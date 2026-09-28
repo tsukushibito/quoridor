@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "resolved_at": "2026-09-28T04:09:17.181253+00:00",
+  "architectures": [
+    "amd64",
+    "arm64"
+  ],
+  "tools": {
+    "godot": {
+      "version": "4.7.2-stable",
+      "source": "https://github.com/godotengine/godot-builds/releases/tag/4.7.2-stable",
+      "explicit": false,
+      "assets": {
+        "gdscript": {
+          "amd64": {
+            "name": "Godot_v4.7.2-stable_linux.x86_64.zip",
+            "url": "https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/Godot_v4.7.2-stable_linux.x86_64.zip",
+            "sha256": "cadd3204e728a35d3f13adb7fd0d7902636b79f6b95c40c265eb73b6c35329e4"
+          },
+          "arm64": {
+            "name": "Godot_v4.7.2-stable_linux.arm64.zip",
+            "url": "https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/Godot_v4.7.2-stable_linux.arm64.zip",
+            "sha256": "5dd0d86405cf7e8adf79fb6377b38ba682a2846cb378ffe5364f38c01ad29b9d"
+          },
+          "templates": {
+            "name": "Godot_v4.7.2-stable_export_templates.tpz",
+            "url": "https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/Godot_v4.7.2-stable_export_templates.tpz",
+            "sha256": "f298490b8d44d934be425a5a65a51bf15f422428b229a06a6e11d9ffea248011"
+          }
+        },
+        "dotnet": {
+          "amd64": {
+            "name": "Godot_v4.7.2-stable_mono_linux_x86_64.zip",
+            "url": "https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/Godot_v4.7.2-stable_mono_linux_x86_64.zip",
+            "sha256": "129f82db7bafd54ae14bb5bb284041c73860e8c7a009a3a026ca5e946cbff247"
+          },
+          "arm64": {
+            "name": "Godot_v4.7.2-stable_mono_linux_arm64.zip",
+            "url": "https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/Godot_v4.7.2-stable_mono_linux_arm64.zip",
+            "sha256": "0dc8ad63feacc6c19d7cb5c89ae828085b0ac3fa8039bc816a08a0537744e523"
+          },
+          "templates": {
+            "name": "Godot_v4.7.2-stable_mono_export_templates.tpz",
+            "url": "https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/Godot_v4.7.2-stable_mono_export_templates.tpz",
+            "sha256": "92f8681e349ef1f90891b792da95e3b2b0bd1ed610b78018c58feb2d87e15a9d"
+          }
+        }
+      }
+    },
+    "node": {
+      "version": "24.21.0",
+      "source": "https://nodejs.org/dist/v24.21.0/",
+      "explicit": false,
+      "lts": "Krypton"
+    },
+    "codex": {
+      "version": "0.157.1",
+      "source": "https://www.npmjs.com/package/@openai/codex/v/0.157.1",
+      "explicit": false,
+      "integrity": "sha512-qJ/UZ0bmYP+/Umav1L9WpmtMYeA6q1+4r4qILSYOKQZhP7WRdjyTQWz3O0dTImZ9RT7AazZa85D87xRDHogcHw=="
+    },
+    "uv": {
+      "version": "0.12.19",
+      "source": "https://github.com/astral-sh/uv/releases/tag/0.12.19",
+      "explicit": false,
+      "image": "ghcr.io/astral-sh/uv:0.12.19@sha256:04d046b13e60d6bcec73cbc5e1cad25d680dea90c8573340950a0ac2d1aef424",
+      "digest": "sha256:04d046b13e60d6bcec73cbc5e1cad25d680dea90c8573340950a0ac2d1aef424"
+    },
+    "gdtoolkit": {
+      "version": "4.5.0",
+      "source": "https://pypi.org/project/gdtoolkit/4.5.0/",
+      "explicit": false
+    },
+    "vscode-cli": {
+      "version": "1.139.1",
+      "source": "https://packages.microsoft.com/repos/code",
+      "explicit": false,
+      "packages": {
+        "amd64": {
+          "version": "1.139.1-1790309529",
+          "url": "https://packages.microsoft.com/repos/code/pool/main/c/code/code_1.139.1-1790309529_amd64.deb",
+          "sha256": "cc8e35cf69ff4c7e515e19fa981bf6aba41f61ddb61c79370e9fe460c5dbaf8b"
+        },
+        "arm64": {
+          "version": "1.139.1-1790309508",
+          "url": "https://packages.microsoft.com/repos/code/pool/main/c/code/code_1.139.1-1790309508_arm64.deb",
+          "sha256": "53cdf61fd870ec9663ea7baa5e4f79014acafc36d8c45b2678a8ce80d72d737d"
+        }
+      }
+    }
+  },
+  "notes": [
+    "Values under tools are exact plan-time resolution snapshots. Godot, Node.js, uv, and VS Code use them as image-build bootstrap inputs; Codex CLI and gdtoolkit are resolved after creation. None of the six runtime versions is fixed when version_policy is post-create-latest.",
+    "The update script resolves the selected stable channels on each postCreate and manual run; installed versions and update time are recorded in /home/vscode/.local/share/godot-devcontainer/toolchain.json.",
+    "The base image tag, Debian package indices, Dev Container feature implementation, and transitive apt packages are not a complete hermetic Linux snapshot."
+  ],
+  "flavor": "gdscript",
+  "project_dir": "godot_project",
+  "enabled_tools": [
+    "git-lfs",
+    "github-cli",
+    "image-tools",
+    "ssh",
+    "vscode-cli"
+  ],
+  "ssh": {
+    "mode": "fixed",
+    "host_port": 2226
+  },
+  "gpu": {
+    "mode": "nvidia"
+  },
+  "chatgpt_browser": {
+    "enabled": false,
+    "access_mode": "off",
+    "display": null,
+    "novnc_host_port": null,
+    "playwright_ui_host_port": null
+  },
+  "volumes": {
+    "worktrees": "volume",
+    "godot_cache": "volume",
+    "inference_cache": "volume",
+    "playwright_cache": "off",
+    "playwright_chatgpt_profile": "off"
+  },
+  "version_policy": "post-create-latest",
+  "update_policy": {
+    "lifecycle": "postCreate",
+    "manual_command": "bash .devcontainer/update-toolchain.sh",
+    "channels": {
+      "godot": "latest-stable-4.x",
+      "node": "latest-lts",
+      "codex": "npm-dist-tag-latest",
+      "uv": "latest-stable",
+      "gdtoolkit": "latest-stable",
+      "vscode-cli": "microsoft-apt-stable"
+    },
+    "runtime_versions_file": "/home/vscode/.local/share/godot-devcontainer/toolchain.json"
+  }
+}

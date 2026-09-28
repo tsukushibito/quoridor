@@ -1,0 +1,166 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+workspace_root="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+lock_file="$workspace_root/.devcontainer/toolchain.lock.json"
+
+require_command() {
+  if ! command -v "$1" >/dev/null 2>&1; then
+    echo "Required command is missing: $1" >&2
+    return 1
+  fi
+}
+
+require_command godot
+require_command node
+require_command npm
+require_command codex
+require_command uv
+require_command gdlint
+require_command gdformat
+require_command git
+require_command python3
+if [[ "gdscript" == dotnet ]]; then require_command dotnet; fi
+if [[ "nvidia" == nvidia ]]; then require_command nvidia-smi; fi
+
+if [[ "volume" == volume ]]; then
+  bash "$workspace_root/scripts/dev/manage_worktree.sh" verify
+fi
+if [[ "nvidia" == nvidia ]]; then
+  inference_cache="${INFERENCE_CACHE_DIR:-/home/vscode/.cache/inference}"
+  mkdir -p "$inference_cache"
+  [[ -w "$inference_cache" ]] || { echo "Inference cache is not writable: $inference_cache" >&2; exit 1; }
+fi
+
+if [[ "true" == true ]]; then require_command gh; fi
+if [[ "true" == true ]]; then require_command git-lfs; fi
+if [[ "true" == true ]]; then
+  require_command convert
+  require_command optipng
+  require_command pngquant
+fi
+if [[ "true" == true ]]; then
+  require_command sshd
+  sudo /usr/sbin/sshd -t
+fi
+if [[ "true" == true ]]; then
+  require_command code-cli
+  # A Dev Container terminal normally injects VSCODE_IPC_HOOK_CLI. The
+  # standalone code-cli wrapper must ignore it instead of delegating to the
+  # editor's Remote CLI.
+  vscode_cli_version="$(
+    VSCODE_IPC_HOOK_CLI=/tmp/code-cli-must-not-use-vscode-ipc.sock \
+      code-cli --version
+  )"
+fi
+if [[ "false" == true ]]; then
+  require_command google-chrome-stable
+  require_command xdpyinfo
+  require_command Xvfb
+  require_command openbox
+  require_command x11vnc
+  require_command websockify
+  e2e_playwright="$workspace_root/.devcontainer/playwright-e2e/node_modules/.bin/playwright"
+  playwright_mcp="$workspace_root/.devcontainer/playwright-mcp/node_modules/.bin/playwright-mcp"
+  for local_tool in "$e2e_playwright" "$playwright_mcp" /home/vscode/.local/bin/playwright-chatgpt-mcp; do
+    [[ -x "$local_tool" ]] || { echo "Required browser tool is missing: $local_tool" >&2; exit 1; }
+  done
+  codex_mcp_list="$(cd "$workspace_root" && codex mcp list)"
+  grep -q 'playwright_chatgpt' <<<"$codex_mcp_list" || {
+    echo "Codex does not list the playwright_chatgpt MCP server." >&2
+    exit 1
+  }
+  chrome_profile_dir="$(mktemp -d)"
+  chrome_smoke_log="$(mktemp)"
+  cleanup_chrome_smoke() { rm -rf -- "$chrome_profile_dir"; rm -f -- "$chrome_smoke_log"; }
+  trap cleanup_chrome_smoke EXIT
+  if ! google-chrome-stable --headless=new --user-data-dir="$chrome_profile_dir" \
+    --no-first-run --no-default-browser-check --password-store=basic --dump-dom about:blank \
+    >"$chrome_smoke_log" 2>&1; then
+    echo "Google Chrome failed its sandboxed smoke test:" >&2
+    cat "$chrome_smoke_log" >&2
+    exit 1
+  fi
+  node - "$workspace_root/.devcontainer/playwright-mcp" <<'JS'
+const path = require('node:path');
+const tools = process.argv[2];
+const { chromium } = require(path.join(tools, 'node_modules', 'playwright'));
+(async () => {
+  const browser = await chromium.launch({ channel: 'chrome', headless: true });
+  try {
+    const page = await browser.newPage();
+    await page.goto('data:text/html,<title>chrome-channel-smoke</title>');
+    if ((await page.title()) !== 'chrome-channel-smoke') throw new Error('unexpected title');
+  } finally { await browser.close(); }
+})().catch(error => { console.error(error); process.exit(1); });
+JS
+fi
+
+python3 - "$lock_file" "$workspace_root" <<'PY'
+import json
+import re
+import subprocess
+import sys
+
+lock = json.load(open(sys.argv[1], encoding="utf-8"))
+commands = {
+    "godot": ["godot", "--version"],
+    "node": ["node", "--version"],
+    "codex": ["codex", "--version"],
+    "uv": ["uv", "--version"],
+    "gdtoolkit": ["gdlint", "--version"],
+    "vscode-cli": ["code-cli", "--version"],
+    "playwright": [f"{sys.argv[2]}/.devcontainer/playwright-e2e/node_modules/.bin/playwright", "--version"],
+    "playwright-mcp": [f"{sys.argv[2]}/.devcontainer/playwright-mcp/node_modules/.bin/playwright-mcp", "--version"],
+}
+for name, metadata in lock["tools"].items():
+    if not metadata.get("explicit") or name not in commands:
+        continue
+    if name == "vscode-cli" and "vscode-cli" not in lock.get("enabled_tools", []):
+        continue
+    output = subprocess.check_output(commands[name], text=True, stderr=subprocess.STDOUT).strip()
+    expected = str(metadata["version"])
+    normalized_output = re.sub(r"[^0-9A-Za-z]+", ".", output).lower()
+    normalized_expected = re.sub(r"[^0-9A-Za-z]+", ".", expected).lower().strip(".")
+    if normalized_expected not in normalized_output:
+        raise SystemExit(f"Pinned {name} version mismatch: expected {expected!r}, got {output!r}")
+PY
+
+godot_version="$(godot --version)"
+if [[ "$godot_version" != 4.* ]]; then
+  echo "Expected Godot 4.x, got: $godot_version" >&2
+  exit 1
+fi
+if [[ "gdscript" == dotnet && "$godot_version" != *mono* ]]; then
+  echo "Expected the .NET/mono Godot build, got: $godot_version" >&2
+  exit 1
+fi
+if [[ "gdscript" == gdscript && "$godot_version" == *mono* ]]; then
+  echo "Expected the standard GDScript Godot build, got: $godot_version" >&2
+  exit 1
+fi
+
+project_dir="${GODOT_PROJECT_DIR:-godot_project}"
+if [[ ! -f "$workspace_root/$project_dir/project.godot" ]]; then
+  echo "NOTE: project.godot is not present at $project_dir yet; environment checks still passed."
+fi
+
+printf 'Godot: %s\n' "$godot_version"
+printf 'Node: %s\n' "$(node --version)"
+printf 'Codex: %s\n' "$(codex --version)"
+printf 'uv: %s\n' "$(uv --version)"
+printf 'gdtoolkit: %s\n' "$(gdlint --version)"
+if [[ "false" == true ]]; then
+  printf 'Playwright: %s\n' "$("$e2e_playwright" --version)"
+  printf 'Playwright MCP: %s\n' "$("$playwright_mcp" --version)"
+  printf 'Google Chrome: %s\n' "$(google-chrome-stable --version)"
+fi
+if [[ "true" == true ]]; then printf 'VS Code CLI: %s\n' "$(printf '%s\n' "$vscode_cli_version" | head -n 1)"; fi
+if [[ "nvidia" == nvidia ]]; then
+  gpu_info="$(nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv,noheader)"
+  if [[ -z "$gpu_info" ]]; then
+    echo "NVIDIA GPU mode was selected, but nvidia-smi reported no GPU." >&2
+    exit 1
+  fi
+  printf 'NVIDIA GPU: %s\n' "$gpu_info"
+fi
