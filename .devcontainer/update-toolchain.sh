@@ -11,7 +11,8 @@ export PATH="$local_bin:$PATH"
 export UV_TOOL_BIN_DIR="$local_bin"
 export UV_TOOL_DIR="$HOME/.local/share/uv/tools"
 
-case "$(dpkg --print-architecture)" in
+apt_arch="$(dpkg --print-architecture)"
+case "$apt_arch" in
   amd64)
     godot_arch="x86_64"
     node_arch="x64"
@@ -68,10 +69,16 @@ godot_tag="$(jq -er '
     [(.minor | tonumber), (.patch | tonumber)]) |
   last | .tag_name
 ' <<<"$godot_releases")"
+godot_release="$(jq -cer --arg tag "$godot_tag" '
+  [.[] | select(.tag_name == $tag)] |
+  if length != 1 then error("expected exactly one release for tag \($tag)")
+  else .[0]
+  end
+' <<<"$godot_releases")"
 godot_archive="Godot_v$godot_tag"_linux."$godot_arch".zip
 templates_archive="Godot_v$godot_tag"_export_templates.tpz
-read -r godot_url godot_sha < <(github_asset "$godot_releases" "$godot_archive")
-read -r templates_url templates_sha < <(github_asset "$godot_releases" "$templates_archive")
+read -r godot_url godot_sha < <(github_asset "$godot_release" "$godot_archive")
+read -r templates_url templates_sha < <(github_asset "$godot_release" "$templates_archive")
 download_verified "$godot_url" "$godot_sha" "$work_dir/godot.zip"
 download_verified "$templates_url" "$templates_sha" "$work_dir/templates.tpz"
 mkdir "$work_dir/godot" "$work_dir/templates"
@@ -140,16 +147,9 @@ npm install --global --prefix "$HOME/.local" @openai/codex@latest
 uv tool install --force --upgrade --link-mode copy gdtoolkit
 
 echo "Updating VS Code CLI from Microsoft's signed stable APT repository..."
-sudo install -d -m 0755 /etc/apt/keyrings
-curl --fail --location --retry 3 --silent --show-error \
-  https://packages.microsoft.com/keys/microsoft.asc |
-  gpg --dearmor |
-  sudo tee /etc/apt/keyrings/microsoft-vscode.gpg >/dev/null
-sudo chmod 0644 /etc/apt/keyrings/microsoft-vscode.gpg
-apt_arch="$(dpkg --print-architecture)"
-printf 'deb [arch=%s signed-by=/etc/apt/keyrings/microsoft-vscode.gpg] https://packages.microsoft.com/repos/code stable main\n' \
-  "$apt_arch" |
-  sudo tee /etc/apt/sources.list.d/vscode.list >/dev/null
+# The Dev Container base image already configures this repository in
+# /etc/apt/sources.list.d/vscode.sources with its matching Microsoft keyring.
+# Do not add a second entry for the same URL with a different Signed-By path.
 sudo apt-get update
 sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends code
 
