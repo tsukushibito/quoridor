@@ -1,0 +1,18 @@
+# このプロジェクトで許可されたSidekick設定。
+# 2026-09-28に稼働中App Serverのmodel/listでIDとeffortを確認。
+# 使用時にも実ホストのカタログと照合する。Lead設定には適用しない。
+
+[profiles.light]
+enabled = true
+model = "gpt-6-luna"
+effort = "xhigh"
+
+[profiles.standard]
+enabled = true
+model = "gpt-6-sol"
+effort = "high"
+
+[profiles.deep]
+enabled = true
+model = "gpt-6-sol"
+effort = "xhigh"
