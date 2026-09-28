@@ -42,7 +42,7 @@ RUN set -eux; \
     if [ "$INSTALL_SSH" = true ]; then \
         apt-get install -y --no-install-recommends openssh-server; \
         mkdir -p /run/sshd; \
-        printf '%s\n' 'PasswordAuthentication no' 'KbdInteractiveAuthentication no' 'PermitRootLogin no' 'PubkeyAuthentication yes' > /etc/ssh/sshd_config.d/99-devcontainer.conf; \
+        printf '%s\n' 'Port 2226' 'ListenAddress 127.0.0.1' 'AddressFamily inet' 'PasswordAuthentication no' 'KbdInteractiveAuthentication no' 'PermitRootLogin no' 'PubkeyAuthentication yes' > /etc/ssh/sshd_config.d/99-devcontainer.conf; \
         ssh-keygen -A; \
     fi; \
     if [ "$INSTALL_VSCODE_CLI" = true ]; then \

@@ -67,8 +67,7 @@
   "portsAttributes": {},
   "runArgs": [
     "--gpus=all",
-    "-p",
-    "127.0.0.1:2226:22"
+    "--network=host"
   ],
   "postCreateCommand": "bash .devcontainer/post-create.sh",
   "postStartCommand": "bash .devcontainer/start-sshd.sh",

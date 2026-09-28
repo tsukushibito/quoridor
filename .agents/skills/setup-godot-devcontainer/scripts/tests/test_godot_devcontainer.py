@@ -548,6 +548,43 @@ class PlannerTests(unittest.TestCase):
             self.assertIn('if [[ "false" == true ]]; then require_command gh; fi', verify)
             self.assertIn('if [[ "false" == true ]]; then\n  require_command code-cli', verify)
 
+    def test_fixed_ssh_can_use_host_network_with_loopback_listener(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            lock = fake_lock(root / "resolved.json")
+            plan = plan_for(root, lock, "--ssh-mode", "fixed", "--ssh-port", "2226")
+            plan_path = root / "plan.json"
+            plan_path.write_text(json.dumps(plan), encoding="utf-8")
+            MODULE.apply_plan(plan_path)
+
+            config_path = root / ".devcontainer/devcontainer.json"
+            config = json.loads(config_path.read_text(encoding="utf-8"))
+            config["runArgs"] = ["--network=host"]
+            config_path.write_text(json.dumps(config), encoding="utf-8")
+            dockerfile_path = root / ".devcontainer/Dockerfile"
+            original = dockerfile_path.read_text(encoding="utf-8")
+            dockerfile_path.write_text(
+                original.replace(
+                    "'PasswordAuthentication no'",
+                    "'Port 2226' 'ListenAddress 127.0.0.1' 'PasswordAuthentication no'",
+                ),
+                encoding="utf-8",
+            )
+            self.assertEqual([], MODULE.static_validate(root))
+
+            dockerfile_path.write_text(original, encoding="utf-8")
+            self.assertIn(
+                "host-network SSH must listen on its fixed port and IPv4 loopback",
+                MODULE.static_validate(root),
+            )
+
+            config["runArgs"] += ["-p", "127.0.0.1:2226:22"]
+            config_path.write_text(json.dumps(config), encoding="utf-8")
+            self.assertIn(
+                "host networking must not use SSH port publishing",
+                MODULE.static_validate(root),
+            )
+
     def test_static_validation_rejects_vscode_cli_without_ipc_isolation(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)

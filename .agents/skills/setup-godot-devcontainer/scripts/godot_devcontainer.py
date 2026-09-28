@@ -1422,15 +1422,25 @@ def static_validate(target: Path) -> list[str]:
         ssh = lock.get("ssh", {})
         run_args = config.get("runArgs", [])
         forward_ports = config.get("forwardPorts", [])
+        host_network = "--network=host" in run_args
         ssh_publish = any(re.fullmatch(r"(?:127\.0\.0\.1|0\.0\.0\.0):\d{1,5}:22", str(item)) for item in run_args)
         if any("0.0.0.0:" in str(item) for item in run_args):
             errors.append("SSH host publishing must not bind to 0.0.0.0")
+        if host_network and ("-p" in run_args or "--publish" in run_args or ssh_publish):
+            errors.append("host networking must not use SSH port publishing")
         if ssh.get("mode") == "vscode" and "ssh" in enabled and 22 not in forward_ports:
             errors.append("VS Code SSH mode must forward container port 22")
         if ssh.get("mode") == "fixed" and "ssh" in enabled:
-            mapping = f"127.0.0.1:{ssh.get('host_port')}:22"
-            if mapping not in run_args:
-                errors.append("fixed SSH mode must use its loopback-only host mapping")
+            if host_network:
+                dockerfile_path = target / ".devcontainer/Dockerfile"
+                dockerfile_text = dockerfile_path.read_text(encoding="utf-8") if dockerfile_path.is_file() else ""
+                port = ssh.get("host_port")
+                if f"'Port {port}'" not in dockerfile_text or "'ListenAddress 127.0.0.1'" not in dockerfile_text:
+                    errors.append("host-network SSH must listen on its fixed port and IPv4 loopback")
+            else:
+                mapping = f"127.0.0.1:{ssh.get('host_port')}:22"
+                if mapping not in run_args:
+                    errors.append("fixed SSH mode must use its loopback-only host mapping")
         if (ssh.get("mode") == "off" or "ssh" not in enabled) and (22 in forward_ports or ssh_publish):
             errors.append("disabled SSH must not publish or forward a port")
         gpu_mode = lock.get("gpu", {}).get("mode", "off")
