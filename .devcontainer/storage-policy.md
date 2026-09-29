@@ -17,7 +17,10 @@ The main checkout remains the integration checkout; perform task work in a manag
 ## Inference models
 
 When GPU mode is `nvidia`, place See-Through, DWPose, Hugging Face, Torch, and similar model downloads under `$INFERENCE_CACHE_DIR`.
-The generated environment maps Hugging Face hub/Xet/assets and Torch caches into that directory. Do not place model weights in the repository or in `/home/vscode/.codex`.
+The generated environment maps Hugging Face hub/Xet/assets and Torch caches into that directory. Do not place these general-purpose model weights in the repository or in `/home/vscode/.codex`.
+
+Quoridor AI models are an explicit exception: repository-local storage is allowed. Only final adopted models and their provenance, distribution terms, hash, size, and feature-schema manifests belong in Git, under `apps/web/public/models/`. Keep all experimental, comparison, and intermediate training models under `models/experiments/`, excluded from Git regardless of size. Add the ignore rule when that directory is introduced. Check the final model's distribution size before adoption.
+
 Framework and CUDA package versions remain project-managed; this Dev Container only exposes the NVIDIA GPU and persistent cache.
 
 Godot remains on software rendering (`LIBGL_ALWAYS_SOFTWARE=1`). NVIDIA access is for inference compute, not editor or Xvfb rendering.
