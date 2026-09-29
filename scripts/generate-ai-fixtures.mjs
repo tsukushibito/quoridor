@@ -1,0 +1,21 @@
+import { spawnSync } from 'node:child_process';
+import { readFileSync, writeFileSync } from 'node:fs';
+import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const target = resolve(root, 'tests/fixtures/ai/native-search.json');
+const result = spawnSync('cargo', ['run', '--quiet', '--locked', '-p', 'quoridor-wasm',
+  '--no-default-features', '--features', 'ai', '--bin', 'export-ai-fixtures'],
+  { cwd: root, encoding: 'utf8' });
+if (result.status !== 0) { process.stderr.write(result.stderr); process.exit(result.status ?? 1); }
+const generated = `${result.stdout.trimEnd()}\n`;
+if (process.argv.includes('--check')) {
+  let current = '';
+  try { current = readFileSync(target, 'utf8'); } catch { /* missing fixture */ }
+  if (current !== generated) { console.error('Native AI fixtures are stale; run node scripts/generate-ai-fixtures.mjs.'); process.exit(1); }
+  console.log('Native AI fixtures match Rust.');
+} else {
+  writeFileSync(target, generated);
+  console.log('Generated native AI fixtures.');
+}

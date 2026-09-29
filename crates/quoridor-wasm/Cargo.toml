@@ -1,0 +1,32 @@
+[package]
+name = "quoridor-wasm"
+version = "0.1.0"
+edition = "2024"
+[lib]
+crate-type = ["cdylib", "rlib"]
+[features]
+default = []
+rules = ["dep:serde", "dep:serde_json", "dep:ts-rs"]
+ai = ["dep:quoridor-ai", "dep:serde", "dep:serde_json", "dep:ts-rs"]
+[dependencies]
+wasm-bindgen = "0.2"
+serde = { version = "1", features = ["derive"], optional = true }
+serde_json = { version = "1", optional = true }
+ts-rs = { version = "12", optional = true }
+quoridor-core = { path = "../quoridor-core" }
+quoridor-ai = { path = "../quoridor-ai", optional = true }
+
+[[bin]]
+name = "generate-protocol"
+path = "src/bin/generate_protocol.rs"
+required-features = ["rules"]
+
+[[bin]]
+name = "export-fixtures"
+path = "src/bin/export_fixtures.rs"
+required-features = ["rules"]
+
+[[bin]]
+name = "export-ai-fixtures"
+path = "src/bin/export_ai_fixtures.rs"
+required-features = ["ai"]

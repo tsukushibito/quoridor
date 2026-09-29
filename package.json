@@ -1,0 +1,25 @@
+{
+  "name": "quoridor-webapp",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/web",
+    "packages/engine-bridge"
+  ],
+  "scripts": {
+    "doctor": "node scripts/doctor.mjs",
+    "codegen:protocol": "node scripts/codegen-protocol.mjs",
+    "wasm:build:dev": "node scripts/build-wasm.mjs dev",
+    "wasm:build": "node scripts/build-wasm.mjs release",
+    "dev": "npm run wasm:build:dev && npm run dev -w @quoridor/web",
+    "typecheck": "npm run typecheck -w @quoridor/engine-bridge && npm run typecheck -w @quoridor/web",
+    "check": "npm run wasm:build:dev && node scripts/codegen-protocol.mjs --check && node scripts/generate-fixtures.mjs --check && node scripts/generate-ai-fixtures.mjs --check && npm run typecheck && node scripts/check-boundaries.mjs && cargo fmt --all -- --check && cargo check --locked --workspace --no-default-features --features quoridor-wasm/rules && cargo check --locked --workspace --no-default-features --features quoridor-wasm/ai && cargo clippy --locked --workspace --no-default-features --features quoridor-wasm/rules -- -D warnings && cargo clippy --locked --workspace --no-default-features --features quoridor-wasm/ai -- -D warnings && cargo test --locked -p quoridor-core -p quoridor-ai && cargo test --locked -p quoridor-wasm --no-default-features --features rules && cargo test --locked -p quoridor-wasm --no-default-features --features ai",
+    "build": "npm run wasm:build && npm run typecheck && npm run build -w @quoridor/web",
+    "test:e2e": "PLAYWRIGHT_BROWSERS_PATH=./artifacts/playwright playwright test",
+    "preview": "npm run preview -w @quoridor/web",
+    "verify:production": "node scripts/verify-production.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0"
+  }
+}
