@@ -2,8 +2,8 @@
 
 **Vite + TypeScript + Three.js WebGPURenderer + VXGI / Rust → WebAssembly AI**
 
-- 文書版: 1.1
-- 更新方針: 動作する対局を先に完成させ、ホストChrome接続・VXGI実機検証は描画強化段階へ延期する。
+- 文書版: 1.2
+- 更新方針: 動作する対局を先に完成させ、ホストChrome接続・VXGI実機検証は描画強化段階へ延期する。ツール・依存は最新安定版へ随時更新し、更新後の検証結果と使用版を記録する。
 - 作成日: 2026-09-29
 - 対象: 新規3DコリドールWebアプリを実装するCodex
 - 推奨配置先: `docs/design/quoridor-3d-webapp-design-rust-wasm-v1.md`
@@ -135,17 +135,28 @@ M1のヒューリスティックAIは機能検証用のB0であり、M2を達成
 1. インストールするnpmパッケージ内にVXGI addonと必要なTSL APIがあることを確認する。
 2. `three`本体、addons、TSL、型定義の組み合わせを確認する。
 3. Phase 0では基本描画をローカルブラウザで動かす。Phase 5で公式VXGIサンプル相当の最小構成をWindowsホストChromeで動かす。
-4. 基本構成で確認した**厳密なバージョン**を固定し、`docs/reports/compatibility-baseline.md`へ記録する。VXGI実機互換性は未検証と記載し、Phase 5で追記する。
+4. 基本構成で確認した**実際のバージョン**と検証日・結果を`docs/reports/compatibility-baseline.md`へ記録する。更新後も同じ確認を行い、記録を更新する。VXGI実機互換性は未検証と記載し、Phase 5で追記する。
 
-基準候補は`three@0.186.1`。レジストリ上の取得可否や実機互換性はこの文書では実行検証していない。候補が使えない場合は理由を報告し、同じ公式実装を含む検証可能な版を選び直す。黙ってGI方式を変更してはならない。
+`three@0.186.1`は調査時の参照点であり、採用版をこの番号に固定しない。実装・更新時点の最新安定版を候補とし、公式VXGI addonの存在と互換性を確認する。問題があれば原因を記録し、必要な修正または直前の検証済み依存への復帰を行う。黙ってGI方式を変更してはならない。
 
-### 3.3 固定するもの
+### 3.3 最新安定版への更新と検証記録
 
-Node.jsは24 LTS系を基準候補とし、Viteの選定版と互換性のあるパッチを固定する。[S17]
+ツール・ライブラリの特定バージョンを恒久的な採用条件にしない。Rustは最新stable、Node.jsは最新LTS、wasm-pack、wasm-bindgen関連依存、Vite、Three.js、型定義、テストツールは最新安定版へ随時更新する。Node.jsの24 LTS系という従来の候補も、特定メジャーへ留める要件ではない。[S17]
 
-Rustは検証時点のstableを`rust-toolchain.toml`で厳密な版へ固定する。wasm-pack、wasm-bindgen関連依存、Vite、Three.js、テストツールも版を記録する。`latest`を毎回解決する運用、`dev`ブランチの実行時参照、CDNからの混在importはしない。
+`rust-toolchain.toml`には`channel = "stable"`を指定し、`wasm32-unknown-unknown`、rustfmt、clippyなど必要なターゲット・コンポーネントを宣言する。`stable`指定だけではインストール済みツールチェーンは毎回更新されないため、更新スクリプトで明示的に`rustup update stable`を実行する。Featureによる導入とpostCreateの分担は15.1.1節に従う。
 
-Rust/Three.jsの更新は独立した変更として扱い、ルール契約・描画・保存データの回帰検証を通す。アプリコードに存在しないaddonの型を作って「実装済み」に見せることは禁止する。
+更新のタイミングを次のように分ける。
+
+- コンテナ作成時: FeatureとpostCreateで最新安定版のツール環境を用意し、実際の使用版を記録する。
+- 開発中: 新しいリリースを取り込む際に更新スクリプトを手動実行する。Rustやwasm-packの通常更新にはコンテナのリビルドを要求しない。
+- プロジェクト依存更新時: npm/Cargoの依存宣言とlockfileを更新し、互換性修正と検証を行う。メジャー更新やThree.jsのAPI変更も、必要な修正を伴う更新として扱う。
+- 通常の起動・ビルド時: 導入済みツールとlockfileを使用する。最新版取得は上記の更新工程で行い、対局やビルドのたびに依存を入れ替えない。
+
+`Cargo.lock`と`package-lock.json`はGit管理を続ける。これらは検証した依存関係の記録であり、将来の更新を禁止するためのものではない。lockfileを無条件に削除する運用にはせず、依存更新時に変更内容を確認してコミットする。通常の依存導入・ビルドでは`npm ci`やCargoの`--locked`を用い、更新工程と区別する。ツールチェーンがstable/LTSを追従するため、過去の使用版はlockfileだけでは再現できず、別途記録が必要である。
+
+更新はアプリ機能の変更から分け、ローカルの型検査・Rustテスト・Wasm/Worker・production build・対局E2Eなど、その段階で実装済みの検証を通す。描画関連の更新では描画を、ルールや保存に関係する更新では該当契約を回帰確認する。Phase 0〜4では基本描画を検証し、ホストChrome・VXGIは未実施として記録する。Phase 5以降の描画関連更新では実機VXGIも確認し、未実施なら以前の版の合格結果を流用しない。
+
+使用版、更新日時、検証コマンド・結果、未検証事項をcompatibility baseline等へ残す。更新に不具合がある場合は原因と採用保留・復帰の内容を記録する。`dev`ブランチの実行時参照やCDNからの混在importは行わず、アプリコードに存在しないaddonの型を作って「実装済み」に見せない。
 
 ---
 
@@ -165,8 +176,7 @@ quoridor-3d/
 ├── package-lock.json
 ├── Cargo.toml                           # Cargo workspace
 ├── Cargo.lock
-├── rust-toolchain.toml
-├── .node-version
+├── rust-toolchain.toml                 # stableチャネルと必要なtarget/component
 ├── .gitignore
 ├── .gitattributes
 ├── .env.example                         # 非秘密の環境変数名・説明のみ
@@ -735,7 +745,7 @@ AI依存をoptionalにし、ルール用Wasmへ推論ランタイムを含めな
 
 `wasm-pack build --target web`で生成したJS glueから初期化する。Wasm本体だけをViteの汎用`?init`でロードし、wasm-bindgenのglueを飛ばしてはならない。ViteにはWasmのURL importがあり、Workerは`new Worker(new URL(..., import.meta.url), { type: 'module' })`形式で扱える。[S08][S09]
 
-概念的な初期化は次のとおり。実際の`init`引数は、固定したwasm-bindgenが生成する型に合わせて確定する。
+概念的な初期化は次のとおり。実際の`init`引数は、使用中のwasm-bindgenが生成する型に合わせて確定する。
 
 ```ts
 // packages/engine-bridge/src/rules-client.ts の初期化部分の例
@@ -1188,11 +1198,13 @@ Windows ChromeのCDP endpoint
 
 「ブラウザがアプリを開く経路」と「PlaywrightがChromeを操作する経路」は別に検証する。`host.docker.internal`という名前が解決できても、WindowsのloopbackにだけbindしたCDPへそのまま届くとは決めつけない。
 
-### 15.1.1 postCreateでのツール導入
+### 15.1.1 Featureによる基盤導入とpostCreate・手動更新
 
-Phase 0で既存postCreateから呼ぶ再実行可能な導入スクリプトを追加する。rustupを導入し、`rust-toolchain.toml`に指定した厳密なRust版、`wasm32-unknown-unknown`、rustfmt、clippyを揃える。wasm-packも厳密な版を指定する。通常の起動・ビルドで最新版を再解決しない。
+Phase 0でDev ContainerのRust Featureを追加し、Rust/rustupと必要なOS依存を導入する。FeatureのRustバージョン指定は最新安定版を選び、特定リリースへの恒久固定はしない。Featureの追加を既存コンテナへ反映する際はリビルドが必要である。
 
-既存のNode updaterはpostCreateで最新LTSを取得するため、プロジェクト用Nodeは`.node-version`の指定版が実際に使われるようPhase 0で導入順序とPATHを整える。既存の他ツール更新とは分離し、doctorで実行版を照合する。ローカルPlaywright用ブラウザとOS依存も再現可能な導入コマンドを用意する。
+既存postCreateから呼ぶ再実行可能なRust/Wasm準備・更新スクリプトを追加する。`rustup update stable`と、`rust-toolchain.toml`に宣言した`wasm32-unknown-unknown`・rustfmt・clippyの導入確認、wasm-packの最新安定版への導入・更新、使用版の記録を担う。wasm-packは存在確認だけで更新を省略せず、最新安定版と導入済み版を照合する。同じスクリプトを開発中に単独実行できるようにし、Rust/Wasmの更新だけで他ツールの更新やリビルドを要求しない。Featureが設定するCARGO_HOME/RUSTUP_HOMEとPATHを引き継ぎ、別のrustup環境を二重導入しない。
+
+既存のNode updaterによる最新LTS取得方針を継続し、特定パッチへ戻す処理は追加しない。doctorでPATH上の実行版、選択されたRustチャネル、Wasmターゲット、wasm-packの導入状態を確認する。ローカルPlaywright用ブラウザとOS依存も導入コマンドを用意し、Playwright更新時には対応するブラウザを揃える。更新後の検証と記録は3.3節に従う。
 
 既存の`tools/webgpu-smoke`は独立したpnpmツールとして保持し、必要な描画・診断コードを参照する。製品側のnpm workspaceとはlockfileと依存導入を分ける。M1のローカル検証からホスト専用smokeを必須呼出ししない。
 
@@ -1233,7 +1245,7 @@ CDPは外部からブラウザを制御できるため、インターネット�
 
 **目的**: ホストChrome接続を待たず、ローカルで実装・起動・検証できる最小構成を作る。
 
-**実装範囲**: workspaceの最小骨格、postCreateからの固定版Rust/Wasm環境導入、依存版固定、doctor、Wasm rules/AIの最小exportとWorker起動、Three.jsの基本描画、ローカルPlaywrightの実行環境、dev/productionのasset読込。公式VXGI addonは存在とimport/build互換性を確認する。
+**実装範囲**: workspaceの最小骨格、Rust FeatureとpostCreateによる最新安定版Rust/Wasm環境導入、手動更新手順と使用版記録、doctor、Wasm rules/AIの最小exportとWorker起動、Three.jsの基本描画、ローカルPlaywrightの実行環境、dev/productionのasset読込。公式VXGI addonは存在とimport/build互換性を確認する。
 
 **範囲外**: 完全なゲーム、強いAI、モデル学習、美術仕上げ、ホストChrome接続、VXGI/TRAAの実装・実機検証。
 
@@ -1371,8 +1383,8 @@ Task ID:
 
 | 項目 | 確定Phase | 判断材料 |
 |---|---|---|
-| Three.js / 型定義の厳密な版 | 0（実機互換性は5） | 基本描画、公式addonの存在・import/build。実機VXGIは後続 |
-| Wasm toolchain / 生成initの型 | 0 | 両Wasmのbuildとブラウザ実行 |
+| Three.js / 型定義の使用版と互換性 | 0と各更新時（実機互換性は5以降） | 基本描画、公式addonの存在・import/build。実機VXGIは後続 |
+| Wasm toolchain / 生成initの型 | 0と各更新時 | 両Wasmのbuildとブラウザ実行 |
 | ホストCDP接続経路 | 5 | doctorの実接続結果 |
 | ルール更新のメイン側予算 | 1 | 複数局面でのWasm実測 |
 | 薄い壁の寸法・GI bounds・preset | 5 | voxel view、画質、frame time |
@@ -1388,7 +1400,7 @@ Task ID:
 
 ## 19. 参考資料
 
-参照日はいずれも2026-09-29。Three.jsの具体的なAPIは、一般の最新ドキュメントよりも**採用する固定版の実ファイル**を優先して確認する。以下は調査根拠であり、記載する性能目標の測定結果ではない。
+参照日はいずれも2026-09-29。Three.jsの具体的なAPIは、一般の最新ドキュメントよりも**実際に使用している版の実ファイル**を優先して確認する。以下は調査根拠であり、記載する性能目標の測定結果ではない。
 
 - **[S01] Quoridorルール説明書の公開PDF（原説明書の転載版）**。基本移動、ジャンプ、壁設置、ゴール到達を参照。本文に加えて図のページも確認。転載版であり、公式サイト上の最新版だとは断定しない。  
   <https://cdn.1j1ju.com/medias/fe/36/08-quoridor-rulebook.pdf>
@@ -1427,7 +1439,7 @@ Task ID:
   <https://github.com/mrdoob/three.js/blob/r186/examples/jsm/tsl/display/TRAANode.js>
 - **[S17] Node.js Release Working Group**。Node 24 LTSの位置付け。  
   <https://github.com/nodejs/Release>
-- **[S18] Sonos tract**。Rust推論、ONNX/NNEF、Wasm実行の案内。採用版は別途固定する。  
+- **[S18] Sonos tract**。Rust推論、ONNX/NNEF、Wasm実行の案内。使用版と互換性は採用・更新時に記録する。  
   <https://github.com/sonos/tract>
 - **[S19] SigmaQuoridor作者の公開アプリ**。比較対象の入口。正確な比較版・モデルはPhase 6で記録する。  
   <https://bartolomeo3000.github.io/SigmaQuoridor/>
@@ -1452,6 +1464,9 @@ AGENTS.md、既存コード、開発環境資料、および
 固定スタックはVite + TypeScript + Three.js WebGPURenderer + 公式VXGIです。
 AIはRust→WebAssemblyとし、ルールはquoridor-coreの1つの実装を共有します。
 UI/描画はTypeScript、探索はAI Worker内のRust/Wasmで実行してください。
+ツール・依存は最新安定版へ随時更新します。Rustはstable、Node.jsは最新LTSとし、
+Rust Featureによる基盤導入とpostCreate・手動更新スクリプトを組み合わせてください。
+Cargo.lock/package-lock.jsonは維持・更新し、更新後のローカル検証結果と使用版を記録してください。
 
 まずPhase 0の実装計画を作り、対象ファイル、実装範囲、範囲外、受入条件を明記してから
 最小の技術検証を実装してください。既に存在して合格している設定は再利用してください。
