@@ -5,6 +5,8 @@ This project keeps generated state out of the host checkout and separates caches
 | Data | Location | Persistence |
 | --- | --- | --- |
 | Managed Git worktrees | `${containerWorkspaceFolder}/.worktree` | `volume` mode |
+| Shared Beads database | `${containerWorkspaceFolder}/.worktree/.beads-state` | worktrees named volume; independent of individual worktrees |
+| Beads full database backup | `${containerWorkspaceFolder}/.artifacts/beads-backup` | host checkout, Git-ignored; not protection against host loss |
 | Godot editor/import cache | `/home/vscode/.cache/godot` | named volume |
 | Inference models and framework downloads | `/home/vscode/.cache/inference` | named volume only in NVIDIA mode |
 | Training Python, uv packages and virtual environment | `$INFERENCE_CACHE_DIR/python`, `$INFERENCE_CACHE_DIR/uv`, `$INFERENCE_CACHE_DIR/envs/quoridor-training` | same named volume |
@@ -15,6 +17,10 @@ This project keeps generated state out of the host checkout and separates caches
 When worktree mode is `volume`, create and remove worktrees only with `scripts/dev/manage_worktree.sh`.
 The helper places them below `.worktree`, locks every managed worktree, refuses dirty removal, and never deletes branches.
 The main checkout remains the integration checkout; perform task work in a managed worktree.
+
+## Beads
+
+Use `bash scripts/dev/beads.sh` from any worktree to access the shared embedded Dolt database. The wrapper resolves the main checkout and serializes CLI access with a file lock. Do not initialize separate worktree databases or use `bd worktree` to manage worktrees. `bash scripts/dev/setup-beads.sh` installs/restores the CLI without rebuilding; `--update` backs up with the existing binary before installing the latest stable release. postCreate restores the CLI and preserves the database. Full backup/restore uses `bd backup`, not a JSONL export. See [the workflow](../docs/development/beads-workflow.md).
 
 ## Inference models
 
