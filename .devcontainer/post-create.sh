@@ -33,6 +33,9 @@ elif [[ "true" == true ]]; then
 fi
 
 bash "$workspace_root/.devcontainer/update-toolchain.sh"
+bash "$workspace_root/scripts/dev/setup-rust.sh" --update
+bash "$workspace_root/scripts/dev/verify-rust.sh"
+bash "$workspace_root/scripts/dev/setup-training.sh"
 
 if [[ "true" == true ]]; then
   chmod 0700 /home/vscode/.ssh

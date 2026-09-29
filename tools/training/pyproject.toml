@@ -1,0 +1,19 @@
+[project]
+name = "quoridor-training"
+version = "0.1.0"
+description = "Quoridor model training and export environment"
+requires-python = ">=3.11"
+dependencies = ["torch", "numpy", "onnx", "onnxruntime", "onnxscript"]
+
+[tool.uv]
+package = false
+# The current training target is the Linux x86_64 NVIDIA Dev Container.
+environments = ["sys_platform == 'linux' and platform_machine == 'x86_64'"]
+
+[[tool.uv.index]]
+name = "pytorch-cuda"
+url = "https://download.pytorch.org/whl/cu130"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cuda" }

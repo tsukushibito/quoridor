@@ -659,7 +659,7 @@ M2の入口で、固定したモデル1つについて次を検証する。
 
 ### 8.5 学習との境界
 
-ブラウザは推論・探索専用にする。学習・自己対戦生成・モデル変換は別のオフライン工程とし、必要なら`tools/models`やnative CLIを使う。学習環境をPythonにすることと、製品のAIをRust/Wasmで動かすことは両立するが、学習パイプライン全体はM1では作らない。
+ブラウザは推論・探索専用にする。学習・自己対戦生成・モデル変換は別のオフライン工程とし、必要なら`tools/models`やnative CLIを使う。学習環境はuv管理のPython + PyTorchを使用し、`tools/training`の`pyproject.toml`と`uv.lock`で依存を管理する。最新安定版への更新後はGPU演算・逆伝播とモデル書き出しを検証する。製品の推論・探索はRust/Wasmを維持し、学習パイプライン全体はM1では作らない。環境導入・更新の操作は`docs/development/rust-python-environment.md`に記載する。
 
 外部モデルを採用する場合、モデルを入れただけでSigmaQuoridorと同等とは言わない。参照実装の版・モデル・探索設定・ルール・持ち時間を固定した対戦が必要である。[S19]
 
@@ -1200,7 +1200,7 @@ Windows ChromeのCDP endpoint
 
 ### 15.1.1 Featureによる基盤導入とpostCreate・手動更新
 
-Phase 0でDev ContainerのRust Featureを追加し、Rust/rustupと必要なOS依存を導入する。FeatureのRustバージョン指定は最新安定版を選び、特定リリースへの恒久固定はしない。Featureの追加を既存コンテナへ反映する際はリビルドが必要である。
+Phase 0でDev ContainerのRust Featureを追加し、Rust/rustupと必要なOS依存を導入する。FeatureのRustバージョン指定は最新安定版を選び、特定リリースへの恒久固定はしない。Feature自体の反映は次回リビルド時に行う。現在のコンテナでは準備スクリプトがrustup未導入を検出して同じ配置へ導入できるようにし、リビルドを待たずに開発する。
 
 既存postCreateから呼ぶ再実行可能なRust/Wasm準備・更新スクリプトを追加する。`rustup update stable`と、`rust-toolchain.toml`に宣言した`wasm32-unknown-unknown`・rustfmt・clippyの導入確認、wasm-packの最新安定版への導入・更新、使用版の記録を担う。wasm-packは存在確認だけで更新を省略せず、最新安定版と導入済み版を照合する。同じスクリプトを開発中に単独実行できるようにし、Rust/Wasmの更新だけで他ツールの更新やリビルドを要求しない。Featureが設定するCARGO_HOME/RUSTUP_HOMEとPATHを引き継ぎ、別のrustup環境を二重導入しない。
 

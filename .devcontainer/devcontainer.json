@@ -27,7 +27,13 @@
   },
   "features": {
     "ghcr.io/devcontainers/features/node:1": {
-      "version": "24.21.0"
+      "version": "lts"
+    },
+    "ghcr.io/devcontainers/features/rust:1": {
+      "version": "latest",
+      "profile": "minimal",
+      "targets": "wasm32-unknown-unknown",
+      "components": "rustfmt,clippy,rust-analyzer,rust-src"
     }
   },
   "remoteUser": "vscode",
@@ -49,7 +55,8 @@
     "HF_HUB_CACHE": "/home/vscode/.cache/inference/huggingface/hub",
     "HF_XET_CACHE": "/home/vscode/.cache/inference/huggingface/xet",
     "HF_ASSETS_CACHE": "/home/vscode/.cache/inference/huggingface/assets",
-    "TORCH_HOME": "/home/vscode/.cache/inference/torch"
+    "TORCH_HOME": "/home/vscode/.cache/inference/torch",
+    "WASM_PACK_CACHE": "/usr/local/cargo/wasm-pack-cache"
   },
   "remoteEnv": {
     "PATH": "/home/vscode/.local/bin:${containerEnv:PATH}"

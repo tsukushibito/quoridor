@@ -3,6 +3,7 @@ set -euo pipefail
 
 workspace_root="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 lock_file="$workspace_root/.devcontainer/toolchain.lock.json"
+source "$workspace_root/scripts/dev/project-env.sh"
 
 require_command() {
   if ! command -v "$1" >/dev/null 2>&1; then
@@ -20,6 +21,10 @@ require_command gdlint
 require_command gdformat
 require_command git
 require_command python3
+require_command rustup
+require_command rustc
+require_command cargo
+require_command wasm-pack
 if [[ "gdscript" == dotnet ]]; then require_command dotnet; fi
 if [[ "nvidia" == nvidia ]]; then require_command nvidia-smi; fi
 

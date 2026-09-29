@@ -7,6 +7,8 @@ This project keeps generated state out of the host checkout and separates caches
 | Managed Git worktrees | `${containerWorkspaceFolder}/.worktree` | `volume` mode |
 | Godot editor/import cache | `/home/vscode/.cache/godot` | named volume |
 | Inference models and framework downloads | `/home/vscode/.cache/inference` | named volume only in NVIDIA mode |
+| Training Python, uv packages and virtual environment | `$INFERENCE_CACHE_DIR/python`, `$INFERENCE_CACHE_DIR/uv`, `$INFERENCE_CACHE_DIR/envs/quoridor-training` | same named volume |
+| Rust toolchains / Cargo / wasm-pack cache | `/usr/local/rustup`, `/usr/local/cargo` | container-local; restored by Feature and setup script |
 
 ## Worktrees
 
@@ -34,3 +36,9 @@ To update the tools in an existing container, run:
     bash .devcontainer/update-toolchain.sh
 
 The updater does not run on each container start.
+
+## Rust and Python setup
+
+Rust uses the official Dev Container Feature. `scripts/dev/setup-project.sh` also installs the environment into an existing container without rebuilding. Add `--update` to update Rust stable, wasm-pack, managed Python and training dependencies. Python packages are recorded in `tools/training/uv.lock`; check and commit its changes after successful updates. The current training target is Linux x86_64 with an NVIDIA GPU.
+
+postCreate updates and verifies Rust, then restores and verifies the Python training environment. Training libraries are installed, but no model training is started. Runtime version and verification reports are written to `~/.local/share/quoridor/`. See `docs/development/rust-python-environment.md` for individual commands and storage overrides.
