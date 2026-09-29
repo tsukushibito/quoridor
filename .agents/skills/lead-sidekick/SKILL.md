@@ -11,7 +11,7 @@ description: ユーザーが $lead-sidekick を明示した作業で、同じLea
 
 1. ユーザーの指示、権限、リポジトリ規約、受入基準を確認する。Leadは現在のスレッドで判断・レビュー・最終受入れを担当し、モデルや推論エフォートをSkillから変更しない。ユーザーが後で設定を変えたらその設定に従う。
 2. [Lead方針](references/lead-policy.md)を読み、直接実装と委譲を比較する。委譲が有益なら[タスク契約テンプレート](assets/task-contract-template.md)で目的・境界・受入基準・検証・書き込み担当を定める。
-3. [実行契約](references/runtime-contract.md)の能力診断を行う。元のLeadへの安全な通知再開、永続化、所有権管理が確認できない場合はSidekickを起動せず、`Runtime-blocked` と不足機能を報告する。黙ってポーリングや別Leadへ切り替えない。Leadが直接対応できる既存の依頼は、権限内で進めてよい。
+3. [実行契約](references/runtime-contract.md)の調べ方の方針に沿って能力診断と必要な接続の準備を行う。通知・再開にはApp Serverの既存スレッドへのメッセージ送信機能を優先し、二重通知は許容する。元Leadへの接続、タスク記録、所有権管理がなお確認できない場合はSidekickを起動せず、`Runtime-blocked` と調査結果・未確認事項を報告する。黙ってポーリングや別Leadへ切り替えない。Leadが直接対応できる既存の依頼は、権限内で進めてよい。
 4. 委譲時は[ルーティング方針](references/routing-policy.md)に沿って許可済みプロファイルを選ぶ。具体的なモデルとエフォートは検証済みの外部設定から解決する。Sidekickに[Sidekick方針](references/sidekick-policy.md)と今回の契約を確実に渡す。再帰委譲は許可しない。
 5. 通知された最終差分と証拠をLeadが確認する。[引き渡しテンプレート](assets/handoff-template.md)を使い、Must-fixを解消して必須検証が完了したら受け入れる。検証不能や予算切れを成功扱いしない。
 

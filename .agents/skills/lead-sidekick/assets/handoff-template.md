@@ -4,7 +4,7 @@
 
 ```text
 Status: Ready for review | Blocked | Validation-blocked | Incomplete
-Task ID / Attempt ID / Contract version / Notification ID:
+Task ID / Attempt ID / Contract version:
 Changes: 変更箇所と観測可能な動作
 Evidence: 受入基準ごとの根拠、検証コマンドと結果
 Tested state: commit、worktree、patchなど識別可能なコード状態
