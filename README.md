@@ -2,6 +2,8 @@
 
 ローカルで2人対戦、または学習不要のRust B0 AIとの対戦ができます。ルールと履歴はメインスレッドのRust WebAssemblyが管理し、AI探索は別のWebAssembly Workerで動きます。盤面はThree.jsの基本描画です。実際の描画方式は「設定・保存」内の「表示と操作の設定」に表示され、GIはオフです。VXGI/TRAAの実装や実GPUでの確認は後続作業です。
 
+実写の室内HDRIを背景と材質の環境光・反射に使い、木製テーブルの上に木製盤を置いた空間を表示します。生成木目、面取り、塗膜、GTAOによる接触部の遮蔽を組み合わせています。IBLに、HDRIの主光源方向から計算したDirectionalLightと影を加えています。採用アセットの出所・ライセンス・生成プロンプトと検証結果は[テーブル空間の描画強化報告](docs/reports/tabletop-rendering.md)に記録します。
+
 ## ローカルで起動
 
 既存のDev Containerまたは同等のRust環境で、プロジェクトのルートから実行します。Rustはstable、`wasm32-unknown-unknown` target、rustfmt、clippy、wasm-packを使用します。固定のRust版は指定しません。
@@ -29,6 +31,7 @@ npm run dev
 source scripts/dev/project-env.sh
 PLAYWRIGHT_BROWSERS_PATH=./artifacts/playwright npx playwright install chromium
 npm run check               # DTO/fixture、strict TypeScript、Rust fmt/check/clippy/test
+npm run test:render         # HDRI光源方向・球面面積・回転・境界の検証
 npm run build               # release rules/AI Wasm + Vite
 VITE_PHASE1_E2E=1 npm run dev
 # 別シェル:
