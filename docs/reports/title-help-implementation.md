@@ -75,4 +75,8 @@ PLAYWRIGHT_BROWSERS_PATH=./artifacts/playwright SMOKE_BASE_URL=http://127.0.0.1:
 
 ## main統合
 
-ユーザー承認後、背景統合済みの `ac0070e` を基点に、タイトル・ヘルプ・ロゴと受領済み音声差分を一つのcommitにまとめ、mainへfast-forwardで取り込む。統合前に検証済みruntime・資産・テスト57ファイルのSHA-256を再照合し、すべて一致した。並行担当の音声・背景worktreeには変更を加えない。mainに既存の未追跡 `docs/reports/ui-ux-evaluation.md` はそのまま保持する。mainでの再確認とpushの結果はBeads `quoridor-bh9.7` の記録を参照する。
+2026-09-30、ユーザー承認後に背景統合済みの `ac0070e` を基点として、タイトル・ヘルプ・ロゴと受領済み音声差分を `4175e01` にまとめ、mainへfast-forwardで取り込んだ。統合前とmain反映後に検証済みruntime・資産・テスト57ファイルのSHA-256を再照合し、すべて一致した。並行担当の音声・背景worktreeには変更を加えていない。mainに既存の未追跡 `docs/reports/ui-ux-evaluation.md` は保持した。
+
+mainで `VITE_PHASE1_E2E=0 npm run build`（release Wasm・型検査・Vite build）、`npm run test:audio`（3件）、`npm run test:render`（6件）、`node scripts/check-boundaries.mjs` が成功。通常production `http://localhost:4173/` ではタイトルからの対局開始・キーボード着手・テストglobal非公開・page/console errorなしを `scripts/smoke-ordinary-production.mjs` で再確認した。専用worktreeで実施済みのE2E・画像・ログも主checkoutの `.artifacts/title-help/` へコピーし、報告内の参照先を保持した。
+
+先行する「マージ済みならpush」の指示に沿い、上記main検証後にpushする。pushの結果とcommitの確定値はBeads `quoridor-bh9.7` を参照する。
