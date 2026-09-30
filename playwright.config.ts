@@ -6,4 +6,6 @@ export default defineConfig({
   reporter: 'list',
   workers: 1,
   timeout: 30_000,
+  // Local SwiftShader can spend several seconds compiling the first PBR/IBL frame.
+  expect: { timeout: 10_000 },
 });

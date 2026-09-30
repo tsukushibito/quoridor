@@ -1,12 +1,19 @@
 import * as THREE from 'three/webgpu';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { TabletopAssets } from './tabletop-assets';
 import type { GameView } from '@quoridor/engine-bridge';
 import { cellPoint, wallPoint, type Target } from './board-coordinates';
 
 export const GI_STATIC = 1;
+export const AO_GEOMETRY = 2;
+const TILE_TOP = 0.14;
+const TILE_THICKNESS = 0.16;
+const PAWN_FOOT_RADIUS = 0.29;
 const wallKey = (orientation: 'horizontal' | 'vertical', anchor: number): string => `${orientation}:${anchor}`;
 function mark(mesh: THREE.Mesh, kind: string, isStatic: boolean): THREE.Mesh {
   mesh.userData.kind = kind;
   if (isStatic) mesh.layers.enable(GI_STATIC);
+  if (['board', 'wall', 'pawn', 'table'].includes(kind)) mesh.layers.enable(AO_GEOMETRY);
   return mesh;
 }
 
@@ -16,8 +23,9 @@ export class BoardScene {
   private readonly walls = new Map<string, THREE.Mesh>();
   private readonly pawns: THREE.Group[] = [];
   private readonly hints = new THREE.Group();
-  private readonly wallGeometry = new THREE.BoxGeometry(1.84, 0.66, 0.16);
-  private readonly wallMaterial = new THREE.MeshStandardMaterial({ color: '#c8a36e', metalness: 0.25, roughness: 0.58 });
+  private readonly wallGeometry = new RoundedBoxGeometry(1.84, 0.66, 0.16, 2, 0.025);
+  private readonly wallMaterial = new THREE.MeshPhysicalMaterial({ color: '#fff0cf', metalness: 0, roughness: 0.68, clearcoat: 0.16, clearcoatRoughness: 0.45 });
+  readonly assets: TabletopAssets;
   private readonly hintGeometry = new THREE.TorusGeometry(0.27, 0.055, 8, 28);
   private readonly hintMaterial = new THREE.MeshBasicMaterial({ color: '#52d5bd' });
   private readonly previewPawn = mark(new THREE.Mesh(new THREE.TorusGeometry(0.39, 0.065, 8, 32),
@@ -26,49 +34,80 @@ export class BoardScene {
     new THREE.MeshStandardMaterial({ color: '#54d5b5', transparent: true, opacity: 0.72, depthWrite: false })), 'preview', false);
 
   constructor() {
-    this.scene.background = new THREE.Color('#111b24');
+    this.scene.background = new THREE.Color('#30251e');
     this.camera.position.set(11, 14, 17);
     this.camera.lookAt(0, 0, 0);
     this.camera.layers.enable(GI_STATIC);
-    const edge = new THREE.MeshStandardMaterial({ color: '#241f22', roughness: 0.75 });
-    const wood = new THREE.MeshStandardMaterial({ color: '#5c3c2c', roughness: 0.85 });
-    const tileLight = new THREE.MeshStandardMaterial({ color: '#d8c6a1', roughness: 0.87 });
-    const tileDark = new THREE.MeshStandardMaterial({ color: '#bba982', roughness: 0.89 });
-    const base = mark(new THREE.Mesh(new THREE.BoxGeometry(10.5, 0.45, 10.5), edge), 'board', true);
-    base.position.y = -0.42;
+    const finish = (color: string, roughness: number, clearcoat: number): THREE.MeshPhysicalMaterial =>
+      new THREE.MeshPhysicalMaterial({ color, roughness, metalness: 0, clearcoat, clearcoatRoughness: 0.36 });
+    const edge = finish('#684139', 0.47, 0.35);
+    const insetWood = finish('#79473a', 0.56, 0.22);
+    const tileWood = finish('#51403a', 0.48, 0.32);
+    const pawnPaint = [finish('#257887', 0.43, 0.38), finish('#b84e35', 0.43, 0.38)];
+    const tableWood = finish('#ad8257', 0.62, 0.18);
+    // All box UVs use local/world distances, so fibers don't stretch with object size.
+    const box = (w: number, h: number, d: number, radius: number, x = 0, z = 0): THREE.BufferGeometry => {
+      const geometry = new RoundedBoxGeometry(w, h, d, 2, radius);
+      const positions = geometry.getAttribute('position'), normals = geometry.getAttribute('normal'), uv = geometry.getAttribute('uv');
+      for (let i = 0; i < positions.count; i++) {
+        const nx = Math.abs(normals.getX(i)), ny = Math.abs(normals.getY(i)), nz = Math.abs(normals.getZ(i));
+        const u = nx > ny && nx > nz ? positions.getZ(i) + z : positions.getX(i) + x;
+        const v = ny >= nx && ny >= nz ? positions.getZ(i) + z : positions.getY(i);
+        uv.setXY(i, u / 4.5, v / 4.5);
+      }
+      return geometry;
+    };
+    const base = mark(new THREE.Mesh(box(10.5, 0.45, 10.5, 0.14), edge), 'board', true);
+    base.position.y = -0.42; base.castShadow = true; base.receiveShadow = true;
     this.scene.add(base);
-    const inset = mark(new THREE.Mesh(new THREE.BoxGeometry(9.7, 0.16, 9.7), wood), 'board', true);
-    inset.position.y = -0.12;
+    const inset = mark(new THREE.Mesh(box(9.7, 0.16, 9.7, 0.045), insetWood), 'board', true);
+    inset.position.y = -0.10; inset.receiveShadow = true;
     this.scene.add(inset);
-    const tileGeometry = new THREE.BoxGeometry(0.88, 0.16, 0.88);
     for (let row = 0; row < 9; row++) for (let col = 0; col < 9; col++) {
-      const tile = mark(new THREE.Mesh(tileGeometry, (row + col) % 2 ? tileDark : tileLight), 'board', true);
-      tile.position.set(col - 4, 0.06, 4 - row);
-      tile.receiveShadow = true;
+      const tile = mark(new THREE.Mesh(box(0.88, TILE_THICKNESS, 0.88, 0.035, col - 4, 4 - row), tileWood), 'board', true);
+      tile.position.set(col - 4, TILE_TOP - TILE_THICKNESS / 2, 4 - row);
+      tile.castShadow = true; tile.receiveShadow = true;
       this.scene.add(tile);
     }
-    const blue = new THREE.MeshStandardMaterial({ color: '#1f87a5', roughness: 0.42 });
-    const coral = new THREE.MeshStandardMaterial({ color: '#dc785a', roughness: 0.42 });
-    const brass = new THREE.MeshStandardMaterial({ color: '#bd9659', metalness: 0.5, roughness: 0.4 });
+    const footHeight = 0.10;
+    const footGeometries = [32, 6].map(segments => new THREE.CylinderGeometry(0.25, PAWN_FOOT_RADIUS, footHeight, segments));
+    const pawnProfile = [[0.20, 0], [0.24, 0.04], [0.23, 0.12], [0.18, 0.32], [0.10, 0.48],
+      [0.10, 0.53], [0.17, 0.58], [0.20, 0.67], [0.18, 0.75], [0.10, 0.82], [0, 0.85]];
+    const bodyGeometries = [40, 6].map(segments =>
+      new THREE.LatheGeometry(pawnProfile.map(([r, y]) => new THREE.Vector2(r, y)), segments));
     for (let player = 0; player < 2; player++) {
       const group = new THREE.Group();
-      const foot = mark(new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.38, 0.18, 32), brass), 'pawn', false);
-      foot.position.y = 0.25; foot.castShadow = true; group.add(foot);
-      const body = mark(player === 0
-        ? new THREE.Mesh(new THREE.SphereGeometry(0.33, 24, 20), blue)
-        : new THREE.Mesh(new THREE.ConeGeometry(0.34, 0.68, 6), coral), 'pawn', false);
-      body.position.y = player === 0 ? 0.58 : 0.66;
-      body.castShadow = true; group.add(body);
+      const foot = mark(new THREE.Mesh(footGeometries[player], pawnPaint[player]), 'pawn', false);
+      foot.position.y = TILE_TOP + footHeight / 2; foot.castShadow = true; foot.receiveShadow = true; group.add(foot);
+      const body = mark(new THREE.Mesh(bodyGeometries[player], pawnPaint[player]), 'pawn', false);
+      body.position.y = TILE_TOP + footHeight; body.castShadow = true; body.receiveShadow = true; group.add(body);
       this.pawns.push(group); this.scene.add(group);
     }
-    const plane = mark(new THREE.Mesh(new THREE.PlaneGeometry(200, 200),
-      new THREE.MeshStandardMaterial({ color: '#172633', roughness: 1 })), 'floor', false);
-    plane.rotation.x = -Math.PI / 2; plane.position.y = -0.68; plane.receiveShadow = true; this.scene.add(plane);
-    const light = new THREE.DirectionalLight('#fff0d5', 3.2);
-    light.position.set(-5, 12, 7); light.castShadow = true; light.shadow.mapSize.set(1024, 1024);
-    light.shadow.camera.left = -12; light.shadow.camera.right = 12;
-    light.shadow.camera.top = 12; light.shadow.camera.bottom = -12;
-    this.scene.add(light, new THREE.AmbientLight('#b3c7df', 1.25));
+    // The board bottom is -0.645; the finite table top touches it exactly.
+    const tabletop = mark(new THREE.Mesh(box(24, 0.65, 18, 0.15), tableWood), 'table', false);
+    tabletop.position.y = -0.97; tabletop.receiveShadow = true; tabletop.castShadow = true;
+    this.scene.add(tabletop);
+    const legGeometry = box(1.1, 27, 1.1, 0.08);
+    for (const x of [-10, 10]) for (const z of [-7, 7]) {
+      const leg = mark(new THREE.Mesh(legGeometry, tableWood), 'table', false);
+      leg.position.set(x, -14.75, z); leg.castShadow = true; leg.receiveShadow = true;
+      this.scene.add(leg);
+    }
+    const fallback = new THREE.AmbientLight('#e5c5a3', 1.05);
+    this.scene.add(fallback);
+    // The HDR loader sets direction/color only after finding an upper-hemisphere source.
+    const key = new THREE.DirectionalLight('#ffffff', 0);
+    key.castShadow = true;
+    key.shadow.mapSize.set(2048, 2048);
+    Object.assign(key.shadow.camera, { left: -8, right: 8, top: 8, bottom: -8, near: 0.1, far: 40 });
+    key.shadow.camera.updateProjectionMatrix();
+    key.shadow.bias = -0.0001;
+    key.shadow.normalBias = 0.012;
+    key.shadow.radius = 5;
+    // Keep depth-only shadow draws independent of diagnostic / AO camera layers.
+    key.shadow.camera.layers.set(AO_GEOMETRY);
+    this.scene.add(key, key.target);
+    this.assets = new TabletopAssets(this.scene, [edge, insetWood, tileWood, this.wallMaterial, ...pawnPaint, tableWood], fallback, key);
     this.scene.add(this.hints, this.previewPawn, this.previewWall);
     this.previewPawn.rotation.x = -Math.PI / 2;
     this.previewPawn.visible = false; this.previewWall.visible = false;
@@ -87,7 +126,7 @@ export class BoardScene {
     const point = wallPoint(anchor);
     mesh.position.set(point.x, 0.38, point.z);
     mesh.rotation.y = orientation === 'horizontal' ? 0 : Math.PI / 2;
-    mesh.castShadow = true;
+    mesh.castShadow = true; mesh.receiveShadow = true;
     this.scene.add(mesh);
     return mesh;
   }
@@ -156,14 +195,18 @@ export class BoardScene {
     return counts;
   }
   dispose(): void {
+    this.assets.dispose();
     const geometries = new Set<THREE.BufferGeometry>();
     const materials = new Set<THREE.Material>();
     this.scene.traverse(object => {
+      if (object instanceof THREE.DirectionalLight || object instanceof THREE.SpotLight) object.shadow.dispose();
       if (!(object instanceof THREE.Mesh)) return;
       geometries.add(object.geometry);
       const material = object.material;
       if (Array.isArray(material)) material.forEach(item => materials.add(item)); else materials.add(material);
     });
+    geometries.add(this.wallGeometry);
+    materials.add(this.wallMaterial);
     geometries.add(this.hintGeometry);
     materials.add(this.hintMaterial);
     geometries.forEach(item => item.dispose()); materials.forEach(item => item.dispose());

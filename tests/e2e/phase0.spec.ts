@@ -20,6 +20,8 @@ test('rules Wasm, real AI Worker parity, restart, and rendered scene', async ({ 
   });
   await page.goto('./?forceWebGL=1');
   await expect.poll(() => page.evaluate(() => window.__QUORIDOR_DIAGNOSTICS__?.phase)).toBe('ready');
+  // Renderer readiness and starting the authoritative rules game are independent.
+  await expect.poll(() => page.evaluate(() => window.__QUORIDOR_DIAGNOSTICS__?.rulesLoaded)).toBe(true);
   await expect.poll(() => page.evaluate(() => window.__QUORIDOR_RULES_TEST_API__ !== undefined)).toBe(true);
   const initial = await page.evaluate(() => window.__QUORIDOR_DIAGNOSTICS__);
   expect(initial?.rulesLoaded).toBe(true);

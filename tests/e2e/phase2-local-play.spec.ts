@@ -36,7 +36,9 @@ async function startPvp(page: Page): Promise<void> {
   await page.locator('#dialog-start').click();
 }
 async function settle(page: Page): Promise<void> {
-  await expect.poll(() => page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.state().phase)).toMatch(/humanTurn|finished/);
+  // Initial PBR/PMREM shader work is slower on the software backend used here.
+  await expect.poll(() => page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.state().phase),
+    { timeout: 10_000 }).toMatch(/humanTurn|finished/);
 }
 
 test('real pointer game reaches winner, then undo/new and camera remain usable', async ({ page }) => {
@@ -126,6 +128,8 @@ test('wall orientation, illegal preview, keyboard, and static layer', async ({ p
 });
 
 test('drag and UI isolation, interrupted animations, reduced motion, repeated new and disposal', async ({ page }) => {
+  // This case renders many camera/animation frames on SwiftShader with PBR/GTAO.
+  test.setTimeout(90_000);
   await page.clock.install();
   await ready(page);
   const canvas = page.locator('#board canvas');
@@ -162,7 +166,9 @@ test('drag and UI isolation, interrupted animations, reduced motion, repeated ne
   await page.mouse.click(5, 5);
   expect((await state(page)).view?.ply).toBe(0);
   expect((await state(page)).selectedId).toBeNull();
-  await page.clock.pauseAt(await page.evaluate(() => Date.now() + 10_000));
+  // Pause close to the current time; advancing ten seconds would execute hundreds
+  // of software-rendered AO frames without testing the interrupted animation.
+  await page.clock.pauseAt(await page.evaluate(() => Date.now() + 100));
   await selectAndConfirm(page, 'wall', 27);
   expect((await state(page)).phase).toBe('animating');
   expect((await state(page)).view?.ply).toBe(1);
@@ -175,7 +181,7 @@ test('drag and UI isolation, interrupted animations, reduced motion, repeated ne
   expect((await state(page)).view?.ply).toBe(0);
   expect(await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.resources().walls)).toBe(0);
   await page.getByRole('button', { name: '駒を動かす' }).click();
-  await page.clock.pauseAt(await page.evaluate(() => Date.now() + 10_000));
+  await page.clock.pauseAt(await page.evaluate(() => Date.now() + 100));
   await selectAndConfirm(page, 'cell', 13);
   expect((await state(page)).phase).toBe('animating');
   expect((await state(page)).view?.ply).toBe(1);
@@ -207,7 +213,7 @@ test('drag and UI isolation, interrupted animations, reduced motion, repeated ne
   await page.locator('#no-animation').uncheck();
   await closeMenu(page);
   await page.getByRole('button', { name: '壁を置く' }).click();
-  await page.clock.pauseAt(await page.evaluate(() => Date.now() + 10_000));
+  await page.clock.pauseAt(await page.evaluate(() => Date.now() + 100));
   await selectAndConfirm(page, 'wall', 27);
   expect((await state(page)).phase).toBe('animating');
   await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.disposeForTest());

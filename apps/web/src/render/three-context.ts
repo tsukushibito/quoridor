@@ -1,8 +1,10 @@
 import * as THREE from 'three/webgpu';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import type { GameView } from '@quoridor/engine-bridge';
+import type { TabletopAssets } from './tabletop-assets';
 import { BoardScene, wallKey } from './board-scene';
 import { cellPoint, wallPoint } from './board-coordinates';
+import { AmbientOcclusion } from './ambient-occlusion';
 
 export type Backend = 'webgpu' | 'webgl2' | 'unknown';
 export type RendererFault = 'deviceLost' | 'backendError' | 'renderError';
@@ -17,12 +19,15 @@ export class BoardRenderer {
   private readonly resizeObserver: ResizeObserver;
   private readonly ray = new THREE.Raycaster();
   private readonly pickPlane = new THREE.Plane(new THREE.Vector3(0, 1, 0), -0.17);
-  private frame = 0;
+  private animationStarted = false;
   private tween: Tween | null = null;
   private disposed = false;
   private faulted = false;
   private reducedMotion = false;
   private presetFlipped = false;
+  private needsRender = true;
+  private submittedFrames = 0;
+  private occlusion: AmbientOcclusion | null = null;
 
   private constructor(private readonly element: HTMLElement,
     private readonly onFault: (kind: RendererFault) => void) {
@@ -30,12 +35,16 @@ export class BoardRenderer {
     this.renderer.onDeviceLost = () => this.fail('deviceLost');
     this.renderer.onError = () => this.fail('backendError');
     this.renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
-    this.renderer.shadowMap.enabled = true;
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
+    this.renderer.toneMapping = THREE.AgXToneMapping;
+    this.renderer.toneMappingExposure = 0.9;
+    this.renderer.shadowMap.enabled = true;
+    this.renderer.shadowMap.type = THREE.PCFShadowMap;
     this.canvas.setAttribute('tabindex', '0');
     this.canvas.style.touchAction = 'none';
     this.element.appendChild(this.canvas);
     this.controls = new OrbitControls(this.board.camera, this.canvas);
+    this.controls.addEventListener('change', () => { this.needsRender = true; });
     this.controls.enableDamping = true;
     this.controls.enablePan = false;
     this.controls.minDistance = 10;
@@ -56,7 +65,10 @@ export class BoardRenderer {
       if (board.faulted) throw new Error('Renderer failed during initialization');
       board.backend = board.renderer.coordinateSystem === THREE.WebGPUCoordinateSystem ? 'webgpu'
         : board.renderer.coordinateSystem === THREE.WebGLCoordinateSystem ? 'webgl2' : 'unknown';
-      board.loop();
+      board.occlusion = new AmbientOcclusion(board.renderer, board.board.scene, board.board.camera);
+      board.animationStarted = true;
+      await board.renderer.setAnimationLoop(board.loop);
+      void board.board.assets.load(board.renderer, () => { board.needsRender = true; });
       return board;
     } catch (error) { board.dispose(); throw error; }
   }
@@ -68,7 +80,8 @@ export class BoardRenderer {
       this.board.camera.updateProjectionMatrix();
       this.renderer.setSize(width, height);
       this.fitCamera(this.presetDirection());
-    } catch { this.fail('renderError'); }
+      this.needsRender = true;
+    } catch (error) { console.error('Board resize failed', error); this.fail('renderError'); }
   }
   private presetDirection(): THREE.Vector3 {
     const narrow = this.element.clientWidth / Math.max(1, this.element.clientHeight) < 1;
@@ -113,6 +126,7 @@ export class BoardRenderer {
     try {
       this.controls.update();
       if (this.tween) {
+        this.needsRender = true;
         const current = this.tween;
         const fraction = Math.min(1, (performance.now() - current.started) / current.duration);
         current.update(fraction);
@@ -121,21 +135,29 @@ export class BoardRenderer {
           current.complete();
         }
       }
-      this.renderer.render(this.board.scene, this.board.camera);
-      this.frame = requestAnimationFrame(this.loop);
-    } catch { this.fail('renderError'); }
+      // PBR/IBL and spatially filtered GTAO have no temporal accumulation. Keep RAF for controls/tweens,
+      // but avoid submitting identical expensive frames while the board is idle.
+      // VXGI/TRAA will require a separate convergence policy when enabled.
+      if (this.needsRender) {
+        this.needsRender = false;
+        this.occlusion!.render();
+        this.submittedFrames++;
+      }
+    } catch (error) { console.error('Board render failed', error); this.fail('renderError'); }
   };
   private fail(kind: RendererFault): void {
     if (this.disposed || this.faulted) return;
     this.faulted = true;
     this.cancelAnimation();
-    cancelAnimationFrame(this.frame);
+    if (this.animationStarted) void this.renderer.setAnimationLoop(null);
     this.onFault(kind);
   }
   setReducedMotion(value: boolean): void { this.reducedMotion = value; }
-  setView(view: GameView): void { this.cancelAnimation(); this.board.sync(view); }
-  setHints(view: GameView | null, enabled: boolean): void { this.board.setHints(view, enabled); }
-  setPreview(target: Parameters<BoardScene['setPreview']>[0], legal: boolean): void { this.board.setPreview(target, legal); }
+  setView(view: GameView): void { this.cancelAnimation(); this.board.sync(view); this.needsRender = true; }
+  setHints(view: GameView | null, enabled: boolean): void { this.board.setHints(view, enabled); this.needsRender = true; }
+  setPreview(target: Parameters<BoardScene['setPreview']>[0], legal: boolean): void {
+    this.board.setPreview(target, legal); this.needsRender = true;
+  }
   cancelAnimation(): void { this.tween = null; }
   animate(before: GameView, after: GameView, actionId: number, complete: () => void): void {
     this.cancelAnimation();
@@ -144,6 +166,7 @@ export class BoardRenderer {
     const orientation = actionId < 145 ? 'horizontal' : 'vertical';
     const anchor = actionId < 145 ? actionId - 81 : actionId - 145;
     this.board.sync(after, isWall ? wallKey(orientation, anchor) : undefined);
+    this.needsRender = true;
     if (!isWall) this.board.setPawn(player, before.pawns[player]!);
     const finish = (): void => {
       if (isWall) this.board.finalizeWall(orientation, anchor);
@@ -194,15 +217,18 @@ export class BoardRenderer {
   cameraPosition(): [number, number, number] {
     return this.board.camera.position.toArray() as [number, number, number];
   }
-  diagnostics(): ReturnType<BoardScene['diagnostics']> & { canvasCount: number; disposed: boolean; animating: boolean } {
-    return { ...this.board.diagnostics(), canvasCount: this.element.querySelectorAll('canvas').length,
-      disposed: this.disposed, animating: this.tween !== null };
+  diagnostics(): ReturnType<BoardScene['diagnostics']> & { canvasCount: number; disposed: boolean; animating: boolean; submittedFrames: number } & ReturnType<TabletopAssets['diagnostics']> & ReturnType<AmbientOcclusion['diagnostics']> {
+    return { ...this.board.diagnostics(), ...this.board.assets.diagnostics(),
+      ...(this.occlusion?.diagnostics() ?? { aoEnabled: false, aoSize: [0, 0] as [number, number] }), canvasCount: this.element.querySelectorAll('canvas').length,
+      disposed: this.disposed, animating: this.tween !== null, submittedFrames: this.submittedFrames };
   }
   dispose(): void {
     if (this.disposed) return;
     this.disposed = true;
-    this.cancelAnimation(); cancelAnimationFrame(this.frame);
+    this.cancelAnimation();
+    if (this.animationStarted) void this.renderer.setAnimationLoop(null);
     this.resizeObserver.disconnect(); this.controls.dispose();
+    this.occlusion?.dispose();
     this.board.dispose(); this.renderer.dispose(); this.canvas.remove();
   }
 }
