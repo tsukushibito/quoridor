@@ -5,6 +5,7 @@ import { BoardRenderer, type Backend, type RendererFault } from './render/three-
 import { InputRouter } from './input/input-router';
 import { DEFAULT_SETTINGS, LocalStateRepository, makeSavedMatch, type LocalSettings,
   type MatchOptions, type SavedMatch, validateMatchOptions } from './persistence/local-state';
+import { ENVIRONMENT_PRESETS, environmentPreset, isEnvironmentId } from './environment-presets';
 import { ja } from './ui/strings';
 import './style.css';
 
@@ -41,7 +42,9 @@ root.innerHTML = `
         <button id="orientation" class="orientation" type="button">${ja.wallDirection}: <b>${ja.horizontal}</b> <kbd>R</kbd></button><p id="preview-text" class="help" aria-live="polite">${ja.guideMove}</p></div>
       <div class="panel actions"><button id="undo" type="button">${ja.undo}</button><button id="new-game" class="accent" type="button">${ja.newGame}</button></div>
       <div class="panel"><p class="section-label">${ja.cameraHeading}</p><div class="actions"><button id="flip" type="button">${ja.flip}</button><button id="reset-camera" type="button">${ja.resetCamera}</button></div></div>
-      <details class="panel settings"><summary>${ja.settings}</summary><label><input id="no-animation" type="checkbox"> ${ja.noAnimation}</label><p id="settings-status"></p><p>${ja.guideKeyboard}</p><p id="backend-label">${ja.diagnostics}: ${ja.preparing} · ${ja.giOff}</p></details>
+      <details class="panel settings"><summary>${ja.settings}</summary>
+        <label for="environment-select">${ja.environment}<select id="environment-select">${ENVIRONMENT_PRESETS.map(preset => `<option value="${preset.id}">${preset.label}</option>`).join('')}</select></label>
+        <p id="environment-status" role="status" aria-live="polite"></p><button id="retry-environment" type="button" hidden>${ja.retryEnvironment}</button><label><input id="no-animation" type="checkbox"> ${ja.noAnimation}</label><p id="settings-status"></p><p>${ja.guideKeyboard}</p><p id="backend-label">${ja.diagnostics}: ${ja.preparing} · ${ja.giOff}</p></details>
     </aside>
   </section>
 </main>`;
@@ -154,6 +157,8 @@ const ui = {
   saveNow: $<HTMLButtonElement>('#save-now'), clearSave: $<HTMLButtonElement>('#clear-save'),
   storageDetailWrap: $<HTMLElement>('#storage-detail-wrap'), storageDetail: $<HTMLElement>('#storage-detail'),
   settingsStatus: $<HTMLElement>('#settings-status'),
+  environment: $<HTMLSelectElement>('#environment-select'), environmentStatus: $<HTMLElement>('#environment-status'),
+  retryEnvironment: $<HTMLButtonElement>('#retry-environment'),
 };
 
 async function bootstrap(): Promise<void> {
@@ -189,6 +194,7 @@ async function bootstrap(): Promise<void> {
   ui.humanSide.value = String(settings.nextMatch.humanSide);
   ui.budget.value = String(settings.nextMatch.simulations);
   ui.motion.checked = settings.reducedMotion;
+  ui.environment.value = settings.environmentId;
 
   const selectedMatch = (): MatchOptions => validateMatchOptions({ mode: ui.matchMode.value,
     humanSide: Number(ui.humanSide.value), simulations: Number(ui.budget.value) });
@@ -243,6 +249,15 @@ async function bootstrap(): Promise<void> {
     ui.storageDetailWrap.hidden = storageDetail === '';
     ui.storageDetail.textContent = storageDetail;
     ui.settingsStatus.textContent = settingsWarning;
+    const assets = board?.diagnostics();
+    const requestedLabel = environmentPreset(settings.environmentId).label;
+    const failedEnvironment = assets?.environment === 'error' || assets?.environment === 'fallback';
+    ui.environment.disabled = !board || !!renderFault;
+    ui.retryEnvironment.hidden = !failedEnvironment;
+    ui.environmentStatus.textContent = assets?.environment === 'ready'
+      ? `${requestedLabel}${ja.environmentReady}` : failedEnvironment
+        ? `${requestedLabel}${ja.environmentFailed}${assets.activeEnvironment ? ` ${environmentPreset(assets.activeEnvironment).label}${ja.environmentKept}` : ja.environmentFallback}`
+        : `${requestedLabel}${ja.environmentLoading}`;
     ui.humanSide.disabled = ui.budget.disabled = ui.matchMode.value !== 'ai';
     ui.activeMatch.textContent = view ? `${state.mode === 'ai' ? ja.versusAi : ja.pvp}${state.mode === 'ai' ? ` · ${state.humanSide === 0 ? ja.humanFirst : ja.humanSecond}` : ''}` : '';
     const showAi = !!view && state.mode === 'ai' && (state.phase === 'aiThinking' || state.phase === 'recoverableError');
@@ -319,7 +334,8 @@ async function bootstrap(): Promise<void> {
         new URLSearchParams(location.search).get('testRenderStartupFailure') === '1') {
         startupFaultInjected = true; throw new Error('Controlled renderer startup failure');
       }
-      const created = await BoardRenderer.create($<HTMLElement>('#board'), renderFailed);
+      const created = await BoardRenderer.create($<HTMLElement>('#board'), renderFailed,
+        { environmentId: settings.environmentId, onAssetsUpdate: () => { if (!disposed) renderUi(); } });
       if (disposed) { created.dispose(); return; }
       board = created; renderFault = null;
       board.canvas.setAttribute('aria-label', ja.boardLabel);
@@ -415,7 +431,8 @@ async function bootstrap(): Promise<void> {
     } finally { temporary?.dispose(); }
   };
   const updateSettings = (): void => {
-    try { settings = { schemaVersion: 1, nextMatch: selectedMatch(), reducedMotion: ui.motion.checked }; }
+    try { settings = { schemaVersion: 1, nextMatch: selectedMatch(), reducedMotion: ui.motion.checked,
+      environmentId: isEnvironmentId(ui.environment.value) ? ui.environment.value : settings.environmentId }; }
     catch { settingsWarning = ja.settingsInvalid; renderUi(); return; }
     board?.setReducedMotion(settings.reducedMotion);
     const result = repository.writeSettings(settings);
@@ -447,6 +464,11 @@ async function bootstrap(): Promise<void> {
   ui.confirmTouch.addEventListener('click', () => input?.confirmSelection(), { signal: listeners.signal });
   for (const select of [ui.matchMode, ui.humanSide, ui.budget]) select.addEventListener('change', updateSettings, { signal: listeners.signal });
   ui.motion.addEventListener('change', updateSettings, { signal: listeners.signal });
+  ui.environment.addEventListener('change', () => {
+    updateSettings(); void board?.setEnvironment(settings.environmentId);
+  }, { signal: listeners.signal });
+  ui.retryEnvironment.addEventListener('click', () => { void board?.setEnvironment(settings.environmentId); },
+    { signal: listeners.signal });
   ui.undo.addEventListener('click', () => { if (renderFault || rulesFault || busy) return;
     const view = session.undo(); if (view) syncBoard(view, true); }, { signal: listeners.signal });
   ui.newGame.addEventListener('click', () => openMatchDialog(), { signal: listeners.signal });

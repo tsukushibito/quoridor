@@ -1,5 +1,6 @@
 import { validateReplayShape, type SavedGame } from '@quoridor/engine-bridge';
 import type { MatchMode } from '../session/session-controller';
+import { DEFAULT_ENVIRONMENT, isEnvironmentId, type EnvironmentId } from '../environment-presets';
 
 export const GAME_KEY = 'quoridor.m1.game.v1';
 export const SETTINGS_KEY = 'quoridor.m1.settings.v1';
@@ -9,9 +10,9 @@ const RULESET = 'standard-2p-v1';
 
 export type MatchOptions = Readonly<{ mode: MatchMode; humanSide: 0 | 1; simulations: number }>;
 export type SavedMatch = Readonly<{ schemaVersion: 1; rulesetId: typeof RULESET; match: MatchOptions; replay: SavedGame }>;
-export type LocalSettings = Readonly<{ schemaVersion: 1; nextMatch: MatchOptions; reducedMotion: boolean }>;
+export type LocalSettings = Readonly<{ schemaVersion: 1; nextMatch: MatchOptions; reducedMotion: boolean; environmentId: EnvironmentId }>;
 export const DEFAULT_SETTINGS: LocalSettings = { schemaVersion: 1,
-  nextMatch: { mode: 'pvp', humanSide: 0, simulations: 96 }, reducedMotion: false };
+  nextMatch: { mode: 'pvp', humanSide: 0, simulations: 96 }, reducedMotion: false, environmentId: DEFAULT_ENVIRONMENT };
 
 export type ReadResult<T> = { status: 'ok'; value: T } | { status: 'empty' } |
   { status: 'invalid'; reason: string } | { status: 'unavailable' };
@@ -47,11 +48,13 @@ export function validateSavedMatch(value: unknown): SavedMatch {
   return { schemaVersion: 1, rulesetId: RULESET, match, replay };
 }
 export function validateSettings(value: unknown): LocalSettings {
-  if (!record(value) || !keys(value, ['schemaVersion', 'nextMatch', 'reducedMotion']) ||
+  if (!record(value) || !(keys(value, ['schemaVersion', 'nextMatch', 'reducedMotion']) ||
+    keys(value, ['schemaVersion', 'nextMatch', 'reducedMotion', 'environmentId'])) ||
     value.schemaVersion !== 1 || typeof value.reducedMotion !== 'boolean') throw new Error('Invalid settings format');
   const nextMatch = validateMatchOptions(value.nextMatch);
   if (![48, 96, 192, 4096].includes(nextMatch.simulations)) throw new Error('Unsupported setting budget');
-  return { schemaVersion: 1, nextMatch, reducedMotion: value.reducedMotion };
+  return { schemaVersion: 1, nextMatch, reducedMotion: value.reducedMotion,
+    environmentId: isEnvironmentId(value.environmentId) ? value.environmentId : DEFAULT_ENVIRONMENT };
 }
 export function makeSavedMatch(replay: SavedGame, match: MatchOptions): SavedMatch {
   return validateSavedMatch({ schemaVersion: 1, rulesetId: RULESET, replay, match });

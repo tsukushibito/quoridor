@@ -1,6 +1,7 @@
 import * as THREE from 'three/webgpu';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import type { GameView } from '@quoridor/engine-bridge';
+import { DEFAULT_ENVIRONMENT, type EnvironmentId } from '../environment-presets';
 import type { TabletopAssets } from './tabletop-assets';
 import { BoardScene, wallKey } from './board-scene';
 import { cellPoint, wallPoint } from './board-coordinates';
@@ -56,7 +57,8 @@ export class BoardRenderer {
     this.resizeObserver = new ResizeObserver(() => this.resize());
     this.resizeObserver.observe(element);
   }
-  static async create(element: HTMLElement, onFault: (kind: RendererFault) => void = () => {}): Promise<BoardRenderer> {
+  static async create(element: HTMLElement, onFault: (kind: RendererFault) => void = () => {},
+    options: { environmentId?: EnvironmentId; onAssetsUpdate?: () => void } = {}): Promise<BoardRenderer> {
     const board = new BoardRenderer(element, onFault);
     try {
       await board.renderer.init();
@@ -68,7 +70,10 @@ export class BoardRenderer {
       board.occlusion = new AmbientOcclusion(board.renderer, board.board.scene, board.board.camera);
       board.animationStarted = true;
       await board.renderer.setAnimationLoop(board.loop);
-      void board.board.assets.load(board.renderer, () => { board.needsRender = true; });
+      void board.board.assets.load(board.renderer, () => {
+        if (board.disposed) return;
+        board.needsRender = true; options.onAssetsUpdate?.();
+      }, options.environmentId ?? DEFAULT_ENVIRONMENT);
       return board;
     } catch (error) { board.dispose(); throw error; }
   }
@@ -152,6 +157,7 @@ export class BoardRenderer {
     if (this.animationStarted) void this.renderer.setAnimationLoop(null);
     this.onFault(kind);
   }
+  async setEnvironment(id: EnvironmentId): Promise<void> { await this.board.assets.setEnvironment(id); }
   setReducedMotion(value: boolean): void { this.reducedMotion = value; }
   setView(view: GameView): void { this.cancelAnimation(); this.board.sync(view); this.needsRender = true; }
   setHints(view: GameView | null, enabled: boolean): void { this.board.setHints(view, enabled); this.needsRender = true; }
@@ -217,10 +223,11 @@ export class BoardRenderer {
   cameraPosition(): [number, number, number] {
     return this.board.camera.position.toArray() as [number, number, number];
   }
-  diagnostics(): ReturnType<BoardScene['diagnostics']> & { canvasCount: number; disposed: boolean; animating: boolean; submittedFrames: number } & ReturnType<TabletopAssets['diagnostics']> & ReturnType<AmbientOcclusion['diagnostics']> {
+  diagnostics(): ReturnType<BoardScene['diagnostics']> & { canvasCount: number; disposed: boolean; animating: boolean; submittedFrames: number; gpuTextures: number; gpuRenderTargets: number } & ReturnType<TabletopAssets['diagnostics']> & ReturnType<AmbientOcclusion['diagnostics']> {
     return { ...this.board.diagnostics(), ...this.board.assets.diagnostics(),
       ...(this.occlusion?.diagnostics() ?? { aoEnabled: false, aoSize: [0, 0] as [number, number] }), canvasCount: this.element.querySelectorAll('canvas').length,
-      disposed: this.disposed, animating: this.tween !== null, submittedFrames: this.submittedFrames };
+      disposed: this.disposed, animating: this.tween !== null, submittedFrames: this.submittedFrames,
+      gpuTextures: this.renderer.info.memory.textures, gpuRenderTargets: this.renderer.info.memory.renderTargets };
   }
   dispose(): void {
     if (this.disposed) return;
