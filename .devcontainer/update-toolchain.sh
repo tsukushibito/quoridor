@@ -143,7 +143,8 @@ install -m 0755 "$work_dir/uv/uv-$uv_arch-unknown-linux-gnu/uv" "$local_bin/uv"
 install -m 0755 "$work_dir/uv/uv-$uv_arch-unknown-linux-gnu/uvx" "$local_bin/uvx"
 
 echo "Installing the latest Codex CLI and gdtoolkit..."
-npm install --global --prefix "$HOME/.local" @openai/codex@latest
+npm config set prefix "$HOME/.local" --location=user
+npm install --global @openai/codex@latest
 uv tool install --force --upgrade --link-mode copy gdtoolkit
 
 echo "Updating VS Code CLI from Microsoft's signed stable APT repository..."
