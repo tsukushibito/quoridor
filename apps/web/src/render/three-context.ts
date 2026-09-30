@@ -26,6 +26,7 @@ export class BoardRenderer {
   private faulted = false;
   private reducedMotion = false;
   private presetFlipped = false;
+  private pausedAt: number | null = null;
   private needsRender = true;
   private submittedFrames = 0;
   private occlusion: AmbientOcclusion | null = null;
@@ -97,8 +98,10 @@ export class BoardRenderer {
     const ray = direction.clone().normalize();
     if (ray.lengthSq() < 0.5) ray.set(11, 14, 17).normalize();
     const canvas = this.canvas.getBoundingClientRect();
-    const overlay = (selector: string): DOMRect | undefined =>
-      this.element.ownerDocument.querySelector<HTMLElement>(selector)?.getBoundingClientRect();
+    const overlay = (selector: string): DOMRect | undefined => {
+      const element = this.element.ownerDocument.querySelector<HTMLElement>(selector);
+      return element?.getClientRects().length ? element.getBoundingClientRect() : undefined;
+    };
     const top = Math.max(canvas.top + 10, (overlay('.status-island')?.bottom ?? canvas.top) + 10,
       (overlay('.top-actions')?.bottom ?? canvas.top) + 10);
     const bottom = Math.min(canvas.bottom - 10, (overlay('.action-hud')?.top ?? canvas.bottom) - 10);
@@ -129,8 +132,8 @@ export class BoardRenderer {
   private loop = (): void => {
     if (this.disposed || this.faulted) return;
     try {
-      this.controls.update();
-      if (this.tween) {
+      if (this.pausedAt === null) this.controls.update();
+      if (this.tween && this.pausedAt === null) {
         this.needsRender = true;
         const current = this.tween;
         const fraction = Math.min(1, (performance.now() - current.started) / current.duration);
@@ -159,6 +162,17 @@ export class BoardRenderer {
   }
   async setEnvironment(id: EnvironmentId): Promise<void> { await this.board.assets.setEnvironment(id); }
   setReducedMotion(value: boolean): void { this.reducedMotion = value; }
+  fitToViewport(): void { this.resize(); }
+  setPaused(value: boolean): void {
+    if (value === (this.pausedAt !== null)) return;
+    const now = performance.now();
+    if (value) this.pausedAt = now;
+    else {
+      if (this.tween && this.pausedAt !== null) this.tween.started += now - this.pausedAt;
+      this.pausedAt = null;
+    }
+    this.controls.enabled = !value;
+  }
   setView(view: GameView): void { this.cancelAnimation(); this.board.sync(view); this.needsRender = true; }
   setHints(view: GameView | null, enabled: boolean): void { this.board.setHints(view, enabled); this.needsRender = true; }
   setPreview(target: Parameters<BoardScene['setPreview']>[0], legal: boolean): void {
@@ -167,6 +181,7 @@ export class BoardRenderer {
   cancelAnimation(): void { this.tween = null; }
   animate(before: GameView, after: GameView, actionId: number, complete: () => void): void {
     this.cancelAnimation();
+    if (this.pausedAt !== null) this.pausedAt = performance.now();
     const player = before.turn;
     const isWall = actionId >= 81;
     const orientation = actionId < 145 ? 'horizontal' : 'vertical';

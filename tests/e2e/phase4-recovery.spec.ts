@@ -1,3 +1,4 @@
+import { startDefaultMatch, restartMatch } from './start-match';
 import { expect, test, type Page } from '@playwright/test';
 
 async function state(page: Page) { return page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.state()); }
@@ -8,6 +9,7 @@ async function clickCell(page: Page, cell: number): Promise<void> {
 }
 async function ready(page: Page): Promise<void> {
   await page.goto('./?forceWebGL=1');
+  await startDefaultMatch(page);
   await expect.poll(() => state(page).then(x => x.phase)).toBe('humanTurn');
 }
 
@@ -17,12 +19,15 @@ test('controlled renderer and rules startup failures recover through visible UI'
   await expect(page.locator('#fault-title')).toHaveText('描画を停止しました');
   expect(await page.locator('#board canvas').count()).toBe(0);
   await page.getByRole('button', { name: '描画を再試行' }).click();
+  await startDefaultMatch(page);
   await expect.poll(() => state(page).then(x => x.phase)).toBe('humanTurn');
   expect(await page.locator('#board canvas').count()).toBe(1);
   await clickCell(page, 13);
   expect((await state(page)).view?.ply).toBe(1);
   await page.evaluate(() => localStorage.clear());
   await page.goto('./?forceWebGL=1&testRulesStartupFailure=1');
+  await page.locator('#startup-new-game').click();
+  await page.locator('#dialog-start').click();
   await expect(page.locator('#fault-title')).toHaveText('ルールエンジンを開始できません');
   expect((await state(page)).view).toBeNull();
   await page.getByRole('button', { name: '対局の開始を再試行' }).click();
@@ -76,7 +81,7 @@ test('device loss during saved startup choice exposes a real retry and preserves
   let navigations = 0;
   page.on('framenavigated', frame => { if (frame === page.mainFrame()) navigations++; });
   await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.injectRenderFault('deviceLost'));
-  await expect(page.locator('#startup-dialog')).not.toBeVisible();
+  await expect(page.locator('#fault-panel')).toBeVisible();
   await expect(page.locator('#fault-title')).toHaveText('描画を停止しました');
   await expect(page.locator('#retry-renderer')).toBeFocused();
   await page.locator('#retry-renderer').click({ timeout: 2500 });
@@ -100,7 +105,7 @@ test('device loss during corrupt startup choice retains data and still allows a 
   let navigations = 0;
   page.on('framenavigated', frame => { if (frame === page.mainFrame()) navigations++; });
   await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.injectRenderFault('deviceLost'));
-  await expect(page.locator('#startup-dialog')).not.toBeVisible();
+  await expect(page.locator('#fault-panel')).toBeVisible();
   await page.locator('#retry-renderer').click({ timeout: 2500 });
   await expect(page.locator('#startup-dialog')).toBeVisible();
   await expect(page.locator('#startup-message')).toContainText('読み込めません');
@@ -162,7 +167,9 @@ test('rules startup failure inside saved new-match dialog exposes retry and keep
   await page.locator('#dialog-start').click();
   await expect(page.locator('#fault-title')).toHaveText('ルールエンジンを開始できません');
   await expect(page.locator('#match-dialog')).not.toBeVisible();
-  await page.locator('#retry-rules').click({ timeout: 2500 });
+  await expect(page.locator('#retry-rules')).toBeFocused();
+  // Shader compilation on SwiftShader can delay the two stable frames needed for a click.
+  await page.locator('#retry-rules').click({ timeout: 10_000 });
   await expect(page.locator('#startup-dialog')).toBeVisible();
   expect(await page.evaluate(key => localStorage.getItem(key), gameKey)).toBe(stored);
   await page.locator('#resume-game-choice').click();
@@ -244,13 +251,13 @@ test('repeated new/restore operations keep one canvas and terminal AI replay res
   await page.evaluate(async replay => window.__QUORIDOR_APP_TEST_API__!.restoreReplay(replay, 'ai', 0), save);
   expect((await state(page)).phase).toBe('finished');
   await page.reload();
-  await page.getByRole('button', { name: '前の対局を再開' }).click();
+  await page.getByRole('button', { name: '続きから遊ぶ' }).click();
   expect((await state(page)).phase).toBe('finished');
   expect((await state(page)).view?.winner).toBe(0);
   const generation = await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.aiDiagnostics().slices.length);
   await page.waitForTimeout(250);
   expect(await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.aiDiagnostics().slices.length)).toBe(generation);
-  await page.locator('#restart-game').dblclick();
+  await restartMatch(page);
   await expect.poll(() => state(page).then(x => x.phase)).toBe('humanTurn');
   expect(await page.locator('#board canvas').count()).toBe(1);
   expect((await state(page)).view?.ply).toBe(0);

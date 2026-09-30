@@ -83,6 +83,8 @@ export class BoardScene {
       body.position.y = TILE_TOP + footHeight; body.castShadow = true; body.receiveShadow = true; group.add(body);
       this.pawns.push(group); this.scene.add(group);
     }
+    // A decorative starting position before an authoritative game is created.
+    this.setPawn(0, 4); this.setPawn(1, 76);
     // The board bottom is -0.645; the finite table top touches it exactly.
     const tabletop = mark(new THREE.Mesh(box(24, 0.65, 18, 0.15), tableWood), 'table', false);
     tabletop.position.y = -0.97; tabletop.receiveShadow = true; tabletop.castShadow = true;

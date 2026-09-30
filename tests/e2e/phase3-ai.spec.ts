@@ -1,3 +1,4 @@
+import { startDefaultMatch, restartMatch } from './start-match';
 import { expect, test, type Page } from '@playwright/test';
 import { mkdirSync } from 'node:fs';
 
@@ -7,6 +8,7 @@ test.beforeEach(async ({ page }) => {
   page.on('pageerror', error => found.push(error.message));
   page.on('console', message => { if (message.type() === 'error') found.push(message.text()); });
   await page.goto('./?forceWebGL=1');
+  await startDefaultMatch(page);
   await expect.poll(() => page.evaluate(() => window.__QUORIDOR_APP_TEST_API__?.state().phase)).toBe('humanTurn');
 });
 test.afterEach(async ({ page }) => { expect(errors.get(page)).toEqual([]); });
@@ -96,7 +98,7 @@ test('AI first opening, responsive controls, and full UI game', async ({ page })
   await page.getByRole('button', { name: '1手戻す' }).click();
   expect((await state(page)).phase).toBe('humanTurn');
   expect((await state(page)).view?.ply).toBe(final.view!.ply - 2);
-  await page.locator('#restart-game').click();
+  await restartMatch(page);
   await waitHuman(page);
   expect((await state(page)).view?.ply).toBe(1);
   mkdirSync('artifacts', { recursive: true });
@@ -164,7 +166,7 @@ test('cancel, retry, undo, and PvP fallback during real AI thought preserve the 
   await configure(page, 0, '4096');
   await clickCell(page, 13);
   expect((await state(page)).phase).toBe('aiThinking');
-  await page.locator('#restart-game').click();
+  await restartMatch(page);
   await page.waitForTimeout(350);
   expect((await state(page)).view?.ply).toBe(0);
   await clickCell(page, 13);
@@ -194,7 +196,7 @@ test('undo and new game cancel the AI result animation without stale completion'
       .toEqual({ phase: 'animating', ply: 2 });
     expect(await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.resources().animating)).toBe(true);
     if (operation === 'undo') await page.getByRole('button', { name: '1手戻す' }).click();
-    else if (operation === 'new') await page.locator('#restart-game').click();
+    else if (operation === 'new') await restartMatch(page);
     else await page.evaluate(async replay => window.__QUORIDOR_APP_TEST_API__!.restoreReplay(replay, 'pvp', 0), opening);
     await page.clock.resume();
     await page.waitForTimeout(260);

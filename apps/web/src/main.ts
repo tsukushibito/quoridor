@@ -7,7 +7,10 @@ import { DEFAULT_SETTINGS, LocalStateRepository, makeSavedMatch, type LocalSetti
   type MatchOptions, type SavedMatch, validateMatchOptions } from './persistence/local-state';
 import { ENVIRONMENT_PRESETS, environmentPreset, isEnvironmentId } from './environment-presets';
 import { ja } from './ui/strings';
+import { createTitleHelp } from './ui/title-help';
+import { installAudioControls } from './audio/audio-controls';
 import './style.css';
+import './ui/title-help.css';
 
 if (import.meta.env.VITE_PHASE1_E2E === '1') void import('./test-support/rules-test-api');
 interface Diagnostics {
@@ -32,7 +35,7 @@ root.innerHTML = `
       <section id="fault-panel" class="panel fault-panel" role="alert" hidden><strong id="fault-title"></strong><p id="fault-text"></p><div class="actions"><button id="retry-renderer" type="button">${ja.retryRenderer}</button><button id="retry-rules" type="button">${ja.retryRules}</button><button id="reload-app" type="button">${ja.reload}</button></div><details><summary>${ja.errorDetail}</summary><code id="fault-detail"></code></details></section>
       <div class="panel match-panel"><p class="section-label">${ja.matchHeading}</p><label>${ja.matchSettings}<select id="match-mode"><option value="pvp">${ja.pvp}</option><option value="ai">${ja.versusAi}</option></select></label>
         <label>${ja.humanSide}<select id="human-side"><option value="0">${ja.humanFirst}</option><option value="1">${ja.humanSecond}</option></select></label>
-        <label>${ja.thoughtBudget}<select id="ai-budget"><option value="48">48</option><option value="96">96</option><option value="192">192</option><option value="4096">4096（${ja.longThought}）</option></select></label><p class="match-note">${ja.applyOnNew}</p><p id="active-match" class="match-note"></p>
+        <label>${ja.thoughtBudget}<select id="ai-budget"><option value="48">速い（48）</option><option value="96">標準（96）</option><option value="192">じっくり（192）</option><option value="4096">長考（4096）</option></select></label><p class="match-note">思考量を増やすと検討が増え、待ち時間が長くなります。</p><p id="active-match" class="match-note"></p>
         <p id="ai-status" class="help" aria-live="off" hidden></p><div id="ai-actions" class="actions" hidden><button id="cancel-ai" type="button">${ja.cancelAi}</button><button id="retry-ai" type="button">${ja.retryAi}</button><button id="take-control" type="button">${ja.takeControl}</button></div>
       </div>
       <section class="panel save-panel" aria-label="${ja.saveHeading}"><p class="section-label">${ja.saveHeading}</p><p id="save-status" role="status" aria-live="polite" tabindex="-1"></p><div class="actions"><button id="resume-game" type="button">${ja.resume}</button><button id="save-now" type="button">${ja.saveNow}</button><button id="clear-save" type="button">${ja.clearSave}</button></div><details id="storage-detail-wrap" hidden><summary>${ja.errorDetail}</summary><code id="storage-detail"></code></details></section>
@@ -118,14 +121,11 @@ const matchButtons = document.createElement('div');
 matchButtons.className = 'dialog-actions';
 matchButtons.innerHTML = `<button id="dialog-cancel" type="button">${ja.cancel}</button><button id="dialog-start" class="accent" type="button">${ja.startMatch}</button>`;
 matchDialog.append(matchButtons);
-const startupDialog = document.createElement('dialog');
-startupDialog.id = 'startup-dialog';
-startupDialog.className = 'app-dialog startup-dialog';
-startupDialog.setAttribute('aria-labelledby', 'startup-title');
-startupDialog.innerHTML = `<h2 id="startup-title">${ja.resumeHeading}</h2><p id="startup-message"></p><div class="dialog-actions"><button id="resume-game-choice" type="button">${ja.resume}</button><button id="startup-new-game" class="accent" type="button">${ja.startNew}</button><button id="startup-clear-save" type="button">${ja.clearSave}</button></div>`;
-shell.append(menuDialog, matchDialog, startupDialog);
+const surfaces = createTitleHelp(shell, menuDialog, topActions, `${import.meta.env.BASE_URL}assets/ui/quoridor-title-logo.png`);
+const startupDialog = surfaces.title;
+shell.append(menuDialog, matchDialog);
 faultGroup.remove();
-layout.append(faultGroup);
+shell.append(faultGroup);
 actionGroup.remove();
 sidebar.remove();
 const ui = {
@@ -140,7 +140,7 @@ const ui = {
   menuDialog: $<HTMLDialogElement>('#menu-dialog'), closeMenu: $<HTMLButtonElement>('#close-menu'),
   matchDialog: $<HTMLDialogElement>('#match-dialog'), dialogCancel: $<HTMLButtonElement>('#dialog-cancel'),
   dialogStart: $<HTMLButtonElement>('#dialog-start'), dialogNote: $<HTMLElement>('#match-dialog-note'),
-  startupDialog: $<HTMLDialogElement>('#startup-dialog'), startupMessage: $<HTMLElement>('#startup-message'),
+  startupDialog: $<HTMLElement>('#startup-dialog'), startupMessage: $<HTMLElement>('#startup-message'),
   startupNew: $<HTMLButtonElement>('#startup-new-game'), startupResume: $<HTMLButtonElement>('#resume-game-choice'),
   startupClear: $<HTMLButtonElement>('#startup-clear-save'),
   flip: $<HTMLButtonElement>('#flip'), reset: $<HTMLButtonElement>('#reset-camera'),
@@ -179,6 +179,7 @@ async function bootstrap(): Promise<void> {
   let rendererStarting = false;
   let renderFault: RendererFault | 'startup' | null = null;
   let rulesFault = false;
+  let rulesStartRequested = false;
   let busy = false;
   let operation = 0;
   let disposed = false;
@@ -188,14 +189,23 @@ async function bootstrap(): Promise<void> {
   let matchStarted = false;
   let suppressMatchClose = false;
   let suppressMenuClose = false;
+  let screen: 'title' | 'match' = 'title';
+  let matchFramed = false;
   const session = new SessionController();
+  session.pause();
   const listeners = new AbortController();
+  const audio = installAudioControls(topActions, ui.menuDialog, listeners.signal, import.meta.env.BASE_URL);
   ui.matchMode.value = settings.nextMatch.mode;
   ui.humanSide.value = String(settings.nextMatch.humanSide);
   ui.budget.value = String(settings.nextMatch.simulations);
   ui.motion.checked = settings.reducedMotion;
   ui.environment.value = settings.environmentId;
 
+  const syncActivity = (): void => {
+    const paused = screen === 'title' || surfaces.help.open || surfaces.restart.open || !!renderFault;
+    board?.setPaused(paused);
+    if (paused) session.pause(); else session.resume();
+  };
   const selectedMatch = (): MatchOptions => validateMatchOptions({ mode: ui.matchMode.value,
     humanSide: Number(ui.humanSide.value), simulations: Number(ui.budget.value) });
   const saveTag = (state: SessionState): string => `${state.gameEpoch}:${state.revision}:${state.mode}:${state.humanSide}:${state.simulations}`;
@@ -220,8 +230,21 @@ async function bootstrap(): Promise<void> {
     diagnostics.workerReady = session.aiWorkerState.ready;
     diagnostics.workerGeneration = session.aiWorkerState.generation;
     diagnostics.rulesLoaded = view !== null;
-    const active = state.phase === 'humanTurn' && !renderFault && !rulesFault && !busy &&
-      !ui.matchDialog.open && !ui.menuDialog.open && !ui.startupDialog.open;
+    const active = screen === 'match' && !state.paused && state.phase === 'humanTurn' && !renderFault && !rulesFault && !busy &&
+      !ui.matchDialog.open && !ui.menuDialog.open;
+    shell.dataset.screen = screen;
+    shell.classList.toggle('reduced-motion', settings.reducedMotion);
+    ui.startupDialog.hidden = screen !== 'title';
+    statusIsland.hidden = footer.hidden = boardCaption.hidden = screen === 'title';
+    saveGroup.hidden = screen === 'title' && !view;
+    ui.restart.hidden = ui.newGame.hidden = surfaces.helpButton.hidden = screen === 'title';
+    surfaces.returnTitle.hidden = !view;
+    ui.startupMessage.textContent = gameChoice === 'corrupt' || gameChoice === 'cleared' || gameRead.status === 'unavailable' || rulesFault || saveMessage === ja.restoreFailed
+      ? saveMessage : view ? '対局を中断しています。戻って続きを遊べます。' : savedCandidate ? '前の対局があります。続きを遊べます。' : '駒を進めて、反対側の端を目指しましょう。';
+    ui.startupResume.hidden = !view && !savedCandidate;
+    ui.startupNew.classList.toggle('accent', ui.startupResume.hidden);
+    ui.startupResume.textContent = view ? '対局に戻る' : '続きから遊ぶ';
+    ui.startupClear.hidden = !slotPresent || !!view;
     ui.heading.textContent = renderFault ? ja.renderStopped : rulesFault && !view ? ja.rulesStopped :
       gameChoice === 'pending' ? ja.resumePrompt : gameChoice === 'corrupt' && !view ? ja.saveCorrupt :
         gameChoice === 'cleared' && !view ? ja.startNew :
@@ -237,7 +260,7 @@ async function bootstrap(): Promise<void> {
     ui.restart.disabled = !view || !!renderFault || !!rulesFault || busy;
     ui.dialogStart.disabled = !board || !!renderFault || busy;
     ui.startupNew.disabled = !board || !!renderFault || busy;
-    ui.startupResume.disabled = !savedCandidate || !board || !!renderFault || !!rulesFault || busy;
+    ui.startupResume.disabled = (!view && !savedCandidate) || !board || !!renderFault || !!rulesFault || busy;
     ui.confirmTouch.hidden = !input?.needsConfirmation() || !active;
     ui.resume.hidden = gameChoice !== 'pending' || savedCandidate === null;
     ui.resume.disabled = !board || !!renderFault || !!rulesFault || busy;
@@ -278,7 +301,7 @@ async function bootstrap(): Promise<void> {
     ui.orientation.querySelector('b')!.textContent = input?.orientation === 'vertical' ? ja.vertical : ja.horizontal;
     ui.guide.textContent = input?.mode === 'wall' ? ja.guideWall : ja.guideMove;
     board?.setHints(view, active && input?.mode === 'move');
-    if (board) board.canvas.style.visibility = view ? 'visible' : 'hidden';
+    if (board) board.canvas.style.visibility = screen === 'title' || view ? 'visible' : 'hidden';
     if (!active) board?.setPreview(null, false);
     const aiMismatch = showAi && !!state.error?.includes('build mismatch');
     ui.faultPanel.hidden = !renderFault && !rulesFault && !aiMismatch;
@@ -296,8 +319,13 @@ async function bootstrap(): Promise<void> {
   const animate = (transition: Transition): void => {
     input?.clear();
     if (!board || renderFault) { session.suspendForRendererFailure(); return; }
-    board.animate(transition.before, transition.after, transition.actionId,
-      () => session.finish(transition.gameEpoch, transition.revision));
+    board.animate(transition.before, transition.after, transition.actionId, () => {
+      const state = session.state;
+      if (disposed || state.phase !== 'animating' || state.gameEpoch !== transition.gameEpoch ||
+        state.revision !== transition.revision) return;
+      audio.playPlacement(transition.actionId < 81 ? 'move' : 'wall', transition.after.winner !== null);
+      session.finish(transition.gameEpoch, transition.revision);
+    });
   };
   session.setTransitionSink(animate);
   const suspendDialogsForFault = (retry: HTMLButtonElement): void => {
@@ -309,12 +337,14 @@ async function bootstrap(): Promise<void> {
     matchStarted = false;
     if (ui.matchDialog.open) ui.matchDialog.close();
     if (ui.menuDialog.open) ui.menuDialog.close();
-    if (ui.startupDialog.open) ui.startupDialog.close();
+    if (surfaces.help.open) surfaces.help.close();
+    if (surfaces.restart.open) surfaces.restart.close();
     queueMicrotask(() => { if (!disposed && !retry.hidden) retry.focus({ preventScroll: true }); });
   };
   const renderFailed = (kind: RendererFault | 'startup'): void => {
     if (disposed || renderFault) return;
     renderFault = kind;
+    audio.cancelEffects();
     suspendDialogsForFault(ui.retryRenderer);
     session.suspendForRendererFailure();
     input?.dispose(); input = null;
@@ -340,8 +370,9 @@ async function bootstrap(): Promise<void> {
       board = created; renderFault = null;
       board.canvas.setAttribute('aria-label', ja.boardLabel);
       board.setReducedMotion(settings.reducedMotion);
+      board.setPaused(session.state.paused);
       input = new InputRouter(board, () => ({ ...session.state,
-        phase: renderFault || rulesFault || busy ? 'recoverableError' : session.state.phase }),
+        phase: renderFault || rulesFault || busy || screen !== 'match' || session.state.paused ? 'recoverableError' : session.state.phase }),
       (id, epoch, revision) => { const transition = session.apply(id, epoch, revision); if (transition) animate(transition); },
       (target, legal) => { ui.preview.textContent = target ? (legal ? ja.legal : ja.illegal) :
         (input?.mode === 'wall' ? ja.guideWall : ja.guideMove);
@@ -355,12 +386,19 @@ async function bootstrap(): Promise<void> {
     finally { rendererStarting = false; renderUi(); }
   };
   const syncBoard = (view: GameView, focus: boolean): void => {
+    audio.cancelEffects();
     input?.clear(); board?.cancelAnimation(); board?.setView(view);
     if (focus) board?.canvas.focus({ preventScroll: true });
   };
+  const frameMatchOnce = (): void => {
+    renderUi();
+    if (!matchFramed && board) { board.fitToViewport(); matchFramed = true; }
+  };
   const startNewGame = async (options: MatchOptions, focus = true): Promise<void> => {
     if (disposed || renderFault || !board) return;
+    audio.cancelEffects();
     const currentOperation = ++operation;
+    rulesStartRequested = true;
     busy = true; suppressSave = true; renderUi();
     try {
       if (import.meta.env.VITE_PHASE1_E2E === '1' && !rulesStartupFaultInjected &&
@@ -377,9 +415,12 @@ async function bootstrap(): Promise<void> {
         setSaveMessage(ja.rulesUnavailable, state.error ?? '');
         return;
       }
+      rulesStartRequested = false;
       rulesFault = false; gameChoice = 'active'; savedCandidate = null;
       if (ui.matchDialog.open) { matchStarted = true; ui.matchDialog.close(); }
-      if (ui.startupDialog.open) ui.startupDialog.close();
+      if (surfaces.help.open) surfaces.help.close();
+      if (surfaces.restart.open) surfaces.restart.close();
+      screen = 'match'; syncActivity(); frameMatchOnce();
       syncBoard(state.view, focus);
       suppressSave = false; persistGame(true);
     } catch (error) {
@@ -399,7 +440,9 @@ async function bootstrap(): Promise<void> {
       const view = await session.restoreReplay(save.replay, save.match);
       if (disposed || currentOperation !== operation) return;
       rulesFault = false; gameChoice = 'active'; savedCandidate = null; slotPresent = true;
-      if (ui.startupDialog.open) ui.startupDialog.close();
+      if (surfaces.help.open) surfaces.help.close();
+      if (surfaces.restart.open) surfaces.restart.close();
+      screen = 'match'; syncActivity(); frameMatchOnce();
       syncBoard(view, focus);
       setSaveMessage(ja.saved);
     } catch (error) {
@@ -440,20 +483,16 @@ async function bootstrap(): Promise<void> {
     renderUi();
   };
   const showStartup = (): void => {
-    if (disposed || !board || renderFault || rulesFault || session.state.view || gameChoice === 'active' || ui.startupDialog.open) return;
-    ui.startupMessage.textContent = savedCandidate ? ja.resumePrompt : saveMessage;
-    ui.startupResume.hidden = !savedCandidate;
-    ui.startupClear.hidden = !slotPresent;
-    ui.startupNew.textContent = slotPresent ? ja.discardStart : ja.startNew;
-    ui.startupDialog.showModal();
-    renderUi();
+    if (disposed || session.state.view) return;
+    screen = 'title'; syncActivity(); renderUi();
   };
   const openMatchDialog = (fromStartup = false): void => {
     if (disposed || busy || !board || renderFault || ui.matchDialog.open) return;
     suppressMatchClose = false;
     matchFromStartup = fromStartup;
-    if (ui.startupDialog.open) ui.startupDialog.close();
-    ui.dialogNote.textContent = fromStartup && slotPresent ? ja.resumePrompt : ja.newMatchHint;
+    if (surfaces.help.open) surfaces.help.close();
+    if (surfaces.restart.open) surfaces.restart.close();
+    ui.dialogNote.textContent = slotPresent ? '開始すると今の対局と保存した進行を置き換えます。開始するまでは変更しません。' : ja.newMatchHint;
     ui.dialogStart.textContent = fromStartup && slotPresent ? ja.discardStart : ja.startMatch;
     ui.matchDialog.showModal();
     renderUi();
@@ -470,12 +509,33 @@ async function bootstrap(): Promise<void> {
   ui.retryEnvironment.addEventListener('click', () => { void board?.setEnvironment(settings.environmentId); },
     { signal: listeners.signal });
   ui.undo.addEventListener('click', () => { if (renderFault || rulesFault || busy) return;
-    const view = session.undo(); if (view) syncBoard(view, true); }, { signal: listeners.signal });
+    const view = session.undo(); if (view) { syncBoard(view, true); audio.play('undo'); } }, { signal: listeners.signal });
   ui.newGame.addEventListener('click', () => openMatchDialog(), { signal: listeners.signal });
-  ui.restart.addEventListener('click', () => {
+  const restartMatch = (): void => {
     const state = session.state;
-    if (state.view) void startNewGame(validateMatchOptions({
-      mode: state.mode, humanSide: state.humanSide, simulations: state.simulations }));
+    if (state.view) void startNewGame(validateMatchOptions({ mode: state.mode, humanSide: state.humanSide, simulations: state.simulations }));
+  };
+  ui.restart.addEventListener('click', () => {
+    if (!session.state.view) return;
+    if (session.state.view.ply === 0) restartMatch();
+    else { input?.clear(); surfaces.restart.showModal(); syncActivity(); renderUi(); }
+  }, { signal: listeners.signal });
+  $<HTMLButtonElement>('#restart-cancel').addEventListener('click', () => surfaces.restart.close(), { signal: listeners.signal });
+  $<HTMLButtonElement>('#restart-confirm').addEventListener('click', () => { surfaces.restart.close(); restartMatch(); }, { signal: listeners.signal });
+  surfaces.restart.addEventListener('close', () => { syncActivity(); renderUi(); if (!renderFault) ui.restart.focus(); }, { signal: listeners.signal });
+  let helpOrigin: HTMLElement = surfaces.helpButton;
+  const openHelp = (origin: HTMLElement): void => {
+    helpOrigin = origin; input?.clear(); surfaces.help.showModal(); surfaces.help.scrollTop = 0; syncActivity(); renderUi();
+  };
+  surfaces.helpButton.addEventListener('click', () => openHelp(surfaces.helpButton), { signal: listeners.signal });
+  $<HTMLButtonElement>('#title-help').addEventListener('click', event => openHelp(event.currentTarget as HTMLElement), { signal: listeners.signal });
+  for (const selector of ['#close-help', '#close-help-bottom']) $(selector).addEventListener('click', () => surfaces.help.close(), { signal: listeners.signal });
+  surfaces.help.addEventListener('close', () => { syncActivity(); renderUi(); if (!renderFault && !rulesFault) helpOrigin.focus(); }, { signal: listeners.signal });
+  surfaces.returnTitle.addEventListener('click', () => {
+    screen = 'title'; input?.clear(); suppressMenuClose = true; ui.menuDialog.close(); syncActivity(); renderUi(); ui.startupResume.focus();
+    // Restart the one-shot logo entrance on each visit without hiding the menu.
+    const logo = $<HTMLElement>('.title-logo'); logo.getAnimations().forEach(animation => animation.cancel());
+    logo.style.animation = 'none'; void logo.offsetWidth; logo.style.animation = '';
   }, { signal: listeners.signal });
   ui.dialogStart.addEventListener('click', () => {
     try { void startNewGame(selectedMatch()); }
@@ -487,13 +547,9 @@ async function bootstrap(): Promise<void> {
       suppressMatchClose = false; matchStarted = false; matchFromStartup = false; renderUi(); return;
     }
     if (matchStarted) { matchStarted = false; matchFromStartup = false; renderUi(); return; }
-    if (matchFromStartup && !session.state.view) showStartup();
-    else ui.newGame.focus({ preventScroll: true });
+    (screen === 'title' ? ui.startupNew : ui.newGame).focus({ preventScroll: true });
     matchFromStartup = false;
     renderUi();
-  }, { signal: listeners.signal });
-  ui.startupDialog.addEventListener('cancel', event => {
-    if (!session.state.view) event.preventDefault();
   }, { signal: listeners.signal });
   ui.startupNew.addEventListener('click', () => openMatchDialog(true), { signal: listeners.signal });
   ui.startupClear.addEventListener('click', () => {
@@ -505,7 +561,10 @@ async function bootstrap(): Promise<void> {
     openMatchDialog(true);
     if (outcome.status !== 'ok') ui.dialogNote.textContent = ja.storageUnavailable;
   }, { signal: listeners.signal });
-  ui.startupResume.addEventListener('click', () => { if (savedCandidate) void restore(savedCandidate); }, { signal: listeners.signal });
+  ui.startupResume.addEventListener('click', () => {
+    if (session.state.view) { screen = 'match'; syncActivity(); renderUi(); board?.canvas.focus(); }
+    else if (savedCandidate) void restore(savedCandidate);
+  }, { signal: listeners.signal });
   ui.resume.addEventListener('click', () => { if (savedCandidate) void restore(savedCandidate); }, { signal: listeners.signal });
   ui.openMenu.addEventListener('click', () => { input?.clear(); suppressMenuClose = false;
     ui.menuDialog.showModal(); renderUi(); }, { signal: listeners.signal });
@@ -527,12 +586,11 @@ async function bootstrap(): Promise<void> {
   ui.flip.addEventListener('click', () => board?.flipCamera(), { signal: listeners.signal });
   ui.reset.addEventListener('click', () => board?.resetCamera(), { signal: listeners.signal });
   ui.retryRenderer.addEventListener('click', () => { void ensureRenderer().then(() => {
-    if (board && !session.state.view && gameChoice === 'active' && !rulesFault) void startNewGame(selectedMatch(), false);
-    else showStartup();
+    syncActivity(); showStartup();
   }); }, { signal: listeners.signal });
   ui.retryRules.addEventListener('click', () => { rulesFault = false;
     if (savedCandidate) void inspectStored().then(showStartup);
-    else if (gameChoice === 'active') void startNewGame(selectedMatch());
+    else if (rulesStartRequested || screen === 'match' || ui.matchDialog.open) void startNewGame(selectedMatch());
     else showStartup(); }, { signal: listeners.signal });
   ui.reload.addEventListener('click', () => location.reload(), { signal: listeners.signal });
   const dispose = (): void => { if (disposed) return; disposed = true; listeners.abort(); input?.dispose(); input = null;
@@ -540,7 +598,7 @@ async function bootstrap(): Promise<void> {
   window.addEventListener('pagehide', dispose, { once: true, signal: listeners.signal });
   if (import.meta.env.VITE_PHASE1_E2E === '1') {
     const support = await import('./test-support/app-test-api');
-    support.installAppTestApi({ session, board: () => board, input: () => input, dispose,
+    support.installAppTestApi({ session, audio, board: () => board, input: () => input, dispose,
       restoreReplay: async (save, mode, humanSide) => {
         const match = { mode, humanSide, simulations: 96 } as MatchOptions;
         await restore(makeSavedMatch(validateReplayShape(save), match));
@@ -554,8 +612,7 @@ async function bootstrap(): Promise<void> {
   }
   if (savedCandidate) await inspectStored();
   await ensureRenderer();
-  if (board && gameChoice === 'active' && !session.state.view && !rulesFault) await startNewGame(selectedMatch(), false);
-  else showStartup();
+  showStartup();
   renderUi();
 }
 void bootstrap().catch(error => { diagnostics.phase = 'failed'; diagnostics.error = error instanceof Error ? error.message : String(error);

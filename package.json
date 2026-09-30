@@ -17,6 +17,8 @@
     "build": "npm run wasm:build && npm run typecheck && npm run build -w @quoridor/web",
     "test:e2e": "PLAYWRIGHT_BROWSERS_PATH=./artifacts/playwright playwright test",
     "test:render": "node --experimental-strip-types --test tests/render/*.test.mjs",
+    "test:audio": "node --experimental-strip-types --test tests/audio/*.test.mjs",
+    "test:audio:browsers": "PLAYWRIGHT_BROWSERS_PATH=./artifacts/playwright playwright test --config playwright.audio.config.ts",
     "preview": "npm run preview -w @quoridor/web",
     "verify:production": "node scripts/verify-production.mjs"
   },

@@ -9,6 +9,8 @@ try {
   page.on('pageerror', error => errors.push(error.message));
   page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
   await page.goto(`${base}?forceWebGL=1`);
+  await page.locator('#startup-new-game').click();
+  await page.locator('#dialog-start').click();
   await page.getByRole('heading', { name: /先手.*手番/ }).waitFor();
   const hooks = await page.evaluate(() => ({
     app: '__QUORIDOR_APP_TEST_API__' in window,

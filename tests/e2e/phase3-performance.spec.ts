@@ -1,3 +1,4 @@
+import { startDefaultMatch } from './start-match';
 import { expect, test } from '@playwright/test';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 
@@ -9,6 +10,7 @@ function percentile(sorted: number[], p: number): number { return sorted[Math.mi
 test('Wasm Worker slice and cancellation baseline across varied positions', async ({ page }) => {
   test.setTimeout(120_000);
   await page.goto('./?forceWebGL=1');
+  await startDefaultMatch(page);
   await expect.poll(() => page.evaluate(() => !!window.__QUORIDOR_RULES_TEST_API__)).toBe(true);
   await expect.poll(() => page.evaluate(() => window.__QUORIDOR_DIAGNOSTICS__?.phase)).toBe('ready');
   const observed = await page.evaluate(async items => {

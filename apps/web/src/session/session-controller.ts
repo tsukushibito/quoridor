@@ -2,10 +2,10 @@ import { AiClient, RulesClient, validateReplayShape, type AiStats, type GameView
 
 export type MatchMode = 'pvp' | 'ai';
 export type Phase = 'booting' | 'humanTurn' | 'aiThinking' | 'animating' | 'finished' | 'recoverableError' | 'disposed';
-export type SessionState = Readonly<{ phase: Phase; gameEpoch: number; revision: number; view: GameView | null;
+export type SessionState = Readonly<{ phase: Phase; paused: boolean; gameEpoch: number; revision: number; view: GameView | null;
   mode: MatchMode; humanSide: 0 | 1; simulations: number; aiStats: AiStats | null; error: string | null }>;
 export type Transition = { before: GameView; after: GameView; actionId: number; gameEpoch: number; revision: number };
-const initial: SessionState = { phase: 'booting', gameEpoch: 0, revision: 0, view: null,
+const initial: SessionState = { phase: 'booting', paused: false, gameEpoch: 0, revision: 0, view: null,
   mode: 'pvp', humanSide: 0, simulations: 96, aiStats: null, error: null };
 
 export class SessionController {
@@ -32,18 +32,30 @@ export class SessionController {
     for (const listener of this.listeners) listener(next);
   }
   private invalidateAi(): void { ++this.aiToken; this.ai.cancel(); }
+  pause(): void {
+    const current = this.stateValue;
+    if (current.paused || current.phase === 'disposed') return;
+    if (current.phase === 'aiThinking') this.invalidateAi();
+    this.set({ ...current, paused: true });
+  }
+  resume(): void {
+    const current = this.stateValue;
+    if (!current.paused || current.phase === 'disposed') return;
+    this.set({ ...current, paused: false });
+    if (this.stateValue.phase === 'aiThinking') void this.think();
+  }
   private enterTurn(): void {
     const current = this.stateValue;
     if (!current.view || current.phase === 'disposed') return;
     if (current.view.winner !== null) { this.set({ ...current, phase: 'finished', error: null, aiStats: null }); return; }
     if (current.mode === 'ai' && current.view.turn !== current.humanSide) {
       this.set({ ...current, phase: 'aiThinking', error: null, aiStats: null });
-      void this.think();
+      if (!this.stateValue.paused) void this.think();
     } else this.set({ ...current, phase: 'humanTurn', error: null, aiStats: null });
   }
   private async think(): Promise<void> {
     const current = this.stateValue;
-    if (!this.client || current.phase !== 'aiThinking' || !current.view) return;
+    if (!this.client || current.paused || current.phase !== 'aiThinking' || !current.view) return;
     const token = ++this.aiToken;
     const { gameEpoch, revision, view } = current;
     let snapshot: Uint8Array;
@@ -59,7 +71,7 @@ export class SessionController {
             this.set({ ...this.stateValue, aiStats: stats });
         } });
       const now = this.stateValue;
-      if (token !== this.aiToken || now.phase !== 'aiThinking' || now.gameEpoch !== gameEpoch || now.revision !== revision ||
+      if (token !== this.aiToken || now.paused || now.phase !== 'aiThinking' || now.gameEpoch !== gameEpoch || now.revision !== revision ||
         !now.view || now.view.positionKey !== view.positionKey || now.view.winner !== null ||
         now.mode !== 'ai' || now.view.turn === now.humanSide) return;
       const id = result.actionId;
@@ -89,7 +101,7 @@ export class SessionController {
     this.invalidateAi();
     const gameEpoch = previous.gameEpoch + 1;
     const revision = previous.revision + 1;
-    this.set({ phase: 'booting', gameEpoch, revision, view: null, mode, humanSide, simulations, aiStats: null, error: null });
+    this.set({ phase: 'booting', paused: previous.paused, gameEpoch, revision, view: null, mode, humanSide, simulations, aiStats: null, error: null });
     try {
       const client = await RulesClient.createGame({ firstPlayer: 0, wallsPerPlayer: 10, humanPlayer: humanSide });
       let view: GameView;
@@ -106,14 +118,14 @@ export class SessionController {
         const old = baseline.state, view = old.view;
         const phase = !view ? 'recoverableError' : view.winner !== null ? 'finished' :
           old.mode === 'ai' && view.turn !== old.humanSide ? 'recoverableError' : 'humanTurn';
-        this.set({ ...old, phase, gameEpoch, revision, aiStats: null,
+        this.set({ ...old, paused: this.stateValue.paused, phase, gameEpoch, revision, aiStats: null,
           error: error instanceof Error ? error.message : String(error) });
       }
     }
   }
   apply(actionId: number, gameEpoch: number, revision: number): Transition | null {
     const current = this.stateValue;
-    if (current.phase !== 'humanTurn' || !current.view || !this.client || current.gameEpoch !== gameEpoch || current.revision !== revision ||
+    if (current.paused || current.phase !== 'humanTurn' || !current.view || !this.client || current.gameEpoch !== gameEpoch || current.revision !== revision ||
       (current.mode === 'ai' && current.view.turn !== current.humanSide) || current.view.legalMask[actionId] !== 1) return null;
     try {
       const after = this.client.applyAction(actionId);
@@ -195,7 +207,7 @@ export class SessionController {
     }
     this.invalidateAi();
     this.client?.dispose(); this.client = replacement; this.replacementBaseline = null;
-    this.set({ phase: 'booting', gameEpoch: before.gameEpoch + 1, revision: before.revision + 1, view,
+    this.set({ phase: 'booting', paused: this.stateValue.paused, gameEpoch: before.gameEpoch + 1, revision: before.revision + 1, view,
       mode: options.mode, humanSide: options.humanSide, simulations: options.simulations, aiStats: null, error: null });
     this.enterTurn();
     return view;

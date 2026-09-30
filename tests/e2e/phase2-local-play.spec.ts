@@ -1,3 +1,4 @@
+import { startDefaultMatch, restartMatch } from './start-match';
 import { expect, test, type Page } from '@playwright/test';
 import { mkdirSync } from 'node:fs';
 
@@ -12,6 +13,7 @@ test.afterEach(async ({ page }) => { expect(browserErrors.get(page)).toEqual([])
 
 async function ready(page: Page): Promise<void> {
   await page.goto('./?forceWebGL=1');
+  await startDefaultMatch(page);
   await expect.poll(() => page.evaluate(() => window.__QUORIDOR_APP_TEST_API__?.state().phase)).toBe('humanTurn');
 }
 async function state(page: Page) { return page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.state()); }
@@ -129,7 +131,7 @@ test('wall orientation, illegal preview, keyboard, and static layer', async ({ p
 
 test('drag and UI isolation, interrupted animations, reduced motion, repeated new and disposal', async ({ page }) => {
   // This case renders many camera/animation frames on SwiftShader with PBR/GTAO.
-  test.setTimeout(90_000);
+  test.setTimeout(120_000);
   await page.clock.install();
   await ready(page);
   const canvas = page.locator('#board canvas');
@@ -185,7 +187,7 @@ test('drag and UI isolation, interrupted animations, reduced motion, repeated ne
   await selectAndConfirm(page, 'cell', 13);
   expect((await state(page)).phase).toBe('animating');
   expect((await state(page)).view?.ply).toBe(1);
-  await page.locator('#restart-game').click();
+  await restartMatch(page);
   await page.clock.resume();
   await page.waitForTimeout(260);
   expect((await state(page)).view?.ply).toBe(0);
@@ -198,7 +200,7 @@ test('drag and UI isolation, interrupted animations, reduced motion, repeated ne
   expect(await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.resources().staticWalls)).toBe(1);
   await page.evaluate(() => { (window as Window & { __canvasReference?: HTMLCanvasElement }).__canvasReference = document.querySelector('#board canvas')!; });
   for (let i = 0; i < 3; i++) {
-    await page.locator('#restart-game').click();
+    await restartMatch(page);
     await expect.poll(() => page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.state().phase)).toBe('humanTurn');
   }
   expect(await page.evaluate(() => document.querySelector('#board canvas') === (window as Window & { __canvasReference?: HTMLCanvasElement }).__canvasReference)).toBe(true);
@@ -207,7 +209,7 @@ test('drag and UI isolation, interrupted animations, reduced motion, repeated ne
   const again = await point(page, 'cell', 13);
   for (let i = 0; i < 4; i++) await page.mouse.click(again.x, again.y);
   expect((await state(page)).view?.ply).toBe(1);
-  await page.locator('#restart-game').click();
+  await restartMatch(page);
   await openMenu(page);
   await expect.poll(() => page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.state().phase)).toBe('humanTurn');
   await page.locator('#no-animation').uncheck();
@@ -217,8 +219,9 @@ test('drag and UI isolation, interrupted animations, reduced motion, repeated ne
   await selectAndConfirm(page, 'wall', 27);
   expect((await state(page)).phase).toBe('animating');
   await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.disposeForTest());
-  await page.clock.resume();
-  await page.waitForTimeout(260);
+  // Advance the paused clock deterministically after disposal so stale callbacks
+  // receive time to run without relying on real-time fake-clock scheduling.
+  await page.clock.runFor(260);
   expect(await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.state().phase)).toBe('disposed');
   expect(await canvas.count()).toBe(0);
 });

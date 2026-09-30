@@ -1,3 +1,4 @@
+import { startDefaultMatch, restartMatch } from './start-match';
 import { expect, test, type Page } from '@playwright/test';
 
 const presets = ['warm-room', 'dark-room', 'forest', 'mountain'] as const;
@@ -8,6 +9,7 @@ const resources = (page: Page) => page.evaluate(() => window.__QUORIDOR_APP_TEST
 const state = (page: Page) => page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.state());
 async function ready(page: Page) {
   await page.goto('./?forceWebGL=1');
+  await startDefaultMatch(page);
   await expect.poll(() => state(page).then(x => x.phase)).toBe('humanTurn');
 }
 async function applied(page: Page, id: string) {
@@ -27,7 +29,7 @@ test('environment presets retain game, camera and canvas; lazy assets and GPU co
   page.on('pageerror', error => errors.push(error.message));
   page.on('console', msg => { if (msg.type() === 'error') errors.push(msg.text()); });
   const requests: string[] = [];
-  page.on('request', req => { if (/assets\/.*\.(hdr|png)/.test(req.url())) requests.push(req.url()); });
+  page.on('request', req => { if (/assets\/(?:tabletop|environments)\/.*\.(hdr|png)/.test(req.url())) requests.push(req.url()); });
   await ready(page); await applied(page, 'warm-room');
   expect(requests).toHaveLength(2);
   await page.locator('#board canvas').focus();
@@ -181,7 +183,7 @@ test('an environment request preserves the AI worker and its committed move', as
   await page.mouse.click(cell.x, cell.y);
   await expect.poll(() => state(page).then(x => x.phase), { timeout: 20_000 }).toBe('humanTurn');
   expect((await state(page)).view?.ply).toBe(2);
-  await page.locator('#restart-game').click();
+  await restartMatch(page);
   await expect.poll(() => state(page).then(x => [x.phase, x.view?.ply])).toEqual(['humanTurn', 0]);
   await page.mouse.click(cell.x, cell.y);
   const before = await state(page);

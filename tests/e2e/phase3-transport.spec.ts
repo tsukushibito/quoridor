@@ -1,3 +1,4 @@
+import { startDefaultMatch } from './start-match';
 import { expect, test } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 
@@ -9,6 +10,7 @@ const fixture = JSON.parse(readFileSync('tests/fixtures/ai/native-search.json', 
 
 test('transport resolves ready/search on restart and dispose, rejects current corruption, ignores stale tags', async ({ page }) => {
   await page.goto('./?forceWebGL=1');
+  await startDefaultMatch(page);
   await expect.poll(() => page.evaluate(() => !!window.__QUORIDOR_RULES_TEST_API__)).toBe(true);
   const outcome = await page.evaluate(async f => {
     class FakeWorker {
@@ -145,6 +147,7 @@ test('transport resolves ready/search on restart and dispose, rejects current co
 
 test('session rejects a malformed current AI action without changing Rust game', async ({ page }) => {
   await page.goto('./?forceWebGL=1');
+  await startDefaultMatch(page);
   await expect.poll(() => page.evaluate(() => !!window.__QUORIDOR_SESSION_TEST_API__)).toBe(true);
   const result = await page.evaluate(async () => {
     const AiClient = window.__QUORIDOR_RULES_TEST_API__!.AiClient;
@@ -169,6 +172,7 @@ test('session rejects a malformed current AI action without changing Rust game',
 
 test('restored AI undo returns to the prior human decision and ignores a late result', async ({ page }) => {
   await page.goto('./?forceWebGL=1');
+  await startDefaultMatch(page);
   await expect.poll(() => page.evaluate(() => !!window.__QUORIDOR_SESSION_TEST_API__)).toBe(true);
   const cases = await page.evaluate(async () => {
     const rules = window.__QUORIDOR_RULES_TEST_API__!;
@@ -288,6 +292,7 @@ test('restored AI undo returns to the prior human decision and ignores a late re
 
 test('public AI bridge rejects malformed budgets, keys, snapshots and seeds', async ({ page }) => {
   await page.goto('./?forceWebGL=1');
+  await startDefaultMatch(page);
   await expect.poll(() => page.evaluate(() => !!window.__QUORIDOR_RULES_TEST_API__)).toBe(true);
   const checks = await page.evaluate(async f => {
     const api = window.__QUORIDOR_RULES_TEST_API__!;

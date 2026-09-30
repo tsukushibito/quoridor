@@ -1,8 +1,10 @@
+import { startDefaultMatch } from './start-match';
 import { expect, test, type Page } from '@playwright/test';
 import { mkdirSync } from 'node:fs';
 
 async function ready(page: Page): Promise<void> {
   await page.goto('./?forceWebGL=1');
+  await startDefaultMatch(page);
   await expect.poll(() => page.evaluate(() => window.__QUORIDOR_APP_TEST_API__?.state().phase)).toBe('humanTurn');
 }
 async function state(page: Page) { return page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.state()); }
@@ -38,14 +40,14 @@ test('one PvP slot resumes via real UI, preserves next-game settings and undo, t
   await closeMenu(page);
   expect((await saved(page)).match).toEqual({ mode: 'pvp', humanSide: 0, simulations: 96 });
   await page.reload();
-  await expect(page.getByRole('button', { name: '前の対局を再開' })).toBeVisible();
+  await expect(page.getByRole('button', { name: '続きから遊ぶ' })).toBeVisible();
   expect((await state(page)).view).toBeNull();
   await page.locator('#startup-new-game').click();
   await expect(page.locator('#match-mode')).toHaveValue('ai');
   await expect(page.locator('#human-side')).toHaveValue('1');
   await expect(page.locator('#ai-budget')).toHaveValue('192');
   await page.locator('#dialog-cancel').click();
-  await page.getByRole('button', { name: '前の対局を再開' }).click();
+  await page.getByRole('button', { name: '続きから遊ぶ' }).click();
   expect((await state(page)).view?.positionKey).toBe(key);
   expect((await state(page)).matchMode).toBe('pvp');
   await expect(page.locator('#board canvas')).toBeFocused();
@@ -66,6 +68,8 @@ test('one PvP slot resumes via real UI, preserves next-game settings and undo, t
 });
 
 test('both AI sides resume active assignment independent of edited next-game controls', async ({ page }) => {
+  // Multiple full renderer initializations and real AI replies on SwiftShader.
+  test.setTimeout(60_000);
   for (const side of [0, 1] as const) {
     await ready(page);
     await openMatch(page);
@@ -83,8 +87,8 @@ test('both AI sides resume active assignment independent of edited next-game con
     await page.locator('#match-mode').selectOption('pvp');
     await page.locator('#dialog-cancel').click();
     await page.reload();
-    await expect(page.getByRole('button', { name: '前の対局を再開' })).toBeVisible();
-    await page.getByRole('button', { name: '前の対局を再開' }).click();
+    await expect(page.getByRole('button', { name: '続きから遊ぶ' })).toBeVisible();
+    await page.getByRole('button', { name: '続きから遊ぶ' }).click();
     await expect.poll(() => state(page).then(x => x.phase), { timeout: 20000 }).toBe('humanTurn');
     expect((await state(page)).view?.positionKey).toBe(before.view?.positionKey);
     expect((await state(page)).matchMode).toBe('ai');
@@ -95,18 +99,20 @@ test('both AI sides resume active assignment independent of edited next-game con
 });
 
 test('committed pawn and wall animation states save immediately; AI thought resumes once', async ({ page }) => {
+  // Multiple full renderer initializations and real AI replies on SwiftShader.
+  test.setTimeout(60_000);
   await ready(page);
   await clickCell(page, 13);
   expect((await saved(page)).replay.ply).toBe(1);
   await page.reload();
-  await page.getByRole('button', { name: '前の対局を再開' }).click();
+  await page.getByRole('button', { name: '続きから遊ぶ' }).click();
   expect((await state(page)).view?.ply).toBe(1);
   await page.getByRole('button', { name: '壁を置く' }).click();
   const wall = await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.projectWall(27));
   await page.mouse.click(wall.x, wall.y);
   expect((await saved(page)).replay.ply).toBe(2);
   await page.reload();
-  await page.getByRole('button', { name: '前の対局を再開' }).click();
+  await page.getByRole('button', { name: '続きから遊ぶ' }).click();
   expect((await state(page)).view?.horizontalWalls).toContain(27);
   await openMatch(page);
   await page.locator('#match-mode').selectOption('ai');
@@ -119,7 +125,7 @@ test('committed pawn and wall animation states save immediately; AI thought resu
   expect((await state(page)).phase).toBe('aiThinking');
   expect((await saved(page)).replay.ply).toBe(1);
   await page.reload();
-  await page.getByRole('button', { name: '前の対局を再開' }).click();
+  await page.getByRole('button', { name: '続きから遊ぶ' }).click();
   await expect.poll(() => state(page).then(x => x.view?.ply), { timeout: 20000 }).toBe(2);
   await expect.poll(() => state(page).then(x => x.phase), { timeout: 20000 }).toBe('humanTurn');
   await page.waitForTimeout(400);

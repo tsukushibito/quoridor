@@ -1,3 +1,4 @@
+import { startDefaultMatch } from './start-match';
 import { test, expect } from '@playwright/test';
 import { mkdirSync } from 'node:fs';
 import { readFileSync } from 'node:fs';
@@ -19,6 +20,7 @@ test('rules Wasm, real AI Worker parity, restart, and rendered scene', async ({ 
       wasm.push({ url: response.url(), contentType: response.headers()['content-type'] || '' });
   });
   await page.goto('./?forceWebGL=1');
+  await startDefaultMatch(page);
   await expect.poll(() => page.evaluate(() => window.__QUORIDOR_DIAGNOSTICS__?.phase)).toBe('ready');
   // Renderer readiness and starting the authoritative rules game are independent.
   await expect.poll(() => page.evaluate(() => window.__QUORIDOR_DIAGNOSTICS__?.rulesLoaded)).toBe(true);

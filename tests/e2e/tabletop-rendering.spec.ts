@@ -1,8 +1,10 @@
+import { startDefaultMatch, restartMatch } from './start-match';
 import { expect, test, type Page } from '@playwright/test';
 import { mkdirSync } from 'node:fs';
 
 async function ready(page: Page): Promise<void> {
   await page.goto('./?forceWebGL=1');
+  await startDefaultMatch(page);
   await expect.poll(() => page.evaluate(() => window.__QUORIDOR_APP_TEST_API__?.state().phase)).toBe('humanTurn');
 }
 async function assets(page: Page, expected: 'ready' | 'fallback'): Promise<void> {
@@ -38,7 +40,7 @@ test('local HDRI and wood survive restart and renderer recovery, with desktop/mo
     const canvas = document.querySelector<HTMLCanvasElement>('#board canvas')!;
     return { enabled: resource.aoEnabled, size: resource.aoSize, expected: [canvas.width / 2, canvas.height / 2] };
   })).toEqual({ enabled: true, size: [720, 450], expected: [720, 450] });
-  for (let i = 0; i < 3; i++) await page.locator('#restart-game').click();
+  for (let i = 0; i < 3; i++) await restartMatch(page);
   expect(requests).toHaveLength(2); // New matches reuse the scene and GPU assets.
   await move(page);
   await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.injectRenderFault('deviceLost'));
@@ -77,7 +79,7 @@ test('missing environment/wood keep play usable and a retry can restore the asse
   expect(await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.resources().assetTextures)).toBe(0);
   expect(await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.resources().keyDirection)).toBeNull();
   await move(page);
-  await page.locator('#restart-game').click();
+  await restartMatch(page);
   await expect.poll(() => page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.state().view?.ply)).toBe(0);
   await page.unroute('**/assets/tabletop/**');
   await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.injectRenderFault('renderError'));

@@ -1,3 +1,4 @@
+import { startDefaultMatch } from './start-match';
 import { expect, test } from '@playwright/test';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import type { GameView } from '../../packages/engine-bridge/src/rules-client';
@@ -7,6 +8,7 @@ const fixtures = JSON.parse(readFileSync('tests/fixtures/rules/native-views.json
 
 test.beforeEach(async ({ page }) => {
   await page.goto('./?forceWebGL=1');
+  await startDefaultMatch(page);
   await expect.poll(() => page.evaluate(() => window.__QUORIDOR_RULES_TEST_API__ !== undefined)).toBe(true);
   await expect.poll(() => page.evaluate(() => window.__QUORIDOR_DIAGNOSTICS__?.phase)).toBe('ready');
 });
