@@ -16,6 +16,7 @@ declare global {
       state: () => ReturnType<typeof snapshot>;
       projectCell: (cell: number) => { x: number; y: number };
       projectWall: (anchor: number) => { x: number; y: number };
+      projectBoardBounds: () => ReturnType<BoardRenderer['projectBoardBounds']>;
       camera: () => [number, number, number];
       resources: () => ReturnType<BoardRenderer['diagnostics']>;
       aiDiagnostics: () => SessionController['aiDiagnostics'];
@@ -41,6 +42,7 @@ export function installAppTestApi(owners: Owners): void {
     state: () => snapshot(owners),
     projectCell: cell => board().projectCell(cell),
     projectWall: anchor => board().projectWall(anchor),
+    projectBoardBounds: () => board().projectBoardBounds(),
     camera: () => board().cameraPosition(),
     resources: () => board().diagnostics(),
     aiDiagnostics: () => owners.session.aiDiagnostics,

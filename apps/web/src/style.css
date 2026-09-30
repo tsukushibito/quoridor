@@ -1,13 +1,113 @@
 @font-face{font-family:'Noto Sans JP';font-style:normal;font-weight:400;font-display:swap;src:url('@fontsource/noto-sans-jp/files/noto-sans-jp-japanese-400-normal.woff2') format('woff2')}
 @font-face{font-family:'Noto Sans JP';font-style:normal;font-weight:700;font-display:swap;src:url('@fontsource/noto-sans-jp/files/noto-sans-jp-japanese-700-normal.woff2') format('woff2')}
-:root{font-family:'Noto Sans JP',system-ui,sans-serif;color:#f6efdf;background:#101b25;font-synthesis:none}*{box-sizing:border-box}body{margin:0;min-width:320px}button,input{font:inherit}button{cursor:pointer}button:disabled{opacity:.42;cursor:default}button:focus-visible,summary:focus-visible,canvas:focus-visible,input:focus-visible{outline:3px solid #78d7c4;outline-offset:3px}.shell{max-width:1540px;min-height:100vh;margin:auto;padding:25px clamp(16px,3vw,48px) 38px}.topbar,.brand,.board-heading,.board-caption,.player-card,.actions,.segmented{display:flex;align-items:center}.topbar,.board-heading,.board-caption{justify-content:space-between}.topbar{margin-bottom:20px}.brand{gap:12px;letter-spacing:.12em;font-weight:700;font-size:17px}.brand-mark{display:grid;place-items:center;width:38px;height:38px;border:1px solid #d8ad74;border-radius:10px;color:#d8ad74;font-family:Georgia,serif;font-size:25px}.phase-pill{border:1px solid #486071;border-radius:50px;padding:9px 15px;color:#bdd0d9;font-size:11px;letter-spacing:.12em}.game-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,330px);gap:20px;align-items:start}.board-panel{min-width:0;background:#192a36;border:1px solid #36505e;border-radius:20px;overflow:hidden;box-shadow:0 25px 70px #030b12aa}.board-heading{padding:20px 26px 4px;gap:15px}.board-heading h1{font-size:clamp(20px,2.5vw,32px);margin:0;line-height:1.4}.eyebrow,.section-label{color:#dbb37d;letter-spacing:.2em;font-size:10px;font-weight:700;margin:0 0 8px}.ply{border:1px solid #4e6772;border-radius:50px;padding:8px 12px;white-space:nowrap;color:#bfd0d8;font-size:12px}.board-canvas{width:100%;height:min(63vw,680px);min-height:450px;position:relative}.board-canvas canvas{display:block;width:100%;height:100%}.board-caption{padding:14px 26px 18px;border-top:1px solid #344b59;color:#a9bbc4;font-size:12px;gap:15px}.sidebar{display:grid;gap:12px}.panel{background:#192a36;border:1px solid #344d5b;border-radius:15px;padding:17px}.player-card{gap:13px;padding:12px 10px;border:1px solid transparent;border-radius:12px}.player-card.active{background:#263e4b;border-color:#689b9c}.player-card strong,.player-card small{display:block}.player-card strong{font-size:14px}.player-card small{margin-top:4px;color:#b3c5cd;font-size:12px}.player-icon{display:grid;place-items:center;width:37px;height:37px;font-size:27px}.round{color:#42abc3}.hex{color:#e5906d}.segmented{gap:5px;background:#10202a;padding:4px;border-radius:11px}.segmented button{flex:1;background:transparent;color:#d0dde2;border:0;border-radius:8px;padding:11px 7px;font-size:12px}.segmented button.active{background:#d7ac73;color:#17232b;font-weight:700}.orientation,.actions button{background:#253b49;color:#e8f0ee;border:1px solid #486371;border-radius:10px;padding:11px 12px;font-size:12px}.orientation{width:100%;margin-top:12px;text-align:left;display:flex;justify-content:space-between}.orientation b{color:#edc18d}.orientation kbd{font-family:inherit;background:#12232c;padding:2px 6px;border-radius:4px;color:#bad0d7}.help{color:#aec3cd;font-size:12px;line-height:1.7;min-height:39px;margin:13px 0 0}.actions{gap:9px}.actions button{flex:1}.actions button.accent{background:#d7ac73;color:#17232b;border-color:#d7ac73;font-weight:700}.settings summary{cursor:pointer;font-size:13px;font-weight:700}.settings label{display:block;margin:16px 0 10px;font-size:12px}.settings p{font-size:11px;color:#adbfca;line-height:1.8}.settings input{accent-color:#8dd7c3}@media(max-width:930px){.game-layout{grid-template-columns:1fr}.sidebar{grid-template-columns:repeat(2,minmax(0,1fr))}.board-canvas{height:70vw;min-height:360px}}@media(max-width:580px){.shell{padding:14px 12px 30px}.topbar{margin-bottom:12px}.brand{font-size:14px}.phase-pill{font-size:10px;padding:7px 9px}.board-heading{padding:15px 15px 3px}.board-caption{padding:10px 15px 14px}.board-canvas{height:90vw;min-height:300px}.sidebar{grid-template-columns:1fr}.panel{padding:13px}.board-caption span:first-child{max-width:75%}}
-.match-panel label{display:block;color:#c7d7dc;font-size:12px;margin:10px 0}.match-panel select{display:block;width:100%;margin-top:5px;border:1px solid #486371;border-radius:8px;background:#10202a;color:#f6efdf;padding:8px}.match-panel select:disabled{opacity:.5}.match-panel .actions{flex-wrap:wrap}.match-panel .actions button{min-width:120px}.match-panel [hidden]{display:none}select:focus-visible{outline:3px solid #78d7c4;outline-offset:3px}
-.match-panel select,.match-panel option{font-family:'Noto Sans JP',system-ui,sans-serif}
-.match-panel .match-note{color:#a8bdc7;font-size:11px;line-height:1.6;margin:10px 0 0}
+:root{font-family:'Noto Sans JP',system-ui,sans-serif;color:#f6efdf;background:#101b25;font-synthesis:none}
+*{box-sizing:border-box}
+html,body,#app{width:100%;height:100%;margin:0;overflow:hidden}
+body{min-width:320px}
+button,input,select{font:inherit}
+button{cursor:pointer}
+button:disabled{opacity:.42;cursor:default}
+button:focus-visible,summary:focus-visible,canvas:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #78d7c4;outline-offset:2px}
 [hidden]{display:none!important}
-.save-panel #save-status,.fault-panel p{color:#c7d7dc;font-size:12px;line-height:1.7;margin:8px 0 13px}
-.save-panel .actions{flex-wrap:wrap}.save-panel .actions button{min-width:95px}
-.save-panel details,.fault-panel details{margin-top:12px;color:#abc0c9;font-size:11px}
-.save-panel code,.fault-panel code{display:block;margin-top:7px;overflow-wrap:anywhere;white-space:pre-wrap}
-.fault-panel{border-color:#c77e62;background:#352b2b}.fault-panel strong{color:#ffd2ae}
-.fault-panel .actions{flex-wrap:wrap}.fault-panel .actions button{min-width:110px}
+
+/* One full-viewport renderer; the three HUD islands do not claim layout rows. */
+.shell,.game-layout,.board-panel,.board-canvas{position:fixed;inset:0;width:100%;height:100%;margin:0}
+.shell,.game-layout,.board-panel{pointer-events:none}
+.board-panel{border:0;background:none;overflow:visible}
+.board-canvas{pointer-events:auto;overflow:hidden}
+.board-canvas canvas{display:block;width:100%;height:100%}
+.topbar{position:fixed;z-index:3;top:0;left:0;right:0;padding:16px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;pointer-events:none}
+.brand,.phase-pill,.eyebrow,.section-label{display:none}
+.status-island,.top-actions,.action-hud{pointer-events:auto;background:#192a36ed;border:1px solid #66818b;border-radius:13px;box-shadow:0 8px 28px #030b1299}
+.status-island{width:max-content;max-width:calc(100vw - 24px);padding:10px 13px;display:grid;gap:7px}
+.board-heading{display:flex;align-items:baseline;gap:10px;min-width:0}
+.board-heading>div{display:flex;align-items:baseline;gap:8px;min-width:0}
+.board-heading h1{margin:0;font-size:clamp(15px,1.5vw,19px);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.board-heading #active-match{color:#e2bf8d;font-size:11px;white-space:nowrap}
+.ply{color:#b9cbd2;font-size:10px;white-space:nowrap}
+.status-island .score-panel{display:flex;gap:7px;margin:0;padding:0;border:0;background:none}
+.player-card{display:flex;align-items:center;gap:5px;border:1px solid #45616b;border-radius:8px;padding:4px 7px}
+.player-card.active{background:#294654;border-color:#81b8ac}
+.player-card strong,.player-card small{display:block;white-space:nowrap}
+.player-card strong{font-size:10px}
+.player-card small{font-size:10px;color:#b3c5cd}
+.player-icon{font-size:17px;line-height:1;width:19px;text-align:center}
+.round{color:#42abc3}.hex{color:#e5906d}
+.top-actions{display:flex;align-items:center;gap:6px;padding:7px}
+button{background:#263e4b;color:#f1eee5;border:1px solid #708b94;border-radius:8px;padding:9px 12px;font-size:12px;white-space:nowrap}
+button:hover:not(:disabled){border-color:#8dd7c3;background:#345160}
+button.accent,#new-game{background:#d7ac73;border-color:#d7ac73;color:#18252c;font-weight:700}
+button.accent:hover:not(:disabled),#new-game:hover:not(:disabled){background:#ecc48c}
+
+.action-hud{position:fixed;z-index:3;left:50%;bottom:16px;transform:translateX(-50%);width:max-content;max-width:calc(100vw - 16px);padding:7px;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px}
+.action-hud>.panel{display:contents}
+.segmented{display:flex;gap:5px}
+.segmented button.active{background:#d7ac73;color:#18252c;border-color:#d7ac73;font-weight:700}
+.orientation b{color:#edc18d}
+.orientation kbd{font-family:inherit;font-size:10px;background:#12232c;padding:2px 4px;border-radius:3px;color:#bad0d7}
+#undo{border-left:2px solid #8aa5a8}
+#confirm-selection{flex-basis:100%;background:#d7ac73;color:#17232b;font-weight:700}
+.help{margin:0;color:#b5c9d0;font-size:11px}
+#preview-text{position:fixed;z-index:2;left:16px;bottom:26px;max-width:min(280px,29vw);pointer-events:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-shadow:0 1px 4px #061018}
+.board-caption{position:fixed;z-index:2;right:16px;bottom:25px;display:flex;align-items:center;gap:8px;color:#b7c9ce;font-size:11px;pointer-events:none}
+#board-guide{display:none}
+.board-caption #ai-status{margin:0;white-space:nowrap;color:#f3c48a}
+.board-caption #ai-actions{display:flex;gap:5px;pointer-events:auto}
+.board-caption #ai-actions button{padding:6px 9px;font-size:11px}
+.board-caption.ai-active{bottom:84px;right:16px;background:#192a36ed;border:1px solid #66818b;border-radius:10px;padding:7px;box-shadow:0 6px 20px #030b1277}
+.board-caption.ai-active>span:nth-child(2){display:none}
+#fault-panel{position:fixed;z-index:5;left:50%;top:50%;transform:translate(-50%,-50%);width:min(440px,calc(100vw - 24px));max-height:85dvh;overflow:auto;pointer-events:auto}
+
+.app-dialog{pointer-events:auto;width:min(460px,calc(100vw - 24px));max-height:min(92dvh,680px);overflow:auto;border:1px solid #78989f;border-radius:17px;background:#192a36;color:#f6efdf;padding:23px;box-shadow:0 24px 90px #000a}
+.app-dialog::backdrop{background:#061018c9}
+.app-dialog h2{font-size:22px;margin:0 0 10px}
+.app-dialog p{color:#c7d7dc;font-size:13px;line-height:1.6}
+.dialog-head,.dialog-actions,.actions{display:flex;align-items:center;gap:9px}
+.dialog-head{justify-content:space-between}
+.dialog-actions{justify-content:flex-end;margin-top:20px;flex-wrap:wrap}
+.dialog-actions button{min-width:125px}
+.panel{background:#1d3340;border:1px solid #3c5966;border-radius:12px;padding:14px;margin-top:12px}
+.panel:first-of-type{margin-top:0}
+.panel strong{font-size:13px}
+.panel label{display:block;color:#c9d9de;font-size:12px;margin:10px 0}
+.panel select{display:block;width:100%;margin-top:5px;border:1px solid #57717e;border-radius:8px;background:#10202a;color:#f6efdf;padding:9px}
+.panel select:disabled{opacity:.5}
+.panel p{font-size:12px;margin:8px 0;color:#bfd0d7}
+.panel .actions{flex-wrap:wrap}
+.panel .actions button{flex:1}
+.panel details{margin-top:10px;color:#bfd0d7;font-size:11px}
+.panel code{display:block;overflow-wrap:anywhere;white-space:pre-wrap}
+.settings summary{cursor:pointer;font-size:13px;font-weight:700}
+.settings input{accent-color:#8dd7c3}
+.fault-panel{border-color:#c77e62;background:#352b2b}
+.fault-panel strong{color:#ffd2ae}
+
+@media(max-width:660px){
+ .topbar{padding:9px;flex-direction:column;gap:6px}
+ .status-island{padding:7px 9px}
+ .top-actions{align-self:flex-end;padding:5px}
+ .top-actions button{padding:7px 9px;font-size:11px}
+ .board-heading h1{font-size:15px}
+ .player-card strong,.player-card small{font-size:9px}
+ .action-hud{bottom:10px;padding:5px}
+ #preview-text{bottom:84px;left:10px;max-width:calc(100vw - 20px)}
+ .board-caption{right:10px;bottom:83px}
+ .board-caption.ai-active{bottom:110px;right:10px}
+}
+@media(max-width:480px){
+ .status-island{gap:4px}
+ .board-heading{gap:6px}
+ .board-heading>div{display:block}
+ .board-heading h1{font-size:13px}
+ .board-heading #active-match{display:block;font-size:10px}
+ .score-panel{gap:4px}
+ .player-card{padding:3px 5px}
+ .player-card strong,.player-card small{font-size:10px}
+ .top-actions button{min-height:35px;padding:6px 8px;font-size:10px}
+ .action-hud{gap:4px}
+ .segmented{gap:4px}
+ .segmented button,.orientation,#undo{min-height:38px;padding:7px 6px;font-size:10px}
+ .orientation kbd{display:none}
+ #confirm-selection{min-height:32px}
+ #preview-text,.board-caption{font-size:9px}
+}

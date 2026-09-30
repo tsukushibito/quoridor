@@ -8,8 +8,9 @@ export class InputRouter {
   mode: Mode = 'move';
   orientation: Orientation = 'horizontal';
   private selection: { target: Target; gameEpoch: number; revision: number } | null = null;
+  private touchSelection = false;
   private hover: Target | null = null;
-  private down: { id: number; button: number; x: number; y: number; dragged: boolean } | null = null;
+  private down: { id: number; button: number; pointerType: string; x: number; y: number; dragged: boolean } | null = null;
   private readonly abort = new AbortController();
   constructor(private readonly board: BoardRenderer, private readonly context: () => Context,
     private readonly onAction: (id: number, epoch: number, revision: number) => void,
@@ -22,17 +23,30 @@ export class InputRouter {
     canvas.addEventListener('pointerup', event => this.pointerUp(event), { signal });
     canvas.addEventListener('pointercancel', () => { this.down = null; this.clear(); }, { signal });
     canvas.addEventListener('lostpointercapture', () => { if (this.down) { this.down = null; this.clear(); } }, { signal });
-    canvas.addEventListener('pointerleave', () => { if (!this.down) this.clear(); }, { signal });
+    canvas.addEventListener('pointerleave', () => { if (!this.down && !this.touchSelection) this.clear(); }, { signal });
     canvas.addEventListener('contextmenu', event => event.preventDefault(), { signal });
-    document.addEventListener('pointerdown', event => { if (event.target !== canvas) this.clear(); }, { signal });
+    document.addEventListener('pointerdown', event => {
+      if (event.target !== canvas && !(event.target instanceof Node &&
+        document.getElementById('confirm-selection')?.contains(event.target))) this.clear();
+    }, { signal });
     document.addEventListener('keydown', event => this.keyDown(event), { signal });
   }
   setMode(mode: Mode): void { this.mode = mode; this.clear(); this.onModeChanged(); }
   setOrientation(orientation: Orientation): void { this.orientation = orientation; this.clear(); this.onModeChanged(); }
   toggleOrientation(): void { this.setOrientation(this.orientation === 'horizontal' ? 'vertical' : 'horizontal'); }
-  clear(): void { this.selection = null; this.hover = null; this.renderPreview(); }
+  clear(): void { this.selection = null; this.touchSelection = false; this.hover = null; this.renderPreview(); }
   selectedId(): number | null { return this.selection?.target.id ?? null; }
-  private active(): Context | null { const state = this.context(); return state.phase === 'humanTurn' && state.view ? state : null; }
+  needsConfirmation(): boolean { return this.touchSelection && this.selection !== null; }
+  confirmSelection(): void {
+    const state = this.active(), selection = this.selection;
+    if (state && selection && selection.gameEpoch === state.gameEpoch && selection.revision === state.revision &&
+      this.legal(selection.target, state)) this.onAction(selection.target.id, state.gameEpoch, state.revision);
+    this.clear();
+  }
+  private active(): Context | null {
+    const state = this.context();
+    return !document.querySelector('dialog[open]') && state.phase === 'humanTurn' && state.view ? state : null;
+  }
   private target(clientX: number, clientY: number): Target | null {
     const point = this.board.planePoint(clientX, clientY);
     return point ? targetFromPlane(point.x, point.z, this.mode, this.orientation) : null;
@@ -49,7 +63,8 @@ export class InputRouter {
   }
   private pointerDown(event: PointerEvent): void {
     if (event.button !== 0 && event.button !== 2) return;
-    this.down = { id: event.pointerId, button: event.button, x: event.clientX, y: event.clientY, dragged: false };
+    this.down = { id: event.pointerId, button: event.button, pointerType: event.pointerType,
+      x: event.clientX, y: event.clientY, dragged: false };
     if (event.button === 0) this.board.canvas.focus({ preventScroll: true });
     if (event.button === 2) this.clear();
   }
@@ -69,27 +84,27 @@ export class InputRouter {
       Math.hypot(event.clientX - down.x, event.clientY - down.y) > 7) { this.clear(); return; }
     const target = this.target(event.clientX, event.clientY);
     if (!target || !this.active()) { this.clear(); return; }
-    this.choose(target);
-  }
-  private choose(target: Target): void {
-    const state = this.active(); if (!state) return;
-    if (this.selection?.target.id === target.id && this.selection.gameEpoch === state.gameEpoch &&
-      this.selection.revision === state.revision) {
-      if (this.legal(target, state)) this.onAction(target.id, state.gameEpoch, state.revision);
-      this.clear(); return;
+    const state = this.active(); if (!state) { this.clear(); return; }
+    if (down.pointerType === 'touch') {
+      this.selection = { target, gameEpoch: state.gameEpoch, revision: state.revision };
+      this.touchSelection = true;
+      this.hover = null; this.renderPreview();
+    } else {
+      this.selection = null; this.touchSelection = false;
+      if (this.legal(target, state)) { this.onAction(target.id, state.gameEpoch, state.revision); this.clear(); }
+      else { this.hover = target; this.renderPreview(); }
     }
-    this.selection = { target, gameEpoch: state.gameEpoch, revision: state.revision };
-    this.hover = null; this.renderPreview();
   }
   private keyDown(event: KeyboardEvent): void {
     if (event.altKey || event.ctrlKey || event.metaKey || event.repeat) return;
+    if (document.querySelector('dialog[open]')) return;
     const focused = document.activeElement;
     if (focused !== this.board.canvas && focused !== document.body) return;
     if (event.key === 'Escape') { this.clear(); return; }
     if (event.key.toLowerCase() === 'r') { event.preventDefault(); this.toggleOrientation(); return; }
     const state = this.active(); if (!state?.view) return;
     if (event.key === 'Enter' || event.key === ' ') {
-      if (this.selection) { event.preventDefault(); this.choose(this.selection.target); }
+      if (this.selection) { event.preventDefault(); this.confirmSelection(); }
       return;
     }
     const delta = { ArrowUp: [0, -1], ArrowDown: [0, 1], ArrowLeft: [-1, 0], ArrowRight: [1, 0] }[event.key];
@@ -109,6 +124,7 @@ export class InputRouter {
       this.selection = { target: { kind: 'wall', anchor: next, orientation: this.orientation,
         id: (this.orientation === 'horizontal' ? 81 : 145) + next }, gameEpoch: state.gameEpoch, revision: state.revision };
     }
+    this.touchSelection = false;
     this.renderPreview();
   }
   dispose(): void { this.abort.abort(); this.clear(); this.down = null; }

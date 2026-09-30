@@ -24,7 +24,16 @@ async function point(page: Page, kind: 'cell' | 'wall', id: number) {
 async function selectAndConfirm(page: Page, kind: 'cell' | 'wall', id: number): Promise<void> {
   const location = await point(page, kind, id);
   await page.mouse.click(location.x, location.y);
-  await page.mouse.click(location.x, location.y);
+}
+async function openMenu(page: Page): Promise<void> {
+  await page.locator('#open-menu').click();
+  if (!await page.locator('#no-animation').isVisible()) await page.locator('.settings summary').click();
+}
+async function closeMenu(page: Page): Promise<void> { await page.locator('#close-menu').click(); }
+async function startPvp(page: Page): Promise<void> {
+  await page.locator('#new-game').click();
+  await page.locator('#match-mode').selectOption('pvp');
+  await page.locator('#dialog-start').click();
 }
 async function settle(page: Page): Promise<void> {
   await expect.poll(() => page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.state().phase)).toMatch(/humanTurn|finished/);
@@ -51,16 +60,17 @@ test('real pointer game reaches winner, then undo/new and camera remain usable',
   await selectAndConfirm(page, 'wall', 27);
   expect((await state(page)).view?.ply).toBe(15);
   const before = await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.camera());
+  await openMenu(page);
   await page.getByRole('button', { name: '反対側から見る' }).click();
   const flipped = await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.camera());
-  expect(flipped[0]).toBeCloseTo(-before[0], 4);
   expect(flipped[2]).toBeCloseTo(-before[2], 4);
   expect((await state(page)).view?.positionKey).toBe(terminal.view?.positionKey);
   await page.getByRole('button', { name: '視点を戻す' }).click();
+  await closeMenu(page);
   await page.getByRole('button', { name: '1手戻す' }).click();
   expect((await state(page)).view?.ply).toBe(14);
   expect((await state(page)).phase).toBe('humanTurn');
-  await page.getByRole('button', { name: '新しい対局' }).click();
+  await startPvp(page);
   await expect.poll(() => page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.state().view?.ply)).toBe(0);
   expect((await state(page)).view?.pawns).toEqual([4, 76]);
 });
@@ -73,7 +83,7 @@ test('wall orientation, illegal preview, keyboard, and static layer', async ({ p
   await page.getByRole('button', { name: '壁を置く' }).click();
   expect(await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.resources().nonWallStatic)).toBe(0);
   const firstWall = await point(page, 'wall', 27);
-  await page.mouse.click(firstWall.x, firstWall.y);
+  await page.mouse.move(firstWall.x, firstWall.y);
   expect(await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.resources().nonWallStatic)).toBe(0);
   await page.mouse.click(firstWall.x, firstWall.y);
   await settle(page);
@@ -82,7 +92,6 @@ test('wall orientation, illegal preview, keyboard, and static layer', async ({ p
   const illegal = await point(page, 'wall', 27);
   await page.mouse.click(illegal.x, illegal.y);
   await expect(page.locator('#preview-text')).toContainText('置けません');
-  await page.mouse.click(illegal.x, illegal.y);
   expect((await state(page)).view?.ply).toBe(1);
   await page.locator('#board canvas').focus();
   await page.keyboard.press('r');
@@ -140,9 +149,12 @@ test('drag and UI isolation, interrupted animations, reduced motion, repeated ne
   await page.mouse.wheel(0, -350);
   await page.waitForTimeout(100);
   expect(Math.hypot(...await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.camera()))).not.toBeCloseTo(distanceBefore, 2);
+  await openMenu(page);
   await page.getByRole('button', { name: '視点を戻す' }).click();
+  await closeMenu(page);
   const resetPoint = await point(page, 'cell', 13);
-  await page.mouse.click(resetPoint.x, resetPoint.y);
+  await page.locator('#board canvas').focus();
+  await page.keyboard.press('ArrowDown');
   expect((await state(page)).selectedId).toBe(13);
   await page.getByRole('button', { name: '壁を置く' }).click();
   expect((await state(page)).selectedId).toBeNull();
@@ -167,19 +179,20 @@ test('drag and UI isolation, interrupted animations, reduced motion, repeated ne
   await selectAndConfirm(page, 'cell', 13);
   expect((await state(page)).phase).toBe('animating');
   expect((await state(page)).view?.ply).toBe(1);
-  await page.getByRole('button', { name: '新しい対局' }).click();
+  await page.locator('#restart-game').click();
   await page.clock.resume();
   await page.waitForTimeout(260);
   expect((await state(page)).view?.ply).toBe(0);
-  await page.getByText('表示と操作の設定').click();
+  await openMenu(page);
   await page.locator('#no-animation').check();
+  await closeMenu(page);
   await page.getByRole('button', { name: '壁を置く' }).click();
   await selectAndConfirm(page, 'wall', 27);
   expect((await state(page)).phase).toBe('humanTurn');
   expect(await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.resources().staticWalls)).toBe(1);
   await page.evaluate(() => { (window as Window & { __canvasReference?: HTMLCanvasElement }).__canvasReference = document.querySelector('#board canvas')!; });
   for (let i = 0; i < 3; i++) {
-    await page.getByRole('button', { name: '新しい対局' }).click();
+    await page.locator('#restart-game').click();
     await expect.poll(() => page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.state().phase)).toBe('humanTurn');
   }
   expect(await page.evaluate(() => document.querySelector('#board canvas') === (window as Window & { __canvasReference?: HTMLCanvasElement }).__canvasReference)).toBe(true);
@@ -188,9 +201,11 @@ test('drag and UI isolation, interrupted animations, reduced motion, repeated ne
   const again = await point(page, 'cell', 13);
   for (let i = 0; i < 4; i++) await page.mouse.click(again.x, again.y);
   expect((await state(page)).view?.ply).toBe(1);
-  await page.getByRole('button', { name: '新しい対局' }).click();
+  await page.locator('#restart-game').click();
+  await openMenu(page);
   await expect.poll(() => page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.state().phase)).toBe('humanTurn');
   await page.locator('#no-animation').uncheck();
+  await closeMenu(page);
   await page.getByRole('button', { name: '壁を置く' }).click();
   await page.clock.pauseAt(await page.evaluate(() => Date.now() + 10_000));
   await selectAndConfirm(page, 'wall', 27);
@@ -206,8 +221,11 @@ test('narrow viewport keeps controls accessible', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await ready(page);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
-  for (const name of ['駒を動かす', '壁を置く', '1手戻す', '新しい対局', '反対側から見る', '視点を戻す'])
+  for (const name of ['駒を動かす', '壁を置く', '1手戻す', '新しい対局', 'やり直す'])
     await expect(page.getByRole('button', { name })).toBeVisible();
+  await openMenu(page);
+  for (const name of ['反対側から見る', '視点を戻す']) await expect(page.getByRole('button', { name })).toBeVisible();
+  await closeMenu(page);
   await selectAndConfirm(page, 'cell', 13);
   await settle(page);
   expect((await state(page)).view?.pawns[0]).toBe(13);

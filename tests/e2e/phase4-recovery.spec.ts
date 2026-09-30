@@ -4,7 +4,7 @@ async function state(page: Page) { return page.evaluate(() => window.__QUORIDOR_
 async function clickCell(page: Page, cell: number): Promise<void> {
   await page.locator('#board canvas').evaluate(element => element.scrollIntoView({ block: 'center' }));
   const point = await page.evaluate(id => window.__QUORIDOR_APP_TEST_API__!.projectCell(id), cell);
-  await page.mouse.click(point.x, point.y); await page.mouse.click(point.x, point.y);
+  await page.mouse.click(point.x, point.y);
 }
 async function ready(page: Page): Promise<void> {
   await page.goto('./?forceWebGL=1');
@@ -47,7 +47,7 @@ test('device-loss and backend/runtime fault handlers preserve committed play and
   await expect.poll(() => state(page).then(x => x.phase)).toBe('humanTurn');
   await page.getByRole('button', { name: '壁を置く' }).click();
   const wall = await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.projectWall(27));
-  await page.mouse.click(wall.x, wall.y); await page.mouse.click(wall.x, wall.y);
+  await page.mouse.click(wall.x, wall.y);
   const placed = await state(page);
   expect(placed.view?.horizontalWalls).toContain(27);
   await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.injectRenderFault('backendError'));
@@ -61,6 +61,113 @@ test('device-loss and backend/runtime fault handlers preserve committed play and
   expect((await state(page)).view?.ply).toBe(2);
   await page.getByRole('button', { name: '1手戻す' }).click();
   expect((await state(page)).view?.ply).toBe(1);
+  expect(unexpected).toEqual([]);
+});
+
+test('device loss during saved startup choice exposes a real retry and preserves the slot', async ({ page }) => {
+  const unexpected: string[] = []; page.on('pageerror', error => unexpected.push(error.message));
+  await ready(page);
+  await clickCell(page, 13);
+  const gameKey = await page.evaluate(() => window.__QUORIDOR_PERSISTENCE_TEST_API__!.GAME_KEY);
+  const stored = await page.evaluate(key => localStorage.getItem(key), gameKey);
+  expect(stored).not.toBeNull();
+  await page.reload();
+  await expect(page.locator('#startup-dialog')).toBeVisible();
+  let navigations = 0;
+  page.on('framenavigated', frame => { if (frame === page.mainFrame()) navigations++; });
+  await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.injectRenderFault('deviceLost'));
+  await expect(page.locator('#startup-dialog')).not.toBeVisible();
+  await expect(page.locator('#fault-title')).toHaveText('描画を停止しました');
+  await expect(page.locator('#retry-renderer')).toBeFocused();
+  await page.locator('#retry-renderer').click({ timeout: 2500 });
+  await expect(page.locator('#startup-dialog')).toBeVisible();
+  expect(await page.evaluate(key => localStorage.getItem(key), gameKey)).toBe(stored);
+  await page.locator('#resume-game-choice').click();
+  await expect.poll(() => state(page).then(value => value.view?.ply)).toBe(1);
+  await clickCell(page, 67);
+  expect((await state(page)).view?.ply).toBe(2);
+  expect(navigations).toBe(0);
+  expect(unexpected).toEqual([]);
+});
+
+test('device loss during corrupt startup choice retains data and still allows a fresh game', async ({ page }) => {
+  const unexpected: string[] = []; page.on('pageerror', error => unexpected.push(error.message));
+  await ready(page);
+  const gameKey = await page.evaluate(() => window.__QUORIDOR_PERSISTENCE_TEST_API__!.GAME_KEY);
+  await page.evaluate(key => localStorage.setItem(key, '42'), gameKey);
+  await page.reload();
+  await expect(page.locator('#startup-dialog')).toBeVisible();
+  let navigations = 0;
+  page.on('framenavigated', frame => { if (frame === page.mainFrame()) navigations++; });
+  await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.injectRenderFault('deviceLost'));
+  await expect(page.locator('#startup-dialog')).not.toBeVisible();
+  await page.locator('#retry-renderer').click({ timeout: 2500 });
+  await expect(page.locator('#startup-dialog')).toBeVisible();
+  await expect(page.locator('#startup-message')).toContainText('読み込めません');
+  expect(await page.evaluate(key => localStorage.getItem(key), gameKey)).toBe('42');
+  await page.locator('#startup-new-game').click();
+  await page.locator('#dialog-start').click();
+  await expect.poll(() => state(page).then(value => value.phase)).toBe('humanTurn');
+  await clickCell(page, 13);
+  expect((await state(page)).view?.ply).toBe(1);
+  expect(navigations).toBe(0);
+  expect(unexpected).toEqual([]);
+});
+
+test('renderer faults suspend live match and settings dialogs without losing the game', async ({ page }) => {
+  const unexpected: string[] = []; page.on('pageerror', error => unexpected.push(error.message));
+  await ready(page);
+  let navigations = 0;
+  page.on('framenavigated', frame => { if (frame === page.mainFrame()) navigations++; });
+  const initialKey = (await state(page)).view!.positionKey;
+  await page.locator('#new-game').click();
+  await page.locator('#match-mode').selectOption('ai');
+  await page.locator('#human-side').selectOption('1');
+  await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.injectRenderFault('backendError'));
+  await expect(page.locator('#match-dialog')).not.toBeVisible();
+  await page.locator('#retry-renderer').click({ timeout: 2500 });
+  await expect.poll(() => state(page).then(value => value.phase)).toBe('humanTurn');
+  expect((await state(page)).view?.positionKey).toBe(initialKey);
+  await page.locator('#new-game').click();
+  await expect(page.locator('#match-mode')).toHaveValue('ai');
+  await expect(page.locator('#human-side')).toHaveValue('1');
+  await page.locator('#dialog-cancel').click();
+  await clickCell(page, 13);
+  const currentKey = (await state(page)).view!.positionKey;
+  await page.locator('#open-menu').click();
+  await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.injectRenderFault('deviceLost'));
+  await expect(page.locator('#menu-dialog')).not.toBeVisible();
+  await page.locator('#retry-renderer').click({ timeout: 2500 });
+  expect((await state(page)).view?.positionKey).toBe(currentKey);
+  await page.locator('#open-menu').click();
+  await expect(page.locator('#menu-dialog')).toBeVisible();
+  await page.locator('#close-menu').click();
+  await clickCell(page, 67);
+  expect((await state(page)).view?.ply).toBe(2);
+  expect(navigations).toBe(0);
+  expect(unexpected).toEqual([]);
+});
+
+test('rules startup failure inside saved new-match dialog exposes retry and keeps the save', async ({ page }) => {
+  const unexpected: string[] = []; page.on('pageerror', error => unexpected.push(error.message));
+  await ready(page);
+  await clickCell(page, 13);
+  const gameKey = await page.evaluate(() => window.__QUORIDOR_PERSISTENCE_TEST_API__!.GAME_KEY);
+  const stored = await page.evaluate(key => localStorage.getItem(key), gameKey);
+  await page.goto('./?forceWebGL=1&testRulesStartupFailure=1');
+  await expect(page.locator('#startup-dialog')).toBeVisible();
+  let navigations = 0;
+  page.on('framenavigated', frame => { if (frame === page.mainFrame()) navigations++; });
+  await page.locator('#startup-new-game').click();
+  await page.locator('#dialog-start').click();
+  await expect(page.locator('#fault-title')).toHaveText('ルールエンジンを開始できません');
+  await expect(page.locator('#match-dialog')).not.toBeVisible();
+  await page.locator('#retry-rules').click({ timeout: 2500 });
+  await expect(page.locator('#startup-dialog')).toBeVisible();
+  expect(await page.evaluate(key => localStorage.getItem(key), gameKey)).toBe(stored);
+  await page.locator('#resume-game-choice').click();
+  await expect.poll(() => state(page).then(value => value.view?.ply)).toBe(1);
+  expect(navigations).toBe(0);
   expect(unexpected).toEqual([]);
 });
 
@@ -84,9 +191,10 @@ test('AI build mismatch shows reload guidance and PvP takeover keeps the Rust ga
   });
   await ready(page);
   const key = (await state(page)).view?.positionKey;
+  await page.locator('#new-game').click();
   await page.locator('#match-mode').selectOption('ai');
   await page.locator('#human-side').selectOption('1');
-  await page.getByRole('button', { name: '新しい対局' }).click();
+  await page.locator('#dialog-start').click();
   await expect.poll(() => state(page).then(x => x.phase)).toBe('recoverableError');
   await expect(page.locator('#fault-title')).toHaveText('AIの版が一致しません');
   expect((await state(page)).view?.positionKey).toBe(key);
@@ -102,8 +210,8 @@ test('AI build mismatch shows reload guidance and PvP takeover keeps the Rust ga
 
 test('invalid replay restore leaves live view, epoch, revision, selection, and saved slot intact', async ({ page }) => {
   await ready(page);
-  const point = await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.projectCell(13));
-  await page.mouse.click(point.x, point.y);
+  await page.locator('#board canvas').focus();
+  await page.keyboard.press('ArrowDown');
   const before = await state(page);
   expect(before.selectedId).toBe(13);
   const save = await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.exportReplay());
@@ -142,7 +250,7 @@ test('repeated new/restore operations keep one canvas and terminal AI replay res
   const generation = await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.aiDiagnostics().slices.length);
   await page.waitForTimeout(250);
   expect(await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.aiDiagnostics().slices.length)).toBe(generation);
-  await page.getByRole('button', { name: '新しい対局' }).dblclick();
+  await page.locator('#restart-game').dblclick();
   await expect.poll(() => state(page).then(x => x.phase)).toBe('humanTurn');
   expect(await page.locator('#board canvas').count()).toBe(1);
   expect((await state(page)).view?.ply).toBe(0);

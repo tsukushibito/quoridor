@@ -22,6 +22,7 @@ export class BoardRenderer {
   private disposed = false;
   private faulted = false;
   private reducedMotion = false;
+  private presetFlipped = false;
 
   private constructor(private readonly element: HTMLElement,
     private readonly onFault: (kind: RendererFault) => void) {
@@ -50,6 +51,7 @@ export class BoardRenderer {
     const board = new BoardRenderer(element, onFault);
     try {
       await board.renderer.init();
+      board.board.camera.position.set(0, 14, 18);
       board.resize();
       if (board.faulted) throw new Error('Renderer failed during initialization');
       board.backend = board.renderer.coordinateSystem === THREE.WebGPUCoordinateSystem ? 'webgpu'
@@ -65,7 +67,46 @@ export class BoardRenderer {
       this.board.camera.aspect = width / height;
       this.board.camera.updateProjectionMatrix();
       this.renderer.setSize(width, height);
+      this.fitCamera(this.presetDirection());
     } catch { this.fail('renderError'); }
+  }
+  private presetDirection(): THREE.Vector3 {
+    const narrow = this.element.clientWidth / Math.max(1, this.element.clientHeight) < 1;
+    return new THREE.Vector3(0, narrow ? 26 : 14, (this.presetFlipped ? -1 : 1) * (narrow ? 12 : 18));
+  }
+  private fitCamera(direction: THREE.Vector3): void {
+    const camera = this.board.camera;
+    const ray = direction.clone().normalize();
+    if (ray.lengthSq() < 0.5) ray.set(11, 14, 17).normalize();
+    const canvas = this.canvas.getBoundingClientRect();
+    const overlay = (selector: string): DOMRect | undefined =>
+      this.element.ownerDocument.querySelector<HTMLElement>(selector)?.getBoundingClientRect();
+    const top = Math.max(canvas.top + 10, (overlay('.status-island')?.bottom ?? canvas.top) + 10,
+      (overlay('.top-actions')?.bottom ?? canvas.top) + 10);
+    const bottom = Math.min(canvas.bottom - 10, (overlay('.action-hud')?.top ?? canvas.bottom) - 10);
+    const left = canvas.left + 10, right = canvas.right - 10;
+    const fits = (distance: number): boolean => {
+      camera.position.copy(ray).multiplyScalar(distance);
+      camera.lookAt(0, 0, 0);
+      camera.updateMatrixWorld();
+      for (const x of [-5.3, 5.3]) for (const z of [-5.3, 5.3]) for (const y of [-0.7, 1.1]) {
+        const clip = new THREE.Vector3(x, y, z).project(camera);
+        const px = canvas.left + (clip.x + 1) * canvas.width / 2;
+        const py = canvas.top + (1 - clip.y) * canvas.height / 2;
+        if (px < left || px > right || py < top || py > bottom || clip.z > 1) return false;
+      }
+      return true;
+    };
+    let near = 7, far = 60;
+    for (let i = 0; i < 22; i++) {
+      const middle = (near + far) / 2;
+      if (fits(middle)) far = middle;
+      else near = middle;
+    }
+    fits(far);
+    this.controls.minDistance = Math.max(7, far * 0.78);
+    this.controls.maxDistance = Math.max(32, far * 1.6);
+    this.controls.update();
   }
   private loop = (): void => {
     if (this.disposed || this.faulted) return;
@@ -131,19 +172,24 @@ export class BoardRenderer {
   projectWall(anchor: number): { x: number; y: number } {
     const point = wallPoint(anchor); return this.project(point.x, point.z);
   }
-  private project(x: number, z: number): { x: number; y: number } {
+  projectBoardBounds(): { left: number; top: number; right: number; bottom: number } {
+    const points = [-5.3, 5.3].flatMap(x => [-5.3, 5.3].flatMap(z =>
+      [-0.7, 1.1].map(y => this.project(x, z, y))));
+    return { left: Math.min(...points.map(point => point.x)), top: Math.min(...points.map(point => point.y)),
+      right: Math.max(...points.map(point => point.x)), bottom: Math.max(...points.map(point => point.y)) };
+  }
+  private project(x: number, z: number, y = 0.17): { x: number; y: number } {
     const rect = this.canvas.getBoundingClientRect();
-    const clip = new THREE.Vector3(x, 0.17, z).project(this.board.camera);
+    const clip = new THREE.Vector3(x, y, z).project(this.board.camera);
     return { x: rect.left + (clip.x + 1) * rect.width / 2, y: rect.top + (1 - clip.y) * rect.height / 2 };
   }
   flipCamera(): void {
-    const camera = this.board.camera;
-    camera.position.set(-camera.position.x, camera.position.y, -camera.position.z);
-    camera.lookAt(0, 0, 0); this.controls.update();
+    this.presetFlipped = !this.presetFlipped;
+    this.fitCamera(this.presetDirection());
   }
   resetCamera(): void {
-    this.board.camera.position.set(11, 14, 17);
-    this.board.camera.lookAt(0, 0, 0); this.controls.update();
+    this.presetFlipped = false;
+    this.fitCamera(this.presetDirection());
   }
   cameraPosition(): [number, number, number] {
     return this.board.camera.position.toArray() as [number, number, number];

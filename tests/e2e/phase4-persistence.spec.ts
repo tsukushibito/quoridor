@@ -9,8 +9,15 @@ async function state(page: Page) { return page.evaluate(() => window.__QUORIDOR_
 async function clickCell(page: Page, cell: number): Promise<void> {
   await page.locator('#board canvas').evaluate(element => element.scrollIntoView({ block: 'center' }));
   const point = await page.evaluate(id => window.__QUORIDOR_APP_TEST_API__!.projectCell(id), cell);
-  await page.mouse.click(point.x, point.y); await page.mouse.click(point.x, point.y);
+  await page.mouse.click(point.x, point.y);
 }
+async function openMenu(page: Page): Promise<void> {
+  await page.locator('#open-menu').click();
+  if (!await page.locator('#no-animation').isVisible()) await page.locator('.settings summary').click();
+}
+async function closeMenu(page: Page): Promise<void> { await page.locator('#close-menu').click(); }
+async function openMatch(page: Page): Promise<void> { await page.locator('#new-game').click(); }
+async function startMatch(page: Page): Promise<void> { await page.locator('#dialog-start').click(); }
 async function saved(page: Page) {
   return page.evaluate(() => JSON.parse(localStorage.getItem(window.__QUORIDOR_PERSISTENCE_TEST_API__!.GAME_KEY)!) as {
     match: { mode: string; humanSide: number; simulations: number }; replay: { ply: number; positionKey: string; actions: number[] } });
@@ -21,19 +28,23 @@ test('one PvP slot resumes via real UI, preserves next-game settings and undo, t
   await clickCell(page, 13);
   await expect.poll(() => saved(page).then(x => x.replay.ply)).toBe(1);
   const key = (await state(page)).view!.positionKey;
+  await openMatch(page);
   await page.locator('#match-mode').selectOption('ai');
   await page.locator('#human-side').selectOption('1');
   await page.locator('#ai-budget').selectOption('192');
-  await page.getByText('表示と操作の設定').click();
+  await page.locator('#dialog-cancel').click();
+  await openMenu(page);
   await page.locator('#no-animation').check();
+  await closeMenu(page);
   expect((await saved(page)).match).toEqual({ mode: 'pvp', humanSide: 0, simulations: 96 });
   await page.reload();
   await expect(page.getByRole('button', { name: '前の対局を再開' })).toBeVisible();
   expect((await state(page)).view).toBeNull();
+  await page.locator('#startup-new-game').click();
   await expect(page.locator('#match-mode')).toHaveValue('ai');
   await expect(page.locator('#human-side')).toHaveValue('1');
   await expect(page.locator('#ai-budget')).toHaveValue('192');
-  await expect(page.locator('#no-animation')).toBeChecked();
+  await page.locator('#dialog-cancel').click();
   await page.getByRole('button', { name: '前の対局を再開' }).click();
   expect((await state(page)).view?.positionKey).toBe(key);
   expect((await state(page)).matchMode).toBe('pvp');
@@ -45,7 +56,11 @@ test('one PvP slot resumes via real UI, preserves next-game settings and undo, t
   await page.getByRole('button', { name: '1手戻す' }).click();
   expect((await state(page)).view?.ply).toBe(0);
   expect((await saved(page)).replay.ply).toBe(0);
-  await page.getByRole('button', { name: '新しい対局' }).click();
+  await openMenu(page);
+  await expect(page.locator('#no-animation')).toBeChecked();
+  await closeMenu(page);
+  await openMatch(page);
+  await startMatch(page);
   await expect.poll(() => state(page).then(x => x.phase)).toMatch(/aiThinking|humanTurn/);
   expect((await saved(page)).match).toEqual({ mode: 'ai', humanSide: 1, simulations: 192 });
 });
@@ -53,16 +68,20 @@ test('one PvP slot resumes via real UI, preserves next-game settings and undo, t
 test('both AI sides resume active assignment independent of edited next-game controls', async ({ page }) => {
   for (const side of [0, 1] as const) {
     await ready(page);
+    await openMatch(page);
     await page.locator('#match-mode').selectOption('ai');
     await page.locator('#human-side').selectOption(String(side));
     await page.locator('#ai-budget').selectOption('48');
-    await page.getByRole('button', { name: '新しい対局' }).click();
-    await page.getByText('表示と操作の設定').click();
+    await startMatch(page);
+    await openMenu(page);
     await page.locator('#no-animation').check();
+    await closeMenu(page);
     await expect.poll(() => state(page).then(x => x.phase), { timeout: 20000 }).toBe('humanTurn');
     const before = await state(page);
     expect((await saved(page)).match).toEqual({ mode: 'ai', humanSide: side, simulations: 48 });
+    await openMatch(page);
     await page.locator('#match-mode').selectOption('pvp');
+    await page.locator('#dialog-cancel').click();
     await page.reload();
     await expect(page.getByRole('button', { name: '前の対局を再開' })).toBeVisible();
     await page.getByRole('button', { name: '前の対局を再開' }).click();
@@ -84,16 +103,18 @@ test('committed pawn and wall animation states save immediately; AI thought resu
   expect((await state(page)).view?.ply).toBe(1);
   await page.getByRole('button', { name: '壁を置く' }).click();
   const wall = await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.projectWall(27));
-  await page.mouse.click(wall.x, wall.y); await page.mouse.click(wall.x, wall.y);
+  await page.mouse.click(wall.x, wall.y);
   expect((await saved(page)).replay.ply).toBe(2);
   await page.reload();
   await page.getByRole('button', { name: '前の対局を再開' }).click();
   expect((await state(page)).view?.horizontalWalls).toContain(27);
+  await openMatch(page);
   await page.locator('#match-mode').selectOption('ai');
   await page.locator('#ai-budget').selectOption('4096');
-  await page.getByRole('button', { name: '新しい対局' }).click();
-  await page.getByText('表示と操作の設定').click();
+  await startMatch(page);
+  await openMenu(page);
   await page.locator('#no-animation').check();
+  await closeMenu(page);
   await clickCell(page, 13);
   expect((await state(page)).phase).toBe('aiThinking');
   expect((await saved(page)).replay.ply).toBe(1);
@@ -118,9 +139,9 @@ test('corrupt slot remains until explicit clear or replacement; settings corrupt
   await expect(page.locator('#settings-status')).toContainText('既定');
   expect(await page.evaluate(key => localStorage.getItem(key), api.GAME_KEY)).toBe('42');
   expect((await state(page)).view).toBeNull();
-  await page.getByRole('button', { name: '保存を消す' }).click();
+  await page.locator('#startup-clear-save').click();
   expect(await page.evaluate(key => localStorage.getItem(key), api.GAME_KEY)).toBeNull();
-  await page.getByRole('button', { name: '新しい対局' }).click();
+  await startMatch(page);
   await expect.poll(() => state(page).then(x => x.phase)).toBe('humanTurn');
   const valid = await saved(page);
   await page.evaluate(({ key, value }) => localStorage.setItem(key, JSON.stringify(value)), {
@@ -129,13 +150,15 @@ test('corrupt slot remains until explicit clear or replacement; settings corrupt
   await page.reload();
   await expect(page.locator('#save-status')).toContainText('読み込めません');
   expect((await state(page)).view).toBeNull();
-  await page.getByRole('button', { name: '新しい対局' }).click();
+  await page.locator('#startup-new-game').click();
+  await startMatch(page);
   await expect.poll(() => state(page).then(x => x.phase)).toBe('humanTurn');
   expect((await saved(page)).replay.positionKey).not.toBe('0'.repeat(42));
   mkdirSync('artifacts', { recursive: true });
   await page.screenshot({ path: `artifacts/phase4-${process.env.E2E_MODE || 'dev'}-desktop.png`, fullPage: true });
   await page.setViewportSize({ width: 390, height: 844 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
+  await openMenu(page);
   await expect(page.getByRole('button', { name: '保存を消す' })).toBeVisible();
   await page.screenshot({ path: `artifacts/phase4-${process.env.E2E_MODE || 'dev'}-narrow.png`, fullPage: true });
 });
@@ -200,6 +223,7 @@ test('quota failure leaves previous slot while live play continues', async ({ pa
   expect((await state(page)).view?.ply).toBe(1);
   expect(await page.evaluate(k => localStorage.getItem(k), key)).toBe(previous);
   await expect(page.locator('#save-status')).toContainText('いっぱい');
+  await openMenu(page);
   await page.getByRole('button', { name: '今すぐ保存' }).click();
   expect((await state(page)).view?.ply).toBe(1);
 });
