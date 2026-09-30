@@ -9,7 +9,7 @@ import { AmbientOcclusion } from './ambient-occlusion';
 
 export type Backend = 'webgpu' | 'webgl2' | 'unknown';
 export type RendererFault = 'deviceLost' | 'backendError' | 'renderError';
-type Tween = { started: number; duration: number; update: (fraction: number) => void; complete: () => void };
+type Tween = { started: number; duration: number; update: (fraction: number) => void; complete: () => void; cancel: () => void };
 export class BoardRenderer {
   readonly board = new BoardScene();
   readonly renderer = new THREE.WebGPURenderer({ antialias: true,
@@ -104,7 +104,7 @@ export class BoardRenderer {
     };
     const top = Math.max(canvas.top + 10, (overlay('.status-island')?.bottom ?? canvas.top) + 10,
       (overlay('.top-actions')?.bottom ?? canvas.top) + 10);
-    const bottom = Math.min(canvas.bottom - 10, (overlay('.action-hud')?.top ?? canvas.bottom) - 10);
+    const bottom = Math.min(canvas.bottom - 10, (overlay('.action-hud:not([hidden])')?.top ?? canvas.bottom) - 10);
     const left = canvas.left + 10, right = canvas.right - 10;
     const fits = (distance: number): boolean => {
       camera.position.copy(ray).multiplyScalar(distance);
@@ -178,7 +178,7 @@ export class BoardRenderer {
   setPreview(target: Parameters<BoardScene['setPreview']>[0], legal: boolean): void {
     this.board.setPreview(target, legal); this.needsRender = true;
   }
-  cancelAnimation(): void { this.tween = null; }
+  cancelAnimation(): void { this.tween?.cancel(); this.tween = null; this.needsRender = true; }
   animate(before: GameView, after: GameView, actionId: number, complete: () => void): void {
     this.cancelAnimation();
     if (this.pausedAt !== null) this.pausedAt = performance.now();
@@ -189,17 +189,17 @@ export class BoardRenderer {
     this.board.sync(after, isWall ? wallKey(orientation, anchor) : undefined);
     this.needsRender = true;
     if (!isWall) this.board.setPawn(player, before.pawns[player]!);
-    const finish = (): void => {
+    const settle = (): void => {
       if (isWall) this.board.finalizeWall(orientation, anchor);
       else this.board.setPawn(player, after.pawns[player]!);
-      complete();
     };
+    const finish = (): void => { settle(); complete(); };
     if (this.reducedMotion || matchMedia('(prefers-reduced-motion: reduce)').matches) { finish(); return; }
-    this.tween = { started: performance.now(), duration: 190,
+    this.tween = { started: performance.now(), duration: isWall ? 350 : 190,
       update: fraction => {
         if (isWall) this.board.animateWall(orientation, anchor, fraction);
         else this.board.setPawnInterpolated(player, before.pawns[player]!, after.pawns[player]!, fraction);
-      }, complete: finish };
+      }, complete: finish, cancel: settle };
   }
   planePoint(clientX: number, clientY: number): { x: number; z: number } | null {
     const rect = this.canvas.getBoundingClientRect();

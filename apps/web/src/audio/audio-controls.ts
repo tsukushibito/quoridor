@@ -1,8 +1,8 @@
 import { AudioController } from './audio-controller';
 import { AudioSettingsRepository, type AudioSettings } from './audio-settings';
 import { ja } from '../ui/strings';
+import { setIconButton } from '../ui/icons';
 
-const speaker = `<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 4 6 8H3v8h3l5 4z"/><path class="sound-waves" d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/><path class="sound-cross" d="m15 9 6 6m0-6-6 6"/></svg>`;
 export function installAudioControls(actions: HTMLElement, menu: HTMLDialogElement,
   signal: AbortSignal, base: string): AudioController {
   const repository = new AudioSettingsRepository();
@@ -10,7 +10,7 @@ export function installAudioControls(actions: HTMLElement, menu: HTMLDialogEleme
   const audio = new AudioController(read.value, base);
   let warning = read.warning === 'invalid' ? ja.audioInvalid : read.warning === 'unavailable' ? ja.audioStorage : '';
   const button = document.createElement('button');
-  button.type = 'button'; button.id = 'sound-mute'; button.innerHTML = `${speaker}<span></span>`;
+  button.type = 'button'; button.id = 'sound-mute'; setIconButton(button, 'sound', ja.muteAll);
   actions.prepend(button);
   const panel = document.createElement('section');
   panel.className = 'panel sound-panel'; panel.setAttribute('aria-labelledby', 'sound-heading');
@@ -28,7 +28,9 @@ export function installAudioControls(actions: HTMLElement, menu: HTMLDialogEleme
     <details class="sound-credits"><summary>${ja.soundCredits}</summary><p>${ja.soundCreditText}
       <a href="https://kenney.nl/assets/impact-sounds" target="_blank" rel="noopener noreferrer">Kenney — Impact Sounds</a> ·
       <a href="https://kenney.nl/assets/interface-sounds" target="_blank" rel="noopener noreferrer">Interface Sounds</a> ·
-      <a href="https://opengameart.org/content/mystical-piano" target="_blank" rel="noopener noreferrer">Indieteur — Mystical Piano</a>
+      <a href="https://opengameart.org/content/cozy-puzzle-in-game-1" target="_blank" rel="noopener noreferrer">MintoDog — Cozy Puzzle In-Game 1</a> ·
+      <a href="https://freesound.org/people/el_boss/sounds/677858/" target="_blank" rel="noopener noreferrer">el_boss — Game Success Fanfare Short</a> ·
+      <a href="https://freesound.org/people/el_boss/sounds/677855/" target="_blank" rel="noopener noreferrer">Game Fail Fanfare</a>
       <span>CC0 1.0</span></p></details>`;
   menu.querySelector('.dialog-head')!.after(panel);
   const get = <T extends HTMLElement>(id: string): T => panel.querySelector<T>(`#${id}`)!;
@@ -43,9 +45,8 @@ export function installAudioControls(actions: HTMLElement, menu: HTMLDialogEleme
       (!settings.bgmEnabled || settings.bgmVolume === 0);
     button.setAttribute('aria-pressed', String(settings.muted));
     button.setAttribute('aria-label', settings.muted ? ja.unmuteAll : ja.muteAll);
-    button.title = settings.muted ? ja.unmuteAll : ja.muteAll;
     button.classList.toggle('sound-silent', silent);
-    button.querySelector('span')!.textContent = settings.muted ? ja.soundMuted : silent ? ja.soundSilent : ja.soundOn;
+    button.querySelector('.icon-tooltip')!.textContent = settings.muted ? ja.unmuteAll : ja.muteAll;
     // Status notifications may run between a checkbox's click and its change event.
     // Only overwrite form values when preferences actually change, preserving that native interaction.
     if (renderedSettings !== settings) {

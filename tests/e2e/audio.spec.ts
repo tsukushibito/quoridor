@@ -16,7 +16,7 @@ async function ready(page: Page) {
 async function unlock(page: Page) {
   await page.locator('#open-menu').click();
   await expect.poll(() => audio(page).then(value => value.status)).toBe('ready');
-  await expect.poll(() => audio(page).then(value => value.loaded.length)).toBe(6);
+  await expect.poll(() => audio(page).then(value => value.loaded.length)).toBe(7);
 }
 async function move(page: Page, id: number) {
   const point = await page.evaluate(cell => window.__QUORIDOR_APP_TEST_API__!.projectCell(cell), id);
@@ -33,7 +33,7 @@ test('first gesture unlocks actual decoded audio; volume and mute preserve indep
   expect((await audio(page)).counts.bgm).toBe(0);
   await unlock(page);
   expect((await audio(page)).counts.bgm).toBe(1);
-  expect((await audio(page)).bgmDuration).toBeCloseTo(95, 1);
+  expect((await audio(page)).bgmDuration).toBeCloseTo(130.194, 1);
   const before = (await audio(page)).counts.move;
   await page.locator('#sound-preview').click();
   expect((await audio(page)).counts.move).toBe(before + 1);
@@ -119,7 +119,7 @@ test('finishing a game emits one completion cue; restoring a finished game is si
   await page.locator('#close-menu').click();
   for (const cell of [13, 67, 22, 58, 31, 49, 40, 48, 49, 47, 58, 46, 67, 45, 76]) await move(page, cell);
   await expect.poll(() => state(page).then(value => value.phase)).toBe('finished');
-  expect((await audio(page)).counts.finish).toBe(1);
+  expect((await audio(page)).counts.win).toBe(1);
   const replay = await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.exportReplay());
   const counts = (await audio(page)).counts;
   await page.evaluate(save => window.__QUORIDOR_APP_TEST_API__!.restoreReplay(save, 'pvp', 0), replay);
@@ -150,14 +150,14 @@ test('hidden tab stops sources and resumes music position without duplicate loop
 
 test('asset HTTP/decode failure is recoverable and does not stop the game', async ({ page }) => {
   await page.route('**/assets/audio/pawn.wav', route => route.fulfill({ status: 404, body: '' }));
-  await page.route('**/assets/audio/mystical-piano.mp3', route => route.fulfill({ status: 200, body: 'invalid audio' }));
+  await page.route('**/assets/audio/cozy-puzzle.mp3', route => route.fulfill({ status: 200, body: 'invalid audio' }));
   await ready(page); await page.locator('#open-menu').click();
   await expect.poll(() => audio(page).then(value => value.pending)).toBe(0);
   expect((await audio(page)).failures.sort()).toEqual(['bgm', 'move']);
   await expect(page.locator('#sound-status')).toContainText('対局は続けられます');
   await page.locator('#close-menu').click(); await move(page, 13);
   expect((await state(page)).view?.ply).toBe(1);
-  await page.unroute('**/assets/audio/pawn.wav'); await page.unroute('**/assets/audio/mystical-piano.mp3');
+  await page.unroute('**/assets/audio/pawn.wav'); await page.unroute('**/assets/audio/cozy-puzzle.mp3');
   await page.locator('#open-menu').click(); await page.locator('#sound-retry').click();
   await expect.poll(() => audio(page).then(value => value.status)).toBe('ready');
   expect((await audio(page)).activeBgm).toBe(1);

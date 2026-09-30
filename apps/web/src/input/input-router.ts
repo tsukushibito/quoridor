@@ -101,7 +101,7 @@ export class InputRouter {
     const focused = document.activeElement;
     if (focused !== this.board.canvas && focused !== document.body) return;
     if (event.key === 'Escape') { this.clear(); return; }
-    if (event.key.toLowerCase() === 'r') { event.preventDefault(); this.toggleOrientation(); return; }
+    if (event.key.toLowerCase() === 'r') { if (this.active()) { event.preventDefault(); this.toggleOrientation(); } return; }
     const state = this.active(); if (!state?.view) return;
     if (event.key === 'Enter' || event.key === ' ') {
       if (this.selection) { event.preventDefault(); this.confirmSelection(); }

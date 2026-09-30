@@ -1,27 +1,31 @@
 # Sound assets
 
-Retrieved 2026-09-30. All six adopted sounds are CC0 1.0; no attribution is required.
-We retain credit in the application and provenance in `manifest.json`, including original
-and distributed SHA-256 hashes, byte sizes, download URLs, and conversion parameters.
+Retrieved 2026-09-30. All seven adopted sounds are CC0 1.0. Credit is retained in the
+application. `manifest.json` records source pages, actual download URLs, source/distributed
+SHA-256 hashes, sizes and processing parameters.
 
-| Distributed file | Original | Author/source |
+| Distributed file | Source | Author |
 | --- | --- | --- |
-| pawn.wav | impactWood_light_000.ogg | [Kenney Impact Sounds](https://kenney.nl/assets/impact-sounds) |
-| wall.wav | impactWood_medium_000.ogg | Kenney Impact Sounds |
-| click.wav | click_001.ogg | [Kenney Interface Sounds](https://kenney.nl/assets/interface-sounds) |
-| undo.wav | back_001.ogg | Kenney Interface Sounds |
-| finish.wav | confirmation_001.ogg | Kenney Interface Sounds |
-| mystical-piano.mp3 | Mystical Piano.Wav | [Indieteur / OpenGameArt](https://opengameart.org/content/mystical-piano) |
+| pawn.wav | impactWood_light_000.ogg / [Impact Sounds](https://kenney.nl/assets/impact-sounds) | Kenney |
+| wall.wav | impactWood_medium_000.ogg / Impact Sounds | Kenney |
+| click.wav | click_001.ogg / [Interface Sounds](https://kenney.nl/assets/interface-sounds) | Kenney |
+| undo.wav | back_001.ogg / Interface Sounds | Kenney |
+| win.wav | [Game Success Fanfare Short](https://freesound.org/people/el_boss/sounds/677858/) | el_boss |
+| lose.wav | [Game Fail Fanfare](https://freesound.org/people/el_boss/sounds/677855/) | el_boss |
+| cozy-puzzle.mp3 | [Cozy Puzzle In-Game 1](https://opengameart.org/content/cozy-puzzle-in-game-1) | MintoDog |
 
 License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/).
-The Kenney archive license notices are included in the adjacent `*-license.txt` files,
-with whitespace and line endings normalized; the license wording is unchanged.
-The OpenGameArt track page explicitly marks the recording CC0 and attribution optional.
+Kenney's archive notices are included in the adjacent `*-license.txt` files with normalized
+whitespace. The OpenGameArt and Freesound pages explicitly license the selected sounds CC0.
+The Freesound downloads use the public HQ MP3 previews of the approved recordings, rather
+than the login-only original WAV files. Their exact download URLs and hashes are recorded.
 
-The soft wooden impacts suit the timber board; the quiet instrumental piano suits a calm
-indoor setting. Only the selected clips ship. SE is mono 44.1 kHz PCM16 WAV for short,
-widely decodable one-shots. BGM is 128 kbps MP3, 1,520,996 bytes. The first 95 seconds
-follow the author's loop instructions. Conversion uses loudness normalization and tiny
-boundary fades; the denser finish cue is attenuated an additional 8 dB to match the impacts.
-The BGM loop is scheduled with a decoded Web Audio buffer, avoiding repeated HTTP fetches.
-No runtime hotlinking, third-party players, or subscriptions are involved.
+The BGM is a soft puzzle-game bossa nova with flute, saxophone and mallets. The author's
+entire loop is normalized to -20 LUFS / -3 dB true peak and encoded at 128 kbps / 44.1 kHz
+(2,084,071 bytes). Web Audio loops the decoded buffer's full duration, about 130.19 seconds;
+there is no fixed 95-second cutoff. Winning/losing notes retain their beginning, with tails
+shortened to 1.8/1.6 seconds and faded over the final 400 ms. SE uses mono PCM16 WAV / 44.1 kHz.
+
+Only the selected processed files ship, locally. No runtime hotlinks or third-party players
+are used. Numerical and browser signal verification is recorded in
+`docs/reports/presentation-implementation.md`; real-speaker listening is a separate human check.

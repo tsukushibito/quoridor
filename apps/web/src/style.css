@@ -128,3 +128,26 @@ button.accent:hover:not(:disabled),#new-game:hover:not(:disabled){background:#ec
  #confirm-selection{min-height:32px}
  #preview-text,.board-caption{font-size:9px}
 }
+
+/* Shared icon controls keep their touch area at every breakpoint. */
+.top-actions .icon-button{position:relative;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;min-width:44px;min-height:44px;padding:9px}
+.icon-tooltip{position:absolute;top:calc(100% + 10px);right:0;background:#10202a;color:#f6efdf;border:1px solid #78989f;border-radius:6px;padding:5px 8px;font-size:12px;white-space:nowrap;pointer-events:none;opacity:0;transform:translateY(-3px);transition:opacity .12s,transform .12s}
+.icon-button:hover .icon-tooltip,.icon-button:focus-visible .icon-tooltip{opacity:1;transform:none}
+.result-dialog{text-align:center;width:min(420px,calc(100vw - 24px));padding:28px}
+.result-dialog .result-eyebrow{margin:0 0 8px;color:#e2bf8d;font-size:12px;letter-spacing:.12em}
+.result-dialog h2{font-size:clamp(22px,4vw,28px);line-height:1.5}
+.result-dialog #result-total{font-size:16px;margin:18px 0 24px;font-variant-numeric:tabular-nums}
+.result-actions{display:grid;gap:10px}
+.result-actions button{min-height:48px;font-size:14px}
+.result-actions .quiet{background:transparent}
+.result-dialog::backdrop{background:#061018ad}
+#finished-actions{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.end-hud button{min-height:44px}
+.end-hud{padding:10px;max-height:40dvh;overflow:auto}
+.review-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+.review-heading strong{font-size:13px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.review-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.review-steps button{padding:9px 7px}
+#review-status{font-size:12px;color:#c7d7dc;max-width:360px;white-space:normal}
+@media(prefers-reduced-motion:reduce){.icon-tooltip{transition:none}}
+.reduced-motion .icon-tooltip{transition:none}

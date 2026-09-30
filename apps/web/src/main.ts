@@ -7,6 +7,9 @@ import { DEFAULT_SETTINGS, LocalStateRepository, makeSavedMatch, type LocalSetti
   type MatchOptions, type SavedMatch, validateMatchOptions } from './persistence/local-state';
 import { ENVIRONMENT_PRESETS, environmentPreset, isEnvironmentId } from './environment-presets';
 import { ja } from './ui/strings';
+import { ReviewController } from './session/review-controller';
+import { createResultReview } from './ui/result-review';
+import { setIconButton } from './ui/icons';
 import { createTitleHelp } from './ui/title-help';
 import { installAudioControls } from './audio/audio-controls';
 import './style.css';
@@ -122,6 +125,11 @@ matchButtons.className = 'dialog-actions';
 matchButtons.innerHTML = `<button id="dialog-cancel" type="button">${ja.cancel}</button><button id="dialog-start" class="accent" type="button">${ja.startMatch}</button>`;
 matchDialog.append(matchButtons);
 const surfaces = createTitleHelp(shell, menuDialog, topActions, `${import.meta.env.BASE_URL}assets/ui/quoridor-title-logo.png`);
+const ending = createResultReview(shell, layout);
+setIconButton(restart, 'restart', ja.restart);
+setIconButton(newGame, 'newGame', ja.newGame);
+setIconButton(openMenu, 'settings', ja.more);
+setIconButton(surfaces.helpButton, 'help', '遊び方');
 const startupDialog = surfaces.title;
 shell.append(menuDialog, matchDialog);
 faultGroup.remove();
@@ -191,6 +199,9 @@ async function bootstrap(): Promise<void> {
   let suppressMenuClose = false;
   let screen: 'title' | 'match' = 'title';
   let matchFramed = false;
+  let endScreen: 'result' | 'board' | 'review' = 'result';
+  let finishedTag = '';
+  const review = new ReviewController();
   const session = new SessionController();
   session.pause();
   const listeners = new AbortController();
@@ -226,7 +237,11 @@ async function bootstrap(): Promise<void> {
     } else setSaveMessage(outcome.status === 'quota' ? ja.storageQuota : ja.storageUnavailable);
   };
   const renderUi = (): void => {
-    const state = session.state, view = state.view;
+    const state = session.state;
+    const finished = state.phase === 'finished';
+    const reviewing = finished && endScreen === 'review';
+    const view = reviewing && review.state.view ? review.state.view : state.view;
+    if (!busy) audio.setMusicActive(screen === 'title' || !finished || reviewing, finished ? 0.6 : 0.025);
     diagnostics.workerReady = session.aiWorkerState.ready;
     diagnostics.workerGeneration = session.aiWorkerState.generation;
     diagnostics.rulesLoaded = view !== null;
@@ -235,12 +250,26 @@ async function bootstrap(): Promise<void> {
     shell.dataset.screen = screen;
     shell.classList.toggle('reduced-motion', settings.reducedMotion);
     ui.startupDialog.hidden = screen !== 'title';
-    statusIsland.hidden = footer.hidden = boardCaption.hidden = screen === 'title';
+    statusIsland.hidden = screen === 'title';
+    footer.hidden = boardCaption.hidden = screen === 'title' || finished;
+    modeGroup.hidden = ui.undo.hidden = finished;
+    ending.actions.hidden = screen !== 'match' || !finished || endScreen === 'result';
+    ending.finished.hidden = reviewing; ending.review.hidden = !reviewing;
+    ending.counter.textContent = `${ja.reviewing} ${review.state.ply} / ${state.view?.ply ?? 0}手`;
+    ending.status.hidden = !reviewing || !['loading', 'error'].includes(review.state.phase);
+    ending.status.textContent = review.state.phase === 'error' ? ja.reviewFailed : ja.reviewLoading;
+    ending.retry.hidden = review.state.phase !== 'error';
+    const reviewReady = reviewing && review.state.phase === 'ready' && !renderFault && !rulesFault && !busy;
+    ending.first.disabled = ending.prev.disabled = !reviewReady || review.state.ply === 0;
+    ending.next.disabled = ending.last.disabled = !reviewReady || review.state.ply === review.state.total;
+    ending.actions.querySelectorAll<HTMLButtonElement>('button').forEach(button => {
+      if (![ending.first, ending.prev, ending.next, ending.last].includes(button)) button.disabled = !!renderFault || !!rulesFault || busy;
+    });
     saveGroup.hidden = screen === 'title' && !view;
     ui.restart.hidden = ui.newGame.hidden = surfaces.helpButton.hidden = screen === 'title';
     surfaces.returnTitle.hidden = !view;
     ui.startupMessage.textContent = gameChoice === 'corrupt' || gameChoice === 'cleared' || gameRead.status === 'unavailable' || rulesFault || saveMessage === ja.restoreFailed
-      ? saveMessage : view ? '対局を中断しています。戻って続きを遊べます。' : savedCandidate ? '前の対局があります。続きを遊べます。' : '駒を進めて、反対側の端を目指しましょう。';
+      ? saveMessage : finished ? '対局は終了しています。結果や棋譜を確認できます。' : view ? '対局を中断しています。戻って続きを遊べます。' : savedCandidate ? '前の対局があります。続きを遊べます。' : '駒を進めて、反対側の端を目指しましょう。';
     ui.startupResume.hidden = !view && !savedCandidate;
     ui.startupNew.classList.toggle('accent', ui.startupResume.hidden);
     ui.startupResume.textContent = view ? '対局に戻る' : '続きから遊ぶ';
@@ -248,7 +277,7 @@ async function bootstrap(): Promise<void> {
     ui.heading.textContent = renderFault ? ja.renderStopped : rulesFault && !view ? ja.rulesStopped :
       gameChoice === 'pending' ? ja.resumePrompt : gameChoice === 'corrupt' && !view ? ja.saveCorrupt :
         gameChoice === 'cleared' && !view ? ja.startNew :
-        state.phase === 'booting' ? ja.loading : state.phase === 'recoverableError' ? (view ? ja.aiInterrupted : ja.error)
+        reviewing ? ja.reviewing : state.phase === 'booting' ? ja.loading : state.phase === 'recoverableError' ? (view ? ja.aiInterrupted : ja.error)
           : state.phase === 'aiThinking' ? ja.thinking : state.phase === 'animating' ? ja.animating :
             view?.winner !== null && view?.winner !== undefined ? `${view.winner === 0 ? ja.first : ja.second}${ja.winner}` :
               view ? `${view.turn === 0 ? ja.first : ja.second}${ja.turn}` : ja.loading;
@@ -312,8 +341,22 @@ async function bootstrap(): Promise<void> {
     ui.retryRules.hidden = !rulesFault;
     ui.reload.hidden = false;
     ui.backend.textContent = `${ja.diagnostics}: ${board?.backend.toUpperCase() ?? ja.preparing} · ${ja.giOff}`;
+    const showResult = screen === 'match' && finished && endScreen === 'result' && !renderFault && !rulesFault && !busy &&
+      !ui.matchDialog.open && !ui.menuDialog.open && !surfaces.help.open && !surfaces.restart.open;
+    if (showResult) { ending.setResult(state); if (!ending.dialog.open) ending.dialog.showModal(); }
+    else if (ending.dialog.open) ending.dialog.close();
   };
-  const onSession = (): void => { renderUi(); persistGame(); };
+  const onSession = (): void => {
+    const state = session.state;
+    const tag = state.phase === 'finished' ? `${state.gameEpoch}:${state.view?.winner}` : '';
+    if (tag && tag !== finishedTag) { finishedTag = tag; endScreen = 'result'; review.close(); }
+    renderUi(); persistGame();
+  };
+  review.subscribe(() => {
+    if (disposed) return;
+    if (endScreen === 'review' && review.state.view) board?.setView(review.state.view);
+    renderUi();
+  });
   session.subscribe(onSession);
 
   const animate = (transition: Transition): void => {
@@ -323,7 +366,8 @@ async function bootstrap(): Promise<void> {
       const state = session.state;
       if (disposed || state.phase !== 'animating' || state.gameEpoch !== transition.gameEpoch ||
         state.revision !== transition.revision) return;
-      audio.playPlacement(transition.actionId < 81 ? 'move' : 'wall', transition.after.winner !== null);
+      const outcome = transition.after.winner === null ? null : state.mode === 'pvp' || transition.after.winner === state.humanSide ? 'win' : 'lose';
+      audio.playPlacement(transition.actionId < 81 ? 'move' : 'wall', outcome);
       session.finish(transition.gameEpoch, transition.revision);
     });
   };
@@ -335,6 +379,7 @@ async function bootstrap(): Promise<void> {
     suppressMenuClose = true;
     matchFromStartup = false;
     matchStarted = false;
+    if (ending.dialog.open) ending.dialog.close();
     if (ui.matchDialog.open) ui.matchDialog.close();
     if (ui.menuDialog.open) ui.menuDialog.close();
     if (surfaces.help.open) surfaces.help.close();
@@ -378,7 +423,7 @@ async function bootstrap(): Promise<void> {
         (input?.mode === 'wall' ? ja.guideWall : ja.guideMove);
         ui.confirmTouch.hidden = !input?.needsConfirmation();
         ui.confirmTouch.disabled = !legal; }, renderUi);
-      if (session.state.view) board.setView(session.state.view);
+      if (session.state.view) board.setView(endScreen === 'review' && review.state.view ? review.state.view : session.state.view);
       diagnostics.backend = board.backend;
       diagnostics.phase = 'ready'; delete diagnostics.error;
       renderUi();
@@ -399,7 +444,7 @@ async function bootstrap(): Promise<void> {
     audio.cancelEffects();
     const currentOperation = ++operation;
     rulesStartRequested = true;
-    busy = true; suppressSave = true; renderUi();
+    busy = true; suppressSave = true; endScreen = 'result'; review.close(); renderUi();
     try {
       if (import.meta.env.VITE_PHASE1_E2E === '1' && !rulesStartupFaultInjected &&
         new URLSearchParams(location.search).get('testRulesStartupFailure') === '1') {
@@ -435,7 +480,7 @@ async function bootstrap(): Promise<void> {
   const restore = async (save: SavedMatch, focus = true): Promise<void> => {
     if (disposed || renderFault || !board) return;
     const currentOperation = ++operation;
-    busy = true; suppressSave = true; renderUi();
+    busy = true; suppressSave = true; endScreen = 'result'; review.close(); renderUi();
     try {
       const view = await session.restoreReplay(save.replay, save.match);
       if (disposed || currentOperation !== operation) return;
@@ -488,6 +533,7 @@ async function bootstrap(): Promise<void> {
   };
   const openMatchDialog = (fromStartup = false): void => {
     if (disposed || busy || !board || renderFault || ui.matchDialog.open) return;
+    if (ending.dialog.open) ending.dialog.close();
     suppressMatchClose = false;
     matchFromStartup = fromStartup;
     if (surfaces.help.open) surfaces.help.close();
@@ -508,21 +554,30 @@ async function bootstrap(): Promise<void> {
   }, { signal: listeners.signal });
   ui.retryEnvironment.addEventListener('click', () => { void board?.setEnvironment(settings.environmentId); },
     { signal: listeners.signal });
-  ui.undo.addEventListener('click', () => { if (renderFault || rulesFault || busy) return;
+  ui.undo.addEventListener('click', () => { if (renderFault || rulesFault || busy || session.state.phase === 'finished') return;
     const view = session.undo(); if (view) { syncBoard(view, true); audio.play('undo'); } }, { signal: listeners.signal });
   ui.newGame.addEventListener('click', () => openMatchDialog(), { signal: listeners.signal });
   const restartMatch = (): void => {
     const state = session.state;
     if (state.view) void startNewGame(validateMatchOptions({ mode: state.mode, humanSide: state.humanSide, simulations: state.simulations }));
   };
-  ui.restart.addEventListener('click', () => {
+  const requestRestart = (): void => {
     if (!session.state.view) return;
     if (session.state.view.ply === 0) restartMatch();
-    else { input?.clear(); surfaces.restart.showModal(); syncActivity(); renderUi(); }
-  }, { signal: listeners.signal });
+    else {
+      if (session.state.phase === 'finished') {
+        endScreen = 'result'; review.close();
+        if (session.state.view) board?.setView(session.state.view);
+      }
+      if (ending.dialog.open) ending.dialog.close();
+      input?.clear(); surfaces.restart.showModal(); syncActivity(); renderUi();
+    }
+  };
+  ui.restart.addEventListener('click', requestRestart, { signal: listeners.signal });
+  $<HTMLButtonElement>('#result-again').addEventListener('click', requestRestart, { signal: listeners.signal });
   $<HTMLButtonElement>('#restart-cancel').addEventListener('click', () => surfaces.restart.close(), { signal: listeners.signal });
   $<HTMLButtonElement>('#restart-confirm').addEventListener('click', () => { surfaces.restart.close(); restartMatch(); }, { signal: listeners.signal });
-  surfaces.restart.addEventListener('close', () => { syncActivity(); renderUi(); if (!renderFault) ui.restart.focus(); }, { signal: listeners.signal });
+  surfaces.restart.addEventListener('close', () => { syncActivity(); renderUi(); if (!renderFault && !ending.dialog.open) ui.restart.focus(); }, { signal: listeners.signal });
   let helpOrigin: HTMLElement = surfaces.helpButton;
   const openHelp = (origin: HTMLElement): void => {
     helpOrigin = origin; input?.clear(); surfaces.help.showModal(); surfaces.help.scrollTop = 0; syncActivity(); renderUi();
@@ -531,12 +586,52 @@ async function bootstrap(): Promise<void> {
   $<HTMLButtonElement>('#title-help').addEventListener('click', event => openHelp(event.currentTarget as HTMLElement), { signal: listeners.signal });
   for (const selector of ['#close-help', '#close-help-bottom']) $(selector).addEventListener('click', () => surfaces.help.close(), { signal: listeners.signal });
   surfaces.help.addEventListener('close', () => { syncActivity(); renderUi(); if (!renderFault && !rulesFault) helpOrigin.focus(); }, { signal: listeners.signal });
-  surfaces.returnTitle.addEventListener('click', () => {
-    screen = 'title'; input?.clear(); suppressMenuClose = true; ui.menuDialog.close(); syncActivity(); renderUi(); ui.startupResume.focus();
+  const returnTitle = (): void => {
+    const wasReviewing = endScreen === 'review';
+    screen = 'title'; endScreen = 'result'; review.close();
+    audio.cancelEffects(); if (wasReviewing && session.state.view) board?.setView(session.state.view);
+    if (ending.dialog.open) ending.dialog.close();
+    input?.clear(); suppressMenuClose = true; ui.menuDialog.close(); syncActivity(); renderUi(); ui.startupResume.focus();
     // Restart the one-shot logo entrance on each visit without hiding the menu.
     const logo = $<HTMLElement>('.title-logo'); logo.getAnimations().forEach(animation => animation.cancel());
     logo.style.animation = 'none'; void logo.offsetWidth; logo.style.animation = '';
+  };
+  surfaces.returnTitle.addEventListener('click', returnTitle, { signal: listeners.signal });
+  $<HTMLButtonElement>('#result-title').addEventListener('click', returnTitle, { signal: listeners.signal });
+  const showResult = (): void => {
+    endScreen = 'result'; review.close();
+    if (session.state.view) syncBoard(session.state.view, false);
+    renderUi();
+  };
+  const showFinishedBoard = (): void => {
+    endScreen = 'board'; if (ending.dialog.open) ending.dialog.close();
+    renderUi(); $<HTMLButtonElement>('#finished-result').focus();
+  };
+  const openReview = (): void => {
+    if (session.state.phase !== 'finished' || renderFault || busy) return;
+    endScreen = 'review'; audio.cancelEffects(); input?.clear();
+    if (ending.dialog.open) ending.dialog.close();
+    void review.open(session.exportReplay()).then(() => {
+      if (!disposed && endScreen === 'review' && review.state.phase === 'ready') ending.first.focus();
+    });
+    renderUi();
+  };
+  for (const id of ['result-review', 'finished-review']) $('#' + id).addEventListener('click', openReview, { signal: listeners.signal });
+  for (const id of ['finished-result', 'review-result']) $('#' + id).addEventListener('click', showResult, { signal: listeners.signal });
+  $<HTMLButtonElement>('#result-board').addEventListener('click', showFinishedBoard, { signal: listeners.signal });
+  ending.dialog.addEventListener('cancel', event => { event.preventDefault(); showFinishedBoard(); }, { signal: listeners.signal });
+  ending.dialog.addEventListener('keydown', event => {
+    if (event.key !== 'Tab') return;
+    const buttons = [...ending.dialog.querySelectorAll<HTMLButtonElement>('button:not(:disabled)')];
+    const target = event.shiftKey && document.activeElement === buttons[0] ? buttons.at(-1)
+      : !event.shiftKey && document.activeElement === buttons.at(-1) ? buttons[0] : null;
+    if (target) { event.preventDefault(); target.focus(); }
   }, { signal: listeners.signal });
+  ending.retry.addEventListener('click', openReview, { signal: listeners.signal });
+  ending.first.addEventListener('click', () => review.seek(0), { signal: listeners.signal });
+  ending.prev.addEventListener('click', () => review.seek(review.state.ply - 1), { signal: listeners.signal });
+  ending.next.addEventListener('click', () => review.seek(review.state.ply + 1), { signal: listeners.signal });
+  ending.last.addEventListener('click', () => review.seek(review.state.total), { signal: listeners.signal });
   ui.dialogStart.addEventListener('click', () => {
     try { void startNewGame(selectedMatch()); }
     catch { ui.dialogNote.textContent = ja.settingsInvalid; }
@@ -562,7 +657,7 @@ async function bootstrap(): Promise<void> {
     if (outcome.status !== 'ok') ui.dialogNote.textContent = ja.storageUnavailable;
   }, { signal: listeners.signal });
   ui.startupResume.addEventListener('click', () => {
-    if (session.state.view) { screen = 'match'; syncActivity(); renderUi(); board?.canvas.focus(); }
+    if (session.state.view) { screen = 'match'; endScreen = 'result'; syncActivity(); renderUi(); if (!ending.dialog.open) board?.canvas.focus(); }
     else if (savedCandidate) void restore(savedCandidate);
   }, { signal: listeners.signal });
   ui.resume.addEventListener('click', () => { if (savedCandidate) void restore(savedCandidate); }, { signal: listeners.signal });
@@ -594,11 +689,11 @@ async function bootstrap(): Promise<void> {
     else showStartup(); }, { signal: listeners.signal });
   ui.reload.addEventListener('click', () => location.reload(), { signal: listeners.signal });
   const dispose = (): void => { if (disposed) return; disposed = true; listeners.abort(); input?.dispose(); input = null;
-    session.dispose(); board?.dispose(); board = null; };
+    review.dispose(); session.dispose(); board?.dispose(); board = null; };
   window.addEventListener('pagehide', dispose, { once: true, signal: listeners.signal });
   if (import.meta.env.VITE_PHASE1_E2E === '1') {
     const support = await import('./test-support/app-test-api');
-    support.installAppTestApi({ session, audio, board: () => board, input: () => input, dispose,
+    support.installAppTestApi({ session, review, audio, board: () => board, input: () => input, dispose,
       restoreReplay: async (save, mode, humanSide) => {
         const match = { mode, humanSide, simulations: 96 } as MatchOptions;
         await restore(makeSavedMatch(validateReplayShape(save), match));

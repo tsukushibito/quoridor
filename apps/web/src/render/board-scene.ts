@@ -7,6 +7,9 @@ import { cellPoint, wallPoint, type Target } from './board-coordinates';
 export const GI_STATIC = 1;
 export const AO_GEOMETRY = 2;
 const TILE_TOP = 0.14;
+const WALL_CENTER_Y = 0.38;
+const WALL_INSERT_HEIGHT = 1.0;
+const MARKER_Y = 0.20;
 const TILE_THICKNESS = 0.16;
 const PAWN_FOOT_RADIUS = 0.29;
 const wallKey = (orientation: 'horizontal' | 'vertical', anchor: number): string => `${orientation}:${anchor}`;
@@ -28,8 +31,9 @@ export class BoardScene {
   readonly assets: TabletopAssets;
   private readonly hintGeometry = new THREE.TorusGeometry(0.27, 0.055, 8, 28);
   private readonly hintMaterial = new THREE.MeshBasicMaterial({ color: '#52d5bd' });
-  private readonly previewPawn = mark(new THREE.Mesh(new THREE.TorusGeometry(0.39, 0.065, 8, 32),
-    new THREE.MeshBasicMaterial({ color: '#54d5b5' })), 'preview', false);
+  private previewCell: number | null = null;
+  private readonly previewPawn = mark(new THREE.Mesh(this.hintGeometry,
+    new THREE.MeshBasicMaterial({ color: '#a1fce4' })), 'preview', false);
   private readonly previewWall = mark(new THREE.Mesh(this.wallGeometry,
     new THREE.MeshStandardMaterial({ color: '#54d5b5', transparent: true, opacity: 0.72, depthWrite: false })), 'preview', false);
 
@@ -126,7 +130,7 @@ export class BoardScene {
   private createWall(orientation: 'horizontal' | 'vertical', anchor: number, staticLayer: boolean): THREE.Mesh {
     const mesh = mark(new THREE.Mesh(this.wallGeometry, this.wallMaterial), 'wall', staticLayer);
     const point = wallPoint(anchor);
-    mesh.position.set(point.x, 0.38, point.z);
+    mesh.position.set(point.x, WALL_CENTER_Y, point.z);
     mesh.rotation.y = orientation === 'horizontal' ? 0 : Math.PI / 2;
     mesh.castShadow = true; mesh.receiveShadow = true;
     this.scene.add(mesh);
@@ -141,7 +145,8 @@ export class BoardScene {
         needed.add(key);
         if (!this.walls.has(key)) this.walls.set(key, this.createWall(orientation, anchor, key !== deferredWall));
         const mesh = this.walls.get(key)!;
-        mesh.scale.y = key === deferredWall ? 0.04 : 1;
+        mesh.scale.y = 1;
+        mesh.position.y = WALL_CENTER_Y + (key === deferredWall ? WALL_INSERT_HEIGHT : 0);
         if (key === deferredWall) mesh.layers.disable(GI_STATIC); else mesh.layers.enable(GI_STATIC);
       }
     }
@@ -149,11 +154,11 @@ export class BoardScene {
   }
   animateWall(orientation: 'horizontal' | 'vertical', anchor: number, progress: number): void {
     const mesh = this.walls.get(wallKey(orientation, anchor));
-    if (mesh) mesh.scale.y = Math.max(0.04, progress);
+    if (mesh) mesh.position.y = WALL_CENTER_Y + WALL_INSERT_HEIGHT * (1 - progress) ** 3;
   }
   finalizeWall(orientation: 'horizontal' | 'vertical', anchor: number): void {
     const mesh = this.walls.get(wallKey(orientation, anchor));
-    if (mesh) { mesh.scale.y = 1; mesh.layers.enable(GI_STATIC); }
+    if (mesh) { mesh.position.y = WALL_CENTER_Y; mesh.scale.y = 1; mesh.layers.enable(GI_STATIC); }
   }
   setHints(view: GameView | null, show: boolean): void {
     this.hints.clear();
@@ -161,17 +166,20 @@ export class BoardScene {
     for (let cell = 0; cell < 81; cell++) if (view.legalMask[cell] === 1) {
       const hint = mark(new THREE.Mesh(this.hintGeometry, this.hintMaterial), 'hint', false);
       const point = cellPoint(cell);
-      hint.position.set(point.x, 0.17, point.z); hint.rotation.x = -Math.PI / 2;
+      hint.position.set(point.x, MARKER_Y, point.z); hint.rotation.x = -Math.PI / 2;
+      hint.userData.cell = cell; hint.visible = cell !== this.previewCell;
       this.hints.add(hint);
     }
   }
   setPreview(target: Target | null, legal: boolean): void {
     this.previewPawn.visible = false; this.previewWall.visible = false;
+    this.previewCell = target?.kind === 'pawn' && legal ? target.id : null;
+    this.hints.children.forEach(hint => { hint.visible = hint.userData.cell !== this.previewCell; });
     if (!target) return;
-    const color = legal ? '#54d5b5' : '#e88472';
+    const color = legal ? '#a1fce4' : '#e88472';
     if (target.kind === 'pawn') {
       const point = cellPoint(target.id);
-      this.previewPawn.position.set(point.x, 0.19, point.z);
+      this.previewPawn.position.set(point.x, MARKER_Y, point.z);
       (this.previewPawn.material as THREE.MeshBasicMaterial).color.set(color);
       this.previewPawn.visible = true;
     } else {

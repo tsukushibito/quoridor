@@ -1,7 +1,7 @@
 import { validateAudioSettings, type AudioSettings } from './audio-settings';
 
 const FILES = { move: 'pawn.wav', wall: 'wall.wav', click: 'click.wav', undo: 'undo.wav',
-  finish: 'finish.wav', bgm: 'mystical-piano.mp3' } as const;
+  win: 'win.wav', lose: 'lose.wav', bgm: 'cozy-puzzle.mp3' } as const;
 export type SoundCue = Exclude<keyof typeof FILES, 'bgm'>;
 type Asset = keyof typeof FILES;
 export type AudioStatus = 'waiting' | 'loading' | 'ready' | 'blocked' | 'unavailable' | 'failed' | 'disposed';
@@ -19,6 +19,7 @@ export class AudioController {
   private sources = new Set<AudioBufferSourceNode>();
   private bgm: AudioBufferSourceNode | null = null;
   private fadingBgm = new Set<AudioBufferSourceNode>();
+  private musicActive = true;
   private bgmOffset = 0;
   private bgmStartedAt = 0;
   private hidden = false;
@@ -28,8 +29,8 @@ export class AudioController {
   private unlocking: Promise<void> | null = null;
   private resumeTimer: ReturnType<typeof setTimeout> | null = null;
   private cancelResume: (() => void) | null = null;
-  private envelopes = new Map<GainNode, { start: number; from: number; to: number }>();
-  private counts: Record<Asset, number> = { move: 0, wall: 0, click: 0, undo: 0, finish: 0, bgm: 0 };
+  private envelopes = new Map<GainNode, { start: number; from: number; to: number; duration: number }>();
+  private counts: Record<Asset, number> = { move: 0, wall: 0, click: 0, undo: 0, win: 0, lose: 0, bgm: 0 };
   private listeners = new Set<() => void>();
   constructor(settings: AudioSettings, private readonly base: string,
     private readonly createContext: () => AudioContext = () => new AudioContext()) {
@@ -96,7 +97,7 @@ export class AudioController {
     const settings = this.settingsValue;
     if (settings.muted) return;
     if (settings.sfxEnabled && settings.sfxVolume > 0)
-      for (const cue of ['move', 'wall', 'click', 'undo', 'finish'] as const) void this.load(cue);
+      for (const cue of ['move', 'wall', 'click', 'undo', 'win', 'lose'] as const) void this.load(cue);
     if (settings.bgmEnabled && settings.bgmVolume > 0) void this.load('bgm');
   }
   private async load(asset: Asset): Promise<void> {
@@ -129,31 +130,31 @@ export class AudioController {
     const resume = this.unlock();
     this.loadEnabled(); return resume;
   }
-  private ramp(node: GainNode | null, value: number): void {
+  private ramp(node: GainNode | null, value: number, duration = 0.025): void {
     if (!node || !this.context) return;
     const now = this.context.currentTime;
     const envelope = this.envelopes.get(node);
     if (envelope?.to === value) return;
     const current = this.level(node);
     node.gain.cancelScheduledValues(now); node.gain.setValueAtTime(current, now);
-    node.gain.linearRampToValueAtTime(value, now + 0.025);
-    this.envelopes.set(node, { start: now, from: current, to: value });
+    node.gain.linearRampToValueAtTime(value, now + duration);
+    this.envelopes.set(node, { start: now, from: current, to: value, duration });
   }
   private level(node: GainNode | null): number {
     if (!node || !this.context) return 0;
     const envelope = this.envelopes.get(node);
     if (!envelope) return 0;
-    const fraction = Math.min(1, Math.max(0, (this.context.currentTime - envelope.start) / 0.025));
+    const fraction = Math.min(1, Math.max(0, (this.context.currentTime - envelope.start) / envelope.duration));
     return envelope.from + (envelope.to - envelope.from) * fraction;
   }
-  private sync(): void {
+  private sync(bgmFade = 0.025): void {
     if (this.disposed) return;
     const settings = this.settingsValue;
     const audible = !settings.muted && !this.hidden && !this.blocked && this.context?.state === 'running';
     this.ramp(this.sfxGain, audible && settings.sfxEnabled ? settings.sfxVolume / 100 : 0);
-    this.ramp(this.bgmGain, audible && settings.bgmEnabled ? settings.bgmVolume / 100 : 0);
+    this.ramp(this.bgmGain, audible && this.musicActive && settings.bgmEnabled ? settings.bgmVolume / 100 : 0, bgmFade);
     if (!audible || !settings.sfxEnabled || settings.sfxVolume === 0) this.stopEffects();
-    if (!audible || !settings.bgmEnabled || settings.bgmVolume === 0) this.pauseBgm();
+    if (!audible || !this.musicActive || !settings.bgmEnabled || settings.bgmVolume === 0) this.pauseBgm(bgmFade);
     else this.startBgm();
   }
   private startBgm(): void {
@@ -161,18 +162,18 @@ export class AudioController {
     if (this.bgm || !buffer || !this.context || !this.bgmGain) return;
     this.stopFadingBgm();
     const source = this.context.createBufferSource(); source.buffer = buffer;
-    source.loop = true; source.loopStart = 0; source.loopEnd = Math.min(95, buffer.duration);
+    source.loop = true; source.loopStart = 0; source.loopEnd = buffer.duration;
     source.connect(this.bgmGain);
     this.bgmOffset %= source.loopEnd; this.bgmStartedAt = this.context.currentTime;
     source.onended = () => { this.fadingBgm.delete(source); source.disconnect(); };
     source.start(0, this.bgmOffset); this.bgm = source; this.counts.bgm++;
   }
-  private pauseBgm(): void {
+  private pauseBgm(fade = 0.025): void {
     const immediate = this.disposed || this.hidden || this.context?.state !== 'running';
     if (immediate) this.stopFadingBgm();
     if (!this.bgm || !this.context) return;
     this.bgmOffset = (this.bgmOffset + this.context.currentTime - this.bgmStartedAt) % this.bgm.loopEnd;
-    this.bgm.stop(this.context.currentTime + (immediate ? 0 : 0.025));
+    this.bgm.stop(this.context.currentTime + (immediate ? 0 : fade));
     if (immediate) this.bgm.disconnect(); else this.fadingBgm.add(this.bgm);
     this.bgm = null;
   }
@@ -180,9 +181,16 @@ export class AudioController {
     for (const source of this.fadingBgm) { source.stop(); source.disconnect(); }
     this.fadingBgm.clear();
   }
-  playPlacement(cue: 'move' | 'wall', finished: boolean): void {
+  setMusicActive(active: boolean, fade = 0.025): void {
+    if (this.musicActive === active || this.disposed) return;
+    this.musicActive = active; this.sync(fade); this.notify();
+  }
+  playPlacement(cue: 'move' | 'wall', outcome: 'win' | 'lose' | null): void {
     this.play(cue);
-    if (finished) this.play('finish', this.buffers.get(cue)?.duration ?? 0);
+    if (outcome) {
+      this.setMusicActive(false, 0.6);
+      this.play(outcome, Math.max(0.6, this.buffers.get(cue)?.duration ?? 0));
+    }
   }
   private startEffect(cue: SoundCue, delay: number): void {
     const settings = this.settingsValue;
@@ -214,6 +222,7 @@ export class AudioController {
       loaded: [...this.buffers.keys()], failures: [...this.failures], pending: this.pending.size,
       activeBgm: this.bgm ? 1 : 0, activeEffects: this.sources.size, counts: { ...this.counts },
       bgmPosition: this.bgmOffset + (this.bgm && this.context ? this.context.currentTime - this.bgmStartedAt : 0),
+      musicActive: this.musicActive, fadingBgm: this.fadingBgm.size,
       bgmDuration: this.buffers.get('bgm')?.duration ?? null, hidden: this.hidden,
       sfxLevel: this.level(this.sfxGain), bgmLevel: this.level(this.bgmGain) };
   }

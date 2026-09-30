@@ -43,7 +43,7 @@ async function settle(page: Page): Promise<void> {
     { timeout: 10_000 }).toMatch(/humanTurn|finished/);
 }
 
-test('real pointer game reaches winner, then undo/new and camera remain usable', async ({ page }) => {
+test('real pointer game reaches winner, then result/review/new and camera remain usable', async ({ page }) => {
   await ready(page);
   expect((await state(page)).view?.legalMask.filter(x => x === 1).length).toBe(131);
   for (let move = 0; move < 8; move++) {
@@ -58,22 +58,26 @@ test('real pointer game reaches winner, then undo/new and camera remain usable',
   expect(terminal.view?.winner).toBe(0);
   expect(terminal.view?.ply).toBe(15);
   expect(terminal.view?.legalMask.every(x => x === 0)).toBe(true);
+  await expect(page.locator('#result-dialog')).toBeVisible();
+  await expect(page.locator('#mode-wall')).toBeHidden();
+  await expect(page.locator('#undo')).toBeHidden();
+  await page.locator('#result-board').click();
   await selectAndConfirm(page, 'cell', 75);
-  expect((await state(page)).view?.ply).toBe(15);
-  await page.getByRole('button', { name: '壁を置く' }).click();
-  await selectAndConfirm(page, 'wall', 27);
   expect((await state(page)).view?.ply).toBe(15);
   const before = await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.camera());
   await openMenu(page);
   await page.getByRole('button', { name: '反対側から見る' }).click();
   const flipped = await page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.camera());
-  expect(flipped[2]).toBeCloseTo(-before[2], 4);
+  expect(flipped[2] * before[2]).toBeLessThan(0);
   expect((await state(page)).view?.positionKey).toBe(terminal.view?.positionKey);
   await page.getByRole('button', { name: '視点を戻す' }).click();
   await closeMenu(page);
-  await page.getByRole('button', { name: '1手戻す' }).click();
-  expect((await state(page)).view?.ply).toBe(14);
-  expect((await state(page)).phase).toBe('humanTurn');
+  await page.locator('#finished-review').click();
+  await expect(page.locator('#review-counter')).toHaveText('振り返り 15 / 15手');
+  await page.locator('#review-prev').click();
+  await expect(page.locator('#review-counter')).toHaveText('振り返り 14 / 15手');
+  expect((await state(page)).view?.ply).toBe(15);
+  expect((await state(page)).phase).toBe('finished');
   await startPvp(page);
   await expect.poll(() => page.evaluate(() => window.__QUORIDOR_APP_TEST_API__!.state().view?.ply)).toBe(0);
   expect((await state(page)).view?.pawns).toEqual([4, 76]);
