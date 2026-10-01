@@ -11,3 +11,9 @@
 - Keep design specifications and verification evidence in their existing documents; link them from issues instead of maintaining duplicate task lists.
 - Respect an explicit user pause. An issue becoming ready or a late agent notification does not by itself authorize resuming paused work.
 - Until Beads installation and shared storage are verified, report that setup is incomplete; do not claim tasks were registered or automatically resume work paused for that setup.
+
+## AI research team
+
+- When the user invokes the AI research team, follow [the team design](docs/design/ai-research-team.md) and the common and role instructions in `.agents/research-team/`.
+- The five roles use independent saved sessions on the existing App Server. Research follows competing hypotheses and experiments; it is not a fixed sequential implementation pipeline.
+- Role instructions alone do not authorize research execution or recursive delegation. Each task needs its Beads issue, scope, worktree/write owner, resource budget, and verification contract. Team setup does not resume deferred AI implementation or start training.

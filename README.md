@@ -4,6 +4,10 @@
 
 実写の室内HDRIを背景と材質の環境光・反射に使い、木製テーブルの上に木製盤を置いた空間を表示します。生成木目、面取り、塗膜、GTAOによる接触部の遮蔽を組み合わせています。IBLに、HDRIの主光源方向から計算したDirectionalLightと影を加えています。採用アセットの出所・ライセンス・生成プロンプトと検証結果は[テーブル空間の描画強化報告](docs/reports/tabletop-rendering.md)に記録します。
 
+今後のAIはPVネットワーク + MCTS + 終盤ソルバを目指します。実装研究はClaustrophobiaとSigmaQuoridorを中心に進めます。最初の棋力目標は、同じ計算資源・思考時間でのSigmaQuoridor同等水準です。Ka・gorisanson・Titanium・Claustrophobia・Ishtar / Zero-Inkは参考比較とします。参照優先度と比較条件の正本は[AI設計・目標](docs/design/quoridor-3d-webapp-design-rust-wasm-v1.md#89-参考aiの優先度と役割)に記載しています。
+
+AI開発は、性能・対戦評価基盤、Rustルール・探索コアの高速化、PV推論統合、自己対局生成全体の高速化、小規模生成・学習検証、大量生成の順に進めます。大量自己対局の前にビット演算・BFS・バッファ再利用を改善し、PV統合後に並列対局・バッチ推論・評価キャッシュを調整します。一定の探索品質での有効対局数・学習局面数/時間を指標とし、詳細は[AIの作業順序](docs/design/quoridor-3d-webapp-design-rust-wasm-v1.md#810-自己対局データ生成前の高速化と作業順序)を参照してください。
+
 ## ローカルで起動
 
 既存のDev Containerまたは同等のRust環境で、プロジェクトのルートから実行します。Rustはstable、`wasm32-unknown-unknown` target、rustfmt、clippy、wasm-packを使用します。固定のRust版は指定しません。
