@@ -58,7 +58,7 @@ App Serverから現在の状態を読み、idleなら `turn/start`、activeな�
 
 ## 用意するものと操作
 
-`scripts/dev/research-team.sh` は既存App Serverへの単発クライアント。接続先を `codex app-server daemon version` から取得する。サーバーの起動・再起動、通知サービス、配送キュー、定期LLMポーリングは追加しない。既存Lead/Sidekickと同じUnix WebSocket経路を使う。この研究チームはLead/Sidekick Skillの自動起動を意味せず、そのSkillの再帰委譲禁止やモデルprofileを研究チームへ自動適用しない。
+`scripts/dev/research-team.sh` は既存App Serverへの単発クライアント。接続先を `codex app-server daemon version` から取得する。サーバーの起動・再起動、通知サービス、配送キューは追加しない。明示的な運用契約を持つ定期点検には、別の単一プロセスを使う。[スケジューラーの設定・運用手順](../development/research-scheduler.md)を参照する。スケジューラーの用意だけで監督セッションや定期運用を開始しない。既存Lead/Sidekickと同じUnix WebSocket経路を使う。この研究チームはLead/Sidekick Skillの自動起動を意味せず、そのSkillの再帰委譲禁止やモデルprofileを研究チームへ自動適用しない。
 
 依存は `tools/research-team/pyproject.toml` と `uv.lock` に保持する。uv cacheと専用Python環境は既存inference-cacheへ置き、学習環境を変更しない。初回クライアント実行はlockfileから復元する。`QUORIDOR_RESEARCH_TEAM_ENV` に学習環境と同じパス（symlinkを含む）を指定すると起動を拒否する。通常の `uv run --locked` は専用環境を同期するため、依存準備済みの環境で読み取りのみの契約を実行する場合は `UV_NO_SYNC=1 UV_OFFLINE=1 PYTHONDONTWRITEBYTECODE=1` を付ける。
 
