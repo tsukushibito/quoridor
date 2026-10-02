@@ -2,8 +2,15 @@
 async function runSameInputBudget(config, fixtures) {
   const errors = [];
   let started = 0;
+  async function timedRequirement(task) {
+    let timer;
+    const timeout = new Promise((resolve,reject)=>{timer=setTimeout(()=>{browserAbort({code:'REQUIREMENT_TIMEOUT',scope:'infra/owned recovery, not chess loss'});reject(Error('REQUIREMENT_TIMEOUT'));},config.requirement_timeout_ms);pendingTimers.add(timer);});
+    try { return await Promise.race([task(),timeout]); }
+    finally {clearTimeout(timer);pendingTimers.delete(timer);}
+  }
   for (const planned of config.requirements) {
     try {
+      await timedRequirement(async()=>{
       await settlePlayerSearches();
       const fixture = fixtures.find(row => row.id === planned.fixture_id);
       if (!fixture) throw Error('INPUT_MISSING');
@@ -26,6 +33,7 @@ async function runSameInputBudget(config, fixtures) {
       } : null;
       row.root_sample_selected = planned.phase === 'steady' && planned.engine_repetition === 1;
       if (!matching && row.response.body.completed) throw Error('ADOPTED_CP_STATS_BINDING');
+      });
     } catch (error) {
       errors.push({planned, name:error.name, message:error.message, stack:error.stack});
       break;
