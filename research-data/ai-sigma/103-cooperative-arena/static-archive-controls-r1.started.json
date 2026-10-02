@@ -1,0 +1,58 @@
+{
+  "subreaper_set_rc": 0,
+  "subreaper_get_rc": 0,
+  "subreaper_value": 1,
+  "kernel_boundary": {
+    "valid": true,
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+    "launcher": {
+      "pid": 2072253,
+      "ppid": 2009,
+      "pgid": 2072253,
+      "start_ticks": 16888325,
+      "state": "R",
+      "rss": 17858560,
+      "utime_ticks": 1,
+      "stime_ticks": 1
+    },
+    "root": {
+      "pid": 2072266,
+      "ppid": 2072253,
+      "pgid": 2072266,
+      "start_ticks": 16888334,
+      "state": "R",
+      "rss": 7200768,
+      "utime_ticks": 0,
+      "stime_ticks": 0
+    },
+    "initial_children": [],
+    "spawn_count": 1,
+    "single_thread_initial": true,
+    "sole_explicit_root": true
+  },
+  "runner_pid": 2072253,
+  "runner_starttick": 16888325,
+  "child_pid": 2072266,
+  "child_starttick": 16888334,
+  "PGID": 2072266,
+  "startUTC": "2026-10-02T04:39:32.148092+00:00",
+  "git_commit": null,
+  "run_id": null,
+  "command": [
+    "python3",
+    "-B",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-cooperative-arena/archive-controls.py"
+  ],
+  "cwd": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-cooperative-arena",
+  "deadline": 1790916032.1602333,
+  "affinity": [
+    0
+  ],
+  "guardRSS": 939524096,
+  "contractRAM": 1073741824,
+  "guard_basis": "current_proc_rss_runner_plus_owned_children",
+  "runner_initial_ru_maxrss": 607244288,
+  "guardStorage": 58720256,
+  "temp": "/proc/2072253/cwd/t",
+  "temp_realpath": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261002/COOPERATIVE-ARENA/t"
+}

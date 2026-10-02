@@ -1,0 +1,16 @@
+--- failed-archive-controls-r1.py
++++ archive-controls.py
+@@ -1,10 +1,11 @@
+ """Archive necessary run controls and failed-check logs, then verify every file."""
+-import json,hashlib,tarfile
++import json,hashlib,tarfile,os
+ from pathlib import Path
+ ROOT=Path(__file__).resolve().parents[2]
+ OUT=ROOT/'.artifacts/ai-sigma/resume-20261002/COOPERATIVE-ARENA'
+ DATA=ROOT/'research-data/ai-sigma/103-cooperative-arena'
+-files=sorted(p for p in OUT.iterdir() if p.is_file())
++active_job=os.environ.get('SIGMA_DUMMY_RUN_ID','')
++files=sorted(p for p in OUT.iterdir() if p.is_file() and not (active_job and p.name.startswith(active_job+'.')))
+ manifest={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in files}
+ archive=DATA/'run-controls.tar.gz'
+ assert not archive.exists()

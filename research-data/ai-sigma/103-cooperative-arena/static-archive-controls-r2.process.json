@@ -1,0 +1,91 @@
+{
+  "name": "static-archive-controls-r2",
+  "cmd": [
+    "python3",
+    "-B",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-cooperative-arena/archive-controls.py"
+  ],
+  "start": "2026-10-02T04:40:28.817013+00:00",
+  "end": "2026-10-02T04:40:28.914087+00:00",
+  "subreaper_set_rc": 0,
+  "subreaper_get_rc": 0,
+  "subreaper_value": 1,
+  "kernel_boundary": {
+    "valid": true,
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+    "launcher": {
+      "pid": 2073247,
+      "ppid": 2009,
+      "pgid": 2073247,
+      "start_ticks": 16893997,
+      "state": "R",
+      "rss": 17997824,
+      "utime_ticks": 2,
+      "stime_ticks": 1
+    },
+    "root": {
+      "pid": 2073250,
+      "ppid": 2073247,
+      "pgid": 2073250,
+      "start_ticks": 16894003,
+      "state": "R",
+      "rss": 7458816,
+      "utime_ticks": 0,
+      "stime_ticks": 0
+    },
+    "initial_children": [],
+    "spawn_count": 1,
+    "single_thread_initial": true,
+    "sole_explicit_root": true
+  },
+  "runner_pid": 2073247,
+  "runner_starttick": 16893997,
+  "child_pid": 2073250,
+  "child_starttick": 16894003,
+  "exit": 0,
+  "stop_reason": null,
+  "sample_interval_ms": 40,
+  "peak_group_plus_runner_RSS": 35860480,
+  "peak_allocated_bytes": 14041088,
+  "final_allocated_bytes": 14061568,
+  "tracked": [
+    {
+      "pid": 2073250,
+      "ppid": 2073247,
+      "pgid": 2073250,
+      "start_ticks": 16894003,
+      "state": "R",
+      "rss": 9314304,
+      "utime_ticks": 4,
+      "stime_ticks": 0,
+      "maxrss": 17698816,
+      "affinities": [
+        [
+          0
+        ]
+      ],
+      "TID_samples": 4,
+      "last_ppid": 2073247,
+      "last_state": "R"
+    }
+  ],
+  "remaining": [],
+  "kernel_identity_count": 1,
+  "kernel_adoptions": [],
+  "ledger_registered_count": 0,
+  "ledger_rejected": {},
+  "ledger_monitor_remaining_consistent": true,
+  "unknown_adopted": [],
+  "privateTMP_alias": "/proc/2073247/cwd/t",
+  "privateTMP_realpath": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261002/COOPERATIVE-ARENA/t",
+  "assigned_CPU": 0,
+  "process_deadline": "05:03:09Z",
+  "newjob_cutoff": "04:58:09Z",
+  "guardRSS": 939524096,
+  "contractRAM": 1073741824,
+  "guard_basis": "current_proc_rss_runner_plus_owned_children",
+  "runner_ru_maxrss_bytes": 607244288,
+  "all_observed_TIDs_at_assigned_CPU": true,
+  "instant_peak_not_guaranteed": true,
+  "runner_sha256": "2667e1a0d4dd2ae1c7e755151f9feced977c8c3fdec7514a9fbca5986ca61db5"
+}
