@@ -11,3 +11,5 @@
 優先順は実GPU可否→数値・同入出力費用→実completed評価への影響。重大な性能主張は停止最小版から必要な独立確認へ渡す。GPU環境が不成立なら不足と最小追加条件を引継ぎ、残りの許可CPU研究・比較計画を別条件で進める。初期化・配分・受付は成功実測ではない。
 
 担当開始ACK: experiment115は10:24:17UTC保守受領、全文/固定版依存差分・ready/show/pause/担当確認後本人claim。処理11:24:17/新run11:19:17/提出11:34:17、実GPU/VRAM/Chromium compute preflightへ着手。hostRTX3060/VRAM1496MiB/compute app空は観測でありモデルGPU実行成功ではない。steward92も10:24:22UTCに契約4/枠8全文・両mirror/本人所有確認後受領開始をBeadsに保存。新終了責任を同92ownerが受領し、実running/loadedは提出証拠を待つ。
+
+比較計画は116として既criticへ10:32:10.685UTC公式turn/start accepted、exact turn01a0fc2b-e6b6-7f70-83aa-75d5b07f3b6eで実配分した。CPU/GPU双方条件、採用/残処理/待ちの区別と正式精度・標本数・最悪時間を結果前に設計する軽い課題で、GPU実測の新gateではない。CPU0/RAM512guard448MiB/新4guard3MiB既critic予約内、NN/Chrome/GPU/対局/source改変0。GPU不成立時にも残りの許可研究の具体的次案を選べるようにする。
