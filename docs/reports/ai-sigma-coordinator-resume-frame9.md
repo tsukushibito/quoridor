@@ -11,3 +11,7 @@
 23:10:59新重job開始停止、23:15:59監督owned+scheduler停止、23:18:59monitor回収、23:20:59証拠保存を同92 ownerが所有。今回の準備受理や起動を未来8時間成功へ読み替えず、次枠自動延長0。GPU115のsoftware adapter/physical driver経路不足は保持し、同条件だけのsoftware測定再反復や共有host/container変更を起動しない。GPU計画は継続し、物理経路を実測できる外的条件変化があれば必要な範囲で配分する。CPU研究はGPU不足を前提条件にしない。
 
 節目の独立監督評価→統括採否/実際の配分→後続効果確認を既運用で継承する。今回の問い変更を役割文書/issue件数で成功としない。129の実評価が選定判断を変えたか・必要費用に見合うかを次停止版で追う。root128へは本人開始と92実running loadedの必要参照だけ短く返す。
+
+本人開始は129の15:28:42UTC claim、92の15:28:07UTCまでの受領/開始で確認した。129は処理16:13:42/新run16:08:42/提出16:28:42の早側期限を適用し、結果を統括へ返す。92はfresh start15:33:01.151317UTC、scheduler2608533/start20809272・monitor2608547/start20809293同bootの実running。統括も現在identity、24期待入力hash不一致0、実stateのloaded config/contract一致をread-only照合した（.artifacts/ai-sigma/resume-20261002/coordinator-frame9-start-check.json）。起動後のsource編集/signal/restart0。root128はroot-acceptance.jsonで独立起動受入れ済みと通知し、通常研究の追加確認は不要とした。
+
+初回監督097d62b6の見解は採用する。wall-protectedは全合法passの負対照であり棋力差への情報を持たず、root-only対照は強い予算差の診断で小改修感度の保証ではない。129の通常8とstress4を混ぜず、全正常passならこの狭い尺度の反復を止め、次の深部/戦略案の選定へ移る。現在契約と分岐で実施できるため件数/資源/条件変更は不要。採用手と認証集合、候補のみ/両側の失着、実費用を129停止版で判断し、次の通常監督で効果を追う。初回App Server turnの15:35:59.274596 completedは運用完了記録であり、未来8時間/研究成功/旧interruptedや未配送を補完しない。92長期所有・129実担当の結果待ちを維持する。
