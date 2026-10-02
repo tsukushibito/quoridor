@@ -75,7 +75,7 @@ async function main() {
     game_unstarted:pairing?planned-(gameResult?.started_games??0):0,
     startup_NN:startup?.startup_NN??0,hand_NN:rows.reduce((n,row)=>n+row.hand_NN,0)+(gameResult?.deep_results??[]).reduce((n,row)=>n+row.NN_calls,0),
     public_classifications:rows.reduce((counts,row)=>(counts[row.response.classification]=(counts[row.response.classification]??0)+1,counts),{}),
-    primary,secondary,count_failures:gameResult?.errors??[],started_search_requests:gameResult?.started??0,browser_judgement:true,per_CP_Node_binding_calls:0,Node_per_hand_clock_calls:0};
+    primary,secondary,count_failures:gameResult?.errors??[],started_search_requests:(gameResult?.started_parity??0)+(gameResult?.started_primary??0),browser_judgement:true,per_CP_Node_binding_calls:0,Node_per_hand_clock_calls:0};
   save('summary',summary);console.log(JSON.stringify(summary));
   if(primary||secondary.length||gameResult?.errors?.length)process.exitCode=1;
 }

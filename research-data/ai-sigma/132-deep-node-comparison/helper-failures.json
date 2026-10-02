@@ -10,5 +10,13 @@
     "error": "same package reused baseline artifact in shared private target; trace hash identical to immutable",
     "before_NN": true,
     "fixed": "distinct private CARGO_TARGET_DIR per variant, old build-results retained"
+  },
+  {
+    "stage": "post-run generic summary mapping",
+    "error": "started_search_requests defaulted0 because generic started field absent",
+    "scientific_raw_preserved": true,
+    "actual_started_parity": 4,
+    "actual_started_primary": 8,
+    "fix": "derive started from explicit phase counts; static syntax only, no successful row rerun"
   }
 ]
