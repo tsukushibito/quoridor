@@ -1,0 +1,34 @@
+{
+  "setup_errors": [
+    {
+      "phase": "schema inventory",
+      "exception": "KeyError rows; actual schema mean_results",
+      "NN": 0,
+      "not_scientific_negative": true
+    }
+  ],
+  "checker_run_failures": [
+    {
+      "run": "check-r1",
+      "exception": "IndexError interim CP tree empty; retain log/hashbefore; recover edge state from complete selection/visit ledger, final priors",
+      "scientific_negative": false
+    }
+  ],
+  "checker_format_corrections": [
+    {
+      "run": "check-r2",
+      "failed_checks": 7,
+      "cause": "difflib patch header named paths but stored headers blank; content/current hashes unchanged",
+      "scientific_negative": false
+    },
+    {
+      "run": "check-r3",
+      "failed_checks": 0
+    },
+    {
+      "run": "check-r4",
+      "failed_checks": 0,
+      "added": "saved startup/session/model and CP finish convention"
+    }
+  ]
+}
