@@ -9,7 +9,7 @@ const CP = require('child_process');
 
 async function main() {
   const config = JSON.parse(fs.readFileSync(process.argv[2]));
-  const out = A.OUT + '/preflight-r1';
+  const out = A.OUT + '/preflight-r2';
   fs.mkdirSync(out, {recursive:false});
   const save = (name, value) => fs.writeFileSync(out+'/'+name+'.json', JSON.stringify(value)+'\n');
   const append = (name, value) => fs.appendFileSync(out+'/'+name+'.jsonl', JSON.stringify(value)+'\n');
@@ -43,7 +43,7 @@ async function main() {
   assert(dropped);
   const rows=fs.readFileSync(out+'/turns.jsonl','utf8').trim().split('\n').map(JSON.parse);
   for(let i=1;i<rows.length;i++) assert(rows[i].t0_ms>=rows[i-1].stop_ACK_ms);
-  const fault=await G.runGame({prefix:[],candidateColor:1,platform:'browser',choose:async engine=>({engine,accepted:false,error:'NO_COMPLETED_SNAPSHOT',action:null})});
+  const fault=await G.runGame({prefix:[],candidateColor:1,platform:'browser',clock:A.clock.now,choose:async engine=>({engine,accepted:false,error:'NO_COMPLETED_SNAPSHOT',action:null})});
   assert.equal(fault.kind,'engine_loss');
   assert.equal(fault.responsible_engine,'candidate');
   const owner=new OwnedProcesses({tracePath:out+'/guardian.jsonl'});
