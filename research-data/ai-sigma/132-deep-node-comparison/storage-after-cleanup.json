@@ -1,0 +1,30 @@
+{
+  "UTC": "2026-10-02T16:37:05.516599+00:00",
+  "removed_self_targets_only": [
+    {
+      "path": ".artifacts/ai-sigma/resume-20261002/DEEP-NODE-COMPARISON/build/target",
+      "allocated_bytes": 20213760,
+      "reason": "self unused offline build target, preserved binaries/command/source after runtime stop and Git restore"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261002/DEEP-NODE-COMPARISON/build/target-baseline",
+      "allocated_bytes": 20213760,
+      "reason": "self unused offline build target, preserved binaries/command/source after runtime stop and Git restore"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261002/DEEP-NODE-COMPARISON/build/target-trace",
+      "allocated_bytes": 20320256,
+      "reason": "self unused offline build target, preserved binaries/command/source after runtime stop and Git restore"
+    }
+  ],
+  "binary_paths_retained": [
+    "build/baseline.wasm",
+    "build/trace.wasm"
+  ],
+  "archive_git_stream_restore_members": 64,
+  "runtime_allocated_bytes": 9863168,
+  "data_allocated_bytes": 1044480,
+  "source_allocated_bytes": 249856,
+  "shared_Git_current_increment_not_byte_attributed": true,
+  "parent_reservation_additional": 0
+}

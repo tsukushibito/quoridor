@@ -31,6 +31,8 @@
 
 2専用Worker/モデルsessionを保持し、各count要求を両旧zero後に孤立実行した。通常実gameの相手t0旧ACK非前提を変更していない。browser内で入力/合法性/数値/比較を生成し、Nodeは起動/外資源監視/障害回収/終了後保存のみ、毎手Node timer/referee/CP binding0。API await/wholewrapperは純NN/kernelCPUではない。prepare内部・stop費の細分span、途中clock drift/exactAtomicstore/背景CPU/終了子CPU完全計上は欠測で、start/end Workerclockを別保存した。
 
-本文前停止正本 runtime-source-stopped-before-report.json SHA e6bf3699666645cb4f66c4d0bf234b2e8dd4a2ecc300c333cdefde49d204d9e8。Model2/search handles/activeNN0、main timer-message0、monitor全callback wait、inner forced controlled回収/outer sole-root-subreeper ownedwait/remainingunknown0を分離保存。141 PID/starttick identity現在不在を自然終了/全期間遵守に読み替えない。build20.977456秒、browser25.258924秒、puremock .152618秒、current RSS観測peak1,601,388,544B、guard停止0。build CPU[0]1logical/jobs1、Chrome CPU[2]1logical/ORT各1threadを直列実行した。ru_maxrss/継承highwaterとcurrent RSSは別。瞬間peak/全host無負荷は保証しない。
+本文前停止正本 runtime-source-stopped-before-report.json SHA e6bf3699666645cb4f66c4d0bf234b2e8dd4a2ecc300c333cdefde49d204d9e8。Model2/search handles/activeNN0、main timer-message0、monitor全callback wait、inner forced controlled回収/outer sole-root-subreaper ownedwait/remainingunknown0を分離保存。141 PID/starttick identity現在不在を自然終了/全期間遵守に読み替えない。build20.977456秒、browser25.258924秒、puremock .152618秒、current RSS観測peak1,601,388,544B、guard停止0。build CPU[0]1logical/jobs1、Chrome CPU[2]1logical/ORT各1threadを直列実行した。ru_maxrss/継承highwaterとcurrent RSSは別。瞬間peak/全host無負荷は保証しない。
 
 必要raw/失敗/停止/2binaryをall-attempts.tar.gzへ保存し64member stream復元SHA一致。archive-manifest.jsonが復元先と各memberを示す。モデル/共有依存/full targetは複製しない。現在自己保持量70,590,464Bは保存448MiB guard内、非build runのstorage観測は未使用build targetを除くため全現在量と区別した。保存/復元後に自域未使用targetだけ整理可能で、読み手の必要binary/rawは保持する。統括へ停止版を渡し、独立確認と有限受入れは後続判断に残す。
+
+Gitblob復元後、自己専用の未使用target3個だけを停止identity再照合後に整理した。2binary/raw/元共有物は保持し、整理後の実量はstorage-after-cleanup.jsonへ記録した。
