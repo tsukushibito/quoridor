@@ -1,0 +1,709 @@
+{
+  "UTC": "2026-10-01T13:59:44.667307+00:00",
+  "issue": "quoridor-4lc.56",
+  "verdict": "limited_finite_ownership_supported",
+  "fixed5_once_NN": true,
+  "responses": [
+    {
+      "i": 0,
+      "engine": "candidate",
+      "accepted": true,
+      "action": 13,
+      "elapsed_ms": 448.7768189907074,
+      "NN_calls": 9,
+      "root_value_f32bits": "18855b3e",
+      "owned_cp_exact": true,
+      "root_prior_sum": 1.0000023393658921,
+      "postvalidation_stamp": true
+    },
+    {
+      "i": 1,
+      "engine": "reference",
+      "accepted": true,
+      "action": 13,
+      "elapsed_ms": 430.456003010273,
+      "NN_calls": 13,
+      "root_value_f32bits": "18855b3e",
+      "owned_cp_exact": false,
+      "root_prior_sum": null,
+      "postvalidation_stamp": true
+    },
+    {
+      "i": 2,
+      "type": "deadline_rejected",
+      "elapsed_ms": 18.35579800605774,
+      "overshoot_ms": 8.35579800605774,
+      "NN_calls": null,
+      "missing_NN_not_zero": true,
+      "published_action": null
+    },
+    {
+      "i": 3,
+      "engine": "candidate",
+      "accepted": true,
+      "action": 13,
+      "elapsed_ms": 438.1436250060797,
+      "NN_calls": 9,
+      "root_value_f32bits": "18855b3e",
+      "owned_cp_exact": true,
+      "root_prior_sum": 1.0000023393658921,
+      "postvalidation_stamp": true
+    },
+    {
+      "i": 4,
+      "engine": "reference",
+      "accepted": true,
+      "action": 13,
+      "elapsed_ms": 457.0483359992504,
+      "NN_calls": 13,
+      "root_value_f32bits": "18855b3e",
+      "owned_cp_exact": false,
+      "root_prior_sum": null,
+      "postvalidation_stamp": true
+    }
+  ],
+  "numeric": {
+    "feature_f32bits": 2592,
+    "NN_elements": 548,
+    "NN_max_abs": 2.384185791015625e-06,
+    "candidate_prior_elements": 262,
+    "candidate_prior_max_abs_to_fixed_softmax": 1.594364312795804e-06,
+    "mixed_gate": "abs <= 1e-4 + 1e-4 abs(ref)",
+    "root_value_f32bit_equal": true
+  },
+  "first_final_cleanup": [
+    {
+      "session": 1,
+      "cleanup_success_UTC": "2026-10-01T13:54:16.754Z",
+      "forced": true,
+      "absent_all_tracked_at_success": true,
+      "drain_ms": 2.76199699999961,
+      "absence_observation_ms": 2.812041000001045,
+      "tracked_count": 31
+    },
+    {
+      "session": 2,
+      "cleanup_success_UTC": "2026-10-01T13:54:24.740Z",
+      "forced": true,
+      "absent_all_tracked_at_success": true,
+      "drain_ms": 1.424776000003476,
+      "absence_observation_ms": 5.811388999998599,
+      "tracked_count": 42
+    }
+  ],
+  "kernel_adoptions": [
+    {
+      "kind": "kernel_adopted_direct_child",
+      "observed": {
+        "pid": 1250697,
+        "ppid": 1250582,
+        "pgid": 1250696,
+        "start_ticks": 11574990,
+        "state": "R",
+        "rss": 901120
+      },
+      "launcher_identity": {
+        "pid": 1250582,
+        "ppid": 1250580,
+        "pgid": 1250582,
+        "start_ticks": 11574659,
+        "state": "R",
+        "rss": 17526784
+      },
+      "sole_jobroot_identity": {
+        "pid": 1250583,
+        "ppid": 1250582,
+        "pgid": 1250583,
+        "start_ticks": 11574662,
+        "state": "R",
+        "rss": 21123072
+      },
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "monotonic": 115749.908957727
+    },
+    {
+      "kind": "kernel_adopted_direct_child",
+      "observed": {
+        "pid": 1250699,
+        "ppid": 1250582,
+        "pgid": 1250698,
+        "start_ticks": 11574991,
+        "state": "S",
+        "rss": 3280896
+      },
+      "launcher_identity": {
+        "pid": 1250582,
+        "ppid": 1250580,
+        "pgid": 1250582,
+        "start_ticks": 11574659,
+        "state": "R",
+        "rss": 17526784
+      },
+      "sole_jobroot_identity": {
+        "pid": 1250583,
+        "ppid": 1250582,
+        "pgid": 1250583,
+        "start_ticks": 11574662,
+        "state": "R",
+        "rss": 21123072
+      },
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "monotonic": 115749.942598685
+    },
+    {
+      "kind": "kernel_adopted_direct_child",
+      "observed": {
+        "pid": 1250914,
+        "ppid": 1250582,
+        "pgid": 1250913,
+        "start_ticks": 11575997,
+        "state": "S",
+        "rss": 2793472
+      },
+      "launcher_identity": {
+        "pid": 1250582,
+        "ppid": 1250580,
+        "pgid": 1250582,
+        "start_ticks": 11574659,
+        "state": "R",
+        "rss": 17526784
+      },
+      "sole_jobroot_identity": {
+        "pid": 1250583,
+        "ppid": 1250582,
+        "pgid": 1250583,
+        "start_ticks": 11574662,
+        "state": "R",
+        "rss": 21123072
+      },
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "monotonic": 115759.98932829
+    }
+  ],
+  "same_identity_wait": [
+    [
+      1250697,
+      11574990
+    ],
+    [
+      1250699,
+      11574991
+    ],
+    [
+      1250702,
+      11574993
+    ],
+    [
+      1250703,
+      11574994
+    ],
+    [
+      1250724,
+      11575018
+    ],
+    [
+      1250741,
+      11575029
+    ],
+    [
+      1250914,
+      11575997
+    ],
+    [
+      1250916,
+      11575998
+    ],
+    [
+      1250925,
+      11576001
+    ],
+    [
+      1250926,
+      11576001
+    ],
+    [
+      1250971,
+      11576041
+    ]
+  ],
+  "same_identity_waitid_WNOWAIT": [
+    [
+      1250697,
+      11574990
+    ],
+    [
+      1250699,
+      11574991
+    ],
+    [
+      1250702,
+      11574993
+    ],
+    [
+      1250703,
+      11574994
+    ],
+    [
+      1250724,
+      11575018
+    ],
+    [
+      1250741,
+      11575029
+    ],
+    [
+      1250914,
+      11575997
+    ],
+    [
+      1250916,
+      11575998
+    ],
+    [
+      1250925,
+      11576001
+    ],
+    [
+      1250926,
+      11576001
+    ],
+    [
+      1250971,
+      11576041
+    ]
+  ],
+  "root_Popen_exit": 0,
+  "finite_dummy_gate": {
+    "at": "2026-10-01T13:52:14.660914+00:00",
+    "verdict": "dummy_gate_pass",
+    "kernel_adoptions": [
+      [
+        1246533,
+        11550213
+      ],
+      [
+        1246534,
+        11550213
+      ]
+    ],
+    "adopted_wait_same_id": [
+      [
+        1246533,
+        11550213
+      ],
+      [
+        1246534,
+        11550213
+      ]
+    ],
+    "waitid_WNOWAIT_same_id": [
+      [
+        1246533,
+        11550213
+      ],
+      [
+        1246534,
+        11550213
+      ]
+    ],
+    "TERM_KILL_leaf_identity": {
+      "pid": 1246534,
+      "ppid": 1246524,
+      "pgid": 1246533,
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "starttick": 11550213
+    },
+    "forced_vs_natural_distinguished": true,
+    "external_foreign_PID": 1246523,
+    "external_not_signalled_adopted_waited": true,
+    "external_own_wait": {
+      "UTC": "2026-10-01T13:50:00.423595+00:00",
+      "PID": 1246523,
+      "exit_code": -15,
+      "wait_returned": true,
+      "externally_managed": true,
+      "tested_launcher_signal_wait": 0
+    },
+    "boundary_invalid_expected_exit": 143,
+    "boundary_receipt_fresh_forbidden": true,
+    "policy_gates": {
+      "tests": [
+        "sole root bootstrap",
+        "direct kernel adoption without polled ancestor",
+        "same PID wrong starttick no wait",
+        "second spawn invalidates/fresh forbidden",
+        "fake external parent edge refused"
+      ],
+      "events": [
+        {
+          "kind": "kernel_boundary_initial",
+          "launcher": {
+            "pid": 40000,
+            "start_ticks": 100,
+            "ppid": 0
+          },
+          "boot_id": "unitboot",
+          "initial_children": [],
+          "single_thread": true
+        },
+        {
+          "kind": "kernel_boundary_root_bound",
+          "proof": {
+            "valid": true,
+            "boot_id": "unitboot",
+            "launcher": {
+              "pid": 40000,
+              "start_ticks": 100,
+              "ppid": 0
+            },
+            "root": {
+              "pid": 40001,
+              "start_ticks": 101,
+              "ppid": 40000
+            },
+            "initial_children": [],
+            "spawn_count": 1,
+            "single_thread_initial": true,
+            "sole_explicit_root": true
+          },
+          "root": {
+            "pid": 40001,
+            "start_ticks": 101,
+            "ppid": 40000
+          }
+        },
+        {
+          "kind": "kernel_adoption_owned",
+          "origin": {
+            "kind": "kernel_adopted_direct_child",
+            "observed": {
+              "pid": 40002,
+              "start_ticks": 102,
+              "ppid": 40000,
+              "state": "Z",
+              "pgid": 50000
+            },
+            "launcher_identity": {
+              "pid": 40000,
+              "start_ticks": 100,
+              "ppid": 0
+            },
+            "sole_jobroot_identity": {
+              "pid": 40001,
+              "start_ticks": 101,
+              "ppid": 40000
+            },
+            "boot_id": "unitboot",
+            "monotonic": 115553.354879465
+          }
+        },
+        {
+          "kind": "launcher_spawn_refused",
+          "audit_event": "subprocess.Popen",
+          "spawn_count": 1
+        },
+        {
+          "kind": "registration_refused",
+          "record": {
+            "boot_id": "unitboot",
+            "root": {
+              "pid": 40001,
+              "starttick": 101
+            },
+            "identity": {
+              "pid": 40003,
+              "starttick": 104,
+              "ppid": 40001
+            },
+            "parent": {
+              "pid": 40001,
+              "starttick": 101
+            },
+            "UTC": "unit"
+          },
+          "reason": "PARENT_EDGE_NOT_PROVED"
+        }
+      ],
+      "signal_calls": 0,
+      "reap_calls": 0,
+      "NN": 0
+    },
+    "core_source_samebytes": [
+      "kernel_boundary.py",
+      "owned_ledger.py",
+      "owned-ledger.cjs",
+      "cleanup.cjs",
+      "kernel-dummy-child.py",
+      "golden-gates.cjs",
+      "run-golden.cjs",
+      "game.js",
+      "worker.js",
+      "candidate-worker.js",
+      "reference-worker.js",
+      "checkpoint.js",
+      "delivery.cjs",
+      "transaction.cjs",
+      "host.js"
+    ],
+    "numeric_NN_not_executed_yet": true,
+    "clock_game_gate": false,
+    "node_negative_stdout": "invalid receipt/fresh forbidden\n"
+  },
+  "input_copy_helper_failure": {
+    "at": "2026-10-01T13:54:03.900667+00:00",
+    "cause": "prepare.py conditional expression copied frozen input to relative main-worktree path instead of owned path",
+    "outside_scope_path": "/workspaces/quoridor/.worktree/ai-sigma/frozen-backend-input.json",
+    "sha256": "3c72d671bda228b57dc1dec3813208e31f0578c6143851feba416f0aa46ef7f7",
+    "corrected_owned_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/frozen-backend-input.json",
+    "outside_file_moved_preserving_bytes": true,
+    "original_immutable_input_unchanged": true,
+    "first_attempt_before_token_generation": true,
+    "first_attempt_exit": 1,
+    "first_attempt_NN_browser_spawn": 0,
+    "NN_retries": 0,
+    "helper_corrections_used": 1,
+    "new_unique_runtime_namespace": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once",
+    "same_fixed_jobname_180_limit_preserved": true,
+    "failure_is_not_relabelled_success": true,
+    "whole_scope_compliance": false
+  },
+  "resources": {
+    "runner_peak_RSS": 1657208832,
+    "outer_peak_RSS": 2238115840,
+    "all_runtime_observed_TIDs_CPU2": true,
+    "sample_ms": 20,
+    "instant_short_lifetime_peaks_unproven": true,
+    "initial_static_reads_PID_RSS_missing": true,
+    "static_preparation_CPU0_deviation": true
+  },
+  "global_no_go": {
+    "clock_gate": false,
+    "entry_ready": false,
+    "actual_go": false,
+    "old49_g287_gt91_and_split62plus82_retained": true,
+    "old51_negative_not_rescued": true,
+    "games": 0,
+    "holdout_sends": 0
+  },
+  "limitations": [
+    "trusted childless single-thread launcher with one root, no untrusted ctypes/ptrace/namespace safety proof",
+    "T10 overshoot kept and NN count missing, no clock-tail guarantee",
+    "old dummy callback failure/birth starttick gaps/forced dependence remain",
+    "initial own input-copy outside write scope corrected; all-scope compliance false",
+    "all initial resource monitoring/deep real NN revisit/true legal200/nolegal/rawview entropy/model distribution provenance unverified",
+    ".55 corrected stored unique path count49, earlier51 wording unsupported; full/OS timing independent support unchanged"
+  ],
+  "immutable_input_current_checks": {
+    "unique_count": 1105,
+    "reference_rows": 1102,
+    "changed": []
+  },
+  "runtime_stop": {
+    "at": "2026-10-01T14:01:10.465883+00:00",
+    "observed_own_identity_count": 72,
+    "remaining": [],
+    "writer63_current_remaining": [],
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "storage": {
+    "unique_allocated": 4386816,
+    "logical": 3539790,
+    "combined_continuation_critic_allocated": 10362880,
+    "new_guard": 58720256,
+    "combined_guard": 117440512
+  },
+  "final_self_sourcehashes": [
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/run-golden.cjs",
+      "sha256": "f299c9e1531f796dc69a7851649e93485d192e11438499929e672b259cdd44e9"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/entry-gate.cjs",
+      "sha256": "8625ab5f55019e958f8cbe84ea3034dbb7cb804acaf26063cb8639cfbe616e49"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/cleanup.cjs",
+      "sha256": "5447032ffa50109b5b0c24411eb3ed5e14bb9536c84c7cc6cfdc73fac5ffe32d"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/kernel-policy-gates.py",
+      "sha256": "a85c3c7b2435ccf56738a1128a127cf9f73323a1b229a6a3b3ece9b27980785d"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/entry-real-main-gate.cjs",
+      "sha256": "472082fe1bc899192e63054f73d510f823c487859dd88e3f5a0e4f4674d44a70"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/delivery.cjs",
+      "sha256": "dd94dbf2205779bb717433b2137982b14061fb93ee610f067677dd1ad39e3242"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/dummy-child.py",
+      "sha256": "3f7aa48658319457c23365bbff64261c8e2ab6338f625f67b755128ae438617e"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/pipe.cjs",
+      "sha256": "33444bddcfb8fae9e73f895f56582c5ed1af149cda5c8aa352e47a12c870502a"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/game.js",
+      "sha256": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/candidate-worker.js",
+      "sha256": "d84b967485a953c574c3f0e2667145ef4ea21a65f55ab0793dcdedf315c54fc8"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/reference-worker.js",
+      "sha256": "0faec2f42d3a3364effa2ed725c34169ea3c8f79e6c5305f09e238850faa0106"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/mock-gates.cjs",
+      "sha256": "c1137be1df132fb995c585b357163491e8404da1063d2ffb82c9b7420ad9d461"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/pause-check.cjs",
+      "sha256": "5e091fae9712ef98a5d8c20ebc7a8cddba47928e3a26442f93968d3a2f404a49"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/checkpoint.js",
+      "sha256": "50d29bb855da3846953125b37dcc895f8e47ced80686cb34e4c515bdcba05e20"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/arena.cjs",
+      "sha256": "cc6bd58c5692d3fcee77b63a6f865986c43eeb83c181a26b436f519ce15eea75"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/arena-integration.cjs",
+      "sha256": "2f393cbf1ac001b4591b4549c514de836e6edf5044835f3eb77a365793aa0024"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/fault-gates.cjs",
+      "sha256": "879ad2e0851c88524681dd58c92029beb0597d936d7b16859f9e069d288b6018"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/match-entry.cjs",
+      "sha256": "7fe957ad608d024b2337d0cf3c9c858eff191522eb6c47dcb51cf2bffbf6c9db"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/golden-gates.cjs",
+      "sha256": "fc7056cfec5fc41c31eb62194efc8159ef894295e96ae85273ddcba06dcfa0ad"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/game-loop.cjs",
+      "sha256": "6e9f50403338d1935cf43103842740ee479f0c38d31c97fde853ba99fac2c64a"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/owned_ledger.py",
+      "sha256": "8a6b52c664e0602dfee6f0a969be26d990df114c3c5ccc43c2d4d6e5560a6036"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/delivery-gate.cjs",
+      "sha256": "5e9dfad2f65da060581da8a5cd8128d3c621d438aab43a6874ba2b2aab3b9550"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/arena-mock.cjs",
+      "sha256": "73ab04ab6b51e89839460ea23cb03cb92f76b0a105bed6bd04514b173a1a821a"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/runner.py",
+      "sha256": "ba6237ed562e8e75c6f73de4bbb6a260a1c20409760980d81fa20ec9c19cd091"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/real-golden.cjs",
+      "sha256": "0194576bdb78fa7846f1ef910e0496c7569ed4dd3dd22d2f09bfecb84058da75"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/kernel_boundary.py",
+      "sha256": "afa63b0b113bdb8f5f112a871e8f183d33b9d493e5e08cce098faa4ecfd5dd21"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/transaction.cjs",
+      "sha256": "1b32c3ab195c84f5147a404563cad1576f08987112d8789f06379caa7aa62afd"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/ledger-gates.py",
+      "sha256": "d1f013478b7365c80a3b6bafa8c0d3259382a44d864f114333d29f9fd3a7e070"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/preregister.cjs",
+      "sha256": "a06ee73eea59d662368993f49ef9119811aa67a05db7927237b92480de0de78f"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/mock.cjs",
+      "sha256": "ea3525b13cbbabd0390058e8288704f25790459c748c5ef3e35312440b50b22c"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/arena-delivery.cjs",
+      "sha256": "59e321ebd6d7ca7263c51aad5f48859f783423c4bec00aee487de33ddbc6d5c7"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/kernel-dummy-child.py",
+      "sha256": "3ca55e1009c543c3e469e0faabec265e590ab15232c3470ea3e8391029bb17f1"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/arena-page.js",
+      "sha256": "0fdd8ac6f326341111d36441e137c301680169a05a58f29669a70f85c0641d8a"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/verify.py",
+      "sha256": "052fdcf65312f7a69c4c4d1a6ae96426dba317a31614d2ded485053b878000b5"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/judge.cjs",
+      "sha256": "a43bed42482ae21a3620449df37b08596bc9fabef31936b27d6c95254fdc7577"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/dummy-gates.cjs",
+      "sha256": "3e18c911ae8651409e7e224b0e8edd7b4de8a154878f6ef24f71735d7d1a9c7b"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/entry-real-smoke.cjs",
+      "sha256": "f637c8037a78be86199c55c1104fd017572774ad2ddcf2789092feab612fea47"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/kernel-dummy.cjs",
+      "sha256": "dfea9e95f01922c9add0363eff567eebf213e30a6a84ff58be5186e149d8dafe"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/context.js",
+      "sha256": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/browser.cjs",
+      "sha256": "cbbaf766b1c64c2c609e079c92000589e6750946ee96e627b9217d21cd976070"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/worker.js",
+      "sha256": "c245c9c0aaaea06e1b595fa0e670ef81e6f34a7e873106a3982ae8aba1e719c8"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/token-helper.cjs",
+      "sha256": "c7818eb2150fd35cb2ba687fc8894756ce236cf975cc8b2a2da0effe18f1209d"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/cleanup-mock-gate.cjs",
+      "sha256": "2a0423d03019e405f20ae65680c523c4ea117ab3ffe0785d8071888e52f8dee2"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/external-dummy-driver.py",
+      "sha256": "e6c67ed6b1c2df9f7dc918ae6ce17aa0e42dbbc1b7247982b3824d678c5544d5"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/final-gate.cjs",
+      "sha256": "214f735ae3586a3cdd9487d601cbe4eb7228353024952d05465d4a9f05dd580a"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/README.md",
+      "sha256": "1f7c13a98258e07ac583a76b24dfbb034a6c606c76535117324b49b723c2a229"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/host.js",
+      "sha256": "6272fd4ed64faea8d7b4b671ac3d9d01703b7676ecb7b3c5a45d3100addb098c"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/helper-correction-once/copy/owned-ledger.cjs",
+      "sha256": "b375c3389139fd918a26c87f6d967978284a23c5cdae6cac7171e09ceabe0035"
+    }
+  ]
+}

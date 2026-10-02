@@ -1,0 +1,271 @@
+{
+  "experiment_id": "SIGMA-MODEL-ACQUIRE",
+  "trial": 1,
+  "contract_version": 1,
+  "goal_issue": "quoridor-4lc",
+  "child_issue": "quoridor-4lc.9",
+  "owner_thread": "01a0f31d-99ee-7d63-b162-bc1a59c457c6",
+  "worktree": "/workspaces/quoridor/.worktree/ai-sigma",
+  "base_head": "1482df8da6dd91c95db211aeaa914af775b2bc76",
+  "branch": "codex/ai-sigma",
+  "deadline": {
+    "first_observed_utc": "2026-09-30T19:31:29Z",
+    "conservative_start_basis": "issue creation is no later than dispatch/turn",
+    "conservative_start_utc": "2026-09-30T19:26:15Z",
+    "processing_deadline_utc": "2026-09-30T19:44:15Z",
+    "handoff_deadline_utc": "2026-09-30T19:51:15Z",
+    "overall_deadline_utc": "2026-10-01T01:17:58.145139Z"
+  },
+  "recorded_utc": "2026-09-30T19:44:01.707949+00:00",
+  "reference_commit": "751186344fc52ad0c29bc65922e62c6fa915f006",
+  "expected": {
+    "bytes": 11663428,
+    "git_blob_sha1": "f23802a83dc9054b5227da74b3771698854535f0"
+  },
+  "acquisition": {
+    "attempt": 1,
+    "pid": 660293,
+    "started_utc": "2026-09-30T19:39:36.546207+00:00",
+    "url": "https://raw.githubusercontent.com/bartolomeo3000/SigmaQuoridor/751186344fc52ad0c29bc65922e62c6fa915f006/docs/models_9x9/best.onnx",
+    "bytes": 11663428,
+    "final_url": "https://raw.githubusercontent.com/bartolomeo3000/SigmaQuoridor/751186344fc52ad0c29bc65922e62c6fa915f006/docs/models_9x9/best.onnx",
+    "status": 200,
+    "headers": {
+      "Content-Length": "11663428",
+      "Content-Type": "application/octet-stream",
+      "ETag": "\"b323d0d66aad1cacc52aad480b7a2993afaced6f67bb1be3cfcf4b0f7aec4208\"",
+      "Last-Modified": null
+    },
+    "sha256": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+    "file_sha1": "c0e48cde8595c3ccb141e4335e04cf149d183b1c",
+    "git_blob_sha1": "f23802a83dc9054b5227da74b3771698854535f0",
+    "size_match": true,
+    "blob_match": true,
+    "outcome": "verified_acquisition",
+    "local_path": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/ai-sigma/reference/sigma-pcr250/best.onnx",
+    "ended_utc": "2026-09-30T19:39:38.256653+00:00",
+    "exit_code": 0,
+    "affinity": [
+      0
+    ],
+    "maxrss_kib": 44084,
+    "user_cpu_s": 0.10851,
+    "system_cpu_s": 0.10851,
+    "rlimit_as_bytes": 1073741824
+  },
+  "license": {
+    "root_license": "MIT",
+    "copyright": "2026 Bartosz Pokora",
+    "notice_source": ".artifacts/ai-sigma/reference-fixtures/SIGMA-PARITY-PLAN/sources/LICENSE",
+    "notice_source_sha256": "b5e277822da3c9eb54eb04e9ee3c4f93bfeb769c829d5d0f70c99835a2f6733d",
+    "preserved_notice": "models/experiments/ai-sigma/reference/sigma-pcr250/LICENSE.upstream",
+    "research_acquisition": "Authorized by goal and child contract",
+    "model_specific_applicability": "Unresolved; root repository notice is not blanket model redistribution clearance",
+    "third_party_pretrained_weight_absence": "Not established by this static acquisition",
+    "product_redistribution": "Outside this contract"
+  },
+  "source_lineage": {
+    "declared": "PCR cycle250, forked from scratch at160",
+    "evidence": "Fixed export source comments and stored commit history; no PT fetched or numerical correspondence tested"
+  },
+  "input_sha256": {
+    "docs/design/ai-sigma-contract-steward-model.md": "7d75de06e0b2bd9a7b2e95a237291b852bce708ac24feed8640a5a8bbde37572",
+    "docs/design/ai-sigma-research-goal.md": "4b0fee4e7b7c9f2de07a6baf0c2fd5f649718511e419366af9464471d4524b7d",
+    "docs/reports/ai-sigma-hypothesis-parity.md": "3f2a7ccce82552bca670b3e518fda84953f15421623504ceef9d34a9d6143460",
+    "docs/reports/ai-sigma-critic-profile-parity.md": "0a3fe219707369414f09cf1d2ef4be6b0937a97d2866d2959591316b80c48837",
+    "tools/training/uv.lock": "6b562f85005518a8e38556722d536c342c17da18b0d7040fcd0e80bb662671b3",
+    ".devcontainer/storage-policy.md": "bc27c254d4cde6342329d9f27c376da786857d58ea8b6cf0ea5e0ba78fabb099",
+    ".artifacts/ai-sigma/reference-fixtures/SIGMA-PARITY-PLAN/model-manifest.json": "07b29a65ceacabdac2981d12736a2d28c26a265bd2604a7f2b8c9de80290c604",
+    ".artifacts/ai-sigma/reference-fixtures/SIGMA-PARITY-PLAN/source-manifest.json": "fb7bbc4658f52e6a5d34c8e2c7bbebf6fbad3fd52b93300b66c0f78353a3dec2",
+    ".artifacts/ai-sigma/reference-fixtures/SIGMA-PARITY-PLAN/conversion-contract.json": "2fef81fb350fba535a7ed047e4c7b8a91bc2cf3797c2774f27443da81df30ba3",
+    ".artifacts/ai-sigma/reference-fixtures/SIGMA-PARITY-PLAN/fixtures.json": "206f46e0763177f138317ba49dc82875fd49a4d2c4ac2844d7fc06911e30bffb",
+    ".artifacts/ai-sigma/reference-fixtures/SIGMA-PARITY-PLAN/sources/export_onnx.py": "ab56635c59d00d0cd818ffbdf583c5e881105b204d6cdc7d97bd0718f46be2d8"
+  },
+  "graph": {
+    "path": "graph.json",
+    "sha256": "e0608fb969e48ac48411b7f10673ac49cda452b66ad1ee313e13f7da478dcb13",
+    "declaration_checks": {
+      "input_name_shape": true,
+      "output_names": true,
+      "policy_shape": true,
+      "value_shape": true,
+      "opset_17": true,
+      "weights_embedded": true
+    },
+    "checker": {
+      "status": "passed",
+      "full_check": false,
+      "neural_execution": false
+    },
+    "input": [
+      {
+        "name": "input",
+        "dtype": "FLOAT",
+        "shape": [
+          1,
+          8,
+          9,
+          9
+        ]
+      }
+    ],
+    "output": [
+      {
+        "name": "policy_logits",
+        "dtype": "FLOAT",
+        "shape": [
+          1,
+          136
+        ]
+      },
+      {
+        "name": "value",
+        "dtype": "FLOAT",
+        "shape": [
+          1,
+          1
+        ]
+      }
+    ],
+    "ir_version": 8,
+    "opsets": [
+      {
+        "domain": "ai.onnx",
+        "version": 17
+      }
+    ],
+    "op_counts": {
+      "ai.onnx::Add": 13,
+      "ai.onnx::BatchNormalization": 6,
+      "ai.onnx::Concat": 6,
+      "ai.onnx::Constant": 58,
+      "ai.onnx::Conv": 24,
+      "ai.onnx::Gather": 2,
+      "ai.onnx::Gemm": 7,
+      "ai.onnx::Mul": 2,
+      "ai.onnx::ReduceMax": 4,
+      "ai.onnx::ReduceMean": 5,
+      "ai.onnx::ReduceSum": 2,
+      "ai.onnx::Relu": 29,
+      "ai.onnx::Reshape": 2,
+      "ai.onnx::Slice": 12,
+      "ai.onnx::Tanh": 1,
+      "ai.onnx::Unsqueeze": 6
+    },
+    "node_count": 179,
+    "initializers": {
+      "count": 83,
+      "raw_bytes": 11633196,
+      "dtype_counts": {
+        "FLOAT": 83
+      },
+      "external_count": 0
+    }
+  },
+  "processes": [
+    {
+      "label": "fetch-attempt1",
+      "pid": 660293,
+      "pgid": 660293,
+      "started_utc": "2026-09-30T19:39:36.521934+00:00",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-MODEL-ACQUIRE/fetch.py",
+        "1"
+      ],
+      "timeout_s": 60,
+      "log": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-MODEL-ACQUIRE/fetch-attempt1.log",
+      "exit_code": 0,
+      "ended_utc": "2026-09-30T19:39:38.295298+00:00",
+      "wait_reaped": true
+    },
+    {
+      "label": "analyze",
+      "pid": 660304,
+      "pgid": 660304,
+      "started_utc": "2026-09-30T19:39:38.296837+00:00",
+      "command": [
+        "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+        "-B",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-MODEL-ACQUIRE/analyze.py"
+      ],
+      "timeout_s": 60,
+      "log": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-MODEL-ACQUIRE/analyze.log",
+      "exit_code": 0,
+      "ended_utc": "2026-09-30T19:39:38.475131+00:00",
+      "wait_reaped": true
+    }
+  ],
+  "process_stop_check": {
+    "660293": {
+      "wait_reaped": true,
+      "exit_code": 0,
+      "proc_present_now": false
+    },
+    "660304": {
+      "wait_reaped": true,
+      "exit_code": 0,
+      "proc_present_now": false
+    }
+  },
+  "resources": {
+    "cpu_affinity": [
+      0
+    ],
+    "rlimit_as_bytes": 1073741824,
+    "maxrss_kib": 87068,
+    "child_cpu_seconds": 0.34607899999999997,
+    "gpu_execution_seconds": 0,
+    "training_seconds": 0,
+    "neural_inferences": 0,
+    "retries": 0,
+    "preflight_path": "preflight.txt",
+    "preflight_existing_inference_cache_allocated_bytes": 11718397952,
+    "preflight_free_bytes": 517729607680,
+    "observed_owner_allocated_bytes": {
+      "experiment_profile_run": 20762624,
+      "experiment_queue_run": 115798016,
+      "experiment_shared_native_build": 314949632,
+      "experiment_shared_wasm_build": 109936640,
+      "hypothesis_parity_fixtures": 1773568,
+      "critic_profile_parity_verification": 1576960,
+      "coordinator_profile_verification": 1040384,
+      "coordinator_queue_static": 8192,
+      "coordinator_dispatch": 28672,
+      "experiment_worktree_node_modules": 212787200
+    },
+    "team_new_storage_limit_bytes": 12884901888,
+    "experiment_reserved_bytes": 2147483648,
+    "this_contract_limit_bytes": 134217728,
+    "baseline_caveats": [
+      "Single path snapshots, not exact 17:17 growth",
+      "Existing cache increase from initial snapshot cannot be attributed to this task",
+      "Shared build ownership spans .5/.7 and is counted once",
+      "Hardlink overlap and unobserved owner paths may prevent exact team total",
+      "No formal no-load certification"
+    ],
+    "observed_owner_allocated_sum_bytes": 778661888,
+    "measurement_note": "Owner/path snapshots across 19:34–19:44 UTC; whole-team exact growth unknown. Existing cache counted separately. This allocation starts with acquisition/run only.",
+    "model_stage_peak_bytes_upper_bound": 13631488,
+    "final_bookkeeping_utc": "2026-09-30T19:45:51.197996+00:00"
+  },
+  "not_verified": [
+    "PT/ONNX numerical parity",
+    "Rust/Wasm/backend operator compatibility",
+    "Feature semantics or Action/value correctness by model execution",
+    "Current served Pages byte parity",
+    "Model-specific provenance/distribution applicability",
+    "Chess-strength or runtime speed",
+    "Exact whole-team new storage delta"
+  ],
+  "reproduce_static_command": "PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 CUDA_VISIBLE_DEVICES=\"\" timeout 60s taskset -c 0 /home/vscode/.cache/inference/envs/quoridor-training/bin/python -B .artifacts/ai-sigma/runs/SIGMA-MODEL-ACQUIRE/analyze.py",
+  "scripts_sha256": {
+    "analyze.py": "27bc96a50442eccd8bb149a1962f057bce2ee74211ce64c92a82d0067b7476d7",
+    "fetch.py": "519adff592d0721937f3fd82a4c7c24e48b5e6f28cc5f97c7b0ee601c530d2a4",
+    "execute.py": "56b09902b6ffa5003115f15b36f65a83d4b461d9fa147bef88ba1908d8fc9e13"
+  },
+  "independent_reexecution": "Not performed by another agent; local separate hash verification follows",
+  "classification": "verified static acquisition, not product adoption/performance success",
+  "writing_stop": "Model files are complete; run/report final bookkeeping only; children reaped"
+}

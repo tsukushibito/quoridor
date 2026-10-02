@@ -1,0 +1,235 @@
+{
+  "issue": "quoridor-4lc.63",
+  "UTC_before_all_new_NN": "2026-10-01T15:59:55.192646+00:00",
+  "T_ms": 500,
+  "cases": [
+    {
+      "kind": "cancel-next",
+      "fixture": "initial-p1",
+      "sample": 0,
+      "T_ms": 500,
+      "cancel_after_cp": true,
+      "request_id": "EARLY63-20",
+      "generation": 519
+    },
+    {
+      "kind": "normal",
+      "fixture": "initial-p1",
+      "sample": -1,
+      "T_ms": 500,
+      "request_id": "EARLY63-01",
+      "generation": 500
+    },
+    {
+      "kind": "normal",
+      "fixture": "initial-p1",
+      "sample": 0,
+      "T_ms": 500,
+      "request_id": "EARLY63-02",
+      "generation": 501
+    },
+    {
+      "kind": "normal",
+      "fixture": "initial-p1",
+      "sample": 1,
+      "T_ms": 500,
+      "request_id": "EARLY63-03",
+      "generation": 502
+    },
+    {
+      "kind": "normal",
+      "fixture": "initial-p1",
+      "sample": 2,
+      "T_ms": 500,
+      "request_id": "EARLY63-04",
+      "generation": 503
+    },
+    {
+      "kind": "normal",
+      "fixture": "asym-hv-p2",
+      "sample": -1,
+      "T_ms": 500,
+      "request_id": "EARLY63-05",
+      "generation": 504
+    },
+    {
+      "kind": "normal",
+      "fixture": "asym-hv-p2",
+      "sample": 0,
+      "T_ms": 500,
+      "request_id": "EARLY63-06",
+      "generation": 505
+    },
+    {
+      "kind": "normal",
+      "fixture": "asym-hv-p2",
+      "sample": 1,
+      "T_ms": 500,
+      "request_id": "EARLY63-07",
+      "generation": 506
+    },
+    {
+      "kind": "normal",
+      "fixture": "asym-hv-p2",
+      "sample": 2,
+      "T_ms": 500,
+      "request_id": "EARLY63-08",
+      "generation": 507
+    },
+    {
+      "kind": "normal",
+      "fixture": "straight-jump-p2",
+      "sample": -1,
+      "T_ms": 500,
+      "request_id": "EARLY63-09",
+      "generation": 508
+    },
+    {
+      "kind": "normal",
+      "fixture": "straight-jump-p2",
+      "sample": 0,
+      "T_ms": 500,
+      "request_id": "EARLY63-10",
+      "generation": 509
+    },
+    {
+      "kind": "normal",
+      "fixture": "straight-jump-p2",
+      "sample": 1,
+      "T_ms": 500,
+      "request_id": "EARLY63-11",
+      "generation": 510
+    },
+    {
+      "kind": "normal",
+      "fixture": "straight-jump-p2",
+      "sample": 2,
+      "T_ms": 500,
+      "request_id": "EARLY63-12",
+      "generation": 511
+    },
+    {
+      "kind": "terminal",
+      "fixture": "goal-win-legal-replay",
+      "sample": 0,
+      "T_ms": 500,
+      "request_id": "EARLY63-13",
+      "generation": 512
+    },
+    {
+      "kind": "terminal",
+      "fixture": "synthetic-total-ply-200",
+      "sample": 0,
+      "T_ms": 500,
+      "request_id": "EARLY63-14",
+      "generation": 513
+    },
+    {
+      "kind": "before-first",
+      "fixture": "initial-p1",
+      "sample": 0,
+      "T_ms": 500,
+      "before_first_nn_busy_ms": 600,
+      "request_id": "EARLY63-15",
+      "generation": 514
+    },
+    {
+      "kind": "validation-cross",
+      "fixture": "initial-p1",
+      "sample": 0,
+      "T_ms": 500,
+      "validation_cross": true,
+      "request_id": "EARLY63-16",
+      "generation": 515
+    },
+    {
+      "kind": "caller-busy",
+      "fixture": "initial-p1",
+      "sample": 0,
+      "T_ms": 500,
+      "caller_busy_at_seal": true,
+      "request_id": "EARLY63-17",
+      "generation": 516
+    },
+    {
+      "kind": "late-notification",
+      "fixture": "initial-p1",
+      "sample": 0,
+      "T_ms": 500,
+      "notify_delay_ms": 600,
+      "request_id": "EARLY63-18",
+      "generation": 517
+    },
+    {
+      "kind": "fault",
+      "fixture": "initial-p1",
+      "sample": 0,
+      "T_ms": 500,
+      "hardfault_after_cp": 1,
+      "request_id": "EARLY63-19",
+      "generation": 518
+    }
+  ],
+  "normal_denominator": 12,
+  "terminal_denominator": 2,
+  "boundary_denominator": 6,
+  "suite_total": 20,
+  "no_suite_retry": true,
+  "fixed_control": {
+    "fixtures": [
+      "initial-p1",
+      "asym-hv-p2",
+      "straight-jump-p2"
+    ],
+    "simulations": 8,
+    "direct_then_stream_once": true,
+    "compare_all24cp": true,
+    "numeric_outputs": 137,
+    "features_bits": 648,
+    "gate_abs": 0.0001,
+    "gate_rtol": 0.0001,
+    "prior_gate_same": true,
+    "strict_value": [
+      -1,
+      1
+    ]
+  },
+  "calibration": {
+    "mode": "NN0 replay of immutable old completed cp as representative payload, never NN success",
+    "fixtures": [
+      "initial-p1",
+      "asym-hv-p2",
+      "straight-jump-p2",
+      "goal-win-legal-replay",
+      "synthetic-total-ply-200"
+    ],
+    "warm_per_fixture": 1,
+    "steady_per_fixture": 5,
+    "total": 30,
+    "scope": "t0 before Node legal-prefix context/identity conversion through actual Worker postMessage+Playwright binding+Node validate/format/encoding/stamp",
+    "reserve_formula": "ceil(max steady end-to-end NN0 ms + 2*max start clock error ms + 25 fixed margin ms)",
+    "commit_margin_formula": "ceil(max steady Node receive validation ms + 2*max start clock error ms + 5 fixed margin ms)",
+    "selection_once": true,
+    "failure": "reserve>=500 or commit margin>=500-reserve or missing/end clock inconsistency => no-go stop, no NN suite",
+    "NN_max_time_not_used": true
+  },
+  "clock": "common Node monotonic t0 input available before conversion; Node cached receive gate rechecks validation-finish against early cutoff; final Node identity/legal/type/value/encoding then stamp, late null/false",
+  "policy": "fault/cancel received before Node seal drops all; postseal ignored for public action; producer time recorded separately/unknown not asserted normal",
+  "notification": "each completed immutable cp, public payload excludes tree/logits/features/private spans; full root edges/stats/identity/value retained",
+  "next_input": "normal contiguous group next input becomes available at previous public stamp, legacy stop/handle free wait charged; next NN begins only explicit stop handles0 activeNN0; no model reload within group",
+  "newjob_cutoff": "2026-10-01T16:50:24Z",
+  "processing_stop": "2026-10-01T16:55:24Z",
+  "job_timeout_s": 240,
+  "CPU": [
+    2
+  ],
+  "NNthreads": 1,
+  "RAMguard": 3758096384,
+  "storageguard": 117440512,
+  "actual_go": false,
+  "holdout": 0,
+  "games": 0,
+  "request_order_note": "cancel boundary first; following initial-p1 warm is the declared next request. Still 20 total, no additional boundary request. All selections before any new NN.",
+  "startup_warm_NN": 0,
+  "control_searches": 6
+}

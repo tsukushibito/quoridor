@@ -1,0 +1,680 @@
+{
+  "issue": "quoridor-4lc.83",
+  "trial": 1,
+  "contract": 1,
+  "UTC_before_any_NN": "2026-10-01T23:27:08.131845+00:00",
+  "runtime_steer_received": false,
+  "independent_acceptance": false,
+  "source": [
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-nn-schema-cost/a-host.js",
+      "sha256": "b40e7611b9f351783f7f838c05aa3c9b72aa9c7152d35ad7cececb5f7a3115d1"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-nn-schema-cost/b-host.js",
+      "sha256": "203c93c1ba4430191c063cdf2e72e2098d2620e8977b8512078c485d85452658"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-nn-schema-cost/cleanup.cjs",
+      "sha256": "5447032ffa50109b5b0c24411eb3ed5e14bb9536c84c7cc6cfdc73fac5ffe32d"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-nn-schema-cost/context.js",
+      "sha256": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-nn-schema-cost/driver.cjs",
+      "sha256": "4f78cf4ab59148c0ad23200a0e4a770ced365959b027993e2782b2b7f6b9fb3f"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-nn-schema-cost/game.js",
+      "sha256": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-nn-schema-cost/kernel_boundary.py",
+      "sha256": "afa63b0b113bdb8f5f112a871e8f183d33b9d493e5e08cce098faa4ecfd5dd21"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-nn-schema-cost/numeric.cjs",
+      "sha256": "488c1c936415a96071374cb63f4cc2b378177effa39f00dae5051169f87fe6d6"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-nn-schema-cost/owned-ledger.cjs",
+      "sha256": "b375c3389139fd918a26c87f6d967978284a23c5cdae6cac7171e09ceabe0035"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-nn-schema-cost/owned_ledger.py",
+      "sha256": "8a6b52c664e0602dfee6f0a969be26d990df114c3c5ccc43c2d4d6e5560a6036"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-nn-schema-cost/pause-check.cjs",
+      "sha256": "20d8a5107fab057489e6f399086407b17dce42e11f1309c66008e24941f58a73"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-nn-schema-cost/phase0.cjs",
+      "sha256": "25a4a7ad801ac81a6f5034fa65d51b056d685a6ffe50998c337a8e5080bbcdf8"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-nn-schema-cost/runner.py",
+      "sha256": "6a9e148058de4e363789922b5b83bd0701795d2d41b1d34ba4a4c932f2d7f4d9"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-nn-schema-cost/schema-gates.cjs",
+      "sha256": "fcf3399f6b22d39cfb9d37c3a015d9b3d726eefbce0c33e2ace9363f0c0ada62"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-nn-schema-cost/worker-protocol-gates.cjs",
+      "sha256": "be8639c6b078cd5cde9ba5a50e065f47ed16866f0fe636d260e33ce350a14116"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-nn-schema-cost/worker.js",
+      "sha256": "b168d9d4c25471740e2cfa7f9274fc9c34113552e277a33f5d6c744d443ef020"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-nn-schema-cost/wrapper-gates.cjs",
+      "sha256": "ad2328e168ea6ebb1a10b2fd12920cc4f784d43b6c954f9075824648e71317f9"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-nn-schema-cost/wrapper.cjs",
+      "sha256": "5040224f746e20f9d8a8506f8a894cfe7db03be685037ea9e756d762e0383090"
+    }
+  ],
+  "input_manifest_sha256": "3e98921cf1b32a90a34b1c7432f44ffc60826dc3cd09d2fc8b548f2278b84642",
+  "gate_order": [
+    {
+      "id": "initial-p1",
+      "backend": "A",
+      "ordinal": 1
+    },
+    {
+      "id": "initial-p1",
+      "backend": "B",
+      "ordinal": 2
+    },
+    {
+      "id": "initial-p2",
+      "backend": "A",
+      "ordinal": 3
+    },
+    {
+      "id": "initial-p2",
+      "backend": "B",
+      "ordinal": 4
+    },
+    {
+      "id": "asym-h-p2",
+      "backend": "A",
+      "ordinal": 5
+    },
+    {
+      "id": "asym-h-p2",
+      "backend": "B",
+      "ordinal": 6
+    },
+    {
+      "id": "asym-hv-p1",
+      "backend": "A",
+      "ordinal": 7
+    },
+    {
+      "id": "asym-hv-p1",
+      "backend": "B",
+      "ordinal": 8
+    },
+    {
+      "id": "asym-hv-p2",
+      "backend": "A",
+      "ordinal": 9
+    },
+    {
+      "id": "asym-hv-p2",
+      "backend": "B",
+      "ordinal": 10
+    },
+    {
+      "id": "straight-jump-p2",
+      "backend": "A",
+      "ordinal": 11
+    },
+    {
+      "id": "straight-jump-p2",
+      "backend": "B",
+      "ordinal": 12
+    },
+    {
+      "id": "behind-wall-diagonal-p2",
+      "backend": "A",
+      "ordinal": 13
+    },
+    {
+      "id": "behind-wall-diagonal-p2",
+      "backend": "B",
+      "ordinal": 14
+    },
+    {
+      "id": "adjacent-wall-blocked",
+      "backend": "A",
+      "ordinal": 15
+    },
+    {
+      "id": "adjacent-wall-blocked",
+      "backend": "B",
+      "ordinal": 16
+    },
+    {
+      "id": "board-edge-diagonal-p2",
+      "backend": "A",
+      "ordinal": 17
+    },
+    {
+      "id": "board-edge-diagonal-p2",
+      "backend": "B",
+      "ordinal": 18
+    },
+    {
+      "id": "repeat-before-first-return",
+      "backend": "A",
+      "ordinal": 19
+    },
+    {
+      "id": "repeat-before-first-return",
+      "backend": "B",
+      "ordinal": 20
+    },
+    {
+      "id": "repeat-initial-count2",
+      "backend": "A",
+      "ordinal": 21
+    },
+    {
+      "id": "repeat-initial-count2",
+      "backend": "B",
+      "ordinal": 22
+    },
+    {
+      "id": "repeat-before-third-return",
+      "backend": "A",
+      "ordinal": 23
+    },
+    {
+      "id": "repeat-before-third-return",
+      "backend": "B",
+      "ordinal": 24
+    },
+    {
+      "id": "simulation-overlay-count2",
+      "backend": "A",
+      "ordinal": 25
+    },
+    {
+      "id": "simulation-overlay-count2",
+      "backend": "B",
+      "ordinal": 26
+    },
+    {
+      "id": "sibling-a-after-cycle",
+      "backend": "A",
+      "ordinal": 27
+    },
+    {
+      "id": "sibling-a-after-cycle",
+      "backend": "B",
+      "ordinal": 28
+    },
+    {
+      "id": "sibling-b-after-cycle",
+      "backend": "A",
+      "ordinal": 29
+    },
+    {
+      "id": "sibling-b-after-cycle",
+      "backend": "B",
+      "ordinal": 30
+    },
+    {
+      "id": "sibling-root-restored",
+      "backend": "A",
+      "ordinal": 31
+    },
+    {
+      "id": "sibling-root-restored",
+      "backend": "B",
+      "ordinal": 32
+    },
+    {
+      "id": "synthetic-root-double-count",
+      "backend": "A",
+      "ordinal": 33
+    },
+    {
+      "id": "synthetic-root-double-count",
+      "backend": "B",
+      "ordinal": 34
+    },
+    {
+      "id": "reachability-closure-forbidden",
+      "backend": "A",
+      "ordinal": 35
+    },
+    {
+      "id": "reachability-closure-forbidden",
+      "backend": "B",
+      "ordinal": 36
+    },
+    {
+      "id": "all-walls-spent",
+      "backend": "A",
+      "ordinal": 37
+    },
+    {
+      "id": "all-walls-spent",
+      "backend": "B",
+      "ordinal": 38
+    },
+    {
+      "id": "one-wall-in-hand",
+      "backend": "A",
+      "ordinal": 39
+    },
+    {
+      "id": "one-wall-in-hand",
+      "backend": "B",
+      "ordinal": 40
+    },
+    {
+      "id": "synthetic-no-legal-move-draw",
+      "backend": "A",
+      "ordinal": 41
+    },
+    {
+      "id": "synthetic-no-legal-move-draw",
+      "backend": "B",
+      "ordinal": 42
+    },
+    {
+      "id": "synthetic-total-ply-198",
+      "backend": "A",
+      "ordinal": 43
+    },
+    {
+      "id": "synthetic-total-ply-198",
+      "backend": "B",
+      "ordinal": 44
+    },
+    {
+      "id": "synthetic-total-ply-199",
+      "backend": "A",
+      "ordinal": 45
+    },
+    {
+      "id": "synthetic-total-ply-199",
+      "backend": "B",
+      "ordinal": 46
+    },
+    {
+      "id": "synthetic-total-ply-200",
+      "backend": "A",
+      "ordinal": 47
+    },
+    {
+      "id": "synthetic-total-ply-200",
+      "backend": "B",
+      "ordinal": 48
+    },
+    {
+      "id": "goal-before-last-step",
+      "backend": "A",
+      "ordinal": 49
+    },
+    {
+      "id": "goal-before-last-step",
+      "backend": "B",
+      "ordinal": 50
+    },
+    {
+      "id": "synthetic-ply198-before-goal",
+      "backend": "A",
+      "ordinal": 51
+    },
+    {
+      "id": "synthetic-ply198-before-goal",
+      "backend": "B",
+      "ordinal": 52
+    },
+    {
+      "id": "goal-win-legal-replay",
+      "backend": "A",
+      "ordinal": 53
+    },
+    {
+      "id": "goal-win-legal-replay",
+      "backend": "B",
+      "ordinal": 54
+    },
+    {
+      "id": "synthetic-goal-at200",
+      "backend": "A",
+      "ordinal": 55
+    },
+    {
+      "id": "synthetic-goal-at200",
+      "backend": "B",
+      "ordinal": 56
+    }
+  ],
+  "latency_order": [
+    {
+      "id": "initial-p1",
+      "backend": "A",
+      "sample": -1,
+      "warm": true,
+      "ordinal": 1
+    },
+    {
+      "id": "initial-p1",
+      "backend": "B",
+      "sample": -1,
+      "warm": true,
+      "ordinal": 2
+    },
+    {
+      "id": "initial-p1",
+      "backend": "B",
+      "sample": 0,
+      "warm": false,
+      "ordinal": 3
+    },
+    {
+      "id": "initial-p1",
+      "backend": "A",
+      "sample": 0,
+      "warm": false,
+      "ordinal": 4
+    },
+    {
+      "id": "initial-p1",
+      "backend": "A",
+      "sample": 1,
+      "warm": false,
+      "ordinal": 5
+    },
+    {
+      "id": "initial-p1",
+      "backend": "B",
+      "sample": 1,
+      "warm": false,
+      "ordinal": 6
+    },
+    {
+      "id": "initial-p1",
+      "backend": "B",
+      "sample": 2,
+      "warm": false,
+      "ordinal": 7
+    },
+    {
+      "id": "initial-p1",
+      "backend": "A",
+      "sample": 2,
+      "warm": false,
+      "ordinal": 8
+    },
+    {
+      "id": "initial-p1",
+      "backend": "A",
+      "sample": 3,
+      "warm": false,
+      "ordinal": 9
+    },
+    {
+      "id": "initial-p1",
+      "backend": "B",
+      "sample": 3,
+      "warm": false,
+      "ordinal": 10
+    },
+    {
+      "id": "initial-p1",
+      "backend": "B",
+      "sample": 4,
+      "warm": false,
+      "ordinal": 11
+    },
+    {
+      "id": "initial-p1",
+      "backend": "A",
+      "sample": 4,
+      "warm": false,
+      "ordinal": 12
+    },
+    {
+      "id": "asym-hv-p2",
+      "backend": "B",
+      "sample": -1,
+      "warm": true,
+      "ordinal": 13
+    },
+    {
+      "id": "asym-hv-p2",
+      "backend": "A",
+      "sample": -1,
+      "warm": true,
+      "ordinal": 14
+    },
+    {
+      "id": "asym-hv-p2",
+      "backend": "A",
+      "sample": 0,
+      "warm": false,
+      "ordinal": 15
+    },
+    {
+      "id": "asym-hv-p2",
+      "backend": "B",
+      "sample": 0,
+      "warm": false,
+      "ordinal": 16
+    },
+    {
+      "id": "asym-hv-p2",
+      "backend": "B",
+      "sample": 1,
+      "warm": false,
+      "ordinal": 17
+    },
+    {
+      "id": "asym-hv-p2",
+      "backend": "A",
+      "sample": 1,
+      "warm": false,
+      "ordinal": 18
+    },
+    {
+      "id": "asym-hv-p2",
+      "backend": "A",
+      "sample": 2,
+      "warm": false,
+      "ordinal": 19
+    },
+    {
+      "id": "asym-hv-p2",
+      "backend": "B",
+      "sample": 2,
+      "warm": false,
+      "ordinal": 20
+    },
+    {
+      "id": "asym-hv-p2",
+      "backend": "B",
+      "sample": 3,
+      "warm": false,
+      "ordinal": 21
+    },
+    {
+      "id": "asym-hv-p2",
+      "backend": "A",
+      "sample": 3,
+      "warm": false,
+      "ordinal": 22
+    },
+    {
+      "id": "asym-hv-p2",
+      "backend": "A",
+      "sample": 4,
+      "warm": false,
+      "ordinal": 23
+    },
+    {
+      "id": "asym-hv-p2",
+      "backend": "B",
+      "sample": 4,
+      "warm": false,
+      "ordinal": 24
+    },
+    {
+      "id": "straight-jump-p2",
+      "backend": "A",
+      "sample": -1,
+      "warm": true,
+      "ordinal": 25
+    },
+    {
+      "id": "straight-jump-p2",
+      "backend": "B",
+      "sample": -1,
+      "warm": true,
+      "ordinal": 26
+    },
+    {
+      "id": "straight-jump-p2",
+      "backend": "B",
+      "sample": 0,
+      "warm": false,
+      "ordinal": 27
+    },
+    {
+      "id": "straight-jump-p2",
+      "backend": "A",
+      "sample": 0,
+      "warm": false,
+      "ordinal": 28
+    },
+    {
+      "id": "straight-jump-p2",
+      "backend": "A",
+      "sample": 1,
+      "warm": false,
+      "ordinal": 29
+    },
+    {
+      "id": "straight-jump-p2",
+      "backend": "B",
+      "sample": 1,
+      "warm": false,
+      "ordinal": 30
+    },
+    {
+      "id": "straight-jump-p2",
+      "backend": "B",
+      "sample": 2,
+      "warm": false,
+      "ordinal": 31
+    },
+    {
+      "id": "straight-jump-p2",
+      "backend": "A",
+      "sample": 2,
+      "warm": false,
+      "ordinal": 32
+    },
+    {
+      "id": "straight-jump-p2",
+      "backend": "A",
+      "sample": 3,
+      "warm": false,
+      "ordinal": 33
+    },
+    {
+      "id": "straight-jump-p2",
+      "backend": "B",
+      "sample": 3,
+      "warm": false,
+      "ordinal": 34
+    },
+    {
+      "id": "straight-jump-p2",
+      "backend": "B",
+      "sample": 4,
+      "warm": false,
+      "ordinal": 35
+    },
+    {
+      "id": "straight-jump-p2",
+      "backend": "A",
+      "sample": 4,
+      "warm": false,
+      "ordinal": 36
+    }
+  ],
+  "numeric_gate_planned": 56,
+  "latency_calls_planned": 36,
+  "each_backend_latency_calls": 18,
+  "warm_per_backend": 3,
+  "sample_per_backend": 15,
+  "load_session": 1,
+  "startup_NN": 0,
+  "extra_A_in_B": 0,
+  "numeric_prior_schema": "raw and effective terminal separate",
+  "whole_wrapper_boundary": {
+    "whole_start": "Worker receives immutable canonical fixed fixture; clock before structuredClone and fixture validation",
+    "A": "clone/input shape -> opaque diagnose(fixture), including Rust context/features/one infer/prior/JSON decode -> same real validator -> identical canonical output JSON/UTF8",
+    "B": "clone/input shape -> .26 raw fixture context/features (feature-only NN0, INSIDE whole) -> copy/tensor/ORT API await/output extraction -> .26 raw_policy samefixture context/prior -> same real validator -> identical canonical output JSON/UTF8",
+    "whole_end": "after mandatory numeric/schema/legal/Action-prior validation and required canonical output JSON/UTF8 encoding; no transport/private traces included",
+    "Node_transport": "Node_start/end saved separately both sides; adapter/transport/scheduling outside Worker whole explicitly separate",
+    "A_kernel_timestamp": null,
+    "B_kernel_timestamp": null,
+    "B_API_await_not_kernel_timestamp": true,
+    "B_replays_context_twice_A_once": "implementation cost difference retained, not pure backend inference ratio",
+    "feature_cost_subtraction_or_NN_cause_claim": false,
+    "extra_A_NN_in_B": 0,
+    "feature_only_expected_calls": {
+      "preflight": 28,
+      "B_gate": 28,
+      "B_latency": 18
+    },
+    "raw_prior": "separately derived stable softmax from fixed policy logits and Action mapping, never replacing effective null",
+    "effective_terminal": "effective search NN0/prior=null independent of raw diagnostic NN1"
+  },
+  "abs": 0.0001,
+  "rtol": 0.0001,
+  "strict_value": [
+    -1,
+    1
+  ],
+  "runtime_CPU": 2,
+  "NNthreads": 1,
+  "RAM": 3221225472,
+  "RSS_guard": 2684354560,
+  "storage_guard": 58720256,
+  "job_wall_cap_seconds": 180,
+  "runtime_cumulative_cap_seconds": 600,
+  "timer_clock": "page and worker start/end ping12, interval/drift, performance.now resolution; no kernel instruction timestamps",
+  "monitor_cost": "owned Beads readers on same assignedCPU; cost/background recorded not subtracted",
+  "headroom": {
+    "phaseA_current_allocated": 1916928,
+    "phaseA_target8MiB": 8388608,
+    "source_preparation_upper": 8388608,
+    "TMP_profile_upper": 33554432,
+    "raw_clock_logs_upper": 8388608,
+    "ending_monitor_upper": 6291456,
+    "worst_total": 56623104,
+    "storage_guard56MiB": 58720256,
+    "new_ceiling64MiB": 67108864,
+    "entry2GiB_additional_reservation": 0,
+    "old77_68peaks_not_reduced": true,
+    "cumulative12GiB_not_reset": true
+  },
+  "actual_go": false,
+  "games": 0,
+  "holdout": 0
+}

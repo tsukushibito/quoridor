@@ -1,0 +1,1050 @@
+{
+  "UTC": "2026-10-01T12:52:56.950154+00:00",
+  "issue": "quoridor-4lc.50",
+  "trial": 1,
+  "contract_version": 1,
+  "role_thread": "01a0f31d-8227-7e03-a7e6-915b4918c11b",
+  "coordinator": "01a0f31b-3409-75f2-a30e-453a50484f94",
+  "contract_sha256": "944156ba567baa11232fbe571582176bb47e5d5767347b47dfa2ac83bbcde6ab",
+  "parent_sha256": "859bb777836cc0683e1ad7d1763a71fda60c75d2d6391290cef28771589a81a2",
+  "frozen49": {
+    "entry_manifest_sha256": "ce728c763071451ef0c2d54238dce854cc239bd1ae9f5d7277e5c00329738216",
+    "manifest_sha256": "c42ccd811123e1c27d8b3434b5622bfb16c68b76124c51bfeff1e980f54631a8",
+    "report_sha256": "1aac4d96cd261c2c8502797e432df40788797c492aca7a575e75f4d76daef336",
+    "source_stop": {
+      "UTC": "2026-10-01T12:21:02.085136+00:00",
+      "source_stopped": true,
+      "all_NN_stopped": true,
+      "entry_ready": false,
+      "actual_go": false,
+      "clock_gate": false,
+      "final_cleanup_incomplete": true,
+      "no_further_repairs_or_runs": true
+    },
+    "original425_before_after_verified": true,
+    "final89_before_after_verified": true,
+    "source37_verified": true,
+    "total_individual_frozen_inputs": 1334,
+    "source51_excluded": true
+  },
+  "verdict": "NO-GO independently supported: fixed clock qualification fails and final controlled cleanup fails",
+  "supported_only": [
+    "fixed saved response numerical values and finite legal pilot36",
+    "exact calibration index0..143 without duplicate saved samples, distinct source62/82",
+    "saved ownership trace identifies scope hole and final controlled cleanup failure",
+    "current866 identities absent at snapshot, not historical bounded cleanup success",
+    "saved prior-source artificial96 mock outcomes/9checks and final source refusal structure"
+  ],
+  "calibration": {
+    "segments": [
+      {
+        "version": "GOLDEN-CALIBRATION-01",
+        "job": "golden-calibration",
+        "exit": 1,
+        "start": "2026-10-01T11:44:06.267777+00:00",
+        "end": "2026-10-01T11:46:07.506189+00:00",
+        "stop_reason": "deadline",
+        "requests": 62,
+        "source_differences_from_final": [
+          {
+            "name": "run-golden.cjs",
+            "run_hash": "012616837b5fc55003646ea68cd88e482d7548311bc6b0b142cadb92faa6f229",
+            "final_hash": "c7caa3869559bca9413eae4cc77299d41d600382cbb44366436864c38a175e25"
+          },
+          {
+            "name": "pause-check.cjs",
+            "run_hash": "f6d0967096d336d7618f0b334044e92073f8ff0e782fa8ee97285d979862064d",
+            "final_hash": "05649153f7c148ed312c50273b55eaed952009a1fea017a8bbf806ffe3881ff1"
+          },
+          {
+            "name": "arena.cjs",
+            "run_hash": "2f07ac5a9f156596509ef7cb056082f68a2d8c04fefc6aebc424e716e173b270",
+            "final_hash": "71cd79c99c801d2e09f3532d1fc7759ff72b665cf4fd3b8e28b2a04a434b1dc2"
+          },
+          {
+            "name": "match-entry.cjs",
+            "run_hash": "50fe9a75e9e2bae0d80d3a001652965e3c31dc9c32850a3ebeb1b4240bcc96fc",
+            "final_hash": "3a301f17e90fb0d3c56893706fccc4c41f60cdc9716bcb864b98632e6b53b1de"
+          },
+          {
+            "name": "golden-gates.cjs",
+            "run_hash": "e3f1a171deb7948b7e1192c756e7b911e2426737d133ca18ec042e95dbdb7238",
+            "final_hash": "fc7056cfec5fc41c31eb62194efc8159ef894295e96ae85273ddcba06dcfa0ad"
+          }
+        ]
+      },
+      {
+        "version": "GOLDEN-CALIBRATION-CONTINUATION-01",
+        "job": "golden-calibration-resume-one",
+        "exit": 0,
+        "start": "2026-10-01T11:50:38.265942+00:00",
+        "end": "2026-10-01T11:50:53.347958+00:00",
+        "stop_reason": null,
+        "requests": 82,
+        "source_differences_from_final": [
+          {
+            "name": "run-golden.cjs",
+            "run_hash": "7b1f61eea82a6aef3fbb20941b21b74a3f72fd40ef59bcd3ea3a37dd96a02f01",
+            "final_hash": "c7caa3869559bca9413eae4cc77299d41d600382cbb44366436864c38a175e25"
+          },
+          {
+            "name": "pause-check.cjs",
+            "run_hash": "d575d2d0088dc0173616487ed6fdc1bbef1bd6584498536c5e3e797daca5875c",
+            "final_hash": "05649153f7c148ed312c50273b55eaed952009a1fea017a8bbf806ffe3881ff1"
+          },
+          {
+            "name": "arena.cjs",
+            "run_hash": "726a236f76414c98007a7327fb30bba69a1c629a9f29442f2bbe37acb97699f4",
+            "final_hash": "71cd79c99c801d2e09f3532d1fc7759ff72b665cf4fd3b8e28b2a04a434b1dc2"
+          },
+          {
+            "name": "match-entry.cjs",
+            "run_hash": "ebb8bdd4250b9372bf2820dd04e0162af3437718f3beb2ec6868c0c9accef3be",
+            "final_hash": "3a301f17e90fb0d3c56893706fccc4c41f60cdc9716bcb864b98632e6b53b1de"
+          },
+          {
+            "name": "golden-gates.cjs",
+            "run_hash": "be9cda1c186b7e735c55c911dbe78e969a2d6cf09f2049e96d167f1d5cbe130e",
+            "final_hash": "fc7056cfec5fc41c31eb62194efc8159ef894295e96ae85273ddcba06dcfa0ad"
+          }
+        ]
+      },
+      {
+        "version": "GOLDEN-PILOT-01",
+        "job": "golden-pilot",
+        "exit": 0,
+        "start": "2026-10-01T11:52:35.000889+00:00",
+        "end": "2026-10-01T11:53:01.922312+00:00",
+        "stop_reason": null,
+        "requests": 36,
+        "source_differences_from_final": [
+          {
+            "name": "run-golden.cjs",
+            "run_hash": "7b1f61eea82a6aef3fbb20941b21b74a3f72fd40ef59bcd3ea3a37dd96a02f01",
+            "final_hash": "c7caa3869559bca9413eae4cc77299d41d600382cbb44366436864c38a175e25"
+          },
+          {
+            "name": "pause-check.cjs",
+            "run_hash": "d575d2d0088dc0173616487ed6fdc1bbef1bd6584498536c5e3e797daca5875c",
+            "final_hash": "05649153f7c148ed312c50273b55eaed952009a1fea017a8bbf806ffe3881ff1"
+          },
+          {
+            "name": "arena.cjs",
+            "run_hash": "726a236f76414c98007a7327fb30bba69a1c629a9f29442f2bbe37acb97699f4",
+            "final_hash": "71cd79c99c801d2e09f3532d1fc7759ff72b665cf4fd3b8e28b2a04a434b1dc2"
+          },
+          {
+            "name": "match-entry.cjs",
+            "run_hash": "ebb8bdd4250b9372bf2820dd04e0162af3437718f3beb2ec6868c0c9accef3be",
+            "final_hash": "3a301f17e90fb0d3c56893706fccc4c41f60cdc9716bcb864b98632e6b53b1de"
+          },
+          {
+            "name": "golden-gates.cjs",
+            "run_hash": "be9cda1c186b7e735c55c911dbe78e969a2d6cf09f2049e96d167f1d5cbe130e",
+            "final_hash": "fc7056cfec5fc41c31eb62194efc8159ef894295e96ae85273ddcba06dcfa0ad"
+          }
+        ]
+      },
+      {
+        "version": "GOLDEN-FINAL-01",
+        "job": "final-same-main-golden",
+        "exit": 0,
+        "start": "2026-10-01T11:54:22.949640+00:00",
+        "end": "2026-10-01T11:54:42.200119+00:00",
+        "stop_reason": null,
+        "requests": 9,
+        "source_differences_from_final": [
+          {
+            "name": "run-golden.cjs",
+            "run_hash": "7b1f61eea82a6aef3fbb20941b21b74a3f72fd40ef59bcd3ea3a37dd96a02f01",
+            "final_hash": "c7caa3869559bca9413eae4cc77299d41d600382cbb44366436864c38a175e25"
+          },
+          {
+            "name": "pause-check.cjs",
+            "run_hash": "d575d2d0088dc0173616487ed6fdc1bbef1bd6584498536c5e3e797daca5875c",
+            "final_hash": "05649153f7c148ed312c50273b55eaed952009a1fea017a8bbf806ffe3881ff1"
+          },
+          {
+            "name": "arena.cjs",
+            "run_hash": "726a236f76414c98007a7327fb30bba69a1c629a9f29442f2bbe37acb97699f4",
+            "final_hash": "71cd79c99c801d2e09f3532d1fc7759ff72b665cf4fd3b8e28b2a04a434b1dc2"
+          },
+          {
+            "name": "match-entry.cjs",
+            "run_hash": "ebb8bdd4250b9372bf2820dd04e0162af3437718f3beb2ec6868c0c9accef3be",
+            "final_hash": "3a301f17e90fb0d3c56893706fccc4c41f60cdc9716bcb864b98632e6b53b1de"
+          },
+          {
+            "name": "golden-gates.cjs",
+            "run_hash": "be9cda1c186b7e735c55c911dbe78e969a2d6cf09f2049e96d167f1d5cbe130e",
+            "final_hash": "fc7056cfec5fc41c31eb62194efc8159ef894295e96ae85273ddcba06dcfa0ad"
+          }
+        ]
+      },
+      {
+        "version": "GOLDEN-FINAL-BOUNDARY-REPAIR-01",
+        "job": "final-boundary-repair-one",
+        "exit": 0,
+        "start": "2026-10-01T12:02:47.188663+00:00",
+        "end": "2026-10-01T12:03:06.106819+00:00",
+        "stop_reason": null,
+        "requests": 9,
+        "source_differences_from_final": [
+          {
+            "name": "run-golden.cjs",
+            "run_hash": "8581ab1933615a75b9dc92772eb4ce1e501c70545330e7e3e95ac8491d5e4c10",
+            "final_hash": "c7caa3869559bca9413eae4cc77299d41d600382cbb44366436864c38a175e25"
+          },
+          {
+            "name": "pause-check.cjs",
+            "run_hash": "d575d2d0088dc0173616487ed6fdc1bbef1bd6584498536c5e3e797daca5875c",
+            "final_hash": "05649153f7c148ed312c50273b55eaed952009a1fea017a8bbf806ffe3881ff1"
+          },
+          {
+            "name": "match-entry.cjs",
+            "run_hash": "ebb8bdd4250b9372bf2820dd04e0162af3437718f3beb2ec6868c0c9accef3be",
+            "final_hash": "3a301f17e90fb0d3c56893706fccc4c41f60cdc9716bcb864b98632e6b53b1de"
+          },
+          {
+            "name": "golden-gates.cjs",
+            "run_hash": "be9cda1c186b7e735c55c911dbe78e969a2d6cf09f2049e96d167f1d5cbe130e",
+            "final_hash": "fc7056cfec5fc41c31eb62194efc8159ef894295e96ae85273ddcba06dcfa0ad"
+          }
+        ]
+      },
+      {
+        "version": "GOLDEN-SEAL-01",
+        "job": "final-source-seal",
+        "exit": 1,
+        "start": "2026-10-01T12:11:09.668807+00:00",
+        "end": "2026-10-01T12:11:27.654987+00:00",
+        "stop_reason": null,
+        "requests": 5,
+        "source_differences_from_final": []
+      }
+    ],
+    "saved62": 62,
+    "saved82": 82,
+    "case_warmup24": 24,
+    "nonwarm120": 120,
+    "pilot_warm6": 6,
+    "pilot_nonwarm30": 30,
+    "startup_warm_class": "outside hand t0 but included in original declared g denominator; distinct from sample=-1 in-request warmup",
+    "warmup_no_completed_repetition": true,
+    "source_diffs_saved": true,
+    "original120s_end_clock_missing": true,
+    "unobserved_cutoff_work_unknown": true,
+    "uniform_finalsource144": false,
+    "g_formula": {
+      "max_operation": {
+        "version": "GOLDEN-PILOT-01",
+        "session": "session-1",
+        "sample_class": "startup_warm",
+        "engine": "candidate",
+        "kind": "NN",
+        "ms": 223.199951171875
+      },
+      "max_finish_delivery": {
+        "version": "GOLDEN-CALIBRATION-01",
+        "row": 0,
+        "finish_ms": 3.599853515625,
+        "delivery_ms": 53.749897330999374,
+        "ms": 57.349750846624374
+      },
+      "max_error": {
+        "version": "GOLDEN-FINAL-01",
+        "session": "session-1",
+        "phase": "start",
+        "engine": "reference",
+        "ms": 0.898095703125
+      },
+      "margin": 5,
+      "g_needed": 287,
+      "fixed_g": 91,
+      "T_over4": 125,
+      "gate": false
+    },
+    "max_sources": "operation=pilot candidate startup warm NN; finish/delivery=original calibration row0; error=original final reference start",
+    "clock_tail_not_proven": true,
+    "operational_boundary": {
+      "startup": "loadArena readiness threads1/proxyfalse/canonical/model hash; native loaded:false, Chromium runtime",
+      "warm_classes": [
+        "startup candidate load warm outside hand",
+        "reference initial numeric startup warm outside hand",
+        "calibration each fixture/engine sample=-1 in request T",
+        "pilot each fixture/engine sample=-1 in request T"
+      ],
+      "operational_t0": "diagnosticRealBackend takes hrtime before golden validation/submit; arena converts early deadline before prefix serialization/replay",
+      "postvalidation": "producer identity + owned binding + legality + response JSON.stringify precede final stamp; late/stale/timeout null",
+      "limits": "full actual game-loop/entry positive token not executed; final source different from 62/82/mock; startup outside requestT does not imply free work during game restart",
+      "minimal_future_contract_suggestions": [
+        "explicit startup-ready model/schema/strictvalue/warm complete gate per fresh session and private trace ownership registration before child can detach",
+        "uniform frozen source/job, predeclared case warmup and steady samples with start+end reclock; pick T/g before matches by same declared formula",
+        "budget jobtimeout from total readiness+warm+pause polls+calibration+cleanup, keeping per-hand T fixed; bounded async metadata reads outside hand",
+        "handoff Python monitor exact owner-discovered PID/starttick or full subreaper adopted child registry; self-adopted-only wait and bounded absence; fail closed when cleanup missing",
+        "gate original clock g=287 and final cleanup fail independently; no historical rescue/no .48 plan change now"
+      ],
+      "no_new_freeze_or_settings": true
+    }
+  },
+  "numerical": {
+    "features_bits": 124416,
+    "NN_elements": 26304,
+    "candidate_prior_comparisons": 12198,
+    "numeric_rows": 192,
+    "NN_max_abs": 5.4836273193359375e-06,
+    "prior_max_abs": 1.5943643125737594e-06,
+    "finite_strict_value_shapes_lengths_first": true,
+    "tensor_dimension_metadata_missing_from_root_rows": 192,
+    "tensor_dims_checked_by_original_source_not_raw_root": true,
+    "threshold": "abs<=1e-4+1e-4*abs(ref)",
+    "raw_canonical_P2_rust209_distinct": true
+  },
+  "responses_by_version": [
+    {
+      "version": "GOLDEN-CALIBRATION-01",
+      "rows": 62,
+      "accepted": 62,
+      "rejected": [],
+      "raw_sha256": "fa6caecdb94318772305995815e77f55a4b7ee6431a8ff7e4f6295cacfa77821",
+      "warmup_minus1": 11,
+      "sample_nonwarm": 51
+    },
+    {
+      "version": "GOLDEN-CALIBRATION-CONTINUATION-01",
+      "rows": 82,
+      "accepted": 82,
+      "rejected": [],
+      "raw_sha256": "f6b05c7bf83663bd78c0423a1fe5d8c34b7ffe16404a9cb4ca57b32874d6a380",
+      "warmup_minus1": 13,
+      "sample_nonwarm": 69
+    },
+    {
+      "version": "GOLDEN-PILOT-01",
+      "rows": 36,
+      "accepted": 36,
+      "rejected": [],
+      "raw_sha256": "f3430abd6ed61be7fa933c4bf77ff48430ab06ab6c4bbcdff61778afd55ab630",
+      "warmup_minus1": 6,
+      "sample_nonwarm": 30
+    },
+    {
+      "version": "GOLDEN-FINAL-01",
+      "rows": 9,
+      "accepted": 6,
+      "rejected": [
+        {
+          "engine": "candidate",
+          "id": "initial-p1",
+          "error": "NO_RESPONSE_TIMEOUT",
+          "elapsed_ms": 13.548539996147156,
+          "T_ms": 10,
+          "late": true,
+          "nn_calls": null
+        },
+        {
+          "engine": "candidate",
+          "id": "initial-p1",
+          "error": "NO_RESPONSE_TIMEOUT",
+          "elapsed_ms": 499.2208690047264,
+          "T_ms": 500,
+          "late": false,
+          "nn_calls": null
+        },
+        {
+          "engine": "reference",
+          "id": "initial-p1",
+          "error": "NO_RESPONSE_TIMEOUT",
+          "elapsed_ms": 500.40026900172234,
+          "T_ms": 500,
+          "late": true,
+          "nn_calls": null
+        }
+      ],
+      "raw_sha256": "c91b1175a895c59e40f6619f59662b0c920da5bc6da32d993a73ffd38046136b",
+      "warmup_minus1": 0,
+      "sample_nonwarm": 9
+    },
+    {
+      "version": "GOLDEN-FINAL-BOUNDARY-REPAIR-01",
+      "rows": 9,
+      "accepted": 6,
+      "rejected": [
+        {
+          "engine": "candidate",
+          "id": "initial-p1",
+          "error": "NO_RESPONSE_TIMEOUT",
+          "elapsed_ms": 14.178527995944023,
+          "T_ms": 10,
+          "late": true,
+          "nn_calls": null
+        },
+        {
+          "engine": "candidate",
+          "id": "initial-p1",
+          "error": "NO_RESPONSE_TIMEOUT",
+          "elapsed_ms": 501.4060439914465,
+          "T_ms": 500,
+          "late": true,
+          "nn_calls": null
+        },
+        {
+          "engine": "reference",
+          "id": "initial-p1",
+          "error": "NO_RESPONSE_TIMEOUT",
+          "elapsed_ms": 500.520107999444,
+          "T_ms": 500,
+          "late": true,
+          "nn_calls": null
+        }
+      ],
+      "raw_sha256": "5bece4577e15c622f086be45d90a37abfdf0559cc33ffd7dd33d3bff000380e9",
+      "warmup_minus1": 0,
+      "sample_nonwarm": 9
+    },
+    {
+      "version": "GOLDEN-SEAL-01",
+      "rows": 5,
+      "accepted": 4,
+      "rejected": [
+        {
+          "engine": "candidate",
+          "id": "initial-p1",
+          "error": "NO_RESPONSE_TIMEOUT",
+          "elapsed_ms": 12.666119009256363,
+          "T_ms": 10,
+          "late": true,
+          "nn_calls": null
+        }
+      ],
+      "raw_sha256": "058a22bc7c4b1e2d9600f10b991f9782bdeb723a3cfa5cce002a1dc816b4b9a2",
+      "warmup_minus1": 0,
+      "sample_nonwarm": 5
+    }
+  ],
+  "cleanup": {
+    "union866_current_absent": true,
+    "identities_from_monitor852_runner11_ownertrace80_overlapping": true,
+    "current_snapshot_UTC": "2026-10-01T12:45:48.004943+00:00",
+    "known_crashpad": {
+      "pid": 1158490,
+      "starttick": 10958079,
+      "owner_known": true,
+      "python_tracked": false,
+      "adopted_wait_logged": false,
+      "current_absent": true,
+      "trace": [
+        {
+          "kind": "cleanup_start",
+          "UTC": "2026-10-01T12:11:26.349Z",
+          "monotonic_ms": 16675.107764,
+          "identity": {
+            "pid": 1158490,
+            "ppid": 1158246,
+            "pgid": 1158489,
+            "starttick": 10958079,
+            "state": "S",
+            "comm": "chrome_crashpad"
+          }
+        },
+        {
+          "kind": "grace_finished",
+          "UTC": "2026-10-01T12:11:26.470Z",
+          "monotonic_ms": 16796.474823,
+          "identity": {
+            "pid": 1158490,
+            "ppid": 1158246,
+            "pgid": 1158489,
+            "starttick": 10958079,
+            "state": "S",
+            "comm": "chrome_crashpad"
+          }
+        },
+        {
+          "kind": "signal_before",
+          "UTC": "2026-10-01T12:11:26.472Z",
+          "monotonic_ms": 16797.669263,
+          "identity": {
+            "pid": 1158490,
+            "ppid": 1158246,
+            "pgid": 1158489,
+            "starttick": 10958079,
+            "state": "S",
+            "comm": "chrome_crashpad"
+          }
+        },
+        {
+          "kind": "signal_order",
+          "UTC": "2026-10-01T12:11:26.478Z",
+          "monotonic_ms": 16804.187256,
+          "identity": {
+            "pid": 1158490,
+            "ppid": 1158246,
+            "pgid": 1158489,
+            "starttick": 10958079,
+            "state": "S",
+            "comm": "chrome_crashpad"
+          }
+        },
+        {
+          "kind": "signal_sent",
+          "UTC": "2026-10-01T12:11:26.480Z",
+          "monotonic_ms": 16805.642589,
+          "identity": {
+            "pid": 1158490,
+            "ppid": 1158246,
+            "pgid": 1158489,
+            "starttick": 10958079,
+            "state": "R",
+            "comm": "chrome_crashpad"
+          }
+        },
+        {
+          "kind": "signal_sent",
+          "UTC": "2026-10-01T12:11:26.489Z",
+          "monotonic_ms": 16815.614173,
+          "identity": {
+            "pid": 1158490,
+            "ppid": 1158246,
+            "pgid": 1158489,
+            "starttick": 10958079,
+            "state": "Z",
+            "comm": "chrome_crashpad"
+          }
+        },
+        {
+          "kind": "signal_identity_mismatch",
+          "UTC": "2026-10-01T12:11:26.491Z",
+          "monotonic_ms": 16817.461177,
+          "identity": {
+            "pid": 1158490,
+            "ppid": 1158246,
+            "pgid": 1158489,
+            "starttick": 10958079,
+            "state": "Z",
+            "comm": "chrome_crashpad"
+          }
+        },
+        {
+          "kind": "signal_sent",
+          "UTC": "2026-10-01T12:11:26.504Z",
+          "monotonic_ms": 16830.031579,
+          "identity": {
+            "pid": 1158490,
+            "ppid": 1158246,
+            "pgid": 1158489,
+            "starttick": 10958079,
+            "state": "Z",
+            "comm": "chrome_crashpad"
+          }
+        },
+        {
+          "kind": "signal_sent",
+          "UTC": "2026-10-01T12:11:26.505Z",
+          "monotonic_ms": 16831.435002,
+          "identity": {
+            "pid": 1158490,
+            "ppid": 1158246,
+            "pgid": 1158489,
+            "starttick": 10958079,
+            "state": "Z",
+            "comm": "chrome_crashpad"
+          }
+        },
+        {
+          "kind": "signal_sent",
+          "UTC": "2026-10-01T12:11:26.511Z",
+          "monotonic_ms": 16837.496745,
+          "identity": {
+            "pid": 1158490,
+            "ppid": 1158246,
+            "pgid": 1158489,
+            "starttick": 10958079,
+            "state": "Z",
+            "comm": "chrome_crashpad"
+          }
+        },
+        {
+          "kind": "signal_after",
+          "UTC": "2026-10-01T12:11:26.512Z",
+          "monotonic_ms": 16838.350167,
+          "identity": {
+            "pid": 1158490,
+            "ppid": 1158246,
+            "pgid": 1158489,
+            "starttick": 10958079,
+            "state": "Z",
+            "comm": "chrome_crashpad"
+          }
+        },
+        {
+          "kind": "direct_child_exit",
+          "UTC": "2026-10-01T12:11:26.531Z",
+          "monotonic_ms": 16856.680181,
+          "identity": {
+            "pid": 1158490,
+            "ppid": 1158246,
+            "pgid": 1158489,
+            "starttick": 10958079,
+            "state": "Z",
+            "comm": "chrome_crashpad"
+          }
+        },
+        {
+          "kind": "direct_child_close",
+          "UTC": "2026-10-01T12:11:26.532Z",
+          "monotonic_ms": 16857.754652,
+          "identity": {
+            "pid": 1158490,
+            "ppid": 1158246,
+            "pgid": 1158489,
+            "starttick": 10958079,
+            "state": "Z",
+            "comm": "chrome_crashpad"
+          }
+        },
+        {
+          "kind": "drain_before",
+          "UTC": "2026-10-01T12:11:26.594Z",
+          "monotonic_ms": 16919.930357,
+          "identity": {
+            "pid": 1158490,
+            "ppid": 1158246,
+            "pgid": 1158489,
+            "starttick": 10958079,
+            "state": "Z",
+            "comm": "chrome_crashpad"
+          }
+        },
+        {
+          "kind": "drain_after",
+          "UTC": "2026-10-01T12:11:26.595Z",
+          "monotonic_ms": 16920.963822,
+          "identity": {
+            "pid": 1158490,
+            "ppid": 1158246,
+            "pgid": 1158489,
+            "starttick": 10958079,
+            "state": "Z",
+            "comm": "chrome_crashpad"
+          }
+        },
+        {
+          "kind": "absence_wait_start",
+          "UTC": "2026-10-01T12:11:26.596Z",
+          "monotonic_ms": 16921.93917,
+          "identity": {
+            "pid": 1158490,
+            "ppid": 1158246,
+            "pgid": 1158489,
+            "starttick": 10958079,
+            "state": "Z",
+            "comm": "chrome_crashpad"
+          }
+        },
+        {
+          "kind": "absence_wait_end",
+          "UTC": "2026-10-01T12:11:27.602Z",
+          "monotonic_ms": 17927.810138,
+          "identity": {
+            "pid": 1158490,
+            "ppid": 1158246,
+            "pgid": 1158489,
+            "starttick": 10958079,
+            "state": "Z",
+            "comm": "chrome_crashpad"
+          }
+        },
+        {
+          "kind": "cleanup_failure",
+          "UTC": "2026-10-01T12:11:27.602Z",
+          "monotonic_ms": 17928.54262,
+          "identity": {
+            "pid": 1158490,
+            "ppid": 1158246,
+            "pgid": 1158489,
+            "starttick": 10958079,
+            "state": "Z",
+            "comm": "chrome_crashpad"
+          }
+        },
+        {
+          "kind": "owner_finished",
+          "UTC": "2026-10-01T12:11:27.603Z",
+          "monotonic_ms": 17929.204153,
+          "identity": {
+            "pid": 1158490,
+            "ppid": 1158246,
+            "pgid": 1158489,
+            "starttick": 10958079,
+            "state": "Z",
+            "comm": "chrome_crashpad"
+          }
+        }
+      ],
+      "absence_wait_ms": 1005.8709679999993
+    },
+    "seal_response5_accepted4_intentional_reject1": true,
+    "session1_PID0_before_fresh": true,
+    "final_session2_OWN_CLEANUP_FAILED": true,
+    "root_monitor_remaining_empty_scope_incomplete": true,
+    "current_absence_cannot_rescue": true,
+    "no_original43_cause_generalization": true
+  },
+  "savedmock": {
+    "saved_nine_summary": {
+      "checks": [
+        "same main registered48/96 all numbering/color/seed/attempt/checkpoint/table",
+        "positive/missing/old/foreign/purpose/hash/fake-acceptance/existing run rejected without model; actual no-go",
+        "whole pair retry1 same registered prefix/seed, old invalid kept no replacement",
+        "pair1/global2 exhausted stops partial, supplementary0",
+        "pause/deadline/signal discard unfinished outcomes and stop",
+        "responsible engine NN/hash/fallback, reference timeout loss, shared infra invalid",
+        "producer all identity fields and legal foreign prefix rejected",
+        "old generation discarded and public watchdog settles while cleanup hangs",
+        "failed real-ownership proof prohibits fresh and fabricated PID0"
+      ],
+      "passed": 9,
+      "synthetic_only": true,
+      "actual_go": false,
+      "real_NN": 0,
+      "real_holdout_sends": 0,
+      "real_games": 0
+    },
+    "positive_artificial_games": 96,
+    "registered_pairs": 48,
+    "number_prefix_color_seed_verified": true,
+    "scenarios": [
+      {
+        "runId": "signal",
+        "dry": true,
+        "completed": 0,
+        "globalRetry": 0,
+        "restarts": 1,
+        "remaining_pids": 0,
+        "cleanup_complete": true,
+        "stopReason": "PROCESSING_DEADLINE_OR_SIGNAL"
+      },
+      {
+        "runId": "expired",
+        "dry": true,
+        "completed": 0,
+        "globalRetry": 0,
+        "restarts": 0,
+        "remaining_pids": 0,
+        "cleanup_complete": true,
+        "stopReason": "PROCESSING_DEADLINE_OR_SIGNAL"
+      },
+      {
+        "runId": "pair-exhausted",
+        "dry": true,
+        "completed": 0,
+        "globalRetry": 1,
+        "restarts": 2,
+        "remaining_pids": 0,
+        "cleanup_complete": true,
+        "stopReason": "invalid_pair_retry_exhausted"
+      },
+      {
+        "runId": "pause",
+        "dry": true,
+        "completed": 0,
+        "globalRetry": 0,
+        "restarts": 0,
+        "remaining_pids": 0,
+        "cleanup_complete": true,
+        "stopReason": "PAUSED"
+      },
+      {
+        "runId": "global",
+        "dry": true,
+        "completed": 4,
+        "globalRetry": 2,
+        "restarts": 3,
+        "remaining_pids": 0,
+        "cleanup_complete": true,
+        "stopReason": "invalid_pair_retry_exhausted"
+      },
+      {
+        "runId": "cleanup-failed",
+        "dry": true,
+        "completed": 1,
+        "globalRetry": 0,
+        "restarts": 1,
+        "remaining_pids": null,
+        "cleanup_complete": false,
+        "stopReason": "OWN_CLEANUP_FAILED;OWN_CLEANUP_FAILED"
+      },
+      {
+        "runId": "MOCK96-01",
+        "dry": true,
+        "completed": 96,
+        "globalRetry": 0,
+        "restarts": 1,
+        "remaining_pids": 0,
+        "cleanup_complete": true,
+        "stopReason": "all_scheduled_complete"
+      },
+      {
+        "runId": "retry",
+        "dry": true,
+        "completed": 96,
+        "globalRetry": 1,
+        "restarts": 2,
+        "remaining_pids": 0,
+        "cleanup_complete": true,
+        "stopReason": "all_scheduled_complete"
+      }
+    ],
+    "entry_mock_job_source_differences_from_final": [
+      {
+        "name": "run-golden.cjs",
+        "mock_run_sha": "012616837b5fc55003646ea68cd88e482d7548311bc6b0b142cadb92faa6f229",
+        "final_sha": "c7caa3869559bca9413eae4cc77299d41d600382cbb44366436864c38a175e25"
+      },
+      {
+        "name": "pause-check.cjs",
+        "mock_run_sha": "f6d0967096d336d7618f0b334044e92073f8ff0e782fa8ee97285d979862064d",
+        "final_sha": "05649153f7c148ed312c50273b55eaed952009a1fea017a8bbf806ffe3881ff1"
+      },
+      {
+        "name": "arena.cjs",
+        "mock_run_sha": "2f07ac5a9f156596509ef7cb056082f68a2d8c04fefc6aebc424e716e173b270",
+        "final_sha": "71cd79c99c801d2e09f3532d1fc7759ff72b665cf4fd3b8e28b2a04a434b1dc2"
+      },
+      {
+        "name": "match-entry.cjs",
+        "mock_run_sha": "50fe9a75e9e2bae0d80d3a001652965e3c31dc9c32850a3ebeb1b4240bcc96fc",
+        "final_sha": "3a301f17e90fb0d3c56893706fccc4c41f60cdc9716bcb864b98632e6b53b1de"
+      },
+      {
+        "name": "golden-gates.cjs",
+        "mock_run_sha": "e3f1a171deb7948b7e1192c756e7b911e2426737d133ca18ec042e95dbdb7238",
+        "final_sha": "fc7056cfec5fc41c31eb62194efc8159ef894295e96ae85273ddcba06dcfa0ad"
+      }
+    ],
+    "prior_source_saved_mock_only": true,
+    "final_source_mock_complete": false,
+    "real_positive_token_path_not_runtime_reverified": true,
+    "newNN_entry_game_execution": 0,
+    "main_token_and_classification_read": true
+  },
+  "original_failures_retained": {
+    "calibration120stop": "exit1/deadline and synchronous Beads context-canceled failure, unfinished work unknown",
+    "watchdog_original9": "candidate NO_RESPONSE_TIMEOUT at499.220869ms for T500/late=false retained, boundary repair separate",
+    "final_boundary_repair9": "6accepted/3null refusal and two goalNN0 finite only; not same source as seal",
+    "seal5": "responses5 do not imply entry success; last cleanup failed",
+    "analyzer_tuple_key_error": "original failed analyzer and one repair note/hash retained; no new helper correction needed",
+    "old": "43 failure/cause unknown/forced/Z telemetry assertion/old cache tmp affinity monitoring deadline deviations retained"
+  },
+  "unverified": [
+    "no NN/browser/entry or positive actual-token execution in this audit",
+    "finalsource full mock not executed; artificial summaries are prior source and synthetic scores",
+    "root numeric telemetry lacks tensor dims: vector lengths and finite value checked, tensor dimensional shape only static original source",
+    "current866 absence is snapshot, not historical wait/exit chronology completeness",
+    "missed crashpad resource usage/instant RSS/short-lived PIDs/TIDs/Beads side-effect bytes/full-period compliance",
+    "true legal200/no-legal/deep NN revisit/native standard/FFI entropy/license provenance distribution/clocktail/general sync cancel remain unproven",
+    "old32 score/NI not established; Sigma equivalence unachieved; new96actual no-go"
+  ],
+  "next_minimal_contract_proposals": [
+    "explicit startup-ready model/schema/strictvalue/warm complete gate per fresh session and private trace ownership registration before child can detach",
+    "uniform frozen source/job, predeclared case warmup and steady samples with start+end reclock; pick T/g before matches by same declared formula",
+    "budget jobtimeout from total readiness+warm+pause polls+calibration+cleanup, keeping per-hand T fixed; bounded async metadata reads outside hand",
+    "handoff Python monitor exact owner-discovered PID/starttick or full subreaper adopted child registry; self-adopted-only wait and bounded absence; fail closed when cleanup missing",
+    "gate original clock g=287 and final cleanup fail independently; no historical rescue/no .48 plan change now"
+  ],
+  "no_current_plan_or_config_changes": true,
+  "stop": {
+    "UTC": "2026-10-01T12:49:44.262925+00:00",
+    "issue": "quoridor-4lc.50",
+    "all_owned_static_jobs_stopped": true,
+    "identity_count": 6,
+    "identities": [
+      {
+        "pid": 1188862,
+        "starttick": 11181007
+      },
+      {
+        "pid": 1188863,
+        "starttick": 11181010
+      },
+      {
+        "pid": 1184309,
+        "starttick": 11147753
+      },
+      {
+        "pid": 1184310,
+        "starttick": 11147756
+      },
+      {
+        "pid": 1186545,
+        "starttick": 11165020
+      },
+      {
+        "pid": 1186546,
+        "starttick": 11165023
+      }
+    ],
+    "remaining": [],
+    "remaining0": true,
+    "static_jobs": 3,
+    "exit0": true,
+    "last_job_end": "2026-10-01T12:48:27.979613+00:00",
+    "processing_stop": "12:55UTC",
+    "submit_stop": "13:05UTC",
+    "newjob_cutoff": "12:50UTC",
+    "no_new_job_after_this_stop": true,
+    "saved_before_report": true,
+    "recorder_PID": 1190423,
+    "recorder_exits_after_save": true,
+    "NN_browser_entry_build_download_games": 0,
+    "other_jobs_not_stopped": true
+  },
+  "resources": {
+    "UTC": "2026-10-01T12:49:44.262925+00:00",
+    "peak_observed_RSS_bytes": 624357376,
+    "guard_RSS_bytes": 1073741824,
+    "allocated_current": 1458176,
+    "combined_continuation_critic_allocated": 5656576,
+    "new_guard": 29360128,
+    "combined_guard": 117440512,
+    "additional_reservation": 0,
+    "static_jobs": [
+      {
+        "name": "final-static-check",
+        "command": [
+          "python3",
+          "-B",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-CONTINUATION-NOGO/final-static-check.py"
+        ],
+        "UTC_start": "2026-10-01T12:48:27.822191+00:00",
+        "UTC_end": "2026-10-01T12:48:27.979613+00:00",
+        "runner_pid": 1188862,
+        "runner_starttick": 11181007,
+        "child_pid": 1188863,
+        "child_starttick": 11181010,
+        "tracked": [
+          {
+            "pid": 1188863,
+            "ppid": 1188862,
+            "starttick": 11181010,
+            "state": "R",
+            "rss": 29458432,
+            "observed_affinities": [
+              [
+                0
+              ]
+            ]
+          }
+        ],
+        "remaining": [],
+        "exit": 0,
+        "stop_reason": null,
+        "peak_RSS_bytes": 610365440,
+        "peak_allocated_bytes": 1105920,
+        "affinity": [
+          0
+        ],
+        "sample_ms": 20,
+        "instant_peak_and_short_lived_TID_not_guaranteed": true,
+        "TMP_XDG_inside_owned": true,
+        "NN_build_download_games": 0,
+        "runner_sha256": "1ca059ca5f7c787cec57a149b43c8792d86310bf9f9b03aed960a902f3a268a5"
+      },
+      {
+        "name": "clock-numeric",
+        "command": [
+          "python3",
+          "-B",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-CONTINUATION-NOGO/independent-clock-numeric.py"
+        ],
+        "UTC_start": "2026-10-01T12:42:55.298874+00:00",
+        "UTC_end": "2026-10-01T12:42:55.476603+00:00",
+        "runner_pid": 1184309,
+        "runner_starttick": 11147753,
+        "child_pid": 1184310,
+        "child_starttick": 11147756,
+        "tracked": [
+          {
+            "pid": 1184310,
+            "ppid": 1184309,
+            "starttick": 11147756,
+            "state": "R",
+            "rss": 43450368,
+            "observed_affinities": [
+              [
+                0
+              ]
+            ]
+          }
+        ],
+        "remaining": [],
+        "exit": 0,
+        "stop_reason": null,
+        "peak_RSS_bytes": 624357376,
+        "peak_allocated_bytes": 667648,
+        "affinity": [
+          0
+        ],
+        "sample_ms": 20,
+        "instant_peak_and_short_lived_TID_not_guaranteed": true,
+        "TMP_XDG_inside_owned": true,
+        "NN_build_download_games": 0,
+        "runner_sha256": "1ca059ca5f7c787cec57a149b43c8792d86310bf9f9b03aed960a902f3a268a5"
+      },
+      {
+        "name": "ownership-mock",
+        "command": [
+          "python3",
+          "-B",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-CONTINUATION-NOGO/independent-ownership-mock.py"
+        ],
+        "UTC_start": "2026-10-01T12:45:47.962440+00:00",
+        "UTC_end": "2026-10-01T12:45:48.025013+00:00",
+        "runner_pid": 1186545,
+        "runner_starttick": 11165020,
+        "child_pid": 1186546,
+        "child_starttick": 11165023,
+        "tracked": [
+          {
+            "pid": 1186546,
+            "ppid": 1186545,
+            "starttick": 11165023,
+            "state": "R",
+            "rss": 18808832,
+            "observed_affinities": [
+              [
+                0
+              ]
+            ]
+          }
+        ],
+        "remaining": [],
+        "exit": 0,
+        "stop_reason": null,
+        "peak_RSS_bytes": 599715840,
+        "peak_allocated_bytes": 937984,
+        "affinity": [
+          0
+        ],
+        "sample_ms": 20,
+        "instant_peak_and_short_lived_TID_not_guaranteed": true,
+        "TMP_XDG_inside_owned": true,
+        "NN_build_download_games": 0,
+        "runner_sha256": "1ca059ca5f7c787cec57a149b43c8792d86310bf9f9b03aed960a902f3a268a5"
+      }
+    ],
+    "all_monitored_TIDs_CPU0": true,
+    "instant_peak_short_lived_process_TID_unmeasured": true,
+    "preflight_read_commands_not_continuously_resource_sampled": true,
+    "Beads_side_effect_bytes_unproven": true,
+    "TMP_XDG_inside_owned": true,
+    "inactive_temp_files": [],
+    "NN_browser_entry_games": 0
+  },
+  "reproduction_readonly": [
+    "UV_NO_SYNC=1 UV_OFFLINE=1 PYTHONDONTWRITEBYTECODE=1 taskset -c 0 python3 -B /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-CONTINUATION-NOGO/static-runner.py clock-numeric python3 -B /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-CONTINUATION-NOGO/independent-clock-numeric.py",
+    "same own static-runner with independent-ownership-mock.py / final-static-check.py; all outputs owned; original analyzer never executed"
+  ],
+  "status_authority": "Beads only; issue remains in_progress pending coordinator acceptance"
+}

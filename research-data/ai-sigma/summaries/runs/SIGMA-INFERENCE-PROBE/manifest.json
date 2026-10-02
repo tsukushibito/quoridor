@@ -1,0 +1,1795 @@
+{
+  "important_inputs": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "c03050bdfe00ecf86558945f0100ca6265d33e7447743cc277aeffea546f6edb",
+      "bytes": 2064
+    },
+    {
+      "path": ".agents/research-team/common.md",
+      "sha256": "56c4d2aed25c083e6292d11efb0afa2c70a8f26709e5ad5a50029c8ef8d55add",
+      "bytes": 3993
+    },
+    {
+      "path": ".agents/research-team/roles/hypothesis.md",
+      "sha256": "abfc3049d891db3da8fdab19a34c41bc1ed38aeda31b049015ba6f02390ef66c",
+      "bytes": 1002
+    },
+    {
+      "path": ".agents/research-team/templates/handoff.md",
+      "sha256": "8139c0ad5a3a4eccc5ba7654807effa350debfcc32c5320aeffba4e9b8e2f753",
+      "bytes": 684
+    },
+    {
+      "path": ".devcontainer/storage-policy.md",
+      "sha256": "bc27c254d4cde6342329d9f27c376da786857d58ea8b6cf0ea5e0ba78fabb099",
+      "bytes": 4527
+    },
+    {
+      "path": "docs/design/ai-sigma-research-goal.md",
+      "sha256": "4b0fee4e7b7c9f2de07a6baf0c2fd5f649718511e419366af9464471d4524b7d",
+      "bytes": 7907
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-inference.md",
+      "sha256": "fb898f566e910eefab2482ed11b45b4a7f96f7d4cd14d95d1a93803cca429deb",
+      "bytes": 7891
+    },
+    {
+      "path": "docs/design/ai-research-team.md",
+      "sha256": "13d757d4cad2b68d1ad1fb106360b91108cbcce0d74718ac1813599635eab123",
+      "bytes": 13085
+    },
+    {
+      "path": "docs/design/quoridor-3d-webapp-design-rust-wasm-v1.md",
+      "sha256": "c4dbe22719bcd60ad0c9e8586a37d4e0be6bcc2dbd863cea21f8e322093ab577",
+      "bytes": 143331
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-model.md",
+      "sha256": "4229433203b5b4bff9921de287f3ecf8f57d0eb313033a75504d3d9cd12a6a46",
+      "bytes": 2583
+    },
+    {
+      "path": ".artifacts/ai-sigma/verification/MODEL-COORD-STATIC/summary.json",
+      "sha256": "bcd604172cc122683ede371b447d0b4862f1609ee4b310998f071e7502298224",
+      "bytes": 948
+    },
+    {
+      "path": "crates/quoridor-ai/src/lib.rs",
+      "sha256": "120dcebbbcb6c894eea64eca24694450d9e97ea833638446e9883b0c43099140",
+      "bytes": 18782
+    },
+    {
+      "path": "crates/quoridor-ai/src/research.rs",
+      "sha256": "c1a632be1177bd8c4fe6b81d36365577bf4f953f58c5c6abd8bc9e9ba6ed770e",
+      "bytes": 12384
+    },
+    {
+      "path": "crates/quoridor-wasm/src/lib.rs",
+      "sha256": "1f2ceb28895373f6cbbc2761a55cba3acf2d837aaa80d401f10cab3c15a3a1da",
+      "bytes": 7510
+    },
+    {
+      "path": "Cargo.lock",
+      "sha256": "f1b7e28714344098c70588371a8869a128612c40e0762c4cd0fbc0677309f346",
+      "bytes": 6911
+    },
+    {
+      "path": "tools/training/uv.lock",
+      "sha256": "6b562f85005518a8e38556722d536c342c17da18b0d7040fcd0e80bb662671b3",
+      "bytes": 49088
+    },
+    {
+      "path": ".artifacts/ai-sigma/reference-fixtures/SIGMA-PARITY-PLAN/sources/docs/mcts_worker.js",
+      "sha256": "f2de9444e8960ca14d4d4acb5dd319e3f0a6a743c39b4032dce32068ebcfe8fa",
+      "bytes": 17775
+    }
+  ],
+  "head": "1482df8da6dd91c95db211aeaa914af775b2bc76",
+  "branch": "codex/ai-sigma",
+  "upstream": "751186344fc52ad0c29bc65922e62c6fa915f006",
+  "model_sha256": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+  "fixed_dependencies": [
+    {
+      "name": "adler2",
+      "version": "2.0.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "320119579fcad9c21884f5c4861d16174d0e06250625266f50fe6898340abefa"
+    },
+    {
+      "name": "ahash",
+      "version": "0.8.12",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "5a15f179cd60c4584b8a8c596927aadc462e27f2ca70c04e0071964a73ba7a75",
+      "dependencies": [
+        "cfg-if",
+        "once_cell",
+        "version_check",
+        "zerocopy"
+      ]
+    },
+    {
+      "name": "aho-corasick",
+      "version": "1.1.5",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "c982642fa9e8606056828ee9a8505737230110bb1099153c79efe865c59d12ba",
+      "dependencies": [
+        "memchr"
+      ]
+    },
+    {
+      "name": "ai-sigma-inference-probe",
+      "version": "0.1.0",
+      "dependencies": [
+        "getrandom",
+        "serde_json",
+        "tract-onnx"
+      ]
+    },
+    {
+      "name": "anyhow",
+      "version": "1.0.104",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "330a5ed07fa54e4702c9d6c4174f74427fc0ef6e214bbd677ae50a5099946470"
+    },
+    {
+      "name": "anymap2",
+      "version": "0.13.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "d301b3b94cb4b2f23d7917810addbbaff90738e0ca2be692bd027e70d7e0330c"
+    },
+    {
+      "name": "anymap3",
+      "version": "1.1.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "fb5dfbc6d8d2675589ccbe4d0fd61df2419075625f8c1a62325e718e2b0049f9"
+    },
+    {
+      "name": "autocfg",
+      "version": "1.5.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "f2032f911046de80f0a198e0901378627c33f59ea0ac00e363d481118bd70a53"
+    },
+    {
+      "name": "bit-set",
+      "version": "0.5.3",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "0700ddab506f33b20a03b13996eccd309a48e5ff77d0d95926aa0210fb4e95f1",
+      "dependencies": [
+        "bit-vec"
+      ]
+    },
+    {
+      "name": "bit-vec",
+      "version": "0.6.3",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "349f9b6a179ed607305526ca489b34ad0a41aed5f7980fa90eb03160b69598fb"
+    },
+    {
+      "name": "bitflags",
+      "version": "2.13.2",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "3ded4057c258ba199e2d26386d3af3780957ecaee6c4ef4041c6b4b8b97c0b06"
+    },
+    {
+      "name": "byteorder",
+      "version": "1.5.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "1fd0f2584146f6f2ef48085050886acf353beff7305ebd1ae69500e27c67f64b"
+    },
+    {
+      "name": "bytes",
+      "version": "1.12.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "fc652a48c352aef3ea3aed32080501cf3ef6ed5da78602a020c991775b0aff04"
+    },
+    {
+      "name": "cc",
+      "version": "1.5.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "f360145194ee8e21db5ee7f3fcd4fe52210864c75c985dae33218202c8bbe040",
+      "dependencies": [
+        "find-msvc-tools",
+        "shlex"
+      ]
+    },
+    {
+      "name": "cfg-if",
+      "version": "1.0.5",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "4e7648175b45a9a48536d676f68d918270699102aa8dab5496df06904c914600"
+    },
+    {
+      "name": "crc32fast",
+      "version": "1.5.2",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "01a7799fd6b852db0e61728dde9a204c423b44d689dbd432522543614b490e78",
+      "dependencies": [
+        "cfg-if"
+      ]
+    },
+    {
+      "name": "crunchy",
+      "version": "0.2.4",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "460fbee9c2c2f33933d720630a6a0bac33ba7053db5344fac858d4b8952d77d5"
+    },
+    {
+      "name": "deranged",
+      "version": "0.5.8",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "7cd812cc2bc1d69d4764bd80df88b4317eaef9e773c75226407d9bc0876b211c"
+    },
+    {
+      "name": "derive-new",
+      "version": "0.5.9",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "3418329ca0ad70234b9735dc4ceed10af4df60eff9c8e7b06cb5e520d92c3535",
+      "dependencies": [
+        "proc-macro2",
+        "quote",
+        "syn 1.0.109"
+      ]
+    },
+    {
+      "name": "downcast-rs",
+      "version": "1.2.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "75b325c5dbd37f80359721ad39aca5a29fb04c89279657cffdda8736d0c0b9d2"
+    },
+    {
+      "name": "dyn-clone",
+      "version": "1.0.20",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "d0881ea181b1df73ff77ffaaf9c7544ecc11e82fba9b5f27b262a3c73a332555"
+    },
+    {
+      "name": "dyn-hash",
+      "version": "0.2.2",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "15401da73a9ed8c80e3b2d4dc05fe10e7b72d7243b9f614e516a44fa99986e88"
+    },
+    {
+      "name": "either",
+      "version": "1.18.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "252afb9ae5eaa683babdc6a068b3f5726eb19e05070c731f9b2a23a7c3e8ed34"
+    },
+    {
+      "name": "errno",
+      "version": "0.3.14",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "39cab71617ae0d63f51a36d69f866391735b51691dbda63cf6f96d042b63efeb",
+      "dependencies": [
+        "libc",
+        "windows-sys"
+      ]
+    },
+    {
+      "name": "filetime",
+      "version": "0.2.29",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "5c287a33c7f0a620c38e641e7f60827713987b3c0f26e8ddc9462cc69cf75759",
+      "dependencies": [
+        "cfg-if",
+        "libc"
+      ]
+    },
+    {
+      "name": "find-msvc-tools",
+      "version": "0.1.14",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "aedcfb3409746eddb02b9e19ebda1c3394f759a152e48ee875a0844d1b955484"
+    },
+    {
+      "name": "flate2",
+      "version": "1.1.10",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "6e634e2e0ebac1ee034020da1ca582e17ffe4e0f5e985823721e168928136dcb",
+      "dependencies": [
+        "crc32fast",
+        "miniz_oxide",
+        "zlib-rs"
+      ]
+    },
+    {
+      "name": "getrandom",
+      "version": "0.2.17",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "ff2abc00be7fca6ebc474524697ae276ad847ad0a6b3faa4bcb027e9a4614ad0",
+      "dependencies": [
+        "cfg-if",
+        "libc",
+        "wasi"
+      ]
+    },
+    {
+      "name": "half",
+      "version": "2.7.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "6ea2d84b969582b4b1864a92dc5d27cd2b77b622a8d79306834f1be5ba20d84b",
+      "dependencies": [
+        "cfg-if",
+        "crunchy",
+        "num-traits",
+        "zerocopy"
+      ]
+    },
+    {
+      "name": "hashbrown",
+      "version": "0.14.5",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "e5274423e17b7c9fc20b6e7e208532f9b19825d82dfd615708b70edd83df41f1",
+      "dependencies": [
+        "ahash"
+      ]
+    },
+    {
+      "name": "itertools",
+      "version": "0.10.5",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "b0fd2260e829bddf4cb6ea802289de2f86d6a7a690192fbe91b3f46e0f2c8473",
+      "dependencies": [
+        "either"
+      ]
+    },
+    {
+      "name": "itertools",
+      "version": "0.12.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "ba291022dbbd398a455acf126c1e341954079855bc60dfdda641363bd6922569",
+      "dependencies": [
+        "either"
+      ]
+    },
+    {
+      "name": "itertools",
+      "version": "0.14.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "2b192c782037fadd9cfa75548310488aabdbf3d2da73885b31bd0abd03351285",
+      "dependencies": [
+        "either"
+      ]
+    },
+    {
+      "name": "itoa",
+      "version": "1.0.18",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "8f42a60cbdf9a97f5d2305f08a87dc4e09308d1276d28c869c684d7777685682"
+    },
+    {
+      "name": "kstring",
+      "version": "2.0.5",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "7a09b82a7f771ed02dc0dd9b27130a0fa5499fa15ed3027116c1e5e4e591bd9e",
+      "dependencies": [
+        "serde",
+        "static_assertions"
+      ]
+    },
+    {
+      "name": "lazy_static",
+      "version": "1.5.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "bbd2bcb4c963f2ddae06a2efc7e9f3591312473c50c6685e1f298068316e66fe"
+    },
+    {
+      "name": "libc",
+      "version": "0.2.189",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "3eaf3ede3fee6db1a4c2ee091bf8a8b4dccdc6d17f656fb07896ee72867612f2"
+    },
+    {
+      "name": "libm",
+      "version": "0.2.16",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "b6d2cec3eae94f9f509c767b45932f1ada8350c4bdb85af2fcab4a3c14807981"
+    },
+    {
+      "name": "linux-raw-sys",
+      "version": "0.12.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "32a66949e030da00e8c7d4434b251670a91556f4144941d37452769c25d58a53"
+    },
+    {
+      "name": "liquid",
+      "version": "0.26.11",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "2a494c3f9dad3cb7ed16f1c51812cbe4b29493d6c2e5cd1e2b87477263d9534d",
+      "dependencies": [
+        "liquid-core",
+        "liquid-derive",
+        "liquid-lib",
+        "serde"
+      ]
+    },
+    {
+      "name": "liquid-core",
+      "version": "0.26.11",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "fc623edee8a618b4543e8e8505584f4847a4e51b805db1af6d9af0a3395d0d57",
+      "dependencies": [
+        "anymap2",
+        "itertools 0.14.0",
+        "kstring",
+        "liquid-derive",
+        "pest",
+        "pest_derive",
+        "regex",
+        "serde",
+        "time"
+      ]
+    },
+    {
+      "name": "liquid-derive",
+      "version": "0.26.10",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "de66c928222984aea59fcaed8ba627f388aaac3c1f57dcb05cc25495ef8faefe",
+      "dependencies": [
+        "proc-macro2",
+        "quote",
+        "syn 2.0.119"
+      ]
+    },
+    {
+      "name": "liquid-lib",
+      "version": "0.26.11",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "9befeedd61f5995bc128c571db65300aeb50d62e4f0542c88282dbcb5f72372a",
+      "dependencies": [
+        "itertools 0.14.0",
+        "liquid-core",
+        "percent-encoding",
+        "regex",
+        "time",
+        "unicode-segmentation"
+      ]
+    },
+    {
+      "name": "lock_api",
+      "version": "0.4.14",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "224399e74b87b5f3557511d98dff8b14089b3dadafcab6bb93eab67d3aace965",
+      "dependencies": [
+        "scopeguard"
+      ]
+    },
+    {
+      "name": "log",
+      "version": "0.4.34",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "f9f8bd3e56ce4dfc153cf470fffbfa98c7620958b312ca5c3a4b8d5181fd13c6"
+    },
+    {
+      "name": "maplit",
+      "version": "1.0.2",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "3e2e65a1a2e43cfcb47a895c4c8b10d1f4a61097f9f254f183aee60cad9c651d"
+    },
+    {
+      "name": "matrixmultiply",
+      "version": "0.3.11",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "3f607c237553f086e7043417a51df26b2eb899d3caff94e6a67592ff992fedc7",
+      "dependencies": [
+        "autocfg",
+        "rawpointer"
+      ]
+    },
+    {
+      "name": "memchr",
+      "version": "2.8.3",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "cf8baf1c55e62ffcace7a9f06f4bd9cd3f0c4beb022d3b367256b91b87513d98"
+    },
+    {
+      "name": "memmap2",
+      "version": "0.9.11",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "d1219ed1b7f229ee7104d281dd01d6802fe28bb6e95d292942c4daacdeb798c0",
+      "dependencies": [
+        "libc"
+      ]
+    },
+    {
+      "name": "miniz_oxide",
+      "version": "0.9.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "b63fbc4a50860e98e7b2aa7804ded1db5cbc3aff9193adaff57a6931bf7c4b4c",
+      "dependencies": [
+        "adler2",
+        "simd-adler32"
+      ]
+    },
+    {
+      "name": "ndarray",
+      "version": "0.16.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "882ed72dce9365842bf196bdeedf5055305f11fc8c03dee7bb0194a6cad34841",
+      "dependencies": [
+        "matrixmultiply",
+        "num-complex",
+        "num-integer",
+        "num-traits",
+        "portable-atomic",
+        "portable-atomic-util",
+        "rawpointer"
+      ]
+    },
+    {
+      "name": "nom",
+      "version": "8.0.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "df9761775871bdef83bee530e60050f7e54b1105350d6884eb0fb4f46c2f9405",
+      "dependencies": [
+        "memchr"
+      ]
+    },
+    {
+      "name": "nom-language",
+      "version": "0.1.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "2de2bc5b451bfedaef92c90b8939a8fff5770bdcc1fafd6239d086aab8fa6b29",
+      "dependencies": [
+        "nom"
+      ]
+    },
+    {
+      "name": "num-complex",
+      "version": "0.4.6",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "73f88a1307638156682bada9d7604135552957b7818057dcef22705b4d509495",
+      "dependencies": [
+        "num-traits"
+      ]
+    },
+    {
+      "name": "num-conv",
+      "version": "0.2.2",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "521739c6d2bac4aa25192232afe6841231376b2b26d4d9fae5ecf8ca5772e441"
+    },
+    {
+      "name": "num-integer",
+      "version": "0.1.47",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "7ce2d95d4b3734dc35aa2f45e1aa22cd416814592a4f9d9205e11affd5b8e10b",
+      "dependencies": [
+        "num-traits"
+      ]
+    },
+    {
+      "name": "num-traits",
+      "version": "0.2.19",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "071dfc062690e90b734c0b2273ce72ad0ffa95f0c74596bc250dcfd960262841",
+      "dependencies": [
+        "autocfg",
+        "libm"
+      ]
+    },
+    {
+      "name": "once_cell",
+      "version": "1.21.4",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "9f7c3e4beb33f85d45ae3e3a1792185706c8e16d043238c593331cc7cd313b50"
+    },
+    {
+      "name": "parking_lot",
+      "version": "0.12.5",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "93857453250e3077bd71ff98b6a65ea6621a19bb0f559a85248955ac12c45a1a",
+      "dependencies": [
+        "lock_api",
+        "parking_lot_core"
+      ]
+    },
+    {
+      "name": "parking_lot_core",
+      "version": "0.9.12",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "2621685985a2ebf1c516881c026032ac7deafcda1a2c9b7850dc81e3dfcb64c1",
+      "dependencies": [
+        "cfg-if",
+        "libc",
+        "redox_syscall",
+        "smallvec",
+        "windows-link"
+      ]
+    },
+    {
+      "name": "pastey",
+      "version": "0.1.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "35fb2e5f958ec131621fdd531e9fc186ed768cbe395337403ae56c17a74c68ec"
+    },
+    {
+      "name": "percent-encoding",
+      "version": "2.3.2",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "9b4f627cb1b25917193a259e49bdad08f671f8d9708acfd5fe0a8c1455d87220"
+    },
+    {
+      "name": "pest",
+      "version": "2.9.2",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "45d3aca230fad2e6f6317ca0a72724338c4960cb97168a85cdee66df4a9a21a8",
+      "dependencies": [
+        "memchr",
+        "ucd-trie"
+      ]
+    },
+    {
+      "name": "pest_derive",
+      "version": "2.9.2",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "284b60557f2c4a2e72ad3f2d34d42685a2fa4a6a61d0d2a10c0ae2a5e916c2cf",
+      "dependencies": [
+        "pest",
+        "pest_generator"
+      ]
+    },
+    {
+      "name": "pest_generator",
+      "version": "2.9.2",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "1d9d1f08a115309ee99268cf85e5228e0e56aa9caf8841ec12866b6be07c3109",
+      "dependencies": [
+        "pest",
+        "pest_meta",
+        "proc-macro2",
+        "quote",
+        "syn 2.0.119"
+      ]
+    },
+    {
+      "name": "pest_meta",
+      "version": "2.9.2",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "ed93ba1a9ffcca32130a5188701c81c0c49cf00d4b7c5007d5148951d743adcb",
+      "dependencies": [
+        "pest"
+      ]
+    },
+    {
+      "name": "portable-atomic",
+      "version": "1.15.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "05c8b63e8d9609db387f0324918f81d68fe27748f084ef092fb35954d0539a85"
+    },
+    {
+      "name": "portable-atomic-util",
+      "version": "0.2.8",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "10ab3eb7f3becc3a1cbc4f2c6f20267996cfc1a6467a873763411b136a122715",
+      "dependencies": [
+        "portable-atomic"
+      ]
+    },
+    {
+      "name": "powerfmt",
+      "version": "0.2.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "439ee305def115ba05938db6eb1644ff94165c5ab5e9420d1c1bcedbba909391"
+    },
+    {
+      "name": "ppv-lite86",
+      "version": "0.2.21",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "85eae3c4ed2f50dcfe72643da4befc30deadb458a9b590d720cde2f2b1e97da9",
+      "dependencies": [
+        "zerocopy"
+      ]
+    },
+    {
+      "name": "primal-check",
+      "version": "0.3.4",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "dc0d895b311e3af9902528fbb8f928688abbd95872819320517cc24ca6b2bd08",
+      "dependencies": [
+        "num-integer"
+      ]
+    },
+    {
+      "name": "proc-macro2",
+      "version": "1.0.107",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "985e7ec9bb745e6ce6535b544d84d6cd6f7ad8bd711c398938ae983b91a766d9",
+      "dependencies": [
+        "unicode-ident"
+      ]
+    },
+    {
+      "name": "prost",
+      "version": "0.11.9",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "0b82eaa1d779e9a4bc1c3217db8ffbeabaae1dca241bf70183242128d48681cd",
+      "dependencies": [
+        "bytes",
+        "prost-derive"
+      ]
+    },
+    {
+      "name": "prost-derive",
+      "version": "0.11.9",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "e5d2d8d10f3c6ded6da8b05b5fb3b8a5082514344d56c9f871412d29b4e075b4",
+      "dependencies": [
+        "anyhow",
+        "itertools 0.10.5",
+        "proc-macro2",
+        "quote",
+        "syn 1.0.109"
+      ]
+    },
+    {
+      "name": "quote",
+      "version": "1.0.47",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "1fbf4db142a473a8d80c26bbf18454ed458bf8d26c8219c331daecfdbd079001",
+      "dependencies": [
+        "proc-macro2"
+      ]
+    },
+    {
+      "name": "rand",
+      "version": "0.8.8",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "e058c7de0b26af77780c769414d6257830bb240f3c38477dbc2c16e5f54d6d4c",
+      "dependencies": [
+        "libc",
+        "rand_chacha",
+        "rand_core"
+      ]
+    },
+    {
+      "name": "rand_chacha",
+      "version": "0.3.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "e6c10a63a0fa32252be49d21e7709d4d4baf8d231c2dbce1eaa8141b9b127d88",
+      "dependencies": [
+        "ppv-lite86",
+        "rand_core"
+      ]
+    },
+    {
+      "name": "rand_core",
+      "version": "0.6.4",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "ec0be4795e2f6a28069bec0b5ff3e2ac9bafc99e6a9a7dc3547996c5c816922c",
+      "dependencies": [
+        "getrandom"
+      ]
+    },
+    {
+      "name": "rand_distr",
+      "version": "0.4.3",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "32cb0b9bc82b0a0876c2dd994a7e7a2683d3e7390ca40e6886785ef0c7e3ee31",
+      "dependencies": [
+        "num-traits",
+        "rand"
+      ]
+    },
+    {
+      "name": "rawpointer",
+      "version": "0.2.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "60a357793950651c4ed0f3f52338f53b2f809f32d83a07f72909fa13e4c6c1e3"
+    },
+    {
+      "name": "redox_syscall",
+      "version": "0.5.18",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "ed2bf2547551a7053d6fdfafda3f938979645c44812fbfcda098faae3f1a362d",
+      "dependencies": [
+        "bitflags"
+      ]
+    },
+    {
+      "name": "regex",
+      "version": "1.13.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "f020237b6c8eed93db2e2cb53c00c60a8e1bc73da7d073199a1180401450218d",
+      "dependencies": [
+        "aho-corasick",
+        "memchr",
+        "regex-automata",
+        "regex-syntax"
+      ]
+    },
+    {
+      "name": "regex-automata",
+      "version": "0.4.18",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "ad8553b9b26413251cbf30e620595c7a41b3887f03da04579c0e6b0d6a06b4b2",
+      "dependencies": [
+        "aho-corasick",
+        "memchr",
+        "regex-syntax"
+      ]
+    },
+    {
+      "name": "regex-syntax",
+      "version": "0.8.11",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "d6f6ff9a378485b298a5286656da665ba74413d36db0979633275d2e708145d4"
+    },
+    {
+      "name": "rustfft",
+      "version": "6.4.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "21db5f9893e91f41798c88680037dba611ca6674703c1a18601b01a72c8adb89",
+      "dependencies": [
+        "num-complex",
+        "num-integer",
+        "num-traits",
+        "primal-check",
+        "strength_reduce",
+        "transpose"
+      ]
+    },
+    {
+      "name": "rustix",
+      "version": "1.1.5",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "891efababe418670775f199f0d233d84843c227a0949a883ce15b37c78d6629d",
+      "dependencies": [
+        "bitflags",
+        "errno",
+        "libc",
+        "linux-raw-sys",
+        "windows-sys"
+      ]
+    },
+    {
+      "name": "ryu",
+      "version": "1.0.23",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "9774ba4a74de5f7b1c1451ed6cd5285a32eddb5cccb8cc655a4e50009e06477f"
+    },
+    {
+      "name": "safetensors",
+      "version": "0.6.2",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "172dd94c5a87b5c79f945c863da53b2ebc7ccef4eca24ac63cca66a41aab2178",
+      "dependencies": [
+        "serde",
+        "serde_json"
+      ]
+    },
+    {
+      "name": "same-file",
+      "version": "1.0.6",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "93fc1dc3aaa9bfed95e02e6eadabb4baf7e3078b0bd1b4d7b6b0b68378900502",
+      "dependencies": [
+        "winapi-util"
+      ]
+    },
+    {
+      "name": "scan_fmt",
+      "version": "0.2.6",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "0b53b0a5db882a8e2fdaae0a43f7b39e7e9082389e978398bdf223a55b581248",
+      "dependencies": [
+        "regex"
+      ]
+    },
+    {
+      "name": "scopeguard",
+      "version": "1.2.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "94143f37725109f92c262ed2cf5e59bce7498c01bcc1502d7b9afe439a4e9f49"
+    },
+    {
+      "name": "serde",
+      "version": "1.0.229",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "4148590afebada386688f18773da617792bf2ef03ffc1e4cbd2b1d45b023e0ba",
+      "dependencies": [
+        "serde_core",
+        "serde_derive"
+      ]
+    },
+    {
+      "name": "serde_core",
+      "version": "1.0.229",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "67dca2c9c51e58a4791a4b1ed58308b39c64224d349a935ab5039aa360942a48",
+      "dependencies": [
+        "serde_derive"
+      ]
+    },
+    {
+      "name": "serde_derive",
+      "version": "1.0.229",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "e7a5d71263a5a7d47b41f6b3f06ba276f10cc18b0931f1799f710578e2309348",
+      "dependencies": [
+        "proc-macro2",
+        "quote",
+        "syn 3.0.6"
+      ]
+    },
+    {
+      "name": "serde_json",
+      "version": "1.0.145",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "402a6f66d8c709116cf22f558eab210f5a50187f702eb4d7e5ef38d9a7f1c79c",
+      "dependencies": [
+        "itoa",
+        "memchr",
+        "ryu",
+        "serde",
+        "serde_core"
+      ]
+    },
+    {
+      "name": "shlex",
+      "version": "2.0.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "f8fadd59c855ef2080decdef8ff161eb6661b86933c9d82e5ba29dc602a55aba"
+    },
+    {
+      "name": "simd-adler32",
+      "version": "0.3.10",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "3a219298ac11a56ea9a6d2120044824d6f01aeb034955e7af7bc16858527deea"
+    },
+    {
+      "name": "smallvec",
+      "version": "1.16.2",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "f9395f0f0eee849a9b707b2f06bb92a6a422090e2123bb2ef8e87a0e61892a8e"
+    },
+    {
+      "name": "static_assertions",
+      "version": "1.1.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "a2eb9349b6444b326872e140eb1cf5e7c522154d69e7a0ffb0fb81c06b37543f"
+    },
+    {
+      "name": "strength_reduce",
+      "version": "0.2.4",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "fe895eb47f22e2ddd4dabc02bce419d2e643c8e3b585c78158b349195bc24d82"
+    },
+    {
+      "name": "string-interner",
+      "version": "0.15.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "07f9fdfdd31a0ff38b59deb401be81b73913d76c9cc5b1aed4e1330a223420b9",
+      "dependencies": [
+        "cfg-if",
+        "hashbrown",
+        "serde"
+      ]
+    },
+    {
+      "name": "syn",
+      "version": "1.0.109",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "72b64191b275b66ffe2469e8af2c1cfe3bafa67b529ead792a6d0160888b4237",
+      "dependencies": [
+        "proc-macro2",
+        "quote",
+        "unicode-ident"
+      ]
+    },
+    {
+      "name": "syn",
+      "version": "2.0.119",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "872831b642d1a07999a962a351ed35b955ea2cfc8f3862091e2a240a84f17297",
+      "dependencies": [
+        "proc-macro2",
+        "quote",
+        "unicode-ident"
+      ]
+    },
+    {
+      "name": "syn",
+      "version": "3.0.6",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "8593e8e72159ed2257d083c7a454a85cbf854f37a0966d8d483aff8c8a3ebcee",
+      "dependencies": [
+        "proc-macro2",
+        "quote",
+        "unicode-ident"
+      ]
+    },
+    {
+      "name": "tar",
+      "version": "0.4.46",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "3f6221d9a6003c78398e3b239969f352578258df48c8eb051caadae0015bc840",
+      "dependencies": [
+        "filetime",
+        "libc",
+        "xattr"
+      ]
+    },
+    {
+      "name": "time",
+      "version": "0.3.55",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "cdb87b95ec50ddfa440816d227a17b2ccbdda963a316a727fda0fc4334f7d134",
+      "dependencies": [
+        "deranged",
+        "num-conv",
+        "powerfmt",
+        "serde_core",
+        "time-core",
+        "time-macros"
+      ]
+    },
+    {
+      "name": "time-core",
+      "version": "0.1.9",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "9e1c906769ad99c88eaa54e728060edef082f8e358ff32030cb7c7d315e81109"
+    },
+    {
+      "name": "time-macros",
+      "version": "0.2.32",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "7e689342a48d2ea927c87ea50cabf8594854bf940e9310208848d680d668ed85",
+      "dependencies": [
+        "num-conv",
+        "time-core"
+      ]
+    },
+    {
+      "name": "tinyvec",
+      "version": "1.13.3",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "fd3ca314f692efd6c868f8408f53fe444634a845f96c028b97d35f6a1f79f0ee"
+    },
+    {
+      "name": "tract-core",
+      "version": "0.22.3",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "3f0674154b96abb73f8bdade9e6b6e22fa65f4e13da8d84c0659bd7d3c4739b9",
+      "dependencies": [
+        "anyhow",
+        "anymap3",
+        "bit-set",
+        "derive-new",
+        "downcast-rs",
+        "dyn-clone",
+        "lazy_static",
+        "log",
+        "maplit",
+        "ndarray",
+        "num-complex",
+        "num-integer",
+        "num-traits",
+        "pastey",
+        "rustfft",
+        "smallvec",
+        "tract-data",
+        "tract-linalg"
+      ]
+    },
+    {
+      "name": "tract-data",
+      "version": "0.22.3",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "5a0972068b06792ef536df873857854c41109aefa3ad90432e09b0b6549e7523",
+      "dependencies": [
+        "anyhow",
+        "downcast-rs",
+        "dyn-clone",
+        "dyn-hash",
+        "half",
+        "itertools 0.12.1",
+        "lazy_static",
+        "libm",
+        "maplit",
+        "ndarray",
+        "nom",
+        "nom-language",
+        "num-integer",
+        "num-traits",
+        "parking_lot",
+        "scan_fmt",
+        "smallvec",
+        "string-interner"
+      ]
+    },
+    {
+      "name": "tract-hir",
+      "version": "0.22.3",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "fe50ad4a84553a75c2eeba7b705ff32f862d7e4bdb5892397b4560ec59d1627d",
+      "dependencies": [
+        "derive-new",
+        "log",
+        "tract-core"
+      ]
+    },
+    {
+      "name": "tract-linalg",
+      "version": "0.22.3",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "a7b582f6ef2dcf32a78f043bbbb93ebc54af247c95cd5d18d5f8b36af47a273e",
+      "dependencies": [
+        "byteorder",
+        "cc",
+        "derive-new",
+        "downcast-rs",
+        "dyn-clone",
+        "dyn-hash",
+        "half",
+        "lazy_static",
+        "liquid",
+        "liquid-core",
+        "liquid-derive",
+        "log",
+        "num-traits",
+        "pastey",
+        "scan_fmt",
+        "smallvec",
+        "time",
+        "tract-data",
+        "unicode-normalization",
+        "walkdir"
+      ]
+    },
+    {
+      "name": "tract-nnef",
+      "version": "0.22.3",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "d4c317f94210bdfc0b81913965c7d7439d401527cc8d9bbc85fffbb59b09af5c",
+      "dependencies": [
+        "byteorder",
+        "flate2",
+        "liquid",
+        "liquid-core",
+        "log",
+        "nom",
+        "nom-language",
+        "safetensors",
+        "serde_json",
+        "tar",
+        "tract-core",
+        "walkdir"
+      ]
+    },
+    {
+      "name": "tract-onnx",
+      "version": "0.22.3",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "30cf71aa3c8a2ca05258ee0750e428cf2d0e8a38781ccd2ab9a0900551684c2b",
+      "dependencies": [
+        "bytes",
+        "derive-new",
+        "log",
+        "memmap2",
+        "num-integer",
+        "prost",
+        "smallvec",
+        "tract-hir",
+        "tract-nnef",
+        "tract-onnx-opl"
+      ]
+    },
+    {
+      "name": "tract-onnx-opl",
+      "version": "0.22.3",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "a34a0c0d726b7adc04e3ae956fa1e091ac6a33d4b9bc52ef678108c5445efb7d",
+      "dependencies": [
+        "getrandom",
+        "log",
+        "rand",
+        "rand_distr",
+        "rustfft",
+        "tract-nnef"
+      ]
+    },
+    {
+      "name": "transpose",
+      "version": "0.2.3",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "1ad61aed86bc3faea4300c7aee358b4c6d0c8d6ccc36524c96e4c92ccf26e77e",
+      "dependencies": [
+        "num-integer",
+        "strength_reduce"
+      ]
+    },
+    {
+      "name": "ucd-trie",
+      "version": "0.1.7",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "2896d95c02a80c6d6a5d6e953d479f5ddf2dfdb6a244441010e373ac0fb88971"
+    },
+    {
+      "name": "unicode-ident",
+      "version": "1.0.26",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "d245f478577f809a851594d02313b640fb437e0bb33866753cff937863096954"
+    },
+    {
+      "name": "unicode-normalization",
+      "version": "0.1.25",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "5fd4f6878c9cb28d874b009da9e8d183b5abc80117c40bbd187a1fde336be6e8",
+      "dependencies": [
+        "tinyvec"
+      ]
+    },
+    {
+      "name": "unicode-segmentation",
+      "version": "1.13.3",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "c6f5d3c3b1bf09027a88a6bc961fc00497d651009560b5463668dc81b0fa87a8"
+    },
+    {
+      "name": "version_check",
+      "version": "0.9.5",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "0b928f33d975fc6ad9f86c8f283853ad26bdd5b10b7f1542aa2fa15e2289105a"
+    },
+    {
+      "name": "walkdir",
+      "version": "2.5.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "29790946404f91d9c5d06f9874efddea1dc06c5efe94541a7d6863108e3a5e4b",
+      "dependencies": [
+        "same-file",
+        "winapi-util"
+      ]
+    },
+    {
+      "name": "wasi",
+      "version": "0.11.1+wasi-snapshot-preview1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "ccf3ec651a847eb01de73ccad15eb7d99f80485de043efb2f370cd654f4ea44b"
+    },
+    {
+      "name": "winapi-util",
+      "version": "0.1.11",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "c2a7b1c03c876122aa43f3020e6c3c3ee5c05081c9a00739faf7503aeba10d22",
+      "dependencies": [
+        "windows-sys"
+      ]
+    },
+    {
+      "name": "windows-link",
+      "version": "0.2.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "f0805222e57f7521d6a62e36fa9163bc891acd422f971defe97d64e70d0a4fe5"
+    },
+    {
+      "name": "windows-sys",
+      "version": "0.61.2",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "ae137229bcbd6cdf0f7b80a31df61766145077ddf49416a728b02cb3921ff3fc",
+      "dependencies": [
+        "windows-link"
+      ]
+    },
+    {
+      "name": "xattr",
+      "version": "1.6.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "32e45ad4206f6d2479085147f02bc2ef834ac85886624a23575ae137c8aa8156",
+      "dependencies": [
+        "libc",
+        "rustix"
+      ]
+    },
+    {
+      "name": "zerocopy",
+      "version": "0.8.59",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "6df92bf3d9227be3d53173901ddbffac2babc27ae50f397776ffd6dc33f800cb",
+      "dependencies": [
+        "zerocopy-derive"
+      ]
+    },
+    {
+      "name": "zerocopy-derive",
+      "version": "0.8.59",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "ac4f328cf2f05d084e496c3e9c3f33ed0a183656a16e1fcec4d464d8373aec82",
+      "dependencies": [
+        "proc-macro2",
+        "quote",
+        "syn 2.0.119"
+      ]
+    },
+    {
+      "name": "zlib-rs",
+      "version": "0.6.8",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "b268e58e7c693d7c271f93ffc4ba3b380412554231c85bf61ca7af91042a4112"
+    }
+  ],
+  "cache": "/home/vscode/.cache/inference/research/ai-sigma/inference-probe",
+  "flags": [
+    "jobs=1",
+    "debug=0",
+    "incremental=false",
+    "CPU0",
+    "tract-onnx default-features=false"
+  ],
+  "candidate_version": "tract-onnx 0.22.3",
+  "current_latest_not_adopted": "0.23.8",
+  "official_sources": [
+    {
+      "url": "https://raw.githubusercontent.com/sonos/tract/v0.22.3/README.md",
+      "snapshot": "tract-readme.txt"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/sonos/tract/v0.22.3/examples/onnx-mobilenet-v2/src/main.rs",
+      "snapshot": "tract-example.rs"
+    },
+    {
+      "url": "https://crates.io/api/v1/crates/tract-onnx",
+      "snapshot": "tract-crate.json"
+    },
+    {
+      "url": "https://onnxruntime.ai/docs/performance/tune-performance/threading.html",
+      "snapshot": "ort-threading.txt"
+    },
+    {
+      "url": "https://onnxruntime.ai/docs/tutorials/web/env-flags-and-session-options.html",
+      "snapshot": "ort-web-api.txt"
+    }
+  ],
+  "retried_failures": [
+    {
+      "name": "native-build",
+      "cause": "probe ensure macro not imported",
+      "fix": "shape assert",
+      "repeat": 1
+    },
+    {
+      "name": "wasm-build",
+      "cause": "getrandom unsupported target",
+      "fix": "official custom feature host crypto callback",
+      "repeat": 1
+    },
+    {
+      "name": "wasm-build-retry",
+      "cause": "host callback missing import declaration",
+      "fix": "link wasm_import_module env",
+      "repeat": 1
+    },
+    {
+      "name": "wasm-run",
+      "cause": "existing browser path missing",
+      "fix": "existing chromium full binary actual path",
+      "repeat": 1
+    },
+    {
+      "name": "wasm-resource-confirm",
+      "cause": "Chrome Unix socket path exceeds limit under long dedicated TMPDIR",
+      "fix": "short /proc/self/cwd alias into owned tools/t directory",
+      "repeat": 1
+    }
+  ],
+  "important_inputs_final_read": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "c03050bdfe00ecf86558945f0100ca6265d33e7447743cc277aeffea546f6edb"
+    },
+    {
+      "path": ".agents/research-team/common.md",
+      "sha256": "56c4d2aed25c083e6292d11efb0afa2c70a8f26709e5ad5a50029c8ef8d55add"
+    },
+    {
+      "path": ".agents/research-team/roles/hypothesis.md",
+      "sha256": "abfc3049d891db3da8fdab19a34c41bc1ed38aeda31b049015ba6f02390ef66c"
+    },
+    {
+      "path": ".agents/research-team/templates/handoff.md",
+      "sha256": "8139c0ad5a3a4eccc5ba7654807effa350debfcc32c5320aeffba4e9b8e2f753"
+    },
+    {
+      "path": ".devcontainer/storage-policy.md",
+      "sha256": "bc27c254d4cde6342329d9f27c376da786857d58ea8b6cf0ea5e0ba78fabb099"
+    },
+    {
+      "path": "docs/design/ai-sigma-research-goal.md",
+      "sha256": "4b0fee4e7b7c9f2de07a6baf0c2fd5f649718511e419366af9464471d4524b7d"
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-inference.md",
+      "sha256": "fb898f566e910eefab2482ed11b45b4a7f96f7d4cd14d95d1a93803cca429deb"
+    },
+    {
+      "path": "docs/design/ai-research-team.md",
+      "sha256": "13d757d4cad2b68d1ad1fb106360b91108cbcce0d74718ac1813599635eab123"
+    },
+    {
+      "path": "docs/design/quoridor-3d-webapp-design-rust-wasm-v1.md",
+      "sha256": "c4dbe22719bcd60ad0c9e8586a37d4e0be6bcc2dbd863cea21f8e322093ab577"
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-model.md",
+      "sha256": "4229433203b5b4bff9921de287f3ecf8f57d0eb313033a75504d3d9cd12a6a46"
+    },
+    {
+      "path": ".artifacts/ai-sigma/verification/MODEL-COORD-STATIC/summary.json",
+      "sha256": "bcd604172cc122683ede371b447d0b4862f1609ee4b310998f071e7502298224"
+    },
+    {
+      "path": "crates/quoridor-ai/src/lib.rs",
+      "sha256": "5ab5eca5c23814dbaa0162b25e8fe710e58cdb7139c0fa4e3e2f794dc041555a"
+    },
+    {
+      "path": "crates/quoridor-ai/src/research.rs",
+      "sha256": "c1a632be1177bd8c4fe6b81d36365577bf4f953f58c5c6abd8bc9e9ba6ed770e"
+    },
+    {
+      "path": "crates/quoridor-wasm/src/lib.rs",
+      "sha256": "1f2ceb28895373f6cbbc2761a55cba3acf2d837aaa80d401f10cab3c15a3a1da"
+    },
+    {
+      "path": "Cargo.lock",
+      "sha256": "f1b7e28714344098c70588371a8869a128612c40e0762c4cd0fbc0677309f346"
+    },
+    {
+      "path": "tools/training/uv.lock",
+      "sha256": "6b562f85005518a8e38556722d536c342c17da18b0d7040fcd0e80bb662671b3"
+    },
+    {
+      "path": ".artifacts/ai-sigma/reference-fixtures/SIGMA-PARITY-PLAN/sources/docs/mcts_worker.js",
+      "sha256": "f2de9444e8960ca14d4d4acb5dd319e3f0a6a743c39b4032dce32068ebcfe8fa"
+    }
+  ],
+  "core_inputs_changed_during_probe": [
+    "crates/quoridor-ai/src/lib.rs"
+  ],
+  "probe_inputs": [
+    {
+      "path": "tools/ai-sigma-inference-probe/Cargo.toml",
+      "sha256": "1cf4dee286ba2cad094393d67813489de69a5c632ac12fdc4de8b8b7b9fa2a86",
+      "bytes": 386
+    },
+    {
+      "path": "tools/ai-sigma-inference-probe/diagnostics.py",
+      "sha256": "d98e6ae1c211d103cc417c4feb376668f43e97be3558be0f05b6742f44239a84",
+      "bytes": 1810
+    },
+    {
+      "path": "tools/ai-sigma-inference-probe/runner.py",
+      "sha256": "1c79ce76bbb96cad7853474eacb8f8880654d45e7401d29ee31adb806df2f8ef",
+      "bytes": 4709
+    },
+    {
+      "path": "tools/ai-sigma-inference-probe/Cargo.lock",
+      "sha256": "16f5122a70258c107d7aaa1b34e641f35d8bf4367b09d81c358c78ca17bc4749",
+      "bytes": 30627
+    },
+    {
+      "path": "tools/ai-sigma-inference-probe/compare.py",
+      "sha256": "669714cd110d87c8b4f856994c5104391e0f1f8666a797618a538dba43881039",
+      "bytes": 1365
+    },
+    {
+      "path": "tools/ai-sigma-inference-probe/browser.cjs",
+      "sha256": "fcbb6af78f0846396427902d5062e9a9e6abeacec4c5deabc3b259a084e61c64",
+      "bytes": 3151
+    },
+    {
+      "path": "tools/ai-sigma-inference-probe/README.md",
+      "sha256": "79832a4f5b0517d5308164c160c3fe5c9c7928bfa91d13d1c9bff060934c0f36",
+      "bytes": 3956
+    },
+    {
+      "path": "tools/ai-sigma-inference-probe/reference.py",
+      "sha256": "0e4d4c55ce9819844b697336b1299ddb2b641f600c35050e7b4b66ae32eeafd2",
+      "bytes": 3462
+    },
+    {
+      "path": "tools/ai-sigma-inference-probe/src/main.rs",
+      "sha256": "1ea24e6c3bbf5fb0c50635c5f20718bec00d411a3be554c502be9873161ce936",
+      "bytes": 702
+    },
+    {
+      "path": "tools/ai-sigma-inference-probe/src/lib.rs",
+      "sha256": "a860f10264bba45f2685f221f4947ca2e5b6c2ec640d70d0abc58dff290eb078",
+      "bytes": 1796
+    }
+  ],
+  "resource_limitations": [
+    "Initial browser run used default /tmp transient profile outside owned roots; browser.close automatically cleaned it. Transient storage not measured.",
+    "Initial browser process group sampler missed detached Chrome group RSS/CPU; replaced with descendant identity tracking for dedicated-resource rerun.",
+    "First native/ORT fast exits can be missed by 1-second sampling; reference metadata records actual per-process ru_maxrss.",
+    "CPU time aggregate is a lower bound for pre-tracking browser run and short commands. No formal latency benchmark."
+  ],
+  "end_utc": "2026-09-30T20:19:46.639560+00:00",
+  "report": {
+    "path": "docs/reports/ai-sigma-hypothesis-inference.md",
+    "sha256": "f77f3a92225c7419f10794037a2a85f571498e09f57f91bd34c9f9cda64f4462",
+    "bytes": 4358
+  },
+  "numeric_summary": {
+    "native": {
+      "candidate": "native",
+      "gate": {
+        "atol": 0.0001,
+        "rtol": 0.0001
+      },
+      "pass": true,
+      "max_abs": 9.775161743164062e-06,
+      "failed_elements": 0,
+      "reference_sha256": "060ba1a3f7647adb7c0ac968eb2834d966665920f72eeee2b3798ce9864b382a",
+      "candidate_sha256": "8447f6c047826e8815df464ffbeb821ae3a213dbef7ff0801130e879ec08f6cc"
+    },
+    "wasm": {
+      "candidate": "wasm",
+      "gate": {
+        "atol": 0.0001,
+        "rtol": 0.0001
+      },
+      "pass": true,
+      "max_abs": 1.049041748046875e-05,
+      "failed_elements": 0,
+      "reference_sha256": "060ba1a3f7647adb7c0ac968eb2834d966665920f72eeee2b3798ce9864b382a",
+      "candidate_sha256": "5d4fc899b3b28a64b9496d55cc58fa035ea0de0ec5e1c6ff1be1a81433466763"
+    }
+  },
+  "artifacts": [
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/native-run.log",
+      "sha256": "5cbb6066b85a454c3619f0e388d6eecf83fca221ecccb4864dcf7ac54db869ac",
+      "bytes": 1138
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/ort-b.metadata.json",
+      "sha256": "558f0a94416f294bef712ab8f6d8800eafb85fb8c39ee051a74a22c69e9e53ce",
+      "bytes": 2417
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/native.gate.json",
+      "sha256": "afc058404d4b5bb48935bad56017267565001d23ee361ca66e7a417c90e5b692",
+      "bytes": 8643
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/ort-repeat.json",
+      "sha256": "9467bbd70a5df46d4937a66413f50ce0a2cc92d300cf3ef19b68b5ac24207133",
+      "bytes": 234
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/wasm-link-retry.log",
+      "sha256": "466defba2c7b37c4034929fc3ef3bea5a85abe4542918ecce94b7c5a3d3b89b8",
+      "bytes": 178
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/wasm.gate.json",
+      "sha256": "131720e0fb2b3aa823b1e3b56fb31fa12450a16fd51a2af7586d4b047344302a",
+      "bytes": 8630
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/wasm-run-retry.process.json",
+      "sha256": "3706bf347ae1cb6b9f01a3f64e0c1eae1711b33440d7858b814c87e51b2d4dd1",
+      "bytes": 688
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/native-build.process.json",
+      "sha256": "2104a4d0a0bd7766bb221da39d2eb516bb0ec288fbac9df9238706c46ca4f08c",
+      "bytes": 739
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/inputs.json",
+      "sha256": "7c69d24ee345bb318baa48171fba597e493659063f5d57f6e830c6bb8ac081e6",
+      "bytes": 153441
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/native-build-retry.process.json",
+      "sha256": "7291fc6aea125b9253a3bf3430eb1cc68eb5e86017897d15040bcbf614275859",
+      "bytes": 760
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/wasm-resource-retry.log",
+      "sha256": "059c12699019f11a8468ae7548a8645adcf66fdcaf3d1be6df291d6941e4851c",
+      "bytes": 1197
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/native.outputs.json",
+      "sha256": "8447f6c047826e8815df464ffbeb821ae3a213dbef7ff0801130e879ec08f6cc",
+      "bytes": 31834
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/storage-process-final.json",
+      "sha256": "7e8cc6ed218060fbefca9a94433526847662c3018c5befadd0e1034452312f6a",
+      "bytes": 1500
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/wasm-build-retry.process.json",
+      "sha256": "21fedb3dd24d307340cadc64ba9a2ccbdff776896ce9bb6993228b288781ad79",
+      "bytes": 807
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/wasm-resource-confirm.process.json",
+      "sha256": "08ca32da2eb041c23d6093ee4495bf9eb3fe5b082f37a4905bd8c6c6acb478d4",
+      "bytes": 1196
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/wasm-feature-tree.log",
+      "sha256": "61b90625795f5538bc96ca57f509cbabbc56040093d93c1f9092780b2f95263b",
+      "bytes": 88121
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/environment.json",
+      "sha256": "dd42d445f09f8387c9be6d28c2e241323ccae573845453c554adbe9dc06c1cfd",
+      "bytes": 634
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/wasm-build.log",
+      "sha256": "ca897a91b234c3baf6b37f6c2ec00b67df961bf08c1ff3ae9f0020ed57e54007",
+      "bytes": 2441
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/native-build.log",
+      "sha256": "1cd97ca8e13a669270cdb412504f36577eb7efcdea06c1df6b8c97e33fb03053",
+      "bytes": 8325
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/ort-a.log",
+      "sha256": "4f9a3b2197f7dbe7e71642ce4199b2e2b061c9ed6057c6a6036bf92cf43839d6",
+      "bytes": 295
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/ort-web-api.txt",
+      "sha256": "5a36597417e19e924ffbdd04f396fbd7d832f9087cd5d22399dd434d024ae54e",
+      "bytes": 66211
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/ort-b.process.json",
+      "sha256": "7b53aa63dc42fc36fcbb7fe336f2c959935772e55b8ad5f5be8e84d0479a7b04",
+      "bytes": 745
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/start.json",
+      "sha256": "eb5c733d20f89ad6c007505588731d659745800a0bfb7853d3eef70ceada1af5",
+      "bytes": 305
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/native-run.process.json",
+      "sha256": "020aa533e7f1252e1caec4b1707ed69f160316c55da4dc2495659e6f7c96f24f",
+      "bytes": 950
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/ort-threading.txt",
+      "sha256": "d037bbb940e863ff8c5ec2465213e34a97d659b2b4c39d0b070db47f94738226",
+      "bytes": 68800
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/wasm-run.process.json",
+      "sha256": "23728344dc075ecf6d5da66cfa41df6043c15e93066f1cebddb6cd31fd7d0a40",
+      "bytes": 705
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/wasm-run-retry.log",
+      "sha256": "059c12699019f11a8468ae7548a8645adcf66fdcaf3d1be6df291d6941e4851c",
+      "bytes": 1197
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/ort-b.log",
+      "sha256": "8d1cd56a5332ff37ccad6e50d1abd5114be6ec259c690fb521d459a28e928639",
+      "bytes": 295
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/tract-core-cargo.txt",
+      "sha256": "334a7b650fa5230f2dd90fd57ed583803c8bb4c0f78819819e0ca6d548314b78",
+      "bytes": 1990
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/wasm-feature-tree.process.json",
+      "sha256": "ed8f1b280d46c2c13616b87ab4a1facced48329938b9b06ec647b431ed694ca6",
+      "bytes": 1347
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/prior-action-diagnostics.json",
+      "sha256": "982d2ee8c6d0f1566386a3096a59f5373e39c5cbc92b7e24a1009d25a2ce7a32",
+      "bytes": 1263845
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/wasm-run.log",
+      "sha256": "549e4f65a110ef8efa18aa2783d038bc067afdfe0e5377ce44e5673212315274",
+      "bytes": 425
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/tract-crate.json",
+      "sha256": "f7afdfb20b955e07e5ad30b39cc3b2b34ddb32a0cb7490beba88efeff18cd8d6",
+      "bytes": 270367
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/wasm.outputs.json",
+      "sha256": "5d4fc899b3b28a64b9496d55cc58fa035ea0de0ec5e1c6ff1be1a81433466763",
+      "bytes": 26120
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/wasm-resource-retry.process.json",
+      "sha256": "a3419e004e212749854ca3c586213ca4d75dba72a6e9c68842fd14c44425d31f",
+      "bytes": 3069
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/native-build-retry.log",
+      "sha256": "9f3f7669424824fe2d12615dac909d95ab7b6b1b3b8bc03b8cb486df8b8325d3",
+      "bytes": 178
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/ort-a.process.json",
+      "sha256": "dd0b553d75cb3729b58c93dcaf54b1deabab646e908b3318643175a9a1b6d79a",
+      "bytes": 745
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/ort-a.outputs.json",
+      "sha256": "060ba1a3f7647adb7c0ac968eb2834d966665920f72eeee2b3798ce9864b382a",
+      "bytes": 182124
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/ort-b.outputs.json",
+      "sha256": "060ba1a3f7647adb7c0ac968eb2834d966665920f72eeee2b3798ce9864b382a",
+      "bytes": 182124
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/wasm-build-retry.log",
+      "sha256": "6f737a87232c71aee6bb12fe7b8268c066edcf52f62cf959bf57812c38282e36",
+      "bytes": 5490
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/ort-a.metadata.json",
+      "sha256": "b66cb1b22f266415dd1122027fca46c8c04efce616e7e43bd71fcc6c164582b6",
+      "bytes": 2427
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/wasm-build.process.json",
+      "sha256": "9e941aa4bdaa198e44c86b669fbb9645b8e3d7648bc8dd951fbd51ece4cb9ffd",
+      "bytes": 817
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/wasm-link-retry.process.json",
+      "sha256": "a14eb85db897d41f45414fdb1e17bf30344b3e70aa737300d2b70c046c92b854",
+      "bytes": 840
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/tract-example.rs",
+      "sha256": "ae84b1bbef5fa98c65072f19d81da694f8de2f956e8b99653ef4737273f55541",
+      "bytes": 1178
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/actual-graph-attributes.json",
+      "sha256": "6388863d0ac06860e06bdbafc10d4c8f39f33f5f503c34c05008ba480288160a",
+      "bytes": 79846
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/tract-readme.txt",
+      "sha256": "55119ba4a56e4278f2395483071ecb5fbfbddc818b5f2f340cb86bb413be66ff",
+      "bytes": 11168
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/wasm.metadata.json",
+      "sha256": "165664629cbe11c8427207bd2f4e8129b67c7bd87f4f5ddae3ffdb60e6c6ba1e",
+      "bytes": 323
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/wasm-resource-confirm.log",
+      "sha256": "7c20822c549259a8480f8f60c1f9eefe9da9213d3958b417f0261970a800aafe",
+      "bytes": 17668
+    }
+  ],
+  "write_stop_utc": "2026-09-30T20:25:33.961974+00:00",
+  "built_binaries": [
+    {
+      "path": "/home/vscode/.cache/inference/research/ai-sigma/inference-probe/target/debug/ai-sigma-inference-probe",
+      "sha256": "ede7ca0e6163d5ea61067749d668fc90e563e051957fa835b115f252381c0c78",
+      "bytes": 76401984
+    },
+    {
+      "path": "/home/vscode/.cache/inference/research/ai-sigma/inference-probe/target/wasm32-unknown-unknown/debug/ai_sigma_inference_probe.wasm",
+      "sha256": "52075a810672ab675c95b543fca12de6c6f609efa89c085c9c71cb14d162eae8",
+      "bytes": 36970550
+    }
+  ]
+}

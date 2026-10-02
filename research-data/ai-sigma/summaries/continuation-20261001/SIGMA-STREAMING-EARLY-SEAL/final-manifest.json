@@ -1,0 +1,2286 @@
+{
+  "issue": "quoridor-4lc.63",
+  "trial": 1,
+  "source_revision": 3,
+  "UTC": "2026-10-01T16:42:09.613443+00:00",
+  "actual_go": false,
+  "games": 0,
+  "holdout_send": 0,
+  "all_clock_suite_eligible": false,
+  "normal_planned": 12,
+  "normal_eligible": 11,
+  "steady_planned": 9,
+  "steady_eligible": 9,
+  "public_planned": 20,
+  "distinct_public_saved": 20,
+  "source_manifest_sha256": "c5381302d6573605242d06ede2f173e8fb68102c3ad9121a6d68e4070a5b411d",
+  "report_sha256": "58996b0567e1688fd1336bdae39a55f7503581ba386fb0f07cbe471fe9f769a3",
+  "PID0": true,
+  "runtime_and_source_stopped_before_document": true,
+  "allocated_before_manifest_bytes": 14471168,
+  "manifest_size_to_be_charged": true,
+  "unique_inode_logical_before_manifest_bytes": 13583479,
+  "runtime_RSS_peak_bytes": 1589903360,
+  "runtime_storage_peak_bytes": 15106048,
+  "storage_guard_bytes": 117440512,
+  "additional_reservation": 0,
+  "old_failures_and_missing_cancel_ACK_preserved": true,
+  "completed_request_replay": false,
+  "checks": [
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN-SUITE-63-01/browser/browser-startup.json",
+      "sha256": "ba88dab10c8eb8355fe851fbcb8c03d22817c974e924efbd53679c9f013516f3",
+      "bytes": 453
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN-SUITE-63-01/browser/cleanup.jsonl",
+      "sha256": "8024ad126344fe12637524f563448e6c5d975877c423fdb95b28e0cbaf883b10",
+      "bytes": 24378
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN-SUITE-63-01/browser/clock-start.json",
+      "sha256": "00b3ca7f71c6fc6cfd778cb981fc43a226aa550f0eddb2283df10aa07bb192c1",
+      "bytes": 3236
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN-SUITE-63-01/browser/model-load.json",
+      "sha256": "855a3dd2185d3577f03f5715aa64874bc1536b387c36ae6ba058f194bdecf836",
+      "bytes": 324
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN-SUITE-63-01/browser/terminated-worker.json",
+      "sha256": "caf45c3e3f3eacb28562426d059913ddbe13f5172ec3e17170ccac3ef24c08b6",
+      "bytes": 49
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN-SUITE-63-01/control-asym-hv-p2.json",
+      "sha256": "3cf500d46c80478bfb4dbd23a190e76b4e16ce7797533bf18ac1c3e9e836caa6",
+      "bytes": 2820993
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN-SUITE-63-01/control-gates.json",
+      "sha256": "ece57445960d8c88baa74861368499a56599d4fd20e9f7edfff05fecb5bb2e31",
+      "bytes": 569
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN-SUITE-63-01/control-initial-p1.json",
+      "sha256": "8c4918cd3df827af04a2e3ffa8402be5d94c0b4486d2af95ed469df330b07f6d",
+      "bytes": 2960526
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN-SUITE-63-01/control-straight-jump-p2.json",
+      "sha256": "5e7152e83a67a478d83887f21156fccc1453a7549202dc1a24893e496b52d3d1",
+      "bytes": 2996190
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN-SUITE-63-01/failure.json",
+      "sha256": "749eb4fd89b131b253c2672fa1470a05023180463461733cf8ade9ae54ec2180",
+      "bytes": 5921
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN-SUITE-63-01/public-requests.json",
+      "sha256": "3ebb048dff1900d155b827673764845879a642c22cc5c7793c41ad1e3cf5bfdd",
+      "bytes": 3978
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN-SUITE-63-01/runtime-stop-before-document.json",
+      "sha256": "b340e9f0cb134875c60799137f97c9ac9a037668e5b870daa146b786ed431e22",
+      "bytes": 1822
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN-SUITE-63-02-REMAINDER/browser/browser-startup.json",
+      "sha256": "ba88dab10c8eb8355fe851fbcb8c03d22817c974e924efbd53679c9f013516f3",
+      "bytes": 453
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN-SUITE-63-02-REMAINDER/browser/cleanup.jsonl",
+      "sha256": "c5ac2fd5b4d5bd6db7e6241af69c620b536bfa7aa79673dec8c1c56e243e6afb",
+      "bytes": 24541
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN-SUITE-63-02-REMAINDER/browser/clock-end.json",
+      "sha256": "0ad836fadca1ad9220efd2247a11c995c811365ff2e5b89caa5c236b5b940392",
+      "bytes": 3226
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN-SUITE-63-02-REMAINDER/browser/clock-start.json",
+      "sha256": "dbeb8c2eba10d9ca2fad421f05f6845137576dec15e962cb34ec9077e26dd139",
+      "bytes": 3225
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN-SUITE-63-02-REMAINDER/browser/model-load.json",
+      "sha256": "7894fc1afd9a110cbd1ed84d054bfb84a15f886cf3d18c527cc97f6be176ec25",
+      "bytes": 324
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN-SUITE-63-02-REMAINDER/browser/terminated-worker.json",
+      "sha256": "4faf601230913567bb2aaafa6ba9810c4a23b193d4c0ae93cbeff373e2947404",
+      "bytes": 52
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN-SUITE-63-02-REMAINDER/clock-drift.json",
+      "sha256": "6ccbd69b0cad29604014b6b5092fdadcd58feb16ab12a399a8a298fc60f74e62",
+      "bytes": 414
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN-SUITE-63-02-REMAINDER/control-gates.json",
+      "sha256": "ece57445960d8c88baa74861368499a56599d4fd20e9f7edfff05fecb5bb2e31",
+      "bytes": 569
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN-SUITE-63-02-REMAINDER/handle-drop.json",
+      "sha256": "84577c7531eb14e14c5470aebb6fc8299920cfe5506e9403f508364c56470092",
+      "bytes": 85
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN-SUITE-63-02-REMAINDER/original-controls-carried-readonly.json",
+      "sha256": "f4d4f5dde7aef8db25b2ba80b5276d7cea28d6efb22d76f62856687d7b620cea",
+      "bytes": 3254
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN-SUITE-63-02-REMAINDER/private-diagnostics-after-public.json",
+      "sha256": "2032b7824a7cca8a3b4672d65a68e3396ddf15f68e7c61b211ce9b5b65879689",
+      "bytes": 516341
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN-SUITE-63-02-REMAINDER/public-requests.json",
+      "sha256": "d0a8bbe93919a57be6dd7ab070e62c913f234de516b677cd760798cbe141ee92",
+      "bytes": 521821
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN-SUITE-63-02-REMAINDER/runtime-stop-before-document.json",
+      "sha256": "05df0a1c32ff0ee634768ba7d83a6fb165d1bc54abdb314c999726667c33ab30",
+      "bytes": 1894
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN-SUITE-63-02-REMAINDER/search-stop-events.json",
+      "sha256": "e8f2dea9471e3f1cf760c77eec02e52d50dcdb62f3d815068008a2b7d04e291e",
+      "bytes": 85483
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN-SUITE-63-02-REMAINDER/summary.json",
+      "sha256": "93dd5437491874eecdd8bd7f6c581471fa8ccb13f347329bf37959cbe9a10400",
+      "bytes": 927
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN0-CAL-63-02/browser/browser-startup.json",
+      "sha256": "ba88dab10c8eb8355fe851fbcb8c03d22817c974e924efbd53679c9f013516f3",
+      "bytes": 453
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN0-CAL-63-02/browser/cleanup.jsonl",
+      "sha256": "9eb8198f8f8862fccd137b09dea1ec36fcb7c98a7d160449bf93b9547d471e17",
+      "bytes": 22502
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN0-CAL-63-02/browser/clock-end.json",
+      "sha256": "55752ae6a30bb7364382cc10999a5d7995c227c1369413adedcc5c69fda6c0c3",
+      "bytes": 3230
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN0-CAL-63-02/browser/clock-start.json",
+      "sha256": "6d5baa503f6c653b84be90a02761372fd39d0f2908b387b654b17229b772dfcc",
+      "bytes": 3220
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN0-CAL-63-02/browser/terminated-worker.json",
+      "sha256": "ac9cecc5dc6284dc3470256b1f297f5ef872eace3ec46463d57aa8dc26cebd6d",
+      "bytes": 52
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN0-CAL-63-02/reserve-selected.json",
+      "sha256": "d7f6f46f87485f3bd977c94f9cce2c64b5904ca57a6b08259dd0d7fd4b15c90c",
+      "bytes": 1685
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN0-CAL-63-02/runtime-stop-before-document.json",
+      "sha256": "750d689b63f55a398ce5ddb67904454afa0086ac21e8f4af0ce845c5f6efc565",
+      "bytes": 1822
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/NN0-CAL-63-02/samples.json",
+      "sha256": "47b7b135b9ad14b889c273c03bd6e1471fa719c57dc46ad70d1c49afcdb34d56",
+      "bytes": 86359
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/all-public-requests-combined.json",
+      "sha256": "e568c46084c12f7a52404575af52c9e17302476efa5ae5a549cbce47470f5da8",
+      "bytes": 525796
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/analysis.json",
+      "sha256": "7c02c769f673a0b0413369343d8ef6c6d3a25e931ed333413d5929e290e965cd",
+      "bytes": 34239
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/calibration-63-01.inputs.json",
+      "sha256": "86029454dce2380f4d782bb038914e46cbc8f374cb964db26414227d00fab0ca",
+      "bytes": 12908
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/calibration-63-01.log",
+      "sha256": "9033703fba56810cc2c2bb3964484e04b1d9dc3e491e9ed1ed30a3d60e27d861",
+      "bytes": 18
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/calibration-63-01.monitor.jsonl",
+      "sha256": "53a3636b6d92a95c0865450ac3efe2e8295345a479ecd675c49164424201643d",
+      "bytes": 3685
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/calibration-63-01.owned-ack.json",
+      "sha256": "44dfc78034c230c9f8b876216c02c28c560c463cbc68121ad670853bdf4e4401",
+      "bytes": 645
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/calibration-63-01.owned-ledger.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/calibration-63-01.process.json",
+      "sha256": "6481fa6ba5016e5eb2d606d9deb81e6ee825fe2fbfa139d297a3eeb5b69c84fa",
+      "bytes": 2436
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/calibration-63-01.started.json",
+      "sha256": "635e0f5d8fe8e286e737f06bd1c8523fc7cafba9b1b674cf82ce6def66f47305",
+      "bytes": 1572
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/calibration-63-02.inputs.json",
+      "sha256": "b54e01d834937e11e3316910bad7ef03d98eda598f9b925bf6bc55445bfe6560",
+      "bytes": 12908
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/calibration-63-02.log",
+      "sha256": "3a987e3ae7fcb8d78520e6f6f13aa320e32635941eabc55f7a20a2e109eadefc",
+      "bytes": 1430
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/calibration-63-02.monitor.jsonl",
+      "sha256": "a4fda1751a0bb778d95a1ae7db5fce503b131f78c1aa594678a4f831787951e1",
+      "bytes": 108267
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/calibration-63-02.owned-ack.json",
+      "sha256": "39f5f1eb67d1bca658a17619b9204b66dd3c368637b6bde32af29bf882853098",
+      "bytes": 12103
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/calibration-63-02.owned-ledger.jsonl",
+      "sha256": "02fe7d4f63df229bad93e7977086ef569adb117ace999f288951febc65abca36",
+      "bytes": 3000
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/calibration-63-02.process.json",
+      "sha256": "6ca5329720bf455371f8bc1894ea2103981c934480200da40e911b4f554997c9",
+      "bytes": 11930
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/calibration-63-02.started.json",
+      "sha256": "455299811b71d86fa5daf510cf0eb6b98d9bbc3937492aa61012dbe8453ffbb6",
+      "bytes": 1572
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/calibration-PID0-before-NN.json",
+      "sha256": "3b807e6bc5436d0e2ed18bdf0db9b4cf9934a83cdbe210cfa5f138c0326741d0",
+      "bytes": 2141
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/calibration-token-revision1.json",
+      "sha256": "ca7d7703fcf2ff219a55c6cf6ca58d3ea715d2baf0c7355e03a64b238f360250",
+      "bytes": 354
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/calibration-token.json",
+      "sha256": "06ba03fafe35ab73b9d3ff12b4e5ff8fea81fce21f4608e3b80eb5b840e1e371",
+      "bytes": 354
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/continuation-bind.json",
+      "sha256": "f4d4f5dde7aef8db25b2ba80b5276d7cea28d6efb22d76f62856687d7b620cea",
+      "bytes": 3254
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/coordinator-acceptance-current-observed.md",
+      "sha256": "75ecd9fd2a5f14cf089603a96c61372afc6f5dd8e16cf005794b37e4c7a735b0",
+      "bytes": 4672
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/coordinator-acceptance-frozen-original.md",
+      "sha256": "f505cd2ee9b76f8979f5d482421d44ffc14835f56df57f0b652dd0b686eeda0c",
+      "bytes": 3618
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/dummy-63-01-cleanup.jsonl",
+      "sha256": "8cfb002bc1830e5d54d1fa7cc005c38a9d3865cecdda420a830eb3d0c5423900",
+      "bytes": 12347
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/dummy-63-01-leaf.json",
+      "sha256": "3546fe2e8a204eeef96630b2c6c3581056d68e60a68b3b60f5030827bbadb20e",
+      "bytes": 124
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/dummy-63-01-natural.jsonl",
+      "sha256": "b0f4bb6409a2572177e15762659260e735222550c1dbde195e579074fdc619c2",
+      "bytes": 6598
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/dummy-63-01-signal.jsonl",
+      "sha256": "6aae022908aa8b6b7c9000c50f1c83e835b42598245362ac62bc7ea47566c85c",
+      "bytes": 7408
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/dummy-63-01-summary.json",
+      "sha256": "f266fb5956047b0eef8fbe11c4c9c6596ed16c743aebfcc0d739e1f971963ae2",
+      "bytes": 1648
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/dummy-63-01.inputs.json",
+      "sha256": "81243bb486778a1105acc5d38de6ee67d5cfcd11b3378aafc4f97509de41f81f",
+      "bytes": 12566
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/dummy-63-01.log",
+      "sha256": "d71f50037b61d55d1c46ed4c529e0e8872bbd1f2b40e5570249fb509344ced2f",
+      "bytes": 20
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/dummy-63-01.monitor.jsonl",
+      "sha256": "aa7054cf2415fe8f7c2b4e9ecc020a497be6840c9b52d168586fa835beafdab8",
+      "bytes": 13510
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/dummy-63-01.owned-ack.json",
+      "sha256": "d21e1a7fe233c105bc0d0f0d08b4ea0390680120afc9e02305afc5ce35a2d451",
+      "bytes": 3840
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/dummy-63-01.owned-ledger.jsonl",
+      "sha256": "4270d77fc7deecb6824bbc97f6473d2d14d85dcf085ce4fb940e53fdab07bc48",
+      "bytes": 1292
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/dummy-63-01.process.json",
+      "sha256": "a0d056ef7f1d40d1ddbce3ee97f0e5e3da177fc33fbaeb2af2ed341ccb9ab129",
+      "bytes": 5433
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/dummy-63-01.started.json",
+      "sha256": "61a87fe8dabd5aaa915e5f4918feceab35f0b5b6e2de52aaceda40639f54c4ff",
+      "bytes": 1398
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/entry-NN0-refusal-gates.json",
+      "sha256": "6231a18998347f20f748b4be6bd9671a24395b68a9e62b44a7fdd8b3668214c4",
+      "bytes": 1492
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/final-entry-refusal-gates.json",
+      "sha256": "c6420554c99236f4eb8f1dac5239ddf5b2faf3540fa2070e5366f2b14b4983f9",
+      "bytes": 2023
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/handoff-stop.json",
+      "sha256": "84eccf6d0342e35730345412b39d06d003c75744cd6385409a90d2c32152fb5c",
+      "bytes": 450
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/initial-input-freeze-failure.json",
+      "sha256": "d7d60a75cc120d0b3537cd3f2da37a1c3d7f87228e5cafc24f424cafd201a330",
+      "bytes": 400
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/input-after-resources.json",
+      "sha256": "05a0d977fa1ae97bbddcadd555da38b283331696e0fafff4cd446055c662ae31",
+      "bytes": 633
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/input-before-initial-live-control-reference.json",
+      "sha256": "189f9348666d496f18b96800b79715add813e248112deb8887949799bd6ad09a",
+      "bytes": 174080
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/input-before.json",
+      "sha256": "4d05659e4f84fff4f10374b5e1ce04e28f643a32bf39a465291f16858df9274d",
+      "bytes": 174307
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/arena-delivery.cjs",
+      "sha256": "ec6f1e0656cb340ed50879fbd58553a245899a58b12a9437bffbdd7ae90bc355",
+      "bytes": 1859
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/arena-integration.cjs",
+      "sha256": "54de62f22e7f6faf92467166718f114db9b13561da22f748b8c630747f50d1a8",
+      "bytes": 3578
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/arena-mock.cjs",
+      "sha256": "73ab04ab6b51e89839460ea23cb03cb92f76b0a105bed6bd04514b173a1a821a",
+      "bytes": 1956
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/arena-page.js",
+      "sha256": "0fdd8ac6f326341111d36441e137c301680169a05a58f29669a70f85c0641d8a",
+      "bytes": 3875
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/arena.cjs",
+      "sha256": "28029a212c4dbf01ccefef1702b5972e555b9b63609b9bfd54fcb0f59116949a",
+      "bytes": 14091
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/browser.cjs",
+      "sha256": "72ad21a8d796530bb9666dd9faaeec63e7df7b2223bfbc927ee8bbaca84bb3d8",
+      "bytes": 4236
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/cache-gates.cjs",
+      "sha256": "507f48c03301d5099b8b6e368e4792b82b20b96b689b5bf38ab93cb7db8b1782",
+      "bytes": 2888
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/caller.cjs",
+      "sha256": "0488721b153fe4f7b200454309a82ad8a1b615a4553c37721279baac955a8cc8",
+      "bytes": 5097
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/candidate-worker.js",
+      "sha256": "d84b967485a953c574c3f0e2667145ef4ea21a65f55ab0793dcdedf315c54fc8",
+      "bytes": 3432
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/checkpoint.js",
+      "sha256": "e8f858b2d41605b8ae8e699aaa4a5ae43d2d7c2f4eb6c7c061f194bf355a9361",
+      "bytes": 5835
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/cleanup-mock-gate.cjs",
+      "sha256": "2a0423d03019e405f20ae65680c523c4ea117ab3ffe0785d8071888e52f8dee2",
+      "bytes": 4955
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/cleanup.cjs",
+      "sha256": "5447032ffa50109b5b0c24411eb3ed5e14bb9536c84c7cc6cfdc73fac5ffe32d",
+      "bytes": 6267
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/context.js",
+      "sha256": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+      "bytes": 2248
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/delivery-gate.cjs",
+      "sha256": "5e9dfad2f65da060581da8a5cd8128d3c621d438aab43a6874ba2b2aab3b9550",
+      "bytes": 3632
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/delivery.cjs",
+      "sha256": "dd94dbf2205779bb717433b2137982b14061fb93ee610f067677dd1ad39e3242",
+      "bytes": 3450
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/dummy-child.py",
+      "sha256": "3f7aa48658319457c23365bbff64261c8e2ab6338f625f67b755128ae438617e",
+      "bytes": 297
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/dummy-gates.cjs",
+      "sha256": "3e18c911ae8651409e7e224b0e8edd7b4de8a154878f6ef24f71735d7d1a9c7b",
+      "bytes": 3041
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/early-cache.cjs",
+      "sha256": "48300889349da30fddabfaa3834b7ee379520e3c7b7a6c9f7f54110b25607fab",
+      "bytes": 6397
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/early-page.js",
+      "sha256": "e0d1014c7ad1557c5975e9e732fe4d32c798d76f60838538f47d3f542e4b7159",
+      "bytes": 1489
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/early-worker.js",
+      "sha256": "ee23be81917ee1763dab09d06545d3894798ca4febf4aadeeb855adfa74db00c",
+      "bytes": 4514
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/entry-gate.cjs",
+      "sha256": "8625ab5f55019e958f8cbe84ea3034dbb7cb804acaf26063cb8639cfbe616e49",
+      "bytes": 12026
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/entry-real-main-gate.cjs",
+      "sha256": "25115d41a715c326eaef9665a014da89cec3c4cda45b37725c59fac99898ef32",
+      "bytes": 2634
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/entry-real-smoke.cjs",
+      "sha256": "20879b02852ef66ddf1f4e361fbbc51f6185c809bc22d5b47bddf18e27c5b04b",
+      "bytes": 2424
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/entry.cjs",
+      "sha256": "d5f24397b990ea0ffd7d24d78dd4bbfeaf802979d221c42da713f5831a00f558",
+      "bytes": 11870
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/external-dummy-driver.py",
+      "sha256": "3a6e9150fd5a31c0b9ed1ba9065808c7e9e3f1061d4439d4e9913ede1992a6e0",
+      "bytes": 1520
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/fault-gates.cjs",
+      "sha256": "879ad2e0851c88524681dd58c92029beb0597d936d7b16859f9e069d288b6018",
+      "bytes": 2719
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/final-gate.cjs",
+      "sha256": "214f735ae3586a3cdd9487d601cbe4eb7228353024952d05465d4a9f05dd580a",
+      "bytes": 4463
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/game-loop.cjs",
+      "sha256": "6e9f50403338d1935cf43103842740ee479f0c38d31c97fde853ba99fac2c64a",
+      "bytes": 4016
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/game.js",
+      "sha256": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+      "bytes": 27877
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/golden-gates.cjs",
+      "sha256": "fc7056cfec5fc41c31eb62194efc8159ef894295e96ae85273ddcba06dcfa0ad",
+      "bytes": 3962
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/host.js",
+      "sha256": "dc6cf3e24774e5e6b52c8cf346090f53f261e58b0c7fda1e6d674c7142983d02",
+      "bytes": 3586
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/judge.cjs",
+      "sha256": "a43bed42482ae21a3620449df37b08596bc9fabef31936b27d6c95254fdc7577",
+      "bytes": 1601
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/kernel-dummy-child.py",
+      "sha256": "3ca55e1009c543c3e469e0faabec265e590ab15232c3470ea3e8391029bb17f1",
+      "bytes": 491
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/kernel-dummy.cjs",
+      "sha256": "91d1fa18300607e1a4a05f656e36e6fe5d99f6babedf225e55b7e05c0421aeea",
+      "bytes": 2474
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/kernel-policy-gates.py",
+      "sha256": "06a2090b5e01e6d71fbb12451b6451f2cce3d9b81153f5fec041a3e2aa9cd488",
+      "bytes": 1736
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/kernel_boundary.py",
+      "sha256": "afa63b0b113bdb8f5f112a871e8f183d33b9d493e5e08cce098faa4ecfd5dd21",
+      "bytes": 2561
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/ledger-gates.py",
+      "sha256": "d1f013478b7365c80a3b6bafa8c0d3259382a44d864f114333d29f9fd3a7e070",
+      "bytes": 1500
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/match-entry.cjs",
+      "sha256": "41f29ffe17179edc0a92faa82c091d12220377284e2dad8260e81352811e523f",
+      "bytes": 5663
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/mock-gates.cjs",
+      "sha256": "c1137be1df132fb995c585b357163491e8404da1063d2ffb82c9b7420ad9d461",
+      "bytes": 6859
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/mock.cjs",
+      "sha256": "ea3525b13cbbabd0390058e8288704f25790459c748c5ef3e35312440b50b22c",
+      "bytes": 5928
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/owned-ledger.cjs",
+      "sha256": "b375c3389139fd918a26c87f6d967978284a23c5cdae6cac7171e09ceabe0035",
+      "bytes": 1981
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/owned_ledger.py",
+      "sha256": "8a6b52c664e0602dfee6f0a969be26d990df114c3c5ccc43c2d4d6e5560a6036",
+      "bytes": 2631
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/pause-check.cjs",
+      "sha256": "65acc36136aab7e626459fc86cd310d4fa1d528b80dfefca1f6a2bca8b3440d0",
+      "bytes": 980
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/pipe.cjs",
+      "sha256": "33444bddcfb8fae9e73f895f56582c5ed1af149cda5c8aa352e47a12c870502a",
+      "bytes": 1634
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/preregister.cjs",
+      "sha256": "ec2084b32ee0087d09e0c091485bca379f8da1df15598791a5d5616a2528c398",
+      "bytes": 3411
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/real-golden.cjs",
+      "sha256": "24c7a860bd80cf85a035f5a93e3927b9455ec0f2df1700cec167708eabc17974",
+      "bytes": 6428
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/reference-worker.js",
+      "sha256": "0faec2f42d3a3364effa2ed725c34169ea3c8f79e6c5305f09e238850faa0106",
+      "bytes": 19596
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/run-golden.cjs",
+      "sha256": "f299c9e1531f796dc69a7851649e93485d192e11438499929e672b259cdd44e9",
+      "bytes": 1132
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/runner.py",
+      "sha256": "a034441505c321eeafd8bdaaab180e9d2c50b1c51bc6a6351a9d501cb4adfe0a",
+      "bytes": 10024
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/stream-cache.js",
+      "sha256": "9887e187291448ec624c04be21414279449309ff09d324313b50cf28cf1ce00c",
+      "bytes": 5301
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/stream-page.js",
+      "sha256": "4245583974586d1b0e2f156da452887ab7e1f786da4175ca5ca2b99cbfd02f88",
+      "bytes": 5341
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/stream-worker.js",
+      "sha256": "1cceabd01c741d0eb4cf914404d740bcc455f0cc2f247dd811dbb971b3eda828",
+      "bytes": 4166
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/token-helper.cjs",
+      "sha256": "8692c6367f9ba205ea5d44fb9819da72da369317f68db6b05cd068e5492584dd",
+      "bytes": 1584
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/transaction.cjs",
+      "sha256": "1b32c3ab195c84f5147a404563cad1576f08987112d8789f06379caa7aa62afd",
+      "bytes": 2984
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/unit-gates.cjs",
+      "sha256": "0d53dba9788c26585b2143b59225e4d9d282644b04cb0e28ba6ee70a5b83ea1d",
+      "bytes": 3820
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/verify.py",
+      "sha256": "052fdcf65312f7a69c4c4d1a6ae96426dba317a31614d2ded485053b878000b5",
+      "bytes": 4051
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-01/worker.js",
+      "sha256": "c245c9c0aaaea06e1b595fa0e670ef81e6f34a7e873106a3982ae8aba1e719c8",
+      "bytes": 3788
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/arena-delivery.cjs",
+      "sha256": "ec6f1e0656cb340ed50879fbd58553a245899a58b12a9437bffbdd7ae90bc355",
+      "bytes": 1859
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/arena-integration.cjs",
+      "sha256": "54de62f22e7f6faf92467166718f114db9b13561da22f748b8c630747f50d1a8",
+      "bytes": 3578
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/arena-mock.cjs",
+      "sha256": "73ab04ab6b51e89839460ea23cb03cb92f76b0a105bed6bd04514b173a1a821a",
+      "bytes": 1956
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/arena-page.js",
+      "sha256": "0fdd8ac6f326341111d36441e137c301680169a05a58f29669a70f85c0641d8a",
+      "bytes": 3875
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/arena.cjs",
+      "sha256": "28029a212c4dbf01ccefef1702b5972e555b9b63609b9bfd54fcb0f59116949a",
+      "bytes": 14091
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/browser.cjs",
+      "sha256": "72ad21a8d796530bb9666dd9faaeec63e7df7b2223bfbc927ee8bbaca84bb3d8",
+      "bytes": 4236
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/cache-gates.cjs",
+      "sha256": "507f48c03301d5099b8b6e368e4792b82b20b96b689b5bf38ab93cb7db8b1782",
+      "bytes": 2888
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/caller.cjs",
+      "sha256": "0488721b153fe4f7b200454309a82ad8a1b615a4553c37721279baac955a8cc8",
+      "bytes": 5097
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/candidate-worker.js",
+      "sha256": "d84b967485a953c574c3f0e2667145ef4ea21a65f55ab0793dcdedf315c54fc8",
+      "bytes": 3432
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/checkpoint.js",
+      "sha256": "e8f858b2d41605b8ae8e699aaa4a5ae43d2d7c2f4eb6c7c061f194bf355a9361",
+      "bytes": 5835
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/cleanup-mock-gate.cjs",
+      "sha256": "2a0423d03019e405f20ae65680c523c4ea117ab3ffe0785d8071888e52f8dee2",
+      "bytes": 4955
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/cleanup.cjs",
+      "sha256": "5447032ffa50109b5b0c24411eb3ed5e14bb9536c84c7cc6cfdc73fac5ffe32d",
+      "bytes": 6267
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/context.js",
+      "sha256": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+      "bytes": 2248
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/delivery-gate.cjs",
+      "sha256": "5e9dfad2f65da060581da8a5cd8128d3c621d438aab43a6874ba2b2aab3b9550",
+      "bytes": 3632
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/delivery.cjs",
+      "sha256": "dd94dbf2205779bb717433b2137982b14061fb93ee610f067677dd1ad39e3242",
+      "bytes": 3450
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/dummy-child.py",
+      "sha256": "3f7aa48658319457c23365bbff64261c8e2ab6338f625f67b755128ae438617e",
+      "bytes": 297
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/dummy-gates.cjs",
+      "sha256": "3e18c911ae8651409e7e224b0e8edd7b4de8a154878f6ef24f71735d7d1a9c7b",
+      "bytes": 3041
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/early-cache.cjs",
+      "sha256": "48300889349da30fddabfaa3834b7ee379520e3c7b7a6c9f7f54110b25607fab",
+      "bytes": 6397
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/early-page.js",
+      "sha256": "e0d1014c7ad1557c5975e9e732fe4d32c798d76f60838538f47d3f542e4b7159",
+      "bytes": 1489
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/early-worker.js",
+      "sha256": "ee23be81917ee1763dab09d06545d3894798ca4febf4aadeeb855adfa74db00c",
+      "bytes": 4514
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/entry-gate.cjs",
+      "sha256": "8625ab5f55019e958f8cbe84ea3034dbb7cb804acaf26063cb8639cfbe616e49",
+      "bytes": 12026
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/entry-real-main-gate.cjs",
+      "sha256": "25115d41a715c326eaef9665a014da89cec3c4cda45b37725c59fac99898ef32",
+      "bytes": 2634
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/entry-real-smoke.cjs",
+      "sha256": "20879b02852ef66ddf1f4e361fbbc51f6185c809bc22d5b47bddf18e27c5b04b",
+      "bytes": 2424
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/entry.cjs",
+      "sha256": "a9f72e46af6f3bd69f35ff3ad93020da3679d1db0a8eff45de449fcdf084dd47",
+      "bytes": 12015
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/external-dummy-driver.py",
+      "sha256": "3a6e9150fd5a31c0b9ed1ba9065808c7e9e3f1061d4439d4e9913ede1992a6e0",
+      "bytes": 1520
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/fault-gates.cjs",
+      "sha256": "879ad2e0851c88524681dd58c92029beb0597d936d7b16859f9e069d288b6018",
+      "bytes": 2719
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/final-gate.cjs",
+      "sha256": "214f735ae3586a3cdd9487d601cbe4eb7228353024952d05465d4a9f05dd580a",
+      "bytes": 4463
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/game-loop.cjs",
+      "sha256": "6e9f50403338d1935cf43103842740ee479f0c38d31c97fde853ba99fac2c64a",
+      "bytes": 4016
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/game.js",
+      "sha256": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+      "bytes": 27877
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/golden-gates.cjs",
+      "sha256": "fc7056cfec5fc41c31eb62194efc8159ef894295e96ae85273ddcba06dcfa0ad",
+      "bytes": 3962
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/host.js",
+      "sha256": "dc6cf3e24774e5e6b52c8cf346090f53f261e58b0c7fda1e6d674c7142983d02",
+      "bytes": 3586
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/judge.cjs",
+      "sha256": "a43bed42482ae21a3620449df37b08596bc9fabef31936b27d6c95254fdc7577",
+      "bytes": 1601
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/kernel-dummy-child.py",
+      "sha256": "3ca55e1009c543c3e469e0faabec265e590ab15232c3470ea3e8391029bb17f1",
+      "bytes": 491
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/kernel-dummy.cjs",
+      "sha256": "91d1fa18300607e1a4a05f656e36e6fe5d99f6babedf225e55b7e05c0421aeea",
+      "bytes": 2474
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/kernel-policy-gates.py",
+      "sha256": "06a2090b5e01e6d71fbb12451b6451f2cce3d9b81153f5fec041a3e2aa9cd488",
+      "bytes": 1736
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/kernel_boundary.py",
+      "sha256": "afa63b0b113bdb8f5f112a871e8f183d33b9d493e5e08cce098faa4ecfd5dd21",
+      "bytes": 2561
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/ledger-gates.py",
+      "sha256": "d1f013478b7365c80a3b6bafa8c0d3259382a44d864f114333d29f9fd3a7e070",
+      "bytes": 1500
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/match-entry.cjs",
+      "sha256": "41f29ffe17179edc0a92faa82c091d12220377284e2dad8260e81352811e523f",
+      "bytes": 5663
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/mock-gates.cjs",
+      "sha256": "c1137be1df132fb995c585b357163491e8404da1063d2ffb82c9b7420ad9d461",
+      "bytes": 6859
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/mock.cjs",
+      "sha256": "ea3525b13cbbabd0390058e8288704f25790459c748c5ef3e35312440b50b22c",
+      "bytes": 5928
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/owned-ledger.cjs",
+      "sha256": "b375c3389139fd918a26c87f6d967978284a23c5cdae6cac7171e09ceabe0035",
+      "bytes": 1981
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/owned_ledger.py",
+      "sha256": "8a6b52c664e0602dfee6f0a969be26d990df114c3c5ccc43c2d4d6e5560a6036",
+      "bytes": 2631
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/pause-check.cjs",
+      "sha256": "65acc36136aab7e626459fc86cd310d4fa1d528b80dfefca1f6a2bca8b3440d0",
+      "bytes": 980
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/pipe.cjs",
+      "sha256": "33444bddcfb8fae9e73f895f56582c5ed1af149cda5c8aa352e47a12c870502a",
+      "bytes": 1634
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/preregister.cjs",
+      "sha256": "ec2084b32ee0087d09e0c091485bca379f8da1df15598791a5d5616a2528c398",
+      "bytes": 3411
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/real-golden.cjs",
+      "sha256": "24c7a860bd80cf85a035f5a93e3927b9455ec0f2df1700cec167708eabc17974",
+      "bytes": 6428
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/reference-worker.js",
+      "sha256": "0faec2f42d3a3364effa2ed725c34169ea3c8f79e6c5305f09e238850faa0106",
+      "bytes": 19596
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/run-golden.cjs",
+      "sha256": "f299c9e1531f796dc69a7851649e93485d192e11438499929e672b259cdd44e9",
+      "bytes": 1132
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/runner.py",
+      "sha256": "a034441505c321eeafd8bdaaab180e9d2c50b1c51bc6a6351a9d501cb4adfe0a",
+      "bytes": 10024
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/stream-cache.js",
+      "sha256": "9887e187291448ec624c04be21414279449309ff09d324313b50cf28cf1ce00c",
+      "bytes": 5301
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/stream-page.js",
+      "sha256": "4245583974586d1b0e2f156da452887ab7e1f786da4175ca5ca2b99cbfd02f88",
+      "bytes": 5341
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/stream-worker.js",
+      "sha256": "1cceabd01c741d0eb4cf914404d740bcc455f0cc2f247dd811dbb971b3eda828",
+      "bytes": 4166
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/token-helper.cjs",
+      "sha256": "8692c6367f9ba205ea5d44fb9819da72da369317f68db6b05cd068e5492584dd",
+      "bytes": 1584
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/transaction.cjs",
+      "sha256": "1b32c3ab195c84f5147a404563cad1576f08987112d8789f06379caa7aa62afd",
+      "bytes": 2984
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/unit-gates.cjs",
+      "sha256": "0d53dba9788c26585b2143b59225e4d9d282644b04cb0e28ba6ee70a5b83ea1d",
+      "bytes": 3820
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/verify.py",
+      "sha256": "052fdcf65312f7a69c4c4d1a6ae96426dba317a31614d2ded485053b878000b5",
+      "bytes": 4051
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/calibration-63-02/worker.js",
+      "sha256": "c245c9c0aaaea06e1b595fa0e670ef81e6f34a7e873106a3982ae8aba1e719c8",
+      "bytes": 3788
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/arena-delivery.cjs",
+      "sha256": "ec6f1e0656cb340ed50879fbd58553a245899a58b12a9437bffbdd7ae90bc355",
+      "bytes": 1859
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/arena-integration.cjs",
+      "sha256": "54de62f22e7f6faf92467166718f114db9b13561da22f748b8c630747f50d1a8",
+      "bytes": 3578
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/arena-mock.cjs",
+      "sha256": "73ab04ab6b51e89839460ea23cb03cb92f76b0a105bed6bd04514b173a1a821a",
+      "bytes": 1956
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/arena-page.js",
+      "sha256": "0fdd8ac6f326341111d36441e137c301680169a05a58f29669a70f85c0641d8a",
+      "bytes": 3875
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/arena.cjs",
+      "sha256": "28029a212c4dbf01ccefef1702b5972e555b9b63609b9bfd54fcb0f59116949a",
+      "bytes": 14091
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/browser.cjs",
+      "sha256": "72ad21a8d796530bb9666dd9faaeec63e7df7b2223bfbc927ee8bbaca84bb3d8",
+      "bytes": 4236
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/cache-gates.cjs",
+      "sha256": "507f48c03301d5099b8b6e368e4792b82b20b96b689b5bf38ab93cb7db8b1782",
+      "bytes": 2888
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/caller.cjs",
+      "sha256": "0488721b153fe4f7b200454309a82ad8a1b615a4553c37721279baac955a8cc8",
+      "bytes": 5097
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/candidate-worker.js",
+      "sha256": "d84b967485a953c574c3f0e2667145ef4ea21a65f55ab0793dcdedf315c54fc8",
+      "bytes": 3432
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/checkpoint.js",
+      "sha256": "e8f858b2d41605b8ae8e699aaa4a5ae43d2d7c2f4eb6c7c061f194bf355a9361",
+      "bytes": 5835
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/cleanup-mock-gate.cjs",
+      "sha256": "2a0423d03019e405f20ae65680c523c4ea117ab3ffe0785d8071888e52f8dee2",
+      "bytes": 4955
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/cleanup.cjs",
+      "sha256": "5447032ffa50109b5b0c24411eb3ed5e14bb9536c84c7cc6cfdc73fac5ffe32d",
+      "bytes": 6267
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/context.js",
+      "sha256": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+      "bytes": 2248
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/delivery-gate.cjs",
+      "sha256": "5e9dfad2f65da060581da8a5cd8128d3c621d438aab43a6874ba2b2aab3b9550",
+      "bytes": 3632
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/delivery.cjs",
+      "sha256": "dd94dbf2205779bb717433b2137982b14061fb93ee610f067677dd1ad39e3242",
+      "bytes": 3450
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/dummy-child.py",
+      "sha256": "3f7aa48658319457c23365bbff64261c8e2ab6338f625f67b755128ae438617e",
+      "bytes": 297
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/dummy-gates.cjs",
+      "sha256": "3e18c911ae8651409e7e224b0e8edd7b4de8a154878f6ef24f71735d7d1a9c7b",
+      "bytes": 3041
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/early-cache.cjs",
+      "sha256": "48300889349da30fddabfaa3834b7ee379520e3c7b7a6c9f7f54110b25607fab",
+      "bytes": 6397
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/early-page.js",
+      "sha256": "e0d1014c7ad1557c5975e9e732fe4d32c798d76f60838538f47d3f542e4b7159",
+      "bytes": 1489
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/early-worker.js",
+      "sha256": "ee23be81917ee1763dab09d06545d3894798ca4febf4aadeeb855adfa74db00c",
+      "bytes": 4514
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/entry-gate.cjs",
+      "sha256": "8625ab5f55019e958f8cbe84ea3034dbb7cb804acaf26063cb8639cfbe616e49",
+      "bytes": 12026
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/entry-real-main-gate.cjs",
+      "sha256": "25115d41a715c326eaef9665a014da89cec3c4cda45b37725c59fac99898ef32",
+      "bytes": 2634
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/entry-real-smoke.cjs",
+      "sha256": "20879b02852ef66ddf1f4e361fbbc51f6185c809bc22d5b47bddf18e27c5b04b",
+      "bytes": 2424
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/entry.cjs",
+      "sha256": "d5f24397b990ea0ffd7d24d78dd4bbfeaf802979d221c42da713f5831a00f558",
+      "bytes": 11870
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/external-dummy-driver.py",
+      "sha256": "3a6e9150fd5a31c0b9ed1ba9065808c7e9e3f1061d4439d4e9913ede1992a6e0",
+      "bytes": 1520
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/fault-gates.cjs",
+      "sha256": "879ad2e0851c88524681dd58c92029beb0597d936d7b16859f9e069d288b6018",
+      "bytes": 2719
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/final-gate.cjs",
+      "sha256": "214f735ae3586a3cdd9487d601cbe4eb7228353024952d05465d4a9f05dd580a",
+      "bytes": 4463
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/game-loop.cjs",
+      "sha256": "6e9f50403338d1935cf43103842740ee479f0c38d31c97fde853ba99fac2c64a",
+      "bytes": 4016
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/game.js",
+      "sha256": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+      "bytes": 27877
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/golden-gates.cjs",
+      "sha256": "fc7056cfec5fc41c31eb62194efc8159ef894295e96ae85273ddcba06dcfa0ad",
+      "bytes": 3962
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/host.js",
+      "sha256": "dc6cf3e24774e5e6b52c8cf346090f53f261e58b0c7fda1e6d674c7142983d02",
+      "bytes": 3586
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/judge.cjs",
+      "sha256": "a43bed42482ae21a3620449df37b08596bc9fabef31936b27d6c95254fdc7577",
+      "bytes": 1601
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/kernel-dummy-child.py",
+      "sha256": "3ca55e1009c543c3e469e0faabec265e590ab15232c3470ea3e8391029bb17f1",
+      "bytes": 491
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/kernel-dummy.cjs",
+      "sha256": "91d1fa18300607e1a4a05f656e36e6fe5d99f6babedf225e55b7e05c0421aeea",
+      "bytes": 2474
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/kernel-policy-gates.py",
+      "sha256": "06a2090b5e01e6d71fbb12451b6451f2cce3d9b81153f5fec041a3e2aa9cd488",
+      "bytes": 1736
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/kernel_boundary.py",
+      "sha256": "afa63b0b113bdb8f5f112a871e8f183d33b9d493e5e08cce098faa4ecfd5dd21",
+      "bytes": 2561
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/ledger-gates.py",
+      "sha256": "d1f013478b7365c80a3b6bafa8c0d3259382a44d864f114333d29f9fd3a7e070",
+      "bytes": 1500
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/match-entry.cjs",
+      "sha256": "41f29ffe17179edc0a92faa82c091d12220377284e2dad8260e81352811e523f",
+      "bytes": 5663
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/mock-gates.cjs",
+      "sha256": "c1137be1df132fb995c585b357163491e8404da1063d2ffb82c9b7420ad9d461",
+      "bytes": 6859
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/mock.cjs",
+      "sha256": "ea3525b13cbbabd0390058e8288704f25790459c748c5ef3e35312440b50b22c",
+      "bytes": 5928
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/owned-ledger.cjs",
+      "sha256": "b375c3389139fd918a26c87f6d967978284a23c5cdae6cac7171e09ceabe0035",
+      "bytes": 1981
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/owned_ledger.py",
+      "sha256": "8a6b52c664e0602dfee6f0a969be26d990df114c3c5ccc43c2d4d6e5560a6036",
+      "bytes": 2631
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/pause-check.cjs",
+      "sha256": "65acc36136aab7e626459fc86cd310d4fa1d528b80dfefca1f6a2bca8b3440d0",
+      "bytes": 980
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/pipe.cjs",
+      "sha256": "33444bddcfb8fae9e73f895f56582c5ed1af149cda5c8aa352e47a12c870502a",
+      "bytes": 1634
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/preregister.cjs",
+      "sha256": "ec2084b32ee0087d09e0c091485bca379f8da1df15598791a5d5616a2528c398",
+      "bytes": 3411
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/real-golden.cjs",
+      "sha256": "24c7a860bd80cf85a035f5a93e3927b9455ec0f2df1700cec167708eabc17974",
+      "bytes": 6428
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/reference-worker.js",
+      "sha256": "0faec2f42d3a3364effa2ed725c34169ea3c8f79e6c5305f09e238850faa0106",
+      "bytes": 19596
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/run-golden.cjs",
+      "sha256": "f299c9e1531f796dc69a7851649e93485d192e11438499929e672b259cdd44e9",
+      "bytes": 1132
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/runner.py",
+      "sha256": "a034441505c321eeafd8bdaaab180e9d2c50b1c51bc6a6351a9d501cb4adfe0a",
+      "bytes": 10024
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/stream-cache.js",
+      "sha256": "9887e187291448ec624c04be21414279449309ff09d324313b50cf28cf1ce00c",
+      "bytes": 5301
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/stream-page.js",
+      "sha256": "4245583974586d1b0e2f156da452887ab7e1f786da4175ca5ca2b99cbfd02f88",
+      "bytes": 5341
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/stream-worker.js",
+      "sha256": "1cceabd01c741d0eb4cf914404d740bcc455f0cc2f247dd811dbb971b3eda828",
+      "bytes": 4166
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/token-helper.cjs",
+      "sha256": "8692c6367f9ba205ea5d44fb9819da72da369317f68db6b05cd068e5492584dd",
+      "bytes": 1584
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/transaction.cjs",
+      "sha256": "1b32c3ab195c84f5147a404563cad1576f08987112d8789f06379caa7aa62afd",
+      "bytes": 2984
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/unit-gates.cjs",
+      "sha256": "0d53dba9788c26585b2143b59225e4d9d282644b04cb0e28ba6ee70a5b83ea1d",
+      "bytes": 3820
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/verify.py",
+      "sha256": "052fdcf65312f7a69c4c4d1a6ae96426dba317a31614d2ded485053b878000b5",
+      "bytes": 4051
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/dummy-63-01/worker.js",
+      "sha256": "c245c9c0aaaea06e1b595fa0e670ef81e6f34a7e873106a3982ae8aba1e719c8",
+      "bytes": 3788
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/arena-delivery.cjs",
+      "sha256": "ec6f1e0656cb340ed50879fbd58553a245899a58b12a9437bffbdd7ae90bc355",
+      "bytes": 1859
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/arena-integration.cjs",
+      "sha256": "54de62f22e7f6faf92467166718f114db9b13561da22f748b8c630747f50d1a8",
+      "bytes": 3578
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/arena-mock.cjs",
+      "sha256": "73ab04ab6b51e89839460ea23cb03cb92f76b0a105bed6bd04514b173a1a821a",
+      "bytes": 1956
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/arena-page.js",
+      "sha256": "0fdd8ac6f326341111d36441e137c301680169a05a58f29669a70f85c0641d8a",
+      "bytes": 3875
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/arena.cjs",
+      "sha256": "28029a212c4dbf01ccefef1702b5972e555b9b63609b9bfd54fcb0f59116949a",
+      "bytes": 14091
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/browser.cjs",
+      "sha256": "72ad21a8d796530bb9666dd9faaeec63e7df7b2223bfbc927ee8bbaca84bb3d8",
+      "bytes": 4236
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/cache-gates.cjs",
+      "sha256": "507f48c03301d5099b8b6e368e4792b82b20b96b689b5bf38ab93cb7db8b1782",
+      "bytes": 2888
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/caller.cjs",
+      "sha256": "0488721b153fe4f7b200454309a82ad8a1b615a4553c37721279baac955a8cc8",
+      "bytes": 5097
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/candidate-worker.js",
+      "sha256": "d84b967485a953c574c3f0e2667145ef4ea21a65f55ab0793dcdedf315c54fc8",
+      "bytes": 3432
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/checkpoint.js",
+      "sha256": "e8f858b2d41605b8ae8e699aaa4a5ae43d2d7c2f4eb6c7c061f194bf355a9361",
+      "bytes": 5835
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/cleanup-mock-gate.cjs",
+      "sha256": "2a0423d03019e405f20ae65680c523c4ea117ab3ffe0785d8071888e52f8dee2",
+      "bytes": 4955
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/cleanup.cjs",
+      "sha256": "5447032ffa50109b5b0c24411eb3ed5e14bb9536c84c7cc6cfdc73fac5ffe32d",
+      "bytes": 6267
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/context.js",
+      "sha256": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+      "bytes": 2248
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/delivery-gate.cjs",
+      "sha256": "5e9dfad2f65da060581da8a5cd8128d3c621d438aab43a6874ba2b2aab3b9550",
+      "bytes": 3632
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/delivery.cjs",
+      "sha256": "dd94dbf2205779bb717433b2137982b14061fb93ee610f067677dd1ad39e3242",
+      "bytes": 3450
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/dummy-child.py",
+      "sha256": "3f7aa48658319457c23365bbff64261c8e2ab6338f625f67b755128ae438617e",
+      "bytes": 297
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/dummy-gates.cjs",
+      "sha256": "3e18c911ae8651409e7e224b0e8edd7b4de8a154878f6ef24f71735d7d1a9c7b",
+      "bytes": 3041
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/early-cache.cjs",
+      "sha256": "48300889349da30fddabfaa3834b7ee379520e3c7b7a6c9f7f54110b25607fab",
+      "bytes": 6397
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/early-page.js",
+      "sha256": "e0d1014c7ad1557c5975e9e732fe4d32c798d76f60838538f47d3f542e4b7159",
+      "bytes": 1489
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/early-worker.js",
+      "sha256": "ee23be81917ee1763dab09d06545d3894798ca4febf4aadeeb855adfa74db00c",
+      "bytes": 4514
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/entry-gate.cjs",
+      "sha256": "8625ab5f55019e958f8cbe84ea3034dbb7cb804acaf26063cb8639cfbe616e49",
+      "bytes": 12026
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/entry-real-main-gate.cjs",
+      "sha256": "25115d41a715c326eaef9665a014da89cec3c4cda45b37725c59fac99898ef32",
+      "bytes": 2634
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/entry-real-smoke.cjs",
+      "sha256": "20879b02852ef66ddf1f4e361fbbc51f6185c809bc22d5b47bddf18e27c5b04b",
+      "bytes": 2424
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/entry.cjs",
+      "sha256": "a9f72e46af6f3bd69f35ff3ad93020da3679d1db0a8eff45de449fcdf084dd47",
+      "bytes": 12015
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/external-dummy-driver.py",
+      "sha256": "3a6e9150fd5a31c0b9ed1ba9065808c7e9e3f1061d4439d4e9913ede1992a6e0",
+      "bytes": 1520
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/fault-gates.cjs",
+      "sha256": "879ad2e0851c88524681dd58c92029beb0597d936d7b16859f9e069d288b6018",
+      "bytes": 2719
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/final-gate.cjs",
+      "sha256": "214f735ae3586a3cdd9487d601cbe4eb7228353024952d05465d4a9f05dd580a",
+      "bytes": 4463
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/game-loop.cjs",
+      "sha256": "6e9f50403338d1935cf43103842740ee479f0c38d31c97fde853ba99fac2c64a",
+      "bytes": 4016
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/game.js",
+      "sha256": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+      "bytes": 27877
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/golden-gates.cjs",
+      "sha256": "fc7056cfec5fc41c31eb62194efc8159ef894295e96ae85273ddcba06dcfa0ad",
+      "bytes": 3962
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/host.js",
+      "sha256": "dc6cf3e24774e5e6b52c8cf346090f53f261e58b0c7fda1e6d674c7142983d02",
+      "bytes": 3586
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/judge.cjs",
+      "sha256": "a43bed42482ae21a3620449df37b08596bc9fabef31936b27d6c95254fdc7577",
+      "bytes": 1601
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/kernel-dummy-child.py",
+      "sha256": "3ca55e1009c543c3e469e0faabec265e590ab15232c3470ea3e8391029bb17f1",
+      "bytes": 491
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/kernel-dummy.cjs",
+      "sha256": "91d1fa18300607e1a4a05f656e36e6fe5d99f6babedf225e55b7e05c0421aeea",
+      "bytes": 2474
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/kernel-policy-gates.py",
+      "sha256": "06a2090b5e01e6d71fbb12451b6451f2cce3d9b81153f5fec041a3e2aa9cd488",
+      "bytes": 1736
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/kernel_boundary.py",
+      "sha256": "afa63b0b113bdb8f5f112a871e8f183d33b9d493e5e08cce098faa4ecfd5dd21",
+      "bytes": 2561
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/ledger-gates.py",
+      "sha256": "d1f013478b7365c80a3b6bafa8c0d3259382a44d864f114333d29f9fd3a7e070",
+      "bytes": 1500
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/match-entry.cjs",
+      "sha256": "41f29ffe17179edc0a92faa82c091d12220377284e2dad8260e81352811e523f",
+      "bytes": 5663
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/mock-gates.cjs",
+      "sha256": "c1137be1df132fb995c585b357163491e8404da1063d2ffb82c9b7420ad9d461",
+      "bytes": 6859
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/mock.cjs",
+      "sha256": "ea3525b13cbbabd0390058e8288704f25790459c748c5ef3e35312440b50b22c",
+      "bytes": 5928
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/owned-ledger.cjs",
+      "sha256": "b375c3389139fd918a26c87f6d967978284a23c5cdae6cac7171e09ceabe0035",
+      "bytes": 1981
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/owned_ledger.py",
+      "sha256": "8a6b52c664e0602dfee6f0a969be26d990df114c3c5ccc43c2d4d6e5560a6036",
+      "bytes": 2631
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/pause-check.cjs",
+      "sha256": "65acc36136aab7e626459fc86cd310d4fa1d528b80dfefca1f6a2bca8b3440d0",
+      "bytes": 980
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/pipe.cjs",
+      "sha256": "33444bddcfb8fae9e73f895f56582c5ed1af149cda5c8aa352e47a12c870502a",
+      "bytes": 1634
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/preregister.cjs",
+      "sha256": "ec2084b32ee0087d09e0c091485bca379f8da1df15598791a5d5616a2528c398",
+      "bytes": 3411
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/real-golden.cjs",
+      "sha256": "24c7a860bd80cf85a035f5a93e3927b9455ec0f2df1700cec167708eabc17974",
+      "bytes": 6428
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/reference-worker.js",
+      "sha256": "0faec2f42d3a3364effa2ed725c34169ea3c8f79e6c5305f09e238850faa0106",
+      "bytes": 19596
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/run-golden.cjs",
+      "sha256": "f299c9e1531f796dc69a7851649e93485d192e11438499929e672b259cdd44e9",
+      "bytes": 1132
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/runner.py",
+      "sha256": "a034441505c321eeafd8bdaaab180e9d2c50b1c51bc6a6351a9d501cb4adfe0a",
+      "bytes": 10024
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/stream-cache.js",
+      "sha256": "9887e187291448ec624c04be21414279449309ff09d324313b50cf28cf1ce00c",
+      "bytes": 5301
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/stream-page.js",
+      "sha256": "4245583974586d1b0e2f156da452887ab7e1f786da4175ca5ca2b99cbfd02f88",
+      "bytes": 5341
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/stream-worker.js",
+      "sha256": "1cceabd01c741d0eb4cf914404d740bcc455f0cc2f247dd811dbb971b3eda828",
+      "bytes": 4166
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/token-helper.cjs",
+      "sha256": "8692c6367f9ba205ea5d44fb9819da72da369317f68db6b05cd068e5492584dd",
+      "bytes": 1584
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/transaction.cjs",
+      "sha256": "1b32c3ab195c84f5147a404563cad1576f08987112d8789f06379caa7aa62afd",
+      "bytes": 2984
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/unit-gates.cjs",
+      "sha256": "0d53dba9788c26585b2143b59225e4d9d282644b04cb0e28ba6ee70a5b83ea1d",
+      "bytes": 3820
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/verify.py",
+      "sha256": "052fdcf65312f7a69c4c4d1a6ae96426dba317a31614d2ded485053b878000b5",
+      "bytes": 4051
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-01/worker.js",
+      "sha256": "c245c9c0aaaea06e1b595fa0e670ef81e6f34a7e873106a3982ae8aba1e719c8",
+      "bytes": 3788
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/arena-delivery.cjs",
+      "sha256": "ec6f1e0656cb340ed50879fbd58553a245899a58b12a9437bffbdd7ae90bc355",
+      "bytes": 1859
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/arena-integration.cjs",
+      "sha256": "54de62f22e7f6faf92467166718f114db9b13561da22f748b8c630747f50d1a8",
+      "bytes": 3578
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/arena-mock.cjs",
+      "sha256": "73ab04ab6b51e89839460ea23cb03cb92f76b0a105bed6bd04514b173a1a821a",
+      "bytes": 1956
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/arena-page.js",
+      "sha256": "0fdd8ac6f326341111d36441e137c301680169a05a58f29669a70f85c0641d8a",
+      "bytes": 3875
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/arena.cjs",
+      "sha256": "28029a212c4dbf01ccefef1702b5972e555b9b63609b9bfd54fcb0f59116949a",
+      "bytes": 14091
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/browser.cjs",
+      "sha256": "72ad21a8d796530bb9666dd9faaeec63e7df7b2223bfbc927ee8bbaca84bb3d8",
+      "bytes": 4236
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/cache-gates.cjs",
+      "sha256": "507f48c03301d5099b8b6e368e4792b82b20b96b689b5bf38ab93cb7db8b1782",
+      "bytes": 2888
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/caller.cjs",
+      "sha256": "0488721b153fe4f7b200454309a82ad8a1b615a4553c37721279baac955a8cc8",
+      "bytes": 5097
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/candidate-worker.js",
+      "sha256": "d84b967485a953c574c3f0e2667145ef4ea21a65f55ab0793dcdedf315c54fc8",
+      "bytes": 3432
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/checkpoint.js",
+      "sha256": "e8f858b2d41605b8ae8e699aaa4a5ae43d2d7c2f4eb6c7c061f194bf355a9361",
+      "bytes": 5835
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/cleanup-mock-gate.cjs",
+      "sha256": "2a0423d03019e405f20ae65680c523c4ea117ab3ffe0785d8071888e52f8dee2",
+      "bytes": 4955
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/cleanup.cjs",
+      "sha256": "5447032ffa50109b5b0c24411eb3ed5e14bb9536c84c7cc6cfdc73fac5ffe32d",
+      "bytes": 6267
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/context.js",
+      "sha256": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+      "bytes": 2248
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/delivery-gate.cjs",
+      "sha256": "5e9dfad2f65da060581da8a5cd8128d3c621d438aab43a6874ba2b2aab3b9550",
+      "bytes": 3632
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/delivery.cjs",
+      "sha256": "dd94dbf2205779bb717433b2137982b14061fb93ee610f067677dd1ad39e3242",
+      "bytes": 3450
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/dummy-child.py",
+      "sha256": "3f7aa48658319457c23365bbff64261c8e2ab6338f625f67b755128ae438617e",
+      "bytes": 297
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/dummy-gates.cjs",
+      "sha256": "3e18c911ae8651409e7e224b0e8edd7b4de8a154878f6ef24f71735d7d1a9c7b",
+      "bytes": 3041
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/early-cache.cjs",
+      "sha256": "48300889349da30fddabfaa3834b7ee379520e3c7b7a6c9f7f54110b25607fab",
+      "bytes": 6397
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/early-page.js",
+      "sha256": "e0d1014c7ad1557c5975e9e732fe4d32c798d76f60838538f47d3f542e4b7159",
+      "bytes": 1489
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/early-worker.js",
+      "sha256": "ee23be81917ee1763dab09d06545d3894798ca4febf4aadeeb855adfa74db00c",
+      "bytes": 4514
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/entry-gate.cjs",
+      "sha256": "8625ab5f55019e958f8cbe84ea3034dbb7cb804acaf26063cb8639cfbe616e49",
+      "bytes": 12026
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/entry-real-main-gate.cjs",
+      "sha256": "25115d41a715c326eaef9665a014da89cec3c4cda45b37725c59fac99898ef32",
+      "bytes": 2634
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/entry-real-smoke.cjs",
+      "sha256": "20879b02852ef66ddf1f4e361fbbc51f6185c809bc22d5b47bddf18e27c5b04b",
+      "bytes": 2424
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/entry.cjs",
+      "sha256": "f3d3e0fde8403d25e60d2020671617bb50534b0ed83609cf5bdf47961a940fb1",
+      "bytes": 13401
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/external-dummy-driver.py",
+      "sha256": "3a6e9150fd5a31c0b9ed1ba9065808c7e9e3f1061d4439d4e9913ede1992a6e0",
+      "bytes": 1520
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/fault-gates.cjs",
+      "sha256": "879ad2e0851c88524681dd58c92029beb0597d936d7b16859f9e069d288b6018",
+      "bytes": 2719
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/final-gate.cjs",
+      "sha256": "214f735ae3586a3cdd9487d601cbe4eb7228353024952d05465d4a9f05dd580a",
+      "bytes": 4463
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/game-loop.cjs",
+      "sha256": "6e9f50403338d1935cf43103842740ee479f0c38d31c97fde853ba99fac2c64a",
+      "bytes": 4016
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/game.js",
+      "sha256": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+      "bytes": 27877
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/golden-gates.cjs",
+      "sha256": "fc7056cfec5fc41c31eb62194efc8159ef894295e96ae85273ddcba06dcfa0ad",
+      "bytes": 3962
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/host.js",
+      "sha256": "dc6cf3e24774e5e6b52c8cf346090f53f261e58b0c7fda1e6d674c7142983d02",
+      "bytes": 3586
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/judge.cjs",
+      "sha256": "a43bed42482ae21a3620449df37b08596bc9fabef31936b27d6c95254fdc7577",
+      "bytes": 1601
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/kernel-dummy-child.py",
+      "sha256": "3ca55e1009c543c3e469e0faabec265e590ab15232c3470ea3e8391029bb17f1",
+      "bytes": 491
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/kernel-dummy.cjs",
+      "sha256": "91d1fa18300607e1a4a05f656e36e6fe5d99f6babedf225e55b7e05c0421aeea",
+      "bytes": 2474
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/kernel-policy-gates.py",
+      "sha256": "06a2090b5e01e6d71fbb12451b6451f2cce3d9b81153f5fec041a3e2aa9cd488",
+      "bytes": 1736
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/kernel_boundary.py",
+      "sha256": "afa63b0b113bdb8f5f112a871e8f183d33b9d493e5e08cce098faa4ecfd5dd21",
+      "bytes": 2561
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/ledger-gates.py",
+      "sha256": "d1f013478b7365c80a3b6bafa8c0d3259382a44d864f114333d29f9fd3a7e070",
+      "bytes": 1500
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/match-entry.cjs",
+      "sha256": "41f29ffe17179edc0a92faa82c091d12220377284e2dad8260e81352811e523f",
+      "bytes": 5663
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/mock-gates.cjs",
+      "sha256": "c1137be1df132fb995c585b357163491e8404da1063d2ffb82c9b7420ad9d461",
+      "bytes": 6859
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/mock.cjs",
+      "sha256": "ea3525b13cbbabd0390058e8288704f25790459c748c5ef3e35312440b50b22c",
+      "bytes": 5928
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/owned-ledger.cjs",
+      "sha256": "b375c3389139fd918a26c87f6d967978284a23c5cdae6cac7171e09ceabe0035",
+      "bytes": 1981
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/owned_ledger.py",
+      "sha256": "8a6b52c664e0602dfee6f0a969be26d990df114c3c5ccc43c2d4d6e5560a6036",
+      "bytes": 2631
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/pause-check.cjs",
+      "sha256": "65acc36136aab7e626459fc86cd310d4fa1d528b80dfefca1f6a2bca8b3440d0",
+      "bytes": 980
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/pipe.cjs",
+      "sha256": "33444bddcfb8fae9e73f895f56582c5ed1af149cda5c8aa352e47a12c870502a",
+      "bytes": 1634
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/preregister.cjs",
+      "sha256": "ec2084b32ee0087d09e0c091485bca379f8da1df15598791a5d5616a2528c398",
+      "bytes": 3411
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/real-golden.cjs",
+      "sha256": "24c7a860bd80cf85a035f5a93e3927b9455ec0f2df1700cec167708eabc17974",
+      "bytes": 6428
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/reference-worker.js",
+      "sha256": "0faec2f42d3a3364effa2ed725c34169ea3c8f79e6c5305f09e238850faa0106",
+      "bytes": 19596
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/run-golden.cjs",
+      "sha256": "f299c9e1531f796dc69a7851649e93485d192e11438499929e672b259cdd44e9",
+      "bytes": 1132
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/runner.py",
+      "sha256": "a034441505c321eeafd8bdaaab180e9d2c50b1c51bc6a6351a9d501cb4adfe0a",
+      "bytes": 10024
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/stream-cache.js",
+      "sha256": "9887e187291448ec624c04be21414279449309ff09d324313b50cf28cf1ce00c",
+      "bytes": 5301
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/stream-page.js",
+      "sha256": "4245583974586d1b0e2f156da452887ab7e1f786da4175ca5ca2b99cbfd02f88",
+      "bytes": 5341
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/stream-worker.js",
+      "sha256": "1cceabd01c741d0eb4cf914404d740bcc455f0cc2f247dd811dbb971b3eda828",
+      "bytes": 4166
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/token-helper.cjs",
+      "sha256": "8692c6367f9ba205ea5d44fb9819da72da369317f68db6b05cd068e5492584dd",
+      "bytes": 1584
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/transaction.cjs",
+      "sha256": "1b32c3ab195c84f5147a404563cad1576f08987112d8789f06379caa7aa62afd",
+      "bytes": 2984
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/unit-gates.cjs",
+      "sha256": "0d53dba9788c26585b2143b59225e4d9d282644b04cb0e28ba6ee70a5b83ea1d",
+      "bytes": 3820
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/verify.py",
+      "sha256": "052fdcf65312f7a69c4c4d1a6ae96426dba317a31614d2ded485053b878000b5",
+      "bytes": 4051
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/job-source/nn-suite-63-02-remainder/worker.js",
+      "sha256": "c245c9c0aaaea06e1b595fa0e670ef81e6f34a7e873106a3982ae8aba1e719c8",
+      "bytes": 3788
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/live-control-append-proof.json",
+      "sha256": "f2904fbca61d63abff9122368ba169cd7fe38439f39717aac376438b5b644865",
+      "bytes": 355
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/nn-suite-63-01.inputs.json",
+      "sha256": "b41cea8268553152ca495d7d49f0cab8e1cc3a6d94577805669febb0651b0936",
+      "bytes": 12737
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/nn-suite-63-01.log",
+      "sha256": "7995706ab2d5ede20fe889111f85b019adf4127bc13fe2528ad447d438702066",
+      "bytes": 289
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/nn-suite-63-01.monitor.jsonl",
+      "sha256": "a3f2eca8a80e4cad09c67e93a3d9440bacf9d07347920b85d1b73c013ec9f0dd",
+      "bytes": 213656
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/nn-suite-63-01.owned-ack.json",
+      "sha256": "a3194b1de3e9525e25b6eeee016392b49f0495f6e5ffd21306fa28400a8da3a5",
+      "bytes": 11707
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/nn-suite-63-01.owned-ledger.jsonl",
+      "sha256": "0453e3a2c47d6d1c743f86dbc562d7d7d8eb25963595cb7afed571f11809451a",
+      "bytes": 2985
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/nn-suite-63-01.process.json",
+      "sha256": "29a34e7a7a373829a0c0dc2a3b936f58ad1fe85e7eeb74a8e6b9877197f042c5",
+      "bytes": 11565
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/nn-suite-63-01.started.json",
+      "sha256": "7e7b4e5bdafd88269ce010f25e48efe4e60cea114e577f57153b411558f8716f",
+      "bytes": 1560
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/nn-suite-63-02-remainder.inputs.json",
+      "sha256": "e58fc3bec37910fa3bcbee86e91cddf8cb308e0322bafa731e987cded93e9296",
+      "bytes": 13307
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/nn-suite-63-02-remainder.log",
+      "sha256": "c9a1b1f12e65cc1ffdfc85f081aa559fcc97057f7d45e787ea439debaf27f450",
+      "bytes": 2757
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/nn-suite-63-02-remainder.monitor.jsonl",
+      "sha256": "6f2f0655f16bc20bb4c24a946d330d8d4fb33f654851736ab3ce8052e4853e1b",
+      "bytes": 257347
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/nn-suite-63-02-remainder.owned-ack.json",
+      "sha256": "6e0011a800b8334ac6eec800922ac06d0220a91a8af6bab9cb10fdc5eb9fa6f8",
+      "bytes": 13574
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/nn-suite-63-02-remainder.owned-ledger.jsonl",
+      "sha256": "539f6ee0eed8ce0534b5c16b8639e7e2e3f7ac73e3ca77ca22eaad98852d9b99",
+      "bytes": 4266
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/nn-suite-63-02-remainder.process.json",
+      "sha256": "43464e1a78cc8133405f84653c369141497328e5cd51e5795b31784240fdcce4",
+      "bytes": 12282
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/nn-suite-63-02-remainder.started.json",
+      "sha256": "5e489be5737561eaf46ebb67a33c81046257ce8761bbf1ae927f80c4dc8494ed",
+      "bytes": 1560
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/other-heavy-stopped.json",
+      "sha256": "ca7903ad78afb21885e436db1487f3bb9beb1bb6290638da11dbac6046e630c3",
+      "bytes": 14782
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/preregister-before-schedule-order.json",
+      "sha256": "44c0580f87c85d090f2c3d43ec244e7cc0f41c47abb7a256046b9177739cb692",
+      "bytes": 6162
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/preregister.json",
+      "sha256": "22d2fa771906345eae0c06f7b8c6bacd2daf62e5e0a68c1607eb28800df3a654",
+      "bytes": 6399
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/representative-payloads-NN0.json",
+      "sha256": "a2cafa26cc1ba7399209c61718a8cd63ebf46a07d3144eb71771fb4592e7206d",
+      "bytes": 54106
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/reserve.json",
+      "sha256": "d7f6f46f87485f3bd977c94f9cce2c64b5904ca57a6b08259dd0d7fd4b15c90c",
+      "bytes": 1685
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/runtime-stop-before-document.json",
+      "sha256": "ca6443bd3486c435fac811084aaf9c83bc378239c876ab18fa237f7cd4c65e3d",
+      "bytes": 19530
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/source-frozen-revision1.json",
+      "sha256": "7861a2521832678e2ab716ca595a87e55894d8f592e500d36783291620347ada",
+      "bytes": 11955
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/source-frozen-revision2.json",
+      "sha256": "8cb68b57c70bcc6c58e15a6ba2d4274d11e2458427c141e515dc13de279f9cc0",
+      "bytes": 11993
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/source-frozen.json",
+      "sha256": "c5381302d6573605242d06ede2f173e8fb68102c3ad9121a6d68e4070a5b411d",
+      "bytes": 12042
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/source-stop.json",
+      "sha256": "0c39dd917c0df230a2cb7e2b24ab2f084acb34c776f169d3611335c3c5d67ebc",
+      "bytes": 312
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/stop-error-classification-correction.json",
+      "sha256": "410bcbfef27350df17528d04394371d114113c4882547d5775731994bc80d32a",
+      "bytes": 468
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/suite-token-original.json",
+      "sha256": "910b13176ba669f4633b5890d8497cac9d42aa531b8a65c318c80a884d8af806",
+      "bytes": 437
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/suite-token.json",
+      "sha256": "0f5fec28843eb55e027e004e00d8562d35263ddddedb16c6d9d4432037919ce6",
+      "bytes": 540
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/unit-gates.json",
+      "sha256": "d159592b21eb9aa07815d9f9a29592ca9d480f5192005024820556312c32d59b",
+      "bytes": 1905
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/xdg-cache/dconf/user",
+      "sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "bytes": 2
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/xdg-config/google-chrome-for-testing/Crash Reports/settings.dat",
+      "sha256": "e8eae69b6e36f37717bfa4933774fd4106b00e6d0dec91f75077e8acb7f40b1a",
+      "bytes": 40
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/README.md",
+      "sha256": "1f7c13a98258e07ac583a76b24dfbb034a6c606c76535117324b49b723c2a229",
+      "bytes": 3586
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/arena-delivery.cjs",
+      "sha256": "ec6f1e0656cb340ed50879fbd58553a245899a58b12a9437bffbdd7ae90bc355",
+      "bytes": 1859
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/arena-integration.cjs",
+      "sha256": "54de62f22e7f6faf92467166718f114db9b13561da22f748b8c630747f50d1a8",
+      "bytes": 3578
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/arena-mock.cjs",
+      "sha256": "73ab04ab6b51e89839460ea23cb03cb92f76b0a105bed6bd04514b173a1a821a",
+      "bytes": 1956
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/arena-page.js",
+      "sha256": "0fdd8ac6f326341111d36441e137c301680169a05a58f29669a70f85c0641d8a",
+      "bytes": 3875
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/arena.cjs",
+      "sha256": "28029a212c4dbf01ccefef1702b5972e555b9b63609b9bfd54fcb0f59116949a",
+      "bytes": 14091
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/browser.cjs",
+      "sha256": "72ad21a8d796530bb9666dd9faaeec63e7df7b2223bfbc927ee8bbaca84bb3d8",
+      "bytes": 4236
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/cache-gates.cjs",
+      "sha256": "507f48c03301d5099b8b6e368e4792b82b20b96b689b5bf38ab93cb7db8b1782",
+      "bytes": 2888
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/caller.cjs",
+      "sha256": "0488721b153fe4f7b200454309a82ad8a1b615a4553c37721279baac955a8cc8",
+      "bytes": 5097
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/candidate-worker.js",
+      "sha256": "d84b967485a953c574c3f0e2667145ef4ea21a65f55ab0793dcdedf315c54fc8",
+      "bytes": 3432
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/checkpoint.js",
+      "sha256": "e8f858b2d41605b8ae8e699aaa4a5ae43d2d7c2f4eb6c7c061f194bf355a9361",
+      "bytes": 5835
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/cleanup-mock-gate.cjs",
+      "sha256": "2a0423d03019e405f20ae65680c523c4ea117ab3ffe0785d8071888e52f8dee2",
+      "bytes": 4955
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/cleanup.cjs",
+      "sha256": "5447032ffa50109b5b0c24411eb3ed5e14bb9536c84c7cc6cfdc73fac5ffe32d",
+      "bytes": 6267
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/context.js",
+      "sha256": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+      "bytes": 2248
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/delivery-gate.cjs",
+      "sha256": "5e9dfad2f65da060581da8a5cd8128d3c621d438aab43a6874ba2b2aab3b9550",
+      "bytes": 3632
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/delivery.cjs",
+      "sha256": "dd94dbf2205779bb717433b2137982b14061fb93ee610f067677dd1ad39e3242",
+      "bytes": 3450
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/dummy-child.py",
+      "sha256": "3f7aa48658319457c23365bbff64261c8e2ab6338f625f67b755128ae438617e",
+      "bytes": 297
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/dummy-gates.cjs",
+      "sha256": "3e18c911ae8651409e7e224b0e8edd7b4de8a154878f6ef24f71735d7d1a9c7b",
+      "bytes": 3041
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/early-cache.cjs",
+      "sha256": "48300889349da30fddabfaa3834b7ee379520e3c7b7a6c9f7f54110b25607fab",
+      "bytes": 6397
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/early-page.js",
+      "sha256": "e0d1014c7ad1557c5975e9e732fe4d32c798d76f60838538f47d3f542e4b7159",
+      "bytes": 1489
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/early-worker.js",
+      "sha256": "ee23be81917ee1763dab09d06545d3894798ca4febf4aadeeb855adfa74db00c",
+      "bytes": 4514
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/entry-gate.cjs",
+      "sha256": "8625ab5f55019e958f8cbe84ea3034dbb7cb804acaf26063cb8639cfbe616e49",
+      "bytes": 12026
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/entry-real-main-gate.cjs",
+      "sha256": "25115d41a715c326eaef9665a014da89cec3c4cda45b37725c59fac99898ef32",
+      "bytes": 2634
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/entry-real-smoke.cjs",
+      "sha256": "20879b02852ef66ddf1f4e361fbbc51f6185c809bc22d5b47bddf18e27c5b04b",
+      "bytes": 2424
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/entry.cjs",
+      "sha256": "f3d3e0fde8403d25e60d2020671617bb50534b0ed83609cf5bdf47961a940fb1",
+      "bytes": 13401
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/external-dummy-driver.py",
+      "sha256": "3a6e9150fd5a31c0b9ed1ba9065808c7e9e3f1061d4439d4e9913ede1992a6e0",
+      "bytes": 1520
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/fault-gates.cjs",
+      "sha256": "879ad2e0851c88524681dd58c92029beb0597d936d7b16859f9e069d288b6018",
+      "bytes": 2719
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/final-gate.cjs",
+      "sha256": "214f735ae3586a3cdd9487d601cbe4eb7228353024952d05465d4a9f05dd580a",
+      "bytes": 4463
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/game-loop.cjs",
+      "sha256": "6e9f50403338d1935cf43103842740ee479f0c38d31c97fde853ba99fac2c64a",
+      "bytes": 4016
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/game.js",
+      "sha256": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+      "bytes": 27877
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/golden-gates.cjs",
+      "sha256": "fc7056cfec5fc41c31eb62194efc8159ef894295e96ae85273ddcba06dcfa0ad",
+      "bytes": 3962
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/host.js",
+      "sha256": "dc6cf3e24774e5e6b52c8cf346090f53f261e58b0c7fda1e6d674c7142983d02",
+      "bytes": 3586
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/judge.cjs",
+      "sha256": "a43bed42482ae21a3620449df37b08596bc9fabef31936b27d6c95254fdc7577",
+      "bytes": 1601
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/kernel-dummy-child.py",
+      "sha256": "3ca55e1009c543c3e469e0faabec265e590ab15232c3470ea3e8391029bb17f1",
+      "bytes": 491
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/kernel-dummy.cjs",
+      "sha256": "91d1fa18300607e1a4a05f656e36e6fe5d99f6babedf225e55b7e05c0421aeea",
+      "bytes": 2474
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/kernel-policy-gates.py",
+      "sha256": "06a2090b5e01e6d71fbb12451b6451f2cce3d9b81153f5fec041a3e2aa9cd488",
+      "bytes": 1736
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/kernel_boundary.py",
+      "sha256": "afa63b0b113bdb8f5f112a871e8f183d33b9d493e5e08cce098faa4ecfd5dd21",
+      "bytes": 2561
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/ledger-gates.py",
+      "sha256": "d1f013478b7365c80a3b6bafa8c0d3259382a44d864f114333d29f9fd3a7e070",
+      "bytes": 1500
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/match-entry.cjs",
+      "sha256": "41f29ffe17179edc0a92faa82c091d12220377284e2dad8260e81352811e523f",
+      "bytes": 5663
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/mock-gates.cjs",
+      "sha256": "c1137be1df132fb995c585b357163491e8404da1063d2ffb82c9b7420ad9d461",
+      "bytes": 6859
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/mock.cjs",
+      "sha256": "ea3525b13cbbabd0390058e8288704f25790459c748c5ef3e35312440b50b22c",
+      "bytes": 5928
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/owned-ledger.cjs",
+      "sha256": "b375c3389139fd918a26c87f6d967978284a23c5cdae6cac7171e09ceabe0035",
+      "bytes": 1981
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/owned_ledger.py",
+      "sha256": "8a6b52c664e0602dfee6f0a969be26d990df114c3c5ccc43c2d4d6e5560a6036",
+      "bytes": 2631
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/pause-check.cjs",
+      "sha256": "65acc36136aab7e626459fc86cd310d4fa1d528b80dfefca1f6a2bca8b3440d0",
+      "bytes": 980
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/pipe.cjs",
+      "sha256": "33444bddcfb8fae9e73f895f56582c5ed1af149cda5c8aa352e47a12c870502a",
+      "bytes": 1634
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/preregister.cjs",
+      "sha256": "ec2084b32ee0087d09e0c091485bca379f8da1df15598791a5d5616a2528c398",
+      "bytes": 3411
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/real-golden.cjs",
+      "sha256": "24c7a860bd80cf85a035f5a93e3927b9455ec0f2df1700cec167708eabc17974",
+      "bytes": 6428
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/reference-worker.js",
+      "sha256": "0faec2f42d3a3364effa2ed725c34169ea3c8f79e6c5305f09e238850faa0106",
+      "bytes": 19596
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/run-golden.cjs",
+      "sha256": "f299c9e1531f796dc69a7851649e93485d192e11438499929e672b259cdd44e9",
+      "bytes": 1132
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/runner.py",
+      "sha256": "a034441505c321eeafd8bdaaab180e9d2c50b1c51bc6a6351a9d501cb4adfe0a",
+      "bytes": 10024
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/stream-cache.js",
+      "sha256": "9887e187291448ec624c04be21414279449309ff09d324313b50cf28cf1ce00c",
+      "bytes": 5301
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/stream-page.js",
+      "sha256": "4245583974586d1b0e2f156da452887ab7e1f786da4175ca5ca2b99cbfd02f88",
+      "bytes": 5341
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/stream-worker.js",
+      "sha256": "1cceabd01c741d0eb4cf914404d740bcc455f0cc2f247dd811dbb971b3eda828",
+      "bytes": 4166
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/token-helper.cjs",
+      "sha256": "8692c6367f9ba205ea5d44fb9819da72da369317f68db6b05cd068e5492584dd",
+      "bytes": 1584
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/transaction.cjs",
+      "sha256": "1b32c3ab195c84f5147a404563cad1576f08987112d8789f06379caa7aa62afd",
+      "bytes": 2984
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/unit-gates.cjs",
+      "sha256": "0d53dba9788c26585b2143b59225e4d9d282644b04cb0e28ba6ee70a5b83ea1d",
+      "bytes": 3820
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/verify.py",
+      "sha256": "052fdcf65312f7a69c4c4d1a6ae96426dba317a31614d2ded485053b878000b5",
+      "bytes": 4051
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-early-seal/worker.js",
+      "sha256": "c245c9c0aaaea06e1b595fa0e670ef81e6f34a7e873106a3982ae8aba1e719c8",
+      "bytes": 3788
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/docs/reports/ai-sigma-experiment-streaming-early-seal.md",
+      "sha256": "58996b0567e1688fd1336bdae39a55f7503581ba386fb0f07cbe471fe9f769a3",
+      "bytes": 5920
+    }
+  ]
+}

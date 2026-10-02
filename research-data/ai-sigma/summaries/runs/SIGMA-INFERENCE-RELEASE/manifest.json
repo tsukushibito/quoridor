@@ -1,0 +1,252 @@
+{
+  "issue": "quoridor-4lc.13",
+  "trial": 1,
+  "contract_version": 1,
+  "role": "hypothesis",
+  "thread": "01a0f31c-2e4b-7170-82c5-69e1428c2418",
+  "worktree": "/workspaces/quoridor/.worktree/ai-sigma",
+  "branch": "codex/ai-sigma",
+  "head": "1482df8da6dd91c95db211aeaa914af775b2bc76",
+  "processing_deadline": "2026-09-30T21:07:42Z",
+  "hard_deadline": "2026-09-30T21:19:42Z",
+  "start_conservative": "2026-09-30T20:39:42Z",
+  "release_flags": {
+    "opt-level": 3,
+    "lto": false,
+    "codegen-units": 16,
+    "debug": 0,
+    "incremental": false
+  },
+  "storage_accounting": "unique new-owned inode logical bytes; hardlinked target aliases counted once, separate physical reflink copy-inodes counted in full; old hypothesis conservatively 1414978405 bytes",
+  "code": [
+    {
+      "path": "tools/ai-sigma-inference-release/Cargo.toml",
+      "sha256": "6f412a35c981e7b0599537d47644da53fb13b020c554908a58d13e2d867044bc",
+      "bytes": 482
+    },
+    {
+      "path": "tools/ai-sigma-inference-release/runner.py",
+      "sha256": "5d698c3fb69cfac82c4cf764cbb86dd39cac0c1e2f09d889cded264a378e9d4f",
+      "bytes": 5408
+    },
+    {
+      "path": "tools/ai-sigma-inference-release/runner-source.txt",
+      "sha256": "f78e79f19bee75b1ed6ef176b4eb4e71487bb25b912327a83095e08bced7deac",
+      "bytes": 4886
+    },
+    {
+      "path": "tools/ai-sigma-inference-release/Cargo.lock",
+      "sha256": "aa86dc918a88f6980576691e0c4eb1f8144814edb1867c305ec8a5d4170b6a9f",
+      "bytes": 30629
+    },
+    {
+      "path": "tools/ai-sigma-inference-release/compare.py",
+      "sha256": "5d4515d972fb8ab69411d59d28d93739d9f025fad6b8c4b72f4db10d18281fd2",
+      "bytes": 1367
+    },
+    {
+      "path": "tools/ai-sigma-inference-release/browser.cjs",
+      "sha256": "efa822d1855b6b2e453254a3b7105e2b886a0fa2980545fd369d12b9b161c58d",
+      "bytes": 6286
+    },
+    {
+      "path": "tools/ai-sigma-inference-release/worker.js",
+      "sha256": "03314dde68baac3e2a77f8477029ee82f92355576d154c0b7ec9995eb0bab1d0",
+      "bytes": 1107
+    },
+    {
+      "path": "tools/ai-sigma-inference-release/README.md",
+      "sha256": "228e833a9800db351be5cf5dde0efc9c304a63f08e294cf0011fa6f2cdedd148",
+      "bytes": 5254
+    },
+    {
+      "path": "tools/ai-sigma-inference-release/host.js",
+      "sha256": "8175d2254ee58f347c3e079eef03ad47a6fd4590b0207e1dd55b8b00960d37fb",
+      "bytes": 2358
+    },
+    {
+      "path": "tools/ai-sigma-inference-release/src/main.rs",
+      "sha256": "f3cbc7a7e10dbfc259b29c950661952334a3c4e72d9b87bd26c372d519ea488d",
+      "bytes": 2125
+    },
+    {
+      "path": "tools/ai-sigma-inference-release/src/lib.rs",
+      "sha256": "fac85193cd626bbf7a362fac3143fafdafaba80c5067126d6710eceb69719ae4",
+      "bytes": 5558
+    },
+    {
+      "path": "tools/ai-sigma-inference-release/browser-config/google-chrome-for-testing/Crash Reports/settings.dat",
+      "sha256": "7056ccfeb7a47a00acc327cab4a217b8f21f94fc61329a613b5515b83c7d3a88",
+      "bytes": 40
+    },
+    {
+      "path": "tools/ai-sigma-inference-release/browser-cache/dconf/user",
+      "sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "bytes": 2
+    }
+  ],
+  "report": {
+    "path": "docs/reports/ai-sigma-hypothesis-release.md",
+    "sha256": "1ea5a77b8e8f52f9ad2d07bf18e337bd3d3630b083776c3d7899593cd8155705",
+    "bytes": 4280
+  },
+  "inputs": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "c03050bdfe00ecf86558945f0100ca6265d33e7447743cc277aeffea546f6edb"
+    },
+    {
+      "path": ".agents/research-team/common.md",
+      "sha256": "56c4d2aed25c083e6292d11efb0afa2c70a8f26709e5ad5a50029c8ef8d55add"
+    },
+    {
+      "path": ".agents/research-team/roles/hypothesis.md",
+      "sha256": "abfc3049d891db3da8fdab19a34c41bc1ed38aeda31b049015ba6f02390ef66c"
+    },
+    {
+      "path": ".agents/research-team/templates/handoff.md",
+      "sha256": "8139c0ad5a3a4eccc5ba7654807effa350debfcc32c5320aeffba4e9b8e2f753"
+    },
+    {
+      "path": ".devcontainer/storage-policy.md",
+      "sha256": "bc27c254d4cde6342329d9f27c376da786857d58ea8b6cf0ea5e0ba78fabb099"
+    },
+    {
+      "path": "docs/design/ai-sigma-research-goal.md",
+      "sha256": "4b0fee4e7b7c9f2de07a6baf0c2fd5f649718511e419366af9464471d4524b7d"
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-release.md",
+      "sha256": "db921b0333e5e4a56938d635ed067d8ca40b179b3ce9d34627941954eead3c0e"
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-inference.md",
+      "sha256": "7039c1e6355094a6fcdb6cf78870b5401c4208c97186c28186f35a7b43c4bc76"
+    },
+    {
+      "path": ".artifacts/ai-sigma/verification/CRITIC-INFERENCE/summary.json",
+      "sha256": "5081d92a8925e57618045e9a02f48e675b95dec808992b2aad4639d9642f0a1b"
+    },
+    {
+      "path": ".artifacts/ai-sigma/verification/CRITIC-INFERENCE/patch-manifest.json",
+      "sha256": "64379a55ed41e8bda70fc51e32781f9fb19eec3623eea96ea352a8d5eef279c1"
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/environment.json",
+      "sha256": "dd42d445f09f8387c9be6d28c2e241323ccae573845453c554adbe9dc06c1cfd"
+    }
+  ],
+  "old_cache_immutable_evidence": "cache-reuse.json",
+  "immutable_before_evidence": "start.json",
+  "unchanged_verification": "resources.json",
+  "artifacts": [
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-RELEASE/diagnostic-summary.json",
+      "sha256": "726f544fa3e3ef181ea202fce225c953c344a40a2dee4aeb2ce161f9ef438bc5",
+      "bytes": 18180
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-RELEASE/wasm-build-resume.log",
+      "sha256": "5779b31d9588a0637283fb073514b4be980458b23c0f5c4fb1556585ba158f22",
+      "bytes": 784
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-RELEASE/native-run.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-RELEASE/native.gate.json",
+      "sha256": "afc058404d4b5bb48935bad56017267565001d23ee361ca66e7a417c90e5b692",
+      "bytes": 8643
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-RELEASE/wasm.gate.json",
+      "sha256": "131720e0fb2b3aa823b1e3b56fb31fa12450a16fd51a2af7586d4b047344302a",
+      "bytes": 8630
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-RELEASE/native-build.process.json",
+      "sha256": "c028b2ed03d9a1ad22bba8203acf46bd8b74d94f1c583f7d336538b1350a16e4",
+      "bytes": 29308
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-RELEASE/native.outputs.json",
+      "sha256": "8447f6c047826e8815df464ffbeb821ae3a213dbef7ff0801130e879ec08f6cc",
+      "bytes": 31834
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-RELEASE/browser-run.log",
+      "sha256": "1d00ac8b7a57ed35905fbd12b407f3ba60a4650d5e4ef29f6e8d9243afc545bd",
+      "bytes": 6171
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-RELEASE/wasm-build.log",
+      "sha256": "1809f1fb7e6edb1d72ad28c7dbc7c9922e4be833a0ad8aea45d539f4e6bf4c4e",
+      "bytes": 2265
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-RELEASE/native-build.log",
+      "sha256": "58cba7a7d56bdd65fd5e73fa62b5fb42da3708088e273e26e6e8a926db63756e",
+      "bytes": 3852
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-RELEASE/resources.json",
+      "sha256": "646a7566e1b7d1351da0faadc1af9fa791be738c7bd83a4a73322e88a8c23bb4",
+      "bytes": 1543
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-RELEASE/start.json",
+      "sha256": "0c5d53d01e24b08539706d236b4596b54548352f362a9f0bee737ac43d24264f",
+      "bytes": 15932
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-RELEASE/native-run.process.json",
+      "sha256": "16fbd9dcd4ea978dbd80843af25cb1c1462c7b6bf9878b843df32308a798305c",
+      "bytes": 1875
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-RELEASE/cache-reuse.json",
+      "sha256": "fd945bcf1904623b5ff384aee8a36b249a8a1780b09f0ad44ff89a3300739f2d",
+      "bytes": 1707771
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-RELEASE/wasm.outputs.json",
+      "sha256": "5d4fc899b3b28a64b9496d55cc58fa035ea0de0ec5e1c6ff1be1a81433466763",
+      "bytes": 26120
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-RELEASE/browser-run.process.json",
+      "sha256": "89d3e9e10cec0cfc004867559307fdaa981a97207eacc76d6981c47b9ef7ba58",
+      "bytes": 3277
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-RELEASE/ort-a.outputs.json",
+      "sha256": "060ba1a3f7647adb7c0ac968eb2834d966665920f72eeee2b3798ce9864b382a",
+      "bytes": 182124
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-RELEASE/wasm-build-resume.process.json",
+      "sha256": "97d1687377e8cebe51d91208d57a2780c31a71855acd173a4b048c592b13adcf",
+      "bytes": 5773
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-RELEASE/wasm-build.process.json",
+      "sha256": "6fbc76073114ff89cccc61480e6e45f50b089ff456a7ff2c65a0f258e2a1be46",
+      "bytes": 11106
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-RELEASE/native.metadata.json",
+      "sha256": "e4337d58618a0b1dc7cd0d28d20c95b2d0a9f37c749147f06f405f5cc7dbdabc",
+      "bytes": 1328
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-RELEASE/wasm.metadata.json",
+      "sha256": "7f8c0c3c1be79b1cddc35610b6958904d4c6b2a92c62a5c8ac542b8bf90e480e",
+      "bytes": 14304
+    }
+  ],
+  "write_stop_utc": "2026-09-30T21:08:24.103406+00:00",
+  "remaining_self_processes": 0,
+  "product_strength_adoption": false
+}

@@ -1,0 +1,376 @@
+{
+  "issue": "quoridor-4lc.18",
+  "experiment": "SIGMA-ARENA-PREFLIGHT",
+  "trial": 1,
+  "contract_version": 1,
+  "supplement_version": 2,
+  "role": "hypothesis",
+  "thread": "01a0f31c-2e4b-7170-82c5-69e1428c2418",
+  "worktree": "/workspaces/quoridor/.worktree/ai-sigma",
+  "branch": "codex/ai-sigma",
+  "HEAD": "1482df8da6dd91c95db211aeaa914af775b2bc76",
+  "inputs_frozen": {
+    "frozen_utc": "2026-09-30T22:07:30.824049+00:00",
+    "source": "owner final snapshots only, no live tool input",
+    "manifest_sha256": "0d92abcc8c5364ce33e48b4d244035d5da534ed583fc313a6c519896d16690af",
+    "manifest": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-NN-SEARCH/artifact-manifest.json",
+    "research_write_stop_utc": "2026-09-30T22:05:44.633184+00:00",
+    "shutdown_sha256": "bf4d60e28aaacc1c78819f674b1ca8b720b6eea429837495b11a6fbaa9f36f55",
+    "known_live_jobs": [],
+    "checks": [
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-NN-SEARCH/final-native",
+        "bytes": 23229168,
+        "sha256": "7cdeb020db3fe96290ec90737b1459026f7c31a28a20216b0ec361e17f665130"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-NN-SEARCH/final.wasm",
+        "bytes": 14174330,
+        "sha256": "891cd5e402885afc234b6041eab682bf429506848c5be532028bbe32e3c2f328"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-NN-SEARCH/final-source/host.js",
+        "bytes": 2737,
+        "sha256": "b40e7611b9f351783f7f838c05aa3c9b72aa9c7152d35ad7cececb5f7a3115d1"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-NN-SEARCH/final-source/worker.js",
+        "bytes": 3885,
+        "sha256": "3aac7020fe92bbdb6497f1dd28d179cd1563dae02cb8b504e814b13a69775581"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-NN-SEARCH/final-source/src/lib.rs",
+        "bytes": 18271,
+        "sha256": "fbe3587b9f0c979e30a1e71f5abf1bcb926b634d43332e050d81b3a63db05094"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-NN-SEARCH/final-source/src/main.rs",
+        "bytes": 11092,
+        "sha256": "ee17ebf1f1c23c9c8464b7c6bdd222e5728f8877de0a1a7928f1ffc54c83ab24"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-NN-SEARCH/final-source/Cargo.lock",
+        "bytes": 30930,
+        "sha256": "dabfaae8b76addad6a1714c89be3a0d003a54ed1aa8995e09fc2d2660e21843a"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-NN-SEARCH/final-source/Cargo.toml",
+        "bytes": 504,
+        "sha256": "d18b370bc872356c48a7f50df3083d33224e30553ae4d02b379ba77baf08ade7"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-NN-SEARCH/final-source/README.md",
+        "bytes": 4154,
+        "sha256": "137e26e2491cd2c36f12d3e3bb8b828258d8ba2d4bb6c15c6c678a1062436e76"
+      }
+    ],
+    "formal_window_owner_shutdown_verified": true
+  },
+  "report": {
+    "path": "/workspaces/quoridor/.worktree/ai-sigma/docs/reports/ai-sigma-hypothesis-arena.md",
+    "bytes": 3164,
+    "sha256": "6e8ba5bf8665dc456bb686cdbe5f3dc404d990b0cb8187b296c35dbee605a21d"
+  },
+  "files": [
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-arena/game.js",
+      "bytes": 27877,
+      "sha256": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-arena/candidate-worker.js",
+      "bytes": 4007,
+      "sha256": "9860834d6404e8b7d39a5ca6ee95dcede12569c8ef65f7730a0445153a161a2d"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-arena/reference-worker.js",
+      "bytes": 17534,
+      "sha256": "72e8ccbf8bc738902d07f5b9193c23accfc3da4ba70113fa24ec106064d2bd0a"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-arena/arena.cjs",
+      "bytes": 16498,
+      "sha256": "2ba142385c84886f1ceef176127493bedac08bebed30f4dbfecb269a5b3fa0d2"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-arena/candidate-host.js",
+      "bytes": 2737,
+      "sha256": "b40e7611b9f351783f7f838c05aa3c9b72aa9c7152d35ad7cececb5f7a3115d1"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-arena/clock-ping.py",
+      "bytes": 283,
+      "sha256": "e755e683c754650009de857f2945a6a6fe13514f289260d6ce598d9d9c2f7870"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-arena/runner.py",
+      "bytes": 6018,
+      "sha256": "60459cf6aad45fe73c71fe4e3e28430312ab11ced4b73cbff6d6ca274dc7ae2f"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-arena/candidate-upstream-README.md",
+      "bytes": 4154,
+      "sha256": "137e26e2491cd2c36f12d3e3bb8b828258d8ba2d4bb6c15c6c678a1062436e76"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-arena/arena-page.js",
+      "bytes": 2398,
+      "sha256": "fb448f859f6777c3bda94f026e6fb2ea9bac41c08f05bff40ef671a7df5c8a2f"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-arena/judge.cjs",
+      "bytes": 1601,
+      "sha256": "a43bed42482ae21a3620449df37b08596bc9fabef31936b27d6c95254fdc7577"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-arena/context.js",
+      "bytes": 2248,
+      "sha256": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-arena/prepare.cjs",
+      "bytes": 3404,
+      "sha256": "5541fa91612b17488ce591f9bbaf071cfc9213b099a373a6b458745e36a94749"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-arena/README.md",
+      "bytes": 8798,
+      "sha256": "458e78a17e702725fc43d48297d864b5d025f88d78d0ee2b849d7630d62a9c1e"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/clock-drift.json",
+      "bytes": 479,
+      "sha256": "fd5812cccd8e68d2ffd937b4fa9d13053a446e4354ca4278267eb83d981e82b5"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/cancellation.json",
+      "bytes": 165658,
+      "sha256": "12cd0f1ab72a8e77d62ce0ea4c650c1be817811852441c011654ce83bf43e12a"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/judge-gate.json",
+      "bytes": 135,
+      "sha256": "bab6954853b2ee947ffe4595c900206ff66a0d0d6c309d95a66581e073ea8866"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/network.json",
+      "bytes": 691,
+      "sha256": "682bca60347e4e4092e63829ad9f1743b2eba13b741cf6bbd98b299afdf9235f"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/arena-calibration.process.json",
+      "bytes": 10765,
+      "sha256": "4285436fe6c12f316f83ab2ab7af7e06d28faffdc37c279154af7082468c422f"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/summary.json",
+      "bytes": 52311,
+      "sha256": "608e89ff561bbd6a6a22394a2cf0ac4e9bf32e6688f04740a65ba4a68059e527"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/host-pressure.json",
+      "bytes": 688,
+      "sha256": "78b4a3053b222edd6495c4ac0e4bd2a5b21104a51596286cb0b540db69ecfa4a"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/candidate-host.patch",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/immutable-after.json",
+      "bytes": 36276,
+      "sha256": "27af522f9693513be9713cbc215e69ed5fc8a8bc7ca9121a81a1164003f27a0c"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/guard.json",
+      "bytes": 310,
+      "sha256": "a68e01c63251ef979613464238ef068b30d63dcd529bb97f9ff66a69d795bc7f"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/resources.json",
+      "bytes": 1546,
+      "sha256": "61b01264d63cbc3181653fd0167f585abf49579ee43eda19d2cee25ea9813e78"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/formal-window.json",
+      "bytes": 6170,
+      "sha256": "a637f8bb1a71123d2e0e75f850f5974ec422e4d8629215ee5e0f95ad6c7f8a8d"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/start.json",
+      "bytes": 1124,
+      "sha256": "49bd37bcc97a8ba303b4fe1bad6d46744256d93df2ae0f9fa0c00586f5585146"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/holdout-proposal.json",
+      "bytes": 217514,
+      "sha256": "ac11691ffa521a86ffce2cff40dfdbebee5d283a83f70abfe36f43028b72ad9d"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/reference.patch",
+      "bytes": 2527,
+      "sha256": "04816ce68fdb4ec8a59a50757973edf18f86098e5e39c37f96b091bed0b7484a"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/value-injections.json",
+      "bytes": 1228,
+      "sha256": "ffebafe4595b0b4bda672db18bc68300982a3ea53630cb51e8754dd34a7d9aea"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/clock-ping.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/clock-calibration.json",
+      "bytes": 6356,
+      "sha256": "764ac5d0188d128e5a4832649175ff6286bf2537bb45d4f275a4f0e2f4f110ed"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/instruction-input-hashes.json",
+      "bytes": 2763,
+      "sha256": "155c1de4b9ed90ed48ea4aa15fb792877f7b829aa185c208375af006619e22ec"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/calibration.json",
+      "bytes": 603288,
+      "sha256": "dd061f70414d20fe44b6979df0bc0884fe5d2744f89d4f4bbf795ac969bda565"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/terminal.json",
+      "bytes": 5239,
+      "sha256": "4516547e91e08d95828f7698cbda7e789baa2d4a4f9ef03c123b98224aa2c42d"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/unit-calibration.json",
+      "bytes": 2963539,
+      "sha256": "af14cb8a0489fbf77668ccf51ab275953e881e6fa6cc99f402ebe216512edbd7"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/pilot.json",
+      "bytes": 2915161,
+      "sha256": "aa1ced5a6bb2b79887a49fe89f1512fbdc3687067cfddbe1f65badca2d6d86bf"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/arena-calibration.log",
+      "bytes": 101,
+      "sha256": "c164f67d5c04852f6adf5705b481438608e67439c934431b33c7974fac32ac23"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/candidate.patch",
+      "bytes": 4225,
+      "sha256": "b867c15d3fea7ff93557fd1631cfd898c9844a5d4a27ab822e2d84fa7a14f857"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/invalid-prefix.json",
+      "bytes": 282,
+      "sha256": "829541b5c56bc28d5529930526f2c0084ee27f1722cb4801a2f3bcbce27605ff"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/startup.json",
+      "bytes": 853,
+      "sha256": "39793c67c7c4dba6cc237e84def0bff3da5e7ffa5d75c475e6e50ca8b56eb0ea"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/native.stderr.log",
+      "bytes": 336853,
+      "sha256": "e56a00ffe25ee0cb10b84b840cf6972e5a78b9d48547c6705367920084ee8ed9"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/backend-faults.json",
+      "bytes": 1946,
+      "sha256": "4302b3411b7836807b800bd6801a346df58ae76c1478f34fd180c72b8e31e6e2"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/start-state.json",
+      "bytes": 120506,
+      "sha256": "d04ea891e9ea4a8c02f5f3f35788765f261b7d998af2c93494df04c8ee263083"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/pilot-gate.json",
+      "bytes": 489,
+      "sha256": "427f37cb20ddf3bdf7f77c6e45faa44cc78ba06364208d630d44527e38c959cd"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/frozen-input.json",
+      "bytes": 2706,
+      "sha256": "d028cc246e2e3827191797058da3764b2c89009e843404adfe1ecc1dae877455"
+    }
+  ],
+  "launch_code_hashes": "arena-calibration.process.json input_code_sha256; full original executable launch version preserved",
+  "proposal": {
+    "T_ms": 500,
+    "g_ms": 91,
+    "formal_no_go": true,
+    "independent_arena_verification": false,
+    "official_next_contract_required": true,
+    "pool_U": 64,
+    "pool_sha256": "ac11691ffa521a86ffce2cff40dfdbebee5d283a83f70abfe36f43028b72ad9d",
+    "calibration_sha256": "dd061f70414d20fe44b6979df0bc0884fe5d2744f89d4f4bbf795ac969bda565"
+  },
+  "support": "only own clock/preflight/single-action diagnosis, not strength/adoption; prior scope limitations retained",
+  "gate": {
+    "unit_calibration": 216,
+    "pilot_requests": 72,
+    "strict_value_injection": true,
+    "terminal_NN0": true,
+    "cancellation_old_rejected": true,
+    "backend_fault_rejected": true,
+    "formal_matches": 0,
+    "holdout_matches": 0
+  },
+  "resources": {
+    "utc": "2026-09-30T22:29:57.441766+00:00",
+    "all_own_jobs_exited": true,
+    "tracked_pid_remaining": [],
+    "observed_affinities": [
+      2
+    ],
+    "RSS_peak_group_plus_runner_bytes": 1507983360,
+    "RSS_guard_bytes": 2684354560,
+    "RSS_limit_bytes": 3221225472,
+    "current_unique_bytes_before_final_metadata": 7557094,
+    "conservative_final_upper_bound_bytes": 16777216,
+    "new_limit_bytes": 536870912,
+    "new_guard_bytes": 469762048,
+    "new_remaining_lower_bound_bytes": 520093696,
+    "prior_hypothesis_conservative_bytes": 2366000000,
+    "hypothesis_cumulative_upper_bound_bytes": 2382777216,
+    "hypothesis_guard_bytes": 2952790016,
+    "hypothesis_guard_remaining_lower_bound_bytes": 570012800,
+    "sampled_runtime_CPU_seconds_lower_bound": 56.59,
+    "unmeasured_cpu": "monitor and short CPU0 prepare/read/hash not fully accumulated",
+    "runtime_wall_interval": [
+      "2026-09-30T22:17:59.449931+00:00",
+      "2026-09-30T22:19:08.988334+00:00"
+    ],
+    "monitor_limit": "50ms sample, transient peaks/short-lived threads may be missed",
+    "model_downloads": 0,
+    "dependencies_downloaded": 0,
+    "builds": 0,
+    "sync": 0,
+    "GPU": 0,
+    "training": 0,
+    "matches": 0,
+    "other_kills": 0,
+    "cleanup": "own Browser.close+direct child stdin EOF/wait; residual group owned-only stop/wait; old cache and failures retained",
+    "temp_files": [],
+    "temporary_alias_verified": "/home/vscode/.cache/inference/research/ai-sigma/arena/t",
+    "immutable_count": 112,
+    "team_storage_remaining": "other-role actual cumulative state must be combined by coordinator"
+  },
+  "write_stop_utc": "2026-09-30T22:35:24.644049+00:00",
+  "processing_deadline": "2026-09-30T22:35:07Z",
+  "hard_deadline": "2026-09-30T22:50:07Z",
+  "remaining_self_processes": 0,
+  "state": "in_progress independent acceptance pending",
+  "prior_issue_closes": {
+    ".16": "limited fixed numeric/error .17 acceptance, g25 unsafe unchanged",
+    ".13": "limited\u5c11\u6570Wasm numeric/owned .17 acceptance; original native boundary/alias/etc unverified"
+  },
+  "failures": [
+    "inspection helper else0 SyntaxError in tool output, not measured runtime; no runtime retries",
+    "original historical deviations retained in report/README"
+  ]
+}

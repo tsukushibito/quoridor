@@ -1,0 +1,401 @@
+{
+  "issue": "quoridor-4lc.16",
+  "experiment": "SIGMA-WEB-REFERENCE",
+  "trial": 1,
+  "contract_version": 1,
+  "role": "hypothesis",
+  "thread": "01a0f31c-2e4b-7170-82c5-69e1428c2418",
+  "worktree": "/workspaces/quoridor/.worktree/ai-sigma",
+  "branch": "codex/ai-sigma",
+  "head": "1482df8da6dd91c95db211aeaa914af775b2bc76",
+  "reference_commit": "751186344fc52ad0c29bc65922e62c6fa915f006",
+  "model": {
+    "path": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/ai-sigma/reference/sigma-pcr250/best.onnx",
+    "bytes": 11663428,
+    "sha256": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d"
+  },
+  "report": {
+    "path": "/workspaces/quoridor/.worktree/ai-sigma/docs/reports/ai-sigma-hypothesis-web-reference.md",
+    "bytes": 3311,
+    "sha256": "0f80f59b7208feb0cbeb86e8ee9706bf57f0893e49e9f2d146c3666bfd7864c8"
+  },
+  "code": [
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-web-reference/mcts_worker.js",
+      "bytes": 17063,
+      "sha256": "830513a045c1ca94583045b8654a39311829137cdbee01cc1a07e26a811057ad"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-web-reference/context.js",
+      "bytes": 2248,
+      "sha256": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-web-reference/browser.cjs",
+      "bytes": 8919,
+      "sha256": "aa8c233cf1755f3f90f3d30dcc4cda0941d71db16eedcceae00524d753930027"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-web-reference/runner.py",
+      "bytes": 5605,
+      "sha256": "0b070400ee788954ba177dac98fb6a769be95eae9fccc65d5e0c4fab058eb21b"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-web-reference/compare.py",
+      "bytes": 4519,
+      "sha256": "a8ebe65d65e89ed67189383a13fdb09c740c2a9c8bf9d1fc5245196811935486"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-web-reference/README.md",
+      "bytes": 8859,
+      "sha256": "b3bed7ffd71cd3a84dcdd503d52767c184d844265ac6746e87746bd0994460b5"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-web-reference/mcts_worker.js",
+      "bytes": 17063,
+      "sha256": "830513a045c1ca94583045b8654a39311829137cdbee01cc1a07e26a811057ad"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-web-reference/runner.py",
+      "bytes": 5605,
+      "sha256": "0b070400ee788954ba177dac98fb6a769be95eae9fccc65d5e0c4fab058eb21b"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-web-reference/compare.py",
+      "bytes": 4519,
+      "sha256": "a8ebe65d65e89ed67189383a13fdb09c740c2a9c8bf9d1fc5245196811935486"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-web-reference/context.js",
+      "bytes": 2248,
+      "sha256": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-web-reference/browser.cjs",
+      "bytes": 8919,
+      "sha256": "aa8c233cf1755f3f90f3d30dcc4cda0941d71db16eedcceae00524d753930027"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-web-reference/README.md",
+      "bytes": 8859,
+      "sha256": "b3bed7ffd71cd3a84dcdd503d52767c184d844265ac6746e87746bd0994460b5"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-web-reference/browser-config/google-chrome-for-testing/Crash Reports/settings.dat",
+      "bytes": 40,
+      "sha256": "ec5c9aff871cf1ac19d53a1a5cc4de99f54632599eebc5e8238d7990aad6f273"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-web-reference/browser-cache/dconf/user",
+      "bytes": 2,
+      "sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/mcts_worker.original.js",
+      "bytes": 17775,
+      "sha256": "f2de9444e8960ca14d4d4acb5dd319e3f0a6a743c39b4032dce32068ebcfe8fa"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/game.js",
+      "bytes": 27877,
+      "sha256": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/ort-wasm-simd-threaded.jsep.mjs",
+      "bytes": 53602,
+      "sha256": "b69c8812bf2d8356dd248fef0abb35e22d1f05f9c593ca34d4b942f35ea93592"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/upstream-ort.min.js",
+      "bytes": 347787,
+      "sha256": "95c6f6611837cb50449cb6a0c092145bf493ac64cd0d004033cefc977366e7cb"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/ort-package.json",
+      "bytes": 3091,
+      "sha256": "679a922763a66fb8bc43cdd45f9e00c765aeba315b8338ac9268983739c47fae"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/ort-LICENSE",
+      "bytes": 1073,
+      "sha256": "2f07c72751aed99790b8a4869cf2311df85a860b22ded05fa22803587a48922c"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/ort-wasm-simd-threaded.jsep.wasm",
+      "bytes": 23914392,
+      "sha256": "0663b902fb3937883a34375926bdfe3e1c86cd4c99cbc04c06a7cdf46c78bdde"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/ort-ThirdPartyNotices.txt",
+      "bytes": 316114,
+      "sha256": "8c06e8cff286a4a117b3b246a4c7da68428a144af757823db50e3d6520941ec6"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/ort.min.js",
+      "bytes": 347787,
+      "sha256": "95c6f6611837cb50449cb6a0c092145bf493ac64cd0d004033cefc977366e7cb"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/worker.patch",
+      "bytes": 14081,
+      "sha256": "cbb55f4474201a3025cfb73070014fe01c5a1a13d60552649d5c581f64c49681"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/Sigma-LICENSE",
+      "bytes": 1071,
+      "sha256": "b5e277822da3c9eb54eb04e9ee3c4f93bfeb769c829d5d0f70c99835a2f6733d"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/download-manifest.json",
+      "bytes": 2785,
+      "sha256": "8c5a387f93b1b8531d10e6a7d89abbb5d593cec6794940447b077134e289677b"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/immutable-check.json",
+      "bytes": 16264,
+      "sha256": "237ac40712957d4b6913c29ee69ba257cd6f24904bea2d5cf840ede521826d69"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/boundary-network.json",
+      "bytes": 526,
+      "sha256": "9ec7e7ee2d4578b97cb7644fc8342d4736bfbb6ab53ea769f3ebf87e0f051488"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/boundary-cancel.json",
+      "bytes": 1504,
+      "sha256": "5be2daa782d1f8a348e9f26551424c6c20cb1619522206eea977f59f02ed9742"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/network.json",
+      "bytes": 517,
+      "sha256": "230aeb87a819022df8fd290a5ab309d73f2f06402f1f6ba6bc07428967104602"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/timing.json",
+      "bytes": 244066,
+      "sha256": "105def8290bac92296b6792a040e72d3f2cc5c84feba2c506145f0c65afe7143"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/web-boundary.process.json",
+      "bytes": 3279,
+      "sha256": "68857cca4c753242715c796844930b92813c6c0a26fa8806e59fbc5effeaee26"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/fallback.json",
+      "bytes": 122,
+      "sha256": "f62b3984fc5909ffcb8e307aaee800d10736ad54db67c99b8011065d41fea511"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/cancel.json",
+      "bytes": 16868,
+      "sha256": "7c4efaf1aa6afba2bf16693e8c8bbafcb8a1fc95b5322edae04dc96f9a435707"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/web-diagnostic.process.json",
+      "bytes": 3271,
+      "sha256": "44c6a0f25da8c78e7748714674e1898d277157f6d193138fe52eb1a74c27d394"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/resources.json",
+      "bytes": 1487,
+      "sha256": "91db2c9838ecde21918435983714ba80e9e9535c48bb9ec11923cbd15f8de68d"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/start.json",
+      "bytes": 3813,
+      "sha256": "ed80d0e8790adad468a8c794e7c1fe534cb6344e680dbb5c525af0b2a300da2c"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/web-boundary.log",
+      "bytes": 47,
+      "sha256": "96a3e2de024b9003dfa2d294c7023161056e5cd2654638ba8ac1eaf23b6b3412"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/web-diagnostic-retry.process.json",
+      "bytes": 3279,
+      "sha256": "06af61d50fa25891a540d71427265b4c11b239ff3d264fe0b2c1b93d3973714c"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/web-diagnostic.log",
+      "bytes": 47,
+      "sha256": "96a3e2de024b9003dfa2d294c7023161056e5cd2654638ba8ac1eaf23b6b3412"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/boundary-zero.json",
+      "bytes": 447,
+      "sha256": "fd7872c40504dba0043c451de8b6125997ee041508f85794820ab7cabd43d0db"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/terminal.json",
+      "bytes": 3715,
+      "sha256": "25c8a424fb4e8789645d84a46230d220daf7bcc9884ff5ed1db7e4a699870355"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/web-boundary-cancel-retry.process.json",
+      "bytes": 3359,
+      "sha256": "675cc361260a5af7c358b4e4978a1f63d315a392df3cccee627e2898d9bdeb2d"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/model-ready.json",
+      "bytes": 413,
+      "sha256": "4eff2397f222c006188779a73de380521e39bfc20d41f141f220ab9367a870fd"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/web-boundary-cancel-retry.log",
+      "bytes": 47,
+      "sha256": "96a3e2de024b9003dfa2d294c7023161056e5cd2654638ba8ac1eaf23b6b3412"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/web-boundary-cancel.process.json",
+      "bytes": 1505,
+      "sha256": "8dc31dec67d07d576e7fc61de4fe0a901e593daef83aa004f2f99072b121dec0"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/inputs-environment.json",
+      "bytes": 8107,
+      "sha256": "d0569c719e76b3acaf07f51f5107412fffca806866040a86b10ae966b198e06e"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/numeric.outputs.json",
+      "bytes": 438907,
+      "sha256": "2969e4084c80ff21c6c4e12d3408fd6bb3827e810841f2cc8f7e1c3aaca5d61d"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/boundary-model-ready.json",
+      "bytes": 413,
+      "sha256": "4eff2397f222c006188779a73de380521e39bfc20d41f141f220ab9367a870fd"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/web-diagnostic-retry.log",
+      "bytes": 47,
+      "sha256": "96a3e2de024b9003dfa2d294c7023161056e5cd2654638ba8ac1eaf23b6b3412"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/pre-report-state.json",
+      "bytes": 59789,
+      "sha256": "231eef91be67c49022895aca1c9e77f9c5c55b70460170006d55d206571f279b"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/web-boundary-cancel.log",
+      "bytes": 802,
+      "sha256": "a770802c0d06321dccb6c4a3dc1c0adbc8b324cd9954c1b28c8309239f2f4ce6"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/temp-placement.json",
+      "bytes": 374,
+      "sha256": "09d002ea26b92503f80bb5c1c5399292c4a87ed50506e30dacdd0f86ab903917"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/gate.json",
+      "bytes": 15528,
+      "sha256": "fab0622dad90f45b0d33909dac3eeb5bb686f98114380760caea9efb5eb4b177"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/boundary-expired.json",
+      "bytes": 421,
+      "sha256": "bde64886124bbe633fd43967eab16370f700ee57fd7f8069fa8d17e4d5aa8dea"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/browser-summary.json",
+      "bytes": 123,
+      "sha256": "ff8065ef1b5e47fcf33f10e7bad0f58e8abda126774ae8d419c636322ca08933"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/boundary-cancel-syntax-failure.cjs",
+      "bytes": 8901,
+      "sha256": "aee4ed6818ca21c095db300650116036a9125dedbdf6616718fcf2be13771544"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/initial-key-order-failure/network.json",
+      "bytes": 517,
+      "sha256": "230aeb87a819022df8fd290a5ab309d73f2f06402f1f6ba6bc07428967104602"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/initial-key-order-failure/timing.json",
+      "bytes": 173641,
+      "sha256": "4b244c30cbd5bfd9778f4cdffe05e28eff851f4983e946e5c0138e4ab456a8df"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/initial-key-order-failure/fallback.json",
+      "bytes": 122,
+      "sha256": "3c8d5c543186cccce9694d5aa20c0e66ad398a1cb9cb2cc6c405d44b4eaa5396"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/initial-key-order-failure/cancel.json",
+      "bytes": 14912,
+      "sha256": "d3158a89fc12b535a3a7607472b99019d194eba4ba186b3edcd37c35141299d8"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/initial-key-order-failure/web-diagnostic.process.json",
+      "bytes": 3271,
+      "sha256": "44c6a0f25da8c78e7748714674e1898d277157f6d193138fe52eb1a74c27d394"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/initial-key-order-failure/cause.json",
+      "bytes": 252,
+      "sha256": "ec6697b102760e8b651e56d2d39ef16f6955f3ad909879873baa8578c00c3e2f"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/initial-key-order-failure/web-diagnostic.log",
+      "bytes": 47,
+      "sha256": "96a3e2de024b9003dfa2d294c7023161056e5cd2654638ba8ac1eaf23b6b3412"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/initial-key-order-failure/terminal.json",
+      "bytes": 3494,
+      "sha256": "e8c35f47755d8b8d2ea9e5ca1faddf4ed3313a05b22c4b930ddedcdf0e32eed9"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/initial-key-order-failure/model-ready.json",
+      "bytes": 413,
+      "sha256": "4eff2397f222c006188779a73de380521e39bfc20d41f141f220ab9367a870fd"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/initial-key-order-failure/numeric.outputs.json",
+      "bytes": 285777,
+      "sha256": "b84535971bb459a31622962bb274874c16014b69519e7c95c32234e6a1e9fb40"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/initial-key-order-failure/browser-summary.json",
+      "bytes": 123,
+      "sha256": "ddb6180029b0e399b6c00eaa09420ea4d00c7c9b06a772fdad69b565ed854da2"
+    }
+  ],
+  "inputs_environment": "inputs-environment.json",
+  "launch_hash_gap": "Exact launch-time script hashes not separately captured; final reproducible scripts are hashed. Original timing data precede the separate boundary branch addition. Failure cases retained.",
+  "source_notices": [
+    "Sigma-LICENSE",
+    "ort-LICENSE",
+    "ort-ThirdPartyNotices.txt"
+  ],
+  "numeric_gate": {
+    "atol": 0.0001,
+    "rtol": 0.0001,
+    "failures": 0,
+    "cases": 28,
+    "NN": 3836,
+    "features": 18144,
+    "priors": 3187
+  },
+  "latency_negative_results": [
+    "1/45 samples late (500ms,502.6ms)",
+    "new request after cancel late (500ms,547.5ms)"
+  ],
+  "actual_main_diagnostic_NN_calls": 1752,
+  "fallback": 0,
+  "prior_terminal_note": "raw diagnostic priors derived separately from fixed reference logits and fixture indices; effective terminal NN0",
+  "independent_execution": false,
+  "placement_deviation": "timing-run dedicated temp/XDG were scoped tool dirs, not prescribed cache; corrected boundary runs use dedicated cache. Held as deviation.",
+  "process_remaining_self": 0,
+  "write_stop_utc": "2026-09-30T21:43:35.707583+00:00",
+  "processing_deadline": "2026-09-30T21:51:46Z",
+  "hard_deadline": "2026-09-30T22:06:46Z",
+  "adoption": false,
+  "formal_matches": 0,
+  "strength_holdout": 0,
+  "gpu": 0,
+  "training": 0,
+  "acceptance": "pending coordinator independent acceptance; delivery accepted is separate"
+}

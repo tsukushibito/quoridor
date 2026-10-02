@@ -1,0 +1,41 @@
+{
+  "records": [
+    {
+      "build": ".artifacts/ai-sigma/build/native/release/measure_native",
+      "retained": ".artifacts/ai-sigma/runs/SIGMA-B0-PROFILE/original-measure-native",
+      "sha256_build": "1dbc7f3ba4e4506746ef03396f77ff6d6f65949a36b0515c6c12e33d6a78da4a",
+      "sha256_retained": "c0d4d8179c6e8f218d779108728e398abb3fb86ec42465697e2895421e556288",
+      "equal": false,
+      "deleted": false
+    },
+    {
+      "build": ".artifacts/ai-sigma/build/native/release/queue_fixture",
+      "retained": ".artifacts/ai-sigma/runs/SIGMA-FIXED-QUEUE/candidate-queue-fixture",
+      "sha256_build": "451a497eadb5747882a94c4aaf7ee568000e7cdc08c9b0ed25e02da48734350c",
+      "sha256_retained": "451a497eadb5747882a94c4aaf7ee568000e7cdc08c9b0ed25e02da48734350c",
+      "equal": true,
+      "deleted": true,
+      "allocated_bytes": 524288
+    },
+    {
+      "build": ".artifacts/ai-sigma/build/native/release/profile_native",
+      "retained": ".artifacts/ai-sigma/runs/SIGMA-RULE-FEATURE-PARITY/standard-research-native",
+      "sha256_build": "6c9a3f36d336d427433d814b2c332befa026da5b651a427d1244a343d47dc1d6",
+      "sha256_retained": "6c9a3f36d336d427433d814b2c332befa026da5b651a427d1244a343d47dc1d6",
+      "equal": true,
+      "deleted": true,
+      "allocated_bytes": 548864
+    },
+    {
+      "build": ".artifacts/ai-sigma/build/native/debug/research-parity",
+      "retained": ".artifacts/ai-sigma/runs/SIGMA-RULE-FEATURE-PARITY/native-research-parity-final",
+      "sha256_build": "a7878b1df2461eb3682022d7c319e46500482717e7b71d3b66fc501444a8ce90",
+      "sha256_retained": "a7878b1df2461eb3682022d7c319e46500482717e7b71d3b66fc501444a8ce90",
+      "equal": true,
+      "deleted": true,
+      "allocated_bytes": 13119488
+    }
+  ],
+  "prior_attempt": "First hash inequality aborted before any deletion; no outcomes changed",
+  "unmatched_generated_binaries": "retained pending mapping/owner determination; not claimed necessary forever"
+}

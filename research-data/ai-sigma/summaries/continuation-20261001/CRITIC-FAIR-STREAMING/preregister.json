@@ -1,0 +1,289 @@
+{
+  "issue": "quoridor-4lc.65",
+  "UTC_before_any_new_NN": "2026-10-01T17:20:23Z receipt; actual file creation per freeze UTC",
+  "T_ms": 500,
+  "reserve_ms": 89,
+  "commit_margin_ms": 9,
+  "cutoff_after_t0_ms": 402,
+  "seal_after_t0_ms": 411,
+  "selection": "no reselection",
+  "clock_pings_each_start_end": 12,
+  "fixed_control": {
+    "fixtures": [
+      "initial-p1"
+    ],
+    "reference_simulations": 8,
+    "reference_searches": 6,
+    "candidate_new_numeric": 3,
+    "candidate_saved_cp_control": 24,
+    "control_deadline_ms": 5000
+  },
+  "calibration": {
+    "fixtures": [
+      "initial-p1",
+      "asym-hv-p2",
+      "straight-jump-p2",
+      "goal-win-legal-replay",
+      "synthetic-total-ply-200"
+    ],
+    "engines": [
+      "candidate",
+      "reference"
+    ],
+    "samples": [
+      -1,
+      0,
+      1
+    ],
+    "denominator": 30,
+    "gate": "all steady e2e <=89ms; failure no real NN",
+    "NN": 0
+  },
+  "normal_denominator": 24,
+  "boundary_denominator": 12,
+  "cases": [
+    {
+      "request_id": "FAIR66-01",
+      "generation": 6600,
+      "engine": "candidate",
+      "fixture": "initial-p1",
+      "kind": "cancel-next",
+      "cancel_after_cp": true
+    },
+    {
+      "request_id": "FAIR66-02",
+      "generation": 6601,
+      "engine": "reference",
+      "fixture": "initial-p1",
+      "kind": "normal",
+      "sample": -1
+    },
+    {
+      "request_id": "FAIR66-03",
+      "generation": 6602,
+      "engine": "reference",
+      "fixture": "initial-p1",
+      "kind": "cancel-next",
+      "cancel_after_cp": true
+    },
+    {
+      "request_id": "FAIR66-04",
+      "generation": 6603,
+      "engine": "candidate",
+      "fixture": "initial-p1",
+      "kind": "normal",
+      "sample": -1
+    },
+    {
+      "request_id": "FAIR66-05",
+      "generation": 6604,
+      "engine": "reference",
+      "fixture": "initial-p1",
+      "kind": "normal",
+      "sample": 0
+    },
+    {
+      "request_id": "FAIR66-06",
+      "generation": 6605,
+      "engine": "candidate",
+      "fixture": "initial-p1",
+      "kind": "normal",
+      "sample": 0
+    },
+    {
+      "request_id": "FAIR66-07",
+      "generation": 6606,
+      "engine": "candidate",
+      "fixture": "initial-p1",
+      "kind": "normal",
+      "sample": 1
+    },
+    {
+      "request_id": "FAIR66-08",
+      "generation": 6607,
+      "engine": "reference",
+      "fixture": "initial-p1",
+      "kind": "normal",
+      "sample": 1
+    },
+    {
+      "request_id": "FAIR66-09",
+      "generation": 6608,
+      "engine": "reference",
+      "fixture": "asym-hv-p2",
+      "kind": "normal",
+      "sample": -1
+    },
+    {
+      "request_id": "FAIR66-10",
+      "generation": 6609,
+      "engine": "candidate",
+      "fixture": "asym-hv-p2",
+      "kind": "normal",
+      "sample": -1
+    },
+    {
+      "request_id": "FAIR66-11",
+      "generation": 6610,
+      "engine": "candidate",
+      "fixture": "asym-hv-p2",
+      "kind": "normal",
+      "sample": 0
+    },
+    {
+      "request_id": "FAIR66-12",
+      "generation": 6611,
+      "engine": "reference",
+      "fixture": "asym-hv-p2",
+      "kind": "normal",
+      "sample": 0
+    },
+    {
+      "request_id": "FAIR66-13",
+      "generation": 6612,
+      "engine": "reference",
+      "fixture": "asym-hv-p2",
+      "kind": "normal",
+      "sample": 1
+    },
+    {
+      "request_id": "FAIR66-14",
+      "generation": 6613,
+      "engine": "candidate",
+      "fixture": "asym-hv-p2",
+      "kind": "normal",
+      "sample": 1
+    },
+    {
+      "request_id": "FAIR66-15",
+      "generation": 6614,
+      "engine": "candidate",
+      "fixture": "straight-jump-p2",
+      "kind": "normal",
+      "sample": -1
+    },
+    {
+      "request_id": "FAIR66-16",
+      "generation": 6615,
+      "engine": "reference",
+      "fixture": "straight-jump-p2",
+      "kind": "normal",
+      "sample": -1
+    },
+    {
+      "request_id": "FAIR66-17",
+      "generation": 6616,
+      "engine": "reference",
+      "fixture": "straight-jump-p2",
+      "kind": "normal",
+      "sample": 0
+    },
+    {
+      "request_id": "FAIR66-18",
+      "generation": 6617,
+      "engine": "candidate",
+      "fixture": "straight-jump-p2",
+      "kind": "normal",
+      "sample": 0
+    },
+    {
+      "request_id": "FAIR66-19",
+      "generation": 6618,
+      "engine": "candidate",
+      "fixture": "straight-jump-p2",
+      "kind": "normal",
+      "sample": 1
+    },
+    {
+      "request_id": "FAIR66-20",
+      "generation": 6619,
+      "engine": "reference",
+      "fixture": "straight-jump-p2",
+      "kind": "normal",
+      "sample": 1
+    },
+    {
+      "request_id": "FAIR66-21",
+      "generation": 6620,
+      "engine": "candidate",
+      "fixture": "goal-win-legal-replay",
+      "kind": "terminal"
+    },
+    {
+      "request_id": "FAIR66-22",
+      "generation": 6621,
+      "engine": "candidate",
+      "fixture": "synthetic-total-ply-200",
+      "kind": "terminal"
+    },
+    {
+      "request_id": "FAIR66-23",
+      "generation": 6622,
+      "engine": "candidate",
+      "fixture": "initial-p1",
+      "kind": "validation-cross",
+      "validation_cross": true
+    },
+    {
+      "request_id": "FAIR66-24",
+      "generation": 6623,
+      "engine": "candidate",
+      "fixture": "initial-p1",
+      "kind": "caller-busy",
+      "caller_busy_at_seal": true
+    },
+    {
+      "request_id": "FAIR66-25",
+      "generation": 6624,
+      "engine": "reference",
+      "fixture": "goal-win-legal-replay",
+      "kind": "terminal"
+    },
+    {
+      "request_id": "FAIR66-26",
+      "generation": 6625,
+      "engine": "reference",
+      "fixture": "synthetic-total-ply-200",
+      "kind": "terminal"
+    },
+    {
+      "request_id": "FAIR66-27",
+      "generation": 6626,
+      "engine": "reference",
+      "fixture": "initial-p1",
+      "kind": "before-first",
+      "before_first_nn_busy_ms": 600
+    },
+    {
+      "request_id": "FAIR66-28",
+      "generation": 6627,
+      "engine": "reference",
+      "fixture": "initial-p1",
+      "kind": "validation-cross",
+      "validation_cross": true
+    }
+  ],
+  "gate": {
+    "abs": 0.0001,
+    "rtol": 0.0001,
+    "strict_value": [
+      -1,
+      1
+    ]
+  },
+  "resources": {
+    "CPU": [
+      2
+    ],
+    "NN_threads": 1,
+    "job_timeout_seconds": 180,
+    "RAM_guard": 3758096384,
+    "storage_guard": 117440512
+  },
+  "actual_go": false,
+  "games": 0,
+  "holdout_send": 0,
+  "policy": "preseal received faults discard; postseal immutable; API run await timing not kernel instruction timing",
+  "unexecuted_boundary_policies": "delay/old generation/fault classification tested in mock only",
+  "candidate_numeric_fixtures": []
+}

@@ -1,0 +1,1199 @@
+{
+  "schema_version": "SIGMA-STREAMING-COMPARISON32-v1",
+  "issue": "quoridor-4lc.73",
+  "experiment": "SIGMA-STREAMING-COMPARISON32-PLAN",
+  "trial": 1,
+  "contract": 1,
+  "generated_UTC": "2026-10-01T21:15:09.153Z",
+  "classification": "new exploratory browser comparison; not retrospective NI",
+  "actual_go": false,
+  "entry_ready": false,
+  "freeze_issued": false,
+  "m": 32,
+  "total_games": 64,
+  "platform": "browser ORT-pending candidate vs fixed Sigma-Web local CPU",
+  "selection_seed": 2026100501,
+  "order_seed": 2026100502,
+  "color_seed": 2026100503,
+  "PRNG": "xorshift32/unbiased rejection modulo/Fisher-Yates descending",
+  "eligible_population": 56,
+  "excluded_sent8": [
+    25,
+    4,
+    51,
+    0,
+    47,
+    44,
+    56,
+    31
+  ],
+  "selected_indices": [
+    57,
+    28,
+    24,
+    36,
+    37,
+    7,
+    58,
+    10,
+    30,
+    45,
+    55,
+    50,
+    43,
+    61,
+    41,
+    40,
+    33,
+    20,
+    17,
+    5,
+    3,
+    63,
+    48,
+    2,
+    32,
+    27,
+    29,
+    49,
+    8,
+    62,
+    38,
+    1
+  ],
+  "ordered_indices": [
+    32,
+    8,
+    37,
+    63,
+    3,
+    62,
+    1,
+    7,
+    36,
+    41,
+    50,
+    38,
+    30,
+    49,
+    27,
+    28,
+    24,
+    61,
+    29,
+    57,
+    20,
+    5,
+    17,
+    48,
+    33,
+    55,
+    40,
+    2,
+    45,
+    43,
+    10,
+    58
+  ],
+  "prefix_dictionary": {
+    "path": "prefix-dictionary.json",
+    "sha256": "86397a79530ad722ab58831d130fde7e40d95ff747b3e88ec290c21f23c577ef",
+    "scope": "only selected32; one copy per prefix"
+  },
+  "pairs": [
+    {
+      "pair": 1,
+      "pair_id": "comparison32-pair-001",
+      "pool_index": 32,
+      "prefix_ref": "holdout-proposal-32",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "games": [
+        {
+          "game": 1,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 2,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 2,
+      "pair_id": "comparison32-pair-002",
+      "pool_index": 8,
+      "prefix_ref": "holdout-proposal-08",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "games": [
+        {
+          "game": 3,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 4,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 3,
+      "pair_id": "comparison32-pair-003",
+      "pool_index": 37,
+      "prefix_ref": "holdout-proposal-37",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "games": [
+        {
+          "game": 5,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 6,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 4,
+      "pair_id": "comparison32-pair-004",
+      "pool_index": 63,
+      "prefix_ref": "holdout-proposal-63",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "games": [
+        {
+          "game": 7,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 8,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 5,
+      "pair_id": "comparison32-pair-005",
+      "pool_index": 3,
+      "prefix_ref": "holdout-proposal-03",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "games": [
+        {
+          "game": 9,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 10,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 6,
+      "pair_id": "comparison32-pair-006",
+      "pool_index": 62,
+      "prefix_ref": "holdout-proposal-62",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "games": [
+        {
+          "game": 11,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 12,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 7,
+      "pair_id": "comparison32-pair-007",
+      "pool_index": 1,
+      "prefix_ref": "holdout-proposal-01",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "games": [
+        {
+          "game": 13,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 14,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 8,
+      "pair_id": "comparison32-pair-008",
+      "pool_index": 7,
+      "prefix_ref": "holdout-proposal-07",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "games": [
+        {
+          "game": 15,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 16,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 9,
+      "pair_id": "comparison32-pair-009",
+      "pool_index": 36,
+      "prefix_ref": "holdout-proposal-36",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "games": [
+        {
+          "game": 17,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 18,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 10,
+      "pair_id": "comparison32-pair-010",
+      "pool_index": 41,
+      "prefix_ref": "holdout-proposal-41",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "games": [
+        {
+          "game": 19,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 20,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 11,
+      "pair_id": "comparison32-pair-011",
+      "pool_index": 50,
+      "prefix_ref": "holdout-proposal-50",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "games": [
+        {
+          "game": 21,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 22,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 12,
+      "pair_id": "comparison32-pair-012",
+      "pool_index": 38,
+      "prefix_ref": "holdout-proposal-38",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "games": [
+        {
+          "game": 23,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 24,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 13,
+      "pair_id": "comparison32-pair-013",
+      "pool_index": 30,
+      "prefix_ref": "holdout-proposal-30",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "games": [
+        {
+          "game": 25,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 26,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 14,
+      "pair_id": "comparison32-pair-014",
+      "pool_index": 49,
+      "prefix_ref": "holdout-proposal-49",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "games": [
+        {
+          "game": 27,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 28,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 15,
+      "pair_id": "comparison32-pair-015",
+      "pool_index": 27,
+      "prefix_ref": "holdout-proposal-27",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "games": [
+        {
+          "game": 29,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 30,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 16,
+      "pair_id": "comparison32-pair-016",
+      "pool_index": 28,
+      "prefix_ref": "holdout-proposal-28",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "games": [
+        {
+          "game": 31,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 32,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 17,
+      "pair_id": "comparison32-pair-017",
+      "pool_index": 24,
+      "prefix_ref": "holdout-proposal-24",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "games": [
+        {
+          "game": 33,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 34,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 18,
+      "pair_id": "comparison32-pair-018",
+      "pool_index": 61,
+      "prefix_ref": "holdout-proposal-61",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "games": [
+        {
+          "game": 35,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 36,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 19,
+      "pair_id": "comparison32-pair-019",
+      "pool_index": 29,
+      "prefix_ref": "holdout-proposal-29",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "games": [
+        {
+          "game": 37,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 38,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 20,
+      "pair_id": "comparison32-pair-020",
+      "pool_index": 57,
+      "prefix_ref": "holdout-proposal-57",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "games": [
+        {
+          "game": 39,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 40,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 21,
+      "pair_id": "comparison32-pair-021",
+      "pool_index": 20,
+      "prefix_ref": "holdout-proposal-20",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "games": [
+        {
+          "game": 41,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 42,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 22,
+      "pair_id": "comparison32-pair-022",
+      "pool_index": 5,
+      "prefix_ref": "holdout-proposal-05",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "games": [
+        {
+          "game": 43,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 44,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 23,
+      "pair_id": "comparison32-pair-023",
+      "pool_index": 17,
+      "prefix_ref": "holdout-proposal-17",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "games": [
+        {
+          "game": 45,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 46,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 24,
+      "pair_id": "comparison32-pair-024",
+      "pool_index": 48,
+      "prefix_ref": "holdout-proposal-48",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "games": [
+        {
+          "game": 47,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 48,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 25,
+      "pair_id": "comparison32-pair-025",
+      "pool_index": 33,
+      "prefix_ref": "holdout-proposal-33",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "games": [
+        {
+          "game": 49,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 50,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 26,
+      "pair_id": "comparison32-pair-026",
+      "pool_index": 55,
+      "prefix_ref": "holdout-proposal-55",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "games": [
+        {
+          "game": 51,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 52,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 27,
+      "pair_id": "comparison32-pair-027",
+      "pool_index": 40,
+      "prefix_ref": "holdout-proposal-40",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "games": [
+        {
+          "game": 53,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 54,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 28,
+      "pair_id": "comparison32-pair-028",
+      "pool_index": 2,
+      "prefix_ref": "holdout-proposal-02",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "games": [
+        {
+          "game": 55,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 56,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 29,
+      "pair_id": "comparison32-pair-029",
+      "pool_index": 45,
+      "prefix_ref": "holdout-proposal-45",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "games": [
+        {
+          "game": 57,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 58,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 30,
+      "pair_id": "comparison32-pair-030",
+      "pool_index": 43,
+      "prefix_ref": "holdout-proposal-43",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "games": [
+        {
+          "game": 59,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 60,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 31,
+      "pair_id": "comparison32-pair-031",
+      "pool_index": 10,
+      "prefix_ref": "holdout-proposal-10",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "games": [
+        {
+          "game": 61,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 62,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 32,
+      "pair_id": "comparison32-pair-032",
+      "pool_index": 58,
+      "prefix_ref": "holdout-proposal-58",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "games": [
+        {
+          "game": 63,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 64,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    }
+  ],
+  "overlap_old_unexecuted": {
+    "old48": [
+      57,
+      28,
+      24,
+      37,
+      7,
+      58,
+      10,
+      30,
+      45,
+      55,
+      50,
+      61,
+      41,
+      40,
+      33,
+      20,
+      17,
+      5,
+      63,
+      48,
+      2,
+      32,
+      27,
+      29,
+      49,
+      8,
+      38
+    ],
+    "old67": [
+      57,
+      28,
+      24,
+      37,
+      7,
+      58,
+      10,
+      30,
+      45,
+      55,
+      50,
+      61,
+      41,
+      40,
+      33,
+      20,
+      17,
+      5,
+      63,
+      48,
+      2,
+      32,
+      27,
+      29,
+      49,
+      8,
+      38
+    ],
+    "oldm10": [
+      10,
+      45,
+      43,
+      33,
+      32,
+      27
+    ],
+    "old67_sha256": "9e05356a42dd79cc8c5ec3427c1e0937c81bf6c82773bffd9c257d238c69dc27",
+    "old48_sha256": "05cf461e23998e7e230c05b280a16f4105723cd1b5d4604f28f5374272961002",
+    "unknown_all_host_sends_training": true,
+    "counterevidence": "whole plan invalid, no replacement"
+  },
+  "pool64": {
+    "sha256": "ac11691ffa521a86ffce2cff40dfdbebee5d283a83f70abfe36f43028b72ad9d",
+    "documentary_unused": "pool64 minus original sent8; old plans unexecuted, not universal send audit",
+    "no_new_roots": true,
+    "golden_excluded": true,
+    "artificial_prefixes": false
+  },
+  "source_binding": {
+    "final_source_sha256": null,
+    "entry_manifest_sha256": null,
+    "binary_sha256": null,
+    "accepted": false,
+    "scope": "placeholder unbound; .72 stop + independent contract adjudication + coordinator binds separately without altering this prereg"
+  },
+  "model": {
+    "sha256": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+    "bytes": 11663428,
+    "terms": "local research only, product redistribution unresolved"
+  },
+  "ORT": {
+    "version": "1.21.0",
+    "provider": "wasm",
+    "threads": 1,
+    "proxy": false,
+    "runtime_hash_binding": null
+  },
+  "candidate": {
+    "PUCT": 1.5,
+    "Q0": 0,
+    "seed": 1979,
+    "simulations": 4096,
+    "max_nodes": 512,
+    "max_depth": 24,
+    "tie_finish": "original unchanged",
+    "root_value": "root NN side-to-move value",
+    "edge_visits": "sim-1"
+  },
+  "reference": {
+    "commit": "751186344fc52ad0c29bc65922e62c6fa915f006",
+    "C": 1,
+    "FPU": 0.2,
+    "temperature": 0,
+    "legal_order": "original first",
+    "bestAction": "original",
+    "simulations": 100000,
+    "root_expansion": "outside sim loop, in elapsed and NN",
+    "max_nodes": null,
+    "max_depth": null,
+    "root_value": "root qValue",
+    "root_visits": "sim+1",
+    "edge_visits": "sim"
+  },
+  "clock": {
+    "T_ms": 500,
+    "reserve_ms": 89,
+    "commit_margin_ms": 9,
+    "cutoff_ms": 402,
+    "seal_ms": 411,
+    "t0": "previous final Judge/clone/UTF8 public stamp, all remaining NN/stop/referee/log/reload-ready charged; no reset",
+    "t1": "after Judge/formatting/UTF8 encoding; reject late no OS rescue",
+    "common_Node": true,
+    "notification_frequency": "completed root expansion or backup; immutable",
+    "receiver_reselects_Action": false
+  },
+  "startup": {
+    "fixtures": [
+      "initial-p1",
+      "asym-hv-p2",
+      "straight-jump-p2"
+    ],
+    "engines": [
+      "candidate",
+      "reference"
+    ],
+    "root_NN_each": 1,
+    "roots_per_session": 6,
+    "discard_tree_history_cache": true,
+    "ready_requires_ACK_handles_activeNN_live0": true,
+    "outside_initial_hand_but_in_jobwall_RAM": true,
+    "holdout_supplied_only_after_ready_and_freeze": true,
+    "subsequent_reload_inside_next_t0": true
+  },
+  "rules": {
+    "name": "Sigma research RuleA",
+    "legal_replay_history": true,
+    "third_repeat_forbidden": true,
+    "goal_priority": true,
+    "total_ply200_includes_prefix": true,
+    "no_legal_draw": true,
+    "terminal_NN0": true,
+    "product_standard_unchanged": true
+  },
+  "scoring": {
+    "win": 1,
+    "draw": 0.5,
+    "loss": 0,
+    "Xi": "mean 2 candidate color-exchange scores for one prefix",
+    "planned_m": 32,
+    "L": "max(0,meanXi-sqrt(log20/(2*32))) iff all32 pairs valid complete",
+    "width": 0.21635229782528567,
+    "confidence": "95% one-sided Hoeffding reference; finite planned comparison assumptions, not formal NI/population transfer",
+    "partial_L": null,
+    "formal_NI": false,
+    "native_goal_unproven": true,
+    "NI_delta": 0.05,
+    "NI_threshold": 0.45,
+    "old_results_pooled": false
+  },
+  "responsibility": {
+    "candidate_NN_model_fallback": "candidate loss, retained denominator",
+    "reference_NN_model_fallback": "whole pair invalid",
+    "shared_identity_referee_infra": "whole pair invalid",
+    "both_timeout_late_crash_noCP_unknown_noresponse": "responsible engine loss; retained denominator",
+    "pause_guard_deadline_signal": "stop incomplete, missing not success",
+    "prepublish_received_fault_cancel": "discard all",
+    "postpublish_fault": "public immutable, residual/stop charged next clock",
+    "delayed_fault_generation_omniscience": false,
+    "fallback": 0
+  },
+  "retry": {
+    "pair_max": 1,
+    "global_max": 2,
+    "same_prefix_seed_colors_full_pair": true,
+    "no_replacement": true,
+    "duplicate_attempt_not_independent_sample": true,
+    "all_attempts_invalid_rejected_retained": true,
+    "exhaustion": "stop incomplete"
+  },
+  "run_budget": {
+    "thinking_s": 6400,
+    "startup_s": 400,
+    "retry_s": 1200,
+    "save_s": 600,
+    "worst_s": 8600,
+    "stop_reserve_s": 1.5,
+    "minimum_entry_s": 8601.5,
+    "match_stop_UTC": "2026-10-02T00:30:00Z",
+    "save_stop_UTC": "2026-10-02T00:50:00Z",
+    "supervisor_stop_UTC": "2026-10-02T00:55:00Z",
+    "global_stop_UTC": "2026-10-02T01:00:00Z",
+    "latest_start_UTC": "2026-10-01T22:06:38.500Z",
+    "no_short_mean_discount": true,
+    "minimum_not_completion_tail_guarantee": true
+  },
+  "resource": {
+    "runtime_CPU": 2,
+    "logical": 1,
+    "NN_threads_each": 1,
+    "GPU": 0,
+    "parallel_games": 0,
+    "ponder": 0,
+    "total_team_RAM_GiB": 8,
+    "combined_RSS_gate": "pending",
+    "heavy_jobs_stopped_gate": "pending"
+  },
+  "gates": [
+    {
+      "id": "final72 source and immutable shutdown",
+      "accepted": false
+    },
+    {
+      "id": "independent real main entry/clock/ownership/responsibility",
+      "accepted": false
+    },
+    {
+      "id": "same prefix producer echo and final public stamp",
+      "accepted": false
+    },
+    {
+      "id": "readiness6roots/ACK0/old NN0 before new NN",
+      "accepted": false
+    },
+    {
+      "id": "singleCPU/combinedRAM/outer watchdog/pause/cleanup",
+      "accepted": false
+    },
+    {
+      "id": "coordinator freeze hashes and runtime authorization",
+      "accepted": false
+    },
+    {
+      "id": "unused documentary counterevidence absent",
+      "accepted": false
+    },
+    {
+      "id": "remaining>=8601.5",
+      "accepted": false
+    }
+  ],
+  "real_NN_engine_games_holdout_sends": 0
+}

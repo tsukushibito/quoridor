@@ -27,6 +27,7 @@ if __name__=='__main__':
   guard();base=ROOT/'.artifacts/ai-sigma'/group/name;fs=list(chosen(base))
   if not fs:continue
   dest=OUT/'archives'/group;dest.mkdir(parents=True,exist_ok=True);archive=dest/(name+'.tar.gz')
+  assert not archive.exists(), 'Preserved archive exists: restore original inputs and choose a fresh migration run; never overwrite archived evidence'
   with tarfile.open(archive,'w:gz',compresslevel=1) as tar:
    for p in fs:guard();tar.add(p,arcname=str(p.relative_to(ROOT)),recursive=False)
   sha=hashlib.sha256(archive.read_bytes()).hexdigest();records.append({'source':str(base.relative_to(ROOT)),'archive':str(archive.relative_to(ROOT)),'files':len(fs),'logical_bytes':sum(p.stat().st_size for p in fs),'archive_bytes':archive.stat().st_size,'sha256':sha,'representative':str(fs[0].relative_to(ROOT))})

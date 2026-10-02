@@ -1,0 +1,8161 @@
+{
+  "issue": "quoridor-4lc.67",
+  "experiment": "SIGMA-STREAMING-MATCH-ENTRY-PLAN",
+  "trial": 1,
+  "contract_version": 1,
+  "plan_version": 1,
+  "generated_UTC": "2026-10-01T18:59:48.359852+00:00",
+  "actual_go": false,
+  "freeze_issued": false,
+  "classification": "exploratory; fixed finite population; never retrospective formal NI",
+  "m": 48,
+  "total_games": 96,
+  "platform": "browser-only Rust-pending-Wasm+ORT vs fixed Sigma-Web local CPU",
+  "eligible_population_size": 56,
+  "pool64_sha256": "ac11691ffa521a86ffce2cff40dfdbebee5d283a83f70abfe36f43028b72ad9d",
+  "old_executed_excluded_indices": [
+    25,
+    4,
+    51,
+    0,
+    47,
+    44,
+    56,
+    31
+  ],
+  "eligible_indices": [
+    1,
+    2,
+    3,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    26,
+    27,
+    28,
+    29,
+    30,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    45,
+    46,
+    48,
+    49,
+    50,
+    52,
+    53,
+    54,
+    55,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63
+  ],
+  "selection_seed": 2026100301,
+  "order_seed": 2026100302,
+  "color_seed": 2026100303,
+  "PRNG": "xorshift32/unbiased rejection modulo/Fisher-Yates descending i",
+  "selection_rule": "ascending eligible56, shuffle, take first48",
+  "order_rule": "independently shuffle selected48",
+  "color_rule": "separate seed2026100303, ordered pairs each rejection modulo2;0->[1,2],1->[2,1]",
+  "selected_indices": [
+    8,
+    61,
+    6,
+    30,
+    60,
+    48,
+    2,
+    7,
+    45,
+    29,
+    13,
+    33,
+    52,
+    17,
+    50,
+    11,
+    59,
+    55,
+    35,
+    21,
+    5,
+    54,
+    40,
+    32,
+    42,
+    26,
+    10,
+    18,
+    49,
+    41,
+    46,
+    12,
+    38,
+    20,
+    23,
+    58,
+    37,
+    28,
+    57,
+    34,
+    22,
+    14,
+    9,
+    16,
+    24,
+    63,
+    27,
+    15
+  ],
+  "ordered_indices": [
+    8,
+    22,
+    48,
+    23,
+    46,
+    28,
+    49,
+    5,
+    41,
+    11,
+    42,
+    20,
+    38,
+    34,
+    12,
+    27,
+    40,
+    14,
+    52,
+    30,
+    60,
+    35,
+    21,
+    32,
+    6,
+    24,
+    57,
+    55,
+    59,
+    18,
+    50,
+    58,
+    63,
+    33,
+    37,
+    15,
+    54,
+    61,
+    45,
+    13,
+    17,
+    29,
+    10,
+    26,
+    7,
+    9,
+    2,
+    16
+  ],
+  "pairs": [
+    {
+      "pair": 1,
+      "pair_id": "continuation-pair-001",
+      "pool_index": 8,
+      "id": "holdout-proposal-08",
+      "platform": "browser",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "prefix_sha256": "50302b9d800d951db1df725cd078c810930c1be72478508908509386c1b74a15",
+      "context_sha256": "230ebc747a13323bacf0ba7c9eaa95d6c2cc573f02903072d00e540d770237d1",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 7,
+          "orientation": "h"
+        }
+      ],
+      "rust_prefix": [
+        129,
+        114,
+        164,
+        137
+      ],
+      "context": {
+        "key": "4,0|4,8|0|0,6;0,7;1,4|3,2",
+        "history": [
+          [
+            "4,0|4,8|0|0,6;0,7;1,4|3,2",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,6;1,4|",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,6;1,4|3,2",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,6|",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 4,
+        "remaining_total_ply": 196,
+        "walls": [
+          8,
+          8
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 1,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 2,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 2,
+      "pair_id": "continuation-pair-002",
+      "pool_index": 22,
+      "id": "holdout-proposal-22",
+      "platform": "browser",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "prefix_sha256": "01fe572545b142170df58cc85fdc4b89b03429c7a712873543f86e0d81fd79bd",
+      "context_sha256": "865f7701693b07586bc8b0233bcd451b79b80cba2c9f3034db0132fa0bf2fb35",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 6,
+          "orientation": "v"
+        }
+      ],
+      "rust_prefix": [
+        140,
+        128,
+        94,
+        77,
+        186,
+        86,
+        179,
+        200
+      ],
+      "context": {
+        "key": "4,0|5,8|0|3,7;5,0;5,1;7,5|1,5;2,4;7,6",
+        "history": [
+          [
+            "4,0|4,8|0|3,7;7,5|",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|3,7;5,1;7,5|",
+            1
+          ],
+          [
+            "4,0|4,8|1|3,7|",
+            1
+          ],
+          [
+            "4,0|5,8|0|3,7;5,0;5,1;7,5|1,5",
+            1
+          ],
+          [
+            "4,0|5,8|0|3,7;5,0;5,1;7,5|1,5;2,4;7,6",
+            1
+          ],
+          [
+            "4,0|5,8|0|3,7;5,1;7,5|",
+            1
+          ],
+          [
+            "4,0|5,8|1|3,7;5,0;5,1;7,5|1,5;2,4",
+            1
+          ],
+          [
+            "4,0|5,8|1|3,7;5,1;7,5|1,5",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 8,
+        "remaining_total_ply": 192,
+        "walls": [
+          6,
+          7
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 3,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 4,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 3,
+      "pair_id": "continuation-pair-003",
+      "pool_index": 48,
+      "id": "holdout-proposal-48",
+      "platform": "browser",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "prefix_sha256": "e819275e1fe4f40dc130d1f1b05f1153eec6c4d3d3502397c723dbc7254d3e00",
+      "context_sha256": "e59a0c7ed1a62f58ab9f4ba33164501df44984f1189b94272239f79d559ddf4f",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 3,
+          "orientation": "h"
+        }
+      ],
+      "rust_prefix": [
+        199,
+        122,
+        85,
+        157,
+        177,
+        158,
+        194,
+        142,
+        82,
+        124,
+        119,
+        131,
+        116,
+        170,
+        197,
+        112
+      ],
+      "context": {
+        "key": "4,0|4,8|0|1,0;1,5;2,6;3,4;3,5;4,0;5,7;6,4;7,3|0,4;1,3;1,6;4,1;4,6;5,1;6,6",
+        "history": [
+          [
+            "4,0|4,8|0|1,0;1,5;2,6;3,4;3,5;4,0;5,7;6,4;7,3|0,4;1,3;1,6;4,1;4,6;5,1;6,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|1,0;1,5;2,6;3,4;3,5;4,0;5,7;6,4|0,4;1,3;1,6;4,1;5,1;6,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|1,0;1,5;2,6;3,5;4,0;5,7;6,4|0,4;1,6;4,1;5,1;6,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|1,0;1,5;3,5;4,0;5,7|0,4;1,6;4,1;5,1;6,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|1,5;4,0;5,7|0,4;1,6;4,1;5,1;6,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|1,5;4,0|0,4;4,1;5,1;6,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|1,5;4,0|4,1;6,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|1,5|6,6",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|1,0;1,5;2,6;3,4;3,5;4,0;5,7;6,4|0,4;1,3;1,6;4,1;4,6;5,1;6,6",
+            1
+          ],
+          [
+            "4,0|4,8|1|1,0;1,5;2,6;3,4;3,5;4,0;5,7;6,4|0,4;1,6;4,1;5,1;6,6",
+            1
+          ],
+          [
+            "4,0|4,8|1|1,0;1,5;3,5;4,0;5,7;6,4|0,4;1,6;4,1;5,1;6,6",
+            1
+          ],
+          [
+            "4,0|4,8|1|1,0;1,5;4,0;5,7|0,4;1,6;4,1;5,1;6,6",
+            1
+          ],
+          [
+            "4,0|4,8|1|1,5;4,0|0,4;1,6;4,1;5,1;6,6",
+            1
+          ],
+          [
+            "4,0|4,8|1|1,5;4,0|0,4;4,1;6,6",
+            1
+          ],
+          [
+            "4,0|4,8|1|1,5;4,0|6,6",
+            1
+          ],
+          [
+            "4,0|4,8|1||6,6",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 16,
+        "remaining_total_ply": 184,
+        "walls": [
+          2,
+          2
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 5,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 6,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 4,
+      "pair_id": "continuation-pair-004",
+      "pool_index": 23,
+      "id": "holdout-proposal-23",
+      "platform": "browser",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "prefix_sha256": "ac70d8f301ddeac9ccff31bd92a5f1e38f301c25646bb6cac1c19d1d09273d72",
+      "context_sha256": "3d73c0f59982c0574a0eff51589a3498829d929487e4e4d4a8eca97a065bde5d",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 7,
+          "orientation": "v"
+        }
+      ],
+      "rust_prefix": [
+        131,
+        165,
+        88,
+        82,
+        115,
+        127,
+        189,
+        204
+      ],
+      "context": {
+        "key": "4,0|4,8|0|1,0;2,4;2,6;6,5;7,0|3,7;4,2;4,5",
+        "history": [
+          [
+            "4,0|4,8|0|1,0;2,4;2,6;6,5;7,0|3,7;4,2;4,5",
+            1
+          ],
+          [
+            "4,0|4,8|0|1,0;2,4;2,6;6,5;7,0|4,2",
+            1
+          ],
+          [
+            "4,0|4,8|0|1,0;2,6;7,0|4,2",
+            1
+          ],
+          [
+            "4,0|4,8|0|2,6|4,2",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|1,0;2,4;2,6;6,5;7,0|4,2;4,5",
+            1
+          ],
+          [
+            "4,0|4,8|1|1,0;2,4;2,6;7,0|4,2",
+            1
+          ],
+          [
+            "4,0|4,8|1|2,6;7,0|4,2",
+            1
+          ],
+          [
+            "4,0|4,8|1|2,6|",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 8,
+        "remaining_total_ply": 192,
+        "walls": [
+          6,
+          6
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 7,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 8,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 5,
+      "pair_id": "continuation-pair-005",
+      "pool_index": 46,
+      "id": "holdout-proposal-46",
+      "platform": "browser",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "prefix_sha256": "9530a5a94a99cd8d78d94dedb4b482c41e9c563fe8e7e671a3fa5e6d30bc0530",
+      "context_sha256": "ee550fd03a3672f9db16e8a88d08df939116343b580e94dba75fb99d5a1435a9",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 0,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 3,
+          "orientation": "v"
+        }
+      ],
+      "rust_prefix": [
+        93,
+        134,
+        100,
+        67,
+        128,
+        82,
+        179,
+        193,
+        208,
+        172,
+        148,
+        175
+      ],
+      "context": {
+        "key": "4,0|4,7|0|1,0;3,2;4,1;5,6;7,5|0,6;2,4;3,0;3,3;6,3;7,7",
+        "history": [
+          [
+            "4,0|4,7|0|1,0;3,2;4,1;5,6;7,5|",
+            1
+          ],
+          [
+            "4,0|4,7|0|1,0;3,2;4,1;5,6;7,5|0,6;2,4",
+            1
+          ],
+          [
+            "4,0|4,7|0|1,0;3,2;4,1;5,6;7,5|0,6;2,4;3,0;3,3;6,3;7,7",
+            1
+          ],
+          [
+            "4,0|4,7|0|1,0;3,2;4,1;5,6;7,5|0,6;2,4;3,3;7,7",
+            1
+          ],
+          [
+            "4,0|4,7|0|3,2;4,1;5,6|",
+            1
+          ],
+          [
+            "4,0|4,7|1|1,0;3,2;4,1;5,6;7,5|0,6;2,4;3,0;3,3;7,7",
+            1
+          ],
+          [
+            "4,0|4,7|1|1,0;3,2;4,1;5,6;7,5|0,6;2,4;7,7",
+            1
+          ],
+          [
+            "4,0|4,7|1|1,0;3,2;4,1;5,6;7,5|2,4",
+            1
+          ],
+          [
+            "4,0|4,7|1|3,2;4,1;5,6;7,5|",
+            1
+          ],
+          [
+            "4,0|4,8|0|4,1;5,6|",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|3,2;4,1;5,6|",
+            1
+          ],
+          [
+            "4,0|4,8|1|4,1|",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 12,
+        "remaining_total_ply": 188,
+        "walls": [
+          4,
+          5
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 9,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 10,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 6,
+      "pair_id": "continuation-pair-006",
+      "pool_index": 28,
+      "id": "holdout-proposal-28",
+      "platform": "browser",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "prefix_sha256": "82269575a03b42182474804f8f57caa189c42be058ef1db414848686bbfad662",
+      "context_sha256": "e33cf9a899fcb22e3d80adda5d3d97ab29ff982f47913a57286faacc3aab9ef6",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 0,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 3,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 2,
+          "orientation": "h"
+        }
+      ],
+      "rust_prefix": [
+        148,
+        173,
+        118,
+        169,
+        112,
+        186,
+        130,
+        101
+      ],
+      "context": {
+        "key": "4,0|4,8|0|1,6;4,2;5,4;7,3|0,3;1,5;3,0;4,3",
+        "history": [
+          [
+            "4,0|4,8|0|1,6;4,2;5,4;7,3|0,3;1,5;3,0;4,3",
+            1
+          ],
+          [
+            "4,0|4,8|0|5,4;7,3|0,3;1,5;3,0;4,3",
+            1
+          ],
+          [
+            "4,0|4,8|0|5,4|0,3;3,0;4,3",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|0||3,0;4,3",
+            1
+          ],
+          [
+            "4,0|4,8|1|1,6;5,4;7,3|0,3;1,5;3,0;4,3",
+            1
+          ],
+          [
+            "4,0|4,8|1|5,4;7,3|0,3;3,0;4,3",
+            1
+          ],
+          [
+            "4,0|4,8|1|5,4|3,0;4,3",
+            1
+          ],
+          [
+            "4,0|4,8|1||3,0",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 8,
+        "remaining_total_ply": 192,
+        "walls": [
+          6,
+          6
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 11,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 12,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 7,
+      "pair_id": "continuation-pair-007",
+      "pool_index": 49,
+      "id": "holdout-proposal-49",
+      "platform": "browser",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "prefix_sha256": "8bf69acd9bcbadc0a716e1174a5fe2319c4520777cf5d6bbc5c581aa3a81f86d",
+      "context_sha256": "6549f6fa41fa7d6a60970cbc400a7807806e30458d9276f0b2fd1f16fb27a1f1",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 0,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 0,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 0,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 3,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 6,
+          "orientation": "v"
+        }
+      ],
+      "rust_prefix": [
+        145,
+        183,
+        113,
+        138,
+        148,
+        83,
+        127,
+        167,
+        174,
+        151,
+        144,
+        130,
+        164,
+        179,
+        112,
+        198
+      ],
+      "context": {
+        "key": "4,0|4,8|0|0,4;1,6;1,7;2,0;6,5;7,3;7,7|0,0;2,4;3,0;3,2;5,3;5,6;6,0;6,2;6,4",
+        "history": [
+          [
+            "4,0|4,8|0|0,4;1,6;1,7;2,0;6,5;7,3;7,7|0,0;2,4;3,0;3,2;5,3;5,6;6,0;6,2;6,4",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,4;1,6;1,7;2,0;6,5;7,7|0,0;2,4;3,0;3,2;5,3;6,0;6,2;6,4",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,4;1,6;1,7;2,0;6,5;7,7|0,0;3,0;5,3;6,0;6,2;6,4",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,4;1,7;2,0;6,5|0,0;3,0;5,3;6,0;6,2;6,4",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,4;1,7;2,0;6,5|0,0;3,0;6,2;6,4",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,4;1,7;2,0|0,0;3,0;6,4",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,4;1,7|0,0;6,4",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|0||0,0;6,4",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,4;1,6;1,7;2,0;6,5;7,3;7,7|0,0;2,4;3,0;3,2;5,3;6,0;6,2;6,4",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,4;1,6;1,7;2,0;6,5;7,7|0,0;3,0;3,2;5,3;6,0;6,2;6,4",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,4;1,7;2,0;6,5;7,7|0,0;3,0;5,3;6,0;6,2;6,4",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,4;1,7;2,0;6,5|0,0;3,0;5,3;6,2;6,4",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,4;1,7;2,0;6,5|0,0;3,0;6,4",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,4;1,7|0,0;3,0;6,4",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,4|0,0;6,4",
+            1
+          ],
+          [
+            "4,0|4,8|1||0,0",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 16,
+        "remaining_total_ply": 184,
+        "walls": [
+          2,
+          2
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 13,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 14,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 8,
+      "pair_id": "continuation-pair-008",
+      "pool_index": 5,
+      "id": "holdout-proposal-05",
+      "platform": "browser",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "prefix_sha256": "0c85881f98604c787ff9854c019274ee3b033028ade3642d31f5eb847b0acaa5",
+      "context_sha256": "77099b7ccfd1bf6ab923e413a05548ed947482423fa317d7b08e79ba05e63c84",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 3,
+          "orientation": "v"
+        }
+      ],
+      "rust_prefix": [
+        141,
+        199,
+        96,
+        173
+      ],
+      "context": {
+        "key": "4,0|4,8|0|4,7;7,1|4,3;6,6",
+        "history": [
+          [
+            "4,0|4,8|0|4,7;7,1|4,3;6,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|4,7|6,6",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|4,7;7,1|6,6",
+            1
+          ],
+          [
+            "4,0|4,8|1|4,7|",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 4,
+        "remaining_total_ply": 196,
+        "walls": [
+          8,
+          8
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 15,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 16,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 9,
+      "pair_id": "continuation-pair-009",
+      "pool_index": 41,
+      "id": "holdout-proposal-41",
+      "platform": "browser",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "prefix_sha256": "e3e1d068bf58086cd4e234c7e63fbabe00c02ad9f6fbdb242eb3f968ab72c0a2",
+      "context_sha256": "aa46a459443facca5dff10de41362a2732da6bb919bf440faea227bc46c0244d",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 3,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 3,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 5,
+          "orientation": "h"
+        }
+      ],
+      "rust_prefix": [
+        182,
+        166,
+        101,
+        110,
+        121,
+        160,
+        194,
+        88,
+        112,
+        204,
+        129,
+        126
+      ],
+      "context": {
+        "key": "4,0|4,8|0|0,5;0,6;4,2;5,3;5,5;7,0;7,3|1,6;3,7;5,2;5,4;7,1",
+        "history": [
+          [
+            "4,0|4,8|0|0,5;0,6;4,2;5,3;5,5;7,0;7,3|1,6;3,7;5,2;5,4;7,1",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,5;4,2;5,3;7,0;7,3|1,6;3,7;5,2;5,4;7,1",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,5;4,2;5,3;7,0|1,6;5,2;5,4;7,1",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,5;4,2;5,3|5,2;5,4;7,1",
+            1
+          ],
+          [
+            "4,0|4,8|0|4,2;5,3|5,2;5,4",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|0||5,2;5,4",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,5;0,6;4,2;5,3;7,0;7,3|1,6;3,7;5,2;5,4;7,1",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,5;4,2;5,3;7,0;7,3|1,6;5,2;5,4;7,1",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,5;4,2;5,3|1,6;5,2;5,4;7,1",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,5;4,2;5,3|5,2;5,4",
+            1
+          ],
+          [
+            "4,0|4,8|1|4,2|5,2;5,4",
+            1
+          ],
+          [
+            "4,0|4,8|1||5,4",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 12,
+        "remaining_total_ply": 188,
+        "walls": [
+          4,
+          4
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 17,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 18,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 10,
+      "pair_id": "continuation-pair-010",
+      "pool_index": 11,
+      "id": "holdout-proposal-11",
+      "platform": "browser",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "prefix_sha256": "4a386f104103980a21dad8e207c0a99ed261c88670ba3e38972977e74928f8b2",
+      "context_sha256": "708b5d6c6c28daaac49d6676b3ab3d865d5c16c7b18e6e7c00a33d90161f69a5",
+      "legal_prefix": [
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 0,
+          "orientation": "v"
+        }
+      ],
+      "rust_prefix": [
+        3,
+        196,
+        164,
+        150
+      ],
+      "context": {
+        "key": "3,0|4,8|0||3,2;3,6;5,0",
+        "history": [
+          [
+            "3,0|4,8|0||3,2;3,6;5,0",
+            1
+          ],
+          [
+            "3,0|4,8|0||3,6",
+            1
+          ],
+          [
+            "3,0|4,8|1||",
+            1
+          ],
+          [
+            "3,0|4,8|1||3,2;3,6",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 4,
+        "remaining_total_ply": 196,
+        "walls": [
+          9,
+          8
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 19,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 20,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 11,
+      "pair_id": "continuation-pair-011",
+      "pool_index": 42,
+      "id": "holdout-proposal-42",
+      "platform": "browser",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "prefix_sha256": "6bc064cad7fa4ff92af0f51576e97e7038792e52782519a42ea60efc3f07313f",
+      "context_sha256": "1b5df74141fd69427c6bc0e8a91d259b102b75a6c537e73f5e924e71a91911b6",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 3,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 0,
+          "orientation": "h"
+        }
+      ],
+      "rust_prefix": [
+        89,
+        112,
+        3,
+        196,
+        102,
+        185,
+        157,
+        138,
+        191,
+        161,
+        144,
+        83
+      ],
+      "context": {
+        "key": "3,0|4,8|0|0,1;1,7;2,0;5,2;7,3;7,7|0,2;0,5;3,6;4,1;6,5",
+        "history": [
+          [
+            "3,0|4,8|0|0,1;1,7;2,0;5,2;7,3;7,7|0,2;0,5;3,6;4,1;6,5",
+            1
+          ],
+          [
+            "3,0|4,8|0|0,1;1,7;5,2;7,3|0,2;0,5;3,6;4,1;6,5",
+            1
+          ],
+          [
+            "3,0|4,8|0|0,1;1,7;5,2;7,3|0,5;3,6;4,1",
+            1
+          ],
+          [
+            "3,0|4,8|0|0,1;5,2;7,3|0,5;3,6",
+            1
+          ],
+          [
+            "3,0|4,8|0|0,1;7,3|3,6",
+            1
+          ],
+          [
+            "3,0|4,8|1|0,1;1,7;5,2;7,3;7,7|0,2;0,5;3,6;4,1;6,5",
+            1
+          ],
+          [
+            "3,0|4,8|1|0,1;1,7;5,2;7,3|0,5;3,6;4,1;6,5",
+            1
+          ],
+          [
+            "3,0|4,8|1|0,1;5,2;7,3|0,5;3,6;4,1",
+            1
+          ],
+          [
+            "3,0|4,8|1|0,1;5,2;7,3|3,6",
+            1
+          ],
+          [
+            "3,0|4,8|1|0,1;7,3|",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,1;7,3|",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,1|",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 12,
+        "remaining_total_ply": 188,
+        "walls": [
+          5,
+          4
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 21,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 22,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 12,
+      "pair_id": "continuation-pair-012",
+      "pool_index": 20,
+      "id": "holdout-proposal-20",
+      "platform": "browser",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "prefix_sha256": "bae39799d34a7a97bbc8b43b9022d338646f8dd9821b54af9c348a7f27fb8baf",
+      "context_sha256": "ff458a779972bee17a5db70139878e7d4dbab5cf1111458cb840dc8ce0ac4305",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 3,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 0,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 5,
+          "orientation": "v"
+        }
+      ],
+      "rust_prefix": [
+        113,
+        106,
+        83,
+        150,
+        141,
+        138,
+        192,
+        186
+      ],
+      "context": {
+        "key": "4,0|4,8|0|0,4;1,3;1,7;2,0;4,7|1,5;5,0;7,5",
+        "history": [
+          [
+            "4,0|4,8|0|0,4;1,3;1,7;2,0;4,7|1,5;5,0;7,5",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,4;1,3;1,7;2,0;4,7|5,0",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,4;1,3;2,0|5,0",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,4;1,3|",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,4;1,3;1,7;2,0;4,7|5,0;7,5",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,4;1,3;2,0;4,7|5,0",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,4;1,3;2,0|",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,4|",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 8,
+        "remaining_total_ply": 192,
+        "walls": [
+          6,
+          6
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 23,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 24,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 13,
+      "pair_id": "continuation-pair-013",
+      "pool_index": 38,
+      "id": "holdout-proposal-38",
+      "platform": "browser",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "prefix_sha256": "e9b2a5c10bc802a9aae16097fb22972296f9d8ee9f9c0ce01ea9eb37d3b102a6",
+      "context_sha256": "f3b2741e418e84a98a3e44d0cc353c4518fd2bf20446e31c2cc4fa0028c208ee",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 3,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 2,
+          "orientation": "h"
+        }
+      ],
+      "rust_prefix": [
+        182,
+        205,
+        3,
+        186,
+        173,
+        99,
+        159,
+        130,
+        105,
+        115,
+        123,
+        104
+      ],
+      "context": {
+        "key": "3,0|4,8|0|0,3;1,6;2,2;2,4;2,5;7,2|1,5;4,3;4,7;5,4;6,1",
+        "history": [
+          [
+            "3,0|4,8|0|0,3;1,6;2,2;2,4;2,5;7,2|1,5;4,3;4,7;5,4;6,1",
+            1
+          ],
+          [
+            "3,0|4,8|0|0,3;1,6;2,2;2,4|1,5;4,3;4,7;5,4;6,1",
+            1
+          ],
+          [
+            "3,0|4,8|0|1,6;2,2|1,5;4,3;4,7;5,4;6,1",
+            1
+          ],
+          [
+            "3,0|4,8|0|2,2|1,5;4,3;4,7;5,4",
+            1
+          ],
+          [
+            "3,0|4,8|0||1,5;4,7;5,4",
+            1
+          ],
+          [
+            "3,0|4,8|1|0,3;1,6;2,2;2,4;2,5|1,5;4,3;4,7;5,4;6,1",
+            1
+          ],
+          [
+            "3,0|4,8|1|0,3;1,6;2,2|1,5;4,3;4,7;5,4;6,1",
+            1
+          ],
+          [
+            "3,0|4,8|1|2,2|1,5;4,3;4,7;5,4;6,1",
+            1
+          ],
+          [
+            "3,0|4,8|1||1,5;4,3;4,7;5,4",
+            1
+          ],
+          [
+            "3,0|4,8|1||4,7;5,4",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|0||4,7;5,4",
+            1
+          ],
+          [
+            "4,0|4,8|1||5,4",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 12,
+        "remaining_total_ply": 188,
+        "walls": [
+          5,
+          4
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 25,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 26,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 14,
+      "pair_id": "continuation-pair-014",
+      "pool_index": 34,
+      "id": "holdout-proposal-34",
+      "platform": "browser",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "prefix_sha256": "c07f31eb6608bb2213b68eeba05e0d9edc05fae5e1ff6ec1ad71e13fecf8e06c",
+      "context_sha256": "2efa42925c5e4e3f9235a9f7a30d0e083fa6f8690bc0734d0cdf11803fbbc0a4",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 0,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 4,
+          "orientation": "v"
+        }
+      ],
+      "rust_prefix": [
+        128,
+        198,
+        176,
+        156,
+        196,
+        81,
+        193,
+        146,
+        137,
+        131,
+        160,
+        178
+      ],
+      "context": {
+        "key": "4,0|4,8|0|0,0;0,7;2,6;7,5|0,6;1,0;1,4;3,1;3,6;5,6;7,1;7,3",
+        "history": [
+          [
+            "4,0|4,8|0|0,0;0,7;2,6;7,5|0,6;1,0;1,4;3,1;3,6;5,6;7,1;7,3",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,0;0,7;2,6;7,5|0,6;1,0;3,1;3,6;5,6;7,3",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,0;7,5|0,6;1,0;3,1;3,6;5,6;7,3",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,0;7,5|3,1;3,6;5,6;7,3",
+            1
+          ],
+          [
+            "4,0|4,8|0|7,5|3,1;5,6;7,3",
+            1
+          ],
+          [
+            "4,0|4,8|0|7,5|5,6",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,0;0,7;2,6;7,5|0,6;1,0;3,1;3,6;5,6;7,1;7,3",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,0;0,7;7,5|0,6;1,0;3,1;3,6;5,6;7,3",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,0;7,5|0,6;3,1;3,6;5,6;7,3",
+            1
+          ],
+          [
+            "4,0|4,8|1|7,5|",
+            1
+          ],
+          [
+            "4,0|4,8|1|7,5|3,1;3,6;5,6;7,3",
+            1
+          ],
+          [
+            "4,0|4,8|1|7,5|5,6;7,3",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 12,
+        "remaining_total_ply": 188,
+        "walls": [
+          4,
+          4
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 27,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 28,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 15,
+      "pair_id": "continuation-pair-015",
+      "pool_index": 12,
+      "id": "holdout-proposal-12",
+      "platform": "browser",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "prefix_sha256": "fe0b1ea07aca5fb5707ea471b3e2fd903a2f9b5d8b0cac14fb210a875f6c0c8e",
+      "context_sha256": "d5ae0da5b05205d4761e0db5afa125e2d1d30cc8e307168c161fdbfdf279ae99",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 3,
+          "orientation": "h"
+        }
+      ],
+      "rust_prefix": [
+        99,
+        134,
+        156,
+        107
+      ],
+      "context": {
+        "key": "4,0|4,8|0|2,2;2,3;5,6|3,1",
+        "history": [
+          [
+            "4,0|4,8|0|2,2;2,3;5,6|3,1",
+            1
+          ],
+          [
+            "4,0|4,8|0|2,2;5,6|",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|2,2;5,6|3,1",
+            1
+          ],
+          [
+            "4,0|4,8|1|2,2|",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 4,
+        "remaining_total_ply": 196,
+        "walls": [
+          8,
+          8
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 29,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 30,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 16,
+      "pair_id": "continuation-pair-016",
+      "pool_index": 27,
+      "id": "holdout-proposal-27",
+      "platform": "browser",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "prefix_sha256": "6f40456136ac0211797fa9c5f1a4ddd2f35a18876af2b70834b088c92e855789",
+      "context_sha256": "c58b932f466cc874441936e1e7ae5b583f442c7754567d9c85be9a19f8b2ee3d",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 2,
+          "orientation": "h"
+        }
+      ],
+      "rust_prefix": [
+        96,
+        179,
+        190,
+        170,
+        159,
+        154,
+        143,
+        102
+      ],
+      "context": {
+        "key": "4,0|4,8|0|5,2;6,7;7,1|1,1;1,3;2,4;5,5;6,1",
+        "history": [
+          [
+            "4,0|4,8|0|5,2;6,7;7,1|1,1;1,3;2,4;5,5;6,1",
+            1
+          ],
+          [
+            "4,0|4,8|0|7,1|1,1;1,3;2,4;5,5;6,1",
+            1
+          ],
+          [
+            "4,0|4,8|0|7,1|1,3;2,4;5,5",
+            1
+          ],
+          [
+            "4,0|4,8|0|7,1|2,4",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|6,7;7,1|1,1;1,3;2,4;5,5;6,1",
+            1
+          ],
+          [
+            "4,0|4,8|1|7,1|",
+            1
+          ],
+          [
+            "4,0|4,8|1|7,1|1,3;2,4;5,5;6,1",
+            1
+          ],
+          [
+            "4,0|4,8|1|7,1|2,4;5,5",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 8,
+        "remaining_total_ply": 192,
+        "walls": [
+          6,
+          6
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 31,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 32,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 17,
+      "pair_id": "continuation-pair-017",
+      "pool_index": 40,
+      "id": "holdout-proposal-40",
+      "platform": "browser",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "prefix_sha256": "8d88eff2c9496b1520c824af9ed6299e4be7700f40185d3d40e0704d32642e91",
+      "context_sha256": "4f163337916476704cf8dc5b2e34266e6143f50c8ad897e59637dda4019923f5",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 5,
+          "orientation": "h"
+        }
+      ],
+      "rust_prefix": [
+        104,
+        200,
+        3,
+        153,
+        87,
+        83,
+        137,
+        199,
+        179,
+        77,
+        99,
+        128
+      ],
+      "context": {
+        "key": "3,0|5,8|0|0,7;2,0;2,2;6,0;7,2;7,5|0,1;2,4;6,6;7,6",
+        "history": [
+          [
+            "3,0|4,8|0|0,7;2,0;6,0;7,2|0,1;6,6;7,6",
+            1
+          ],
+          [
+            "3,0|4,8|0|2,0;6,0;7,2|0,1;7,6",
+            1
+          ],
+          [
+            "3,0|4,8|0|7,2|0,1;7,6",
+            1
+          ],
+          [
+            "3,0|4,8|1|0,7;2,0;6,0;7,2|0,1;2,4;6,6;7,6",
+            1
+          ],
+          [
+            "3,0|4,8|1|0,7;2,0;6,0;7,2|0,1;7,6",
+            1
+          ],
+          [
+            "3,0|4,8|1|6,0;7,2|0,1;7,6",
+            1
+          ],
+          [
+            "3,0|4,8|1|7,2|7,6",
+            1
+          ],
+          [
+            "3,0|5,8|0|0,7;2,0;2,2;6,0;7,2;7,5|0,1;2,4;6,6;7,6",
+            1
+          ],
+          [
+            "3,0|5,8|0|0,7;2,0;6,0;7,2|0,1;2,4;6,6;7,6",
+            1
+          ],
+          [
+            "3,0|5,8|1|0,7;2,0;2,2;6,0;7,2|0,1;2,4;6,6;7,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|7,2|7,6",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|7,2|",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 12,
+        "remaining_total_ply": 188,
+        "walls": [
+          5,
+          5
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 33,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 34,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 18,
+      "pair_id": "continuation-pair-018",
+      "pool_index": 14,
+      "id": "holdout-proposal-14",
+      "platform": "browser",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "prefix_sha256": "1e01165e49f203305ccc3af567f3f3452e1400214f15623bf736274ec7ad8c07",
+      "context_sha256": "312473c61a0b7fb54a409b794939e3b6c22382400b0d5af2a6b82b9c37c7056c",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 6,
+          "orientation": "v"
+        }
+      ],
+      "rust_prefix": [
+        122,
+        188,
+        155,
+        193
+      ],
+      "context": {
+        "key": "4,0|4,8|0|1,5|0,6;2,1;3,5",
+        "history": [
+          [
+            "4,0|4,8|0|1,5|0,6;2,1;3,5",
+            1
+          ],
+          [
+            "4,0|4,8|0|1,5|3,5",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|1,5|",
+            1
+          ],
+          [
+            "4,0|4,8|1|1,5|2,1;3,5",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 4,
+        "remaining_total_ply": 196,
+        "walls": [
+          8,
+          8
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 35,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 36,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 19,
+      "pair_id": "continuation-pair-019",
+      "pool_index": 52,
+      "id": "holdout-proposal-52",
+      "platform": "browser",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "prefix_sha256": "cf80b1c7d06538e3bb8d47dfc5156c0d77113c945e30b8582dc2ad02b7470b80",
+      "context_sha256": "e5dc71ee575c540aa73ca7382e8cb3148dab5c21d6c9e8ef010001f0238f313e",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 3,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 0,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 2,
+          "orientation": "v"
+        }
+      ],
+      "rust_prefix": [
+        199,
+        121,
+        188,
+        83,
+        162,
+        114,
+        126,
+        99,
+        111,
+        186,
+        172,
+        134,
+        146,
+        129,
+        171,
+        165
+      ],
+      "context": {
+        "key": "4,0|4,8|0|0,5;0,6;1,4;2,0;2,2;5,5;5,6;6,3|1,0;1,2;1,5;2,3;3,3;3,5;4,2;6,6",
+        "history": [
+          [
+            "4,0|4,8|0|0,5;0,6;1,4;2,0;2,2;5,5;5,6;6,3|1,0;1,2;1,5;2,3;3,3;3,5;4,2;6,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,5;0,6;1,4;2,0;2,2;5,5;5,6;6,3|1,0;1,2;1,5;3,3;3,5;6,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,5;1,4;2,0;2,2;5,5;5,6;6,3|1,2;1,5;3,3;3,5;6,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,5;1,4;2,0;2,2;5,5;6,3|1,2;1,5;3,5;6,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,5;1,4;2,0;2,2;5,5|1,2;3,5;6,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,5;1,4;2,0|1,2;3,5;6,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,5;2,0|3,5;6,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,5|6,6",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,5;0,6;1,4;2,0;2,2;5,5;5,6;6,3|1,0;1,2;1,5;2,3;3,3;3,5;6,6",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,5;1,4;2,0;2,2;5,5;5,6;6,3|1,0;1,2;1,5;3,3;3,5;6,6",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,5;1,4;2,0;2,2;5,5;6,3|1,2;1,5;3,3;3,5;6,6",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,5;1,4;2,0;2,2;5,5;6,3|1,2;3,5;6,6",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,5;1,4;2,0;5,5|1,2;3,5;6,6",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,5;2,0|1,2;3,5;6,6",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,5|3,5;6,6",
+            1
+          ],
+          [
+            "4,0|4,8|1||6,6",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 16,
+        "remaining_total_ply": 184,
+        "walls": [
+          2,
+          2
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 37,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 38,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 20,
+      "pair_id": "continuation-pair-020",
+      "pool_index": 30,
+      "id": "holdout-proposal-30",
+      "platform": "browser",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "prefix_sha256": "e7543faa909a74e0aeaf58a42709136b84560e4613c89b8b256d23224a6950a4",
+      "context_sha256": "67ab7ec91663ab6a8ca0baa7c8ee36c716f8db0a598c66f07ea774239a6b0daf",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 1,
+          "orientation": "h"
+        }
+      ],
+      "rust_prefix": [
+        99,
+        173,
+        125,
+        140,
+        176,
+        159,
+        202,
+        92
+      ],
+      "context": {
+        "key": "4,0|4,8|0|2,2;3,1;3,7;4,5|1,7;4,3;6,1;7,3",
+        "history": [
+          [
+            "4,0|4,8|0|2,2;3,1;3,7;4,5|1,7;4,3;6,1;7,3",
+            1
+          ],
+          [
+            "4,0|4,8|0|2,2;3,7;4,5|4,3",
+            1
+          ],
+          [
+            "4,0|4,8|0|2,2;3,7;4,5|4,3;6,1;7,3",
+            1
+          ],
+          [
+            "4,0|4,8|0|2,2|4,3",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|2,2;3,7;4,5|1,7;4,3;6,1;7,3",
+            1
+          ],
+          [
+            "4,0|4,8|1|2,2;3,7;4,5|4,3;7,3",
+            1
+          ],
+          [
+            "4,0|4,8|1|2,2;4,5|4,3",
+            1
+          ],
+          [
+            "4,0|4,8|1|2,2|",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 8,
+        "remaining_total_ply": 192,
+        "walls": [
+          6,
+          6
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 39,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 40,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 21,
+      "pair_id": "continuation-pair-021",
+      "pool_index": 60,
+      "id": "holdout-proposal-60",
+      "platform": "browser",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "prefix_sha256": "cfc94fb55cbe60938bf6760d21e35387f9c20f1765f43b745a3f751085996292",
+      "context_sha256": "0054894587f0dd8960404c6f9414efba21320ac79c5a2fa9e9122aa169f6c2ce",
+      "legal_prefix": [
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 3,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 3,
+          "orientation": "v"
+        }
+      ],
+      "rust_prefix": [
+        3,
+        140,
+        100,
+        192,
+        116,
+        108,
+        118,
+        98,
+        122,
+        158,
+        156,
+        129,
+        96,
+        206,
+        144,
+        171
+      ],
+      "context": {
+        "key": "3,0|4,8|0|0,6;1,2;1,5;3,2;3,3;3,4;3,7;5,4;7,1;7,7|2,3;3,1;5,1;5,7;7,5",
+        "history": [
+          [
+            "3,0|4,8|0|0,6;1,2;1,5;3,2;3,3;3,4;3,7;5,4;7,1;7,7|2,3;3,1;5,1;5,7;7,5",
+            1
+          ],
+          [
+            "3,0|4,8|0|0,6;1,2;1,5;3,2;3,3;3,4;3,7;5,4;7,1|3,1;5,1;5,7;7,5",
+            1
+          ],
+          [
+            "3,0|4,8|0|0,6;1,2;1,5;3,2;3,3;3,4;3,7;5,4|3,1;5,1;7,5",
+            1
+          ],
+          [
+            "3,0|4,8|0|1,2;1,5;3,2;3,3;3,4;3,7;5,4|5,1;7,5",
+            1
+          ],
+          [
+            "3,0|4,8|0|1,2;3,2;3,3;3,4;3,7;5,4|7,5",
+            1
+          ],
+          [
+            "3,0|4,8|0|3,2;3,3;3,4;3,7|7,5",
+            1
+          ],
+          [
+            "3,0|4,8|0|3,2;3,7|7,5",
+            1
+          ],
+          [
+            "3,0|4,8|0|3,7|",
+            1
+          ],
+          [
+            "3,0|4,8|1|0,6;1,2;1,5;3,2;3,3;3,4;3,7;5,4;7,1;7,7|3,1;5,1;5,7;7,5",
+            1
+          ],
+          [
+            "3,0|4,8|1|0,6;1,2;1,5;3,2;3,3;3,4;3,7;5,4;7,1|3,1;5,1;7,5",
+            1
+          ],
+          [
+            "3,0|4,8|1|1,2;1,5;3,2;3,3;3,4;3,7;5,4|3,1;5,1;7,5",
+            1
+          ],
+          [
+            "3,0|4,8|1|1,2;1,5;3,2;3,3;3,4;3,7;5,4|7,5",
+            1
+          ],
+          [
+            "3,0|4,8|1|3,2;3,3;3,4;3,7;5,4|7,5",
+            1
+          ],
+          [
+            "3,0|4,8|1|3,2;3,4;3,7|7,5",
+            1
+          ],
+          [
+            "3,0|4,8|1|3,2;3,7|",
+            1
+          ],
+          [
+            "3,0|4,8|1||",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 16,
+        "remaining_total_ply": 184,
+        "walls": [
+          3,
+          2
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 41,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 42,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 22,
+      "pair_id": "continuation-pair-022",
+      "pool_index": 35,
+      "id": "holdout-proposal-35",
+      "platform": "browser",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "prefix_sha256": "fc6f690d48b88a25aafa5f9953b1893518a45b152c40e92c9a75af3c7d9212e5",
+      "context_sha256": "e4ad16e01a30d5755eb754789687467dc001052857b545ca2cd2eb1319c3a4d4",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 0,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        }
+      ],
+      "rust_prefix": [
+        187,
+        122,
+        103,
+        83,
+        148,
+        178,
+        120,
+        136,
+        190,
+        75,
+        125,
+        74
+      ],
+      "context": {
+        "key": "4,0|2,8|0|1,5;2,0;4,5;6,2;7,4;7,6|1,4;2,5;3,0;5,5",
+        "history": [
+          [
+            "4,0|2,8|0|1,5;2,0;4,5;6,2;7,4;7,6|1,4;2,5;3,0;5,5",
+            1
+          ],
+          [
+            "4,0|3,8|0|1,5;2,0;6,2;7,4;7,6|1,4;2,5;3,0;5,5",
+            1
+          ],
+          [
+            "4,0|3,8|1|1,5;2,0;4,5;6,2;7,4;7,6|1,4;2,5;3,0;5,5",
+            1
+          ],
+          [
+            "4,0|4,8|0|1,5;2,0;6,2;7,4;7,6|1,4;2,5;3,0",
+            1
+          ],
+          [
+            "4,0|4,8|0|1,5;2,0;6,2|1,4;2,5;3,0",
+            1
+          ],
+          [
+            "4,0|4,8|0|1,5;2,0;6,2|2,5",
+            1
+          ],
+          [
+            "4,0|4,8|0|1,5|2,5",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|1,5;2,0;6,2;7,4;7,6|1,4;2,5;3,0;5,5",
+            1
+          ],
+          [
+            "4,0|4,8|1|1,5;2,0;6,2;7,4|1,4;2,5;3,0",
+            1
+          ],
+          [
+            "4,0|4,8|1|1,5;2,0;6,2|2,5;3,0",
+            1
+          ],
+          [
+            "4,0|4,8|1|1,5;6,2|2,5",
+            1
+          ],
+          [
+            "4,0|4,8|1||2,5",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 12,
+        "remaining_total_ply": 188,
+        "walls": [
+          4,
+          6
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 43,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 44,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 23,
+      "pair_id": "continuation-pair-023",
+      "pool_index": 21,
+      "id": "holdout-proposal-21",
+      "platform": "browser",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "prefix_sha256": "b2d154c8c3dd18d342099c09f6e53dee3faab1ad726794ee7169cd897ea2db75",
+      "context_sha256": "73dbf07863a926d3418424ab7456daff8e79d20af5bf4e27879c3f89f405f465",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 3,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 4,
+          "orientation": "h"
+        }
+      ],
+      "rust_prefix": [
+        104,
+        111,
+        159,
+        137,
+        87,
+        125,
+        162,
+        120
+      ],
+      "context": {
+        "key": "4,0|4,8|0|0,7;4,5;6,0;6,3;7,2;7,4|1,2;6,1",
+        "history": [
+          [
+            "4,0|4,8|0|0,7;4,5;6,0;6,3;7,2;7,4|1,2;6,1",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,7;4,5;6,0;6,3;7,2|6,1",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,7;6,3;7,2|6,1",
+            1
+          ],
+          [
+            "4,0|4,8|0|6,3;7,2|",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,7;4,5;6,0;6,3;7,2|1,2;6,1",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,7;6,0;6,3;7,2|6,1",
+            1
+          ],
+          [
+            "4,0|4,8|1|6,3;7,2|6,1",
+            1
+          ],
+          [
+            "4,0|4,8|1|7,2|",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 8,
+        "remaining_total_ply": 192,
+        "walls": [
+          6,
+          6
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 45,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 46,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 24,
+      "pair_id": "continuation-pair-024",
+      "pool_index": 32,
+      "id": "holdout-proposal-32",
+      "platform": "browser",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "prefix_sha256": "b0a555b4f2e4afc7dbfbbb0f6342821df3d0ed5d288b7154fe2b16277f83a639",
+      "context_sha256": "d962c1a4363640820ae672abd5922d5554852935f238a0b8608eec6f458f60e7",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 0,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        }
+      ],
+      "rust_prefix": [
+        178,
+        150,
+        133,
+        189,
+        103,
+        166,
+        172,
+        201,
+        156,
+        200,
+        169,
+        67
+      ],
+      "context": {
+        "key": "4,0|4,7|0|4,6;6,2|0,3;0,7;1,4;3,1;3,3;4,5;5,0;5,2;7,6",
+        "history": [
+          [
+            "4,0|4,7|0|4,6;6,2|0,3;0,7;1,4;3,1;3,3;4,5;5,0;5,2;7,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|4,6;6,2|0,7;1,4;3,1;3,3;4,5;5,0;5,2;7,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|4,6;6,2|0,7;1,4;3,3;4,5;5,0;5,2",
+            1
+          ],
+          [
+            "4,0|4,8|0|4,6;6,2|1,4;4,5;5,0;5,2",
+            1
+          ],
+          [
+            "4,0|4,8|0|4,6|1,4;4,5;5,0",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|0||1,4;5,0",
+            1
+          ],
+          [
+            "4,0|4,8|1|4,6;6,2|0,3;0,7;1,4;3,1;3,3;4,5;5,0;5,2;7,6",
+            1
+          ],
+          [
+            "4,0|4,8|1|4,6;6,2|0,7;1,4;3,1;3,3;4,5;5,0;5,2",
+            1
+          ],
+          [
+            "4,0|4,8|1|4,6;6,2|1,4;3,3;4,5;5,0;5,2",
+            1
+          ],
+          [
+            "4,0|4,8|1|4,6;6,2|1,4;4,5;5,0",
+            1
+          ],
+          [
+            "4,0|4,8|1|4,6|1,4;5,0",
+            1
+          ],
+          [
+            "4,0|4,8|1||1,4",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 12,
+        "remaining_total_ply": 188,
+        "walls": [
+          4,
+          5
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 47,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 48,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 25,
+      "pair_id": "continuation-pair-025",
+      "pool_index": 6,
+      "id": "holdout-proposal-06",
+      "platform": "browser",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "prefix_sha256": "bdcd358e06205bab08237eb4527037bb7b8c8edf23a3c674770053e745928fc0",
+      "context_sha256": "3102247cfd067b54f67ff56d366e6800ea4596b98b0eefb407f4573f8eac372c",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 7,
+          "orientation": "h"
+        }
+      ],
+      "rust_prefix": [
+        113,
+        90,
+        162,
+        139
+      ],
+      "context": {
+        "key": "4,0|4,8|0|0,4;1,1;2,7|1,2",
+        "history": [
+          [
+            "4,0|4,8|0|0,4;1,1;2,7|1,2",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,4;1,1|",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,4;1,1|1,2",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,4|",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 4,
+        "remaining_total_ply": 196,
+        "walls": [
+          8,
+          8
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 49,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 50,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 26,
+      "pair_id": "continuation-pair-026",
+      "pool_index": 24,
+      "id": "holdout-proposal-24",
+      "platform": "browser",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "prefix_sha256": "3d0c5c13137ad3846132786a214410adb51bfddba093fc19cbfc1f33f3c00c82",
+      "context_sha256": "29a0d0873d8b3e1b41636b8f65e168ca0861d50d79813bc30b056f0c0f8176af",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 7,
+          "orientation": "v"
+        }
+      ],
+      "rust_prefix": [
+        88,
+        200,
+        156,
+        100,
+        169,
+        83,
+        179,
+        207
+      ],
+      "context": {
+        "key": "4,0|4,8|0|2,0;3,2;7,0|0,3;2,4;3,1;6,7;7,6",
+        "history": [
+          [
+            "4,0|4,8|0|2,0;3,2;7,0|0,3;2,4;3,1;6,7;7,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|2,0;3,2;7,0|0,3;3,1;7,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|3,2;7,0|3,1;7,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|7,0|7,6",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|2,0;3,2;7,0|0,3;2,4;3,1;7,6",
+            1
+          ],
+          [
+            "4,0|4,8|1|3,2;7,0|0,3;3,1;7,6",
+            1
+          ],
+          [
+            "4,0|4,8|1|7,0|",
+            1
+          ],
+          [
+            "4,0|4,8|1|7,0|3,1;7,6",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 8,
+        "remaining_total_ply": 192,
+        "walls": [
+          6,
+          6
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 51,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 52,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 27,
+      "pair_id": "continuation-pair-027",
+      "pool_index": 57,
+      "id": "holdout-proposal-57",
+      "platform": "browser",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "prefix_sha256": "271e316c0a8444fa2cf79ca2a291515dcccb1f7d0ca5fdb74d329811324df638",
+      "context_sha256": "8e8a0b140a0f80c97a1ac43d5f072a61707dd2ea6ef97e7c5b35037c87e99fe3",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 3,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 1,
+          "orientation": "v"
+        }
+      ],
+      "rust_prefix": [
+        85,
+        128,
+        105,
+        143,
+        138,
+        113,
+        129,
+        136,
+        96,
+        208,
+        115,
+        83,
+        197,
+        101,
+        206,
+        158
+      ],
+      "context": {
+        "key": "4,0|4,8|0|0,3;0,4;0,6;1,7;2,0;2,4;4,0;4,2;6,7;7,1;7,5;7,6|4,6;5,1;5,7;7,7",
+        "history": [
+          [
+            "4,0|4,8|0|0,3;0,4;0,6;1,7;2,0;2,4;4,0;4,2;6,7;7,1;7,5;7,6|4,6;5,1;5,7;7,7",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,3;0,4;0,6;1,7;2,0;2,4;4,0;4,2;6,7;7,1;7,5;7,6|4,6;7,7",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,3;0,4;0,6;1,7;2,0;2,4;4,0;6,7;7,1;7,5;7,6|7,7",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,3;0,4;0,6;1,7;4,0;6,7;7,1;7,5;7,6|7,7",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,3;0,4;0,6;1,7;4,0;6,7;7,5;7,6|",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,3;0,4;1,7;4,0;6,7;7,5|",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,3;4,0;6,7;7,5|",
+            1
+          ],
+          [
+            "4,0|4,8|0|4,0;7,5|",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,3;0,4;0,6;1,7;2,0;2,4;4,0;4,2;6,7;7,1;7,5;7,6|4,6;5,7;7,7",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,3;0,4;0,6;1,7;2,0;2,4;4,0;6,7;7,1;7,5;7,6|4,6;7,7",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,3;0,4;0,6;1,7;2,4;4,0;6,7;7,1;7,5;7,6|7,7",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,3;0,4;0,6;1,7;4,0;6,7;7,1;7,5;7,6|",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,3;0,4;0,6;1,7;4,0;6,7;7,5|",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,3;1,7;4,0;6,7;7,5|",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,3;4,0;7,5|",
+            1
+          ],
+          [
+            "4,0|4,8|1|4,0|",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 16,
+        "remaining_total_ply": 184,
+        "walls": [
+          2,
+          2
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 53,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 54,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 28,
+      "pair_id": "continuation-pair-028",
+      "pool_index": 55,
+      "id": "holdout-proposal-55",
+      "platform": "browser",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "prefix_sha256": "ea6028051bc2766cab41a8222ea9988c1c95c0bfa7b8825c23441ab0695de73b",
+      "context_sha256": "16295ff3328268b0212dfb33efc75d37cf984fa9fd35c69711ed0d67ff1325c1",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 0,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 0,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 0,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 3,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 6,
+          "orientation": "h"
+        }
+      ],
+      "rust_prefix": [
+        95,
+        169,
+        155,
+        92,
+        178,
+        151,
+        143,
+        124,
+        162,
+        84,
+        146,
+        149,
+        138,
+        165,
+        110,
+        132
+      ],
+      "context": {
+        "key": "4,0|4,8|0|1,7;3,0;3,1;3,5;3,6;5,3;6,1;6,7|0,3;1,0;1,2;1,4;2,1;4,0;4,2;6,0",
+        "history": [
+          [
+            "4,0|4,8|0|1,7;3,0;3,1;3,5;3,6;5,3;6,1;6,7|0,3;1,0;1,2;1,4;2,1;4,0;4,2;6,0",
+            1
+          ],
+          [
+            "4,0|4,8|0|1,7;3,0;3,1;3,5;6,1;6,7|0,3;1,0;1,2;1,4;2,1;4,0;4,2;6,0",
+            1
+          ],
+          [
+            "4,0|4,8|0|3,0;3,1;3,5;6,1;6,7|0,3;1,0;1,2;1,4;2,1;4,0;6,0",
+            1
+          ],
+          [
+            "4,0|4,8|0|3,0;3,1;3,5;6,1;6,7|0,3;1,2;1,4;2,1;6,0",
+            1
+          ],
+          [
+            "4,0|4,8|0|3,1;3,5;6,1;6,7|0,3;1,4;2,1;6,0",
+            1
+          ],
+          [
+            "4,0|4,8|0|3,1;6,1|0,3;1,4;2,1;6,0",
+            1
+          ],
+          [
+            "4,0|4,8|0|3,1;6,1|0,3;2,1",
+            1
+          ],
+          [
+            "4,0|4,8|0|6,1|0,3",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|1,7;3,0;3,1;3,5;5,3;6,1;6,7|0,3;1,0;1,2;1,4;2,1;4,0;4,2;6,0",
+            1
+          ],
+          [
+            "4,0|4,8|1|1,7;3,0;3,1;3,5;6,1;6,7|0,3;1,0;1,2;1,4;2,1;4,0;6,0",
+            1
+          ],
+          [
+            "4,0|4,8|1|3,0;3,1;3,5;6,1;6,7|0,3;1,0;1,2;1,4;2,1;6,0",
+            1
+          ],
+          [
+            "4,0|4,8|1|3,1;3,5;6,1;6,7|0,3;1,2;1,4;2,1;6,0",
+            1
+          ],
+          [
+            "4,0|4,8|1|3,1;6,1;6,7|0,3;1,4;2,1;6,0",
+            1
+          ],
+          [
+            "4,0|4,8|1|3,1;6,1|0,3;1,4;2,1",
+            1
+          ],
+          [
+            "4,0|4,8|1|6,1|",
+            1
+          ],
+          [
+            "4,0|4,8|1|6,1|0,3;2,1",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 16,
+        "remaining_total_ply": 184,
+        "walls": [
+          2,
+          2
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 55,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 56,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 29,
+      "pair_id": "continuation-pair-029",
+      "pool_index": 59,
+      "id": "holdout-proposal-59",
+      "platform": "browser",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "prefix_sha256": "52af4816ef0c8c445452725a4c453ed6fc75a67bb3e7b594e09cd32f150c5498",
+      "context_sha256": "448e93760de76ccedf6c63168000374d8e86dc3bbcfb9a9b39c590469c6734f8",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 3,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 3,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 0,
+          "orientation": "h"
+        }
+      ],
+      "rust_prefix": [
+        112,
+        110,
+        84,
+        177,
+        93,
+        158,
+        119,
+        117,
+        170,
+        165,
+        5,
+        186,
+        91,
+        156,
+        198,
+        87
+      ],
+      "context": {
+        "key": "5,0|4,8|0|2,1;3,0;4,1;4,4;5,3;6,0;6,4;7,3|0,4;1,3;1,5;3,1;4,2;5,1;5,6",
+        "history": [
+          [
+            "4,0|4,8|0|3,0;4,1;4,4;5,3;6,4;7,3|0,4;1,3;4,2;5,1",
+            1
+          ],
+          [
+            "4,0|4,8|0|3,0;4,1;4,4;5,3;6,4;7,3|0,4;5,1",
+            1
+          ],
+          [
+            "4,0|4,8|0|3,0;4,1;5,3;7,3|0,4;5,1",
+            1
+          ],
+          [
+            "4,0|4,8|0|3,0;5,3;7,3|0,4",
+            1
+          ],
+          [
+            "4,0|4,8|0|5,3;7,3|",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|3,0;4,1;4,4;5,3;6,4;7,3|0,4;1,3;5,1",
+            1
+          ],
+          [
+            "4,0|4,8|1|3,0;4,1;5,3;6,4;7,3|0,4;5,1",
+            1
+          ],
+          [
+            "4,0|4,8|1|3,0;4,1;5,3;7,3|0,4",
+            1
+          ],
+          [
+            "4,0|4,8|1|3,0;5,3;7,3|",
+            1
+          ],
+          [
+            "4,0|4,8|1|7,3|",
+            1
+          ],
+          [
+            "5,0|4,8|0|2,1;3,0;4,1;4,4;5,3;6,0;6,4;7,3|0,4;1,3;1,5;3,1;4,2;5,1;5,6",
+            1
+          ],
+          [
+            "5,0|4,8|0|2,1;3,0;4,1;4,4;5,3;6,4;7,3|0,4;1,3;1,5;3,1;4,2;5,1",
+            1
+          ],
+          [
+            "5,0|4,8|0|3,0;4,1;4,4;5,3;6,4;7,3|0,4;1,3;1,5;4,2;5,1",
+            1
+          ],
+          [
+            "5,0|4,8|1|2,1;3,0;4,1;4,4;5,3;6,4;7,3|0,4;1,3;1,5;3,1;4,2;5,1;5,6",
+            1
+          ],
+          [
+            "5,0|4,8|1|2,1;3,0;4,1;4,4;5,3;6,4;7,3|0,4;1,3;1,5;4,2;5,1",
+            1
+          ],
+          [
+            "5,0|4,8|1|3,0;4,1;4,4;5,3;6,4;7,3|0,4;1,3;4,2;5,1",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 16,
+        "remaining_total_ply": 184,
+        "walls": [
+          3,
+          2
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 57,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 58,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 30,
+      "pair_id": "continuation-pair-030",
+      "pool_index": 18,
+      "id": "holdout-proposal-18",
+      "platform": "browser",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "prefix_sha256": "fc742d05a8bc7b689643ad2c05d699d5d9b36b72e962de5a01cf43f14bcb0fc2",
+      "context_sha256": "e8579e267272b15cb631d85620ee0e77417c300709e6b9f5e524ba8b3fa745bb",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 0,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 6,
+          "orientation": "h"
+        }
+      ],
+      "rust_prefix": [
+        85,
+        198,
+        150,
+        202,
+        87,
+        187,
+        94,
+        129
+      ],
+      "context": {
+        "key": "4,0|4,8|0|0,6;4,0;5,1;6,0|1,7;2,5;5,0;5,6",
+        "history": [
+          [
+            "4,0|4,8|0|0,6;4,0;5,1;6,0|1,7;2,5;5,0;5,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|4,0;6,0|1,7;2,5;5,0;5,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|4,0|1,7;5,0;5,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|4,0|5,6",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|4,0;5,1;6,0|1,7;2,5;5,0;5,6",
+            1
+          ],
+          [
+            "4,0|4,8|1|4,0;6,0|1,7;5,0;5,6",
+            1
+          ],
+          [
+            "4,0|4,8|1|4,0|",
+            1
+          ],
+          [
+            "4,0|4,8|1|4,0|5,0;5,6",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 8,
+        "remaining_total_ply": 192,
+        "walls": [
+          6,
+          6
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 59,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 60,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 31,
+      "pair_id": "continuation-pair-031",
+      "pool_index": 50,
+      "id": "holdout-proposal-50",
+      "platform": "browser",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "prefix_sha256": "189fb84dcd09a0bbc2240bf9e36a26843752714a0644e96f87c8e3cb28a2f75d",
+      "context_sha256": "fc053b37970b6e65bb117381a55603183d9fcef51f4bc445d76cf623faed7bfe",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 5,
+          "orientation": "h"
+        }
+      ],
+      "rust_prefix": [
+        117,
+        103,
+        87,
+        200,
+        121,
+        204,
+        205,
+        135,
+        115,
+        180,
+        174,
+        177,
+        131,
+        176,
+        85,
+        126
+      ],
+      "context": {
+        "key": "4,0|4,8|0|0,5;2,4;2,6;4,0;4,4;5,5;6,0;6,2;6,6|0,4;3,4;3,7;4,7;5,3;7,3;7,6",
+        "history": [
+          [
+            "4,0|4,8|0|0,5;2,4;2,6;4,0;4,4;5,5;6,0;6,2;6,6|0,4;3,4;3,7;4,7;5,3;7,3;7,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,5;2,4;2,6;4,4;6,0;6,2;6,6|0,4;3,4;3,7;4,7;5,3;7,3;7,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,5;2,4;4,4;6,0;6,2;6,6|0,4;3,4;3,7;4,7;5,3;7,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,5;2,4;4,4;6,0;6,2;6,6|3,4;3,7;4,7;7,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,5;4,4;6,0;6,2;6,6|3,7;4,7;7,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,5;4,4;6,0;6,2|3,7;7,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|4,4;6,0;6,2|7,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|4,4;6,2|",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,5;2,4;2,6;4,0;4,4;6,0;6,2;6,6|0,4;3,4;3,7;4,7;5,3;7,3;7,6",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,5;2,4;2,6;4,4;6,0;6,2;6,6|0,4;3,4;3,7;4,7;5,3;7,6",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,5;2,4;4,4;6,0;6,2;6,6|3,4;3,7;4,7;5,3;7,6",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,5;2,4;4,4;6,0;6,2;6,6|3,7;4,7;7,6",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,5;4,4;6,0;6,2|3,7;4,7;7,6",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,5;4,4;6,0;6,2|7,6",
+            1
+          ],
+          [
+            "4,0|4,8|1|4,4;6,0;6,2|",
+            1
+          ],
+          [
+            "4,0|4,8|1|4,4|",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 16,
+        "remaining_total_ply": 184,
+        "walls": [
+          2,
+          2
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 61,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 62,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 32,
+      "pair_id": "continuation-pair-032",
+      "pool_index": 58,
+      "id": "holdout-proposal-58",
+      "platform": "browser",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "prefix_sha256": "bc2dc26a57695ab55cbac9241e8b33a69ec50bb5c69a4673a5ad11e83b94936a",
+      "context_sha256": "d8114deb90db71c6330a7c97db49e4adcdc8cd009a3a645d05f899abf2b0bcc7",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 3,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 4,
+          "orientation": "h"
+        }
+      ],
+      "rust_prefix": [
+        194,
+        97,
+        198,
+        126,
+        93,
+        120,
+        204,
+        115,
+        155,
+        201,
+        183,
+        106,
+        200,
+        143,
+        84,
+        117
+      ],
+      "context": {
+        "key": "4,0|4,8|0|0,2;1,3;2,4;3,0;4,1;4,4;5,5;6,7;7,4|0,7;1,6;2,1;3,7;5,6;6,4;7,6",
+        "history": [
+          [
+            "4,0|4,8|0|0,2;1,3;2,4;3,0;4,1;4,4;5,5;6,7;7,4|0,7;1,6;2,1;3,7;5,6;6,4;7,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,2;1,3;2,4;4,1;5,5;6,7;7,4|0,7;1,6;2,1;3,7;5,6;6,4;7,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,2;1,3;2,4;4,1;5,5;7,4|0,7;1,6;2,1;3,7;5,6;6,4",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,2;2,4;4,1;5,5;7,4|0,7;1,6;2,1;3,7;5,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,2;2,4;4,1;5,5;7,4|1,6;3,7;5,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,2;4,1;5,5;7,4|1,6;5,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,2;5,5|1,6;5,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,2|1,6",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,2;1,3;2,4;3,0;4,1;5,5;6,7;7,4|0,7;1,6;2,1;3,7;5,6;6,4;7,6",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,2;1,3;2,4;4,1;5,5;7,4|0,7;1,6;2,1;3,7;5,6;6,4;7,6",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,2;2,4;4,1;5,5;7,4|0,7;1,6;2,1;3,7;5,6;6,4",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,2;2,4;4,1;5,5;7,4|1,6;2,1;3,7;5,6",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,2;4,1;5,5;7,4|1,6;3,7;5,6",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,2;4,1;5,5|1,6;5,6",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,2|1,6;5,6",
+            1
+          ],
+          [
+            "4,0|4,8|1||1,6",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 16,
+        "remaining_total_ply": 184,
+        "walls": [
+          2,
+          2
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 63,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 64,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 33,
+      "pair_id": "continuation-pair-033",
+      "pool_index": 63,
+      "id": "holdout-proposal-63",
+      "platform": "browser",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "prefix_sha256": "e39cdd0c03f1e95a533ec51707de239ce8160bc434406a2573c1be372a693d98",
+      "context_sha256": "6b2bee6803687131f43728e35c5dae028b0de4ebda509616173ada452bad08cb",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 0,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 3,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 3,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 5,
+          "orientation": "h"
+        }
+      ],
+      "rust_prefix": [
+        204,
+        195,
+        99,
+        208,
+        101,
+        153,
+        133,
+        162,
+        152,
+        207,
+        193,
+        106,
+        110,
+        97,
+        177,
+        127
+      ],
+      "context": {
+        "key": "4,0|4,8|0|0,2;1,3;2,2;4,2;4,6;5,3;6,5|0,1;0,4;0,6;1,2;2,6;3,7;6,7;7,0;7,7",
+        "history": [
+          [
+            "4,0|4,8|0|0,2;1,3;2,2;4,2;4,6;5,3;6,5|0,1;0,4;0,6;1,2;2,6;3,7;6,7;7,0;7,7",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,2;1,3;2,2;4,2;4,6;5,3|0,1;0,6;1,2;2,6;3,7;6,7;7,0;7,7",
+            1
+          ],
+          [
+            "4,0|4,8|0|1,3;2,2;4,2;4,6|0,1;0,6;1,2;2,6;3,7;6,7;7,0;7,7",
+            1
+          ],
+          [
+            "4,0|4,8|0|2,2;4,2;4,6|0,1;1,2;2,6;3,7;6,7;7,0;7,7",
+            1
+          ],
+          [
+            "4,0|4,8|0|2,2;4,2;4,6|0,1;1,2;2,6;3,7;7,7",
+            1
+          ],
+          [
+            "4,0|4,8|0|2,2;4,2|0,1;2,6;3,7;7,7",
+            1
+          ],
+          [
+            "4,0|4,8|0|2,2|2,6;3,7;7,7",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|0||2,6;3,7",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,2;1,3;2,2;4,2;4,6;5,3|0,1;0,4;0,6;1,2;2,6;3,7;6,7;7,0;7,7",
+            1
+          ],
+          [
+            "4,0|4,8|1|1,3;2,2;4,2;4,6;5,3|0,1;0,6;1,2;2,6;3,7;6,7;7,0;7,7",
+            1
+          ],
+          [
+            "4,0|4,8|1|2,2;4,2;4,6|0,1;0,6;1,2;2,6;3,7;6,7;7,0;7,7",
+            1
+          ],
+          [
+            "4,0|4,8|1|2,2;4,2;4,6|0,1;1,2;2,6;3,7;7,0;7,7",
+            1
+          ],
+          [
+            "4,0|4,8|1|2,2;4,2;4,6|0,1;2,6;3,7;7,7",
+            1
+          ],
+          [
+            "4,0|4,8|1|2,2;4,2|2,6;3,7;7,7",
+            1
+          ],
+          [
+            "4,0|4,8|1|2,2|2,6;3,7",
+            1
+          ],
+          [
+            "4,0|4,8|1||3,7",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 16,
+        "remaining_total_ply": 184,
+        "walls": [
+          2,
+          2
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 65,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 66,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 34,
+      "pair_id": "continuation-pair-034",
+      "pool_index": 33,
+      "id": "holdout-proposal-33",
+      "platform": "browser",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "prefix_sha256": "6bc12412e5eb52047cd3904b9b3aeefba76cdf600abaf89dd121cc516ceb6e8d",
+      "context_sha256": "f3de8cee3e754da84e405700d0ff2b39db1b00284feec61516090966ae17b5c5",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 7,
+          "orientation": "v"
+        }
+      ],
+      "rust_prefix": [
+        91,
+        133,
+        13,
+        117,
+        88,
+        140,
+        201,
+        202,
+        167,
+        174,
+        169,
+        206
+      ],
+      "context": {
+        "key": "4,1|4,8|0|2,1;3,7;4,4;4,6;7,0|0,3;0,7;1,7;5,3;5,7;6,2",
+        "history": [
+          [
+            "4,0|4,8|0|2,1;4,6|",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|2,1|",
+            1
+          ],
+          [
+            "4,1|4,8|0|2,1;3,7;4,4;4,6;7,0|",
+            1
+          ],
+          [
+            "4,1|4,8|0|2,1;3,7;4,4;4,6;7,0|0,3;0,7;1,7;5,3;5,7;6,2",
+            1
+          ],
+          [
+            "4,1|4,8|0|2,1;3,7;4,4;4,6;7,0|0,7;1,7",
+            1
+          ],
+          [
+            "4,1|4,8|0|2,1;3,7;4,4;4,6;7,0|0,7;1,7;5,3;6,2",
+            1
+          ],
+          [
+            "4,1|4,8|0|2,1;4,4;4,6|",
+            1
+          ],
+          [
+            "4,1|4,8|1|2,1;3,7;4,4;4,6;7,0|0,3;0,7;1,7;5,3;6,2",
+            1
+          ],
+          [
+            "4,1|4,8|1|2,1;3,7;4,4;4,6;7,0|0,7",
+            1
+          ],
+          [
+            "4,1|4,8|1|2,1;3,7;4,4;4,6;7,0|0,7;1,7;6,2",
+            1
+          ],
+          [
+            "4,1|4,8|1|2,1;4,4;4,6;7,0|",
+            1
+          ],
+          [
+            "4,1|4,8|1|2,1;4,6|",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 12,
+        "remaining_total_ply": 188,
+        "walls": [
+          5,
+          4
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 67,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 68,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 35,
+      "pair_id": "continuation-pair-035",
+      "pool_index": 37,
+      "id": "holdout-proposal-37",
+      "platform": "browser",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "prefix_sha256": "cfeb197250d23fa0ed5059c7ae2ef895ba88684d68b4205c6a9ef478ef9b9a2b",
+      "context_sha256": "7fd2aa6e172a1765a211600f80be101299af942ddad62698a755231136a478d3",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 3,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 3,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 5,
+          "orientation": "h"
+        }
+      ],
+      "rust_prefix": [
+        135,
+        108,
+        119,
+        166,
+        201,
+        185,
+        163,
+        124,
+        139,
+        129,
+        105,
+        122
+      ],
+      "context": {
+        "key": "4,0|4,8|0|0,3;0,6;1,5;2,7;3,3;3,5;6,4;6,6|0,5;0,7;2,2;5,2",
+        "history": [
+          [
+            "4,0|4,8|0|0,3;0,6;1,5;2,7;3,3;3,5;6,4;6,6|0,5;0,7;2,2;5,2",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,6;2,7;3,3;3,5;6,4;6,6|0,5;0,7;2,2;5,2",
+            1
+          ],
+          [
+            "4,0|4,8|0|3,3;3,5;6,4;6,6|0,5;0,7;2,2;5,2",
+            1
+          ],
+          [
+            "4,0|4,8|0|3,3;6,4;6,6|0,5;0,7;5,2",
+            1
+          ],
+          [
+            "4,0|4,8|0|3,3;6,4;6,6|5,2",
+            1
+          ],
+          [
+            "4,0|4,8|0|3,3;6,6|",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,3;0,6;2,7;3,3;3,5;6,4;6,6|0,5;0,7;2,2;5,2",
+            1
+          ],
+          [
+            "4,0|4,8|1|2,7;3,3;3,5;6,4;6,6|0,5;0,7;2,2;5,2",
+            1
+          ],
+          [
+            "4,0|4,8|1|3,3;6,4;6,6|",
+            1
+          ],
+          [
+            "4,0|4,8|1|3,3;6,4;6,6|0,5;0,7;2,2;5,2",
+            1
+          ],
+          [
+            "4,0|4,8|1|3,3;6,4;6,6|0,7;5,2",
+            1
+          ],
+          [
+            "4,0|4,8|1|6,6|",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 12,
+        "remaining_total_ply": 188,
+        "walls": [
+          4,
+          4
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 69,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 70,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 36,
+      "pair_id": "continuation-pair-036",
+      "pool_index": 15,
+      "id": "holdout-proposal-15",
+      "platform": "browser",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "prefix_sha256": "6a47c1491fb03026fc41463db47b21cf6465cf5db0e93bf877fe9929904defe0",
+      "context_sha256": "afb512fdcc0fb528490ff1dbc041d4a868f3a5294d20084267fd15e24dd9b033",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 2,
+          "orientation": "v"
+        }
+      ],
+      "rust_prefix": [
+        188,
+        207,
+        119,
+        161
+      ],
+      "context": {
+        "key": "4,0|4,8|0|6,4|0,2;3,5;6,7",
+        "history": [
+          [
+            "4,0|4,8|0|6,4|0,2;3,5;6,7",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|0||3,5;6,7",
+            1
+          ],
+          [
+            "4,0|4,8|1|6,4|3,5;6,7",
+            1
+          ],
+          [
+            "4,0|4,8|1||3,5",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 4,
+        "remaining_total_ply": 196,
+        "walls": [
+          8,
+          8
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 71,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 72,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 37,
+      "pair_id": "continuation-pair-037",
+      "pool_index": 54,
+      "id": "holdout-proposal-54",
+      "platform": "browser",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "prefix_sha256": "a7d4a696f14bd1632cf45f86ad02be51a8c8ee97103d53ebc62410452e1240dc",
+      "context_sha256": "cbf6b4977ea898dc252c11aefb73f76c482effb7fbf8d8bda714e9e0009cf194",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 0,
+          "orientation": "h"
+        }
+      ],
+      "rust_prefix": [
+        207,
+        103,
+        125,
+        90,
+        113,
+        140,
+        156,
+        81,
+        13,
+        159,
+        184,
+        173,
+        172,
+        206,
+        96,
+        83
+      ],
+      "context": {
+        "key": "4,1|4,8|0|0,0;0,4;1,1;2,0;3,7;4,5;6,2;7,1|3,1;3,3;4,3;5,7;6,1;6,7;7,4",
+        "history": [
+          [
+            "4,0|4,8|0|0,0;0,4;1,1;3,7;4,5;6,2|3,1;6,7",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,4;1,1;3,7;4,5;6,2|6,7",
+            1
+          ],
+          [
+            "4,0|4,8|0|1,1;4,5;6,2|6,7",
+            1
+          ],
+          [
+            "4,0|4,8|0|6,2|6,7",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,4;1,1;3,7;4,5;6,2|3,1;6,7",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,4;1,1;4,5;6,2|6,7",
+            1
+          ],
+          [
+            "4,0|4,8|1|4,5;6,2|6,7",
+            1
+          ],
+          [
+            "4,0|4,8|1||6,7",
+            1
+          ],
+          [
+            "4,1|4,8|0|0,0;0,4;1,1;2,0;3,7;4,5;6,2;7,1|3,1;3,3;4,3;5,7;6,1;6,7;7,4",
+            1
+          ],
+          [
+            "4,1|4,8|0|0,0;0,4;1,1;3,7;4,5;6,2|3,1;3,3;4,3;5,7;6,1;6,7;7,4",
+            1
+          ],
+          [
+            "4,1|4,8|0|0,0;0,4;1,1;3,7;4,5;6,2|3,1;4,3;6,1;6,7;7,4",
+            1
+          ],
+          [
+            "4,1|4,8|0|0,0;0,4;1,1;3,7;4,5;6,2|3,1;6,1;6,7",
+            1
+          ],
+          [
+            "4,1|4,8|1|0,0;0,4;1,1;3,7;4,5;6,2;7,1|3,1;3,3;4,3;5,7;6,1;6,7;7,4",
+            1
+          ],
+          [
+            "4,1|4,8|1|0,0;0,4;1,1;3,7;4,5;6,2|3,1;3,3;4,3;6,1;6,7;7,4",
+            1
+          ],
+          [
+            "4,1|4,8|1|0,0;0,4;1,1;3,7;4,5;6,2|3,1;6,1;6,7;7,4",
+            1
+          ],
+          [
+            "4,1|4,8|1|0,0;0,4;1,1;3,7;4,5;6,2|3,1;6,7",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 16,
+        "remaining_total_ply": 184,
+        "walls": [
+          3,
+          2
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 73,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 74,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 38,
+      "pair_id": "continuation-pair-038",
+      "pool_index": 61,
+      "id": "holdout-proposal-61",
+      "platform": "browser",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "prefix_sha256": "cb685e2f50ba867e30856883a1c8e748ae4064a69343a92a9adcf3c35da65554",
+      "context_sha256": "ccb71b359d6d6c7d6feac2f8533eff06051dbc785d710793cbe95b091463caa8",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 0,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 0,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 3,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 0,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 7,
+          "orientation": "h"
+        }
+      ],
+      "rust_prefix": [
+        116,
+        194,
+        176,
+        104,
+        90,
+        88,
+        150,
+        149,
+        188,
+        106,
+        148,
+        102,
+        133,
+        127,
+        96,
+        138
+      ],
+      "context": {
+        "key": "4,0|4,8|0|1,1;1,3;1,7;3,4;4,6;5,2;6,5;7,0;7,1;7,2|1,6;3,0;3,5;4,0;5,0;7,3",
+        "history": [
+          [
+            "4,0|4,8|0|1,1;1,3;1,7;3,4;4,6;5,2;6,5;7,0;7,1;7,2|1,6;3,0;3,5;4,0;5,0;7,3",
+            1
+          ],
+          [
+            "4,0|4,8|0|1,1;1,3;3,4;4,6;5,2;6,5;7,0;7,2|1,6;3,0;3,5;4,0;5,0;7,3",
+            1
+          ],
+          [
+            "4,0|4,8|0|1,1;1,3;3,4;5,2;7,0;7,2|1,6;3,0;3,5;4,0;5,0;7,3",
+            1
+          ],
+          [
+            "4,0|4,8|0|1,1;1,3;3,4;7,0;7,2|1,6;3,5;4,0;5,0;7,3",
+            1
+          ],
+          [
+            "4,0|4,8|0|1,1;3,4;7,0;7,2|1,6;4,0;5,0;7,3",
+            1
+          ],
+          [
+            "4,0|4,8|0|1,1;3,4;7,0;7,2|1,6;7,3",
+            1
+          ],
+          [
+            "4,0|4,8|0|3,4;7,2|1,6;7,3",
+            1
+          ],
+          [
+            "4,0|4,8|0|3,4|1,6",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|1,1;1,3;3,4;4,6;5,2;6,5;7,0;7,1;7,2|1,6;3,0;3,5;4,0;5,0;7,3",
+            1
+          ],
+          [
+            "4,0|4,8|1|1,1;1,3;3,4;4,6;5,2;7,0;7,2|1,6;3,0;3,5;4,0;5,0;7,3",
+            1
+          ],
+          [
+            "4,0|4,8|1|1,1;1,3;3,4;7,0;7,2|1,6;3,0;3,5;4,0;5,0;7,3",
+            1
+          ],
+          [
+            "4,0|4,8|1|1,1;3,4;7,0;7,2|1,6;3,5;4,0;5,0;7,3",
+            1
+          ],
+          [
+            "4,0|4,8|1|1,1;3,4;7,0;7,2|1,6;5,0;7,3",
+            1
+          ],
+          [
+            "4,0|4,8|1|1,1;3,4;7,2|1,6;7,3",
+            1
+          ],
+          [
+            "4,0|4,8|1|3,4|",
+            1
+          ],
+          [
+            "4,0|4,8|1|3,4|1,6;7,3",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 16,
+        "remaining_total_ply": 184,
+        "walls": [
+          2,
+          2
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 75,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 76,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 39,
+      "pair_id": "continuation-pair-039",
+      "pool_index": 45,
+      "id": "holdout-proposal-45",
+      "platform": "browser",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "prefix_sha256": "1cb1776859261bdaf21cce0cb8f2ad95aac0090334ed79598e4072ca02636758",
+      "context_sha256": "5e9e17600f450e42091d9c8f29a00988668bf906963b2d266a3296fffe989fc5",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 3,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 0,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 0,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 7,
+          "orientation": "h"
+        }
+      ],
+      "rust_prefix": [
+        105,
+        92,
+        146,
+        167,
+        161,
+        145,
+        192,
+        141,
+        88,
+        157,
+        185,
+        144
+      ],
+      "context": {
+        "key": "4,0|4,8|0|0,3;3,1;4,7;7,0;7,7|0,0;0,2;0,5;1,0;4,1;6,2;7,5",
+        "history": [
+          [
+            "4,0|4,8|0|0,3;3,1;4,7;7,0;7,7|0,0;0,2;0,5;1,0;4,1;6,2;7,5",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,3;3,1;4,7;7,0|0,0;0,2;1,0;4,1;6,2;7,5",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,3;3,1;4,7|0,0;0,2;1,0;6,2;7,5",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,3;3,1|",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,3;3,1|0,0;0,2;1,0;6,2",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,3;3,1|1,0;6,2",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,3;3,1;4,7;7,0|0,0;0,2;0,5;1,0;4,1;6,2;7,5",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,3;3,1;4,7;7,0|0,0;0,2;1,0;6,2;7,5",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,3;3,1|0,0;0,2;1,0;6,2;7,5",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,3;3,1|0,2;1,0;6,2",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,3;3,1|1,0",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,3|",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 12,
+        "remaining_total_ply": 188,
+        "walls": [
+          4,
+          4
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 77,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 78,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 40,
+      "pair_id": "continuation-pair-040",
+      "pool_index": 13,
+      "id": "holdout-proposal-13",
+      "platform": "browser",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "prefix_sha256": "2efa5d903af5b98a95b3f2a3edf6ba3fb96d013947835d43eaad395a8ca8daf1",
+      "context_sha256": "40d3bbf82d87b9daa41a90b1ec878a39e0a9f466ce3c42bba2077338a1fe17c1",
+      "legal_prefix": [
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 0,
+          "orientation": "h"
+        }
+      ],
+      "rust_prefix": [
+        5,
+        161,
+        132,
+        87
+      ],
+      "context": {
+        "key": "5,0|4,8|0|3,6;6,0|0,2",
+        "history": [
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "5,0|4,8|0|3,6;6,0|0,2",
+            1
+          ],
+          [
+            "5,0|4,8|0||0,2",
+            1
+          ],
+          [
+            "5,0|4,8|1|3,6|0,2",
+            1
+          ],
+          [
+            "5,0|4,8|1||",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 4,
+        "remaining_total_ply": 196,
+        "walls": [
+          9,
+          8
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 79,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 80,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 41,
+      "pair_id": "continuation-pair-041",
+      "pool_index": 17,
+      "id": "holdout-proposal-17",
+      "platform": "browser",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "prefix_sha256": "ae57c5a1eb7ec78a86d40f17dea4c416a31df2a941d87ec45a8237c093387a62",
+      "context_sha256": "5ea6c6cd67ae6822feec18fa9f18a99e97ac59b9ce0944dca66ec450f748ed0d",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 7,
+          "orientation": "h"
+        }
+      ],
+      "rust_prefix": [
+        178,
+        123,
+        93,
+        118,
+        176,
+        188,
+        90,
+        138
+      ],
+      "context": {
+        "key": "4,0|4,8|0|1,1;1,7;2,5;4,1;5,4|1,4;3,5;7,3",
+        "history": [
+          [
+            "4,0|4,8|0|1,1;1,7;2,5;4,1;5,4|1,4;3,5;7,3",
+            1
+          ],
+          [
+            "4,0|4,8|0|2,5;4,1;5,4|1,4",
+            1
+          ],
+          [
+            "4,0|4,8|0|2,5;4,1;5,4|1,4;3,5;7,3",
+            1
+          ],
+          [
+            "4,0|4,8|0|2,5|1,4",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|1,1;2,5;4,1;5,4|1,4;3,5;7,3",
+            1
+          ],
+          [
+            "4,0|4,8|1|2,5;4,1;5,4|1,4;7,3",
+            1
+          ],
+          [
+            "4,0|4,8|1|2,5;4,1|1,4",
+            1
+          ],
+          [
+            "4,0|4,8|1||1,4",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 8,
+        "remaining_total_ply": 192,
+        "walls": [
+          6,
+          6
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 81,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 82,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 42,
+      "pair_id": "continuation-pair-042",
+      "pool_index": 29,
+      "id": "holdout-proposal-29",
+      "platform": "browser",
+      "candidate_color_order": [
+        2,
+        1
+      ],
+      "prefix_sha256": "c80348c0da93c0d95d162c7f004b2ccfa586becbaf76770f740da204422e50c2",
+      "context_sha256": "0eb7ab056a58aea12d40a68301c7e7ebc10db192553885c02ae143a608c386ab",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 0,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 6,
+          "orientation": "v"
+        }
+      ],
+      "rust_prefix": [
+        151,
+        85,
+        83,
+        81,
+        104,
+        97,
+        131,
+        199
+      ],
+      "context": {
+        "key": "4,0|4,8|0|0,0;0,2;2,0;2,6;4,0;7,2|6,0;6,6",
+        "history": [
+          [
+            "4,0|4,8|0|0,0;0,2;2,0;2,6;4,0;7,2|6,0;6,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,0;0,2;2,0;4,0;7,2|6,0",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,0;2,0;4,0|6,0",
+            1
+          ],
+          [
+            "4,0|4,8|0|4,0|6,0",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,0;0,2;2,0;2,6;4,0;7,2|6,0",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,0;2,0;4,0;7,2|6,0",
+            1
+          ],
+          [
+            "4,0|4,8|1|2,0;4,0|6,0",
+            1
+          ],
+          [
+            "4,0|4,8|1||6,0",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 8,
+        "remaining_total_ply": 192,
+        "walls": [
+          6,
+          6
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 83,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 84,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 43,
+      "pair_id": "continuation-pair-043",
+      "pool_index": 10,
+      "id": "holdout-proposal-10",
+      "platform": "browser",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "prefix_sha256": "ad674155afe7613b60b3a86ca34ade03ce80f75c397f1ee8efd900b5489faddf",
+      "context_sha256": "8e617f243633bd209f9e41d619df6a258bea76189118c1f9b548428ed9c74b58",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 0,
+          "orientation": "v"
+        }
+      ],
+      "rust_prefix": [
+        160,
+        125,
+        158,
+        145
+      ],
+      "context": {
+        "key": "4,0|4,8|0|4,5|0,0;5,1;7,1",
+        "history": [
+          [
+            "4,0|4,8|0|4,5|0,0;5,1;7,1",
+            1
+          ],
+          [
+            "4,0|4,8|0|4,5|7,1",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|4,5|5,1;7,1",
+            1
+          ],
+          [
+            "4,0|4,8|1||7,1",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 4,
+        "remaining_total_ply": 196,
+        "walls": [
+          8,
+          8
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 85,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 86,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 44,
+      "pair_id": "continuation-pair-044",
+      "pool_index": 26,
+      "id": "holdout-proposal-26",
+      "platform": "browser",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "prefix_sha256": "c76ff51128567dbfc5b0af72374b04bc75f5cb6cc8e61d0fb1a9a8d026b6023e",
+      "context_sha256": "a3f15d193d36450694eb27e73efe1a5cf34668ac398737ce0f2d0d2fc10d2337",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 3,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 3,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 2,
+          "orientation": "v"
+        }
+      ],
+      "rust_prefix": [
+        107,
+        102,
+        139,
+        137,
+        111,
+        88,
+        95,
+        163
+      ],
+      "context": {
+        "key": "4,0|4,8|0|0,7;2,3;2,7;5,2;6,1;6,3;7,0|2,2",
+        "history": [
+          [
+            "4,0|4,8|0|0,7;2,3;2,7;5,2;6,1;6,3;7,0|2,2",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,7;2,3;2,7;5,2;6,3;7,0|",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,7;2,3;2,7;5,2|",
+            1
+          ],
+          [
+            "4,0|4,8|0|2,3;5,2|",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,7;2,3;2,7;5,2;6,1;6,3;7,0|",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,7;2,3;2,7;5,2;6,3|",
+            1
+          ],
+          [
+            "4,0|4,8|1|2,3;2,7;5,2|",
+            1
+          ],
+          [
+            "4,0|4,8|1|2,3|",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 8,
+        "remaining_total_ply": 192,
+        "walls": [
+          6,
+          6
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 87,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 88,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 45,
+      "pair_id": "continuation-pair-045",
+      "pool_index": 7,
+      "id": "holdout-proposal-07",
+      "platform": "browser",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "prefix_sha256": "2b156e4d85fd3343191ac2f79705470fe5192fc1e2b9e3bb74dc74408fdb03f9",
+      "context_sha256": "eeff1c769e7baa5ad4e3dc109fa296c81a560be744c257b7eaa25bf501691d0d",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 6,
+          "orientation": "v"
+        }
+      ],
+      "rust_prefix": [
+        156,
+        85,
+        207,
+        195
+      ],
+      "context": {
+        "key": "4,0|4,8|0|4,0|2,6;3,1;6,7",
+        "history": [
+          [
+            "4,0|4,8|0|4,0|2,6;3,1;6,7",
+            1
+          ],
+          [
+            "4,0|4,8|0|4,0|3,1",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|4,0|3,1;6,7",
+            1
+          ],
+          [
+            "4,0|4,8|1||3,1",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 4,
+        "remaining_total_ply": 196,
+        "walls": [
+          8,
+          8
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 89,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 90,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 46,
+      "pair_id": "continuation-pair-046",
+      "pool_index": 9,
+      "id": "holdout-proposal-09",
+      "platform": "browser",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "prefix_sha256": "118fcf44cfcfd39226db62f9098418b74d073076efe24677e7ab51d91f05adef",
+      "context_sha256": "6ba423c8ba8f424a0d97455e7c8505ce4ef5ee46a00dbc726205a6f72ef354ac",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 6,
+          "orientation": "h"
+        }
+      ],
+      "rust_prefix": [
+        200,
+        175,
+        164,
+        132
+      ],
+      "context": {
+        "key": "4,0|4,8|0|3,6|3,2;6,3;7,6",
+        "history": [
+          [
+            "4,0|4,8|0|3,6|3,2;6,3;7,6",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|0||6,3;7,6",
+            1
+          ],
+          [
+            "4,0|4,8|1||3,2;6,3;7,6",
+            1
+          ],
+          [
+            "4,0|4,8|1||7,6",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 4,
+        "remaining_total_ply": 196,
+        "walls": [
+          8,
+          8
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 91,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 92,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 47,
+      "pair_id": "continuation-pair-047",
+      "pool_index": 2,
+      "id": "holdout-proposal-02",
+      "platform": "browser",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "prefix_sha256": "98b26699bb968f2c8d087860f03b24418659e5019f72ab933660afbfdfc2144a",
+      "context_sha256": "c9ff05f03cb0efec2f57c11760871f2a2bbf7f5ed69d3b088f136172e76bb757",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 7,
+          "orientation": "h"
+        }
+      ],
+      "rust_prefix": [
+        205,
+        144,
+        125,
+        142
+      ],
+      "context": {
+        "key": "4,0|4,8|0|4,5;5,7;7,7|4,7",
+        "history": [
+          [
+            "4,0|4,8|0|4,5;5,7;7,7|4,7",
+            1
+          ],
+          [
+            "4,0|4,8|0|7,7|4,7",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|4,5;7,7|4,7",
+            1
+          ],
+          [
+            "4,0|4,8|1||4,7",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 4,
+        "remaining_total_ply": 196,
+        "walls": [
+          8,
+          8
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 93,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 94,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    },
+    {
+      "pair": 48,
+      "pair_id": "continuation-pair-048",
+      "pool_index": 16,
+      "id": "holdout-proposal-16",
+      "platform": "browser",
+      "candidate_color_order": [
+        1,
+        2
+      ],
+      "prefix_sha256": "f72d0b8096496865d3b1d1627d06b270419831aba3f6830391ab840733af995d",
+      "context_sha256": "2fef0108730e388b92b74c7b8fcd1d5d39de1a7b0b1c7e011447900e050736b2",
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 6,
+          "orientation": "v"
+        }
+      ],
+      "rust_prefix": [
+        177,
+        118,
+        200,
+        116,
+        89,
+        81,
+        100,
+        196
+      ],
+      "context": {
+        "key": "4,0|4,8|0|0,0;0,1;3,2;3,4;5,4|0,4;3,6;7,6",
+        "history": [
+          [
+            "4,0|4,8|0|0,0;0,1;3,2;3,4;5,4|0,4;3,6;7,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,0;0,1;3,4;5,4|0,4;7,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|3,4;5,4|0,4;7,6",
+            1
+          ],
+          [
+            "4,0|4,8|0|5,4|0,4",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,0;0,1;3,2;3,4;5,4|0,4;7,6",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,1;3,4;5,4|0,4;7,6",
+            1
+          ],
+          [
+            "4,0|4,8|1|5,4|0,4;7,6",
+            1
+          ],
+          [
+            "4,0|4,8|1||0,4",
+            1
+          ]
+        ],
+        "turn": 1,
+        "total_ply": 8,
+        "remaining_total_ply": 192,
+        "walls": [
+          6,
+          6
+        ],
+        "terminal": null
+      },
+      "games": [
+        {
+          "game": 95,
+          "candidate_color": 1,
+          "reference_color": 2,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        },
+        {
+          "game": 96,
+          "candidate_color": 2,
+          "reference_color": 1,
+          "seed": 1979,
+          "attempt": 0,
+          "status": "scheduled-unexecuted"
+        }
+      ]
+    }
+  ],
+  "old32": {
+    "selected_indices": [
+      10,
+      6,
+      45,
+      39,
+      42,
+      43,
+      33,
+      12,
+      32,
+      27
+    ],
+    "real_games": 0,
+    "unused": "initial-results and coordinator .32 handoff, not universal host audit",
+    "selected_here": [
+      10,
+      6,
+      45,
+      42,
+      33,
+      12,
+      32,
+      27
+    ],
+    "if_any_prior_real_send_found": "entire plan invalid; no replacement or post-selection pruning"
+  },
+  "T_ms": 500,
+  "search_seed": 1979,
+  "candidate": {
+    "entry45_manifest_sha256": "f1ced3e1a58f9fb1235b3718aa407726914e7d9a894ff231672521a9e74e0f1b",
+    "source45_hashlist_sha256": "5cd28260b57ef3c629fc7454e3ff439ab24264c6a2e73658f120ca834eb14e02",
+    "Wasm_sha256": "1f54d0b8f0c6d3d7d51935886ed506e44376a2052506be62ca7a726c85a78a01",
+    "PUCT": 1.5,
+    "Q0": 0,
+    "simulations": 4096,
+    "max_nodes": 512,
+    "max_depth": 24,
+    "step": 1,
+    "legal_order_tie_finish": "frozen .45, unchanged",
+    "backend": "ORT-Web1.21.0/WASM/numThreads1/proxyfalse",
+    "fallback": 0,
+    "root_value": "root NN side-to-move value",
+    "edge_visits": "simulations-1",
+    "root_value_denominator": "distinct from reference"
+  },
+  "reference": {
+    "commit": "751186344fc52ad0c29bc65922e62c6fa915f006",
+    "game_sha256": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+    "cpuct": 1,
+    "FPU": 0.2,
+    "temp": 0,
+    "root_expansion": "outside sim loop; counted in elapsed/NN",
+    "order": "first legal order",
+    "fallback": 0,
+    "simulations": 100000,
+    "max_nodes": null,
+    "max_depth": null,
+    "root_value": "root qValue",
+    "root_visits": "simulations+1",
+    "edge_visits": "simulations",
+    "receiver_reselection": false
+  },
+  "model": {
+    "sha256": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+    "bytes": 11663428,
+    "distribution_terms": "unresolved; local research only"
+  },
+  "rules": {
+    "name": "Sigma research RuleA",
+    "total_ply": 200,
+    "prefix_included": true,
+    "goal_priority": true,
+    "third_repeat_pawn_move_forbidden": true,
+    "no_legal": "draw",
+    "product_standard_unchanged": true
+  },
+  "scoring": {
+    "win": 1,
+    "draw": 0.5,
+    "loss": 0,
+    "pair_Xi": "mean both engine colors",
+    "planned_m": 48,
+    "mean": "only completed valid pairs; incomplete separately",
+    "L": "max(0,meanXi-sqrt(log(20)/(2*48))) only if all48 valid complete",
+    "width": 0.17665091145020284,
+    "formal_NI": false,
+    "goal_attainment": false,
+    "old_results_pooling": false,
+    "goal_tolerance": 0.05,
+    "native_condition": "unproven separate task"
+  },
+  "responsibility": {
+    "candidate_NN_hash_fallback_illegal_deadline_noresponse_late_crash": "candidate loss in denominator",
+    "reference_timeout_noresponse_late_crash_illegal": "reference loss in denominator",
+    "reference_NN_model_fault_only": "invalid whole pair",
+    "shared_referee_identity_infra": "invalid whole pair, separately tagged",
+    "user_pause_signal_global_stop": "stop incomplete; no invented outcome",
+    "preseal_cancel": "public discard, cancellation due pause stops incomplete; engine cancellation failure otherwise classified",
+    "postseal_fault": "immutable published result unchanged; private fault requires stopped proof before next request"
+  },
+  "retry": {
+    "pair_max": 1,
+    "global_max": 2,
+    "same_prefix_seed_engine_versions": true,
+    "whole_pair": true,
+    "no_replacement": true,
+    "all_attempts_and_invalid_kept": true,
+    "exhaustion": "stop incomplete",
+    "outcome_based_stop": false
+  },
+  "clock_requirements": {
+    "T_ms": 500,
+    "reserve_ms": 89,
+    "commit_margin_ms": 9,
+    "commit_cutoff_ms": 402,
+    "seal_ms": 411,
+    "t0": "immutable next input availability; conservatively previous public stamp; all residual work/reload/referee/logging included",
+    "t1": "post validation/formatting/encoding stamp",
+    "startup": "initial common ready/load/warm/reclock before first holdout; charged wall/RSS",
+    "preseal_received_fault_cancel": "discard all",
+    "postseal_received_fault": "published unchanged",
+    "missing_completed_snapshot": "NO_COMPLETED_SNAPSHOT/null/false",
+    "scheduling_late": "discard no rescue"
+  },
+  "run_budget": {
+    "thinking_s": 9600,
+    "startup_s": 400,
+    "retry_s": 1200,
+    "save_s": 600,
+    "total_minimum_s": 11800,
+    "stop_reserve_s": 1.5,
+    "match_stop_UTC": "2026-10-02T00:30:00Z",
+    "save_stop_UTC": "2026-10-02T00:50:00Z",
+    "supervisor_stop_UTC": "2026-10-02T00:55:00Z",
+    "global_stop_UTC": "2026-10-02T01:00:00Z",
+    "latest_start_UTC": "2026-10-01T21:13:18.500Z",
+    "minimum_only_not_tail_guarantee": true
+  },
+  "runtime_requirements": {
+    "CPU": 2,
+    "logical_cpus": 1,
+    "NN_threads_each": 1,
+    "parallel_games": 0,
+    "pondering": 0,
+    "GPU": 0,
+    "team_RAM_GiB": 8,
+    "heavy_team_jobs_stopped": true,
+    "background_scheduler": "do not stop; observe load/SMT and limits",
+    "combined_engine_load_RSS": "independent gate required"
+  },
+  "pre_run_gates": [
+    {
+      "id": "critic66-frozen-caller",
+      "status": "pending/not accepted"
+    },
+    {
+      "id": "independent-new96-real-entry",
+      "status": "pending/not accepted"
+    },
+    {
+      "id": "arbitrary-prefix-producer-echo",
+      "status": "pending/not accepted"
+    },
+    {
+      "id": "clock-watchdog-real-pause",
+      "status": "pending/not accepted"
+    },
+    {
+      "id": "owned-final-cleanup",
+      "status": "pending/not accepted"
+    },
+    {
+      "id": "combined-RSS-singleCPU",
+      "status": "pending/not accepted"
+    },
+    {
+      "id": "coordinator-final-freeze",
+      "status": "pending/not accepted"
+    },
+    {
+      "id": "minimum-remaining11801.5",
+      "status": "pending/not accepted"
+    },
+    {
+      "id": "unused-prefix-documentary-audit",
+      "status": "pending/not accepted"
+    }
+  ],
+  "training_overlap": "unknown; not audited against all prior training",
+  "real_NN_browser_binary_build_games_holdout_sends": 0,
+  "entry_ready": false,
+  "old48_pristine_sha256": "05cf461e23998e7e230c05b280a16f4105723cd1b5d4604f28f5374272961002",
+  "clock": {
+    "T_ms": 500,
+    "reserve_ms": 89,
+    "commit_margin_ms": 9,
+    "commit_cutoff_ms": 402,
+    "seal_ms": 411,
+    "t0": "immutable next input availability; conservatively previous public stamp; all residual work/reload/referee/logging included",
+    "t1": "post validation/formatting/encoding stamp",
+    "startup": "initial common ready/load/warm/reclock before first holdout; charged wall/RSS",
+    "preseal_received_fault_cancel": "discard all",
+    "postseal_received_fault": "published unchanged",
+    "missing_completed_snapshot": "NO_COMPLETED_SNAPSHOT/null/false",
+    "scheduling_late": "discard no rescue"
+  },
+  "source65": {
+    "revision": 3,
+    "source_frozen_sha256": "b66988de59787c3b955d54fe15a894887b237b7430ceae1710db827880a698b1",
+    "manifest_sha256": "8778edbf1638772b072b0b9deb5bf07b7dad61c2fe8982987c5ceec5a56e5132",
+    "critic66_acceptance": "pending; not presumed",
+    "real_backend_connected": false,
+    "arbitrary_prefix_runtime": "unverified",
+    "entry_watchdog_runtime": "unverified"
+  },
+  "unused_documentary": {
+    "basis": "old48 pool64 minus first sent8, old32 real0; no universal host send/training audit",
+    "counterevidence": "entire plan invalid; no replacement",
+    "unknown_training_overlap": true
+  }
+}

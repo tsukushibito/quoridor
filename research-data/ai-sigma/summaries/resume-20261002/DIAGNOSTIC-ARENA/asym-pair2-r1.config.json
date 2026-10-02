@@ -1,0 +1,46 @@
+{
+  "issue": "quoridor-4lc.93",
+  "run_kind": "exploratory-diagnostic",
+  "diagnostic": true,
+  "actual_go": false,
+  "holdout": false,
+  "run_id": "asym-pair2-r1",
+  "stage": "pair",
+  "fixture_id": "asym-hv-p2",
+  "prefix_sha256": "408cd978855e0ffa316b779d01d5aa4b2c84a73f7f5be3d9112753d1ad2a6112",
+  "games_before": 2,
+  "candidate_color_order": [
+    1,
+    2
+  ],
+  "seed": 1979,
+  "model_sha256": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+  "affinity": [
+    2
+  ],
+  "NNthreads": 1,
+  "clock": {
+    "T": 500,
+    "reserve": 89,
+    "commit": 9,
+    "cutoff": 402,
+    "seal": 411
+  },
+  "processing_deadline": "2026-10-02T02:55:19Z",
+  "startup_root_NN_per_session": 6,
+  "clock_accounting": "next t0 after previous owned stopACK; cause t0 through stopACK retained",
+  "runtime_seconds_cap": 2400,
+  "run_seconds_cap": 600,
+  "RAM": 4294967296,
+  "RSSguard": 3758096384,
+  "storageguard": 117440512,
+  "planned_order": [
+    "golden2",
+    "four-ply4",
+    "initial pair colors1,2",
+    "optional up to8 games; each extension preregistered"
+  ],
+  "git": "9496cae",
+  "planned_games": 2,
+  "pair": 2
+}
