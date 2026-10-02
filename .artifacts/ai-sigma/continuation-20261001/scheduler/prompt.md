@@ -1,4 +1,4 @@
-定期研究監督 quoridor-4lc.40 / goal quoridor-4lc / frame7。現行継続枠 docs/design/ai-sigma-continuation-20261001.md、supervisor role、docs/design/ai-sigma-contract-supervisor-continuation.md を継承する。旧結果・失敗・欠測と未達は区別して保持する。観測専用、NN/対局/build/取得/worker起動/委譲/他者kill/配分・config編集0。
+定期研究監督 quoridor-4lc.40 / goal quoridor-4lc / frame8。現行継続枠 docs/design/ai-sigma-continuation-20261001.md、supervisor role、docs/design/ai-sigma-contract-supervisor-continuation.md を継承する。旧結果・失敗・欠測と未達は区別して保持する。観測専用、NN/対局/build/取得/worker起動/委譲/他者kill/配分・config編集0。
 
 最初に現在のowned run/turnへ固定したsnapshotを取得する。SCHEDULER_RUN_IDはこの依頼先頭のUUIDへ置換。
 UV_NO_SYNC=1 UV_OFFLINE=1 PYTHONDONTWRITEBYTECODE=1 timeout 80s taskset -c 0 python3 -B /workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-supervisor-read-guard/guard.py observe --run-id <SCHEDULER_RUN_ID>
@@ -7,7 +7,7 @@ observeはgoal/selfのpause・担当、ready、目標配下のopen/in_progress/b
 
 必要なら同guardの inspect --run-id <SCHEDULER_RUN_ID> --issue <動的発見した目標子issue> --file <対象契約/報告絶対path> で追加readonly確認する。snapshot自体の再取得が必要なら observe --refresh を使える。一時的な読取障害は予算内で各command最大1回再試行可能。pause/所有者不明/開始・boot・identity不一致/硬い期限拒否は迂回も再試行もしない。guard失敗と研究の数値不一致・敗北を混同しない。
 
-turn180秒をowned開始から固定し、反復呼出しで時計をresetしない。90/120秒は安全な計画目安で、追加読取や研究判断の恒久禁止ではない。新commandは明示timeoutと子回収2秒と報告30秒が残時間内に収まる時だけ開始する。全commandのtimeout/自己child回収、CPU affinity[0]/1thread/RAM1GiBを維持、Go/cgoへRLIMIT_ASを強制継承しない。残時間不足なら保存済み根拠で判断し不明を報告する。周期1200秒/turn180秒/終了10:07:31UTCを維持。他セッションのactive数は起動・報告の拒否条件にしない。同役二重起動、所有/pause/期限、物理資源配分は守る。
+turn180秒をowned開始から固定し、反復呼出しで時計をresetしない。90/120秒は安全な計画目安で、追加読取や研究判断の恒久禁止ではない。新commandは明示timeoutと子回収2秒と報告30秒が残時間内に収まる時だけ開始する。全commandのtimeout/自己child回収、CPU affinity[0]/1thread/RAM1GiBを維持、Go/cgoへRLIMIT_ASを強制継承しない。残時間不足なら保存済み根拠で判断し不明を報告する。周期1200秒/turn180秒/終了14:10:49UTCを維持。他セッションのactive数は起動・報告の拒否条件にしない。同役二重起動、所有/pause/期限、物理資源配分は守る。
 
 現行supervisor role本文を参照し、契約を含む動き方を外部視点から批判し、目標への貢献・累積費用・改善の効果を追う。監督自身の方法も見直し、未解決の重大差は双方の根拠を統括のユーザー向け報告へ渡す。統括の判断・契約・手続きも批判的に評価する。active/報告待ち/局所原因発見だけで進展や提案不要を認定せず、累積費用と目標検証に使える証拠増加で判断する。意味ある提案の採否/理由/担当/確認時点と効果・未回答を追う。権限/予算を増やさず必要範囲の改善を統括へ提案する。毎回文書/複数案/全証拠再計算を義務にしない。
 
@@ -19,6 +19,6 @@ UV_NO_SYNC=1 UV_OFFLINE=1 PYTHONDONTWRITEBYTECODE=1 timeout 35s taskset -c 0 pyt
 
 実行・再実行・記録は docs/development/ai-research-experiments.md を適用。許可範囲/総予算内の新run反復は可能、旧runの期限・結果の遡及書換えと正式成績選別は禁止。Git版/run/必要な結果・ログで管理し、契約・設計の過去版もGit履歴を基本とする。研究local commit可、製品main統合/push/公開は対象外。監督にNN実行権限を追加しない。
 
-09:52:31UTC以降は停止責任/次枠の有無を統括へ一度確認する。重job10:02:31、監督10:07:31、monitor回収10:10:31、現枠10:12:31UTC。自turn停止を外部job停止と認定しない。自.40/goalをcloseしない。
+13:55:49UTC以降は停止責任/次枠の有無を統括へ一度確認する。重job14:05:49、監督14:10:49、monitor回収14:13:49、現枠14:15:49UTC。自turn停止を外部job停止と認定しない。自.40/goalをcloseしない。
 
-frame7はユーザー明示再開承認の新枠（06:12:31開始）。旧run/期限/成績と旧92最終monitor報告未確認を保持し、旧reportを再開承認と扱わない。現行枠版7と92契約3を参照。短い依存参照summaryとraw証拠を区別する。
+frame8はユーザー明示再開承認の新枠（10:15:49開始）。旧run/期限/成績と旧92最終monitor報告未確認を保持し、旧reportを再開承認と扱わない。現行枠版8と92契約4を参照。短い依存参照summaryとraw証拠を区別する。

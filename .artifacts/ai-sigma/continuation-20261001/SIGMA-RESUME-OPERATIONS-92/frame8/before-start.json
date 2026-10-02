@@ -1,0 +1,60 @@
+{
+  "at": "2026-10-02T10:29:52.441045+00:00",
+  "old_pointer": {
+    "issue": "quoridor-4lc.92",
+    "frame": 7,
+    "updated_by": "quoridor-4lc.92-inspect-summary",
+    "record": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame7-inspect-summary/live-applied.json",
+    "run": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame7-inspect-summary-725321aa-3d01-4d33-863d-d9ef5a0ed430",
+    "scheduler": {
+      "pid": 2259113,
+      "start_ticks": "18105937",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "monitor": {
+      "pid": 2259164,
+      "start_ticks": "18106112",
+      "state": "R",
+      "rss_bytes": 20250624,
+      "cpu_ticks": 3,
+      "affinity": [
+        0
+      ],
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    }
+  },
+  "state": {
+    "binding": {
+      "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+      "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+      "target": "supervisor",
+      "dispatch_issue": "quoridor-4lc.40",
+      "contract_file": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+    },
+    "process": null,
+    "phase": "stopped",
+    "recovery_required": false,
+    "last_result": {
+      "at": "2026-10-02T10:07:31.297535+00:00",
+      "event": "process_stopped",
+      "owned_turn_pending": false
+    },
+    "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+    "config_sha256": "eb0d3636a54e1575dd1c6f55ad6774810fe1f76367aaa93bde306227f96ce785",
+    "contract_sha256": "496c3d6e0e3d46ea44e5d3d91578af391813841e60594222c21b0dbd6574f9cd",
+    "next_at": null,
+    "owned": null
+  },
+  "old_scheduler_identity_absent": true,
+  "old_monitor_identity_absent": true,
+  "supervisor_status": {
+    "type": "notLoaded"
+  },
+  "supervisor_settings": {
+    "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+    "model": "gpt-6.1-sol",
+    "reasoningEffort": "high"
+  },
+  "old_final_monitor_report_unaccepted_unverified": true
+}

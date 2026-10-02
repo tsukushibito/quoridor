@@ -1,0 +1,1 @@
+quoridor-4lc.92 契約4/frame8受領・開始。10:24:22UTC受領、本人所有/pauseなし、親版8 SHA0f0be04113893b62d3f79ef45bd9d17bd38817622091152d2eb25017acec43fe・両mirror一致。旧最終回収/報告未受入れは別保持。旧identity/ownedを確認後、新期限と期待hashを先固定し同runtimeを開始する。115変更なし。14:05:49重job通知/14:10:49監督停止/14:13:49monitor回収/14:15:49保存責任を保持。
