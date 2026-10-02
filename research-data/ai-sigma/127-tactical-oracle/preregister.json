@@ -1,0 +1,32 @@
+{
+  "issue": "quoridor-4lc.127",
+  "UTC": "2026-10-02T13:56:11.093789+00:00",
+  "cases": [
+    {
+      "id": "own-near-goal",
+      "rule": "P1 advances7; P2 left toedge then x0/x1 oscillation; P1turn, P1y7/P2y8, differentcolumns"
+    },
+    {
+      "id": "opponent-threat",
+      "rule": "P1 left toedge thenx0/x1oscillation; P2 forward7; P1turn/P2y1/P1y0"
+    },
+    {
+      "id": "both-near",
+      "rule": "P1left/P2right initially, then7forwardrounds; P1turn/P1y7/P2y1/differentcolumns"
+    },
+    {
+      "id": "wall-protected-threat",
+      "rule": "P1H(3,0)/P2H(0,6), thenopponent-threat7rounds; P1turn/P2y1/P1y0; existingHblocksP2verticalgoal"
+    }
+  ],
+  "order": "as above, fixedbefore generation/oracle outcomes",
+  "attempt_limit": 8,
+  "attempt_rule": "stationary edge shifts x0 orx1 byattempt parity; fixed goals/forward7 unchanged; rejectillegal orwronggeometry/terminal; first matching attempt accepted; no outcome-based replacement",
+  "nodes": "root=1, each applied rootlegalaction child +1, each applied opponentlegalaction grandchild +1; eachcase cap20000; capbefore applyingnode; pendingbranches UNKNOWN notsafe",
+  "depth": "root actions for allcases, opponentactions only if noimmediaterootgoal",
+  "terminal": "winner before total200/no-legal draw; no longterm outcome labels",
+  "AI_model_NN_game": 0,
+  "max_cases": 4,
+  "mock": "legalgenerated immediatewin/threat assertions and cap1 unresolved; no syntheticboard manipulation",
+  "shared_RuleA_independence_limit": true
+}
