@@ -1,0 +1,42 @@
+{
+  "UTC": "2026-10-02T23:13:45.015190+00:00",
+  "new_heavy_cutoff": "2026-10-02T23:10:59Z",
+  "new_heavy_started_by_coordinator": 0,
+  "145": {
+    "source_data_Git": "5bef895",
+    "stop_Git": "3028f54",
+    "necessary_git_current_files": 9,
+    "stop_SHA256": "9eb03f2972db6b3b75534afe6adc04a7076bba3ecb51ac00ea74d7bc6eff277f",
+    "current_identities_checked": 10,
+    "current_alive": [],
+    "saved_report_not_delivered": true,
+    "proposal_only_not_executed": true,
+    "static_wall_s": 0.04397902201162651
+  },
+  "scheduler_state": {
+    "phase": "running",
+    "owned": null,
+    "recovery_required": false,
+    "last_result": {
+      "at": "2026-10-02T23:12:50.956590+00:00",
+      "event": "skipped",
+      "reason": "target_not_idle"
+    }
+  },
+  "known_owned_runtime_current": [
+    {
+      "pid": 2608533,
+      "start_ticks": 20809272,
+      "current_same_identity": true
+    },
+    {
+      "pid": 2608547,
+      "start_ticks": 20809293,
+      "current_same_identity": true
+    }
+  ],
+  "systemError_evidence": "frame9-end-session-errors.json",
+  "automatic_restart_or_settings_change": false,
+  "external_NN_stopped_certified": false,
+  "future_deadline_stop_certified": false
+}
