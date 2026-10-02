@@ -1,0 +1,451 @@
+{
+  "counts": {
+    "public": 764,
+    "legal": 764,
+    "late": 0,
+    "cancel": 0,
+    "initial_none": 0,
+    "NN": 7764,
+    "discard": 298,
+    "opposite_before_ACK": 429,
+    "oldAPI_spans_newinput": 292,
+    "own_ACK_violations": 0,
+    "ACKover500": 2,
+    "post_public_definite": 0,
+    "post_public_possible": 0,
+    "cutoff_definite": 0,
+    "cutoff_possible": 0,
+    "max_public": 426.18994140625,
+    "max_own_wait": 0.030029296875,
+    "accepted_CP_sequences": 8737
+  },
+  "worker_stop_intervals": {
+    "candidate": {
+      "upper_le_D": 380,
+      "lower_gt_D": 0,
+      "straddles": 0
+    },
+    "reference": {
+      "upper_le_D": 382,
+      "lower_gt_D": 2,
+      "straddles": 0
+    }
+  },
+  "W": 4,
+  "D": 0,
+  "L": 12,
+  "color1": [
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    0,
+    0
+  ],
+  "color2": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1
+  ],
+  "pairs": [
+    {
+      "pair": "prefix119-pair1-r1",
+      "Xi": 0,
+      "scores": [
+        0,
+        0
+      ],
+      "winners": [
+        2,
+        1
+      ],
+      "same_side_winner": false,
+      "prefixply": 4,
+      "newplies": [
+        44,
+        53
+      ]
+    },
+    {
+      "pair": "prefix119-pair2-r1",
+      "Xi": 0,
+      "scores": [
+        0,
+        0
+      ],
+      "winners": [
+        2,
+        1
+      ],
+      "same_side_winner": false,
+      "prefixply": 5,
+      "newplies": [
+        47,
+        50
+      ]
+    },
+    {
+      "pair": "prefix119-pair3-r1",
+      "Xi": 0,
+      "scores": [
+        0,
+        0
+      ],
+      "winners": [
+        2,
+        1
+      ],
+      "same_side_winner": false,
+      "prefixply": 8,
+      "newplies": [
+        58,
+        55
+      ]
+    },
+    {
+      "pair": "prefix119-pair4-r1",
+      "Xi": 0.5,
+      "scores": [
+        1,
+        0
+      ],
+      "winners": [
+        1,
+        1
+      ],
+      "same_side_winner": true,
+      "prefixply": 9,
+      "newplies": [
+        30,
+        46
+      ]
+    },
+    {
+      "pair": "prefix119-pair5-r1",
+      "Xi": 0.5,
+      "scores": [
+        1,
+        0
+      ],
+      "winners": [
+        1,
+        1
+      ],
+      "same_side_winner": true,
+      "prefixply": 12,
+      "newplies": [
+        49,
+        39
+      ]
+    },
+    {
+      "pair": "prefix119-pair6-r1",
+      "Xi": 0.5,
+      "scores": [
+        1,
+        0
+      ],
+      "winners": [
+        1,
+        1
+      ],
+      "same_side_winner": true,
+      "prefixply": 13,
+      "newplies": [
+        52,
+        78
+      ]
+    },
+    {
+      "pair": "prefix119-pair7-r1",
+      "Xi": 0,
+      "scores": [
+        0,
+        0
+      ],
+      "winners": [
+        2,
+        1
+      ],
+      "same_side_winner": false,
+      "prefixply": 16,
+      "newplies": [
+        54,
+        57
+      ]
+    },
+    {
+      "pair": "prefix119-pair8-r1",
+      "Xi": 0.5,
+      "scores": [
+        0,
+        1
+      ],
+      "winners": [
+        2,
+        2
+      ],
+      "same_side_winner": true,
+      "prefixply": 17,
+      "newplies": [
+        25,
+        27
+      ]
+    }
+  ],
+  "same_side_pairs": 4,
+  "startup_NN": 48,
+  "numeric_samples": [
+    {
+      "request": "prefix119-pair1-r1-1",
+      "engine": "candidate",
+      "P2": false,
+      "cancelled": false,
+      "features": 648,
+      "NN": 137,
+      "priors": 124,
+      "maxNN": null,
+      "maxPrior": 6.181722239650966e-7,
+      "fixed_reference": false,
+      "valueMeaning": "rootNN"
+    },
+    {
+      "request": "prefix119-pair2-r1-49",
+      "engine": "reference",
+      "P2": false,
+      "cancelled": false,
+      "features": 648,
+      "NN": 137,
+      "priors": 117,
+      "maxNN": null,
+      "maxPrior": 0,
+      "fixed_reference": false,
+      "valueMeaning": "rootQ"
+    },
+    {
+      "request": "prefix119-pair3-r1-60",
+      "engine": "candidate",
+      "P2": true,
+      "cancelled": false,
+      "features": 648,
+      "NN": 137,
+      "priors": 119,
+      "maxNN": null,
+      "maxPrior": 0.0000013870301605045654,
+      "fixed_reference": false,
+      "valueMeaning": "rootNN"
+    },
+    {
+      "request": "prefix119-pair4-r1-1",
+      "engine": "reference",
+      "P2": true,
+      "cancelled": false,
+      "features": 648,
+      "NN": 137,
+      "priors": 106,
+      "maxNN": null,
+      "maxPrior": 0,
+      "fixed_reference": false,
+      "valueMeaning": "rootQ"
+    },
+    {
+      "request": "prefix119-pair5-r1-1",
+      "engine": "candidate",
+      "P2": false,
+      "cancelled": false,
+      "features": 648,
+      "NN": 137,
+      "priors": 112,
+      "maxNN": null,
+      "maxPrior": 3.6556428262279894e-7,
+      "fixed_reference": false,
+      "valueMeaning": "rootNN"
+    },
+    {
+      "request": "prefix119-pair6-r1-54",
+      "engine": "reference",
+      "P2": false,
+      "cancelled": false,
+      "features": 648,
+      "NN": 137,
+      "priors": 110,
+      "maxNN": null,
+      "maxPrior": 0,
+      "fixed_reference": false,
+      "valueMeaning": "rootQ"
+    },
+    {
+      "request": "prefix119-pair7-r1-56",
+      "engine": "candidate",
+      "P2": true,
+      "cancelled": false,
+      "features": 648,
+      "NN": 137,
+      "priors": 107,
+      "maxNN": null,
+      "maxPrior": 1.9458007952111167e-7,
+      "fixed_reference": false,
+      "valueMeaning": "rootNN"
+    },
+    {
+      "request": "prefix119-pair8-r1-1",
+      "engine": "reference",
+      "P2": true,
+      "cancelled": false,
+      "features": 648,
+      "NN": 137,
+      "priors": 93,
+      "maxNN": null,
+      "maxPrior": 0,
+      "fixed_reference": false,
+      "valueMeaning": "rootQ"
+    }
+  ],
+  "cache": [
+    {
+      "runs": [
+        {
+          "run": "prefix119-pair1-r1",
+          "accepted": 1014,
+          "rejected": 36,
+          "selected": 97,
+          "accepted_after_cutoff": 0,
+          "selected_publish_definite_after": 0,
+          "selected_publish_possible_after": 0,
+          "publish_end_is_saved_marker_not_exact_Atomic_store_time": true
+        }
+      ],
+      "marker_examples": [],
+      "browser_computed": true,
+      "NN": 0
+    },
+    {
+      "runs": [
+        {
+          "run": "prefix119-pair2-r1",
+          "accepted": 1227,
+          "rejected": 38,
+          "selected": 97,
+          "accepted_after_cutoff": 0,
+          "selected_publish_definite_after": 0,
+          "selected_publish_possible_after": 0,
+          "publish_end_is_saved_marker_not_exact_Atomic_store_time": true
+        }
+      ],
+      "marker_examples": [],
+      "browser_computed": true,
+      "NN": 0
+    },
+    {
+      "runs": [
+        {
+          "run": "prefix119-pair3-r1",
+          "accepted": 1415,
+          "rejected": 50,
+          "selected": 113,
+          "accepted_after_cutoff": 0,
+          "selected_publish_definite_after": 0,
+          "selected_publish_possible_after": 2,
+          "publish_end_is_saved_marker_not_exact_Atomic_store_time": true
+        }
+      ],
+      "marker_examples": [],
+      "browser_computed": true,
+      "NN": 0
+    },
+    {
+      "runs": [
+        {
+          "run": "prefix119-pair4-r1",
+          "accepted": 861,
+          "rejected": 27,
+          "selected": 76,
+          "accepted_after_cutoff": 0,
+          "selected_publish_definite_after": 0,
+          "selected_publish_possible_after": 0,
+          "publish_end_is_saved_marker_not_exact_Atomic_store_time": true
+        }
+      ],
+      "marker_examples": [],
+      "browser_computed": true,
+      "NN": 0
+    },
+    {
+      "runs": [
+        {
+          "run": "prefix119-pair5-r1",
+          "accepted": 1062,
+          "rejected": 38,
+          "selected": 88,
+          "accepted_after_cutoff": 0,
+          "selected_publish_definite_after": 0,
+          "selected_publish_possible_after": 1,
+          "publish_end_is_saved_marker_not_exact_Atomic_store_time": true
+        }
+      ],
+      "marker_examples": [],
+      "browser_computed": true,
+      "NN": 0
+    },
+    {
+      "runs": [
+        {
+          "run": "prefix119-pair6-r1",
+          "accepted": 1284,
+          "rejected": 53,
+          "selected": 130,
+          "accepted_after_cutoff": 0,
+          "selected_publish_definite_after": 0,
+          "selected_publish_possible_after": 1,
+          "publish_end_is_saved_marker_not_exact_Atomic_store_time": true
+        }
+      ],
+      "marker_examples": [],
+      "browser_computed": true,
+      "NN": 0
+    },
+    {
+      "runs": [
+        {
+          "run": "prefix119-pair7-r1",
+          "accepted": 1215,
+          "rejected": 33,
+          "selected": 111,
+          "accepted_after_cutoff": 0,
+          "selected_publish_definite_after": 0,
+          "selected_publish_possible_after": 0,
+          "publish_end_is_saved_marker_not_exact_Atomic_store_time": true
+        }
+      ],
+      "marker_examples": [],
+      "browser_computed": true,
+      "NN": 0
+    },
+    {
+      "runs": [
+        {
+          "run": "prefix119-pair8-r1",
+          "accepted": 659,
+          "rejected": 22,
+          "selected": 52,
+          "accepted_after_cutoff": 0,
+          "selected_publish_definite_after": 0,
+          "selected_publish_possible_after": 0,
+          "publish_end_is_saved_marker_not_exact_Atomic_store_time": true
+        }
+      ],
+      "marker_examples": [],
+      "browser_computed": true,
+      "NN": 0
+    }
+  ],
+  "formal_go": false,
+  "NN0_browser_only": true
+}
