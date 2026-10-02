@@ -2,7 +2,7 @@
 
 ユーザー「作業を再開させて。」を適用し、同saved coordinator/model/effort/cwdで実作業を再開した。新4時間枠・期限延長・サーバー再起動・新roleはない。受信失敗した112保存資料と111裁定、Beads40未配送監督notesを読み、現在の受領と以前のsystemError拒否を区別した。再発時は引渡しを残し繰返し自動起動/設定変更しない。
 
-110/111は有限C感度を受入れ、C1を採用しない。112はC1.5/固定Sigmaの専用2Worker4局W2L2/goal4/298合法採用、相手t0旧ACK前232、旧NN返却棄却211のowner保存結果を引継ぐ。これらは正式棋力や独立認定と別で、113既criticへ必要最小独立確認を実配分した。公式配送09:42:35UTC、exact turn01a0fbfe-81b8-7db1-8324-6b6bdca126f9/start accepted。担当開始ACKと実検証は別記録で追う。
+110/111は有限C感度を受入れ、C1を採用しない。112はC1.5/固定Sigmaの専用2Worker4局W2L2/goal4/298合法採用、相手t0旧ACK前232、旧NN返却棄却211のowner保存結果を引継ぐ。これらは正式棋力や独立認定と別で、113既criticへ必要最小独立確認を実配分した。公式配送09:42:35UTC、exact turn01a0fbfe-81b8-7db1-8324-6b6bdca126f9/start accepted。担当は09:42:48保守受領、113本人claim/全文継承と開始ACKを報告した。実検証の成立は結果待ち。個別早側期限は処理10:02:48、新run09:57:48、提出10:08:48UTC。
 
 113はbrowser内保存replay/世代・SAB・取消/旧結果棄却と最大機能7、原4局再起動0。RAM6guard5.5/CPU2threads1、既critic予約内32guard28MiBでChrome全RSSも計上。新run09:58まで、処理10:04/提出10:10と受領相対期限の早い方。新重job10:02:31/監督10:07:31/monitor10:10:31/全終了10:12:31、CPU4/RAM8/保存12GiBは不変。92既stewardが終了運用を所有し、運用source追加編集は行わない。
 
