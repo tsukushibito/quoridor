@@ -48,7 +48,7 @@ assert hashes['ONNX']=='d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226
 assert files['ONNX'].stat().st_size==11663428
 assert hashes['Wasm']=='1f54d0b8f0c6d3d7d51935886ed506e44376a2052506be62ca7a726c85a78a01'
 current=allocated(OUT)+allocated(Path(__file__).parent)+allocated(ROOT/'research-data/ai-sigma/103-cooperative-arena')
-forecast=16*1024*1024 # one pair profile/TMP/public/private/monitor/ending; archive/Git reserve separate
+forecast=32*1024*1024 # one pair profile/TMP/public/private/monitor/ending; archive/Git reserve separate
 ending=6*1024*1024
 guard=56*1024*1024
 result={'UTC':datetime.datetime.now(datetime.timezone.utc).isoformat(),'external_heavy':heavy,'prior':prior,'input_hashes':hashes,'input_paths':{n:str(p) for n,p in files.items()},'current_allocated':current,'next_pair_forecast':forecast,'ending_archive_Git_reserve':ending,'guard':guard,'sufficient':current+forecast+ending<guard,'formal_background_CPU_guarantee':False}
