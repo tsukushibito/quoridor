@@ -1,1 +1,1 @@
-'use strict';const path=require('path');const ROOT=path.resolve(__dirname,'../..'),PLAN=ROOT+'/.artifacts/ai-sigma/continuation-20261001/SIGMA-ACTUAL-BOUNDARY-REPAIR',BASE=PLAN+'/runs/v2',DEADLINE='2026-10-02T00:26:33Z';module.exports={ROOT,PLAN,BASE,DEADLINE};
+'use strict';const path=require('path');const ROOT=path.resolve(__dirname,'../..'),PLAN=ROOT+'/.artifacts/ai-sigma/continuation-20261001/SIGMA-ACTUAL-BOUNDARY-REPAIR',BASE=PLAN+'/runs/v3',DEADLINE='2026-10-02T00:40:00Z';module.exports={ROOT,PLAN,BASE,DEADLINE};
