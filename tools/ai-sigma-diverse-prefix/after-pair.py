@@ -8,7 +8,7 @@ pair=int(sys.argv[1]);run=f'prefix119-pair{pair}-r1'
 s=json.loads((DATA/(run+'.summary.json')).read_text())
 assert not s['primary'] and not s['secondary'] and not s['process']['remaining'] and not s['process']['unknown'],'NOT_SAFE_TO_ADVANCE'
 paths=[str(p.relative_to(ROOT)) for p in DATA.glob(run+'.*')]
-env=os.environ.copy();env['SIGMA_COMMIT_MESSAGE']=f'research117: preserve registered pair{pair}, all outcomes and stop records'
+env=os.environ.copy();env['SIGMA_COMMIT_MESSAGE']=f'research119: preserve registered pair{pair}, all outcomes and stop records'
 subprocess.run(['bash',str(ROOT/'tools/ai-sigma-diverse-prefix/commit-own.sh'),*paths],cwd=ROOT,env=env,check=True)
 manifest=json.loads((DATA/(run+'.manifest.json')).read_text())
 blob=subprocess.check_output(['git','show','HEAD:research-data/ai-sigma/119-diverse-prefix/'+run+'.tar.gz'],cwd=ROOT)
@@ -24,7 +24,11 @@ for suffix in ['log','monitor.jsonl','owned-ledger.jsonl']:
  if p.exists():p.unlink()
 (OUT/f'pair{pair}-Git-restore-cleanup.json').write_text(json.dumps({'UTC':datetime.datetime.now(datetime.timezone.utc).isoformat(),'run':run,'archive_SHA':manifest['SHA256'],'Git_stream_restore':True,'expanded_duplicate_removed':True,'process_metadata_retained':True},indent=2)+'\n')
 report=OUT/f'pair{pair}-report.md'
-report.write_text(f"EXPERIMENT_PAIR .117 / pair{pair}\n{json.dumps(s['games'],ensure_ascii=False)}\nWDL {s['WDL']}; public {s['public']}; startupNN {s['startup_NN']} separate; handNN {s['hand_NN']}. primary/secondary0, both models stopped, outer remaining/unknown0. RSSpeak {s['process']['RSS_peak']}B. All turns and stop metadata saved in research Git archive SHA {manifest['SHA256']}; stream restoration verified. Formal fairness/NI/old WDL integration0.\n")
+cumulative=[json.loads(p.read_text()) for p in sorted(DATA.glob('prefix119-pair*.summary.json'))]
+counts={}
+for item in cumulative:
+ for outcome,n in item['WDL'].items():counts[outcome]=counts.get(outcome,0)+n
+report.write_text(f"EXPERIMENT_PAIR .119 / pair{pair}\n{json.dumps(s['games'],ensure_ascii=False)}\nWDL {s['WDL']}; public {s['public']}; startupNN {s['startup_NN']} separate; handNN {s['hand_NN']}. primary/secondary0, both models stopped, outer remaining/unknown0. RSSpeak {s['process']['RSS_peak']}B. All turns and stop metadata saved in research Git archive SHA {manifest['SHA256']}; stream restoration verified. Cumulative pair1..{pair}: games_started {sum(x['games_started'] for x in cumulative)}/16, WDL {counts}, public {sum(x['public'] for x in cumulative)}, unstarted {16-sum(x['games_started'] for x in cumulative)}. Fixed8prefix/8accepted attempts/old results uncombined. Formal fairness/NI/old WDL integration0.\n")
 if pair%2==0:
  subprocess.run(['bash','/workspaces/quoridor/scripts/dev/research-team.sh','report','--to','coordinator','--issue','quoridor-4lc','--body-file',str(report)],cwd=ROOT,check=True)
 if pair==8:sys.exit(0)
