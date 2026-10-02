@@ -1,0 +1,15 @@
+# SIGMA-WALLLESS-LABEL-INDEPENDENT / quoridor-4lc.143 / 契約1・枠9
+
+既critic 01a0f31d-8227-7e03-a7e6-915b4918c11b→coordinator。142の有限ラベルを独立NN0検証し、AI対照の採点に使える区間かを裁定する。合法・depth6認証だけで小改修感度を保証しない。144static/mock開始のgateではない。2heavyは直列、143の有限支持と停止速報は本文/Git全完成待ちにしない。
+
+原142登録8466495/科学3866532/data9143e12/handoff63d46ddを区別。handoff9b091fc47bfe95e93fd860ea44d6886f1a35d4cb60ababcee5950f7a9c34ede2、runtime-stop3dc910cd05a94ca4fc07c81920bba246ccf0ee224e4bc5d08197730dc7a03a31、final-source-stop071a90d7206ca4385aa708679e6c6e1344cf20a48f0a956673eda3745f160a70、archive5aa75aeb9c640d0dceb91de026da08535face3086a23287adc8b182f8d570b60へbind。必要member stream読取、原全copy/全展開0。統括9canonicalGit/55member/71runtime現在不在、owner復元7/78最終identityとは別分母。
+
+固定2input P1-race/P2-corridorだけ。合法prefix32/33、wall0/0、side/key/history/pawns/全648features、生成AIなし/firstattempt0/preregisterとの一致をbrowser mainで独自確認。root全4actual legal Action/objectを元label actionToIndex(…,9)へ照合し、ラベル番号をRust209 Actionと同一視しない。両視点と合法順/terminalgoal/draw優先を小mockで確認、共有RuleA実装の限界を保持。
+
+元全証明木2352/3632nodeを独自walkして状態合法/親子/side/max/min/terminal90,112/depth unknown1593,2527/全root4区間と件数を再算。元checker関数のコピーで独立と呼ばない。さらに自独立小solverで同固定2stateをdepth6/node20000/watchdog20秒へ再計算、各rootActionのinterval一致を確認する。未知leafは[-1,1]で真draw/敗北へ補完0、node/time上限なら未解決、capを上げて救済0。即goal0とP1[1,-1,1,1]/P2[-1,1,1,1]・勝ち手3/負け1は保存宣言からコピーせず自再算。trueState/historyで合致しない場合はAI採点不成立。完備証明を一般wall中盤/深部モデル正しさへ外挿しない。
+
+新NN/model/AI探索Worker/game/build/取得0、全合法判定/minimaxはChromium main、Node外起動監視終了保存。原RuleAは必要参照のみで編集0。静的CPU0/RAM1GiBguard896/各60秒/累計180秒、browserNN0 CPU2単1/RAM6guard5.5/各job90秒/累計120秒、他heavy無し/headroom/142最終stop/currentidentityを直前確認。144staticCPU0/RAM1並行可。新scope8MiB guard7MiB目安を既critic128MiB/combined112内、current＋forecastを先確認/旧未知減額・親追加予約0。元archive sourceを全copyせず必要proofだけ保持し7MiB不足なら不足を返す。
+
+自scope tools/ai-sigma-wallless-label-independent/、research-data/ai-sigma/143-wallless-label-independent/、.artifacts/ai-sigma/resume-20261002/WALLLESS-LABEL-INDEPENDENT/、docs/reports/ai-sigma-critic-wallless-label.md。科学再実行は固定2solver1回ずつ、successful行の追加反復0。未開始/NN0debug失敗は同budget内修復、全attempt保存。label finite支持/不成立とheavy回収証拠をcoordinatorへ先報、144は停止版参照可能。source/runtime停止/hash/版/Git/必要復元/backup最終を後続保存。最大1次案は尺度の感度確認又は枝終了として返す。処理受領30分又は20:15UTC/newrun受領25分又は20:10UTC/提出受領40分又は20:25UTC早側。
+
+既saved同model/effort/cwd、worktree /workspaces/quoridor/.worktree/ai-sigma。親版9/common/担当role/goal/記録規約全文を継承、ready/show goal+self/pauseなし本人担当後自issueのみclaim、本人受領claim開始を短く報告。原成果/source/model/kernel/role/registry/92/main/defaultindex編集削除0。普通debugは自scope総予算内、失敗/版/run保持、旧成功/期限/条件への付替え0。所有不明・pause・期限・資源不足・admission false/unknown/readerror時spawn0を同必須分岐とし、他owner signal/interrupt0。親CPU4logical/RAM8GiB/現在保持＋未使用予約12GiB、23:10:59新heavy/23:15:59監督/23:18:59monitor/23:20:59全終了を維持。NN/Model/search/timer-message/monitorcallback/innercontrolled/outersole-root ownedwait remainingunknown/currentsameidentity/sourcehashを別保存、heavy停止と必要速報を本文前coordinatorへ。現在不在≠自然/全期間全host。source/子停止/Git/版/input/hash/run/command/開始終了/全attempt/typed失敗/欠測/資源/必要最小archive復元/backup/reportをcoordinatorへ。formalNI/Sigma/棋力・政策採用/actualgo/goal他者close0、製品統合push公開/shared環境変更/取得/GPU学習0。契約coordinatorwriter、自域担当単独writer。
