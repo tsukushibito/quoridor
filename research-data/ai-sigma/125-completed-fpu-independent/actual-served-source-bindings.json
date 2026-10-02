@@ -1,0 +1,76 @@
+{
+  "checks": [
+    {
+      "path": "tools/ai-sigma-completed-fpu/adapters.cjs",
+      "SHA256": "dabdecb23d4254de82f9518884353c06e39ec524a90e5fa018577926db27789c",
+      "tested_Git_SHA256": "dabdecb23d4254de82f9518884353c06e39ec524a90e5fa018577926db27789c",
+      "equal": true
+    },
+    {
+      "path": "tools/ai-sigma-completed-fpu/count-input.js",
+      "SHA256": "b46b4502d585c8a0fab9ad3598dd7ff20a26321acd6ebb92881624d2d3a804fe",
+      "tested_Git_SHA256": "b46b4502d585c8a0fab9ad3598dd7ff20a26321acd6ebb92881624d2d3a804fe",
+      "equal": true
+    },
+    {
+      "path": "tools/ai-sigma-completed-fpu/count-main.js",
+      "SHA256": "95e42e059e3da0c4d8ab00c49b34cc5a17e4326038fe51c7e20a5658d8b1d3fc",
+      "tested_Git_SHA256": "95e42e059e3da0c4d8ab00c49b34cc5a17e4326038fe51c7e20a5658d8b1d3fc",
+      "equal": true
+    },
+    {
+      "path": "tools/ai-sigma-completed-fpu/count-worker.js",
+      "SHA256": "289b79d53212a9095ffe9e3031494333de0b56614622e26fc23861e929b0a3aa",
+      "tested_Git_SHA256": "289b79d53212a9095ffe9e3031494333de0b56614622e26fc23861e929b0a3aa",
+      "equal": true
+    }
+  ],
+  "scripts": {
+    "main": "f39ebe294fd120cfa27717ecdc7ac1e76bca096f3e2c7e2a5730eaf2f432803a",
+    "worker": "289b79d53212a9095ffe9e3031494333de0b56614622e26fc23861e929b0a3aa",
+    "reference": "5c6900a97e08c4bcd5e2f50638183437690e66b5ae3c3ee56c99cc7a36800769",
+    "producer": "31c2684547c9b6e16aa27163ead080cf20bbede284e4a1b77dc3436764422a09",
+    "checkpoint": "494581d5ce5fc38e7afb753d9ca92e0f49bb71ed516762b7ea48a0c6d89e1119",
+    "cache": "a547e67cc4cfa6cfce8b40234381b48c9126a7accbee8e121351d822d8cbf8ac"
+  },
+  "inherited_bindings": {
+    "main": {
+      "path": "tools/ai-sigma-player-workers/player-main.js",
+      "original_SHA256": "610e899acd43215efc9fa3a08f3c337248639505a57196e1a730a91f7afde4a8",
+      "adapted_SHA256": "deeb2a7b9fa00e7869860bd590919e10040f9e8d535be279e9ae95b43616b5c1",
+      "adapter117_readonly": true
+    },
+    "worker": {
+      "path": "tools/ai-sigma-player-workers/player-worker.js",
+      "original_SHA256": "fd5f5b72a836164133b22f718d58ef31d2d4b0f8a4887070e1ac9346112de5e8",
+      "adapted_SHA256": "9e347faf1ad8862a640c6ef5aee67ff2dc540c3d439a8b860253660090767c4c",
+      "adapter117_readonly": true
+    },
+    "producer": {
+      "path": "tools/ai-sigma-tail-transport/early-worker.js",
+      "original_SHA256": "9494e33e7204be208262914c04ea5eb0d7985872a6d7ebc6e4084d84729097d4",
+      "adapted_SHA256": "31c2684547c9b6e16aa27163ead080cf20bbede284e4a1b77dc3436764422a09",
+      "adapter117_readonly": true
+    },
+    "checkpoint": {
+      "path": "tools/ai-sigma-tail-transport/checkpoint.js",
+      "original_SHA256": "2b736d696a099350bf724b40dd858fc3afe11ce17a1c143f3029e5fcd2f28d8c",
+      "adapted_SHA256": "494581d5ce5fc38e7afb753d9ca92e0f49bb71ed516762b7ea48a0c6d89e1119",
+      "adapter117_readonly": true
+    },
+    "cache": {
+      "path": "tools/ai-sigma-actual-boundary-repair/early-cache.cjs",
+      "original_SHA256": "748fe01dfebf5e524465ef69255acf0026154188b9002a5338ca790ca092e7f7",
+      "adapted_SHA256": "a547e67cc4cfa6cfce8b40234381b48c9126a7accbee8e121351d822d8cbf8ac",
+      "adapter117_readonly": true
+    },
+    "FPU_reference": {
+      "original_path": "tools/ai-sigma-actual-boundary-repair/reference-core.js",
+      "original_SHA256": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05",
+      "adapted_SHA256": "5c6900a97e08c4bcd5e2f50638183437690e66b5ae3c3ee56c99cc7a36800769",
+      "factor": "unvisitedQ only; same root instrumentation B/C"
+    }
+  },
+  "inherited_main_worker_hashes_are_base_scripts_not_served_count_extension": true,
+  "actual_served_scripts_independently_hashed": true
+}

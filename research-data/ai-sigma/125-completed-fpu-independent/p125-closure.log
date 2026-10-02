@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-completed-fpu-independent/closure.py", line 47, in <module>
+    if m.isfile():b=a.extractfile(m).read();assert b==(O/m.name).read_bytes();checks.append({'member':m.name,'SHA256':sha(b),'bytes':len(b)})
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

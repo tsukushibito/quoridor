@@ -1,0 +1,10 @@
+'use strict';
+const fs=require('fs'),crypto=require('crypto'),cp=require('child_process'),path=require('path');
+const root=path.resolve(__dirname,'../..'),out=root+'/.artifacts/ai-sigma/resume-20261002/COMPLETED-FPU-INDEPENDENT';
+const a=require('../ai-sigma-completed-fpu/adapters.cjs');const hash=x=>crypto.createHash('sha256').update(x).digest('hex');
+const files=['adapters.cjs','count-input.js','count-main.js','count-worker.js'];
+const checks=files.map(n=>{const p='tools/ai-sigma-completed-fpu/'+n,b=fs.readFileSync(root+'/'+p),g=cp.execFileSync('git',['show','33d2c134d17e93047f54a24419d4acf9c8128a43:'+p],{cwd:root});return {path:p,SHA256:hash(b),tested_Git_SHA256:hash(g),equal:b.equals(g)};});
+if(checks.some(x=>!x.equal))throw Error('UPSTREAM_SOURCE_MISMATCH');
+const scripts=Object.fromEntries(['main','worker','reference','producer','checkpoint','cache'].map(n=>[n,hash(a.script(n))]));
+fs.writeFileSync(out+'/actual-served-source-bindings.json',JSON.stringify({checks,scripts,inherited_bindings:a.bindings(),inherited_main_worker_hashes_are_base_scripts_not_served_count_extension:true,actual_served_scripts_independently_hashed:true},null,2)+'\n');
+console.log(JSON.stringify({source_checks:checks.length,all_equal:true,served_scripts:scripts}));

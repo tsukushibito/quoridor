@@ -1,0 +1,92 @@
+{
+  "phase": "protocol",
+  "name": "p125-closure-r2",
+  "cmd": [
+    "python3",
+    "-B",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-completed-fpu-independent/closure.py"
+  ],
+  "start": "2026-10-02T13:26:21.742812+00:00",
+  "end": "2026-10-02T13:26:21.921738+00:00",
+  "subreaper_set_rc": 0,
+  "subreaper_get_rc": 0,
+  "subreaper_value": 1,
+  "kernel_boundary": {
+    "valid": true,
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+    "launcher": {
+      "pid": 2549394,
+      "ppid": 2549392,
+      "pgid": 2549392,
+      "start_ticks": 20049547,
+      "state": "R",
+      "rss": 17838080,
+      "utime_ticks": 1,
+      "stime_ticks": 0
+    },
+    "root": {
+      "pid": 2549395,
+      "ppid": 2549394,
+      "pgid": 2549395,
+      "start_ticks": 20049550,
+      "state": "R",
+      "rss": 7286784,
+      "utime_ticks": 0,
+      "stime_ticks": 0
+    },
+    "initial_children": [],
+    "spawn_count": 1,
+    "single_thread_initial": true,
+    "sole_explicit_root": true
+  },
+  "runner_pid": 2549394,
+  "runner_starttick": 20049547,
+  "child_pid": 2549395,
+  "child_starttick": 20049550,
+  "exit": 0,
+  "stop_reason": null,
+  "sample_interval_ms": 40,
+  "peak_group_plus_runner_RSS": 48717824,
+  "peak_allocated_bytes": 2953216,
+  "final_allocated_bytes": 2969600,
+  "tracked": [
+    {
+      "pid": 2549395,
+      "ppid": 2549394,
+      "pgid": 2549395,
+      "start_ticks": 20049550,
+      "state": "R",
+      "rss": 9605120,
+      "utime_ticks": 9,
+      "stime_ticks": 1,
+      "maxrss": 30519296,
+      "affinities": [
+        [
+          0
+        ]
+      ],
+      "TID_samples": 8,
+      "last_ppid": 2549394,
+      "last_state": "R"
+    }
+  ],
+  "remaining": [],
+  "kernel_identity_count": 1,
+  "kernel_adoptions": [],
+  "ledger_registered_count": 0,
+  "ledger_rejected": {},
+  "ledger_monitor_remaining_consistent": true,
+  "unknown_adopted": [],
+  "privateTMP_alias": "/proc/2549394/cwd/t",
+  "privateTMP_realpath": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261002/COMPLETED-FPU-INDEPENDENT/runs/t",
+  "assigned_CPU": 0,
+  "process_deadline": "2026-10-02T13:31:50Z",
+  "newjob_cutoff": "2026-10-02T13:28:50Z",
+  "guardRSS": 939524096,
+  "contractRAM": 1073741824,
+  "guard_basis": "current_proc_rss_runner_plus_owned_children",
+  "runner_ru_maxrss_bytes": 18198528,
+  "all_observed_TIDs_at_assigned_CPU": true,
+  "instant_peak_not_guaranteed": true,
+  "runner_sha256": "80ad6c51a45972592de719eb32a552d45e36cd5f6a3a4b107d6381a1e261662f"
+}
