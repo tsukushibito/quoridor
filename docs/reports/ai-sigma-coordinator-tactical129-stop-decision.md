@@ -1,0 +1,9 @@
+# 129停止速報からの次配分
+
+129 owner停止速報は通常A4/B4と候補root-only4が全て有限ラベルpass、4入力全条件Action一致である。統括は保存compactの8/4分母、手NN71、通常採用backup276=採用CP NN61+terminal-noNN215、private STALE_GENERATION6/公開enginefault0を算術確認した。stop SHA343f6ce4e3c05d319222edb78a32eb9b7edf63aebbe5480f662be2964a8f21adと記録55identityの現在同identity不在をread-only確認した。新browser/NN/replayは0で、認証ラベルとAI数値の独立動作再検証ではない。現在不在と当時controlled回収/自然終了/全期間を区別する。最終Git/handoffはまだ受領待ちであり、129受入れcloseは保留する。
+
+129の出口どおり、この狭い即goal/次手goal回避尺度の横拡大・同形式反復は終了する。通常8とstress4は別条件であり、root1でもpassしたことは一般的深部・長期棋力成立やモデルの十分性を証明しない。wall-protected全合法passの負対照と、strong-budget stressは小改修感度を保証しないという初回監督の指摘を維持する。候補の現政策C1.5/モデル/固定Sigmaの変更はしない。
+
+次に判断を変える深部・戦略・評価方法の問いを130として既hypothesisへ実配分した。契約Git2b30cabと現common/hypothesis/親9/目標/記録規約全文を15:46:05.859929UTC既idleへturn/start accepted（01a0fd4b-4d9b-7d11-9e42-fb627ca88971）で配送した。本人開始は別確認。NN0 source差/必要保存根の最大8を固定選定し、最大2案の競合説明・反証・結果別継続変更中止・費用を返す。統括の深部規則変更を結論として渡さず、評価尺度や測定対象そのものの変更案も許可する。Chrome/NN/対局/build/取得0、CPU0/RAM1guard896/静的累計180秒、既hypothesis保存16MiB内combined14MiBで新予約0。
+
+129最終保存版と130の独立見解をcoordinatorが待ち、必要主張の範囲で129受入れ/後続実験を判断する。通常詳細のroot再確認、新gate/全コピー/全root再計算/全role承認は追加しない。科学的進展は今回の全pass件数ではなく、判別力の足りない尺度を終え、次に実装・評価選定を変えられる対照が得られるかで評価する。次の自然監督で採否・実配分・実費用を追う。枠9終了23:20:59UTC/新heavy23:10:59ほか92所有不変、Sigma/正式NI未達。
