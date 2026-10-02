@@ -44,3 +44,17 @@ async function runCountSearches(config,fixtures,references) {
   }
   return {count_results:countResults,completed:countResults.length,games_started:0,clock_end:await calibrateFactorClock()};
 }
+
+function verifyCountParity(referenceRows) {
+  if(referenceRows.length!==countResults.length)throw Error('PARITY_SHAPE');
+  return countResults.map((row,i)=>{
+    const ref=referenceRows[i];
+    if(row.fixture_id!==ref.fixture_id||row.K!==ref.K)throw Error('PARITY_CONTEXT');
+    if(JSON.stringify(row.cp)!==JSON.stringify(ref.cp))throw Error('PARITY_COMPLETED_CP');
+    const a=row.numeric[0],b=ref.numeric[0];
+    if(JSON.stringify(a.features_bits)!==JSON.stringify(b.features_bits))throw Error('PARITY_FEATURE_BITS');
+    const actual=[...a.policy_logits,a.value],expected=[...b.policy_logits,b.value];
+    if(actual.length!==137||actual.some((x,j)=>!Number.isFinite(x)||Math.abs(x-expected[j])>1e-4+1e-4*Math.abs(expected[j])))throw Error('PARITY_ROOT_NN');
+    return {fixture_id:row.fixture_id,K:row.K,completed_CP_exact:true,feature_bits648_exact:true,NN137_mixed_gate:true,NNcalls_equal:row.NN_calls===ref.NN_calls};
+  });
+}

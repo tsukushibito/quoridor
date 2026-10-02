@@ -43,6 +43,7 @@ async function main() {
       const result=await browser.page.evaluate(({config,references,fixtures})=>config.kind==='count'?runCountSearches(config,fixtures,references):config.kind==='browser-pair'?runBrowserGames(config,fixtures,references):runFunctional(config,references),{config,references,fixtures});
       gameResult=result;
       rows=result.rows??[];save('browser-result',result);save('rows',rows);
+      if(config.parity_reference){const refs=JSON.parse(fs.readFileSync(OUT+'/runs/'+config.parity_reference+'/browser-result.json')).count_results;save('browser-parity',await browser.page.evaluate(refs=>verifyCountParity(refs),refs));}
       save('clock-end',await browser.page.evaluate(()=>calibrateFactorClock()));
 
     }
