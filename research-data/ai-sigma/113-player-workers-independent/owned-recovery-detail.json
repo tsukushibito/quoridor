@@ -1,0 +1,16 @@
+{
+  "issue": "quoridor-4lc.113",
+  "immutable_primary_stopSHA": "1dab2d2192ecac24c40a6b1b50e938ae3b12831832424e0de50d8cf72e33b880",
+  "inner_controlled_receipt": {
+    "remaining_pids": 0,
+    "forced": true,
+    "waited": true,
+    "zombie_identities_absent": true,
+    "registration_ack": true,
+    "registered": 33,
+    "graceful_error": null
+  },
+  "outer_kernel_proof_file": "runs/p113-functional-r2.process.json",
+  "archive_member": "runs/p113-functional-r2/outer-controlled-stop.json",
+  "note": "inner_controlled null in compact stop was a nonexistent field lookup; actual controlled receipt preserved in immutable archive; no recovery claim changed"
+}
