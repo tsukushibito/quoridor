@@ -1,0 +1,23 @@
+{
+  "models": {
+    "model": {
+      "path": "models/experiments/ai-sigma/reference/sigma-pcr250/best.onnx",
+      "SHA256": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+      "bytes": 11663428
+    },
+    "Wasm": {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-ORT-SEARCH/final.wasm",
+      "SHA256": "1f54d0b8f0c6d3d7d51935886ed506e44376a2052506be62ca7a726c85a78a01",
+      "bytes": 292139
+    }
+  },
+  "readonly_imports_checked": {
+    "tools/ai-sigma-player-workers/player-main.js": "610e899acd43215efc9fa3a08f3c337248639505a57196e1a730a91f7afde4a8",
+    "tools/ai-sigma-player-workers/player-worker.js": "fd5f5b72a836164133b22f718d58ef31d2d4b0f8a4887070e1ac9346112de5e8",
+    "tools/ai-sigma-tail-transport/early-worker.js": "9494e33e7204be208262914c04ea5eb0d7985872a6d7ebc6e4084d84729097d4",
+    "tools/ai-sigma-tail-transport/checkpoint.js": "2b736d696a099350bf724b40dd858fc3afe11ce17a1c143f3029e5fcd2f28d8c",
+    "tools/ai-sigma-actual-boundary-repair/early-cache.cjs": "748fe01dfebf5e524465ef69255acf0026154188b9002a5338ca790ca092e7f7",
+    "tools/ai-sigma-cpu-sigma-frame8/adapters.cjs": "12b2617595336a7ae24ad1503566814add61f8f553dd1cf6560f9459112a1905"
+  },
+  "scope": "required recorded inputs only; not all history"
+}
