@@ -1,0 +1,96 @@
+{
+  "issue": "quoridor-4lc.121",
+  "actual_go": false,
+  "next_contract_required": true,
+  "priority": "P1 first; P2 only if score saturation/decision uncertainty persists. Neither changes119 or requires balancing every diagnostic.",
+  "questions": [
+    "Does the selected outcome/prefix population distinguish changes relevant to the goal?",
+    "On exact same inputs, are policy differences or completed evaluation/initial CP costs the more useful next factor?",
+    "Would the next result change an implementation or budget decision, rather than add another uninformative WDL?"
+  ],
+  "current_route_rationale": [
+    "Retain both dedicatedWorkers/SAB/main and current policy as controls; 119 detects four two-colour losses, unlike117, so wholesale evaluation rejection is unsupported.",
+    "Current common model/finite saved numerical gates make a policy-versus-cost diagnostic cheap; coefficient110 already demonstrated finite sensitivity without proving strength.",
+    "Complete fixed119 and audit its necessary claims; do not select/rewrite inputs or merge117."
+  ],
+  "P1": {
+    "title": "Same-input completed-work control, then one-factor reference FPU counterfactual",
+    "problem": "WDL and different-trajectory median costs confound H1/preparation, H2 rules and H3 retained work; C-only again has uncertain incremental information.",
+    "evidence": [
+      "119 Xi=[0,0,0,.5,.5,.5,0,.5].",
+      "Same-input roots pair1/2 exactfeatures/logits/value; completedNN7:13 then12:8, firstCP95.755:45.020 then55.110:95.200ms.",
+      "94 source: candidateunvisitedQ0; referenceparentQ-.2sqrt(visitedbasePrior); parentQ absent in oldrootarchives.",
+      "110/111 C changes finite distribution/action, but WDL4 and missingCP do not establish coefficient quality."
+    ],
+    "competing_explanations": [
+      "Candidate initial preparation reduces search quantity under walltime.",
+      "FPU/order/finish/precision changes use the same evaluations differently.",
+      "Shared model error or deeper-feature/context error; two initialroot matches do not exclude these."
+    ],
+    "minimal_experiment": {
+      "inputs": "fixed3golden plus119 first2prefixes; reused diagnostic inputs, notholdout; all5 results retained",
+      "control": "both policies/model/backend/order/caps/seed fixed; K32 root-inclusive completedbackup; compare all5 same inputs",
+      "factor": "Within reference JS only, replace unvisitedQ parentQ-.2sqrt(visitedPriorSum) with0; allC1/N/tie/legalorder/finish/temp/backend heldfixed. Do not claim full candidate/Sigma delta is a single factor.",
+      "planned_searches": 15,
+      "nominal_completed_backups": 480,
+      "record": "rootAction/visits by Action/TV, trueparentN/valueSum/visitedbasePrior, NNcalls vs completedbackup/rootNN; firstinfer/firstCP/wholetime/retiredNN. SameK is neither sameCPU nor samewall; baseline source numerical/legal gate only necessary range.",
+      "comparison": "unmodified-reference vs unvisited-Q=0 is the one-factor test; baseline engine comparison is a bundle and readiness/cost control"
+    },
+    "predictions": "If initial overhead limits walltime, sameK removes quantity gap while candidate takes longer. If FPU matters, one-factor referenceunvisited-Q=0 changes completed search distribution, possibly toward candidate; no claim about wins.",
+    "falsification": "If sameK exactAction/distribution do not respond tounvisited-Q=0 on all5, this finite FPU branch lacks evidence; numeric orcontextfailure is invalidexperiment, notnegativeeffect. ParentQ not logged => missing, never averageedges.",
+    "decisions": {
+      "sameKsimilar_policy_but_wallcostdiff": "continuecurrentpolicy; change allocation toward preparation/wrapper span fix or CPU/GPU inference cost study, with samewallconfirmation later",
+      "unvisited-Q=0shifts_reference_toward_candidate_at_sameK": "prioritize accurate candidateFPU onefactor implementation/verification next; maintainbaseline, do notadopt fromActionchanges",
+      "neither_explanation_distinguished": "stopautomaticC/FPUtuning; request smallestdeepcontext/value/finish diagnostic needed, reportunresolved"
+    },
+    "cost_estimate": "writer25min + independent15min; CPU2/thread1 RAMexistingbrowser6GiB; runtimecap120s after119 ownedNNstop, startup counted; no build if referenceJS-toggle only. Proposed allocation, not current authorization.",
+    "confounding": [
+      "f32 vsJSNumber/candidateorder remain in bundle",
+      "terminalbackup maynotcallNN; equalk is not equalinferencework",
+      "fiveobserveddiagnosticinputs cannotinfergeneral strength",
+      "candidatehost vsreferenceprep/scheduling not pureNN"
+    ]
+  },
+  "P2": {
+    "title": "Change diagnostic target to independently bounded tactical regret instead of more uncalibrated WDL",
+    "problem": "Colour exchange cancels average side bias but saturated same-side wins can conceal useful policy change;119 shows some sensitivity, so this is a conditional alternative, not a mandatory gate.",
+    "evidence": [
+      "117 all6Xi=.5/samewinningboard side at2seeds on3fixtures; zero observed variance is not evidence of exactequalstrength.",
+      "119 fourXi0 andfourXi.5; inputpopulation changes, so no causal improvement/decline estimate vs117.",
+      "Toy logistic calculation explicitlysynthetic: sidebias b0/3/5 gives dE[Xi]/dDelta=.25/.045177/.006648; colour exchange doesnotguarantee sensitivity."
+    ],
+    "competing_explanations": [
+      "Same-side pattern reflects legitimate largeposition advantage.",
+      "Both engines share blindspots/commonmodel or differ only in moves that do not flip shortWDL.",
+      "Smallfixedpopulation/seed variation alone producespattern."
+    ],
+    "minimal_experiment": {
+      "inputs": "Future separate NN-free construction of4 legal near-goal prefixes by boardgeometry rule fixedbeforeengine calls; preservelegalhistory, bothsides represented; do notreuse asformalholdout.",
+      "control": "currentcandidate andunmodifiedreference under same500ms; prior-only/root1 control labels intended stress, not proven universallyweaker.",
+      "bounded_oracle": "Independent goal-first RuleA depth<=2 legalcontinuation enumeration, hardcap20000nodes/case; certify immediate win/avoidforcednext-plyloss where exhaustive; unresolvedcases retained asunresolved, no selective replacement.",
+      "metric": "Exactcertified action mistake/regret category andcompletedNN/firstCP, allcases; no arbitrary rootNNvalue as truevalue. WDL optional futurecontract, notneeded to certify immediateerrors.",
+      "calls_upper": "4cases x3conditions=12 single-root searches; no fullgames in minimaltest"
+    },
+    "predictions": "A finite tacticalmetric can reveal a candidate-only forced-goal mistake even when colourpairedWDL saturates. Shared failures suggest commonmodel/policy blindspot; allpass maymean metrictoosimple.",
+    "falsification": "No oraclecertified states orallcontrols includingroot1 agree => this sentinel adds little discrimination; cannotdeclare currentWDL insensitive orNNbad.",
+    "decisions": {
+      "candidate_only_certified_errors": "changeimplementation priority to concrete tactic/terminal/searchcause, holdcoefficientadoption; keepcurrentcontrol",
+      "bothengines_certified_errors": "changequestion tosharedmodel/searchterminal handling rather thanrelativecoefficient tuning",
+      "allpass_orunresolved": "stopthismetric expansion; continuecurrentfixeddiagnosticpopulation orbroaderpredeclaredsampling; no mandatorybalancecalibration"
+    },
+    "cost_estimate": "design/oracle20min + writer20min + independent15min; stdoraclecap80k nodes total/run<=60s; browserfutureCPU2/thread1/allocatedRAM6GiB, NNruntime<=120s afterownedstop; new contract/resources required.",
+    "confounding": [
+      "near-goal diagnosticcoverage narrow/strategicstrengthunresolved",
+      "oracle sharesRuleA ifshared: independentimplementationlimits muststated",
+      "stressroot1 notmonotonicallyweaker",
+      "conditionselectedbeforeNN doesnotmakeIID/representative"
+    ]
+  },
+  "nonclaims": [
+    "NoformalNI/nativebrowsergoal",
+    "NoH2wholebranchfalsification",
+    "NoWDLcausefrommedianAPIcost",
+    "No119change/newgame/holdout",
+    "No policyorcoefficientadoption"
+  ]
+}

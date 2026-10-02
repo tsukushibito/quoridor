@@ -1,0 +1,70 @@
+{
+  "issue": "quoridor-4lc.121",
+  "UTC": "2026-10-02T12:30:17.676400+00:00",
+  "run_processing_stopped": true,
+  "checker_source_stopped": true,
+  "observed_identities": [
+    {
+      "PID": 2501110,
+      "ppid": 2501109,
+      "PGID": 2501109,
+      "starttick": 19690095,
+      "rss": 16588800
+    },
+    {
+      "PID": 2501111,
+      "ppid": 2501110,
+      "PGID": 2501111,
+      "starttick": 19690099,
+      "rss": 0
+    },
+    {
+      "PID": 2499143,
+      "ppid": 2499141,
+      "PGID": 2499141,
+      "starttick": 19673127,
+      "rss": 16445440
+    },
+    {
+      "PID": 2499144,
+      "ppid": 2499143,
+      "PGID": 2499144,
+      "starttick": 19673132,
+      "rss": 0
+    }
+  ],
+  "same_identity_live": [],
+  "PID0": true,
+  "NN": 0,
+  "Chrome": 0,
+  "games": 0,
+  "runtime_s": 0.2974970600043889,
+  "currentRSS_sample_max": 74989568,
+  "sampled_affinities": [
+    {
+      "2501111": [
+        0
+      ]
+    },
+    {
+      "2499144": [
+        0
+      ]
+    }
+  ],
+  "guard_errors": [
+    null,
+    null
+  ],
+  "initial_short_commands_PID_RSS_and_all_management_CPU_missing": true,
+  "prior_holding_retained_B": 5869568,
+  "holding_note": "Prior observed78/79/84/94 accounting conservatively retained; missing paths not deducted, oldarchives/globalledger not fully remeasured.",
+  "combined_guard_B": 14680064,
+  "reservation_B": 16777216,
+  "newscope_target_B": 2097152,
+  "instant_peak_and_full_period_not_guaranteed": true,
+  "error_notes": [
+    "Initial rg own directory missing/exit2 and expected119reportname missing/exit2; actual saved data used.",
+    "Initial source reference helper Git128: kernel.rs not a blob in119Git; corrected to hashreadonly source and mark119binarybinding notindependentlychecked. No NN failure."
+  ]
+}
