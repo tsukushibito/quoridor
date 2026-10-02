@@ -1,0 +1,11 @@
+# 119停止成果の引渡しと122配分
+
+119の登録16局はowner報告でgoal16・候補W4D0L12・764正常合法公開、late/初回無し/責任loss/未完了0。保存8pair compact summaryの算術と各archive現物SHA、stopSHA624c0728471aea3a389f68c0fe7d4b8a48b6afb0fdc3da804888447e69ad3b3fを統括確認した。startup48と手NN7764は別。archive全member復元はowner確認であり、統括のSHA照合を全member独立復元とは呼ばない。
+
+16局・764手は独立同分布の棋力標本とはしない。pair1/2/3/7は各L2、pair4/5/6/8は各W1L1。旧117/118の局面群W6L6と混合せず、合法ランダムprefixが均衡入力だとも認定しない。次判断に向け重要なのは、候補が弱い条件とそれを変える因子・評価感度を区別できるかである。121既hypothesisは問い/評価代替を含め調査中で、119全結果とsource停止を同正確activeへ追送した。
+
+122を既criticへ12:29:19.144420UTC turn/start accepted（turn01a0fc97-25a0-7191-b072-e8aa9cce266a）で実配分した。停止版の固定16棋譜・必要時計/最大8数値sampleをブラウザ内独立確認し、評価が改善差を見分ける設計かの独立見解を返す。新NN/model-load/対局0。原集計関数を呼ぶだけの再集計は独立裁定としない。Node審判へ戻さず、RuleA共有による独立性限界を示す。少数NN0保存確認を配分し、新ゲームの反復を現在追加しない。
+
+測定版pair1は8124d876、pair2–8は532c873でargv0識別。停止後のproc/exe+argv/read-error/stop-unconfirmed failclosed修正成功を旧admissionへ遡及適用しない。原21run/1517identity現在不在と当時Modeldrop/innercontrolled/outerwaitは別の停止根拠として122へ渡した。現在不在・source停止・全期間遵守・自然終了を区別する。
+
+119最終data/report/handoff Gitは保存中で、到着後122同turnへ追送する。119の棋譜主張は122の有限裁定待ち、121の見解を次選定へ使う。今回新ゲーム・正式NI・Sigma同等の認定はない。122処理受領30分又は13:10、新run25分又は13:05、提出40分又は13:20の早い側。CPU2/RAM6guard5.5・保存32guard28既critic内、親14:15:49と各停止時刻を維持する。
