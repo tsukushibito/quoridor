@@ -1,0 +1,2441 @@
+{
+  "issue": "quoridor-4lc.143",
+  "UTC": "2026-10-02T19:54:09.371093+00:00",
+  "scientific_Git": "885eb8e",
+  "original_run_env_git_label": "candidate-r2",
+  "env_label_not_Git_binding": true,
+  "actual_source_hash_Git_match": [
+    {
+      "path": "tools/ai-sigma-wallless-label-independent/admission.py",
+      "SHA256": "71557c56c2b1822ba6617508de5b91a55ea20222143b7dc29202111d4317590a"
+    },
+    {
+      "path": "tools/ai-sigma-wallless-label-independent/checker.js",
+      "SHA256": "e688741a3a81e4c2bf5eb7134c2ab56e32bcf1b9afd550091a58adc57d15f41c"
+    },
+    {
+      "path": "tools/ai-sigma-wallless-label-independent/entry.cjs",
+      "SHA256": "c99c15a3060865005d23b246b24517fccd4e2a9b3acffdad82fbf12c7c15849c"
+    },
+    {
+      "path": "tools/ai-sigma-wallless-label-independent/managed.py",
+      "SHA256": "cf1ede1f88734279b6082d0dc139fa657e0d24879dd91ff296c02d22144cc05b"
+    },
+    {
+      "path": "tools/ai-sigma-wallless-label-independent/prepare.py",
+      "SHA256": "fcbbf3926576d7dac093c4d27590263ce5ad6d67c0744222106a96a77540c226"
+    },
+    {
+      "path": "tools/ai-sigma-wallless-label-independent/runner.py",
+      "SHA256": "d42ce2baac91d8dcaf41448e7ccbce03db1a82fc036ffd8a975f011fb2b74a74"
+    }
+  ],
+  "job": {
+    "phase": "label",
+    "name": "p143-label-r2",
+    "cmd": [
+      "node",
+      "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-wallless-label-independent/entry.cjs",
+      "p143-label-r2"
+    ],
+    "start": "2026-10-02T19:53:05.775816+00:00",
+    "end": "2026-10-02T19:53:14.281272+00:00",
+    "subreaper_set_rc": 0,
+    "subreaper_get_rc": 0,
+    "subreaper_value": 1,
+    "kernel_boundary": {
+      "valid": true,
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "launcher": {
+        "pid": 2801778,
+        "ppid": 2009,
+        "pgid": 2801778,
+        "start_ticks": 22370527,
+        "state": "R",
+        "rss": 17268736,
+        "utime_ticks": 1,
+        "stime_ticks": 0
+      },
+      "root": {
+        "pid": 2801779,
+        "ppid": 2801778,
+        "pgid": 2801779,
+        "start_ticks": 22370530,
+        "state": "R",
+        "rss": 21139456,
+        "utime_ticks": 0,
+        "stime_ticks": 0
+      },
+      "initial_children": [],
+      "spawn_count": 1,
+      "single_thread_initial": true,
+      "sole_explicit_root": true
+    },
+    "runner_pid": 2801778,
+    "runner_starttick": 22370527,
+    "child_pid": 2801779,
+    "child_starttick": 22370530,
+    "exit": 0,
+    "stop_reason": null,
+    "sample_interval_ms": 40,
+    "peak_group_plus_runner_RSS": 1344892928,
+    "peak_allocated_bytes": 2183168,
+    "final_allocated_bytes": 1069056,
+    "tracked": [
+      {
+        "pid": 2801779,
+        "ppid": 2801778,
+        "pgid": 2801779,
+        "start_ticks": 22370530,
+        "state": "R",
+        "rss": 29491200,
+        "utime_ticks": 92,
+        "stime_ticks": 38,
+        "maxrss": 265031680,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 3882,
+        "last_ppid": 2801778,
+        "last_state": "S"
+      },
+      {
+        "pid": 2801786,
+        "ppid": 2801779,
+        "pgid": 2801779,
+        "start_ticks": 22370534,
+        "state": "S",
+        "rss": 3076096,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3076096,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 66,
+        "last_ppid": 2801779,
+        "last_state": "S"
+      },
+      {
+        "pid": 2801790,
+        "ppid": 2801786,
+        "pgid": 2801779,
+        "start_ticks": 22370534,
+        "state": "D",
+        "rss": 3784704,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3784704,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2801786,
+        "last_state": "D"
+      },
+      {
+        "pid": 2801802,
+        "ppid": 2801786,
+        "pgid": 2801779,
+        "start_ticks": 22370594,
+        "state": "R",
+        "rss": 72867840,
+        "utime_ticks": 23,
+        "stime_ticks": 7,
+        "maxrss": 189964288,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 246,
+        "last_ppid": 2801786,
+        "last_state": "S"
+      },
+      {
+        "pid": 2801810,
+        "ppid": 2801802,
+        "pgid": 2801779,
+        "start_ticks": 22370597,
+        "state": "R",
+        "rss": 3919872,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3919872,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2801802,
+        "last_state": "R"
+      },
+      {
+        "pid": 2801820,
+        "ppid": 2801802,
+        "pgid": 2801779,
+        "start_ticks": 22370661,
+        "state": "R",
+        "rss": 3883008,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3883008,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 4,
+        "last_ppid": 2801802,
+        "last_state": "D"
+      },
+      {
+        "pid": 2801825,
+        "ppid": 2801779,
+        "pgid": 2801779,
+        "start_ticks": 22370669,
+        "state": "S",
+        "rss": 3129344,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3129344,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 60,
+        "last_ppid": 2801779,
+        "last_state": "S"
+      },
+      {
+        "pid": 2801829,
+        "ppid": 2801825,
+        "pgid": 2801779,
+        "start_ticks": 22370669,
+        "state": "R",
+        "rss": 3837952,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3837952,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2801825,
+        "last_state": "R"
+      },
+      {
+        "pid": 2801845,
+        "ppid": 2801825,
+        "pgid": 2801779,
+        "start_ticks": 22370711,
+        "state": "R",
+        "rss": 67604480,
+        "utime_ticks": 30,
+        "stime_ticks": 5,
+        "maxrss": 193986560,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 260,
+        "last_ppid": 2801825,
+        "last_state": "S"
+      },
+      {
+        "pid": 2801857,
+        "ppid": 2801845,
+        "pgid": 2801779,
+        "start_ticks": 22370715,
+        "state": "R",
+        "rss": 4075520,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 4075520,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2801845,
+        "last_state": "R"
+      },
+      {
+        "pid": 2801862,
+        "ppid": 2801845,
+        "pgid": 2801779,
+        "start_ticks": 22370784,
+        "state": "R",
+        "rss": 4038656,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 4038656,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2801845,
+        "last_state": "R"
+      },
+      {
+        "pid": 2801878,
+        "ppid": 2801779,
+        "pgid": 2801878,
+        "start_ticks": 22370817,
+        "state": "R",
+        "rss": 6213632,
+        "utime_ticks": 19,
+        "stime_ticks": 16,
+        "maxrss": 179113984,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 7847,
+        "last_ppid": 2801779,
+        "last_state": "Z"
+      },
+      {
+        "pid": 2801889,
+        "ppid": 2801778,
+        "pgid": 2801888,
+        "start_ticks": 22370839,
+        "state": "S",
+        "rss": 3039232,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3039232,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 242,
+        "last_ppid": 2801778,
+        "last_state": "R"
+      },
+      {
+        "pid": 2801892,
+        "ppid": 2801878,
+        "pgid": 2801878,
+        "start_ticks": 22370840,
+        "state": "R",
+        "rss": 5795840,
+        "utime_ticks": 1,
+        "stime_ticks": 0,
+        "maxrss": 68751360,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 248,
+        "last_ppid": 2801778,
+        "last_state": "Z"
+      },
+      {
+        "pid": 2801893,
+        "ppid": 2801878,
+        "pgid": 2801878,
+        "start_ticks": 22370840,
+        "state": "R",
+        "rss": 5439488,
+        "utime_ticks": 1,
+        "stime_ticks": 1,
+        "maxrss": 68542464,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 248,
+        "last_ppid": 2801778,
+        "last_state": "Z"
+      },
+      {
+        "pid": 2801887,
+        "ppid": 2801778,
+        "pgid": 2801886,
+        "start_ticks": 22370838,
+        "state": "S",
+        "rss": 3461120,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3461120,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 484,
+        "last_ppid": 2801778,
+        "last_state": "R"
+      },
+      {
+        "pid": 2801931,
+        "ppid": 2801892,
+        "pgid": 2801878,
+        "start_ticks": 22370866,
+        "state": "R",
+        "rss": 44171264,
+        "utime_ticks": 1,
+        "stime_ticks": 0,
+        "maxrss": 65806336,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 1798,
+        "last_ppid": 2801892,
+        "last_state": "S"
+      },
+      {
+        "pid": 2801938,
+        "ppid": 2801878,
+        "pgid": 2801878,
+        "start_ticks": 22370868,
+        "state": "R",
+        "rss": 25649152,
+        "utime_ticks": 4,
+        "stime_ticks": 1,
+        "maxrss": 115347456,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 2016,
+        "last_ppid": 2801878,
+        "last_state": "Z"
+      },
+      {
+        "pid": 2801948,
+        "ppid": 2801893,
+        "pgid": 2801878,
+        "start_ticks": 22370876,
+        "state": "S",
+        "rss": 40673280,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 47845376,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 1788,
+        "last_ppid": 2801893,
+        "last_state": "S"
+      },
+      {
+        "pid": 2801972,
+        "ppid": 2801779,
+        "pgid": 2801779,
+        "start_ticks": 22370888,
+        "state": "S",
+        "rss": 3149824,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3149824,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 102,
+        "last_ppid": 2801779,
+        "last_state": "S"
+      },
+      {
+        "pid": 2801976,
+        "ppid": 2801972,
+        "pgid": 2801779,
+        "start_ticks": 22370889,
+        "state": "R",
+        "rss": 3850240,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3850240,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2801972,
+        "last_state": "D"
+      },
+      {
+        "pid": 2801981,
+        "ppid": 2801893,
+        "pgid": 2801878,
+        "start_ticks": 22370904,
+        "state": "R",
+        "rss": 46817280,
+        "utime_ticks": 15,
+        "stime_ticks": 3,
+        "maxrss": 136257536,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 2406,
+        "last_ppid": 2801893,
+        "last_state": "Z"
+      },
+      {
+        "pid": 2801988,
+        "ppid": 2801893,
+        "pgid": 2801878,
+        "start_ticks": 22370913,
+        "state": "R",
+        "rss": 55250944,
+        "utime_ticks": 27,
+        "stime_ticks": 13,
+        "maxrss": 182730752,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 2324,
+        "last_ppid": 2801893,
+        "last_state": "Z"
+      },
+      {
+        "pid": 2802027,
+        "ppid": 2801972,
+        "pgid": 2801779,
+        "start_ticks": 22370995,
+        "state": "R",
+        "rss": 15818752,
+        "utime_ticks": 25,
+        "stime_ticks": 7,
+        "maxrss": 216178688,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 363,
+        "last_ppid": 2801972,
+        "last_state": "S"
+      },
+      {
+        "pid": 2802039,
+        "ppid": 2802027,
+        "pgid": 2801779,
+        "start_ticks": 22371008,
+        "state": "R",
+        "rss": 4083712,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 4083712,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2802027,
+        "last_state": "D"
+      },
+      {
+        "pid": 2802050,
+        "ppid": 2802027,
+        "pgid": 2801779,
+        "start_ticks": 22371110,
+        "state": "R",
+        "rss": 3969024,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 4165632,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 6,
+        "last_ppid": 2802027,
+        "last_state": "D"
+      },
+      {
+        "pid": 2802056,
+        "ppid": 2801779,
+        "pgid": 2801779,
+        "start_ticks": 22371124,
+        "state": "S",
+        "rss": 3125248,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3125248,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 108,
+        "last_ppid": 2801779,
+        "last_state": "S"
+      },
+      {
+        "pid": 2802057,
+        "ppid": 2802056,
+        "pgid": 2801779,
+        "start_ticks": 22371124,
+        "state": "R",
+        "rss": 163840,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 163840,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 1,
+        "last_ppid": 2802056,
+        "last_state": "R"
+      },
+      {
+        "pid": 2802096,
+        "ppid": 2802056,
+        "pgid": 2801779,
+        "start_ticks": 22371262,
+        "state": "R",
+        "rss": 72900608,
+        "utime_ticks": 22,
+        "stime_ticks": 8,
+        "maxrss": 186703872,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 262,
+        "last_ppid": 2802056,
+        "last_state": "S"
+      },
+      {
+        "pid": 2802107,
+        "ppid": 2802096,
+        "pgid": 2801779,
+        "start_ticks": 22371267,
+        "state": "R",
+        "rss": 3866624,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3866624,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2802096,
+        "last_state": "D"
+      },
+      {
+        "pid": 2802118,
+        "ppid": 2802096,
+        "pgid": 2801779,
+        "start_ticks": 22371336,
+        "state": "R",
+        "rss": 3895296,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3895296,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2802096,
+        "last_state": "D"
+      }
+    ],
+    "remaining": [],
+    "kernel_identity_count": 31,
+    "kernel_adoptions": [
+      {
+        "kind": "kernel_adopted_direct_child",
+        "observed": {
+          "pid": 2801887,
+          "ppid": 2801778,
+          "pgid": 2801886,
+          "start_ticks": 22370838,
+          "state": "S",
+          "rss": 3461120,
+          "utime_ticks": 0,
+          "stime_ticks": 0
+        },
+        "launcher_identity": {
+          "pid": 2801778,
+          "ppid": 2009,
+          "pgid": 2801778,
+          "start_ticks": 22370527,
+          "state": "R",
+          "rss": 17268736,
+          "utime_ticks": 1,
+          "stime_ticks": 0
+        },
+        "sole_jobroot_identity": {
+          "pid": 2801779,
+          "ppid": 2801778,
+          "pgid": 2801779,
+          "start_ticks": 22370530,
+          "state": "R",
+          "rss": 21139456,
+          "utime_ticks": 0,
+          "stime_ticks": 0
+        },
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "monotonic": 223708.412454191
+      },
+      {
+        "kind": "kernel_adopted_direct_child",
+        "observed": {
+          "pid": 2801889,
+          "ppid": 2801778,
+          "pgid": 2801888,
+          "start_ticks": 22370839,
+          "state": "S",
+          "rss": 3039232,
+          "utime_ticks": 0,
+          "stime_ticks": 0
+        },
+        "launcher_identity": {
+          "pid": 2801778,
+          "ppid": 2009,
+          "pgid": 2801778,
+          "start_ticks": 22370527,
+          "state": "R",
+          "rss": 17268736,
+          "utime_ticks": 1,
+          "stime_ticks": 0
+        },
+        "sole_jobroot_identity": {
+          "pid": 2801779,
+          "ppid": 2801778,
+          "pgid": 2801779,
+          "start_ticks": 22370530,
+          "state": "R",
+          "rss": 21139456,
+          "utime_ticks": 0,
+          "stime_ticks": 0
+        },
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "monotonic": 223708.412516779
+      }
+    ],
+    "ledger_registered_count": 25,
+    "ledger_rejected": {},
+    "ledger_monitor_remaining_consistent": true,
+    "unknown_adopted": [],
+    "privateTMP_alias": "/proc/2801778/cwd/t",
+    "privateTMP_realpath": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261002/WALLLESS-LABEL-INDEPENDENT/runs/t",
+    "assigned_CPU": 2,
+    "process_deadline": "2026-10-02T20:15:00+00:00",
+    "newjob_cutoff": "2026-10-02T20:10:00+00:00",
+    "guardRSS": 5905580032,
+    "contractRAM": 6442450944,
+    "guard_basis": "current_proc_rss_runner_plus_owned_children",
+    "runner_ru_maxrss_bytes": 615759872,
+    "all_observed_TIDs_at_assigned_CPU": true,
+    "instant_peak_not_guaranteed": true,
+    "runner_sha256": "d42ce2baac91d8dcaf41448e7ccbce03db1a82fc036ffd8a975f011fb2b74a74"
+  },
+  "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+  "identities_checked": 32,
+  "current_same_identity": [],
+  "remaining_unknown": false,
+  "browser_status": {
+    "Worker_attempts": 0,
+    "Model": 0,
+    "NN": 0,
+    "solver_started": 2,
+    "solver_completed": 2,
+    "main_active": false,
+    "timer_message": 0
+  },
+  "inner_controlled": {
+    "remaining_pids": 0,
+    "tracked": [
+      {
+        "pid": 2801786,
+        "starttick": 22370534
+      },
+      {
+        "pid": 2801790,
+        "starttick": 22370534
+      },
+      {
+        "pid": 2801802,
+        "starttick": 22370594
+      },
+      {
+        "pid": 2801810,
+        "starttick": 22370597
+      },
+      {
+        "pid": 2801820,
+        "starttick": 22370661
+      },
+      {
+        "pid": 2801825,
+        "starttick": 22370669
+      },
+      {
+        "pid": 2801829,
+        "starttick": 22370669
+      },
+      {
+        "pid": 2801845,
+        "starttick": 22370711
+      },
+      {
+        "pid": 2801857,
+        "starttick": 22370715
+      },
+      {
+        "pid": 2801862,
+        "starttick": 22370784
+      },
+      {
+        "pid": 2801878,
+        "starttick": 22370817
+      },
+      {
+        "pid": 2801892,
+        "starttick": 22370840
+      },
+      {
+        "pid": 2801887,
+        "starttick": 22370838
+      },
+      {
+        "pid": 2801889,
+        "starttick": 22370839
+      },
+      {
+        "pid": 2801893,
+        "starttick": 22370840
+      },
+      {
+        "pid": 2801931,
+        "starttick": 22370866
+      },
+      {
+        "pid": 2801938,
+        "starttick": 22370868
+      },
+      {
+        "pid": 2801948,
+        "starttick": 22370876
+      },
+      {
+        "pid": 2801972,
+        "starttick": 22370888
+      },
+      {
+        "pid": 2801976,
+        "starttick": 22370889
+      },
+      {
+        "pid": 2801981,
+        "starttick": 22370904
+      },
+      {
+        "pid": 2801988,
+        "starttick": 22370913
+      },
+      {
+        "pid": 2802027,
+        "starttick": 22370995
+      },
+      {
+        "pid": 2802039,
+        "starttick": 22371008
+      },
+      {
+        "pid": 2802050,
+        "starttick": 22371110
+      },
+      {
+        "pid": 2802056,
+        "starttick": 22371124
+      },
+      {
+        "pid": 2802057,
+        "starttick": 22371124
+      },
+      {
+        "pid": 2802058,
+        "starttick": 22371125
+      },
+      {
+        "pid": 2802059,
+        "starttick": 22371125
+      },
+      {
+        "pid": 2802060,
+        "starttick": 22371125
+      },
+      {
+        "pid": 2802096,
+        "starttick": 22371262
+      },
+      {
+        "pid": 2802107,
+        "starttick": 22371267
+      },
+      {
+        "pid": 2802118,
+        "starttick": 22371336
+      }
+    ],
+    "forced": true,
+    "graceful_error": null,
+    "waited": true,
+    "zombie_identities_absent": true,
+    "registration_ack": true,
+    "registered": 21
+  },
+  "monitor_stop": {
+    "UTC": "2026-10-02T19:53:13.898Z",
+    "state": "READY",
+    "failure": null,
+    "deadlineUTC": "2026-10-02T20:15:00+00:00",
+    "subjectIssue": "quoridor-4lc.143",
+    "rows": [
+      {
+        "pid": 2801786,
+        "starttick": 22370534,
+        "PPID": 2801779,
+        "ppid": 2801779,
+        "state": "R",
+        "kind": "owned_observer_child",
+        "parent": {
+          "pid": 2801779,
+          "starttick": 22370530,
+          "PPID": 2801778,
+          "ppid": 2801778,
+          "state": "R"
+        },
+        "startUTC": "2026-10-02T19:53:05.816Z",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      {
+        "id": "quoridor-4lc",
+        "PID": 2801786,
+        "startUTC": "2026-10-02T19:53:05.816Z",
+        "endUTC": "2026-10-02T19:53:07.166Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      },
+      {
+        "pid": 2801825,
+        "starttick": 22370669,
+        "PPID": 2801779,
+        "ppid": 2801779,
+        "state": "S",
+        "kind": "owned_observer_child",
+        "parent": {
+          "pid": 2801779,
+          "starttick": 22370530,
+          "PPID": 2801778,
+          "ppid": 2801778,
+          "state": "R"
+        },
+        "startUTC": "2026-10-02T19:53:07.166Z",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      {
+        "id": "quoridor-4lc.143",
+        "PID": 2801825,
+        "startUTC": "2026-10-02T19:53:07.166Z",
+        "endUTC": "2026-10-02T19:53:08.357Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      },
+      {
+        "pid": 2801972,
+        "starttick": 22370888,
+        "PPID": 2801779,
+        "ppid": 2801779,
+        "state": "R",
+        "kind": "owned_observer_child",
+        "parent": {
+          "pid": 2801779,
+          "starttick": 22370530,
+          "PPID": 2801778,
+          "ppid": 2801778,
+          "state": "R"
+        },
+        "startUTC": "2026-10-02T19:53:09.360Z",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      {
+        "id": "quoridor-4lc",
+        "PID": 2801972,
+        "startUTC": "2026-10-02T19:53:09.360Z",
+        "endUTC": "2026-10-02T19:53:11.718Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      },
+      {
+        "pid": 2802056,
+        "starttick": 22371124,
+        "PPID": 2801779,
+        "ppid": 2801779,
+        "state": "R",
+        "kind": "owned_observer_child",
+        "parent": {
+          "pid": 2801779,
+          "starttick": 22370530,
+          "PPID": 2801778,
+          "ppid": 2801778,
+          "state": "R"
+        },
+        "startUTC": "2026-10-02T19:53:11.719Z",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      {
+        "id": "quoridor-4lc.143",
+        "PID": 2802056,
+        "startUTC": "2026-10-02T19:53:11.719Z",
+        "endUTC": "2026-10-02T19:53:13.898Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      }
+    ],
+    "pending_children": [],
+    "clock_cost_not_subtracted": true,
+    "all_owned_read_callbacks_waited": true,
+    "signal_unknown": 0,
+    "active_monitor_timer": false
+  },
+  "outer_ack": {
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+    "accepted": {
+      "2801786:22370534": {
+        "parent": {
+          "pid": 2801779,
+          "starttick": 22370530,
+          "PPID": 2801778,
+          "ppid": 2801778,
+          "state": "R"
+        },
+        "root": {
+          "pid": 2801779,
+          "starttick": 22370530
+        },
+        "UTC": "2026-10-02T19:53:05.818Z",
+        "received_monotonic": 223705.362850414,
+        "currently_present": true
+      },
+      "2801802:22370594": {
+        "parent": {
+          "pid": 2801786,
+          "ppid": 2801779,
+          "pgid": 2801779,
+          "starttick": 22370534,
+          "state": "S",
+          "comm": "flock"
+        },
+        "root": {
+          "pid": 2801779,
+          "ppid": 2801778,
+          "pgid": 2801779,
+          "starttick": 22370530,
+          "state": "R",
+          "comm": "MainThread"
+        },
+        "UTC": "2026-10-02T19:53:06.420Z",
+        "received_monotonic": 223705.9691587,
+        "currently_present": true
+      },
+      "2801810:22370597": {
+        "parent": {
+          "pid": 2801802,
+          "ppid": 2801786,
+          "pgid": 2801779,
+          "starttick": 22370594,
+          "state": "S",
+          "comm": "bd"
+        },
+        "root": {
+          "pid": 2801779,
+          "ppid": 2801778,
+          "pgid": 2801779,
+          "starttick": 22370530,
+          "state": "R",
+          "comm": "MainThread"
+        },
+        "UTC": "2026-10-02T19:53:06.462Z",
+        "received_monotonic": 223706.009311817,
+        "currently_present": true
+      },
+      "2801820:22370661": {
+        "parent": {
+          "pid": 2801802,
+          "ppid": 2801786,
+          "pgid": 2801779,
+          "starttick": 22370594,
+          "state": "S",
+          "comm": "bd"
+        },
+        "root": {
+          "pid": 2801779,
+          "ppid": 2801778,
+          "pgid": 2801779,
+          "starttick": 22370530,
+          "state": "R",
+          "comm": "MainThread"
+        },
+        "UTC": "2026-10-02T19:53:07.094Z",
+        "received_monotonic": 223706.621898815,
+        "currently_present": true
+      },
+      "2801825:22370669": {
+        "parent": {
+          "pid": 2801779,
+          "starttick": 22370530,
+          "PPID": 2801778,
+          "ppid": 2801778,
+          "state": "R"
+        },
+        "root": {
+          "pid": 2801779,
+          "starttick": 22370530
+        },
+        "UTC": "2026-10-02T19:53:07.170Z",
+        "received_monotonic": 223706.702111567,
+        "currently_present": true
+      },
+      "2801845:22370711": {
+        "parent": {
+          "pid": 2801825,
+          "ppid": 2801779,
+          "pgid": 2801779,
+          "starttick": 22370669,
+          "state": "S",
+          "comm": "flock"
+        },
+        "root": {
+          "pid": 2801779,
+          "ppid": 2801778,
+          "pgid": 2801779,
+          "starttick": 22370530,
+          "state": "R",
+          "comm": "MainThread"
+        },
+        "UTC": "2026-10-02T19:53:07.598Z",
+        "received_monotonic": 223707.145741509,
+        "currently_present": true
+      },
+      "2801857:22370715": {
+        "parent": {
+          "pid": 2801845,
+          "ppid": 2801825,
+          "pgid": 2801779,
+          "starttick": 22370711,
+          "state": "S",
+          "comm": "bd"
+        },
+        "root": {
+          "pid": 2801779,
+          "ppid": 2801778,
+          "pgid": 2801779,
+          "starttick": 22370530,
+          "state": "R",
+          "comm": "MainThread"
+        },
+        "UTC": "2026-10-02T19:53:07.639Z",
+        "received_monotonic": 223707.185893356,
+        "currently_present": true
+      },
+      "2801862:22370784": {
+        "parent": {
+          "pid": 2801845,
+          "ppid": 2801825,
+          "pgid": 2801779,
+          "starttick": 22370711,
+          "state": "S",
+          "comm": "bd"
+        },
+        "root": {
+          "pid": 2801779,
+          "ppid": 2801778,
+          "pgid": 2801779,
+          "starttick": 22370530,
+          "state": "R",
+          "comm": "MainThread"
+        },
+        "UTC": "2026-10-02T19:53:08.329Z",
+        "received_monotonic": 223707.873227516,
+        "currently_present": true
+      },
+      "2801878:22370817": {
+        "parent": {
+          "pid": 2801779,
+          "ppid": 2801778,
+          "pgid": 2801779,
+          "starttick": 22370530,
+          "state": "R",
+          "comm": "MainThread"
+        },
+        "root": {
+          "pid": 2801779,
+          "ppid": 2801778,
+          "pgid": 2801779,
+          "starttick": 22370530,
+          "state": "R",
+          "comm": "MainThread"
+        },
+        "UTC": "2026-10-02T19:53:08.669Z",
+        "received_monotonic": 223708.205228612,
+        "currently_present": true
+      },
+      "2801892:22370840": {
+        "parent": {
+          "pid": 2801878,
+          "ppid": 2801779,
+          "pgid": 2801878,
+          "starttick": 22370817,
+          "state": "R",
+          "comm": "chrome"
+        },
+        "root": {
+          "pid": 2801779,
+          "ppid": 2801778,
+          "pgid": 2801779,
+          "starttick": 22370530,
+          "state": "R",
+          "comm": "MainThread"
+        },
+        "UTC": "2026-10-02T19:53:08.877Z",
+        "received_monotonic": 223708.412594882,
+        "currently_present": true
+      },
+      "2801931:22370866": {
+        "parent": {
+          "pid": 2801892,
+          "ppid": 2801878,
+          "pgid": 2801878,
+          "starttick": 22370840,
+          "state": "S",
+          "comm": "chrome"
+        },
+        "root": {
+          "pid": 2801779,
+          "ppid": 2801778,
+          "pgid": 2801779,
+          "starttick": 22370530,
+          "state": "R",
+          "comm": "MainThread"
+        },
+        "UTC": "2026-10-02T19:53:09.148Z",
+        "received_monotonic": 223708.695269181,
+        "currently_present": true
+      },
+      "2801938:22370868": {
+        "parent": {
+          "pid": 2801878,
+          "ppid": 2801779,
+          "pgid": 2801878,
+          "starttick": 22370817,
+          "state": "R",
+          "comm": "chrome"
+        },
+        "root": {
+          "pid": 2801779,
+          "ppid": 2801778,
+          "pgid": 2801779,
+          "starttick": 22370530,
+          "state": "R",
+          "comm": "MainThread"
+        },
+        "UTC": "2026-10-02T19:53:09.164Z",
+        "received_monotonic": 223708.695331139,
+        "currently_present": true
+      },
+      "2801948:22370876": {
+        "parent": {
+          "pid": 2801893,
+          "ppid": 2801878,
+          "pgid": 2801878,
+          "starttick": 22370840,
+          "state": "S",
+          "comm": "chrome"
+        },
+        "root": {
+          "pid": 2801779,
+          "ppid": 2801778,
+          "pgid": 2801779,
+          "starttick": 22370530,
+          "state": "R",
+          "comm": "MainThread"
+        },
+        "UTC": "2026-10-02T19:53:09.239Z",
+        "received_monotonic": 223708.776772447,
+        "currently_present": true
+      },
+      "2801972:22370888": {
+        "parent": {
+          "pid": 2801779,
+          "starttick": 22370530,
+          "PPID": 2801778,
+          "ppid": 2801778,
+          "state": "R"
+        },
+        "root": {
+          "pid": 2801779,
+          "starttick": 22370530
+        },
+        "UTC": "2026-10-02T19:53:09.365Z",
+        "received_monotonic": 223708.903335278,
+        "currently_present": true
+      },
+      "2801981:22370904": {
+        "parent": {
+          "pid": 2801893,
+          "ppid": 2801878,
+          "pgid": 2801878,
+          "starttick": 22370840,
+          "state": "S",
+          "comm": "chrome"
+        },
+        "root": {
+          "pid": 2801779,
+          "ppid": 2801778,
+          "pgid": 2801779,
+          "starttick": 22370530,
+          "state": "R",
+          "comm": "MainThread"
+        },
+        "UTC": "2026-10-02T19:53:09.537Z",
+        "received_monotonic": 223709.068351919,
+        "currently_present": true
+      },
+      "2801988:22370913": {
+        "parent": {
+          "pid": 2801893,
+          "ppid": 2801878,
+          "pgid": 2801878,
+          "starttick": 22370840,
+          "state": "S",
+          "comm": "chrome"
+        },
+        "root": {
+          "pid": 2801779,
+          "ppid": 2801778,
+          "pgid": 2801779,
+          "starttick": 22370530,
+          "state": "R",
+          "comm": "MainThread"
+        },
+        "UTC": "2026-10-02T19:53:09.607Z",
+        "received_monotonic": 223709.148801679,
+        "currently_present": true
+      },
+      "2802039:22371008": {
+        "parent": {
+          "pid": 2802027,
+          "ppid": 2801972,
+          "pgid": 2801779,
+          "starttick": 22370995,
+          "state": "R",
+          "comm": "bd"
+        },
+        "root": {
+          "pid": 2801779,
+          "ppid": 2801778,
+          "pgid": 2801779,
+          "starttick": 22370530,
+          "state": "R",
+          "comm": "MainThread"
+        },
+        "UTC": "2026-10-02T19:53:10.575Z",
+        "received_monotonic": 223710.112798408,
+        "currently_present": true
+      },
+      "2802050:22371110": {
+        "parent": {
+          "pid": 2802027,
+          "ppid": 2801972,
+          "pgid": 2801779,
+          "starttick": 22370995,
+          "state": "S",
+          "comm": "bd"
+        },
+        "root": {
+          "pid": 2801779,
+          "ppid": 2801778,
+          "pgid": 2801779,
+          "starttick": 22370530,
+          "state": "R",
+          "comm": "MainThread"
+        },
+        "UTC": "2026-10-02T19:53:11.588Z",
+        "received_monotonic": 223711.125609998,
+        "currently_present": true
+      },
+      "2802056:22371124": {
+        "parent": {
+          "pid": 2801779,
+          "starttick": 22370530,
+          "PPID": 2801778,
+          "ppid": 2801778,
+          "state": "R"
+        },
+        "root": {
+          "pid": 2801779,
+          "starttick": 22370530
+        },
+        "UTC": "2026-10-02T19:53:11.721Z",
+        "received_monotonic": 223711.248498928,
+        "currently_present": true
+      },
+      "2802058:22371125": {
+        "parent": {
+          "pid": 2802056,
+          "ppid": 2801779,
+          "pgid": 2801779,
+          "starttick": 22371124,
+          "state": "S",
+          "comm": "bash"
+        },
+        "root": {
+          "pid": 2801779,
+          "ppid": 2801778,
+          "pgid": 2801779,
+          "starttick": 22370530,
+          "state": "R",
+          "comm": "MainThread"
+        },
+        "UTC": "2026-10-02T19:53:11.728Z",
+        "received_monotonic": 223711.253223407,
+        "currently_present": false
+      },
+      "2802059:22371125": {
+        "parent": {
+          "pid": 2802058,
+          "ppid": 2802056,
+          "pgid": 2801779,
+          "starttick": 22371125,
+          "state": "S",
+          "comm": "bash"
+        },
+        "root": {
+          "pid": 2801779,
+          "ppid": 2801778,
+          "pgid": 2801779,
+          "starttick": 22370530,
+          "state": "R",
+          "comm": "MainThread"
+        },
+        "UTC": "2026-10-02T19:53:11.728Z",
+        "received_monotonic": 223711.253289836,
+        "currently_present": false
+      },
+      "2802060:22371125": {
+        "parent": {
+          "pid": 2802056,
+          "ppid": 2801779,
+          "pgid": 2801779,
+          "starttick": 22371124,
+          "state": "S",
+          "comm": "bash"
+        },
+        "root": {
+          "pid": 2801779,
+          "ppid": 2801778,
+          "pgid": 2801779,
+          "starttick": 22370530,
+          "state": "R",
+          "comm": "MainThread"
+        },
+        "UTC": "2026-10-02T19:53:11.738Z",
+        "received_monotonic": 223711.288514106,
+        "currently_present": false
+      },
+      "2802096:22371262": {
+        "parent": {
+          "pid": 2802056,
+          "ppid": 2801779,
+          "pgid": 2801779,
+          "starttick": 22371124,
+          "state": "S",
+          "comm": "flock"
+        },
+        "root": {
+          "pid": 2801779,
+          "ppid": 2801778,
+          "pgid": 2801779,
+          "starttick": 22370530,
+          "state": "R",
+          "comm": "MainThread"
+        },
+        "UTC": "2026-10-02T19:53:13.101Z",
+        "received_monotonic": 223712.65911047,
+        "currently_present": true
+      },
+      "2802107:22371267": {
+        "parent": {
+          "pid": 2802096,
+          "ppid": 2802056,
+          "pgid": 2801779,
+          "starttick": 22371262,
+          "state": "S",
+          "comm": "bd"
+        },
+        "root": {
+          "pid": 2801779,
+          "ppid": 2801778,
+          "pgid": 2801779,
+          "starttick": 22370530,
+          "state": "R",
+          "comm": "MainThread"
+        },
+        "UTC": "2026-10-02T19:53:13.150Z",
+        "received_monotonic": 223712.699309402,
+        "currently_present": true
+      },
+      "2802118:22371336": {
+        "parent": {
+          "pid": 2802096,
+          "ppid": 2802056,
+          "pgid": 2801779,
+          "starttick": 22371262,
+          "state": "S",
+          "comm": "bd"
+        },
+        "root": {
+          "pid": 2801779,
+          "ppid": 2801778,
+          "pgid": 2801779,
+          "starttick": 22370530,
+          "state": "R",
+          "comm": "MainThread"
+        },
+        "UTC": "2026-10-02T19:53:13.849Z",
+        "received_monotonic": 223713.390902669,
+        "currently_present": true
+      }
+    },
+    "rejected": {},
+    "unknown_adopted": [],
+    "registered_live": [],
+    "kernel_boundary": {
+      "valid": true,
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "launcher": {
+        "pid": 2801778,
+        "ppid": 2009,
+        "pgid": 2801778,
+        "start_ticks": 22370527,
+        "state": "R",
+        "rss": 17268736,
+        "utime_ticks": 1,
+        "stime_ticks": 0
+      },
+      "root": {
+        "pid": 2801779,
+        "ppid": 2801778,
+        "pgid": 2801779,
+        "start_ticks": 22370530,
+        "state": "R",
+        "rss": 21139456,
+        "utime_ticks": 0,
+        "stime_ticks": 0
+      },
+      "initial_children": [],
+      "spawn_count": 1,
+      "single_thread_initial": true,
+      "sole_explicit_root": true
+    },
+    "kernel_owned": [
+      {
+        "pid": 2801786,
+        "starttick": 22370534,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2801786,
+            "ppid": 2801779,
+            "pgid": 2801779,
+            "start_ticks": 22370534,
+            "state": "S",
+            "rss": 3076096,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2801779,
+            "ppid": 2801778,
+            "pgid": 2801779,
+            "start_ticks": 22370530,
+            "state": "S",
+            "rss": 55005184,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2801790,
+        "starttick": 22370534,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2801790,
+            "ppid": 2801786,
+            "pgid": 2801779,
+            "start_ticks": 22370534,
+            "state": "D",
+            "rss": 3784704,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2801786,
+            "ppid": 2801779,
+            "pgid": 2801779,
+            "start_ticks": 22370534,
+            "state": "S",
+            "rss": 3076096,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2801802,
+        "starttick": 22370594,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2801802,
+            "ppid": 2801786,
+            "pgid": 2801779,
+            "start_ticks": 22370594,
+            "state": "R",
+            "rss": 72867840,
+            "utime_ticks": 1,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2801786,
+            "ppid": 2801779,
+            "pgid": 2801779,
+            "start_ticks": 22370534,
+            "state": "S",
+            "rss": 1884160,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2801810,
+        "starttick": 22370597,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2801810,
+            "ppid": 2801802,
+            "pgid": 2801779,
+            "start_ticks": 22370597,
+            "state": "R",
+            "rss": 3919872,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2801802,
+            "ppid": 2801786,
+            "pgid": 2801779,
+            "start_ticks": 22370594,
+            "state": "S",
+            "rss": 90091520,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2801820,
+        "starttick": 22370661,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2801820,
+            "ppid": 2801802,
+            "pgid": 2801779,
+            "start_ticks": 22370661,
+            "state": "R",
+            "rss": 3883008,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2801802,
+            "ppid": 2801786,
+            "pgid": 2801779,
+            "start_ticks": 22370594,
+            "state": "S",
+            "rss": 189505536,
+            "utime_ticks": 23,
+            "stime_ticks": 7
+          }
+        }
+      },
+      {
+        "pid": 2801825,
+        "starttick": 22370669,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2801825,
+            "ppid": 2801779,
+            "pgid": 2801779,
+            "start_ticks": 22370669,
+            "state": "S",
+            "rss": 3129344,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2801779,
+            "ppid": 2801778,
+            "pgid": 2801779,
+            "start_ticks": 22370530,
+            "state": "S",
+            "rss": 59658240,
+            "utime_ticks": 9,
+            "stime_ticks": 7
+          }
+        }
+      },
+      {
+        "pid": 2801829,
+        "starttick": 22370669,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2801829,
+            "ppid": 2801825,
+            "pgid": 2801779,
+            "start_ticks": 22370669,
+            "state": "R",
+            "rss": 3837952,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2801825,
+            "ppid": 2801779,
+            "pgid": 2801779,
+            "start_ticks": 22370669,
+            "state": "S",
+            "rss": 3129344,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2801845,
+        "starttick": 22370711,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2801845,
+            "ppid": 2801825,
+            "pgid": 2801779,
+            "start_ticks": 22370711,
+            "state": "R",
+            "rss": 67604480,
+            "utime_ticks": 1,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2801825,
+            "ppid": 2801779,
+            "pgid": 2801779,
+            "start_ticks": 22370669,
+            "state": "S",
+            "rss": 1646592,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2801857,
+        "starttick": 22370715,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2801857,
+            "ppid": 2801845,
+            "pgid": 2801779,
+            "start_ticks": 22370715,
+            "state": "R",
+            "rss": 4075520,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2801845,
+            "ppid": 2801825,
+            "pgid": 2801779,
+            "start_ticks": 22370711,
+            "state": "S",
+            "rss": 87511040,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2801862,
+        "starttick": 22370784,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2801862,
+            "ppid": 2801845,
+            "pgid": 2801779,
+            "start_ticks": 22370784,
+            "state": "R",
+            "rss": 4038656,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2801845,
+            "ppid": 2801825,
+            "pgid": 2801779,
+            "start_ticks": 22370711,
+            "state": "S",
+            "rss": 187387904,
+            "utime_ticks": 30,
+            "stime_ticks": 5
+          }
+        }
+      },
+      {
+        "pid": 2801878,
+        "starttick": 22370817,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2801878,
+            "ppid": 2801779,
+            "pgid": 2801878,
+            "start_ticks": 22370817,
+            "state": "R",
+            "rss": 6213632,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2801779,
+            "ppid": 2801778,
+            "pgid": 2801779,
+            "start_ticks": 22370530,
+            "state": "S",
+            "rss": 149848064,
+            "utime_ticks": 38,
+            "stime_ticks": 14
+          }
+        }
+      },
+      {
+        "pid": 2801887,
+        "starttick": 22370838,
+        "origin": {
+          "kind": "kernel_adopted_direct_child",
+          "observed": {
+            "pid": 2801887,
+            "ppid": 2801778,
+            "pgid": 2801886,
+            "start_ticks": 22370838,
+            "state": "S",
+            "rss": 3461120,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "launcher_identity": {
+            "pid": 2801778,
+            "ppid": 2009,
+            "pgid": 2801778,
+            "start_ticks": 22370527,
+            "state": "R",
+            "rss": 17268736,
+            "utime_ticks": 1,
+            "stime_ticks": 0
+          },
+          "sole_jobroot_identity": {
+            "pid": 2801779,
+            "ppid": 2801778,
+            "pgid": 2801779,
+            "start_ticks": 22370530,
+            "state": "R",
+            "rss": 21139456,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+          "monotonic": 223708.412454191
+        }
+      },
+      {
+        "pid": 2801889,
+        "starttick": 22370839,
+        "origin": {
+          "kind": "kernel_adopted_direct_child",
+          "observed": {
+            "pid": 2801889,
+            "ppid": 2801778,
+            "pgid": 2801888,
+            "start_ticks": 22370839,
+            "state": "S",
+            "rss": 3039232,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "launcher_identity": {
+            "pid": 2801778,
+            "ppid": 2009,
+            "pgid": 2801778,
+            "start_ticks": 22370527,
+            "state": "R",
+            "rss": 17268736,
+            "utime_ticks": 1,
+            "stime_ticks": 0
+          },
+          "sole_jobroot_identity": {
+            "pid": 2801779,
+            "ppid": 2801778,
+            "pgid": 2801779,
+            "start_ticks": 22370530,
+            "state": "R",
+            "rss": 21139456,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+          "monotonic": 223708.412516779
+        }
+      },
+      {
+        "pid": 2801892,
+        "starttick": 22370840,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2801892,
+            "ppid": 2801878,
+            "pgid": 2801878,
+            "start_ticks": 22370840,
+            "state": "R",
+            "rss": 5795840,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2801878,
+            "ppid": 2801779,
+            "pgid": 2801878,
+            "start_ticks": 22370817,
+            "state": "S",
+            "rss": 66469888,
+            "utime_ticks": 2,
+            "stime_ticks": 2
+          }
+        }
+      },
+      {
+        "pid": 2801893,
+        "starttick": 22370840,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2801893,
+            "ppid": 2801878,
+            "pgid": 2801878,
+            "start_ticks": 22370840,
+            "state": "R",
+            "rss": 5439488,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2801878,
+            "ppid": 2801779,
+            "pgid": 2801878,
+            "start_ticks": 22370817,
+            "state": "S",
+            "rss": 66469888,
+            "utime_ticks": 2,
+            "stime_ticks": 2
+          }
+        }
+      },
+      {
+        "pid": 2801931,
+        "starttick": 22370866,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2801931,
+            "ppid": 2801892,
+            "pgid": 2801878,
+            "start_ticks": 22370866,
+            "state": "R",
+            "rss": 44171264,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2801892,
+            "ppid": 2801878,
+            "pgid": 2801878,
+            "start_ticks": 22370840,
+            "state": "S",
+            "rss": 68751360,
+            "utime_ticks": 1,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2801938,
+        "starttick": 22370868,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2801938,
+            "ppid": 2801878,
+            "pgid": 2801878,
+            "start_ticks": 22370868,
+            "state": "R",
+            "rss": 25649152,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2801878,
+            "ppid": 2801779,
+            "pgid": 2801878,
+            "start_ticks": 22370817,
+            "state": "R",
+            "rss": 98926592,
+            "utime_ticks": 3,
+            "stime_ticks": 5
+          }
+        }
+      },
+      {
+        "pid": 2801948,
+        "starttick": 22370876,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2801948,
+            "ppid": 2801893,
+            "pgid": 2801878,
+            "start_ticks": 22370876,
+            "state": "S",
+            "rss": 40673280,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2801893,
+            "ppid": 2801878,
+            "pgid": 2801878,
+            "start_ticks": 22370840,
+            "state": "S",
+            "rss": 68370432,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2801972,
+        "starttick": 22370888,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2801972,
+            "ppid": 2801779,
+            "pgid": 2801779,
+            "start_ticks": 22370888,
+            "state": "S",
+            "rss": 3149824,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2801779,
+            "ppid": 2801778,
+            "pgid": 2801779,
+            "start_ticks": 22370530,
+            "state": "R",
+            "rss": 156729344,
+            "utime_ticks": 43,
+            "stime_ticks": 16
+          }
+        }
+      },
+      {
+        "pid": 2801976,
+        "starttick": 22370889,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2801976,
+            "ppid": 2801972,
+            "pgid": 2801779,
+            "start_ticks": 22370889,
+            "state": "R",
+            "rss": 3850240,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2801972,
+            "ppid": 2801779,
+            "pgid": 2801779,
+            "start_ticks": 22370888,
+            "state": "S",
+            "rss": 3149824,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2801981,
+        "starttick": 22370904,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2801981,
+            "ppid": 2801893,
+            "pgid": 2801878,
+            "start_ticks": 22370904,
+            "state": "R",
+            "rss": 46817280,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2801893,
+            "ppid": 2801878,
+            "pgid": 2801878,
+            "start_ticks": 22370840,
+            "state": "S",
+            "rss": 68370432,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2801988,
+        "starttick": 22370913,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2801988,
+            "ppid": 2801893,
+            "pgid": 2801878,
+            "start_ticks": 22370913,
+            "state": "R",
+            "rss": 55250944,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2801893,
+            "ppid": 2801878,
+            "pgid": 2801878,
+            "start_ticks": 22370840,
+            "state": "S",
+            "rss": 68370432,
+            "utime_ticks": 1,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2802027,
+        "starttick": 22370995,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2802027,
+            "ppid": 2801972,
+            "pgid": 2801779,
+            "start_ticks": 22370995,
+            "state": "R",
+            "rss": 15818752,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2801972,
+            "ppid": 2801779,
+            "pgid": 2801779,
+            "start_ticks": 22370888,
+            "state": "S",
+            "rss": 1884160,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2802039,
+        "starttick": 22371008,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2802039,
+            "ppid": 2802027,
+            "pgid": 2801779,
+            "start_ticks": 22371008,
+            "state": "R",
+            "rss": 4083712,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2802027,
+            "ppid": 2801972,
+            "pgid": 2801779,
+            "start_ticks": 22370995,
+            "state": "S",
+            "rss": 88145920,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2802050,
+        "starttick": 22371110,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2802050,
+            "ppid": 2802027,
+            "pgid": 2801779,
+            "start_ticks": 22371110,
+            "state": "R",
+            "rss": 3969024,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2802027,
+            "ppid": 2801972,
+            "pgid": 2801779,
+            "start_ticks": 22370995,
+            "state": "S",
+            "rss": 194306048,
+            "utime_ticks": 25,
+            "stime_ticks": 7
+          }
+        }
+      },
+      {
+        "pid": 2802056,
+        "starttick": 22371124,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2802056,
+            "ppid": 2801779,
+            "pgid": 2801779,
+            "start_ticks": 22371124,
+            "state": "S",
+            "rss": 3125248,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2801779,
+            "ppid": 2801778,
+            "pgid": 2801779,
+            "start_ticks": 22370530,
+            "state": "S",
+            "rss": 264540160,
+            "utime_ticks": 78,
+            "stime_ticks": 27
+          }
+        }
+      },
+      {
+        "pid": 2802057,
+        "starttick": 22371124,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2802057,
+            "ppid": 2802056,
+            "pgid": 2801779,
+            "start_ticks": 22371124,
+            "state": "R",
+            "rss": 163840,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2802056,
+            "ppid": 2801779,
+            "pgid": 2801779,
+            "start_ticks": 22371124,
+            "state": "S",
+            "rss": 3125248,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2802096,
+        "starttick": 22371262,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2802096,
+            "ppid": 2802056,
+            "pgid": 2801779,
+            "start_ticks": 22371262,
+            "state": "R",
+            "rss": 72900608,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2802056,
+            "ppid": 2801779,
+            "pgid": 2801779,
+            "start_ticks": 22371124,
+            "state": "S",
+            "rss": 1736704,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2802107,
+        "starttick": 22371267,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2802107,
+            "ppid": 2802096,
+            "pgid": 2801779,
+            "start_ticks": 22371267,
+            "state": "R",
+            "rss": 3866624,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2802096,
+            "ppid": 2802056,
+            "pgid": 2801779,
+            "start_ticks": 22371262,
+            "state": "S",
+            "rss": 88625152,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2802118,
+        "starttick": 22371336,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2802118,
+            "ppid": 2802096,
+            "pgid": 2801779,
+            "start_ticks": 22371336,
+            "state": "R",
+            "rss": 3895296,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2802096,
+            "ppid": 2802056,
+            "pgid": 2801779,
+            "start_ticks": 22371262,
+            "state": "S",
+            "rss": 182816768,
+            "utime_ticks": 22,
+            "stime_ticks": 8
+          }
+        }
+      }
+    ]
+  },
+  "source_preparation_still_active": true,
+  "scientific_source_write_stopped": true,
+  "source_before_after_exact": true,
+  "current_absence_not_natural_fullperiod": true
+}
