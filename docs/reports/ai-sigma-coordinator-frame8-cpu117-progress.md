@@ -9,3 +9,7 @@
 必要な棋譜・時計・seed・全分母を118へ実配分。既critic idleへ2026-10-02T11:20:45.154672UTC契約全文turn/start accepted、turn01a0fc58-5f59-78a2-a990-7828f9229ba6。新NN/対局0、browser内全12棋譜と保存時計・最大12rootを確認し、Nodeは外側だけ。117最終Git/handoffを同turnへ追送する。受付と本人開始/独立成功は区別する。
 
 116新正式統計法/F時計は保留案、117の結果救済へ後付けしない。117最終報告と118独立裁定→coordinatorが受入れと次の仮説・配分を判断する。GPU115不足解決をCPU研究の前提にしない。14:05:49新重job/14:15:49終了、92長期責任は不変。
+
+117最終提出を受領。data/report ee3c3d10b3fd73378f03d605ed287ff379c98485、handoff ba5515c4c0b0a440dca58cd3b12165ff1f89af67、handoff SHAedc1a33d171ba22f2502d3c3f2202317755da8db366b09e8ffdcfb315ca821adの現物/Git blob一致を確認。pair1実版9eb3510、pair2〜6実版db3bdc029a049e7feed1c5da9624786ba9419e9e、postrunaccount8883864を区別し118へ実追送する。
+
+候補/参照firstCP中央値81.474/49.272ms、firstAPI31.867/34.865msは入力/root/scheduling未分離、純NN速度差や棋力原因としない。pair4事前helper falsepositive・エラー後起動継続・gate欠測を未成立のまま118へ渡す。runtimeguard観測を事前gate成功へ補完しない。全43Gitfile/330archive member復元はowner結果、統括は必要最終handoff/reportと各pair archive hashを確認した。118独立裁定待ちで117研究受入れは未完了。
