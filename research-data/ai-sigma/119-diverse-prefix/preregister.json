@@ -1,0 +1,145 @@
+{
+  "issue": "quoridor-4lc.119",
+  "registeredUTC": "2026-10-02T11:59:13.499109+00:00",
+  "source_Git": "8124d876ed69128f16485f8d6b7216171e792789",
+  "prefix_SHA256": "c8104df06585717c54900e02afcf62a9133a91fdfc2a25732da38dcc7b286e27",
+  "generation_rule": {
+    "PRNG": "xorshift32 unsigned after x<<13,x>>>17,x<<5; nonzero seed",
+    "class_rule": "both nonempty: consume one class uint32 (<2^31 pawn, else wall); empty class: no class draw; always consume one uint32 floor(u/2^32*class.length) index in RuleA class order",
+    "attempt_rule": "(base XOR Math.imul(0x9e3779b9,attempt)) unsigned; zero to1",
+    "selection": "first legal nonterminal nonduplicate exact Action-prefix; no NN/value/AI"
+  },
+  "pairs": [
+    {
+      "pair": 1,
+      "generation_seed": 31001,
+      "accepted_attempt": 0,
+      "prefix_ply": 4,
+      "current_player": 1,
+      "key": "4,0|5,7|0|0,6;3,5|",
+      "fixture": "diverse-prefix-1",
+      "games_candidate_color": [
+        1,
+        2
+      ],
+      "search_seed": 1979,
+      "config": "pair1.config.json"
+    },
+    {
+      "pair": 2,
+      "generation_seed": 31002,
+      "accepted_attempt": 0,
+      "prefix_ply": 5,
+      "current_player": 2,
+      "key": "4,1|4,8|1|0,5|5,5;6,4;7,1",
+      "fixture": "diverse-prefix-2",
+      "games_candidate_color": [
+        1,
+        2
+      ],
+      "search_seed": 1979,
+      "config": "pair2.config.json"
+    },
+    {
+      "pair": 3,
+      "generation_seed": 31003,
+      "accepted_attempt": 0,
+      "prefix_ply": 8,
+      "current_player": 1,
+      "key": "2,1|4,8|0|1,1;1,5;6,2|",
+      "fixture": "diverse-prefix-3",
+      "games_candidate_color": [
+        1,
+        2
+      ],
+      "search_seed": 1979,
+      "config": "pair3.config.json"
+    },
+    {
+      "pair": 4,
+      "generation_seed": 31004,
+      "accepted_attempt": 0,
+      "prefix_ply": 9,
+      "current_player": 2,
+      "key": "4,0|4,8|1|4,3;6,5|1,4;3,0;4,7;5,7;6,7",
+      "fixture": "diverse-prefix-4",
+      "games_candidate_color": [
+        1,
+        2
+      ],
+      "search_seed": 1979,
+      "config": "pair4.config.json"
+    },
+    {
+      "pair": 5,
+      "generation_seed": 31005,
+      "accepted_attempt": 0,
+      "prefix_ply": 12,
+      "current_player": 1,
+      "key": "5,2|5,6|0|0,2;0,5;2,3;3,1;7,5|0,4",
+      "fixture": "diverse-prefix-5",
+      "games_candidate_color": [
+        1,
+        2
+      ],
+      "search_seed": 1979,
+      "config": "pair5.config.json"
+    },
+    {
+      "pair": 6,
+      "generation_seed": 31006,
+      "accepted_attempt": 0,
+      "prefix_ply": 13,
+      "current_player": 2,
+      "key": "5,0|2,7|1|2,3;4,3;4,5;6,3|7,1",
+      "fixture": "diverse-prefix-6",
+      "games_candidate_color": [
+        1,
+        2
+      ],
+      "search_seed": 1979,
+      "config": "pair6.config.json"
+    },
+    {
+      "pair": 7,
+      "generation_seed": 31007,
+      "accepted_attempt": 0,
+      "prefix_ply": 16,
+      "current_player": 1,
+      "key": "2,1|2,6|0|4,7;5,5|2,4;4,5;5,0;6,1;6,3",
+      "fixture": "diverse-prefix-7",
+      "games_candidate_color": [
+        1,
+        2
+      ],
+      "search_seed": 1979,
+      "config": "pair7.config.json"
+    },
+    {
+      "pair": 8,
+      "generation_seed": 31008,
+      "accepted_attempt": 0,
+      "prefix_ply": 17,
+      "current_player": 2,
+      "key": "6,0|3,7|1|0,5;2,2;4,0;4,4;6,1;6,5;7,7|0,6;3,3;5,2;5,4",
+      "fixture": "diverse-prefix-8",
+      "games_candidate_color": [
+        1,
+        2
+      ],
+      "search_seed": 1979,
+      "config": "pair8.config.json"
+    }
+  ],
+  "total_games": 16,
+  "game_public_cap": 3200,
+  "functional_cap": 2,
+  "functional_choice": "no additional NN requests; cheap/browser prefix and accepted same glue sufficient to enter fixed pair directly",
+  "model_or_NN_before_prefix_freeze": 0,
+  "numeric_selection_rule": "P1/P2\u00d7both engines: first root of each of eight accepted prefix games plus first eligible later root per game, existing browser validator checks all saved root self-consistency; no fixed NN reference for diverse root, golden startup separate",
+  "Responsibility": "candidate NN/model loss; reference NN/model invalid; all shared timer/Judge/automation/identity unfinished and all flags preserved",
+  "late_or_error_replacement": false,
+  "PRNG_independence": "generated/replayed with same shared RuleA; not independent rule implementation; exploratory input not formal holdout",
+  "formal_NI": false,
+  "old_results_combined": false
+}
