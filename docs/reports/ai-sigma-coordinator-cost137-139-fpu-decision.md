@@ -1,0 +1,13 @@
+# 費用枝を終了しcandidate FPU一因子へ配分する
+
+137/138の停止保存を有限受入れする。138独自NN0で全4採用/rootN8/8/9/15・edge7/7/8/14・Action154/154/154/162、手44/startup6/session2、厳密共通KのAction/根edgeを支持した。全661保存数値check、162TIDsampleの11,240隣接共通identity差分も有限支持。原134必要2根の入力/CP対応、Node VM共有RuleA自己整合とfixedgolden0、拒否CP10/16全文/欠測rootFinishedを保持し深部一般一致へしない。
+
+同Kで局所選択が再現され、500ms採用時の量が変わるという問いは絞れた。しかしTID直接Worker binding無し/採取時exe無し/端点欠測/消失tail/guardian終CPU欠測、公→ACK sample0から実推論CPUや残CPU原因は不成立。138は監視対照でfixedSigma孤立1状態の量を整えてもcandidate実装判断が未定義と批判した。これを採用し、同状態費用枝を終了、監視負荷対照は今回は配分しない。独立見解への反映は研究の選定変更であり文書やclose数を効果としない。
+
+139の最大1案candidate真parent mean FPUを部分採用する。visited候補Qが負・未訪問0という規則への直接介入で、現policyを対照に維持する。真meanを新たに両variant同計測しbaseline parityを確かめ、原/計測Q0/FPUの132固定input3/4×K32最大6検索へ140を配分する。C/order/finish/model/capsを同時変更しない。品質は参照距離で判断せず、手不変なら終了、input3->133なら既局所不利で全枝終了とする（139の提案からこの早期終了を明確化）。未評価新Actionに限り事前固定のbaseline/FPU/FPU/baseline局所fixedSigma対照最大8が今回条件付き許可、入力増量0。品質も局所policy依存/同seed/事後2状態でcandidate WDL/正式NIではない。
+
+139自己summary40CP/49共通K Action再算を138raw根edge監査と区別する。新raw根0、監視対照/深いoracle自動拡大0。真parent mean記録の初回/async/terminal/capの分母・符号が誤れば機構効果を未成立にし、edge平均補完0。private cached buildの計測負荷/型追加を無料としない。原parity失敗は科学negativeではなく計測修復範囲で、成功検索好結果への置換0。
+
+統括は137必要7Gitと77archive member/74現在不在、138必要13Git/7archive member/26現在不在、139必要19Git/6現在不在をNN0照合した。参照集合は本人6/20Git復元と異なる。137stop79ea43ce…f240d/handoff1a82c4ec…f4c7a、138stop799f92bf…e949、139stopf916e2ac…a41c、data/reportと最終metadata版を分けてbind。source/子停止とbackup引渡しを満たし137/138/139を統括へ移譲close。現在不在≠自然/全期間、自己checker/初回sourcehash欠測/旧失敗を保持する。
+
+140は同既experiment、private自域単独writer。CPU0 build単1/RAM4guard3.5各120秒/累計300、CPU2 browser単1/ORT1thread/RAM6guard5.5機構累計180/任意品質1440、static180、保存256guard224MiBを既2GiB内から配分する（親予約増0）。139の見積64MiBと実target/raw込み配分を区別する。全team費用不明、13720.428637秒/1382.881秒/139.108502秒は有限部分費用。次の節目は140同因子で手/品質が変わり、実装を継続・中止する根拠になったかを監督が追う。現政策維持、Sigma/NI未達、92既停止責任・23:20:59枠終了不変。
