@@ -48,3 +48,5 @@ Node小mockで逆順messageのengine別解決、初回無し、完成手更新�
 [archive manifest](../../research-data/ai-sigma/112-player-workers/archive-manifest.json)は必要120ファイルのstream復元hash一致を記録。archive SHA `01f5ef08e29b9c056d5513feceff6377fa213083c6374a4aba432d74a75a4950`、2,179,671B。モデル/全source/旧rawは複製せず、110/111使用中binary/rawを変更していない。コード版、設定、全棋譜・応答・失敗・clock・所有をGit/archiveへ固定した。
 
 開始・機能報告は通信受付を確認。initial途中報告と停止速報は宛先 `systemError` で拒否され、記録して有界再試行した。通信障害を研究不成立やpause解除へ変換しない。最終[handoff](../../research-data/ai-sigma/112-player-workers/handoff.json)とBeads112 notesを統括の読取先とし、停止版の世代棄却・非同期引渡し・合法棋譜・回収という有限主張を独立確認へ渡す。正式goや独立受入れを自己発行しない。
+
+最終報告は統括への `turn/steer` 配送受付を確認（[通信記録](../../research-data/ai-sigma/112-player-workers/communication.json)）。先の2件の拒否は保持する。これは研究の独立受入れではない。
