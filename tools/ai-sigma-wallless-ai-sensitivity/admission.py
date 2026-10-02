@@ -36,7 +36,10 @@ def admit(c,out,tool,runs):
  if c['kind']=='ai':
   started=0
   for p in runs.glob('wallless144-*.started.json'):
-   x=json.loads(p.read_text());cmd=x['command'];old=json.loads(Path(cmd[-1]).read_text())
+   x=json.loads(p.read_text());cmd=x['command']
+   if x['affinity']==[0]:continue
+   assert cmd[-2]=='--config','STARTED_CONFIG_UNKNOWN'
+   old=json.loads(Path(cmd[-1]).read_text())
    if old['kind']!='ai':continue
    result=runs/old['run_id']/'browser-result.json';assert result.exists(),'OLD_ATTEMPTS_UNKNOWN'
    started+=json.loads(result.read_text())['started_requests']
