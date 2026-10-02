@@ -1,4 +1,4 @@
-# SIGMA-COOPERATIVE-ARENA / quoridor-4lc.103 / 契約1
+# SIGMA-COOPERATIVE-ARENA / quoridor-4lc.103 / 契約2（104通信規約差分）
 
 既experiment saved01a0f31d-6d15-7620-bb63-4b4f878e4746へ。親現行版5/common/experiment/ai-research-experiments全文とready/show goal/self・pause・担当を確認し本人claim/受領開始を報告。97/100を新NN開始抑止と完成CP保持の有限理由で統括受入れ。原97 Git83bb0ce、保存1051ad6、独立adapter997e274/検算データdd34acd。旧93/97/100の結果/期限を変更せず、現在の新課題として実施する。
 
@@ -16,6 +16,6 @@ samefixed ONNX/immutableWasm/既ORTthreads1、CPU[2]単logical、candidate PUCT1
 
 公開/棋譜/Actionと必要保存rootのshape/finite/strict[-1,1]/特徴/合法mask/logits別softmaxを既validatorで確認。固定golden NN参照のあるrootと動的rootを別分母、startup6と手NNを別計上、全深部NNの一般一致は主張しない。Node/producer/page計測は既97と同経路を使い、通知payload削減やFIFO変更を今回の時計採用へ束ねない。終了子CPU/親Q欠測を捏造しない。
 
-総処理受領50分/新run終了5分前まで/提出60分、親heavy新開始05:39:12/終了05:49:12との早い方。静的CPU0/RAM1guard896MiB/run60s累計240s、NNCPU2threads1/RAM4currentRSSguard3.5GiB/run600s重累計1800s。root込みLLMglobal3維持、LLM入場は統括が実確認する。新保存64MiBguard56MiBは既entry2GiB内・追加予約0、Git/圧縮/展開/tmpも会計。単一run時間だけで全局完遂を保証しない。各pair前の残worstと自身のharddeadlineで続行/partialを判断し、cap/親期限を迂回しない。既source/localGit/共有modelを参照し圧縮は性能測定後、使用中93/95/97pathを削除しない。
+総処理受領50分/新run終了5分前まで/提出60分、親heavy新開始05:39:12/終了05:49:12との早い方。静的CPU0/RAM1guard896MiB/run60s累計240s、NNCPU2threads1/RAM4currentRSSguard3.5GiB/run600s重累計1800s。ユーザー104指示によりLLM active数の起動/報告制限は撤廃。宛先のpause/所有/正確turnと同役二重起動保護は維持し、CPU4/RAM8/保存12GiB/重job測定非競合/全期限は変えない。新保存64MiBguard56MiBは既entry2GiB内・追加予約0、Git/圧縮/展開/tmpも会計。単一run時間だけで全局完遂を保証しない。各pair前の残worstと自身のharddeadlineで続行/partialを判断し、cap/親期限を迂回しない。既source/localGit/共有modelを参照し圧縮は性能測定後、使用中93/95/97pathを削除しない。
 
 owned PID/boot/starttick/PPID・sole-root/subreaper/unknown・Beads監視callback/Modeldrop/Worker/innerforcedcontrolledPID0/outer同identitywaitを本文前停止記録、回収欠測でfresh禁止。自然終了/全期間遵守へ付替えずcurrentRSS対ru_maxrss/瞬間peak/背景CPUの限界を残す。必要棋譜/応答/clock/設定/失敗を研究Gitarchiveへ保存し復元照合、sourceと実runをGit参照、必要最小の報告→backup→idle。新NNkernel/Cargo/build/取得/model/GPU/学習/製品/push/role/scheduler/他者scope/再委譲変更0。Sigma同等未達・NI未立証を保持。独立確認は今回の動的接続/棋譜/clockに必要な範囲を次担当へ渡す。
