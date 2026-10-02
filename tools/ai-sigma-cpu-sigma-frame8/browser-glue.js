@@ -5,7 +5,8 @@ function frame8Mock(config, fixtures) {
     const fixture=fixtures.find(row=>row.id===fixtureId);
     let state=fromPrefix([]);
     for(const action of fixture.legal_prefix) {
-      if(!state.isActionLegal(action)||!state.getLegalActions().some(a=>JSON.stringify(a)===JSON.stringify(action)))throw Error('PREFIX_ILLEGAL');
+      const target=rustAction(state,action);
+      if(!state.getLegalActions().some(a=>rustAction(state,a)===target))throw Error('PREFIX_ILLEGAL '+fixtureId+' '+JSON.stringify(action));
       state=state.next(action);
     }
     const expected=referenceState(fixture);
