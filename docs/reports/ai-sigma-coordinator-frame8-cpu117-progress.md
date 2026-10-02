@@ -1,0 +1,11 @@
+# 枠8 CPU Sigma診断の実完遂と独立引渡し
+
+117固定6pair12局がowner保存で全goal/W6D0L6、644公開全合法・late0となった。接続2要求は別で、対局手NN7020/接続18、startup36+6計42、実NN総7080。initial/asym/jump各seed1979/2098、各色1→2の結果前順を維持した。全pairW1L1を正式同等、644手を独立WDL標本としない。旧CPU/GPU/旧枠の成績は混合しない。
+
+各pairの保存summary/archive SHAを確認済。pair内prefix込み総plyと新公開を区別する。参照Worker停止lower>D2は手採用500ms/有効CPUと別、公開後確実新NN0は保存runの有限観測。双方同資源への権利から実CPUcycle等値を導かない。
+
+停止速報code888386484c19ae33fae0b4cfa8ba7f063f4d1e46、stopSHA3998fe143ee2052d65118e611bc70cb57a909f6301f7894a6a58f87d1eed2c1bを現物照合。source/runtime stopped、17 process runs/1231記録identity現在なし、全remainingunknown0を保持する。owner RSSpeak1850765312B、保存peak20578304B、heavy392.160068秒。現在不在と当時forced/ownedwaitは自然終了/全期間保証と区別。最終data/reportはowner保存中で受入れ未完了。
+
+必要な棋譜・時計・seed・全分母を118へ実配分。既critic idleへ2026-10-02T11:20:45.154672UTC契約全文turn/start accepted、turn01a0fc58-5f59-78a2-a990-7828f9229ba6。新NN/対局0、browser内全12棋譜と保存時計・最大12rootを確認し、Nodeは外側だけ。117最終Git/handoffを同turnへ追送する。受付と本人開始/独立成功は区別する。
+
+116新正式統計法/F時計は保留案、117の結果救済へ後付けしない。117最終報告と118独立裁定→coordinatorが受入れと次の仮説・配分を判断する。GPU115不足解決をCPU研究の前提にしない。14:05:49新重job/14:15:49終了、92長期責任は不変。
