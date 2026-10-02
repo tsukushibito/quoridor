@@ -1,0 +1,138 @@
+{
+  "tables": [
+    {
+      "alpha": 0.05,
+      "Hoeffding_n_width_below_05": 600,
+      "Hoeffding_conservative_80pct_n": 1800,
+      "Hoeffding_conservative_90pct_n": 2111,
+      "Hoeffding_hours_one_environment": 55.333333333333336,
+      "EB_variance_scenarios": [
+        {
+          "hypothetical_observed_sample_variance": 0,
+          "n_width_below_05": 174,
+          "not_power_guarantee": true,
+          "wall_hours_330n_plus1200": 16.283333333333335
+        },
+        {
+          "hypothetical_observed_sample_variance": 0.0625,
+          "n_width_below_05": 466,
+          "not_power_guarantee": true,
+          "wall_hours_330n_plus1200": 43.05
+        },
+        {
+          "hypothetical_observed_sample_variance": 0.125,
+          "n_width_below_05": 670,
+          "not_power_guarantee": true,
+          "wall_hours_330n_plus1200": 61.75
+        },
+        {
+          "hypothetical_observed_sample_variance": 0.25,
+          "n_width_below_05": 1055,
+          "not_power_guarantee": true,
+          "wall_hours_330n_plus1200": 97.04166666666667
+        }
+      ],
+      "EB_universal_conservative_80pct_n": 2367,
+      "EB_universal_conservative_90pct_n": 2698
+    },
+    {
+      "alpha": 0.025,
+      "Hoeffding_n_width_below_05": 738,
+      "Hoeffding_conservative_80pct_n": 2035,
+      "Hoeffding_conservative_90pct_n": 2365,
+      "Hoeffding_hours_one_environment": 67.98333333333333,
+      "EB_variance_scenarios": [
+        {
+          "hypothetical_observed_sample_variance": 0,
+          "n_width_below_05": 206,
+          "not_power_guarantee": true,
+          "wall_hours_330n_plus1200": 19.216666666666665
+        },
+        {
+          "hypothetical_observed_sample_variance": 0.0625,
+          "n_width_below_05": 553,
+          "not_power_guarantee": true,
+          "wall_hours_330n_plus1200": 51.025
+        },
+        {
+          "hypothetical_observed_sample_variance": 0.125,
+          "n_width_below_05": 795,
+          "not_power_guarantee": true,
+          "wall_hours_330n_plus1200": 73.20833333333333
+        },
+        {
+          "hypothetical_observed_sample_variance": 0.25,
+          "n_width_below_05": 1253,
+          "not_power_guarantee": true,
+          "wall_hours_330n_plus1200": 115.19166666666666
+        }
+      ],
+      "EB_universal_conservative_80pct_n": 2655,
+      "EB_universal_conservative_90pct_n": 3004
+    },
+    {
+      "alpha": 0.0125,
+      "Hoeffding_n_width_below_05": 877,
+      "Hoeffding_conservative_80pct_n": 2261,
+      "Hoeffding_conservative_90pct_n": 2608,
+      "Hoeffding_hours_one_environment": 80.725,
+      "EB_variance_scenarios": [
+        {
+          "hypothetical_observed_sample_variance": 0,
+          "n_width_below_05": 238,
+          "not_power_guarantee": true,
+          "wall_hours_330n_plus1200": 22.15
+        },
+        {
+          "hypothetical_observed_sample_variance": 0.0625,
+          "n_width_below_05": 641,
+          "not_power_guarantee": true,
+          "wall_hours_330n_plus1200": 59.09166666666667
+        },
+        {
+          "hypothetical_observed_sample_variance": 0.125,
+          "n_width_below_05": 921,
+          "not_power_guarantee": true,
+          "wall_hours_330n_plus1200": 84.75833333333334
+        },
+        {
+          "hypothetical_observed_sample_variance": 0.25,
+          "n_width_below_05": 1451,
+          "not_power_guarantee": true,
+          "wall_hours_330n_plus1200": 133.34166666666667
+        }
+      ],
+      "EB_universal_conservative_80pct_n": 2936,
+      "EB_universal_conservative_90pct_n": 3301
+    }
+  ],
+  "budget": [
+    {
+      "from": "frame_start",
+      "seconds_before_new_heavy_stop": 13800.0,
+      "planning_pairs_max": 38,
+      "mean_half_old_L": 0.30146151527931897,
+      "overhead_is_explicit_planning_cap_not_measured": true
+    },
+    {
+      "from": "receipt",
+      "seconds_before_new_heavy_stop": 12798.0,
+      "planning_pairs_max": 35,
+      "mean_half_old_L": 0.2931276351551866,
+      "overhead_is_explicit_planning_cap_not_measured": true
+    },
+    {
+      "from": "hypothetical_after_115_deadline",
+      "seconds_before_new_heavy_stop": 9349.0,
+      "planning_pairs_max": 24,
+      "mean_half_old_L": 0.2501778852215545,
+      "overhead_is_explicit_planning_cap_not_measured": true
+    }
+  ],
+  "observed": [
+    66,
+    76,
+    73,
+    83
+  ]
+}
