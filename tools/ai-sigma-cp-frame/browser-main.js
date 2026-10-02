@@ -134,12 +134,29 @@ function rustPrefix(prefix) {
   return ids;
 }
 
+function responseCauses(response, fault) {
+  return {
+    cancelled:!!response.cancelled,
+    browser_late:!!response.late,
+    browser_judge:!!response.judge_error,
+    external_abort:!!response.external_abort,
+    shared_fault:response.shared_state===SharedBestAction.STATE.FAULT,
+    received_engine_fault:!!fault && fault.error!=='guard',
+    received_fault:fault??null,
+    initial_none:!response.completed,
+  };
+}
+
 function classifyResponse(response, fault) {
-  if(response.cancelled) return 'cancel_null';
-  if(response.late) return 'browser_deadline_processing_late';
-  if(response.judge_error) return 'browser_judge_failure';
-  if(fault && fault.error!=='guard') return 'engine_fault';
-  if(!response.completed) return 'initial_no_completed_cp';
+  const causes=responseCauses(response,fault);
+  // Keep all flags; framework/cancel causes cannot be overwritten by shared FAULT.
+  if(causes.external_abort) return 'external_automation_failure';
+  if(causes.cancelled) return 'cancel_null';
+  if(causes.browser_late) return 'browser_deadline_processing_late';
+  if(causes.browser_judge) return 'browser_judge_failure';
+  if(causes.received_engine_fault) return 'engine_fault';
+  if(causes.shared_fault) return 'ambiguous_shared_fault';
+  if(causes.initial_none) return 'initial_no_completed_cp';
   return 'completed_legal';
 }
 
@@ -220,9 +237,8 @@ async function chooseBrowser(spec, inputState, prefix, reference, config) {
         activeMainState=nextState;
         explorationWorker.postMessage({kind:'cancel',generation:generation+100000});
         let classification=classifyResponse(body,requestFaults.get(requestId));
-        if(sharedStatus.state===SharedBestAction.STATE.FAULT)classification='engine_fault';
-        if(externalAbort)classification='external_automation_failure';
-        resolve({body,t0_ms:t0,planned_ms:identity.seal_ms,timer_ms:timerAt,stamp_ms:stamp,public_elapsed_ms:stamp-t0,bytes:bytes.length,read_samples:readSamples,body_serialized:JSON.stringify(body),classification,public_did_not_await_ACK:true,Node_clock_referee_calls:0});
+        const causes=immutable(responseCauses(body,requestFaults.get(requestId)));
+        resolve({body,t0_ms:t0,planned_ms:identity.seal_ms,timer_ms:timerAt,stamp_ms:stamp,public_elapsed_ms:stamp-t0,bytes:bytes.length,read_samples:readSamples,body_serialized:JSON.stringify(body),classification,causes,public_did_not_await_ACK:true,Node_clock_referee_calls:0});
       } catch(error) { reader.stop('fault');explorationWorker.postMessage({kind:'cancel',generation:generation+100000});reject(error); }
     },Math.max(0,identity.seal_ms-epochMain()));
     pendingTimers.add(adoptTimer);
