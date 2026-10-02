@@ -1,0 +1,132 @@
+{
+  "issue": "quoridor-4lc.126",
+  "inputs": [
+    "diverse-prefix-1",
+    "diverse-prefix-2",
+    "diverse-prefix-3",
+    "diverse-prefix-7"
+  ],
+  "requirements": [
+    {
+      "fixture_id": "diverse-prefix-1",
+      "engine": "candidate",
+      "phase": "warm",
+      "engine_repetition": 0
+    },
+    {
+      "fixture_id": "diverse-prefix-1",
+      "engine": "reference",
+      "phase": "warm",
+      "engine_repetition": 0
+    },
+    {
+      "fixture_id": "diverse-prefix-1",
+      "engine": "candidate",
+      "phase": "steady",
+      "engine_repetition": 1
+    },
+    {
+      "fixture_id": "diverse-prefix-1",
+      "engine": "reference",
+      "phase": "steady",
+      "engine_repetition": 1
+    },
+    {
+      "fixture_id": "diverse-prefix-1",
+      "engine": "reference",
+      "phase": "steady",
+      "engine_repetition": 2
+    },
+    {
+      "fixture_id": "diverse-prefix-1",
+      "engine": "candidate",
+      "phase": "steady",
+      "engine_repetition": 2
+    },
+    {
+      "fixture_id": "diverse-prefix-2",
+      "engine": "reference",
+      "phase": "steady",
+      "engine_repetition": 1
+    },
+    {
+      "fixture_id": "diverse-prefix-2",
+      "engine": "candidate",
+      "phase": "steady",
+      "engine_repetition": 1
+    },
+    {
+      "fixture_id": "diverse-prefix-2",
+      "engine": "candidate",
+      "phase": "steady",
+      "engine_repetition": 2
+    },
+    {
+      "fixture_id": "diverse-prefix-2",
+      "engine": "reference",
+      "phase": "steady",
+      "engine_repetition": 2
+    },
+    {
+      "fixture_id": "diverse-prefix-3",
+      "engine": "candidate",
+      "phase": "steady",
+      "engine_repetition": 1
+    },
+    {
+      "fixture_id": "diverse-prefix-3",
+      "engine": "reference",
+      "phase": "steady",
+      "engine_repetition": 1
+    },
+    {
+      "fixture_id": "diverse-prefix-3",
+      "engine": "reference",
+      "phase": "steady",
+      "engine_repetition": 2
+    },
+    {
+      "fixture_id": "diverse-prefix-3",
+      "engine": "candidate",
+      "phase": "steady",
+      "engine_repetition": 2
+    },
+    {
+      "fixture_id": "diverse-prefix-7",
+      "engine": "reference",
+      "phase": "steady",
+      "engine_repetition": 1
+    },
+    {
+      "fixture_id": "diverse-prefix-7",
+      "engine": "candidate",
+      "phase": "steady",
+      "engine_repetition": 1
+    },
+    {
+      "fixture_id": "diverse-prefix-7",
+      "engine": "candidate",
+      "phase": "steady",
+      "engine_repetition": 2
+    },
+    {
+      "fixture_id": "diverse-prefix-7",
+      "engine": "reference",
+      "phase": "steady",
+      "engine_repetition": 2
+    }
+  ],
+  "steady": 16,
+  "warm": 2,
+  "startup": 6,
+  "adopt": 411,
+  "T": 500,
+  "cutoff": 402,
+  "numeric_selection": "each input both engines first steady row (8roots); prefix self/matched, no fixedgolden reference",
+  "failure": "all flags preserved; browser late/Judge/automation unfinished not engine-loss; no successful replacement",
+  "expected_exit_branch": "consistent lower candidate completed backups prioritizes prepare/throughput; otherwise preserve mixed direction and propose smallest tactical/deep contrast",
+  "old_context_postselection_not_IID": true,
+  "planned_NN_before_results": true,
+  "new_per_step_instrumentation": "light bounded SAB checkpoint copy only, full statistics evaluated after zero",
+  "same_rootN_not_same_work_or_CPU": true
+}
