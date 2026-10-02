@@ -34,7 +34,7 @@ class ReadFailed(Rejected):
 GOAL = 'quoridor-4lc'
 SELF = 'quoridor-4lc.40'
 REPORT_RESERVE = 30
-OPERATION_END = dt.datetime(2026, 10, 2, 0, 55, tzinfo=UTC)
+OPERATION_END = dt.datetime(2026, 10, 2, 5, 44, 12, tzinfo=UTC)
 
 def utc_now():
     return dt.datetime.now(UTC)
@@ -98,8 +98,8 @@ def binding(owned, run, turn, prior=None, wall=None, mono=None, boot=None):
         return prior
     return {**core, 'mapped_start_monotonic': mono-age, 'calibrated_at_utc': wall.isoformat(),
             'calibrated_at_monotonic': mono,
-            'read_start_deadline_utc': (start+dt.timedelta(seconds=90)).isoformat(),
-            'read_finish_deadline_utc': (start+dt.timedelta(seconds=120)).isoformat(),
+            'read_start_planning_at_utc': (start+dt.timedelta(seconds=90)).isoformat(),
+            'read_finish_planning_at_utc': (start+dt.timedelta(seconds=120)).isoformat(),
             'turn_deadline_utc': (start+dt.timedelta(seconds=180)).isoformat(),
             'initial_mapping_limit': 'Initial UTC-to-monotonic mapping assumes no prior wall-clock jump; future/backwards boot/start is rejected.'}
 
@@ -170,6 +170,7 @@ def owned_storage_bytes():
             ROOT/'.artifacts/ai-sigma/continuation-20261001/SIGMA-SUPERVISOR-READ-GUARD',
              ROOT/'.artifacts/ai-sigma/continuation-20261001/SIGMA-EXPERIMENT-POLICY-85',
              ROOT/'.artifacts/ai-sigma/continuation-20261001/SIGMA-CONTRACT-IMPROVEMENT-88',
+             ROOT/'.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92',
              ROOT/'.artifacts/ai-sigma/continuation-20261001/supervisor',
              ROOT/'docs/reports/ai-sigma-steward-scheduler-live.md',
              ROOT/'docs/reports/ai-sigma-steward-supervisor-read-guard.md']
