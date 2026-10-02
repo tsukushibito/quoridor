@@ -25,6 +25,17 @@ ENV = {'UV_NO_SYNC': '1', 'UV_OFFLINE': '1', 'PYTHONDONTWRITEBYTECODE': '1'}
 class Rejected(ValueError):
     pass
 
+class ReadFailed(Rejected):
+    """A bounded metadata attempt failed; only explicit transient causes retry."""
+    def __init__(self, message, transient=False):
+        super().__init__(message)
+        self.transient = transient
+
+GOAL = 'quoridor-4lc'
+SELF = 'quoridor-4lc.40'
+REPORT_RESERVE = 30
+OPERATION_END = dt.datetime(2026, 10, 2, 0, 55, tzinfo=UTC)
+
 def utc_now():
     return dt.datetime.now(UTC)
 
@@ -100,11 +111,13 @@ def age_now(bound, wall=None, mono=None):
     return max((wall-parse_utc(bound['started_at'])).total_seconds(),
                mono-bound['mapped_start_monotonic'])
 
-def admit(bound, phase, wall=None, mono=None):
+def admit(bound, phase, wall=None, mono=None, required_seconds=0):
     age = age_now(bound, wall, mono)
-    limit = {'read_start': 90, 'read_finish': 120, 'finish': 180}[phase]
-    if age >= limit:
-        raise Rejected(f'{phase} cutoff reached ({age:.6f}s >= {limit}s)')
+    # 90/120 are planning checkpoints, not a permanent ban on research reads.
+    remaining = min(180-age, (OPERATION_END-(wall or utc_now())).total_seconds())
+    reserve = REPORT_RESERVE if phase in ('read_start', 'read_finish') else 0
+    if remaining <= required_seconds+reserve:
+        raise Rejected(f'{phase} insufficient remaining time ({remaining:.6f}s; need {required_seconds+reserve}s)')
     return age
 
 def stamp():
@@ -154,7 +167,10 @@ def owned_storage_bytes():
     roots = [ROOT/'tools/ai-sigma-supervisor-read-guard', RUNTIME,
              ROOT/'.artifacts/ai-sigma/continuation-20261001/scheduler',
              ROOT/'.artifacts/ai-sigma/continuation-20261001/SIGMA-SCHEDULER-LIVE',
-             ROOT/'.artifacts/ai-sigma/continuation-20261001/SIGMA-SUPERVISOR-READ-GUARD',
+            ROOT/'.artifacts/ai-sigma/continuation-20261001/SIGMA-SUPERVISOR-READ-GUARD',
+             ROOT/'.artifacts/ai-sigma/continuation-20261001/SIGMA-EXPERIMENT-POLICY-85',
+             ROOT/'.artifacts/ai-sigma/continuation-20261001/SIGMA-CONTRACT-IMPROVEMENT-88',
+             ROOT/'.artifacts/ai-sigma/continuation-20261001/supervisor',
              ROOT/'docs/reports/ai-sigma-steward-scheduler-live.md',
              ROOT/'docs/reports/ai-sigma-steward-supervisor-read-guard.md']
     seen = set(); total = 0
@@ -173,17 +189,18 @@ def owned_storage_bytes():
     return total
 
 def run_child(args, path, bound, phase='read', background=(), timeout=12):
-    admit(bound, 'read_start' if phase == 'read' else 'finish')
+    admit(bound, 'read_start' if phase == 'read' else 'finish', required_seconds=timeout+2)
     if owned_storage_bytes() >= 112*1024**2:
         raise Rejected('Combined steward allocated guard; no command launched')
-    limit = 120 if phase == 'read' else 180
+    admit(bound, 'read_start' if phase == 'read' else 'finish', required_seconds=timeout+2)
+    limit = 180-REPORT_RESERVE if phase == 'read' else 180
     started = stamp(); peak = 0; cause = None
     # AS is intentionally inherited without imposing 1GiB; Go/cgo needs virtual reserve.
     with path.with_suffix('.stdout').open('wb') as stdout, path.with_suffix('.stderr').open('wb') as stderr:
         child = subprocess.Popen(args, cwd=ROOT, stdout=stdout, stderr=stderr,
                                  env={**os.environ, **ENV}, start_new_session=True)
         ident = proc(child.pid)
-        command_deadline = time.monotonic() + min(timeout, max(0, limit-age_now(bound)-2))
+        command_deadline = time.monotonic() + timeout
         try:
             while child.poll() is None:
                 peak = max(peak, sampled_rss(child.pid, background))
@@ -191,7 +208,7 @@ def run_child(args, path, bound, phase='read', background=(), timeout=12):
                     cause = 'sampled_combined_RSS_guard'; break
                 if path.with_suffix('.stdout').stat().st_size + path.with_suffix('.stderr').stat().st_size > 2*1024**2:
                     cause = 'bounded_output_guard'; break
-                if time.monotonic() >= command_deadline or age_now(bound) >= limit-2:
+                if time.monotonic() >= command_deadline or age_now(bound) >= limit-2 or utc_now() >= OPERATION_END-dt.timedelta(seconds=2):
                     cause = 'timeout/deadline'; break
                 time.sleep(0.02)
             if cause:
@@ -213,13 +230,20 @@ def run_child(args, path, bound, phase='read', background=(), timeout=12):
            'age_finished_seconds': age_now(bound, parse_utc(finished['utc']), finished['monotonic'])}
     write(path, row)
     if cause or child.returncode:
-        raise Rejected('Owned command failed/expired; evidence retained and child reaped')
+        error = path.with_suffix('.stderr').read_text(errors='replace')[-4096:]
+        transient = (cause == 'timeout/deadline' and age_now(bound) < limit-2) or (not cause and any(x in error.lower() for x in ('database is locked', 'resource temporarily unavailable', 'connection reset', 'temporarily unavailable', 'connection refused')))
+        raise ReadFailed('Owned command failed; child reaped: '+str(cause or error), transient=transient and phase == 'read')
     admit(bound, 'read_finish' if phase == 'read' else 'finish')
-    return json.loads(path.with_suffix('.stdout').read_text()) if phase == 'read' else row
+    if phase != 'read':
+        return row
+    try:
+        return json.loads(path.with_suffix('.stdout').read_text())
+    except json.JSONDecodeError as error:
+        raise ReadFailed('Temporary invalid metadata JSON: '+str(error), transient=True)
 
 def live_owned(run, turn, prior):
     if prior:
-        admit(prior, 'read_start')
+        admit(prior, 'finish')
     state = json.loads((RUNTIME/'state.json').read_text())
     b = state.get('binding') or {}
     if state.get('phase') != 'running' or state.get('recovery_required') or b.get('thread_id') != THREAD or b.get('dispatch_issue') != 'quoridor-4lc.40':
@@ -228,52 +252,128 @@ def live_owned(run, turn, prior):
     if not observed or observed['state'] == 'Z' or observed['start_ticks'] != str(expected['start_ticks']) or expected.get('boot_id') != boot_id():
         raise Rejected('Scheduler identity absent/changed')
     bound = binding(state.get('owned'), run, turn, prior)
-    admit(bound, 'read_start')
+    admit(bound, 'finish')
     return bound, state
 
-def observe(directory, run, turn):
+def read_retry(args, directory, name, bound, background=(), owner_check=None, attempts=2):
+    """At most two attempts, with the same owned clock; hard refusals never retry."""
+    for attempt in range(attempts):
+        if owner_check:
+            owner_check()
+        admit(bound, 'read_start', required_seconds=14)
+        try:
+            return run_child(args, directory/(name+f'-attempt-{attempt+1}.json'), bound, background=background)
+        except ReadFailed as error:
+            if not error.transient or attempt+1 == attempts:
+                raise
+
+def issue_summary(issues):
+    return [{'id': x.get('id'), 'status': x.get('status'), 'assignee': x.get('assignee'),
+             'labels': x.get('labels') or [], 'dependencies': x.get('dependencies') or [],
+             'dependency_count': x.get('dependency_count'),
+             'notes_tail': str(x.get('notes') or '')[-1200:]} for x in issues]
+
+def require_unpaused(issues):
+    core = {x.get('id'): x for x in issues}
+    if any(i not in core for i in (GOAL, SELF)):
+        raise Rejected('Goal/self authorization snapshot missing')
+    if any('paused-by-user' in (core[i].get('labels') or []) or core[i].get('status') not in ('open', 'in_progress') for i in (GOAL, SELF)):
+        raise Rejected('Goal/self paused or unavailable; do not retry/bypass')
+    if core[SELF].get('assignee') != 'codex:'+THREAD or core[SELF].get('status') != 'in_progress':
+        raise Rejected('Self owner/status unknown; no retry or claim')
+
+def select_current(issues, ready=(), limit=8):
+    rows = [x for x in issues if x.get('id', '').startswith(GOAL+'.') and x.get('status') in ('open', 'in_progress', 'blocked') and x.get('id') != SELF]
+    # First use recency, then stable priority for current assigned workers/blocked work.
+    rows.sort(key=lambda x: str(x.get('updated_at') or ''), reverse=True)
+    rows.sort(key=lambda x: (0 if x.get('status') == 'in_progress' and x.get('assignee') else 1 if x.get('status') == 'blocked' else 2 if x.get('id') in ready else 3))
+    return list(dict.fromkeys(x['id'] for x in rows))[:limit]
+
+def observe(directory, run, turn, refresh=False):
     prior_path = directory/'binding.json'
     prior = json.loads(prior_path.read_text()) if prior_path.exists() else None
     bound, state = live_owned(run, turn, prior)
     write(prior_path, bound)
-    if (directory/'observation.json').exists():
-        # Cached result only. No late new reads and no new deadline calibration.
+    if (directory/'observation.json').exists() and not refresh:
         return {'cached': True, 'observation': str(directory/'observation.json'), 'binding': bound}
     background = [state['process']]
     monitor = ROOT/'.artifacts/ai-sigma/continuation-20261001/SIGMA-SCHEDULER-LIVE/monitor-process.json'
     if monitor.exists():
         background.append(json.loads(monitor.read_text())['process'])
-    commands = [('ready', ['bash', str(MAIN/'scripts/dev/beads.sh'), 'ready', '--json']),
-                ('issues', ['bash', str(MAIN/'scripts/dev/beads.sh'), 'show', 'quoridor-4lc.40',
-                            'quoridor-4lc', 'quoridor-4lc.38', 'quoridor-4lc.39', 'quoridor-4lc.41', 'quoridor-4lc.42', '--json']),
-                ('sessions', ['bash', str(MAIN/'scripts/dev/research-team.sh'), 'status'])]
+    prefix = ['bash', str(MAIN/'scripts/dev/beads.sh')]
     values = {}
     begin = stamp()
-    for name, args in commands:
-        # Rebind exact current owner before every new metadata command.
+    token = str(time.monotonic_ns())
+    def owner_check():
         current, _ = live_owned(run, bound['turn_id'], bound)
         assert current == bound
-        values[name] = run_child(args, directory/(name+'.json'), bound, background=background)
+    def read(name, args):
+        return read_retry(args, directory, token+'-'+name, bound, background, owner_check)
+    core = read('core', prefix+['show', GOAL, SELF, '--json'])
+    write(directory/'authorization.json', {'at': stamp(), 'issues': issue_summary(core)})
+    require_unpaused(core)
+    values['ready'] = read('ready', prefix+['ready', '--json'])
+    current = read('current', prefix+['list', '--parent', GOAL, '--status', 'open,in_progress,blocked', '--sort', 'updated', '--limit', '24', '--json'])
+    # Current subcontracts may be grandchildren (for example the present .88.1).
+    for parent in select_current(current, limit=3):
+        current += read('children-'+parent, prefix+['list', '--parent', parent, '--status', 'open,in_progress,blocked', '--limit', '8', '--json'])
+    selected = select_current(current, {x.get('id') for x in values['ready']})
+    values['issues'] = core + (read('selected', prefix+['show', *selected, '--json']) if selected else [])
+    values['sessions'] = read('sessions', ['bash', str(MAIN/'scripts/dev/research-team.sh'), 'status'])
     admit(bound, 'read_finish')
     issues = values['issues']
     if not isinstance(issues, list):
         raise Rejected('Unexpected issues shape; retain command raw')
-    summary = [{'id': x.get('id'), 'status': x.get('status'), 'assignee': x.get('assignee'),
-                'labels': x.get('labels') or [], 'notes_tail': str(x.get('notes') or '')[-1200:]} for x in issues]
-    paused = any('paused-by-user' in x['labels'] for x in summary if x['id'] in ('quoridor-4lc', 'quoridor-4lc.40'))
+    summary = issue_summary(issues)
+    require_unpaused(issues)
     result = {'run_id': run, 'turn_id': bound['turn_id'], 'binding': bound, 'started': begin,
               'finished': stamp(), 'ready_ids': [x.get('id') for x in values['ready']], 'issues': summary,
               'sessions': values['sessions'], 'scheduler_snapshot': state,
               'background_identities_for_RSS': background,
-              'pause_observed': paused, 'read_command_count': len(commands),
+              'pause_observed': False, 'current_issue_ids': [x.get('id') for x in current],
+              'discovery_limits': {'direct': 24, 'nested_parents': 3, 'per_nested': 8, 'detail': 8},
+              'not_all_history_or_descendants_scanned': True,
+              'read_command_count': len(list(directory.glob(token+'-*-attempt-*.json'))),
               'scripted_path_only': True, 'whole_turn_compliance_verified': False,
               'side_DB_cache_writes_not_quantified': True,
               'old_deviations_32games_goal_not_attained_preserved': True}
+    if (directory/'observation.json').exists():
+        write(directory/('observation-'+token+'.json'), result)
     write(directory/'observation.json', result)
     return result
 
+def inspect(directory, run, turn, issue_ids=(), files=()):
+    """Additional relevant readonly checks, sharing the original turn budget."""
+    prior = json.loads((directory/'binding.json').read_text())
+    bound, state = live_owned(run, turn, prior)
+    if len(issue_ids) > 8 or len(files) > 4:
+        raise Rejected('Bound additional evidence request to eight issues/four documents')
+    if any(not i.startswith(GOAL+'.') or not all(c.isalnum() or c in '.-' for c in i) for i in issue_ids):
+        raise Rejected('Additional issue outside goal namespace')
+    background = [state['process']]
+    check = lambda: live_owned(run, bound['turn_id'], bound)
+    prefix = ['bash', str(MAIN/'scripts/dev/beads.sh')]
+    token = 'inspect-'+str(time.monotonic_ns())
+    core = read_retry(prefix+['show', GOAL, SELF, '--json'], directory, token+'-core', bound, background, check)
+    require_unpaused(core)
+    result = {'at': stamp(), 'binding': bound, 'issues': [], 'documents': []}
+    if issue_ids:
+        rows = read_retry(prefix+['show', *issue_ids, '--json'], directory, token+'-issues', bound, background, check)
+        if any('paused-by-user' in (x.get('labels') or []) for x in rows):
+            raise Rejected('Selected issue paused; no further checks')
+        result['issues'] = rows
+    for name in files:
+        path = Path(name).resolve()
+        allowed = [base/sub for base in (ROOT, MAIN) for sub in ('docs/design', 'docs/reports', '.artifacts/ai-sigma/continuation-20261001')]
+        if not any(base in path.parents for base in allowed):
+            raise Rejected('Document outside research evidence namespaces')
+        code = "import pathlib,json,sys;p=pathlib.Path(sys.argv[1]);f=p.open('rb');b=f.read(131073);f.close();assert len(b)<=131072,'Document too large';print(json.dumps({'path':str(p),'text':b.decode()}))"
+        result['documents'].append(read_retry([sys.executable, '-B', '-c', code, str(path)], directory, token+'-file-'+str(len(result['documents'])), bound, background, check))
+    write(directory/(token+'.json'), result)
+    return result
+
 def finish(directory, run, turn, note):
-    # Only already-saved own observation/binding; no fresh issue/session/runtime reads.
+    # Bounded current pause/owner check is bookkeeping, sharing the owned clock.
     bound = json.loads((directory/'binding.json').read_text())
     uuid_text(run)
     if run != bound['run_id'] or (turn and uuid_text(turn) != bound['turn_id']) or boot_id() != bound['boot_id']:
@@ -287,6 +387,12 @@ def finish(directory, run, turn, note):
         raise Rejected('Own monitor issue not claimed; do not claim/restart from stale data')
     if len(note)>4096:
         raise Rejected('Note too long')
+    admit(bound, 'finish', required_seconds=36)
+    authorization = directory/('finish-authorization-'+str(time.monotonic_ns())+'.json')
+    run_child(['bash', str(MAIN/'scripts/dev/beads.sh'), 'show', GOAL, SELF, '--json'],
+              authorization, bound, phase='finish', timeout=10,
+              background=observation['background_identities_for_RSS'])
+    require_unpaused(json.loads(authorization.with_suffix('.stdout').read_text()))
     row = run_child(['bash', str(MAIN/'scripts/dev/beads.sh'), 'update', 'quoridor-4lc.40',
                      '--if-assignee', 'codex:'+THREAD, '--if-status', 'in_progress',
                      '--append-notes', note+' / guarded observation '+str(directory/'observation.json')],
@@ -304,9 +410,12 @@ def finish(directory, run, turn, note):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('operation', choices=('observe', 'finish'))
+    parser.add_argument('operation', choices=('observe', 'inspect', 'finish'))
     parser.add_argument('--run-id', required=True)
     parser.add_argument('--turn-id')
+    parser.add_argument('--refresh', action='store_true', help='Refresh relevant snapshot using original owned clock')
+    parser.add_argument('--issue', action='append', default=[])
+    parser.add_argument('--file', action='append', default=[])
     parser.add_argument('--note', default='監督の保存済みバッチ観測。旧逸脱/欠測/目標未達を保持、正常なら通知0。')
     args = parser.parse_args()
     def interrupted(*_):
@@ -329,7 +438,12 @@ def main():
     with (directory/'guard.lock').open('a') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         try:
-            result = observe(directory, run, args.turn_id) if args.operation == 'observe' else finish(directory, run, args.turn_id, args.note)
+            if args.operation == 'observe':
+                result = observe(directory, run, args.turn_id, args.refresh)
+            elif args.operation == 'inspect':
+                result = inspect(directory, run, args.turn_id, args.issue, args.file)
+            else:
+                result = finish(directory, run, args.turn_id, args.note)
             print(json.dumps(result, ensure_ascii=False))
         except Exception as error:
             write(directory/('failure-'+str(time.monotonic_ns())+'.json'), {'at': stamp(), 'operation': args.operation,

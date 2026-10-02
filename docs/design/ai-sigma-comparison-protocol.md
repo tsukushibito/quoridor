@@ -1,23 +1,33 @@
-# Sigma比較プロトコル（方法決定・未凍結項目）
+# Sigma比較の現行方法
 
-目標契約版1 / quoridor-4lc。統括判断UTC2026-09-30 18:24頃。根拠は ai-sigma-critic-comparison.md と初期hypothesis/steward報告。方法の採択であって比較gate通過・モデル採用・棋力達成ではない。状態/担当/依存の正本はBeads。
+[目標](ai-sigma-research-goal.md)と[実行枠](ai-sigma-continuation-20261001.md)を継承する。2026-10-02、契約改善指示により機能診断・探索的棋力評価・正式認定を分離した。過去の計画・標本・条件はGit/実行記録で参照し、変更していない。
 
-採択した参照経路:
-Sigma固定commit 751186344fc52ad0c29bc65922e62c6fa915f006 のWeb9x9/10壁 NN-MCTS、docs/models_9x9/best.onnx、C_PUCT1/FPU.2/temp0。ORT WASM numThreads1/GPU推論なし、root noise/先読み/analysisなし、参照NN成功/fallback0が必須。root expansionからresult配送まで同実時間とする最小adapter差分を保存する。参照に元来ないsolver/TTを導入した版や、部分機能を落とした弱い版へ置換しない。
-最初のnative/ローカル対局はRust-native対ローカルChromium内Sigma-Webと名称/範囲を固定する。これは目標契約のnative/ローカル条件の初期参照経路であり、C++同士のnative速度・棋力の成績とは呼ばない。製品到達のためRust-Wasm対Sigma-Webも独立実測必須。C++ tournamentは別条件の候補として残す（FPU.1/temp/max_moves等をWebと混ぜない）。
+## 参照と共通条件
 
-規約方法A:
-製品standard-2p-v1を維持したまま、研究用Rust contextをSigma規約に内部探索まで揃える。3回目同一局面を生む駒手禁止、200total plies/合法手なしdraw、goal優先。正確なposition/count/turn/残りplyをrootと各pathで保持し兄弟へ漏らさない。rootだけの不正手拒否では不足。TTやmask/proof再利用はhistory context依存、NN raw評価cacheとは区別。固定合法prefix/特徴/action/value/terminal fixtureで独立parityを先に確認する。
+固定Sigma-Web commit `751186344fc52ad0c29bc65922e62c6fa915f006`、9x9/10壁、NN-MCTS、`best.onnx`、C_PUCT1/FPU.2/temp0、ORT WASM推論1スレッドを参照する。root noise/先読み/analysisなし。参照原版の機能を弱めた別設定へ無断で置き換えない。モデル/依存/sourceの実版はrunから参照する。
 
-時計/資源gate:
-同じPC指定論理CPU1つ、GPU推論なし、交互着手/1対局、重い自チームbuild/依存/学習/生成停止。browser子process/ORT compute thread/affinity/RSSと背景/SMT負荷を実観測する。monotonic t0は盤面/history供給可能時から各adapter開始前、t1は合法結果が呼出し元へ配送完了。root/特徴/推論/探索/yield/finish/変換/配送を含む。審判の共通apply/log/UI演出、モデルload/warmupは別記。T-gで新しい重い処理を止め、T以内に確定配送した合法checkpointのみ有効。checkpointなしtimeout負け、遅延結果不採用。参照fallback/model違いは試験不成立。
+最初のnative/localはRust-native対ローカルSigma-Webであり、Sigma C++ nativeの成績ではない。Rust-Wasm対Sigma-Webは別に測る。研究RuleAはSigmaの履歴・3回目反復手禁止・200ply/合法手なしdraw・goal優先に内部探索まで合わせる。製品standard-2p-v1をこの比較のため変更しない。
 
-統計方法の採択（正式run未登録）:
-独立合法開始手順の先後ペア平均X∈[0,1]、固定mペア・N=2mgames/各platform、score=(W+.5D)/N。片側95%の保守下限L=max(0,meanX-sqrt(log20/(2m)))>.45。有限poolの一様非復元抽出または独立pair条件を事前に検証する。両platform成功が全体到達条件、片方だけ選ばない。安全/時間停止でm未完了なら未達、CI方式/候補/局面/規約を勝敗後に変えない。複数候補を同じholdoutで選んだ結果をこの1候補判定へ流用しない。探索的試験を後から正式認定へ格上げしない。
-近接mean=.5でm600（1200games/platform）でも保守幅が約.05、80%powerの保守十分条件例はm1800。今回残枠で達成認定を保証しない。精度不足/未完了は同等未立証と残す。
+同じPC・指定論理CPU・推論1スレッド・GPU推論なしを使い、測定中の重い研究jobを停止する。入力供給可能時のt0から合法応答の配送完了までを測る。モデルload/warmup、共通審判処理は区別して記録する。現在の500msとearly-sealの数値は既存試験の条件で、製品の一般上限ではない。
 
-対戦前に残っている固定項目:
-実ONNX SHA256/graph/provenance、ORT JS/Wasm版/patch/binary hash、候補Rust native/Wasm版/推論parity、rule/deadline adapter実行検証、T/g/engine総RAM上限、正式pool生成/重複規則/hash/抽出seed・pair順/固定m/停止・再実行・invalid規約。T候補.1/.5/1秒はlatency-only preflightから結果前に決める。未固定のまま正式対戦を開始しない。
+旧探索の停止・後始末を次の相手の時間へ無条件に課金しない。各engineの配送前後の時間とCPU費用を原因側へ帰属させ、正式run前に同じ実効予算となる時計/資源課金を確認する。遅延結果や旧局面応答は採用せず、終了・所有・processの回収を確認する。
 
-H1計測方法:
-R_exp=Expand祖先内のLegalまたはDistance部分木の和集合時間/Expand inclusive。R_all=同Legal/Distance union全体/T_search、f_expandも記録。nested exclusiveを足し、BFS in legalを二重計上しない。kind×直近parentの集約だけでは祖先が失われる。R_exp>=.50支持、<.20不支持、間は保留、局面別結果を保持。case別median overhead5%以内が主分類gate、超過/残差が大きいなら計測不成立としH1不支持と混同しない。元B0/原3fixture/seed1979/192sims/512nodes/depth24/決定的結果を維持し原3と追加fixtureを分ける。速度最適化の着手はこの方法と実測報告で次契約へ分岐する。
+## 機能診断と探索的対局
+
+エンジン/モデルの識別、合法性/入力変換、共通時計、資源上限と停止を最小経路で確認して、固定goldenや少数局から進められる。最大run/局数/時間を総予算内で配分し、修正版はGit版/runを分けて反復できる。通常診断へ正式認定の標本数・全fault検証・独自issuer/proof形式の完備を一律要求しない。
+
+実行入口はrun種類・Git版・設定・入力・予算・停止を明示する。診断/正式の取り違えは拒否するが、独自認可payloadの整形をAI性能の不成立理由にしない。既runnerがその形式を要求する場合、統括と担当が最小controlを使うか、所有範囲でrunner外の実行管理へ分離する。pause・資源・所有の制御を迂回する許可ではない。
+
+探索的対局はW/D/L、得点率、先後・局面・誤り/timeout・時間の分布を報告し、改良や仮説選定に使う。精度不足は明記するが、正式な同等証明ができないだけで診断を禁止しない。探索用局面/結果を後から正式holdoutへ格上げしない。
+
+## 正式な同等判定
+
+固定候補と参照の版/モデル/探索設定/規約/資源/時間/局面抽出/seed/先後ペア/標本数/集計/エラー分類/再試行/終了条件を結果前に登録する。合法開始手順の先後ペアを単位にし、同じholdoutで候補を選んだ結果を選定後の独立認定へ流用しない。時間不足や標本未完了は未立証とする。
+
+旧採択の保守方式は片側95%下限 `max(0, mean_pair_score - sqrt(log(20)/(2*m))) > .45`。平均.5付近では約600ペア/環境が必要で、少数の研究枠での達成を保証しない。この方式で事前登録済みの計画・結果は維持する。
+
+新しい正式計画では統括と検証担当が推定対象・許容差・信頼水準・必要精度/検出力・標本数・最悪所要時間を先に見積もり、利用可能な予算と両立する方法を結果前に選ぶ。予算不足なら正式認定は将来計画として分け、現在は診断/改善測定を行う。既に見た結果に都合よく方法や判定を緩めない。最終native/localとbrowserの主張は独立根拠に基づき区別して受け入れる。
+
+## 性能の原因判別
+
+固定探索量での速度と固定実時間での棋力を区別する。重複区間を二重計上せず、warmup/steady・wrapper全体/内部APIの費用を区別する。計測器のoverheadや誤差はその主張への影響と感度を報告し、境界値だけで全ての診断を止めない。数値schemaと安い機能確認を先に行い、重大な因果主張に必要な独立確認だけ依頼する。
