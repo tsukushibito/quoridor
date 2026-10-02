@@ -1,35 +1,35 @@
-# SIGMA-BROWSER-SHARED-MEMORY / quoridor-4lc.107 / 現行契約3
+# SIGMA-BROWSER-SHARED-MEMORY / quoridor-4lc.107 / 現行契約4・枠7
 
-既experiment saved01a0f31d-6d15-7620-bb63-4b4f878e4746が単独owner。親現行版6/common/experiment/実行記録規約を継承。ユーザーが保留後に採用した責務分担を適用し、本方針変更について契約2の部分保留を解除する。研究全体の別pauseや期限を解除／延長しない。契約1のframe配送対照、契約2のNode全面除去保留はGit履歴に保持し、有効本文は本書へ置換。同issue／同owner／同turnで実装と必要な最小確認を進める。
+既experiment saved01a0f31d-6d15-7620-bb63-4b4f878e4746が単独writer。ユーザーの「研究を再開して。4時間枠で。」、親現行枠版7/common/experiment/実行記録規約、本書を全文継承。ready/show goal/self・pause/担当を確認して同107をclaim、受領開始を直ちに返す。root108はroot所有、claimせず個々の研究gateにも使わない。
 
-## 採用する責務と実装
+旧準備版Git8b9e99f0f4f57a4e06dcdf7ea8bbd7f6c65602a1／data804123a／17Node worker_threads mock／browser static guard失敗は保持。新枠のGit/newrunでブラウザ実接続を再開し、旧run／期限／成績を変更しない。旧frame草案5def70eと24対照はsupersededのまま。前run RAM不足をNN/SAB負例とせず、NN0でもChrome所有全RSSをbrowser予算で監視する。
 
-ブラウザ探索WorkerはAI探索／推論と完成済み暫定手の更新を担当する。SharedArrayBuffer＋Atomicsで最新完成暫定手をブラウザmainへ公開する。ブラウザmainは対局進行、締切管理、共有暫定手読取と手の採用、合法性／局面／勝敗判定、棋譜／時計／結果の収集を担当する。通常の手確定は進行中推論や停止ACKを待たず、毎更新のNode転送、Node timer、Node refereeを必須にしない。
+## 責務と実装範囲
 
-外側Nodeは必要なブラウザ起動、実験の順次自動実行、外部CPU／RAM監視、ハング／クラッシュのtimeout／所有回収、対局終了後の結果回収／ファイル保存だけを薄く担当する。Node側のゲーム状態／合法性／勝敗の再計算、時計換算／毎手の審判往復、必須事後replayを本経路の前提にしない。監視／保存の負荷は締切経路から分離。native/browser共通arenaへの接続を保つ目的で本ブラウザ経路を複雑化しない。旧Node全除去案も採用案ではない。
+Workerは探索/推論と完成暫定手の更新を行い、SharedArrayBuffer＋Atomicsでbrowser mainへ公開。mainは対局進行、締切、bounded readと手採用、合法性/局面/勝敗、棋譜/時計/結果収集を担当。外Nodeは必要な起動、順次自動実行、外部CPU/RAM監視、ハング/クラッシュtimeoutと所有回収、終了後結果回収/保存だけを薄く担当する。毎手Node timer/referee/CP転送/時計換算/必須Node事後replayを主経路又は受入れ前提へ戻さない。native/browser共通arenaを守る目的でbrowser経路を複雑化しない。
 
-既固定RuleA／game／Action等の必要関数をブラウザで使用し、小さい自域glueで進める。モデル／探索係数／FPU／合法順／tie／finish／capsの変更を混ぜない。詳細CP、数値検査、診断ログは応答経路と分け、ブラウザ内で必要な正しさを検査し結果へ残す。毎完成CPの詳細をNode bindingへ転送してから暫定手を有効化する構成にはしない。
+write scopeはtools/ai-sigma-cp-frame/、自己CP-FRAMEの新runs/frame7-*出力、research-data/ai-sigma/107-cp-frame/の新frame7証拠、docs/reports/ai-sigma-experiment-cp-frame.md。旧reportはGit参照して新版結果と区別。必要なread-only既RuleA/game/Action/97協調Worker/固定Sigma/モデルを自域glueへ接続し、実験の局所的な修正を読みやすい関数/名前で行う。モデル/探索係数/FPU/order/tie/finish/caps/kernelを変更しない。既停止scope/他担当/role/registry/92運用へ書かない。新build/取得/GPU/学習/製品main統合/push/新role/再委譲0。
 
-SABでは世代／局面と完成済みActionの一致、未完成書込み／複数fieldの整合、初回無し／取消を扱う。single writer／Atomics sequence等の適切なprotocolを用い、ブラウザmainはbounded readで過去の有効完成手又はnullを選べるようにし、busy wait／Worker保有lock待ちを作らない。前局面／取消済み世代の手を採用しない。締切で読取と採用を行い、停止ACKは安全な次探索開始／回収条件として分離する。残処理を次の相手の思考時間へ転嫁しない。始まったNNをSABで強制中断できるとは主張しない。
+SABは世代/局面/完成fieldの整合、初回無し、取消/旧世代破棄を扱う。mainは最大有界sampleのread又は過去の有効完成手/nullを使い、busy wait/Worker保有lock待ちをしない。通常の手採用は進行中NN/停止ACKを待たない。最終採用は一回、不変なbodyとActionを局面へ適用し、取消/他局面の手を再利用しない。停止ACK0は別の安全な次探索開始条件にし、相手のt0へ原因側停止待ちを転嫁しない。詳細CP/数値/診断記録は応答経路と分離しbrowser内で必要検査、外Nodeへは終了後回収する。Atomicsだけでtimerの硬い期限/進行中推論の強制中断を保証しない。
 
-## 安い準備と最小実検証
+## 機能修復と診断
 
-最初にsecure context／crossOriginIsolated／SharedArrayBufferとAtomics／COOP・COEP／既Wasm・ORT依存読込の安いpreflightを行う。既共有環境を更新せず、自scopeのserve／headers等で成立させる。成立しなければ理由を返し、非共有の旧経路をSAB成功扱いしない。
+最初に新runでsecure context/crossOriginIsolated/COOP/COEP/既Wasm・ORT依存のbrowser preflightを実行。実ブラウザでSAB protocolの初回無し/更新/不完全/世代局面/取消/正常budget時保持とbounded read、mainの合法性/局面進行/goal判定を少数確認する。Node worker mock成功をbrowser成功へ代用せず、既17caseの全反復を必須にしない。安いschema/設定確認を先に行うが新proof/全履歴hash/全sourcecopy/一原因一修正/一NN窓を要求しない。
 
-小NN0で世代／局面不一致、未完成・混合field、初回無し、取消、完成手更新、main bounded read、browser合法Judge／turn進行／goal等の必要ケースを確認。Nodeは自動化と保存のみ、検証結果はbrowserで生成する。全旧phaseA／全sourcecopy／全史hash／新承認層を前提にしない。通常修正は同範囲と総残予算内でGit／runを区別し反復可。
+同107の許可範囲と総予算内で設定・検査器・実接続の修正/再runを普通に反復できる。必要なエラー要点とGit/run/入力/設定を区別し、成立しないhelperをNN不一致/棋力敗北と呼ばない。原因が絞れず反復している場合は小診断/代替/中止理由を報告し、無限反復しない。新run名/出力を使い旧結果へ上書きしない。
 
-実AIの最小候補は固定initialで両側の合法完成手2要求、取消1、合法goal両側2の5要求、その同main game-loopによる動的4ply（最大4要求）。初期startup6は別分母でjobwall／RAMへ課金。残時間と接続状況からさらに小さくしてよいが、実行前に選択した入力／順／要求上限／成功・失敗判定を設定へ記録する。通常要求は総最大24以内、今回新しい完走ゲーム／holdout／正式棋力比較は配分しない。4plyは未終局でも対局進行の機能確認として報告し、棋力勝敗へしない。必要経路が成立すれば追加測定を自動で続けず停止・引渡す。
+実AIの最小経路は両engine固定initialの完成合法手、初回無し/取消の意味、合法goal両側NN0、browser内動的4ply。必要なsubsetを実行前に設定し全成功/失敗/late/未実施を保持。startup初回6rootは別分母、jobwall/RAMへ課金、tree/history/cache持込0。対応固定NN参照のあるrootだけ固定abs1e-4+rtol1e-4、648bits/137出力/finite/strict[-1,1]/固有合法順/Action-P2-priorへ照合し、動的rootの自己整合と分ける。全深部NNや任意tree一致を主張しない。
 
-両AIに共通のbrowser main clock、requested500msと協調Worker cutoff402／D500を診断条件に固定する。暫定読取／採用の予定時刻と実行時刻をbrowser内で保存し、旧Node seal411方式を維持することを必須にしない。具体の採用予約時刻／余裕とdeadline境界は実行前に明記。両AIの資源は同CPU[2]単logical／推論threads1／同既モデル、旧手の停止後に次の相手のt0を開始。通常採用はACK待ちなし、次探索の安全開始はACK0後という別条件にする。
+最小browser経路と所有回収が成立したら、結果前にinitial色1→2/seed1979の診断pairを登録して2局へ進んでよい。余裕と正常機能を確認した後、別固定fixtureの次pairを結果前登録して最大計4game起動まで。旧holdout/pool未送信、正式NIではない。未成立なら同総予算のデバッグを進め、全fault/正式freeze/独自proof完成を診断の一律前提にしない。完了ゲームとlate/infra/未完了を分け、好結果だけの再選別/旧Node成績との統合をしない。
 
-AI仕事開始／完成暫定手更新／新NN開始・協調停止、browser deadline予定／実行／合法採用、外部終了後回収／保存の時計を別記。ブラウザtimerも遅延し得る。main側の採用遅延・判定基盤の失敗をAI棋力lossへ混同せず、初回無し／engine fault／browser deadline処理遅れ／外部automation失敗を新診断条件として結果前に区別する。wrapper開始と内部API開始を別にし、API awaitをkernel命令時刻やCPU保証にしない。SAB導入だけでtimer遅延解消／硬締切／正式公平性を認定しない。
+両AIは同browser main clock/requested500ms、同CPU[2]単logical/threads1、既同model、候補PUCT1.5/Q0/seed1979/capsと固定Sigma規約を保持。協調402新仕事cutoff/D500を基準とし、採用予約時刻/余裕はbrowser main条件として実行前に明記。旧Node seal411方式自体は必須にしない。API入口とwrapper/内核、Worker停止と配送/ACK、main採用予定/実行/合法判定、外部回収保存を別に測る。main timer遅延/審判基盤fault/外部automation失敗をAI棋力lossへ混同しない。原因側残処理と次t0を分け、正式公平性/NI/Sigma同等/actual_goを診断成功から認定しない。
 
-103 late2にも完成cacheがあり、seal予定411→499.050／502.441というNode実行遅れが直近要因だった。同期処理／通知／OS寄与は未特定。この旧Node条件の結果と本browser条件を統合／上書きしない。対応固定rootだけをbrowser内numeric gateで確認し、動的局面の自己features／合法／prior検査と分ける。一般深木や全NN一致、正式NI／Sigma同等／actual_goは認定しない。
+## 現在の配分と終了
 
-## 所有・残予算・停止
+枠開始06:12:31Z/終了10:12:31Z、新重job開始停止10:02:31Z。今回初期課題の処理は受領60分又は07:20Zの早い方、新runは処理5分前、提出受領70分又は07:30Zの早い方。途中の受領/preflight/実初回採用/4ply/対局/重要障害を短く報告し、完了待ちで報告を止めない。通常修正と再runはこの現在配分内で反復可能、個別deadlineは旧05時台から切り離す。結果からcoordinatorが後続を枠内で再配分する。
 
-write scopeはtools/ai-sigma-cp-frame/、自己resume-20261002/CP-FRAME/、research-data/ai-sigma/107-cp-frame/、docs/reports/ai-sigma-experiment-cp-frame.md。103／97／105等の停止source／結果、共有model／役割／registry／92はread-only。新build／取得／model／kernel／GPU／学習／製品統合／push／新role／再委譲0。元sourceを参照した自域の必要差分、読みやすいfunction境界を用い、実装全copy／独立検証層を増やさない。
+軽い純protocol/schemaはCPU0/RAM1GiB guard896MiB/各60s、管理job総600s。Chromiumを起動する全preflight/NN0/実AIはCPU2単logical、currentRSS RAM4GiB guard3.5GiB（親＋全owned Chrome/Node/Worker）、各run600s/重run総1800s。NNthreads1、ブラウザpreflightをstatic小RAMへ分類しない。普通機能要求の累計上限100と診断game最大4起動を別計上、warmup/startup/未実施も記録。現在の開始前に外重NN停止/所有/保存headroomを確認しheavyを直列化。steward CPU0/RAM1と合計CPU4/RAM8内。
 
-処理05:20UTC、新heavy05:15UTC、提出05:30UTCの既期限を維持。静的CPU0/currentRSS RAM1guard896MiB/各60s総180s。NNCPU2単logical/threads1/currentRSS RAM4guard3.5GiB/各180s総300s、通常要求総最大24。保存32MiBguard28は既entry予約内追加0。既に使ったrun費用を差し引き、起動前に残量と外重NN0／所有／保存headroomを確認。親CPU4/RAM8/保持＋未使用有効予約12GiB、05:39:12新重job停止／05:44:12監督停止／05:47:12monitor回収／05:49:12終了は不変。時間不足なら実装／preflight／部分動作のどこまで成立したかを返し、終わらない部分は次枠提案に留める。
+新scope保存64MiB/guard56MiB（Git/archive/temp込み）は既entry2GiB内で配分、親12GiBを増やさない。必要raw/棋譜/時刻をGit/archive正本へ保存しstream復元hash、利用中でない自域展開重複は要点保持して整理可、旧証拠一括削除0。必要共有model/依存を毎runcopyしない。
 
-sourceとbrowser実処理を停止してから必要結果／失敗／再現／Git archiveを保存。Modeldrop／search ACK、main timer／Worker、外側所有processの終了／remainingを分けて記録し、未知ownerへsignalしない。現在不在を自然停止／全期間保証へ変換しない。Beads backup/report→coordinator。受領・旧方針からの切替開始と残課題を短く返す。本書はユーザー採用分担の実依頼であり、rootの再確認や新しい承認を待たない。
+途中/終了にbrowser timer/Worker/searchACK/Modeldrop/monitor callback/inner controlledPID/outer owned waitを適切に回収し記録。通常完了ACKとguard強制回収/現在不在を分け、未知ownerへsignalしない。源/runtime停止→必要data/report/Git/Beads backup→coordinator。同担当が停止版を引渡し、主張に必要な最小独立確認を後で配分する。root108受入れは実受領開始と92running/loadedだけ、個々の研究をrootの追加承認待ちにしない。
