@@ -1,0 +1,47 @@
+{
+  "UTC": "2026-10-02T08:39:54.896600+00:00",
+  "issue": "quoridor-4lc.111",
+  "primary_order": [
+    {
+      "run": "c111-asym-baseline-r1",
+      "variant": "baseline",
+      "fixtures": [
+        "asym-hv-p2"
+      ],
+      "K": 32
+    },
+    {
+      "run": "c111-c1-r1",
+      "variant": "c1",
+      "fixtures": [
+        "asym-hv-p2",
+        "straight-jump-p2"
+      ],
+      "K": 32
+    },
+    {
+      "run": "c111-jump-baseline-r1",
+      "variant": "baseline",
+      "fixtures": [
+        "straight-jump-p2"
+      ],
+      "K": 32
+    }
+  ],
+  "primary_searches": 4,
+  "maximum_including_debug": 12,
+  "maximum_backups": 384,
+  "count_timeout_ms": 30000,
+  "new_games": 0,
+  "startup_separate_6_per_session": true,
+  "coefficient_model_search_clock_not_modified": true,
+  "checkerGit": "54c2d89003c4e21633c9d78986d35b5781abbcfa",
+  "source_hashes": {
+    "tools/ai-sigma-c-factor-independent/driver.cjs": "57b7c5aff97761f6ed9ae4453a254c63debe04bab30b398ca1763a6eb38cf7ab",
+    "tools/ai-sigma-c-factor-independent/independent-browser.js": "f7a7133ab774e4a222a4706b17655b673f1a5142765a290a5cee511fa1052872",
+    "tools/ai-sigma-c-factor-independent/runner.py": "135d4528536b00d0527323674171a11718e49b95dfbfb5d613c007e86bdda71b",
+    "tools/ai-sigma-c-factor-independent/extend-checker.py": "e87544c18abbfb4af63ae661a039fd2bc8b1c2ed055bcd48c88454a1e1318d11",
+    "tools/ai-sigma-c-factor-independent/browser.cjs": "a67d2b5cf3f22eb6972dbed51bca6f79fb6827e69dc5e923c5ff27658c831626",
+    "tools/ai-sigma-c-factor-independent/prepare.py": "9421beb23ece911788417f1761b8b5921bd0b24191ae5e28f7326a2589e54a5d"
+  }
+}
