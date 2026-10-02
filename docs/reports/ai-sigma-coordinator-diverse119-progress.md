@@ -9,3 +9,5 @@
 測定版pair1は8124d876、pair2–8は532c873でargv0識別。停止後のproc/exe+argv/read-error/stop-unconfirmed failclosed修正成功を旧admissionへ遡及適用しない。原21run/1517identity現在不在と当時Modeldrop/innercontrolled/outerwaitは別の停止根拠として122へ渡した。現在不在・source停止・全期間遵守・自然終了を区別する。
 
 119最終data/report/handoff Gitは保存中で、到着後122同turnへ追送する。119の棋譜主張は122の有限裁定待ち、121の見解を次選定へ使う。今回新ゲーム・正式NI・Sigma同等の認定はない。122処理受領30分又は13:10、新run25分又は13:05、提出40分又は13:20の早い側。CPU2/RAM6guard5.5・保存32guard28既critic内、親14:15:49と各停止時刻を維持する。
+
+最終提出追記：119 data/report a5f3183e2e58b0f0db8cddc883730dd1ec1ce669、handoff Git d4ee35ea518f818bb76be39c9bc592987f9b3ea7／SHA1cacd67d196fc897a49e82ffd6a93405d30eb06bd1e8948721012a93327be6aeを現物とGit blobで一致確認した。停止最小source42cbd46と測定版を分離。122同正確activeへ12:31:30.797176、121同正確activeへ12:31:32.628048に最終bindingをsteer accepted追送した。32原選定rootを担当の最大8sampleへ一律拡大しない。119書込・実行停止の提出は受領、棋譜主張の有限受入れは122裁定待ち。121は本人claim済み、122本人claim／結果は別確認。
