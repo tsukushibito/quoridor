@@ -1,0 +1,275 @@
+{
+  "pass": true,
+  "own_saved_arithmetic": true,
+  "root": {
+    "features_bits": 317520,
+    "NN_elements": 67130,
+    "prior_elements": 41913,
+    "hand_NN_roots": 490,
+    "fixed_golden_reference_roots": 16,
+    "dynamic_roots_without_fixed_NN_reference": 474
+  },
+  "startup": {
+    "NN_separate": 36,
+    "features_bits": 23328,
+    "NN_elements": 4932,
+    "max_fixed_NN_diff": 0.0000035762786865234375,
+    "prior_rows_observed_only": 2316,
+    "reference_startup_prior_missing_not_filled": true
+  },
+  "cases": [
+    {
+      "run": "golden-r1",
+      "engine": "candidate",
+      "id": "initial-p1",
+      "numeric_fixed_gate": true,
+      "prior_observed": true
+    },
+    {
+      "run": "golden-r1",
+      "engine": "candidate",
+      "id": "asym-hv-p2",
+      "numeric_fixed_gate": true,
+      "prior_observed": true
+    },
+    {
+      "run": "golden-r1",
+      "engine": "candidate",
+      "id": "straight-jump-p2",
+      "numeric_fixed_gate": true,
+      "prior_observed": true
+    },
+    {
+      "run": "golden-r1",
+      "engine": "reference",
+      "id": "initial-p1",
+      "numeric_fixed_gate": true,
+      "prior_observed": false
+    },
+    {
+      "run": "golden-r1",
+      "engine": "reference",
+      "id": "asym-hv-p2",
+      "numeric_fixed_gate": true,
+      "prior_observed": false
+    },
+    {
+      "run": "golden-r1",
+      "engine": "reference",
+      "id": "straight-jump-p2",
+      "numeric_fixed_gate": true,
+      "prior_observed": false
+    },
+    {
+      "run": "four-ply-r1",
+      "engine": "candidate",
+      "id": "initial-p1",
+      "numeric_fixed_gate": true,
+      "prior_observed": true
+    },
+    {
+      "run": "four-ply-r1",
+      "engine": "candidate",
+      "id": "asym-hv-p2",
+      "numeric_fixed_gate": true,
+      "prior_observed": true
+    },
+    {
+      "run": "four-ply-r1",
+      "engine": "candidate",
+      "id": "straight-jump-p2",
+      "numeric_fixed_gate": true,
+      "prior_observed": true
+    },
+    {
+      "run": "four-ply-r1",
+      "engine": "reference",
+      "id": "initial-p1",
+      "numeric_fixed_gate": true,
+      "prior_observed": false
+    },
+    {
+      "run": "four-ply-r1",
+      "engine": "reference",
+      "id": "asym-hv-p2",
+      "numeric_fixed_gate": true,
+      "prior_observed": false
+    },
+    {
+      "run": "four-ply-r1",
+      "engine": "reference",
+      "id": "straight-jump-p2",
+      "numeric_fixed_gate": true,
+      "prior_observed": false
+    },
+    {
+      "run": "initial-pair1-r1",
+      "engine": "candidate",
+      "id": "initial-p1",
+      "numeric_fixed_gate": true,
+      "prior_observed": true
+    },
+    {
+      "run": "initial-pair1-r1",
+      "engine": "candidate",
+      "id": "asym-hv-p2",
+      "numeric_fixed_gate": true,
+      "prior_observed": true
+    },
+    {
+      "run": "initial-pair1-r1",
+      "engine": "candidate",
+      "id": "straight-jump-p2",
+      "numeric_fixed_gate": true,
+      "prior_observed": true
+    },
+    {
+      "run": "initial-pair1-r1",
+      "engine": "reference",
+      "id": "initial-p1",
+      "numeric_fixed_gate": true,
+      "prior_observed": false
+    },
+    {
+      "run": "initial-pair1-r1",
+      "engine": "reference",
+      "id": "asym-hv-p2",
+      "numeric_fixed_gate": true,
+      "prior_observed": false
+    },
+    {
+      "run": "initial-pair1-r1",
+      "engine": "reference",
+      "id": "straight-jump-p2",
+      "numeric_fixed_gate": true,
+      "prior_observed": false
+    },
+    {
+      "run": "asym-pair2-r1",
+      "engine": "candidate",
+      "id": "initial-p1",
+      "numeric_fixed_gate": true,
+      "prior_observed": true
+    },
+    {
+      "run": "asym-pair2-r1",
+      "engine": "candidate",
+      "id": "asym-hv-p2",
+      "numeric_fixed_gate": true,
+      "prior_observed": true
+    },
+    {
+      "run": "asym-pair2-r1",
+      "engine": "candidate",
+      "id": "straight-jump-p2",
+      "numeric_fixed_gate": true,
+      "prior_observed": true
+    },
+    {
+      "run": "asym-pair2-r1",
+      "engine": "reference",
+      "id": "initial-p1",
+      "numeric_fixed_gate": true,
+      "prior_observed": false
+    },
+    {
+      "run": "asym-pair2-r1",
+      "engine": "reference",
+      "id": "asym-hv-p2",
+      "numeric_fixed_gate": true,
+      "prior_observed": false
+    },
+    {
+      "run": "asym-pair2-r1",
+      "engine": "reference",
+      "id": "straight-jump-p2",
+      "numeric_fixed_gate": true,
+      "prior_observed": false
+    },
+    {
+      "run": "jump-pair3-r2",
+      "engine": "candidate",
+      "id": "initial-p1",
+      "numeric_fixed_gate": true,
+      "prior_observed": true
+    },
+    {
+      "run": "jump-pair3-r2",
+      "engine": "candidate",
+      "id": "asym-hv-p2",
+      "numeric_fixed_gate": true,
+      "prior_observed": true
+    },
+    {
+      "run": "jump-pair3-r2",
+      "engine": "candidate",
+      "id": "straight-jump-p2",
+      "numeric_fixed_gate": true,
+      "prior_observed": true
+    },
+    {
+      "run": "jump-pair3-r2",
+      "engine": "reference",
+      "id": "initial-p1",
+      "numeric_fixed_gate": true,
+      "prior_observed": false
+    },
+    {
+      "run": "jump-pair3-r2",
+      "engine": "reference",
+      "id": "asym-hv-p2",
+      "numeric_fixed_gate": true,
+      "prior_observed": false
+    },
+    {
+      "run": "jump-pair3-r2",
+      "engine": "reference",
+      "id": "straight-jump-p2",
+      "numeric_fixed_gate": true,
+      "prior_observed": false
+    },
+    {
+      "run": "initial-pair4-r3",
+      "engine": "candidate",
+      "id": "initial-p1",
+      "numeric_fixed_gate": true,
+      "prior_observed": true
+    },
+    {
+      "run": "initial-pair4-r3",
+      "engine": "candidate",
+      "id": "asym-hv-p2",
+      "numeric_fixed_gate": true,
+      "prior_observed": true
+    },
+    {
+      "run": "initial-pair4-r3",
+      "engine": "candidate",
+      "id": "straight-jump-p2",
+      "numeric_fixed_gate": true,
+      "prior_observed": true
+    },
+    {
+      "run": "initial-pair4-r3",
+      "engine": "reference",
+      "id": "initial-p1",
+      "numeric_fixed_gate": true,
+      "prior_observed": false
+    },
+    {
+      "run": "initial-pair4-r3",
+      "engine": "reference",
+      "id": "asym-hv-p2",
+      "numeric_fixed_gate": true,
+      "prior_observed": false
+    },
+    {
+      "run": "initial-pair4-r3",
+      "engine": "reference",
+      "id": "straight-jump-p2",
+      "numeric_fixed_gate": true,
+      "prior_observed": false
+    }
+  ],
+  "deep_NN_calls_not_all_fixed_reference_checked": true
+}

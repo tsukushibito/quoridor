@@ -1,0 +1,1314 @@
+{
+  "UTC": "2026-10-02T02:45:34.442161+00:00",
+  "runs": [
+    {
+      "base": ".artifacts/ai-sigma/resume-20261002/DIAGNOSTIC-ARENA/asym-pair2-r1",
+      "Git": "9496cae",
+      "stage": "pair",
+      "startup": {
+        "wall_ms": 6133.262479990721,
+        "root_NN": 6,
+        "outside_first_input_clock": true,
+        "tree_history_cache_reuse": false
+      },
+      "public": 114,
+      "ACKzero": 114,
+      "engine": {
+        "candidate": {
+          "n": 57,
+          "accepted": 57,
+          "ACK_breach": 11,
+          "worker_stop_upper_le500_and_ACK_late": 7,
+          "worker_stop_definite_gt500": 4,
+          "postpublic_NN": 12,
+          "NN": 463,
+          "max_public": 493.75245997309685,
+          "max_ACK_cause": 953.1935419738293,
+          "max_worker_stop_upper": 622.2950491905212,
+          "max_delivery_upper": 331.65508458018303,
+          "negative_legacyCPU": [
+            {
+              "id": "asym-pair2-r1-18",
+              "field": "browser_public_ticks",
+              "ticks": -9
+            },
+            {
+              "id": "asym-pair2-r1-22",
+              "field": "browser_public_ticks",
+              "ticks": -12
+            },
+            {
+              "id": "asym-pair2-r1-32",
+              "field": "browser_public_ticks",
+              "ticks": -7
+            },
+            {
+              "id": "asym-pair2-r1-46",
+              "field": "browser_public_ticks",
+              "ticks": -10
+            },
+            {
+              "id": "asym-pair2-r1-49",
+              "field": "browser_public_ticks",
+              "ticks": -9
+            },
+            {
+              "id": "asym-pair2-r1-67",
+              "field": "browser_public_ticks",
+              "ticks": -8
+            },
+            {
+              "id": "asym-pair2-r1-79",
+              "field": "browser_public_ticks",
+              "ticks": -8
+            },
+            {
+              "id": "asym-pair2-r1-83",
+              "field": "browser_public_ticks",
+              "ticks": -9
+            },
+            {
+              "id": "asym-pair2-r1-91",
+              "field": "browser_public_ticks",
+              "ticks": -5
+            },
+            {
+              "id": "asym-pair2-r1-99",
+              "field": "browser_public_ticks",
+              "ticks": -9
+            }
+          ],
+          "max_lastAPI_to_worker_stop_upper": 365.756591796875
+        },
+        "reference": {
+          "n": 57,
+          "accepted": 57,
+          "ACK_breach": 5,
+          "worker_stop_upper_le500_and_ACK_late": 4,
+          "worker_stop_definite_gt500": 1,
+          "postpublic_NN": 9,
+          "NN": 518,
+          "max_public": 456.25824600458145,
+          "max_ACK_cause": 634.8093059957027,
+          "max_worker_stop_upper": 508.95485386252403,
+          "max_delivery_upper": 126.61104393005371,
+          "negative_legacyCPU": [
+            {
+              "id": "asym-pair2-r1-3",
+              "field": "browser_residual_ticks",
+              "ticks": -24
+            },
+            {
+              "id": "asym-pair2-r1-11",
+              "field": "browser_residual_ticks",
+              "ticks": -27
+            },
+            {
+              "id": "asym-pair2-r1-15",
+              "field": "browser_public_ticks",
+              "ticks": -10
+            },
+            {
+              "id": "asym-pair2-r1-25",
+              "field": "browser_public_ticks",
+              "ticks": -7
+            },
+            {
+              "id": "asym-pair2-r1-29",
+              "field": "browser_public_ticks",
+              "ticks": -6
+            },
+            {
+              "id": "asym-pair2-r1-35",
+              "field": "browser_public_ticks",
+              "ticks": -9
+            },
+            {
+              "id": "asym-pair2-r1-39",
+              "field": "browser_public_ticks",
+              "ticks": -8
+            },
+            {
+              "id": "asym-pair2-r1-43",
+              "field": "browser_public_ticks",
+              "ticks": -9
+            },
+            {
+              "id": "asym-pair2-r1-52",
+              "field": "browser_public_ticks",
+              "ticks": -10
+            },
+            {
+              "id": "asym-pair2-r1-56",
+              "field": "browser_public_ticks",
+              "ticks": -9
+            },
+            {
+              "id": "asym-pair2-r1-60",
+              "field": "browser_public_ticks",
+              "ticks": -9
+            },
+            {
+              "id": "asym-pair2-r1-64",
+              "field": "browser_public_ticks",
+              "ticks": -10
+            },
+            {
+              "id": "asym-pair2-r1-70",
+              "field": "browser_public_ticks",
+              "ticks": -10
+            },
+            {
+              "id": "asym-pair2-r1-88",
+              "field": "browser_public_ticks",
+              "ticks": -10
+            },
+            {
+              "id": "asym-pair2-r1-96",
+              "field": "browser_public_ticks",
+              "ticks": -9
+            },
+            {
+              "id": "asym-pair2-r1-104",
+              "field": "browser_public_ticks",
+              "ticks": -4
+            },
+            {
+              "id": "asym-pair2-r1-108",
+              "field": "browser_public_ticks",
+              "ticks": -11
+            },
+            {
+              "id": "asym-pair2-r1-112",
+              "field": "browser_public_ticks",
+              "ticks": -15
+            },
+            {
+              "id": "asym-pair2-r1-114",
+              "field": "browser_public_ticks",
+              "ticks": -13
+            }
+          ],
+          "max_lastAPI_to_worker_stop_upper": 44.15673828125
+        }
+      },
+      "next_t0_checks": 113,
+      "next_t0_min_after_previous_ACK": 7.142230004072189,
+      "games": [
+        {
+          "game": 3,
+          "candidateColor": 1,
+          "complete": true,
+          "score": 1,
+          "terminal": {
+            "winner": 1,
+            "value": -1
+          },
+          "kind": null,
+          "category": null,
+          "responsible_engine": null,
+          "reason": null
+        },
+        {
+          "game": 4,
+          "candidateColor": 2,
+          "complete": true,
+          "score": 0,
+          "terminal": {
+            "winner": 1,
+            "value": -1
+          },
+          "kind": null,
+          "category": null,
+          "responsible_engine": null,
+          "reason": null
+        }
+      ],
+      "WDL": [
+        1,
+        0,
+        1
+      ],
+      "clock_start_end": {
+        "start": {
+          "page": {
+            "samples": 12,
+            "lo": 1790747090612.7952,
+            "hi": 1790747090613.5361,
+            "error": 0.4704833984375
+          },
+          "worker": {
+            "samples": 12,
+            "lo": 1790747090612.7378,
+            "hi": 1790747090613.4944,
+            "error": 0.4782958984375
+          }
+        },
+        "end": {
+          "page": {
+            "samples": 12,
+            "lo": 1790747090612.8977,
+            "hi": 1790747090613.4077,
+            "error": 0.3550048828125
+          },
+          "worker": {
+            "samples": 12,
+            "lo": 1790747090612.8525,
+            "hi": 1790747090613.4268,
+            "error": 0.387109375
+          }
+        }
+      },
+      "drop0": true,
+      "controlledPID0": true,
+      "forced": true,
+      "primary": null,
+      "secondary": []
+    },
+    {
+      "base": ".artifacts/ai-sigma/resume-20261002/DIAGNOSTIC-ARENA/four-ply-r1",
+      "Git": "9496cae",
+      "stage": "four-ply",
+      "startup": {
+        "wall_ms": 6520.771095991135,
+        "root_NN": 6,
+        "outside_first_input_clock": true,
+        "tree_history_cache_reuse": false
+      },
+      "public": 4,
+      "ACKzero": 4,
+      "engine": {
+        "candidate": {
+          "n": 2,
+          "accepted": 2,
+          "ACK_breach": 1,
+          "worker_stop_upper_le500_and_ACK_late": 0,
+          "worker_stop_definite_gt500": 1,
+          "postpublic_NN": 1,
+          "NN": 12,
+          "max_public": 413.8982799947262,
+          "max_ACK_cause": 519.6133829951286,
+          "max_worker_stop_upper": 516.9436264932156,
+          "max_delivery_upper": 5.898524105548859,
+          "negative_legacyCPU": [
+            {
+              "id": "four-ply-r1-3",
+              "field": "browser_public_ticks",
+              "ticks": -5
+            }
+          ],
+          "max_lastAPI_to_worker_stop_upper": 24.4462890625
+        },
+        "reference": {
+          "n": 2,
+          "accepted": 2,
+          "ACK_breach": 0,
+          "worker_stop_upper_le500_and_ACK_late": 0,
+          "worker_stop_definite_gt500": 0,
+          "postpublic_NN": 0,
+          "NN": 17,
+          "max_public": 423.1008720099926,
+          "max_ACK_cause": 464.02215299010277,
+          "max_worker_stop_upper": 453.41189965605736,
+          "max_delivery_upper": 11.45644474029541,
+          "negative_legacyCPU": [],
+          "max_lastAPI_to_worker_stop_upper": 12.246337890625
+        }
+      },
+      "next_t0_checks": 3,
+      "next_t0_min_after_previous_ACK": 9.334003001451492,
+      "games": [],
+      "WDL": [
+        0,
+        0,
+        0
+      ],
+      "clock_start_end": {
+        "start": {
+          "page": {
+            "samples": 12,
+            "lo": 1790747090671.7314,
+            "hi": 1790747090672.4812,
+            "error": 0.4748779296875
+          },
+          "worker": {
+            "samples": 12,
+            "lo": 1790747090671.5842,
+            "hi": 1790747090672.4304,
+            "error": 0.523095703125
+          }
+        },
+        "end": {
+          "page": {
+            "samples": 12,
+            "lo": 1790747090671.7307,
+            "hi": 1790747090672.3357,
+            "error": 0.402490234375
+          },
+          "worker": {
+            "samples": 12,
+            "lo": 1790747090671.6804,
+            "hi": 1790747090672.3694,
+            "error": 0.444482421875
+          }
+        }
+      },
+      "drop0": true,
+      "controlledPID0": true,
+      "forced": true,
+      "primary": null,
+      "secondary": []
+    },
+    {
+      "base": ".artifacts/ai-sigma/resume-20261002/DIAGNOSTIC-ARENA/golden-r1",
+      "Git": "9496cae",
+      "stage": "golden",
+      "startup": {
+        "wall_ms": 6116.98697000742,
+        "root_NN": 6,
+        "outside_first_input_clock": true,
+        "tree_history_cache_reuse": false
+      },
+      "public": 2,
+      "ACKzero": 2,
+      "engine": {
+        "candidate": {
+          "n": 1,
+          "accepted": 1,
+          "ACK_breach": 1,
+          "worker_stop_upper_le500_and_ACK_late": 1,
+          "worker_stop_definite_gt500": 0,
+          "postpublic_NN": 0,
+          "NN": 7,
+          "max_public": 419.76239198446274,
+          "max_ACK_cause": 510.1841899752617,
+          "max_worker_stop_upper": 489.06765165925026,
+          "max_delivery_upper": 21.99690940976143,
+          "negative_legacyCPU": [],
+          "max_lastAPI_to_worker_stop_upper": 14.780517578125
+        },
+        "reference": {
+          "n": 1,
+          "accepted": 1,
+          "ACK_breach": 0,
+          "worker_stop_upper_le500_and_ACK_late": 0,
+          "worker_stop_definite_gt500": 0,
+          "postpublic_NN": 0,
+          "NN": 6,
+          "max_public": 412.4249800145626,
+          "max_ACK_cause": 443.8510009944439,
+          "max_worker_stop_upper": 424.19874584674835,
+          "max_delivery_upper": 20.53262624144554,
+          "negative_legacyCPU": [],
+          "max_lastAPI_to_worker_stop_upper": 5.780517578125
+        }
+      },
+      "next_t0_checks": 1,
+      "next_t0_min_after_previous_ACK": 38.38466700911522,
+      "games": [],
+      "WDL": [
+        0,
+        0,
+        0
+      ],
+      "clock_start_end": {
+        "start": {
+          "page": {
+            "samples": 12,
+            "lo": 1790747090677.3137,
+            "hi": 1790747090678.0308,
+            "error": 0.4585205078125
+          },
+          "worker": {
+            "samples": 12,
+            "lo": 1790747090677.333,
+            "hi": 1790747090678.2134,
+            "error": 0.540185546875
+          }
+        },
+        "end": {
+          "page": {
+            "samples": 12,
+            "lo": 1790747090677.432,
+            "hi": 1790747090677.9153,
+            "error": 0.34169921875
+          },
+          "worker": {
+            "samples": 12,
+            "lo": 1790747090677.4358,
+            "hi": 1790747090677.9712,
+            "error": 0.3677001953125
+          }
+        }
+      },
+      "drop0": true,
+      "controlledPID0": true,
+      "forced": true,
+      "primary": null,
+      "secondary": []
+    },
+    {
+      "base": ".artifacts/ai-sigma/resume-20261002/DIAGNOSTIC-ARENA/initial-pair1-r1",
+      "Git": "9496cae",
+      "stage": "pair",
+      "startup": {
+        "wall_ms": 5993.919911980629,
+        "root_NN": 6,
+        "outside_first_input_clock": true,
+        "tree_history_cache_reuse": false
+      },
+      "public": 153,
+      "ACKzero": 153,
+      "engine": {
+        "candidate": {
+          "n": 77,
+          "accepted": 77,
+          "ACK_breach": 16,
+          "worker_stop_upper_le500_and_ACK_late": 9,
+          "worker_stop_definite_gt500": 7,
+          "postpublic_NN": 20,
+          "NN": 594,
+          "max_public": 492.12536999583244,
+          "max_ACK_cause": 1125.5726130008698,
+          "max_worker_stop_upper": 597.355375379324,
+          "max_delivery_upper": 528.9987317621708,
+          "negative_legacyCPU": [
+            {
+              "id": "initial-pair1-r1-9",
+              "field": "browser_public_ticks",
+              "ticks": -8
+            },
+            {
+              "id": "initial-pair1-r1-19",
+              "field": "browser_public_ticks",
+              "ticks": -2
+            },
+            {
+              "id": "initial-pair1-r1-41",
+              "field": "browser_public_ticks",
+              "ticks": -10
+            },
+            {
+              "id": "initial-pair1-r1-63",
+              "field": "browser_residual_ticks",
+              "ticks": -22
+            },
+            {
+              "id": "initial-pair1-r1-67",
+              "field": "browser_public_ticks",
+              "ticks": -11
+            },
+            {
+              "id": "initial-pair1-r1-71",
+              "field": "browser_public_ticks",
+              "ticks": -6
+            },
+            {
+              "id": "initial-pair1-r1-77",
+              "field": "browser_residual_ticks",
+              "ticks": -15
+            },
+            {
+              "id": "initial-pair1-r1-81",
+              "field": "browser_public_ticks",
+              "ticks": -10
+            },
+            {
+              "id": "initial-pair1-r1-85",
+              "field": "browser_public_ticks",
+              "ticks": -10
+            },
+            {
+              "id": "initial-pair1-r1-89",
+              "field": "browser_public_ticks",
+              "ticks": -6
+            },
+            {
+              "id": "initial-pair1-r1-95",
+              "field": "browser_public_ticks",
+              "ticks": -10
+            },
+            {
+              "id": "initial-pair1-r1-99",
+              "field": "browser_public_ticks",
+              "ticks": -7
+            },
+            {
+              "id": "initial-pair1-r1-103",
+              "field": "browser_residual_ticks",
+              "ticks": -25
+            },
+            {
+              "id": "initial-pair1-r1-113",
+              "field": "browser_public_ticks",
+              "ticks": -11
+            },
+            {
+              "id": "initial-pair1-r1-139",
+              "field": "browser_public_ticks",
+              "ticks": -10
+            },
+            {
+              "id": "initial-pair1-r1-143",
+              "field": "browser_public_ticks",
+              "ticks": -10
+            },
+            {
+              "id": "initial-pair1-r1-149",
+              "field": "browser_public_ticks",
+              "ticks": -8
+            }
+          ],
+          "max_lastAPI_to_worker_stop_upper": 431.381591796875
+        },
+        "reference": {
+          "n": 76,
+          "accepted": 76,
+          "ACK_breach": 9,
+          "worker_stop_upper_le500_and_ACK_late": 7,
+          "worker_stop_definite_gt500": 1,
+          "postpublic_NN": 16,
+          "NN": 708,
+          "max_public": 490.95465698838234,
+          "max_ACK_cause": 828.2218180000782,
+          "max_worker_stop_upper": 556.7514891922474,
+          "max_delivery_upper": 328.4180711209774,
+          "negative_legacyCPU": [
+            {
+              "id": "initial-pair1-r1-4",
+              "field": "browser_public_ticks",
+              "ticks": -6
+            },
+            {
+              "id": "initial-pair1-r1-12",
+              "field": "browser_public_ticks",
+              "ticks": -9
+            },
+            {
+              "id": "initial-pair1-r1-16",
+              "field": "browser_public_ticks",
+              "ticks": -9
+            },
+            {
+              "id": "initial-pair1-r1-24",
+              "field": "browser_public_ticks",
+              "ticks": -8
+            },
+            {
+              "id": "initial-pair1-r1-26",
+              "field": "browser_residual_ticks",
+              "ticks": -26
+            },
+            {
+              "id": "initial-pair1-r1-30",
+              "field": "browser_public_ticks",
+              "ticks": -10
+            },
+            {
+              "id": "initial-pair1-r1-34",
+              "field": "browser_public_ticks",
+              "ticks": -11
+            },
+            {
+              "id": "initial-pair1-r1-38",
+              "field": "browser_public_ticks",
+              "ticks": -9
+            },
+            {
+              "id": "initial-pair1-r1-44",
+              "field": "browser_public_ticks",
+              "ticks": -6
+            },
+            {
+              "id": "initial-pair1-r1-46",
+              "field": "browser_public_ticks",
+              "ticks": -6
+            },
+            {
+              "id": "initial-pair1-r1-50",
+              "field": "browser_public_ticks",
+              "ticks": -7
+            },
+            {
+              "id": "initial-pair1-r1-54",
+              "field": "browser_public_ticks",
+              "ticks": -10
+            },
+            {
+              "id": "initial-pair1-r1-58",
+              "field": "browser_public_ticks",
+              "ticks": -7
+            },
+            {
+              "id": "initial-pair1-r1-60",
+              "field": "browser_public_ticks",
+              "ticks": -9
+            },
+            {
+              "id": "initial-pair1-r1-74",
+              "field": "browser_public_ticks",
+              "ticks": -9
+            },
+            {
+              "id": "initial-pair1-r1-76",
+              "field": "browser_public_ticks",
+              "ticks": -9
+            },
+            {
+              "id": "initial-pair1-r1-106",
+              "field": "browser_public_ticks",
+              "ticks": -5
+            },
+            {
+              "id": "initial-pair1-r1-110",
+              "field": "browser_public_ticks",
+              "ticks": -8
+            },
+            {
+              "id": "initial-pair1-r1-116",
+              "field": "browser_residual_ticks",
+              "ticks": -24
+            },
+            {
+              "id": "initial-pair1-r1-120",
+              "field": "browser_public_ticks",
+              "ticks": -9
+            },
+            {
+              "id": "initial-pair1-r1-124",
+              "field": "browser_public_ticks",
+              "ticks": -12
+            },
+            {
+              "id": "initial-pair1-r1-128",
+              "field": "browser_public_ticks",
+              "ticks": -9
+            },
+            {
+              "id": "initial-pair1-r1-134",
+              "field": "browser_public_ticks",
+              "ticks": -22
+            },
+            {
+              "id": "initial-pair1-r1-146",
+              "field": "browser_public_ticks",
+              "ticks": -13
+            },
+            {
+              "id": "initial-pair1-r1-152",
+              "field": "browser_public_ticks",
+              "ticks": -8
+            }
+          ],
+          "max_lastAPI_to_worker_stop_upper": 297.681640625
+        }
+      },
+      "next_t0_checks": 152,
+      "next_t0_min_after_previous_ACK": 6.764896005392075,
+      "games": [
+        {
+          "game": 1,
+          "candidateColor": 1,
+          "complete": true,
+          "score": 1,
+          "terminal": {
+            "winner": 1,
+            "value": -1
+          },
+          "kind": null,
+          "category": null,
+          "responsible_engine": null,
+          "reason": null
+        },
+        {
+          "game": 2,
+          "candidateColor": 2,
+          "complete": true,
+          "score": 1,
+          "terminal": {
+            "winner": 2,
+            "value": -1
+          },
+          "kind": null,
+          "category": null,
+          "responsible_engine": null,
+          "reason": null
+        }
+      ],
+      "WDL": [
+        2,
+        0,
+        0
+      ],
+      "clock_start_end": {
+        "start": {
+          "page": {
+            "samples": 12,
+            "lo": 1790747090649.1648,
+            "hi": 1790747090649.9526,
+            "error": 0.4939208984375
+          },
+          "worker": {
+            "samples": 12,
+            "lo": 1790747090649.1724,
+            "hi": 1790747090649.9539,
+            "error": 0.4907470703125
+          }
+        },
+        "end": {
+          "page": {
+            "samples": 12,
+            "lo": 1790747090649.2917,
+            "hi": 1790747090649.8613,
+            "error": 0.3847900390625
+          },
+          "worker": {
+            "samples": 12,
+            "lo": 1790747090649.1714,
+            "hi": 1790747090649.791,
+            "error": 0.409814453125
+          }
+        }
+      },
+      "drop0": true,
+      "controlledPID0": true,
+      "forced": true,
+      "primary": null,
+      "secondary": []
+    },
+    {
+      "base": ".artifacts/ai-sigma/resume-20261002/DIAGNOSTIC-ARENA/initial-pair4-r3",
+      "Git": "812a9e4",
+      "stage": "pair",
+      "startup": {
+        "wall_ms": 6086.979063987732,
+        "root_NN": 6,
+        "outside_first_input_clock": true,
+        "tree_history_cache_reuse": false
+      },
+      "public": 132,
+      "ACKzero": 132,
+      "engine": {
+        "candidate": {
+          "n": 66,
+          "accepted": 65,
+          "ACK_breach": 10,
+          "worker_stop_upper_le500_and_ACK_late": 5,
+          "worker_stop_definite_gt500": 5,
+          "postpublic_NN": 13,
+          "NN": 522,
+          "max_public": 526.6053359806538,
+          "max_ACK_cause": 1070.0903599858284,
+          "max_worker_stop_upper": 629.1945375800133,
+          "max_delivery_upper": 441.8015841245651,
+          "negative_legacyCPU": [],
+          "max_lastAPI_to_worker_stop_upper": 468.20556640625
+        },
+        "reference": {
+          "n": 66,
+          "accepted": 65,
+          "ACK_breach": 2,
+          "worker_stop_upper_le500_and_ACK_late": 0,
+          "worker_stop_definite_gt500": 2,
+          "postpublic_NN": 13,
+          "NN": 615,
+          "max_public": 540.6197009980679,
+          "max_ACK_cause": 741.1200219988823,
+          "max_worker_stop_upper": 605.9654560685158,
+          "max_delivery_upper": 136.06032764911652,
+          "negative_legacyCPU": [],
+          "max_lastAPI_to_worker_stop_upper": 24.40576171875
+        }
+      },
+      "next_t0_checks": 131,
+      "next_t0_min_after_previous_ACK": 5.491374999284744,
+      "games": [
+        {
+          "game": 7,
+          "candidateColor": 1,
+          "complete": true,
+          "score": 0,
+          "terminal": null,
+          "kind": "engine_loss",
+          "category": "engine_loss",
+          "responsible_engine": "candidate",
+          "reason": "LATE_RESPONSE"
+        },
+        {
+          "game": 8,
+          "candidateColor": 2,
+          "complete": true,
+          "score": 1,
+          "terminal": null,
+          "kind": "engine_loss",
+          "category": "engine_loss",
+          "responsible_engine": "reference",
+          "reason": "LATE_RESPONSE"
+        }
+      ],
+      "WDL": [
+        1,
+        0,
+        1
+      ],
+      "clock_start_end": {
+        "start": {
+          "page": {
+            "samples": 12,
+            "lo": 1790747090507.3494,
+            "hi": 1790747090507.9775,
+            "error": 0.4140869140625
+          },
+          "worker": {
+            "samples": 12,
+            "lo": 1790747090507.343,
+            "hi": 1790747090508.2488,
+            "error": 0.552880859375
+          }
+        },
+        "end": {
+          "page": {
+            "samples": 12,
+            "lo": 1790747090507.3857,
+            "hi": 1790747090507.8547,
+            "error": 0.3344970703125
+          },
+          "worker": {
+            "samples": 12,
+            "lo": 1790747090507.4194,
+            "hi": 1790747090508.014,
+            "error": 0.3972412109375
+          }
+        }
+      },
+      "drop0": true,
+      "controlledPID0": true,
+      "forced": true,
+      "primary": null,
+      "secondary": []
+    },
+    {
+      "base": ".artifacts/ai-sigma/resume-20261002/DIAGNOSTIC-ARENA/jump-pair3-r2",
+      "Git": "132ec12",
+      "stage": "pair",
+      "startup": {
+        "wall_ms": 6435.12273401022,
+        "root_NN": 6,
+        "outside_first_input_clock": true,
+        "tree_history_cache_reuse": false
+      },
+      "public": 85,
+      "ACKzero": 85,
+      "engine": {
+        "candidate": {
+          "n": 42,
+          "accepted": 42,
+          "ACK_breach": 2,
+          "worker_stop_upper_le500_and_ACK_late": 0,
+          "worker_stop_definite_gt500": 2,
+          "postpublic_NN": 9,
+          "NN": 357,
+          "max_public": 456.058768004179,
+          "max_ACK_cause": 553.6011959910393,
+          "max_worker_stop_upper": 540.4322297871113,
+          "max_delivery_upper": 25.60772082209587,
+          "negative_legacyCPU": [
+            {
+              "id": "jump-pair3-r2-4",
+              "field": "browser_public_ticks",
+              "ticks": -8
+            },
+            {
+              "id": "jump-pair3-r2-8",
+              "field": "browser_public_ticks",
+              "ticks": -9
+            },
+            {
+              "id": "jump-pair3-r2-12",
+              "field": "browser_public_ticks",
+              "ticks": -9
+            },
+            {
+              "id": "jump-pair3-r2-16",
+              "field": "browser_public_ticks",
+              "ticks": -5
+            },
+            {
+              "id": "jump-pair3-r2-22",
+              "field": "browser_residual_ticks",
+              "ticks": -24
+            },
+            {
+              "id": "jump-pair3-r2-56",
+              "field": "browser_public_ticks",
+              "ticks": -8
+            },
+            {
+              "id": "jump-pair3-r2-64",
+              "field": "browser_public_ticks",
+              "ticks": -10
+            }
+          ],
+          "max_lastAPI_to_worker_stop_upper": 22.950439453125
+        },
+        "reference": {
+          "n": 43,
+          "accepted": 42,
+          "ACK_breach": 6,
+          "worker_stop_upper_le500_and_ACK_late": 3,
+          "worker_stop_definite_gt500": 3,
+          "postpublic_NN": 8,
+          "NN": 387,
+          "max_public": 505.4510309994221,
+          "max_ACK_cause": 706.9051829874516,
+          "max_worker_stop_upper": 538.0453499555588,
+          "max_delivery_upper": 174.6308273077011,
+          "negative_legacyCPU": [
+            {
+              "id": "jump-pair3-r2-1",
+              "field": "browser_public_ticks",
+              "ticks": -1
+            },
+            {
+              "id": "jump-pair3-r2-19",
+              "field": "browser_public_ticks",
+              "ticks": -8
+            },
+            {
+              "id": "jump-pair3-r2-25",
+              "field": "browser_residual_ticks",
+              "ticks": -27
+            },
+            {
+              "id": "jump-pair3-r2-33",
+              "field": "browser_public_ticks",
+              "ticks": -8
+            },
+            {
+              "id": "jump-pair3-r2-39",
+              "field": "browser_public_ticks",
+              "ticks": -8
+            },
+            {
+              "id": "jump-pair3-r2-43",
+              "field": "browser_public_ticks",
+              "ticks": -11
+            },
+            {
+              "id": "jump-pair3-r2-47",
+              "field": "browser_public_ticks",
+              "ticks": -10
+            },
+            {
+              "id": "jump-pair3-r2-51",
+              "field": "browser_public_ticks",
+              "ticks": -12
+            },
+            {
+              "id": "jump-pair3-r2-53",
+              "field": "browser_public_ticks",
+              "ticks": -8
+            },
+            {
+              "id": "jump-pair3-r2-59",
+              "field": "browser_public_ticks",
+              "ticks": -9
+            },
+            {
+              "id": "jump-pair3-r2-69",
+              "field": "browser_public_ticks",
+              "ticks": -12
+            },
+            {
+              "id": "jump-pair3-r2-73",
+              "field": "browser_public_ticks",
+              "ticks": -12
+            },
+            {
+              "id": "jump-pair3-r2-75",
+              "field": "browser_residual_ticks",
+              "ticks": -26
+            },
+            {
+              "id": "jump-pair3-r2-79",
+              "field": "browser_public_ticks",
+              "ticks": -8
+            },
+            {
+              "id": "jump-pair3-r2-83",
+              "field": "browser_public_ticks",
+              "ticks": -10
+            }
+          ],
+          "max_lastAPI_to_worker_stop_upper": 295.75048828125
+        }
+      },
+      "next_t0_checks": 84,
+      "next_t0_min_after_previous_ACK": 9.255295008420944,
+      "games": [
+        {
+          "game": 5,
+          "candidateColor": 1,
+          "complete": true,
+          "score": 1,
+          "terminal": null,
+          "kind": "engine_loss",
+          "category": "engine_loss",
+          "responsible_engine": "reference",
+          "reason": "LATE_RESPONSE"
+        },
+        {
+          "game": 6,
+          "candidateColor": 2,
+          "complete": true,
+          "score": 0,
+          "terminal": {
+            "winner": 1,
+            "value": -1
+          },
+          "kind": null,
+          "category": null,
+          "responsible_engine": null,
+          "reason": null
+        }
+      ],
+      "WDL": [
+        1,
+        0,
+        1
+      ],
+      "clock_start_end": {
+        "start": {
+          "page": {
+            "samples": 12,
+            "lo": 1790747090560.57,
+            "hi": 1790747090561.218,
+            "error": 0.423974609375
+          },
+          "worker": {
+            "samples": 12,
+            "lo": 1790747090560.306,
+            "hi": 1790747090561.2563,
+            "error": 0.5752197265625
+          }
+        },
+        "end": {
+          "page": {
+            "samples": 12,
+            "lo": 1790747090560.595,
+            "hi": 1790747090561.1274,
+            "error": 0.3662353515625
+          },
+          "worker": {
+            "samples": 12,
+            "lo": 1790747090560.4026,
+            "hi": 1790747090561.0986,
+            "error": 0.4480224609375
+          }
+        }
+      },
+      "drop0": true,
+      "controlledPID0": true,
+      "forced": true,
+      "primary": null,
+      "secondary": []
+    },
+    {
+      "base": ".artifacts/ai-sigma/resume-20261002/DIAGNOSTIC-ARENA-INDEPENDENT/critic95-four-ply-r1",
+      "Git": "dca3588570c293cb1883456901f4fa3f25a9ad4b",
+      "stage": "four-ply",
+      "startup": {
+        "wall_ms": 6350.694215983152,
+        "root_NN": 6,
+        "outside_first_input_clock": true,
+        "tree_history_cache_reuse": false
+      },
+      "public": 4,
+      "ACKzero": 4,
+      "engine": {
+        "candidate": {
+          "n": 2,
+          "accepted": 2,
+          "ACK_breach": 0,
+          "worker_stop_upper_le500_and_ACK_late": 0,
+          "worker_stop_definite_gt500": 0,
+          "postpublic_NN": 0,
+          "NN": 11,
+          "max_public": 421.92994302511215,
+          "max_ACK_cause": 488.69732800126076,
+          "max_worker_stop_upper": 469.2549404501915,
+          "max_delivery_upper": 27.614066570997238,
+          "negative_legacyCPU": [],
+          "max_lastAPI_to_worker_stop_upper": 6.148193359375
+        },
+        "reference": {
+          "n": 2,
+          "accepted": 2,
+          "ACK_breach": 0,
+          "worker_stop_upper_le500_and_ACK_late": 0,
+          "worker_stop_definite_gt500": 0,
+          "postpublic_NN": 1,
+          "NN": 16,
+          "max_public": 414.1474720239639,
+          "max_ACK_cause": 463.94855999946594,
+          "max_worker_stop_upper": 462.5073724389076,
+          "max_delivery_upper": 2.3221737444400787,
+          "negative_legacyCPU": [],
+          "max_lastAPI_to_worker_stop_upper": 14.048095703125
+        }
+      },
+      "next_t0_checks": 3,
+      "next_t0_min_after_previous_ACK": 5.8711279928684235,
+      "games": [],
+      "WDL": [
+        0,
+        0,
+        0
+      ],
+      "clock_start_end": {
+        "start": {
+          "page": {
+            "samples": 12,
+            "lo": 1790747090272.1501,
+            "hi": 1790747090272.999,
+            "error": 0.5244384765625
+          },
+          "worker": {
+            "samples": 12,
+            "lo": 1790747090272.2012,
+            "hi": 1790747090273.0493,
+            "error": 0.524072265625
+          }
+        },
+        "end": {
+          "page": {
+            "samples": 12,
+            "lo": 1790747090272.2764,
+            "hi": 1790747090272.7852,
+            "error": 0.35439453125
+          },
+          "worker": {
+            "samples": 12,
+            "lo": 1790747090272.292,
+            "hi": 1790747090272.9373,
+            "error": 0.4226318359375
+          }
+        }
+      },
+      "drop0": true,
+      "controlledPID0": true,
+      "forced": true,
+      "primary": null,
+      "secondary": []
+    },
+    {
+      "base": ".artifacts/ai-sigma/resume-20261002/DIAGNOSTIC-ARENA-INDEPENDENT/critic95-golden-r1",
+      "Git": "dca3588570c293cb1883456901f4fa3f25a9ad4b",
+      "stage": "golden",
+      "startup": {
+        "wall_ms": 6346.865420997143,
+        "root_NN": 6,
+        "outside_first_input_clock": true,
+        "tree_history_cache_reuse": false
+      },
+      "public": 2,
+      "ACKzero": 2,
+      "engine": {
+        "candidate": {
+          "n": 1,
+          "accepted": 1,
+          "ACK_breach": 1,
+          "worker_stop_upper_le500_and_ACK_late": 0,
+          "worker_stop_definite_gt500": 1,
+          "postpublic_NN": 1,
+          "NN": 4,
+          "max_public": 413.27545499801636,
+          "max_ACK_cause": 552.7508659958839,
+          "max_worker_stop_upper": 545.4648558497429,
+          "max_delivery_upper": 8.029906630516052,
+          "negative_legacyCPU": [],
+          "max_lastAPI_to_worker_stop_upper": 11.64404296875
+        },
+        "reference": {
+          "n": 1,
+          "accepted": 1,
+          "ACK_breach": 0,
+          "worker_stop_upper_le500_and_ACK_late": 0,
+          "worker_stop_definite_gt500": 0,
+          "postpublic_NN": 1,
+          "NN": 8,
+          "max_public": 412.424468010664,
+          "max_ACK_cause": 466.6049990057945,
+          "max_worker_stop_upper": 462.16660702228546,
+          "max_delivery_upper": 5.182288467884064,
+          "negative_legacyCPU": [],
+          "max_lastAPI_to_worker_stop_upper": 19.44384765625
+        }
+      },
+      "next_t0_checks": 1,
+      "next_t0_min_after_previous_ACK": 17.747334003448486,
+      "games": [],
+      "WDL": [
+        0,
+        0,
+        0
+      ],
+      "clock_start_end": {
+        "start": {
+          "page": {
+            "samples": 12,
+            "lo": 1790747090279.3223,
+            "hi": 1790747090279.957,
+            "error": 0.4173828125
+          },
+          "worker": {
+            "samples": 12,
+            "lo": 1790747090279.1611,
+            "hi": 1790747090279.905,
+            "error": 0.4719482421875
+          }
+        },
+        "end": {
+          "page": {
+            "samples": 12,
+            "lo": 1790747090279.3652,
+            "hi": 1790747090279.9229,
+            "error": 0.37880859375
+          },
+          "worker": {
+            "samples": 12,
+            "lo": 1790747090279.1636,
+            "hi": 1790747090279.8342,
+            "error": 0.4353271484375
+          }
+        }
+      },
+      "drop0": true,
+      "controlledPID0": true,
+      "forced": true,
+      "primary": null,
+      "secondary": []
+    }
+  ],
+  "upstream_totals_separate_Git_not_WDL_pool": {
+    "public": 490,
+    "accepted": 487,
+    "cause_ACK_breaches": 63,
+    "handNN": 4206,
+    "startupNN": 36,
+    "game_starts": 8,
+    "natural_goal": 5,
+    "fault_termination": 3
+  },
+  "root96_independent_match": {
+    "rows": 153,
+    "ACK_budget_breaches": 25,
+    "ACK_late_worker_stop_within500_upper": 16
+  },
+  "limitations": [
+    "ACK wall is not Worker stop time or engine CPU budget",
+    "API await not kernel execution time",
+    "source timers and current absence do not prove hard deadlines",
+    "old live-process counter differences invalid when negative; retained counters lower bound with exited final samples missing"
+  ]
+}

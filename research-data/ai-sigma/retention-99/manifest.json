@@ -1,0 +1,757 @@
+{
+  "issue": "quoridor-4lc.99.1",
+  "created": "2026-10-02T03:21:10.474235+00:00",
+  "archives": [
+    {
+      "source": ".artifacts/ai-sigma/resume-20261002/DIAGNOSTIC-ARENA",
+      "archive": "research-data/ai-sigma/archives/resume-20261002/DIAGNOSTIC-ARENA.tar.gz",
+      "files": 1287,
+      "logical_bytes": 59358043,
+      "archive_bytes": 7261289,
+      "sha256": "7a59aa05473551bdd9ea45c75175247966ed898adae0577be95867d283f29012",
+      "representative": ".artifacts/ai-sigma/resume-20261002/DIAGNOSTIC-ARENA/analysis-asym-pair2-r1.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/resume-20261002/DIAGNOSTIC-ARENA-INDEPENDENT",
+      "archive": "research-data/ai-sigma/archives/resume-20261002/DIAGNOSTIC-ARENA-INDEPENDENT.tar.gz",
+      "files": 156,
+      "logical_bytes": 2259850,
+      "archive_bytes": 397112,
+      "sha256": "b5fa7157405618b7f151c7dd885eeb6cbcb5e82dd88718884cf291cd054713db",
+      "representative": ".artifacts/ai-sigma/resume-20261002/DIAGNOSTIC-ARENA-INDEPENDENT/adapter.patch"
+    },
+    {
+      "source": ".artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT",
+      "archive": "research-data/ai-sigma/archives/runs/SIGMA-ARENA-PREFLIGHT.tar.gz",
+      "files": 33,
+      "logical_bytes": 7478701,
+      "archive_bytes": 774458,
+      "sha256": "ba2604025a6e044d45535814873d5f7f2e5199ee91d9fb7493473a5a8a0d9e25",
+      "representative": ".artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/arena-calibration.log"
+    },
+    {
+      "source": ".artifacts/ai-sigma/runs/SIGMA-B0-PROFILE",
+      "archive": "research-data/ai-sigma/archives/runs/SIGMA-B0-PROFILE.tar.gz",
+      "files": 875,
+      "logical_bytes": 14647338,
+      "archive_bytes": 1127883,
+      "sha256": "316573e96929ab0a6a96e043492a08fd3591473e948f3113b059fc929b5de556",
+      "representative": ".artifacts/ai-sigma/runs/SIGMA-B0-PROFILE/ancestor-control-build.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/runs/SIGMA-FIXED-QUEUE",
+      "archive": "research-data/ai-sigma/archives/runs/SIGMA-FIXED-QUEUE.tar.gz",
+      "files": 195,
+      "logical_bytes": 8496218,
+      "archive_bytes": 930411,
+      "sha256": "6170aa2f29d778e666c7d449af8a224b32814a1648a5f8da0a7d58c29460297d",
+      "representative": ".artifacts/ai-sigma/runs/SIGMA-FIXED-QUEUE/artifact-manifest.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE",
+      "archive": "research-data/ai-sigma/archives/runs/SIGMA-INFERENCE-PROBE.tar.gz",
+      "files": 48,
+      "logical_bytes": 2562411,
+      "archive_bytes": 307985,
+      "sha256": "1bf33ada9c695fcfa0e230a33a12a703124815bc6649f9cb2d1f1a3bcf2ffe3c",
+      "representative": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/actual-graph-attributes.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-RELEASE",
+      "archive": "research-data/ai-sigma/archives/runs/SIGMA-INFERENCE-RELEASE.tar.gz",
+      "files": 22,
+      "logical_bytes": 2090467,
+      "archive_bytes": 395570,
+      "sha256": "82809f735ba2d6967b90c2a83d15e6a2633842aa87ee93018737da2c6cc37cbd",
+      "representative": ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-RELEASE/browser-run.log"
+    },
+    {
+      "source": ".artifacts/ai-sigma/runs/SIGMA-MODEL-ACQUIRE",
+      "archive": "research-data/ai-sigma/archives/runs/SIGMA-MODEL-ACQUIRE.tar.gz",
+      "files": 10,
+      "logical_bytes": 133194,
+      "archive_bytes": 19958,
+      "sha256": "f26ff277ef1b841f98522a325d389bdc463f9be0d0014bb19ecc2af2df13d841",
+      "representative": ".artifacts/ai-sigma/runs/SIGMA-MODEL-ACQUIRE/analyze.log"
+    },
+    {
+      "source": ".artifacts/ai-sigma/runs/SIGMA-NN-SEARCH",
+      "archive": "research-data/ai-sigma/archives/runs/SIGMA-NN-SEARCH.tar.gz",
+      "files": 101,
+      "logical_bytes": 14410544,
+      "archive_bytes": 2363995,
+      "sha256": "7dcfbfcd62706d0826f5a83bf8af088a929747e03fd6e793729d65137871a8f9",
+      "representative": ".artifacts/ai-sigma/runs/SIGMA-NN-SEARCH/artifact-manifest.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/runs/SIGMA-ORT-CHECKPOINT",
+      "archive": "research-data/ai-sigma/archives/runs/SIGMA-ORT-CHECKPOINT.tar.gz",
+      "files": 121,
+      "logical_bytes": 4477897,
+      "archive_bytes": 613468,
+      "sha256": "19bf55b9558306d121802ee83f95d6dcf3b4049beb9546efd893c893a01515c4",
+      "representative": ".artifacts/ai-sigma/runs/SIGMA-ORT-CHECKPOINT/adapter.patch"
+    },
+    {
+      "source": ".artifacts/ai-sigma/runs/SIGMA-ORT-CLEANUP-REPAIR",
+      "archive": "research-data/ai-sigma/archives/runs/SIGMA-ORT-CLEANUP-REPAIR.tar.gz",
+      "files": 82,
+      "logical_bytes": 1266133,
+      "archive_bytes": 211522,
+      "sha256": "892c8b0936caf9128549ab53eafc1279c35c7717b4181c728a4fe1d39313226d",
+      "representative": ".artifacts/ai-sigma/runs/SIGMA-ORT-CLEANUP-REPAIR/cleanup-mock-summary.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/runs/SIGMA-ORT-ENTRY-CONTINUE",
+      "archive": "research-data/ai-sigma/archives/runs/SIGMA-ORT-ENTRY-CONTINUE.tar.gz",
+      "files": 379,
+      "logical_bytes": 2962118,
+      "archive_bytes": 345622,
+      "sha256": "9d3bb39fbd10c510a4283137c4c553ac9492070b3fce1a173a50576b27dad455",
+      "representative": ".artifacts/ai-sigma/runs/SIGMA-ORT-ENTRY-CONTINUE/NN-runtime-stopped.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/runs/SIGMA-ORT-ENTRY-FINAL",
+      "archive": "research-data/ai-sigma/archives/runs/SIGMA-ORT-ENTRY-FINAL.tar.gz",
+      "files": 12,
+      "logical_bytes": 43555,
+      "archive_bytes": 12858,
+      "sha256": "9e7cf56d85bce8f091fe3e7138d8356252f02eb16f257785b88d4aa250c25616",
+      "representative": ".artifacts/ai-sigma/runs/SIGMA-ORT-ENTRY-FINAL/adapter.patch"
+    },
+    {
+      "source": ".artifacts/ai-sigma/runs/SIGMA-ORT-SEARCH",
+      "archive": "research-data/ai-sigma/archives/runs/SIGMA-ORT-SEARCH.tar.gz",
+      "files": 134,
+      "logical_bytes": 3066262,
+      "archive_bytes": 460561,
+      "sha256": "d641bd00d60b3eb31b35f37d56bb8e6e1565f79218475e99000c68ebf2a05248",
+      "representative": ".artifacts/ai-sigma/runs/SIGMA-ORT-SEARCH/b0-gate.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/runs/SIGMA-PAIRED-MATCHES",
+      "archive": "research-data/ai-sigma/archives/runs/SIGMA-PAIRED-MATCHES.tar.gz",
+      "files": 279,
+      "logical_bytes": 84531203,
+      "archive_bytes": 16220139,
+      "sha256": "8ef3fe0e8841dbc15cfcb894d169ee7eb656d47d75f7d8062508f649235fcab9",
+      "representative": ".artifacts/ai-sigma/runs/SIGMA-PAIRED-MATCHES/README.md.patch"
+    },
+    {
+      "source": ".artifacts/ai-sigma/runs/SIGMA-PUCT-FACTOR",
+      "archive": "research-data/ai-sigma/archives/runs/SIGMA-PUCT-FACTOR.tar.gz",
+      "files": 119,
+      "logical_bytes": 15465047,
+      "archive_bytes": 2428271,
+      "sha256": "cee149fba2c432ab0303652b5f1863af56b8c231b918cce0d57cd3acb6ea34af",
+      "representative": ".artifacts/ai-sigma/runs/SIGMA-PUCT-FACTOR/binary-freeze.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/runs/SIGMA-RULE-FEATURE-PARITY",
+      "archive": "research-data/ai-sigma/archives/runs/SIGMA-RULE-FEATURE-PARITY.tar.gz",
+      "files": 198,
+      "logical_bytes": 27227756,
+      "archive_bytes": 2317332,
+      "sha256": "56a70b63fdb2bc08f7367ad22a583164b3d47eef28a3c025659b807dfc7d33b9",
+      "representative": ".artifacts/ai-sigma/runs/SIGMA-RULE-FEATURE-PARITY/artifact-manifest.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE",
+      "archive": "research-data/ai-sigma/archives/runs/SIGMA-WEB-REFERENCE.tar.gz",
+      "files": 42,
+      "logical_bytes": 1330297,
+      "archive_bytes": 148763,
+      "sha256": "8f03e13aae179a12dd491c6724e353d9594dbfe3a29739c350fd0b65283931cf",
+      "representative": ".artifacts/ai-sigma/runs/SIGMA-WEB-REFERENCE/boundary-cancel.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/verification/CONTEXT-COORD-STATIC",
+      "archive": "research-data/ai-sigma/archives/verification/CONTEXT-COORD-STATIC.tar.gz",
+      "files": 1,
+      "logical_bytes": 608,
+      "archive_bytes": 639,
+      "sha256": "aa1dd9cc662f93b013cd1c3ff2fe1cc5ad7687740aa6dbd106cf4ce27b8b2423",
+      "representative": ".artifacts/ai-sigma/verification/CONTEXT-COORD-STATIC/input-checks.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/verification/CRITIC-ARENA",
+      "archive": "research-data/ai-sigma/archives/verification/CRITIC-ARENA.tar.gz",
+      "files": 22,
+      "logical_bytes": 1096442,
+      "archive_bytes": 122280,
+      "sha256": "5a21fbbd16b34eb51eaaab18e4c01f247f2f96b4bae8b7b29bfa6e37b7224c4c",
+      "representative": ".artifacts/ai-sigma/verification/CRITIC-ARENA/arithmetic.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/verification/CRITIC-CONTEXT",
+      "archive": "research-data/ai-sigma/archives/verification/CRITIC-CONTEXT.tar.gz",
+      "files": 72,
+      "logical_bytes": 15843872,
+      "archive_bytes": 1254618,
+      "sha256": "05d97840f54f784e9cbf38458e83dd715740214921970714da621cd4523428e6",
+      "representative": ".artifacts/ai-sigma/verification/CRITIC-CONTEXT/browser-final-runtime.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY",
+      "archive": "research-data/ai-sigma/archives/verification/CRITIC-FINAL-ENTRY.tar.gz",
+      "files": 150,
+      "logical_bytes": 1230962,
+      "archive_bytes": 166003,
+      "sha256": "1a68f3a11bb3a625aa01339d54d5882d469eabc147c72d073e27f42e12f62d0d",
+      "representative": ".artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/arena-prep.patch"
+    },
+    {
+      "source": ".artifacts/ai-sigma/verification/CRITIC-INFERENCE",
+      "archive": "research-data/ai-sigma/archives/verification/CRITIC-INFERENCE.tar.gz",
+      "files": 24,
+      "logical_bytes": 792232,
+      "archive_bytes": 93491,
+      "sha256": "53c513b4eb0406bf207d9439276e30e6baafe6661f4f9a32433239729d4b6718",
+      "representative": ".artifacts/ai-sigma/verification/CRITIC-INFERENCE/actual-graph-attributes.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/verification/CRITIC-MATCH-RESULTS",
+      "archive": "research-data/ai-sigma/archives/verification/CRITIC-MATCH-RESULTS.tar.gz",
+      "files": 32,
+      "logical_bytes": 168668,
+      "archive_bytes": 36335,
+      "sha256": "f1b2a5e10f872c9db95327e542755a058c3d142703f260865dff0a1ac068544d",
+      "representative": ".artifacts/ai-sigma/verification/CRITIC-MATCH-RESULTS/audit-summary.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/verification/CRITIC-MATCHES-GATE",
+      "archive": "research-data/ai-sigma/archives/verification/CRITIC-MATCHES-GATE.tar.gz",
+      "files": 60,
+      "logical_bytes": 1542480,
+      "archive_bytes": 246350,
+      "sha256": "615854316a7aab0504e454aa6e61aa489e1a789d9ab3c2e6709afebf98ce20d9",
+      "representative": ".artifacts/ai-sigma/verification/CRITIC-MATCHES-GATE/arena-final-paths.patch"
+    },
+    {
+      "source": ".artifacts/ai-sigma/verification/CRITIC-NN-SEARCH",
+      "archive": "research-data/ai-sigma/archives/verification/CRITIC-NN-SEARCH.tar.gz",
+      "files": 58,
+      "logical_bytes": 7420754,
+      "archive_bytes": 961833,
+      "sha256": "7cc14638371e63da6506ee40b07d9b398d41f460a4a59d782821b917b75a3606",
+      "representative": ".artifacts/ai-sigma/verification/CRITIC-NN-SEARCH/browser-boundary-short.patch"
+    },
+    {
+      "source": ".artifacts/ai-sigma/verification/CRITIC-ORT-CHECKPOINT",
+      "archive": "research-data/ai-sigma/archives/verification/CRITIC-ORT-CHECKPOINT.tar.gz",
+      "files": 103,
+      "logical_bytes": 2437398,
+      "archive_bytes": 308951,
+      "sha256": "d3da5b96de1d0ac7b83c681a35d0157a2fa93cabcb6b03e6b699ca87b95d787d",
+      "representative": ".artifacts/ai-sigma/verification/CRITIC-ORT-CHECKPOINT/browser-boundary-critic.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/verification/CRITIC-ORT-SEARCH",
+      "archive": "research-data/ai-sigma/archives/verification/CRITIC-ORT-SEARCH.tar.gz",
+      "files": 51,
+      "logical_bytes": 2501857,
+      "archive_bytes": 377041,
+      "sha256": "2450cf11d1e3a3e04b2e496b9e67a4dd0634e7c8aabf32ff1e28bfa979dc7b98",
+      "representative": ".artifacts/ai-sigma/verification/CRITIC-ORT-SEARCH/browser-boundary-independent.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/verification/CRITIC-PROFILE-PARITY",
+      "archive": "research-data/ai-sigma/archives/verification/CRITIC-PROFILE-PARITY.tar.gz",
+      "files": 12,
+      "logical_bytes": 1464859,
+      "archive_bytes": 132052,
+      "sha256": "c84a07308a3f080ff12c085de5118e5dc2129eb6d7634d5fc65a13ef5768dc94",
+      "representative": ".artifacts/ai-sigma/verification/CRITIC-PROFILE-PARITY/finalization.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/verification/CRITIC-PUCT-FACTOR",
+      "archive": "research-data/ai-sigma/archives/verification/CRITIC-PUCT-FACTOR.tar.gz",
+      "files": 24,
+      "logical_bytes": 1021844,
+      "archive_bytes": 172152,
+      "sha256": "3380510e589caccfdd93a0ed830e994376654046185d074da92647869d1f0487",
+      "representative": ".artifacts/ai-sigma/verification/CRITIC-PUCT-FACTOR/browser.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/verification/CRITIC-WEB",
+      "archive": "research-data/ai-sigma/archives/verification/CRITIC-WEB.tar.gz",
+      "files": 38,
+      "logical_bytes": 726303,
+      "archive_bytes": 92326,
+      "sha256": "0eb8a40adb467e200904c1d08c5a07812010d0fc36ae49d01ae6baaa50d5b676",
+      "representative": ".artifacts/ai-sigma/verification/CRITIC-WEB/boundary-cancel.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/verification/INFERENCE-COORD-STATIC",
+      "archive": "research-data/ai-sigma/archives/verification/INFERENCE-COORD-STATIC.tar.gz",
+      "files": 1,
+      "logical_bytes": 631,
+      "archive_bytes": 654,
+      "sha256": "ca653e55ab5aff650ea1e783fce9f7c8ea60078c2f71f5e57976b3e2bceadd77",
+      "representative": ".artifacts/ai-sigma/verification/INFERENCE-COORD-STATIC/summary.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/verification/MATCHES-COORD-STATIC",
+      "archive": "research-data/ai-sigma/archives/verification/MATCHES-COORD-STATIC.tar.gz",
+      "files": 3,
+      "logical_bytes": 21435,
+      "archive_bytes": 3198,
+      "sha256": "2e3f55a97a08016cc3044ad41d290a6c0a521eb775ac048703eb2ebbb9815664",
+      "representative": ".artifacts/ai-sigma/verification/MATCHES-COORD-STATIC/entry-checks.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/verification/MODEL-COORD-STATIC",
+      "archive": "research-data/ai-sigma/archives/verification/MODEL-COORD-STATIC.tar.gz",
+      "files": 1,
+      "logical_bytes": 948,
+      "archive_bytes": 759,
+      "sha256": "55813683cf2d6ce1ab40fa6eb20f1b33fcbe0c798431596a5cdff8f6c390b15f",
+      "representative": ".artifacts/ai-sigma/verification/MODEL-COORD-STATIC/summary.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/verification/NN-COORD-STATIC",
+      "archive": "research-data/ai-sigma/archives/verification/NN-COORD-STATIC.tar.gz",
+      "files": 1,
+      "logical_bytes": 529,
+      "archive_bytes": 636,
+      "sha256": "cd585ddb2eb980111d169adb6b0a401c8b774a157d469715da614f69ec75a274",
+      "representative": ".artifacts/ai-sigma/verification/NN-COORD-STATIC/summary.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/verification/PROFILE-COORD-1",
+      "archive": "research-data/ai-sigma/archives/verification/PROFILE-COORD-1.tar.gz",
+      "files": 49,
+      "logical_bytes": 1001750,
+      "archive_bytes": 83932,
+      "sha256": "2025ee8b9c6ba48b6b040cfa49ff78e01a2fd8aaa6e0f5054358157c1a5b9500",
+      "representative": ".artifacts/ai-sigma/verification/PROFILE-COORD-1/initial-0-coarse.jsonl"
+    },
+    {
+      "source": ".artifacts/ai-sigma/verification/QUEUE-COORD-STATIC",
+      "archive": "research-data/ai-sigma/archives/verification/QUEUE-COORD-STATIC.tar.gz",
+      "files": 1,
+      "logical_bytes": 2033,
+      "archive_bytes": 1137,
+      "sha256": "bb64b51b5cdd98963334c99dacf26d934cdfdbac18f39198e1a34e6895a08ac0",
+      "representative": ".artifacts/ai-sigma/verification/QUEUE-COORD-STATIC/summary.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/verification/RELEASE-COORD-STATIC",
+      "archive": "research-data/ai-sigma/archives/verification/RELEASE-COORD-STATIC.tar.gz",
+      "files": 1,
+      "logical_bytes": 459,
+      "archive_bytes": 572,
+      "sha256": "302b4b58017d315d575d7c6173626b2114738bb11a27b965f740483ec89291c9",
+      "representative": ".artifacts/ai-sigma/verification/RELEASE-COORD-STATIC/summary.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/verification/WEB-COORD-STATIC",
+      "archive": "research-data/ai-sigma/archives/verification/WEB-COORD-STATIC.tar.gz",
+      "files": 1,
+      "logical_bytes": 357,
+      "archive_bytes": 518,
+      "sha256": "56ad4cb34df59dc899c27f01b7a4bc076f9f2c69628bd691bef53d9b7498b6d3",
+      "representative": ".artifacts/ai-sigma/verification/WEB-COORD-STATIC/summary.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/analysis/SIGMA-MATCH-HYPOTHESES",
+      "archive": "research-data/ai-sigma/archives/analysis/SIGMA-MATCH-HYPOTHESES.tar.gz",
+      "files": 32,
+      "logical_bytes": 6548815,
+      "archive_bytes": 2146016,
+      "sha256": "29a29ee7b522a58f701b7403c5ba816389197463bcaa1484c0ca9f31662a0bee",
+      "representative": ".artifacts/ai-sigma/analysis/SIGMA-MATCH-HYPOTHESES/analysis-final.log"
+    },
+    {
+      "source": ".artifacts/ai-sigma/analysis/SIGMA-ROOT-SELECTION-ABLATION",
+      "archive": "research-data/ai-sigma/archives/analysis/SIGMA-ROOT-SELECTION-ABLATION.tar.gz",
+      "files": 53,
+      "logical_bytes": 7510931,
+      "archive_bytes": 1600930,
+      "sha256": "f7ceb9a5ae863cdf29585602cf79077b99b1575b1546bf3ce9f90d2a93924d19",
+      "representative": ".artifacts/ai-sigma/analysis/SIGMA-ROOT-SELECTION-ABLATION/Sigma-MCTSNode-original.js.txt"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/CRITIC-ACTUAL-DRIVER-MINIMAL",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/CRITIC-ACTUAL-DRIVER-MINIMAL.tar.gz",
+      "files": 9,
+      "logical_bytes": 35013,
+      "archive_bytes": 9015,
+      "sha256": "a4254aa6c6acf72a4bafe815e42b5546817d5ada553ea6021a933f5603a22bcb",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/CRITIC-ACTUAL-DRIVER-MINIMAL/handoff-summary.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/CRITIC-CONTINUATION-NOGO",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/CRITIC-CONTINUATION-NOGO.tar.gz",
+      "files": 24,
+      "logical_bytes": 1163703,
+      "archive_bytes": 141671,
+      "sha256": "4577063599fca895b980d1d400d637dbcdeddfa5f9cd8a9368856be1e5c2d195",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/CRITIC-CONTINUATION-NOGO/artifact-manifest-final.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/CRITIC-FAIR-STREAMING",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/CRITIC-FAIR-STREAMING.tar.gz",
+      "files": 59,
+      "logical_bytes": 13463195,
+      "archive_bytes": 750603,
+      "sha256": "5c8f62c970e42e7bdfcb234f40205ab1396e46bd3d65c0bc201d384bf4b56125",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/CRITIC-FAIR-STREAMING/analysis-helper-failure.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/CRITIC-KERNEL-OWNERSHIP.tar.gz",
+      "files": 107,
+      "logical_bytes": 1909622,
+      "archive_bytes": 320677,
+      "sha256": "e06d3d6f3b2b50ed01b03d6a31f7ec958fd9b90f8f87b20431c3a38f608cf3fe",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP/boundary-invalid-gate.inputs.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/CRITIC-ORT-CLEANUP-REPAIR",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/CRITIC-ORT-CLEANUP-REPAIR.tar.gz",
+      "files": 68,
+      "logical_bytes": 1215416,
+      "archive_bytes": 204271,
+      "sha256": "86048f9f0102fd79fee3657d8ead53c038195f8198f626dfe495e4cef3006f90",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/CRITIC-ORT-CLEANUP-REPAIR/artifact-manifest-final.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/CRITIC-ORT-ENTRY",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/CRITIC-ORT-ENTRY.tar.gz",
+      "files": 86,
+      "logical_bytes": 733664,
+      "archive_bytes": 110381,
+      "sha256": "733dab2708362eb16a121de7aac6b55b72bad5b179f31ed32e7c88f881ad1480",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/CRITIC-ORT-ENTRY/actual-cli-rejection.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/CRITIC-ROOT-NN",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/CRITIC-ROOT-NN.tar.gz",
+      "files": 32,
+      "logical_bytes": 198724,
+      "archive_bytes": 47799,
+      "sha256": "bc02e7e1690fac514ad9c1dcf86adcf48b529943ce61ef052a423953031bd70b",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/CRITIC-ROOT-NN/80-denominators-saved-evidence.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/CRITIC-STARTUP-WATCHDOG",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/CRITIC-STARTUP-WATCHDOG.tar.gz",
+      "files": 55,
+      "logical_bytes": 883646,
+      "archive_bytes": 141684,
+      "sha256": "42c46c5999a64cf8c7dd0072d63d3322e4588b95a029476f65238f47b00b55cf",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/CRITIC-STARTUP-WATCHDOG/CLI-negatives.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/CRITIC-STREAMING-EARLY-SEAL",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/CRITIC-STREAMING-EARLY-SEAL.tar.gz",
+      "files": 54,
+      "logical_bytes": 2642678,
+      "archive_bytes": 289044,
+      "sha256": "cb226ed46bdc08ddaddf469a0bc9eb0782d512b06e732c6db63f8215cde5e580",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/CRITIC-STREAMING-EARLY-SEAL/control-text-prefix-audit.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/CRITIC-STREAMING-ENTRY-FINAL",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/CRITIC-STREAMING-ENTRY-FINAL.tar.gz",
+      "files": 39,
+      "logical_bytes": 1693722,
+      "archive_bytes": 232943,
+      "sha256": "f5b442399c18872200b4d2409dfbebf8b82b9d3ff1e416449b69bbe6fac86a03",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/CRITIC-STREAMING-ENTRY-FINAL/actual-refusal-token.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/CRITIC-STREAMING-READY32",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/CRITIC-STREAMING-READY32.tar.gz",
+      "files": 105,
+      "logical_bytes": 1101857,
+      "archive_bytes": 180012,
+      "sha256": "b74b72f6338461d28b67a238d618ab2c72b6734947ba684413e766e3ee9bd02c",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/CRITIC-STREAMING-READY32/boundary-check-all-historical-diagnostic.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/CRITIC-STREAMING-SNAPSHOT",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/CRITIC-STREAMING-SNAPSHOT.tar.gz",
+      "files": 11,
+      "logical_bytes": 44261,
+      "archive_bytes": 17216,
+      "sha256": "03791a58600c0694ac79e42bace8b842c9e7aabea1cbe147a3ad595520ca9c0b",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/CRITIC-STREAMING-SNAPSHOT/ai-sigma-continuation-20261001.md"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/SIGMA-ACTUAL-BOUNDARY-REPAIR",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/SIGMA-ACTUAL-BOUNDARY-REPAIR.tar.gz",
+      "files": 284,
+      "logical_bytes": 1626269,
+      "archive_bytes": 298374,
+      "sha256": "b160f0f34f285c20d110089e092ae51f9e025c99b973c0eb3d4329328582a9e9",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/SIGMA-ACTUAL-BOUNDARY-REPAIR/actual-driver.cjs.patch"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/SIGMA-CONTINUATION-ENTRY",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/SIGMA-CONTINUATION-ENTRY.tar.gz",
+      "files": 331,
+      "logical_bytes": 22637885,
+      "archive_bytes": 1918343,
+      "sha256": "6a524b54cf8a6dbe47abd5445cf45b7ccc95ca28fe6407ad62bd8c7f035c4b0e",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/SIGMA-CONTINUATION-ENTRY/calibration-failure.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/SIGMA-CONTINUATION-MATCH-PLAN",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/SIGMA-CONTINUATION-MATCH-PLAN.tar.gz",
+      "files": 29,
+      "logical_bytes": 493915,
+      "archive_bytes": 85658,
+      "sha256": "035347b93b7eec76a9490b87c3aafdba2796c2b9f5bba14b53214e16f6a4125f",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/SIGMA-CONTINUATION-MATCH-PLAN/all-game-numbers.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/SIGMA-CONTINUATION-MATCH-PLAN-DISPATCH",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/SIGMA-CONTINUATION-MATCH-PLAN-DISPATCH.tar.gz",
+      "files": 8,
+      "logical_bytes": 4076,
+      "archive_bytes": 3047,
+      "sha256": "13fedfe36b7b46a462682d32e257abc2e49da1e32dc21d825dd5dac3f15a3547",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/SIGMA-CONTINUATION-MATCH-PLAN-DISPATCH/acceptance-receipt.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/SIGMA-DETACHED-OWNERSHIP",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/SIGMA-DETACHED-OWNERSHIP.tar.gz",
+      "files": 83,
+      "logical_bytes": 1858448,
+      "archive_bytes": 287121,
+      "sha256": "e42fad1bf0f1110ed16a91390b174dc354e8ad2f2b7fa63c64ce53875cf2874c",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/SIGMA-DETACHED-OWNERSHIP/delayed-ack-unit.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/SIGMA-FAIR-STREAMING",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/SIGMA-FAIR-STREAMING.tar.gz",
+      "files": 156,
+      "logical_bytes": 57192431,
+      "archive_bytes": 2599991,
+      "sha256": "8cac6940933b4e5324b14293a43f46163aca990b71a38f7de91ad9e16815f6b1",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/SIGMA-FAIR-STREAMING/ORT-fixed-assets-verified.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/SIGMA-ISOLATED-NN-COST",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/SIGMA-ISOLATED-NN-COST.tar.gz",
+      "files": 62,
+      "logical_bytes": 1787061,
+      "archive_bytes": 187471,
+      "sha256": "587e741c376cedb659336fb7791d12c1cd05bbc7315921a1eb17e569c2741d28",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/SIGMA-ISOLATED-NN-COST/NN-start-report.md"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/SIGMA-KERNEL-OWNERSHIP",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/SIGMA-KERNEL-OWNERSHIP.tar.gz",
+      "files": 101,
+      "logical_bytes": 1508874,
+      "archive_bytes": 234526,
+      "sha256": "74cc812a96d2ef69e2e5964ebc3897548f7b98b68b7aff00aeea6e2f0daaa561",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/SIGMA-KERNEL-OWNERSHIP/boundary-invalid-gate.inputs.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/SIGMA-NN-SCHEMA-COST",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/SIGMA-NN-SCHEMA-COST.tar.gz",
+      "files": 138,
+      "logical_bytes": 3496861,
+      "archive_bytes": 351805,
+      "sha256": "14bac106f98886405802a501dbe12c1a68a1428c8e7eb925cb57e3c20c9840e1",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/SIGMA-NN-SCHEMA-COST/a-host.js.patch"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/SIGMA-READINESS-CLOCK-PLAN",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/SIGMA-READINESS-CLOCK-PLAN.tar.gz",
+      "files": 27,
+      "logical_bytes": 187579,
+      "archive_bytes": 31485,
+      "sha256": "d8c0be005976f3a5a3e3263e5a8aa333b961f65cf53b16aba5797aab5ad13387",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/SIGMA-READINESS-CLOCK-PLAN/budget-arithmetic.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/SIGMA-REMAINING-EVIDENCE-PLAN",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/SIGMA-REMAINING-EVIDENCE-PLAN.tar.gz",
+      "files": 23,
+      "logical_bytes": 99945,
+      "archive_bytes": 29815,
+      "sha256": "1b711d39bb9b5ee226b8a4594b860bbc1d74d0850b3beaa1dc82ba44d33cb1a0",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/SIGMA-REMAINING-EVIDENCE-PLAN/binding-static.log"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/SIGMA-ROOT-FACTOR-CORRECT-N",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/SIGMA-ROOT-FACTOR-CORRECT-N.tar.gz",
+      "files": 37,
+      "logical_bytes": 4664368,
+      "archive_bytes": 985363,
+      "sha256": "92d27922b5a2ea0f95972446ea9f34b4c7894ef08b4bb3d875c103e8112e9cb0",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/SIGMA-ROOT-FACTOR-CORRECT-N/boundary-check.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/SIGMA-SAVED-NN46-INDEPENDENT",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/SIGMA-SAVED-NN46-INDEPENDENT.tar.gz",
+      "files": 16,
+      "logical_bytes": 60408,
+      "archive_bytes": 14773,
+      "sha256": "9051661df30686720d142c9812ba0a44bda34e2f1d27d562ec19adf2c0c1d6e4",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/SIGMA-SAVED-NN46-INDEPENDENT/final-manifest.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-COMPARISON32-PLAN",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/SIGMA-STREAMING-COMPARISON32-PLAN.tar.gz",
+      "files": 30,
+      "logical_bytes": 244718,
+      "archive_bytes": 44077,
+      "sha256": "943f32b9469da20459024c541a45942a86965a6d6d2055747162a47d44331c34",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-COMPARISON32-PLAN/beads-intake.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-COMPLETE-CLOCK",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/SIGMA-STREAMING-COMPLETE-CLOCK.tar.gz",
+      "files": 108,
+      "logical_bytes": 1135891,
+      "archive_bytes": 172889,
+      "sha256": "711cc1287e163fb3e8cc85232c71ce5301907bea6887d5f9434615ada2f2f6ae",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-COMPLETE-CLOCK/actual-cli-refusal.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL.tar.gz",
+      "files": 106,
+      "logical_bytes": 12094897,
+      "archive_bytes": 886104,
+      "sha256": "bc656a007d0c8a9843661b460bdffb749c4383cf9be256c67cfc277f2d428b7d",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-EARLY-SEAL/all-public-requests-combined.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-ENTRY-REPAIR",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/SIGMA-STREAMING-ENTRY-REPAIR.tar.gz",
+      "files": 897,
+      "logical_bytes": 17629564,
+      "archive_bytes": 2260118,
+      "sha256": "14852e5044cc297a973f3748e25c7474ef207f100de77313b370ab3ae5a32611",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-ENTRY-REPAIR/all-owned-current-absence.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-MATCH-PLAN",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/SIGMA-STREAMING-MATCH-PLAN.tar.gz",
+      "files": 141,
+      "logical_bytes": 30937029,
+      "archive_bytes": 2324545,
+      "sha256": "c24d0e14d104b5a2c8250d245e86951b787fa5ff091fc2ebee1147a2856656b3",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-MATCH-PLAN/backend-interface-and-gates.md"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-NUMERIC-ORDER",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/SIGMA-STREAMING-NUMERIC-ORDER.tar.gz",
+      "files": 142,
+      "logical_bytes": 1606063,
+      "archive_bytes": 242028,
+      "sha256": "45f6243d357411627529a630b0d086f60d2978ac0c5a984033212d77e1f8dcb5",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-NUMERIC-ORDER/actual-cli-refusal.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL.tar.gz",
+      "files": 74,
+      "logical_bytes": 794422,
+      "archive_bytes": 127324,
+      "sha256": "920fec21d9833e8334b54c7d7642a5979a8a86a6100a945082ce3f81533d21f9",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/actual-cli-refusal.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-SNAPSHOT",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/SIGMA-STREAMING-SNAPSHOT.tar.gz",
+      "files": 205,
+      "logical_bytes": 63606537,
+      "archive_bytes": 3827700,
+      "sha256": "1f7c3cdd8b7ba3110389b5403a341f6230cd16f097034e47f48b94bd768670ae",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-SNAPSHOT/NN-returned-error-notification-gap.json"
+    },
+    {
+      "source": ".artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-STARTUP-WATCHDOG",
+      "archive": "research-data/ai-sigma/archives/continuation-20261001/SIGMA-STREAMING-STARTUP-WATCHDOG.tar.gz",
+      "files": 320,
+      "logical_bytes": 3667472,
+      "archive_bytes": 485923,
+      "sha256": "50704824d10912ce3489d9ed051a93be495ca92e57ae64c5167ff4d2b7443117",
+      "representative": ".artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-STARTUP-WATCHDOG/CLEANUP-PENDING.token.json"
+    }
+  ],
+  "selection": {
+    "extensions": [
+      ".csv",
+      ".diff",
+      ".json",
+      ".jsonl",
+      ".log",
+      ".md",
+      ".patch",
+      ".stderr",
+      ".stdout",
+      ".tsv",
+      ".txt"
+    ],
+    "excluded_directories": [
+      ".git",
+      ".venv",
+      "__pycache__",
+      "apps",
+      "browser-cache",
+      "browser-config",
+      "browser-profile",
+      "build",
+      "cache",
+      "canonical-source",
+      "copy",
+      "crates",
+      "dist",
+      "job-source",
+      "node_modules",
+      "packages",
+      "profile",
+      "snapshot",
+      "source",
+      "source-copy",
+      "src",
+      "t",
+      "target",
+      "temp",
+      "tests",
+      "tmp",
+      "upstream",
+      "venv",
+      "xdg-cache",
+      "xdg-config"
+    ],
+    "excluded_source_subtrees": true,
+    "symlinks_followed": false
+  },
+  "restore": "git show <data-commit>:<archive> | tar -xz -C /workspaces/quoridor/.worktree/ai-sigma (stop writers/readers before overwriting)",
+  "shared_inputs": [
+    "models/experiments/ai-sigma/reference/sigma-pcr250/best.onnx",
+    ".artifacts/ai-sigma/runs/SIGMA-ORT-SEARCH/final.wasm",
+    ".artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/ORT",
+    ".artifacts/ai-sigma/reference-fixtures/SIGMA-PARITY-PLAN/fixtures.json",
+    ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/ort-a.outputs.json"
+  ],
+  "source_references": {
+    "93": [
+      "dca3588570c293cb1883456901f4fa3f25a9ad4b",
+      "9496cae",
+      "132ec12",
+      "812a9e4"
+    ],
+    "95": "a57e402de3dab717592ac6e853d236c47694d56a",
+    "legacy": "archived input/manifest/config/hash/command logs identify versions; untracked source snapshots retained in original workspace"
+  },
+  "unchanged_outcomes": "diagnostic/verification only; old failures/results preserved; no new formal NI or strength conclusion",
+  "protected": [
+    "resume-20261002/TAIL-TRANSPORT",
+    "continuation-20261001/scheduler",
+    "continuation-20261001/SIGMA-RESUME-OPERATIONS-92",
+    "all unGit sources",
+    "shared dependencies/models/DB"
+  ],
+  "raw_copies": "93/95 retain while experiment97 references; other old raw retained until readers confirmed"
+}
