@@ -9,3 +9,5 @@
 14:05:49新重job開始停止、14:10:49監督/正確owned停止、14:13:49monitor回収、14:15:49証拠保存は同92 owner。起動受入れと未来停止を分離し、旧92最終回収未受入れを旧runとして保持する。root114受入れ用の本人開始ACK・実running/loaded証拠を既経路/Beadsで返す。新role/モデル/サーバーrestart/製品統合/pushなし。GPU速度だけで公平性NI/Sigma同等を認定しない。
 
 優先順は実GPU可否→数値・同入出力費用→実completed評価への影響。重大な性能主張は停止最小版から必要な独立確認へ渡す。GPU環境が不成立なら不足と最小追加条件を引継ぎ、残りの許可CPU研究・比較計画を別条件で進める。初期化・配分・受付は成功実測ではない。
+
+担当開始ACK: experiment115は10:24:17UTC保守受領、全文/固定版依存差分・ready/show/pause/担当確認後本人claim。処理11:24:17/新run11:19:17/提出11:34:17、実GPU/VRAM/Chromium compute preflightへ着手。hostRTX3060/VRAM1496MiB/compute app空は観測でありモデルGPU実行成功ではない。steward92も10:24:22UTCに契約4/枠8全文・両mirror/本人所有確認後受領開始をBeadsに保存。新終了責任を同92ownerが受領し、実running/loadedは提出証拠を待つ。
