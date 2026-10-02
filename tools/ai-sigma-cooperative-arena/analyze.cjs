@@ -34,7 +34,7 @@ function analyze(run) {
   if(index)assert(row.t0_ms>=rows[index-1].stop_ACK_ms);
   const finished=read(backend+'/public-'+row.request_id+'.json');
   assert.deepEqual(finished.response,response,'PUBLIC_CHANGED_AFTER_FINISH');
-  if(response.accepted)assert.deepEqual(A.J.validate(identity.legal_prefix,response.action),response.referee_action);
+  if(response.accepted)assert.deepEqual(JSON.parse(JSON.stringify(A.J.validate(identity.legal_prefix,response.action))),response.referee_action);
   for(const binding of row.bindings??[])if(binding.accepted&&binding.kind==='snapshot')assert(binding.node_validation_finished_ms<=identity.commit_cutoff_ms);
   const fixture=fixtures.find(f=>JSON.stringify(f.legal_prefix)===JSON.stringify(identity.legal_prefix));
   const reference=fixture?refs.find(r=>r.id===fixture.id):undefined;

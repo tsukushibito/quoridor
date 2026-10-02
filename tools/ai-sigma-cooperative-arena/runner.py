@@ -13,7 +13,7 @@ def storage():
  seen=set();total=0
  def walk_error(error):
   if not isinstance(error,FileNotFoundError):raise error
- for base in (TOOL,OUT):
+ for base in (TOOL,OUT,TOOL.parents[1]/'research-data/ai-sigma/103-cooperative-arena'):
   for directory,subdirs,files in os.walk(base,onerror=walk_error):
    for name in files:
     p=Path(directory)/name
