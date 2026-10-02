@@ -1,0 +1,5472 @@
+{
+  "issue": "quoridor-4lc.134",
+  "run": "quality134-group4-r1",
+  "source_Git": "857ce64d758a6abd22fa165fc51aecca3f7f759f",
+  "planned_games": 2,
+  "started_games": 2,
+  "games": [
+    {
+      "id": "input4-rep2-A",
+      "input_index": 4,
+      "rep": 2,
+      "branch": "A",
+      "seed": 1979,
+      "forced_side": 2,
+      "external_wall_seconds": 180,
+      "totalply_draw": 200,
+      "root_selection": "first response of each physical side, at most2; post-rollout browser check",
+      "initial_prefix": [
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        }
+      ],
+      "forced": {
+        "branch": "A",
+        "source_engine": "candidate",
+        "source_K": 32,
+        "Action209": 32,
+        "Action": {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        "P2canonical_policy_index": 0,
+        "side": 2,
+        "NN": 0,
+        "original_key": "3,4|5,4|1|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+        "branch_key": "3,4|5,3|0|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+        "prefix_length": 21,
+        "totalply_before": 21,
+        "totalply_after": 22,
+        "walls_before": [
+          4,
+          5
+        ],
+        "walls_after": [
+          4,
+          5
+        ],
+        "history_counts": [
+          [
+            "3,4|5,3|0|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+            1
+          ],
+          [
+            "3,4|5,4|1|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,5|5,5",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,5|5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,5|",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,5|5,5;6,4",
+            1
+          ],
+          [
+            "4,1|4,7|0|0,5|5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,1|4,8|1|0,5|5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,2|4,6|0|0,5|5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,2|4,7|1|0,5|5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,3|4,5|0|0,1;0,5;2,2;4,2;4,6|0,2;4,7;5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,3|4,5|0|0,5;2,2;4,2|0,2;4,7;5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,3|4,5|0|0,5;4,2|4,7;5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,3|4,5|0|0,5|5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,3|4,5|1|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,3|4,5|1|0,1;0,5;2,2;4,2|0,2;4,7;5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,3|4,5|1|0,5;2,2;4,2|4,7;5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,3|4,5|1|0,5;4,2|5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,3|4,6|1|0,5|5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,3|5,5|0|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,4|5,4|0|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,4|5,5|1|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+            1
+          ]
+        ],
+        "terminal": null
+      },
+      "policy_players": [
+        "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "fixedSigma C1/FPU.2/first/temp0/originalorder"
+      ],
+      "actions": [
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 3,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        }
+      ],
+      "turn_indices": [
+        "quality134-group4-r1-1",
+        "quality134-group4-r1-2",
+        "quality134-group4-r1-3",
+        "quality134-group4-r1-4",
+        "quality134-group4-r1-5",
+        "quality134-group4-r1-6",
+        "quality134-group4-r1-7",
+        "quality134-group4-r1-8",
+        "quality134-group4-r1-9",
+        "quality134-group4-r1-10",
+        "quality134-group4-r1-11",
+        "quality134-group4-r1-12",
+        "quality134-group4-r1-13",
+        "quality134-group4-r1-14",
+        "quality134-group4-r1-15"
+      ],
+      "numeric_selected": [
+        "quality134-group4-r1-1",
+        "quality134-group4-r1-2"
+      ],
+      "status": "terminal",
+      "winner": 1,
+      "reason": "goal",
+      "forced_side_score": 0,
+      "start_ms": 1790960649806.08,
+      "total_ply": 37,
+      "new_public": 15,
+      "final_key": "3,8|7,5|1|0,1;0,5;2,2;2,5;4,2;4,6;5,3;5,4|0,2;1,1;2,6;4,7;5,2;5,5;6,4;7,1",
+      "final_history": [
+        [
+          "4,0|4,8|0||",
+          1
+        ],
+        [
+          "4,0|4,8|1|0,5|",
+          1
+        ],
+        [
+          "4,0|4,8|0|0,5|5,5",
+          1
+        ],
+        [
+          "4,0|4,8|1|0,5|5,5;6,4",
+          1
+        ],
+        [
+          "4,0|4,8|0|0,5|5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,1|4,8|1|0,5|5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,1|4,7|0|0,5|5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,2|4,7|1|0,5|5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,2|4,6|0|0,5|5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|4,6|1|0,5|5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|4,5|0|0,5|5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|4,5|1|0,5;4,2|5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|4,5|0|0,5;4,2|4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|4,5|1|0,5;2,2;4,2|4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|4,5|0|0,5;2,2;4,2|0,2;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|4,5|1|0,1;0,5;2,2;4,2|0,2;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|4,5|0|0,1;0,5;2,2;4,2;4,6|0,2;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|4,5|1|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|5,5|0|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,4|5,5|1|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,4|5,4|0|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "3,4|5,4|1|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "3,4|5,3|0|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "3,4|5,3|1|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,2;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "3,4|5,4|0|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,2;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "3,4|5,4|1|0,1;0,5;2,2;4,2;4,6;5,3|0,2;1,1;4,7;5,2;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "3,4|6,4|0|0,1;0,5;2,2;4,2;4,6;5,3|0,2;1,1;4,7;5,2;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "3,5|6,4|1|0,1;0,5;2,2;4,2;4,6;5,3|0,2;1,1;4,7;5,2;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "3,5|6,5|0|0,1;0,5;2,2;4,2;4,6;5,3|0,2;1,1;4,7;5,2;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "3,5|6,5|1|0,1;0,5;2,2;4,2;4,6;5,3;5,4|0,2;1,1;4,7;5,2;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "3,5|6,6|0|0,1;0,5;2,2;4,2;4,6;5,3;5,4|0,2;1,1;4,7;5,2;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "3,6|6,6|1|0,1;0,5;2,2;4,2;4,6;5,3;5,4|0,2;1,1;4,7;5,2;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "3,6|6,6|0|0,1;0,5;2,2;4,2;4,6;5,3;5,4|0,2;1,1;2,6;4,7;5,2;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "3,6|6,6|1|0,1;0,5;2,2;2,5;4,2;4,6;5,3;5,4|0,2;1,1;2,6;4,7;5,2;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "3,6|7,6|0|0,1;0,5;2,2;2,5;4,2;4,6;5,3;5,4|0,2;1,1;2,6;4,7;5,2;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "3,7|7,6|1|0,1;0,5;2,2;2,5;4,2;4,6;5,3;5,4|0,2;1,1;2,6;4,7;5,2;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "3,7|7,5|0|0,1;0,5;2,2;2,5;4,2;4,6;5,3;5,4|0,2;1,1;2,6;4,7;5,2;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "3,8|7,5|1|0,1;0,5;2,2;2,5;4,2;4,6;5,3;5,4|0,2;1,1;2,6;4,7;5,2;5,5;6,4;7,1",
+          1
+        ]
+      ],
+      "final_walls": [
+        0,
+        4
+      ],
+      "browser_replay": {
+        "legal_public": 15,
+        "final_key_exact": true,
+        "history_exact": true,
+        "terminal": {
+          "winner": 1,
+          "value": -1
+        }
+      },
+      "end_ms": 1790960655993.145,
+      "search_zero_before_next_branch": true
+    },
+    {
+      "id": "input4-rep2-B",
+      "input_index": 4,
+      "rep": 2,
+      "branch": "B",
+      "seed": 1979,
+      "forced_side": 2,
+      "external_wall_seconds": 180,
+      "totalply_draw": 200,
+      "root_selection": "first response of each physical side, at most2; post-rollout browser check",
+      "initial_prefix": [
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        }
+      ],
+      "forced": {
+        "branch": "B",
+        "source_engine": "reference",
+        "source_K": 32,
+        "Action209": 42,
+        "Action": {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        "P2canonical_policy_index": 3,
+        "side": 2,
+        "NN": 0,
+        "original_key": "3,4|5,4|1|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+        "branch_key": "3,4|6,4|0|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+        "prefix_length": 21,
+        "totalply_before": 21,
+        "totalply_after": 22,
+        "walls_before": [
+          4,
+          5
+        ],
+        "walls_after": [
+          4,
+          5
+        ],
+        "history_counts": [
+          [
+            "3,4|5,4|1|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+            1
+          ],
+          [
+            "3,4|6,4|0|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,0|4,8|0||",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,5|5,5",
+            1
+          ],
+          [
+            "4,0|4,8|0|0,5|5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,5|",
+            1
+          ],
+          [
+            "4,0|4,8|1|0,5|5,5;6,4",
+            1
+          ],
+          [
+            "4,1|4,7|0|0,5|5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,1|4,8|1|0,5|5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,2|4,6|0|0,5|5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,2|4,7|1|0,5|5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,3|4,5|0|0,1;0,5;2,2;4,2;4,6|0,2;4,7;5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,3|4,5|0|0,5;2,2;4,2|0,2;4,7;5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,3|4,5|0|0,5;4,2|4,7;5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,3|4,5|0|0,5|5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,3|4,5|1|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,3|4,5|1|0,1;0,5;2,2;4,2|0,2;4,7;5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,3|4,5|1|0,5;2,2;4,2|4,7;5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,3|4,5|1|0,5;4,2|5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,3|4,6|1|0,5|5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,3|5,5|0|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,4|5,4|0|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+            1
+          ],
+          [
+            "4,4|5,5|1|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+            1
+          ]
+        ],
+        "terminal": null
+      },
+      "policy_players": [
+        "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "fixedSigma C1/FPU.2/first/temp0/originalorder"
+      ],
+      "actions": [
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 3,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 3,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 3,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        }
+      ],
+      "turn_indices": [
+        "quality134-group4-r1-16",
+        "quality134-group4-r1-17",
+        "quality134-group4-r1-18",
+        "quality134-group4-r1-19",
+        "quality134-group4-r1-20",
+        "quality134-group4-r1-21",
+        "quality134-group4-r1-22",
+        "quality134-group4-r1-23",
+        "quality134-group4-r1-24",
+        "quality134-group4-r1-25",
+        "quality134-group4-r1-26",
+        "quality134-group4-r1-27",
+        "quality134-group4-r1-28",
+        "quality134-group4-r1-29",
+        "quality134-group4-r1-30",
+        "quality134-group4-r1-31",
+        "quality134-group4-r1-32",
+        "quality134-group4-r1-33",
+        "quality134-group4-r1-34",
+        "quality134-group4-r1-35",
+        "quality134-group4-r1-36",
+        "quality134-group4-r1-37",
+        "quality134-group4-r1-38",
+        "quality134-group4-r1-39",
+        "quality134-group4-r1-40",
+        "quality134-group4-r1-41",
+        "quality134-group4-r1-42",
+        "quality134-group4-r1-43",
+        "quality134-group4-r1-44"
+      ],
+      "numeric_selected": [
+        "quality134-group4-r1-16",
+        "quality134-group4-r1-17"
+      ],
+      "status": "terminal",
+      "winner": 1,
+      "reason": "goal",
+      "forced_side_score": 0,
+      "start_ms": 1790960656006.9949,
+      "total_ply": 51,
+      "new_public": 29,
+      "final_key": "0,8|6,2|1|0,1;0,5;1,7;2,2;2,4;2,6;3,3;4,2;4,6;5,3;6,5;7,3|0,2;1,1;3,4;4,7;5,5;6,4;7,1",
+      "final_history": [
+        [
+          "4,0|4,8|0||",
+          1
+        ],
+        [
+          "4,0|4,8|1|0,5|",
+          1
+        ],
+        [
+          "4,0|4,8|0|0,5|5,5",
+          1
+        ],
+        [
+          "4,0|4,8|1|0,5|5,5;6,4",
+          1
+        ],
+        [
+          "4,0|4,8|0|0,5|5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,1|4,8|1|0,5|5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,1|4,7|0|0,5|5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,2|4,7|1|0,5|5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,2|4,6|0|0,5|5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|4,6|1|0,5|5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|4,5|0|0,5|5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|4,5|1|0,5;4,2|5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|4,5|0|0,5;4,2|4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|4,5|1|0,5;2,2;4,2|4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|4,5|0|0,5;2,2;4,2|0,2;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|4,5|1|0,1;0,5;2,2;4,2|0,2;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|4,5|0|0,1;0,5;2,2;4,2;4,6|0,2;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|4,5|1|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|5,5|0|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,4|5,5|1|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,4|5,4|0|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "3,4|5,4|1|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "3,4|6,4|0|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "3,4|6,4|1|0,1;0,5;2,2;4,2;4,6;5,3|0,2;1,1;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "3,4|5,4|0|0,1;0,5;2,2;4,2;4,6;5,3|0,2;1,1;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "3,5|5,4|1|0,1;0,5;2,2;4,2;4,6;5,3|0,2;1,1;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "3,5|5,4|0|0,1;0,5;2,2;2,6;4,2;4,6;5,3|0,2;1,1;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "3,4|5,4|1|0,1;0,5;2,2;2,6;4,2;4,6;5,3|0,2;1,1;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "3,4|5,4|0|0,1;0,5;2,2;2,6;4,2;4,6;5,3;6,5|0,2;1,1;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "3,4|5,4|1|0,1;0,5;2,2;2,6;3,3;4,2;4,6;5,3;6,5|0,2;1,1;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "3,4|4,4|0|0,1;0,5;2,2;2,6;3,3;4,2;4,6;5,3;6,5|0,2;1,1;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "2,4|4,4|1|0,1;0,5;2,2;2,6;3,3;4,2;4,6;5,3;6,5|0,2;1,1;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "2,4|3,4|0|0,1;0,5;2,2;2,6;3,3;4,2;4,6;5,3;6,5|0,2;1,1;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "2,4|3,4|1|0,1;0,5;2,2;2,6;3,3;4,2;4,6;5,3;6,5;7,3|0,2;1,1;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "2,4|3,4|0|0,1;0,5;2,2;2,4;2,6;3,3;4,2;4,6;5,3;6,5;7,3|0,2;1,1;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "2,4|3,4|1|0,1;0,5;2,2;2,4;2,6;3,3;4,2;4,6;5,3;6,5;7,3|0,2;1,1;3,4;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "2,4|3,4|0|0,1;0,5;1,7;2,2;2,4;2,6;3,3;4,2;4,6;5,3;6,5;7,3|0,2;1,1;3,4;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "1,4|3,4|1|0,1;0,5;1,7;2,2;2,4;2,6;3,3;4,2;4,6;5,3;6,5;7,3|0,2;1,1;3,4;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "1,4|2,4|0|0,1;0,5;1,7;2,2;2,4;2,6;3,3;4,2;4,6;5,3;6,5;7,3|0,2;1,1;3,4;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "1,5|2,4|1|0,1;0,5;1,7;2,2;2,4;2,6;3,3;4,2;4,6;5,3;6,5;7,3|0,2;1,1;3,4;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "1,5|2,3|0|0,1;0,5;1,7;2,2;2,4;2,6;3,3;4,2;4,6;5,3;6,5;7,3|0,2;1,1;3,4;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "2,5|2,3|1|0,1;0,5;1,7;2,2;2,4;2,6;3,3;4,2;4,6;5,3;6,5;7,3|0,2;1,1;3,4;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "2,5|3,3|0|0,1;0,5;1,7;2,2;2,4;2,6;3,3;4,2;4,6;5,3;6,5;7,3|0,2;1,1;3,4;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "2,6|3,3|1|0,1;0,5;1,7;2,2;2,4;2,6;3,3;4,2;4,6;5,3;6,5;7,3|0,2;1,1;3,4;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "2,6|4,3|0|0,1;0,5;1,7;2,2;2,4;2,6;3,3;4,2;4,6;5,3;6,5;7,3|0,2;1,1;3,4;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "1,6|4,3|1|0,1;0,5;1,7;2,2;2,4;2,6;3,3;4,2;4,6;5,3;6,5;7,3|0,2;1,1;3,4;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "1,6|5,3|0|0,1;0,5;1,7;2,2;2,4;2,6;3,3;4,2;4,6;5,3;6,5;7,3|0,2;1,1;3,4;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "0,6|5,3|1|0,1;0,5;1,7;2,2;2,4;2,6;3,3;4,2;4,6;5,3;6,5;7,3|0,2;1,1;3,4;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "0,6|6,3|0|0,1;0,5;1,7;2,2;2,4;2,6;3,3;4,2;4,6;5,3;6,5;7,3|0,2;1,1;3,4;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "0,7|6,3|1|0,1;0,5;1,7;2,2;2,4;2,6;3,3;4,2;4,6;5,3;6,5;7,3|0,2;1,1;3,4;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "0,7|6,2|0|0,1;0,5;1,7;2,2;2,4;2,6;3,3;4,2;4,6;5,3;6,5;7,3|0,2;1,1;3,4;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "0,8|6,2|1|0,1;0,5;1,7;2,2;2,4;2,6;3,3;4,2;4,6;5,3;6,5;7,3|0,2;1,1;3,4;4,7;5,5;6,4;7,1",
+          1
+        ]
+      ],
+      "final_walls": [
+        0,
+        1
+      ],
+      "browser_replay": {
+        "legal_public": 29,
+        "final_key_exact": true,
+        "history_exact": true,
+        "terminal": {
+          "winner": 1,
+          "value": -1
+        }
+      },
+      "end_ms": 1790960667947.92,
+      "search_zero_before_next_branch": true
+    }
+  ],
+  "connection": null,
+  "new_public": 44,
+  "functional_public": 0,
+  "hand_NN": 477,
+  "startup_NN": 6,
+  "metrics": [
+    {
+      "spec": {
+        "engine": "candidate",
+        "cancel": false,
+        "game_id": "input4-rep2-A",
+        "turn": 0,
+        "physical_side": 1,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": true
+      },
+      "request_id": "quality134-group4-r1-1",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "wall",
+        "x": 5,
+        "y": 2,
+        "orientation": "v"
+      },
+      "adopted_stats": {
+        "sequence": 8,
+        "action": 166,
+        "begin_ms": 1790960650194.295,
+        "validation_end_ms": 1790960650194.455,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 8,
+        "completed_backup": 8,
+        "rootN": 8,
+        "loop_simulations": 7,
+        "edge_sum": 7
+      },
+      "public_ms": 414.150146484375,
+      "planned_ms": 411.0,
+      "timer_ms": 413.97509765625,
+      "ACK_wall_ms": 465.14501953125,
+      "public_before_ACK": true,
+      "opposite_previous": null,
+      "own_wait": {
+        "input_available_ms": 1790960649806.345,
+        "start_ms": 1790960649806.345,
+        "end_ms": 1790960649806.355,
+        "wait_ms": 0.010009765625,
+        "ready_t0_ms": 1790960649806.3599
+      },
+      "first_CP_begin_worker_ms": 1790960649883.405,
+      "first_CP_validation_worker_ms": 1790960649884.705,
+      "first_API": {
+        "generation": 1,
+        "request_id": "quality134-group4-r1-1",
+        "engine": "candidate",
+        "start_ms": 1790960649840.74,
+        "return_ms": 1790960649879.36,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960649840.755,
+        "session_run_end_ms": 1790960649879.215
+      },
+      "first_API_await_ms": 38.460205078125,
+      "hand_NN": 9,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 1,
+      "discarded_returns": 1,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 94,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "reference",
+        "cancel": false,
+        "game_id": "input4-rep2-A",
+        "turn": 1,
+        "physical_side": 2,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": true
+      },
+      "request_id": "quality134-group4-r1-2",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "adopted_stats": {
+        "sequence": 8,
+        "action": 41,
+        "begin_ms": 1790960650569.27,
+        "validation_end_ms": 1790960650569.4302,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 8,
+        "completed_backup": 8,
+        "rootN": 8,
+        "loop_simulations": 7,
+        "edge_sum": 7
+      },
+      "public_ms": 410.519775390625,
+      "planned_ms": 411.0,
+      "timer_ms": 410.4248046875,
+      "ACK_wall_ms": 415.264892578125,
+      "public_before_ACK": true,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-1",
+        "public_ms": 1790960650220.51,
+        "ACK_known_at_next_input": false,
+        "ACK_ms": null,
+        "observed_at_ms": 1790960650220.695,
+        "final_ACK_ms": 1790960650271.505,
+        "input_before_old_ACK": true,
+        "residual_overlap_wall_ms": 50.809814453125
+      },
+      "own_wait": {
+        "input_available_ms": 1790960650220.675,
+        "start_ms": 1790960650220.675,
+        "end_ms": 1790960650220.675,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790960650220.695
+      },
+      "first_CP_begin_worker_ms": 1790960650301.145,
+      "first_CP_validation_worker_ms": 1790960650302.745,
+      "first_API": {
+        "generation": 2,
+        "request_id": "quality134-group4-r1-2",
+        "engine": "reference",
+        "start_ms": 1790960650250.425,
+        "return_ms": 1790960650300.51,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960650250.4402,
+        "session_run_end_ms": 1790960650298.28
+      },
+      "first_API_await_ms": 47.83984375,
+      "hand_NN": 9,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 0,
+      "discarded_returns": 0,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 90,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": true,
+        "missing_public_cp": false
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "candidate",
+        "cancel": false,
+        "game_id": "input4-rep2-A",
+        "turn": 2,
+        "physical_side": 1,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-3",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "wall",
+        "x": 5,
+        "y": 3,
+        "orientation": "h"
+      },
+      "adopted_stats": {
+        "sequence": 10,
+        "action": 110,
+        "begin_ms": 1790960651021.675,
+        "validation_end_ms": 1790960651021.885,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 10,
+        "completed_backup": 10,
+        "rootN": 10,
+        "loop_simulations": 9,
+        "edge_sum": 9
+      },
+      "public_ms": 410.46484375,
+      "planned_ms": 411.0,
+      "timer_ms": 410.369873046875,
+      "ACK_wall_ms": 423.93994140625,
+      "public_before_ACK": true,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-2",
+        "public_ms": 1790960650631.2148,
+        "ACK_known_at_next_input": false,
+        "ACK_ms": null,
+        "observed_at_ms": 1790960650631.385,
+        "final_ACK_ms": 1790960650635.96,
+        "input_before_old_ACK": true,
+        "residual_overlap_wall_ms": 4.574951171875
+      },
+      "own_wait": {
+        "input_available_ms": 1790960650631.375,
+        "start_ms": 1790960650631.375,
+        "end_ms": 1790960650631.38,
+        "wait_ms": 0.0048828125,
+        "ready_t0_ms": 1790960650631.385
+      },
+      "first_CP_begin_worker_ms": 1790960650712.74,
+      "first_CP_validation_worker_ms": 1790960650712.955,
+      "first_API": {
+        "generation": 3,
+        "request_id": "quality134-group4-r1-3",
+        "engine": "candidate",
+        "start_ms": 1790960650655.285,
+        "return_ms": 1790960650700.785,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960650655.3,
+        "session_run_end_ms": 1790960650700.76
+      },
+      "first_API_await_ms": 45.4599609375,
+      "hand_NN": 11,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 1,
+      "discarded_returns": 1,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "reference",
+        "cancel": false,
+        "game_id": "input4-rep2-A",
+        "turn": 3,
+        "physical_side": 2,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-4",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          1,
+          0
+        ]
+      },
+      "adopted_stats": {
+        "sequence": 9,
+        "action": 42,
+        "begin_ms": 1790960651418.155,
+        "validation_end_ms": 1790960651418.3,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 9,
+        "completed_backup": 9,
+        "rootN": 9,
+        "loop_simulations": 8,
+        "edge_sum": 8
+      },
+      "public_ms": 411.114990234375,
+      "planned_ms": 411.0,
+      "timer_ms": 411.02490234375,
+      "ACK_wall_ms": 445.264892578125,
+      "public_before_ACK": true,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-3",
+        "public_ms": 1790960651041.8499,
+        "ACK_known_at_next_input": false,
+        "ACK_ms": null,
+        "observed_at_ms": 1790960651041.98,
+        "final_ACK_ms": 1790960651055.325,
+        "input_before_old_ACK": true,
+        "residual_overlap_wall_ms": 13.344970703125
+      },
+      "own_wait": {
+        "input_available_ms": 1790960651041.97,
+        "start_ms": 1790960651041.97,
+        "end_ms": 1790960651041.97,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790960651041.98
+      },
+      "first_CP_begin_worker_ms": 1790960651101.03,
+      "first_CP_validation_worker_ms": 1790960651101.655,
+      "first_API": {
+        "generation": 4,
+        "request_id": "quality134-group4-r1-4",
+        "engine": "reference",
+        "start_ms": 1790960651062.6702,
+        "return_ms": 1790960651100.59,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960651062.6802,
+        "session_run_end_ms": 1790960651100.56
+      },
+      "first_API_await_ms": 37.8798828125,
+      "hand_NN": 10,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 1,
+      "discarded_returns": 1,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "candidate",
+        "cancel": false,
+        "game_id": "input4-rep2-A",
+        "turn": 4,
+        "physical_side": 1,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-5",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "adopted_stats": {
+        "sequence": 8,
+        "action": 48,
+        "begin_ms": 1790960651829.885,
+        "validation_end_ms": 1790960651830.05,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 8,
+        "completed_backup": 8,
+        "rootN": 8,
+        "loop_simulations": 7,
+        "edge_sum": 7
+      },
+      "public_ms": 410.545166015625,
+      "planned_ms": 411.0,
+      "timer_ms": 410.4501953125,
+      "ACK_wall_ms": 442.18017578125,
+      "public_before_ACK": true,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-4",
+        "public_ms": 1790960651453.095,
+        "ACK_known_at_next_input": false,
+        "ACK_ms": null,
+        "observed_at_ms": 1790960651453.2148,
+        "final_ACK_ms": 1790960651487.2449,
+        "input_before_old_ACK": true,
+        "residual_overlap_wall_ms": 34.030029296875
+      },
+      "own_wait": {
+        "input_available_ms": 1790960651453.205,
+        "start_ms": 1790960651453.205,
+        "end_ms": 1790960651453.21,
+        "wait_ms": 0.0048828125,
+        "ready_t0_ms": 1790960651453.2148
+      },
+      "first_CP_begin_worker_ms": 1790960651544.83,
+      "first_CP_validation_worker_ms": 1790960651549.585,
+      "first_API": {
+        "generation": 5,
+        "request_id": "quality134-group4-r1-5",
+        "engine": "candidate",
+        "start_ms": 1790960651458.56,
+        "return_ms": 1790960651544.675,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960651458.575,
+        "session_run_end_ms": 1790960651544.65
+      },
+      "first_API_await_ms": 86.074951171875,
+      "hand_NN": 9,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 1,
+      "discarded_returns": 1,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "reference",
+        "cancel": false,
+        "game_id": "input4-rep2-A",
+        "turn": 5,
+        "physical_side": 2,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-6",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "adopted_stats": {
+        "sequence": 9,
+        "action": 51,
+        "begin_ms": 1790960652222.72,
+        "validation_end_ms": 1790960652222.875,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 9,
+        "completed_backup": 9,
+        "rootN": 9,
+        "loop_simulations": 8,
+        "edge_sum": 8
+      },
+      "public_ms": 410.619873046875,
+      "planned_ms": 411.0,
+      "timer_ms": 410.5400390625,
+      "ACK_wall_ms": 416.554931640625,
+      "public_before_ACK": true,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-5",
+        "public_ms": 1790960651863.76,
+        "ACK_known_at_next_input": false,
+        "ACK_ms": null,
+        "observed_at_ms": 1790960651863.895,
+        "final_ACK_ms": 1790960651895.395,
+        "input_before_old_ACK": true,
+        "residual_overlap_wall_ms": 31.5
+      },
+      "own_wait": {
+        "input_available_ms": 1790960651863.89,
+        "start_ms": 1790960651863.89,
+        "end_ms": 1790960651863.89,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790960651863.895
+      },
+      "first_CP_begin_worker_ms": 1790960651923.28,
+      "first_CP_validation_worker_ms": 1790960651923.455,
+      "first_API": {
+        "generation": 6,
+        "request_id": "quality134-group4-r1-6",
+        "engine": "reference",
+        "start_ms": 1790960651884.75,
+        "return_ms": 1790960651923.1501,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960651884.77,
+        "session_run_end_ms": 1790960651923.125
+      },
+      "first_API_await_ms": 38.35498046875,
+      "hand_NN": 10,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 0,
+      "discarded_returns": 0,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "candidate",
+        "cancel": false,
+        "game_id": "input4-rep2-A",
+        "turn": 6,
+        "physical_side": 1,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-7",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "wall",
+        "x": 5,
+        "y": 4,
+        "orientation": "h"
+      },
+      "adopted_stats": {
+        "sequence": 12,
+        "action": 118,
+        "begin_ms": 1790960652664.095,
+        "validation_end_ms": 1790960652664.255,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 12,
+        "completed_backup": 12,
+        "rootN": 12,
+        "loop_simulations": 11,
+        "edge_sum": 11
+      },
+      "public_ms": 410.669921875,
+      "planned_ms": 411.0,
+      "timer_ms": 410.56494140625,
+      "ACK_wall_ms": 456.554931640625,
+      "public_before_ACK": true,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-6",
+        "public_ms": 1790960652274.515,
+        "ACK_known_at_next_input": false,
+        "ACK_ms": null,
+        "observed_at_ms": 1790960652274.665,
+        "final_ACK_ms": 1790960652280.45,
+        "input_before_old_ACK": true,
+        "residual_overlap_wall_ms": 5.784912109375
+      },
+      "own_wait": {
+        "input_available_ms": 1790960652274.66,
+        "start_ms": 1790960652274.66,
+        "end_ms": 1790960652274.66,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790960652274.665
+      },
+      "first_CP_begin_worker_ms": 1790960652323.315,
+      "first_CP_validation_worker_ms": 1790960652323.49,
+      "first_API": {
+        "generation": 7,
+        "request_id": "quality134-group4-r1-7",
+        "engine": "candidate",
+        "start_ms": 1790960652290.06,
+        "return_ms": 1790960652323.135,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960652290.07,
+        "session_run_end_ms": 1790960652323.09
+      },
+      "first_API_await_ms": 33.02001953125,
+      "hand_NN": 13,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 1,
+      "discarded_returns": 1,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "reference",
+        "cancel": false,
+        "game_id": "input4-rep2-A",
+        "turn": 7,
+        "physical_side": 2,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-8",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "adopted_stats": {
+        "sequence": 9,
+        "action": 60,
+        "begin_ms": 1790960653062.1401,
+        "validation_end_ms": 1790960653062.29,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 9,
+        "completed_backup": 9,
+        "rootN": 9,
+        "loop_simulations": 8,
+        "edge_sum": 8
+      },
+      "public_ms": 413.164794921875,
+      "planned_ms": 411.0,
+      "timer_ms": 413.059814453125,
+      "ACK_wall_ms": 444.454833984375,
+      "public_before_ACK": true,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-7",
+        "public_ms": 1790960652685.335,
+        "ACK_known_at_next_input": false,
+        "ACK_ms": null,
+        "observed_at_ms": 1790960652685.445,
+        "final_ACK_ms": 1790960652731.22,
+        "input_before_old_ACK": true,
+        "residual_overlap_wall_ms": 45.77490234375
+      },
+      "own_wait": {
+        "input_available_ms": 1790960652685.44,
+        "start_ms": 1790960652685.44,
+        "end_ms": 1790960652685.44,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790960652685.445
+      },
+      "first_CP_begin_worker_ms": 1790960652749.2551,
+      "first_CP_validation_worker_ms": 1790960652749.7002,
+      "first_API": {
+        "generation": 8,
+        "request_id": "quality134-group4-r1-8",
+        "engine": "reference",
+        "start_ms": 1790960652708.685,
+        "return_ms": 1790960652749.0452,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960652708.7002,
+        "session_run_end_ms": 1790960652749.0151
+      },
+      "first_API_await_ms": 40.31494140625,
+      "hand_NN": 10,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 1,
+      "discarded_returns": 1,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "candidate",
+        "cancel": false,
+        "game_id": "input4-rep2-A",
+        "turn": 8,
+        "physical_side": 1,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-9",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "adopted_stats": {
+        "sequence": 11,
+        "action": 57,
+        "begin_ms": 1790960653480.66,
+        "validation_end_ms": 1790960653480.805,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 10,
+        "completed_backup": 11,
+        "rootN": 11,
+        "loop_simulations": 10,
+        "edge_sum": 10
+      },
+      "public_ms": 410.75,
+      "planned_ms": 411.0,
+      "timer_ms": 410.64990234375,
+      "ACK_wall_ms": 448.669921875,
+      "public_before_ACK": true,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-8",
+        "public_ms": 1790960653098.6099,
+        "ACK_known_at_next_input": false,
+        "ACK_ms": null,
+        "observed_at_ms": 1790960653098.75,
+        "final_ACK_ms": 1790960653129.9,
+        "input_before_old_ACK": true,
+        "residual_overlap_wall_ms": 31.14990234375
+      },
+      "own_wait": {
+        "input_available_ms": 1790960653098.74,
+        "start_ms": 1790960653098.74,
+        "end_ms": 1790960653098.74,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790960653098.75
+      },
+      "first_CP_begin_worker_ms": 1790960653167.125,
+      "first_CP_validation_worker_ms": 1790960653167.31,
+      "first_API": {
+        "generation": 9,
+        "request_id": "quality134-group4-r1-9",
+        "engine": "candidate",
+        "start_ms": 1790960653127.785,
+        "return_ms": 1790960653162.785,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960653127.795,
+        "session_run_end_ms": 1790960653162.77
+      },
+      "first_API_await_ms": 34.97509765625,
+      "hand_NN": 11,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 1,
+      "discarded_returns": 1,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "reference",
+        "cancel": false,
+        "game_id": "input4-rep2-A",
+        "turn": 9,
+        "physical_side": 2,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-10",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "wall",
+        "x": 2,
+        "y": 6,
+        "orientation": "v"
+      },
+      "adopted_stats": {
+        "sequence": 11,
+        "action": 195,
+        "begin_ms": 1790960653902.33,
+        "validation_end_ms": 1790960653902.485,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 10,
+        "completed_backup": 11,
+        "rootN": 11,
+        "loop_simulations": 10,
+        "edge_sum": 10
+      },
+      "public_ms": 410.64501953125,
+      "planned_ms": 411.0,
+      "timer_ms": 410.554931640625,
+      "ACK_wall_ms": 464.31494140625,
+      "public_before_ACK": true,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-9",
+        "public_ms": 1790960653509.5,
+        "ACK_known_at_next_input": false,
+        "ACK_ms": null,
+        "observed_at_ms": 1790960653509.615,
+        "final_ACK_ms": 1790960653547.42,
+        "input_before_old_ACK": true,
+        "residual_overlap_wall_ms": 37.804931640625
+      },
+      "own_wait": {
+        "input_available_ms": 1790960653509.6099,
+        "start_ms": 1790960653509.6099,
+        "end_ms": 1790960653509.6099,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790960653509.615
+      },
+      "first_CP_begin_worker_ms": 1790960653572.0552,
+      "first_CP_validation_worker_ms": 1790960653572.2102,
+      "first_API": {
+        "generation": 10,
+        "request_id": "quality134-group4-r1-10",
+        "engine": "reference",
+        "start_ms": 1790960653530.09,
+        "return_ms": 1790960653571.9202,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960653530.105,
+        "session_run_end_ms": 1790960653571.9001
+      },
+      "first_API_await_ms": 41.795166015625,
+      "hand_NN": 11,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 1,
+      "discarded_returns": 1,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "candidate",
+        "cancel": false,
+        "game_id": "input4-rep2-A",
+        "turn": 10,
+        "physical_side": 1,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-11",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "wall",
+        "x": 2,
+        "y": 5,
+        "orientation": "h"
+      },
+      "adopted_stats": {
+        "sequence": 12,
+        "action": 123,
+        "begin_ms": 1790960654309.205,
+        "validation_end_ms": 1790960654309.355,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 10,
+        "completed_backup": 12,
+        "rootN": 12,
+        "loop_simulations": 11,
+        "edge_sum": 11
+      },
+      "public_ms": 410.489990234375,
+      "planned_ms": 411.0,
+      "timer_ms": 410.400146484375,
+      "ACK_wall_ms": 439.989990234375,
+      "public_before_ACK": true,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-10",
+        "public_ms": 1790960653920.26,
+        "ACK_known_at_next_input": false,
+        "ACK_ms": null,
+        "observed_at_ms": 1790960653920.3599,
+        "final_ACK_ms": 1790960653973.93,
+        "input_before_old_ACK": true,
+        "residual_overlap_wall_ms": 53.570068359375
+      },
+      "own_wait": {
+        "input_available_ms": 1790960653920.3499,
+        "start_ms": 1790960653920.3499,
+        "end_ms": 1790960653920.355,
+        "wait_ms": 0.005126953125,
+        "ready_t0_ms": 1790960653920.3599
+      },
+      "first_CP_begin_worker_ms": 1790960653992.34,
+      "first_CP_validation_worker_ms": 1790960653992.495,
+      "first_API": {
+        "generation": 11,
+        "request_id": "quality134-group4-r1-11",
+        "engine": "candidate",
+        "start_ms": 1790960653945.795,
+        "return_ms": 1790960653992.22,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960653945.815,
+        "session_run_end_ms": 1790960653992.2
+      },
+      "first_API_await_ms": 46.385009765625,
+      "hand_NN": 11,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 1,
+      "discarded_returns": 1,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "reference",
+        "cancel": false,
+        "game_id": "input4-rep2-A",
+        "turn": 11,
+        "physical_side": 2,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-12",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          1,
+          0
+        ]
+      },
+      "adopted_stats": {
+        "sequence": 14,
+        "action": 61,
+        "begin_ms": 1790960654731.395,
+        "validation_end_ms": 1790960654731.57,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 10,
+        "completed_backup": 14,
+        "rootN": 14,
+        "loop_simulations": 13,
+        "edge_sum": 13
+      },
+      "public_ms": 410.510009765625,
+      "planned_ms": 411.0,
+      "timer_ms": 410.429931640625,
+      "ACK_wall_ms": 404.919921875,
+      "public_before_ACK": false,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-11",
+        "public_ms": 1790960654330.8499,
+        "ACK_known_at_next_input": false,
+        "ACK_ms": null,
+        "observed_at_ms": 1790960654330.96,
+        "final_ACK_ms": 1790960654360.3499,
+        "input_before_old_ACK": true,
+        "residual_overlap_wall_ms": 29.389892578125
+      },
+      "own_wait": {
+        "input_available_ms": 1790960654330.955,
+        "start_ms": 1790960654330.955,
+        "end_ms": 1790960654330.955,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790960654330.96
+      },
+      "first_CP_begin_worker_ms": 1790960654405.5051,
+      "first_CP_validation_worker_ms": 1790960654405.6501,
+      "first_API": {
+        "generation": 12,
+        "request_id": "quality134-group4-r1-12",
+        "engine": "reference",
+        "start_ms": 1790960654360.4102,
+        "return_ms": 1790960654405.3901,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960654360.4202,
+        "session_run_end_ms": 1790960654405.365
+      },
+      "first_API_await_ms": 44.94482421875,
+      "hand_NN": 10,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 0,
+      "discarded_returns": 0,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "candidate",
+        "cancel": false,
+        "game_id": "input4-rep2-A",
+        "turn": 12,
+        "physical_side": 1,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-13",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "adopted_stats": {
+        "sequence": 12,
+        "action": 66,
+        "begin_ms": 1790960655092.35,
+        "validation_end_ms": 1790960655092.48,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 6,
+        "completed_backup": 12,
+        "rootN": 12,
+        "loop_simulations": 11,
+        "edge_sum": 11
+      },
+      "public_ms": 415.625,
+      "planned_ms": 411.0,
+      "timer_ms": 415.544921875,
+      "ACK_wall_ms": 410.429931640625,
+      "public_before_ACK": false,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-12",
+        "public_ms": 1790960654741.47,
+        "ACK_known_at_next_input": true,
+        "ACK_ms": 1790960654735.88,
+        "observed_at_ms": 1790960654741.58,
+        "final_ACK_ms": 1790960654735.88,
+        "input_before_old_ACK": false,
+        "residual_overlap_wall_ms": 0
+      },
+      "own_wait": {
+        "input_available_ms": 1790960654741.57,
+        "start_ms": 1790960654741.57,
+        "end_ms": 1790960654741.575,
+        "wait_ms": 0.0048828125,
+        "ready_t0_ms": 1790960654741.58
+      },
+      "first_CP_begin_worker_ms": 1790960654800.895,
+      "first_CP_validation_worker_ms": 1790960654801.045,
+      "first_API": {
+        "generation": 13,
+        "request_id": "quality134-group4-r1-13",
+        "engine": "candidate",
+        "start_ms": 1790960654769.795,
+        "return_ms": 1790960654800.805,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960654769.805,
+        "session_run_end_ms": 1790960654800.785
+      },
+      "first_API_await_ms": 30.97998046875,
+      "hand_NN": 7,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 0,
+      "discarded_returns": 0,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "reference",
+        "cancel": false,
+        "game_id": "input4-rep2-A",
+        "turn": 13,
+        "physical_side": 2,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-14",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          -1
+        ]
+      },
+      "adopted_stats": {
+        "sequence": 36,
+        "action": 52,
+        "begin_ms": 1790960655551.22,
+        "validation_end_ms": 1790960655551.415,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 11,
+        "completed_backup": 36,
+        "rootN": 36,
+        "loop_simulations": 35,
+        "edge_sum": 35
+      },
+      "public_ms": 410.93994140625,
+      "planned_ms": 411.0,
+      "timer_ms": 410.849853515625,
+      "ACK_wall_ms": 435.849853515625,
+      "public_before_ACK": true,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-13",
+        "public_ms": 1790960655157.205,
+        "ACK_known_at_next_input": true,
+        "ACK_ms": 1790960655152.01,
+        "observed_at_ms": 1790960655157.32,
+        "final_ACK_ms": 1790960655152.01,
+        "input_before_old_ACK": false,
+        "residual_overlap_wall_ms": 0
+      },
+      "own_wait": {
+        "input_available_ms": 1790960655157.315,
+        "start_ms": 1790960655157.315,
+        "end_ms": 1790960655157.32,
+        "wait_ms": 0.005126953125,
+        "ready_t0_ms": 1790960655157.32
+      },
+      "first_CP_begin_worker_ms": 1790960655200.6702,
+      "first_CP_validation_worker_ms": 1790960655200.87,
+      "first_API": {
+        "generation": 14,
+        "request_id": "quality134-group4-r1-14",
+        "engine": "reference",
+        "start_ms": 1790960655162.52,
+        "return_ms": 1790960655200.5251,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960655162.53,
+        "session_run_end_ms": 1790960655200.5051
+      },
+      "first_API_await_ms": 37.97509765625,
+      "hand_NN": 12,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 1,
+      "discarded_returns": 1,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "candidate",
+        "cancel": false,
+        "game_id": "input4-rep2-A",
+        "turn": 14,
+        "physical_side": 1,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-15",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "adopted_stats": {
+        "sequence": 46,
+        "action": 75,
+        "begin_ms": 1790960655969.575,
+        "validation_end_ms": 1790960655970.005,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 8,
+        "completed_backup": 46,
+        "rootN": 46,
+        "loop_simulations": 45,
+        "edge_sum": 45
+      },
+      "public_ms": 410.5048828125,
+      "planned_ms": 411.0,
+      "timer_ms": 410.44482421875,
+      "ACK_wall_ms": 406.534912109375,
+      "public_before_ACK": false,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-14",
+        "public_ms": 1790960655568.26,
+        "ACK_known_at_next_input": false,
+        "ACK_ms": null,
+        "observed_at_ms": 1790960655568.32,
+        "final_ACK_ms": 1790960655593.17,
+        "input_before_old_ACK": true,
+        "residual_overlap_wall_ms": 24.849853515625
+      },
+      "own_wait": {
+        "input_available_ms": 1790960655568.315,
+        "start_ms": 1790960655568.315,
+        "end_ms": 1790960655568.315,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790960655568.32
+      },
+      "first_CP_begin_worker_ms": 1790960655620.92,
+      "first_CP_validation_worker_ms": 1790960655621.06,
+      "first_API": {
+        "generation": 15,
+        "request_id": "quality134-group4-r1-15",
+        "engine": "candidate",
+        "start_ms": 1790960655583.24,
+        "return_ms": 1790960655620.815,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960655583.255,
+        "session_run_end_ms": 1790960655620.785
+      },
+      "first_API_await_ms": 37.530029296875,
+      "hand_NN": 8,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 0,
+      "discarded_returns": 0,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "candidate",
+        "cancel": false,
+        "game_id": "input4-rep2-B",
+        "turn": 0,
+        "physical_side": 1,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": true
+      },
+      "request_id": "quality134-group4-r1-16",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "wall",
+        "x": 5,
+        "y": 3,
+        "orientation": "h"
+      },
+      "adopted_stats": {
+        "sequence": 10,
+        "action": 110,
+        "begin_ms": 1790960656386.005,
+        "validation_end_ms": 1790960656386.155,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 10,
+        "completed_backup": 10,
+        "rootN": 10,
+        "loop_simulations": 9,
+        "edge_sum": 9
+      },
+      "public_ms": 418.985107421875,
+      "planned_ms": 411.0,
+      "timer_ms": 418.925048828125,
+      "ACK_wall_ms": 418.880126953125,
+      "public_before_ACK": false,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-14",
+        "public_ms": 1790960655568.26,
+        "ACK_known_at_next_input": true,
+        "ACK_ms": 1790960655593.17,
+        "observed_at_ms": 1790960656007.025,
+        "final_ACK_ms": 1790960655593.17,
+        "input_before_old_ACK": false,
+        "residual_overlap_wall_ms": 0
+      },
+      "own_wait": {
+        "input_available_ms": 1790960656007.015,
+        "start_ms": 1790960656007.015,
+        "end_ms": 1790960656007.015,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790960656007.025
+      },
+      "first_CP_begin_worker_ms": 1790960656045.65,
+      "first_CP_validation_worker_ms": 1790960656045.795,
+      "first_API": {
+        "generation": 16,
+        "request_id": "quality134-group4-r1-16",
+        "engine": "candidate",
+        "start_ms": 1790960656021.175,
+        "return_ms": 1790960656045.515,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960656021.185,
+        "session_run_end_ms": 1790960656045.495
+      },
+      "first_API_await_ms": 24.31005859375,
+      "hand_NN": 11,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 0,
+      "discarded_returns": 0,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 95,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "reference",
+        "cancel": false,
+        "game_id": "input4-rep2-B",
+        "turn": 1,
+        "physical_side": 2,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": true
+      },
+      "request_id": "quality134-group4-r1-17",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          -1,
+          0
+        ]
+      },
+      "adopted_stats": {
+        "sequence": 11,
+        "action": 41,
+        "begin_ms": 1790960656827.875,
+        "validation_end_ms": 1790960656828.0151,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 11,
+        "completed_backup": 11,
+        "rootN": 11,
+        "loop_simulations": 10,
+        "edge_sum": 10
+      },
+      "public_ms": 410.364990234375,
+      "planned_ms": 411.0,
+      "timer_ms": 410.31005859375,
+      "ACK_wall_ms": 406.1650390625,
+      "public_before_ACK": false,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-16",
+        "public_ms": 1790960656426.01,
+        "ACK_known_at_next_input": true,
+        "ACK_ms": 1790960656425.905,
+        "observed_at_ms": 1790960656426.1199,
+        "final_ACK_ms": 1790960656425.905,
+        "input_before_old_ACK": false,
+        "residual_overlap_wall_ms": 0
+      },
+      "own_wait": {
+        "input_available_ms": 1790960656426.105,
+        "start_ms": 1790960656426.105,
+        "end_ms": 1790960656426.1099,
+        "wait_ms": 0.0048828125,
+        "ready_t0_ms": 1790960656426.1199
+      },
+      "first_CP_begin_worker_ms": 1790960656466.0552,
+      "first_CP_validation_worker_ms": 1790960656466.25,
+      "first_API": {
+        "generation": 17,
+        "request_id": "quality134-group4-r1-17",
+        "engine": "reference",
+        "start_ms": 1790960656434.1301,
+        "return_ms": 1790960656465.865,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960656434.1401,
+        "session_run_end_ms": 1790960656465.8352
+      },
+      "first_API_await_ms": 31.695068359375,
+      "hand_NN": 11,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 0,
+      "discarded_returns": 0,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 89,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": true,
+        "missing_public_cp": false
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "candidate",
+        "cancel": false,
+        "game_id": "input4-rep2-B",
+        "turn": 2,
+        "physical_side": 1,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-18",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "adopted_stats": {
+        "sequence": 12,
+        "action": 48,
+        "begin_ms": 1790960657222.725,
+        "validation_end_ms": 1790960657222.88,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 12,
+        "completed_backup": 12,
+        "rootN": 12,
+        "loop_simulations": 11,
+        "edge_sum": 11
+      },
+      "public_ms": 410.420166015625,
+      "planned_ms": 411.0,
+      "timer_ms": 410.34521484375,
+      "ACK_wall_ms": 409.56005859375,
+      "public_before_ACK": false,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-17",
+        "public_ms": 1790960656836.4849,
+        "ACK_known_at_next_input": true,
+        "ACK_ms": 1790960656832.285,
+        "observed_at_ms": 1790960656836.6099,
+        "final_ACK_ms": 1790960656832.285,
+        "input_before_old_ACK": false,
+        "residual_overlap_wall_ms": 0
+      },
+      "own_wait": {
+        "input_available_ms": 1790960656836.5999,
+        "start_ms": 1790960656836.5999,
+        "end_ms": 1790960656836.605,
+        "wait_ms": 0.005126953125,
+        "ready_t0_ms": 1790960656836.6099
+      },
+      "first_CP_begin_worker_ms": 1790960656876.56,
+      "first_CP_validation_worker_ms": 1790960656876.715,
+      "first_API": {
+        "generation": 18,
+        "request_id": "quality134-group4-r1-18",
+        "engine": "candidate",
+        "start_ms": 1790960656844.86,
+        "return_ms": 1790960656876.43,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960656844.87,
+        "session_run_end_ms": 1790960656876.405
+      },
+      "first_API_await_ms": 31.534912109375,
+      "hand_NN": 13,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 0,
+      "discarded_returns": 0,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "reference",
+        "cancel": false,
+        "game_id": "input4-rep2-B",
+        "turn": 3,
+        "physical_side": 2,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-19",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "wall",
+        "x": 2,
+        "y": 6,
+        "orientation": "h"
+      },
+      "adopted_stats": {
+        "sequence": 15,
+        "action": 131,
+        "begin_ms": 1790960657630.4202,
+        "validation_end_ms": 1790960657630.5852,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 15,
+        "completed_backup": 15,
+        "rootN": 15,
+        "loop_simulations": 14,
+        "edge_sum": 14
+      },
+      "public_ms": 410.405029296875,
+      "planned_ms": 411.0,
+      "timer_ms": 410.329833984375,
+      "ACK_wall_ms": 440,
+      "public_before_ACK": true,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-18",
+        "public_ms": 1790960657247.03,
+        "ACK_known_at_next_input": true,
+        "ACK_ms": 1790960657246.17,
+        "observed_at_ms": 1790960657247.135,
+        "final_ACK_ms": 1790960657246.17,
+        "input_before_old_ACK": false,
+        "residual_overlap_wall_ms": 0
+      },
+      "own_wait": {
+        "input_available_ms": 1790960657247.135,
+        "start_ms": 1790960657247.135,
+        "end_ms": 1790960657247.135,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790960657247.135
+      },
+      "first_CP_begin_worker_ms": 1790960657277.48,
+      "first_CP_validation_worker_ms": 1790960657277.6602,
+      "first_API": {
+        "generation": 19,
+        "request_id": "quality134-group4-r1-19",
+        "engine": "reference",
+        "start_ms": 1790960657256.215,
+        "return_ms": 1790960657277.3,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960657256.245,
+        "session_run_end_ms": 1790960657277.27
+      },
+      "first_API_await_ms": 21.02490234375,
+      "hand_NN": 16,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 1,
+      "discarded_returns": 1,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "candidate",
+        "cancel": false,
+        "game_id": "input4-rep2-B",
+        "turn": 4,
+        "physical_side": 1,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-20",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          -1
+        ]
+      },
+      "adopted_stats": {
+        "sequence": 10,
+        "action": 39,
+        "begin_ms": 1790960658054.63,
+        "validation_end_ms": 1790960658054.785,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 10,
+        "completed_backup": 10,
+        "rootN": 10,
+        "loop_simulations": 9,
+        "edge_sum": 9
+      },
+      "public_ms": 410.445068359375,
+      "planned_ms": 411.0,
+      "timer_ms": 410.375,
+      "ACK_wall_ms": 404.670166015625,
+      "public_before_ACK": false,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-19",
+        "public_ms": 1790960657657.54,
+        "ACK_known_at_next_input": false,
+        "ACK_ms": null,
+        "observed_at_ms": 1790960657657.64,
+        "final_ACK_ms": 1790960657687.135,
+        "input_before_old_ACK": true,
+        "residual_overlap_wall_ms": 29.4951171875
+      },
+      "own_wait": {
+        "input_available_ms": 1790960657657.63,
+        "start_ms": 1790960657657.63,
+        "end_ms": 1790960657657.63,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790960657657.64
+      },
+      "first_CP_begin_worker_ms": 1790960657708.93,
+      "first_CP_validation_worker_ms": 1790960657709.095,
+      "first_API": {
+        "generation": 20,
+        "request_id": "quality134-group4-r1-20",
+        "engine": "candidate",
+        "start_ms": 1790960657662.285,
+        "return_ms": 1790960657708.79,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960657662.305,
+        "session_run_end_ms": 1790960657708.765
+      },
+      "first_API_await_ms": 46.4599609375,
+      "hand_NN": 10,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 0,
+      "discarded_returns": 0,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "reference",
+        "cancel": false,
+        "game_id": "input4-rep2-B",
+        "turn": 5,
+        "physical_side": 2,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-21",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "wall",
+        "x": 6,
+        "y": 5,
+        "orientation": "h"
+      },
+      "adopted_stats": {
+        "sequence": 10,
+        "action": 127,
+        "begin_ms": 1790960658457.8052,
+        "validation_end_ms": 1790960658457.9502,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 10,
+        "completed_backup": 10,
+        "rootN": 10,
+        "loop_simulations": 9,
+        "edge_sum": 9
+      },
+      "public_ms": 410.465087890625,
+      "planned_ms": 411.0,
+      "timer_ms": 410.3798828125,
+      "ACK_wall_ms": 445.989990234375,
+      "public_before_ACK": true,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-20",
+        "public_ms": 1790960658068.085,
+        "ACK_known_at_next_input": true,
+        "ACK_ms": 1790960658062.31,
+        "observed_at_ms": 1790960658068.23,
+        "final_ACK_ms": 1790960658062.31,
+        "input_before_old_ACK": false,
+        "residual_overlap_wall_ms": 0
+      },
+      "own_wait": {
+        "input_available_ms": 1790960658068.2249,
+        "start_ms": 1790960658068.2249,
+        "end_ms": 1790960658068.2249,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790960658068.23
+      },
+      "first_CP_begin_worker_ms": 1790960658121.965,
+      "first_CP_validation_worker_ms": 1790960658122.61,
+      "first_API": {
+        "generation": 21,
+        "request_id": "quality134-group4-r1-21",
+        "engine": "reference",
+        "start_ms": 1790960658083.445,
+        "return_ms": 1790960658121.5251,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960658083.455,
+        "session_run_end_ms": 1790960658121.185
+      },
+      "first_API_await_ms": 37.72998046875,
+      "hand_NN": 11,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 1,
+      "discarded_returns": 1,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "candidate",
+        "cancel": false,
+        "game_id": "input4-rep2-B",
+        "turn": 6,
+        "physical_side": 1,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-22",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "wall",
+        "x": 3,
+        "y": 3,
+        "orientation": "h"
+      },
+      "adopted_stats": {
+        "sequence": 11,
+        "action": 108,
+        "begin_ms": 1790960658879.6,
+        "validation_end_ms": 1790960658879.755,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 11,
+        "completed_backup": 11,
+        "rootN": 11,
+        "loop_simulations": 10,
+        "edge_sum": 10
+      },
+      "public_ms": 410.56982421875,
+      "planned_ms": 411.0,
+      "timer_ms": 410.52001953125,
+      "ACK_wall_ms": 405.5498046875,
+      "public_before_ACK": false,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-21",
+        "public_ms": 1790960658478.695,
+        "ACK_known_at_next_input": false,
+        "ACK_ms": null,
+        "observed_at_ms": 1790960658478.81,
+        "final_ACK_ms": 1790960658514.22,
+        "input_before_old_ACK": true,
+        "residual_overlap_wall_ms": 35.409912109375
+      },
+      "own_wait": {
+        "input_available_ms": 1790960658478.8,
+        "start_ms": 1790960658478.8,
+        "end_ms": 1790960658478.8,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790960658478.81
+      },
+      "first_CP_begin_worker_ms": 1790960658532.985,
+      "first_CP_validation_worker_ms": 1790960658533.26,
+      "first_API": {
+        "generation": 22,
+        "request_id": "quality134-group4-r1-22",
+        "engine": "candidate",
+        "start_ms": 1790960658492.115,
+        "return_ms": 1790960658532.81,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960658492.125,
+        "session_run_end_ms": 1790960658532.785
+      },
+      "first_API_await_ms": 40.659912109375,
+      "hand_NN": 11,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 0,
+      "discarded_returns": 0,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "reference",
+        "cancel": false,
+        "game_id": "input4-rep2-B",
+        "turn": 7,
+        "physical_side": 2,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-23",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          -1,
+          0
+        ]
+      },
+      "adopted_stats": {
+        "sequence": 14,
+        "action": 40,
+        "begin_ms": 1790960659268.705,
+        "validation_end_ms": 1790960659268.8801,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 14,
+        "completed_backup": 14,
+        "rootN": 14,
+        "loop_simulations": 13,
+        "edge_sum": 13
+      },
+      "public_ms": 411.929931640625,
+      "planned_ms": 411.0,
+      "timer_ms": 411.885009765625,
+      "ACK_wall_ms": 418.635009765625,
+      "public_before_ACK": true,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-22",
+        "public_ms": 1790960658889.38,
+        "ACK_known_at_next_input": true,
+        "ACK_ms": 1790960658884.3599,
+        "observed_at_ms": 1790960658889.52,
+        "final_ACK_ms": 1790960658884.3599,
+        "input_before_old_ACK": false,
+        "residual_overlap_wall_ms": 0
+      },
+      "own_wait": {
+        "input_available_ms": 1790960658889.515,
+        "start_ms": 1790960658889.515,
+        "end_ms": 1790960658889.52,
+        "wait_ms": 0.005126953125,
+        "ready_t0_ms": 1790960658889.52
+      },
+      "first_CP_begin_worker_ms": 1790960658913.08,
+      "first_CP_validation_worker_ms": 1790960658913.225,
+      "first_API": {
+        "generation": 23,
+        "request_id": "quality134-group4-r1-23",
+        "engine": "reference",
+        "start_ms": 1790960658895.735,
+        "return_ms": 1790960658912.97,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960658895.745,
+        "session_run_end_ms": 1790960658912.955
+      },
+      "first_API_await_ms": 17.2099609375,
+      "hand_NN": 15,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 0,
+      "discarded_returns": 0,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "candidate",
+        "cancel": false,
+        "game_id": "input4-rep2-B",
+        "turn": 8,
+        "physical_side": 1,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-24",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          -1,
+          0
+        ]
+      },
+      "adopted_stats": {
+        "sequence": 15,
+        "action": 38,
+        "begin_ms": 1790960659701.105,
+        "validation_end_ms": 1790960659701.325,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 15,
+        "completed_backup": 15,
+        "rootN": 15,
+        "loop_simulations": 14,
+        "edge_sum": 14
+      },
+      "public_ms": 410.510009765625,
+      "planned_ms": 411.0,
+      "timer_ms": 410.4248046875,
+      "ACK_wall_ms": 405.619873046875,
+      "public_before_ACK": false,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-23",
+        "public_ms": 1790960659301.45,
+        "ACK_known_at_next_input": false,
+        "ACK_ms": null,
+        "observed_at_ms": 1790960659301.55,
+        "final_ACK_ms": 1790960659308.155,
+        "input_before_old_ACK": true,
+        "residual_overlap_wall_ms": 6.60498046875
+      },
+      "own_wait": {
+        "input_available_ms": 1790960659301.545,
+        "start_ms": 1790960659301.545,
+        "end_ms": 1790960659301.55,
+        "wait_ms": 0.005126953125,
+        "ready_t0_ms": 1790960659301.55
+      },
+      "first_CP_begin_worker_ms": 1790960659331.805,
+      "first_CP_validation_worker_ms": 1790960659331.98,
+      "first_API": {
+        "generation": 24,
+        "request_id": "quality134-group4-r1-24",
+        "engine": "candidate",
+        "start_ms": 1790960659310.875,
+        "return_ms": 1790960659331.68,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960659310.9,
+        "session_run_end_ms": 1790960659331.655
+      },
+      "first_API_await_ms": 20.755126953125,
+      "hand_NN": 15,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 0,
+      "discarded_returns": 0,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "reference",
+        "cancel": false,
+        "game_id": "input4-rep2-B",
+        "turn": 9,
+        "physical_side": 2,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-25",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          -1,
+          0
+        ]
+      },
+      "adopted_stats": {
+        "sequence": 9,
+        "action": 39,
+        "begin_ms": 1790960660095.675,
+        "validation_end_ms": 1790960660095.8352,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 9,
+        "completed_backup": 9,
+        "rootN": 9,
+        "loop_simulations": 8,
+        "edge_sum": 8
+      },
+      "public_ms": 411.409912109375,
+      "planned_ms": 411.0,
+      "timer_ms": 411.3349609375,
+      "ACK_wall_ms": 440.219970703125,
+      "public_before_ACK": true,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-24",
+        "public_ms": 1790960659712.06,
+        "ACK_known_at_next_input": true,
+        "ACK_ms": 1790960659707.17,
+        "observed_at_ms": 1790960659712.185,
+        "final_ACK_ms": 1790960659707.17,
+        "input_before_old_ACK": false,
+        "residual_overlap_wall_ms": 0
+      },
+      "own_wait": {
+        "input_available_ms": 1790960659712.175,
+        "start_ms": 1790960659712.175,
+        "end_ms": 1790960659712.18,
+        "wait_ms": 0.0048828125,
+        "ready_t0_ms": 1790960659712.185
+      },
+      "first_CP_begin_worker_ms": 1790960659761.675,
+      "first_CP_validation_worker_ms": 1790960659761.8252,
+      "first_API": {
+        "generation": 25,
+        "request_id": "quality134-group4-r1-25",
+        "engine": "reference",
+        "start_ms": 1790960659724.99,
+        "return_ms": 1790960659761.47,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960659725.0051,
+        "session_run_end_ms": 1790960659761.4302
+      },
+      "first_API_await_ms": 36.425048828125,
+      "hand_NN": 10,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 1,
+      "discarded_returns": 1,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "candidate",
+        "cancel": false,
+        "game_id": "input4-rep2-B",
+        "turn": 10,
+        "physical_side": 1,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-26",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "wall",
+        "x": 7,
+        "y": 3,
+        "orientation": "h"
+      },
+      "adopted_stats": {
+        "sequence": 11,
+        "action": 112,
+        "begin_ms": 1790960660525,
+        "validation_end_ms": 1790960660525.155,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 11,
+        "completed_backup": 11,
+        "rootN": 11,
+        "loop_simulations": 10,
+        "edge_sum": 10
+      },
+      "public_ms": 410.47021484375,
+      "planned_ms": 411.0,
+      "timer_ms": 410.39501953125,
+      "ACK_wall_ms": 418.460205078125,
+      "public_before_ACK": true,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-25",
+        "public_ms": 1790960660123.595,
+        "ACK_known_at_next_input": false,
+        "ACK_ms": null,
+        "observed_at_ms": 1790960660123.7249,
+        "final_ACK_ms": 1790960660152.405,
+        "input_before_old_ACK": true,
+        "residual_overlap_wall_ms": 28.68017578125
+      },
+      "own_wait": {
+        "input_available_ms": 1790960660123.7148,
+        "start_ms": 1790960660123.7148,
+        "end_ms": 1790960660123.7148,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790960660123.7249
+      },
+      "first_CP_begin_worker_ms": 1790960660178.48,
+      "first_CP_validation_worker_ms": 1790960660178.66,
+      "first_API": {
+        "generation": 26,
+        "request_id": "quality134-group4-r1-26",
+        "engine": "candidate",
+        "start_ms": 1790960660138.685,
+        "return_ms": 1790960660178.34,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960660138.7,
+        "session_run_end_ms": 1790960660178.32
+      },
+      "first_API_await_ms": 39.6201171875,
+      "hand_NN": 11,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 0,
+      "discarded_returns": 0,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "reference",
+        "cancel": false,
+        "game_id": "input4-rep2-B",
+        "turn": 11,
+        "physical_side": 2,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-27",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "wall",
+        "x": 2,
+        "y": 4,
+        "orientation": "h"
+      },
+      "adopted_stats": {
+        "sequence": 10,
+        "action": 115,
+        "begin_ms": 1790960660901.9602,
+        "validation_end_ms": 1790960660902.105,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 10,
+        "completed_backup": 10,
+        "rootN": 10,
+        "loop_simulations": 9,
+        "edge_sum": 9
+      },
+      "public_ms": 410.465087890625,
+      "planned_ms": 411.0,
+      "timer_ms": 410.385009765625,
+      "ACK_wall_ms": 416.3349609375,
+      "public_before_ACK": true,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-26",
+        "public_ms": 1790960660534.195,
+        "ACK_known_at_next_input": false,
+        "ACK_ms": null,
+        "observed_at_ms": 1790960660534.315,
+        "final_ACK_ms": 1790960660542.185,
+        "input_before_old_ACK": true,
+        "residual_overlap_wall_ms": 7.8701171875
+      },
+      "own_wait": {
+        "input_available_ms": 1790960660534.305,
+        "start_ms": 1790960660534.305,
+        "end_ms": 1790960660534.305,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790960660534.315
+      },
+      "first_CP_begin_worker_ms": 1790960660582.0151,
+      "first_CP_validation_worker_ms": 1790960660582.1702,
+      "first_API": {
+        "generation": 27,
+        "request_id": "quality134-group4-r1-27",
+        "engine": "reference",
+        "start_ms": 1790960660547.355,
+        "return_ms": 1790960660581.8901,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960660547.365,
+        "session_run_end_ms": 1790960660581.87
+      },
+      "first_API_await_ms": 34.505126953125,
+      "hand_NN": 11,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 0,
+      "discarded_returns": 0,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "candidate",
+        "cancel": false,
+        "game_id": "input4-rep2-B",
+        "turn": 12,
+        "physical_side": 1,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-28",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "wall",
+        "x": 3,
+        "y": 4,
+        "orientation": "v"
+      },
+      "adopted_stats": {
+        "sequence": 10,
+        "action": 180,
+        "begin_ms": 1790960661334.28,
+        "validation_end_ms": 1790960661334.43,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 10,
+        "completed_backup": 10,
+        "rootN": 10,
+        "loop_simulations": 9,
+        "edge_sum": 9
+      },
+      "public_ms": 410.630126953125,
+      "planned_ms": 411.0,
+      "timer_ms": 410.4599609375,
+      "ACK_wall_ms": 432.669921875,
+      "public_before_ACK": true,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-27",
+        "public_ms": 1790960660944.78,
+        "ACK_known_at_next_input": false,
+        "ACK_ms": null,
+        "observed_at_ms": 1790960660944.95,
+        "final_ACK_ms": 1790960660950.65,
+        "input_before_old_ACK": true,
+        "residual_overlap_wall_ms": 5.699951171875
+      },
+      "own_wait": {
+        "input_available_ms": 1790960660944.94,
+        "start_ms": 1790960660944.94,
+        "end_ms": 1790960660944.94,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790960660944.95
+      },
+      "first_CP_begin_worker_ms": 1790960661004.585,
+      "first_CP_validation_worker_ms": 1790960661004.76,
+      "first_API": {
+        "generation": 28,
+        "request_id": "quality134-group4-r1-28",
+        "engine": "candidate",
+        "start_ms": 1790960660961.745,
+        "return_ms": 1790960661004.46,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960660961.76,
+        "session_run_end_ms": 1790960661004.435
+      },
+      "first_API_await_ms": 42.675048828125,
+      "hand_NN": 11,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 1,
+      "discarded_returns": 1,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "reference",
+        "cancel": false,
+        "game_id": "input4-rep2-B",
+        "turn": 13,
+        "physical_side": 2,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-29",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "wall",
+        "x": 1,
+        "y": 7,
+        "orientation": "h"
+      },
+      "adopted_stats": {
+        "sequence": 9,
+        "action": 138,
+        "begin_ms": 1790960661742.8152,
+        "validation_end_ms": 1790960661743.0051,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 9,
+        "completed_backup": 9,
+        "rootN": 9,
+        "loop_simulations": 8,
+        "edge_sum": 8
+      },
+      "public_ms": 410.5849609375,
+      "planned_ms": 411.0,
+      "timer_ms": 410.5048828125,
+      "ACK_wall_ms": 433.925048828125,
+      "public_before_ACK": true,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-28",
+        "public_ms": 1790960661355.58,
+        "ACK_known_at_next_input": false,
+        "ACK_ms": null,
+        "observed_at_ms": 1790960661355.865,
+        "final_ACK_ms": 1790960661377.6199,
+        "input_before_old_ACK": true,
+        "residual_overlap_wall_ms": 21.7548828125
+      },
+      "own_wait": {
+        "input_available_ms": 1790960661355.845,
+        "start_ms": 1790960661355.845,
+        "end_ms": 1790960661355.8499,
+        "wait_ms": 0.0048828125,
+        "ready_t0_ms": 1790960661355.865
+      },
+      "first_CP_begin_worker_ms": 1790960661417.345,
+      "first_CP_validation_worker_ms": 1790960661417.5151,
+      "first_API": {
+        "generation": 29,
+        "request_id": "quality134-group4-r1-29",
+        "engine": "reference",
+        "start_ms": 1790960661374.375,
+        "return_ms": 1790960661417.245,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960661374.385,
+        "session_run_end_ms": 1790960661417.23
+      },
+      "first_API_await_ms": 42.844970703125,
+      "hand_NN": 10,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 1,
+      "discarded_returns": 1,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "candidate",
+        "cancel": false,
+        "game_id": "input4-rep2-B",
+        "turn": 14,
+        "physical_side": 1,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-30",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          -1,
+          0
+        ]
+      },
+      "adopted_stats": {
+        "sequence": 11,
+        "action": 37,
+        "begin_ms": 1790960662158.59,
+        "validation_end_ms": 1790960662158.72,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 11,
+        "completed_backup": 11,
+        "rootN": 11,
+        "loop_simulations": 10,
+        "edge_sum": 10
+      },
+      "public_ms": 410.469970703125,
+      "planned_ms": 411.0,
+      "timer_ms": 410.400146484375,
+      "ACK_wall_ms": 435.175048828125,
+      "public_before_ACK": true,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-29",
+        "public_ms": 1790960661766.45,
+        "ACK_known_at_next_input": false,
+        "ACK_ms": null,
+        "observed_at_ms": 1790960661766.545,
+        "final_ACK_ms": 1790960661789.79,
+        "input_before_old_ACK": true,
+        "residual_overlap_wall_ms": 23.2451171875
+      },
+      "own_wait": {
+        "input_available_ms": 1790960661766.535,
+        "start_ms": 1790960661766.535,
+        "end_ms": 1790960661766.54,
+        "wait_ms": 0.005126953125,
+        "ready_t0_ms": 1790960661766.545
+      },
+      "first_CP_begin_worker_ms": 1790960661824.135,
+      "first_CP_validation_worker_ms": 1790960661824.29,
+      "first_API": {
+        "generation": 30,
+        "request_id": "quality134-group4-r1-30",
+        "engine": "candidate",
+        "start_ms": 1790960661787.515,
+        "return_ms": 1790960661824.045,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960661787.79,
+        "session_run_end_ms": 1790960661824.02
+      },
+      "first_API_await_ms": 36.22998046875,
+      "hand_NN": 12,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 1,
+      "discarded_returns": 1,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "reference",
+        "cancel": false,
+        "game_id": "input4-rep2-B",
+        "turn": 15,
+        "physical_side": 2,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-31",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          -1,
+          0
+        ]
+      },
+      "adopted_stats": {
+        "sequence": 15,
+        "action": 38,
+        "begin_ms": 1790960662575.02,
+        "validation_end_ms": 1790960662575.175,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 15,
+        "completed_backup": 15,
+        "rootN": 15,
+        "loop_simulations": 14,
+        "edge_sum": 14
+      },
+      "public_ms": 410.51513671875,
+      "planned_ms": 411.0,
+      "timer_ms": 410.4501953125,
+      "ACK_wall_ms": 402.315185546875,
+      "public_before_ACK": false,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-30",
+        "public_ms": 1790960662177.015,
+        "ACK_known_at_next_input": false,
+        "ACK_ms": null,
+        "observed_at_ms": 1790960662177.13,
+        "final_ACK_ms": 1790960662201.72,
+        "input_before_old_ACK": true,
+        "residual_overlap_wall_ms": 24.590087890625
+      },
+      "own_wait": {
+        "input_available_ms": 1790960662177.1199,
+        "start_ms": 1790960662177.1199,
+        "end_ms": 1790960662177.1199,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790960662177.13
+      },
+      "first_CP_begin_worker_ms": 1790960662225.165,
+      "first_CP_validation_worker_ms": 1790960662225.3152,
+      "first_API": {
+        "generation": 31,
+        "request_id": "quality134-group4-r1-31",
+        "engine": "reference",
+        "start_ms": 1790960662194.3,
+        "return_ms": 1790960662225.0552,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960662194.3152,
+        "session_run_end_ms": 1790960662225.02
+      },
+      "first_API_await_ms": 30.704833984375,
+      "hand_NN": 15,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 0,
+      "discarded_returns": 0,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "candidate",
+        "cancel": false,
+        "game_id": "input4-rep2-B",
+        "turn": 16,
+        "physical_side": 1,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-32",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "adopted_stats": {
+        "sequence": 9,
+        "action": 46,
+        "begin_ms": 1790960662933.945,
+        "validation_end_ms": 1790960662934.07,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 9,
+        "completed_backup": 9,
+        "rootN": 9,
+        "loop_simulations": 8,
+        "edge_sum": 8
+      },
+      "public_ms": 410.510009765625,
+      "planned_ms": 411.0,
+      "timer_ms": 410.445068359375,
+      "ACK_wall_ms": 415.52001953125,
+      "public_before_ACK": true,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-31",
+        "public_ms": 1790960662587.645,
+        "ACK_known_at_next_input": true,
+        "ACK_ms": 1790960662579.445,
+        "observed_at_ms": 1790960662587.76,
+        "final_ACK_ms": 1790960662579.445,
+        "input_before_old_ACK": false,
+        "residual_overlap_wall_ms": 0
+      },
+      "own_wait": {
+        "input_available_ms": 1790960662587.75,
+        "start_ms": 1790960662587.75,
+        "end_ms": 1790960662587.755,
+        "wait_ms": 0.0048828125,
+        "ready_t0_ms": 1790960662587.76
+      },
+      "first_CP_begin_worker_ms": 1790960662620.505,
+      "first_CP_validation_worker_ms": 1790960662620.635,
+      "first_API": {
+        "generation": 32,
+        "request_id": "quality134-group4-r1-32",
+        "engine": "candidate",
+        "start_ms": 1790960662594.745,
+        "return_ms": 1790960662619.075,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960662594.755,
+        "session_run_end_ms": 1790960662619.05
+      },
+      "first_API_await_ms": 24.295166015625,
+      "hand_NN": 10,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 0,
+      "discarded_returns": 0,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "reference",
+        "cancel": false,
+        "game_id": "input4-rep2-B",
+        "turn": 17,
+        "physical_side": 2,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-33",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          -1
+        ]
+      },
+      "adopted_stats": {
+        "sequence": 10,
+        "action": 29,
+        "begin_ms": 1790960663388.6602,
+        "validation_end_ms": 1790960663389.675,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 10,
+        "completed_backup": 10,
+        "rootN": 10,
+        "loop_simulations": 9,
+        "edge_sum": 9
+      },
+      "public_ms": 410.55517578125,
+      "planned_ms": 411.0,
+      "timer_ms": 410.47998046875,
+      "ACK_wall_ms": 447.25,
+      "public_before_ACK": true,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-32",
+        "public_ms": 1790960662998.27,
+        "ACK_known_at_next_input": false,
+        "ACK_ms": null,
+        "observed_at_ms": 1790960662998.39,
+        "final_ACK_ms": 1790960663003.28,
+        "input_before_old_ACK": true,
+        "residual_overlap_wall_ms": 4.89013671875
+      },
+      "own_wait": {
+        "input_available_ms": 1790960662998.385,
+        "start_ms": 1790960662998.385,
+        "end_ms": 1790960662998.385,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790960662998.39
+      },
+      "first_CP_begin_worker_ms": 1790960663059.485,
+      "first_CP_validation_worker_ms": 1790960663059.675,
+      "first_API": {
+        "generation": 33,
+        "request_id": "quality134-group4-r1-33",
+        "engine": "reference",
+        "start_ms": 1790960663010.725,
+        "return_ms": 1790960663059.37,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960663010.7852,
+        "session_run_end_ms": 1790960663059.34
+      },
+      "first_API_await_ms": 48.554931640625,
+      "hand_NN": 11,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 1,
+      "discarded_returns": 1,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "candidate",
+        "cancel": false,
+        "game_id": "input4-rep2-B",
+        "turn": 18,
+        "physical_side": 1,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-34",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          1,
+          0
+        ]
+      },
+      "adopted_stats": {
+        "sequence": 10,
+        "action": 47,
+        "begin_ms": 1790960663796.71,
+        "validation_end_ms": 1790960663796.85,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 10,
+        "completed_backup": 10,
+        "rootN": 10,
+        "loop_simulations": 9,
+        "edge_sum": 9
+      },
+      "public_ms": 412.030029296875,
+      "planned_ms": 411.0,
+      "timer_ms": 411.949951171875,
+      "ACK_wall_ms": 444.494873046875,
+      "public_before_ACK": true,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-33",
+        "public_ms": 1790960663408.945,
+        "ACK_known_at_next_input": false,
+        "ACK_ms": null,
+        "observed_at_ms": 1790960663409.03,
+        "final_ACK_ms": 1790960663445.64,
+        "input_before_old_ACK": true,
+        "residual_overlap_wall_ms": 36.60986328125
+      },
+      "own_wait": {
+        "input_available_ms": 1790960663409.025,
+        "start_ms": 1790960663409.025,
+        "end_ms": 1790960663409.025,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790960663409.03
+      },
+      "first_CP_begin_worker_ms": 1790960663477.09,
+      "first_CP_validation_worker_ms": 1790960663477.225,
+      "first_API": {
+        "generation": 34,
+        "request_id": "quality134-group4-r1-34",
+        "engine": "candidate",
+        "start_ms": 1790960663429.32,
+        "return_ms": 1790960663476.73,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960663429.33,
+        "session_run_end_ms": 1790960663476.705
+      },
+      "first_API_await_ms": 47.375,
+      "hand_NN": 11,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 1,
+      "discarded_returns": 1,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "reference",
+        "cancel": false,
+        "game_id": "input4-rep2-B",
+        "turn": 19,
+        "physical_side": 2,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-35",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          1,
+          0
+        ]
+      },
+      "adopted_stats": {
+        "sequence": 16,
+        "action": 30,
+        "begin_ms": 1790960664222.97,
+        "validation_end_ms": 1790960664223.115,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 14,
+        "completed_backup": 16,
+        "rootN": 16,
+        "loop_simulations": 15,
+        "edge_sum": 15
+      },
+      "public_ms": 410.52490234375,
+      "planned_ms": 411.0,
+      "timer_ms": 410.465087890625,
+      "ACK_wall_ms": 406.135009765625,
+      "public_before_ACK": false,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-34",
+        "public_ms": 1790960663821.06,
+        "ACK_known_at_next_input": false,
+        "ACK_ms": null,
+        "observed_at_ms": 1790960663821.19,
+        "final_ACK_ms": 1790960663853.525,
+        "input_before_old_ACK": true,
+        "residual_overlap_wall_ms": 32.3349609375
+      },
+      "own_wait": {
+        "input_available_ms": 1790960663821.18,
+        "start_ms": 1790960663821.18,
+        "end_ms": 1790960663821.18,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790960663821.19
+      },
+      "first_CP_begin_worker_ms": 1790960663872.74,
+      "first_CP_validation_worker_ms": 1790960663873.135,
+      "first_API": {
+        "generation": 35,
+        "request_id": "quality134-group4-r1-35",
+        "engine": "reference",
+        "start_ms": 1790960663839.49,
+        "return_ms": 1790960663872.4302,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960663839.51,
+        "session_run_end_ms": 1790960663872.4102
+      },
+      "first_API_await_ms": 32.900146484375,
+      "hand_NN": 14,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 0,
+      "discarded_returns": 0,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "candidate",
+        "cancel": false,
+        "game_id": "input4-rep2-B",
+        "turn": 20,
+        "physical_side": 1,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-36",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "adopted_stats": {
+        "sequence": 16,
+        "action": 56,
+        "begin_ms": 1790960664621.185,
+        "validation_end_ms": 1790960664621.325,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 13,
+        "completed_backup": 16,
+        "rootN": 16,
+        "loop_simulations": 15,
+        "edge_sum": 15
+      },
+      "public_ms": 411.27490234375,
+      "planned_ms": 411.0,
+      "timer_ms": 411.199951171875,
+      "ACK_wall_ms": 419.175048828125,
+      "public_before_ACK": true,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-35",
+        "public_ms": 1790960664231.7148,
+        "ACK_known_at_next_input": true,
+        "ACK_ms": 1790960664227.325,
+        "observed_at_ms": 1790960664231.78,
+        "final_ACK_ms": 1790960664227.325,
+        "input_before_old_ACK": false,
+        "residual_overlap_wall_ms": 0
+      },
+      "own_wait": {
+        "input_available_ms": 1790960664231.77,
+        "start_ms": 1790960664231.77,
+        "end_ms": 1790960664231.775,
+        "wait_ms": 0.0048828125,
+        "ready_t0_ms": 1790960664231.78
+      },
+      "first_CP_begin_worker_ms": 1790960664266.915,
+      "first_CP_validation_worker_ms": 1790960664267.055,
+      "first_API": {
+        "generation": 36,
+        "request_id": "quality134-group4-r1-36",
+        "engine": "candidate",
+        "start_ms": 1790960664244.94,
+        "return_ms": 1790960664266.805,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960664244.95,
+        "session_run_end_ms": 1790960664266.78
+      },
+      "first_API_await_ms": 21.830078125,
+      "hand_NN": 14,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 1,
+      "discarded_returns": 1,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "reference",
+        "cancel": false,
+        "game_id": "input4-rep2-B",
+        "turn": 21,
+        "physical_side": 2,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-37",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          1,
+          0
+        ]
+      },
+      "adopted_stats": {
+        "sequence": 19,
+        "action": 31,
+        "begin_ms": 1790960665019.85,
+        "validation_end_ms": 1790960665019.985,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 14,
+        "completed_backup": 19,
+        "rootN": 19,
+        "loop_simulations": 18,
+        "edge_sum": 18
+      },
+      "public_ms": 410.5498046875,
+      "planned_ms": 411.0,
+      "timer_ms": 410.469970703125,
+      "ACK_wall_ms": 415.35498046875,
+      "public_before_ACK": true,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-36",
+        "public_ms": 1790960664643.055,
+        "ACK_known_at_next_input": false,
+        "ACK_ms": null,
+        "observed_at_ms": 1790960664643.175,
+        "final_ACK_ms": 1790960664650.955,
+        "input_before_old_ACK": true,
+        "residual_overlap_wall_ms": 7.780029296875
+      },
+      "own_wait": {
+        "input_available_ms": 1790960664643.165,
+        "start_ms": 1790960664643.165,
+        "end_ms": 1790960664643.17,
+        "wait_ms": 0.0048828125,
+        "ready_t0_ms": 1790960664643.175
+      },
+      "first_CP_begin_worker_ms": 1790960664672.4001,
+      "first_CP_validation_worker_ms": 1790960664672.56,
+      "first_API": {
+        "generation": 37,
+        "request_id": "quality134-group4-r1-37",
+        "engine": "reference",
+        "start_ms": 1790960664652.5652,
+        "return_ms": 1790960664672.28,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960664652.58,
+        "session_run_end_ms": 1790960664672.26
+      },
+      "first_API_await_ms": 19.679931640625,
+      "hand_NN": 15,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 1,
+      "discarded_returns": 1,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "candidate",
+        "cancel": false,
+        "game_id": "input4-rep2-B",
+        "turn": 22,
+        "physical_side": 1,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-38",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          -1,
+          0
+        ]
+      },
+      "adopted_stats": {
+        "sequence": 9,
+        "action": 55,
+        "begin_ms": 1790960665420.705,
+        "validation_end_ms": 1790960665420.845,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 9,
+        "completed_backup": 9,
+        "rootN": 9,
+        "loop_simulations": 8,
+        "edge_sum": 8
+      },
+      "public_ms": 410.530029296875,
+      "planned_ms": 411.0,
+      "timer_ms": 410.474853515625,
+      "ACK_wall_ms": 416.71484375,
+      "public_before_ACK": true,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-37",
+        "public_ms": 1790960665053.7249,
+        "ACK_known_at_next_input": false,
+        "ACK_ms": null,
+        "observed_at_ms": 1790960665053.79,
+        "final_ACK_ms": 1790960665058.53,
+        "input_before_old_ACK": true,
+        "residual_overlap_wall_ms": 4.739990234375
+      },
+      "own_wait": {
+        "input_available_ms": 1790960665053.78,
+        "start_ms": 1790960665053.78,
+        "end_ms": 1790960665053.785,
+        "wait_ms": 0.0048828125,
+        "ready_t0_ms": 1790960665053.79
+      },
+      "first_CP_begin_worker_ms": 1790960665118.795,
+      "first_CP_validation_worker_ms": 1790960665119.005,
+      "first_API": {
+        "generation": 38,
+        "request_id": "quality134-group4-r1-38",
+        "engine": "candidate",
+        "start_ms": 1790960665076.195,
+        "return_ms": 1790960665118.685,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960665076.21,
+        "session_run_end_ms": 1790960665118.66
+      },
+      "first_API_await_ms": 42.449951171875,
+      "hand_NN": 10,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 0,
+      "discarded_returns": 0,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "reference",
+        "cancel": false,
+        "game_id": "input4-rep2-B",
+        "turn": 23,
+        "physical_side": 2,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-39",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          1,
+          0
+        ]
+      },
+      "adopted_stats": {
+        "sequence": 12,
+        "action": 32,
+        "begin_ms": 1790960665862.84,
+        "validation_end_ms": 1790960665863.03,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 10,
+        "completed_backup": 12,
+        "rootN": 12,
+        "loop_simulations": 11,
+        "edge_sum": 11
+      },
+      "public_ms": 410.580078125,
+      "planned_ms": 411.0,
+      "timer_ms": 410.510009765625,
+      "ACK_wall_ms": 405.68505859375,
+      "public_before_ACK": false,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-38",
+        "public_ms": 1790960665464.32,
+        "ACK_known_at_next_input": false,
+        "ACK_ms": null,
+        "observed_at_ms": 1790960665464.42,
+        "final_ACK_ms": 1790960665470.505,
+        "input_before_old_ACK": true,
+        "residual_overlap_wall_ms": 6.0849609375
+      },
+      "own_wait": {
+        "input_available_ms": 1790960665464.41,
+        "start_ms": 1790960665464.41,
+        "end_ms": 1790960665464.415,
+        "wait_ms": 0.005126953125,
+        "ready_t0_ms": 1790960665464.42
+      },
+      "first_CP_begin_worker_ms": 1790960665511.3252,
+      "first_CP_validation_worker_ms": 1790960665511.48,
+      "first_API": {
+        "generation": 39,
+        "request_id": "quality134-group4-r1-39",
+        "engine": "reference",
+        "start_ms": 1790960665479.31,
+        "return_ms": 1790960665511.205,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960665479.3252,
+        "session_run_end_ms": 1790960665511.185
+      },
+      "first_API_await_ms": 31.85986328125,
+      "hand_NN": 10,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 0,
+      "discarded_returns": 0,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "candidate",
+        "cancel": false,
+        "game_id": "input4-rep2-B",
+        "turn": 24,
+        "physical_side": 1,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-40",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          -1,
+          0
+        ]
+      },
+      "adopted_stats": {
+        "sequence": 16,
+        "action": 54,
+        "begin_ms": 1790960666270.12,
+        "validation_end_ms": 1790960666270.25,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 11,
+        "completed_backup": 16,
+        "rootN": 16,
+        "loop_simulations": 15,
+        "edge_sum": 15
+      },
+      "public_ms": 410.565185546875,
+      "planned_ms": 411.0,
+      "timer_ms": 410.4951171875,
+      "ACK_wall_ms": 438.72021484375,
+      "public_before_ACK": true,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-39",
+        "public_ms": 1790960665875,
+        "ACK_known_at_next_input": true,
+        "ACK_ms": 1790960665870.105,
+        "observed_at_ms": 1790960665875.1099,
+        "final_ACK_ms": 1790960665870.105,
+        "input_before_old_ACK": false,
+        "residual_overlap_wall_ms": 0
+      },
+      "own_wait": {
+        "input_available_ms": 1790960665875.0999,
+        "start_ms": 1790960665875.0999,
+        "end_ms": 1790960665875.105,
+        "wait_ms": 0.005126953125,
+        "ready_t0_ms": 1790960665875.1099
+      },
+      "first_CP_begin_worker_ms": 1790960665917.05,
+      "first_CP_validation_worker_ms": 1790960665921.58,
+      "first_API": {
+        "generation": 40,
+        "request_id": "quality134-group4-r1-40",
+        "engine": "candidate",
+        "start_ms": 1790960665882.345,
+        "return_ms": 1790960665916.94,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960665882.355,
+        "session_run_end_ms": 1790960665916.9
+      },
+      "first_API_await_ms": 34.544921875,
+      "hand_NN": 12,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 1,
+      "discarded_returns": 1,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "reference",
+        "cancel": false,
+        "game_id": "input4-rep2-B",
+        "turn": 25,
+        "physical_side": 2,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-41",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          1,
+          0
+        ]
+      },
+      "adopted_stats": {
+        "sequence": 44,
+        "action": 33,
+        "begin_ms": 1790960666679.195,
+        "validation_end_ms": 1790960666679.375,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 9,
+        "completed_backup": 44,
+        "rootN": 44,
+        "loop_simulations": 43,
+        "edge_sum": 43
+      },
+      "public_ms": 413.25,
+      "planned_ms": 411.0,
+      "timer_ms": 413.179931640625,
+      "ACK_wall_ms": 437.68505859375,
+      "public_before_ACK": true,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-40",
+        "public_ms": 1790960666285.675,
+        "ACK_known_at_next_input": false,
+        "ACK_ms": null,
+        "observed_at_ms": 1790960666285.795,
+        "final_ACK_ms": 1790960666313.83,
+        "input_before_old_ACK": true,
+        "residual_overlap_wall_ms": 28.03515625
+      },
+      "own_wait": {
+        "input_available_ms": 1790960666285.79,
+        "start_ms": 1790960666285.79,
+        "end_ms": 1790960666285.79,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790960666285.795
+      },
+      "first_CP_begin_worker_ms": 1790960666343.975,
+      "first_CP_validation_worker_ms": 1790960666344.1401,
+      "first_API": {
+        "generation": 41,
+        "request_id": "quality134-group4-r1-41",
+        "engine": "reference",
+        "start_ms": 1790960666302.7952,
+        "return_ms": 1790960666343.86,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960666302.81,
+        "session_run_end_ms": 1790960666343.8352
+      },
+      "first_API_await_ms": 41.025146484375,
+      "hand_NN": 10,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 1,
+      "discarded_returns": 1,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "candidate",
+        "cancel": false,
+        "game_id": "input4-rep2-B",
+        "turn": 26,
+        "physical_side": 1,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-42",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "adopted_stats": {
+        "sequence": 51,
+        "action": 63,
+        "begin_ms": 1790960667100.335,
+        "validation_end_ms": 1790960667100.47,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 8,
+        "completed_backup": 51,
+        "rootN": 51,
+        "loop_simulations": 50,
+        "edge_sum": 50
+      },
+      "public_ms": 410.58984375,
+      "planned_ms": 411.0,
+      "timer_ms": 410.534912109375,
+      "ACK_wall_ms": 405.594970703125,
+      "public_before_ACK": false,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-41",
+        "public_ms": 1790960666699.045,
+        "ACK_known_at_next_input": false,
+        "ACK_ms": null,
+        "observed_at_ms": 1790960666699.125,
+        "final_ACK_ms": 1790960666723.48,
+        "input_before_old_ACK": true,
+        "residual_overlap_wall_ms": 24.35498046875
+      },
+      "own_wait": {
+        "input_available_ms": 1790960666699.115,
+        "start_ms": 1790960666699.115,
+        "end_ms": 1790960666699.1199,
+        "wait_ms": 0.0048828125,
+        "ready_t0_ms": 1790960666699.125
+      },
+      "first_CP_begin_worker_ms": 1790960666745.92,
+      "first_CP_validation_worker_ms": 1790960666746.065,
+      "first_API": {
+        "generation": 42,
+        "request_id": "quality134-group4-r1-42",
+        "engine": "candidate",
+        "start_ms": 1790960666716.06,
+        "return_ms": 1790960666745.825,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960666716.07,
+        "session_run_end_ms": 1790960666745.795
+      },
+      "first_API_await_ms": 29.724853515625,
+      "hand_NN": 8,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 0,
+      "discarded_returns": 0,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "reference",
+        "cancel": false,
+        "game_id": "input4-rep2-B",
+        "turn": 27,
+        "physical_side": 2,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-43",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          -1
+        ]
+      },
+      "adopted_stats": {
+        "sequence": 50,
+        "action": 24,
+        "begin_ms": 1790960667511.375,
+        "validation_end_ms": 1790960667511.7102,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 7,
+        "completed_backup": 50,
+        "rootN": 50,
+        "loop_simulations": 49,
+        "edge_sum": 49
+      },
+      "public_ms": 412.074951171875,
+      "planned_ms": 411.0,
+      "timer_ms": 412.02001953125,
+      "ACK_wall_ms": 407.159912109375,
+      "public_before_ACK": false,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-42",
+        "public_ms": 1790960667109.7148,
+        "ACK_known_at_next_input": true,
+        "ACK_ms": 1790960667104.72,
+        "observed_at_ms": 1790960667109.855,
+        "final_ACK_ms": 1790960667104.72,
+        "input_before_old_ACK": false,
+        "residual_overlap_wall_ms": 0
+      },
+      "own_wait": {
+        "input_available_ms": 1790960667109.8499,
+        "start_ms": 1790960667109.8499,
+        "end_ms": 1790960667109.8499,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790960667109.855
+      },
+      "first_CP_begin_worker_ms": 1790960667138.2651,
+      "first_CP_validation_worker_ms": 1790960667138.4402,
+      "first_API": {
+        "generation": 43,
+        "request_id": "quality134-group4-r1-43",
+        "engine": "reference",
+        "start_ms": 1790960667124.3252,
+        "return_ms": 1790960667138.155,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960667124.3352,
+        "session_run_end_ms": 1790960667138.125
+      },
+      "first_API_await_ms": 13.789794921875,
+      "hand_NN": 7,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 0,
+      "discarded_returns": 0,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    },
+    {
+      "spec": {
+        "engine": "candidate",
+        "cancel": false,
+        "game_id": "input4-rep2-B",
+        "turn": 28,
+        "physical_side": 1,
+        "policy": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+        "numeric_selected": false
+      },
+      "request_id": "quality134-group4-r1-44",
+      "classification": "completed_legal",
+      "causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "adopted_stats": {
+        "sequence": 72,
+        "action": 72,
+        "begin_ms": 1790960667921.88,
+        "validation_end_ms": 1790960667922.005,
+        "policy": "fixedSigma",
+        "cp_NN_calls": 1,
+        "completed_backup": 72,
+        "rootN": 72,
+        "loop_simulations": 71,
+        "edge_sum": 71
+      },
+      "public_ms": 410.594970703125,
+      "planned_ms": 411.0,
+      "timer_ms": 410.53515625,
+      "ACK_wall_ms": 404.22998046875,
+      "public_before_ACK": false,
+      "opposite_previous": {
+        "request_id": "quality134-group4-r1-43",
+        "public_ms": 1790960667521.93,
+        "ACK_known_at_next_input": true,
+        "ACK_ms": 1790960667517.015,
+        "observed_at_ms": 1790960667522.005,
+        "final_ACK_ms": 1790960667517.015,
+        "input_before_old_ACK": false,
+        "residual_overlap_wall_ms": 0
+      },
+      "own_wait": {
+        "input_available_ms": 1790960667521.9849,
+        "start_ms": 1790960667521.9849,
+        "end_ms": 1790960667521.9849,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790960667522.005
+      },
+      "first_CP_begin_worker_ms": 1790960667582.575,
+      "first_CP_validation_worker_ms": 1790960667582.73,
+      "first_API": {
+        "generation": 44,
+        "request_id": "quality134-group4-r1-44",
+        "engine": "candidate",
+        "start_ms": 1790960667536.495,
+        "return_ms": 1790960667574.82,
+        "result_discarded": false,
+        "session_run_start_ms": 1790960667536.51,
+        "session_run_end_ms": 1790960667574.8
+      },
+      "first_API_await_ms": 38.2900390625,
+      "hand_NN": 1,
+      "post_public_newNN_definite": 0,
+      "post_cutoff_newNN_definite": 0,
+      "NN_after_public": 0,
+      "discarded_returns": 0,
+      "worker_stop_class": "upper_le_D",
+      "postpublic_immutable": true,
+      "numeric_gate": {
+        "selected": false,
+        "missing_not_zero": true
+      },
+      "root_internal_prepare_kernelCPU_exactstore_missing": true
+    }
+  ],
+  "clock_start": {
+    "candidate": {
+      "lo_ms": -0.110009765625,
+      "hi_ms": 0.11513671875,
+      "mid_ms": 0.0025634765625,
+      "error_ms": 0.2125732421875,
+      "measured": true,
+      "samples": [
+        {
+          "start_ms": 1790960648755.155,
+          "end_ms": 1790960648799.275,
+          "worker_ms": 1790960648758.975
+        },
+        {
+          "start_ms": 1790960648799.285,
+          "end_ms": 1790960648801.51,
+          "worker_ms": 1790960648800.635
+        },
+        {
+          "start_ms": 1790960648801.51,
+          "end_ms": 1790960648801.605,
+          "worker_ms": 1790960648801.58
+        },
+        {
+          "start_ms": 1790960648801.605,
+          "end_ms": 1790960648801.64,
+          "worker_ms": 1790960648801.63
+        },
+        {
+          "start_ms": 1790960648801.64,
+          "end_ms": 1790960648801.67,
+          "worker_ms": 1790960648801.655
+        },
+        {
+          "start_ms": 1790960648801.67,
+          "end_ms": 1790960648801.825,
+          "worker_ms": 1790960648801.685
+        },
+        {
+          "start_ms": 1790960648801.825,
+          "end_ms": 1790960648801.895,
+          "worker_ms": 1790960648801.85
+        },
+        {
+          "start_ms": 1790960648801.895,
+          "end_ms": 1790960648801.95,
+          "worker_ms": 1790960648801.935
+        }
+      ]
+    },
+    "reference": {
+      "lo_ms": -0.109765625,
+      "hi_ms": 0.105126953125,
+      "mid_ms": -0.0023193359375,
+      "error_ms": 0.2074462890625,
+      "measured": true,
+      "samples": [
+        {
+          "start_ms": 1790960648802,
+          "end_ms": 1790960648802.08,
+          "worker_ms": 1790960648802.0552
+        },
+        {
+          "start_ms": 1790960648802.08,
+          "end_ms": 1790960648802.1199,
+          "worker_ms": 1790960648802.11
+        },
+        {
+          "start_ms": 1790960648802.1199,
+          "end_ms": 1790960648802.15,
+          "worker_ms": 1790960648802.1401
+        },
+        {
+          "start_ms": 1790960648802.15,
+          "end_ms": 1790960648802.205,
+          "worker_ms": 1790960648802.165
+        },
+        {
+          "start_ms": 1790960648802.205,
+          "end_ms": 1790960648802.23,
+          "worker_ms": 1790960648802.22
+        },
+        {
+          "start_ms": 1790960648802.23,
+          "end_ms": 1790960648802.2449,
+          "worker_ms": 1790960648802.235
+        },
+        {
+          "start_ms": 1790960648802.2449,
+          "end_ms": 1790960648802.31,
+          "worker_ms": 1790960648802.26
+        },
+        {
+          "start_ms": 1790960648802.31,
+          "end_ms": 1790960648809.2349,
+          "worker_ms": 1790960648805.2102
+        }
+      ]
+    }
+  },
+  "clock_end": {
+    "candidate": {
+      "lo_ms": -0.1048828125,
+      "hi_ms": 0.1048828125,
+      "mid_ms": 0,
+      "error_ms": 0.2048828125,
+      "measured": true,
+      "samples": [
+        {
+          "start_ms": 1790960669137.78,
+          "end_ms": 1790960669138.075,
+          "worker_ms": 1790960669138.02
+        },
+        {
+          "start_ms": 1790960669138.08,
+          "end_ms": 1790960669138.105,
+          "worker_ms": 1790960669138.095
+        },
+        {
+          "start_ms": 1790960669138.105,
+          "end_ms": 1790960669138.115,
+          "worker_ms": 1790960669138.11
+        },
+        {
+          "start_ms": 1790960669138.115,
+          "end_ms": 1790960669138.135,
+          "worker_ms": 1790960669138.125
+        },
+        {
+          "start_ms": 1790960669138.14,
+          "end_ms": 1790960669138.155,
+          "worker_ms": 1790960669138.145
+        },
+        {
+          "start_ms": 1790960669138.155,
+          "end_ms": 1790960669138.165,
+          "worker_ms": 1790960669138.16
+        },
+        {
+          "start_ms": 1790960669138.165,
+          "end_ms": 1790960669138.18,
+          "worker_ms": 1790960669138.17
+        },
+        {
+          "start_ms": 1790960669138.18,
+          "end_ms": 1790960669138.195,
+          "worker_ms": 1790960669138.185
+        }
+      ]
+    },
+    "reference": {
+      "lo_ms": -0.1,
+      "hi_ms": 0.1,
+      "mid_ms": 0,
+      "error_ms": 0.2,
+      "measured": true,
+      "samples": [
+        {
+          "start_ms": 1790960669138.2,
+          "end_ms": 1790960669138.25,
+          "worker_ms": 1790960669138.235
+        },
+        {
+          "start_ms": 1790960669138.25,
+          "end_ms": 1790960669138.27,
+          "worker_ms": 1790960669138.26
+        },
+        {
+          "start_ms": 1790960669138.27,
+          "end_ms": 1790960669138.28,
+          "worker_ms": 1790960669138.2751
+        },
+        {
+          "start_ms": 1790960669138.28,
+          "end_ms": 1790960669138.29,
+          "worker_ms": 1790960669138.29
+        },
+        {
+          "start_ms": 1790960669138.295,
+          "end_ms": 1790960669138.31,
+          "worker_ms": 1790960669138.3
+        },
+        {
+          "start_ms": 1790960669138.31,
+          "end_ms": 1790960669138.33,
+          "worker_ms": 1790960669138.32
+        },
+        {
+          "start_ms": 1790960669138.33,
+          "end_ms": 1790960669138.3398,
+          "worker_ms": 1790960669138.33
+        },
+        {
+          "start_ms": 1790960669138.3398,
+          "end_ms": 1790960669138.355,
+          "worker_ms": 1790960669138.35
+        }
+      ]
+    }
+  },
+  "resources": {
+    "start": "2026-10-02T17:03:58.443908+00:00",
+    "end": "2026-10-02T17:04:30.643133+00:00",
+    "exit": 0,
+    "stop_reason": null,
+    "peak_group_plus_runner_RSS": 1678192640,
+    "peak_allocated_bytes": 34615296,
+    "assigned_CPU": 2,
+    "affinity_violations": []
+  },
+  "primary": null,
+  "secondary": [],
+  "all_attempts_preserved": true,
+  "score_for_forced_side_not_candidate_AI": true,
+  "formalNI_actualgo": false
+}
