@@ -232,7 +232,11 @@ async function chooseBrowser(spec, inputState, prefix, reference, config) {
   const workerClock=slot.clock;
   const explorationWorker=slot.worker;
   if(Date.now()>=Date.parse(config.processing_deadline))throw Error('PROCESSING_DEADLINE');
+  const previousOpposite=collectedRows.slice().reverse().find(row=>row.spec.engine!==spec.engine);
   const t0=epochMain();
+  const oppositeAtInput=previousOpposite?{request_id:previousOpposite.identity.request_id,
+    public_ms:previousOpposite.response.stamp_ms,ACK_known_at_next_input:!!previousOpposite.stop,
+    ACK_ms:previousOpposite.stop?.main_received_ms??null,observed_at_ms:t0}:null;
   const state=inputState ?? fromPrefix(prefix);
   const generation=++generationCounter;
   const requestId=config.run_id+'-'+generation;
@@ -304,7 +308,7 @@ async function chooseBrowser(spec, inputState, prefix, reference, config) {
   collectedRows.push(row); // Keep public even if the later ACK or helper fails.
   row.player_engine=spec.engine;
   row.own_previous_wait={start_ms:ownWaitStart,end_ms:ownWaitEnd,wait_ms:ownWaitEnd-ownWaitStart};
-  row.opposite_previous=lastTurnForOther(spec.engine);
+  row.opposite_previous=oppositeAtInput;
   deferredChecks.set(requestId,{state,reference,slot});
   const cleanup=(async()=>{
     const stop=await stopPromise;
