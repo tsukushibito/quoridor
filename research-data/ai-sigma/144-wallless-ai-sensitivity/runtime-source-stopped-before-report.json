@@ -1,0 +1,778 @@
+{
+  "issue": "quoridor-4lc.144",
+  "UTC": "2026-10-02T19:57:47.945896+00:00",
+  "scientific_source_Git": "1d96dd5",
+  "original_env_Git": "to-be-source-commit",
+  "env_label_not_Git_binding": true,
+  "source_before_after": {
+    "tools/ai-sigma-wallless-ai-sensitivity/input.js": "d0ac8e4c27870138353ea1d8603058ea5637c790ab4515a430ef8753b06f2ae9",
+    "tools/ai-sigma-wallless-ai-sensitivity/diagnose.cjs": "0c0dca16a07d1f72f74ddd85960388e14495d11803f8118d2d825838b1127556",
+    "tools/ai-sigma-wallless-ai-sensitivity/main.js": "8005f8cfc40574b6ab0894f6a09771bc4466088e54e045d9ac78a8eae2a86a1a",
+    "tools/ai-sigma-wallless-ai-sensitivity/static.cjs": "bd7f1f74f2302f61daf0836b2e7b6784049655a1a23d65142a913e1c1f24cc39",
+    "tools/ai-sigma-wallless-ai-sensitivity/runner.py": "4774497213c377d07e55f804d057d598d4c20859e8a601130de773aa97196e8b",
+    "tools/ai-sigma-wallless-ai-sensitivity/admission.py": "84a70e70b9324e048e16b120d51bb0a9523674bd920b8cb33f0377d09f4fcfcb",
+    "tools/ai-sigma-wallless-ai-sensitivity/browser.cjs": "cc60cb4afacf3721a61070bf4fbe89f5deb45c0fdd3edb920c198ed6fbccae07",
+    "tools/ai-sigma-wallless-ai-sensitivity/worker.js": "b8ddd4aee24792144fb4333735ac49511755be07dc412c75d8ebd4a520a7ddf6",
+    "tools/ai-sigma-wallless-ai-sensitivity/adapters.cjs": "7014b6a060a97078035deef9b203088ba3360ed1f69c6fdf9e919c0a1b3749c0",
+    "tools/ai-sigma-deep-node-comparison/deep-worker.js": "a529af8a552baaaf4f643a96cbe7ad3ba256443cf2a8aea216220d70fcb84bab",
+    "tools/ai-sigma-player-workers/player-worker.js": "fd5f5b72a836164133b22f718d58ef31d2d4b0f8a4887070e1ac9346112de5e8",
+    "tools/ai-sigma-actual-boundary-repair/reference-core.js": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05",
+    "tools/ai-sigma-actual-boundary-repair/reference-control-run.js": "87dbd43b34f23793c36806ad41a09fda723b5f7b7b10745c0df8b055e3039a0c",
+    ".artifacts/ai-sigma/runs/SIGMA-ORT-SEARCH/final.wasm": "1f54d0b8f0c6d3d7d51935886ed506e44376a2052506be62ca7a726c85a78a01",
+    "models/experiments/ai-sigma/reference/sigma-pcr250/best.onnx": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d"
+  },
+  "source_before_after_exact": true,
+  "scientific_source_write_stopped": true,
+  "finalization_helper_active_separate": true,
+  "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+  "jobs": [
+    {
+      "name": "wallless144-static-r2",
+      "phase": "protocol",
+      "start": "2026-10-02T19:53:39.939895+00:00",
+      "end": "2026-10-02T19:53:40.125794+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "peak_group_plus_runner_RSS": 77471744,
+      "peak_allocated_bytes": 577536,
+      "remaining": [],
+      "unknown_adopted": [],
+      "kernel_boundary": {
+        "valid": true,
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "launcher": {
+          "pid": 2802510,
+          "ppid": 2802502,
+          "pgid": 2802502,
+          "start_ticks": 22373944,
+          "state": "R",
+          "rss": 17494016,
+          "utime_ticks": 1,
+          "stime_ticks": 0
+        },
+        "root": {
+          "pid": 2802515,
+          "ppid": 2802510,
+          "pgid": 2802515,
+          "start_ticks": 22373947,
+          "state": "R",
+          "rss": 19578880,
+          "utime_ticks": 0,
+          "stime_ticks": 0
+        },
+        "initial_children": [],
+        "spawn_count": 1,
+        "single_thread_initial": true,
+        "sole_explicit_root": true
+      }
+    },
+    {
+      "name": "wallless144-static-r1",
+      "phase": "protocol",
+      "start": "2026-10-02T19:52:11.534709+00:00",
+      "end": "2026-10-02T19:52:11.633996+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "peak_group_plus_runner_RSS": 68632576,
+      "peak_allocated_bytes": 532480,
+      "remaining": [],
+      "unknown_adopted": [],
+      "kernel_boundary": {
+        "valid": true,
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "launcher": {
+          "pid": 2800721,
+          "ppid": 2009,
+          "pgid": 2800721,
+          "start_ticks": 22365099,
+          "state": "R",
+          "rss": 17481728,
+          "utime_ticks": 1,
+          "stime_ticks": 1
+        },
+        "root": {
+          "pid": 2800726,
+          "ppid": 2800721,
+          "pgid": 2800726,
+          "start_ticks": 22365104,
+          "state": "R",
+          "rss": 21237760,
+          "utime_ticks": 0,
+          "stime_ticks": 0
+        },
+        "initial_children": [],
+        "spawn_count": 1,
+        "single_thread_initial": true,
+        "sole_explicit_root": true
+      }
+    },
+    {
+      "name": "wallless144-ai-r2",
+      "phase": "ai",
+      "start": "2026-10-02T19:56:38.224695+00:00",
+      "end": "2026-10-02T19:56:50.820576+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "peak_group_plus_runner_RSS": 1619980288,
+      "peak_allocated_bytes": 2535424,
+      "remaining": [],
+      "unknown_adopted": [],
+      "kernel_boundary": {
+        "valid": true,
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "launcher": {
+          "pid": 2804894,
+          "ppid": 2009,
+          "pgid": 2804894,
+          "start_ticks": 22391635,
+          "state": "R",
+          "rss": 17670144,
+          "utime_ticks": 2,
+          "stime_ticks": 1
+        },
+        "root": {
+          "pid": 2804950,
+          "ppid": 2804894,
+          "pgid": 2804950,
+          "start_ticks": 22391781,
+          "state": "R",
+          "rss": 18710528,
+          "utime_ticks": 0,
+          "stime_ticks": 0
+        },
+        "initial_children": [],
+        "spawn_count": 1,
+        "single_thread_initial": true,
+        "sole_explicit_root": true
+      }
+    }
+  ],
+  "identities": [
+    {
+      "pid": 2802515,
+      "start_ticks": 22373947
+    },
+    {
+      "pid": 2802510,
+      "start_ticks": 22373944
+    },
+    {
+      "pid": 2800726,
+      "start_ticks": 22365104
+    },
+    {
+      "pid": 2800721,
+      "start_ticks": 22365099
+    },
+    {
+      "pid": 2804950,
+      "start_ticks": 22391781
+    },
+    {
+      "pid": 2804962,
+      "start_ticks": 22391788
+    },
+    {
+      "pid": 2804958,
+      "start_ticks": 22391787
+    },
+    {
+      "pid": 2804964,
+      "start_ticks": 22391807
+    },
+    {
+      "pid": 2804974,
+      "start_ticks": 22391872
+    },
+    {
+      "pid": 2804979,
+      "start_ticks": 22391878
+    },
+    {
+      "pid": 2804975,
+      "start_ticks": 22391878
+    },
+    {
+      "pid": 2804981,
+      "start_ticks": 22391880
+    },
+    {
+      "pid": 2804987,
+      "start_ticks": 22391883
+    },
+    {
+      "pid": 2804992,
+      "start_ticks": 22391943
+    },
+    {
+      "pid": 2805005,
+      "start_ticks": 22391994
+    },
+    {
+      "pid": 2805006,
+      "start_ticks": 22392013
+    },
+    {
+      "pid": 2805007,
+      "start_ticks": 22392014
+    },
+    {
+      "pid": 2805009,
+      "start_ticks": 22392015
+    },
+    {
+      "pid": 2805014,
+      "start_ticks": 22392016
+    },
+    {
+      "pid": 2805016,
+      "start_ticks": 22392017
+    },
+    {
+      "pid": 2805066,
+      "start_ticks": 22392039
+    },
+    {
+      "pid": 2805070,
+      "start_ticks": 22392040
+    },
+    {
+      "pid": 2805084,
+      "start_ticks": 22392048
+    },
+    {
+      "pid": 2805099,
+      "start_ticks": 22392054
+    },
+    {
+      "pid": 2805106,
+      "start_ticks": 22392056
+    },
+    {
+      "pid": 2805122,
+      "start_ticks": 22392077
+    },
+    {
+      "pid": 2805135,
+      "start_ticks": 22392085
+    },
+    {
+      "pid": 2805151,
+      "start_ticks": 22392116
+    },
+    {
+      "pid": 2805166,
+      "start_ticks": 22392139
+    },
+    {
+      "pid": 2805180,
+      "start_ticks": 22392156
+    },
+    {
+      "pid": 2805191,
+      "start_ticks": 22392283
+    },
+    {
+      "pid": 2805194,
+      "start_ticks": 22392288
+    },
+    {
+      "pid": 2805205,
+      "start_ticks": 22392289
+    },
+    {
+      "pid": 2805206,
+      "start_ticks": 22392289
+    },
+    {
+      "pid": 2805242,
+      "start_ticks": 22392396
+    },
+    {
+      "pid": 2805248,
+      "start_ticks": 22392417
+    },
+    {
+      "pid": 2805262,
+      "start_ticks": 22392595
+    },
+    {
+      "pid": 2805310,
+      "start_ticks": 22392691
+    },
+    {
+      "pid": 2805316,
+      "start_ticks": 22392694
+    },
+    {
+      "pid": 2805328,
+      "start_ticks": 22392703
+    },
+    {
+      "pid": 2805339,
+      "start_ticks": 22392829
+    },
+    {
+      "pid": 2805341,
+      "start_ticks": 22392844
+    },
+    {
+      "pid": 2805354,
+      "start_ticks": 22392845
+    },
+    {
+      "pid": 2805514,
+      "start_ticks": 22392892
+    },
+    {
+      "pid": 2805526,
+      "start_ticks": 22392903
+    },
+    {
+      "pid": 2804894,
+      "start_ticks": 22391635
+    }
+  ],
+  "current_same_identity": [],
+  "Model2_drop": {
+    "players": [
+      {
+        "kind": "dropped",
+        "handles": 0,
+        "activeNN": 0,
+        "at_ms": 1790971010231.2148,
+        "producer_post_begin_ms": 1790971010231.22,
+        "worker_engine": "candidate"
+      },
+      {
+        "kind": "dropped",
+        "handles": 0,
+        "activeNN": 0,
+        "at_ms": 1790971010231.935,
+        "producer_post_begin_ms": 1790971010231.935,
+        "worker_engine": "reference"
+      }
+    ],
+    "handles": 0,
+    "activeNN": 0
+  },
+  "searches_completed": 6,
+  "all_searches_zero": [
+    {
+      "handles": 0,
+      "activeNN": 0,
+      "active": false
+    },
+    {
+      "handles": 0,
+      "activeNN": 0,
+      "active": false
+    },
+    {
+      "handles": 0,
+      "activeNN": 0,
+      "active": false
+    },
+    {
+      "handles": 0,
+      "activeNN": 0,
+      "active": false
+    },
+    {
+      "handles": 0,
+      "activeNN": 0,
+      "active": false
+    },
+    {
+      "handles": 0,
+      "activeNN": 0,
+      "active": false
+    }
+  ],
+  "main_timers": {
+    "main_timers": 0,
+    "pending_messages": []
+  },
+  "monitor_stop": {
+    "UTC": "2026-10-02T19:56:50.449Z",
+    "state": "READY",
+    "failure": null,
+    "deadlineUTC": "2026-10-02T20:30:00+00:00",
+    "subjectIssue": "quoridor-4lc.144",
+    "rows": [
+      {
+        "pid": 2804958,
+        "starttick": 22391787,
+        "PPID": 2804950,
+        "ppid": 2804950,
+        "state": "S",
+        "kind": "owned_observer_child",
+        "parent": {
+          "pid": 2804950,
+          "starttick": 22391781,
+          "PPID": 2804894,
+          "ppid": 2804894,
+          "state": "R"
+        },
+        "startUTC": "2026-10-02T19:56:38.298Z",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      {
+        "id": "quoridor-4lc",
+        "PID": 2804958,
+        "startUTC": "2026-10-02T19:56:38.298Z",
+        "endUTC": "2026-10-02T19:56:39.202Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      },
+      {
+        "pid": 2804975,
+        "starttick": 22391878,
+        "PPID": 2804950,
+        "ppid": 2804950,
+        "state": "R",
+        "kind": "owned_observer_child",
+        "parent": {
+          "pid": 2804950,
+          "starttick": 22391781,
+          "PPID": 2804894,
+          "ppid": 2804894,
+          "state": "R"
+        },
+        "startUTC": "2026-10-02T19:56:39.202Z",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      {
+        "id": "quoridor-4lc.144",
+        "PID": 2804975,
+        "startUTC": "2026-10-02T19:56:39.202Z",
+        "endUTC": "2026-10-02T19:56:39.964Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      },
+      {
+        "pid": 2805099,
+        "starttick": 22392054,
+        "PPID": 2804950,
+        "ppid": 2804950,
+        "state": "R",
+        "kind": "owned_observer_child",
+        "parent": {
+          "pid": 2804950,
+          "starttick": 22391781,
+          "PPID": 2804894,
+          "ppid": 2804894,
+          "state": "R"
+        },
+        "startUTC": "2026-10-02T19:56:40.964Z",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      {
+        "id": "quoridor-4lc",
+        "PID": 2805099,
+        "startUTC": "2026-10-02T19:56:40.964Z",
+        "endUTC": "2026-10-02T19:56:43.303Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      },
+      {
+        "pid": 2805194,
+        "starttick": 22392288,
+        "PPID": 2804950,
+        "ppid": 2804950,
+        "state": "R",
+        "kind": "owned_observer_child",
+        "parent": {
+          "pid": 2804950,
+          "starttick": 22391781,
+          "PPID": 2804894,
+          "ppid": 2804894,
+          "state": "R"
+        },
+        "startUTC": "2026-10-02T19:56:43.303Z",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      {
+        "id": "quoridor-4lc.144",
+        "PID": 2805194,
+        "startUTC": "2026-10-02T19:56:43.303Z",
+        "endUTC": "2026-10-02T19:56:46.455Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      },
+      {
+        "pid": 2805310,
+        "starttick": 22392691,
+        "PPID": 2804950,
+        "ppid": 2804950,
+        "state": "R",
+        "kind": "owned_observer_child",
+        "parent": {
+          "pid": 2804950,
+          "starttick": 22391781,
+          "PPID": 2804894,
+          "ppid": 2804894,
+          "state": "R"
+        },
+        "startUTC": "2026-10-02T19:56:47.337Z",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      {
+        "id": "quoridor-4lc",
+        "PID": 2805310,
+        "startUTC": "2026-10-02T19:56:47.337Z",
+        "endUTC": "2026-10-02T19:56:48.856Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      },
+      {
+        "pid": 2805341,
+        "starttick": 22392844,
+        "PPID": 2804950,
+        "ppid": 2804950,
+        "state": "S",
+        "kind": "owned_observer_child",
+        "parent": {
+          "pid": 2804950,
+          "starttick": 22391781,
+          "PPID": 2804894,
+          "ppid": 2804894,
+          "state": "R"
+        },
+        "startUTC": "2026-10-02T19:56:48.857Z",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      {
+        "id": "quoridor-4lc.144",
+        "PID": 2805341,
+        "startUTC": "2026-10-02T19:56:48.857Z",
+        "endUTC": "2026-10-02T19:56:50.448Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      }
+    ],
+    "pending_children": [],
+    "clock_cost_not_subtracted": true,
+    "all_owned_read_callbacks_waited": true,
+    "signal_unknown": 0,
+    "active_monitor_timer": false
+  },
+  "innercontrolled": {
+    "remaining_pids": 0,
+    "tracked": [
+      {
+        "pid": 2804958,
+        "starttick": 22391787
+      },
+      {
+        "pid": 2804962,
+        "starttick": 22391788
+      },
+      {
+        "pid": 2804964,
+        "starttick": 22391807
+      },
+      {
+        "pid": 2804974,
+        "starttick": 22391872
+      },
+      {
+        "pid": 2804975,
+        "starttick": 22391878
+      },
+      {
+        "pid": 2804979,
+        "starttick": 22391878
+      },
+      {
+        "pid": 2804981,
+        "starttick": 22391880
+      },
+      {
+        "pid": 2804987,
+        "starttick": 22391883
+      },
+      {
+        "pid": 2804992,
+        "starttick": 22391943
+      },
+      {
+        "pid": 2805005,
+        "starttick": 22391994
+      },
+      {
+        "pid": 2805006,
+        "starttick": 22392013
+      },
+      {
+        "pid": 2805014,
+        "starttick": 22392016
+      },
+      {
+        "pid": 2805016,
+        "starttick": 22392017
+      },
+      {
+        "pid": 2805007,
+        "starttick": 22392014
+      },
+      {
+        "pid": 2805009,
+        "starttick": 22392015
+      },
+      {
+        "pid": 2805066,
+        "starttick": 22392039
+      },
+      {
+        "pid": 2805070,
+        "starttick": 22392040
+      },
+      {
+        "pid": 2805084,
+        "starttick": 22392048
+      },
+      {
+        "pid": 2805099,
+        "starttick": 22392054
+      },
+      {
+        "pid": 2805106,
+        "starttick": 22392056
+      },
+      {
+        "pid": 2805122,
+        "starttick": 22392077
+      },
+      {
+        "pid": 2805135,
+        "starttick": 22392085
+      },
+      {
+        "pid": 2805151,
+        "starttick": 22392116
+      },
+      {
+        "pid": 2805166,
+        "starttick": 22392139
+      },
+      {
+        "pid": 2805180,
+        "starttick": 22392156
+      },
+      {
+        "pid": 2805191,
+        "starttick": 22392283
+      },
+      {
+        "pid": 2805194,
+        "starttick": 22392288
+      },
+      {
+        "pid": 2805205,
+        "starttick": 22392289
+      },
+      {
+        "pid": 2805206,
+        "starttick": 22392289
+      },
+      {
+        "pid": 2805207,
+        "starttick": 22392289
+      },
+      {
+        "pid": 2805242,
+        "starttick": 22392396
+      },
+      {
+        "pid": 2805248,
+        "starttick": 22392417
+      },
+      {
+        "pid": 2805262,
+        "starttick": 22392595
+      },
+      {
+        "pid": 2805310,
+        "starttick": 22392691
+      },
+      {
+        "pid": 2805316,
+        "starttick": 22392694
+      },
+      {
+        "pid": 2805328,
+        "starttick": 22392703
+      },
+      {
+        "pid": 2805339,
+        "starttick": 22392829
+      },
+      {
+        "pid": 2805341,
+        "starttick": 22392844
+      },
+      {
+        "pid": 2805354,
+        "starttick": 22392845
+      },
+      {
+        "pid": 2805514,
+        "starttick": 22392892
+      },
+      {
+        "pid": 2805526,
+        "starttick": 22392903
+      },
+      {
+        "pid": 2805541,
+        "starttick": 22393000
+      }
+    ],
+    "forced": true,
+    "graceful_error": null,
+    "waited": true,
+    "zombie_identities_absent": true,
+    "registration_ack": true,
+    "registered": 19
+  },
+  "outer_ownedwait_remainingunknown0": true,
+  "current_absence_not_natural_fullperiod_allhost": true,
+  "before_body": true
+}

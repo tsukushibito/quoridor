@@ -1,0 +1,554 @@
+{
+  "issue": "quoridor-4lc.144",
+  "scientific_source_Git": "1d96dd5",
+  "all_attempts": {
+    "planned": 6,
+    "started": 6,
+    "completed": 6,
+    "unstarted": 0,
+    "certifiedwin": 6,
+    "certifiedloss": 0,
+    "unscored": 0,
+    "fault": 0,
+    "unfinished": 0
+  },
+  "prelaunch_failures": [
+    {
+      "run": "wallless144-ai-r1",
+      "Chrome_spawn": 0,
+      "reason": "static command parsed as config"
+    }
+  ],
+  "rows": [
+    {
+      "request": "wallless144-ai-r2-1",
+      "spec": {
+        "fixture_id": "P1-race",
+        "engine": "candidate",
+        "K": 32,
+        "condition": "normal"
+      },
+      "Action": 67,
+      "action": {
+        "action": {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        "label_index": 0,
+        "rust_id": 67,
+        "canonical_NN_index": 0,
+        "side": 1,
+        "from": [
+          4,
+          6
+        ],
+        "to": [
+          4,
+          7
+        ]
+      },
+      "certified_interval": [
+        1,
+        1
+      ],
+      "winning_label_set": [
+        0,
+        2,
+        3
+      ],
+      "classification": "certifiedwin",
+      "payoff": 1,
+      "K": 32,
+      "rootN": 32,
+      "raw_loop_or_sim": 32,
+      "root_edge_sum": 31,
+      "NN_started": 5,
+      "NN_completed": 5,
+      "completed_without_NN": 27,
+      "terminal_count_source": "snapshot terminal visits",
+      "snapshot_terminal_visits": 27,
+      "max_depth": 3,
+      "cap": false,
+      "numeric_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 4,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "SAB_completed": {
+        "completed": true,
+        "sequence": 32,
+        "action": 67,
+        "value": 0.9858837723731995,
+        "visits": 32
+      },
+      "wrapper_ms": 261.7548828125,
+      "first_CP_ms": 1790971008741.27,
+      "ACK_ms": 1790971008957.665,
+      "API_await_ms": [
+        25.81494140625,
+        17.065185546875,
+        24.51513671875,
+        12.77490234375,
+        28.294921875
+      ],
+      "discard_explicit_counter": null
+    },
+    {
+      "request": "wallless144-ai-r2-2",
+      "spec": {
+        "fixture_id": "P1-race",
+        "engine": "candidate",
+        "K": 1,
+        "condition": "root1"
+      },
+      "Action": 67,
+      "action": {
+        "action": {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        "label_index": 0,
+        "rust_id": 67,
+        "canonical_NN_index": 0,
+        "side": 1,
+        "from": [
+          4,
+          6
+        ],
+        "to": [
+          4,
+          7
+        ]
+      },
+      "certified_interval": [
+        1,
+        1
+      ],
+      "winning_label_set": [
+        0,
+        2,
+        3
+      ],
+      "classification": "certifiedwin",
+      "payoff": 1,
+      "K": 1,
+      "rootN": 1,
+      "raw_loop_or_sim": 1,
+      "root_edge_sum": 0,
+      "NN_started": 1,
+      "NN_completed": 1,
+      "completed_without_NN": 0,
+      "terminal_count_source": "snapshot terminal visits",
+      "snapshot_terminal_visits": 0,
+      "max_depth": 0,
+      "cap": false,
+      "numeric_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 4,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "SAB_completed": {
+        "completed": true,
+        "sequence": 1,
+        "action": 67,
+        "value": 0.9858837723731995,
+        "visits": 1
+      },
+      "wrapper_ms": 32.47509765625,
+      "first_CP_ms": 1790971009006.875,
+      "ACK_ms": 1790971009007.28,
+      "API_await_ms": [
+        17.550048828125
+      ],
+      "discard_explicit_counter": null
+    },
+    {
+      "request": "wallless144-ai-r2-3",
+      "spec": {
+        "fixture_id": "P1-race",
+        "engine": "reference",
+        "K": 32,
+        "condition": "normal"
+      },
+      "Action": 67,
+      "action": {
+        "action": {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        "label_index": 0,
+        "rust_id": 67,
+        "canonical_NN_index": 0,
+        "side": 1,
+        "from": [
+          4,
+          6
+        ],
+        "to": [
+          4,
+          7
+        ]
+      },
+      "certified_interval": [
+        1,
+        1
+      ],
+      "winning_label_set": [
+        0,
+        2,
+        3
+      ],
+      "classification": "certifiedwin",
+      "payoff": 1,
+      "K": 32,
+      "rootN": 32,
+      "raw_loop_or_sim": 31,
+      "root_edge_sum": 31,
+      "NN_started": 7,
+      "NN_completed": 7,
+      "completed_without_NN": 25,
+      "terminal_count_source": "completed-minus-NN with unchanged uncapped reference branch; per-backup terminal state not saved",
+      "snapshot_terminal_visits": null,
+      "max_depth": null,
+      "cap": null,
+      "numeric_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 4,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "SAB_completed": {
+        "completed": true,
+        "sequence": 32,
+        "action": 67,
+        "value": 0.9858837723731995,
+        "visits": 32
+      },
+      "wrapper_ms": 294.6650390625,
+      "first_CP_ms": 1790971009067.48,
+      "ACK_ms": 1790971009321.915,
+      "API_await_ms": [
+        39.5048828125,
+        22.8701171875,
+        24.47998046875,
+        31.860107421875,
+        22.025146484375,
+        13.2451171875,
+        22.425048828125
+      ],
+      "discard_explicit_counter": null
+    },
+    {
+      "request": "wallless144-ai-r2-4",
+      "spec": {
+        "fixture_id": "P2-corridor",
+        "engine": "reference",
+        "K": 32,
+        "condition": "normal"
+      },
+      "Action": 13,
+      "action": {
+        "action": {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        "label_index": 1,
+        "rust_id": 13,
+        "canonical_NN_index": 0,
+        "side": 2,
+        "from": [
+          4,
+          2
+        ],
+        "to": [
+          4,
+          1
+        ]
+      },
+      "certified_interval": [
+        1,
+        1
+      ],
+      "winning_label_set": [
+        1,
+        2,
+        3
+      ],
+      "classification": "certifiedwin",
+      "payoff": 1,
+      "K": 32,
+      "rootN": 32,
+      "raw_loop_or_sim": 31,
+      "root_edge_sum": 31,
+      "NN_started": 6,
+      "NN_completed": 6,
+      "completed_without_NN": 26,
+      "terminal_count_source": "completed-minus-NN with unchanged uncapped reference branch; per-backup terminal state not saved",
+      "snapshot_terminal_visits": null,
+      "max_depth": null,
+      "cap": null,
+      "numeric_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 4,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": true,
+        "missing_public_cp": false
+      },
+      "SAB_completed": {
+        "completed": true,
+        "sequence": 32,
+        "action": 13,
+        "value": 0.9204335808753967,
+        "visits": 32
+      },
+      "wrapper_ms": 373.510009765625,
+      "first_CP_ms": 1790971009347.435,
+      "ACK_ms": 1790971009701.61,
+      "API_await_ms": [
+        19.25,
+        43.25,
+        33.614990234375,
+        35.419921875,
+        53.824951171875,
+        52.159912109375
+      ],
+      "discard_explicit_counter": null
+    },
+    {
+      "request": "wallless144-ai-r2-5",
+      "spec": {
+        "fixture_id": "P2-corridor",
+        "engine": "candidate",
+        "K": 1,
+        "condition": "root1"
+      },
+      "Action": 13,
+      "action": {
+        "action": {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        "label_index": 1,
+        "rust_id": 13,
+        "canonical_NN_index": 0,
+        "side": 2,
+        "from": [
+          4,
+          2
+        ],
+        "to": [
+          4,
+          1
+        ]
+      },
+      "certified_interval": [
+        1,
+        1
+      ],
+      "winning_label_set": [
+        1,
+        2,
+        3
+      ],
+      "classification": "certifiedwin",
+      "payoff": 1,
+      "K": 1,
+      "rootN": 1,
+      "raw_loop_or_sim": 1,
+      "root_edge_sum": 0,
+      "NN_started": 1,
+      "NN_completed": 1,
+      "completed_without_NN": 0,
+      "terminal_count_source": "snapshot terminal visits",
+      "snapshot_terminal_visits": 0,
+      "max_depth": 0,
+      "cap": false,
+      "numeric_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 4,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": true,
+        "missing_public_cp": false
+      },
+      "SAB_completed": {
+        "completed": true,
+        "sequence": 1,
+        "action": 13,
+        "value": 0.9204335808753967,
+        "visits": 1
+      },
+      "wrapper_ms": 46.97509765625,
+      "first_CP_ms": 1790971009769.0498,
+      "ACK_ms": 1790971009769.22,
+      "API_await_ms": [
+        31.77001953125
+      ],
+      "discard_explicit_counter": null
+    },
+    {
+      "request": "wallless144-ai-r2-6",
+      "spec": {
+        "fixture_id": "P2-corridor",
+        "engine": "candidate",
+        "K": 32,
+        "condition": "normal"
+      },
+      "Action": 13,
+      "action": {
+        "action": {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        "label_index": 1,
+        "rust_id": 13,
+        "canonical_NN_index": 0,
+        "side": 2,
+        "from": [
+          4,
+          2
+        ],
+        "to": [
+          4,
+          1
+        ]
+      },
+      "certified_interval": [
+        1,
+        1
+      ],
+      "winning_label_set": [
+        1,
+        2,
+        3
+      ],
+      "classification": "certifiedwin",
+      "payoff": 1,
+      "K": 32,
+      "rootN": 32,
+      "raw_loop_or_sim": 32,
+      "root_edge_sum": 31,
+      "NN_started": 6,
+      "NN_completed": 6,
+      "completed_without_NN": 26,
+      "terminal_count_source": "snapshot terminal visits",
+      "snapshot_terminal_visits": 26,
+      "max_depth": 3,
+      "cap": false,
+      "numeric_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 4,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": true,
+        "missing_public_cp": false
+      },
+      "SAB_completed": {
+        "completed": true,
+        "sequence": 32,
+        "action": 13,
+        "value": 0.9204335808753967,
+        "visits": 32
+      },
+      "wrapper_ms": 340.324951171875,
+      "first_CP_ms": 1790971009828.9849,
+      "ACK_ms": 1790971010117.48,
+      "API_await_ms": [
+        37.510009765625,
+        31.364990234375,
+        28.02001953125,
+        32.75,
+        37.48486328125,
+        23.349853515625
+      ],
+      "discard_explicit_counter": null
+    }
+  ],
+  "comparisons": [
+    {
+      "fixture_id": "P1-race",
+      "features_exact": true,
+      "NN": {
+        "exact": true,
+        "within_tolerance": true,
+        "max_abs": 0
+      },
+      "candidate_root1_NN": {
+        "exact": true,
+        "within_tolerance": true,
+        "max_abs": 0
+      },
+      "new_fixedgolden": false
+    },
+    {
+      "fixture_id": "P2-corridor",
+      "features_exact": true,
+      "NN": {
+        "exact": true,
+        "within_tolerance": true,
+        "max_abs": 0
+      },
+      "candidate_root1_NN": {
+        "exact": true,
+        "within_tolerance": true,
+        "max_abs": 0
+      },
+      "new_fixedgolden": false
+    }
+  ],
+  "completed_total": 130,
+  "hand_NN": 26,
+  "completed_without_NN": 104,
+  "startup_NN": 6,
+  "sessions": 2,
+  "games": 0,
+  "exit": "all conditions certifiedwin bothcase: end same-format scale",
+  "policy_maintained": "candidate immutableQ0/C1.5 and originalfixedSigma",
+  "new_fixedgolden": false,
+  "no_general_strength_smallfix_sensitivity_or_depth_sufficiency_claim": true
+}
