@@ -29,6 +29,6 @@ public最大418.985ms、public前ACK非待ち199件、相手t0<旧ACK197件、�
 
 重175.380634秒/1800秒、管理mock0.285858秒、currentRSS peak1,678,192,640B/guard5,905,580,032B、観測保存peak34,615,296B/guard117,440,512B、affinity違反/guard停止0。CPU[2]単logical/ORT各1thread。現在保持と予約未使用分・過去peakを分け、旧未確認保持は減額しない。研究Git容量は最終保存manifestで別記する。
 
-本文前の各job Model2drop/searchACK/timer-message/monitor callback回収とinnercontrolled/outersole-root ownedwaitを分けて保存し、管理記録556identityは現在不在だった。inner終了回収はforced receiptを含み、正常Modeldrop/検索zeroと同義にしない。現在不在を自然終了・全期間・全host停止へ変換しない。停止正本SHA bebf1bdf42bacf3e93cbc1272c28d66614a46c72f299ec431f60e38717559873。
+本文前の各job Model2drop/searchACK/timer-message/monitor callback回収とinnercontrolled/outersole-root ownedwaitを分けて保存し、管理記録556identityは現在不在だった。inner終了回収はforced receiptを含み、正常Modeldrop/検索zeroと同義にしない。現在不在を自然終了・全期間・全host停止へ変換しない。停止正本SHA 656a9265724f57c07207c50261038e4d881e01db1e43ff2f7da17c368c76aa0c。
 
 保存は[最終集計](../../research-data/ai-sigma/134-local-move-quality/final-results.json)、[preregister](../../research-data/ai-sigma/134-local-move-quality/preregister.json)、[停止](../../research-data/ai-sigma/134-local-move-quality/runtime-source-stopped-before-report.json)、各groupのraw archive/manifest、intake失敗archiveに分け、全必要memberをstream復元照合した。元132/133/119の使用中資料を変更・削除していない。受入れはcoordinator、正式棋力/NI/Sigma同等/係数採用/actual_go/目標達成は未認定。

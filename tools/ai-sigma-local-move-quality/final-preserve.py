@@ -63,7 +63,7 @@ for p in sorted(DATA.glob('quality134-group*-archive-manifest.json')):
  archive_checks.append({'archive':m['archive'],'SHA256':m['SHA256'],'members':len(m['members']),'stream_restore':True})
 save(DATA/'archive-restore-index.json',archive_checks)
 # Intake/config/failure receipts and source-stop in a separate small archive; no duplicated model or raw game results.
-files=[p for p in OUT.iterdir() if p.is_file() and 'private-index' not in p.name]
+files=[p for p in OUT.iterdir() if p.is_file() and 'private-index' not in p.name and not p.name.startswith('final-preserve-result')]
 files+=[p for p in (OUT/'runs').iterdir() if p.is_file() and (p.name.startswith('quality134-mock') or 'admission-failure' in p.name or p.name.startswith(('quality134-group1-r1.','quality134-group1-r2.')))]
 members=[{'path':str(p.relative_to(OUT)),'SHA256':sha(p),'bytes':p.stat().st_size} for p in sorted(set(files))]
 archive=DATA/'intake-failures-stop.tar.gz'
