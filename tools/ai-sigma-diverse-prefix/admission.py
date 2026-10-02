@@ -42,6 +42,10 @@ def admit(config,out,tool,runs):
  # Do not count paused metadata/MCP readers or our parent shell's command text as compute.
  heavy=scan_processes(exclude={os.getpid()}) if config['kind']!='protocol' else []
  decide(heavy,previous)
+ game_records=[json.loads(p.read_text()) for p in runs.glob('prefix119-*.game-count.json')]
+ if config['kind']=='browser-pair':
+  if len(game_records)!=sum(d['phase']=='browser-pair' for d in previous):raise RuntimeError('GAME_COUNT_UNKNOWN')
+  if sum(d['games_started'] for d in game_records)+len(config['games'])>16:raise RuntimeError('GAME_START_CAP')
  now=datetime.datetime.now(datetime.timezone.utc)
  if now>=datetime.datetime.fromisoformat(config['newjob_deadline']):raise RuntimeError('ADMISSION_DEADLINE')
  allocated=0
@@ -54,4 +58,4 @@ def admit(config,out,tool,runs):
  if allocated+forecast>=config['new_saved_guard']:raise RuntimeError('ADMISSION_HEADROOM')
  heavy_used=sum((datetime.datetime.fromisoformat(d['end'])-datetime.datetime.fromisoformat(d['start'])).total_seconds() for d in previous if d['phase']!='protocol')
  if config['kind']!='protocol' and heavy_used+config['minimum_remaining_heavy_seconds']>3600:raise RuntimeError('ADMISSION_HEAVY_BUDGET')
- return {'UTC':now.isoformat(),'external_heavy':heavy,'prior_runs':len(previous),'prior_remaining_unknown':0,'current_allocated':allocated,'forecast':forecast,'guard':config['new_saved_guard'],'heavy_used_seconds':heavy_used,'remaining_heavy_seconds':3600-heavy_used,'decision':'launch_allowed','location':'runner sole-root branch before subprocess.Popen; any exception means launch0'}
+ return {'UTC':now.isoformat(),'external_heavy':heavy,'prior_runs':len(previous),'prior_remaining_unknown':0,'current_allocated':allocated,'forecast':forecast,'guard':config['new_saved_guard'],'heavy_used_seconds':heavy_used,'remaining_heavy_seconds':3600-heavy_used,'previous_game_starts':sum(d['games_started'] for d in game_records),'planned_new_games':len(config.get('games',[])),'decision':'launch_allowed','location':'runner sole-root branch before subprocess.Popen; any exception means launch0'}

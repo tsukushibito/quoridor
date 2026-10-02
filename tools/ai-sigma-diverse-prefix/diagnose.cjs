@@ -8,6 +8,7 @@ async function main() {
   if(process.argv[2]!=='--config')throw Error('CONFIG_REQUIRED');
   const config=JSON.parse(fs.readFileSync(process.argv[3]));
   if(config.issue!=='quoridor-4lc.119'||config.frame!==8)throw Error('FRAME119_BINDING');
+  if(config.seed!==1979)throw Error('REGISTERED_SEARCH_SEED');
   const mode=config.kind==='browser-prefix'?'prefix':config.kind==='browser-preflight'?'preflight':'NN';
   if(!['prefix','preflight','NN'].includes(mode))throw Error('MODE_REQUIRED');
   const run=config.run_id;

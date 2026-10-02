@@ -17,6 +17,7 @@ with tarfile.open(fileobj=io.BytesIO(blob),mode='r:gz') as tar:
  for member in manifest['members']:
   assert hashlib.sha256(tar.extractfile(member['path']).read()).hexdigest()==member['SHA256']
 # Only our unused expanded duplicate is removed; process metadata stays for cumulative budgets.
+(OUT/'runs'/(run+'.game-count.json')).write_text(json.dumps({'run':run,'games_started':s['games_started'],'public':s['public'],'stopped':True},indent=2)+'\n')
 shutil.rmtree(OUT/'runs'/run)
 for suffix in ['log','monitor.jsonl','owned-ledger.jsonl']:
  p=OUT/'runs'/(run+'.'+suffix)
