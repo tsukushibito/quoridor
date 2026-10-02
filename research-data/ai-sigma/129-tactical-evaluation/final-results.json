@@ -1,0 +1,1744 @@
+{
+  "issue": "quoridor-4lc.129",
+  "source_Git": "766605299347c46869a2154afe27412162917d2f",
+  "run": "tactical129-measure-r1",
+  "planned": 12,
+  "started": 12,
+  "completed_legal": 12,
+  "normal_pass": 8,
+  "stress_pass": 4,
+  "certified_legal_blunder": 0,
+  "late": 0,
+  "firstnone": 0,
+  "enginefault": 0,
+  "infraunfinished": 0,
+  "unexecuted": 0,
+  "hand_NN": 71,
+  "startup_NN": 6,
+  "normal_adopt_backup": 276,
+  "normal_adopt_CP_NN": 61,
+  "normal_terminal_noNN_backup": 215,
+  "stress_adopt_backup": 4,
+  "stress_NN": 4,
+  "private_retired_STALE_GENERATION_rows": 6,
+  "private_retirement_not_public_engine_fault": true,
+  "explicit_result_discarded_markers": 4,
+  "NN_beyond_adopt_CP": 6,
+  "postpublic_newNN_definite": 0,
+  "normal_public_before_ACK": 6,
+  "max_public_ms": 416.625,
+  "startup_model_init_separate": {
+    "kind": "ready",
+    "threads": 1,
+    "proxy": false,
+    "handles": 0,
+    "activeNN": 0,
+    "players": [
+      {
+        "kind": "ready",
+        "digest": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+        "threads": 1,
+        "proxy": false,
+        "model_load_ms": 1516.875,
+        "compile_ms": 17.730000019073486,
+        "handles": 0,
+        "activeNN": 0,
+        "producer_post_begin_ms": 1790955365006.245,
+        "worker_engine": "candidate",
+        "engine": "candidate"
+      },
+      {
+        "kind": "ready",
+        "digest": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+        "threads": 1,
+        "proxy": false,
+        "model_load_ms": 1179.3350000083447,
+        "compile_ms": 94.66499999165535,
+        "handles": 0,
+        "activeNN": 0,
+        "producer_post_begin_ms": 1790955367249.3599,
+        "worker_engine": "reference",
+        "engine": "reference"
+      }
+    ],
+    "wall_ms": 4186.1644349992275,
+    "model_ready_outside_first_input_only": true
+  },
+  "metrics": [
+    {
+      "spec": {
+        "case": "own-near-goal",
+        "condition": "A",
+        "engine": "candidate",
+        "cancel": false
+      },
+      "request_id": "tactical129-measure-r1-1",
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "tactical_verdict": {
+        "classification": "pass",
+        "label_verdict": true,
+        "action": {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        "label_scope": "finite immediate/next-ply goal label",
+        "immediate_goal": true,
+        "case": "own-near-goal",
+        "condition": "A",
+        "request_id": "tactical129-measure-r1-1"
+      },
+      "generation": 1,
+      "adopted_stats": {
+        "completed_backup": 48,
+        "simulations": 48,
+        "rootN": 48,
+        "rootN_origin": "source convention sim, not direct tree",
+        "edge_sum": 47,
+        "cp_NN_calls": 4,
+        "terminal_noNN_backup": 44,
+        "sequence": 48,
+        "exactAtomicstore_missing": true
+      },
+      "first_CP_validation_interval": {
+        "lower_ms": 87.689697265625,
+        "upper_ms": 87.9599609375
+      },
+      "first_publication_begin_interval": {
+        "lower_ms": 86.849853515625,
+        "upper_ms": 87.1201171875
+      },
+      "request_to_first_API_start_interval": {
+        "lower_ms": 60.544677734375,
+        "upper_ms": 60.81494140625
+      },
+      "first_infer_wrapper_start_interval": {
+        "lower_ms": 60.519775390625,
+        "upper_ms": 60.7900390625
+      },
+      "first_API_await_ms": 24.52001953125,
+      "root_internal_preparation_span_missing": true,
+      "adopt_planned_ms": 411.0,
+      "adopt_timer_ms": 411.159912109375,
+      "adopt_stamp_ms": 411.284912109375,
+      "adopt_sequence": 48,
+      "hand_NN": 4,
+      "result_discarded_marker_count": 0,
+      "hand_NN_minus_adopt_CP_NN": 0,
+      "private_result_error": null,
+      "public_before_ACK": false,
+      "post_public_new_NN_definite": 0,
+      "self_wait": {
+        "input_available_ms": 1790955369505.57,
+        "start_ms": 1790955369505.57,
+        "end_ms": 1790955369505.57,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790955369505.58
+      },
+      "worker_stop_class": "upper_le_D",
+      "ACK_wall_ms": 407.039794921875,
+      "stop_to_ACK_interval": {
+        "lower_ms": -0.0302734375,
+        "upper_ms": 0.239990234375
+      },
+      "dynamic_self_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 132,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "public_causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "exact_Atomicstore_kernel_CPU_missing": true
+    },
+    {
+      "spec": {
+        "case": "own-near-goal",
+        "condition": "B",
+        "engine": "reference",
+        "cancel": false
+      },
+      "request_id": "tactical129-measure-r1-2",
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "tactical_verdict": {
+        "classification": "pass",
+        "label_verdict": true,
+        "action": {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        "label_scope": "finite immediate/next-ply goal label",
+        "immediate_goal": true,
+        "case": "own-near-goal",
+        "condition": "B",
+        "request_id": "tactical129-measure-r1-2"
+      },
+      "generation": 2,
+      "adopted_stats": {
+        "completed_backup": 62,
+        "simulations": 61,
+        "rootN": 62,
+        "rootN_origin": "raw root_visits",
+        "edge_sum": 61,
+        "cp_NN_calls": 4,
+        "terminal_noNN_backup": 58,
+        "sequence": 62,
+        "exactAtomicstore_missing": true
+      },
+      "first_CP_validation_interval": {
+        "lower_ms": 51.5498046875,
+        "upper_ms": 51.77001953125
+      },
+      "first_publication_begin_interval": {
+        "lower_ms": 50.4697265625,
+        "upper_ms": 50.68994140625
+      },
+      "request_to_first_API_start_interval": {
+        "lower_ms": 18.44482421875,
+        "upper_ms": 18.6650390625
+      },
+      "first_infer_wrapper_start_interval": {
+        "lower_ms": 18.3798828125,
+        "upper_ms": 18.60009765625
+      },
+      "first_API_await_ms": 29.9599609375,
+      "root_internal_preparation_span_missing": true,
+      "adopt_planned_ms": 411.0,
+      "adopt_timer_ms": 413.550048828125,
+      "adopt_stamp_ms": 413.64013671875,
+      "adopt_sequence": 62,
+      "hand_NN": 5,
+      "result_discarded_marker_count": 0,
+      "hand_NN_minus_adopt_CP_NN": 1,
+      "private_result_error": "STALE_GENERATION",
+      "public_before_ACK": true,
+      "post_public_new_NN_definite": 0,
+      "self_wait": {
+        "input_available_ms": 1790955369922.76,
+        "start_ms": 1790955369922.76,
+        "end_ms": 1790955369922.76,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790955369922.775
+      },
+      "worker_stop_class": "upper_le_D",
+      "ACK_wall_ms": 428.780029296875,
+      "stop_to_ACK_interval": {
+        "lower_ms": 0.014892578125,
+        "upper_ms": 0.235107421875
+      },
+      "dynamic_self_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 132,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "public_causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "exact_Atomicstore_kernel_CPU_missing": true
+    },
+    {
+      "spec": {
+        "case": "opponent-threat",
+        "condition": "B",
+        "engine": "reference",
+        "cancel": false
+      },
+      "request_id": "tactical129-measure-r1-3",
+      "Action": {
+        "type": "wall",
+        "x": 3,
+        "y": 0,
+        "orientation": "h"
+      },
+      "tactical_verdict": {
+        "classification": "pass",
+        "label_verdict": true,
+        "action": {
+          "type": "wall",
+          "x": 3,
+          "y": 0,
+          "orientation": "h"
+        },
+        "label_scope": "finite immediate/next-ply goal label",
+        "immediate_goal": false,
+        "case": "opponent-threat",
+        "condition": "B",
+        "request_id": "tactical129-measure-r1-3"
+      },
+      "generation": 3,
+      "adopted_stats": {
+        "completed_backup": 10,
+        "simulations": 9,
+        "rootN": 10,
+        "rootN_origin": "raw root_visits",
+        "edge_sum": 9,
+        "cp_NN_calls": 10,
+        "terminal_noNN_backup": 0,
+        "sequence": 10,
+        "exactAtomicstore_missing": true
+      },
+      "first_CP_validation_interval": {
+        "lower_ms": 43.229736328125,
+        "upper_ms": 43.449951171875
+      },
+      "first_publication_begin_interval": {
+        "lower_ms": 43.074951171875,
+        "upper_ms": 43.295166015625
+      },
+      "request_to_first_API_start_interval": {
+        "lower_ms": 11.419921875,
+        "upper_ms": 11.64013671875
+      },
+      "first_infer_wrapper_start_interval": {
+        "lower_ms": 11.409912109375,
+        "upper_ms": 11.630126953125
+      },
+      "first_API_await_ms": 31.469970703125,
+      "root_internal_preparation_span_missing": true,
+      "adopt_planned_ms": 411.0,
+      "adopt_timer_ms": 410.2900390625,
+      "adopt_stamp_ms": 410.375,
+      "adopt_sequence": 10,
+      "hand_NN": 11,
+      "result_discarded_marker_count": 1,
+      "hand_NN_minus_adopt_CP_NN": 1,
+      "private_result_error": "STALE_GENERATION",
+      "public_before_ACK": true,
+      "post_public_new_NN_definite": 0,
+      "self_wait": {
+        "input_available_ms": 1790955370353.255,
+        "start_ms": 1790955370353.255,
+        "end_ms": 1790955370353.26,
+        "wait_ms": 0.005126953125,
+        "ready_t0_ms": 1790955370353.265
+      },
+      "worker_stop_class": "upper_le_D",
+      "ACK_wall_ms": 443.690185546875,
+      "stop_to_ACK_interval": {
+        "lower_ms": -0.06494140625,
+        "upper_ms": 0.1552734375
+      },
+      "dynamic_self_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 131,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "public_causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "exact_Atomicstore_kernel_CPU_missing": true
+    },
+    {
+      "spec": {
+        "case": "opponent-threat",
+        "condition": "A",
+        "engine": "candidate",
+        "cancel": false
+      },
+      "request_id": "tactical129-measure-r1-4",
+      "Action": {
+        "type": "wall",
+        "x": 3,
+        "y": 0,
+        "orientation": "h"
+      },
+      "tactical_verdict": {
+        "classification": "pass",
+        "label_verdict": true,
+        "action": {
+          "type": "wall",
+          "x": 3,
+          "y": 0,
+          "orientation": "h"
+        },
+        "label_scope": "finite immediate/next-ply goal label",
+        "immediate_goal": false,
+        "case": "opponent-threat",
+        "condition": "A",
+        "request_id": "tactical129-measure-r1-4"
+      },
+      "generation": 4,
+      "adopted_stats": {
+        "completed_backup": 10,
+        "simulations": 10,
+        "rootN": 10,
+        "rootN_origin": "source convention sim, not direct tree",
+        "edge_sum": 9,
+        "cp_NN_calls": 9,
+        "terminal_noNN_backup": 1,
+        "sequence": 10,
+        "exactAtomicstore_missing": true
+      },
+      "first_CP_validation_interval": {
+        "lower_ms": 74.794921875,
+        "upper_ms": 75.065185546875
+      },
+      "first_publication_begin_interval": {
+        "lower_ms": 74.659912109375,
+        "upper_ms": 74.93017578125
+      },
+      "request_to_first_API_start_interval": {
+        "lower_ms": 35.2998046875,
+        "upper_ms": 35.570068359375
+      },
+      "first_infer_wrapper_start_interval": {
+        "lower_ms": 35.27490234375,
+        "upper_ms": 35.545166015625
+      },
+      "first_API_await_ms": 34.705078125,
+      "root_internal_preparation_span_missing": true,
+      "adopt_planned_ms": 411.0,
+      "adopt_timer_ms": 410.284912109375,
+      "adopt_stamp_ms": 410.360107421875,
+      "adopt_sequence": 10,
+      "hand_NN": 10,
+      "result_discarded_marker_count": 1,
+      "hand_NN_minus_adopt_CP_NN": 1,
+      "private_result_error": "STALE_GENERATION",
+      "public_before_ACK": true,
+      "post_public_new_NN_definite": 0,
+      "self_wait": {
+        "input_available_ms": 1790955370798.6,
+        "start_ms": 1790955370798.6,
+        "end_ms": 1790955370798.6,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790955370798.605
+      },
+      "worker_stop_class": "upper_le_D",
+      "ACK_wall_ms": 429.56494140625,
+      "stop_to_ACK_interval": {
+        "lower_ms": -0.115234375,
+        "upper_ms": 0.155029296875
+      },
+      "dynamic_self_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 131,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "public_causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "exact_Atomicstore_kernel_CPU_missing": true
+    },
+    {
+      "spec": {
+        "case": "both-near",
+        "condition": "A",
+        "engine": "candidate",
+        "cancel": false
+      },
+      "request_id": "tactical129-measure-r1-5",
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "tactical_verdict": {
+        "classification": "pass",
+        "label_verdict": true,
+        "action": {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        "label_scope": "finite immediate/next-ply goal label",
+        "immediate_goal": true,
+        "case": "both-near",
+        "condition": "A",
+        "request_id": "tactical129-measure-r1-5"
+      },
+      "generation": 5,
+      "adopted_stats": {
+        "completed_backup": 59,
+        "simulations": 59,
+        "rootN": 59,
+        "rootN_origin": "source convention sim, not direct tree",
+        "edge_sum": 58,
+        "cp_NN_calls": 3,
+        "terminal_noNN_backup": 56,
+        "sequence": 59,
+        "exactAtomicstore_missing": true
+      },
+      "first_CP_validation_interval": {
+        "lower_ms": 67.4248046875,
+        "upper_ms": 67.695068359375
+      },
+      "first_publication_begin_interval": {
+        "lower_ms": 67.2998046875,
+        "upper_ms": 67.570068359375
+      },
+      "request_to_first_API_start_interval": {
+        "lower_ms": 28.939697265625,
+        "upper_ms": 29.2099609375
+      },
+      "first_infer_wrapper_start_interval": {
+        "lower_ms": 28.9248046875,
+        "upper_ms": 29.195068359375
+      },
+      "first_API_await_ms": 38.030029296875,
+      "root_internal_preparation_span_missing": true,
+      "adopt_planned_ms": 411.0,
+      "adopt_timer_ms": 410.27001953125,
+      "adopt_stamp_ms": 410.3349609375,
+      "adopt_sequence": 59,
+      "hand_NN": 4,
+      "result_discarded_marker_count": 1,
+      "hand_NN_minus_adopt_CP_NN": 1,
+      "private_result_error": "STALE_GENERATION",
+      "public_before_ACK": true,
+      "post_public_new_NN_definite": 0,
+      "self_wait": {
+        "input_available_ms": 1790955371230.165,
+        "start_ms": 1790955371230.165,
+        "end_ms": 1790955371230.17,
+        "wait_ms": 0.0048828125,
+        "ready_t0_ms": 1790955371230.175
+      },
+      "worker_stop_class": "upper_le_D",
+      "ACK_wall_ms": 415.10986328125,
+      "stop_to_ACK_interval": {
+        "lower_ms": -0.10009765625,
+        "upper_ms": 0.170166015625
+      },
+      "dynamic_self_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 132,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "public_causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "exact_Atomicstore_kernel_CPU_missing": true
+    },
+    {
+      "spec": {
+        "case": "both-near",
+        "condition": "B",
+        "engine": "reference",
+        "cancel": false
+      },
+      "request_id": "tactical129-measure-r1-6",
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "tactical_verdict": {
+        "classification": "pass",
+        "label_verdict": true,
+        "action": {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        "label_scope": "finite immediate/next-ply goal label",
+        "immediate_goal": true,
+        "case": "both-near",
+        "condition": "B",
+        "request_id": "tactical129-measure-r1-6"
+      },
+      "generation": 6,
+      "adopted_stats": {
+        "completed_backup": 63,
+        "simulations": 62,
+        "rootN": 63,
+        "rootN_origin": "raw root_visits",
+        "edge_sum": 62,
+        "cp_NN_calls": 7,
+        "terminal_noNN_backup": 56,
+        "sequence": 63,
+        "exactAtomicstore_missing": true
+      },
+      "first_CP_validation_interval": {
+        "lower_ms": 34.194580078125,
+        "upper_ms": 34.414794921875
+      },
+      "first_publication_begin_interval": {
+        "lower_ms": 34.0546875,
+        "upper_ms": 34.27490234375
+      },
+      "request_to_first_API_start_interval": {
+        "lower_ms": 3.644775390625,
+        "upper_ms": 3.864990234375
+      },
+      "first_infer_wrapper_start_interval": {
+        "lower_ms": 3.634765625,
+        "upper_ms": 3.85498046875
+      },
+      "first_API_await_ms": 30.269775390625,
+      "root_internal_preparation_span_missing": true,
+      "adopt_planned_ms": 411.0,
+      "adopt_timer_ms": 410.294921875,
+      "adopt_stamp_ms": 410.35986328125,
+      "adopt_sequence": 63,
+      "hand_NN": 7,
+      "result_discarded_marker_count": 0,
+      "hand_NN_minus_adopt_CP_NN": 0,
+      "private_result_error": null,
+      "public_before_ACK": false,
+      "post_public_new_NN_definite": 0,
+      "self_wait": {
+        "input_available_ms": 1790955371648.435,
+        "start_ms": 1790955371648.435,
+        "end_ms": 1790955371648.435,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790955371648.445
+      },
+      "worker_stop_class": "upper_le_D",
+      "ACK_wall_ms": 406.889892578125,
+      "stop_to_ACK_interval": {
+        "lower_ms": -0.034912109375,
+        "upper_ms": 0.185302734375
+      },
+      "dynamic_self_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 132,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "public_causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "exact_Atomicstore_kernel_CPU_missing": true
+    },
+    {
+      "spec": {
+        "case": "wall-protected-threat",
+        "condition": "B",
+        "engine": "reference",
+        "cancel": false
+      },
+      "request_id": "tactical129-measure-r1-7",
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "tactical_verdict": {
+        "classification": "pass",
+        "label_verdict": true,
+        "action": {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        "label_scope": "all-legal negative control",
+        "immediate_goal": false,
+        "case": "wall-protected-threat",
+        "condition": "B",
+        "request_id": "tactical129-measure-r1-7"
+      },
+      "generation": 7,
+      "adopted_stats": {
+        "completed_backup": 14,
+        "simulations": 13,
+        "rootN": 14,
+        "rootN_origin": "raw root_visits",
+        "edge_sum": 13,
+        "cp_NN_calls": 14,
+        "terminal_noNN_backup": 0,
+        "sequence": 14,
+        "exactAtomicstore_missing": true
+      },
+      "first_CP_validation_interval": {
+        "lower_ms": 19.454833984375,
+        "upper_ms": 19.675048828125
+      },
+      "first_publication_begin_interval": {
+        "lower_ms": 19.244873046875,
+        "upper_ms": 19.465087890625
+      },
+      "request_to_first_API_start_interval": {
+        "lower_ms": 6.249755859375,
+        "upper_ms": 6.469970703125
+      },
+      "first_infer_wrapper_start_interval": {
+        "lower_ms": 6.23974609375,
+        "upper_ms": 6.4599609375
+      },
+      "first_API_await_ms": 12.47998046875,
+      "root_internal_preparation_span_missing": true,
+      "adopt_planned_ms": 411.0,
+      "adopt_timer_ms": 410.280029296875,
+      "adopt_stamp_ms": 410.35498046875,
+      "adopt_sequence": 14,
+      "hand_NN": 15,
+      "result_discarded_marker_count": 1,
+      "hand_NN_minus_adopt_CP_NN": 1,
+      "private_result_error": "STALE_GENERATION",
+      "public_before_ACK": true,
+      "post_public_new_NN_definite": 0,
+      "self_wait": {
+        "input_available_ms": 1790955372062.905,
+        "start_ms": 1790955372062.905,
+        "end_ms": 1790955372062.905,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790955372062.91
+      },
+      "worker_stop_class": "upper_le_D",
+      "ACK_wall_ms": 419.375,
+      "stop_to_ACK_interval": {
+        "lower_ms": -0.06494140625,
+        "upper_ms": 0.1552734375
+      },
+      "dynamic_self_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 124,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "public_causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "exact_Atomicstore_kernel_CPU_missing": true
+    },
+    {
+      "spec": {
+        "case": "wall-protected-threat",
+        "condition": "A",
+        "engine": "candidate",
+        "cancel": false
+      },
+      "request_id": "tactical129-measure-r1-8",
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "tactical_verdict": {
+        "classification": "pass",
+        "label_verdict": true,
+        "action": {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        "label_scope": "all-legal negative control",
+        "immediate_goal": false,
+        "case": "wall-protected-threat",
+        "condition": "A",
+        "request_id": "tactical129-measure-r1-8"
+      },
+      "generation": 8,
+      "adopted_stats": {
+        "completed_backup": 10,
+        "simulations": 10,
+        "rootN": 10,
+        "rootN_origin": "source convention sim, not direct tree",
+        "edge_sum": 9,
+        "cp_NN_calls": 10,
+        "terminal_noNN_backup": 0,
+        "sequence": 10,
+        "exactAtomicstore_missing": true
+      },
+      "first_CP_validation_interval": {
+        "lower_ms": 44.749755859375,
+        "upper_ms": 45.02001953125
+      },
+      "first_publication_begin_interval": {
+        "lower_ms": 44.579833984375,
+        "upper_ms": 44.85009765625
+      },
+      "request_to_first_API_start_interval": {
+        "lower_ms": 30.224853515625,
+        "upper_ms": 30.4951171875
+      },
+      "first_infer_wrapper_start_interval": {
+        "lower_ms": 30.2099609375,
+        "upper_ms": 30.480224609375
+      },
+      "first_API_await_ms": 13.800048828125,
+      "root_internal_preparation_span_missing": true,
+      "adopt_planned_ms": 411.0,
+      "adopt_timer_ms": 410.344970703125,
+      "adopt_stamp_ms": 410.405029296875,
+      "adopt_sequence": 10,
+      "hand_NN": 11,
+      "result_discarded_marker_count": 0,
+      "hand_NN_minus_adopt_CP_NN": 1,
+      "private_result_error": "STALE_GENERATION",
+      "public_before_ACK": true,
+      "post_public_new_NN_definite": 0,
+      "self_wait": {
+        "input_available_ms": 1790955372484.465,
+        "start_ms": 1790955372484.465,
+        "end_ms": 1790955372484.465,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790955372484.47
+      },
+      "worker_stop_class": "upper_le_D",
+      "ACK_wall_ms": 413.39501953125,
+      "stop_to_ACK_interval": {
+        "lower_ms": -0.115234375,
+        "upper_ms": 0.155029296875
+      },
+      "dynamic_self_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 124,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "public_causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "exact_Atomicstore_kernel_CPU_missing": true
+    },
+    {
+      "spec": {
+        "case": "own-near-goal",
+        "condition": "S",
+        "engine": "candidate",
+        "cancel": false
+      },
+      "request_id": "tactical129-measure-r1-9",
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "tactical_verdict": {
+        "classification": "pass",
+        "label_verdict": true,
+        "action": {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        "label_scope": "finite immediate/next-ply goal label",
+        "immediate_goal": true,
+        "case": "own-near-goal",
+        "condition": "S",
+        "request_id": "tactical129-measure-r1-9"
+      },
+      "generation": 9,
+      "adopted_stats": {
+        "completed_backup": 1,
+        "simulations": 1,
+        "rootN": 1,
+        "rootN_origin": "source convention sim, not direct tree",
+        "edge_sum": 0,
+        "cp_NN_calls": 1,
+        "terminal_noNN_backup": 0,
+        "sequence": 1,
+        "exactAtomicstore_missing": true
+      },
+      "first_CP_validation_interval": {
+        "lower_ms": 72.479736328125,
+        "upper_ms": 72.75
+      },
+      "first_publication_begin_interval": {
+        "lower_ms": 72.354736328125,
+        "upper_ms": 72.625
+      },
+      "request_to_first_API_start_interval": {
+        "lower_ms": 31.71484375,
+        "upper_ms": 31.985107421875
+      },
+      "first_infer_wrapper_start_interval": {
+        "lower_ms": 31.69482421875,
+        "upper_ms": 31.965087890625
+      },
+      "first_API_await_ms": 40.119873046875,
+      "root_internal_preparation_span_missing": true,
+      "adopt_planned_ms": 411.0,
+      "adopt_timer_ms": 410.5,
+      "adopt_stamp_ms": 410.625,
+      "adopt_sequence": 1,
+      "hand_NN": 1,
+      "result_discarded_marker_count": 0,
+      "hand_NN_minus_adopt_CP_NN": 0,
+      "private_result_error": null,
+      "public_before_ACK": false,
+      "post_public_new_NN_definite": 0,
+      "self_wait": {
+        "input_available_ms": 1790955372899.475,
+        "start_ms": 1790955372899.475,
+        "end_ms": 1790955372899.475,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790955372899.485
+      },
+      "worker_stop_class": "upper_le_D",
+      "ACK_wall_ms": 75.579833984375,
+      "stop_to_ACK_interval": {
+        "lower_ms": -0.080078125,
+        "upper_ms": 0.190185546875
+      },
+      "dynamic_self_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 132,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "public_causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "exact_Atomicstore_kernel_CPU_missing": true
+    },
+    {
+      "spec": {
+        "case": "opponent-threat",
+        "condition": "S",
+        "engine": "candidate",
+        "cancel": false
+      },
+      "request_id": "tactical129-measure-r1-10",
+      "Action": {
+        "type": "wall",
+        "x": 3,
+        "y": 0,
+        "orientation": "h"
+      },
+      "tactical_verdict": {
+        "classification": "pass",
+        "label_verdict": true,
+        "action": {
+          "type": "wall",
+          "x": 3,
+          "y": 0,
+          "orientation": "h"
+        },
+        "label_scope": "finite immediate/next-ply goal label",
+        "immediate_goal": false,
+        "case": "opponent-threat",
+        "condition": "S",
+        "request_id": "tactical129-measure-r1-10"
+      },
+      "generation": 10,
+      "adopted_stats": {
+        "completed_backup": 1,
+        "simulations": 1,
+        "rootN": 1,
+        "rootN_origin": "source convention sim, not direct tree",
+        "edge_sum": 0,
+        "cp_NN_calls": 1,
+        "terminal_noNN_backup": 0,
+        "sequence": 1,
+        "exactAtomicstore_missing": true
+      },
+      "first_CP_validation_interval": {
+        "lower_ms": 52.60986328125,
+        "upper_ms": 52.880126953125
+      },
+      "first_publication_begin_interval": {
+        "lower_ms": 52.48974609375,
+        "upper_ms": 52.760009765625
+      },
+      "request_to_first_API_start_interval": {
+        "lower_ms": 14.61474609375,
+        "upper_ms": 14.885009765625
+      },
+      "first_infer_wrapper_start_interval": {
+        "lower_ms": 14.599853515625,
+        "upper_ms": 14.8701171875
+      },
+      "first_API_await_ms": 37.330078125,
+      "root_internal_preparation_span_missing": true,
+      "adopt_planned_ms": 411.0,
+      "adopt_timer_ms": 410.375,
+      "adopt_stamp_ms": 410.469970703125,
+      "adopt_sequence": 1,
+      "hand_NN": 1,
+      "result_discarded_marker_count": 0,
+      "hand_NN_minus_adopt_CP_NN": 0,
+      "private_result_error": null,
+      "public_before_ACK": false,
+      "post_public_new_NN_definite": 0,
+      "self_wait": {
+        "input_available_ms": 1790955373311.82,
+        "start_ms": 1790955373311.82,
+        "end_ms": 1790955373311.82,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790955373311.83
+      },
+      "worker_stop_class": "upper_le_D",
+      "ACK_wall_ms": 55.639892578125,
+      "stop_to_ACK_interval": {
+        "lower_ms": 2.699951171875,
+        "upper_ms": 2.97021484375
+      },
+      "dynamic_self_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 131,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "public_causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "exact_Atomicstore_kernel_CPU_missing": true
+    },
+    {
+      "spec": {
+        "case": "both-near",
+        "condition": "S",
+        "engine": "candidate",
+        "cancel": false
+      },
+      "request_id": "tactical129-measure-r1-11",
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "tactical_verdict": {
+        "classification": "pass",
+        "label_verdict": true,
+        "action": {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        "label_scope": "finite immediate/next-ply goal label",
+        "immediate_goal": true,
+        "case": "both-near",
+        "condition": "S",
+        "request_id": "tactical129-measure-r1-11"
+      },
+      "generation": 11,
+      "adopted_stats": {
+        "completed_backup": 1,
+        "simulations": 1,
+        "rootN": 1,
+        "rootN_origin": "source convention sim, not direct tree",
+        "edge_sum": 0,
+        "cp_NN_calls": 1,
+        "terminal_noNN_backup": 0,
+        "sequence": 1,
+        "exactAtomicstore_missing": true
+      },
+      "first_CP_validation_interval": {
+        "lower_ms": 37.10498046875,
+        "upper_ms": 37.375244140625
+      },
+      "first_publication_begin_interval": {
+        "lower_ms": 36.98486328125,
+        "upper_ms": 37.255126953125
+      },
+      "request_to_first_API_start_interval": {
+        "lower_ms": 12.794921875,
+        "upper_ms": 13.065185546875
+      },
+      "first_infer_wrapper_start_interval": {
+        "lower_ms": 12.780029296875,
+        "upper_ms": 13.05029296875
+      },
+      "first_API_await_ms": 23.89501953125,
+      "root_internal_preparation_span_missing": true,
+      "adopt_planned_ms": 411.0,
+      "adopt_timer_ms": 410.3251953125,
+      "adopt_stamp_ms": 410.405029296875,
+      "adopt_sequence": 1,
+      "hand_NN": 1,
+      "result_discarded_marker_count": 0,
+      "hand_NN_minus_adopt_CP_NN": 0,
+      "private_result_error": null,
+      "public_before_ACK": false,
+      "post_public_new_NN_definite": 0,
+      "self_wait": {
+        "input_available_ms": 1790955373725.52,
+        "start_ms": 1790955373725.52,
+        "end_ms": 1790955373725.52,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790955373725.525
+      },
+      "worker_stop_class": "upper_le_D",
+      "ACK_wall_ms": 37.35009765625,
+      "stop_to_ACK_interval": {
+        "lower_ms": -0.080078125,
+        "upper_ms": 0.190185546875
+      },
+      "dynamic_self_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 132,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "public_causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "exact_Atomicstore_kernel_CPU_missing": true
+    },
+    {
+      "spec": {
+        "case": "wall-protected-threat",
+        "condition": "S",
+        "engine": "candidate",
+        "cancel": false
+      },
+      "request_id": "tactical129-measure-r1-12",
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "tactical_verdict": {
+        "classification": "pass",
+        "label_verdict": true,
+        "action": {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        "label_scope": "all-legal negative control",
+        "immediate_goal": false,
+        "case": "wall-protected-threat",
+        "condition": "S",
+        "request_id": "tactical129-measure-r1-12"
+      },
+      "generation": 12,
+      "adopted_stats": {
+        "completed_backup": 1,
+        "simulations": 1,
+        "rootN": 1,
+        "rootN_origin": "source convention sim, not direct tree",
+        "edge_sum": 0,
+        "cp_NN_calls": 1,
+        "terminal_noNN_backup": 0,
+        "sequence": 1,
+        "exactAtomicstore_missing": true
+      },
+      "first_CP_validation_interval": {
+        "lower_ms": 64.449951171875,
+        "upper_ms": 64.72021484375
+      },
+      "first_publication_begin_interval": {
+        "lower_ms": 64.2998046875,
+        "upper_ms": 64.570068359375
+      },
+      "request_to_first_API_start_interval": {
+        "lower_ms": 32.659912109375,
+        "upper_ms": 32.93017578125
+      },
+      "first_infer_wrapper_start_interval": {
+        "lower_ms": 32.64501953125,
+        "upper_ms": 32.915283203125
+      },
+      "first_API_await_ms": 22.669921875,
+      "root_internal_preparation_span_missing": true,
+      "adopt_planned_ms": 411.0,
+      "adopt_timer_ms": 416.51513671875,
+      "adopt_stamp_ms": 416.625,
+      "adopt_sequence": 1,
+      "hand_NN": 1,
+      "result_discarded_marker_count": 0,
+      "hand_NN_minus_adopt_CP_NN": 0,
+      "private_result_error": null,
+      "public_before_ACK": false,
+      "post_public_new_NN_definite": 0,
+      "self_wait": {
+        "input_available_ms": 1790955374140.43,
+        "start_ms": 1790955374140.43,
+        "end_ms": 1790955374140.435,
+        "wait_ms": 0.005126953125,
+        "ready_t0_ms": 1790955374140.44
+      },
+      "worker_stop_class": "upper_le_D",
+      "ACK_wall_ms": 65.080078125,
+      "stop_to_ACK_interval": {
+        "lower_ms": 0.08984375,
+        "upper_ms": 0.360107421875
+      },
+      "dynamic_self_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 124,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "public_causes": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": false,
+        "received_engine_fault": false,
+        "received_fault": null,
+        "initial_none": false
+      },
+      "exact_Atomicstore_kernel_CPU_missing": true
+    }
+  ],
+  "root_pairs": [
+    {
+      "case": "own-near-goal",
+      "features648_exact": true,
+      "NN137_mixed": true,
+      "max_abs": 0,
+      "fixed_NN_reference": false,
+      "engine_gates": [
+        {
+          "features648_exact": true,
+          "NN137_finite_strict": true,
+          "fixed_reference": false,
+          "prior_checked": true,
+          "priors": 132,
+          "engine_specific_order": true,
+          "legal_set_exact": true,
+          "P2canonical": false,
+          "missing_public_cp": false
+        },
+        {
+          "features648_exact": true,
+          "NN137_finite_strict": true,
+          "fixed_reference": false,
+          "prior_checked": true,
+          "priors": 132,
+          "engine_specific_order": true,
+          "legal_set_exact": true,
+          "P2canonical": false,
+          "missing_public_cp": false
+        }
+      ]
+    },
+    {
+      "case": "opponent-threat",
+      "features648_exact": true,
+      "NN137_mixed": true,
+      "max_abs": 0,
+      "fixed_NN_reference": false,
+      "engine_gates": [
+        {
+          "features648_exact": true,
+          "NN137_finite_strict": true,
+          "fixed_reference": false,
+          "prior_checked": true,
+          "priors": 131,
+          "engine_specific_order": true,
+          "legal_set_exact": true,
+          "P2canonical": false,
+          "missing_public_cp": false
+        },
+        {
+          "features648_exact": true,
+          "NN137_finite_strict": true,
+          "fixed_reference": false,
+          "prior_checked": true,
+          "priors": 131,
+          "engine_specific_order": true,
+          "legal_set_exact": true,
+          "P2canonical": false,
+          "missing_public_cp": false
+        }
+      ]
+    },
+    {
+      "case": "both-near",
+      "features648_exact": true,
+      "NN137_mixed": true,
+      "max_abs": 0,
+      "fixed_NN_reference": false,
+      "engine_gates": [
+        {
+          "features648_exact": true,
+          "NN137_finite_strict": true,
+          "fixed_reference": false,
+          "prior_checked": true,
+          "priors": 132,
+          "engine_specific_order": true,
+          "legal_set_exact": true,
+          "P2canonical": false,
+          "missing_public_cp": false
+        },
+        {
+          "features648_exact": true,
+          "NN137_finite_strict": true,
+          "fixed_reference": false,
+          "prior_checked": true,
+          "priors": 132,
+          "engine_specific_order": true,
+          "legal_set_exact": true,
+          "P2canonical": false,
+          "missing_public_cp": false
+        }
+      ]
+    },
+    {
+      "case": "wall-protected-threat",
+      "features648_exact": true,
+      "NN137_mixed": true,
+      "max_abs": 0,
+      "fixed_NN_reference": false,
+      "engine_gates": [
+        {
+          "features648_exact": true,
+          "NN137_finite_strict": true,
+          "fixed_reference": false,
+          "prior_checked": true,
+          "priors": 124,
+          "engine_specific_order": true,
+          "legal_set_exact": true,
+          "P2canonical": false,
+          "missing_public_cp": false
+        },
+        {
+          "features648_exact": true,
+          "NN137_finite_strict": true,
+          "fixed_reference": false,
+          "prior_checked": true,
+          "priors": 124,
+          "engine_specific_order": true,
+          "legal_set_exact": true,
+          "P2canonical": false,
+          "missing_public_cp": false
+        }
+      ]
+    }
+  ],
+  "normal_numeric_roots": 8,
+  "fixed_prefix_NN_reference": false,
+  "golden_startup_references": 6,
+  "tactical_contexts_all_P1": true,
+  "label_preflight_before_model_load": {
+    "cases": [
+      {
+        "case": "own-near-goal",
+        "player": 1,
+        "key": "4,7|1,8|0||",
+        "history_exact": true,
+        "legal_count": 132,
+        "label_exact": true,
+        "nodes": 133,
+        "terminal": false
+      },
+      {
+        "case": "opponent-threat",
+        "player": 1,
+        "key": "1,0|4,1|0||",
+        "history_exact": true,
+        "legal_count": 131,
+        "label_exact": true,
+        "nodes": 16932,
+        "terminal": false
+      },
+      {
+        "case": "both-near",
+        "player": 1,
+        "key": "3,7|5,1|0||",
+        "history_exact": true,
+        "legal_count": 132,
+        "label_exact": true,
+        "nodes": 133,
+        "terminal": false
+      },
+      {
+        "case": "wall-protected-threat",
+        "player": 1,
+        "key": "1,0|4,1|0|0,6;3,0|",
+        "history_exact": true,
+        "legal_count": 124,
+        "label_exact": true,
+        "nodes": 15047,
+        "terminal": false
+      }
+    ],
+    "NN": 0,
+    "model_load": 0,
+    "sharedRuleA_not_independent": true
+  },
+  "labels_sharedRuleA_depth2_node20000_finite": true,
+  "clock_start": {
+    "candidate": {
+      "lo_ms": -0.154931640625,
+      "hi_ms": 0.11513671875,
+      "mid_ms": -0.0198974609375,
+      "error_ms": 0.2350341796875,
+      "measured": true,
+      "samples": [
+        {
+          "start_ms": 1790955368187.905,
+          "end_ms": 1790955368238.975,
+          "worker_ms": 1790955368195.955
+        },
+        {
+          "start_ms": 1790955368239.05,
+          "end_ms": 1790955368239.29,
+          "worker_ms": 1790955368239.235
+        },
+        {
+          "start_ms": 1790955368239.29,
+          "end_ms": 1790955368239.405,
+          "worker_ms": 1790955368239.33
+        },
+        {
+          "start_ms": 1790955368239.41,
+          "end_ms": 1790955368239.665,
+          "worker_ms": 1790955368239.58
+        },
+        {
+          "start_ms": 1790955368239.67,
+          "end_ms": 1790955368239.78,
+          "worker_ms": 1790955368239.685
+        },
+        {
+          "start_ms": 1790955368239.78,
+          "end_ms": 1790955368240,
+          "worker_ms": 1790955368239.885
+        },
+        {
+          "start_ms": 1790955368240.01,
+          "end_ms": 1790955368240.28,
+          "worker_ms": 1790955368240.135
+        },
+        {
+          "start_ms": 1790955368240.285,
+          "end_ms": 1790955368240.39,
+          "worker_ms": 1790955368240.335
+        }
+      ]
+    },
+    "reference": {
+      "lo_ms": -0.114892578125,
+      "hi_ms": 0.105126953125,
+      "mid_ms": -0.0048828125,
+      "error_ms": 0.210009765625,
+      "measured": true,
+      "samples": [
+        {
+          "start_ms": 1790955368240.785,
+          "end_ms": 1790955368240.925,
+          "worker_ms": 1790955368240.88
+        },
+        {
+          "start_ms": 1790955368240.93,
+          "end_ms": 1790955368241.2,
+          "worker_ms": 1790955368241.165
+        },
+        {
+          "start_ms": 1790955368241.2,
+          "end_ms": 1790955368241.235,
+          "worker_ms": 1790955368241.205
+        },
+        {
+          "start_ms": 1790955368241.235,
+          "end_ms": 1790955368241.31,
+          "worker_ms": 1790955368241.2449
+        },
+        {
+          "start_ms": 1790955368241.31,
+          "end_ms": 1790955368241.41,
+          "worker_ms": 1790955368241.385
+        },
+        {
+          "start_ms": 1790955368241.41,
+          "end_ms": 1790955368241.43,
+          "worker_ms": 1790955368241.415
+        },
+        {
+          "start_ms": 1790955368241.44,
+          "end_ms": 1790955368241.58,
+          "worker_ms": 1790955368241.4949
+        },
+        {
+          "start_ms": 1790955368241.58,
+          "end_ms": 1790955368241.695,
+          "worker_ms": 1790955368241.64
+        }
+      ]
+    }
+  },
+  "clock_end": {
+    "candidate": {
+      "lo_ms": -0.109765625,
+      "hi_ms": 0.1,
+      "mid_ms": -0.0048828125,
+      "error_ms": 0.2048828125,
+      "measured": true,
+      "samples": [
+        {
+          "start_ms": 1790955375026.34,
+          "end_ms": 1790955375026.565,
+          "worker_ms": 1790955375026.5151
+        },
+        {
+          "start_ms": 1790955375026.565,
+          "end_ms": 1790955375026.6,
+          "worker_ms": 1790955375026.58
+        },
+        {
+          "start_ms": 1790955375026.6,
+          "end_ms": 1790955375026.6199,
+          "worker_ms": 1790955375026.605
+        },
+        {
+          "start_ms": 1790955375026.6199,
+          "end_ms": 1790955375026.635,
+          "worker_ms": 1790955375026.62
+        },
+        {
+          "start_ms": 1790955375026.635,
+          "end_ms": 1790955375026.66,
+          "worker_ms": 1790955375026.635
+        },
+        {
+          "start_ms": 1790955375026.66,
+          "end_ms": 1790955375026.675,
+          "worker_ms": 1790955375026.665
+        },
+        {
+          "start_ms": 1790955375026.675,
+          "end_ms": 1790955375026.685,
+          "worker_ms": 1790955375026.675
+        },
+        {
+          "start_ms": 1790955375026.685,
+          "end_ms": 1790955375026.7,
+          "worker_ms": 1790955375026.6902
+        }
+      ]
+    },
+    "reference": {
+      "lo_ms": -0.110009765625,
+      "hi_ms": 0.0951171875,
+      "mid_ms": -0.0074462890625,
+      "error_ms": 0.2025634765625,
+      "measured": true,
+      "samples": [
+        {
+          "start_ms": 1790955375026.705,
+          "end_ms": 1790955375026.755,
+          "worker_ms": 1790955375026.7249
+        },
+        {
+          "start_ms": 1790955375026.755,
+          "end_ms": 1790955375026.77,
+          "worker_ms": 1790955375026.75
+        },
+        {
+          "start_ms": 1790955375026.77,
+          "end_ms": 1790955375026.785,
+          "worker_ms": 1790955375026.77
+        },
+        {
+          "start_ms": 1790955375026.785,
+          "end_ms": 1790955375026.795,
+          "worker_ms": 1790955375026.785
+        },
+        {
+          "start_ms": 1790955375026.795,
+          "end_ms": 1790955375026.81,
+          "worker_ms": 1790955375026.795
+        },
+        {
+          "start_ms": 1790955375026.81,
+          "end_ms": 1790955375026.83,
+          "worker_ms": 1790955375026.81
+        },
+        {
+          "start_ms": 1790955375026.83,
+          "end_ms": 1790955375026.845,
+          "worker_ms": 1790955375026.83
+        },
+        {
+          "start_ms": 1790955375026.845,
+          "end_ms": 1790955375026.865,
+          "worker_ms": 1790955375026.845
+        }
+      ]
+    }
+  },
+  "intermediate_drift_missing": true,
+  "candidate_parentQ_missing": true,
+  "APIawait_not_kernel_CPU": true,
+  "same_backup_not_same_NN_CPU": true,
+  "isolated_all_workers_zero_between_requests": true,
+  "real_game_opponent_t0_policy_unchanged": true,
+  "resources": {
+    "managed_heavy_seconds": 18.374447,
+    "managed_static_seconds": 0.644271,
+    "currentRSS_peak": 1525977088,
+    "observed_storage_peak": 3424256,
+    "observed_affinity_violations": 0,
+    "currentRSS_not_ru_maxrss": true,
+    "instant_peak_background_CPU_short_metadata_unobserved": true
+  },
+  "conclusion": "All normal policies and root1 stress pass these finite labels. Stop narrow-label expansion/repetition; keep policy and propose a distinct deeper/strategic comparison. No attribution of 119 losses or general strength from these labels.",
+  "new_games": 0,
+  "formalNI_Sigma_actual_go": false,
+  "old_results_integrated": false
+}
