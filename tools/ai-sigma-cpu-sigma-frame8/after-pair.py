@@ -31,7 +31,11 @@ for p in Path('/proc').iterdir():
  if not p.name.isdigit():continue
  try:
   cmd=(p/'cmdline').read_bytes().replace(b'\0',b' ').decode(errors='replace')
-  if ('--type=renderer' in cmd or 'runner.py --config' in cmd or 'cargo build' in cmd) and int(p.name)!=os.getpid():current_heavy.append({'pid':int(p.name),'command':cmd})
+  args=(p/'cmdline').read_bytes().split(b'\0'); executable=Path(args[0].decode(errors='replace')).name if args and args[0] else ''; argv=[a.decode(errors='replace') for a in args[1:] if a]
+  is_renderer=executable in ['chrome','chromium','chrome-headless-shell'] and any(a=='--type=renderer' for a in argv)
+  is_runner=executable.startswith('python') and any(a.endswith('/runner.py') or a=='runner.py' for a in argv)
+  is_build=executable=='cargo' and 'build' in argv
+  if (is_renderer or is_runner or is_build) and int(p.name)!=os.getpid():current_heavy.append({'pid':int(p.name),'command':cmd})
  except OSError:pass
 assert not current_heavy,('OTHER_HEAVY_PRESENT',current_heavy)
 allocated=sum(p.stat().st_blocks*512 for base in [OUT,DATA,ROOT/'tools/ai-sigma-cpu-sigma-frame8'] for p in base.rglob('*') if p.is_file())
