@@ -1,6 +1,6 @@
 # Sigma研究・現行実行枠
 
-契約版5。2026-10-02、日本時間、ユーザーの研究再開指示と「再開から4時間後」の終了指定を適用。目標は[研究目標](ai-sigma-research-goal.md)、実行・記録は[共通規約](../development/ai-research-experiments.md)、比較は[評価方法](ai-sigma-comparison-protocol.md)。現在の条件は本書と担当の現行契約に記す。過去の条件や失敗を本文に累積転記せずGitと実行記録で参照する。
+契約版6。2026-10-02、日本時間、ユーザーの研究再開指示と「再開から4時間後」の終了指定、セッション数による起動・報告拒否撤廃を適用。目標は[研究目標](ai-sigma-research-goal.md)、実行・記録は[共通規約](../development/ai-research-experiments.md)、比較は[評価方法](ai-sigma-comparison-protocol.md)。現在の条件は本書と担当の現行契約に記す。過去の条件や失敗を本文に累積転記せずGitと実行記録で参照する。
 
 ## 期限と資源
 
@@ -12,7 +12,7 @@
 | CPU | 計算job合計最大4論理CPU。CPU番号と使用数は別記 |
 | 正式CPU測定 | 指定論理CPUで推論1スレッド、GPU推論なし、他の重い研究job停止。現在の測定affinity `[2]` |
 | RAM | 研究プロセス合計8GiB。担当ごとのcurrent RSS上限を配分し、過去peakは別記 |
-| LLM | この研究のroot・統括・監督を含む同時active最大3。依頼前に現在状態を確認 |
+| LLM | 既saved6role＋rootの必要な依頼・報告・監督をactive数で拒否しない。同役二重起動を防ぎ、物理資源配分を守る |
 | 保存 | 保持物・依存・cache・一時物と未使用の有効予約を合わせて12GiB以内。下記会計を適用 |
 | GPU/学習 | 現在未配分。既承認上限VRAM6GiB、1job30分、累積GPU学習2時間以内。別配分前に開始しない |
 
@@ -42,4 +42,4 @@
 
 監督は20分周期、1turn180秒、観測専用。現在の課題・担当・待ちを動的取得し、必要な契約/報告だけ追加参照する。残時間・読取資源内の一時障害の有界再試行を認め、pause・所有不明・硬い期限拒否を迂回しない。子timeout・終了処理余裕を確保し、呼出しで時計をresetしない。
 
-scheduler入場閾値2で統括報告枠を残す。変化なしは短い記録のみ、意味ある問題/成果/期限時に報告。stewardが現runtime/monitorの本枠の停止・回収を所有する。現行本文を保存セッションへ適用し、digest/registry/prompt/運用設定を整合する。active補足とidle常設適用を区別し、不要な再確認層を増やさない。
+schedulerは他セッション数でskipしない。宛先active・owned未確定・dispatch競合時は二重開始しない。変化なしは短い記録のみ、意味ある問題/成果/期限時に報告。stewardが現runtime/monitorの本枠の停止・回収を所有する。現行本文を保存セッションへ適用し、digest/registry/prompt/運用設定を整合する。active補足とidle常設適用を区別し、不要な再確認層を増やさない。

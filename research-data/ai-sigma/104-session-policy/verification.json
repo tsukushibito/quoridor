@@ -1,0 +1,200 @@
+{
+  "issue": "quoridor-4lc.104.1",
+  "source_hashes": {
+    "/workspaces/quoridor/scripts/dev/research-team.py": "44b149a99a96aae059335ee612fed72b3597b13db8aa7f5ad1e2208124b93525",
+    "/workspaces/quoridor/scripts/dev/research-scheduler.py": "c6ed46377d209d192b5990fbfd746de6487b2913731daf22f30bf436fbd30a9d",
+    "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/scheduler.py": "a5ade72a5024d2de569b18ec9f470a984a4d0fe1331c1ac0d24534bb4cef4652",
+    "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/report.py": "13b2c32f68fdc4dca68c0f251b68ebfdb838d201ff4ad35b489dec12b75ec7b5",
+    "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json": "c7fe98c6e9a668a3b6e456d302b97373a99cbcbc241c630b6143b61121117324",
+    "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json": "eb1f0098e9fdc6a04c111a81be3ab3986296ff741307114ba98c3d3467db208f",
+    "/workspaces/quoridor/tools/research-team/examples/scheduler-contract.json": "ab13218b46650efea4a1599f8952a0987f34a1e2375c0396225339642c869e1f",
+    "/workspaces/quoridor/tools/research-team/examples/scheduler.json": "5f8085285d0807217870d3d2033ca68491f4d9d63f53cc388215a122bcfb7ec7",
+    "/workspaces/quoridor/.worktree/ai-sigma/.agents/research-team/common.md": "f689b6f37b4e41b97e33837d146fba756463fc4ba01f852e9043c083d34e0ac1",
+    "/workspaces/quoridor/.worktree/ai-sigma/.agents/research-team/roles/supervisor.md": "ace98c1080024575d4d6ba20e20a7aeb65cbf32b4c2ca9de6f418f424ec1cf76",
+    "/workspaces/quoridor/.worktree/ai-sigma/docs/design/ai-sigma-continuation-20261001.md": "cefea926e8814202a366af52e6603f8c7dabb2611757bbf9033000d83b930e7c",
+    "/workspaces/quoridor/.worktree/ai-sigma/docs/design/ai-research-team.md": "89a7b53b5e0383994a225678a04ab9543cbe3adbfbe3b2b356dfd33d18f2ee83",
+    "/workspaces/quoridor/.worktree/ai-sigma/docs/design/ai-sigma-contract-supervisor-continuation.md": "834a84b152a277fab73a36e5ce9faec30f65b249fbbfe124c333041d9e18ed3c",
+    "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/prompt.md": "da771a5722342a1b6fe88e42a36a781d09ff97ec22a2c8c3da60901526ce0dba",
+    "/workspaces/quoridor/docs/development/research-scheduler.md": "c0bc954f77b65517ead76a66d1fb6b4accc4a06634f10860d91ebbc4ed442b95",
+    "/workspaces/quoridor/.agents/research-team/common.md": "f689b6f37b4e41b97e33837d146fba756463fc4ba01f852e9043c083d34e0ac1",
+    "/workspaces/quoridor/.agents/research-team/roles/supervisor.md": "ace98c1080024575d4d6ba20e20a7aeb65cbf32b4c2ca9de6f418f424ec1cf76",
+    "/workspaces/quoridor/docs/design/ai-sigma-continuation-20261001.md": "cefea926e8814202a366af52e6603f8c7dabb2611757bbf9033000d83b930e7c",
+    "/workspaces/quoridor/docs/design/ai-research-team.md": "89a7b53b5e0383994a225678a04ab9543cbe3adbfbe3b2b356dfd33d18f2ee83",
+    "/workspaces/quoridor/.worktree/ai-sigma/scripts/dev/research-team.py": "44b149a99a96aae059335ee612fed72b3597b13db8aa7f5ad1e2208124b93525",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/research-team/test_client.py": "194676544af95f4656e64e5e1d816b5129527fb854ae837583464826270b5842",
+    "/workspaces/quoridor/tools/research-team/test_client.py": "194676544af95f4656e64e5e1d816b5129527fb854ae837583464826270b5842",
+    "/workspaces/quoridor/tools/research-team/test_scheduler.py": "6844137cdce46129f5869b63f5caf286bd3b53d2c50666b7914e6a7c7354da52",
+    "/workspaces/quoridor/.worktree/ai-sigma/docs/design/ai-sigma-contract-steward-resume4h.md": "8d08d8f0c7e36cd46c4f760525a707cf3e677bfb5ebe18c6ca3b901f9714117b"
+  },
+  "tests": {
+    "standard": 36,
+    "runtime92": 4,
+    "result": "pass",
+    "command": "taskset -c 0 env UV_NO_SYNC=1 UV_OFFLINE=1 PYTHONDONTWRITEBYTECODE=1 /home/vscode/.cache/inference/envs/quoridor-research-team/bin/python -B -m unittest discover -s /workspaces/quoridor/tools/research-team -p test_*.py"
+  },
+  "sessions": [
+    {
+      "role": "coordinator",
+      "thread_id": "01a0f31b-3409-75f2-a30e-453a50484f94",
+      "status_before": "idle",
+      "definition_sha256": "a4b7955d2bf3edbd175ea0961860beff3a47f5fd2a193308a538ecb44ca2c178",
+      "payload_sha256": "84e656723b7a677b0f9ce4775b8e399731e086daaa452bf7f16710d950a22f2b",
+      "settings_before": {
+        "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+        "model": "gpt-6.1-sol",
+        "reasoningEffort": "high"
+      },
+      "at": "2026-10-02T04:29:59.817407+00:00",
+      "permanent_applied": true,
+      "rpc_accepted": true,
+      "settings_after": {
+        "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+        "model": "gpt-6.1-sol",
+        "reasoningEffort": "high"
+      }
+    },
+    {
+      "role": "hypothesis",
+      "thread_id": "01a0f31c-2e4b-7170-82c5-69e1428c2418",
+      "status_before": "idle",
+      "definition_sha256": "29cdd86f7d1a5450e8d07483cfe4fd8491fbc446d68c119de989cee6dea0c329",
+      "payload_sha256": "81bb28a57d65b1e65ac2fde286dde357e0b2db6456a4c2e28018f983e695ab62",
+      "settings_before": {
+        "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+        "model": "gpt-6.1-sol",
+        "reasoningEffort": "high"
+      },
+      "at": "2026-10-02T04:29:59.828696+00:00",
+      "permanent_applied": true,
+      "rpc_accepted": true,
+      "settings_after": {
+        "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+        "model": "gpt-6.1-sol",
+        "reasoningEffort": "high"
+      }
+    },
+    {
+      "role": "experiment",
+      "thread_id": "01a0f31d-6d15-7620-bb63-4b4f878e4746",
+      "status_before": "active",
+      "definition_sha256": "b0087339568bfa5a5fad63bec6f6c91575d78ae314e8c87357add9e8ceda7c02",
+      "payload_sha256": "61f25c53c946a5fb0e1ac4d5d557ba9ce9cbf42ec781c24ec4d4b7b2c1ba4da4",
+      "settings_before": {
+        "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+        "model": "gpt-6.1-sol",
+        "reasoningEffort": "high"
+      },
+      "at": "2026-10-02T04:29:59.842729+00:00",
+      "permanent_applied": false,
+      "pending": "idle後の正式refreshをroot/担当へ引渡し",
+      "rpc_accepted": true,
+      "settings_after": {
+        "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+        "model": "gpt-6.1-sol",
+        "reasoningEffort": "high"
+      }
+    },
+    {
+      "role": "critic",
+      "thread_id": "01a0f31d-8227-7e03-a7e6-915b4918c11b",
+      "status_before": "idle",
+      "definition_sha256": "c3c65b5c5d29dae28d74fe065a04ba18e8785d16bea2f4dcaf8f43b6b33f0c60",
+      "payload_sha256": "df9819595b7a71d4d895974316f784124ff4c870fd9f9dba459268afe538bb9b",
+      "settings_before": {
+        "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+        "model": "gpt-6.1-sol",
+        "reasoningEffort": "high"
+      },
+      "at": "2026-10-02T04:29:59.859777+00:00",
+      "permanent_applied": true,
+      "rpc_accepted": true,
+      "settings_after": {
+        "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+        "model": "gpt-6.1-sol",
+        "reasoningEffort": "high"
+      }
+    },
+    {
+      "role": "steward",
+      "thread_id": "01a0f31d-99ee-7d63-b162-bc1a59c457c6",
+      "status_before": "active",
+      "definition_sha256": "b48f1bda7c958c7e2106b8e376f37abc47dc5234508b190396415a72783a194b",
+      "payload_sha256": "1389946496f0538890b74cfeab9359e14f0c8091a3faa64b3b704fc357cf78e2",
+      "settings_before": {
+        "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+        "model": "gpt-6.1-sol",
+        "reasoningEffort": "high"
+      },
+      "at": "2026-10-02T04:29:59.868731+00:00",
+      "permanent_applied": false,
+      "pending": "idle後の正式refreshをroot/担当へ引渡し",
+      "rpc_accepted": true,
+      "settings_after": {
+        "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+        "model": "gpt-6.1-sol",
+        "reasoningEffort": "high"
+      }
+    },
+    {
+      "role": "supervisor",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+      "status_before": "notLoaded",
+      "definition_sha256": "c8ff113429420f2eef1382d34590a616c1b3af79d80f3c1a60bc36c76a5201ff",
+      "payload_sha256": "10ffe0ff3d940b784f394b7696b5bf37efc0035e19ab905c5cbfc0179d9540e9",
+      "settings_before": {
+        "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+        "model": "gpt-6.1-sol",
+        "reasoningEffort": "high"
+      },
+      "at": "2026-10-02T04:29:59.877857+00:00",
+      "permanent_applied": true,
+      "rpc_accepted": true,
+      "settings_after": {
+        "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+        "model": "gpt-6.1-sol",
+        "reasoningEffort": "high"
+      }
+    }
+  ],
+  "live": {
+    "pointer": {
+      "issue": "quoridor-4lc.92",
+      "updated_by": "quoridor-4lc.104.1",
+      "record": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/session-count-104/recovered-live.json",
+      "run": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-session-count-104-recovery-0d2cc945-e4ec-4875-ac84-fb3fb212a116",
+      "scheduler": {
+        "pid": 2064203,
+        "start_ticks": "16857111",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "monitor": {
+        "pid": 2064518,
+        "start_ticks": "16857952",
+        "state": "R",
+        "rss_bytes": 20275200,
+        "cpu_ticks": 2,
+        "affinity": [
+          0
+        ],
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      }
+    },
+    "loaded_config_sha256": "c7fe98c6e9a668a3b6e456d302b97373a99cbcbc241c630b6143b61121117324",
+    "loaded_contract_sha256": "eb1f0098e9fdc6a04c111a81be3ab3986296ff741307114ba98c3d3467db208f",
+    "end_at": "2026-10-02T05:44:12Z"
+  },
+  "incident": {
+    "monitor_abnormal_exit_at": "2026-10-02T04:32:52.699408Z",
+    "cause": "report.py source edited after live start, expected hash mismatch",
+    "exact_owned_turn_interrupted": "01a0fae1-7dab-7c62-8751-9b87c29bbbfa",
+    "owned_remaining": null,
+    "recovered_at": "2026-10-02T04:34:28.514557+00:00",
+    "old_evidence_run": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-session-count-104-0959704c-d49e-4d45-b562-7510c6d0e0b2"
+  },
+  "limitations": [
+    "developer instructions body readback unsupported",
+    "experiment/steward active supplement accepted; idle permanent refresh pending",
+    "future deadline stop and whole-period success not observed"
+  ],
+  "self_stop_ref": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/session-count-104/self-stop.json"
+}
