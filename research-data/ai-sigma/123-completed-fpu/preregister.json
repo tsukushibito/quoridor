@@ -1,0 +1,120 @@
+{
+  "issue": "quoridor-4lc.123",
+  "input_order": [
+    "initial-p1",
+    "asym-hv-p2",
+    "straight-jump-p2",
+    "diverse-prefix-1",
+    "diverse-prefix-2"
+  ],
+  "searches": [
+    {
+      "fixture_id": "initial-p1",
+      "condition": "A",
+      "K": 32
+    },
+    {
+      "fixture_id": "initial-p1",
+      "condition": "B",
+      "K": 32
+    },
+    {
+      "fixture_id": "initial-p1",
+      "condition": "C",
+      "K": 32
+    },
+    {
+      "fixture_id": "asym-hv-p2",
+      "condition": "C",
+      "K": 32
+    },
+    {
+      "fixture_id": "asym-hv-p2",
+      "condition": "B",
+      "K": 32
+    },
+    {
+      "fixture_id": "asym-hv-p2",
+      "condition": "A",
+      "K": 32
+    },
+    {
+      "fixture_id": "straight-jump-p2",
+      "condition": "A",
+      "K": 32
+    },
+    {
+      "fixture_id": "straight-jump-p2",
+      "condition": "B",
+      "K": 32
+    },
+    {
+      "fixture_id": "straight-jump-p2",
+      "condition": "C",
+      "K": 32
+    },
+    {
+      "fixture_id": "diverse-prefix-1",
+      "condition": "C",
+      "K": 32
+    },
+    {
+      "fixture_id": "diverse-prefix-1",
+      "condition": "B",
+      "K": 32
+    },
+    {
+      "fixture_id": "diverse-prefix-1",
+      "condition": "A",
+      "K": 32
+    },
+    {
+      "fixture_id": "diverse-prefix-2",
+      "condition": "A",
+      "K": 32
+    },
+    {
+      "fixture_id": "diverse-prefix-2",
+      "condition": "B",
+      "K": 32
+    },
+    {
+      "fixture_id": "diverse-prefix-2",
+      "condition": "C",
+      "K": 32
+    }
+  ],
+  "K": 32,
+  "count_timeout_ms": 20000,
+  "seed": 1979,
+  "CPU": [
+    2
+  ],
+  "NN_threads_each": 1,
+  "candidate_C": 1.5,
+  "reference_C": 1,
+  "reference_FPU": 0.2,
+  "C_factor": "strict unvisitedQ=0, not reduction=0",
+  "candidate_simulations": 32,
+  "reference_loop_iterations": 31,
+  "reference_root_N": 32,
+  "expected_edge_sum": 31,
+  "startup_root_NN": 6,
+  "B_C_same_instrumentation_model_session": true,
+  "registeredUTC": "2026-10-02T12:48:32.450851+00:00",
+  "max_search_attempts": 15,
+  "no_result_replacement": true,
+  "golden_reference_inputs": [
+    "initial-p1",
+    "asym-hv-p2",
+    "straight-jump-p2"
+  ],
+  "new_prefix_self_inputs": [
+    "diverse-prefix-1",
+    "diverse-prefix-2"
+  ],
+  "sameK_not_sameNN_CPU_wall": true,
+  "formalNI": false,
+  "old_WDL_integrated": false,
+  "firstAPI_CP_wrapper_start_end_and_zero_cleanup_separate": true
+}
