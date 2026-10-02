@@ -1,0 +1,70 @@
+{
+  "issue": "quoridor-4lc.135",
+  "UTC": "2026-10-02T17:18:33.744Z",
+  "effective": [
+    {
+      "name": "main",
+      "actual_SHA256": "df84f3b8e792ce198c819f6165c2b50aa52ad520324240ed5748d6276f28455f",
+      "current_matches_all4_served": true
+    },
+    {
+      "name": "worker",
+      "actual_SHA256": "bb8d8ad079f6a7fda1bde49372a946d1fc0033db3109ff5928c38218ff2fa21e",
+      "current_matches_all4_served": true
+    },
+    {
+      "name": "producer",
+      "actual_SHA256": "ca164746491a3497268dc61a5db0fb29ead7bc8fa3200a3934b5a61dc79a01c9",
+      "current_matches_all4_served": true
+    },
+    {
+      "name": "checkpoint",
+      "actual_SHA256": "494581d5ce5fc38e7afb753d9ca92e0f49bb71ed516762b7ea48a0c6d89e1119",
+      "current_matches_all4_served": true
+    },
+    {
+      "name": "cache",
+      "actual_SHA256": "2b2ddecbc850e1c86722069cccd5b3c484073fd28f402da43b27e9a154a74b7c",
+      "current_matches_all4_served": true
+    }
+  ],
+  "git": [
+    {
+      "run": "quality134-group1-r3",
+      "Git": "6b79eca8913b52725ccc2791fa902fbfb3d87fba",
+      "adapter_SHA": "c91da9107a37d9b164daae089c5e4ea81c3a6ccc4ab70fb5353068a135f79c68"
+    },
+    {
+      "run": "quality134-group2-r1",
+      "Git": "64a656a7db105c2de54f671e031afd16e4094c49",
+      "adapter_SHA": "c91da9107a37d9b164daae089c5e4ea81c3a6ccc4ab70fb5353068a135f79c68"
+    },
+    {
+      "run": "quality134-group3-r1",
+      "Git": "b7f4db360fb5dadb0194094652ef7c2829a94174",
+      "adapter_SHA": "c91da9107a37d9b164daae089c5e4ea81c3a6ccc4ab70fb5353068a135f79c68"
+    },
+    {
+      "run": "quality134-group4-r1",
+      "Git": "857ce64d758a6abd22fa165fc51aecca3f7f759f",
+      "adapter_SHA": "c91da9107a37d9b164daae089c5e4ea81c3a6ccc4ab70fb5353068a135f79c68"
+    }
+  ],
+  "mock_dispatch": [
+    {
+      "policy": "fixedSigma",
+      "slot": "candidate"
+    },
+    {
+      "policy": "fixedSigma",
+      "slot": "reference"
+    }
+  ],
+  "mock_NN": 0,
+  "mock_browser": false,
+  "physical_slot_not_policy": true,
+  "read_only_source_review": "both request dispatch runReference and reference cache/NN invalid in physical slots; Worker/session/SAB independent from retained player plumbing; normal adopt before ACK observed separately",
+  "NNthreads": 1,
+  "model_shared": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+  "private_index_required": true
+}

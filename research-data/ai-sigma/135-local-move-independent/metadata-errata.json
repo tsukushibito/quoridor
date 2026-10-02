@@ -1,0 +1,18 @@
+{
+  "before": {
+    "browser.cjs": "d8e6c25f7d6a3a1fe3c59874654588c6435e980071ea6725fd9ca6c3b2ab896f",
+    "admission.py": "4d107474ad9e0ee873305c587b19a20e05023fa72d8a08f619aaefcc0c082b16"
+  },
+  "after": {
+    "browser.cjs": "a609ff55d9792a06e3a2237a6beea1c89ca81270783d02089d03e60949c295b5",
+    "admission.py": "da1db65fdbccfe82b51629497b9e3170fea5a6d97e0140419475a1ffcd96276a"
+  },
+  "changes": [
+    "browser-summary inherited one_pair_input_at_a_time:true was wrong; one compact JSON text holds four fixed groups",
+    "admission returned 134_stop_path was loop-shadowed; actual guarded dependency fixed literal from code/read plus input binding"
+  ],
+  "old_run_receipts_preserved": true,
+  "only_record_label_path_changes": true,
+  "new_Chrome_or_replay0": true,
+  "measured_run_source_in_original_inputs_json": true
+}

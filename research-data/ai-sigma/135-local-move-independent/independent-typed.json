@@ -1,0 +1,128 @@
+{
+  "rows": [
+    {
+      "slot": "candidate",
+      "result": {
+        "status": "unfinished",
+        "winner": null,
+        "reason": "reference_NN_invalid",
+        "pair_invalid": true,
+        "responsible_engine": "candidate",
+        "fault": {
+          "error": "NN_BACKEND:DIAGNOSTIC"
+        }
+      }
+    },
+    {
+      "slot": "candidate",
+      "classification": "browser_deadline_processing_late",
+      "flags": {
+        "cancelled": false,
+        "browser_late": true,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": true,
+        "received_engine_fault": true,
+        "received_fault": {
+          "error": "NN_BACKEND:DIAGNOSTIC"
+        },
+        "initial_none": true
+      }
+    },
+    {
+      "slot": "candidate",
+      "classification": "browser_judge_failure",
+      "flags": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": true,
+        "external_abort": false,
+        "shared_fault": true,
+        "received_engine_fault": true,
+        "received_fault": {
+          "error": "NN_BACKEND:DIAGNOSTIC"
+        },
+        "initial_none": true
+      }
+    },
+    {
+      "slot": "candidate",
+      "classification": "external_automation_failure",
+      "flags": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": true,
+        "shared_fault": true,
+        "received_engine_fault": true,
+        "received_fault": {
+          "error": "NN_BACKEND:DIAGNOSTIC"
+        },
+        "initial_none": true
+      }
+    },
+    {
+      "slot": "reference",
+      "result": {
+        "status": "unfinished",
+        "winner": null,
+        "reason": "reference_NN_invalid",
+        "pair_invalid": true,
+        "responsible_engine": "reference",
+        "fault": {
+          "error": "NN_BACKEND:DIAGNOSTIC"
+        }
+      }
+    },
+    {
+      "slot": "reference",
+      "classification": "browser_deadline_processing_late",
+      "flags": {
+        "cancelled": false,
+        "browser_late": true,
+        "browser_judge": false,
+        "external_abort": false,
+        "shared_fault": true,
+        "received_engine_fault": true,
+        "received_fault": {
+          "error": "NN_BACKEND:DIAGNOSTIC"
+        },
+        "initial_none": true
+      }
+    },
+    {
+      "slot": "reference",
+      "classification": "browser_judge_failure",
+      "flags": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": true,
+        "external_abort": false,
+        "shared_fault": true,
+        "received_engine_fault": true,
+        "received_fault": {
+          "error": "NN_BACKEND:DIAGNOSTIC"
+        },
+        "initial_none": true
+      }
+    },
+    {
+      "slot": "reference",
+      "classification": "external_automation_failure",
+      "flags": {
+        "cancelled": false,
+        "browser_late": false,
+        "browser_judge": false,
+        "external_abort": true,
+        "shared_fault": true,
+        "received_engine_fault": true,
+        "received_fault": {
+          "error": "NN_BACKEND:DIAGNOSTIC"
+        },
+        "initial_none": true
+      }
+    }
+  ],
+  "NN": 0,
+  "Worker": 0
+}
