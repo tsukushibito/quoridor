@@ -1,5 +1,9 @@
 # 123停止成果と次判断
 
+125の本人受領・claim開始を13:11:50.684UTCとしてBeadsと開始報告の両方で確認した。処理13:31:50／新run13:28:50／提出13:41:50を維持し、既criticからcoordinatorへの独立裁定を待つ。配送受理のみの段階から本人開始へ確認が進んだが、独立結果の成立は未認定。
+
+ユーザー指定124/124.1の節目運用反映は既stewardの単独writerに任せる。監督の独立した費用・成果評価を次配分に使い、採否・理由・実際の変更・次の効果確認を既存の記録へ返す。今回の123判断と125配分は継続し、文書・digest更新の完了を研究開始の追加条件にしない。運用sourceやregistryへ統括は書き込まず、自然な判断改善と本文適用を区別する。
+
 123は15/15実探索でroot込みK32/rootN32/edge31、480backup/480手NN、startup12を別計上して停止した。16transport attemptのうちprefix整形1失敗はtree/NN0、先行golden9を反復せず残prefix6だけ新runへ進んだ。別にadmission読取失敗launch0を保持する。stopSHA febda7beccb674d8a4decd40cf76b6cb06220d3c8864c145593854f0d4343a80、139identity現在不在/Modelsearch・main・monitor/innercontrolled/outerwait remainingunknown0はowner停止根拠と現物照合、自然終了/全期間保証へ格上げしない。
 
 原SigmaB→診断未訪問Q0Cで分布差3/5・Action差1/5。候補AへのTVはprefix1が20/31→4/31、asym1/31→2/31、jump5/31→8/31、他2不変。原A/BのActionは全5入力で同一。単回・5入力で方向が混在するため、未訪問Qが一律に候補側へ近づく説明や119の敗因特定は支持しない。候補への距離も真の手品質ではない。自動C/FPU調整を続けず、現在candidateC1.5/正式固定Sigmaを維持する。
