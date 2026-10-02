@@ -53,7 +53,8 @@ def admit(config,out,tool,runs):
         if not stop_path.is_file():raise RuntimeError('DEPENDENCY133_STOP_NOT_RECEIVED')
         if hashlib.sha256(stop_path.read_bytes()).hexdigest()!=config['dependency_stop_SHA256']:raise RuntimeError('DEPENDENCY133_STOP_SHA')
         stop=json.loads(stop_path.read_text())
-        if stop.get('issue')!='quoridor-4lc.133' or not stop.get('source_write_stopped') or stop['job']['remaining'] or stop['job']['unknown_adopted']:raise RuntimeError('DEPENDENCY133_STOP_UNCONFIRMED')
+        if stop.get('issue')!='quoridor-4lc.133' or not stop.get('source_write_stopped') or any(job['remaining'] or job['unknown_adopted'] for job in stop.get('jobs',[stop.get('job',{})])):raise RuntimeError('DEPENDENCY133_STOP_UNCONFIRMED')
+        if stop['Model2_drop']['handles'] or stop['Model2_drop']['activeNN'] or stop['main_timers']['main_timers'] or stop['main_timers']['pending_messages']:raise RuntimeError('DEPENDENCY133_MODEL_TIMER_NOT_ZERO')
         if stop['boot']!=Path('/proc/sys/kernel/random/boot_id').read_text().strip():raise RuntimeError('DEPENDENCY_BOOT')
         same=[]
         for identity in stop['identities']:
