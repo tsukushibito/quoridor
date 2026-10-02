@@ -50,7 +50,7 @@ async function main() {
       if(!result.gpu)return result;
       let adapter=null,device=null,buffers=[];
       try {
-        adapter=await navigator.gpu.requestAdapter({powerPreference:'high-performance',forceFallbackAdapter:false});
+        adapter=await Promise.race([navigator.gpu.requestAdapter({powerPreference:'high-performance',forceFallbackAdapter:false}),new Promise((_,reject)=>setTimeout(()=>reject(Error('ADAPTER_TIMEOUT')),5000))]);
         if(!adapter){result.adapter=null;return result;}
         const info=adapter.info??await adapter.requestAdapterInfo();
         result.adapter={vendor:info.vendor,architecture:info.architecture,device:info.device,description:info.description,isFallbackAdapter:info.isFallbackAdapter??adapter.isFallbackAdapter??null,features:[...adapter.features]};

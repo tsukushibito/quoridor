@@ -57,6 +57,7 @@ def event(kind,**data):
 sys.path.insert(0,str(TOOL.parent/'ai-sigma-actual-boundary-repair'))
 from kernel_boundary import Boundary
 initial=table();assert not [v for v in initial.values() if v['ppid']==os.getpid()],'NONEMPTY_INITIAL_CHILDREN';assert len(list(Path('/proc/self/task').iterdir()))==1,'MULTITHREADED_LAUNCHER';boundary=Boundary(initial[os.getpid()],boot,event);sys.addaudithook(boundary.audit)
+affinity_violations=[]
 tracked={};child=None;childtick=None;reason=None;peak=0;sizepeak=0;start=utc()
 def group():
  t=table();kernel_ids=boundary.observe(t)
@@ -77,7 +78,13 @@ def group():
    for task in Path(f'/proc/{pid}/task').iterdir():
     affinity=sorted(os.sched_getaffinity(int(task.name)));r['TID_samples']+=1
     if affinity not in r['affinities']:r['affinities'].append(affinity)
-    if affinity!=[CPU]:raise RuntimeError('AFFINITY_GUARD')
+    if affinity!=[CPU] and not any(z['pid']==pid and z['affinity']==affinity for z in affinity_violations):
+     record={'pid':pid,'starttick':v['start_ticks'],'TID':int(task.name),'affinity':affinity}
+     # Reassert this job's CPU budget on a kernel-proven owned TID; never on external processes.
+     current=table().get(pid)
+     if current and current['start_ticks']==v['start_ticks'] and CONFIG.get('pin_owned_TIDs'):
+      os.sched_setaffinity(int(task.name),{CPU});record['repinned_affinity']=sorted(os.sched_getaffinity(int(task.name)))
+     affinity_violations.append(record)
   except (FileNotFoundError,ProcessLookupError):pass
  return [t[p] for p in known if p in t]
 def kill_owned(sig):
@@ -124,6 +131,7 @@ with (OUT/(name+'.log')).open('wb') as log:
   except Exception as e:reason=str(e);break
   if interrupted:reason=interrupted
   elif not boundary.valid:reason='KERNEL_BOUNDARY_INVALID'
+  elif any(z.get('repinned_affinity')!=[CPU] for z in affinity_violations):reason='AFFINITY_GUARD'
   elif time.time()>=deadline:reason='deadline'
   elif rss>=RSS_GUARD:reason='RSS_GUARD'
   elif used>=STORAGE_GUARD:reason='STORAGE_GUARD'
@@ -141,5 +149,5 @@ with (OUT/(name+'.log')).open('wb') as log:
   if not residual:break
   kill_owned(signal.SIGKILL);time.sleep(.01)
  remaining=group()
-r={'phase':PHASE,'name':name,'cmd':cmd,'start':start,'end':utc(),'subreaper_set_rc':set_subreaper_rc,'subreaper_get_rc':get_subreaper_rc,'subreaper_value':get_subreaper_value.value,'kernel_boundary':boundary.proof(),'runner_pid':os.getpid(),'runner_starttick':table()[os.getpid()]['start_ticks'],'child_pid':child.pid,'child_starttick':childtick,'exit':code,'stop_reason':reason,'sample_interval_ms':40,'peak_group_plus_runner_RSS':peak,'peak_allocated_bytes':sizepeak,'final_allocated_bytes':storage(),'tracked':list(tracked.values()),'remaining':remaining,'kernel_boundary':boundary.proof(),'kernel_identity_count':len(boundary.ids),'kernel_adoptions':boundary.adoptions,'ledger_registered_count':len(ledger.accepted),'ledger_rejected':ledger.rejected,'ledger_monitor_remaining_consistent':all((v['pid'],v['start_ticks']) in tracked for v in ledger.live(table())),'unknown_adopted':[v for v in table().values() if v['ppid']==os.getpid() and (v['pid'],v['start_ticks']) not in tracked],'privateTMP_alias':alias,'privateTMP_realpath':str(Path(alias).resolve()),'assigned_CPU':CPU,'process_deadline':CONFIG['processing_deadline'],'newjob_cutoff':CONFIG['newjob_deadline'],'guardRSS':RSS_GUARD,'contractRAM':CONTRACT_RAM,'guard_basis':'current_proc_rss_runner_plus_owned_children','runner_ru_maxrss_bytes':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss*1024,'all_observed_TIDs_at_assigned_CPU':not any(z!=[CPU] for x in tracked.values() for z in x['affinities']),'instant_peak_not_guaranteed':True,'runner_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}
+r={'phase':PHASE,'name':name,'cmd':cmd,'start':start,'end':utc(),'subreaper_set_rc':set_subreaper_rc,'subreaper_get_rc':get_subreaper_rc,'subreaper_value':get_subreaper_value.value,'kernel_boundary':boundary.proof(),'runner_pid':os.getpid(),'runner_starttick':table()[os.getpid()]['start_ticks'],'child_pid':child.pid,'child_starttick':childtick,'exit':code,'stop_reason':reason,'sample_interval_ms':40,'peak_group_plus_runner_RSS':peak,'peak_allocated_bytes':sizepeak,'final_allocated_bytes':storage(),'tracked':list(tracked.values()),'remaining':remaining,'kernel_boundary':boundary.proof(),'kernel_identity_count':len(boundary.ids),'kernel_adoptions':boundary.adoptions,'ledger_registered_count':len(ledger.accepted),'ledger_rejected':ledger.rejected,'ledger_monitor_remaining_consistent':all((v['pid'],v['start_ticks']) in tracked for v in ledger.live(table())),'unknown_adopted':[v for v in table().values() if v['ppid']==os.getpid() and (v['pid'],v['start_ticks']) not in tracked],'privateTMP_alias':alias,'privateTMP_realpath':str(Path(alias).resolve()),'assigned_CPU':CPU,'process_deadline':CONFIG['processing_deadline'],'newjob_cutoff':CONFIG['newjob_deadline'],'guardRSS':RSS_GUARD,'contractRAM':CONTRACT_RAM,'guard_basis':'current_proc_rss_runner_plus_owned_children','runner_ru_maxrss_bytes':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss*1024,'all_observed_TIDs_at_assigned_CPU':not any(z!=[CPU] for x in tracked.values() for z in x['affinities']),'affinity_violations':affinity_violations,'instant_peak_not_guaranteed':True,'runner_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}
 (OUT/(name+'.process.json')).write_text(json.dumps(r,indent=2)+'\n');print(json.dumps({k:r[k] for k in ['name','exit','stop_reason','peak_group_plus_runner_RSS','peak_allocated_bytes','remaining']}));sys.exit(code if code>=0 else 128-code)
