@@ -15,3 +15,11 @@ phaseBは95のheavy NN停止/同identity回収・現在外部heavy不在とheadr
 write ownerはtools/ai-sigma-tail-transport/・resume-20261002/TAIL-TRANSPORT/・docs/reports/ai-sigma-experiment-tail-transport.mdだけ。93/77/95/model/kernel/role/registry/scheduler本文を編集しない。必要なWorker一ファイル差分/自己serve adapterは新toolのGitで特定し、元sourceはimmutable参照、全共有sourceコピー0。95が使う93元sourceに変更を加えず、まず安い検査を進めNNを待つ。95停止が未着・期限余裕不足ならNN0保存診断までで部分終了する。
 
 owned PID/boot/starttick/PPID・sole-root/subreaper、unknown/回収欠測でfresh禁止、Beads監視callbackとWorker/Modeldrop/outerwaitを停止確認して本文前に保存。currentRSSとru_maxrss、瞬間peak欠測/背景CPUを区別。判断に必要な最小版をGit/runで固定しcoordinatorへ報告、独立確認は今回の新主張に必要な範囲へ返す。停止後backup/report→idle。93版別WDLを統合/遡及変更せず、Sigma同等目標未達を保持する。
+
+## root96反証の採用・現在許可差分
+
+rootのstop-clock-arithmetic.jsonと統括ack-worker-stop-classification.jsonが初期153手/ACKlate25のうち16はWorker停止遅側<=500ms、8は早側>500ms、1は境界不確実と一致した。cause_window/budget_breachはACK確認までの全壁時計として保持し、engine計算時間/Worker停止期限違反へ読み替えない。新版の追加欄はpublic/Judge完了、Worker停止生成の区間、配送/Node確認、CPU観測範囲/欠測を別にする。安全な次手条件ACK0を省かない。
+
+source確認でcandidate runOwnedへidentity.deadline未供給・T_ms既定1e9、referencecheckはgenerationだけという問題をphaseAで具体化する。cancel配送は有効だがローカル時刻による新探索/NN抑止はない。最初の有力一因子は「両engineのWorkerへ早側時計換算した絶対手期限/新NN開始cutoffを明示し協調停止する」対照へ変更できる。既開始ORTの強制中断は保証せず、正常な予算停止とhardfault全discardを区別して完成cpを保持する。Node/t0/500/reserve89/cutoff402/seal411は固定、Worker→Node時計誤差を含む変換をNN0確認、次NN開始/最後API/Workerstop/ACK時計を観測する。時計境界の原版/修正版という因子を、同探索係数・バックアップ・finishの変更と混ぜない。maxNNguard最大値だけで方式を限定しない。
+
+root96の通知量/非await page binding/private payloadは別の競合仮説として残す。phaseAのsourceと少数mock/spanから時計一因子又は配送一因子のどちらかを36primaryの前に選び、採用理由/反証を記録する。両修正の束で原因を断定せず、別因子を後で試す場合は現在総予算内の別版/run/新事前測定分母として記録し、旧原結果を置換しない。参照/候補の新cpを根拠なしに検証削除しない。root96は新gate/新予算/期限変更ではなく改善入力、95原停止版の独立確認を待たせたり変更したりしない。
