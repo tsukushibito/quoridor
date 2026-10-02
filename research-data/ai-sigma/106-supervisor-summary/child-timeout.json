@@ -1,0 +1,74 @@
+{
+  "command": [
+    "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python",
+    "-B",
+    "-c",
+    "import time;time.sleep(5)"
+  ],
+  "started": {
+    "utc": "2026-10-02T04:44:57.628066+00:00",
+    "monotonic": 169208.920658242,
+    "process": {
+      "pid": 2079344,
+      "start_ticks": "16920884",
+      "state": "R",
+      "rss_bytes": 26251264,
+      "affinity": [
+        0
+      ]
+    },
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+    "environment": {
+      "UV_NO_SYNC": "1",
+      "UV_OFFLINE": "1",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "rlimit_as": [
+      -1,
+      -1
+    ],
+    "ram_budget_is_RSS_not_AS": true
+  },
+  "finished": {
+    "utc": "2026-10-02T04:44:57.736503+00:00",
+    "monotonic": 169209.029121263,
+    "process": {
+      "pid": 2079344,
+      "start_ticks": "16920884",
+      "state": "R",
+      "rss_bytes": 26251264,
+      "affinity": [
+        0
+      ]
+    },
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+    "environment": {
+      "UV_NO_SYNC": "1",
+      "UV_OFFLINE": "1",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "rlimit_as": [
+      -1,
+      -1
+    ],
+    "ram_budget_is_RSS_not_AS": true
+  },
+  "child": {
+    "pid": 2079345,
+    "start_ticks": "16920892",
+    "state": "R",
+    "rss_bytes": 0,
+    "affinity": [
+      0
+    ]
+  },
+  "exit_code": -15,
+  "cause": "timeout/deadline",
+  "reaped": true,
+  "sampled_combined_RSS_peak_bytes": 37969920,
+  "sample_interval_seconds": 0.02,
+  "instant_RSS_peak_not_guaranteed": true,
+  "phase": "read",
+  "age_started_seconds": 0.028788211988285184,
+  "age_finished_seconds": 0.1372512330126483
+}

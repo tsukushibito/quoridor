@@ -268,9 +268,29 @@ def read_retry(args, directory, name, bound, background=(), owner_check=None, at
             if not error.transient or attempt+1 == attempts:
                 raise
 
+DEPENDENCY_REFERENCE_FIELDS = ('id', 'issue_id', 'depends_on_id', 'type',
+                               'dependency_type', 'status', 'assignee')
+
+
+def dependency_summary(dependencies):
+    """Keep relation references, never embedded issue history or nested graphs."""
+    result = []
+    for item in dependencies or []:
+        if isinstance(item, str):
+            result.append({'id': item})
+        elif isinstance(item, dict):
+            reference = {key: item[key] for key in DEPENDENCY_REFERENCE_FIELDS
+                         if key in item and isinstance(item[key], (str, int, bool, type(None)))}
+            if 'labels' in item:
+                reference['labels'] = [label for label in item['labels'] or []
+                                       if isinstance(label, str)]
+            result.append(reference)
+    return result
+
+
 def issue_summary(issues):
     return [{'id': x.get('id'), 'status': x.get('status'), 'assignee': x.get('assignee'),
-             'labels': x.get('labels') or [], 'dependencies': x.get('dependencies') or [],
+             'labels': x.get('labels') or [], 'dependencies': dependency_summary(x.get('dependencies')),
              'dependency_count': x.get('dependency_count'),
              'notes_tail': str(x.get('notes') or '')[-1200:]} for x in issues]
 
