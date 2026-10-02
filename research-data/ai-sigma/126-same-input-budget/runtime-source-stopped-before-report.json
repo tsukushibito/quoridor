@@ -1,0 +1,1604 @@
+{
+  "issue": "quoridor-4lc.126",
+  "UTC": "2026-10-02T13:47:02.639318+00:00",
+  "source_runtime_stopped": true,
+  "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+  "identities": [
+    {
+      "pid": 2561688,
+      "ppid": 2561639,
+      "pgid": 2561688,
+      "start_ticks": 20137627,
+      "state": "R",
+      "rss": 29138944,
+      "utime_ticks": 260,
+      "stime_ticks": 71,
+      "maxrss": 290136064,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 10386,
+      "last_ppid": 2561639,
+      "last_state": "R"
+    },
+    {
+      "pid": 2561699,
+      "ppid": 2561695,
+      "pgid": 2561688,
+      "start_ticks": 20137634,
+      "state": "R",
+      "rss": 4112384,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 4112384,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 2,
+      "last_ppid": 2561695,
+      "last_state": "R"
+    },
+    {
+      "pid": 2561695,
+      "ppid": 2561688,
+      "pgid": 2561688,
+      "start_ticks": 20137634,
+      "state": "S",
+      "rss": 3063808,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 3063808,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 42,
+      "last_ppid": 2561688,
+      "last_state": "S"
+    },
+    {
+      "pid": 2561701,
+      "ppid": 2561695,
+      "pgid": 2561688,
+      "start_ticks": 20137638,
+      "state": "R",
+      "rss": 60375040,
+      "utime_ticks": 30,
+      "stime_ticks": 8,
+      "maxrss": 194318336,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 266,
+      "last_ppid": 2561695,
+      "last_state": "Z"
+    },
+    {
+      "pid": 2561707,
+      "ppid": 2561701,
+      "pgid": 2561688,
+      "start_ticks": 20137642,
+      "state": "R",
+      "rss": 4055040,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 4055040,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 4,
+      "last_ppid": 2561701,
+      "last_state": "D"
+    },
+    {
+      "pid": 2561718,
+      "ppid": 2561701,
+      "pgid": 2561688,
+      "start_ticks": 20137712,
+      "state": "R",
+      "rss": 3784704,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 3784704,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 2,
+      "last_ppid": 2561701,
+      "last_state": "D"
+    },
+    {
+      "pid": 2561719,
+      "ppid": 2561688,
+      "pgid": 2561688,
+      "start_ticks": 20137718,
+      "state": "S",
+      "rss": 1736704,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 1736704,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 34,
+      "last_ppid": 2561688,
+      "last_state": "S"
+    },
+    {
+      "pid": 2561725,
+      "ppid": 2561719,
+      "pgid": 2561688,
+      "start_ticks": 20137720,
+      "state": "R",
+      "rss": 45334528,
+      "utime_ticks": 29,
+      "stime_ticks": 6,
+      "maxrss": 188768256,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 230,
+      "last_ppid": 2561719,
+      "last_state": "S"
+    },
+    {
+      "pid": 2561732,
+      "ppid": 2561725,
+      "pgid": 2561688,
+      "start_ticks": 20137724,
+      "state": "R",
+      "rss": 4050944,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 4050944,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 2,
+      "last_ppid": 2561725,
+      "last_state": "R"
+    },
+    {
+      "pid": 2561735,
+      "ppid": 2561725,
+      "pgid": 2561688,
+      "start_ticks": 20137785,
+      "state": "R",
+      "rss": 3784704,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 3784704,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 2,
+      "last_ppid": 2561725,
+      "last_state": "D"
+    },
+    {
+      "pid": 2561742,
+      "ppid": 2561688,
+      "pgid": 2561742,
+      "start_ticks": 20137825,
+      "state": "R",
+      "rss": 9981952,
+      "utime_ticks": 64,
+      "stime_ticks": 42,
+      "maxrss": 352514048,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 26051,
+      "last_ppid": 2561688,
+      "last_state": "Z"
+    },
+    {
+      "pid": 2561744,
+      "ppid": 2561639,
+      "pgid": 2561743,
+      "start_ticks": 20137859,
+      "state": "R",
+      "rss": 1888256,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 3383296,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 1708,
+      "last_ppid": 2561639,
+      "last_state": "Z"
+    },
+    {
+      "pid": 2561746,
+      "ppid": 2561639,
+      "pgid": 2561745,
+      "start_ticks": 20137861,
+      "state": "S",
+      "rss": 3170304,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 3170304,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 854,
+      "last_ppid": 2561639,
+      "last_state": "Z"
+    },
+    {
+      "pid": 2561749,
+      "ppid": 2561742,
+      "pgid": 2561742,
+      "start_ticks": 20137863,
+      "state": "R",
+      "rss": 5828608,
+      "utime_ticks": 0,
+      "stime_ticks": 2,
+      "maxrss": 68636672,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 856,
+      "last_ppid": 2561639,
+      "last_state": "Z"
+    },
+    {
+      "pid": 2561750,
+      "ppid": 2561742,
+      "pgid": 2561742,
+      "start_ticks": 20137863,
+      "state": "R",
+      "rss": 5025792,
+      "utime_ticks": 1,
+      "stime_ticks": 1,
+      "maxrss": 68857856,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 856,
+      "last_ppid": 2561639,
+      "last_state": "Z"
+    },
+    {
+      "pid": 2561777,
+      "ppid": 2561749,
+      "pgid": 2561742,
+      "start_ticks": 20137887,
+      "state": "R",
+      "rss": 42573824,
+      "utime_ticks": 1,
+      "stime_ticks": 1,
+      "maxrss": 66383872,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 6680,
+      "last_ppid": 2561749,
+      "last_state": "S"
+    },
+    {
+      "pid": 2561784,
+      "ppid": 2561742,
+      "pgid": 2561742,
+      "start_ticks": 20137888,
+      "state": "R",
+      "rss": 5644288,
+      "utime_ticks": 4,
+      "stime_ticks": 4,
+      "maxrss": 117293056,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 7532,
+      "last_ppid": 2561742,
+      "last_state": "S"
+    },
+    {
+      "pid": 2561786,
+      "ppid": 2561688,
+      "pgid": 2561688,
+      "start_ticks": 20137890,
+      "state": "S",
+      "rss": 2998272,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 2998272,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 64,
+      "last_ppid": 2561688,
+      "last_state": "S"
+    },
+    {
+      "pid": 2561790,
+      "ppid": 2561786,
+      "pgid": 2561688,
+      "start_ticks": 20137891,
+      "state": "D",
+      "rss": 3915776,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 3915776,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 2,
+      "last_ppid": 2561786,
+      "last_state": "D"
+    },
+    {
+      "pid": 2561800,
+      "ppid": 2561786,
+      "pgid": 2561688,
+      "start_ticks": 20137895,
+      "state": "R",
+      "rss": 41099264,
+      "utime_ticks": 23,
+      "stime_ticks": 10,
+      "maxrss": 185675776,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 378,
+      "last_ppid": 2561786,
+      "last_state": "S"
+    },
+    {
+      "pid": 2561804,
+      "ppid": 2561750,
+      "pgid": 2561742,
+      "start_ticks": 20137899,
+      "state": "S",
+      "rss": 41500672,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 49766400,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 6668,
+      "last_ppid": 2561750,
+      "last_state": "S"
+    },
+    {
+      "pid": 2561819,
+      "ppid": 2561800,
+      "pgid": 2561688,
+      "start_ticks": 20137905,
+      "state": "D",
+      "rss": 3829760,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 4026368,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 4,
+      "last_ppid": 2561800,
+      "last_state": "D"
+    },
+    {
+      "pid": 2561826,
+      "ppid": 2561750,
+      "pgid": 2561742,
+      "start_ticks": 20137942,
+      "state": "R",
+      "rss": 45748224,
+      "utime_ticks": 12,
+      "stime_ticks": 7,
+      "maxrss": 136581120,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 9629,
+      "last_ppid": 2561750,
+      "last_state": "R"
+    },
+    {
+      "pid": 2561833,
+      "ppid": 2561750,
+      "pgid": 2561742,
+      "start_ticks": 20137958,
+      "state": "R",
+      "rss": 37773312,
+      "utime_ticks": 2,
+      "stime_ticks": 1,
+      "maxrss": 95895552,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 240,
+      "last_ppid": 2561750,
+      "last_state": "Z"
+    },
+    {
+      "pid": 2561848,
+      "ppid": 2561750,
+      "pgid": 2561742,
+      "start_ticks": 20138001,
+      "state": "S",
+      "rss": 16756736,
+      "utime_ticks": 528,
+      "stime_ticks": 58,
+      "maxrss": 415145984,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 10930,
+      "last_ppid": 2561750,
+      "last_state": "Z"
+    },
+    {
+      "pid": 2561871,
+      "ppid": 2561800,
+      "pgid": 2561688,
+      "start_ticks": 20138045,
+      "state": "D",
+      "rss": 3678208,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 3678208,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 2,
+      "last_ppid": 2561800,
+      "last_state": "R"
+    },
+    {
+      "pid": 2561877,
+      "ppid": 2561688,
+      "pgid": 2561688,
+      "start_ticks": 20138054,
+      "state": "S",
+      "rss": 3100672,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 3100672,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 98,
+      "last_ppid": 2561688,
+      "last_state": "S"
+    },
+    {
+      "pid": 2561881,
+      "ppid": 2561877,
+      "pgid": 2561688,
+      "start_ticks": 20138056,
+      "state": "R",
+      "rss": 3862528,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 3862528,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 1,
+      "last_ppid": 2561877,
+      "last_state": "R"
+    },
+    {
+      "pid": 2561897,
+      "ppid": 2561877,
+      "pgid": 2561688,
+      "start_ticks": 20138115,
+      "state": "R",
+      "rss": 40558592,
+      "utime_ticks": 22,
+      "stime_ticks": 10,
+      "maxrss": 196870144,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 460,
+      "last_ppid": 2561877,
+      "last_state": "S"
+    },
+    {
+      "pid": 2561910,
+      "ppid": 2561897,
+      "pgid": 2561688,
+      "start_ticks": 20138124,
+      "state": "R",
+      "rss": 3854336,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 3854336,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 6,
+      "last_ppid": 2561897,
+      "last_state": "D"
+    },
+    {
+      "pid": 2561914,
+      "ppid": 2561897,
+      "pgid": 2561688,
+      "start_ticks": 20138270,
+      "state": "R",
+      "rss": 3723264,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 3723264,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 4,
+      "last_ppid": 2561897,
+      "last_state": "D"
+    },
+    {
+      "pid": 2561930,
+      "ppid": 2561688,
+      "pgid": 2561688,
+      "start_ticks": 20138291,
+      "state": "R",
+      "rss": 3108864,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 3108864,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 88,
+      "last_ppid": 2561688,
+      "last_state": "S"
+    },
+    {
+      "pid": 2561931,
+      "ppid": 2561930,
+      "pgid": 2561688,
+      "start_ticks": 20138292,
+      "state": "Z",
+      "rss": 0,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 0,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 2,
+      "last_ppid": 2561930,
+      "last_state": "Z"
+    },
+    {
+      "pid": 2561934,
+      "ppid": 2561930,
+      "pgid": 2561688,
+      "start_ticks": 20138295,
+      "state": "R",
+      "rss": 3891200,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 3891200,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 2,
+      "last_ppid": 2561930,
+      "last_state": "R"
+    },
+    {
+      "pid": 2561939,
+      "ppid": 2561930,
+      "pgid": 2561688,
+      "start_ticks": 20138341,
+      "state": "R",
+      "rss": 48979968,
+      "utime_ticks": 25,
+      "stime_ticks": 8,
+      "maxrss": 177393664,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 446,
+      "last_ppid": 2561930,
+      "last_state": "S"
+    },
+    {
+      "pid": 2561946,
+      "ppid": 2561939,
+      "pgid": 2561688,
+      "start_ticks": 20138362,
+      "state": "D",
+      "rss": 4014080,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 4014080,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 2,
+      "last_ppid": 2561939,
+      "last_state": "R"
+    },
+    {
+      "pid": 2561957,
+      "ppid": 2561939,
+      "pgid": 2561688,
+      "start_ticks": 20138530,
+      "state": "D",
+      "rss": 3887104,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 3887104,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 2,
+      "last_ppid": 2561939,
+      "last_state": "R"
+    },
+    {
+      "pid": 2561958,
+      "ppid": 2561688,
+      "pgid": 2561688,
+      "start_ticks": 20138535,
+      "state": "R",
+      "rss": 3117056,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 3117056,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 70,
+      "last_ppid": 2561688,
+      "last_state": "S"
+    },
+    {
+      "pid": 2561959,
+      "ppid": 2561958,
+      "pgid": 2561688,
+      "start_ticks": 20138535,
+      "state": "Z",
+      "rss": 0,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 0,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 2,
+      "last_ppid": 2561958,
+      "last_state": "Z"
+    },
+    {
+      "pid": 2561962,
+      "ppid": 2561958,
+      "pgid": 2561688,
+      "start_ticks": 20138538,
+      "state": "D",
+      "rss": 3883008,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 3883008,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 2,
+      "last_ppid": 2561958,
+      "last_state": "D"
+    },
+    {
+      "pid": 2561964,
+      "ppid": 2561958,
+      "pgid": 2561688,
+      "start_ticks": 20138543,
+      "state": "R",
+      "rss": 42008576,
+      "utime_ticks": 25,
+      "stime_ticks": 7,
+      "maxrss": 177528832,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 406,
+      "last_ppid": 2561958,
+      "last_state": "S"
+    },
+    {
+      "pid": 2561970,
+      "ppid": 2561964,
+      "pgid": 2561688,
+      "start_ticks": 20138562,
+      "state": "D",
+      "rss": 3891200,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 3891200,
+      "affinities": [],
+      "TID_samples": 0,
+      "last_ppid": 2561964,
+      "last_state": "D"
+    },
+    {
+      "pid": 2561981,
+      "ppid": 2561964,
+      "pgid": 2561688,
+      "start_ticks": 20138700,
+      "state": "D",
+      "rss": 3870720,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 4067328,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 4,
+      "last_ppid": 2561964,
+      "last_state": "D"
+    },
+    {
+      "pid": 2561985,
+      "ppid": 2561983,
+      "pgid": 2561688,
+      "start_ticks": 20138718,
+      "state": "R",
+      "rss": 1753088,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 1753088,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 2,
+      "last_ppid": 2561983,
+      "last_state": "R"
+    },
+    {
+      "pid": 2561983,
+      "ppid": 2561688,
+      "pgid": 2561688,
+      "start_ticks": 20138717,
+      "state": "S",
+      "rss": 3239936,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 3239936,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 66,
+      "last_ppid": 2561688,
+      "last_state": "Z"
+    },
+    {
+      "pid": 2561989,
+      "ppid": 2561983,
+      "pgid": 2561688,
+      "start_ticks": 20138722,
+      "state": "R",
+      "rss": 42123264,
+      "utime_ticks": 25,
+      "stime_ticks": 9,
+      "maxrss": 180916224,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 402,
+      "last_ppid": 2561983,
+      "last_state": "S"
+    },
+    {
+      "pid": 2562008,
+      "ppid": 2561989,
+      "pgid": 2561688,
+      "start_ticks": 20138857,
+      "state": "D",
+      "rss": 3694592,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 3694592,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 2,
+      "last_ppid": 2561989,
+      "last_state": "D"
+    },
+    {
+      "pid": 2562013,
+      "ppid": 2561688,
+      "pgid": 2561688,
+      "start_ticks": 20138864,
+      "state": "S",
+      "rss": 3076096,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 3076096,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 96,
+      "last_ppid": 2561688,
+      "last_state": "S"
+    },
+    {
+      "pid": 2562017,
+      "ppid": 2562013,
+      "pgid": 2561688,
+      "start_ticks": 20138865,
+      "state": "D",
+      "rss": 3874816,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 3874816,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 2,
+      "last_ppid": 2562013,
+      "last_state": "D"
+    },
+    {
+      "pid": 2562032,
+      "ppid": 2562013,
+      "pgid": 2561688,
+      "start_ticks": 20138925,
+      "state": "R",
+      "rss": 45580288,
+      "utime_ticks": 28,
+      "stime_ticks": 5,
+      "maxrss": 187990016,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 415,
+      "last_ppid": 2562013,
+      "last_state": "S"
+    },
+    {
+      "pid": 2562044,
+      "ppid": 2562032,
+      "pgid": 2561688,
+      "start_ticks": 20138935,
+      "state": "D",
+      "rss": 4096000,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 4096000,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 2,
+      "last_ppid": 2562032,
+      "last_state": "D"
+    },
+    {
+      "pid": 2562051,
+      "ppid": 2562032,
+      "pgid": 2561688,
+      "start_ticks": 20139067,
+      "state": "R",
+      "rss": 4075520,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 4247552,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 2,
+      "last_ppid": 2562032,
+      "last_state": "D"
+    },
+    {
+      "pid": 2562067,
+      "ppid": 2561688,
+      "pgid": 2561688,
+      "start_ticks": 20139118,
+      "state": "S",
+      "rss": 3092480,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 3092480,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 70,
+      "last_ppid": 2561688,
+      "last_state": "S"
+    },
+    {
+      "pid": 2562069,
+      "ppid": 2562067,
+      "pgid": 2561688,
+      "start_ticks": 20139118,
+      "state": "R",
+      "rss": 1544192,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 1544192,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 2,
+      "last_ppid": 2562067,
+      "last_state": "R"
+    },
+    {
+      "pid": 2562070,
+      "ppid": 2562069,
+      "pgid": 2561688,
+      "start_ticks": 20139118,
+      "state": "Z",
+      "rss": 0,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 0,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 2,
+      "last_ppid": 2562069,
+      "last_state": "Z"
+    },
+    {
+      "pid": 2562071,
+      "ppid": 2562067,
+      "pgid": 2561688,
+      "start_ticks": 20139119,
+      "state": "R",
+      "rss": 3817472,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 3817472,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 2,
+      "last_ppid": 2562067,
+      "last_state": "D"
+    },
+    {
+      "pid": 2562075,
+      "ppid": 2562067,
+      "pgid": 2561688,
+      "start_ticks": 20139127,
+      "state": "R",
+      "rss": 15699968,
+      "utime_ticks": 29,
+      "stime_ticks": 4,
+      "maxrss": 188522496,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 413,
+      "last_ppid": 2562067,
+      "last_state": "S"
+    },
+    {
+      "pid": 2562081,
+      "ppid": 2562075,
+      "pgid": 2561688,
+      "start_ticks": 20139138,
+      "state": "D",
+      "rss": 4083712,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 4083712,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 4,
+      "last_ppid": 2562075,
+      "last_state": "D"
+    },
+    {
+      "pid": 2562086,
+      "ppid": 2562075,
+      "pgid": 2561688,
+      "start_ticks": 20139264,
+      "state": "D",
+      "rss": 3690496,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 3690496,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 2,
+      "last_ppid": 2562075,
+      "last_state": "D"
+    },
+    {
+      "pid": 2562087,
+      "ppid": 2561688,
+      "pgid": 2561688,
+      "start_ticks": 20139268,
+      "state": "R",
+      "rss": 69701632,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 69701632,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 70,
+      "last_ppid": 2561688,
+      "last_state": "S"
+    },
+    {
+      "pid": 2562092,
+      "ppid": 2562087,
+      "pgid": 2561688,
+      "start_ticks": 20139272,
+      "state": "R",
+      "rss": 1622016,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 1622016,
+      "affinities": [],
+      "TID_samples": 0,
+      "last_ppid": 2562087,
+      "last_state": "R"
+    },
+    {
+      "pid": 2562093,
+      "ppid": 2562087,
+      "pgid": 2561688,
+      "start_ticks": 20139273,
+      "state": "R",
+      "rss": 45428736,
+      "utime_ticks": 23,
+      "stime_ticks": 9,
+      "maxrss": 181178368,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 418,
+      "last_ppid": 2562087,
+      "last_state": "S"
+    },
+    {
+      "pid": 2562099,
+      "ppid": 2562093,
+      "pgid": 2561688,
+      "start_ticks": 20139284,
+      "state": "D",
+      "rss": 3870720,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 3870720,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 4,
+      "last_ppid": 2562093,
+      "last_state": "D"
+    },
+    {
+      "pid": 2562111,
+      "ppid": 2562093,
+      "pgid": 2561688,
+      "start_ticks": 20139414,
+      "state": "R",
+      "rss": 3682304,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 3682304,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 2,
+      "last_ppid": 2562093,
+      "last_state": "R"
+    },
+    {
+      "pid": 2562119,
+      "ppid": 2561688,
+      "pgid": 2561688,
+      "start_ticks": 20139517,
+      "state": "S",
+      "rss": 3010560,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 3010560,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 64,
+      "last_ppid": 2561688,
+      "last_state": "S"
+    },
+    {
+      "pid": 2562121,
+      "ppid": 2562119,
+      "pgid": 2561688,
+      "start_ticks": 20139518,
+      "state": "R",
+      "rss": 1712128,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 1712128,
+      "affinities": [],
+      "TID_samples": 0,
+      "last_ppid": 2562119,
+      "last_state": "R"
+    },
+    {
+      "pid": 2562122,
+      "ppid": 2562121,
+      "pgid": 2561688,
+      "start_ticks": 20139518,
+      "state": "Z",
+      "rss": 0,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 0,
+      "affinities": [],
+      "TID_samples": 0,
+      "last_ppid": 2562121,
+      "last_state": "Z"
+    },
+    {
+      "pid": 2562123,
+      "ppid": 2562119,
+      "pgid": 2561688,
+      "start_ticks": 20139518,
+      "state": "D",
+      "rss": 3899392,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 3899392,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 3,
+      "last_ppid": 2562119,
+      "last_state": "D"
+    },
+    {
+      "pid": 2562125,
+      "ppid": 2562119,
+      "pgid": 2561688,
+      "start_ticks": 20139525,
+      "state": "R",
+      "rss": 41975808,
+      "utime_ticks": 28,
+      "stime_ticks": 9,
+      "maxrss": 188952576,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 362,
+      "last_ppid": 2562119,
+      "last_state": "S"
+    },
+    {
+      "pid": 2562133,
+      "ppid": 2562125,
+      "pgid": 2561688,
+      "start_ticks": 20139536,
+      "state": "R",
+      "rss": 3878912,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 4075520,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 3,
+      "last_ppid": 2562125,
+      "last_state": "D"
+    },
+    {
+      "pid": 2562145,
+      "ppid": 2562125,
+      "pgid": 2561688,
+      "start_ticks": 20139669,
+      "state": "D",
+      "rss": 3903488,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 3903488,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 2,
+      "last_ppid": 2562125,
+      "last_state": "D"
+    },
+    {
+      "pid": 2562151,
+      "ppid": 2561688,
+      "pgid": 2561688,
+      "start_ticks": 20139674,
+      "state": "S",
+      "rss": 3149824,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 3149824,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 70,
+      "last_ppid": 2561688,
+      "last_state": "S"
+    },
+    {
+      "pid": 2562155,
+      "ppid": 2562151,
+      "pgid": 2561688,
+      "start_ticks": 20139674,
+      "state": "R",
+      "rss": 3899392,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 3899392,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 2,
+      "last_ppid": 2562151,
+      "last_state": "D"
+    },
+    {
+      "pid": 2562170,
+      "ppid": 2562151,
+      "pgid": 2561688,
+      "start_ticks": 20139732,
+      "state": "R",
+      "rss": 74756096,
+      "utime_ticks": 23,
+      "stime_ticks": 10,
+      "maxrss": 196210688,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 250,
+      "last_ppid": 2562151,
+      "last_state": "S"
+    },
+    {
+      "pid": 2562182,
+      "ppid": 2562170,
+      "pgid": 2561688,
+      "start_ticks": 20139737,
+      "state": "D",
+      "rss": 3846144,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 3846144,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 2,
+      "last_ppid": 2562170,
+      "last_state": "D"
+    },
+    {
+      "pid": 2562186,
+      "ppid": 2562170,
+      "pgid": 2561688,
+      "start_ticks": 20139809,
+      "state": "R",
+      "rss": 4059136,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 4059136,
+      "affinities": [
+        [
+          2
+        ]
+      ],
+      "TID_samples": 2,
+      "last_ppid": 2562170,
+      "last_state": "R"
+    },
+    {
+      "pid": 2561639,
+      "start_ticks": 20137492
+    },
+    {
+      "pid": 2561043,
+      "ppid": 2560980,
+      "pgid": 2561043,
+      "start_ticks": 20131405,
+      "state": "R",
+      "rss": 27316224,
+      "utime_ticks": 5,
+      "stime_ticks": 1,
+      "maxrss": 52666368,
+      "affinities": [
+        [
+          0
+        ]
+      ],
+      "TID_samples": 40,
+      "last_ppid": 2560980,
+      "last_state": "R"
+    },
+    {
+      "pid": 2560980,
+      "start_ticks": 20131237
+    }
+  ],
+  "recorded_identity_union": 79,
+  "current_same_identity": [],
+  "remaining_unknown": 0,
+  "Model2_drop_zero": {
+    "players": [
+      {
+        "kind": "dropped",
+        "handles": 0,
+        "activeNN": 0,
+        "at_ms": 1790948482703.92,
+        "producer_post_begin_ms": 1790948482703.935,
+        "worker_engine": "candidate"
+      },
+      {
+        "kind": "dropped",
+        "handles": 0,
+        "activeNN": 0,
+        "at_ms": 1790948482716.28,
+        "producer_post_begin_ms": 1790948482716.29,
+        "worker_engine": "reference"
+      }
+    ],
+    "handles": 0,
+    "activeNN": 0
+  },
+  "main_timer_message_zero": {
+    "main_timers": 0,
+    "pending_messages": []
+  },
+  "monitor_callbacks_waited": true,
+  "inner_controlled": {
+    "remaining": 0,
+    "forced": true,
+    "waited": true
+  },
+  "outer_owned_wait": [
+    {
+      "run": "budget126-measure-r1",
+      "remaining": [],
+      "unknown_adopted": [],
+      "kernel_adoptions": [
+        {
+          "kind": "kernel_adopted_direct_child",
+          "observed": {
+            "pid": 2561744,
+            "ppid": 2561639,
+            "pgid": 2561743,
+            "start_ticks": 20137859,
+            "state": "R",
+            "rss": 1888256,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "launcher_identity": {
+            "pid": 2561639,
+            "ppid": 2009,
+            "pgid": 2561639,
+            "start_ticks": 20137492,
+            "state": "R",
+            "rss": 17944576,
+            "utime_ticks": 1,
+            "stime_ticks": 1
+          },
+          "sole_jobroot_identity": {
+            "pid": 2561688,
+            "ppid": 2561639,
+            "pgid": 2561688,
+            "start_ticks": 20137627,
+            "state": "R",
+            "rss": 21209088,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+          "monotonic": 201378.604852395
+        },
+        {
+          "kind": "kernel_adopted_direct_child",
+          "observed": {
+            "pid": 2561746,
+            "ppid": 2561639,
+            "pgid": 2561745,
+            "start_ticks": 20137861,
+            "state": "S",
+            "rss": 3170304,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "launcher_identity": {
+            "pid": 2561639,
+            "ppid": 2009,
+            "pgid": 2561639,
+            "start_ticks": 20137492,
+            "state": "R",
+            "rss": 17944576,
+            "utime_ticks": 1,
+            "stime_ticks": 1
+          },
+          "sole_jobroot_identity": {
+            "pid": 2561688,
+            "ppid": 2561639,
+            "pgid": 2561688,
+            "start_ticks": 20137627,
+            "state": "R",
+            "rss": 21209088,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+          "monotonic": 201378.649956035
+        }
+      ]
+    },
+    {
+      "run": "budget126-mock-r1",
+      "remaining": [],
+      "unknown_adopted": [],
+      "kernel_adoptions": []
+    }
+  ],
+  "resources": {
+    "managed_heavy_seconds": 22.283234,
+    "managed_static_seconds": 0.14456,
+    "currentRSS_peak": 1633054720,
+    "observed_storage_peak": 3792896,
+    "observed_affinity_violations": 0,
+    "currentRSS_not_ru_maxrss": true,
+    "instant_peak_background_CPU_short_metadata_unobserved": true
+  },
+  "source_after": {
+    "tools/ai-sigma-same-input-budget/diagnose.cjs": "b8d94260ba99b0a94ba5929ac003f6ec486e21a9853e857b14bdbf2e9a3ca2a3",
+    "tools/ai-sigma-same-input-budget/budget-main.js": "33a8bc551f73585dd2c450ef354201accfdc8bd7684491d3a179808016a1cfcb",
+    "tools/ai-sigma-same-input-budget/runner.py": "2f503e4f044afa167d13985d313ce6c3023be348049f92ccf0499c7e1b1898c3",
+    "tools/ai-sigma-same-input-budget/mock.cjs": "42d7f8d553cf6ef99bbc6016821e994f81df8978da4f801625d805fc975c0fe6",
+    "tools/ai-sigma-same-input-budget/admission.py": "66a0403abddb8856b82baf770a1d78e064cbb9ff6e059bdb1b9e6dd9c7479659",
+    "tools/ai-sigma-same-input-budget/browser.cjs": "2021487ea4f1c8f68d214d6cfe4a227f693face34106b3eb9e36c0b492b960d6",
+    "tools/ai-sigma-same-input-budget/commit-own.sh": "efea9270668aadd7567359df31d5def89e53ec14813a464a0ae12f6cdfd3e454",
+    "tools/ai-sigma-same-input-budget/adapters.cjs": "797ac9bed9634445933fe58b9b40dde79820f505190ea8a139a7e2f774e5a52e",
+    "tools/ai-sigma-same-input-budget/preserve.py": "b5c7b898f25b20eab8c3e1695bfe5829ae228a4fd3c02d071322e1145e658df7"
+  },
+  "current_absence_not_natural_or_all_period_proof": true
+}

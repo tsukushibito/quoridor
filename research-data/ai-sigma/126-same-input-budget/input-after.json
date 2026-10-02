@@ -1,0 +1,49 @@
+{
+  "necessary_inputs_only": [
+    {
+      "name": "main",
+      "path": "tools/ai-sigma-player-workers/player-main.js",
+      "SHA256": "610e899acd43215efc9fa3a08f3c337248639505a57196e1a730a91f7afde4a8",
+      "unchanged": true
+    },
+    {
+      "name": "worker",
+      "path": "tools/ai-sigma-player-workers/player-worker.js",
+      "SHA256": "fd5f5b72a836164133b22f718d58ef31d2d4b0f8a4887070e1ac9346112de5e8",
+      "unchanged": true
+    },
+    {
+      "name": "producer",
+      "path": "tools/ai-sigma-tail-transport/early-worker.js",
+      "SHA256": "9494e33e7204be208262914c04ea5eb0d7985872a6d7ebc6e4084d84729097d4",
+      "unchanged": true
+    },
+    {
+      "name": "checkpoint",
+      "path": "tools/ai-sigma-tail-transport/checkpoint.js",
+      "SHA256": "2b736d696a099350bf724b40dd858fc3afe11ce17a1c143f3029e5fcd2f28d8c",
+      "unchanged": true
+    },
+    {
+      "name": "cache",
+      "path": "tools/ai-sigma-actual-boundary-repair/early-cache.cjs",
+      "SHA256": "748fe01dfebf5e524465ef69255acf0026154188b9002a5338ca790ca092e7f7",
+      "unchanged": true
+    },
+    {
+      "path": "models/experiments/ai-sigma/reference/sigma-pcr250/best.onnx",
+      "SHA256": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+      "unchanged": true
+    },
+    {
+      "path": ".artifacts/ai-sigma/runs/SIGMA-ORT-SEARCH/final.wasm",
+      "SHA256": "1f54d0b8f0c6d3d7d51935886ed506e44376a2052506be62ca7a726c85a78a01",
+      "unchanged": true
+    },
+    {
+      "path": "research-data/ai-sigma/119-diverse-prefix/prefix-document.json",
+      "SHA256": "c8104df06585717c54900e02afcf62a9133a91fdfc2a25732da38dcc7b286e27",
+      "unchanged": true
+    }
+  ]
+}
