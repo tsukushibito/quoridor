@@ -1,6 +1,6 @@
 # SIGMA-ACTUAL-BOUNDARY-REPAIR / quoridor-4lc.77 / 現行契約版3
 
-担当experiment 01a0f31d-6d15-7620-bb63-4b4f878e4746。未完了の同課題を現在の許可枠でNN0デバッグする実依頼。親正本 docs/design/ai-sigma-continuation-20261001.md/common/docs/development/ai-research-experiments.md全文を継承。終了Oct2 01:00UTC/重job00:50/監督00:55/watch00:58、CPU4/RAM8/globalLLM3/cum12GiB/GPU0不変。旧77各runの期限/guard965697536>896MiB/失敗/NN未実施は保持し、当時を成功や延長へ書き換えない。同じ課題/コード/入力を新runとして再確認できる。
+担当experiment 01a0f31d-6d15-7620-bb63-4b4f878e4746。未完了の同課題を現在の許可枠で入口診断する実依頼。親正本 docs/design/ai-sigma-continuation-20261001.md/common/docs/development/ai-research-experiments.md全文を継承。終了Oct2 01:00UTC/重job00:50/監督00:55/watch00:58、CPU4/RAM8/globalLLM3/cum12GiB/GPU0不変。旧77各runの期限/guard965697536>896MiB/失敗/NN未実施は保持し、当時を成功や延長へ書き換えない。同じ課題/コード/入力を新runとして再確認できる。
 
 問い: 旧76に拒否されたactual監視未開始/typed期限/purpose監査/proof意味結合の最小経路を、旧77のguard設定不足を修正して同actual-driver経由で確認できるか。許可write ownerは既tools/ai-sigma-actual-boundary-repair/、既SIGMA-ACTUAL-BOUNDARY-REPAIR/の新run出力、docs/reports/ai-sigma-experiment-actual-boundary-repair.md。旧ログ/結果は保持、コード/文書版はローカルGitで管理。全sourcecopy/新issue/全履歴hash/一原因一修正/一窓を標準にしない。必要な既83 guardian/currentRSS/PPID/race処理を参照/必要差分で再利用可、83 source自体は変更しない。製品main/push/共有role/registry/config/model/workerNNkernel/探索規約編集0。
 
