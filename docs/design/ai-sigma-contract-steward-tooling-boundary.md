@@ -1,15 +1,13 @@
-# SIGMA-TOOLING-BOUNDARY / quoridor-4lc.102 / 契約1
+# SIGMA-TOOLING-BOUNDARY / quoridor-4lc.102 / 現行契約2
 
-既steward saved01a0f31d-99ee-7d63-b162-bc1a59c457c6へ。親現行版5/common/101改定steward/実行記録規約を全文継承、ready/show goal/self・pause・担当確認後本人claim/受領開始を報告。役割適用はGit7335e66/digest d4e18a22…1701でroot受入れ済み、本依頼は今の研究開始終了・修正再利用の節目での必要性判断。役割本文の再適用/新監督層/新確認層を起動しない。
+既steward saved01a0f31d-99ee-7d63-b162-bc1a59c457c6、親現行版5/common/101改定steward/実行記録規約を全文継承。既受領04:03:06/claimを保持し、新課題・新role・新turnを起動しない。rootのユーザー明示『整理させて』で現契約の提案限定scopeを6文書の実整理へ変更する。新読取cutoff04:07:17/処理04:09:17/提出04:13:17を維持し期限延長しない。根拠main .artifacts/research-team/project-layout-102/steward-request.md全文。rootは当該6pathに書込0、単独writerはsteward。
 
-97は協調Worker時計修正Git83bb0ce、保存1051ad6で停止。100は同保存36算術と独立最小8公開を終了し最終本文準備中（Beads notes NN終了03:45:45/source03:57:17、Gitdd34acd）。独立結果の正式受入れはcoordinator待ち、あなたの品質検討をそのgateへ加えない。原コード/現在の共有sourceに書込せず、この節目で次回修正漏れ/混雑/検証負担へ影響する構成を少数実sourceと設定から検討する。
+指定pathはmain /workspaces/quoridor と研究 /workspaces/quoridor/.worktree/ai-sigma の AGENTS.md、README.md、docs/development/ai-research-experiments.md、計6file。rootの追加許可により、研究docs/development/research-scheduler.mdのみ既mainからのmirrorを追加1pathとして選べる。研究AGENTSの不存在scheduler文書リンクを修正し、実装がmain側のみという意味を保つ最小案をstewardが判断する。期限後のroot指摘修正は実時刻を記録し旧期限遵守へ付け替えない。AGENTSは主要文書への短いインデックス/何の確認時に読むかを整理し、Beads/team/DevContainer managed blockを保持する。全資料必読・全列挙を義務化しない。READMEは主要製品Web/Rust/Wasm・research tools・scripts/tests/docs/research-data/.artifacts/外部資源の現状を短い表等で説明し、研究branchのみのpath/将来配置を区別する。旧固定逐次工程の一段落は競合仮説/実験方針へ整合できる。
 
-現役tools/ai-sigma-tail-transport、tools/ai-sigma-cooperative-clock-independent、再利用元actual-boundary-repair/diagnostic-arenaと必要runnerのうち、判断に必要なファイルだけread-only。可読性/責務混在/重複/ハードコード設定/依存境界、Formatter/Linter既存設定と適用範囲を確認。全63runnerや全旧sourceの監査/同NN0全反復/全rawcopy/hashは不要。重複だけを根拠に独立checkerまで統合しない。既依存で可能な安い確認は行えるが、新toolchain/依存導入/整形全適用/リファクタはこの最初の必要性判断では行わない。
+実行記録規約へ共通基盤/実験固有コード/設定/Git保存データの短い配置・依存方針を追加する。現tools/ai-sigma-*の試作・共通機能混在と推奨境界を区別し、将来共通化や移動を実施済みと書かない。既保存規約を参照し説明を重複させず、stewardが利用実態で案内/境界を見直す責務を記す。現役保守とGit過去版・独立検証分離を区別し、重複のみを根拠に一律統合しない。必要な既Formatter/Linter・可読性/責務/設定/依存の少数readonly確認と最大2改善案又は見送り理由を今回の説明へ反映できる。実体整理は将来の提案として効果/費用/時期/owner/採用後確認を短く返す。
 
-現役保守source、過去Git版、独立検証、実験設定、研究Gitデータ、展開/tmpを区別して方針を必要な範囲で定義又は既方針を参照する。最大2案に効果・費用・実験への影響・実施時期・owner・採用後の最小確認と効果追跡を短く付す、見送り判断も可。頻度/毎回報告を制度化せず、今回終了後は通常の参加機会で必要時検討する。
+同bytes旧本文だけmirror、main/研究に固有差分があれば意味を保って各版へ適用。通常差分と相対リンク/見出し・Gitpath確認で受入れ、新監査/全史/全role再適用は不要。実装/ディレクトリ実体移動削除/依存導入/全整形/リファクタ/NN/build/download/model/product/pushは変更0。100/97 source/data/期限、共有roles/common/registry、92運用は変更0。運用の現在期待hashに影響があれば既92ownerとして必要な秩序ある整合を確認し、周期/上限/期限は維持する。品質検討を100/次実験のgateにしない。
 
-write scope新docs/design/ai-sigma-research-tooling.md、docs/reports/ai-sigma-steward-tooling-boundary.md、research-data/ai-sigma/102-tooling-boundary/必要compact記録、自己resume-20261002/TOOLING-BOUNDARY/だけ。既shared design/common/roles/registry/92runtime、100/97コード/データ、主製品/依存/他者indexは変更0。提案後coordinatorが通常委任範囲で採否を返し、必要なら書込ownerと予算を差分配分して適用/効果確認を行う。現owner以外のsourceを自分の文書作業で修正しない。
+自報告 docs/reports/ai-sigma-steward-tooling-boundary.md、自己resume-20261002/TOOLING-BOUNDARY/、research-data/ai-sigma/102-tooling-boundary/compact記録は既scopeのまま。方針は指定dev文書へ反映し、新しい全体設計文書を今回必須にしない。rootは実6文書の差分受入れ、coordinatorは研究配分/102結果採否を担当。書込停止/必要Git/リンク確認/未実施実体変更を短く両者へ報告し、root現在activeなら同turnへ通知、新rootturnを起動しない。
 
-総処理受領8分/新command終了2分前まで/提出12分、親05:49:12終了との早い方。CPU0/RAM1GiB currentRSSguard896MiB/各readonly command45s/管理command累計120s、新保存最大2MiB/既steward128MiB内・追加予約0。NN/Chrome/model-load/build/download/GPU/学習/ゲーム/holdout0。今はNN測定を再実行せず、小さなread-onlyで十分な判別ができるか判断する。LLMglobal3(root込み)維持、次監督入場を自課題継続で占有しない。処理deadline後は新調査を足さず必要報告/停止を優先する。
-
-小localGitで必要版を管理し未Git/所有不明を消さない。99のGit/archive正本を継承、データ全copy0。自child/currentPID停止確認と必要結果を保存し本文固定→backup/report→idle。92の05:39:12重job通知/05:44:12監督停止/05:47:12monitor/05:49:12最終保存責任は別運用として維持する。既101役割刷新と今回の品質導入効果を混同せず、goal/他者close0。
+資源は既CPU0/RAM1GiB currentRSSguard896MiB/readonlycommand45s/管理command累計120s、新保存2MiB以内/既steward128MiB予約内追加0。終了04:09:17後は新調査を足さず停止/報告を優先、親05:49:12/LLMroot込みglobal3を維持する。通常の文書編集を制限済みNNや旧正式評価へ混同しない。使用中/未知owner/未Gitコードを削除0。他者indexを触れず自己localGitで必要差分を記録、backup/report→idle。92の05:39:12/05:44:12/05:47:12/05:49:12将来停止責任は保持する。
