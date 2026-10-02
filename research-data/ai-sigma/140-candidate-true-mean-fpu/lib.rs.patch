@@ -1,0 +1,27 @@
+--- tools/ai-sigma-deep-node-comparison/baseline/src/lib.rs
++++ tools/ai-sigma-candidate-true-mean-fpu/private/src/lib.rs
+@@ -138,7 +138,7 @@
+     let cp = s.checkpoint(g)?;
+     let st = cp.stats;
+     let nodes: Vec<_> = if tree {
+-        s.search.research_tree_snapshot().iter().map(|n|json!({"index":n.index,"key":HistoryKey::from(n.context.position()).sigma_string(),"ply":n.context.total_ply(),"history":n.context.history_counts().iter().map(|(k,n)|(k.sigma_string(),*n)).collect::<Vec<_>>(),"legal":n.context.legal_ids(),"terminal":n.context.terminal_value(),"expanded":n.expanded,"edges":n.edges.iter().map(|e|(e.0,e.1.to_bits(),e.2,e.3.to_bits())).collect::<Vec<_>>(),"children":n.children,"visits":n.visits})).collect()
++        s.search.research_tree_snapshot().iter().map(|n|json!({"index":n.index,"key":HistoryKey::from(n.context.position()).sigma_string(),"ply":n.context.total_ply(),"history":n.context.history_counts().iter().map(|(k,n)|(k.sigma_string(),*n)).collect::<Vec<_>>(),"legal":n.context.legal_ids(),"terminal":n.context.terminal_value(),"expanded":n.expanded,"edges":n.edges.iter().map(|e|(e.0,e.1.to_bits(),e.2,e.3.to_bits())).collect::<Vec<_>>(),"children":n.children,"visits":n.visits,"true_value_sum":n.true_value_sum})).collect()
+     } else {
+         Vec::new()
+     };
+@@ -215,6 +215,7 @@
+         };
+         return Ok(json!({"priors":priors}));
+     }
++    if v["op"] == "mean_probe" {return Ok(kernel::mean_probe());}
+     if v["op"] == "new" {
+         let c = context(v.get("fixture").unwrap_or(&v), v["diagnostic"] == true)?;
+         let lim = SearchLimits {
+@@ -243,6 +244,7 @@
+     let h = v["handle"].as_u64().ok_or("SESSION_HANDLE")? as u32;
+     let s = r.sessions.get_mut(&h).ok_or("INVALID_SESSION")?;
+     match v["op"].as_str().unwrap_or("") {
++        "mean_trace" => Ok(json!({"selections":s.search.select_trace,"visits":s.search.visit_trace,"nodes":s.search.deep_trace,"FPU_enabled":cfg!(feature="true-mean-fpu")})),
+         "begin" => match s.begin(g)? {
+             Some(q) => {
+                 let ft = features(q.position);

@@ -1,0 +1,96 @@
+{
+  "contract_Git": "78a93bb3f4f81bd5c57420c62058a20fa84dd444",
+  "original_binary": {
+    "path": ".artifacts/ai-sigma/runs/SIGMA-ORT-SEARCH/final.wasm",
+    "SHA256": "1f54d0b8f0c6d3d7d51935886ed506e44376a2052506be62ca7a726c85a78a01"
+  },
+  "baseline_source": {
+    "tools/ai-sigma-deep-node-comparison/baseline/Cargo.toml": "57e3173114c234ff39b0dd976e913fa142358d8f0eb426ec87e61668344bcade",
+    "tools/ai-sigma-deep-node-comparison/baseline/Cargo.lock": "d0568a38ed13c537c3ab96abe3a0585e82258da1a3a5e64ee4ab18df07211b24",
+    "tools/ai-sigma-deep-node-comparison/baseline/src/kernel.rs": "7d6873a7cab441bfe1bcf291e752da5cacfbe54bf55e5568d3112c930366c2cb",
+    "tools/ai-sigma-deep-node-comparison/baseline/src/research.rs": "3b1340552a98e520068ac5c9e8f2fffaffc0831bf6eb0142f9cf9a059af5cf4a",
+    "tools/ai-sigma-deep-node-comparison/baseline/src/lib.rs": "9fad536fcaaafb858bb588621a421fa71a62fe7339c97cdf13fbdea06aad6c44"
+  },
+  "original_build_binding": {
+    "path": "research-data/ai-sigma/132-deep-node-comparison/build-binding.json",
+    "SHA256": "f96a46eb71a20f46f1fcf851db9d969a9f2d46f58431d8c2972995f2d2b0668b",
+    "past_bytes_equal_not_new_rebuild": true
+  },
+  "fixed_input_source": {
+    "path": "research-data/ai-sigma/132-deep-node-comparison/fixed-inputs.json",
+    "SHA256": "fffc171a2b2fc5f36cab950299e651912fa95287ee0e6121bebb35d18bf56b01"
+  },
+  "selected_input_SHA256": "5a2064169747855d2d6c173b40c5a087e96baa632e5ff2409dc5237a059f916f",
+  "new_private": {
+    "tools/ai-sigma-candidate-true-mean-fpu/private/Cargo.toml": "9c20ccfd83b33c9d5760e3bb9ce435a9c0a189171c5896577ce50e2cdb1f0898",
+    "tools/ai-sigma-candidate-true-mean-fpu/private/Cargo.lock": "d0568a38ed13c537c3ab96abe3a0585e82258da1a3a5e64ee4ab18df07211b24",
+    "tools/ai-sigma-candidate-true-mean-fpu/private/src/kernel.rs": "b231e06f4c35e3228ce344a8f8f78557b6b3962d6a9742e086530c5c7ecaec7c",
+    "tools/ai-sigma-candidate-true-mean-fpu/private/src/research.rs": "41f35611f95436c9a76fe544ff5cd274b5116ab611b0156003ca373777116b31",
+    "tools/ai-sigma-candidate-true-mean-fpu/private/src/lib.rs": "9f016fb65c0db97b96fd47ad3e1f29284228469514e07e5593170cae97eb3b59"
+  },
+  "139_proposal_SHA256": "f3cd5d768318252d9b17f80375a9416d452c83ff8f4bf07356f56b7749bf3bbf",
+  "private_builds": [
+    {
+      "variant": "q0",
+      "command": [
+        "cargo",
+        "build",
+        "--release",
+        "--offline",
+        "--locked",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--lib",
+        "--manifest-path",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-candidate-true-mean-fpu/private/Cargo.toml"
+      ],
+      "start": "2026-10-02T18:42:16.343627+00:00",
+      "end": "2026-10-02T18:42:23.267880+00:00",
+      "SHA256": "80f5dff7316f2594f5e5cd711407a7ea892b6e721c10ea359f14240c19445df3",
+      "bytes": 383165,
+      "rustc": "rustc 1.98.1 (48a229cea 2026-09-01)",
+      "cargo": "cargo 1.98.1 (797e8a9bc 2026-08-05)",
+      "RUSTFLAGS": null,
+      "CARGO_TARGET_DIR": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261002/CANDIDATE-TRUE-MEAN-FPU/build/target-q0",
+      "source": {
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-candidate-true-mean-fpu/private/Cargo.toml": "9c20ccfd83b33c9d5760e3bb9ce435a9c0a189171c5896577ce50e2cdb1f0898",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-candidate-true-mean-fpu/private/Cargo.lock": "d0568a38ed13c537c3ab96abe3a0585e82258da1a3a5e64ee4ab18df07211b24",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-candidate-true-mean-fpu/private/src/kernel.rs": "b231e06f4c35e3228ce344a8f8f78557b6b3962d6a9742e086530c5c7ecaec7c",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-candidate-true-mean-fpu/private/src/research.rs": "41f35611f95436c9a76fe544ff5cd274b5116ab611b0156003ca373777116b31",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-candidate-true-mean-fpu/private/src/lib.rs": "9f016fb65c0db97b96fd47ad3e1f29284228469514e07e5593170cae97eb3b59"
+      }
+    },
+    {
+      "variant": "fpu",
+      "command": [
+        "cargo",
+        "build",
+        "--release",
+        "--offline",
+        "--locked",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--lib",
+        "--manifest-path",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-candidate-true-mean-fpu/private/Cargo.toml",
+        "--features",
+        "true-mean-fpu"
+      ],
+      "start": "2026-10-02T18:45:15.160135+00:00",
+      "end": "2026-10-02T18:45:23.211853+00:00",
+      "SHA256": "16163810b649fb976c9a9cc7ab1c5922df53f83e1db1695e273b4fbb3790b0af",
+      "bytes": 383011,
+      "rustc": "rustc 1.98.1 (48a229cea 2026-09-01)",
+      "cargo": "cargo 1.98.1 (797e8a9bc 2026-08-05)",
+      "RUSTFLAGS": null,
+      "CARGO_TARGET_DIR": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261002/CANDIDATE-TRUE-MEAN-FPU/build/target-fpu",
+      "source": {
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-candidate-true-mean-fpu/private/Cargo.toml": "9c20ccfd83b33c9d5760e3bb9ce435a9c0a189171c5896577ce50e2cdb1f0898",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-candidate-true-mean-fpu/private/Cargo.lock": "d0568a38ed13c537c3ab96abe3a0585e82258da1a3a5e64ee4ab18df07211b24",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-candidate-true-mean-fpu/private/src/kernel.rs": "b231e06f4c35e3228ce344a8f8f78557b6b3962d6a9742e086530c5c7ecaec7c",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-candidate-true-mean-fpu/private/src/research.rs": "41f35611f95436c9a76fe544ff5cd274b5116ab611b0156003ca373777116b31",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-candidate-true-mean-fpu/private/src/lib.rs": "9f016fb65c0db97b96fd47ad3e1f29284228469514e07e5593170cae97eb3b59"
+      }
+    }
+  ]
+}
