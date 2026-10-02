@@ -57,7 +57,10 @@ def admit(config,out,tool,runs):
         if stop['Model2_drop']['handles'] or stop['Model2_drop']['activeNN'] or stop['main_timers']['main_timers'] or stop['main_timers']['pending_messages']:raise RuntimeError('DEPENDENCY133_MODEL_TIMER_NOT_ZERO')
         if stop['boot']!=Path('/proc/sys/kernel/random/boot_id').read_text().strip():raise RuntimeError('DEPENDENCY_BOOT')
         same=[]
-        for identity in stop['identities']:
+        identities=json.loads(Path(config['dependency_identities']).read_text())
+        for reference in identities['process_refs']:
+            if hashlib.sha256(Path(reference['path']).read_bytes()).hexdigest()!=reference['SHA256']:raise RuntimeError('DEPENDENCY_PROCESS_CHANGED')
+        for identity in identities['identities']:
             path=Path('/proc')/str(identity['pid'])/'stat'
             try: fields=path.read_text().rsplit(')',1)[1].split()
             except FileNotFoundError:continue
