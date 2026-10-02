@@ -1,34 +1,30 @@
-# 107: browser SharedArrayBuffer draft
+# 107: browser SharedArrayBuffer diagnostics
 
-Contract 3 replaces the unexecuted frame/Node reconstruction draft in commit
-`5def70e`. The earlier `frame-codec.js`, `worker-adapter.js`, `browser.cjs`,
-and `real-backend.cjs` remain inactive historical drafts. The active draft
-entry is `diagnose.cjs` with `browser-sab.cjs`.
+The tested frame7 implementation is Git ec4e92d (functional precursor
+81401c2). Historical frame and contract3 preparation versions remain in Git.
 
-The browser main owns state, legal Action decoding, adoption timers, UTF8
-encoding, and response timestamps. A request receives a fresh 48-byte SAB;
-the browser Worker alone writes completed fields. All shared words, including
-float32 value bits, use Atomics. The reader samples at most twice, retains its
-previous coherent completion during an odd revision, and never calls
-Atomics.wait. Budget stop retains completed data; cancel/fault invalidate it.
-Generation and position are bound to the per-request descriptor and checked
-against the Worker's independently reconstructed state.
+The browser main owns game state, legal Action decoding, adoption timers,
+UTF8 encoding, goal/RuleA results, and timestamps. The Worker validates
+completed snapshots and writes a fresh 48-byte SAB per request. Atomic sequence
+checks provide a bounded two-sample read with a previous coherent completion;
+there is no Atomics.wait or lock wait. Generation and position are checked
+against the independently reconstructed Worker state. Cancel/fault invalidate
+shared data; normal budget stopping preserves a completed result.
 
-The original cooperative Worker and completed-snapshot validator are read-only
-imports. Completed snapshots are validated in that Worker and published into
-SAB; they are not forwarded through Playwright bindings. Detailed CP/numeric
-records are collected after public adoption and stop. Node launches and
-monitors processes, drives one browser operation, and saves its returned data;
-it does not compute game legality or per-hand timestamps.
+Detailed CP is requested after public adoption and zero stop ACK, then checked
+in the browser. Node launches, externally monitors, and saves returned results;
+it neither judges moves nor supplies per-turn timestamps. Browser startup
+calibrates the main/Worker clock interval and performs six separate root NN
+calls. New work uses the early-side 402ms cutoff and 500ms deadline.
 
-`mock-protocol.cjs` passed in Node worker_threads. It does not establish browser
-operation. The browser preflight was forcibly stopped by its static 896MiB
-current-RSS guard before a capability result or model load was returned. Actual
-browser loading, crossOriginIsolated, root numerical gates, startup6, and the
-three selected AI requests remain unverified. No actual AI request ran.
+Frame7 browser preflight passed with Chrome RAM4GiB/current-RSS guard3.5GiB.
+Seven functional responses and four exploratory games completed. All game
+publics were legal; Worker stop/ACK delays remain in the evidence. Initial clock
+bounds do not prove end-of-run drift or hard deadlines. Results establish no
+formal fairness, NI, or Sigma equivalence. See the experiment report and
+research-data/ai-sigma/107-cp-frame/frame7-archive-manifest.json.
 
-The next run requires a current allocation appropriate for the browser's
-observed RSS; this document does not authorize a retry or extend the deadline.
-Existing code still needs browser execution and independent review. Neither
-SAB itself nor the mock proves a hard deadline, complete cleanup, fair chess
-strength, or Sigma equivalence.
+Reproduction requires a current allocation, a fresh run/config and deadlines.
+Use runner.py --config <newconfig> node --max-old-space-size=192
+--no-node-snapshot <absolute diagnose.cjs> --config <newconfig>. This README
+provides no additional execution permission.

@@ -1,0 +1,120 @@
+{
+  "issue": "quoridor-4lc.107",
+  "frame": 7,
+  "source_Git": "ec4e92d68b4b4aabd7d45ae6cf8cb1234abae82b",
+  "runs": [
+    {
+      "run": "frame7-functional-r1",
+      "responses": 7,
+      "classifications": {
+        "completed_legal": 6,
+        "cancel_null": 1
+      },
+      "public_max_ms": 417.880126953125,
+      "hand_NN": 77,
+      "fixed_reference_roots": 4,
+      "self_consistency_roots": 3,
+      "Worker_stop": {
+        "not_measured": 7
+      },
+      "ACK_wall_gt500": 0,
+      "startup_NN": 6
+    },
+    {
+      "run": "frame7-initial-pair-r1",
+      "responses": 134,
+      "classifications": {
+        "completed_legal": 134
+      },
+      "public_max_ms": 453.590087890625,
+      "hand_NN": 598,
+      "fixed_reference_roots": 2,
+      "self_consistency_roots": 132,
+      "Worker_stop": {
+        "upper_le_D": 130,
+        "lower_gt_D": 4
+      },
+      "ACK_wall_gt500": 4,
+      "startup_NN": 6
+    },
+    {
+      "run": "frame7-asym-pair-r1",
+      "responses": 162,
+      "classifications": {
+        "completed_legal": 162
+      },
+      "public_max_ms": 438.269775390625,
+      "hand_NN": 665,
+      "fixed_reference_roots": 2,
+      "self_consistency_roots": 160,
+      "Worker_stop": {
+        "upper_le_D": 156,
+        "lower_gt_D": 5,
+        "straddles_D": 1
+      },
+      "ACK_wall_gt500": 6,
+      "startup_NN": 6
+    }
+  ],
+  "game_starts": 4,
+  "games": [
+    {
+      "id": "initial-candidate-color1",
+      "fixture_id": "initial-p1",
+      "candidate_color": 1,
+      "status": "terminal",
+      "winner": 2,
+      "reason": "goal",
+      "total_ply": 66
+    },
+    {
+      "id": "initial-candidate-color2",
+      "fixture_id": "initial-p1",
+      "candidate_color": 2,
+      "status": "terminal",
+      "winner": 2,
+      "reason": "goal",
+      "total_ply": 68
+    },
+    {
+      "id": "asym-candidate-color1",
+      "fixture_id": "asym-hv-p2",
+      "candidate_color": 1,
+      "status": "terminal",
+      "winner": 2,
+      "reason": "goal",
+      "total_ply": 76
+    },
+    {
+      "id": "asym-candidate-color2",
+      "fixture_id": "asym-hv-p2",
+      "candidate_color": 2,
+      "status": "terminal",
+      "winner": 2,
+      "reason": "goal",
+      "total_ply": 92
+    }
+  ],
+  "exploratory_WDL": {
+    "W": 2,
+    "D": 0,
+    "L": 2
+  },
+  "game_publics": 296,
+  "search_zero_ACK": 303,
+  "normal_publics": 302,
+  "cancel_null": 1,
+  "public_max_ms": 453.590087890625,
+  "post402_NN_definite": 0,
+  "post402_NN_possible": 0,
+  "postpublic_NN_definite": 0,
+  "functional_requests": 7,
+  "startup_NN_total": 18,
+  "hand_NN_total": 1340,
+  "publics_do_not_wait_ACK": true,
+  "limitations": [
+    "current absence is not natural stop/all-period ownership proof",
+    "initial browser-main/Worker calibration only; end drift unmeasured",
+    "40ms instantaneous peaks and external background not guaranteed"
+  ]
+}

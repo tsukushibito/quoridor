@@ -1,0 +1,99 @@
+{
+  "issue": "quoridor-4lc.107",
+  "frame": 7,
+  "UTC": "2026-10-02T06:59:33.304050+00:00",
+  "source_Git": "ec4e92d68b4b4aabd7d45ae6cf8cb1234abae82b",
+  "source_stopped": true,
+  "new_NN_or_games": false,
+  "all_processes": [
+    {
+      "run": "frame7-asym-pair-r1",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "RSSpeak": 1711349760,
+      "storagepeak": 48959488,
+      "wall_seconds": 93.554661,
+      "ru_maxrss": 615759872
+    },
+    {
+      "run": "frame7-functional-r1",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "RSSpeak": 1588736000,
+      "storagepeak": 3485696,
+      "wall_seconds": 13.867655,
+      "ru_maxrss": 607244288
+    },
+    {
+      "run": "frame7-initial-pair-r1",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "RSSpeak": 1659789312,
+      "storagepeak": 23252992,
+      "wall_seconds": 77.655346,
+      "ru_maxrss": 615759872
+    },
+    {
+      "run": "frame7-preflight-r1",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "RSSpeak": 1109819392,
+      "storagepeak": 1654784,
+      "wall_seconds": 6.309407,
+      "ru_maxrss": 607244288
+    },
+    {
+      "run": "frame7-preflight-r2",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "RSSpeak": 1145323520,
+      "storagepeak": 1884160,
+      "wall_seconds": 4.655697,
+      "ru_maxrss": 607244288
+    },
+    {
+      "run": "frame7-preflight-r3",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "RSSpeak": 1202180096,
+      "storagepeak": 3506176,
+      "wall_seconds": 5.187476,
+      "ru_maxrss": 607244288
+    }
+  ],
+  "identity_union_count": 519,
+  "current_same_identity_live": [],
+  "source_hashes": {
+    "tools/ai-sigma-cp-frame/README.md": "0516970ba5d3e22c360bfa424401711eb0f166366c6d82295cfb6427a945ac72",
+    "tools/ai-sigma-cp-frame/browser-main.js": "829a0f1e36c1d4e948247bf75e2a70bdcf088deadb83b7cde7d043355d2a949b",
+    "tools/ai-sigma-cp-frame/browser-sab.cjs": "487fd830f069a7a0843073b79dc0cb9913283e1df663758c27a65525191422e8",
+    "tools/ai-sigma-cp-frame/browser.cjs": "8b0c6f4acb6fe3d99d718e625308d334e1f7516ff792f88479d79355e5ddeefc",
+    "tools/ai-sigma-cp-frame/diagnose.cjs": "96e92de1143e9a955dbd1464d68897386dccb06fc9e2e4e48b2706ab6b1cf0ed",
+    "tools/ai-sigma-cp-frame/frame-codec.js": "b5209a7bba33e019005068b470aa87ea68f88d860840f86922122b7637928f77",
+    "tools/ai-sigma-cp-frame/mock-protocol.cjs": "adf64f4d017ecde5d31ae1633239478c24206e77536c313e7aff2f6265f33c06",
+    "tools/ai-sigma-cp-frame/numeric-browser.js": "00d4d518a613e1a28fb4ee010076d3bca20a7247b0d0a96a46dd4ca86b74df01",
+    "tools/ai-sigma-cp-frame/protocol-worker.js": "5f74daff7279fcf9e3697fe538e280480705e42ba63c88b2a6789efa6d26d77c",
+    "tools/ai-sigma-cp-frame/real-backend.cjs": "1bb3a1aa5d806426379335c423642865d0eebe552b57511b1cefe26f1aeed17f",
+    "tools/ai-sigma-cp-frame/runner.py": "40c606874288d46460963e4e56065ced399dc79c405377591b174f94293759ca",
+    "tools/ai-sigma-cp-frame/sab-worker.js": "a1f0c2c76ceb9e8c8136dead7e12e9d53a2c63feda21ca149d27eeb25bceefcb",
+    "tools/ai-sigma-cp-frame/shared-best-action.cjs": "37491ac0e9f2fb20b564fb2699ac58c3dfc35bff84ca888cd39b40036359132a",
+    "tools/ai-sigma-cp-frame/worker-adapter.js": "1bc4324a34b21ec36cf68b806b4d0b73a9a0c26e47ac604a0161663345984953"
+  },
+  "limits": [
+    "current absence is not natural stop/all-period ownership proof",
+    "initial browser-main/Worker calibration only; end drift unmeasured",
+    "40ms instantaneous peaks and external background not guaranteed"
+  ]
+}
