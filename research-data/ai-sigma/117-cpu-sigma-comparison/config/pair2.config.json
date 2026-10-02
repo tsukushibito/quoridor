@@ -1,0 +1,46 @@
+{
+  "issue": "quoridor-4lc.117",
+  "frame": 8,
+  "Git": "db3bdc029a049e7feed1c5da9624786ba9419e9e",
+  "processing_deadline": "2026-10-02T12:15:00Z",
+  "newjob_deadline": "2026-10-02T12:10:00Z",
+  "diagnostic": true,
+  "actual_go": false,
+  "holdout": 0,
+  "adopt_ms": 411,
+  "sample_interval_ms": 8,
+  "T_ms": 500,
+  "nn_cutoff_ms": 402,
+  "worker_D_ms": 500,
+  "seed": 1979,
+  "candidate_C": 1.5,
+  "reference_C": 1,
+  "CPU": [
+    2
+  ],
+  "NN_threads_each": 1,
+  "model_sessions": 2,
+  "old_worker_ACK_before_opposite_input_required": false,
+  "own_previous_zero_before_own_input_required": true,
+  "numeric_after_progression": true,
+  "classification_policy": "112 cause priority; explicit reference NN/model/fallback fault invalid, candidate NN fault loss, common identity unfinished; simultaneous browser/automation flags retain priority",
+  "run_id": "cpu117-pair2-r1",
+  "kind": "browser-pair",
+  "schedule": [],
+  "dynamic_plies": 0,
+  "pin_owned_TIDs": true,
+  "games": [
+    {
+      "id": "pair2-color1",
+      "fixture_id": "asym-hv-p2",
+      "candidate_color": 1,
+      "seed": 1979
+    },
+    {
+      "id": "pair2-color2",
+      "fixture_id": "asym-hv-p2",
+      "candidate_color": 2,
+      "seed": 1979
+    }
+  ]
+}
