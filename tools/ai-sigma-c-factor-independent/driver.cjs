@@ -28,6 +28,7 @@ async function main() {
     await browser.page.addScriptTag({path:__dirname+'/independent-browser.js'});
     save('independent-classification',await browser.page.evaluate(()=>independentClassification111()));
     if(config.independent_saved){const savedJSON=fs.readFileSync(OUT+'/saved-browser-input.json','utf8');save('independent-saved-audit',await browser.page.evaluate(async ({savedJSON,fixtures,references})=>auditAll111(JSON.parse(savedJSON),fixtures,references),{savedJSON,fixtures,references}));}
+    if(config.clock_only){const savedJSON=fs.readFileSync(OUT+'/saved-browser-input.json','utf8');save('independent-clock-audit',await browser.page.evaluate(savedJSON=>auditClocks111(JSON.parse(savedJSON)),savedJSON));}
     if(mode==='NN') {
       if(Date.now()>=Date.parse(config.newjob_deadline))throw Error('NEW_HEAVY_CUTOFF');
       monitor.check();save('config',config);
