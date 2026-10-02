@@ -1,0 +1,36 @@
+{
+  "issue": "quoridor-4lc.133",
+  "frame": 9,
+  "kind": "protocol",
+  "run_id": "p133-source-audit-r1",
+  "processing_deadline": "2026-10-02T17:15:32Z",
+  "newjob_deadline": "2026-10-02T17:10:32Z",
+  "seed": 1979,
+  "count_timeout_ms": 30000,
+  "searches": [
+    {
+      "fixture_id": "diverse-prefix-mid-pair2-color2-new8",
+      "engine": "candidate",
+      "K": 32
+    },
+    {
+      "fixture_id": "diverse-prefix-mid-pair2-color2-new8",
+      "engine": "reference",
+      "K": 32
+    },
+    {
+      "fixture_id": "diverse-prefix-mid-pair2-color2-new16",
+      "engine": "reference",
+      "K": 32
+    },
+    {
+      "fixture_id": "diverse-prefix-mid-pair2-color2-new16",
+      "engine": "candidate",
+      "K": 32
+    }
+  ],
+  "startup_separate": 6,
+  "tracecap": 8,
+  "new_games": 0,
+  "selection_result_before": true
+}
