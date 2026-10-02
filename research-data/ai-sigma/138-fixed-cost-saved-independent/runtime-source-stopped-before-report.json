@@ -1,0 +1,219 @@
+{
+  "issue": "quoridor-4lc.138",
+  "UTC": "2026-10-02T18:22:09.276972+00:00",
+  "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+  "source_write_stopped": true,
+  "source_hashafter": {
+    "tools/ai-sigma-fixed-cost-saved-independent/numeric.cjs": "7e247732efc5a3946d3fe4ea20ea94514594f870a19c6772a30ebe310e11879f",
+    "tools/ai-sigma-fixed-cost-saved-independent/managed.py": "4dfd18a5d4234c2fa4f6cabc0fad84b21f6838709ab2f872bf055f0cb99f173e",
+    "tools/ai-sigma-fixed-cost-saved-independent/check.py": "52a4846d3d2b1cdb133693796d5d2278382e01f37e6eeedacf46f1a3ded0cca0"
+  },
+  "managed_jobs": [
+    {
+      "run": "verify-r1",
+      "command": [
+        "python3",
+        "tools/ai-sigma-fixed-cost-saved-independent/check.py"
+      ],
+      "UTC_start": "2026-10-02T18:17:57.887351+00:00",
+      "UTC_end": "2026-10-02T18:17:59.227903+00:00",
+      "wall_s": 1.3405650610220619,
+      "exit": 0,
+      "reason": null,
+      "peak_observed_RSS": 46395392,
+      "CPU": [
+        0
+      ],
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "owned": [
+        {
+          "pid": 2733348,
+          "start_ticks": 21799546,
+          "pgrp": 2733348
+        },
+        {
+          "pid": 2733349,
+          "start_ticks": 21799551,
+          "pgrp": 2733349
+        },
+        {
+          "pid": 2733350,
+          "start_ticks": 21799553,
+          "pgrp": 2733349
+        },
+        {
+          "pid": 2733351,
+          "start_ticks": 21799568,
+          "pgrp": 2733349
+        },
+        {
+          "pid": 2733352,
+          "start_ticks": 21799585,
+          "pgrp": 2733349
+        },
+        {
+          "pid": 2733354,
+          "start_ticks": 21799595,
+          "pgrp": 2733349
+        },
+        {
+          "pid": 2733355,
+          "start_ticks": 21799612,
+          "pgrp": 2733349
+        },
+        {
+          "pid": 2733359,
+          "start_ticks": 21799640,
+          "pgrp": 2733349
+        },
+        {
+          "pid": 2733365,
+          "start_ticks": 21799677,
+          "pgrp": 2733349
+        }
+      ],
+      "remaining": [],
+      "unknown_not_signalled": true,
+      "short_child_between_samples_missing": true
+    },
+    {
+      "run": "numeric-r1",
+      "command": [
+        "node",
+        "--max-old-space-size=128",
+        "tools/ai-sigma-fixed-cost-saved-independent/numeric.cjs"
+      ],
+      "UTC_start": "2026-10-02T18:19:17.472492+00:00",
+      "UTC_end": "2026-10-02T18:19:17.543866+00:00",
+      "wall_s": 0.07138501200824976,
+      "exit": 0,
+      "reason": null,
+      "peak_observed_RSS": 70152192,
+      "CPU": [
+        0
+      ],
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "owned": [
+        {
+          "pid": 2734136,
+          "start_ticks": 21807507,
+          "pgrp": 2734136
+        },
+        {
+          "pid": 2734138,
+          "start_ticks": 21807511,
+          "pgrp": 2734138
+        },
+        {
+          "pid": 2734145,
+          "start_ticks": 21807513,
+          "pgrp": 2734138
+        },
+        {
+          "pid": 2734146,
+          "start_ticks": 21807513,
+          "pgrp": 2734138
+        }
+      ],
+      "remaining": [],
+      "unknown_not_signalled": true,
+      "short_child_between_samples_missing": true
+    },
+    {
+      "run": "verify-r2",
+      "command": [
+        "python3",
+        "tools/ai-sigma-fixed-cost-saved-independent/check.py"
+      ],
+      "UTC_start": "2026-10-02T18:20:41.343437+00:00",
+      "UTC_end": "2026-10-02T18:20:42.812799+00:00",
+      "wall_s": 1.4693759460060392,
+      "exit": 0,
+      "reason": null,
+      "peak_observed_RSS": 70344704,
+      "CPU": [
+        0
+      ],
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "owned": [
+        {
+          "pid": 2735000,
+          "start_ticks": 21815898,
+          "pgrp": 2735000
+        },
+        {
+          "pid": 2735002,
+          "start_ticks": 21815901,
+          "pgrp": 2735002
+        },
+        {
+          "pid": 2735003,
+          "start_ticks": 21815903,
+          "pgrp": 2735002
+        },
+        {
+          "pid": 2735004,
+          "start_ticks": 21815925,
+          "pgrp": 2735002
+        },
+        {
+          "pid": 2735005,
+          "start_ticks": 21815932,
+          "pgrp": 2735002
+        },
+        {
+          "pid": 2735007,
+          "start_ticks": 21815939,
+          "pgrp": 2735002
+        },
+        {
+          "pid": 2735008,
+          "start_ticks": 21815953,
+          "pgrp": 2735002
+        },
+        {
+          "pid": 2735009,
+          "start_ticks": 21815982,
+          "pgrp": 2735002
+        },
+        {
+          "pid": 2735010,
+          "start_ticks": 21815996,
+          "pgrp": 2735002
+        },
+        {
+          "pid": 2735017,
+          "start_ticks": 21816015,
+          "pgrp": 2735002
+        },
+        {
+          "pid": 2735018,
+          "start_ticks": 21816031,
+          "pgrp": 2735002
+        },
+        {
+          "pid": 2735020,
+          "start_ticks": 21816039,
+          "pgrp": 2735002
+        },
+        {
+          "pid": 2735021,
+          "start_ticks": 21816043,
+          "pgrp": 2735002
+        }
+      ],
+      "remaining": [],
+      "unknown_not_signalled": true,
+      "short_child_between_samples_missing": true
+    }
+  ],
+  "owned_identity_count": 26,
+  "current_same_identity": [],
+  "Chrome_Model_Worker_NN_started": 0,
+  "other_owner_signal": 0,
+  "current_absence_not_natural_allperiod": true,
+  "management_short_command_fullperiod_PID_RSS_missing": true,
+  "checker_run_source_hash_missing_before_r1": true,
+  "final_source_hash_and_saved_diff_record_present": true,
+  "base_Git_at_freeze": "e91228431d09fd15c451e6fb011e90b7ca38bf2c"
+}
