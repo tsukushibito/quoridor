@@ -1,0 +1,9 @@
+# 77版2 / 87 NN0入口の限定受入れ
+
+writer Git ffb4559413a907b044b464f06d81f7c223df9cfeのsame actual-driver最小NN0経路を、critic Git e27fde12bf524620219f3c8112bd3aff11fda49dの独立8 CLIケースで有限支持。元15/7 monitor-stopと独立8/5stopは別分母。正diagnostic→monitor READY→2mock public、typed BEADS_READ_ERROR/PROCESSING_DEADLINE、未dispatch/partial、既run、real診断proof拒否、subject/review意味拒否を支持。
+
+診断proof/人工cp/counterは実NN・実game・holdoutの実績ではない。real正freeze→real factory起動は未実行。時計全gate/OS hard deadline/棋力/NI/entry_ready/goalは未認定、actual_go=false。
+
+統括はsource/entry/stopの指定3hash、独立stop83947f15062b904368152f2130100c609c8d73f15d1f8cbf17bc28dfff6d83a8と必要Git版・結果8ケース/5監視枝の保存を確認。29追跡現在不在/forced回収は自然終了/全期間保証にしない。旧77guard失敗/NN11未実施を新成功へ付け替えない。
+
+次は同77の現在許可で固定golden最大5要求をsame actual-driverの診断経路へ接続する。新run/Git版/事前固定/原失敗保持、現run修復は総予算内反復可。実対局/holdout評価/goは許可しない。87は第一段階NN0受入れ済み、第二段階はwriter停止後の現在契約差分に基づく必要少数の独立確認であり旧期限を改変しない。
