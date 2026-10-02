@@ -54,8 +54,9 @@ async function main() {
     if(observerTimer){clearInterval(observerTimer);observerTimer=null;}
     if(browser)try{save('main-timers-stop',await browser.page.evaluate(()=>abortBrowserTimers()));}catch(error){secondary.push({stage:'main-timers-stop',message:error.message});}
     if(browser&&browser.loadState.ready)try{save('finally-model-drop',await browser.page.evaluate(()=>dropEarly()));}catch(error){secondary.push({stage:'finally-drop',message:error.message});}
-    if(browser)try {save('outer-controlled-stop',await boundedStop(browser));}catch(error){secondary.push({stage:'browser-stop',message:error.message});}
+    // Freeze owned observer creation before taking the browser cleanup receipt.
     try{await monitor.stop();}catch(error){secondary.push({stage:'monitor-stop',message:error.message});}
+    if(browser)try {save('outer-controlled-stop',await boundedStop(browser));}catch(error){secondary.push({stage:'browser-stop',message:error.message});}
   }
   const games=gameResult?.games??[];
   const pairing=config.kind==='browser-pair';
