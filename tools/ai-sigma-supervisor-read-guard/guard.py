@@ -382,7 +382,8 @@ def inspect(directory, run, turn, issue_ids=(), files=()):
         rows = read_retry(prefix+['show', *issue_ids, '--json'], directory, token+'-issues', bound, background, check)
         if any('paused-by-user' in (x.get('labels') or []) for x in rows):
             raise Rejected('Selected issue paused; no further checks')
-        result['issues'] = rows
+        result['issues'] = [{**row, 'dependencies': dependency_summary(row.get('dependencies'))}
+                            for row in rows]
     for name in files:
         path = Path(name).resolve()
         allowed = [base/sub for base in (ROOT, MAIN) for sub in ('docs/design', 'docs/reports', '.artifacts/ai-sigma/continuation-20261001')]
