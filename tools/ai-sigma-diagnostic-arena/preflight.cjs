@@ -1,5 +1,5 @@
 'use strict';const fs=require('fs'),assert=require('assert/strict'),crypto=require('crypto'),A=require('./arena.cjs'),{createMonitor}=require('../ai-sigma-actual-boundary-repair/pause-check.cjs');
-async function main(){const config=JSON.parse(fs.readFileSync(process.argv[2])),out=A.OUT+'/preflight-r1';fs.mkdirSync(out,{recursive:false});const save=(n,x)=>fs.writeFileSync(out+'/'+n+'.json',JSON.stringify(x)+'\n'),append=(n,x)=>fs.appendFileSync(out+'/'+n+'.jsonl',JSON.stringify(x)+'\n');
+async function main(){const config=JSON.parse(fs.readFileSync(process.argv[2])),out=A.OUT+'/preflight-'+config.run_id;fs.mkdirSync(out,{recursive:false});const save=(n,x)=>fs.writeFileSync(out+'/'+n+'.json',JSON.stringify(x)+'\n'),append=(n,x)=>fs.appendFileSync(out+'/'+n+'.jsonl',JSON.stringify(x)+'\n');
  A.validate(config);for(const [key,value]of [['holdout',true],['seed',123],['games_before',8],['model_sha256','foreign']]){const q={...config,[key]:value,stage:key==='games_before'?'pair':config.stage};assert.throws(()=>A.validate(q));}
  const checks=[];let stopped=0,drop=0;
  const monitor=createMonitor({out,subjectIssue:config.issue,deadlineUTC:config.processing_deadline,windowEndUTC:'2026-10-02T05:39:12Z'});await monitor.start();
