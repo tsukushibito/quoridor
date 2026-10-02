@@ -1,0 +1,52 @@
+{
+  "at": "2026-10-02T12:12:42.425717+00:00",
+  "roles": {
+    "supervisor": {
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+      "method": "thread/resume",
+      "definition_digest": "97fd8b75dd3544490ac309a1e61b4e3fc760e1b3dd4b36349749fad29921fec9",
+      "accepted": true,
+      "permanent_idle_developer_applied": true,
+      "active_supplement_only": false,
+      "status_after": {
+        "type": "idle"
+      }
+    },
+    "hypothesis": {
+      "thread_id": "01a0f31c-2e4b-7170-82c5-69e1428c2418",
+      "method": "thread/resume",
+      "definition_digest": "f73f8389211ab26b2dad82af32d988bd0a3c1bb4758d0304328145c1ed35f30b",
+      "accepted": true,
+      "permanent_idle_developer_applied": true,
+      "active_supplement_only": false,
+      "status_after": {
+        "type": "idle"
+      }
+    },
+    "critic": {
+      "thread_id": "01a0f31d-8227-7e03-a7e6-915b4918c11b",
+      "method": "thread/resume",
+      "definition_digest": "652993bc55281d1d76d706cdf2b7a234eda3bb56d927dfa536dec9e76126680e",
+      "accepted": true,
+      "permanent_idle_developer_applied": true,
+      "active_supplement_only": false,
+      "status_after": {
+        "type": "idle"
+      }
+    },
+    "coordinator": {
+      "thread_id": "01a0f31b-3409-75f2-a30e-453a50484f94",
+      "method": "turn/steer",
+      "definition_digest": "bd7d114e3a0fffad9305f36d3663731e4d995ec4cbd2b3388d209571736a0b20",
+      "accepted": true,
+      "permanent_idle_developer_applied": false,
+      "active_supplement_only": true,
+      "status_after": {
+        "type": "active",
+        "activeFlags": []
+      }
+    }
+  },
+  "settings_unchanged": true,
+  "developer_body_readback_supported": false
+}

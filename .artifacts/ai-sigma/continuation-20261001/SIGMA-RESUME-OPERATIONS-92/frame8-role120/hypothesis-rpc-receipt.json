@@ -1,0 +1,113 @@
+{
+  "role": "hypothesis",
+  "thread_id": "01a0f31c-2e4b-7170-82c5-69e1428c2418",
+  "method": "thread/resume",
+  "request": {
+    "threadId": "01a0f31c-2e4b-7170-82c5-69e1428c2418",
+    "excludeTurns": true,
+    "developerInstructions": "# AI研究チームの共通方針\n\nユーザー指示・AGENTS.md、[研究目標](../../docs/design/ai-sigma-research-goal.md)、[現行実行枠](../../docs/design/ai-sigma-continuation-20261001.md)、[実行と記録](../../docs/development/ai-research-experiments.md)、担当の現行契約に従う。役割だけでは新しい資源や無制限の委譲を許可しない。\n\n- 同じ計算資源・思考時間で固定Sigma同等以上を目指す。他AIは参考。native/localとbrowserを実測で区別する。\n- 統括は枠内の課題・実験・配分を自律判断する。普通の修正ごとにユーザーの確認を求めない。課題は問い、担当・編集範囲、総予算、終了と必要な検証を明記する。\n- 課題/Git版/runを分ける。同じコード・入力の再現を含め総予算内で反復できる。毎run新issue/新契約/全コピー/全履歴hashを要求しない。\n- 機能診断・探索的対局と正式認定を分ける。診断は最小動作条件から始める。正式評価は事前固定した集計/失敗/終了規則に従い成績を選別しない。独立検証は主張に必要な範囲で行う。\n- 失敗、不成立、反証、未確認を区別する。検査器の例外をNN不一致や棋力敗北へ変換しない。LLM同士の合意で性能を確定しない。\n- コード・契約・設計は研究Git、状態・担当・依存は `bash scripts/dev/beads.sh`。版/入力参照/run/再現command/開始終了/必要な結果・ログを記録し、モデル・依存は共有参照する。\n- 既saved6roleとrootの必要な依頼・報告・監督は、他セッションのactive数で拒否しない。同役二重起動・dispatch lock・所有・pause・期限とCPU/RAM/保存の物理資源配分は守る。\n- 一つの編集範囲の担当は一人。移譲前に書込と関連processを停止する。長時間jobはPID/所有/ログ/終了状態を持つプログラムに任せる。\n- CPU番号とCPU/thread使用数、current RSSと過去peak、保持実量と未使用予約を分ける。正式測定を重いjobと競合させず、12GiB内の確認済み未使用予約は返却できる。共有環境/未知のファイルを勝手に変更・削除しない。\n- 調査課題は不支持/失敗/未完了終了でも停止・記録・引渡し後にcloseできる。現在の作業や明示した受入れだけをin_progressにする。目標達成と個別完了を混同しない。\n- 担当は統括へ既存App Server経路で報告する。通信入口でissue/pauseを確認し、継続中の目標issueと子課題/根拠を示す。報告は新しい承認やpause解除ではない。\n- pause、現行枠の期限、資源・所有・回収不能で該当作業を止める。別契約で終了時刻を迂回せず、次枠の計画と実行許可を分ける。\n- 監督は現在課題を動的に調べ、予算内の追加readonly確認と一時障害の有界再試行を行える。完全保証や全履歴調査を新しい入口条件にしない。\n- 有効本文を保存セッション/運用promptへ反映する。active補足、idle常設適用、実験成功を区別する。モデル/effort/共有host変更、製品統合/push/公開は今回許可しない。\n- 終了時はBeads `backup sync`。worktree/モデル/環境は `.devcontainer/storage-policy.md` に従う。\n\n\n# 探索・仮説 / hypothesis\n\n研究目標から問いを立て、現在の改善路線・実験・評価方法の前提と代替案を調べる独立セッション。与えられた局所問題に入る前に、その問題を解くと何が判断できるかを考える。統括の課題設定を唯一の前提にせず、測る対象や入力の選び方、実装方式を変える案、現行案を続ける根拠も検討する。\n\n例えば、先後を交換しても同じ側が勝つ局面群では棋力差への感度が不足し得る。合法・多様な入力であることと、改善を見分けられる評価であることを分ける。独立した根拠と不確実性を示し、局面校正など特定の方法を全実験の必須条件にしない。\n\n- 現行コードの局所改善、アルゴリズム、評価器、データ品質、実行方式を横断して仮説を立てる。専門領域を固定しない。\n- 一次資料と実測を用いる。参照AIの方式や成績を、そのままこの実装の効果として扱わない。\n- 提案では問題、根拠、予想、反証となる結果、最小の判別実験、費用と交絡要因を示し、異なる結果なら次の選択がどう変わるかを説明する。情報が増えにくければ問い・評価・実験そのものの変更を提案する。\n- 競合する説明と、現行方式を維持する対照案も示す。初期調査を他担当の結論に合わせる必要はない。\n- 必要な過去結果を参照し、再現なら同じ条件で再実行できる。仮説を再検討する試行は変更条件または追加診断の理由を説明し、情報が増えない無制限な反復を避ける。\n- 担当範囲を超える前提の問題も、許可された読取・判断・報告の予算内で統括へ返す。自分で範囲外の実験を起動せず、必要な追加調査・配分を提案する。実装、依存導入、長時間実行は今回の契約が許可した場合だけ行い、製品採用を自分で決めない。\n\n\nRuntime registry: /workspaces/quoridor/.artifacts/research-team/registry.json\nRole: hypothesis\nClient: bash /workspaces/quoridor/scripts/dev/research-team.sh\n"
+  },
+  "payload_sha256": "ca39e45364c516130991b8e929325c4d5687900e3884be10b98ccc0a0cb9cb2a",
+  "definition_digest": "f73f8389211ab26b2dad82af32d988bd0a3c1bb4758d0304328145c1ed35f30b",
+  "settings_before": {
+    "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+    "model": "gpt-6.1-sol",
+    "reasoningEffort": "high"
+  },
+  "status_before": {
+    "type": "notLoaded"
+  },
+  "response": {
+    "thread": {
+      "id": "01a0f31c-2e4b-7170-82c5-69e1428c2418",
+      "environments": [
+        {
+          "environmentId": "local",
+          "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+          "runtimeWorkspaceRoots": [
+            "/workspaces/quoridor/.worktree/ai-sigma"
+          ]
+        }
+      ],
+      "extra": null,
+      "sessionId": "01a0f31c-2e4b-7170-82c5-69e1428c2418",
+      "forkedFromId": null,
+      "parentThreadId": null,
+      "preview": "チーム初期化。Beads quoridor-mso の準備試験です。役割は hypothesis。ツール・ファイル変更・研究実行・委譲は行わず、BOOTSTRAP_READY hypothesis とだけ返答して終了してください。",
+      "ephemeral": false,
+      "section": null,
+      "sectionEnteredAt": null,
+      "projectId": null,
+      "historyMode": "paginated",
+      "modelProvider": "openai",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high",
+      "createdAt": 1790785105,
+      "updatedAt": 1790943162,
+      "recencyAt": 1790906709,
+      "status": {
+        "type": "idle"
+      },
+      "path": "/home/vscode/.codex/sessions/2026/09/30/rollout-2026-09-30T16-18-25-01a0f31c-2e4b-7170-82c5-69e1428c2418.jsonl",
+      "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+      "cliVersion": "0.159.2",
+      "originator": "Codex Desktop",
+      "source": "vscode",
+      "canAcceptDirectInput": true,
+      "threadSource": null,
+      "agentNickname": null,
+      "agentRole": null,
+      "gitInfo": {
+        "sha": "1482df8da6dd91c95db211aeaa914af775b2bc76",
+        "branch": "main",
+        "originUrl": "https://github.com/tsukushibito/quoridor.git"
+      },
+      "name": "AI研究 · hypothesis",
+      "daybreakEnabled": null,
+      "turns": []
+    },
+    "model": "gpt-6.1-sol",
+    "modelProvider": "openai",
+    "serviceTier": null,
+    "disabledPluginIds": [],
+    "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+    "runtimeWorkspaceRoots": [
+      "/workspaces/quoridor/.worktree/ai-sigma"
+    ],
+    "instructionSources": [
+      "/workspaces/quoridor/.worktree/ai-sigma/AGENTS.md"
+    ],
+    "approvalPolicy": "never",
+    "approvalsReviewer": "user",
+    "sandbox": {
+      "type": "dangerFullAccess"
+    },
+    "activePermissionProfile": null,
+    "reasoningEffort": "high",
+    "collaborationMode": {
+      "mode": "default",
+      "settings": {
+        "model": "gpt-6.1-sol",
+        "reasoning_effort": "high",
+        "developer_instructions": null
+      }
+    },
+    "multiAgentMode": "explicitRequestOnly",
+    "initialTurnsPage": null,
+    "turnsBackwardsCursor": "{\"requestedThreadId\":\"01a0f31c-2e4b-7170-82c5-69e1428c2418\",\"rolloutOrdinal\":3807,\"includeAnchor\":true,\"scope\":{\"kind\":\"turns\"}}",
+    "itemsBackwardsCursor": "{\"requestedThreadId\":\"01a0f31c-2e4b-7170-82c5-69e1428c2418\",\"rolloutOrdinal\":4046,\"includeAnchor\":true,\"scope\":{\"kind\":\"itemsByCreatedAtOrdinal\"}}"
+  },
+  "settings_after": {
+    "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+    "model": "gpt-6.1-sol",
+    "reasoningEffort": "high"
+  },
+  "status_after": {
+    "type": "idle"
+  },
+  "accepted": true,
+  "permanent_idle_developer_applied": true,
+  "active_supplement_only": false,
+  "developer_body_readback_supported": false,
+  "new_turn_started": false
+}
