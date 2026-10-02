@@ -26,9 +26,13 @@ with tempfile.TemporaryDirectory() as directory:
  except RuntimeError as error:assert 'ADMISSION_READ_ERROR' in str(error)
  else:raise AssertionError('LIVE_EMPTY_COMMAND_ALLOWED')
  (p/'cmdline').write_bytes(b'node\x00metadata-reader.cjs\x00')
+ (p/'exe').symlink_to('/usr/bin/node')
  assert scan_processes(proc=root)==[]
  (p/'cmdline').write_bytes(b'chrome\x00--type=renderer\x00')
+ (p/'exe').unlink();(p/'exe').symlink_to('/bin/chrome')
  assert len(scan_processes(proc=root))==1
+ (p/'cmdline').write_bytes(b'node\x00--type=renderer\x00')
+ assert len(scan_processes(proc=root))==1,'ARGV0_MUST_NOT_HIDE_REAL_CHROME'
  (p/'stat').write_text('malformed')
  try:scan_processes(proc=root)
  except RuntimeError as error:assert 'ADMISSION_READ_ERROR' in str(error)

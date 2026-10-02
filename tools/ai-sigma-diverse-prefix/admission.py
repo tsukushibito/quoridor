@@ -24,7 +24,8 @@ def scan_processes(exclude=None,proc=Path('/proc'),timeout=3):
    if not args:
     if state=='Z':continue
     raise RuntimeError('LIVE_COMMAND_UNKNOWN '+p.name)
-   rec={'pid':pid,'ppid':ppid,'start_ticks':tick,'state':state,'exe':args[0],'argv':args[1:]}
+   executable=os.readlink(p/'exe')
+   rec={'pid':pid,'ppid':ppid,'start_ticks':tick,'state':state,'exe':executable,'argv':args[1:]}
    if classify_process(rec):records.append(rec)
   except (FileNotFoundError,ProcessLookupError):
    if p.exists():raise RuntimeError('ADMISSION_PROCESS_READ_UNKNOWN '+p.name)
