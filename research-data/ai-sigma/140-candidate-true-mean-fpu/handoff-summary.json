@@ -1,0 +1,76 @@
+{
+  "issue": "quoridor-4lc.140",
+  "UTC": "2026-10-02T18:59:16.433804+00:00",
+  "measured_Git": "25d673dcee7cde1516eb10445eb4611abebc20f7",
+  "data_report_Git": "a09a25566d5508caf36ebc9564096c5c0514524b",
+  "stop_SHA256": "16a3f57c2d38ebe046d364145ed292355ad352e164494791ba83d84db9e0c136",
+  "archive_SHA256": "1fd8e4483e0e95b7f42ec92b2898a88d717e31f0de5b33e04751019fff69c427",
+  "archive_members": 76,
+  "Git_restored_files": 44,
+  "report": "docs/reports/ai-sigma-experiment-candidate-true-mean-fpu.md",
+  "branch": "known_adverse_input3_end",
+  "all_mechanism_planned_started_completed": [
+    6,
+    6,
+    6
+  ],
+  "Actions": [
+    {
+      "fixture_id": "diverse-prefix-mid-pair2-color2-new8",
+      "original_Action": 161,
+      "Q0_Action": 161,
+      "FPU_Action": 133,
+      "TV": 0.6129032258064514,
+      "NN_Q0": 32,
+      "NN_FPU": 32
+    },
+    {
+      "fixture_id": "diverse-prefix-mid-pair2-color2-new16",
+      "original_Action": 32,
+      "Q0_Action": 32,
+      "FPU_Action": 118,
+      "TV": 0.8064516129032255,
+      "NN_Q0": 32,
+      "NN_FPU": 32
+    }
+  ],
+  "quality_started": 0,
+  "source_write_stopped": true,
+  "runtime_stopped": true,
+  "current_identity_absence_not_natural_allperiod": true,
+  "no_NI_Sigma_policy_adoption": true,
+  "ready_for_coordinator_acceptance": true,
+  "ownership_of_original_results_not_changed": true,
+  "storage_final": {
+    "UTC": "2026-10-02T18:59:16.433557+00:00",
+    "current_allocated": {
+      "tools/ai-sigma-candidate-true-mean-fpu": 200704,
+      "research-data/ai-sigma/140-candidate-true-mean-fpu": 995328,
+      ".artifacts/ai-sigma/resume-20261002/CANDIDATE-TRUE-MEAN-FPU": 9957376
+    },
+    "conservative_new_Git_bytes": 1087776,
+    "current_plus_Git": 12241184,
+    "final_transfer_forecast": 2097152,
+    "guard": 234881024,
+    "valid_self_reservation": 268435456,
+    "valid_unused": 256194272,
+    "existing_experiment_entry_conservative": 2147483648,
+    "old_unknown_not_decreased": true,
+    "additional_parent_reservation": 0,
+    "peak_previous_current_separate": 52695040,
+    "owned_unused_targets_removed_after_stop_Git_restore": [
+      {
+        "path": ".artifacts/ai-sigma/resume-20261002/CANDIDATE-TRUE-MEAN-FPU/build/target-q0",
+        "allocated_before": 20779008,
+        "regenerable_offline_from_saved_source_command": true
+      },
+      {
+        "path": ".artifacts/ai-sigma/resume-20261002/CANDIDATE-TRUE-MEAN-FPU/build/target-fpu",
+        "allocated_before": 20779008,
+        "regenerable_offline_from_saved_source_command": true
+      }
+    ],
+    "source_raw_binary_model_removed": 0,
+    "parent_current_unknown_unchanged": true
+  }
+}
