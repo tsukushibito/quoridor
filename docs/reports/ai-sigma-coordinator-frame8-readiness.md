@@ -13,3 +13,11 @@
 担当開始ACK: experiment115は10:24:17UTC保守受領、全文/固定版依存差分・ready/show/pause/担当確認後本人claim。処理11:24:17/新run11:19:17/提出11:34:17、実GPU/VRAM/Chromium compute preflightへ着手。hostRTX3060/VRAM1496MiB/compute app空は観測でありモデルGPU実行成功ではない。steward92も10:24:22UTCに契約4/枠8全文・両mirror/本人所有確認後受領開始をBeadsに保存。新終了責任を同92ownerが受領し、実running/loadedは提出証拠を待つ。
 
 比較計画は116として既criticへ10:32:10.685UTC公式turn/start accepted、exact turn01a0fc2b-e6b6-7f70-83aa-75d5b07f3b6eで実配分した。CPU/GPU双方条件、採用/残処理/待ちの区別と正式精度・標本数・最悪時間を結果前に設計する軽い課題で、GPU実測の新gateではない。CPU0/RAM512guard448MiB/新4guard3MiB既critic予約内、NN/Chrome/GPU/対局/source改変0。GPU不成立時にも残りの許可研究の具体的次案を選べるようにする。
+
+92起動受入れ: owner最終準備Git1909e48bdef874b90caeacc81a0e316365bcae01、6少数NN0pass、source/shortchild停止/backup。fresh start10:32:29.156361でscheduler2402552/start19006242・monitor2402571/start19006262がrunning。統括10:34:32のreadonly照合で同boot/identity現在一致、必要24input hash不一致0、loaded config337dd95b…bc24/contracta8f55457…be42一致、end14:10:49を確認した。reloadedイベントとは呼ばない。root114も独立照合し再開・計画追加/担当引渡しを受入れた旨の通知を受領。92の長期責任/旧枠最終未確認は保持しin_progress。
+
+初回自然監督turn01a0fc2c-3ced-7762-b66c-1ef51f96bddbは10:32:32.752943 dispatch→10:35:33.870709 interrupted。運用の実dispatchと中断を保存し成功したwholeturn/点検内容/全面遵守とは認定しない。各turnのための新critic層を追加しない。
+
+115途中: secure/isolated/SAB・compute sentinel読戻しは実browserで成立したが、当該adapterはGoogle/SwiftShader/isFallbackAdapter=true、CDP SwANGLE software。物理RTX3060モデルGPU実行未確認なのでC60/D12は未開始。hostVRAM約1.5GiB/利用0を当該dispatch証拠へ格上げしない。/dev/dxgあり、native vkCreateInstance=-9/ICD設定空/compute,utilityのみ露出は不足候補。自己browserはjob-local LIBGL_ALWAYS_SOFTWARE=0へ明示済み、親のsoftware設定だけで断定しない。default/Vulkan profileとdriverの必要小readonly確認・最小追加条件を115が保存中で共有環境変更0。旧launcher/r1r2失敗とGPU可否を混同しない。
+
+116本人10:32:31UTC受領claim/開始ACK。早側処理10:52:31/newcommand10:49:31/提出10:57:31、CPU0軽い計画のみ。現在は115停止最小版/不足報告と116計画結果待ち、報告先coordinator。
