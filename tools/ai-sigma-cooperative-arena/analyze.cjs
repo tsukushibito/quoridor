@@ -43,7 +43,7 @@ function analyze(run) {
  }
  for(const game of summary.games) {
   if(game.result.prefix)A.J.ids(game.result.prefix);
-  if(game.result.terminal)assert.deepEqual(A.J.terminalResult(A.J.state(game.result.prefix)),game.result.terminal);
+  if(game.result.terminal)assert.deepEqual(JSON.parse(JSON.stringify(A.J.terminalResult(A.J.state(game.result.prefix)))),game.result.terminal);
  }
  const counts={public:rows.length,accepted:rows.filter(r=>r.accepted).length,late:publicRows.filter(r=>r.response.late).length,missing_completed_cp:rows.filter(r=>!r.checkpoint).length,hand_NN:summary.NN_hand,startup_NN:summary.startup.root_NN,fixed_golden_root_references:gates.filter(g=>g.fixed_reference).length,dynamic_root_gates:gates.filter(g=>!g.fixed_reference&&!g.missing_numeric).length,features_bits:gates.filter(g=>!g.missing_numeric).length*648,NN_elements:gates.filter(g=>!g.missing_numeric).length*137,prior_elements:gates.reduce((n,g)=>n+(g.priors??0),0)};
  const engines=['candidate','reference'].map(engine=>{
