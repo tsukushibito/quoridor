@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "UTC": "2026-10-02T03:39:24.025595+00:00",
+  "goal": "quoridor-4lc",
+  "limit_bytes": 12884901888,
+  "basis": "retention-99/capacity-before.json same deliberately conservative overlapping envelope; not whole-host unique allocation",
+  "retention99": {
+    "owner_work_complete": true,
+    "data_git": "6710b177387f2d9f49d6509a051b8d36213a3a6f",
+    "report_git": "1b889414",
+    "original_reservation_bytes": 536870912,
+    "research_data_working_current_allocated": 70512640,
+    "git_objects_current_allocated": 96247808,
+    "git_objects_baseline_allocated": 31640576,
+    "git_growth_conservatively_all_attributed_to_migration": 64607232,
+    "held_working_plus_git_growth": 135119872,
+    "retained_reservation_bytes": 142606336,
+    "unused_retained_bytes": 7486464,
+    "returned_unused_reservation_bytes": 394264576,
+    "future_work_uses_own_existing_reservations": true
+  },
+  "conditional_envelope": {
+    "old_unknown_conservative_charge_unchanged": 6588000723,
+    "all_current_ai_sigma_artifacts_overlaps_base": 303714304,
+    "current_shared_git_objects": 96247808,
+    "postinitial_other_reservation_envelopes_including_used": 2499805184,
+    "retention99_reservation_including_held": 142606336,
+    "conservative_total": 9630374355,
+    "conditional_unallocated": 3254527533
+  },
+  "past_peak_and_old_results_unchanged": true,
+  "instant_peak_and_shared_cache_unknowns": "same prior caveats; no complete whole-host certification",
+  "active_scope_protection": [
+    "current100 output/source",
+    "97 source and immutable Git/archive",
+    "92 scheduler/monitor",
+    "shared model/Wasm/ORT/Chromium/fixture",
+    "93/95 current expanded paths until all readers done"
+  ],
+  "review100": {
+    "issue": "quoridor-4lc.100",
+    "accepted_UTC": "2026-10-02T03:36:34.612525+00:00",
+    "thread": "01a0f31d-8227-7e03-a7e6-915b4918c11b",
+    "turn": "01a0faaf-6829-7352-9063-f25018232643",
+    "new_8MiB_within_existing_critic_reservation": true,
+    "actual_go": false
+  }
+}
