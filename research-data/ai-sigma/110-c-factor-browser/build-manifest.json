@@ -1,0 +1,59 @@
+{
+  "issue": "quoridor-4lc.110",
+  "source_Git": "0f0597e73e5444c2a576121242a02e18417aad01",
+  "factor_diff": "--- baseline/kernel.rs\n+++ c1/kernel.rs\n@@ -6,7 +6,7 @@\n pub const MAX_NODES: u32 = 2048;\n pub const MAX_DEPTH: u8 = 48;\n pub const MAX_ARENA_BYTES: usize = 64 * 1024 * 1024;\n-const PUCT_C: f32 = 1.5;\n+const PUCT_C: f32 = 1.0;\n #[cfg(feature = \"research\")]\n use quoridor_core::research::SigmaContext;\n #[cfg(feature = \"research\")]\n",
+  "build": [
+    {
+      "variant": "baseline",
+      "command": [
+        "cargo",
+        "build",
+        "--release",
+        "--offline",
+        "--locked",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--lib",
+        "--manifest-path",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-c-factor-browser/baseline/Cargo.toml"
+      ],
+      "start": "2026-10-02T07:58:17.502852+00:00",
+      "end": "2026-10-02T07:58:17.540380+00:00",
+      "bytes": 292139,
+      "sha256": "1f54d0b8f0c6d3d7d51935886ed506e44376a2052506be62ca7a726c85a78a01"
+    },
+    {
+      "variant": "c1",
+      "command": [
+        "cargo",
+        "build",
+        "--release",
+        "--offline",
+        "--locked",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--lib",
+        "--manifest-path",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-c-factor-browser/c1/Cargo.toml"
+      ],
+      "start": "2026-10-02T07:58:17.540719+00:00",
+      "end": "2026-10-02T07:58:24.493356+00:00",
+      "bytes": 292135,
+      "sha256": "8438310cf8f7d096bd84364a03b97f99f737ca0a9be6c2812a7ecdee3d92d9dd"
+    }
+  ],
+  "targets": {
+    "baseline": "build/target",
+    "c1": "build/target-c1"
+  },
+  "same_toolchain_flags_dependencies": true,
+  "baseline_original_bytes_equal": true,
+  "original_Wasm_SHA": "1f54d0b8f0c6d3d7d51935886ed506e44376a2052506be62ca7a726c85a78a01",
+  "C1_Wasm_SHA": "8438310cf8f7d096bd84364a03b97f99f737ca0a9be6c2812a7ecdee3d92d9dd",
+  "artifact_reference": "binaries/{baseline,c1}.wasm",
+  "failed_builds_retained": [
+    "c110-build-r1",
+    "c110-build-r2"
+  ],
+  "no_model_copy": true
+}

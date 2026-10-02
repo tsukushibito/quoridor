@@ -1,0 +1,205 @@
+{
+  "issue": "quoridor-4lc.110",
+  "count_results_ref": "equal-completed-results.json",
+  "ordinary_search_requests": 14,
+  "startup_NN": 54,
+  "search_NN_calls": 1469,
+  "total_actual_NN_calls": 1523,
+  "games_started": 4,
+  "game_results": [
+    {
+      "id": "c1-initial-color1",
+      "fixture_id": "initial-p1",
+      "candidate_color": 1,
+      "status": "terminal",
+      "winner": 2,
+      "reason": "goal",
+      "total_ply": 66
+    },
+    {
+      "id": "c1-initial-color2",
+      "fixture_id": "initial-p1",
+      "candidate_color": 2,
+      "status": "responsibility_loss",
+      "winner": 1,
+      "reason": "initial_no_completed_cp",
+      "total_ply": 71
+    },
+    {
+      "id": "c1-asym-color1",
+      "fixture_id": "asym-hv-p2",
+      "candidate_color": 1,
+      "status": "terminal",
+      "winner": 2,
+      "reason": "goal",
+      "total_ply": 76
+    },
+    {
+      "id": "c1-asym-color2",
+      "fixture_id": "asym-hv-p2",
+      "candidate_color": 2,
+      "status": "terminal",
+      "winner": 1,
+      "reason": "goal",
+      "total_ply": 83
+    }
+  ],
+  "exploratory_WDL_including_registered_failure_policy": {
+    "W": 0,
+    "D": 0,
+    "L": 4
+  },
+  "goal_games": 3,
+  "responsibility_loss": 1,
+  "unfinished": 0,
+  "public_runs": [
+    {
+      "run": "c110-baseline-public-r1",
+      "publics": 2,
+      "classes": {
+        "completed_legal": 2
+      },
+      "max_public_ms": 418.735107421875,
+      "NN_calls": 10,
+      "fixed_reference_roots": 2,
+      "dynamic_self_roots": 0,
+      "root_prior_gate_completed": 2,
+      "missing_eligible_CP": 0,
+      "worker_stop": {
+        "lower_gt_D": 1,
+        "upper_le_D": 1
+      },
+      "ACK_wall_gt500": 1,
+      "ACK_wall_max_ms": 523.045166015625,
+      "post402_NN_possible": 1,
+      "postpublic_NN_definite": 1
+    },
+    {
+      "run": "c110-initial-pair-r1",
+      "publics": 138,
+      "classes": {
+        "completed_legal": 137,
+        "initial_no_completed_cp": 1
+      },
+      "max_public_ms": 439.315185546875,
+      "NN_calls": 589,
+      "fixed_reference_roots": 2,
+      "dynamic_self_roots": 136,
+      "root_prior_gate_completed": 137,
+      "missing_eligible_CP": 1,
+      "worker_stop": {
+        "upper_le_D": 136,
+        "lower_gt_D": 2
+      },
+      "ACK_wall_gt500": 2,
+      "ACK_wall_max_ms": 557.64501953125,
+      "post402_NN_possible": 0,
+      "postpublic_NN_definite": 0
+    },
+    {
+      "run": "c110-asym-pair-r1",
+      "publics": 153,
+      "classes": {
+        "completed_legal": 153
+      },
+      "max_public_ms": 447.760009765625,
+      "NN_calls": 630,
+      "fixed_reference_roots": 2,
+      "dynamic_self_roots": 151,
+      "root_prior_gate_completed": 153,
+      "missing_eligible_CP": 0,
+      "worker_stop": {
+        "upper_le_D": 150,
+        "lower_gt_D": 3
+      },
+      "ACK_wall_gt500": 3,
+      "ACK_wall_max_ms": 516.235107421875,
+      "post402_NN_possible": 0,
+      "postpublic_NN_definite": 0
+    }
+  ],
+  "model_runs": [
+    {
+      "run": "c110-initial-pair-r1",
+      "startup_NN": 6,
+      "hand_NN": 589,
+      "primary": null,
+      "secondary": []
+    },
+    {
+      "run": "c110-classification-r1",
+      "startup_NN": 0,
+      "hand_NN": 0,
+      "primary": null,
+      "secondary": []
+    },
+    {
+      "run": "c110-count-c1-first-r1",
+      "startup_NN": 6,
+      "hand_NN": 64,
+      "primary": null,
+      "secondary": []
+    },
+    {
+      "run": "c110-count-baseline-last-r1",
+      "startup_NN": 6,
+      "hand_NN": 64,
+      "primary": null,
+      "secondary": []
+    },
+    {
+      "run": "c110-baseline-public-r1",
+      "startup_NN": 6,
+      "hand_NN": 10,
+      "primary": null,
+      "secondary": []
+    },
+    {
+      "run": "c110-parity-baseline-r1",
+      "startup_NN": 6,
+      "hand_NN": 24,
+      "primary": null,
+      "secondary": []
+    },
+    {
+      "run": "c110-count-baseline-first-r1",
+      "startup_NN": 6,
+      "hand_NN": 32,
+      "primary": null,
+      "secondary": [
+        {
+          "stage": "browser-stop",
+          "message": "OWNED_REGISTRATION_REQUIRED_BEFORE_SIGNAL"
+        }
+      ]
+    },
+    {
+      "run": "c110-asym-pair-r1",
+      "startup_NN": 6,
+      "hand_NN": 630,
+      "primary": null,
+      "secondary": []
+    },
+    {
+      "run": "c110-count-c1-last-r1",
+      "startup_NN": 6,
+      "hand_NN": 32,
+      "primary": null,
+      "secondary": []
+    },
+    {
+      "run": "c110-parity-original-r1",
+      "startup_NN": 6,
+      "hand_NN": 24,
+      "primary": null,
+      "secondary": []
+    }
+  ],
+  "limits": [
+    "C1 exploratory WDL is not an independent formal comparison with old107",
+    "initial and end clock intervals sampled; intermediate drift/hard deadline not guaranteed",
+    "API await/ACK wall are not kernel time or CPU",
+    "root missing eligible CP retains features/NN gate but no prior/finished tree gate",
+    "C1 not adopted, formal NI/Sigma equality/actual_go false"
+  ]
+}
