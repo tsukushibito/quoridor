@@ -1,0 +1,312 @@
+{
+  "issue": "quoridor-4lc.97",
+  "run_id": "clock-factor-primary-r1",
+  "git": "83bb0ce4ea55b210f1657913ab2d6f2fa728eac5",
+  "diagnostic": true,
+  "actual_go": false,
+  "holdout": false,
+  "seed": 1979,
+  "affinity": [
+    2
+  ],
+  "NNthreads": 1,
+  "model_sha256": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+  "clock": {
+    "T": 500,
+    "reserve": 89,
+    "commit": 9,
+    "cutoff": 402,
+    "seal": 411
+  },
+  "processing_deadline": "2026-10-02T03:44:25Z",
+  "schedule": [
+    {
+      "index": 1,
+      "fixture_id": "initial-p1",
+      "engine": "candidate",
+      "condition": "baseline",
+      "sample": "warm",
+      "rep": 0
+    },
+    {
+      "index": 2,
+      "fixture_id": "initial-p1",
+      "engine": "candidate",
+      "condition": "cooperative",
+      "sample": "warm",
+      "rep": 0
+    },
+    {
+      "index": 3,
+      "fixture_id": "initial-p1",
+      "engine": "candidate",
+      "condition": "cooperative",
+      "sample": "steady",
+      "rep": 1
+    },
+    {
+      "index": 4,
+      "fixture_id": "initial-p1",
+      "engine": "candidate",
+      "condition": "baseline",
+      "sample": "steady",
+      "rep": 1
+    },
+    {
+      "index": 5,
+      "fixture_id": "initial-p1",
+      "engine": "candidate",
+      "condition": "baseline",
+      "sample": "steady",
+      "rep": 2
+    },
+    {
+      "index": 6,
+      "fixture_id": "initial-p1",
+      "engine": "candidate",
+      "condition": "cooperative",
+      "sample": "steady",
+      "rep": 2
+    },
+    {
+      "index": 7,
+      "fixture_id": "initial-p1",
+      "engine": "reference",
+      "condition": "baseline",
+      "sample": "warm",
+      "rep": 0
+    },
+    {
+      "index": 8,
+      "fixture_id": "initial-p1",
+      "engine": "reference",
+      "condition": "cooperative",
+      "sample": "warm",
+      "rep": 0
+    },
+    {
+      "index": 9,
+      "fixture_id": "initial-p1",
+      "engine": "reference",
+      "condition": "cooperative",
+      "sample": "steady",
+      "rep": 1
+    },
+    {
+      "index": 10,
+      "fixture_id": "initial-p1",
+      "engine": "reference",
+      "condition": "baseline",
+      "sample": "steady",
+      "rep": 1
+    },
+    {
+      "index": 11,
+      "fixture_id": "initial-p1",
+      "engine": "reference",
+      "condition": "baseline",
+      "sample": "steady",
+      "rep": 2
+    },
+    {
+      "index": 12,
+      "fixture_id": "initial-p1",
+      "engine": "reference",
+      "condition": "cooperative",
+      "sample": "steady",
+      "rep": 2
+    },
+    {
+      "index": 13,
+      "fixture_id": "asym-hv-p2",
+      "engine": "reference",
+      "condition": "baseline",
+      "sample": "warm",
+      "rep": 0
+    },
+    {
+      "index": 14,
+      "fixture_id": "asym-hv-p2",
+      "engine": "reference",
+      "condition": "cooperative",
+      "sample": "warm",
+      "rep": 0
+    },
+    {
+      "index": 15,
+      "fixture_id": "asym-hv-p2",
+      "engine": "reference",
+      "condition": "cooperative",
+      "sample": "steady",
+      "rep": 1
+    },
+    {
+      "index": 16,
+      "fixture_id": "asym-hv-p2",
+      "engine": "reference",
+      "condition": "baseline",
+      "sample": "steady",
+      "rep": 1
+    },
+    {
+      "index": 17,
+      "fixture_id": "asym-hv-p2",
+      "engine": "reference",
+      "condition": "baseline",
+      "sample": "steady",
+      "rep": 2
+    },
+    {
+      "index": 18,
+      "fixture_id": "asym-hv-p2",
+      "engine": "reference",
+      "condition": "cooperative",
+      "sample": "steady",
+      "rep": 2
+    },
+    {
+      "index": 19,
+      "fixture_id": "asym-hv-p2",
+      "engine": "candidate",
+      "condition": "baseline",
+      "sample": "warm",
+      "rep": 0
+    },
+    {
+      "index": 20,
+      "fixture_id": "asym-hv-p2",
+      "engine": "candidate",
+      "condition": "cooperative",
+      "sample": "warm",
+      "rep": 0
+    },
+    {
+      "index": 21,
+      "fixture_id": "asym-hv-p2",
+      "engine": "candidate",
+      "condition": "cooperative",
+      "sample": "steady",
+      "rep": 1
+    },
+    {
+      "index": 22,
+      "fixture_id": "asym-hv-p2",
+      "engine": "candidate",
+      "condition": "baseline",
+      "sample": "steady",
+      "rep": 1
+    },
+    {
+      "index": 23,
+      "fixture_id": "asym-hv-p2",
+      "engine": "candidate",
+      "condition": "baseline",
+      "sample": "steady",
+      "rep": 2
+    },
+    {
+      "index": 24,
+      "fixture_id": "asym-hv-p2",
+      "engine": "candidate",
+      "condition": "cooperative",
+      "sample": "steady",
+      "rep": 2
+    },
+    {
+      "index": 25,
+      "fixture_id": "straight-jump-p2",
+      "engine": "candidate",
+      "condition": "baseline",
+      "sample": "warm",
+      "rep": 0
+    },
+    {
+      "index": 26,
+      "fixture_id": "straight-jump-p2",
+      "engine": "candidate",
+      "condition": "cooperative",
+      "sample": "warm",
+      "rep": 0
+    },
+    {
+      "index": 27,
+      "fixture_id": "straight-jump-p2",
+      "engine": "candidate",
+      "condition": "cooperative",
+      "sample": "steady",
+      "rep": 1
+    },
+    {
+      "index": 28,
+      "fixture_id": "straight-jump-p2",
+      "engine": "candidate",
+      "condition": "baseline",
+      "sample": "steady",
+      "rep": 1
+    },
+    {
+      "index": 29,
+      "fixture_id": "straight-jump-p2",
+      "engine": "candidate",
+      "condition": "baseline",
+      "sample": "steady",
+      "rep": 2
+    },
+    {
+      "index": 30,
+      "fixture_id": "straight-jump-p2",
+      "engine": "candidate",
+      "condition": "cooperative",
+      "sample": "steady",
+      "rep": 2
+    },
+    {
+      "index": 31,
+      "fixture_id": "straight-jump-p2",
+      "engine": "reference",
+      "condition": "baseline",
+      "sample": "warm",
+      "rep": 0
+    },
+    {
+      "index": 32,
+      "fixture_id": "straight-jump-p2",
+      "engine": "reference",
+      "condition": "cooperative",
+      "sample": "warm",
+      "rep": 0
+    },
+    {
+      "index": 33,
+      "fixture_id": "straight-jump-p2",
+      "engine": "reference",
+      "condition": "cooperative",
+      "sample": "steady",
+      "rep": 1
+    },
+    {
+      "index": 34,
+      "fixture_id": "straight-jump-p2",
+      "engine": "reference",
+      "condition": "baseline",
+      "sample": "steady",
+      "rep": 1
+    },
+    {
+      "index": 35,
+      "fixture_id": "straight-jump-p2",
+      "engine": "reference",
+      "condition": "baseline",
+      "sample": "steady",
+      "rep": 2
+    },
+    {
+      "index": 36,
+      "fixture_id": "straight-jump-p2",
+      "engine": "reference",
+      "condition": "cooperative",
+      "sample": "steady",
+      "rep": 2
+    }
+  ]
+}

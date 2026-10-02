@@ -1,0 +1,18 @@
+{
+  "issue": "quoridor-4lc.97",
+  "hypothesis": "Worker cooperative clock limits new NN starts; may reduce Worker tail but not FIFO or Node delivery tail",
+  "factor": "forward early-side absolute deadline NodeD500 and new-work cutoff Node402 to both engines; normal budget termination preserves completed CP; pending NN not forcibly interrupted",
+  "baseline": "original candidate implicit T=1e9/reference generation-only; same added clock/transport instrumentation",
+  "notification_factor": "unchanged snapshot/private_done/stopped FIFO order, same payloads/validation in both conditions",
+  "fixed": "NN/model/kernel/coefficients/order/tie/finish/caps/Node500-89-9-402-411/fallback0",
+  "prediction": "fewer postpublic starts and Worker_stop lower_gt_D, ACK may remain >D due transport",
+  "refutation": "no start/tail difference; stop dominated by in-flight API or nonNN/transport; numerical/ownership failure prevents interpretation",
+  "clock_transform": "worker_nn_cutoff=Node(t0+402)+worker.lo offset; maps back to interval <=Nodecutoff; workerD similarly early-side. layer calibration start/end 12 intervals, APIawait not kernel",
+  "public_classes": "Worker stop upper<=D, lower>D, straddle; ACK wall>500 independent of engine CPU",
+  "all_warm_failures_unexecuted_kept": true,
+  "planned_public": 36,
+  "startup_per_session": 6,
+  "formal_fairness": false,
+  "formal_NI": false,
+  "phaseA_failure": "r1 reference VM stub lacked vertPolicyPermutation; preserved debug r1 and corrected context import, no real NN"
+}

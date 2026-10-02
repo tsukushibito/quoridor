@@ -1,0 +1,110 @@
+{
+  "name": "static-archive-r1",
+  "cmd": [
+    "python3",
+    "-B",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-tail-transport/archive.py"
+  ],
+  "start": "2026-10-02T03:25:00.643472+00:00",
+  "end": "2026-10-02T03:25:00.821419+00:00",
+  "subreaper_set_rc": 0,
+  "subreaper_get_rc": 0,
+  "subreaper_value": 1,
+  "kernel_boundary": {
+    "valid": true,
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+    "launcher": {
+      "pid": 1978181,
+      "ppid": 2009,
+      "pgid": 1978181,
+      "start_ticks": 16441085,
+      "state": "R",
+      "rss": 17674240,
+      "utime_ticks": 2,
+      "stime_ticks": 2
+    },
+    "root": {
+      "pid": 1978183,
+      "ppid": 1978181,
+      "pgid": 1978183,
+      "start_ticks": 16441090,
+      "state": "R",
+      "rss": 7401472,
+      "utime_ticks": 0,
+      "stime_ticks": 0
+    },
+    "initial_children": [],
+    "spawn_count": 1,
+    "single_thread_initial": true,
+    "sole_explicit_root": true
+  },
+  "runner_pid": 1978181,
+  "runner_starttick": 16441085,
+  "child_pid": 1978183,
+  "child_starttick": 16441090,
+  "exit": 0,
+  "stop_reason": null,
+  "sample_interval_ms": 40,
+  "peak_group_plus_runner_RSS": 43802624,
+  "peak_allocated_bytes": 4571136,
+  "final_allocated_bytes": 4579328,
+  "tracked": [
+    {
+      "pid": 1978183,
+      "ppid": 1978181,
+      "pgid": 1978183,
+      "start_ticks": 16441090,
+      "state": "R",
+      "rss": 9588736,
+      "utime_ticks": 5,
+      "stime_ticks": 1,
+      "maxrss": 21708800,
+      "affinities": [
+        [
+          0
+        ]
+      ],
+      "TID_samples": 8,
+      "last_ppid": 1978181,
+      "last_state": "S"
+    },
+    {
+      "pid": 1978184,
+      "ppid": 1978183,
+      "pgid": 1978183,
+      "start_ticks": 16441099,
+      "state": "R",
+      "rss": 4059136,
+      "utime_ticks": 0,
+      "stime_ticks": 0,
+      "maxrss": 4255744,
+      "affinities": [
+        [
+          0
+        ]
+      ],
+      "TID_samples": 4,
+      "last_ppid": 1978183,
+      "last_state": "D"
+    }
+  ],
+  "remaining": [],
+  "kernel_identity_count": 2,
+  "kernel_adoptions": [],
+  "ledger_registered_count": 0,
+  "ledger_rejected": {},
+  "ledger_monitor_remaining_consistent": true,
+  "unknown_adopted": [],
+  "privateTMP_alias": "/proc/1978181/cwd/t",
+  "privateTMP_realpath": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261002/TAIL-TRANSPORT/t",
+  "assigned_CPU": 0,
+  "process_deadline": "03:44:25Z",
+  "newjob_cutoff": "03:39:25Z",
+  "guardRSS": 939524096,
+  "contractRAM": 1073741824,
+  "guard_basis": "current_proc_rss_runner_plus_owned_children",
+  "runner_ru_maxrss_bytes": 607244288,
+  "all_observed_TIDs_at_assigned_CPU": true,
+  "instant_peak_not_guaranteed": true,
+  "runner_sha256": "7a7e697a17a849cf812b9604c8100835f4e5a17d4cace2d9f0f153b7c82497c9"
+}
