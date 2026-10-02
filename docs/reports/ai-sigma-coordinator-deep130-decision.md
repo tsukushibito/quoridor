@@ -13,3 +13,5 @@ private read-only traceが必要なため、必要sourceのみ自域で計測com
 130のsource/runtime-stop16:03:48.434539、管理3run計.45434789898秒/RSS観測74178560B/NN Chrome0と必要24Gitblob復元一致・handoff837f0bb SHAf263e13068571d4a30fb653276f622dad377ffeffcd04e3c0c240a80c2cfd772/stop SHA5e18f7a1cf25ad1d2faac066f4e4e33df1d115839867053f70b6cf8a519e34d6を確認した。前後入力hash一致、記録6identity現在不在は自然/全期間証明と別で、短metadata/全CPU/旧provisionの全owner監査なしを保持する。source/子停止とGit/backup引渡しにより130を統括へ移譲closeする。本人受領15:46:25.223667/旧個別期限は変更0。
 
 今回の目標への成果は131で尺度不足を絞り、130の競合案で次に判断を変える計測へ移ること。まだ新計測成立や棋力改善は未観測。初回監督の「全passなら狭い尺度反復停止」の採用を次配分に反映し、132の実完遂量・対応nodeとAction・実費用で後続効果を通常監督が追えるようにする。正式公平性/NI/Sigma同等/採用未認定。92長期停止責任と親資源/終了不変。
+
+132契約Git36a6b0dとcurrent common/experiment/親9/目標/実行規約全文を16:15:11.522958UTC既experiment idleへturn/start accepted（01a0fd65-f098-7220-976a-c72155cc7808）で実配送した。本人受領/claim/実開始と実計測成功は別確認。現在の待ちは132既担当の受領と停止版結果で、130/129/131の追加実行待ちではない。
