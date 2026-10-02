@@ -54,7 +54,17 @@ async function main() {
     if(browser)try {save('outer-controlled-stop',await boundedStop(browser));}catch(error){secondary.push({stage:'browser-stop',message:error.message});}
     try{await monitor.stop();}catch(error){secondary.push({stage:'monitor-stop',message:error.message});}
   }
-  const summary={issue:'quoridor-4lc.107',mode,run,diagnostic:true,actual_go:false,games_started:gameResult?.started_games??0,games:gameResult?.games??[],holdout:0,planned:mode==='NN'?config.schedule.length+(config.dynamic_plies??0):0,completed:rows.length,missing:mode==='NN'?config.schedule.length+(config.dynamic_plies??0)-rows.length:0,startup_NN:startup?.startup_NN??0,hand_NN:rows.reduce((n,row)=>n+row.hand_NN,0),primary,secondary,browser_judgement:true,per_CP_Node_binding_calls:0,Node_per_hand_clock_calls:0};
+  const games=gameResult?.games??[];
+  const pairing=config.kind==='browser-pair';
+  const planned=pairing?config.games.length:(mode==='NN'?config.schedule.length+(config.dynamic_plies??0):0);
+  const completed=pairing?games.filter(game=>['terminal','responsibility_loss'].includes(game.status)).length:rows.length;
+  const summary={issue:'quoridor-4lc.107',frame:7,Git:config.Git,mode,run,diagnostic:true,actual_go:false,
+    games_started:gameResult?.started_games??0,games,holdout:0,planned,completed,missing:planned-completed,
+    denominator:pairing?'game requirements; public count separate':'functional public requirements',public_response_count:rows.length,
+    game_unstarted:pairing?planned-(gameResult?.started_games??0):0,
+    startup_NN:startup?.startup_NN??0,hand_NN:rows.reduce((n,row)=>n+row.hand_NN,0),
+    public_classifications:rows.reduce((counts,row)=>(counts[row.response.classification]=(counts[row.response.classification]??0)+1,counts),{}),
+    primary,secondary,browser_judgement:true,per_CP_Node_binding_calls:0,Node_per_hand_clock_calls:0};
   save('summary',summary);console.log(JSON.stringify(summary));
   if(primary||secondary.length)process.exitCode=1;
 }
