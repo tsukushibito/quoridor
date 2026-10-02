@@ -1,0 +1,141 @@
+{
+  "issue": "quoridor-4lc.92",
+  "contract": 3,
+  "frame": 7,
+  "intake": {
+    "received": "2026-10-02T06:22:01.999833+00:00",
+    "preparation_target": "2026-10-02T06:42:01.999833+00:00",
+    "report_target": "2026-10-02T06:47:01.999833+00:00",
+    "frame_start": "2026-10-02T06:12:31Z",
+    "frame_end": "2026-10-02T10:12:31Z"
+  },
+  "changes": [
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+      "before_sha256": "c7fe98c6e9a668a3b6e456d302b97373a99cbcbc241c630b6143b61121117324",
+      "after_sha256": "491eca4bab3996d562f773472eb708695fc451c2d2aa4163b50adc5fb3b2443e"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+      "before_sha256": "eb1f0098e9fdc6a04c111a81be3ab3986296ff741307114ba98c3d3467db208f",
+      "after_sha256": "496c3d6e0e3d46ea44e5d3d91578af391813841e60594222c21b0dbd6574f9cd"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/prompt.md",
+      "before_sha256": "da771a5722342a1b6fe88e42a36a781d09ff97ec22a2c8c3da60901526ce0dba",
+      "after_sha256": "2081603a7cb9847c5cbd4ada2107aa61272828166ce46c8421f5ec1a7a550a37"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/watch.py",
+      "before_sha256": "a74a0f29c5ea47694cdb62b132761449d12ded50aba359c514322bd2ac138006",
+      "after_sha256": "e710a2c40a16eac1cb34861f36ed65439740b852abced94bd6bf2e37255be524"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-supervisor-read-guard/guard.py",
+      "before_sha256": "69142b5303de524fec775448d41c736df5c0ac47ff250e91bc624a9333bbb089",
+      "after_sha256": "4b2e1b49cbaa1e8d043e423ff58be777e1e1d5b464a5dd8f5d43e120dd5873b7"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-supervisor-read-guard/README.md",
+      "before_sha256": "50f38e71eb11dd897b15b945f88ed1f0d6a9cf8656d732611fee618e35caeb57",
+      "after_sha256": "b247594f5c11f5b87fd809fc1b9b8f38541815e010eed95390f2dca51083a6d8"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/docs/design/ai-sigma-contract-supervisor-continuation.md",
+      "before_sha256": "834a84b152a277fab73a36e5ce9faec30f65b249fbbfe124c333041d9e18ed3c",
+      "after_sha256": "47f694e8df73f52e164b129e4527ccf32e76241bf2c9cfad1e026721098d4fd7"
+    }
+  ],
+  "deadline_tests": {
+    "checks": [
+      "guard frame7 absolute end",
+      "before/end/after frame7 operation deadline",
+      "old expired end no longer blocks fresh frame7; turn180 remains",
+      "load new config/contract end and unchanged policy",
+      "config cannot exceed operational contract"
+    ],
+    "passed": 5,
+    "live_NN_RPC": false,
+    "at": "2026-10-02T06:25:56.665601+00:00"
+  },
+  "commands": [
+    {
+      "args": [
+        "validate",
+        "--config",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json"
+      ],
+      "pid": 2167893,
+      "start_ticks": "17534079",
+      "exit": 0,
+      "stdout": "{\"valid\": true, \"config_sha256\": \"491eca4bab3996d562f773472eb708695fc451c2d2aa4163b50adc5fb3b2443e\", \"end_at\": \"2026-10-02T10:07:31+00:00\", \"expired\": false}\n",
+      "stderr": "",
+      "reaped": true,
+      "elapsed_seconds": 0.20398692600429058
+    },
+    {
+      "args": [
+        "start",
+        "--config",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+        "--state-dir",
+        "/workspaces/quoridor/.artifacts/research-team/scheduler-sigma-continuation-20261001"
+      ],
+      "pid": 2167896,
+      "start_ticks": "17534100",
+      "exit": 0,
+      "stdout": "{\"started\": true, \"process\": {\"pid\": 2167898, \"start_ticks\": \"17534107\", \"boot_id\": \"ab5e66ac-12ce-49b0-ac55-afe05e3f5216\"}, \"state_dir\": \"/workspaces/quoridor/.artifacts/research-team/scheduler-sigma-continuation-20261001\"}\n",
+      "stderr": "",
+      "reaped": true,
+      "elapsed_seconds": 0.2610137459996622
+    },
+    {
+      "args": [
+        "reload",
+        "--state-dir",
+        "/workspaces/quoridor/.artifacts/research-team/scheduler-sigma-continuation-20261001"
+      ],
+      "pid": 2167912,
+      "start_ticks": "17534126",
+      "exit": 0,
+      "stdout": "{\"reload_requested\": true, \"confirmation\": \"check status.last_result and events.jsonl\"}\n",
+      "stderr": "",
+      "reaped": true,
+      "elapsed_seconds": 0.18647715900442563
+    }
+  ],
+  "live_pointer": {
+    "issue": "quoridor-4lc.92",
+    "frame": 7,
+    "updated_by": "quoridor-4lc.92-contract3",
+    "record": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame7/live-applied.json",
+    "run": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame7-675e30ad-4d75-46ea-bb27-0a3ed934aee0",
+    "scheduler": {
+      "pid": 2167898,
+      "start_ticks": "17534107",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "monitor": {
+      "pid": 2168144,
+      "start_ticks": "17534922",
+      "state": "R",
+      "rss_bytes": 20234240,
+      "cpu_ticks": 2,
+      "affinity": [
+        0
+      ],
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    }
+  },
+  "loaded": {
+    "config_sha256": "491eca4bab3996d562f773472eb708695fc451c2d2aa4163b50adc5fb3b2443e",
+    "contract_sha256": "496c3d6e0e3d46ea44e5d3d91578af391813841e60594222c21b0dbd6574f9cd",
+    "reloaded_at": {
+      "at": "2026-10-02T06:27:16.691899+00:00",
+      "event": "reloaded"
+    }
+  },
+  "stop_and_resource_ref": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame7/self-stop.json",
+  "old_final_monitor_report_unverified": true,
+  "future_stop_and_all_period_success_unclaimed": true
+}

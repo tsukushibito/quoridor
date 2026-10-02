@@ -19,7 +19,7 @@ or bypass the guard. Every attempt retains timeout/exit/child cleanup evidence.
 The turn remains 180 seconds. 90/120 seconds are planning checkpoints;
 new metadata commands must fit their full timeout plus child cleanup and a
 30-second reporting reserve. Commands are not launched if they cannot finish.
-Repeated invocation never resets this budget. The current absolute 05:44:12UTC operation
+Repeated invocation never resets this budget. The current absolute 10:07:31UTC (frame7) operation
 end also applies. Only this invocation's process group is collected; no foreign
 turn/process is stopped. Go/cgo inherits no artificial 1GiB AS restriction;
 combined RAM is sampled RSS, with unobserved instantaneous peaks disclosed.
