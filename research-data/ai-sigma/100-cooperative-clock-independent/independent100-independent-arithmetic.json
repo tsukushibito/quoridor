@@ -1,0 +1,377 @@
+{
+  "UTC": "2026-10-02T03:46:25.559460+00:00",
+  "input": ".artifacts/ai-sigma/resume-20261002/COOPERATIVE-CLOCK-INDEPENDENT/critic100-primary-r1/turns.jsonl",
+  "sha256": "ad39c26125c47b8d4139ac9cb4417e73e6116ae075524e03a16a68033a928d2a",
+  "n": 8,
+  "NN": 72,
+  "all_public_legal_deadline": true,
+  "Worker_stop_upper_le500": 8,
+  "ACK_over500": 0,
+  "groups": {
+    "candidate/baseline/all": {
+      "public": {
+        "n": 2,
+        "median": 421.3661289960146,
+        "p95": 422.03919300436974,
+        "max": 422.03919300436974
+      },
+      "ACK": {
+        "n": 2,
+        "median": 480.2868155092001,
+        "p95": 495.1594600081444,
+        "max": 495.1594600081444
+      },
+      "Worker_stop_upper": {
+        "n": 2,
+        "median": 472.65325762331486,
+        "p95": 485.4499782919884,
+        "max": 485.4499782919884
+      },
+      "NN": 12,
+      "aftercutoff": 2,
+      "afterpublic": 1
+    },
+    "candidate/baseline/steady": {
+      "public": {
+        "n": 1,
+        "median": 420.69306498765945,
+        "p95": 420.69306498765945,
+        "max": 420.69306498765945
+      },
+      "ACK": {
+        "n": 1,
+        "median": 465.4141710102558,
+        "p95": 465.4141710102558,
+        "max": 465.4141710102558
+      },
+      "Worker_stop_upper": {
+        "n": 1,
+        "median": 459.85653695464134,
+        "p95": 459.85653695464134,
+        "max": 459.85653695464134
+      },
+      "NN": 8,
+      "aftercutoff": 1,
+      "afterpublic": 0
+    },
+    "candidate/cooperative/all": {
+      "public": {
+        "n": 2,
+        "median": 413.7119470089674,
+        "p95": 413.7839090228081,
+        "max": 413.7839090228081
+      },
+      "ACK": {
+        "n": 2,
+        "median": 414.05120201408863,
+        "p95": 414.1074320077896,
+        "max": 414.1074320077896
+      },
+      "Worker_stop_upper": {
+        "n": 2,
+        "median": 406.76765613257885,
+        "p95": 407.7904573082924,
+        "max": 407.7904573082924
+      },
+      "NN": 17,
+      "aftercutoff": 0,
+      "afterpublic": 0
+    },
+    "candidate/cooperative/steady": {
+      "public": {
+        "n": 1,
+        "median": 413.6399849951267,
+        "p95": 413.6399849951267,
+        "max": 413.6399849951267
+      },
+      "ACK": {
+        "n": 1,
+        "median": 414.1074320077896,
+        "p95": 414.1074320077896,
+        "max": 414.1074320077896
+      },
+      "Worker_stop_upper": {
+        "n": 1,
+        "median": 405.7448549568653,
+        "p95": 405.7448549568653,
+        "max": 405.7448549568653
+      },
+      "NN": 8,
+      "aftercutoff": 0,
+      "afterpublic": 0
+    },
+    "reference/baseline/all": {
+      "public": {
+        "n": 2,
+        "median": 412.996489495039,
+        "p95": 413.08748200535774,
+        "max": 413.08748200535774
+      },
+      "ACK": {
+        "n": 2,
+        "median": 432.01604449748993,
+        "p95": 434.89037999510765,
+        "max": 434.89037999510765
+      },
+      "Worker_stop_upper": {
+        "n": 2,
+        "median": 429.90862986445427,
+        "p95": 433.7830211222172,
+        "max": 433.7830211222172
+      },
+      "NN": 20,
+      "aftercutoff": 0,
+      "afterpublic": 0
+    },
+    "reference/baseline/steady": {
+      "public": {
+        "n": 1,
+        "median": 413.08748200535774,
+        "p95": 413.08748200535774,
+        "max": 413.08748200535774
+      },
+      "ACK": {
+        "n": 1,
+        "median": 429.1417089998722,
+        "p95": 429.1417089998722,
+        "max": 429.1417089998722
+      },
+      "Worker_stop_upper": {
+        "n": 1,
+        "median": 426.03423860669136,
+        "p95": 426.03423860669136,
+        "max": 426.03423860669136
+      },
+      "NN": 11,
+      "aftercutoff": 0,
+      "afterpublic": 0
+    },
+    "reference/cooperative/all": {
+      "public": {
+        "n": 2,
+        "median": 413.5402100086212,
+        "p95": 414.80624002218246,
+        "max": 414.80624002218246
+      },
+      "ACK": {
+        "n": 2,
+        "median": 423.0567139983177,
+        "p95": 423.30924898386,
+        "max": 423.30924898386
+      },
+      "Worker_stop_upper": {
+        "n": 2,
+        "median": 417.1487802118063,
+        "p95": 417.8255232870579,
+        "max": 417.8255232870579
+      },
+      "NN": 23,
+      "aftercutoff": 0,
+      "afterpublic": 0
+    },
+    "reference/cooperative/steady": {
+      "public": {
+        "n": 1,
+        "median": 414.80624002218246,
+        "p95": 414.80624002218246,
+        "max": 414.80624002218246
+      },
+      "ACK": {
+        "n": 1,
+        "median": 422.8041790127754,
+        "p95": 422.8041790127754,
+        "max": 422.8041790127754
+      },
+      "Worker_stop_upper": {
+        "n": 1,
+        "median": 416.4720371365547,
+        "p95": 416.4720371365547,
+        "max": 416.4720371365547
+      },
+      "NN": 13,
+      "aftercutoff": 0,
+      "afterpublic": 0
+    }
+  },
+  "paired_steady": [
+    {
+      "engine": "candidate",
+      "fixture": "initial-p1",
+      "rep": 1,
+      "cooperative_minus_baseline_ACK": -51.3067390024662,
+      "cooperative_minus_baseline_public": -7.05307999253273,
+      "NN_difference": 0
+    },
+    {
+      "engine": "reference",
+      "fixture": "initial-p1",
+      "rep": 1,
+      "cooperative_minus_baseline_ACK": -6.3375299870967865,
+      "cooperative_minus_baseline_public": 1.7187580168247223,
+      "NN_difference": 2
+    }
+  ],
+  "details": [
+    {
+      "index": 1,
+      "engine": "candidate",
+      "condition": "baseline",
+      "fixture": "initial-p1",
+      "sample": "warm",
+      "rep": 0,
+      "public": 422.03919300436974,
+      "ACK": 495.1594600081444,
+      "Worker_stop_upper": 485.4499782919884,
+      "Worker_stop_lower": 484.5669216513634,
+      "transport": [
+        9.576914697885513,
+        10.459971338510513
+      ],
+      "awaiter_aftercutoff": 1,
+      "API_afterpublic": 1,
+      "NN": 4,
+      "completed_simulations": 2
+    },
+    {
+      "index": 2,
+      "engine": "candidate",
+      "condition": "cooperative",
+      "fixture": "initial-p1",
+      "sample": "warm",
+      "rep": 0,
+      "public": 413.7839090228081,
+      "ACK": 413.99497202038765,
+      "Worker_stop_upper": 407.7904573082924,
+      "Worker_stop_lower": 406.9074006676674,
+      "transport": [
+        1.4280107021331787,
+        2.3110673427581787
+      ],
+      "awaiter_aftercutoff": 0,
+      "API_afterpublic": 0,
+      "NN": 9,
+      "completed_simulations": 9
+    },
+    {
+      "index": 3,
+      "engine": "candidate",
+      "condition": "cooperative",
+      "fixture": "initial-p1",
+      "sample": "steady",
+      "rep": 1,
+      "public": 413.6399849951267,
+      "ACK": 414.1074320077896,
+      "Worker_stop_upper": 405.7448549568653,
+      "Worker_stop_lower": 404.8617983162403,
+      "transport": [
+        8.256441056728363,
+        9.139497697353363
+      ],
+      "awaiter_aftercutoff": 0,
+      "API_afterpublic": 0,
+      "NN": 8,
+      "completed_simulations": 7
+    },
+    {
+      "index": 4,
+      "engine": "candidate",
+      "condition": "baseline",
+      "fixture": "initial-p1",
+      "sample": "steady",
+      "rep": 1,
+      "public": 420.69306498765945,
+      "ACK": 465.4141710102558,
+      "Worker_stop_upper": 459.85653695464134,
+      "Worker_stop_lower": 458.97348031401634,
+      "transport": [
+        5.344326049089432,
+        6.227382689714432
+      ],
+      "awaiter_aftercutoff": 1,
+      "API_afterpublic": 0,
+      "NN": 8,
+      "completed_simulations": 6
+    },
+    {
+      "index": 5,
+      "engine": "reference",
+      "condition": "baseline",
+      "fixture": "initial-p1",
+      "sample": "warm",
+      "rep": 0,
+      "public": 412.90549698472023,
+      "ACK": 434.89037999510765,
+      "Worker_stop_upper": 433.7830211222172,
+      "Worker_stop_lower": 432.8999644815922,
+      "transport": [
+        0.9793548882007599,
+        1.8624115288257599
+      ],
+      "awaiter_aftercutoff": 0,
+      "API_afterpublic": 0,
+      "NN": 9,
+      "completed_simulations": 7
+    },
+    {
+      "index": 6,
+      "engine": "reference",
+      "condition": "cooperative",
+      "fixture": "initial-p1",
+      "sample": "warm",
+      "rep": 0,
+      "public": 412.27417999505997,
+      "ACK": 423.30924898386,
+      "Worker_stop_upper": 417.8255232870579,
+      "Worker_stop_lower": 416.9424666464329,
+      "transport": [
+        5.341557711362839,
+        6.224614351987839
+      ],
+      "awaiter_aftercutoff": 0,
+      "API_afterpublic": 0,
+      "NN": 10,
+      "completed_simulations": 8
+    },
+    {
+      "index": 7,
+      "engine": "reference",
+      "condition": "cooperative",
+      "fixture": "initial-p1",
+      "sample": "steady",
+      "rep": 1,
+      "public": 414.80624002218246,
+      "ACK": 422.8041790127754,
+      "Worker_stop_upper": 416.4720371365547,
+      "Worker_stop_lower": 415.5889804959297,
+      "transport": [
+        6.057504862546921,
+        6.940561503171921
+      ],
+      "awaiter_aftercutoff": 0,
+      "API_afterpublic": 0,
+      "NN": 13,
+      "completed_simulations": 11
+    },
+    {
+      "index": 8,
+      "engine": "reference",
+      "condition": "baseline",
+      "fixture": "initial-p1",
+      "sample": "steady",
+      "rep": 1,
+      "public": 413.08748200535774,
+      "ACK": 429.1417089998722,
+      "Worker_stop_upper": 426.03423860669136,
+      "Worker_stop_lower": 425.15118196606636,
+      "transport": [
+        2.9932113885879517,
+        3.8762680292129517
+      ],
+      "awaiter_aftercutoff": 0,
+      "API_afterpublic": 0,
+      "NN": 11,
+      "completed_simulations": 9
+    }
+  ],
+  "no_tail_or_strength_claim": true
+}
