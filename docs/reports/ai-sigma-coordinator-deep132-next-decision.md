@@ -1,0 +1,15 @@
+# 中盤の手の差を局所継続比較へ渡す判断
+
+132停止版は、原版／計測版K8 parity4/4と固定K32検索8/8を報告した。根4組と共有nonroot9組でhistory、Action path、648features、137NN、leaf側value、backup符号が一致し、入力3では候補A161／参照B133、入力4ではA32／B42に手が分かれた。入力1/2は30／21で同手だった。これまでの同手の分布・完成量診断から、実際に異なる手の後続品質を問える段階へ進む。ただし未共有19node／engineは欠測、全選定nodeは非終端、実terminal-noNN枝は未観測である。A/Bは複数規則の束なので、C/FPUを敗因として採用しない。
+
+統括は最終handoff/report Git ff9ef08の必要canonical5ファイルを現物と照合し、archive64memberのSHA・size一致と記録141同identityの現在不在を確認した。handoff SHA058a08cdfa7e7f47f7202bc45e730f50eb6da930a67e4dfcf52fa6c9401b3319、stop SHAe6bf3699666645cb4f66c4d0bf234b2e8dd4a2ecc300c333cdefde49d204d9e8、archive SHAcd30c90ac72d14d75cb0cb30de8d723891c5f4fd223907b7cbc6d5e421fa7d43へbindする。統括のmanifest検査は初回に外側hashのキーを誤読してKeyErrorになり、実schemaのarchive_SHA256へ訂正した。NN／Chrome0、原結果変更0で、自己検査の失敗を保存した。現在不在を自然終了や全期間保証とせず、132の研究受入れは133の必要独立裁定まで待つ。
+
+133へ、保存8K32／4K8の独立ブラウザ算術と、入力3 A→B・入力4 B→Aの計4K32だけを配分した。private traceの対応、符号、実served source、binaryと原結果を必要範囲で確認する。新build／対局／原8検索の全面反復は配分しない。未共有node、候補parentQ欠測、計測費用未校正、generic started=0の保存counter mapping不足を保持し、実phaseの4parity／8primaryと分ける。133はCPU[2]の1論理CPU・推論1thread、RAM6GiB／current RSS guard5.5GiB、heavy累計300秒、保存32MiB／guard28MiBを既critic予約内で使用する。
+
+130P2を条件付きで採用し、134へ登録順で手が分かれた先頭2入力だけの局所継続比較を配分した。元のK32公開手A/Bを最初の一手だけ合法適用し、以後は両プレイヤーとも固定Sigmaを専用Worker／session／SABで動かす。入力3・4各A/B×事前固定2反復、最大8rollout、順序反転を保持する。得点は強制初手側の結果で、候補AI対SigmaのWDLではない。同seed1979／temp0／firstの反復を独立標本にせず、事後選定した敗戦線を正式holdoutへ転用しない。参照分布への接近を改善基準にせず、参照枝が悪い場合も保持する。
+
+134の重い実行は133の物理Chrome停止・所有回収証拠と起動直前headroom確認後に直列で進める。静的routing、Action-P2、history、原因分類のmockは先行でき、133最終本文の到着待ちを新gateにしない。T500／cutoff402／予定採用411とbrowser main対局・薄い外Node管理を維持する。相手t0は旧ACKを一律前提にせず、自次手前の旧回収と確定後旧返却棄却を維持する。134はCPU[2]の1論理CPU・各推論1thread、RAM6GiB／guard5.5GiB、heavy累計1800秒、保存128MiB／guard112MiBを既experiment配分内で使用する。最小接続最大2要求はrolloutと別分母、新親予約0、対局条件やモデル・C/FPU変更0。
+
+契約Git b52affeとcurrent common／担当role／親枠9／目標／記録規約全文を既保存sessionへ実配送した。133は16:40:18.613234UTCにturn/start accepted（01a0fd7c-efac-7b41-bbc3-b1dbe0eb43e2）、本人16:40:32UTC受領・claim・開始を確認した。早側処理17:15:32／新run17:10:32／提出17:25:32。134は16:40:39.005395UTCにturn/start accepted（01a0fd7d-3f4c-71e2-81b8-b19d2a225746）、本人16:41:34.523294UTC受領・claim・静的開始を確認した。早側処理18:11:34.523294／新run18:06:34.523294／提出18:26:34.523294。待機で時計をresetしない。通信受理、本人開始、実NN／rollout成功は別である。
+
+節目の採否は、浅い尺度の反復を止めて対応深部へ移った130提案を継続し、132で同入力の実Action差が得られたためP2へ配分を変更したことにある。132の有限費用はbuild20.977456秒／browser25.258924秒／mock .152618秒で、全チーム費用や純NN比ではない。次に133の対応行再現と134の枝結果が実装因子の選定を変えるかを監督が追えるようにする。同結果・方向混在ならこの尺度の同形式反復を止め、モデルvalue／入力尺度や深部因子を見直す。現政策維持、正式公平性／NI／Sigma同等／棋力改善は未認定。現在は133 criticと134 experimentの報告先coordinatorを明示して待つ。92同ownerの23:10:59重job通知、23:15:59監督停止、23:18:59monitor回収、23:20:59研究終了は不変。
