@@ -1,0 +1,32 @@
+{
+  "UTC": "2026-10-02T16:01:53.380188+00:00",
+  "monotonic": 209828.596239495,
+  "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+  "parent": {
+    "PID": 2629940,
+    "ppid": 2629939,
+    "PGID": 2629939,
+    "starttick": 20982857,
+    "rss": 16445440
+  },
+  "child": {
+    "PID": 2629941,
+    "ppid": 2629940,
+    "PGID": 2629941,
+    "starttick": 20982859,
+    "rss": 176128
+  },
+  "command": [
+    "python3",
+    "tools/ai-sigma-deep-discrimination/check.py"
+  ],
+  "command_sha256": "5fc7e88ee9804e15dfb799e06bf89cd48a0d7230434fbc10814ed4e7b3f0298a",
+  "source_hashes": {
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-deep-discrimination/backup-probe.cjs": "ba7d924237f6eca0aa2622afe9c4493969b5208060a9c7650c3267914477e37a",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-deep-discrimination/supervise.py": "a93d8df06a93a66a54f345c82a8c8f1d657d7396f4b45ae2096d664d2fea4fe5",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-deep-discrimination/check.py": "0064d3aca27bb1a5f071df75601867c29101509a70b419e6baf64a8723571b9f"
+  },
+  "deadline_epoch": 1790956973.3793962,
+  "memory": "Nodeheap192 + sampled parent/child RSS896MiB; no AS limit",
+  "TMP": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261002/DEEP-DISCRIMINATION/temp"
+}

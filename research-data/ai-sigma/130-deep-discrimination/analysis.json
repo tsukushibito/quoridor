@@ -1,0 +1,130 @@
+{
+  "issue": "quoridor-4lc.130",
+  "run": "saved130-r1",
+  "UTC": "2026-10-02T16:01:53.520043+00:00",
+  "normal129": {
+    "completed_backup": 276,
+    "cp_NN_calls": 61,
+    "terminal_noNN_backup": 215
+  },
+  "terminal_noNN_fraction": 0.7789855072463768,
+  "stress129": {
+    "n": 4,
+    "CP_NN_each": 1,
+    "edge_sum_each": 0,
+    "same_normal_action_all": true
+  },
+  "private_STALE": 6,
+  "public_engine_fault": 0,
+  "roots129_A_only": [
+    {
+      "case": "own-near-goal",
+      "action209": 76,
+      "top_prior": 0.18332447111606598,
+      "next_prior": 0.16331523656845093,
+      "unique_prior_argmax": true,
+      "normal_equals_stress_action": true,
+      "normal_backup": 48,
+      "normal_CP_NN": 4,
+      "normal_max_depth": 2,
+      "rootN": "conditional sim=edge_sum+1; raw root node visits absent",
+      "root_features_SHA": "52aa958ada948cf751cb8f67076e40f1d247c56611ea6c21ce49dc8bbcc65f4d"
+    },
+    {
+      "case": "opponent-threat",
+      "action209": 84,
+      "top_prior": 0.32201090455055237,
+      "next_prior": 0.15846824645996094,
+      "unique_prior_argmax": true,
+      "normal_equals_stress_action": true,
+      "normal_backup": 10,
+      "normal_CP_NN": 9,
+      "normal_max_depth": 3,
+      "rootN": "conditional sim=edge_sum+1; raw root node visits absent",
+      "root_features_SHA": "7b78b1db3cf5c6ac7bf3d374878ffc8c13722a28022aecd8ac4650b6d43a8ec6"
+    },
+    {
+      "case": "both-near",
+      "action209": 75,
+      "top_prior": 0.14872139692306519,
+      "next_prior": 0.135763019323349,
+      "unique_prior_argmax": true,
+      "normal_equals_stress_action": true,
+      "normal_backup": 59,
+      "normal_CP_NN": 3,
+      "normal_max_depth": 2,
+      "rootN": "conditional sim=edge_sum+1; raw root node visits absent",
+      "root_features_SHA": "c29ab07fed8653e5f9f442ceefcd8343cbd017465c17ca56b5023b294e2a9eb5"
+    },
+    {
+      "case": "wall-protected-threat",
+      "action209": 10,
+      "top_prior": 0.3689470589160919,
+      "next_prior": 0.11609683185815811,
+      "unique_prior_argmax": true,
+      "normal_equals_stress_action": true,
+      "normal_backup": 10,
+      "normal_CP_NN": 10,
+      "normal_max_depth": 3,
+      "rootN": "conditional sim=edge_sum+1; raw root node visits absent",
+      "root_features_SHA": "9cd49cbf6327944041af7f44aa2ee43a2ca0fe3bd45ec260ae6ea5f9256bd0f0"
+    }
+  ],
+  "roots119_turn0_only": [
+    {
+      "pair": 1,
+      "same_initial_features_logits_value": true,
+      "same_key_history_prefix_model": true,
+      "same_Action": true,
+      "candidate_action209": 13,
+      "reference_public_action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "candidate_CP_NN": 7,
+      "reference_CP_NN": 13,
+      "later_divergence": "unobserved in this checker; no deep trace/parentQ inferred"
+    },
+    {
+      "pair": 2,
+      "same_initial_features_logits_value": true,
+      "same_key_history_prefix_model": true,
+      "same_Action": true,
+      "candidate_action209": 67,
+      "reference_public_action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          -1
+        ]
+      },
+      "candidate_CP_NN": 12,
+      "reference_CP_NN": 8,
+      "later_divergence": "unobserved in this checker; no deep trace/parentQ inferred"
+    }
+  ],
+  "root_read_denominators": {
+    "129": 4,
+    "119": 4
+  },
+  "NN": 0,
+  "games": 0,
+  "missing": [
+    "candidate parentQ",
+    "child/deep NN trace",
+    "kernel CPU",
+    "general strategic oracle"
+  ],
+  "actual_go": false,
+  "input_hashes": {
+    "research-data/ai-sigma/129-tactical-evaluation/final-results.json": "a5f5a416969ed09fa4fe27d56cbee1f4bbdf92e7790dd6bce8cca54f0fbeb192",
+    "research-data/ai-sigma/129-tactical-evaluation/runs-all-attempts.tar.gz": "fc0b8cb2a85221bc61e5b4b30fd258d772cd88327dfff57337084c3a00be0a45",
+    "research-data/ai-sigma/119-diverse-prefix/prefix119-pair1-r1.tar.gz": "badbe6e47303d63809f2704d6c37a14c52da639ccde6a3eb46075a80c8213df8",
+    "research-data/ai-sigma/119-diverse-prefix/prefix119-pair2-r1.tar.gz": "c5cd7d44b10b6fbd3be07906198eeab33321a3dbb63e51e878a29690e97f6cba",
+    "tools/ai-sigma-ort-search/src/kernel.rs": "7d6873a7cab441bfe1bcf291e752da5cacfbe54bf55e5568d3112c930366c2cb",
+    "tools/ai-sigma-actual-boundary-repair/reference-core.js": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05"
+  }
+}

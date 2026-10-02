@@ -1,0 +1,56 @@
+{
+  "issue": "quoridor-4lc.130",
+  "priority": "P1 first; P2 only Action disagreement",
+  "adopted": false,
+  "actual_go": false,
+  "proposals": [
+    {
+      "id": "P1",
+      "question": "中盤の判断差は対応state/value/backup不一致か、同じ評価の探索配分差か。",
+      "evidence": "129 root1は4/4最大priorで通常と同手。119敗戦pair1/2開始根はNN/Action一致、後続は今回未観測。123/125はA/B全5同手、126は8対照量方向混在・同手。",
+      "competitors": [
+        "深部history/features/terminal/value視点又はbackupの違い",
+        "C/FPU/N/order/capsによる配分差",
+        "予算差又は共有modelの長期盲点"
+      ],
+      "inputs": "保存119 pair1-color1とpair2-color2の敗戦線、開始prefix後8/16公開手の位置、計4を採番順で事前固定。終端・不明なら未実施、補充0。事後診断でholdout/IIDでない。",
+      "conditions": "現候補C1.5/Q0/seed1979と固定Sigma自身の規約を維持。各根双方completed backup32（根展開含む、参照loop31/候補sim32を区別）で8検索。最大256NN+startup6。NNとterminal noNNを別記。同Kは同CPUでない。samewall500msは後の別対照。",
+      "denominators": "root4×engine2。root key/history/features648/NN137、共有して訪問したdeep keyだけvalue視点/終端/backupを比較。未共有は欠測。depth/訪問/NN開始・完了・採用・棄却/terminal noNN/caps/最終手。trace最大8node/search、parentQ実記録のみ。",
+      "prediction": "同じdeep keyでvalue/terminal/backup解釈が破れれば正しさの枝。対応NNが一致し訪問とActionだけ違えば配分の枝。",
+      "falsification": "対応解釈と手が一致ならこの4根で深部規則主因を支持しない。共有deep key無しは不明。検査器例外は仮説negativeにしない。",
+      "decisions": {
+        "mismatch": "規約/value修正へ変更、係数変更は停止。",
+        "visits_and_Action_change": "実際に変わった分岐だけCのみ等一因子を別配分、P2へ。",
+        "visits_only": "採用せず手品質尺度へ変更。",
+        "same_or_missing": "同根反復停止、不足node最小計測又はmodel/評価枝へ。"
+      },
+      "writer": "experiment 新trace adapter単独owner、criticは必要対応と有限算術だけ検証",
+      "cost_estimate": "writer20分、CPU2 singlethread各job60秒以下/合計120秒、保存検証10分。別実配分が必要。",
+      "confounding": "A/Bは複数規則差がありC/FPU因果はこの対照だけでは不明。保存敗戦の事後利用。"
+    },
+    {
+      "id": "P2",
+      "question": "異なる手の選択は長期の手品質へ届くか。参照分布への接近を改善条件にしない。",
+      "evidence": "浅いラベルは根priorだけでも全pass、開始同手でも後続敗戦。長期の局所手品質は未測定。",
+      "competitors": [
+        "候補の別手が長期に弱い",
+        "固定Sigmaの手も弱い/共有NN盲点",
+        "入力の側有利と後続政策が差を隠す"
+      ],
+      "inputs": "P1固定4入力の順でAction不一致の先頭最大2。無ければrun0、追加根/補充0。条件付き事後尺度で代表性なし。",
+      "conditions": "同状態から候補手又は参照手を1手だけ強制、以後双方同じ固定Sigma continuation T500/CPU2/thread1/history。両枝seed1979を保持し事前固定2反復（全結果保持）、最大2位置×2手×2反復=8rollout。現政策の候補手枝が維持対照。旧成績と統合0。",
+      "denominators": "位置/初手/反復別goal/draw/責任loss/未完了/残totalply、初手手番側score。2反復を独立棋力標本としない。参照temp0/first tieなので別seedを有効摂動と仮定しない。政策依存の局所結果でゲーム理論正解ではない。",
+      "prediction": "候補初手が主因なら固定後続でも候補枝だけの悪化が一貫。",
+      "falsification": "同結果なら尺度の感度不足又は両手同品質を絞れない。反復で方向混在は保留。infra例外を手品質lossにしない。",
+      "decisions": {
+        "candidate_worse": "P1の関連一因子/別budget対照を品質で評価、係数一括採用0。",
+        "equal_or_mixed": "追加反復を止め共有model/valueの長期感度又は入力尺度へ変更。",
+        "reference_worse": "参照分布一致を改善出口にせず現政策維持。",
+        "no_disagreement": "rollout0、同手の配分差反復停止。"
+      },
+      "writer": "experiment 新forced-first-move継続harness単独owner、critic有限入力/合法/集計/時計検証",
+      "cost_estimate": "最大8×200×.5=800秒思考+startup400/save300/停止余裕で約25分wall、writer20分+保存検証15分=計60分目安。別実配分が必要。完遂保証なし。",
+      "confounding": "固定Sigma continuation bias/共有model盲点。残CPU/公平時計の未成立は診断範囲として明記。正式NI/全体棋力オラクルではない。"
+    }
+  ]
+}

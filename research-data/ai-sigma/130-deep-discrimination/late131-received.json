@@ -1,0 +1,38 @@
+{
+  "UTC": "2026-10-02T16:07:36.450160+00:00",
+  "source_data_Git": "4a8d3bb",
+  "final_Git": "da4f2e5",
+  "policy_sensitivity": [
+    {
+      "case": "own-near-goal",
+      "legal": 132,
+      "label_accepts": 1,
+      "root1_chosen_is_max_legal_prior": true
+    },
+    {
+      "case": "opponent-threat",
+      "legal": 131,
+      "label_accepts": 2,
+      "root1_chosen_is_max_legal_prior": true
+    },
+    {
+      "case": "both-near",
+      "legal": 132,
+      "label_accepts": 1,
+      "root1_chosen_is_max_legal_prior": true
+    },
+    {
+      "case": "wall-protected-threat",
+      "legal": 124,
+      "label_accepts": 124,
+      "root1_chosen_is_max_legal_prior": true
+    }
+  ],
+  "refs": {
+    "research-data/ai-sigma/131-tactical-saved-independent/policy-sensitivity-and-stop.json": "66a438932c06d8f9c0111556673b36c260ee098f439eec9b10f3cde770bb9314",
+    "research-data/ai-sigma/131-tactical-saved-independent/handoff-summary.json": "96ab0c853be861365d2884917ee7f337fb975948699043f65a4713c0a34b1bcf"
+  },
+  "independence": "coordinator-delivered131 supports same finite claims; no new root or enumeration performed",
+  "alternative": "bounded multi-ply certification could replace policy-biased P2 if nontrivial resolved labels obtained; not mandatorygate",
+  "limits": "do not promise finite certificate on branching all legal walls; unresolved without branch completion; early public timers not strict411 guarantee"
+}
