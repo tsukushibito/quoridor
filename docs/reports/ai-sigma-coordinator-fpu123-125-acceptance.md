@@ -1,0 +1,13 @@
+# 123/125有限受入れと次の判別
+
+原123の15検索/root込みK32/480backup・手NN/startup12別と、125の保存ブラウザ算術/指定4検索の128backup・手NN/startup6別を有限受入れする。prefix1 B→CはTV24/31・Action13同、jump C→BはTV13/31・B31/C131で全4行のAction/訪問/featuresが対応原行に一致した。厳密未訪問Q0はreduction0と異なる。初期同入力features/rootNN一致を全深部一致へ外挿しない。
+
+候補へのTVはprefix1で近づきasym/jumpで離れ、原A/B最終Actionは5入力すべて同じ。FPU感度は支持するが候補への類似は手品質ではなく、5入力単回・事後の逆方向2例/4検索・A/Bの複数規則/精度/order束では候補FPU実装や119敗因を認定できない。candidate C1.5/固定Sigmaを維持し、自動C/FPU調整は止める。候補parentQ・原6参照depth・全child trace/cleanup独立spanの欠測を補完しない。K32 wrapperを500ms内完成量や純backend/CPU比としない。
+
+125最終Git5a9d427のhandoff SHA00d7bdd677cf1ffe4720adb51642def01d6ddaaa0912aa451e9778fd1b71e62f、stopSHA055a75d23f1580a415c180c2931eea26104e8912d643c452fd723273864b65ebと現物/blob一致を確認した。archive2f495489d02bb784d9376f956fe8ff4bf41ce408cfe14daedbb4a8b3684cd30cのGit blob66memberを統括もstream復元hash照合した。最終closure証拠の35参照source/dataの現hash一致、source停止・自己112/原再抽出163の現在不在、Model/search/main/monitor/innercontrolled/outerwaitを分けた停止根拠を受領。closure初回の実行中ログ混入/復元例外exit1、NN0訂正exit0を保持する。自然終了/全期間保証ではない。managedbrowser27.877720秒/RSS1565765632B、静的.829038秒、原123 managed44.221712秒と全チーム費用を混同しない。
+
+125の保存敗戦public/eligibleCP/採用completed/自己待ちのNN0案は部分採用。121で同入力の初回準備・完成量の優劣が逆転した2例があるため、保存だけから単一費用原因へ進まず、同入力・同採用時間・順序反転で直接判別する126へ配分した。119で参照が両色勝ったprefix1/2/3/7の4入力を事後診断として保持し、現政策固定・warm2とsteady16を別記、各要求間は旧zero後として残処理競合を分離する。実対局の相手t0旧ACK非前提は変えない。完成量差が一貫すれば政策固定の準備/throughput案、逆転やAction差/欠測なら戦術/終端尺度又は必要な規則対照へ進み、次判断がどう変わるかを結果で返す。正式NIや119全ゲームの因果をこの診断で証明しない。
+
+126契約Git115b7e7＋現common/experiment/枠8/記録規約を13:33:56.043110UTC既experiment idleへturn/start accepted、turn01a0fcd2-4dc3-73d3-a4e0-a4e23c15a67eで実配送。本人受領/claimと実成果は別確認。CPU2/RAM6guard5.5/heavy240秒/保存64guard56既予約内、受領20分又は14:00処理・17分又は13:57新run・30分又は14:10提出の早側。125 heavyは終了済み、追加game0。主張に必要な独立確認は停止版/残時間で選ぶ。
+
+節目の監督評価を待つ新gateは作らず、既55a3ad57の採用手品質と量の分離提案を今回配分へ反映した。反証された一律FPU類似路線を継続せず、比較入力と時間を揃える問いへ変更したことを監督が後続で追えるようgoalへ記録する。役割124適用自体を改善効果としない。親14:05:49/14:10:49/14:13:49/14:15:49の停止責任・資源・旧失敗/成績は維持、Sigma同等/NI/actual_go未認定。
