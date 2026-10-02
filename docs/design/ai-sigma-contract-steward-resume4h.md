@@ -1,17 +1,15 @@
-# SIGMA-RESUME-OPERATIONS / quoridor-4lc.92 / 契約3・現行枠7
+# SIGMA-RESUME-OPERATIONS / quoridor-4lc.92 / 契約4・現行枠8
 
-既steward 01a0f31d-99ee-7d63-b162-bc1a59c457c6が単独運用writer。ユーザーの新4時間研究再開承認、親現行枠版7/common/steward/実行記録規約と本書を全文継承し、ready/show goal/self・pause/担当を確認して92の現在作業を開始する。root準備108はroot所有、claimしない。
+coordinator→既steward 01a0f31d-99ee-7d63-b162-bc1a59c457c6。ユーザー明示のGPU実測追加/停止研究継続による新現在枠8。親正本/common/steward/記録規約を全文継承、ready/show goal/self・pause/本人担当を確認し92現作業開始を報告。root114はroot所有、claimしない。同saved/model/effort/cwd、別role/host再起動なし。
 
-開始2026-10-02T06:12:31Z、終了10:12:31Z。新重job開始停止10:02:31Z、監督10:07:31Z、monitor回収10:10:31Z。旧枠の期限／run／成績を書き換えない。旧92最終monitor報告未確認を保持する。旧scheduler state stopped/ownednull、scheduler2080724/start16927236・monitor2081005/start16928052不在はrootとcoordinatorの既観測を参照し、必要な現在確認だけ行う。旧証拠を保存し、最終報告の未確認を成功へ変えず、新枠開始の全面監査gateにも使わない。
+開始10:15:49/全終了14:15:49UTC、新重job開始停止14:05:49/監督14:10:49/monitor回収14:13:49。旧枠7の期限/run/成績を変更しない。旧scheduler2259113/start18105937・monitor2259164/start18106112現在不在/state stopped/ownednullを再確認し、旧最終回収・報告未受入れを別に保存/報告。旧未確認を新枠起動の全面gateにしない。
 
-所有範囲は既92運用helper/scheduler/watch/safe_state/reportとrun data、.artifacts/ai-sigma/continuation-20261001/scheduler/のconfig/operational contract/prompt、tools/ai-sigma-supervisor-read-guard/の現期限・必要hash差分、自報告。新runは既92内frame7等で区別する。main/研究の現行枠正本はrootが同bytesで版7へ更新済み・write停止、再編集しない。common/roles/registry定義は一致、必要な保存sessionのidle公式refresh以外は編集しない。実験107 source/code/settingsには書かない。
+既92 helper/scheduler/watch/safe_state/report、運用config/contract/prompt、guardの必要期限/hashと自己run/frame8/報告のみ単独write。主/研究の現行枠はroot同bytes更新・write停止。SHA0f0be04113893b62d3f79ef45bd9d17bd38817622091152d2eb25017acec43feを参照し再編集しない。common/role/registry source定義、GPU115/研究sourceに書込0。必要保存supervisor idle公式refreshは同model/effort/cwd/settingsで実施、active割込0、本文readback不可とacceptedを区別。
 
-同saved supervisor、周期1200秒/turn180秒、他LLMactive数で拒否しない設定を保持。同役二重開始、dispatch lock/pause/owner/正確owned回収/物理資源制約を維持。promptへ現行役割（契約・分担・累積費用/目標貢献・自身の方法・改善効果追跡/重大差双方根拠）と新frame7責任を反映し、動的課題取得/短い依存参照/有界一時retryを保つ。旧絶対期限とparent/supervisor期待hashを新本文・期限へ結合する。
+旧正確identity/ownedなし→source/config/operational contract/prompt新期限/親8/current supervisor期待hashを固定→24必要binding/validate→同runtime新start→実running/loaded hashを確認。必要時reloadedとfreshstartの実イベントを区別。監視開始後のreport等source追加編集禁止。修正が必要なら自己owned秩序停止・監督idle/正確identity確認から再適用。二重起動/未知processsignal0。
 
-旧process/ownedなし確認→source/config/operational contract/promptを先に固定→必要hash binding→validate→同runtime新start→実running/reloaded/loaded hashを確認する。監視開始後に報告helper等の監視対象sourceを編集してhash異常を起こす順序を繰り返さない。追加変更が必要なら自己ownedの秩序停止/監督idle/正確identity確認後に修正し再start。未知processへsignalしない。モデル/effort/cwd/settingsを維持した同saved sessionへの正式idle thread/resumeは許可、新role/AppServer restart/active interruptは配分しない。本文readback不可とRPC受理/実点検成功を区別する。
+同saved supervisor、周期1200/turn180、他active数入場拒否なし。同役二重開始/dispatch lock/pause/所有/正確owned回収と物理予算維持。dynamic課題・短い依存参照/有界retry・契約を含む外部改善/累積費用・目標貢献/効果追跡/自身見直し・重大差双方根拠を維持。終了直前は実残時間で開始/読取/報告/回収が収まるか判断し、期限を延長してturnを救済しない。
 
-準備は受領20分目安、速報は実running/loaded後直ちに、提出25分目安。通常の設定/小helper修正・再確認は現在総予算内で反復可。少数の新期限/hash/終了拒否caseだけ確認し、全史/全role/全古いscenarioの反復を要求しない。個々のcommand60秒以内・所有子回収余裕を確保。障害は早く伝え、実験107をこの事務待ちで止めない。
+準備受領20分/提出25分目安、実running/loaded後速報。新期限・親hash・硬end拒否の必要少数NN0だけ、全史/全旧scenario反復不要。通常設定/debug同予算内反復可、command60秒以内で子回収余裕を確保。CPU0/currentRSSRAM1GiB、準備管理job累計600秒、既steward128MiB/combined112内新run8MiB目安・追加予約0。CPU4/RAM8/保持+未使用有効予約12GiB内、GPU/Chrome/モデル/対局/build/取得/依存更新/製品/push0。研究115を事務待ちで停止しない。
 
-CPU0の短期準備/常駐監視、currentRSS RAM1GiB、各command60秒/準備管理job累計600秒。既steward128MiB/combined112内の新run8MiB目安、追加予約0。新scope保持実量と未使用有効予約を区別し、古いpeakを現在量へ二重加算しない。NN/Chrome/対局/モデル/build/取得/共有依存同期/製品/push0。CPU4/RAM8/保持＋有効未使用予約12GiB・既saved6role+root/同model+effortを維持。
-
-起動後の長期責任は本92同ownerが保持:10:02:31新重job開始停止通知、10:07:31正確ownedturnとscheduler停止、10:10:31monitor回収、10:12:31まで必要終了証拠保存。起動受入れと未来終了を別にし、外部NN停止や全期間成功を認定しない。準備受領/実起動/loadedとPID/starttick/boot・短期子終了を簡潔報告。Git/runで必要設定/差分/失敗/commandを保存、backup/report→coordinator。root108へ統括が必要起動証拠を短く伝える。旧最終報告の残確認は新枠責任と分けて維持。
+長期責任は同92 owner:14:05:49新重job停止通知、14:10:49正確ownedturn+scheduler停止、14:13:49monitor同identity回収、14:15:49必要証拠保存。準備実running/loadedと未来停止/wholeturn成功/外部NN全停止を区別。旧証拠はGit/runで参照し必要現量/予約未使用分/過去peakを分ける。本人受領開始/実稼働PIDstarttickboot/shortchild終了→Git/backup/reportをcoordinatorへ、root114受入れに必要な起動証拠は統括が伝える。実稼働/失敗を短く報告し新独立層を追加しない。
