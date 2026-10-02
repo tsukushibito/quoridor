@@ -1,4 +1,4 @@
-import json,struct,math,datetime,subprocess
+import json,struct,math,datetime,subprocess,os
 from pathlib import Path
 R=Path('/workspaces/quoridor/.worktree/ai-sigma');O=R/'.artifacts/ai-sigma/resume-20261002/SEARCH-POLICY';data=json.loads((O/'small-input.json').read_text());node=json.loads((O/'node-result.json').read_text())
 def f(x):return struct.unpack('<f',struct.pack('<f',x))[0]
@@ -26,5 +26,5 @@ art=[]
 for name,pq,q in [('negative-parent',-.4,.2),('positive-parent',.7,.8)]:
  es=[[3,bits(.8),9,bits(q*9),0],[5,bits(.2),0,bits(0),1]];p=val(bits(.8));fpu=pq-.2*math.sqrt(p);baseline=select(es,10,1,False,False,0);factor=select(es,10,1,False,False,fpu);actual=next(x for x in node['artificial'] if x['name']==name);assert actual['Q0_action']==baseline['action'] and actual['FPU_only_action']==factor['action'];assert abs(actual['FPU']-fpu)<1e-12;art.append({'name':name,'Q0':baseline,'FPU':factor,'known_parentQ':pq})
 assert node['finish_gate']=={'n':6,'pass':6};assert next(x for x in node['artificial'] if x['name']=='parent-Q-not-edge-average')['parentQ']==.375
-result={'issue':'quoridor-4lc.94','run':'python-policy-r1','UTC':datetime.datetime.now(datetime.timezone.utc).isoformat(),'Git':subprocess.run(['git','rev-parse','HEAD'],check=True,capture_output=True,text=True).stdout.strip(),'real_roots':results,'Action_scorebits_agree':24,'backup_cases_agree':len(node['backup_cases']),'known_parent_FPU_cases':art,'failures':[],'NN':0,'full765_replay':False}
+result={'issue':'quoridor-4lc.94','run':os.environ.get('SIGMA_POLICY_RUN','python-policy-unspecified'),'UTC':datetime.datetime.now(datetime.timezone.utc).isoformat(),'Git':subprocess.run(['git','rev-parse','HEAD'],check=True,capture_output=True,text=True).stdout.strip(),'real_roots':results,'Action_scorebits_agree':24,'backup_cases_agree':len(node['backup_cases']),'known_parent_FPU_cases':art,'failures':[],'NN':0,'full765_replay':False}
 (O/'python-result.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps({'Action_scorebits_agree':24,'backup_cases_agree':len(node['backup_cases']),'artificial_FPU':art,'failures':[]}))
