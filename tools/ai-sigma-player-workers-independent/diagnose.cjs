@@ -17,7 +17,7 @@ async function main() {
 
   const fixtures=JSON.parse(fs.readFileSync(ROOT+'/.artifacts/ai-sigma/reference-fixtures/SIGMA-PARITY-PLAN/fixtures.json')).fixtures;
   const references=JSON.parse(fs.readFileSync(ROOT+'/.artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/ort-a.outputs.json'));
-  const monitor=require('../ai-sigma-actual-boundary-repair/pause-check.cjs').createMonitor({out:directory,subjectIssue:'quoridor-4lc.113',deadlineUTC:config.processing_deadline,windowEndUTC:'2026-10-02T10:02:31Z'});
+  const monitor=require('../ai-sigma-actual-boundary-repair/pause-check.cjs').createMonitor({out:directory,subjectIssue:'quoridor-4lc.113',deadlineUTC:config.processing_deadline,windowEndUTC:'2026-10-02T10:12:31Z'});
   let browser=null,primary=null,secondary=[],rows=[],startup=null,gameResult=null,observerTimer=null;
   try {
     await monitor.start();monitor.check();
