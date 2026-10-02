@@ -28,3 +28,5 @@ P1の実手は(4,6)→(4,7)、P2は(4,2)→(4,1)。小label index0/1とRust67/13
 科学source/NN/Model2/search/main timers-message/monitorcallbacksは本文前に停止・速報した。innercontrolled forced/waitとoutersole-root ownedwait/remainingunknown空を区別し、46 exact identity現在不在を確認した。現在不在を自然終了/全期間/全host保証にしない。最終保存helper停止は後述のhandoff正本へbindする。processing20:30/newheavy20:25/submission20:45、親枠9の期限と資源を維持した。
 
 再現入口・設定・全要求・失敗・actual served hash・時計・資源・停止は `research-data/ai-sigma/144-wallless-ai-sensitivity/` と同課題archive manifestを参照。共有model/ORT/Wasmは参照しコピーしない。archiveを停止rawから生成して全member SHA/bytesを復元確認し、研究Git/Beads backup後coordinatorへ引渡す。goal/他者close、actual_go、政策採用0。
+
+最終保存：data/report47878ffから30Gitファイルとarchive51memberをstream復元確認。科学stop7bc78b82079538b71d7263270154171f371f187b314128ae6a517964376d42daを保持し、復元helper停止・最終sourcehashは `final-source-stop.json` に別保存。確認対象identity現在不在を再確認。prelaunch失敗runnerのidentityは未記録であり、command exit1/childspawn0と区別する。最終handoff metadata/report/backup操作は科学分母外。
