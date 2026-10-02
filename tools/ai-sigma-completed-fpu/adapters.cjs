@@ -17,7 +17,7 @@ function referenceCore(){
 }
 function script(name){
   if(name==='reference')return referenceCore();
-  if(name==='main')return original.script('main')+'\n'+fs.readFileSync(__dirname+'/count-main.js','utf8');
+  if(name==='main')return original.script('main')+'\n'+fs.readFileSync(__dirname+'/count-input.js','utf8')+'\n'+fs.readFileSync(__dirname+'/count-main.js','utf8');
   if(name==='worker')return fs.readFileSync(__dirname+'/count-worker.js','utf8');
   return original.script(name);
 }

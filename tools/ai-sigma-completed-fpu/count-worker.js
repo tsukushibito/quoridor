@@ -2,6 +2,7 @@
 let unvisitedMode='original';
 let fpuSelections=[];
 importScripts('/player-base.js');
+importScripts('/count-input.js');
 const countInheritedHandler=onmessage;
 const countOriginalCheck=check;
 check=function(context,beforeNewWork=false){
@@ -33,7 +34,9 @@ async function countSearch(data){
   };
   try{
     if(data.condition==='A'){
-      handle=b.create({fixture:data.fixture,diagnostic:true,simulations:data.K,max_nodes:512,max_depth:24,generation,seed:1979});
+      checkedCountState(data.fixture);
+      const input=data.fixture.id.startsWith('diverse-prefix-')?{prefix:data.prefix}:{fixture:data.fixture};
+      handle=b.create({...input,diagnostic:true,simulations:data.K,max_nodes:512,max_depth:24,generation,seed:1979});
       while(true){
         if(epoch()>=deadline)throw Error('COUNT_SEARCH_TIMEOUT');
         const request=b.call({op:'begin',handle,generation});
@@ -50,7 +53,7 @@ async function countSearch(data){
       }
       cp=b.call({op:'snapshot',handle,generation});
     }else{
-      const state=referenceState(data.fixture);
+      const state=checkedCountState(data.fixture);
       const context={generation,cooperative:false,count_deadline:deadline,nnCalls:0,simulations:0,spans:[],steps:[],onComplete:null};
       clockContext=context;
       root=await runMCTSControl(state,data.K-1,nnEvaluator,generation);
@@ -64,9 +67,12 @@ async function countSearch(data){
     if(handle!==null)b.free(handle);
     clockContext=null;b.infer=originalInfer;active=false;
     const usedMode=unvisitedMode;unvisitedMode='original';
+    const wrapperEnd=epoch();
     const completed=data.condition==='A'?(cp?.simulations??0):(root?.visitCount??0);
+    function visitedDepth(node,depth=0){return Math.max(depth,...node.children.filter(x=>x.visitCount>0).map(x=>visitedDepth(x,depth+1)));}
+    const referenceDepth=root?visitedDepth(root):null;
     const rootNode=root?{truevisitCount:root.visitCount,valueSum:root.valueSum,parentQ:root.qValue,visitedChildBasePriorSum:root.children.filter(x=>x.visitCount>0).reduce((s,x)=>s+x.basePrior,0),children:root.children.map(x=>({action:rustAction(root.state,x.action),basePrior:x.basePrior,visitCount:x.visitCount,valueSum:x.valueSum,childQ:x.qValue}))}:null;
-    send({kind:'count_result',id:data.id,condition:data.condition,fixture_id:data.fixture.id,generation,K:data.K,cp,numeric,spans,backup_counts:backupCounts,primary,wrapper_start_ms:start,wrapper_end_ms:epoch(),first_CP_ms:firstCP,zero:{handles:b.liveHandles(),activeNN,active,mode:unvisitedMode},used_mode:usedMode,NN_calls:spans.length,completed_backups:completed,terminal_noNN_backups:completed-spans.length,root_node:rootNode,root_FPU_selections:fpuSelections,candidate_parentQ_missing:data.condition==='A'});
+    send({kind:'count_result',id:data.id,condition:data.condition,fixture_id:data.fixture.id,generation,K:data.K,cp,numeric,spans,backup_counts:backupCounts,primary,wrapper_start_ms:start,wrapper_end_ms:wrapperEnd,first_CP_ms:firstCP,zero:{handles:b.liveHandles(),activeNN,active,mode:unvisitedMode},used_mode:usedMode,NN_calls:spans.length,completed_backups:completed,terminal_noNN_backups:completed-spans.length,root_node:rootNode,root_FPU_selections:fpuSelections,reference_visited_depth:referenceDepth,reference_uncapped:true,post_wrapper_analysis_end_ms:epoch(),candidate_parentQ_missing:data.condition==='A'});
   }
 }
 onmessage=async function(event){

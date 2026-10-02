@@ -14,7 +14,7 @@ function installCountHandler(){
   }
   countHandlerInstalled=true;
 }
-function countFixtureState(fixture){return fixture.id.startsWith('diverse-prefix-')?diversePrefixState(fixture):referenceState(fixture);}
+function countFixtureState(fixture){return checkedCountState(fixture);}
 function rootDistribution(row){
   const sum=row.cp.root_edges.reduce((s,e)=>s+e[2],0);
   return Object.fromEntries(row.cp.root_edges.map(e=>[String(e[0]),e[2]/sum]));
@@ -40,7 +40,7 @@ async function runCompletedFPU(config,fixtures,references){
     if(!fixture)throw Error('COUNT_FIXTURE_MISSING');
     const state=countFixtureState(fixture),id=config.run_id+'-'+(countRows.length+1),generation=++generationCounter;
     const reply=waitingMessage('count-'+id,config.count_timeout_ms+5000);
-    slotFor(engine).worker.postMessage({kind:'count_search',id,engine,generation,condition:spec.condition,fixture,K:config.K,timeout_ms:config.count_timeout_ms});
+    slotFor(engine).worker.postMessage({kind:'count_search',id,engine,generation,condition:spec.condition,fixture,prefix:fixture.id.startsWith('diverse-prefix-')?rustPrefix(fixture.legal_prefix):null,K:config.K,timeout_ms:config.count_timeout_ms});
     const row=await reply;countRows.push(row);
     try{
       if(row.primary)throw Error(row.primary.message);
@@ -53,7 +53,7 @@ async function runCompletedFPU(config,fixtures,references){
       if(engine==='reference' && (row.cp.simulations!==config.K-1 || row.cp.root_visits!==config.K))throw Error('REFERENCE_LOOP31');
       row.entropy=row.cp.root_edges.reduce((s,e)=>e[2]?s-e[2]/row.edge_sum*Math.log(e[2]/row.edge_sum):s,0);
       row.main_received_ms=epochMain();
-      row.depth=engine==='candidate'?row.cp.max_depth:null;row.caps=engine==='candidate'?row.cp.cap:null;
+      row.depth=engine==='candidate'?row.cp.max_depth:row.reference_visited_depth??null;row.caps=engine==='candidate'?row.cp.cap:null;
     }catch(error){row.main_gate_error={name:error.name,message:error.message};errors.push(row.main_gate_error);}
   }
   const comparisons=[];
