@@ -1,0 +1,133 @@
+{
+  "issue": "quoridor-4lc.102",
+  "time": "2026-10-02T04:05:21.322459+00:00",
+  "HEAD": "54f08da57cdaf312b654616038e4f55409f79ff4",
+  "files": [
+    {
+      "path": "tools/ai-sigma-tail-transport/runner.py",
+      "sha256": "7a7e697a17a849cf812b9604c8100835f4e5a17d4cace2d9f0f153b7c82497c9",
+      "lines": 126,
+      "max_line_characters": 1526,
+      "AST_parse": "pass (no execution/import/cache)"
+    },
+    {
+      "path": "tools/ai-sigma-cooperative-clock-independent/runner.py",
+      "sha256": "dfc12608d8a0db67188e30a318a0bb0eea814384ddbafad500b98f0777d2e831",
+      "lines": 126,
+      "max_line_characters": 1526,
+      "AST_parse": "pass (no execution/import/cache)"
+    },
+    {
+      "path": "tools/ai-sigma-tail-transport/measure.cjs",
+      "sha256": "d498cb451b19cec08e04614dddbdcbe7b18cfc18eb9f5c1ba2f97ca227ad764c",
+      "lines": 27,
+      "max_line_characters": 1781,
+      "syntax_exit": 0,
+      "stderr": ""
+    },
+    {
+      "path": "tools/ai-sigma-cooperative-clock-independent/measure.cjs",
+      "sha256": "139be4bd98ae5a45cb94104bb7b56ef3d73355692e020199ba5fcafe0f999457",
+      "lines": 27,
+      "max_line_characters": 1780,
+      "syntax_exit": 0,
+      "stderr": ""
+    },
+    {
+      "path": "tools/ai-sigma-tail-transport/browser.cjs",
+      "sha256": "6b82703d032a92aa36275f142344dda4e5a0e4ee49597622a2140259b9455280",
+      "lines": 10,
+      "max_line_characters": 1040,
+      "syntax_exit": 0,
+      "stderr": ""
+    },
+    {
+      "path": "tools/ai-sigma-cooperative-clock-independent/audit.py",
+      "sha256": "5d5e178ee5a1157945e42c67063d8faa8d2e28533b70783792b5d1638302ea4e",
+      "lines": 33,
+      "max_line_characters": 452,
+      "AST_parse": "pass (no execution/import/cache)"
+    },
+    {
+      "path": "tools/ai-sigma-cooperative-clock-independent/numeric.cjs",
+      "sha256": "5efcb71ad0ecf18ef96cb502e02adf3e1dbc4d3aaec2861305d7736ba1d6eff5",
+      "lines": 5,
+      "max_line_characters": 1949,
+      "syntax_exit": 0,
+      "stderr": ""
+    },
+    {
+      "path": "tools/ai-sigma-tail-transport/early-worker.js",
+      "sha256": "9494e33e7204be208262914c04ea5eb0d7985872a6d7ebc6e4084d84729097d4",
+      "lines": 30,
+      "max_line_characters": 1025,
+      "syntax_exit": 0,
+      "stderr": ""
+    },
+    {
+      "path": "tools/ai-sigma-diagnostic-arena/arena.cjs",
+      "sha256": "a5fad8730b81e69a82eaa9d9240ba4e0de188e28fb0e2412bf0784ed6fb71820",
+      "lines": 61,
+      "max_line_characters": 1516,
+      "syntax_exit": 0,
+      "stderr": ""
+    },
+    {
+      "path": "scripts/check-boundaries.mjs",
+      "sha256": "ff1710fc63647da035b8262d26cddc8db50bec71ae67e1465f940b215501ac02",
+      "lines": 9,
+      "max_line_characters": 105
+    },
+    {
+      "path": "package.json",
+      "sha256": "4a3d4888a194b478418b337827b2b6a599b90505bec59605f8ce20edef907e30",
+      "lines": 28,
+      "max_line_characters": 881
+    },
+    {
+      "path": "tools/research-team/pyproject.toml",
+      "sha256": "78915378805f095911e7a3ccb58e8db96daaa0d0fb3a1fb02cab9470eb57e951",
+      "lines": 8,
+      "max_line_characters": 38
+    }
+  ],
+  "runner_line_similarity": 0.9603174603174603,
+  "runner_diff": "runner-diff.txt",
+  "existing_tools": {
+    "node": {
+      "PATH_available": "/home/vscode/.local/bin/node",
+      "root_local_available": false,
+      "version": "v24.21.0"
+    },
+    "ruff": {
+      "PATH_available": null,
+      "root_local_available": false
+    },
+    "black": {
+      "PATH_available": null,
+      "root_local_available": false
+    },
+    "prettier": {
+      "PATH_available": null,
+      "root_local_available": false
+    },
+    "eslint": {
+      "PATH_available": null,
+      "root_local_available": false
+    }
+  },
+  "syntax_checks_do_not_execute_sources": true,
+  "no_dependency_sync_or_install": true,
+  "scope": "12 selected files, six Node syntax checks/three Python AST parses; not all runners or all configurations",
+  "job": {
+    "pid": 2026942,
+    "starttick": "16683183",
+    "affinity": [
+      0
+    ],
+    "wall_seconds": 0.25490926098427735,
+    "peak_rss_bytes": 18935808,
+    "exit": 0,
+    "children_reaped": true
+  }
+}

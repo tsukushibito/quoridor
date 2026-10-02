@@ -4,6 +4,27 @@
 
 実写の室内HDRIを背景と材質の環境光・反射に使い、木製テーブルの上に木製盤を置いた空間を表示します。生成木目、面取り、塗膜、GTAOによる接触部の遮蔽を組み合わせています。IBLに、HDRIの主光源方向から計算したDirectionalLightと影を加えています。採用アセットの出所・ライセンス・生成プロンプトと検証結果は[テーブル空間の描画強化報告](docs/reports/tabletop-rendering.md)に記録します。
 
+今後のAIはPVネットワーク + MCTS + 終盤ソルバを目指します。実装研究はClaustrophobiaとSigmaQuoridorを中心に進めます。最初の棋力目標は、同じ計算資源・思考時間でのSigmaQuoridor同等水準です。Ka・gorisanson・Titanium・Claustrophobia・Ishtar / Zero-Inkは参考比較とします。参照優先度と比較条件の正本は[AI設計・目標](docs/design/quoridor-3d-webapp-design-rust-wasm-v1.md#89-参考aiの優先度と役割)に記載しています。
+
+AI研究は競合仮説と実験を並行し、結果から修正・再確認・別案へ進めます。性能・探索・推論・生成などを固定の逐次工程にせず、許可範囲と総予算で統括が配分します。小規模診断と正式棋力評価は区別し、現在のSigma同等水準は未立証です。[研究チーム](docs/design/ai-research-team.md)と[実行・記録規約](docs/development/ai-research-experiments.md)を参照してください。
+
+## 主要ディレクトリ
+
+| 現在の配置 | 役割 |
+| --- | --- |
+| `apps/web/` | 製品Web UI・Three.js描画・Worker側の連携 |
+| `packages/engine-bridge/` | TypeScriptとRust/Wasmを結ぶプロトコル・bridge |
+| `crates/quoridor-core/`, `quoridor-ai/`, `quoridor-wasm/` | Rustのルール、AI、Wasm公開境界 |
+| `tools/` | 研究・補助ツール。`ai-sigma-*`は研究ブランチ側の試作/再利用基盤/独立検証で、現状は共通機能も混在 |
+| `scripts/`, `scripts/dev/` | ビルド・生成・検証入口と開発環境/Beads/研究通信の操作 |
+| `tests/` | 製品のrender/audio/e2e検証・fixture |
+| `docs/design/`, `development/`, `reports/` | 設計・運用規約・実施結果と限界 |
+| `research-data/ai-sigma/` | 研究ブランチ側のGit保存データ・設定・要約・圧縮観測 |
+| `.artifacts/`, `artifacts/` | ローカル運用/出力・データ展開・一時物、Playwrightブラウザ等。研究の出力は`.artifacts/ai-sigma/` |
+| `models/experiments/`・外部cache | 研究モデルと共有依存。保存先/配布条件は[保存方針](.devcontainer/storage-policy.md)参照 |
+
+研究ブランチは`codex/ai-sigma`、研究worktreeは`.worktree/ai-sigma`。研究側だけのパスを製品mainへ移動・統合したという説明ではない。今後の共通化や配置境界は[研究規約](docs/development/ai-research-experiments.md#研究コード設定データの配置)を参照し、既存コードの移動は担当・予算を定めて別途適用する。文書を探す入口は[AGENTS.mdのインデックス](AGENTS.md#文書インデックス)。
+
 ## ローカルで起動
 
 既存のDev Containerまたは同等のRust環境で、プロジェクトのルートから実行します。Rustはstable、`wasm32-unknown-unknown` target、rustfmt、clippy、wasm-packを使用します。固定のRust版は指定しません。
