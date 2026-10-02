@@ -1,24 +1,12 @@
 {
-  "issue": "quoridor-4lc.132",
-  "frame": 9,
-  "kind": "count",
-  "run_id": "deep132-measure-r1",
-  "processing_deadline": "2026-10-02T17:15:44.730539+00:00",
-  "newjob_deadline": "2026-10-02T17:10:44.730539+00:00",
-  "seed": 1979,
-  "pin_owned_TIDs": true,
-  "forecast_bytes": 33554432,
-  "minimum_remaining_heavy_seconds": 180,
-  "dependency_stop": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/129-tactical-evaluation/runtime-source-stopped-before-report.json",
-  "input_prefixes": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/132-deep-node-comparison/raw-input-prefixes.json",
-  "fixed_input_path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/132-deep-node-comparison/fixed-inputs.json",
+  "config_SHA256": "c8fb1552d5a3ce3aea94af7c7c7b3746a89523a86c769230a07b77d514ed1b90",
+  "raw_prefix_SHA256": "8a401d08512761b19c30169e93048899bd911b83d4fe1c07458a2f8262f1f6ef",
   "input_order": [
     "diverse-prefix-mid-pair1-color1-new8",
     "diverse-prefix-mid-pair1-color1-new16",
     "diverse-prefix-mid-pair2-color2-new8",
     "diverse-prefix-mid-pair2-color2-new16"
   ],
-  "count_timeout_ms": 30000,
   "parity_searches": [
     {
       "phase": "parity",
@@ -49,7 +37,7 @@
       "K": 8
     }
   ],
-  "searches": [
+  "primary_searches": [
     {
       "phase": "primary",
       "fixture_id": "diverse-prefix-mid-pair1-color1-new8",
@@ -107,10 +95,14 @@
       "K": 32
     }
   ],
-  "trace_selection": "root and first seven unique nonroot completed evaluation/terminal nodes; unchanged cap8",
-  "mixed_abs": 0.0001,
-  "mixed_rtol": 0.0001,
-  "P2_rollout": 0,
+  "trace_cap": 8,
+  "selection": "root + first seven unique nonroot nodes to complete evaluation or terminal backup; no result-dependent replacement",
+  "same_input_exact_history_features_required": true,
+  "numeric_threshold": "abs1e-4 + rtol1e-4",
+  "whole_wrapper_not_kernelCPU": true,
+  "source_Git": "edbf29ac29208616a8d20b859db497acb30f0f42",
+  "source_baseline_binary_bytes_match": true,
+  "independent_source_reproof": false,
   "games": 0,
-  "Git": "edbf29ac29208616a8d20b859db497acb30f0f42"
+  "P2_rollout": 0
 }
