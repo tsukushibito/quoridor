@@ -1,0 +1,319 @@
+{
+  "finite_supported": true,
+  "NN": 0,
+  "source_Git": "885eb8e",
+  "input_generation_hashes": [
+    "55362d6c1165d55269faa778052f45e546587d26f3ec0c85331721711e7aeb76",
+    "08fa06a453fe397e726124fbd938437be000015b16968f91d54dcde9afb55b28"
+  ],
+  "rows": [
+    {
+      "id": "P1-race",
+      "input": {
+        "id": "P1-race",
+        "side": 1,
+        "prefix": 32,
+        "pawns": [
+          [
+            4,
+            6
+          ],
+          [
+            3,
+            3
+          ]
+        ],
+        "walls": [
+          0,
+          0
+        ],
+        "key": "4,6|3,3|0||0,0;0,2;0,4;0,6;1,0;1,2;1,4;1,6;2,0;2,2;2,4;2,6;6,0;6,2;6,4;6,6;7,0;7,2;7,4;7,6",
+        "features": 648,
+        "root_actions": [
+          {
+            "object": {
+              "type": "pawn",
+              "direction": [
+                0,
+                1
+              ]
+            },
+            "policy_index": 0,
+            "rust209_action": 67
+          },
+          {
+            "object": {
+              "type": "pawn",
+              "direction": [
+                0,
+                -1
+              ]
+            },
+            "policy_index": 1,
+            "rust209_action": 49
+          },
+          {
+            "object": {
+              "type": "pawn",
+              "direction": [
+                -1,
+                0
+              ]
+            },
+            "policy_index": 2,
+            "rust209_action": 57
+          },
+          {
+            "object": {
+              "type": "pawn",
+              "direction": [
+                1,
+                0
+              ]
+            },
+            "policy_index": 3,
+            "rust209_action": 59
+          }
+        ],
+        "fixed_golden": false
+      },
+      "actions": [
+        {
+          "policy_index": 0,
+          "interval": [
+            1,
+            1
+          ]
+        },
+        {
+          "policy_index": 1,
+          "interval": [
+            -1,
+            -1
+          ]
+        },
+        {
+          "policy_index": 2,
+          "interval": [
+            1,
+            1
+          ]
+        },
+        {
+          "policy_index": 3,
+          "interval": [
+            1,
+            1
+          ]
+        }
+      ],
+      "saved_proof": {
+        "nodes": 2352,
+        "proof_rows": 2352,
+        "terminal": 90,
+        "depthUnknown": 1593,
+        "actions": [
+          {
+            "policy_index": 0,
+            "interval": [
+              1,
+              1
+            ]
+          },
+          {
+            "policy_index": 1,
+            "interval": [
+              -1,
+              -1
+            ]
+          },
+          {
+            "policy_index": 2,
+            "interval": [
+              1,
+              1
+            ]
+          },
+          {
+            "policy_index": 3,
+            "interval": [
+              1,
+              1
+            ]
+          }
+        ],
+        "interval": [
+          1,
+          1
+        ],
+        "all_parent_states_legal": true,
+        "algorithm": "forward state reconstruction, reverse interval aggregation"
+      },
+      "recomputed_nodes": 2352
+    },
+    {
+      "id": "P2-corridor",
+      "input": {
+        "id": "P2-corridor",
+        "side": 2,
+        "prefix": 33,
+        "pawns": [
+          [
+            4,
+            5
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "walls": [
+          0,
+          0
+        ],
+        "key": "4,5|4,2|1||0,0;0,2;0,4;0,6;1,0;1,2;1,4;1,6;2,0;2,2;2,4;2,6;6,0;6,2;6,4;6,6;7,0;7,2;7,4;7,6",
+        "features": 648,
+        "root_actions": [
+          {
+            "object": {
+              "type": "pawn",
+              "direction": [
+                0,
+                1
+              ]
+            },
+            "policy_index": 0,
+            "rust209_action": 31
+          },
+          {
+            "object": {
+              "type": "pawn",
+              "direction": [
+                0,
+                -1
+              ]
+            },
+            "policy_index": 1,
+            "rust209_action": 13
+          },
+          {
+            "object": {
+              "type": "pawn",
+              "direction": [
+                -1,
+                0
+              ]
+            },
+            "policy_index": 2,
+            "rust209_action": 21
+          },
+          {
+            "object": {
+              "type": "pawn",
+              "direction": [
+                1,
+                0
+              ]
+            },
+            "policy_index": 3,
+            "rust209_action": 23
+          }
+        ],
+        "fixed_golden": false
+      },
+      "actions": [
+        {
+          "policy_index": 0,
+          "interval": [
+            -1,
+            -1
+          ]
+        },
+        {
+          "policy_index": 1,
+          "interval": [
+            1,
+            1
+          ]
+        },
+        {
+          "policy_index": 2,
+          "interval": [
+            1,
+            1
+          ]
+        },
+        {
+          "policy_index": 3,
+          "interval": [
+            1,
+            1
+          ]
+        }
+      ],
+      "saved_proof": {
+        "nodes": 3632,
+        "proof_rows": 3632,
+        "terminal": 112,
+        "depthUnknown": 2527,
+        "actions": [
+          {
+            "policy_index": 0,
+            "interval": [
+              -1,
+              -1
+            ]
+          },
+          {
+            "policy_index": 1,
+            "interval": [
+              1,
+              1
+            ]
+          },
+          {
+            "policy_index": 2,
+            "interval": [
+              1,
+              1
+            ]
+          },
+          {
+            "policy_index": 3,
+            "interval": [
+              1,
+              1
+            ]
+          }
+        ],
+        "interval": [
+          1,
+          1
+        ],
+        "all_parent_states_legal": true,
+        "algorithm": "forward state reconstruction, reverse interval aggregation"
+      },
+      "recomputed_nodes": 3632
+    }
+  ],
+  "raw_bindings": [
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261002/WALLLESS-LABEL-INDEPENDENT/runs/p143-label-r2/preflight.json",
+      "SHA256": "3692ed788067039a58a0de771dc4b76e4a9221c3e100d27d9b8b5a254308de2b"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/143-wallless-label-independent/input-and-binding.json",
+      "SHA256": "ae83fe23ab9981e4d5ff1e2e35acb1f40e91e13cd27b6677a96af56c18f4c104"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261002/WALLLESS-LABEL-INDEPENDENT/runs/p143-label-r2/case-0.json",
+      "SHA256": "037602ef92168f6f7cd17e6a2a565eceb106cefb3c50cbfde6d8c4efcce66c3c"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261002/WALLLESS-LABEL-INDEPENDENT/runs/p143-label-r2/case-1.json",
+      "SHA256": "0de84e15f55729790540011c1c033b9b9d2915fdb20b763f39eb1fca0fed28b3"
+    }
+  ],
+  "shared_RuleA": true,
+  "no_fullreport_gate": true
+}
