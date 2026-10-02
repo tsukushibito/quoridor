@@ -1,0 +1,106 @@
+{
+  "issue": "quoridor-4lc.129",
+  "received_UTC": "2026-10-02T15:28:42+00:00",
+  "processing_deadline": "2026-10-02T16:13:42+00:00",
+  "newjob_deadline": "2026-10-02T16:08:42+00:00",
+  "submission_deadline": "2026-10-02T16:28:42+00:00",
+  "base_Git": "81625307376dfe4b4ae70f343deda0acac9033b0",
+  "owner": "codex:01a0f31d-6d15-7620-bb63-4b4f878e4746",
+  "no_pause_confirmed": true,
+  "run_id": "tactical129-mock-r1",
+  "kind": "protocol",
+  "frame": 9,
+  "seed": 1979,
+  "pin_owned_TIDs": true,
+  "forecast_bytes": 20971520,
+  "minimum_remaining_heavy_seconds": 180,
+  "dependency_stop": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/127-tactical-oracle/runtime-source-stopped-before-report.json",
+  "prefix_document": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/127-tactical-oracle/labels-and-inputs.json",
+  "prefix_SHA256": "0c63b9eb1450d824c45786c3c73aec62f0908f87d4d14f14eacaefed7b8adc26",
+  "input_order": [
+    "own-near-goal",
+    "opponent-threat",
+    "both-near",
+    "wall-protected-threat"
+  ],
+  "requirements": [
+    {
+      "case": "own-near-goal",
+      "condition": "A",
+      "engine": "candidate"
+    },
+    {
+      "case": "own-near-goal",
+      "condition": "B",
+      "engine": "reference"
+    },
+    {
+      "case": "opponent-threat",
+      "condition": "B",
+      "engine": "reference"
+    },
+    {
+      "case": "opponent-threat",
+      "condition": "A",
+      "engine": "candidate"
+    },
+    {
+      "case": "both-near",
+      "condition": "A",
+      "engine": "candidate"
+    },
+    {
+      "case": "both-near",
+      "condition": "B",
+      "engine": "reference"
+    },
+    {
+      "case": "wall-protected-threat",
+      "condition": "B",
+      "engine": "reference"
+    },
+    {
+      "case": "wall-protected-threat",
+      "condition": "A",
+      "engine": "candidate"
+    },
+    {
+      "case": "own-near-goal",
+      "condition": "S",
+      "engine": "candidate"
+    },
+    {
+      "case": "opponent-threat",
+      "condition": "S",
+      "engine": "candidate"
+    },
+    {
+      "case": "both-near",
+      "condition": "S",
+      "engine": "candidate"
+    },
+    {
+      "case": "wall-protected-threat",
+      "condition": "S",
+      "engine": "candidate"
+    }
+  ],
+  "adopt_ms": 411,
+  "sample_interval_ms": 5,
+  "requirement_timeout_ms": 20000,
+  "CPU": [
+    2
+  ],
+  "NN_threads_each": 1,
+  "RAM": 6442450944,
+  "RSS_guard": 5905580032,
+  "model_sessions": 2,
+  "diagnostic": true,
+  "actual_go": false,
+  "games": [],
+  "schedule": [],
+  "dynamic_plies": 0,
+  "startup_NN": 6,
+  "normal_policy_fixed": true,
+  "stress_root_backup_limit": 1
+}
