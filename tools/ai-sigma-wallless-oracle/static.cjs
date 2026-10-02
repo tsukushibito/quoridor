@@ -1,0 +1,1 @@
+'use strict';const fs=require('fs'),vm=require('vm');const ctx=vm.createContext({performance});vm.runInContext(fs.readFileSync(__dirname+'/checker.js','utf8'),ctx);console.log(JSON.stringify(vm.runInContext('abstractMocks()',ctx)));new vm.Script(fs.readFileSync(__dirname+'/entry.cjs','utf8'));
