@@ -1,0 +1,14 @@
+[
+  {
+    "stage": "input extraction draft",
+    "error": "turn_indices are request IDs, not list indices",
+    "before_NN": true,
+    "fixed": "request-id map, all source Action equality verified"
+  },
+  {
+    "stage": "private trace build-r1",
+    "error": "same package reused baseline artifact in shared private target; trace hash identical to immutable",
+    "before_NN": true,
+    "fixed": "distinct private CARGO_TARGET_DIR per variant, old build-results retained"
+  }
+]
