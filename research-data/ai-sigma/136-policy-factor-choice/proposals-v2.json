@@ -1,0 +1,64 @@
+{
+  "issue": "quoridor-4lc.136",
+  "revision": 2,
+  "priority": "P2 direct cost/quantity attribution before coefficient adoption; P1 remains falsifiable policy factor if writer budget allocated.",
+  "current_policy": "keep C1.5/finish prior and fixedSigma",
+  "actual_go": false,
+  "adoption": false,
+  "max_proposals": 2,
+  "proposals": [
+    {
+      "id": "P1",
+      "question": "未訪問Q0の楽観性を、実parent meanに基づくFPUだけ変えると手と配分が変わるか。集中＝改善を前提にしない。",
+      "evidence": "132 input3/4 A訪問20/29、B3/5。A訪問済みQは全20/29負、未訪問は0。finish-firstはinput3を161→133へ変え、134局所出口では133枝が悪い。Cのみの仮想次selectは両根で不変。",
+      "competitors": [
+        "Q0が未訪問に過剰配分",
+        "現在の探索多様性/finish priorが実際に良い手を保つ",
+        "FPU以外のC/order/精度/深部枝差",
+        "固定Sigma後続政策による局所bias"
+      ],
+      "only_factor": "candidate未訪問Q:0→node実valueSum/node.visits−.2sqrt(visitedPriorSum)。C1.5、sqrt(N+1)、f32、合法順、seed1979、finish、caps、backend/modelを固定。Sigma本参照を変更しない。",
+      "implementation": "両variantに同じ直接node valueSum蓄積を追加、初期根NN/terminal/各交互backupを実記録。baselineは蓄積をselectに使わない。人工backupとbaselineの小parityで侵入影響を確認。A parentQは現保存に無いためedge平均/参照parentQから代入0。",
+      "inputs": "132事前入力3/4全2位置、両variant K32(根展開込み)各1=4検索。補充/有利再試行0、既保存Bは読み取り参照。",
+      "denominators": "各入力×variantでbackups/rootN/edgeN/NN開始完了採用/terminal-noNN/parent mean/visited prior/未訪問選択/最終Action。訪問分布や同KをCPU/wall品質にしない。",
+      "prediction": "実FPUが負なら未訪問0より楽観性が下がり訪問集中が増え得る。Action変化まで到達するかは未確認。",
+      "falsification": "FPU<0でも選択/訪問が変わらないならこの2入力のQ0説明力は小さい。parent mean欠測/蓄積bugは未成立、効果ゼロにしない。",
+      "decisions": {
+        "Action_unchanged": "分布だけの差で採用しない、追加局所WDL反復停止。",
+        "input3_to133": "旧134固定後続では不利な方向。全体採用を止め、現finish/政策を維持。",
+        "other_Action_change": "新手の有限手品質を別評価/別配分、参照近似だけで採用0。",
+        "baseline_changed": "instrumentation修正、FPU結果の評価停止。"
+      },
+      "writer": "experiment 新一因子kernel/adapter単独owner、hypothesisは既data/計画のみ。criticはvalue蓄積と必要parityの独立検証。",
+      "cost_estimate": "writer35分、cached build CPU0単1/RAM2GiB≤120秒（現契約では未許可、次配分必要）、runtime CPU2/thread1/RAM6GiB≤60秒、最大128handNN+startup6、保存検証10分。",
+      "confounding": "f32新sum蓄積の実装費/タイミング、2入力事後診断、旧134は固定Sigmacontinuationで新AI全体品質でない。"
+    },
+    {
+      "id": "P2",
+      "question": "完成量で手が変わる対応例について、同500msで完成量を変える費用境界は何か。policyを固定し計測対象だけ変える。",
+      "evidence": "134 input3 A rep1/rep2第3新手は同key/history/prefix/model/根NN。CP backup9→16でAction154→162、同score1でも全軌跡は不同。 共通completed1..9のSAB Actionは9/9一致、K9両154。rep2だけK16で162。保存ではCPU/深部NN/途中量の原因未観測。",
+      "competitors": [
+        "completed量が手を変える",
+        "deep NN/隠れたstate/order/session差",
+        "OS/残処理/初回費用が同500msの完成量を変える",
+        "両方同品質で局所scoreが差を検出しない"
+      ],
+      "only_factor": "探索政策/予算は変更0、測定対象を最終WDLから時刻別完成CP・実threadCPU/準備/残処理費へ変える。固定Sigma C1/FPU.2/first/temp0/order/T500、通常100000loop cap維持。",
+      "inputs": "134 input3A第3新手の同1状態のみ、warm1/sample3=最大4要求を結果前固定、全保持。startup6/session、同CPU2/thread1、各request前の同history/cache resetと旧処理回収費を原因側へ記録。追加対局0。",
+      "denominators": "各要求のAPI開始/返却/採用CP/棄却/terminal-noNN、時刻ごとのcompletedとAction、root特徴/NN、CPU thread差分・wall spans・停止残CPU・次要求競合。APIawaitを内kernel時間とせず、測定不能CPUは欠測。sameKやAPI件数を同CPUとしない。",
+      "prediction": "同Kの手推移が一致したまま完成量が変わり、その差と準備/待ち/残CPU等が対応すれば費用境界を次の実装対象にできる。量だけで品質改善とはしない。",
+      "falsification": "完成量の揺れを再現しない/CPU計測欠測/深部数値差なら費用原因は絞れない。今回9/9一致を全K・同CPUの証明にしない。",
+      "decisions": {
+        "same_K_Action_and_numeric_agree_cost_boundary_differs": "その境界だけ最小修復/別因子backend対照を配分、C/FPU変更を先取りしない。",
+        "same_K_differs": "初の対応分岐だけstate/order/NN調査へ変更。",
+        "quantity_stable_or_cost_unclear": "測定不足を返し、この状態の反復を終了。",
+        "only_distribution_or_same_local_score": "品質向上とせず局所WDL追加反復停止。"
+      },
+      "writer": "experiment 薄い自己診断計測adapter単独owner。critic保存量/時計/CPU帰属の必要範囲のみ。Sigma正式参照/製品不変。",
+      "cost_estimate": "writer15分+CPU2/thread1/RAM6GiB runtime≤60秒、最大4要求+startup6NN/session、手NN数は実観測（0補完0/恣意的固定Kへの変更0）、保存検証10分、build/download0。今回実行許可0。",
+      "confounding": "参照1状態の事後診断で119候補弱さや全500ms性能を説明しない。計測自体のCPU/log費、OS/background/途中drift、深部NN未記録。費用修復がActionや品質へ影響しなければ採用根拠なし。"
+    }
+  ],
+  "oracle_alternative": "131/133 bounded multi-ply oracle can replace future hand-quality metric if nontrivial completed labels obtained. Unresolved/node budget failure => no expansion by default. Not a universal gate.",
+  "revision_reason": "selected same-root SAB publications at common completed backups1..9 agree9/9; 135 saved review concurs. Avoid repeating already supported common-K action diagnostic."
+}

@@ -1,0 +1,63 @@
+{
+  "issue": "quoridor-4lc.136",
+  "revision": 1,
+  "priority": "P2 cheaper first if implementation budget tight; P1 tests stronger direct policy hypothesis",
+  "current_policy": "keep C1.5/finish prior and fixedSigma",
+  "actual_go": false,
+  "adoption": false,
+  "max_proposals": 2,
+  "proposals": [
+    {
+      "id": "P1",
+      "question": "未訪問Q0の楽観性を、実parent meanに基づくFPUだけ変えると手と配分が変わるか。集中＝改善を前提にしない。",
+      "evidence": "132 input3/4 A訪問20/29、B3/5。A訪問済みQは全20/29負、未訪問は0。finish-firstはinput3を161→133へ変え、134局所出口では133枝が悪い。Cのみの仮想次selectは両根で不変。",
+      "competitors": [
+        "Q0が未訪問に過剰配分",
+        "現在の探索多様性/finish priorが実際に良い手を保つ",
+        "FPU以外のC/order/精度/深部枝差",
+        "固定Sigma後続政策による局所bias"
+      ],
+      "only_factor": "candidate未訪問Q:0→node実valueSum/node.visits−.2sqrt(visitedPriorSum)。C1.5、sqrt(N+1)、f32、合法順、seed1979、finish、caps、backend/modelを固定。Sigma本参照を変更しない。",
+      "implementation": "両variantに同じ直接node valueSum蓄積を追加、初期根NN/terminal/各交互backupを実記録。baselineは蓄積をselectに使わない。人工backupとbaselineの小parityで侵入影響を確認。A parentQは現保存に無いためedge平均/参照parentQから代入0。",
+      "inputs": "132事前入力3/4全2位置、両variant K32(根展開込み)各1=4検索。補充/有利再試行0、既保存Bは読み取り参照。",
+      "denominators": "各入力×variantでbackups/rootN/edgeN/NN開始完了採用/terminal-noNN/parent mean/visited prior/未訪問選択/最終Action。訪問分布や同KをCPU/wall品質にしない。",
+      "prediction": "実FPUが負なら未訪問0より楽観性が下がり訪問集中が増え得る。Action変化まで到達するかは未確認。",
+      "falsification": "FPU<0でも選択/訪問が変わらないならこの2入力のQ0説明力は小さい。parent mean欠測/蓄積bugは未成立、効果ゼロにしない。",
+      "decisions": {
+        "Action_unchanged": "分布だけの差で採用しない、追加局所WDL反復停止。",
+        "input3_to133": "旧134固定後続では不利な方向。全体採用を止め、現finish/政策を維持。",
+        "other_Action_change": "新手の有限手品質を別評価/別配分、参照近似だけで採用0。",
+        "baseline_changed": "instrumentation修正、FPU結果の評価停止。"
+      },
+      "writer": "experiment 新一因子kernel/adapter単独owner、hypothesisは既data/計画のみ。criticはvalue蓄積と必要parityの独立検証。",
+      "cost_estimate": "writer35分、cached build CPU0単1/RAM2GiB≤120秒（現契約では未許可、次配分必要）、runtime CPU2/thread1/RAM6GiB≤60秒、最大128handNN+startup6、保存検証10分。",
+      "confounding": "f32新sum蓄積の実装費/タイミング、2入力事後診断、旧134は固定Sigmacontinuationで新AI全体品質でない。"
+    },
+    {
+      "id": "P2",
+      "question": "同じpolicy/inputなのに134反復の手が違う原因はcompleted予算か、別の未観測要因か。係数を変えず仕事量を判別する。",
+      "evidence": "134 input3 A rep1/rep2第3新手は同key/history/prefix/model/根NN。CP backup9→16でAction154→162、同score1でも全軌跡は不同。",
+      "competitors": [
+        "completed量が手を変える",
+        "deep NN/隠れたstate/order/session差",
+        "OS/残処理/初回費用が同500msの完成量を変える",
+        "両方同品質で局所scoreが差を検出しない"
+      ],
+      "only_factor": "固定Sigma policy/model/seed1979/同入力のままcompleted backup上限K9→K16。係数/finish/order/時計規約は変更0。root展開含むのでloop8対15。",
+      "inputs": "134 input3 A第3新手の既対応1状態のみ、各K2反復全保持=4検索。同session/warm規則、順序9/16/16/9を結果前固定。追加入力・WDL反復0。",
+      "denominators": "root/edge backup、非終端NN/terminalnoNN、対応keyのdeep NN、parent mean、Action、wrapper/API await/CPU観測の費用は別。K16を16step純NN等量としない。",
+      "prediction": "量がこの分岐の原因ならK9で154/K16で162が再現し、対応数値/規約は一致する。",
+      "falsification": "固定Kでも反復方向が変わる/対応数値が違うなら完成量だけでは不足。元repの数値trace欠測を補って昔の因果を確定しない。",
+      "decisions": {
+        "predicted_Action_reproduced": "この状態で量の因果を有限支持、次に同policyで前処理/残CPU/完成量の帰属を直接計測。C/FPU一括変更0。",
+        "K_changes_distribution_only": "手品質出口への情報が増えないのでこの枝停止。",
+        "fixedK_varies_or_deep_NN_diff": "最初の対応分岐だけstate/order/NN診断へ変更、量単独仮説を保留。",
+        "Action_different_but_scores_same": "同局所score反復を止め、別尺度へ。"
+      },
+      "writer": "experiment 既referenceの固定K診断adapter単独owner、Sigma本参照/製品不変。critic保存された対応数値/量/Action必要範囲だけ。",
+      "cost_estimate": "writer15分+CPU2/thread1/RAM6GiB runtime≤60秒、最大50handNN+startup6、保存検証10分、build/download0を出発条件。",
+      "confounding": "参照政策1状態の事後診断で候補の119弱さ/全500ms性能を説明しない。sameKでも選択路径・各NN費用・CPUは違い得る。"
+    }
+  ],
+  "oracle_alternative": "131/133 bounded multi-ply oracle can replace future hand-quality metric if nontrivial completed labels obtained. Unresolved/node budget failure => no expansion by default. Not a universal gate."
+}
