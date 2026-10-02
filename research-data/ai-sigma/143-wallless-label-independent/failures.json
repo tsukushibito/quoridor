@@ -1,0 +1,14 @@
+{
+  "attempts": [
+    {
+      "run": "p143-label-r1",
+      "type": "wrapper admission not connected before Node spawn; entry failed ENOENT and blocked Chrome",
+      "Node_spawn": 1,
+      "Chrome_spawn": 0,
+      "solver_started": 0,
+      "scientific_negative": false,
+      "source_Git": "e70a71b",
+      "repair": "runner now calls own admit and launch_if_allowed before child Popen"
+    }
+  ]
+}

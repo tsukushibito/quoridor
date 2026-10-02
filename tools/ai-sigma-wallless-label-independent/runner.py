@@ -109,7 +109,13 @@ signal.signal(signal.SIGTERM,signal_stop);signal.signal(signal.SIGINT,signal_sto
 sourcefiles=sorted(p for d in [TOOL] for p in d.iterdir() if p.is_file() and p.suffix in ['.py','.cjs','.js'])
 (OUT/(name+'.inputs.json')).write_text(json.dumps({'git_commit':os.environ.get('SIGMA77_GIT_COMMIT'),'source':{str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in sourcefiles}},indent=2)+'\n')
 with (OUT/(name+'.log')).open('wb') as log:
- boundary.reserve_root();child=subprocess.Popen(cmd,cwd=TOOL,env=env,stdout=log,stderr=subprocess.STDOUT,start_new_session=True)
+ import importlib.util
+ spec=importlib.util.spec_from_file_location('self143admission',TOOL/'admission.py');admission_module=importlib.util.module_from_spec(spec);spec.loader.exec_module(admission_module)
+ try:admission=admission_module.admit(CONFIG,OUT.parent,TOOL,OUT)
+ except Exception as e:
+  (OUT/(name+'.admission-failure.json')).write_text(json.dumps({'UTC':utc(),'error':repr(e),'spawn':0})+'\n');raise
+ (OUT/(name+'.admission.json')).write_text(json.dumps(admission,indent=2)+'\n')
+ boundary.reserve_root();child=admission_module.launch_if_allowed(admission,lambda:subprocess.Popen(cmd,cwd=TOOL,env=env,stdout=log,stderr=subprocess.STDOUT,start_new_session=True))
  childtick=table().get(child.pid,{}).get('start_ticks');boundary.bind_root(table()[child.pid]);from owned_ledger import Ledger
  ledger=Ledger(ledger_path,ack_path,table()[child.pid],boot,event);deadline=min(END,time.time()+MAX_WALL,time.time()+TOTAL_WALL-prior_wall)
  (OUT/(name+'.started.json')).write_text(json.dumps({'subreaper_set_rc':set_subreaper_rc,'subreaper_get_rc':get_subreaper_rc,'subreaper_value':get_subreaper_value.value,'kernel_boundary':boundary.proof(),'runner_pid':os.getpid(),'runner_starttick':table()[os.getpid()]['start_ticks'],'child_pid':child.pid,'child_starttick':childtick,'PGID':child.pid,'startUTC':start,'git_commit':os.environ.get('SIGMA77_GIT_COMMIT'),'run_id':os.environ.get('SIGMA77_RUN_ID'),'command':cmd,'cwd':str(TOOL),'deadline':deadline,'affinity':[CPU],'guardRSS':RSS_GUARD,'contractRAM':CONTRACT_RAM,'guard_basis':'current_proc_rss_runner_plus_owned_children','runner_initial_ru_maxrss':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss*1024,'guardStorage':STORAGE_GUARD,'temp':alias,'temp_realpath':str(Path(alias).resolve())},indent=2)+'\n')
