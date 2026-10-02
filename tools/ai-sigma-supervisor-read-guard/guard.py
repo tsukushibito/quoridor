@@ -305,9 +305,10 @@ def require_unpaused(issues):
 
 def select_current(issues, ready=(), limit=8):
     rows = [x for x in issues if x.get('id', '').startswith(GOAL+'.') and x.get('status') in ('open', 'in_progress', 'blocked') and x.get('id') != SELF]
-    # First use recency, then stable priority for current assigned workers/blocked work.
+    # Keep the live operation and ready work visible; stale in_progress labels
+    # must not displace newer contracts merely because they have an assignee.
     rows.sort(key=lambda x: str(x.get('updated_at') or ''), reverse=True)
-    rows.sort(key=lambda x: (0 if x.get('status') == 'in_progress' and x.get('assignee') else 1 if x.get('status') == 'blocked' else 2 if x.get('id') in ready else 3))
+    rows.sort(key=lambda x: 0 if x.get('id') == GOAL+'.92' else 1 if x.get('id') in ready else 2)
     return list(dict.fromkeys(x['id'] for x in rows))[:limit]
 
 def observe(directory, run, turn, refresh=False):

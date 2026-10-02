@@ -1,0 +1,74 @@
+{
+  "at": "2026-10-02T12:00:26.577060+00:00",
+  "passed": 7,
+  "checks": [
+    "saved_119_ready_now_in_unchanged_eight_details",
+    "future_ready_recent_assigned_blocked_dynamic_and_deduplicated",
+    "older_needed_dependency_remains_eligible_and_reference_preserved",
+    "self_closed_external_excluded",
+    "pause_unknown_self_owner_hard_refusal",
+    "namespace_deadline_owner_inspect_body_and_dependency_logic_unchanged",
+    "saved_raw_sha_unchanged"
+  ],
+  "before_selected": [
+    "quoridor-4lc.92",
+    "quoridor-4lc.38",
+    "quoridor-4lc.75",
+    "quoridor-4lc.74",
+    "quoridor-4lc.73",
+    "quoridor-4lc.72",
+    "quoridor-4lc.71",
+    "quoridor-4lc.70"
+  ],
+  "after_selected": [
+    "quoridor-4lc.92",
+    "quoridor-4lc.119",
+    "quoridor-4lc.38",
+    "quoridor-4lc.75",
+    "quoridor-4lc.74",
+    "quoridor-4lc.73",
+    "quoridor-4lc.72",
+    "quoridor-4lc.71"
+  ],
+  "future_fixture_selected": [
+    "quoridor-4lc.92",
+    "quoridor-4lc.121",
+    "quoridor-4lc.122",
+    "quoridor-4lc.120",
+    "quoridor-4lc.119",
+    "quoridor-4lc.38",
+    "quoridor-4lc.75",
+    "quoridor-4lc.74"
+  ],
+  "raw_sha256": "5558ae6db210a6e1c4c89e57d62b241a0f5e9cb1f0895b3564234dea3ab22531",
+  "raw_bytes": 191182,
+  "detail_limit": 8,
+  "discovery_limits_unchanged": true,
+  "future_natural_snapshot_effect_unobserved": true,
+  "reproduction": "saved current stdout referenced by raw-reference.json + select_current; fixture parameters recorded here",
+  "fixture_future_rows": [
+    {
+      "id": "quoridor-4lc.120",
+      "status": "in_progress",
+      "assignee": "codex:worker",
+      "updated_at": "2026-10-02T12:01:00Z",
+      "dependencies": [
+        {
+          "id": "quoridor-4lc.60",
+          "type": "blocks"
+        }
+      ]
+    },
+    {
+      "id": "quoridor-4lc.121",
+      "status": "open",
+      "assignee": null,
+      "updated_at": "2026-10-02T12:02:00Z"
+    },
+    {
+      "id": "quoridor-4lc.122",
+      "status": "blocked",
+      "updated_at": "2026-10-02T12:03:00Z"
+    }
+  ]
+}
