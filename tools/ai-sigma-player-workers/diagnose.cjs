@@ -42,7 +42,7 @@ async function main() {
       // One evaluate drives all requests in browser; Node never supplies per-hand clocks or judges.
       const result=await browser.page.evaluate(({config,references,fixtures})=>config.kind==='browser-pair'?runBrowserGames(config,fixtures,references):runFunctional(config,references),{config,references,fixtures});
       gameResult=result;
-      rows=result.rows??[];save('browser-result',result);save('rows',rows);
+      rows=result.rows??[];save('browser-result',result);save('rows-index',rows.map(row=>({request_id:row.identity.request_id,engine:row.spec.engine,classification:row.response.classification,public_elapsed_ms:row.response.public_elapsed_ms,hand_NN:row.hand_NN,stop_class:row.worker_stop_class}))); // Full rows preserved once in browser-result, no duplicate diagnostics.
 
       save('clock-end',await browser.page.evaluate(()=>calibratePlayerClocks()));
 
