@@ -11,3 +11,5 @@ App Serverの公式thread/readでhypothesisとsupervisorのsystemErrorを確認�
 最後の受入れ済み研究は144の通常K32/root1/固定Sigma×2全6certifiedwinで、非即goalの有限ラベルでもAI条件を区別しない尺度として同形式反復を終了した。140 trueMean FPUは既局所不利の出口で品質0・枝終了、現Q0/C1.5/固定Sigmaを維持した。小改修/一般棋力/実効公平CPU/正式NI/Sigma同等は未達。未配分のGPU学習、host/container改変、製品統合push公開は行わない。
 
 92の実終了保存を通常報告から受け入れるまでin_progressで保持し、目標も未達として継続する。145比較案と利用上限状態を次許可判断へ引き渡す。全host外部NN・全期間遵守をここで証明しない。必要証拠 research-data/ai-sigma/frame9-coordinator-ending/{frame9-end-session-errors,frame9-end-handoff-check}.json と研究145原正本、既142/143/144受入れ報告。
+
+23:16終了証拠を後着確認した。scheduler state stopped/processnull/ownednull/recoveryfalse・pending無し、同identity2つ現在不在。process_stoppedイベント23:15:59.746791は名目締切から.746791秒後の記録で、厳密exit timestampや締切ちょうど停止の証明にしない。monitor-ended23:16:11.263196/errornull/自己child残無しは23:18:59回収期限より前、監督failedや未配送を全期間成功へ変換しない。必要24input現在hashをreadonly照合し、結果はcoordinator92-final-stop-check.jsonへ保存した。運用source/短期子停止は既frame9準備保存とsourcehash維持、長期owned2process停止を今回独立確認した。92現枠9の終了scopeを有限受入れし、coordinatorへ移譲closeする。旧枠8最終未受入れ等は旧scopeとして保持し、外部NN/全host/全期間成功を認定しない。証拠保存・backup後、今枠の追加job/自動次枠を開始しない。
