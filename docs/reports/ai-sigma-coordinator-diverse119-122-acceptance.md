@@ -1,0 +1,17 @@
+# 119・122多様prefix比較の有限受入れ
+
+119の固定8prefix・16対局について、122のブラウザ内独立replayでgoal16・候補W4D0L12・764合法公開、late/初回完成手なし/AI責任loss/未完了0を確認した。119 data/report a5f3183e、handoff d4ee35ea／SHA1cacd67d…be6ae、測定版8124d876/532c873と最終account/source42cbd46を分けて受け入れる。旧117のW6L6と統合しない。16局や764手を独立母集団の標本数とはしない。
+
+startup48と手NN7764、相手t0<旧ACK429・旧返却discard298・自旧ACK後次t0違反0を独立保存算術で確認した。Worker停止候補380upper<=500、参照382upper<=500/2lower>500、ACKwall超過2は公開合法/思考CPUと別。APIの確実・可能402後/公開後0は保存開始終了clock区間条件下の観測で、途中drift/内核時刻/CPU等値/hard realtime保証ではない。
+
+最大8rootの5184feature bits/1096NN/888prior・strict/engine固有順/P1P2/訪問規約を有限支持する。全8は動的自己整合で固定NN参照0、一般NN一致/深部安全性/rootparentQ補完を主張しない。RuleA共有の独立性限界を保持する。
+
+122 data/checker Gitd02db7e11db2c7c10f3376a5bbd85f944530d0baのhandoff/results/stop/manifest current/blob一致・必要7source hashafter・archive現物/Git SHA b98adc2b07fa650e79d32a2a55d756e40c2417e4bea5918d7c65279c09d12822一致を統括照合した。88memberのstream復元はowner検証、統括SHA照合と区別する。stopSHA c31a65a531a9a8d256a951e8a58816937e80dcd69de6ec53c7345211990aeb9a、自己131+closure2現在不在/ownedwait/monitorcallback停止。原1517と122独自8pair+inner1663は別分母で、forced回収や現在不在を自然終了/全期間保証にしない。
+
+原測定argv0 admissionと停止後proc/exe failclosed修正は別版。旧admissionを最終guardの成功へ書換えない。自己setup/summarymax/emptylist helperのNN0訂正と失敗ログを保持し、棋力やNN負例へ変換しない。独立Chrome NN0費用24.213366秒/RSSpeak1401651200B/保存5722112B、モデル/Worker/新NN/対局0。全期間/瞬間/終了子CPUは保証しない。
+
+評価設計見解を採用する。この集合は4prefixで候補両色敗北を検出し、4prefixは同側winner。粗い差を検出できた一方、小改修への感度は未校正で、同側winnerだけで無価値とも先後pairだけで感度成立とも呼ばない。121の独立見解とも整合するが、合意を性能認定には使わない。
+
+122のmatched改修WDL案は方法を後続候補として保持し、指定prefix1/7/8・新seed2098・C1.5/C1.0対Sigmaの12局実行は保留する。現123は同completed量で規則と費用を分ける安い判別へ既配分済みで、ここでC1再対局を加えると別の係数問いと交絡が増える。123で選ぶ因子に対して、結果前固定したmatched条件と全attemptで改修のWDL感度を調べる案を再検討する。元結果を使う診断入力選定を正式holdoutに格上げせず、全診断の均衡校正gateを増やさない。
+
+119・122は実行/書込停止と必要保存・有限受入れ後に統括へ所有移譲close。研究goalはNI/Sigma同等未達のまま。123への実NN許可は既契約、122のheavy最後12:38:37.785175と停止証拠を12:52:10.701025同正確activeへ追送し、起動直前headroomを通常確認する。123の15検索と次の規則/費用分岐の報告→coordinatorを待つ。親14:15:49と92の全停止時刻・資源は維持する。
