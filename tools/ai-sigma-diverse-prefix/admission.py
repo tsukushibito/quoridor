@@ -21,7 +21,9 @@ def scan_processes(exclude=None,proc=Path('/proc'),timeout=3):
    fields=(p/'stat').read_text().rsplit(')',1)[1].split()
    args=[x.decode(errors='strict') for x in (p/'cmdline').read_bytes().split(b'\0') if x]
    state=fields[0];pid=int(p.name);tick=int(fields[19]);ppid=int(fields[1])
-   if not args:continue # exited zombies / kernel threads carry no userspace work command
+   if not args:
+    if state=='Z':continue
+    raise RuntimeError('LIVE_COMMAND_UNKNOWN '+p.name)
    rec={'pid':pid,'ppid':ppid,'start_ticks':tick,'state':state,'exe':args[0],'argv':args[1:]}
    if classify_process(rec):records.append(rec)
   except (FileNotFoundError,ProcessLookupError):
