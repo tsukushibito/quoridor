@@ -1,0 +1,31 @@
+{
+  "UTC": "2026-10-02T18:20:16.436575+00:00",
+  "monotonic": 218134.098944392,
+  "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+  "parent": {
+    "PID": 2734740,
+    "ppid": 2734739,
+    "PGID": 2734739,
+    "starttick": 21813408,
+    "rss": 16388096
+  },
+  "child": {
+    "PID": 2734741,
+    "ppid": 2734740,
+    "PGID": 2734741,
+    "starttick": 21813409,
+    "rss": 0
+  },
+  "command": [
+    "python3",
+    "tools/ai-sigma-next-information-choice/check.py"
+  ],
+  "command_sha256": "9fb317ba33539f15fcd141439d5b003f181b94aa21e209b16e5c1cc3c2207d2a",
+  "source_hashes": {
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-next-information-choice/supervise.py": "f33cff3bbe79e85b08d9effb9aa2df826f343469259519e63f3cceba5b2902d7",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-next-information-choice/check.py": "e9d5776347b22a225fe04a6f20ed453c958b59235cc1c17d3aab988c3b39a29b"
+  },
+  "deadline_epoch": 1790965276.4361506,
+  "memory": "Nodeheap192 + sampled parent/child RSS448MiB; no AS limit",
+  "TMP": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261002/NEXT-INFORMATION-CHOICE/temp"
+}

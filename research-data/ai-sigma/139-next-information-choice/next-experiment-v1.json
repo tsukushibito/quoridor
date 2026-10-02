@@ -1,0 +1,109 @@
+{
+  "issue": "quoridor-4lc.139",
+  "revision": 1,
+  "UTC": "2026-10-02T18:19:04.530009+00:00",
+  "selection": "candidate true-parent-mean FPU, with bounded local quality exit; monitoring contrast deferred",
+  "max_next_experiments": 1,
+  "actual_go": false,
+  "policy_adopted": false,
+  "problem": "Q0 is optimistic relative to visited negative parent Q in132 selected roots; whether this single rule changes a useful candidate decision remains untested. Cost variability of one reference state alone does not choose candidate policy.",
+  "evidence": {
+    "summary_check": "13740 accepted CP entries;49pairwise shared-K Action checks all equal; sample3 Action162->154->162 atK2/8/14",
+    "limits": "saved owner summary arithmetic, not independent root-edge bit or CPU audit; 138 pending",
+    "candidate_roots": "136input3/4 visited20/29 all parent edge means negative; unvisitedQ0; actual node mean missing",
+    "quality": "134fixedSigma continuation input3 baseline161score[1,1]/133[0,0]; input4 baseline32 and42both[0,0]; reference proximity not improvement"
+  },
+  "competing_choices": [
+    {
+      "choice": "monitor load control",
+      "status": "defer, no next run requested",
+      "reason": "could choose lighter sampling for one reference state but has no observed candidate quantity-to-quality effect; warm/order/current CPU and Worker binding unresolved. Reconsider only if candidate matched quality shows budget limitation, or resource safety itself requires repair."
+    },
+    {
+      "choice": "deeper finite oracle",
+      "status": "defer, no next run requested",
+      "reason": "old shallowroot1pass lacks sensitivity; no currently certified nontrivial midgame label. Extra depth may hit budget without labels. Not mandatorygate nor evidence against model."
+    }
+  ],
+  "only_factor": "candidate unvisited Q0 -> f32(node.valueSum/node.visits - .2*sqrt(sum original prior of visited edges)); no root special casing. C1.5/sqrt(N+1)/visitededgeQ/f32/seed1979/order/finishvisits-prior-tie/caps/value/backend/model fixed. fixedSigma unchanged.",
+  "true_mean_implementation": "actual own-side valueSum accumulated once per completed node backup including initial root NN/terminal and each alternating ancestor; async actual backup path included. Both scientificvariants record identical mean fields; baseline does not use them. No edge-average or reference-mean substitution. Both variants also record visited original-prior sum and the proposed FPU term; only score uses0 versus term. Computation/instrumentation costs measured, not assumed free; caps pseudo-leaf not counted as actual node.",
+  "inputs": "132registered input3 and4 exactly, diagnosis chosen before future FPU outcomes, P2. No newpool, replacement, balanced/IID/holdout claim.",
+  "stageA": {
+    "variant_order": [
+      "input3 original",
+      "input3 instrumentedQ0",
+      "input3 FPU",
+      "input4 FPU",
+      "input4 instrumentedQ0",
+      "input4 original"
+    ],
+    "searches_max": 6,
+    "K": 32,
+    "K_definition": "completed backups rootincluded; edge sum K-1, NN/terminal separate",
+    "hand_NN_max": 192,
+    "session_startup_NN": 6,
+    "budget_seconds": 120,
+    "acceptance": "old vs instrumented baseline features/NN/prior/selected Action/rootedge visits and values exact; matched policy/model seed and necessary value-sign fixture checks. Original platform baseline against saved132 binds features/NN and numerical tolerance before run, differences are unresolved no treatment claim.",
+    "capture": "actual parent mean at each selected node/unvisited selection; visited prior mass; visited/unvisited choices; root full selected CP; terminal-noNN; API starts/returns/accepted/discard; wall and resource separately",
+    "stop": "parityfail/missing mean/cancel/guard -> unresolved stop, no qualityrollout. Actionunchanged -> stop irrespective distribution distance.",
+    "clock": "same-completed diagnostic, persearch10s watchdog/6searches+startup within120s; not T500 comparison. K32 incompletion is unresolved, do not extend or replace. StageB fixedSigma continuation remains T500."
+  },
+  "stageB_quality_exit": {
+    "trigger": "only an input where FPU changes Action to a legal Action not already scored as its134registered baseline or B branch; all such predeclared inputs are included, no favorable filtering",
+    "known_bad_exit": "input3->133 is adverse on existing fixedSigma exit; do not adopt or repeat old branch merely to seek reversal. Known equal branches add no local information.",
+    "input_count_max": 2,
+    "continuation_policy": "both sides fixedSigma unchanged, force initial sameP2 move selected by original/instrumented baseline or FPU; no candidate subsequent AI claim",
+    "rollouts_max": 8,
+    "per_input_order": [
+      "baseline rep1",
+      "FPU rep1",
+      "FPU rep2",
+      "baseline rep2"
+    ],
+    "seed": 1979,
+    "max_ply_total": 200,
+    "T_ms": 500,
+    "responsibility": "stop/faultloss/infra labels frozen before run, invalid attempts retained; no rescue/replacement. Finishpartial not scorezero by default unless engine-responsibility rule applies.",
+    "quality_score": "forcedP2 win1/draw.5/loss0, perinput baseline/FPU rep scores separate; no CI or pooledWDL with old runs",
+    "jobs": "max8jobs, each≤180seconds; eachjobstartup6NN -> at most48 stageBstartup, stageA6 separate",
+    "worst_think_seconds": 800,
+    "runtime_wall_budget_seconds": 1440,
+    "failure": "unresolved/same result/opposite repeat directions -> no qualityclaim, stop at fixed cap; no extra rollout"
+  },
+  "predictions": "negative trueFPU may reduce unseen selections and change finish; if it preserves161 and finds a better localinput4 branch, it supplies a reason for a later candidatepolicy test, not adoption. Root mean could be positive or effects could be only visits.",
+  "falsification": "meanFPU actuallynegative yet same selected Actions atK32 -> low information on these2states, end coefficient branch. Parityfailure is checker/implementation unresolved, not FPUnegative. New selected branch failing paired quality exit undermines proposed benefit.",
+  "next_decisions": {
+    "baseline_parity_failed": "repair minimal instrumentation or stop; do not evaluate FPU outcomes",
+    "Action_unchanged": "maintain policy/end FPU branch, do not spend stageBbudget",
+    "input3_to133_or_local_worse": "maintain original policy/no FPU adoption",
+    "novel_Action_but_quality_equal_or_inconsistent": "stop local scale branch; revisit evaluation/policy dependence, no new sameformat repeats",
+    "paired_local_better_without_input3_harm": "finite local support only; coordinator may allocate broader fixedcandidate-policy diagnostic, no Sigma/NI/adoption",
+    "quality_unresolved": "report missing and stop, no automaticoracle/new pool/extra games"
+  },
+  "writer": "experiment sole owner of future researchkernel/copy/adapter and run config; critic necessary backup mean/parity/score validation. hypothesis current planning only.",
+  "cost_estimate": {
+    "implementation_minutes": 45,
+    "cached_build_CPU0_single_seconds": 120,
+    "stageA_runtime_CPU2_thread1_RAM6GiB_seconds": 120,
+    "stageB_optional_CPU2_RAM6GiB_seconds": 1440,
+    "independent_saved_minutes": 15,
+    "wall_worst_minutes": 88,
+    "future_storage_forecast_MiB": 64,
+    "storage_source": "futureexperiment existing entry reservation if coordinator confirms, no current hypothesis reservation increase",
+    "headroom": "nextcontract must bind to parent23:10:59 heavy/23:20:59end, jobs/cleanupbudget; elapsed oldmeans cannot reduce worst",
+    "authorized_now": false
+  },
+  "confounding": [
+    "sameK not sameNN/CPU/wall, terminal changesNNdenominator",
+    "Qsum instrumentation time and f32 rounding cost",
+    "2posthoc losingline inputs with fixedSigma continuation bias",
+    "local score not optimum/general strategy or fullcandidateWDL",
+    "same seed repeats not independent sample",
+    "historical knownbad labels finite; no universal effect",
+    "normal500ms candidate performance remains untested even afterK32factor"
+  ],
+  "holding_current_policy": true,
+  "new_NN_current": 0,
+  "new_root_reads_current": 0,
+  "quality_exit_limit": "Concurrent forced-baseline controls only if new unlabeled treatment Action; this is a new one-factor diagnostic, not repeating old identical134 branches to seek favorable scores. Prescribed conditional rule fixed before new outcomes, all stageA inputs/outcomes retained. Local policy-dependent gain can justify later policy comparison but never adoption by itself."
+}
