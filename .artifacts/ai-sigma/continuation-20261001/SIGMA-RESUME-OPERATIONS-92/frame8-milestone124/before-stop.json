@@ -1,0 +1,68 @@
+{
+  "at": "2026-10-02T13:14:00.517698+00:00",
+  "pointer": {
+    "issue": "quoridor-4lc.92",
+    "frame": 8,
+    "updated_by": "quoridor-4lc.120.1-role-value",
+    "record": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame8-role120/live-applied.json",
+    "run": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame8-role120-5a468918-2139-4bcd-bed4-c4c19592da68",
+    "scheduler": {
+      "pid": 2488999,
+      "start_ticks": "19614085",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "monitor": {
+      "pid": 2490166,
+      "start_ticks": "19619190",
+      "state": "R",
+      "rss_bytes": 20213760,
+      "cpu_ticks": 2,
+      "affinity": [
+        0
+      ],
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    }
+  },
+  "state": {
+    "binding": {
+      "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+      "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+      "target": "supervisor",
+      "dispatch_issue": "quoridor-4lc.40",
+      "contract_file": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+    },
+    "process": {
+      "pid": 2488999,
+      "start_ticks": "19614085",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "phase": "running",
+    "recovery_required": true,
+    "last_result": {
+      "at": "2026-10-02T13:13:58.846783+00:00",
+      "event": "error",
+      "error": "Another client is dispatching; retry later"
+    },
+    "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+    "config_sha256": "4009f48a185681b154b2fb8ec6455c245b94db99c9fe3a583b26d6f102d6be2f",
+    "contract_sha256": "a8f554579b70bdf1431b70b9a73e280c421efc3880a5f083a6fbfca9c345be42",
+    "next_at": 1790948027.250894,
+    "owned": {
+      "run_id": "b8b23051-781f-43ad-ae57-e23a33238fd9",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+      "turn_id": null,
+      "started_at": "2026-10-02T13:13:50.882087+00:00",
+      "max_turn_seconds": 180
+    }
+  },
+  "supervisor_status": {
+    "type": "notLoaded"
+  },
+  "source_scope": {
+    ".agents/research-team/roles/supervisor.md": "8fd5980933e35d237796a32bc4f217c7e0ce91a98c025c2c7ccf1024c6b8bf2c",
+    ".agents/research-team/roles/coordinator.md": "a7a2ba34dc151dad6ae06cf3c9129abd6601f1346ff97899cf644a914359ea9d",
+    "docs/design/ai-research-team.md": "94cfa2440ca62d3d6def0c1cf6d1080f6bd19db6968029294d6a34081caffb3a"
+  },
+  "current24hash_match": true
+}
