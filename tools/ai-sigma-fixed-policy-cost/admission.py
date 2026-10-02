@@ -27,7 +27,10 @@ def admit(config,out,tool,runs):
   if memory['MemAvailable']<6442450944:raise RuntimeError('RAM_HEADROOM')
   count=0
   for p in runs.glob('cost137-*.started.json'):
-   d=json.loads(p.read_text());c=json.loads(Path(d['command'][-1]).read_text())
+   d=json.loads(p.read_text());finished=next((q for q in previous if q['name']==p.name.replace('.started.json','')),None)
+   if finished and finished['phase']=='protocol':continue
+   if d['command'][-2]!='--config':raise RuntimeError('PREVIOUS_STARTED_CONFIG_UNKNOWN')
+   c=json.loads(Path(d['command'][-1]).read_text())
    if c['kind']=='protocol':continue
    result=runs/c['run_id']/'browser-result.json'
    if not result.is_file():raise RuntimeError('PREVIOUS_STARTED_REQUEST_COUNT_UNKNOWN')
