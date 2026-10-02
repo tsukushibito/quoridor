@@ -3,13 +3,15 @@ const sendDiagnostic = postMessage.bind(globalThis);
 let channel = null;
 let completeCache = null;
 let latestCP = null;
+let requestClock={mid_ms:0,error_ms:0};
 let publications = [];
 const deferredPrivate = new Map();
 
 globalThis.postMessage = function(message) {
   if (message.kind === 'snapshot') {
     const begin = performance.timeOrigin + performance.now();
-    if (completeCache.receive(message)) {
+    const cacheMessage={...message,sent_ms:message.sent_ms-requestClock.mid_ms,owned:{...message.owned,completed_at:message.owned.completed_at-requestClock.mid_ms}};
+    if (completeCache.receive(cacheMessage)) {
       const cp = completeCache.cache.owned.cp;
       channel.publish({completed:true, sequence:message.sequence, action:cp.action, value:message.value, visits:cp.simulations});
       latestCP = cp;
@@ -43,10 +45,11 @@ onmessage = async function(event) {
   if (data.kind === 'request') {
     const state = fromPrefix(data.identity.legal_prefix);
     channel = SharedBestAction.bind(data.shared, data.shared_context, {generation:data.identity.generation,key:state._positionKey(),legalActions:state.getLegalActions().map(action=>rustAction(state,action))});
+    requestClock=data.worker_clock??{mid_ms:0,error_ms:0};
     completeCache = new SnapshotCache(data.identity, {
       legal:state.getLegalActions().map(action=>rustAction(state,action)),
-      terminal:terminalResult(state), clock_error_ms:1,
-    }, ()=>performance.timeOrigin+performance.now());
+      terminal:terminalResult(state), clock_error_ms:requestClock.error_ms+.2,
+    }, ()=>performance.timeOrigin+performance.now()-requestClock.mid_ms);
     latestCP = null;
     publications = [];
   }

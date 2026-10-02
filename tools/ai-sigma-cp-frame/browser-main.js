@@ -11,6 +11,11 @@ let startedGames=0;
 let pendingTimers=new Set();
 let lastOwnedACK=null;
 let activeMainState=null;
+let workerClock={lo_ms:0,hi_ms:0,mid_ms:0,error_ms:0,measured:false};
+let externalAbort=null;
+const collectedGames=[];
+let currentReader=null;
+let currentGeneration=null;
 const epochMain = ()=>performance.timeOrigin+performance.now();
 function waitingMessage(key,timeoutMs=8000) {
   return new Promise((resolve,reject)=>{
@@ -95,6 +100,15 @@ async function browserPreflight() {
 }
 
 async function browserStartup(fixtures, references) {
+  const clockSamples=[];
+  for(let index=0;index<8;index++) {
+    const start=epochMain(),reply=await pingEarly(),end=epochMain();
+    clockSamples.push({start_ms:start,end_ms:end,worker_ms:reply.at_ms});
+  }
+  const lo=Math.max(...clockSamples.map(row=>row.worker_ms-row.end_ms-.1));
+  const hi=Math.min(...clockSamples.map(row=>row.worker_ms-row.start_ms+.1));
+  if(lo>hi)throw Error('BROWSER_WORKER_CLOCK_DISJOINT');
+  workerClock={lo_ms:lo,hi_ms:hi,mid_ms:(lo+hi)/2,error_ms:(hi-lo)/2+.1,measured:true,samples:clockSamples};
   const rows=[];startupRows=rows;
   for(const engine of ['candidate','reference'])for(const id of ['initial-p1','asym-hv-p2','straight-jump-p2']) {
     const fixture=fixtures.find(row=>row.id===id),reply=await startupRootEarly(engine,fixture);
@@ -102,7 +116,7 @@ async function browserStartup(fixtures, references) {
     BrowserNumeric.check({engine,state:referenceState(fixture),numeric:reply.row,cp:null,reference:references.find(row=>row.id===id)});
     rows.push({engine,id,NN:1,zero:true});
   }
-  return {ready:true,startup_NN:6,rows,tree_history_cache_reused:false};
+  return {ready:true,startup_NN:6,rows,worker_clock:workerClock,tree_history_cache_reused:false};
 }
 
 function immutable(value) {
@@ -129,7 +143,27 @@ function classifyResponse(response, fault) {
   return 'completed_legal';
 }
 
+function gameFailureResult(classification, currentPlayer, engine) {
+  if(['initial_no_completed_cp','engine_fault'].includes(classification)) return {status:'responsibility_loss',winner:3-currentPlayer,reason:classification,responsible_engine:engine};
+  return {status:'unfinished',winner:null,reason:classification};
+}
+
+function browserRulesMock() {
+  const cases=[];
+  for(const [classification,status] of [['initial_no_completed_cp','responsibility_loss'],['engine_fault','responsibility_loss'],['browser_deadline_processing_late','unfinished'],['browser_judge_failure','unfinished'],['external_automation_failure','unfinished']]) {
+    const result=gameFailureResult(classification,1,'candidate');
+    if(result.status!==status||(status==='unfinished'&&result.winner!==null))throw Error('GAME_FAILURE_CLASSIFICATION');
+    cases.push({classification,result});
+  }
+  if(classifyResponse({late:true},null)!=='browser_deadline_processing_late')throw Error('LATE_CLASSIFICATION');
+  if(classifyResponse({judge_error:'SAB_CORRUPT'},null)!=='browser_judge_failure')throw Error('JUDGE_CLASSIFICATION');
+  const drawn=new State({boardsize:9,depth:200});
+  if(terminalResult(drawn).winner!==0)throw Error('RuleA_DRAW');
+  return {cases,RuleA_200_NN0:true,scope:'synthetic classifier/terminal cases; no legal 200ply reachability claim'};
+}
+
 async function chooseBrowser(spec, inputState, prefix, reference, config) {
+  if(externalAbort)throw Error('EXTERNAL_ABORT_'+externalAbort.code);
   if(lastOwnedACK && (lastOwnedACK.handles || lastOwnedACK.activeNN || lastOwnedACK.live_searches)) throw Error('PREVIOUS_ACK_NOT_ZERO');
   if(Date.now()>=Date.parse(config.processing_deadline))throw Error('PROCESSING_DEADLINE');
   const t0=epochMain();
@@ -142,6 +176,7 @@ async function chooseBrowser(spec, inputState, prefix, reference, config) {
   const context=immutable({generation,key,legalActions:legal});
   const memory=SharedBestAction.create(context);
   const reader=SharedBestAction.bind(memory,context,context);
+  currentReader=reader;currentGeneration=generation;
   const identity=immutable({engine:spec.engine,request_id:requestId,generation,epoch:generation,fixture:null,legal_prefix:structuredClone(prefix),prefix:rustPrefix(prefix),key,
     history:Array.from(state.position_history).sort((a,b)=>a[0]<b[0]?-1:a[0]>b[0]?1:0),
     model:'d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d',schema:'8x9x9-f32/136logits/value1/rust209',
@@ -162,7 +197,7 @@ async function chooseBrowser(spec, inputState, prefix, reference, config) {
       clearInterval(sampleTimer);pendingTimers.delete(sampleTimer);
       try {
         const timerAt=epochMain();
-        if(spec.cancel)reader.stop('cancel');
+        if(spec.cancel||externalAbort)reader.stop('cancel');
         const checkpoint=reader.readLatest();
         let action=null;
         if(checkpoint) {
@@ -172,7 +207,8 @@ async function chooseBrowser(spec, inputState, prefix, reference, config) {
           // State transition is in main at adoption, before ACK, never in Node.
           nextState=state.next(action);
         }
-        let body={engine:spec.engine,request_id:requestId,generation,action,completed:!!checkpoint,cancelled:!!spec.cancel,sequence:checkpoint?.sequence??null,late:false,judge_error:readFault};
+        const sharedStatus=reader.status();
+        let body={engine:spec.engine,request_id:requestId,generation,action,completed:!!checkpoint,cancelled:!!spec.cancel,sequence:checkpoint?.sequence??null,late:false,judge_error:readFault,shared_state:sharedStatus.state,external_abort:externalAbort};
         let bytes=new TextEncoder().encode(JSON.stringify(body));
         let stamp=epochMain();
         if(stamp>=identity.deadline_ms) {
@@ -183,28 +219,40 @@ async function chooseBrowser(spec, inputState, prefix, reference, config) {
         body=immutable(body);
         activeMainState=nextState;
         explorationWorker.postMessage({kind:'cancel',generation:generation+100000});
-        resolve({body,t0_ms:t0,planned_ms:identity.seal_ms,timer_ms:timerAt,stamp_ms:stamp,public_elapsed_ms:stamp-t0,bytes:bytes.length,read_samples:readSamples,body_serialized:JSON.stringify(body),classification:classifyResponse(body,requestFaults.get(requestId)),public_did_not_await_ACK:true,Node_clock_referee_calls:0});
+        let classification=classifyResponse(body,requestFaults.get(requestId));
+        if(sharedStatus.state===SharedBestAction.STATE.FAULT)classification='engine_fault';
+        if(externalAbort)classification='external_automation_failure';
+        resolve({body,t0_ms:t0,planned_ms:identity.seal_ms,timer_ms:timerAt,stamp_ms:stamp,public_elapsed_ms:stamp-t0,bytes:bytes.length,read_samples:readSamples,body_serialized:JSON.stringify(body),classification,public_did_not_await_ACK:true,Node_clock_referee_calls:0});
       } catch(error) { reader.stop('fault');explorationWorker.postMessage({kind:'cancel',generation:generation+100000});reject(error); }
     },Math.max(0,identity.seal_ms-epochMain()));
     pendingTimers.add(adoptTimer);
   });
   startedRequests++;
-  explorationWorker.postMessage({kind:'request',identity,shared:memory,shared_context:context,tail_condition:'cooperative',worker_limits:{deadline_ms:t0+500,nn_cutoff_ms:t0+402},capture_tree:false});
+  explorationWorker.postMessage({kind:'request',identity,shared:memory,shared_context:context,tail_condition:'cooperative',worker_clock:workerClock,worker_limits:{deadline_ms:t0+500+workerClock.lo_ms,nn_cutoff_ms:t0+402+workerClock.lo_ms},capture_tree:false});
   const response=await publicPromise;
   const row={spec,identity,response,stop:null,gate:null,diagnostic:null,hand_NN:0,Node_per_CP_binding_calls:0};
   collectedRows.push(row); // Keep public even if the later ACK or helper fails.
   const stop=await stopPromise;
   row.stop=stop;row.ACK_wall_ms=stop.main_received_ms-t0;
+  row.worker_clock=workerClock;
+  row.worker_stop_interval_main=Number.isFinite(stop.stop.at_ms)?{lower_ms:stop.stop.at_ms-workerClock.hi_ms,upper_ms:stop.stop.at_ms-workerClock.lo_ms}:null;
+  row.worker_stop_class=!row.worker_stop_interval_main?'missing':row.worker_stop_interval_main.upper_ms<=identity.deadline_ms?'upper_le_D':row.worker_stop_interval_main.lower_ms>identity.deadline_ms?'lower_gt_D':'straddles_D';
+  row.stop_to_main_ACK_interval=row.worker_stop_interval_main?{lower_ms:stop.main_received_ms-row.worker_stop_interval_main.upper_ms,upper_ms:stop.main_received_ms-row.worker_stop_interval_main.lower_ms}:null;
   if(stop.stop.handles||stop.stop.activeNN||stop.stop.live_searches||stop.stop.active)throw Error('OWNED_NOT_ZERO');
   lastOwnedACK=stop.stop;
   const privatePromise=waitingMessage('private-'+requestId);
   explorationWorker.postMessage({kind:'get_private',request_id:requestId});
   const diagnostic=await privatePromise;
   row.diagnostic=diagnostic;row.hand_NN=diagnostic?.NN?.length??0;
+  row.post_public_NN_definite=(diagnostic?.NN??[]).filter(span=>span.session_run_start_ms-workerClock.hi_ms>response.stamp_ms).length;
+  row.post_cutoff_NN_definite=(diagnostic?.NN??[]).filter(span=>span.session_run_start_ms-workerClock.hi_ms>identity.commit_cutoff_ms).length;
+  row.post_cutoff_NN_possible=(diagnostic?.NN??[]).filter(span=>span.session_run_start_ms-workerClock.lo_ms>identity.commit_cutoff_ms).length;
+  if(externalAbort){currentReader=null;currentGeneration=null;return {row,nextState:state};}
   if(!diagnostic?.numeric?.length)throw Error('ROOT_NUMERIC_MISSING');
   row.gate=BrowserNumeric.check({engine:spec.engine,state,numeric:diagnostic.numeric[0],cp:diagnostic.validated_cp,reference});
   row.postpublic_immutable=JSON.stringify(response.body)===response.body_serialized;
   if(!row.postpublic_immutable)throw Error('POST_PUBLIC_MUTATION');
+  currentReader=null;currentGeneration=null;
   return {row,nextState};
 }
 
@@ -223,7 +271,46 @@ async function runFunctional(config, references) {
 }
 
 function collectBrowser() {
-  return {rows:collectedRows,startup_rows:startupRows,started_requests:startedRequests,started_games:startedGames,waiting_messages:[...waitingMessages.keys()],main_timer_count:pendingTimers.size};
+  return {rows:collectedRows,games:collectedGames,startup_rows:startupRows,started_requests:startedRequests,started_games:startedGames,waiting_messages:[...waitingMessages.keys()],main_timer_count:pendingTimers.size,external_abort:externalAbort};
+}
+
+function browserAbort(reason) {
+  externalAbort=reason;
+  currentReader?.stop('cancel');
+  if(currentGeneration!==null)explorationWorker.postMessage({kind:'cancel',generation:currentGeneration+100000});
+  return {cause:reason,at_ms:epochMain(),fresh_forbidden:true};
+}
+
+async function runBrowserGames(config, fixtures, references) {
+  for(const planned of config.games) {
+    if(externalAbort||Date.now()>=Date.parse(config.processing_deadline))break;
+    const fixture=fixtures.find(row=>row.id===planned.fixture_id);
+    const prefix=structuredClone(fixture.legal_prefix);
+    let state=referenceState(fixture);
+    const game={id:planned.id,fixture_id:fixture.id,candidate_color:planned.candidate_color,seed:1979,status:'started',initial_prefix:structuredClone(prefix),actions:[],turn_indices:[],winner:null,reason:null};
+    collectedGames.push(game);startedGames++;
+    try {
+      while(!terminalResult(state)) {
+        if(externalAbort){game.status='unfinished';game.reason=externalAbort.code;break;}
+        const engine=state.getCurrentPlayer()===planned.candidate_color?'candidate':'reference';
+        const rootReference=prefix.length===fixture.legal_prefix.length?references.find(row=>row.id===fixture.id):null;
+        const {row,nextState}=await chooseBrowser({engine,cancel:false,game_id:game.id,turn:game.actions.length},state,prefix,rootReference,config);
+        game.turn_indices.push(row.identity.request_id);
+        const failure=row.response.classification;
+        if(failure!=='completed_legal') {
+          Object.assign(game,gameFailureResult(failure,state.getCurrentPlayer(),engine));
+          break;
+        }
+        const action=structuredClone(row.response.body.action);
+        game.actions.push(action);prefix.push(action);state=nextState;
+      }
+      const terminal=terminalResult(state);
+      if(terminal){game.status='terminal';game.winner=terminal.winner;game.reason=terminal.winner?'goal':'RuleA_draw';}
+      game.final_key=state._positionKey();game.total_ply=state.depth;
+    }catch(error){game.status='unfinished';game.reason='browser_infrastructure_failure';game.error={name:error.name,message:error.message};throw error;}
+    if(game.status==='unfinished')break;
+  }
+  return collectBrowser();
 }
 
 function abortBrowserTimers() {

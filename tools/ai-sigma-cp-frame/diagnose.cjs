@@ -18,31 +18,43 @@ async function main() {
   const fixtures=JSON.parse(fs.readFileSync(ROOT+'/.artifacts/ai-sigma/reference-fixtures/SIGMA-PARITY-PLAN/fixtures.json')).fixtures;
   const references=JSON.parse(fs.readFileSync(ROOT+'/.artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/ort-a.outputs.json'));
   const monitor=require('../ai-sigma-actual-boundary-repair/pause-check.cjs').createMonitor({out:directory,subjectIssue:'quoridor-4lc.107',deadlineUTC:config.processing_deadline,windowEndUTC:'2026-10-02T10:02:31Z'});
-  let browser=null,primary=null,secondary=[],rows=[],startup=null;
+  let browser=null,primary=null,secondary=[],rows=[],startup=null,gameResult=null,observerTimer=null;
   try {
     await monitor.start();monitor.check();
     browser=await require('./browser-sab.cjs').open(directory,()=>{throw Error('PER_CP_NODE_BINDING_FORBIDDEN');},()=>{throw Error('PER_HAND_NODE_ACK_BINDING_FORBIDDEN');});
     save('browser-preflight',await browser.page.evaluate(()=>browserPreflight()));
+    save('browser-rules-mock',await browser.page.evaluate(()=>browserRulesMock()));
     if(mode==='NN') {
       if(Date.now()>=Date.parse(config.newjob_deadline))throw Error('NEW_HEAVY_CUTOFF');
       monitor.check();save('config',config);
+      let observerBusy=false;
+      observerTimer=setInterval(async()=>{
+        if(observerBusy)return;observerBusy=true;
+        try{monitor.check();if(Date.now()>=Date.parse(config.processing_deadline))throw Error('PROCESSING_DEADLINE');}
+        catch(error){
+          clearInterval(observerTimer);observerTimer=null;
+          try{save('external-abort',await browser.page.evaluate(reason=>browserAbort(reason),{code:error.message,scope:'external run monitor, not per-hand clock'}));}catch(failure){secondary.push({stage:'external-abort',message:failure.message});}
+        }finally{observerBusy=false;}
+      },250);
       await browser.load();
       startup=await browser.page.evaluate(({fixtures,references})=>browserStartup(fixtures,references),{fixtures,references});save('startup',startup);
       // One evaluate drives all requests in browser; Node never supplies per-hand clocks or judges.
-      const result=await browser.page.evaluate(({config,references})=>runFunctional(config,references),{config,references});
+      const result=await browser.page.evaluate(({config,references,fixtures})=>config.kind==='browser-pair'?runBrowserGames(config,fixtures,references):runFunctional(config,references),{config,references,fixtures});
+      gameResult=result;
       rows=result.rows;save('browser-result',result);save('rows',rows);
 
     }
   } catch(error) {
     primary={name:error.name,message:error.message,stack:error.stack};save('primary',primary);
-    if(browser)try{const partial=await browser.page.evaluate(()=>collectBrowser());rows=partial.rows;save('partial-browser-result',partial);}catch(error){secondary.push({stage:'partial-collect',message:error.message});}
+    if(browser)try{const partial=await browser.page.evaluate(()=>collectBrowser());rows=partial.rows;gameResult=partial;save('partial-browser-result',partial);}catch(error){secondary.push({stage:'partial-collect',message:error.message});}
   } finally {
+    if(observerTimer){clearInterval(observerTimer);observerTimer=null;}
     if(browser)try{save('main-timers-stop',await browser.page.evaluate(()=>abortBrowserTimers()));}catch(error){secondary.push({stage:'main-timers-stop',message:error.message});}
     if(browser&&browser.loadState.ready)try{save('finally-model-drop',await browser.page.evaluate(()=>dropEarly()));}catch(error){secondary.push({stage:'finally-drop',message:error.message});}
     if(browser)try {save('outer-controlled-stop',await boundedStop(browser));}catch(error){secondary.push({stage:'browser-stop',message:error.message});}
     try{await monitor.stop();}catch(error){secondary.push({stage:'monitor-stop',message:error.message});}
   }
-  const summary={issue:'quoridor-4lc.107',mode,run,diagnostic:true,actual_go:false,games:0,holdout:0,planned:mode==='NN'?config.schedule.length+(config.dynamic_plies??0):0,completed:rows.length,missing:mode==='NN'?config.schedule.length+(config.dynamic_plies??0)-rows.length:0,startup_NN:startup?.startup_NN??0,hand_NN:rows.reduce((n,row)=>n+row.hand_NN,0),primary,secondary,browser_judgement:true,per_CP_Node_binding_calls:0,Node_per_hand_clock_calls:0};
+  const summary={issue:'quoridor-4lc.107',mode,run,diagnostic:true,actual_go:false,games_started:gameResult?.started_games??0,games:gameResult?.games??[],holdout:0,planned:mode==='NN'?config.schedule.length+(config.dynamic_plies??0):0,completed:rows.length,missing:mode==='NN'?config.schedule.length+(config.dynamic_plies??0)-rows.length:0,startup_NN:startup?.startup_NN??0,hand_NN:rows.reduce((n,row)=>n+row.hand_NN,0),primary,secondary,browser_judgement:true,per_CP_Node_binding_calls:0,Node_per_hand_clock_calls:0};
   save('summary',summary);console.log(JSON.stringify(summary));
   if(primary||secondary.length)process.exitCode=1;
 }

@@ -92,7 +92,8 @@ function bind(buffer, context, expectedContext) {
     if (target !== STATE.BUDGET_STOP) cached = null;
   }
 
-  return { publish, readLatest, stop };
+  function status() { return {state:Atomics.load(words,INDEX.state),generation:Atomics.load(words,INDEX.generation)}; }
+  return { publish, readLatest, stop, status };
 }
 
 function create(context) {
