@@ -18,7 +18,9 @@ for engine in ['candidate','reference']:
  def first_span(r):
   publications=(r.get('diagnostic')or{}).get('sab_publications',[])
   return publications[0]['validation_end_ms']-r['worker_clock']['mid_ms']-r['identity']['t0_ms'] if publications else None
- engines[engine]={'public':len(selected),'classifications':dict(collections.Counter(r['response']['classification'] for r in selected)),
+ first_events=[(r,(r.get('diagnostic')or{}).get('NN_control_events',[])[0]) for r in selected if (r.get('diagnostic')or{}).get('NN_control_events')]
+ first_public=[(r,e,(r.get('diagnostic')or{}).get('sab_publications',[])[0]) for r,e in first_events if (r.get('diagnostic')or{}).get('sab_publications')]
+ engines[engine]={'first_NN_spans':{'t0_to_first_infer_entry_ms':dist(e['start_ms']-r['worker_clock']['mid_ms']-r['identity']['t0_ms'] for r,e in first_events),'infer_wrapper_ms':dist(e['return_ms']-e['start_ms'] for r,e in first_events),'session_API_await_ms':dist(e['session_run_end_ms']-e['session_run_start_ms'] for r,e in first_events if e.get('session_run_start_ms') is not None),'first_infer_return_to_completed_publication_ms':dist(p['validation_end_ms']-e['return_ms'] for r,e,p in first_public),'start_span_contains_unseparated_input_preparation_rootwork_scheduling':True,'cross_clock_start_span_has_saved_interval_error':True,'APIawait_not_kernel':True}, 'public':len(selected),'classifications':dict(collections.Counter(r['response']['classification'] for r in selected)),
   'public_ms':dist(r['response']['public_elapsed_ms'] for r in selected),'timer_execution_delay_ms':dist(r['response']['timer_ms']-r['response']['planned_ms'] for r in selected),
   'first_completed_publication_ms':dist(first_span(r) for r in selected),'ACK_wall_ms':dist(r.get('ACK_wall_ms') for r in selected),'own_previous_wait_ms':dist(r.get('own_previous_wait',{}).get('wait_ms') for r in selected),
   'worker_stop_classes':dict(collections.Counter(r.get('worker_stop_class','missing') for r in selected)),
