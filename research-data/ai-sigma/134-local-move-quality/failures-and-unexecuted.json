@@ -1,0 +1,28 @@
+{
+  "static_first_schema_failure": {
+    "error": "PREFIX_CONTEXT",
+    "NN": 0,
+    "reason": "134 initial glue reused119 fixture.player field but132 fixture encodes board.turn; corrected to read-only deepCheckedState; input and source unchanged"
+  },
+  "admission_failures": [
+    {
+      "UTC": "2026-10-02T16:53:23.102323+00:00",
+      "error": "DEPENDENCY133_STOP_SHA",
+      "child_started": false,
+      "owned_child_count": 0
+    },
+    {
+      "UTC": "2026-10-02T16:54:47.080991+00:00",
+      "error": "'identities'",
+      "child_started": false,
+      "owned_child_count": 0
+    }
+  ],
+  "all_admission_failures_child_started_false": true,
+  "scientific_rollouts_retried": 0,
+  "scientific_unstarted": 0,
+  "late_firstnone_fault_loss_invalid_infra": 0,
+  "source_tree_copy_removed_beforeNN": true,
+  "original_preregister_SHA": "a3b368a42a3d0efdbac8eb085f4c12db7c10de5e55f31ec9891ddec8de666a38",
+  "executed_minimal_preregister_SHA": "355d9064f13caac54b5c20b23c523a834db58f49c9d0a4246afe40546fe1289d"
+}
