@@ -43,7 +43,7 @@ function browserMocks(){
  if(JSON.stringify(s.player2pos)!=='[4,3]')throw Error('MOCK_JUMP');
  let near=fromPrefix([]),hist=[];for(let i=0;i<7;i++){hist.push(pawn(0,1));hist.push(pawn(i%2===0?-1:1,0));}near=fromPrefix(hist);
  if(near.winner()!==0)throw Error('MOCK_NEAR_TERMINAL');const a=pawn(0,1);if(!near.getLegalActions().some(b=>sameAction(a,b))||near.next(a).winner()!==1)throw Error('MOCK_GOAL');
- const wall=(x,y)=>({type:'wall',x,y,orientation:'h'});const dh=[wall(4,5),wall(0,0)];for(let i=0;i<3;i++)dh.push(pawn(0,1),pawn(0,-1));dh.push(pawn(0,1),wall(0,2));const ds=fromPrefix(dh),diag=pawn(-1,1);if(!ds.getLegalActions().some(a=>sameAction(a,diag))||JSON.stringify(ds.next(diag).player1pos)!=='[3,5]')throw Error('MOCK_DIAGONAL');return {...r,ruleA_legal_jump_prefix:p,ruleA_neargoal_prefix:hist,ruleA_diagonal_prefix:dh,ruleA_pass:['jump','diagonal','goal_priority'],history_cache:'disabled',shared_rule_limit:true};
+ const wall=(x,y)=>({type:'wall',x,y,orientation:'h'});const dh=[];for(let i=0;i<3;i++)dh.push(pawn(0,1),pawn(0,-1));dh.push(pawn(0,1),wall(4,5));const ds=fromPrefix(dh),diag=pawn(-1,1);if(!ds.getLegalActions().some(a=>sameAction(a,diag))||JSON.stringify(ds.next(diag).player1pos)!=='[3,5]')throw Error('MOCK_DIAGONAL');return {...r,ruleA_legal_jump_prefix:p,ruleA_neargoal_prefix:hist,ruleA_diagonal_prefix:dh,ruleA_pass:['jump','diagonal','goal_priority'],history_cache:'disabled',shared_rule_limit:true};
 }
 function walllessGenerate(reg,index){
  const c=reg.cases[index],attempts=[],pawn=(x,y)=>({type:'pawn',direction:[x,y]});let adopted=null;
