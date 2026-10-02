@@ -1,0 +1,698 @@
+{
+  "runs": [
+    {
+      "run": "cpu117-pair1-r1",
+      "seed": 1979,
+      "fixture": "initial-p1",
+      "counts": {
+        "public": 134,
+        "legal": 134,
+        "late": 0,
+        "cancel": 0,
+        "initial_none": 0,
+        "NN": 1514,
+        "discard": 47,
+        "opposite_before_ACK": 78,
+        "oldAPI_spans_newinput": 45,
+        "own_ACK_violations": 0,
+        "ACKover500": 0,
+        "post_public_definite": 0,
+        "post_public_possible": 0,
+        "cutoff_definite": 0,
+        "cutoff_possible": 0,
+        "worker_by_engine": {
+          "candidate": {
+            "upper_le_D": 67,
+            "lower_gt_D": 0,
+            "straddles": 0
+          },
+          "reference": {
+            "upper_le_D": 67,
+            "lower_gt_D": 0,
+            "straddles": 0
+          }
+        },
+        "max_public": 423.89501953125,
+        "max_own_wait": 0.010009765625,
+        "accepted_CP_sequences": 1589
+      },
+      "clocks": {
+        "candidate": {
+          "initial": {
+            "lo": -0.11513671875,
+            "hi": 0.110009765625
+          },
+          "end": {
+            "lo": -0.1048828125,
+            "hi": 0.1048828125
+          },
+          "mid_shift": 0.0025634765625,
+          "intermediate_drift_unmeasured": true
+        },
+        "reference": {
+          "initial": {
+            "lo": -0.110009765625,
+            "hi": 0.1
+          },
+          "end": {
+            "lo": -0.1048828125,
+            "hi": 0.1
+          },
+          "mid_shift": 0.0025634765625,
+          "intermediate_drift_unmeasured": true
+        }
+      },
+      "Xi": 0.5,
+      "startup_NN": 6
+    },
+    {
+      "run": "cpu117-pair2-r1",
+      "seed": 1979,
+      "fixture": "asym-hv-p2",
+      "counts": {
+        "public": 114,
+        "legal": 114,
+        "late": 0,
+        "cancel": 0,
+        "initial_none": 0,
+        "NN": 1227,
+        "discard": 46,
+        "opposite_before_ACK": 66,
+        "oldAPI_spans_newinput": 45,
+        "own_ACK_violations": 0,
+        "ACKover500": 1,
+        "post_public_definite": 0,
+        "post_public_possible": 0,
+        "cutoff_definite": 0,
+        "cutoff_possible": 0,
+        "worker_by_engine": {
+          "candidate": {
+            "upper_le_D": 57,
+            "lower_gt_D": 0,
+            "straddles": 0
+          },
+          "reference": {
+            "upper_le_D": 56,
+            "lower_gt_D": 1,
+            "straddles": 0
+          }
+        },
+        "max_public": 431.85009765625,
+        "max_own_wait": 0.005126953125,
+        "accepted_CP_sequences": 1511
+      },
+      "clocks": {
+        "candidate": {
+          "initial": {
+            "lo": -0.11513671875,
+            "hi": 0.114892578125
+          },
+          "end": {
+            "lo": -0.1,
+            "hi": 0.1
+          },
+          "mid_shift": 0.0001220703125,
+          "intermediate_drift_unmeasured": true
+        },
+        "reference": {
+          "initial": {
+            "lo": -0.1048828125,
+            "hi": 0.105126953125
+          },
+          "end": {
+            "lo": -0.1,
+            "hi": 0.105126953125
+          },
+          "mid_shift": 0.00244140625,
+          "intermediate_drift_unmeasured": true
+        }
+      },
+      "Xi": 0.5,
+      "startup_NN": 6
+    },
+    {
+      "run": "cpu117-pair3-r1",
+      "seed": 1979,
+      "fixture": "straight-jump-p2",
+      "counts": {
+        "public": 74,
+        "legal": 74,
+        "late": 0,
+        "cancel": 0,
+        "initial_none": 0,
+        "NN": 815,
+        "discard": 25,
+        "opposite_before_ACK": 44,
+        "oldAPI_spans_newinput": 25,
+        "own_ACK_violations": 0,
+        "ACKover500": 0,
+        "post_public_definite": 0,
+        "post_public_possible": 0,
+        "cutoff_definite": 0,
+        "cutoff_possible": 0,
+        "worker_by_engine": {
+          "candidate": {
+            "upper_le_D": 37,
+            "lower_gt_D": 0,
+            "straddles": 0
+          },
+          "reference": {
+            "upper_le_D": 37,
+            "lower_gt_D": 0,
+            "straddles": 0
+          }
+        },
+        "max_public": 420.60498046875,
+        "max_own_wait": 0.010009765625,
+        "accepted_CP_sequences": 1002
+      },
+      "clocks": {
+        "candidate": {
+          "initial": {
+            "lo": -0.1048828125,
+            "hi": 0.11513671875
+          },
+          "end": {
+            "lo": -0.099755859375,
+            "hi": 0.105126953125
+          },
+          "mid_shift": -0.00244140625,
+          "intermediate_drift_unmeasured": true
+        },
+        "reference": {
+          "initial": {
+            "lo": -0.1,
+            "hi": 0.105126953125
+          },
+          "end": {
+            "lo": -0.1048828125,
+            "hi": 0.1
+          },
+          "mid_shift": -0.0050048828125,
+          "intermediate_drift_unmeasured": true
+        }
+      },
+      "Xi": 0.5,
+      "startup_NN": 6
+    },
+    {
+      "run": "cpu117-pair4-r1",
+      "seed": 2098,
+      "fixture": "initial-p1",
+      "counts": {
+        "public": 134,
+        "legal": 134,
+        "late": 0,
+        "cancel": 0,
+        "initial_none": 0,
+        "NN": 1431,
+        "discard": 60,
+        "opposite_before_ACK": 85,
+        "oldAPI_spans_newinput": 59,
+        "own_ACK_violations": 0,
+        "ACKover500": 0,
+        "post_public_definite": 0,
+        "post_public_possible": 0,
+        "cutoff_definite": 0,
+        "cutoff_possible": 0,
+        "worker_by_engine": {
+          "candidate": {
+            "upper_le_D": 67,
+            "lower_gt_D": 0,
+            "straddles": 0
+          },
+          "reference": {
+            "upper_le_D": 67,
+            "lower_gt_D": 0,
+            "straddles": 0
+          }
+        },
+        "max_public": 422.175048828125,
+        "max_own_wait": 0.324951171875,
+        "accepted_CP_sequences": 1535
+      },
+      "clocks": {
+        "candidate": {
+          "initial": {
+            "lo": -0.1,
+            "hi": 0.114892578125
+          },
+          "end": {
+            "lo": -0.1,
+            "hi": 0.109765625
+          },
+          "mid_shift": -0.0025634765625,
+          "intermediate_drift_unmeasured": true
+        },
+        "reference": {
+          "initial": {
+            "lo": -0.1048828125,
+            "hi": 0.110009765625
+          },
+          "end": {
+            "lo": -0.1,
+            "hi": 0.105126953125
+          },
+          "mid_shift": 0,
+          "intermediate_drift_unmeasured": true
+        }
+      },
+      "Xi": 0.5,
+      "startup_NN": 6
+    },
+    {
+      "run": "cpu117-pair5-r1",
+      "seed": 2098,
+      "fixture": "asym-hv-p2",
+      "counts": {
+        "public": 118,
+        "legal": 118,
+        "late": 0,
+        "cancel": 0,
+        "initial_none": 0,
+        "NN": 1245,
+        "discard": 53,
+        "opposite_before_ACK": 69,
+        "oldAPI_spans_newinput": 51,
+        "own_ACK_violations": 0,
+        "ACKover500": 1,
+        "post_public_definite": 0,
+        "post_public_possible": 0,
+        "cutoff_definite": 0,
+        "cutoff_possible": 0,
+        "worker_by_engine": {
+          "candidate": {
+            "upper_le_D": 59,
+            "lower_gt_D": 0,
+            "straddles": 0
+          },
+          "reference": {
+            "upper_le_D": 58,
+            "lower_gt_D": 1,
+            "straddles": 0
+          }
+        },
+        "max_public": 428.625,
+        "max_own_wait": 0.010009765625,
+        "accepted_CP_sequences": 1319
+      },
+      "clocks": {
+        "candidate": {
+          "initial": {
+            "lo": -0.110009765625,
+            "hi": 0.110009765625
+          },
+          "end": {
+            "lo": -0.1,
+            "hi": 0.1048828125
+          },
+          "mid_shift": 0.00244140625,
+          "intermediate_drift_unmeasured": true
+        },
+        "reference": {
+          "initial": {
+            "lo": -0.105126953125,
+            "hi": 0.1048828125
+          },
+          "end": {
+            "lo": -0.105126953125,
+            "hi": 0.104638671875
+          },
+          "mid_shift": -0.0001220703125,
+          "intermediate_drift_unmeasured": true
+        }
+      },
+      "Xi": 0.5,
+      "startup_NN": 6
+    },
+    {
+      "run": "cpu117-pair6-r1",
+      "seed": 2098,
+      "fixture": "straight-jump-p2",
+      "counts": {
+        "public": 70,
+        "legal": 70,
+        "late": 0,
+        "cancel": 0,
+        "initial_none": 0,
+        "NN": 788,
+        "discard": 27,
+        "opposite_before_ACK": 44,
+        "oldAPI_spans_newinput": 27,
+        "own_ACK_violations": 0,
+        "ACKover500": 0,
+        "post_public_definite": 0,
+        "post_public_possible": 0,
+        "cutoff_definite": 0,
+        "cutoff_possible": 0,
+        "worker_by_engine": {
+          "candidate": {
+            "upper_le_D": 35,
+            "lower_gt_D": 0,
+            "straddles": 0
+          },
+          "reference": {
+            "upper_le_D": 35,
+            "lower_gt_D": 0,
+            "straddles": 0
+          }
+        },
+        "max_public": 420.990234375,
+        "max_own_wait": 0.010009765625,
+        "accepted_CP_sequences": 831
+      },
+      "clocks": {
+        "candidate": {
+          "initial": {
+            "lo": -0.1048828125,
+            "hi": 0.115380859375
+          },
+          "end": {
+            "lo": -0.099755859375,
+            "hi": 0.110009765625
+          },
+          "mid_shift": -0.0001220703125,
+          "intermediate_drift_unmeasured": true
+        },
+        "reference": {
+          "initial": {
+            "lo": -0.1,
+            "hi": 0.109765625
+          },
+          "end": {
+            "lo": -0.1,
+            "hi": 0.110009765625
+          },
+          "mid_shift": 0.0001220703125,
+          "intermediate_drift_unmeasured": true
+        }
+      },
+      "Xi": 0.5,
+      "startup_NN": 6
+    }
+  ],
+  "games": [
+    {
+      "id": "pair1-color1",
+      "fixture": "initial-p1",
+      "seed": 1979,
+      "color": 1,
+      "winner": 1,
+      "newplies": 67,
+      "prefixply": 0,
+      "totalply": 67,
+      "score": 1
+    },
+    {
+      "id": "pair1-color2",
+      "fixture": "initial-p1",
+      "seed": 1979,
+      "color": 2,
+      "winner": 1,
+      "newplies": 67,
+      "prefixply": 0,
+      "totalply": 67,
+      "score": 0
+    },
+    {
+      "id": "pair2-color1",
+      "fixture": "asym-hv-p2",
+      "seed": 1979,
+      "color": 1,
+      "winner": 2,
+      "newplies": 63,
+      "prefixply": 3,
+      "totalply": 66,
+      "score": 0
+    },
+    {
+      "id": "pair2-color2",
+      "fixture": "asym-hv-p2",
+      "seed": 1979,
+      "color": 2,
+      "winner": 2,
+      "newplies": 51,
+      "prefixply": 3,
+      "totalply": 54,
+      "score": 1
+    },
+    {
+      "id": "pair3-color1",
+      "fixture": "straight-jump-p2",
+      "seed": 1979,
+      "color": 1,
+      "winner": 1,
+      "newplies": 42,
+      "prefixply": 7,
+      "totalply": 49,
+      "score": 1
+    },
+    {
+      "id": "pair3-color2",
+      "fixture": "straight-jump-p2",
+      "seed": 1979,
+      "color": 2,
+      "winner": 1,
+      "newplies": 32,
+      "prefixply": 7,
+      "totalply": 39,
+      "score": 0
+    },
+    {
+      "id": "pair4-color1",
+      "fixture": "initial-p1",
+      "seed": 2098,
+      "color": 1,
+      "winner": 1,
+      "newplies": 67,
+      "prefixply": 0,
+      "totalply": 67,
+      "score": 1
+    },
+    {
+      "id": "pair4-color2",
+      "fixture": "initial-p1",
+      "seed": 2098,
+      "color": 2,
+      "winner": 1,
+      "newplies": 67,
+      "prefixply": 0,
+      "totalply": 67,
+      "score": 0
+    },
+    {
+      "id": "pair5-color1",
+      "fixture": "asym-hv-p2",
+      "seed": 2098,
+      "color": 1,
+      "winner": 2,
+      "newplies": 57,
+      "prefixply": 3,
+      "totalply": 60,
+      "score": 0
+    },
+    {
+      "id": "pair5-color2",
+      "fixture": "asym-hv-p2",
+      "seed": 2098,
+      "color": 2,
+      "winner": 2,
+      "newplies": 61,
+      "prefixply": 3,
+      "totalply": 64,
+      "score": 1
+    },
+    {
+      "id": "pair6-color1",
+      "fixture": "straight-jump-p2",
+      "seed": 2098,
+      "color": 1,
+      "winner": 1,
+      "newplies": 38,
+      "prefixply": 7,
+      "totalply": 45,
+      "score": 1
+    },
+    {
+      "id": "pair6-color2",
+      "fixture": "straight-jump-p2",
+      "seed": 2098,
+      "color": 2,
+      "winner": 1,
+      "newplies": 32,
+      "prefixply": 7,
+      "totalply": 39,
+      "score": 0
+    }
+  ],
+  "W": 6,
+  "D": 0,
+  "L": 6,
+  "public": 644,
+  "legal": 644,
+  "hand_NN": 7020,
+  "startup_NN": 36,
+  "numeric_samples": [
+    {
+      "request": "cpu117-pair1-r1-1",
+      "engine": "candidate",
+      "P2": false,
+      "cancelled": false,
+      "features": 648,
+      "NN": 137,
+      "priors": 131,
+      "maxNN": 0.000002384185791015625,
+      "maxPrior": 0.000001620060892992825,
+      "fixed_reference": true,
+      "valueMeaning": "rootNN"
+    },
+    {
+      "request": "cpu117-pair1-r1-2",
+      "engine": "reference",
+      "P2": true,
+      "cancelled": false,
+      "features": 648,
+      "NN": 137,
+      "priors": 131,
+      "maxNN": 0.0000021457672119140625,
+      "maxPrior": 0,
+      "fixed_reference": true,
+      "valueMeaning": "rootQ"
+    },
+    {
+      "request": "cpu117-pair2-r1-1",
+      "engine": "reference",
+      "P2": true,
+      "cancelled": false,
+      "features": 648,
+      "NN": 137,
+      "priors": 123,
+      "maxNN": 0.0000035762786865234375,
+      "maxPrior": 0,
+      "fixed_reference": true,
+      "valueMeaning": "rootQ"
+    },
+    {
+      "request": "cpu117-pair2-r1-2",
+      "engine": "candidate",
+      "P2": false,
+      "cancelled": false,
+      "features": 648,
+      "NN": 137,
+      "priors": 124,
+      "maxNN": null,
+      "maxPrior": 9.443712710721641e-7,
+      "fixed_reference": false,
+      "valueMeaning": "rootNN"
+    },
+    {
+      "request": "cpu117-pair3-r1-1",
+      "engine": "reference",
+      "P2": true,
+      "cancelled": false,
+      "features": 648,
+      "NN": 137,
+      "priors": 132,
+      "maxNN": 0.0000030994415283203125,
+      "maxPrior": 0,
+      "fixed_reference": true,
+      "valueMeaning": "rootQ"
+    },
+    {
+      "request": "cpu117-pair3-r1-2",
+      "engine": "candidate",
+      "P2": false,
+      "cancelled": false,
+      "features": 648,
+      "NN": 137,
+      "priors": 129,
+      "maxNN": null,
+      "maxPrior": 7.80701390923344e-7,
+      "fixed_reference": false,
+      "valueMeaning": "rootNN"
+    },
+    {
+      "request": "cpu117-pair4-r1-1",
+      "engine": "candidate",
+      "P2": false,
+      "cancelled": false,
+      "features": 648,
+      "NN": 137,
+      "priors": 131,
+      "maxNN": 0.000002384185791015625,
+      "maxPrior": 0.000001620060892992825,
+      "fixed_reference": true,
+      "valueMeaning": "rootNN"
+    },
+    {
+      "request": "cpu117-pair4-r1-2",
+      "engine": "reference",
+      "P2": true,
+      "cancelled": false,
+      "features": 648,
+      "NN": 137,
+      "priors": 131,
+      "maxNN": 0.0000021457672119140625,
+      "maxPrior": 0,
+      "fixed_reference": true,
+      "valueMeaning": "rootQ"
+    },
+    {
+      "request": "cpu117-pair5-r1-1",
+      "engine": "reference",
+      "P2": true,
+      "cancelled": false,
+      "features": 648,
+      "NN": 137,
+      "priors": 123,
+      "maxNN": 0.0000035762786865234375,
+      "maxPrior": 0,
+      "fixed_reference": true,
+      "valueMeaning": "rootQ"
+    },
+    {
+      "request": "cpu117-pair5-r1-2",
+      "engine": "candidate",
+      "P2": false,
+      "cancelled": false,
+      "features": 648,
+      "NN": 137,
+      "priors": 124,
+      "maxNN": null,
+      "maxPrior": 9.443712710721641e-7,
+      "fixed_reference": false,
+      "valueMeaning": "rootNN"
+    },
+    {
+      "request": "cpu117-pair6-r1-1",
+      "engine": "reference",
+      "P2": true,
+      "cancelled": false,
+      "features": 648,
+      "NN": 137,
+      "priors": 132,
+      "maxNN": 0.0000030994415283203125,
+      "maxPrior": 0,
+      "fixed_reference": true,
+      "valueMeaning": "rootQ"
+    },
+    {
+      "request": "cpu117-pair6-r1-2",
+      "engine": "candidate",
+      "P2": false,
+      "cancelled": false,
+      "features": 648,
+      "NN": 137,
+      "priors": 129,
+      "maxNN": null,
+      "maxPrior": 4.43949874973093e-7,
+      "fixed_reference": false,
+      "valueMeaning": "rootNN"
+    }
+  ],
+  "shared_RuleA_independence_limit": true,
+  "browser_adjudicated": true,
+  "new_NN_model_load_games": 0,
+  "formal_go": false,
+  "issues": []
+}

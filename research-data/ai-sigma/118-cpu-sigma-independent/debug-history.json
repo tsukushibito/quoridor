@@ -1,0 +1,8 @@
+{
+  "r1": "waiting_messages [] erroneously tested ===0; fixed checker type; old source/log/process retained",
+  "r6": "connect startup rows live in startup.json not browser-result.json; missing input caused expected6 assert, no upstream/NN failure; original input/source/process kept; r7 adds hash-checked separate startup rows",
+  "NN_games_all_runs": 0,
+  "no_successful_WDL_or_measurement_replaced": true,
+  "r8": "static finalize cwd assumed workspace but launcher uses tool cwd; corrected to __file__.parents[2], first source/log/process retained",
+  "r9": "archive inadvertently included active pack monitor changing during stream comparison; failed archive/source/log retained, exclude only current static closure job and save its final process separately"
+}

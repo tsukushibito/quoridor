@@ -1,0 +1,31 @@
+{
+  "runs": [
+    {
+      "run": "cpu117-connect-r1",
+      "public": 0,
+      "legal": 0,
+      "hand_NN": 0,
+      "startup_NN": 0,
+      "primary": {
+        "name": "Error",
+        "message": "page.evaluate: Error: PREFIX_ILLEGAL\n    at frame8Mock (http://localhost:5194/early-page.js:477:123)\n    at eval (eval at evaluate (:311:30), <anonymous>:1:22)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+        "stack": "page.evaluate: Error: PREFIX_ILLEGAL\n    at frame8Mock (http://localhost:5194/early-page.js:477:123)\n    at eval (eval at evaluate (:311:30), <anonymous>:1:22)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at main (/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-cpu-sigma-frame8/diagnose.cjs:27:45)"
+      },
+      "secondary": [],
+      "failed_checker_not_NN_negative": true
+    },
+    {
+      "run": "cpu117-connect-r2",
+      "public": 2,
+      "legal": 2,
+      "hand_NN": 18,
+      "startup_NN": 6,
+      "primary": null,
+      "secondary": [],
+      "failed_checker_not_NN_negative": false
+    }
+  ],
+  "separate_from_game644": true,
+  "new_NN": 0,
+  "browser_computed": true
+}
