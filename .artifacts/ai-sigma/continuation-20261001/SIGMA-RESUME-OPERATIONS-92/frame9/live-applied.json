@@ -1,0 +1,91 @@
+{
+  "at": "2026-10-02T15:33:01.151317+00:00",
+  "run": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame9-944572e0-a006-4e84-8935-52e41374f819",
+  "scheduler": {
+    "pid": 2608533,
+    "start_ticks": "20809272",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "monitor": {
+    "pid": 2608547,
+    "start_ticks": "20809293",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+    "rss_bytes": 20688896,
+    "affinity": [
+      0
+    ]
+  },
+  "state": {
+    "binding": {
+      "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+      "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+      "target": "supervisor",
+      "dispatch_issue": "quoridor-4lc.40",
+      "contract_file": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+    },
+    "process": {
+      "pid": 2608533,
+      "start_ticks": "20809272",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "phase": "running",
+    "recovery_required": false,
+    "last_result": {
+      "at": "2026-10-02T15:33:00.966685+00:00",
+      "event": "dispatched",
+      "run_id": "097d62b6-d4a3-4299-acf7-208d4cf80245",
+      "turn_id": "01a0fd3f-539a-7960-9a65-aa3a3f7b412f"
+    },
+    "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+    "config_sha256": "0b02da94a0ca6a4ab2cb85b264a88b7e3ec32f0ed1b889a507c281288873dc67",
+    "contract_sha256": "154f7f0d4ff06e7305b6277c43d06b1d9608fe652bfcda0049ec0d4cb117ccc3",
+    "next_at": 1790956378.0201166,
+    "owned": {
+      "run_id": "097d62b6-d4a3-4299-acf7-208d4cf80245",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+      "turn_id": "01a0fd3f-539a-7960-9a65-aa3a3f7b412f",
+      "started_at": "2026-10-02T15:33:00.943949+00:00",
+      "max_turn_seconds": 180
+    }
+  },
+  "commands": [
+    {
+      "command": [
+        "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python",
+        "-B",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/scheduler.py",
+        "validate",
+        "--config",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json"
+      ],
+      "exit": 0,
+      "stdout": "{\"valid\": true, \"config_sha256\": \"0b02da94a0ca6a4ab2cb85b264a88b7e3ec32f0ed1b889a507c281288873dc67\", \"end_at\": \"2026-10-02T23:15:59+00:00\", \"expired\": false}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python",
+        "-B",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/scheduler.py",
+        "start",
+        "--config",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+        "--state-dir",
+        "/workspaces/quoridor/.artifacts/research-team/scheduler-sigma-continuation-20261001"
+      ],
+      "exit": 0,
+      "stdout": "{\"started\": true, \"process\": {\"pid\": 2608533, \"start_ticks\": \"20809272\", \"boot_id\": \"ab5e66ac-12ce-49b0-ac55-afe05e3f5216\"}, \"state_dir\": \"/workspaces/quoridor/.artifacts/research-team/scheduler-sigma-continuation-20261001\"}\n",
+      "stderr": ""
+    }
+  ],
+  "expected_input_count": 24,
+  "hash_mismatches": [],
+  "fresh_start": true,
+  "reload_claimed": false,
+  "operational_end": "23:15:59UTC",
+  "heavy_notice": "23:10:59UTC",
+  "monitor_collection": "23:18:59UTC",
+  "evidence_end": "23:20:59UTC",
+  "old_frame8_record": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame9/before-start.json"
+}

@@ -1,0 +1,67 @@
+{
+  "at": "2026-10-02T15:33:57.448734+00:00",
+  "state": {
+    "binding": {
+      "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+      "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+      "target": "supervisor",
+      "dispatch_issue": "quoridor-4lc.40",
+      "contract_file": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+    },
+    "process": {
+      "pid": 2608533,
+      "start_ticks": "20809272",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "phase": "running",
+    "recovery_required": false,
+    "last_result": {
+      "at": "2026-10-02T15:33:00.966685+00:00",
+      "event": "dispatched",
+      "run_id": "097d62b6-d4a3-4299-acf7-208d4cf80245",
+      "turn_id": "01a0fd3f-539a-7960-9a65-aa3a3f7b412f"
+    },
+    "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+    "config_sha256": "0b02da94a0ca6a4ab2cb85b264a88b7e3ec32f0ed1b889a507c281288873dc67",
+    "contract_sha256": "154f7f0d4ff06e7305b6277c43d06b1d9608fe652bfcda0049ec0d4cb117ccc3",
+    "next_at": 1790956378.0099537,
+    "owned": {
+      "run_id": "097d62b6-d4a3-4299-acf7-208d4cf80245",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+      "turn_id": "01a0fd3f-539a-7960-9a65-aa3a3f7b412f",
+      "started_at": "2026-10-02T15:33:00.943949+00:00",
+      "max_turn_seconds": 180
+    }
+  },
+  "long_processes": [
+    {
+      "pid": 2608533,
+      "start_ticks": "20809272",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "rss_bytes": 61521920,
+      "affinity": [
+        0
+      ]
+    },
+    {
+      "pid": 2608547,
+      "start_ticks": "20809293",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "rss_bytes": 20877312,
+      "affinity": [
+        0
+      ]
+    }
+  ],
+  "current_rss_sum_bytes": 82399232,
+  "owned_allocated_bytes": 14516224,
+  "reservation_bytes": 134217728,
+  "combined_guard_bytes": 117440512,
+  "guard_unused_bytes": 102924288,
+  "newscope_logical_bytes": 56066,
+  "additional_reservation": 0,
+  "input_hash_mismatches": 0,
+  "old_peak_not_added_to_current": true,
+  "wholehost_peak_not_certified": true
+}
