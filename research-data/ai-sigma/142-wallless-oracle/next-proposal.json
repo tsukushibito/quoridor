@@ -1,0 +1,22 @@
+{
+  "maximum_next_experiments": 1,
+  "status": "proposal only; coordinator allocation required",
+  "question": "Do these frozen finite win/loss labels distinguish root1 from normal search, or do all policies already avoid the certified losing move?",
+  "input": "exact two adopted .142 prefixes/keys/history/featuresbits, all root Action payoff intervals; no replacement or expansion",
+  "label_check": "separate NN0 checker reconstructs all proof nodes/RuleA legal sets, terminal priorities and min/max intervals; shared RuleA limitation retained",
+  "AI_conditions": "current candidate Q0/C1.5, same candidate root1 stress, unmodified fixed Sigma; same model/features/seed/order/finish and one fixed completed budget K32 for normal runs; true root1 one completion; no throughput claim",
+  "counts": "2 cases x 3 conditions = 6 one-shot requests, normal completed budgets 4x32 and stress2x1; startup separately; actual backup/terminal-noNN/API-start/adopted/discard separately",
+  "quality": "chosen Action's certified root-player payoff; reference similarity is not quality",
+  "prediction": "nontrivial labels may expose a losing root1 move that normal search avoids; simpler competing explanation is prior already selects a winning move in both cases",
+  "decisions": {
+    "all_three_correct": "end this scale branch; do not expand easy races automatically or claim depth sensitivity",
+    "root1_loss_normal_win": "retain as narrow depth-sensitive regression scale; choose future one-factor implementation only with directly measured mechanism",
+    "normal_candidate_loss_reference_win": "investigate that fixed local failure with true mean/select/backup records in a later allocation, no coefficient adoption from outcome alone",
+    "both_normal_loss_or_normal_worse_than_root1": "question search/label binding and finite mechanism; with valid label record local failure and change diagnostic target, not generic model/value attribution",
+    "label_uncertified_or_binding_mismatch": "do not score AI; return unresolved and stop"
+  },
+  "owner_candidate": "experiment for isolated AI adapter/config; critic for saved NN0 label/response binding; coordinator allocates scope",
+  "estimated_cost": "implementation 10-15min + NN0 review 5-10min; sequential existing-browser runtime ceiling proposed60s, CPU[2]1/RAM6GiB, <=136 planned evaluation calls including six startup calls; estimates are not authorization or guaranteed latency",
+  "confounds": "constructed wallless reachable race states, limited depth6, potential prior-only pass, two cases not representative/IID/holdout; K != NN work/CPU/wall; no WDL/game extrapolation",
+  "current_policy": "keep Q0/C1.5; new NN/model/game permission absent"
+}
