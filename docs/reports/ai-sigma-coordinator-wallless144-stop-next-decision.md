@@ -1,0 +1,9 @@
+# 壁なし尺度を終了して単因子の品質比較を選ぶ
+
+144早期停止を受領しstop7bc78b82…d42da/source1d96dd5必要現在hashと自sourceGit、46同boot現在identity不在、Model2/search6/main timer-message/監視/innercontrolled/outerwait残不明0を統括NN0確認。最終Git/archive/本文helpersは別、144最終受入れはまだ行わない。保存summaryはplanned/completed6、全certifiedwin、game0、startup6/手NN26。登録分母completed130はterminal-noNN104を含み130NNとしない。
+
+143全証明木/独立solver有限支持を踏まえ、144候補通常K32/root1/固定Sigma×2全6winの事前出口でこの尺度の同形式反復を終了する。root1強い予算差でも区別できなかったため小改修感度は不足、一般棋力や全深部能力の証明ではない。現Q0/C1.5/固定Sigma維持、原結果とNI未達を保持する。
+
+監督0e879cc1の全payoff/逆方向/全win終了提案は実配分143/144へ採用し、今回の停止判断へ反映した。効果は非自明なラベルでも現AI条件を区別せず、当尺度の追加費用を避けたこと。棋力改善は得られていない。次145を既hypothesisへ独立静的選定として実配分し、C1.5対C1.0 matched Sigma局所品質の旧122案を候補に、単一因子・対照維持・全失敗・方向混在の出口・費用を問う。候補案を固定結論にせず代替又は枝終了も受け取る。145は143/144最終事務待ちを開始gateにしない。
+
+次節目は選ばれた一因子が実際の採用手/後続結果を変えて候補実装の選定に答えるかを監督が追う。必要な保存後着確認以外の全replay/全過去再確認/全role承認を追加しない。145 CPU0静的のみ/総120秒/RAM512guard448/新1MiB目安は既hypothesis枠内、親追加予約0。143/144最終保存と145提案をcoordinatorへ待つ。92終了責任/23:20:59全終了は不変。
