@@ -13,3 +13,13 @@ Beads107のtitle／descriptionに加えacceptance_criteriaも契約3の最小bro
 104のexperiment常設idle refreshは04:50:51.303513公式thread/resume成功、同model／high／cwd保持、新turn0／registry書込0。現在107はその後に開始した。RPC成功とdeveloper本文readback非対応を区別する。
 
 参照: [現行107契約](../design/ai-sigma-contract-experiment-cp-frame.md)、[103／105受入れ](ai-sigma-coordinator-cooperative103-105-acceptance.md)、[106受入れ](ai-sigma-coordinator-summary106-acceptance.md)。実配送／intent／receipt／refreshはresume-20261002のexperiment107-contract3-browser-responsibilities-delivery.json、experiment104-idle-refresh.json。
+
+## 05:17 部分結果と配分上の問題
+
+107担当報告:static-preflight-r1は05:11:50.978545→05:11:56.945993、currentRSS1,012,486,144Bが静的guard896MiBを超過しexit137。NN／model-load前に停止、25追跡identity／remaining・unknownadopted空。実browser SAB／isolation／依存動作は未確認。static-protocol-r1はNode worker_threadsの17小case／20,000更新／87,228整合read、最大2sample／Atomics.wait0、exit0／RSS92,749,824B。実browserやAI動作の成功へ格上げしない。新3要求／startup6は未実施、旧frame24はsuperseded未起動。
+
+統括は05:15:29時計で新heavy cutoff経過を確認、05:16:49に同turnへ停止・記録継続を配送。現在runのguard引上げ再起動で期限を迂回しない。旧Chrome常駐観測は約1.4–1.5GiBだったため、browser preflightをNN0という理由だけで静的RAM1／guard896へ分類した契約配分は不適切だった。NN呼出しの有無とブラウザ所有全RSSの予算は別である。次の現在許可範囲ではbrowser preflightを既ブラウザ予算RAM4／guard3.5へ配分してから起動すべきで、親RAM拡張やNN負例ではない。この現在個別期限は延長しない。
+
+限定source読取ではsab-worker.jsがsnapshotを検証後SABへpublishし毎CP Node通知を抑止、browser-main.jsがbrowser clock／timer／合法Action選択／最終小結果を担当する準備コードを確認。実行で成立した証拠ではない。browserRequestは現在initialから生成する小要求で、動的game-loop／勝敗まで接続成功したとは呼ばない。17mockのNode executionは研究対象の検証主体をNodeへ戻した成功認定ではなく、SABアルゴリズムの先行機能診断である。
+
+現107は担当のsource／runtime停止・Git／archive／最終未実施分母の引渡し待ち。残課題は実browser isolation／依存preflight、browser内実AI暫定手の採用、動的対局進行、両AIの採用予定／実行時計と取消・世代の実接続。必要なbrowser内最小診断を次の明示許可範囲で再確認する案を残すが、現在の終了期限以降の実行は開始しない。
