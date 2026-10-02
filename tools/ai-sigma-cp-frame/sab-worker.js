@@ -4,6 +4,7 @@ let channel = null;
 let completeCache = null;
 let latestCP = null;
 let publications = [];
+const deferredPrivate = new Map();
 
 globalThis.postMessage = function(message) {
   if (message.kind === 'snapshot') {
@@ -24,6 +25,8 @@ globalThis.postMessage = function(message) {
     message.validated_cp = latestCP;
     message.sab_publications = publications;
     message.validation_events = completeCache?.events;
+    deferredPrivate.set(message.identity.request_id,message);
+    return; // Detailed payload delivered only after browser public and zero ACK.
   }
   sendDiagnostic(message);
 };
@@ -32,6 +35,11 @@ importScripts('/original-worker.js');
 const originalHandler = onmessage;
 onmessage = async function(event) {
   const data = event.data;
+  if(data.kind==='get_private') {
+    const row=deferredPrivate.get(data.request_id);
+    if(!row)throw Error('PRIVATE_MISSING');
+    deferredPrivate.delete(data.request_id);sendDiagnostic(row);return;
+  }
   if (data.kind === 'request') {
     const state = fromPrefix(data.identity.legal_prefix);
     channel = SharedBestAction.bind(data.shared, data.shared_context, {generation:data.identity.generation,key:state._positionKey(),legalActions:state.getLegalActions().map(action=>rustAction(state,action))});

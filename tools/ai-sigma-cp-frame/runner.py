@@ -1,9 +1,27 @@
 import os,sys,json,time,signal,subprocess,datetime,resource,ctypes,hashlib,re
 from pathlib import Path
-TOOL=Path(__file__).resolve().parent;OUT=TOOL.parents[1]/'.artifacts/ai-sigma/resume-20261002/CP-FRAME';END=datetime.datetime.fromisoformat('2026-10-02T05:20:00+00:00').timestamp()
-assert time.time()<END-300,'NEW_JOB_CUTOFF'
-PHASE=os.environ.get('SIGMA77_PHASE','A');CPU=0 if PHASE=='A' else 2;RSS_GUARD=939524096 if PHASE=='A' else 3758096384;STORAGE_GUARD=29360128;CONTRACT_RAM=1073741824 if PHASE=='A' else 4294967296
-prior_wall=sum((datetime.datetime.fromisoformat(d['end'])-datetime.datetime.fromisoformat(d['start'])).total_seconds() for p in OUT.glob(('static*' if PHASE=='A' else 'nn*')+'.process.json') for d in [json.loads(p.read_text())]);assert prior_wall<(180 if PHASE=='A' else 300),'RUNTIME_CUMULATIVE_CAP';
+TOOL=Path(__file__).resolve().parent
+OUT=TOOL.parents[1]/'.artifacts/ai-sigma/resume-20261002/CP-FRAME/runs'
+assert sys.argv[1]=='--config','CONFIG_REQUIRED'
+CONFIG_PATH=Path(sys.argv[2]).resolve();CONFIG=json.loads(CONFIG_PATH.read_text())
+assert CONFIG['issue']=='quoridor-4lc.107' and CONFIG['frame']==7,'FRAME_BINDING'
+END=datetime.datetime.fromisoformat(CONFIG['processing_deadline']).timestamp()
+NEW_END=datetime.datetime.fromisoformat(CONFIG['newjob_deadline']).timestamp()
+assert time.time()<NEW_END,'NEW_JOB_CUTOFF'
+PHASE=CONFIG['kind'];assert PHASE in ['browser-preflight','browser-diagnostic','browser-pair','protocol']
+CPU=0 if PHASE=='protocol' else 2
+RSS_GUARD=939524096 if CPU==0 else 3758096384
+STORAGE_GUARD=58720256
+CONTRACT_RAM=1073741824 if CPU==0 else 4294967296
+MAX_WALL=60 if CPU==0 else 600
+TOTAL_WALL=600 if CPU==0 else 1800
+prior_wall=0
+for p in OUT.glob('frame7-*.process.json'):
+ d=json.loads(p.read_text())
+ if d['assigned_CPU']==CPU:prior_wall+=(datetime.datetime.fromisoformat(d['end'])-datetime.datetime.fromisoformat(d['start'])).total_seconds()
+assert prior_wall<TOTAL_WALL,'RUNTIME_CUMULATIVE_CAP'
+name=CONFIG['run_id'];assert name.startswith('frame7-'),'RUN_NAMESPACE'
+sys.argv=[sys.argv[0],name]+sys.argv[3:]
 name=sys.argv[1];assert re.fullmatch(r'[A-Za-z0-9_-]+',name),'INVALID_JOB_NAME';assert not (OUT/(name+'.started.json')).exists(),'JOB_ALREADY_EXISTS';cmd=sys.argv[2:];os.sched_setaffinity(0,{CPU});resource.setrlimit(resource.RLIMIT_CORE,(0,0));libc=ctypes.CDLL(None,use_errno=True);set_subreaper_rc=libc.prctl(36,1,0,0,0);get_subreaper_value=ctypes.c_int();get_subreaper_rc=libc.prctl(37,ctypes.byref(get_subreaper_value),0,0,0);assert set_subreaper_rc==0 and get_subreaper_rc==0 and get_subreaper_value.value==1,'SUBREAPER_FAILED'
 for d in ['t','xdg-cache','xdg-config']:(OUT/d).mkdir(exist_ok=True)
 os.chdir(OUT);alias=f'/proc/{os.getpid()}/cwd/t';assert Path(alias).resolve()==OUT/'t'
@@ -13,7 +31,7 @@ def storage():
  seen=set();total=0
  def walk_error(error):
   if not isinstance(error,FileNotFoundError):raise error
- for base in (TOOL,OUT,TOOL.parents[1]/'research-data/ai-sigma/107-cp-frame'):
+ for base in (TOOL,OUT.parent,TOOL.parents[1]/'research-data/ai-sigma/107-cp-frame'):
   for directory,subdirs,files in os.walk(base,onerror=walk_error):
    for name in files:
     p=Path(directory)/name
@@ -92,7 +110,7 @@ sourcefiles=sorted(p for d in [TOOL] for p in d.iterdir() if p.is_file() and p.s
 with (OUT/(name+'.log')).open('wb') as log:
  boundary.reserve_root();child=subprocess.Popen(cmd,cwd=TOOL,env=env,stdout=log,stderr=subprocess.STDOUT,start_new_session=True)
  childtick=table().get(child.pid,{}).get('start_ticks');boundary.bind_root(table()[child.pid]);from owned_ledger import Ledger
- ledger=Ledger(ledger_path,ack_path,table()[child.pid],boot,event);deadline=min(END,time.time()+(60 if PHASE=='A' else 180),time.time()+(180 if PHASE=='A' else 300)-prior_wall)
+ ledger=Ledger(ledger_path,ack_path,table()[child.pid],boot,event);deadline=min(END,time.time()+MAX_WALL,time.time()+TOTAL_WALL-prior_wall)
  (OUT/(name+'.started.json')).write_text(json.dumps({'subreaper_set_rc':set_subreaper_rc,'subreaper_get_rc':get_subreaper_rc,'subreaper_value':get_subreaper_value.value,'kernel_boundary':boundary.proof(),'runner_pid':os.getpid(),'runner_starttick':table()[os.getpid()]['start_ticks'],'child_pid':child.pid,'child_starttick':childtick,'PGID':child.pid,'startUTC':start,'git_commit':os.environ.get('SIGMA77_GIT_COMMIT'),'run_id':os.environ.get('SIGMA77_RUN_ID'),'command':cmd,'cwd':str(TOOL),'deadline':deadline,'affinity':[CPU],'guardRSS':RSS_GUARD,'contractRAM':CONTRACT_RAM,'guard_basis':'current_proc_rss_runner_plus_owned_children','runner_initial_ru_maxrss':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss*1024,'guardStorage':STORAGE_GUARD,'temp':alias,'temp_realpath':str(Path(alias).resolve())},indent=2)+'\n')
  event('runner_start',root_child_pid=child.pid,root_child_starttick=childtick,runner_pid=os.getpid(),subreaper=True)
  if name=='boundary-invalid-gate':
@@ -122,5 +140,5 @@ with (OUT/(name+'.log')).open('wb') as log:
   if not residual:break
   kill_owned(signal.SIGKILL);time.sleep(.01)
  remaining=group()
-r={'name':name,'cmd':cmd,'start':start,'end':utc(),'subreaper_set_rc':set_subreaper_rc,'subreaper_get_rc':get_subreaper_rc,'subreaper_value':get_subreaper_value.value,'kernel_boundary':boundary.proof(),'runner_pid':os.getpid(),'runner_starttick':table()[os.getpid()]['start_ticks'],'child_pid':child.pid,'child_starttick':childtick,'exit':code,'stop_reason':reason,'sample_interval_ms':40,'peak_group_plus_runner_RSS':peak,'peak_allocated_bytes':sizepeak,'final_allocated_bytes':storage(),'tracked':list(tracked.values()),'remaining':remaining,'kernel_boundary':boundary.proof(),'kernel_identity_count':len(boundary.ids),'kernel_adoptions':boundary.adoptions,'ledger_registered_count':len(ledger.accepted),'ledger_rejected':ledger.rejected,'ledger_monitor_remaining_consistent':all((v['pid'],v['start_ticks']) in tracked for v in ledger.live(table())),'unknown_adopted':[v for v in table().values() if v['ppid']==os.getpid() and (v['pid'],v['start_ticks']) not in tracked],'privateTMP_alias':alias,'privateTMP_realpath':str(Path(alias).resolve()),'assigned_CPU':CPU,'process_deadline':'05:20:00Z','newjob_cutoff':'05:15:00Z','guardRSS':RSS_GUARD,'contractRAM':CONTRACT_RAM,'guard_basis':'current_proc_rss_runner_plus_owned_children','runner_ru_maxrss_bytes':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss*1024,'all_observed_TIDs_at_assigned_CPU':not any(z!=[CPU] for x in tracked.values() for z in x['affinities']),'instant_peak_not_guaranteed':True,'runner_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}
+r={'name':name,'cmd':cmd,'start':start,'end':utc(),'subreaper_set_rc':set_subreaper_rc,'subreaper_get_rc':get_subreaper_rc,'subreaper_value':get_subreaper_value.value,'kernel_boundary':boundary.proof(),'runner_pid':os.getpid(),'runner_starttick':table()[os.getpid()]['start_ticks'],'child_pid':child.pid,'child_starttick':childtick,'exit':code,'stop_reason':reason,'sample_interval_ms':40,'peak_group_plus_runner_RSS':peak,'peak_allocated_bytes':sizepeak,'final_allocated_bytes':storage(),'tracked':list(tracked.values()),'remaining':remaining,'kernel_boundary':boundary.proof(),'kernel_identity_count':len(boundary.ids),'kernel_adoptions':boundary.adoptions,'ledger_registered_count':len(ledger.accepted),'ledger_rejected':ledger.rejected,'ledger_monitor_remaining_consistent':all((v['pid'],v['start_ticks']) in tracked for v in ledger.live(table())),'unknown_adopted':[v for v in table().values() if v['ppid']==os.getpid() and (v['pid'],v['start_ticks']) not in tracked],'privateTMP_alias':alias,'privateTMP_realpath':str(Path(alias).resolve()),'assigned_CPU':CPU,'process_deadline':CONFIG['processing_deadline'],'newjob_cutoff':CONFIG['newjob_deadline'],'guardRSS':RSS_GUARD,'contractRAM':CONTRACT_RAM,'guard_basis':'current_proc_rss_runner_plus_owned_children','runner_ru_maxrss_bytes':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss*1024,'all_observed_TIDs_at_assigned_CPU':not any(z!=[CPU] for x in tracked.values() for z in x['affinities']),'instant_peak_not_guaranteed':True,'runner_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}
 (OUT/(name+'.process.json')).write_text(json.dumps(r,indent=2)+'\n');print(json.dumps({k:r[k] for k in ['name','exit','stop_reason','peak_group_plus_runner_RSS','peak_allocated_bytes','remaining']}));sys.exit(code if code>=0 else 128-code)
