@@ -31,6 +31,7 @@
     "train_validation_shared_row_occurrences": 0,
     "independent_state_holdout": false
   },
-  "full_state_definition": "position key + side + ply + ordered history_counts; not path identity",
-  "state_holdout_independence": false
+  "full_state_definition": "position key + side + ply + canonical sorted history counts; includes saved rule state, not path identity",
+  "state_holdout_independence": false,
+  "checker_wall_seconds": 0.22335903899511322
 }

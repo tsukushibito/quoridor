@@ -1,0 +1,291 @@
+{
+  "issue": "quoridor-4lc.176",
+  "UTC": "2026-10-03T09:57:50.709316+00:00",
+  "production_jobwall_seconds": 198.496598,
+  "Rpolicy": 1409,
+  "Rz": 1409,
+  "Rjoint": 1409,
+  "production_rows_per_second": 7.0983584313117545,
+  "production_games_per_second": 0.12090887320900079,
+  "all_owned_compute_jobwall_seconds": 235.726026,
+  "phase_jobwall_seconds": {
+    "arena": 16.666095,
+    "generate": 198.496598,
+    "repair": 14.422604999999999,
+    "learn": 3.724501,
+    "mock": 2.416227
+  },
+  "export_seconds": 0.6337808719873428,
+  "finite_overlap_checker_seconds": 0.22335903899511322,
+  "recorded_compute_plus_export_overlap_seconds": 236.58316591098244,
+  "opening_generation_seconds": null,
+  "unwrapped_GPU_NN0_debug_seconds": null,
+  "source_implementation_Git_Beads_reporting_archive_seconds": "not individual instrumented; leadtime separate, not silently zero",
+  "all_attempts": [
+    {
+      "run": "native176-arena-r2",
+      "phase": "arena",
+      "wall_seconds": 16.666095,
+      "exit": 0,
+      "stop_reason": null,
+      "peakaggregateRSS": 690819072,
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "node",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-native-teacher-pipeline/arena.cjs",
+        "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/176-native-teacher-pipeline/native176-arena-r2.json"
+      ]
+    },
+    {
+      "run": "native176-generate-b1-r1",
+      "phase": "generate",
+      "wall_seconds": 72.162764,
+      "exit": 0,
+      "stop_reason": null,
+      "peakaggregateRSS": 1371549696,
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "node",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-native-teacher-pipeline/generate.cjs",
+        "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/176-native-teacher-pipeline/native176-generate-b1-r1.json"
+      ]
+    },
+    {
+      "run": "native176-generate-b2-r1",
+      "phase": "generate",
+      "wall_seconds": 70.974192,
+      "exit": 0,
+      "stop_reason": null,
+      "peakaggregateRSS": 1371865088,
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "node",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-native-teacher-pipeline/generate.cjs",
+        "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/176-native-teacher-pipeline/native176-generate-b2-r1.json"
+      ]
+    },
+    {
+      "run": "native176-generate-b3-r2",
+      "phase": "generate",
+      "wall_seconds": 55.359642,
+      "exit": 0,
+      "stop_reason": null,
+      "peakaggregateRSS": 1369640960,
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "node",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-native-teacher-pipeline/generate.cjs",
+        "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/176-native-teacher-pipeline/native176-generate-b3-r2.json"
+      ]
+    },
+    {
+      "run": "native176-gpu-roots-r1",
+      "phase": "repair",
+      "wall_seconds": 4.09654,
+      "exit": 1,
+      "stop_reason": null,
+      "peakaggregateRSS": 315695104,
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "node",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-native-teacher-pipeline/gpu-parity.cjs",
+        "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/176-native-teacher-pipeline/native176-gpu-roots-r1.json"
+      ]
+    },
+    {
+      "run": "native176-gpu-roots-r2",
+      "phase": "repair",
+      "wall_seconds": 8.553122,
+      "exit": 0,
+      "stop_reason": null,
+      "peakaggregateRSS": 1709879296,
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "node",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-native-teacher-pipeline/gpu-parity.cjs",
+        "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/176-native-teacher-pipeline/native176-gpu-roots-r2.json"
+      ]
+    },
+    {
+      "run": "native176-learn-r1",
+      "phase": "learn",
+      "wall_seconds": 3.724501,
+      "exit": 0,
+      "stop_reason": null,
+      "peakaggregateRSS": 741400576,
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "node",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-native-teacher-pipeline/learn-control.cjs",
+        "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/176-native-teacher-pipeline/native176-learn-r1.json"
+      ]
+    },
+    {
+      "run": "native176-mock-r1",
+      "phase": "mock",
+      "wall_seconds": 0.322508,
+      "exit": 0,
+      "stop_reason": null,
+      "peakaggregateRSS": 163930112,
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "node",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-native-teacher-pipeline/mock.cjs"
+      ]
+    },
+    {
+      "run": "native176-parity-r1",
+      "phase": "repair",
+      "wall_seconds": 1.772943,
+      "exit": 0,
+      "stop_reason": null,
+      "peakaggregateRSS": 256868352,
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "node",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-native-teacher-pipeline/parity.cjs",
+        "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/176-native-teacher-pipeline/native176-parity-r1.json"
+      ]
+    },
+    {
+      "run": "native176-poolmock-r1",
+      "phase": "mock",
+      "wall_seconds": 2.093719,
+      "exit": 0,
+      "stop_reason": null,
+      "peakaggregateRSS": 554643456,
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "node",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-native-teacher-pipeline/generate.cjs",
+        "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/176-native-teacher-pipeline/native176-poolmock-r1.json"
+      ]
+    },
+    {
+      "run": "native176-arena-r1",
+      "phase": "admission",
+      "typed": {
+        "UTC": "2026-10-03T09:38:53.810523+00:00",
+        "error": "EXTERNAL_COMPUTE_ALLOCATION_UNKNOWN",
+        "child_started": false,
+        "owned_child_count": 0,
+        "runner_pid": 3384089,
+        "runner_starttick": 27326201,
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "NN": 0,
+      "spawn": 0,
+      "wall_seconds": null
+    },
+    {
+      "run": "native176-generate-b3-r1",
+      "phase": "admission",
+      "typed": {
+        "UTC": "2026-10-03T09:31:21.718248+00:00",
+        "error": "CONTROL_STALE",
+        "child_started": false,
+        "owned_child_count": 0,
+        "runner_pid": 3378294,
+        "runner_starttick": 27282066,
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "NN": 0,
+      "spawn": 0,
+      "wall_seconds": null
+    }
+  ],
+  "no_retry_completed_success": true,
+  "hand_NN": 85688,
+  "hand_NN_breakdown": {
+    "production": 81768,
+    "final_only_mechanism_parity": 256,
+    "student_arena": 3152,
+    "GPU_root_CPUplusGPU8": 512
+  },
+  "search_model_warm_startup_samples": 17,
+  "learner_ONNX_validation_forward_rows": 10,
+  "learner_ONNX_validation_API_starts": 6,
+  "production_terminal_noNN_simulations": 8408,
+  "production_discarded_NN": 0,
+  "production_CP_delivered": 1409,
+  "production_aggregate_searchwall_ms": 424884.7833505273,
+  "CPUORT_API_await_ms": 350341.4139137021,
+  "JSONpipe_await_ms": 402644.42566818,
+  "CPUORT_API_inside_pipe": true,
+  "independent_arena_intervals_overlap": "sum across3cores; not additive jobwall or kernelCPU",
+  "features_legal_historyreplay_separate_seconds": null,
+  "CP_delivery_and_write_separate_seconds": null,
+  "cleanup_separate_seconds": null,
+  "production_session_init_warm": {
+    "initialization_cold_ms": [
+      27.95671997591853,
+      25.23095899960026,
+      23.510911036282778,
+      32.34185097971931,
+      27.827262005303055,
+      23.465581994969398,
+      24.582370009738952,
+      26.508497016038746,
+      26.54018299654126
+    ],
+    "warm_API_ms": [
+      4.111831949558109,
+      4.281841975171119,
+      4.809291975107044,
+      4.240783047862351,
+      4.375511023681611,
+      4.257138003595173,
+      5.647737008985132,
+      4.521374008618295,
+      4.5793839963153005
+    ],
+    "warm_wall_ms": [
+      4.53955203294754,
+      4.837482988834381,
+      5.383652985095978,
+      4.782052993774414,
+      4.908559024333954,
+      4.94751501083374,
+      6.405155003070831,
+      5.078269004821777,
+      5.320581018924713
+    ]
+  },
+  "GPU_root_counts": {
+    "B1": 97,
+    "B2": 81,
+    "samples_with_startup": 259,
+    "mean_queue_ms": 4.1297223298706145,
+    "cold": {
+      "import": 0.82943542097928,
+      "CPUORT_session": 0.03260274202330038,
+      "graph_weights": 0.05062972102314234,
+      "CUDA_upload_context": 0.14647208800306544
+    },
+    "VRAM_peak_reserved": 35651584
+  },
+  "newGPU_generation_games": 0,
+  "scientific_qualification": "teacher/outcome + small model connection only; no NI/no strength improvement",
+  "missing_timing_is_unknown": true,
+  "scientific_first_game_startUTC": "2026-10-03T09:23:09.982Z"
+}

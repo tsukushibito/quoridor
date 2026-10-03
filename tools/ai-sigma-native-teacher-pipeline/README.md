@@ -1,0 +1,9 @@
+# Private native teacher pipeline / issue176
+
+Frozen CPU source and conditions are in preregister.json, bindings and each run.inputs.json/Git. Existing original165/173/model/environment are read only. No downloads or cargo builds.
+
+Do not rerun prepare.cjs in this frozen scope: it creates fresh entropy/input manifests. Do not replay successful production games or final checkpoint training. Future execution needs its own authorized run/config and deadline, keeping prior evidence.
+
+The launcher is runner.py --config CONFIG COMMAND. Before launch, capture goal/self through bash scripts/dev/beads.sh into admission-quoridor-4lc.json and admission-quoridor-4lc.176.json. Actual commands, runtime versions, resource admission, process identities and end state are in the handoff archive. generate.cjs uses K64 final-only and frozen 24 slots; export.cjs validates RuleA/game-lineage labels; learn-control.cjs/learn.py perform one fixed CPU learner; arena.cjs performs the four new diagnostic K32 games.
+
+GPU source is a private branch only. The first CPU root raw was lost in a checker failure. Remaining paired roots pass limited numeric/trace checks, but all4 correspondence is incomplete. gpu-root-parity-attempt1.json and continuation preserve every slot; no successful search rerun. Original conditional efficiency slots stay NOT_STARTED. A later authorized future phase joined the frozen CPU teacher firstrow to saved GPU finalroot without rescuing the missing original run; it ran 3 CPU+3 GPU games once. Both modes produced188 qualified rows, CPU21.251523s versusGPU54.711141s, so CPU remains default. eff-generate/eff-worker executed only that registered future phase. Original177 cap512 stays unchanged; private cap advertised in info. Never use the optional branch as CPU dataset replacement or strength evidence.

@@ -1,0 +1,1782 @@
+{
+  "issue": "quoridor-4lc.176",
+  "UTC": "2026-10-03T10:23:48.747561+00:00",
+  "archive": "native176-handoff-r1.tar.gz",
+  "archive_bytes": 4752939,
+  "archive_SHA256": "e559c173a8e8001d2c65521c4d0c2bd026c1a9046f5812043d168cae59cfd90b",
+  "members": {
+    "tools/ai-sigma-native-teacher-pipeline/common.cjs": {
+      "bytes": 1710,
+      "sha256": "f11d23c1f4c65b866b2a5a14264a0425de8fca4ec9828e43ede425ce14147221"
+    },
+    "tools/ai-sigma-native-teacher-pipeline/arena.cjs": {
+      "bytes": 5237,
+      "sha256": "9098ea12ac99c964b513bb19974a1797215d84172cfe589caac5fe5359f1d3d6"
+    },
+    "tools/ai-sigma-native-teacher-pipeline/gpu-transport.cjs": {
+      "bytes": 5287,
+      "sha256": "39bfd1b56aa89ddcb331b33f4df9c84048bb00a9942679aebe834051270e2560"
+    },
+    "tools/ai-sigma-native-teacher-pipeline/eff-export.cjs": {
+      "bytes": 6509,
+      "sha256": "c461a208c4b3eca2e7ae25219c1fbff6781635910b11e648c5990512cf6f1c35"
+    },
+    "tools/ai-sigma-native-teacher-pipeline/generate.cjs": {
+      "bytes": 2447,
+      "sha256": "f0b6ebc1393dfcd36a99f5698fe771be0702fb283dbf36d71b8c2db0a829b037"
+    },
+    "tools/ai-sigma-native-teacher-pipeline/schema.cjs": {
+      "bytes": 1188,
+      "sha256": "d3f26b75b59bad2ac5813225a24f4ef96085ce5edec55ec241ddda0dec544a50"
+    },
+    "tools/ai-sigma-native-teacher-pipeline/gpu-engine.cjs": {
+      "bytes": 7380,
+      "sha256": "42a05bd6a6108ef33b2647b5cf3b8e811c14bc287ea3d2accdd08dbd4a7d26f8"
+    },
+    "tools/ai-sigma-native-teacher-pipeline/gpu-provider.py": {
+      "bytes": 5563,
+      "sha256": "600fb5403f7051b19be36a258a1b4145f571e789b2f5a826c332dab384e01fae"
+    },
+    "tools/ai-sigma-native-teacher-pipeline/worker.cjs": {
+      "bytes": 5901,
+      "sha256": "1814daccbc6b23f1b575915d54e9bf452a80c499b8ed4e1ba8c32b565c88cbd7"
+    },
+    "tools/ai-sigma-native-teacher-pipeline/gpu-controller.cjs": {
+      "bytes": 1655,
+      "sha256": "44cb44d42ac44e155fa6de48b76ea994888ec5bf83b3dcd08f772febccab8b16"
+    },
+    "tools/ai-sigma-native-teacher-pipeline/learn.py": {
+      "bytes": 6386,
+      "sha256": "512a13858b7caea8ec0f53f07cc455fb3d6946b8125b30b734fb4e40a0c047ec"
+    },
+    "tools/ai-sigma-native-teacher-pipeline/eff-worker.cjs": {
+      "bytes": 6248,
+      "sha256": "38afd2dfac640d35de9fae6da45eef1af14710b940793acf10964614b19fcbd6"
+    },
+    "tools/ai-sigma-native-teacher-pipeline/save-tree.py": {
+      "bytes": 1653,
+      "sha256": "9ed7654ddb8efc3265d04e86b3b11a547f5377bfd3b95eb8663b27aaecd6a38a"
+    },
+    "tools/ai-sigma-native-teacher-pipeline/runner.py": {
+      "bytes": 15160,
+      "sha256": "961b991a39f654ef0f94632b0081c8f491e89688ae305d3520570b5114f09787"
+    },
+    "tools/ai-sigma-native-teacher-pipeline/controller.cjs": {
+      "bytes": 1651,
+      "sha256": "9127022a6df9f521f802332b9db70bbd543da96a783add1213c8059d5141cccf"
+    },
+    "tools/ai-sigma-native-teacher-pipeline/gpu-adapter.py": {
+      "bytes": 4256,
+      "sha256": "1d3a232faebb0bdb05ec3d10bf30857c9f59374d4fbd5217f18b7f345f2f0478"
+    },
+    "tools/ai-sigma-native-teacher-pipeline/parity.cjs": {
+      "bytes": 1620,
+      "sha256": "98b60c84ddfbbf14d72cd89b2bff2572709dffc5221819d5329c86066909020d"
+    },
+    "tools/ai-sigma-native-teacher-pipeline/mock.cjs": {
+      "bytes": 2285,
+      "sha256": "6b2f269a1ec0e4d4413eaa969d24bbc8f8913704bcac66263df9616c36259015"
+    },
+    "tools/ai-sigma-native-teacher-pipeline/admission.py": {
+      "bytes": 6381,
+      "sha256": "bd167c6c2736c0ab7e380d8ff675354779311fc797eb3169ba505ff10f0b2d95"
+    },
+    "tools/ai-sigma-native-teacher-pipeline/export.cjs": {
+      "bytes": 6629,
+      "sha256": "75b8be86e8ef7539b6a0d966be760ca572419e40ddc0bb1a26af341fc3ec3108"
+    },
+    "tools/ai-sigma-native-teacher-pipeline/pause-monitor.cjs": {
+      "bytes": 6690,
+      "sha256": "265f7c8aa34f9a7f7f06f2ac2441546bd3ab7c36519196a70704351c61bddbea"
+    },
+    "tools/ai-sigma-native-teacher-pipeline/learn-control.cjs": {
+      "bytes": 994,
+      "sha256": "fbb45c971c52ff006b35dab3760412eeea98f3fcc675e6099ba49697619e70a2"
+    },
+    "tools/ai-sigma-native-teacher-pipeline/eff-generate.cjs": {
+      "bytes": 2920,
+      "sha256": "eef94a6e8e9612ff5800a3bf3f47b93e473b3d44a547237b7b33ac5d5490bb20"
+    },
+    "tools/ai-sigma-native-teacher-pipeline/compact-beads.py": {
+      "bytes": 134,
+      "sha256": "63dd13b825818e5d1a2a34c466383cc81ad667fac8c0fe77f065cbebf91be8d3"
+    },
+    "tools/ai-sigma-native-teacher-pipeline/gpu-broker.cjs": {
+      "bytes": 1863,
+      "sha256": "edf8a01c9ee157b25ac5a276522e77f63c67b117485f7bdc0aa9d8ca5f430357"
+    },
+    "tools/ai-sigma-native-teacher-pipeline/engine.cjs": {
+      "bytes": 7212,
+      "sha256": "dd44b0138d35af09a86939c167ed8384f7dfe902051b05279127062fcf1d25f5"
+    },
+    "tools/ai-sigma-native-teacher-pipeline/prepare.cjs": {
+      "bytes": 4708,
+      "sha256": "47f364517fe7c49e9204e1022c0bfc4f484a062eff80b59330e5961ce6690641"
+    },
+    "tools/ai-sigma-native-teacher-pipeline/gpu-parity.cjs": {
+      "bytes": 5892,
+      "sha256": "ca8f8c4a1471fb8a079016659abb9ac648a2ee4c444658a5ce710ab135a3024c"
+    },
+    "tools/ai-sigma-native-teacher-pipeline/README.md": {
+      "bytes": 1825,
+      "sha256": "071bcae10ec272502f8e0d8118c08826711b83e3578a209ab1fa185bfbd1e732"
+    },
+    "tools/ai-sigma-native-teacher-pipeline/arena-prepare.cjs": {
+      "bytes": 2708,
+      "sha256": "c574d36c52bc3219a13fff6022a9a631cfde223dcb3769471b441398ddfacca4"
+    },
+    "tools/ai-sigma-native-teacher-pipeline/gpu-mock.cjs": {
+      "bytes": 1423,
+      "sha256": "de2e80c95a1c52cf9a8ded00bf7bde7c7c3b16b04db62cc0e55e16b7fa62f50a"
+    },
+    "tools/ai-sigma-native-teacher-pipeline/gpu-schema.py": {
+      "bytes": 363,
+      "sha256": "1f70bc781724fd9bb97a888fb32d86e6905c7ef07df37b3340d2d21cd9c4ce81"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/native176-learn-r1.json": {
+      "bytes": 510,
+      "sha256": "e47b10a417fc0b32275b449127b7d7f8a468edf64935c222cc303390eb471834"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/student.onnx": {
+      "bytes": 102023,
+      "sha256": "54ed35d8b175d342d8fe50339fd918dd138c1bfb6c376c90bd50daf791b6ca7a"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/efficiency-preregister.json": {
+      "bytes": 6073,
+      "sha256": "5e1ee3d80879d96397626cd23875d8997ca475fb393a7a858b0d2053e52471cc"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/all-game-status.json": {
+      "bytes": 167573,
+      "sha256": "f54b8d78b8a4882525a19899909ddbeab9f275a2c1ea301ddf8272132f53aae1"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/gpu-NN0-result.json": {
+      "bytes": 566,
+      "sha256": "50e6f1c91bfa0b2190ec05948bcbb9abd8825906de67b7440ed91e03e4bffe9b"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/gpu-firstroot-final-join.json": {
+      "bytes": 1409,
+      "sha256": "8421a8c035096f1ac0d0f2c83f7d8957f41f30bdae7ce964de3da25706c4527a"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/native176-gpu-roots-r1.json": {
+      "bytes": 598,
+      "sha256": "0a63d7dc2dd8ee63de44176b05088c82f15568d2442db1bfc13407b24a4b7999"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/prelaunch-erratum.json": {
+      "bytes": 403,
+      "sha256": "7c6ee062538b38d98bdaa7890b11eb2a586ebbb354427bcda9284bd78e2091bd"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/teacher-rows.jsonl.gz": {
+      "bytes": 728258,
+      "sha256": "a8e79d3bdcc7f5d9d7c7105a476f37e3168fc44eec47ea221a57dddd6ae2e94a"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/arena-results.json": {
+      "bytes": 20720,
+      "sha256": "54b22c0f876ab333ef581b65fa08a5699c55b8fb3c5c499c971d6b06be39c36d"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/gpu-newphase-science-stop.json": {
+      "bytes": 26375,
+      "sha256": "84d28ab4f75074ff01236ace5799bc69ce007adac9dfc5f819abeb33c719934e"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/gpu-roots-continuation-preregister.json": {
+      "bytes": 668,
+      "sha256": "cccbfc1d4a01cfdbc1649d5427a49c336d1579ff6423304149390c5f75822fdd"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/gpu-roots-preregister.json": {
+      "bytes": 2071,
+      "sha256": "2845babafc44069408652b4453e80db382f3b4f4f8512b60781c0939dbc5d52f"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/production-runs.json": {
+      "bytes": 93,
+      "sha256": "961207659f581259bf87d2fa5cd64460e87138efa50b249c2f954bc8ac4103a2"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/efficiency-game-status.json": {
+      "bytes": 2012,
+      "sha256": "3ab0affe5cf54fc6aac14c35bfd5e22cc555218bf0a5a9c7427da94a35cdc7a0"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/native176-mock-r1.json": {
+      "bytes": 474,
+      "sha256": "dfd266ef5f3bd4ce643713a28a7d1dd09af5077e61d3d4da0f6e59a516b36ccd"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/learner-reload.json": {
+      "bytes": 279,
+      "sha256": "e3bc9481fdb2eafaa3351fd2394d3b91d47e32f46830e86603d0b8fe1cb4ee08"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/dataset-summary.json": {
+      "bytes": 2364,
+      "sha256": "b0c53e6ac070d84823739621bfb4dc2de40ebf3cf9abe3749bcc5f8c2937837e"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/mock-result.json": {
+      "bytes": 994,
+      "sha256": "ba277e39012d9eca086423caaddfbe95c00fcd6a80dd6885a201df17664ec03a"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/binding.json": {
+      "bytes": 2518,
+      "sha256": "f23f43437eb012f74c370d5056e1e106c121f061419f4170363ec9fa6e555824"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/gpu-source-binding.json": {
+      "bytes": 727,
+      "sha256": "d123f72afb4c359030b4880b830c2b045e97effccdeec741a37eb99378a842f1"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/efficiency-finalroot-correspondence.json": {
+      "bytes": 317,
+      "sha256": "7db514ed56ad703be2f06d792957f580cd2dbd321ee0f2577903c3f67e4f3efa"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/cost-ledger-newphase.json": {
+      "bytes": 3016,
+      "sha256": "2481040c475854417c278a31e87f9d823cd699f999e4517fd128831b6d89ecda"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/efficiency-results.json": {
+      "bytes": 30612,
+      "sha256": "c13448bf344c9f5987920c913472761afeeb4295267e7143ceef36ff0b1e39c2"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/gpu-root-checker-NN0.json": {
+      "bytes": 99,
+      "sha256": "8434e78f5c106a01a9a67c4c91648168b96386bdb12f80e807d4c2411f0e98fb"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/efficiency-benchmark-rows.jsonl.gz": {
+      "bytes": 191213,
+      "sha256": "36a634ce1f557e232147bc67eb04d20c27f63f25a393a450577773fd8f0ee93b"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/native176-arena-r2.json": {
+      "bytes": 510,
+      "sha256": "c1d383e6479df8679adaf4d1f40b83cfa3dfd703bd1f50e89ba0d8fa323ec2c5"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/native176-parity-r1.json": {
+      "bytes": 481,
+      "sha256": "789883c73e766fdd3ba1ba56c3e652dddbbd78ba6ae01aa27657353c9f643e36"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/mock-close.json": {
+      "bytes": 151,
+      "sha256": "3494bfe4b6a328bdd2ab0978b8a60d5ad08c995698c4ce69588e18f963b77928"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/learner-export.json": {
+      "bytes": 846,
+      "sha256": "c147af0487966b2a3a71d069816269c96c947e2d69ebd5b214a8eebca3325dd3"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/gpu-root-parity-attempt1.json": {
+      "bytes": 2037,
+      "sha256": "498f579c63226cca92b322bcef20286ff3222d4e90db5f2d25aba6d4ae1cad8e"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/gpu-root-parity.json": {
+      "bytes": 13175773,
+      "sha256": "12e47b7937a038cdffc96dd371ce0f6230cd1e004a94d0fec9e0b173256d2453"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/gpu-thin-newphase-start.json": {
+      "bytes": 423,
+      "sha256": "ba25c1933eb50f018cbf65855e184da04d2428a21c4cbec7aab270bc031a63e8"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/efficiency-openings.json": {
+      "bytes": 4119,
+      "sha256": "5903efe93e2294c6d0850b203a8cdc0715f658b74fdacbb3846014d57372f439"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/gpu-NN0-failure.json": {
+      "bytes": 399,
+      "sha256": "e8c41eeab4604f488efaf8ef044b55c1ffe05f0de317f32c0bc12eb30e000093"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/preregister.json": {
+      "bytes": 5096,
+      "sha256": "2b99aa81c6f9490e636e990e707d98432369077a0382dea8ee66c96496a2ee6c"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/learner-training.json": {
+      "bytes": 1952,
+      "sha256": "044c25ba7447fee07b40cd03854df886b19658cba9ab79777449d4d0cd16a15b"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/native176-arena-r1.json": {
+      "bytes": 510,
+      "sha256": "77ff0b68cd7c3cfbe2bfe63eda1e99ef95316124425351db005765d87bcec632"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/native176-eff-cuda-r1.json": {
+      "bytes": 652,
+      "sha256": "a49f772678b1dfe214cac90e99d5e088517808967b05cfebf68fcf2cbd8adabf"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/native176-eff-cpuort-r1.json": {
+      "bytes": 658,
+      "sha256": "f4379846c2ecaffbff0a58073d6fdca1d7b96219a959c6bd808fa57a3baf20ef"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/student-checkpoint.pt": {
+      "bytes": 104281,
+      "sha256": "c1abf195c272eb9a143ad0f88d209b7741c8c9bca0c2318de37af759ea9c2351"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/native176-poolmock-r1.json": {
+      "bytes": 497,
+      "sha256": "bf64bf823aea7742a6e17b61c9df9f592909b812c78bd3254475b5ad2d3004f2"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/native176-gpu-roots-r2.json": {
+      "bytes": 649,
+      "sha256": "2dab405fc27690e0c64d9e61eb8d238073dfea8e56261c99cbe9f9ed656f4c95"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/science-stop.json": {
+      "bytes": 74915,
+      "sha256": "794403d5d75527b3c421f362c3e24e4b9e4c3aab6607d000fae639f96d1942ce"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/fixedK-parity.json": {
+      "bytes": 120633,
+      "sha256": "090fe1bd7a4068198099cff438924be2dbe08be4408b80192f1518a6329b146d"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/cost-ledger.json": {
+      "bytes": 9055,
+      "sha256": "7bfc5a1420473355a592ff75f4b2552395cb69c26011d3323779536c858c58b5"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/openings.json": {
+      "bytes": 38403,
+      "sha256": "460a4fcd51b8c7fe099e5d43f96d77f5ef6742b23ec227c135bd0a3bddd65a42"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/efficiency-newphase-status.json": {
+      "bytes": 42271,
+      "sha256": "9134fccddfe53aecc1a3a675b46015733af5bd319b09d480973fee28b5d8da1e"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/arena-preregister.json": {
+      "bytes": 28551,
+      "sha256": "3b174be6e6ea9414c0018bbddadfb53f7cb7f608eac49bbd79c0001181c4af86"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/native176-generate-b2-r1.json": {
+      "bytes": 509,
+      "sha256": "822a3fe11211f50ac59a77f5b402b5d3d408bb0b1c2c06b2c9cd38f3d11c5024"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/native176-generate-b3-r2.json": {
+      "bytes": 509,
+      "sha256": "d5253dacf6927388223b6b90380320725e426b5d511591bfb06843373ed1a813"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/native176-generate-b1-r1.json": {
+      "bytes": 509,
+      "sha256": "f1569583eca3c4b42dc4d9d473fe7fcb414e127e42b6042018ef6f07e49476c0"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/learner-preregister.json": {
+      "bytes": 3984,
+      "sha256": "018fe03bcfd69b572120d6b3ed4832544ad751a4f70b68fe7f143eb3f9d4e2c8"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/overlap-detail.json": {
+      "bytes": 1261,
+      "sha256": "e32e45b210d0cd5630e9c0efdc24928ebcf083a246cbee9d22687b0a6126e6ea"
+    },
+    "research-data/ai-sigma/176-native-teacher-pipeline/native176-generate-b3-r1.json": {
+      "bytes": 509,
+      "sha256": "114f4cac449c0d7500dd1586db24faaf47bd89a247b4d0f02deaeb128d743979"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/stageC-and-GPU-report.md": {
+      "bytes": 600,
+      "sha256": "3bb057de79cf20dbde3a320f7008784f651600b71291d6bb5c29d348e7ceef5d"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/first-generation-receipt.json": {
+      "bytes": 157,
+      "sha256": "ec807bcb17a547399778de367e09e56832d33b260d3b1c4e0d960703883e4748"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/admission-self.json": {
+      "bytes": 209,
+      "sha256": "9676e2bda9992d71492edcca7fa6d7820405381dd14110f82c8184e341b2aa0c"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/claim-received.json": {
+      "bytes": 89,
+      "sha256": "3be850c5aebfb436d623bd49e87f1e5451e614496e151882f95a8293a187dec6"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/pre-handoff-self.json": {
+      "bytes": 209,
+      "sha256": "3da1c99eefdf86468acb34fbc2eafbf0d9eb5fa8c700bcc9c8ed084a0afb0968"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/ready-received.json": {
+      "bytes": 17324,
+      "sha256": "ac97020a08a97af89141f328c2c2d76cf495035c50db69bd08642fc81bc1a0d1"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/goal-received.json": {
+      "bytes": 237468,
+      "sha256": "db9883d4a045443a6786bc8df187b4156c57526017474ef67a2fa61743acc22a"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/admission-quoridor-4lc.176.json": {
+      "bytes": 209,
+      "sha256": "3da1c99eefdf86468acb34fbc2eafbf0d9eb5fa8c700bcc9c8ed084a0afb0968"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/connection-report.md": {
+      "bytes": 782,
+      "sha256": "3b703489ca1a749b1d287deedfd39dfcd9f9bef3e216b0162f28c74793a84d3d"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/source-git.txt": {
+      "bytes": 41,
+      "sha256": "b4b41b7cce3577f4bbd60a460fbc9485543aa40db3c6387b124041094f27ae37"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/efficiency-source-git.txt": {
+      "bytes": 41,
+      "sha256": "36efa72814b6b987f599d7345079470821abcc4f237b03b0ccd1411e3fc878e5"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/arena-source-git.txt": {
+      "bytes": 41,
+      "sha256": "febd3e399f0d4922e8b9d66abb6dc149a3e582bdedb0e0132bf36ca51a94c652"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/learner-source-git.txt": {
+      "bytes": 41,
+      "sha256": "d63f47d986674c984ef455aa96b26c9a62c759284762008e73d1120672f0a043"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/connection-receipt.json": {
+      "bytes": 157,
+      "sha256": "dc45b3268c7354ea5e8864140fbeb1d270e5262408e0dac06ccaf40e57a56e2b"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/GPU-newphase-receipt.json": {
+      "bytes": 157,
+      "sha256": "18a226f4c41654b3a27f7528ed1c3bbda9778bedae63772b36b96f65f6e7a4cf"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/critic179-window-report.md": {
+      "bytes": 1005,
+      "sha256": "6941dc5e25ac0c064806dc07ba9ff24c1a32c7d95772f1f8c5cfbafadff5d2aa"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/critic179-window-receipt.json": {
+      "bytes": 157,
+      "sha256": "5b2e797f1116a3f24cc304f68f8b9c8997bd9421845f978978307bb964a82fb6"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/gpu-source-git.txt": {
+      "bytes": 41,
+      "sha256": "8701a6780b78e3bfc43351e14bebece0420e8afeed01f51f32dac0b0ff9f9421"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/stageC-and-GPU-receipt.json": {
+      "bytes": 157,
+      "sha256": "dc45b3268c7354ea5e8864140fbeb1d270e5262408e0dac06ccaf40e57a56e2b"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/self-received.json": {
+      "bytes": 245064,
+      "sha256": "83dc47583f5b530065c8bc8b91249278ba58517a1af446dab4086c0bc8d8425b"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/first-generation-report.md": {
+      "bytes": 756,
+      "sha256": "9fba33b8e1840750322b0db2d400d2c6d35d94043438bd37569e57ebe04c1fb3"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/GPU-newphase-report.md": {
+      "bytes": 797,
+      "sha256": "7bd35837af45c89f3799433df270872966abf857406ce17c2fe4b2fdd6941801"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/GPU-finite-end-report.md": {
+      "bytes": 883,
+      "sha256": "cc16e4af4433c0b6addea731960fc390e00685daeb8a473214e5f79059a36db6"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/gpu-continuation-git.txt": {
+      "bytes": 41,
+      "sha256": "8c53b8afd7d0fc0267286af63376bd1988fa67ee21133dcd85e53949c4ffe619"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/start-receipt.json": {
+      "bytes": 157,
+      "sha256": "535c9c5d0211d1eb0ac29acc4c2991022c0ca46c97088d0d81a84e074f176079"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/gpu-physical-current.json": {
+      "bytes": 173,
+      "sha256": "2cbe62b432548d742e9be7ff7117ba68a64780676876488ac61162c28899c0d6"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/admission-goal.json": {
+      "bytes": 205,
+      "sha256": "93fdb9bb02bd286caf34611f1d19bc405c144db1d8dc0674b3a89abcd46ed0ac"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/GPU-finite-end-receipt.json": {
+      "bytes": 157,
+      "sha256": "39c85d43114bc460dccfd269e9980f91009cebd6f004ef623aabc3a0f31fcba2"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/admission-quoridor-4lc.json": {
+      "bytes": 205,
+      "sha256": "ee9f29cc5b36b5bb6bc920e8f051ac43e5c3777067243db575a397313e665aa6"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/start-report.md": {
+      "bytes": 544,
+      "sha256": "090df199314b73544adbd94fd8c04c6c1091f121efcdd47ee4513b386fa362e6"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/gpu-NN0/gpu-stop.json": {
+      "bytes": 260,
+      "sha256": "e175be26da14d2fbd486e872f440fab4ea090480d3b640c71ffd002960bf0e2c"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/gpu-NN0/gpu-batches.jsonl": {
+      "bytes": 719,
+      "sha256": "6ae85f19d4331281295204642127593a005ec35a09b354e89e3717b426ec1ad3"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-gpu-roots-r1.admission.json": {
+      "bytes": 1327,
+      "sha256": "00b1a115eeedfb4bf191a71720fc0f66a614c9c0175dabd27355c002b7b18153"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-mock-r1.admission.json": {
+      "bytes": 1236,
+      "sha256": "8e4c15a4c723313091097d441fc969201a30270b59ea27fbb049645a593200a6"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1.process.json": {
+      "bytes": 79795,
+      "sha256": "c5784471f8179e90ce0e163af6f7facdaa299a4a3fdceaf0a6578b219ea078fb"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2.process.json": {
+      "bytes": 68305,
+      "sha256": "1b3170aab7195a9f5935073b2fff665b9388381007e2a3638b693880553224ee"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-mock-r1.owned-ledger.jsonl": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r1.monitor.jsonl": {
+      "bytes": 361,
+      "sha256": "28d6cb7d3e608fae9117187a1a9a26204b612b09918a6fba9867d040d3b71ef8"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2.owned-ack.json": {
+      "bytes": 78145,
+      "sha256": "192263f6b28334edf8aabab3ce80fb74a908a2c29805b6df39bcf694f70f2fcd"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1.process.json": {
+      "bytes": 82660,
+      "sha256": "a1ffb957d3e7519525af99b6e18fe928923a5c2d115c2a8c75d0f87f5a72d85d"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1.process.json": {
+      "bytes": 27762,
+      "sha256": "1bcae4236fb9863abb4e1b0463bff3b072a6a95da6bd855feff4985326561b3e"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2.inputs.json": {
+      "bytes": 2912,
+      "sha256": "c70fb00b4ddff31d470e5fa432b9f5731dd4385f20f17ecbbc61caaf1761aab0"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-arena-r1.inputs.json": {
+      "bytes": 3248,
+      "sha256": "c2633d4aabbb6443e05a0bf0ff707d9f73f59fcd265f1e481511d95e3488497c"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-gpu-roots-r1.inputs.json": {
+      "bytes": 5114,
+      "sha256": "c80adde291c014a644874f446b7caa1b76f6bb2c676e97f95615ece348df1cdc"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1.log": {
+      "bytes": 45,
+      "sha256": "bdf736ae4661e0d416f111a775b40f1f106e1e4b9562ef64cc9eb664b8ab6521"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1.process.json": {
+      "bytes": 59991,
+      "sha256": "f03760ac961a13d3312968225948f74539303cc1909bea866ae69a5a6d4db971"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-learn-r1.owned-ledger.jsonl": {
+      "bytes": 662,
+      "sha256": "748c6a7cbef2f3e3f1bf31b24669a1f9556ea55604074b8ab1f7199cc10d8e7a"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1.monitor.jsonl": {
+      "bytes": 18175,
+      "sha256": "33d3051131bf92ba1dd26d6ae43f6ca1ab6afd1e11cb1210931b750fc678ad18"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-mock-r1.process.json": {
+      "bytes": 2961,
+      "sha256": "440531c86ccc7cdfc2ed1ed2fcfabbb23e0fe5a6bee8dfb72a340a241b448ec5"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1.admission.json": {
+      "bytes": 1236,
+      "sha256": "0f866e3c817d2e59141f90aa827b5a19df514e0fdee010e30f0aa0ee50efe790"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1.threads.json": {
+      "bytes": 190,
+      "sha256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-mock-r1.threads.json": {
+      "bytes": 190,
+      "sha256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-gpu-roots-r1.owned-ledger.jsonl": {
+      "bytes": 663,
+      "sha256": "8ac7fbfc654498aa71016989f76d7c92a725733fb2209861760bbf951f5b510a"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1.log": {
+      "bytes": 45,
+      "sha256": "18493e4f0e924542b0548f92954bd979019e8b961f60e8e1d4d5a00dfda29a75"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1.owned-ack.json": {
+      "bytes": 8778,
+      "sha256": "1f5fd3c3c086b1b56202c520200e06aa7e390ee3aff7387cd20a9e2245c14199"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1.monitor.jsonl": {
+      "bytes": 560222,
+      "sha256": "e257b25e68e77c3d2998a3e5bf3e2d8a25abf01e827de5b298038c40157b584e"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1.started.json": {
+      "bytes": 1767,
+      "sha256": "66d8386ad0cc5117974b99af9e21fde53824e56e59ec4c3d173d5f5d3c4bc3f7"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1.started.json": {
+      "bytes": 1770,
+      "sha256": "d0d250493348a31f2b761ae0bf65e9251a860f722f0704970bc0c50814e42229"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-learn-r1.admission.json": {
+      "bytes": 1084,
+      "sha256": "639440d05c954d9e5ca6da075030190a62b2fa7aefafe14f57fab95d45807df1"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1.admission.json": {
+      "bytes": 1083,
+      "sha256": "29e707f3008cff194c3297ad61304d4af720c6a7c8104bd4492d328e8526d91e"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-gpu-roots-r2.process.json": {
+      "bytes": 11974,
+      "sha256": "5984c3d1fa625cddc88764fc06a7e389aeed603456edd9c94a9114fad275ec8e"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1.threads.json": {
+      "bytes": 190,
+      "sha256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-arena-r2.threads.json": {
+      "bytes": 190,
+      "sha256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-arena-r2.owned-ack.json": {
+      "bytes": 21455,
+      "sha256": "4753377ead08a65767f865612d4a424a749a14a5a02abb2a73ade960a48501d4"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1.owned-ack.json": {
+      "bytes": 68474,
+      "sha256": "35beff561c9d5e7268ca267c597154589f223719d9207ac4826982c60accef89"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-parity-r1.monitor.jsonl": {
+      "bytes": 14451,
+      "sha256": "3e6caa8d6217a74f13dbe825d9c7cde68ee3b9d8c516f7ea8c82acc96af29bc2"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-parity-r1.admission.json": {
+      "bytes": 1237,
+      "sha256": "ad4c51ef1517ee0bd3d49a3c3d922e9b56032148e247b6e7848d2c6f6b735f80"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1.admission.json": {
+      "bytes": 1147,
+      "sha256": "d7f2a7217878e83350ac2ab9053791bc7c100500b4cf3d263cd8d15bbf78f5bd"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-learn-r1.process.json": {
+      "bytes": 7883,
+      "sha256": "545c167143c1f50b62a07aadb516c9dece825bed911591d6715456538dd6bb07"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-gpu-roots-r2.admission.json": {
+      "bytes": 1327,
+      "sha256": "94c4f206404effb8cabe793c66b678de2d9dcaa6b707379bd30c86aaef9ce3f6"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1.owned-ack.json": {
+      "bytes": 95334,
+      "sha256": "1028e7a7268e162b50b62c7aea8c66005f368f095f6f063fd582461c9093d4fe"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1.log": {
+      "bytes": 45,
+      "sha256": "ac76f2106028394cffbebd146933e876c747ec35badfb704d3acac95d5fce790"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1.owned-ledger.jsonl": {
+      "bytes": 9345,
+      "sha256": "29136b889954c4b961063f4171627d2550521cc497afec39b1c01e3ed48d73d4"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1.owned-ledger.jsonl": {
+      "bytes": 2665,
+      "sha256": "7b25eaa492a6e7d676dc9f35318220240ba4eb52455c060352aae2015e781cff"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-gpu-roots-r1.log": {
+      "bytes": 1194,
+      "sha256": "db011429e3bed12532cb39a158c6034ab2a5fcf5a3de55b903297fef13b538d4"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-gpu-roots-r2.threads.json": {
+      "bytes": 190,
+      "sha256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-gpu-roots-r2.monitor.jsonl": {
+      "bytes": 67657,
+      "sha256": "185cea534fc6685d95331cf7225eed734d8f29847857a00b15b236216499bb85"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-mock-r1.owned-ack.json": {
+      "bytes": 1041,
+      "sha256": "55837a6b08534f5030a040ea87ee41cd22c73613e148f0985db7e0af2fb89ae0"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-parity-r1.started.json": {
+      "bytes": 1763,
+      "sha256": "19036c41940c5111652eff143783429f055bcb5b851599357fac6d6335a62a3c"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-gpu-roots-r1.started.json": {
+      "bytes": 1770,
+      "sha256": "064698f5fd67d83e7bd17c82d4c5df81636ce9b884cc4ad7bd2cdf1a22e4ecba"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-gpu-roots-r2.owned-ledger.jsonl": {
+      "bytes": 664,
+      "sha256": "875c5a60118ea2d79ef380f6901bf8d2719223c8785125726dec83b4dcf67451"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1.log": {
+      "bytes": 41,
+      "sha256": "9524213e3334c66e7d88e9c72a4168cf0698988f8bfc5296be56002a7f9dab6c"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-learn-r1.log": {
+      "bytes": 773,
+      "sha256": "618eca98f37aac23fb700f5ed66d1dfc3f0f8060a36a7bf96ca739ad39b3d945"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1.started.json": {
+      "bytes": 1773,
+      "sha256": "d6372113bf19f8c4225b66558ea521ce55d099df98ac06842874ab333f6a4a79"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-arena-r2.inputs.json": {
+      "bytes": 3248,
+      "sha256": "c2633d4aabbb6443e05a0bf0ff707d9f73f59fcd265f1e481511d95e3488497c"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-learn-r1.started.json": {
+      "bytes": 1769,
+      "sha256": "4ecc1bd091f5facca31a8dbfeaffe9cb4ed26e0bb6a7285d4e55d5fb03f711c5"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2.threads.json": {
+      "bytes": 190,
+      "sha256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1.owned-ledger.jsonl": {
+      "bytes": 663,
+      "sha256": "ef2e3f5e433a9ccbe77ab022b9ac37cd6aaeade2c0f2b8283b921c7cc2555b35"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1.log": {
+      "bytes": 45,
+      "sha256": "18493e4f0e924542b0548f92954bd979019e8b961f60e8e1d4d5a00dfda29a75"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-learn-r1.owned-ack.json": {
+      "bytes": 6781,
+      "sha256": "1646605e2b4c5ec1fab8369f8766553198d231c20b4101f952658bc3084f6000"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-mock-r1.monitor.jsonl": {
+      "bytes": 3183,
+      "sha256": "0c623a52ea5adac4bc0886916e764aa746103f84903812c303f2080578c1616d"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1.inputs.json": {
+      "bytes": 2412,
+      "sha256": "50c7090b74dc144a68ab1889517f3792f2ed89be5a558a6abf59b8a289b12432"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1.monitor.jsonl": {
+      "bytes": 571205,
+      "sha256": "c8f3ae5a2181dd4d9610fa3a7fd300f52405b4f3d7a91d5bc2aa74d4225757c1"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-mock-r1.inputs.json": {
+      "bytes": 2374,
+      "sha256": "c6bb64864551af183a4a82125d32be98efd7af3e8478d1c6afe315b0c018bd3e"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r1.admission-failure.json": {
+      "bytes": 235,
+      "sha256": "8b50966e21334b566cb118d8e7a0ee74211ffb503c3c9d1abeb404a47809ed9d"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1.monitor.jsonl": {
+      "bytes": 172260,
+      "sha256": "a8cbe55e07fe2960a447b8933ea2fd8cdd6cb1514ac37a9bc7372bd8ee6f5a1e"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-gpu-roots-r2.inputs.json": {
+      "bytes": 5114,
+      "sha256": "069f3d347623a31ef550c7a528d699c3bf9f4f3621c29bca61136677c41be44b"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-arena-r2.log": {
+      "bytes": 193,
+      "sha256": "dd32f9cd52cd776ff182cd79872a63af94288411dec50010808a9a891ee10b67"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-parity-r1.owned-ledger.jsonl": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-gpu-roots-r2.log": {
+      "bytes": 1154,
+      "sha256": "74b4be009a3f5566d154ee731b54be27f7618e20c5b328129564827be2d0a68d"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-parity-r1.process.json": {
+      "bytes": 3466,
+      "sha256": "3fb154294f6185a57f117f7c8cc8198483b3fa9b8b823bb31212694a2d30dbcb"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2.log": {
+      "bytes": 45,
+      "sha256": "caf098de3ef4e5c02986b5d4106c2e955aa06f74c20b05c94b4c00940a075eb2"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-arena-r2.admission.json": {
+      "bytes": 1084,
+      "sha256": "686651b24a4bd3438ff99f0df6f345bfc5eff517b42ebe61bfd4095fd828bef7"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1.owned-ledger.jsonl": {
+      "bytes": 6670,
+      "sha256": "81c315ab09663520d9e9e010f872cc7b5d7d833a57611b7c13b93b6cd2cb8155"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-arena-r2.owned-ledger.jsonl": {
+      "bytes": 1998,
+      "sha256": "1e4237eb4147a4faef4a9eff321c7c0bb5fb60745fe5c22b6d150ffb808ddc75"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1.threads.json": {
+      "bytes": 190,
+      "sha256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-arena-r2.process.json": {
+      "bytes": 20352,
+      "sha256": "a2f3bb2d232cb56ddf0b1feb61dfd7444554787ec730cfe572432a54005a3f02"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-arena-r1.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-learn-r1.threads.json": {
+      "bytes": 190,
+      "sha256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1.threads.json": {
+      "bytes": 190,
+      "sha256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1.inputs.json": {
+      "bytes": 5283,
+      "sha256": "6185bd960aa0fb643c54a1ed6272bc66d0ef4056d4372346d9506f3ef090f554"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-parity-r1.owned-ack.json": {
+      "bytes": 1442,
+      "sha256": "d977598397854e9166aa4f580638fd1ddf35aa52667a8978823c222424abb019"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-gpu-roots-r2.owned-ack.json": {
+      "bytes": 11183,
+      "sha256": "a350b3c4d09bdb14f9627e523be3e680fb330b379e55631ad7099fcc7a2fa7d1"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2.admission.json": {
+      "bytes": 1084,
+      "sha256": "b52c344fe681e9112346408ed2155d3ebe0076cbb0eba5fc4d42a461bb626f75"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-learn-r1.inputs.json": {
+      "bytes": 3248,
+      "sha256": "8c6ca27217d4929eb305b8f67e8ce3f8cd0f24a3111bbb84737949ef9f3bacd2"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1.admission.json": {
+      "bytes": 1084,
+      "sha256": "3cdccaba670b84fe6e75df8468355ce90ea5f071c0052d52c077eb59a9ae8d3f"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1.monitor.jsonl": {
+      "bytes": 430188,
+      "sha256": "4e333791da471a1282e5022f10c53fdf3e504202e0ab5f21607583716bac3687"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1.owned-ack.json": {
+      "bytes": 92208,
+      "sha256": "85cb3e9037196b45d33f9bbb752b0c44f5dbe5ab91e254d83128bcb3cf23ae73"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-mock-r1.started.json": {
+      "bytes": 1599,
+      "sha256": "784365bd9559464f1cd46aba68b1efd96b5cb3749368539e2cc9c7b4dd3cfa3d"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-gpu-roots-r2.started.json": {
+      "bytes": 1769,
+      "sha256": "44aae5d88bb13d41e257e21119047820892bd772e1e56cd99fa8132c57ce4233"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-learn-r1.monitor.jsonl": {
+      "bytes": 31068,
+      "sha256": "8c11ebbde391f4e916ff7a5fb863896ba6984f6c5fd3faea3187fb5465f6304f"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-gpu-roots-r1.monitor.jsonl": {
+      "bytes": 33802,
+      "sha256": "311e6b8f3a7839d5149daabcd1c62b8f3ab14cdf0734ba8e710d5f1a627ac64a"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1.inputs.json": {
+      "bytes": 5114,
+      "sha256": "edd745d61424496b630c37e071acab16f4b01e2f330707e49a7fc68bfc6c77af"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-arena-r2.started.json": {
+      "bytes": 1762,
+      "sha256": "5c1ab4dc3e5440df10e598c7079c5f6dfc54e31a93d66a28ca16525af646edd3"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r1.inputs.json": {
+      "bytes": 2577,
+      "sha256": "ec4cb82e98d060b8ee0fcaa2fb1eb6a438c26ee3b8922a013abf5abd1858e9e7"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r1.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1.started.json": {
+      "bytes": 1771,
+      "sha256": "d9df218aceb5143ac27b93dccd82084e0f3bff6167d612134708af9e7ba7ca3c"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2.monitor.jsonl": {
+      "bytes": 439664,
+      "sha256": "fd4915945e0ae99893fb89c6336419b4dd63431b933e5e0d7cbc1ffd0711eec7"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-arena-r1.admission-failure.json": {
+      "bytes": 257,
+      "sha256": "67595503e4cad35c7d30100a70915f7868abe8f83ba79632f716914531bb46c0"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1.started.json": {
+      "bytes": 1769,
+      "sha256": "95f5a95c48ef31669237bf5479820fb33f2f0ad76b52b9aaa1968f67db33de02"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-gpu-roots-r1.threads.json": {
+      "bytes": 190,
+      "sha256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1.threads.json": {
+      "bytes": 190,
+      "sha256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1.admission.json": {
+      "bytes": 1327,
+      "sha256": "8cafeb4cce028703d19d558d482dedd6c656074b1a77e704d331cb8821a9bf47"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1.owned-ack.json": {
+      "bytes": 29990,
+      "sha256": "1135843dbd1bff508b5691ecd93014fc2318e6f55c4c8aaff575e3744e0918bd"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1.owned-ledger.jsonl": {
+      "bytes": 9345,
+      "sha256": "1b3a87c1b2877c6dce567bfc6b891a80c63a958b8833f2c253a33b84be8508cb"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-parity-r1.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-gpu-roots-r1.owned-ack.json": {
+      "bytes": 7174,
+      "sha256": "3da3592a7ca413273141617f00a387f26eed7338a605be5cf216eb343c6e3362"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-arena-r2.monitor.jsonl": {
+      "bytes": 132486,
+      "sha256": "38b233619cefbe6d1dacd0afe31191a1394fd6b016d833ddde051a4376349b3d"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2.owned-ledger.jsonl": {
+      "bytes": 7337,
+      "sha256": "7dd04f342b7d252cea6e7144ba5536c6f662fbc374230a36a46259e9389441b3"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2.started.json": {
+      "bytes": 1770,
+      "sha256": "cbc05e2eabf1d8ce155b0851993f7887cedad53a0872053b25d79cecb8f2ae57"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-gpu-roots-r1.process.json": {
+      "bytes": 8269,
+      "sha256": "612d8323bf8f4afc779f2e7fe6ce6e4f795b45cb885d273a6f087cb447253a43"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-mock-r1.log": {
+      "bytes": 41,
+      "sha256": "f9cd6d592be754f7bea1661a2a3aa5de648ef589c3e0732264d9ede9c8878433"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1.process.json": {
+      "bytes": 9731,
+      "sha256": "aa455f449d908c867c0b21b038d625d010b415025dd296884bde703db7328cdc"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-parity-r1.threads.json": {
+      "bytes": 190,
+      "sha256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1.inputs.json": {
+      "bytes": 2412,
+      "sha256": "50c7090b74dc144a68ab1889517f3792f2ed89be5a558a6abf59b8a289b12432"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-parity-r1.inputs.json": {
+      "bytes": 2412,
+      "sha256": "50c7090b74dc144a68ab1889517f3792f2ed89be5a558a6abf59b8a289b12432"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-arena-r1.monitor.jsonl": {
+      "bytes": 361,
+      "sha256": "a948d6f3f677eb2fcb861e6cb70389360a11ada08043ee9912185dd3f8539aa3"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1.inputs.json": {
+      "bytes": 2577,
+      "sha256": "ec4cb82e98d060b8ee0fcaa2fb1eb6a438c26ee3b8922a013abf5abd1858e9e7"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1/init-all.json": {
+      "bytes": 8547,
+      "sha256": "642ec0ce32f69f36cf1d1df77a6a4aa4adcd392ac7029d313835b31218c5df9b"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1/pause-monitor-stop.json": {
+      "bytes": 22889,
+      "sha256": "7661c9119d0ceef77dda380dbbed38d0d9dc3d8c2649e4f267d138cb44e95f02"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1/result.json": {
+      "bytes": 84426,
+      "sha256": "974f7429faa7f1173d69a648aa8c80072f03e65483baa74abdde7920fb17ad9d"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1/registered-games.json": {
+      "bytes": 10532,
+      "sha256": "c5b8bf570062e1de653b995b97f463128e466e54c3662f4b7c2bd6c23a073bb2"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1/beads-read-quoridor-4lc.176.json": {
+      "bytes": 209,
+      "sha256": "9676e2bda9992d71492edcca7fa6d7820405381dd14110f82c8184e341b2aa0c"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1/beads-read-quoridor-4lc.json": {
+      "bytes": 205,
+      "sha256": "93fdb9bb02bd286caf34611f1d19bc405c144db1d8dc0674b3a89abcd46ed0ac"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1/pause-monitor.json": {
+      "bytes": 22802,
+      "sha256": "bf93f487dd5c3a4065580c9682470c0a591136daa57838f7a9918e6a9e9ef6d7"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1/core4/init.json": {
+      "bytes": 2441,
+      "sha256": "8e5e554daccb43d8d04ed2978e55b11a68756af797cf380d21d46f129619cb6e"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1/core4/game-starts.jsonl": {
+      "bytes": 507,
+      "sha256": "65fa327e97368887cb28d717dad309b242b9037a9fff5fbc9c1767d2ef6ec6ed"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1/core4/games.jsonl": {
+      "bytes": 9512,
+      "sha256": "ae4a2104a0a5a4f21dc56b174d90597fdbdc6e791e9f077b88a6b0bdb99195e7"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1/core4/raw-rows.jsonl": {
+      "bytes": 1997696,
+      "sha256": "4abc5598bae41a703d35929a89484d1e00241847e575aa035c674ad949e4f3d1"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1/core4/close.json": {
+      "bytes": 301,
+      "sha256": "c9cd2223e379f0a08a4b9915363822bab05062a4477576bfdd30652522baf667"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1/core4/rows.jsonl": {
+      "bytes": 1996466,
+      "sha256": "f9bcc4f8844b1cbddeecfd02ccd3b8646573e202f84e3b23606adf46178d0718"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1/core2/init.json": {
+      "bytes": 2440,
+      "sha256": "547ab99f04eca85d733eeb9a64b947645d8fc904d9ea9a77ac4700fd56dc68c3"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1/core2/game-starts.jsonl": {
+      "bytes": 507,
+      "sha256": "e7103ea860668ee64b35d414a0ff0ad9cfd99e5a7379be9a23e4d5187e25b5ff"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1/core2/games.jsonl": {
+      "bytes": 8601,
+      "sha256": "bd60faa1f6b73b83c04aa08b8778ebef8fa9318898c291ad679006a64a3513e1"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1/core2/raw-rows.jsonl": {
+      "bytes": 1717821,
+      "sha256": "878263a083fd6a2104e862976d61a6c31c9e81261c60658825fc57e19746e10b"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1/core2/close.json": {
+      "bytes": 301,
+      "sha256": "338f97169d5d9e2607e10b5346a64291d9e8092c1c54a54806d8acc5412f3e6e"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1/core2/rows.jsonl": {
+      "bytes": 1716689,
+      "sha256": "5fbe10a9becac3408fb33759ed8fb48797ac0d4cbc7144e4dcdc5c03557c55ce"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1/core6/init.json": {
+      "bytes": 2442,
+      "sha256": "66e10eb4ee14a7f05a0c74e48e3559c0301f014bfe7e7a25daf446acc180d0ad"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1/core6/game-starts.jsonl": {
+      "bytes": 338,
+      "sha256": "5f94ce4dfecba9b23c59ec542ceb10d2ffdc641ba20839884e6b5f86d850b9e2"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1/core6/games.jsonl": {
+      "bytes": 5931,
+      "sha256": "bb4faa1fd6cf545c363810451809f6af0fcf40ec10dac874d6fce424507e43ad"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1/core6/raw-rows.jsonl": {
+      "bytes": 1248808,
+      "sha256": "1488001ac4f027027e129e008628e1a6af1fbb2a07a0db38a4d1eaaddc2a42e9"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1/core6/close.json": {
+      "bytes": 299,
+      "sha256": "88ceb1b5af8a80f87ae5ca0045dc589e928c23583a827c6fec2c24fa75233b86"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b1-r1/core6/rows.jsonl": {
+      "bytes": 1248006,
+      "sha256": "d5dfe1870afadb3dae04dacc4dcf85c346f67b18d6df5305aa3fbc62d3c4af45"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-gpu-roots-r2/cpu-init.json": {
+      "bytes": 2442,
+      "sha256": "7470e2a10ed056857fe9781396837a8071b4324c8b1e5461f2ea5378db9d3b91"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-gpu-roots-r2/gpu-init.json": {
+      "bytes": 893,
+      "sha256": "f3e8888ecf3b735c58ac4fe22b3f793b6ec6864e0c5cd9269c1fe8ac5fae0e36"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-gpu-roots-r2/gpu-engine-init.json": {
+      "bytes": 9203,
+      "sha256": "1da35ee1245bbfb28a3e7b7c5f0c2a8dbbb9be87a796025f69ddec3d1b769b99"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-gpu-roots-r2/pause-monitor-stop.json": {
+      "bytes": 1903,
+      "sha256": "e714273f5e76314384a84e9fbb5037fe484d2eac5ffa389f55096ae64be9046f"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-gpu-roots-r2/gpu-stop.json": {
+      "bytes": 1422,
+      "sha256": "db2127a2fef9f0670d8e69ab51be8120b5fc2a8cc064e047a18ccbc5e244208e"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-gpu-roots-r2/gpu-batches.jsonl": {
+      "bytes": 84039,
+      "sha256": "af1476c5365ff900234bbfe577c776721a1d755dad98f2e32f712ba34b084523"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-gpu-roots-r2/beads-read-quoridor-4lc.176.json": {
+      "bytes": 209,
+      "sha256": "9676e2bda9992d71492edcca7fa6d7820405381dd14110f82c8184e341b2aa0c"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-gpu-roots-r2/beads-read-quoridor-4lc.json": {
+      "bytes": 205,
+      "sha256": "93fdb9bb02bd286caf34611f1d19bc405c144db1d8dc0674b3a89abcd46ed0ac"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-gpu-roots-r2/pause-monitor.json": {
+      "bytes": 1816,
+      "sha256": "b57d682290779b8a8627f4e730ed4b84829eb436e110b58d4a9fb367e27178ea"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-gpu-roots-r1/cpu-init.json": {
+      "bytes": 2442,
+      "sha256": "319a30da91bf5ffdfd6aa44c95ae9f4a74a18be1a56ee339138c31360276e27e"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-gpu-roots-r1/pause-monitor-stop.json": {
+      "bytes": 1903,
+      "sha256": "3eb3e770ee5836232ddfeb3324f2cc31d639134b3b743d2ff003ac1a9b6be0dc"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-gpu-roots-r1/beads-read-quoridor-4lc.176.json": {
+      "bytes": 209,
+      "sha256": "9676e2bda9992d71492edcca7fa6d7820405381dd14110f82c8184e341b2aa0c"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-gpu-roots-r1/beads-read-quoridor-4lc.json": {
+      "bytes": 205,
+      "sha256": "93fdb9bb02bd286caf34611f1d19bc405c144db1d8dc0674b3a89abcd46ed0ac"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-gpu-roots-r1/pause-monitor.json": {
+      "bytes": 1816,
+      "sha256": "821f0c05b1074f640893b635dcadb53c0247b29eca145c3c2dbf6704b05a1feb"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1/init-all.json": {
+      "bytes": 8548,
+      "sha256": "b3bb45ae8a2f1c70e1a5586e63f19f87d328aaea429bc74db9eb9b5dbe212fed"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1/pause-monitor-stop.json": {
+      "bytes": 22889,
+      "sha256": "d9cd23a162ccaecafee156b96aad75128ed2f74422b868bf057a7bad8c9e89dc"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1/result.json": {
+      "bytes": 74962,
+      "sha256": "0fb0e5c4ce396cbca04e5a0fe9d47c76a6d2854ec13a4ca1368cd8108f42cd0b"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1/registered-games.json": {
+      "bytes": 12421,
+      "sha256": "ce2e8286b340e284bd7448a08e5a8fd933035c2616c39ebb4191468c4fe09d20"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1/beads-read-quoridor-4lc.176.json": {
+      "bytes": 209,
+      "sha256": "9676e2bda9992d71492edcca7fa6d7820405381dd14110f82c8184e341b2aa0c"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1/beads-read-quoridor-4lc.json": {
+      "bytes": 205,
+      "sha256": "93fdb9bb02bd286caf34611f1d19bc405c144db1d8dc0674b3a89abcd46ed0ac"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1/pause-monitor.json": {
+      "bytes": 22802,
+      "sha256": "058aa7e9247bbd7f5b81cd439e3bc2547bb60aa4e45d5d72ab31d8887bf2bdf1"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1/core4/init.json": {
+      "bytes": 2442,
+      "sha256": "007a6a5a3be619a1d2d0ea393e830260f2506b2211323bd5b2e4b3bd2bbe1e89"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1/core4/game-starts.jsonl": {
+      "bytes": 340,
+      "sha256": "120fedf47679d3f56665d98a46a8288b6527b6bfe9920d84bafbe9f6be7925ca"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1/core4/games.jsonl": {
+      "bytes": 5006,
+      "sha256": "35e82b02dde11345065d7a122d4b5395dabec5dc1226006b83c0979930ef87fc"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1/core4/raw-rows.jsonl": {
+      "bytes": 902780,
+      "sha256": "61242adf108a22cbdffdfa8f465f037628bcaa782f4d9b7270b2717fdabd1818"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1/core4/close.json": {
+      "bytes": 299,
+      "sha256": "bfba38a24a4e3a3980e863aa761562e5d90ac68392e6494386abf48a1d6cafff"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1/core4/rows.jsonl": {
+      "bytes": 902192,
+      "sha256": "467c665fa8c63c81fd0112b7c571d18a7dda40e4368649b6d3d8549ec7c5cd9c"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1/core2/init.json": {
+      "bytes": 2441,
+      "sha256": "6b99ba68a2b22d407e14303df2fba6eef50ef6d18e0cbdaff33ef3088d64e156"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1/core2/game-starts.jsonl": {
+      "bytes": 510,
+      "sha256": "a796156c2a8d25df49c8c4136aa42756f65f54b632ac617758819b6ec4cff961"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1/core2/games.jsonl": {
+      "bytes": 8749,
+      "sha256": "13fe6a6ede93d9031b6e444ddd2266f8cd1c9d26acc9e164b8652cc0cc104d89"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1/core2/raw-rows.jsonl": {
+      "bytes": 1781022,
+      "sha256": "22be7cad17785b3a93acdf2e1f644319db5271212ee634ffe44fcb318dbbbfd8"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1/core2/close.json": {
+      "bytes": 301,
+      "sha256": "acd64dc1fa81694711f96869a2bd54f8ae8d89aa7517f0d453348eae19e45665"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1/core2/rows.jsonl": {
+      "bytes": 1779878,
+      "sha256": "7b47525a796a334f08ffae60bd8be19e618dbb7a54272e3c7b9d50906a028a53"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1/core6/init.json": {
+      "bytes": 2441,
+      "sha256": "609d8fde3df7e0c9988128ce014ec604e7794e8653f6a65791c416e6ce65a6c1"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1/core6/game-starts.jsonl": {
+      "bytes": 509,
+      "sha256": "07246e8102c2da6698f964646f400b17a6ad045b9ed528cf6d007d733dd66ec0"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1/core6/games.jsonl": {
+      "bytes": 7930,
+      "sha256": "1ecf3583a2e96a776807d86fa013cf92dc6cea6266ab8aa7a55168317a750b6c"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1/core6/raw-rows.jsonl": {
+      "bytes": 1435978,
+      "sha256": "a4ebd309b366256ca81787064f733ec713fb8751f8b97da3023a4fb959921376"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1/core6/close.json": {
+      "bytes": 299,
+      "sha256": "fa9037c28fcd8976fd267d1b2ef43fbf5c02a28b38bf6e46697fc3b11e606ce1"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b2-r1/core6/rows.jsonl": {
+      "bytes": 1435124,
+      "sha256": "6fd08693426c72a253daaa9978ee331efcc274c0dd621a1d9f0d44119ce83dd4"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/t/mat-debug-3374284.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/t/mat-debug-3392191.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/t/mat-debug-3380342.log": {
+      "bytes": 151,
+      "sha256": "124398aeac5d77d94ca3c67052885d37fcb300333c279802c76ebc61285d6f4b"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/t/mat-debug-3408272.log": {
+      "bytes": 151,
+      "sha256": "16d89ab33bb4f759fc757fe3b632ff35d2bca8ccf1d7e8be6217acbc06b65a3f"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/t/mat-debug-3371672.log": {
+      "bytes": 151,
+      "sha256": "2ee2fb60613823bb7991950c10479337dbdb77fa1010440dc0c1ca3e44cb0528"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/t/mat-debug-3374283.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/t/mat-debug-3410755.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/t/.ses": {
+      "bytes": 51,
+      "sha256": "64b0bb938d70ae4e1341d31e0a0bbbfacb3efcf50da1c85f752b54717b908e18"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/t/mat-debug-3385973.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/t/mat-debug-3371671.log": {
+      "bytes": 151,
+      "sha256": "b8502819864b258177bad22604595af523842382d5150d0d05fa4f133f972fb8"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/t/mat-debug-3380343.log": {
+      "bytes": 151,
+      "sha256": "9034bf999bbabae901ac9025b90bb90b94cdb3883d306dbc75eaa668d90c2873"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/t/mat-debug-3383371.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/t/mat-debug-3385971.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/t/mat-debug-3408273.log": {
+      "bytes": 151,
+      "sha256": "42c837866fe4819ddb9f260aff8d067dfc855931f56044fcdeb784fcae06a74b"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/t/mat-debug-3380341.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/t/mat-debug-3370318.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/t/mat-debug-3408271.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/t/mat-debug-3393951.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/t/mat-debug-3393960.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/t/mat-debug-3371670.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/t/mat-debug-3374282.log": {
+      "bytes": 150,
+      "sha256": "a5ddb1f5f3c970e2700fdb9ef2a98cf3b35d1da9b716ffb9963746bd8b508eff"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-arena-r2/pause-monitor-stop.json": {
+      "bytes": 5099,
+      "sha256": "906b2dada0decb6f4c86f2620725b6df098a3080c94ec4e34620b15f5b9480f8"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-arena-r2/init.json": {
+      "bytes": 6730,
+      "sha256": "aba69a334209daff0145f248ef056b18fce699a0d0f957c4074ad7ed05c4ca7c"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-arena-r2/game-starts.jsonl": {
+      "bytes": 988,
+      "sha256": "691fb5b8be589882567f0b73dfa033cdd0e216dc9f40f1dfcb4b764494c7dce8"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-arena-r2/journal.jsonl": {
+      "bytes": 106608,
+      "sha256": "bae8f3fa53954dbc174545c20999fc7c7af972fc3e5025e364ae31a11e69f53c"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-arena-r2/beads-read-quoridor-4lc.176.json": {
+      "bytes": 209,
+      "sha256": "9676e2bda9992d71492edcca7fa6d7820405381dd14110f82c8184e341b2aa0c"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-arena-r2/beads-read-quoridor-4lc.json": {
+      "bytes": 205,
+      "sha256": "93fdb9bb02bd286caf34611f1d19bc405c144db1d8dc0674b3a89abcd46ed0ac"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-arena-r2/games.jsonl": {
+      "bytes": 7307,
+      "sha256": "e0e5717239e86b3ef0d87c2b874f461828c4bbf6cb298aaa55baed88ce65f22f"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-arena-r2/pause-monitor.json": {
+      "bytes": 5012,
+      "sha256": "4e83a8f75e06d7af24c0cff52e48ec41d577e34267445ba40e54ac3efbec3389"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-parity-r1/close.json": {
+      "bytes": 216,
+      "sha256": "f666e1c950db611488836dc0c451b6d0998e305c35133cbafbe223ee2269f7b8"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-learn-r1/pause-monitor-stop.json": {
+      "bytes": 1895,
+      "sha256": "9daa422aeab8212d293854503842a6b1bb5d5e5f121865678823e0f1b9a3d0e7"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-learn-r1/control-end.json": {
+      "bytes": 99,
+      "sha256": "6686478370ac13e2d50238b2b6c54ebbd046f8dc07fddde2362a305b065095c6"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-learn-r1/beads-read-quoridor-4lc.176.json": {
+      "bytes": 209,
+      "sha256": "9676e2bda9992d71492edcca7fa6d7820405381dd14110f82c8184e341b2aa0c"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-learn-r1/beads-read-quoridor-4lc.json": {
+      "bytes": 205,
+      "sha256": "93fdb9bb02bd286caf34611f1d19bc405c144db1d8dc0674b3a89abcd46ed0ac"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-learn-r1/pause-monitor.json": {
+      "bytes": 1808,
+      "sha256": "f4a2399cb0d95feaaed552739c0be45991b4f536e255a85d6549a438409ada67"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2/init-all.json": {
+      "bytes": 8550,
+      "sha256": "bf34b273acff29bfab6cd24fbcf8f470c76d198a0c6175dc89552927f5c77e01"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2/pause-monitor-stop.json": {
+      "bytes": 18047,
+      "sha256": "701feed3cbd53bf89d33a284a4b33801cc741316ac2908dd2d17723c109d485e"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2/result.json": {
+      "bytes": 79056,
+      "sha256": "4e4c94207830e9df794cbf26412f28b3edeec917a480b31ac2f07c23ca1e6bb7"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2/registered-games.json": {
+      "bytes": 11946,
+      "sha256": "ab71e18460003f7d5a47e975ecd3ec1ea3cffeac1371719e0b8de7fca52db0cb"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2/beads-read-quoridor-4lc.176.json": {
+      "bytes": 209,
+      "sha256": "9676e2bda9992d71492edcca7fa6d7820405381dd14110f82c8184e341b2aa0c"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2/beads-read-quoridor-4lc.json": {
+      "bytes": 205,
+      "sha256": "93fdb9bb02bd286caf34611f1d19bc405c144db1d8dc0674b3a89abcd46ed0ac"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2/pause-monitor.json": {
+      "bytes": 17960,
+      "sha256": "ade63715f99bb95876822372085a785a578464c39f4d7d0f78e5bcf7a1b8245c"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2/core4/init.json": {
+      "bytes": 2442,
+      "sha256": "c993e5e31b01542c6246aa531e0ff7d750c2254273893d1e1ac14fff937eae52"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2/core4/game-starts.jsonl": {
+      "bytes": 510,
+      "sha256": "7acaad668e8f9f5df454b75918b3e58bba6efca86892fce63d2b94c58ad93744"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2/core4/games.jsonl": {
+      "bytes": 7524,
+      "sha256": "d226e7ae388dccce9878c9509924f866394e87eee70ad1c74881312c4374a94c"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2/core4/raw-rows.jsonl": {
+      "bytes": 1358543,
+      "sha256": "bd8b22a17fbb9062355506a2cdfb684798f6ce4c960591a2e3e453a7dd6ad81a"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2/core4/close.json": {
+      "bytes": 299,
+      "sha256": "b66d6ff2303390d203b16f7a15a512e80cfa585e87caf9eb89eb177696968c20"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2/core4/rows.jsonl": {
+      "bytes": 1357750,
+      "sha256": "8d84cd0e39659752da3edc1cc7aa45107e401767888bab03158336176d4f4ad7"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2/core2/init.json": {
+      "bytes": 2442,
+      "sha256": "02ac2c8f5853e843ac912504a6d447ce2016f4a109b9d27c65fb6385ce84b5ee"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2/core2/game-starts.jsonl": {
+      "bytes": 340,
+      "sha256": "ed2e38cb15d7798ef5c5fb11f20fa527cfbdae8c506c8578d0f2d5830fd3f63b"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2/core2/games.jsonl": {
+      "bytes": 6521,
+      "sha256": "6fdbfadaed6532a2f564f6ea44531c0e78513ccacef1c68560ca56a5934d1fe2"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2/core2/raw-rows.jsonl": {
+      "bytes": 1343825,
+      "sha256": "8e79d6cd679fbf87753b6244604307819e98fc9057de157f4a2b0ec8aca45b70"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2/core2/close.json": {
+      "bytes": 299,
+      "sha256": "ce28a9468894179c465ec25a2b8f29a55c5b6751e7f0e15b5b9cc77ba9a242dd"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2/core2/rows.jsonl": {
+      "bytes": 1342988,
+      "sha256": "ae197f90c22531c7702c8a41a0fa849742964a60252177d7e83558f49fcfdd57"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2/core6/init.json": {
+      "bytes": 2442,
+      "sha256": "4d4d74ec207cba666e227b8a89730932de46ef09e9d72a28b6a573fe4d58e523"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2/core6/game-starts.jsonl": {
+      "bytes": 510,
+      "sha256": "518d23ba18ed3d81d0a2daae580218891af855a2e25424237a0524fda1151246"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2/core6/games.jsonl": {
+      "bytes": 8732,
+      "sha256": "08b32041826d98fd795bbde69e7e1a91684066770a29e4883b633ae6028b374b"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2/core6/raw-rows.jsonl": {
+      "bytes": 1751281,
+      "sha256": "48a7e81cb5cfe0fef54e72b111cfbf684021df5b9cb64323dd7618a758ad2e2b"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2/core6/close.json": {
+      "bytes": 301,
+      "sha256": "ed74169f812e593d720c9ff623370cf958238ff2f4868b2f41201f5a30ec8af8"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-generate-b3-r2/core6/rows.jsonl": {
+      "bytes": 1750159,
+      "sha256": "f66f1dc50b66c5a2caacae31a60ef85ff81f325d4bea5c2a0dd0d51ed9e368d5"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1/init-all.json": {
+      "bytes": 453,
+      "sha256": "e06bf20fe43ee7c7a49b0ce7b7bcc93bdcf1ac16a358897e745e36dcde55411f"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1/pause-monitor-stop.json": {
+      "bytes": 1901,
+      "sha256": "5eaf9865867596fad7b54810aa776d7c5b2139d2c41ffd5026246a2eeb5da05d"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1/result.json": {
+      "bytes": 13935,
+      "sha256": "3a47b5b3b8e5a813cc4c69eb9c5039c06f5fd73268368a905848e780d157d8df"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1/registered-games.json": {
+      "bytes": 10532,
+      "sha256": "c5b8bf570062e1de653b995b97f463128e466e54c3662f4b7c2bd6c23a073bb2"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1/beads-read-quoridor-4lc.176.json": {
+      "bytes": 209,
+      "sha256": "9676e2bda9992d71492edcca7fa6d7820405381dd14110f82c8184e341b2aa0c"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1/beads-read-quoridor-4lc.json": {
+      "bytes": 205,
+      "sha256": "429dcc439f78241394849daa337800c06413b18d332896b9d36fc8fa58b2dbe2"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1/pause-monitor.json": {
+      "bytes": 1814,
+      "sha256": "d3d45792d30edbb813221a9f4279827786c9b039d89b45011aaf9fdab0b9c918"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1/core4/init.json": {
+      "bytes": 129,
+      "sha256": "3b00980422fb813fb7a543509e9c8220b379859848fb63f9e8f7590ff6b3375a"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1/core4/game-starts.jsonl": {
+      "bytes": 507,
+      "sha256": "d8931b0338797eec0214d556924f670fd7b18726e3af60bfcb7a1c9f2099f36a"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1/core4/games.jsonl": {
+      "bytes": 2310,
+      "sha256": "5b4b314c10c70b9da4eb0ec7762a5e7b46921e2d55bd5881cb1053ba25928721"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1/core4/raw-rows.jsonl": {
+      "bytes": 48132,
+      "sha256": "f95f6aa2d377218587fc48bb864bf187fb84a4e27c8df3e819bb876846a5569a"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1/core4/close.json": {
+      "bytes": 222,
+      "sha256": "4b7d7b4d2b0592bd3c36560495d7ec3dc04064c057d484fb75c57d45928cc1de"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1/core4/rows.jsonl": {
+      "bytes": 48132,
+      "sha256": "f95f6aa2d377218587fc48bb864bf187fb84a4e27c8df3e819bb876846a5569a"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1/core2/init.json": {
+      "bytes": 129,
+      "sha256": "f64819da87e127ce62d0ed2167b2b6f72f832a911022bb9d55e2c8ea9f24f4b7"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1/core2/game-starts.jsonl": {
+      "bytes": 507,
+      "sha256": "b7b4a9ea97e1c86c2dc644711ea616c47d2a6600316da53153699e6b58bb5ee0"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1/core2/games.jsonl": {
+      "bytes": 2003,
+      "sha256": "27bb33cee18898a2aaae7b12c474f640cfc96e676e75764d6a1086e9da1c4f07"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1/core2/raw-rows.jsonl": {
+      "bytes": 47946,
+      "sha256": "2f870d637ce9800f20050c082fd1abf2580ca8cf8ad1a2106aa012eb87acda9c"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1/core2/close.json": {
+      "bytes": 222,
+      "sha256": "4b7d7b4d2b0592bd3c36560495d7ec3dc04064c057d484fb75c57d45928cc1de"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1/core2/rows.jsonl": {
+      "bytes": 47946,
+      "sha256": "2f870d637ce9800f20050c082fd1abf2580ca8cf8ad1a2106aa012eb87acda9c"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1/core6/init.json": {
+      "bytes": 129,
+      "sha256": "b803039e8ca7ad09577234473e5e106dc3fc85e90f2ed96a83a5ded540090893"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1/core6/game-starts.jsonl": {
+      "bytes": 338,
+      "sha256": "b6ad5c0f3aae9b2ce0e77df57bc9a7835265fb059d72ba56c764689ef299822d"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1/core6/games.jsonl": {
+      "bytes": 1081,
+      "sha256": "54a21dcc754744702c7a0bbf5833988ff627631ee92ccc736ef3e8d5bd6b76bc"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1/core6/raw-rows.jsonl": {
+      "bytes": 31738,
+      "sha256": "100adc3f8b1d41dbe969cd000e8554ba8dcb60391ee0a4b6741f5df8d742ee98"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1/core6/close.json": {
+      "bytes": 222,
+      "sha256": "f790829250a37455ad717566162c04806cd70065184abafd26b9c9dcc68e0ab1"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-poolmock-r1/core6/rows.jsonl": {
+      "bytes": 31738,
+      "sha256": "100adc3f8b1d41dbe969cd000e8554ba8dcb60391ee0a4b6741f5df8d742ee98"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1/init-all.json": {
+      "bytes": 8547,
+      "sha256": "b3b48c4b7351605dc9b643f268e95e3666c1c6bf2f17a6d93961b925f2cd37ea"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1/pause-monitor-stop.json": {
+      "bytes": 6741,
+      "sha256": "401d720d97114e24a6fec61edfc5ac8e0b8a5663d3011a3b1bf68e377da5b998"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1/result.json": {
+      "bytes": 31117,
+      "sha256": "39b47df90e1b39e714f813fd8899d442c889cd8a8f7219710b1226dd7d337064"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1/registered-games.json": {
+      "bytes": 3705,
+      "sha256": "1b6fc1ef380d9f055ed243c661f788b845d0980f0b22abe8d25dd29c5b05f815"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1/beads-read-quoridor-4lc.176.json": {
+      "bytes": 209,
+      "sha256": "3da1c99eefdf86468acb34fbc2eafbf0d9eb5fa8c700bcc9c8ed084a0afb0968"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1/beads-read-quoridor-4lc.json": {
+      "bytes": 205,
+      "sha256": "16962e67199f173474a9c08f438334ed15b518f29aa636ff032666c493964c9c"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1/pause-monitor.json": {
+      "bytes": 6654,
+      "sha256": "8c75dbe41001a0113d9260e1a30845ffe325eb9fa2e535d7295123ac417ebb65"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1/core4/init.json": {
+      "bytes": 2441,
+      "sha256": "916d9fa54002aa78bcbb9a03889981473010d1ae2b9dccd07783fb364b51b37f"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1/core4/game-starts.jsonl": {
+      "bytes": 170,
+      "sha256": "6d5441f932330736ec1f1643ef0e27f2223becf656cc7a118c9912d056f640e5"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1/core4/games.jsonl": {
+      "bytes": 2875,
+      "sha256": "878c44a17cf983d8b47836ca0814e3fcfaca6716e6f34481a1a29adf9a3c7b02"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1/core4/raw-rows.jsonl": {
+      "bytes": 566853,
+      "sha256": "3331820eea11335e4f9ceeb0170611a01f0f7b78d731785be5dbab6d7b6401f4"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1/core4/close.json": {
+      "bytes": 299,
+      "sha256": "0a42f5f386e0404b08525227eb46dcdee035ba9825b4f51939268ddf43b8f481"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1/core4/rows.jsonl": {
+      "bytes": 566512,
+      "sha256": "18ae672a7bb20f108ad6b7e964a26a5f1edf6175038f62d9c4ec4f783fe2f8dd"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1/core2/init.json": {
+      "bytes": 2440,
+      "sha256": "44ebdd74953ca53ba0e316a026554d277f064f482ccf84dd8f85b99d7bfe8239"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1/core2/game-starts.jsonl": {
+      "bytes": 170,
+      "sha256": "03f64cce91895146f66c5299761942060da6d1b8f6c1dd97ec61aeca79048e5a"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1/core2/games.jsonl": {
+      "bytes": 3213,
+      "sha256": "45ca38cd455fff80c8a73679198de2a17bc18ec31a3ec1f2bf275a5202d1a933"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1/core2/raw-rows.jsonl": {
+      "bytes": 706699,
+      "sha256": "1b6f4493b714ac3e0e4fac555ee271eac4750ac699f4a50f70d04a35f3f3b739"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1/core2/close.json": {
+      "bytes": 299,
+      "sha256": "86c55c270c2873543deb55b60200b33dd9abcdd3465cac6c30d987f5625d6978"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1/core2/rows.jsonl": {
+      "bytes": 706211,
+      "sha256": "3f2c4e8d9bdc4f1b07eac6d43d1783f19367c037c7ca9448bbf3a83179eefb95"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1/core6/init.json": {
+      "bytes": 2442,
+      "sha256": "ea7e320d31841f95bf8f04317f14e5668220145fc848ed99a96fa37ab09fb3f4"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1/core6/game-starts.jsonl": {
+      "bytes": 170,
+      "sha256": "e1429bf42e50814547a2ab21ccc771ae13c3ded77739c8f544b1754304258109"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1/core6/games.jsonl": {
+      "bytes": 2500,
+      "sha256": "f8e76d62e57048409e7a7ead287006ca4e134ab06dedd17c23326d5feed3b560"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1/core6/raw-rows.jsonl": {
+      "bytes": 474667,
+      "sha256": "ad76626c819b3694f0c53ea6dc22a3795d5273c13fa270e292274c8d6df7f59b"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1/core6/close.json": {
+      "bytes": 299,
+      "sha256": "d71a7b450c4878e66f94cfb0b9147440e3687bbfe307dcbe0ef2de014da7de97"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cpuort-r1/core6/rows.jsonl": {
+      "bytes": 474386,
+      "sha256": "a6537f897742b7d534d7bb711cad563ab866353e05c3748258e250203c1e52ad"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/xdg-cache/Microsoft/DeveloperTools/.onnxruntime/onnxruntime.db": {
+      "bytes": 24576,
+      "sha256": "ab39b7e0a9e7d0cbb4a9de78af0196e7c8fd5344b5705124634aa92f849a8f5d"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/xdg-cache/Microsoft/DeveloperTools/.onnxruntime/deviceid": {
+      "bytes": 36,
+      "sha256": "6575b6630a07f99a5e06a692631017e745ed6afdf61861272487fe6f404c4817"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1/gpu-init.json": {
+      "bytes": 896,
+      "sha256": "73c1859ebdadb758c61870f85548f61ee37f83de240ce789ca4fb4bed075727d"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1/init-all.json": {
+      "bytes": 9214,
+      "sha256": "bbf35c0ccbd1afd0a51a367d1262508f93e7caf23f726a9a726f7e6fdda48e10"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1/pause-monitor-stop.json": {
+      "bytes": 16373,
+      "sha256": "c49cf8a38b90c1a663365266d1bddd725e47ad4e120d4238a2f9034d16635eba"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1/result.json": {
+      "bytes": 32880,
+      "sha256": "2ae74e5474b28a6c46b7ed42eb67dd73acdc72ef918e6fc6a765b33f4cff86b0"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1/gpu-stop.json": {
+      "bytes": 1435,
+      "sha256": "e1fedece993f993593ad8e0528a6e73375701f3b475f7b6caea86fe479576822"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1/registered-games.json": {
+      "bytes": 3693,
+      "sha256": "e631ebb4f9429494e3afe30522b99dc65b0ed20ba60b804410b63133b8a30526"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1/gpu-batches.jsonl": {
+      "bytes": 2977787,
+      "sha256": "6acc5cb90cfb642fb1072fc6402eb2438fd93cb5bb1411812e8b6f55b9ddd3d9"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1/beads-read-quoridor-4lc.176.json": {
+      "bytes": 209,
+      "sha256": "3da1c99eefdf86468acb34fbc2eafbf0d9eb5fa8c700bcc9c8ed084a0afb0968"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1/beads-read-quoridor-4lc.json": {
+      "bytes": 205,
+      "sha256": "0da244b951afc8ceb86084a22225544db151560f20835feda393e7af1ba0e030"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1/pause-monitor.json": {
+      "bytes": 16286,
+      "sha256": "07effbe0fdc91432e8b44e833bbdad75308ad498a254b5ac697dcbeb156c2b90"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1/core4/init.json": {
+      "bytes": 2682,
+      "sha256": "c49997fc37fd7b11d07309ad9eb657bde3cb2c7456bd7b956be813f9aa3c6220"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1/core4/game-starts.jsonl": {
+      "bytes": 168,
+      "sha256": "c2c8e66e86ffd72245663ef8d91e716842b191213a21bc083a6950283d8853f7"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1/core4/games.jsonl": {
+      "bytes": 2872,
+      "sha256": "083871ab68bdfd95110d933cbdcc1504bf43c3bb1c2b21f7ff3f1645253f79b7"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1/core4/raw-rows.jsonl": {
+      "bytes": 567159,
+      "sha256": "98bfb39bfe24f29eb105382358fe23b5ff5b7f727f43bf9c6c06f0bec9a430bc"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1/core4/close.json": {
+      "bytes": 285,
+      "sha256": "4ac1af7c506ceadb306cb8216f7290f985c2c79bc55cafa66c98edabeba879c5"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1/core4/rows.jsonl": {
+      "bytes": 566818,
+      "sha256": "1279d5276d198fbdb1019b09fce277e17c3002a9304dfe211b5b882015c3cc06"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1/core2/init.json": {
+      "bytes": 2682,
+      "sha256": "57b60a2226957a35fa8caef92196d5d26a487583c9454af9bf696415d14ed164"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1/core2/game-starts.jsonl": {
+      "bytes": 168,
+      "sha256": "e45a66b0353df69da405dd79c455685ef446db86570419b64c3c48bc78ce6e9a"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1/core2/games.jsonl": {
+      "bytes": 3210,
+      "sha256": "87338e478df6970c6ba47f0e61ba71d77f7265e0de28d2fa6156c7dd092641c9"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1/core2/raw-rows.jsonl": {
+      "bytes": 707117,
+      "sha256": "5fc6df67e4ab7183ba56dd8bcdbe9ca891b0110acdc1731fede0670bc3656def"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1/core2/close.json": {
+      "bytes": 285,
+      "sha256": "c19cbb335b38fb6e016ec2d414fcde3ffdfa72e0be3e16bc5003b710eeecf718"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1/core2/rows.jsonl": {
+      "bytes": 706629,
+      "sha256": "acab5522c0d063825f1f94f4cff7479cc7b0fdb1c8039dc065951c15177eddd2"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1/core6/init.json": {
+      "bytes": 2680,
+      "sha256": "a46ca5cc9daf0088ba49b8873c0300df9fd36acd6707753567cd2e44c48b7361"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1/core6/game-starts.jsonl": {
+      "bytes": 168,
+      "sha256": "601e35fcd685b9dcc67558685c2891d43ec5ef24aadc8a1112af3f4395d36dc2"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1/core6/games.jsonl": {
+      "bytes": 2498,
+      "sha256": "92ca9775c219b70f1e655f2e80ad90a9f27e10ae20005bf7ea19c6f81548d545"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1/core6/raw-rows.jsonl": {
+      "bytes": 474896,
+      "sha256": "c2b8ec77ba230818e769696329516ad4535e3c7c759bd51c9677049cf8f71fb7"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1/core6/close.json": {
+      "bytes": 285,
+      "sha256": "2e78099a18214287221a3ec900b56fee17b6d0b90793c21395477255bf0641f9"
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-TEACHER-PIPELINE/runs/native176-eff-cuda-r1/core6/rows.jsonl": {
+      "bytes": 474615,
+      "sha256": "c2d9dbfeecc8074a7fac67ee5645d06d6cd7afd253c2775296e178af57e6a135"
+    }
+  },
+  "all_member_inmemory_restoration_verified": true,
+  "restoration_destination": "original relative paths under research worktree; do not overwrite active owner",
+  "source_and_inputs": "per-run source hash/Git/command/start/end/stop, model/source binding references; no model/dependency copy",
+  "old_CPU_frozen_stop_preserved": true,
+  "new_GPU_stop_preserved": true,
+  "all_attempts_including_prelaunch_failures_kept": true,
+  "pack_wall_seconds": 0.6696108779869974,
+  "allocated_before_pack": 58404864,
+  "allocated_with_pack": 63160320,
+  "Git_unused_forecast": 16777216,
+  "scope_guard": 234881024,
+  "scope_reservation": 268435456,
+  "experiment_effective_reservation": 2143289344,
+  "old_unknown_not_decremented": true,
+  "parent_extra_reservation": 0,
+  "all_old173_teacher_transfer": 0,
+  "large_gpu-root_raw": "full raw numeric/checkpoints in archive; small finalroot join/compare referenced separately"
+}
