@@ -17,3 +17,5 @@
 161 NN0 clock14mock、163 browser fixed1000ms/12要求のD500までACKとmain402採用を有限受入れ。163preregisterに1000cycleがあり、161『ACKは次1000前で可』との差は『D500まで必須』として保存、prototype14mockをD500実証へ転用しない。kernelCPU/TID/cutoff誤差等欠測を残しformal_ready=false。費用の大きいbrowser正式clock全保証へ自動連鎖せず、この基準を主native経路へ移す。151/153/155の機構/合法16局7勝9敗を再利用するが同等未立証。
 
 監督の『fixture負担除去を実探索/棋力改善としない』『全cacheの優劣を4状態結果で決めない』『軽い学習準備と正式評価を分ける』を採用。次効果確認はnative機構成立の有無・games/sec/有効教師行/sec・起動/NN/輸送/記録の支配費と実際の配分変更。主基盤の巨大化/追加承認層を効果と数えない。前のbrowser主計画はresearch-data/ai-sigma/frame10-coordinator-start/priorities-before-native-20261003.mdに保存。
+
+04:37–04:38UTC：165本人04:37:21.307017受領/claim私有静的開始、既nativeCPU ORT1.30.0を両engineで使う（browser1.21とは別）。164本人04:38:34.800333受領/claim静的開始、166本人04:38:32受領/04:38:55claim静的開始を確認。166独立速報のevent-driven共通quiescence→新actualt0方式を採用候補として165へactive補足配送。特徴/NN/pipeABI/受信検証を500msへ同ruleで含める定義と原因側cleanup費を事前固定、1000msbrowser周期義務0。推定kernelCPUや完全公平性へ格上げしない。rootへ実配分/開始と必要設計3path writer案を実報告受理04:40:08、本文反映待ちは研究開始gate0。
