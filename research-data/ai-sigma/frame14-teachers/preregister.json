@@ -46,7 +46,8 @@
     "test_sealing": "fullteacher only test-sealed, only label-free QF/features/exposure metadata prefreeze; labels accessible to candidate-freeze evaluation only",
     "partial": "firsttrain24+val/test can be announced; maximumtrain96 mask pending until allplanned train processed or missing explicit; do not claim unexposed before fixed mask",
     "game_family_duplicates": "reject all; state overlap masks do not unite allgames into giant group",
-    "QF1_signature": "195-owned shared canonical actualforward: version + STM/opponent sorted ids + same-order float32 distance bits; no private parallel signature"
+    "QF1_signature": "195-owned shared canonical actualforward: version + STM/opponent sorted ids + same-order float32 distance bits; no private parallel signature",
+    "history_signature": "sha256 JSON[current_position_key, byte-key-sort recorded history occurrence counts]; no target/z/value/loss. Fullstate side+ply+history also saved separately."
   },
   "fault": "typedunknown allaffected, zunknown/value maskfalse; no replacement of completed success",
   "CPU": [

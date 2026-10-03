@@ -6,7 +6,7 @@ c=json.loads(Path(sys.argv[1]).read_text());name=c['run_id'];assert name.startsw
 out=Path(c['job_out']);assert not out.exists(),'ATTEMPT_ALREADY_EXISTS';out.mkdir(parents=True)
 wall=time.monotonic();utc=lambda:datetime.datetime.now(datetime.timezone.utc).isoformat();end=lambda s:datetime.datetime.fromisoformat(s).timestamp()
 assert time.time()<end('2026-10-04T02:15:00+00:00'),'NEWHEAVY_CUTOFF'
-prior=sum(json.loads(p.read_text())['jobwall_seconds']for p in A.glob('*/process.json'));assert prior+c['job_seconds']<=2100,'TOTAL_BUDGET_ADMISSION'
+prior=.206989253+sum(json.loads(p.read_text())['jobwall_seconds']for p in A.rglob('process.json'));assert prior+c['job_seconds']<=2100,'TOTAL_BUDGET_ADMISSION'
 os.sched_setaffinity(0,{c['management_core']});assert ctypes.CDLL(None).prctl(36,1,0,0,0)==0
 save=lambda n,v:(out/n).write_text(json.dumps(v,indent=2)+'\n')
 def table():
@@ -40,7 +40,7 @@ for pid,row in table().items():
  try:args=Path(f'/proc/{pid}/cmdline').read_bytes().replace(b'\0',b' ').decode();comm=Path(f'/proc/{pid}/comm').read_text().strip()
  except FileNotFoundError:continue
  if comm not in ['python','python3','node','bash','faithful-native']:continue
- if 'tools/ai-sigma-' not in args and 'tools/research-team/' not in args and 'faithful-native' not in args:continue
+ if 'tools/ai-sigma-' not in args and 'tools/research-team/' not in args and 'faithful-native' not in args and '.artifacts/ai-sigma/continuation-20261001/' not in args and 'tools/nnue-training/' not in args:continue
  if str(T) in args:continue
  aff=sorted(os.sched_getaffinity(pid));researchRSS+=row['RSS'];current.append({**row,'affinity':aff,'argv':args[:220]})
  if any(k in args for k in ['ort.py','provider.py','learn.py','learn-control.cjs','runner.py','generate.cjs','measure.cjs','faithful-native','engine.cjs','tools/nnue-training/train.py','tools/nnue-training/evaluate.py','tools/ai-sigma-frame14']):foreign.append(current[-1])
@@ -55,10 +55,10 @@ for f,h in binding['readonly'].items():assert hashlib.sha256((ROOT/f).read_bytes
 assert researchRSS+c['RAM']<=8*1024**3,'PARENT_RAM';available=int(next(s.split()[1]for s in Path('/proc/meminfo').read_text().splitlines()if s.startswith('MemAvailable:')))*1024;assert available>c['RAM'],'HOST_RAM'
 # Retain all old physical quantities; compare current referenced experiment roots plus new forecast.
 oldnames=['NATIVE-BASELINE','NATIVE-RUNTIME-READY','NATIVE-NI-ARENA','NATIVE-TEACHER-PIPELINE','NATIVE-K800-TIME','CHECKPOINT-TEACHER','MANYGAME-GENERATION']
-old=allocated([ROOT/'.artifacts/ai-sigma/resume-20261003'/n for n in oldnames]+[ROOT/'research-data/ai-sigma'/n for n in ['165-native-baseline','170-native-runtime-ready','173-native-ni-arena','176-native-teacher-pipeline','180-native-k800-time','181-checkpoint-teacher','185-manygame-runtime-preparation','187-manygame-generation']]+[ROOT/'tools'/n for n in ['ai-sigma-native-baseline','ai-sigma-native-runtime-ready','ai-sigma-native-ni-arena','ai-sigma-native-teacher-pipeline','ai-sigma-native-k800-time','ai-sigma-native-checkpoint-teacher','ai-sigma-manygame-runtime-preparation','ai-sigma-manygame-generation']]);assert old+256*1024**2<2044*1024**2,'EXPERIMENT_RESERVATION'
+old=allocated([ROOT/'.artifacts/ai-sigma/resume-20261003'/n for n in oldnames]+[ROOT/'research-data/ai-sigma'/n for n in ['165-native-baseline','170-native-runtime-ready','173-native-ni-arena','176-native-teacher-pipeline','180-native-k800-time','181-checkpoint-teacher','185-manygame-runtime-preparation','187-manygame-generation']]+[ROOT/'tools'/n for n in ['ai-sigma-native-baseline','ai-sigma-native-runtime-ready','ai-sigma-native-ni-arena','ai-sigma-native-teacher-pipeline','ai-sigma-native-k800-time','ai-sigma-native-checkpoint-teacher','ai-sigma-manygame-runtime-preparation','ai-sigma-manygame-generation']]);assert old+256*1024**2<1980*1024**2,'EXPERIMENT_RESERVATION'
 assert allocated([T,D,A])+32*1024**2<224*1024**2,'FORECAST_GUARD'
 source={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()for p in T.iterdir()if p.is_file()}
-save('admission.json',{'UTC':utc(),'controls':controls,'current':current,'foreign_heavy':foreign,'scheduler':sch,'quietwindow_seconds':next_at-time.time(),'known_old_allocated':old,'scope_allocated':allocated([T,D,A]),'newforecast':256*1024**2,'Git_forecast':32*1024**2,'reservation':2044*1024**2,'old_unknown_not_decremented':True,'RAM':c['RAM'],'RAMguard':c['RAM_guard'],'parent_current_RSS':researchRSS,'CPU_pool':c['cores'],'source':source,'prior_job_seconds':prior,'GPU_current':gpu_current,'sampled_not_all_host_guarantee':True})
+save('admission.json',{'UTC':utc(),'controls':controls,'current':current,'foreign_heavy':foreign,'scheduler':sch,'quietwindow_seconds':next_at-time.time(),'known_old_allocated':old,'scope_allocated':allocated([T,D,A]),'newforecast':256*1024**2,'Git_forecast':32*1024**2,'reservation':1980*1024**2,'old_unknown_not_decremented':True,'RAM':c['RAM'],'RAMguard':c['RAM_guard'],'parent_current_RSS':researchRSS,'CPU_pool':c['cores'],'source':source,'prior_job_seconds':prior,'GPU_current':gpu_current,'sampled_not_all_host_guarantee':True})
 cmd=['node','--max-old-space-size=192',str(T/c['script']),str(out)if c['kind']in ['mock','parity'] else str(Path(sys.argv[1]).resolve())]
 env=os.environ.copy();env.update(OMP_NUM_THREADS='1',MKL_NUM_THREADS='1',OPENBLAS_NUM_THREADS='1',BLIS_NUM_THREADS='1',UV_NO_SYNC='1',UV_OFFLINE='1',PYTHONDONTWRITEBYTECODE='1',SIGMA_SOURCE=c['source_git'])
 tracked={};reason=None;peak=0;storagepeak=0;child=None;startUTC=utc();limit=min(time.time()+c['job_seconds'],end(c['science_deadline']),time.time()+2100-prior)
