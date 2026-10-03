@@ -81,7 +81,7 @@ def checkrow(row):
  for k,(n,b,cp) in enumerate(zip(row['numeric'],row['trace']['backups'],row['CPs']),1):
   path=tuple(n['path']);exact(b['path'],list(path),'backup_path');exact(b['K'],k,'backupK')
   # Request state/history reconstructed from the root and the actual path.
-  p,t,w=unpackkey(f['history_count_key']);hist=dict(f['history_counts']);remain=f['board']['walls_remaining'][:]
+  p,t,w=unpackkey(f['history_count_key']);hist=dict(f['history_counts']);remain=[10-sum(a['type']=='wall' for a in f['legal_prefix'][player::2]) for player in (0,1)]
   for a in path:
    if a>=81:remain[t]-=1
    p,t,w=nextkey(p,t,w,a);s=key(p,t,w);hist[s]=hist.get(s,0)+1

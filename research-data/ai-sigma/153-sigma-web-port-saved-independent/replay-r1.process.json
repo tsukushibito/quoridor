@@ -1,0 +1,41 @@
+{
+  "run": "replay-r1",
+  "command": [
+    "node",
+    "--max-old-space-size=256",
+    "tools/ai-sigma-sigma-web-port-saved-independent/replay.cjs"
+  ],
+  "UTC_start": "2026-10-03T01:59:03.851579+00:00",
+  "UTC_end": "2026-10-03T01:59:04.210567+00:00",
+  "wall_s": 0.35900058201514184,
+  "exit": 1,
+  "reason": null,
+  "peak_observed_current_RSS": 128278528,
+  "CPU": [
+    0
+  ],
+  "RAMguard_bytes": 939524096,
+  "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+  "owned": [
+    {
+      "pid": 3030609,
+      "starttick": 24567226
+    },
+    {
+      "pid": 3030610,
+      "starttick": 24567228
+    }
+  ],
+  "remaining": [],
+  "source_before": {
+    "tools/ai-sigma-sigma-web-port-saved-independent/managed.py": "4de6dae8b5cedfeb0341159cbbd36fffca184591b5ad16278646ec8c7d84992b",
+    "tools/ai-sigma-sigma-web-port-saved-independent/check.py": "b00d2c7db18226aec65b83b9e2ce793043be9efcf00ffe6b66ae6908f64f7506"
+  },
+  "source_after": {
+    "tools/ai-sigma-sigma-web-port-saved-independent/managed.py": "4de6dae8b5cedfeb0341159cbbd36fffca184591b5ad16278646ec8c7d84992b",
+    "tools/ai-sigma-sigma-web-port-saved-independent/check.py": "b00d2c7db18226aec65b83b9e2ce793043be9efcf00ffe6b66ae6908f64f7506"
+  },
+  "child_waited": true,
+  "instant_peak_and_short_children_unknown": true,
+  "NN_Chrome_game": 0
+}
