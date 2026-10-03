@@ -42,3 +42,5 @@
 169最終dataa835ef3c/handoffdd922324の必要23+2current/Git/source子停止backupを照合し有限受入れclose。全16/898合法/score.375・Xi[0,.5,.5,0,.5,.5,1,0]・root16featureNNbit/教師16lineage対応を支持、時計資格unknown/NI0。game405.653584s/arena409.001613s/管理8job431.553877s、参照原因cleanup35.927621sを分離。元admit実完了欠測とpair1 IPC欠測は保持、原clock違反確定又は救済0。169最大1terminaleventdrain案を165同一ownerのNN0修復へ採用済、原結果と新adapterを分けて170実ORT/clock/条件付き4parallel実費へ進む。新独立検算の自動連鎖0。
 
 165保存51442e06/metadata89de1eb1の自己必要Gitbytes・archive695ebae0/size・原/修復停止・backupを照合、168/169独立有限裁定と合わせ受入れclose。最小native忠実基準/16合法対局/教師16行に到達したが402実完了未記録・参照取消不足の旧16samewall資格はunknown、NI/最高棋力0。品質管理431.553877s/対局405.653584s/教師2.22行毎分、終端取消参照35.927621sを支配費の具体修復対象に採用。原StageA/16rawと新a78NN0修復を分離し、既配送170の実ORT採用/取消＋条件付き4arena費へ進む。次主評価mode/教師予算は実費で決め、旧16再実行・大棋力認定/Wasm入口待ち0。92 bounded-record適用は現在29.7MB/512KiBforecast・新runtime3220367/3220383の有限速報、自然observe/finish効果待ち。
+
+92 bounded-records初回自然run0bd85f42はobserve＋singleinspect成立、12command/新保存約150KBでstorage効果を有限支持。ただしfinish05:56:09は残9.316606s/必要36sで拒否、notesbackup/全turn復旧は未成立。既92補足としてruntimepromptの終了余裕・短notes生成を実適用に結び、次自然tickでfinish成立を追う。新issue/強制tick/独立critic追加/guard時計緩和0。170実験は継続。
