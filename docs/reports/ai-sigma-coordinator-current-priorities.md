@@ -19,7 +19,7 @@ root経由のユーザー質問に対し、これまでの具体配分にこの�
 
 固定[自対局source751186](https://github.com/bartolomeo3000/SigmaQuoridor/blob/751186344fc52ad0c29bc65922e62c6fa915f006/selfplay_cpp.py)を確認した。CPU threadsとparallel_gamesは別引数で、既定はthreads7/parallel2048/leaf-batch1/max-batch1024、中央get_batch→GPU→put_results。これらは設定値であり実効batch・旧checkpointの歴史設定の証明ではない。sourceは共有NN cache、leaf parallel/virtual loss、noise/FPU/temperature、PCR/solverも持つため、この生成構造の再現と、固定Sigma C++の探索・教師全規則を同一にすることは分ける。既忠実Web751186 native経路のK64/K800結果でC++総生成効率を代弁しない。
 
-優先順位は181の薄checkpoint削減→新独立CPU教師/learner接続を主とする。今枠183をhypothesisへNN0静的60秒・新512KiBで配分し、既cached C++界面/利用可否、既Rust複数handle/177batch8の再用、必要な薄gamepool/broker変更と有界メモリを具体化する。compile/download/newmodel/NN/GPU/game0、181 writerと科学jobを妨げず、183全文待ちgate0。今枠にこのSigma型GPU実生成を配分済みとはしない。181は12:25science終了予定、残りは保存/12:37:38重開始停止もあり、通常は次枠実測候補。181が早く引渡し、183準備が有限に成立し、直前所有/資源/残20分以上の終了余裕がある場合のみ統括が新現在配分を決める。ここでGPUjobを自動起動せず、次枠計画だけで現12:47:38を延長しない。
+優先順位は181の薄checkpoint削減→新独立CPU教師/learner接続を主とする。183のNN0静的設計・人工3handle/8項目mockを有限受入れ。既Rust Registry worker各4/8gameと177共通GPU maxB8 queueを最大1案とする。実NN/GPU/game0であり実効batch/RAM/教師率は未測定。既cache即時listingでC++extension未確認はhost全体の不存在証明ではない。compile/download/newmodel/NN/GPU/game0、181 writerと科学jobを妨げず、183全文待ちgate0。今枠にこのSigma型GPU実生成を配分済みとはしない。181は12:25science終了予定、残りは保存/12:37:38重開始停止もあり、通常は次枠実測候補。181が早く引渡し、183準備が有限に成立し、直前所有/資源/残20分以上の終了余裕がある場合のみ統括が新現在配分を決める。ここでGPUjobを自動起動せず、次枠計画だけで現12:47:38を延長しない。
 
 次の実測候補を以下の単位で定める。
 
@@ -53,3 +53,7 @@ CPU4logical合計/RAM8GiB/保持と有効未使用予約12GiBを維持、NN重jo
 監督c42df5ceの評価改善を採用。181の追加200step/旧新train混合の前後損失は、この継続学習条件で未知gameへのfitが変わった有限結果として扱う。多様性だけの因果効果は追加学習量・旧データ再露出と分離していないため未確定。原val悪化とπ/z間の交換も残し、対照追加runや新gateを義務化しない。担当experiment、効果確認は181学習報告。
 
 181新27K800の本人速報:old/new根対応を有限保持、new/old中央値.961216/.879079/.958675、採用<=.90は1/3で限定条件未達。new/JS1.299314/1.136611/1.165635、24新lineage productionは原選定どおりCPUJS。利益時のみ6K64比較は全NOT_STARTEDとして保持し、速度診断の追加反復0。内部checkpoint800→1/応答約8→4MBの削減が生成利益や棋力を証明したとはしない。182独立180支持は必要7Gitblob/停止backupを統括受入れclose、後着metadataのGit版誤指定失敗は科学と別に保存。
+
+183の実装見積45〜75分、4mode測定上限20分に最速CPUJS採用対照の任意5分と保存費が追加される。全比較の実生成は次枠候補として保持し、現在の残枠で完了すると約束しない。partial batch B3/5/6/7は177で未測定なので実モデルを使う前に有限parityを予算内で扱う。各mode最大307200sampleは原177/176capと別の私有run予算bindingを要し、黙って上限をresetしない。新GPU予算/自動起動0。今枠に前倒しする場合も181停止引渡し後の新有限配分として、薄実装の準備と実生成検証を分ける。
+
+181科学停止・保存引渡しを受領。新24GOAL/1353適格行をCPUJSで195.29244秒/6.9281行秒、旧新train2260/200stepで原val π/z改善・新val π改善/z悪化を保持。184criticへ保存独立教師/損失検算（NN0/static120秒/新2MiB）を配分。183受入れ設計の実GPU比較は次枠、今枠185experimentへ最小gamepool/brokerのNN0実装準備35分（script180秒/新8MiB既experiment内）だけを配分する。実生成倍率/実partialGPUparity/多木RAM未測定を維持し、実GPU検査をこの準備へ自動追加しない。学習の次配分は184のvalue悪化裁定と実既lossから選ぶ。
