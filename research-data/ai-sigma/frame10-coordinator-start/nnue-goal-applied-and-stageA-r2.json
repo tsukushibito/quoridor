@@ -1,0 +1,91 @@
+{
+  "UTC": "2026-10-03T01:55:03.588269+00:00",
+  "root_goal_design_repair_Git": "bc47dad7b952b6dee1672cb951c40bc383b928db",
+  "original_docs_Git_kept": "017681c118ac84f168025255d04f021dc69357e9",
+  "root3_main_mirror_Git_bytes": {
+    "docs/design/ai-sigma-research-goal.md": "ec46444e63d360f325a5d251ed9bf0f805850d2588a622bab43b41906845b125",
+    "docs/design/ai-nnue-research.md": "a1624038f3b4af4c30064fd433179fefba0cb0d2aed63b75494d9cb54bed27aa",
+    "docs/design/ai-research-team.md": "67822daafbf67aeba0670c18bb49d0e9364a6faa3844f66c78b26392f05a9564"
+  },
+  "coordinator_source_rewrite": false,
+  "allocations_Git": "3c3432512f35528ed80b5efefe138940daf24384",
+  "deliveries": {
+    "frame10-experiment-port-stageA-r2-observer-finding": {
+      "method": "turn/steer",
+      "thread_id": "01a0f31d-6d15-7620-bb63-4b4f878e4746",
+      "turn_id": "01a0ff56-12b3-7cd1-997d-abac2803003e",
+      "accepted": true,
+      "UTC": "2026-10-03T01:47:16.630977+00:00",
+      "states_before": {
+        "experiment": "active"
+      }
+    },
+    "frame10-experiment-nnue-goal-inheritance": {
+      "method": "turn/steer",
+      "thread_id": "01a0f31d-6d15-7620-bb63-4b4f878e4746",
+      "turn_id": "01a0ff56-12b3-7cd1-997d-abac2803003e",
+      "accepted": true,
+      "UTC": "2026-10-03T01:52:02.070811+00:00",
+      "states_before": {
+        "experiment": "active"
+      }
+    },
+    "frame10-critic-port-independent-request": {
+      "method": "turn/start",
+      "thread_id": "01a0f31d-8227-7e03-a7e6-915b4918c11b",
+      "turn_id": "01a0ff76-a647-7db0-9509-1fdb9b5b4127",
+      "accepted": true,
+      "UTC": "2026-10-03T01:52:41.040594+00:00",
+      "states_before": {
+        "critic": "idle"
+      }
+    },
+    "frame10-hypothesis-nnue-preliminary-request": {
+      "method": "turn/start",
+      "thread_id": "01a0f31c-2e4b-7170-82c5-69e1428c2418",
+      "turn_id": "01a0ff77-31e4-73f3-b121-e40577ddc679",
+      "accepted": true,
+      "UTC": "2026-10-03T01:53:16.781404+00:00",
+      "states_before": {
+        "hypothesis": "idle"
+      }
+    }
+  },
+  "StageA_r2": {
+    "run": "port151-stageA-r2",
+    "raw_SHA256": "d37215cbc7914519ca24ab254c5e413d21e780389094faed537280a059c234d2",
+    "stop_SHA256": "f529d9a71dc25fd3b20dfe4e9a5dff0b8c5073fa8c8cbe2afdb840c367a3b414",
+    "owner_finite_supported": true,
+    "all5_pair_summary_checks_pass": true,
+    "handNN": 320,
+    "old_r1_handNN": 320,
+    "startup_per_run": 6,
+    "max_prior_diff": 1.734723475976807e-18,
+    "max_score_diff": 1.1102230246251565e-16,
+    "independent153_pending": true,
+    "coordinator_alltrace_replay_not_performed": true,
+    "late_observer_schema_error_preserved": {
+      "state": "BEADS_SCHEMA_ERROR",
+      "failure": {
+        "code": "BEADS_SCHEMA_ERROR",
+        "cause": {
+          "name": "SyntaxError",
+          "message": "Unterminated string in JSON at position 93104 (line 27 column 91634)",
+          "code": null,
+          "signal": null,
+          "killed": null
+        }
+      },
+      "original_exit0_science_and_control_separate": true
+    },
+    "owner_private_reader_finally_fix_received": true
+  },
+  "StageB_group1_owner_only_scores": [
+    2,
+    0,
+    2
+  ],
+  "StageB16_planned_unknown_remainder12": true,
+  "Sigma_is_initial_not_final_goal": true,
+  "deadline_resources_GPU_learning_changed": false
+}
