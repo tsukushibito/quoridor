@@ -1,0 +1,1788 @@
+{
+  "issue": "quoridor-4lc.191",
+  "NN_executed": 0,
+  "first_difference": null,
+  "supported": true,
+  "modes": [
+    {
+      "mode": "CPUJS",
+      "all24_status": {
+        "GOAL": 24
+      },
+      "allgame_unknown": 0,
+      "Rpolicy": 1132,
+      "Rz": 1132,
+      "Rjoint": 1132,
+      "allattempt_jobwall_s": 137.83640136098256,
+      "joint_per_s": 8.212634607569173,
+      "successful_games_per_s": 0.1741194616445761,
+      "split_rows": {
+        "validation": 215,
+        "train": 917
+      },
+      "NN_completed_qualified": 63720,
+      "NN_actual_attempt": 63720,
+      "terminal_noNN": 8728,
+      "NN_discarded": 0,
+      "startup": 3,
+      "finalCP_saved_counter": null,
+      "finalCP_source_once": true,
+      "P2_jump_entries": 29,
+      "P2_wall_entries": 36656,
+      "overlaps": {
+        "position": {
+          "unique": 1118,
+          "crossgame_shared_keys": 8,
+          "crossgame_row_occurrences": 22,
+          "train_val_shared_keys": 7,
+          "train_val_row_occurrences": 20
+        },
+        "fullstate": {
+          "unique": 1118,
+          "crossgame_shared_keys": 8,
+          "crossgame_row_occurrences": 22,
+          "train_val_shared_keys": 7,
+          "train_val_row_occurrences": 20
+        },
+        "features": {
+          "unique": 1118,
+          "crossgame_shared_keys": 8,
+          "crossgame_row_occurrences": 22,
+          "train_val_shared_keys": 7,
+          "train_val_row_occurrences": 20
+        },
+        "features_legal": {
+          "unique": 1118,
+          "crossgame_shared_keys": 8,
+          "crossgame_row_occurrences": 22,
+          "train_val_shared_keys": 7,
+          "train_val_row_occurrences": 20
+        }
+      },
+      "all24_distribution": [
+        {
+          "game": "native187-game-001",
+          "status": "GOAL",
+          "winner": 1,
+          "total_ply": 59,
+          "new_rows": 59,
+          "split": "validation"
+        },
+        {
+          "game": "native187-game-002",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 86,
+          "new_rows": 82,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-003",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 70,
+          "new_rows": 62,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-004",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 68,
+          "new_rows": 56,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-005",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 54,
+          "new_rows": 38,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-006",
+          "status": "GOAL",
+          "winner": 1,
+          "total_ply": 39,
+          "new_rows": 19,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-007",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 48,
+          "new_rows": 48,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-008",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 66,
+          "new_rows": 62,
+          "split": "validation"
+        },
+        {
+          "game": "native187-game-009",
+          "status": "GOAL",
+          "winner": 1,
+          "total_ply": 65,
+          "new_rows": 57,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-010",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 52,
+          "new_rows": 40,
+          "split": "validation"
+        },
+        {
+          "game": "native187-game-011",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 70,
+          "new_rows": 54,
+          "split": "validation"
+        },
+        {
+          "game": "native187-game-012",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 42,
+          "new_rows": 22,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-013",
+          "status": "GOAL",
+          "winner": 1,
+          "total_ply": 73,
+          "new_rows": 73,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-014",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 56,
+          "new_rows": 52,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-015",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 68,
+          "new_rows": 60,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-016",
+          "status": "GOAL",
+          "winner": 1,
+          "total_ply": 43,
+          "new_rows": 31,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-017",
+          "status": "GOAL",
+          "winner": 1,
+          "total_ply": 59,
+          "new_rows": 43,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-018",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 44,
+          "new_rows": 24,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-019",
+          "status": "GOAL",
+          "winner": 1,
+          "total_ply": 47,
+          "new_rows": 47,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-020",
+          "status": "GOAL",
+          "winner": 1,
+          "total_ply": 53,
+          "new_rows": 49,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-021",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 54,
+          "new_rows": 46,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-022",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 72,
+          "new_rows": 60,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-023",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 40,
+          "new_rows": 24,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-024",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 44,
+          "new_rows": 24,
+          "split": "train"
+        }
+      ],
+      "total_ply_min_median_max": [
+        39,
+        55.0,
+        86
+      ],
+      "newply_sum": 1132,
+      "batches": null,
+      "RAM_peak_sampled": 1441316864,
+      "exit": 0,
+      "primary": null,
+      "point_stopped": true,
+      "matched_CPUJS": {
+        "paired_saved_rows": 0,
+        "same_position_action_visits": 0,
+        "NN137_maxabs": 0,
+        "rootmean_maxabs": 0
+      },
+      "closed_worker_API_ms": 263326.7677692347,
+      "closed_worker_pipe_ms": 293412.2240103483,
+      "bridge": {
+        "calls": 0,
+        "request_bytes": 0,
+        "response_bytes": 0
+      }
+    },
+    {
+      "mode": "RustCPU",
+      "all24_status": {
+        "CONTROL_OR_ENGINE_OR_SCHEMA_UNKNOWN": 3,
+        "NOT_STARTED": 21
+      },
+      "allgame_unknown": 24,
+      "Rpolicy": 0,
+      "Rz": 0,
+      "Rjoint": 0,
+      "allattempt_jobwall_s": 6.334307405981235,
+      "joint_per_s": 0.0,
+      "successful_games_per_s": 0.0,
+      "split_rows": {},
+      "NN_completed_qualified": 0,
+      "NN_actual_attempt": 190,
+      "terminal_noNN": 0,
+      "NN_discarded": 0,
+      "startup": 0,
+      "finalCP_saved_counter": null,
+      "finalCP_source_once": true,
+      "P2_jump_entries": 0,
+      "P2_wall_entries": 0,
+      "overlaps": {
+        "position": {
+          "unique": 0,
+          "crossgame_shared_keys": 0,
+          "crossgame_row_occurrences": 0,
+          "train_val_shared_keys": 0,
+          "train_val_row_occurrences": 0
+        },
+        "fullstate": {
+          "unique": 0,
+          "crossgame_shared_keys": 0,
+          "crossgame_row_occurrences": 0,
+          "train_val_shared_keys": 0,
+          "train_val_row_occurrences": 0
+        },
+        "features": {
+          "unique": 0,
+          "crossgame_shared_keys": 0,
+          "crossgame_row_occurrences": 0,
+          "train_val_shared_keys": 0,
+          "train_val_row_occurrences": 0
+        },
+        "features_legal": {
+          "unique": 0,
+          "crossgame_shared_keys": 0,
+          "crossgame_row_occurrences": 0,
+          "train_val_shared_keys": 0,
+          "train_val_row_occurrences": 0
+        }
+      },
+      "all24_distribution": [
+        {
+          "game": "native187-game-001",
+          "status": "CONTROL_OR_ENGINE_OR_SCHEMA_UNKNOWN",
+          "winner": null,
+          "total_ply": 0,
+          "new_rows": 0,
+          "split": "validation"
+        },
+        {
+          "game": "native187-game-002",
+          "status": "CONTROL_OR_ENGINE_OR_SCHEMA_UNKNOWN",
+          "winner": null,
+          "total_ply": 4,
+          "new_rows": 0,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-003",
+          "status": "CONTROL_OR_ENGINE_OR_SCHEMA_UNKNOWN",
+          "winner": null,
+          "total_ply": 8,
+          "new_rows": 0,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-004",
+          "status": "NOT_STARTED",
+          "winner": null,
+          "total_ply": null,
+          "new_rows": 0,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-005",
+          "status": "NOT_STARTED",
+          "winner": null,
+          "total_ply": null,
+          "new_rows": 0,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-006",
+          "status": "NOT_STARTED",
+          "winner": null,
+          "total_ply": null,
+          "new_rows": 0,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-007",
+          "status": "NOT_STARTED",
+          "winner": null,
+          "total_ply": null,
+          "new_rows": 0,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-008",
+          "status": "NOT_STARTED",
+          "winner": null,
+          "total_ply": null,
+          "new_rows": 0,
+          "split": "validation"
+        },
+        {
+          "game": "native187-game-009",
+          "status": "NOT_STARTED",
+          "winner": null,
+          "total_ply": null,
+          "new_rows": 0,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-010",
+          "status": "NOT_STARTED",
+          "winner": null,
+          "total_ply": null,
+          "new_rows": 0,
+          "split": "validation"
+        },
+        {
+          "game": "native187-game-011",
+          "status": "NOT_STARTED",
+          "winner": null,
+          "total_ply": null,
+          "new_rows": 0,
+          "split": "validation"
+        },
+        {
+          "game": "native187-game-012",
+          "status": "NOT_STARTED",
+          "winner": null,
+          "total_ply": null,
+          "new_rows": 0,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-013",
+          "status": "NOT_STARTED",
+          "winner": null,
+          "total_ply": null,
+          "new_rows": 0,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-014",
+          "status": "NOT_STARTED",
+          "winner": null,
+          "total_ply": null,
+          "new_rows": 0,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-015",
+          "status": "NOT_STARTED",
+          "winner": null,
+          "total_ply": null,
+          "new_rows": 0,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-016",
+          "status": "NOT_STARTED",
+          "winner": null,
+          "total_ply": null,
+          "new_rows": 0,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-017",
+          "status": "NOT_STARTED",
+          "winner": null,
+          "total_ply": null,
+          "new_rows": 0,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-018",
+          "status": "NOT_STARTED",
+          "winner": null,
+          "total_ply": null,
+          "new_rows": 0,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-019",
+          "status": "NOT_STARTED",
+          "winner": null,
+          "total_ply": null,
+          "new_rows": 0,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-020",
+          "status": "NOT_STARTED",
+          "winner": null,
+          "total_ply": null,
+          "new_rows": 0,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-021",
+          "status": "NOT_STARTED",
+          "winner": null,
+          "total_ply": null,
+          "new_rows": 0,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-022",
+          "status": "NOT_STARTED",
+          "winner": null,
+          "total_ply": null,
+          "new_rows": 0,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-023",
+          "status": "NOT_STARTED",
+          "winner": null,
+          "total_ply": null,
+          "new_rows": 0,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-024",
+          "status": "NOT_STARTED",
+          "winner": null,
+          "total_ply": null,
+          "new_rows": 0,
+          "split": "train"
+        }
+      ],
+      "total_ply_min_median_max": [
+        0,
+        4,
+        8
+      ],
+      "newply_sum": 0,
+      "batches": null,
+      "RAM_peak_sampled": 557940736,
+      "exit": 1,
+      "primary": null,
+      "point_stopped": true,
+      "matched_CPUJS": {
+        "paired_saved_rows": 0,
+        "same_position_action_visits": 0,
+        "NN137_maxabs": 0,
+        "rootmean_maxabs": 0
+      },
+      "closed_worker_API_ms": 739.0908776433207,
+      "closed_worker_pipe_ms": 819.861635,
+      "bridge": {
+        "calls": 388,
+        "request_bytes": 225150,
+        "response_bytes": 994557
+      }
+    },
+    {
+      "mode": "GPU3",
+      "all24_status": {
+        "GOAL": 24
+      },
+      "allgame_unknown": 0,
+      "Rpolicy": 1132,
+      "Rz": 1132,
+      "Rjoint": 1132,
+      "allattempt_jobwall_s": 247.13934529200196,
+      "joint_per_s": 4.580411907551631,
+      "successful_games_per_s": 0.09711120652052929,
+      "split_rows": {
+        "validation": 215,
+        "train": 917
+      },
+      "NN_completed_qualified": 63720,
+      "NN_actual_attempt": 63720,
+      "terminal_noNN": 8728,
+      "NN_discarded": 0,
+      "startup": 0,
+      "finalCP_saved_counter": null,
+      "finalCP_source_once": true,
+      "P2_jump_entries": 29,
+      "P2_wall_entries": 36656,
+      "overlaps": {
+        "position": {
+          "unique": 1118,
+          "crossgame_shared_keys": 8,
+          "crossgame_row_occurrences": 22,
+          "train_val_shared_keys": 7,
+          "train_val_row_occurrences": 20
+        },
+        "fullstate": {
+          "unique": 1118,
+          "crossgame_shared_keys": 8,
+          "crossgame_row_occurrences": 22,
+          "train_val_shared_keys": 7,
+          "train_val_row_occurrences": 20
+        },
+        "features": {
+          "unique": 1118,
+          "crossgame_shared_keys": 8,
+          "crossgame_row_occurrences": 22,
+          "train_val_shared_keys": 7,
+          "train_val_row_occurrences": 20
+        },
+        "features_legal": {
+          "unique": 1118,
+          "crossgame_shared_keys": 8,
+          "crossgame_row_occurrences": 22,
+          "train_val_shared_keys": 7,
+          "train_val_row_occurrences": 20
+        }
+      },
+      "all24_distribution": [
+        {
+          "game": "native187-game-001",
+          "status": "GOAL",
+          "winner": 1,
+          "total_ply": 59,
+          "new_rows": 59,
+          "split": "validation"
+        },
+        {
+          "game": "native187-game-002",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 86,
+          "new_rows": 82,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-003",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 70,
+          "new_rows": 62,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-004",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 68,
+          "new_rows": 56,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-005",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 54,
+          "new_rows": 38,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-006",
+          "status": "GOAL",
+          "winner": 1,
+          "total_ply": 39,
+          "new_rows": 19,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-007",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 48,
+          "new_rows": 48,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-008",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 66,
+          "new_rows": 62,
+          "split": "validation"
+        },
+        {
+          "game": "native187-game-009",
+          "status": "GOAL",
+          "winner": 1,
+          "total_ply": 65,
+          "new_rows": 57,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-010",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 52,
+          "new_rows": 40,
+          "split": "validation"
+        },
+        {
+          "game": "native187-game-011",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 70,
+          "new_rows": 54,
+          "split": "validation"
+        },
+        {
+          "game": "native187-game-012",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 42,
+          "new_rows": 22,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-013",
+          "status": "GOAL",
+          "winner": 1,
+          "total_ply": 73,
+          "new_rows": 73,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-014",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 56,
+          "new_rows": 52,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-015",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 68,
+          "new_rows": 60,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-016",
+          "status": "GOAL",
+          "winner": 1,
+          "total_ply": 43,
+          "new_rows": 31,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-017",
+          "status": "GOAL",
+          "winner": 1,
+          "total_ply": 59,
+          "new_rows": 43,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-018",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 44,
+          "new_rows": 24,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-019",
+          "status": "GOAL",
+          "winner": 1,
+          "total_ply": 47,
+          "new_rows": 47,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-020",
+          "status": "GOAL",
+          "winner": 1,
+          "total_ply": 53,
+          "new_rows": 49,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-021",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 54,
+          "new_rows": 46,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-022",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 72,
+          "new_rows": 60,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-023",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 40,
+          "new_rows": 24,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-024",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 44,
+          "new_rows": 24,
+          "split": "train"
+        }
+      ],
+      "total_ply_min_median_max": [
+        39,
+        55.0,
+        86
+      ],
+      "newply_sum": 1132,
+      "batches": {
+        "histogram": [
+          0,
+          2165,
+          15347,
+          10287,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "batch_calls": 27799,
+        "sample_rows": 63720,
+        "effective_batch": 2.29216878304975,
+        "full_batch_fraction": 0.0,
+        "mean_queue_ms": 1.722374864799113,
+        "max_queue_ms": 219.52503999999954,
+        "provider_pipe_ms": 194562.73811200005,
+        "provider_stage_spans": {
+          "batches": 27799,
+          "server_before_JSON_ms": 161834.35682700112,
+          "stages": {
+            "input_parse_ms": 4214.927748000015,
+            "H2D_sync_ms": 12614.250273999965,
+            "forward_sync_ms": 131714.55537800022,
+            "D2H_sync_ms": 6074.595529999994
+          }
+        },
+        "coldinit_s": {
+          "import": 1.1133614190039225,
+          "CPUORT_session": 0.01990084198769182,
+          "graph_weights": 0.05023838597116992,
+          "CUDA_upload_context": 0.11890460504218936
+        },
+        "VRAM_peak_reserved_B": 35651584,
+        "provider_exit": {
+          "code": null,
+          "signal": "SIGTERM",
+          "pid": 3571306
+        },
+        "max_pending_games": 3
+      },
+      "RAM_peak_sampled": 1979912192,
+      "exit": 0,
+      "primary": null,
+      "point_stopped": true,
+      "matched_CPUJS": {
+        "paired_saved_rows": 1132,
+        "same_position_action_visits": 1132,
+        "NN137_maxabs": 1.2159347534179688e-05,
+        "rootmean_maxabs": 1.374048224533908e-06
+      },
+      "closed_worker_API_ms": 0,
+      "closed_worker_pipe_ms": 0,
+      "bridge": {
+        "calls": 140696,
+        "request_bytes": 71123127,
+        "response_bytes": 438110108
+      }
+    },
+    {
+      "mode": "GPU12",
+      "all24_status": {
+        "GOAL": 24
+      },
+      "allgame_unknown": 0,
+      "Rpolicy": 1132,
+      "Rz": 1132,
+      "Rjoint": 1132,
+      "allattempt_jobwall_s": 107.80132248700829,
+      "joint_per_s": 10.500798820315245,
+      "successful_games_per_s": 0.22263177710915713,
+      "split_rows": {
+        "validation": 215,
+        "train": 917
+      },
+      "NN_completed_qualified": 63720,
+      "NN_actual_attempt": 63720,
+      "terminal_noNN": 8728,
+      "NN_discarded": 0,
+      "startup": 0,
+      "finalCP_saved_counter": null,
+      "finalCP_source_once": true,
+      "P2_jump_entries": 29,
+      "P2_wall_entries": 36656,
+      "overlaps": {
+        "position": {
+          "unique": 1118,
+          "crossgame_shared_keys": 8,
+          "crossgame_row_occurrences": 22,
+          "train_val_shared_keys": 7,
+          "train_val_row_occurrences": 20
+        },
+        "fullstate": {
+          "unique": 1118,
+          "crossgame_shared_keys": 8,
+          "crossgame_row_occurrences": 22,
+          "train_val_shared_keys": 7,
+          "train_val_row_occurrences": 20
+        },
+        "features": {
+          "unique": 1118,
+          "crossgame_shared_keys": 8,
+          "crossgame_row_occurrences": 22,
+          "train_val_shared_keys": 7,
+          "train_val_row_occurrences": 20
+        },
+        "features_legal": {
+          "unique": 1118,
+          "crossgame_shared_keys": 8,
+          "crossgame_row_occurrences": 22,
+          "train_val_shared_keys": 7,
+          "train_val_row_occurrences": 20
+        }
+      },
+      "all24_distribution": [
+        {
+          "game": "native187-game-001",
+          "status": "GOAL",
+          "winner": 1,
+          "total_ply": 59,
+          "new_rows": 59,
+          "split": "validation"
+        },
+        {
+          "game": "native187-game-002",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 86,
+          "new_rows": 82,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-003",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 70,
+          "new_rows": 62,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-004",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 68,
+          "new_rows": 56,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-005",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 54,
+          "new_rows": 38,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-006",
+          "status": "GOAL",
+          "winner": 1,
+          "total_ply": 39,
+          "new_rows": 19,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-007",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 48,
+          "new_rows": 48,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-008",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 66,
+          "new_rows": 62,
+          "split": "validation"
+        },
+        {
+          "game": "native187-game-009",
+          "status": "GOAL",
+          "winner": 1,
+          "total_ply": 65,
+          "new_rows": 57,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-010",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 52,
+          "new_rows": 40,
+          "split": "validation"
+        },
+        {
+          "game": "native187-game-011",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 70,
+          "new_rows": 54,
+          "split": "validation"
+        },
+        {
+          "game": "native187-game-012",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 42,
+          "new_rows": 22,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-013",
+          "status": "GOAL",
+          "winner": 1,
+          "total_ply": 73,
+          "new_rows": 73,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-014",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 56,
+          "new_rows": 52,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-015",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 68,
+          "new_rows": 60,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-016",
+          "status": "GOAL",
+          "winner": 1,
+          "total_ply": 43,
+          "new_rows": 31,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-017",
+          "status": "GOAL",
+          "winner": 1,
+          "total_ply": 59,
+          "new_rows": 43,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-018",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 44,
+          "new_rows": 24,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-019",
+          "status": "GOAL",
+          "winner": 1,
+          "total_ply": 47,
+          "new_rows": 47,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-020",
+          "status": "GOAL",
+          "winner": 1,
+          "total_ply": 53,
+          "new_rows": 49,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-021",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 54,
+          "new_rows": 46,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-022",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 72,
+          "new_rows": 60,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-023",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 40,
+          "new_rows": 24,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-024",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 44,
+          "new_rows": 24,
+          "split": "train"
+        }
+      ],
+      "total_ply_min_median_max": [
+        39,
+        55.0,
+        86
+      ],
+      "newply_sum": 1132,
+      "batches": {
+        "histogram": [
+          0,
+          135,
+          774,
+          1297,
+          2585,
+          1830,
+          1193,
+          1158,
+          2924
+        ],
+        "batch_calls": 11896,
+        "sample_rows": 63720,
+        "effective_batch": 5.356422326832549,
+        "full_batch_fraction": 0.24579690652320108,
+        "mean_queue_ms": 4.707696492168901,
+        "max_queue_ms": 197.19640299999992,
+        "provider_pipe_ms": 87960.32385699976,
+        "provider_stage_spans": {
+          "batches": 11896,
+          "server_before_JSON_ms": 70993.28807999956,
+          "stages": {
+            "input_parse_ms": 4076.1155529999905,
+            "H2D_sync_ms": 4193.318250000003,
+            "forward_sync_ms": 56799.7299080001,
+            "D2H_sync_ms": 2594.972575000009
+          }
+        },
+        "coldinit_s": {
+          "import": 0.7569999090046622,
+          "CPUORT_session": 0.020073647028766572,
+          "graph_weights": 0.048448531015310436,
+          "CUDA_upload_context": 0.10311023896792904
+        },
+        "VRAM_peak_reserved_B": 35651584,
+        "provider_exit": {
+          "code": null,
+          "signal": "SIGTERM",
+          "pid": 3577031
+        },
+        "max_pending_games": 12
+      },
+      "RAM_peak_sampled": 2078588928,
+      "exit": 0,
+      "primary": null,
+      "point_stopped": true,
+      "matched_CPUJS": {
+        "paired_saved_rows": 1132,
+        "same_position_action_visits": 1132,
+        "NN137_maxabs": 1.1920928955078125e-05,
+        "rootmean_maxabs": 1.3749795471085235e-06
+      },
+      "closed_worker_API_ms": 0,
+      "closed_worker_pipe_ms": 0,
+      "bridge": {
+        "calls": 140696,
+        "request_bytes": 71124583,
+        "response_bytes": 438111018
+      }
+    },
+    {
+      "mode": "GPU24",
+      "all24_status": {
+        "GOAL": 24
+      },
+      "allgame_unknown": 0,
+      "Rpolicy": 1132,
+      "Rz": 1132,
+      "Rjoint": 1132,
+      "allattempt_jobwall_s": 88.33445621305145,
+      "joint_per_s": 12.814931438189422,
+      "successful_games_per_s": 0.27169465946691357,
+      "split_rows": {
+        "validation": 215,
+        "train": 917
+      },
+      "NN_completed_qualified": 63720,
+      "NN_actual_attempt": 63720,
+      "terminal_noNN": 8728,
+      "NN_discarded": 0,
+      "startup": 0,
+      "finalCP_saved_counter": null,
+      "finalCP_source_once": true,
+      "P2_jump_entries": 29,
+      "P2_wall_entries": 36656,
+      "overlaps": {
+        "position": {
+          "unique": 1118,
+          "crossgame_shared_keys": 8,
+          "crossgame_row_occurrences": 22,
+          "train_val_shared_keys": 7,
+          "train_val_row_occurrences": 20
+        },
+        "fullstate": {
+          "unique": 1118,
+          "crossgame_shared_keys": 8,
+          "crossgame_row_occurrences": 22,
+          "train_val_shared_keys": 7,
+          "train_val_row_occurrences": 20
+        },
+        "features": {
+          "unique": 1118,
+          "crossgame_shared_keys": 8,
+          "crossgame_row_occurrences": 22,
+          "train_val_shared_keys": 7,
+          "train_val_row_occurrences": 20
+        },
+        "features_legal": {
+          "unique": 1118,
+          "crossgame_shared_keys": 8,
+          "crossgame_row_occurrences": 22,
+          "train_val_shared_keys": 7,
+          "train_val_row_occurrences": 20
+        }
+      },
+      "all24_distribution": [
+        {
+          "game": "native187-game-001",
+          "status": "GOAL",
+          "winner": 1,
+          "total_ply": 59,
+          "new_rows": 59,
+          "split": "validation"
+        },
+        {
+          "game": "native187-game-002",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 86,
+          "new_rows": 82,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-003",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 70,
+          "new_rows": 62,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-004",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 68,
+          "new_rows": 56,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-005",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 54,
+          "new_rows": 38,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-006",
+          "status": "GOAL",
+          "winner": 1,
+          "total_ply": 39,
+          "new_rows": 19,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-007",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 48,
+          "new_rows": 48,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-008",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 66,
+          "new_rows": 62,
+          "split": "validation"
+        },
+        {
+          "game": "native187-game-009",
+          "status": "GOAL",
+          "winner": 1,
+          "total_ply": 65,
+          "new_rows": 57,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-010",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 52,
+          "new_rows": 40,
+          "split": "validation"
+        },
+        {
+          "game": "native187-game-011",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 70,
+          "new_rows": 54,
+          "split": "validation"
+        },
+        {
+          "game": "native187-game-012",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 42,
+          "new_rows": 22,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-013",
+          "status": "GOAL",
+          "winner": 1,
+          "total_ply": 73,
+          "new_rows": 73,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-014",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 56,
+          "new_rows": 52,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-015",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 68,
+          "new_rows": 60,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-016",
+          "status": "GOAL",
+          "winner": 1,
+          "total_ply": 43,
+          "new_rows": 31,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-017",
+          "status": "GOAL",
+          "winner": 1,
+          "total_ply": 59,
+          "new_rows": 43,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-018",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 44,
+          "new_rows": 24,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-019",
+          "status": "GOAL",
+          "winner": 1,
+          "total_ply": 47,
+          "new_rows": 47,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-020",
+          "status": "GOAL",
+          "winner": 1,
+          "total_ply": 53,
+          "new_rows": 49,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-021",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 54,
+          "new_rows": 46,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-022",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 72,
+          "new_rows": 60,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-023",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 40,
+          "new_rows": 24,
+          "split": "train"
+        },
+        {
+          "game": "native187-game-024",
+          "status": "GOAL",
+          "winner": 2,
+          "total_ply": 44,
+          "new_rows": 24,
+          "split": "train"
+        }
+      ],
+      "total_ply_min_median_max": [
+        39,
+        55.0,
+        86
+      ],
+      "newply_sum": 1132,
+      "batches": {
+        "histogram": [
+          0,
+          628,
+          698,
+          311,
+          354,
+          275,
+          283,
+          310,
+          6763
+        ],
+        "batch_calls": 9622,
+        "sample_rows": 63720,
+        "effective_batch": 6.6223238411972565,
+        "full_batch_fraction": 0.7028684265225524,
+        "mean_queue_ms": 8.614522557328888,
+        "max_queue_ms": 209.5049370000006,
+        "provider_pipe_ms": 75733.11443200013,
+        "provider_stage_spans": {
+          "batches": 9622,
+          "server_before_JSON_ms": 59294.66566500008,
+          "stages": {
+            "input_parse_ms": 3906.1373800000088,
+            "H2D_sync_ms": 3183.7092029999917,
+            "forward_sync_ms": 47486.881096999896,
+            "D2H_sync_ms": 2053.280508000013
+          }
+        },
+        "coldinit_s": {
+          "import": 0.7521842620335519,
+          "CPUORT_session": 0.025914813042618334,
+          "graph_weights": 0.046028675977140665,
+          "CUDA_upload_context": 0.11724465398583561
+        },
+        "VRAM_peak_reserved_B": 35651584,
+        "provider_exit": {
+          "code": null,
+          "signal": "SIGTERM",
+          "pid": 3579926
+        },
+        "max_pending_games": 24
+      },
+      "RAM_peak_sampled": 2180927488,
+      "exit": 0,
+      "primary": null,
+      "point_stopped": true,
+      "matched_CPUJS": {
+        "paired_saved_rows": 1132,
+        "same_position_action_visits": 1132,
+        "NN137_maxabs": 1.1920928955078125e-05,
+        "rootmean_maxabs": 1.3749795471085235e-06
+      },
+      "closed_worker_API_ms": 0,
+      "closed_worker_pipe_ms": 0,
+      "bridge": {
+        "calls": 140696,
+        "request_bytes": 71122909,
+        "response_bytes": 438110074
+      }
+    }
+  ],
+  "all120_status": {
+    "GOAL": 96,
+    "CONTROL_OR_ENGINE_OR_SCHEMA_UNKNOWN": 3,
+    "NOT_STARTED": 21
+  },
+  "all_produced_qualified_rows": 4528,
+  "allattempts": [
+    {
+      "run": "native187-cpujs-r1",
+      "kind": "generate",
+      "jobwall": 137.83640136098256,
+      "exit": 0,
+      "reason": null,
+      "source_git": "2fef995b9e59c4dd8109c18c067f148d91f83083",
+      "tracked_identities": 301
+    },
+    {
+      "run": "native187-gpu12-r1",
+      "kind": "generate",
+      "jobwall": 107.80132248700829,
+      "exit": 0,
+      "reason": null,
+      "source_git": "31a807382621e6b73d8656502e7ea6991bb8ba25",
+      "tracked_identities": 207
+    },
+    {
+      "run": "native187-gpu24-r1",
+      "kind": "generate",
+      "jobwall": 88.33445621305145,
+      "exit": 0,
+      "reason": null,
+      "source_git": "31a807382621e6b73d8656502e7ea6991bb8ba25",
+      "tracked_identities": 185
+    },
+    {
+      "run": "native187-gpu3-r1",
+      "kind": "generate",
+      "jobwall": 247.13934529200196,
+      "exit": 0,
+      "reason": null,
+      "source_git": "31a807382621e6b73d8656502e7ea6991bb8ba25",
+      "tracked_identities": 562
+    },
+    {
+      "run": "native187-history-normalize-r1",
+      "kind": "mock",
+      "jobwall": 2.417806187993847,
+      "exit": 0,
+      "reason": null,
+      "source_git": "PRECOMMIT-NN0",
+      "tracked_identities": 1
+    },
+    {
+      "run": "native187-mock-r1",
+      "kind": "mock",
+      "jobwall": 31.86220907297684,
+      "exit": -15,
+      "reason": "JOB_OR_SCIENCE_OR_TOTAL_DEADLINE",
+      "source_git": "PRECOMMIT-NN0",
+      "tracked_identities": 9
+    },
+    {
+      "run": "native187-mock-r2",
+      "kind": "mock",
+      "jobwall": 2.0722249620012008,
+      "exit": 0,
+      "reason": null,
+      "source_git": "PRECOMMIT-NN0",
+      "tracked_identities": 10
+    },
+    {
+      "run": "native187-parity-r1",
+      "kind": "parity",
+      "jobwall": 3.6645938450237736,
+      "exit": 0,
+      "reason": null,
+      "source_git": "2fef995b9e59c4dd8109c18c067f148d91f83083",
+      "tracked_identities": 2
+    },
+    {
+      "run": "native187-prepare-r1",
+      "kind": "mock",
+      "jobwall": 1.4818282109918073,
+      "exit": 0,
+      "reason": null,
+      "source_git": "PRECOMMIT-NN0",
+      "tracked_identities": 1
+    },
+    {
+      "run": "native187-probe-r1",
+      "kind": "mock",
+      "jobwall": 1.6431774880038574,
+      "exit": 0,
+      "reason": null,
+      "source_git": "PRECOMMIT-NN0",
+      "tracked_identities": 1
+    },
+    {
+      "run": "native187-rustcpu-r1",
+      "kind": "generate",
+      "jobwall": 6.334307405981235,
+      "exit": 1,
+      "reason": null,
+      "source_git": "2fef995b9e59c4dd8109c18c067f148d91f83083",
+      "tracked_identities": 20
+    }
+  ],
+  "allattempt_jobwall_s": 630.5876725260168,
+  "repeated_family_rows_per_allattempt_s": 7.1806034232506875,
+  "distinct_sibling_workload_warning": true,
+  "snapshots": {
+    "research-data/ai-sigma/187-manygame-generation/openings.json": {
+      "SHA256": "4ec94a50da0c7c53604085fca3fff95e1713f02c9f6ea220d1c0f177985fdba5",
+      "bytes": 420705
+    },
+    "research-data/ai-sigma/187-manygame-generation/CPUJS-all-status.json": {
+      "SHA256": "6f76a5ca5f4a2123ac8269b21c4f1970d0119e6041227ba0ff6439bf91e72ca0",
+      "bytes": 147861
+    },
+    "research-data/ai-sigma/187-manygame-generation/CPUJS-summary.json": {
+      "SHA256": "89488a39ca899e5f0d30ffc492689822203eb458552da205420d0556b51fd921",
+      "bytes": 6017
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-cpujs-r1/process.json": {
+      "SHA256": "99a98390a692d892285a0f20dc0c34b59cd833a8c85549048dda91394f5e64a9",
+      "bytes": 37927
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-cpujs-r1/result.json": {
+      "SHA256": "e32914b7e1ba89c17e1a0d1689bd73f02eb6531648ef66ee975dd4c3e2b76922",
+      "bytes": 207731
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-cpujs-r1/core2/raw-rows.jsonl": {
+      "SHA256": "0fc864decbd53838d1d4594d6f0c1db9a6fc1dbb1ee898fd7893afe9ebc16878",
+      "bytes": 3931265
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-cpujs-r1/core4/raw-rows.jsonl": {
+      "SHA256": "af44092c325811b053906c72825f53203e82d9d74560c16ef13bf7f08ada5012",
+      "bytes": 3895962
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-cpujs-r1/core6/raw-rows.jsonl": {
+      "SHA256": "e0dd1ffde7c74e88bc08496af5481cac098a657f9d09d0567579390f1aa871c3",
+      "bytes": 3014381
+    },
+    "research-data/ai-sigma/187-manygame-generation/RustCPU-all-status.json": {
+      "SHA256": "8c25b0dc7f215f31158bd2fae22f6082a68a426a416eb10c0020169dd73010d3",
+      "bytes": 10553
+    },
+    "research-data/ai-sigma/187-manygame-generation/RustCPU-summary.json": {
+      "SHA256": "e8941f4ecc3ec183a0db9d60ee60b60b04608ef152944479a7f79e184f39e48e",
+      "bytes": 6217
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-rustcpu-r1/process.json": {
+      "SHA256": "47893006071abf772c91eb03a0faa979720a6f0dc9ef366ebdf82e2f76878e67",
+      "bytes": 3345
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-rustcpu-r1/result.json": {
+      "SHA256": "af98aa807b51e35cacc86a29b8923da5e6b5ca64610b6a1a29ef5d11446390b7",
+      "bytes": 8375
+    },
+    "research-data/ai-sigma/187-manygame-generation/GPU3-all-status.json": {
+      "SHA256": "865eea569d6aa10abb99ccd34f6e2ce24d5e8b5d4e22ec6b382db6120610194a",
+      "bytes": 147777
+    },
+    "research-data/ai-sigma/187-manygame-generation/GPU3-summary.json": {
+      "SHA256": "6b2016ded1f59fb58c0965938858d6a61377a43d153209eb0603b9f7fc173fba",
+      "bytes": 16109
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu3-r1/process.json": {
+      "SHA256": "ac016730f78ef8a2c7f00d6dc09ca3d968ad87ef51684ad0379b4ec52db683d5",
+      "bytes": 70070
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu3-r1/result.json": {
+      "SHA256": "52357893b133e656492b83b86e5a8fb75feae4e1e051796bbd93d2267b209f23",
+      "bytes": 208181
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu3-r1/core2/raw-rows.jsonl": {
+      "SHA256": "a619157153120d426a3d06b40ca0934405bb9c14c34673f91a9657e110ad2d23",
+      "bytes": 3918727
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu3-r1/core4/raw-rows.jsonl": {
+      "SHA256": "eb25f83316a93a0c18cc1636df0258ffc2cf8fbd99b551c2ec610e9f821025ee",
+      "bytes": 3883791
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu3-r1/core6/raw-rows.jsonl": {
+      "SHA256": "d9ae0f5b7d13ad716a350ab4848373e2cd84fb32a6db6da7a0044a4d7ecd1bef",
+      "bytes": 3004876
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu3-r1/broker.json": {
+      "SHA256": "670e6a880f123f364db1aaa6ddd1093c2947ad2a6872a11a5716dd10d9cde95d",
+      "bytes": 10299
+    },
+    "research-data/ai-sigma/187-manygame-generation/GPU12-all-status.json": {
+      "SHA256": "9d3e518c3ff7db5bd8187ae5d4b7425d1e9334d87a479e20a686207371ea5979",
+      "bytes": 147782
+    },
+    "research-data/ai-sigma/187-manygame-generation/GPU12-summary.json": {
+      "SHA256": "71d26e2ba77bfdacef199b98bae70deea9160fc5fd1ab6e40a73cba75cde29d0",
+      "bytes": 17790
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu12-r1/process.json": {
+      "SHA256": "1a90e0c754c979c4b683e93fc3dcf36fc25db45653c1c2dcd1eb30d787edf079",
+      "bytes": 26390
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu12-r1/result.json": {
+      "SHA256": "9214f4143aae961ccff61c9d7e866d497cb5eed822c8e09aeb8a36a503715fec",
+      "bytes": 208190
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu12-r1/core2/raw-rows.jsonl": {
+      "SHA256": "82d84d83336d92c7f94ac544c07f3f6c4d7f8964bcf4bbb27c7978826a62491d",
+      "bytes": 3919569
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu12-r1/core4/raw-rows.jsonl": {
+      "SHA256": "838a08298bf3b444fe31ab45508e864d6f030ad823f8a879792c2ffac4c49547",
+      "bytes": 3884516
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu12-r1/core6/raw-rows.jsonl": {
+      "SHA256": "c0b2f3b55489b16ce5301a11dc99f1b6e6797db2ccb75b3d4fb2de7441b719bb",
+      "bytes": 3005488
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu12-r1/broker.json": {
+      "SHA256": "3f7b00011d4591dbbb01ef16c7a0c1fdd2521b7fafd739004d4b0aea9f0e03fa",
+      "bytes": 11975
+    },
+    "research-data/ai-sigma/187-manygame-generation/GPU24-all-status.json": {
+      "SHA256": "6aeac9445c310475887d7212b47ef0e8eb6d775428e7ad96114dc2f7fcb2cb4d",
+      "bytes": 147747
+    },
+    "research-data/ai-sigma/187-manygame-generation/GPU24-summary.json": {
+      "SHA256": "90aa84800b2ab12bd6ea51ac062653881078ff42d7f443c582c7a84ed2278ba6",
+      "bytes": 18790
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu24-r1/process.json": {
+      "SHA256": "2fa6e62a5e87b0d8343f79baed2fde1c19c8ed5ba441af8f968a320ad5fccaf9",
+      "bytes": 23649
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu24-r1/result.json": {
+      "SHA256": "111f99eafb74e041cfba81e79ee12e3f19f919c7c80baea7240a1658a2ae4f98",
+      "bytes": 208148
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu24-r1/core2/raw-rows.jsonl": {
+      "SHA256": "7600a6d437d7328b7bf07bd9d688fa61433ef7a41a407c7c8d5ec50fa0c84c02",
+      "bytes": 3919527
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu24-r1/core4/raw-rows.jsonl": {
+      "SHA256": "53495f84c5dbcaab38a9eb5f0f915b9ae5c436ea49109b7211e61abb16d61b5f",
+      "bytes": 3884646
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu24-r1/core6/raw-rows.jsonl": {
+      "SHA256": "0d7a193318c68d38ff806e936d18388809b2211a67aa2c0e794b16d17fb1577c",
+      "bytes": 3005490
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu24-r1/broker.json": {
+      "SHA256": "71a24be6ca01ef92229a128daf6660cead7a1b233d00fcb31a60bb396a8325c7",
+      "bytes": 12976
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-history-normalize-r1/process.json": {
+      "SHA256": "ebea870777679b6b475339ea1c78453cb59af89baafd79d358a075ecb5217757",
+      "bytes": 995
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-mock-r1/process.json": {
+      "SHA256": "ea0ec8ba896ff07d0a1649aaaac9082f02f994f6fae61549b07476f6c14736b6",
+      "bytes": 1970
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-mock-r2/process.json": {
+      "SHA256": "f001aeec0fc8c89c03046e2de61c10a93fe2d5c5f374d71687f8823e86552db2",
+      "bytes": 2071
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-parity-r1/process.json": {
+      "SHA256": "3d3f22a2141ac4f22eb485c4f5ff72b81c418f048d6e1e3a739d2b8af4a516bd",
+      "bytes": 1124
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-prepare-r1/process.json": {
+      "SHA256": "affb539ec2e5761125e0cab269dee56d1e1e04cd006bf222ab25d376b8faaa26",
+      "bytes": 962
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-probe-r1/process.json": {
+      "SHA256": "a9ac285604b3656fa9ae171e38aa9d85953e1bd96011c3bfbb6a4b13e0e2d7bf",
+      "bytes": 960
+    }
+  },
+  "RustCPU_quality": "0 certified rows; all24 unknown/notstarted; failure is checker not NN negative",
+  "no_old173_reads": true,
+  "elapsed_seconds": 2.791271805006545,
+  "maxRSS_bytes": 137543680,
+  "end": "2026-10-03T13:55:11.004066+00:00",
+  "PID": 3587699
+}
