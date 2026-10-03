@@ -1,0 +1,39 @@
+{
+  "UTC": "2026-10-03T09:28:54.143229+00:00",
+  "issue": "quoridor-4lc.176",
+  "interim_phase": "first8productiongames",
+  "games": 8,
+  "all_status_GOAL": true,
+  "rows": 514,
+  "rootK_edge_z_finite_checks": true,
+  "NN": 30347,
+  "production_jobwall_seconds": 72.162764,
+  "rows_per_production_job_seconds": 7.1227870373701325,
+  "RAM_peak_B": 1371549696,
+  "production_job_exit_remaining_unknown": [
+    0,
+    [],
+    []
+  ],
+  "sameK_comparison": [
+    {
+      "opening_ply": 0,
+      "root_fields_firstNN_exact": true,
+      "allCP_wall_ms": 355.81916803121567,
+      "final_only_wall_ms": 340.08971095085144
+    },
+    {
+      "opening_ply": 5,
+      "root_fields_firstNN_exact": true,
+      "allCP_wall_ms": 344.5731729865074,
+      "final_only_wall_ms": 338.89336997270584
+    }
+  ],
+  "scope": "saved first-batch counters/root/z checks; no independent full RuleA replay or backend/strength claim",
+  "limitations": [
+    "single ordered comparison at each of two inputs; warm/order confounding",
+    "production stage denominator excludes separate prep/parity/export/learning; report whole-pipeline cost separately",
+    "all24 lineage/state overlap validation remains owner followup"
+  ],
+  "continuation": "remaining registered16 and learner connection continue; GPU comparison independent"
+}
