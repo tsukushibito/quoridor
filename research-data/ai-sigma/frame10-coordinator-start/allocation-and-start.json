@@ -1,0 +1,93 @@
+{
+  "utc": "2026-10-03T00:30:06.622973+00:00",
+  "parent_version": 10,
+  "parent_sha256": "25f7eabd32bf67b07c511c8f3cae57ee18047b78a4be485266331854a5751238",
+  "allocations": {
+    "commit": "40243b25804f8e929a6af5680c02a2b70bef39d1",
+    "records": {
+      "critic": {
+        "issue": "quoridor-4lc.147",
+        "path": "docs/design/ai-sigma-contract-critic-frame10-gap-design.md",
+        "body": "frame10-critic-request.md"
+      },
+      "hypothesis": {
+        "issue": "quoridor-4lc.148",
+        "path": "docs/design/ai-sigma-contract-hypothesis-frame10-gap-sampling.md",
+        "body": "frame10-hypothesis-request.md"
+      },
+      "experiment": {
+        "issue": "quoridor-4lc.149",
+        "path": "docs/design/ai-sigma-contract-experiment-frame10-baseline-gap.md",
+        "body": "frame10-experiment-request.md"
+      },
+      "steward": {
+        "issue": "quoridor-4lc.92",
+        "path": "docs/design/ai-sigma-contract-steward-frame10.md",
+        "body": "frame10-steward-request.md"
+      }
+    }
+  },
+  "deliveries": {
+    "critic": {
+      "method": "turn/start",
+      "thread_id": "01a0f31d-8227-7e03-a7e6-915b4918c11b",
+      "turn_id": "01a0ff28-a586-7e32-b41d-c4482c853d79",
+      "accepted": true,
+      "UTC": "2026-10-03T00:27:29.039974+00:00",
+      "state_before": "idle",
+      "body_sha256": "c77c7b81f6aa5748e2cbfe86cb3e6413aee1b57aebb330c0ff421854ee23400f"
+    },
+    "hypothesis": {
+      "method": "turn/start",
+      "thread_id": "01a0f31c-2e4b-7170-82c5-69e1428c2418",
+      "turn_id": "01a0ff28-c113-7791-a3fd-cc52e316b2df",
+      "accepted": true,
+      "explicit_restart_from_systemError": true,
+      "UTC": "2026-10-03T00:27:36.091207+00:00",
+      "state_before": "systemError",
+      "body_sha256": "bcadb4c2923b2afdbfa90ef530363a2154f8408326dd6310eaeb2394c4f12336"
+    },
+    "experiment": {
+      "method": "turn/start",
+      "thread_id": "01a0f31d-6d15-7620-bb63-4b4f878e4746",
+      "turn_id": "01a0ff28-85fd-7642-9f95-71dad52eac94",
+      "accepted": true,
+      "UTC": "2026-10-03T00:27:20.968136+00:00",
+      "state_before": "idle",
+      "body_sha256": "82ea4d4ce56ecd027f5991aec2f3bdc83fbcea412bfed327b3d6d7769ec11d2b"
+    },
+    "steward": {
+      "method": "turn/start",
+      "thread_id": "01a0f31d-99ee-7d63-b162-bc1a59c457c6",
+      "turn_id": "01a0ff28-5cb0-7501-981d-21bb410c9602",
+      "accepted": true,
+      "UTC": "2026-10-03T00:27:10.394433+00:00",
+      "state_before": "notLoaded",
+      "body_sha256": "cc834ec26d0bbbccfdcb35f626df4001165463c972201f1c50a79723b7a01100"
+    }
+  },
+  "owner_reports": {
+    "steward": {
+      "receipt": "2026-10-03T00:27:48.859040+00:00",
+      "scope_started": true
+    },
+    "experiment": {
+      "receipt": "2026-10-03T00:28:04.562204+00:00",
+      "claim_static_started": true
+    },
+    "hypothesis": {
+      "receipt": "2026-10-03T00:28:22.929797+00:00",
+      "claim_static_started": true
+    },
+    "critic": {
+      "receipt": "2026-10-03T00:27:40+00:00",
+      "claim": "2026-10-03T00:28:06+00:00",
+      "static_started": true
+    }
+  },
+  "science_games_observed": 0,
+  "runtime_ready_observed": false,
+  "automatic_retry": false,
+  "model_settings_changed": false,
+  "old_usage_failure_preserved": true
+}
