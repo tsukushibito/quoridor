@@ -1,0 +1,131 @@
+{
+  "issue": "quoridor-4lc.176",
+  "frame": 12,
+  "UTC": "2026-10-03T09:20:15.068645+00:00",
+  "StageA": {
+    "games": 24,
+    "jobs": 3,
+    "games_per_job": 8,
+    "cores": [
+      2,
+      4,
+      6
+    ],
+    "sessions_per_active_job": 3,
+    "initializations_total_planned": 9,
+    "K": 64,
+    "rootN": 64,
+    "edgeSum": 63,
+    "first_new_plies_temperature1": 16,
+    "remaining_temperature0": "strict first maximum original legal order",
+    "policy_target": "edge visits /63, not sampled action onehot",
+    "provider": "ORT1.30 CPUExecutionProvider intra/inter1 SEQUENTIAL",
+    "model_SHA": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+    "final_only": true,
+    "parity": {
+      "inputs": "new own opening0/P2prefix5",
+      "K": 64,
+      "modes": [
+        "allCP",
+        "finalOnly"
+      ],
+      "rounds": 1,
+      "trace": false
+    },
+    "max_hand_NN": 300000,
+    "per_job_limit": 300,
+    "unfinished": "quality/value z unknown; valid policy-only rows retained; no success supplementation",
+    "startup_initial_total": 9,
+    "NN_budget_per_core_per_job": 30000,
+    "final_only_CP": "r.CP/root_edges built once after final root, per-sim event drain unchanged"
+  },
+  "StageB": {
+    "architecture": "flatten648->hidden32 ReLU->policy136/value1 tanh",
+    "init_seed": 17680311,
+    "steps": 200,
+    "minibatch": 128,
+    "optimizer": "manual SGD lr.01 momentum0 decay0",
+    "loss": "legal-masked piCE + z_stm MSE",
+    "rootmean_auxiliary_weight": 0,
+    "group_split": "SHA256 lineage modulo5==0 validation else train",
+    "duplicate_states": "count crossgame/split overlap; not independent-state validation",
+    "checkpoint": "weights_only reload",
+    "export": "ONNX opset17 legacy/dynamic batch, input Bx8x9x9",
+    "parity_fixed_rows": 5,
+    "tolerance": "abs1e-5+rtol1e-4",
+    "CPU_threads": 1,
+    "seconds": 120,
+    "teacher_fit_is_not_strength": true
+  },
+  "StageC": {
+    "conditional_on_export": true,
+    "new_fresh_lineage_domain": "NATIVE176_EVAL_V1",
+    "pairs": 2,
+    "games": 4,
+    "opening_ply": [
+      12,
+      13
+    ],
+    "both_color_same_input": true,
+    "K": 32,
+    "temperature": 0,
+    "models": [
+      "new student",
+      "fixedSigma d790"
+    ],
+    "purpose": "learning/ONNX/arena legal connection; not improvement or NI",
+    "faults_unknown": true,
+    "seconds": 240
+  },
+  "deadlines": {
+    "received": "2026-10-03T09:07:19Z",
+    "processing": "2026-10-03T10:47:19Z",
+    "newheavy": "2026-10-03T10:37:19Z",
+    "submission": "2026-10-03T11:02:19Z",
+    "parent": "2026-10-03T12:47:38Z"
+  },
+  "resources": {
+    "CPU_pool": [
+      2,
+      4,
+      6
+    ],
+    "RAM": 4294967296,
+    "guard": 3758096384,
+    "storage": 268435456,
+    "storage_guard": 234881024,
+    "experiment_effective_reservation": 2143289344,
+    "heavy_total": 1500,
+    "phase_seconds": {
+      "generate": 900,
+      "learn": 120,
+      "arena": 240,
+      "repair": 240
+    }
+  },
+  "source": {
+    "tools/ai-sigma-native-teacher-pipeline/common.cjs": "f11d23c1f4c65b866b2a5a14264a0425de8fca4ec9828e43ede425ce14147221",
+    "tools/ai-sigma-native-teacher-pipeline/generate.cjs": "f0b6ebc1393dfcd36a99f5698fe771be0702fb283dbf36d71b8c2db0a829b037",
+    "tools/ai-sigma-native-teacher-pipeline/schema.cjs": "d3f26b75b59bad2ac5813225a24f4ef96085ce5edec55ec241ddda0dec544a50",
+    "tools/ai-sigma-native-teacher-pipeline/worker.cjs": "1814daccbc6b23f1b575915d54e9bf452a80c499b8ed4e1ba8c32b565c88cbd7",
+    "tools/ai-sigma-native-teacher-pipeline/save-tree.py": "9ed7654ddb8efc3265d04e86b3b11a547f5377bfd3b95eb8663b27aaecd6a38a",
+    "tools/ai-sigma-native-teacher-pipeline/runner.py": "961b991a39f654ef0f94632b0081c8f491e89688ae305d3520570b5114f09787",
+    "tools/ai-sigma-native-teacher-pipeline/controller.cjs": "9127022a6df9f521f802332b9db70bbd543da96a783add1213c8059d5141cccf",
+    "tools/ai-sigma-native-teacher-pipeline/parity.cjs": "98b60c84ddfbbf14d72cd89b2bff2572709dffc5221819d5329c86066909020d",
+    "tools/ai-sigma-native-teacher-pipeline/mock.cjs": "6b2f269a1ec0e4d4413eaa969d24bbc8f8913704bcac66263df9616c36259015",
+    "tools/ai-sigma-native-teacher-pipeline/admission.py": "4ddcd19197b7b85b042d032dac3f6b091dccf65bb6688b8e13893771232d181f",
+    "tools/ai-sigma-native-teacher-pipeline/pause-monitor.cjs": "265f7c8aa34f9a7f7f06f2ac2441546bd3ab7c36519196a70704351c61bddbea",
+    "tools/ai-sigma-native-teacher-pipeline/compact-beads.py": "63dd13b825818e5d1a2a34c466383cc81ad667fac8c0fe77f065cbebf91be8d3",
+    "tools/ai-sigma-native-teacher-pipeline/engine.cjs": "dd44b0138d35af09a86939c167ed8384f7dfe902051b05279127062fcf1d25f5",
+    "tools/ai-sigma-native-teacher-pipeline/prepare.cjs": "47f364517fe7c49e9204e1022c0bfc4f484a062eff80b59330e5961ce6690641"
+  },
+  "openings_SHA256": "460a4fcd51b8c7fe099e5d43f96d77f5ef6742b23ec227c135bd0a3bddd65a42",
+  "old173_teacher_transfer": false,
+  "row_denominators": [
+    "Rpolicy",
+    "Rz",
+    "Rjoint"
+  ],
+  "loss_value_unknown_mask": 0,
+  "leafNN": "last expanded NN leaf value and own side/ply, distinct rootinitialNN/rootmean/z; auxiliary disabled"
+}
