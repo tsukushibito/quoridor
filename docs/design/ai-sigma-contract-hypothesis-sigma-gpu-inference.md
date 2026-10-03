@@ -1,0 +1,15 @@
+# SIGMA-FOLDED-ONNX-GPU-PARITY-AND-COST / quoridor-4lc.174 / 契約1・親11
+
+171最大1速報を部分採択。固定ONNXd790 graph N9/F128/R10/gpool zero-based2,5,8/83FLOATinitializer/179node/16op、21Conv BNfoldW+bと残6BNをそのまま使う私有torchadapter案。元state_dict捏造/BN逆算/副作用CUDA元dual_network直接import0。現在のTorchCUDAは実tensor成功のみ、モデル対応/数値/総速度は未測定。既CPUnative主評価173のpreregister版をGPUへ変更0、171必要mapping/source/停止Gitbackup最小引渡し後この新自域だけ開始。
+
+writer tools/ai-sigma-gpu-inference/、research-data/ai-sigma/174-gpu-inference/、docs/reports/ai-sigma-hypothesis-gpu-inference.md（自己id差あれば補正）。研究固有コードの少量実装を許可、学習/CUDAtrain/新依存取得/共有環境/driver変更/cargoBuild/ゲーム0。既ONNX/rootfeaturesをreadonly再利用しweights/model重複保存0、83initializerのrawf32→torchCPU/GPUへ入力/構成を明示してmodeleval/inference_mode。AMP/TF32無効/float32/cudnnbenchmarkfalse、既model出力logit/valueを軌道に丸めて救済0。CUDA_CACHE_DISABLE=1等で不要永続cache増殖を避ける。対応外opは正確に不足報告し勝手に近似0。
+
+結果前固定5inputは151/165 StageA保存initial/asym-hv-p2/p2jump/未開始旧149prefix13/14の元648feature bits。shape[1,8,9,9]固定batch1、policy136/value1。各CPUORT1.30/torchCPU/torchCUDAの出力を1回ずつ比較、maxabsとabs1e-4+rtol1e-4の有限判定を別記。NNfloatbit一致を期待値として勝手に要求せず、旧CPU同backendexactbitと別claim。失敗fixtureを補充0、partial/例外/温度/丸めを維持。parityが失敗ならGPU教師/正式比較に採用せず停止/原因最大1案、旧CPU結果変更0。
+
+parity成立時のみinitial単入力の各backend warm1＋steady8各1系列（入力再コピー/起動session重みreuse）、同期H2D/投入/処理/同期/D2H込み応答wall、init/import/modelupload/warm別を測る。CPU側も入力出力費を同scope、nativeJSON encode/decode/stdioの最小往復費を同入力NN0又はheldprovider1要求の範囲で別記、IPCを含まない裸GPUkernelをnative速度倍率と呼ばない。固定batch1を8requestsでbatch8に格上げ0。多数kernel/Python/IPC支配/無差悪化ならCPU優先、利益があれば次の教師生成provider候補のみ。新GPUWDL/正式NI/棋力/学習ready認定0。科学成功行再実行0、adapterデバッグはNN0shape/mock先行、数値failureは同総費新source/runへ保存して最小原因修復可（好都合なbackend条件変更0）。
+
+資源: CPU0単1/torchintra-inter1/ORTintra-inter1、GPU推論既6GiB/1job30minの中でこの計測総heavy180秒/1jobhard120秒、RAM2GiBguard1.75GiB、現在173はscience前RAM4.5GiBguard4GiBへ別補足して同modeで登録、監督1GiB/steward管理512MiBと合計8GiB内。GPUheavyはCPU3arena+本1で4logicalだがCPU0監督180秒turnと重ねない。既scheduler次通常time/ownedcurrentをreadonly確認し硬120秒+30余裕が確実に収まる窓でのみ開始、未知なら新spawn0/延期。LLMactive数だけでは拒否0。CUDA他研究owner/GPUownpeak/実headroomを確認、物理12GiB全量を研究枠にしない。173RAMguard調整が未反映又は現在combinedforecast/RSS/CPU足りなければGPUモデルjobは待機、173強制interrupt0。予算不足/CPU窓不足ならNN0adapter停止準備成果として提出できる。
+
+新scope+smallsubtreeGit/報告forecast256KiBを既hypothesis16MiB予約/combinedguard15MiB内 current旧14,596,875B＋171実保持＋本forecastで確認、足りないなら新write0、未確認旧量減額/parent追加/owner移管0。完全privateindex~380KBはこの小forecastに収まらないのでin-memory subtree保存又は実indexforecastを確保し超過0。graph重み/元raw全copy0、必要参照hash/小mapping/5outputs/timing/失敗を残す。GPUallocatortorchpeak/current/RSS/CPUpool/jobPIDidentity/childwait/owner停止source/raw必要Git復元/Beadsbackup→coordinator。
+
+受領時計保存ready/show goal+self/no pause本人割当、本issueのみclaim/5分内実開始、処理受領35分/newheavy30分/提出50分、親newheavy08:05:21/end08:15:21早側。現在GPU測定権限は既推論枠内の本有限実験だけ、GPU学習追加0/モデルeffort変更0/新role/再委譲0。171最終metadata/172統計/173WDLの全完了を静的準備のgateにせず、実物理resourceとsource停止だけ確認。停止後受入closeはcoordinator、goal他者close0。次最大1案は有限数値/総費からCPU継続か別GPU教師生成配分を選ぶもの、GPU実装自体を成果に代えない。
