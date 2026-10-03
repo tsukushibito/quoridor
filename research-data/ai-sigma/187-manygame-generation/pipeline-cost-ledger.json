@@ -1,0 +1,83 @@
+{
+  "receivedUTC": "2026-10-03T13:02:09Z",
+  "static_startUTC": "2026-10-03T13:06:42Z",
+  "first_modelUTC": "2026-10-03T13:20:47.954103Z",
+  "first_generationUTC": "2026-10-03T13:22:24.638760Z",
+  "source_preparation_wall_until_first_model_s": 1118.9541029999964,
+  "definition": "Preparation elapsed wall includes LLM/static reads/control/Git/report/NN0; separate from allattempt program jobwall. No kernelCPU attribution or double summation of API/pipe awaits.",
+  "measured_export_helper_wall_s": 0.8084846990000001,
+  "mode_jobwall_includes": "admission+session init+startup+game input+features/legal/MCTS+NN+pipe/IPC+CP receive+row record+stop/drain/cleanup",
+  "allattempt_jobs_available": [
+    {
+      "run": "native187-cpujs-r1",
+      "kind": "generate",
+      "jobwall": 137.83640136098256,
+      "exit": 0,
+      "reason": null
+    },
+    {
+      "run": "native187-mock-r1",
+      "kind": "mock",
+      "jobwall": 31.86220907297684,
+      "exit": -15,
+      "reason": "JOB_OR_SCIENCE_OR_TOTAL_DEADLINE"
+    },
+    {
+      "run": "native187-mock-r2",
+      "kind": "mock",
+      "jobwall": 2.0722249620012008,
+      "exit": 0,
+      "reason": null
+    },
+    {
+      "run": "native187-parity-r1",
+      "kind": "parity",
+      "jobwall": 3.6645938450237736,
+      "exit": 0,
+      "reason": null
+    },
+    {
+      "run": "native187-prepare-r1",
+      "kind": "mock",
+      "jobwall": 1.4818282109918073,
+      "exit": 0,
+      "reason": null
+    },
+    {
+      "run": "native187-probe-r1",
+      "kind": "mock",
+      "jobwall": 1.6431774880038574,
+      "exit": 0,
+      "reason": null
+    },
+    {
+      "run": "native187-rustcpu-r1",
+      "kind": "generate",
+      "jobwall": 6.334307405981235,
+      "exit": 1,
+      "reason": null
+    }
+  ],
+  "config_preflight_failure": "Python syntax before config/child no model; saved separately",
+  "partial_missing_mode_cost": "unstarted0 observed cost; full intended capacity retained",
+  "report_Git_backup_helpers": "Recorded final capture separately; excluded from production denominator but included as pipeline operations",
+  "early_export_summary_path": "CPUJS-summary.json",
+  "export_replay_scope": "shared RuleA, exact features/order/history/Action/terminal on all stored rows; no fulltree/inference trace replay",
+  "CPU_resource_limit": "CPUJS management+workers use logical2/4/6; GPU workers2/4/6 plus provider/broker0 use4; same parent allowed4, no equal kernelCPU claim",
+  "cost_await_overlap": "CPU API sums and pipe spans overlap; GPU batches/queue overlap acrossgames; no summed kernelCPU or exclusive decomposition claim",
+  "allattempt_jobwall_seconds": 630.5876725260168,
+  "final_export_helper_wall_s": 1.985892922,
+  "hand_NN_actual_total": 255070,
+  "parity_debug_actual": 72,
+  "startup_actual_separate": 3,
+  "all_NN_forward_including_debug_startup": 255145,
+  "all_mode_intended_games": 120,
+  "mode_qualified_terminal_games": 96,
+  "fault_games": 3,
+  "not_started_slots_in_failed_mode": 21,
+  "additional_science": false,
+  "pack_helper_wall_s": 0.5068798889988102,
+  "allocated_scope_with_raw_and_archive_current": 57298944,
+  "Git_forecast_B": 33554432,
+  "own_guard_B": 234881024
+}
