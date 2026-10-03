@@ -1,0 +1,49 @@
+{
+  "UTC": "2026-10-03T02:03:12.431866+00:00",
+  "deliveries": {
+    "frame10-root-nnue-goal-applied": {
+      "method": "turn/start",
+      "thread_id": "01a0f2e9-357d-7ef3-a2fe-b16f80accda5",
+      "turn_id": "01a0ff7f-09e7-7ec3-beb3-60f90dd76afa",
+      "accepted": true,
+      "UTC": "2026-10-03T02:01:50.828895+00:00",
+      "states_before": {
+        "root": "idle"
+      }
+    },
+    "frame10-supervisor-nnue-goal-inheritance": {
+      "UTC": "2026-10-03T01:55:32.993553+00:00",
+      "accepted": false,
+      "RPC": false,
+      "state": "idle",
+      "reason": "next normal scheduler observation reads current goal notes/doc; no duplicate manual supervisor turn",
+      "active_only": true
+    }
+  },
+  "153_owner_received_claim_start_UTC": "2026-10-03T01:52:50Z",
+  "154_owner_received_claim_start_UTC": "2026-10-03T01:53:50.576807Z",
+  "StageB_owner_flash_original_W8L8_kept_not_result": true,
+  "coordinator_summary_winner_color_arithmetic": {
+    "W": 7,
+    "D": 0,
+    "L": 9,
+    "pair_Xi": [
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.0,
+      0.5
+    ],
+    "all16_score": 0.4375,
+    "saved_results_SHA256": "dd7ffd8fc10de57031696b8324cf0eaad3f553d7428beed77e3d7e39f3ccbc3e",
+    "legality_clock_and_source_independent_replay_not_performed": true
+  },
+  "science_stop_SHA256": "c86081a4b96cca63934b0e62aa1c82ff86560ca6beeb2fd62635983074ebb304",
+  "151_final_handoff_pending": true,
+  "153_final_independent_pending": true,
+  "154_final_selection_pending": true,
+  "NNUE_final_goal_not_closed": true
+}
