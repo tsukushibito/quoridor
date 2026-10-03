@@ -1,0 +1,15 @@
+{
+  "start_epoch": 1791002894.8696325,
+  "end_epoch": 1791002894.8888576,
+  "command": [
+    "taskset",
+    "-c",
+    "0",
+    "python3",
+    "-B",
+    "tools/ai-sigma-native-route-choice/codec.py"
+  ],
+  "exit": 0,
+  "stdout": "{\"fixture_source\": \"research-data/ai-sigma/160-pv-pipeline-bootstrap/fixtures.jsonl\", \"fixture_sha256\": \"978b3a9eb51e9b994e8d5c56bd97bbd1281797be0e3d925b42b9dfcb2c71cd2e\", \"request_bytes\": 4113, \"synthetic_reply_bytes\": 611, \"warmup\": 1, \"measured_codec_pairs\": 8, \"codec_pair_ms\": [0.059349, 0.054913, 0.064277, 0.055863, 0.055599, 0.053241, 0.054963, 0.053607], \"median_codec_ms\": 0.055281, \"peak_RSS_KiB\": 15280, \"NN\": 0, \"IPC\": 0, \"model_session\": 0, \"actual_Rust_Node_ORT_route_unmeasured\": true, \"bits_roundtrip_equal\": true}\n",
+  "stderr": ""
+}

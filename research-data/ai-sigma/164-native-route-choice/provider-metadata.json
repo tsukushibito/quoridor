@@ -1,0 +1,34 @@
+{
+  "command": [
+    "taskset",
+    "-c",
+    "0",
+    "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "-c",
+    "import onnxruntime as ort,json,resource;print(json.dumps({'version':ort.__version__,'available_providers':ort.get_available_providers(),'build':ort.get_build_info(),'model_sessions':0,'NN':0,'CUDA_inference':0,'peak_RSS_KiB':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss}))"
+  ],
+  "start_epoch": 1791002526.8747911,
+  "end_epoch": 1791002527.0494857,
+  "elapsed_s": 0.17469477653503418,
+  "exit": 0,
+  "stdout": "{\"version\": \"1.30.0\", \"available_providers\": [\"AzureExecutionProvider\", \"CPUExecutionProvider\"], \"build\": \"ORT Build Info: git-branch=HEAD, git-commit-id=f2c39fe, fp8-kv-cache=1, build type=Release\", \"model_sessions\": 0, \"NN\": 0, \"CUDA_inference\": 0, \"peak_RSS_KiB\": 49460}\n",
+  "stderr": "",
+  "no_model_session_NN": true,
+  "GPU_metadata_paths": {
+    "/dev/dxg": true,
+    "/usr/lib/wsl/lib/libcuda.so.1": false,
+    "/usr/lib/x86_64-linux-gnu/libcuda.so.1": true
+  },
+  "provider_metadata": {
+    "version": "1.30.0",
+    "available_providers": [
+      "AzureExecutionProvider",
+      "CPUExecutionProvider"
+    ],
+    "build": "ORT Build Info: git-branch=HEAD, git-commit-id=f2c39fe, fp8-kv-cache=1, build type=Release",
+    "model_sessions": 0,
+    "NN": 0,
+    "CUDA_inference": 0,
+    "peak_RSS_KiB": 49460
+  }
+}

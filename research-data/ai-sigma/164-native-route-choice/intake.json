@@ -1,0 +1,66 @@
+{
+  "issue": "quoridor-4lc.164",
+  "receipt_observed_UTC": "2026-10-03T04:38:34.800333+00:00",
+  "static_start_UTC": "2026-10-03T04:38:38.576782+00:00",
+  "contractGit": "d0136c1293dc66be2d165d5c012a40b898655f23",
+  "frame": 11,
+  "ready_ids": [
+    "quoridor-4lc.164",
+    "quoridor-4lc.166"
+  ],
+  "states": [
+    {
+      "id": "quoridor-4lc",
+      "status": "in_progress",
+      "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ]
+    },
+    {
+      "id": "quoridor-4lc.164",
+      "status": "open",
+      "assignee": "codex:01a0f31c-2e4b-7170-82c5-69e1428c2418",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ]
+    }
+  ],
+  "claim": {
+    "id": "quoridor-4lc.164",
+    "status": "in_progress",
+    "assignee": "codex:01a0f31c-2e4b-7170-82c5-69e1428c2418",
+    "started_at": "2026-10-03T04:38:38Z"
+  },
+  "prior162_source_unchanged": {
+    "tools/ai-sigma-pv-cpu-smoke/report.py": "dd521977e7fba2f43dc92810708fbd631b3ede4da296479bbd5cb19ff089040d",
+    "tools/ai-sigma-pv-cpu-smoke/save_git.py": "cd14a3459ff278b86e7f95693fd5607df26d9d5322057a7f77e92bb0b1f4da71",
+    "tools/ai-sigma-pv-cpu-smoke/toy.py": "cede790c58b226726cfe9bbf456a3a7e072634c87151c2517648650107ad65e9",
+    "tools/ai-sigma-pv-cpu-smoke/launch.py": "6baaffc80449a6ccee26a6a42f12ffc9185eed3c40cf472de388a1a615cf3c15"
+  },
+  "prior162_identities_current_absent": [
+    {
+      "pid": 3115090,
+      "starttick": "25170364",
+      "same_current_identity_present": false
+    },
+    {
+      "pid": 3115021,
+      "starttick": "25170120",
+      "same_current_identity_present": false
+    }
+  ],
+  "processing_deadline_epoch": 1791003514.8003266,
+  "newcommand_deadline_epoch": 1791003334.8003266,
+  "submission_deadline_epoch": 1791004114.8003266,
+  "static_budget_s": 60,
+  "scope_guard_bytes": 131072,
+  "old_combined_conservative_bytes": 14498727,
+  "combined_forecast_bytes": 14629799,
+  "combined_guard_bytes": 14680064,
+  "new_reservation": 0,
+  "old_unknown_discount": 0,
+  "NN_game_build_train_GPU_download": 0
+}
