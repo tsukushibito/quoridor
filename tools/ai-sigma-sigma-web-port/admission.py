@@ -9,7 +9,7 @@ def admit(c,out,tool,runs):
  heavy,metadata=base.physical_heavy_scan() if c['kind'] in ['build','stageA','stageB'] else ([],[])
  assert base.base.decide(heavy,previous) is True,'EXTERNAL_HEAVY_UNKNOWN'
  same=[]
- stop_path=tool.parents[1]/'research-data/ai-sigma/151-sigma-web-port/user-direction-science-stop.json'
+ stop_path=tool.parents[1]/'research-data/ai-sigma/frame10-baseline-gap/user-direction-science-stop.json'
  assert hashlib.sha256(stop_path.read_bytes()).hexdigest()=='f41c4d9c6263c908e268950edde977b94a94a967ab8dca5e85fc669287e79b8e','OLD149_STOP_SHA'
  stop=json.loads(stop_path.read_text());assert stop['science_source_write_stopped'] and stop['new_heavy_forbidden'],'OLD149_NOT_STOPPED'
  assert stop['boot']==Path('/proc/sys/kernel/random/boot_id').read_text().strip(),'BOOT_CHANGED'
@@ -45,6 +45,13 @@ def admit(c,out,tool,runs):
  # Per-stage experiments and total NN budget are registered; no blind attempt replacement.
  for p in runs.glob('port151-*.started.json'):
   old=json.loads(Path(json.loads(p.read_text())['command'][-1]).read_text()) if False else None
+ NNused=0
+ for d in previous:
+  if d['phase']!='stageA':continue
+  summary=runs/d['name']/'summary.json'
+  if summary.exists():NNused+=json.loads(summary.read_text())['hand_NN']
+  else:NNused+=320 # Lost actual receipt stays conservative, not free retry.
+ if c['kind']=='stageA':assert NNused+sum(x['K'] for x in c['searches'])<=1024,'STAGEA_NN_BUDGET'
  current=0;seen=set()
  for f in [out,tool,tool.parents[1]/'research-data/ai-sigma/151-sigma-web-port']:
   for p in f.rglob('*'):
