@@ -4,9 +4,9 @@
 
 ## 現在の判断
 
-187の同24入力/K64比較は5mode全120slotを保持し、CPUJS/GPU3/GPU12/GPU24各24GOAL・各1132適格policy/value/joint行を得た。全modejob時間（初期化・回収込み）は137.836401/247.139345/107.8013/88.3345秒、joint率8.212635/4.580412/10.500799/12.814931行秒。GPU24のCPUJS比1.560392、GPU12比1.278615、GPU3比.557727。独立191保存算術/共有RuleA再生の速報も支持する。今回は多数game・共有GPUbatchで実生成利益を有限に確認した。単回固定順・host/warm・CPUJS管理pool2,4,6対GPU0,2,4,6の差、全deep未検証を残す。速度一般保証・教師真値・棋力・元Sigma C++全規則の同一性は認定しない。
+187の同24入力/K64比較は5mode全120slotを保持し、CPUJS/GPU3/GPU12/GPU24各24GOAL・各1132適格policy/value/joint行を得た。全modejob時間（初期化・回収込み）は137.836401/247.139345/107.8013/88.3345秒、joint率8.212635/4.580412/10.500799/12.814931行秒。GPU24のCPUJS比1.560392、GPU12比1.278615、GPU3比.557727。独立191保存算術/共有RuleA再生と必要source/parity/188保存502値の最終有限裁定も支持する。191科学子/source停止・Git737b5605のreport/算術/replay/binding/stop byte照合とbackup後に統括受入れclose。今回は多数game・共有GPUbatchで実生成利益を有限に確認した。単回固定順・host/warm・CPUJS管理pool2,4,6対GPU0,2,4,6の差、全deep未検証を残す。速度一般保証・教師真値・棋力・元Sigma C++全規則の同一性は認定しない。
 
-RustCPU対照はhistory表示順schemaで3UNKNOWN/21NOT_STARTED、190NN返却・適格行0。JS localeSortとRust byte-sort表示差をNN0で区別し、未開始GPUだけcanonical key/count検査へ修正した。原失敗の補充・救済なし。同Rust CPU構造比は不明、CPUJS実用対照比と分ける。全11attempt630.587673秒は記録された計算job費であり、全team/準備費ではない。
+RustCPU対照はhistory表示順schemaで3UNKNOWN/21NOT_STARTED、190NN返却・適格行0。JS localeSortとRust byte-sort表示差をNN0で区別し、未開始GPUだけcanonical key/count検査へ修正した。原失敗の補充・救済なし。同Rust CPU構造比は不明、CPUJS実用対照比と分ける。全11attempt630.587673秒は記録された計算job費であり、全team/準備費ではない。正常4mode物理handNN254880はexact、失敗Rustの190はlogical要求で物理UNKNOWN<=190、parity72/startup3別で総physicalforward上限255145。191報告のexact総数表現は187最終counter資格により訂正し、統括受入れ記録に残した。速度・全slot・教師資格は不変。
 
 GPU24を次の独立教師生成の候補へ採用する。現在default/backend/旧learnerを自動変更せず、新生成はこの枠で追加しない。全modeでtrain-val共有7state key/20occurrenceが独立算術にも一致した。game splitだけで独立validationとは扱えない。次の生成・学習ではstate/history重複がつなぐgame群をgroup化し、学習結果前にsplitを固定する。元split/速度結果は書き換えない。同入力兄弟modeを独立教師件数として合算しない。
 
@@ -15,10 +15,10 @@ GPU24を次の独立教師生成の候補へ採用する。現在default/backend
 | 担当 | 現在の到達点・次判断 | 個別期限・資源 |
 | --- | --- | --- |
 | experiment187 | 共有GPU多数game実生成を停止、各mode全教師/全fault/実batch/全費・必要archive/Git復元/backupを引渡す。主科学子の回収を本人13:48確認、今は保存処理のみ | newheavy14:15/science14:20/process14:30/submit14:40。CPU4/RAM8/VRAM6親内、GPUjob30分、保持256MiBは既experiment2044MiB内 |
-| hypothesis190 | QF1-H32二視点312疎特徴＋後段距離2、既2762学習教師のrootmean value蒸留、full/delta/undoと小探索を有限接続。13:42:53静的開始、13:58:22–23 NN0復元終了。学習14:00:56–59/200step31151sample、native14:02:12/515child full-delta/undo＋Torch固定27対応を本人報告。差8.94e-8。depth1完成/depth2 NODE_CAP未採用、新val rootmeanMSE.994812は定数.715720より悪く重み採用/棋力認定0。停止保存の最終bindingを待つ | CPU8単1/RAM1GiB guard896、science60s/modeljob30s/sample65536。newscience14:28/stop14:32/process14:36/submit14:41。384KiB予約/320KiBguard、uniqueGit・二つの重み保存・残metadataを先forecast |
+| hypothesis190 | QF1-H32二視点312疎特徴＋後段距離2、既2762学習教師のrootmean value蒸留、full/delta/undoと小探索を有限接続。13:42:53静的開始、13:58:22–23 NN0復元終了。学習14:00:56–59/200step31151sample、native14:02:12/515child full-delta/undo＋Torch固定27対応を本人報告。差8.94e-8。depth1完成/depth2 NODE_CAP未採用、新val rootmeanMSE.994812は定数.715720より悪く重み採用/棋力認定0。停止保存の最終bindingを待つ（190本人） | CPU8単1/RAM1GiB guard896、science60s/modeljob30s/sample65536。newscience14:28/stop14:32/process14:36/submit14:41。384KiB予約/320KiBguard、uniqueGit・二つの重み保存・残metadataを先forecast |
 | critic191 | 全120slot・全教師資格・全費・source/provider/parityの独立有限裁定。13:50:11.649562 claim/static準備開始、短CPU0算術・再生は終了通知済。NN/model/game/GPU0 | static120s/job60s/CPU0単1/RAM512guard448、新4MiBは既critic112MiB内。newscript14:26/compute14:30/process14:35/submit14:41 |
 
-187実重計算中は190/191の実CPU子を重ねない。187科学停止と191短算術終了の通知を受け、190は直前owner/current/RAM確認で実処理する。自然監督CPU0との窓も各ownerが確認する。source/metadataの軽い準備と実計算を分け、CPU5・LLMactive数gate・全稿相互承認・運用全史gateを作らない。
+187は最終引渡し後に統括有限受入れclose済み。187実重計算中は190/191の実CPU子を重ねない。187科学停止と191短算術終了の通知を受け、190は直前owner/current/RAM確認で実処理する。自然監督CPU0との窓も各ownerが確認する。source/metadataの軽い準備と実計算を分け、CPU5・LLMactive数gate・全稿相互承認・運用全史gateを作らない。
 
 ## 小LR対照と保存失敗の受入れ
 
