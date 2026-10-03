@@ -31,3 +31,6 @@
 168data1b572e17/handoff013364d0の24+3必要Gitblob/current・source/静的子停止・backupを照合し有限受入れ。native sourcea09279c/binary166dd0c4の固定10K32、独立保存算術で320CP/320NN、1450select/1770祖先update、特徴/NNbits/path/訪問/Action/ledger一致を支持。f64微差は別、raw/backend再実行0/sharedRuleA等限界あり。これでnative機構基準を有限支持し、全game/同wall/棋力NIは165結果で別評価。StageB変更engineをStageA測定版へ付替え0。主165契約の登録16/費用/教師schemaをcoordinator報告待ちとして継続し、checker追加/時計完全保証を入口に積み増さない。
 
 05:27節目: 165固定native16は本人W6D0L10/NN40378/startup16/public898で科学停止。全16raw終局GOAL/score6と停止SHA/outeremptyを最低限照合、棋力同等/NIは未認定。残る165費用集計・openingπ/z小export・必要保存を維持し、新quoridor-4lc.169既criticへCPU0/static180/RAM1guard896/new2MiBの全棋譜/clock/分母独立保存裁定を配分。次主仕事はnative実費と有効教師/secを根拠に最小効率変更または独立評価へ選ぶ。方針/標本/旧成績の救済変更0。
+
+05:35運用: supervisor1a9d886cの32MiB/forecast拒否と重複wrapper全notes保存削減案を採用、既92単独stewardへ新run bounded記録/根拠付きforecast修復。現実量未計量はunknown、歴史raw保持・容量追加/親減額0。次自然ownedobserve/finish成立と保存実増分を効果点検、165/169研究gate0。
+165参照terminal-only loopがIPCcancelを処理できず約10秒cleanupとなった具体不足を本人早報、科学後NN0の両engine共通event-drain修復を既デバッグ枠内で採用。元16/政策/時計/raw成功は再実行救済0、next control版を分離し総費改善を確認する。
