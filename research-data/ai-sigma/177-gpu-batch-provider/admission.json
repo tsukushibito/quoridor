@@ -1,0 +1,51 @@
+{
+  "UTC": "2026-10-03T09:22:12.094998+00:00",
+  "scheduler_owned": null,
+  "next_at": 1791020318.40191,
+  "scheduler_identity": {
+    "pid": 3352074,
+    "start_ticks": "27085893",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "critic_static_stop_sha": "cf5d209a248757472e3bfccb15c42bcb6ea712f0cd20e7160636500da84288ea",
+  "critic_mock_pid_absent": 3361539,
+  "current_processes": [
+    {
+      "pid": 3352074,
+      "ppid": 1,
+      "pgid": 3352074,
+      "starttick": "27085893",
+      "RSS": 142131200,
+      "state": "S",
+      "affinity": [
+        0
+      ],
+      "cmd": "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python -B /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/scheduler.py run --config /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json --state-dir /workspaces/quoridor/.artifacts/research-team/scheduler-sigma-continuation-20261001 "
+    },
+    {
+      "pid": 3352088,
+      "ppid": 1,
+      "pgid": 3352088,
+      "starttick": "27085920",
+      "RSS": 21762048,
+      "state": "S",
+      "affinity": [
+        0
+      ],
+      "cmd": "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python -B /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/watch.py --run-dir /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame12-04c303d7-a365-457c-99de-7b4eb2c52eed --expectations /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame12-04c303d7-a365-457c-99de-7b4eb2c52eed/expectations.json "
+    }
+  ],
+  "other_RSS_B": 163893248,
+  "MemAvailable_B": 21080436736,
+  "GPU_headroom": "NVIDIA GeForce RTX 3060, 10610, 1499",
+  "GPU_compute_owners": "",
+  "CPU_total_pool": [
+    0,
+    2,
+    4,
+    6
+  ],
+  "RAM_forecast_contract_B": 8053063680,
+  "allocated_scope_B": 98304,
+  "combined_plus_forecast_B": 16216691
+}

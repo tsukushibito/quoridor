@@ -42,5 +42,40 @@
       0
     ],
     "cmd": "node /workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-gpu-batch-provider/measure.cjs "
-  }
+  },
+  "end_epoch": 1791019336.5519288,
+  "elapsed_s": 4.456745862960815,
+  "exit": 0,
+  "stop_reason": null,
+  "peak_owned_RSS_B": 1346174976,
+  "tracked": [
+    {
+      "pid": 3370800,
+      "ppid": 3364491,
+      "pgid": 3370800,
+      "starttick": "27227281",
+      "RSS": 52322304,
+      "state": "R",
+      "affinity": [
+        0
+      ],
+      "cmd": "node /workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-gpu-batch-provider/measure.cjs "
+    },
+    {
+      "pid": 3370811,
+      "ppid": 3370800,
+      "pgid": 3370800,
+      "starttick": "27227286",
+      "RSS": 1264459776,
+      "state": "D",
+      "affinity": [
+        0
+      ],
+      "cmd": "/home/vscode/.cache/inference/envs/quoridor-training/bin/python -B /workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-gpu-batch-provider/provider.py "
+    }
+  ],
+  "owned_remaining": [],
+  "unknown_adopted": [],
+  "CPU_affinity_violation": false,
+  "scientific_source_write_stopped": true
 }

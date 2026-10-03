@@ -1,0 +1,95 @@
+{
+  "NN": 0,
+  "records": 84,
+  "single_sample_equivalent": 305,
+  "rows": {
+    "cuda": 170,
+    "cpuort": 135
+  },
+  "all_shape_finite_ID_bits_and_saved174_pass": true,
+  "maxabs": {
+    "cuda-CPUORT": 6.198883056640625e-06,
+    "cuda-torchCUDA": 3.337860107421875e-06,
+    "cpuort-CPUORT": 0.0,
+    "cpuort-torchCUDA": 5.7220458984375e-06
+  },
+  "route_cost": {
+    "1": {
+      "cpuort": {
+        "median_ms": 4.176487499999894,
+        "steady8_aggregate_rows_per_s": 217.87884378451827,
+        "range_ms": [
+          4.038720000000012,
+          6.802790000000186
+        ]
+      },
+      "cuda": {
+        "median_ms": 3.410960000000159,
+        "steady8_aggregate_rows_per_s": 271.94697034078337,
+        "range_ms": [
+          2.884183000000121,
+          6.195699999999761
+        ]
+      },
+      "CPUORT_over_CUDA": 1.2244316849214587
+    },
+    "2": {
+      "cpuort": {
+        "median_ms": 8.262790999999652,
+        "steady8_aggregate_rows_per_s": 239.55916203223282,
+        "range_ms": [
+          7.769741999999951,
+          9.848309000000427
+        ]
+      },
+      "cuda": {
+        "median_ms": 3.0336389999999938,
+        "steady8_aggregate_rows_per_s": 616.1954100451209,
+        "range_ms": [
+          2.756137999999737,
+          4.952756000000136
+        ]
+      },
+      "CPUORT_over_CUDA": 2.7237225655391657
+    },
+    "4": {
+      "cpuort": {
+        "median_ms": 16.57316250000008,
+        "steady8_aggregate_rows_per_s": 241.20187699381043,
+        "range_ms": [
+          15.242395000000215,
+          18.213506999999936
+        ]
+      },
+      "cuda": {
+        "median_ms": 3.812277500000164,
+        "steady8_aggregate_rows_per_s": 1014.9103653366408,
+        "range_ms": [
+          3.0392739999997502,
+          5.148310000000038
+        ]
+      },
+      "CPUORT_over_CUDA": 4.347312728414804
+    },
+    "8": {
+      "cpuort": {
+        "median_ms": 34.79706949999991,
+        "steady8_aggregate_rows_per_s": 231.1921284108711,
+        "range_ms": [
+          31.23213100000021,
+          37.946500000000015
+        ]
+      },
+      "cuda": {
+        "median_ms": 5.064010999999937,
+        "steady8_aggregate_rows_per_s": 1485.7056659683728,
+        "range_ms": [
+          4.644041999999899,
+          6.77514999999994
+        ]
+      },
+      "CPUORT_over_CUDA": 6.871444295835918
+    }
+  },
+  "raw_SHA": "542e2531b0e08308a070101f3ff2a9be1230e17d5882cc5ece5260f63ae219ca"
+}
