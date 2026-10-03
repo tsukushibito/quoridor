@@ -31,6 +31,9 @@ def admit(c,out,tool,runs):
  pool=c['mode']['cores'];assert pool in [[2],[2,4],[2,4,6]] or (c.get('efficiency_adoption') and pool==[0,2,4,6])
  gpu_admission=None
  if c.get('efficiency_adoption'):
+  if c.get('backend') in ['cpuort','cuda']:
+   release=json.loads((ROOT/'research-data/ai-sigma/179-native-teacher-independent/science-stop.json').read_text());assert release['NN_executed']==0,'179_RELEASE_UNKNOWN'
+   for ident in release['CPU0_science_children']:assert not Path('/proc/'+str(ident['PID'])).exists(),'179_SCIENCE_CURRENT'
   scheduler=json.loads(Path('/workspaces/quoridor/.artifacts/research-team/scheduler-sigma-continuation-20261001/state.json').read_text());assert scheduler['phase']=='running' and not scheduler['recovery_required'] and scheduler['owned'] is None,'SUPERVISOR_NOT_QUIET'
   assert scheduler['next_at']-time.time()>c['job_seconds']+30,'SUPERVISOR_QUIET_WINDOW'
   ident=scheduler['process'];sp=Path('/proc/'+str(ident['pid'])+'/stat').read_text().rsplit(')',1)[1].split();assert int(sp[19])==int(ident['start_ticks']),'SUPERVISOR_IDENTITY'

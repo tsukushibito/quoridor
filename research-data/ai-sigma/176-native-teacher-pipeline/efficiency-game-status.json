@@ -1,0 +1,88 @@
+{
+  "planned_games": 6,
+  "conditional_generation_started": false,
+  "production_default": "CPU unchanged",
+  "dataset_mix_into_CPU24": 0,
+  "slots": [
+    {
+      "slot": 1,
+      "backend": "cpuort",
+      "status": "NOT_STARTED",
+      "reason": "ROOT1_CPU_CHECKER_INFRA_RAW_MISSING; all4root correspondence incomplete",
+      "quality_interval": [
+        0,
+        1
+      ],
+      "Rpolicy": 0,
+      "Rz": 0,
+      "Rjoint": 0
+    },
+    {
+      "slot": 2,
+      "backend": "cpuort",
+      "status": "NOT_STARTED",
+      "reason": "ROOT1_CPU_CHECKER_INFRA_RAW_MISSING; all4root correspondence incomplete",
+      "quality_interval": [
+        0,
+        1
+      ],
+      "Rpolicy": 0,
+      "Rz": 0,
+      "Rjoint": 0
+    },
+    {
+      "slot": 3,
+      "backend": "cpuort",
+      "status": "NOT_STARTED",
+      "reason": "ROOT1_CPU_CHECKER_INFRA_RAW_MISSING; all4root correspondence incomplete",
+      "quality_interval": [
+        0,
+        1
+      ],
+      "Rpolicy": 0,
+      "Rz": 0,
+      "Rjoint": 0
+    },
+    {
+      "slot": 1,
+      "backend": "cuda",
+      "status": "NOT_STARTED",
+      "reason": "ROOT1_CPU_CHECKER_INFRA_RAW_MISSING; all4root correspondence incomplete",
+      "quality_interval": [
+        0,
+        1
+      ],
+      "Rpolicy": 0,
+      "Rz": 0,
+      "Rjoint": 0
+    },
+    {
+      "slot": 2,
+      "backend": "cuda",
+      "status": "NOT_STARTED",
+      "reason": "ROOT1_CPU_CHECKER_INFRA_RAW_MISSING; all4root correspondence incomplete",
+      "quality_interval": [
+        0,
+        1
+      ],
+      "Rpolicy": 0,
+      "Rz": 0,
+      "Rjoint": 0
+    },
+    {
+      "slot": 3,
+      "backend": "cuda",
+      "status": "NOT_STARTED",
+      "reason": "ROOT1_CPU_CHECKER_INFRA_RAW_MISSING; all4root correspondence incomplete",
+      "quality_interval": [
+        0,
+        1
+      ],
+      "Rpolicy": 0,
+      "Rz": 0,
+      "Rjoint": 0
+    }
+  ],
+  "GPU_performance_negative": false,
+  "cause": "checker/provenance missing firstpairedroot, not NN numerical mismatch"
+}
