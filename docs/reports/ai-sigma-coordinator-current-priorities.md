@@ -1,53 +1,41 @@
 # 現在の優先順位と教師生成・学習計画
 
-2026-10-03 frame13。開始12:45:15/終了14:45:15UTC、重開始停止14:35:15、監督14:40:15、monitor14:43:15。親13と92運用はsteward唯一writer。統括は本計画・担当契約・Beadsを所有する。native教師生成の効率と最小NNUE接続を主とし、旧枠の成績・期限・失敗を保持する。173正式198holdoutは学習へ転用しない。Sigma NI/NNUE最高棋力は未達。
+2026-10-03更新。frame13（12:45:15–14:45:15 UTC）は終了した。新しい研究枠の承認はなく、追加の教師生成・学習・GPU・対局runを起動しない。親期限正本と92運用はsteward所有、統括は本計画・goal説明・配分だけを所有する。新しい192はユーザーの「学習曲線をプロット、ハイパーパラメータ調整可能な環境を用意」に対応するroot所有のsoftware整備であり、研究枠の再開ではない。Sigma NI/NNUE最高棋力は未達、173正式198holdoutの学習転用0。
 
-## 現在の判断
+## 今進める整備と所有境界
 
-187の同24入力/K64比較は5mode全120slotを保持し、CPUJS/GPU3/GPU12/GPU24各24GOAL・各1132適格policy/value/joint行を得た。全modejob時間（初期化・回収込み）は137.836401/247.139345/107.8013/88.3345秒、joint率8.212635/4.580412/10.500799/12.814931行秒。GPU24のCPUJS比1.560392、GPU12比1.278615、GPU3比.557727。独立191保存算術/共有RuleA再生と必要source/parity/188保存502値の最終有限裁定も支持する。191科学子/source停止・Git737b5605のreport/算術/replay/binding/stop byte照合とbackup後に統括受入れclose。今回は多数game・共有GPUbatchで実生成利益を有限に確認した。単回固定順・host/warm・CPUJS管理pool2,4,6対GPU0,2,4,6の差、全deep未検証を残す。速度一般保証・教師真値・棋力・元Sigma C++全規則の同一性は認定しない。
+root192がtools/nnue-training/、docs/development/nnue-training.md（main mirror）、research-data/ai-sigma/quoridor-4lc.192-learning-tools/を単独所有する。統括・研究roleは同pathを編集しない。config/CLI、train/validation同時系列、game重み/層別MSE、定数基準、earlystop/best checkpoint、run比較・静的曲線、旧190ログの忠実可視化は現在整備中。完成Git/実行手順/曲線の引渡しを待つ。既共有training依存・旧190・role・92・親期限の変更を伴わず、plot環境はroot担当の小専用envへ隔離する。軽いsoftware機能検証を新しい学習科学・教師生成成功と扱わない。
 
-RustCPU対照はhistory表示順schemaで3UNKNOWN/21NOT_STARTED、190NN返却・適格行0。JS localeSortとRust byte-sort表示差をNN0で区別し、未開始GPUだけcanonical key/count検査へ修正した。原失敗の補充・救済なし。同Rust CPU構造比は不明、CPUJS実用対照比と分ける。全11attempt630.587673秒は記録された計算job費であり、全team/準備費ではない。正常4mode物理handNN254880はexact、失敗Rustの190はlogical要求で物理UNKNOWN<=190、parity72/startup3別で総physicalforward上限255145。191報告のexact総数表現は187最終counter資格により訂正し、統括受入れ記録に残した。速度・全slot・教師資格は不変。
+190の保存ログはtrain minibatch loss4点とvalidation before/afterであり、既runの連続validation曲線はない。過去の中間値・earlystop効果・best checkpointを補完して捏造しない。192の実装完了や機能検証結果は引渡し後に必要範囲で確認し、計画機能を現在の成果として数えない。
 
-GPU24を次の独立教師生成の候補へ採用する。現在default/backend/旧learnerを自動変更せず、新生成はこの枠で追加しない。全modeでtrain-val共有7state key/20occurrenceが独立算術にも一致した。game splitだけで独立validationとは扱えない。次の生成・学習ではstate/history重複がつなぐgame群をgroup化し、学習結果前にsplitを固定する。元split/速度結果は書き換えない。同入力兄弟modeを独立教師件数として合算しない。
+## 次の研究枠で選ぶ主仕事
 
-## 残枠の到達点と配分
+大規模化の小測定で選んだGPU24active/maxB8経路を、独立した学習用lineageの教師増量に接続する。最初はfresh24game/K64を一度生成し、初期化・回収・記録込みのRpolicy/Rz/Rjoint/全job時間を再計上する。現187の兄弟mode4528反復行を独立教師として合算しない。生成mode/model/provider/K/温度/全fault扱いを結果前に固定し、探索量削減だけを品質維持の効率改善とは呼ばない。
 
-| 担当 | 現在の到達点・次判断 | 個別期限・資源 |
-| --- | --- | --- |
-| experiment187 | 共有GPU多数game実生成を停止、各mode全教師/全fault/実batch/全費・必要archive/Git復元/backupを引渡す。主科学子の回収を本人13:48確認、今は保存処理のみ | newheavy14:15/science14:20/process14:30/submit14:40。CPU4/RAM8/VRAM6親内、GPUjob30分、保持256MiBは既experiment2044MiB内 |
-| hypothesis190 | QF1-H32二視点312疎特徴＋後段距離2、既2762学習教師のrootmean value蒸留、full/delta/undoと小探索を有限接続。13:42:53静的開始、13:58:22–23 NN0復元終了。学習14:00:56–59/200step31151sample、native14:02:12/515child full-delta/undo＋Torch固定27対応を本人報告。差8.94e-8。depth1完成/depth2 NODE_CAP未採用、新val rootmeanMSE.994812は定数.715720より悪く重み採用/棋力認定0。統括が修正版Git8bb9e8a2のreport/科学10path、weights archive両member byte/hash、48game weighted集計を有限照合。最終receipt14:31台を受領、科学/source/全3child回収・metadata018240f7/54file復元を確認して統括引取りclose。allphase uniqueGit189771+files137175=326946B、320KiBguard327680に余裕734B、追加metadataGit forecastは超過するため通常write/Git停止として受入れ、無制限な全面資源保証はしない。 | CPU8単1/RAM1GiB guard896、science60s/modeljob30s/sample65536。newscience14:28/stop14:32/process14:36/submit14:41。384KiB予約/320KiBguard、uniqueGit・二つの重み保存・残metadataを先forecast |
-| critic191 | 全120slot・全教師資格・全費・source/provider/parityの独立有限裁定。13:50:11.649562 claim/static準備開始、短CPU0算術・再生は終了通知済。NN/model/game/GPU0 | static120s/job60s/CPU0単1/RAM512guard448、新4MiBは既critic112MiB内。newscript14:26/compute14:30/process14:35/submit14:41 |
+その同じ教師・固定QF1条件の学習を192環境で追い、教師量を24→48→96game等の入れ子集合へ段階的に増やす案を検討する。一括大量生成から始めず、各段の曲線と有効教師/総費から次の増量を選ぶ。段数・数量・予算は新枠で担当実受付前に固定し、現在この案を実行しない。まず固定190 evaluatorを再学習せずfresh教師のgame別rootmean/真z/定数基準へ比較する小診断も同じ生成成果で可能にし、元モデルの汎化と新データでの学習効果を混同しない。
 
-187は最終引渡し後に統括有限受入れclose済み。187実重計算中は190/191の実CPU子を重ねない。187科学停止と191短算術終了の通知を受け、190は直前owner/current/RAM確認で実処理する。自然監督CPU0との窓も各ownerが確認する。source/metadataの軽い準備と実計算を分け、CPU5・LLMactive数gate・全稿相互承認・運用全史gateを作らない。
+splitはgame/lineageに加えstate/history重複でつながるgroupを結果前に定義する。現187のtrain-validation共有7state/20occurrenceを未見局面評価として扱わない。段階増量ではvalidationを固定し、同じgroupをtrainへ流さない。独立groupを確保できない場合は成立を保留し、既露出/未露出を別報告する。学習条件選定用validationと最終独立holdout・arenaを区別し、validationで選んだbest checkpointを独立棋力証明へ読み替えない。正式173holdoutは引続き学習から除外する。
 
-## 小LR対照と保存失敗の受入れ
+## 学習曲線と調整の判断
 
-188受領13:02:32.710953、claim/static13:03:52.463619（以前の13:03前という時刻要約を訂正）。旧r1はpython不在exit127と13:12入口期限でscience0停止。新future r2は同issue・同未使用予算・新事前登録で13:19:07.788647–11.028623にCPU8単1を一回実行、3.239972秒/202forward/200step/26604sample/GPU0、子回収。旧r1結果/期限を遡及変更しない。
+192のconfig/CLIとrun比較を再利用し、features/幅/target/optimizer/seed/splitを記録する。教師量を比較する段ではこれらを固定し、steps・見たsample数・epoch・学習wallを曲線に対応させる。データ増量で同stepsのepoch数が変わるため、その差をデータ量単独の因果としない。比較目的に応じ固定更新量又は時間予算を結果前に選び、必要なら小さな一因子変更を次に行う。LR・幅・target混合・特徴拡張・GPU変更を同時に選別するsweepを最初の主仕事にしない。
 
-新validation zMSEは176親1.663258、181 LR.01 1.951053、188 LR.0025 1.706646。退行緩和を部分支持するが親よりまだ悪い。新4gameのうち2/4は親より悪化、符号正解66→85→60、015は全model0/70。逆符号飽和45→0は方向修正の証明ではない。全8gameπCEは親より改善し.01より改善量が小さい。176既定を維持し181/188は代替候補保存。LR原因/一般化/棋力改善を認定せず、同8gameを使うLR選別を自動反復しない。
+train/validationの同時系列と定数基準、row加重/game等重み、旧新group・game・phase別rootmeanMSE/zMSEを並べる。trainが改善しvalidationが悪化する形は過学習又は分布差と整合する証拠であり、一意原因とはしない。両方が定数を超えない場合は更新条件・容量・特徴/教師を小さく判別し、教師量不足だと即断しない。教師増量で未見gameの曲線が改善するかを確認して、データ不足仮説と過学習仮説を切り分ける。有限game数・相関・samplingと教師K64の推定誤差を保持する。
 
-科学Git2f1633a0b96914e8f962f31e0405e370c8c2a809の41対象byte/旧r1不変・保存502算術を統括が有限照合し、188を停止保存済み課題として受入れcloseした。一方local257150+uniqueGit229688=486838Bは448KiBguard458752Bを28086B超過。512KiB予約/combined内でもguard成功にはしない。最後必要stop manifest1805Bを別保持、通常metadata追加停止、未作成項目は未完とする。旧量減額/削除/増額で救済しない。190はこの失敗を受けuniqueGitと全最終metadataのforecastを前倒しした。
+earlystop/best checkpointは選定用validationの事前固定したmetric・patience・最小改善量等をconfigへ記録する。総val lossの改善でnewgame又はvalue退行を隠さない。主targetはQF1のrootmean蒸留、rootNN/真zは別診断とし、curveの改善を棋力や教師真値の改善とは扱わない。量子化・深い探索・T1全機能はこの判断より先の必須入口にしない。
 
-## NNUE設計と保持する評価範囲
+## 再利用する成果と限界
 
-root189のQF1設計Git e2897f5ebfddf84f8c86a7e04394081ec596032a、到達QF-T1追補Git e8dbab151a32f8f8727889709103f42ab87fc9aaを受領。root所有の2設計pathは統括/担当編集0。現190は各視点312/共有H32/距離2の別小条件で、rootmean K64を教師としz/rootNNを分離する。新小学習をSigma重み・製品NNUE・棋力達成と扱わない。T1の828特徴/H256/接触壁ペア/経路・選択policy/αβPVS全実装やPV退行解消を開始gateにしない。残費不足なら小接続と未着手項目を保存する。
+- 187/191: 同24入力/K64、CPUJS/GPU3/GPU12/GPU24各24GOAL・各1132joint。初期化/回収込みjobwall137.836401/247.139345/107.801322/88.334456秒、GPU24行率12.814931対CPUJS8.212635（比1.560392、生成jobwall35.9136%減）。単回固定順・host/warm・CPUJS3logical対GPU4logical、全deep未確認を保持する。RustCPUは3schemaUNKNOWN/21NOT_STARTEDで同Rust構造速度比欠測、補充0。正常4mode物理NN254880 exact、失敗Rust logical190はphysicalUNKNOWN<=190。旧結果を一般性能・C++全教師規則同一性・棋力へ拡張しない。
+- 190: 48game2762行復元、QF1-H32/二視点312+距離2/rootmean学習一回、sample34095/GPU0。固定Torch27とfull/delta515child最大差8.94e-8、undoは親snapshot方式。depth1接続、depth2NODE_CAP未採用。全val rootmeanMSE.704042→.646561は定数.697566より改善、新281行は.717160→.994812で定数.715720より悪い。重み不採用、速度/RustWasm/SIMD/量子化/棋力未実施。連続学習曲線・可変hyperparam環境は元runに存在しない。
+- 188: LR.0025でnew zMSEは親1.663258/旧LR.01 1.951053/低LR1.706646。部分緩和だが親より悪く、015符号0/70。176既定を維持し181/188は代替、原因/一般化/棋力は未認定。
 
-既176+181の48game2762教師・train2260/val502を再利用する。正式173holdout非転用。validation再利用、4game相関、追加step/旧再露出の交絡を保持し、多様性単独の因果を認定しない。180K800現RustはJSより23–33%遅く、181checkpoint削減は限定採否未達でCPUJS基準を維持した。176 GPU3/maxB2負利益からGPU一般を除外せず今回多数game接続を測った。固定751186 selfplay_cpp.pyのworker数とgame数分離を参照したが既定2048/max1024の複製や歴史学習設定の証明はしない。
+根拠は既[生成報告](ai-sigma-experiment-manygame-generation.md)、[独立裁定](ai-sigma-critic-manygame-independent.md)、[QF1試作](ai-sigma-hypothesis-nnue-qf1-prototype.md)、[LR対照](ai-sigma-hypothesis-value-lr-control.md)。root189のQF1/T1設計は保持し、T1全実装を学習環境又は小試作の開始gateにしない。
 
-## 監督・停止責任
+## 予算・停止と次の確認
 
-92親13 SHA160ca38306c6ddaaf81b874771afd0a52f5127dd5b7924588b6fab688bf80f8e、scheduler3534745/start28492381・monitor3534758/start28492397の本人running/loaded24hash一致を受領。期限通知14:35:15、監督+scheduler14:40:15、monitor14:43:15、証拠14:45:15は92 owner。統括は親/運用binding編集・92再配送・強制tick0。自然turnのcompleted/finishと全期間/外部NN停止保証は分ける。
+frame13の187/188/190/191は有限受入れclose、goalは未達。188 guard超過28086B、190最終327455<327680/残225B・通常write停止・一部receipt未Git、報告path収録漏れの修復を保持する。必要科学と両重みarchiveの保存成功を全metadata/全期間保証へ広げない。
 
-監督提案のRjoint全費・全予定打切り手数、低LRのπ利益減/価値方向、保存uniqueGit forecastを採用した。効果は実結果へ限定し、手続きや配送acceptedを科学受入れとしない。個別課題はsource/子停止・必要保存と有限検証後にcloseでき、goal未達は維持する。
+92のscheduler-end-stopは14:40:20読取、owned_turn_pending=false/scheduler_identity_alive=false。monitor/終了証拠は同ownerが保持、統括は運用source/registryを編集せず重複停止しない。今回192通知は92再開・frame13延長・役割再起動の承認ではない。
 
-190の保存集計を統括NN0で再計算し、全validation502のrootmeanMSE.704042→.646561は定数.697566より改善、新281は.717160→.994812で定数.715720より悪化と確認した。機能接続の有限受入れと重み採用を分離する。初期最終Gitdf42/a7は報告path未収録、担当savehelper修正版8bbでreport/科学不変のbyte復元を確認した。元保存失敗を科学negativeへ変換せず保持。現在は190最終metadata/backup停止receipt待ちで実science追加0、閉じるための新LLM専用turnも起動しない。次枠候補はGPU24のfresh独立教師を露出group splitで固定し、固定QF1のvalue汎化を少数で判別する一案。未許可の次枠や現在14:35重開始上限を超えた実行は行わない。
-
-## frame13の終了判断と次の一案
-
-187・188・190・191を有限受入れclose、現在新科学は配分しない。14:35:15入口までに新配分/事前固定/担当実受付/資源admit/科学終了/必要保存を安全に通す余裕が少ないため、残りは停止・backup・92期限証拠の通常報告へ置く。ユーザーpause/goal完了とはしない。92が運用終了を所有、監督やmonitorを統括が重複停止しない。次枠の実行は未許可。
-
-次枠の最大1主案は、GPU24active/maxB8/K64でfresh独立24teacher gameを一回生成し、結果を見る前にgame/state/historyの露出groupを定め、固定190 QF1-H32を再学習せずrootmean/真z/定数基準に対するgame別汎化を判別する。現在の兄弟mode4528行を独立学習教師として合算しない。複数groupが確保できなければ独立validation成立を保留し露出区分を報告する。全slotの失敗・打切り・適格π/z/joint/全job費を残す。現在のK64教師自体は予算付きMCTS推定であり、value真値とは呼ばない。
-
-費用見込みは既private生成/NNUE evaluatorの再利用で15–25分の薄接続・準備、1GPUjob上限300秒/推論30分・VRAM6内、CPU解析最大60秒の別窓、必要保存20分を含む60–75分程度の配分候補。CPU4/RAM8親内、新teacher保存32MiBと小解析1MiBを確認済未使用分から配分する案で、新上限追加なし。数量・上限・source/教師/split/fault・残GPU時間は新許可枠で実登録するまで実行しない。LR/幅/target混合/新T1全機能を同時に選ばず、必要ならこの結果から次の教師品質又は学習更新を一つ選ぶ。既runtime小診断や保存管理の反復を目的化せず、重みの採用には未知gameの効果が必要。
-
-14:34監督の後着会計標本は190最終327455B<327680/残225B。統括の先行owner326946B/残734Bとは時点を分け、通常write停止と一部receipt未Gitを保持する。必要科学/report/両weight archiveの保存成功を全metadata/全期間保存保証へ広げない。監督提案「量子化/深さ/T1全実装より定数を超える未知gameのfitを先に判断」を部分採用、次の固定QF1一般化案の主基準へ。原因/特徴無効/棋力を認定せず、新科学0。92の14:35:15重停止通知を受領、新枠承認なし、終了回収は同92owner。
+次研究の費用・個別scope・CPU4/RAM8/保存12GiB/GPU推論6GiB/job30分・未使用残の配分は新許可枠で実確認する。従来案の薄接続/準備15–25分、1GPUjob300秒上限、CPU解析60秒別窓、必要保存込み60–75分は24game小段階の参考見積であり、96gameや全学習曲線の総費保証ではない。GPU学習は確認済未使用累積残のみで、今回自動開始しない。root192の完成Git/実行手順/曲線を受領した時に本計画から再利用方法を参照し、機能確認の反復や全役承認を新研究の恒久gateにしない。
