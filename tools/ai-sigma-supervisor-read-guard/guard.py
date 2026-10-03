@@ -34,6 +34,7 @@ class ReadFailed(Rejected):
 GOAL = 'quoridor-4lc'
 SELF = 'quoridor-4lc.40'
 REPORT_RESERVE = 30
+OPERATION_BEGIN = dt.datetime(2026, 10, 3, 0, 15, 21, tzinfo=UTC)
 OPERATION_END = dt.datetime(2026, 10, 3, 4, 10, 21, tzinfo=UTC)
 
 def utc_now():
@@ -162,40 +163,77 @@ def sampled_rss(child_pid, background):
             pass
     return sum(v['rss_bytes'] for v in items)
 
-def owned_storage_bytes():
-    # Bounded owner namespaces only; no shared cache/DB traversal.
-    roots = [ROOT/'tools/ai-sigma-supervisor-read-guard', RUNTIME,
-             ROOT/'.artifacts/ai-sigma/continuation-20261001/scheduler',
-             ROOT/'.artifacts/ai-sigma/continuation-20261001/SIGMA-SCHEDULER-LIVE',
-            ROOT/'.artifacts/ai-sigma/continuation-20261001/SIGMA-SUPERVISOR-READ-GUARD',
-             ROOT/'.artifacts/ai-sigma/continuation-20261001/SIGMA-EXPERIMENT-POLICY-85',
-             ROOT/'.artifacts/ai-sigma/continuation-20261001/SIGMA-CONTRACT-IMPROVEMENT-88',
-             ROOT/'.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92',
-             ROOT/'.artifacts/ai-sigma/continuation-20261001/supervisor',
-             ROOT/'docs/reports/ai-sigma-steward-scheduler-live.md',
-             ROOT/'docs/reports/ai-sigma-steward-supervisor-read-guard.md']
+def allocated_bytes(roots):
     seen = set(); total = 0
     for root in roots:
         stack = [root]
         while stack:
             p = stack.pop()
             try:
-                s = p.lstat(); key = (s.st_dev, s.st_ino)
-                if key not in seen:
-                    total += s.st_blocks*512; seen.add(key)
+                stat = p.lstat(); key = (stat.st_dev, stat.st_ino)
+                if key in seen:
+                    continue
+                seen.add(key); total += stat.st_blocks * 512
                 if p.is_dir() and not p.is_symlink():
                     stack.extend(p.iterdir())
             except FileNotFoundError:
-                pass
+                continue
+            except OSError as error:
+                raise Rejected('Storage allocation unknown: ' + str(p)) from error
     return total
+
+
+def owned_storage_bytes():
+    # Same steward ownership as the existing monitor; supervisor history is separate.
+    return allocated_bytes((ROOT / '.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92', ROOT / '.artifacts/ai-sigma/continuation-20261001/scheduler', RUNTIME, ROOT / '.artifacts/ai-sigma/continuation-20261001/SIGMA-EXPERIMENT-POLICY-85', ROOT / '.artifacts/ai-sigma/continuation-20261001/SIGMA-CONTRACT-IMPROVEMENT-88', ROOT / '.artifacts/ai-sigma/continuation-20261001/SIGMA-SCHEDULER-LIVE', ROOT / '.artifacts/ai-sigma/continuation-20261001/SIGMA-SUPERVISOR-READ-GUARD', ROOT / 'tools/ai-sigma-supervisor-read-guard', ROOT / 'tools/ai-sigma-scheduler-monitor-recovery', ROOT / '.artifacts/ai-sigma/continuation-20261001/SIGMA-SCHEDULER-RECOVERY', ROOT / 'tools/ai-sigma-scheduler-deadline-update', ROOT / '.artifacts/ai-sigma/continuation-20261001/SIGMA-DEADLINE-UPDATE', ROOT / 'tools/ai-sigma-supervisor-role-review', ROOT / '.artifacts/ai-sigma/continuation-20261001/SIGMA-SUPERVISOR-ROLE-REVIEW', ROOT / 'tools/ai-sigma-critical-roles-v2', ROOT / '.artifacts/ai-sigma/continuation-20261001/SIGMA-CRITICAL-ROLES-V2', ROOT / 'tools/ai-sigma-experiment-policy', ROOT / 'docs/reports/ai-sigma-steward-experiment-policy.md', ROOT / 'docs/reports/ai-sigma-steward-critical-roles-v2.md', ROOT / 'docs/reports/ai-sigma-steward-supervisor-role-review.md', ROOT / 'docs/reports/ai-sigma-steward-deadline-20261002.md', ROOT / 'docs/reports/ai-sigma-steward-scheduler-live.md', ROOT / 'docs/reports/ai-sigma-steward-supervisor-read-guard.md', ROOT / 'docs/reports/ai-sigma-steward-scheduler-recovery.md'))
+
+
+def supervisor_storage_bytes():
+    if BASE.is_symlink() or not BASE.is_dir():
+        raise Rejected('Supervisor storage ownership unknown')
+    frame_roots = []
+    for directory in BASE.iterdir():
+        if directory.is_symlink():
+            raise Rejected('Supervisor storage ownership unknown: symlink')
+        binding_path = directory / 'read-guard/binding.json'
+        try:
+            saved = json.loads(binding_path.read_text())
+            start = parse_utc(saved['started_at'])
+            if saved.get('thread_id') != THREAD:
+                raise Rejected('Supervisor storage owner unknown')
+            if start >= OPERATION_BEGIN:
+                if start > utc_now():
+                    raise Rejected('Supervisor storage start is in the future')
+                frame_roots.append(directory)
+        except (FileNotFoundError, KeyError, ValueError) as error:
+            # Legacy unbound evidence remains held and charged; a new unknown run refuses.
+            if directory.stat().st_mtime >= OPERATION_BEGIN.timestamp():
+                raise Rejected('Current supervisor storage ownership unknown') from error
+    held = allocated_bytes([BASE])
+    current = allocated_bytes(frame_roots)
+    return held, current
+
+
+def check_storage(forecast_bytes=4 * 1024**2):
+    steward = owned_storage_bytes()
+    held, current = supervisor_storage_bytes()
+    if steward + forecast_bytes > 112 * 1024**2:
+        raise Rejected('Steward allocated/forecast guard; no command launched')
+    if current + forecast_bytes > 32 * 1024**2:
+        raise Rejected('Current supervisor reservation/forecast guard; no command launched')
+    return {'steward_allocated_bytes': steward,
+            'supervisor_held_bytes': held, 'supervisor_current_frame_bytes': current,
+            'supervisor_historical_held_bytes': held-current,
+            'forecast_bytes': forecast_bytes, 'additional_reservation_bytes': 0,
+            'historical_parent_charge_released': False}
 
 def run_child(args, path, bound, phase='read', background=(), timeout=12):
     admit(bound, 'read_start' if phase == 'read' else 'finish', required_seconds=timeout+2)
-    if owned_storage_bytes() >= 112*1024**2:
-        raise Rejected('Combined steward allocated guard; no command launched')
+    storage = check_storage()
     admit(bound, 'read_start' if phase == 'read' else 'finish', required_seconds=timeout+2)
     limit = 180-REPORT_RESERVE if phase == 'read' else 180
-    started = stamp(); peak = 0; cause = None
+    started = stamp(); started['storage_accounting'] = storage
+    peak = 0; cause = None
     # AS is intentionally inherited without imposing 1GiB; Go/cgo needs virtual reserve.
     with path.with_suffix('.stdout').open('wb') as stdout, path.with_suffix('.stderr').open('wb') as stderr:
         child = subprocess.Popen(args, cwd=ROOT, stdout=stdout, stderr=stderr,
