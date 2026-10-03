@@ -1,0 +1,1866 @@
+{
+  "issue": "quoridor-4lc.151",
+  "UTC": "2026-10-03T02:09:32.509472+00:00",
+  "archives": [
+    {
+      "archive": "research-data/ai-sigma/151-sigma-web-port/port151-stageA-r1.tar.gz",
+      "bytes": 1218812,
+      "SHA256": "2e8651804c29ec66827fd148c6defb762428959316c1ca293e6ec54cb2eb7ee2",
+      "member_count": 29,
+      "members": [
+        {
+          "name": "runs/port151-stageA-r1/actual-served-source.json",
+          "bytes": 4821,
+          "SHA256": "053b7faaadf40ce14e139d31fbf0ae628d9a97e8abb1ba4bc16993e2bb05512f"
+        },
+        {
+          "name": "runs/port151-stageA-r1/browser-result.json",
+          "bytes": 17536361,
+          "SHA256": "75a09f525d85d2ed3f9ffc09e9a97f7e7ff066964086e9b9858e2a67e5a93bb4"
+        },
+        {
+          "name": "runs/port151-stageA-r1/browser-startup.json",
+          "bytes": 420,
+          "SHA256": "7e046c29c4fcb4132947711f27e9cc6701ee2dcdd4a3707c4a50a16d0eccc5ef"
+        },
+        {
+          "name": "runs/port151-stageA-r1/cleanup.jsonl",
+          "bytes": 24552,
+          "SHA256": "fe3cbc2a3dd5e5d7282a473316049703a12f35ea3cdf949f57437e1f4d543042"
+        },
+        {
+          "name": "runs/port151-stageA-r1/clock-end.json",
+          "bytes": 2510,
+          "SHA256": "2ac3cf9836e70f94aec2a8effb76e60c2ab7af40828b0726687c8aafdec02488"
+        },
+        {
+          "name": "runs/port151-stageA-r1/config.json",
+          "bytes": 1799,
+          "SHA256": "90197e18c800ce82dd2dadda4237da304aff76b9f28216a6b335a8f77a3df7ed"
+        },
+        {
+          "name": "runs/port151-stageA-r1/finally-model-drop.json",
+          "bytes": 456,
+          "SHA256": "205da1397e087453ccead78f3bfd5c63eed54325a4345b011acdde609cf18459"
+        },
+        {
+          "name": "runs/port151-stageA-r1/main-timers-stop.json",
+          "bytes": 49,
+          "SHA256": "7dcfee3d0f6d458c477d356171d6dc22abd316b5762d0543ac2166f996081ac1"
+        },
+        {
+          "name": "runs/port151-stageA-r1/model-load.json",
+          "bytes": 987,
+          "SHA256": "4a1db50de9b89b7465de56d64584cb9f0f526166cef90b76314b6acef0dab0d5"
+        },
+        {
+          "name": "runs/port151-stageA-r1/monitor-callback-stop.json",
+          "bytes": 56,
+          "SHA256": "2ae1208f2bc0c3960139f4e152e0b5419a237c52eec8245ad1c65942d7b66331"
+        },
+        {
+          "name": "runs/port151-stageA-r1/outer-controlled-stop.json",
+          "bytes": 5168,
+          "SHA256": "901f7155c8bb44f841b6dac1f4263cb08d3c4610960bef71bd1cba2002fa8542"
+        },
+        {
+          "name": "runs/port151-stageA-r1/pause-monitor-stop.json",
+          "bytes": 6492,
+          "SHA256": "818b4a6487c8b05a59cbcca92c9db91d9e6a07e39bac4c497ab718b022510e1e"
+        },
+        {
+          "name": "runs/port151-stageA-r1/pause-monitor.json",
+          "bytes": 6405,
+          "SHA256": "e254cfe46f98aeac8c91f1598619a45bfa08d38d82665d73c649dec541ba6374"
+        },
+        {
+          "name": "runs/port151-stageA-r1/preflight.json",
+          "bytes": 561,
+          "SHA256": "58325f442bcd8792928ce10131494596fa91d0da4418cde6231625b2d7a64503"
+        },
+        {
+          "name": "runs/port151-stageA-r1/routing-mock.json",
+          "bytes": 161,
+          "SHA256": "03d4b2944e97b19f0a67069d29679951e7a95340f1578d45337497e4216d395c"
+        },
+        {
+          "name": "runs/port151-stageA-r1/rules-mock.json",
+          "bytes": 1179,
+          "SHA256": "e65600320d6c47d5f4ea7d6139da2f0c20d4a3f450250152bcbcd4039b52056b"
+        },
+        {
+          "name": "runs/port151-stageA-r1/source-bindings.json",
+          "bytes": 2782,
+          "SHA256": "57bb540f68e8dca517ce3a1e8156be88befd081ad518e58f19b886857bed7038"
+        },
+        {
+          "name": "runs/port151-stageA-r1/startup.json",
+          "bytes": 3462,
+          "SHA256": "b3d9f9043a7b70278e6852e7f3276d16a8cecd3f0a325b2d1da41f93b21de566"
+        },
+        {
+          "name": "runs/port151-stageA-r1/summary.json",
+          "bytes": 216,
+          "SHA256": "630df134d3ed5b45384ea24b6ceda49f6db25a2ba9b68ac61bfa962b1930fbec"
+        },
+        {
+          "name": "runs/port151-stageA-r1/terminated-worker.json",
+          "bytes": 66,
+          "SHA256": "5e666ed174ef5309578c2703b511c20f4cce26fd1532a64cb06c17f137a0f4cb"
+        },
+        {
+          "name": "runs/port151-stageA-r1.admission.json",
+          "bytes": 4017,
+          "SHA256": "e039addb04d4b5b8f9a036272e5f2e291b9ddbbf6f29876663ba6c0840af2d64"
+        },
+        {
+          "name": "runs/port151-stageA-r1.inputs.json",
+          "bytes": 1457,
+          "SHA256": "0dd3cb66706313e2ca75c615ad0042eca88343b6e894c9c2141af8c52fb20c70"
+        },
+        {
+          "name": "runs/port151-stageA-r1.log",
+          "bytes": 175,
+          "SHA256": "91f96991be970ea3f0c5c68969cf85465406781a5612e6e1ca6a94cf0d13cf3e"
+        },
+        {
+          "name": "runs/port151-stageA-r1.monitor.jsonl",
+          "bytes": 562335,
+          "SHA256": "f3c0068c343429522a4ff7807b9a93c560c5cd5a4e89370ab7a7205bfe5c1b3e"
+        },
+        {
+          "name": "runs/port151-stageA-r1.owned-ack.json",
+          "bytes": 47270,
+          "SHA256": "c94209f485b124a33b5464f3b8bed16abb828f31f9e5761cfc617c3ea330cea4"
+        },
+        {
+          "name": "runs/port151-stageA-r1.owned-ledger.jsonl",
+          "bytes": 20062,
+          "SHA256": "1501bc53e783893bb2e1d2392c38104db30c167bd33f77593db61dcabc52445c"
+        },
+        {
+          "name": "runs/port151-stageA-r1.process.json",
+          "bytes": 31209,
+          "SHA256": "f5c3ea9931d1c71f0e103ac66c5183811df6ef99992487e24c3ce9ba6d91692b"
+        },
+        {
+          "name": "runs/port151-stageA-r1.started.json",
+          "bytes": 1741,
+          "SHA256": "12e480165e438d2fedef57d256cd96b88c083c2f90b73d3cba7f108c509518cd"
+        },
+        {
+          "name": "runs/port151-stageA-r1.threads.json",
+          "bytes": 190,
+          "SHA256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+        }
+      ],
+      "all_members_SHA_size_stream_verified": true,
+      "minimum_extracted_and_rehashed": [
+        "runs/port151-stageA-r1/browser-result.json",
+        "runs/port151-stageA-r1/finally-model-drop.json",
+        "runs/port151-stageA-r1/pause-monitor-stop.json",
+        "runs/port151-stageA-r1/summary.json",
+        "runs/port151-stageA-r1.process.json"
+      ],
+      "runtime_expanded_source": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT",
+      "minimal_restore_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/restore-minimum/port151-stageA-r1"
+    },
+    {
+      "archive": "research-data/ai-sigma/151-sigma-web-port/port151-stageA-r2.tar.gz",
+      "bytes": 1226444,
+      "SHA256": "09285a0890a08bb935a8cb9eeb34b62c51f9986f8467b06790b93ddc003cbb1b",
+      "member_count": 29,
+      "members": [
+        {
+          "name": "runs/port151-stageA-r2/actual-served-source.json",
+          "bytes": 4821,
+          "SHA256": "e4507ac93932d589b3612f97081ada5958bdb8f61b7a624c17e1cbf684cb7c34"
+        },
+        {
+          "name": "runs/port151-stageA-r2/browser-result.json",
+          "bytes": 17535637,
+          "SHA256": "d37215cbc7914519ca24ab254c5e413d21e780389094faed537280a059c234d2"
+        },
+        {
+          "name": "runs/port151-stageA-r2/browser-startup.json",
+          "bytes": 420,
+          "SHA256": "7e046c29c4fcb4132947711f27e9cc6701ee2dcdd4a3707c4a50a16d0eccc5ef"
+        },
+        {
+          "name": "runs/port151-stageA-r2/cleanup.jsonl",
+          "bytes": 23105,
+          "SHA256": "0f90a37cb5ac7dcaa9feceb4c5e7e5b956edd2da14ba90536fa10a9a51cbfc05"
+        },
+        {
+          "name": "runs/port151-stageA-r2/clock-end.json",
+          "bytes": 2447,
+          "SHA256": "d7b3a93b360647a59ac36842672f3794183acdcedf515dc4f1374f8b071c1d27"
+        },
+        {
+          "name": "runs/port151-stageA-r2/config.json",
+          "bytes": 1882,
+          "SHA256": "a6769cbda0633c3cbdddddcefa129ccd92760b0e425eedb187a5fd5aa6ffa939"
+        },
+        {
+          "name": "runs/port151-stageA-r2/finally-model-drop.json",
+          "bytes": 451,
+          "SHA256": "2d066768968f0dfd4d531c01304bff372d4d9d6ecd949bb4bc9f17e3c5b04e90"
+        },
+        {
+          "name": "runs/port151-stageA-r2/main-timers-stop.json",
+          "bytes": 49,
+          "SHA256": "7dcfee3d0f6d458c477d356171d6dc22abd316b5762d0543ac2166f996081ac1"
+        },
+        {
+          "name": "runs/port151-stageA-r2/model-load.json",
+          "bytes": 987,
+          "SHA256": "f5f8b8526fb898bbea9d8b76c4b1a131da11eb1cb31621346ef01ace465a81ff"
+        },
+        {
+          "name": "runs/port151-stageA-r2/monitor-callback-stop.json",
+          "bytes": 56,
+          "SHA256": "2ae1208f2bc0c3960139f4e152e0b5419a237c52eec8245ad1c65942d7b66331"
+        },
+        {
+          "name": "runs/port151-stageA-r2/outer-controlled-stop.json",
+          "bytes": 5798,
+          "SHA256": "7a103d5663f103ceee3111820d8280b0737596953cde323f7510a9e57fcf1758"
+        },
+        {
+          "name": "runs/port151-stageA-r2/pause-monitor-stop.json",
+          "bytes": 7876,
+          "SHA256": "8c4f6435d45aef3897ecbb4aafa2b72da0b537b85aeb32dbcb6c4d407cb54e9c"
+        },
+        {
+          "name": "runs/port151-stageA-r2/pause-monitor.json",
+          "bytes": 7789,
+          "SHA256": "6b0e383e655cf81f873ba31b29d6ae14b773be8c7f9022972362b222dfd87a0b"
+        },
+        {
+          "name": "runs/port151-stageA-r2/preflight.json",
+          "bytes": 561,
+          "SHA256": "d419e4acfb7ef0542263e876d2946d2fb1c063014c6f11222d21367dc4ead8b2"
+        },
+        {
+          "name": "runs/port151-stageA-r2/routing-mock.json",
+          "bytes": 161,
+          "SHA256": "03d4b2944e97b19f0a67069d29679951e7a95340f1578d45337497e4216d395c"
+        },
+        {
+          "name": "runs/port151-stageA-r2/rules-mock.json",
+          "bytes": 1179,
+          "SHA256": "e65600320d6c47d5f4ea7d6139da2f0c20d4a3f450250152bcbcd4039b52056b"
+        },
+        {
+          "name": "runs/port151-stageA-r2/source-bindings.json",
+          "bytes": 2782,
+          "SHA256": "57bb540f68e8dca517ce3a1e8156be88befd081ad518e58f19b886857bed7038"
+        },
+        {
+          "name": "runs/port151-stageA-r2/startup.json",
+          "bytes": 3437,
+          "SHA256": "976ff21360c50a2ee4c0e393ec5b424f29eb82c433eebd64f8d1f966f436f387"
+        },
+        {
+          "name": "runs/port151-stageA-r2/summary.json",
+          "bytes": 216,
+          "SHA256": "f272ec6ed13871f729addbd8aba7e980765fe4c2fe65285f59dab66f9a87b58e"
+        },
+        {
+          "name": "runs/port151-stageA-r2/terminated-worker.json",
+          "bytes": 67,
+          "SHA256": "5fa8434a74209872bcc376dca4f46e2aa44415d64939ff17731929bfd3af6721"
+        },
+        {
+          "name": "runs/port151-stageA-r2.admission.json",
+          "bytes": 4022,
+          "SHA256": "32bef28fd1fdb496d43838bea099a3c131a0627e1807858933fb78cb9e61ed09"
+        },
+        {
+          "name": "runs/port151-stageA-r2.inputs.json",
+          "bytes": 1618,
+          "SHA256": "6b60ce179ad0268f281805a7b2a6c4bd9bfa10b9e9bc7310231eb1b6b136461f"
+        },
+        {
+          "name": "runs/port151-stageA-r2.log",
+          "bytes": 175,
+          "SHA256": "5e22c0660ae07ebca09be4e549d77468f0b36e163c0f5f12c55c01a886526069"
+        },
+        {
+          "name": "runs/port151-stageA-r2.monitor.jsonl",
+          "bytes": 601035,
+          "SHA256": "a71b76e2c22822aa277911edf2caa6e0c40cab14bcf1631621eecd990e4508c1"
+        },
+        {
+          "name": "runs/port151-stageA-r2.owned-ack.json",
+          "bytes": 54544,
+          "SHA256": "43a29dfbc4c6e95712d18268446745f9559ad2860d5846ed5f26ca8a6785f872"
+        },
+        {
+          "name": "runs/port151-stageA-r2.owned-ledger.jsonl",
+          "bytes": 25396,
+          "SHA256": "51d140d36dfca69e455719af277d030dc33be43829d8724c52abff9821bbbb25"
+        },
+        {
+          "name": "runs/port151-stageA-r2.process.json",
+          "bytes": 33829,
+          "SHA256": "97c09c1cabed587bbaecdf0ec5ba10c739d566d6cba92f557dc8ce698067fc11"
+        },
+        {
+          "name": "runs/port151-stageA-r2.started.json",
+          "bytes": 1710,
+          "SHA256": "11f5ec4a6bac714385c3dd1df6e402ad63950f1356466438f605fac7d3c02018"
+        },
+        {
+          "name": "runs/port151-stageA-r2.threads.json",
+          "bytes": 190,
+          "SHA256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+        }
+      ],
+      "all_members_SHA_size_stream_verified": true,
+      "minimum_extracted_and_rehashed": [
+        "runs/port151-stageA-r2/browser-result.json",
+        "runs/port151-stageA-r2/finally-model-drop.json",
+        "runs/port151-stageA-r2/pause-monitor-stop.json",
+        "runs/port151-stageA-r2/summary.json",
+        "runs/port151-stageA-r2.process.json"
+      ],
+      "runtime_expanded_source": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT",
+      "minimal_restore_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/restore-minimum/port151-stageA-r2"
+    },
+    {
+      "archive": "research-data/ai-sigma/151-sigma-web-port/port151-stageB-group1-r1.tar.gz",
+      "bytes": 2628633,
+      "SHA256": "202caa8aafcf95b9edefb6b93ef54b3524c463a9aa3e1a912e4cfc64deb35f0e",
+      "member_count": 33,
+      "members": [
+        {
+          "name": "runs/port151-stageB-group1-r1/actual-served-source.json",
+          "bytes": 4821,
+          "SHA256": "34d5d8aa327c2d7e02de190cd6a3dd128d279e80d9bdb90295b867dd3311bec8"
+        },
+        {
+          "name": "runs/port151-stageB-group1-r1/browser-result.json",
+          "bytes": 143414,
+          "SHA256": "dd015d0b3ed9e7f688eac083fea6a3feb6730e2f0513e6402d40b57867d0fc7b"
+        },
+        {
+          "name": "runs/port151-stageB-group1-r1/browser-startup.json",
+          "bytes": 420,
+          "SHA256": "7e046c29c4fcb4132947711f27e9cc6701ee2dcdd4a3707c4a50a16d0eccc5ef"
+        },
+        {
+          "name": "runs/port151-stageB-group1-r1/cleanup.jsonl",
+          "bytes": 20482,
+          "SHA256": "6199a7e384efa4b38d15df906f734e7a4e30dca0c39664b420db6bd48e0aafa1"
+        },
+        {
+          "name": "runs/port151-stageB-group1-r1/clock-end.json",
+          "bytes": 2481,
+          "SHA256": "027342e57b8f0efc6b3afbd8bf9d60f70c45ddeaa4a09380d39c91df805383c1"
+        },
+        {
+          "name": "runs/port151-stageB-group1-r1/completed-game-port151-pair1-color1.json",
+          "bytes": 5935437,
+          "SHA256": "bec738ef7c34a18eb4bdbd1845e56311df217fd91c9e9d5d0fd99e32ea476612"
+        },
+        {
+          "name": "runs/port151-stageB-group1-r1/completed-game-port151-pair1-color2.json",
+          "bytes": 5573624,
+          "SHA256": "8012ace3bfeb44c34b180daf85da07b113c708c8193094be54bb5766a9fc1f55"
+        },
+        {
+          "name": "runs/port151-stageB-group1-r1/completed-game-port151-pair2-color1.json",
+          "bytes": 4958718,
+          "SHA256": "2d8a141ff51d65d678289376d63b786f83a9332fd96c783afd98dcfd07ba2738"
+        },
+        {
+          "name": "runs/port151-stageB-group1-r1/completed-game-port151-pair2-color2.json",
+          "bytes": 5966624,
+          "SHA256": "964caf10bfa2414fdae22bab388a676b304eea4d6055a302473908cbdd2128f6"
+        },
+        {
+          "name": "runs/port151-stageB-group1-r1/config.json",
+          "bytes": 1998,
+          "SHA256": "34070bc9a7a2c7a1379636aa02af39386f6ea44dd91f14107d0e06c5f033eb7e"
+        },
+        {
+          "name": "runs/port151-stageB-group1-r1/finally-model-drop.json",
+          "bytes": 453,
+          "SHA256": "eae0a5abae4eab1af698bc74f53d31deed8d6c218a32ad77cac58f3ad7636924"
+        },
+        {
+          "name": "runs/port151-stageB-group1-r1/main-timers-stop.json",
+          "bytes": 49,
+          "SHA256": "7dcfee3d0f6d458c477d356171d6dc22abd316b5762d0543ac2166f996081ac1"
+        },
+        {
+          "name": "runs/port151-stageB-group1-r1/model-load.json",
+          "bytes": 964,
+          "SHA256": "2620db9d76cd7fb037469e4d31386d3b6206fc8986f408689b9222925dc1027b"
+        },
+        {
+          "name": "runs/port151-stageB-group1-r1/monitor-callback-stop.json",
+          "bytes": 56,
+          "SHA256": "2ae1208f2bc0c3960139f4e152e0b5419a237c52eec8245ad1c65942d7b66331"
+        },
+        {
+          "name": "runs/port151-stageB-group1-r1/outer-controlled-stop.json",
+          "bytes": 23124,
+          "SHA256": "7167c2eca1bd144f93bdca5a77c1dbf448458d57d90f6afb10f091f9581c292d"
+        },
+        {
+          "name": "runs/port151-stageB-group1-r1/pause-monitor-stop.json",
+          "bytes": 30228,
+          "SHA256": "f8fa0ff647d9503bf1ac44d1cfac5db3c10ad068da990576fdacc6c41c09fcac"
+        },
+        {
+          "name": "runs/port151-stageB-group1-r1/pause-monitor.json",
+          "bytes": 30141,
+          "SHA256": "a05c9011c08a4afb0ba089527912a74639120b503a5de49fbac80161a789b924"
+        },
+        {
+          "name": "runs/port151-stageB-group1-r1/preflight.json",
+          "bytes": 561,
+          "SHA256": "d419e4acfb7ef0542263e876d2946d2fb1c063014c6f11222d21367dc4ead8b2"
+        },
+        {
+          "name": "runs/port151-stageB-group1-r1/routing-mock.json",
+          "bytes": 5322,
+          "SHA256": "e6f10890d2f75b5fb7d248f312fa303816a3717bece26438d73ad62cc9dfc50f"
+        },
+        {
+          "name": "runs/port151-stageB-group1-r1/rules-mock.json",
+          "bytes": 1179,
+          "SHA256": "e65600320d6c47d5f4ea7d6139da2f0c20d4a3f450250152bcbcd4039b52056b"
+        },
+        {
+          "name": "runs/port151-stageB-group1-r1/source-bindings.json",
+          "bytes": 2782,
+          "SHA256": "92208f260d7935010457ac3b1f87bd9274a82052efab59fcea9330a26c883dca"
+        },
+        {
+          "name": "runs/port151-stageB-group1-r1/startup.json",
+          "bytes": 3420,
+          "SHA256": "a1d09235c92173ee731c7a1acaf508f6672562a490d480c6feb325c4880710d4"
+        },
+        {
+          "name": "runs/port151-stageB-group1-r1/summary.json",
+          "bytes": 219,
+          "SHA256": "0acb474b1b16a3153a1de4a31b0a4010cfe1a74f03f336653b285787bb02b904"
+        },
+        {
+          "name": "runs/port151-stageB-group1-r1/terminated-worker.json",
+          "bytes": 66,
+          "SHA256": "d34f16a0c3c35ebc9f3836eb9895d0543de5ed62cb380692c7fbefc7ee4223cd"
+        },
+        {
+          "name": "runs/port151-stageB-group1-r1.admission.json",
+          "bytes": 4025,
+          "SHA256": "773eb80ea69846eac0830302313ec8ab0024157eb0e6de4d01cf089d4760f9e4"
+        },
+        {
+          "name": "runs/port151-stageB-group1-r1.inputs.json",
+          "bytes": 1943,
+          "SHA256": "a75c5da57997bbaaf612f45f4f4d0ac2ecf3ad7b3087fcb020e5ec59ef952f77"
+        },
+        {
+          "name": "runs/port151-stageB-group1-r1.log",
+          "bytes": 178,
+          "SHA256": "7894d55470a0f9756d5871f11a6b331d5a745c9a86a03c2e570edf01c2daaab6"
+        },
+        {
+          "name": "runs/port151-stageB-group1-r1.monitor.jsonl",
+          "bytes": 2389509,
+          "SHA256": "e78e9cd2a35a9a60a669786df27dd5698cb0cef9e963ef6e22c880307883606c"
+        },
+        {
+          "name": "runs/port151-stageB-group1-r1.owned-ack.json",
+          "bytes": 214137,
+          "SHA256": "79fe9dcebe8527465fba2a35f924e34f173cd141d555639290123be1f8f291f4"
+        },
+        {
+          "name": "runs/port151-stageB-group1-r1.owned-ledger.jsonl",
+          "bytes": 107165,
+          "SHA256": "9d10d273e81040a84de3d542243cf6c7752d29f367ab565feb600993fde26bba"
+        },
+        {
+          "name": "runs/port151-stageB-group1-r1.process.json",
+          "bytes": 116740,
+          "SHA256": "2f0975c45dbf38b6c06638b50c193410e2371a5bde89e1fac3926c5f34d2d850"
+        },
+        {
+          "name": "runs/port151-stageB-group1-r1.started.json",
+          "bytes": 1717,
+          "SHA256": "0143a65bfeef8c81aa6be51d23f58635bf1e3b8ab469fedb3695cb720346d6e5"
+        },
+        {
+          "name": "runs/port151-stageB-group1-r1.threads.json",
+          "bytes": 190,
+          "SHA256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+        }
+      ],
+      "all_members_SHA_size_stream_verified": true,
+      "minimum_extracted_and_rehashed": [
+        "runs/port151-stageB-group1-r1/completed-game-port151-pair1-color1.json",
+        "runs/port151-stageB-group1-r1/finally-model-drop.json",
+        "runs/port151-stageB-group1-r1/pause-monitor-stop.json",
+        "runs/port151-stageB-group1-r1/summary.json",
+        "runs/port151-stageB-group1-r1.process.json"
+      ],
+      "runtime_expanded_source": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT",
+      "minimal_restore_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/restore-minimum/port151-stageB-group1-r1"
+    },
+    {
+      "archive": "research-data/ai-sigma/151-sigma-web-port/port151-stageB-group2-r1.tar.gz",
+      "bytes": 2348511,
+      "SHA256": "b9fd428d3b51d97adeb9c870e086dd79dd0b9e65bf576b3045cc54cd88672b70",
+      "member_count": 37,
+      "members": [
+        {
+          "name": "runs/port151-stageB-group2-r1/actual-served-source.json",
+          "bytes": 4821,
+          "SHA256": "34d5d8aa327c2d7e02de190cd6a3dd128d279e80d9bdb90295b867dd3311bec8"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1/beads-read-quoridor-4lc.151.json",
+          "bytes": 203649,
+          "SHA256": "075ded14fbf772c6539aa138d19be641ca8a326cf05012fce53f180c6f43d761"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1/beads-read-quoridor-4lc.json",
+          "bytes": 202339,
+          "SHA256": "e7a0a564a6031c11f3c1330e34a3be81dd9c6ecfd94418b7c747f55c784d4a58"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1/browser-result.json",
+          "bytes": 119649,
+          "SHA256": "dd2463ab841d6e7bde12091ebb4da6bc3b074831d598bccc126019ce2dd65a04"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1/browser-startup.json",
+          "bytes": 420,
+          "SHA256": "7e046c29c4fcb4132947711f27e9cc6701ee2dcdd4a3707c4a50a16d0eccc5ef"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1/cleanup.jsonl",
+          "bytes": 23345,
+          "SHA256": "196206903bda74a43c4a7d8a1b8c43756e44999fade485067e2f34059d3615d1"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1/clock-end.json",
+          "bytes": 2464,
+          "SHA256": "bea4b639073f81af7c0bc139d2c837515f9934f37f70129abec5dc63849d90f8"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1/completed-game-port151-pair3-color1.json",
+          "bytes": 2619208,
+          "SHA256": "1facbccb4ea0d15c9292d606949da4ddebd9d3980825571c4ee674a5258bc5fd"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1/completed-game-port151-pair3-color2.json",
+          "bytes": 5445748,
+          "SHA256": "54f3ebb6eb00f59185f8fa2eb7bddc1954ade23043321692f5866a10367d5669"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1/completed-game-port151-pair4-color1.json",
+          "bytes": 5097667,
+          "SHA256": "b5cd21213c4ef2905c58a8d61c89d609a4a6fe30432fc9f3fb005c04539fe8e1"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1/completed-game-port151-pair4-color2.json",
+          "bytes": 5069214,
+          "SHA256": "bb32530a21daec3de67949303e4d74c9721c4afdebcebbb5d0cf5f2014c5e283"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1/config.json",
+          "bytes": 2006,
+          "SHA256": "ef200b3a846069863ced7ed14bd310ab02df0a92078d2299d55291f232685af9"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1/control-status.json",
+          "bytes": 191,
+          "SHA256": "3bc3195f4861e936ea2c2797f119b25cf25edfaaff54923ee8370b753f2fdd69"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1/finally-model-drop.json",
+          "bytes": 454,
+          "SHA256": "c9528b2020635cff4f8fdfa484c3deba91420c6b558e9dace9c6ac9562738d3f"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1/main-timers-stop.json",
+          "bytes": 49,
+          "SHA256": "7dcfee3d0f6d458c477d356171d6dc22abd316b5762d0543ac2166f996081ac1"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1/model-load.json",
+          "bytes": 988,
+          "SHA256": "da31b9ac454579d92a20f4f777cfce392a09ce697e054527a7b0d326c60bd6b6"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1/monitor-callback-stop.json",
+          "bytes": 56,
+          "SHA256": "2ae1208f2bc0c3960139f4e152e0b5419a237c52eec8245ad1c65942d7b66331"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1/monitor-ready-before-NN.json",
+          "bytes": 77,
+          "SHA256": "1e36db722c1d9a6c152538438e0bc7dac0a885480b12e234907a47d0b8fe38ea"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1/outer-controlled-stop.json",
+          "bytes": 23061,
+          "SHA256": "4286222a072ad7a9adb10b149cfdd49e8050bacdf3dd243dcc1b2d5ec5307b4f"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1/pause-monitor-stop.json",
+          "bytes": 38748,
+          "SHA256": "64b6c780f93334968075d11450392483df1a625dceec36012fe35c9f3f5ef9ff"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1/pause-monitor.json",
+          "bytes": 38661,
+          "SHA256": "eef75123d91d6780d5cc2a3fdaf1ca3ff3865677aeb83d9869725bfe25e788bf"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1/preflight.json",
+          "bytes": 561,
+          "SHA256": "d419e4acfb7ef0542263e876d2946d2fb1c063014c6f11222d21367dc4ead8b2"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1/routing-mock.json",
+          "bytes": 5322,
+          "SHA256": "e6f10890d2f75b5fb7d248f312fa303816a3717bece26438d73ad62cc9dfc50f"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1/rules-mock.json",
+          "bytes": 1179,
+          "SHA256": "e65600320d6c47d5f4ea7d6139da2f0c20d4a3f450250152bcbcd4039b52056b"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1/source-bindings.json",
+          "bytes": 2782,
+          "SHA256": "92208f260d7935010457ac3b1f87bd9274a82052efab59fcea9330a26c883dca"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1/startup.json",
+          "bytes": 3432,
+          "SHA256": "fe90c4b85f12cd26cbdaf951e17e2df1bd9a2924654a16ea8c1ffe28fdf5471e"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1/summary.json",
+          "bytes": 219,
+          "SHA256": "042fcf5b763ea3999b95d2106c1b1d4cb8c669b08b5bfcb8bf9e71925038fd03"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1/terminated-worker.json",
+          "bytes": 67,
+          "SHA256": "f5c7afa5cf345a0b5afd040ca6996bbbd25063c76a81ee16f13b0122de8c7257"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1.admission.json",
+          "bytes": 4026,
+          "SHA256": "6ea2f993bafb864f7d233b940c32502f36ba6366b4495245155c8064015f667f"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1.inputs.json",
+          "bytes": 2268,
+          "SHA256": "86cdbbaa6c8d5a74ad4990fe507c1f421b6c67e0f0410f2f2e892e1115183c9c"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1.log",
+          "bytes": 178,
+          "SHA256": "cf922c37fc5b5d8e5c1a98440dce353cbe2f32f2eba3deb459141529e1960b75"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1.monitor.jsonl",
+          "bytes": 2000901,
+          "SHA256": "ab00cb5373a890c28d355583c867a34bf20076e23be5c999496b68b5df270771"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1.owned-ack.json",
+          "bytes": 204199,
+          "SHA256": "0b68590acd0ea0086d0f47a35ec9185c512df679ab1051ab943d42f4089f1ec4"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1.owned-ledger.jsonl",
+          "bytes": 100070,
+          "SHA256": "93b3d38920c8cbf989b457db9f7d4c4287c92d248323de710703f815220ae1c7"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1.process.json",
+          "bytes": 113262,
+          "SHA256": "ff45f48413e8f70583261788bc2b66b4beb87f670fb02ab65b54f3f2977ae988"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1.started.json",
+          "bytes": 1717,
+          "SHA256": "ad0b0ca6f6fb19e48aeb82540039c7d5d1082e844835999924dcc16a9a01e648"
+        },
+        {
+          "name": "runs/port151-stageB-group2-r1.threads.json",
+          "bytes": 190,
+          "SHA256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+        }
+      ],
+      "all_members_SHA_size_stream_verified": true,
+      "minimum_extracted_and_rehashed": [
+        "runs/port151-stageB-group2-r1/completed-game-port151-pair3-color1.json",
+        "runs/port151-stageB-group2-r1/finally-model-drop.json",
+        "runs/port151-stageB-group2-r1/pause-monitor-stop.json",
+        "runs/port151-stageB-group2-r1/summary.json",
+        "runs/port151-stageB-group2-r1.process.json"
+      ],
+      "runtime_expanded_source": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT",
+      "minimal_restore_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/restore-minimum/port151-stageB-group2-r1"
+    },
+    {
+      "archive": "research-data/ai-sigma/151-sigma-web-port/port151-stageB-group3-r1.tar.gz",
+      "bytes": 2310541,
+      "SHA256": "7ef3993867fe9414f722aa4cc4678bb13f889fde67850a3c6d9ccecd68a75f13",
+      "member_count": 37,
+      "members": [
+        {
+          "name": "runs/port151-stageB-group3-r1/actual-served-source.json",
+          "bytes": 4821,
+          "SHA256": "34d5d8aa327c2d7e02de190cd6a3dd128d279e80d9bdb90295b867dd3311bec8"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.151.json",
+          "bytes": 204552,
+          "SHA256": "d00cd73e165bfe3f693a67faf1b7bf681bd48926661b7dfbe06032e9759805bc"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.json",
+          "bytes": 203243,
+          "SHA256": "0a82552d4dc8d484bd0211a2b2f88f2d1ca5853a8a7aaadc64af12ffc887c503"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1/browser-result.json",
+          "bytes": 118270,
+          "SHA256": "75f77c2b5ba4861f60efdb4c270e9a43838699c44db0877b50963ed707496568"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1/browser-startup.json",
+          "bytes": 420,
+          "SHA256": "7e046c29c4fcb4132947711f27e9cc6701ee2dcdd4a3707c4a50a16d0eccc5ef"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1/cleanup.jsonl",
+          "bytes": 25660,
+          "SHA256": "33c90a132e3e0902af369d6083712e9f94f235f27bd33d7ecd2bd016aabcdf61"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1/clock-end.json",
+          "bytes": 2455,
+          "SHA256": "10ae2819581518da915b9a027dead897adb2a4908d3682a9ecf38c797fa42c68"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1/completed-game-port151-pair5-color1.json",
+          "bytes": 3689139,
+          "SHA256": "763b32c5ef605b557bb3288666e7ce7ba3e4599a6b6c640b215079ac46bbb064"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1/completed-game-port151-pair5-color2.json",
+          "bytes": 3818554,
+          "SHA256": "6d46f38fd41d42e715eaea90404bd023d3f0e602dcdcf5972fc5b69fd75caddb"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1/completed-game-port151-pair6-color1.json",
+          "bytes": 5477457,
+          "SHA256": "a489d84d6a8132de52e04c93d4c7785b60fdd53e9d800983daa87359cee63875"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1/completed-game-port151-pair6-color2.json",
+          "bytes": 4355524,
+          "SHA256": "8f23ed24deb83551f46548e0ef8c140aa008dd48e8bcf94970f391fafbe22ff5"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1/config.json",
+          "bytes": 1998,
+          "SHA256": "7c377bcc4bbcc8cb50d173138b19a212b43b6272df61375d94022504c0b8b1db"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1/control-status.json",
+          "bytes": 191,
+          "SHA256": "3bc3195f4861e936ea2c2797f119b25cf25edfaaff54923ee8370b753f2fdd69"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1/finally-model-drop.json",
+          "bytes": 455,
+          "SHA256": "aec4e38517dbd980ef9094b3edeca75c66b06b4c2f2bd340954602d9dafc6d2d"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1/main-timers-stop.json",
+          "bytes": 49,
+          "SHA256": "7dcfee3d0f6d458c477d356171d6dc22abd316b5762d0543ac2166f996081ac1"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1/model-load.json",
+          "bytes": 989,
+          "SHA256": "463f4173a8bc9844c230c02c4c7049558c840395c9a32dc5d72d9b6149bbc767"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1/monitor-callback-stop.json",
+          "bytes": 56,
+          "SHA256": "2ae1208f2bc0c3960139f4e152e0b5419a237c52eec8245ad1c65942d7b66331"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1/monitor-ready-before-NN.json",
+          "bytes": 77,
+          "SHA256": "ef048faca77400cb91ddfa4c739530178aa71ac564488a5819c45dc3736100dc"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1/outer-controlled-stop.json",
+          "bytes": 21045,
+          "SHA256": "5f572fe72dd00c11ab2f4dd9f526db5b1cbff5a5ddca7cb91bf279d63af71020"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1/pause-monitor-stop.json",
+          "bytes": 37146,
+          "SHA256": "a2970cf04acb553cc69b13ad94616940c244eb97f3a607f5ca168a121d11fbb7"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1/pause-monitor.json",
+          "bytes": 37059,
+          "SHA256": "f9efda625730725c55d07fac09b942fef8aa05249e47019211241a898c6846be"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1/preflight.json",
+          "bytes": 561,
+          "SHA256": "d419e4acfb7ef0542263e876d2946d2fb1c063014c6f11222d21367dc4ead8b2"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1/routing-mock.json",
+          "bytes": 5322,
+          "SHA256": "e6f10890d2f75b5fb7d248f312fa303816a3717bece26438d73ad62cc9dfc50f"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1/rules-mock.json",
+          "bytes": 1179,
+          "SHA256": "e65600320d6c47d5f4ea7d6139da2f0c20d4a3f450250152bcbcd4039b52056b"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1/source-bindings.json",
+          "bytes": 2782,
+          "SHA256": "92208f260d7935010457ac3b1f87bd9274a82052efab59fcea9330a26c883dca"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1/startup.json",
+          "bytes": 3445,
+          "SHA256": "9eba35681d5d76526687a5a8fa651bd539dbbb177ea1b528e75bd0edde843f7a"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1/summary.json",
+          "bytes": 219,
+          "SHA256": "4e6f967b44cdba8fb3840840c291b14ba6fcaee0c9e8e6f6f17372191613d4fb"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1/terminated-worker.json",
+          "bytes": 67,
+          "SHA256": "1e1f8a89a292082aa0c4102882d02ac7db5a6e9e97eb69f5bccdb60c2750496d"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1.admission.json",
+          "bytes": 4035,
+          "SHA256": "55f778dfe271b320925652556a3760e6b8e3ec3e0f7ac038a803e45d088e7fe2"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1.inputs.json",
+          "bytes": 2268,
+          "SHA256": "86cdbbaa6c8d5a74ad4990fe507c1f421b6c67e0f0410f2f2e892e1115183c9c"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1.log",
+          "bytes": 178,
+          "SHA256": "4a3f070dd0ed2b83121d052be3b06fd948b37a4680001e88560aecc7df8142a3"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1.monitor.jsonl",
+          "bytes": 1937935,
+          "SHA256": "85d55cfadffb69104c0ff15aa998df21e3ae794d7b76313609f4953f61d48451"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1.owned-ack.json",
+          "bytes": 191664,
+          "SHA256": "ec651f2cbd547a6f9faa20265415492eb1c25eebddfe2928dd1cd22d079945fe"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1.owned-ledger.jsonl",
+          "bytes": 93067,
+          "SHA256": "1b9dd0afb2092d093c4c53069e4ad1560fdba9a0865668f535107b90560bc355"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1.process.json",
+          "bytes": 107115,
+          "SHA256": "ced1f52f1fc31dc0f657c21e04a0ee9285d0a454ff6b5b58ed3ffc9985b9eb08"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1.started.json",
+          "bytes": 1717,
+          "SHA256": "4514a81aba8d8a521df82f179c180c138b605b52185082f53038e01b0ce4da33"
+        },
+        {
+          "name": "runs/port151-stageB-group3-r1.threads.json",
+          "bytes": 190,
+          "SHA256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+        }
+      ],
+      "all_members_SHA_size_stream_verified": true,
+      "minimum_extracted_and_rehashed": [
+        "runs/port151-stageB-group3-r1/completed-game-port151-pair5-color1.json",
+        "runs/port151-stageB-group3-r1/finally-model-drop.json",
+        "runs/port151-stageB-group3-r1/pause-monitor-stop.json",
+        "runs/port151-stageB-group3-r1/summary.json",
+        "runs/port151-stageB-group3-r1.process.json"
+      ],
+      "runtime_expanded_source": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT",
+      "minimal_restore_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/restore-minimum/port151-stageB-group3-r1"
+    },
+    {
+      "archive": "research-data/ai-sigma/151-sigma-web-port/port151-stageB-group4-r1.tar.gz",
+      "bytes": 2637904,
+      "SHA256": "93dbf6aec6bdb1e61a1f15f7123ab6d0e34d371fa6c1c911f7efdcb49904302b",
+      "member_count": 37,
+      "members": [
+        {
+          "name": "runs/port151-stageB-group4-r1/actual-served-source.json",
+          "bytes": 4821,
+          "SHA256": "34d5d8aa327c2d7e02de190cd6a3dd128d279e80d9bdb90295b867dd3311bec8"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1/beads-read-quoridor-4lc.151.json",
+          "bytes": 204552,
+          "SHA256": "d00cd73e165bfe3f693a67faf1b7bf681bd48926661b7dfbe06032e9759805bc"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1/beads-read-quoridor-4lc.json",
+          "bytes": 203243,
+          "SHA256": "0a82552d4dc8d484bd0211a2b2f88f2d1ca5853a8a7aaadc64af12ffc887c503"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1/browser-result.json",
+          "bytes": 136139,
+          "SHA256": "42d8d80abfcc8c799b654b1dec91101d22b0c8b2bb44777145cec7b6ec5f14c1"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1/browser-startup.json",
+          "bytes": 420,
+          "SHA256": "7e046c29c4fcb4132947711f27e9cc6701ee2dcdd4a3707c4a50a16d0eccc5ef"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1/cleanup.jsonl",
+          "bytes": 25940,
+          "SHA256": "4d679495012678530cf08ac195987b40f7619d4f9e04908f223844100e591ef2"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1/clock-end.json",
+          "bytes": 2479,
+          "SHA256": "d83e6432182d2c566fa4d0e44244b86fd171e01a1f1f27e92c8fe4b981fe9522"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1/completed-game-port151-pair7-color1.json",
+          "bytes": 4138293,
+          "SHA256": "603eadf49b03a0088002785ada3551c5b958db71e538ce5c028b76296f932b12"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1/completed-game-port151-pair7-color2.json",
+          "bytes": 5632393,
+          "SHA256": "69ca77ebb798011bd209bb8d741b9ad754078ba8926fbd7c672788633bb42b96"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1/completed-game-port151-pair8-color1.json",
+          "bytes": 6492572,
+          "SHA256": "6eedd2c419a71b0adbfddbe307f54cb3b27d6cf07c6673529a485667dd634def"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1/completed-game-port151-pair8-color2.json",
+          "bytes": 4632368,
+          "SHA256": "283c3bd57b0f8aa039939ccc18d35bf8a035776a772f7292e0c0b23901cf1c46"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1/config.json",
+          "bytes": 2006,
+          "SHA256": "5e8e95889b5b3de3edb8be181666ff23d952b0d78f68ecec0d6659ebd7c389f7"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1/control-status.json",
+          "bytes": 191,
+          "SHA256": "3bc3195f4861e936ea2c2797f119b25cf25edfaaff54923ee8370b753f2fdd69"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1/finally-model-drop.json",
+          "bytes": 451,
+          "SHA256": "c7eb286eb5f3da7ecb0a37301b3f3f57dea15c42269978a69060a37b1e1d4109"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1/main-timers-stop.json",
+          "bytes": 49,
+          "SHA256": "7dcfee3d0f6d458c477d356171d6dc22abd316b5762d0543ac2166f996081ac1"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1/model-load.json",
+          "bytes": 989,
+          "SHA256": "3eced6dff02d97ecd6c95be756ea54afe21a8ba3a11c40c73fd1685f350d1ec4"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1/monitor-callback-stop.json",
+          "bytes": 56,
+          "SHA256": "2ae1208f2bc0c3960139f4e152e0b5419a237c52eec8245ad1c65942d7b66331"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1/monitor-ready-before-NN.json",
+          "bytes": 77,
+          "SHA256": "57d1a8cfc7fd958032ec60555bd5665867f74116ce6325aa114980dcad051028"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1/outer-controlled-stop.json",
+          "bytes": 24636,
+          "SHA256": "ac1fed7dce70be0f393460a06aeefc7629bb38ac79acded668f473b861416b9a"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1/pause-monitor-stop.json",
+          "bytes": 43554,
+          "SHA256": "a1d5e3a0aedaa8dbb1a7b1120f338260def0ae70b85d67ca5f6f90aec49e5c47"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1/pause-monitor.json",
+          "bytes": 43467,
+          "SHA256": "1a0837572a3ab2dba6c63823764dd7480d262b35de54321cddbd759f6fee6f05"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1/preflight.json",
+          "bytes": 561,
+          "SHA256": "d419e4acfb7ef0542263e876d2946d2fb1c063014c6f11222d21367dc4ead8b2"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1/routing-mock.json",
+          "bytes": 5322,
+          "SHA256": "e6f10890d2f75b5fb7d248f312fa303816a3717bece26438d73ad62cc9dfc50f"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1/rules-mock.json",
+          "bytes": 1179,
+          "SHA256": "e65600320d6c47d5f4ea7d6139da2f0c20d4a3f450250152bcbcd4039b52056b"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1/source-bindings.json",
+          "bytes": 2782,
+          "SHA256": "92208f260d7935010457ac3b1f87bd9274a82052efab59fcea9330a26c883dca"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1/startup.json",
+          "bytes": 3445,
+          "SHA256": "bad8bb16cf290a75b902195fe11705de0393090d8446c4950ecee4c1b66aa97b"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1/summary.json",
+          "bytes": 219,
+          "SHA256": "3b76672247c754fd4d548f2e31d806b61004d83150cf76c584fdab55c2256b81"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1/terminated-worker.json",
+          "bytes": 65,
+          "SHA256": "aa127f41225e920b0799e24461f05b2e330c4df30f10f7555f9618247eefdf36"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1.admission.json",
+          "bytes": 4036,
+          "SHA256": "3109b23ff8796a0f619aa8af000f956fe3756bc2252e72b9eb81a9846621cc88"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1.inputs.json",
+          "bytes": 2430,
+          "SHA256": "4d08d8272acce8d766e0616c3ec61325ce423849fdba99317d1399cc97b16d91"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1.log",
+          "bytes": 178,
+          "SHA256": "54e82b3f5e804cc60f6fefa68fd38d33a42ffbb5701ac8dfdd65556a2fadeecf"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1.monitor.jsonl",
+          "bytes": 2128014,
+          "SHA256": "6afccc04acdbbceb55106b81fcb18d04c7c2768b6f9e80a9d33ac692c2540e70"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1.owned-ack.json",
+          "bytes": 217543,
+          "SHA256": "a4bb4f9da776ce639058bd445d709e1d2ffbd6c9e0c8381ecbfea509f58e9d7c"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1.owned-ledger.jsonl",
+          "bytes": 101225,
+          "SHA256": "1ce6076f3260ea2d8e5895b5f16f170c11d6a6d2cd978bef0c1d02bcd3b7972e"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1.process.json",
+          "bytes": 124813,
+          "SHA256": "bb88ca7dd78de86c6f44f8affcaa0113ba83846041565e7b86e2de32c76e584e"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1.started.json",
+          "bytes": 1717,
+          "SHA256": "05190496f31db4927c92a0303fc87518de52b2aa7630abebc206f67ff77a76eb"
+        },
+        {
+          "name": "runs/port151-stageB-group4-r1.threads.json",
+          "bytes": 190,
+          "SHA256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+        }
+      ],
+      "all_members_SHA_size_stream_verified": true,
+      "minimum_extracted_and_rehashed": [
+        "runs/port151-stageB-group4-r1/completed-game-port151-pair7-color1.json",
+        "runs/port151-stageB-group4-r1/finally-model-drop.json",
+        "runs/port151-stageB-group4-r1/pause-monitor-stop.json",
+        "runs/port151-stageB-group4-r1/summary.json",
+        "runs/port151-stageB-group4-r1.process.json"
+      ],
+      "runtime_expanded_source": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT",
+      "minimal_restore_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/restore-minimum/port151-stageB-group4-r1"
+    },
+    {
+      "archive": "research-data/ai-sigma/151-sigma-web-port/control.tar.gz",
+      "bytes": 575676,
+      "SHA256": "a2817da33bd1b6c1c5cdeb14354db54918d7fa350685ae38bde16ec5e4f639b6",
+      "member_count": 145,
+      "members": [
+        {
+          "name": "build/build-binding.json",
+          "bytes": 1395,
+          "SHA256": "ea2e0caf8ef7a3ec98f76c531f3cf7ab1523878eac5f40c76eacefe3e0caf20f"
+        },
+        {
+          "name": "build/faithful.wasm",
+          "bytes": 282867,
+          "SHA256": "500181795b373f69f6f2214ee1a77e12767e2f342e15a56ab5e27d0a0453f2c2"
+        },
+        {
+          "name": "claim.json",
+          "bytes": 1138,
+          "SHA256": "05341f790ca67e1e219d8b069af3bdfd28ccc2e121550927d6fa8115b319f2a0"
+        },
+        {
+          "name": "final-heavy-flash-correction-receipt.json",
+          "bytes": 157,
+          "SHA256": "4371710d45ee1a8e8b644f505fe2199e52f87cb7aa1dbe6c0cdf9c46c4dc0f5e"
+        },
+        {
+          "name": "final-heavy-flash-correction.md",
+          "bytes": 872,
+          "SHA256": "3a98c748bbf00a799cf61a0cc27ec27e6c5bb590f95601278ab5bb3c6b0a78ba"
+        },
+        {
+          "name": "final-heavy-flash-original-error.md",
+          "bytes": 1212,
+          "SHA256": "2d991eb8c00cf87a2d8f5c45513adee15f5a93659e283ceb5340da935b40fb04"
+        },
+        {
+          "name": "final-heavy-flash-receipt.json",
+          "bytes": 157,
+          "SHA256": "4371710d45ee1a8e8b644f505fe2199e52f87cb7aa1dbe6c0cdf9c46c4dc0f5e"
+        },
+        {
+          "name": "final-heavy-flash.md",
+          "bytes": 1212,
+          "SHA256": "2d991eb8c00cf87a2d8f5c45513adee15f5a93659e283ceb5340da935b40fb04"
+        },
+        {
+          "name": "goal.json",
+          "bytes": 197927,
+          "SHA256": "e3c673128903676916048cf4239e54b43ae7d1e3ec0b8be401dedbcf6122962e"
+        },
+        {
+          "name": "monitor-mock/beads-read-quoridor-4lc.151.json",
+          "bytes": 202657,
+          "SHA256": "419298810cd391d6e3864600cf91d07b24250d7dcc90c612348f3a0030e22154"
+        },
+        {
+          "name": "monitor-mock/beads-read-quoridor-4lc.json",
+          "bytes": 201347,
+          "SHA256": "532e3f7fadcc22ff3db5e6843cf6b55c058cd6c8cb5948ff484c46564208ac04"
+        },
+        {
+          "name": "monitor-mock/pause-monitor-stop.json",
+          "bytes": 1851,
+          "SHA256": "530a2688e5e2f5b5f7f904842eb2e67db72180e7872576dacdb8b9e446ab27e4"
+        },
+        {
+          "name": "monitor-mock/pause-monitor.json",
+          "bytes": 1764,
+          "SHA256": "a57c465ee8047a97e219c45c5fe8f1b6c2f0c94b8bb028eeca0f3ed9d2edaa78"
+        },
+        {
+          "name": "oracle.json",
+          "bytes": 6724,
+          "SHA256": "79aac732bbedb5a8fd584b2b117a36975a3f9fe07e5ccb6c599cec8e5d370a17"
+        },
+        {
+          "name": "ready.json",
+          "bytes": 2974,
+          "SHA256": "6b8226819fe03980c516a8033ef2a6b56fe208014e7d9a14148b5f200912ded3"
+        },
+        {
+          "name": "runs/port151-build-r1.admission-failure.json",
+          "bytes": 375,
+          "SHA256": "bdae0e7cda628190b86b990befa1adcc4aae53ec3cff87b01419b6f9277dfc57"
+        },
+        {
+          "name": "runs/port151-build-r1.inputs.json",
+          "bytes": 510,
+          "SHA256": "5f79a4a56c55fc5ca8df715dcefc5937ca3b38bc686c2f65120d6b49075cc9dc"
+        },
+        {
+          "name": "runs/port151-build-r1.log",
+          "bytes": 0,
+          "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "name": "runs/port151-build-r1.monitor.jsonl",
+          "bytes": 361,
+          "SHA256": "e5759930cd71a1aeef3865de626964dc2c3cca7b61e34e9f4234839b55be614f"
+        },
+        {
+          "name": "runs/port151-build-r2.admission.json",
+          "bytes": 4016,
+          "SHA256": "be798b6adc94e778c43b514ce26786e2847401ea66839f6392bed6b1ed39b338"
+        },
+        {
+          "name": "runs/port151-build-r2.inputs.json",
+          "bytes": 510,
+          "SHA256": "ae16489fb766c101f3d30c67f002fcfe80f30c780ebcede54b7c681a3a11180a"
+        },
+        {
+          "name": "runs/port151-build-r2.log",
+          "bytes": 1825,
+          "SHA256": "863a8aecd960d8c4141c6942a02b989acbdcc2966e23c01c7420fd0e5f50c427"
+        },
+        {
+          "name": "runs/port151-build-r2.monitor.jsonl",
+          "bytes": 47382,
+          "SHA256": "6c895a4fdc3d0045a4f97d0edec4d53c3156455248371e5f25951f6bf1209439"
+        },
+        {
+          "name": "runs/port151-build-r2.owned-ack.json",
+          "bytes": 7847,
+          "SHA256": "01a1480a083bff5fbee7cbd7a9924541c8faddc5fe6262419e752e449f3df86e"
+        },
+        {
+          "name": "runs/port151-build-r2.owned-ledger.jsonl",
+          "bytes": 0,
+          "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "name": "runs/port151-build-r2.process.json",
+          "bytes": 9163,
+          "SHA256": "a90df8712d4da96cae079b978775ee5515f851a9df12b10e344e4b96f637ab9d"
+        },
+        {
+          "name": "runs/port151-build-r2.started.json",
+          "bytes": 1540,
+          "SHA256": "9ccf1f19d465428091850e9077a54ab5b8cb32d1eb5198c8f70c990e8ee45d49"
+        },
+        {
+          "name": "runs/port151-build-r2.threads.json",
+          "bytes": 190,
+          "SHA256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+        },
+        {
+          "name": "runs/port151-build-r3.admission.json",
+          "bytes": 4023,
+          "SHA256": "4a09480d76d558f0c6796af009cc0b726abf7eefd552896f5606e4205dbaa2f5"
+        },
+        {
+          "name": "runs/port151-build-r3.inputs.json",
+          "bytes": 1618,
+          "SHA256": "bd8238a26fb208b29157450f3d5a1fafb6d28e92b163508dc5609bbba76d07c9"
+        },
+        {
+          "name": "runs/port151-build-r3.log",
+          "bytes": 1491,
+          "SHA256": "2312ba052976c772c5598ec42865448921109ea610da05c668621881aacc05b9"
+        },
+        {
+          "name": "runs/port151-build-r3.monitor.jsonl",
+          "bytes": 13223,
+          "SHA256": "89af07ff0a8780f7ce1092480662663bee66babe49964e500ae09a103cdd172a"
+        },
+        {
+          "name": "runs/port151-build-r3.owned-ack.json",
+          "bytes": 2245,
+          "SHA256": "f37ba6b4f68054e3c426c116edb72a338bab08c4c7a1fa79a27624eda020031c"
+        },
+        {
+          "name": "runs/port151-build-r3.owned-ledger.jsonl",
+          "bytes": 0,
+          "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "name": "runs/port151-build-r3.process.json",
+          "bytes": 3997,
+          "SHA256": "528e7d2a84d4b44aba3e1d2ba01cea5336caaa89ace1543d429c555c79a7e69e"
+        },
+        {
+          "name": "runs/port151-build-r3.started.json",
+          "bytes": 1541,
+          "SHA256": "204084d07a9eff7b5ab297f1e10a034a3d427ad97a56619ecd40d9cb84487f65"
+        },
+        {
+          "name": "runs/port151-build-r3.threads.json",
+          "bytes": 190,
+          "SHA256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r1/actual-served-source.json",
+          "bytes": 3998,
+          "SHA256": "f8c0d3387469d744682aceffa85e8a237534adb99f026997a00c74debb140395"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r1/browser-startup.json",
+          "bytes": 420,
+          "SHA256": "7e046c29c4fcb4132947711f27e9cc6701ee2dcdd4a3707c4a50a16d0eccc5ef"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r1/cleanup.jsonl",
+          "bytes": 22398,
+          "SHA256": "785afafd0a6b9ee005075227a72971b814410bc0e81d75593a248825a0482767"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r1/config.json",
+          "bytes": 578,
+          "SHA256": "977cc6595ce6f98dc98618da9c1af65b743bd347a1af01d9d84910f0b50ccf26"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r1/main-timers-stop.json",
+          "bytes": 49,
+          "SHA256": "7dcfee3d0f6d458c477d356171d6dc22abd316b5762d0543ac2166f996081ac1"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r1/monitor-callback-stop.json",
+          "bytes": 56,
+          "SHA256": "2ae1208f2bc0c3960139f4e152e0b5419a237c52eec8245ad1c65942d7b66331"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r1/outer-controlled-stop.json",
+          "bytes": 2459,
+          "SHA256": "39e5818fd18e9e07b0e1462b0b0b559f566f5dd242b2e29405e06be0e12a7bc8"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r1/pause-monitor-stop.json",
+          "bytes": 2364,
+          "SHA256": "bf3126b8cbbd176d7cbee410e2347003e84232bc8d1990ff7b482a361a1d763c"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r1/pause-monitor.json",
+          "bytes": 2277,
+          "SHA256": "ee26113b8529b57abf9d14d4cb0bc0549a0f10323200c6613a52e3a3f78554cc"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r1/preflight.json",
+          "bytes": 561,
+          "SHA256": "d419e4acfb7ef0542263e876d2946d2fb1c063014c6f11222d21367dc4ead8b2"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r1/primary.json",
+          "bytes": 729,
+          "SHA256": "38368c92e33a36faeedcaa438426813e7a9df8c9266ab6530537bee7591db5dd"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r1/rules-mock.json",
+          "bytes": 1179,
+          "SHA256": "e65600320d6c47d5f4ea7d6139da2f0c20d4a3f450250152bcbcd4039b52056b"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r1/source-bindings.json",
+          "bytes": 2782,
+          "SHA256": "6118897b9183745e19c3a83652d33653f32df06bff66cfc22ed2c060f29de0d8"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r1/summary.json",
+          "bytes": 953,
+          "SHA256": "67cef9f3402f9a3302d6823544bcc53ef335a763f1017a92d84b2ccf7fee48b3"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r1/terminated-worker.json",
+          "bytes": 67,
+          "SHA256": "d4ce9d2ee40e69c01c53cd8974e5935ef7bf873da2eb8e406d974e6d4989383a"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r1.admission.json",
+          "bytes": 4017,
+          "SHA256": "d04c70d6b195c20edf700ce52ed560b49b8ed9dc1897404288c496a53e6333a2"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r1.inputs.json",
+          "bytes": 1618,
+          "SHA256": "6721c6b4f2cb82d62b72b5f8faed468e22e603ebbec21b5fe07f5bd01b72c269"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r1.log",
+          "bytes": 891,
+          "SHA256": "7973300a023c0fc95e1bbca0bf914cc32f2e529731e1bc800089b18b41f6e933"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r1.monitor.jsonl",
+          "bytes": 129083,
+          "SHA256": "d02a9243f7508b06c2b3e690a49ccd9b5546141ee437dd576f7a7e10101acbf0"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r1.owned-ack.json",
+          "bytes": 22585,
+          "SHA256": "adde09324bb408893b63a95e15a73ffb85e10735121ea666374b06ecc343db43"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r1.owned-ledger.jsonl",
+          "bytes": 10243,
+          "SHA256": "be0b5e4946f6938d5f43dbbb6e005eb8b05f97d36635b8a3cce2987c20619800"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r1.process.json",
+          "bytes": 16201,
+          "SHA256": "743b278f4fc28d6e9db20fa83cfdf464034f102b4e35710b0db6b2245728b162"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r1.started.json",
+          "bytes": 1718,
+          "SHA256": "644aee48d20646d9aabb26e5a52b526b8b66ec8e231660d915a54e0f5f47382b"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r1.threads.json",
+          "bytes": 190,
+          "SHA256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r2/actual-served-source.json",
+          "bytes": 3998,
+          "SHA256": "e00de830e1dde8db34df5943a052da72ad5a817d759ca7c26c44ac2b9b6824b3"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r2/browser-startup.json",
+          "bytes": 482,
+          "SHA256": "15418945503ed77a4462c1bfbd361cd81c58ccc12841a19ad9d9a6b23fef22e6"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r2/cleanup.jsonl",
+          "bytes": 20020,
+          "SHA256": "a6cd7638008746c6d413a29505f65e90a598f018bed6289644c517983090ee7d"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r2/config.json",
+          "bytes": 624,
+          "SHA256": "6344d5a72eda5e2561133ef953f28b04980566be932b659738209fc7d9d59f1a"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r2/generated-prefixes.json",
+          "bytes": 163449,
+          "SHA256": "20d9c9ae7284e18e4e0e30de81a2006fd65d3a0dd0e627d2ea056d5f935a5f95"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r2/main-timers-stop.json",
+          "bytes": 49,
+          "SHA256": "7dcfee3d0f6d458c477d356171d6dc22abd316b5762d0543ac2166f996081ac1"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r2/monitor-callback-stop.json",
+          "bytes": 56,
+          "SHA256": "2ae1208f2bc0c3960139f4e152e0b5419a237c52eec8245ad1c65942d7b66331"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r2/outer-controlled-stop.json",
+          "bytes": 2333,
+          "SHA256": "144585cd47b9bc24c53c41b8e447ef4782c4f022d4327b182ea4f44d4c97fe07"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r2/pause-monitor-stop.json",
+          "bytes": 2364,
+          "SHA256": "bf94acffa8f2f83e0bf24f9647447c7edfc2d6b5f49e5d11e4d9d7804976e41b"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r2/pause-monitor.json",
+          "bytes": 2277,
+          "SHA256": "2e12b589d7a48f11890a5c9cfe52d36362e88c57ed8a7fad6b55d8a8cc90ffe2"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r2/preflight.json",
+          "bytes": 561,
+          "SHA256": "d419e4acfb7ef0542263e876d2946d2fb1c063014c6f11222d21367dc4ead8b2"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r2/routing-mock.json",
+          "bytes": 5322,
+          "SHA256": "e6f10890d2f75b5fb7d248f312fa303816a3717bece26438d73ad62cc9dfc50f"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r2/rules-mock.json",
+          "bytes": 1179,
+          "SHA256": "e65600320d6c47d5f4ea7d6139da2f0c20d4a3f450250152bcbcd4039b52056b"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r2/source-bindings.json",
+          "bytes": 2782,
+          "SHA256": "5855af1ffc17dd5c256c0c7904cbc6671b6be1c99b49eaa30ed4197d0069255b"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r2/summary.json",
+          "bytes": 221,
+          "SHA256": "882472be2ad550503a21f3b04844710620e93783aeaf4411889575c04d040096"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r2/terminated-worker.json",
+          "bytes": 67,
+          "SHA256": "f8b89396fd4e08eb890c6632efdb533fe368cdc9f718d92e56388c42017606c1"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r2.admission.json",
+          "bytes": 4024,
+          "SHA256": "3431eed4c90d56cb61edf130ddcf8d34e9b3cde8fb5ddf82def9dd32b9d20d51"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r2.inputs.json",
+          "bytes": 1779,
+          "SHA256": "ea533ecf46ba6ee91c777afa144190be775b4ffd2ae066bf3ded77d1c4125b7d"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r2.log",
+          "bytes": 180,
+          "SHA256": "825f571894cdd706f50d7929b92302f56518eb7d6ce2ff3865e6e82c45840e6d"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r2.monitor.jsonl",
+          "bytes": 119411,
+          "SHA256": "69931823e9d4effa19d5106ba7ab6133b9afe9ab4b0fd2db8abb60383fb485a9"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r2.owned-ack.json",
+          "bytes": 20906,
+          "SHA256": "f75533a7a779f9fe37c7ae05eba8f920d13a3ca672a261697834b9061c4156f4"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r2.owned-ledger.jsonl",
+          "bytes": 8547,
+          "SHA256": "24bc7380c9fef61743c4e422fa47c3b554f1bc59afd8d426ae3e95dce55ac249"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r2.process.json",
+          "bytes": 15372,
+          "SHA256": "a8d7358f8f955f440450129a1bc8b24a0dc0a7cff9d03d6a15ba3f8075c03f63"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r2.started.json",
+          "bytes": 1719,
+          "SHA256": "38778ff8a7e4218137149c0f4be656a5cbdcbf97d869cbb6481df81a4695f948"
+        },
+        {
+          "name": "runs/port151-stageB-generate-r2.threads.json",
+          "bytes": 190,
+          "SHA256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+        },
+        {
+          "name": "runs/port151-static-r1.admission.json",
+          "bytes": 805,
+          "SHA256": "431d6ddd0c76857fecb26e645c78e35e64ee98bcac17a2ee9e95da4b5ebfc85d"
+        },
+        {
+          "name": "runs/port151-static-r1.inputs.json",
+          "bytes": 1299,
+          "SHA256": "da1a51af93aac59b0682d744b425cc0e3a1d2031056dd87eac1011b007c96804"
+        },
+        {
+          "name": "runs/port151-static-r1.log",
+          "bytes": 35,
+          "SHA256": "d64bca34daf478073f52f08eefe578d66ca1057b013ba19c87d23c8f3e3ad5a9"
+        },
+        {
+          "name": "runs/port151-static-r1.monitor.jsonl",
+          "bytes": 3813,
+          "SHA256": "c638a0a22f8a2cc9020fd32baa28c3b19f7dcb798d81f8c6c21a263a7bf62aeb"
+        },
+        {
+          "name": "runs/port151-static-r1.owned-ack.json",
+          "bytes": 642,
+          "SHA256": "8eb32e82159701c871d79cd7bfee9e46e7c62a15c714c3713e5879a2e0046f5f"
+        },
+        {
+          "name": "runs/port151-static-r1.owned-ledger.jsonl",
+          "bytes": 0,
+          "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "name": "runs/port151-static-r1.process.json",
+          "bytes": 2556,
+          "SHA256": "0ba072232b6b9a0c34642ccc828f3bdbba97df2bc8d5721af31d94030647cf10"
+        },
+        {
+          "name": "runs/port151-static-r1.started.json",
+          "bytes": 1572,
+          "SHA256": "58e0becabde393b27dc1a38ae9b2b0e00e8a98d0025b53832f6ab7e18d75fa12"
+        },
+        {
+          "name": "runs/port151-static-r1.threads.json",
+          "bytes": 190,
+          "SHA256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+        },
+        {
+          "name": "runs/port151-static-r2.admission.json",
+          "bytes": 812,
+          "SHA256": "9f5b9e7137d6f00d5e39f2b8dc1db6c13ff8e91d61a4a253ac316714fd2bbb42"
+        },
+        {
+          "name": "runs/port151-static-r2.inputs.json",
+          "bytes": 1299,
+          "SHA256": "bfd374db8ce4a8d4b3720fd5db4df1f580d3c52909b40512b6b9c5a838557dcc"
+        },
+        {
+          "name": "runs/port151-static-r2.log",
+          "bytes": 144,
+          "SHA256": "0d644413731a1542dbfa39bebd021f0d47ef084b636b50c2a78c96b56553f787"
+        },
+        {
+          "name": "runs/port151-static-r2.monitor.jsonl",
+          "bytes": 4438,
+          "SHA256": "d1a8cf860001787d0f8f26b13c0406e07a6ff101b05e2e3246e7a0a3b2b9abaf"
+        },
+        {
+          "name": "runs/port151-static-r2.owned-ack.json",
+          "bytes": 642,
+          "SHA256": "80a51e47a73a7d280f567f4b19e5293b83a576b67ca09259b59ec32e1dc7e07a"
+        },
+        {
+          "name": "runs/port151-static-r2.owned-ledger.jsonl",
+          "bytes": 0,
+          "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "name": "runs/port151-static-r2.process.json",
+          "bytes": 2556,
+          "SHA256": "4948b85d7b7c27f0ea85ce1242cfa5621bf880f6f4b08ed682b161724465f841"
+        },
+        {
+          "name": "runs/port151-static-r2.started.json",
+          "bytes": 1572,
+          "SHA256": "07e55de664d7d871a30571dfc57773bfeab7a90837692b86f040ac799b70a248"
+        },
+        {
+          "name": "runs/port151-static-r2.threads.json",
+          "bytes": 190,
+          "SHA256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+        },
+        {
+          "name": "runs/port151-static-r3.admission.json",
+          "bytes": 812,
+          "SHA256": "e78167ee913af7e088df817731f807f1b65c867b7411d62baf41f8af27e7a830"
+        },
+        {
+          "name": "runs/port151-static-r3.inputs.json",
+          "bytes": 1457,
+          "SHA256": "3877ecf768db2df3afac4164ce1f5c8d8b975d91aec86d76c38d80ecb1fab1ba"
+        },
+        {
+          "name": "runs/port151-static-r3.log",
+          "bytes": 35,
+          "SHA256": "35644d3ba2e7a92e332ea1f282e68264ba2c0bfaac5852bbc34d93ab4a26cbdf"
+        },
+        {
+          "name": "runs/port151-static-r3.monitor.jsonl",
+          "bytes": 5064,
+          "SHA256": "c133383c5e9ca1f1609ac7fe6cc4013dd20a6e4088f34fa7c1d558ea130d2e3f"
+        },
+        {
+          "name": "runs/port151-static-r3.owned-ack.json",
+          "bytes": 642,
+          "SHA256": "e3dfb91012969a50362be038615a6f2bb21733324bb4ade7155fc51e567f64c7"
+        },
+        {
+          "name": "runs/port151-static-r3.owned-ledger.jsonl",
+          "bytes": 0,
+          "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "name": "runs/port151-static-r3.process.json",
+          "bytes": 2557,
+          "SHA256": "d58ecb6930f7cc59ec2c82a2a7bb39e221d7f6f39c47922ba4ec4934b567b0d5"
+        },
+        {
+          "name": "runs/port151-static-r3.started.json",
+          "bytes": 1572,
+          "SHA256": "65306b4807fd2ee0ddee3bdf9f62372e7c330afbf2efb54206dac907dde17b7a"
+        },
+        {
+          "name": "runs/port151-static-r3.threads.json",
+          "bytes": 190,
+          "SHA256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+        },
+        {
+          "name": "runs/port151-static-r4.admission.json",
+          "bytes": 812,
+          "SHA256": "ae8f7cb55d0a3e32d0cb2c7eddc098c6a4d4ee7ff6d64872cf84a780af39dec3"
+        },
+        {
+          "name": "runs/port151-static-r4.inputs.json",
+          "bytes": 1618,
+          "SHA256": "6b60ce179ad0268f281805a7b2a6c4bd9bfa10b9e9bc7310231eb1b6b136461f"
+        },
+        {
+          "name": "runs/port151-static-r4.log",
+          "bytes": 35,
+          "SHA256": "9ce12f49631e6893daf6bfc7b097ad4c711d0f23e89372de032cabc69df46e8f"
+        },
+        {
+          "name": "runs/port151-static-r4.monitor.jsonl",
+          "bytes": 5381,
+          "SHA256": "4059b4d800bfca40a494437ea94039d1e276a9f2894a2e4eeda5177b8ddc6052"
+        },
+        {
+          "name": "runs/port151-static-r4.owned-ack.json",
+          "bytes": 642,
+          "SHA256": "fe75fbdaaa01e4a545d61688d07acb644d91220c7c7783d0e3970f46e8309043"
+        },
+        {
+          "name": "runs/port151-static-r4.owned-ledger.jsonl",
+          "bytes": 0,
+          "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "name": "runs/port151-static-r4.process.json",
+          "bytes": 2525,
+          "SHA256": "f4d2e20ce428eb248546f4c10f3ba2bb3917f87e539722efde94807f6784b9ba"
+        },
+        {
+          "name": "runs/port151-static-r4.started.json",
+          "bytes": 1539,
+          "SHA256": "4a3164345d39cbf4b2b533188f3dcdb34c12e5c519524d02ac0558e4e29117ba"
+        },
+        {
+          "name": "runs/port151-static-r4.threads.json",
+          "bytes": 190,
+          "SHA256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+        },
+        {
+          "name": "runs/port151-static-r5.admission.json",
+          "bytes": 812,
+          "SHA256": "51e7284d4dba8fde1e6f06d76c15c9746e00bc939331470e14984e9d211ac82e"
+        },
+        {
+          "name": "runs/port151-static-r5.inputs.json",
+          "bytes": 1943,
+          "SHA256": "3a2f6f27a8285fcea9b7b0caa84f0a43312a46c914ae58e3db0ba9e7460f2b11"
+        },
+        {
+          "name": "runs/port151-static-r5.log",
+          "bytes": 33,
+          "SHA256": "43e85aa3b73592111e48cb945dd7d6ccc4a105aef7817c91cd759a7e0dc23769"
+        },
+        {
+          "name": "runs/port151-static-r5.monitor.jsonl",
+          "bytes": 4761,
+          "SHA256": "45fc135265808a006f444f1f925ec5c23a32971160806dda42546eefd8fbb61a"
+        },
+        {
+          "name": "runs/port151-static-r5.owned-ack.json",
+          "bytes": 642,
+          "SHA256": "d1c14a3ead5f48e1c3de06167f50fe6c92d7f5228da3d15d458f8379da3b840d"
+        },
+        {
+          "name": "runs/port151-static-r5.owned-ledger.jsonl",
+          "bytes": 0,
+          "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "name": "runs/port151-static-r5.process.json",
+          "bytes": 2534,
+          "SHA256": "dccb35ab1f0844a0e4c4e6def249e0b9fc2fdb0aa2e2ee5c18cd125cbbf4dc20"
+        },
+        {
+          "name": "runs/port151-static-r5.started.json",
+          "bytes": 1547,
+          "SHA256": "16773b4fb95716e9ac7479ccc543a9a0eaae835023c29c42131c74e6ce1c448e"
+        },
+        {
+          "name": "runs/port151-static-r5.threads.json",
+          "bytes": 190,
+          "SHA256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+        },
+        {
+          "name": "self-before.json",
+          "bytes": 199096,
+          "SHA256": "83a9255858b2f5c5dc34bcdcac025221ffdd521112603991acc6e4c36bb3e7e1"
+        },
+        {
+          "name": "stageA-r1-flash-receipt.json",
+          "bytes": 157,
+          "SHA256": "f9f26fd6920703d689b293eb89644a253a4ba290f319c55942da0394cf6dfd26"
+        },
+        {
+          "name": "stageA-r1-flash.md",
+          "bytes": 777,
+          "SHA256": "a20896bd314f0089b85d6e388be1845e313fac190b742ee77e243104eda0de7a"
+        },
+        {
+          "name": "stageA-r2-flash-receipt.json",
+          "bytes": 157,
+          "SHA256": "de6ea6e8ec53902a7bbd7e0756260d1257e0c58c300a407c240b3386651019e3"
+        },
+        {
+          "name": "stageA-r2-flash.md",
+          "bytes": 818,
+          "SHA256": "c0fb8f65e1f06e534beb70609c917c4190319e186782c8c8e1995d60b224b044"
+        },
+        {
+          "name": "stageB-group1-flash-receipt.json",
+          "bytes": 157,
+          "SHA256": "4371710d45ee1a8e8b644f505fe2199e52f87cb7aa1dbe6c0cdf9c46c4dc0f5e"
+        },
+        {
+          "name": "stageB-group1-flash.md",
+          "bytes": 878,
+          "SHA256": "d3d5a0477ae15940f27566a77bc4ee8c1420f7e907ec8d322c8fe5b0a8aa5198"
+        },
+        {
+          "name": "stageB-group2-flash-receipt.json",
+          "bytes": 157,
+          "SHA256": "4371710d45ee1a8e8b644f505fe2199e52f87cb7aa1dbe6c0cdf9c46c4dc0f5e"
+        },
+        {
+          "name": "stageB-group2-flash.md",
+          "bytes": 896,
+          "SHA256": "d87471df976c6eb03ef2d3149d57b1acf880c727e6284a27356f1d6da321c4bc"
+        },
+        {
+          "name": "stageB-group3-flash-receipt.json",
+          "bytes": 157,
+          "SHA256": "4371710d45ee1a8e8b644f505fe2199e52f87cb7aa1dbe6c0cdf9c46c4dc0f5e"
+        },
+        {
+          "name": "stageB-group3-flash.md",
+          "bytes": 611,
+          "SHA256": "32015933ae8c12d70a3d98014182ee2196a09a1cffefa197aaf37b8fe2fa87bf"
+        },
+        {
+          "name": "started-receipt.json",
+          "bytes": 157,
+          "SHA256": "60a50cbe09e22603a640e952fdf462f4544760acf81e8d22e2a37bab8d187178"
+        },
+        {
+          "name": "started.md",
+          "bytes": 569,
+          "SHA256": "7776c57d15f7ae01ffb55a602b73e67889e580ce26ee5466b565487d9ba7f395"
+        },
+        {
+          "name": "transport-mock.json",
+          "bytes": 289,
+          "SHA256": "24b4eb6bf077d80817c1b406db6f634feed318af4d2527e4ba62a901a2ba4bc5"
+        }
+      ],
+      "all_members_SHA_size_stream_verified": true,
+      "minimum_extracted_and_rehashed": [
+        "build/build-binding.json",
+        "build/faithful.wasm"
+      ],
+      "runtime_expanded_source": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT",
+      "minimal_restore_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/restore-minimum/control"
+    }
+  ],
+  "not_all_source_models_or_targets_copied": true,
+  "old_failure_and_all16_game_journals_preserved": true
+}
