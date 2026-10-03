@@ -1,0 +1,41 @@
+[
+  {
+    "script": "export-teachers.py",
+    "start": "2026-10-03T05:29:10.138906+00:00",
+    "end": "2026-10-03T05:29:10.197652+00:00",
+    "wall_s": 0.05876529400120489,
+    "exit": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-native-baseline/export-teachers.py\", line 27, in <module>\n    for group in {x['group'] for x in rows}:assert len({x['split'] for x in rows if x['group']==group})==1\n                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-native-baseline/export-teachers.py\", line 27, in <setcomp>\n    for group in {x['group'] for x in rows}:assert len({x['split'] for x in rows if x['group']==group})==1\n                                                        ~^^^^^^^^^\nKeyError: 'split'\n",
+    "CPU": [
+      0
+    ],
+    "NN": 0
+  },
+  {
+    "script": "export-teachers.py",
+    "start": "2026-10-03T05:29:33.056990+00:00",
+    "end": "2026-10-03T05:29:33.090253+00:00",
+    "wall_s": 0.033279293013038114,
+    "exit": 0,
+    "stdout": "{\"planned_opening_rows\": 16, \"valid_rows\": 16, \"missing\": [], \"groups\": 8, \"train\": 14, \"validation\": 2, \"shared160schema_not_overwritten\": true, \"variable_completed_amount_and_game_outcome_extension\": true, \"NN\": 0, \"new_learning\": 0, \"diagnostic_holdout_not_formal\": true, \"full_permove_dataset_not_exported\": true}\n",
+    "stderr": "",
+    "CPU": [
+      0
+    ],
+    "NN": 0
+  },
+  {
+    "script": "collect.py",
+    "start": "2026-10-03T05:29:33.090434+00:00",
+    "end": "2026-10-03T05:29:33.207816+00:00",
+    "wall_s": 0.11739596899133176,
+    "exit": 0,
+    "stdout": "{\"cost_seconds\": {\"build\": 14.257875, \"protocol\": 10.264363, \"mechanism\": 5.592912, \"arena\": 431.553877}, \"heavy_total_s\": 451.404664, \"game_total_s\": 405.6535843708515, \"game_per_s_game_section\": 0.039442520950024894, \"game_per_s_quality_job\": 0.03707532443278223, \"peak_own_group_plus_guardian_RSS\": 950575104, \"formal_ready\": false}\n{\"W\": 6, \"D\": 0, \"L\": 10}\n{\"denominator\": 16, \"known\": 16, \"unknown\": 0, \"mean_if_all_known\": 0.375, \"identified_lower\": 0.375, \"identified_upper\": 0.375, \"complete_only_aux\": 0.375}\n",
+    "stderr": "",
+    "CPU": [
+      0
+    ],
+    "NN": 0
+  }
+]

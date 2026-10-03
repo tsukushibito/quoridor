@@ -10,10 +10,10 @@ END=datetime.datetime.fromisoformat(CONFIG['processing_deadline']).timestamp()
 NEW_END=datetime.datetime.fromisoformat(CONFIG['newjob_deadline']).timestamp()
 assert time.time()<NEW_END,'NEW_JOB_CUTOFF'
 PHASE=CONFIG['kind'];assert PHASE in ['build','mechanism','arena','protocol']
-POOL=[0] if PHASE=='protocol' else CONFIG.get('mode',{}).get('cores',[2]);CPU=POOL[0]
-RSS_GUARD={'protocol':939524096}.get(PHASE,5905580032)
+POOL=[0] if PHASE=='protocol' and not CONFIG.get('control_repair_NN0') else CONFIG.get('mode',{}).get('cores',[2]);CPU=POOL[0]
+RSS_GUARD=5905580032 if CONFIG.get('control_repair_NN0') else {'protocol':939524096}.get(PHASE,5905580032)
 STORAGE_GUARD=58720256
-CONTRACT_RAM={'protocol':1073741824}.get(PHASE,6442450944)
+CONTRACT_RAM=6442450944 if CONFIG.get('control_repair_NN0') else {'protocol':1073741824}.get(PHASE,6442450944)
 MAX_WALL={'protocol':60,'build':120,'mechanism':180,'arena':300}[PHASE]
 TOTAL_WALL={'protocol':120,'build':120,'mechanism':180,'arena':1800}[PHASE]
 prior_wall=0

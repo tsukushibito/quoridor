@@ -1,0 +1,70 @@
+{
+  "issue": "quoridor-4lc.165",
+  "observed": [
+    {
+      "game_id": "native165-game-15",
+      "pair": 8,
+      "ply": 84,
+      "engine": "reference",
+      "key": "0,7|7,1|0|0,2;1,0;1,5;2,2;3,1;3,3;5,1;5,4;5,5;5,7|0,4;2,1;2,4;2,6;3,0;4,4;5,2;5,6;6,3;6,7",
+      "completed": 199787,
+      "NN_calls": 3,
+      "NN_discarded": 0,
+      "terminal_noNN": 199784,
+      "public_actual_ms": 410.806185990572,
+      "quiescent_receive_ms": 10905.923742979765,
+      "cleanup_after_public_ms": 10495.237555027008,
+      "CP_late_discarded": 198735
+    },
+    {
+      "game_id": "native165-game-16",
+      "pair": 8,
+      "ply": 89,
+      "engine": "reference",
+      "key": "7,4|3,1|1|0,2;0,6;1,0;1,4;2,2;3,3;4,0;5,4;5,5;5,7|0,5;2,1;2,4;2,6;3,0;4,4;5,6;6,1;6,3;6,7",
+      "completed": 76502,
+      "NN_calls": 19,
+      "NN_discarded": 1,
+      "terminal_noNN": 76484,
+      "public_actual_ms": 410.5741409957409,
+      "quiescent_receive_ms": 3626.664838016033,
+      "cleanup_after_public_ms": 3216.144744992256,
+      "CP_late_discarded": 73635
+    },
+    {
+      "game_id": "native165-game-11",
+      "pair": 6,
+      "ply": 68,
+      "engine": "reference",
+      "key": "2,7|7,1|0|0,0;0,7;1,2;1,6;3,0;3,2;3,7;4,3;5,0;5,5;5,7;7,2;7,7|1,1;1,7;2,1;3,6;4,2;5,4;6,3",
+      "completed": 249938,
+      "NN_calls": 2,
+      "NN_discarded": 0,
+      "terminal_noNN": 249936,
+      "public_actual_ms": 410.36080700159073,
+      "quiescent_receive_ms": 10781.766995996237,
+      "cleanup_after_public_ms": 10371.483552008867,
+      "CP_late_discarded": 249516
+    },
+    {
+      "game_id": "native165-game-07",
+      "pair": 4,
+      "ply": 62,
+      "engine": "reference",
+      "key": "1,7|6,2|0|0,3;0,6;2,3;2,6;3,1;3,2;3,7;4,3;5,4;5,5;6,3;7,0;7,5|0,7;1,7;3,3;4,1;4,6;5,3",
+      "completed": 323150,
+      "NN_calls": 1,
+      "NN_discarded": 0,
+      "terminal_noNN": 323149,
+      "public_actual_ms": 411.81534001231194,
+      "quiescent_receive_ms": 10888.27292200923,
+      "cleanup_after_public_ms": 10476.560692995787,
+      "CP_late_discarded": 323047
+    }
+  ],
+  "source_cause": "native reference removed browser timers, terminal-only runMCTS loop has no await; stops stdin cannot be processed; local10s watchdog bounds; completed CPs after402 discarded; no overlapnextinput duequiescent gate",
+  "old16_kept": true,
+  "science_rerun": 0,
+  "repair_scope": "NN0 common cooperative event drain at each CP/begin, no artificial timer delay; policy source/NN/backend immutable",
+  "science_source_reopen_after_stop": "only newprivate control adapter NN0 debug; previousstop preserved as time-bounded stopped version, not wholeperiod guarantee"
+}

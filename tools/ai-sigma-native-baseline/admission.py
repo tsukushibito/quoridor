@@ -12,7 +12,7 @@ def size(bases):
 def admit(c,out,tool,runs):
  assert c['issue']=='quoridor-4lc.165' and c['frame']==11
  prev=[json.loads(p.read_text()) for p in runs.glob('native165-*.process.json')];assert base.base.decide([],prev) is True,'OWN_OLD_NOT_ZERO'
- heavy,meta=base.physical_heavy_scan() if c['kind']!='protocol' else ([],[]);assert base.base.decide(heavy,prev) is True,'EXTERNAL_HEAVY_UNKNOWN'
+ heavy,meta=base.physical_heavy_scan() if c['kind']!='protocol' or c.get('control_repair_NN0') else ([],[]);assert base.base.decide(heavy,prev) is True,'EXTERNAL_HEAVY_UNKNOWN'
  root=tool.parents[1];stop=root/'research-data/ai-sigma/151-sigma-web-port/runtime-source-stopped-before-report.json';assert hashlib.sha256(stop.read_bytes()).hexdigest()=='c6868015bac31ea2e975ed384675bc0ad8b16a39b0c9aae566c5cef0ff0b297e';d=json.loads(stop.read_text());assert d['science_source_write_stopped'] and not d['current_same_identity'] and not d['owned_remainingunknown'];assert d['boot']==Path('/proc/sys/kernel/random/boot_id').read_text().strip()
  ids=[]
  for p in (root/'.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs').glob('port151-*.process.json'):

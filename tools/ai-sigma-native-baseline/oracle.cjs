@@ -1,8 +1,8 @@
 'use strict';
 const fs=require('fs'),path=require('path'),vm=require('vm'),assert=require('assert');const ROOT=path.resolve(__dirname,'../..'),O=ROOT+'/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT';
-const {Pipe,A,D,runControlled}=require('./common.cjs');const config=JSON.parse(fs.readFileSync(process.argv[2]));let pipe;
+const {Pipe,A,D,runControlled,controlDrain}=require('./common.cjs');const config=JSON.parse(fs.readFileSync(process.argv[2]));let pipe;
 async function main(){pipe=new Pipe(A+'/build/target/release/faithful-native',[]);const call=async v=>{const r=await pipe.ask(v);if(!r.ok)throw Error(r.error);return r.data;};
- const ctx=vm.createContext({console,setTimeout,Uint8Array,Float32Array,Uint32Array,Date,Math});
+ const ctx=vm.createContext({console,setTimeout,nativeControlDrain:controlDrain,Uint8Array,Float32Array,Uint32Array,Date,Math});
  for(const f of ['game.js','context.js','reference-core.js'])vm.runInContext(fs.readFileSync(__dirname+'/'+(f==='reference-core.js'?'reference-core-native.js':f),'utf8'),ctx);
  vm.runInContext(`const stamp=()=>0;let clockContext=null;function check(){};globalThis.oracle={fromPrefix,referenceState,rustAction,terminalResult,runMCTS,State,MCTSNode};`,ctx);
  const fixtures=JSON.parse(fs.readFileSync(ROOT+'/research-data/ai-sigma/151-sigma-web-port/stageA-inputs.json')).fixtures;const checks=[];
