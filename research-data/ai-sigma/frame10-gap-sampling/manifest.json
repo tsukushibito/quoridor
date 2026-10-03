@@ -1,0 +1,25 @@
+{
+  "issue": "quoridor-4lc.148",
+  "run": "static-r1",
+  "contract_Git": "40243b25804f8e929a6af5680c02a2b70bef39d1",
+  "baseline_Git_at_save": "4173f407413db4771a515f264a624f0e40a41902",
+  "source_hashes": {
+    "tools/ai-sigma-frame10-gap-sampling/run-controlled.py": "e6ebd8f5834b17ec4a10b527f52df5c73c99541b14ebf1f4255f03e89c10da85",
+    "tools/ai-sigma-frame10-gap-sampling/verify.py": "bc012e8701ae875cd0fb98058bf137c2489d3ee409e5041a7af5661dbbe4ac95"
+  },
+  "readonly_reference_hashes": {
+    "docs/reports/ai-sigma-coordinator-diverse119-122-acceptance.md": "c3b0fb506dafaec3c704fac36971ea3eed018a455255e5e8ea0d38ee3d515e38",
+    "docs/reports/ai-sigma-critic-diverse-prefix.md": "8c295064656e435eb011ac4c13f4acf261beb767ced5e8a7bdfd81e5f15d8558",
+    "docs/design/ai-sigma-frame10-gap-preregister-supplement.md": "d41ec735d4d80874d1beb31ddaf9a15edebcab743aadb671eae76a5cb23f82b1",
+    "research-data/ai-sigma/119-diverse-prefix/preregister.json": "5ae2af8776feff8994e540ba5db24ab242d695da8cc827e0cd31513c613a30fb"
+  },
+  "reproduce": "timeout 60s taskset -c 0 python3 -B tools/ai-sigma-frame10-gap-sampling/run-controlled.py",
+  "new_scientific_execution": "none; static table/arithmetic only",
+  "models": "no load; future source/model/binary binding149",
+  "early_delivery": {
+    "accepted": true,
+    "thread": "01a0f31b-3409-75f2-a30e-453a50484f94",
+    "turn": "01a0ff1f-2117-79e0-a20d-7de4b4b26935"
+  },
+  "archive": "none necessary; small JSON/source directly Git saved"
+}

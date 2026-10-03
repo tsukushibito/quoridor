@@ -1,0 +1,60 @@
+{
+  "issue": "quoridor-4lc.148",
+  "UTC": "2026-10-03T00:40:27.845633+00:00",
+  "source_write_stop": "checker sources final, hashes in manifest; data/report finalization and Git/save/report remain",
+  "browser": {
+    "started": false,
+    "NN": 0
+  },
+  "Node": {
+    "started": false
+  },
+  "checker_child": {
+    "owned_identity": {
+      "pid": 2952071,
+      "starttick": "24075533",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "owned_wait_complete": true,
+    "exit_code": 0,
+    "natural_exit_observed": true,
+    "current_identity": null
+  },
+  "checker_manager": {
+    "owned_identity": {
+      "pid": 2952070,
+      "starttick": "24075531",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "current_identity": null,
+    "natural_exit_guarantee": "manager exec returned exit0, current absence separately checked"
+  },
+  "timer_monitorcallback": {
+    "checker_monitor_loop": "returned",
+    "model_main_timers_started": 0
+  },
+  "innercontrolled": {
+    "child_limits_and_wait": true
+  },
+  "outerownedwait": {
+    "complete": true
+  },
+  "remaining_unknown_owned_children": 0,
+  "current_absence_not_all_host_or_all_period": true,
+  "other_owner_signal_interrupt": 0,
+  "all_host_audit": false,
+  "forecast": {
+    "old_held_conservative_bytes": 11560048,
+    "new_scope_forecast_bytes": 2097152,
+    "combined_forecast_bytes": 13657200,
+    "guard_bytes": 14680064,
+    "parent_new_reservation": 0
+  },
+  "missing": [
+    "no legalprefix generated or replayed",
+    "no AI gap score",
+    "full canonical old signatures not built by148",
+    "future source/model/binary bindings belong149",
+    "exact aggregate management wall time not retained"
+  ]
+}

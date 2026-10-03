@@ -1,0 +1,154 @@
+{
+  "issue": "quoridor-4lc.148",
+  "status": "static checks passed; proposal only",
+  "table_sha256": "a82f2d01875180aa6a4a53be6e62d1ae11b9ab01ef2b3d37e5a1b40a7ede5c04",
+  "seed_count": 256,
+  "unique_seed_count": 256,
+  "legal_states_generated": 0,
+  "NN": 0,
+  "Chrome": 0,
+  "games": 0,
+  "planned_prefix_units": 32,
+  "planned_games": 64,
+  "max_new_plies": 12256,
+  "nominal_thought_seconds": 6128.0,
+  "proposed_job_cap_seconds": 7680,
+  "overhead_headroom_seconds": 1552.0,
+  "conditional_independent_slot_hoeffding": {
+    "one_sided_95_width": 0.21635229782528567,
+    "two_sided_95_width": 0.24008069782998018,
+    "formal_coverage_claim": false
+  },
+  "integer_only_first_class_probe": {
+    "naive_consecutive": {
+      "wall": 32
+    },
+    "fixed_hash_derived": {
+      "wall": 14,
+      "pawn": 18
+    }
+  },
+  "paired_score_fixtures": [
+    {
+      "scores": [
+        0,
+        0
+      ],
+      "interval": [
+        0,
+        0
+      ]
+    },
+    {
+      "scores": [
+        1,
+        1
+      ],
+      "interval": [
+        1,
+        1
+      ]
+    },
+    {
+      "scores": [
+        1,
+        0
+      ],
+      "interval": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "scores": [
+        0,
+        1
+      ],
+      "interval": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "scores": [
+        0.5,
+        0.5
+      ],
+      "interval": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "scores": [
+        1,
+        null
+      ],
+      "interval": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "scores": [
+        0,
+        null
+      ],
+      "interval": [
+        0,
+        0.5
+      ]
+    },
+    {
+      "scores": [
+        null,
+        null
+      ],
+      "interval": [
+        0,
+        1
+      ]
+    }
+  ],
+  "uniform_old_signature_exclusion": {
+    "source": "research-data/ai-sigma/119-diverse-prefix/preregister.json",
+    "sha256": "5ae2af8776feff8994e540ba5db24ab242d695da8cc827e0cd31513c613a30fb",
+    "signatures": [
+      {
+        "ply": 4,
+        "key": "4,0|5,7|0|0,6;3,5|"
+      },
+      {
+        "ply": 5,
+        "key": "4,1|4,8|1|0,5|5,5;6,4;7,1"
+      },
+      {
+        "ply": 8,
+        "key": "2,1|4,8|0|1,1;1,5;6,2|"
+      },
+      {
+        "ply": 9,
+        "key": "4,0|4,8|1|4,3;6,5|1,4;3,0;4,7;5,7;6,7"
+      },
+      {
+        "ply": 12,
+        "key": "5,2|5,6|0|0,2;0,5;2,3;3,1;7,5|0,4"
+      },
+      {
+        "ply": 13,
+        "key": "5,0|2,7|1|2,3;4,3;4,5;6,3|7,1"
+      },
+      {
+        "ply": 16,
+        "key": "2,1|2,6|0|4,7;5,5|2,4;4,5;5,0;6,1;6,3"
+      },
+      {
+        "ply": 17,
+        "key": "6,0|3,7|1|0,5;2,2;4,0;4,4;6,1;6,5;7,7|0,6;3,3;5,2;5,4"
+      }
+    ],
+    "old_WDL_read_for_exclusion": false
+  },
+  "missing_policy": "retain fixed 32 prefix denominator; unknown color interval [0,1]",
+  "new_duplicate_policy": "retain and flag; no replenishment"
+}
