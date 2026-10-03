@@ -1,0 +1,126 @@
+{
+  "at": "2026-10-03T23:27:48.789105+00:00",
+  "issues": [
+    {
+      "id": "quoridor-4lc",
+      "status": "in_progress",
+      "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+      "labels": [
+        "continuation-active",
+        "frame14",
+        "initial-window-ended"
+      ]
+    },
+    {
+      "id": "quoridor-4lc.92",
+      "status": "in_progress",
+      "assignee": "codex:01a0f31d-99ee-7d63-b162-bc1a59c457c6",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ]
+    }
+  ],
+  "parent_sha256": "292c722fccc2a95566e537a9b35ffb9bad85c43ca5aff60dfdbabf3d79a1897f",
+  "state": {
+    "binding": {
+      "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+      "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+      "target": "supervisor",
+      "dispatch_issue": "quoridor-4lc.40",
+      "contract_file": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+    },
+    "process": null,
+    "phase": "stopped",
+    "recovery_required": false,
+    "last_result": {
+      "at": "2026-10-03T14:40:15.027223+00:00",
+      "event": "process_stopped",
+      "owned_turn_pending": false
+    },
+    "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+    "config_sha256": "8701ecd5e88d9c7dc692097190651a76d709ce9b2c5f14b8db8f7e74d22a4071",
+    "contract_sha256": "57724fa96a8798bf21d1fbfc37486cabe9bb920ef727f6f5e788ad8134bcb7ec",
+    "next_at": null,
+    "owned": null
+  },
+  "old_pointer": {
+    "issue": "quoridor-4lc.92",
+    "frame": 13,
+    "updated_by": "92-frame13",
+    "record": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame13/running-loaded.json",
+    "run": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame13-ec60da74-6928-46e5-af8a-22b8e39937ea",
+    "scheduler": {
+      "pid": 3534745,
+      "start_ticks": "28492381",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "monitor": {
+      "pid": 3534758,
+      "start_ticks": "28492397",
+      "state": "R",
+      "rss_bytes": 20488192,
+      "cpu_ticks": 2,
+      "affinity": [
+        0
+      ],
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    }
+  },
+  "old_processes": [
+    {
+      "pid": 3534745,
+      "absent": true,
+      "same_identity_running": false
+    },
+    {
+      "pid": 3534758,
+      "absent": true,
+      "same_identity_running": false
+    }
+  ],
+  "old_monitor_ended": {
+    "started_utc": "2026-10-03T12:52:59.689245+00:00",
+    "ended_utc": "2026-10-03T14:40:26.001382+00:00",
+    "process": {
+      "pid": 3534758,
+      "start_ticks": "28492397",
+      "state": "R",
+      "rss_bytes": 20488192,
+      "cpu_ticks": 2,
+      "affinity": [
+        0
+      ],
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "reason": "2026-10-03 14:40:15 owned operation deadline",
+    "error": null,
+    "exit_code_if_normal": 0,
+    "self_user_cpu_s": 3.6102629999999998,
+    "self_sys_cpu_s": 4.057919,
+    "self_maxrss_kib": 24656,
+    "child_user_cpu_s": 7.471588,
+    "child_sys_cpu_s": 2.122663,
+    "child_maxrss_kib": 232040,
+    "sampled_combined_rss_peak_bytes": 248860672,
+    "allocated_peak_bytes": 24428544,
+    "no_child_command_left_running": true,
+    "own_process_exits_after_this_record": true,
+    "all_research_stopped_claimed": false
+  },
+  "supervisor": {
+    "status": {
+      "type": "notLoaded"
+    },
+    "turns": [
+      {
+        "id": "01a1022e-beae-7502-b715-b01694258c20",
+        "status": "completed",
+        "error": null,
+        "startedAt": 1791037980,
+        "completedAt": 1791038143
+      }
+    ]
+  }
+}

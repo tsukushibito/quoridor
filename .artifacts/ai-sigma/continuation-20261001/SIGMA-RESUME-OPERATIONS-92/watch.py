@@ -30,9 +30,9 @@ LAST_GOOD=None
 STATE=MAIN/'.artifacts/research-team/scheduler-sigma-continuation-20261001'
 CFG=ROOT/'.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json'
 UTC=dt.timezone.utc
-END=dt.datetime(2026,10,3,14,40,15,tzinfo=UTC)
-FINAL=dt.datetime(2026,10,3,14,43,15,tzinfo=UTC)
-HEAVY=dt.datetime(2026,10,3,14,35,15,tzinfo=UTC)
+END=dt.datetime(2026,10,4,3,15,36,tzinfo=UTC)
+FINAL=dt.datetime(2026,10,4,3,18,36,tzinfo=UTC)
+HEAVY=dt.datetime(2026,10,4,3,10,36,tzinfo=UTC)
 os.sched_setaffinity(0,{0})
 resource.setrlimit(resource.RLIMIT_CORE,(0,0))
 os.environ.update(UV_NO_SYNC='1',UV_OFFLINE='1',PYTHONDONTWRITEBYTECODE='1')
@@ -197,10 +197,10 @@ reason='unknown';exit_code=0
 try:
     while True:
         if stopping: reason='monitor operator stop';stop_owned(reason);break
-        if dt.datetime.now(UTC)>=END: reason='2026-10-03 14:40:15 owned operation deadline';stop_owned(reason);break
+        if dt.datetime.now(UTC)>=END: reason='2026-10-04 03:15:36 owned operation deadline';stop_owned(reason);break
         if dt.datetime.now(UTC)>=HEAVY and not heavy_notified:
             heavy_notified=True
-            notify('heavy-job-stop-notice','quoridor-4lc.92 / 14:35:15UTC到達。新しい重いjobの開始を止め、各ownerが自己jobを回収。監督14:40:15/monitor14:43:15/証拠14:45:15。外部NN停止は認定しない。')
+            notify('heavy-job-stop-notice','quoridor-4lc.92 / 2026-10-04 03:10:36UTC到達。新しい重いjobの開始を止め、各ownerが自己jobを回収。監督03:15:36/monitor03:18:36/証拠03:20:36。外部NN停止は認定しない。')
         state=readstate();owned=state.get('owned');p=state.get('process')
         # New bounded-record runs only. Existing historical evidence is untouched.
         bounded_run_bytes=None
@@ -261,9 +261,9 @@ try:
                   'source_events':str(events),'source_events_sha256':hashlib.sha256(events.read_bytes()).hexdigest()})
             notify('first-live-turn-report','quoridor-4lc.92 / 初回実監督turn観測。\n'+
                    'dispatched='+json.dumps(first,ensure_ascii=False)+'\nfinished='+json.dumps(finished,ensure_ascii=False)+
-                   '\n過去枠のactive_limit skipとは別のframe13 dispatch。App Server履歴上の完了のみ、点検内容/全面稼働成功は別確認。'+
+                   '\n過去枠のactive_limit skipとは別のframe14 dispatch。App Server履歴上の完了のみ、点検内容/全面稼働成功は別確認。'+
                    '\n詳細 '+str(OUT/'first-live-turn.json')+' / '+str(OUT/'monitor-observation.json')+
-                   '。schedulerは2026-10-03 14:40:15UTCまで継続、.92停止責任保持。旧逸脱/欠測/32局/goal未達維持。')
+                   '。schedulerは2026-10-04 03:15:36UTCまで継続、.92停止責任保持。旧逸脱/欠測/32局/goal未達維持。')
         if rss>=1024**3 or allocated>=112*1024**2:
             reason='sampled owner RAM/storage guard';stop_owned(reason);break
         if state.get('phase')=='stopped' and not matches(p,observed):

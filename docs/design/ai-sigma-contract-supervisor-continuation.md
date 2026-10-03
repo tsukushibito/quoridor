@@ -1,8 +1,8 @@
-# 継続枠・運用監督 / quoridor-4lc.40 / 契約14・frame13
+# 継続枠・運用監督 / quoridor-4lc.40 / 契約15・frame14
 
 現行[継続枠](ai-sigma-continuation-20261001.md)と[研究規約](../development/ai-research-experiments.md)を継承。担当supervisor 01a0f6b5-b1bd-7752-b0bb-74a336e459a4、報告coordinator。20分周期/turn180秒、CPU affinity[0]/1thread/RAM1GiB/既新32MiB、他セッション数による入場・報告制限なし。観測・自己notes/reportのみ、NN/取得/build/worker起動/委譲/他者kill/配分/config編集0。
 
-本枠は12:45:15開始の新2時間枠。185薄gamepoolからSigma型多数独立game・共通GPU batchの実生成へ接続し、同モデル/同探索品質/同K・独立treeと最速CPUJS対照の総費・適格教師を点検する。GPU利益がなければCPU前進、価値退行のCPU対照1案、NNUE最小試作の時期/費用/教師を次判断へつなぐ。PV調整/基盤整備を目的化せず、低LRだけを原因と確定しない。旧176比較基準/181 value悪化と旧173正式198holdout非学習、旧frame12科学/run/期限/92終了証拠を保持する。実配分は統括、監督実行権限を増やさない。
+本枠は2026-10-03 23:20:36開始、2026-10-04 03:20:36終了の新4時間枠。教師段階増量から固定validation/test・group/lineage分割、露出とtrain量/学習量交絡、validation選定後の独立test・未学習/定数対照まで実配分されたか、未見対局への学習効果が次判断を変えるかを点検する。GPU生成の再利用は有効教師/総時間へ結び付け、小validation・機能接続をNNUE方式最終性能/同時間棋力へ広げない。旧173正式198holdout非学習・旧frame13/run結果/失敗/個別期限/終了証拠を保持。具体実装/数量/採否は統括へ任せ、監督実行権限や新gateを増やさない。
 
 最初に目標から今重要な不確実性と実験結果が次判断を変えるかを独立に考え、既guard observeでgoal/selfのpause・所有者と現在の目標配下open/in_progress/blocked issue・担当・依存をwrapper list/showで有界収集する。現在稼働担当と子契約を優先し、古い全履歴や固定の旧issue一覧を要求しない。必要な対象issue/契約/報告はinspect、必要なsnapshot再取得はobserve --refreshで追加readonly確認できる。一時障害は残予算内でcommand最大1回再試行、pause/所有者不明/硬い期限拒否を迂回しない。
 
@@ -14,7 +14,7 @@
 
 意味のある評価・配分見直しがない変化なしは保存だけ。意味のある停滞/障害/期限資源/成果・引渡しに加え、契約・運用の改善提案と重要な未解決見解差、節目の振り返りで意味のある評価・配分見直しが得られた場合も統括へ通知する。停滞や障害の顕在化を改善提案の条件にしない。acceptedと恒久適用/whole-turn遵守/研究成功を区別、応答不明の盲目再送0。実developer本文読戻し非対応を研究成功の条件にしない。
 
-親現行枠版13の重job14:35:15UTC/監督14:40:15/monitor14:43:15/終了14:45:15を維持。scheduler/monitorは既steward ownerが回収し、監督停止だけで外部NN停止を認定しない。ユーザーpause/guardを尊重し自動延長しない。自.40は運用終了受入れまでcloseせず、goalをcloseしない。旧期限/失敗/32局・未達と旧run結果は書換えない。版/run/必要ログをGit等で追跡し、許可範囲/総予算内の新run再現を旧終了窓の遡及変更と混同しない。
+親現行枠版14の2026-10-04重job03:10:36UTC/監督03:15:36/monitor03:18:36/終了03:20:36を維持。scheduler/monitorは既steward ownerが回収し、監督停止だけで外部NN停止を認定しない。ユーザーpause/guardを尊重し自動延長しない。自.40は運用終了受入れまでcloseせず、goalをcloseしない。旧期限/失敗/32局・未達と旧run結果は書換えない。版/run/必要ログをGit等で追跡し、許可範囲/総予算内の新run再現を旧終了窓の遡及変更と混同しない。
 
 保存guardはsteward所有実量とsupervisor現行枠32MiB内の実量を分ける。新runはwrapper stdoutをpipeで一時的に読み（最大4MiB、超過は失敗）、必要metadataとdescription/notesの明示byte区間だけを保持し、元size/SHA・command/exit・欠測を保存する。同run同selectionは参照で再利用する。必要本文不足はfield/offset付きbounded inspectで確認し、無言の切捨てをpassにしない。現在owner/pause/namespace/硬期限と旧raw/失敗は維持する。
 
