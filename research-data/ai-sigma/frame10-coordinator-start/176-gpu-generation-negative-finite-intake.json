@@ -1,0 +1,62 @@
+{
+  "UTC": "2026-10-03T10:31:23.173871+00:00",
+  "issue": "quoridor-4lc.176",
+  "scope": "new future3CPU+3GPU generation, original8root/old6NOT_STARTED retained",
+  "decision": "keep CPU; reject current3arena/maxB2 GPU provider as production default; no blind GPU retry",
+  "CPU": {
+    "status_counts": {
+      "GOAL": 3
+    },
+    "Rpolicy": 188,
+    "Rz": 188,
+    "Rjoint": 188,
+    "jobwall_seconds": 21.251523,
+    "NN": 10594,
+    "terminal_noNN": 1438
+  },
+  "CUDA": {
+    "status_counts": {
+      "GOAL": 3
+    },
+    "Rpolicy": 188,
+    "Rz": 188,
+    "Rjoint": 188,
+    "jobwall_seconds": 54.711141,
+    "NN": 10594,
+    "terminal_noNN": 1438
+  },
+  "CUDA_vs_CPU_Rjoint_rate_ratio": 0.38843136172210335,
+  "same_188_adopted_roots_owner_saved_correspondence": {
+    "all3_legal_action_path_equal": true,
+    "all_finalroot_visits_equal": true,
+    "rootNN_max_abs": 8.58306884765625e-06,
+    "rootmean_max_abs": 7.104172254912555e-07,
+    "allpairs_finalroot_NNtol": true,
+    "scope": "all188 matched saved adopted finalroots only, not all deep NN/PUCT or general trajectory guarantee"
+  },
+  "bindings": [
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/efficiency-preregister.json",
+      "SHA256": "5e1ee3d80879d96397626cd23875d8997ca475fb393a7a858b0d2053e52471cc"
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/efficiency-results.json",
+      "SHA256": "c13448bf344c9f5987920c913472761afeeb4295267e7143ceef36ff0b1e39c2"
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/efficiency-finalroot-correspondence.json",
+      "SHA256": "7db514ed56ad703be2f06d792957f580cd2dbd321ee0f2577903c3f67e4f3efa"
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/efficiency-benchmark-rows.jsonl.gz",
+      "SHA256": "36a634ce1f557e232147bc67eb04d20c27f63f25a393a450577773fd8f0ee93b"
+    }
+  ],
+  "limits": [
+    "one sequentialCPUthenGPU3game comparison/warm-order/host limits",
+    "only current native provider,maxB2,3arena config; not all GPU methods",
+    "adopted root/path finite correspondence not all-deep proof",
+    "full source/Git/owned helper final handoff still pending"
+  ],
+  "next": "new user-directed180 sameK800 Rustnative vs fixedWebJSnative CPU comparison; then CPU teacher lineage diversity/efficiency"
+}

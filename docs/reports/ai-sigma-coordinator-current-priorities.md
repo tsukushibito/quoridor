@@ -1,36 +1,30 @@
-# 現在の優先順位と評価・学習計画
+# 現在の優先順位と教師生成・学習計画
 
-2026-10-03版12。ユーザー明示4時間再開08:47:38–12:47:38UTC。新heavy12:37:38、監督12:42:38、monitor12:45:38。親期限の正本と運用は92/stewardが単独所有する。native主評価・高速化効率化を維持する。
+2026-10-03 frame12。許可08:47:38–12:47:38UTC、heavy12:37:38、監督12:42:38、monitor12:45:38。親期限・運用は92/steward単独所有。native主検証と教師生成の効率化、独立lineageから全手π/rootNN/rootmean/z→game split→自前学習・評価が主経路。NNUE最高棋力は最終目標、Sigma同等は未認定。旧173正式198局95勝103敗・逐次閾値未達の不確かという結論/失敗/期限を保持し、学習へ転用しない。
 
-主問いは学習データ生成の総費を減らし、独立した学習lineageから全手の教師を既learner/ONNX/少数独立arenaへ接続できるか。Sigma同等は未認定、NNUE型最高棋力は最終目標のまま。前枠173の正式198局95勝103敗、逐次閾値未達で不確かという結論と旧epoch/失敗/期限を保持する。この198局を学習へ転用しない。旧優先計画はGit履歴で保持する。
+## 現在の問い・実配分
 
-| 優先 | 問いと到達点 | 費用と判断 |
+| 優先 | 到達点・担当 | 費用・次の判断 |
 | --- | --- | --- |
-| 主生成・接続176 | 固定Sigma自己対局24局、固定K64で全手π/rootNN/rootmean/z/視点/lineage、game split、CPU小学生/ONNX、条件付き診断4局 | 最終rootだけ配送し毎simulationのCP JSON費を削る。同入力同Kの対応と有効行/job秒を測る。CPU生成900s・学習120s・arena240s・修復240s、計1500s、NN300000。RAM4GiB/guard3.5、3arena CPU2/4/6。GPU結果待ちにせず生成する |
-| GPU効率177 | 174 folded推論を私有dynamic batch B1/2/4/8、held stdio APIへ。独立局面各1pendingを束ねる | 同入力数値と転送同期/JSON/IPC込み費用で採否、GPU180s/出力512sample相当、CPU0/RAM2GiB/VRAM6GiB。利益が残る場合だけ176へ最小実生成比較を配分する。元ONNX batch1と区別 |
-| 教師品質178 | πと行動、rootNN/rootmean/z、P2合法対応、truncation z未知、lineage split/共通状態漏洩を独立静的裁定 | CPU0/static60s/RAM512MiB。短い物理計算終了を177へ共有。176の全文受入れgateにはしない |
+| ユーザー要求180 | experimentがfixedSigma-Web751186 native-hosted JS対既privateRust nativeを同モデルd790/CPUORT1.30/1thread/同core2で実K800測定 | 3合法非終端入力、rootN800/edge799、warm各1＋steady各4、全30search、外finalOnly/受信検査込み。同Kの中央値/幅/C:R比とNN/terminal/内部IPCを保存。NN30000、heavy600s、RAM3guard2.5、新32MiBguard28。受領newheavy30分/処理40分/提出55分。K64から外挿・500ms棋力規約・C++GPU総効率の代弁0 |
+| 次の主教師・学習案 | 180の支配費からCPU教師生成の実最適化と新lineage/局面多様性を選ぶ | 同KのNN出力再利用、特徴/合法/BFS、探索/IPCのどこに利益があるかを小根拠で選ぶ。raw行増産だけを進展にせずπ/z別validationと未知lineageの学習価値を併せる。未配分のNN/GPUtrain/大生成を開始しない |
 
-小CPU学習は初期小モデルの機能接続で、fit/速度を棋力としない。本PV構造の大規模訓練・NNUE全面移行・GPU学習・正式NI自動反復は現在配分しない。GPU学習累積2時間の未使用残は不明なので開始せず、CPU接続で前進する。
+180は新現在配分であり176個別期限を延長しない。176の必要最小pack/Git復元/backup・旧writer/科学子停止を終えて新自域だけ開始。旧GPUbranchの盲目再試行はしない。C++公開学習経路、browser棋力、正式NIは本測定と別の未実測/未達として残す。計測が教師量/学習へどう寄与するかで次配分を決め、速度診断を自動連鎖しない。
 
-保存上限12GiBは維持。停止受入れ済173の512MiB予約に対し保存時保守計上244597028Bで未使用292273884B以上を確認、4MiBのみexperimentからhypothesisへprospective再配分する。experiment総予約2044MiB、hypothesis20MiB/guard19MiB。旧保持/未知量減額・削除・親増額なし。176新256MiB/guard224、177新2MiB/guard1.75、178新2MiBはいずれも担当予約内で直前currentを確認する。
+## 確認できた基準と採否
 
-CPU4logicalは実job合計。176の3arenaに追加できるCPU重jobは一つ。178短CPU0検算→177 GPU/CPU0実測を順序調整し、自然監督の実jobと競合する場合は次空き窓を選ぶ。RAM配分exp4+hyp2+critic.5+super1+stew.5=8GiB内、実headroomを直前確認する。LLM active数を物理資源gateにしない。
+176CPU自己対局24GOALからRpolicy/Rz/Rjoint各1409、K64/root64edge63、train20game1188/validation4game221。179は全1409行のπ合法mass・独自P2jump/wall/z/side/split/4重複算術と共有RuleA全24教師1409手＋新4診断110手再生を有限支持。必要12Gitblob、dataset/checkpoint/ONNX実SHA、source/子停止、backupへ統括bindingし179を引継close（受入れcd4ce173）。共有RuleA/保存reload-forward receiptの限界、全deep/state独立holdout保証0を残す。crossgame16key37occurrence、train-validation共有0。
 
-最初の効果確認は176の少数game/適格教師行・総費、177の実batch数値と総route費。主要ボトルネックの改善を実生成へ結び、GPU性能確認だけの連鎖を続けない。条件/探索量を変えた教師は版を分け、量削減だけを質保持利益としない。
+成功production198.496598s=7.098358適格行/s。記録compute全attempt235.726026s＋export/overlap既知小計236.583166s≈5.956行/sは研究費を含む別分母。入力生成/開発/一部admissionwall/管理費はunknown。Rpolicy/Rz/Rjointと未知/全attempt費を別記し、成功速度を総研究率へ置換しない。
 
-92は08:58:38通常freshstart、scheduler3352074/start27085893とmonitor3352088/start27085920、running/loadedと24hash一致を本人報告。親版12SHA0e0e03a157e86bb9d9b7bd0659fb17a3c413afac2286944a5fde839336baae50。初回dispatch競合でownednull、次通常09:18:38。起動の有限成立と未来自然監督/学習成功は分ける。92へ同依頼再配送なし。
+CPU200step/checkpoint/ONNX接続を有限支持。保存validation πCE3.903287→2.514467、zMSE1.047608→.684094、train zMSE.207420。未学習初期基準とのfit改善と新診断0勝4敗を区別する。教師不良/hidden32の能力/200step不足/分布不足のどれかを現在証拠から一意に選ばず、同接続診断の反復を学習成果の代用にしない。
 
-09:12節目: 178独立速報のRpolicy/Rz/Rjoint別分母＋全attemptの総jobwall台帳を採用。打切りzunknownのvalue mask、game splitで防げないcrossgame重複の限界を維持。final-only配送で毎sim root_edges構築が残る場合はIPC部分の利得とし、総探索費改善へ広げない。178科学CPU0静的子終了を177へ共有、本人current/headroom/次09:18:38監督窓でGPU開始を調整。176には同K対応と適格行率を既scopeで反映、全文承認待ち/新計測gateなし。効果は176実生成と177総route費で確認する。
+177GPUbatch有限数値/route費受入れ後、176で実生成を比較した。原firstCPUrootのVM checker/raw欠測はUNKNOWN・旧条件の6slotはNOT_STARTEDのまま。新NN0teacher001保存first/finalroot joinは原missingtape救済ではなく、新有限根比較として採用。CPUargmax13とtau1実行89を分離、rootNNtol/piL1=0/訪問一致、deep未確認。新futureCPU3→CUDA3は全6GOAL、両backend各188適格行・NN10594、保存採用188根の経路/訪問有限対応。CPU21.251523s=8.846425行/s、CUDA54.711141s=3.436229行/s、比.388431。current3arena/maxB2/.25ms/FIFO経路は生成利益なしとして不採用・CPU維持。GPU一般の無効を主張せず、177B2単route2.72倍を生成倍率へ転用しない。元CPU24学習への新比較siblings混合0。
 
-178最終166dff52/handoffe9e53f49の必要15＋2blobをGit/size/SHA/current一致で確認、mock sourceと子PID現在不在・本人source/子停止・backup receiptを照合し有限受入れ。合成schema/設計の支持で実176dataset/数値backend/棋力は別。採択は既176/177へ反映済み、追加静的課題を連鎖せず実生成/学習接続・GPU総route費を待つ。
+監督ff1307b0/b811d33aの提案を採用：教師効率と学習価値を別裁定し、既保存π/z別損失と未学習基準を先に見る。次主教師案はlineage/局面多様性を増やし未知lineageへの効果で選ぶ。追加baselineforward/全役承認/新監督層を入口にしない。GPU比較の採否・K800の実支配費・次主データ生成と学習結果を後続節目で確認する。
 
-09:30節目: 176 first8GOAL/514row/NN30347と2新input同K64最終root/firstNN exact、CP64→1を保存有限照合。productionjob72.162764s/7.122787行毎秒は準備・比較・export/学習の全pipeline費と分ける。177実B2 JSONpipe CPUserial8.262791/GPU3.033639msを受領、3CPUsession並列倍率は未立証。176へ既予算内の薄maxB2/flush.25接続・4root同K検査→条件付き3CPU+3GPUgameの限定効率branchを採択。手NN追加60000/重360s以下は元300000/1500sの残内、GPUphaseRAM6/guard5.5は他model終了確認のsolo科学だけ。CPU24本dataset/小学習接続を優先、比較siblingsは本学習へ混合0。全6分母/未知/同K/版/実batch-fill/総job費で判断し、利益なしならCPU継続して接続診断を連鎖しない。
+## 資源・運用
 
-09:48節目: 177保存84raw/305行のfinite f32・CPU135bit・batch対応を確認し有限受入れ。35 scientific Gitblobを復元、34 current exact、storage後着actual_finalだけ別binding。B2 route比は直列CPU比較であり生成倍率ではない。176本人は24GOAL/1409適格行・production198.496598s/7.098358行秒、train20game1188/validation4game221、200step/reload/ONNX成功を報告。独立検算前の本人結果として保持。新4診断全GOAL/学生0勝4敗で接続成立と棋力未改善を分け、限定GPUbranchへ進む。全24元データ・正式holdout除外・全失敗を保持し、実dataset/学習接続/総費の保存独立レビューをcriticへ配分する。
+CPU4logical合計/RAM8GiB/保持と有効未使用予約12GiBを維持、NN重jobは競合させない。experiment2044MiB、hypothesis20MiB/guard19MiB（旧173の確認済unused4MiBだけ移転）、critic112MiBguard。旧保持削除/unknown減額/親増額0。180新32MiBはexperiment内、CPU2単1solo測定、管理/providerも同core。GPU学習の累積2h未使用残は不明のため現在配分0。環境/モデル/effort/AppServer/main統合/push/公開変更0。
 
-保存独立レビュー179をcriticへ配分。全1409行のπ/視点/z/lineage/split/重複・保存200step/reload/ONNXと新4診断をNN0算術で検算。CPU0静的90s/新2MiBは既112MiBguard内、176 GPU科学pool0/2/4/6と順序調整し、レビュー全文待ちをGPUbranch入口にしない。学習fit/arena0勝4敗と生成効率を別に裁定する。
-
-10:00節目: 176 GPU根試験はCPUfirst checkerのVM prototype例外・raw欠測でfirst未知、残3根tol/Action/visits対応。原追加6生成はNOT_STARTEDで全分母保持。有限CPU24本成果へ失敗を付替えない。GPU生成効率を未測のまま検査器欠測だけで放棄せず、既残費内の新phaseで保存teacher001根のNN0final-root joinを先に配分。不足時のみ別CPU64機構診断、元8要求/512NN・未知・source-stopは変更0。有限成立時だけ事前登録済3CPU+3GPU同Kの総費比較、利益なしならCPU継続。追加費は元176残上限内、成功成績を救済置換しない。
-監督ff1307b0の提案を部分採用。教師効率と学習価値を別判断し、既保存π/z別train-validation損失・未学習基準を179へ読むよう実配送。基準なしはunknown、新NN/再学習・全承認gateを増やさない。4局0勝4敗は教師/小モデル/学習量の原因を一意に決めない。179 CPU0算術90s実jobは176GPU4logicalと重ねず終了後に科学窓を渡す。採否の効果は179保存裁定と176実生成Rjoint/総費で次に確認する。
-
-10:12節目: 179独立saved算術/共有RuleA replayの全24CPU/1409教師＋全4eval110手、split/4重複/π・P2・zを必要Git12blobとdataset/checkpoint/ONNX実hash、owner source/子停止/backupへbindし有限受入れ。200step/ONNX/reloadは保存receiptの射程。成功production7.098358行秒と既知compute/export小計236.583166s/約5.956行秒を分け、未計測費はunknown。0勝4敗から教師/モデル/step不足の原因を一意に選ばない。179は統括が引継close、176新future全6GPUefficiencyが実生成結果を返す。新CPU64再取得なく、teacher001保存finalroot NN0joinで有限資格を得て旧UNKNOWN/deep未確認を保持、CPU24本学習とは混合0。
+92frame12は08:58:38freshstart、scheduler3352074/start27085893・monitor3352088/start27085920、親SHA0e0e03a157e86bb9d9b7bd0659fb17a3c413afac2286944a5fde839336baae50/24hash一致を本人報告。自然監督のobserve/早期notes/backupと後のturn_limit/interruptedは別、全期間・外部NN停止保証0。監督10:19:23finish有限成功を受領、未来12時台の停止責任は同92。運用sourceはcoordinator編集0。
