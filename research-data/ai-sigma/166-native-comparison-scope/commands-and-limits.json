@@ -1,0 +1,15 @@
+{
+  "issue":"quoridor-4lc.166",
+  "kind":"static source review",
+  "commands":["bash scripts/dev/beads.sh ready --json; show quoridor-4lc; show quoridor-4lc.166; update quoridor-4lc.166 --claim (separate serialized operations at intake)","readonly rg/sed/cat of assigned contract, prior finite reports and 165 source","bash scripts/dev/research-team.sh report --to coordinator --issue quoridor-4lc --body-file <owned start-report.txt>","bash scripts/dev/research-team.sh report --to coordinator --issue quoridor-4lc --body-file <owned early-concern-report.txt>","taskset -c 0 timeout 60s python3 tools/ai-sigma-native-comparison-scope/static-scope.py"],
+  "static_run_attempts":1,
+  "static_run_exit":0,
+  "source_execution_NN_model_Chrome_build_game_training_GPU_delegation":0,
+  "external_read_failure":{"source":"https://nodejs.org/docs/latest-v24.x/api/timers.html","error":"Internal Error","retry":0,"used_as_evidence":false},
+  "command_wall_limit_seconds":60,
+  "management_total_budget_seconds":90,
+  "historical_per_command_elapsed_log_missing":true,
+  "note":"Tool transcript contains command outcomes; no precise reconstructed aggregate elapsed claim. Short readonly/Beads/report helpers and one subsecond static run only. No long-running scientific child.",
+  "CPU":[0],"RAM_guard_bytes":469762048,"new_save_forecast_bytes":2097152,
+  "other_source_mutations":0,"root_or_other_close":0
+}
