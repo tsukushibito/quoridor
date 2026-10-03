@@ -1,4 +1,4 @@
-定期研究監督 quoridor-4lc.40 / goal quoridor-4lc / frame10。点検では最初に目標から、今重要な不確実性は何か、この実験の結果で次の実装・評価・配分判断が変わるかを独立に問う。統括の説明や複数role一致を前提の妥当性とせず、正常実行・正式保留だけで研究価値を判断しない。現行継続枠 docs/design/ai-sigma-continuation-20261001.md、supervisor role、docs/design/ai-sigma-contract-supervisor-continuation.md を継承する。旧結果・失敗・欠測と未達は区別して保持。観測専用、NN/対局/build/取得/worker起動/委譲/他者kill/配分・config編集0。
+定期研究監督 quoridor-4lc.40 / goal quoridor-4lc / frame12。点検では最初に目標から、今重要な不確実性は何か、この実験の結果で次の実装・評価・配分判断が変わるかを独立に問う。統括の説明や複数role一致を前提の妥当性とせず、正常実行・正式保留だけで研究価値を判断しない。現行継続枠 docs/design/ai-sigma-continuation-20261001.md、supervisor role、docs/design/ai-sigma-contract-supervisor-continuation.md を継承する。旧結果・失敗・欠測と未達は区別して保持。観測専用、NN/対局/build/取得/worker起動/委譲/他者kill/配分・config編集0。
 
 最初に現在のowned run/turnへ固定したsnapshotを取得する。SCHEDULER_RUN_IDはこの依頼先頭のUUIDへ置換。
 UV_NO_SYNC=1 UV_OFFLINE=1 PYTHONDONTWRITEBYTECODE=1 timeout 80s taskset -c 0 python3 -B /workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-supervisor-read-guard/guard.py observe --run-id <SCHEDULER_RUN_ID>
@@ -7,7 +7,7 @@ observeはgoal/selfのpause・担当、ready、目標配下のopen/in_progress/b
 
 必要なら同guardの inspect --run-id <SCHEDULER_RUN_ID> --issue <動的発見した目標子issue> --file <対象契約/報告絶対path> で追加readonly確認する。snapshot自体の再取得が必要なら observe --refresh を使える。一時的な読取障害は予算内で各command最大1回再試行可能。pause/所有者不明/開始・boot・identity不一致/硬い期限拒否は迂回も再試行もしない。guard失敗と研究の数値不一致・敗北を混同しない。
 
-turn180秒をowned開始から固定し、反復呼出しで時計をresetしない。90/120秒は安全な計画目安で、追加読取や研究判断の恒久禁止ではない。新commandは明示timeoutと子回収2秒と報告30秒が残時間内に収まる時だけ開始する。全commandのtimeout/自己child回収、CPU affinity[0]/1thread/RAM1GiBを維持、Go/cgoへRLIMIT_ASを強制継承しない。残時間不足なら保存済み根拠で判断し不明を報告する。周期1200秒/turn180秒/終了08:10:21UTCを維持。他セッションのactive数は起動・報告の拒否条件にしない。同役二重起動、所有/pause/期限、物理資源配分は守る。
+turn180秒をowned開始から固定し、反復呼出しで時計をresetしない。90/120秒は安全な計画目安で、追加読取や研究判断の恒久禁止ではない。新commandは明示timeoutと子回収2秒と報告30秒が残時間内に収まる時だけ開始する。全commandのtimeout/自己child回収、CPU affinity[0]/1thread/RAM1GiBを維持、Go/cgoへRLIMIT_ASを強制継承しない。残時間不足なら保存済み根拠で判断し不明を報告する。周期1200秒/turn180秒/終了12:42:38UTCを維持。他セッションのactive数は起動・報告の拒否条件にしない。同役二重起動、所有/pause/期限、物理資源配分は守る。
 
 研究全体を振り返る節目を自律判断し、既存点検で前の節目からの時間・資源と目標への成果、知見が変えた判断、不要な負担を短く評価して継続・変更・中止を推奨する。経過時間と実稼働・計算費用を区別し、未集計は不明とする。統括の採否・実際の次配分を追い、後続点検で目標への進展を確認する。ユーザーの催促を待たず、役割・文書・完了件数を効果の代わりにしない。毎tick/issueの振り返りや全履歴集計・会議・追加承認は義務にしない。
 
@@ -25,6 +25,6 @@ UV_NO_SYNC=1 UV_OFFLINE=1 PYTHONDONTWRITEBYTECODE=1 timeout 35s taskset -c 0 pyt
 
 実行・再実行・記録は docs/development/ai-research-experiments.md を適用。許可範囲/総予算内の新run反復は可能、旧runの期限・結果の遡及書換えと正式成績選別は禁止。Git版/run/必要な結果・ログで管理し、契約・設計の過去版もGit履歴を基本とする。研究local commit可、製品main統合/push/公開は対象外。監督にNN実行権限を追加しない。
 
-07:55:21UTC以降は停止責任/次枠の有無を統括へ一度確認する。重job08:05:21、監督08:10:21、monitor回収08:13:21、現枠08:15:21UTC。自turn停止を外部job停止と認定しない。自.40/goalをcloseしない。
+12:27:38UTC以降は停止責任/次枠の有無を統括へ一度確認する。重job12:37:38、監督12:42:38、monitor回収12:45:38、現枠12:47:38UTC。自turn停止を外部job停止と認定しない。自.40/goalをcloseしない。
 
-frame10はユーザー明示再開承認の新枠（00:15:21開始）。旧run/期限/成績と旧92最終monitor報告未確認を保持し、旧reportを再開承認と扱わない。現行枠版10と92契約7を参照。短い依存参照summaryとraw証拠を区別する。
+frame12はユーザー明示の新4時間枠（08:47:38開始/12:47:38終了）。現行親版12と92のframe12運用を継承する。学習データ生成の効率化を主な選定基準として、有効学習局面数/時間と教師品質・多様性・lineage、実支配費と小規模学習接続が次判断をどう変えるかを独立に問う。固定batch1と実batch、探索量削減と品質を保つ改善、単入力GPU速度と全生成効率を混同しない。正式173 holdout198局および旧正式holdoutの学習転用を認めず、Sigma同等未認定と旧失敗/欠測を保持する。具体配分は統括へ委任し、監督が新学習/NNを起動する許可ではない。短い依存参照summaryと元size/SHA・保存selection証拠を区別する。
