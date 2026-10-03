@@ -34,7 +34,7 @@ for p,sha in dep['151_current_hashes'].items():
  if p in patches:
   try:before=gitbytes(dep['measured_Git'],p).decode()
   except subprocess.CalledProcessError:before=''
-  patch='\n'.join(difflib.unified_diff(before.splitlines(),q.read_text().splitlines(),lineterm=''))
+  patch=''.join(difflib.unified_diff(before.splitlines(keepends=True),q.read_text().splitlines(keepends=True)))
   assert patch==patches[p],p
  libraries.append({'path':p,'SHA256':sha,'current_mtime_UTC':datetime.datetime.fromtimestamp(q.stat().st_mtime,datetime.timezone.utc).isoformat(),'saved_patch_exact':patch is not None,'mtime_before_build':q.stat().st_mtime<datetime.datetime.fromisoformat(build['start']).timestamp()})
 assert len(patches)==7
