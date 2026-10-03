@@ -13,6 +13,23 @@
 
 180は新現在配分であり176個別期限を延長しない。176の必要最小pack/Git復元/backup・旧writer/科学子停止を終えて新自域だけ開始。旧GPUbranchの盲目再試行はしない。C++公開学習経路、browser棋力、正式NIは本測定と別の未実測/未達として残す。計測が教師量/学習へどう寄与するかで次配分を決め、速度診断を自動連鎖しない。
 
+## Sigma型の多数game多重化とGPU共有batch
+
+root経由のユーザー質問に対し、これまでの具体配分にこの経路の実生成検証は含まれていなかったと明記する。176の3arena/maxB2不採用は当該実装だけで、少数CPU workerが多数の独立gameを進め、共通GPU queueでより大きなbatchを集める方式を除外しない。
+
+固定[自対局source751186](https://github.com/bartolomeo3000/SigmaQuoridor/blob/751186344fc52ad0c29bc65922e62c6fa915f006/selfplay_cpp.py)を確認した。CPU threadsとparallel_gamesは別引数で、既定はthreads7/parallel2048/leaf-batch1/max-batch1024、中央get_batch→GPU→put_results。これらは設定値であり実効batch・旧checkpointの歴史設定の証明ではない。sourceは共有NN cache、leaf parallel/virtual loss、noise/FPU/temperature、PCR/solverも持つため、この生成構造の再現と、固定Sigma C++の探索・教師全規則を同一にすることは分ける。既忠実Web751186 native経路のK64/K800結果でC++総生成効率を代弁しない。
+
+優先順位は181の薄checkpoint削減→新独立CPU教師/learner接続を主とする。今枠183をhypothesisへNN0静的60秒・新512KiBで配分し、既cached C++界面/利用可否、既Rust複数handle/177batch8の再用、必要な薄gamepool/broker変更と有界メモリを具体化する。compile/download/newmodel/NN/GPU/game0、181 writerと科学jobを妨げず、183全文待ちgate0。今枠にこのSigma型GPU実生成を配分済みとはしない。181は12:25science終了予定、残りは保存/12:37:38重開始停止もあり、通常は次枠実測候補。181が早く引渡し、183準備が有限に成立し、直前所有/資源/残20分以上の終了余裕がある場合のみ統括が新現在配分を決める。ここでGPUjobを自動起動せず、次枠計画だけで現12:47:38を延長しない。
+
+次の実測候補を以下の単位で定める。
+
+- CPU worker最大3（core2/4/6）＋共有GPU provider/broker管理1（core0）、CPU4logical/RAM8GiB/VRAM6GiB/job30分を維持。game数をprocess数にしない。各gameの探索は1pending leafのみ、game間を多重化してsameKの木を独立保持し、virtual loss/多leaf同tree/PCR/solver/TT追加をこの構造比較へ混ぜない。
+- 第1小比較は同fresh24game/モデルd790/K64/tau/lineage条件を結果前固定し、CPU3 heldsession基準とGPU共有maxB8でactive game総数3/12/24を比較する案。queueには全game ID/generation/tokenを保持し、返却取り違え・取消・遅着・待ち上限をtypedに扱う。active24は3worker各8gameをpoolで管理、同時24OS processにしない。steady/cold/init/輸送/保存/尾部を全jobへ計上する。最終K/π/z資格/全予定fault/censoringを保ち、実効batch分布・queue待ち・batch-fill・有効Rpolicy/Rz/Rjointとgame/secを使う。
+- 177/176はprivate Torch dynamicB<=8までを有限確認済み。B16/32又は48activeは、上記最小方式で利益が残りメモリheadroomと異種入力parityが成立した時の次拡張案で、現在readyや効果を仮定しない。原ONNXbatch1と実GPU batchを混同しない。2048game/1024batchを複製しない。
+- 将来実runの初期見積はCPU対照上限300秒、GPU各mode上限300秒・GPU累計900秒/1job30分内、RAM全体6GiB guard5.5GiB/新保持128MiB程度を既予約から割当てる案。全3mode/全24game完走や速度利益の保証ではなく、打切りzunknown/全attempt費も残す。NN/量と実最大arena保持は183が上界と実装費を見積り、実配分時に固定する。既GPU学習はこの検証で0。
+
+採否はCPU単入力/3arena maxB2の結果から推定せず、同条件・同Kの実生成で有効教師率が増え、合法性/視点/lineage/教師品質が保たれ、queue/輸送/RAM/VRAMを含む総費に利益が残るかで決める。CPU側MCTS/特徴・合法/BFSが支配的ならGPUbatch追加だけを続けずCPU最適化へ戻す。原C++実行がcache内に用意済みなら版/model/探索設定を別bindingした比較候補、未用意なら未実測と記し巨大新移植・依存取得を今枠に混ぜない。構造比較/全Sigma C++方式/棋力NI/学習価値を別結論にする。
+
 ## 確認できた基準と採否
 
 176CPU自己対局24GOALからRpolicy/Rz/Rjoint各1409、K64/root64edge63、train20game1188/validation4game221。179は全1409行のπ合法mass・独自P2jump/wall/z/side/split/4重複算術と共有RuleA全24教師1409手＋新4診断110手再生を有限支持。必要12Gitblob、dataset/checkpoint/ONNX実SHA、source/子停止、backupへ統括bindingし179を引継close（受入れcd4ce173）。共有RuleA/保存reload-forward receiptの限界、全deep/state独立holdout保証0を残す。crossgame16key37occurrence、train-validation共有0。
