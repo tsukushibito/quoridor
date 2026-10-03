@@ -1,0 +1,46 @@
+{
+  "run": "train-0",
+  "start_epoch": 1790998771.7760916,
+  "end_epoch": 1790998774.2725053,
+  "elapsed_seconds": 2.4964139461517334,
+  "returncode": 0,
+  "stop_reason": null,
+  "peak_observed_own_plus_manager_RSS_bytes": 729448448,
+  "current_owned_children_remaining": [],
+  "outer_owned_wait_complete": true,
+  "outer_remaining_unknown": [],
+  "observed_identities": [
+    {
+      "pid": 3115090,
+      "ppid": 3115021,
+      "starttick": "25170364",
+      "rss_bytes": 712073216,
+      "affinity": [
+        0
+      ],
+      "state": "R"
+    },
+    {
+      "pid": 3115021,
+      "ppid": 3115020,
+      "starttick": "25170120",
+      "rss_bytes": 17375232,
+      "affinity": [
+        0
+      ],
+      "state": "R"
+    }
+  ],
+  "instant_RSS_sampling_not_full_period_guarantee": true,
+  "manager_source_sha256": "6baaffc80449a6ccee26a6a42f12ffc9185eed3c40cf472de388a1a615cf3c15",
+  "toy_source_sha256": "cede790c58b226726cfe9bbf456a3a7e072634c87151c2517648650107ad65e9",
+  "command": [
+    "taskset",
+    "-c",
+    "0",
+    "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "tools/ai-sigma-pv-cpu-smoke/toy.py",
+    "train"
+  ],
+  "new_teacher_game_Chrome_GPU": 0
+}

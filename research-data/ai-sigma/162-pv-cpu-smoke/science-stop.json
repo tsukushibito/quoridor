@@ -1,0 +1,61 @@
+{
+  "issue": "quoridor-4lc.162",
+  "recorded_UTC": "2026-10-03T03:40:43.088203+00:00",
+  "scientific_source_write_stopped": true,
+  "scientific_source_hashes": {
+    "tools/ai-sigma-pv-cpu-smoke/toy.py": "cede790c58b226726cfe9bbf456a3a7e072634c87151c2517648650107ad65e9",
+    "tools/ai-sigma-pv-cpu-smoke/launch.py": "6baaffc80449a6ccee26a6a42f12ffc9185eed3c40cf472de388a1a615cf3c15"
+  },
+  "science_sourceGit": "1aefc12895043d74fda7f58fb4542e4a7e32522b",
+  "science_actual_training_runs": 1,
+  "training_steps": 20,
+  "job_start_epoch": 1790998771.7760916,
+  "job_end_epoch": 1790998774.2725053,
+  "CPU_toy_elapsed_s": 2.4964139461517334,
+  "sample_peak_RSS_bytes": 729448448,
+  "RAM_current_science_children_bytes": 0,
+  "outer_owned_wait_complete": true,
+  "remaining_unknown": [],
+  "current_identity_checks": [
+    {
+      "identity": {
+        "pid": 3115090,
+        "ppid": 3115021,
+        "starttick": "25170364",
+        "rss_bytes": 712073216,
+        "affinity": [
+          0
+        ],
+        "state": "R"
+      },
+      "same_current_identity_present": false
+    },
+    {
+      "identity": {
+        "pid": 3115021,
+        "ppid": 3115020,
+        "starttick": "25170120",
+        "rss_bytes": 17375232,
+        "affinity": [
+          0
+        ],
+        "state": "R"
+      },
+      "same_current_identity_present": false
+    }
+  ],
+  "checkpoint_sha256": "52aa17fcb29113e85264a1d1740adac616750bf6208270d8313f369d60c8800c",
+  "ONNX_sha256": "6763321690ec595ff4e0f40090987d85a0e8ee34a2cf3f3d7720ca3b4b26e895",
+  "results_sha256": "2c1484b6efcdfab744f52899a52ac4e41caed16c821a82635e8b40fdb5742b61",
+  "new_teacher_game_Chrome_GPU": 0,
+  "CUDA_API_calls_in_own_source": 0,
+  "current_absence_not_natural_fullperiod_allhost": true,
+  "helpers_for_Git_restore_report_still_active": true,
+  "failures_preserved": "r0 storage admission rejected before torch/import child; error reporter typo; sourceGit b331f330 / ordinary repair Git1aefc128",
+  "self_current_files_bytes": 159317,
+  "retained_git_forecast_bytes": 163840,
+  "combined_conservative_forecast_bytes": 14498727,
+  "combined_guard_bytes": 14680064,
+  "old_unknown_discount": 0,
+  "new_reservation": 0
+}
