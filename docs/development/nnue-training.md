@@ -32,7 +32,7 @@ bash tools/nnue-training/run.sh \
 
 ## 学習設定
 
-`configs/qf1-h32.json` は例であり、190のmanual SGD条件を再現する設定ではない。JSONまたは `--set` で以下を変更できる。
+190はAdam・学習率0.001・200stepの固定試作だった。`configs/qf1-h32.json` は共通環境の例で、samplingや途中評価・選定条件が異なるため旧190の厳密再現とは扱わない。JSONまたは `--set` で以下を変更できる。
 
 | 項目 | 設定 |
 | --- | --- |
