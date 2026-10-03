@@ -53,3 +53,5 @@ fresh24gameの開始prefix/lineage/seed、fixed d790、K64（root展開込みroo
 source-evidence.jsonに必要source hash、intake.jsonに受領/claim/開始/期限、storage.jsonに旧保守量を残したcurrent+forecast、mock-result.jsonに人工3handleのonepending/partial/stale/stop/不正ID/provider失敗検査を保存する。mockは本Registry/native search/ゲーム実行やGPU能力の証明ではない。受入れ・後続実配分・closeはcoordinator。GPU生成は次枠候補、181は本案待ち0。
 
 NN0 mock実行11:23:39UTC、0.012452s、CPU affinity[0]、peak child RSS16,330,752B、exit0/wait/currentPID不在。8項目PASS、モデル/forward/game0。監督owned null確認後に実行。公開blob閲覧はcache miss、固定raw一次page閲覧成功を保持し、原source保存0。必要参照sourceは終了時hash一致。現在の176transport cap<=40000も24game全上界には足りず、次私有providerのrun予算bindingが必要。
+
+部分batch B3/5/6/7は177の実測数値検査対象ではなかった。次私有wrapperの最大60s準備費に実B1..8の小parityを含め、sample予算へ計上する。今回の人工B3を実GPU parityへ転用しない。
