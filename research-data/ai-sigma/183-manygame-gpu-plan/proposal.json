@@ -107,5 +107,32 @@
     6,
     7
   ],
-  "future_wrapper_parity": "within proposed separate60s, test actual B1..8 using saved diagnostic input samples and batch1 references before new teacher use; samples charged to adopted run cap"
+  "future_wrapper_parity": "within proposed separate60s, test actual B1..8 using saved diagnostic input samples and batch1 references before new teacher use; samples charged to adopted run cap",
+  "adoption_control": {
+    "engine": "CPUJS held3worker",
+    "same_fresh_game_manifest": 24,
+    "K": 64,
+    "optional_future_wall_seconds": 300,
+    "additional_sample_upper_bound": 307200,
+    "all_five_modes_wall_seconds": 1500,
+    "measured_now": false,
+    "gate": false,
+    "old_different_game_rate_reused": false
+  },
+  "GPU_job_schedule": {
+    "separate_jobs": [
+      "GPU_3",
+      "GPU_12",
+      "GPU_24"
+    ],
+    "each_science_wall_seconds": 300,
+    "minimum_guard_quiet_window_seconds": 330,
+    "init_extra_window_required_if_separate": true,
+    "scheduler_owned_required": null,
+    "current_resource_admission_required": true,
+    "provider_reused_within_job_only": true,
+    "all_children_reaped_between_jobs": true,
+    "GUI": false,
+    "automatically_start": false
+  }
 }

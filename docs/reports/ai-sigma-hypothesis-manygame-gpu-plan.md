@@ -55,3 +55,9 @@ source-evidence.jsonに必要source hash、intake.jsonに受領/claim/開始/期
 NN0 mock実行11:23:39UTC、0.012452s、CPU affinity[0]、peak child RSS16,330,752B、exit0/wait/currentPID不在。8項目PASS、モデル/forward/game0。監督owned null確認後に実行。公開blob閲覧はcache miss、固定raw一次page閲覧成功を保持し、原source保存0。必要参照sourceは終了時hash一致。現在の176transport cap<=40000も24game全上界には足りず、次私有providerのrun予算bindingが必要。
 
 部分batch B3/5/6/7は177の実測数値検査対象ではなかった。次私有wrapperの最大60s準備費に実B1..8の小parityを含め、sample予算へ計上する。今回の人工B3を実GPU parityへ転用しない。
+
+## Coordinator補足の反映（11:28 UTC以後、実run追加0）
+
+Rust対Rustの4modeは多重化/推論経路を切り分ける診断で、現在採用CPUJSより速い根拠ではない。GPUの実採用を判断する時は、同fresh24game/K64/tau/同teacher記録条件のCPUJS held3workerを追加対照として提案する。追加wall上限300s、全5mode生成上限1500s（既4mode1200s＋CPUJS300s）、追加NN上界307200 sample-equivalent、保存forecastはmode増分を配分時に更新する。これは新実許可/必須開始gateではなく費用案。旧CPUJSの異なるgame率を新同条件対照へ付け替えない。直接CPUJS対照未実測のままRust対Rustだけで現在最速経路の改善を宣言しない。
+
+GUIなしgamepoolの私有実装45〜75分を提案し、GPU3/12/24activeを**独立3job各300s**にする。jobごとpreregister/source/manifest/NN cap/owned PIDをbinding、providerはそのjob内で常駐し、終了時全回収する。modeごとのcoldinit/upload/warmを全jobwallへ課金し、job間モデル保持を未計上にしない。科学300s＋管理/回収30s以上を自然CPU0監督の空き窓へ収め、起動直前にscheduler ownedなし/次observeまで330s以上・3workerとGPUhostの現在CPU/RAM/VRAM所有・親/個別残時間を確認する。起動/init費が300sとは別に必要なら、その分も窓へ加え、未知ならspawnしない。監督を止めず、届かない窓は延期する。RAM6GiB guard5.5/VRAM6GiBは将来目標であり、多数木/CPUJS対照のcurrent headroomを確認した実保証ではない。queue/wrapper準備60s内のNN0有限検査で止め、全同期系の再実装や全historyproofを今回増やさない。

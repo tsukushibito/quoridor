@@ -1,0 +1,1 @@
+goal quoridor-4lc / 本人183補足反映。report/proposalへ同fresh24game/K64/tau CPUJS held3worker採用対照案を追加（任意未来300s/NN上界307200、全5mode1500s、新実許可0/入口gate0）。Rust対Rustのみで現在最速CPUJS改善を宣言0、旧異なるgame率付替え0。GPU3/12/24activeを別3job各300s、自然監督ownedなし/次observe330s以上＋別init費・liveCPU/RAM/VRAM/親早側を実admit、各job model常駐→全回収/cold費計上。GUI0/NN0有限同期例のまま、181継続。原受領時計維持、新モデル/NN/GPU/build/game0。
