@@ -1,0 +1,140 @@
+{
+  "UTC": "2026-10-03T10:37:01.649470+00:00",
+  "issue": "quoridor-4lc.176",
+  "decision": "accept finite CPU teacher/learner/eval pipeline and bounded GPU efficiency negative; close owner-stopped scope",
+  "Git": "8543b5505e759745b4d6c1d13f356b76a7a05f16",
+  "required_Git_blobs": [
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/handoff-stop.json",
+      "bytes": 513,
+      "SHA256": "33cb7bb6ac1ce5bab4998d9110d50f0d2cb20b06d8b9991fe92714166da28737",
+      "Git_current_exact": true
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/handoff-manifest.json",
+      "bytes": 95606,
+      "SHA256": "09e1a60e063ba3209317887951f2040cf7dd98ede893e6ee31acb3e2d868eb37",
+      "Git_current_exact": true
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/science-stop.json",
+      "bytes": 74915,
+      "SHA256": "794403d5d75527b3c421f362c3e24e4b9e4c3aab6607d000fae639f96d1942ce",
+      "Git_current_exact": true
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/gpu-newphase-science-stop.json",
+      "bytes": 26375,
+      "SHA256": "84d28ab4f75074ff01236ace5799bc69ce007adac9dfc5f819abeb33c719934e",
+      "Git_current_exact": true
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/efficiency-preregister.json",
+      "bytes": 6073,
+      "SHA256": "5e1ee3d80879d96397626cd23875d8997ca475fb393a7a858b0d2053e52471cc",
+      "Git_current_exact": true
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/efficiency-results.json",
+      "bytes": 30612,
+      "SHA256": "c13448bf344c9f5987920c913472761afeeb4295267e7143ceef36ff0b1e39c2",
+      "Git_current_exact": true
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/efficiency-finalroot-correspondence.json",
+      "bytes": 317,
+      "SHA256": "7db514ed56ad703be2f06d792957f580cd2dbd321ee0f2577903c3f67e4f3efa",
+      "Git_current_exact": true
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/cost-ledger-newphase.json",
+      "bytes": 3016,
+      "SHA256": "2481040c475854417c278a31e87f9d823cd699f999e4517fd128831b6d89ecda",
+      "Git_current_exact": true
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/teacher-rows.jsonl.gz",
+      "bytes": 728258,
+      "SHA256": "a8e79d3bdcc7f5d9d7c7105a476f37e3168fc44eec47ea221a57dddd6ae2e94a",
+      "Git_current_exact": true
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/student-checkpoint.pt",
+      "bytes": 104281,
+      "SHA256": "c1abf195c272eb9a143ad0f88d209b7741c8c9bca0c2318de37af759ea9c2351",
+      "Git_current_exact": true
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/student.onnx",
+      "bytes": 102023,
+      "SHA256": "54ed35d8b175d342d8fe50339fd918dd138c1bfb6c376c90bd50daf791b6ca7a",
+      "Git_current_exact": true
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-native-teacher-pipeline.md",
+      "SHA256": "1bafad2fed79e251e66656fe9204afc8727705df04ad7b6cffe3cc9b8d0ebcc6"
+    }
+  ],
+  "archive_SHA256": "e559c173a8e8001d2c65521c4d0c2bd026c1a9046f5812043d168cae59cfd90b",
+  "archive_members": 439,
+  "archive_sample_restore": [
+    {
+      "member": "research-data/ai-sigma/176-native-teacher-pipeline/teacher-rows.jsonl.gz",
+      "SHA256": "a8e79d3bdcc7f5d9d7c7105a476f37e3168fc44eec47ea221a57dddd6ae2e94a",
+      "bytes": 728258
+    },
+    {
+      "member": "research-data/ai-sigma/176-native-teacher-pipeline/efficiency-results.json",
+      "SHA256": "c13448bf344c9f5987920c913472761afeeb4295267e7143ceef36ff0b1e39c2",
+      "bytes": 30612
+    },
+    {
+      "member": "tools/ai-sigma-native-teacher-pipeline/learn.py",
+      "SHA256": "512a13858b7caea8ec0f53f07cc455fb3d6946b8125b30b734fb4e40a0c047ec",
+      "bytes": 6386
+    }
+  ],
+  "owner_all_members_and_89Git_restored": "reported/manifest preserved, no new model execution",
+  "owner_stop_and_backup": {
+    "UTC": "2026-10-03T10:33:48.235982+00:00",
+    "issue": "quoridor-4lc.176",
+    "source_writer_stopped": true,
+    "science_children_reaped": true,
+    "old_science_stop_preserved": true,
+    "new_GPU_stop_preserved": true,
+    "backup_sync_exit": 0,
+    "archive": "research-data/ai-sigma/176-native-teacher-pipeline/native176-handoff-r1.tar.gz",
+    "archive_sha256": "e559c173a8e8001d2c65521c4d0c2bd026c1a9046f5812043d168cae59cfd90b",
+    "data_Git": "2e4879214ac6171ab5699e414254f2d7b4e1ffbd",
+    "next_scope": "180 only"
+  },
+  "CPU_data_independent_review": "179 accepted cd4ce173/959de776/88c78b55",
+  "CPU_generation": {
+    "GOAL": 24,
+    "Rpolicy": 1409,
+    "Rz": 1409,
+    "Rjoint": 1409,
+    "production_seconds": 198.496598,
+    "production_rate": 7.0983584313117545
+  },
+  "learner": "200step checkpoint/ONNX finite saved receipts; no fresh independent forward",
+  "eval": "new4GOAL student0W4L, connection not strength",
+  "new_efficiency": {
+    "planned6_GOAL6": true,
+    "Rjoint_each": 188,
+    "CPU_seconds": 21.251523,
+    "CUDA_seconds": 54.711141,
+    "CUDA_vs_CPU_rate": 0.38843136172210335,
+    "adoption": "CPU maintained, currentmaxB2 GPU branch ended; no generalizedGPUnegative"
+  },
+  "total_owner_compute_seconds": 311.68869,
+  "total_hand_NN": 106876,
+  "unmeasured_costs": "unknown, not zero",
+  "limits": [
+    "originalCPUrootUNKNOWN/old6NOT_STARTED retain original phase",
+    "new benchmark siblings not mixed into CPU24 learning",
+    "sharedRuleA/finite source-counter binding, no all-deep/allhost proof",
+    "newK800 C/R speed unmeasured until180 results"
+  ],
+  "next": "180 userrequested actualK800 comparison new scope, no180 start gate on close"
+}

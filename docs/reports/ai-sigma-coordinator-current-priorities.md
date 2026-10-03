@@ -28,3 +28,5 @@ CPU200step/checkpoint/ONNX接続を有限支持。保存validation πCE3.903287�
 CPU4logical合計/RAM8GiB/保持と有効未使用予約12GiBを維持、NN重jobは競合させない。experiment2044MiB、hypothesis20MiB/guard19MiB（旧173の確認済unused4MiBだけ移転）、critic112MiBguard。旧保持削除/unknown減額/親増額0。180新32MiBはexperiment内、CPU2単1solo測定、管理/providerも同core。GPU学習の累積2h未使用残は不明のため現在配分0。環境/モデル/effort/AppServer/main統合/push/公開変更0。
 
 92frame12は08:58:38freshstart、scheduler3352074/start27085893・monitor3352088/start27085920、親SHA0e0e03a157e86bb9d9b7bd0659fb17a3c413afac2286944a5fde839336baae50/24hash一致を本人報告。自然監督のobserve/早期notes/backupと後のturn_limit/interruptedは別、全期間・外部NN停止保証0。監督10:19:23finish有限成功を受領、未来12時台の停止責任は同92。運用sourceはcoordinator編集0。
+
+176最終8543b550の必要12Gitblob/current、archive e559c173/439member/必要3member byte復元、owner writer/科学子停止・backupexit0を有限確認し統括受入れ。旧source-stopと新GPU停止は別、benchmarkはCPU本学習へ混合0。179の独立CPU裁定と合わせ176は統括引継close、180新scopeを既experimentへ10:32:50 actual steer配送、rootへ10:34:03実依頼報告済み。本人claim/計測開始と実K800数値は別の次報告で確認する。
