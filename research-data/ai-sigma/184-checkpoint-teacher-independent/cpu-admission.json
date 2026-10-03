@@ -1,0 +1,54 @@
+{
+  "utc": "2026-10-03T11:50:07.242129+00:00",
+  "selected_current_processes": [
+    {
+      "pid": 3352074,
+      "command": "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python -B /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/scheduler.py run --config /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json --state-dir /workspaces/quoridor/.artifacts/research-team/scheduler-sigma-continuation-20261001 ",
+      "affinity": [
+        0
+      ],
+      "ticks_before": 1258,
+      "tick_delta_200ms": 0
+    },
+    {
+      "pid": 3352088,
+      "command": "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python -B /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/watch.py --run-dir /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame12-04c303d7-a365-457c-99de-7b4eb2c52eed --expectations /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame12-04c303d7-a365-457c-99de-7b4eb2c52eed/expectations.json ",
+      "affinity": [
+        0
+      ],
+      "ticks_before": 2063,
+      "tick_delta_200ms": 0
+    },
+    {
+      "pid": 3491737,
+      "command": "/bin/bash -c python3 - <<'PY'\nimport pathlib,os,time,json,datetime\nD=pathlib.Path('research-data/ai-sigma/184-checkpoint-teacher-independent');a=[]\nfor p in pathlib.Path('/proc').iterdir():\n if not p.name.isdigit():continue\n try:\n  cmd=(p/'cmdline').read_bytes().replace(b'\\0',b' ').decode();st=(p/'stat').read_text();i=st.rfind(')');v=st[i+2:].split();ticks=int(v[11])+int(v[12]);aff=sorted(os.sched_getaffinity(int(p.name)))\n  if 'ai-sigma' in cmd or 'research-team' in cmd:a.append({'pid':int(p.name),'command':cmd,'affinity':aff,'ticks_before':ticks})\n except (OSError,ValueError):pass\ntime.sleep(.2)\nfor x in a:\n try:\n  st=pathlib.Path('/proc',str(x['pid']),'stat').read_text();v=st[st.rfind(')')+2:].split();x['tick_delta_200ms']=int(v[11])+int(v[12])-x['ticks_before']\n except OSError:x['ended']=True\nconf=[x for x in a if x.get('tick_delta_200ms',0)>1 and x['affinity']==[0] and x['pid']!=os.getpid()];j={'utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'selected_current_processes':a,'CPU0_conflicts':conf,'limited_observation_not_all_period':True,'planned_command':'taskset -c 0 timeout 45s python3 check.py then Node NN0 replay sequential'};D.joinpath('cpu-admission.json').write_text(json.dumps(j,indent=2)+'\\n');print('CPU0 conflict',[(x['pid'],x['command'][:120])for x in conf]);assert not conf\nD.joinpath('cpu-start-report.txt').write_text('goal quoridor-4lc /184\u3002\u76f4\u524dselected current identity/tick\u78ba\u8a8d\u3067CPU0\u91cd\u9759\u7684job\u7af6\u5408\u306a\u3057\u3002\u77edNN0\u72ec\u7acb\u7b97\u8853\u3068\u5171\u6709RuleA\u65b024\u518d\u751f\u3092CPU0\u53581\u3067\u9806\u6b21\u958b\u59cb\u4e88\u5b9a\u3001120s\u7dcfstatic\u5185/NN0\u3002\u89b3\u6e2c\u306f\u5168\u671f\u9593\u4fdd\u8a3c0\u3001\u5b8c\u4e86\u5f8c\u7d42\u4e86\u5831\u544a\u3002')\nPY ",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "ticks_before": 0,
+      "tick_delta_200ms": 0
+    }
+  ],
+  "CPU0_conflicts": [],
+  "limited_observation_not_all_period": true,
+  "planned_command": "taskset -c 0 timeout 45s python3 check.py then Node NN0 replay sequential"
+}

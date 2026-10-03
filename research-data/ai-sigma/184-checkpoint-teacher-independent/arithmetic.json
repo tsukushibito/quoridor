@@ -1,0 +1,519 @@
+{
+  "issue": "quoridor-4lc.184",
+  "start": "2026-10-03T11:50:10.017787+00:00",
+  "first_difference": null,
+  "production_raw_keys": [
+    "issue",
+    "run",
+    "results",
+    "closed",
+    "primary",
+    "elapsed_ms",
+    "monitor_state",
+    "NN_actual",
+    "startup_actual"
+  ],
+  "supported": true,
+  "rows": 1353,
+  "planned_games": 24,
+  "all_status": {
+    "GOAL": 24
+  },
+  "split_rows": {
+    "train": 1072,
+    "validation": 281
+  },
+  "split_games": {
+    "train": 20,
+    "validation": 4
+  },
+  "terminal_noNN": 9205,
+  "CP": 1353,
+  "P2_jump_entries": 24,
+  "P2_wall_entries": 50470,
+  "overlaps": {
+    "position_key": {
+      "unique": 1333,
+      "crossgame_shared_keys": 8,
+      "crossgame_shared_row_occurrences": 28,
+      "train_validation_shared_keys": 0,
+      "train_validation_shared_row_occurrences": 0
+    },
+    "full_state_history_side_ply": {
+      "unique": 1333,
+      "crossgame_shared_keys": 8,
+      "crossgame_shared_row_occurrences": 28,
+      "train_validation_shared_keys": 0,
+      "train_validation_shared_row_occurrences": 0
+    },
+    "features648_only": {
+      "unique": 1333,
+      "crossgame_shared_keys": 8,
+      "crossgame_shared_row_occurrences": 28,
+      "train_validation_shared_keys": 0,
+      "train_validation_shared_row_occurrences": 0
+    },
+    "features648_plus_legalmask136": {
+      "unique": 1333,
+      "crossgame_shared_keys": 8,
+      "crossgame_shared_row_occurrences": 28,
+      "train_validation_shared_keys": 0,
+      "train_validation_shared_row_occurrences": 0
+    }
+  },
+  "cross_old_new": {
+    "position_key": {
+      "unique": 2708,
+      "crossgame_keys": 19,
+      "crossgame_occ": 69,
+      "train_validation_keys": 0,
+      "train_validation_occ": 0,
+      "old_new_shared_keys": 9,
+      "old_new_shared_occ": 49
+    },
+    "full_state_history_side_ply": {
+      "unique": 2713,
+      "crossgame_keys": 18,
+      "crossgame_occ": 67,
+      "train_validation_keys": 0,
+      "train_validation_occ": 0,
+      "old_new_shared_keys": 8,
+      "old_new_shared_occ": 47
+    },
+    "features648_only": {
+      "unique": 2708,
+      "crossgame_keys": 19,
+      "crossgame_occ": 69,
+      "train_validation_keys": 0,
+      "train_validation_occ": 0,
+      "old_new_shared_keys": 9,
+      "old_new_shared_occ": 49
+    },
+    "features648_plus_legalmask136": {
+      "unique": 2709,
+      "crossgame_keys": 19,
+      "crossgame_occ": 69,
+      "train_validation_keys": 0,
+      "train_validation_occ": 0,
+      "old_new_shared_keys": 9,
+      "old_new_shared_occ": 49
+    }
+  },
+  "loss": {
+    "train": {
+      "before": [
+        3.342197895050049,
+        2.586958646774292,
+        0.7552391886711121
+      ],
+      "after": [
+        2.6879281997680664,
+        2.397059917449951,
+        0.2908683717250824
+      ],
+      "delta": [
+        -0.6542696952819824,
+        -0.18989872932434082,
+        -0.46437081694602966
+      ]
+    },
+    "original_validation": {
+      "before": [
+        3.198561668395996,
+        2.514467239379883,
+        0.6840944886207581
+      ],
+      "after": [
+        2.68996262550354,
+        2.287370443344116,
+        0.40259218215942383
+      ],
+      "delta": [
+        -0.508599042892456,
+        -0.2270967960357666,
+        -0.28150230646133423
+      ]
+    },
+    "new_validation": {
+      "before": [
+        4.235158443450928,
+        2.5719008445739746,
+        1.6632575988769531
+      ],
+      "after": [
+        4.342149257659912,
+        2.391096353530884,
+        1.9510529041290283
+      ],
+      "delta": [
+        0.10699081420898438,
+        -0.18080449104309082,
+        0.2877953052520752
+      ]
+    }
+  },
+  "weighted_combined_validation": {
+    "loss_before": [
+      3.7788080703689757,
+      2.546616329139922,
+      1.2321917674693454
+    ],
+    "loss_after": [
+      3.6147921944994374,
+      2.3454321580104143,
+      1.2693600364890232
+    ]
+  },
+  "game_z": [
+    {
+      "game": "native181-teacher-001",
+      "split": "train",
+      "rows": 59,
+      "winner": 1,
+      "z_stm_counts": {
+        "1": 30,
+        "-1": 29
+      }
+    },
+    {
+      "game": "native181-teacher-002",
+      "split": "train",
+      "rows": 57,
+      "winner": 1,
+      "z_stm_counts": {
+        "1": 29,
+        "-1": 28
+      }
+    },
+    {
+      "game": "native181-teacher-003",
+      "split": "train",
+      "rows": 61,
+      "winner": 1,
+      "z_stm_counts": {
+        "1": 31,
+        "-1": 30
+      }
+    },
+    {
+      "game": "native181-teacher-004",
+      "split": "validation",
+      "rows": 65,
+      "winner": 1,
+      "z_stm_counts": {
+        "1": 33,
+        "-1": 32
+      }
+    },
+    {
+      "game": "native181-teacher-005",
+      "split": "validation",
+      "rows": 52,
+      "winner": 2,
+      "z_stm_counts": {
+        "-1": 26,
+        "1": 26
+      }
+    },
+    {
+      "game": "native181-teacher-006",
+      "split": "train",
+      "rows": 69,
+      "winner": 1,
+      "z_stm_counts": {
+        "1": 35,
+        "-1": 34
+      }
+    },
+    {
+      "game": "native181-teacher-007",
+      "split": "train",
+      "rows": 49,
+      "winner": 1,
+      "z_stm_counts": {
+        "1": 25,
+        "-1": 24
+      }
+    },
+    {
+      "game": "native181-teacher-008",
+      "split": "validation",
+      "rows": 94,
+      "winner": 2,
+      "z_stm_counts": {
+        "-1": 47,
+        "1": 47
+      }
+    },
+    {
+      "game": "native181-teacher-009",
+      "split": "train",
+      "rows": 46,
+      "winner": 2,
+      "z_stm_counts": {
+        "-1": 23,
+        "1": 23
+      }
+    },
+    {
+      "game": "native181-teacher-010",
+      "split": "train",
+      "rows": 56,
+      "winner": 2,
+      "z_stm_counts": {
+        "-1": 28,
+        "1": 28
+      }
+    },
+    {
+      "game": "native181-teacher-011",
+      "split": "train",
+      "rows": 41,
+      "winner": 1,
+      "z_stm_counts": {
+        "1": 21,
+        "-1": 20
+      }
+    },
+    {
+      "game": "native181-teacher-012",
+      "split": "train",
+      "rows": 40,
+      "winner": 2,
+      "z_stm_counts": {
+        "-1": 20,
+        "1": 20
+      }
+    },
+    {
+      "game": "native181-teacher-013",
+      "split": "train",
+      "rows": 52,
+      "winner": 2,
+      "z_stm_counts": {
+        "-1": 26,
+        "1": 26
+      }
+    },
+    {
+      "game": "native181-teacher-014",
+      "split": "train",
+      "rows": 51,
+      "winner": 1,
+      "z_stm_counts": {
+        "1": 26,
+        "-1": 25
+      }
+    },
+    {
+      "game": "native181-teacher-015",
+      "split": "validation",
+      "rows": 70,
+      "winner": 2,
+      "z_stm_counts": {
+        "-1": 35,
+        "1": 35
+      }
+    },
+    {
+      "game": "native181-teacher-016",
+      "split": "train",
+      "rows": 49,
+      "winner": 1,
+      "z_stm_counts": {
+        "1": 25,
+        "-1": 24
+      }
+    },
+    {
+      "game": "native181-teacher-017",
+      "split": "train",
+      "rows": 43,
+      "winner": 1,
+      "z_stm_counts": {
+        "1": 22,
+        "-1": 21
+      }
+    },
+    {
+      "game": "native181-teacher-018",
+      "split": "train",
+      "rows": 69,
+      "winner": 1,
+      "z_stm_counts": {
+        "1": 35,
+        "-1": 34
+      }
+    },
+    {
+      "game": "native181-teacher-019",
+      "split": "train",
+      "rows": 63,
+      "winner": 1,
+      "z_stm_counts": {
+        "1": 32,
+        "-1": 31
+      }
+    },
+    {
+      "game": "native181-teacher-020",
+      "split": "train",
+      "rows": 46,
+      "winner": 2,
+      "z_stm_counts": {
+        "-1": 23,
+        "1": 23
+      }
+    },
+    {
+      "game": "native181-teacher-021",
+      "split": "train",
+      "rows": 70,
+      "winner": 2,
+      "z_stm_counts": {
+        "-1": 35,
+        "1": 35
+      }
+    },
+    {
+      "game": "native181-teacher-022",
+      "split": "train",
+      "rows": 52,
+      "winner": 2,
+      "z_stm_counts": {
+        "-1": 26,
+        "1": 26
+      }
+    },
+    {
+      "game": "native181-teacher-023",
+      "split": "train",
+      "rows": 54,
+      "winner": 2,
+      "z_stm_counts": {
+        "-1": 27,
+        "1": 27
+      }
+    },
+    {
+      "game": "native181-teacher-024",
+      "split": "train",
+      "rows": 45,
+      "winner": 1,
+      "z_stm_counts": {
+        "1": 23,
+        "-1": 22
+      }
+    }
+  ],
+  "learner_saved_receipts_only": true,
+  "independent_forward": false,
+  "processes": [
+    {
+      "run": "native181-learn-r1",
+      "seconds": 4.145451,
+      "exit": 0
+    },
+    {
+      "run": "native181-measure-r1",
+      "seconds": 190.179505,
+      "exit": 0
+    },
+    {
+      "run": "native181-mock-r1",
+      "seconds": 0.217685,
+      "exit": 0
+    },
+    {
+      "run": "native181-mock-r2",
+      "seconds": 0.296082,
+      "exit": 1
+    },
+    {
+      "run": "native181-mock-r3",
+      "seconds": 0.305645,
+      "exit": 1
+    },
+    {
+      "run": "native181-mock-r4",
+      "seconds": 0.308155,
+      "exit": 0
+    },
+    {
+      "run": "native181-production-r1",
+      "seconds": 195.29244,
+      "exit": 0
+    }
+  ],
+  "production_wall": 195.29244,
+  "all_guardian_wall": 390.744963,
+  "production_rate": 6.928071562831618,
+  "all_guardian_amortized_rows_per_s": 3.4626166121557915,
+  "export_seconds": 0.692880960047245,
+  "unknown_prep": true,
+  "raw_member_hashes": {
+    ".artifacts/ai-sigma/resume-20261003/CHECKPOINT-TEACHER/runs/native181-learn-r1.process.json": "512d5d60fdd93f7a2633faa2bf3b0632468de327902c883c830bddd61c12facf",
+    ".artifacts/ai-sigma/resume-20261003/CHECKPOINT-TEACHER/runs/native181-measure-r1.process.json": "1d464429fa47957537cd4cac81f336a5635fb2051ecc0742e49dbc6d1c8e97fe",
+    ".artifacts/ai-sigma/resume-20261003/CHECKPOINT-TEACHER/runs/native181-mock-r1.process.json": "a0fa78e2c55e243b54581a606ab949c33c654a4607f364cb52372d8105119f06",
+    ".artifacts/ai-sigma/resume-20261003/CHECKPOINT-TEACHER/runs/native181-mock-r2.process.json": "18d1e682d3ee2363b599f62ca1d618c1f4d492e806e78424d9db45b1f8ff431a",
+    ".artifacts/ai-sigma/resume-20261003/CHECKPOINT-TEACHER/runs/native181-mock-r3.process.json": "f3c8aa5db646deb1c6bb169901509cb52835a31e2758979484c20d539fd9afab",
+    ".artifacts/ai-sigma/resume-20261003/CHECKPOINT-TEACHER/runs/native181-mock-r4.process.json": "1a451e09a2ee68b3ac42e6923cd6b46bb59d89b452d7f2a49ab54925ba537eb5",
+    ".artifacts/ai-sigma/resume-20261003/CHECKPOINT-TEACHER/runs/native181-production-r1.process.json": "71008eeb30cfd3ff1ea15736e9d84506d747e9629e6889f225f0e2df3858b0a7",
+    ".artifacts/ai-sigma/resume-20261003/CHECKPOINT-TEACHER/runs/native181-measure-r1/rows.jsonl": "a758d2a2fffcd48df9eb3b685bcc4e583484f491f12c057e31d6908a957fa64f",
+    ".artifacts/ai-sigma/resume-20261003/CHECKPOINT-TEACHER/runs/native181-production-r1/result.json": "b380aa57ded745818efad61d14f9173393765bb0d085f1e0eeb240b4f2e769b2"
+  },
+  "measurement_row_keys": [
+    "fixture",
+    "engine",
+    "phase",
+    "slot",
+    "t0",
+    "final_CP_validation_end",
+    "elapsed_ms",
+    "result_receipt_ms",
+    "post_CP_cleanup_ms",
+    "CP_count",
+    "cp",
+    "first_NN",
+    "root_state",
+    "NN_actual",
+    "returned",
+    "discarded",
+    "terminal_noNN",
+    "cache_hits",
+    "bridge",
+    "NN_API_sum_ms",
+    "NN_pipe_sum_ms",
+    "worker_elapsed_ms",
+    "zero",
+    "host_load"
+  ],
+  "measurement_scalar_sample": {
+    "fixture": "initial-p1",
+    "engine": "old",
+    "phase": "warm",
+    "slot": 0,
+    "t0": 278583409.674467,
+    "final_CP_validation_end": 278589857.185661,
+    "elapsed_ms": 6447.511193990707,
+    "result_receipt_ms": 278589862.004951,
+    "post_CP_cleanup_ms": 4.819289982318878,
+    "CP_count": 1,
+    "NN_actual": 800,
+    "returned": 800,
+    "discarded": 0,
+    "terminal_noNN": 0,
+    "cache_hits": 0,
+    "NN_API_sum_ms": 3656.7394236917607,
+    "NN_pipe_sum_ms": 4491.55197095871,
+    "worker_elapsed_ms": 6449.571762979031,
+    "host_load": "1.20 0.96 1.01 3/1181 3455595\n"
+  },
+  "elapsed_seconds": 2.0483902000123635,
+  "maxRSS_bytes": 258830336,
+  "end": "2026-10-03T11:50:12.066183+00:00",
+  "PID": 3491909,
+  "recorded_teacher_NN": 77387,
+  "NN_executed": 0,
+  "receipt_field_erratum": "Original NN field was stored teacher count, not checker execution; clarified without changing arithmetic."
+}
