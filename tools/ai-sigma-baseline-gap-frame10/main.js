@@ -29,3 +29,7 @@ validateAfterProgression=async function(){
   row.completed_without_NN={count:cp?Math.max(0,row.completed_backup_convention.completed_backup-cp.nn_calls):null,basis:'adoptable last validated CP completed backup minus its cp.nn_calls; excludes pending/retired API; candidate cap pseudo-leaf not isolated',terminal_noNN_direct_count:null,terminal_count_missing:true};
  }
 };
+
+function gapCollectForSave(){
+ const full=collectBrowser();return {...full,rows:full.rows.map(r=>({spec:r.spec,identity:{request_id:r.identity.request_id},response:{classification:r.response.classification,public_elapsed_ms:r.response.public_elapsed_ms},hand_NN:r.hand_NN,worker_stop_class:r.worker_stop_class})),full_rows_saved_in_postgame_files:true,postgame_save_only_Node:true,per_hand_Node_CP_or_clock_calls:0};
+}

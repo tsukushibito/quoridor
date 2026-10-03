@@ -1,0 +1,3272 @@
+{
+  "issue": "quoridor-4lc.149",
+  "UTC": "2026-10-03T00:52:47.608374+00:00",
+  "planned_games": 64,
+  "planned_pairs": 32,
+  "started_games": 0,
+  "possibly_started_result_missing": 4,
+  "assigned_attempted_games": 4,
+  "categories": {
+    "outer_OOM_unknown_start_and_result": 4,
+    "unstarted": 60
+  },
+  "operational_mean_interval": [
+    0.0,
+    1.0
+  ],
+  "terminal_quality_all64_interval": [
+    0.0,
+    1.0
+  ],
+  "reference_Hoeffding_eps": 0.24008069782998018,
+  "operational_assumption_only_95_interval": [
+    0,
+    1
+  ],
+  "terminal_quality_assumption_only_95_interval": [
+    0,
+    1
+  ],
+  "interval_assumptions": "independent bounded32pairs added assumption; fixedPRNG/sharedstates/drift independence and coverage unproved; not64independent games",
+  "complete_only_auxiliary": {
+    "m": 0,
+    "mean": null,
+    "selection_limit": "normal terminal subset; never replaces64"
+  },
+  "strata": {
+    "4": {
+      "planned_games": 16,
+      "operational": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality": [
+        0.0,
+        1.0
+      ]
+    },
+    "5": {
+      "planned_games": 16,
+      "operational": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality": [
+        0.0,
+        1.0
+      ]
+    },
+    "12": {
+      "planned_games": 16,
+      "operational": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality": [
+        0.0,
+        1.0
+      ]
+    },
+    "13": {
+      "planned_games": 16,
+      "operational": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality": [
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "games": [
+    {
+      "id": "slot01-color1",
+      "pair": 1,
+      "fixture_id": "frame10-prefix-1",
+      "candidate_color": 1,
+      "layer_ply": 12,
+      "run": "gap149-group01-r1",
+      "status": "unknown_start_result",
+      "category": "outer_OOM_unknown_start_and_result",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": "outer_Node_OOM",
+      "new_public_plies": 0,
+      "initial_prefix_length": 12,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot01-color2",
+      "pair": 1,
+      "fixture_id": "frame10-prefix-1",
+      "candidate_color": 2,
+      "layer_ply": 12,
+      "run": "gap149-group01-r1",
+      "status": "unknown_start_result",
+      "category": "outer_OOM_unknown_start_and_result",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": "outer_Node_OOM",
+      "new_public_plies": 0,
+      "initial_prefix_length": 12,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot02-color1",
+      "pair": 2,
+      "fixture_id": "frame10-prefix-2",
+      "candidate_color": 1,
+      "layer_ply": 4,
+      "run": "gap149-group01-r1",
+      "status": "unknown_start_result",
+      "category": "outer_OOM_unknown_start_and_result",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": "outer_Node_OOM",
+      "new_public_plies": 0,
+      "initial_prefix_length": 4,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot02-color2",
+      "pair": 2,
+      "fixture_id": "frame10-prefix-2",
+      "candidate_color": 2,
+      "layer_ply": 4,
+      "run": "gap149-group01-r1",
+      "status": "unknown_start_result",
+      "category": "outer_OOM_unknown_start_and_result",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": "outer_Node_OOM",
+      "new_public_plies": 0,
+      "initial_prefix_length": 4,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot03-color1",
+      "pair": 3,
+      "fixture_id": "frame10-prefix-3",
+      "candidate_color": 1,
+      "layer_ply": 13,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot03-color2",
+      "pair": 3,
+      "fixture_id": "frame10-prefix-3",
+      "candidate_color": 2,
+      "layer_ply": 13,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot04-color1",
+      "pair": 4,
+      "fixture_id": "frame10-prefix-4",
+      "candidate_color": 1,
+      "layer_ply": 5,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot04-color2",
+      "pair": 4,
+      "fixture_id": "frame10-prefix-4",
+      "candidate_color": 2,
+      "layer_ply": 5,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot05-color2",
+      "pair": 5,
+      "fixture_id": "frame10-prefix-5",
+      "candidate_color": 2,
+      "layer_ply": 5,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot05-color1",
+      "pair": 5,
+      "fixture_id": "frame10-prefix-5",
+      "candidate_color": 1,
+      "layer_ply": 5,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot06-color2",
+      "pair": 6,
+      "fixture_id": "frame10-prefix-6",
+      "candidate_color": 2,
+      "layer_ply": 13,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot06-color1",
+      "pair": 6,
+      "fixture_id": "frame10-prefix-6",
+      "candidate_color": 1,
+      "layer_ply": 13,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot07-color2",
+      "pair": 7,
+      "fixture_id": "frame10-prefix-7",
+      "candidate_color": 2,
+      "layer_ply": 4,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot07-color1",
+      "pair": 7,
+      "fixture_id": "frame10-prefix-7",
+      "candidate_color": 1,
+      "layer_ply": 4,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot08-color2",
+      "pair": 8,
+      "fixture_id": "frame10-prefix-8",
+      "candidate_color": 2,
+      "layer_ply": 12,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot08-color1",
+      "pair": 8,
+      "fixture_id": "frame10-prefix-8",
+      "candidate_color": 1,
+      "layer_ply": 12,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot09-color1",
+      "pair": 9,
+      "fixture_id": "frame10-prefix-9",
+      "candidate_color": 1,
+      "layer_ply": 13,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot09-color2",
+      "pair": 9,
+      "fixture_id": "frame10-prefix-9",
+      "candidate_color": 2,
+      "layer_ply": 13,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot10-color1",
+      "pair": 10,
+      "fixture_id": "frame10-prefix-10",
+      "candidate_color": 1,
+      "layer_ply": 5,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot10-color2",
+      "pair": 10,
+      "fixture_id": "frame10-prefix-10",
+      "candidate_color": 2,
+      "layer_ply": 5,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot11-color1",
+      "pair": 11,
+      "fixture_id": "frame10-prefix-11",
+      "candidate_color": 1,
+      "layer_ply": 4,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot11-color2",
+      "pair": 11,
+      "fixture_id": "frame10-prefix-11",
+      "candidate_color": 2,
+      "layer_ply": 4,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot12-color1",
+      "pair": 12,
+      "fixture_id": "frame10-prefix-12",
+      "candidate_color": 1,
+      "layer_ply": 12,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot12-color2",
+      "pair": 12,
+      "fixture_id": "frame10-prefix-12",
+      "candidate_color": 2,
+      "layer_ply": 12,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot13-color2",
+      "pair": 13,
+      "fixture_id": "frame10-prefix-13",
+      "candidate_color": 2,
+      "layer_ply": 5,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot13-color1",
+      "pair": 13,
+      "fixture_id": "frame10-prefix-13",
+      "candidate_color": 1,
+      "layer_ply": 5,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot14-color2",
+      "pair": 14,
+      "fixture_id": "frame10-prefix-14",
+      "candidate_color": 2,
+      "layer_ply": 13,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot14-color1",
+      "pair": 14,
+      "fixture_id": "frame10-prefix-14",
+      "candidate_color": 1,
+      "layer_ply": 13,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot15-color2",
+      "pair": 15,
+      "fixture_id": "frame10-prefix-15",
+      "candidate_color": 2,
+      "layer_ply": 4,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot15-color1",
+      "pair": 15,
+      "fixture_id": "frame10-prefix-15",
+      "candidate_color": 1,
+      "layer_ply": 4,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot16-color2",
+      "pair": 16,
+      "fixture_id": "frame10-prefix-16",
+      "candidate_color": 2,
+      "layer_ply": 12,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot16-color1",
+      "pair": 16,
+      "fixture_id": "frame10-prefix-16",
+      "candidate_color": 1,
+      "layer_ply": 12,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot17-color1",
+      "pair": 17,
+      "fixture_id": "frame10-prefix-17",
+      "candidate_color": 1,
+      "layer_ply": 5,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot17-color2",
+      "pair": 17,
+      "fixture_id": "frame10-prefix-17",
+      "candidate_color": 2,
+      "layer_ply": 5,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot18-color1",
+      "pair": 18,
+      "fixture_id": "frame10-prefix-18",
+      "candidate_color": 1,
+      "layer_ply": 13,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot18-color2",
+      "pair": 18,
+      "fixture_id": "frame10-prefix-18",
+      "candidate_color": 2,
+      "layer_ply": 13,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot19-color1",
+      "pair": 19,
+      "fixture_id": "frame10-prefix-19",
+      "candidate_color": 1,
+      "layer_ply": 12,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot19-color2",
+      "pair": 19,
+      "fixture_id": "frame10-prefix-19",
+      "candidate_color": 2,
+      "layer_ply": 12,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot20-color1",
+      "pair": 20,
+      "fixture_id": "frame10-prefix-20",
+      "candidate_color": 1,
+      "layer_ply": 4,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot20-color2",
+      "pair": 20,
+      "fixture_id": "frame10-prefix-20",
+      "candidate_color": 2,
+      "layer_ply": 4,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot21-color2",
+      "pair": 21,
+      "fixture_id": "frame10-prefix-21",
+      "candidate_color": 2,
+      "layer_ply": 4,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot21-color1",
+      "pair": 21,
+      "fixture_id": "frame10-prefix-21",
+      "candidate_color": 1,
+      "layer_ply": 4,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot22-color2",
+      "pair": 22,
+      "fixture_id": "frame10-prefix-22",
+      "candidate_color": 2,
+      "layer_ply": 12,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot22-color1",
+      "pair": 22,
+      "fixture_id": "frame10-prefix-22",
+      "candidate_color": 1,
+      "layer_ply": 12,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot23-color2",
+      "pair": 23,
+      "fixture_id": "frame10-prefix-23",
+      "candidate_color": 2,
+      "layer_ply": 13,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot23-color1",
+      "pair": 23,
+      "fixture_id": "frame10-prefix-23",
+      "candidate_color": 1,
+      "layer_ply": 13,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot24-color2",
+      "pair": 24,
+      "fixture_id": "frame10-prefix-24",
+      "candidate_color": 2,
+      "layer_ply": 5,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot24-color1",
+      "pair": 24,
+      "fixture_id": "frame10-prefix-24",
+      "candidate_color": 1,
+      "layer_ply": 5,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot25-color1",
+      "pair": 25,
+      "fixture_id": "frame10-prefix-25",
+      "candidate_color": 1,
+      "layer_ply": 5,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot25-color2",
+      "pair": 25,
+      "fixture_id": "frame10-prefix-25",
+      "candidate_color": 2,
+      "layer_ply": 5,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot26-color1",
+      "pair": 26,
+      "fixture_id": "frame10-prefix-26",
+      "candidate_color": 1,
+      "layer_ply": 4,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot26-color2",
+      "pair": 26,
+      "fixture_id": "frame10-prefix-26",
+      "candidate_color": 2,
+      "layer_ply": 4,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot27-color1",
+      "pair": 27,
+      "fixture_id": "frame10-prefix-27",
+      "candidate_color": 1,
+      "layer_ply": 13,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot27-color2",
+      "pair": 27,
+      "fixture_id": "frame10-prefix-27",
+      "candidate_color": 2,
+      "layer_ply": 13,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot28-color1",
+      "pair": 28,
+      "fixture_id": "frame10-prefix-28",
+      "candidate_color": 1,
+      "layer_ply": 12,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot28-color2",
+      "pair": 28,
+      "fixture_id": "frame10-prefix-28",
+      "candidate_color": 2,
+      "layer_ply": 12,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot29-color2",
+      "pair": 29,
+      "fixture_id": "frame10-prefix-29",
+      "candidate_color": 2,
+      "layer_ply": 13,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot29-color1",
+      "pair": 29,
+      "fixture_id": "frame10-prefix-29",
+      "candidate_color": 1,
+      "layer_ply": 13,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot30-color2",
+      "pair": 30,
+      "fixture_id": "frame10-prefix-30",
+      "candidate_color": 2,
+      "layer_ply": 5,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot30-color1",
+      "pair": 30,
+      "fixture_id": "frame10-prefix-30",
+      "candidate_color": 1,
+      "layer_ply": 5,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot31-color2",
+      "pair": 31,
+      "fixture_id": "frame10-prefix-31",
+      "candidate_color": 2,
+      "layer_ply": 12,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot31-color1",
+      "pair": 31,
+      "fixture_id": "frame10-prefix-31",
+      "candidate_color": 1,
+      "layer_ply": 12,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot32-color2",
+      "pair": 32,
+      "fixture_id": "frame10-prefix-32",
+      "candidate_color": 2,
+      "layer_ply": 4,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    },
+    {
+      "id": "slot32-color1",
+      "pair": 32,
+      "fixture_id": "frame10-prefix-32",
+      "candidate_color": 1,
+      "layer_ply": 4,
+      "run": null,
+      "status": "unstarted",
+      "category": "unstarted",
+      "operational_interval": [
+        0,
+        1
+      ],
+      "terminal_quality_interval": [
+        0,
+        1
+      ],
+      "normal_terminal_score": null,
+      "winner": null,
+      "reason": null,
+      "new_public_plies": 0,
+      "initial_prefix_length": null,
+      "total_ply": null,
+      "start_ms": null,
+      "end_ms": null,
+      "public_count": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "adopted_completed_backup": 0,
+      "adopted_NN": 0,
+      "typed_flags": []
+    }
+  ],
+  "pairs": [
+    {
+      "pair": 1,
+      "layer_ply": 12,
+      "operational_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "normal_scores": [
+        null,
+        null
+      ],
+      "physical_side_winners": [
+        null,
+        null
+      ],
+      "pattern": "unknown",
+      "game_ids": [
+        "slot01-color1",
+        "slot01-color2"
+      ]
+    },
+    {
+      "pair": 2,
+      "layer_ply": 4,
+      "operational_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "normal_scores": [
+        null,
+        null
+      ],
+      "physical_side_winners": [
+        null,
+        null
+      ],
+      "pattern": "unknown",
+      "game_ids": [
+        "slot02-color1",
+        "slot02-color2"
+      ]
+    },
+    {
+      "pair": 3,
+      "layer_ply": 13,
+      "operational_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "normal_scores": [
+        null,
+        null
+      ],
+      "physical_side_winners": [
+        null,
+        null
+      ],
+      "pattern": "unknown",
+      "game_ids": [
+        "slot03-color1",
+        "slot03-color2"
+      ]
+    },
+    {
+      "pair": 4,
+      "layer_ply": 5,
+      "operational_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "normal_scores": [
+        null,
+        null
+      ],
+      "physical_side_winners": [
+        null,
+        null
+      ],
+      "pattern": "unknown",
+      "game_ids": [
+        "slot04-color1",
+        "slot04-color2"
+      ]
+    },
+    {
+      "pair": 5,
+      "layer_ply": 5,
+      "operational_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "normal_scores": [
+        null,
+        null
+      ],
+      "physical_side_winners": [
+        null,
+        null
+      ],
+      "pattern": "unknown",
+      "game_ids": [
+        "slot05-color2",
+        "slot05-color1"
+      ]
+    },
+    {
+      "pair": 6,
+      "layer_ply": 13,
+      "operational_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "normal_scores": [
+        null,
+        null
+      ],
+      "physical_side_winners": [
+        null,
+        null
+      ],
+      "pattern": "unknown",
+      "game_ids": [
+        "slot06-color2",
+        "slot06-color1"
+      ]
+    },
+    {
+      "pair": 7,
+      "layer_ply": 4,
+      "operational_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "normal_scores": [
+        null,
+        null
+      ],
+      "physical_side_winners": [
+        null,
+        null
+      ],
+      "pattern": "unknown",
+      "game_ids": [
+        "slot07-color2",
+        "slot07-color1"
+      ]
+    },
+    {
+      "pair": 8,
+      "layer_ply": 12,
+      "operational_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "normal_scores": [
+        null,
+        null
+      ],
+      "physical_side_winners": [
+        null,
+        null
+      ],
+      "pattern": "unknown",
+      "game_ids": [
+        "slot08-color2",
+        "slot08-color1"
+      ]
+    },
+    {
+      "pair": 9,
+      "layer_ply": 13,
+      "operational_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "normal_scores": [
+        null,
+        null
+      ],
+      "physical_side_winners": [
+        null,
+        null
+      ],
+      "pattern": "unknown",
+      "game_ids": [
+        "slot09-color1",
+        "slot09-color2"
+      ]
+    },
+    {
+      "pair": 10,
+      "layer_ply": 5,
+      "operational_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "normal_scores": [
+        null,
+        null
+      ],
+      "physical_side_winners": [
+        null,
+        null
+      ],
+      "pattern": "unknown",
+      "game_ids": [
+        "slot10-color1",
+        "slot10-color2"
+      ]
+    },
+    {
+      "pair": 11,
+      "layer_ply": 4,
+      "operational_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "normal_scores": [
+        null,
+        null
+      ],
+      "physical_side_winners": [
+        null,
+        null
+      ],
+      "pattern": "unknown",
+      "game_ids": [
+        "slot11-color1",
+        "slot11-color2"
+      ]
+    },
+    {
+      "pair": 12,
+      "layer_ply": 12,
+      "operational_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "normal_scores": [
+        null,
+        null
+      ],
+      "physical_side_winners": [
+        null,
+        null
+      ],
+      "pattern": "unknown",
+      "game_ids": [
+        "slot12-color1",
+        "slot12-color2"
+      ]
+    },
+    {
+      "pair": 13,
+      "layer_ply": 5,
+      "operational_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "normal_scores": [
+        null,
+        null
+      ],
+      "physical_side_winners": [
+        null,
+        null
+      ],
+      "pattern": "unknown",
+      "game_ids": [
+        "slot13-color2",
+        "slot13-color1"
+      ]
+    },
+    {
+      "pair": 14,
+      "layer_ply": 13,
+      "operational_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "normal_scores": [
+        null,
+        null
+      ],
+      "physical_side_winners": [
+        null,
+        null
+      ],
+      "pattern": "unknown",
+      "game_ids": [
+        "slot14-color2",
+        "slot14-color1"
+      ]
+    },
+    {
+      "pair": 15,
+      "layer_ply": 4,
+      "operational_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "normal_scores": [
+        null,
+        null
+      ],
+      "physical_side_winners": [
+        null,
+        null
+      ],
+      "pattern": "unknown",
+      "game_ids": [
+        "slot15-color2",
+        "slot15-color1"
+      ]
+    },
+    {
+      "pair": 16,
+      "layer_ply": 12,
+      "operational_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "normal_scores": [
+        null,
+        null
+      ],
+      "physical_side_winners": [
+        null,
+        null
+      ],
+      "pattern": "unknown",
+      "game_ids": [
+        "slot16-color2",
+        "slot16-color1"
+      ]
+    },
+    {
+      "pair": 17,
+      "layer_ply": 5,
+      "operational_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "normal_scores": [
+        null,
+        null
+      ],
+      "physical_side_winners": [
+        null,
+        null
+      ],
+      "pattern": "unknown",
+      "game_ids": [
+        "slot17-color1",
+        "slot17-color2"
+      ]
+    },
+    {
+      "pair": 18,
+      "layer_ply": 13,
+      "operational_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "normal_scores": [
+        null,
+        null
+      ],
+      "physical_side_winners": [
+        null,
+        null
+      ],
+      "pattern": "unknown",
+      "game_ids": [
+        "slot18-color1",
+        "slot18-color2"
+      ]
+    },
+    {
+      "pair": 19,
+      "layer_ply": 12,
+      "operational_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "normal_scores": [
+        null,
+        null
+      ],
+      "physical_side_winners": [
+        null,
+        null
+      ],
+      "pattern": "unknown",
+      "game_ids": [
+        "slot19-color1",
+        "slot19-color2"
+      ]
+    },
+    {
+      "pair": 20,
+      "layer_ply": 4,
+      "operational_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "normal_scores": [
+        null,
+        null
+      ],
+      "physical_side_winners": [
+        null,
+        null
+      ],
+      "pattern": "unknown",
+      "game_ids": [
+        "slot20-color1",
+        "slot20-color2"
+      ]
+    },
+    {
+      "pair": 21,
+      "layer_ply": 4,
+      "operational_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "normal_scores": [
+        null,
+        null
+      ],
+      "physical_side_winners": [
+        null,
+        null
+      ],
+      "pattern": "unknown",
+      "game_ids": [
+        "slot21-color2",
+        "slot21-color1"
+      ]
+    },
+    {
+      "pair": 22,
+      "layer_ply": 12,
+      "operational_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "normal_scores": [
+        null,
+        null
+      ],
+      "physical_side_winners": [
+        null,
+        null
+      ],
+      "pattern": "unknown",
+      "game_ids": [
+        "slot22-color2",
+        "slot22-color1"
+      ]
+    },
+    {
+      "pair": 23,
+      "layer_ply": 13,
+      "operational_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "normal_scores": [
+        null,
+        null
+      ],
+      "physical_side_winners": [
+        null,
+        null
+      ],
+      "pattern": "unknown",
+      "game_ids": [
+        "slot23-color2",
+        "slot23-color1"
+      ]
+    },
+    {
+      "pair": 24,
+      "layer_ply": 5,
+      "operational_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "normal_scores": [
+        null,
+        null
+      ],
+      "physical_side_winners": [
+        null,
+        null
+      ],
+      "pattern": "unknown",
+      "game_ids": [
+        "slot24-color2",
+        "slot24-color1"
+      ]
+    },
+    {
+      "pair": 25,
+      "layer_ply": 5,
+      "operational_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "normal_scores": [
+        null,
+        null
+      ],
+      "physical_side_winners": [
+        null,
+        null
+      ],
+      "pattern": "unknown",
+      "game_ids": [
+        "slot25-color1",
+        "slot25-color2"
+      ]
+    },
+    {
+      "pair": 26,
+      "layer_ply": 4,
+      "operational_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "normal_scores": [
+        null,
+        null
+      ],
+      "physical_side_winners": [
+        null,
+        null
+      ],
+      "pattern": "unknown",
+      "game_ids": [
+        "slot26-color1",
+        "slot26-color2"
+      ]
+    },
+    {
+      "pair": 27,
+      "layer_ply": 13,
+      "operational_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "normal_scores": [
+        null,
+        null
+      ],
+      "physical_side_winners": [
+        null,
+        null
+      ],
+      "pattern": "unknown",
+      "game_ids": [
+        "slot27-color1",
+        "slot27-color2"
+      ]
+    },
+    {
+      "pair": 28,
+      "layer_ply": 12,
+      "operational_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "normal_scores": [
+        null,
+        null
+      ],
+      "physical_side_winners": [
+        null,
+        null
+      ],
+      "pattern": "unknown",
+      "game_ids": [
+        "slot28-color1",
+        "slot28-color2"
+      ]
+    },
+    {
+      "pair": 29,
+      "layer_ply": 13,
+      "operational_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "normal_scores": [
+        null,
+        null
+      ],
+      "physical_side_winners": [
+        null,
+        null
+      ],
+      "pattern": "unknown",
+      "game_ids": [
+        "slot29-color2",
+        "slot29-color1"
+      ]
+    },
+    {
+      "pair": 30,
+      "layer_ply": 5,
+      "operational_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "normal_scores": [
+        null,
+        null
+      ],
+      "physical_side_winners": [
+        null,
+        null
+      ],
+      "pattern": "unknown",
+      "game_ids": [
+        "slot30-color2",
+        "slot30-color1"
+      ]
+    },
+    {
+      "pair": 31,
+      "layer_ply": 12,
+      "operational_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "normal_scores": [
+        null,
+        null
+      ],
+      "physical_side_winners": [
+        null,
+        null
+      ],
+      "pattern": "unknown",
+      "game_ids": [
+        "slot31-color2",
+        "slot31-color1"
+      ]
+    },
+    {
+      "pair": 32,
+      "layer_ply": 4,
+      "operational_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "terminal_quality_Xi_interval": [
+        0.0,
+        1.0
+      ],
+      "normal_scores": [
+        null,
+        null
+      ],
+      "physical_side_winners": [
+        null,
+        null
+      ],
+      "pattern": "unknown",
+      "game_ids": [
+        "slot32-color2",
+        "slot32-color1"
+      ]
+    }
+  ],
+  "first_roots_sameinput": [
+    {
+      "pair": 1,
+      "observed": 0,
+      "same_input_NN_supported": false
+    },
+    {
+      "pair": 2,
+      "observed": 0,
+      "same_input_NN_supported": false
+    },
+    {
+      "pair": 3,
+      "observed": 0,
+      "same_input_NN_supported": false
+    },
+    {
+      "pair": 4,
+      "observed": 0,
+      "same_input_NN_supported": false
+    },
+    {
+      "pair": 5,
+      "observed": 0,
+      "same_input_NN_supported": false
+    },
+    {
+      "pair": 6,
+      "observed": 0,
+      "same_input_NN_supported": false
+    },
+    {
+      "pair": 7,
+      "observed": 0,
+      "same_input_NN_supported": false
+    },
+    {
+      "pair": 8,
+      "observed": 0,
+      "same_input_NN_supported": false
+    },
+    {
+      "pair": 9,
+      "observed": 0,
+      "same_input_NN_supported": false
+    },
+    {
+      "pair": 10,
+      "observed": 0,
+      "same_input_NN_supported": false
+    },
+    {
+      "pair": 11,
+      "observed": 0,
+      "same_input_NN_supported": false
+    },
+    {
+      "pair": 12,
+      "observed": 0,
+      "same_input_NN_supported": false
+    },
+    {
+      "pair": 13,
+      "observed": 0,
+      "same_input_NN_supported": false
+    },
+    {
+      "pair": 14,
+      "observed": 0,
+      "same_input_NN_supported": false
+    },
+    {
+      "pair": 15,
+      "observed": 0,
+      "same_input_NN_supported": false
+    },
+    {
+      "pair": 16,
+      "observed": 0,
+      "same_input_NN_supported": false
+    },
+    {
+      "pair": 17,
+      "observed": 0,
+      "same_input_NN_supported": false
+    },
+    {
+      "pair": 18,
+      "observed": 0,
+      "same_input_NN_supported": false
+    },
+    {
+      "pair": 19,
+      "observed": 0,
+      "same_input_NN_supported": false
+    },
+    {
+      "pair": 20,
+      "observed": 0,
+      "same_input_NN_supported": false
+    },
+    {
+      "pair": 21,
+      "observed": 0,
+      "same_input_NN_supported": false
+    },
+    {
+      "pair": 22,
+      "observed": 0,
+      "same_input_NN_supported": false
+    },
+    {
+      "pair": 23,
+      "observed": 0,
+      "same_input_NN_supported": false
+    },
+    {
+      "pair": 24,
+      "observed": 0,
+      "same_input_NN_supported": false
+    },
+    {
+      "pair": 25,
+      "observed": 0,
+      "same_input_NN_supported": false
+    },
+    {
+      "pair": 26,
+      "observed": 0,
+      "same_input_NN_supported": false
+    },
+    {
+      "pair": 27,
+      "observed": 0,
+      "same_input_NN_supported": false
+    },
+    {
+      "pair": 28,
+      "observed": 0,
+      "same_input_NN_supported": false
+    },
+    {
+      "pair": 29,
+      "observed": 0,
+      "same_input_NN_supported": false
+    },
+    {
+      "pair": 30,
+      "observed": 0,
+      "same_input_NN_supported": false
+    },
+    {
+      "pair": 31,
+      "observed": 0,
+      "same_input_NN_supported": false
+    },
+    {
+      "pair": 32,
+      "observed": 0,
+      "same_input_NN_supported": false
+    }
+  ],
+  "engine_cost": {
+    "candidate": {
+      "requests": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "saved_API_events": 0,
+      "old_return_discarded": 0,
+      "adopted_backup": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "max": null,
+        "sum": null
+      },
+      "adopted_NN": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "max": null,
+        "sum": null
+      },
+      "firstCP_backup": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "max": null,
+        "sum": null
+      },
+      "public_wall_ms": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "max": null,
+        "sum": null
+      },
+      "API_await_ms": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "max": null,
+        "sum": null
+      },
+      "self_wait_ms": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "max": null,
+        "sum": null
+      },
+      "ACK_wall_ms": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "max": null,
+        "sum": null
+      },
+      "residual_overlap_wall_ms": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "max": null,
+        "sum": null
+      },
+      "terminal_noNN_direct_count": null,
+      "completed_without_NN_derived": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "max": null,
+        "sum": null
+      },
+      "terminal_caps_deep_states_not_separated": true,
+      "CPU_kernel_NN_time_not_measured": true,
+      "after_public_new_API_definite": 0,
+      "public_immutable_all": true
+    },
+    "reference": {
+      "requests": 0,
+      "hand_API_started": 0,
+      "hand_API_returned": 0,
+      "saved_API_events": 0,
+      "old_return_discarded": 0,
+      "adopted_backup": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "max": null,
+        "sum": null
+      },
+      "adopted_NN": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "max": null,
+        "sum": null
+      },
+      "firstCP_backup": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "max": null,
+        "sum": null
+      },
+      "public_wall_ms": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "max": null,
+        "sum": null
+      },
+      "API_await_ms": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "max": null,
+        "sum": null
+      },
+      "self_wait_ms": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "max": null,
+        "sum": null
+      },
+      "ACK_wall_ms": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "max": null,
+        "sum": null
+      },
+      "residual_overlap_wall_ms": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "max": null,
+        "sum": null
+      },
+      "terminal_noNN_direct_count": null,
+      "completed_without_NN_derived": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "max": null,
+        "sum": null
+      },
+      "terminal_caps_deep_states_not_separated": true,
+      "CPU_kernel_NN_time_not_measured": true,
+      "after_public_new_API_definite": 0,
+      "public_immutable_all": true
+    }
+  },
+  "startup_NN": 6,
+  "sessions": 2,
+  "jobs": [
+    {
+      "run": "gap149-group01-r1",
+      "startup_NN": 6,
+      "started_games": null,
+      "publics": 0,
+      "primary": null,
+      "secondary": null
+    }
+  ],
+  "raw_bindings": [
+    {
+      "run": "gap149-group01-r1",
+      "archive_SHA256": "f57accf77ef24caafd31f2a3ee2644089f77ca9a282c807202a45583deed5749",
+      "member": "runs/gap149-group01-r1/failure-attempts.json",
+      "member_SHA256": "f7b5c4dbcc9308a070e0f1f808b742c25cb6348d218de78efcaf3bbcf0ad3135"
+    }
+  ],
+  "old_WDL_mixed": false,
+  "policy_changed": false,
+  "NI_or_Sigma_equivalence": false,
+  "interim_not_used_for_stop": true
+}

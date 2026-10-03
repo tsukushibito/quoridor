@@ -23,6 +23,7 @@ async function main() {
   try {
     await monitor.start();monitor.check();
     browser=await require('./browser.cjs').open(directory,config);
+    await browser.page.exposeFunction('saveFinishedGame',data=>{if(!config.games.some(g=>g.id===data.game.id))throw Error('UNREGISTERED_GAME_SAVE');save('completed-game-'+data.game.id,data);});
     save('browser-preflight',await browser.page.evaluate(()=>browserPreflight()));
     save('browser-rules-mock',await browser.page.evaluate(()=>browserRulesMock()));
     save('149-glue-mock',await browser.page.evaluate(({config,fixtures})=>gapMock(config,fixtures),{config,fixtures}));
@@ -63,7 +64,7 @@ async function main() {
     }
   } catch(error) {
     primary={name:error.name,message:error.message,stack:error.stack};save('primary',primary);
-    if(browser)try{const partial=await browser.page.evaluate(()=>collectBrowser());rows=partial.rows;gameResult=partial;save('partial-browser-result',partial);}catch(error){secondary.push({stage:'partial-collect',message:error.message});}
+    if(browser)try{const partial=await browser.page.evaluate(()=>gapCollectForSave());rows=partial.rows;gameResult=partial;save('partial-browser-result',partial);}catch(error){secondary.push({stage:'partial-collect',message:error.message});}
   } finally {
     if(observerTimer){clearInterval(observerTimer);observerTimer=null;}
     if(observerPromise)await observerPromise;

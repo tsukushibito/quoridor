@@ -24,5 +24,11 @@ if not result.exists():result=result.with_name('partial-browser-result.json')
 if result.exists():
  d=json.loads(result.read_text());count={'issue':'quoridor-4lc.149','run':run,'started_games':d.get('started_games',0),'games':[{'id':g['id'],'status':g['status'],'reason':g['reason'],'winner':g['winner']} for g in d.get('games',[])],'result_member':str(result.relative_to(out)),'result_SHA256':hashlib.sha256(result.read_bytes()).hexdigest(),'archive':str(archive),'archive_SHA256':manifest['archive_SHA256']}
  (runs/(run+'.game-count.json')).write_text(json.dumps(count,indent=2)+'\n')
+else:
+ c=json.loads((out/'configs'/(run+'.json')).read_text())
+ if c.get('games'):
+  fail_path=runs/run/'failure-attempts.json';assert fail_path.exists(),'START_AND_RESULT_UNKNOWN_WITHOUT_RECORD'
+  fail=json.loads(fail_path.read_text());count={'issue':'quoridor-4lc.149','run':run,'started_games':fail['possibly_started_upper'],'started_games_exact':None,'started_count_is_conservative_upper':True,'games':[{'id':g['id'],'status':'unknown_start_result','reason':'outer_Node_OOM','winner':None} for g in c['games']],'archive':str(archive),'archive_SHA256':manifest['archive_SHA256']}
+  (runs/(run+'.game-count.json')).write_text(json.dumps(count,indent=2)+'\n')
 # Rotation is a separate post-Git action; preservation/restoration must precede removal.
 print(json.dumps({'run':run,'members':len(files),'archive_bytes':archive.stat().st_size,'SHA256':manifest['archive_SHA256'],'stream_restored':True,'working_raw_removed':False}))

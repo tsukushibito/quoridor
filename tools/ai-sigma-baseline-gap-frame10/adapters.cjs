@@ -11,8 +11,9 @@ function script(name){
  if(name==='main'){
   s=change(s,'collectedGames.push(game);startedGames++;','game.start_ms=epochMain();collectedGames.push(game);startedGames++;');
   s=change(s,"game.final_key=state._positionKey();game.total_ply=state.depth;","game.final_key=state._positionKey();game.total_ply=state.depth;game.end_ms=epochMain();");
+  s=change(s,'return collectBrowser();','return gapCollectForSave();');
   s=change(s,'let state=referenceState(fixture);','let state=diversePrefixState(fixture);');
-  s=change(s,"await settlePlayerSearches();\n    if(game.status==='unfinished')break;","await settlePlayerSearches();\n    await validateAfterProgression();\n    if(game.status==='unfinished')break;");
+  s=change(s,"await settlePlayerSearches();\n    if(game.status==='unfinished')break;","await settlePlayerSearches();\n    await validateAfterProgression();\n    if(typeof window.saveFinishedGame!==\'function\')throw Error(\'POSTGAME_SAVE_ENTRY_MISSING\');\n    await window.saveFinishedGame({game,rows:collectedRows.filter(r=>r.spec.game_id===game.id)});\n    if(game.status==='unfinished')break;");
   // Restore histories through actual legal actions; classify shared faults before engine loss.
   s=change(s,"if(!diagnostic?.numeric?.length)throw Error('ROOT_NUMERIC_MISSING');\n    row.gate=BrowserNumeric.check({engine:row.spec.engine,state,numeric:diagnostic.numeric[0],cp:diagnostic.validated_cp,reference});","if(!diagnostic?.numeric?.length){row.gate={missing:'ROOT_NUMERIC_MISSING',typed_classification:row.response.classification};if(row.response.classification==='completed_legal')throw Error('ROOT_NUMERIC_MISSING');}else row.gate=BrowserNumeric.check({engine:row.spec.engine,state,numeric:diagnostic.numeric[0],cp:diagnostic.validated_cp,reference});");
   s+='\n'+fs.readFileSync(__dirname+'/input.js','utf8')+'\n'+fs.readFileSync(__dirname+'/main.js','utf8');
