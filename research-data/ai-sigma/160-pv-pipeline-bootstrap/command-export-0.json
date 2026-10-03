@@ -1,0 +1,26 @@
+{
+  "run": "export-0",
+  "command": [
+    "taskset",
+    "-c",
+    "0",
+    "python3",
+    "tools/ai-sigma-pv-pipeline-bootstrap/bootstrap.py",
+    "export"
+  ],
+  "start_epoch": 1790997216.2709105,
+  "end_epoch": 1790997217.0369735,
+  "elapsed_seconds": 0.7660632133483887,
+  "returncode": 0,
+  "stdout": "{\"rows\": 5, \"groups\": 5, \"train\": 4, \"validation\": 1, \"command\": \"export\", \"start_UTC\": 1790997216.2965956, \"end_UTC\": 1790997217.031767, \"peak_RSS_KiB\": 71152, \"new_NN\": 0, \"new_training\": 0}\n",
+  "stderr": "",
+  "identity": {
+    "pid": 3093008,
+    "starttick": "25014722",
+    "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "own_wait_completed": true,
+  "new_NN": 0,
+  "source_sha256": "f53d90620cdc106660880671364cca1f190d09299ada46346825028e9edf3cd7",
+  "children_peak_RSS_KiB": 71152
+}

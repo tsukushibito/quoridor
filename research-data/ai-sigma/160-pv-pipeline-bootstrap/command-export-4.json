@@ -1,0 +1,26 @@
+{
+  "run": "export-4",
+  "command": [
+    "taskset",
+    "-c",
+    "0",
+    "python3",
+    "tools/ai-sigma-pv-pipeline-bootstrap/bootstrap.py",
+    "export"
+  ],
+  "start_epoch": 1790997308.9210458,
+  "end_epoch": 1790997309.1508656,
+  "elapsed_seconds": 0.22982025146484375,
+  "returncode": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-pv-pipeline-bootstrap/bootstrap.py\", line 163, in <module>\n    if __name__=='__main__': main()\n                             ^^^^^^\n  File \"/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-pv-pipeline-bootstrap/bootstrap.py\", line 156, in main\n    if args.command=='export': out=export()\n                                   ^^^^^^^^\n  File \"/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-pv-pipeline-bootstrap/bootstrap.py\", line 113, in export\n    assert n['history']==f['history_counts']\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+  "identity": {
+    "pid": 3094873,
+    "starttick": "25023992",
+    "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "own_wait_completed": true,
+  "new_NN": 0,
+  "source_sha256": "1746911332a51110ec516739c02fa74d08185e33ab1605d9a1c5802ef182d3ae",
+  "children_peak_RSS_KiB": 53948
+}

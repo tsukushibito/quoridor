@@ -1,0 +1,26 @@
+{
+  "run": "export-2",
+  "command": [
+    "taskset",
+    "-c",
+    "0",
+    "python3",
+    "tools/ai-sigma-pv-pipeline-bootstrap/bootstrap.py",
+    "export"
+  ],
+  "start_epoch": 1790997290.9633658,
+  "end_epoch": 1790997291.1956446,
+  "elapsed_seconds": 0.23227882385253906,
+  "returncode": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-pv-pipeline-bootstrap/bootstrap.py\", line 161, in <module>\n    if __name__=='__main__': main()\n                             ^^^^^^\n  File \"/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-pv-pipeline-bootstrap/bootstrap.py\", line 154, in main\n    if args.command=='export': out=export()\n                                   ^^^^^^^^\n  File \"/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-pv-pipeline-bootstrap/bootstrap.py\", line 115, in export\n    assert sorted(legal)==sorted(f.get('legal_actions',f.get('legal_ids')))\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: '<' not supported between instances of 'dict' and 'dict'\n",
+  "identity": {
+    "pid": 3094562,
+    "starttick": "25022196",
+    "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "own_wait_completed": true,
+  "new_NN": 0,
+  "source_sha256": "72d6144bcc90ed4e23e2719ca83b375b005a545035a8a80af60eb57aa34f2b50",
+  "children_peak_RSS_KiB": 51260
+}
