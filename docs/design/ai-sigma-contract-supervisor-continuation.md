@@ -1,4 +1,4 @@
-# 継続枠・運用監督 / quoridor-4lc.40 / 契約8
+# 継続枠・運用監督 / quoridor-4lc.40 / 契約9
 
 現行[継続枠](ai-sigma-continuation-20261001.md)と[研究規約](../development/ai-research-experiments.md)を継承。担当supervisor 01a0f6b5-b1bd-7752-b0bb-74a336e459a4、報告coordinator。20分周期/turn180秒、CPU affinity[0]/1thread/RAM1GiB/既新32MiB、他セッション数による入場・報告制限なし。観測・自己notes/reportのみ、NN/取得/build/worker起動/委譲/他者kill/配分/config編集0。
 
@@ -12,4 +12,4 @@
 
 意味のある評価・配分見直しがない変化なしは保存だけ。意味のある停滞/障害/期限資源/成果・引渡しに加え、契約・運用の改善提案と重要な未解決見解差、節目の振り返りで意味のある評価・配分見直しが得られた場合も統括へ通知する。停滞や障害の顕在化を改善提案の条件にしない。acceptedと恒久適用/whole-turn遵守/研究成功を区別、応答不明の盲目再送0。実developer本文読戻し非対応を研究成功の条件にしない。
 
-親現行枠版9の重job23:10:59UTC/監督23:15:59/monitor23:18:59/終了23:20:59を維持。scheduler/monitorは既steward ownerが回収し、監督停止だけで外部NN停止を認定しない。ユーザーpause/guardを尊重し自動延長しない。自.40は運用終了受入れまでcloseせず、goalをcloseしない。旧期限/失敗/32局・未達と旧run結果は書換えない。版/run/必要ログをGit等で追跡し、許可範囲/総予算内の新run再現を旧終了窓の遡及変更と混同しない。
+親現行枠版10の重job04:05:21UTC/監督04:10:21/monitor04:13:21/終了04:15:21を維持。scheduler/monitorは既steward ownerが回収し、監督停止だけで外部NN停止を認定しない。ユーザーpause/guardを尊重し自動延長しない。自.40は運用終了受入れまでcloseせず、goalをcloseしない。旧期限/失敗/32局・未達と旧run結果は書換えない。版/run/必要ログをGit等で追跡し、許可範囲/総予算内の新run再現を旧終了窓の遡及変更と混同しない。

@@ -262,6 +262,9 @@ class Engine:
             self.save()
             return False
         self.state["owned"] = None
+        error = found.get("error") or {}
+        if found["status"] == "failed" and error.get("codexErrorInfo") == "usageLimitExceeded":
+            self.state["fatal_dispatch_error"] = {"turn_id": found["id"], "error": error}
         self.record("owned_turn_finished", turn_id=found["id"], status=found["status"])
         return True
 
@@ -307,6 +310,9 @@ class Engine:
         async with connection as server:
             with team.dispatch_lock(self.root):
                 ready = await self.reconcile(server)
+                if self.state.get("fatal_dispatch_error"):
+                    self.record("stopped", reason="usageLimitExceeded", error=self.state["fatal_dispatch_error"])
+                    return False
                 if reason or interrupt or expired:
                     if self.state.get("owned"):
                         await self.interrupt_owned(server)
@@ -333,7 +339,13 @@ class Engine:
                 if target["status"]["type"] == "notLoaded":
                     await server.request("thread/resume", {"threadId": c["thread_id"], "excludeTurns": True})
                     target = await server.read_thread(c["thread_id"])
-                if target["status"]["type"] != "idle":
+                if target["status"]["type"] == "systemError":
+                    previous = await server.turns(c["thread_id"], limit=1)
+                    if not previous or previous[0].get("status") != "failed":
+                        self.record("skipped", reason="target_error_without_terminal_turn")
+                        return True
+                    self.record("terminal_error_admission", previous_turn_id=previous[0]["id"])
+                elif target["status"]["type"] != "idle":
                     self.record("skipped", reason="target_not_idle")
                     return True
                 reason = "deadline" if self.now() >= c["end"] else await self.issue_stop()

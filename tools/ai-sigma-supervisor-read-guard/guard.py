@@ -34,7 +34,7 @@ class ReadFailed(Rejected):
 GOAL = 'quoridor-4lc'
 SELF = 'quoridor-4lc.40'
 REPORT_RESERVE = 30
-OPERATION_END = dt.datetime(2026, 10, 2, 23, 15, 59, tzinfo=UTC)
+OPERATION_END = dt.datetime(2026, 10, 3, 4, 10, 21, tzinfo=UTC)
 
 def utc_now():
     return dt.datetime.now(UTC)
