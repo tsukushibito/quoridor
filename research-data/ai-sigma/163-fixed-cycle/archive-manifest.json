@@ -1,0 +1,553 @@
+{
+  "issue": "quoridor-4lc.163",
+  "sha256": "1395421befb095ca593755e51e52347eb5dc60264abf571a1e9d2f47f4338d6e",
+  "size": 1194487,
+  "members": [
+    {
+      "name": "claim.json",
+      "size": 69,
+      "sha256": "3171206c3631472e4e10f81cc966f73cc24386def4487ab199a8587f3aa2647a"
+    },
+    {
+      "name": "control-mock.log",
+      "size": 427,
+      "sha256": "3c90f56a6f154c17d2688fd8834522fc8ff8dcdbc90042da77abfbbf36841e0a"
+    },
+    {
+      "name": "goal.json",
+      "size": 212942,
+      "sha256": "373fd2bbd67bb3744dd7d7fba03919c593febb97f7157644e9ee2e6c4753aeca"
+    },
+    {
+      "name": "intake.json",
+      "size": 315,
+      "sha256": "5e70035ffdde29ae1d77ad1c8eec1862bcdba237858a9c81b191148a2593ae20"
+    },
+    {
+      "name": "mock-control/pause/pause-monitor-stop.json",
+      "size": 405,
+      "sha256": "5009f03199c87ccd23a70267aae8c9a943896f96e2cb1d9d790d2a80b1f33563"
+    },
+    {
+      "name": "mock-control/pause/pause-monitor.json",
+      "size": 318,
+      "sha256": "8f19819aeda115cb9a9f147ebcd0fdad637d31ac978ef195e1586a8817ae8bd5"
+    },
+    {
+      "name": "mock-control/read-error/pause-monitor-stop.json",
+      "size": 609,
+      "sha256": "3ac04b559afe7e0668b5f6dcd4615beb2e1e9135ebc6e8519118990eee3f011e"
+    },
+    {
+      "name": "mock-control/read-error/pause-monitor.json",
+      "size": 522,
+      "sha256": "8b53a027ea03581cbb6338c9f52589eb5fa321404955560547c9eaea2f594212"
+    },
+    {
+      "name": "mock-control/ready/beads-read-quoridor-4lc.163.json",
+      "size": 214762,
+      "sha256": "a1b2b8ec408ee637626d571342dbaff5d8fe2f022e11fbb7014fa9b476197423"
+    },
+    {
+      "name": "mock-control/ready/beads-read-quoridor-4lc.json",
+      "size": 213650,
+      "sha256": "3c84d89cb373f022b0b1b5425ca8f5c93f67fcece1d955ce4cd6d96e10e20e8d"
+    },
+    {
+      "name": "mock-control/ready/pause-monitor-stop.json",
+      "size": 1862,
+      "sha256": "f71e40c527949d3fd60f68590527fef264c0f3cd407b3af8e3f7849d593c633c"
+    },
+    {
+      "name": "mock-control/ready/pause-monitor.json",
+      "size": 1775,
+      "sha256": "079b6e58f6a47d9f92f1af8773ebb0448a3b73b4990576312ca3c2c7e531b1c2"
+    },
+    {
+      "name": "mock-control/unready/pause-monitor-stop.json",
+      "size": 408,
+      "sha256": "d9226a78771f20319b78625493506ef8d76706c1a8fe1d4ac410aa4296292f2f"
+    },
+    {
+      "name": "mock-control/unready/pause-monitor.json",
+      "size": 321,
+      "sha256": "8212eab85f46b3af9b660efef79751264e89401f7a91c03e7e1a602e15c8bf3e"
+    },
+    {
+      "name": "readonly151-main.js",
+      "size": 45356,
+      "sha256": "dd5c6c00a7dc949630b58d86aa964d7d5e5af594e30d2dd3851a92600f3a71d2"
+    },
+    {
+      "name": "ready.json",
+      "size": 1203,
+      "sha256": "5379aa1b8d55439c14023f20076f62514dc4964535aadb1d3a0883a96cf00876"
+    },
+    {
+      "name": "runs/cycle163-input0-r1/actual-served-source.json",
+      "size": 3998,
+      "sha256": "13736e39c25b08feadd142d7e469577c518ac1ed533ed967b420afe2bf64c943"
+    },
+    {
+      "name": "runs/cycle163-input0-r1/beads-read-quoridor-4lc.163.json",
+      "size": 214762,
+      "sha256": "a1b2b8ec408ee637626d571342dbaff5d8fe2f022e11fbb7014fa9b476197423"
+    },
+    {
+      "name": "runs/cycle163-input0-r1/beads-read-quoridor-4lc.json",
+      "size": 213650,
+      "sha256": "3c84d89cb373f022b0b1b5425ca8f5c93f67fcece1d955ce4cd6d96e10e20e8d"
+    },
+    {
+      "name": "runs/cycle163-input0-r1/browser-startup.json",
+      "size": 420,
+      "sha256": "7e046c29c4fcb4132947711f27e9cc6701ee2dcdd4a3707c4a50a16d0eccc5ef"
+    },
+    {
+      "name": "runs/cycle163-input0-r1/cleanup.jsonl",
+      "size": 5494,
+      "sha256": "bba4a65dc01c22a4b9f9879eb8fec3c5937fb815e42aaf1ad95069970120958c"
+    },
+    {
+      "name": "runs/cycle163-input0-r1/final-collect.json",
+      "size": 175,
+      "sha256": "6ac37a1159c3d2becaeff3c324a1c1b83fd5b534380e8ddd2294413992acf656"
+    },
+    {
+      "name": "runs/cycle163-input0-r1/main-timer-stop.json",
+      "size": 49,
+      "sha256": "7dcfee3d0f6d458c477d356171d6dc22abd316b5762d0543ac2166f996081ac1"
+    },
+    {
+      "name": "runs/cycle163-input0-r1/pause-monitor-stop.json",
+      "size": 3456,
+      "sha256": "5a1b4a6e38c15975ae37cb09e1919710953e6042d38bf17a1db8227f0328d9a7"
+    },
+    {
+      "name": "runs/cycle163-input0-r1/pause-monitor.json",
+      "size": 3369,
+      "sha256": "f5628ba2f9ecfd20e30f5a177586ed70f6f9e1ac0568b6e0c7f83c190a199b93"
+    },
+    {
+      "name": "runs/cycle163-input0-r1/preflight.json",
+      "size": 561,
+      "sha256": "d419e4acfb7ef0542263e876d2946d2fb1c063014c6f11222d21367dc4ead8b2"
+    },
+    {
+      "name": "runs/cycle163-input0-r1/rules-mock.json",
+      "size": 1179,
+      "sha256": "e65600320d6c47d5f4ea7d6139da2f0c20d4a3f450250152bcbcd4039b52056b"
+    },
+    {
+      "name": "runs/cycle163-input0-r1/settled.json",
+      "size": 10,
+      "sha256": "770c2d18aa4ec3159f46da461ef452972949942ff4f6a9771044485faa146398"
+    },
+    {
+      "name": "runs/cycle163-input0-r1/source-bindings.json",
+      "size": 3859,
+      "sha256": "facd354db0952d8c9a147412c6c65cff0d99467f31b48e60036dc0671212d2c7"
+    },
+    {
+      "name": "runs/cycle163-input0-r1/summary.json",
+      "size": 1476,
+      "sha256": "1cfeb51fa94d79fa4ec7a65c445682e2d81cdd150b6ed9195aba02cf016a3d2f"
+    },
+    {
+      "name": "runs/cycle163-input0-r1.admission.json",
+      "size": 3883,
+      "sha256": "18ab57ab0faa3f3f82190b4c4349dd5ab896313ed7e3e94e21fddcb85af5bb42"
+    },
+    {
+      "name": "runs/cycle163-input0-r1.inputs.json",
+      "size": 1586,
+      "sha256": "dece631f12f93471468eeaf4ecd4ee2c4a207f255c4a9e6693f2554f8fd94e36"
+    },
+    {
+      "name": "runs/cycle163-input0-r1.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/cycle163-input0-r1.manager-stop-request.json",
+      "size": 290,
+      "sha256": "62fdd4cee351540e24c391677fff459ab11367b045f9fb5443730edf9ad779f0"
+    },
+    {
+      "name": "runs/cycle163-input0-r1.monitor.jsonl",
+      "size": 1096465,
+      "sha256": "bd27e8f786e6fb40a39472a633d9316e4588fa57dbed41e5b33eec4527d512bc"
+    },
+    {
+      "name": "runs/cycle163-input0-r1.owned-ack.json",
+      "size": 18806,
+      "sha256": "1f7d21d67c921d2ef2a749f3f3c83d8cfec81150a1a836ef496e1aa31521aa12"
+    },
+    {
+      "name": "runs/cycle163-input0-r1.owned-ledger.jsonl",
+      "size": 5351,
+      "sha256": "b3d4bc76c94b9b7c77b52204d50178e6cd14f8b911b682b91b6e344c299d50a6"
+    },
+    {
+      "name": "runs/cycle163-input0-r1.process.json",
+      "size": 17014,
+      "sha256": "88ae12eb7d40176d1089ad3802bbe83330fc1c221515122caf4a3b1c23deae3e"
+    },
+    {
+      "name": "runs/cycle163-input0-r1.started.json",
+      "size": 1672,
+      "sha256": "0fb14751a079ff863f40805e61d6ffd8a218ebe83d49ecf701ec7b6181c1ca3a"
+    },
+    {
+      "name": "runs/cycle163-input0-r1.threads.json",
+      "size": 190,
+      "sha256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    {
+      "name": "runs/cycle163-input0-r2/actual-served-source.json",
+      "size": 4821,
+      "sha256": "ba00e36996c3da9948c94fce557487025337b10f752d97077a05199529d3ef60"
+    },
+    {
+      "name": "runs/cycle163-input0-r2/beads-read-quoridor-4lc.163.json",
+      "size": 214762,
+      "sha256": "a1b2b8ec408ee637626d571342dbaff5d8fe2f022e11fbb7014fa9b476197423"
+    },
+    {
+      "name": "runs/cycle163-input0-r2/beads-read-quoridor-4lc.json",
+      "size": 213650,
+      "sha256": "3c84d89cb373f022b0b1b5425ca8f5c93f67fcece1d955ce4cd6d96e10e20e8d"
+    },
+    {
+      "name": "runs/cycle163-input0-r2/browser-startup.json",
+      "size": 420,
+      "sha256": "7e046c29c4fcb4132947711f27e9cc6701ee2dcdd4a3707c4a50a16d0eccc5ef"
+    },
+    {
+      "name": "runs/cycle163-input0-r2/cleanup.jsonl",
+      "size": 15773,
+      "sha256": "ee12e264e68d20da7e380b96dfeeee4f9c98c977d4ef3932367ad5b7151afb65"
+    },
+    {
+      "name": "runs/cycle163-input0-r2/controlled-stop.json",
+      "size": 884,
+      "sha256": "5550730bc749e54968eefe6d8195243f4109d8373e6302049cd39494e57d5cbc"
+    },
+    {
+      "name": "runs/cycle163-input0-r2/final-collect.json",
+      "size": 503531,
+      "sha256": "a2334858e6ada71df7a28273de6db1b587a31de0f579c2bdcc43df35944928e4"
+    },
+    {
+      "name": "runs/cycle163-input0-r2/main-timer-stop.json",
+      "size": 49,
+      "sha256": "7dcfee3d0f6d458c477d356171d6dc22abd316b5762d0543ac2166f996081ac1"
+    },
+    {
+      "name": "runs/cycle163-input0-r2/model-drop.json",
+      "size": 453,
+      "sha256": "a95bcfa515304e46e829154c07bad651a390b348391c6c8aedf0335468e1a635"
+    },
+    {
+      "name": "runs/cycle163-input0-r2/model-load.json",
+      "size": 989,
+      "sha256": "decbd5ec9e723721cdb53cd29dc3ccba42316e97c6f240ddd2e2b9577540ee72"
+    },
+    {
+      "name": "runs/cycle163-input0-r2/pause-monitor-stop.json",
+      "size": 8208,
+      "sha256": "b0b857cc7c9f36684dc765d19c7644cc99426a321560e8fd113b8745ff3bc61b"
+    },
+    {
+      "name": "runs/cycle163-input0-r2/pause-monitor.json",
+      "size": 8121,
+      "sha256": "c3cf17b8954775030f2b9175c9039aa89af2a91afa5ff618ea91acbb34e9774d"
+    },
+    {
+      "name": "runs/cycle163-input0-r2/preflight.json",
+      "size": 561,
+      "sha256": "d419e4acfb7ef0542263e876d2946d2fb1c063014c6f11222d21367dc4ead8b2"
+    },
+    {
+      "name": "runs/cycle163-input0-r2/result.json",
+      "size": 503531,
+      "sha256": "a2334858e6ada71df7a28273de6db1b587a31de0f579c2bdcc43df35944928e4"
+    },
+    {
+      "name": "runs/cycle163-input0-r2/routing.json",
+      "size": 5322,
+      "sha256": "e6f10890d2f75b5fb7d248f312fa303816a3717bece26438d73ad62cc9dfc50f"
+    },
+    {
+      "name": "runs/cycle163-input0-r2/rules-mock.json",
+      "size": 1179,
+      "sha256": "e65600320d6c47d5f4ea7d6139da2f0c20d4a3f450250152bcbcd4039b52056b"
+    },
+    {
+      "name": "runs/cycle163-input0-r2/settled.json",
+      "size": 10,
+      "sha256": "770c2d18aa4ec3159f46da461ef452972949942ff4f6a9771044485faa146398"
+    },
+    {
+      "name": "runs/cycle163-input0-r2/source-bindings.json",
+      "size": 3859,
+      "sha256": "facd354db0952d8c9a147412c6c65cff0d99467f31b48e60036dc0671212d2c7"
+    },
+    {
+      "name": "runs/cycle163-input0-r2/startup.json",
+      "size": 3424,
+      "sha256": "ad1bc731851b739f493086367a546b34ab62d40186630b52442722b093249baf"
+    },
+    {
+      "name": "runs/cycle163-input0-r2/summary.json",
+      "size": 166,
+      "sha256": "46ac74bb8591d7b36b16093ec606b58d8345b36217278dac43f2ce5f2a0e3091"
+    },
+    {
+      "name": "runs/cycle163-input0-r2/terminated-worker.json",
+      "size": 67,
+      "sha256": "245f48c777d841c1966146a8216f2ffa369e4939145590428f825c2d2429e530"
+    },
+    {
+      "name": "runs/cycle163-input0-r2.admission.json",
+      "size": 3891,
+      "sha256": "ebcd3a42f30ebc4248fe91daa7785f94de89f1678cf47674a40ff2fded92fae6"
+    },
+    {
+      "name": "runs/cycle163-input0-r2.inputs.json",
+      "size": 1586,
+      "sha256": "4ce51f9664ccf4713c636ed3c0d87bd3a9831650fb40ccee72906c249d4a9827"
+    },
+    {
+      "name": "runs/cycle163-input0-r2.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/cycle163-input0-r2.monitor.jsonl",
+      "size": 322075,
+      "sha256": "3e1ed8bd3189bc044153809b3d8b6b8c12fa41649bbcddfc2f545e2714a52991"
+    },
+    {
+      "name": "runs/cycle163-input0-r2.owned-ack.json",
+      "size": 35506,
+      "sha256": "3af4cc20eb48a9bcdddb8dc476d8c65963baaada5fafd9e6a003b664652bec7f"
+    },
+    {
+      "name": "runs/cycle163-input0-r2.owned-ledger.jsonl",
+      "size": 7344,
+      "sha256": "16f2a4f5fcbe27aeb887757a316b2c0fdbd3be5ba357870b59f220bab6364bd8"
+    },
+    {
+      "name": "runs/cycle163-input0-r2.process.json",
+      "size": 30537,
+      "sha256": "ce6818fc9fccba2372a014cf7ea1da7c0760c6d690fc29b3c71e476027320239"
+    },
+    {
+      "name": "runs/cycle163-input0-r2.started.json",
+      "size": 1675,
+      "sha256": "a354d663d6d2eca85b3210ad6d42745058fd78c0fe6bd9eea12bae13a280d6be"
+    },
+    {
+      "name": "runs/cycle163-input0-r2.threads.json",
+      "size": 190,
+      "sha256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    {
+      "name": "runs/cycle163-input1-r1/actual-served-source.json",
+      "size": 4821,
+      "sha256": "ba00e36996c3da9948c94fce557487025337b10f752d97077a05199529d3ef60"
+    },
+    {
+      "name": "runs/cycle163-input1-r1/beads-read-quoridor-4lc.163.json",
+      "size": 214762,
+      "sha256": "a1b2b8ec408ee637626d571342dbaff5d8fe2f022e11fbb7014fa9b476197423"
+    },
+    {
+      "name": "runs/cycle163-input1-r1/beads-read-quoridor-4lc.json",
+      "size": 213650,
+      "sha256": "3c84d89cb373f022b0b1b5425ca8f5c93f67fcece1d955ce4cd6d96e10e20e8d"
+    },
+    {
+      "name": "runs/cycle163-input1-r1/browser-startup.json",
+      "size": 482,
+      "sha256": "15418945503ed77a4462c1bfbd361cd81c58ccc12841a19ad9d9a6b23fef22e6"
+    },
+    {
+      "name": "runs/cycle163-input1-r1/cleanup.jsonl",
+      "size": 20786,
+      "sha256": "6fe9df199a007b7721cf1cb5fe3b0395e7449b1ee515b0080ee3ee3fdae4719d"
+    },
+    {
+      "name": "runs/cycle163-input1-r1/controlled-stop.json",
+      "size": 757,
+      "sha256": "436259780e74ab868ff21a82dcf85f0c513ed5e05a55db4626be58500083d23d"
+    },
+    {
+      "name": "runs/cycle163-input1-r1/final-collect.json",
+      "size": 458166,
+      "sha256": "05cc80e50b0b2e5d32b70ad35b193f49bff77344627321e2d9ebfced863e58b4"
+    },
+    {
+      "name": "runs/cycle163-input1-r1/main-timer-stop.json",
+      "size": 49,
+      "sha256": "7dcfee3d0f6d458c477d356171d6dc22abd316b5762d0543ac2166f996081ac1"
+    },
+    {
+      "name": "runs/cycle163-input1-r1/model-drop.json",
+      "size": 453,
+      "sha256": "aeb24726ca1cea955666f2b0aa551c0949cf6886d4a8daae1b6abca1dd436105"
+    },
+    {
+      "name": "runs/cycle163-input1-r1/model-load.json",
+      "size": 989,
+      "sha256": "df7c8989f55fc559d51a534cd51881e6d16eac37b6ef1a696d605305d852ff75"
+    },
+    {
+      "name": "runs/cycle163-input1-r1/pause-monitor-stop.json",
+      "size": 9792,
+      "sha256": "345aa0d4a7ea5e78437218dd59be58af9b84a4be70afafefde4bd6a2626264f8"
+    },
+    {
+      "name": "runs/cycle163-input1-r1/pause-monitor.json",
+      "size": 9705,
+      "sha256": "82eefb76a82200ada128f960351693d6cded092c3bf70e77d21c6cdf2e7ce4b5"
+    },
+    {
+      "name": "runs/cycle163-input1-r1/preflight.json",
+      "size": 561,
+      "sha256": "d419e4acfb7ef0542263e876d2946d2fb1c063014c6f11222d21367dc4ead8b2"
+    },
+    {
+      "name": "runs/cycle163-input1-r1/result.json",
+      "size": 458166,
+      "sha256": "05cc80e50b0b2e5d32b70ad35b193f49bff77344627321e2d9ebfced863e58b4"
+    },
+    {
+      "name": "runs/cycle163-input1-r1/routing.json",
+      "size": 5322,
+      "sha256": "e6f10890d2f75b5fb7d248f312fa303816a3717bece26438d73ad62cc9dfc50f"
+    },
+    {
+      "name": "runs/cycle163-input1-r1/rules-mock.json",
+      "size": 1179,
+      "sha256": "e65600320d6c47d5f4ea7d6139da2f0c20d4a3f450250152bcbcd4039b52056b"
+    },
+    {
+      "name": "runs/cycle163-input1-r1/settled.json",
+      "size": 10,
+      "sha256": "770c2d18aa4ec3159f46da461ef452972949942ff4f6a9771044485faa146398"
+    },
+    {
+      "name": "runs/cycle163-input1-r1/source-bindings.json",
+      "size": 3859,
+      "sha256": "facd354db0952d8c9a147412c6c65cff0d99467f31b48e60036dc0671212d2c7"
+    },
+    {
+      "name": "runs/cycle163-input1-r1/startup.json",
+      "size": 3436,
+      "sha256": "1d8c198036f76cebcfbd1d082d339bb52f1f094e4424e9a12c070fd0e19fde73"
+    },
+    {
+      "name": "runs/cycle163-input1-r1/summary.json",
+      "size": 166,
+      "sha256": "7a32b702843ef30ebf0e4b0c7fdd91fd675e4409511313580987f65de9483cdc"
+    },
+    {
+      "name": "runs/cycle163-input1-r1/terminated-worker.json",
+      "size": 66,
+      "sha256": "254c10c0fc8e071e0c486ff3078411e1bad910f83c3cc1497e580eaab38313d3"
+    },
+    {
+      "name": "runs/cycle163-input1-r1.admission.json",
+      "size": 3891,
+      "sha256": "dbe7ff0d322ce8d5d4ae6840e97073981acf31453b64c35fc02fb69d4f1cee1d"
+    },
+    {
+      "name": "runs/cycle163-input1-r1.inputs.json",
+      "size": 1586,
+      "sha256": "4ce51f9664ccf4713c636ed3c0d87bd3a9831650fb40ccee72906c249d4a9827"
+    },
+    {
+      "name": "runs/cycle163-input1-r1.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/cycle163-input1-r1.monitor.jsonl",
+      "size": 384132,
+      "sha256": "992162f139b7619cb2408fb598f16c1e799bdf23d5e21e3cbb625a7f79781b31"
+    },
+    {
+      "name": "runs/cycle163-input1-r1.owned-ack.json",
+      "size": 40005,
+      "sha256": "db827c677ce3e02cc0685a5c67b5e1a7a3e16bd464685403f0ea87bb91151db1"
+    },
+    {
+      "name": "runs/cycle163-input1-r1.owned-ledger.jsonl",
+      "size": 7283,
+      "sha256": "2480afea27d2edc50941941551c25e3fb8286f3867424025a4e3267091e39bb8"
+    },
+    {
+      "name": "runs/cycle163-input1-r1.process.json",
+      "size": 33973,
+      "sha256": "48250f9dbcb1fd5cca1e29ea6813ab6a9d0cce1c4620046b4b8a13a196020db7"
+    },
+    {
+      "name": "runs/cycle163-input1-r1.started.json",
+      "size": 1672,
+      "sha256": "b297515e0d09dfc880eb07750286d4aae48821f1f6cb8935f8c20e1449ba2784"
+    },
+    {
+      "name": "runs/cycle163-input1-r1.threads.json",
+      "size": 190,
+      "sha256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    {
+      "name": "self.json",
+      "size": 213914,
+      "sha256": "100617e98a94526d1d24ff031b1e3890d7e5d817a5275882896734f1ca63255f"
+    },
+    {
+      "name": "start-receipt.json",
+      "size": 157,
+      "sha256": "9789dfff5a26e5e6ac02f387fd27901e6873ec441cb70a5bebbf213484a91bc0"
+    },
+    {
+      "name": "start-report.md",
+      "size": 639,
+      "sha256": "6430d40959f9d65e9cbe0ec400296931a4a13fc3057d437ba41835395db05adf"
+    },
+    {
+      "name": "static-attempt-error.json",
+      "size": 210,
+      "sha256": "512bac0df80971a6599b2899a42375f070e440859ca1a3e29f73787eb386df70"
+    },
+    {
+      "name": "static-monitor-r1-failure.json",
+      "size": 196,
+      "sha256": "c827dee4395e33ecb82cc292b9c8bacf22efa4e2d652270eaf4a2ede23d9bfcb"
+    },
+    {
+      "name": "stop-receipt.json",
+      "size": 157,
+      "sha256": "9789dfff5a26e5e6ac02f387fd27901e6873ec441cb70a5bebbf213484a91bc0"
+    },
+    {
+      "name": "stop-report.md",
+      "size": 1151,
+      "sha256": "7e48a722b1c109b6ed1a8354884851a29e70a9c8ec3cb840c6387fa2e5dd2690"
+    }
+  ],
+  "all_member_SHA_size_equal": true,
+  "finite_actual_extracts": [
+    "runs/cycle163-input0-r1/summary.json",
+    "runs/cycle163-input0-r1.process.json",
+    "runs/cycle163-input0-r2/result.json",
+    "runs/cycle163-input0-r2/summary.json",
+    "runs/cycle163-input0-r2.process.json"
+  ],
+  "source_models_dependencies_reference_only": true,
+  "original_failures_retained": true,
+  "original_raw_retained": true
+}
