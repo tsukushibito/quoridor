@@ -45,7 +45,7 @@
     "pairs": 600,
     "games": 1200
   },
-  "sampling": "entropy after frozen source; each proposal chooses target uniform[12,13,24,25,36,37,48,49]; class .5/.5 then uniform within; first suitable <=256 proposals; nonterminal walls>=2 distance>=3/diff<=1; duplicate signatures flag-only retained; no AI result filter",
+  "sampling": "entropy after frozen source; each pair chooses target once uniform[12,13,24,25,36,37,48,49]; class .5/.5 then uniform within; first suitable <=256 proposals; nonterminal walls>=2 distance>=3/diff<=1; duplicate signatures flag-only retained; no AI result filter",
   "searchseed": 1979,
   "history_reset": "fresh exact legal opening replay at each color game; each search fresh tree; no previous result/NN reuse",
   "provider": "native Python ORT1.30 CPUExecutionProvider SEQUENTIAL intra/inter1 same ONNX d790",
@@ -92,7 +92,7 @@
   "freeze": {
     "tools/ai-sigma-native-ni-arena/common.cjs": "d883fadd1df13fa056130b19ec17e36ae3fc1ea09799394a684a9d22f829110f",
     "tools/ai-sigma-native-ni-arena/arena.cjs": "918c9fdd9d6ce7c58994301c581bca29f2a826ae35769a1fec1817e24788e824",
-    "tools/ai-sigma-native-ni-arena/generate.cjs": "bafea6011e84004e12ec0c28c13d4e81db70f3de493c351dfffde0850d72fa20",
+    "tools/ai-sigma-native-ni-arena/generate.cjs": "9cdffe04585d205a891ad678b7449ee08e10e9ca218bbc3a5fd1f6c764a902c3",
     "tools/ai-sigma-native-ni-arena/pool.cjs": "4ad5182b32160bc207627d77c74a573e8fb6902f3076e8152822ea5c0e42125c",
     "tools/ai-sigma-native-ni-arena/save-tree.py": "db1d068b9f9d2440617b37dacdfcb87dbe0a8f2ef0af63b78277834c070b611f",
     "tools/ai-sigma-native-ni-arena/runner.py": "ddf2f3f71c1d5f70f3b9d890b7caa43541642e96f25767c21df873ff98ce150e",
@@ -105,5 +105,11 @@
     "tools/ai-sigma-native-ni-arena/pause-monitor.cjs": "accee99954af0317df244b66b5e42abf7c8aa6ee5dad68fe7f88d9d316b3d4b6",
     "tools/ai-sigma-native-ni-arena/compact-beads.py": "63dd13b825818e5d1a2a34c466383cc81ad667fac8c0fe77f065cbebf91be8d3"
   },
-  "UTC": "2026-10-03T06:49:34.596417+00:00"
+  "UTC": "2026-10-03T06:49:34.596417+00:00",
+  "generator_erratum": {
+    "draft_git": "3c833ff8ca28dd09a15c638dc503e382010bed4a",
+    "draft_hash": "90c1c7ea616b87f99993f656536bb6083d5965781201c60b1a10d1062b6ce6e7",
+    "fix": "target uniform once per pair, never redrawn by acceptance filters; same captured entropy, no AI/NN/results",
+    "draft_source_reproducible": true
+  }
 }
