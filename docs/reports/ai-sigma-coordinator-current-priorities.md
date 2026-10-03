@@ -29,3 +29,6 @@ CPU4logicalは実job合計。176の3arenaに追加できるCPU重jobは一つ。
 09:48節目: 177保存84raw/305行のfinite f32・CPU135bit・batch対応を確認し有限受入れ。35 scientific Gitblobを復元、34 current exact、storage後着actual_finalだけ別binding。B2 route比は直列CPU比較であり生成倍率ではない。176本人は24GOAL/1409適格行・production198.496598s/7.098358行秒、train20game1188/validation4game221、200step/reload/ONNX成功を報告。独立検算前の本人結果として保持。新4診断全GOAL/学生0勝4敗で接続成立と棋力未改善を分け、限定GPUbranchへ進む。全24元データ・正式holdout除外・全失敗を保持し、実dataset/学習接続/総費の保存独立レビューをcriticへ配分する。
 
 保存独立レビュー179をcriticへ配分。全1409行のπ/視点/z/lineage/split/重複・保存200step/reload/ONNXと新4診断をNN0算術で検算。CPU0静的90s/新2MiBは既112MiBguard内、176 GPU科学pool0/2/4/6と順序調整し、レビュー全文待ちをGPUbranch入口にしない。学習fit/arena0勝4敗と生成効率を別に裁定する。
+
+10:00節目: 176 GPU根試験はCPUfirst checkerのVM prototype例外・raw欠測でfirst未知、残3根tol/Action/visits対応。原追加6生成はNOT_STARTEDで全分母保持。有限CPU24本成果へ失敗を付替えない。GPU生成効率を未測のまま検査器欠測だけで放棄せず、既残費内の新phaseで保存teacher001根のNN0final-root joinを先に配分。不足時のみ別CPU64機構診断、元8要求/512NN・未知・source-stopは変更0。有限成立時だけ事前登録済3CPU+3GPU同Kの総費比較、利益なしならCPU継続。追加費は元176残上限内、成功成績を救済置換しない。
+監督ff1307b0の提案を部分採用。教師効率と学習価値を別判断し、既保存π/z別train-validation損失・未学習基準を179へ読むよう実配送。基準なしはunknown、新NN/再学習・全承認gateを増やさない。4局0勝4敗は教師/小モデル/学習量の原因を一意に決めない。179 CPU0算術90s実jobは176GPU4logicalと重ねず終了後に科学窓を渡す。採否の効果は179保存裁定と176実生成Rjoint/総費で次に確認する。
