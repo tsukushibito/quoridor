@@ -1,0 +1,80 @@
+{
+  "UTC": "2026-10-03T00:56:35.089249+00:00",
+  "issue": "quoridor-4lc.149",
+  "run": "gap149-group01-r1",
+  "exit": -6,
+  "OOM_log_line": [
+    "FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory"
+  ],
+  "nominal_heap_MiB": 192,
+  "recorded_heavy_wall_s": 119.327804,
+  "recorded_current_RSS_peak": 1885872128,
+  "planned_game_slots": [
+    {
+      "id": "slot01-color1",
+      "pair": 1,
+      "fixture_id": "frame10-prefix-1",
+      "candidate_color": 1,
+      "layer_ply": 12
+    },
+    {
+      "id": "slot01-color2",
+      "pair": 1,
+      "fixture_id": "frame10-prefix-1",
+      "candidate_color": 2,
+      "layer_ply": 12
+    },
+    {
+      "id": "slot02-color1",
+      "pair": 2,
+      "fixture_id": "frame10-prefix-2",
+      "candidate_color": 1,
+      "layer_ply": 4
+    },
+    {
+      "id": "slot02-color2",
+      "pair": 2,
+      "fixture_id": "frame10-prefix-2",
+      "candidate_color": 2,
+      "layer_ply": 4
+    }
+  ],
+  "actual_started_unknown": true,
+  "results_unknown": true,
+  "primary_and_quality_scores_for_all4": [
+    0,
+    1
+  ],
+  "unknown_mean_span_from4_of64": 0.0625,
+  "physical_owned_recovery_record": {
+    "remaining": [],
+    "unknown_adopted": [],
+    "guardian_and_sole_root_recorded": true
+  },
+  "currently_checked_identity_count": 313,
+  "current_same_identity_present": [],
+  "readerrors": [],
+  "normal_model_drop_NNzero_main_timer_receipts_missing": true,
+  "natural_or_all_period_guarantee": false,
+  "retry_replacement": false,
+  "decision": "accept bounded self debug of heap/postgame capture then proceed only next unstarted group under original aggregate budget",
+  "source_archive": "research-data/ai-sigma/frame10-baseline-gap/gap149-group01-r1.tar.gz",
+  "archive_sha256": "f57accf77ef24caafd31f2a3ee2644089f77ca9a282c807202a45583deed5749",
+  "source_records": [
+    {
+      "member": "runs/gap149-group01-r1.process.json",
+      "sha256": "359ef9705dac674f21486c86d50376e26fbbf019657f2e1e2e867aa6626fb955",
+      "size": 118709
+    },
+    {
+      "member": "runs/gap149-group01-r1/failure-attempts.json",
+      "sha256": "f7b5c4dbcc9308a070e0f1f808b742c25cb6348d218de78efcaf3bbcf0ad3135",
+      "size": 2011
+    },
+    {
+      "member": "runs/gap149-group01-r1.log",
+      "sha256": "05f2ba0a2deb667ff2dcf55346ec6febbf8a5b03c6c4fcfb5f9f3d60b64cc6df",
+      "size": 686
+    }
+  ]
+}
