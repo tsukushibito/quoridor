@@ -1,0 +1,29 @@
+{
+  "UTC": "2026-10-03T23:53:00.102448+00:00",
+  "outputs": {
+    "train": {
+      "metadata": "research-data/ai-sigma/frame14-teachers/partial-qf1-v1/train-canonical.jsonl.gz",
+      "metadataSHA": "138a1641ff763edf396771b2d0098a866a4e8b9dd4d3abef2577177b3e587f75",
+      "label_path": "research-data/ai-sigma/frame14-teachers/partial-qf1-v1/train-partial-labels.jsonl.gz",
+      "labelSHA": "34594a752edf272b318ca83bb4510872bf4bc8d3c68247d4de3382e3591f79b1"
+    },
+    "validation": {
+      "metadata": "research-data/ai-sigma/frame14-teachers/partial-qf1-v1/validation-canonical.jsonl.gz",
+      "metadataSHA": "096d7fb591e93d510138beaf7594d778b4cfd4925a029c9d56f8cbea5b192079",
+      "label_path": "research-data/ai-sigma/frame14-teachers/partial-qf1-v1/validation-partial-labels.jsonl.gz",
+      "labelSHA": "8ce29ba4ffb6d893d9882ec781f9547d9c1be1bfb763a92069a3c598d2ea210a"
+    },
+    "test": {
+      "metadata": "research-data/ai-sigma/frame14-teachers/partial-qf1-v1/test-canonical.jsonl.gz",
+      "metadataSHA": "04f5f734871526e7c05a1352dbd9e01c14de02bcafb6b198fc812ca40ff24247",
+      "label_path": "research-data/ai-sigma/frame14-teachers/test-sealed/test-partial-labels.jsonl.gz",
+      "labelSHA": "f962d47cba027d610966af41b5c719d7888200d614f54a18125ab7a71d8a481e"
+    }
+  },
+  "max96_mask_pending": true,
+  "validation_selection_permitted": false,
+  "testlabels_analyzed": false,
+  "test_pre_freeze_allowlist": "canonical metadata and labelpath/hash only; no label contents/raw/statejournals/oldpreview",
+  "NN_model_forward": 0,
+  "wall_s": 2.0588505290215835
+}
