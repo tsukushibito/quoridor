@@ -1,0 +1,100 @@
+{
+  "UTC": "2026-10-03T03:12:34.124491+00:00",
+  "starts_reported": {
+    "158": {
+      "received": "2026-10-03T03:05:55Z",
+      "claimed_started": true
+    },
+    "159": {
+      "received": "2026-10-03T03:06:15.627920Z",
+      "claimed_started": true
+    },
+    "160": {
+      "received": "2026-10-03T03:06:45.436210Z",
+      "claimed_started": true
+    }
+  },
+  "dispatch_receipts": [
+    {
+      "path": ".artifacts/ai-sigma/resume-20261002/frame10-critic-158-priority-request-delivery.json",
+      "receipt": {
+        "method": "turn/start",
+        "thread_id": "01a0f31d-8227-7e03-a7e6-915b4918c11b",
+        "turn_id": "01a0ffb9-83ed-7722-8be7-b0e533ea9bcd",
+        "accepted": true,
+        "UTC": "2026-10-03T03:05:43.163431+00:00",
+        "states_before": {
+          "critic": "idle"
+        }
+      }
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261002/frame10-experiment-159-priority-request-delivery.json",
+      "receipt": {
+        "method": "turn/start",
+        "thread_id": "01a0f31d-6d15-7620-bb63-4b4f878e4746",
+        "turn_id": "01a0ffb9-b9e0-71b2-9154-17e62648680a",
+        "accepted": true,
+        "UTC": "2026-10-03T03:05:56.970809+00:00",
+        "states_before": {
+          "experiment": "idle"
+        }
+      }
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261002/frame10-hypothesis-160-priority-request-delivery.json",
+      "receipt": {
+        "method": "turn/start",
+        "thread_id": "01a0f31c-2e4b-7170-82c5-69e1428c2418",
+        "turn_id": "01a0ffb9-db60-7f30-87f8-4a036aa33f75",
+        "accepted": true,
+        "UTC": "2026-10-03T03:06:05.547416+00:00",
+        "states_before": {
+          "hypothesis": "idle"
+        }
+      }
+    }
+  ],
+  "steward_repair_normal_run": "8407c748-49bb-46cb-8a85-15a09a9bb5ac",
+  "limited_evidence": [
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/supervisor/8407c748-49bb-46cb-8a85-15a09a9bb5ac/read-guard/observation.json",
+      "sha": "c1908e6f566b6f866391a8ada525ad0bbbc2e97ea81519280003cacc6135b7b7"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/supervisor/8407c748-49bb-46cb-8a85-15a09a9bb5ac/read-guard/self-stop.json",
+      "sha": "463ddfe31f63591fdcc46a7362d2b3ee210847442a147ca946ee5a7acabfebee"
+    }
+  ],
+  "normal_observe_inspect_notes_backup": true,
+  "command_exit0_reaped_count": 15,
+  "runtime_current": [
+    {
+      "pid": 3070572,
+      "start_ticks": "24839468",
+      "current_sameidentity": true
+    },
+    {
+      "pid": 3070586,
+      "start_ticks": "24839490",
+      "current_sameidentity": true
+    }
+  ],
+  "old7failures_retained": true,
+  "whole_period_future_external_NN_asserted": false,
+  "NI_first_proposal": {
+    "margin": 0.05,
+    "alpha": 0.05,
+    "n": 600,
+    "mean_half_pass_not_high_power_guarantee": true,
+    "power_numbers": "158速報のみ、最終独立保存確認後に計画採否",
+    "clock_remaining_CPU_mode_still_unresolved": true
+  },
+  "formal_WDL_launched": false,
+  "NNUE_main_implementation": false,
+  "waiting_for": [
+    "158 formal design",
+    "159 resource/time calibration",
+    "160 bounded actual data bootstrap"
+  ]
+}
