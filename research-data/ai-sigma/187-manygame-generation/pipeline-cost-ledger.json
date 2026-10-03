@@ -67,10 +67,8 @@
   "cost_await_overlap": "CPU API sums and pipe spans overlap; GPU batches/queue overlap acrossgames; no summed kernelCPU or exclusive decomposition claim",
   "allattempt_jobwall_seconds": 630.5876725260168,
   "final_export_helper_wall_s": 1.985892922,
-  "hand_NN_actual_total": 255070,
   "parity_debug_actual": 72,
   "startup_actual_separate": 3,
-  "all_NN_forward_including_debug_startup": 255145,
   "all_mode_intended_games": 120,
   "mode_qualified_terminal_games": 96,
   "fault_games": 3,
@@ -79,5 +77,13 @@
   "pack_helper_wall_s": 0.5068798889988102,
   "allocated_scope_with_raw_and_archive_current": 57298944,
   "Git_forecast_B": 33554432,
-  "own_guard_B": 234881024
+  "own_guard_B": 234881024,
+  "original_hand_NN_reported_counter": 255070,
+  "original_all_NN_reported_counter": 255145,
+  "normal_modes_hand_NN_physical_exact": 254880,
+  "failed_RustCPU_logical_requests": 190,
+  "failed_RustCPU_physical_count": "UNKNOWN <=190",
+  "hand_NN_physical_total_upper_bound": 255070,
+  "all_NN_forward_physical_upper_bound": 255145,
+  "counter_qualification": "counter-qualification.json"
 }
