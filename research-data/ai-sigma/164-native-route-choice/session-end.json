@@ -1,0 +1,38 @@
+{
+  "UTC": "2026-10-03T04:51:54.346965+00:00",
+  "report_delivered_accepted": true,
+  "coordinator_turn": "01a1001a-2775-74d3-8a9e-40063138c321",
+  "source_hashes_unchanged": true,
+  "science_children_retained": [],
+  "synchronous_operational_report_waited": true,
+  "recorded_timed_commands": [
+    {
+      "file": "command-codec.json",
+      "duration_s": 0.019225120544433594
+    },
+    {
+      "file": "command-1.json",
+      "duration_s": 0.004844188690185547
+    },
+    {
+      "file": "final-delivery.json",
+      "duration_s": 3.3433895111083984
+    },
+    {
+      "file": "command-0.json",
+      "duration_s": 3.776703119277954
+    },
+    {
+      "file": "provider-metadata.json",
+      "duration_s": 0.17469453811645508
+    }
+  ],
+  "recorded_timed_sum_s": 7.318856477737427,
+  "timing_limit": "read-only shell reads and Git/Beads tool durations are additional; total conservative management charge 60s, no further scientific command",
+  "management_budget_s_charged": 60,
+  "new_scope_actual_before_final_metadata_B": 61271,
+  "old_combined_conservative_B": 14498727,
+  "old_discount": 0,
+  "parent_extra": 0,
+  "next_science": false
+}
