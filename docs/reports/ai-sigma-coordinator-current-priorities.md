@@ -8,7 +8,7 @@
 | --- | --- | --- |
 | 完了180 K800 | 3固定入力の候補現wrapperはJS参照より中央値23〜33%長い | root800edge799/全30/NN24000。initial C/R1.322332、asym1.325008、jump1.229342、bridge2404往復/約8MB。有限速度の比/幅だけを回答、速度等価margin未設定・C++未実測 |
 | 主181 experiment | 最終checkpointだけに薄修正→sameK800 old/new/JS→教師生成実費→24新独立lineage→既CPUlearner継続 | 総heavy1800s/NN240000、CPU最大3/RAM4guard3.5/新256MiBは既2044内。新版採否/teacher engine選択を結果前固定、GPUcurrent不採用継続、原173教師0。science12:25/処理12:35/提出12:42 |
-| 182 critic独立検算 | 180全30保存算術/費用範囲と181の取りこぼし・選定を評価 | NN0/static120s/CPU0/新2MiB既guard内。181開始gate0。比から純言語/棋力・全分布へ広げない |
+| 完了182 critic独立検算 | 180全30保存算術/費用範囲と181の取りこぼし・選定を評価 | NN0/static120s/CPU0/新2MiB既guard内。181開始gate0。比から純言語/棋力・全分布へ広げない |
 
 
 180は新現在配分であり176個別期限を延長しない。176の必要最小pack/Git復元/backup・旧writer/科学子停止を終えて新自域だけ開始。旧GPUbranchの盲目再試行はしない。C++公開学習経路、browser棋力、正式NIは本測定と別の未実測/未達として残す。計測が教師量/学習へどう寄与するかで次配分を決め、速度診断を自動連鎖しない。
@@ -59,3 +59,5 @@ CPU4logical合計/RAM8GiB/保持と有効未使用予約12GiBを維持、NN重jo
 181科学停止・保存引渡しを受領。新24GOAL/1353適格行をCPUJSで195.29244秒/6.9281行秒、旧新train2260/200stepで原val π/z改善・新val π改善/z悪化を保持。184criticへ保存独立教師/損失検算（NN0/static120秒/新2MiB）を配分。183受入れ設計の実GPU比較は次枠、今枠185experimentへ最小gamepool/brokerのNN0実装準備35分（script180秒/新8MiB既experiment内）だけを配分する。実生成倍率/実partialGPUparity/多木RAM未測定を維持し、実GPU検査をこの準備へ自動追加しない。学習の次配分は184のvalue悪化裁定と実既lossから選ぶ。
 
 184速報を部分採用。独立1353行算術/共有RuleA24局再生は有限支持、原val/newvalの損失値はsaved receipt bindingで新forward再認証0。新val πCE2.571901→2.391096改善、zMSE1.663258→1.951053/総4.235158→4.342149悪化を保つ。181継続checkpointを既定へ自動置換せず代替候補として保存し、176checkpointを比較基準として保持する。正式な新lineage棋力や多様性因果は未確定、次の学習配分は旧新validationのπ/z別結果で選ぶ。production195.29244秒の6.928072行秒と全7guardian390.744963秒の3.462617行秒、prep等unknownを分ける。184最終source/停止binding報告を待ち、185NN0準備継続/全稿待ちgate0。
+
+181/184最終有限受入れ。原181必要6Gitblob/packSHA、独立184必要8Gitblob/currentexactと自己停止backupへbindし、両課題を統括引継closeする。全24/1353行・K64/π/z/P2/split・27K800原選定を支持するが新forward/all-deep/棋力認定0。旧新val合算総loss3.778808→3.614792の改善に対しvalue1.232192→1.269360は悪化。181のcheckpointは代替として保持する判断を確定、pooled totalでvalue悪化を隠さない。現在実施中は185NN0薄gamepool準備、12:15科学終了/12:32提出の範囲で結果・不足を待つ。
