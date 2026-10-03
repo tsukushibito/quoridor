@@ -2,7 +2,7 @@
 from pathlib import Path
 import datetime, gzip, hashlib, json, os, time, traceback
 
-D = Path('research-data/ai-sigma/188-value-lr-control')
+D = Path('research-data/ai-sigma/188-value-lr-control/runs/r2')
 
 
 def save(name, x):

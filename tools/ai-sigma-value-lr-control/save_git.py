@@ -57,7 +57,7 @@ def main():
     gitdir=Path(git(['rev-parse','--git-common-dir']).decode().strip())
     retained=sum((gitdir/'objects'/oid[:2]/oid[2:]).stat().st_size for oid in objects if (gitdir/'objects'/oid[:2]/oid[2:]).exists())
     out={'phase':sys.argv[1],'Git':commit,'parent':parent,'tree':tree,'default_index_unchanged':True,'new_private_index':False,'referenced_loose_object_bytes_including_reused':retained,'objects':sorted(objects),'owned_files':len(files)}
-    (D/('Git-'+sys.argv[1]+'.json')).write_text(json.dumps(out,indent=2)+'\n')
+    (D/'runs/r2'/('Git-'+sys.argv[1]+'.json')).write_text(json.dumps(out,indent=2)+'\n')
     print(json.dumps({k:v for k,v in out.items() if k!='objects'}))
 
 if __name__=='__main__': main()
