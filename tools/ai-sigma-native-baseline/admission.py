@@ -61,6 +61,14 @@ def admit(c,out,tool,runs):
    result=runs/job['name']/'result.json';assert result.exists(),'PRIOR_NN_UNKNOWN';z=json.loads(result.read_text());nn+=z['hand_NN']
    assert len(z['rows'])!=10 or z['errors'],'SUCCESS_MECHANISM_NOT_REPEATED'
   assert nn+320<=1024,'STAGEA_NN_CUMULATIVE'
+ if c['kind']=='arena':
+  seen=set()
+  for job in prev:
+   if job['phase']!='arena':continue
+   result=runs/job['name']/'result.json';assert result.exists(),'PREVIOUS_ARENA_COUNT_UNKNOWN';z=json.loads(result.read_text());seen.update(g['game_id'] for g in z['games'])
+  assert not seen.intersection(g['game_id'] for g in c['games']),'GAME_ALREADY_RECORDED'
+  assert len(seen)+len(c['games'])<=16,'FULL16_DENOMINATOR'
+ model=root/'models/experiments/ai-sigma/reference/sigma-pcr250/best.onnx';assert hashlib.sha256(model.read_bytes()).hexdigest()=='d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d','MODEL_SHA'
  mem=int(next(l.split()[1] for l in Path('/proc/meminfo').read_text().splitlines() if l.startswith('MemAvailable:')))*1024;assert mem>6442450944,'PHYSICAL_RAM'
  research=[]
  for p in Path('/proc').iterdir():
