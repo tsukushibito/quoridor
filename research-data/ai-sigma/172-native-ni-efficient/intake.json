@@ -1,0 +1,91 @@
+{
+  "issue": "quoridor-4lc.172",
+  "contract_Git": "1849f98998afc383fdb1d87054d5df1411a8baf7",
+  "received": "2026-10-03T06:29:34.269455+00:00",
+  "claim_static_start": "2026-10-03T06:29:37.144498+00:00",
+  "newcommand_deadline": "2026-10-03T06:46:34.269455+00:00",
+  "processing_deadline": "2026-10-03T06:49:34.269455+00:00",
+  "submission_deadline": "2026-10-03T06:59:34.269455+00:00",
+  "commands": [
+    {
+      "command": [
+        "ready",
+        "--json"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.6318661349941976,
+      "issues": [
+        {
+          "id": "quoridor-4lc.172",
+          "status": "open",
+          "assignee": "codex:01a0f31d-8227-7e03-a7e6-915b4918c11b",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        }
+      ]
+    },
+    {
+      "command": [
+        "show",
+        "quoridor-4lc",
+        "--json"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.7476560230134055,
+      "issues": [
+        {
+          "id": "quoridor-4lc",
+          "status": "in_progress",
+          "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        }
+      ]
+    },
+    {
+      "command": [
+        "show",
+        "quoridor-4lc.172",
+        "--json"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.790660287020728,
+      "issues": [
+        {
+          "id": "quoridor-4lc.172",
+          "status": "open",
+          "assignee": "codex:01a0f31d-8227-7e03-a7e6-915b4918c11b",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        }
+      ]
+    }
+  ],
+  "claim_exit": 0,
+  "previous_scope_stopped": true,
+  "CPU": [
+    0
+  ],
+  "RAM_guard": 939524096,
+  "static_budget": 180,
+  "storage": {
+    "old_conservative": 88190086,
+    "prior_current": {
+      "158-formal-ni-plan": 397312,
+      "161-formal-clock": 475136,
+      "166-native-comparison-scope": 868352,
+      "168-native-stageA-independent": 1290240,
+      "169-native-games-independent": 614400
+    },
+    "new_forecast": 2097152,
+    "current_plus_forecast": 93932678,
+    "guard": 117440512,
+    "old_unknown_discount": 0
+  }
+}
