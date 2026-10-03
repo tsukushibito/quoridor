@@ -13,3 +13,8 @@ parity成立時のみinitial単入力の各backend warm1＋steady8各1系列（�
 新scope+smallsubtreeGit/報告forecast256KiBを既hypothesis16MiB予約/combinedguard15MiB内 current旧14,596,875B＋171実保持＋本forecastで確認、足りないなら新write0、未確認旧量減額/parent追加/owner移管0。完全privateindex~380KBはこの小forecastに収まらないのでin-memory subtree保存又は実indexforecastを確保し超過0。graph重み/元raw全copy0、必要参照hash/小mapping/5outputs/timing/失敗を残す。GPUallocatortorchpeak/current/RSS/CPUpool/jobPIDidentity/childwait/owner停止source/raw必要Git復元/Beadsbackup→coordinator。
 
 受領時計保存ready/show goal+self/no pause本人割当、本issueのみclaim/5分内実開始、処理受領35分/newheavy30分/提出50分、親newheavy08:05:21/end08:15:21早側。現在GPU測定権限は既推論枠内の本有限実験だけ、GPU学習追加0/モデルeffort変更0/新role/再委譲0。171最終metadata/172統計/173WDLの全完了を静的準備のgateにせず、実物理resourceとsource停止だけ確認。停止後受入closeはcoordinator、goal他者close0。次最大1案は有限数値/総費からCPU継続か別GPU教師生成配分を選ぶもの、GPU実装自体を成果に代えない。
+
+
+## 契約2 未実行GPU窓だけ訂正
+
+goal quoridor-4lc /174 契約2・未来未実行GPU窓の配分訂正。受領06:45:35.781時計を保持、現在本人報告はNN0静的adapter準備で新forward/model0。173正式CPUjobとの非重複を守るため、初期受領30分newheavy/35分処理/50分提出では後続GPU窓が足りないことを訂正する。今後未実行の本GPU計測だけ新heavy07:58:00/科学処理08:02:00/提出08:10:00UTC（親newheavy08:05:21/証拠08:15:21より早側）を配分。準備速報は受領20分目安、adapter/sourceを固定して待機可。GPUjob180秒総/1jobhard120秒、CPU/RAM/保存/VRAM/学習0/同数固定5paritywarm1steady8/条件は増やさない。旧171/完了run期限/結果を変更0、future窓修正で新モデル条件変更/科学成功反復0。173はscience07:55までなので終了後の窓を利用できるが、自然監督CPU0/次予定/全回収/remainingtime/parentRAMに収まらなければ新spawn0/NN0準備成果提出。173をpause/interrupt0/GPUreadyをmain評価gate0。hard120+30sが07:58以降開始なら08:02前に収まることを本人確認、個別GPUjobの開始時計をresetしない。新GUI/provider常設化や大量runは許可0。
