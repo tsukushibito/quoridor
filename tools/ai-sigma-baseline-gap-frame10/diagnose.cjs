@@ -19,7 +19,7 @@ async function main() {
   const fixtures=JSON.parse(fs.readFileSync(ROOT+'/.artifacts/ai-sigma/reference-fixtures/SIGMA-PARITY-PLAN/fixtures.json')).fixtures;
   const references=JSON.parse(fs.readFileSync(ROOT+'/.artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/ort-a.outputs.json'));
   const monitor=require('../ai-sigma-actual-boundary-repair/pause-check.cjs').createMonitor({out:directory,subjectIssue:'quoridor-4lc.149',deadlineUTC:config.processing_deadline,windowEndUTC:'2026-10-03T04:15:21Z'});
-  let browser=null,primary=null,secondary=[],rows=[],startup=null,gameResult=null,observerTimer=null;
+  let browser=null,primary=null,secondary=[],rows=[],startup=null,gameResult=null,observerTimer=null,observerBusy=false,observerPromise=null;
   try {
     await monitor.start();monitor.check();
     browser=await require('./browser.cjs').open(directory,config);
@@ -40,14 +40,15 @@ async function main() {
     if(mode==='NN') {
       if(Date.now()>=Date.parse(config.newjob_deadline))throw Error('NEW_HEAVY_CUTOFF');
       monitor.check();save('config',config);
-      let observerBusy=false;
-      observerTimer=setInterval(async()=>{
+      observerTimer=setInterval(()=>{
         if(observerBusy)return;observerBusy=true;
+        observerPromise=(async()=>{
         try{monitor.check();if(Date.now()>=Date.parse(config.processing_deadline))throw Error('PROCESSING_DEADLINE');}
         catch(error){
           clearInterval(observerTimer);observerTimer=null;
           try{save('external-abort',await browser.page.evaluate(reason=>browserAbort(reason),{code:error.message,scope:'external run monitor, not per-hand clock'}));}catch(failure){secondary.push({stage:'external-abort',message:failure.message});}
         }finally{observerBusy=false;}
+        })();
       },250);
       for(const [p,h] of [[ROOT+'/.artifacts/ai-sigma/runs/SIGMA-ORT-SEARCH/final.wasm','1f54d0b8f0c6d3d7d51935886ed506e44376a2052506be62ca7a726c85a78a01'],[ROOT+'/models/experiments/ai-sigma/reference/sigma-pcr250/best.onnx','d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d']])if(require('crypto').createHash('sha256').update(fs.readFileSync(p)).digest('hex')!==h)throw Error('CURRENT_MODEL_BINARY_SHA');
       await browser.load();
@@ -65,6 +66,8 @@ async function main() {
     if(browser)try{const partial=await browser.page.evaluate(()=>collectBrowser());rows=partial.rows;gameResult=partial;save('partial-browser-result',partial);}catch(error){secondary.push({stage:'partial-collect',message:error.message});}
   } finally {
     if(observerTimer){clearInterval(observerTimer);observerTimer=null;}
+    if(observerPromise)await observerPromise;
+    save('outer-main-observer-stop',{active_timer:!!observerTimer,inflight_callback:observerBusy,callbacks_awaited:!observerBusy});
     if(browser)try{save('main-timers-stop',await browser.page.evaluate(()=>abortBrowserTimers()));}catch(error){secondary.push({stage:'main-timers-stop',message:error.message});}
     if(browser&&browser.loadState.ready)try{save('finally-model-drop',await browser.page.evaluate(()=>dropEarly()));}catch(error){secondary.push({stage:'finally-drop',message:error.message});}
     // Freeze owned observer creation before taking the browser cleanup receipt.
