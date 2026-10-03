@@ -92,6 +92,7 @@
     "r1_r2_debug_failures_retained": true
   },
   "freeze": {
+    "tools/ai-sigma-native-ni-arena/monitor-mock.cjs": "cf101a38cc75337a177c30bfb9f741d9ca1938223ae978686882f0a82b09a2bc",
     "tools/ai-sigma-native-ni-arena/common.cjs": "d883fadd1df13fa056130b19ec17e36ae3fc1ea09799394a684a9d22f829110f",
     "tools/ai-sigma-native-ni-arena/signatures.cjs": "f3abd5e32f0c1675da96cd910bdb25249813cba4ab95d9bdb56f4c32028fc009",
     "tools/ai-sigma-native-ni-arena/continuation.cjs": "ba94a5aa11b1d6519c13c2c9ee4a9eda6bae869891c6b55e0a800faa35213c62",
@@ -106,7 +107,7 @@
     "tools/ai-sigma-native-ni-arena/admission.py": "9877f44b2afd12fbcfe8db950de00068ee69d9a3e5e5cf31fa0f8308b66fd7fc",
     "tools/ai-sigma-native-ni-arena/load-engine.cjs": "0380ae721bb220c0e99c10e0d0bd734d66a0e0bfbc23072fc7dfcb264723afb3",
     "tools/ai-sigma-native-ni-arena/block-ready.py": "48233ee0d6fc6b3d981344fbc305dc77d28dcb9aa640d300c89666625d97992a",
-    "tools/ai-sigma-native-ni-arena/pause-monitor.cjs": "9ee1932ade59a4b2ac6f5ac02c05ebfa43f6166703e235ecbe586c3882677e38",
+    "tools/ai-sigma-native-ni-arena/pause-monitor.cjs": "265f7c8aa34f9a7f7f06f2ac2441546bd3ab7c36519196a70704351c61bddbea",
     "tools/ai-sigma-native-ni-arena/compact-beads.py": "63dd13b825818e5d1a2a34c466383cc81ad667fac8c0fe77f065cbebf91be8d3",
     "tools/ai-sigma-native-ni-arena/generate-block.cjs": "6e92818a3296508c93d705c29d5364b3bf456879f7a822e8f9bede44b3bef54d"
   },
@@ -143,7 +144,9 @@
   "source_control_erratum": {
     "old_read_failure": "06:53:42.574 BEADS_READ_ERROR timeout5s, old pending block continued to terminal because callback was not wired; retain rawterminal but allregistered qualityqualification UNKNOWN",
     "repair": "ownread timeout10s; failure callback immediately aborts allarenas/stopCurrent; no further search aftercontrolunknown; no outcome/policy/caps/math/model change",
-    "NN0_new_pool": "native173-poolmock-r2 exit0"
+    "NN0_new_pool": "native173-poolmock-r2 exit0",
+    "NN0_monitor": "native173-monitormock-r2 PASS: timeout once readonlyretry, failure keepsrunstop; pause/readerror no retry/newengine; missingcapturedfile distinguished; allcallback waited",
+    "retry_cap": "one transport/schema readonly retry per job, command10s; first control loss aborts allarenas beforediagnostic retry; no newNN afterguard"
   },
   "continuation_evidence": {
     "selection_before_data": [
@@ -164,5 +167,6 @@
     "NN": 0,
     "old_success_replaced": false,
     "only_two_static_classes_no_general_acceptance_guarantee": true
-  }
+  },
+  "future_epoch_adoption": "PENDING_COORDINATOR_BASED_ON_NN0_ONLY"
 }
