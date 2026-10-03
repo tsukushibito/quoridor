@@ -51,3 +51,5 @@ CPU4logical合計/RAM8GiB/保持と有効未使用予約12GiBを維持、NN重jo
 176最終8543b550の必要12Gitblob/current、archive e559c173/439member/必要3member byte復元、owner writer/科学子停止・backupexit0を有限確認し統括受入れ。旧source-stopと新GPU停止は別、benchmarkはCPU本学習へ混合0。179の独立CPU裁定と合わせ176は統括引継close、180新scopeを既experimentへ10:32:50 actual steer配送、rootへ10:34:03実依頼報告済み。本人claim10:36/科学開始10:39:12→終了10:42:28、全30完成を受領しrootへ10:48:26実結果を配送。180保存の必要12Gitblob/68archive member概要・必要3member/hash・median/statusを統括有限照合して受入れ、次181へ実配分する。監督53f0f8eaの結果後marginを設けず比/幅を示す案を採用し、181以降の費用規則と旧180判断を区別する。
 
 監督c42df5ceの評価改善を採用。181の追加200step/旧新train混合の前後損失は、この継続学習条件で未知gameへのfitが変わった有限結果として扱う。多様性だけの因果効果は追加学習量・旧データ再露出と分離していないため未確定。原val悪化とπ/z間の交換も残し、対照追加runや新gateを義務化しない。担当experiment、効果確認は181学習報告。
+
+181新27K800の本人速報:old/new根対応を有限保持、new/old中央値.961216/.879079/.958675、採用<=.90は1/3で限定条件未達。new/JS1.299314/1.136611/1.165635、24新lineage productionは原選定どおりCPUJS。利益時のみ6K64比較は全NOT_STARTEDとして保持し、速度診断の追加反復0。内部checkpoint800→1/応答約8→4MBの削減が生成利益や棋力を証明したとはしない。182独立180支持は必要7Gitblob/停止backupを統括受入れclose、後着metadataのGit版誤指定失敗は科学と別に保存。
