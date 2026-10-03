@@ -16,8 +16,8 @@ def update(tree,parts,blob):
  data=b''.join(m+b' '+t+b' '+h+b'\t'+n+b'\0' for n,(m,t,h) in items.items());return run(['mktree','-z'],data)
 base=run(['rev-parse','HEAD']).decode();tree=run(['rev-parse',base+'^{tree}']).decode()
 for filename in sys.argv[1:]:
- assert filename.startswith(('tools/ai-sigma-native-k800-time/','research-data/ai-sigma/180-native-k800-time/','docs/reports/ai-sigma-experiment-native-teacher-pipeline.md'))
+ assert filename.startswith(('tools/ai-sigma-native-k800-time/','research-data/ai-sigma/180-native-k800-time/','docs/reports/ai-sigma-experiment-native-k800-time.md'))
  blob=run(['hash-object','-w','--stdin'],Path(filename).read_bytes());tree=update(tree,filename.split('/'),blob).decode()
-commit=run(['commit-tree',tree,'-p',base],b'research(176): save native teacher pipeline source and finite evidence\n').decode();subprocess.run(['git','update-ref','HEAD',commit,base],check=True)
+commit=run(['commit-tree',tree,'-p',base],b'research(180): save native teacher pipeline source and finite evidence\n').decode();subprocess.run(['git','update-ref','HEAD',commit,base],check=True)
 for filename in sys.argv[1:]:assert run(['show',commit+':'+filename])+b'\n'==Path(filename).read_bytes() or subprocess.check_output(['git','show',commit+':'+filename])==Path(filename).read_bytes()
 print(commit)
