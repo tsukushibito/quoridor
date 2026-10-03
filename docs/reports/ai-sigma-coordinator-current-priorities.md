@@ -14,7 +14,7 @@ frame14ユーザー明示4時間再開。開始2026-10-03T23:20:36Z、終了2026
 | 期限運用・主手順mirror | steward / 既quoridor-4lc.92 | 親/92運用bindingを停止窓で更新して同runtime起動・回収。研究手順hyp停止/hash引渡し後だけmain同bytes同期 |
 | 目標・配分・受入れ | coordinator | 本計画・goal説明/契約・有限受入れ、本人報告から次判断を実配分 |
 
-既savedへ実配送済み。配送accepted/本人claim/static開始/実science成立は別。92runtime準備待ち・critic全文待ちは静的準備のgateではない。生成GPU4core窓とCPU学習/CPU0算術は実process所有/RAM/自然監督予定を直前に確認し重計算を重ねない。主報告待ちは194教師、195ソフト接続と学習/test、196分割/独立結果、92running/loaded。
+既savedへ実配送済み、本人claim/static開始を受領。194のfirsttrain24は23:37:08–23:39:09で全24GOAL/raw1217/physicalNN68292/jobwall122.708701秒、資格exportは未確定。195共通canonical interface-v1停止hashを194へ渡し、64MiB保存移転を実確認した。194旧guardのruntime RSS表示はscheduler/monitorを除外して0だった限界を保存し、後続版はruntimeとnested testを算入する。全期間資源成功や適格教師数を先取りしない。配送accepted/本人claim/static開始/実science成立は別。92runtime準備待ち・critic全文待ちは静的準備のgateではない。生成GPU4core窓とCPU学習/CPU0算術は実process所有/RAM/自然監督予定を直前に確認し重計算を重ねない。主報告待ちは194教師、195ソフト接続と学習/test、196分割/独立結果、92running/loaded。
 
 ## データ版と3分割・露出
 
