@@ -58,3 +58,6 @@
 
 07:16更新: 173の同entropy48/49ply各1のNN0 continuationはproposal348/408で初受理、追加費合計約554ms。WDL未読のまま、fresh entropy/domainによる新epoch2・4096上限・登録blockごとのlazy firstaccepted生成を採択。元generatorと同じ「pawn/wallどちらかの合法categoryが空ならproposal全体棄却」を明記し、この条件付き生成分布への推定として扱う。cap失敗/旧開始済3入力のsignature再利用は登録6品質未知で停止し補充0。oldepochの6terminal/controlfault/未開始1194/wealthを保存、copied e2 draftの旧manifest/497generated/ready日時は旧provenanceへ分離し、新seed/sourceを結果前固定。readfailure初回でallarena stopCurrent/次NN0を接続し、10秒・最大1readretryは資格の救済に使わない。CPU3arena/統計閾値/累積費/07:55終了は維持。
 174は本人GPU1run42forward停止/5×3parity成功、CPUORT-CUDA差policy5.722046e-6/value3.576279e-7、steady中央値3.5707745/2.100652ms、coldCUDA613.673741ms。native JSON/IPC全経路・対局速度未立証のため173CPU backend変更0。次は正式epoch2の結果と実費を優先し、GPU輸送実測の自動追加0。
+
+07:55節目:173 epoch2は事前規則SCIENCE_DEADLINE_HEADROOMで07:50:17に科学停止、33block/99pair/198game/95勝103敗・mean.47979798、NIwealth約1.88506/負方向約.43848で両閾値20未達、結論は不確か。全owner回収/537460NN返却/8268公開手は本人有限根拠、保存引渡し・独立裁定は別。残1002gameは未登録capacityでwealthへゼロ補完0、old6資格未知別。保存算術のみの175既criticへ120秒/2MiB/08:05処理08:10提出を配分し、33登録block品質分母・exact閾値・停止と必要clock集計を独立裁定、新NN/game0。173packをその全文待ちgateにしない。
+次枠の主候補は新しい学習用lineageで少数native自己対局→全手π/rootNN/rootmean/zと視点を保存→game単位split→本PV学習/ONNX/独立arena接続。今回173正式holdoutは転用0。NIを通すまで同計画を反復することやNNUE主実装全面移行は選ばない。初期Sigma同等は未認定のまま、教師・評価基準の機構対応と動作を使って軽い学習準備を進める例外の費用は次許可枠で設定する。現枠の追加NN/教師生成/学習/GPU接続は配分0、必要保存/裁定と92停止責任を優先。
