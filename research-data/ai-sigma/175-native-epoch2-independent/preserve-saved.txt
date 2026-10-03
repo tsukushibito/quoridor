@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/175-native-epoch2-independent/preserve.py", line 31, in <module>
+    b=run(['git','show',cid+':'+str(p)]);assert b==p.read_bytes();restore.append({'path':str(p),'bytes':len(b),'SHA256':hashlib.sha256(b).hexdigest()})
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/175-native-epoch2-independent/preserve.py", line 4, in run
+    p=subprocess.run(args,input=data,capture_output=True,timeout=30);commands.append({'command':args[:6],'exit':p.returncode,'stderr':p.stderr.decode()[:800]});assert p.returncode==0,(args[:6],p.stderr.decode()[:800]);return p.stdout
+                                                                                                                                                                       ^^^^^^^^^^^^^^^
+AssertionError: (['git', 'show', '2b8659496452ae92673322f5807213ac4a87d1c9:/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/175-native-epoch2-independent/start-report.stderr'], 'fatal: empty filename in tree entry\n')
