@@ -28,7 +28,22 @@ def admit(c,out,tool,runs):
    try:s=Path('/proc/'+str(i['pid'])+'/stat').read_text().rsplit(')',1)[1].split()
    except FileNotFoundError:continue
    assert int(s[19])!=i['start_ticks'],'OLD_CURRENT_IDENTITY'
- pool=c['mode']['cores'];assert pool in [[2],[2,4],[2,4,6]]
+ pool=c['mode']['cores'];assert pool in [[2],[2,4],[2,4,6]] or (c.get('efficiency_adoption') and pool==[0,2,4,6])
+ gpu_admission=None
+ if c.get('efficiency_adoption'):
+  scheduler=json.loads(Path('/workspaces/quoridor/.artifacts/research-team/scheduler-sigma-continuation-20261001/state.json').read_text());assert scheduler['phase']=='running' and not scheduler['recovery_required'] and scheduler['owned'] is None,'SUPERVISOR_NOT_QUIET'
+  assert scheduler['next_at']-time.time()>c['job_seconds']+30,'SUPERVISOR_QUIET_WINDOW'
+  ident=scheduler['process'];sp=Path('/proc/'+str(ident['pid'])+'/stat').read_text().rsplit(')',1)[1].split();assert int(sp[19])==int(ident['start_ticks']),'SUPERVISOR_IDENTITY'
+  assert hashlib.sha256(Path(scheduler['config_path']).read_bytes()).hexdigest()==scheduler['config_sha256'],'SUPERVISOR_BINDING'
+  stop=json.loads((ROOT/'research-data/ai-sigma/177-gpu-batch-provider/manager-stop.json').read_text());assert stop['scientific_source_write_stopped'] and not stop['owned_remaining'] and not stop['unknown_adopted'],'177_STOP'
+  for ident in [stop['manager'],*stop['tracked']]:
+   try:st=Path('/proc/'+str(ident['pid'])+'/stat').read_text().rsplit(')',1)[1].split()
+   except FileNotFoundError:continue
+   assert int(st[19])!=int(ident['starttick']),'177_CURRENT_IDENTITY'
+  for p,h in json.loads((ROOT/'research-data/ai-sigma/176-native-teacher-pipeline/gpu-source-binding.json').read_text())['readonly_source'].items():assert hashlib.sha256((ROOT/p).read_bytes()).hexdigest()==h,'177_SOURCE_BINDING'
+  if c.get('backend')=='cuda' or c.get('gpu_parity'):
+   capture=out/'gpu-physical-current.json';assert time.time()-capture.stat().st_mtime<60,'GPU_PHYSICAL_STALE';gpu_admission=json.loads(capture.read_text());assert gpu_admission['query_exit']==0 and gpu_admission['owners_query_exit']==0 and not gpu_admission['compute_owners'].strip(),'GPU_OWNER'
+   assert int(gpu_admission['headroom'].split(',')[1].strip())*1024**2>=6*1024**3,'GPU_HEADROOM'
  for core in pool:assert Path(f'/sys/devices/system/cpu/cpu{core}').exists(),'CORE_UNAVAILABLE'
  current=[];external=0
  for p in Path('/proc').iterdir():
@@ -51,4 +66,4 @@ def admit(c,out,tool,runs):
  assert old+268435456<2044*1024*1024,'EXPERIMENT_RESERVATION'
  for p in runs.glob('native176-*.process.json'):
   x=json.loads(p.read_text());assert not x['remaining'] and not x['unknown_adopted'],'OWN_NOT_COLLECTED'
- return {'decision':'launch_allowed','UTC':datetime.datetime.now(datetime.timezone.utc).isoformat(),'control':control,'current':current,'external_RSS':external,'own_allocated':own,'old_known_retained_allocated':old,'old_unknown_not_decremented':True,'experiment_effective_reservation':2044*1024*1024,'new_scope_reservation':268435456,'new_parent_reservation':0,'LLMactive_gate':False}
+ return {'decision':'launch_allowed','UTC':datetime.datetime.now(datetime.timezone.utc).isoformat(),'control':control,'current':current,'external_RSS':external,'own_allocated':own,'old_known_retained_allocated':old,'old_unknown_not_decremented':True,'experiment_effective_reservation':2044*1024*1024,'new_scope_reservation':268435456,'new_parent_reservation':0,'LLMactive_gate':False,'GPU_physical':gpu_admission,'efficiency_supervisor_quiet':bool(c.get('efficiency_adoption'))}
