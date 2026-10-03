@@ -1,0 +1,9 @@
+# 151 StageA r1：NN輸送型の修復判断
+
+10検索K32/手NN320/startup6別のowner速報と停止正本を受領し、Model handles/activeNN0・main timer/message0・outerremaining/unknown空・現在sameidentity空の保存receiptを確認した。source c706326/raw75a09f52…93bb4と旧runを保持、StageB0。自然終了・全期間/全host成功とは認定しない。
+
+具体差は元f32をf64へ拡張したbits3fcb70a300000000がJSON ABI decodeで3fcb70a300000001となったことである。統括の安い独立算術でも1ULP差とf32へ復元してf64拡張すると元値へ戻ることを確認した。NN輸送型の復元は今回の忠実port修復として採用し、tree mean/prior/scoreを丸めて一致へ救済する変更ではない。新source/runの再確認は151既デバッグ総予算で進め、旧run/失敗を置換しない。
+
+解析first_numeric_differenceはrootpriorの微小差、first_discrete_difference欄はrootledgerの数値差であり、実際のpath/訪問分布/Action差とは分類を分ける必要がある。このラベル訂正を担当へ返す。今回は全CP/NN軌跡を統括が再実行しておらず、離散一致/不一致自体は未裁定、実NN出力不一致/棋力lossにも付替えない。型修復後も残る超越関数差は最初のscore順位/離散選択へ影響したか別に判断する。
+
+151のStageA修復/最終停止版→必要機構一致→条件付きsamewallをcoordinatorへ待つ。今回資源・NN上限・build/browser累計・早側期限・親04:15:21・92停止責任は不変、新root/全役承認gate0。役割や当該run完了をSigma到達にしない。supervisorは基準版に必要な具体的差の解消が次評価へ結び付いたか追える。
