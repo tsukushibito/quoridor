@@ -1,0 +1,40 @@
+{
+  "issue": "quoridor-4lc.147",
+  "proposal_count": 1,
+  "adopted_by_this_actor": false,
+  "NN_permission": false,
+  "new_policy": false,
+  "pairs": 32,
+  "games": 64,
+  "strata_prefix_ply": [
+    4,
+    5,
+    12,
+    13
+  ],
+  "pairs_per_stratum": 8,
+  "Xi": "(candidate_color1_score+candidate_color2_score)/2",
+  "weights": [
+    0.25,
+    0.25,
+    0.25,
+    0.25
+  ],
+  "generator": "AI-free pawn/wall class probability1/2 when both nonempty; uniform within original legal class order; first legal nonterminal history; max100attempt/slot; record attempts and history/state duplicates; no result selection",
+  "freeze_before_first_science": [
+    "actual seed list/PRNG/attempt derivation/history key/SHA/order/caps/binary model binding",
+    "all64slots and strata round-robin/color alternating",
+    "typedfault operational vs pureterminal scores/unknown bounds",
+    "two-sided Hoeffding .05/independence limits",
+    "T500/cutoff402/adopt411/seed1979/ready-relative clock"
+  ],
+  "missing_quality": "unknown slot interval[0,1]; denominator64; enginefault separate operational score",
+  "interval": "[max(0,S/64-r),min(1,(S+U)/64+r)], r=.24008069782998018, conditional independent bounded pair model only",
+  "fixed_stop": "32pairs or preregistered resource/deadline/pause/owned-recovery failure, no outcome optional stop or replacement",
+  "quantity_flag": "first matched-input accepted CP-NN median ratio>=1.5 either direction; zero/missing separate; descriptive only",
+  "samecompleted_extra_games": 0,
+  "oldWDL_integrated": false,
+  "NI": false,
+  "general_strength": false,
+  "actual_go": false
+}

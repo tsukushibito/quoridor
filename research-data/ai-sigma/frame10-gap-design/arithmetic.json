@@ -1,0 +1,177 @@
+{
+  "issue": "quoridor-4lc.147",
+  "UTC": "2026-10-03T00:32:53.503417+00:00",
+  "refs": [
+    {
+      "path": "docs/design/ai-sigma-contract-critic-frame10-gap-design.md",
+      "Git": "40243b25804f8e929a6af5680c02a2b70bef39d1",
+      "SHA256": "6567efe346d20196d604c1fe2eb719375148578b377bfd05e5861998652bc6ca",
+      "bytes": 2622
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-frame10-baseline-gap.md",
+      "Git": "40243b25804f8e929a6af5680c02a2b70bef39d1",
+      "SHA256": "6dd67390b29150a21bd579605505f7b779cf587d900caec41d11628700577659",
+      "bytes": 4242
+    },
+    {
+      "path": "research-data/ai-sigma/119-diverse-prefix/final-results.json",
+      "Git": "c22d7760d8b835bbebddf14862066f1d1584ed92",
+      "SHA256": "f0d2e5891aa6475035735b90eaf7ab3dbdfdbb0402e5a88c5b62597815bb89cc",
+      "bytes": 13195
+    },
+    {
+      "path": "research-data/ai-sigma/119-diverse-prefix/preregister.json",
+      "Git": "e2433f0de2cbdea50da75542576a7323270a09f9",
+      "SHA256": "5ae2af8776feff8994e540ba5db24ab242d695da8cc827e0cd31513c613a30fb",
+      "bytes": 4466
+    },
+    {
+      "path": "research-data/ai-sigma/145-matched-policy-quality-choice/proposal.json",
+      "Git": "5bef8954461e8bd58308f84b742385ef9401dee1",
+      "SHA256": "bccfc0b7453432671a5b6bd47cda93f2cfd3040e47021b57ceeda64cdc61825c",
+      "bytes": 9298
+    },
+    {
+      "path": "docs/design/ai-sigma-frame8-evaluation-plan.md",
+      "Git": "b14a1666264b0dc59db433e2b68d8760a985b6fe",
+      "SHA256": "ef2f6d1b2f0dac6d7a0c6a1912e70e51805d57f0b3b4f8566ac7e77f20b5c3b6",
+      "bytes": 15046
+    },
+    {
+      "path": "research-data/ai-sigma/116-evaluation-plan/arithmetic.json",
+      "Git": "b14a1666264b0dc59db433e2b68d8760a985b6fe",
+      "SHA256": "ea3980296e63f5710e2ec15400c45d54c0868f1f6971f38f81ef9e775a622190",
+      "bytes": 5424
+    }
+  ],
+  "old119": {
+    "pair_units": 8,
+    "games": 16,
+    "Xi": [
+      0.0,
+      0.0,
+      0.0,
+      0.5,
+      0.5,
+      0.5,
+      0.0,
+      0.5
+    ],
+    "mean": 0.25,
+    "W": 4,
+    "L": 12,
+    "inference_as_current_weakness": false,
+    "incorporated_into_new_result": false,
+    "generator": {
+      "PRNG": "xorshift32 unsigned after x<<13,x>>>17,x<<5; nonzero seed",
+      "class_rule": "both nonempty: consume one class uint32 (<2^31 pawn, else wall); empty class: no class draw; always consume one uint32 floor(u/2^32*class.length) index in RuleA class order",
+      "attempt_rule": "(base XOR Math.imul(0x9e3779b9,attempt)) unsigned; zero to1",
+      "selection": "first legal nonterminal nonduplicate exact Action-prefix; no NN/value/AI"
+    },
+    "accepted_CP_NN_medians": {
+      "candidate": 8.0,
+      "reference": 10.0
+    },
+    "APIawait_is_CPU": false
+  },
+  "old145": {
+    "proposal_only": true,
+    "prefixes": [
+      1,
+      7,
+      8
+    ],
+    "independent_positions": 3,
+    "games": 12,
+    "seeds_not_new_positions": true
+  },
+  "precision": {
+    "alpha": 0.05,
+    "method": "two-sided bounded-pair Hoeffding",
+    "radius": {
+      "8": 0.48016139565996035,
+      "16": 0.3395253789351549,
+      "32": 0.24008069782998018,
+      "64": 0.16976268946757744
+    },
+    "n_for_radius_le_05": 738,
+    "independent_bounded_units_required": true,
+    "IID_not_required_for_fixed_equal_stratum_weight_bound": true,
+    "PRNG_seed_or_temporal_independence_not_proved": true,
+    "weights": [
+      0.03125,
+      0.03125,
+      0.03125,
+      0.03125,
+      0.03125,
+      0.03125,
+      0.03125,
+      0.03125,
+      0.03125,
+      0.03125,
+      0.03125,
+      0.03125,
+      0.03125,
+      0.03125,
+      0.03125,
+      0.03125,
+      0.03125,
+      0.03125,
+      0.03125,
+      0.03125,
+      0.03125,
+      0.03125,
+      0.03125,
+      0.03125,
+      0.03125,
+      0.03125,
+      0.03125,
+      0.03125,
+      0.03125,
+      0.03125,
+      0.03125,
+      0.03125
+    ],
+    "no_actual_CI_or_power_certification": true
+  },
+  "missing_examples": {
+    "all_unknown": [
+      0.0,
+      1.0
+    ],
+    "half_wins_unknown": [
+      0.5,
+      1.0
+    ],
+    "half_losses_unknown": [
+      0.0,
+      0.5
+    ]
+  },
+  "cost": {
+    "planned_pair": 32,
+    "planned_game": 64,
+    "prefix_lengths": [
+      4,
+      5,
+      12,
+      13
+    ],
+    "nominal_think_all_max_200ply_s": 6128.0,
+    "browser_cap_s": 7200,
+    "residual_budget_s": 1072.0,
+    "nominal_not_measured_wall": true,
+    "startup_calls_if_six_per_fresh_game": 384,
+    "equal_completed_additional_games": 0
+  },
+  "attempts": {
+    "static": 1,
+    "NN": 0,
+    "Chrome": 0,
+    "model": 0,
+    "game": 0,
+    "build": 0
+  },
+  "failures": []
+}
