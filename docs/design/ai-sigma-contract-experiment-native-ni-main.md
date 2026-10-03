@@ -17,3 +17,13 @@ mode第一案は3arena CPU2/4/6、各engine/管理process/ORTは自arena同core/
 有界debugは同課題総費内、静的/mock/運用準備の失敗版を保存し scientific成功置換0。firstblockも一度正式開始すれば分母に保持、診断名で好都合な初回を捨てない。中間WDLはvalid事前統計以外の停止/追加判断に使用0。時計/資源/owner不明・ユーザーpause・硬deadlineは即該当job停止/必要保存。全最大slot状態/開始停止理由/法律合法/score/π根visit数/rootNN/rootmean/terminalz/P1と手番視点/lineageを区別し必要初根のみ小export、正式holdoutを今学習利用0。大量teacher export/自己対局学習は別目的として混ぜない。
 
 5分内に本人受領/170minhandoff/新issueclaim静的開始を報告。新科学preregister時点で方式/mode/版/seed/input/全fault/停止と総費をcoordinatorへ短速報、通知受理をroot再承認gate0。停止後source/関連process回収/必要Git復元/Beadsbackup/有限結果をcoordinatorへ。正式NIが不確かでも停止/記録/引渡しで課題終了可、親goal/他者close0。現在枠完走/NI支持を保証しない。次判断はnative初期NIと主学習データ生成/改善配分、局所診断を自動追加し続けない。
+
+
+## 結果前採択補足 06:42UTC
+
+goal quoridor-4lc /173 結果前統計採択。172独立速報を条件付き採択、全稿待ちgate0。新formal3arena CPU2/4/6/1block3pair6game、最大200block600paircapacity。Ylow/Yhighは登録済block全6予定gameの品質score[0,1]から作り、win1/draw.5/loss0、未生成/clock/infra/Cfault/Rfaultの品質未知[0,1]、Cfault運用0別。Ylow=k/12・theta=.45=9/20。
+NI primary: λ={1,2,4,6,8}/4の5等重み、P_a,n=Π_b [240+a(5k_b-27)]、D_n=240^n。Eplus=(ΣP)/(5D)、exact整数ΣP>=100Dで閾値20到達を判定。主片側falseNI<=.05はH0 conditional E[Y|past]<=.45/定常共通μに基づく。各因子最小.1で非負・条件付きsupermartingale・Villeの172証明を採択。周辺平均だけでは成立せず、fresh input/毎game独立search/historyreset、同policy/provider/core均衡/mode保持の条件を明示、hostclock等に既知変化があれば資格保留/時計不成立を原勝敗と区別。統計modelの仮定を証明済みと呼ばず、nativeこの抽出分布/許可core資源のμ>.45支持、browser/C++/最高棋力/厳密等価へ拡大0。
+劣性方向も事前固定: λ={1,2,4,6}/4の4等重み、Yhigh=k/12、Q_a,n=Π[240-a(5k_b-27)]、exactΣQ>=80Dで実用上μ<.45の別片側5%支持。両方向を合わせて同時両側95とは言わない。停止後通常95%CI/.05精度の保証を作らず wealth/処理prefix mean+capacity識別を別報告。最初にいずれか閾値に達した解決済block後で新block登録を止める、もし両閾値同時成立なら矛盾/NUMERIC_OR_MODEL_UNKNOWNとしてNI選好0。未達時hardheavy/科学07:55/RAM保存/回収の硬停止は不確か又は不成立。途中成績をrule外停止/追加に使わない。
+登録blockは一度だけ所定順に取り込み、開始前cancelledでも登録済ならunknownを入れ、未完block飛越し0。閾値又はbudget停止後future未登録capacityはNOT_STARTED(reason)全予定帳簿に保持しwealthへzeroを加えない。全最大slot識別intervalは別記述分母、anytimeは処理prefixの定常分布平均に関する新方式。旧固定m600Hoeffding/旧rawを上書き0、新結果前方式/λ/方向/閾値/stop/データ生成全入力seedmanifest/provider/source/RAM4.5guard4をGitpreregister固定。floatlogsumexpは表示だけ、判定はPython/JS BigInt等のexact整数（n<=200）又は検算不能typed未知。
+同盤面側winner/pairbothwinlossを全保存、600pairを今枠完走と保証0。172人工constantY.5が44block264gameで閾値到達は計算例でpower保証0、旧16で方式調整0。NN0mock extreme/unknown/prefix/capacity/order/threshold boundaryを簡潔に確認し新科学へ。第一blockも正式分母、新mode診断名で選別廃棄0。
+GPU174は別backendの数値/費候補でこのformalCPU版へ混合0。sharedhostGPU計測の負荷を本正式modeへ追加しないため、174実GPUforwardは173正式科学jobと非重複（静的adapter準備のみ並行）。173はGPUreadyを待つ入口gateなし、3arena本評価を優先。GPUjob枠が必要なら173科学終了後/明示quiescent非計測枠でのみ他ownerがadmissionする。routineArena/session startupがblockごと必要ならstartup総6は初回6として全再init費を実数別記、policy/採択CP/予定gameを再試行0、費用を過小課金しない。再initのmode条件を最初の科学game前に固定。CPUpool/core/reset/モデルidenticalと十分RAM/ownerを最小確認してscienceを進め、exactkernelCPU/全host/allTIDをformal入口gateにしない。
