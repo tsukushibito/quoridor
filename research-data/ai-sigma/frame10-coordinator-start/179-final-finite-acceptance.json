@@ -1,0 +1,111 @@
+{
+  "UTC": "2026-10-03T10:12:42.324019+00:00",
+  "issue": "quoridor-4lc.179",
+  "decision": "finite saved CPU dataset/learner/diagnostic support accepted",
+  "data_git": "959de776500a347717a1d1bed2e9a6f024865d39",
+  "handoff_git": "88c78b55b50a861a932137f91f274092af900217",
+  "required_Git_restores": [
+    {
+      "path": "research-data/ai-sigma/179-native-teacher-independent/arithmetic.json",
+      "SHA256": "b03e6c89eaadb48a37e2b6c7c0315270dd9156e8f50ba746f6f00cb63faae721",
+      "bytes": 3729,
+      "Git_current_exact": true
+    },
+    {
+      "path": "research-data/ai-sigma/179-native-teacher-independent/replay.json",
+      "SHA256": "1f6b9c61a659f5c03cedc5f3955e59508c1d5a5df1cc9024592d2dfd9a88c4d0",
+      "bytes": 364,
+      "Git_current_exact": true
+    },
+    {
+      "path": "research-data/ai-sigma/179-native-teacher-independent/binding.json",
+      "SHA256": "a6f5005c004067e76ba64223442774453a25effbebb1ac120398ff83781111dd",
+      "bytes": 83775,
+      "Git_current_exact": true
+    },
+    {
+      "path": "research-data/ai-sigma/179-native-teacher-independent/executed-source-binding.json",
+      "SHA256": "092901dda22baea05a142e5a518b7950f05f441400c53ddc1eb4f140de1952ba",
+      "bytes": 1355,
+      "Git_current_exact": true
+    },
+    {
+      "path": "research-data/ai-sigma/179-native-teacher-independent/science-stop.json",
+      "SHA256": "a38415263fbf52d0f68cb1f90fd5579dbdf132ac8e6054ec3031b90eb7fc7755",
+      "bytes": 676,
+      "Git_current_exact": true
+    },
+    {
+      "path": "research-data/ai-sigma/179-native-teacher-independent/check.py",
+      "SHA256": "3233995863a88237daced07f2d83d7c570971a89374b010730cf4f58e5747401",
+      "bytes": 8768,
+      "Git_current_exact": true
+    },
+    {
+      "path": "research-data/ai-sigma/179-native-teacher-independent/replay.cjs",
+      "SHA256": "9996ec6a7790493e62eeb82a111e6918086edb7cc0dd22284f7ce03b563352f6",
+      "bytes": 3052,
+      "Git_current_exact": true
+    },
+    {
+      "path": "research-data/ai-sigma/179-native-teacher-independent/management-failure1.json",
+      "SHA256": "3b4efacc9f916b27710cb8c2e7ab58ed90e51eecba5b7a7f559b850d760c63be",
+      "bytes": 147,
+      "Git_current_exact": true
+    },
+    {
+      "path": "research-data/ai-sigma/179-native-teacher-independent/checker-failure1.json",
+      "SHA256": "10f4b308215ec770500c3201c6cbbebfb493c36cbf2afda3fab239505d810133",
+      "bytes": 107,
+      "Git_current_exact": true
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-native-teacher-independent.md",
+      "SHA256": "6a289b91b320d8bc787ba340d1326e4fd405e6229f612fee2ec355351680320e",
+      "bytes": 7709
+    },
+    {
+      "path": "research-data/ai-sigma/179-native-teacher-independent/handoff.json",
+      "SHA256": "221c090b476142e24dcbd326d9e9e7d9e3846894cc3c4043d34091aeea1e01d7",
+      "bytes": 13886
+    },
+    {
+      "path": "research-data/ai-sigma/179-native-teacher-independent/restore-check.json",
+      "SHA256": "2168fa4b548aaa0d46f69ef20b1623622f226f69929884936b04724cdffa00b3",
+      "bytes": 5638
+    }
+  ],
+  "independent_rows": 1409,
+  "teacher_games": 24,
+  "eval_games": 4,
+  "eval_WDL": [
+    0,
+    0,
+    4
+  ],
+  "source_stop_and_owner_backup": true,
+  "current_short_science_PID_absent": {
+    "3403578": true,
+    "3404006": true
+  },
+  "new_NN_model_forward_game_GPU": 0,
+  "model_data_hashes": {
+    "dataset": "a8e79d3bdcc7f5d9d7c7105a476f37e3168fc44eec47ea221a57dddd6ae2e94a",
+    "checkpoint": "c1abf195c272eb9a143ad0f88d209b7741c8c9bca0c2318de37af759ea9c2351",
+    "ONNX": "54ed35d8b175d342d8fe50339fd918dd138c1bfb6c376c90bd50daf791b6ca7a"
+  },
+  "production_job_seconds": 198.496598,
+  "production_rows_per_second": 7.0983584313117545,
+  "known_compute_export_overlap_seconds": 236.58316591098244,
+  "known_research_smalltotal_rows_per_second": 5.95562239001466,
+  "limits": [
+    "shared RuleA replay; no full independent rules/deep search",
+    "reload/export finite saved receipts, no fresh forward",
+    "split game-wise; no proof of IID/state-independent holdout",
+    "unwrapped implementation/openings/admissionwall costs unknown",
+    "0W4L connection, not strength improvement/NI",
+    "originalGPUrootmissing/6unstarted remain distinct; new future efficiency benchmark separate"
+  ],
+  "adoption": "Rpolicy/Rz/Rjoint over allattempt measured costs plus production rate; unknown costs explicit",
+  "next": "active176 bounded new CPU3/GPU3 generation efficiency; no new review gate/NN rerun"
+}
