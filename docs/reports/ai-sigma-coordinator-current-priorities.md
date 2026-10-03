@@ -20,3 +20,5 @@ rootの151有限対局時計353.880秒/16、平均22.1175秒を費用の参考�
 03:05–03:06UTCに158/159/160へ全文実配送。158本人claim/開始03:05:55、160受領claim/開始03:06:45を確認。159本人受領03:06:15.627920、claim/静的開始も確認。監督8407c748の通常observe/inspect/notes/backup/通知が1回成立した有限復旧報告を受領。旧7拒否と将来点検保証は別。監督の「cache混在を方式全般の無効としない」「実探索loopの親保持とfixture replay費を分ける」を採用し、156同形式/親再利用診断を自動連鎖せず、158/159/160の定量評価と小さい教師入口へ配分する。効果はこの3成果と次通常点検で確認する。
 
 158速報：600pairは真平均.5で通過境界を満たす数で、高power保証ではない（IID Bernoulli pair例power約.51628）。これと分布自由95%power十分n2397/真平均.55のm600 power下限約.95043を最終保存に基づき区別する。現在正式clock/残CPU/mode不足は未解決、正式run0。159本人claim開始03:06:15と160本人claim開始03:06:45を確認、各成果は統括へ報告待ち。
+
+2026-10-03T03:28:47.483868+00:00：158の5pp/片側95%/固定600pair第一統計案・未知全予定/固定停止/条件付きopening proposalを採用。sampler実生成/clock実効費/並列mode/正式版manifestは未成立なので正式WDL保留。600pairは高power保証でない。160の5diagnostic export/validatorを有限受入れ。後続quoridor-4lc.161既criticは残費/clockの最小方式と任意NN0 worker/TID直接binding、quoridor-4lc.162既hypothesisは20step単CPUの小PV loss/backward/checkpoint/既依存ONNX parityを部分採用し実配分。どちらも159全heavy物理回収後だけCPU重いjobを開始、合計4logical/8GiB。新selfplay/本PV学習/arena/NNUE主実装は今追加0。CPUsmokeはtrainer/変換不足を総120秒で見分ける準備、teacherfitを棋力にしない。正式1200run未開始/終了延長0。

@@ -1,0 +1,63 @@
+{
+  "UTC": "2026-10-03T03:28:47.483868+00:00",
+  "minimum_checks": [
+    {
+      "path": "research-data/ai-sigma/158-formal-ni-plan/numbers.json",
+      "Git": "cb01c19e77a9f44b8d3f99f94fcdf3a45f080383",
+      "SHA256": "a875a124c3a085adfb153148a9675fc6deec5b1f6ee727fc359629409c759402"
+    },
+    {
+      "path": "research-data/ai-sigma/158-formal-ni-plan/source-process-stop.json",
+      "Git": "cb01c19e77a9f44b8d3f99f94fcdf3a45f080383",
+      "SHA256": "a81a5a8f6c18899423572029c329d599ef4dd9781a58a38aa725916f55e45a77"
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-formal-ni-plan.md",
+      "Git": "cb01c19e77a9f44b8d3f99f94fcdf3a45f080383",
+      "SHA256": "69c1948ac6626bf0d75cfe72d7e79e65341cb8d844fafc20a6fc3d8067b67c07"
+    },
+    {
+      "path": "research-data/ai-sigma/160-pv-pipeline-bootstrap/stop.json",
+      "Git": "509491462be8b2e11888564f5403c48330e8bda6",
+      "SHA256": "ab0e8c352458a6958d0886d9b86c68d55b0f5e724c28ed4d1e0fc8f82b575704"
+    },
+    {
+      "path": "research-data/ai-sigma/160-pv-pipeline-bootstrap/fixtures.jsonl",
+      "Git": "509491462be8b2e11888564f5403c48330e8bda6",
+      "SHA256": "978b3a9eb51e9b994e8d5c56bd97bbd1281797be0e3d925b42b9dfcb2c71cd2e"
+    },
+    {
+      "path": "research-data/ai-sigma/160-pv-pipeline-bootstrap/schema.json",
+      "Git": "509491462be8b2e11888564f5403c48330e8bda6",
+      "SHA256": "8eb23b3fd587074489ff93011b1a681f22034bdf385e969125993cd805b78012"
+    },
+    {
+      "path": "tools/ai-sigma-pv-pipeline-bootstrap/bootstrap.py",
+      "Git": "509491462be8b2e11888564f5403c48330e8bda6",
+      "SHA256": "cd84e59faa7f43f4737ad99be5f985f7218ef9ee92edea7622d45782c5da8f21"
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-pv-pipeline-bootstrap.md",
+      "Git": "509491462be8b2e11888564f5403c48330e8bda6",
+      "SHA256": "011042b735fa01ca84a6a6e8585985c93e50ae8cb0eac46db8d2988f6b30697a"
+    }
+  ],
+  "158_adopted": "first NI margin5pp/alpha .05/fixed600 + typed outcomes/unknown full denominator; distribution proposal accepted for implementation feasibility not ready; no formal WDL before clocks/mode/actualmanifest frozen",
+  "160_accepted": "five diagnostic groups export/validator finite; not holdout/learning ready; stopped+backup+4 streamchecks",
+  "power": "m600 true mean .5 highpower not guaranteed; fixedsample ifuncertain no posthocextend; highpower alternative2397 plannedbeforefutureWDL",
+  "next_actual_allocations": [
+    {
+      "issue": "quoridor-4lc.161",
+      "role": "critic",
+      "path": "docs/design/ai-sigma-contract-critic-formal-clock.md"
+    },
+    {
+      "issue": "quoridor-4lc.162",
+      "role": "hypothesis",
+      "path": "docs/design/ai-sigma-contract-hypothesis-pv-cpu-smoke.md"
+    }
+  ],
+  "160_proposal_partial_adoption": "CPU toy checkpoint/export only now; new selfplay+arena later because main NI priority/residualframecost",
+  "CPU_heavy_gating": "159 physical allheavy stop/currentownership/headroom, then bounded CPU toy/optionalNN0 binding; no NNUE main",
+  "formalNI_or_goal_achieved": false
+}
