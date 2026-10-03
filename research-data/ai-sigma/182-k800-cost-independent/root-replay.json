@@ -1,0 +1,45 @@
+{
+  "issue": "quoridor-4lc.182",
+  "NN_executed": 0,
+  "sharedRuleA": true,
+  "deep_replay": false,
+  "supported": true,
+  "all30root_inputs": true,
+  "fixtures": [
+    {
+      "fixture": "initial-p1",
+      "rows": 10,
+      "side": 1,
+      "ply": 0,
+      "key": "4,0|4,8|0||",
+      "action209": 13,
+      "history_entries": 1,
+      "legal_count": 131
+    },
+    {
+      "fixture": "asym-hv-p2",
+      "rows": 10,
+      "side": 2,
+      "ply": 3,
+      "key": "4,1|4,8|1|1,2|5,3",
+      "action209": 129,
+      "history_entries": 4,
+      "legal_count": 123
+    },
+    {
+      "fixture": "straight-jump-p2",
+      "rows": 10,
+      "side": 2,
+      "ply": 7,
+      "key": "4,4|4,5|1||",
+      "action209": 31,
+      "history_entries": 8,
+      "legal_count": 132
+    }
+  ],
+  "first_difference": null,
+  "elapsed_seconds": 0.026824003,
+  "RSS": 59592704,
+  "PID": 3450562,
+  "UTC": "2026-10-03T11:01:57.446Z"
+}
