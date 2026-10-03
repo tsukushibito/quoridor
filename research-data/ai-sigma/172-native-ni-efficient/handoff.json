@@ -1,0 +1,295 @@
+{
+  "issue": "quoridor-4lc.172",
+  "data_git": "e4668db96ca9a5e712a190e09b6d16b8913f6801",
+  "source_stopped": true,
+  "children_stopped": true,
+  "restore_verified": true,
+  "Beads_backup_sync": true,
+  "self_close": false,
+  "formal_ready": false,
+  "source_stop": {
+    "issue": "quoridor-4lc.172",
+    "UTC": "2026-10-03T06:48:15.132255+00:00",
+    "current_owner": "codex:01a0f31d-8227-7e03-a7e6-915b4918c11b",
+    "science_source_stopped": true,
+    "science_children_current_absent": true,
+    "new_NN": 0,
+    "new_game": 0,
+    "formal_ready": false,
+    "scope_bytes": 24558,
+    "forecast_bytes": 2097152,
+    "old_unknown_discount": 0,
+    "extra_parent_reservation": 0,
+    "check_source_SHA": "058b160a5a8ada512afc82125f6bad882bc05a1b24cc27816ce7884c36ba6c72",
+    "management_failure": {
+      "attempt": "finalize admission",
+      "exit": 1,
+      "reason": "newcommand deadline assertion refused before mutation",
+      "no_science_reexecution": true
+    },
+    "remaining_work": "stop preservation Beads backup handoff only"
+  },
+  "elapsed_seconds": 8.32689234497957,
+  "commands": [
+    {
+      "command": [
+        "bash",
+        "scripts/dev/beads.sh",
+        "show",
+        "quoridor-4lc.172",
+        "--json"
+      ],
+      "exit": 0,
+      "stdout_SHA": "7ff9618631960af02a1cb69da1b2ed9fc25efab5311df2ee0823a4dd3b15a70d",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/dev/beads.sh",
+        "show",
+        "quoridor-4lc",
+        "--json"
+      ],
+      "exit": 0,
+      "stdout_SHA": "b98b72efbd4a55695ad3a660da1c910439a95cbfddeb239441d54c80021a9a56",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "read-tree",
+        "HEAD"
+      ],
+      "exit": 0,
+      "stdout_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "add",
+        "--",
+        "research-data/ai-sigma/172-native-ni-efficient/proposal.json",
+        "research-data/ai-sigma/172-native-ni-efficient/physical-admission.json"
+      ],
+      "exit": 0,
+      "stdout_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "commit",
+        "-m",
+        "research: critic 172 native NI conditional stopping plan"
+      ],
+      "exit": 0,
+      "stdout_SHA": "2cfc50323823e92fc2366b0105c7c4061088e637e63305824667d1ab2c64cb23",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit": 0,
+      "stdout_SHA": "79bdbe227c71c5fb6e0b2ca960d974a29bb613d69440b2bd8b86ebfa23104a7e",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "e4668db96ca9a5e712a190e09b6d16b8913f6801:research-data/ai-sigma/172-native-ni-efficient/proposal.json"
+      ],
+      "exit": 0,
+      "stdout_SHA": "c57ea9a769f0374832b0372fdaddda158474111860d90fea4f5d88434749f7cc",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "e4668db96ca9a5e712a190e09b6d16b8913f6801:research-data/ai-sigma/172-native-ni-efficient/physical-admission.json"
+      ],
+      "exit": 0,
+      "stdout_SHA": "b85f753257264a983e99762e3a8aaccaccaa22fc7abf711221eb9d6eb941fc3a",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "e4668db96ca9a5e712a190e09b6d16b8913f6801:research-data/ai-sigma/172-native-ni-efficient/start-report.stderr"
+      ],
+      "exit": 0,
+      "stdout_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "e4668db96ca9a5e712a190e09b6d16b8913f6801:research-data/ai-sigma/172-native-ni-efficient/managed.py"
+      ],
+      "exit": 0,
+      "stdout_SHA": "18d183ccf76e59ac9256c7fc4d6611c28a26c688e6d5a7379093af6ce9c4f176",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "e4668db96ca9a5e712a190e09b6d16b8913f6801:research-data/ai-sigma/172-native-ni-efficient/start-report.txt"
+      ],
+      "exit": 0,
+      "stdout_SHA": "63b33a71ef5067364da0d5fea2b957da693f101473590233e59dde9b5610d6b4",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "e4668db96ca9a5e712a190e09b6d16b8913f6801:research-data/ai-sigma/172-native-ni-efficient/check-result.json"
+      ],
+      "exit": 0,
+      "stdout_SHA": "07d063b171cf0d752d5791db14fb74e47b252c7ebf7971da622521d9aeaf0a4a",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "e4668db96ca9a5e712a190e09b6d16b8913f6801:research-data/ai-sigma/172-native-ni-efficient/early-report.stderr"
+      ],
+      "exit": 0,
+      "stdout_SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "e4668db96ca9a5e712a190e09b6d16b8913f6801:research-data/ai-sigma/172-native-ni-efficient/check.py"
+      ],
+      "exit": 0,
+      "stdout_SHA": "058b160a5a8ada512afc82125f6bad882bc05a1b24cc27816ce7884c36ba6c72",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "e4668db96ca9a5e712a190e09b6d16b8913f6801:research-data/ai-sigma/172-native-ni-efficient/early-report.txt"
+      ],
+      "exit": 0,
+      "stdout_SHA": "a1796d40ad22933b791f21b851c2da5d1463b291e15a59c3e1292bf9418f2bef",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "e4668db96ca9a5e712a190e09b6d16b8913f6801:research-data/ai-sigma/172-native-ni-efficient/primary-reference.json"
+      ],
+      "exit": 0,
+      "stdout_SHA": "195b6a4b0f3fc7c358ffb6c1a52f160d17aef9f86a2f620ed65408da4e4b6106",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "e4668db96ca9a5e712a190e09b6d16b8913f6801:research-data/ai-sigma/172-native-ni-efficient/source-stop.json"
+      ],
+      "exit": 0,
+      "stdout_SHA": "e11547ad7e3a8e81dd5aef525c2f9ce02b1d6bc6bcf6d81beef152866eb42b90",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "e4668db96ca9a5e712a190e09b6d16b8913f6801:research-data/ai-sigma/172-native-ni-efficient/check-r1.process.json"
+      ],
+      "exit": 0,
+      "stdout_SHA": "eb6efe17cca0920f7500e5f8dd2dc6f96a4e934fed4159426bbe0abc479c6ff5",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "e4668db96ca9a5e712a190e09b6d16b8913f6801:research-data/ai-sigma/172-native-ni-efficient/check-r1.log"
+      ],
+      "exit": 0,
+      "stdout_SHA": "8b0833d0d319d69e36dd9826097a438b5e371ca442de5e7b027edfc2b132c073",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "e4668db96ca9a5e712a190e09b6d16b8913f6801:research-data/ai-sigma/172-native-ni-efficient/start-report-transport.json"
+      ],
+      "exit": 0,
+      "stdout_SHA": "aaaf144aa4fd20740d79d21c0622d3b9b88b4e613f1ec42f60d5275da98d4920",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "e4668db96ca9a5e712a190e09b6d16b8913f6801:research-data/ai-sigma/172-native-ni-efficient/intake.json"
+      ],
+      "exit": 0,
+      "stdout_SHA": "1d3ef399e52e17e103a86510d981579e3a0c18f7692f7f0e7bcff7d34bdad1a9",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "e4668db96ca9a5e712a190e09b6d16b8913f6801:research-data/ai-sigma/172-native-ni-efficient/early-report-transport.json"
+      ],
+      "exit": 0,
+      "stdout_SHA": "aaaf144aa4fd20740d79d21c0622d3b9b88b4e613f1ec42f60d5275da98d4920",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "e4668db96ca9a5e712a190e09b6d16b8913f6801:docs/reports/ai-sigma-critic-native-ni-efficient.md"
+      ],
+      "exit": 0,
+      "stdout_SHA": "d2d982886c4230490dc2871adc5274a6897d6e9ac9f224df72510b57a39ded17",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/dev/beads.sh",
+        "update",
+        "quoridor-4lc.172",
+        "--notes"
+      ],
+      "exit": 0,
+      "stdout_SHA": "5970d2da478dc5a7e443e4110583e6213092febea813183d7cc303982286d0bf",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/dev/beads.sh",
+        "backup",
+        "sync"
+      ],
+      "exit": 0,
+      "stdout_SHA": "1a52937233cbce8a4239df89a157d6f545c78445948fa84afe3862a18da67462",
+      "stderr": ""
+    }
+  ]
+}
