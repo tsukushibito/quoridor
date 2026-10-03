@@ -34,7 +34,7 @@
 
 目標issueは研究全体の継続を管理し、個別実験は子issueで担当と受入れを管理する。完了した子issueの報告で継続を起動するときは、通信の `--issue` に進行中の目標issueを指定し、本文に実験issueを記す。目標と個別作業のpauseは送信前にも確認する。既存deferred/paused issueを黙って再開しない。
 
-2026-10-01（日本時間）のユーザー合意により、最初の到達目標は「固定したSigmaQuoridorと同じ計算資源・思考時間で同等水準の強さを持ち、ブラウザで使えるRust/Wasm AI」に確定した。Ka・gorisanson・Titanium・Claustrophobia・Ishtar / Zero-Inkは参考比較とし、これらへの勝利を初回の達成条件にしない。実装研究の主要参考はClaustrophobiaとSigmaQuoridorを維持する。
+2026-10-03のユーザー指示により、最終目標は「NNUE型で最強のQuoridor AI」とする。[研究目標](ai-sigma-research-goal.md)と[NNUE研究方針](ai-nnue-research.md)を参照し、統括・仮説・検証・監督は課題選定をこの目標への貢献から判断する。最初の到達目標は、固定したSigmaQuoridorと同じ計算資源・思考時間で同等水準の強さを持ち、ブラウザで使えるRust/Wasm AI。Sigmaモデルを使う忠実な探索、自前モデルの学習、NNUE＋αβ比較を基本経路とするが、必要な予備調査と並行実験は枠内で配分できる。Ka・gorisanson・Titanium・Claustrophobia・Ishtar / Zero-Inkは初回には参考比較、最終段階では有力AIから正式比較対象を選ぶ。これらへの勝利を初回の達成条件にしない。実装研究の主要参考はClaustrophobiaとSigmaQuoridorを維持する。
 
 Sigmaのcommit/release、モデルのハッシュ、探索設定、対象機材、CPU/GPU・スレッド数・メモリ・思考時間を対戦前に固定する。同等水準は「実用上Sigmaに劣らないこと（上回る場合を含む）」として、統括と検証担当が非劣性許容差・信頼水準・開始局面・先後入替・必要な精度と判定手順を事前に定義する。思考時間と数値基準は未確定で、従来の1手1秒案は採択済みの制約として扱わない。200対局程度は探索的な開始数であり、必要な精度が得られた保証とはしない。
 
