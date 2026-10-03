@@ -1,26 +1,19 @@
-# 現在の優先順位と正式評価・学習準備計画
+# 現在の優先順位と評価・学習計画
 
-2026-10-03 03:11 UTC。ユーザー指摘を受け、前段とNNUE予備調査の関係/完了条件/実費を示せていなかった点を訂正する。Sigma棋力同等は未認定、学習パイプライン未整備、NNUE evaluator/αβ/学習未着手。156は科学外費11.793秒のNN0予備診断に限定、cache3減1増で終了し、NNUE主実装へ拡大しない。終局16の7勝9敗・同K一致を同等判定へ置換しない。
+2026-10-03版11。ユーザー確定方針により、棋力検証・大量対局・自己対局の主環境をネイティブとし、高速化・効率化で結果と学習データを得る総費を下げる。最終目標はNNUE型の最高棋力、初期Sigma同等は未認定。Wasmは必要な数値/探索/合法/応答/取消と少数の実用確認に限定し、大規模Wasm NIを主研究の入口にしない。CPU/GPUは目的と実費から選び、GPU利用を開始条件にしない。
 
-| 優先 | 問い・到達点 | 今枠の実配分/担当 | 完了条件・次判断 |
+開始00:15:21UTC維持、明示4時間追加で終了08:15:21UTC、重開始08:05:21/監督08:10:21/monitor08:13:21。CPU4logical/RAM8GiB/保持＋予約12GiB、既GPU推論6GiB/job30min・追加GPU学習0。親期限と92運用はsteward単独writerで更新済み、同schedulerを重複開始しない。旧枠の個別期限/結果は変えない。
+
+| 優先 | 問い・到達点 | 配分と完了条件 | 次判断 |
 | --- | --- | --- | --- |
-| 主1 | Sigma「同等」の定量判定と対象を確定 | 158既critic、静的120秒/受領20分処理 | margin5pp/片側95%、開始分布/独立pair/未知分類/固定n/clock資源/費用を正式WDL前に定義。未解決条件は正式開始保留 |
-| 主2 | CPU1/2/4並列で同wallの条件と評価費を確認 | 159既experiment、固定同入力60要求最大、heavy360秒/総手NN2048 | coreごとのsolo対2/4、firstCP/NN/完成量/期限tail/aggregateRAM。4が4logical/8GiBで不成立なら2/未実施。採用modeを正式WDL前に固定 |
-| 並行小準備 | 自前PVの教師データ契約と再読込を動かす | 160既hypothesis、5保存rootのexport/validator/split smoke、static90秒/512KiB | leafNN/rootmean/π/game結果と出所/視点を分離。自己対局→学習→評価の必要未実装と次実行単位を明示。学習/棋力readyと言わない |
-| 運用 | 保存7件の監督guard拒否からの復旧 | 92既steward、現修復割当180秒、次自然observe | 会計範囲訂正/loaded成功と実監督成立を分ける。旧保持/7失敗/終了承継、研究開始gate0 |
-| 後続 | 自己対局生成/CPU学習smoke→本PV学習→同資源評価 | 本枠はデータ/計画まで、追加GPU学習0 | 次実配分/次枠提案。正式NI大標本を軽い準備の一律gate0 |
-| 後続 | NNUE＋αβ/方策headの棋力比較 | 候補登録のみ、今枠主実装0 | 前段基準/データ/実費を使って選択。安い予備調査の許可を全面移行へ解釈しない |
+| 主1 | 最小native忠実Sigma基準と同時間対局が動くか、総費はいくらか | 165既experiment。151 Rust探索＋固定Web751186のnative-hosted参照＋同ONNX/既CPU provider、私有build→5入力sameK32→条件付き新8pair16診断。build120s/機構180s/対局1800s、新64MiB既枠内 | 同K有限対応とsamewall費/結果を分けて受入れ、native正式設計・教師生成へ。障害なら最小route修復。formal1200/Wasm再検証の義務0 |
+| 並行小調査 | CPU/native輸送と既GPU providerの実行可能性/費用の選択 | 164既hypothesis。新NN/GPU/学習0、静的60s/128KiB、10分速報。既依存とsourceから最大1経路 | CPU first優先。GPUは必要な単局面/batch実測を後続配分、GPU対応を文字列だけで認定0 |
+| 必要独立視点 | native参照・時計・局面/標本が主問いを満たすか | 166既critic。静的90s/新2MiB、10分速報。実装開始gate0 | 重大scope差を結果前修正、少数診断をNIにしない。正式比較の新native条件を後続固定 |
+| 学習準備 | 実対局π/z/rootmean→lineage group→本PV学習→独立arena | 162で小CPU toy 20step/weights-only checkpoint/ONNX5行parityが実成立。現在は5診断の4train/1validationのみ | native基準のπ/z出力を小schemaへ接続する次配分。full selfplay/学習規模/実PV構造/独立holdout未整備、GPU学習追加0 |
+| NNUE/方策 | 前段の基準・教師・費用からNNUE＋αβ/方策順序を選ぶ | 156予備コスト終了、主NNUE実装拡大0。方策head候補は正本登録済み | 総探索費と棋力を比較できる段階で別配分、toy損失やcache速度を棋力へ置換0 |
 
-第一正式数値案は既採択を継承：pair Xi=(2色score)/2、margin=.05、片側95%、L=max(0,mean−sqrt(log20/(2m)))>.45なら非劣性。厳密両側等価ではない。mean=.5なら600pair/1200game、200pairなら>.5365409191、100pairなら>.5723873415。新候補/新独立分布/資源clock条件に事前固定し、旧計画/16診断へ遡及適用しない。上限を使う実用上劣性判定、固定標本/未完了識別区間、独立性/抽出/被覆仮定と代替法は158の独立裁定で具体化し統括が採否する。計画成立、実測不足保留、NI支持、劣性支持、不確かを分ける。
+同等の実用定義は5pp非劣性/片側95%という旧158案を保存し、browser m600/1200gameや旧rawを遡及変更しない。旧式L=max(0,mean−sqrt(log20/(2m)))>.45、m600でmean.5を通すが高power保証はない（例示Bernoulli pair power約.51628、分布自由95%power十分m2397）。計画成立、実測不足保留、非劣性支持、劣性支持、不確かを区別する。新native版の参照・モデル/backend・時計/資源・独立開始分布/抽出仮定・fault全分母・固定m/停止を正式データ前に別固定し、今回16診断や教師へ正式holdoutを流用しない。native結果をbrowser NI達成へ読み替えない。
 
-rootの151有限対局時計353.880秒/16、平均22.1175秒を費用の参考とすると1200gameは対局部分7h22m21s単独、速度維持を仮定した4並列でも1h50m35s。準備/保存/モデルinit/熱や新局面差は別。200ply×500ms上限なら33h20m単独/4でも8h20m。現枠残時間から正式達成を約束せず、並列は4logical/8GiB/RSS初期化/他owner実量を実確認。並列でも無影響とみなさず単独結果に混合しない。
+161 NN0 clock14mock、163 browser fixed1000ms/12要求のD500までACKとmain402採用を有限受入れ。163preregisterに1000cycleがあり、161『ACKは次1000前で可』との差は『D500まで必須』として保存、prototype14mockをD500実証へ転用しない。kernelCPU/TID/cutoff誤差等欠測を残しformal_ready=false。費用の大きいbrowser正式clock全保証へ自動連鎖せず、この基準を主native経路へ移す。151/153/155の機構/合法16局7勝9敗を再利用するが同等未立証。
 
-今枠は評価設計・正式条件/費用の校正、安いデータ入口を完了させる。正式1200局やGPU学習の無許可開始/終了後自動延長0。158/159結果後に、十分な残枠と事前固定条件が成立する小診断/修復だけ追加判断できるが、大標本計画とは別に記録する。将来正式枠の必要時間は実並列倍率/初期化/停止余裕で更新して提案する。04:15:21終了、重04:05:21/監督04:10:21/monitor04:13:21、CPU4/RAM8/保持＋予約12GiB、既GPU推論枠/追加GPU学習0、各writer/saved設定/92責任は不変。
-
-03:05–03:06UTCに158/159/160へ全文実配送。158本人claim/開始03:05:55、160受領claim/開始03:06:45を確認。159本人受領03:06:15.627920、claim/静的開始も確認。監督8407c748の通常observe/inspect/notes/backup/通知が1回成立した有限復旧報告を受領。旧7拒否と将来点検保証は別。監督の「cache混在を方式全般の無効としない」「実探索loopの親保持とfixture replay費を分ける」を採用し、156同形式/親再利用診断を自動連鎖せず、158/159/160の定量評価と小さい教師入口へ配分する。効果はこの3成果と次通常点検で確認する。
-
-158速報：600pairは真平均.5で通過境界を満たす数で、高power保証ではない（IID Bernoulli pair例power約.51628）。これと分布自由95%power十分n2397/真平均.55のm600 power下限約.95043を最終保存に基づき区別する。現在正式clock/残CPU/mode不足は未解決、正式run0。159本人claim開始03:06:15と160本人claim開始03:06:45を確認、各成果は統括へ報告待ち。
-
-2026-10-03T03:28:47.483868+00:00：158の5pp/片側95%/固定600pair第一統計案・未知全予定/固定停止/条件付きopening proposalを採用。sampler実生成/clock実効費/並列mode/正式版manifestは未成立なので正式WDL保留。600pairは高power保証でない。160の5diagnostic export/validatorを有限受入れ。後続quoridor-4lc.161既criticは残費/clockの最小方式と任意NN0 worker/TID直接binding、quoridor-4lc.162既hypothesisは20step単CPUの小PV loss/backward/checkpoint/既依存ONNX parityを部分採用し実配分。どちらも159全heavy物理回収後だけCPU重いjobを開始、合計4logical/8GiB。新selfplay/本PV学習/arena/NNUE主実装は今追加0。CPUsmokeはtrainer/変換不足を総120秒で見分ける準備、teacherfitを棋力にしない。正式1200run未開始/終了延長0。
-
-2026-10-03T03:43:38.631705+00:00：159登録60のfinite sameinput測定を受入れ。4並列RSS6.096GB/参考batch係数3.814は実施可能性の限定根拠でWDL速度/正式採用でない。solo2 control不足と残CPU/arenaRSS欠測保持。161暫定same-core固定cycleを採用候補としてquoridor-4lc.163既experimentにstaticmock→2input12検索の実確認を配分。前cycleD以降に次t0、main自身のCP read/admit、旧NN停止を原因側cycle内へ記録する別mode。失敗/不明はtyped保存し正式readyにしない。162CPU toyと資源分離、NNUE主実装/1200正式run0。
+監督の『fixture負担除去を実探索/棋力改善としない』『全cacheの優劣を4状態結果で決めない』『軽い学習準備と正式評価を分ける』を採用。次効果確認はnative機構成立の有無・games/sec/有効教師行/sec・起動/NN/輸送/記録の支配費と実際の配分変更。主基盤の巨大化/追加承認層を効果と数えない。前のbrowser主計画はresearch-data/ai-sigma/frame10-coordinator-start/priorities-before-native-20261003.mdに保存。
