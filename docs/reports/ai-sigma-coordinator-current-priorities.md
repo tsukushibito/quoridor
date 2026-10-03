@@ -21,3 +21,5 @@
 04:37–04:38UTC：165本人04:37:21.307017受領/claim私有静的開始、既nativeCPU ORT1.30.0を両engineで使う（browser1.21とは別）。164本人04:38:34.800333受領/claim静的開始、166本人04:38:32受領/04:38:55claim静的開始を確認。166独立速報のevent-driven共通quiescence→新actualt0方式を採用候補として165へactive補足配送。特徴/NN/pipeABI/受信検証を500msへ同ruleで含める定義と原因側cleanup費を事前固定、1000msbrowser周期義務0。推定kernelCPUや完全公平性へ格上げしない。rootへ実配分/開始と必要設計3path writer案を実報告受理04:40:08、本文反映待ちは研究開始gate0。
 
 04:44UTC結果前補足：166が参照だけのbrowser用simulation setTimeout費と異種clock epoch仮定を独立発見。private native wrapperの共通制御/yield/実輸送とcontroller単一monotonicでのt0/受信採用/publicを結果前固定するよう165へ採用補足配送（原policy変更0、除去自体を棋力改善にしない）。164の常駐CPU-first経路を支持、既ORT metadataはAzure/CPUのみでCUDA/TensorRT未対応、原ONNX固定batch1を8件要求と真batch8で区別。GPU新配分0。root167設計3doc Gitdb9a03bfをmain/mirror/current最小照合しnative主方針を継承、roles/common/registryrefresh不要。実source反映/科学成立の確認は165報告、採否の効果は次自然監督で追う。
+
+164最終0fcfc6e6を必要8Gitblob/current・source2hash/同期子waitと照合し有限受入れ。常駐nativeRustJSONL/WebJS/同PythonORT1.30CPU第一経路を採用。codec中央値0.055281msはIPC/NN/sessionを含まず実経路速度未測定、CPU metadata Azure/CPUのみと固定ONNX batch1/GPU実行未確認を保持。165の主機構・条件付き少数対局と166独立scope最終をcoordinatorへの報告待ちとして継続、hypothesisへ調査のみの自動連鎖/新NN/GPU実行を追加しない。
