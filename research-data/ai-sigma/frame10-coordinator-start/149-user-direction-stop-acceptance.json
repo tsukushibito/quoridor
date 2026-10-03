@@ -1,0 +1,327 @@
+{
+  "UTC": "2026-10-03T01:21:26.401710+00:00",
+  "issue": "quoridor-4lc.149",
+  "canonical_Git_current_SHA": {
+    "handoff.json": "95beace58ed1023116ddedc93021c6f078abe0a228608655d3d33557fabbd3d4",
+    "final-source-stop.json": "a920a585329fcf52cc7ff99a8b15b4459a553946f914cb6be18fdbfc70702835",
+    "user-direction-science-stop.json": "f41c4d9c6263c908e268950edde977b94a94a967ab8dca5e85fc669287e79b8e"
+  },
+  "normal_saved_summary_independent_arithmetic": [
+    {
+      "id": "slot03-color1",
+      "candidate_color": 1,
+      "winner": 2,
+      "candidate_score": 0,
+      "new_public": 35
+    },
+    {
+      "id": "slot03-color2",
+      "candidate_color": 2,
+      "winner": 1,
+      "candidate_score": 0,
+      "new_public": 52
+    },
+    {
+      "id": "slot04-color1",
+      "candidate_color": 1,
+      "winner": 2,
+      "candidate_score": 0,
+      "new_public": 57
+    },
+    {
+      "id": "slot04-color2",
+      "candidate_color": 2,
+      "winner": 1,
+      "candidate_score": 0,
+      "new_public": 70
+    },
+    {
+      "id": "slot05-color2",
+      "candidate_color": 2,
+      "winner": 1,
+      "candidate_score": 0,
+      "new_public": 56
+    },
+    {
+      "id": "slot05-color1",
+      "candidate_color": 1,
+      "winner": 2,
+      "candidate_score": 0,
+      "new_public": 67
+    },
+    {
+      "id": "slot06-color2",
+      "candidate_color": 2,
+      "winner": 1,
+      "candidate_score": 0,
+      "new_public": 66
+    },
+    {
+      "id": "slot06-color1",
+      "candidate_color": 1,
+      "winner": 2,
+      "candidate_score": 0,
+      "new_public": 63
+    },
+    {
+      "id": "slot07-color2",
+      "candidate_color": 2,
+      "winner": 1,
+      "candidate_score": 0,
+      "new_public": 59
+    },
+    {
+      "id": "slot07-color1",
+      "candidate_color": 1,
+      "winner": 2,
+      "candidate_score": 0,
+      "new_public": 76
+    },
+    {
+      "id": "slot08-color2",
+      "candidate_color": 2,
+      "winner": 2,
+      "candidate_score": 1,
+      "new_public": 64
+    },
+    {
+      "id": "slot08-color1",
+      "candidate_color": 1,
+      "winner": 2,
+      "candidate_score": 0,
+      "new_public": 64
+    },
+    {
+      "id": "slot09-color1",
+      "candidate_color": 1,
+      "winner": 1,
+      "candidate_score": 1,
+      "new_public": 68
+    },
+    {
+      "id": "slot09-color2",
+      "candidate_color": 2,
+      "winner": 1,
+      "candidate_score": 0,
+      "new_public": 40
+    },
+    {
+      "id": "slot10-color1",
+      "candidate_color": 1,
+      "winner": 2,
+      "candidate_score": 0,
+      "new_public": 65
+    },
+    {
+      "id": "slot10-color2",
+      "candidate_color": 2,
+      "winner": 1,
+      "candidate_score": 0,
+      "new_public": 50
+    },
+    {
+      "id": "slot11-color1",
+      "candidate_color": 1,
+      "winner": 2,
+      "candidate_score": 0,
+      "new_public": 50
+    },
+    {
+      "id": "slot11-color2",
+      "candidate_color": 2,
+      "winner": 1,
+      "candidate_score": 0,
+      "new_public": 77
+    },
+    {
+      "id": "slot12-color1",
+      "candidate_color": 1,
+      "winner": 1,
+      "candidate_score": 1,
+      "new_public": 79
+    },
+    {
+      "id": "slot12-color2",
+      "candidate_color": 2,
+      "winner": 1,
+      "candidate_score": 0,
+      "new_public": 49
+    }
+  ],
+  "WDL": [
+    3,
+    0,
+    17
+  ],
+  "planned64_unknown_interval": [
+    0.046875,
+    0.734375
+  ],
+  "OOM_unknown4": true,
+  "direction_unstarted40": true,
+  "normal_public": 1207,
+  "normal_handNN": 11761,
+  "normal_stops": [
+    {
+      "run": "gap149-group02-r1",
+      "stop_SHA256": "8842e7073a02e833cc5485dfe6b1ee5d73401eefe14efe610434a0687226f2b7",
+      "model_receipt": {
+        "players": [
+          {
+            "kind": "dropped",
+            "handles": 0,
+            "activeNN": 0,
+            "at_ms": 1790988878122.58,
+            "producer_post_begin_ms": 1790988878122.585,
+            "worker_engine": "candidate"
+          },
+          {
+            "kind": "dropped",
+            "handles": 0,
+            "activeNN": 0,
+            "at_ms": 1790988878124.705,
+            "producer_post_begin_ms": 1790988878124.705,
+            "worker_engine": "reference"
+          }
+        ],
+        "handles": 0,
+        "activeNN": 0
+      },
+      "main_receipt": {
+        "main_timers": 0,
+        "pending_messages": []
+      },
+      "outer_empty": true
+    },
+    {
+      "run": "gap149-group03-r1",
+      "stop_SHA256": "029c21c1d47148638efc0dbae5f87e600ca6cf228452f8301e79e006de7f3be4",
+      "model_receipt": {
+        "players": [
+          {
+            "kind": "dropped",
+            "handles": 0,
+            "activeNN": 0,
+            "at_ms": 1790989319249.57,
+            "producer_post_begin_ms": 1790989319249.615,
+            "worker_engine": "candidate"
+          },
+          {
+            "kind": "dropped",
+            "handles": 0,
+            "activeNN": 0,
+            "at_ms": 1790989319251.3198,
+            "producer_post_begin_ms": 1790989319251.4248,
+            "worker_engine": "reference"
+          }
+        ],
+        "handles": 0,
+        "activeNN": 0
+      },
+      "main_receipt": {
+        "main_timers": 0,
+        "pending_messages": []
+      },
+      "outer_empty": true
+    },
+    {
+      "run": "gap149-group04-r1",
+      "stop_SHA256": "d132355f9002306c9214aaf6d8fedc62a65433a404f2ae1112012b98c9bfeca1",
+      "model_receipt": {
+        "players": [
+          {
+            "kind": "dropped",
+            "handles": 0,
+            "activeNN": 0,
+            "at_ms": 1790989457788.195,
+            "producer_post_begin_ms": 1790989457788.2,
+            "worker_engine": "candidate"
+          },
+          {
+            "kind": "dropped",
+            "handles": 0,
+            "activeNN": 0,
+            "at_ms": 1790989457789.53,
+            "producer_post_begin_ms": 1790989457789.5352,
+            "worker_engine": "reference"
+          }
+        ],
+        "handles": 0,
+        "activeNN": 0
+      },
+      "main_receipt": {
+        "main_timers": 0,
+        "pending_messages": []
+      },
+      "outer_empty": true
+    },
+    {
+      "run": "gap149-group05-r1",
+      "stop_SHA256": "8f5d0ed82ea653f16fdce492ea5e118409b0377aae211608018a84457146e4af",
+      "model_receipt": {
+        "players": [
+          {
+            "kind": "dropped",
+            "handles": 0,
+            "activeNN": 0,
+            "at_ms": 1790989579317.25,
+            "producer_post_begin_ms": 1790989579317.25,
+            "worker_engine": "candidate"
+          },
+          {
+            "kind": "dropped",
+            "handles": 0,
+            "activeNN": 0,
+            "at_ms": 1790989579318.045,
+            "producer_post_begin_ms": 1790989579318.05,
+            "worker_engine": "reference"
+          }
+        ],
+        "handles": 0,
+        "activeNN": 0
+      },
+      "main_receipt": {
+        "main_timers": 0,
+        "pending_messages": []
+      },
+      "outer_empty": true
+    },
+    {
+      "run": "gap149-group06-r1",
+      "stop_SHA256": "d861f071ed33cd77f1b86ebe7de636561fa666e82b6b3e3b4a3206a9f6d9c5a9",
+      "model_receipt": {
+        "players": [
+          {
+            "kind": "dropped",
+            "handles": 0,
+            "activeNN": 0,
+            "at_ms": 1790989714466.345,
+            "producer_post_begin_ms": 1790989714466.355,
+            "worker_engine": "candidate"
+          },
+          {
+            "kind": "dropped",
+            "handles": 0,
+            "activeNN": 0,
+            "at_ms": 1790989714467.175,
+            "producer_post_begin_ms": 1790989714467.18,
+            "worker_engine": "reference"
+          }
+        ],
+        "handles": 0,
+        "activeNN": 0
+      },
+      "main_receipt": {
+        "main_timers": 0,
+        "pending_messages": []
+      },
+      "outer_empty": true
+    }
+  ],
+  "stop_current_identity_count": 330,
+  "currently_sameidentity_alive": [],
+  "read_errors": [],
+  "full_browser_legal_clock_deep_or_NI_reexecution": false,
+  "group1_normal_model_NN_main_receipt_missing_preserved": true,
+  "acceptance": "bounded saved results and orderly direction-change termination; no strength equivalence"
+}
