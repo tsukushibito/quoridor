@@ -1,0 +1,14 @@
+{
+  "status": "MANAGEMENT_COMMAND_FAILED_BEFORE_EXECUTION",
+  "commands": [
+    "taskset -c 8 python -B - [prepare manager]",
+    "taskset -c 8 python -B tools/ai-sigma-value-lr-control/save_git.py source",
+    "taskset -c 8 python -B tools/ai-sigma-value-lr-control/launch.py"
+  ],
+  "exit": 127,
+  "stderr": "taskset: failed to execute python: No such file or directory",
+  "command_science_launched": false,
+  "confirmed_after_deadline_UTC": "2026-10-03T13:12:22.024066642Z",
+  "corrected_interpreter": "python3",
+  "corrected_manager_science_executed": false
+}
