@@ -1,0 +1,30 @@
+{
+  "reconstruct_earlier_source": "apply stored current-line\u2192earlier-line replacements to current Git source; exact earlier SHA verified",
+  "changes": [
+    {
+      "file": "tools/ai-sigma-manygame-runtime-preparation/gamepool.cjs",
+      "current_line": " async begin(h,g){const s=this.get(h,g);if(s.pending)throw Error('REGISTRY_ONE_PENDING');if(s.fixture.guard)throw Error('MOCK_CAPACITY_GUARD');if(s.fixture.terminal)return{done:true,pending:false};if(s.n>=s.K)return{done:true,pending:false};if(s.fixture.terminal_steps&&s.n>0){s.n++;return{done:s.n===s.K,pending:false};}s.pending=true;s.token++;const bits=Array(648).fill(0);bits[0]=new Uint32Array(new Float32Array([s.marker]).buffer)[0];return{pending:true,token:s.token,features_bits:bits};}",
+      "earlier_line": " async begin(h,g){const s=this.get(h,g);if(s.pending)throw Error('REGISTRY_ONE_PENDING');if(s.fixture.terminal)return{done:true,pending:false};if(s.n>=s.K)return{done:true,pending:false};s.pending=true;s.token++;const bits=Array(648).fill(0);bits[0]=new Uint32Array(new Float32Array([s.marker]).buffer)[0];return{pending:true,token:s.token,features_bits:bits};}",
+      "earlier_sha256": "d688c716a5204ea7b4ba7da4cab443ae7a0712eb944a30a4eb9f9421a46a1d14",
+      "earlier_runs": [
+        "native185-mock-r1",
+        "native185-tape-r1"
+      ],
+      "reason": "subsequent NN0 terminal-noNN and capacity fixtures, no real tree policy change"
+    },
+    {
+      "file": "tools/ai-sigma-manygame-runtime-preparation/teacher-interface.cjs",
+      "current_line": "function record(result,{lineage,split='diagnostic',side=1,ply=0,rootNN=null,source='185-NN0',mapping136=null,legal_mask136=null}={}){const cp=result.cp,edges=(cp?.root_edges??[]).map(e=>Array.isArray(e)?{action:e[0],visits:e[2],native209:true}:e),edgeSum=edges.reduce((s,e)=>s+e.visits,0);const pi=Array(136).fill(0);let known=true;for(const e of edges){const a=mapping136?new Map(mapping136).get(e.action):e.native209?undefined:e.action;if(!Number.isInteger(a)||a<0||a>=136){known=false;continue;}if(edgeSum>0)pi[a]+=e.visits/edgeSum;}return{game_id:result.game_id,lineage,split,side,ply,rootN:cp?.root_visits??0,edgeSum,pi136:edgeSum&&known?pi:null,legal_mask136,rootNN,rootNN_view:'side-to-move root NN; no teacher truth claim',rootmean:cp?.root_mean??null,rootmean_view:'side-to-move root search mean',leafNN:null,z_stm:null,z_p1:null,value_loss_mask:0,policy_eligible:false,value_eligible:false,joint_eligible:false,reason:'NN0_MOCK_OR_SAVED_TAPE_NOT_A_NEW_TEACHER',typed:result.typed,source,cost:result.counters};}",
+      "earlier_line": "function record(result,{lineage,split='diagnostic',side=1,ply=0,rootNN=null,source='185-NN0'}={}){const cp=result.cp,edgeSum=cp?.root_edges?.reduce((s,e)=>s+e.visits,0)??0;const pi=Array(136).fill(0);for(const e of cp?.root_edges??[])if(edgeSum>0&&e.action>=0&&e.action<136)pi[e.action]+=e.visits/edgeSum;return{game_id:result.game_id,lineage,split,side,ply,rootN:cp?.root_visits??0,edgeSum,pi136:edgeSum?pi:null,rootNN,rootmean:cp?.root_mean??null,z_stm:null,z_p1:null,value_loss_mask:0,policy_eligible:false,value_eligible:false,joint_eligible:false,reason:'NN0_MOCK_OR_SAVED_TAPE_NOT_A_NEW_TEACHER',typed:result.typed,source,cost:result.counters};}",
+      "earlier_sha256": "5a84a320f721e214e660d9c421244f5d330c2079409a46e3bbe5482e7aa8d4d9",
+      "earlier_runs": [
+        "native185-mock-r1",
+        "native185-tape-r1",
+        "native185-edge-r1"
+      ],
+      "reason": "array209 root edges and mapping-aware schema; rootNN/rootmean separate; still no train eligibility"
+    }
+  ],
+  "interface_r1_placeholder_saved_file": "tools/ai-sigma-manygame-runtime-preparation/interface-mock-r1-placeholder.cjs",
+  "interface_r1_retained_not_promoted_to_real_P2": "r2 explicitly checks shared RuleA P2 mapping from saved fixture, no NN or new search"
+}

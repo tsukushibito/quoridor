@@ -1,0 +1,103 @@
+{
+  "issue": "quoridor-4lc.185",
+  "UTC": "2026-10-03T12:08:14.727861+00:00",
+  "NN0_checks_stopped": true,
+  "source_code_writer_stopped": true,
+  "remaining_writes": "report/pack/localGit/restoration/backup/handoff metadata only",
+  "NN": 0,
+  "model_sessions": 0,
+  "GPU": 0,
+  "owned_children_reaped": true,
+  "current_matching_identities": [],
+  "attempts": [
+    {
+      "run": "native185-edge-r1",
+      "jobwall_seconds": 1.6668351119733416,
+      "exit": 0,
+      "stop_reason": null,
+      "peak_aggregate_RSS": 121286656,
+      "mock_reply_upper_bound": 10,
+      "command": [
+        "node",
+        "--max-old-space-size=192",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-manygame-runtime-preparation/edge-mock.cjs",
+        "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/185-manygame-runtime-preparation/runs/native185-edge-r1"
+      ]
+    },
+    {
+      "run": "native185-interface-r1",
+      "jobwall_seconds": 1.478120880026836,
+      "exit": 0,
+      "stop_reason": null,
+      "peak_aggregate_RSS": 39710720,
+      "mock_reply_upper_bound": 0,
+      "command": [
+        "node",
+        "--max-old-space-size=192",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-manygame-runtime-preparation/interface-mock.cjs",
+        "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/185-manygame-runtime-preparation/runs/native185-interface-r1"
+      ]
+    },
+    {
+      "run": "native185-interface-r2",
+      "jobwall_seconds": 1.605628475022968,
+      "exit": 0,
+      "stop_reason": null,
+      "peak_aggregate_RSS": 132014080,
+      "mock_reply_upper_bound": 0,
+      "command": [
+        "node",
+        "--max-old-space-size=192",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-manygame-runtime-preparation/interface-mock.cjs",
+        "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/185-manygame-runtime-preparation/runs/native185-interface-r2"
+      ]
+    },
+    {
+      "run": "native185-mock-r1",
+      "jobwall_seconds": 2.3511330949841067,
+      "exit": 0,
+      "stop_reason": null,
+      "peak_aggregate_RSS": 289427456,
+      "mock_reply_upper_bound": 235,
+      "command": [
+        "node",
+        "--max-old-space-size=192",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-manygame-runtime-preparation/mock.cjs",
+        "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/185-manygame-runtime-preparation/runs/native185-mock-r1"
+      ]
+    },
+    {
+      "run": "native185-tape-r1",
+      "jobwall_seconds": 3.0744717600173317,
+      "exit": 0,
+      "stop_reason": null,
+      "peak_aggregate_RSS": 173146112,
+      "mock_reply_upper_bound": 64,
+      "command": [
+        "node",
+        "--max-old-space-size=192",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-manygame-runtime-preparation/tape.cjs",
+        "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/185-manygame-runtime-preparation/runs/native185-tape-r1"
+      ]
+    }
+  ],
+  "total_NN0_jobwall_seconds": 10.176189322024584,
+  "synthetic_plus_saved_tape_sample_equivalents": 309,
+  "reply_cap": 512,
+  "future_science_status": "NOT_STARTED_REQUIRES_SEPARATE_ALLOCATION",
+  "source_sha256": {
+    "tools/ai-sigma-manygame-runtime-preparation/interface-mock.cjs": "0565036b784d30bd8b8d0b06ff09af1dcbea50c1fdb54fb308c85399b1a2aa78",
+    "tools/ai-sigma-manygame-runtime-preparation/tape.cjs": "78c30f43c22112714d55d8ce08d3a4b87f524dca4079b2554bd523254152e497",
+    "tools/ai-sigma-manygame-runtime-preparation/pipe.cjs": "67837f583eb5e08e066cda35c87fe3cca63fd8c91ef8085a269bff56d297920b",
+    "tools/ai-sigma-manygame-runtime-preparation/broker.cjs": "acec033e09b78acb7ea099572bbb0f8f7491580662e4caa808fdefaccf67de8a",
+    "tools/ai-sigma-manygame-runtime-preparation/worker.cjs": "21be45fadaf407c2f4d6e002ceaee57e571af20118674e1b9dfbc2034ff36190",
+    "tools/ai-sigma-manygame-runtime-preparation/teacher-interface.cjs": "961403ab7cf386fb56d0931fa6d872ca0424a74bbdbd93ff1aa34e3414495805",
+    "tools/ai-sigma-manygame-runtime-preparation/gamepool.cjs": "637365493138c835448c8421e9eea9b326db135c66767a0c9dc3b034d487d7cf",
+    "tools/ai-sigma-manygame-runtime-preparation/mock.cjs": "f5759d7f09722b80d9e1143c01ed96eb6face50a48cc77f1adeb9f23e1bbb24f",
+    "tools/ai-sigma-manygame-runtime-preparation/interface-mock-r1-placeholder.cjs": "6bf85c22ede16540bf00c6cb5143dc2fbc6b16419c4de7c90d8707f02b14796a",
+    "tools/ai-sigma-manygame-runtime-preparation/identity.cjs": "42987bf17b607551fab4f55ad3ed0b7ba6f3d4facdd612b1f2a5312bac46085b",
+    "tools/ai-sigma-manygame-runtime-preparation/edge-mock.cjs": "e79c3ec3dd999886e7ec7e9d4ca03067e15032b8b1e1953138561f9d1a91a7a8",
+    "tools/ai-sigma-manygame-runtime-preparation/fake-provider.cjs": "e2ac3104a95e1c69a329b7eb4e07b86f8d8ac02596c11ac5d626d283f408e0cd",
+    "tools/ai-sigma-manygame-runtime-preparation/tape-provider.cjs": "59c498c67d0319fb02e62906eb9844616efc186d3e2234ab2d25fcc4cbf3772c"
+  }
+}

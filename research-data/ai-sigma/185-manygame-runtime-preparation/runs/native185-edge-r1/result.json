@@ -1,0 +1,124 @@
+{
+  "issue": "quoridor-4lc.185",
+  "NN": 0,
+  "GPU": 0,
+  "model_sessions": 0,
+  "mock_reply_equivalents": 10,
+  "requested_edge_cases": [
+    {
+      "active": true,
+      "error": "STALE_CANCEL_GENERATION"
+    },
+    {
+      "game_id": "stale-generation",
+      "generation": 7,
+      "cp": {
+        "root_visits": 1,
+        "simulations": 1,
+        "root_mean": 0.25,
+        "action": 0,
+        "root_edges": []
+      },
+      "typed": null,
+      "status": "MOCK_OR_TAPE_COMPLETE",
+      "counters": {
+        "started": 1,
+        "returned": 1,
+        "discarded": 0,
+        "completed": 1
+      },
+      "zero": {
+        "pending": 0,
+        "handle": 0
+      },
+      "mock_or_tape": true,
+      "model_forward": 0
+    },
+    {
+      "game_id": "terminal-noNN",
+      "generation": 1,
+      "cp": {
+        "root_visits": 4,
+        "simulations": 4,
+        "root_mean": 0.25,
+        "action": 0,
+        "root_edges": [
+          {
+            "action": 0,
+            "visits": 3
+          }
+        ]
+      },
+      "typed": null,
+      "status": "MOCK_OR_TAPE_COMPLETE",
+      "counters": {
+        "started": 1,
+        "returned": 1,
+        "discarded": 0,
+        "completed": 4
+      },
+      "zero": {
+        "pending": 0,
+        "handle": 0
+      },
+      "mock_or_tape": true,
+      "model_forward": 0
+    },
+    {
+      "game_id": "guard",
+      "generation": 1,
+      "cp": null,
+      "typed": "MOCK_CAPACITY_GUARD",
+      "status": "CONTROL_OR_MOCK_UNKNOWN",
+      "counters": {
+        "started": 0,
+        "returned": 0,
+        "discarded": 0,
+        "completed": 0
+      },
+      "zero": {
+        "pending": 0,
+        "handle": 0
+      },
+      "mock_or_tape": true,
+      "model_forward": 0
+    }
+  ],
+  "provider_EOF": {
+    "planned": 12,
+    "statuses": [
+      "PROVIDER_OR_CONTROL_UNKNOWN:PIPE_EXIT",
+      "PROVIDER_OR_CONTROL_UNKNOWN:PIPE_EXIT",
+      "PROVIDER_OR_CONTROL_UNKNOWN:PIPE_EXIT",
+      "PROVIDER_OR_CONTROL_UNKNOWN:PIPE_EXIT",
+      "PROVIDER_OR_CONTROL_UNKNOWN:PIPE_EXIT",
+      "PROVIDER_OR_CONTROL_UNKNOWN:PIPE_EXIT",
+      "PROVIDER_OR_CONTROL_UNKNOWN:PIPE_EXIT",
+      "PROVIDER_OR_CONTROL_UNKNOWN:PIPE_EXIT",
+      "PROVIDER_OR_CONTROL_UNKNOWN:PIPE_EXIT",
+      "PROVIDER_OR_CONTROL_UNKNOWN:PIPE_EXIT",
+      "PROVIDER_OR_CONTROL_UNKNOWN:PIPE_EXIT",
+      "PROVIDER_OR_CONTROL_UNKNOWN:PIPE_EXIT"
+    ],
+    "zero": {
+      "pending_games": 0,
+      "inflight_batches": 0,
+      "queued": 0,
+      "timer": false,
+      "started": 8,
+      "returned": 0
+    },
+    "exit": {
+      "code": 7,
+      "signal": null,
+      "pid": 3501141
+    }
+  },
+  "exit": {
+    "code": 0,
+    "signal": null,
+    "pid": 3501133
+  },
+  "logical_requested_is_not_physical_NN_started": true,
+  "terminal_noNN_is_control_fixture_not_teacher": true
+}
