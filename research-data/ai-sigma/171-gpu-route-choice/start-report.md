@@ -1,0 +1,1 @@
+goal quoridor-4lc / 本人quoridor-4lc.171 受領06:29:03UTC、ready/show goal+self・pause無し本人割当確認後claim06:29:08UTC。現在170保存停止正本/current processで4arena実競合を認めずCPU0静的読取開始。原CUDA実tensor成功SHA427f7ec1…を参照しGPU全体不能とは説明しない。最大1経路を固定ONNX graph/initializerと既Sigma PyTorch sourceから10分以内選定。NN/session/forward/CUDA/取得/依存更新0、旧保持14596875B減額0＋forecast524288B<15MiB、親追加0。

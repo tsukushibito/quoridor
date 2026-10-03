@@ -1,0 +1,149 @@
+{
+  "/workspaces/quoridor/.artifacts/research-team/gpu-environment-check/result.json": {
+    "sha256": "427f7ec1fcf1e249caa7f2827f5a9ab9c95819a0dcb4b95aa12161b60db3fe78",
+    "data": {
+      "kind": "root user-question GPU capability probe",
+      "nvidia_smi": {
+        "name": "NVIDIA GeForce RTX 3060",
+        "driver": "591.86",
+        "memory_total_MiB": 12288,
+        "memory_used_before_MiB": 1498
+      },
+      "torch": "2.14.0+cu130",
+      "cuda_build": "13.0",
+      "cuda_available": true,
+      "device_count": 1,
+      "device_name": "NVIDIA GeForce RTX 3060",
+      "cuda_small_add_result": [
+        2.0
+      ],
+      "cuda_allocated_bytes": 1024,
+      "cuda_reserved_bytes": 2097152,
+      "peak_rss_KiB": 658552,
+      "process_exit": 0,
+      "model_load": false,
+      "model_inference": false,
+      "training": false,
+      "environment_update": false
+    }
+  },
+  "research-data/ai-sigma/170-native-runtime-ready/science-stop.json": {
+    "sha256": "b3e9abb87275a1c155b3f8f7efdb31c66972409dc3e92aebad5c507d4e8dde4e",
+    "data": {
+      "issue": "quoridor-4lc.170",
+      "UTC": "2026-10-03T06:11:09.349431+00:00",
+      "scientific_source_write_stopped": true,
+      "source_hashes": {
+        "tools/ai-sigma-native-runtime-ready/common.cjs": "12dd3587bb615e461dc78a217616a28fae8ef43a1af0789a1f4ee03c6c5a711c",
+        "tools/ai-sigma-native-runtime-ready/runner.py": "babd3b66c9899640247964bb170154850f8a10ea4e1b34febb5d80d41cbf00cd",
+        "tools/ai-sigma-native-runtime-ready/controller.cjs": "a8a2047861c9e10efa2bab41979623b0f3b66a3dfea6ca3b3ffa5a2703d4f355",
+        "tools/ai-sigma-native-runtime-ready/mock.cjs": "0246bad852f501b1d85c7e3e5475439cf786369400dd033de4a188c011bdbdc4",
+        "tools/ai-sigma-native-runtime-ready/admission.py": "a590fe349073105a6b56f3318ffe376f1bbcfb48f382cc36879b2115892b335c",
+        "tools/ai-sigma-native-runtime-ready/load-engine.cjs": "8c95f0b3670ba0888a5ae9688baf367df42e3a66a2028113da2da7f7e2e3c6d4",
+        "tools/ai-sigma-native-runtime-ready/runtime.cjs": "bcb6f0665b40c27881832c10c071e19e31ffb9bcda8d9983800fd02094a89dde"
+      },
+      "runtime_source_git": "bd7ffde0d46f51ec35d8faa4091f526c95ccc914",
+      "readonly165_binding_unchanged": true,
+      "Model_and_engine_closed": true,
+      "search_activeNN_handles_zero": true,
+      "main_timers_completed_and_monitor_callbacks_waited": true,
+      "outer_remaining": [],
+      "unknown_adopted": [],
+      "current_same_identity": [],
+      "phases": {
+        "solo": {
+          "requests": 8,
+          "hand_NN": 398,
+          "startup_NN": 2,
+          "outer_wall_s": 5.723927,
+          "runtime_elapsed_s": 3.736829539000988,
+          "phase_work_s": 3.311918386012316,
+          "max_public_ms": 414.8927730023861,
+          "max_actual_admit_ms": 400.2897370159626,
+          "max_cleanup_ms": 2.5307160019874573,
+          "pending_cancel_coverage": 7,
+          "min_next_start_gap_ms": 0.759674996137619,
+          "peak_RSS": 619491328,
+          "all_observed_TIDs_at_pool": true,
+          "control_state": "READY"
+        },
+        "parallel": {
+          "requests": 32,
+          "hand_NN": 2093,
+          "startup_NN": 8,
+          "outer_wall_s": 6.547816,
+          "runtime_elapsed_s": 3.9221539010107516,
+          "phase_work_s": 3.378213348984718,
+          "max_public_ms": 415.1997919976711,
+          "max_actual_admit_ms": 401.4568060040474,
+          "max_cleanup_ms": 10.494430005550385,
+          "pending_cancel_coverage": 25,
+          "min_next_start_gap_ms": 1.899423986673355,
+          "peak_RSS": 1686081536,
+          "all_observed_TIDs_at_pool": true,
+          "control_state": "READY"
+        }
+      },
+      "total_hand_NN": 2491,
+      "startup_separate": 10,
+      "new_build_training_game_GPU": 0,
+      "not_allperiod_allhost_natural_stop_proof": true,
+      "formal_ready": false
+    }
+  },
+  "research-data/ai-sigma/170-native-runtime-ready/final-preservation-stop.json": {
+    "sha256": "9428cc4b08a3eae45d17f85a54f4fcf99e58d78f4521323702bee2afd9b8bf16",
+    "data": {
+      "issue": "quoridor-4lc.170",
+      "UTC": "2026-10-03T06:21:13.915629+00:00",
+      "source_runtime_stopped_unchanged": true,
+      "readonly165_unchanged": true,
+      "all_attempts": [
+        {
+          "run": "native170-mock-r1",
+          "phase": "mock",
+          "exit": 0,
+          "stop_reason": null
+        },
+        {
+          "run": "native170-parallel-r1",
+          "phase": "parallel",
+          "exit": 0,
+          "stop_reason": null
+        },
+        {
+          "run": "native170-solo-r1",
+          "phase": "solo",
+          "exit": 0,
+          "stop_reason": null
+        }
+      ],
+      "current_same_identity": [],
+      "outer_remaining": [],
+      "helpers_pack_complete": true,
+      "scope_current_allocated": 5980160,
+      "unused_Git_privateindex_forecast": 1171094,
+      "current_plus_forecast": 7151254,
+      "new_scope_guard": 7340032,
+      "old_listed_retained_current": 320471040,
+      "old159163_added_current_read_not_retroactive_allperiod_admission_proof": true,
+      "existing_experiment_reservation": 2147483648,
+      "old_other_unknown_not_decremented": true,
+      "allteam_storage_total": "unknown; existing parent reservation unchanged",
+      "parent_new_reservation": 0,
+      "formal_ready": false
+    }
+  },
+  "current_filtered_processes": [
+    {
+      "pid": 3250102,
+      "cmd": "/bin/bash -c taskset -c 0 python3 - <<'PY'\nimport json,hashlib,os,time\nfrom pathlib import Path\nD=Path('research-data/ai-sigma/171-gpu-route-choice');out={}\nfor p in [Path('/workspaces/quoridor/.artifacts/research-team/gpu-environment-check/result.json'),Path('research-data/ai-sigma/170-native-runtime-ready/science-stop.json'),Path('research-data/ai-sigma/170-native-runtime-ready/final-preservation-stop.json')]:\n out[str(p)]={'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'data':json.loads(",
+      "status": [
+        "VmRSS:\t    3200 kB",
+        "Threads:\t1",
+        "Cpus_allowed_list:\t0-19"
+      ],
+      "starttick": "26190360"
+    }
+  ]
+}

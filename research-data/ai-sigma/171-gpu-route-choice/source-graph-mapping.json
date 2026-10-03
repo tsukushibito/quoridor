@@ -1,0 +1,499 @@
+{
+  "architecture_inferred_from_graph": {
+    "board": 9,
+    "filters": 128,
+    "residual_blocks": 10,
+    "gpool_indices_zero_based": [
+      2,
+      5,
+      8
+    ],
+    "regular_pool_channels": [
+      96,
+      32
+    ],
+    "pawn_head": "local;384->64->8",
+    "value_head": "pooled;32channels mean/max ->64->128->1tanh"
+  },
+  "conv_count": 24,
+  "folded_Conv_with_onnx_named_weight_bias": 21,
+  "nonfolded_conv": [
+    {
+      "name": "/residuals/residuals.2/conv1/Conv",
+      "inputs": [
+        "/residuals/residuals.1/Relu_1_output_0",
+        "residuals.2.conv1.weight"
+      ],
+      "attrs": {
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "/residuals/residuals.5/conv1/Conv",
+      "inputs": [
+        "/residuals/residuals.4/Relu_1_output_0",
+        "residuals.5.conv1.weight"
+      ],
+      "attrs": {
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "/residuals/residuals.8/conv1/Conv",
+      "inputs": [
+        "/residuals/residuals.7/Relu_1_output_0",
+        "residuals.8.conv1.weight"
+      ],
+      "attrs": {
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ]
+      }
+    }
+  ],
+  "remaining_BN": [
+    {
+      "name": "/residuals/residuals.2/bn1_reg/BatchNormalization",
+      "op": "BatchNormalization",
+      "inputs": [
+        "/residuals/residuals.2/Slice_output_0",
+        "residuals.2.bn1_reg.weight",
+        "residuals.2.bn1_reg.bias",
+        "residuals.2.bn1_reg.running_mean",
+        "residuals.2.bn1_reg.running_var"
+      ],
+      "outputs": [
+        "/residuals/residuals.2/bn1_reg/BatchNormalization_output_0"
+      ],
+      "attrs": {
+        "epsilon": 9.999999747378752e-06,
+        "momentum": 0.8999999761581421,
+        "training_mode": 0
+      }
+    },
+    {
+      "name": "/residuals/residuals.2/bn1_pool/BatchNormalization",
+      "op": "BatchNormalization",
+      "inputs": [
+        "/residuals/residuals.2/Slice_1_output_0",
+        "residuals.2.bn1_pool.weight",
+        "residuals.2.bn1_pool.bias",
+        "residuals.2.bn1_pool.running_mean",
+        "residuals.2.bn1_pool.running_var"
+      ],
+      "outputs": [
+        "/residuals/residuals.2/bn1_pool/BatchNormalization_output_0"
+      ],
+      "attrs": {
+        "epsilon": 9.999999747378752e-06,
+        "momentum": 0.8999999761581421,
+        "training_mode": 0
+      }
+    },
+    {
+      "name": "/residuals/residuals.5/bn1_reg/BatchNormalization",
+      "op": "BatchNormalization",
+      "inputs": [
+        "/residuals/residuals.5/Slice_output_0",
+        "residuals.5.bn1_reg.weight",
+        "residuals.5.bn1_reg.bias",
+        "residuals.5.bn1_reg.running_mean",
+        "residuals.5.bn1_reg.running_var"
+      ],
+      "outputs": [
+        "/residuals/residuals.5/bn1_reg/BatchNormalization_output_0"
+      ],
+      "attrs": {
+        "epsilon": 9.999999747378752e-06,
+        "momentum": 0.8999999761581421,
+        "training_mode": 0
+      }
+    },
+    {
+      "name": "/residuals/residuals.5/bn1_pool/BatchNormalization",
+      "op": "BatchNormalization",
+      "inputs": [
+        "/residuals/residuals.5/Slice_1_output_0",
+        "residuals.5.bn1_pool.weight",
+        "residuals.5.bn1_pool.bias",
+        "residuals.5.bn1_pool.running_mean",
+        "residuals.5.bn1_pool.running_var"
+      ],
+      "outputs": [
+        "/residuals/residuals.5/bn1_pool/BatchNormalization_output_0"
+      ],
+      "attrs": {
+        "epsilon": 9.999999747378752e-06,
+        "momentum": 0.8999999761581421,
+        "training_mode": 0
+      }
+    },
+    {
+      "name": "/residuals/residuals.8/bn1_reg/BatchNormalization",
+      "op": "BatchNormalization",
+      "inputs": [
+        "/residuals/residuals.8/Slice_output_0",
+        "residuals.8.bn1_reg.weight",
+        "residuals.8.bn1_reg.bias",
+        "residuals.8.bn1_reg.running_mean",
+        "residuals.8.bn1_reg.running_var"
+      ],
+      "outputs": [
+        "/residuals/residuals.8/bn1_reg/BatchNormalization_output_0"
+      ],
+      "attrs": {
+        "epsilon": 9.999999747378752e-06,
+        "momentum": 0.8999999761581421,
+        "training_mode": 0
+      }
+    },
+    {
+      "name": "/residuals/residuals.8/bn1_pool/BatchNormalization",
+      "op": "BatchNormalization",
+      "inputs": [
+        "/residuals/residuals.8/Slice_1_output_0",
+        "residuals.8.bn1_pool.weight",
+        "residuals.8.bn1_pool.bias",
+        "residuals.8.bn1_pool.running_mean",
+        "residuals.8.bn1_pool.running_var"
+      ],
+      "outputs": [
+        "/residuals/residuals.8/bn1_pool/BatchNormalization_output_0"
+      ],
+      "attrs": {
+        "epsilon": 9.999999747378752e-06,
+        "momentum": 0.8999999761581421,
+        "training_mode": 0
+      }
+    }
+  ],
+  "Gemm_mapping": [
+    {
+      "name": "/residuals/residuals.2/gpool_fc/Gemm",
+      "op": "Gemm",
+      "inputs": [
+        "/residuals/residuals.2/Concat_output_0",
+        "residuals.2.gpool_fc.weight",
+        "residuals.2.gpool_fc.bias"
+      ],
+      "outputs": [
+        "/residuals/residuals.2/gpool_fc/Gemm_output_0"
+      ],
+      "attrs": {
+        "alpha": 1.0,
+        "beta": 1.0,
+        "transB": 1
+      }
+    },
+    {
+      "name": "/residuals/residuals.5/gpool_fc/Gemm",
+      "op": "Gemm",
+      "inputs": [
+        "/residuals/residuals.5/Concat_output_0",
+        "residuals.5.gpool_fc.weight",
+        "residuals.5.gpool_fc.bias"
+      ],
+      "outputs": [
+        "/residuals/residuals.5/gpool_fc/Gemm_output_0"
+      ],
+      "attrs": {
+        "alpha": 1.0,
+        "beta": 1.0,
+        "transB": 1
+      }
+    },
+    {
+      "name": "/residuals/residuals.8/gpool_fc/Gemm",
+      "op": "Gemm",
+      "inputs": [
+        "/residuals/residuals.8/Concat_output_0",
+        "residuals.8.gpool_fc.weight",
+        "residuals.8.gpool_fc.bias"
+      ],
+      "outputs": [
+        "/residuals/residuals.8/gpool_fc/Gemm_output_0"
+      ],
+      "attrs": {
+        "alpha": 1.0,
+        "beta": 1.0,
+        "transB": 1
+      }
+    },
+    {
+      "name": "/policy_pawn_fc1/Gemm",
+      "op": "Gemm",
+      "inputs": [
+        "/Concat_output_0",
+        "policy_pawn_fc1.weight",
+        "policy_pawn_fc1.bias"
+      ],
+      "outputs": [
+        "/policy_pawn_fc1/Gemm_output_0"
+      ],
+      "attrs": {
+        "alpha": 1.0,
+        "beta": 1.0,
+        "transB": 1
+      }
+    },
+    {
+      "name": "/policy_pawn_fc2/Gemm",
+      "op": "Gemm",
+      "inputs": [
+        "/Relu_1_output_0",
+        "policy_pawn_fc2.weight",
+        "policy_pawn_fc2.bias"
+      ],
+      "outputs": [
+        "/policy_pawn_fc2/Gemm_output_0"
+      ],
+      "attrs": {
+        "alpha": 1.0,
+        "beta": 1.0,
+        "transB": 1
+      }
+    },
+    {
+      "name": "/value_pool_fc/Gemm",
+      "op": "Gemm",
+      "inputs": [
+        "/Concat_2_output_0",
+        "value_pool_fc.weight",
+        "value_pool_fc.bias"
+      ],
+      "outputs": [
+        "/value_pool_fc/Gemm_output_0"
+      ],
+      "attrs": {
+        "alpha": 1.0,
+        "beta": 1.0,
+        "transB": 1
+      }
+    },
+    {
+      "name": "/value_fc2/Gemm",
+      "op": "Gemm",
+      "inputs": [
+        "/Relu_5_output_0",
+        "value_fc2.weight",
+        "value_fc2.bias"
+      ],
+      "outputs": [
+        "/value_fc2/Gemm_output_0"
+      ],
+      "attrs": {
+        "alpha": 1.0,
+        "beta": 1.0,
+        "transB": 1
+      }
+    }
+  ],
+  "original_PyTorch_state_dict_not_recoverable_by_name_only": true,
+  "source_module_import_prohibited_here": "module DEVICE invokes torch.cuda.is_available; do not import; static read only",
+  "checkpoint_paths_selected": {
+    "runs/models_9x9_pcr/best.pt": false,
+    ".artifacts/ai-sigma/reference-fixtures/SIGMA-PARITY-PLAN/sources/runs/models_9x9_pcr/best.pt": false,
+    "models/experiments/ai-sigma/reference/sigma-pcr250/best.pt": false
+  },
+  "source_manifest": {
+    "path": ".artifacts/ai-sigma/reference-fixtures/SIGMA-PARITY-PLAN/source-manifest.json",
+    "sha256": "fb7bbc4658f52e6a5d34c8e2c7bbebf6fbad3fd52b93300b66c0f78353a3dec2",
+    "data": {
+      "commit": "751186344fc52ad0c29bc65922e62c6fa915f006",
+      "observed_utc": "2026-09-30T18:26:25.629849+00:00",
+      "text_sources": [
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/bartolomeo3000/SigmaQuoridor/751186344fc52ad0c29bc65922e62c6fa915f006/LICENSE",
+          "bytes": 1071,
+          "sha256": "b5e277822da3c9eb54eb04e9ee3c4f93bfeb769c829d5d0f70c99835a2f6733d"
+        },
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/bartolomeo3000/SigmaQuoridor/751186344fc52ad0c29bc65922e62c6fa915f006/README.md",
+          "bytes": 32959,
+          "sha256": "4446f2bd6a6c3c7584f3ae1688b52797c56a96d1c4d03e715cf159c66b7c34ae"
+        },
+        {
+          "path": "RULES.md",
+          "url": "https://raw.githubusercontent.com/bartolomeo3000/SigmaQuoridor/751186344fc52ad0c29bc65922e62c6fa915f006/RULES.md",
+          "bytes": 8955,
+          "sha256": "52a2669b824ca95a78a76c3bbc0016a4ac08e16b90099b2af49491341e1728ce"
+        },
+        {
+          "path": "docs/game.js",
+          "url": "https://raw.githubusercontent.com/bartolomeo3000/SigmaQuoridor/751186344fc52ad0c29bc65922e62c6fa915f006/docs/game.js",
+          "bytes": 27877,
+          "sha256": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5"
+        },
+        {
+          "path": "docs/mcts_worker.js",
+          "url": "https://raw.githubusercontent.com/bartolomeo3000/SigmaQuoridor/751186344fc52ad0c29bc65922e62c6fa915f006/docs/mcts_worker.js",
+          "bytes": 17775,
+          "sha256": "f2de9444e8960ca14d4d4acb5dd319e3f0a6a743c39b4032dce32068ebcfe8fa"
+        },
+        {
+          "path": "docs/app.js",
+          "url": "https://raw.githubusercontent.com/bartolomeo3000/SigmaQuoridor/751186344fc52ad0c29bc65922e62c6fa915f006/docs/app.js",
+          "bytes": 93099,
+          "sha256": "b585302b0af1295dbea23fe0a59781c568ead0be79fc6bc13ccb2273fe6dc9bd"
+        },
+        {
+          "path": "export_onnx.py",
+          "url": "https://raw.githubusercontent.com/bartolomeo3000/SigmaQuoridor/751186344fc52ad0c29bc65922e62c6fa915f006/export_onnx.py",
+          "bytes": 4087,
+          "sha256": "ab56635c59d00d0cd818ffbdf583c5e881105b204d6cdc7d97bd0718f46be2d8"
+        },
+        {
+          "path": "dual_network.py",
+          "url": "https://raw.githubusercontent.com/bartolomeo3000/SigmaQuoridor/751186344fc52ad0c29bc65922e62c6fa915f006/dual_network.py",
+          "bytes": 27874,
+          "sha256": "c1b4e74d0cdff688580dd29a3cdea4b5fb498c6020324924936066702f301502"
+        },
+        {
+          "path": "train.py",
+          "url": "https://raw.githubusercontent.com/bartolomeo3000/SigmaQuoridor/751186344fc52ad0c29bc65922e62c6fa915f006/train.py",
+          "bytes": 79777,
+          "sha256": "35008fb43f1bbd8c90f7ab0fc1f7f32611598ffd7a9cc1a86cfd87f4213c7d72"
+        },
+        {
+          "path": "supervised_train.py",
+          "url": "https://raw.githubusercontent.com/bartolomeo3000/SigmaQuoridor/751186344fc52ad0c29bc65922e62c6fa915f006/supervised_train.py",
+          "bytes": 7645,
+          "sha256": "495a2a0cf1f6f333dbdac536985ce77f88aa80708ed7461ed3de53d3e39c3693"
+        },
+        {
+          "path": "markdown_notes/HEAD_REDESIGN_PLAN.md",
+          "url": "https://raw.githubusercontent.com/bartolomeo3000/SigmaQuoridor/751186344fc52ad0c29bc65922e62c6fa915f006/markdown_notes/HEAD_REDESIGN_PLAN.md",
+          "bytes": 14762,
+          "sha256": "cd953b3714dd76409393a26aca981a1b87b72b63fc7600b1ca515941f1b52155"
+        }
+      ],
+      "tree_metadata": [
+        {
+          "path": "LICENSE",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "2112c0c74b540846d28bb19b4ae9948379edcd2f",
+          "size": 1071,
+          "url": "https://api.github.com/repos/bartolomeo3000/SigmaQuoridor/git/blobs/2112c0c74b540846d28bb19b4ae9948379edcd2f"
+        },
+        {
+          "path": "docs/models_9x9/best.onnx",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "f23802a83dc9054b5227da74b3771698854535f0",
+          "size": 11663428,
+          "url": "https://api.github.com/repos/bartolomeo3000/SigmaQuoridor/git/blobs/f23802a83dc9054b5227da74b3771698854535f0"
+        },
+        {
+          "path": "runs/models_9x9_pcr/best.pt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "eed997da36e5bf758cbc46080fcca13b47bb4f87",
+          "size": 11718115,
+          "url": "https://api.github.com/repos/bartolomeo3000/SigmaQuoridor/git/blobs/eed997da36e5bf758cbc46080fcca13b47bb4f87"
+        }
+      ],
+      "tree_truncated": false,
+      "export_history": [
+        {
+          "sha": "751186344fc52ad0c29bc65922e62c6fa915f006",
+          "date": "2026-08-22T21:14:55Z",
+          "message": "serve the PCR lineage (cycle 250) on the site\n\ndocs/models_9x9/best.onnx now comes from runs/models_9x9_pcr/best.pt instead\nof the scratch lineage. Measured at 800 sims, 300 games/pair: pcr 250 beats\npcr 220 81.5% and the previously-served scratch 321 85.5%. pcr 220 had already\ntaken rank 1 in pcr_ab v3 (60.7%, beating scratch 321 70.1% over 600 games).\n\nScratch 321 stays browsable in the picker as checkpoints/scratch_0321.onnx.\nThree 9x9 lineages now share docs/models_9x9/checkpoints/, so bare\ncycle_NNNN.onnx is reserved for the heads auto-glob and one-off exports from\nother lineages carry a lineage prefix; modelShortLabel renders those too.\n\nCo-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>",
+          "url": "https://github.com/bartolomeo3000/SigmaQuoridor/commit/751186344fc52ad0c29bc65922e62c6fa915f006"
+        },
+        {
+          "sha": "a7a91e5e8ccb561b9e520bc96a1c199a0f16ab12",
+          "date": "2026-07-25T14:57:59Z",
+          "message": "restructure repo: runs/ for artifacts, drop the RL track, serve the scratch net\n\nLayout\n------\nAll generated artifacts move under runs/ (model lineages, self-play data,\ntournament results, logs), leaving 8 directories at the repo root instead of\n18. Source stays at the root -- docs/ is pinned there by GitHub Pages, and the\nquoridor_cpp extension is built in-place, so a src/ layout would have cost more\nthan it bought. Paths are cwd-relative, so run everything from the repo root.\n\nTwo things a string-level path rewrite could not fix:\n\n  * cpp_train_loop.py inferred the data dir from basename() alone, so\n    runs/models_9x9_scratch resolved to a top-level data_9x9_scratch that no\n    longer exists -- it would have self-played into a fresh empty directory\n    instead of failing. Now keeps the parent, matching train.py.\n  * Tournament CSVs store model paths as roster names, and --baseline matches\n    pairs on those exact strings. They were rewritten in place (30 files) so\n    series inheritance and game reuse keep working; without it, extending the\n    series would have silently replayed all 91 pairs.\n\nTournament series\n-----------------\ntournament_cpp.py gains --series/--add: it reads the previous version's own\nfiles (vN.csv for the roster and games/pair, vN_matchups.csv as the baseline,\nthe .meta.json sidecar for the rules config) instead of making the caller\nretype 18 lines of flags. Deriving from those files rather than a separate\nmanifest keeps one source of truth. Roster de-duplication compares normalised\npaths, so an --add with forward slashes cannot register an already-present\nmodel a second time.\n\nRL baseline track removed\n-------------------------\nrl_models.py and friends were deleted, which left app.py failing to import.\nRemoved the Flask agent registry, the browser app's Simple RL option and\nworker branch, and docs/models/simple_rl/.\n\nModel serving\n-------------\ndocs/models_9x9/best.onnx is now the from-scratch lineage's cycle 321, which\nbeat the old heads cycle 56 head-to-head (61.1% over 500 games) and took rank 1\nin the v7 tournament. Heads cycle 56 stays as checkpoints/cycle_0056.onnx for\ncomparison; the other 23 stale checkpoint exports are gone (277MB -> 23MB).\n\nAlso: training_stats.csv now records self-play time. cycle_time_s only ever\ncovered training, because cpp_train_loop.py runs self-play in a separate\nsubprocess -- 8.4h of a real 35.7h. Self-play wall time is passed through to\ntrain.py, and the history was reconstructed from the self-play logs.\n\nCo-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>",
+          "url": "https://github.com/bartolomeo3000/SigmaQuoridor/commit/a7a91e5e8ccb561b9e520bc96a1c199a0f16ab12"
+        },
+        {
+          "sha": "77cd66f614a1dfadca9d69e850e749e2f3c87d9d",
+          "date": "2026-07-19T23:16:26Z",
+          "message": "heads redesign + training",
+          "url": "https://github.com/bartolomeo3000/SigmaQuoridor/commit/77cd66f614a1dfadca9d69e850e749e2f3c87d9d"
+        },
+        {
+          "sha": "6becf9c30584f8671ebbc9719e402898d5cbc580",
+          "date": "2026-07-15T15:22:44Z",
+          "message": "add 9x9 variant and vertical board flip to github io app",
+          "url": "https://github.com/bartolomeo3000/SigmaQuoridor/commit/6becf9c30584f8671ebbc9719e402898d5cbc580"
+        },
+        {
+          "sha": "f4b15bf397975369e5f88b4fef3fb652eda41508",
+          "date": "2026-06-15T22:37:18Z",
+          "message": "bugfixes in github app",
+          "url": "https://github.com/bartolomeo3000/SigmaQuoridor/commit/f4b15bf397975369e5f88b4fef3fb652eda41508"
+        },
+        {
+          "sha": "8e03840a6cf35be4260d4841a42e9378ed3db160",
+          "date": "2026-06-03T17:27:40Z",
+          "message": "Add static GitHub Pages frontend (game.js, mcts_worker.js, ORT, ONNX models)",
+          "url": "https://github.com/bartolomeo3000/SigmaQuoridor/commit/8e03840a6cf35be4260d4841a42e9378ed3db160"
+        }
+      ],
+      "model_binary_downloaded": false,
+      "model_sha256": null,
+      "graph_verified": false,
+      "pid": 633925,
+      "affinity": [
+        0
+      ],
+      "maxrss_kib": 22076
+    }
+  }
+}
