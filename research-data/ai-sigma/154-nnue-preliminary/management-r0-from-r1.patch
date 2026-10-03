@@ -1,0 +1,48 @@
+--- a/tools/ai-sigma-nnue-preliminary/manage.py
++++ b/tools/ai-sigma-nnue-preliminary/manage.py
+@@ -1,6 +1,5 @@
+ """Bounded CPU0 management commands and readonly source inspection ledger."""
+ import datetime
+-import fcntl
+ import hashlib
+ import json
+ import os
+@@ -24,8 +23,6 @@
+ 
+ 
+ def main():
+-    lock = (D/'management.lock').open('a')
+-    fcntl.flock(lock, fcntl.LOCK_EX)
+     records = json.loads(ledger.read_text()) if ledger.exists() else []
+     used = sum(x['wall_seconds'] for x in records)
+     deadline = datetime.datetime.fromisoformat(json.loads((D/'intake.json').read_text())['newcommand_UTC'])
+@@ -38,9 +35,7 @@
+     os.sched_setaffinity(0, {0})
+     start = datetime.datetime.now(datetime.timezone.utc).isoformat()
+     t0 = time.monotonic()
+-    outpath = D / f'command-{os.getpid()}.stdout.tmp'
+-    errpath = D / f'command-{os.getpid()}.stderr.tmp'
+-    with outpath.open('wb') as stdout, errpath.open('wb') as stderr:
++    with (D/'command.stdout.tmp').open('wb') as stdout, (D/'command.stderr.tmp').open('wb') as stderr:
+         p = subprocess.Popen(argv, env=env, stdout=stdout, stderr=stderr)
+         owned = identity(p.pid)
+         sampled = 0
+@@ -58,8 +53,8 @@
+                 pass
+             time.sleep(.02)
+         p.wait(timeout=1)
+-    out = outpath.read_bytes()
+-    err = errpath.read_bytes()
++    out = (D/'command.stdout.tmp').read_bytes()
++    err = (D/'command.stderr.tmp').read_bytes()
+     r = {'command': argv, 'start_UTC': start, 'end_UTC': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+          'wall_seconds': time.monotonic()-t0, 'exit_code': p.returncode, 'manager': identity(os.getpid()),
+          'child': owned, 'child_current_identity': identity(p.pid), 'owned_wait_complete': True,
+@@ -67,7 +62,6 @@
+          'wait_ru_maxrss_bytes': resource.getrusage(resource.RUSAGE_CHILDREN).ru_maxrss*1024,
+          'RSS_scope_limit': 'sample covers immediate child; not all descendant/current RSS assurance',
+          'stdout_sha256': hashlib.sha256(out).hexdigest(), 'stderr': err.decode()[:3000],
+-         'stdout_file': str(outpath), 'stderr_file': str(errpath),
+          'CPU_affinity': [0], 'formal_performance_measurement': False}
+     records.append(r)
+     ledger.write_text(json.dumps(records, indent=2)+'\n')

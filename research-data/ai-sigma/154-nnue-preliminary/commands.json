@@ -1,0 +1,690 @@
+[
+  {
+    "command": [
+      "bash",
+      "scripts/dev/beads.sh",
+      "ready",
+      "--json"
+    ],
+    "start_UTC": "2026-10-03T01:54:30.713233+00:00",
+    "end_UTC": "2026-10-03T01:54:31.269016+00:00",
+    "wall_seconds": 0.5557867479801644,
+    "exit_code": 0,
+    "manager": {
+      "pid": 3025492,
+      "starttick": "24539897",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child": {
+      "pid": 3025493,
+      "starttick": "24539899",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child_current_identity": null,
+    "owned_wait_complete": true,
+    "stop": "owned wait natural exit",
+    "sampled_immediate_child_RSS_bytes": 3276800,
+    "wait_ru_maxrss_bytes": 181809152,
+    "RSS_scope_limit": "sample covers immediate child; not all descendant/current RSS assurance",
+    "stdout_sha256": "db1bd363c652874a21f1a50451eda00b6a9fcb5c61583d520104af21bb5ea49d",
+    "stderr": "",
+    "CPU_affinity": [
+      0
+    ],
+    "formal_performance_measurement": false
+  },
+  {
+    "command": [
+      "python3",
+      "-B",
+      "-"
+    ],
+    "start_UTC": "2026-10-03T01:54:51.243505+00:00",
+    "end_UTC": "2026-10-03T01:54:58.807151+00:00",
+    "wall_seconds": 7.56364739901619,
+    "exit_code": 0,
+    "manager": {
+      "pid": 3025971,
+      "starttick": "24541952",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child": {
+      "pid": 3025972,
+      "starttick": "24541953",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child_current_identity": null,
+    "owned_wait_complete": true,
+    "stop": "owned wait natural exit",
+    "sampled_immediate_child_RSS_bytes": 12918784,
+    "wait_ru_maxrss_bytes": 201441280,
+    "RSS_scope_limit": "sample covers immediate child; not all descendant/current RSS assurance",
+    "stdout_sha256": "685c1760cddc515aeb3063bfa1bdbf3610c263dce0c7e091b56f1699ec185827",
+    "stderr": "",
+    "CPU_affinity": [
+      0
+    ],
+    "formal_performance_measurement": false
+  },
+  {
+    "command": [
+      "cat",
+      "docs/design/ai-sigma-research-goal.md",
+      "docs/design/ai-nnue-research.md",
+      "docs/design/ai-research-team.md"
+    ],
+    "start_UTC": "2026-10-03T01:54:58.839183+00:00",
+    "end_UTC": "2026-10-03T01:54:58.859874+00:00",
+    "wall_seconds": 0.020695465995231643,
+    "exit_code": 0,
+    "manager": {
+      "pid": 3026157,
+      "starttick": "24542711",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child": {
+      "pid": 3026158,
+      "starttick": "24542713",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child_current_identity": null,
+    "owned_wait_complete": true,
+    "stop": "owned wait natural exit",
+    "sampled_immediate_child_RSS_bytes": 4096,
+    "wait_ru_maxrss_bytes": 15970304,
+    "RSS_scope_limit": "sample covers immediate child; not all descendant/current RSS assurance",
+    "stdout_sha256": "21b52ebb491fa108076caa822121a38f99357ffaa1a2eb3c61ab955dc7df3ec5",
+    "stderr": "",
+    "CPU_affinity": [
+      0
+    ],
+    "formal_performance_measurement": false
+  },
+  {
+    "command": [
+      "bash",
+      "/workspaces/quoridor/scripts/dev/research-team.sh",
+      "report",
+      "--to",
+      "coordinator",
+      "--issue",
+      "quoridor-4lc",
+      "--body-file",
+      "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/154-nnue-preliminary/start-report.md"
+    ],
+    "start_UTC": "2026-10-03T01:55:08.331893+00:00",
+    "end_UTC": "2026-10-03T01:55:13.181083+00:00",
+    "wall_seconds": 4.866132845985703,
+    "exit_code": 0,
+    "manager": {
+      "pid": 3026412,
+      "starttick": "24543661",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child": {
+      "pid": 3026413,
+      "starttick": "24543662",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child_current_identity": null,
+    "owned_wait_complete": true,
+    "stop": "owned wait natural exit",
+    "sampled_immediate_child_RSS_bytes": 24363008,
+    "wait_ru_maxrss_bytes": 199688192,
+    "RSS_scope_limit": "sample covers immediate child; not all descendant/current RSS assurance",
+    "stdout_sha256": "5af7728897ffbd11edbc35812a6a582ce555e2dc62eac4b36fc3194aed82d5c8",
+    "stderr": "rg: tools/ai-sigma-frame10-fidelity: IO error for operation on tools/ai-sigma-frame10-fidelity: No such file or directory (os error 2)\n",
+    "CPU_affinity": [
+      0
+    ],
+    "formal_performance_measurement": false
+  },
+  {
+    "command": [
+      "rg",
+      "--files",
+      "crates",
+      "tools/ai-sigma-web-port",
+      "research-data/ai-sigma/151-sigma-web-port",
+      "research-data/ai-sigma/132-deep-node-comparison"
+    ],
+    "start_UTC": "2026-10-03T01:55:55.474078+00:00",
+    "end_UTC": "2026-10-03T01:55:55.495849+00:00",
+    "wall_seconds": 0.021769237995613366,
+    "exit_code": 2,
+    "manager": {
+      "pid": 3027584,
+      "starttick": "24548378",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child": {
+      "pid": 3027585,
+      "starttick": "24548380",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child_current_identity": null,
+    "owned_wait_complete": true,
+    "stop": "owned wait natural exit",
+    "sampled_immediate_child_RSS_bytes": 4526080,
+    "wait_ru_maxrss_bytes": 15970304,
+    "RSS_scope_limit": "sample covers immediate child; not all descendant/current RSS assurance",
+    "stdout_sha256": "7d6fb70777cc2ffcb31b4ff23465ca6307c347d162a7287c659fb5fb5e9564d8",
+    "stderr": "rg: tools/ai-sigma-web-port: IO error for operation on tools/ai-sigma-web-port: No such file or directory (os error 2)\n",
+    "stdout_file": "research-data/ai-sigma/154-nnue-preliminary/command-3027584.stdout.tmp",
+    "stderr_file": "research-data/ai-sigma/154-nnue-preliminary/command-3027584.stderr.tmp",
+    "CPU_affinity": [
+      0
+    ],
+    "formal_performance_measurement": false
+  },
+  {
+    "command": [
+      "bash",
+      "-c",
+      "rg --files tools | rg \"151|sigma-port|web-port|kernel.rs|reference.*js|RuleA\""
+    ],
+    "start_UTC": "2026-10-03T01:56:20.752981+00:00",
+    "end_UTC": "2026-10-03T01:56:20.773549+00:00",
+    "wall_seconds": 0.02057303799665533,
+    "exit_code": 0,
+    "manager": {
+      "pid": 3027983,
+      "starttick": "24550908",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child": {
+      "pid": 3027984,
+      "starttick": "24550910",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child_current_identity": null,
+    "owned_wait_complete": true,
+    "stop": "owned wait natural exit",
+    "sampled_immediate_child_RSS_bytes": 4096,
+    "wait_ru_maxrss_bytes": 16039936,
+    "RSS_scope_limit": "sample covers immediate child; not all descendant/current RSS assurance",
+    "stdout_sha256": "55849d96ff7373dfc5880ea4aca996f35f2443d52047185595cfff7b83c12832",
+    "stderr": "",
+    "stdout_file": "research-data/ai-sigma/154-nnue-preliminary/command-3027983.stdout.tmp",
+    "stderr_file": "research-data/ai-sigma/154-nnue-preliminary/command-3027983.stderr.tmp",
+    "CPU_affinity": [
+      0
+    ],
+    "formal_performance_measurement": false
+  },
+  {
+    "command": [
+      "python3",
+      "-B",
+      "-"
+    ],
+    "start_UTC": "2026-10-03T01:56:57.960751+00:00",
+    "end_UTC": "2026-10-03T01:56:57.981362+00:00",
+    "wall_seconds": 0.02061425198917277,
+    "exit_code": 0,
+    "manager": {
+      "pid": 3028364,
+      "starttick": "24554631",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child": {
+      "pid": 3028365,
+      "starttick": "24554632",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child_current_identity": null,
+    "owned_wait_complete": true,
+    "stop": "owned wait natural exit",
+    "sampled_immediate_child_RSS_bytes": 4096,
+    "wait_ru_maxrss_bytes": 16261120,
+    "RSS_scope_limit": "sample covers immediate child; not all descendant/current RSS assurance",
+    "stdout_sha256": "d19fe52b73a9bba53958b1e21c67e11e43ebaed8855bcf7864be157b26ed6904",
+    "stderr": "",
+    "stdout_file": "research-data/ai-sigma/154-nnue-preliminary/command-3028364.stdout.tmp",
+    "stderr_file": "research-data/ai-sigma/154-nnue-preliminary/command-3028364.stderr.tmp",
+    "CPU_affinity": [
+      0
+    ],
+    "formal_performance_measurement": false
+  },
+  {
+    "command": [
+      "rg",
+      "-n",
+      "distance|Distance|shortest|goal|history|feature|Feature|value|mean|root|encode|visits|backup|terminal|draw",
+      "crates/quoridor-core/src/position.rs",
+      "crates/quoridor-core/src/game.rs",
+      "crates/quoridor-ai/src/lib.rs",
+      "tools/ai-sigma-sigma-web-port/private/src/context.rs",
+      "tools/ai-sigma-sigma-web-port/private/src/lib.rs",
+      "tools/ai-sigma-sigma-web-port/port-worker.js"
+    ],
+    "start_UTC": "2026-10-03T01:56:58.073320+00:00",
+    "end_UTC": "2026-10-03T01:56:58.095965+00:00",
+    "wall_seconds": 0.022665633994620293,
+    "exit_code": 0,
+    "manager": {
+      "pid": 3028367,
+      "starttick": "24554641",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child": {
+      "pid": 3028368,
+      "starttick": "24554644",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child_current_identity": null,
+    "owned_wait_complete": true,
+    "stop": "owned wait natural exit",
+    "sampled_immediate_child_RSS_bytes": 4575232,
+    "wait_ru_maxrss_bytes": 16347136,
+    "RSS_scope_limit": "sample covers immediate child; not all descendant/current RSS assurance",
+    "stdout_sha256": "b9395dc87866389670a49bad5c53a804a1314b3c4b9a74afa6b86ac0f47388e2",
+    "stderr": "",
+    "stdout_file": "research-data/ai-sigma/154-nnue-preliminary/command-3028367.stdout.tmp",
+    "stderr_file": "research-data/ai-sigma/154-nnue-preliminary/command-3028367.stderr.tmp",
+    "CPU_affinity": [
+      0
+    ],
+    "formal_performance_measurement": false
+  },
+  {
+    "command": [
+      "python3",
+      "-B",
+      "-"
+    ],
+    "start_UTC": "2026-10-03T01:57:36.828095+00:00",
+    "end_UTC": "2026-10-03T01:57:36.851921+00:00",
+    "wall_seconds": 0.023833949002437294,
+    "exit_code": 0,
+    "manager": {
+      "pid": 3028797,
+      "starttick": "24558519",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child": {
+      "pid": 3028798,
+      "starttick": "24558521",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child_current_identity": null,
+    "owned_wait_complete": true,
+    "stop": "owned wait natural exit",
+    "sampled_immediate_child_RSS_bytes": 4096,
+    "wait_ru_maxrss_bytes": 15998976,
+    "RSS_scope_limit": "sample covers immediate child; not all descendant/current RSS assurance",
+    "stdout_sha256": "d57d3e8a23cf71ce2159fa16e09bfacb1233a33d6a92f0d2b8dcaba2e57d997e",
+    "stderr": "",
+    "stdout_file": "research-data/ai-sigma/154-nnue-preliminary/command-3028797.stdout.tmp",
+    "stderr_file": "research-data/ai-sigma/154-nnue-preliminary/command-3028797.stderr.tmp",
+    "CPU_affinity": [
+      0
+    ],
+    "formal_performance_measurement": false
+  },
+  {
+    "command": [
+      "rg",
+      "-n",
+      "pub fn features|distance_map|distances|terminal_value|history_counts|total_ply|REPETITION|DRAW|200|to_features",
+      "crates/quoridor-core/src/research.rs",
+      "tools/ai-sigma-sigma-web-port/port-main.js"
+    ],
+    "start_UTC": "2026-10-03T01:57:36.924802+00:00",
+    "end_UTC": "2026-10-03T01:57:36.926586+00:00",
+    "wall_seconds": 0.0017790630226954818,
+    "exit_code": 0,
+    "manager": {
+      "pid": 3028800,
+      "starttick": "24558527",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child": {
+      "pid": 3028801,
+      "starttick": "24558530",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child_current_identity": null,
+    "owned_wait_complete": true,
+    "stop": "owned wait natural exit",
+    "sampled_immediate_child_RSS_bytes": 0,
+    "wait_ru_maxrss_bytes": 15998976,
+    "RSS_scope_limit": "sample covers immediate child; not all descendant/current RSS assurance",
+    "stdout_sha256": "b336161b4b7137d13fe5c2562d1bb8a36576598b94c5c6e8962b5064dbf1f048",
+    "stderr": "",
+    "stdout_file": "research-data/ai-sigma/154-nnue-preliminary/command-3028800.stdout.tmp",
+    "stderr_file": "research-data/ai-sigma/154-nnue-preliminary/command-3028800.stderr.tmp",
+    "CPU_affinity": [
+      0
+    ],
+    "formal_performance_measurement": false
+  },
+  {
+    "command": [
+      "python3",
+      "-B",
+      "-"
+    ],
+    "start_UTC": "2026-10-03T01:58:17.470099+00:00",
+    "end_UTC": "2026-10-03T01:58:17.512313+00:00",
+    "wall_seconds": 0.04222114401636645,
+    "exit_code": 0,
+    "manager": {
+      "pid": 3029775,
+      "starttick": "24562587",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child": {
+      "pid": 3029776,
+      "starttick": "24562589",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child_current_identity": null,
+    "owned_wait_complete": true,
+    "stop": "owned wait natural exit",
+    "sampled_immediate_child_RSS_bytes": 11698176,
+    "wait_ru_maxrss_bytes": 16089088,
+    "RSS_scope_limit": "sample covers immediate child; not all descendant/current RSS assurance",
+    "stdout_sha256": "62994c4ed33988e72014c943795bfc611cef32d3de0b219c8edef2f43e823fa7",
+    "stderr": "",
+    "stdout_file": "research-data/ai-sigma/154-nnue-preliminary/command-3029775.stdout.tmp",
+    "stderr_file": "research-data/ai-sigma/154-nnue-preliminary/command-3029775.stderr.tmp",
+    "CPU_affinity": [
+      0
+    ],
+    "formal_performance_measurement": false
+  },
+  {
+    "command": [
+      "bash",
+      "-c",
+      "rg --files -uuu .artifacts/ai-sigma | rg \"stageA-r2|stageA.*raw|port151\""
+    ],
+    "start_UTC": "2026-10-03T01:58:37.050887+00:00",
+    "end_UTC": "2026-10-03T01:58:37.092543+00:00",
+    "wall_seconds": 0.04166172299301252,
+    "exit_code": 0,
+    "manager": {
+      "pid": 3030117,
+      "starttick": "24564545",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child": {
+      "pid": 3030118,
+      "starttick": "24564547",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child_current_identity": null,
+    "owned_wait_complete": true,
+    "stop": "owned wait natural exit",
+    "sampled_immediate_child_RSS_bytes": 3416064,
+    "wait_ru_maxrss_bytes": 15986688,
+    "RSS_scope_limit": "sample covers immediate child; not all descendant/current RSS assurance",
+    "stdout_sha256": "63b0f37ea236040f4ec1bccdf5a6ae17343485f5aedfdcfad2540c33fc0a0a2d",
+    "stderr": "",
+    "stdout_file": "research-data/ai-sigma/154-nnue-preliminary/command-3030117.stdout.tmp",
+    "stderr_file": "research-data/ai-sigma/154-nnue-preliminary/command-3030117.stderr.tmp",
+    "CPU_affinity": [
+      0
+    ],
+    "formal_performance_measurement": false
+  },
+  {
+    "command": [
+      "python3",
+      "-B",
+      "-"
+    ],
+    "start_UTC": "2026-10-03T01:58:48.474361+00:00",
+    "end_UTC": "2026-10-03T01:58:48.494959+00:00",
+    "wall_seconds": 0.020600813993951306,
+    "exit_code": 0,
+    "manager": {
+      "pid": 3030340,
+      "starttick": "24565689",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child": {
+      "pid": 3030341,
+      "starttick": "24565691",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child_current_identity": null,
+    "owned_wait_complete": true,
+    "stop": "owned wait natural exit",
+    "sampled_immediate_child_RSS_bytes": 4096,
+    "wait_ru_maxrss_bytes": 16113664,
+    "RSS_scope_limit": "sample covers immediate child; not all descendant/current RSS assurance",
+    "stdout_sha256": "103ff01821667ee204ed5dfaadde471c475237d4b29c0dd4241374c1e5ae35e3",
+    "stderr": "",
+    "stdout_file": "research-data/ai-sigma/154-nnue-preliminary/command-3030340.stdout.tmp",
+    "stderr_file": "research-data/ai-sigma/154-nnue-preliminary/command-3030340.stderr.tmp",
+    "CPU_affinity": [
+      0
+    ],
+    "formal_performance_measurement": false
+  },
+  {
+    "command": [
+      "python3",
+      "-B",
+      "-"
+    ],
+    "start_UTC": "2026-10-03T01:59:11.884084+00:00",
+    "end_UTC": "2026-10-03T01:59:11.910677+00:00",
+    "wall_seconds": 0.026592776004690677,
+    "exit_code": 0,
+    "manager": {
+      "pid": 3030759,
+      "starttick": "24568028",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child": {
+      "pid": 3030760,
+      "starttick": "24568032",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child_current_identity": null,
+    "owned_wait_complete": true,
+    "stop": "owned wait natural exit",
+    "sampled_immediate_child_RSS_bytes": 5394432,
+    "wait_ru_maxrss_bytes": 16039936,
+    "RSS_scope_limit": "sample covers immediate child; not all descendant/current RSS assurance",
+    "stdout_sha256": "acecbf132c19924ef0e47aafcf34560557fc4a1145c2b1725cfeecc0d9f5b9ed",
+    "stderr": "",
+    "stdout_file": "research-data/ai-sigma/154-nnue-preliminary/command-3030759.stdout.tmp",
+    "stderr_file": "research-data/ai-sigma/154-nnue-preliminary/command-3030759.stderr.tmp",
+    "CPU_affinity": [
+      0
+    ],
+    "formal_performance_measurement": false
+  },
+  {
+    "command": [
+      "python3",
+      "-B",
+      "tools/ai-sigma-nnue-preliminary/inspect.py"
+    ],
+    "start_UTC": "2026-10-03T02:00:28.815566+00:00",
+    "end_UTC": "2026-10-03T02:00:29.485590+00:00",
+    "wall_seconds": 0.6700241229846142,
+    "exit_code": 0,
+    "manager": {
+      "pid": 3031707,
+      "starttick": "24575726",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child": {
+      "pid": 3031708,
+      "starttick": "24575731",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child_current_identity": null,
+    "owned_wait_complete": true,
+    "stop": "owned wait natural exit",
+    "sampled_immediate_child_RSS_bytes": 70586368,
+    "wait_ru_maxrss_bytes": 70348800,
+    "RSS_scope_limit": "sample covers immediate child; not all descendant/current RSS assurance",
+    "stdout_sha256": "222f08bb1a1d0fd3f49069e9275ae462d4cbe91c8c9a17f8692543a778bb7c59",
+    "stderr": "",
+    "stdout_file": "research-data/ai-sigma/154-nnue-preliminary/command-3031707.stdout.tmp",
+    "stderr_file": "research-data/ai-sigma/154-nnue-preliminary/command-3031707.stderr.tmp",
+    "CPU_affinity": [
+      0
+    ],
+    "formal_performance_measurement": false
+  },
+  {
+    "command": [
+      "bash",
+      "/workspaces/quoridor/scripts/dev/research-team.sh",
+      "report",
+      "--to",
+      "coordinator",
+      "--issue",
+      "quoridor-4lc",
+      "--body-file",
+      "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/154-nnue-preliminary/early-report.md"
+    ],
+    "start_UTC": "2026-10-03T02:01:54.245821+00:00",
+    "end_UTC": "2026-10-03T02:01:55.711193+00:00",
+    "wall_seconds": 1.465375235013198,
+    "exit_code": 1,
+    "manager": {
+      "pid": 3032890,
+      "starttick": "24584277",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child": {
+      "pid": 3032891,
+      "starttick": "24584279",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child_current_identity": null,
+    "owned_wait_complete": true,
+    "stop": "owned wait natural exit",
+    "sampled_immediate_child_RSS_bytes": 24375296,
+    "wait_ru_maxrss_bytes": 201535488,
+    "RSS_scope_limit": "sample covers immediate child; not all descendant/current RSS assurance",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr": "research-team: Another client is dispatching; retry later\n",
+    "stdout_file": "research-data/ai-sigma/154-nnue-preliminary/command-3032890.stdout.tmp",
+    "stderr_file": "research-data/ai-sigma/154-nnue-preliminary/command-3032890.stderr.tmp",
+    "CPU_affinity": [
+      0
+    ],
+    "formal_performance_measurement": false
+  },
+  {
+    "command": [
+      "python3",
+      "-B",
+      "-"
+    ],
+    "start_UTC": "2026-10-03T02:02:36.022878+00:00",
+    "end_UTC": "2026-10-03T02:02:36.043638+00:00",
+    "wall_seconds": 0.020764451997820288,
+    "exit_code": 0,
+    "manager": {
+      "pid": 3033429,
+      "starttick": "24588457",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child": {
+      "pid": 3033430,
+      "starttick": "24588459",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child_current_identity": null,
+    "owned_wait_complete": true,
+    "stop": "owned wait natural exit",
+    "sampled_immediate_child_RSS_bytes": 4096,
+    "wait_ru_maxrss_bytes": 16338944,
+    "RSS_scope_limit": "sample covers immediate child; not all descendant/current RSS assurance",
+    "stdout_sha256": "4f46dc449c1d197c48ef0aa2bf919e58ac76a12749d9e879dd33578824f429e2",
+    "stderr": "",
+    "stdout_file": "research-data/ai-sigma/154-nnue-preliminary/command-3033429.stdout.tmp",
+    "stderr_file": "research-data/ai-sigma/154-nnue-preliminary/command-3033429.stderr.tmp",
+    "CPU_affinity": [
+      0
+    ],
+    "formal_performance_measurement": false
+  },
+  {
+    "command": [
+      "bash",
+      "/workspaces/quoridor/scripts/dev/research-team.sh",
+      "report",
+      "--to",
+      "coordinator",
+      "--issue",
+      "quoridor-4lc",
+      "--body-file",
+      "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/154-nnue-preliminary/early-report.md"
+    ],
+    "start_UTC": "2026-10-03T02:02:49.594454+00:00",
+    "end_UTC": "2026-10-03T02:02:51.338666+00:00",
+    "wall_seconds": 1.7442192010057624,
+    "exit_code": 0,
+    "manager": {
+      "pid": 3033552,
+      "starttick": "24589815",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child": {
+      "pid": 3033553,
+      "starttick": "24589817",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child_current_identity": null,
+    "owned_wait_complete": true,
+    "stop": "owned wait natural exit",
+    "sampled_immediate_child_RSS_bytes": 24215552,
+    "wait_ru_maxrss_bytes": 189480960,
+    "RSS_scope_limit": "sample covers immediate child; not all descendant/current RSS assurance",
+    "stdout_sha256": "4371710d45ee1a8e8b644f505fe2199e52f87cb7aa1dbe6c0cdf9c46c4dc0f5e",
+    "stderr": "",
+    "stdout_file": "research-data/ai-sigma/154-nnue-preliminary/command-3033552.stdout.tmp",
+    "stderr_file": "research-data/ai-sigma/154-nnue-preliminary/command-3033552.stderr.tmp",
+    "CPU_affinity": [
+      0
+    ],
+    "formal_performance_measurement": false
+  },
+  {
+    "command": [
+      "python3",
+      "-B",
+      "-"
+    ],
+    "start_UTC": "2026-10-03T02:08:59.767780+00:00",
+    "end_UTC": "2026-10-03T02:09:04.001770+00:00",
+    "wall_seconds": 4.233994950976921,
+    "exit_code": 0,
+    "manager": {
+      "pid": 3037887,
+      "starttick": "24626852",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child": {
+      "pid": 3037888,
+      "starttick": "24626854",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child_current_identity": null,
+    "owned_wait_complete": true,
+    "stop": "owned wait natural exit",
+    "sampled_immediate_child_RSS_bytes": 12902400,
+    "wait_ru_maxrss_bytes": 202735616,
+    "RSS_scope_limit": "sample covers immediate child; not all descendant/current RSS assurance",
+    "stdout_sha256": "526545ebf30753b52eba69dee694095db757695db4e5aff9a24560a5520bb3cd",
+    "stderr": "",
+    "stdout_file": "research-data/ai-sigma/154-nnue-preliminary/command-3037887.stdout.tmp",
+    "stderr_file": "research-data/ai-sigma/154-nnue-preliminary/command-3037887.stderr.tmp",
+    "CPU_affinity": [
+      0
+    ],
+    "formal_performance_measurement": false
+  }
+]
