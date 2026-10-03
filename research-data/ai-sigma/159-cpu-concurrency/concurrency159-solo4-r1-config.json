@@ -1,0 +1,127 @@
+{
+  "issue": "quoridor-4lc.159",
+  "received_observed_UTC": "2026-10-03T03:06:15.627920+00:00",
+  "processing_deadline": "2026-10-03T03:35:00+00:00",
+  "newjob_deadline": "2026-10-03T03:30:00+00:00",
+  "submission_deadline": "2026-10-03T03:50:00+00:00",
+  "current_affinity": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "frame": 10,
+  "seed": 1979,
+  "T_ms": 500,
+  "cutoff_ms": 402,
+  "adopt_ms": 411,
+  "sample_interval_ms": 1,
+  "requests": [
+    "candidate",
+    "reference",
+    "reference",
+    "candidate",
+    "candidate",
+    "reference"
+  ],
+  "warm_ordinals": [
+    0,
+    1
+  ],
+  "steady_ordinals": [
+    2,
+    3,
+    4,
+    5
+  ],
+  "modes": [
+    {
+      "id": "solo2",
+      "cores": [
+        2
+      ]
+    },
+    {
+      "id": "solo4",
+      "cores": [
+        4
+      ]
+    },
+    {
+      "id": "solo6",
+      "cores": [
+        6
+      ]
+    },
+    {
+      "id": "solo8",
+      "cores": [
+        8
+      ]
+    },
+    {
+      "id": "mode2",
+      "cores": [
+        2,
+        4
+      ]
+    },
+    {
+      "id": "mode4",
+      "cores": [
+        2,
+        4,
+        6,
+        8
+      ],
+      "conditional": "aggregateRAM/owner/currentphysical admission, independent of mode2 results"
+    }
+  ],
+  "planned_arenas": 10,
+  "planned_requests": 60,
+  "startup_NN_per_arena": 6,
+  "planned_startup_NN": 60,
+  "hand_NN_limit": 2048,
+  "operational_budget_reservation": "102 API starts per engine per arena; maximum2040 across10 arenas; refusal unfinished, no replacement",
+  "binary_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/faithful.wasm",
+  "binary_SHA256": "500181795b373f69f6f2214ee1a77e12767e2f342e15a56ab5e27d0a0453f2c2",
+  "input_SHA256": "cea8084d912c0f07bfd762d3d501850c4c0e85532e8b2e0b8368a37cca1be324",
+  "barrier": "parent program releases prepared browser-local Promise for each fixed phase; main owns local t0/adoption, no Node judge/CP path",
+  "runtime_cumulative_seconds": 360,
+  "job_seconds": 180,
+  "RAM_guard": 6979321856,
+  "RAM_reservation": 7516192768,
+  "parent_RAM_limit": 8589934592,
+  "storage_guard": 58720256,
+  "storage_reservation": 67108864,
+  "formal_WDL": 0,
+  "NI_ready": false,
+  "kind": "browser",
+  "mode": {
+    "id": "solo4",
+    "cores": [
+      4
+    ]
+  },
+  "run_id": "concurrency159-solo4-r1",
+  "job_out": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/CPU-CONCURRENCY/runs/concurrency159-solo4-r1",
+  "fixed_input_path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/159-cpu-concurrency/initial-input.json",
+  "forecast_bytes": 25165824,
+  "pin_owned_TIDs": true
+}
