@@ -8,15 +8,17 @@
 | --- | --- | --- |
 | 主187 experiment | 185の薄gamepoolを実Rust複数handle・177のheld realGPU provider・fullgame/全手教師exportに接続。CPU worker3とactive game3/12/24を分離し共有maxB8へ多重化。同K64で最速CPUJSと実生成の全費を比較 | 実装45–60分見積、重計1800s、候補5mode各24game/各300s、計算CPU4/RAM GPU6guard5.5/VRAM6、storage256MiBは既experiment2044内。個別science14:20/処理14:30/提出14:40。実効batch/待ち/輸送/初期化/回収とRpolicy/Rz/Rjoint/全jobwallで採否。利益なしならGPUbranch終了、CPU採用経路へ |
 | 小188 hypothesis | 176親から同2260train/seed18180311/200step128でLRだけ.01→.0025。旧新validation全502/8gameのπ/zを比較し代替checkpointへ | CPU8単1/RAM1guard896、science60s・1job30s/26604samples、new512KiBは既hyp20内、science13:15/提出13:27。187重NN/GPU前に終了。全game/πとzを別評価、176既定を自動置換しない |
-| 条件付き次189候補 | 既2762学習教師で小value NNUEの疎特徴/差分更新とCPU学習接続 | 13:40頃に187実進展・188結果・残費/空きCPUから実配分判断。小実装25–35分＋CPU実処理<=60s/RAM1/保存256KiB目安。未登録・未開始、GPU本仕事を遅らせる全案必須gate0 |
+| 条件付き次NNUE試作候補 | 既2762学習教師で小value NNUEの疎特徴/差分更新とCPU学習接続 | 13:40頃に187実進展・188結果・残費/空きCPUから実配分判断。小実装25–35分＋CPU実処理<=60s/RAM1/保存256KiB目安。未登録・未開始、GPU本仕事を遅らせる全案必須gate0 |
 
-187/188は13:01:51/13:02:03UTCに本人保存セッションへ実配送accepted。受理と本人ready/show/claim・actual scienceは別に追う。187実装と188静的準備を進め、188学習のactualstop/currentidentityを確認して187重計算を開始する。研究を92全史・全役承認待ちにしない。criticの独立検算は重大な実結果の保存を受けて必要範囲で配分し、入口の全稿gateを作らない。自然監督CPU0とのphysical窓・aggregateCPU/RAMは各ownerが直前に確認、LLMactive数は拒否条件にしない。
+187/188は13:01:51/13:02:03UTCに本人保存セッションへ実配送accepted。187本人受領13:02:09/claim13:06:42・新自域静的開始、188本人受領13:02:32.710953/13:03前claim・静的開始を確認。実NN/GPU科学はまだ0として別に追う。187実装と188静的準備を進め、188学習のactualstop/currentidentityを確認して187重計算を開始する。研究を92全史・全役承認待ちにしない。criticの独立検算は重大な実結果の保存を受けて必要範囲で配分し、入口の全稿gateを作らない。自然監督CPU0とのphysical窓・aggregateCPU/RAMは各ownerが直前に確認、LLMactive数は拒否条件にしない。
 
 187は実装上必要なら科学結果前に最小mode群へ絞って理由/全予定statusを固定する。予定はCPUJS3heldsession（現在最速実用対照）、RustCPU3serial（構造対照）、GPU3/12/24activeの5mode。各samefresh24game/K64/root64edge63/同d790/温度tau1初16newply、その後argmax/200newply打切りzunknown。GPU差によるtrajectory差も保存、C++全生成規則との同一性/棋力を認定しない。各game1pending・独立tree、取消所有を返却/破棄まで保持する。新private capを明示し旧177512/17640000/185512を黙ってresetしない。実GPU未測部分B3/5/6/7は必要小parityを予算内で確認する。原ONNX batch1と私有torch実dynamicBは別に記録する。
 
 採否はraw行数より合法・視点・π訪問・z終局・lineage・多様性を保つ有効教師/全job時間。全fault/未完了/初期化/探索/推論/輸送/記録/回収の費用を残す。対照はsameKで、探索量削減だけを品質維持の高速化としない。実装が長引けば最小実生成と保存を優先し、mock/handle増だけを実生成成功にしない。最初の本人開始・準備/科学進展をrootへ報告する。
 
 ## NNUEへの最小接続の判断
+
+rootが189でdocs/design/ai-nnue-research.mdとai-nnue-feature-design.md（main/研究mirror）を単独所有し特徴設計中。完成版は13:40頃の試作判断の参照とする。統括/187/188は当該設計pathへ書込0、文書完成待ちを研究開始gateにしない。二視点accumulator/疎盤面と後段経路/HalfKP式全壁anchorの更新費/履歴/教師/方策の候補は未検証として扱い、現在の187/188条件を変更しない。
 
 自前PVの正式Sigma同等を恒久的入口にしない。13:40頃に物理空き/残40分程度があれば、188担当へvalue-only小NNUEを1案だけ配分する判断をする。候補は固定座標313疎特徴＋距離2値を後段へ接続しhidden32 accumulator、f32 full-vs-delta/make-unmakeと手番符号の有限parity、既学習用48game2762行のz又はrootmeanを明確に分けたCPU fit。選ぶ教師・split・追加samples・費用は実配分時に固定する。rootmeanは予算付きMCTS蒸留で真値に読み替えない。差分更新の機能・value fitと速度/αβ/棋力は別にする。GPU生成を妨げるCPU5/同重jobを作らず、残費不足なら具体未着手項目と次枠費用を示す。NNUE全面移行や本PV調整の反復を今枠主仕事にしない。
 
