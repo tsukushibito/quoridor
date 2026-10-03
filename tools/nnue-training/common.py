@@ -67,8 +67,15 @@ def feature_key(row):
 
 def load_data(path, overlap_policy="error"):
     data = Path(path).read_bytes()
-    raw = gzip.decompress(data) if str(path).endswith(".gz") else data
-    if str(path).removesuffix(".gz").endswith(".jsonl"):
+    stage = None
+    if str(path).endswith('.stage.json'):
+        from frame14_data import load_stage
+        rows, stage = load_stage(path)
+    else:
+        raw = gzip.decompress(data) if str(path).endswith(".gz") else data
+    if stage is not None:
+        pass
+    elif str(path).removesuffix(".gz").endswith(".jsonl"):
         rows = [json.loads(line) for line in raw.splitlines() if line.strip()]
     else:
         obj = json.loads(raw)
@@ -111,7 +118,7 @@ def load_data(path, overlap_policy="error"):
     if overlap_policy == "error" and any(overlap.values()):
         raise ValueError(f"state/history/features cross split: {overlap}")
     split_hashes = {s + "_sha256": hashlib.sha256(json.dumps(sorted([r for r in rows if r["split"] == s], key=lambda r: r["id"]), sort_keys=True, separators=(",", ":")).encode()).hexdigest() for s in counts}
-    return rows, {"path": str(Path(path).resolve()), "sha256": hashlib.sha256(data).hexdigest(), **split_hashes, "rows": len(rows), "counts": counts, "groups": {s: len({r["group"] for r in rows if r["split"] == s}) for s in counts}, "cross_split_keys": overlap, "independent_test": False}
+    return rows, {"path": str(Path(path).resolve()), "sha256": hashlib.sha256(data).hexdigest(), **split_hashes, "rows": len(rows), "counts": counts, "groups": {s: len({r["group"] for r in rows if r["split"] == s}) for s in counts}, "cross_split_keys": overlap, "stage_manifest": stage, "independent_test": False}
 
 
 def measurements(rows, values, target, constant):

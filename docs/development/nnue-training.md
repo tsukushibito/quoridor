@@ -82,6 +82,39 @@ python3 tools/nnue-training/compare.py \
 
 実験・検証の必要データは研究Gitへ保存する。再生成できる重み・図の展開重複や中間物は保存方針に従い整理する。この入口は成果物削除やGit追加を自動実行しない。
 
+## frame14の固定分割・候補freeze・一度だけのtest
+
+frame14では144個のfresh familyを96train/24validation/24testへ結果前に割り当てる。testラベルは生成担当の別sealed pathへ保持する。学習担当がfreeze前に受け取るのはtestのlabel-free特徴とsealedファイルのSHA/pathだけ。`export_generated.cjs` は生成担当が保存棋譜・RuleA履歴・648bitsを照合し、label-free metadataと別labelsを出力する。testの変換は生成担当だけが実行する。元wireの`evaluation`を`test`へ戻すのはopening manifestがtestと宣言した行だけで、旧source/splitを変更しない。
+
+実network入力は`frame14_data.canonical_model_input`で統一する。STM側/相手側のsorted active IDsと、既にSTM順になっている距離2値のfloat32 uint32bits、feature版`QF1-f32-STM-v1`を使う。`model.inputs`も同じ関数を使う。生P1/P2配列やJSON浮動小数点表記を入力一致の判定にしない。history署名はRuleA版・対象state・手番・canonicalな履歴countsを含む。
+
+`frame14.py mask`はlabelを拒否し、state一致 **OR** history文脈一致 **OR** 実QF1入力一致で露出を判定する。validationは最大train96との共有を、testは最大train96または全validationとの共有をprimary評価から除く。同じmaskを全24/48/96段階へ使い、曲線を見た後に交換しない。`--openings`を渡すと行がないgameも全144予定の分母へ残す。family/gameのpartition共有は拒否する。
+
+```bash
+python3 -B tools/nnue-training/frame14.py mask \
+  --metadata LABEL_FREE_ALL144.jsonl.gz --openings OPENINGS.json --output MASK.json
+python3 -B tools/nnue-training/frame14.py stage \
+  --metadata LABEL_FREE_ALL144.jsonl.gz --mask MASK.json \
+  --training-labels TRAIN_VALIDATION_LABELS.jsonl.gz --games 24 --output train24.stage.json
+```
+
+stage manifestは入力/label/maskのSHAとtrain familyを束縛する。training label artifactにtest行があれば拒否する。trainerはtest行をforwardしない。validation primaryをbest選定へ、全行validationをsecondary露出診断へ使い、game/phase/符号/飽和/全分母を記録する。trainだけから求めたgame等重み定数はtestでも再fitしない。2000step/batch128の各段階は初期重みを同じseedから新規に作り、256000学習sampleを固定する。epoch数は段階ごとに異なる。checkpointはinitial/best/lastを保存する。
+
+validationだけで候補を一つ選び、`frame14.py freeze`でcheckpoint/config/data/validation/mask/initial/source/testsealedSHA/selection reasonを保存する。`evaluate --freeze-sha`はadmitしたfreeze SHAを検査し、test専用outputを排他的に作成してからラベルを読む。同じoutputでの再実行・testを見ての再選定は禁止。失敗時もstarted/failureを残す。
+
+```bash
+python3 -B tools/nnue-training/frame14.py freeze --run RUN_DIRECTORY \
+  --test-labels SEALED_TEST_LABELS.jsonl.gz --test-sha SEALED_SHA \
+  --reason 'eligible validation gameequal MSE minimum; complete curves retained' --output FREEZE.json
+# 次のモデル評価は担当予算/physical admission後、既training Pythonで実行する。
+/home/vscode/.cache/inference/envs/quoridor-training/bin/python -B tools/nnue-training/frame14.py evaluate \
+  --freeze FREEZE.json --freeze-sha FREEZE_SHA --output ONE_TEST_OUTPUT --samples ADMITTED_SAMPLE_CAP
+```
+
+testは候補/未学習同モデル/train定数を同時比較し、primaryと全行secondary、rootmean/z誤差、game等重み/行重み、符号、飽和、各gameとeligible0gameを保存する。group bootstrapは同gameを共有する差の探索的区間で、24gameの小標本・family内相関の限界がある。未露出subsetに条件付きの精度と、露出を含む未学習game全体の精度を分ける。rootmean蒸留改善は棋力認定を意味しない。
+
+`manage_frame14.py`はCPU2単logical/1thread、family RSS/timeout/子wait/identityと累積費を記録する有限launcher。外部生成scienceが現在存在する間はmock・学習・testを開始しない。NN0境界の追加確認は`test_frame14.py`だけで、旧5softwaretestsや既48game exportを再測定しない。
+
 ## 依存とソフトウェア検証
 
 run.shは既存のtraining Pythonを使い、`QUORIDOR_NNUE_PYTHON` で明示変更できる。共有依存を自動更新しない。plot.shは隔離plot環境を使い、`QUORIDOR_PLOT_PYTHON` で変更できる。

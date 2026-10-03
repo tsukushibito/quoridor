@@ -24,6 +24,8 @@ def train(args):
     rows, data_info = load_data(args.data, cfg["data"]["overlap_policy"])
     target_name = cfg["training"]["target"]
     splits = {s: [i for i, r in enumerate(rows) if r["split"] == s] for s in ["train", "validation"]}
+    validation_all = list(splits['validation'])
+    splits['validation'] = [i for i in validation_all if rows[i].get('primary_eligible', True)]
     eligible = [i for i in splits["train"] if rows[i].get(target_name) is not None]
     if not eligible or not any(rows[i].get(target_name) is not None for i in splits["validation"]):
         raise ValueError("selected target needs eligible training and validation rows")
@@ -67,35 +69,18 @@ def train(args):
         if device.type == "cuda":
             torch.cuda.manual_seed_all(cfg["training"]["seed"])
 
-        class Model(torch.nn.Module):
-            def __init__(self):
-                super().__init__()
-                h = cfg["model"]["transformer_width"]
-                self.ft = torch.nn.Linear(312, h)
-                self.h = torch.nn.Linear(2 * h + 2, cfg["model"]["hidden_width"])
-                self.dropout = torch.nn.Dropout(cfg["model"]["dropout"])
-                self.out = torch.nn.Linear(cfg["model"]["hidden_width"], 1)
-
-            def forward(self, x, d, side):
-                a = torch.relu(self.ft(x))
-                p = side.long() - 1
-                idx = torch.arange(len(x), device=x.device)
-                q = torch.cat([a[idx, p], a[idx, 1 - p], d], dim=1)
-                return torch.tanh(self.out(self.dropout(torch.relu(self.h(q)))))[:, 0]
-
-        model = Model().to(device)
+        from model import Model, inputs
+        model = Model(cfg['model']).to(device)
         if args.init_checkpoint:
             cp = torch.load(args.init_checkpoint, map_location=device, weights_only=True)
             if cp["model_config"] != cfg["model"]:
                 raise ValueError("initial checkpoint model configuration mismatch")
             model.load_state_dict(cp["model"])
+        all_inputs = inputs(rows, device)
+        initial_sha = hashlib.sha256(b''.join(v.detach().cpu().numpy().tobytes() for v in model.state_dict().values())).hexdigest()
         def batch(indices):
-            selected = [rows[i] for i in indices]
-            x = torch.zeros(len(selected), 2, 312)
-            for i, row in enumerate(selected):
-                for p in (0, 1):
-                    x[i, p, row["ids"][p]] = 1
-            return x.to(device), torch.tensor([r["distance"] for r in selected], device=device), torch.tensor([r["side"] for r in selected], device=device)
+            ix = torch.tensor(list(indices), device=device, dtype=torch.long)
+            return tuple(v[ix] for v in all_inputs)
         opt_config = cfg["optimizer"]
         opt_type = {"adam": torch.optim.Adam, "adamw": torch.optim.AdamW, "sgd": torch.optim.SGD}[opt_config["name"]]
         kwargs = {"lr": opt_config["lr"], "weight_decay": opt_config["weight_decay"]}
@@ -112,6 +97,11 @@ def train(args):
 
         def checkpoint(name):
             torch.save({"model": {k: v.detach().cpu() for k, v in model.state_dict().items()}, "model_config": cfg["model"], "target": target_name, "step": step, "samples": count, "dataset_sha256": data_info["sha256"]}, weights / name)
+        checkpoint('initial.pt')
+        data_info.update({'constant': constant, 'constant_rule': cfg['evaluation']['monitor'], 'initial_state_sha256': initial_sha,
+                          'validation_primary_rows': len(splits['validation']), 'validation_all_rows': len(validation_all),
+                          'validation_zero_eligible_games': sorted({rows[i]['group'] for i in validation_all} - {rows[i]['group'] for i in splits['validation']})})
+        write_json(out / 'dataset.json', data_info)
 
         def evaluate():
             nonlocal last_record, best_step
@@ -127,6 +117,17 @@ def train(args):
             record = {"step": step, "train_samples_seen": step * cfg["training"]["batch_size"], "train_epochs_equivalent": step * cfg["training"]["batch_size"] / len(eligible), "all_samples": count, "elapsed_s": time.monotonic() - start, "lr": optimizer.param_groups[0]["lr"]}
             for split, ix in splits.items():
                 record[split] = measurements([rows[i] for i in ix], [values[i] for i in ix], target_name, constant)
+            record['validation_secondary_all'] = measurements([rows[i] for i in validation_all], [values[i] for i in validation_all], target_name, constant)
+            record['validation_eligible_zero_games'] = data_info['validation_zero_eligible_games']
+            record['train_games'] = {}
+            for group in sorted({rows[i]['group'] for i in splits['train']}):
+                ix = [i for i in splits['train'] if rows[i]['group'] == group]
+                record['train_games'][group] = measurements([rows[i] for i in ix], [values[i] for i in ix], target_name, constant)
+            record['phase'] = {}
+            for phase in ['early', 'middle', 'late']:
+                for split, ix0 in splits.items():
+                    ix = [i for i in ix0 if ('early' if rows[i].get('ply', 0)<40 else 'middle' if rows[i].get('ply', 0)<100 else 'late') == phase]
+                    record['phase'][split+'_'+phase] = measurements([rows[i] for i in ix], [values[i] for i in ix], target_name, constant)
             record["validation_cohorts"] = {}
             for cohort in sorted({rows[i].get("cohort", "all") for i in splits["validation"]}):
                 ix = [i for i in splits["validation"] if rows[i].get("cohort", "all") == cohort]
