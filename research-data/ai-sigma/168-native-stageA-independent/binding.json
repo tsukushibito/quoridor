@@ -1,0 +1,357 @@
+{
+  "issue": "quoridor-4lc.168",
+  "UTC": "2026-10-03T05:10:52.380301+00:00",
+  "source_Git": "a09279c58fc89802bfb98b3e2cf6e1e79e98ff44",
+  "native_binary_sha256": "166dd0c4f5eef9cd02a189e9e8bb4811bd307f6545db83a07e7180ea410e96f8",
+  "model_sha256": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+  "source_binding": [
+    {
+      "path": "tools/ai-sigma-native-baseline/engine.cjs",
+      "source_Git": "a09279c58fc89802bfb98b3e2cf6e1e79e98ff44",
+      "Git_sha256_equal": true,
+      "sha256": "f265a94e782363b55b99db7b64d7a06b7df41cd965f16b0a638c1945f9a47504",
+      "current_sha256": "8f860172ee3a66229fc3fe1deba6f922d9c824f7f44f11943c6704641a60166c",
+      "current_equal_to_StageA": false
+    },
+    {
+      "path": "tools/ai-sigma-native-baseline/ort.py",
+      "source_Git": "a09279c58fc89802bfb98b3e2cf6e1e79e98ff44",
+      "Git_sha256_equal": true,
+      "sha256": "a1385fa48b07a2e5fb34d105e13d06556efed100b127a3667dfd0daa25111565",
+      "current_sha256": "a1385fa48b07a2e5fb34d105e13d06556efed100b127a3667dfd0daa25111565",
+      "current_equal_to_StageA": true
+    },
+    {
+      "path": "tools/ai-sigma-native-baseline/reference-core-native.js",
+      "source_Git": "a09279c58fc89802bfb98b3e2cf6e1e79e98ff44",
+      "Git_sha256_equal": true,
+      "sha256": "94ae4c315b671569e99d60091dca8fdcb69b1ad042e5e9e945e323a39a803ae7",
+      "current_sha256": "94ae4c315b671569e99d60091dca8fdcb69b1ad042e5e9e945e323a39a803ae7",
+      "current_equal_to_StageA": true
+    },
+    {
+      "path": "tools/ai-sigma-native-baseline/reference-core-browser-adapter.js",
+      "source_Git": "a09279c58fc89802bfb98b3e2cf6e1e79e98ff44",
+      "Git_sha256_equal": true,
+      "sha256": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05",
+      "current_sha256": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05",
+      "current_equal_to_StageA": true
+    },
+    {
+      "path": "tools/ai-sigma-native-baseline/reference.cjs",
+      "source_Git": "a09279c58fc89802bfb98b3e2cf6e1e79e98ff44",
+      "Git_sha256_equal": true,
+      "sha256": "5c2574b1539d7d84f0a5b3710f3da3399715657a91577d577ffed8da9cf29eef",
+      "current_sha256": "5c2574b1539d7d84f0a5b3710f3da3399715657a91577d577ffed8da9cf29eef",
+      "current_equal_to_StageA": true
+    },
+    {
+      "path": "tools/ai-sigma-native-baseline/trace-reference.js",
+      "source_Git": "a09279c58fc89802bfb98b3e2cf6e1e79e98ff44",
+      "Git_sha256_equal": true,
+      "sha256": "056c98b85d4003835dba54b6170249114e46b20146a1be0f691490e39aba92f0",
+      "current_sha256": "056c98b85d4003835dba54b6170249114e46b20146a1be0f691490e39aba92f0",
+      "current_equal_to_StageA": true
+    },
+    {
+      "path": "tools/ai-sigma-native-baseline/common.cjs",
+      "source_Git": "a09279c58fc89802bfb98b3e2cf6e1e79e98ff44",
+      "Git_sha256_equal": true,
+      "sha256": "df81c11661f37d8da170c80e459349a62a4c5aa4242ea026b885b5ecd63dadbf",
+      "current_sha256": "df81c11661f37d8da170c80e459349a62a4c5aa4242ea026b885b5ecd63dadbf",
+      "current_equal_to_StageA": true
+    },
+    {
+      "path": "tools/ai-sigma-native-baseline/controller.cjs",
+      "source_Git": "a09279c58fc89802bfb98b3e2cf6e1e79e98ff44",
+      "Git_sha256_equal": true,
+      "sha256": "0a8c8727b3144187127f20ccdc37ef95044c591c95e7d7a99ba1b92c56f56572",
+      "current_sha256": "0a8c8727b3144187127f20ccdc37ef95044c591c95e7d7a99ba1b92c56f56572",
+      "current_equal_to_StageA": true
+    },
+    {
+      "path": "tools/ai-sigma-native-baseline/diagnose.cjs",
+      "source_Git": "a09279c58fc89802bfb98b3e2cf6e1e79e98ff44",
+      "Git_sha256_equal": true,
+      "sha256": "63a0eda954135eb41b10af7762b7e1dc379e000eed8f19aca88b447687a82bf3",
+      "current_sha256": "63a0eda954135eb41b10af7762b7e1dc379e000eed8f19aca88b447687a82bf3",
+      "current_equal_to_StageA": true
+    },
+    {
+      "path": "tools/ai-sigma-native-baseline/private/src/lib.rs",
+      "source_Git": "a09279c58fc89802bfb98b3e2cf6e1e79e98ff44",
+      "Git_sha256_equal": true,
+      "sha256": "bcd41464e7aa76c3970384b36d41087feb2087b5af7f311bfc6a3b6bf11a2b2e",
+      "current_sha256": "bcd41464e7aa76c3970384b36d41087feb2087b5af7f311bfc6a3b6bf11a2b2e",
+      "current_equal_to_StageA": true
+    },
+    {
+      "path": "tools/ai-sigma-native-baseline/private/src/main.rs",
+      "source_Git": "a09279c58fc89802bfb98b3e2cf6e1e79e98ff44",
+      "Git_sha256_equal": true,
+      "sha256": "8e775ccc526c0169cfc260764a20dbf591d7c9da7f211bc094968d8d1a5122f2",
+      "current_sha256": "8e775ccc526c0169cfc260764a20dbf591d7c9da7f211bc094968d8d1a5122f2",
+      "current_equal_to_StageA": true
+    },
+    {
+      "path": "tools/ai-sigma-native-baseline/private/Cargo.lock",
+      "source_Git": "a09279c58fc89802bfb98b3e2cf6e1e79e98ff44",
+      "Git_sha256_equal": true,
+      "sha256": "d0568a38ed13c537c3ab96abe3a0585e82258da1a3a5e64ee4ab18df07211b24",
+      "current_sha256": "d0568a38ed13c537c3ab96abe3a0585e82258da1a3a5e64ee4ab18df07211b24",
+      "current_equal_to_StageA": true
+    }
+  ],
+  "preregister_Git_sha256": "eb22b0be3c6e4f3047168ef2593d32cd53688c16cecf47701e3d367ce75db1b1",
+  "fixed_inputs_Git_sha256": "dc205f8d7e00ee52aca51845ddbca5e3085d0aebdb22c3f4ceb6fa139cd10954",
+  "native_timer_only_operational_difference_supported": true,
+  "fixed_Web_Git": "751186344fc52ad0c29bc65922e62c6fa915f006",
+  "crossbackend_root_only": [
+    {
+      "fixture": "initial-p1",
+      "features_bits_exact": true,
+      "outputs": 137,
+      "different_f32_bits": 22,
+      "max_abs": 2.384185791015625e-06,
+      "abs1e4_rel1e4": true,
+      "backend_different": true,
+      "no_crossbackend_path_claim": true
+    },
+    {
+      "fixture": "asym-hv-p2",
+      "features_bits_exact": true,
+      "outputs": 137,
+      "different_f32_bits": 43,
+      "max_abs": 3.5762786865234375e-06,
+      "abs1e4_rel1e4": true,
+      "backend_different": true,
+      "no_crossbackend_path_claim": true
+    },
+    {
+      "fixture": "straight-jump-p2",
+      "features_bits_exact": true,
+      "outputs": 137,
+      "different_f32_bits": 34,
+      "max_abs": 3.0994415283203125e-06,
+      "abs1e4_rel1e4": true,
+      "backend_different": true,
+      "no_crossbackend_path_claim": true
+    },
+    {
+      "fixture": "frame10-prefix-13",
+      "features_bits_exact": true,
+      "outputs": 137,
+      "different_f32_bits": 64,
+      "max_abs": 3.5762786865234375e-06,
+      "abs1e4_rel1e4": true,
+      "backend_different": true,
+      "no_crossbackend_path_claim": true
+    },
+    {
+      "fixture": "frame10-prefix-14",
+      "features_bits_exact": true,
+      "outputs": 137,
+      "different_f32_bits": 48,
+      "max_abs": 3.0994415283203125e-06,
+      "abs1e4_rel1e4": true,
+      "backend_different": true,
+      "no_crossbackend_path_claim": true
+    }
+  ],
+  "phase": {
+    "start": "2026-10-03T04:56:56.343872+00:00",
+    "end": "2026-10-03T04:57:01.936784+00:00",
+    "exit": 0,
+    "stop_reason": null,
+    "remaining": [],
+    "unknown_adopted": [],
+    "saved_model_receipts_equal": true,
+    "reader_callbacks": [
+      {
+        "id": "quoridor-4lc",
+        "PID": 3176583,
+        "startUTC": "2026-10-03T04:56:56.411Z",
+        "endUTC": "2026-10-03T04:56:57.239Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "output_bytes": 219217,
+        "output_SHA256": "b019c6d328020d90f1fe382eb1b5d727f7ac85abaeb38ab31e76e06e0e6fb2ed",
+        "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/NATIVE-BASELINE/runs/native165-mechanism-r1/beads-read-quoridor-4lc.json",
+        "attempt": 0,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      },
+      {
+        "id": "quoridor-4lc.165",
+        "PID": 3176608,
+        "startUTC": "2026-10-03T04:56:57.243Z",
+        "endUTC": "2026-10-03T04:56:58.230Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "output_bytes": 220290,
+        "output_SHA256": "072527afdb475a5dc9b0283f1a41d05a7e8d36f42883418a8ecdd533219ab6c1",
+        "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/NATIVE-BASELINE/runs/native165-mechanism-r1/beads-read-quoridor-4lc.165.json",
+        "attempt": 0,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      },
+      {
+        "id": "quoridor-4lc",
+        "PID": 3176675,
+        "startUTC": "2026-10-03T04:56:59.236Z",
+        "endUTC": "2026-10-03T04:57:00.337Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "output_bytes": 219217,
+        "output_SHA256": "b019c6d328020d90f1fe382eb1b5d727f7ac85abaeb38ab31e76e06e0e6fb2ed",
+        "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/NATIVE-BASELINE/runs/native165-mechanism-r1/beads-read-quoridor-4lc.json",
+        "attempt": 0,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      },
+      {
+        "id": "quoridor-4lc.165",
+        "PID": 3176724,
+        "startUTC": "2026-10-03T04:57:00.339Z",
+        "endUTC": "2026-10-03T04:57:01.912Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "output_bytes": 220290,
+        "output_SHA256": "072527afdb475a5dc9b0283f1a41d05a7e8d36f42883418a8ecdd533219ab6c1",
+        "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/NATIVE-BASELINE/runs/native165-mechanism-r1/beads-read-quoridor-4lc.165.json",
+        "attempt": 0,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      }
+    ],
+    "monitor_end": "2026-10-03T04:57:01.914Z",
+    "pending": [],
+    "timer": false,
+    "monitor_event_counts": {
+      "kernel_boundary_initial": 1,
+      "kernel_boundary_root_bound": 1,
+      "runner_start": 1,
+      "monitor_cycle": 134,
+      "registration_accepted": 4,
+      "monitor_zombies": 1
+    },
+    "current_identities": [
+      {
+        "pid": 3176627,
+        "start_ticks": 25635348,
+        "type": "engine/init",
+        "current_exact_present": false
+      },
+      {
+        "pid": 3176634,
+        "start_ticks": 25635351,
+        "type": "engine/init",
+        "current_exact_present": false
+      },
+      {
+        "pid": 3176635,
+        "start_ticks": 25635352,
+        "type": "engine/init",
+        "current_exact_present": false
+      },
+      {
+        "pid": 3176637,
+        "start_ticks": 25635367,
+        "type": "engine/init",
+        "current_exact_present": false
+      },
+      {
+        "pid": 3176644,
+        "start_ticks": 25635370,
+        "type": "engine/init",
+        "current_exact_present": false
+      },
+      {
+        "pid": 3176440,
+        "start_ticks": 25634548,
+        "type": "outer",
+        "current_exact_present": false
+      },
+      {
+        "pid": 3176576,
+        "start_ticks": 25635163,
+        "type": "controller",
+        "current_exact_present": false
+      }
+    ],
+    "source_write_stopped_for_StageA_only": true,
+    "new_StageB_writer_may_continue": true,
+    "not_allhost_allperiod_natural_exit": true
+  },
+  "minimal_references": [
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/NATIVE-BASELINE/runs/native165-mechanism-r1/result.json",
+      "sha256": "dee3d3b52839b3c8ba50c082abba835be6f0784c61617a37ccfa550811113286",
+      "bytes": 13141705
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/NATIVE-BASELINE/runs/native165-mechanism-r1.inputs.json",
+      "sha256": "cb2106cee1d131f83863fed365f147f6d9a58d9d8fba56854f6032ac07d61425",
+      "bytes": 3128
+    },
+    {
+      "path": "research-data/ai-sigma/165-native-baseline/source-binding.json",
+      "sha256": "847de31e7e97420f2a77222ea4b050172e0b58c5f9a3b41d7506edcc75828f67",
+      "bytes": 8607
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageA-r2/browser-result.json",
+      "sha256": "d37215cbc7914519ca24ab254c5e413d21e780389094faed537280a059c234d2",
+      "bytes": 17535637
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/NATIVE-BASELINE/runs/native165-mechanism-r1.process.json",
+      "sha256": "58bbeeababa05f2657a8436d620a103eea070755009fabd20363003b6dedd6fe",
+      "bytes": 13343
+    },
+    {
+      "path": "research-data/ai-sigma/165-native-baseline/stageA-stop.json",
+      "sha256": "d97b970a9125ad470b48c9368935dc2df2156832c0db1f31a06f100996c26f5a",
+      "bytes": 1268
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/NATIVE-BASELINE/runs/native165-mechanism-r1/control-summary.json",
+      "sha256": "78b316bead0c9a71b59cbe5176ad366e45d2e4dc65775c224b05b8e212b47f6c",
+      "bytes": 181
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/NATIVE-BASELINE/runs/native165-mechanism-r1/pause-monitor-stop.json",
+      "sha256": "e36e45dd506c4ee26f2e909b62180e081782103469291f58d9ed09d954788f4a",
+      "bytes": 3500
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/NATIVE-BASELINE/runs/native165-mechanism-r1.started.json",
+      "sha256": "36b8a659b355807e04886b47ec5a116cd59a7ae025ea62b25a772e8e1d35ebb7",
+      "bytes": 1726
+    }
+  ],
+  "new_NN": 0,
+  "native_binary_execution": 0,
+  "limits": [
+    "snapshots do not prove wholegame clocks or CPU cycles",
+    "current identity absence is current-only",
+    "reader receipts saved; no allperiod monitoring audit",
+    "source Git corresponds StageA; current differences are not replacement source"
+  ]
+}

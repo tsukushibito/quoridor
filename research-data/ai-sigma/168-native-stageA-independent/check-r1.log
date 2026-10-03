@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-native-stageA-independent/check.py", line 135, in <module>
+    root=a['root_state'];f=fixtures[fid];exact(root['key'],f['history_count_key'],'fixed_rootkey');exact(root['history'],sorted(f['history_counts']),'fixed_roothistory');exact(root['legal'],[x['rust209'] for x in f['legal_actions']],'fixed_rootlegal');exact(root['features_bits'],[bits(x) for x in f['raw_features_float32']],'fixed_rootfeatures')
+                                                                                                                                                                                                                     ~^^^^^^^^^^^^^^^^^
+KeyError: 'legal_actions'
