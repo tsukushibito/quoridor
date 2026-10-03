@@ -1,0 +1,19 @@
+# frame14 3分割・露出と独立test裁定 / quoridor-4lc.196
+
+受領2026-10-03 23:30:38 UTC、本人claim・静的実開始23:31:30。frame14の既許可内、critic単独writer。原生成/共通trainer/学習sourceはreadonly。新NN/model/forward/session/ORT/GPU/train/game/buildは0。これは早期の結果前静的見解で、実144game・curve・候補freeze・最終testは未検証。生成・学習softwareの静的準備を本全文承認待ちにしない。
+
+**早期裁定：巨大な全game groupを作らず、family単位固定splitとlabel-free row exposure maskで条件付き未露出精度を調べる計画を支持する。ただし未見game全体の精度とは別の対象である。** train96を基準に固定したvalidation subsetをtrain24/48/96で共用すれば、段階ごとの除外row変化による曲線のすり替えを防げる。testの除外対象は最大train96とvalidationの全登録rowで固定する。署名・mask・candidate選択規則はvalidation結果を使う前、候補/weights/設定はtestラベル読取前に凍結する必要がある。全行testのsecondaryは露出診断として結果を残し、testを再選定・追加訓練・閾値調整へ使わない。
+
+**最大1早期案：露出判定を「state一致 OR history一致 OR 実QF1入力一致」の固定predicateとして結果前登録する。** 3署名を一個に連結して全要素一致だけを除外すると、featureだけ既露出のrowを未露出扱いにする。QF1入力の署名はversion＋STM順のsorted active IDs＋相手順IDs＋正確なfloat32 distance bitsとする。state/historyのより細かな区別は別署名として保持する。これにより、同初期stateを介して全gameを連結せず、元の全slot/game分母と各除外理由を残せる。既共通trainerを本担当が編集する提案ではない。
+
+必要なsource静的根拠：tools/nnue-training/common.pyのfeature_keyは[idsP1,idsP2,distance,side]のJSON hashだが、train.pyのforwardはp=side−1としてa[p],a[1−p],distanceを結合する。P1/P2のidsを交換しsideを反転した2rowは既存署名が違ってもネット入力が同一になり得る。またfloat64 JSONの差でもfloat32へ丸めて同じ距離入力になる場合がある。原648 NN inputや壁mapだけをQF1実入力の代用にしない。QF1は履歴を入力しないため、feature aliasで異なる教師targetが生じ得る。これは履歴漏洩検査と教師noiseの限界を分けて扱う理由で、すべての教師真値の保証ではない。
+
+family/色交換/対称/派生を同partitionに置く規則は支持。共通stateのrow maskはfamily splitを置き換えない。opening8/12/16/20/24/28の均衡と初期0の回避は多様性の一条件で、非重複・実戦代表性を数学的には保証しない。eligible0gameはMSE=0へ補完せず、全24game中positive-eligible G+と全row/除外row/理由/game別を併記する。主game等重み平均はG+に条件付きの平均になる。G+が少ない/0なら不確か・不成立を隠さない。完全独立test全state証明や追加対照を入口gateにしない。
+
+train24/48/96で同256000sampleは計算量を揃えるが、各rowの再露出回数・epoch・game sampling分布は異なる。曲線差を独立教師量だけの因果と断定しない。rootmean蒸留と終局zへのMSE/符号を別に集計し、rootNN/leafNNを同targetへ混ぜない。定数基準は対応trainだけで決め、未学習基準は候補と同評価row/maskで比較する。選択済候補のtest比較はgame/family単位のpaired誤差差とし、row単位bootstrapを独立gameの精度へ変換しない。game bootstrapの区間は有限24gameと独立family仮定に依存する近似で、NI認定や世界最高棋力ではない。
+
+test封印のSHA/ラベル分離・freeze後一回評価・全slot/typedfault/mask分母の保存は必要な有限確認とする。test実体生成時に教師ラベルが管理processで生成されることと、学習/設定選択担当へ評価labelや損失が渡ることを分けて記録する。ラベルを未読にしたreceiptだけで全人員/全履歴の非閲覧を保証しない。criticもfreeze前のtest教師targetを読まず、label-free署名/member/schemaと管理記録から準備を進める。
+
+coordinatorは23:34台に早期predicate/固定mask/G+条件付きclaimを194/195へ実steerしたと本人へ報告し、結果前採用した。原data/成績は変更しない。初自然監督は23:34:58に終了、23:35台のownedNone/現194195 heavy不在/次23:51:55を直前記録してCPU0の独立smallmockをadmitした。split-mock.pyは23:35:48にexit0、wall0.000247秒/RSS15912960B。side反転+ids交換で既署名違い・同STM入力、float64 JSON違い・同float32入力、OR predicate、label/loss非依存、最大train96固定maskとstage別maskの相違、eligible0game/G+分母、family混入、mock candidatefreeze→一回label open順を確認した。実144gameの署名/export/mask実装、封印の実閲覧、曲線・学習効果を認証したわけではない。PID3767462の停止とCPU0窓解放をcoordinatorへ報告した。
+
+新scope4MiB forecastは旧unknown88190086Bを減額せず既critic112MiB内で計上済み。現時点の追加科学jobは停止。label-free manifestと後続のfreeze/testreceiptの必要配送を待ち、候補freeze前のtest教師labelは読まない。最終データ到着後の必要NN0算術は総static180s/各60s・CPU0/RAM896MiB guard内、直前のowner/current/次窓確認後に行う。最終裁定のnewcommand03:02/処理03:08/提出03:12 UTCを維持する。

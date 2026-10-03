@@ -1,0 +1,31 @@
+{
+  "issue": "quoridor-4lc.196",
+  "supported_smallmock": true,
+  "witnesses": [
+    "raw-side signature misses equivalent STM-network input",
+    "float64 JSON differs but float32 input equals",
+    "state/history/QF1 OR; conjunction would miss exposure",
+    "targets/loss not used in mask",
+    "maxtrain96 fixed mask differs from stage-specific masks",
+    "zero eligible games kept as denominator status, not zero loss",
+    "family partition disjointness",
+    "mock freeze precedes once-only test-label access"
+  ],
+  "conditional_game_equal_target": {
+    "all_games": 3,
+    "positive_eligible_games": 1,
+    "eligible_counts": {
+      "V1": 0,
+      "V2": 0,
+      "V3": 1
+    },
+    "positive_game_mean": 2.0
+  },
+  "actual_test_targets_read": false,
+  "actual_model_forward": 0,
+  "actual_dataset_sealing_certified": false,
+  "wall_s": 0.0002461060066707432,
+  "RSS_B": 15912960,
+  "PID": 3767462,
+  "UTC": "2026-10-03T23:35:48.799672+00:00"
+}
