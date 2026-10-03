@@ -1,0 +1,36 @@
+{
+  "issue": "quoridor-4lc.181",
+  "registered_UTC": "2026-10-03T11:22:31.294637+00:00",
+  "dataset_SHA256": "233c0e1fc479ab42da328feaed2129d5ec11b9ef8a949f5bbd5c13426579d951",
+  "old_dataset_SHA256": "a8e79d3bdcc7f5d9d7c7105a476f37e3168fc44eec47ea221a57dddd6ae2e94a",
+  "new_dataset_SHA256": "a4983274b1be7e57d8a587255a06cb4f57aec80f28c96424c6fcbfe1f4b2e316",
+  "parent_checkpoint_SHA256": "c1abf195c272eb9a143ad0f88d209b7741c8c9bca0c2318de37af759ea9c2351",
+  "architecture": "648->32/ReLU->136+value/tanh",
+  "sampling_seed": 18180311,
+  "steps": 200,
+  "minibatch": 128,
+  "optimizer": "manualSGD.01",
+  "loss": "legalpiCE +z_stmMSE mask0unknown/rootmeanaux0",
+  "train": "original1188 +new train only",
+  "original_validation": 221,
+  "new_train": 1072,
+  "new_validation": 281,
+  "parity_indices": [
+    0,
+    1,
+    1409,
+    1410,
+    1411
+  ],
+  "parity_row_ids": [
+    "native176-teacher-001-ply-0",
+    "native176-teacher-001-ply-1",
+    "native181-teacher-001-ply-0",
+    "native181-teacher-001-ply-1",
+    "native181-teacher-001-ply-2"
+  ],
+  "interpretation": "this continuation fit of unseen games; extra steps and old train reexposure confound diversity causal effect; not NI/strength",
+  "ONNX_tol": "abs1e-5+rtol1e-4/fixed5 +batch1 each",
+  "formal173_read": 0,
+  "GPU": false
+}

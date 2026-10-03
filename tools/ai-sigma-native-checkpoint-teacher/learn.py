@@ -8,8 +8,8 @@ def save(name,x):(D/name).write_text(json.dumps(x,indent=2,allow_nan=False)+'\n'
 def main():
  start=time.perf_counter();cfg=json.loads(Path(sys.argv[1]).read_text());pr=json.loads((D/'learner-preregister.json').read_text())
  assert os.sched_getaffinity(0)=={2} and os.environ['CUDA_VISIBLE_DEVICES']==''
- assert sha(D/'teacher-rows.jsonl.gz')==pr['dataset_SHA256']
- rows=[json.loads(x)for x in gzip.decompress((D/'teacher-rows.jsonl.gz').read_bytes()).splitlines()]
+ assert sha(D/'training-connection-rows.jsonl.gz')==pr['dataset_SHA256']
+ rows=[json.loads(x)for x in gzip.decompress((D/'training-connection-rows.jsonl.gz').read_bytes()).splitlines()]
  assert all(r['lineage'].startswith(('native181-train-','native176-train-')) for r in rows)
  import numpy as np
  import torch
