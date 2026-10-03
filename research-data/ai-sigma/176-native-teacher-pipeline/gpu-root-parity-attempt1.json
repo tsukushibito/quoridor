@@ -1,0 +1,59 @@
+{
+  "inputs": [
+    "native176-teacher-001",
+    "native176-teacher-002",
+    "native176-teacher-003",
+    "native176-teacher-004"
+  ],
+  "planned_searches": 8,
+  "CPU": [],
+  "GPU": [],
+  "compare": [
+    {
+      "slot": 1,
+      "status": "UNKNOWN"
+    },
+    {
+      "slot": 2,
+      "status": "UNKNOWN"
+    },
+    {
+      "slot": 3,
+      "status": "UNKNOWN"
+    },
+    {
+      "slot": 4,
+      "status": "UNKNOWN"
+    }
+  ],
+  "primary": "Error: AssertionError [ERR_ASSERTION]: Values have same structure but are not reference-equal:\n\n... Skipped lines\n{\n  features_bits: [\n    0,\n    0,\n    0,\n    0,\n    1065353216,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n    0,\n...}\n\n    at /workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-native-teacher-pipeline/gpu-parity.cjs:2:713\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at ChildProcess.<anonymous> (/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-native-teacher-pipeline/gpu-parity.cjs:3:408)\n    at ChildProcess.emit (node:events:514:28)\n    at emit (node:internal/child_process:989:14)\n    at process.processTicksAndRejections (node:internal/process/task_queues:91:21)",
+  "closed": [
+    {
+      "recovery": {
+        "receipt": {
+          "exit": [
+            {
+              "code": 0,
+              "signal": null
+            }
+          ],
+          "NN_total": 64,
+          "startup_separate": 1
+        },
+        "exit": {
+          "code": 0,
+          "signal": null
+        },
+        "stderr": ""
+      },
+      "exit": {
+        "code": 0,
+        "signal": null
+      }
+    }
+  ],
+  "NN": 0,
+  "finite_numeric_ready": false,
+  "no_rounding_path_rescue": true,
+  "complete_tree_guarantee": false
+}
