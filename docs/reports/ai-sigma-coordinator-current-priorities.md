@@ -25,3 +25,5 @@
 164最終0fcfc6e6を必要8Gitblob/current・source2hash/同期子waitと照合し有限受入れ。常駐nativeRustJSONL/WebJS/同PythonORT1.30CPU第一経路を採用。codec中央値0.055281msはIPC/NN/sessionを含まず実経路速度未測定、CPU metadata Azure/CPUのみと固定ONNX batch1/GPU実行未確認を保持。165の主機構・条件付き少数対局と166独立scope最終をcoordinatorへの報告待ちとして継続、hypothesisへ調査のみの自動連鎖/新NN/GPU実行を追加しない。
 
 166最終12b20c7f/handofff4131b29を必要12＋3Gitblob/current/静的停止/backupで有限受入れ。独立指摘が04:49:44snapshotのnative loop人工timer除去/Python epoch分離へ反映した限定根拠を支持し、165の実NN・controller採用・quiescenceは未確認のまま。共通500ms内の特徴/NN/輸送/検証と原因側cleanup、startup別を採用。未測kernelCPU同値を主張しないが、同資源samewallは同じ許可core/thread/時間条件で実装効率も比較する問いであり、消費CPU cycleの厳密等値/全TID証明を新一律入口にしない。正式版/抽出/clock/fault/固定mの事前条件は維持。新native費は165から更新、旧53.5625手×500msによる1200局8h55m37.5は費用例だけでinit/cleanup/save/並列負荷別。現在主165の実装・機構/条件付き少数対局報告待ち、全role稼働維持/新scope調査自動連鎖は不要。
+
+165 StageA native sourcea09279c/rawdee3d3b5…の固定5×両K32/NN320＋startup2で離散・ledger差なしを本人速報、rawSHA/owner集計/phase停止を最小照合して条件付き16準備継続を支持。全165書込停止やsameCPU/棋力成立とは別。quoridor-4lc.168既criticへ保存NN0の独立算術をCPU0/RAM1guard896/static180/new8MiBで配分、NN/game/build0、StageB受入れ待ちgate0。native同providerの機構claimへ必要範囲の確認で、全deep/全史再監査に拡大しない。
