@@ -29,3 +29,5 @@
 165 StageA native sourcea09279c/rawdee3d3b5…の固定5×両K32/NN320＋startup2で離散・ledger差なしを本人速報、rawSHA/owner集計/phase停止を最小照合して条件付き16準備継続を支持。全165書込停止やsameCPU/棋力成立とは別。quoridor-4lc.168既criticへ保存NN0の独立算術をCPU0/RAM1guard896/static180/new8MiBで配分、NN/game/build0、StageB受入れ待ちgate0。native同providerの機構claimへ必要範囲の確認で、全deep/全史再監査に拡大しない。
 
 168data1b572e17/handoff013364d0の24+3必要Gitblob/current・source/静的子停止・backupを照合し有限受入れ。native sourcea09279c/binary166dd0c4の固定10K32、独立保存算術で320CP/320NN、1450select/1770祖先update、特徴/NNbits/path/訪問/Action/ledger一致を支持。f64微差は別、raw/backend再実行0/sharedRuleA等限界あり。これでnative機構基準を有限支持し、全game/同wall/棋力NIは165結果で別評価。StageB変更engineをStageA測定版へ付替え0。主165契約の登録16/費用/教師schemaをcoordinator報告待ちとして継続し、checker追加/時計完全保証を入口に積み増さない。
+
+05:27節目: 165固定native16は本人W6D0L10/NN40378/startup16/public898で科学停止。全16raw終局GOAL/score6と停止SHA/outeremptyを最低限照合、棋力同等/NIは未認定。残る165費用集計・openingπ/z小export・必要保存を維持し、新quoridor-4lc.169既criticへCPU0/static180/RAM1guard896/new2MiBの全棋譜/clock/分母独立保存裁定を配分。次主仕事はnative実費と有効教師/secを根拠に最小効率変更または独立評価へ選ぶ。方針/標本/旧成績の救済変更0。
