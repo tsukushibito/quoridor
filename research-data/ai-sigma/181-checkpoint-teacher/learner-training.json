@@ -1,0 +1,94 @@
+{
+  "issue": "quoridor-4lc.181",
+  "steps": 200,
+  "seed": 18180311,
+  "init_weights_SHA256": "9a92dd24972373c834cae96cf92a9c28037e08b6040165dda8e0a90b072529ac",
+  "train_rows": 2260,
+  "validation_rows": 502,
+  "value_unknown_mask": 0,
+  "rootmean_auxiliary_weight": 0,
+  "loss_before": {
+    "train": [
+      3.342197895050049,
+      2.586958646774292,
+      0.7552391886711121
+    ],
+    "original_validation": [
+      3.198561668395996,
+      2.514467239379883,
+      0.6840944886207581
+    ],
+    "new_validation": [
+      4.235158443450928,
+      2.5719008445739746,
+      1.6632575988769531
+    ]
+  },
+  "loss_after": {
+    "train": [
+      2.6879281997680664,
+      2.397059917449951,
+      0.2908683717250824
+    ],
+    "original_validation": [
+      2.68996262550354,
+      2.287370443344116,
+      0.40259218215942383
+    ],
+    "new_validation": [
+      4.342149257659912,
+      2.391096353530884,
+      1.9510529041290283
+    ]
+  },
+  "ledger": [
+    {
+      "step": 1,
+      "loss": 3.1025733947753906,
+      "policy_CE": 2.411255121231079,
+      "z_stm_MSE": 0.6913183331489563,
+      "gradmax": 0.35202232003211975
+    },
+    {
+      "step": 20,
+      "loss": 3.13623046875,
+      "policy_CE": 2.4719433784484863,
+      "z_stm_MSE": 0.6642870903015137,
+      "gradmax": 0.18021957576274872
+    },
+    {
+      "step": 50,
+      "loss": 2.901200294494629,
+      "policy_CE": 2.415389060974121,
+      "z_stm_MSE": 0.48581135272979736,
+      "gradmax": 0.22893935441970825
+    },
+    {
+      "step": 100,
+      "loss": 2.942627191543579,
+      "policy_CE": 2.5375986099243164,
+      "z_stm_MSE": 0.4050285220146179,
+      "gradmax": 0.09837660938501358
+    },
+    {
+      "step": 200,
+      "loss": 2.734107494354248,
+      "policy_CE": 2.477663040161133,
+      "z_stm_MSE": 0.25644442439079285,
+      "gradmax": 0.3619017004966736
+    }
+  ],
+  "training_seconds": 0.2125180849689059,
+  "torch": "2.14.0+cu130",
+  "threads": [
+    1,
+    1
+  ],
+  "dataset_SHA256": "233c0e1fc479ab42da328feaed2129d5ec11b9ef8a949f5bbd5c13426579d951",
+  "checkpoint_SHA256": "97595bf993af12d4a4575a5b6c6f964a494848eb27eb80a6e4aa6ad9481a15ec",
+  "teacher_fit_is_strength": false,
+  "continuation_parent_checkpoint_SHA256": "c1abf195c272eb9a143ad0f88d209b7741c8c9bca0c2318de37af759ea9c2351",
+  "original_validation_rows": 221,
+  "new_validation_rows": 281,
+  "interpretation": "unseen game fit under this continuation; added steps and old-data reexposure confound any diversity causal claim"
+}
