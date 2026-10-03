@@ -1,0 +1,1 @@
+goal quoridor-4lc /190 NN0復元実CPUjob 2026-10-03T13:58:22.250169+00:00→2026-10-03T13:58:23.059949+00:00、CPU8/wall0.8097775230417028s/exit0/currentidentity不在/子wait済、NNまだ0。187 science-stop/current確認でadmit。次same190学習1回/有限nativeprobeへ、187の再scienceをinterrupt/待ちgateにしない。source初期のNode argv /usr/bin/node不足はbeforechildscience0管理失敗として保存し現物 /home/vscode/.local/bin/nodeへ修正済。

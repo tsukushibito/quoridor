@@ -1,6 +1,6 @@
 """One QF1-H32 rootmean-only Adam CPU trial; no extra teacher or validation selection."""
 from pathlib import Path
-import os,json,subprocess,hashlib,time,datetime,traceback
+import os,json,subprocess,hashlib,time,datetime,traceback,gzip
 D=Path('research-data/ai-sigma/190-nnue-qf1-prototype')
 def save(n,x):(D/n).write_text(json.dumps(x,separators=(',',':'),allow_nan=False)+'\n')
 def main():
@@ -52,7 +52,7 @@ def main():
  for g in sorted({r['group']for r in rows}):
   ix=[i for i,r in enumerate(rows)if r['group']==g];groups[g]={'split':rows[ix[0]]['split'],**aggregate(ix)}
  metrics={'train':aggregate(tr.tolist()),'validation':aggregate(va),'validation_old':aggregate([i for i in va if rows[i]['group'].startswith('native176-')]),'validation_new':aggregate([i for i in va if rows[i]['group'].startswith('native181-')]),'games':groups,'phase':{phase:aggregate([i for i in va if rows[i]['phase']==phase])for phase in ['early','middle','late']if any(rows[i]['phase']==phase for i in va)},'trainmean_constant':mean,'target':'rootmean root side-to-move K64 MCTS, not minimax','z_used_for_learning':False,'independent_holdout':False,'rootNN_not_mixed':True,'ledger':ledger,'torch':str(torch.__version__),'train_steps':200,'seed':19080311,'LR':.001,'optimizer':'Adam','parameters':sum(p.numel()for p in model.parameters()),'model':'QF1-H32','rows_denominator':2762,'reconstructed':len(rows),'masked':data['reconstruction']['masked']}
- save('learning.json',metrics)
+ (D/'learning.json.gz').write_bytes(gzip.compress(json.dumps(metrics,separators=(',',':'),allow_nan=False).encode(),mtime=0))
  fs=data['fixtures'];fx,fd,fp=tensors(fs);charge(len(fs),'torch_fixture')
  with torch.inference_mode():fv=model(fx,fd,fp).tolist()
  save('torch-fixtures.json',[{'id':f['id'],'value':v}for f,v in zip(fs,fv)])

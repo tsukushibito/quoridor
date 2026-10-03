@@ -1,0 +1,43 @@
+{
+  "identity": {
+    "pid": 3592704,
+    "tick": "28900230",
+    "RSS": 0,
+    "ppid": 3592702,
+    "pgrp": 3592704
+  },
+  "tracked": [
+    {
+      "pid": 3592704,
+      "tick": "28900230",
+      "RSS": 0,
+      "ppid": 3592702,
+      "pgrp": 3592704
+    },
+    {
+      "pid": 3592705,
+      "tick": "28900233",
+      "RSS": 153251840,
+      "ppid": 3592704,
+      "pgrp": 3592704
+    }
+  ],
+  "command": [
+    "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "-B",
+    "tools/ai-sigma-nnue-qf1-prototype/learn.py"
+  ],
+  "exit": 0,
+  "reason": null,
+  "wall_seconds": 3.169796480971854,
+  "peak_family_RSS_bytes": 859529216,
+  "waited": true,
+  "current_identity_absent": true,
+  "remaining": [],
+  "CPU_affinity": [
+    8
+  ],
+  "started_UTC": "2026-10-03T14:00:56.464319+00:00",
+  "stopped_UTC": "2026-10-03T14:00:59.634120+00:00",
+  "GPU_calls": 0
+}
