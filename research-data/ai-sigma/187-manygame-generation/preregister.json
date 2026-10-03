@@ -1,0 +1,92 @@
+{
+  "issue": "quoridor-4lc.187",
+  "UTC": "2026-10-03T13:15:06.126438+00:00",
+  "scientific_results_read": false,
+  "modes": [
+    {
+      "mode": "CPUJS",
+      "active_per_worker": 1,
+      "planned_games": 24,
+      "job_max_seconds": 300,
+      "hand_NN_cap": 307200
+    },
+    {
+      "mode": "RustCPU",
+      "active_per_worker": 1,
+      "planned_games": 24,
+      "job_max_seconds": 300,
+      "hand_NN_cap": 307200
+    },
+    {
+      "mode": "GPU3",
+      "active_per_worker": 1,
+      "planned_games": 24,
+      "job_max_seconds": 300,
+      "hand_NN_cap": 307200
+    },
+    {
+      "mode": "GPU12",
+      "active_per_worker": 4,
+      "planned_games": 24,
+      "job_max_seconds": 300,
+      "hand_NN_cap": 307200
+    },
+    {
+      "mode": "GPU24",
+      "active_per_worker": 8,
+      "planned_games": 24,
+      "job_max_seconds": 300,
+      "hand_NN_cap": 307200
+    }
+  ],
+  "fixed_order": [
+    "CPUJS",
+    "RustCPU",
+    "GPU3",
+    "GPU12",
+    "GPU24"
+  ],
+  "K": 64,
+  "rootN": 64,
+  "edgeSum": 63,
+  "newply_cap": 200,
+  "tau": "tau1 first16newply; strict-first argmax afterward",
+  "maxBatch": 8,
+  "flush_ms": 0.25,
+  "parity_tol": "abs1e-4+rtol1e-4",
+  "parity_samples_cap": 2048,
+  "partial_B": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "provider": "private177-folded-dynamicB capexplicit/TF32off/AMPoff",
+  "modelSHA": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+  "fault": "all affected typed unknown; no good-game replacement",
+  "censoring": "newply200cap zunknown/value loss maskfalse; actual RuleA terminal draw z0 separately",
+  "row_qualification": "Rpolicy/Rz/Rjoint separate; allattempt jobwall cold-init/cleanup and faults included",
+  "data_split": "family hash rank20train4validation; mode siblings samefamily",
+  "learn_mixing": false,
+  "formal173_read": 0,
+  "CPU": [
+    0,
+    2,
+    4,
+    6
+  ],
+  "RAM_CPU": 4294967296,
+  "RAM_GPU": 6442450944,
+  "heavy_total": 1800,
+  "newheavy": "14:15",
+  "science_stop": "14:20",
+  "process_stop": "14:30",
+  "submit": "14:40",
+  "current_models_not_changed": true,
+  "terminal_reporting": "All24 slots terminal/censored/total ply and produced newrows distributions alongside joint rate; never completed-only teacher-quality claim",
+  "status_reporting": "NOT_STARTED mode separately from run attempted fault/registered unfinished"
+}
