@@ -1,0 +1,106 @@
+{
+  "issue": "quoridor-4lc.151",
+  "StageA_fixed_input_SHA256": "dc205f8d7e00ee52aca51845ddbca5e3085d0aebdb22c3f4ceb6fa139cd10954",
+  "source_prebuild": {
+    "tools/ai-sigma-sigma-web-port/runner.py": "0232a84866a3840c3819b58c19580fb4a56d7ede85bf18e4d2f1b28654109ccc",
+    "tools/ai-sigma-sigma-web-port/admission.py": "0ec56717014d06a2b1a0700f2b5d23928d7fab328d4247f97adb73cdb932755d",
+    "tools/ai-sigma-sigma-web-port/build.py": "03c88bea3523511a5c8fce4465645d57fba7ef4a1d90e046d1e4a7cbe74226ea",
+    "tools/ai-sigma-sigma-web-port/private/Cargo.toml": "57e3173114c234ff39b0dd976e913fa142358d8f0eb426ec87e61668344bcade",
+    "tools/ai-sigma-sigma-web-port/private/Cargo.lock": "d0568a38ed13c537c3ab96abe3a0585e82258da1a3a5e64ee4ab18df07211b24",
+    "tools/ai-sigma-sigma-web-port/private/src/context.rs": "9ba343646347329e1c5a21bacba8032c04e762e80653bce20d55b2518e54114e",
+    "tools/ai-sigma-sigma-web-port/private/src/lib.rs": "7f2819701752760496b563cc0464bc44330a9062627a98406bca59b2d2029e27"
+  },
+  "StageA_plans": [
+    {
+      "fixture_id": "initial-p1",
+      "engine": "candidate",
+      "K": 32,
+      "ordinal": 1
+    },
+    {
+      "fixture_id": "initial-p1",
+      "engine": "reference",
+      "K": 32,
+      "ordinal": 2
+    },
+    {
+      "fixture_id": "asym-hv-p2",
+      "engine": "reference",
+      "K": 32,
+      "ordinal": 3
+    },
+    {
+      "fixture_id": "asym-hv-p2",
+      "engine": "candidate",
+      "K": 32,
+      "ordinal": 4
+    },
+    {
+      "fixture_id": "straight-jump-p2",
+      "engine": "candidate",
+      "K": 32,
+      "ordinal": 5
+    },
+    {
+      "fixture_id": "straight-jump-p2",
+      "engine": "reference",
+      "K": 32,
+      "ordinal": 6
+    },
+    {
+      "fixture_id": "frame10-prefix-13",
+      "engine": "reference",
+      "K": 32,
+      "ordinal": 7
+    },
+    {
+      "fixture_id": "frame10-prefix-13",
+      "engine": "candidate",
+      "K": 32,
+      "ordinal": 8
+    },
+    {
+      "fixture_id": "frame10-prefix-14",
+      "engine": "candidate",
+      "K": 32,
+      "ordinal": 9
+    },
+    {
+      "fixture_id": "frame10-prefix-14",
+      "engine": "reference",
+      "K": 32,
+      "ordinal": 10
+    }
+  ],
+  "NN_budget": 1024,
+  "startup_NN_separate": 6,
+  "reference_path_discrete_must_match": true,
+  "numeric_abs_tolerance": 0.0001,
+  "numeric_relative_tolerance": 0.0001,
+  "numeric_tolerance_does_not_excuse_path_difference": true,
+  "StageB_conditional_on_StageA": true,
+  "StageB_master": 74021,
+  "StageB_domain": "port151-stageB-v1",
+  "StageB_layers": [
+    4,
+    5,
+    12,
+    13,
+    4,
+    5,
+    12,
+    13
+  ],
+  "StageB_max_games": 16,
+  "old149_games_not_retried_or_combined": true,
+  "StageB_scores": {
+    "operational": "candidate responsibilityfault0; reference/shared/unknown[0,1]",
+    "terminal_quality": "both faults/unknown[0,1]",
+    "denominator": 16
+  },
+  "fixed_Web_core_vs_research_operational_adapter_distinct": true,
+  "reference_Web_Git": "751186344fc52ad0c29bc65922e62c6fa915f006",
+  "original_immutable_readonly": "1f54d0b8f0c6d3d7d51935886ed506e44376a2052506be62ca7a726c85a78a01",
+  "processing_deadline": "2026-10-03T03:17:36.232260+00:00",
+  "newheavy_deadline": "2026-10-03T03:07:36.232260+00:00"
+}
