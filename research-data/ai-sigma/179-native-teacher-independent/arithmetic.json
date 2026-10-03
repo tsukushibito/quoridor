@@ -1,0 +1,155 @@
+{
+  "issue": "quoridor-4lc.179",
+  "start": "2026-10-03T10:04:19.938563+00:00",
+  "first_difference": null,
+  "supported": true,
+  "rows": 1409,
+  "games": 24,
+  "split_rows": {
+    "train": 1188,
+    "validation": 221
+  },
+  "split_games": {
+    "train": 20,
+    "validation": 4
+  },
+  "Rpolicy": 1409,
+  "Rz": 1409,
+  "Rjoint": 1409,
+  "terminal_noNN": 8408,
+  "CP": 1409,
+  "P2_jump_mapping_entries": 46,
+  "P2_wall_mapping_entries": 46688,
+  "overlaps": {
+    "position_key": {
+      "unique": 1384,
+      "crossgame_shared_keys": 16,
+      "crossgame_shared_row_occurrences": 37,
+      "train_validation_shared_keys": 0,
+      "train_validation_shared_row_occurrences": 0
+    },
+    "full_state_history_side_ply": {
+      "unique": 1388,
+      "crossgame_shared_keys": 16,
+      "crossgame_shared_row_occurrences": 37,
+      "train_validation_shared_keys": 0,
+      "train_validation_shared_row_occurrences": 0
+    },
+    "features648_only": {
+      "unique": 1384,
+      "crossgame_shared_keys": 16,
+      "crossgame_shared_row_occurrences": 37,
+      "train_validation_shared_keys": 0,
+      "train_validation_shared_row_occurrences": 0
+    },
+    "features648_plus_legalmask136": {
+      "unique": 1385,
+      "crossgame_shared_keys": 16,
+      "crossgame_shared_row_occurrences": 37,
+      "train_validation_shared_keys": 0,
+      "train_validation_shared_row_occurrences": 0
+    }
+  },
+  "learner_saved_receipts_only": true,
+  "binary_hashes": {
+    "dataset": "a8e79d3bdcc7f5d9d7c7105a476f37e3168fc44eec47ea221a57dddd6ae2e94a",
+    "checkpoint": "c1abf195c272eb9a143ad0f88d209b7741c8c9bca0c2318de37af759ea9c2351",
+    "ONNX": "54ed35d8b175d342d8fe50339fd918dd138c1bfb6c376c90bd50daf791b6ca7a"
+  },
+  "processes": [
+    {
+      "run": "native176-arena-r2",
+      "wall": 16.666095,
+      "exit": 0,
+      "stop_reason": null
+    },
+    {
+      "run": "native176-generate-b1-r1",
+      "wall": 72.162764,
+      "exit": 0,
+      "stop_reason": null
+    },
+    {
+      "run": "native176-generate-b2-r1",
+      "wall": 70.974192,
+      "exit": 0,
+      "stop_reason": null
+    },
+    {
+      "run": "native176-generate-b3-r2",
+      "wall": 55.359642,
+      "exit": 0,
+      "stop_reason": null
+    },
+    {
+      "run": "native176-gpu-roots-r1",
+      "wall": 4.09654,
+      "exit": 1,
+      "stop_reason": null
+    },
+    {
+      "run": "native176-gpu-roots-r2",
+      "wall": 8.553122,
+      "exit": 0,
+      "stop_reason": null
+    },
+    {
+      "run": "native176-learn-r1",
+      "wall": 3.724501,
+      "exit": 0,
+      "stop_reason": null
+    },
+    {
+      "run": "native176-mock-r1",
+      "wall": 0.322508,
+      "exit": 0,
+      "stop_reason": null
+    },
+    {
+      "run": "native176-parity-r1",
+      "wall": 1.772943,
+      "exit": 0,
+      "stop_reason": null
+    },
+    {
+      "run": "native176-poolmock-r1",
+      "wall": 2.093719,
+      "exit": 0,
+      "stop_reason": null
+    },
+    {
+      "run": "native176-arena-r1",
+      "wall": null,
+      "NN": 0,
+      "typed": "EXTERNAL_COMPUTE_ALLOCATION_UNKNOWN"
+    },
+    {
+      "run": "native176-generate-b3-r1",
+      "wall": null,
+      "NN": 0,
+      "typed": "CONTROL_STALE"
+    }
+  ],
+  "phase_jobwall": {
+    "arena": 16.666095,
+    "generate": 198.496598,
+    "repair": 14.422604999999999,
+    "learn": 3.724501,
+    "mock": 2.416227
+  },
+  "all_compute_wall": 235.726026,
+  "production_rate": 7.0983584313117545,
+  "known_compute_export_overlap_wall": 236.58316591098244,
+  "arena_WDL": [
+    0,
+    0,
+    4
+  ],
+  "GPU_generation_rate_unestablished": true,
+  "elapsed_seconds": 0.5223960389848799,
+  "maxRSS_bytes": 95465472,
+  "end": "2026-10-03T10:04:20.460961+00:00",
+  "PID": 3403578,
+  "saved_NN_completed": 81768,
+  "NN_executed": 0
+}

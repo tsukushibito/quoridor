@@ -1,0 +1,3939 @@
+{
+  "UTC": "2026-10-03T10:07:02.324979+00:00",
+  "HEAD_at_read": "f06955674d107e7bc1a7ba69e4de8e27e2df7eee",
+  "references": [
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/preregister.json",
+      "bytes": 5096,
+      "SHA256": "2b99aa81c6f9490e636e990e707d98432369077a0382dea8ee66c96496a2ee6c"
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/openings.json",
+      "bytes": 38403,
+      "SHA256": "460a4fcd51b8c7fe099e5d43f96d77f5ef6742b23ec227c135bd0a3bddd65a42"
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/teacher-rows.jsonl.gz",
+      "bytes": 728258,
+      "SHA256": "a8e79d3bdcc7f5d9d7c7105a476f37e3168fc44eec47ea221a57dddd6ae2e94a"
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/all-game-status.json",
+      "bytes": 167573,
+      "SHA256": "f54b8d78b8a4882525a19899909ddbeab9f275a2c1ea301ddf8272132f53aae1"
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/dataset-summary.json",
+      "bytes": 2364,
+      "SHA256": "b0c53e6ac070d84823739621bfb4dc2de40ebf3cf9abe3749bcc5f8c2937837e"
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/overlap-detail.json",
+      "bytes": 1261,
+      "SHA256": "e32e45b210d0cd5630e9c0efdc24928ebcf083a246cbee9d22687b0a6126e6ea"
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/learner-preregister.json",
+      "bytes": 3984,
+      "SHA256": "018fe03bcfd69b572120d6b3ed4832544ad751a4f70b68fe7f143eb3f9d4e2c8"
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/learner-training.json",
+      "bytes": 1952,
+      "SHA256": "044c25ba7447fee07b40cd03854df886b19658cba9ab79777449d4d0cd16a15b"
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/learner-reload.json",
+      "bytes": 279,
+      "SHA256": "e3bc9481fdb2eafaa3351fd2394d3b91d47e32f46830e86603d0b8fe1cb4ee08"
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/learner-export.json",
+      "bytes": 846,
+      "SHA256": "c147af0487966b2a3a71d069816269c96c947e2d69ebd5b214a8eebca3325dd3"
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/student-checkpoint.pt",
+      "bytes": 104281,
+      "SHA256": "c1abf195c272eb9a143ad0f88d209b7741c8c9bca0c2318de37af759ea9c2351"
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/student.onnx",
+      "bytes": 102023,
+      "SHA256": "54ed35d8b175d342d8fe50339fd918dd138c1bfb6c376c90bd50daf791b6ca7a"
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/arena-preregister.json",
+      "bytes": 28551,
+      "SHA256": "3b174be6e6ea9414c0018bbddadfb53f7cb7f608eac49bbd79c0001181c4af86"
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/arena-results.json",
+      "bytes": 20720,
+      "SHA256": "54b22c0f876ab333ef581b65fa08a5699c55b8fb3c5c499c971d6b06be39c36d"
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/cost-ledger.json",
+      "bytes": 9055,
+      "SHA256": "7bfc5a1420473355a592ff75f4b2552395cb69c26011d3323779536c858c58b5"
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/science-stop.json",
+      "bytes": 74915,
+      "SHA256": "794403d5d75527b3c421f362c3e24e4b9e4c3aab6607d000fae639f96d1942ce"
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/binding.json",
+      "bytes": 2518,
+      "SHA256": "f23f43437eb012f74c370d5056e1e106c121f061419f4170363ec9fa6e555824"
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/fixedK-parity.json",
+      "bytes": 120633,
+      "SHA256": "090fe1bd7a4068198099cff438924be2dbe08be4408b80192f1518a6329b146d"
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/production-runs.json",
+      "bytes": 93,
+      "SHA256": "961207659f581259bf87d2fa5cd64460e87138efa50b249c2f954bc8ac4103a2"
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/gpu-root-parity-attempt1.json",
+      "bytes": 2037,
+      "SHA256": "498f579c63226cca92b322bcef20286ff3222d4e90db5f2d25aba6d4ae1cad8e"
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/gpu-root-parity.json",
+      "bytes": 13175773,
+      "SHA256": "12e47b7937a038cdffc96dd371ce0f6230cd1e004a94d0fec9e0b173256d2453"
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/gpu-firstroot-final-join.json",
+      "bytes": 1409,
+      "SHA256": "8421a8c035096f1ac0d0f2c83f7d8957f41f30bdae7ce964de3da25706c4527a"
+    }
+  ],
+  "source": [
+    {
+      "path": "tools/ai-sigma-native-teacher-pipeline/learn.py",
+      "SHA256": "512a13858b7caea8ec0f53f07cc455fb3d6946b8125b30b734fb4e40a0c047ec",
+      "preregister_SHA256": "512a13858b7caea8ec0f53f07cc455fb3d6946b8125b30b734fb4e40a0c047ec",
+      "match": true
+    },
+    {
+      "path": "tools/ai-sigma-native-teacher-pipeline/worker.cjs",
+      "SHA256": "1814daccbc6b23f1b575915d54e9bf452a80c499b8ed4e1ba8c32b565c88cbd7",
+      "preregister_SHA256": "1814daccbc6b23f1b575915d54e9bf452a80c499b8ed4e1ba8c32b565c88cbd7",
+      "match": true
+    },
+    {
+      "path": "tools/ai-sigma-native-teacher-pipeline/engine.cjs",
+      "SHA256": "dd44b0138d35af09a86939c167ed8384f7dfe902051b05279127062fcf1d25f5",
+      "preregister_SHA256": "dd44b0138d35af09a86939c167ed8384f7dfe902051b05279127062fcf1d25f5",
+      "match": true
+    },
+    {
+      "path": "tools/ai-sigma-native-teacher-pipeline/schema.cjs",
+      "SHA256": "d3f26b75b59bad2ac5813225a24f4ef96085ce5edec55ec241ddda0dec544a50",
+      "preregister_SHA256": "d3f26b75b59bad2ac5813225a24f4ef96085ce5edec55ec241ddda0dec544a50",
+      "match": true
+    },
+    {
+      "path": "tools/ai-sigma-native-teacher-pipeline/controller.cjs",
+      "SHA256": "9127022a6df9f521f802332b9db70bbd543da96a783add1213c8059d5141cccf",
+      "preregister_SHA256": "9127022a6df9f521f802332b9db70bbd543da96a783add1213c8059d5141cccf",
+      "match": true
+    },
+    {
+      "path": "tools/ai-sigma-native-teacher-pipeline/arena.cjs",
+      "SHA256": "9098ea12ac99c964b513bb19974a1797215d84172cfe589caac5fe5359f1d3d6",
+      "preregister_SHA256": "9098ea12ac99c964b513bb19974a1797215d84172cfe589caac5fe5359f1d3d6",
+      "match": true
+    },
+    {
+      "path": "tools/ai-sigma-native-teacher-pipeline/export.cjs",
+      "SHA256": "75b8be86e8ef7539b6a0d966be760ca572419e40ddc0bb1a26af341fc3ec3108",
+      "preregister_SHA256": "75b8be86e8ef7539b6a0d966be760ca572419e40ddc0bb1a26af341fc3ec3108",
+      "match": true
+    },
+    {
+      "path": "tools/ai-sigma-native-baseline/reference.cjs",
+      "SHA256": "85cae30273fa481f96ec28fa77eeb5907bb203812c7234f9ffdfd75d337848cf",
+      "sharedRuleA": true
+    },
+    {
+      "path": "tools/ai-sigma-native-baseline/game.js",
+      "SHA256": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+      "sharedRuleA": true
+    },
+    {
+      "path": "tools/ai-sigma-native-baseline/context.js",
+      "SHA256": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+      "sharedRuleA": true
+    },
+    {
+      "path": "tools/ai-sigma-native-baseline/reference-core-native.js",
+      "SHA256": "9670b29d07489a568206b739cf4acdf5477a3c4f0a22f5e8fee2332166201705",
+      "sharedRuleA": true
+    },
+    {
+      "path": "tools/ai-sigma-native-baseline/trace-reference.js",
+      "SHA256": "056c98b85d4003835dba54b6170249114e46b20146a1be0f691490e39aba92f0",
+      "sharedRuleA": true
+    }
+  ],
+  "fixedK_finalOnly_finite": [
+    {
+      "slot": 1,
+      "ply": 0,
+      "CP_counts": [
+        64,
+        1
+      ],
+      "root_and_firstNN_equal": true,
+      "backup_rootNN_minus_childvalue_sum_supported": true
+    },
+    {
+      "slot": 3,
+      "ply": 5,
+      "CP_counts": [
+        64,
+        1
+      ],
+      "root_and_firstNN_equal": true,
+      "backup_rootNN_minus_childvalue_sum_supported": true
+    }
+  ],
+  "loss_saved_untrained_baseline": {
+    "train": {
+      "before_piCE": 3.8619914054870605,
+      "after_piCE": 2.4845097064971924,
+      "before_zMSE": 1.0132079124450684,
+      "after_zMSE": 0.20741985738277435,
+      "before_total": 4.875199317932129,
+      "after_total": 2.691929578781128
+    },
+    "validation": {
+      "before_piCE": 3.9032866954803467,
+      "after_piCE": 2.514467239379883,
+      "before_zMSE": 1.0476082563400269,
+      "after_zMSE": 0.6840944886207581,
+      "before_total": 4.950894832611084,
+      "after_total": 3.198561668395996
+    }
+  },
+  "saved_forward_confirmation_only": true,
+  "NN_executed": 0,
+  "owner_stop_current_identities": [
+    {
+      "PID": 3385861,
+      "saved_start_ticks": 27338279,
+      "current_absent": true
+    },
+    {
+      "PID": 3385868,
+      "saved_start_ticks": 27338282,
+      "current_absent": true
+    },
+    {
+      "PID": 3385869,
+      "saved_start_ticks": 27338282,
+      "current_absent": true
+    },
+    {
+      "PID": 3385870,
+      "saved_start_ticks": 27338282,
+      "current_absent": true
+    },
+    {
+      "PID": 3385874,
+      "saved_start_ticks": 27338284,
+      "current_absent": true
+    },
+    {
+      "PID": 3385879,
+      "saved_start_ticks": 27338341,
+      "current_absent": true
+    },
+    {
+      "PID": 3385892,
+      "saved_start_ticks": 27338345,
+      "current_absent": true
+    },
+    {
+      "PID": 3385902,
+      "saved_start_ticks": 27338412,
+      "current_absent": true
+    },
+    {
+      "PID": 3385907,
+      "saved_start_ticks": 27338416,
+      "current_absent": true
+    },
+    {
+      "PID": 3385908,
+      "saved_start_ticks": 27338417,
+      "current_absent": true
+    },
+    {
+      "PID": 3385909,
+      "saved_start_ticks": 27338417,
+      "current_absent": true
+    },
+    {
+      "PID": 3385911,
+      "saved_start_ticks": 27338417,
+      "current_absent": true
+    },
+    {
+      "PID": 3385923,
+      "saved_start_ticks": 27338496,
+      "current_absent": true
+    },
+    {
+      "PID": 3385943,
+      "saved_start_ticks": 27338500,
+      "current_absent": true
+    },
+    {
+      "PID": 3385953,
+      "saved_start_ticks": 27338565,
+      "current_absent": true
+    },
+    {
+      "PID": 3385957,
+      "saved_start_ticks": 27338579,
+      "current_absent": true
+    },
+    {
+      "PID": 3385958,
+      "saved_start_ticks": 27338579,
+      "current_absent": true
+    },
+    {
+      "PID": 3385971,
+      "saved_start_ticks": 27338584,
+      "current_absent": true
+    },
+    {
+      "PID": 3385973,
+      "saved_start_ticks": 27338592,
+      "current_absent": true
+    },
+    {
+      "PID": 3386009,
+      "saved_start_ticks": 27339079,
+      "current_absent": true
+    },
+    {
+      "PID": 3386010,
+      "saved_start_ticks": 27339079,
+      "current_absent": true
+    },
+    {
+      "PID": 3386011,
+      "saved_start_ticks": 27339079,
+      "current_absent": true
+    },
+    {
+      "PID": 3386015,
+      "saved_start_ticks": 27339081,
+      "current_absent": true
+    },
+    {
+      "PID": 3386021,
+      "saved_start_ticks": 27339084,
+      "current_absent": true
+    },
+    {
+      "PID": 3386029,
+      "saved_start_ticks": 27339091,
+      "current_absent": true
+    },
+    {
+      "PID": 3386040,
+      "saved_start_ticks": 27339189,
+      "current_absent": true
+    },
+    {
+      "PID": 3386052,
+      "saved_start_ticks": 27339197,
+      "current_absent": true
+    },
+    {
+      "PID": 3386045,
+      "saved_start_ticks": 27339195,
+      "current_absent": true
+    },
+    {
+      "PID": 3386046,
+      "saved_start_ticks": 27339195,
+      "current_absent": true
+    },
+    {
+      "PID": 3386047,
+      "saved_start_ticks": 27339195,
+      "current_absent": true
+    },
+    {
+      "PID": 3386061,
+      "saved_start_ticks": 27339256,
+      "current_absent": true
+    },
+    {
+      "PID": 3386081,
+      "saved_start_ticks": 27339263,
+      "current_absent": true
+    },
+    {
+      "PID": 3386086,
+      "saved_start_ticks": 27339361,
+      "current_absent": true
+    },
+    {
+      "PID": 3386112,
+      "saved_start_ticks": 27339580,
+      "current_absent": true
+    },
+    {
+      "PID": 3386109,
+      "saved_start_ticks": 27339579,
+      "current_absent": true
+    },
+    {
+      "PID": 3386110,
+      "saved_start_ticks": 27339579,
+      "current_absent": true
+    },
+    {
+      "PID": 3386111,
+      "saved_start_ticks": 27339579,
+      "current_absent": true
+    },
+    {
+      "PID": 3386123,
+      "saved_start_ticks": 27339584,
+      "current_absent": true
+    },
+    {
+      "PID": 3386129,
+      "saved_start_ticks": 27339592,
+      "current_absent": true
+    },
+    {
+      "PID": 3386141,
+      "saved_start_ticks": 27339690,
+      "current_absent": true
+    },
+    {
+      "PID": 3386142,
+      "saved_start_ticks": 27339704,
+      "current_absent": true
+    },
+    {
+      "PID": 3386143,
+      "saved_start_ticks": 27339704,
+      "current_absent": true
+    },
+    {
+      "PID": 3386144,
+      "saved_start_ticks": 27339704,
+      "current_absent": true
+    },
+    {
+      "PID": 3386146,
+      "saved_start_ticks": 27339704,
+      "current_absent": true
+    },
+    {
+      "PID": 3386147,
+      "saved_start_ticks": 27339704,
+      "current_absent": true
+    },
+    {
+      "PID": 3386148,
+      "saved_start_ticks": 27339706,
+      "current_absent": true
+    },
+    {
+      "PID": 3386150,
+      "saved_start_ticks": 27339713,
+      "current_absent": true
+    },
+    {
+      "PID": 3386156,
+      "saved_start_ticks": 27339721,
+      "current_absent": true
+    },
+    {
+      "PID": 3386181,
+      "saved_start_ticks": 27339816,
+      "current_absent": true
+    },
+    {
+      "PID": 3371573,
+      "saved_start_ticks": 27232816,
+      "current_absent": true
+    },
+    {
+      "PID": 3371586,
+      "saved_start_ticks": 27232820,
+      "current_absent": true
+    },
+    {
+      "PID": 3371580,
+      "saved_start_ticks": 27232819,
+      "current_absent": true
+    },
+    {
+      "PID": 3371581,
+      "saved_start_ticks": 27232819,
+      "current_absent": true
+    },
+    {
+      "PID": 3371582,
+      "saved_start_ticks": 27232819,
+      "current_absent": true
+    },
+    {
+      "PID": 3371590,
+      "saved_start_ticks": 27232884,
+      "current_absent": true
+    },
+    {
+      "PID": 3371596,
+      "saved_start_ticks": 27232888,
+      "current_absent": true
+    },
+    {
+      "PID": 3371607,
+      "saved_start_ticks": 27232955,
+      "current_absent": true
+    },
+    {
+      "PID": 3371608,
+      "saved_start_ticks": 27232961,
+      "current_absent": true
+    },
+    {
+      "PID": 3371609,
+      "saved_start_ticks": 27232961,
+      "current_absent": true
+    },
+    {
+      "PID": 3371610,
+      "saved_start_ticks": 27232961,
+      "current_absent": true
+    },
+    {
+      "PID": 3371614,
+      "saved_start_ticks": 27232962,
+      "current_absent": true
+    },
+    {
+      "PID": 3371616,
+      "saved_start_ticks": 27232976,
+      "current_absent": true
+    },
+    {
+      "PID": 3371623,
+      "saved_start_ticks": 27232981,
+      "current_absent": true
+    },
+    {
+      "PID": 3371627,
+      "saved_start_ticks": 27233050,
+      "current_absent": true
+    },
+    {
+      "PID": 3371628,
+      "saved_start_ticks": 27233056,
+      "current_absent": true
+    },
+    {
+      "PID": 3371629,
+      "saved_start_ticks": 27233056,
+      "current_absent": true
+    },
+    {
+      "PID": 3371630,
+      "saved_start_ticks": 27233056,
+      "current_absent": true
+    },
+    {
+      "PID": 3371649,
+      "saved_start_ticks": 27233058,
+      "current_absent": true
+    },
+    {
+      "PID": 3371650,
+      "saved_start_ticks": 27233059,
+      "current_absent": true
+    },
+    {
+      "PID": 3371651,
+      "saved_start_ticks": 27233059,
+      "current_absent": true
+    },
+    {
+      "PID": 3371670,
+      "saved_start_ticks": 27233061,
+      "current_absent": true
+    },
+    {
+      "PID": 3371671,
+      "saved_start_ticks": 27233061,
+      "current_absent": true
+    },
+    {
+      "PID": 3371672,
+      "saved_start_ticks": 27233062,
+      "current_absent": true
+    },
+    {
+      "PID": 3371733,
+      "saved_start_ticks": 27233556,
+      "current_absent": true
+    },
+    {
+      "PID": 3371735,
+      "saved_start_ticks": 27233556,
+      "current_absent": true
+    },
+    {
+      "PID": 3371734,
+      "saved_start_ticks": 27233556,
+      "current_absent": true
+    },
+    {
+      "PID": 3371739,
+      "saved_start_ticks": 27233558,
+      "current_absent": true
+    },
+    {
+      "PID": 3371741,
+      "saved_start_ticks": 27233565,
+      "current_absent": true
+    },
+    {
+      "PID": 3371752,
+      "saved_start_ticks": 27233671,
+      "current_absent": true
+    },
+    {
+      "PID": 3371753,
+      "saved_start_ticks": 27233679,
+      "current_absent": true
+    },
+    {
+      "PID": 3371754,
+      "saved_start_ticks": 27233679,
+      "current_absent": true
+    },
+    {
+      "PID": 3371756,
+      "saved_start_ticks": 27233680,
+      "current_absent": true
+    },
+    {
+      "PID": 3371757,
+      "saved_start_ticks": 27233680,
+      "current_absent": true
+    },
+    {
+      "PID": 3371759,
+      "saved_start_ticks": 27233681,
+      "current_absent": true
+    },
+    {
+      "PID": 3371761,
+      "saved_start_ticks": 27233688,
+      "current_absent": true
+    },
+    {
+      "PID": 3371767,
+      "saved_start_ticks": 27233695,
+      "current_absent": true
+    },
+    {
+      "PID": 3371778,
+      "saved_start_ticks": 27233796,
+      "current_absent": true
+    },
+    {
+      "PID": 3371812,
+      "saved_start_ticks": 27234056,
+      "current_absent": true
+    },
+    {
+      "PID": 3371813,
+      "saved_start_ticks": 27234057,
+      "current_absent": true
+    },
+    {
+      "PID": 3371814,
+      "saved_start_ticks": 27234057,
+      "current_absent": true
+    },
+    {
+      "PID": 3371816,
+      "saved_start_ticks": 27234058,
+      "current_absent": true
+    },
+    {
+      "PID": 3371818,
+      "saved_start_ticks": 27234059,
+      "current_absent": true
+    },
+    {
+      "PID": 3371822,
+      "saved_start_ticks": 27234087,
+      "current_absent": true
+    },
+    {
+      "PID": 3371834,
+      "saved_start_ticks": 27234094,
+      "current_absent": true
+    },
+    {
+      "PID": 3371855,
+      "saved_start_ticks": 27234200,
+      "current_absent": true
+    },
+    {
+      "PID": 3371861,
+      "saved_start_ticks": 27234206,
+      "current_absent": true
+    },
+    {
+      "PID": 3371863,
+      "saved_start_ticks": 27234206,
+      "current_absent": true
+    },
+    {
+      "PID": 3371862,
+      "saved_start_ticks": 27234206,
+      "current_absent": true
+    },
+    {
+      "PID": 3371865,
+      "saved_start_ticks": 27234208,
+      "current_absent": true
+    },
+    {
+      "PID": 3371866,
+      "saved_start_ticks": 27234208,
+      "current_absent": true
+    },
+    {
+      "PID": 3371875,
+      "saved_start_ticks": 27234267,
+      "current_absent": true
+    },
+    {
+      "PID": 3371883,
+      "saved_start_ticks": 27234274,
+      "current_absent": true
+    },
+    {
+      "PID": 3371910,
+      "saved_start_ticks": 27234372,
+      "current_absent": true
+    },
+    {
+      "PID": 3371925,
+      "saved_start_ticks": 27234557,
+      "current_absent": true
+    },
+    {
+      "PID": 3371926,
+      "saved_start_ticks": 27234557,
+      "current_absent": true
+    },
+    {
+      "PID": 3371928,
+      "saved_start_ticks": 27234558,
+      "current_absent": true
+    },
+    {
+      "PID": 3371931,
+      "saved_start_ticks": 27234559,
+      "current_absent": true
+    },
+    {
+      "PID": 3371933,
+      "saved_start_ticks": 27234566,
+      "current_absent": true
+    },
+    {
+      "PID": 3371939,
+      "saved_start_ticks": 27234574,
+      "current_absent": true
+    },
+    {
+      "PID": 3371947,
+      "saved_start_ticks": 27234675,
+      "current_absent": true
+    },
+    {
+      "PID": 3371948,
+      "saved_start_ticks": 27234679,
+      "current_absent": true
+    },
+    {
+      "PID": 3371949,
+      "saved_start_ticks": 27234680,
+      "current_absent": true
+    },
+    {
+      "PID": 3371950,
+      "saved_start_ticks": 27234680,
+      "current_absent": true
+    },
+    {
+      "PID": 3371952,
+      "saved_start_ticks": 27234680,
+      "current_absent": true
+    },
+    {
+      "PID": 3371953,
+      "saved_start_ticks": 27234680,
+      "current_absent": true
+    },
+    {
+      "PID": 3371954,
+      "saved_start_ticks": 27234681,
+      "current_absent": true
+    },
+    {
+      "PID": 3371956,
+      "saved_start_ticks": 27234685,
+      "current_absent": true
+    },
+    {
+      "PID": 3371963,
+      "saved_start_ticks": 27234693,
+      "current_absent": true
+    },
+    {
+      "PID": 3371980,
+      "saved_start_ticks": 27234802,
+      "current_absent": true
+    },
+    {
+      "PID": 3372017,
+      "saved_start_ticks": 27235057,
+      "current_absent": true
+    },
+    {
+      "PID": 3372018,
+      "saved_start_ticks": 27235057,
+      "current_absent": true
+    },
+    {
+      "PID": 3372019,
+      "saved_start_ticks": 27235057,
+      "current_absent": true
+    },
+    {
+      "PID": 3372021,
+      "saved_start_ticks": 27235059,
+      "current_absent": true
+    },
+    {
+      "PID": 3372022,
+      "saved_start_ticks": 27235059,
+      "current_absent": true
+    },
+    {
+      "PID": 3372023,
+      "saved_start_ticks": 27235060,
+      "current_absent": true
+    },
+    {
+      "PID": 3372025,
+      "saved_start_ticks": 27235065,
+      "current_absent": true
+    },
+    {
+      "PID": 3372044,
+      "saved_start_ticks": 27235172,
+      "current_absent": true
+    },
+    {
+      "PID": 3372048,
+      "saved_start_ticks": 27235183,
+      "current_absent": true
+    },
+    {
+      "PID": 3372049,
+      "saved_start_ticks": 27235183,
+      "current_absent": true
+    },
+    {
+      "PID": 3372050,
+      "saved_start_ticks": 27235183,
+      "current_absent": true
+    },
+    {
+      "PID": 3372054,
+      "saved_start_ticks": 27235185,
+      "current_absent": true
+    },
+    {
+      "PID": 3372055,
+      "saved_start_ticks": 27235193,
+      "current_absent": true
+    },
+    {
+      "PID": 3372056,
+      "saved_start_ticks": 27235193,
+      "current_absent": true
+    },
+    {
+      "PID": 3372063,
+      "saved_start_ticks": 27235201,
+      "current_absent": true
+    },
+    {
+      "PID": 3372068,
+      "saved_start_ticks": 27235304,
+      "current_absent": true
+    },
+    {
+      "PID": 3372109,
+      "saved_start_ticks": 27235557,
+      "current_absent": true
+    },
+    {
+      "PID": 3372110,
+      "saved_start_ticks": 27235558,
+      "current_absent": true
+    },
+    {
+      "PID": 3372112,
+      "saved_start_ticks": 27235559,
+      "current_absent": true
+    },
+    {
+      "PID": 3372115,
+      "saved_start_ticks": 27235560,
+      "current_absent": true
+    },
+    {
+      "PID": 3372125,
+      "saved_start_ticks": 27235576,
+      "current_absent": true
+    },
+    {
+      "PID": 3372131,
+      "saved_start_ticks": 27235584,
+      "current_absent": true
+    },
+    {
+      "PID": 3372136,
+      "saved_start_ticks": 27235686,
+      "current_absent": true
+    },
+    {
+      "PID": 3372137,
+      "saved_start_ticks": 27235691,
+      "current_absent": true
+    },
+    {
+      "PID": 3372138,
+      "saved_start_ticks": 27235691,
+      "current_absent": true
+    },
+    {
+      "PID": 3372139,
+      "saved_start_ticks": 27235691,
+      "current_absent": true
+    },
+    {
+      "PID": 3372141,
+      "saved_start_ticks": 27235692,
+      "current_absent": true
+    },
+    {
+      "PID": 3372142,
+      "saved_start_ticks": 27235692,
+      "current_absent": true
+    },
+    {
+      "PID": 3372143,
+      "saved_start_ticks": 27235693,
+      "current_absent": true
+    },
+    {
+      "PID": 3372145,
+      "saved_start_ticks": 27235697,
+      "current_absent": true
+    },
+    {
+      "PID": 3372152,
+      "saved_start_ticks": 27235705,
+      "current_absent": true
+    },
+    {
+      "PID": 3372163,
+      "saved_start_ticks": 27235811,
+      "current_absent": true
+    },
+    {
+      "PID": 3372172,
+      "saved_start_ticks": 27236058,
+      "current_absent": true
+    },
+    {
+      "PID": 3372173,
+      "saved_start_ticks": 27236058,
+      "current_absent": true
+    },
+    {
+      "PID": 3372174,
+      "saved_start_ticks": 27236058,
+      "current_absent": true
+    },
+    {
+      "PID": 3372178,
+      "saved_start_ticks": 27236059,
+      "current_absent": true
+    },
+    {
+      "PID": 3372180,
+      "saved_start_ticks": 27236068,
+      "current_absent": true
+    },
+    {
+      "PID": 3372185,
+      "saved_start_ticks": 27236074,
+      "current_absent": true
+    },
+    {
+      "PID": 3372197,
+      "saved_start_ticks": 27236174,
+      "current_absent": true
+    },
+    {
+      "PID": 3372209,
+      "saved_start_ticks": 27236178,
+      "current_absent": true
+    },
+    {
+      "PID": 3372210,
+      "saved_start_ticks": 27236178,
+      "current_absent": true
+    },
+    {
+      "PID": 3372211,
+      "saved_start_ticks": 27236178,
+      "current_absent": true
+    },
+    {
+      "PID": 3372215,
+      "saved_start_ticks": 27236180,
+      "current_absent": true
+    },
+    {
+      "PID": 3372223,
+      "saved_start_ticks": 27236239,
+      "current_absent": true
+    },
+    {
+      "PID": 3372235,
+      "saved_start_ticks": 27236246,
+      "current_absent": true
+    },
+    {
+      "PID": 3372240,
+      "saved_start_ticks": 27236349,
+      "current_absent": true
+    },
+    {
+      "PID": 3372262,
+      "saved_start_ticks": 27236558,
+      "current_absent": true
+    },
+    {
+      "PID": 3372263,
+      "saved_start_ticks": 27236558,
+      "current_absent": true
+    },
+    {
+      "PID": 3372264,
+      "saved_start_ticks": 27236558,
+      "current_absent": true
+    },
+    {
+      "PID": 3372266,
+      "saved_start_ticks": 27236558,
+      "current_absent": true
+    },
+    {
+      "PID": 3372270,
+      "saved_start_ticks": 27236563,
+      "current_absent": true
+    },
+    {
+      "PID": 3372276,
+      "saved_start_ticks": 27236570,
+      "current_absent": true
+    },
+    {
+      "PID": 3372287,
+      "saved_start_ticks": 27236674,
+      "current_absent": true
+    },
+    {
+      "PID": 3372288,
+      "saved_start_ticks": 27236682,
+      "current_absent": true
+    },
+    {
+      "PID": 3372289,
+      "saved_start_ticks": 27236683,
+      "current_absent": true
+    },
+    {
+      "PID": 3372290,
+      "saved_start_ticks": 27236683,
+      "current_absent": true
+    },
+    {
+      "PID": 3372291,
+      "saved_start_ticks": 27236683,
+      "current_absent": true
+    },
+    {
+      "PID": 3372294,
+      "saved_start_ticks": 27236685,
+      "current_absent": true
+    },
+    {
+      "PID": 3372296,
+      "saved_start_ticks": 27236690,
+      "current_absent": true
+    },
+    {
+      "PID": 3372302,
+      "saved_start_ticks": 27236697,
+      "current_absent": true
+    },
+    {
+      "PID": 3372313,
+      "saved_start_ticks": 27236799,
+      "current_absent": true
+    },
+    {
+      "PID": 3372357,
+      "saved_start_ticks": 27237058,
+      "current_absent": true
+    },
+    {
+      "PID": 3372358,
+      "saved_start_ticks": 27237058,
+      "current_absent": true
+    },
+    {
+      "PID": 3372359,
+      "saved_start_ticks": 27237058,
+      "current_absent": true
+    },
+    {
+      "PID": 3372360,
+      "saved_start_ticks": 27237059,
+      "current_absent": true
+    },
+    {
+      "PID": 3372363,
+      "saved_start_ticks": 27237060,
+      "current_absent": true
+    },
+    {
+      "PID": 3372365,
+      "saved_start_ticks": 27237064,
+      "current_absent": true
+    },
+    {
+      "PID": 3372371,
+      "saved_start_ticks": 27237071,
+      "current_absent": true
+    },
+    {
+      "PID": 3372376,
+      "saved_start_ticks": 27237171,
+      "current_absent": true
+    },
+    {
+      "PID": 3372377,
+      "saved_start_ticks": 27237176,
+      "current_absent": true
+    },
+    {
+      "PID": 3372378,
+      "saved_start_ticks": 27237176,
+      "current_absent": true
+    },
+    {
+      "PID": 3372379,
+      "saved_start_ticks": 27237176,
+      "current_absent": true
+    },
+    {
+      "PID": 3372381,
+      "saved_start_ticks": 27237177,
+      "current_absent": true
+    },
+    {
+      "PID": 3372385,
+      "saved_start_ticks": 27237181,
+      "current_absent": true
+    },
+    {
+      "PID": 3372391,
+      "saved_start_ticks": 27237189,
+      "current_absent": true
+    },
+    {
+      "PID": 3372402,
+      "saved_start_ticks": 27237291,
+      "current_absent": true
+    },
+    {
+      "PID": 3372412,
+      "saved_start_ticks": 27237558,
+      "current_absent": true
+    },
+    {
+      "PID": 3372413,
+      "saved_start_ticks": 27237558,
+      "current_absent": true
+    },
+    {
+      "PID": 3372414,
+      "saved_start_ticks": 27237558,
+      "current_absent": true
+    },
+    {
+      "PID": 3372418,
+      "saved_start_ticks": 27237560,
+      "current_absent": true
+    },
+    {
+      "PID": 3372447,
+      "saved_start_ticks": 27237628,
+      "current_absent": true
+    },
+    {
+      "PID": 3372462,
+      "saved_start_ticks": 27237636,
+      "current_absent": true
+    },
+    {
+      "PID": 3372477,
+      "saved_start_ticks": 27237745,
+      "current_absent": true
+    },
+    {
+      "PID": 3372483,
+      "saved_start_ticks": 27237750,
+      "current_absent": true
+    },
+    {
+      "PID": 3372484,
+      "saved_start_ticks": 27237750,
+      "current_absent": true
+    },
+    {
+      "PID": 3372485,
+      "saved_start_ticks": 27237750,
+      "current_absent": true
+    },
+    {
+      "PID": 3372487,
+      "saved_start_ticks": 27237750,
+      "current_absent": true
+    },
+    {
+      "PID": 3372488,
+      "saved_start_ticks": 27237750,
+      "current_absent": true
+    },
+    {
+      "PID": 3372489,
+      "saved_start_ticks": 27237752,
+      "current_absent": true
+    },
+    {
+      "PID": 3372504,
+      "saved_start_ticks": 27237811,
+      "current_absent": true
+    },
+    {
+      "PID": 3372510,
+      "saved_start_ticks": 27237819,
+      "current_absent": true
+    },
+    {
+      "PID": 3372515,
+      "saved_start_ticks": 27237924,
+      "current_absent": true
+    },
+    {
+      "PID": 3372523,
+      "saved_start_ticks": 27238058,
+      "current_absent": true
+    },
+    {
+      "PID": 3372524,
+      "saved_start_ticks": 27238058,
+      "current_absent": true
+    },
+    {
+      "PID": 3372525,
+      "saved_start_ticks": 27238058,
+      "current_absent": true
+    },
+    {
+      "PID": 3372529,
+      "saved_start_ticks": 27238060,
+      "current_absent": true
+    },
+    {
+      "PID": 3372531,
+      "saved_start_ticks": 27238063,
+      "current_absent": true
+    },
+    {
+      "PID": 3372542,
+      "saved_start_ticks": 27238175,
+      "current_absent": true
+    },
+    {
+      "PID": 3372544,
+      "saved_start_ticks": 27238181,
+      "current_absent": true
+    },
+    {
+      "PID": 3372543,
+      "saved_start_ticks": 27238181,
+      "current_absent": true
+    },
+    {
+      "PID": 3372545,
+      "saved_start_ticks": 27238182,
+      "current_absent": true
+    },
+    {
+      "PID": 3372549,
+      "saved_start_ticks": 27238183,
+      "current_absent": true
+    },
+    {
+      "PID": 3372551,
+      "saved_start_ticks": 27238189,
+      "current_absent": true
+    },
+    {
+      "PID": 3372557,
+      "saved_start_ticks": 27238196,
+      "current_absent": true
+    },
+    {
+      "PID": 3372568,
+      "saved_start_ticks": 27238299,
+      "current_absent": true
+    },
+    {
+      "PID": 3372612,
+      "saved_start_ticks": 27238558,
+      "current_absent": true
+    },
+    {
+      "PID": 3372613,
+      "saved_start_ticks": 27238558,
+      "current_absent": true
+    },
+    {
+      "PID": 3372614,
+      "saved_start_ticks": 27238558,
+      "current_absent": true
+    },
+    {
+      "PID": 3372615,
+      "saved_start_ticks": 27238559,
+      "current_absent": true
+    },
+    {
+      "PID": 3372618,
+      "saved_start_ticks": 27238561,
+      "current_absent": true
+    },
+    {
+      "PID": 3372620,
+      "saved_start_ticks": 27238564,
+      "current_absent": true
+    },
+    {
+      "PID": 3372637,
+      "saved_start_ticks": 27238678,
+      "current_absent": true
+    },
+    {
+      "PID": 3372638,
+      "saved_start_ticks": 27238683,
+      "current_absent": true
+    },
+    {
+      "PID": 3372639,
+      "saved_start_ticks": 27238683,
+      "current_absent": true
+    },
+    {
+      "PID": 3372640,
+      "saved_start_ticks": 27238683,
+      "current_absent": true
+    },
+    {
+      "PID": 3372641,
+      "saved_start_ticks": 27238684,
+      "current_absent": true
+    },
+    {
+      "PID": 3372644,
+      "saved_start_ticks": 27238685,
+      "current_absent": true
+    },
+    {
+      "PID": 3372646,
+      "saved_start_ticks": 27238689,
+      "current_absent": true
+    },
+    {
+      "PID": 3372657,
+      "saved_start_ticks": 27238798,
+      "current_absent": true
+    },
+    {
+      "PID": 3372777,
+      "saved_start_ticks": 27239058,
+      "current_absent": true
+    },
+    {
+      "PID": 3372778,
+      "saved_start_ticks": 27239058,
+      "current_absent": true
+    },
+    {
+      "PID": 3372779,
+      "saved_start_ticks": 27239059,
+      "current_absent": true
+    },
+    {
+      "PID": 3372783,
+      "saved_start_ticks": 27239061,
+      "current_absent": true
+    },
+    {
+      "PID": 3372829,
+      "saved_start_ticks": 27239143,
+      "current_absent": true
+    },
+    {
+      "PID": 3372835,
+      "saved_start_ticks": 27239152,
+      "current_absent": true
+    },
+    {
+      "PID": 3372846,
+      "saved_start_ticks": 27239255,
+      "current_absent": true
+    },
+    {
+      "PID": 3372847,
+      "saved_start_ticks": 27239263,
+      "current_absent": true
+    },
+    {
+      "PID": 3372848,
+      "saved_start_ticks": 27239263,
+      "current_absent": true
+    },
+    {
+      "PID": 3372849,
+      "saved_start_ticks": 27239263,
+      "current_absent": true
+    },
+    {
+      "PID": 3372851,
+      "saved_start_ticks": 27239264,
+      "current_absent": true
+    },
+    {
+      "PID": 3372852,
+      "saved_start_ticks": 27239265,
+      "current_absent": true
+    },
+    {
+      "PID": 3372853,
+      "saved_start_ticks": 27239265,
+      "current_absent": true
+    },
+    {
+      "PID": 3372855,
+      "saved_start_ticks": 27239270,
+      "current_absent": true
+    },
+    {
+      "PID": 3372861,
+      "saved_start_ticks": 27239277,
+      "current_absent": true
+    },
+    {
+      "PID": 3372866,
+      "saved_start_ticks": 27239379,
+      "current_absent": true
+    },
+    {
+      "PID": 3372875,
+      "saved_start_ticks": 27239559,
+      "current_absent": true
+    },
+    {
+      "PID": 3372877,
+      "saved_start_ticks": 27239559,
+      "current_absent": true
+    },
+    {
+      "PID": 3372878,
+      "saved_start_ticks": 27239559,
+      "current_absent": true
+    },
+    {
+      "PID": 3372879,
+      "saved_start_ticks": 27239559,
+      "current_absent": true
+    },
+    {
+      "PID": 3372884,
+      "saved_start_ticks": 27239563,
+      "current_absent": true
+    },
+    {
+      "PID": 3372890,
+      "saved_start_ticks": 27239571,
+      "current_absent": true
+    },
+    {
+      "PID": 3372907,
+      "saved_start_ticks": 27239671,
+      "current_absent": true
+    },
+    {
+      "PID": 3372913,
+      "saved_start_ticks": 27239677,
+      "current_absent": true
+    },
+    {
+      "PID": 3372914,
+      "saved_start_ticks": 27239677,
+      "current_absent": true
+    },
+    {
+      "PID": 3372915,
+      "saved_start_ticks": 27239677,
+      "current_absent": true
+    },
+    {
+      "PID": 3372919,
+      "saved_start_ticks": 27239679,
+      "current_absent": true
+    },
+    {
+      "PID": 3372928,
+      "saved_start_ticks": 27239742,
+      "current_absent": true
+    },
+    {
+      "PID": 3372940,
+      "saved_start_ticks": 27239749,
+      "current_absent": true
+    },
+    {
+      "PID": 3372951,
+      "saved_start_ticks": 27239851,
+      "current_absent": true
+    },
+    {
+      "PID": 3374187,
+      "saved_start_ticks": 27249810,
+      "current_absent": true
+    },
+    {
+      "PID": 3374194,
+      "saved_start_ticks": 27249813,
+      "current_absent": true
+    },
+    {
+      "PID": 3374195,
+      "saved_start_ticks": 27249814,
+      "current_absent": true
+    },
+    {
+      "PID": 3374196,
+      "saved_start_ticks": 27249814,
+      "current_absent": true
+    },
+    {
+      "PID": 3374200,
+      "saved_start_ticks": 27249815,
+      "current_absent": true
+    },
+    {
+      "PID": 3374202,
+      "saved_start_ticks": 27249818,
+      "current_absent": true
+    },
+    {
+      "PID": 3374209,
+      "saved_start_ticks": 27249822,
+      "current_absent": true
+    },
+    {
+      "PID": 3374213,
+      "saved_start_ticks": 27249893,
+      "current_absent": true
+    },
+    {
+      "PID": 3374214,
+      "saved_start_ticks": 27249906,
+      "current_absent": true
+    },
+    {
+      "PID": 3374215,
+      "saved_start_ticks": 27249906,
+      "current_absent": true
+    },
+    {
+      "PID": 3374216,
+      "saved_start_ticks": 27249906,
+      "current_absent": true
+    },
+    {
+      "PID": 3374220,
+      "saved_start_ticks": 27249907,
+      "current_absent": true
+    },
+    {
+      "PID": 3374222,
+      "saved_start_ticks": 27249911,
+      "current_absent": true
+    },
+    {
+      "PID": 3374228,
+      "saved_start_ticks": 27249915,
+      "current_absent": true
+    },
+    {
+      "PID": 3374236,
+      "saved_start_ticks": 27249979,
+      "current_absent": true
+    },
+    {
+      "PID": 3374240,
+      "saved_start_ticks": 27249984,
+      "current_absent": true
+    },
+    {
+      "PID": 3374241,
+      "saved_start_ticks": 27249984,
+      "current_absent": true
+    },
+    {
+      "PID": 3374242,
+      "saved_start_ticks": 27249984,
+      "current_absent": true
+    },
+    {
+      "PID": 3374273,
+      "saved_start_ticks": 27249987,
+      "current_absent": true
+    },
+    {
+      "PID": 3374282,
+      "saved_start_ticks": 27249989,
+      "current_absent": true
+    },
+    {
+      "PID": 3374283,
+      "saved_start_ticks": 27249989,
+      "current_absent": true
+    },
+    {
+      "PID": 3374284,
+      "saved_start_ticks": 27249989,
+      "current_absent": true
+    },
+    {
+      "PID": 3374261,
+      "saved_start_ticks": 27249986,
+      "current_absent": true
+    },
+    {
+      "PID": 3374262,
+      "saved_start_ticks": 27249986,
+      "current_absent": true
+    },
+    {
+      "PID": 3374339,
+      "saved_start_ticks": 27250484,
+      "current_absent": true
+    },
+    {
+      "PID": 3374340,
+      "saved_start_ticks": 27250484,
+      "current_absent": true
+    },
+    {
+      "PID": 3374341,
+      "saved_start_ticks": 27250485,
+      "current_absent": true
+    },
+    {
+      "PID": 3374345,
+      "saved_start_ticks": 27250487,
+      "current_absent": true
+    },
+    {
+      "PID": 3374347,
+      "saved_start_ticks": 27250490,
+      "current_absent": true
+    },
+    {
+      "PID": 3374353,
+      "saved_start_ticks": 27250499,
+      "current_absent": true
+    },
+    {
+      "PID": 3374363,
+      "saved_start_ticks": 27250597,
+      "current_absent": true
+    },
+    {
+      "PID": 3374364,
+      "saved_start_ticks": 27250597,
+      "current_absent": true
+    },
+    {
+      "PID": 3374365,
+      "saved_start_ticks": 27250603,
+      "current_absent": true
+    },
+    {
+      "PID": 3374366,
+      "saved_start_ticks": 27250603,
+      "current_absent": true
+    },
+    {
+      "PID": 3374367,
+      "saved_start_ticks": 27250603,
+      "current_absent": true
+    },
+    {
+      "PID": 3374371,
+      "saved_start_ticks": 27250605,
+      "current_absent": true
+    },
+    {
+      "PID": 3374373,
+      "saved_start_ticks": 27250611,
+      "current_absent": true
+    },
+    {
+      "PID": 3374378,
+      "saved_start_ticks": 27250618,
+      "current_absent": true
+    },
+    {
+      "PID": 3374390,
+      "saved_start_ticks": 27250718,
+      "current_absent": true
+    },
+    {
+      "PID": 3374437,
+      "saved_start_ticks": 27250984,
+      "current_absent": true
+    },
+    {
+      "PID": 3374438,
+      "saved_start_ticks": 27250985,
+      "current_absent": true
+    },
+    {
+      "PID": 3374439,
+      "saved_start_ticks": 27250985,
+      "current_absent": true
+    },
+    {
+      "PID": 3374443,
+      "saved_start_ticks": 27250986,
+      "current_absent": true
+    },
+    {
+      "PID": 3374445,
+      "saved_start_ticks": 27250990,
+      "current_absent": true
+    },
+    {
+      "PID": 3374452,
+      "saved_start_ticks": 27250997,
+      "current_absent": true
+    },
+    {
+      "PID": 3374471,
+      "saved_start_ticks": 27251098,
+      "current_absent": true
+    },
+    {
+      "PID": 3374472,
+      "saved_start_ticks": 27251104,
+      "current_absent": true
+    },
+    {
+      "PID": 3374473,
+      "saved_start_ticks": 27251104,
+      "current_absent": true
+    },
+    {
+      "PID": 3374474,
+      "saved_start_ticks": 27251104,
+      "current_absent": true
+    },
+    {
+      "PID": 3374475,
+      "saved_start_ticks": 27251104,
+      "current_absent": true
+    },
+    {
+      "PID": 3374478,
+      "saved_start_ticks": 27251106,
+      "current_absent": true
+    },
+    {
+      "PID": 3374480,
+      "saved_start_ticks": 27251111,
+      "current_absent": true
+    },
+    {
+      "PID": 3374486,
+      "saved_start_ticks": 27251119,
+      "current_absent": true
+    },
+    {
+      "PID": 3374503,
+      "saved_start_ticks": 27251218,
+      "current_absent": true
+    },
+    {
+      "PID": 3374550,
+      "saved_start_ticks": 27251485,
+      "current_absent": true
+    },
+    {
+      "PID": 3374551,
+      "saved_start_ticks": 27251485,
+      "current_absent": true
+    },
+    {
+      "PID": 3374552,
+      "saved_start_ticks": 27251485,
+      "current_absent": true
+    },
+    {
+      "PID": 3374554,
+      "saved_start_ticks": 27251486,
+      "current_absent": true
+    },
+    {
+      "PID": 3374558,
+      "saved_start_ticks": 27251491,
+      "current_absent": true
+    },
+    {
+      "PID": 3374564,
+      "saved_start_ticks": 27251498,
+      "current_absent": true
+    },
+    {
+      "PID": 3374578,
+      "saved_start_ticks": 27251602,
+      "current_absent": true
+    },
+    {
+      "PID": 3374596,
+      "saved_start_ticks": 27251612,
+      "current_absent": true
+    },
+    {
+      "PID": 3374585,
+      "saved_start_ticks": 27251610,
+      "current_absent": true
+    },
+    {
+      "PID": 3374586,
+      "saved_start_ticks": 27251610,
+      "current_absent": true
+    },
+    {
+      "PID": 3374587,
+      "saved_start_ticks": 27251610,
+      "current_absent": true
+    },
+    {
+      "PID": 3374624,
+      "saved_start_ticks": 27251647,
+      "current_absent": true
+    },
+    {
+      "PID": 3374630,
+      "saved_start_ticks": 27251655,
+      "current_absent": true
+    },
+    {
+      "PID": 3374635,
+      "saved_start_ticks": 27251760,
+      "current_absent": true
+    },
+    {
+      "PID": 3374734,
+      "saved_start_ticks": 27251985,
+      "current_absent": true
+    },
+    {
+      "PID": 3374735,
+      "saved_start_ticks": 27251985,
+      "current_absent": true
+    },
+    {
+      "PID": 3374736,
+      "saved_start_ticks": 27251985,
+      "current_absent": true
+    },
+    {
+      "PID": 3374740,
+      "saved_start_ticks": 27251987,
+      "current_absent": true
+    },
+    {
+      "PID": 3374747,
+      "saved_start_ticks": 27251993,
+      "current_absent": true
+    },
+    {
+      "PID": 3374754,
+      "saved_start_ticks": 27252001,
+      "current_absent": true
+    },
+    {
+      "PID": 3374765,
+      "saved_start_ticks": 27252103,
+      "current_absent": true
+    },
+    {
+      "PID": 3374771,
+      "saved_start_ticks": 27252108,
+      "current_absent": true
+    },
+    {
+      "PID": 3374772,
+      "saved_start_ticks": 27252108,
+      "current_absent": true
+    },
+    {
+      "PID": 3374773,
+      "saved_start_ticks": 27252108,
+      "current_absent": true
+    },
+    {
+      "PID": 3374774,
+      "saved_start_ticks": 27252109,
+      "current_absent": true
+    },
+    {
+      "PID": 3374777,
+      "saved_start_ticks": 27252110,
+      "current_absent": true
+    },
+    {
+      "PID": 3374786,
+      "saved_start_ticks": 27252172,
+      "current_absent": true
+    },
+    {
+      "PID": 3374799,
+      "saved_start_ticks": 27252180,
+      "current_absent": true
+    },
+    {
+      "PID": 3374813,
+      "saved_start_ticks": 27252283,
+      "current_absent": true
+    },
+    {
+      "PID": 3374833,
+      "saved_start_ticks": 27252485,
+      "current_absent": true
+    },
+    {
+      "PID": 3374834,
+      "saved_start_ticks": 27252485,
+      "current_absent": true
+    },
+    {
+      "PID": 3374835,
+      "saved_start_ticks": 27252485,
+      "current_absent": true
+    },
+    {
+      "PID": 3374839,
+      "saved_start_ticks": 27252487,
+      "current_absent": true
+    },
+    {
+      "PID": 3374841,
+      "saved_start_ticks": 27252492,
+      "current_absent": true
+    },
+    {
+      "PID": 3374848,
+      "saved_start_ticks": 27252499,
+      "current_absent": true
+    },
+    {
+      "PID": 3374852,
+      "saved_start_ticks": 27252600,
+      "current_absent": true
+    },
+    {
+      "PID": 3374853,
+      "saved_start_ticks": 27252605,
+      "current_absent": true
+    },
+    {
+      "PID": 3374854,
+      "saved_start_ticks": 27252605,
+      "current_absent": true
+    },
+    {
+      "PID": 3374855,
+      "saved_start_ticks": 27252605,
+      "current_absent": true
+    },
+    {
+      "PID": 3374859,
+      "saved_start_ticks": 27252606,
+      "current_absent": true
+    },
+    {
+      "PID": 3374861,
+      "saved_start_ticks": 27252609,
+      "current_absent": true
+    },
+    {
+      "PID": 3374888,
+      "saved_start_ticks": 27252712,
+      "current_absent": true
+    },
+    {
+      "PID": 3374889,
+      "saved_start_ticks": 27252713,
+      "current_absent": true
+    },
+    {
+      "PID": 3374930,
+      "saved_start_ticks": 27252985,
+      "current_absent": true
+    },
+    {
+      "PID": 3374931,
+      "saved_start_ticks": 27252986,
+      "current_absent": true
+    },
+    {
+      "PID": 3374932,
+      "saved_start_ticks": 27252986,
+      "current_absent": true
+    },
+    {
+      "PID": 3374933,
+      "saved_start_ticks": 27252986,
+      "current_absent": true
+    },
+    {
+      "PID": 3374938,
+      "saved_start_ticks": 27252988,
+      "current_absent": true
+    },
+    {
+      "PID": 3374940,
+      "saved_start_ticks": 27252993,
+      "current_absent": true
+    },
+    {
+      "PID": 3374946,
+      "saved_start_ticks": 27253001,
+      "current_absent": true
+    },
+    {
+      "PID": 3374957,
+      "saved_start_ticks": 27253104,
+      "current_absent": true
+    },
+    {
+      "PID": 3374958,
+      "saved_start_ticks": 27253116,
+      "current_absent": true
+    },
+    {
+      "PID": 3374959,
+      "saved_start_ticks": 27253116,
+      "current_absent": true
+    },
+    {
+      "PID": 3374960,
+      "saved_start_ticks": 27253116,
+      "current_absent": true
+    },
+    {
+      "PID": 3374962,
+      "saved_start_ticks": 27253117,
+      "current_absent": true
+    },
+    {
+      "PID": 3374963,
+      "saved_start_ticks": 27253117,
+      "current_absent": true
+    },
+    {
+      "PID": 3374964,
+      "saved_start_ticks": 27253118,
+      "current_absent": true
+    },
+    {
+      "PID": 3374966,
+      "saved_start_ticks": 27253126,
+      "current_absent": true
+    },
+    {
+      "PID": 3374977,
+      "saved_start_ticks": 27253232,
+      "current_absent": true
+    },
+    {
+      "PID": 3374996,
+      "saved_start_ticks": 27253485,
+      "current_absent": true
+    },
+    {
+      "PID": 3374997,
+      "saved_start_ticks": 27253486,
+      "current_absent": true
+    },
+    {
+      "PID": 3374998,
+      "saved_start_ticks": 27253486,
+      "current_absent": true
+    },
+    {
+      "PID": 3375002,
+      "saved_start_ticks": 27253488,
+      "current_absent": true
+    },
+    {
+      "PID": 3375004,
+      "saved_start_ticks": 27253491,
+      "current_absent": true
+    },
+    {
+      "PID": 3375016,
+      "saved_start_ticks": 27253499,
+      "current_absent": true
+    },
+    {
+      "PID": 3375026,
+      "saved_start_ticks": 27253602,
+      "current_absent": true
+    },
+    {
+      "PID": 3375032,
+      "saved_start_ticks": 27253612,
+      "current_absent": true
+    },
+    {
+      "PID": 3375033,
+      "saved_start_ticks": 27253612,
+      "current_absent": true
+    },
+    {
+      "PID": 3375034,
+      "saved_start_ticks": 27253612,
+      "current_absent": true
+    },
+    {
+      "PID": 3375038,
+      "saved_start_ticks": 27253614,
+      "current_absent": true
+    },
+    {
+      "PID": 3375053,
+      "saved_start_ticks": 27253677,
+      "current_absent": true
+    },
+    {
+      "PID": 3375066,
+      "saved_start_ticks": 27253684,
+      "current_absent": true
+    },
+    {
+      "PID": 3375070,
+      "saved_start_ticks": 27253786,
+      "current_absent": true
+    },
+    {
+      "PID": 3375090,
+      "saved_start_ticks": 27253986,
+      "current_absent": true
+    },
+    {
+      "PID": 3375091,
+      "saved_start_ticks": 27253986,
+      "current_absent": true
+    },
+    {
+      "PID": 3375092,
+      "saved_start_ticks": 27253986,
+      "current_absent": true
+    },
+    {
+      "PID": 3375096,
+      "saved_start_ticks": 27253989,
+      "current_absent": true
+    },
+    {
+      "PID": 3375098,
+      "saved_start_ticks": 27253992,
+      "current_absent": true
+    },
+    {
+      "PID": 3375115,
+      "saved_start_ticks": 27254106,
+      "current_absent": true
+    },
+    {
+      "PID": 3375116,
+      "saved_start_ticks": 27254111,
+      "current_absent": true
+    },
+    {
+      "PID": 3375117,
+      "saved_start_ticks": 27254111,
+      "current_absent": true
+    },
+    {
+      "PID": 3375118,
+      "saved_start_ticks": 27254111,
+      "current_absent": true
+    },
+    {
+      "PID": 3375120,
+      "saved_start_ticks": 27254111,
+      "current_absent": true
+    },
+    {
+      "PID": 3375124,
+      "saved_start_ticks": 27254116,
+      "current_absent": true
+    },
+    {
+      "PID": 3375130,
+      "saved_start_ticks": 27254123,
+      "current_absent": true
+    },
+    {
+      "PID": 3375135,
+      "saved_start_ticks": 27254227,
+      "current_absent": true
+    },
+    {
+      "PID": 3375190,
+      "saved_start_ticks": 27254486,
+      "current_absent": true
+    },
+    {
+      "PID": 3375191,
+      "saved_start_ticks": 27254486,
+      "current_absent": true
+    },
+    {
+      "PID": 3375192,
+      "saved_start_ticks": 27254486,
+      "current_absent": true
+    },
+    {
+      "PID": 3375196,
+      "saved_start_ticks": 27254488,
+      "current_absent": true
+    },
+    {
+      "PID": 3375200,
+      "saved_start_ticks": 27254493,
+      "current_absent": true
+    },
+    {
+      "PID": 3375212,
+      "saved_start_ticks": 27254599,
+      "current_absent": true
+    },
+    {
+      "PID": 3375216,
+      "saved_start_ticks": 27254606,
+      "current_absent": true
+    },
+    {
+      "PID": 3375217,
+      "saved_start_ticks": 27254606,
+      "current_absent": true
+    },
+    {
+      "PID": 3375218,
+      "saved_start_ticks": 27254606,
+      "current_absent": true
+    },
+    {
+      "PID": 3375222,
+      "saved_start_ticks": 27254608,
+      "current_absent": true
+    },
+    {
+      "PID": 3375224,
+      "saved_start_ticks": 27254613,
+      "current_absent": true
+    },
+    {
+      "PID": 3375230,
+      "saved_start_ticks": 27254620,
+      "current_absent": true
+    },
+    {
+      "PID": 3375241,
+      "saved_start_ticks": 27254722,
+      "current_absent": true
+    },
+    {
+      "PID": 3375251,
+      "saved_start_ticks": 27254986,
+      "current_absent": true
+    },
+    {
+      "PID": 3375252,
+      "saved_start_ticks": 27254986,
+      "current_absent": true
+    },
+    {
+      "PID": 3375253,
+      "saved_start_ticks": 27254986,
+      "current_absent": true
+    },
+    {
+      "PID": 3375255,
+      "saved_start_ticks": 27254987,
+      "current_absent": true
+    },
+    {
+      "PID": 3375259,
+      "saved_start_ticks": 27254991,
+      "current_absent": true
+    },
+    {
+      "PID": 3375270,
+      "saved_start_ticks": 27255000,
+      "current_absent": true
+    },
+    {
+      "PID": 3375282,
+      "saved_start_ticks": 27255099,
+      "current_absent": true
+    },
+    {
+      "PID": 3375287,
+      "saved_start_ticks": 27255104,
+      "current_absent": true
+    },
+    {
+      "PID": 3375288,
+      "saved_start_ticks": 27255104,
+      "current_absent": true
+    },
+    {
+      "PID": 3375289,
+      "saved_start_ticks": 27255104,
+      "current_absent": true
+    },
+    {
+      "PID": 3375291,
+      "saved_start_ticks": 27255105,
+      "current_absent": true
+    },
+    {
+      "PID": 3375293,
+      "saved_start_ticks": 27255106,
+      "current_absent": true
+    },
+    {
+      "PID": 3375303,
+      "saved_start_ticks": 27255167,
+      "current_absent": true
+    },
+    {
+      "PID": 3375316,
+      "saved_start_ticks": 27255174,
+      "current_absent": true
+    },
+    {
+      "PID": 3375320,
+      "saved_start_ticks": 27255279,
+      "current_absent": true
+    },
+    {
+      "PID": 3375343,
+      "saved_start_ticks": 27255486,
+      "current_absent": true
+    },
+    {
+      "PID": 3375344,
+      "saved_start_ticks": 27255486,
+      "current_absent": true
+    },
+    {
+      "PID": 3375345,
+      "saved_start_ticks": 27255486,
+      "current_absent": true
+    },
+    {
+      "PID": 3375349,
+      "saved_start_ticks": 27255488,
+      "current_absent": true
+    },
+    {
+      "PID": 3375354,
+      "saved_start_ticks": 27255491,
+      "current_absent": true
+    },
+    {
+      "PID": 3375360,
+      "saved_start_ticks": 27255499,
+      "current_absent": true
+    },
+    {
+      "PID": 3375366,
+      "saved_start_ticks": 27255601,
+      "current_absent": true
+    },
+    {
+      "PID": 3375367,
+      "saved_start_ticks": 27255606,
+      "current_absent": true
+    },
+    {
+      "PID": 3375368,
+      "saved_start_ticks": 27255606,
+      "current_absent": true
+    },
+    {
+      "PID": 3375369,
+      "saved_start_ticks": 27255606,
+      "current_absent": true
+    },
+    {
+      "PID": 3375370,
+      "saved_start_ticks": 27255607,
+      "current_absent": true
+    },
+    {
+      "PID": 3375374,
+      "saved_start_ticks": 27255611,
+      "current_absent": true
+    },
+    {
+      "PID": 3375375,
+      "saved_start_ticks": 27255611,
+      "current_absent": true
+    },
+    {
+      "PID": 3375381,
+      "saved_start_ticks": 27255619,
+      "current_absent": true
+    },
+    {
+      "PID": 3375392,
+      "saved_start_ticks": 27255723,
+      "current_absent": true
+    },
+    {
+      "PID": 3375436,
+      "saved_start_ticks": 27255987,
+      "current_absent": true
+    },
+    {
+      "PID": 3375437,
+      "saved_start_ticks": 27255987,
+      "current_absent": true
+    },
+    {
+      "PID": 3375438,
+      "saved_start_ticks": 27255987,
+      "current_absent": true
+    },
+    {
+      "PID": 3375442,
+      "saved_start_ticks": 27255988,
+      "current_absent": true
+    },
+    {
+      "PID": 3375444,
+      "saved_start_ticks": 27255992,
+      "current_absent": true
+    },
+    {
+      "PID": 3375450,
+      "saved_start_ticks": 27256000,
+      "current_absent": true
+    },
+    {
+      "PID": 3375461,
+      "saved_start_ticks": 27256110,
+      "current_absent": true
+    },
+    {
+      "PID": 3375462,
+      "saved_start_ticks": 27256115,
+      "current_absent": true
+    },
+    {
+      "PID": 3375463,
+      "saved_start_ticks": 27256115,
+      "current_absent": true
+    },
+    {
+      "PID": 3375464,
+      "saved_start_ticks": 27256115,
+      "current_absent": true
+    },
+    {
+      "PID": 3375465,
+      "saved_start_ticks": 27256116,
+      "current_absent": true
+    },
+    {
+      "PID": 3375470,
+      "saved_start_ticks": 27256120,
+      "current_absent": true
+    },
+    {
+      "PID": 3375476,
+      "saved_start_ticks": 27256129,
+      "current_absent": true
+    },
+    {
+      "PID": 3375481,
+      "saved_start_ticks": 27256232,
+      "current_absent": true
+    },
+    {
+      "PID": 3375491,
+      "saved_start_ticks": 27256487,
+      "current_absent": true
+    },
+    {
+      "PID": 3375492,
+      "saved_start_ticks": 27256487,
+      "current_absent": true
+    },
+    {
+      "PID": 3375493,
+      "saved_start_ticks": 27256487,
+      "current_absent": true
+    },
+    {
+      "PID": 3375504,
+      "saved_start_ticks": 27256489,
+      "current_absent": true
+    },
+    {
+      "PID": 3375523,
+      "saved_start_ticks": 27256550,
+      "current_absent": true
+    },
+    {
+      "PID": 3375535,
+      "saved_start_ticks": 27256557,
+      "current_absent": true
+    },
+    {
+      "PID": 3375541,
+      "saved_start_ticks": 27256659,
+      "current_absent": true
+    },
+    {
+      "PID": 3375553,
+      "saved_start_ticks": 27256665,
+      "current_absent": true
+    },
+    {
+      "PID": 3375547,
+      "saved_start_ticks": 27256663,
+      "current_absent": true
+    },
+    {
+      "PID": 3375548,
+      "saved_start_ticks": 27256663,
+      "current_absent": true
+    },
+    {
+      "PID": 3375549,
+      "saved_start_ticks": 27256663,
+      "current_absent": true
+    },
+    {
+      "PID": 3375567,
+      "saved_start_ticks": 27256724,
+      "current_absent": true
+    },
+    {
+      "PID": 3375573,
+      "saved_start_ticks": 27256732,
+      "current_absent": true
+    },
+    {
+      "PID": 3375578,
+      "saved_start_ticks": 27256832,
+      "current_absent": true
+    },
+    {
+      "PID": 3380231,
+      "saved_start_ticks": 27298221,
+      "current_absent": true
+    },
+    {
+      "PID": 3380238,
+      "saved_start_ticks": 27298224,
+      "current_absent": true
+    },
+    {
+      "PID": 3380239,
+      "saved_start_ticks": 27298224,
+      "current_absent": true
+    },
+    {
+      "PID": 3380240,
+      "saved_start_ticks": 27298224,
+      "current_absent": true
+    },
+    {
+      "PID": 3380244,
+      "saved_start_ticks": 27298225,
+      "current_absent": true
+    },
+    {
+      "PID": 3380246,
+      "saved_start_ticks": 27298227,
+      "current_absent": true
+    },
+    {
+      "PID": 3380252,
+      "saved_start_ticks": 27298231,
+      "current_absent": true
+    },
+    {
+      "PID": 3380257,
+      "saved_start_ticks": 27298305,
+      "current_absent": true
+    },
+    {
+      "PID": 3380258,
+      "saved_start_ticks": 27298318,
+      "current_absent": true
+    },
+    {
+      "PID": 3380259,
+      "saved_start_ticks": 27298319,
+      "current_absent": true
+    },
+    {
+      "PID": 3380260,
+      "saved_start_ticks": 27298319,
+      "current_absent": true
+    },
+    {
+      "PID": 3380264,
+      "saved_start_ticks": 27298320,
+      "current_absent": true
+    },
+    {
+      "PID": 3380269,
+      "saved_start_ticks": 27298329,
+      "current_absent": true
+    },
+    {
+      "PID": 3380279,
+      "saved_start_ticks": 27298333,
+      "current_absent": true
+    },
+    {
+      "PID": 3380283,
+      "saved_start_ticks": 27298418,
+      "current_absent": true
+    },
+    {
+      "PID": 3380295,
+      "saved_start_ticks": 27298436,
+      "current_absent": true
+    },
+    {
+      "PID": 3380296,
+      "saved_start_ticks": 27298436,
+      "current_absent": true
+    },
+    {
+      "PID": 3380298,
+      "saved_start_ticks": 27298437,
+      "current_absent": true
+    },
+    {
+      "PID": 3380317,
+      "saved_start_ticks": 27298439,
+      "current_absent": true
+    },
+    {
+      "PID": 3380320,
+      "saved_start_ticks": 27298440,
+      "current_absent": true
+    },
+    {
+      "PID": 3380326,
+      "saved_start_ticks": 27298440,
+      "current_absent": true
+    },
+    {
+      "PID": 3380341,
+      "saved_start_ticks": 27298442,
+      "current_absent": true
+    },
+    {
+      "PID": 3380342,
+      "saved_start_ticks": 27298442,
+      "current_absent": true
+    },
+    {
+      "PID": 3380343,
+      "saved_start_ticks": 27298442,
+      "current_absent": true
+    },
+    {
+      "PID": 3380383,
+      "saved_start_ticks": 27298936,
+      "current_absent": true
+    },
+    {
+      "PID": 3380384,
+      "saved_start_ticks": 27298937,
+      "current_absent": true
+    },
+    {
+      "PID": 3380385,
+      "saved_start_ticks": 27298937,
+      "current_absent": true
+    },
+    {
+      "PID": 3380387,
+      "saved_start_ticks": 27298937,
+      "current_absent": true
+    },
+    {
+      "PID": 3380388,
+      "saved_start_ticks": 27298937,
+      "current_absent": true
+    },
+    {
+      "PID": 3380390,
+      "saved_start_ticks": 27298939,
+      "current_absent": true
+    },
+    {
+      "PID": 3380397,
+      "saved_start_ticks": 27298944,
+      "current_absent": true
+    },
+    {
+      "PID": 3380404,
+      "saved_start_ticks": 27298952,
+      "current_absent": true
+    },
+    {
+      "PID": 3380408,
+      "saved_start_ticks": 27299058,
+      "current_absent": true
+    },
+    {
+      "PID": 3380409,
+      "saved_start_ticks": 27299059,
+      "current_absent": true
+    },
+    {
+      "PID": 3380410,
+      "saved_start_ticks": 27299067,
+      "current_absent": true
+    },
+    {
+      "PID": 3380411,
+      "saved_start_ticks": 27299067,
+      "current_absent": true
+    },
+    {
+      "PID": 3380412,
+      "saved_start_ticks": 27299067,
+      "current_absent": true
+    },
+    {
+      "PID": 3380413,
+      "saved_start_ticks": 27299067,
+      "current_absent": true
+    },
+    {
+      "PID": 3380416,
+      "saved_start_ticks": 27299068,
+      "current_absent": true
+    },
+    {
+      "PID": 3380418,
+      "saved_start_ticks": 27299073,
+      "current_absent": true
+    },
+    {
+      "PID": 3380430,
+      "saved_start_ticks": 27299081,
+      "current_absent": true
+    },
+    {
+      "PID": 3380441,
+      "saved_start_ticks": 27299189,
+      "current_absent": true
+    },
+    {
+      "PID": 3380489,
+      "saved_start_ticks": 27299437,
+      "current_absent": true
+    },
+    {
+      "PID": 3380490,
+      "saved_start_ticks": 27299437,
+      "current_absent": true
+    },
+    {
+      "PID": 3380491,
+      "saved_start_ticks": 27299437,
+      "current_absent": true
+    },
+    {
+      "PID": 3380495,
+      "saved_start_ticks": 27299439,
+      "current_absent": true
+    },
+    {
+      "PID": 3380497,
+      "saved_start_ticks": 27299442,
+      "current_absent": true
+    },
+    {
+      "PID": 3380506,
+      "saved_start_ticks": 27299449,
+      "current_absent": true
+    },
+    {
+      "PID": 3380522,
+      "saved_start_ticks": 27299554,
+      "current_absent": true
+    },
+    {
+      "PID": 3380525,
+      "saved_start_ticks": 27299560,
+      "current_absent": true
+    },
+    {
+      "PID": 3380526,
+      "saved_start_ticks": 27299560,
+      "current_absent": true
+    },
+    {
+      "PID": 3380527,
+      "saved_start_ticks": 27299560,
+      "current_absent": true
+    },
+    {
+      "PID": 3380528,
+      "saved_start_ticks": 27299560,
+      "current_absent": true
+    },
+    {
+      "PID": 3380531,
+      "saved_start_ticks": 27299562,
+      "current_absent": true
+    },
+    {
+      "PID": 3380533,
+      "saved_start_ticks": 27299569,
+      "current_absent": true
+    },
+    {
+      "PID": 3380539,
+      "saved_start_ticks": 27299576,
+      "current_absent": true
+    },
+    {
+      "PID": 3380544,
+      "saved_start_ticks": 27299681,
+      "current_absent": true
+    },
+    {
+      "PID": 3380545,
+      "saved_start_ticks": 27299681,
+      "current_absent": true
+    },
+    {
+      "PID": 3380589,
+      "saved_start_ticks": 27299937,
+      "current_absent": true
+    },
+    {
+      "PID": 3380590,
+      "saved_start_ticks": 27299937,
+      "current_absent": true
+    },
+    {
+      "PID": 3380591,
+      "saved_start_ticks": 27299937,
+      "current_absent": true
+    },
+    {
+      "PID": 3380593,
+      "saved_start_ticks": 27299938,
+      "current_absent": true
+    },
+    {
+      "PID": 3380594,
+      "saved_start_ticks": 27299938,
+      "current_absent": true
+    },
+    {
+      "PID": 3380595,
+      "saved_start_ticks": 27299939,
+      "current_absent": true
+    },
+    {
+      "PID": 3380600,
+      "saved_start_ticks": 27299953,
+      "current_absent": true
+    },
+    {
+      "PID": 3380609,
+      "saved_start_ticks": 27299961,
+      "current_absent": true
+    },
+    {
+      "PID": 3380617,
+      "saved_start_ticks": 27300067,
+      "current_absent": true
+    },
+    {
+      "PID": 3380618,
+      "saved_start_ticks": 27300074,
+      "current_absent": true
+    },
+    {
+      "PID": 3380619,
+      "saved_start_ticks": 27300074,
+      "current_absent": true
+    },
+    {
+      "PID": 3380620,
+      "saved_start_ticks": 27300074,
+      "current_absent": true
+    },
+    {
+      "PID": 3380622,
+      "saved_start_ticks": 27300075,
+      "current_absent": true
+    },
+    {
+      "PID": 3380624,
+      "saved_start_ticks": 27300076,
+      "current_absent": true
+    },
+    {
+      "PID": 3380626,
+      "saved_start_ticks": 27300087,
+      "current_absent": true
+    },
+    {
+      "PID": 3380632,
+      "saved_start_ticks": 27300094,
+      "current_absent": true
+    },
+    {
+      "PID": 3380643,
+      "saved_start_ticks": 27300199,
+      "current_absent": true
+    },
+    {
+      "PID": 3380652,
+      "saved_start_ticks": 27300437,
+      "current_absent": true
+    },
+    {
+      "PID": 3380653,
+      "saved_start_ticks": 27300437,
+      "current_absent": true
+    },
+    {
+      "PID": 3380654,
+      "saved_start_ticks": 27300437,
+      "current_absent": true
+    },
+    {
+      "PID": 3380656,
+      "saved_start_ticks": 27300439,
+      "current_absent": true
+    },
+    {
+      "PID": 3380658,
+      "saved_start_ticks": 27300440,
+      "current_absent": true
+    },
+    {
+      "PID": 3380660,
+      "saved_start_ticks": 27300445,
+      "current_absent": true
+    },
+    {
+      "PID": 3380667,
+      "saved_start_ticks": 27300454,
+      "current_absent": true
+    },
+    {
+      "PID": 3380684,
+      "saved_start_ticks": 27300557,
+      "current_absent": true
+    },
+    {
+      "PID": 3380689,
+      "saved_start_ticks": 27300564,
+      "current_absent": true
+    },
+    {
+      "PID": 3380690,
+      "saved_start_ticks": 27300564,
+      "current_absent": true
+    },
+    {
+      "PID": 3380691,
+      "saved_start_ticks": 27300564,
+      "current_absent": true
+    },
+    {
+      "PID": 3380692,
+      "saved_start_ticks": 27300565,
+      "current_absent": true
+    },
+    {
+      "PID": 3380711,
+      "saved_start_ticks": 27300629,
+      "current_absent": true
+    },
+    {
+      "PID": 3380723,
+      "saved_start_ticks": 27300637,
+      "current_absent": true
+    },
+    {
+      "PID": 3380731,
+      "saved_start_ticks": 27300745,
+      "current_absent": true
+    },
+    {
+      "PID": 3380751,
+      "saved_start_ticks": 27300937,
+      "current_absent": true
+    },
+    {
+      "PID": 3380752,
+      "saved_start_ticks": 27300937,
+      "current_absent": true
+    },
+    {
+      "PID": 3380753,
+      "saved_start_ticks": 27300937,
+      "current_absent": true
+    },
+    {
+      "PID": 3380754,
+      "saved_start_ticks": 27300938,
+      "current_absent": true
+    },
+    {
+      "PID": 3380757,
+      "saved_start_ticks": 27300940,
+      "current_absent": true
+    },
+    {
+      "PID": 3380759,
+      "saved_start_ticks": 27300943,
+      "current_absent": true
+    },
+    {
+      "PID": 3380765,
+      "saved_start_ticks": 27300950,
+      "current_absent": true
+    },
+    {
+      "PID": 3380777,
+      "saved_start_ticks": 27301054,
+      "current_absent": true
+    },
+    {
+      "PID": 3380778,
+      "saved_start_ticks": 27301062,
+      "current_absent": true
+    },
+    {
+      "PID": 3380779,
+      "saved_start_ticks": 27301062,
+      "current_absent": true
+    },
+    {
+      "PID": 3380781,
+      "saved_start_ticks": 27301063,
+      "current_absent": true
+    },
+    {
+      "PID": 3380782,
+      "saved_start_ticks": 27301063,
+      "current_absent": true
+    },
+    {
+      "PID": 3380783,
+      "saved_start_ticks": 27301063,
+      "current_absent": true
+    },
+    {
+      "PID": 3380784,
+      "saved_start_ticks": 27301064,
+      "current_absent": true
+    },
+    {
+      "PID": 3380786,
+      "saved_start_ticks": 27301069,
+      "current_absent": true
+    },
+    {
+      "PID": 3380792,
+      "saved_start_ticks": 27301078,
+      "current_absent": true
+    },
+    {
+      "PID": 3380798,
+      "saved_start_ticks": 27301182,
+      "current_absent": true
+    },
+    {
+      "PID": 3380845,
+      "saved_start_ticks": 27301438,
+      "current_absent": true
+    },
+    {
+      "PID": 3380846,
+      "saved_start_ticks": 27301438,
+      "current_absent": true
+    },
+    {
+      "PID": 3380847,
+      "saved_start_ticks": 27301438,
+      "current_absent": true
+    },
+    {
+      "PID": 3380848,
+      "saved_start_ticks": 27301438,
+      "current_absent": true
+    },
+    {
+      "PID": 3380851,
+      "saved_start_ticks": 27301440,
+      "current_absent": true
+    },
+    {
+      "PID": 3380856,
+      "saved_start_ticks": 27301452,
+      "current_absent": true
+    },
+    {
+      "PID": 3380862,
+      "saved_start_ticks": 27301461,
+      "current_absent": true
+    },
+    {
+      "PID": 3380885,
+      "saved_start_ticks": 27301565,
+      "current_absent": true
+    },
+    {
+      "PID": 3380886,
+      "saved_start_ticks": 27301573,
+      "current_absent": true
+    },
+    {
+      "PID": 3380887,
+      "saved_start_ticks": 27301573,
+      "current_absent": true
+    },
+    {
+      "PID": 3380888,
+      "saved_start_ticks": 27301573,
+      "current_absent": true
+    },
+    {
+      "PID": 3380892,
+      "saved_start_ticks": 27301574,
+      "current_absent": true
+    },
+    {
+      "PID": 3380894,
+      "saved_start_ticks": 27301579,
+      "current_absent": true
+    },
+    {
+      "PID": 3380900,
+      "saved_start_ticks": 27301587,
+      "current_absent": true
+    },
+    {
+      "PID": 3380923,
+      "saved_start_ticks": 27301693,
+      "current_absent": true
+    },
+    {
+      "PID": 3380935,
+      "saved_start_ticks": 27301938,
+      "current_absent": true
+    },
+    {
+      "PID": 3380936,
+      "saved_start_ticks": 27301938,
+      "current_absent": true
+    },
+    {
+      "PID": 3380937,
+      "saved_start_ticks": 27301938,
+      "current_absent": true
+    },
+    {
+      "PID": 3380938,
+      "saved_start_ticks": 27301939,
+      "current_absent": true
+    },
+    {
+      "PID": 3380941,
+      "saved_start_ticks": 27301941,
+      "current_absent": true
+    },
+    {
+      "PID": 3380943,
+      "saved_start_ticks": 27301944,
+      "current_absent": true
+    },
+    {
+      "PID": 3380967,
+      "saved_start_ticks": 27302056,
+      "current_absent": true
+    },
+    {
+      "PID": 3380973,
+      "saved_start_ticks": 27302062,
+      "current_absent": true
+    },
+    {
+      "PID": 3380974,
+      "saved_start_ticks": 27302062,
+      "current_absent": true
+    },
+    {
+      "PID": 3380975,
+      "saved_start_ticks": 27302062,
+      "current_absent": true
+    },
+    {
+      "PID": 3380979,
+      "saved_start_ticks": 27302064,
+      "current_absent": true
+    },
+    {
+      "PID": 3380987,
+      "saved_start_ticks": 27302124,
+      "current_absent": true
+    },
+    {
+      "PID": 3380999,
+      "saved_start_ticks": 27302132,
+      "current_absent": true
+    },
+    {
+      "PID": 3381010,
+      "saved_start_ticks": 27302242,
+      "current_absent": true
+    },
+    {
+      "PID": 3381030,
+      "saved_start_ticks": 27302438,
+      "current_absent": true
+    },
+    {
+      "PID": 3381031,
+      "saved_start_ticks": 27302438,
+      "current_absent": true
+    },
+    {
+      "PID": 3381032,
+      "saved_start_ticks": 27302438,
+      "current_absent": true
+    },
+    {
+      "PID": 3381034,
+      "saved_start_ticks": 27302439,
+      "current_absent": true
+    },
+    {
+      "PID": 3381038,
+      "saved_start_ticks": 27302444,
+      "current_absent": true
+    },
+    {
+      "PID": 3381044,
+      "saved_start_ticks": 27302452,
+      "current_absent": true
+    },
+    {
+      "PID": 3381051,
+      "saved_start_ticks": 27302549,
+      "current_absent": true
+    },
+    {
+      "PID": 3381059,
+      "saved_start_ticks": 27302557,
+      "current_absent": true
+    },
+    {
+      "PID": 3381053,
+      "saved_start_ticks": 27302555,
+      "current_absent": true
+    },
+    {
+      "PID": 3381054,
+      "saved_start_ticks": 27302555,
+      "current_absent": true
+    },
+    {
+      "PID": 3381055,
+      "saved_start_ticks": 27302555,
+      "current_absent": true
+    },
+    {
+      "PID": 3381061,
+      "saved_start_ticks": 27302564,
+      "current_absent": true
+    },
+    {
+      "PID": 3381079,
+      "saved_start_ticks": 27302673,
+      "current_absent": true
+    },
+    {
+      "PID": 3381122,
+      "saved_start_ticks": 27302938,
+      "current_absent": true
+    },
+    {
+      "PID": 3381123,
+      "saved_start_ticks": 27302939,
+      "current_absent": true
+    },
+    {
+      "PID": 3381124,
+      "saved_start_ticks": 27302939,
+      "current_absent": true
+    },
+    {
+      "PID": 3381126,
+      "saved_start_ticks": 27302940,
+      "current_absent": true
+    },
+    {
+      "PID": 3381127,
+      "saved_start_ticks": 27302940,
+      "current_absent": true
+    },
+    {
+      "PID": 3381129,
+      "saved_start_ticks": 27302944,
+      "current_absent": true
+    },
+    {
+      "PID": 3381133,
+      "saved_start_ticks": 27302959,
+      "current_absent": true
+    },
+    {
+      "PID": 3381139,
+      "saved_start_ticks": 27302967,
+      "current_absent": true
+    },
+    {
+      "PID": 3381150,
+      "saved_start_ticks": 27303071,
+      "current_absent": true
+    },
+    {
+      "PID": 3381151,
+      "saved_start_ticks": 27303084,
+      "current_absent": true
+    },
+    {
+      "PID": 3381152,
+      "saved_start_ticks": 27303084,
+      "current_absent": true
+    },
+    {
+      "PID": 3381153,
+      "saved_start_ticks": 27303084,
+      "current_absent": true
+    },
+    {
+      "PID": 3381154,
+      "saved_start_ticks": 27303085,
+      "current_absent": true
+    },
+    {
+      "PID": 3381157,
+      "saved_start_ticks": 27303087,
+      "current_absent": true
+    },
+    {
+      "PID": 3381159,
+      "saved_start_ticks": 27303094,
+      "current_absent": true
+    },
+    {
+      "PID": 3381165,
+      "saved_start_ticks": 27303101,
+      "current_absent": true
+    },
+    {
+      "PID": 3381170,
+      "saved_start_ticks": 27303207,
+      "current_absent": true
+    },
+    {
+      "PID": 3381185,
+      "saved_start_ticks": 27303439,
+      "current_absent": true
+    },
+    {
+      "PID": 3381186,
+      "saved_start_ticks": 27303439,
+      "current_absent": true
+    },
+    {
+      "PID": 3381187,
+      "saved_start_ticks": 27303440,
+      "current_absent": true
+    },
+    {
+      "PID": 3381191,
+      "saved_start_ticks": 27303442,
+      "current_absent": true
+    },
+    {
+      "PID": 3381193,
+      "saved_start_ticks": 27303448,
+      "current_absent": true
+    },
+    {
+      "PID": 3381200,
+      "saved_start_ticks": 27303456,
+      "current_absent": true
+    },
+    {
+      "PID": 3381211,
+      "saved_start_ticks": 27303570,
+      "current_absent": true
+    },
+    {
+      "PID": 3381217,
+      "saved_start_ticks": 27303575,
+      "current_absent": true
+    },
+    {
+      "PID": 3381218,
+      "saved_start_ticks": 27303575,
+      "current_absent": true
+    },
+    {
+      "PID": 3381219,
+      "saved_start_ticks": 27303575,
+      "current_absent": true
+    },
+    {
+      "PID": 3381223,
+      "saved_start_ticks": 27303576,
+      "current_absent": true
+    },
+    {
+      "PID": 3381238,
+      "saved_start_ticks": 27303638,
+      "current_absent": true
+    },
+    {
+      "PID": 3381250,
+      "saved_start_ticks": 27303647,
+      "current_absent": true
+    },
+    {
+      "PID": 3381255,
+      "saved_start_ticks": 27303738,
+      "current_absent": true
+    },
+    {
+      "PID": 3392089,
+      "saved_start_ticks": 27393615,
+      "current_absent": true
+    },
+    {
+      "PID": 3392096,
+      "saved_start_ticks": 27393619,
+      "current_absent": true
+    },
+    {
+      "PID": 3392097,
+      "saved_start_ticks": 27393619,
+      "current_absent": true
+    },
+    {
+      "PID": 3392098,
+      "saved_start_ticks": 27393619,
+      "current_absent": true
+    },
+    {
+      "PID": 3392102,
+      "saved_start_ticks": 27393620,
+      "current_absent": true
+    },
+    {
+      "PID": 3392122,
+      "saved_start_ticks": 27393714,
+      "current_absent": true
+    },
+    {
+      "PID": 3392150,
+      "saved_start_ticks": 27393794,
+      "current_absent": true
+    },
+    {
+      "PID": 3392151,
+      "saved_start_ticks": 27393795,
+      "current_absent": true
+    },
+    {
+      "PID": 3392152,
+      "saved_start_ticks": 27393795,
+      "current_absent": true
+    },
+    {
+      "PID": 3392154,
+      "saved_start_ticks": 27393795,
+      "current_absent": true
+    },
+    {
+      "PID": 3392156,
+      "saved_start_ticks": 27393797,
+      "current_absent": true
+    },
+    {
+      "PID": 3392165,
+      "saved_start_ticks": 27393872,
+      "current_absent": true
+    },
+    {
+      "PID": 3392176,
+      "saved_start_ticks": 27393943,
+      "current_absent": true
+    },
+    {
+      "PID": 3392177,
+      "saved_start_ticks": 27393946,
+      "current_absent": true
+    },
+    {
+      "PID": 3392184,
+      "saved_start_ticks": 27393949,
+      "current_absent": true
+    },
+    {
+      "PID": 3392191,
+      "saved_start_ticks": 27393952,
+      "current_absent": true
+    },
+    {
+      "PID": 3393861,
+      "saved_start_ticks": 27409920,
+      "current_absent": true
+    },
+    {
+      "PID": 3393868,
+      "saved_start_ticks": 27409926,
+      "current_absent": true
+    },
+    {
+      "PID": 3393869,
+      "saved_start_ticks": 27409926,
+      "current_absent": true
+    },
+    {
+      "PID": 3393870,
+      "saved_start_ticks": 27409926,
+      "current_absent": true
+    },
+    {
+      "PID": 3393874,
+      "saved_start_ticks": 27409928,
+      "current_absent": true
+    },
+    {
+      "PID": 3393880,
+      "saved_start_ticks": 27409994,
+      "current_absent": true
+    },
+    {
+      "PID": 3393892,
+      "saved_start_ticks": 27409999,
+      "current_absent": true
+    },
+    {
+      "PID": 3393899,
+      "saved_start_ticks": 27410071,
+      "current_absent": true
+    },
+    {
+      "PID": 3393902,
+      "saved_start_ticks": 27410077,
+      "current_absent": true
+    },
+    {
+      "PID": 3393903,
+      "saved_start_ticks": 27410077,
+      "current_absent": true
+    },
+    {
+      "PID": 3393904,
+      "saved_start_ticks": 27410077,
+      "current_absent": true
+    },
+    {
+      "PID": 3393905,
+      "saved_start_ticks": 27410078,
+      "current_absent": true
+    },
+    {
+      "PID": 3393910,
+      "saved_start_ticks": 27410079,
+      "current_absent": true
+    },
+    {
+      "PID": 3393926,
+      "saved_start_ticks": 27410173,
+      "current_absent": true
+    },
+    {
+      "PID": 3393932,
+      "saved_start_ticks": 27410183,
+      "current_absent": true
+    },
+    {
+      "PID": 3393936,
+      "saved_start_ticks": 27410263,
+      "current_absent": true
+    },
+    {
+      "PID": 3393937,
+      "saved_start_ticks": 27410278,
+      "current_absent": true
+    },
+    {
+      "PID": 3393944,
+      "saved_start_ticks": 27410280,
+      "current_absent": true
+    },
+    {
+      "PID": 3393951,
+      "saved_start_ticks": 27410283,
+      "current_absent": true
+    },
+    {
+      "PID": 3393960,
+      "saved_start_ticks": 27410405,
+      "current_absent": true
+    },
+    {
+      "PID": 3393974,
+      "saved_start_ticks": 27410514,
+      "current_absent": true
+    },
+    {
+      "PID": 3393995,
+      "saved_start_ticks": 27410516,
+      "current_absent": true
+    },
+    {
+      "PID": 3393996,
+      "saved_start_ticks": 27410517,
+      "current_absent": true
+    },
+    {
+      "PID": 3394002,
+      "saved_start_ticks": 27410517,
+      "current_absent": true
+    },
+    {
+      "PID": 3393980,
+      "saved_start_ticks": 27410514,
+      "current_absent": true
+    },
+    {
+      "PID": 3393981,
+      "saved_start_ticks": 27410515,
+      "current_absent": true
+    },
+    {
+      "PID": 3383323,
+      "saved_start_ticks": 27320414,
+      "current_absent": true
+    },
+    {
+      "PID": 3383330,
+      "saved_start_ticks": 27320417,
+      "current_absent": true
+    },
+    {
+      "PID": 3383331,
+      "saved_start_ticks": 27320418,
+      "current_absent": true
+    },
+    {
+      "PID": 3383332,
+      "saved_start_ticks": 27320418,
+      "current_absent": true
+    },
+    {
+      "PID": 3383336,
+      "saved_start_ticks": 27320419,
+      "current_absent": true
+    },
+    {
+      "PID": 3383338,
+      "saved_start_ticks": 27320420,
+      "current_absent": true
+    },
+    {
+      "PID": 3383345,
+      "saved_start_ticks": 27320424,
+      "current_absent": true
+    },
+    {
+      "PID": 3383351,
+      "saved_start_ticks": 27320500,
+      "current_absent": true
+    },
+    {
+      "PID": 3383352,
+      "saved_start_ticks": 27320514,
+      "current_absent": true
+    },
+    {
+      "PID": 3383353,
+      "saved_start_ticks": 27320514,
+      "current_absent": true
+    },
+    {
+      "PID": 3383354,
+      "saved_start_ticks": 27320514,
+      "current_absent": true
+    },
+    {
+      "PID": 3383358,
+      "saved_start_ticks": 27320515,
+      "current_absent": true
+    },
+    {
+      "PID": 3383360,
+      "saved_start_ticks": 27320517,
+      "current_absent": true
+    },
+    {
+      "PID": 3383370,
+      "saved_start_ticks": 27320586,
+      "current_absent": true
+    },
+    {
+      "PID": 3383371,
+      "saved_start_ticks": 27320591,
+      "current_absent": true
+    },
+    {
+      "PID": 3367296,
+      "saved_start_ticks": 27206340,
+      "current_absent": true
+    },
+    {
+      "PID": 3367303,
+      "saved_start_ticks": 27206343,
+      "current_absent": true
+    },
+    {
+      "PID": 3370304,
+      "saved_start_ticks": 27224533,
+      "current_absent": true
+    },
+    {
+      "PID": 3370311,
+      "saved_start_ticks": 27224536,
+      "current_absent": true
+    },
+    {
+      "PID": 3370318,
+      "saved_start_ticks": 27224539,
+      "current_absent": true
+    },
+    {
+      "PID": 3369218,
+      "saved_start_ticks": 27217825,
+      "current_absent": true
+    },
+    {
+      "PID": 3369225,
+      "saved_start_ticks": 27217827,
+      "current_absent": true
+    },
+    {
+      "PID": 3369226,
+      "saved_start_ticks": 27217827,
+      "current_absent": true
+    },
+    {
+      "PID": 3369227,
+      "saved_start_ticks": 27217827,
+      "current_absent": true
+    },
+    {
+      "PID": 3369231,
+      "saved_start_ticks": 27217828,
+      "current_absent": true
+    },
+    {
+      "PID": 3369233,
+      "saved_start_ticks": 27217830,
+      "current_absent": true
+    },
+    {
+      "PID": 3369250,
+      "saved_start_ticks": 27217898,
+      "current_absent": true
+    },
+    {
+      "PID": 3369251,
+      "saved_start_ticks": 27217905,
+      "current_absent": true
+    },
+    {
+      "PID": 3369252,
+      "saved_start_ticks": 27217906,
+      "current_absent": true
+    },
+    {
+      "PID": 3369253,
+      "saved_start_ticks": 27217906,
+      "current_absent": true
+    },
+    {
+      "PID": 3369257,
+      "saved_start_ticks": 27217906,
+      "current_absent": true
+    },
+    {
+      "PID": 3369259,
+      "saved_start_ticks": 27217914,
+      "current_absent": true
+    },
+    {
+      "PID": 3369265,
+      "saved_start_ticks": 27217918,
+      "current_absent": true
+    },
+    {
+      "PID": 3369276,
+      "saved_start_ticks": 27217989,
+      "current_absent": true
+    },
+    {
+      "PID": 3369283,
+      "saved_start_ticks": 27217995,
+      "current_absent": true
+    },
+    {
+      "PID": 3369282,
+      "saved_start_ticks": 27217995,
+      "current_absent": true
+    },
+    {
+      "PID": 3369312,
+      "saved_start_ticks": 27217999,
+      "current_absent": true
+    },
+    {
+      "PID": 3369289,
+      "saved_start_ticks": 27217996,
+      "current_absent": true
+    },
+    {
+      "PID": 3369303,
+      "saved_start_ticks": 27217998,
+      "current_absent": true
+    },
+    {
+      "PID": 3369311,
+      "saved_start_ticks": 27217999,
+      "current_absent": true
+    }
+  ],
+  "allhost_allperiod_proof": false,
+  "rootmean_all1409_backup_not_saved_fullledger": true,
+  "GPU_version_scope": "originalr1/r2 + later NN0 firstroot join; futurerepair not included",
+  "elapsed_seconds": 0.09784529398893937,
+  "maxRSS_bytes": 29556736
+}
