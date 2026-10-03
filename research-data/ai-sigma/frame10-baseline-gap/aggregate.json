@@ -1,23 +1,23 @@
 {
   "issue": "quoridor-4lc.149",
-  "UTC": "2026-10-03T01:04:21.948530+00:00",
+  "UTC": "2026-10-03T01:06:23.601630+00:00",
   "planned_games": 64,
   "planned_pairs": 32,
-  "started_games": 12,
+  "started_games": 16,
   "possibly_started_result_missing": 4,
-  "assigned_attempted_games": 16,
+  "assigned_attempted_games": 20,
   "categories": {
-    "goal": 12,
+    "goal": 16,
     "outer_OOM_unknown_start_and_result": 4,
-    "unstarted": 48
+    "unstarted": 44
   },
   "operational_mean_interval": [
-    0.015625,
-    0.828125
+    0.03125,
+    0.78125
   ],
   "terminal_quality_all64_interval": [
-    0.015625,
-    0.828125
+    0.03125,
+    0.78125
   ],
   "reference_Hoeffding_eps": 0.24008069782998018,
   "operational_assumption_only_95_interval": [
@@ -30,8 +30,8 @@
   ],
   "interval_assumptions": "independent bounded32pairs added assumption; fixedPRNG/sharedstates/drift independence and coverage unproved; not64independent games",
   "complete_only_auxiliary": {
-    "m": 12,
-    "mean": 0.08333333333333333,
+    "m": 16,
+    "mean": 0.125,
     "selection_limit": "normal terminal subset; never replaces64"
   },
   "strata": {
@@ -50,11 +50,11 @@
       "planned_games": 16,
       "operational": [
         0.0,
-        0.75
+        0.625
       ],
       "terminal_quality": [
         0.0,
-        0.75
+        0.625
       ]
     },
     "12": {
@@ -71,12 +71,12 @@
     "13": {
       "planned_games": 16,
       "operational": [
-        0.0,
-        0.75
+        0.0625,
+        0.6875
       ],
       "terminal_quality": [
-        0.0,
-        0.75
+        0.0625,
+        0.6875
       ]
     }
   },
@@ -599,30 +599,30 @@
       "fixture_id": "frame10-prefix-9",
       "candidate_color": 1,
       "layer_ply": 13,
-      "run": null,
-      "status": "unstarted",
-      "category": "unstarted",
+      "run": "gap149-group05-r1",
+      "status": "terminal",
+      "category": "goal",
       "operational_interval": [
-        0,
+        1,
         1
       ],
       "terminal_quality_interval": [
-        0,
+        1,
         1
       ],
-      "normal_terminal_score": null,
-      "winner": null,
-      "reason": null,
-      "new_public_plies": 0,
-      "initial_prefix_length": null,
-      "total_ply": null,
-      "start_ms": null,
-      "end_ms": null,
-      "public_count": 0,
-      "hand_API_started": 0,
-      "hand_API_returned": 0,
-      "adopted_completed_backup": 0,
-      "adopted_NN": 0,
+      "normal_terminal_score": 1,
+      "winner": 1,
+      "reason": "goal",
+      "new_public_plies": 68,
+      "initial_prefix_length": 13,
+      "total_ply": 81,
+      "start_ms": 1790989481246.925,
+      "end_ms": 1790989509348.575,
+      "public_count": 68,
+      "hand_API_started": 637,
+      "hand_API_returned": 637,
+      "adopted_completed_backup": 735,
+      "adopted_NN": 583,
       "typed_flags": []
     },
     {
@@ -631,30 +631,30 @@
       "fixture_id": "frame10-prefix-9",
       "candidate_color": 2,
       "layer_ply": 13,
-      "run": null,
-      "status": "unstarted",
-      "category": "unstarted",
+      "run": "gap149-group05-r1",
+      "status": "terminal",
+      "category": "goal",
       "operational_interval": [
         0,
-        1
+        0
       ],
       "terminal_quality_interval": [
         0,
-        1
+        0
       ],
-      "normal_terminal_score": null,
-      "winner": null,
-      "reason": null,
-      "new_public_plies": 0,
-      "initial_prefix_length": null,
-      "total_ply": null,
-      "start_ms": null,
-      "end_ms": null,
-      "public_count": 0,
-      "hand_API_started": 0,
-      "hand_API_returned": 0,
-      "adopted_completed_backup": 0,
-      "adopted_NN": 0,
+      "normal_terminal_score": 0,
+      "winner": 1,
+      "reason": "goal",
+      "new_public_plies": 40,
+      "initial_prefix_length": 13,
+      "total_ply": 53,
+      "start_ms": 1790989511252.895,
+      "end_ms": 1790989527758.855,
+      "public_count": 40,
+      "hand_API_started": 403,
+      "hand_API_returned": 403,
+      "adopted_completed_backup": 422,
+      "adopted_NN": 366,
       "typed_flags": []
     },
     {
@@ -663,30 +663,30 @@
       "fixture_id": "frame10-prefix-10",
       "candidate_color": 1,
       "layer_ply": 5,
-      "run": null,
-      "status": "unstarted",
-      "category": "unstarted",
+      "run": "gap149-group05-r1",
+      "status": "terminal",
+      "category": "goal",
       "operational_interval": [
         0,
-        1
+        0
       ],
       "terminal_quality_interval": [
         0,
-        1
+        0
       ],
-      "normal_terminal_score": null,
-      "winner": null,
-      "reason": null,
-      "new_public_plies": 0,
-      "initial_prefix_length": null,
-      "total_ply": null,
-      "start_ms": null,
-      "end_ms": null,
-      "public_count": 0,
-      "hand_API_started": 0,
-      "hand_API_returned": 0,
-      "adopted_completed_backup": 0,
-      "adopted_NN": 0,
+      "normal_terminal_score": 0,
+      "winner": 2,
+      "reason": "goal",
+      "new_public_plies": 65,
+      "initial_prefix_length": 5,
+      "total_ply": 70,
+      "start_ms": 1790989528633.155,
+      "end_ms": 1790989555472.26,
+      "public_count": 65,
+      "hand_API_started": 626,
+      "hand_API_returned": 626,
+      "adopted_completed_backup": 680,
+      "adopted_NN": 579,
       "typed_flags": []
     },
     {
@@ -695,30 +695,30 @@
       "fixture_id": "frame10-prefix-10",
       "candidate_color": 2,
       "layer_ply": 5,
-      "run": null,
-      "status": "unstarted",
-      "category": "unstarted",
+      "run": "gap149-group05-r1",
+      "status": "terminal",
+      "category": "goal",
       "operational_interval": [
         0,
-        1
+        0
       ],
       "terminal_quality_interval": [
         0,
-        1
+        0
       ],
-      "normal_terminal_score": null,
-      "winner": null,
-      "reason": null,
-      "new_public_plies": 0,
-      "initial_prefix_length": null,
-      "total_ply": null,
-      "start_ms": null,
-      "end_ms": null,
-      "public_count": 0,
-      "hand_API_started": 0,
-      "hand_API_returned": 0,
-      "adopted_completed_backup": 0,
-      "adopted_NN": 0,
+      "normal_terminal_score": 0,
+      "winner": 1,
+      "reason": "goal",
+      "new_public_plies": 50,
+      "initial_prefix_length": 5,
+      "total_ply": 55,
+      "start_ms": 1790989557439.27,
+      "end_ms": 1790989578078.515,
+      "public_count": 50,
+      "hand_API_started": 476,
+      "hand_API_returned": 476,
+      "adopted_completed_backup": 603,
+      "adopted_NN": 437,
       "typed_flags": []
     },
     {
@@ -2335,22 +2335,22 @@
       "pair": 9,
       "layer_ply": 13,
       "operational_Xi_interval": [
-        0.0,
-        1.0
+        0.5,
+        0.5
       ],
       "terminal_quality_Xi_interval": [
-        0.0,
-        1.0
+        0.5,
+        0.5
       ],
       "normal_scores": [
-        null,
-        null
+        1,
+        0
       ],
       "physical_side_winners": [
-        null,
-        null
+        1,
+        1
       ],
-      "pattern": "unknown",
+      "pattern": "same_physical_side_winner_one_each_AI",
       "game_ids": [
         "slot09-color1",
         "slot09-color2"
@@ -2361,21 +2361,21 @@
       "layer_ply": 5,
       "operational_Xi_interval": [
         0.0,
-        1.0
+        0.0
       ],
       "terminal_quality_Xi_interval": [
         0.0,
-        1.0
+        0.0
       ],
       "normal_scores": [
-        null,
-        null
+        0,
+        0
       ],
       "physical_side_winners": [
-        null,
-        null
+        2,
+        1
       ],
-      "pattern": "unknown",
+      "pattern": "candidate_both_colors_loss",
       "game_ids": [
         "slot10-color1",
         "slot10-color2"
@@ -3572,13 +3572,212 @@
     },
     {
       "pair": 9,
-      "observed": 0,
-      "same_input_NN_supported": false
+      "observed": 2,
+      "same_input_NN_supported": true,
+      "identity_exact": true,
+      "engines": [
+        "candidate",
+        "reference"
+      ],
+      "firstCP": [
+        {
+          "sequence": 1,
+          "action": 68,
+          "begin_ms": 1790989511313.175,
+          "validation_end_ms": 1790989511313.3152,
+          "raw_simulations": 1,
+          "root_visits": null,
+          "completed_backup": 1,
+          "completed_NN": 1,
+          "depth": 0,
+          "cap": false,
+          "actual_owned_seed": 1979
+        },
+        {
+          "sequence": 1,
+          "action": 68,
+          "begin_ms": 1790989481343.775,
+          "validation_end_ms": 1790989481344.3,
+          "raw_simulations": 0,
+          "root_visits": 1,
+          "completed_backup": 1,
+          "completed_NN": 1,
+          "depth": null,
+          "cap": null,
+          "actual_owned_seed": 1979
+        }
+      ],
+      "adoptedCP": [
+        {
+          "sequence": 12,
+          "action": 68,
+          "begin_ms": 1790989511636.915,
+          "validation_end_ms": 1790989511637.03,
+          "raw_simulations": 12,
+          "root_visits": null,
+          "completed_backup": 12,
+          "completed_NN": 12,
+          "depth": 3,
+          "cap": false,
+          "actual_owned_seed": 1979
+        },
+        {
+          "sequence": 7,
+          "action": 68,
+          "begin_ms": 1790989481637.92,
+          "validation_end_ms": 1790989481638.085,
+          "raw_simulations": 6,
+          "root_visits": 7,
+          "completed_backup": 7,
+          "completed_NN": 7,
+          "depth": null,
+          "cap": null,
+          "actual_owned_seed": 1979
+        }
+      ],
+      "self_wait": [
+        {
+          "start_ms": 1790989511252.905,
+          "end_ms": 1790989511252.91,
+          "wait_ms": 0.0048828125
+        },
+        {
+          "start_ms": 1790989481247.22,
+          "end_ms": 1790989481247.2249,
+          "wait_ms": 0.0048828125
+        }
+      ],
+      "opposite_previous": [
+        {
+          "request_id": "gap149-group05-r1-67",
+          "public_ms": 1790989508935.035,
+          "ACK_known_at_next_input": true,
+          "ACK_ms": 1790989508928.77,
+          "observed_at_ms": 1790989511252.92,
+          "final_ACK_ms": 1790989508928.77,
+          "input_before_old_ACK": false,
+          "residual_overlap_wall_ms": 0
+        },
+        null
+      ],
+      "features_exact": true,
+      "NN_shape": [
+        137,
+        137
+      ],
+      "NN_bit_equal": true,
+      "NN_within_tolerance": true,
+      "max_abs_difference": 0.0,
+      "new_fixedgolden": false
     },
     {
       "pair": 10,
-      "observed": 0,
-      "same_input_NN_supported": false
+      "observed": 2,
+      "same_input_NN_supported": true,
+      "identity_exact": true,
+      "engines": [
+        "candidate",
+        "reference"
+      ],
+      "firstCP": [
+        {
+          "sequence": 1,
+          "action": 59,
+          "begin_ms": 1790989557484.59,
+          "validation_end_ms": 1790989557484.85,
+          "raw_simulations": 1,
+          "root_visits": null,
+          "completed_backup": 1,
+          "completed_NN": 1,
+          "depth": 0,
+          "cap": false,
+          "actual_owned_seed": 1979
+        },
+        {
+          "sequence": 1,
+          "action": 77,
+          "begin_ms": 1790989528672.26,
+          "validation_end_ms": 1790989528672.63,
+          "raw_simulations": 0,
+          "root_visits": 1,
+          "completed_backup": 1,
+          "completed_NN": 1,
+          "depth": null,
+          "cap": null,
+          "actual_owned_seed": 1979
+        }
+      ],
+      "adoptedCP": [
+        {
+          "sequence": 9,
+          "action": 59,
+          "begin_ms": 1790989557830.4502,
+          "validation_end_ms": 1790989557830.5552,
+          "raw_simulations": 9,
+          "root_visits": null,
+          "completed_backup": 9,
+          "completed_NN": 9,
+          "depth": 5,
+          "cap": false,
+          "actual_owned_seed": 1979
+        },
+        {
+          "sequence": 14,
+          "action": 59,
+          "begin_ms": 1790989529031.71,
+          "validation_end_ms": 1790989529031.83,
+          "raw_simulations": 13,
+          "root_visits": 14,
+          "completed_backup": 14,
+          "completed_NN": 14,
+          "depth": null,
+          "cap": null,
+          "actual_owned_seed": 1979
+        }
+      ],
+      "self_wait": [
+        {
+          "start_ms": 1790989557439.275,
+          "end_ms": 1790989557439.28,
+          "wait_ms": 0.005126953125
+        },
+        {
+          "start_ms": 1790989528633.16,
+          "end_ms": 1790989528633.165,
+          "wait_ms": 0.005126953125
+        }
+      ],
+      "opposite_previous": [
+        {
+          "request_id": "gap149-group05-r1-173",
+          "public_ms": 1790989555472.21,
+          "ACK_known_at_next_input": true,
+          "ACK_ms": 1790989555468.105,
+          "observed_at_ms": 1790989557439.285,
+          "final_ACK_ms": 1790989555468.105,
+          "input_before_old_ACK": false,
+          "residual_overlap_wall_ms": 0
+        },
+        {
+          "request_id": "gap149-group05-r1-107",
+          "public_ms": 1790989527346.06,
+          "ACK_known_at_next_input": true,
+          "ACK_ms": 1790989527345.46,
+          "observed_at_ms": 1790989528633.165,
+          "final_ACK_ms": 1790989527345.46,
+          "input_before_old_ACK": false,
+          "residual_overlap_wall_ms": 0
+        }
+      ],
+      "features_exact": true,
+      "NN_shape": [
+        137,
+        137
+      ],
+      "NN_bit_equal": true,
+      "NN_within_tolerance": true,
+      "max_abs_difference": 0.0,
+      "new_fixedgolden": false
     },
     {
       "pair": 11,
@@ -3693,74 +3892,74 @@
   ],
   "engine_cost": {
     "candidate": {
-      "requests": 362,
-      "hand_API_started": 3284,
-      "hand_API_returned": 3284,
-      "saved_API_events": 3284,
-      "old_return_discarded": 199,
+      "requests": 473,
+      "hand_API_started": 4265,
+      "hand_API_returned": 4265,
+      "saved_API_events": 4265,
+      "old_return_discarded": 253,
       "adopted_backup": {
-        "n": 362,
+        "n": 473,
         "min": 4,
-        "median": 8.0,
+        "median": 8,
         "max": 66,
-        "sum": 3246
+        "sum": 4225
       },
       "adopted_NN": {
-        "n": 362,
+        "n": 473,
         "min": 1,
-        "median": 8.0,
+        "median": 8,
         "max": 13,
-        "sum": 2987
+        "sum": 3877
       },
       "firstCP_backup": {
-        "n": 362,
+        "n": 473,
         "min": 1,
-        "median": 1.0,
+        "median": 1,
         "max": 1,
-        "sum": 362
+        "sum": 473
       },
       "public_wall_ms": {
-        "n": 362,
+        "n": 473,
         "min": 410.264892578125,
-        "median": 412.66015625,
+        "median": 412.659912109375,
         "max": 421.580078125,
-        "sum": 149432.58471679688
+        "sum": 195246.47973632812
       },
       "API_await_ms": {
-        "n": 3284,
+        "n": 4265,
         "min": 12.065185546875,
-        "median": 34.125,
-        "max": 135.925048828125,
-        "sum": 111316.35400390625
+        "median": 34.199951171875,
+        "max": 144.719970703125,
+        "sum": 145106.64501953125
       },
       "self_wait_ms": {
-        "n": 362,
+        "n": 473,
         "min": 0,
-        "median": 0.0,
+        "median": 0,
         "max": 0.010009765625,
-        "sum": 0.52099609375
+        "sum": 0.70166015625
       },
       "ACK_wall_ms": {
-        "n": 362,
+        "n": 473,
         "min": 402.2900390625,
-        "median": 423.95751953125,
-        "max": 468.93505859375,
-        "sum": 153972.2802734375
+        "median": 423.89501953125,
+        "max": 475.455078125,
+        "sum": 201287.63427734375
       },
       "residual_overlap_wall_ms": {
-        "n": 361,
+        "n": 472,
         "min": 0,
-        "median": 11.364990234375,
+        "median": 10.4998779296875,
         "max": 123.81005859375,
-        "sum": 5522.068359375
+        "sum": 6686.516845703125
       },
       "terminal_noNN_direct_count": null,
       "completed_without_NN_derived": {
-        "n": 362,
+        "n": 473,
         "min": 0,
-        "median": 0.0,
+        "median": 0,
         "max": 65,
-        "sum": 259
+        "sum": 348
       },
       "terminal_caps_deep_states_not_separated": true,
       "CPU_kernel_NN_time_not_measured": true,
@@ -3768,74 +3967,74 @@
       "public_immutable_all": true
     },
     "reference": {
-      "requests": 367,
-      "hand_API_started": 3841,
-      "hand_API_returned": 3841,
-      "saved_API_events": 3841,
-      "old_return_discarded": 205,
+      "requests": 479,
+      "hand_API_started": 5002,
+      "hand_API_returned": 5002,
+      "saved_API_events": 5002,
+      "old_return_discarded": 254,
       "adopted_backup": {
-        "n": 367,
+        "n": 479,
         "min": 7,
         "median": 9,
         "max": 77,
-        "sum": 4597
+        "sum": 6058
       },
       "adopted_NN": {
-        "n": 367,
+        "n": 479,
         "min": 1,
         "median": 9,
         "max": 16,
-        "sum": 3547
+        "sum": 4622
       },
       "firstCP_backup": {
-        "n": 367,
+        "n": 479,
         "min": 1,
         "median": 1,
         "max": 1,
-        "sum": 367
+        "sum": 479
       },
       "public_wall_ms": {
-        "n": 367,
+        "n": 479,
         "min": 410.315185546875,
         "median": 412.655029296875,
         "max": 421.6650390625,
-        "sum": 151510.30078125
+        "sum": 197749.20922851562
       },
       "API_await_ms": {
-        "n": 3841,
+        "n": 5002,
         "min": 12.155029296875,
-        "median": 34.35986328125,
+        "median": 34.2674560546875,
         "max": 131.405029296875,
-        "sum": 131566.5107421875
+        "sum": 170725.96606445312
       },
       "self_wait_ms": {
-        "n": 367,
+        "n": 479,
         "min": 0,
         "median": 0,
         "max": 0.030029296875,
-        "sum": 0.5146484375
+        "sum": 0.689697265625
       },
       "ACK_wall_ms": {
-        "n": 367,
-        "min": 402.39013671875,
-        "median": 423.824951171875,
+        "n": 479,
+        "min": 402.169921875,
+        "median": 423.02001953125,
         "max": 536.2900390625,
-        "sum": 156385.8291015625
+        "sum": 203559.1923828125
       },
       "residual_overlap_wall_ms": {
-        "n": 365,
+        "n": 476,
         "min": 0,
-        "median": 10.9150390625,
-        "max": 58.47509765625,
-        "sum": 5081.124755859375
+        "median": 10.847412109375,
+        "max": 62.050048828125,
+        "sum": 6757.11376953125
       },
       "terminal_noNN_direct_count": null,
       "completed_without_NN_derived": {
-        "n": 367,
+        "n": 479,
         "min": 0,
         "median": 0,
         "max": 76,
-        "sum": 1050
+        "sum": 1436
       },
       "terminal_caps_deep_states_not_separated": true,
       "CPU_kernel_NN_time_not_measured": true,
@@ -3843,8 +4042,8 @@
       "public_immutable_all": true
     }
   },
-  "startup_NN": 24,
-  "sessions": 8,
+  "startup_NN": 30,
+  "sessions": 10,
   "jobs": [
     {
       "run": "gap149-group01-r1",
@@ -3877,6 +4076,14 @@
       "publics": 263,
       "primary": null,
       "secondary": []
+    },
+    {
+      "run": "gap149-group05-r1",
+      "startup_NN": 6,
+      "started_games": 4,
+      "publics": 223,
+      "primary": null,
+      "secondary": []
     }
   ],
   "raw_bindings": [
@@ -3903,6 +4110,12 @@
       "archive_SHA256": "a2c0e8d4feacef57e563b05d4ba2e7474058b9e5dbc1453432e1bc2279de9df9",
       "member": "runs/gap149-group04-r1/browser-result.json",
       "member_SHA256": "c3a93435aa61861c1aad8ac1ae398d21d089d6b35b06e3458dbcaf6bcaf69fc7"
+    },
+    {
+      "run": "gap149-group05-r1",
+      "archive_SHA256": "4e86be1dc2f3c477e795d5c59282c9b669d0274a966ab84efa1e222c80c9dbe3",
+      "member": "runs/gap149-group05-r1/browser-result.json",
+      "member_SHA256": "c9527bcb72755a65cd7b9818333e72698d87b0c9019524314ebe157de66406d7"
     }
   ],
   "old_WDL_mixed": false,
