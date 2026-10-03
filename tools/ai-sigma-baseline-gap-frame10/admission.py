@@ -49,8 +49,11 @@ def admit(c,out,tool,runs):
   if old['kind']!='ai' or not old.get('games'):continue
   result=runs/old['run_id']/'browser-result.json'
   if not result.exists():result=result.with_name('partial-browser-result.json')
-  assert result.exists(),'OLD_ATTEMPT_COUNT_UNKNOWN'
-  d=json.loads(result.read_text());starts+=d['started_games'];started_ids.extend(g['id'] for g in d['games'])
+  if result.exists():d=json.loads(result.read_text())
+  else:
+   count=runs/(old['run_id']+'.game-count.json');assert count.exists(),'OLD_ATTEMPT_COUNT_UNKNOWN'
+   d=json.loads(count.read_text());archive=Path(d['archive']);assert hashlib.sha256(archive.read_bytes()).hexdigest()==d['archive_SHA256'],'ARCHIVED_ATTEMPT_CHANGED'
+  starts+=d['started_games'];started_ids.extend(g['id'] for g in d['games'])
  assert starts+len(c.get('games',[]))<=64,'GAME_START_CAP'
  assert not set(started_ids).intersection(g['id'] for g in c.get('games',[])),'SUCCESS_OR_STARTED_GAME_REPLACEMENT'
  current=0;seen=set()
