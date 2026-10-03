@@ -1,0 +1,35 @@
+{
+  "UTC": "2026-10-03T07:16:04.495519+00:00",
+  "issue": "quoridor-4lc.173",
+  "decision": "ADOPT_NEW_FUTURE_EPOCH2",
+  "basis": "NN0 continuation first accepted proposals348/408, no old WDL read or selection",
+  "generation": {
+    "fresh_entropy_domain": "NATIVE173_EPOCH2_OPENING_V1",
+    "fixed_target_once_uniform": [
+      12,
+      13,
+      24,
+      25,
+      36,
+      37,
+      48,
+      49
+    ],
+    "max_proposals": 4096,
+    "lazy_per_registered_block": true,
+    "empty_category": "Reject proposal when either legal pawn or wall category is empty, exactly as original generator; no redraw to different category. Actual proposal-generator conditional distribution is the estimand; do not claim representative opening distribution.",
+    "old_started_signature_reuse": "whole registered six quality unknown; stop before new games",
+    "cap_failure": "PLAN_GENERATION_UNSETTLED; registered six unknown; stop, no replacements"
+  },
+  "controls": {
+    "read_timeout_seconds": 10,
+    "bounded_retry": "at most one transport/schema retry; first failure immediately stops all arenas and new searches; retry cannot restore lost formal qualification",
+    "required_cheap_check": "callback connected, false/unknown/pause means nextNN0; original fault retained",
+    "GPU_overlap": false
+  },
+  "statistical_rules_unchanged": "af2ed3fd exact Eplus/Eminus threshold20, conditional stationarity assumptions and quality unknown handling retained; epoch1 wealth and all attempts separate",
+  "resources": "CPU2/4/6 RAM4.5GiB guard4; cumulative heavy3600s and NN2m deduct epoch1; science07:55 process08:00 submit08:10 unchanged",
+  "preregister_cleanup": "Freeze new entropy/seed manifest and actual source before epoch2 science. Old 497-generated/old manifest hash/ready timestamp in copied e2 draft are epoch1 provenance only; label them explicitly, not e2 readiness. No need to generate all600 legal inputs upfront.",
+  "current_GPU": "174 model job stopped07:05:48; finite model parity/cost evidence received, do not change CPU formal backend",
+  "goal_achieved": false
+}
