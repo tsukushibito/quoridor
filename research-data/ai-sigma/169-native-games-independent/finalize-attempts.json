@@ -1,0 +1,60 @@
+[
+  {
+    "command": [
+      "bash",
+      "scripts/dev/beads.sh",
+      "ready",
+      "--json"
+    ],
+    "UTC": "2026-10-03T05:48:08.583642+00:00",
+    "elapsed_seconds": 0.5041101179958787,
+    "exit": 0,
+    "stdout_bytes": 3,
+    "stdout_SHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/dev/beads.sh",
+      "show",
+      "quoridor-4lc",
+      "--json"
+    ],
+    "UTC": "2026-10-03T05:48:09.344941+00:00",
+    "elapsed_seconds": 0.7610600049956702,
+    "exit": 0,
+    "stdout_bytes": 225436,
+    "stdout_SHA256": "79080beeb9367f885822afd58d63b28535703b93c9a8e4aa443baaf0cd102505",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "bash",
+      "scripts/dev/beads.sh",
+      "show",
+      "quoridor-4lc.169",
+      "--json"
+    ],
+    "UTC": "2026-10-03T05:48:10.289451+00:00",
+    "elapsed_seconds": 0.9423327799886465,
+    "exit": 0,
+    "stdout_bytes": 226593,
+    "stdout_SHA256": "2869727aac56c10eda3b113671bf47601fc2c621dc49110ee1e6b75a5ce67f3f",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "read-tree",
+      "HEAD"
+    ],
+    "UTC": "2026-10-03T05:48:10.482690+00:00",
+    "elapsed_seconds": 0.19090212098672055,
+    "exit": 0,
+    "stdout_bytes": 0,
+    "stdout_SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr": "",
+    "stdout": ""
+  }
+]
