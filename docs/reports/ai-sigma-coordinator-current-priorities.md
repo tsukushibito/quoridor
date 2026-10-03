@@ -22,3 +22,5 @@ rootの151有限対局時計353.880秒/16、平均22.1175秒を費用の参考�
 158速報：600pairは真平均.5で通過境界を満たす数で、高power保証ではない（IID Bernoulli pair例power約.51628）。これと分布自由95%power十分n2397/真平均.55のm600 power下限約.95043を最終保存に基づき区別する。現在正式clock/残CPU/mode不足は未解決、正式run0。159本人claim開始03:06:15と160本人claim開始03:06:45を確認、各成果は統括へ報告待ち。
 
 2026-10-03T03:28:47.483868+00:00：158の5pp/片側95%/固定600pair第一統計案・未知全予定/固定停止/条件付きopening proposalを採用。sampler実生成/clock実効費/並列mode/正式版manifestは未成立なので正式WDL保留。600pairは高power保証でない。160の5diagnostic export/validatorを有限受入れ。後続quoridor-4lc.161既criticは残費/clockの最小方式と任意NN0 worker/TID直接binding、quoridor-4lc.162既hypothesisは20step単CPUの小PV loss/backward/checkpoint/既依存ONNX parityを部分採用し実配分。どちらも159全heavy物理回収後だけCPU重いjobを開始、合計4logical/8GiB。新selfplay/本PV学習/arena/NNUE主実装は今追加0。CPUsmokeはtrainer/変換不足を総120秒で見分ける準備、teacherfitを棋力にしない。正式1200run未開始/終了延長0。
+
+2026-10-03T03:43:38.631705+00:00：159登録60のfinite sameinput測定を受入れ。4並列RSS6.096GB/参考batch係数3.814は実施可能性の限定根拠でWDL速度/正式採用でない。solo2 control不足と残CPU/arenaRSS欠測保持。161暫定same-core固定cycleを採用候補としてquoridor-4lc.163既experimentにstaticmock→2input12検索の実確認を配分。前cycleD以降に次t0、main自身のCP read/admit、旧NN停止を原因側cycle内へ記録する別mode。失敗/不明はtyped保存し正式readyにしない。162CPU toyと資源分離、NNUE主実装/1200正式run0。
