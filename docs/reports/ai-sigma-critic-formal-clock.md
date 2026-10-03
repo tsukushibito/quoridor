@@ -60,3 +60,11 @@ modeの採用は上の費用と159の非対称management修復を踏まえ正式
 保存管理r1は、RSS512MiBを仮想アドレス空間RLIMIT_AS512MiBへ誤って置き換えたため、最初のBeads readyのGo runtimeがpage summary予約に失敗した。管理失敗の実stderrを保持し、科学mock成功とは別に記録した。r2はAS制限を継承せず、自己管理子familyのcurrent RSSを448MiB guardで有界pollする方式へ修正する。共有host/server/保存セッション設定の変更ではない。poll間の瞬間RSS peak保証はしない。
 
 統計は158のmargin5pp/片側95%/固定600pair候補を継承し、μ=.5高power保証はない。開始分布案の実生成/受理率/感度、new adapter実証、正式版manifest、並列modeが未解決なので、今回も正式readyfalse。NNUE最終目標は維持し、本文の方式を教師・評価基盤の次実証へ渡す。必要停止/Git復元/backup記録を保存しcoordinator受入れへ提出する。goal/他者close、正式NI、最高棋力認定は行わない。
+
+## 163への採否補足（結果前、active配送を反映）
+
+03:47 UTCのactive補足Git `fd1066d33ad3459a3176260354ecaa3c0a9f5828` と現163契約を必要範囲で確認した。163は **D=t0+500msまでに旧search停止/activeNN0のACKをmainが受信**し、次actualt0を前D以降の固定時刻に始める条件である。本報告の暫定1,000ms案はACKを次cycle前まで許すため、重大な受入条件差がある。mockのtailACK=547.3msは1,000ms案ではpassだが、163のD500ではCLOCK_UNSETTLEDになる。14passを163のD500要件のpassへ読み替えない。
+
+163のより厳しいD500条件を別modeの結果前条件として支持する。Dまでのquiescenceが未成立なら次NN開始0/未知として終え、成功補充・無期限ACK待ち・cycleを1,000msへ黙って延長することはしない。151保存にACK>500の例がある点はリスクの根拠だが、163の固定2入力12要求が必ず不成立になるという予測ではない。原151/159を違反・敗北に付替えない。
+
+本selector/schemaは1,000ms提案の境界prototypeであり、163 ownerへD500の独立source/clock欄を使うよう差を通知する。相互承認や161全文を163開始gateにしない。1,000ms案の費用表は163のcycle費用ではない。main read/admit<402、public<500、旧ACKmain receipt≤D、次actualt0≥前Dの各証拠を分け、未解消のkernelCPU/provider終了範囲/途中drift/modeはformal_readyfalseのまま保持する。Chrome未使用枠は使用せず、CPU0静的512のみとする。
