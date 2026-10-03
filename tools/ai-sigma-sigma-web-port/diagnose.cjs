@@ -8,7 +8,7 @@ async function main(){
  const monitor=require('../ai-sigma-actual-boundary-repair/pause-check.cjs').createMonitor({out:dir,subjectIssue:'quoridor-4lc.151',deadlineUTC:config.processing_deadline,windowEndUTC:'2026-10-03T04:15:21Z'});let browser=null,primary=null,secondary=[],startup=null,result=null,timer=null,busy=false,promise=null;
  try{
   await monitor.start();monitor.check();browser=await require('./browser.cjs').open(dir,config);
-  save('config',config);save('preflight',await browser.page.evaluate(()=>browserPreflight()));save('rules-mock',await browser.page.evaluate(()=>browserRulesMock()));save('routing-mock',await browser.page.evaluate(()=>portMock()));
+  save('config',config);save('preflight',await browser.page.evaluate(()=>browserPreflight()));save('rules-mock',await browser.page.evaluate(()=>browserRulesMock()));save('routing-mock',await browser.page.evaluate(({config,fixtures})=>portMock(config,fixtures),{config,fixtures}));
   if(config.generate_only){const plan=JSON.parse(fs.readFileSync(config.seed_table));save('generated-prefixes',await browser.page.evaluate(plan=>portGenerate(plan),plan));}
   else{
    const binary=fs.readFileSync(OUT+'/build/faithful.wasm');if(crypto.createHash('sha256').update(binary).digest('hex')!==config.binary_SHA256)throw Error('SERVED_BINARY_BINDING');

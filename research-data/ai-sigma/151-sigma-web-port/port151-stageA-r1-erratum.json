@@ -1,0 +1,15 @@
+{
+  "issue": "quoridor-4lc.151",
+  "corrects": "port151-stageA-r1-analysis.json",
+  "old_bytes_preserved": true,
+  "old_analysis_SHA256": "b73ef2a0da57c35aa831bfa990e0a414480d962e1b9a20bc3ec51a0d52975852",
+  "old_first_discrete_difference_field": "root_ledger was a numerical mismatch, not a discrete path result",
+  "first_ledger_numeric_difference": {
+    "source_f32_as_f64": 0.21437489986419678,
+    "decoded": 0.2143748998641968
+  },
+  "r1_actual_paths_visits_Actions_equal": true,
+  "r1_faithful_numeric_ledger_not_supported": true,
+  "r2_is_new_repaired_source_run_not_replacement": true,
+  "NN_loss_or_game_loss": false
+}

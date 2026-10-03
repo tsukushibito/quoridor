@@ -7,7 +7,8 @@ function script(name){
  let s=base.script(name);
  // Wire identity now states the private refusal guards; shared originals remain read-only.
  s=s.replace(/max_nodes:512/g,'max_nodes:200000').replace(/max_depth:24/g,'max_depth:200').replace(/max_nodes!==512/g,'max_nodes!==200000').replace(/max_depth!==24/g,'max_depth!==200');
- if(name==='main')s=s.replace("max_nodes:spec.engine==='reference'?null:512","max_nodes:spec.engine==='reference'?null:200000").replace("max_depth:spec.engine==='reference'?null:24","max_depth:spec.engine==='reference'?null:200")+'\n'+fs.readFileSync(__dirname+'/port-main.js','utf8');
+ s=s.replace(/max_nodes:ref\?null:512/g,'max_nodes:ref?null:200000').replace(/max_depth:ref\?null:24/g,'max_depth:ref?null:200').replace(/c.nodes>512/g,'c.nodes>200000').replace(/c.max_depth>24/g,'c.max_depth>200');
+ if(name==='main')s=s.replace("simulations:spec.engine==='reference'?100000:4096",'simulations:100000').replace("max_nodes:spec.engine==='reference'?null:512","max_nodes:spec.engine==='reference'?null:200000").replace("max_depth:spec.engine==='reference'?null:24","max_depth:spec.engine==='reference'?null:200")+'\n'+fs.readFileSync(__dirname+'/port-main.js','utf8');
  return s;
 }
 function bindings(){return {policy:'faithful fixed Sigma-Web f64 bundle; research CP/SAB/clock/strictfault adapter distinct',old_base_readonly:base.bindings(),local:Object.fromEntries(['adapters.cjs','port-worker.js','port-main.js'].map(n=>[n,crypto.createHash('sha256').update(fs.readFileSync(__dirname+'/'+n)).digest('hex')])),served:Object.fromEntries(['main','worker','producer','checkpoint','cache','reference'].map(n=>[n,crypto.createHash('sha256').update(script(n)).digest('hex')]))};}
