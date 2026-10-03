@@ -2,6 +2,7 @@ import os,sys,json,time,signal,subprocess,datetime,resource,ctypes,hashlib,re
 from pathlib import Path
 TOOL=Path(__file__).resolve().parent
 OUT=TOOL.parents[1]/'.artifacts/ai-sigma/resume-20261003/NNUE-FEATURE-COST/runs'
+OUT.mkdir(parents=True,exist_ok=True)
 assert sys.argv[1]=='--config','CONFIG_REQUIRED'
 CONFIG_PATH=Path(sys.argv[2]).resolve();CONFIG=json.loads(CONFIG_PATH.read_text())
 assert CONFIG['issue']=='quoridor-4lc.156' and CONFIG['frame']==10,'FRAME151_BINDING'

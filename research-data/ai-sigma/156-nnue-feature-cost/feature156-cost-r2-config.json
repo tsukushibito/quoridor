@@ -1,0 +1,49 @@
+{
+  "issue": "quoridor-4lc.156",
+  "receipt": {
+    "issue": "quoridor-4lc.156",
+    "received_observed_UTC": "2026-10-03T02:20:06.755129+00:00",
+    "original_receipt_clock_not_reset_after151_helpers": true,
+    "new_task_not_claimed_or_implemented_yet": true
+  },
+  "processing_deadline": "2026-10-03T03:05:06.755129+00:00",
+  "newjob_deadline": "2026-10-03T03:00:06.755129+00:00",
+  "submission_deadline": "2026-10-03T03:20:06.755129+00:00",
+  "inputs": [
+    "initial-p1",
+    "asym-hv-p2",
+    "frame10-prefix-13",
+    "frame10-prefix-14"
+  ],
+  "actions": "original legal order first8 pawn then first8 wall; missing stays missing",
+  "correctness": 1,
+  "warm": 1,
+  "repeat": 64,
+  "timing_repetitions": 1,
+  "orders": [
+    "AB",
+    "BA",
+    "AB",
+    "BA"
+  ],
+  "cache_capacity_pairs": 32,
+  "map_key": "wall H/V segments + goalrows0/8 + RuleA SHA + geometry9",
+  "noNN_build_game_training": true,
+  "source_bindings": {
+    "tools/ai-sigma-nnue-feature-cost/game.js": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+    "tools/ai-sigma-nnue-feature-cost/context.js": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c"
+  },
+  "original_stageA_input_SHA256": "dc205f8d7e00ee52aca51845ddbca5e3085d0aebdb22c3f4ceb6fa139cd10954",
+  "r2_raw_SHA256": "d37215cbc7914519ca24ab254c5e413d21e780389094faed537280a059c234d2",
+  "teacher_schema": {
+    "leafNN": "ownside float32 NN output + source/input/history/budget",
+    "rootmean": "ownside node ledger + completed budget; distinct leafNN",
+    "game": "winner/draw and forced perspective; no missing outcome inference",
+    "new_teacher": 0
+  },
+  "kind": "browser",
+  "frame": 10,
+  "run_id": "feature156-cost-r2",
+  "pin_owned_TIDs": true,
+  "forecast_bytes": 12582912
+}
