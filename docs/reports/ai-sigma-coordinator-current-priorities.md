@@ -6,11 +6,11 @@
 
 | 優先 | 問い・到達点 | 配分と完了条件 | 次判断 |
 | --- | --- | --- | --- |
-| 主1 | 最小native忠実Sigma基準と同時間対局が動くか、総費はいくらか | 165既experiment。151 Rust探索＋固定Web751186のnative-hosted参照＋同ONNX/既CPU provider、私有build→5入力sameK32→条件付き新8pair16診断。build120s/機構180s/対局1800s、新64MiB既枠内 | 同K有限対応とsamewall費/結果を分けて受入れ、native正式設計・教師生成へ。障害なら最小route修復。formal1200/Wasm再検証の義務0 |
-| 並行小調査 | CPU/native輸送と既GPU providerの実行可能性/費用の選択 | 164既hypothesis。新NN/GPU/学習0、静的60s/128KiB、10分速報。既依存とsourceから最大1経路 | CPU first優先。GPUは必要な単局面/batch実測を後続配分、GPU対応を文字列だけで認定0 |
-| 必要独立視点 | native参照・時計・局面/標本が主問いを満たすか | 166既critic。静的90s/新2MiB、10分速報。実装開始gate0 | 重大scope差を結果前修正、少数診断をNIにしない。正式比較の新native条件を後続固定 |
-| 学習準備 | 実対局π/z/rootmean→lineage group→本PV学習→独立arena | 162で小CPU toy 20step/weights-only checkpoint/ONNX5行parityが実成立。現在は5診断の4train/1validationのみ | native基準のπ/z出力を小schemaへ接続する次配分。full selfplay/学習規模/実PV構造/独立holdout未整備、GPU学習追加0 |
-| NNUE/方策 | 前段の基準・教師・費用からNNUE＋αβ/方策順序を選ぶ | 156予備コスト終了、主NNUE実装拡大0。方策head候補は正本登録済み | 総探索費と棋力を比較できる段階で別配分、toy損失やcache速度を棋力へ置換0 |
+| 枠末受入れ | 忠実native基準の同時間棋力を識別できたか | 173新epoch33block/198局95勝103敗、175独立保存裁定。両exact閾値20未達、停止・必要保存を受入れ | 結論は不確か、Sigma NI未達。旧epoch/未知/未登録1002を分け、同NI自動反復0 |
+| 次枠主候補 | 新学習lineageのnative教師を学習器へ接続できるか | 新たな少数自己対局、π/rootNN/rootmean/z/視点/lineageを既schemaへ。formalholdout198行は使用0。次の許可枠で契約・数量・費用を固定、現在実行0 | 有効教師行/job時間、group splitと学習/ONNX/独立arena接続で自前PV準備へ。初期Sigma同等未認定を明記 |
+| 効率候補 | GPU応答利益がnative総費へ残るか | 174固定5input parityとwarm/steady費受入れ、CUDA応答2.10ms/CPUORT3.57ms、cold614ms。native IPC/探索への寄与未測 | 教師経路候補として保持、GPU接続診断を自動追加せず主CPU版維持 |
+| NNUE/方策 | 前段の基準・教師・総費からNNUE＋αβ/方策順序を選ぶ | 156予備コスト終了、313等は案、NNUE主実装/学習は未着手 | 自前PV完成を軽い調査の恒久gateにしないが、全面移行0。棋力と総探索費で後続を選ぶ |
+| 終了責任 | 現枠の研究・運用を停止保存できたか | 新heavy08:05:21で停止、173/175source/子停止・受入れ。92はstewardが監督08:10:21/monitor08:13:21/証拠08:15:21を保持 | 92有限停止根拠を受入れ、親goalは未達のまま。自動次枠0 |
 
 同等の実用定義は5pp非劣性/片側95%という旧158案を保存し、browser m600/1200gameや旧rawを遡及変更しない。旧式L=max(0,mean−sqrt(log20/(2m)))>.45、m600でmean.5を通すが高power保証はない（例示Bernoulli pair power約.51628、分布自由95%power十分m2397）。計画成立、実測不足保留、非劣性支持、劣性支持、不確かを区別する。新native版の参照・モデル/backend・時計/資源・独立開始分布/抽出仮定・fault全分母・固定m/停止を正式データ前に別固定し、今回16診断や教師へ正式holdoutを流用しない。native結果をbrowser NI達成へ読み替えない。
 
@@ -61,3 +61,5 @@
 
 07:55節目:173 epoch2は事前規則SCIENCE_DEADLINE_HEADROOMで07:50:17に科学停止、33block/99pair/198game/95勝103敗・mean.47979798、NIwealth約1.88506/負方向約.43848で両閾値20未達、結論は不確か。全owner回収/537460NN返却/8268公開手は本人有限根拠、保存引渡し・独立裁定は別。残1002gameは未登録capacityでwealthへゼロ補完0、old6資格未知別。保存算術のみの175既criticへ120秒/2MiB/08:05処理08:10提出を配分し、33登録block品質分母・exact閾値・停止と必要clock集計を独立裁定、新NN/game0。173packをその全文待ちgateにしない。
 次枠の主候補は新しい学習用lineageで少数native自己対局→全手π/rootNN/rootmean/zと視点を保存→game単位split→本PV学習/ONNX/独立arena接続。今回173正式holdoutは転用0。NIを通すまで同計画を反復することやNNUE主実装全面移行は選ばない。初期Sigma同等は未認定のまま、教師・評価基準の機構対応と動作を使って軽い学習準備を進める例外の費用は次許可枠で設定する。現枠の追加NN/教師生成/学習/GPU接続は配分0、必要保存/裁定と92停止責任を優先。
+
+08:08最終受入れ:175独立保存NN0裁定470059ea/handoff38056ffの15必要Git/current・source子停止/backupを確認。33block/99pair/198GOAL95W103L、全33整数prefix未達、最終1.8850575878/.438479351で不確かを支持。8268公開CP actualend402/public500/nextquiescentとNN537460返却を有限対応、逸脱0でもclockprecision/CPUcycle/drift/定常conditionalmean/深部RuleA/allhost証明0。173最終70Git/pathとstop/archive/backup受領と合わせ、両個別課題をclose。親goal達成0、正式holdout学習0、研究次枠自動開始0。

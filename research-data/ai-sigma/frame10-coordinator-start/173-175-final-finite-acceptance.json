@@ -1,0 +1,140 @@
+{
+  "UTC": "2026-10-03T08:09:52.619916+00:00",
+  "issues": [
+    "quoridor-4lc.173",
+    "quoridor-4lc.175"
+  ],
+  "decision": "ACCEPT_STOPPED_INCONCLUSIVE_TASKS_CLOSE_INDIVIDUALS_ONLY",
+  "owner_Gits": [
+    "5a7ce76e100a8399dc53b73e9eb37607d9d1abf2",
+    "c2594a30ca6943e7f79db96bd2c87ecf5479f486"
+  ],
+  "critic_Gits": [
+    "470059eadd2a4d1a4e5bc827b9728eaef9da8127",
+    "38056ff118d5b51531081334c67231490cd4ee65"
+  ],
+  "owner_intake": "173-final-owner-intake.json",
+  "independent_Git_current_verified": 15,
+  "blocks_pairs_games": [
+    33,
+    99,
+    198
+  ],
+  "WDL": [
+    95,
+    0,
+    103
+  ],
+  "mean": 0.4797979797979798,
+  "wealth": [
+    1.8850575878116762,
+    0.43847935098694685
+  ],
+  "both_threshold_unreached": true,
+  "quality_unknown_registered": 0,
+  "future_unregistered_capacity": 1002,
+  "capacity_identification_interval": [
+    "19/240",
+    "1097/1200"
+  ],
+  "clock_correspondence": {
+    "public": 8268,
+    "errors": [],
+    "maxima": {
+      "receive_ms": {
+        "value": 401.99543499946594,
+        "game": "native173-e2-game-0185",
+        "generation": 2491,
+        "core": 6
+      },
+      "admit_ms": {
+        "value": 401.99864998459816,
+        "game": "native173-e2-game-0119",
+        "generation": 1540,
+        "core": 6
+      },
+      "firstCP_ms": {
+        "value": 120.74030300974846,
+        "game": "native173-e2-game-0014",
+        "generation": 207,
+        "core": 2
+      },
+      "public_actual_ms": {
+        "value": 420.9554470181465,
+        "game": "native173-e2-game-0008",
+        "generation": 100,
+        "core": 2
+      },
+      "cut_actual_ms": {
+        "value": 411.9989809989929,
+        "game": "native173-e2-game-0133",
+        "generation": 1829,
+        "core": 2
+      },
+      "cleanup_after_public_ms": {
+        "value": 14.666054993867874,
+        "game": "native173-e2-game-0163",
+        "generation": 2331,
+        "core": 2
+      },
+      "API_total_ms": {
+        "value": 357.2159490431659,
+        "game": "native173-e2-game-0093",
+        "generation": 1216,
+        "core": 4
+      },
+      "pipe_total_ms": {
+        "value": 411.98211708664894,
+        "game": "native173-e2-game-0151",
+        "generation": 2125,
+        "core": 2
+      },
+      "common_legal_preparation_ms": {
+        "value": 6.5788609981536865,
+        "game": "native173-e2-game-0057",
+        "generation": 786,
+        "core": 4
+      },
+      "previous_zero_to_t0_ms": {
+        "value": 44938.441655009985,
+        "game": "native173-e2-game-0105",
+        "generation": 1318,
+        "core": 4
+      }
+    },
+    "sums": {
+      "firstCP_ms": 185197.3866739869,
+      "public_actual_ms": 3396599.3158019483,
+      "cut_actual_ms": 3322193.5771076083,
+      "cleanup_after_public_ms": 1248.5459195673466,
+      "API_total_ms": 2372418.194860744,
+      "pipe_total_ms": 2819002.4308643937,
+      "common_legal_preparation_ms": 314.88906157016754,
+      "NN_calls": 537460,
+      "NN_returned": 537460,
+      "NN_discarded": 7271,
+      "terminal_noNN": 1484984,
+      "CP_received": 2015173,
+      "CP_admitted": 2008555,
+      "CP_late_discarded": 6618,
+      "CP_schema_rejected": 0,
+      "previous_zero_to_t0_ms": 1225912.1171075106
+    }
+  },
+  "old_epoch_separate": true,
+  "formal_holdout_training": false,
+  "independent_source_children_stopped": true,
+  "management_failures_retained": [
+    "175 preserve-r1/r2 failure logs and versions; successful source/results not rerun"
+  ],
+  "limits": [
+    "stationary conditional mean not proved",
+    "finite timestamps do not prove CPUcycle/drift/clockprecision",
+    "no deep independent RuleA replay/allhost guarantee",
+    "native fixedSigma-Web not browser or SigmaC++ equivalence"
+  ],
+  "goal_achieved": false,
+  "new_execution": 0,
+  "next_direction": "prospective distinct native learning-lineage teacher generation pi/rootmean/z -> learner; no automatic run/frame",
+  "ops92": "steward sole owner08:10:21/08:13:21/08:15:21 still pending"
+}
