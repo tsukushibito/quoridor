@@ -1,22 +1,23 @@
 {
   "issue": "quoridor-4lc.149",
-  "UTC": "2026-10-03T00:52:47.608374+00:00",
+  "UTC": "2026-10-03T00:57:27.696584+00:00",
   "planned_games": 64,
   "planned_pairs": 32,
-  "started_games": 0,
+  "started_games": 4,
   "possibly_started_result_missing": 4,
-  "assigned_attempted_games": 4,
+  "assigned_attempted_games": 8,
   "categories": {
+    "goal": 4,
     "outer_OOM_unknown_start_and_result": 4,
-    "unstarted": 60
+    "unstarted": 56
   },
   "operational_mean_interval": [
     0.0,
-    1.0
+    0.9375
   ],
   "terminal_quality_all64_interval": [
     0.0,
-    1.0
+    0.9375
   ],
   "reference_Hoeffding_eps": 0.24008069782998018,
   "operational_assumption_only_95_interval": [
@@ -29,8 +30,8 @@
   ],
   "interval_assumptions": "independent bounded32pairs added assumption; fixedPRNG/sharedstates/drift independence and coverage unproved; not64independent games",
   "complete_only_auxiliary": {
-    "m": 0,
-    "mean": null,
+    "m": 4,
+    "mean": 0.0,
     "selection_limit": "normal terminal subset; never replaces64"
   },
   "strata": {
@@ -49,11 +50,11 @@
       "planned_games": 16,
       "operational": [
         0.0,
-        1.0
+        0.875
       ],
       "terminal_quality": [
         0.0,
-        1.0
+        0.875
       ]
     },
     "12": {
@@ -71,11 +72,11 @@
       "planned_games": 16,
       "operational": [
         0.0,
-        1.0
+        0.875
       ],
       "terminal_quality": [
         0.0,
-        1.0
+        0.875
       ]
     }
   },
@@ -214,30 +215,30 @@
       "fixture_id": "frame10-prefix-3",
       "candidate_color": 1,
       "layer_ply": 13,
-      "run": null,
-      "status": "unstarted",
-      "category": "unstarted",
+      "run": "gap149-group02-r1",
+      "status": "terminal",
+      "category": "goal",
       "operational_interval": [
         0,
-        1
+        0
       ],
       "terminal_quality_interval": [
         0,
-        1
+        0
       ],
-      "normal_terminal_score": null,
-      "winner": null,
-      "reason": null,
-      "new_public_plies": 0,
-      "initial_prefix_length": null,
-      "total_ply": null,
-      "start_ms": null,
-      "end_ms": null,
-      "public_count": 0,
-      "hand_API_started": 0,
-      "hand_API_returned": 0,
-      "adopted_completed_backup": 0,
-      "adopted_NN": 0,
+      "normal_terminal_score": 0,
+      "winner": 2,
+      "reason": "goal",
+      "new_public_plies": 35,
+      "initial_prefix_length": 13,
+      "total_ply": 48,
+      "start_ms": 1790988783660.03,
+      "end_ms": 1790988798136.26,
+      "public_count": 35,
+      "hand_API_started": 346,
+      "hand_API_returned": 346,
+      "adopted_completed_backup": 359,
+      "adopted_NN": 317,
       "typed_flags": []
     },
     {
@@ -246,30 +247,30 @@
       "fixture_id": "frame10-prefix-3",
       "candidate_color": 2,
       "layer_ply": 13,
-      "run": null,
-      "status": "unstarted",
-      "category": "unstarted",
+      "run": "gap149-group02-r1",
+      "status": "terminal",
+      "category": "goal",
       "operational_interval": [
         0,
-        1
+        0
       ],
       "terminal_quality_interval": [
         0,
-        1
+        0
       ],
-      "normal_terminal_score": null,
-      "winner": null,
-      "reason": null,
-      "new_public_plies": 0,
-      "initial_prefix_length": null,
-      "total_ply": null,
-      "start_ms": null,
-      "end_ms": null,
-      "public_count": 0,
-      "hand_API_started": 0,
-      "hand_API_returned": 0,
-      "adopted_completed_backup": 0,
-      "adopted_NN": 0,
+      "normal_terminal_score": 0,
+      "winner": 1,
+      "reason": "goal",
+      "new_public_plies": 52,
+      "initial_prefix_length": 13,
+      "total_ply": 65,
+      "start_ms": 1790988799227.48,
+      "end_ms": 1790988820696.28,
+      "public_count": 52,
+      "hand_API_started": 520,
+      "hand_API_returned": 520,
+      "adopted_completed_backup": 644,
+      "adopted_NN": 477,
       "typed_flags": []
     },
     {
@@ -278,30 +279,30 @@
       "fixture_id": "frame10-prefix-4",
       "candidate_color": 1,
       "layer_ply": 5,
-      "run": null,
-      "status": "unstarted",
-      "category": "unstarted",
+      "run": "gap149-group02-r1",
+      "status": "terminal",
+      "category": "goal",
       "operational_interval": [
         0,
-        1
+        0
       ],
       "terminal_quality_interval": [
         0,
-        1
+        0
       ],
-      "normal_terminal_score": null,
-      "winner": null,
-      "reason": null,
-      "new_public_plies": 0,
-      "initial_prefix_length": null,
-      "total_ply": null,
-      "start_ms": null,
-      "end_ms": null,
-      "public_count": 0,
-      "hand_API_started": 0,
-      "hand_API_returned": 0,
-      "adopted_completed_backup": 0,
-      "adopted_NN": 0,
+      "normal_terminal_score": 0,
+      "winner": 2,
+      "reason": "goal",
+      "new_public_plies": 57,
+      "initial_prefix_length": 5,
+      "total_ply": 62,
+      "start_ms": 1790988822258.325,
+      "end_ms": 1790988845783.925,
+      "public_count": 57,
+      "hand_API_started": 566,
+      "hand_API_returned": 566,
+      "adopted_completed_backup": 586,
+      "adopted_NN": 520,
       "typed_flags": []
     },
     {
@@ -310,30 +311,30 @@
       "fixture_id": "frame10-prefix-4",
       "candidate_color": 2,
       "layer_ply": 5,
-      "run": null,
-      "status": "unstarted",
-      "category": "unstarted",
+      "run": "gap149-group02-r1",
+      "status": "terminal",
+      "category": "goal",
       "operational_interval": [
         0,
-        1
+        0
       ],
       "terminal_quality_interval": [
         0,
-        1
+        0
       ],
-      "normal_terminal_score": null,
-      "winner": null,
-      "reason": null,
-      "new_public_plies": 0,
-      "initial_prefix_length": null,
-      "total_ply": null,
-      "start_ms": null,
-      "end_ms": null,
-      "public_count": 0,
-      "hand_API_started": 0,
-      "hand_API_returned": 0,
-      "adopted_completed_backup": 0,
-      "adopted_NN": 0,
+      "normal_terminal_score": 0,
+      "winner": 1,
+      "reason": "goal",
+      "new_public_plies": 70,
+      "initial_prefix_length": 5,
+      "total_ply": 75,
+      "start_ms": 1790988847404.82,
+      "end_ms": 1790988876304.535,
+      "public_count": 70,
+      "hand_API_started": 678,
+      "hand_API_returned": 678,
+      "adopted_completed_backup": 787,
+      "adopted_NN": 627,
       "typed_flags": []
     },
     {
@@ -2185,21 +2186,21 @@
       "layer_ply": 13,
       "operational_Xi_interval": [
         0.0,
-        1.0
+        0.0
       ],
       "terminal_quality_Xi_interval": [
         0.0,
-        1.0
+        0.0
       ],
       "normal_scores": [
-        null,
-        null
+        0,
+        0
       ],
       "physical_side_winners": [
-        null,
-        null
+        2,
+        1
       ],
-      "pattern": "unknown",
+      "pattern": "candidate_both_colors_loss",
       "game_ids": [
         "slot03-color1",
         "slot03-color2"
@@ -2210,21 +2211,21 @@
       "layer_ply": 5,
       "operational_Xi_interval": [
         0.0,
-        1.0
+        0.0
       ],
       "terminal_quality_Xi_interval": [
         0.0,
-        1.0
+        0.0
       ],
       "normal_scores": [
-        null,
-        null
+        0,
+        0
       ],
       "physical_side_winners": [
-        null,
-        null
+        2,
+        1
       ],
-      "pattern": "unknown",
+      "pattern": "candidate_both_colors_loss",
       "game_ids": [
         "slot04-color1",
         "slot04-color2"
@@ -2944,13 +2945,212 @@
     },
     {
       "pair": 3,
-      "observed": 0,
-      "same_input_NN_supported": false
+      "observed": 2,
+      "same_input_NN_supported": true,
+      "identity_exact": true,
+      "engines": [
+        "candidate",
+        "reference"
+      ],
+      "firstCP": [
+        {
+          "sequence": 1,
+          "action": 58,
+          "begin_ms": 1790988799291.145,
+          "validation_end_ms": 1790988799291.365,
+          "raw_simulations": 1,
+          "root_visits": null,
+          "completed_backup": 1,
+          "completed_NN": 1,
+          "depth": 0,
+          "cap": false,
+          "actual_owned_seed": 1979
+        },
+        {
+          "sequence": 1,
+          "action": 76,
+          "begin_ms": 1790988783751.735,
+          "validation_end_ms": 1790988783752.4302,
+          "raw_simulations": 0,
+          "root_visits": 1,
+          "completed_backup": 1,
+          "completed_NN": 1,
+          "depth": null,
+          "cap": null,
+          "actual_owned_seed": 1979
+        }
+      ],
+      "adoptedCP": [
+        {
+          "sequence": 11,
+          "action": 58,
+          "begin_ms": 1790988799611.05,
+          "validation_end_ms": 1790988799611.17,
+          "raw_simulations": 11,
+          "root_visits": null,
+          "completed_backup": 11,
+          "completed_NN": 11,
+          "depth": 3,
+          "cap": false,
+          "actual_owned_seed": 1979
+        },
+        {
+          "sequence": 9,
+          "action": 58,
+          "begin_ms": 1790988784032.7952,
+          "validation_end_ms": 1790988784033.2002,
+          "raw_simulations": 8,
+          "root_visits": 9,
+          "completed_backup": 9,
+          "completed_NN": 9,
+          "depth": null,
+          "cap": null,
+          "actual_owned_seed": 1979
+        }
+      ],
+      "self_wait": [
+        {
+          "start_ms": 1790988799227.49,
+          "end_ms": 1790988799227.49,
+          "wait_ms": 0
+        },
+        {
+          "start_ms": 1790988783660.3699,
+          "end_ms": 1790988783660.38,
+          "wait_ms": 0.010009765625
+        }
+      ],
+      "opposite_previous": [
+        {
+          "request_id": "gap149-group02-r1-35",
+          "public_ms": 1790988798136.2048,
+          "ACK_known_at_next_input": true,
+          "ACK_ms": 1790988798145.7048,
+          "observed_at_ms": 1790988799227.4949,
+          "final_ACK_ms": 1790988798145.7048,
+          "input_before_old_ACK": false,
+          "residual_overlap_wall_ms": 0
+        },
+        null
+      ],
+      "features_exact": true,
+      "NN_shape": [
+        137,
+        137
+      ],
+      "NN_bit_equal": true,
+      "NN_within_tolerance": true,
+      "max_abs_difference": 0.0,
+      "new_fixedgolden": false
     },
     {
       "pair": 4,
-      "observed": 0,
-      "same_input_NN_supported": false
+      "observed": 2,
+      "same_input_NN_supported": true,
+      "identity_exact": true,
+      "engines": [
+        "candidate",
+        "reference"
+      ],
+      "firstCP": [
+        {
+          "sequence": 1,
+          "action": 68,
+          "begin_ms": 1790988847458.885,
+          "validation_end_ms": 1790988847458.98,
+          "raw_simulations": 1,
+          "root_visits": null,
+          "completed_backup": 1,
+          "completed_NN": 1,
+          "depth": 0,
+          "cap": false,
+          "actual_owned_seed": 1979
+        },
+        {
+          "sequence": 1,
+          "action": 68,
+          "begin_ms": 1790988822336.395,
+          "validation_end_ms": 1790988822336.625,
+          "raw_simulations": 0,
+          "root_visits": 1,
+          "completed_backup": 1,
+          "completed_NN": 1,
+          "depth": null,
+          "cap": null,
+          "actual_owned_seed": 1979
+        }
+      ],
+      "adoptedCP": [
+        {
+          "sequence": 8,
+          "action": 68,
+          "begin_ms": 1790988847784.84,
+          "validation_end_ms": 1790988847784.935,
+          "raw_simulations": 8,
+          "root_visits": null,
+          "completed_backup": 8,
+          "completed_NN": 8,
+          "depth": 3,
+          "cap": false,
+          "actual_owned_seed": 1979
+        },
+        {
+          "sequence": 12,
+          "action": 68,
+          "begin_ms": 1790988822623.7302,
+          "validation_end_ms": 1790988822623.86,
+          "raw_simulations": 11,
+          "root_visits": 12,
+          "completed_backup": 12,
+          "completed_NN": 12,
+          "depth": null,
+          "cap": null,
+          "actual_owned_seed": 1979
+        }
+      ],
+      "self_wait": [
+        {
+          "start_ms": 1790988847404.825,
+          "end_ms": 1790988847404.8298,
+          "wait_ms": 0.0048828125
+        },
+        {
+          "start_ms": 1790988822258.335,
+          "end_ms": 1790988822258.335,
+          "wait_ms": 0
+        }
+      ],
+      "opposite_previous": [
+        {
+          "request_id": "gap149-group02-r1-144",
+          "public_ms": 1790988845783.88,
+          "ACK_known_at_next_input": true,
+          "ACK_ms": 1790988845777.1199,
+          "observed_at_ms": 1790988847404.8298,
+          "final_ACK_ms": 1790988845777.1199,
+          "input_before_old_ACK": false,
+          "residual_overlap_wall_ms": 0
+        },
+        {
+          "request_id": "gap149-group02-r1-86",
+          "public_ms": 1790988820282.575,
+          "ACK_known_at_next_input": true,
+          "ACK_ms": 1790988820274.82,
+          "observed_at_ms": 1790988822258.3398,
+          "final_ACK_ms": 1790988820274.82,
+          "input_before_old_ACK": false,
+          "residual_overlap_wall_ms": 0
+        }
+      ],
+      "features_exact": true,
+      "NN_shape": [
+        137,
+        137
+      ],
+      "NN_bit_equal": true,
+      "NN_within_tolerance": true,
+      "max_abs_difference": 0.0,
+      "new_fixedgolden": false
     },
     {
       "pair": 5,
@@ -3095,74 +3295,74 @@
   ],
   "engine_cost": {
     "candidate": {
-      "requests": 0,
-      "hand_API_started": 0,
-      "hand_API_returned": 0,
-      "saved_API_events": 0,
-      "old_return_discarded": 0,
+      "requests": 106,
+      "hand_API_started": 979,
+      "hand_API_returned": 979,
+      "saved_API_events": 979,
+      "old_return_discarded": 46,
       "adopted_backup": {
-        "n": 0,
-        "min": null,
-        "median": null,
-        "max": null,
-        "sum": null
+        "n": 106,
+        "min": 5,
+        "median": 8.0,
+        "max": 54,
+        "sum": 985
       },
       "adopted_NN": {
-        "n": 0,
-        "min": null,
-        "median": null,
-        "max": null,
-        "sum": null
+        "n": 106,
+        "min": 3,
+        "median": 8.0,
+        "max": 13,
+        "sum": 894
       },
       "firstCP_backup": {
-        "n": 0,
-        "min": null,
-        "median": null,
-        "max": null,
-        "sum": null
+        "n": 106,
+        "min": 1,
+        "median": 1.0,
+        "max": 1,
+        "sum": 106
       },
       "public_wall_ms": {
-        "n": 0,
-        "min": null,
-        "median": null,
-        "max": null,
-        "sum": null
+        "n": 106,
+        "min": 410.35009765625,
+        "median": 412.630126953125,
+        "max": 421.580078125,
+        "sum": 43756.45166015625
       },
       "API_await_ms": {
-        "n": 0,
-        "min": null,
-        "median": null,
-        "max": null,
-        "sum": null
+        "n": 979,
+        "min": 12.18994140625,
+        "median": 33.945068359375,
+        "max": 129.130126953125,
+        "sum": 32710.966064453125
       },
       "self_wait_ms": {
-        "n": 0,
-        "min": null,
-        "median": null,
-        "max": null,
-        "sum": null
+        "n": 106,
+        "min": 0,
+        "median": 0.0,
+        "max": 0.005126953125,
+        "sum": 0.146240234375
       },
       "ACK_wall_ms": {
-        "n": 0,
-        "min": null,
-        "median": null,
-        "max": null,
-        "sum": null
+        "n": 106,
+        "min": 402.46484375,
+        "median": 418.2850341796875,
+        "max": 468.93505859375,
+        "sum": 44775.03173828125
       },
       "residual_overlap_wall_ms": {
-        "n": 0,
-        "min": null,
-        "median": null,
-        "max": null,
-        "sum": null
+        "n": 106,
+        "min": 0,
+        "median": 12.534912109375,
+        "max": 123.81005859375,
+        "sum": 1628.801025390625
       },
       "terminal_noNN_direct_count": null,
       "completed_without_NN_derived": {
-        "n": 0,
-        "min": null,
-        "median": null,
-        "max": null,
-        "sum": null
+        "n": 106,
+        "min": 0,
+        "median": 0.0,
+        "max": 51,
+        "sum": 91
       },
       "terminal_caps_deep_states_not_separated": true,
       "CPU_kernel_NN_time_not_measured": true,
@@ -3170,74 +3370,74 @@
       "public_immutable_all": true
     },
     "reference": {
-      "requests": 0,
-      "hand_API_started": 0,
-      "hand_API_returned": 0,
-      "saved_API_events": 0,
-      "old_return_discarded": 0,
+      "requests": 108,
+      "hand_API_started": 1131,
+      "hand_API_returned": 1131,
+      "saved_API_events": 1131,
+      "old_return_discarded": 60,
       "adopted_backup": {
-        "n": 0,
-        "min": null,
-        "median": null,
-        "max": null,
-        "sum": null
+        "n": 108,
+        "min": 7,
+        "median": 10.0,
+        "max": 77,
+        "sum": 1391
       },
       "adopted_NN": {
-        "n": 0,
-        "min": null,
-        "median": null,
-        "max": null,
-        "sum": null
+        "n": 108,
+        "min": 1,
+        "median": 9.0,
+        "max": 15,
+        "sum": 1047
       },
       "firstCP_backup": {
-        "n": 0,
-        "min": null,
-        "median": null,
-        "max": null,
-        "sum": null
+        "n": 108,
+        "min": 1,
+        "median": 1.0,
+        "max": 1,
+        "sum": 108
       },
       "public_wall_ms": {
-        "n": 0,
-        "min": null,
-        "median": null,
-        "max": null,
-        "sum": null
+        "n": 108,
+        "min": 410.41015625,
+        "median": 412.6075439453125,
+        "max": 421.6650390625,
+        "sum": 44586.110595703125
       },
       "API_await_ms": {
-        "n": 0,
-        "min": null,
-        "median": null,
-        "max": null,
-        "sum": null
+        "n": 1131,
+        "min": 12.155029296875,
+        "median": 34.574951171875,
+        "max": 131.150146484375,
+        "sum": 38875.682373046875
       },
       "self_wait_ms": {
-        "n": 0,
-        "min": null,
-        "median": null,
-        "max": null,
-        "sum": null
+        "n": 108,
+        "min": 0,
+        "median": 0.0,
+        "max": 0.02001953125,
+        "sum": 0.125732421875
       },
       "ACK_wall_ms": {
-        "n": 0,
-        "min": null,
-        "median": null,
-        "max": null,
-        "sum": null
+        "n": 108,
+        "min": 402.39501953125,
+        "median": 425.3125,
+        "max": 536.2900390625,
+        "sum": 46017.090087890625
       },
       "residual_overlap_wall_ms": {
-        "n": 0,
-        "min": null,
-        "median": null,
-        "max": null,
-        "sum": null
+        "n": 107,
+        "min": 0,
+        "median": 5.14501953125,
+        "max": 58.47509765625,
+        "sum": 1239.940185546875
       },
       "terminal_noNN_direct_count": null,
       "completed_without_NN_derived": {
-        "n": 0,
-        "min": null,
-        "median": null,
-        "max": null,
-        "sum": null
+        "n": 108,
+        "min": 0,
+        "median": 0.0,
+        "max": 76,
+        "sum": 344
       },
       "terminal_caps_deep_states_not_separated": true,
       "CPU_kernel_NN_time_not_measured": true,
@@ -3245,8 +3445,8 @@
       "public_immutable_all": true
     }
   },
-  "startup_NN": 6,
-  "sessions": 2,
+  "startup_NN": 12,
+  "sessions": 4,
   "jobs": [
     {
       "run": "gap149-group01-r1",
@@ -3255,6 +3455,14 @@
       "publics": 0,
       "primary": null,
       "secondary": null
+    },
+    {
+      "run": "gap149-group02-r1",
+      "startup_NN": 6,
+      "started_games": 4,
+      "publics": 214,
+      "primary": null,
+      "secondary": []
     }
   ],
   "raw_bindings": [
@@ -3263,6 +3471,12 @@
       "archive_SHA256": "f57accf77ef24caafd31f2a3ee2644089f77ca9a282c807202a45583deed5749",
       "member": "runs/gap149-group01-r1/failure-attempts.json",
       "member_SHA256": "f7b5c4dbcc9308a070e0f1f808b742c25cb6348d218de78efcaf3bbcf0ad3135"
+    },
+    {
+      "run": "gap149-group02-r1",
+      "archive_SHA256": "7680e7232cbd9ed54374a2fc4b1551e2a16efd4eb4f631c07e23d543b6255ef3",
+      "member": "runs/gap149-group02-r1/browser-result.json",
+      "member_SHA256": "90e547f6190b52a77266f408ce55753ef13e841a17a9a1d2eda4184fd63e1731"
     }
   ],
   "old_WDL_mixed": false,

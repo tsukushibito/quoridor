@@ -19,7 +19,9 @@ for man in sorted(data.glob('gap149-group*.manifest.json')):
   for g in r.get('games',[]):
    assert g['id'] not in observed,'STARTED_GAME_DUPLICATE'
    observed[g['id']]={'game':g,'run':m['run'],'postgame_helper_primary':summary.get('primary'),'postgame_helper_secondary':summary.get('secondary')}
-  for row in r.get('rows',[]):row['_run']=m['run'];requests.append(row)
+  for row in r.get('rows',[]):
+   first=row['spec'].get('turn')==0;diag=row.get('diagnostic') or {}
+   requests.append({'_run':m['run'],'spec':row['spec'],'identity':row['identity'] if first else {'request_id':row['identity']['request_id']},'response':row['response'],'diagnostic':{'numeric':diag.get('numeric',[]) if first else [],'control_final':diag.get('control_final',{}),'NN_control_events':diag.get('NN_control_events',[])},'firstCP':row.get('firstCP'),'adoptedCP':row.get('adoptedCP'),'own_previous_wait':row.get('own_previous_wait'),'opposite_previous':row.get('opposite_previous'),'ACK_wall_ms':row.get('ACK_wall_ms'),'postpublic_immutable':row.get('postpublic_immutable'),'post_public_NN_definite':row.get('post_public_NN_definite',0)})
   jobs.append({'run':m['run'],'startup_NN':summary.get('startup_NN',0) if sum_name else (6 if any(n.endswith('/startup.json') for n in names) else 0),'started_games':r.get('started_games',0),'publics':len(r.get('rows',[])),'primary':summary.get('primary'),'secondary':summary.get('secondary')})
 games=[]
 for plan in pr['planned_games']:
