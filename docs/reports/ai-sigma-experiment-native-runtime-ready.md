@@ -32,3 +32,5 @@ core2 steadyの保存採用Kは候補initial37→27/asym36→30、参照initial4
 新scope guard7MiB内で保存するため、停止済みの重複progress snapshotのみ、最終result.rows＋保存group時刻から元bytes完全再構成・hash一致・再構成metadata Git保存/復元を確認後に整理した。原最終resultと全attempt、旧165/149/151証拠は保持。raw archiveの全member readback/有限実展開とsource/input/Git bytes確認、Beads notes/backupを最小引渡しに含める。外部cached Python/Cargo/模型をGitだけで復元可能とはしない。
 
 **最大1次案：この4arenaを選定候補として、別配分の小native教師生成・既schemaへのπ/rootmean/z/lineage exportへ進む。** 4arenaのRAMと短runtimeは成立した一方、core2の探索量低下とsample/時計射程があるため同modeを結果前に固定する。sampler・game総費・独立splitの必要未実装をその小単位で測り、runtime計測を自動連鎖しない。正式NIには新native版/mode/独立開始分布/fault全分母/固定m・停止の登録が別途必要で、今枠残費から600pair/1200gameの完走を約束しない。
+
+保存移管erratum：科学jobの保存peakはguard内だが、停止後Git移管のprivateindex実380127bytesを131072bytesと見積った。保存済current5980160＋新archive Git blob allocated1024000＋index380127から、移管時の下限7384287bytes（guard7340032を44255bytes超過）を導出した。連続peakは未サンプル。`storage-transfer-erratum.json`をtyped保存不足として保持し、全期間guard成功に格上げない。科学40行・時計・勝敗分類へ付替え0、新NN0。indexは除去済み、残る小metadataのGit保存はin-memory subtree方式に変更し、親予約追加なしでbackup/最小引渡しのみ行う。
