@@ -3,3 +3,7 @@
 154必要Gitblob/現物と停止・4根schemaの有限調査を受入れ。commands.jsonだけは最終報告の終了receipt1件がGit後に追記され、元19件prefix一致を確認し別hashで保存。統括の初回全current一致assert失敗と未登録156宛dispatch拒否を保持し、科学negativeへ付け替えない。rootNNとrootmeanは手番側視点を揃えても符号が異なる例があり、教師targetを混合しない。4局面に保存局面/履歴/特徴/探索平均があることは教師の真値/完全export/holdout準備の証明ではない。後2prefix合法再構成不足は保持し156で必要入力の実replayへ。
 
 最大1案のwall-only immutablemap＋固定座標313/距離2値を採択。NNUE単体の名目速度や313数ではなく、合法生成/BFS/特徴/更新・復帰/key/総費を同合法列で測る。155保存対局独立裁定と並行し、151必要保存停止後の同experimentへ156新自域の実契約を配送。利益＋一致ならprivate evaluator/αβ試作、利益混在/不足なら測定支配費へ、parity不一致は修復/終了。追加NN/game/GPU学習/共有source変更0、現枠・予算内。次Supervisor節目はSigma忠実基準の独立証拠→NNUE特徴処理の次実装選択へ移った情報価値と実費を追う。仮説役を常時稼働させるための追加調査は配分しない。
+
+## 方策による手順序付けの候補継承
+
+root157の正本追加Git0872cbbadc718c1240f81868fcb912d7e1e6e251をmain/研究mirrorで確認し、既active156へ共有。評価値のみ＋TT/履歴/安い順序付けを対照、小さい方策head/軽量採点器をαβ手順序付け候補に保持する。初期比較は順序だけとし、除外/深さ変更を別因子へ。方策教師はroot訪問分布候補でありleaf/rootvalueを付替えない。現在156の固定4入力/variant/64repeat/予算は変えず、新policyhead実装/学習・棋力認定0。将来選択では合法対応・並べ替え込み総費と価値精度/同時間棋力を分け、全候補の完了を新gateにしない。
