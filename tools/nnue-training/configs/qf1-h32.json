@@ -1,0 +1,8 @@
+{
+  "model": {"feature_version": "QF1", "transformer_width": 32, "hidden_width": 32, "dropout": 0.0},
+  "optimizer": {"name": "adam", "lr": 0.001, "weight_decay": 0.0},
+  "training": {"steps": 200, "batch_size": 128, "seed": 19080311, "target": "rootmean", "sampling": "game", "scheduler": "none", "device": "cpu", "threads": 1},
+  "evaluation": {"interval": 10, "batch_size": 1024, "monitor": "game", "early_stopping_patience": 5, "min_delta": 0.0},
+  "limits": {"seconds": 60.0, "samples": 500000},
+  "data": {"overlap_policy": "error"}
+}

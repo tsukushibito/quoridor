@@ -1,0 +1,48 @@
+{
+  "task": "quoridor-4lc.192",
+  "scope": "software environment preparation; research frame not resumed",
+  "tests": {
+    "command": "MPLCONFIGDIR=/home/vscode/.cache/inference/matplotlib PYTHONDONTWRITEBYTECODE=1 /home/vscode/.cache/inference/envs/quoridor-training/bin/python -m unittest discover -s tools/nnue-training -p test_*.py -v",
+    "cases": 5,
+    "result": "PASS",
+    "synthetic_training": "6 artificial rows; width4; complete 2-step run and sample-limit run, temporary outputs removed",
+    "research_model_training": false,
+    "modern_plot_png_svg_checked": true,
+    "comparison_different_validation_flag_checked": true
+  },
+  "existing_data": {
+    "games": 48,
+    "rows": 2762,
+    "train_rows": 2260,
+    "validation_rows": 502,
+    "train_groups": 40,
+    "validation_groups": 8,
+    "operation": "legal replay/export/dry-run; no new forward or learning",
+    "cross_split_state_history_features": 0
+  },
+  "legacy_plot": {
+    "available_training_points": 4,
+    "available_validation_steps": [
+      0,
+      200
+    ],
+    "invented_intermediate_validation_points": 0,
+    "image_visually_checked": true
+  },
+  "corrected_software_failure": "First export used deepStrictEqual on reference VM arrays; changed to canonical JSON content comparison; same full 2762-row export succeeded. No model run involved.",
+  "source_sha256": {
+    "tools/nnue-training/common.py": "a7497f1120f09ed42801be5314f0355105bebf86d21f3a44d7b1d77d89b00435",
+    "tools/nnue-training/compare.py": "92fe702e3abef15e0f74e0edb185fec1b55108a4c3e9bd030402062a640af2e9",
+    "tools/nnue-training/configs/qf1-h32.json": "55141b83b7f42a331bcfc223d4ddb6e371d8371989cbbb0d3fae7edd5d2bde1b",
+    "tools/nnue-training/export_qf1.cjs": "3434260776793c1b95c866c3810a8f6806a2ca74ee4b4306fa59f3e79c3db510",
+    "tools/nnue-training/plot-requirements.txt": "afcc9a6c6143ccc107654170083bd42bc4af2c06585903f3b9a230d672d31601",
+    "tools/nnue-training/plot.py": "81081a71814a3a9955a759411f84bd1a2ac8a057161f4af9b813eccace41fb3b",
+    "tools/nnue-training/plot.sh": "1395e484e2f1c3de56d4b3ebec3ea134b112ba6437d360a3ed3e38e64daf1998",
+    "tools/nnue-training/run.sh": "a1b265602130757c2c2c3265f42a2f9ac3ebd61a72bc749c16e9c545c5527402",
+    "tools/nnue-training/test_workbench.py": "d192d07f9a0be11ed99a6e7343e33dd51f3287be7a7aa65b5d0e06280519e613",
+    "tools/nnue-training/train.py": "1f04e460c47e73b282075db30b0bb3e2cac6b1c24eff78c3086333f3104fa927"
+  },
+  "shared_training_dependencies_changed": false,
+  "plot_dependencies": "isolated quoridor-learning-plots env; pinned plot-requirements.txt",
+  "research_gpu_games_new_teachers": 0
+}
