@@ -1,0 +1,59 @@
+{
+  "UTC": "2026-10-03T09:24:07.963446+00:00",
+  "run": "fad5eb63-d433-41ce-9e7e-522ef9d78065",
+  "turn": "01a1010f-060a-7532-85a9-8a684e705384",
+  "dispatch": {
+    "at": "2026-10-03T09:18:44.239311+00:00",
+    "event": "dispatched",
+    "run_id": "fad5eb63-d433-41ce-9e7e-522ef9d78065",
+    "turn_id": "01a1010f-060a-7532-85a9-8a684e705384"
+  },
+  "finished": {
+    "at": "2026-10-03T09:21:50.030318+00:00",
+    "event": "owned_turn_finished",
+    "turn_id": "01a1010f-060a-7532-85a9-8a684e705384",
+    "status": "interrupted"
+  },
+  "finite_observe_finished": "2026-10-03T09:19:06.820131+00:00",
+  "finite_notes_backup_self_stop": "2026-10-03T09:19:23.402801+00:00",
+  "notes_backup_exit_reaped": true,
+  "turn_status": "interrupted",
+  "scheduler_cause": "turn_limit",
+  "independent_judgment_report": "not confirmed",
+  "future_full_period_success": false,
+  "external_NN_stop": false,
+  "decision": "accept finite observation/notes/backup; preserve interrupted turn and missing final judgment; no restart/forced tick/new role; maintain176177 work",
+  "next_effect_check": "next natural owned supervisor tick; short independent judgment/report within same180s after early finish",
+  "refs": [
+    {
+      "path": ".artifacts/ai-sigma/continuation-20261001/supervisor/fad5eb63-d433-41ce-9e7e-522ef9d78065/read-guard/observation.json",
+      "bytes": 37590,
+      "SHA256": "f058a5af8ddc3075e441d250c7a9bc3f07eccc46e8140ab310f7e6d71bca52fa"
+    },
+    {
+      "path": ".artifacts/ai-sigma/continuation-20261001/supervisor/fad5eb63-d433-41ce-9e7e-522ef9d78065/read-guard/self-stop.json",
+      "bytes": 5841,
+      "SHA256": "8c243b42f004e31e3241b9e57028471dbe6c8ee341e1a211d7852931899fc558"
+    },
+    {
+      "path": ".artifacts/ai-sigma/continuation-20261001/supervisor/fad5eb63-d433-41ce-9e7e-522ef9d78065/read-guard/notes.json",
+      "bytes": 2959,
+      "SHA256": "2be653b8126dfea510bc4d9b1cc2c524e48ae1463f65100ceb102b232ee2371b"
+    },
+    {
+      "path": ".artifacts/ai-sigma/continuation-20261001/supervisor/fad5eb63-d433-41ce-9e7e-522ef9d78065/read-guard/backup.json",
+      "bytes": 2206,
+      "SHA256": "7068b00bc9dce6aeb48374e342d079893fa6762272a20246e08fc2ce7e488218"
+    },
+    {
+      "path": ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame12-04c303d7-a365-457c-99de-7b4eb2c52eed/first-live-turn.json",
+      "bytes": 750,
+      "SHA256": "57a060d2d411aed792dffd6e2a986522c82e39d9cfd85a853b2bd4637dbe0554"
+    },
+    {
+      "path": ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame12-04c303d7-a365-457c-99de-7b4eb2c52eed/monitor-observation.json",
+      "bytes": 1240,
+      "SHA256": "596ff9d19379f26fb7f21cb49dd5159e950539db85ae0593175ac0e8371c9c67"
+    }
+  ]
+}
