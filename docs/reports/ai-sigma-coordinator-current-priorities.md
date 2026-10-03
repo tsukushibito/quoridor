@@ -27,3 +27,5 @@ CPU4logicalは実job合計。176の3arenaに追加できるCPU重jobは一つ。
 09:30節目: 176 first8GOAL/514row/NN30347と2新input同K64最終root/firstNN exact、CP64→1を保存有限照合。productionjob72.162764s/7.122787行毎秒は準備・比較・export/学習の全pipeline費と分ける。177実B2 JSONpipe CPUserial8.262791/GPU3.033639msを受領、3CPUsession並列倍率は未立証。176へ既予算内の薄maxB2/flush.25接続・4root同K検査→条件付き3CPU+3GPUgameの限定効率branchを採択。手NN追加60000/重360s以下は元300000/1500sの残内、GPUphaseRAM6/guard5.5は他model終了確認のsolo科学だけ。CPU24本dataset/小学習接続を優先、比較siblingsは本学習へ混合0。全6分母/未知/同K/版/実batch-fill/総job費で判断し、利益なしならCPU継続して接続診断を連鎖しない。
 
 09:48節目: 177保存84raw/305行のfinite f32・CPU135bit・batch対応を確認し有限受入れ。35 scientific Gitblobを復元、34 current exact、storage後着actual_finalだけ別binding。B2 route比は直列CPU比較であり生成倍率ではない。176本人は24GOAL/1409適格行・production198.496598s/7.098358行秒、train20game1188/validation4game221、200step/reload/ONNX成功を報告。独立検算前の本人結果として保持。新4診断全GOAL/学生0勝4敗で接続成立と棋力未改善を分け、限定GPUbranchへ進む。全24元データ・正式holdout除外・全失敗を保持し、実dataset/学習接続/総費の保存独立レビューをcriticへ配分する。
+
+保存独立レビュー179をcriticへ配分。全1409行のπ/視点/z/lineage/split/重複・保存200step/reload/ONNXと新4診断をNN0算術で検算。CPU0静的90s/新2MiBは既112MiBguard内、176 GPU科学pool0/2/4/6と順序調整し、レビュー全文待ちをGPUbranch入口にしない。学習fit/arena0勝4敗と生成効率を別に裁定する。
