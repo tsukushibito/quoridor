@@ -15,7 +15,7 @@ GPU24を次の独立教師生成の候補へ採用する。現在default/backend
 | 担当 | 現在の到達点・次判断 | 個別期限・資源 |
 | --- | --- | --- |
 | experiment187 | 共有GPU多数game実生成を停止、各mode全教師/全fault/実batch/全費・必要archive/Git復元/backupを引渡す。主科学子の回収を本人13:48確認、今は保存処理のみ | newheavy14:15/science14:20/process14:30/submit14:40。CPU4/RAM8/VRAM6親内、GPUjob30分、保持256MiBは既experiment2044MiB内 |
-| hypothesis190 | QF1-H32二視点312疎特徴＋後段距離2、既2762学習教師のrootmean value蒸留、full/delta/undoと小探索を有限接続。13:42:53静的開始、13:58:22–23 NN0復元終了。学習14:00:56–59/200step31151sample、native14:02:12/515child full-delta/undo＋Torch固定27対応を本人報告。差8.94e-8。depth1完成/depth2 NODE_CAP未採用、新val rootmeanMSE.994812は定数.715720より悪く重み採用/棋力認定0。停止保存の最終bindingを待つ（190本人） | CPU8単1/RAM1GiB guard896、science60s/modeljob30s/sample65536。newscience14:28/stop14:32/process14:36/submit14:41。384KiB予約/320KiBguard、uniqueGit・二つの重み保存・残metadataを先forecast |
+| hypothesis190 | QF1-H32二視点312疎特徴＋後段距離2、既2762学習教師のrootmean value蒸留、full/delta/undoと小探索を有限接続。13:42:53静的開始、13:58:22–23 NN0復元終了。学習14:00:56–59/200step31151sample、native14:02:12/515child full-delta/undo＋Torch固定27対応を本人報告。差8.94e-8。depth1完成/depth2 NODE_CAP未採用、新val rootmeanMSE.994812は定数.715720より悪く重み採用/棋力認定0。統括が修正版Git8bb9e8a2のreport/科学10path、weights archive両member byte/hash、48game weighted集計を有限照合。最終storage/backup/helper停止receiptを本人から待つ。 | CPU8単1/RAM1GiB guard896、science60s/modeljob30s/sample65536。newscience14:28/stop14:32/process14:36/submit14:41。384KiB予約/320KiBguard、uniqueGit・二つの重み保存・残metadataを先forecast |
 | critic191 | 全120slot・全教師資格・全費・source/provider/parityの独立有限裁定。13:50:11.649562 claim/static準備開始、短CPU0算術・再生は終了通知済。NN/model/game/GPU0 | static120s/job60s/CPU0単1/RAM512guard448、新4MiBは既critic112MiB内。newscript14:26/compute14:30/process14:35/submit14:41 |
 
 187は最終引渡し後に統括有限受入れclose済み。187実重計算中は190/191の実CPU子を重ねない。187科学停止と191短算術終了の通知を受け、190は直前owner/current/RAM確認で実処理する。自然監督CPU0との窓も各ownerが確認する。source/metadataの軽い準備と実計算を分け、CPU5・LLMactive数gate・全稿相互承認・運用全史gateを作らない。
@@ -39,3 +39,5 @@ root189のQF1設計Git e2897f5ebfddf84f8c86a7e04394081ec596032a、到達QF-T1追
 92親13 SHA160ca38306c6ddaaf81b874771afd0a52f5127dd5b7924588b6fab688bf80f8e、scheduler3534745/start28492381・monitor3534758/start28492397の本人running/loaded24hash一致を受領。期限通知14:35:15、監督+scheduler14:40:15、monitor14:43:15、証拠14:45:15は92 owner。統括は親/運用binding編集・92再配送・強制tick0。自然turnのcompleted/finishと全期間/外部NN停止保証は分ける。
 
 監督提案のRjoint全費・全予定打切り手数、低LRのπ利益減/価値方向、保存uniqueGit forecastを採用した。効果は実結果へ限定し、手続きや配送acceptedを科学受入れとしない。個別課題はsource/子停止・必要保存と有限検証後にcloseでき、goal未達は維持する。
+
+190の保存集計を統括NN0で再計算し、全validation502のrootmeanMSE.704042→.646561は定数.697566より改善、新281は.717160→.994812で定数.715720より悪化と確認した。機能接続の有限受入れと重み採用を分離する。初期最終Gitdf42/a7は報告path未収録、担当savehelper修正版8bbでreport/科学不変のbyte復元を確認した。元保存失敗を科学negativeへ変換せず保持。現在は190最終metadata/backup停止receipt待ちで実science追加0、閉じるための新LLM専用turnも起動しない。次枠候補はGPU24のfresh独立教師を露出group splitで固定し、固定QF1のvalue汎化を少数で判別する一案。未許可の次枠や現在14:35重開始上限を超えた実行は行わない。
