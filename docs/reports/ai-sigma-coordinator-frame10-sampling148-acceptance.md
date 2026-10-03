@@ -1,0 +1,6 @@
+# 148 局面分布設計の有限受入れ
+148の静的分布提案・採択済みseed表・欠測算術を受入れる。4/5/12/13ply各8、クラス選択確率pawn/wall各1/2＋クラス内合法順一様、master61041 SHA256混合seedを新32prefix×色交換64gameへ採択した。整数PRNGの連番初回class偏り32wallとhash混合18pawn/14wallの比較は設計の偏りを避ける根拠で、合法状態の均衡・代表性・独立性を証明した意味ではない。
+538f11a8版の必要16fileをGitstream/current/SHA/size一致、後着Git-restoration/final-stop/backup metadataは各最終保存版へ別binding。256seedの一意性/32slot/各8層/色順4ずつ/採択表同bytesを確認。static-r1 exit0/ownedwait/remainingunknown0/source前後一致、記録manager/child同identity現在不在を確認。wall.021902秒/CPU.015856秒/waitRSS15294464Bは自己run範囲、短管理費厳密累計と全host/全期間は欠測保持。追加NN/Chrome/game/build0。
+旧ply/key一覧はinventoryであり、trueState key＋正規化history_counts＋sideの完全signatureを構成したものではない。この不足を補完済みへ格上げせず、149が旧119全8の元historyを保持して採択定義を実装することを明示配送する。新集合内重複保持/後補充0/NN-prior-balance filter0/最大8attempt/全64未知識別区間は維持。案の7680秒は見積りに留め、採択済み生成込みheavy7200秒・各job600秒を優先し完走保証はしない。
+C145/samecompleted自動追加保留を維持し、重大な停止異論なし。参考Hoeffding幅.2400806978は32pairの独立bounded追加仮定だけ、差未確定なら現政策維持・同等認定0。主運用と双方fault未知のterminal品質区間を分ける147指摘を継承。旧119弱さ前提/成績統合/一般棋力/NI/Sigma認定0。
+本人source/子停止・保存/backup引渡し後、統括が148を引き継ぎcloseする。149は実入力生成/固定/対局/停止をcoordinatorへ報告する。設計者の最終本文完成やcloseを研究開始gateにしない。根拠 research-data/ai-sigma/frame10-coordinator-start/148-acceptance-check.json、docs/reports/ai-sigma-hypothesis-frame10-gap-sampling.md。
