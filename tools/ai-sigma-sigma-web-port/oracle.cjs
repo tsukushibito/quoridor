@@ -28,6 +28,12 @@ async function main(){const e=(await WebAssembly.instantiate(fs.readFileSync(O+'
  for(const id of ['synthetic-total-ply-200','synthetic-goal-at200','repeat-before-third-return','straight-jump-p2']){const f=all.find(x=>x.id===id),s=ctx.oracle.referenceState(f),r=call({op:'raw',fixture:f});const t=ctx.oracle.terminalResult(s);assert.equal(r.terminal,t?.value??null);assert.deepStrictEqual(r.effective_legal,t?[]:Array.from(s.getLegalActions(),a=>ctx.oracle.rustAction(s,a)));checks.push({fixture:id,terminal_goal_priority_or_repetition_exclusion_or_jump:true,artificial_or_saved_fixture:true});}
  // Recording toggle parity is checked in the same actual Wasm with identical oracle outputs.
  function traceParity(on){const h=call({op:'new',prefix:[],simulations:8,generation:9,trace:on}).handle;let cp;while(true){const q=call({op:'begin',handle:h,generation:9});if(q.pending)call({op:'resume',handle:h,generation:9,token:q.token,logits:Array(136).fill(0),value:.25});cp=call({op:'checkpoint',handle:h,generation:9});if(cp.simulations===8)break;}e.ort_free(h);return cp;}assert.deepStrictEqual(traceParity(true),traceParity(false));checks.push({trace_toggle_actual_private_parity:true});
+ // Actual f32 ABI decimal transport regression, not rounding tree arithmetic.
+ for(const value of [Math.fround(.2143749),Math.fround(-.6378562)]){
+  const h=call({op:'new',prefix:[],simulations:1,generation:13}).handle,q=call({op:'begin',handle:h,generation:13});
+  call({op:'resume',handle:h,generation:13,token:q.token,logits:Array(136).fill(Math.fround(.2143749)),value});
+  assert.strictEqual(call({op:'checkpoint',handle:h,generation:13}).root_valueSum,value);e.ort_free(h);
+ }checks.push({actual_NN_f32_decimal_ABI_exact_extension:true});
  const result={issue:'quoridor-4lc.151',NN:0,Chrome:0,actual_private_Wasm:true,JS_original_fixed_core:true,checks,artificial_oracle_not_runtime_NN_or_terminal_reachability_proof:true};fs.writeFileSync(O+'/oracle.json',JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify({checks:checks.length,NN:0,passed:true}));
 }
 main().catch(e=>{console.error(e.stack);process.exitCode=1});

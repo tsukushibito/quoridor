@@ -1,0 +1,79 @@
+{
+  "issue": "quoridor-4lc.151",
+  "frame": 10,
+  "seed": 1979,
+  "processing_deadline": "2026-10-03T03:17:36.232260+00:00",
+  "newjob_deadline": "2026-10-03T03:07:36.232260+00:00",
+  "pin_owned_TIDs": true,
+  "minimum_remaining_heavy_seconds": 15,
+  "kind": "stageA",
+  "run_id": "port151-stageA-r2",
+  "forecast_bytes": 16777216,
+  "searches": [
+    {
+      "fixture_id": "initial-p1",
+      "engine": "candidate",
+      "K": 32,
+      "ordinal": 1
+    },
+    {
+      "fixture_id": "initial-p1",
+      "engine": "reference",
+      "K": 32,
+      "ordinal": 2
+    },
+    {
+      "fixture_id": "asym-hv-p2",
+      "engine": "reference",
+      "K": 32,
+      "ordinal": 3
+    },
+    {
+      "fixture_id": "asym-hv-p2",
+      "engine": "candidate",
+      "K": 32,
+      "ordinal": 4
+    },
+    {
+      "fixture_id": "straight-jump-p2",
+      "engine": "candidate",
+      "K": 32,
+      "ordinal": 5
+    },
+    {
+      "fixture_id": "straight-jump-p2",
+      "engine": "reference",
+      "K": 32,
+      "ordinal": 6
+    },
+    {
+      "fixture_id": "frame10-prefix-13",
+      "engine": "reference",
+      "K": 32,
+      "ordinal": 7
+    },
+    {
+      "fixture_id": "frame10-prefix-13",
+      "engine": "candidate",
+      "K": 32,
+      "ordinal": 8
+    },
+    {
+      "fixture_id": "frame10-prefix-14",
+      "engine": "candidate",
+      "K": 32,
+      "ordinal": 9
+    },
+    {
+      "fixture_id": "frame10-prefix-14",
+      "engine": "reference",
+      "K": 32,
+      "ordinal": 10
+    }
+  ],
+  "fixed_input_path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/151-sigma-web-port/stageA-inputs.json",
+  "fixed_input_SHA256": "dc205f8d7e00ee52aca51845ddbca5e3085d0aebdb22c3f4ceb6fa139cd10954",
+  "binary_SHA256": "500181795b373f69f6f2214ee1a77e12767e2f342e15a56ab5e27d0a0453f2c2",
+  "repair_of": "port151-stageA-r1",
+  "scientific_old_success_not_replaced": true
+}

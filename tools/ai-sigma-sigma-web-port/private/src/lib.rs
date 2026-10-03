@@ -69,12 +69,15 @@ impl Registry{fn id(&mut self)->u32{self.next+=1;self.next}fn bytes(&mut self,b:
 #[no_mangle]pub extern "C" fn ort_ptr(h:u32)->usize{REG.with(|r|r.borrow_mut().bytes.get_mut(&h).map_or(0,|v|v.as_mut_ptr() as usize))}
 #[no_mangle]pub extern "C" fn ort_len(h:u32)->usize{REG.with(|r|r.borrow().bytes.get(&h).map_or(0,|v|v.len()))}
 #[no_mangle]pub extern "C" fn ort_free(h:u32)->u32{REG.with(|r|{let mut r=r.borrow_mut();(r.bytes.remove(&h).is_some()||r.sessions.remove(&h).is_some())as u32})}
-fn numbers(v:&Value)->Result<Vec<f64>,String>{v.as_array().ok_or("ARRAY")?.iter().map(|x|x.as_f64().ok_or("NUMBER".into())).collect()}
+// ORT output is Float32Array. Restore its exact f32 bits at the JSON ABI,
+// then extend to f64; tree arithmetic and sums remain unrounded f64.
+fn nn_number(v:&Value)->Result<f64,String>{let n=v.as_f64().ok_or("NN_NUMBER")? as f32;if !n.is_finite(){return Err("NN_FINITE".into())}Ok(n as f64)}
+fn numbers(v:&Value)->Result<Vec<f64>,String>{v.as_array().ok_or("ARRAY")?.iter().map(nn_number).collect()}
 fn dispatch(r:&mut Registry,v:Value)->Result<Value,String>{
  let op=v["op"].as_str().ok_or("OP")?;let g=v["generation"].as_u64().unwrap_or(1)as u32;
  if op=="raw"||op=="raw_policy" {let c=context::context(&v["fixture"],true)?;let legal=ordered_legal(&c);if op=="raw_policy"{return Ok(json!({"priors":priors(&c,&legal,&numbers(&v["logits"])?)?}))}return Ok(json!({"features_bits":features(c.position()).map(f32::to_bits).to_vec(),"legal":legal,"effective_legal":legal,"raw_legal":legal,"turn":c.position().turn,"terminal":c.terminal_value()}))}
  if op=="new"{let c=context::context(v.get("fixture").unwrap_or(&v),v["diagnostic"]==true)?;let k=v["simulations"].as_u64().unwrap_or(4096);if k>1000000{return Err("K_GUARD".into())}let s=Search::new(c,g,k as u32,v["trace"]==true);let h=r.id();r.sessions.insert(h,s);return Ok(json!({"handle":h}))}
  let h=v["handle"].as_u64().ok_or("HANDLE")?as u32;let s=r.sessions.get_mut(&h).ok_or("INVALID_SESSION")?;
- match op{"begin"=>s.begin(g),"resume"=>{let result=s.resume(g,v["token"].as_u64().ok_or("TOKEN")?,&numbers(&v["logits"])?,v["value"].as_f64().ok_or("VALUE")?);if result.is_err(){s.cancelled=true;}result?;Ok(json!({"done":s.nodes[0].visits>=s.limit,"simulations":s.nodes[0].visits,"nn_calls":s.calls}))},"checkpoint"|"snapshot"=>s.cp(g,op=="snapshot"),"trace"=>{s.check(g)?;Ok(json!({"selects":s.selects,"backups":s.backups}))},"cancel"=>{s.cancelled=true;Ok(json!({"discarded":true}))},_=>Err("OP".into())}
+ match op{"begin"=>s.begin(g),"resume"=>{let result=s.resume(g,v["token"].as_u64().ok_or("TOKEN")?,&numbers(&v["logits"])?,nn_number(&v["value"])?);if result.is_err(){s.cancelled=true;}result?;Ok(json!({"done":s.nodes[0].visits>=s.limit,"simulations":s.nodes[0].visits,"nn_calls":s.calls}))},"checkpoint"|"snapshot"=>s.cp(g,op=="snapshot"),"trace"=>{s.check(g)?;Ok(json!({"selects":s.selects,"backups":s.backups}))},"cancel"=>{s.cancelled=true;Ok(json!({"discarded":true}))},_=>Err("OP".into())}
 }
 #[no_mangle]pub extern "C" fn ort_call(h:u32)->u32{REG.with(|r|{let mut r=r.borrow_mut();let result=(||{let b=r.bytes.get(&h).ok_or("INVALID_HANDLE")?;let v=serde_json::from_slice(b).map_err(|e|e.to_string())?;dispatch(&mut r,v)})();r.bytes(serde_json::to_vec(&match result{Ok(v)=>json!({"ok":true,"data":v}),Err(e)=>json!({"ok":false,"error":e,"discarded":true})}).unwrap())})}

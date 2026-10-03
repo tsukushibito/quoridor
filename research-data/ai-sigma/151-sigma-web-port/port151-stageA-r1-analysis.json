@@ -1,0 +1,90 @@
+{
+  "issue": "quoridor-4lc.151",
+  "run": "port151-stageA-r1",
+  "source_raw_SHA256": "75a09f525d85d2ed3f9ffc09e9a97f7e7ff066964086e9b9858e2a67e5a93bb4",
+  "StageA_finite_supported": false,
+  "first_numeric_difference": {
+    "kind": "root_prior",
+    "fixture": "initial-p1",
+    "index": [
+      1,
+      78
+    ],
+    "left": 0.0010577700916885842,
+    "right": 0.0010577700916885844
+  },
+  "first_discrete_difference": {
+    "kind": "root_ledger",
+    "fixture": "initial-p1",
+    "index": 1,
+    "left": 0.2143748998641968,
+    "right": 0.21437489986419678
+  },
+  "pairs": [
+    {
+      "fixture": "initial-p1",
+      "okay": false,
+      "root_CPs": 32,
+      "requests": 32,
+      "selects": 159,
+      "all_path_and_order_visits_Action_ledger_exact": false,
+      "max_prior_difference": 2.168404344971009e-19,
+      "max_score_difference": 2.220446049250313e-16,
+      "cap_refusal": null,
+      "same_backend_saved_NN_exact": true
+    },
+    {
+      "fixture": "asym-hv-p2",
+      "okay": false,
+      "root_CPs": 32,
+      "requests": 32,
+      "selects": 196,
+      "all_path_and_order_visits_Action_ledger_exact": false,
+      "max_prior_difference": 8.673617379884035e-19,
+      "max_score_difference": 1.1102230246251565e-16,
+      "cap_refusal": null,
+      "same_backend_saved_NN_exact": true
+    },
+    {
+      "fixture": "straight-jump-p2",
+      "okay": false,
+      "root_CPs": 32,
+      "requests": 32,
+      "selects": 89,
+      "all_path_and_order_visits_Action_ledger_exact": false,
+      "max_prior_difference": 4.336808689942018e-19,
+      "max_score_difference": 5.551115123125783e-17,
+      "cap_refusal": null,
+      "same_backend_saved_NN_exact": true
+    },
+    {
+      "fixture": "frame10-prefix-13",
+      "okay": false,
+      "root_CPs": 32,
+      "requests": 32,
+      "selects": 153,
+      "all_path_and_order_visits_Action_ledger_exact": false,
+      "max_prior_difference": 1.734723475976807e-18,
+      "max_score_difference": 2.220446049250313e-16,
+      "cap_refusal": null,
+      "same_backend_saved_NN_exact": true
+    },
+    {
+      "fixture": "frame10-prefix-14",
+      "okay": true,
+      "root_CPs": 32,
+      "requests": 32,
+      "selects": 128,
+      "all_path_and_order_visits_Action_ledger_exact": true,
+      "max_prior_difference": 8.673617379884035e-19,
+      "max_score_difference": 1.1102230246251565e-16,
+      "cap_refusal": null,
+      "same_backend_saved_NN_exact": true
+    }
+  ],
+  "StageB_allowed": false,
+  "sameK_not_sameCPU": true,
+  "not_general_deep_or_formal_Sigma_proof": true,
+  "NN_actual": 320,
+  "startup_separate": 6
+}
