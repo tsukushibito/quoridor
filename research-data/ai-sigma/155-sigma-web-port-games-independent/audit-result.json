@@ -1,0 +1,1020 @@
+{
+  "UTC": "2026-10-03T02:23:40.833419+00:00",
+  "binding": {},
+  "roots": [
+    {
+      "pair": 1,
+      "side": 1,
+      "features648_bit_exact": true,
+      "NN137_numeric_and_bit_exact": true,
+      "legal_order_exact": true,
+      "key": "3,1|5,7|0||",
+      "NN_bits_SHA256": "a80f21d1df2427860a3f47ffd78210f2197f392420eca01c8925b849d82c72ce"
+    },
+    {
+      "pair": 2,
+      "side": 2,
+      "features648_bit_exact": true,
+      "NN137_numeric_and_bit_exact": true,
+      "legal_order_exact": true,
+      "key": "3,1|2,8|1|0,0|",
+      "NN_bits_SHA256": "3ff4409360924447f158303d0ea67096fa3dada3d925a75f650e9947f997e6bf"
+    },
+    {
+      "pair": 3,
+      "side": 1,
+      "features648_bit_exact": true,
+      "NN137_numeric_and_bit_exact": true,
+      "legal_order_exact": true,
+      "key": "4,0|3,8|0|2,0;2,5;6,6|1,0;4,3;5,0;7,6",
+      "NN_bits_SHA256": "8e424814d04de812288876c8e78db06dd10727ac4ab42a784309acbe0da862cd"
+    },
+    {
+      "pair": 4,
+      "side": 2,
+      "features648_bit_exact": true,
+      "NN137_numeric_and_bit_exact": true,
+      "legal_order_exact": true,
+      "key": "3,1|3,7|1|0,6;2,6;4,0;7,1;7,7|0,0;2,4;4,4;7,0",
+      "NN_bits_SHA256": "e27fad06946ffa0eb43482ad12ac20ee21aca7e5b1981527205a4cd874000f22"
+    },
+    {
+      "pair": 5,
+      "side": 1,
+      "features648_bit_exact": true,
+      "NN137_numeric_and_bit_exact": true,
+      "legal_order_exact": true,
+      "key": "4,0|4,8|0|1,3;4,2|2,1;4,0",
+      "NN_bits_SHA256": "557531ab702cfd9ee020b6165cf541ecd469de04bbf0a75d1639f0f755c87564"
+    },
+    {
+      "pair": 6,
+      "side": 2,
+      "features648_bit_exact": true,
+      "NN137_numeric_and_bit_exact": true,
+      "legal_order_exact": true,
+      "key": "4,1|3,8|1|3,1|2,3;6,2",
+      "NN_bits_SHA256": "2e4479c9e6f89bd78317e673c056df8c27c3547012664670e9ca464956f21812"
+    },
+    {
+      "pair": 7,
+      "side": 1,
+      "features648_bit_exact": true,
+      "NN137_numeric_and_bit_exact": true,
+      "legal_order_exact": true,
+      "key": "5,2|3,5|0|6,2;7,1|1,1",
+      "NN_bits_SHA256": "e6898f7ac51827971cb908c9cf66b682ec5e5df0acf6ceb97fccee9edf0503a7"
+    },
+    {
+      "pair": 8,
+      "side": 2,
+      "features648_bit_exact": true,
+      "NN137_numeric_and_bit_exact": true,
+      "legal_order_exact": true,
+      "key": "2,0|5,8|1|0,7|7,1",
+      "NN_bits_SHA256": "1a3b7c7c3bb96706f365f5912da8c9f518400e5f529003d15e5c812913be6dcd"
+    }
+  ],
+  "groups": [
+    {
+      "run": "port151-stageB-group1-r1",
+      "start": "2026-10-03T01:47:42.719290+00:00",
+      "end": "2026-10-03T01:49:42.419889+00:00",
+      "last_game_end_ms": 1790992180056.75,
+      "Modeldrop2": {
+        "players": [
+          {
+            "kind": "dropped",
+            "handles": 0,
+            "activeNN": 0,
+            "at_ms": 1790992181605.055,
+            "producer_post_begin_ms": 1790992181605.055,
+            "worker_engine": "candidate"
+          },
+          {
+            "kind": "dropped",
+            "handles": 0,
+            "activeNN": 0,
+            "at_ms": 1790992181605.835,
+            "producer_post_begin_ms": 1790992181605.845,
+            "worker_engine": "reference"
+          }
+        ],
+        "handles": 0,
+        "activeNN": 0
+      },
+      "main": {
+        "main_timers": 0,
+        "pending_messages": []
+      },
+      "callbacks": {
+        "timer": false,
+        "busy": false,
+        "waited": true
+      },
+      "monitor": {
+        "UTC": "2026-10-03T01:49:41.949Z",
+        "state": "READY",
+        "failure": null,
+        "pending_children": [],
+        "all_owned_read_callbacks_waited": true,
+        "active_monitor_timer": false
+      },
+      "inner": {
+        "remaining_pids": 0,
+        "forced": true,
+        "waited": true,
+        "registered": 208,
+        "registration_ack": true
+      },
+      "outerwait": true,
+      "outer_unknown": [],
+      "outer_remaining": [],
+      "identity_denominator": 307,
+      "currentidentity": [],
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "saved_source_commit": null,
+      "launch_sources": {
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/adapters.cjs": "c02f218acbc03978c0d55ebde213a08d2edadb13b16aa5324e46bce7331de69f",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/admission.py": "5e626db1758891334dfe183ac113d19dcb80e8cfdbac9f8a665e41a6f5dceea8",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/browser.cjs": "53a26f2d75558a6ad2ea13c52217da708c1a1d7d355719e7d451dd6ef8345d81",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/build.py": "03c88bea3523511a5c8fce4465645d57fba7ef4a1d90e046d1e4a7cbe74226ea",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/capture-stop.py": "aa06b592ab8b3454f0750f5a8087ec8959ca3e96674877c39161e413230c0133",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/check-stageA.py": "8ddb425624edbbbaad6836bfc97535f0609900dad9a4f1e47aec4a79086af23f",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/diagnose.cjs": "42d2e61dc52fa08c595817f6b50dd8415c3545274ef099be18e15ad561851ca7",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/oracle.cjs": "7bdf4048a3e1322b0821ca794af98682da4037efed4868b67c4efb9a4b4667a2",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/port-main.js": "542355b984a6cf35e22ab8799b9b7e5a928265e99f07e1caf83042e72b214ece",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/port-worker.js": "f82e3e1a10572576c0efa2088b00eaf62610cef18e6b71f7d7ebc9c506723d8a",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/runner.py": "0232a84866a3840c3819b58c19580fb4a56d7ede85bf18e4d2f1b28654109ccc",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/transport-mock.cjs": "f8809c35491213f19ede2acbad68589926c194a4202b8d123c5f12eecdcf17c2"
+      },
+      "served": {
+        "/game.js": {
+          "saved": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+          "current": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+          "is_generated": false
+        },
+        "/context.js": {
+          "saved": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+          "current": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+          "is_generated": false
+        },
+        "/shared-best-action.js": {
+          "saved": "37491ac0e9f2fb20b564fb2699ac58c3dfc35bff84ca888cd39b40036359132a",
+          "current": "37491ac0e9f2fb20b564fb2699ac58c3dfc35bff84ca888cd39b40036359132a",
+          "is_generated": false
+        },
+        "/numeric-browser.js": {
+          "saved": "027ff2fbaffc6e3b53925a7205fe2c989d1f49903a4601b6eab0aa49af6e851f",
+          "current": "00d4d518a613e1a28fb4ee010076d3bca20a7247b0d0a96a46dd4ca86b74df01",
+          "is_generated": false
+        },
+        "/player-control.js": {
+          "saved": "3b87d63253cd93267ccc9419bfddd334a3cbe5cacba4d98da9328109a3f33e5c",
+          "current": "3b87d63253cd93267ccc9419bfddd334a3cbe5cacba4d98da9328109a3f33e5c",
+          "is_generated": false
+        },
+        "/early-page.js": {
+          "saved": "dd5c6c00a7dc949630b58d86aa964d7d5e5af594e30d2dd3851a92600f3a71d2",
+          "current": "610e899acd43215efc9fa3a08f3c337248639505a57196e1a730a91f7afde4a8",
+          "is_generated": true
+        },
+        "/early-worker.js": {
+          "saved": "f82e3e1a10572576c0efa2088b00eaf62610cef18e6b71f7d7ebc9c506723d8a",
+          "current": "fd5f5b72a836164133b22f718d58ef31d2d4b0f8a4887070e1ac9346112de5e8",
+          "is_generated": true
+        },
+        "/protocol-worker.js": {
+          "saved": "5f74daff7279fcf9e3697fe538e280480705e42ba63c88b2a6789efa6d26d77c",
+          "current": "5f74daff7279fcf9e3697fe538e280480705e42ba63c88b2a6789efa6d26d77c",
+          "is_generated": false
+        },
+        "/player-base.js": {
+          "saved": "26bdf8f24715dd75ed22b43c15fa4ffc2f3c1c32231971e9f48b6cc21c763212",
+          "current": "fd5f5b72a836164133b22f718d58ef31d2d4b0f8a4887070e1ac9346112de5e8",
+          "is_generated": true
+        },
+        "/snapshot-cache.js": {
+          "saved": "8e695aa385386202976310a18cdb9bd9f36c09ea0e115abe86f463666561d0b0",
+          "current": "748fe01dfebf5e524465ef69255acf0026154188b9002a5338ca790ca092e7f7",
+          "is_generated": true
+        },
+        "/original-worker.js": {
+          "saved": "e566da94469926f7abbdc0816efa7671d5a49f016d6eeb06dd060b7e44f8c577",
+          "current": "9494e33e7204be208262914c04ea5eb0d7985872a6d7ebc6e4084d84729097d4",
+          "is_generated": true
+        },
+        "/ort/ort.min.js": {
+          "saved": "95c6f6611837cb50449cb6a0c092145bf493ac64cd0d004033cefc977366e7cb",
+          "current": "95c6f6611837cb50449cb6a0c092145bf493ac64cd0d004033cefc977366e7cb",
+          "is_generated": false
+        },
+        "/candidate-host.js": {
+          "saved": "dc6cf3e24774e5e6b52c8cf346090f53f261e58b0c7fda1e6d674c7142983d02",
+          "current": "dc6cf3e24774e5e6b52c8cf346090f53f261e58b0c7fda1e6d674c7142983d02",
+          "is_generated": false
+        },
+        "/checkpoint.js": {
+          "saved": "494581d5ce5fc38e7afb753d9ca92e0f49bb71ed516762b7ea48a0c6d89e1119",
+          "current": "2b736d696a099350bf724b40dd858fc3afe11ce17a1c143f3029e5fcd2f28d8c",
+          "is_generated": false
+        },
+        "/reference-core.js": {
+          "saved": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05",
+          "current": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05",
+          "is_generated": false
+        },
+        "/reference-control-run.js": {
+          "saved": "87dbd43b34f23793c36806ad41a09fda723b5f7b7b10745c0df8b055e3039a0c",
+          "current": "87dbd43b34f23793c36806ad41a09fda723b5f7b7b10745c0df8b055e3039a0c",
+          "is_generated": false
+        },
+        "/b.wasm": {
+          "saved": "500181795b373f69f6f2214ee1a77e12767e2f342e15a56ab5e27d0a0453f2c2",
+          "current": "500181795b373f69f6f2214ee1a77e12767e2f342e15a56ab5e27d0a0453f2c2",
+          "is_generated": false
+        },
+        "/model.onnx": {
+          "saved": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+          "current": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+          "is_generated": false
+        },
+        "/ort/ort-wasm-simd-threaded.jsep.mjs": {
+          "saved": "b69c8812bf2d8356dd248fef0abb35e22d1f05f9c593ca34d4b942f35ea93592",
+          "current": "b69c8812bf2d8356dd248fef0abb35e22d1f05f9c593ca34d4b942f35ea93592",
+          "is_generated": false
+        },
+        "/ort/ort-wasm-simd-threaded.jsep.wasm": {
+          "saved": "0663b902fb3937883a34375926bdfe3e1c86cd4c99cbc04c06a7cdf46c78bdde",
+          "current": "0663b902fb3937883a34375926bdfe3e1c86cd4c99cbc04c06a7cdf46c78bdde",
+          "is_generated": false
+        }
+      },
+      "source_launch_vs_stop": true,
+      "reader_final_status_file_present": false,
+      "summary": {
+        "issue": "quoridor-4lc.151",
+        "kind": "stageB",
+        "run": "port151-stageB-group1-r1",
+        "startup_NN": 6,
+        "model_sessions": 2,
+        "hand_NN": 0,
+        "started": 4,
+        "planned": 4,
+        "primary": null,
+        "secondary": []
+      }
+    },
+    {
+      "run": "port151-stageB-group2-r1",
+      "start": "2026-10-03T01:51:37.847702+00:00",
+      "end": "2026-10-03T01:53:18.156540+00:00",
+      "last_game_end_ms": 1790992393765.455,
+      "Modeldrop2": {
+        "players": [
+          {
+            "kind": "dropped",
+            "handles": 0,
+            "activeNN": 0,
+            "at_ms": 1790992395317.0698,
+            "producer_post_begin_ms": 1790992395317.075,
+            "worker_engine": "candidate"
+          },
+          {
+            "kind": "dropped",
+            "handles": 0,
+            "activeNN": 0,
+            "at_ms": 1790992395317.995,
+            "producer_post_begin_ms": 1790992395317.995,
+            "worker_engine": "reference"
+          }
+        ],
+        "handles": 0,
+        "activeNN": 0
+      },
+      "main": {
+        "main_timers": 0,
+        "pending_messages": []
+      },
+      "callbacks": {
+        "timer": false,
+        "busy": false,
+        "waited": true
+      },
+      "monitor": {
+        "UTC": "2026-10-03T01:53:17.749Z",
+        "state": "READY",
+        "failure": null,
+        "pending_children": [],
+        "all_owned_read_callbacks_waited": true,
+        "active_monitor_timer": false
+      },
+      "inner": {
+        "remaining_pids": 0,
+        "forced": true,
+        "waited": true,
+        "registered": 199,
+        "registration_ack": true
+      },
+      "outerwait": true,
+      "outer_unknown": [],
+      "outer_remaining": [],
+      "identity_denominator": 297,
+      "currentidentity": [],
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "saved_source_commit": null,
+      "launch_sources": {
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/adapters.cjs": "c02f218acbc03978c0d55ebde213a08d2edadb13b16aa5324e46bce7331de69f",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/admission.py": "5bf436602222a01c81f0065f1e2ba72c983a7f87ba07e58511a41200a4dc7f0e",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/browser.cjs": "53a26f2d75558a6ad2ea13c52217da708c1a1d7d355719e7d451dd6ef8345d81",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/build.py": "03c88bea3523511a5c8fce4465645d57fba7ef4a1d90e046d1e4a7cbe74226ea",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/capture-stop.py": "aa06b592ab8b3454f0750f5a8087ec8959ca3e96674877c39161e413230c0133",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/check-stageA.py": "8ddb425624edbbbaad6836bfc97535f0609900dad9a4f1e47aec4a79086af23f",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/diagnose.cjs": "74e34f9c6e027bb0c43aaeaec6bd76e71ecac765da9f6a7f9a5450c722b51140",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/monitor-mock.cjs": "dde7304d485b38d2b30ce5f725c2dfd73b8805a35dcc9e91858d2d21e74d6672",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/oracle.cjs": "7bdf4048a3e1322b0821ca794af98682da4037efed4868b67c4efb9a4b4667a2",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/pause-monitor.cjs": "37ec727ccf516165f703a24dc4b74563a22a1028c63546e394121cf499cef0cf",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/port-main.js": "542355b984a6cf35e22ab8799b9b7e5a928265e99f07e1caf83042e72b214ece",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/port-worker.js": "f82e3e1a10572576c0efa2088b00eaf62610cef18e6b71f7d7ebc9c506723d8a",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/runner.py": "0232a84866a3840c3819b58c19580fb4a56d7ede85bf18e4d2f1b28654109ccc",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/transport-mock.cjs": "f8809c35491213f19ede2acbad68589926c194a4202b8d123c5f12eecdcf17c2"
+      },
+      "served": {
+        "/game.js": {
+          "saved": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+          "current": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+          "is_generated": false
+        },
+        "/context.js": {
+          "saved": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+          "current": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+          "is_generated": false
+        },
+        "/shared-best-action.js": {
+          "saved": "37491ac0e9f2fb20b564fb2699ac58c3dfc35bff84ca888cd39b40036359132a",
+          "current": "37491ac0e9f2fb20b564fb2699ac58c3dfc35bff84ca888cd39b40036359132a",
+          "is_generated": false
+        },
+        "/numeric-browser.js": {
+          "saved": "027ff2fbaffc6e3b53925a7205fe2c989d1f49903a4601b6eab0aa49af6e851f",
+          "current": "00d4d518a613e1a28fb4ee010076d3bca20a7247b0d0a96a46dd4ca86b74df01",
+          "is_generated": false
+        },
+        "/player-control.js": {
+          "saved": "3b87d63253cd93267ccc9419bfddd334a3cbe5cacba4d98da9328109a3f33e5c",
+          "current": "3b87d63253cd93267ccc9419bfddd334a3cbe5cacba4d98da9328109a3f33e5c",
+          "is_generated": false
+        },
+        "/early-page.js": {
+          "saved": "dd5c6c00a7dc949630b58d86aa964d7d5e5af594e30d2dd3851a92600f3a71d2",
+          "current": "610e899acd43215efc9fa3a08f3c337248639505a57196e1a730a91f7afde4a8",
+          "is_generated": true
+        },
+        "/early-worker.js": {
+          "saved": "f82e3e1a10572576c0efa2088b00eaf62610cef18e6b71f7d7ebc9c506723d8a",
+          "current": "fd5f5b72a836164133b22f718d58ef31d2d4b0f8a4887070e1ac9346112de5e8",
+          "is_generated": true
+        },
+        "/protocol-worker.js": {
+          "saved": "5f74daff7279fcf9e3697fe538e280480705e42ba63c88b2a6789efa6d26d77c",
+          "current": "5f74daff7279fcf9e3697fe538e280480705e42ba63c88b2a6789efa6d26d77c",
+          "is_generated": false
+        },
+        "/player-base.js": {
+          "saved": "26bdf8f24715dd75ed22b43c15fa4ffc2f3c1c32231971e9f48b6cc21c763212",
+          "current": "fd5f5b72a836164133b22f718d58ef31d2d4b0f8a4887070e1ac9346112de5e8",
+          "is_generated": true
+        },
+        "/snapshot-cache.js": {
+          "saved": "8e695aa385386202976310a18cdb9bd9f36c09ea0e115abe86f463666561d0b0",
+          "current": "748fe01dfebf5e524465ef69255acf0026154188b9002a5338ca790ca092e7f7",
+          "is_generated": true
+        },
+        "/original-worker.js": {
+          "saved": "e566da94469926f7abbdc0816efa7671d5a49f016d6eeb06dd060b7e44f8c577",
+          "current": "9494e33e7204be208262914c04ea5eb0d7985872a6d7ebc6e4084d84729097d4",
+          "is_generated": true
+        },
+        "/ort/ort.min.js": {
+          "saved": "95c6f6611837cb50449cb6a0c092145bf493ac64cd0d004033cefc977366e7cb",
+          "current": "95c6f6611837cb50449cb6a0c092145bf493ac64cd0d004033cefc977366e7cb",
+          "is_generated": false
+        },
+        "/candidate-host.js": {
+          "saved": "dc6cf3e24774e5e6b52c8cf346090f53f261e58b0c7fda1e6d674c7142983d02",
+          "current": "dc6cf3e24774e5e6b52c8cf346090f53f261e58b0c7fda1e6d674c7142983d02",
+          "is_generated": false
+        },
+        "/checkpoint.js": {
+          "saved": "494581d5ce5fc38e7afb753d9ca92e0f49bb71ed516762b7ea48a0c6d89e1119",
+          "current": "2b736d696a099350bf724b40dd858fc3afe11ce17a1c143f3029e5fcd2f28d8c",
+          "is_generated": false
+        },
+        "/reference-core.js": {
+          "saved": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05",
+          "current": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05",
+          "is_generated": false
+        },
+        "/reference-control-run.js": {
+          "saved": "87dbd43b34f23793c36806ad41a09fda723b5f7b7b10745c0df8b055e3039a0c",
+          "current": "87dbd43b34f23793c36806ad41a09fda723b5f7b7b10745c0df8b055e3039a0c",
+          "is_generated": false
+        },
+        "/b.wasm": {
+          "saved": "500181795b373f69f6f2214ee1a77e12767e2f342e15a56ab5e27d0a0453f2c2",
+          "current": "500181795b373f69f6f2214ee1a77e12767e2f342e15a56ab5e27d0a0453f2c2",
+          "is_generated": false
+        },
+        "/model.onnx": {
+          "saved": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+          "current": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+          "is_generated": false
+        },
+        "/ort/ort-wasm-simd-threaded.jsep.mjs": {
+          "saved": "b69c8812bf2d8356dd248fef0abb35e22d1f05f9c593ca34d4b942f35ea93592",
+          "current": "b69c8812bf2d8356dd248fef0abb35e22d1f05f9c593ca34d4b942f35ea93592",
+          "is_generated": false
+        },
+        "/ort/ort-wasm-simd-threaded.jsep.wasm": {
+          "saved": "0663b902fb3937883a34375926bdfe3e1c86cd4c99cbc04c06a7cdf46c78bdde",
+          "current": "0663b902fb3937883a34375926bdfe3e1c86cd4c99cbc04c06a7cdf46c78bdde",
+          "is_generated": false
+        }
+      },
+      "source_launch_vs_stop": true,
+      "reader_final_status_file_present": true,
+      "summary": {
+        "issue": "quoridor-4lc.151",
+        "kind": "stageB",
+        "run": "port151-stageB-group2-r1",
+        "startup_NN": 6,
+        "model_sessions": 2,
+        "hand_NN": 0,
+        "started": 4,
+        "planned": 4,
+        "primary": null,
+        "secondary": []
+      }
+    },
+    {
+      "run": "port151-stageB-group3-r1",
+      "start": "2026-10-03T01:54:43.608525+00:00",
+      "end": "2026-10-03T01:56:23.801626+00:00",
+      "last_game_end_ms": 1790992581580.285,
+      "Modeldrop2": {
+        "players": [
+          {
+            "kind": "dropped",
+            "handles": 0,
+            "activeNN": 0,
+            "at_ms": 1790992583427.0898,
+            "producer_post_begin_ms": 1790992583427.0999,
+            "worker_engine": "candidate"
+          },
+          {
+            "kind": "dropped",
+            "handles": 0,
+            "activeNN": 0,
+            "at_ms": 1790992583427.8552,
+            "producer_post_begin_ms": 1790992583427.86,
+            "worker_engine": "reference"
+          }
+        ],
+        "handles": 0,
+        "activeNN": 0
+      },
+      "main": {
+        "main_timers": 0,
+        "pending_messages": []
+      },
+      "callbacks": {
+        "timer": false,
+        "busy": false,
+        "waited": true
+      },
+      "monitor": {
+        "UTC": "2026-10-03T01:56:23.379Z",
+        "state": "READY",
+        "failure": null,
+        "pending_children": [],
+        "all_owned_read_callbacks_waited": true,
+        "active_monitor_timer": false
+      },
+      "inner": {
+        "remaining_pids": 0,
+        "forced": true,
+        "waited": true,
+        "registered": 184,
+        "registration_ack": true
+      },
+      "outerwait": true,
+      "outer_unknown": [],
+      "outer_remaining": [],
+      "identity_denominator": 281,
+      "currentidentity": [],
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "saved_source_commit": null,
+      "launch_sources": {
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/adapters.cjs": "c02f218acbc03978c0d55ebde213a08d2edadb13b16aa5324e46bce7331de69f",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/admission.py": "5bf436602222a01c81f0065f1e2ba72c983a7f87ba07e58511a41200a4dc7f0e",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/browser.cjs": "53a26f2d75558a6ad2ea13c52217da708c1a1d7d355719e7d451dd6ef8345d81",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/build.py": "03c88bea3523511a5c8fce4465645d57fba7ef4a1d90e046d1e4a7cbe74226ea",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/capture-stop.py": "aa06b592ab8b3454f0750f5a8087ec8959ca3e96674877c39161e413230c0133",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/check-stageA.py": "8ddb425624edbbbaad6836bfc97535f0609900dad9a4f1e47aec4a79086af23f",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/diagnose.cjs": "74e34f9c6e027bb0c43aaeaec6bd76e71ecac765da9f6a7f9a5450c722b51140",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/monitor-mock.cjs": "dde7304d485b38d2b30ce5f725c2dfd73b8805a35dcc9e91858d2d21e74d6672",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/oracle.cjs": "7bdf4048a3e1322b0821ca794af98682da4037efed4868b67c4efb9a4b4667a2",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/pause-monitor.cjs": "37ec727ccf516165f703a24dc4b74563a22a1028c63546e394121cf499cef0cf",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/port-main.js": "542355b984a6cf35e22ab8799b9b7e5a928265e99f07e1caf83042e72b214ece",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/port-worker.js": "f82e3e1a10572576c0efa2088b00eaf62610cef18e6b71f7d7ebc9c506723d8a",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/runner.py": "0232a84866a3840c3819b58c19580fb4a56d7ede85bf18e4d2f1b28654109ccc",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/transport-mock.cjs": "f8809c35491213f19ede2acbad68589926c194a4202b8d123c5f12eecdcf17c2"
+      },
+      "served": {
+        "/game.js": {
+          "saved": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+          "current": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+          "is_generated": false
+        },
+        "/context.js": {
+          "saved": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+          "current": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+          "is_generated": false
+        },
+        "/shared-best-action.js": {
+          "saved": "37491ac0e9f2fb20b564fb2699ac58c3dfc35bff84ca888cd39b40036359132a",
+          "current": "37491ac0e9f2fb20b564fb2699ac58c3dfc35bff84ca888cd39b40036359132a",
+          "is_generated": false
+        },
+        "/numeric-browser.js": {
+          "saved": "027ff2fbaffc6e3b53925a7205fe2c989d1f49903a4601b6eab0aa49af6e851f",
+          "current": "00d4d518a613e1a28fb4ee010076d3bca20a7247b0d0a96a46dd4ca86b74df01",
+          "is_generated": false
+        },
+        "/player-control.js": {
+          "saved": "3b87d63253cd93267ccc9419bfddd334a3cbe5cacba4d98da9328109a3f33e5c",
+          "current": "3b87d63253cd93267ccc9419bfddd334a3cbe5cacba4d98da9328109a3f33e5c",
+          "is_generated": false
+        },
+        "/early-page.js": {
+          "saved": "dd5c6c00a7dc949630b58d86aa964d7d5e5af594e30d2dd3851a92600f3a71d2",
+          "current": "610e899acd43215efc9fa3a08f3c337248639505a57196e1a730a91f7afde4a8",
+          "is_generated": true
+        },
+        "/early-worker.js": {
+          "saved": "f82e3e1a10572576c0efa2088b00eaf62610cef18e6b71f7d7ebc9c506723d8a",
+          "current": "fd5f5b72a836164133b22f718d58ef31d2d4b0f8a4887070e1ac9346112de5e8",
+          "is_generated": true
+        },
+        "/protocol-worker.js": {
+          "saved": "5f74daff7279fcf9e3697fe538e280480705e42ba63c88b2a6789efa6d26d77c",
+          "current": "5f74daff7279fcf9e3697fe538e280480705e42ba63c88b2a6789efa6d26d77c",
+          "is_generated": false
+        },
+        "/player-base.js": {
+          "saved": "26bdf8f24715dd75ed22b43c15fa4ffc2f3c1c32231971e9f48b6cc21c763212",
+          "current": "fd5f5b72a836164133b22f718d58ef31d2d4b0f8a4887070e1ac9346112de5e8",
+          "is_generated": true
+        },
+        "/snapshot-cache.js": {
+          "saved": "8e695aa385386202976310a18cdb9bd9f36c09ea0e115abe86f463666561d0b0",
+          "current": "748fe01dfebf5e524465ef69255acf0026154188b9002a5338ca790ca092e7f7",
+          "is_generated": true
+        },
+        "/original-worker.js": {
+          "saved": "e566da94469926f7abbdc0816efa7671d5a49f016d6eeb06dd060b7e44f8c577",
+          "current": "9494e33e7204be208262914c04ea5eb0d7985872a6d7ebc6e4084d84729097d4",
+          "is_generated": true
+        },
+        "/ort/ort.min.js": {
+          "saved": "95c6f6611837cb50449cb6a0c092145bf493ac64cd0d004033cefc977366e7cb",
+          "current": "95c6f6611837cb50449cb6a0c092145bf493ac64cd0d004033cefc977366e7cb",
+          "is_generated": false
+        },
+        "/candidate-host.js": {
+          "saved": "dc6cf3e24774e5e6b52c8cf346090f53f261e58b0c7fda1e6d674c7142983d02",
+          "current": "dc6cf3e24774e5e6b52c8cf346090f53f261e58b0c7fda1e6d674c7142983d02",
+          "is_generated": false
+        },
+        "/checkpoint.js": {
+          "saved": "494581d5ce5fc38e7afb753d9ca92e0f49bb71ed516762b7ea48a0c6d89e1119",
+          "current": "2b736d696a099350bf724b40dd858fc3afe11ce17a1c143f3029e5fcd2f28d8c",
+          "is_generated": false
+        },
+        "/reference-core.js": {
+          "saved": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05",
+          "current": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05",
+          "is_generated": false
+        },
+        "/reference-control-run.js": {
+          "saved": "87dbd43b34f23793c36806ad41a09fda723b5f7b7b10745c0df8b055e3039a0c",
+          "current": "87dbd43b34f23793c36806ad41a09fda723b5f7b7b10745c0df8b055e3039a0c",
+          "is_generated": false
+        },
+        "/b.wasm": {
+          "saved": "500181795b373f69f6f2214ee1a77e12767e2f342e15a56ab5e27d0a0453f2c2",
+          "current": "500181795b373f69f6f2214ee1a77e12767e2f342e15a56ab5e27d0a0453f2c2",
+          "is_generated": false
+        },
+        "/model.onnx": {
+          "saved": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+          "current": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+          "is_generated": false
+        },
+        "/ort/ort-wasm-simd-threaded.jsep.mjs": {
+          "saved": "b69c8812bf2d8356dd248fef0abb35e22d1f05f9c593ca34d4b942f35ea93592",
+          "current": "b69c8812bf2d8356dd248fef0abb35e22d1f05f9c593ca34d4b942f35ea93592",
+          "is_generated": false
+        },
+        "/ort/ort-wasm-simd-threaded.jsep.wasm": {
+          "saved": "0663b902fb3937883a34375926bdfe3e1c86cd4c99cbc04c06a7cdf46c78bdde",
+          "current": "0663b902fb3937883a34375926bdfe3e1c86cd4c99cbc04c06a7cdf46c78bdde",
+          "is_generated": false
+        }
+      },
+      "source_launch_vs_stop": true,
+      "reader_final_status_file_present": true,
+      "summary": {
+        "issue": "quoridor-4lc.151",
+        "kind": "stageB",
+        "run": "port151-stageB-group3-r1",
+        "startup_NN": 6,
+        "model_sessions": 2,
+        "hand_NN": 0,
+        "started": 4,
+        "planned": 4,
+        "primary": null,
+        "secondary": []
+      }
+    },
+    {
+      "run": "port151-stageB-group4-r1",
+      "start": "2026-10-03T01:57:40.377067+00:00",
+      "end": "2026-10-03T01:59:31.444851+00:00",
+      "last_game_end_ms": 1790992768940.225,
+      "Modeldrop2": {
+        "players": [
+          {
+            "kind": "dropped",
+            "handles": 0,
+            "activeNN": 0,
+            "at_ms": 1790992771040.975,
+            "producer_post_begin_ms": 1790992771040.98,
+            "worker_engine": "candidate"
+          },
+          {
+            "kind": "dropped",
+            "handles": 0,
+            "activeNN": 0,
+            "at_ms": 1790992771041.945,
+            "producer_post_begin_ms": 1790992771041.95,
+            "worker_engine": "reference"
+          }
+        ],
+        "handles": 0,
+        "activeNN": 0
+      },
+      "main": {
+        "main_timers": 0,
+        "pending_messages": []
+      },
+      "callbacks": {
+        "timer": false,
+        "busy": false,
+        "waited": true
+      },
+      "monitor": {
+        "UTC": "2026-10-03T01:59:30.983Z",
+        "state": "READY",
+        "failure": null,
+        "pending_children": [],
+        "all_owned_read_callbacks_waited": true,
+        "active_monitor_timer": false
+      },
+      "inner": {
+        "remaining_pids": 0,
+        "forced": true,
+        "waited": true,
+        "registered": 197,
+        "registration_ack": true
+      },
+      "outerwait": true,
+      "outer_unknown": [],
+      "outer_remaining": [],
+      "identity_denominator": 328,
+      "currentidentity": [],
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "saved_source_commit": null,
+      "launch_sources": {
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/adapters.cjs": "c02f218acbc03978c0d55ebde213a08d2edadb13b16aa5324e46bce7331de69f",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/admission.py": "5bf436602222a01c81f0065f1e2ba72c983a7f87ba07e58511a41200a4dc7f0e",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/browser.cjs": "53a26f2d75558a6ad2ea13c52217da708c1a1d7d355719e7d451dd6ef8345d81",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/build.py": "03c88bea3523511a5c8fce4465645d57fba7ef4a1d90e046d1e4a7cbe74226ea",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/capture-stop.py": "aa06b592ab8b3454f0750f5a8087ec8959ca3e96674877c39161e413230c0133",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/check-stageA.py": "8ddb425624edbbbaad6836bfc97535f0609900dad9a4f1e47aec4a79086af23f",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/collect-games.py": "5bc37f7a76a7156ef2969e1803e35eb17f7706e6d26c19d9eb99f6913de9d3c4",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/diagnose.cjs": "74e34f9c6e027bb0c43aaeaec6bd76e71ecac765da9f6a7f9a5450c722b51140",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/monitor-mock.cjs": "dde7304d485b38d2b30ce5f725c2dfd73b8805a35dcc9e91858d2d21e74d6672",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/oracle.cjs": "7bdf4048a3e1322b0821ca794af98682da4037efed4868b67c4efb9a4b4667a2",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/pause-monitor.cjs": "37ec727ccf516165f703a24dc4b74563a22a1028c63546e394121cf499cef0cf",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/port-main.js": "542355b984a6cf35e22ab8799b9b7e5a928265e99f07e1caf83042e72b214ece",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/port-worker.js": "f82e3e1a10572576c0efa2088b00eaf62610cef18e6b71f7d7ebc9c506723d8a",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/runner.py": "0232a84866a3840c3819b58c19580fb4a56d7ede85bf18e4d2f1b28654109ccc",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/transport-mock.cjs": "f8809c35491213f19ede2acbad68589926c194a4202b8d123c5f12eecdcf17c2"
+      },
+      "served": {
+        "/game.js": {
+          "saved": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+          "current": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+          "is_generated": false
+        },
+        "/context.js": {
+          "saved": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+          "current": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+          "is_generated": false
+        },
+        "/shared-best-action.js": {
+          "saved": "37491ac0e9f2fb20b564fb2699ac58c3dfc35bff84ca888cd39b40036359132a",
+          "current": "37491ac0e9f2fb20b564fb2699ac58c3dfc35bff84ca888cd39b40036359132a",
+          "is_generated": false
+        },
+        "/numeric-browser.js": {
+          "saved": "027ff2fbaffc6e3b53925a7205fe2c989d1f49903a4601b6eab0aa49af6e851f",
+          "current": "00d4d518a613e1a28fb4ee010076d3bca20a7247b0d0a96a46dd4ca86b74df01",
+          "is_generated": false
+        },
+        "/player-control.js": {
+          "saved": "3b87d63253cd93267ccc9419bfddd334a3cbe5cacba4d98da9328109a3f33e5c",
+          "current": "3b87d63253cd93267ccc9419bfddd334a3cbe5cacba4d98da9328109a3f33e5c",
+          "is_generated": false
+        },
+        "/early-page.js": {
+          "saved": "dd5c6c00a7dc949630b58d86aa964d7d5e5af594e30d2dd3851a92600f3a71d2",
+          "current": "610e899acd43215efc9fa3a08f3c337248639505a57196e1a730a91f7afde4a8",
+          "is_generated": true
+        },
+        "/early-worker.js": {
+          "saved": "f82e3e1a10572576c0efa2088b00eaf62610cef18e6b71f7d7ebc9c506723d8a",
+          "current": "fd5f5b72a836164133b22f718d58ef31d2d4b0f8a4887070e1ac9346112de5e8",
+          "is_generated": true
+        },
+        "/protocol-worker.js": {
+          "saved": "5f74daff7279fcf9e3697fe538e280480705e42ba63c88b2a6789efa6d26d77c",
+          "current": "5f74daff7279fcf9e3697fe538e280480705e42ba63c88b2a6789efa6d26d77c",
+          "is_generated": false
+        },
+        "/player-base.js": {
+          "saved": "26bdf8f24715dd75ed22b43c15fa4ffc2f3c1c32231971e9f48b6cc21c763212",
+          "current": "fd5f5b72a836164133b22f718d58ef31d2d4b0f8a4887070e1ac9346112de5e8",
+          "is_generated": true
+        },
+        "/snapshot-cache.js": {
+          "saved": "8e695aa385386202976310a18cdb9bd9f36c09ea0e115abe86f463666561d0b0",
+          "current": "748fe01dfebf5e524465ef69255acf0026154188b9002a5338ca790ca092e7f7",
+          "is_generated": true
+        },
+        "/original-worker.js": {
+          "saved": "e566da94469926f7abbdc0816efa7671d5a49f016d6eeb06dd060b7e44f8c577",
+          "current": "9494e33e7204be208262914c04ea5eb0d7985872a6d7ebc6e4084d84729097d4",
+          "is_generated": true
+        },
+        "/ort/ort.min.js": {
+          "saved": "95c6f6611837cb50449cb6a0c092145bf493ac64cd0d004033cefc977366e7cb",
+          "current": "95c6f6611837cb50449cb6a0c092145bf493ac64cd0d004033cefc977366e7cb",
+          "is_generated": false
+        },
+        "/candidate-host.js": {
+          "saved": "dc6cf3e24774e5e6b52c8cf346090f53f261e58b0c7fda1e6d674c7142983d02",
+          "current": "dc6cf3e24774e5e6b52c8cf346090f53f261e58b0c7fda1e6d674c7142983d02",
+          "is_generated": false
+        },
+        "/checkpoint.js": {
+          "saved": "494581d5ce5fc38e7afb753d9ca92e0f49bb71ed516762b7ea48a0c6d89e1119",
+          "current": "2b736d696a099350bf724b40dd858fc3afe11ce17a1c143f3029e5fcd2f28d8c",
+          "is_generated": false
+        },
+        "/reference-core.js": {
+          "saved": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05",
+          "current": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05",
+          "is_generated": false
+        },
+        "/reference-control-run.js": {
+          "saved": "87dbd43b34f23793c36806ad41a09fda723b5f7b7b10745c0df8b055e3039a0c",
+          "current": "87dbd43b34f23793c36806ad41a09fda723b5f7b7b10745c0df8b055e3039a0c",
+          "is_generated": false
+        },
+        "/b.wasm": {
+          "saved": "500181795b373f69f6f2214ee1a77e12767e2f342e15a56ab5e27d0a0453f2c2",
+          "current": "500181795b373f69f6f2214ee1a77e12767e2f342e15a56ab5e27d0a0453f2c2",
+          "is_generated": false
+        },
+        "/model.onnx": {
+          "saved": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+          "current": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+          "is_generated": false
+        },
+        "/ort/ort-wasm-simd-threaded.jsep.mjs": {
+          "saved": "b69c8812bf2d8356dd248fef0abb35e22d1f05f9c593ca34d4b942f35ea93592",
+          "current": "b69c8812bf2d8356dd248fef0abb35e22d1f05f9c593ca34d4b942f35ea93592",
+          "is_generated": false
+        },
+        "/ort/ort-wasm-simd-threaded.jsep.wasm": {
+          "saved": "0663b902fb3937883a34375926bdfe3e1c86cd4c99cbc04c06a7cdf46c78bdde",
+          "current": "0663b902fb3937883a34375926bdfe3e1c86cd4c99cbc04c06a7cdf46c78bdde",
+          "is_generated": false
+        }
+      },
+      "source_launch_vs_stop": true,
+      "reader_final_status_file_present": true,
+      "summary": {
+        "issue": "quoridor-4lc.151",
+        "kind": "stageB",
+        "run": "port151-stageB-group4-r1",
+        "startup_NN": 6,
+        "model_sessions": 2,
+        "hand_NN": 0,
+        "started": 4,
+        "planned": 4,
+        "primary": null,
+        "secondary": []
+      }
+    }
+  ],
+  "scienceStopSHA": "c86081a4b96cca63934b0e62aa1c82ff86560ca6beeb2fd62635983074ebb304",
+  "rawResultsSHA": "dd7ffd8fc10de57031696b8324cf0eaad3f553d7428beed77e3d7e39f3ccbc3e",
+  "unknown": [
+    "exactAtomicstore",
+    "midrunclockdrift",
+    "kernelCPU",
+    "effectiveCycles",
+    "instantRSSpeak",
+    "allhost",
+    "buildEntireDependencyReadAudit",
+    "independentBrowserFetchdigest"
+  ],
+  "classification": {
+    "planned": 16,
+    "normal_terminal": 16,
+    "typedfault": 0,
+    "notstarted": 0,
+    "infraunknown": 0,
+    "operational_identification": [
+      0.4375,
+      0.4375
+    ],
+    "terminal_quality_identification": [
+      0.4375,
+      0.4375
+    ],
+    "WDL": [
+      7,
+      0,
+      9
+    ],
+    "pairs": [
+      {
+        "pair": 1,
+        "Xi": 0.5,
+        "same_side_winner": true,
+        "layer": 4
+      },
+      {
+        "pair": 2,
+        "Xi": 0.5,
+        "same_side_winner": true,
+        "layer": 5
+      },
+      {
+        "pair": 3,
+        "Xi": 0.5,
+        "same_side_winner": true,
+        "layer": 12
+      },
+      {
+        "pair": 4,
+        "Xi": 0.5,
+        "same_side_winner": true,
+        "layer": 13
+      },
+      {
+        "pair": 5,
+        "Xi": 0.5,
+        "same_side_winner": true,
+        "layer": 4
+      },
+      {
+        "pair": 6,
+        "Xi": 0.5,
+        "same_side_winner": true,
+        "layer": 5
+      },
+      {
+        "pair": 7,
+        "Xi": 0,
+        "same_side_winner": false,
+        "layer": 12
+      },
+      {
+        "pair": 8,
+        "Xi": 0.5,
+        "same_side_winner": true,
+        "layer": 13
+      }
+    ],
+    "layers": {
+      "4": 0.5,
+      "5": 0.5,
+      "12": 0.25,
+      "13": 0.5
+    },
+    "assumption_only_Hoeffding_eps": 0.48016139565996035,
+    "assumption_only_interval": [
+      0,
+      0.9176613956599604
+    ],
+    "independence_or_coverage_proved": false
+  },
+  "counts": {
+    "candidate": {
+      "API": 3886,
+      "adoptedNN": 3533,
+      "backup": 4181,
+      "noNN": 648,
+      "returned_discard": 222
+    },
+    "reference": {
+      "API": 4543,
+      "adoptedNN": 4189,
+      "backup": 5060,
+      "noNN": 871,
+      "returned_discard": 240
+    }
+  },
+  "startup_separate": 24,
+  "unique_currentidentity_denominator": 1213,
+  "currentabsence_only": true,
+  "clocks": {
+    "candidate": {
+      "requests": 428,
+      "public_elapsed_minmax": [
+        410.31982421875,
+        417.219970703125
+      ],
+      "ACK_minmax": [
+        402.18994140625,
+        512.864990234375
+      ],
+      "ownwait_sum": 2.020263671875,
+      "other_t0_before_ACK": 302,
+      "publication_end_straddles_cutoff": [
+        {
+          "id": "port151-stageB-group1-r1-81",
+          "engine": "candidate",
+          "elapsed": 412.445068359375,
+          "cutoffMargin": -0.08974609375,
+          "cutoffUpperMargin": 0.130029296875,
+          "ACK_ms": 408.534912109375,
+          "other_t0_before_ACK": false,
+          "own_wait": 0,
+          "root": 9,
+          "edge": 8,
+          "NN": 9,
+          "NN_discard": 0
+        }
+      ],
+      "publication_end_definitely_after_cutoff": []
+    },
+    "reference": {
+      "requests": 429,
+      "public_elapsed_minmax": [
+        410.275146484375,
+        419.23486328125
+      ],
+      "ACK_minmax": [
+        402.25,
+        547.275146484375
+      ],
+      "ownwait_sum": 0.64501953125,
+      "other_t0_before_ACK": 293,
+      "publication_end_straddles_cutoff": [
+        {
+          "id": "port151-stageB-group3-r1-87",
+          "engine": "reference",
+          "elapsed": 412.989990234375,
+          "cutoffMargin": -0.009912109375000006,
+          "cutoffUpperMargin": 0.20009765625,
+          "ACK_ms": 406.155029296875,
+          "other_t0_before_ACK": false,
+          "own_wait": 0,
+          "root": 42,
+          "edge": 41,
+          "NN": 9,
+          "NN_discard": 0
+        }
+      ],
+      "publication_end_definitely_after_cutoff": []
+    }
+  },
+  "necessary_archive_stream_restore_count": 60,
+  "stream_no_full_copy_extract": true
+}

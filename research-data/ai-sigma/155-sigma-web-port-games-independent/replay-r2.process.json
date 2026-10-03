@@ -1,0 +1,41 @@
+{
+  "run": "replay-r2",
+  "command": [
+    "node",
+    "--max-old-space-size=256",
+    "tools/ai-sigma-sigma-web-port-games-independent/replay.cjs"
+  ],
+  "UTC_start": "2026-10-03T02:18:54.518126+00:00",
+  "UTC_end": "2026-10-03T02:18:54.583636+00:00",
+  "wall_s": 0.06552457201178186,
+  "exit": 1,
+  "reason": null,
+  "peak_observed_current_RSS": 79847424,
+  "CPU": [
+    0
+  ],
+  "RAMguard_bytes": 939524096,
+  "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+  "owned": [
+    {
+      "pid": 3045968,
+      "starttick": 24685969
+    },
+    {
+      "pid": 3046071,
+      "starttick": 24686363
+    }
+  ],
+  "remaining": [],
+  "source_before": {
+    "tools/ai-sigma-sigma-web-port-games-independent/replay.cjs": "b560d16500ed3b498924a7f24de79034ea38f90d5b0005c7c6dad9b43a174b48",
+    "tools/ai-sigma-sigma-web-port-games-independent/managed.py": "cc4c6f67df319dd27a50d46d125032a5db7e26edd9e7b28515c95194a5400324"
+  },
+  "source_after": {
+    "tools/ai-sigma-sigma-web-port-games-independent/replay.cjs": "b560d16500ed3b498924a7f24de79034ea38f90d5b0005c7c6dad9b43a174b48",
+    "tools/ai-sigma-sigma-web-port-games-independent/managed.py": "cc4c6f67df319dd27a50d46d125032a5db7e26edd9e7b28515c95194a5400324"
+  },
+  "child_waited": true,
+  "instant_peak_and_short_children_unknown": true,
+  "NN_Chrome_game": 0
+}

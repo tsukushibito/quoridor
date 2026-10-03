@@ -1,0 +1,155 @@
+{
+  "engines": {
+    "candidate": {
+      "requests": 428,
+      "API_started": 3886,
+      "API_returned": 3886,
+      "discarded": 222,
+      "postpublic_start_definite": 0,
+      "postcutoff_start_definite": 0,
+      "postcutoff_start_possible": 0,
+      "returned_afterpublic_definite": 222,
+      "ACK_after500": 1,
+      "clockbrackets": [
+        {
+          "id": "port151-stageB-group1-r1-1",
+          "lo": -0.119775390625,
+          "hi": 0.1,
+          "error": 0.2098876953125
+        },
+        {
+          "id": "port151-stageB-group1-r1-3",
+          "lo": -0.119775390625,
+          "hi": 0.1,
+          "error": 0.2098876953125
+        },
+        {
+          "id": "port151-stageB-group1-r1-5",
+          "lo": -0.119775390625,
+          "hi": 0.1,
+          "error": 0.2098876953125
+        },
+        {
+          "id": "port151-stageB-group1-r1-7",
+          "lo": -0.119775390625,
+          "hi": 0.1,
+          "error": 0.2098876953125
+        },
+        {
+          "id": "port151-stageB-group1-r1-9",
+          "lo": -0.119775390625,
+          "hi": 0.1,
+          "error": 0.2098876953125
+        },
+        {
+          "id": "port151-stageB-group1-r1-11",
+          "lo": -0.119775390625,
+          "hi": 0.1,
+          "error": 0.2098876953125
+        },
+        {
+          "id": "port151-stageB-group1-r1-13",
+          "lo": -0.119775390625,
+          "hi": 0.1,
+          "error": 0.2098876953125
+        },
+        {
+          "id": "port151-stageB-group1-r1-15",
+          "lo": -0.119775390625,
+          "hi": 0.1,
+          "error": 0.2098876953125
+        }
+      ],
+      "cache_margin_min": 0.030029296875,
+      "public_margin_min": 82.780029296875
+    },
+    "reference": {
+      "requests": 429,
+      "API_started": 4543,
+      "API_returned": 4543,
+      "discarded": 240,
+      "postpublic_start_definite": 0,
+      "postcutoff_start_definite": 0,
+      "postcutoff_start_possible": 1,
+      "returned_afterpublic_definite": 240,
+      "ACK_after500": 3,
+      "clockbrackets": [
+        {
+          "id": "port151-stageB-group1-r1-2",
+          "lo": -0.11513671875,
+          "hi": 0.094873046875,
+          "error": 0.2050048828125
+        },
+        {
+          "id": "port151-stageB-group1-r1-4",
+          "lo": -0.11513671875,
+          "hi": 0.094873046875,
+          "error": 0.2050048828125
+        },
+        {
+          "id": "port151-stageB-group1-r1-6",
+          "lo": -0.11513671875,
+          "hi": 0.094873046875,
+          "error": 0.2050048828125
+        },
+        {
+          "id": "port151-stageB-group1-r1-8",
+          "lo": -0.11513671875,
+          "hi": 0.094873046875,
+          "error": 0.2050048828125
+        },
+        {
+          "id": "port151-stageB-group1-r1-10",
+          "lo": -0.11513671875,
+          "hi": 0.094873046875,
+          "error": 0.2050048828125
+        },
+        {
+          "id": "port151-stageB-group1-r1-12",
+          "lo": -0.11513671875,
+          "hi": 0.094873046875,
+          "error": 0.2050048828125
+        },
+        {
+          "id": "port151-stageB-group1-r1-14",
+          "lo": -0.11513671875,
+          "hi": 0.094873046875,
+          "error": 0.2050048828125
+        },
+        {
+          "id": "port151-stageB-group1-r1-16",
+          "lo": -0.11513671875,
+          "hi": 0.094873046875,
+          "error": 0.2050048828125
+        }
+      ],
+      "cache_margin_min": 0.10009765625,
+      "public_margin_min": 80.76513671875
+    }
+  },
+  "exactstore_missing": true,
+  "clock_drift_missing": true,
+  "root_edge_CP_checked": 857,
+  "raw_r2_monitor_error_preserved": {
+    "code": "BEADS_SCHEMA_ERROR",
+    "cause": {
+      "name": "SyntaxError",
+      "message": "Unterminated string in JSON at position 93104 (line 27 column 91634)",
+      "code": null,
+      "signal": null,
+      "killed": null
+    }
+  },
+  "StageB_group1_control_status_missing_but_saved_monitor_READY": true,
+  "late_handoff": {
+    "SHA256": "def0c4b343dd0068eec9090c651ae3d70f5dc1e6b8e11b895e20e196cd1170b5",
+    "data_report_git": "0e13191bacbba7f1f92f66d3c664e2745aff26fc",
+    "stop_SHA256": "c6868015bac31ea2e975ed384675bc0ad8b16a39b0c9aae566c5cef0ff0b297e",
+    "StageB_WDL": [
+      7,
+      0,
+      9
+    ],
+    "same_science_results": true
+  }
+}
