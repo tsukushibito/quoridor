@@ -1,0 +1,168 @@
+{
+  "issue": "quoridor-4lc.173",
+  "contract_git": "304c63f782941ee390056083670d8ece48bdadf3",
+  "statistics": {
+    "status": "ADOPTED",
+    "coordinator_git": "af2ed3fda471f92b8c077809dac65ab199a039a7",
+    "theta": 0.45,
+    "threshold": 20,
+    "lambda_plus": [
+      0.25,
+      0.5,
+      1,
+      1.5,
+      2
+    ],
+    "lambda_minus": [
+      0.25,
+      0.5,
+      1,
+      1.5
+    ],
+    "primary": "sum P_a >= 100*240^n",
+    "inferiority": "sum Q_a >= 80*240^n",
+    "Ylow_high": "quality score unknown [0,1] all6 registered game; operational Cfault0 separate",
+    "simultaneous_directions": "NOT simultaneous two-sided95; both hit => NUMERIC_OR_MODEL_UNKNOWN",
+    "assumption": "H0 conditional E[Y|past]<=.45; stationary common conditional mean across3core balanced distribution. Marginal mean alone insufficient; hypothesis not proved by fresh entropy",
+    "stopping": "first resolved registered block reaching either exact threshold; otherwise hard resource/deadline/capacity; no outcome-based additions/replacements",
+    "future_unregistered": "all1200 capacity statuses, omitted from prefix wealth, included capacity descriptive interval",
+    "epoch2_reset": "New input/censoring plan, oldepoch wealth/results separate; no outcome-based rule changes"
+  },
+  "science_ready": false,
+  "mode": {
+    "cores": [
+      2,
+      4,
+      6
+    ],
+    "arenas": 3,
+    "same_core_per_arena_engine_ORT_management": true,
+    "ops_CPU0_reserved": true,
+    "RAM": 4831838208,
+    "RAM_guard": 4294967296
+  },
+  "capacity": {
+    "blocks": 200,
+    "pairs": 600,
+    "games": 1200
+  },
+  "sampling": "fresh independent epoch2 entropy after frozen code; target once uniform8 per pair; same pawn/wall .5/categoryuniform/legal/source/history/balance filters; proposal0..4095 first suitable. Potential first-accepted-opening continuation distribution at fixed target; cap is censoring, NOT a quality outcome. Eventual acceptance/support and stationarity are model assumptions. If cap fails, no large continuation run; alternate distribution is a future preregistered plan.",
+  "searchseed": 1979,
+  "history_reset": "fresh exact legal opening replay at each color game; each search fresh tree; no previous result/NN reuse",
+  "provider": "native Python ORT1.30 CPUExecutionProvider SEQUENTIAL intra/inter1 same ONNX d790",
+  "reference": "fixed Sigma-Web751186 native-hosted JS, not C++/browser",
+  "clock": {
+    "controller": "single per-arena process.hrtime monotonic",
+    "cutoff": 402,
+    "public_planned": 411,
+    "public_deadline": 500,
+    "admit": "sync validate/clone/tentativecache/actualend; rollback late/unknown; no await/public mid-handler",
+    "search_cost_inside": "engine prefix replay/features/NN/pipe/parse/control-yield/CP validation/clone/cache",
+    "common_outside": "common legal judge, state advance, journal before next input; measured separately",
+    "quiescence": "both dedicated engine pending0 and result activeNN0/handles0/searchfalse, NNstarted=returned before nextt0; after-public cause-side cleanup",
+    "clock_unknown": "quality[0,1]; no newbackup afterdeadline; no completed game replacement",
+    "kernelCPU_exact": "unmeasured, allowed logical cores and same monotonic clock target"
+  },
+  "initialization": "6 held dedicatedsessions once before all registeredblocks, initial startup6 separate; no block reinit planned; failure stops whole run",
+  "limits": {
+    "heavy_seconds": 3600,
+    "block_hard_seconds": 300,
+    "next_block_headroom_seconds": 305,
+    "NN": 2000000,
+    "NN_allocation": "remaining 666666-minus prior eachcore; total acrossepochs<=1999998",
+    "depth": 200,
+    "nodes": 200000,
+    "bytes": 134217728,
+    "K": 1000000,
+    "storage_reservation": 536870912,
+    "storage_guard": 469762048,
+    "Git_index": "in-memory subtree, no full on-disk index",
+    "science_end": "2026-10-03T07:55:00Z",
+    "processing_end": "2026-10-03T08:00:00Z",
+    "submission": "2026-10-03T08:10:00Z",
+    "startup": "actual6prior+6new separate; held for remainingblocks; routine reinitcost actual, no successfulgame replay"
+  },
+  "GPU_forward_overlap": false,
+  "old_results_mixed": false,
+  "all_faults": "Cfault operational0 vs qualityunknown; Rfault/infra/clock/generationmissing/unfinished unknown; game terminal scores kept separate from clock qualification",
+  "first_root_teacher": "holdout only; \u03c0 visits/rootNN/rootmean/z/views/lineage separate; no training use",
+  "NN0_checks": {
+    "clock_stats_engine": "native173-mock-r3 exit0",
+    "3arena_pool": "native173-poolmock-r1 exit0",
+    "r1_r2_debug_failures_retained": true
+  },
+  "freeze": {
+    "tools/ai-sigma-native-ni-arena/common.cjs": "d883fadd1df13fa056130b19ec17e36ae3fc1ea09799394a684a9d22f829110f",
+    "tools/ai-sigma-native-ni-arena/signatures.cjs": "f3abd5e32f0c1675da96cd910bdb25249813cba4ab95d9bdb56f4c32028fc009",
+    "tools/ai-sigma-native-ni-arena/continuation.cjs": "ba94a5aa11b1d6519c13c2c9ee4a9eda6bae869891c6b55e0a800faa35213c62",
+    "tools/ai-sigma-native-ni-arena/arena.cjs": "bb741c8c4f2579d5d95782a149acf4fc03898e0f6169e3330aa6fc30cc472bc3",
+    "tools/ai-sigma-native-ni-arena/generate.cjs": "9cdffe04585d205a891ad678b7449ee08e10e9ca218bbc3a5fd1f6c764a902c3",
+    "tools/ai-sigma-native-ni-arena/pool.cjs": "5044f95b6a605389d6ed550b522aba29a0026b0e6908afa300e6058302baeb02",
+    "tools/ai-sigma-native-ni-arena/save-tree.py": "db1d068b9f9d2440617b37dacdfcb87dbe0a8f2ef0af63b78277834c070b611f",
+    "tools/ai-sigma-native-ni-arena/runner.py": "ddf2f3f71c1d5f70f3b9d890b7caa43541642e96f25767c21df873ff98ce150e",
+    "tools/ai-sigma-native-ni-arena/statistics.cjs": "d1f1052a3cea442662c57d309a74da3219cd2918bf177b311b0320f8aaa63f42",
+    "tools/ai-sigma-native-ni-arena/controller.cjs": "a8a2047861c9e10efa2bab41979623b0f3b66a3dfea6ca3b3ffa5a2703d4f355",
+    "tools/ai-sigma-native-ni-arena/mock.cjs": "3825181170d7596085aac3fdd0d16815b87c75a682814f7f58f59513b86682d4",
+    "tools/ai-sigma-native-ni-arena/admission.py": "9877f44b2afd12fbcfe8db950de00068ee69d9a3e5e5cf31fa0f8308b66fd7fc",
+    "tools/ai-sigma-native-ni-arena/load-engine.cjs": "0380ae721bb220c0e99c10e0d0bd734d66a0e0bfbc23072fc7dfcb264723afb3",
+    "tools/ai-sigma-native-ni-arena/block-ready.py": "48233ee0d6fc6b3d981344fbc305dc77d28dcb9aa640d300c89666625d97992a",
+    "tools/ai-sigma-native-ni-arena/pause-monitor.cjs": "9ee1932ade59a4b2ac6f5ac02c05ebfa43f6166703e235ecbe586c3882677e38",
+    "tools/ai-sigma-native-ni-arena/compact-beads.py": "63dd13b825818e5d1a2a34c466383cc81ad667fac8c0fe77f065cbebf91be8d3",
+    "tools/ai-sigma-native-ni-arena/generate-block.cjs": "6e92818a3296508c93d705c29d5364b3bf456879f7a822e8f9bede44b3bef54d"
+  },
+  "UTC": "2026-10-03T06:49:34.596417+00:00",
+  "generator_erratum": {
+    "draft_git": "3c833ff8ca28dd09a15c638dc503e382010bed4a",
+    "draft_hash": "90c1c7ea616b87f99993f656536bb6083d5965781201c60b1a10d1062b6ce6e7",
+    "fix": "target uniform once per pair, never redrawn by acceptance filters; same captured entropy, no AI/NN/results",
+    "draft_source_reproducible": true
+  },
+  "source_git": "9e121d4f967b04d8d18b35e681c986a2b03a6da2",
+  "input_manifest_SHA256": "26cd9d90f5658ebf8fdeee227b78e09588142c3bba6e47f822c901f3db6b8085",
+  "input_slots_generated": 497,
+  "ready_UTC": "2026-10-03T06:52:25.098441+00:00",
+  "epoch": 2,
+  "new_epoch_independent": true,
+  "old_registered_inputs_reused": false,
+  "old_epoch_scores_mixed": false,
+  "generation_cap": 4096,
+  "realization": "LAZY: before each admitted block register all6 slots -> exact frozen block seeds NN0 generate <=4096/first accepted per pair -> save allattempts -> if any still missing or prior started input signature reused, registered whole6 qualityunknown and stop PLAN_GENERATION_UNSETTLED; no game started; no success substitution",
+  "prior_heavy_seconds": 54.491439,
+  "prior_hand_NN_by_core": {
+    "2": 6376,
+    "4": 5735,
+    "6": 3534
+  },
+  "new_hand_NN_allocation": {
+    "2": 660290,
+    "4": 660931,
+    "6": 663132
+  },
+  "startup_actual_prior": 6,
+  "startup_first_new_epoch": 6,
+  "source_control_erratum": {
+    "old_read_failure": "06:53:42.574 BEADS_READ_ERROR timeout5s, old pending block continued to terminal because callback was not wired; retain rawterminal but allregistered qualityqualification UNKNOWN",
+    "repair": "ownread timeout10s; failure callback immediately aborts allarenas/stopCurrent; no further search aftercontrolunknown; no outcome/policy/caps/math/model change",
+    "NN0_new_pool": "native173-poolmock-r2 exit0"
+  },
+  "continuation_evidence": {
+    "selection_before_data": [
+      {
+        "pair": 10,
+        "target": 48
+      },
+      {
+        "pair": 7,
+        "target": 49
+      }
+    ],
+    "firstaccepted_onebased": [
+      348,
+      408
+    ],
+    "total_wall_ms": 553.528028011322,
+    "NN": 0,
+    "old_success_replaced": false,
+    "only_two_static_classes_no_general_acceptance_guarantee": true
+  }
+}

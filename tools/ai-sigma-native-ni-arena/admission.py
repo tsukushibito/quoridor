@@ -66,7 +66,7 @@ def admit(c,out,tool,runs):
  current=physical(out);capacity=storage(out,tool)
  for f in runs.glob('native173-*.process.json'):
   z=json.loads(f.read_text());assert not z['remaining'] and not z['unknown_adopted'],'OWN_PREVIOUS_REMAINS'
-  if not c.get('mock') and z['phase']=='quality':raise RuntimeError('SCIENTIFIC_ATTEMPT_ALREADY_REGISTERED_NO_REPLACEMENT')
+  if not c.get('mock') and z['phase']=='quality' and not (c.get('epoch')==2 and z['name']=='native173-quality-r1'):raise RuntimeError('SCIENTIFIC_ATTEMPT_ALREADY_REGISTERED_NO_REPLACEMENT')
  if not c.get('mock'):
   p=json.loads((ROOT/'research-data/ai-sigma/173-native-ni-arena/preregister.json').read_text());assert p['science_ready'] and p['statistics']['status']=='ADOPTED','PREREG_MISSING'
  return{'decision':'launch_allowed','UTC':datetime.datetime.now(datetime.timezone.utc).isoformat(),'control':rows,'research_current':current,'storage':capacity,'CPU_topology':topo,'LLMactive_gate':False,'CPU0_reserved_ops':True,'physical_wholeperiod_guarantee':False}
