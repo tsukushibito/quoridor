@@ -1,0 +1,273 @@
+{
+  "issue": "quoridor-4lc.159",
+  "recorded_at": "2026-10-03T03:26:47.658811+00:00",
+  "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+  "scientific_source_write_stopped": true,
+  "source_hashes": {
+    "tools/ai-sigma-cpu-concurrency/adapters.cjs": "19d68aa12d00a7f4e5bd1d8dbf9c834f5f5e71b659bcc8b351663e8f4783ab97",
+    "tools/ai-sigma-cpu-concurrency/admission.py": "ca7fdb983d4b2d222dcc5fc03ede7d18e7e754ec4abd75aea28f594f0214bc5f",
+    "tools/ai-sigma-cpu-concurrency/arena.cjs": "0eeb282fc0ecbdd3b97a46a8720ae45c589ab2bf3b33651743f37ff0d7ff133b",
+    "tools/ai-sigma-cpu-concurrency/browser.cjs": "82b0ce9bfb4f715cc1047fcf9555d4864a7579676f72de6cecbe1910ec895d1d",
+    "tools/ai-sigma-cpu-concurrency/collect.py": "6901cf618abd2f99c64f9b996e2e489e619a3c43fca439fb4a9924ef1979fc2b",
+    "tools/ai-sigma-cpu-concurrency/control-mock.cjs": "1189d3e28d2de77b61a464a984fcb9613a438d2783f1bc05597b848ad4124888",
+    "tools/ai-sigma-cpu-concurrency/main.js": "c5780a21e87d2960f4be24e9a274687a73277aff790a5735d1177235cff28249",
+    "tools/ai-sigma-cpu-concurrency/pause-monitor.cjs": "3da03be6ecd7ac5dd9a374f81ea9292c1ea43abeb4a9ed10bfc93bc1279a4527",
+    "tools/ai-sigma-cpu-concurrency/program.cjs": "dfd72f1ffdc091201bd59a0c03d093702971f87652e728286935760c8eb6c311",
+    "tools/ai-sigma-cpu-concurrency/runner.py": "8bfcae28ff1f6dc5b69c7f402302336780d71231228d90fe3953138cd21a929b",
+    "tools/ai-sigma-cpu-concurrency/tape-mock.cjs": "3eb1b282850e6af1327f4f592d6caf2a6169b34e8f65ee9b03f86c625192d3b0",
+    "tools/ai-sigma-cpu-concurrency/worker.js": "c918c143ac2860fc567b13f2bf6d223e7ce4653b478b0b5e9126422ebf2aa41b"
+  },
+  "scientific_jobs_finished": true,
+  "last_heavy_end": "2026-10-03T03:19:55.971795+00:00",
+  "heavy_cumulative_s": 218.18919100000002,
+  "heavy_budget_s": 360,
+  "hand_NN": 909,
+  "startup_NN": 60,
+  "planned": 60,
+  "saved": 60,
+  "results_sha256": "53a852af4e9079f07e98069da32370935b67a0b9a4583cd442c033c1194b86cf",
+  "formal_ready": false,
+  "jobs": [
+    {
+      "name": "concurrency159-mode2-r1",
+      "process_sha256": "aafb2d2bf2ed489edf523ccea615a577ac1adff2e5c74f81ad6e1e2c0527d739",
+      "start": "2026-10-03T03:18:51.943361+00:00",
+      "end": "2026-10-03T03:19:17.782439+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown": [],
+      "current_same_identity": [],
+      "identity_count": 106,
+      "boot_matches": true,
+      "peak_RSS": 3187142656,
+      "affinity_violations": []
+    },
+    {
+      "name": "concurrency159-mode4-r1",
+      "process_sha256": "f26c92ad20bc220b2682b393c179fbe8876ed6bec074be0cb9d8fc8c7d09c971",
+      "start": "2026-10-03T03:19:17.954176+00:00",
+      "end": "2026-10-03T03:19:55.971795+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown": [],
+      "current_same_identity": [],
+      "identity_count": 183,
+      "boot_matches": true,
+      "peak_RSS": 6096449536,
+      "affinity_violations": []
+    },
+    {
+      "name": "concurrency159-solo2-r1",
+      "process_sha256": "2131e93c9bfda0c7d97619052be941df18df8dcf4f2b8c7f7ce7b530b0097780",
+      "start": "2026-10-03T03:14:26.279176+00:00",
+      "end": "2026-10-03T03:16:06.047315+00:00",
+      "exit": -15,
+      "stop_reason": "signal15",
+      "remaining": [],
+      "unknown": [],
+      "current_same_identity": [],
+      "identity_count": 63,
+      "boot_matches": true,
+      "peak_RSS": 1771790336,
+      "affinity_violations": []
+    },
+    {
+      "name": "concurrency159-solo4-r1",
+      "process_sha256": "69248c1b1a40a9c7d989b5158d2c41d299f459e1577343847b9b1a16cd437a8f",
+      "start": "2026-10-03T03:17:26.329136+00:00",
+      "end": "2026-10-03T03:17:43.105220+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown": [],
+      "current_same_identity": [],
+      "identity_count": 63,
+      "boot_matches": true,
+      "peak_RSS": 1774837760,
+      "affinity_violations": []
+    },
+    {
+      "name": "concurrency159-solo6-r1",
+      "process_sha256": "e7b3c9b0a18bd5b8745fd11fb7a7bc1fc7a59288e385968c15f4c005e23a2d8d",
+      "start": "2026-10-03T03:18:13.982695+00:00",
+      "end": "2026-10-03T03:18:32.342059+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown": [],
+      "current_same_identity": [],
+      "identity_count": 81,
+      "boot_matches": true,
+      "peak_RSS": 1825734656,
+      "affinity_violations": []
+    },
+    {
+      "name": "concurrency159-solo8-r1",
+      "process_sha256": "a6b3958376683c25085ff169a08ee03fb9e50a2c59651df00cf6060a3a642245",
+      "start": "2026-10-03T03:18:32.439296+00:00",
+      "end": "2026-10-03T03:18:51.868203+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown": [],
+      "current_same_identity": [],
+      "identity_count": 74,
+      "boot_matches": true,
+      "peak_RSS": 1814290432,
+      "affinity_violations": []
+    }
+  ],
+  "inner_receipts": [
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/CPU-CONCURRENCY/runs/concurrency159-mode2-r1/arena-2/summary.json",
+      "sha256": "1e485b881585fe94f3f62f02f5c9258f6456056db92b4efca2bf75391bd5b854",
+      "value": {
+        "start": "2026-10-03T03:18:53.878Z",
+        "end": "2026-10-03T03:19:17.229Z",
+        "core": 2,
+        "primary": null,
+        "secondary": [],
+        "engine_sessions": 2,
+        "planned": 6,
+        "not_natural_allhost_proof": true
+      }
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/CPU-CONCURRENCY/runs/concurrency159-mode2-r1/arena-4/summary.json",
+      "sha256": "e027bb44c0826178132a1bb4f2e91d8e483bb5203bce92aeccc3182da998ef69",
+      "value": {
+        "start": "2026-10-03T03:19:05.431Z",
+        "end": "2026-10-03T03:19:17.641Z",
+        "core": 4,
+        "primary": null,
+        "secondary": [],
+        "engine_sessions": 2,
+        "planned": 6,
+        "not_natural_allhost_proof": true
+      }
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/CPU-CONCURRENCY/runs/concurrency159-mode4-r1/arena-2/summary.json",
+      "sha256": "a92d000a456ba4615d4eeebc956f370e78b5bcc39aeff67b7a8d04988620da9e",
+      "value": {
+        "start": "2026-10-03T03:19:19.956Z",
+        "end": "2026-10-03T03:19:54.761Z",
+        "core": 2,
+        "primary": null,
+        "secondary": [],
+        "engine_sessions": 2,
+        "planned": 6,
+        "not_natural_allhost_proof": true
+      }
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/CPU-CONCURRENCY/runs/concurrency159-mode4-r1/arena-4/summary.json",
+      "sha256": "f3929bbc1bd331d5ed7f8047638b022a4bafb37fcc0186787c8f8dd0d2793da1",
+      "value": {
+        "start": "2026-10-03T03:19:31.751Z",
+        "end": "2026-10-03T03:19:55.075Z",
+        "core": 4,
+        "primary": null,
+        "secondary": [],
+        "engine_sessions": 2,
+        "planned": 6,
+        "not_natural_allhost_proof": true
+      }
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/CPU-CONCURRENCY/runs/concurrency159-mode4-r1/arena-6/summary.json",
+      "sha256": "1f936bc118038cbd33dad4380a6083414e36f67400e49d5273a26b83820e8917",
+      "value": {
+        "start": "2026-10-03T03:19:38.183Z",
+        "end": "2026-10-03T03:19:55.482Z",
+        "core": 6,
+        "primary": null,
+        "secondary": [],
+        "engine_sessions": 2,
+        "planned": 6,
+        "not_natural_allhost_proof": true
+      }
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/CPU-CONCURRENCY/runs/concurrency159-mode4-r1/arena-8/summary.json",
+      "sha256": "20662fa17b2fed05e2df5f89dce56fff25f00ed28e93c46b19a19109b6dc32cc",
+      "value": {
+        "start": "2026-10-03T03:19:44.785Z",
+        "end": "2026-10-03T03:19:55.846Z",
+        "core": 8,
+        "primary": null,
+        "secondary": [],
+        "engine_sessions": 2,
+        "planned": 6,
+        "not_natural_allhost_proof": true
+      }
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/CPU-CONCURRENCY/runs/concurrency159-solo2-r1/arena-2/summary.json",
+      "sha256": "1e3041801fdb3550df23b1cd1299582da8b6e293eeda54b62df5dce44d2d705f",
+      "value": {
+        "start": "2026-10-03T03:14:28.034Z",
+        "end": "2026-10-03T03:14:42.132Z",
+        "core": 2,
+        "primary": null,
+        "secondary": [
+          {
+            "stage": "cleanup",
+            "message": "KERNEL_OWNERSHIP_BOUNDARY_INVALID"
+          }
+        ],
+        "engine_sessions": 2,
+        "planned": 6,
+        "not_natural_allhost_proof": true
+      }
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/CPU-CONCURRENCY/runs/concurrency159-solo4-r1/arena-4/summary.json",
+      "sha256": "526573f0137fcf92bace00eec24ce2c610f4c7940f7b171c399f3d3dd873bfc7",
+      "value": {
+        "start": "2026-10-03T03:17:28.464Z",
+        "end": "2026-10-03T03:17:42.970Z",
+        "core": 4,
+        "primary": null,
+        "secondary": [],
+        "engine_sessions": 2,
+        "planned": 6,
+        "not_natural_allhost_proof": true
+      }
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/CPU-CONCURRENCY/runs/concurrency159-solo6-r1/arena-6/summary.json",
+      "sha256": "9c73ad2f634f92cff3685425b097c9cb5fa14fa15ceaa2b26f692f1e693005e7",
+      "value": {
+        "start": "2026-10-03T03:18:15.869Z",
+        "end": "2026-10-03T03:18:32.190Z",
+        "core": 6,
+        "primary": null,
+        "secondary": [],
+        "engine_sessions": 2,
+        "planned": 6,
+        "not_natural_allhost_proof": true
+      }
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/CPU-CONCURRENCY/runs/concurrency159-solo8-r1/arena-8/summary.json",
+      "sha256": "ae2c25686bfe96b53adbb42abf13c75d2b275d24a1b05ce7ae4dd59ee43bc5c0",
+      "value": {
+        "start": "2026-10-03T03:18:34.845Z",
+        "end": "2026-10-03T03:18:51.716Z",
+        "core": 8,
+        "primary": null,
+        "secondary": [],
+        "engine_sessions": 2,
+        "planned": 6,
+        "not_natural_allhost_proof": true
+      }
+    }
+  ],
+  "cleanup_failure_solo2_preserved": true,
+  "natural_exit_all_jobs": false,
+  "all_period_all_host_guarantee": false,
+  "pack_report_helpers_remaining": true
+}

@@ -1,0 +1,1646 @@
+{
+  "issue": "quoridor-4lc.159",
+  "archive_sha256": "b6be70d11582b51689c0bcc7659f3d9f0fe598453295a31a86e8855ef2fde311",
+  "archive_bytes": 2253393,
+  "archive_members": [
+    {
+      "name": "control-mock.log",
+      "size": 427,
+      "sha256": "3c90f56a6f154c17d2688fd8834522fc8ff8dcdbc90042da77abfbbf36841e0a"
+    },
+    {
+      "name": "feasibility-current.json",
+      "size": 1071,
+      "sha256": "a8bc3c9790f0d456e584f4fc8693e67417cbbf5c3ea4023721e5f9ae5c6c51ec"
+    },
+    {
+      "name": "goal.json",
+      "size": 210665,
+      "sha256": "db60abb7abd86d76c0ed9460eec63c430d7f54142fb607260914d22e799e98ca"
+    },
+    {
+      "name": "intake.json",
+      "size": 433,
+      "sha256": "4142ca8943891607a4d83358ef45c09a5ba274bc104a067705e5690a448967ac"
+    },
+    {
+      "name": "mock-control/pause/pause-monitor-stop.json",
+      "size": 405,
+      "sha256": "f5bc363638f688a7904ea467c66dba19e3736f9047631495f6b50d412fcedaed"
+    },
+    {
+      "name": "mock-control/pause/pause-monitor.json",
+      "size": 318,
+      "sha256": "8eb400ef71a9b727cf67b31cbfff113d373e3e8ef63d626a71f9614d9a72899d"
+    },
+    {
+      "name": "mock-control/read-error/pause-monitor-stop.json",
+      "size": 609,
+      "sha256": "274fe4226c9dfee4594f3e4a6059fae4d16ee6237850549d7ffd1199f397397f"
+    },
+    {
+      "name": "mock-control/read-error/pause-monitor.json",
+      "size": 522,
+      "sha256": "123d85d84ddedef169410977faed211493774a54f9e18e16cc450bf7bed8ae43"
+    },
+    {
+      "name": "mock-control/ready/beads-read-quoridor-4lc.159.json",
+      "size": 212950,
+      "sha256": "8062eb5a56b62c47e88306c392d9a91bac6577c079db43360cca97fad50ca20e"
+    },
+    {
+      "name": "mock-control/ready/beads-read-quoridor-4lc.json",
+      "size": 211796,
+      "sha256": "bcdfeae451bac66cb8c6a67e82ac06b12b46209c84b7025f0a055cdaf6191d2a"
+    },
+    {
+      "name": "mock-control/ready/pause-monitor-stop.json",
+      "size": 1870,
+      "sha256": "f05dcb8bbc94d40908d42fefb6c1c743eade0438a91cb77d467ca3ecb3d460ce"
+    },
+    {
+      "name": "mock-control/ready/pause-monitor.json",
+      "size": 1783,
+      "sha256": "24890b119a16a8f0f82a15f384443672c2c63a2e8b14c11fe56d0232c9a4dde5"
+    },
+    {
+      "name": "mock-control/unready/pause-monitor-stop.json",
+      "size": 408,
+      "sha256": "07906c27f311bc4a901f7706a574c5c7ed04a118efba96f6492512919cb97d1b"
+    },
+    {
+      "name": "mock-control/unready/pause-monitor.json",
+      "size": 321,
+      "sha256": "be051c51b9eb152957a842b1d7b28d5718cbbf77178b27dfbfb80391361ee4f6"
+    },
+    {
+      "name": "ready.json",
+      "size": 3707,
+      "sha256": "e559e3117a5f302e1266fcab0eb09d654760309ee62bdb9fd70464bd0e228420"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-2/actual-served-source.json",
+      "size": 4821,
+      "sha256": "b4679daa7f73ef185e5a107ec0a941573a92b3a58df51d0b1ea9a991893cc9f3"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-2/browser-startup.json",
+      "size": 420,
+      "sha256": "7e046c29c4fcb4132947711f27e9cc6701ee2dcdd4a3707c4a50a16d0eccc5ef"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-2/cleanup.jsonl",
+      "size": 19224,
+      "sha256": "c8c88a5c4543a73745292b5d6e4f20466fb36a8b0a89dfb09e534083bb2fd1ac"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-2/config.json",
+      "size": 2961,
+      "sha256": "676030fb4063822b36188e59268c0779abc0f4b8e869a096c469f5b941c2d81a"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-2/controlled-stop.json",
+      "size": 821,
+      "sha256": "05775e4e60c3452dcbb75a89ff2f1842947961458d9a98872e36063bff0c8a4e"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-2/main-timer-stop.json",
+      "size": 49,
+      "sha256": "7dcfee3d0f6d458c477d356171d6dc22abd316b5762d0543ac2166f996081ac1"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-2/model-drop.json",
+      "size": 453,
+      "sha256": "b4b74ecfb157db3a92a7d6711ee28c8a686d8740f397e408e198c7ef8ca4c711"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-2/model-load.json",
+      "size": 989,
+      "sha256": "a85ab34b00af56ced0ec7676460ea796b0d84a61bf3807aba8773b15aacdc69f"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-2/preflight.json",
+      "size": 561,
+      "sha256": "d419e4acfb7ef0542263e876d2946d2fb1c063014c6f11222d21367dc4ead8b2"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-2/result.json",
+      "size": 427899,
+      "sha256": "948c931ffee8ffbf8f9624a176363442919982c2d5ebc24d233b0b05c26ba713"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-2/routing.json",
+      "size": 5322,
+      "sha256": "e6f10890d2f75b5fb7d248f312fa303816a3717bece26438d73ad62cc9dfc50f"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-2/rules-mock.json",
+      "size": 1179,
+      "sha256": "e65600320d6c47d5f4ea7d6139da2f0c20d4a3f450250152bcbcd4039b52056b"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-2/source-bindings.json",
+      "size": 3813,
+      "sha256": "476527748f55ba10113c2e1b8cbd4ca1857349c26f14425bbb3259af8d6c6654"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-2/startup.json",
+      "size": 3437,
+      "sha256": "81ef4355561c807ba083c5b1124512e91b20573e27b5f2cdbf1c3f9af98c2509"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-2/summary.json",
+      "size": 207,
+      "sha256": "1e485b881585fe94f3f62f02f5c9258f6456056db92b4efca2bf75391bd5b854"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-2/terminated-worker.json",
+      "size": 66,
+      "sha256": "f7776bb8aec37a0c50817f069a0c58062d4dcf0a4c57896a6afaed58ed327b00"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-2-config.json",
+      "size": 2961,
+      "sha256": "676030fb4063822b36188e59268c0779abc0f4b8e869a096c469f5b941c2d81a"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-2.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-4/actual-served-source.json",
+      "size": 4821,
+      "sha256": "b4679daa7f73ef185e5a107ec0a941573a92b3a58df51d0b1ea9a991893cc9f3"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-4/browser-startup.json",
+      "size": 420,
+      "sha256": "7e046c29c4fcb4132947711f27e9cc6701ee2dcdd4a3707c4a50a16d0eccc5ef"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-4/cleanup.jsonl",
+      "size": 11561,
+      "sha256": "cd49f1568a19bd528001a26beccee9af144b614e3a8ac4efdd7e8b0eda0437c6"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-4/config.json",
+      "size": 2961,
+      "sha256": "8ca791ceb81e045a849d07b1d3c09b34a93313fafea637fb431ba548a0194f9d"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-4/controlled-stop.json",
+      "size": 758,
+      "sha256": "d0905989cce1a768c973f3bf1d2fd710a309c610d298417db9533e586f7e3a4a"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-4/main-timer-stop.json",
+      "size": 49,
+      "sha256": "7dcfee3d0f6d458c477d356171d6dc22abd316b5762d0543ac2166f996081ac1"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-4/model-drop.json",
+      "size": 457,
+      "sha256": "d600a5142c1f0d1fec5fa00f63301fa5e9b4151c1c0e20bf20e682dee7443421"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-4/model-load.json",
+      "size": 987,
+      "sha256": "3ad866819a40d14a20f76d041bf3fd5b683d67ad7c1e2215a33a1db05810d4dd"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-4/preflight.json",
+      "size": 561,
+      "sha256": "d419e4acfb7ef0542263e876d2946d2fb1c063014c6f11222d21367dc4ead8b2"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-4/result.json",
+      "size": 665274,
+      "sha256": "a30b40942a61d376edca7c5a3196b584131e08462ef8d3edefee7723783c416e"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-4/routing.json",
+      "size": 5322,
+      "sha256": "e6f10890d2f75b5fb7d248f312fa303816a3717bece26438d73ad62cc9dfc50f"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-4/rules-mock.json",
+      "size": 1179,
+      "sha256": "e65600320d6c47d5f4ea7d6139da2f0c20d4a3f450250152bcbcd4039b52056b"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-4/source-bindings.json",
+      "size": 3813,
+      "sha256": "476527748f55ba10113c2e1b8cbd4ca1857349c26f14425bbb3259af8d6c6654"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-4/startup.json",
+      "size": 3439,
+      "sha256": "412a05aadd90d24f30fcb4b1bc47768c53a41afe871d70946f03dd252a1ccc8e"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-4/summary.json",
+      "size": 207,
+      "sha256": "e027bb44c0826178132a1bb4f2e91d8e483bb5203bce92aeccc3182da998ef69"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-4/terminated-worker.json",
+      "size": 66,
+      "sha256": "dd2056dedb2b9af6b23c353eeebf38f0044d516397f1252a8138af7517b82ed8"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-4-config.json",
+      "size": 2961,
+      "sha256": "8ca791ceb81e045a849d07b1d3c09b34a93313fafea637fb431ba548a0194f9d"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/arena-4.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/beads-read-quoridor-4lc.159.json",
+      "size": 212950,
+      "sha256": "8062eb5a56b62c47e88306c392d9a91bac6577c079db43360cca97fad50ca20e"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/beads-read-quoridor-4lc.json",
+      "size": 211796,
+      "sha256": "bcdfeae451bac66cb8c6a67e82ac06b12b46209c84b7025f0a055cdaf6191d2a"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/init-progress.json",
+      "size": 66,
+      "sha256": "c88e16fa6c46ee3f6695b19f39210565e9b9ace1d93c00625217201634e98c2d"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/pause-monitor-stop.json",
+      "size": 11507,
+      "sha256": "6455439d94d411b0b3880ddad7003ef39db40d9282ecd7641c274ab9444a5203"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/pause-monitor.json",
+      "size": 11420,
+      "sha256": "0d5992ac5de4de18c4aa48e59822781f4836c5ec77cecd57417533a73ef4ff25"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/phase-0.json",
+      "size": 1940,
+      "sha256": "4e724ab9567108cdd2b9e3c58a50e23a0a927c038673b4e4865bce1a4a387a7c"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/phase-1.json",
+      "size": 1943,
+      "sha256": "c0073946c0cf1849e4b3de2b4f16c28e83bf6abe9951b8107c9958dc649ebdef"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/phase-2.json",
+      "size": 1943,
+      "sha256": "5be35bad744054a3b9effadacb3934834e4b2394a157eb9296dd56f08c1c00e3"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/phase-3.json",
+      "size": 1943,
+      "sha256": "1176ad6d5caf856c2fedc6c323ef80e1f2f485c0340b1e25522b85ea953ed03f"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/phase-4.json",
+      "size": 1941,
+      "sha256": "0aa005c5c766fbe45b38c86539bf0e8b01887d69e96e03488dd1d5dfde22d590"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/phase-5.json",
+      "size": 1941,
+      "sha256": "89582432486e34c2de1cda359a6ad58f9a1b435945215844c1047cb0ed8d4f5b"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1/summary.json",
+      "size": 12337,
+      "sha256": "d78db500c4d881bc53c31e424cab5b5f95b86f050368e9959540f261bd166dd1"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1.admission.json",
+      "size": 3902,
+      "sha256": "c57713712f9e90fefd13481271b5a5f999def776fc9914d39de79ce1ab72442f"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1.inputs.json",
+      "size": 1824,
+      "sha256": "085bd65c5206f64b73857e4037674cf2f9f143a45fffc393b1f24ad3d9a6d8e1"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1.monitor.jsonl",
+      "size": 605136,
+      "sha256": "9dd7fcfc2023deabdc7871ea6f63f1fb40606d898ef2cd3dff426076f5749662"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1.owned-ack.json",
+      "size": 52804,
+      "sha256": "bb3193111dd85ef80835e08554d1000f0f8f4c7ab97eff4dcd8b27909b5e6ce3"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1.owned-ledger.jsonl",
+      "size": 12330,
+      "sha256": "6dd0750d9e0cd783b07474944a3095b938a0bef5fca1773bd7c2c2094bb59087"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1.process.json",
+      "size": 44099,
+      "sha256": "aafb2d2bf2ed489edf523ccea615a577ac1adff2e5c74f81ad6e1e2c0527d739"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1.started.json",
+      "size": 1742,
+      "sha256": "3aacfd107cd52511004fc4981bf5f063deb4ea07900bbb119e030a6ad21472cd"
+    },
+    {
+      "name": "runs/concurrency159-mode2-r1.threads.json",
+      "size": 190,
+      "sha256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-2/actual-served-source.json",
+      "size": 4821,
+      "sha256": "b4679daa7f73ef185e5a107ec0a941573a92b3a58df51d0b1ea9a991893cc9f3"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-2/browser-startup.json",
+      "size": 420,
+      "sha256": "7e046c29c4fcb4132947711f27e9cc6701ee2dcdd4a3707c4a50a16d0eccc5ef"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-2/cleanup.jsonl",
+      "size": 13468,
+      "sha256": "5c4d0b0d53ab82010804ad45d096c709eaf54866f108f28caa2f2fef4bcce561"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-2/config.json",
+      "size": 3076,
+      "sha256": "37e029de13bf30c0f2896963e2db61ac008ca4db5e4a21e1c073a35480759bcf"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-2/controlled-stop.json",
+      "size": 821,
+      "sha256": "7c570d784488bd5021b2c984e38eae9924141042aa8e432eb5ce29256ae51274"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-2/main-timer-stop.json",
+      "size": 49,
+      "sha256": "7dcfee3d0f6d458c477d356171d6dc22abd316b5762d0543ac2166f996081ac1"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-2/model-drop.json",
+      "size": 455,
+      "sha256": "addcd13a8e0cda760908c916876f3663a0628602d3eaff9d47d6a9cf00fe5760"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-2/model-load.json",
+      "size": 986,
+      "sha256": "b27e8ac8ab42c7b777fd2e85b7609dbf6cad879490968ee26a4c9e2ea950f763"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-2/preflight.json",
+      "size": 561,
+      "sha256": "d419e4acfb7ef0542263e876d2946d2fb1c063014c6f11222d21367dc4ead8b2"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-2/result.json",
+      "size": 403145,
+      "sha256": "08eb3a8171db458081d0badec6e59b13a9d0781e197a77ee41a8eeb35e804af6"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-2/routing.json",
+      "size": 5322,
+      "sha256": "e6f10890d2f75b5fb7d248f312fa303816a3717bece26438d73ad62cc9dfc50f"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-2/rules-mock.json",
+      "size": 1179,
+      "sha256": "e65600320d6c47d5f4ea7d6139da2f0c20d4a3f450250152bcbcd4039b52056b"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-2/source-bindings.json",
+      "size": 3813,
+      "sha256": "476527748f55ba10113c2e1b8cbd4ca1857349c26f14425bbb3259af8d6c6654"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-2/startup.json",
+      "size": 3454,
+      "sha256": "9410cf8c04f86aeda2cef863b849dd4a17fe6ec9f0dc6e4ff229d31625de75a7"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-2/summary.json",
+      "size": 207,
+      "sha256": "a92d000a456ba4615d4eeebc956f370e78b5bcc39aeff67b7a8d04988620da9e"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-2/terminated-worker.json",
+      "size": 68,
+      "sha256": "ef383119edb47e1e2d62613ca64202464c163d1c958f2fb7f31e9ee4b017db45"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-2-config.json",
+      "size": 3076,
+      "sha256": "37e029de13bf30c0f2896963e2db61ac008ca4db5e4a21e1c073a35480759bcf"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-2.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-4/actual-served-source.json",
+      "size": 4821,
+      "sha256": "b4679daa7f73ef185e5a107ec0a941573a92b3a58df51d0b1ea9a991893cc9f3"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-4/browser-startup.json",
+      "size": 482,
+      "sha256": "15418945503ed77a4462c1bfbd361cd81c58ccc12841a19ad9d9a6b23fef22e6"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-4/cleanup.jsonl",
+      "size": 10026,
+      "sha256": "0970dac3c26b526225bfac9f236ecdd4466e9c6f418a6a14459c17fa593256e4"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-4/config.json",
+      "size": 3076,
+      "sha256": "13da741fe02d1f6b6f8fa742abe129517e195bc0b96330b1c6065849cc5f87c6"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-4/controlled-stop.json",
+      "size": 885,
+      "sha256": "41567fc0db38f13b2f69d8c4ad09bbc88db3946358d27816218aab129ecd6829"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-4/main-timer-stop.json",
+      "size": 49,
+      "sha256": "7dcfee3d0f6d458c477d356171d6dc22abd316b5762d0543ac2166f996081ac1"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-4/model-drop.json",
+      "size": 451,
+      "sha256": "adb9b38bcb261224d43e378e50acffddf978a7505af85f0a5cd2f79123fc5bc2"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-4/model-load.json",
+      "size": 985,
+      "sha256": "a807a012a712ef5accead7a886651f63d9bec9f3413af0f63804b07e7e589d68"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-4/preflight.json",
+      "size": 561,
+      "sha256": "d419e4acfb7ef0542263e876d2946d2fb1c063014c6f11222d21367dc4ead8b2"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-4/result.json",
+      "size": 578417,
+      "sha256": "8943ffb05b52cb9c94b36b14a243cb64127c6b078937cafcc02c9773b0e4a3dd"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-4/routing.json",
+      "size": 5322,
+      "sha256": "e6f10890d2f75b5fb7d248f312fa303816a3717bece26438d73ad62cc9dfc50f"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-4/rules-mock.json",
+      "size": 1179,
+      "sha256": "e65600320d6c47d5f4ea7d6139da2f0c20d4a3f450250152bcbcd4039b52056b"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-4/source-bindings.json",
+      "size": 3813,
+      "sha256": "476527748f55ba10113c2e1b8cbd4ca1857349c26f14425bbb3259af8d6c6654"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-4/startup.json",
+      "size": 3441,
+      "sha256": "13b0fbac57f7a3cb5b35774fa4c0f4308ae786774b3ac5557309cc0b2d562348"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-4/summary.json",
+      "size": 207,
+      "sha256": "f3929bbc1bd331d5ed7f8047638b022a4bafb37fcc0186787c8f8dd0d2793da1"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-4/terminated-worker.json",
+      "size": 67,
+      "sha256": "8fc6720431fdccfdfc10216370fe8c68ada02aaefe41a0f09fa68b114ecd126d"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-4-config.json",
+      "size": 3076,
+      "sha256": "13da741fe02d1f6b6f8fa742abe129517e195bc0b96330b1c6065849cc5f87c6"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-4.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-6/actual-served-source.json",
+      "size": 4821,
+      "sha256": "97328ced40e3e5323163fcca67af761392f3a3fb118cd912604ce03bd6c84753"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-6/browser-startup.json",
+      "size": 544,
+      "sha256": "61f77789f321a90b38ad8b8ae6381a868ffeaac0620632c332b5f91334a75f0a"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-6/cleanup.jsonl",
+      "size": 11864,
+      "sha256": "6d18b34c6919703c260a72b477c3d0e448f763d66a6413d65d86da6f36edfdbd"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-6/config.json",
+      "size": 3076,
+      "sha256": "3c18a70b16aff2432425ef10916baad975f09788d90f846e9269bdb6dc6499df"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-6/controlled-stop.json",
+      "size": 884,
+      "sha256": "395ef83a4fb3a7a98b1c7dcd4a7288f8189ea75c30cf832f131120d755562755"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-6/main-timer-stop.json",
+      "size": 49,
+      "sha256": "7dcfee3d0f6d458c477d356171d6dc22abd316b5762d0543ac2166f996081ac1"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-6/model-drop.json",
+      "size": 455,
+      "sha256": "30f1d03e241a1e4b33e08d1f0419767540b00b2d7c677116e0021d6b2f908d8d"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-6/model-load.json",
+      "size": 985,
+      "sha256": "32fae23acbd23b4a64f6c7240afbc782310724b716700ab0599f4403fb1bdc21"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-6/preflight.json",
+      "size": 561,
+      "sha256": "d419e4acfb7ef0542263e876d2946d2fb1c063014c6f11222d21367dc4ead8b2"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-6/result.json",
+      "size": 585067,
+      "sha256": "be7c54e4812ca6a4f72498ad29dba38a5c2346e48aed50c949ec2bfb31dc4aeb"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-6/routing.json",
+      "size": 5322,
+      "sha256": "e6f10890d2f75b5fb7d248f312fa303816a3717bece26438d73ad62cc9dfc50f"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-6/rules-mock.json",
+      "size": 1179,
+      "sha256": "e65600320d6c47d5f4ea7d6139da2f0c20d4a3f450250152bcbcd4039b52056b"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-6/source-bindings.json",
+      "size": 3813,
+      "sha256": "476527748f55ba10113c2e1b8cbd4ca1857349c26f14425bbb3259af8d6c6654"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-6/startup.json",
+      "size": 3430,
+      "sha256": "c7f630aecf50cdb28deee95c256fa126dddc08fa6b0a8b4e75550b3d04b5036c"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-6/summary.json",
+      "size": 207,
+      "sha256": "1f936bc118038cbd33dad4380a6083414e36f67400e49d5273a26b83820e8917"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-6/terminated-worker.json",
+      "size": 66,
+      "sha256": "3477c9e0bec807d0c790555b7336076917644203502fa88250b39bc5e997a628"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-6-config.json",
+      "size": 3076,
+      "sha256": "3c18a70b16aff2432425ef10916baad975f09788d90f846e9269bdb6dc6499df"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-6.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-8/actual-served-source.json",
+      "size": 4821,
+      "sha256": "b4679daa7f73ef185e5a107ec0a941573a92b3a58df51d0b1ea9a991893cc9f3"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-8/browser-startup.json",
+      "size": 482,
+      "sha256": "15418945503ed77a4462c1bfbd361cd81c58ccc12841a19ad9d9a6b23fef22e6"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-8/cleanup.jsonl",
+      "size": 13661,
+      "sha256": "00dcf90311219ebe36974ff85f57f571aec2ac4ff257928202a7ce9a3525ea19"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-8/config.json",
+      "size": 3076,
+      "sha256": "ccb3581043e4a804619158f5af1b36ef758f3b5a45f5f2e57625b1832f06316f"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-8/controlled-stop.json",
+      "size": 758,
+      "sha256": "cf326be60f7b18922e1c99537255c76c13370b1e933d4d992d54b394eedb5f1f"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-8/main-timer-stop.json",
+      "size": 49,
+      "sha256": "7dcfee3d0f6d458c477d356171d6dc22abd316b5762d0543ac2166f996081ac1"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-8/model-drop.json",
+      "size": 453,
+      "sha256": "93c279633760b21260bc1b3ef88fec699aa9173c761fae57a8a86c717e06b07b"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-8/model-load.json",
+      "size": 987,
+      "sha256": "e7252de74839aefd56c31f39211650fcfb6f6c6e6fb79b5413434e53003d5ec4"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-8/preflight.json",
+      "size": 561,
+      "sha256": "d419e4acfb7ef0542263e876d2946d2fb1c063014c6f11222d21367dc4ead8b2"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-8/result.json",
+      "size": 625227,
+      "sha256": "66ad3e85fa44688bfe83dac4cbe783eed569220dda55a25f82a25c4ada146b0d"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-8/routing.json",
+      "size": 5322,
+      "sha256": "e6f10890d2f75b5fb7d248f312fa303816a3717bece26438d73ad62cc9dfc50f"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-8/rules-mock.json",
+      "size": 1179,
+      "sha256": "e65600320d6c47d5f4ea7d6139da2f0c20d4a3f450250152bcbcd4039b52056b"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-8/source-bindings.json",
+      "size": 3813,
+      "sha256": "476527748f55ba10113c2e1b8cbd4ca1857349c26f14425bbb3259af8d6c6654"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-8/startup.json",
+      "size": 3410,
+      "sha256": "0caba0124a0b9d372a177106dd2fba40f84df457d0fa91d259dbe7c35f1a36b6"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-8/summary.json",
+      "size": 207,
+      "sha256": "20662fa17b2fed05e2df5f89dce56fff25f00ed28e93c46b19a19109b6dc32cc"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-8/terminated-worker.json",
+      "size": 67,
+      "sha256": "11dd029d92124ed10eedca349ae0848529943d3d099e61a4b55a726d26654c9f"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-8-config.json",
+      "size": 3076,
+      "sha256": "ccb3581043e4a804619158f5af1b36ef758f3b5a45f5f2e57625b1832f06316f"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/arena-8.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/beads-read-quoridor-4lc.159.json",
+      "size": 212950,
+      "sha256": "8062eb5a56b62c47e88306c392d9a91bac6577c079db43360cca97fad50ca20e"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/beads-read-quoridor-4lc.json",
+      "size": 211796,
+      "sha256": "bcdfeae451bac66cb8c6a67e82ac06b12b46209c84b7025f0a055cdaf6191d2a"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/init-progress.json",
+      "size": 80,
+      "sha256": "11098b5aacd45bfc5c667e4e4e4955e0cbb7b3ff000caff1add1e0a952872071"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/pause-monitor-stop.json",
+      "size": 19517,
+      "sha256": "6316431164386373585233acbde794ae025a6d30bd7399faac80dfa919a8e343"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/pause-monitor.json",
+      "size": 19430,
+      "sha256": "5389ea441730ffdb6b21dc3a45ece47a8a116640e9356332870f15275b498f34"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/phase-0.json",
+      "size": 3813,
+      "sha256": "1e130536c9eb3f58ac93558ceb1455e2c3643c333562d55e47887df22b98b294"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/phase-1.json",
+      "size": 3823,
+      "sha256": "cf70b4f663f49af33e140df81b508c74c946d2f32e22f25a082262c665b639c5"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/phase-2.json",
+      "size": 3819,
+      "sha256": "d65d3025fed3a970efec47da33e5e460457510995ec2c47ea96312309549c0bd"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/phase-3.json",
+      "size": 3821,
+      "sha256": "1d675e07316b4e7446de86eecc9ad9934bdb569a5e7fa18e3d83c7c5f8303193"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/phase-4.json",
+      "size": 3819,
+      "sha256": "3074b16368dcd063c9c77cb1c07b23eb65aeadee66336253476fe6817a1221ce"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/phase-5.json",
+      "size": 3820,
+      "sha256": "858635ff264ee23758b11abd076036174f5c08cb09565e8384e12d62bffaa61b"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1/summary.json",
+      "size": 24526,
+      "sha256": "f3450ede6e02ce61645d00391446fc9826a0a0aa5c0822e3521102ca010cfcad"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1.admission.json",
+      "size": 3902,
+      "sha256": "c97c6e6de168350cfeb44d87d4adb856fb593d2b661dd26311507ddff69b0c2f"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1.inputs.json",
+      "size": 1824,
+      "sha256": "54cdaafa6eba0cf23e2b1858df627afd81d233b35e6d1692bea3cc6193aea047"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1.monitor.jsonl",
+      "size": 1168803,
+      "sha256": "97b9d1af0e13e00403e72ed950e72eba3424b76edacffddc5fad30e3d8fc407b"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1.owned-ack.json",
+      "size": 94116,
+      "sha256": "731049e4024dd743ef96a03e8dff353cfd5ad3ec47e6ab956cb764ec285397d4"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1.owned-ledger.jsonl",
+      "size": 24430,
+      "sha256": "e8f1f5451540e3175ec80d556b4e24b00485dff422eeae2d7297dd36497db4c6"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1.process.json",
+      "size": 75187,
+      "sha256": "f26c92ad20bc220b2682b393c179fbe8876ed6bec074be0cb9d8fc8c7d09c971"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1.started.json",
+      "size": 1742,
+      "sha256": "593c3fa27c536cbfa8d88dea547169233b461cd85625f84b7dad6bac88e07b51"
+    },
+    {
+      "name": "runs/concurrency159-mode4-r1.threads.json",
+      "size": 190,
+      "sha256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1/arena-2/actual-served-source.json",
+      "size": 4821,
+      "sha256": "b4679daa7f73ef185e5a107ec0a941573a92b3a58df51d0b1ea9a991893cc9f3"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1/arena-2/browser-startup.json",
+      "size": 544,
+      "sha256": "61f77789f321a90b38ad8b8ae6381a868ffeaac0620632c332b5f91334a75f0a"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1/arena-2/cleanup.jsonl",
+      "size": 3319,
+      "sha256": "0aec388db79cf77dd1fc930f372e54a7ceb4aa0e71bb0e6afc0ff1f188b36bc7"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1/arena-2/config.json",
+      "size": 2952,
+      "sha256": "703bfc5ff32ebaaba2b74ac4d565ce58bb6d2f1ca05d4655eb97af4364be5784"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1/arena-2/main-timer-stop.json",
+      "size": 49,
+      "sha256": "7dcfee3d0f6d458c477d356171d6dc22abd316b5762d0543ac2166f996081ac1"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1/arena-2/model-drop.json",
+      "size": 453,
+      "sha256": "7322f6028783a12cfa248239eb684ab8167df5b4dd10b241777445183c8e6564"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1/arena-2/model-load.json",
+      "size": 989,
+      "sha256": "834d6668f48c62a7d2218c09514a2422d463557e90b0c245528285fe388ae242"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1/arena-2/preflight.json",
+      "size": 561,
+      "sha256": "d419e4acfb7ef0542263e876d2946d2fb1c063014c6f11222d21367dc4ead8b2"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1/arena-2/result.json",
+      "size": 423024,
+      "sha256": "4791e92f32635609e25ba25d9dbb9b31018cd1a01bd7eafa1db9e6f8930c7fb9"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1/arena-2/routing.json",
+      "size": 5322,
+      "sha256": "e6f10890d2f75b5fb7d248f312fa303816a3717bece26438d73ad62cc9dfc50f"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1/arena-2/rules-mock.json",
+      "size": 1179,
+      "sha256": "e65600320d6c47d5f4ea7d6139da2f0c20d4a3f450250152bcbcd4039b52056b"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1/arena-2/source-bindings.json",
+      "size": 3813,
+      "sha256": "476527748f55ba10113c2e1b8cbd4ca1857349c26f14425bbb3259af8d6c6654"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1/arena-2/startup.json",
+      "size": 3421,
+      "sha256": "1a5e65eebab506aa64b48246cea5414033763b06c09aaec1c9436879020e210d"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1/arena-2/summary.json",
+      "size": 301,
+      "sha256": "1e3041801fdb3550df23b1cd1299582da8b6e293eeda54b62df5dce44d2d705f"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1/arena-2-config.json",
+      "size": 2952,
+      "sha256": "703bfc5ff32ebaaba2b74ac4d565ce58bb6d2f1ca05d4655eb97af4364be5784"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1/arena-2.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1/beads-read-quoridor-4lc.159.json",
+      "size": 212950,
+      "sha256": "8062eb5a56b62c47e88306c392d9a91bac6577c079db43360cca97fad50ca20e"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1/beads-read-quoridor-4lc.json",
+      "size": 211796,
+      "sha256": "bcdfeae451bac66cb8c6a67e82ac06b12b46209c84b7025f0a055cdaf6191d2a"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1/init-progress.json",
+      "size": 59,
+      "sha256": "0e0122930b5aca3a8fb743d4b7fe3dbf7216825176a9632049d24d42ed2b9b2b"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1/pause-monitor-stop.json",
+      "size": 6701,
+      "sha256": "d7e64598068f01e095d5df53975ce97aa636bf67095cdeeaa1c3890f46a61801"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1/pause-monitor.json",
+      "size": 6614,
+      "sha256": "c30e9701e42f07743b723c7f52974899569fff4b940d9b066aa3ee8937d91cae"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1/phase-0.json",
+      "size": 998,
+      "sha256": "83916550ca3b7ae9cacf817fb072665c23d4274d3f906f68561bc653fcf9b1ba"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1/phase-1.json",
+      "size": 1001,
+      "sha256": "9ad91cf45f040e39032207a755aff0b1f8cc0a037dfdf967e25f97a806219a6f"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1/phase-2.json",
+      "size": 1004,
+      "sha256": "7271d6c3ebf2a303fdf4212bc6572349ed69c76338dc151ca83c545f2bef26d6"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1/phase-3.json",
+      "size": 1001,
+      "sha256": "676f69e828e654db3594d21265923f163a7c23ba0274b0340d7676dfd3ac90d6"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1/phase-4.json",
+      "size": 1002,
+      "sha256": "29a659ef3684b50b611c9ef8aec284513991758369b5bd84ea7764bb32e54a71"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1/phase-5.json",
+      "size": 1002,
+      "sha256": "bb3c0c0023095af0dd7da883020351866313bb218d9fc939c1aef1d76f5992bc"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1.admission.json",
+      "size": 3797,
+      "sha256": "8be0e9c85656c414ddcc62e431661688d68a2307c1f63e776ee066791ec02f53"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1.inputs.json",
+      "size": 1824,
+      "sha256": "f5038e7e837993f22b146205a4f5d6c396f4ef9006bc41ba78eb3ec0cadc4710"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1.manager-stop-request.json",
+      "size": 351,
+      "sha256": "db50d2e42ec7d82aafda7f0d47738a84f27e89bd34bbc69671e6858bbcec81b5"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1.monitor.jsonl",
+      "size": 2147961,
+      "sha256": "76c8e917160f6919664599aad05f2456d40359b6a057928e89828d54710fd371"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1.owned-ack.json",
+      "size": 27668,
+      "sha256": "3611c82c69ca5d1acb080b6e23e6e92ad96df21e29f31b2366cc48694abd16e6"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1.owned-ledger.jsonl",
+      "size": 6501,
+      "sha256": "83da5c512cb53995037afee5bfa047a53386e752856ab35d4461ea857c276607"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1.process.json",
+      "size": 26926,
+      "sha256": "2131e93c9bfda0c7d97619052be941df18df8dcf4f2b8c7f7ce7b530b0097780"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1.started.json",
+      "size": 1739,
+      "sha256": "e956c71dacdce7110612952f43db153e98c93b09a51d0cd20ce67fd34d9294f5"
+    },
+    {
+      "name": "runs/concurrency159-solo2-r1.threads.json",
+      "size": 190,
+      "sha256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1/arena-4/actual-served-source.json",
+      "size": 4821,
+      "sha256": "b4679daa7f73ef185e5a107ec0a941573a92b3a58df51d0b1ea9a991893cc9f3"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1/arena-4/browser-startup.json",
+      "size": 420,
+      "sha256": "7e046c29c4fcb4132947711f27e9cc6701ee2dcdd4a3707c4a50a16d0eccc5ef"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1/arena-4/cleanup.jsonl",
+      "size": 25856,
+      "sha256": "0089e9b1f647fab744cabc180364ca937a6a49dbb2c32591b655b1f342b2f275"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1/arena-4/config.json",
+      "size": 2952,
+      "sha256": "54292275b43fdd310036639eb76387ec6a4fc3eb39fbc4e32990abb9f201acf2"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1/arena-4/controlled-stop.json",
+      "size": 1010,
+      "sha256": "0b4d60af30d82f5445e945e79e51ea9e319cc2d1dd95e1a9bd1617b02e8f1c6e"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1/arena-4/main-timer-stop.json",
+      "size": 49,
+      "sha256": "7dcfee3d0f6d458c477d356171d6dc22abd316b5762d0543ac2166f996081ac1"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1/arena-4/model-drop.json",
+      "size": 456,
+      "sha256": "40a505c9cd71b942dac7ccebafdedc4431da715170f343f9af8f9525b5596a88"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1/arena-4/model-load.json",
+      "size": 986,
+      "sha256": "6366ce8aa8f0c52c120bd83b1962bf916ce323ea5fc4eed1a5c5421b30c07443"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1/arena-4/preflight.json",
+      "size": 561,
+      "sha256": "d419e4acfb7ef0542263e876d2946d2fb1c063014c6f11222d21367dc4ead8b2"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1/arena-4/result.json",
+      "size": 462087,
+      "sha256": "06f03b3c3c2605c1ecc9a1fb093e7a169716c09c87ce5fa4414c8be4fba56344"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1/arena-4/routing.json",
+      "size": 5322,
+      "sha256": "e6f10890d2f75b5fb7d248f312fa303816a3717bece26438d73ad62cc9dfc50f"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1/arena-4/rules-mock.json",
+      "size": 1179,
+      "sha256": "e65600320d6c47d5f4ea7d6139da2f0c20d4a3f450250152bcbcd4039b52056b"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1/arena-4/source-bindings.json",
+      "size": 3813,
+      "sha256": "476527748f55ba10113c2e1b8cbd4ca1857349c26f14425bbb3259af8d6c6654"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1/arena-4/startup.json",
+      "size": 3444,
+      "sha256": "540e766b450fc67a3501b96758383bff9d851f04cc896e7b09e672da4831a2cf"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1/arena-4/summary.json",
+      "size": 207,
+      "sha256": "526573f0137fcf92bace00eec24ce2c610f4c7940f7b171c399f3d3dd873bfc7"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1/arena-4/terminated-worker.json",
+      "size": 68,
+      "sha256": "44a7b311ca2ba23983c2f432e12404e87185415fa0db8c12dcd91c2c62b1688d"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1/arena-4-config.json",
+      "size": 2952,
+      "sha256": "54292275b43fdd310036639eb76387ec6a4fc3eb39fbc4e32990abb9f201acf2"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1/arena-4.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1/beads-read-quoridor-4lc.159.json",
+      "size": 212950,
+      "sha256": "8062eb5a56b62c47e88306c392d9a91bac6577c079db43360cca97fad50ca20e"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1/beads-read-quoridor-4lc.json",
+      "size": 211796,
+      "sha256": "bcdfeae451bac66cb8c6a67e82ac06b12b46209c84b7025f0a055cdaf6191d2a"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1/init-progress.json",
+      "size": 59,
+      "sha256": "9280f4e4bcb08321425b805f36ccbd80831c5d89f120184276eac2b3db89f214"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1/pause-monitor-stop.json",
+      "size": 6701,
+      "sha256": "0b24c93aff0b532b0ebf6cec8e157f0479af402ea7ef199bf487251bab6d2c4a"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1/pause-monitor.json",
+      "size": 6614,
+      "sha256": "62bb95a12e4da7f581ed6a7cb630bb7f4003617c159d90c7004cad96e86d0a25"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1/phase-0.json",
+      "size": 1000,
+      "sha256": "d8e00de5e29e5e4ae63f3cc863fb3d42f0230ca0fabb9e533825008c63c56e2f"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1/phase-1.json",
+      "size": 1002,
+      "sha256": "95a2657dab106d0b3f48e09cf7b3f0a84181f9f5f2fc08ecdd7231306de3bd44"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1/phase-2.json",
+      "size": 1002,
+      "sha256": "4590b7db198c66ba8d794d2246eb032c0c41951cf9780e27d4e09d5cfe8489f5"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1/phase-3.json",
+      "size": 1001,
+      "sha256": "95f01d04472675f93ac95ca68c269c7a7eb64db02a802a58f03af7e1747260fd"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1/phase-4.json",
+      "size": 1002,
+      "sha256": "f08ca0736e24a314233a21baaa35560e63c758bcb53326091ebb74ea98609309"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1/phase-5.json",
+      "size": 1000,
+      "sha256": "f9afb19c83223a6e75b39d947052315090723ab4335c15ea26d2d29422f86057"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1/summary.json",
+      "size": 6278,
+      "sha256": "2590f6ee271fdb75855a4c5661d8d026c6c2fae2cfdde7e562427dfa79445058"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1.admission.json",
+      "size": 3805,
+      "sha256": "931da2f624cb9f121b85534c718f4b3a50ed8437e62330a2d108efa212241ef5"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1.inputs.json",
+      "size": 1824,
+      "sha256": "7db3df70573ae9b234f6bc1e9681bc3be0e47d881aed37c4a8d1237b61fbcdeb"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1.monitor.jsonl",
+      "size": 267901,
+      "sha256": "4c8bce9f2874cd1d7e827e200236ea1d37e4333649bffdc3d76f374f88abb53b"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1.owned-ack.json",
+      "size": 31433,
+      "sha256": "7e844032c3016123dc0446b0aea059fc6493aeb48aa6f9bf14370452db32889e"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1.owned-ledger.jsonl",
+      "size": 7817,
+      "sha256": "50037e158efea2ef8bd670abe0e03a17dc6527233f70a73fd28a2aa206dbcb9f"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1.process.json",
+      "size": 26516,
+      "sha256": "69248c1b1a40a9c7d989b5158d2c41d299f459e1577343847b9b1a16cd437a8f"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1.started.json",
+      "size": 1740,
+      "sha256": "70c935a8d5057c696944e9ed6d87cad641a725d859ab69ce7199e835efa3b92a"
+    },
+    {
+      "name": "runs/concurrency159-solo4-r1.threads.json",
+      "size": 190,
+      "sha256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1/arena-6/actual-served-source.json",
+      "size": 4821,
+      "sha256": "97328ced40e3e5323163fcca67af761392f3a3fb118cd912604ce03bd6c84753"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1/arena-6/browser-startup.json",
+      "size": 482,
+      "sha256": "15418945503ed77a4462c1bfbd361cd81c58ccc12841a19ad9d9a6b23fef22e6"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1/arena-6/cleanup.jsonl",
+      "size": 20940,
+      "sha256": "4ffd12235d30735fcce9627b48b0345fd7e7249c69d3031b9633116429e6d6be"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1/arena-6/config.json",
+      "size": 2952,
+      "sha256": "b31b312125f1c25d3a6aba08086124680854c398fe7a24e23fdf4d7910fdfde9"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1/arena-6/controlled-stop.json",
+      "size": 758,
+      "sha256": "07b9a8199434a790a91d7d6b646d18e723f1ce6976ef7e6ee9d188c11f865f59"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1/arena-6/main-timer-stop.json",
+      "size": 49,
+      "sha256": "7dcfee3d0f6d458c477d356171d6dc22abd316b5762d0543ac2166f996081ac1"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1/arena-6/model-drop.json",
+      "size": 454,
+      "sha256": "44039dc14419516601982c1a92172c884facac06cf7e61d49fe25770881b756a"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1/arena-6/model-load.json",
+      "size": 988,
+      "sha256": "4e64ba0ef25073c0da1909eb6a614828128a9831936c2a35cb065f8df43ef783"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1/arena-6/preflight.json",
+      "size": 561,
+      "sha256": "d419e4acfb7ef0542263e876d2946d2fb1c063014c6f11222d21367dc4ead8b2"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1/arena-6/result.json",
+      "size": 469582,
+      "sha256": "fa344e6785c1d11ea4814b41bee5ee3db49933d23aee65ad97e8df96ed9f1e1f"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1/arena-6/routing.json",
+      "size": 5322,
+      "sha256": "e6f10890d2f75b5fb7d248f312fa303816a3717bece26438d73ad62cc9dfc50f"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1/arena-6/rules-mock.json",
+      "size": 1179,
+      "sha256": "e65600320d6c47d5f4ea7d6139da2f0c20d4a3f450250152bcbcd4039b52056b"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1/arena-6/source-bindings.json",
+      "size": 3813,
+      "sha256": "476527748f55ba10113c2e1b8cbd4ca1857349c26f14425bbb3259af8d6c6654"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1/arena-6/startup.json",
+      "size": 3446,
+      "sha256": "936ef85936b88b460f528ab0901634056002f2ab66328b8297043081087aa786"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1/arena-6/summary.json",
+      "size": 207,
+      "sha256": "9c73ad2f634f92cff3685425b097c9cb5fa14fa15ceaa2b26f692f1e693005e7"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1/arena-6/terminated-worker.json",
+      "size": 66,
+      "sha256": "0d3474588afb91797802a3151283601dbdd34b8bd4bc828d5a2486a3eba427c6"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1/arena-6-config.json",
+      "size": 2952,
+      "sha256": "b31b312125f1c25d3a6aba08086124680854c398fe7a24e23fdf4d7910fdfde9"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1/arena-6.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1/beads-read-quoridor-4lc.159.json",
+      "size": 212950,
+      "sha256": "8062eb5a56b62c47e88306c392d9a91bac6577c079db43360cca97fad50ca20e"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1/beads-read-quoridor-4lc.json",
+      "size": 211796,
+      "sha256": "bcdfeae451bac66cb8c6a67e82ac06b12b46209c84b7025f0a055cdaf6191d2a"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1/init-progress.json",
+      "size": 59,
+      "sha256": "dbd10e1fd90d7dad5339cef12bbd903c8483adaa0441cba989f77b8121c65216"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1/pause-monitor-stop.json",
+      "size": 8303,
+      "sha256": "e5c781d66957c5d972e0a3ffb6aada1bc38c228de591d975d7f02f31e86b9358"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1/pause-monitor.json",
+      "size": 8216,
+      "sha256": "f8b9eee23cf3be59f94fbea51e09ba27ec24d8fd1e925cc685412c634758ea31"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1/phase-0.json",
+      "size": 1002,
+      "sha256": "e527517bc18fda7b5c579e78e5e0bbd5d035972e9b5545ed8b7ffa2c5935682a"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1/phase-1.json",
+      "size": 1001,
+      "sha256": "9e7c01109d325c61ebe63dc9cbffd59dad21ffee92588a652941194e3b2b81e1"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1/phase-2.json",
+      "size": 1003,
+      "sha256": "5d4a75fe4a99920d368e4f925fce5b501caf819e36ff774e683ff68a43ccc6fa"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1/phase-3.json",
+      "size": 1002,
+      "sha256": "e5aec00d8e66806b9cc0e3603ebd28d0a6d1870f47a53808bd96a7ed47017941"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1/phase-4.json",
+      "size": 1002,
+      "sha256": "61d1df0108e1f724148a70803f4c696853480f74fef0224cdfcff029f11444b7"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1/phase-5.json",
+      "size": 1003,
+      "sha256": "73765f6af3098383d1eba61640d487e26f6f9577f34fe9f8eef1d4e90a32eaf8"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1/summary.json",
+      "size": 6284,
+      "sha256": "6ed9e1dd56678e65524c15eb3c7c83d80d795dffd80d1e4eade275850b636532"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1.admission.json",
+      "size": 3894,
+      "sha256": "24ad77d1217c5c39e17ce15b700120ffd8d5a854fd8863651d525f7feabfc1b8"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1.inputs.json",
+      "size": 1824,
+      "sha256": "085bd65c5206f64b73857e4037674cf2f9f143a45fffc393b1f24ad3d9a6d8e1"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1.monitor.jsonl",
+      "size": 299461,
+      "sha256": "b3576e40d3c146ac32739c0395603194b178b0affc45343b2241996ca7519ce1"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1.owned-ack.json",
+      "size": 37981,
+      "sha256": "49fa091e13888248103e6884794fc3d0c5787714180b262f5cb32503926c37c2"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1.owned-ledger.jsonl",
+      "size": 6996,
+      "sha256": "be8192fc04133296db36ef44c3eed1673c9e968c9cbe475f240957603b2d4118"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1.process.json",
+      "size": 33052,
+      "sha256": "e7b3c9b0a18bd5b8745fd11fb7a7bc1fc7a59288e385968c15f4c005e23a2d8d"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1.started.json",
+      "size": 1741,
+      "sha256": "408751df9ef065f8ff6d0904110f09714d61ec2d3c536cc104f2e13b2b9ec7cf"
+    },
+    {
+      "name": "runs/concurrency159-solo6-r1.threads.json",
+      "size": 190,
+      "sha256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1/arena-8/actual-served-source.json",
+      "size": 4821,
+      "sha256": "b4679daa7f73ef185e5a107ec0a941573a92b3a58df51d0b1ea9a991893cc9f3"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1/arena-8/browser-startup.json",
+      "size": 420,
+      "sha256": "7e046c29c4fcb4132947711f27e9cc6701ee2dcdd4a3707c4a50a16d0eccc5ef"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1/arena-8/cleanup.jsonl",
+      "size": 20318,
+      "sha256": "88685d15527b7123872f5b0b808605d0ceff6641a554b20a347a494748846e36"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1/arena-8/config.json",
+      "size": 2952,
+      "sha256": "fd3e28b50ae053c631fb9ddf8cbf8b2435742d33c10ca07b0320a1b57669d588"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1/arena-8/controlled-stop.json",
+      "size": 821,
+      "sha256": "97b75cf19af372638a5a15c274962f2db23c406022633e44b89a0710083480b0"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1/arena-8/main-timer-stop.json",
+      "size": 49,
+      "sha256": "7dcfee3d0f6d458c477d356171d6dc22abd316b5762d0543ac2166f996081ac1"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1/arena-8/model-drop.json",
+      "size": 450,
+      "sha256": "93b0f031bdab92c194e5e112813de9805b68df7345d46717c29a8efa40187045"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1/arena-8/model-load.json",
+      "size": 990,
+      "sha256": "7f92c7430b3bf00fca53cb54140058c83ecc7fac8d6b8c1744c8c3c5fef0b327"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1/arena-8/preflight.json",
+      "size": 561,
+      "sha256": "d419e4acfb7ef0542263e876d2946d2fb1c063014c6f11222d21367dc4ead8b2"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1/arena-8/result.json",
+      "size": 426267,
+      "sha256": "08e4e5d37211fb01088dcaa364cb41efc0294d040b50520948a279fa02cff822"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1/arena-8/routing.json",
+      "size": 5322,
+      "sha256": "e6f10890d2f75b5fb7d248f312fa303816a3717bece26438d73ad62cc9dfc50f"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1/arena-8/rules-mock.json",
+      "size": 1179,
+      "sha256": "e65600320d6c47d5f4ea7d6139da2f0c20d4a3f450250152bcbcd4039b52056b"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1/arena-8/source-bindings.json",
+      "size": 3813,
+      "sha256": "476527748f55ba10113c2e1b8cbd4ca1857349c26f14425bbb3259af8d6c6654"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1/arena-8/startup.json",
+      "size": 3423,
+      "sha256": "6e727c3a3b1a4a11e2b8c9701366edec65acf209cc7f88df7a10dba4a73c72a3"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1/arena-8/summary.json",
+      "size": 207,
+      "sha256": "ae2c25686bfe96b53adbb42abf13c75d2b275d24a1b05ce7ae4dd59ee43bc5c0"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1/arena-8/terminated-worker.json",
+      "size": 66,
+      "sha256": "fee502cdf2ce2e0ecb55050172eb375c46dc306b20ee1f2f9be6635f8a02c7e8"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1/arena-8-config.json",
+      "size": 2952,
+      "sha256": "fd3e28b50ae053c631fb9ddf8cbf8b2435742d33c10ca07b0320a1b57669d588"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1/arena-8.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1/beads-read-quoridor-4lc.159.json",
+      "size": 212950,
+      "sha256": "8062eb5a56b62c47e88306c392d9a91bac6577c079db43360cca97fad50ca20e"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1/beads-read-quoridor-4lc.json",
+      "size": 211796,
+      "sha256": "bcdfeae451bac66cb8c6a67e82ac06b12b46209c84b7025f0a055cdaf6191d2a"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1/init-progress.json",
+      "size": 59,
+      "sha256": "fadf65b651061c0c40534aaa0bd9914307d87b0d0d6c0e4536c13a0cb22830b2"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1/pause-monitor-stop.json",
+      "size": 8303,
+      "sha256": "98fcfe0cc04eb7fecd8c5642b407c4dc65652797c54340e9fcdf588ae62f778c"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1/pause-monitor.json",
+      "size": 8216,
+      "sha256": "dca64bdc250c55e712949f28dca1f12a7eb3229c9291147e919dd38e36d53068"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1/phase-0.json",
+      "size": 1000,
+      "sha256": "d66fb19b0eeafb80f98c0d5c73376f1d2ced35ff70c50b0bf0f49dd8475a0a30"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1/phase-1.json",
+      "size": 1000,
+      "sha256": "6f2b2a9a992e3a420bf2046dd1300c62545877e883b26f9eabc89ad71395f378"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1/phase-2.json",
+      "size": 999,
+      "sha256": "f128264df80743beedab0460a8558729b4493fb8dcd18a3b74e011f9823733ac"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1/phase-3.json",
+      "size": 1000,
+      "sha256": "09e5c581e715c265b1ba306841ecb2bd91e691d385fcb41d5efa77953b21d83e"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1/phase-4.json",
+      "size": 1001,
+      "sha256": "ede50c4a185b20e6b6381a3f87d51610c4a1f689f4f87783a1f3361aac55c438"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1/phase-5.json",
+      "size": 1001,
+      "sha256": "70e5b5cbcb8dd0b6eb376d24489d38560a118171a069b5998c5c5db207a47571"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1/summary.json",
+      "size": 6272,
+      "sha256": "78075544cc9c170ebaa52635d294ee91499e95f93113a1ca45c8fb26fb2c061a"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1.admission.json",
+      "size": 3902,
+      "sha256": "014ec688ab13e18c094c9512e188ae2e9fad845a2c3b4597da13b24d1384977c"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1.inputs.json",
+      "size": 1824,
+      "sha256": "085bd65c5206f64b73857e4037674cf2f9f143a45fffc393b1f24ad3d9a6d8e1"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1.monitor.jsonl",
+      "size": 319242,
+      "sha256": "bb9802d5ae6c3b02d41f2a4417a4eeee5c1ac1250cbfc9af68a59d9ba3c8deda"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1.owned-ack.json",
+      "size": 35497,
+      "sha256": "7b9cc7d0936888049d9ccf432f21f291080dbae0e09dc6936c8c77b0fb623619"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1.owned-ledger.jsonl",
+      "size": 7348,
+      "sha256": "23d2734c8c595d25435fa59e82f77887ec3450b01117982d555e7f1271ba15f3"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1.process.json",
+      "size": 30567,
+      "sha256": "a6b3958376683c25085ff169a08ee03fb9e50a2c59651df00cf6060a3a642245"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1.started.json",
+      "size": 1742,
+      "sha256": "56919cb73ac3d8515056eb8a2acc8b5423fb7100b193a66201033725c5176bee"
+    },
+    {
+      "name": "runs/concurrency159-solo8-r1.threads.json",
+      "size": 190,
+      "sha256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    {
+      "name": "science-stop-receipt.json",
+      "size": 157,
+      "sha256": "9789dfff5a26e5e6ac02f387fd27901e6873ec441cb70a5bebbf213484a91bc0"
+    },
+    {
+      "name": "science-stop-report.md",
+      "size": 1217,
+      "sha256": "2f1a55b1ae683374d01469cdc6ffdbd2cb1106cce4f9b7c8f16fa5f2e0a00bf0"
+    },
+    {
+      "name": "self.json",
+      "size": 211677,
+      "sha256": "8a4b2cbdade3c9e0c45f2ba8a3da5df401457439580c3690751119d7eb40c189"
+    },
+    {
+      "name": "start-receipt.json",
+      "size": 157,
+      "sha256": "8d75d2b118bebaf481e963f5b4e973b3460c7a0415baddd876131f30f0ee6d98"
+    },
+    {
+      "name": "start-report.md",
+      "size": 896,
+      "sha256": "e69c6a6cc66c2835db236e9645c1660e13a454a700645b83d3517fd4486d0492"
+    },
+    {
+      "name": "tape-mock.log",
+      "size": 32,
+      "sha256": "5c88bd652b0ca355b0771e347eed08b7ac730c21b0c565d2036c77a2af265b4b"
+    }
+  ],
+  "all_member_size_SHA_checked": true,
+  "finite_actual_extract_checked": [
+    "runs/concurrency159-mode2-r1/arena-2/result.json",
+    "runs/concurrency159-mode2-r1/arena-4/result.json",
+    "runs/concurrency159-mode4-r1/arena-2/result.json",
+    "runs/concurrency159-mode4-r1/arena-4/result.json",
+    "runs/concurrency159-mode4-r1/arena-6/result.json"
+  ],
+  "source_reference": "solo2 be872e8; other scientific a3094fd; prereg564593e; actual served bindings archived",
+  "readonly_binary": "151 faithful500181795b373f69f6f2214ee1a77e12767e2f342e15a56ab5e27d0a0453f2c2",
+  "reproduce": "taskset -c CORE python3 -B tools/ai-sigma-cpu-concurrency/runner.py CONFIG; actual commands retained in per-run process.json",
+  "pack_wall_s": 0.2829060730000492,
+  "original_raw_retained_for_independent_readers": true,
+  "policy_model_WDL_change": false
+}

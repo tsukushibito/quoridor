@@ -1,0 +1,276 @@
+{
+  "issue": "quoridor-4lc.159",
+  "kind": "same-writer finite saved arithmetic",
+  "job_costs": [
+    {
+      "mode": "solo2",
+      "wall_including_init_debug_monitor_cleanup_s": 99.768139,
+      "steady_batch_until_ACK_ms": 1794.550048828125,
+      "peak_aggregate_RSS": 1771790336,
+      "exit": -15,
+      "control_failure": true
+    },
+    {
+      "mode": "solo4",
+      "wall_including_init_debug_monitor_cleanup_s": 16.776084,
+      "steady_batch_until_ACK_ms": 1770.02001953125,
+      "peak_aggregate_RSS": 1774837760,
+      "exit": 0,
+      "control_failure": false
+    },
+    {
+      "mode": "solo6",
+      "wall_including_init_debug_monitor_cleanup_s": 18.359364,
+      "steady_batch_until_ACK_ms": 1752.22998046875,
+      "peak_aggregate_RSS": 1825734656,
+      "exit": 0,
+      "control_failure": false
+    },
+    {
+      "mode": "solo8",
+      "wall_including_init_debug_monitor_cleanup_s": 19.428907,
+      "steady_batch_until_ACK_ms": 1741.7900390625,
+      "peak_aggregate_RSS": 1814290432,
+      "exit": 0,
+      "control_failure": false
+    },
+    {
+      "mode": "mode2",
+      "wall_including_init_debug_monitor_cleanup_s": 25.839078,
+      "steady_batch_until_ACK_ms": 1799.80517578125,
+      "peak_aggregate_RSS": 3187142656,
+      "exit": 0,
+      "control_failure": false
+    },
+    {
+      "mode": "mode4",
+      "wall_including_init_debug_monitor_cleanup_s": 38.017619,
+      "steady_batch_until_ACK_ms": 1850.580078125,
+      "peak_aggregate_RSS": 6096449536,
+      "exit": 0,
+      "control_failure": false
+    }
+  ],
+  "engine_steady": [
+    {
+      "mode": "solo2",
+      "core": 2,
+      "engine": "candidate",
+      "n_requests": 2,
+      "unweighted_request_mean_API_await_ms": 32.68414084694602,
+      "API_starts": 21,
+      "adopted_NN": 20,
+      "adopted_backup": 20
+    },
+    {
+      "mode": "solo2",
+      "core": 2,
+      "engine": "reference",
+      "n_requests": 2,
+      "unweighted_request_mean_API_await_ms": 27.194825451783462,
+      "API_starts": 29,
+      "adopted_NN": 27,
+      "adopted_backup": 27
+    },
+    {
+      "mode": "solo4",
+      "core": 4,
+      "engine": "candidate",
+      "n_requests": 2,
+      "unweighted_request_mean_API_await_ms": 31.719341571514423,
+      "API_starts": 22,
+      "adopted_NN": 20,
+      "adopted_backup": 20
+    },
+    {
+      "mode": "solo4",
+      "core": 4,
+      "engine": "reference",
+      "n_requests": 2,
+      "unweighted_request_mean_API_await_ms": 27.860358220880684,
+      "API_starts": 26,
+      "adopted_NN": 25,
+      "adopted_backup": 25
+    },
+    {
+      "mode": "solo6",
+      "core": 6,
+      "engine": "candidate",
+      "n_requests": 2,
+      "unweighted_request_mean_API_await_ms": 27.695399305555554,
+      "API_starts": 24,
+      "adopted_NN": 22,
+      "adopted_backup": 22
+    },
+    {
+      "mode": "solo6",
+      "core": 6,
+      "engine": "reference",
+      "n_requests": 2,
+      "unweighted_request_mean_API_await_ms": 31.198715956894667,
+      "API_starts": 24,
+      "adopted_NN": 22,
+      "adopted_backup": 22
+    },
+    {
+      "mode": "solo8",
+      "core": 8,
+      "engine": "candidate",
+      "n_requests": 2,
+      "unweighted_request_mean_API_await_ms": 22.652997116815477,
+      "API_starts": 29,
+      "adopted_NN": 27,
+      "adopted_backup": 27
+    },
+    {
+      "mode": "solo8",
+      "core": 8,
+      "engine": "reference",
+      "n_requests": 2,
+      "unweighted_request_mean_API_await_ms": 37.642522515190976,
+      "API_starts": 19,
+      "adopted_NN": 17,
+      "adopted_backup": 17
+    },
+    {
+      "mode": "mode2",
+      "core": 2,
+      "engine": "candidate",
+      "n_requests": 2,
+      "unweighted_request_mean_API_await_ms": 26.950726631360176,
+      "API_starts": 25,
+      "adopted_NN": 23,
+      "adopted_backup": 23
+    },
+    {
+      "mode": "mode2",
+      "core": 2,
+      "engine": "reference",
+      "n_requests": 2,
+      "unweighted_request_mean_API_await_ms": 31.34071360768138,
+      "API_starts": 24,
+      "adopted_NN": 22,
+      "adopted_backup": 22
+    },
+    {
+      "mode": "mode2",
+      "core": 4,
+      "engine": "candidate",
+      "n_requests": 2,
+      "unweighted_request_mean_API_await_ms": 13.158086603338068,
+      "API_starts": 44,
+      "adopted_NN": 42,
+      "adopted_backup": 42
+    },
+    {
+      "mode": "mode2",
+      "core": 4,
+      "engine": "reference",
+      "n_requests": 2,
+      "unweighted_request_mean_API_await_ms": 14.524316358000865,
+      "API_starts": 45,
+      "adopted_NN": 44,
+      "adopted_backup": 44
+    },
+    {
+      "mode": "mode4",
+      "core": 2,
+      "engine": "candidate",
+      "n_requests": 2,
+      "unweighted_request_mean_API_await_ms": 41.705902099609375,
+      "API_starts": 16,
+      "adopted_NN": 16,
+      "adopted_backup": 16
+    },
+    {
+      "mode": "mode4",
+      "core": 2,
+      "engine": "reference",
+      "n_requests": 2,
+      "unweighted_request_mean_API_await_ms": 32.56425678813374,
+      "API_starts": 24,
+      "adopted_NN": 22,
+      "adopted_backup": 22
+    },
+    {
+      "mode": "mode4",
+      "core": 4,
+      "engine": "candidate",
+      "n_requests": 2,
+      "unweighted_request_mean_API_await_ms": 14.947503662109376,
+      "API_starts": 40,
+      "adopted_NN": 38,
+      "adopted_backup": 38
+    },
+    {
+      "mode": "mode4",
+      "core": 4,
+      "engine": "reference",
+      "n_requests": 2,
+      "unweighted_request_mean_API_await_ms": 14.281966238310844,
+      "API_starts": 46,
+      "adopted_NN": 45,
+      "adopted_backup": 45
+    },
+    {
+      "mode": "mode4",
+      "core": 6,
+      "engine": "candidate",
+      "n_requests": 2,
+      "unweighted_request_mean_API_await_ms": 15.16124267578125,
+      "API_starts": 40,
+      "adopted_NN": 38,
+      "adopted_backup": 38
+    },
+    {
+      "mode": "mode4",
+      "core": 6,
+      "engine": "reference",
+      "n_requests": 2,
+      "unweighted_request_mean_API_await_ms": 14.286738520083219,
+      "API_starts": 47,
+      "adopted_NN": 45,
+      "adopted_backup": 45
+    },
+    {
+      "mode": "mode4",
+      "core": 8,
+      "engine": "candidate",
+      "n_requests": 2,
+      "unweighted_request_mean_API_await_ms": 13.90500023251488,
+      "API_starts": 42,
+      "adopted_NN": 41,
+      "adopted_backup": 41
+    },
+    {
+      "mode": "mode4",
+      "core": 8,
+      "engine": "reference",
+      "n_requests": 2,
+      "unweighted_request_mean_API_await_ms": 14.932717063210227,
+      "API_starts": 44,
+      "adopted_NN": 42,
+      "adopted_backup": 42
+    }
+  ],
+  "public_elapsed_min_max_ms": [
+    410.360107421875,
+    415.39501953125
+  ],
+  "returned_after_public_discard": 28,
+  "definite_post_public_API_starts": 0,
+  "independent_kernelCPU": null,
+  "host_frequency_thermal_series": null,
+  "management_placement": {
+    "solo": "parent/guardian/arena same solo core",
+    "parallel": "parent/guardian pool first core2; arena nodes own2/4/6/8"
+  },
+  "management_causality": "asymmetry is known configuration; causal size unmeasured",
+  "next_max1": {
+    "selected": "private CPU-provider/residual-NN accounting repair before formal WDL",
+    "scope": "Bind inference Worker TID and residual interval to measured cause-side CPU; verify normal opponent t0 remains independent of old ACK; account parent/guardian inside chosen pool symmetrically or explicitly",
+    "new_allocation_required": true,
+    "falsifier": "cannot measure attribution or match effective budget within CPU4/RAM8 => formal_ready=false; no blind switch to mode4",
+    "no_NNUE_expansion": true
+  }
+}
