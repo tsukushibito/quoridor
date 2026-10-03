@@ -8,6 +8,7 @@ import math
 import os
 from pathlib import Path
 import resource
+import selectors
 import signal
 import subprocess
 import sys
@@ -36,6 +37,15 @@ SELF = 'quoridor-4lc.40'
 REPORT_RESERVE = 30
 OPERATION_BEGIN = dt.datetime(2026, 10, 3, 0, 15, 21, tzinfo=UTC)
 OPERATION_END = dt.datetime(2026, 10, 3, 8, 10, 21, tzinfo=UTC)
+# New runs only: pipes are transient memory, not retained wrapper transcripts.
+RAW_PIPE_CAP = 4 * 1024**2
+SELECTED_CAP = 64 * 1024
+RUN_CAP = 384 * 1024
+FAILURE_RESERVE = 8 * 1024
+RUN_FORECAST = 512 * 1024
+COMMAND_CAP = 24
+NOTE_CAP = 1024
+_FIELD_REQUEST = None
 
 def utc_now():
     return dt.datetime.now(UTC)
@@ -58,8 +68,19 @@ def uuid_text(value):
     return value
 
 def write(path, value):
+    encoded = (json.dumps(value, ensure_ascii=False, separators=(',', ':')) + '\n').encode()
+    if len(encoded) > SELECTED_CAP:
+        raise Rejected('selected_record_overflow: use bounded inspect field/offset')
+    if BASE in path.parents:
+        run_root = BASE / path.relative_to(BASE).parts[0]
+        actual = allocated_bytes([run_root])
+        # Charge the temporary file before replacement, including 4KiB rounding.
+        forecast = ((len(encoded) + 4095) // 4096) * 4096 + 4096
+        ceiling = RUN_CAP if path.name.startswith('failure') or path.name == 'terminal-refusal.json' else RUN_CAP - FAILURE_RESERVE
+        if actual + forecast > ceiling:
+            raise Rejected('run_retention_cap: no further command; failure reserve retained')
     tmp = path.with_suffix(path.suffix + '.tmp')
-    tmp.write_text(json.dumps(value, ensure_ascii=False, indent=2) + '\n')
+    tmp.write_bytes(encoded)
     os.replace(tmp, path)
 
 def proc(pid):
@@ -214,7 +235,7 @@ def supervisor_storage_bytes():
     return held, current
 
 
-def check_storage(forecast_bytes=4 * 1024**2):
+def check_storage(forecast_bytes=RUN_FORECAST):
     steward = owned_storage_bytes()
     held, current = supervisor_storage_bytes()
     if steward + forecast_bytes > 112 * 1024**2:
@@ -227,58 +248,156 @@ def check_storage(forecast_bytes=4 * 1024**2):
             'forecast_bytes': forecast_bytes, 'additional_reservation_bytes': 0,
             'historical_parent_charge_released': False}
 
-def run_child(args, path, bound, phase='read', background=(), timeout=12):
+def select_text(text, cap, tail=False, offset=None):
+    raw = str(text or '').encode()
+    start = max(0, len(raw)-cap) if tail else 0
+    if offset is not None:
+        start = min(offset, len(raw))
+    end = min(len(raw), start+cap)
+    # Select complete UTF-8 codepoints; byte ranges refer to original bytes.
+    while start < end and raw[start] & 0xC0 == 0x80:
+        start += 1
+    while end < len(raw) and end > start and raw[end] & 0xC0 == 0x80:
+        end -= 1
+    return raw[start:end].decode(), {'source_bytes': len(raw),
+        'source_sha256': hashlib.sha256(raw).hexdigest(), 'range': [start, end],
+        'complete': start == 0 and end == len(raw),
+        'missing': None if start == 0 and end == len(raw) else 'bounded_field_evidence',
+        'additional_read': 'inspect --issue ID --field notes|description --offset BYTE'}
+
+
+def select_stdout(value, args):
+    if len(args) > 1 and args[1] == str(MAIN/'scripts/dev/beads.sh') and isinstance(value, list):
+        is_show = 'show' in args
+        result = []
+        fields = ('id', 'title', 'status', 'assignee', 'labels', 'updated_at',
+                  'created_at', 'started_at', 'parent', 'dependency_count', 'dependent_count')
+        for row in value:
+            if not isinstance(row, dict):
+                raise ReadFailed('Unexpected wrapper issue schema')
+            selected = {key: row[key] for key in fields if key in row}
+            selected['dependencies'] = dependency_summary(row.get('dependencies'))
+            coverage = {}
+            if is_show:
+                for field, cap, tail in (('description', 3072, False), ('notes', 1024, True)):
+                    request = _FIELD_REQUEST if _FIELD_REQUEST and _FIELD_REQUEST[0] == field else None
+                    selected[field], coverage[field] = select_text(row.get(field),
+                        8192 if request else cap, tail=tail and not request,
+                        offset=request[1] if request else None)
+            coverage['omitted_fields'] = sorted(set(row)-set(selected)-{'description', 'notes', 'dependencies'})
+            selected['_selection'] = coverage
+            result.append(selected)
+        return result
+    if isinstance(value, dict) and 'text' in value and 'path' in value:
+        text, coverage = select_text(value['text'], 8192,
+            offset=_FIELD_REQUEST[1] if _FIELD_REQUEST and _FIELD_REQUEST[0] == 'document' else None)
+        return {**value, 'text': text, '_selection': coverage}
+    return value
+
+
+def retain_stdout(raw, args, directory, complete=True):
+    source = {'bytes': len(raw), 'sha256': hashlib.sha256(raw).hexdigest(),
+              'complete_pipe': complete, 'full_wrapper_stdout_retained': False}
+    try:
+        parsed = json.loads(raw)
+    except (UnicodeDecodeError, json.JSONDecodeError):
+        # Non-JSON bookkeeping output is also bounded and explicitly scoped.
+        parsed, coverage = select_text(raw.decode(errors='replace'), 1024)
+        selected = {'text': parsed, '_selection': coverage}
+    else:
+        selected = select_stdout(parsed, args)
+    encoded = json.dumps(selected, ensure_ascii=False, separators=(',', ':')).encode()
+    if len(encoded) > SELECTED_CAP:
+        raise ReadFailed('selected_output_overflow: required evidence exceeds cap; use bounded inspect')
+    digest = hashlib.sha256(encoded).hexdigest()
+    blob = directory / ('selection-'+digest+'.json')
+    if not blob.exists():
+        write(blob, selected)
+    return selected, {**source, 'selection': str(blob), 'selected_bytes': len(encoded),
+                      'selected_sha256': digest, 'same_selection_reuses_reference': True}
+
+
+def run_child(args, path, bound, phase='read', background=(), timeout=12, return_value=False):
     admit(bound, 'read_start' if phase == 'read' else 'finish', required_seconds=timeout+2)
     storage = check_storage()
+    directory = path.parent
+    # A persistent counter includes inspect, retries, authorization and finish.
+    ledger = directory/'command-count.json'
+    count = json.loads(ledger.read_text())['count'] if ledger.exists() else 0
+    if count >= COMMAND_CAP:
+        raise Rejected('run_command_cap: no command launched')
+    if BASE in path.parents and allocated_bytes([BASE/path.relative_to(BASE).parts[0]]) + SELECTED_CAP + 16*1024 > RUN_CAP - FAILURE_RESERVE:
+        raise Rejected('run_retention_cap: next spawn blocked')
+    write(ledger, {'count': count+1, 'limit': COMMAND_CAP})
     admit(bound, 'read_start' if phase == 'read' else 'finish', required_seconds=timeout+2)
     limit = 180-REPORT_RESERVE if phase == 'read' else 180
     started = stamp(); started['storage_accounting'] = storage
     peak = 0; cause = None
     # AS is intentionally inherited without imposing 1GiB; Go/cgo needs virtual reserve.
-    with path.with_suffix('.stdout').open('wb') as stdout, path.with_suffix('.stderr').open('wb') as stderr:
-        child = subprocess.Popen(args, cwd=ROOT, stdout=stdout, stderr=stderr,
-                                 env={**os.environ, **ENV}, start_new_session=True)
+    raw = {'stdout': bytearray(), 'stderr': bytearray()}
+    hashes = {key: hashlib.sha256() for key in raw}; sizes = {key: 0 for key in raw}
+    selector = selectors.DefaultSelector()
+    child = subprocess.Popen(args, cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                             env={**os.environ, **ENV}, start_new_session=True)
+    try:
+        for key, pipe in (('stdout', child.stdout), ('stderr', child.stderr)):
+            os.set_blocking(pipe.fileno(), False); selector.register(pipe, selectors.EVENT_READ, key)
         ident = proc(child.pid)
         command_deadline = time.monotonic() + timeout
         try:
-            while child.poll() is None:
+            while selector.get_map() or child.poll() is None:
+                for event, _ in selector.select(.02):
+                    chunk = os.read(event.fileobj.fileno(), 65536)
+                    if not chunk:
+                        selector.unregister(event.fileobj); continue
+                    key = event.data; sizes[key] += len(chunk); hashes[key].update(chunk)
+                    room = RAW_PIPE_CAP-len(raw[key]); raw[key].extend(chunk[:max(0, room)])
+                    if sum(sizes.values()) > RAW_PIPE_CAP and cause is None:
+                        cause = 'raw_pipe_overflow'; cleanup_group(child)
                 peak = max(peak, sampled_rss(child.pid, background))
-                if peak >= 1024**3:
-                    cause = 'sampled_combined_RSS_guard'; break
-                if path.with_suffix('.stdout').stat().st_size + path.with_suffix('.stderr').stat().st_size > 2*1024**2:
-                    cause = 'bounded_output_guard'; break
-                if time.monotonic() >= command_deadline or age_now(bound) >= limit-2 or utc_now() >= OPERATION_END-dt.timedelta(seconds=2):
-                    cause = 'timeout/deadline'; break
-                time.sleep(0.02)
-            if cause:
-                cleanup_group(child)
-            else:
-                child.wait()
+                if child.poll() is None and not cause:
+                    if peak >= 1024**3: cause = 'sampled_combined_RSS_guard'
+                    elif time.monotonic() >= command_deadline or age_now(bound) >= limit-2 or utc_now() >= OPERATION_END-dt.timedelta(seconds=2): cause = 'timeout/deadline'
+                    if cause: cleanup_group(child)
+            child.wait()
         except BaseException as error:
             cause = 'operator/interruption: '+type(error).__name__
             cleanup_group(child)
         finally:
             if child.poll() is None:
                 cleanup_group(child)
+    finally:
+        selector.close(); child.stdout.close(); child.stderr.close()
     finished = stamp()
     row = {'command': args, 'started': started, 'finished': finished, 'child': ident,
            'exit_code': child.returncode, 'cause': cause, 'reaped': True,
            'sampled_combined_RSS_peak_bytes': peak, 'sample_interval_seconds': 0.02,
            'instant_RSS_peak_not_guaranteed': True, 'phase': phase,
            'age_started_seconds': age_now(bound, parse_utc(started['utc']), started['monotonic']),
-           'age_finished_seconds': age_now(bound, parse_utc(finished['utc']), finished['monotonic'])}
+           'age_finished_seconds': age_now(bound, parse_utc(finished['utc']), finished['monotonic']),
+           'stdout_evidence': {'bytes': sizes['stdout'], 'sha256': hashes['stdout'].hexdigest(),
+                               'complete_pipe': not bool(cause)},
+           'stderr_evidence': {'bytes': sizes['stderr'], 'sha256': hashes['stderr'].hexdigest(),
+                               'excerpt': bytes(raw['stderr'][:1024]).decode(errors='replace')},
+           'output_limits': {'raw_pipe_bytes': RAW_PIPE_CAP, 'selection_bytes': SELECTED_CAP,
+                             'run_allocated_bytes': RUN_CAP, 'commands': COMMAND_CAP}}
+    value = None
+    if not cause and child.returncode == 0:
+        try:
+            value, row['stdout_evidence'] = retain_stdout(bytes(raw['stdout']), args, directory)
+        except (Rejected, ReadFailed) as error:
+            cause = str(error); row['cause'] = cause
     write(path, row)
     if cause or child.returncode:
-        error = path.with_suffix('.stderr').read_text(errors='replace')[-4096:]
+        error = bytes(raw['stderr'][-4096:]).decode(errors='replace')
         transient = (cause == 'timeout/deadline' and age_now(bound) < limit-2) or (not cause and any(x in error.lower() for x in ('database is locked', 'resource temporarily unavailable', 'connection reset', 'temporarily unavailable', 'connection refused')))
         raise ReadFailed('Owned command failed; child reaped: '+str(cause or error), transient=transient and phase == 'read')
     admit(bound, 'read_finish' if phase == 'read' else 'finish')
-    if phase != 'read':
+    if phase != 'read' and not return_value:
         return row
-    try:
-        return json.loads(path.with_suffix('.stdout').read_text())
-    except json.JSONDecodeError as error:
-        raise ReadFailed('Temporary invalid metadata JSON: '+str(error), transient=True)
+    if isinstance(value, dict) and 'text' in value and not ('path' in value):
+        raise ReadFailed('invalid_metadata_json: required structured evidence absent')
+    return value
 
 def live_owned(run, turn, prior):
     if prior:
@@ -328,6 +447,8 @@ def dependency_summary(dependencies):
 
 def issue_summary(issues):
     return [{'id': x.get('id'), 'status': x.get('status'), 'assignee': x.get('assignee'),
+             'title': x.get('title'), 'updated_at': x.get('updated_at'),
+             'description': x.get('description'), '_selection': x.get('_selection'),
              'labels': x.get('labels') or [], 'dependencies': dependency_summary(x.get('dependencies')),
              'dependency_count': x.get('dependency_count'),
              'notes_tail': str(x.get('notes') or '')[-1200:]} for x in issues]
@@ -354,6 +475,11 @@ def observe(directory, run, turn, refresh=False):
     prior = json.loads(prior_path.read_text()) if prior_path.exists() else None
     bound, state = live_owned(run, turn, prior)
     write(prior_path, bound)
+    write(directory/'storage-policy.json', {'version': 'bounded-records-v1',
+        'guard_run_allocated_cap': RUN_CAP, 'total_run_cap': RUN_FORECAST,
+        'failure_reserved_bytes': FAILURE_RESERVE, 'command_cap': COMMAND_CAP,
+        'raw_pipe_cap': RAW_PIPE_CAP, 'selected_record_cap': SELECTED_CAP,
+        'notes_increment_cap': NOTE_CAP, 'external_report_limit_bytes': 16384})
     if (directory/'observation.json').exists() and not refresh:
         return {'cached': True, 'observation': str(directory/'observation.json'), 'binding': bound}
     background = [state['process']]
@@ -433,6 +559,11 @@ def inspect(directory, run, turn, issue_ids=(), files=()):
     write(directory/(token+'.json'), result)
     return result
 
+def validate_note(note):
+    if len(note.encode()) > NOTE_CAP:
+        raise Rejected('notes_increment_overflow: save independent judgment in bounded report; append short time/judgment/evidence reference')
+
+
 def finish(directory, run, turn, note):
     # Bounded current pause/owner check is bookkeeping, sharing the owned clock.
     bound = json.loads((directory/'binding.json').read_text())
@@ -446,14 +577,13 @@ def finish(directory, run, turn, note):
     own = next(x for x in observation['issues'] if x['id'] == 'quoridor-4lc.40')
     if own['status'] != 'in_progress' or own['assignee'] != 'codex:'+THREAD:
         raise Rejected('Own monitor issue not claimed; do not claim/restart from stale data')
-    if len(note)>4096:
-        raise Rejected('Note too long')
+    validate_note(note)
     admit(bound, 'finish', required_seconds=36)
     authorization = directory/('finish-authorization-'+str(time.monotonic_ns())+'.json')
-    run_child(['bash', str(MAIN/'scripts/dev/beads.sh'), 'show', GOAL, SELF, '--json'],
+    authorization_rows = run_child(['bash', str(MAIN/'scripts/dev/beads.sh'), 'show', GOAL, SELF, '--json'],
               authorization, bound, phase='finish', timeout=10,
-              background=observation['background_identities_for_RSS'])
-    require_unpaused(json.loads(authorization.with_suffix('.stdout').read_text()))
+              background=observation['background_identities_for_RSS'], return_value=True)
+    require_unpaused(authorization_rows)
     row = run_child(['bash', str(MAIN/'scripts/dev/beads.sh'), 'update', 'quoridor-4lc.40',
                      '--if-assignee', 'codex:'+THREAD, '--if-status', 'in_progress',
                      '--append-notes', note+' / guarded observation '+str(directory/'observation.json')],
@@ -470,6 +600,7 @@ def finish(directory, run, turn, note):
     return result
 
 def main():
+    global _FIELD_REQUEST
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('operation', choices=('observe', 'inspect', 'finish'))
     parser.add_argument('--run-id', required=True)
@@ -477,8 +608,13 @@ def main():
     parser.add_argument('--refresh', action='store_true', help='Refresh relevant snapshot using original owned clock')
     parser.add_argument('--issue', action='append', default=[])
     parser.add_argument('--file', action='append', default=[])
+    parser.add_argument('--field', choices=('description', 'notes', 'document'))
+    parser.add_argument('--offset', type=int, default=0)
     parser.add_argument('--note', default='監督の保存済みバッチ観測。旧逸脱/欠測/目標未達を保持、正常なら通知0。')
     args = parser.parse_args()
+    if args.offset < 0 or (args.field and args.operation != 'inspect'):
+        raise Rejected('Invalid bounded field request')
+    _FIELD_REQUEST = (args.field, args.offset) if args.field else None
     def interrupted(*_):
         raise Rejected('Owned guard interrupted; collect own command group')
     signal.signal(signal.SIGTERM, interrupted)
@@ -498,6 +634,8 @@ def main():
     directory.mkdir(parents=True, exist_ok=True)
     with (directory/'guard.lock').open('a') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        if (directory/'terminal-refusal.json').exists():
+            raise Rejected('prior_terminal_refusal: no retry/output accumulation in same run')
         try:
             if args.operation == 'observe':
                 result = observe(directory, run, args.turn_id, args.refresh)
@@ -507,8 +645,9 @@ def main():
                 result = finish(directory, run, args.turn_id, args.note)
             print(json.dumps(result, ensure_ascii=False))
         except Exception as error:
-            write(directory/('failure-'+str(time.monotonic_ns())+'.json'), {'at': stamp(), 'operation': args.operation,
-                  'error': str(error), 'no_foreign_process_or_turn_stopped': True})
+            write(directory/'terminal-refusal.json', {'utc': utc_now().isoformat(),
+                'operation': args.operation, 'error': str(error)[:1024],
+                'no_foreign_process_or_turn_stopped': True, 'blind_retry': False})
             raise
 
 if __name__ == '__main__':

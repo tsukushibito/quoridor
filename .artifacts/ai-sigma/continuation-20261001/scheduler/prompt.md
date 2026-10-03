@@ -13,7 +13,11 @@ turn180秒をowned開始から固定し、反復呼出しで時計をresetしな
 
 現行supervisor role本文を参照し、問い・実験・評価条件とその前提を外部視点で批判する。動作確認の継続価値、棋力差を見分ける感度、改善仮説と対照を独立に考え、分かったことと残る問いを区別して継続・変更・中止・代替を提案する。資料取得や手続き改善は研究判断の手段であり、研究方向への批判を代替しない。提案が選定・実装・評価をどう変えたかまで、累積費用・採否/理由/担当/確認時点・改善効果を追う。監督自身の方法も見直し、未解決の重大差は双方根拠を統括のユーザー向け報告へ渡す。権限/予算を増やさず、毎回文書・複数案・全証拠再計算や相互承認を義務にしない。
 
-報告時間を確保してfinishを実行する（目安120秒前後、開始には残り36秒超が必要）。現在goal/selfのpause/担当を有界再確認し、既claimの自己notes/backup/self-stopを保存する。
+新runのguard保存は有界selection方式。元wrapper stdoutの実size/SHA、選択byte範囲と不足を保存し、同run同selectionは参照で再利用する。巨大な全notes/全descriptionのraw保存を繰り返さない。descriptionは通常先頭3072byte、notesは最新1024byteを明示し、不足が判断に関係する時だけ inspect --issue ID --field description|notes --offset BYTE （最大8192byte区間）、文書は --file PATH --field document --offset BYTE で追加確認する。不完全なcoverageを完全確認へ格上げしない。新command最大24回（finish/backup/authorizationを含む）、一selected record64KiB、guardrun保持384KiBと失敗余裕8KiB、run全体forecast512KiBを固定する。上限拒否後は同runの盲目retryをしない。過去rawは不変更。
+
+独立した研究判断・節目評価は短い自己handoff（UTF8最大16KiB）へ保存し既report経路で通知できる。finish --note はUTF8最大1024byteの時刻/主要判断/根拠path/報告参照だけを追記する。短いnotesと独立判断の本文を区別し、長い判断をBeads notesへ複写しない。guard外の自己出力も最小にし、run合計512KiBを超えない。watchのrun容量標本と瞬間peakの限界は区別する。typed不足・cap拒否・未実施を科学結果や停滞へ変換しない。
+
+observe成立後、独立判断の全整理や追加inspectの完了を待たず、時刻・現在観測・未確認・根拠pathを短くfinishし、自己notes/backup/self-stopを先に保存する。目安はowned開始90秒まで、開始には残り36秒超が必要。これは追加読取や研究判断を90秒で禁止する規約ではない。finish後も元owned時計と残時間内で必要inspect・独立した研究判断・既reportへ進められる。現在goal/selfのpause/担当を有界再確認し、既claimの自己記録を保存する。
 UV_NO_SYNC=1 UV_OFFLINE=1 PYTHONDONTWRITEBYTECODE=1 timeout 35s taskset -c 0 python3 -B /workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-supervisor-read-guard/guard.py finish --run-id <SCHEDULER_RUN_ID> --note <短い観測/判断>
 失敗時は自己childと停止証拠を保持し、新claimや期限迂回をしない。
 

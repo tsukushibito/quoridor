@@ -1,0 +1,1 @@
+quoridor-4lc.92 新現在修復SUPERVISOR-BOUNDED-RECORDSを受領・実開始。親11/長期08:05:21・08:10:21・08:13:21・08:15:21維持、本人所有/pauseなし確認。最新実allocatedを調べ、新runのみwrapper保存selection/重複参照と実capを整合。過去raw保持、32MiB/12GiB増額・削除・移管0。研究source/NN変更0。

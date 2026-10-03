@@ -202,6 +202,23 @@ try:
             heavy_notified=True
             notify('heavy-job-stop-notice','quoridor-4lc.92 / 08:05:21UTC到達。新しい重いjobの開始を止め、各ownerが自己jobを回収。監督08:10:21/monitor08:13:21/証拠08:15:21。外部NN停止は認定しない。')
         state=readstate();owned=state.get('owned');p=state.get('process')
+        # New bounded-record runs only. Existing historical evidence is untouched.
+        bounded_run_bytes=None
+        if owned:
+            run_root=ROOT/'.artifacts/ai-sigma/continuation-20261001/supervisor'/owned['run_id']
+            policy=run_root/'read-guard/storage-policy.json'
+            if policy.exists() and json.loads(policy.read_text()).get('version')=='bounded-records-v1':
+                seen=set();bounded_run_bytes=0;stack=[run_root]
+                while stack:
+                    item=stack.pop()
+                    try:stat=item.lstat()
+                    except FileNotFoundError:continue  # atomic recorder replacement
+                    key=(stat.st_dev,stat.st_ino)
+                    if key in seen:continue
+                    seen.add(key);bounded_run_bytes+=stat.st_blocks*512
+                    if item.is_dir() and not item.is_symlink():stack.extend(item.iterdir())
+                if bounded_run_bytes>512*1024:
+                    reason='bounded supervisor run output guard';stop_owned(reason);break
         observed=proc(p['pid']) if p else None
         members=[proc(os.getpid())]
         if matches(p,observed):
@@ -235,6 +252,7 @@ try:
                'first_dispatched':first,'first_owned_turn_finished':finished,
                'sampled_owned_process_rss_peak_bytes':peak,'own_scope_allocated_peak_bytes':storage_peak,
                'sample_count':samples,'all_team_pid_zero_claimed':False,
+               'bounded_supervisor_run_allocated_bytes':bounded_run_bytes,
                'inspection_semantic_success_independently_verified':False})
         if finished and not first_reported:
             first_reported=True

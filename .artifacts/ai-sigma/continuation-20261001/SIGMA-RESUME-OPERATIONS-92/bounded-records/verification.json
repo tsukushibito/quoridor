@@ -1,0 +1,50 @@
+{
+  "at": "2026-10-03T05:49:34.229784+00:00",
+  "checks": [
+    "actual-wrapper-selection-owner-pause-evidence-ranges-and-content-reference-dedup",
+    "bounded-field-typed-missing-utf8-offset-and-dependency-relations",
+    "notes-utf8-increment-cap",
+    "run-command-cap-next-spawn-zero",
+    "deadline-spawn-zero",
+    "pause-owner-check-spawn-zero",
+    "real-pipe-overflow-reaped-no-full-output-file",
+    "current-unknown-storage-refusal",
+    "allocated-run-write-cap-refusal",
+    "syntax-two-modified-sources",
+    "real-small-structured-pipe-success-and-reference"
+  ],
+  "passed": 11,
+  "original_bytes": 556943,
+  "selection_bytes": 5952,
+  "original_sha256": "9d35686c9e08b0f6f6c202de210ebd78e685ca9105ed3c05ea080ef8fe3f5b0a",
+  "raw_unchanged": true,
+  "limits": {
+    "raw_pipe": 4194304,
+    "selection": 65536,
+    "guard_run": 393216,
+    "failure_reserved": 8192,
+    "forecast": 524288,
+    "commands": 24,
+    "notes": 1024
+  },
+  "current_storage": {
+    "steward_allocated_bytes": 18870272,
+    "supervisor_held_bytes": 133746688,
+    "supervisor_current_frame_bytes": 29708288,
+    "supervisor_historical_held_bytes": 104038400,
+    "forecast_bytes": 524288,
+    "additional_reservation_bytes": 0,
+    "historical_parent_charge_released": false
+  },
+  "scope_bytes": 77824,
+  "self": {
+    "pid": 3218829,
+    "start_ticks": "25951096",
+    "state": "R",
+    "rss_bytes": 22511616,
+    "affinity": [
+      0
+    ]
+  },
+  "manual_supervisor_turn": false
+}

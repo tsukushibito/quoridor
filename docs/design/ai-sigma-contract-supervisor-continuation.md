@@ -1,4 +1,4 @@
-# 継続枠・運用監督 / quoridor-4lc.40 / 契約11
+# 継続枠・運用監督 / quoridor-4lc.40 / 契約12
 
 現行[継続枠](ai-sigma-continuation-20261001.md)と[研究規約](../development/ai-research-experiments.md)を継承。担当supervisor 01a0f6b5-b1bd-7752-b0bb-74a336e459a4、報告coordinator。20分周期/turn180秒、CPU affinity[0]/1thread/RAM1GiB/既新32MiB、他セッション数による入場・報告制限なし。観測・自己notes/reportのみ、NN/取得/build/worker起動/委譲/他者kill/配分/config編集0。
 
@@ -14,4 +14,8 @@
 
 親現行枠版11の重job08:05:21UTC/監督08:10:21/monitor08:13:21/終了08:15:21を維持。scheduler/monitorは既steward ownerが回収し、監督停止だけで外部NN停止を認定しない。ユーザーpause/guardを尊重し自動延長しない。自.40は運用終了受入れまでcloseせず、goalをcloseしない。旧期限/失敗/32局・未達と旧run結果は書換えない。版/run/必要ログをGit等で追跡し、許可範囲/総予算内の新run再現を旧終了窓の遡及変更と混同しない。
 
-保存guardはsteward所有実量とsupervisor現行枠の32MiB予約内実量を分け、command前に最大4MiB forecastを確認する。旧監督履歴は保持実量としてparent保守会計へ残し、現予約に二重加算せず、未分類の現在出力は拒否する。128MiB/112MiBのsteward枠・parent12GiBは変更せず、削除・未確認量の減額・予約追加を行わない。
+保存guardはsteward所有実量とsupervisor現行枠32MiB内の実量を分ける。新runはwrapper stdoutをpipeで一時的に読み（最大4MiB、超過は失敗）、必要metadataとdescription/notesの明示byte区間だけを保持し、元size/SHA・command/exit・欠測を保存する。同run同selectionは参照で再利用する。必要本文不足はfield/offset付きbounded inspectで確認し、無言の切捨てをpassにしない。現在owner/pause/namespace/硬期限と旧raw/失敗は維持する。
+
+新runはcommand最大24（authorization/finish/backup込み）、selected record最大64KiB、guard保持384KiBと失敗余裕8KiB、独立判断handoff最大16KiB、notes追記はUTF8最大1024byteの時刻/判断/根拠参照とする。run forecast512KiBはguard cap384KiB＋一時write64KiB＋失敗/外部短報告/dir余裕64KiBから定める。guard書込・spawn前の実allocated/cap検査と旧owner watchのrun合計512KiB標本で確認し、瞬間全host/外部書込保証へ格上げしない。run cap拒否後の同retryを行わず、不足を残す。既32MiBに収まらなければ点検不能として報告し、過去raw削除・予約増・保存所有移管で救済しない。旧監督履歴はparent保守会計へ残し、128MiB/112MiB steward・parent12GiBを変更しない。
+
+現在保存修復の自然run0bd85f42はobserve/保存量削減が成立したが、finishを残り9秒で開始して必要36秒の期限拒否となりnotes/backup未成立。旧失敗として保持する。以後はobserve成立後に短い暫定観測・未確認・根拠参照をfinishで先保存し、その後の残時間で追加inspect/独立判断/通知を行う。早い保存の目安90秒を新しい読取禁止時刻へ変えず、180秒時計/期限を延長しない。独立判断の全文は必要な短報告に保持する。

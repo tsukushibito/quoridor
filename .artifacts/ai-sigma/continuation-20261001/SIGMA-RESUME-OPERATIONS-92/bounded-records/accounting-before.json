@@ -1,0 +1,177 @@
+{
+  "at": "2026-10-03T05:38:51.579002+00:00",
+  "steward": 18321408,
+  "supervisor": [
+    133746688,
+    29708288
+  ],
+  "state": {
+    "binding": {
+      "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+      "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+      "target": "supervisor",
+      "dispatch_issue": "quoridor-4lc.40",
+      "contract_file": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+    },
+    "process": {
+      "pid": 3134871,
+      "start_ticks": "25308050",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "phase": "running",
+    "recovery_required": false,
+    "last_result": {
+      "at": "2026-10-03T05:35:49.606101+00:00",
+      "event": "owned_turn_finished",
+      "turn_id": "01a10040-a70d-7831-a87f-4654c1e85793",
+      "status": "completed"
+    },
+    "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+    "config_sha256": "b4ee414d9576f871820688aa89037abcf1e7a0641fed15d00e3f2dca1c3aea9d",
+    "contract_sha256": "5232d0d338e11a110bd3a05d5483ceb7d9f1bc635227f0245ece21510bf2db89",
+    "next_at": 1791006795.8767834,
+    "owned": null
+  },
+  "live_current": {
+    "issue": "quoridor-4lc.92",
+    "frame": 11,
+    "updated_by": "quoridor-4lc.92-user-extend4h",
+    "record": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame11-extension/live-applied.json",
+    "run": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame11-extension-8d999385-3396-4e75-a8c3-688562c16ab5",
+    "scheduler": {
+      "pid": 3134871,
+      "start_ticks": "25308050",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "monitor": {
+      "pid": 3134885,
+      "start_ticks": "25308065",
+      "state": "R",
+      "rss_bytes": 20246528,
+      "cpu_ticks": 2,
+      "affinity": [
+        0
+      ],
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    }
+  },
+  "selected_runs": [
+    {
+      "run": "1a9d886c-8a19-4f08-a4f2-a1237de84759",
+      "allocated": 614400,
+      "files": [
+        {
+          "path": "failure-summary.json",
+          "bytes": 1609
+        },
+        {
+          "path": "read-guard/258544049897473-core-attempt-1.stdout",
+          "bytes": 566254
+        },
+        {
+          "path": "read-guard/failure-258545356899240.json",
+          "bytes": 671
+        },
+        {
+          "path": "read-guard/binding.json",
+          "bytes": 754
+        },
+        {
+          "path": "read-guard/failure-258653635832186.json",
+          "bytes": 799
+        }
+      ]
+    },
+    {
+      "run": "0b8e6e20-756f-4b7c-8fbe-9e59f902d711",
+      "allocated": 5677056,
+      "files": [
+        {
+          "path": "read-guard/inspect-257377411092586-core-attempt-1.stdout",
+          "bytes": 556943
+        },
+        {
+          "path": "read-guard/inspect-257389755775702-file-0-attempt-1.stdout",
+          "bytes": 6059
+        },
+        {
+          "path": "read-guard/257343923063833-ready-attempt-1.stdout",
+          "bytes": 3
+        },
+        {
+          "path": "read-guard/inspect-257377411092586-issues-attempt-1.stdout",
+          "bytes": 221647
+        },
+        {
+          "path": "read-guard/257343923063833-current-attempt-1.stdout",
+          "bytes": 214027
+        },
+        {
+          "path": "read-guard/backup.stdout",
+          "bytes": 24
+        },
+        {
+          "path": "read-guard/inspect-257365522152231-file-0-attempt-1.stdout",
+          "bytes": 0
+        },
+        {
+          "path": "read-guard/inspect-257365522152231-core-attempt-1.stdout",
+          "bytes": 556943
+        },
+        {
+          "path": "read-guard/257343923063833-core-attempt-1.stdout",
+          "bytes": 556943
+        },
+        {
+          "path": "read-guard/binding.json",
+          "bytes": 754
+        },
+        {
+          "path": "read-guard/failure-257368288819295.json",
+          "bytes": 1073
+        },
+        {
+          "path": "read-guard/257343923063833-children-quoridor-4lc.168-attempt-1.stdout",
+          "bytes": 3
+        },
+        {
+          "path": "read-guard/inspect-257365522152231-issues-attempt-1.stdout",
+          "bytes": 443241
+        },
+        {
+          "path": "read-guard/finish-authorization-257444542382967.stdout",
+          "bytes": 557994
+        },
+        {
+          "path": "read-guard/notes.stdout",
+          "bytes": 97
+        },
+        {
+          "path": "read-guard/257343923063833-children-quoridor-4lc.92-attempt-1.stdout",
+          "bytes": 3
+        },
+        {
+          "path": "read-guard/self-stop.json",
+          "bytes": 8494
+        },
+        {
+          "path": "read-guard/257343923063833-sessions-attempt-1.stdout",
+          "bytes": 1484
+        },
+        {
+          "path": "read-guard/inspect-257389755775702-core-attempt-1.stdout",
+          "bytes": 556943
+        },
+        {
+          "path": "read-guard/257343923063833-selected-attempt-1.stdout",
+          "bytes": 1801331
+        },
+        {
+          "path": "read-guard/257343923063833-children-quoridor-4lc.165-attempt-1.stdout",
+          "bytes": 3
+        }
+      ]
+    }
+  ]
+}
