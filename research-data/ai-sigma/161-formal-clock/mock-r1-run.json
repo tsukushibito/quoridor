@@ -1,0 +1,18 @@
+{
+  "UTC_end": "2026-10-03T03:36:01.275206+00:00",
+  "command": [
+    "taskset",
+    "-c",
+    "0",
+    "node",
+    "--max-old-space-size=128",
+    "tools/ai-sigma-formal-clock/mock.cjs",
+    "research-data/ai-sigma/161-formal-clock/mock-r1.json"
+  ],
+  "exit": 0,
+  "wall_with_admission_s": 1.5923511290166061,
+  "child_waited": true,
+  "NN": 0,
+  "Chrome": 0,
+  "source_SHA256": "7a6bd3ab714f1cb2332adbb72a225eab877a9a155ae41254f9f830e20e21005b"
+}

@@ -1,0 +1,47 @@
+{
+  "issue": "quoridor-4lc.161",
+  "kind": "future experimental owner input schema; no real ORT capture in this issue",
+  "formal_ready": false,
+  "mode_candidate": "single-core arena fixed 1000ms cycle",
+  "required_binding": ["run/Git/served hashes", "model/provider/ORT version", "source and browser version", "physical core and logical affinity", "PID/starttick/boot id", "true state/history/side/features schema", "all owner current RSS and reservations"],
+  "main_clock": {
+    "fields": ["input_ready", "t0", "CP read start", "CP coherent read end", "full CP validation end", "admit eligibility interval", "seal/control closure", "public body bytes end", "stop receipt", "next target", "next input t0"],
+    "cutoff_ms": 402,
+    "planned_adopt_ms": 411,
+    "public_upper_exclusive_ms": 500,
+    "cycle_ms": 1000,
+    "next_dispatch_late_candidate_ms": 5,
+    "upper_bound_missing": "unknown; never use midpoint to accept",
+    "clock_validation": "finite pre/per-request/post brackets and stated resolution uncertainty; end calibration alone is insufficient"
+  },
+  "CP": {
+    "fields": ["request", "generation", "full-input binding key", "sequence", "legal Action", "stable revision", "already validated CP payload", "main read-plus-full-validation interval"],
+    "exactAtomicstore": null,
+    "store_causality": "stable main read can bound prior publication causally; does not measure the precise store time",
+    "worker_only_interval": "diagnostic separate evidence; a crossing upper cannot become a certified main observation"
+  },
+  "tail_receipt": {
+    "fields": ["request/generation", "shared control closed", "active", "activeNN", "live_searches", "handles", "pending_eval", "pending_publish", "NNstarted", "NNreturned", "mainReceived"],
+    "required": "zero active/handles/pending fields, counters equal within generation, no old outputs adopted, receipt no later than next target",
+    "counters_scope": "request generation, excluding model initialization and startup",
+    "failure": "abort new start; typed measurement/quality unknown; no synthetic loss",
+    "ACK_wall_is_kernel_CPU": false
+  },
+  "CPU_optional_finite_capture": {
+    "unit": "whole dedicated arena including main and observer, separately reported from NN",
+    "fields": ["endpoint monotonic interval", "PID starttick identity", "utime", "stime", "SC_CLK_TCK", "child lifecycle or missing status", "shared management placement"],
+    "measured_SC_CLK_TCK_here": 100,
+    "tick_ms_here": 10,
+    "kernel_CPU_measured_here": false,
+    "no_double_count": "do not sum process aggregate with all its thread counters or waited children again",
+    "missing": "exited/unreadable endpoints and NN backend binding are missing, not zero; tracing runtime is a separate metric"
+  },
+  "future_minimum_real_capture": {
+    "requests": 4,
+    "engines": "candidate/reference each 2, interleaved same registered input",
+    "resources": "arena one logical CPU, each ORT1/proxyfalse, RAM allocation includes browser2sessions and management within CPU4/RAM8",
+    "authorization": "future allocation required; no NN/Chrome/model/game/build run authorized by this schema",
+    "success": "all CP/public/cycle bounds and identity/zero receipts, interpretable provider/resource/CPU endpoints; freeze resulting adapter and mode before formal WDL",
+    "unknown": "formal_ready=false, preserve all attempt/slot quality intervals; no repeated same-format collection without an identified repair"
+  }
+}

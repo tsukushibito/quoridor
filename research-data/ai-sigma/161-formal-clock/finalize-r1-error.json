@@ -1,0 +1,18 @@
+{
+  "issue": "quoridor-4lc.161",
+  "recorded_at": "2026-10-03T03:45:43.368139+00:00",
+  "exit": 1,
+  "typed": "MANAGEMENT_VIRTUAL_ADDRESS_RESERVATION_ERROR",
+  "failed_command": [
+    "bash",
+    "scripts/dev/beads.sh",
+    "ready",
+    "--json"
+  ],
+  "parent_guard": "inherited resource.RLIMIT_AS=(536870912,536870912)",
+  "stderr": "fatal error: failed to reserve page summary memory; runtime.pageAlloc.sysInit; runtime.mallocinit; runtime.schedinit",
+  "r1_failed_before_git_or_backup": true,
+  "NN_Chrome_scientific_children_started": 0,
+  "scientific_failure": false,
+  "repair": "local own-helper RSS guard; no shared environment/model/AppServer changes"
+}
