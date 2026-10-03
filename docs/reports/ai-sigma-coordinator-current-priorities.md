@@ -15,7 +15,7 @@ GPU24を次の独立教師生成の候補へ採用する。現在default/backend
 | 担当 | 現在の到達点・次判断 | 個別期限・資源 |
 | --- | --- | --- |
 | experiment187 | 共有GPU多数game実生成を停止、各mode全教師/全fault/実batch/全費・必要archive/Git復元/backupを引渡す。主科学子の回収を本人13:48確認、今は保存処理のみ | newheavy14:15/science14:20/process14:30/submit14:40。CPU4/RAM8/VRAM6親内、GPUjob30分、保持256MiBは既experiment2044MiB内 |
-| hypothesis190 | QF1-H32二視点312疎特徴＋後段距離2、既2762学習教師のrootmean value蒸留、full/delta/undoと小探索を有限接続。13:42:53静的開始、13:58:22–23 NN0復元終了。学習/最小nativeprobeの結果を待つ | CPU8単1/RAM1GiB guard896、science60s/modeljob30s/sample65536。newscience14:28/stop14:32/process14:36/submit14:41。384KiB予約/320KiBguard、uniqueGit・二つの重み保存・残metadataを先forecast |
+| hypothesis190 | QF1-H32二視点312疎特徴＋後段距離2、既2762学習教師のrootmean value蒸留、full/delta/undoと小探索を有限接続。13:42:53静的開始、13:58:22–23 NN0復元終了。学習14:00:56–59/200step31151sample、native14:02:12/515child full-delta/undo＋Torch固定27対応を本人報告。差8.94e-8。depth1完成/depth2 NODE_CAP未採用、新val rootmeanMSE.994812は定数.715720より悪く重み採用/棋力認定0。停止保存の最終bindingを待つ | CPU8単1/RAM1GiB guard896、science60s/modeljob30s/sample65536。newscience14:28/stop14:32/process14:36/submit14:41。384KiB予約/320KiBguard、uniqueGit・二つの重み保存・残metadataを先forecast |
 | critic191 | 全120slot・全教師資格・全費・source/provider/parityの独立有限裁定。13:50:11.649562 claim/static準備開始、短CPU0算術・再生は終了通知済。NN/model/game/GPU0 | static120s/job60s/CPU0単1/RAM512guard448、新4MiBは既critic112MiB内。newscript14:26/compute14:30/process14:35/submit14:41 |
 
 187実重計算中は190/191の実CPU子を重ねない。187科学停止と191短算術終了の通知を受け、190は直前owner/current/RAM確認で実処理する。自然監督CPU0との窓も各ownerが確認する。source/metadataの軽い準備と実計算を分け、CPU5・LLMactive数gate・全稿相互承認・運用全史gateを作らない。

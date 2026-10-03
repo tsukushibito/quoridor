@@ -6,7 +6,12 @@
     "claim_static": "13:42:53Z",
     "NN0_reconstruction_wall": 0.8097775230417028,
     "actual_learning_receipt_file": "190-nnue-qf1-prototype/learn-stop.json",
-    "scientific_acceptance": false
+    "scientific_acceptance": false,
+    "CPU_learning_started": "2026-10-03T14:00:56.464319Z",
+    "CPU_learning_ended": "2026-10-03T14:00:59.634120Z",
+    "native_ended": "2026-10-03T14:02:12.587516Z",
+    "all_science_stopped": true,
+    "new_model_adopted": false
   },
   "191": {
     "claim_static": "13:50:11.649562Z",
@@ -14,5 +19,6 @@
     "independent_final_pending": true
   },
   "parent_deadline_reset": false,
-  "script_writer_failure": "prior multiline Python syntax error prevented plan/body writes; dispatcher missing body exit1 no receipt, corrected without science"
+  "script_writer_failure": "prior multiline Python syntax error prevented plan/body writes; dispatcher missing body exit1 no receipt, corrected without science",
+  "finite_acceptance_attempt_error": "187 evidenceGit c8f8e087 contains scientific snapshot but current report/cost ledger received later counter qualification additions. First strict-current assertion refused; no source/raw/scientific disagreement inferred; final metadata binding pending latest owner handoff."
 }
