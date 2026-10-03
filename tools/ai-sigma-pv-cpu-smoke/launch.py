@@ -116,7 +116,7 @@ def main():
     try:
         admission = admit(mode)
     except Exception as exc:
-        dump(D/('admission-failure-'+str(time.time_ns())+'.json'), {'error_type':type(exc).__name(),'error':str(exc),'child_started':False,'epoch':time.time()})
+        dump(D/('admission-failure-'+str(time.time_ns())+'.json'), {'error_type':type(exc).__name__,'error':str(exc),'child_started':False,'epoch':time.time()})
         raise
     dump(D/('admission-'+run+'.json'), admission)
     if mode == 'train':
