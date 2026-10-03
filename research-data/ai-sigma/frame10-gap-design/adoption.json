@@ -1,0 +1,42 @@
+{
+  "UTC": "2026-10-03T00:37:25.883631+00:00",
+  "issue": "quoridor-4lc.147",
+  "refs": [
+    {
+      "path": "docs/design/ai-sigma-frame10-gap-preregister-supplement.md",
+      "Git": "9bafd9ef12298d2b587599f12ea02b4ba5f21123",
+      "SHA256": "d41ec735d4d80874d1beb31ddaf9a15edebcab743aadb671eae76a5cb23f82b1",
+      "bytes": 4959
+    },
+    {
+      "path": "research-data/ai-sigma/frame10-coordinator-start/adopted-seeds.json",
+      "Git": "9bafd9ef12298d2b587599f12ea02b4ba5f21123",
+      "SHA256": "a82f2d01875180aa6a4a53be6e62d1ae11b9ab01ef2b3d37e5a1b40a7ede5c04",
+      "bytes": 12683
+    }
+  ],
+  "slots": 32,
+  "game_slots": 64,
+  "attempt_seed_count": 256,
+  "seed_collision_count": 0,
+  "layer_and_color_order_check": true,
+  "adopted": [
+    "strata4/5/12/13 each8",
+    "master61041/hash-mixed seeded table",
+    "all64 slots denominator/missing intervals",
+    "round-robin strata and color alternating",
+    "samewall primary/quantity separate/conditional exploratory Hoeffding",
+    "old119 all8 signatures excluded independently of WDL",
+    "maximum8attempt not proposed100",
+    "new-set history/state duplicates retained"
+  ],
+  "not_adopted": [
+    "samecompleted automatic games",
+    "C145 policy selection",
+    "new balance/prior filter"
+  ],
+  "dissent": "No major objection preventing this finite diagnostic; exclusion makes target conditional on being unlike all8 old signatures and max8first-nonterminal attempts. Random legal, hash-mixed seeds, class variation and color swap do not certify representative states or independent game runtime; root-prior-only saturation remains possible.",
+  "primary_operation_fault_quality_asymmetry": "candidate fault operational loss kept separately; reference fault is unknown, so pure terminal quality must also mark candidate faults unknown and label operational vs pure-quality intervals distinctly.",
+  "execution_gate_added": false,
+  "NN_Chrome_game": 0
+}

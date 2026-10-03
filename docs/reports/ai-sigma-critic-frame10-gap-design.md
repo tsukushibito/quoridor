@@ -48,4 +48,8 @@ startup、手NN開始/完了、採用CPのNN、completed backup、terminal-noNN�
 
 ## 保存と実行
 
+最終採否追記：coordinatorがGit9bafd9ef12298d2b587599f12ea02b4ba5f21123の `docs/design/ai-sigma-frame10-gap-preregister-supplement.md` とseed表SHAa82f2d01875180aa6a4a53be6e62d1ae11b9ab01ef2b3d37e5a1b40a7ede5c04で結果前補足を採択した。4/5/12/13各8、層巡回・色交互、全64slot・未知識別区間・条件付き両側Hoeffding・samewallと量別分母を採用。148のmaster61041/hash混合seed、旧119全8signature一律除外、最大8attemptを採用し、上記147原案の最大100attemptとの差を保持する。現候補政策は変更せず、145とsamecompleted自動追加は保留。32行・各8attempt seed・4層各8・各block4層・色交互・search1979は静的に照合した。入力生成やAI実行はしていない。
+
+この採択に、有限診断を止める重大な異論はない。一律除外はWDLによる好都合な選別ではないが、対象は「旧全8signatureと異なる、最大8attemptの条件付き出力」となる。新一般棋力や独立coverageへ言い換えない。固定hash混合seedも時間相関の独立性を証明しない。候補faultlossを既知0、参照faultを未知とする主運用区間には分類の非対称性があるため、双方faultを未知とする純terminal品質区間と並べて説明する必要がある。補足の運用/手品質分離をこの意味で支持する。新root1検査や全役承認を開始gateに追加しない。
+
 契約/選定Git40243b25804f8e929a6af5680c02a2b70bef39d1。本人00:27:40UTC受領、00:28:06claim。早側処理00:47:40・提出00:52:40、親04:15:21終了を維持。開始報告と10分以内の速報はApp Serverに受理されたが、科学採択とは別。独自静的算術は `tools/ai-sigma-frame10-gap-design/check.py`、原checkerをimportしない。CPU0単logical、448MiB guard、各60秒/管理180秒。全attempt/log/command/前後source hash/必要入力Git-SHAは `research-data/ai-sigma/frame10-gap-design/`。詳細停止・資源・復元は同域の最終manifest参照。過去未確認量の減額・親追加予約0。原成果/shared/model/parent/role/defaultindex編集0、受入れcoordinator、goal/他者close0。

@@ -1,5 +1,5 @@
 {
-  "UTC": "2026-10-03T00:35:52.900001+00:00",
+  "UTC": "2026-10-03T00:38:09.864999+00:00",
   "issue": "quoridor-4lc.147",
   "source_write_complete_for_checker": true,
   "source_before": {
@@ -47,7 +47,7 @@
       "unchanged": true
     }
   ],
-  "static_managed_wall_s": 2.3195459879934788,
+  "static_managed_wall_s": 2.5135000469745137,
   "static_peak_observed_current_RSS": 38121472,
   "CPU": [
     0
@@ -67,7 +67,7 @@
   },
   "current_same_identity_present": [],
   "identity_read_errors": [],
-  "identity_count": 14,
+  "identity_count": 18,
   "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
   "whole_period_host_guarantee": false,
   "current_absence_not_natural_end_proof": true,
@@ -82,5 +82,24 @@
     "initial read/report commands not pinned/managed as static arithmetic; exact affinity/RSS for these commands unrecorded; no AI or heavy launched"
   ],
   "original_results_changed": false,
-  "new_reservation": 0
+  "new_reservation": 0,
+  "source_hash_final": {
+    "tools/ai-sigma-frame10-gap-design/managed.py": "9c97b7aa3268d7ac49514131a57e15dc719e30b6ba33e2408bf0dcfa51a7997b",
+    "tools/ai-sigma-frame10-gap-design/check.py": "0fdd92ea91710d7ce4f7def5316075ced52946bf2a18793e33d29211e54162ae",
+    "tools/ai-sigma-frame10-gap-design/adoption.py": "be548e1d3c3fff7bd8a27773c5eaee75e44f5e63472e74cc08db6a9561f942af"
+  },
+  "adoption_Git": "9bafd9ef12298d2b587599f12ea02b4ba5f21123",
+  "attempts": [
+    {
+      "run": "adoption-r1",
+      "exit": 0,
+      "wall_s": 0.1939540589810349
+    },
+    {
+      "run": "arithmetic-r1",
+      "exit": 0,
+      "wall_s": 2.3195459879934788
+    }
+  ],
+  "source_and_children_stopped": true
 }
