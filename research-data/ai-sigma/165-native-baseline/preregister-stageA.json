@@ -1,0 +1,83 @@
+{
+  "issue": "quoridor-4lc.165",
+  "fixed_input_SHA256": "dc205f8d7e00ee52aca51845ddbca5e3085d0aebdb22c3f4ceb6fa139cd10954",
+  "searches": [
+    {
+      "fixture": "initial-p1",
+      "engine": "candidate",
+      "K": 32
+    },
+    {
+      "fixture": "initial-p1",
+      "engine": "reference",
+      "K": 32
+    },
+    {
+      "fixture": "asym-hv-p2",
+      "engine": "candidate",
+      "K": 32
+    },
+    {
+      "fixture": "asym-hv-p2",
+      "engine": "reference",
+      "K": 32
+    },
+    {
+      "fixture": "straight-jump-p2",
+      "engine": "candidate",
+      "K": 32
+    },
+    {
+      "fixture": "straight-jump-p2",
+      "engine": "reference",
+      "K": 32
+    },
+    {
+      "fixture": "frame10-prefix-13",
+      "engine": "candidate",
+      "K": 32
+    },
+    {
+      "fixture": "frame10-prefix-13",
+      "engine": "reference",
+      "K": 32
+    },
+    {
+      "fixture": "frame10-prefix-14",
+      "engine": "candidate",
+      "K": 32
+    },
+    {
+      "fixture": "frame10-prefix-14",
+      "engine": "reference",
+      "K": 32
+    }
+  ],
+  "planned": 10,
+  "hand_NN_first": 320,
+  "hand_NN_cumulative_max": 1024,
+  "startup_separate": true,
+  "backend": "existing native Python ORT1.30.0 CPUExecutionProvider intra/inter1; two held engine sessions; browserWasm ORT1.21 numerical comparison separate",
+  "native_vs_JS_f64_discrete_match_required": true,
+  "oldWasm_tol": {
+    "abs": 0.0001,
+    "rtol": 0.0001
+  },
+  "CPU": [
+    2
+  ],
+  "RAM": 6442450944,
+  "guard": 5905580032,
+  "max_job_s": 180,
+  "caps": {
+    "nodes": 200000,
+    "depth": 200,
+    "bytes": 134217728,
+    "K": 1000000
+  },
+  "source": "151 faithful port with native IO shim only",
+  "clock_scope": "sameK mechanism not sameCPU/strength",
+  "timing_source": "Node process.hrtime plus Python perf/process_time; shared absolute epoch monotonic fields not kernelCPU",
+  "stageB_gate": "all fixed sameK discrete paths/visits/Action and NN output match, else StageB0",
+  "contractGit": "d0136c1293dc66be2d165d5c012a40b898655f23"
+}

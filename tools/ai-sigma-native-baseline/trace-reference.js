@@ -1,0 +1,10 @@
+let portTraceOn=false,portDeadline=null,portNumeric=[],portBackup=[],portSelections=[],portCPs=[],portIds=new WeakMap(),portNextId=0,portEvaluationNode=null;
+function portId(n){if(!portIds.has(n))portIds.set(n,portNextId++);return portIds.get(n);}
+function portPath(n){const actions=[];for(let c=n;c.parent;c=c.parent)actions.unshift(rustAction(c.parent.state,c.action));return actions;}
+function portState(s){const f=s.toNNInput();return{key:s._positionKey(),history:[...s.position_history].sort((a,b)=>a[0]<b[0]?-1:a[0]>b[0]?1:0),ply:s.depth,turn:s.isPlayer1Turn()?0:1,features_bits:Array.from(new Uint32Array(f.buffer,f.byteOffset,f.length)),legal:s.getLegalActions().map(a=>rustAction(s,a))};}
+const portOrigExpand=expandNode;
+expandNode=async function(n,e){if(portTraceOn){portId(n);portEvaluationNode=n;}try{const v=await portOrigExpand(n,e);if(portTraceOn)for(const c of n.children)portId(c);return v;}finally{portEvaluationNode=null;}};
+const portOrigBest=MCTSNode.prototype.bestChild;
+MCTSNode.prototype.bestChild=function(...args){const c=portOrigBest.apply(this,args);if(portTraceOn){let vs=0;for(const x of this.children)if(x.visitCount>0)vs+=x.basePrior;const q=c.visitCount===0?this.qValue-.2*Math.sqrt(vs):-c.qValue,u=c.prior*Math.sqrt(this.visitCount)/(1+c.visitCount);let root=this;while(root.parent)root=root.parent;portSelections.push({K_before:root.visitCount,path_before:portPath(this),node_index:portId(this),nodeN:this.visitCount,nodeSum:this.valueSum,parentQ:this.qValue,visited_base_prior_sum:vs,Action:rustAction(this.state,c.action),prior:c.prior,childN:c.visitCount,childSum:c.valueSum,childQ:c.qValue,score:q+u});}return c;};
+const portOrigBackup=backup;
+backup=function(n,v){let record;if(portTraceOn){const updates=[];let x=n,value=v;while(x){updates.push({index:portId(x),preN:x.visitCount,preSum:x.valueSum,value});value=-value;x=x.parent;}let root=n;while(root.parent)root=root.parent;record={K:root.visitCount+1,leaf_index:portId(n),path:portPath(n),value_leaf_side:v,terminal:terminalResult(n.state)?.value??null,updates};}portOrigBackup(n,v);if(record)portBackup.push(record);};

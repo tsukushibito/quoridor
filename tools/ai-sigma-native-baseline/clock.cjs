@@ -1,0 +1,3 @@
+'use strict';
+function admitCP({cp,receive,validateEnd,t0,cutoff,generation,legal,finalized}){if(finalized)return{accepted:false,code:'AFTER_PUBLIC'};if(cp.generation!==generation)return{accepted:false,code:'STALE_GENERATION'};if(!Number.isFinite(receive)||!Number.isFinite(validateEnd)||receive<t0||validateEnd<receive)return{accepted:false,code:'CLOCK_UNKNOWN'};if(validateEnd>t0+cutoff)return{accepted:false,code:'LATE_CP'};if(!Number.isInteger(cp.action)||!legal.includes(cp.action)||!(cp.simulations>=1)||cp.root_visits!==cp.simulations)return{accepted:false,code:'ILLEGAL_OR_SCHEMA'};return{accepted:true,code:'ADMITTED'};}
+module.exports={admitCP};
