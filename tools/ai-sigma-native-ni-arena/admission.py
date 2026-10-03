@@ -64,6 +64,23 @@ def admit(c,out,tool,runs):
  assert set(pool)<=allowed,'CPUSET'
  topo=[{'CPU':i,'package':Path(f'/sys/devices/system/cpu/cpu{i}/topology/physical_package_id').read_text().strip(),'core':Path(f'/sys/devices/system/cpu/cpu{i}/topology/core_id').read_text().strip()}for i in pool];assert len({(x['package'],x['core'])for x in topo})==len(pool),'TOPOLOGY'
  current=physical(out);capacity=storage(out,tool)
+ if not c.get('mock'):
+  import tarfile
+  archive=ROOT/'research-data/ai-sigma/174-gpu-inference/run-records.tar.gz'
+  with tarfile.open(archive)as t:
+   stopname=next(n for n in t.getnames()if n.endswith('manager-stop.json'));gpu=json.load(t.extractfile(stopname))
+  assert not gpu['owned_wait_remaining'] and not gpu['current_child_exact_identity_present'],'GPU_NOT_STOPPED'
+  for i in [gpu['child_identity'],{'pid':gpu['manager_pid'],'starttick':gpu['manager_starttick']}]:
+   try:st=Path('/proc/'+str(i['pid'])+'/stat').read_text().rsplit(')',1)[1].split()
+   except FileNotFoundError:continue
+   assert st[19]!=str(i['starttick']),'GPU_CURRENT_IDENTITY'
+  for p in Path('/proc').iterdir():
+   if not p.name.isdigit():continue
+   try:a=(p/'cmdline').read_bytes();st=(p/'stat').read_text().rsplit(')',1)[1].split()
+   except FileNotFoundError:continue
+   if st[0]!='Z' and b'ai-sigma-gpu-inference/measure.py' in a:raise RuntimeError('GPU_FORWARD_ACTIVE')
+  (out/'gpu-nonoverlap-admission.json').write_text(json.dumps({'archive_SHA256':hashlib.sha256(archive.read_bytes()).hexdigest(),'child':gpu['child_identity'],'current_identity':False,'new_forward_process_observed':False,'allhost_guarantee':False},indent=2)+'\n')
+
  for f in runs.glob('native173-*.process.json'):
   z=json.loads(f.read_text());assert not z['remaining'] and not z['unknown_adopted'],'OWN_PREVIOUS_REMAINS'
   if not c.get('mock') and z['phase']=='quality' and not (c.get('epoch')==2 and z['name']=='native173-quality-r1'):raise RuntimeError('SCIENTIFIC_ATTEMPT_ALREADY_REGISTERED_NO_REPLACEMENT')
