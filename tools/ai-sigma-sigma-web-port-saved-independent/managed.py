@@ -4,7 +4,7 @@ os.sched_setaffinity(0,{0}); run=sys.argv[1]; cmd=sys.argv[2:]
 intake=json.loads((D/'intake.json').read_text()); deadline=datetime.datetime.fromisoformat(intake['newcommand_deadline'].replace('Z','+00:00'))
 assert datetime.datetime.now(datetime.timezone.utc)<deadline
 used=sum(json.loads(p.read_text())['wall_s'] for p in D.glob('*.process.json'));assert used<180
-sources={str(p.relative_to(R)):hashlib.sha256(p.read_bytes()).hexdigest() for p in pathlib.Path(__file__).parent.glob('*.py')}
+sources={str(p.relative_to(R)):hashlib.sha256(p.read_bytes()).hexdigest() for p in [p for p in pathlib.Path(__file__).parent.iterdir() if p.suffix in ['.py','.cjs']]}
 start=time.monotonic();utc=datetime.datetime.now(datetime.timezone.utc).isoformat();owned={};peak=0;reason=None
 with (D/(run+'.log')).open('w') as log:
  p=subprocess.Popen(cmd,cwd=R,stdout=log,stderr=subprocess.STDOUT,start_new_session=True,env={**os.environ,'PYTHONDONTWRITEBYTECODE':'1'})

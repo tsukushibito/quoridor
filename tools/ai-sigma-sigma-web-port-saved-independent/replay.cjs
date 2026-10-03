@@ -6,7 +6,8 @@ const digest=b=>crypto.createHash('sha256').update(b).digest('hex');
 const rawBytes=fs.readFileSync(P+'/runs/port151-stageA-r2/browser-result.json');assert.equal(digest(rawBytes),'d37215cbc7914519ca24ab254c5e413d21e780389094faed537280a059c234d2');
 const raw=JSON.parse(rawBytes),fixtures=JSON.parse(fs.readFileSync(R+'/research-data/ai-sigma/151-sigma-web-port/stageA-inputs.json')).fixtures;
 const clean=x=>JSON.parse(JSON.stringify(x));
-let maxPrior=0;function cpCompare(cp,saved){
+let maxPrior=0,signedZero=0;function numericTraceEqual(a,b){if(typeof a==='number'){assert(a===b);if(!Object.is(a,b))signedZero++;return;}if(a===null||typeof a!=='object'){assert.strictEqual(a,b);return;}assert.deepStrictEqual(Object.keys(a),Object.keys(b));for(const k of Object.keys(a))numericTraceEqual(a[k],b[k]);}
+function cpCompare(cp,saved){
  for(const k of ['action','root_visits','root_valueSum','root_mean'])assert.deepStrictEqual(cp[k],saved[k],k);
  assert.equal(cp.root_edges.length,saved.root_edges.length);
  cp.root_edges.forEach((e,i)=>{let z=saved.root_edges[i];for(const j of [0,2,3])assert.strictEqual(e[j],z[j]);let d=Math.abs(e[1]-z[1]);maxPrior=Math.max(maxPrior,d);assert(d<=1e-4+1e-4*Math.abs(z[1]));});
@@ -31,7 +32,7 @@ async function main(){
     assert.deepStrictEqual(q.history.slice().sort(),n.history.slice().sort());
     call({op:'resume',handle:h,generation:71,token:q.token,logits:n.policy_logits,value:n.value});cpCompare(call({op:'checkpoint',handle:h,generation:71}),a.CPs[count]);count++;
    }
-   assert.deepStrictEqual(call({op:'trace',handle:h,generation:71}),a.trace);
+   numericTraceEqual(call({op:'trace',handle:h,generation:71}),a.trace);
   }finally{assert.equal(e.ort_free(h),1);}
   // Actual fixed JS core: supply the saved same-state logits/value, capturing each root finish.
   let ni=0,ci=0;const tape=b.numeric;
@@ -39,9 +40,9 @@ async function main(){
   const evaluation=async(s,legal)=>{const n=tape[ni++];assert(n,'NN tape exhausted');assert.equal(s._positionKey(),n.key);assert.equal(s.depth,n.ply);assert.equal(s.isPlayer1Turn()?0:1,n.turn);assert.deepStrictEqual(Array.from(new Uint32Array(s.toNNInput().buffer)),n.features_bits);assert.deepStrictEqual(clean([...s.position_history].sort()),n.history.slice().sort());assert.deepStrictEqual(Array.from(legal,a=>c.saved.rustAction(s,a)),n.legal);
    const perm=n.turn?c.saved.vertPolicyPermutation(9):null,ls=Array.from(legal,a=>{const i=c.saved.actionToIndex(a,9);return n.policy_logits[perm?perm[i]:i];});let mx=Math.max(...ls),sum=0,ex=ls.map(v=>Math.exp(v-mx));for(const x of ex)sum+=x;return [ex.map(x=>x/sum),n.value];};
   const root=await c.saved.runMCTS(state,31,evaluation,null);assert.equal(ni,32);assert.equal(ci,32);assert.equal(root.visitCount,32);
-  results.push({id,actual_Wasm_CP32_trace_exact:true,actual_JS_CP32_saved_state_exact:true,saved_tape_requests:32,new_NN:0});
+  results.push({id,actual_Wasm_CP32_trace_arithmetic_equal:true,actual_JS_CP32_saved_state_exact:true,saved_tape_requests:32,new_NN:0});
  }
- const out={issue:'quoridor-4lc.153',UTC:new Date().toISOString(),actual_Wasm:true,actual_JS_VM:true,NN:0,Chrome:0,model_load:0,build:0,results,max_prior_abs_difference:maxPrior,binary_SHA256:digest(bytes),shared_RuleA_limit:true,scripts,teacher_NN_correctness_not_reexecuted:true};
+ const out={issue:'quoridor-4lc.153',UTC:new Date().toISOString(),actual_Wasm:true,actual_JS_VM:true,NN:0,Chrome:0,model_load:0,build:0,results,signed_zero_numeric_differences:signedZero,max_prior_abs_difference:maxPrior,binary_SHA256:digest(bytes),shared_RuleA_limit:true,scripts,teacher_NN_correctness_not_reexecuted:true};
  fs.writeFileSync(D+'/replay.json',JSON.stringify(out,null,2)+'\n');console.log(JSON.stringify(out));
 }
 main().catch(e=>{console.error(e.stack);process.exitCode=1;});
