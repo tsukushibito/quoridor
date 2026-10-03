@@ -1,0 +1,70 @@
+{
+  "issue": "quoridor-4lc.174",
+  "run": "folded-gpu-r1",
+  "model": "models/experiments/ai-sigma/reference/sigma-pcr250/best.onnx",
+  "model_sha256": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+  "fixture_names": [
+    "initial-p1",
+    "asym-hv-p2",
+    "straight-jump-p2",
+    "frame10-prefix-13",
+    "frame10-prefix-14"
+  ],
+  "inputs_sha256": "9d8d8d92e7472b831de45bffbede5333b313fee22e07d4b7a237c65ac8c704e1",
+  "batch": 1,
+  "shape": [
+    1,
+    8,
+    9,
+    9
+  ],
+  "dtype": "float32",
+  "parity_backends": [
+    "CPUORT",
+    "torchCPU",
+    "torchCUDA"
+  ],
+  "pairwise_comparisons": [
+    "CPUORT-torchCPU",
+    "CPUORT-torchCUDA",
+    "torchCPU-torchCUDA"
+  ],
+  "abs_tol": 0.0001,
+  "rel_tol": 0.0001,
+  "parity_forwards_each": 5,
+  "timing_condition": "all5 all3backend pairwise parity pass",
+  "timing_fixture": "initial-p1",
+  "warmup_each": 1,
+  "steady_each": 8,
+  "timing_forwards_each": 9,
+  "outputs": [
+    "policy136",
+    "value1"
+  ],
+  "threads": 1,
+  "TF32": false,
+  "AMP": false,
+  "cudnn_benchmark": false,
+  "seed": null,
+  "game": 0,
+  "training": 0,
+  "hardjob_s": 120,
+  "total_heavy_s": 180,
+  "RAM_guard_B": 1879048192,
+  "VRAM_guard_B": 6442450944,
+  "CPU": [
+    0
+  ],
+  "scientific_success_rerun": 0,
+  "fixture_replacement": 0,
+  "failure_tolerance_change": 0,
+  "GPU_overlap_173_formal": false,
+  "future_batch8": false,
+  "newheavy_cutoff_epoch": 1791014280,
+  "hard_deadline_rule": "actual job launch +120s; requires 30s collection margin before science deadline and >=150s before supervisor next",
+  "contract": 2,
+  "contractGit": "38054955b40070d07f16d400d41adb6b71fd85a6",
+  "receipt_epoch_original": 1791009935.7811377,
+  "science_deadline_epoch": 1791014520,
+  "submission_deadline_epoch": 1791015000
+}
