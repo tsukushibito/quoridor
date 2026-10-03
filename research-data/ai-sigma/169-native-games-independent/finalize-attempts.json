@@ -153,5 +153,51 @@
     "stdout_bytes": 24,
     "stdout_SHA256": "2326a1e9e05fd4fe97b4d944d439b3e41cc3fea11d65470eaaa4f20e4106c241",
     "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "add",
+      "--",
+      "research-data/ai-sigma/169-native-games-independent/git-restore.json",
+      "research-data/ai-sigma/169-native-games-independent/handoff.json",
+      "research-data/ai-sigma/169-native-games-independent/finalize-attempts.json"
+    ],
+    "UTC": "2026-10-03T05:48:17.178321+00:00",
+    "elapsed_seconds": 0.0558068259852007,
+    "exit": 0,
+    "stdout_bytes": 0,
+    "stdout_SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr": "",
+    "stdout": ""
+  },
+  {
+    "command": [
+      "git",
+      "commit",
+      "-m",
+      "research: save 169 stop restoration and backup handoff"
+    ],
+    "UTC": "2026-10-03T05:48:18.418319+00:00",
+    "elapsed_seconds": 1.2397786639921833,
+    "exit": 0,
+    "stdout_bytes": 290,
+    "stdout_SHA256": "7cd0af0630976461268ce802de68007d37b192227a838656ca6ccf319b78e836",
+    "stderr": "",
+    "stdout": "[codex/ai-sigma dd92232] research: save 169 stop restoration and backup handoff\n 3 files changed, 241 insertions(+)\n create mode 100644 research-data/ai-sigma/169-native-games-independent/git-restore.json\n create mode 100644 research-data/ai-sigma/169-native-games-independent/handoff.json\n"
+  },
+  {
+    "command": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "UTC": "2026-10-03T05:48:18.505384+00:00",
+    "elapsed_seconds": 0.0866781199874822,
+    "exit": 0,
+    "stdout_bytes": 41,
+    "stdout_SHA256": "15cdcee78f9539e53c988d05108e8f2426e9b46a0c5c7cd7e6727d8461f32eb2",
+    "stderr": "",
+    "stdout": "dd9223246da4c93fdb5749c33bfdc1803faf3265\n"
   }
 ]
