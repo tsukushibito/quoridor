@@ -1,0 +1,133 @@
+{
+  "at": "2026-10-03T12:48:20.294589+00:00",
+  "issues": [
+    {
+      "id": "quoridor-4lc",
+      "status": "in_progress",
+      "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ]
+    },
+    {
+      "id": "quoridor-4lc.92",
+      "status": "in_progress",
+      "assignee": "codex:01a0f31d-99ee-7d63-b162-bc1a59c457c6",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ]
+    }
+  ],
+  "state": {
+    "binding": {
+      "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+      "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+      "target": "supervisor",
+      "dispatch_issue": "quoridor-4lc.40",
+      "contract_file": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+    },
+    "process": null,
+    "phase": "stopped",
+    "recovery_required": false,
+    "last_result": {
+      "at": "2026-10-03T12:42:38.757737+00:00",
+      "event": "process_stopped",
+      "owned_turn_pending": false
+    },
+    "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+    "config_sha256": "686ca726154b500b73c6c258b27f64e712de585ce5ef997bcbd221306e0d2cbd",
+    "contract_sha256": "21b7dc93f847a1580dcc2b5b4ebeb028c30d108064ae888f4095749ff22dd338",
+    "next_at": null,
+    "owned": null
+  },
+  "old_pointer": {
+    "issue": "quoridor-4lc.92",
+    "frame": 12,
+    "updated_by": "92-frame12",
+    "record": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame12/running-loaded.json",
+    "run": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame12-04c303d7-a365-457c-99de-7b4eb2c52eed",
+    "scheduler": {
+      "pid": 3352074,
+      "start_ticks": "27085893",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "monitor": {
+      "pid": 3352088,
+      "start_ticks": "27085920",
+      "state": "R",
+      "rss_bytes": 20414464,
+      "cpu_ticks": 1,
+      "affinity": [
+        0
+      ],
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    }
+  },
+  "old_processes": [
+    {
+      "pid": 3352074,
+      "absent": true,
+      "same_identity_running": false
+    },
+    {
+      "pid": 3352088,
+      "absent": true,
+      "same_identity_running": false
+    }
+  ],
+  "old_monitor_ended": {
+    "started_utc": "2026-10-03T08:58:38.892724+00:00",
+    "ended_utc": "2026-10-03T12:42:47.258666+00:00",
+    "process": {
+      "pid": 3352088,
+      "start_ticks": "27085920",
+      "state": "R",
+      "rss_bytes": 20414464,
+      "cpu_ticks": 1,
+      "affinity": [
+        0
+      ],
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "reason": "2026-10-03 12:42:38 owned operation deadline",
+    "error": null,
+    "exit_code_if_normal": 0,
+    "self_user_cpu_s": 11.896552,
+    "self_sys_cpu_s": 12.843281,
+    "self_maxrss_kib": 24360,
+    "child_user_cpu_s": 8.08806,
+    "child_sys_cpu_s": 2.462958,
+    "child_maxrss_kib": 235208,
+    "sampled_combined_rss_peak_bytes": 259338240,
+    "allocated_peak_bytes": 22683648,
+    "no_child_command_left_running": true,
+    "own_process_exits_after_this_record": true,
+    "all_research_stopped_claimed": false
+  },
+  "supervisor": {
+    "status": {
+      "type": "idle"
+    },
+    "turns": [
+      {
+        "id": "01a101c6-08ae-7d82-a945-46bd29fcca16",
+        "status": "completed",
+        "error": null,
+        "startedAt": 1791031118,
+        "completedAt": 1791031258,
+        "durationMs": 140573
+      },
+      {
+        "id": "01a101b3-bad3-7520-ac07-9dad584b96e3",
+        "status": "completed",
+        "error": null,
+        "startedAt": 1791029918,
+        "completedAt": 1791030101,
+        "durationMs": 183487
+      }
+    ]
+  }
+}

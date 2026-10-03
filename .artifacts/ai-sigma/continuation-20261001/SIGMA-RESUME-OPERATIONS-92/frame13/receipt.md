@@ -1,0 +1,1 @@
+92 frame13受領/実開始。ready/show goal+selfで本人割当・pause無し・in_progressを確認。旧frame12 scheduler3352074/27085893・monitor3352088/27085920は正確identity現在不在、state stopped/processnull/ownednull/recoveryfalse、supervisor idle。旧monitor-ended12:42:47.258666/errornull/自己child無しを保存（全期間成功は認定しない）。親13/mainmirror・運用期限14:35:15/14:40:15/14:43:15/14:45:15UTCを単独writerで停止窓に更新開始。研究新配分をこの事務待ちgateにしない。
