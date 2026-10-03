@@ -21,3 +21,5 @@
 次判断は1つ：別配分で、結果前に固定した少数新selfplay教師からπ/z/rootmean/予算を保存し、fullstate+prefixとgame lineageを同groupにしたtrain/validationへ接続する。担当experiment/private生成・trainer scope、GPU追加なしならCPU1/4pair8game×最大200ply×500ms=対局時計800秒＋init/停止/保存、teacher保持8MiB・model4MiB・log4MiBを見積りの出発点にする。toy smokeはCPU1/RAM1GiB/120秒程度で限定し、writer45分・独立schema確認10分。これは新許可ではない。本PV構造/本学習の必要data数・CPU/GPU費はこのtoyから推定できず、次実配分で固定・計測する。初期重み学習とSigma継続学習を分け、元PyTorch構造/state_dict移送がない限りONNXだけを継続学習readyとしない。
 
 新教師schema/group漏洩/π合法mass/z視点が不成立なら最小修復へ戻り本学習/arenaを保留。接続成立なら実費を基に本PV構造・教師生成量と独立同wall arena計画を選定する。学習lossが下がっても棋力は固定モデルの独立評価で別に判定し、NIには158の事前正式条件を使う。NNUEは後続候補でPV全完成の恒久gateにしない。今回goal/他者close0、受入れcoordinator。
+
+最終保存data/report Git `4f0e14a748eda2030ba5f85838e691128ffdaa15`。必要8path（checkpoint/ONNX含む）はGitからstreamしSHA/size/current一致を確認、全copy/展開0。自己ファイル保持178677B＋Git保守forecast229376B＋metadata余裕8192B=416245B<524288B。初回未使用privateindex328312Bの一時peak/削除を別記、旧carry減額0。科学command開始終了は正確、初期管理commandの個別UTCは未保存でtool transcriptのexit/wallを残し欠測扱い。管理tool wall概算30秒＋残上限15秒を静的60秒枠内で保守計上する。

@@ -1,0 +1,94 @@
+{
+  "recorded_UTC": "2026-10-03T03:45:18.883765+00:00",
+  "dataGit": "4f0e14a748eda2030ba5f85838e691128ffdaa15",
+  "stream_restore": [
+    {
+      "path": "tools/ai-sigma-pv-cpu-smoke/toy.py",
+      "bytes": 10088,
+      "sha256": "cede790c58b226726cfe9bbf456a3a7e072634c87151c2517648650107ad65e9",
+      "Git_stream_equals_current": true
+    },
+    {
+      "path": "tools/ai-sigma-pv-cpu-smoke/launch.py",
+      "bytes": 10451,
+      "sha256": "6baaffc80449a6ccee26a6a42f12ffc9185eed3c40cf472de388a1a615cf3c15",
+      "Git_stream_equals_current": true
+    },
+    {
+      "path": "research-data/ai-sigma/162-pv-cpu-smoke/preregister.json",
+      "bytes": 3323,
+      "sha256": "3cf99678accbfe3e81eb92be28af4f8127df8d0e2e5cb74d270632188ff5ebbb",
+      "Git_stream_equals_current": true
+    },
+    {
+      "path": "research-data/ai-sigma/162-pv-cpu-smoke/toy-checkpoint.pt",
+      "bytes": 53929,
+      "sha256": "52aa17fcb29113e85264a1d1740adac616750bf6208270d8313f369d60c8800c",
+      "Git_stream_equals_current": true
+    },
+    {
+      "path": "research-data/ai-sigma/162-pv-cpu-smoke/toy.onnx",
+      "bytes": 51619,
+      "sha256": "6763321690ec595ff4e0f40090987d85a0e8ee34a2cf3f3d7720ca3b4b26e895",
+      "Git_stream_equals_current": true
+    },
+    {
+      "path": "research-data/ai-sigma/162-pv-cpu-smoke/results.json",
+      "bytes": 6559,
+      "sha256": "2c1484b6efcdfab744f52899a52ac4e41caed16c821a82635e8b40fdb5742b61",
+      "Git_stream_equals_current": true
+    },
+    {
+      "path": "research-data/ai-sigma/162-pv-cpu-smoke/science-stop.json",
+      "bytes": 2178,
+      "sha256": "21f3e571c78603c520384dbc87fe889c7d6d3fe48c5748b136ad8ad33c9bd849",
+      "Git_stream_equals_current": true
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-pv-cpu-smoke.md",
+      "bytes": 6750,
+      "sha256": "d6debcb764c58045f658046524dca6fd9f1af0d81f414befaf12ba68ea5add17",
+      "Git_stream_equals_current": true
+    }
+  ],
+  "restore_full_copy_bytes": 0,
+  "source_write_stopped": {
+    "tools/ai-sigma-pv-cpu-smoke/toy.py": "cede790c58b226726cfe9bbf456a3a7e072634c87151c2517648650107ad65e9",
+    "tools/ai-sigma-pv-cpu-smoke/launch.py": "6baaffc80449a6ccee26a6a42f12ffc9185eed3c40cf472de388a1a615cf3c15"
+  },
+  "current_identity_absent": [
+    {
+      "pid": 3115090,
+      "starttick": "25170364",
+      "current_exact_identity_present": false
+    },
+    {
+      "pid": 3115021,
+      "starttick": "25170120",
+      "current_exact_identity_present": false
+    }
+  ],
+  "current_child_RSS_bytes": 0,
+  "owned_wait_unknown": 0,
+  "self_retained_files_bytes_now": 178677,
+  "Git_conservative_retained_forecast_bytes": 229376,
+  "final_metadata_allowance_bytes": 8192,
+  "scope_current_plus_forecast_bytes": 416245,
+  "scope512KiB_guard": 524288,
+  "old_conservative_carry_bytes": 13974439,
+  "combined_conservative_forecast_bytes": 14498727,
+  "combined14MiB_guard": 14680064,
+  "hypothesis16MiB_reservation_unchanged": true,
+  "parent_additional_reservation": 0,
+  "old_unknown_discount": 0,
+  "prior_admission_private_index_transient_peak_bytes": 328312,
+  "static_command_CPU": "0 single logical",
+  "static_management_observed_tool_wall_estimate_s": 30,
+  "static_management_remaining_upper_allowance_s": 15,
+  "static_command_individual_start_end_missing": "early Beads/read/source/Git/report helper commands; tool transcript retains commands/exit/wall, exact individual UTC not persisted",
+  "science_command_start_end_exact": true,
+  "scientific_CPUtoy_s": 2.4964139461517334,
+  "science_actual_training_runs": 1,
+  "new_train_after_success": 0,
+  "whole_host_all_period_guarantee": false
+}
