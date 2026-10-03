@@ -1,0 +1,192 @@
+{
+  "issue": "quoridor-4lc.151",
+  "run": "port151-stageB-generate-r2",
+  "UTC": "2026-10-03T01:47:40.767690+00:00",
+  "start": "2026-10-03T01:45:16.527023+00:00",
+  "end": "2026-10-03T01:45:23.623707+00:00",
+  "exit": 0,
+  "stop_reason": null,
+  "inner_controlled": {
+    "remaining_pids": 0,
+    "forced": true,
+    "graceful_error": null,
+    "waited": true,
+    "registration_ack": true,
+    "registered": 17
+  },
+  "inner_proof_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-generate-r2/outer-controlled-stop.json",
+  "outer_ownedwait_returned": true,
+  "outer_remaining": [],
+  "outer_unknown": [],
+  "current_sameidentity": [],
+  "identity_count": 34,
+  "peak_current_RSS": 1332211712,
+  "retained_current": 57065472,
+  "source_launch_hash": "0232a84866a3840c3819b58c19580fb4a56d7ede85bf18e4d2f1b28654109ccc",
+  "source_current_hash": "0232a84866a3840c3819b58c19580fb4a56d7ede85bf18e4d2f1b28654109ccc",
+  "files": {
+    "summary": {
+      "issue": "quoridor-4lc.151",
+      "kind": "stageB",
+      "run": "port151-stageB-generate-r2",
+      "startup_NN": 0,
+      "model_sessions": 0,
+      "hand_NN": 0,
+      "started": 0,
+      "planned": 0,
+      "primary": null,
+      "secondary": []
+    },
+    "finally-model-drop": {
+      "missing": true
+    },
+    "main-timers-stop": {
+      "main_timers": 0,
+      "pending_messages": []
+    },
+    "monitor-callback-stop": {
+      "timer": false,
+      "busy": false,
+      "waited": true
+    },
+    "pause-monitor-stop": {
+      "UTC": "2026-10-03T01:45:23.276Z",
+      "state": "READY",
+      "failure": null,
+      "deadlineUTC": "2026-10-03T03:17:36.232260+00:00",
+      "subjectIssue": "quoridor-4lc.151",
+      "rows": [
+        {
+          "pid": 3015709,
+          "starttick": 24484455,
+          "PPID": 3015702,
+          "ppid": 3015702,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3015702,
+            "starttick": 24484452,
+            "PPID": 3015697,
+            "ppid": 3015697,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:45:16.589Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc",
+          "PID": 3015709,
+          "startUTC": "2026-10-03T01:45:16.589Z",
+          "endUTC": "2026-10-03T01:45:17.591Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3015745,
+          "starttick": 24484555,
+          "PPID": 3015702,
+          "ppid": 3015702,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3015702,
+            "starttick": 24484452,
+            "PPID": 3015697,
+            "ppid": 3015697,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:45:17.591Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc.151",
+          "PID": 3015745,
+          "startUTC": "2026-10-03T01:45:17.591Z",
+          "endUTC": "2026-10-03T01:45:19.102Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3015859,
+          "starttick": 24484807,
+          "PPID": 3015702,
+          "ppid": 3015702,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3015702,
+            "starttick": 24484452,
+            "PPID": 3015697,
+            "ppid": 3015697,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:45:20.103Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc",
+          "PID": 3015859,
+          "startUTC": "2026-10-03T01:45:20.103Z",
+          "endUTC": "2026-10-03T01:45:22.093Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3015927,
+          "starttick": 24485006,
+          "PPID": 3015702,
+          "ppid": 3015702,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3015702,
+            "starttick": 24484452,
+            "PPID": 3015697,
+            "ppid": 3015697,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:45:22.094Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc.151",
+          "PID": 3015927,
+          "startUTC": "2026-10-03T01:45:22.094Z",
+          "endUTC": "2026-10-03T01:45:23.276Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        }
+      ],
+      "pending_children": [],
+      "clock_cost_not_subtracted": true,
+      "all_owned_read_callbacks_waited": true,
+      "signal_unknown": 0,
+      "active_monitor_timer": false
+    }
+  },
+  "natural_allperiod_allhost_not_asserted": true
+}
