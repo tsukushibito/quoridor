@@ -40,3 +40,5 @@
 CPU affinity[8]、Torch intra/inter1、CUDA_VISIBLE_DEVICES空、GPU API/割当0。science child wall1.798429s、実処理1.451383s、sampled peak RSS681418752B<896MiB guard、exit0/wait/current PID不在。20ms samplingの瞬間peak欠測は残る。直前admissionは185同identity不在/current科学job不在、監督CPU0と自CPU8の物理区別、aggregate forecastを保存。
 
 preregister/ID fixture/source Git c03499d17fdb44373da5c63ba633bc04e8a2aa20を基準に、実launch.py追加source SHAと全command/PID/admissionを保存した。全科学成功行の追加forward0、weights/dataは終了時SHA不変。source/子停止science-stop後、少量subtreeGit/default index非更新・stream byte復元・旧保守量維持/新forecast448KiB内・Beadsbackup・coordinator引渡しで終える。goal他者close0、受入れcloseはcoordinator。
+
+補足：resultsのz別平均予測は結果条件付きの方向診断であり、予測値条件付きの厳密な校正指標とは分ける。prediction-bins.jsonに固定5予測binの行数/game数・平均predictionと観測zを保存。game相関と少数8gameのため母集団校正/IID信頼区間は主張しない。
