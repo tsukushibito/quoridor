@@ -42,6 +42,16 @@ def admit(c,out,tool,runs):
  used=sum((datetime.datetime.fromisoformat(d['end'])-datetime.datetime.fromisoformat(d['start'])).total_seconds() for d in previous if d['phase']==c['kind'])
  assert used+c.get('minimum_remaining_heavy_seconds',0)<{'protocol':300,'build':180,'stageA':300,'stageB':1800}[c['kind']],'CUMULATIVE_BUDGET'
  starts=0;started_ids=[]
+ if c['kind']=='stageB' and not c.get('generate_only'):
+  analysis=json.loads((tool.parents[1]/'research-data/ai-sigma/151-sigma-web-port/port151-stageA-r2-analysis.json').read_text());assert analysis['StageA_finite_supported'],'STAGEA_NOT_SUPPORTED'
+  reg=json.loads((tool.parents[1]/'research-data/ai-sigma/151-sigma-web-port/stageB-preregister.json').read_text());assert c['binary_SHA256']==reg['binary_SHA256'] and c['fixed_input_SHA256']==reg['input_SHA256'],'STAGEB_BINDING'
+  assert 0<len(c['games'])<=4 and all(g in reg['games'] for g in c['games']),'STAGEB_PLAN_MEMBERSHIP'
+  for d in previous:
+   saved=runs/d['name']/'config.json'
+   if d['phase']=='stageB' and saved.exists():started_ids.extend(g['id'] for g in json.loads(saved.read_text()).get('games',[]))
+  assert not any(g['id'] in started_ids for g in c['games']),'NO_SCIENTIFIC_GAME_RETRY'
+  assert len(started_ids)+len(c['games'])<=16,'STAGEB_GAME_CAP'
+  starts=len(started_ids)
  # Per-stage experiments and total NN budget are registered; no blind attempt replacement.
  for p in runs.glob('port151-*.started.json'):
   old=json.loads(Path(json.loads(p.read_text())['command'][-1]).read_text()) if False else None

@@ -1,0 +1,39 @@
+{
+  "issue": "quoridor-4lc.151",
+  "run": "port151-stageA-r2",
+  "raw_scientific_SHA256": "d37215cbc7914519ca24ab254c5e413d21e780389094faed537280a059c234d2",
+  "raw_control_SHA256": "8c4f6435d45aef3897ecbb4aafa2b72da0b537b85aeb32dbcb6c4d407cb54e9c",
+  "scientific_search_completed": true,
+  "last_worker_search_end_epoch_ms": 1790991683263.345,
+  "control_state": "BEADS_SCHEMA_ERROR",
+  "control_failure": {
+    "code": "BEADS_SCHEMA_ERROR",
+    "cause": {
+      "name": "SyntaxError",
+      "message": "Unterminated string in JSON at position 93104 (line 27 column 91634)",
+      "code": null,
+      "signal": null,
+      "killed": null
+    }
+  },
+  "observer_failure_events": [
+    {
+      "kind": "observer_failure",
+      "code": "BEADS_SCHEMA_ERROR",
+      "cause": {
+        "name": "SyntaxError",
+        "message": "Unterminated string in JSON at position 93104 (line 27 column 91634)",
+        "code": null,
+        "signal": null,
+        "killed": null
+      },
+      "UTC": "2026-10-03T01:41:28.167Z"
+    }
+  ],
+  "original_summary_primary_null_is_not_control_success": true,
+  "fullperiod_monitor_success_not_supported": true,
+  "max_prior_difference": 1.734723475976807e-18,
+  "first_prior_difference": 2.168404344971009e-19,
+  "max_score_difference": 1.1102230246251565e-16,
+  "r2_scientific_rows_not_repeated_or_replaced": true
+}
