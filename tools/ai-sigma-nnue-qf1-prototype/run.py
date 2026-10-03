@@ -12,7 +12,7 @@ pr=json.loads((D/'preregister.json').read_text());deadline=datetime.datetime.fro
 assert utc()<deadline,'NEW_SCIENCE_DEADLINE'
 phase=sys.argv[1];assert phase in ['mock','learn','native']
 script=Path('tools/ai-sigma-nnue-qf1-prototype/'+{'mock':'prepare.cjs','learn':'learn.py','native':'probe.cjs'}[phase]);assert hashlib.sha256(script.read_bytes()).hexdigest()==pr['sources'][str(script)]
-command=['/home/vscode/.cache/inference/envs/quoridor-training/bin/python','-B',str(script)] if phase=='learn' else ['/usr/bin/node',str(script)]
+command=['/home/vscode/.cache/inference/envs/quoridor-training/bin/python','-B',str(script)] if phase=='learn' else ['/home/vscode/.local/bin/node',str(script)]
 assert os.access(command[0],os.X_OK)
 previous=sum(json.loads(p.read_text())['wall_seconds'] for p in D.glob('process-*.json'))
 assert previous<60,'TOTAL_SCIENCE_TIME'

@@ -7,7 +7,7 @@ def main():
  start=time.monotonic();pr=json.loads((D/'preregister.json').read_text())
  assert os.sched_getaffinity(0)=={8} and os.environ['CUDA_VISIBLE_DEVICES']==''
  assert datetime.datetime.now(datetime.timezone.utc)<datetime.datetime.fromisoformat(pr['newscience'].replace('Z','+00:00'))
- p=subprocess.run(['node','tools/ai-sigma-nnue-qf1-prototype/prepare.cjs'],capture_output=True,timeout=25)
+ p=subprocess.run([pr['node'],'tools/ai-sigma-nnue-qf1-prototype/prepare.cjs'],capture_output=True,timeout=25)
  if p.returncode:raise RuntimeError(p.stderr.decode()[-4000:])
  data=json.loads(p.stdout);rows=data['samples'];assert len(rows)>0
  import numpy as np
