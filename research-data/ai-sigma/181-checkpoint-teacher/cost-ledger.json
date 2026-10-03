@@ -160,9 +160,26 @@
   "learner_whole_python_is_nested_in_guardian_jobwall": true,
   "preparation_opening_generation_seconds": null,
   "analysis_seconds": null,
-  "Git_pack_backup_seconds": null,
+  "Git_pack_backup_seconds": {
+    "first_evidence_save": 72.33114138699602,
+    "pack_memory_restore": 0.25322503299685195,
+    "final_metadata_Git_and_backup": "pending tail receipt"
+  },
   "other_prelaunch_management_seconds": null,
   "unknown_costs_not_zero": true,
   "API_pipe_spans_overlap_not_exclusive_CPU": true,
-  "all_pipeline_prep_record_learning_cost_is_distinct_from_production_rate": true
+  "all_pipeline_prep_record_learning_cost_is_distinct_from_production_rate": true,
+  "measured_nonoverlapping_component_wall_lower_bound_seconds": 464.0222103800401,
+  "NN0_helper_attempts": [
+    {
+      "command": "taskset -c2 python3 finish-evidence.py",
+      "status": "COMMAND_SYNTAX_FAILURE_BEFORE_CHILD",
+      "NN": 0
+    },
+    {
+      "command": "taskset -c 2 python3 finish-evidence.py",
+      "status": "COMPLETE",
+      "NN": 0
+    }
+  ]
 }
