@@ -1,0 +1,84 @@
+{
+  "issue": "quoridor-4lc.176",
+  "planned_games": 24,
+  "game_status_counts": {
+    "GOAL": 24
+  },
+  "Rpolicy": 1409,
+  "Rz": 1409,
+  "Rjoint": 1409,
+  "train_policy": 1188,
+  "train_joint": 1188,
+  "validation_policy": 221,
+  "validation_joint": 221,
+  "value_unknown_rows": 0,
+  "loss_value_unknown_mask": 0,
+  "all_generation_job_wall_seconds": 198.49600000000004,
+  "export_validate_compress_wall_seconds": 0.6337808719873428,
+  "production_including_export_seconds": 199.12978087198738,
+  "rates_per_all_jobwall": {
+    "Rpolicy": 7.098379816217958,
+    "Rz": 7.098379816217958,
+    "Rjoint": 7.098379816217958
+  },
+  "rates_including_export": {
+    "Rpolicy": 7.075787427827232,
+    "Rz": 7.075787427827232,
+    "Rjoint": 7.075787427827232
+  },
+  "API_await_ms": 350341.4139137021,
+  "pipe_await_ms": 402644.42566818,
+  "spans_overlap_not_kernelCPU": true,
+  "NN": 81768,
+  "terminal_noNN": 8408,
+  "CP_received": 1409,
+  "position_keys": {
+    "unique": 1384,
+    "crossgame_shared_keys": 16,
+    "crossgame_shared_row_occurrences": 37,
+    "train_validation_shared_keys": 0,
+    "train_validation_shared_row_occurrences": 0,
+    "independent_state_holdout": false
+  },
+  "features648_only": {
+    "unique": 1384,
+    "crossgame_shared_keys": 16,
+    "crossgame_shared_row_occurrences": 37,
+    "train_validation_shared_keys": 0,
+    "train_validation_shared_row_occurrences": 0,
+    "independent_state_holdout": false
+  },
+  "lineages": 24,
+  "teacher_holdout": false,
+  "old173_teacher_rows": 0,
+  "attempts": [
+    {
+      "run": "native176-generate-b1-r1",
+      "exit": 0,
+      "stop_reason": null,
+      "wall_seconds": 72.162,
+      "peak_RSS": 1371549696,
+      "wall_seconds_exact_iso": 72.162764
+    },
+    {
+      "run": "native176-generate-b2-r1",
+      "exit": 0,
+      "stop_reason": null,
+      "wall_seconds": 70.974,
+      "peak_RSS": 1371865088,
+      "wall_seconds_exact_iso": 70.974192
+    },
+    {
+      "run": "native176-generate-b3-r2",
+      "exit": 0,
+      "stop_reason": null,
+      "wall_seconds": 55.36,
+      "peak_RSS": 1369640960,
+      "wall_seconds_exact_iso": 55.359642
+    }
+  ],
+  "dataset_SHA256": "a8e79d3bdcc7f5d9d7c7105a476f37e3168fc44eec47ea221a57dddd6ae2e94a",
+  "shared_RuleA_checker_limit": true,
+  "all_generation_job_wall_seconds_exact_iso": 198.496598,
+  "production_rate_exact_iso": 7.0983584313117545
+}
