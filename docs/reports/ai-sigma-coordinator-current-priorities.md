@@ -21,3 +21,5 @@ CPU4logicalは実job合計。176の3arenaに追加できるCPU重jobは一つ。
 92は08:58:38通常freshstart、scheduler3352074/start27085893とmonitor3352088/start27085920、running/loadedと24hash一致を本人報告。親版12SHA0e0e03a157e86bb9d9b7bd0659fb17a3c413afac2286944a5fde839336baae50。初回dispatch競合でownednull、次通常09:18:38。起動の有限成立と未来自然監督/学習成功は分ける。92へ同依頼再配送なし。
 
 09:12節目: 178独立速報のRpolicy/Rz/Rjoint別分母＋全attemptの総jobwall台帳を採用。打切りzunknownのvalue mask、game splitで防げないcrossgame重複の限界を維持。final-only配送で毎sim root_edges構築が残る場合はIPC部分の利得とし、総探索費改善へ広げない。178科学CPU0静的子終了を177へ共有、本人current/headroom/次09:18:38監督窓でGPU開始を調整。176には同K対応と適格行率を既scopeで反映、全文承認待ち/新計測gateなし。効果は176実生成と177総route費で確認する。
+
+178最終166dff52/handoffe9e53f49の必要15＋2blobをGit/size/SHA/current一致で確認、mock sourceと子PID現在不在・本人source/子停止・backup receiptを照合し有限受入れ。合成schema/設計の支持で実176dataset/数値backend/棋力は別。採択は既176/177へ反映済み、追加静的課題を連鎖せず実生成/学習接続・GPU総route費を待つ。
