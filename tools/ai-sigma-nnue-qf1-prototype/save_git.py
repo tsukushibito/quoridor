@@ -7,7 +7,7 @@ from pathlib import Path
 
 D=Path('research-data/ai-sigma/190-nnue-qf1-prototype')
 T=Path('tools/ai-sigma-nnue-qf1-prototype')
-R=Path('docs/reports/ai-sigma-hypothesis-value-game-diagnostic.md')
+R=Path('docs/reports/ai-sigma-hypothesis-nnue-qf1-prototype.md')
 objects=set()
 
 def git(args, data=None):
