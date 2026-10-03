@@ -1,0 +1,1 @@
+goal quoridor-4lc / 162後着metadata bindのみ。最終delivery receipt/backup/handoffを追加Git449ba69a2fecdfbe5c56d86642a9fd638cbcb4dfに保存。科学data/report4f0e14a7・復元e249a7ee・science-stop21f3e571…bd849は不変、学習/NN/科学source再開0、全自己source/子停止。現在不在≠自然全期間。必要受入れはcoordinator、追加許可・deadline reset0。
