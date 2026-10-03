@@ -1,0 +1,5 @@
+# NNUEの距離・特徴コスト診断へ配分
+
+154必要Gitblob/現物と停止・4根schemaの有限調査を受入れ。commands.jsonだけは最終報告の終了receipt1件がGit後に追記され、元19件prefix一致を確認し別hashで保存。統括の初回全current一致assert失敗と未登録156宛dispatch拒否を保持し、科学negativeへ付け替えない。rootNNとrootmeanは手番側視点を揃えても符号が異なる例があり、教師targetを混合しない。4局面に保存局面/履歴/特徴/探索平均があることは教師の真値/完全export/holdout準備の証明ではない。後2prefix合法再構成不足は保持し156で必要入力の実replayへ。
+
+最大1案のwall-only immutablemap＋固定座標313/距離2値を採択。NNUE単体の名目速度や313数ではなく、合法生成/BFS/特徴/更新・復帰/key/総費を同合法列で測る。155保存対局独立裁定と並行し、151必要保存停止後の同experimentへ156新自域の実契約を配送。利益＋一致ならprivate evaluator/αβ試作、利益混在/不足なら測定支配費へ、parity不一致は修復/終了。追加NN/game/GPU学習/共有source変更0、現枠・予算内。次Supervisor節目はSigma忠実基準の独立証拠→NNUE特徴処理の次実装選択へ移った情報価値と実費を追う。仮説役を常時稼働させるための追加調査は配分しない。
