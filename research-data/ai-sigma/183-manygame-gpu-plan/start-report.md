@@ -1,0 +1,1 @@
+goal quoridor-4lc / 本人 quoridor-4lc.183。ready/show goal+self・pauseなし・本人割当確認済み。11:16:39UTC claim、11:16:52UTC source静的実開始。受領11:13:32時計維持。NN/GPU/game/build0、181継続。Rust Registry複数handleと現engine global active入口の差を確認、gamepool＋共通177 maxB8 queueの最大1案へ。全生成倍率・多数handle RAMは未測定。CPU0短静的/60s・512KiB内、主181終了待ちgate0。

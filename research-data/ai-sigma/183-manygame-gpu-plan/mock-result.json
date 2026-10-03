@@ -1,0 +1,159 @@
+{
+  "status": "PASS",
+  "NN": 0,
+  "game": 0,
+  "GPU": 0,
+  "real_engine": 0,
+  "partial_B": 3,
+  "cases": [
+    "onepending",
+    "partial",
+    "stale",
+    "replacement",
+    "stop_queue",
+    "stop_inflight",
+    "bad_ID",
+    "provider_error"
+  ],
+  "successful_log": [
+    {
+      "resume": [
+        "mock-run",
+        "worker-0",
+        "a",
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "discard": "STALE_GENERATION_HANDLE_TOKEN",
+      "id": [
+        "mock-run",
+        "worker-0",
+        "b",
+        1,
+        2,
+        1
+      ]
+    },
+    {
+      "resume": [
+        "mock-run",
+        "worker-0",
+        "c",
+        1,
+        3,
+        1
+      ]
+    },
+    {
+      "resume": [
+        "mock-run",
+        "worker-0",
+        "b",
+        2,
+        4,
+        1
+      ]
+    },
+    {
+      "discard": "STOP_QUEUED",
+      "id": [
+        "mock-run",
+        "worker-0",
+        "a",
+        1,
+        1,
+        2
+      ]
+    }
+  ],
+  "faults": [
+    {
+      "mode": "reordered_ID",
+      "log": [
+        {
+          "fault": "ID_ATTRIBUTION",
+          "affected": [
+            [
+              "mock-run",
+              "worker-0",
+              "a",
+              1,
+              1,
+              1
+            ],
+            [
+              "mock-run",
+              "worker-0",
+              "b",
+              1,
+              2,
+              1
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "provider_error",
+      "log": [
+        {
+          "fault": "PROVIDER_FAILURE",
+          "affected": [
+            [
+              "mock-run",
+              "worker-0",
+              "a",
+              1,
+              1,
+              1
+            ],
+            [
+              "mock-run",
+              "worker-0",
+              "b",
+              1,
+              2,
+              1
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "stop_inflight",
+      "log": [
+        {
+          "discard": "STALE_GENERATION_HANDLE_TOKEN",
+          "id": [
+            "mock-run",
+            "worker-0",
+            "a",
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "discard": "STALE_GENERATION_HANDLE_TOKEN",
+          "id": [
+            "mock-run",
+            "worker-0",
+            "b",
+            1,
+            2,
+            1
+          ]
+        }
+      ]
+    }
+  ],
+  "pid": 3472543,
+  "affinity": [
+    0
+  ],
+  "wall_seconds": 6.232899613678455e-05,
+  "peak_RSS_bytes": 16330752
+}
