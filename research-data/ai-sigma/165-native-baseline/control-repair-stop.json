@@ -1,0 +1,161 @@
+{
+  "issue": "quoridor-4lc.165",
+  "UTC": "2026-10-03T05:44:09.872773+00:00",
+  "science_source_stopped_original_UTC": "2026-10-03T05:27:22.252435+00:00",
+  "original_science_stop_sha256": "9becd64e4bfac3e3d145765a7586b0e3376ac49aaae87d5b6ebdb7d49aac671c",
+  "control_repair_source_git": "a78ea8336edc84c9716fee8972c86d94200941b6",
+  "control_source_write_stopped": true,
+  "new_NN": 0,
+  "new_game": 0,
+  "repair_run_result_sha256": "6dfac07767a29cc0f4bba9334a9011ada5961bd0b300a318b6006d948c2e376d",
+  "source_hashes": {
+    "tools/ai-sigma-native-baseline/common.cjs": "35a01a1db0dd124ba78c59aa1bff38232d73fd202c41188bb0f4960e71a4424f",
+    "tools/ai-sigma-native-baseline/reference.cjs": "85cae30273fa481f96ec28fa77eeb5907bb203812c7234f9ffdfd75d337848cf",
+    "tools/ai-sigma-native-baseline/reference-core-native.js": "9670b29d07489a568206b739cf4acdf5477a3c4f0a22f5e8fee2332166201705",
+    "tools/ai-sigma-native-baseline/engine.cjs": "a7c7fd516785455b5412997fee59630b80cd99bd7fe01021e02b0fc3f5c0dde4",
+    "tools/ai-sigma-native-baseline/clock.cjs": "b79bdfba1f3780a7e2394fb04c5703e2ef62daae5283880f7433c65c0c433f2a",
+    "tools/ai-sigma-native-baseline/arena.cjs": "5bb9cbd2a30ff138b36e0160c7443e8f55121626d67289f779fc6ce6cbe10379",
+    "tools/ai-sigma-native-baseline/runner.py": "a41408fd4df51839f9de0ee7d17cb1467daa11bbff141433011c7276f2165b40",
+    "tools/ai-sigma-native-baseline/admission.py": "8dff704031138901be8d3924e2267f23ea5daf50dd23835dc33a3e120eda3766",
+    "tools/ai-sigma-native-baseline/oracle.cjs": "45b816741f2502817b03d76acaf1e05810e10a3ddbbbaa9f1817c14f2dadea87",
+    "tools/ai-sigma-native-baseline/control-repair.cjs": "9a5457398f3fd3b4238bb13ec31a092c54c08a6478f3cfd17d96cd98e2cc0460"
+  },
+  "original_raw_unchanged": true,
+  "runtime": {
+    "Model_sessions_started": 0,
+    "engine_processes_closed": {
+      "candidate": {
+        "receipt": {
+          "exit": [
+            {
+              "code": 0,
+              "signal": null
+            }
+          ],
+          "NN_total": 0,
+          "startup_separate": 0
+        },
+        "exit": {
+          "code": 0,
+          "signal": null
+        },
+        "stderr": ""
+      },
+      "reference": {
+        "receipt": {
+          "exit": [],
+          "NN_total": 0,
+          "startup_separate": 0
+        },
+        "exit": {
+          "code": 0,
+          "signal": null
+        },
+        "stderr": ""
+      }
+    },
+    "outer_exit": 0,
+    "outer_stop_reason": null,
+    "outer_owned_remaining": [],
+    "unknown_adopted": [],
+    "inner_timers_cleared": true,
+    "main_callbacks_and_monitor_stop": {
+      "result": {
+        "NN": 0,
+        "passed": true,
+        "tape_rows": 10
+      },
+      "primary": null,
+      "control": null,
+      "monitor_state": "READY",
+      "UTC": "2026-10-03T05:43:17.351Z"
+    },
+    "monitor_stop": {
+      "UTC": "2026-10-03T05:43:17.351Z",
+      "state": "READY",
+      "failure": null,
+      "deadlineUTC": "2026-10-03T06:27:21.307017+00:00",
+      "subjectIssue": "quoridor-4lc.165",
+      "rows": [
+        {
+          "pid": 3215847,
+          "starttick": 25913117,
+          "PPID": 3215840,
+          "ppid": 3215840,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3215840,
+            "starttick": 25913110,
+            "PPID": 3215839,
+            "ppid": 3215839,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T05:43:14.537Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc",
+          "PID": 3215847,
+          "startUTC": "2026-10-03T05:43:14.537Z",
+          "endUTC": "2026-10-03T05:43:15.609Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 225436,
+          "output_SHA256": "79080beeb9367f885822afd58d63b28535703b93c9a8e4aa443baaf0cd102505",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/NATIVE-BASELINE/runs/native165-control-repair-r1/beads-read-quoridor-4lc.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3215872,
+          "starttick": 25913224,
+          "PPID": 3215840,
+          "ppid": 3215840,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3215840,
+            "starttick": 25913110,
+            "PPID": 3215839,
+            "ppid": 3215839,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T05:43:15.615Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc.165",
+          "PID": 3215872,
+          "startUTC": "2026-10-03T05:43:15.615Z",
+          "endUTC": "2026-10-03T05:43:16.437Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 226509,
+          "output_SHA256": "78df4248915327bcb67cc7440ea4cb2dbeba3138bc0254f5892ccb50353c2140",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/NATIVE-BASELINE/runs/native165-control-repair-r1/beads-read-quoridor-4lc.165.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        }
+      ],
+      "pending_children": [],
+      "clock_cost_not_subtracted": true,
+      "all_owned_read_callbacks_waited": true,
+      "signal_unknown": 0,
+      "active_monitor_timer": false
+    }
+  },
+  "current_same_identity": [],
+  "allperiod_allhost_natural_guarantee": false,
+  "formal_ready": false
+}

@@ -1,0 +1,1507 @@
+{
+  "issue": "quoridor-4lc.165",
+  "UTC": "2026-10-03T05:48:29.650889+00:00",
+  "archive": "research-data/ai-sigma/165-native-baseline/native165-raw.tar.gz",
+  "archive_bytes": 5866462,
+  "archive_SHA256": "695ebae0e448a0faa7ed49cedfc68161e6041da14fa2660af730fa6276e2e862",
+  "original_raw_retained": true,
+  "members": [
+    {
+      "name": "admission-quoridor-4lc.165.json",
+      "bytes": 226509,
+      "SHA256": "78df4248915327bcb67cc7440ea4cb2dbeba3138bc0254f5892ccb50353c2140"
+    },
+    {
+      "name": "admission-quoridor-4lc.json",
+      "bytes": 225436,
+      "SHA256": "79080beeb9367f885822afd58d63b28535703b93c9a8e4aa443baaf0cd102505"
+    },
+    {
+      "name": "claim.txt",
+      "bytes": 62,
+      "SHA256": "c7ad4ac9d7f932e6dbb1a9ddeb9c7aaddc941b48ba643e1e8a4c7e083a58266c"
+    },
+    {
+      "name": "control-defect-receipt.json",
+      "bytes": 157,
+      "SHA256": "227ce505482246a866c32821d1e8e1d32e63442d66efc27f6afdef17b46dcca2"
+    },
+    {
+      "name": "control-defect-report.md",
+      "bytes": 806,
+      "SHA256": "10f40569accba25f53502bed5c68dd320a6b30e8d07b8f0b57c7f2e328e8e18c"
+    },
+    {
+      "name": "control-repair-source-git.txt",
+      "bytes": 41,
+      "SHA256": "101740849fb8c1af33deb938d29a5a4275b0c7ebd88ef88e4857d4650e6861e6"
+    },
+    {
+      "name": "control-repair-stop-receipt.json",
+      "bytes": 157,
+      "SHA256": "f01c818b6ffeb1f9f9573da40d6bc0baa3cf7f1f1fc8c6aec9655fb86eab5b1d"
+    },
+    {
+      "name": "control-repair-stop-report.md",
+      "bytes": 1811,
+      "SHA256": "7bc30303b0eeda20a398294d4b06b11fddeae280425df4e357bb7037b450c67f"
+    },
+    {
+      "name": "critic-control-repair-receipt.json",
+      "bytes": 157,
+      "SHA256": "14db6289d30a69f1c65b44cd52bd8b6acca6f7402fdd0c8a884690a3eaae0a33"
+    },
+    {
+      "name": "critic-control-repair.md",
+      "bytes": 1575,
+      "SHA256": "3e828c957ba7bbe63f36ad2a70bad8d533affc57791ae856b629bf0e36ffa8fc"
+    },
+    {
+      "name": "goal.json",
+      "bytes": 216387,
+      "SHA256": "73a9508b329df6423c97f71d95818776c590e0e0faabd090d7d31332e73fdad2"
+    },
+    {
+      "name": "intake.json",
+      "bytes": 109,
+      "SHA256": "6fabe0cfe7bf1d40041538dd5ed874b09646afc0a59ea94d74e9f31a66c2831e"
+    },
+    {
+      "name": "ready.json",
+      "bytes": 3486,
+      "SHA256": "90d707560c632d8fd5cac9c4d46a2d951bb7d5b1e049cec8ff1be50537dc9be8"
+    },
+    {
+      "name": "repair-ready.json",
+      "bytes": 3,
+      "SHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "name": "runs/native165-build-r1/beads-read-quoridor-4lc.165.json",
+      "bytes": 219653,
+      "SHA256": "2ccc2196a146d13dfc5473f1c8f20dffba3a20d2ff2c631acd4661972262baef"
+    },
+    {
+      "name": "runs/native165-build-r1/beads-read-quoridor-4lc.json",
+      "bytes": 218580,
+      "SHA256": "011253d94ee64553472f57cb88763a55cbf858fb2aa4ae8be9c0e596da94dc8d"
+    },
+    {
+      "name": "runs/native165-build-r1/build.json",
+      "bytes": 908,
+      "SHA256": "a9b6034382cfc49bc4c8a54915cc2916089df2b05e6f6ce06a45fd4f501cec0c"
+    },
+    {
+      "name": "runs/native165-build-r1/control-summary.json",
+      "bytes": 1085,
+      "SHA256": "ba67a6f0164bacc6c0bce2fd148b1d6745ed4f594428b5255447d1dbd023e75a"
+    },
+    {
+      "name": "runs/native165-build-r1/pause-monitor-stop.json",
+      "bytes": 8260,
+      "SHA256": "b5eb2cda95b3faeac0ed9b2aa0399160a3b9c2385a33862c12f207c2d97904b7"
+    },
+    {
+      "name": "runs/native165-build-r1/pause-monitor.json",
+      "bytes": 8173,
+      "SHA256": "16cab537d68c8ea56da4e3da1750907bc8c050f18158a64867bdb71d9580bade"
+    },
+    {
+      "name": "runs/native165-build-r1.admission.json",
+      "bytes": 3797,
+      "SHA256": "996662d051539afd84774cf209bb650515f542bd5876354a84d8fa8d8db5312e"
+    },
+    {
+      "name": "runs/native165-build-r1.inputs.json",
+      "bytes": 1975,
+      "SHA256": "8779622c8d47d794ed737965f084ddc23bbd37b61f1f91d774f49d5aa5f0c762"
+    },
+    {
+      "name": "runs/native165-build-r1.log",
+      "bytes": 592,
+      "SHA256": "d926e84881f796e24dffe34288e97c10fab48d4cd991aa8708629337d90aeaeb"
+    },
+    {
+      "name": "runs/native165-build-r1.monitor.jsonl",
+      "bytes": 115627,
+      "SHA256": "c8d520120914887637b13062ccf6b33a79da0367b89fbbe28007c9f461d3c663"
+    },
+    {
+      "name": "runs/native165-build-r1.owned-ack.json",
+      "bytes": 34557,
+      "SHA256": "a863ca8e9b7a51bbcc9d03861d61a2fd55f046752c6b6e9ea59f2b9a4195a6be"
+    },
+    {
+      "name": "runs/native165-build-r1.owned-ledger.jsonl",
+      "bytes": 3329,
+      "SHA256": "6402784709a9d87e5a1f55b1351d0d1802fdc99c08271378b94790b159a6d45e"
+    },
+    {
+      "name": "runs/native165-build-r1.process.json",
+      "bytes": 31347,
+      "SHA256": "a9493bcc625d48ac9d90843a71c001fe7a65d9c84d839abe91f327c1c9b2ca60"
+    },
+    {
+      "name": "runs/native165-build-r1.started.json",
+      "bytes": 1650,
+      "SHA256": "056aaff92a33ec08ad9d8822d077675b62de80e4409aa097ca9e3715b5cbcf8c"
+    },
+    {
+      "name": "runs/native165-build-r1.threads.json",
+      "bytes": 190,
+      "SHA256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    {
+      "name": "runs/native165-control-mock-r1/beads-read-quoridor-4lc.165.json",
+      "bytes": 220290,
+      "SHA256": "072527afdb475a5dc9b0283f1a41d05a7e8d36f42883418a8ecdd533219ab6c1"
+    },
+    {
+      "name": "runs/native165-control-mock-r1/beads-read-quoridor-4lc.json",
+      "bytes": 219217,
+      "SHA256": "b019c6d328020d90f1fe382eb1b5d727f7ac85abaeb38ab31e76e06e0e6fb2ed"
+    },
+    {
+      "name": "runs/native165-control-mock-r1/control-summary.json",
+      "bytes": 2341,
+      "SHA256": "420f22280dfeb4265246533ff945faac296dd92b9a42705363e15a803b59cc4a"
+    },
+    {
+      "name": "runs/native165-control-mock-r1/pause-monitor-stop.json",
+      "bytes": 1906,
+      "SHA256": "3ef43f0afcd91932cf12054232a60267a8a770e7b1ff4df236be75de302d40ba"
+    },
+    {
+      "name": "runs/native165-control-mock-r1/pause-monitor.json",
+      "bytes": 1819,
+      "SHA256": "38894531e2b994743bab0b07d9fc219d5eef12989cdd90c3cae36d4d9ade6852"
+    },
+    {
+      "name": "runs/native165-control-mock-r1.admission.json",
+      "bytes": 593,
+      "SHA256": "ad725bfa2f46c2ab5c5c85f3bc38ab5ca38117c0508722e3be25508de480ba32"
+    },
+    {
+      "name": "runs/native165-control-mock-r1.inputs.json",
+      "bytes": 3090,
+      "SHA256": "766c6f8c569b201160a85b237117e62b595d30cd51a4fe4158bcc62340e5a73f"
+    },
+    {
+      "name": "runs/native165-control-mock-r1.log",
+      "bytes": 2436,
+      "SHA256": "f6c04364db5abe6dab0635368619ffd6d6d6ab0a319204e2070bf500967d7da5"
+    },
+    {
+      "name": "runs/native165-control-mock-r1.monitor.jsonl",
+      "bytes": 25767,
+      "SHA256": "154ac4dc21c313f89bf00206be712382f4b39894f427637bedbb15564968a179"
+    },
+    {
+      "name": "runs/native165-control-mock-r1.owned-ack.json",
+      "bytes": 5584,
+      "SHA256": "d370ad523f3f9772a5cfe5f316bb23a514fcc2ec1e30bcb8ce07809010405cc8"
+    },
+    {
+      "name": "runs/native165-control-mock-r1.owned-ledger.jsonl",
+      "bytes": 664,
+      "SHA256": "9e5c98c31db13877dde3e194795edecd6dad8232830f0b36355e71079afbc01e"
+    },
+    {
+      "name": "runs/native165-control-mock-r1.process.json",
+      "bytes": 6741,
+      "SHA256": "0a4c9615d8ec4488252d22e38c936124dd553d70552901dbf905f098d9abfd0d"
+    },
+    {
+      "name": "runs/native165-control-mock-r1.started.json",
+      "bytes": 1663,
+      "SHA256": "278ffdd2f86844cca0a58f049f12bf4002890876429ccd50c54b63dc4760a876"
+    },
+    {
+      "name": "runs/native165-control-mock-r1.threads.json",
+      "bytes": 190,
+      "SHA256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    {
+      "name": "runs/native165-control-mock-r2/beads-read-quoridor-4lc.165.json",
+      "bytes": 220290,
+      "SHA256": "072527afdb475a5dc9b0283f1a41d05a7e8d36f42883418a8ecdd533219ab6c1"
+    },
+    {
+      "name": "runs/native165-control-mock-r2/beads-read-quoridor-4lc.json",
+      "bytes": 219217,
+      "SHA256": "b019c6d328020d90f1fe382eb1b5d727f7ac85abaeb38ab31e76e06e0e6fb2ed"
+    },
+    {
+      "name": "runs/native165-control-mock-r2/control-summary.json",
+      "bytes": 154,
+      "SHA256": "6d78aff11e5f94f7ca8c8aeddeca05f89a8033d3cbc506e1aedcdc71a4625122"
+    },
+    {
+      "name": "runs/native165-control-mock-r2/mock.json",
+      "bytes": 43673,
+      "SHA256": "8e8c698eb22bb05b6bf06758905126533415324b7f14ed5ce06f78704bbf247d"
+    },
+    {
+      "name": "runs/native165-control-mock-r2/pause-monitor-stop.json",
+      "bytes": 1906,
+      "SHA256": "7ed3cfb4814890c71216b7fa2f5771a22263da3ac3c0960daef40678b903e5c0"
+    },
+    {
+      "name": "runs/native165-control-mock-r2/pause-monitor.json",
+      "bytes": 1819,
+      "SHA256": "6e962dad600d798ac824abde496b6f3cdfffa12f99c68b68225a670ab1e23522"
+    },
+    {
+      "name": "runs/native165-control-mock-r2.admission.json",
+      "bytes": 593,
+      "SHA256": "afa107d8350123c8dcc7a00f7c0d8449e964f56b341c02d3a056003704c4f920"
+    },
+    {
+      "name": "runs/native165-control-mock-r2.inputs.json",
+      "bytes": 3090,
+      "SHA256": "04f13977dd549cec23f97d4a671301be5989871d9d3e78089e82bc3f583e0b12"
+    },
+    {
+      "name": "runs/native165-control-mock-r2.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/native165-control-mock-r2.monitor.jsonl",
+      "bytes": 28207,
+      "SHA256": "f5c718d261fa5c25a4cddbfbcba1ef408b06fb4cad1ea1bfa38343199209fd83"
+    },
+    {
+      "name": "runs/native165-control-mock-r2.owned-ack.json",
+      "bytes": 6785,
+      "SHA256": "e87f4dea315a9b97dbac3701cabcc71dc5e6ddd3e3eb224707adba0ace4c5d77"
+    },
+    {
+      "name": "runs/native165-control-mock-r2.owned-ledger.jsonl",
+      "bytes": 664,
+      "SHA256": "cbb0bb578392f0de7fac17fa111c7015850a144670486848e82761ebce08c7db"
+    },
+    {
+      "name": "runs/native165-control-mock-r2.process.json",
+      "bytes": 7845,
+      "SHA256": "f1e70427dfc8179c2eaa0201fe5bfbbddf9132be1782a0267976ee82233efb50"
+    },
+    {
+      "name": "runs/native165-control-mock-r2.started.json",
+      "bytes": 1666,
+      "SHA256": "697ef6375a2ec87fbddf9d1439726f9d5ca8fcdd669f2a58c7a32358b4503829"
+    },
+    {
+      "name": "runs/native165-control-mock-r2.threads.json",
+      "bytes": 190,
+      "SHA256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    {
+      "name": "runs/native165-control-repair-r1/beads-read-quoridor-4lc.165.json",
+      "bytes": 226509,
+      "SHA256": "78df4248915327bcb67cc7440ea4cb2dbeba3138bc0254f5892ccb50353c2140"
+    },
+    {
+      "name": "runs/native165-control-repair-r1/beads-read-quoridor-4lc.json",
+      "bytes": 225436,
+      "SHA256": "79080beeb9367f885822afd58d63b28535703b93c9a8e4aa443baaf0cd102505"
+    },
+    {
+      "name": "runs/native165-control-repair-r1/control-summary.json",
+      "bytes": 178,
+      "SHA256": "835657a7cd3111665439d84e63c3006dc0d844582bbf9d86e27bbf923d9730b0"
+    },
+    {
+      "name": "runs/native165-control-repair-r1/pause-monitor-stop.json",
+      "bytes": 1910,
+      "SHA256": "6328d66f9f6fb36b0f3c046d92b58866ce12535c55faab0ff4d2977bc35c7943"
+    },
+    {
+      "name": "runs/native165-control-repair-r1/pause-monitor.json",
+      "bytes": 1823,
+      "SHA256": "7c6566fcf953cb44a6aa9418269c9b032dda19931b5324059d9520f38c27f575"
+    },
+    {
+      "name": "runs/native165-control-repair-r1/result.json",
+      "bytes": 4618,
+      "SHA256": "6dfac07767a29cc0f4bba9334a9011ada5961bd0b300a318b6006d948c2e376d"
+    },
+    {
+      "name": "runs/native165-control-repair-r1.admission.json",
+      "bytes": 3805,
+      "SHA256": "f780d129d6dc929ee29c488163b4d5a82e273aa923630884c9d4de243c8d296a"
+    },
+    {
+      "name": "runs/native165-control-repair-r1.inputs.json",
+      "bytes": 3930,
+      "SHA256": "a3a240472eadb5651342c35d3c766b0f838092a9b8dc65405b6f5f0c374c8208"
+    },
+    {
+      "name": "runs/native165-control-repair-r1.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/native165-control-repair-r1.monitor.jsonl",
+      "bytes": 25357,
+      "SHA256": "4a82c8b56feef9eb4a67d79de573440eba38519737a9f9f98fc057b74954b46b"
+    },
+    {
+      "name": "runs/native165-control-repair-r1.owned-ack.json",
+      "bytes": 6784,
+      "SHA256": "33b4c5ff0eea57e310107c1797ab78d8ef337d9a268d3447aa87eabaa405e14f"
+    },
+    {
+      "name": "runs/native165-control-repair-r1.owned-ledger.jsonl",
+      "bytes": 664,
+      "SHA256": "2004c7c47bb246ff99f6f3b383f6356d7800eee35cbf562845ea7c9c8caf9435"
+    },
+    {
+      "name": "runs/native165-control-repair-r1.process.json",
+      "bytes": 7891,
+      "SHA256": "eb05ea3b82c0a0340057a5fb8dfaf0472706556ba78d3967b22e775046fc3680"
+    },
+    {
+      "name": "runs/native165-control-repair-r1.started.json",
+      "bytes": 1766,
+      "SHA256": "aa9915b68fb534d156a586018a8fcdcf3cdf092488a351da50eee19d81bda52e"
+    },
+    {
+      "name": "runs/native165-control-repair-r1.threads.json",
+      "bytes": 190,
+      "SHA256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    {
+      "name": "runs/native165-mechanism-r1/beads-read-quoridor-4lc.165.json",
+      "bytes": 220290,
+      "SHA256": "072527afdb475a5dc9b0283f1a41d05a7e8d36f42883418a8ecdd533219ab6c1"
+    },
+    {
+      "name": "runs/native165-mechanism-r1/beads-read-quoridor-4lc.json",
+      "bytes": 219217,
+      "SHA256": "b019c6d328020d90f1fe382eb1b5d727f7ac85abaeb38ab31e76e06e0e6fb2ed"
+    },
+    {
+      "name": "runs/native165-mechanism-r1/control-summary.json",
+      "bytes": 181,
+      "SHA256": "78b316bead0c9a71b59cbe5176ad366e45d2e4dc65775c224b05b8e212b47f6c"
+    },
+    {
+      "name": "runs/native165-mechanism-r1/pause-monitor-stop.json",
+      "bytes": 3500,
+      "SHA256": "e36e45dd506c4ee26f2e909b62180e081782103469291f58d9ed09d954788f4a"
+    },
+    {
+      "name": "runs/native165-mechanism-r1/pause-monitor.json",
+      "bytes": 3413,
+      "SHA256": "18116323b20288ed6f5b91c6de2f3b3d23549c6a7b8f5e0baca71e52562c2517"
+    },
+    {
+      "name": "runs/native165-mechanism-r1/result.json",
+      "bytes": 13141705,
+      "SHA256": "dee3d3b52839b3c8ba50c082abba835be6f0784c61617a37ccfa550811113286"
+    },
+    {
+      "name": "runs/native165-mechanism-r1.admission.json",
+      "bytes": 3797,
+      "SHA256": "4fb4c3f274e86fe014b1be771c171162a1e4a84b6d18281fc42a9e40cc4bb90d"
+    },
+    {
+      "name": "runs/native165-mechanism-r1.inputs.json",
+      "bytes": 3128,
+      "SHA256": "cb2106cee1d131f83863fed365f147f6d9a58d9d8fba56854f6032ac07d61425"
+    },
+    {
+      "name": "runs/native165-mechanism-r1.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/native165-mechanism-r1.monitor.jsonl",
+      "bytes": 46156,
+      "SHA256": "ad082491535374bd598ead5dc254a7d504f5c8b22b4d3b2e0fab2e56e67c8812"
+    },
+    {
+      "name": "runs/native165-mechanism-r1.owned-ack.json",
+      "bytes": 13321,
+      "SHA256": "6f46bab360a47084278bcfa03cff0a8d6a12890bbbc18bfc24acc5e386102776"
+    },
+    {
+      "name": "runs/native165-mechanism-r1.owned-ledger.jsonl",
+      "bytes": 1329,
+      "SHA256": "a822526ec96beac7bf661b18d89c678ffe2713cc92f511ed407adffcdb32e21a"
+    },
+    {
+      "name": "runs/native165-mechanism-r1.process.json",
+      "bytes": 13343,
+      "SHA256": "58bbeeababa05f2657a8436d620a103eea070755009fabd20363003b6dedd6fe"
+    },
+    {
+      "name": "runs/native165-mechanism-r1.started.json",
+      "bytes": 1726,
+      "SHA256": "36b8a659b355807e04886b47ec5a116cd59a7ae025ea62b25a772e8e1d35ebb7"
+    },
+    {
+      "name": "runs/native165-mechanism-r1.threads.json",
+      "bytes": 190,
+      "SHA256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    {
+      "name": "runs/native165-oracle-r1/beads-read-quoridor-4lc.json",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/native165-oracle-r1.admission.json",
+      "bytes": 586,
+      "SHA256": "d14bc2c85f9801ca0ee05f81f691155e7217bb8c8a6691ec8fefba0fc76db096"
+    },
+    {
+      "name": "runs/native165-oracle-r1.inputs.json",
+      "bytes": 2450,
+      "SHA256": "18eb8be95bfdf77ec1d2b5afbba8b465fe0693e475fd03f818fede59f4dbde99"
+    },
+    {
+      "name": "runs/native165-oracle-r1.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/native165-oracle-r1.monitor.jsonl",
+      "bytes": 2259,
+      "SHA256": "b14066d1a60a9464cd1a6bef610f75df9ecc162f197b89fc247c0a1c438a6d1e"
+    },
+    {
+      "name": "runs/native165-oracle-r1.owned-ack.json",
+      "bytes": 3299,
+      "SHA256": "7b8569383f1955778ec89cb5ab7fd6439b77e92e0b2c18a5b5ad1cd040756e5d"
+    },
+    {
+      "name": "runs/native165-oracle-r1.owned-ledger.jsonl",
+      "bytes": 331,
+      "SHA256": "81532f3036e95a406e708ccc114c2885c6ab5cdf0780bbb0606ac1a719fcee58"
+    },
+    {
+      "name": "runs/native165-oracle-r1.process.json",
+      "bytes": 5820,
+      "SHA256": "feae726dba4105686f1c1ec8dbdb6da678c3bfbfcf6a5e254cd58acc9b369543"
+    },
+    {
+      "name": "runs/native165-oracle-r1.started.json",
+      "bytes": 1651,
+      "SHA256": "95523a6fb74d9f156e5a6a5de651914e019a994459070d10ee0631ee9f2201d4"
+    },
+    {
+      "name": "runs/native165-oracle-r1.threads.json",
+      "bytes": 190,
+      "SHA256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    {
+      "name": "runs/native165-oracle-r2/beads-read-quoridor-4lc.165.json",
+      "bytes": 219653,
+      "SHA256": "2ccc2196a146d13dfc5473f1c8f20dffba3a20d2ff2c631acd4661972262baef"
+    },
+    {
+      "name": "runs/native165-oracle-r2/beads-read-quoridor-4lc.json",
+      "bytes": 218580,
+      "SHA256": "011253d94ee64553472f57cb88763a55cbf858fb2aa4ae8be9c0e596da94dc8d"
+    },
+    {
+      "name": "runs/native165-oracle-r2/control-summary.json",
+      "bytes": 696,
+      "SHA256": "d9d11779f05d0638384f9b71130d9250d7a604074f65ad8a4f0b39b112013164"
+    },
+    {
+      "name": "runs/native165-oracle-r2/pause-monitor-stop.json",
+      "bytes": 1894,
+      "SHA256": "441688ef3f74df36f37006af4e5a651bfc3e0df031b0ce374f2dd6d6ff1002fa"
+    },
+    {
+      "name": "runs/native165-oracle-r2/pause-monitor.json",
+      "bytes": 1807,
+      "SHA256": "f1df897413c15304f1a76533b8130e523d276dfb7b68f6183177380540bb4cbc"
+    },
+    {
+      "name": "runs/native165-oracle-r2.admission.json",
+      "bytes": 593,
+      "SHA256": "57d4f7697ebe551e4ba0ddbaba48dbfbd73ee858302841842e0a004c0f0bb195"
+    },
+    {
+      "name": "runs/native165-oracle-r2.inputs.json",
+      "bytes": 2609,
+      "SHA256": "c5af88fb868456772e84fda6515463130dbf00a83d89f3d048e8c230a11abf46"
+    },
+    {
+      "name": "runs/native165-oracle-r2.log",
+      "bytes": 791,
+      "SHA256": "0b63155ac55a9c5d2ee38d51b0c0e4a908d3179aa1436a6941999822bc33d66f"
+    },
+    {
+      "name": "runs/native165-oracle-r2.monitor.jsonl",
+      "bytes": 13813,
+      "SHA256": "774eecbdd663e11c78de9d265565887ccd3fcbfb058d254b7437ca14c9c31886"
+    },
+    {
+      "name": "runs/native165-oracle-r2.owned-ack.json",
+      "bytes": 5981,
+      "SHA256": "c6e478f40de375233249e4e7edea1e646a0c4fa976957fa1261754affa5dacf0"
+    },
+    {
+      "name": "runs/native165-oracle-r2.owned-ledger.jsonl",
+      "bytes": 663,
+      "SHA256": "58ef7f670b9a7350e886df7caa4993a45182535b07a8830706a6150db620ce26"
+    },
+    {
+      "name": "runs/native165-oracle-r2.process.json",
+      "bytes": 7049,
+      "SHA256": "ae890edbf1d4fbbc8e24b1c295bd5211384624d6dd8a27807593bc75a341372b"
+    },
+    {
+      "name": "runs/native165-oracle-r2.started.json",
+      "bytes": 1654,
+      "SHA256": "60f8a43bea016ca51e2ee85ce0b81283e4669883e99c274f9a354058d8e5cd7e"
+    },
+    {
+      "name": "runs/native165-oracle-r2.threads.json",
+      "bytes": 190,
+      "SHA256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    {
+      "name": "runs/native165-oracle-r3/beads-read-quoridor-4lc.165.json",
+      "bytes": 219653,
+      "SHA256": "2ccc2196a146d13dfc5473f1c8f20dffba3a20d2ff2c631acd4661972262baef"
+    },
+    {
+      "name": "runs/native165-oracle-r3/beads-read-quoridor-4lc.json",
+      "bytes": 218580,
+      "SHA256": "011253d94ee64553472f57cb88763a55cbf858fb2aa4ae8be9c0e596da94dc8d"
+    },
+    {
+      "name": "runs/native165-oracle-r3/control-summary.json",
+      "bytes": 157,
+      "SHA256": "7768f61ca7312f560c0d1bbd8bc2041a5de73492fa5650b8a67c51c60286e928"
+    },
+    {
+      "name": "runs/native165-oracle-r3/oracle.json",
+      "bytes": 6726,
+      "SHA256": "c1fb1ba94eae58135326e7346acf53e8afd5ed7fae3f37b682f93cfdc8e3c34a"
+    },
+    {
+      "name": "runs/native165-oracle-r3/pause-monitor-stop.json",
+      "bytes": 1894,
+      "SHA256": "e901d2e42658e3cca007e17476ecedd19cb11addf624bd6be745597c3e3d4b39"
+    },
+    {
+      "name": "runs/native165-oracle-r3/pause-monitor.json",
+      "bytes": 1807,
+      "SHA256": "870b751e3fe70bfe513936d2103b5f950326956f0f9b8848bb15271270980d0f"
+    },
+    {
+      "name": "runs/native165-oracle-r3.admission.json",
+      "bytes": 593,
+      "SHA256": "df53f9c8169d97b7ae469ba3b0b76f5fc18081b6897a2a13adf58b0eb6ebff14"
+    },
+    {
+      "name": "runs/native165-oracle-r3.inputs.json",
+      "bytes": 2609,
+      "SHA256": "1094964b43546c06ea580a6bcc908050b245311fafb2765b10d7654796b22f3c"
+    },
+    {
+      "name": "runs/native165-oracle-r3.log",
+      "bytes": 35,
+      "SHA256": "9ce12f49631e6893daf6bfc7b097ad4c711d0f23e89372de032cabc69df46e8f"
+    },
+    {
+      "name": "runs/native165-oracle-r3.monitor.jsonl",
+      "bytes": 19212,
+      "SHA256": "407a367622a9d3087b7bd7fb24f247ce712bd6dced25fdb4842123fa0d19a96e"
+    },
+    {
+      "name": "runs/native165-oracle-r3.owned-ack.json",
+      "bytes": 5981,
+      "SHA256": "7404edc351de5174c17d1fcbdf0b9c96bf6f5eb04e06e44aa89a3945d2bf78d9"
+    },
+    {
+      "name": "runs/native165-oracle-r3.owned-ledger.jsonl",
+      "bytes": 663,
+      "SHA256": "ef00c716d64b73d9c15c6ad8f3bd61cef3ed988307dac09a2cebff02baa58dd3"
+    },
+    {
+      "name": "runs/native165-oracle-r3.process.json",
+      "bytes": 7089,
+      "SHA256": "3eb6917fb10c6028f12c1163c05c19bb2ae5a5a3598059ff9b0b0c76de26a08c"
+    },
+    {
+      "name": "runs/native165-oracle-r3.started.json",
+      "bytes": 1653,
+      "SHA256": "2e3ba49ce0d458f6201294e272d87a309c93b09cabab947a50087344dce99da7"
+    },
+    {
+      "name": "runs/native165-oracle-r3.threads.json",
+      "bytes": 190,
+      "SHA256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    {
+      "name": "runs/native165-pair01-r1/beads-read-quoridor-4lc.165.json",
+      "bytes": 221597,
+      "SHA256": "d6e12eee5aa1cc84aaa2e79a84e89c36437683ab4c40b22307fa7b1de08f7b69"
+    },
+    {
+      "name": "runs/native165-pair01-r1/beads-read-quoridor-4lc.json",
+      "bytes": 220524,
+      "SHA256": "6ee087fd7dfb785dd99eb191eb0d52df549eb4ef014b17b813cd078ac17bcd3e"
+    },
+    {
+      "name": "runs/native165-pair01-r1/control-summary.json",
+      "bytes": 203,
+      "SHA256": "0c827de03d16580f24d45cdeddb02e2d4ec3bd2dd3ca91f61f3e881d241312e7"
+    },
+    {
+      "name": "runs/native165-pair01-r1/games-progress.json",
+      "bytes": 73470,
+      "SHA256": "8a50014256151f7d0b2e4b67d5e469f3c8f393ab12d8d5af78cfe37beafff216"
+    },
+    {
+      "name": "runs/native165-pair01-r1/journal.jsonl",
+      "bytes": 348057,
+      "SHA256": "b6b4bbb8e81c01c12e2647c0d523d0dc19725e99ccdc3355b6fb2f1282d234f2"
+    },
+    {
+      "name": "runs/native165-pair01-r1/pause-monitor-stop.json",
+      "bytes": 24210,
+      "SHA256": "fa19201d4ff212610c7b7745b128825341f2fd5468b73213f40c19140f890bc4"
+    },
+    {
+      "name": "runs/native165-pair01-r1/pause-monitor.json",
+      "bytes": 24123,
+      "SHA256": "345641aba1d8d71cd6c3a93339879bbcf1eaf48fe347fc6207fb80c3f2836eae"
+    },
+    {
+      "name": "runs/native165-pair01-r1/result.json",
+      "bytes": 81142,
+      "SHA256": "d2362c69c52ef75cc1080c58b603a23d9f68466b80a320c9f20f79ed615f872a"
+    },
+    {
+      "name": "runs/native165-pair01-r1.admission.json",
+      "bytes": 3797,
+      "SHA256": "02bdf8115ea9ef961b8aa11692c10317978f812217410eb08a1849cb8ef6e6a3"
+    },
+    {
+      "name": "runs/native165-pair01-r1.inputs.json",
+      "bytes": 3443,
+      "SHA256": "03a282346924743b68af866640ba2477e064e10bf772e40ce833f25382c2a30f"
+    },
+    {
+      "name": "runs/native165-pair01-r1.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/native165-pair01-r1.monitor.jsonl",
+      "bytes": 382955,
+      "SHA256": "d1bc54bfff8ff16e1af47b2253efe307e7bb2fa77f02d9891b21e996f78f8a2a"
+    },
+    {
+      "name": "runs/native165-pair01-r1.owned-ack.json",
+      "bytes": 80781,
+      "SHA256": "df31299c7d276b7a434e43e13d340adac8d0065df4d51f403aa2a8f1a31bcb32"
+    },
+    {
+      "name": "runs/native165-pair01-r1.owned-ledger.jsonl",
+      "bytes": 10008,
+      "SHA256": "556122d909cae08bd2ef8170e8fc75c9a0815e71ed73cf05c9f5c283bab44c54"
+    },
+    {
+      "name": "runs/native165-pair01-r1.process.json",
+      "bytes": 68716,
+      "SHA256": "af00f54a795427552e4807e4835886a4b4f724f8da8a61987c39116f6dfddbcf"
+    },
+    {
+      "name": "runs/native165-pair01-r1.started.json",
+      "bytes": 1721,
+      "SHA256": "4173f1f69245e165873922c4aeab2593777c40f1336fe16ec23c163ab9741512"
+    },
+    {
+      "name": "runs/native165-pair01-r1.threads.json",
+      "bytes": 190,
+      "SHA256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    {
+      "name": "runs/native165-pair02-r1/beads-read-quoridor-4lc.165.json",
+      "bytes": 221597,
+      "SHA256": "d6e12eee5aa1cc84aaa2e79a84e89c36437683ab4c40b22307fa7b1de08f7b69"
+    },
+    {
+      "name": "runs/native165-pair02-r1/beads-read-quoridor-4lc.json",
+      "bytes": 220524,
+      "SHA256": "6ee087fd7dfb785dd99eb191eb0d52df549eb4ef014b17b813cd078ac17bcd3e"
+    },
+    {
+      "name": "runs/native165-pair02-r1/control-summary.json",
+      "bytes": 203,
+      "SHA256": "3c13e07955d2ed99929d068b269f04495d68f4c6ee70075a6fa8f2e24a542652"
+    },
+    {
+      "name": "runs/native165-pair02-r1/games-progress.json",
+      "bytes": 75760,
+      "SHA256": "a8a061a30ae21566c8ca319cd374d35bd46ece9c722e949a78d78e9eb374d41e"
+    },
+    {
+      "name": "runs/native165-pair02-r1/journal.jsonl",
+      "bytes": 483579,
+      "SHA256": "6ea6cbf1ce8990ac82aedafc95ec8267cac9eb64eaf4ccca972f5fc4e396425f"
+    },
+    {
+      "name": "runs/native165-pair02-r1/pause-monitor-stop.json",
+      "bytes": 33774,
+      "SHA256": "f8f880a53587a5eb360d121897aafad5198b0bddb3504ed56d2abe3306263479"
+    },
+    {
+      "name": "runs/native165-pair02-r1/pause-monitor.json",
+      "bytes": 33687,
+      "SHA256": "76502c07742413c08dcd9adcf149d36efd4f9b540f829aa5bb74b99142ed6961"
+    },
+    {
+      "name": "runs/native165-pair02-r1/result.json",
+      "bytes": 83432,
+      "SHA256": "23acbc0667a18dbf01db4346d1f31142132d1034e7ba9c8fb03c01147e3d8829"
+    },
+    {
+      "name": "runs/native165-pair02-r1.admission.json",
+      "bytes": 3805,
+      "SHA256": "d6e36a0b848c8eea6457e423bb14f07e66f589042916f143d71e67bd69ddc0bb"
+    },
+    {
+      "name": "runs/native165-pair02-r1.inputs.json",
+      "bytes": 3443,
+      "SHA256": "2e20f11f782fc904705639ed08883a7adb004037a0682ea0afe04d31d50ae868"
+    },
+    {
+      "name": "runs/native165-pair02-r1.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/native165-pair02-r1.monitor.jsonl",
+      "bytes": 517448,
+      "SHA256": "eec702d57f4261234d482d00843eb50ef387a12037027061d3d2b5485119c4d1"
+    },
+    {
+      "name": "runs/native165-pair02-r1.owned-ack.json",
+      "bytes": 111283,
+      "SHA256": "a30fbb9f6a9012d446035f82d09beadc8b9434e2c9db95ca432f65b7e0cd518f"
+    },
+    {
+      "name": "runs/native165-pair02-r1.owned-ledger.jsonl",
+      "bytes": 14014,
+      "SHA256": "9b1deff20de0ccfa04a41c0d1478282234eb6126dacc8fba7772fa373915c709"
+    },
+    {
+      "name": "runs/native165-pair02-r1.process.json",
+      "bytes": 93583,
+      "SHA256": "43adab23c44c1d46ccd6e402c7eb57f2d3953f01307d0b2716c7a620463b45de"
+    },
+    {
+      "name": "runs/native165-pair02-r1.started.json",
+      "bytes": 1721,
+      "SHA256": "2ecd17aac651b23ddde11f3f217a19b52c5fb72a2c85523ed30a4764b3c73d73"
+    },
+    {
+      "name": "runs/native165-pair02-r1.threads.json",
+      "bytes": 190,
+      "SHA256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    {
+      "name": "runs/native165-pair03-r1/beads-read-quoridor-4lc.165.json",
+      "bytes": 221597,
+      "SHA256": "d6e12eee5aa1cc84aaa2e79a84e89c36437683ab4c40b22307fa7b1de08f7b69"
+    },
+    {
+      "name": "runs/native165-pair03-r1/beads-read-quoridor-4lc.json",
+      "bytes": 220524,
+      "SHA256": "6ee087fd7dfb785dd99eb191eb0d52df549eb4ef014b17b813cd078ac17bcd3e"
+    },
+    {
+      "name": "runs/native165-pair03-r1/control-summary.json",
+      "bytes": 202,
+      "SHA256": "80accd4beda0aa01ddb3b3d47ea6c4d72aadd36c662f9b5f8032379e46bfffd5"
+    },
+    {
+      "name": "runs/native165-pair03-r1/games-progress.json",
+      "bytes": 70681,
+      "SHA256": "5046e71710b9934cbe191f307753449803d09beeaff9b39acbb52611fa4574e9"
+    },
+    {
+      "name": "runs/native165-pair03-r1/journal.jsonl",
+      "bytes": 313060,
+      "SHA256": "96a99bd4890fbf308d13c69c446619fc097feacf94f3dc4bed337af645cc5686"
+    },
+    {
+      "name": "runs/native165-pair03-r1/pause-monitor-stop.json",
+      "bytes": 22616,
+      "SHA256": "f93a8ce723da4ea83d27ee582a0be2dc960f5c71c5a0342e161c60ce33d894d7"
+    },
+    {
+      "name": "runs/native165-pair03-r1/pause-monitor.json",
+      "bytes": 22529,
+      "SHA256": "a8ab2cb107bfe30494b1c07e9c53083fa364da166f9d4d1f07f88a6d9f661911"
+    },
+    {
+      "name": "runs/native165-pair03-r1/result.json",
+      "bytes": 78351,
+      "SHA256": "3a7aa1a9f43db2a440d15b12e90991973037c4240a31e26e372fdabb98227b86"
+    },
+    {
+      "name": "runs/native165-pair03-r1.admission.json",
+      "bytes": 3804,
+      "SHA256": "866d0bb941f24458622ed757c93cb97c3793cce63f283c352f812f3207f8442d"
+    },
+    {
+      "name": "runs/native165-pair03-r1.inputs.json",
+      "bytes": 3443,
+      "SHA256": "09a93df7dd7b3bd2d4b0010dbf333f3510f4d6eddb3f9da71073ea44fa5b42ed"
+    },
+    {
+      "name": "runs/native165-pair03-r1.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/native165-pair03-r1.monitor.jsonl",
+      "bytes": 337247,
+      "SHA256": "6c3cbf126d77d652d9e78cd8f83b56fc953bf8beccea90a25ee515b225b8ff8b"
+    },
+    {
+      "name": "runs/native165-pair03-r1.owned-ack.json",
+      "bytes": 72245,
+      "SHA256": "a5c63eaef924e015483d7b406aa8a4d76374a4ada6ec8c189455fce4c5e69192"
+    },
+    {
+      "name": "runs/native165-pair03-r1.owned-ledger.jsonl",
+      "bytes": 9339,
+      "SHA256": "d67a7cfa14bb3d0eba3c6bdfd37a5d7ce2690f2cd259339a086ee6ea4312c7f5"
+    },
+    {
+      "name": "runs/native165-pair03-r1.process.json",
+      "bytes": 61234,
+      "SHA256": "265cb8985a8438bfd7a8ee31937464f40dc2fe01ac6726f209cdfcf281b54ee2"
+    },
+    {
+      "name": "runs/native165-pair03-r1.started.json",
+      "bytes": 1720,
+      "SHA256": "2c5ba668e454388ff33d71a78f9d9cc1687047a5ddb301a737195714de630eae"
+    },
+    {
+      "name": "runs/native165-pair03-r1.threads.json",
+      "bytes": 190,
+      "SHA256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    {
+      "name": "runs/native165-pair04-r1/beads-read-quoridor-4lc.165.json",
+      "bytes": 221597,
+      "SHA256": "d6e12eee5aa1cc84aaa2e79a84e89c36437683ab4c40b22307fa7b1de08f7b69"
+    },
+    {
+      "name": "runs/native165-pair04-r1/beads-read-quoridor-4lc.json",
+      "bytes": 220524,
+      "SHA256": "6ee087fd7dfb785dd99eb191eb0d52df549eb4ef014b17b813cd078ac17bcd3e"
+    },
+    {
+      "name": "runs/native165-pair04-r1/control-summary.json",
+      "bytes": 202,
+      "SHA256": "c8752b91a6c7e99556c21fa5fe5bf0b9214180faa77e4d65cc12450677a3e379"
+    },
+    {
+      "name": "runs/native165-pair04-r1/games-progress.json",
+      "bytes": 68399,
+      "SHA256": "69d34cf28708108e4ebc8366d9710920496a6b6aea6d224dba3bccbdc7110e00"
+    },
+    {
+      "name": "runs/native165-pair04-r1/journal.jsonl",
+      "bytes": 286117,
+      "SHA256": "9d1162ec9d1b4427edca77f85330f840a40797db0ce4277aea97c679ff84608a"
+    },
+    {
+      "name": "runs/native165-pair04-r1/pause-monitor-stop.json",
+      "bytes": 24210,
+      "SHA256": "ad58e869f412d745da28e8887bd5a0d979d73dc93c95a638b383d1008c219b02"
+    },
+    {
+      "name": "runs/native165-pair04-r1/pause-monitor.json",
+      "bytes": 24123,
+      "SHA256": "80c4719ede751771f16dfdca4cfde8d3cb469f66a9fc8961c50277157dd3adc4"
+    },
+    {
+      "name": "runs/native165-pair04-r1/result.json",
+      "bytes": 76069,
+      "SHA256": "68fa745a8a9dc1e8a1775fe695a0efa6a573a4a139bcafcc668fea416c46f7b4"
+    },
+    {
+      "name": "runs/native165-pair04-r1.admission.json",
+      "bytes": 3814,
+      "SHA256": "13ad2a151514273de9a501a5c91f051e7e081a7309f0adcd23531ccfd771af43"
+    },
+    {
+      "name": "runs/native165-pair04-r1.inputs.json",
+      "bytes": 3575,
+      "SHA256": "4941cb1eb9d080e7578b9b40306cfb50b6404a049597d34196b1d8f2de530d74"
+    },
+    {
+      "name": "runs/native165-pair04-r1.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/native165-pair04-r1.monitor.jsonl",
+      "bytes": 381240,
+      "SHA256": "66dba45dee548871062203fe05e39f57ad342b98e3137850addacc3f8ce01e4f"
+    },
+    {
+      "name": "runs/native165-pair04-r1.owned-ack.json",
+      "bytes": 84775,
+      "SHA256": "84594e18b456287ec6c3f9af811ba9808995dd78f7c68d212605bf3f102b122b"
+    },
+    {
+      "name": "runs/native165-pair04-r1.owned-ledger.jsonl",
+      "bytes": 10008,
+      "SHA256": "73d113febb5ebe487afd328b7d8f3c99307283804362de09f7bffd66654564b6"
+    },
+    {
+      "name": "runs/native165-pair04-r1.process.json",
+      "bytes": 72324,
+      "SHA256": "baf3869589aba46d4a5f328e4080786690c39e504f8e2108b6969cfae7f6bbd8"
+    },
+    {
+      "name": "runs/native165-pair04-r1.started.json",
+      "bytes": 1688,
+      "SHA256": "3bc49cb1d48d15b9783e9adbb5ad3984ec7a25a606494828b61e1562f4e2c64f"
+    },
+    {
+      "name": "runs/native165-pair04-r1.threads.json",
+      "bytes": 190,
+      "SHA256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    {
+      "name": "runs/native165-pair05-r1/beads-read-quoridor-4lc.165.json",
+      "bytes": 222122,
+      "SHA256": "8b203c7ebc70b7c2f8ccdca41c57a9d36a5362faeb2c448f67d85a0c3c5d4ce9"
+    },
+    {
+      "name": "runs/native165-pair05-r1/beads-read-quoridor-4lc.json",
+      "bytes": 221050,
+      "SHA256": "0320a2a57e1c0beb1ea9fa3e38fa178187ba0c33318c8ecda8f8440dd2a44816"
+    },
+    {
+      "name": "runs/native165-pair05-r1/control-summary.json",
+      "bytes": 203,
+      "SHA256": "7df2efff10d66da5508410a101dbeda07712c58981a3d2c1a4f29b96664d4cdb"
+    },
+    {
+      "name": "runs/native165-pair05-r1/games-progress.json",
+      "bytes": 76547,
+      "SHA256": "115e1eb3acb85e2a33b7185a62c38497e82c366aa4d31a7876091572c673b54b"
+    },
+    {
+      "name": "runs/native165-pair05-r1/journal.jsonl",
+      "bytes": 455345,
+      "SHA256": "1c94b42526aa0c45c2e79c6e6141ccbe1bc26966451d8ae6b021c730edb23f1e"
+    },
+    {
+      "name": "runs/native165-pair05-r1/pause-monitor-stop.json",
+      "bytes": 27398,
+      "SHA256": "8766d0b0f9e137235716982c211a13e35caff02dc6b84bcf21c2fb2d1b630dd5"
+    },
+    {
+      "name": "runs/native165-pair05-r1/pause-monitor.json",
+      "bytes": 27311,
+      "SHA256": "856e83aeb2460044b3787518d59876fe6eef2cf0b1b10544a3dbcbc60bb4ba4a"
+    },
+    {
+      "name": "runs/native165-pair05-r1/result.json",
+      "bytes": 84219,
+      "SHA256": "25acb4777a64f816b67a452a6ab923b4a2bf75539fe3db4e7a0be50fdff7005d"
+    },
+    {
+      "name": "runs/native165-pair05-r1.admission.json",
+      "bytes": 3805,
+      "SHA256": "5e24711fef539459af2d2d5d875fb101706c97f49df2a53a4400a23c244cac8f"
+    },
+    {
+      "name": "runs/native165-pair05-r1.inputs.json",
+      "bytes": 3575,
+      "SHA256": "4941cb1eb9d080e7578b9b40306cfb50b6404a049597d34196b1d8f2de530d74"
+    },
+    {
+      "name": "runs/native165-pair05-r1.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/native165-pair05-r1.monitor.jsonl",
+      "bytes": 444631,
+      "SHA256": "42080ebf3a3a804510b25edf6408dd0ecdaa3f34ef32add912baa636cc418322"
+    },
+    {
+      "name": "runs/native165-pair05-r1.owned-ack.json",
+      "bytes": 93488,
+      "SHA256": "f28e6e845c9de551370660f1ca5f2374ca2a68bfaed8e744dc8ca61791775e96"
+    },
+    {
+      "name": "runs/native165-pair05-r1.owned-ledger.jsonl",
+      "bytes": 11344,
+      "SHA256": "f4b9018fb7b9b159d415de69454472cefc61751c8e8d578430eb140b9cf986ea"
+    },
+    {
+      "name": "runs/native165-pair05-r1.process.json",
+      "bytes": 79342,
+      "SHA256": "0b0587b781657c31eb39fa5ba54b32b205123a783cda386e0cc0e21992556592"
+    },
+    {
+      "name": "runs/native165-pair05-r1.started.json",
+      "bytes": 1688,
+      "SHA256": "5015ba8c59a86436638fadb98b8dc5e8be43d4f2017b2f0e9ff6cdf7222ab296"
+    },
+    {
+      "name": "runs/native165-pair05-r1.threads.json",
+      "bytes": 190,
+      "SHA256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    {
+      "name": "runs/native165-pair06-r1/beads-read-quoridor-4lc.165.json",
+      "bytes": 222122,
+      "SHA256": "8b203c7ebc70b7c2f8ccdca41c57a9d36a5362faeb2c448f67d85a0c3c5d4ce9"
+    },
+    {
+      "name": "runs/native165-pair06-r1/beads-read-quoridor-4lc.json",
+      "bytes": 221050,
+      "SHA256": "0320a2a57e1c0beb1ea9fa3e38fa178187ba0c33318c8ecda8f8440dd2a44816"
+    },
+    {
+      "name": "runs/native165-pair06-r1/control-summary.json",
+      "bytes": 203,
+      "SHA256": "3a94cd0029db9feade1080147c6e1aa2e666394eb6d84e50f7f41771752f069c"
+    },
+    {
+      "name": "runs/native165-pair06-r1/games-progress.json",
+      "bytes": 71187,
+      "SHA256": "525ef5972f32fea884c04c2b9fbf7954cc5b60fa7cdbd15e09ec103f733c66ba"
+    },
+    {
+      "name": "runs/native165-pair06-r1/journal.jsonl",
+      "bytes": 371262,
+      "SHA256": "e6dfada4fc30e34739e9c9b7cd019ae263ecbeeb7352e7460478960eac27e047"
+    },
+    {
+      "name": "runs/native165-pair06-r1/pause-monitor-stop.json",
+      "bytes": 27398,
+      "SHA256": "1f3ed7a71567a472f65021b9c64e3af7a67c7b48b58c5429627b4dd440540715"
+    },
+    {
+      "name": "runs/native165-pair06-r1/pause-monitor.json",
+      "bytes": 27311,
+      "SHA256": "fb6da0d0483b6f934aeaa3800f14f433cad462dfd0dda2b9c66f68b2c724a745"
+    },
+    {
+      "name": "runs/native165-pair06-r1/result.json",
+      "bytes": 78856,
+      "SHA256": "267bc209435f697431f316cb3c44c942718cc8160978d90488950750b1c56e49"
+    },
+    {
+      "name": "runs/native165-pair06-r1.admission.json",
+      "bytes": 3814,
+      "SHA256": "20635306e7e42f50a6e12942a406340509dc4e9aa26db75f085688773cc166cd"
+    },
+    {
+      "name": "runs/native165-pair06-r1.inputs.json",
+      "bytes": 3732,
+      "SHA256": "42d1f6ec21a589e10a48cfc68b528e3bbb5eee9777978969a946022be6397058"
+    },
+    {
+      "name": "runs/native165-pair06-r1.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/native165-pair06-r1.monitor.jsonl",
+      "bytes": 451859,
+      "SHA256": "e06cfff9831224be7127f7a4ac0218ee8fe86a7a6540a609028556e2330ac158"
+    },
+    {
+      "name": "runs/native165-pair06-r1.owned-ack.json",
+      "bytes": 91080,
+      "SHA256": "53b41a3b176cc9f4b137579610d46f0697979d4c22a3ab320e07090aed7e1443"
+    },
+    {
+      "name": "runs/native165-pair06-r1.owned-ledger.jsonl",
+      "bytes": 11345,
+      "SHA256": "79ccf2e1032799bf8c822091955505fefc9b3d16cdba241dad090d0d7590d824"
+    },
+    {
+      "name": "runs/native165-pair06-r1.process.json",
+      "bytes": 77203,
+      "SHA256": "dec5a4c776885fd9ff3d44afd1e9d7f25fa4aa7492a1234b1c858278e6b3c603"
+    },
+    {
+      "name": "runs/native165-pair06-r1.started.json",
+      "bytes": 1687,
+      "SHA256": "56d97ee284560be1bf8c6f907218a3b787ecfbffa4fbdabf07489e73301b7766"
+    },
+    {
+      "name": "runs/native165-pair06-r1.threads.json",
+      "bytes": 190,
+      "SHA256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    {
+      "name": "runs/native165-pair07-r1/beads-read-quoridor-4lc.165.json",
+      "bytes": 222949,
+      "SHA256": "04ae00b4bab026d410b275e5b7b6736b54ebb68d3730370673c654bfed2ef215"
+    },
+    {
+      "name": "runs/native165-pair07-r1/beads-read-quoridor-4lc.json",
+      "bytes": 221876,
+      "SHA256": "4624b92b69104dad5434260c6d798433780626532c8f79b6bb4b611d2f40e241"
+    },
+    {
+      "name": "runs/native165-pair07-r1/control-summary.json",
+      "bytes": 203,
+      "SHA256": "46d021b2a9ff155a1ecda78196369f788fbd9d17fe84c308ee9e86e571434077"
+    },
+    {
+      "name": "runs/native165-pair07-r1/games-progress.json",
+      "bytes": 71275,
+      "SHA256": "64cbcd23566fdf9600905539a6fb5fd1ce9ce979f6747a5f7396af003d5553ff"
+    },
+    {
+      "name": "runs/native165-pair07-r1/journal.jsonl",
+      "bytes": 405592,
+      "SHA256": "0d2f345a97a84240633c7fb5093ec9c3e4139fc750dea885cfdd97e7287cfa04"
+    },
+    {
+      "name": "runs/native165-pair07-r1/pause-monitor-stop.json",
+      "bytes": 24210,
+      "SHA256": "abb47ed7caeed3c7624596bc17205154837771eaf2575dfeb2a7549996e9f03a"
+    },
+    {
+      "name": "runs/native165-pair07-r1/pause-monitor.json",
+      "bytes": 24123,
+      "SHA256": "d4f2fa3a8fba111b98113e7c87816db92b051c2f9015027c9fd07cf399907cb2"
+    },
+    {
+      "name": "runs/native165-pair07-r1/result.json",
+      "bytes": 78948,
+      "SHA256": "9153b1a25fe94b2acb0c7bb1ee2d33041ad7ba514aa1687702ff80d1adf4e55b"
+    },
+    {
+      "name": "runs/native165-pair07-r1.admission.json",
+      "bytes": 3814,
+      "SHA256": "d937ea7d9ad69f24e36075a91db33c4efaca79cc39ed9e28bc15d6b95126bbfb"
+    },
+    {
+      "name": "runs/native165-pair07-r1.inputs.json",
+      "bytes": 3732,
+      "SHA256": "42d1f6ec21a589e10a48cfc68b528e3bbb5eee9777978969a946022be6397058"
+    },
+    {
+      "name": "runs/native165-pair07-r1.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/native165-pair07-r1.monitor.jsonl",
+      "bytes": 391278,
+      "SHA256": "7eba959178fa56a03b459bf9a0cdd772e1f4ed3ebc3a46c8e0a6ef12cc81d0a9"
+    },
+    {
+      "name": "runs/native165-pair07-r1.owned-ack.json",
+      "bytes": 79592,
+      "SHA256": "7beb819211d016307a447a10fe45301b3bd667194de467855ed4aa5d9427d560"
+    },
+    {
+      "name": "runs/native165-pair07-r1.owned-ledger.jsonl",
+      "bytes": 10006,
+      "SHA256": "f1360267d8ad3e511eb3aebd719f886fbe390270c435f7b232fa862e38d7a6bb"
+    },
+    {
+      "name": "runs/native165-pair07-r1.process.json",
+      "bytes": 67718,
+      "SHA256": "763ae6b121de778a30df3627e8795e20729f4c611e8072bb8e1a644370c22ca8"
+    },
+    {
+      "name": "runs/native165-pair07-r1.started.json",
+      "bytes": 1688,
+      "SHA256": "ef1dc92843151ca36c1c88ff1c81af29cddd4549b1d6e2a4ddd649a3b54cc8d2"
+    },
+    {
+      "name": "runs/native165-pair07-r1.threads.json",
+      "bytes": 190,
+      "SHA256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    {
+      "name": "runs/native165-pair08-r1/beads-read-quoridor-4lc.165.json",
+      "bytes": 222949,
+      "SHA256": "04ae00b4bab026d410b275e5b7b6736b54ebb68d3730370673c654bfed2ef215"
+    },
+    {
+      "name": "runs/native165-pair08-r1/beads-read-quoridor-4lc.json",
+      "bytes": 221876,
+      "SHA256": "4624b92b69104dad5434260c6d798433780626532c8f79b6bb4b611d2f40e241"
+    },
+    {
+      "name": "runs/native165-pair08-r1/control-summary.json",
+      "bytes": 203,
+      "SHA256": "7aa94e8520918bae5bf5fee9cfb7457e3d671933f103f3c5e14cde78ad6c6d40"
+    },
+    {
+      "name": "runs/native165-pair08-r1/games-progress.json",
+      "bytes": 76469,
+      "SHA256": "7b8b1cd04b2c69c7aa47838da77973cd26f746d2334bd7f60ae924bd9d5faa11"
+    },
+    {
+      "name": "runs/native165-pair08-r1/journal.jsonl",
+      "bytes": 394202,
+      "SHA256": "99b209c36297f18773517c4563703129a83d9bfa78bf7794e734537a9c670696"
+    },
+    {
+      "name": "runs/native165-pair08-r1/pause-monitor-stop.json",
+      "bytes": 33774,
+      "SHA256": "8fc3d493c2b7cee7e6c65dac8217a12e3ad6658d48a6429c8db8767bdf8ba54b"
+    },
+    {
+      "name": "runs/native165-pair08-r1/pause-monitor.json",
+      "bytes": 33687,
+      "SHA256": "f3f664cedd1a75862c75746120682e639a9d1637653e1ee138c3f816b2eecec0"
+    },
+    {
+      "name": "runs/native165-pair08-r1/result.json",
+      "bytes": 84139,
+      "SHA256": "d58bd91b3583610ad407fff76470278d69c5db4b155dbd53739ec40a26777211"
+    },
+    {
+      "name": "runs/native165-pair08-r1.admission.json",
+      "bytes": 3814,
+      "SHA256": "366fc001253651a0318419d0d6d3d32205421cf89ebe32139c96765b612b57e6"
+    },
+    {
+      "name": "runs/native165-pair08-r1.inputs.json",
+      "bytes": 3732,
+      "SHA256": "42d1f6ec21a589e10a48cfc68b528e3bbb5eee9777978969a946022be6397058"
+    },
+    {
+      "name": "runs/native165-pair08-r1.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/native165-pair08-r1.monitor.jsonl",
+      "bytes": 543834,
+      "SHA256": "359770c6c35f07322571f30e7bb8f0399ba8931f83b83b6e4f07fca48ccd925c"
+    },
+    {
+      "name": "runs/native165-pair08-r1.owned-ack.json",
+      "bytes": 111164,
+      "SHA256": "6c3f128c1ec87b50fa2775299bc128eadb39b98d0b266454fca5f04a497990ff"
+    },
+    {
+      "name": "runs/native165-pair08-r1.owned-ledger.jsonl",
+      "bytes": 14015,
+      "SHA256": "828ba1922b3d64b8211e1aac457d8c2bbf0658620d420f19066a69aecf2324e4"
+    },
+    {
+      "name": "runs/native165-pair08-r1.process.json",
+      "bytes": 94249,
+      "SHA256": "ea2dafb58005a657dff2d0fb1042136de047afb215d9f95bee4d81891f22a7bb"
+    },
+    {
+      "name": "runs/native165-pair08-r1.started.json",
+      "bytes": 1688,
+      "SHA256": "2b44d7599e170ddf9107c6d463ec1a44fda9e62e5c5c7320af2f554ce2250949"
+    },
+    {
+      "name": "runs/native165-pair08-r1.threads.json",
+      "bytes": 190,
+      "SHA256": "f691edf963a54d8555582b825a5e3d318db395e1866bfcaf83a3235bfcf19dd1"
+    },
+    {
+      "name": "runs/t/.ses",
+      "bytes": 51,
+      "SHA256": "52375ecf210e9a529f2e17c8765563e0ebfd46fb94161514a75799675b22c769"
+    },
+    {
+      "name": "runs/t/mat-debug-3176635.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/t/mat-debug-3176644.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/t/mat-debug-3181202.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/t/mat-debug-3181212.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/t/mat-debug-3184833.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/t/mat-debug-3184842.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/t/mat-debug-3187260.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/t/mat-debug-3187284.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/t/mat-debug-3189209.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/t/mat-debug-3189219.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/t/mat-debug-3192373.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/t/mat-debug-3192383.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/t/mat-debug-3196086.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/t/mat-debug-3196095.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/t/mat-debug-3198549.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/t/mat-debug-3198559.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/t/mat-debug-3200749.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/t/mat-debug-3200760.log",
+      "bytes": 0,
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "runs/xdg-cache/Microsoft/DeveloperTools/.onnxruntime/deviceid",
+      "bytes": 36,
+      "SHA256": "d7530b6980a09dbf53feee13bb3eeb5bae191eda8eb8a1390d7a8f12e389cb25"
+    },
+    {
+      "name": "runs/xdg-cache/Microsoft/DeveloperTools/.onnxruntime/onnxruntime.db",
+      "bytes": 32768,
+      "SHA256": "f434899bd4a0a43c53ba435681ba542129be3dacfb3c34df3422eb1e60cba9ae"
+    },
+    {
+      "name": "science-stop-receipt.json",
+      "bytes": 157,
+      "SHA256": "01131b99208b7f09220b4b06ed3f4ec53537736df27e0545ebe30b79be55c5d9"
+    },
+    {
+      "name": "science-stop-report.md",
+      "bytes": 1011,
+      "SHA256": "6783b07d5b949b7e3ab7f013dd7d89356c8fcd20ec53fdd6ef831827648337fe"
+    },
+    {
+      "name": "self.json",
+      "bytes": 217320,
+      "SHA256": "9381dba58142c3879c91a7286ccfe4e5eb41c5fc62af8d4250bca8362027bf09"
+    },
+    {
+      "name": "stageA-check.stdout.json",
+      "bytes": 3359,
+      "SHA256": "4fd4c2330cc41d091fa0f0df9a395877a5e6da9e0a38d604136390f049e156ec"
+    },
+    {
+      "name": "stageA-receipt.json",
+      "bytes": 157,
+      "SHA256": "bbcd6ee3c09ba486099f3ff28d72e5dd93a3b04c068e7524e4b205b941c33c15"
+    },
+    {
+      "name": "stageA-report.md",
+      "bytes": 1080,
+      "SHA256": "61a30304f8d76585e6ac83100ee6af8f385bea59bc3139588ecd90fb990be82f"
+    },
+    {
+      "name": "start-receipt.json",
+      "bytes": 157,
+      "SHA256": "9789dfff5a26e5e6ac02f387fd27901e6873ec441cb70a5bebbf213484a91bc0"
+    },
+    {
+      "name": "start-report.md",
+      "bytes": 787,
+      "SHA256": "7662b495ac5aa7373dabf5618bf87bbc645aca1962b9208830fd9aa07a041204"
+    }
+  ],
+  "all_members_roundtrip_SHA256_verified": true,
+  "finite_extraction_verified": [
+    {
+      "member": "runs/native165-control-repair-r1/result.json",
+      "restored_path": ".artifacts/ai-sigma/resume-20261003/NATIVE-BASELINE/finite-restore/result.json",
+      "SHA256": "6dfac07767a29cc0f4bba9334a9011ada5961bd0b300a318b6006d948c2e376d"
+    },
+    {
+      "member": "runs/native165-mechanism-r1/pause-monitor-stop.json",
+      "restored_path": ".artifacts/ai-sigma/resume-20261003/NATIVE-BASELINE/finite-restore/pause-monitor-stop.json",
+      "SHA256": "e36e45dd506c4ee26f2e909b62180e081782103469291f58d9ed09d954788f4a"
+    },
+    {
+      "member": "runs/native165-pair01-r1/control-summary.json",
+      "restored_path": ".artifacts/ai-sigma/resume-20261003/NATIVE-BASELINE/finite-restore/control-summary.json",
+      "SHA256": "0c827de03d16580f24d45cdeddb02e2d4ec3bd2dd3ca91f61f3e881d241312e7"
+    }
+  ],
+  "source_refs": {
+    "StageA": "a09279c",
+    "StageB": [
+      "19275b3",
+      "e6b42a3",
+      "f63e8b3"
+    ],
+    "NN0_control_repair": "a78ea8336edc84c9716fee8972c86d94200941b6"
+  },
+  "code_dependencies": [
+    "dependency-binding.json",
+    "source-binding.json",
+    "model-binding-current.json",
+    "control-repair-binding-before-run.json"
+  ],
+  "reproduction": "Archive paths are relative to .artifacts/ai-sigma/resume-20261003/NATIVE-BASELINE. Source and configuration version are the per-run started/process command and git_commit. Rebuild private native crate with recorded compiler, offline locked cached Cargo and jobs1. Existing external Cargo/Python ORT environments and original shared model are required and not reconstructed by Git alone. Restoring records does not authorize rerunning original successful science. New-adapter runtime validation requires separate allocation/preregistration.",
+  "wall_s": 0.3261918140051421,
+  "NN": 0,
+  "scope_bytes_and_unused_forecast_within_existing_experiment_2GiB_not_new_parent_reservation": true
+}
