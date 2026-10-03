@@ -10,16 +10,16 @@ def main():
  assert os.sched_getaffinity(0)=={2} and os.environ['CUDA_VISIBLE_DEVICES']==''
  assert sha(D/'teacher-rows.jsonl.gz')==pr['dataset_SHA256']
  rows=[json.loads(x)for x in gzip.decompress((D/'teacher-rows.jsonl.gz').read_bytes()).splitlines()]
- assert all(r['lineage'].startswith('native181-train-')and '173'not in r['lineage']for r in rows)
+ assert all(r['lineage'].startswith(('native181-train-','native176-train-')) for r in rows)
  import numpy as np
  import torch
- torch.set_num_threads(1);torch.set_num_interop_threads(1);torch.random.default_generator.manual_seed(17680311)
+ torch.set_num_threads(1);torch.set_num_interop_threads(1);torch.random.default_generator.manual_seed(18180311)
  class PV(torch.nn.Module):
   def __init__(self):
    super().__init__();self.hidden=torch.nn.Linear(648,32);self.policy=torch.nn.Linear(32,136);self.value=torch.nn.Linear(32,1)
   def forward(self,x):
    h=torch.relu(self.hidden(x.flatten(1)));return self.policy(h),torch.tanh(self.value(h))
- model=PV().cpu();checkpoint=D/'student-checkpoint.pt';assert not checkpoint.exists(),'NO_TRAINING_REPLACEMENT'
+ model=PV().cpu();parent=ROOT/'research-data/ai-sigma/176-native-teacher-pipeline/student-checkpoint.pt';assert sha(parent)==pr['parent_checkpoint_SHA256'];parent_state=torch.load(parent,map_location='cpu',weights_only=True);model.load_state_dict(parent_state,strict=True);checkpoint=D/'student-checkpoint.pt';assert not checkpoint.exists(),'NO_TRAINING_REPLACEMENT'
  x=torch.from_numpy(np.asarray([r['features648_bits']for r in rows],dtype=np.uint32).view(np.float32).copy()).reshape(-1,8,9,9)
  pi=torch.tensor([r['pi136']for r in rows],dtype=torch.float32);z=torch.tensor([[r['z_stm']if r['value_eligible']else 0]for r in rows],dtype=torch.float32)
  vm=torch.tensor([[float(r['value_eligible'])]for r in rows]);mask=torch.zeros((len(rows),136),dtype=torch.bool)
@@ -27,11 +27,11 @@ def main():
   for a,k in r['mapping136']:mask[i,k]=True
  assert torch.isfinite(x).all()and torch.isfinite(pi).all()and torch.all(pi[~mask]==0)
  tr=torch.tensor([i for i,r in enumerate(rows)if r['split']=='train']);va=torch.tensor([i for i,r in enumerate(rows)if r['split']=='validation'])
- assert len(tr)>0 and len(va)>0
+ assert len(tr)>0 and len(va)>0;origva=torch.tensor([i for i,r in enumerate(rows)if r['split']=='validation'and r['lineage'].startswith('native176-')],dtype=torch.long);newva=torch.tensor([i for i,r in enumerate(rows)if r['split']=='validation'and r['lineage'].startswith('native181-')],dtype=torch.long)
  def loss(idx):
   logits,value=model(x[idx]);ce=-(pi[idx]*torch.log_softmax(logits.masked_fill(~mask[idx],-1e9),dim=1)).sum(1).mean();mse=(((value-z[idx])**2)*vm[idx]).sum()/vm[idx].sum().clamp_min(1);return ce+mse,ce,mse
  def measure():
-  with torch.no_grad():return {key:[float(v)for v in loss(idx)]for key,idx in [('train',tr),('validation',va)]}
+  with torch.no_grad():return {key:([float(v)for v in loss(idx)]if len(idx) else None)for key,idx in [('train',tr),('original_validation',origva),('new_validation',newva)]}
  before=measure();initial=hashlib.sha256(b''.join(p.detach().numpy().tobytes()for p in model.parameters())).hexdigest();ledger=[];trainstart=time.perf_counter()
  for step in range(200):
   idx=tr[torch.randint(len(tr),(128,))];model.zero_grad(set_to_none=True);total,ce,mse=loss(idx);assert torch.isfinite(total);total.backward()
@@ -41,7 +41,7 @@ def main():
    for p in model.parameters():p.add_(p.grad,alpha=-.01)
   assert all(torch.isfinite(p).all()for p in model.parameters())
  after=measure();trainsec=time.perf_counter()-trainstart;torch.save(model.state_dict(),checkpoint)
- result={'issue':'quoridor-4lc.181','steps':200,'seed':17680311,'init_weights_SHA256':initial,'train_rows':len(tr),'validation_rows':len(va),'value_unknown_mask':0,'rootmean_auxiliary_weight':0,'loss_before':before,'loss_after':after,'ledger':ledger,'training_seconds':trainsec,'torch':str(torch.__version__),'threads':[torch.get_num_threads(),torch.get_num_interop_threads()],'dataset_SHA256':pr['dataset_SHA256'],'checkpoint_SHA256':sha(checkpoint),'teacher_fit_is_strength':False}
+ result={'issue':'quoridor-4lc.181','steps':200,'seed':18180311,'init_weights_SHA256':initial,'train_rows':len(tr),'validation_rows':len(va),'value_unknown_mask':0,'rootmean_auxiliary_weight':0,'loss_before':before,'loss_after':after,'ledger':ledger,'training_seconds':trainsec,'torch':str(torch.__version__),'threads':[torch.get_num_threads(),torch.get_num_interop_threads()],'dataset_SHA256':pr['dataset_SHA256'],'checkpoint_SHA256':sha(checkpoint),'teacher_fit_is_strength':False,'continuation_parent_checkpoint_SHA256':sha(parent),'original_validation_rows':len(origva),'new_validation_rows':len(newva),'interpretation':'unseen game fit under this continuation; added steps and old-data reexposure confound any diversity causal claim'}
  save('learner-training.json',result)
  state=torch.load(checkpoint,map_location='cpu',weights_only=True);loaded=PV();loaded.load_state_dict(state,strict=True);loaded.eval();assert all(torch.equal(v,loaded.state_dict()[k])for k,v in state.items())
  idx=torch.tensor(pr['parity_indices']);sample=x[idx]

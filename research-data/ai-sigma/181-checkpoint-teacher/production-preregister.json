@@ -1,0 +1,181 @@
+{
+  "issue": "quoridor-4lc.181",
+  "UTC": "2026-10-03T11:06:36.680718+00:00",
+  "K800": {
+    "input_order": [
+      "initial-p1",
+      "asym-hv-p2",
+      "straight-jump-p2"
+    ],
+    "engine_names": [
+      "old",
+      "new",
+      "reference"
+    ],
+    "warm_order": [
+      "old",
+      "new",
+      "reference"
+    ],
+    "steady_order": [
+      "old",
+      "new",
+      "reference",
+      "reference",
+      "new",
+      "old"
+    ],
+    "warm1_steady2_per_engine_input": true,
+    "all_slots": 27,
+    "held_sessions_per_input": 3,
+    "startup_planned": 9,
+    "K": 800,
+    "rootN": 800,
+    "edgeSum": 799,
+    "NN_planned": 21600,
+    "source_same_existing_binary": true,
+    "old_checkpoint_per_sim": true,
+    "new_checkpoint_final_once": true,
+    "policy_NN_math_unchanged": true,
+    "CPU": [
+      2
+    ],
+    "elapsed": "controller send before input through finalCP parse/legal/rootvisit/edge validation/clone actualend",
+    "phase_seconds": 300
+  },
+  "limited_checkpoint_adoption": "all finite K/root/action/NNbits/visits/rootmean correspond; new/old median<=.90 at least2/3, all others<=1.05",
+  "teacher_engine_selection": "new/JS median<=.95 at least2/3 and all<=1.05 selects newRust; else JS; further prospective 6game fallback below",
+  "benchmark": {
+    "registered_games": 6,
+    "modes": [
+      "old",
+      "new"
+    ],
+    "CPU": [
+      2,
+      4,
+      6
+    ],
+    "K": 64,
+    "tau1_first_newplies": 16,
+    "siblings_same_fresh_inputs_action_seeds": true,
+    "inputs_ply": [
+      0,
+      8,
+      16
+    ],
+    "all6_denominator": "fault/censoring unknown; no replacement; exclude training",
+    "fallback_adopted_before_any_sixgame": true,
+    "fallback": "if any new finite teacher root/NN/legal/K qualification insufficient or missing OR new Rjoint/allattemptjobwall below old, production JS despite K800 selection; all3 vs3 planned included"
+  },
+  "production": {
+    "slots": 24,
+    "plies": [
+      0,
+      4,
+      8,
+      12,
+      16,
+      20
+    ],
+    "each_target_count": 4,
+    "split": "20train/4validation by family hash rank fixed before games",
+    "K": 64,
+    "rootN": 64,
+    "edgeSum": 63,
+    "pi": "visits/63 never actiononehot",
+    "tau1_first_newplies": 16,
+    "rest": "first max visit originallegal",
+    "newply200cap": "zunknown value_maskfalse",
+    "whole_rule200draw": "z0 if actual RuleA draw, separately classified",
+    "fault_unknown_no_success_replacement": true,
+    "all_fresh_entropy_domains": true,
+    "Rpolicy_Rz_Rjoint_separate": true,
+    "CPU": [
+      2,
+      4,
+      6
+    ],
+    "heldsessions": 3,
+    "teacher_engine": "prospective selection above"
+  },
+  "learning": {
+    "parent_checkpoint": "176/student-checkpoint.pt",
+    "old_dataset": "176/teacher-rows.jsonl.gz",
+    "old_train_only": 1188,
+    "old_val_only": 221,
+    "new_train_only": true,
+    "new_val_never_train": true,
+    "architecture": "648->32 ReLU->136/value tanh",
+    "manualSGD": ".01/minibatch128/200step once",
+    "seed": 18180311,
+    "loss": "piCE+z_stmMSE; unknownz mask0/rootmeanaux0",
+    "measure": "origval/newval piCE/zMSE before/after separately plus train",
+    "scope": "unseen game fit under continuation; step and old-data reexposure confound; not diversity causal effect",
+    "ONNX": "fixed5rows tol abs1e-5+rtol1e-4/batch1 parity"
+  },
+  "budget": {
+    "heavy_total": 1800,
+    "handNN_total": 240000,
+    "RAM": 4294967296,
+    "guard": 3758096384,
+    "scopeforecast": 268435456,
+    "saveguard": 234881024,
+    "effectiveExperiment": 2143289344,
+    "newheavy": "2026-10-03T12:20Z",
+    "science": "2026-10-03T12:25Z",
+    "process": "2026-10-03T12:35Z",
+    "submit": "2026-10-03T12:42Z"
+  },
+  "NN0": "r1 basecases pass; r2/r3 terminal checker failure preserved; r4 rootterminal/terminalnoNN/K1/cancel/stale/guard seven finite cases NN0 pass",
+  "input_hashes": {
+    "research-data/ai-sigma/181-checkpoint-teacher/benchmark-new-openings.json": "3e84921dd4b4ea67bfbbe5b18cb9d520f239e319e6b6c616b96c4126f3582259",
+    "research-data/ai-sigma/181-checkpoint-teacher/inputs.json": "537b0c3bbe7e3136cecee904e4c33fbc41d6704f2bcbf354fbd5273f640d01ad",
+    "research-data/ai-sigma/181-checkpoint-teacher/benchmark-old-openings.json": "08444506d292ad0e01d7d9c78f999b587a7a03683d7896daf0dd7e26b5c29dbe",
+    "research-data/ai-sigma/181-checkpoint-teacher/openings.json": "6a432f7c8f701da78b7f57059357b64941d8780e0ae41a54b9def923d7b26a18"
+  },
+  "source": {
+    "tools/ai-sigma-native-checkpoint-teacher/common.cjs": "8f7ca770402175f73837528734a8b56f585a11b48bd08001f0719c771130b313",
+    "tools/ai-sigma-native-checkpoint-teacher/generate.cjs": "698eed410014833af89615560602c55bee43da7ff6f6a3711a6592747a1f58ce",
+    "tools/ai-sigma-native-checkpoint-teacher/schema.cjs": "d3f26b75b59bad2ac5813225a24f4ef96085ce5edec55ec241ddda0dec544a50",
+    "tools/ai-sigma-native-checkpoint-teacher/worker.cjs": "332af668240a6537cfbf777416828566c22f1636778b4d073fdbd8a4f24d3cdf",
+    "tools/ai-sigma-native-checkpoint-teacher/learn.py": "64a4a2ce1c98296553a2bf05337be2b9670e14bde80251f7dac99b2f503cb664",
+    "tools/ai-sigma-native-checkpoint-teacher/save-tree.py": "a4c786fc98f48e7e24743a9a217d0b18a71fd60df3666a5fdec0d6c304144989",
+    "tools/ai-sigma-native-checkpoint-teacher/runner.py": "90f702564cac9f29408a6af554e18cfb22fd858df26a014c72bfaf58b281da83",
+    "tools/ai-sigma-native-checkpoint-teacher/controller.cjs": "9127022a6df9f521f802332b9db70bbd543da96a783add1213c8059d5141cccf",
+    "tools/ai-sigma-native-checkpoint-teacher/mock.cjs": "17c77aa21f8d18111be3c216eca972ac9f9cfb75fe7258e6be382f39c3f229df",
+    "tools/ai-sigma-native-checkpoint-teacher/admission.py": "fcb0f2f5964117e36f11576d93cb17e559a7aec757eeed7a39e240f9571ee8e3",
+    "tools/ai-sigma-native-checkpoint-teacher/export.cjs": "c3fe94e7cd7fd99b9213b832b43ea86929c3eb4c36a3de7ecfa3accf5865f9be",
+    "tools/ai-sigma-native-checkpoint-teacher/pause-monitor.cjs": "265f7c8aa34f9a7f7f06f2ac2441546bd3ab7c36519196a70704351c61bddbea",
+    "tools/ai-sigma-native-checkpoint-teacher/measure.cjs": "4ee6f1ee9f76959487d1db24928421e7bd4a7587e7de3132b0d4fa9c77f94af3",
+    "tools/ai-sigma-native-checkpoint-teacher/learn-control.cjs": "fbb45c971c52ff006b35dab3760412eeea98f3fcc675e6099ba49697619e70a2",
+    "tools/ai-sigma-native-checkpoint-teacher/compact-beads.py": "63dd13b825818e5d1a2a34c466383cc81ad667fac8c0fe77f065cbebf91be8d3",
+    "tools/ai-sigma-native-checkpoint-teacher/engine.cjs": "f6c2fd2a7a0aeea2225f16899b1056fc6392678cc3bc5e9dbb74495a39676eb3",
+    "tools/ai-sigma-native-checkpoint-teacher/prepare.cjs": "00507acd2ba57ad3c3feca7a694fe9e355c2f6c26948f7be83c5f1defb96f256"
+  },
+  "formal173_read": 0,
+  "GPU": 0,
+  "production_engine_actual": "reference",
+  "benchmark_actual": "NOT_STARTED because limited adoption threshold failed",
+  "prospective_conditions_unchanged": true,
+  "production_source": {
+    "tools/ai-sigma-native-checkpoint-teacher/common.cjs": "8f7ca770402175f73837528734a8b56f585a11b48bd08001f0719c771130b313",
+    "tools/ai-sigma-native-checkpoint-teacher/generate.cjs": "698eed410014833af89615560602c55bee43da7ff6f6a3711a6592747a1f58ce",
+    "tools/ai-sigma-native-checkpoint-teacher/schema.cjs": "d3f26b75b59bad2ac5813225a24f4ef96085ce5edec55ec241ddda0dec544a50",
+    "tools/ai-sigma-native-checkpoint-teacher/worker.cjs": "332af668240a6537cfbf777416828566c22f1636778b4d073fdbd8a4f24d3cdf",
+    "tools/ai-sigma-native-checkpoint-teacher/learn.py": "6920d114dd76ebea3917f6286f5da8487460575b1b4c2873dc79a4145d7ee470",
+    "tools/ai-sigma-native-checkpoint-teacher/save-tree.py": "a4c786fc98f48e7e24743a9a217d0b18a71fd60df3666a5fdec0d6c304144989",
+    "tools/ai-sigma-native-checkpoint-teacher/runner.py": "90f702564cac9f29408a6af554e18cfb22fd858df26a014c72bfaf58b281da83",
+    "tools/ai-sigma-native-checkpoint-teacher/controller.cjs": "9127022a6df9f521f802332b9db70bbd543da96a783add1213c8059d5141cccf",
+    "tools/ai-sigma-native-checkpoint-teacher/mock.cjs": "17c77aa21f8d18111be3c216eca972ac9f9cfb75fe7258e6be382f39c3f229df",
+    "tools/ai-sigma-native-checkpoint-teacher/admission.py": "1ab1e5103d88b41474d9b17f905d1029a9ff8dda29e15d183ed83f46051751f1",
+    "tools/ai-sigma-native-checkpoint-teacher/export.cjs": "e87d7232a2bbde3a4793063147f38008d9da8a3f23738b6d4e0bfbc7bd992572",
+    "tools/ai-sigma-native-checkpoint-teacher/pause-monitor.cjs": "265f7c8aa34f9a7f7f06f2ac2441546bd3ab7c36519196a70704351c61bddbea",
+    "tools/ai-sigma-native-checkpoint-teacher/measure.cjs": "4ee6f1ee9f76959487d1db24928421e7bd4a7587e7de3132b0d4fa9c77f94af3",
+    "tools/ai-sigma-native-checkpoint-teacher/learn-control.cjs": "fbb45c971c52ff006b35dab3760412eeea98f3fcc675e6099ba49697619e70a2",
+    "tools/ai-sigma-native-checkpoint-teacher/compact-beads.py": "63dd13b825818e5d1a2a34c466383cc81ad667fac8c0fe77f065cbebf91be8d3",
+    "tools/ai-sigma-native-checkpoint-teacher/engine.cjs": "f6c2fd2a7a0aeea2225f16899b1056fc6392678cc3bc5e9dbb74495a39676eb3",
+    "tools/ai-sigma-native-checkpoint-teacher/prepare.cjs": "00507acd2ba57ad3c3feca7a694fe9e355c2f6c26948f7be83c5f1defb96f256"
+  },
+  "production_registered_UTC": "2026-10-03T11:16:09.887454+00:00"
+}

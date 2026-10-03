@@ -17,6 +17,10 @@
   "newjob_deadline": "2026-10-03T12:20:00+00:00",
   "processing_deadline": "2026-10-03T12:25:00+00:00",
   "pin_owned_TIDs": true,
-  "NN_budget_per_core": 50000,
-  "batch": 1
+  "NN_budget_per_core": 25000,
+  "batch": 1,
+  "teacher_engine": "new",
+  "openings_file": "benchmark-new-openings.json",
+  "benchmark": true,
+  "export_prefix": "benchmark-new-"
 }

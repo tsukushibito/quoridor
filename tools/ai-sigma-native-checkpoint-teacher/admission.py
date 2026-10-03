@@ -15,7 +15,7 @@ def admit(c,out,tool,runs):
  controls=[]
  for issue in ['quoridor-4lc','quoridor-4lc.181']:
   p=out/('admission-'+issue+'.json');assert time.time()-p.stat().st_mtime<60,'STALE_CONTROL';x=json.loads(p.read_text())[0];assert x['status']=='in_progress' and 'paused-by-user' not in x.get('labels',[]),'PAUSE_OR_STATUS'
-  if issue.endswith('.180'):assert x['assignee']=='codex:01a0f31d-6d15-7620-bb63-4b4f878e4746','OWNER'
+  if issue.endswith('.181'):assert x['assignee']=='codex:01a0f31d-6d15-7620-bb63-4b4f878e4746','OWNER'
   controls.append({k:x.get(k)for k in ['id','status','assignee','labels']})
  assert not (out/'PAUSE').exists()
  stop=json.loads((ROOT/'research-data/ai-sigma/176-native-teacher-pipeline/handoff-stop.json').read_text());assert stop['source_writer_stopped'] and stop['science_children_reaped'] and stop['backup_sync_exit']==0
