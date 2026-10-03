@@ -16,7 +16,7 @@ STORAGE_GUARD=234881024
 CONTRACT_RAM=CONFIG.get('RAM',4294967296)
 MAX_WALL=min(900,CONFIG.get('job_seconds',300))
 TOTAL_WALL=1800
-PHASE_WALL={'generate':1200,'learn':120,'arena':300,'repair':180,'mock':120}[PHASE]
+PHASE_WALL={'generate':1500,'learn':120,'arena':300,'repair':180,'mock':120}[PHASE]
 phase_wall=0
 prior_wall=0
 for p in OUT.glob('native181-*.process.json'):
