@@ -31,6 +31,19 @@ def proc_snapshot():
         except (FileNotFoundError,ProcessLookupError):pass
     return rows
 
+def formal_current(rows):
+    # NN0 generation/mock helpers may coexist on CPU2; actual arena/provider jobs may not.
+    for r in rows:
+        c=r['cmd']
+        if 'NATIVE-NI-ARENA' not in c and 'ai-sigma-native-ni-arena' not in c:continue
+        if any(x in c for x in ('quality-config', 'pool.cjs', 'arena.cjs', 'load-engine.cjs')):return True
+        if 'runner.py' in c and 'quality' in c:return True
+        if any(x in c for x in ('generate.cjs','mock.cjs','statistics.cjs','save-tree.py','compact-beads.py','block-ready.py')):
+            if set(r['affinity'])!={2}:return True
+            continue
+        return True
+    return False
+
 def admit():
     now=time.time();assert now<REG['newheavy_cutoff_epoch'] and now+150<REG['science_deadline_epoch'],'DEADLINE'
     st=json.loads(S.read_text());cfg=Path(st['config_path']);assert st['phase']=='running' and not st['recovery_required'],'SCHEDULER_NOT_CURRENT'
@@ -39,12 +52,17 @@ def admit():
     assert hashlib.sha256(cfg.read_bytes()).hexdigest()==st['config_sha256'],'SCHEDULER_CONFIG_BINDING'
     assert float(st['next_at'])-now>=150,'SUPERVISOR_WINDOW'
     rows=proc_snapshot()
-    assert not any('NATIVE-NI-ARENA' in r['cmd'] or 'ai-sigma-native-ni-arena' in r['cmd'] for r in rows),'173_CURRENT_JOB'
+    assert not formal_current(rows),'173_CURRENT_JOB'
     # Wait for a stopped-science handoff so 173 cannot start its next block during this job.
-    stop_path=ROOT/'research-data/ai-sigma/173-native-ni-arena/science-stop.json'
+    stop_path=ROOT/'research-data/ai-sigma/173-native-ni-arena/epoch1-stop.json'
     assert stop_path.exists(),'173_STOP_HANDOFF_PENDING'
-    stop=json.loads(stop_path.read_text());assert stop.get('scientific_source_write_stopped') or stop.get('scientific_source_stopped') or stop.get('science_stopped'),'173_STOP_FLAG_PENDING'
-    assert not any(stop.get(k) for k in ('current_same_identity','outer_remaining','unknown_adopted','remaining')),'173_NOT_COLLECTED'
+    stop=json.loads(stop_path.read_text());assert stop.get('source_write_stopped'),'173_STOP_FLAG_PENDING'
+    assert not any(stop.get(k) for k in ('current_same_identity','outer_remaining','unknown_adopted','remaining','owned_remaining')),'173_NOT_COLLECTED'
+    prior_job=ROOT/'.artifacts/ai-sigma/resume-20261003/NATIVE-NI-ARENA/runs/native173-quality-r1.process.json'
+    physical=json.loads(prior_job.read_text());assert physical.get('end') and not physical.get('remaining') and not physical.get('unknown_adopted'),'173_OUTER_STOP'
+    identities=[(physical['runner_pid'],physical['runner_starttick']),(physical['child_pid'],physical['child_starttick'])]+[(r['pid'],r['start_ticks']) for r in physical['tracked']]
+    for pid,tick in identities:
+        live_old=identity(pid);assert live_old is None or live_old['starttick']!=str(tick),'173_EXACT_IDENTITY_PRESENT'
     code=(ROOT/'tools/ai-sigma-native-ni-arena/runner.py').read_text();assert "'quality':4294967296" in code and "'quality':4831838208" in code,'173_RAM_ADJUSTMENT_PENDING'
     assert not any('supervisor' in r['cmd'] and r['pid']!=proc['pid'] for r in rows),'SUPERVISOR_CURRENT_UNKNOWN'
     known_other=sum(r['RSS'] for r in rows)
@@ -76,7 +94,8 @@ while not interrupt and time.time()<REG['newheavy_cutoff_epoch']:
         if reason!=last_reason:
             result['attempts'].append({'UTC':datetime.datetime.now(datetime.timezone.utc).isoformat(),'admission_deferred':reason});last_reason=reason
             (D/'manager-current.json').write_text(json.dumps(result,indent=2)+'\n');print('DEFERRED '+reason,flush=True)
-        time.sleep(20)
+        if reason in ('CONTROL_PAUSE','OWNER','SOURCE_CHANGED','DEADLINE'):interrupt=True
+        if not interrupt:time.sleep(20)
 else:
     result.update(waiting=False,model_jobs_started=0,end_epoch=time.time(),stop_reason='INTERRUPTED' if interrupt else 'NO_ADMISSIBLE_WINDOW',owned_wait_remaining=[])
     (D/'manager-stop.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result),flush=True);sys.exit(0)
@@ -97,7 +116,7 @@ while child.poll() is None:
     elif time.time()>=launch+120:why='JOB_HARD120'
     elif rss>=REG['RAM_guard_B']:why='RSS_GUARD'
     elif time.time()>=REG['science_deadline_epoch']:why='SCIENCE_DEADLINE'
-    elif any('NATIVE-NI-ARENA' in r['cmd'] or 'ai-sigma-native-ni-arena' in r['cmd'] for r in proc_snapshot()):why='173_NEW_CURRENT_JOB'
+    elif formal_current(proc_snapshot()):why='173_NEW_CURRENT_JOB'
     st=json.loads(S.read_text())
     if st['owned'] is not None:why='SUPERVISOR_NEW_OWNED'
     if time.time()-last_control>10:
