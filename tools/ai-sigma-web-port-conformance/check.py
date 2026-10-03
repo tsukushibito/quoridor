@@ -1,5 +1,5 @@
 """NN0 static source binding and independently derived fixture expectations."""
-import collections,datetime,hashlib,json,math,pathlib,subprocess
+import collections,datetime,hashlib,json,math,pathlib,subprocess,struct
 R=pathlib.Path(__file__).resolve().parents[2];D=R/'research-data/ai-sigma/150-sigma-web-port-conformance';refs=[]
 def read(p,git=True):
  b=(R/p).read_bytes();g=None
@@ -36,7 +36,17 @@ f=json.loads(read('.artifacts/ai-sigma/reference-fixtures/SIGMA-PARITY-PLAN/fixt
 inputs=[next(x for x in f if x['id']==fid) for fid in ['initial-p1','asym-hv-p2','straight-jump-p2']]
 for slot in [13,14]:
  p=next(x for x in g['prefixes'] if x['slot']==slot);assert p['accepted'] and p['attempt']==0;inputs.append(p['fixture'])
-assert len(inputs)==5 and all(len(x['raw_features_float32'])==648 for x in inputs)
+assert len(inputs)==5
+features=[]
+for x in inputs:
+ if 'features_bits' in x:
+  assert len(x['features_bits'])==648
+  raw=struct.pack('<648I',*x['features_bits']);values=struct.unpack('<648f',raw)
+ else:
+  assert len(x['raw_features_float32'])==648
+  values=x['raw_features_float32'];raw=struct.pack('<648f',*values)
+ assert all(math.isfinite(v) for v in values)
+ features.append(dict(id=x['id'],features648=True,features_bytes_SHA256=hashlib.sha256(raw).hexdigest()))
 (D/'fixed-five-inputs.json').write_text(json.dumps({'kind':'saved exact5 machine diagnostics; legality declared upstream, new replay not executed','inputs':inputs},indent=2)+'\n')
 # Independent arithmetic expectations for proposed artificial-oracle tests, not executing port/reference.
 def first_max(a):return max(range(len(a)),key=lambda i:a[i])
@@ -53,7 +63,7 @@ assert len(vp)==136 and sorted(vp)==list(range(136)) and all(vp[vp[i]]==i for i 
 wall_order=[(ori,x,y,8+(0 if ori=='h' else 64)+y*8+x,(81 if ori=='h' else 145)+y*8+x) for y in range(8) for x in range(8) for ori in ['h','v']]
 assert [r[4] for r in wall_order[:4]]==[81,145,82,146]
 result=dict(issue='quoridor-4lc.150',UTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),refs=refs,four_functions_original_current_equal=equal,
- minimal_input_ids=[x['id'] for x in inputs],root_only_finish='all child visits0 -> original-order first, irrespective of max prior',sameK='rootN K/edgeK-1/loopK-1; terminal-noNN counted separately',
+ minimal_input_ids=[x['id'] for x in inputs],features=features,root_only_finish='all child visits0 -> original-order first, irrespective of max prior',sameK='rootN K/edgeK-1/loopK-1; terminal-noNN counted separately',
  arithmetic_expectations=dict(ledger=ledger,visits=visits,parentmean=pq,FPU_baseprior025=fpu,P2_permutation_involution=True,wall_first4_209=[r[4] for r in wall_order[:4]]),
  source_differences=['original root expands without terminal short circuit; research wrapper handles terminal root NN0','original stale cancel returnsnull; research adapter retains completed CP and discards stale return','research control yields/setTimeout and clocks/checkpoint versus upstream progress at~40 intervals','upstream NN error random rollout fallback; current fixed-model adapter strict faults','fullcanonical upstream based model-path; current fixed artifact explicitlyP2 canonical'],
  old_finite=dict(shared_roots=4,shared_nonroot=9,unshared_each19=True,actual_true_mean_select=280,fullDeep_proved=False),

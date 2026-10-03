@@ -1,0 +1,78 @@
+{
+  "issue": "quoridor-4lc.150",
+  "proposal_count": 1,
+  "scope": "private faithful fixedSigmaWeb port then artificialOracle/fixed5sameK then8newpairedsamewall",
+  "sameK_inputs": [
+    "initial-p1",
+    "asym-hv-p2",
+    "straight-jump-p2",
+    "frame10-prefix-13",
+    "frame10-prefix-14"
+  ],
+  "artificial_expectations": {
+    "ledger": [
+      1.8,
+      -1.2000000000000002,
+      0.8
+    ],
+    "visits": [
+      3,
+      2,
+      1
+    ],
+    "parentmean": 0.6,
+    "FPU_baseprior025": 0.5,
+    "P2_permutation_involution": true,
+    "wall_first4_209": [
+      81,
+      145,
+      82,
+      146
+    ]
+  },
+  "four_function_binding": {
+    "class MCTSNode": {
+      "bytes_equal": true,
+      "SHA256": "dc8dea8bfc4cecc7994dc1fab43898c992f8e9ed7523b1c2c6b78bb6fc88d0a2"
+    },
+    "function backup": {
+      "bytes_equal": true,
+      "SHA256": "ee3f2306bcb77ee9f45f307e32f17673f5b9281bab2408a82c1cfeb327ea5617"
+    },
+    "function selectLeaf": {
+      "bytes_equal": true,
+      "SHA256": "ff53693e1276a27ab929069c3ffa62b532df7ab473d52e3e9a34aeff497058ed"
+    },
+    "function pickFromVisits": {
+      "bytes_equal": true,
+      "SHA256": "372a830d8435d376c6647a19c78f67b40e8366b558a476ac2e038898ab3fc1ef"
+    }
+  },
+  "source_runtime_differences": [
+    "original root expands without terminal short circuit; research wrapper handles terminal root NN0",
+    "original stale cancel returnsnull; research adapter retains completed CP and discards stale return",
+    "research control yields/setTimeout and clocks/checkpoint versus upstream progress at~40 intervals",
+    "upstream NN error random rollout fallback; current fixed-model adapter strict faults",
+    "fullcanonical upstream based model-path; current fixed artifact explicitlyP2 canonical"
+  ],
+  "sameK": {
+    "rootN": 32,
+    "edge": 31,
+    "loop": 31,
+    "NN_plus_terminal": 32,
+    "startup_separate": true
+  },
+  "NN_value_tolerance": {
+    "abs": 0.0001,
+    "rtol": 0.0001
+  },
+  "trajectory_tolerance": "exact discrete history/features/path/visits/Action separately; micro exp difference classified at firstscore difference, never rounded into parity",
+  "new_pairs": 8,
+  "new_games": 16,
+  "exploratory95_independent_bound_radius": 0.48016139565996035,
+  "NI": false,
+  "Sigma": false,
+  "actualgo": false,
+  "implementation_policy_authorized_here": false,
+  "execution_by150": false
+}
