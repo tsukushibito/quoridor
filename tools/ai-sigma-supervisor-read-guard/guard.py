@@ -35,7 +35,7 @@ GOAL = 'quoridor-4lc'
 SELF = 'quoridor-4lc.40'
 REPORT_RESERVE = 30
 OPERATION_BEGIN = dt.datetime(2026, 10, 3, 0, 15, 21, tzinfo=UTC)
-OPERATION_END = dt.datetime(2026, 10, 3, 4, 10, 21, tzinfo=UTC)
+OPERATION_END = dt.datetime(2026, 10, 3, 8, 10, 21, tzinfo=UTC)
 
 def utc_now():
     return dt.datetime.now(UTC)

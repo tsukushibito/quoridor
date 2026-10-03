@@ -1,0 +1,68 @@
+{
+  "at": "2026-10-03T04:03:33.987382+00:00",
+  "self": {
+    "pid": 3135528,
+    "start_ticks": "25314694",
+    "state": "R",
+    "rss_bytes": 15511552,
+    "matches": true
+  },
+  "self_children": [],
+  "source_frozen": true,
+  "current": [
+    {
+      "pid": 3134871,
+      "start_ticks": "25308050",
+      "state": "S",
+      "rss_bytes": 31637504,
+      "matches": true
+    },
+    {
+      "pid": 3134885,
+      "start_ticks": "25308065",
+      "state": "S",
+      "rss_bytes": 20893696,
+      "matches": true
+    }
+  ],
+  "old": [
+    {
+      "pid": 3070572,
+      "absent": true,
+      "matches": false
+    },
+    {
+      "pid": 3070586,
+      "absent": true,
+      "matches": false
+    }
+  ],
+  "state": {
+    "binding": {
+      "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+      "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+      "target": "supervisor",
+      "dispatch_issue": "quoridor-4lc.40",
+      "contract_file": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+    },
+    "process": {
+      "pid": 3134871,
+      "start_ticks": "25308050",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "phase": "running",
+    "recovery_required": false,
+    "last_result": {
+      "at": "2026-10-03T04:02:27.669736+00:00",
+      "event": "started"
+    },
+    "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+    "config_sha256": "b4ee414d9576f871820688aa89037abcf1e7a0641fed15d00e3f2dca1c3aea9d",
+    "contract_sha256": "5232d0d338e11a110bd3a05d5483ceb7d9f1bc635227f0245ece21510bf2db89",
+    "next_at": 1791000799.388864,
+    "owned": null
+  },
+  "main_mirror_identical": true,
+  "short_recorder_absent_after_return": true
+}
