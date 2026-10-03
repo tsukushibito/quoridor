@@ -6,8 +6,10 @@
 
 | 優先 | 到達点・担当 | 費用・次の判断 |
 | --- | --- | --- |
-| ユーザー要求180 | experimentがfixedSigma-Web751186 native-hosted JS対既privateRust nativeを同モデルd790/CPUORT1.30/1thread/同core2で実K800測定 | 3合法非終端入力、rootN800/edge799、warm各1＋steady各4、全30search、外finalOnly/受信検査込み。同Kの中央値/幅/C:R比とNN/terminal/内部IPCを保存。NN30000、heavy600s、RAM3guard2.5、新32MiBguard28。受領newheavy30分/処理40分/提出55分。K64から外挿・500ms棋力規約・C++GPU総効率の代弁0 |
-| 次の主教師・学習案 | 180の支配費からCPU教師生成の実最適化と新lineage/局面多様性を選ぶ | 同KのNN出力再利用、特徴/合法/BFS、探索/IPCのどこに利益があるかを小根拠で選ぶ。raw行増産だけを進展にせずπ/z別validationと未知lineageの学習価値を併せる。未配分のNN/GPUtrain/大生成を開始しない |
+| 完了180 K800 | 3固定入力の候補現wrapperはJS参照より中央値23〜33%長い | root800edge799/全30/NN24000。initial C/R1.322332、asym1.325008、jump1.229342、bridge2404往復/約8MB。有限速度の比/幅だけを回答、速度等価margin未設定・C++未実測 |
+| 主181 experiment | 最終checkpointだけに薄修正→sameK800 old/new/JS→教師生成実費→24新独立lineage→既CPUlearner継続 | 総heavy1800s/NN240000、CPU最大3/RAM4guard3.5/新256MiBは既2044内。新版採否/teacher engine選択を結果前固定、GPUcurrent不採用継続、原173教師0。science12:25/処理12:35/提出12:42 |
+| 182 critic独立検算 | 180全30保存算術/費用範囲と181の取りこぼし・選定を評価 | NN0/static120s/CPU0/新2MiB既guard内。181開始gate0。比から純言語/棋力・全分布へ広げない |
+
 
 180は新現在配分であり176個別期限を延長しない。176の必要最小pack/Git復元/backup・旧writer/科学子停止を終えて新自域だけ開始。旧GPUbranchの盲目再試行はしない。C++公開学習経路、browser棋力、正式NIは本測定と別の未実測/未達として残す。計測が教師量/学習へどう寄与するかで次配分を決め、速度診断を自動連鎖しない。
 
@@ -29,4 +31,4 @@ CPU4logical合計/RAM8GiB/保持と有効未使用予約12GiBを維持、NN重jo
 
 92frame12は08:58:38freshstart、scheduler3352074/start27085893・monitor3352088/start27085920、親SHA0e0e03a157e86bb9d9b7bd0659fb17a3c413afac2286944a5fde839336baae50/24hash一致を本人報告。自然監督のobserve/早期notes/backupと後のturn_limit/interruptedは別、全期間・外部NN停止保証0。監督10:19:23finish有限成功を受領、未来12時台の停止責任は同92。運用sourceはcoordinator編集0。
 
-176最終8543b550の必要12Gitblob/current、archive e559c173/439member/必要3member byte復元、owner writer/科学子停止・backupexit0を有限確認し統括受入れ。旧source-stopと新GPU停止は別、benchmarkはCPU本学習へ混合0。179の独立CPU裁定と合わせ176は統括引継close、180新scopeを既experimentへ10:32:50 actual steer配送、rootへ10:34:03実依頼報告済み。本人claim/計測開始と実K800数値は別の次報告で確認する。
+176最終8543b550の必要12Gitblob/current、archive e559c173/439member/必要3member byte復元、owner writer/科学子停止・backupexit0を有限確認し統括受入れ。旧source-stopと新GPU停止は別、benchmarkはCPU本学習へ混合0。179の独立CPU裁定と合わせ176は統括引継close、180新scopeを既experimentへ10:32:50 actual steer配送、rootへ10:34:03実依頼報告済み。本人claim10:36/科学開始10:39:12→終了10:42:28、全30完成を受領しrootへ10:48:26実結果を配送。180保存の必要12Gitblob/68archive member概要・必要3member/hash・median/statusを統括有限照合して受入れ、次181へ実配分する。監督53f0f8eaの結果後marginを設けず比/幅を示す案を採用し、181以降の費用規則と旧180判断を区別する。
