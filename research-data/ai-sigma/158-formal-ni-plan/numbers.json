@@ -1,0 +1,241 @@
+{
+  "source": "Hoeffding1963 theorem2, bounded independent pair Xi, one-sided alpha .05",
+  "first_plan_m": 600,
+  "thresholds": {
+    "8": {
+      "eps": 0.43270459565057134,
+      "strict_mean_required": 0.8827045956505714,
+      "L_if_mean_half": 0.06729540434942866
+    },
+    "100": {
+      "eps": 0.12238734153404082,
+      "strict_mean_required": 0.5723873415340408,
+      "L_if_mean_half": 0.37761265846595915
+    },
+    "200": {
+      "eps": 0.08654091913011426,
+      "strict_mean_required": 0.5365409191301143,
+      "L_if_mean_half": 0.41345908086988575
+    },
+    "600": {
+      "eps": 0.049964422955689106,
+      "strict_mean_required": 0.4999644229556891,
+      "L_if_mean_half": 0.4500355770443109
+    }
+  },
+  "power600": [
+    {
+      "mu": 0.5,
+      "Hoeffding_power_lower_bound": 1.5188701447677033e-06,
+      "illustrative_IID_Bernoulli_pair_exact_power": 0.5162799656674009,
+      "true_half_constant_pair_power": 1,
+      "power_not_identified_by_mean_alone": true
+    },
+    {
+      "mu": 0.55,
+      "Hoeffding_power_lower_bound": 0.9504251070626658,
+      "illustrative_IID_Bernoulli_pair_exact_power": 0.9937467979626489,
+      "true_half_constant_pair_power": null,
+      "power_not_identified_by_mean_alone": true
+    },
+    {
+      "mu": 0.6,
+      "Hoeffding_power_lower_bound": 0.9999939080358609,
+      "illustrative_IID_Bernoulli_pair_exact_power": 0.9999997013476546,
+      "true_half_constant_pair_power": null,
+      "power_not_identified_by_mean_alone": true
+    }
+  ],
+  "required_m_guarantee": [
+    {
+      "mu": 0.5,
+      "power_at_least": 0.8,
+      "strict_sufficient_m": 1800,
+      "games": 3600
+    },
+    {
+      "mu": 0.5,
+      "power_at_least": 0.9,
+      "strict_sufficient_m": 2111,
+      "games": 4222
+    },
+    {
+      "mu": 0.5,
+      "power_at_least": 0.95,
+      "strict_sufficient_m": 2397,
+      "games": 4794
+    },
+    {
+      "mu": 0.55,
+      "power_at_least": 0.8,
+      "strict_sufficient_m": 450,
+      "games": 900
+    },
+    {
+      "mu": 0.55,
+      "power_at_least": 0.9,
+      "strict_sufficient_m": 528,
+      "games": 1056
+    },
+    {
+      "mu": 0.55,
+      "power_at_least": 0.95,
+      "strict_sufficient_m": 600,
+      "games": 1200
+    },
+    {
+      "mu": 0.6,
+      "power_at_least": 0.8,
+      "strict_sufficient_m": 200,
+      "games": 400
+    },
+    {
+      "mu": 0.6,
+      "power_at_least": 0.9,
+      "strict_sufficient_m": 235,
+      "games": 470
+    },
+    {
+      "mu": 0.6,
+      "power_at_least": 0.95,
+      "strict_sufficient_m": 267,
+      "games": 534
+    }
+  ],
+  "cost": [
+    {
+      "pairs": 600,
+      "games": 1200,
+      "parallel": 1,
+      "old_mean_thinking_s": 26541.0,
+      "worst_thinking_s": 120000.0,
+      "startup_save_cooling_clock_extra_excluded": true,
+      "speedup_not_measured": true
+    },
+    {
+      "pairs": 600,
+      "games": 1200,
+      "parallel": 2,
+      "old_mean_thinking_s": 13270.5,
+      "worst_thinking_s": 60000.0,
+      "startup_save_cooling_clock_extra_excluded": true,
+      "speedup_not_measured": true
+    },
+    {
+      "pairs": 600,
+      "games": 1200,
+      "parallel": 4,
+      "old_mean_thinking_s": 6635.25,
+      "worst_thinking_s": 30000.0,
+      "startup_save_cooling_clock_extra_excluded": true,
+      "speedup_not_measured": true
+    },
+    {
+      "pairs": 1198,
+      "games": 2396,
+      "parallel": 1,
+      "old_mean_thinking_s": 52993.53,
+      "worst_thinking_s": 239600.0,
+      "startup_save_cooling_clock_extra_excluded": true,
+      "speedup_not_measured": true
+    },
+    {
+      "pairs": 1198,
+      "games": 2396,
+      "parallel": 2,
+      "old_mean_thinking_s": 26496.765,
+      "worst_thinking_s": 119800.0,
+      "startup_save_cooling_clock_extra_excluded": true,
+      "speedup_not_measured": true
+    },
+    {
+      "pairs": 1198,
+      "games": 2396,
+      "parallel": 4,
+      "old_mean_thinking_s": 13248.3825,
+      "worst_thinking_s": 59900.0,
+      "startup_save_cooling_clock_extra_excluded": true,
+      "speedup_not_measured": true
+    },
+    {
+      "pairs": 2047,
+      "games": 4094,
+      "parallel": 1,
+      "old_mean_thinking_s": 90549.045,
+      "worst_thinking_s": 409400.0,
+      "startup_save_cooling_clock_extra_excluded": true,
+      "speedup_not_measured": true
+    },
+    {
+      "pairs": 2047,
+      "games": 4094,
+      "parallel": 2,
+      "old_mean_thinking_s": 45274.5225,
+      "worst_thinking_s": 204700.0,
+      "startup_save_cooling_clock_extra_excluded": true,
+      "speedup_not_measured": true
+    },
+    {
+      "pairs": 2047,
+      "games": 4094,
+      "parallel": 4,
+      "old_mean_thinking_s": 22637.26125,
+      "worst_thinking_s": 102350.0,
+      "startup_save_cooling_clock_extra_excluded": true,
+      "speedup_not_measured": true
+    }
+  ],
+  "mock": {
+    "allnormalhalf": {
+      "m": 600,
+      "mean_low": 0.5,
+      "mean_high": 0.5,
+      "L": 0.4500355770443109,
+      "U": 0.5499644229556891
+    },
+    "allunknown": {
+      "m": 600,
+      "mean_low": 0.0,
+      "mean_high": 1.0,
+      "L": 0,
+      "U": 1
+    },
+    "oneknown_win_oneunknown": {
+      "m": 1,
+      "mean_low": 0.5,
+      "mean_high": 1.0,
+      "L": 0,
+      "U": 1
+    },
+    "candidatefault_referencefault": {
+      "operational_slots": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "terminal_quality_slots": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    "boundary_strict": false
+  },
+  "UTC": "2026-10-03T03:08:35.687515+00:00",
+  "wall_s": 0.000657291995594278,
+  "ru_maxrss_bytes": 17084416,
+  "CPU": [
+    0
+  ],
+  "NN_Chrome_game_build": 0
+}
