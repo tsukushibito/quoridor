@@ -24,6 +24,14 @@ frame14ユーザー明示4時間再開。開始2026-10-03T23:20:36Z、終了2026
 
 196の低LR/初期10-100step案は競合候補として保持し、今回は先に配分済みのL2一因子を優先、同時sweepにはしない。正則化量が支持されなければ原因を断定せず、表現/教師視点又は初期学習量の最小判別へ戻す。元144/3stage/testの結果・freeze・guard失敗は変更しない。195最小停止/保存後197へ、194は198実turnで本人close/backup後、新claimした。195は197の現turnで有限受入れ後の本人closeを実依頼済み、196はidleで次実依頼と合わせる所有対応待ち。closeだけの新turn/force takeoverは行わない。
 
+## L2結果と現在の判別
+
+197は00:37:09–00:37:15にL2学習1run完了/6.490182s/379921samples/全子回収。beststep0/初期同tensor/val.69017557対train定数.67878047で4条件false、固定GATE_NOT_METを採択。WD.01は一部LAST誤差/飽和に反応したが、未学習以下にはならず学習重み採用0。この量の正則化を支持せず、全正則化又は全QF1無効とはしない。198は先行fresh24manifestを保持し全24NOT_STARTED、新NN/GPU/model/game0で有限終了、未知教師/maskは作らない。gate-result SHA00145fafを結果前規則に結び、閾値を緩めない。
+
+197の12witness静的案を採用し、critic199へ新現在配分を実配送00:44:55accepted（本人開始未確認）。許可train/validationだけで6opening群×P1/P2の12固定witnessをlabel/loss非依存で選び、生成root統計→teacher→QF1/STM入力のview/fieldを別算術で確認する。併せてtrainだけから距離差の2係数解析基準を一意に求め、同validationの教師誤差/真z/符号を定数/QF1保存値と比較する。NN/forward/新test/学習sweep0。既距離に予測情報があれば最小value初期化/残差案、系統誤りなら具体変換修復へ最大1を選ぶ。旧testを再選定へ戻さず、validationは診断集合と明示。newcommand01:00/static stop01:05/submit01:25・CPU0静的120s/RAM448MiB/既112MiB内新2MiB、全稿承認gate0。
+
+92はmain nnue-training.mdだけを195停止hashへ同期し、main/research/Gitblob f7ab6f3一致を統括でも確認。親/運用binding/watch対象・research source/scienceは編集0。198有限受入れclose通知で統括がactive-onlyを使わずidle turnを起動した運用失敗を198-close-dispatch-erratumへ保存（科学追加0）。以後close routineはactive-onlyを維持する。
+
 ## データ版と3分割・露出
 
 新fresh144gameをtrain96/validation24/test24へ結果前manifest固定。trainだけfirst24→48→96の入れ子、validationとtestは同じgame/rowで固定する。opening8/12/16/20/24/28plyを各partition均衡、新entropy/domain/family/actionseed、色交換・対称・派生兄弟は同partition。K64/root64edge63/tau1最初16newply→argmax/200newplycapを固定、打切りzunknown/value mask0。187モード反復4528行を独立教師として足さない。
