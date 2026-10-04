@@ -1,0 +1,20 @@
+{
+  "UTC": "2026-10-04T00:35:36.845122+00:00",
+  "AST_PASS": true,
+  "executable": "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+  "launch": "taskset -c2 python3 -B frame14-l2-control/launch.py --id l2-train-r1 --kind heavy --seconds120 --samples379921 --result runs/frame14-l2-r1/summary.json -- absoluteTrainingPython -B run.py",
+  "deadlines": [
+    "01:15 new",
+    "01:20 stop"
+  ],
+  "RAM_guard_B": 1879048192,
+  "CPU": [
+    2
+  ],
+  "Torch_loaded": false,
+  "NN": 0,
+  "private_source_SHA": {
+    "research-data/ai-sigma/frame14-l2-control/launch.py": "b103ba4f8557df06613bc0c6f2d0762d7483cbfbca4205426ee807e8d8a63cda",
+    "research-data/ai-sigma/frame14-l2-control/run.py": "10e97e5401afd7b0a8123df510d11e73f453981f572595c2f79c7ea473acdee6"
+  }
+}
