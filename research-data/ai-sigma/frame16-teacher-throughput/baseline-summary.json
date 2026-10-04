@@ -1,0 +1,1091 @@
+{
+  "issue": "quoridor-4lc.221",
+  "mode": "baseline",
+  "planned_games": 48,
+  "status_counts": {
+    "GOAL": 48
+  },
+  "Rpolicy": 1554,
+  "Rz": 1554,
+  "Rjoint": 1554,
+  "unknown_z_rows": 0,
+  "allattempt_jobwall_s": 113.86541091400431,
+  "rates": {
+    "Rpolicy": 13.647691494071386,
+    "Rz": 13.647691494071386,
+    "Rjoint": 13.647691494071386,
+    "games": 0.42155031641919344
+  },
+  "actual_NN": 81096,
+  "logical_worker_NN": 81096,
+  "startup": 0,
+  "terminal_noNN": 18360,
+  "discarded": 0,
+  "batch": {
+    "started": 81096,
+    "returned": 81096,
+    "resumed": 81096,
+    "discarded": 0,
+    "rejected_queued": 0,
+    "batches": [
+      {
+        "size": 4,
+        "sent_ms": 5122.536157,
+        "received_ms": 5604.133953,
+        "queue_ms": [
+          0.6991819999993822,
+          0.5714949999992314,
+          0.5175519999993412,
+          0.1499709999998231
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 5604.273732,
+        "received_ms": 5617.099079,
+        "queue_ms": [
+          473.40445699999964,
+          473.38786699999946,
+          473.3783659999999,
+          473.36986699999943,
+          473.3605069999994,
+          473.2400499999994,
+          473.2268389999999,
+          473.21882000000005
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 5617.155391,
+        "received_ms": 5633.542566,
+        "queue_ms": [
+          486.0935559999998,
+          486.07862900000055,
+          486.07077800000025,
+          486.0344960000002,
+          484.45696899999984,
+          484.17489300000034,
+          483.79809699999987,
+          483.17284500000005
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 5633.612934,
+        "received_ms": 5644.421272,
+        "queue_ms": [
+          499.61864199999945,
+          499.6125069999998,
+          499.4234669999996,
+          499.31294999999955,
+          22.302952000000005,
+          22.231654000000162,
+          22.22434599999997,
+          22.21868699999959
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 5644.462219,
+        "received_ms": 5654.772477,
+        "queue_ms": [
+          20.76739699999962,
+          20.755170000000362,
+          20.748915999999554,
+          20.6728949999997,
+          20.66724499999964,
+          20.65863100000024,
+          20.616759999999886,
+          20.6080579999998
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 5654.789675,
+        "received_ms": 5668.966364,
+        "queue_ms": [
+          18.735421999999744,
+          18.648251999999957,
+          18.638930000000073,
+          18.611297999999806,
+          18.08067099999971,
+          17.897739,
+          17.735225000000355,
+          17.60102300000017
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 5668.984515,
+        "received_ms": 5676.579627,
+        "queue_ms": [
+          22.82344600000033,
+          22.75841500000024,
+          22.23429000000033,
+          22.198159000000487,
+          21.806813000000147,
+          21.765526000000136,
+          21.759055000000444,
+          21.738632000000507
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 5676.597954,
+        "received_ms": 5682.248923,
+        "queue_ms": [
+          19.776253999999426,
+          16.42996299999959,
+          16.419173999999657,
+          16.319918000000143,
+          16.312323000000106,
+          16.30663099999947,
+          16.301131999999598,
+          16.278949999999895
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 5682.265561,
+        "received_ms": 5689.053845,
+        "queue_ms": [
+          11.43647400000009,
+          11.398020999999972,
+          11.366962000000058,
+          11.230733000000328,
+          10.667099000000235,
+          10.627371999999923,
+          10.602334000000155,
+          10.446155000000545
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 5689.066444,
+        "received_ms": 5695.015673,
+        "queue_ms": [
+          8.405545999999958,
+          8.364615999999842,
+          8.336366999999882,
+          8.114722000000256,
+          7.993932999999743,
+          7.526192000000265,
+          7.486065000000053,
+          7.141501000000062
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 5695.032478,
+        "received_ms": 5700.038833,
+        "queue_ms": [
+          7.616649000000507,
+          7.605854999999792,
+          7.599976000000424,
+          7.594855999999709,
+          7.589947000000393,
+          7.547575000000506,
+          7.542733000000226,
+          7.538005999999768
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 5700.052814,
+        "received_ms": 5704.579713,
+        "queue_ms": [
+          9.39002999999957,
+          9.313344999999572,
+          9.13262499999928,
+          8.793545999999878,
+          8.519008999999642,
+          8.388084999999592,
+          8.200025999999525,
+          8.096200999999382
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 5704.594689,
+        "received_ms": 5708.991097,
+        "queue_ms": [
+          8.11903699999948,
+          8.010765999999421,
+          7.924830999999358,
+          7.691110999999182,
+          7.189467999999579,
+          7.159361999999419,
+          7.102474999999686,
+          7.074848999999631
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 5709.004105,
+        "received_ms": 5715.668173,
+        "queue_ms": [
+          7.867854000000079,
+          7.791473000000224,
+          7.160735999999815,
+          7.050874999999905,
+          6.2662490000002435,
+          6.172450000000026,
+          6.11432700000023,
+          5.714186000000154
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 5715.681941,
+        "received_ms": 5720.213855,
+        "queue_ms": [
+          9.145066999999472,
+          8.893552999999883,
+          8.344309000000067,
+          8.251922999999806,
+          8.225965999999971,
+          8.018274999999448,
+          6.433911999999509,
+          6.220577000000048
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 5720.226538,
+        "received_ms": 5727.307093,
+        "queue_ms": [
+          9.704405999999835,
+          9.597662999999557,
+          9.572979999999916,
+          9.497655000000123,
+          9.475836999999956,
+          8.630904999999984,
+          8.595838999999614,
+          8.572924000000057
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "identity": {
+          "run_id": "throughput221-baseline-r1",
+          "worker_id": "w4",
+          "game_id": "native221-game-002",
+          "generation": 1,
+          "handle": 1,
+          "token": 1,
+          "request_id": "w4:1"
+        },
+        "wire_id": "nn0.1",
+        "started_ms": 5122.536157,
+        "returned_ms": 5604.133953,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-baseline-r1",
+          "worker_id": "w4",
+          "game_id": "native221-game-005",
+          "generation": 2,
+          "handle": 2,
+          "token": 1,
+          "request_id": "w4:2"
+        },
+        "wire_id": "nn0.2",
+        "started_ms": 5122.536157,
+        "returned_ms": 5604.133953,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-baseline-r1",
+          "worker_id": "w2",
+          "game_id": "native221-game-001",
+          "generation": 1,
+          "handle": 1,
+          "token": 1,
+          "request_id": "w2:1"
+        },
+        "wire_id": "nn0.3",
+        "started_ms": 5122.536157,
+        "returned_ms": 5604.133953,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-baseline-r1",
+          "worker_id": "w4",
+          "game_id": "native221-game-008",
+          "generation": 3,
+          "handle": 3,
+          "token": 1,
+          "request_id": "w4:3"
+        },
+        "wire_id": "nn0.4",
+        "started_ms": 5122.536157,
+        "returned_ms": 5604.133953,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-baseline-r1",
+          "worker_id": "w4",
+          "game_id": "native221-game-011",
+          "generation": 4,
+          "handle": 4,
+          "token": 1,
+          "request_id": "w4:4"
+        },
+        "wire_id": "nn0.5",
+        "started_ms": 5604.273732,
+        "returned_ms": 5617.099079,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-baseline-r1",
+          "worker_id": "w4",
+          "game_id": "native221-game-014",
+          "generation": 5,
+          "handle": 5,
+          "token": 1,
+          "request_id": "w4:5"
+        },
+        "wire_id": "nn0.6",
+        "started_ms": 5604.273732,
+        "returned_ms": 5617.099079,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-baseline-r1",
+          "worker_id": "w4",
+          "game_id": "native221-game-017",
+          "generation": 6,
+          "handle": 6,
+          "token": 1,
+          "request_id": "w4:6"
+        },
+        "wire_id": "nn0.7",
+        "started_ms": 5604.273732,
+        "returned_ms": 5617.099079,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-baseline-r1",
+          "worker_id": "w4",
+          "game_id": "native221-game-020",
+          "generation": 7,
+          "handle": 7,
+          "token": 1,
+          "request_id": "w4:7"
+        },
+        "wire_id": "nn0.8",
+        "started_ms": 5604.273732,
+        "returned_ms": 5617.099079,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-baseline-r1",
+          "worker_id": "w4",
+          "game_id": "native221-game-023",
+          "generation": 8,
+          "handle": 8,
+          "token": 1,
+          "request_id": "w4:8"
+        },
+        "wire_id": "nn0.9",
+        "started_ms": 5604.273732,
+        "returned_ms": 5617.099079,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-baseline-r1",
+          "worker_id": "w2",
+          "game_id": "native221-game-004",
+          "generation": 2,
+          "handle": 2,
+          "token": 1,
+          "request_id": "w2:2"
+        },
+        "wire_id": "nn0.10",
+        "started_ms": 5604.273732,
+        "returned_ms": 5617.099079,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-baseline-r1",
+          "worker_id": "w2",
+          "game_id": "native221-game-007",
+          "generation": 3,
+          "handle": 3,
+          "token": 1,
+          "request_id": "w2:3"
+        },
+        "wire_id": "nn0.11",
+        "started_ms": 5604.273732,
+        "returned_ms": 5617.099079,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-baseline-r1",
+          "worker_id": "w2",
+          "game_id": "native221-game-010",
+          "generation": 4,
+          "handle": 4,
+          "token": 1,
+          "request_id": "w2:4"
+        },
+        "wire_id": "nn0.12",
+        "started_ms": 5604.273732,
+        "returned_ms": 5617.099079,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-baseline-r1",
+          "worker_id": "w2",
+          "game_id": "native221-game-013",
+          "generation": 5,
+          "handle": 5,
+          "token": 1,
+          "request_id": "w2:5"
+        },
+        "wire_id": "nn0.13",
+        "started_ms": 5617.155391,
+        "returned_ms": 5633.542566,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-baseline-r1",
+          "worker_id": "w2",
+          "game_id": "native221-game-016",
+          "generation": 6,
+          "handle": 6,
+          "token": 1,
+          "request_id": "w2:6"
+        },
+        "wire_id": "nn0.14",
+        "started_ms": 5617.155391,
+        "returned_ms": 5633.542566,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-baseline-r1",
+          "worker_id": "w2",
+          "game_id": "native221-game-019",
+          "generation": 7,
+          "handle": 7,
+          "token": 1,
+          "request_id": "w2:7"
+        },
+        "wire_id": "nn0.15",
+        "started_ms": 5617.155391,
+        "returned_ms": 5633.542566,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-baseline-r1",
+          "worker_id": "w2",
+          "game_id": "native221-game-022",
+          "generation": 8,
+          "handle": 8,
+          "token": 1,
+          "request_id": "w2:8"
+        },
+        "wire_id": "nn0.16",
+        "started_ms": 5617.155391,
+        "returned_ms": 5633.542566,
+        "discarded": false
+      }
+    ],
+    "max_pending_games": 24,
+    "batch_histogram": [
+      0,
+      1928,
+      570,
+      616,
+      522,
+      366,
+      278,
+      190,
+      8658
+    ],
+    "queue_ms_sum": 796454.0929840112,
+    "queue_ms_max": 499.61864199999945,
+    "provider_pipe_ms": 96558.85452800048
+  },
+  "providerCost": {
+    "batches": 13128,
+    "server_before_JSON_ms": 76646.39818299972,
+    "JSON_encode_firstpass_ms": 2571.7364650000004,
+    "stages": {
+      "input_parse_ms": 4837.944108000026,
+      "H2D_sync_ms": 5156.756605999998,
+      "forward_sync_ms": 60860.39429600007,
+      "D2H_sync_ms": 2637.436002000006
+    }
+  },
+  "providerStop": {
+    "sample_cap": 300000,
+    "wire_totals_ms": {
+      "json_parse": 2157.4230130000033,
+      "json_encode_firstpass": 2571.7663720000005,
+      "stdout_write": 10977.849362000014
+    },
+    "private_issue": "quoridor-4lc.221",
+    "modelhash": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+    "provider": "torch-folded-dynamicB-v1",
+    "original_ONNX_batch": 1,
+    "batch_min": 1,
+    "batch_max": 8,
+    "dtype": "float32",
+    "TF32": false,
+    "AMP": false,
+    "torch": "2.14.0+cu130",
+    "ORT": "1.30.0",
+    "device": "NVIDIA GeForce RTX 3060",
+    "threads": [
+      1,
+      1
+    ],
+    "CPU_affinity": [
+      0
+    ],
+    "coldinit_s": {
+      "import": 1.2165627760114148,
+      "CPUORT_session": 0.03336656896863133,
+      "graph_weights": 0.07862835295964032,
+      "CUDA_upload_context": 0.16585949604632333
+    },
+    "single_sample_equivalent": 81096,
+    "calls": {
+      "cuda": 13128,
+      "cpuort": 0
+    },
+    "rows": {
+      "cuda": 81096,
+      "cpuort": 0
+    },
+    "RAM_peak_KiB": 1164816,
+    "GPU_allocated_B": 20162048,
+    "GPU_reserved_B": 35651584,
+    "GPU_peak_allocated_B": 23154176,
+    "GPU_peak_reserved_B": 35651584,
+    "pipe": {
+      "calls": 13130,
+      "requestBytes": 307001981,
+      "responseBytes": 161508173,
+      "timings": {
+        "serialize_ms": 651.7371210000388,
+        "parse_ms": 611.9322010006263,
+        "write_callback_ms": 5250.29722399962
+      }
+    },
+    "exit": {
+      "code": null,
+      "signal": "SIGTERM",
+      "pid": 4143901
+    }
+  },
+  "worker_spans": [
+    {
+      "usedNN": 28226,
+      "startup_NN": 0,
+      "raw_record_ms": 165.56219600003357,
+      "search_ms": 554450.8360279996,
+      "IPC_send_ms": 448.57227899992733,
+      "API_ms": 0,
+      "pipe_ms": 0,
+      "exits": [
+        {
+          "code": 0,
+          "signal": null,
+          "pid": 4143959
+        }
+      ],
+      "bridge": {
+        "calls": 64810,
+        "request_bytes": 32806539,
+        "response_bytes": 187165260,
+        "timings": {
+          "serialize_ms": 225.10297999857931,
+          "parse_ms": 496.4759870003195,
+          "write_callback_ms": 1874.9840339993796
+        }
+      },
+      "zero": {
+        "handles": 0,
+        "pending": 0,
+        "waits": 0
+      }
+    },
+    {
+      "usedNN": 27907,
+      "startup_NN": 0,
+      "raw_record_ms": 118.79744300007924,
+      "search_ms": 547788.0242829993,
+      "IPC_send_ms": 406.9055670007567,
+      "API_ms": 0,
+      "pipe_ms": 0,
+      "exits": [
+        {
+          "code": 0,
+          "signal": null,
+          "pid": 4143958
+        }
+      ],
+      "bridge": {
+        "calls": 64559,
+        "request_bytes": 32506143,
+        "response_bytes": 191661417,
+        "timings": {
+          "serialize_ms": 204.72122900016032,
+          "parse_ms": 468.75159800069525,
+          "write_callback_ms": 1729.4228990006338
+        }
+      },
+      "zero": {
+        "handles": 0,
+        "pending": 0,
+        "waits": 0
+      }
+    },
+    {
+      "usedNN": 24963,
+      "startup_NN": 0,
+      "raw_record_ms": 170.97779800006822,
+      "search_ms": 502545.54376499995,
+      "IPC_send_ms": 340.1233659997724,
+      "API_ms": 0,
+      "pipe_ms": 0,
+      "exits": [
+        {
+          "code": 0,
+          "signal": null,
+          "pid": 4143960
+        }
+      ],
+      "bridge": {
+        "calls": 57399,
+        "request_bytes": 28974000,
+        "response_bytes": 172394786,
+        "timings": {
+          "serialize_ms": 182.89160799935377,
+          "parse_ms": 413.8301589991176,
+          "write_callback_ms": 1583.1248259999404
+        }
+      },
+      "zero": {
+        "handles": 0,
+        "pending": 0,
+        "waits": 0
+      }
+    }
+  ],
+  "sampled_peak_RSS": 2279505920,
+  "all_slot_plies": [
+    {
+      "id": "native221-game-001",
+      "status": "GOAL",
+      "total_ply": 39,
+      "new_rows": 31,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-002",
+      "status": "GOAL",
+      "total_ply": 73,
+      "new_rows": 61,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-003",
+      "status": "GOAL",
+      "total_ply": 64,
+      "new_rows": 48,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-004",
+      "status": "GOAL",
+      "total_ply": 40,
+      "new_rows": 20,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-005",
+      "status": "GOAL",
+      "total_ply": 49,
+      "new_rows": 25,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-006",
+      "status": "GOAL",
+      "total_ply": 54,
+      "new_rows": 26,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-007",
+      "status": "GOAL",
+      "total_ply": 66,
+      "new_rows": 58,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-008",
+      "status": "GOAL",
+      "total_ply": 63,
+      "new_rows": 51,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-009",
+      "status": "GOAL",
+      "total_ply": 54,
+      "new_rows": 38,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-010",
+      "status": "GOAL",
+      "total_ply": 34,
+      "new_rows": 14,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-011",
+      "status": "GOAL",
+      "total_ply": 39,
+      "new_rows": 15,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-012",
+      "status": "GOAL",
+      "total_ply": 51,
+      "new_rows": 23,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-013",
+      "status": "GOAL",
+      "total_ply": 52,
+      "new_rows": 44,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-014",
+      "status": "GOAL",
+      "total_ply": 64,
+      "new_rows": 52,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-015",
+      "status": "GOAL",
+      "total_ply": 59,
+      "new_rows": 43,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-016",
+      "status": "GOAL",
+      "total_ply": 50,
+      "new_rows": 30,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-017",
+      "status": "GOAL",
+      "total_ply": 39,
+      "new_rows": 15,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-018",
+      "status": "GOAL",
+      "total_ply": 56,
+      "new_rows": 28,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-019",
+      "status": "GOAL",
+      "total_ply": 58,
+      "new_rows": 50,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-020",
+      "status": "GOAL",
+      "total_ply": 65,
+      "new_rows": 53,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-021",
+      "status": "GOAL",
+      "total_ply": 59,
+      "new_rows": 43,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-022",
+      "status": "GOAL",
+      "total_ply": 43,
+      "new_rows": 23,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-023",
+      "status": "GOAL",
+      "total_ply": 45,
+      "new_rows": 21,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-024",
+      "status": "GOAL",
+      "total_ply": 46,
+      "new_rows": 18,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-025",
+      "status": "GOAL",
+      "total_ply": 48,
+      "new_rows": 40,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-026",
+      "status": "GOAL",
+      "total_ply": 42,
+      "new_rows": 30,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-027",
+      "status": "GOAL",
+      "total_ply": 51,
+      "new_rows": 35,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-028",
+      "status": "GOAL",
+      "total_ply": 36,
+      "new_rows": 16,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-029",
+      "status": "GOAL",
+      "total_ply": 41,
+      "new_rows": 17,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-030",
+      "status": "GOAL",
+      "total_ply": 43,
+      "new_rows": 15,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-031",
+      "status": "GOAL",
+      "total_ply": 43,
+      "new_rows": 35,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-032",
+      "status": "GOAL",
+      "total_ply": 57,
+      "new_rows": 45,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-033",
+      "status": "GOAL",
+      "total_ply": 41,
+      "new_rows": 25,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-034",
+      "status": "GOAL",
+      "total_ply": 41,
+      "new_rows": 21,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-035",
+      "status": "GOAL",
+      "total_ply": 46,
+      "new_rows": 22,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-036",
+      "status": "GOAL",
+      "total_ply": 49,
+      "new_rows": 21,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-037",
+      "status": "GOAL",
+      "total_ply": 60,
+      "new_rows": 52,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-038",
+      "status": "GOAL",
+      "total_ply": 66,
+      "new_rows": 54,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-039",
+      "status": "GOAL",
+      "total_ply": 57,
+      "new_rows": 41,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-040",
+      "status": "GOAL",
+      "total_ply": 43,
+      "new_rows": 23,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-041",
+      "status": "GOAL",
+      "total_ply": 39,
+      "new_rows": 15,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-042",
+      "status": "GOAL",
+      "total_ply": 46,
+      "new_rows": 18,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-043",
+      "status": "GOAL",
+      "total_ply": 75,
+      "new_rows": 67,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-044",
+      "status": "GOAL",
+      "total_ply": 59,
+      "new_rows": 47,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-045",
+      "status": "GOAL",
+      "total_ply": 53,
+      "new_rows": 37,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-046",
+      "status": "GOAL",
+      "total_ply": 34,
+      "new_rows": 14,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-047",
+      "status": "GOAL",
+      "total_ply": 40,
+      "new_rows": 16,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-048",
+      "status": "GOAL",
+      "total_ply": 46,
+      "new_rows": 18,
+      "terminal": true,
+      "unknown_z": false
+    }
+  ],
+  "qualification_replay_rows": 1554,
+  "qualify_wall_s": 0.691659679,
+  "mixed_into_learner": false,
+  "formal_holdout_read": false,
+  "teacher_truth_or_strength": false,
+  "process": {
+    "exit": 0,
+    "stop_reason": null,
+    "current_exact_absent": true
+  }
+}

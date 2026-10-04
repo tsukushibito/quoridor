@@ -1,0 +1,498 @@
+{
+  "UTC": "2026-10-04T08:06:42.446083+00:00",
+  "archive": "research-data/ai-sigma/frame16-teacher-throughput/benchmark-evidence-r1.tar.gz",
+  "archive_B": 6868344,
+  "archive_SHA": "6ae3de7c241a03136618c3271ab45178f89b81b7638c9a75c3ffade8b90eb149",
+  "members": [
+    {
+      "member": "baseline-all-status.json",
+      "B": 263767,
+      "SHA": "e635a46d828dfe86b14562385024c55e8bc6aec5acc49527206274e462d95420"
+    },
+    {
+      "member": "baseline-confirmation-all-status.json",
+      "B": 263747,
+      "SHA": "efcfca82c2ca32b6da1720d1539f6ce9333e530c8d5d2c843adb237914dc480e"
+    },
+    {
+      "member": "baseline-confirmation-teacher-rows.jsonl.gz",
+      "B": 783989,
+      "SHA": "28d3d835c041f14c116b78d9fbc71f199fc553eafbe7e5bd92d090e9bdfb654e"
+    },
+    {
+      "member": "baseline-teacher-rows.jsonl.gz",
+      "B": 783899,
+      "SHA": "025da40357fe8026e2495368de986badaccff5f3795bf5a43b9b8ddaa21b69b6"
+    },
+    {
+      "member": "candidate-all-status.json",
+      "B": 263717,
+      "SHA": "70ed4736f5d93e392e0123433db53c12077370d084062df7216a31ca3c9345db"
+    },
+    {
+      "member": "candidate-teacher-rows.jsonl.gz",
+      "B": 784052,
+      "SHA": "05b3e1b19a4f14f869f7f5a29b0a9f73c0bd3a9e944425c37ff0e9c2f4b1c8cb"
+    },
+    {
+      "member": "jobs/baseline/admission.json",
+      "B": 5567,
+      "SHA": "2f735714d7da685f2c4add86b0636d37a5c7df28ef8274ba7872e9ffe382a5c0"
+    },
+    {
+      "member": "jobs/baseline/beads-read-quoridor-4lc.221.json",
+      "B": 220,
+      "SHA": "04fb68fd133153e3a75821b178f3c9e786950a255543e4cb9c5a82870f55cc00"
+    },
+    {
+      "member": "jobs/baseline/beads-read-quoridor-4lc.json",
+      "B": 216,
+      "SHA": "4b72c0a97a338b4ae59227bafd9981a99ebbe511a57c8ade6c0e296de5b2357c"
+    },
+    {
+      "member": "jobs/baseline/broker.json",
+      "B": 13156,
+      "SHA": "b9b22fbfc94c82d001a97de6aa35e286ecda23240963217de3cc47e2571d71d2"
+    },
+    {
+      "member": "jobs/baseline/core2/close.json",
+      "B": 436,
+      "SHA": "d5169e30a35ab6121dc06ab5fd1c8b5f24e36dd828e1c7bf48cd2045e2b75350"
+    },
+    {
+      "member": "jobs/baseline/core2/games.jsonl",
+      "B": 35907,
+      "SHA": "f7d7b2b209f622041b986c7c129c37cd9ccfaa9016b472c6fb401be4e0765da6"
+    },
+    {
+      "member": "jobs/baseline/core2/init.json",
+      "B": 59,
+      "SHA": "86db18966af419ab230dbcd4f680b96d1da30c677dc8707692010fed0c146eb4"
+    },
+    {
+      "member": "jobs/baseline/core2/raw-rows.jsonl",
+      "B": 4900339,
+      "SHA": "1c6a1ede30bba4554e2a0d7eebdcbc080d92d8aac712a7ac66d1a1f153107047"
+    },
+    {
+      "member": "jobs/baseline/core2/starts.jsonl",
+      "B": 2477,
+      "SHA": "67c4a6db5bbb6b6f714624d230ebff6ecbe6a7b2834fbcb59a3581aa498a3cf9"
+    },
+    {
+      "member": "jobs/baseline/core4/close.json",
+      "B": 436,
+      "SHA": "0a5810869764cd63f83990e04b96ed2d6a399c6d69bc5ec10ff268869c0d9a89"
+    },
+    {
+      "member": "jobs/baseline/core4/games.jsonl",
+      "B": 38282,
+      "SHA": "24d524fdc699bf518813159758cf3295e5f3dd03c87709aa4328a626d2e31c0d"
+    },
+    {
+      "member": "jobs/baseline/core4/init.json",
+      "B": 58,
+      "SHA": "74421ddb1809ff8ebadf7d98899c04a162035b227b7f0b67c08eb7af69427325"
+    },
+    {
+      "member": "jobs/baseline/core4/raw-rows.jsonl",
+      "B": 4988485,
+      "SHA": "d4ba8d6f07f00b44b3af66bb9cef2f335ca4f07df7a65f6ff91e76a7bcd3c570"
+    },
+    {
+      "member": "jobs/baseline/core4/starts.jsonl",
+      "B": 2477,
+      "SHA": "7ffa5691152b6e5dd220b00d893fb675a9560dc48751fb6e7cb0556df7f6eb6d"
+    },
+    {
+      "member": "jobs/baseline/core6/close.json",
+      "B": 436,
+      "SHA": "7b3f8522a26adb57b7cf80402f1a3463c893cb8420d73c419c46728df16c5abd"
+    },
+    {
+      "member": "jobs/baseline/core6/games.jsonl",
+      "B": 38363,
+      "SHA": "41769febc6240a8244bc138ac46e1f29702365ad4a87f089243739e774bffa5c"
+    },
+    {
+      "member": "jobs/baseline/core6/init.json",
+      "B": 49,
+      "SHA": "d479aac094a909e7ae8d34f45263e10a1a0e88ffe7cdcae1886a6d0d985d1b30"
+    },
+    {
+      "member": "jobs/baseline/core6/raw-rows.jsonl",
+      "B": 4399986,
+      "SHA": "8663c90ff0ce67e779da013d9a14dfabb79578a795677a676d2ac550fb6346fe"
+    },
+    {
+      "member": "jobs/baseline/core6/starts.jsonl",
+      "B": 2477,
+      "SHA": "f5453ca5ee3ef57f0d82104ccb84205ed62ffb14cef9add2cb903de851c6fa38"
+    },
+    {
+      "member": "jobs/baseline/current-owned-point.json",
+      "B": 105,
+      "SHA": "8ac5f0df0128f02a690136c03059a610032adbe19aa82e8b1e7d1726a109d20d"
+    },
+    {
+      "member": "jobs/baseline/init-all.json",
+      "B": 147,
+      "SHA": "d4fd891dd558b9ca24fd32b7fed74c5ec991f572d9bc85aba41d50d9a2f47f68"
+    },
+    {
+      "member": "jobs/baseline/pause-monitor-stop.json",
+      "B": 31928,
+      "SHA": "849fa2b58b5ac4a7f6dfa6fe662d9ee541c02cc3a835cadf66b6a1610ad1f346"
+    },
+    {
+      "member": "jobs/baseline/pause-monitor.json",
+      "B": 31841,
+      "SHA": "847f4538a69520726dacb897baf6edd2f0fef5728096566d0399cfab336ea1b0"
+    },
+    {
+      "member": "jobs/baseline/process.json",
+      "B": 28578,
+      "SHA": "0f75fef8740cba2e4ec89a7a11ec36cf80f8cf7fa5eee17b007abbdc914d17ba"
+    },
+    {
+      "member": "jobs/baseline/provider-init.json",
+      "B": 1045,
+      "SHA": "e64f9234c47a69726065a724e428a5203e8ed8f7a26966d812cbcc37ec95abdd"
+    },
+    {
+      "member": "jobs/baseline/provider-stop.json",
+      "B": 1248,
+      "SHA": "e7352334fe149d5990bf60853b0b81ad9393679ae427362db62c6739b0f0b2c2"
+    },
+    {
+      "member": "jobs/baseline/registered-games.json",
+      "B": 798764,
+      "SHA": "42668105b610802641803d079d07143cab6916481425a7bb23590d24553aed11"
+    },
+    {
+      "member": "jobs/baseline/result.json",
+      "B": 368855,
+      "SHA": "abad55f2574d5fa588a7d850956f253d8b7c0a3e59d2751a35816f3ac00eeec4"
+    },
+    {
+      "member": "jobs/baseline/stdout.txt",
+      "B": 69,
+      "SHA": "c2d1128cb6584118d0f8b0128d15e18b6df33fde9f2553e995f8319ee9558c8a"
+    },
+    {
+      "member": "jobs/baseline-confirmation/admission.json",
+      "B": 5572,
+      "SHA": "e7d2a5649e1d439570275d1abe88843a79337d8f88cec60ed3268770eb89cbfb"
+    },
+    {
+      "member": "jobs/baseline-confirmation/beads-read-quoridor-4lc.221.json",
+      "B": 220,
+      "SHA": "1ad49dfd4500b7be67e3eee36ba4ebbc3ae55352a4a17b2c076788285bdb72e0"
+    },
+    {
+      "member": "jobs/baseline-confirmation/beads-read-quoridor-4lc.json",
+      "B": 216,
+      "SHA": "8518a1435ad52498c43f30a6d2f34378280b8b5df5591fe56687492fe4fd1498"
+    },
+    {
+      "member": "jobs/baseline-confirmation/broker.json",
+      "B": 13500,
+      "SHA": "2ad00f6b3080ba42572ed6d71d46d3d694659d5583fe06ac2815f18080e2c41b"
+    },
+    {
+      "member": "jobs/baseline-confirmation/core2/close.json",
+      "B": 434,
+      "SHA": "250027354f58e2cff18332ba4732a34827cec3ef5decd9729796831a7a8fd1c5"
+    },
+    {
+      "member": "jobs/baseline-confirmation/core2/games.jsonl",
+      "B": 35885,
+      "SHA": "3daa07a6d4f35ffaf8f24b08573fb2c15ae02afc467a3f9f2acbf1e3f02fb309"
+    },
+    {
+      "member": "jobs/baseline-confirmation/core2/init.json",
+      "B": 59,
+      "SHA": "a935017a181ccf9e697e2eb67f8236fb8a0715cc3fefa2b7808bf75c9b99cd13"
+    },
+    {
+      "member": "jobs/baseline-confirmation/core2/raw-rows.jsonl",
+      "B": 4900372,
+      "SHA": "7907a45dd70439e08c7623ca0f82c3b9596ec56ab82f49e820353ed7149b782d"
+    },
+    {
+      "member": "jobs/baseline-confirmation/core2/starts.jsonl",
+      "B": 2477,
+      "SHA": "35c7a5dfdb02b052539ff61eb5ced567a20005a99b1f8b49a5838844a1991df5"
+    },
+    {
+      "member": "jobs/baseline-confirmation/core4/close.json",
+      "B": 433,
+      "SHA": "be13e9a18c7a3cd4d45bc567e630af825ad7293616a58aa61bdf6c13aab63b2c"
+    },
+    {
+      "member": "jobs/baseline-confirmation/core4/games.jsonl",
+      "B": 38301,
+      "SHA": "bb5eae902f9751a31a22d3dd187805ffb9c45e3e1efd4bdbca9cb29efaf4e269"
+    },
+    {
+      "member": "jobs/baseline-confirmation/core4/init.json",
+      "B": 58,
+      "SHA": "0631e7e01882fae9e9326077db8e703f92b7323bc433b1896f2897c9d405e779"
+    },
+    {
+      "member": "jobs/baseline-confirmation/core4/raw-rows.jsonl",
+      "B": 4988527,
+      "SHA": "ee95c68b741e6d26eb76a9fd53adf75fa20267db299e7a79a2c3e079e5a4cdf3"
+    },
+    {
+      "member": "jobs/baseline-confirmation/core4/starts.jsonl",
+      "B": 2477,
+      "SHA": "a13155b9d219f61b0c701405cbf704426621ced32d4dcc5ea443fb1ec5251cde"
+    },
+    {
+      "member": "jobs/baseline-confirmation/core6/close.json",
+      "B": 434,
+      "SHA": "a06dd9d8935a5b163a38320e9ea3f3b595ab1029718bc03c2eabb9fbed481035"
+    },
+    {
+      "member": "jobs/baseline-confirmation/core6/games.jsonl",
+      "B": 38346,
+      "SHA": "f3c78e42e757964fe61444542a3e02ab8ebf1642a471f3fca5f5d907e81e8330"
+    },
+    {
+      "member": "jobs/baseline-confirmation/core6/init.json",
+      "B": 59,
+      "SHA": "4ae0c5037ead5e1eb34b96339e8601d11dfe626ded817cc375c5e3192923baf5"
+    },
+    {
+      "member": "jobs/baseline-confirmation/core6/raw-rows.jsonl",
+      "B": 4400067,
+      "SHA": "15a60085be6cc3b11ab7ac2bf17fa1acb7c0a9b6ace80ead2be2008e837a5154"
+    },
+    {
+      "member": "jobs/baseline-confirmation/core6/starts.jsonl",
+      "B": 2477,
+      "SHA": "7b3f773ab5567dd7c471d7ba3330528e20dd439c4b30b89b2c0d29e7d913ed0f"
+    },
+    {
+      "member": "jobs/baseline-confirmation/init-all.json",
+      "B": 147,
+      "SHA": "d4fd891dd558b9ca24fd32b7fed74c5ec991f572d9bc85aba41d50d9a2f47f68"
+    },
+    {
+      "member": "jobs/baseline-confirmation/pause-monitor-stop.json",
+      "B": 35664,
+      "SHA": "833a80cdebda93ed4025e2419233a67beac2815babf94259c51bef72e473467a"
+    },
+    {
+      "member": "jobs/baseline-confirmation/pause-monitor.json",
+      "B": 35577,
+      "SHA": "722f98f1143a4ceeddafea932076fa0d9c6fb9f34b732185d352d974d58a2a52"
+    },
+    {
+      "member": "jobs/baseline-confirmation/process.json",
+      "B": 32983,
+      "SHA": "d0e198ad33c3232a1aaa4c5c4d1aeac58bd034e48a3ca099af62947fcbb94559"
+    },
+    {
+      "member": "jobs/baseline-confirmation/provider-init.json",
+      "B": 1044,
+      "SHA": "e4849f29154756724312636abc6c34b708689c59e3b08ae27a076a23b92c5e93"
+    },
+    {
+      "member": "jobs/baseline-confirmation/provider-stop.json",
+      "B": 1246,
+      "SHA": "d5cec7591f6901bb93acbdd79f987d18cc45742b65cd0610edbd2da9cef288b1"
+    },
+    {
+      "member": "jobs/baseline-confirmation/registered-games.json",
+      "B": 798764,
+      "SHA": "42668105b610802641803d079d07143cab6916481425a7bb23590d24553aed11"
+    },
+    {
+      "member": "jobs/baseline-confirmation/result.json",
+      "B": 368839,
+      "SHA": "552ae5f8b59b2336275ae5ac7eefbe9ba078d05c168801d5608cdb108f043b06"
+    },
+    {
+      "member": "jobs/baseline-confirmation/stdout.txt",
+      "B": 69,
+      "SHA": "c2d1128cb6584118d0f8b0128d15e18b6df33fde9f2553e995f8319ee9558c8a"
+    },
+    {
+      "member": "jobs/candidate/admission.json",
+      "B": 5571,
+      "SHA": "7d91f36b16f99477a46141e8b86759f57d0a0791ebb57cc25609decc8a5f4f82"
+    },
+    {
+      "member": "jobs/candidate/beads-read-quoridor-4lc.221.json",
+      "B": 220,
+      "SHA": "04fb68fd133153e3a75821b178f3c9e786950a255543e4cb9c5a82870f55cc00"
+    },
+    {
+      "member": "jobs/candidate/beads-read-quoridor-4lc.json",
+      "B": 216,
+      "SHA": "f780fe066bdb35026ec9a6eedcc1db553f23abaae1fe524e27b609b769687222"
+    },
+    {
+      "member": "jobs/candidate/broker.json",
+      "B": 15551,
+      "SHA": "b381141fe6d537c4047b9a54a7369555d3d340da62f4b6c812bae56263f19a0a"
+    },
+    {
+      "member": "jobs/candidate/core2/close.json",
+      "B": 436,
+      "SHA": "7a7c62fa770c39e29c86d339eda4bc2dc1ce6932468dee6cbcaaa12d93d7b584"
+    },
+    {
+      "member": "jobs/candidate/core2/games.jsonl",
+      "B": 35884,
+      "SHA": "00f36634f4be6386fbf9a3cb12c1d3d0264dcc587014441be735c721c4f3cadd"
+    },
+    {
+      "member": "jobs/candidate/core2/init.json",
+      "B": 58,
+      "SHA": "e1ab1b3bc9befe2a883558cd356271741aef39a6c0c89106510ddba04b2c3e3b"
+    },
+    {
+      "member": "jobs/candidate/core2/raw-rows.jsonl",
+      "B": 4900311,
+      "SHA": "545b207bec5105cc9a38a8d5b031430d8bd66ad65f6fe071ee3b9c31a32ea226"
+    },
+    {
+      "member": "jobs/candidate/core2/starts.jsonl",
+      "B": 2477,
+      "SHA": "9c17586071e8e335e2b02d7866793f69fc4de80e8bebe05780a356ae0e9fb00d"
+    },
+    {
+      "member": "jobs/candidate/core4/close.json",
+      "B": 433,
+      "SHA": "1b4571874ea1bac3f88b407b77059e25e1766cbf0ee16c8e9aa4debd74e952ac"
+    },
+    {
+      "member": "jobs/candidate/core4/games.jsonl",
+      "B": 38273,
+      "SHA": "6f83e19ac2b461cfa395d8af8f9e7bffd29e183471fcab9802c5fe51a8155b21"
+    },
+    {
+      "member": "jobs/candidate/core4/init.json",
+      "B": 59,
+      "SHA": "3dce7096b0e79eeadbabfae23665e726bb3c1d3e5d0fc247df830f6ffe4cbc58"
+    },
+    {
+      "member": "jobs/candidate/core4/raw-rows.jsonl",
+      "B": 4988444,
+      "SHA": "ecac3bcac847ac3b3b8ae89a3e3b169b0b586fbba11bb4fd1d67bff20988bebd"
+    },
+    {
+      "member": "jobs/candidate/core4/starts.jsonl",
+      "B": 2477,
+      "SHA": "b4c7284e4c6d9b119ba9355f1b0301672cde68a0077edc2ca48415d8ed1d25e7"
+    },
+    {
+      "member": "jobs/candidate/core6/close.json",
+      "B": 437,
+      "SHA": "2200e547929f7c45e576b83581bece6bca1f52f2ebcfc265d19ac4c0d2d6a7e7"
+    },
+    {
+      "member": "jobs/candidate/core6/games.jsonl",
+      "B": 38345,
+      "SHA": "cc3c80758a331612417eba618121e560a912b5201c140ad7a7483a847eb86923"
+    },
+    {
+      "member": "jobs/candidate/core6/init.json",
+      "B": 58,
+      "SHA": "0bf65fd31d6b63f39323e31950569c9187db1236e6ebc3c4d470394938f2d76c"
+    },
+    {
+      "member": "jobs/candidate/core6/raw-rows.jsonl",
+      "B": 4400057,
+      "SHA": "250605747424f9611e93cf69938b033291bebc46df7bc28a57c2b8f7b1a758d8"
+    },
+    {
+      "member": "jobs/candidate/core6/starts.jsonl",
+      "B": 2477,
+      "SHA": "1398c18e0e89067a2bb9e7ab46d86ac19bd35638ad82198cc48eb14071d7fd95"
+    },
+    {
+      "member": "jobs/candidate/init-all.json",
+      "B": 147,
+      "SHA": "d4fd891dd558b9ca24fd32b7fed74c5ec991f572d9bc85aba41d50d9a2f47f68"
+    },
+    {
+      "member": "jobs/candidate/pause-monitor-stop.json",
+      "B": 35136,
+      "SHA": "67b157c5c8322d48983bb452af822f7d1508441417f7c9edff739d8aa20b94b4"
+    },
+    {
+      "member": "jobs/candidate/pause-monitor.json",
+      "B": 35049,
+      "SHA": "4695cd263b8db5c1b7a5851aee67c96ee722e3c0efaf6cac8c486aae12e7aeb0"
+    },
+    {
+      "member": "jobs/candidate/process.json",
+      "B": 32944,
+      "SHA": "74eb4c297465cc94698e3f7064368787333d36926ec59f7c015f1b7030a75e8a"
+    },
+    {
+      "member": "jobs/candidate/provider-init.json",
+      "B": 1047,
+      "SHA": "46c07e371e5f7b90d4f715f732b2a3b659b8820e5b8a7832b76325c393f1650b"
+    },
+    {
+      "member": "jobs/candidate/provider-stop.json",
+      "B": 1249,
+      "SHA": "c214dd29a6894a98ba1cdcebbe2b08b07fb1c03cdb8c918f1e3fc591fafbb567"
+    },
+    {
+      "member": "jobs/candidate/registered-games.json",
+      "B": 798764,
+      "SHA": "42668105b610802641803d079d07143cab6916481425a7bb23590d24553aed11"
+    },
+    {
+      "member": "jobs/candidate/result.json",
+      "B": 368807,
+      "SHA": "6d7cf39c32426abcb93c1d3e2931369933efb62395677f39b018124765c4f6c1"
+    },
+    {
+      "member": "jobs/candidate/stdout.txt",
+      "B": 70,
+      "SHA": "572e401d7aa93096949bf3fdaa366e96ee1492f8c008dec4d8a9304f6fd84dd5"
+    },
+    {
+      "member": "jobs/parity-r1/process.json",
+      "B": 474,
+      "SHA": "898a8b928adef8705072179b43440dd890965eb10851c2742d6d83522219713d"
+    },
+    {
+      "member": "jobs/parity-r2/admission.json",
+      "B": 5549,
+      "SHA": "eeada1ad1068711c648763a7f81c2335942977728d4a0be598824e7be839d930"
+    },
+    {
+      "member": "jobs/parity-r2/checks-so-far.json",
+      "B": 11499,
+      "SHA": "5108a366c6825bef4f1f5952ae85010f2bd4adc1a944b1995472da5180ec8927"
+    },
+    {
+      "member": "jobs/parity-r2/process.json",
+      "B": 1154,
+      "SHA": "fafb606930dfed5db954c60d077c5f2f49801f1b923bf7001c1478651f2afce1"
+    },
+    {
+      "member": "jobs/parity-r2/result.json",
+      "B": 15294,
+      "SHA": "fa3a6269963f2e35a2afedaf1b89269f514de189b8830272a561bf9986caf2a5"
+    },
+    {
+      "member": "jobs/parity-r2/stdout.txt",
+      "B": 83,
+      "SHA": "c37884a9e447ea9fca3e4aa2244cb79a2af09ebfb073356579f223ed8703bafa"
+    }
+  ],
+  "byte_restore_PASS": true,
+  "wall_s": 0.7259016950265504,
+  "includes": "new221 jobs/raw/qualification records only",
+  "old_source_model_copy": false,
+  "raw_retention": "owned stopped raw kept in place until accepted; no fullraw extra copy outside archive"
+}

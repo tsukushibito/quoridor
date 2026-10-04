@@ -1,0 +1,572 @@
+{
+  "info": {
+    "request_id": "init",
+    "ok": true,
+    "result": {
+      "sample_cap": 600,
+      "wire_totals_ms": {
+        "json_parse": 0.017895,
+        "json_encode_firstpass": 0,
+        "stdout_write": 0
+      },
+      "private_issue": "quoridor-4lc.221",
+      "modelhash": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+      "provider": "torch-folded-dynamicB-v1",
+      "original_ONNX_batch": 1,
+      "batch_min": 1,
+      "batch_max": 24,
+      "dtype": "float32",
+      "TF32": false,
+      "AMP": false,
+      "torch": "2.14.0+cu130",
+      "ORT": "1.30.0",
+      "device": "NVIDIA GeForce RTX 3060",
+      "threads": [
+        1,
+        1
+      ],
+      "CPU_affinity": [
+        0
+      ],
+      "coldinit_s": {
+        "import": 0.7743896769825369,
+        "CPUORT_session": 0.03466806100914255,
+        "graph_weights": 0.07582303299568594,
+        "CUDA_upload_context": 0.19334590603830293
+      },
+      "single_sample_equivalent": 0,
+      "calls": {
+        "cuda": 0,
+        "cpuort": 0
+      },
+      "rows": {
+        "cuda": 0,
+        "cpuort": 0
+      },
+      "RAM_peak_KiB": 697252,
+      "GPU_allocated_B": 11642368,
+      "GPU_reserved_B": 14680064,
+      "GPU_peak_allocated_B": 11642368,
+      "GPU_peak_reserved_B": 14680064
+    }
+  },
+  "checks": [
+    {
+      "B": 1,
+      "max_absdiff": 0.0000031888484954833984,
+      "max_tol_ratio": 0.030198454954126222,
+      "IDs_pass": true,
+      "f32_finite_pass": true,
+      "CPU_samples": 1,
+      "CUDA_samples": 1,
+      "CUDA_cost": {
+        "server_before_JSON_ms": 736.977796,
+        "stages": {
+          "input_parse_ms": 0.08041,
+          "H2D_sync_ms": 0.261518,
+          "forward_sync_ms": 736.242455,
+          "D2H_sync_ms": 0.199082
+        },
+        "JSON_encode_firstpass_ms": 0.044983
+      }
+    },
+    {
+      "B": 2,
+      "max_absdiff": 0.000003814697265625,
+      "max_tol_ratio": 0.0258373147020457,
+      "IDs_pass": true,
+      "f32_finite_pass": true,
+      "CPU_samples": 2,
+      "CUDA_samples": 2,
+      "CUDA_cost": {
+        "server_before_JSON_ms": 18.682975,
+        "stages": {
+          "input_parse_ms": 0.108614,
+          "H2D_sync_ms": 0.235432,
+          "forward_sync_ms": 18.013958,
+          "D2H_sync_ms": 0.140017
+        },
+        "JSON_encode_firstpass_ms": 0.067309
+      }
+    },
+    {
+      "B": 3,
+      "max_absdiff": 0.00000476837158203125,
+      "max_tol_ratio": 0.040834028586399,
+      "IDs_pass": true,
+      "f32_finite_pass": true,
+      "CPU_samples": 3,
+      "CUDA_samples": 3,
+      "CUDA_cost": {
+        "server_before_JSON_ms": 7.528301,
+        "stages": {
+          "input_parse_ms": 0.158309,
+          "H2D_sync_ms": 0.261186,
+          "forward_sync_ms": 6.841077,
+          "D2H_sync_ms": 0.127737
+        },
+        "JSON_encode_firstpass_ms": 0.084822
+      }
+    },
+    {
+      "B": 4,
+      "max_absdiff": 0.00000667572021484375,
+      "max_tol_ratio": 0.04513234738496732,
+      "IDs_pass": true,
+      "f32_finite_pass": true,
+      "CPU_samples": 4,
+      "CUDA_samples": 4,
+      "CUDA_cost": {
+        "server_before_JSON_ms": 22.040529,
+        "stages": {
+          "input_parse_ms": 0.262487,
+          "H2D_sync_ms": 0.24101,
+          "forward_sync_ms": 21.110683,
+          "D2H_sync_ms": 0.186822
+        },
+        "JSON_encode_firstpass_ms": 0.133199
+      }
+    },
+    {
+      "B": 5,
+      "max_absdiff": 0.000007152557373046875,
+      "max_tol_ratio": 0.04513234738496732,
+      "IDs_pass": true,
+      "f32_finite_pass": true,
+      "CPU_samples": 5,
+      "CUDA_samples": 5,
+      "CUDA_cost": {
+        "server_before_JSON_ms": 8.078467,
+        "stages": {
+          "input_parse_ms": 0.263946,
+          "H2D_sync_ms": 0.286018,
+          "forward_sync_ms": 7.21158,
+          "D2H_sync_ms": 0.132638
+        },
+        "JSON_encode_firstpass_ms": 0.134632
+      }
+    },
+    {
+      "B": 6,
+      "max_absdiff": 0.000007152557373046875,
+      "max_tol_ratio": 0.04513234738496732,
+      "IDs_pass": true,
+      "f32_finite_pass": true,
+      "CPU_samples": 6,
+      "CUDA_samples": 6,
+      "CUDA_cost": {
+        "server_before_JSON_ms": 8.014696,
+        "stages": {
+          "input_parse_ms": 0.279691,
+          "H2D_sync_ms": 0.307132,
+          "forward_sync_ms": 7.158031,
+          "D2H_sync_ms": 0.115101
+        },
+        "JSON_encode_firstpass_ms": 0.131324
+      }
+    },
+    {
+      "B": 7,
+      "max_absdiff": 0.000007152557373046875,
+      "max_tol_ratio": 0.04513234738496732,
+      "IDs_pass": true,
+      "f32_finite_pass": true,
+      "CPU_samples": 7,
+      "CUDA_samples": 7,
+      "CUDA_cost": {
+        "server_before_JSON_ms": 7.740647,
+        "stages": {
+          "input_parse_ms": 0.325633,
+          "H2D_sync_ms": 0.232943,
+          "forward_sync_ms": 6.881772,
+          "D2H_sync_ms": 0.135119
+        },
+        "JSON_encode_firstpass_ms": 0.155732
+      }
+    },
+    {
+      "B": 8,
+      "max_absdiff": 0.000007152557373046875,
+      "max_tol_ratio": 0.04513234738496732,
+      "IDs_pass": true,
+      "f32_finite_pass": true,
+      "CPU_samples": 8,
+      "CUDA_samples": 8,
+      "CUDA_cost": {
+        "server_before_JSON_ms": 7.98785,
+        "stages": {
+          "input_parse_ms": 0.385795,
+          "H2D_sync_ms": 0.293027,
+          "forward_sync_ms": 7.047716,
+          "D2H_sync_ms": 0.108812
+        },
+        "JSON_encode_firstpass_ms": 0.173447
+      }
+    },
+    {
+      "B": 9,
+      "max_absdiff": 0.000007152557373046875,
+      "max_tol_ratio": 0.04513234738496732,
+      "IDs_pass": true,
+      "f32_finite_pass": true,
+      "CPU_samples": 9,
+      "CUDA_samples": 9,
+      "CUDA_cost": {
+        "server_before_JSON_ms": 8.124611,
+        "stages": {
+          "input_parse_ms": 0.423791,
+          "H2D_sync_ms": 0.317667,
+          "forward_sync_ms": 7.07431,
+          "D2H_sync_ms": 0.124727
+        },
+        "JSON_encode_firstpass_ms": 0.194548
+      }
+    },
+    {
+      "B": 10,
+      "max_absdiff": 0.000007152557373046875,
+      "max_tol_ratio": 0.04513234738496732,
+      "IDs_pass": true,
+      "f32_finite_pass": true,
+      "CPU_samples": 10,
+      "CUDA_samples": 10,
+      "CUDA_cost": {
+        "server_before_JSON_ms": 10.438952,
+        "stages": {
+          "input_parse_ms": 0.469805,
+          "H2D_sync_ms": 0.302471,
+          "forward_sync_ms": 9.281429,
+          "D2H_sync_ms": 0.190099
+        },
+        "JSON_encode_firstpass_ms": 0.210387
+      }
+    },
+    {
+      "B": 11,
+      "max_absdiff": 0.00000667572021484375,
+      "max_tol_ratio": 0.03755489721224633,
+      "IDs_pass": true,
+      "f32_finite_pass": true,
+      "CPU_samples": 11,
+      "CUDA_samples": 11,
+      "CUDA_cost": {
+        "server_before_JSON_ms": 8.220294,
+        "stages": {
+          "input_parse_ms": 0.553303,
+          "H2D_sync_ms": 0.269808,
+          "forward_sync_ms": 7.100866,
+          "D2H_sync_ms": 0.121258
+        },
+        "JSON_encode_firstpass_ms": 0.224324
+      }
+    },
+    {
+      "B": 12,
+      "max_absdiff": 0.00000667572021484375,
+      "max_tol_ratio": 0.03755489721224633,
+      "IDs_pass": true,
+      "f32_finite_pass": true,
+      "CPU_samples": 12,
+      "CUDA_samples": 12,
+      "CUDA_cost": {
+        "server_before_JSON_ms": 8.330467,
+        "stages": {
+          "input_parse_ms": 0.558956,
+          "H2D_sync_ms": 0.319132,
+          "forward_sync_ms": 7.163342,
+          "D2H_sync_ms": 0.109175
+        },
+        "JSON_encode_firstpass_ms": 0.240623
+      }
+    },
+    {
+      "B": 13,
+      "max_absdiff": 0.00000667572021484375,
+      "max_tol_ratio": 0.051124787938640025,
+      "IDs_pass": true,
+      "f32_finite_pass": true,
+      "CPU_samples": 13,
+      "CUDA_samples": 13,
+      "CUDA_cost": {
+        "server_before_JSON_ms": 8.044351,
+        "stages": {
+          "input_parse_ms": 0.587657,
+          "H2D_sync_ms": 0.292094,
+          "forward_sync_ms": 6.878516,
+          "D2H_sync_ms": 0.10459
+        },
+        "JSON_encode_firstpass_ms": 0.268564
+      }
+    },
+    {
+      "B": 14,
+      "max_absdiff": 0.000009298324584960938,
+      "max_tol_ratio": 0.05281568254634397,
+      "IDs_pass": true,
+      "f32_finite_pass": true,
+      "CPU_samples": 14,
+      "CUDA_samples": 14,
+      "CUDA_cost": {
+        "server_before_JSON_ms": 17.62819,
+        "stages": {
+          "input_parse_ms": 0.631968,
+          "H2D_sync_ms": 0.264179,
+          "forward_sync_ms": 16.163666,
+          "D2H_sync_ms": 0.329903
+        },
+        "JSON_encode_firstpass_ms": 0.340572
+      }
+    },
+    {
+      "B": 15,
+      "max_absdiff": 0.000009298324584960938,
+      "max_tol_ratio": 0.05281568254634397,
+      "IDs_pass": true,
+      "f32_finite_pass": true,
+      "CPU_samples": 15,
+      "CUDA_samples": 15,
+      "CUDA_cost": {
+        "server_before_JSON_ms": 10.116195,
+        "stages": {
+          "input_parse_ms": 0.707831,
+          "H2D_sync_ms": 0.354016,
+          "forward_sync_ms": 8.674763,
+          "D2H_sync_ms": 0.131835
+        },
+        "JSON_encode_firstpass_ms": 0.357083
+      }
+    },
+    {
+      "B": 16,
+      "max_absdiff": 0.000009298324584960938,
+      "max_tol_ratio": 0.05281568254634397,
+      "IDs_pass": true,
+      "f32_finite_pass": true,
+      "CPU_samples": 16,
+      "CUDA_samples": 16,
+      "CUDA_cost": {
+        "server_before_JSON_ms": 9.348238,
+        "stages": {
+          "input_parse_ms": 0.711192,
+          "H2D_sync_ms": 0.249621,
+          "forward_sync_ms": 7.990894,
+          "D2H_sync_ms": 0.127161
+        },
+        "JSON_encode_firstpass_ms": 0.33604
+      }
+    },
+    {
+      "B": 17,
+      "max_absdiff": 0.0000073909759521484375,
+      "max_tol_ratio": 0.04260398994886669,
+      "IDs_pass": true,
+      "f32_finite_pass": true,
+      "CPU_samples": 17,
+      "CUDA_samples": 17,
+      "CUDA_cost": {
+        "server_before_JSON_ms": 9.025557,
+        "stages": {
+          "input_parse_ms": 0.759092,
+          "H2D_sync_ms": 0.258324,
+          "forward_sync_ms": 7.561351,
+          "D2H_sync_ms": 0.141809
+        },
+        "JSON_encode_firstpass_ms": 0.348772
+      }
+    },
+    {
+      "B": 18,
+      "max_absdiff": 0.0000073909759521484375,
+      "max_tol_ratio": 0.04260398994886669,
+      "IDs_pass": true,
+      "f32_finite_pass": true,
+      "CPU_samples": 18,
+      "CUDA_samples": 18,
+      "CUDA_cost": {
+        "server_before_JSON_ms": 9.489817,
+        "stages": {
+          "input_parse_ms": 0.799343,
+          "H2D_sync_ms": 0.357614,
+          "forward_sync_ms": 7.98591,
+          "D2H_sync_ms": 0.125633
+        },
+        "JSON_encode_firstpass_ms": 0.343317
+      }
+    },
+    {
+      "B": 19,
+      "max_absdiff": 0.0000073909759521484375,
+      "max_tol_ratio": 0.04260398994886669,
+      "IDs_pass": true,
+      "f32_finite_pass": true,
+      "CPU_samples": 19,
+      "CUDA_samples": 19,
+      "CUDA_cost": {
+        "server_before_JSON_ms": 8.597305,
+        "stages": {
+          "input_parse_ms": 0.853808,
+          "H2D_sync_ms": 0.285167,
+          "forward_sync_ms": 7.136405,
+          "D2H_sync_ms": 0.118683
+        },
+        "JSON_encode_firstpass_ms": 0.361891
+      }
+    },
+    {
+      "B": 20,
+      "max_absdiff": 0.0000073909759521484375,
+      "max_tol_ratio": 0.04260398994886669,
+      "IDs_pass": true,
+      "f32_finite_pass": true,
+      "CPU_samples": 20,
+      "CUDA_samples": 20,
+      "CUDA_cost": {
+        "server_before_JSON_ms": 8.902954,
+        "stages": {
+          "input_parse_ms": 0.900339,
+          "H2D_sync_ms": 0.363197,
+          "forward_sync_ms": 7.240562,
+          "D2H_sync_ms": 0.149706
+        },
+        "JSON_encode_firstpass_ms": 0.395145
+      }
+    },
+    {
+      "B": 21,
+      "max_absdiff": 0.0000073909759521484375,
+      "max_tol_ratio": 0.04260398994886669,
+      "IDs_pass": true,
+      "f32_finite_pass": true,
+      "CPU_samples": 21,
+      "CUDA_samples": 21,
+      "CUDA_cost": {
+        "server_before_JSON_ms": 9.033638,
+        "stages": {
+          "input_parse_ms": 0.945569,
+          "H2D_sync_ms": 0.348105,
+          "forward_sync_ms": 7.385248,
+          "D2H_sync_ms": 0.117194
+        },
+        "JSON_encode_firstpass_ms": 0.40191
+      }
+    },
+    {
+      "B": 22,
+      "max_absdiff": 0.0000073909759521484375,
+      "max_tol_ratio": 0.04260398994886669,
+      "IDs_pass": true,
+      "f32_finite_pass": true,
+      "CPU_samples": 22,
+      "CUDA_samples": 22,
+      "CUDA_cost": {
+        "server_before_JSON_ms": 11.180922,
+        "stages": {
+          "input_parse_ms": 0.987444,
+          "H2D_sync_ms": 0.397087,
+          "forward_sync_ms": 9.39411,
+          "D2H_sync_ms": 0.181689
+        },
+        "JSON_encode_firstpass_ms": 0.429309
+      }
+    },
+    {
+      "B": 23,
+      "max_absdiff": 0.0000073909759521484375,
+      "max_tol_ratio": 0.04260398994886669,
+      "IDs_pass": true,
+      "f32_finite_pass": true,
+      "CPU_samples": 23,
+      "CUDA_samples": 23,
+      "CUDA_cost": {
+        "server_before_JSON_ms": 16.601881,
+        "stages": {
+          "input_parse_ms": 1.344774,
+          "H2D_sync_ms": 0.550242,
+          "forward_sync_ms": 14.215612,
+          "D2H_sync_ms": 0.209443
+        },
+        "JSON_encode_firstpass_ms": 0.49148
+      }
+    },
+    {
+      "B": 24,
+      "max_absdiff": 0.0000073909759521484375,
+      "max_tol_ratio": 0.04260398994886669,
+      "IDs_pass": true,
+      "f32_finite_pass": true,
+      "CPU_samples": 24,
+      "CUDA_samples": 24,
+      "CUDA_cost": {
+        "server_before_JSON_ms": 21.8677,
+        "stages": {
+          "input_parse_ms": 1.126403,
+          "H2D_sync_ms": 0.300426,
+          "forward_sync_ms": 19.995721,
+          "D2H_sync_ms": 0.205903
+        },
+        "JSON_encode_firstpass_ms": 0.457569
+      }
+    }
+  ],
+  "stop": {
+    "request_id": "stop",
+    "ok": true,
+    "result": {
+      "sample_cap": 600,
+      "wire_totals_ms": {
+        "json_parse": 12.600231000000004,
+        "json_encode_firstpass": 12.746541,
+        "stdout_write": 42.262439
+      },
+      "private_issue": "quoridor-4lc.221",
+      "modelhash": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+      "provider": "torch-folded-dynamicB-v1",
+      "original_ONNX_batch": 1,
+      "batch_min": 1,
+      "batch_max": 24,
+      "dtype": "float32",
+      "TF32": false,
+      "AMP": false,
+      "torch": "2.14.0+cu130",
+      "ORT": "1.30.0",
+      "device": "NVIDIA GeForce RTX 3060",
+      "threads": [
+        1,
+        1
+      ],
+      "CPU_affinity": [
+        0
+      ],
+      "coldinit_s": {
+        "import": 0.7743896769825369,
+        "CPUORT_session": 0.03466806100914255,
+        "graph_weights": 0.07582303299568594,
+        "CUDA_upload_context": 0.19334590603830293
+      },
+      "single_sample_equivalent": 600,
+      "calls": {
+        "cuda": 24,
+        "cpuort": 24
+      },
+      "rows": {
+        "cuda": 300,
+        "cpuort": 300
+      },
+      "RAM_peak_KiB": 1182348,
+      "GPU_allocated_B": 20162048,
+      "GPU_reserved_B": 39845888,
+      "GPU_peak_allocated_B": 27085312,
+      "GPU_peak_reserved_B": 39845888
+    }
+  },
+  "exit": {
+    "code": null,
+    "signal": "SIGTERM",
+    "pid": 4143298
+  },
+  "primary": null,
+  "elapsed_s": 3.7580098369999995,
+  "NN_samples": 600,
+  "tol": "abs1e-4+rtol1e-4",
+  "fulltree_or_teacher_quality_proved": false
+}
