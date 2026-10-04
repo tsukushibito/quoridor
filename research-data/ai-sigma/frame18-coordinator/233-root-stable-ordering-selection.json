@@ -1,0 +1,17 @@
+{
+  "UTC": "2026-10-04T14:02:12.219918+00:00",
+  "issue": "quoridor-4lc.233",
+  "proposal": "previous completed-depth root best action first, stable remainder, every legal action retained",
+  "decision": "retain as next low-cost search intervention; do not add a new condition or run to current232 parity/action contract",
+  "reason": "current frozen-model semantic connection precedes ordering benefit test; limited remaining window and current fixed tie/ordering conditions",
+  "guards": [
+    "discard incomplete depth",
+    "cache-aware legal-call cost",
+    "inclusive spans not exclusive additive cost",
+    "minimax-value consistency does not establish identical action or strength",
+    "policy ordering-only with overhead retained; TT/history context needs separate proof"
+  ],
+  "source_science": "static/model/NN0",
+  "deadline_source": "14:12",
+  "deadline_save": "14:18"
+}

@@ -1,0 +1,136 @@
+{
+  "UTC": "2026-10-04T14:02:48.898238+00:00",
+  "owner_receipt_only": true,
+  "no_independent_forward": true,
+  "artifact_point": {
+    "parity-result.json": {
+      "SHA": "3d7681f01f1f9ae23a818db98eb133e0f0ac1a651cbfc238b02d2404de73bcd7",
+      "keys": [
+        "UTC",
+        "PASS",
+        "samples",
+        "Torch_samples",
+        "native_samples",
+        "forward_only",
+        "training",
+        "GPU",
+        "weights_export_forward",
+        "max_torch_abs",
+        "max_full_delta_abs",
+        "all_legal_children"
+      ]
+    },
+    "native-parity.json": {
+      "SHA": "d668d625685905e1fe58a685b4daea7660b9173a12753b8781acb7495a47c8de",
+      "keys": [
+        "PASS",
+        "implementation",
+        "samples",
+        "Torch27",
+        "max_torch_abs",
+        "max_full_delta_abs",
+        "tol",
+        "all_legal_children",
+        "kinds",
+        "roots",
+        "selected",
+        "parent_copy_buffer_key_history_unchanged",
+        "mutable_undo_guarantee",
+        "terminal_beforeNN",
+        "terminal_NN",
+        "full_including_input_ms",
+        "delta_including_input_ms",
+        "map",
+        "samewall_speed_claim"
+      ]
+    },
+    "weight-manifest.json": {
+      "SHA": "9bc786e82c3b73a462da4a30e1d884678ef9f7bdb757560dd6bb437fa4b25d40",
+      "keys": [
+        "feature",
+        "weights",
+        "weights_SHA",
+        "weights_B",
+        "checkpoint_SHA",
+        "freeze_SHA",
+        "names",
+        "shapes",
+        "little_endian_f32",
+        "mu_f32",
+        "sigma_f32",
+        "scale_SHA",
+        "h_export_recompensation",
+        "runtime",
+        "distance_fit"
+      ]
+    },
+    "guardians/parity-r1/process.json": {
+      "SHA": "2b4b7eabdf998a69fd1402be618a95e84cb93ccdfcdaf341a654ba8311396a27",
+      "keys": [
+        "UTC",
+        "startUTC",
+        "endUTC",
+        "exit",
+        "reason",
+        "wall_s",
+        "peak_family_RSS",
+        "samples_actual",
+        "samples_charge",
+        "original_unknown",
+        "tracked",
+        "remaining",
+        "all_child_waited",
+        "current_exact_absent",
+        "runner_pid",
+        "runner_tick"
+      ]
+    },
+    "background-parity-r1/result.json": {
+      "SHA": "f3d78b568462ed4d569e34b0f949c9dcbc07c21e08525cc16a4501ea4424ab9d",
+      "keys": [
+        "job_id",
+        "outcome",
+        "error",
+        "exit_code",
+        "finished_at",
+        "wall_seconds",
+        "remaining",
+        "descendant_scope",
+        "cleanup_complete",
+        "log_bytes_seen",
+        "log_bytes_retained"
+      ]
+    },
+    "background-parity-r1/notification.json": {
+      "SHA": "5c727dbbf509905f8a6c6bacedf157de915d30fbc6a4d915bcfbacb35446f1dc",
+      "keys": [
+        "status",
+        "updated_at",
+        "reason",
+        "marker",
+        "turn_id"
+      ]
+    },
+    "background-search-r1/result.json": {
+      "SHA": "1bf1390c0efb42c55cf8075abea00b883ef0a3053486b84c5a76120ebcc9ef08",
+      "keys": [
+        "job_id",
+        "outcome",
+        "error",
+        "exit_code",
+        "finished_at",
+        "wall_seconds",
+        "remaining",
+        "descendant_scope",
+        "cleanup_complete",
+        "log_bytes_seen",
+        "log_bytes_retained"
+      ]
+    }
+  },
+  "reported_sample1084": true,
+  "reported_27maxabs": 8.94e-08,
+  "reported_515fulldelta": 1.192e-07,
+  "mutable_undo_guarantee": false,
+  "strength": false
+}
