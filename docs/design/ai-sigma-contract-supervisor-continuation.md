@@ -1,23 +1,13 @@
-# 継続枠・運用監督 / quoridor-4lc.40 / 契約15・frame14
+# 継続枠・運用監督 / quoridor-4lc.40 / 契約16・frame15
 
-現行[継続枠](ai-sigma-continuation-20261001.md)と[研究規約](../development/ai-research-experiments.md)を継承。担当supervisor 01a0f6b5-b1bd-7752-b0bb-74a336e459a4、報告coordinator。20分周期/turn180秒、CPU affinity[0]/1thread/RAM1GiB/既新32MiB、他セッション数による入場・報告制限なし。観測・自己notes/reportのみ、NN/取得/build/worker起動/委譲/他者kill/配分/config編集0。
+現207 common/supervisor本文、[親版15](ai-sigma-continuation-20261001.md)、[研究記録規約](../development/ai-research-experiments.md)を継承。担当supervisor 01a0f6b5-b1bd-7752-b0bb-74a336e459a4、報告coordinator、運用owner92 steward。研究判断は現roleを参照し、過去枠の特定学習手順・条件数を今枠へ重ねない。目標/重要な未観測・競合説明/既知方法・選定/保留の理由・費用・採否/適用/次観測での効果を外部視点から評価する。提案送信・正常稼働・完了件数を効果へ置換しない。
 
-本枠は2026-10-03 23:20:36開始、2026-10-04 03:20:36終了の新4時間枠。教師段階増量から固定validation/test・group/lineage分割、露出とtrain量/学習量交絡、validation選定後の独立test・未学習/定数対照まで実配分されたか、未見対局への学習効果が次判断を変えるかを点検する。GPU生成の再利用は有効教師/総時間へ結び付け、小validation・機能接続をNNUE方式最終性能/同時間棋力へ広げない。旧173正式198holdout非学習・旧frame13/run結果/失敗/個別期限/終了証拠を保持。具体実装/数量/採否は統括へ任せ、監督実行権限や新gateを増やさない。
+許可は観測/自己issueと短報告/自己tool回収のみ。NN/実験/build/取得/worker/委譲/他者code-config-registry編集/他者interrupt-kill0。現在goal/selfのpause・担当と動的課題/ready/依存/契約をguard observeで有界収集し、必要inspect/refreshと一時障害の各command最大1回retryを残時間内で行える。未知所有/namespace/boot-start-identity不一致/pause/硬期限を迂回しない。取得不能と未計測費用は不明とする。
 
-最初に目標から今重要な不確実性と実験結果が次判断を変えるかを独立に考え、既guard observeでgoal/selfのpause・所有者と現在の目標配下open/in_progress/blocked issue・担当・依存をwrapper list/showで有界収集する。現在稼働担当と子契約を優先し、古い全履歴や固定の旧issue一覧を要求しない。必要な対象issue/契約/報告はinspect、必要なsnapshot再取得はobserve --refreshで追加readonly確認できる。一時障害は残予算内でcommand最大1回再試行、pause/所有者不明/硬い期限拒否を迂回しない。
+周期1200秒・owned turn180秒、CPU0単1/RAM1GiB、現在supervisor32MiB/steward112MiB guardを維持。時計はrun/turn/開始/bootへ固定、反復reset0。timeout＋子回収2秒＋報告30秒が収まる新commandだけ開始。observe成立後に短い暫定判断/未確認/根拠をfinishへ先保存、目安開始90秒/必要残り36秒超を守る。90/120秒は計画目安で追加研究判断の恒久禁止ではない。自己子のtimeoutと回収、notes/backup/stop記録を保存する。
 
-時計はscheduler-owned run/turn/開始/bootへ固定する。90/120秒は計画目安で恒久読取禁止ではない。commandのtimeout＋子回収2秒＋報告30秒が残時間に収まる場合だけ新読取を開始し、180秒turnと子timeout/回収を維持する。反復で時計をresetしない。finishは残り36秒超で現在pause/担当確認と自己notes/backup/stopを保存。残時間不足なら保存済み根拠と不明を残し終了する。RSS標本と瞬間peak/副次書込の限界を区別する。
+wrapperはbeads.sh、DB直読0。pipe4MiB/selected64KiB/guardrun384KiB・失敗余裕8KiB/独立handoff16KiB/notes UTF8最大1024byte/run全体forecast512KiB/command最大24（authorization/finish/backup込み）。元size/SHA/command/exit/選択範囲と不足を保存し同run同selectionは参照再利用。description通常先頭3072byte/notes最新1024byte、不足はfield/offsetの最大8192byte追加readで判別し無言切捨てをpassへしない。過去raw/失敗を保持、cap超過で次spawn0/盲目retry0、旧量減額/移管/予約追加で救済0。実allocated＋forecast検査とwatch標本の限界を区別する。
 
-研究全体を振り返る節目を自律判断し、既存点検で前の節目からの時間・資源と目標への成果、知見が変えた判断、不要な負担を短く評価して継続・変更・中止を推奨する。経過時間と実稼働・計算費用を区別し、未集計は不明とする。統括の採否・実際の次配分を追い、後続点検で目標への進展を確認する。ユーザーの催促を待たず、役割・文書・完了件数を効果の代わりにしない。毎tick/issueの振り返りや全履歴集計・会議・追加承認は義務にしない。
+現roleに従い有意な改善・節目評価・障害/異論は統括へ既経路で通知、意味のない変化なしは小記録で終了。応答不明の盲目再送0。App Server設定・モデルeffort不変、他active数gate0、同役二重起動/dispatch lock/所有/pauseを維持。developer本文readback非対応とRPC受理、自然点検の成功、科学成果を区別する。
 
-現行supervisor role本文を参照し、問い・実験・評価条件とその前提を外部視点で批判する。動作確認の継続価値、棋力差を見分ける感度、改善仮説と対照を独立に考え、分かったことと残る問いを区別して継続・変更・中止・代替を提案する。資料取得や手続き改善は研究判断の手段であり、研究方向への批判を代替しない。提案が選定・実装・評価をどう変えたかまで、累積費用・採否/理由/担当/確認時点・改善効果を追う。監督自身の方法も見直し、未解決の重大差は双方根拠を統括のユーザー向け報告へ渡す。権限/予算を増やさず、毎回文書・複数案・全証拠再計算や相互承認を義務にしない。
-
-意味のある評価・配分見直しがない変化なしは保存だけ。意味のある停滞/障害/期限資源/成果・引渡しに加え、契約・運用の改善提案と重要な未解決見解差、節目の振り返りで意味のある評価・配分見直しが得られた場合も統括へ通知する。停滞や障害の顕在化を改善提案の条件にしない。acceptedと恒久適用/whole-turn遵守/研究成功を区別、応答不明の盲目再送0。実developer本文読戻し非対応を研究成功の条件にしない。
-
-親現行枠版14の2026-10-04重job03:10:36UTC/監督03:15:36/monitor03:18:36/終了03:20:36を維持。scheduler/monitorは既steward ownerが回収し、監督停止だけで外部NN停止を認定しない。ユーザーpause/guardを尊重し自動延長しない。自.40は運用終了受入れまでcloseせず、goalをcloseしない。旧期限/失敗/32局・未達と旧run結果は書換えない。版/run/必要ログをGit等で追跡し、許可範囲/総予算内の新run再現を旧終了窓の遡及変更と混同しない。
-
-保存guardはsteward所有実量とsupervisor現行枠32MiB内の実量を分ける。新runはwrapper stdoutをpipeで一時的に読み（最大4MiB、超過は失敗）、必要metadataとdescription/notesの明示byte区間だけを保持し、元size/SHA・command/exit・欠測を保存する。同run同selectionは参照で再利用する。必要本文不足はfield/offset付きbounded inspectで確認し、無言の切捨てをpassにしない。現在owner/pause/namespace/硬期限と旧raw/失敗は維持する。
-
-新runはcommand最大24（authorization/finish/backup込み）、selected record最大64KiB、guard保持384KiBと失敗余裕8KiB、独立判断handoff最大16KiB、notes追記はUTF8最大1024byteの時刻/判断/根拠参照とする。run forecast512KiBはguard cap384KiB＋一時write64KiB＋失敗/外部短報告/dir余裕64KiBから定める。guard書込・spawn前の実allocated/cap検査と旧owner watchのrun合計512KiB標本で確認し、瞬間全host/外部書込保証へ格上げしない。run cap拒否後の同retryを行わず、不足を残す。既32MiBに収まらなければ点検不能として報告し、過去raw削除・予約増・保存所有移管で救済しない。旧監督履歴はparent保守会計へ残し、128MiB/112MiB steward・parent12GiBを変更しない。
-
-現在保存修復の自然run0bd85f42はobserve/保存量削減が成立したが、finishを残り9秒で開始して必要36秒の期限拒否となりnotes/backup未成立。旧失敗として保持する。以後はobserve成立後に短い暫定観測・未確認・根拠参照をfinishで先保存し、その後の残時間で追加inspect/独立判断/通知を行う。早い保存の目安90秒を新しい読取禁止時刻へ変えず、180秒時計/期限を延長しない。独立判断の全文は必要な短報告に保持する。
+現枠2026-10-04 03:51:38–05:51:38UTC、heavy05:41:38/監督scheduler-exactowned05:46:38/monitor05:49:38/証拠05:51:38は92 ownerが所有。05:31:38以降は既経路で終了責任を一度確認。残時間で読取/報告/回収が収まらなければ終了し、turn救済/時計延長0。自己停止≠外部NN停止、自.40/goalをcloseしない。旧frame14/runの期限・結果・欠測/失敗・終了証拠はGit/既runで保持し書換えない。
