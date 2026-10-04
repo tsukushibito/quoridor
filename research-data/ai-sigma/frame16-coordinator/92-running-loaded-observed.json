@@ -1,0 +1,100 @@
+{
+  "UTC": "2026-10-04T06:14:16.626999+00:00",
+  "source": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame16/running-loaded.json",
+  "sourceSHA": "e75bca66ef04188250c82b423d29f68510790c0ce616eb7791a121d4f1a4beaa",
+  "owner_report": {
+    "at": "2026-10-04T06:13:31.377760+00:00",
+    "frame": 16,
+    "fresh_start": true,
+    "reloaded_event": false,
+    "run": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame16-89597b76-3de7-4fb8-86bc-1fcf5dc505d4",
+    "parent_git": "c7607679934fdc1a64e8d6f2f4cec2483789351e",
+    "parent_sha256": "b468782c611a9e495e8dcceb92b77717dfd46e8e8f0209e702a8959ef13bf361",
+    "definitions": {
+      "coordinator": "52a19638dff9af8fa422afadacf757bf3517223e410f3e1210f6964db6e032f0",
+      "hypothesis": "db6370b3f5d091f5b2155b3cba42b62d4743153b513445066714bdbf7f9e8a04",
+      "experiment": "09c3472d031e94f10263ba518abb57b1c9876e84712ef7d59fca6989b32d9720",
+      "critic": "b5a20ad0f99585ec5d308759dd74aa4db057c34521136abd1c9659f9a8d5c268",
+      "steward": "666d142158dcbf82d898fcacdfb3a1d7409fd1ff43ad34e15b27ca12ee05cb5e",
+      "supervisor": "190683a09f655188d2a92ff01affff45b17ee1d2eb2a00a623e7f995081e67fc"
+    },
+    "scheduler": {
+      "pid": 4069898,
+      "start_ticks": "34737868",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "state": "S",
+      "rss_bytes": 32047104,
+      "affinity": [
+        0
+      ]
+    },
+    "monitor": {
+      "pid": 4069912,
+      "start_ticks": "34737890",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "state": "S",
+      "rss_bytes": 20869120,
+      "affinity": [
+        0
+      ]
+    },
+    "state_phase": "running",
+    "owned": {
+      "run_id": "f3cd2859-2097-41c2-9fc9-16ae8209aaa5",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+      "turn_id": "01a1058b-cf9e-72f3-b934-f7212e61c9d3",
+      "started_at": "2026-10-04T06:13:31.141131+00:00",
+      "max_turn_seconds": 180
+    },
+    "last_result": {
+      "at": "2026-10-04T06:13:31.174494+00:00",
+      "event": "dispatched",
+      "run_id": "f3cd2859-2097-41c2-9fc9-16ae8209aaa5",
+      "turn_id": "01a1058b-cf9e-72f3-b934-f7212e61c9d3"
+    },
+    "next_at": 1791095607.6037133,
+    "loaded_config_sha256": "bbb37316a9fa82885ce3c7f4b61033007440d87b159bbe1d2de9400f75c03c70",
+    "loaded_contract_sha256": "8c14a0792486f564df92621c51c004003cea2bcbe6d45e89e81006c1f8d5ebe4",
+    "input_hashes_count": 24,
+    "input_hash_mismatch": [],
+    "source_write_stopped": true,
+    "old_identities_absent": [
+      {
+        "pid": 3975993,
+        "absent": true,
+        "same_identity_running": false,
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      {
+        "pid": 3976006,
+        "absent": true,
+        "same_identity_running": false,
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      }
+    ],
+    "heavy_stop_utc": "2026-10-04T07:45:50Z",
+    "scheduler_stop_utc": "2026-10-04T07:50:50Z",
+    "monitor_collect_utc": "2026-10-04T07:53:50Z",
+    "final_save_utc": "2026-10-04T07:55:50Z",
+    "natural_supervision_and_whole_period_success_unconfirmed": true,
+    "external_jobs_stopped_claimed": false
+  },
+  "point_identity_read": [
+    {
+      "role": "scheduler",
+      "pid": 4069898,
+      "expected_tick": "34737868",
+      "current_tick": "34737868",
+      "exact_match": true
+    },
+    {
+      "role": "monitor",
+      "pid": 4069912,
+      "expected_tick": "34737890",
+      "current_tick": "34737890",
+      "exact_match": true
+    }
+  ],
+  "whole_period_success": false,
+  "external_NN_stopped_claimed": false
+}
