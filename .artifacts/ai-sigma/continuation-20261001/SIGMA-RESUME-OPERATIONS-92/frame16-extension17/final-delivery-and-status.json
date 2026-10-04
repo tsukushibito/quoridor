@@ -1,0 +1,47 @@
+{
+  "at": "2026-10-04T07:45:57.509125+00:00",
+  "report_exit_code": 0,
+  "accepted": true,
+  "report_body_sha256": "bbc7277633629dc0fb1d0420d5a0f53c9ea151e2d17df332043d627436d29cc7",
+  "phase": "running",
+  "same_processes": [
+    {
+      "pid": 4133634,
+      "start_ticks": "35249387"
+    },
+    {
+      "pid": 4133648,
+      "start_ticks": "35249412"
+    }
+  ],
+  "input_hash_mismatch": 0,
+  "default_indices_same": {
+    "main": true,
+    "research": true
+  },
+  "source_stopped": true,
+  "short_children_ended": true,
+  "intentional_long_processes": 2,
+  "stop_times": [
+    "09:45:50",
+    "09:50:50",
+    "09:53:50",
+    "09:55:50"
+  ],
+  "semantic_supervision_unknown_preserved": true,
+  "corrected_previous_receipt": true,
+  "previous_acceptance_field_was_erroneous": true,
+  "final_receipt": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame16-extension17/final-report-retry-receipt.json",
+  "prior_report_error": "research-team: Another client is dispatching; retry later",
+  "prior_rejection_stage": "local dispatch lock before delivery",
+  "report_error": null,
+  "accepted_receipt": {
+    "at": "2026-10-04T07:47:17.266291+00:00",
+    "exit_code": 0,
+    "stdout": "{\n  \"method\": \"turn/steer\",\n  \"thread_id\": \"01a0f31b-3409-75f2-a30e-453a50484f94\",\n  \"turn_id\": \"01a1057f-b013-7b70-b0bb-ac81ded30272\",\n  \"accepted\": true\n}\n",
+    "stderr": "",
+    "attempt": 2,
+    "prior_local_refusal_saved": true,
+    "blind_ambiguous_retry": false
+  }
+}
