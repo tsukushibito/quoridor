@@ -1,0 +1,2 @@
+goal quoridor-4lc /221 phase3主科学回収速報
+Main48 actual09:09:58.270→09:11:18.545/guardian82.130331s、48GOAL/Rpolicy=Rz=Rjoint1554、logicalNN81096/startup108/physical81204/exit0/全childwait currentexactabsence、RuleA全1554replay資格PASS。原graph mean85.727sに比べ小差のため事前留保したsamecandidate確認を本人freshphysics/caps/storage/newnullablemonitorでadmit。確認actual 2026-10-04T09:11:31.304491+00:00/PID13972/tick35806653。成功置換0/2条件増0、別attempt/全96planned benchmark siblings48family、訓練混合0。

@@ -1,0 +1,32 @@
+{
+  "UTC": "2026-10-04T09:04:10.811224+00:00",
+  "prospective": true,
+  "conditions_unchanged": true,
+  "per_component": [
+    {
+      "change": "single transmitted JSON encode; cumulative prior-response timing",
+      "implementation_estimate_minutes": 5,
+      "verification": "source syntax+mock guards; same numerical hotwire bit compare in shared432NNfixture",
+      "expected_job_savings_s": "discarded encode old~2.65s/job avoided; secondencode/write span9-10s mixed, not promised whole saving"
+    },
+    {
+      "change": "bits-only payload and validated f32 reconstruction",
+      "implementation_estimate_minutes": 10,
+      "verification": "10invalidschemas, signedzero/subnormal,partialB1..8-ID/cancel/EOF; shared432 actualfixture then sharedRuleA teacher replay",
+      "expected_job_savings_s": "smaller encoding/bytes/receiveparse; added strictword/finite/range/roundtrip CPU cost; net unknown until wholejob"
+    }
+  ],
+  "package_selected": true,
+  "individual_cause_not_identified": true,
+  "implementation_estimate_total_minutes": 15,
+  "remaining_actual_numeric_cap": 2000,
+  "numeric_planned": 432,
+  "break_even_before_observation": {
+    "delta_unknown": true,
+    "development_scenario_cost_s": 900,
+    "if_save5s_per48_games_recovery": 8640,
+    "if_save15s_per48_games_recovery": 2880
+  },
+  "broader_choices": "Binary/Rustpump requires frame/IDs/cancel/restart/build/RuleA schema parity; C++ requires coreteacher correspondence; estimates unmeasured, not simultaneously implemented",
+  "old_graph_gain_does_not_justify_freezing_process_placement": true
+}
