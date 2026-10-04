@@ -217,3 +217,8 @@ HEAD対DISTarena、追加L2/headfreeze/幅/target調整、教師増量は保留�
 ### 213停止観測：更新増幅を抑えると標準化利益が縮む
 
 固定primary200 valgameMSEは213減衰.6593288242、211標準化.6139164436、209raw.6598473195。減衰−標準化+.0454123807、24局20悪化4改善、同初期関数/同batch、actual116111sample/CPU2science3.074941s/停止全wait。first-proposal実f32PASS/proposalzero2は未知ratio/追加NN0。距離列実効updateが今回の利益に関与したことと整合するが、中心化bias結合・moment/gradientpath・単seed/再用valの留保が残り、raw完全同軌跡/唯一原因ではない。214独立保存算術待ち、213最終Git/backup待ちを分ける。現時点追加科学/test/arena0。
+
+
+### 214裁定の受入れと保留案の再検討
+
+214独立保存算術は213減衰で211利益保持を不支持、増幅関与に整合する有限証拠を支持した。主張の留保は維持。次最大1のjointseed標準化再現と統括選定が一致し、同213・元予算内に1条件を追加配送した（旧成功run不変更）。既209seed19080312 raw対照reuse、primary200/4eval/追加parity、80705+116111=196816<=200000、同reserve/180秒、newscience05:38/stop05:40/submit05:48。新test/arena0、214120chargeをresetせず追加独立未検算は区別。重要保留を実観測で再検討した記録はsecond-seed-scale-amendment/scale-replication-revisit-decision。
