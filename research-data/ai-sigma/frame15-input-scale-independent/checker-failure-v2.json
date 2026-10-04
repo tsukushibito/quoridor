@@ -1,0 +1,9 @@
+{
+  "type": "checker_witness_order_assumption",
+  "reason": "hash chooses membership; producer displays sorted original indices rather than hash order; old/new identical ID order",
+  "SHA": "adeb397b43b2378c8829a39d21019f3f5eec71fd0bbb27361764502171c277be",
+  "exit": 1,
+  "science_negative": false,
+  "fix": "independent hash membership set plus exact old/new ordering; no new witness selection",
+  "original_new212_60s_block": true
+}
