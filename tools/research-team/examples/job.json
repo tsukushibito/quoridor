@@ -1,0 +1,16 @@
+{
+  "issue": "replace-with-owned-experiment-issue",
+  "goal_issue": "replace-with-current-authorized-goal",
+  "registry": "/absolute/path/to/registry.json",
+  "role": "experiment",
+  "cwd": "/absolute/path/to/research-worktree",
+  "argv": ["/absolute/path/to/existing/python", "-B", "/absolute/path/to/contracted-guardian.py"],
+  "end_at": "2020-01-01T00:00:00Z",
+  "notify_until": "2020-01-01T00:05:00Z",
+  "max_runtime_seconds": 600,
+  "control_interval_seconds": 30,
+  "notify_interval_seconds": 10,
+  "request_timeout_seconds": 25,
+  "log_max_bytes": 65536,
+  "resource_contract": "/absolute/path/to/current-experiment-contract.md"
+}
