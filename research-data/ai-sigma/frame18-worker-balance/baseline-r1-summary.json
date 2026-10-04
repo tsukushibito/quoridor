@@ -1,0 +1,830 @@
+{
+  "issue": "quoridor-4lc.225",
+  "mode": "baseline-r1",
+  "planned_games": 96,
+  "status_counts": {
+    "NOT_STARTED": 96
+  },
+  "Rpolicy": 0,
+  "Rz": 0,
+  "Rjoint": 0,
+  "unknown_z_rows": 0,
+  "allattempt_jobwall_s": 4.494707922975067,
+  "rates": {
+    "Rpolicy": 0,
+    "Rz": 0,
+    "Rjoint": 0,
+    "games": 0
+  },
+  "actual_NN": null,
+  "logical_worker_NN": 0,
+  "startup": 0,
+  "terminal_noNN": 0,
+  "discarded": null,
+  "batch": null,
+  "providerCost": null,
+  "providerStop": {
+    "error": "Error: PIPE_EXIT\n    at ChildProcess.<anonymous> (/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-teacher-throughput/pipe.cjs:5:502)\n    at ChildProcess.wrapper (node:events:639:12)\n    at ChildProcess.emit (node:events:514:28)\n    at ChildProcess._handle.onexit (node:internal/child_process:295:12)",
+    "pipe": {
+      "calls": 1,
+      "requestBytes": 34,
+      "responseBytes": 0,
+      "timings": {
+        "serialize_ms": 0.004374000000098022,
+        "parse_ms": 0,
+        "write_callback_ms": 0.3084479999997711
+      }
+    },
+    "exit": {
+      "code": 1,
+      "signal": null,
+      "pid": 68260
+    }
+  },
+  "worker_spans": [
+    null,
+    null,
+    null
+  ],
+  "sampled_peak_RSS": 319475712,
+  "all_slot_plies": [
+    {
+      "id": "native221-fresh96-game-001",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-002",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-003",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-004",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-005",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-006",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-007",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-008",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-009",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-010",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-011",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-012",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-013",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-014",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-015",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-016",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-017",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-018",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-019",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-020",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-021",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-022",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-023",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-024",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-025",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-026",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-027",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-028",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-029",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-030",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-031",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-032",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-033",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-034",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-035",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-036",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-037",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-038",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-039",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-040",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-041",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-042",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-043",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-044",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-045",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-046",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-047",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-048",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-049",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-050",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-051",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-052",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-053",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-054",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-055",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-056",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-057",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-058",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-059",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-060",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-061",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-062",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-063",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-064",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-065",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-066",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-067",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-068",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-069",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-070",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-071",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-072",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-073",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-074",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-075",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-076",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-077",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-078",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-079",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-080",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-081",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-082",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-083",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-084",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-085",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-086",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-087",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-088",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-089",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-090",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-091",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-092",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-093",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-094",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-095",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-096",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    }
+  ],
+  "qualification_replay_rows": 0,
+  "qualify_wall_s": 0.138937093,
+  "mixed_into_learner": false,
+  "formal_holdout_read": false,
+  "teacher_truth_or_strength": false,
+  "process": {
+    "exit": 1,
+    "stop_reason": null,
+    "current_exact_absent": true
+  }
+}
