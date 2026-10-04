@@ -1,0 +1,13 @@
+#216 phase3 — QF1 raw linear residualridge一対照（主計画更新/実配分）
+
+phase2実停止/学習済みhidden ridge train .208594,val .612799、同scalar再校正val .484540/D.485147を受け主問いを更新。最大未解決点は、現在learned hiddenでなく元QF1 state inputに、距離基準以上へ転移する低容量の加法的関係が残るか。phase2は低容量読出しでもtrain改善だけでvalD未達なのでfresh testやλsweep/幅LR再学習を先行しない。
+
+216提案gamegroup crossfit readoutは有力保留: encoder standard400は全train96のlabelで学習済みなのでheldout head foldを全model独立gameとみなせない。conditional readout varianceは測れるが、最大不足のrawstate関係対learnedrepresentationより直接ではない。次最大1をNN0 raw-linear residualridgeへ選ぶ。意味のある結果で主配分を変更した記録、追加science自動開始ではなくこの現在実許可。
+
+同216scopeの新phase3 subdir raw-linear-control、新私有source。元phase1/2source/input/results/Git/stop/preregister不変更。train4653/val1248・同ids/group/rootmean/z/mask、同gameequal w=1/(96*n_game)、同Dとclamp。新teacher/test/game/NN/model/optimizer/backward/GPU0。canonical_model_input readonly停止sourceから、実STM順2views312binary activeIDsを624列へ展開しdistance2を末尾、計626列（実model既版数をsource検算、違えばtyped不足）。初期model容量/情報が同じとはしない、32learnedhiddenより係数多い直接raw加法的probeである。
+
+結果前条件: train-only gameweightedpopulation mu/sigma、zero variance列β=0/typed保存、train eD=y-D に固定lambda .01/ridge(intercept非penalty)を一回閉形式fit。目的/標準化/λ/f32clampはphase2と同規約。valをmoments/係数fit/λ選択へ使わない。solve finite/normalequation/condition number/zero列/未観測val activeID列massを保存。prediction clamp(D+intercept+Z_raw beta,-1,1)、unclippedfitとclipped評価別記。D/scalar2coef/learned-hiddenridge/元standard400と同row/game/rootmean/z/sign/phase-cohort-remainwall/原重みdecomposition/signedgapを比較する。行群探索と独立testの違いを保持。
+
+実資源/費: pureNN0 math、一jobCPU2single/BLAS1/OMP1、RAM512MiBguard448、hard60sec、元allstatic180残内のみ。NN actual29505/30000不変更/追加forward0、重学習なし。もし残staticや保存forecast不明なら具体残量を返し、未確認の新capを始めない。元16MiB subreserve/14guard内でraw行列はRAMのみ(5901x626float64~30MB)、原metadata必要分だけ読みoldtest行beforejoinで除外。rawfullmatrixコピー/新依存/環境変更0。保存係数/moments/zero列/小perrow/result/plots/Gittemp forecast追加1MiB以内、旧UNKNOWN減額/parent増0。scientificsourceとconditionsをローカルGit/result前SHA固定し、同CPU2current owner/PIDtick/RAM/92正frame16owned/quietを直前admit。firstmath06:50/stop06:55/result07:00/保存07:10、親07:55:50内。
+
+予測判断: rawridgeがD/scalarをvalで上回れば、この低容量raw加法的関係の再用val支持でlearned表示/最適化側の不足を制約する。trainのみ改善なら当probeでもtransfer不足、history/teachernoise/データカバレッジ/非線形関係を残す。rawridge失敗からrawfeature全無効・唯一原因・棋力を認定しない。feature626対hidden32の容量/penaltygeometry差とDanchoring等交絡保持。結果で主計画/有力保留を再検討、旧test開封/選定復帰0。217残60はphase2必要独立算術を優先し新capreset0、このphase3は本人自己検証・必要compactを統括受入れし独立未検算を明記できる。全文承認gate0。
