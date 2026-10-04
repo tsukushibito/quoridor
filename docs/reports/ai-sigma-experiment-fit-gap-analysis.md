@@ -42,3 +42,24 @@ source/preregister、checkpoint/input SHA、guardian command/owner/PIDtick/当�
 再現入口は `tools/ai-sigma-fit-gap-analysis/forward.py` と `residual-head-control/forward_fit.py`。NN0参照は `distance_reference.py`、分解は `analyze-comparison.py`。再生成を自動開始する許可ではない。旧科学/source/preregisterと結果後解釈は別版保持。
 
 次最大1案はgame-group cross-fit residual headの低費用対照。今回のreadout fitの安定性と表現の残差転移不足を判別する材料とし、history/教師/分布/他readoutの競合説明を保つ。新配分前の自動train/test/forwardは行わない。
+
+## phase3: raw QF1加法的probe
+
+learned hiddenの低容量readoutで残差転移が不足したため、元state入力の加法的関係を一つの固定NN0対照で検査した。actualSTM順binary312×2とdistance2の626列、train-only gameweighted population mu/std、zero列β0、lambda .01/intercept非penaltyの627係数。行列はRAMのみ。distance2だけの3係数も結果前固定し、phase2のs差2係数とは別参照とした。容量/penalty geometryはhidden32と異なる。
+
+| 固定probe | train gameMSE | val gameMSE |
+|---|---:|---:|
+| distance2残差ridge | .396228716 | .484525910 |
+| raw626残差ridge | .161373671 | .781449457 |
+
+raw626はtrain80/96game改善・16悪化、val10/24改善・14悪化。val gap .296302644、rNN RMS .547699、eDとの相関 .004809。unclipped train .177281775/val .832536159。36zero分散列はβ0、train未観測でval activeの列/行massは0。normal residual8.33e-17、condition785.50。原重みbin寄与は全体gapへ戻る。真z/sign/rowMSEと全群はraw-linear-control/residual-analysis.json.gzに保存し、rootmean誤差へ代用しない。
+
+この固定raw加法的probeでもtrain補正がvalidationに転移しない。raw特徴全無効/teacher/history/分布の唯一原因とは判断しない。distance2微小利益も全非線形距離の影響を除外せず、binary壁/pawn独自関係の証明にはならない。cross-fit headはencoderが全trainで学習済みのためconditional readout varianceのみという留保で保留。
+
+初回jobはscript parseの閉じ括弧不足で0.053226秒失敗、matrix/solve0/NN0。失敗source/preregister/logを保持し、構文のみのv2で1成功math0.895876秒/peak255750144B<448MiB、全wait/currentexact不在。実開始/終了・owner/currentquiet/CPU2/BLAS1はjobs/raw-ridge-r2に保存。元static180秒内の保守的prior課金120秒+今回全attempt0.949103秒、追加forward0/totalNN29505不変。新teacher/game/test/モデル/optimizer/backward/GPU0。
+
+217のphase2独立算術PASSを後受領した。係数差5.72e-14、予測差2.384e-7、scalarもPASS。結果前参照のowner非読取宣言は独立検証の対象外。phase3は本人自己検証のみ。次最大1案は後続配分でstandard200hiddenを同D/ridge.01へ接続しrepresentationの学習時点を400と比較する。新encoder学習やraw幅拡張・λsweep・fresh testを自動開始しない。
+
+![固定raw入力ridge比較](../../research-data/ai-sigma/frame16-fit-gap-analysis/raw-linear-control/comparison.png)
+
+同row/gameの全6候補比較はraw-linear-control/matched-all-models.csvに保存（原phase2集計を再用）。
