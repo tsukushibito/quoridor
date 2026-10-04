@@ -1,0 +1,40 @@
+{
+  "PASS": true,
+  "NN": 0,
+  "AST_edits": {
+    "schedule": 1,
+    "optimizer_observer": 1,
+    "row_binding": 1,
+    "record_storage": 1
+  },
+  "points": [
+    0,
+    1,
+    2,
+    5,
+    10,
+    20,
+    50,
+    100,
+    200,
+    400
+  ],
+  "model_not_imported": true,
+  "observer_extra_forward": 0,
+  "condition_samples": 110210,
+  "source_SHA": {
+    "tools/ai-sigma-learning-diagnostic/save.py": "0ec3d535c8c9852a33c8857397a7a51e255e7f8ef72fd8e282c70933d87487aa",
+    "tools/ai-sigma-learning-diagnostic/launch.py": "9ef0db3990559b3fb3f2926201f84294169c221f2c0adadc4399283a74995ae7",
+    "tools/ai-sigma-learning-diagnostic/observer.py": "12aad0227412f4e6f3a52c495c5fdea5b6f0e7ce7e41a3aada3f42347341dbfb",
+    "tools/ai-sigma-learning-diagnostic/run.py": "af0b6397d7250d8551105a4a490d3fe2effbdd83c62c53adde76aa5f54a1d511"
+  },
+  "argv": [
+    "absolute training Python",
+    "-B",
+    "tools/ai-sigma-learning-diagnostic/run.py",
+    "--condition",
+    "lr1e-3"
+  ],
+  "newscience": "04:45Z",
+  "science_stop": "04:55Z"
+}
