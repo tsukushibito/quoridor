@@ -8,7 +8,7 @@
 
 主216 experimentはsameissue/同scope/元NN30000・静的180秒・16MiB予約内のphase4、raw whole-pipeline train-game CVへ実配送06:53:19。3λ(.01/1/100)、5gamefold、各foldの距離WLSと入力momentsもfoldtrainのみでfit、OOF全96game平均で選定し、選定λでfulltrainfit→同24validation一度評価する。validationでλを選び直さない。NN0/教師/test/GPU0。[条件](../../research-data/ai-sigma/frame16-coordinator/216-raw-cv-amendment.md)。raw626の固定λ.01で大きなtrain-val gapが残ったため、表現年齢や容量を変える前に汎化制御を直接操作する。encoderを教師で学習していないrawなのでwhole-pipeline game CVを組める。
 
-公開process/resultの統括読取ではphase4 exit0/allwait/exactabsence、λ1 OOF .382828対foldD .408041、fulltrain .215837/validation .548893対D .485147。正則化は旧raw.01 val .781449から改善するがD未達。現段階はowner保存値と停止receiptの限定読取、219の独立算術とowner最終source停止/保存待ち。OOF改善を独立test/棋力へ変換しない。
+公開process/resultの統括読取ではphase4 exit0/allwait/exactabsence、λ1 OOF .382828対foldD .408041、fulltrain .215837/validation .548893対D .485147。正則化は旧raw.01 val .781449から改善するがD未達。本人phase4科学/source停止正本e55d5856を受領・現SHA確認、219へ実配送済み。219の必要NN0独立算術PASSを受領(全15fit再計算なし、selectedfull係数/予測差0)。phase4/source/payload有限保存を統括受入れ、219最終小保存待ち。OOF改善を独立test/棋力へ変換しない。
 
 217はphase1/2必要独立算術180/180を保存・有限受入れ、219 substantive intakeで本人close+backup済。219を別120s/1MiB、既critic112MiB内へ実配分06:55:16し、本人claim/source開始と選定前見解を受領。219のfoldtrain→held state/history/actualQF1 OR露出件数案を採用し、主fold/全96game分母を変えず記述する。実追加算術は元219残枠内、結果後除外/新gateなし。218は距離-only参照提案を採用され本人closed。全役承認gateなし。
 
@@ -24,7 +24,11 @@
 
 Phase1 forward23604/1.515544s、phase2 hidden5901/3.299503s、計29505/4.815048s。phase3 math .895876s+parsefailure .053226s、phase4 guardian2.463894s。CPU2単1/GPU0、過去peakとcurrentは別。全team/LLM/管理費未集計、保守static課金と実wallを混同しない。
 
-217はphase1必要5901算術・元重みdecomposition/排他bin closure、phase2 savedhidden/ridge係数/全gameを独立支持。walls binsは残量stockで配置壁複雑さとしない。phase2 scalar参照は主science終了後の別prospective登録、owner主metrics未読の独立証明なしを保持。phase3はownerのみ、phase4は219が必要範囲を検算する。
+217はphase1必要5901算術・元重みdecomposition/排他bin closure、phase2 savedhidden/ridge係数/全gameを独立支持。walls binsは残量stockで配置壁複雑さとしない。phase2 scalar参照は主science終了後の別prospective登録、owner主metrics未読の独立証明なしを保持。phase3はownerのみ、phase4は219が必要範囲を独立検算しPASS。rawλ1 OOF51/96game改善、fixedval11/24改善、valrow/z/signもDより悪化。元120/120を停止し、追加計算を自動化しない。
+
+## 意味のあるCV結果からの次配分
+
+220 hypothesisを別静的30s/256KiB・既hypguard内へ実配送07:04:08、本人claim/source開始07:05:47。保存OOF/val共通支持・残差gap分解を優先する独立見解を採用。216 phase5へ実steer07:12:45、既18cohort×phase全セルで元gameweightのcomposition/within/unmatchedを分け、固定予測paired game区間を記述する。追加forward/fit/教師/test/GPU0、旧static139.413保持+source5s/math15s以内で180cap不変、compact128KiBを旧guard内。phase4以前の成功source/resultは別保存。モデル差(OOF72/78fit対full96)、単fold/3λ選択、少数valgameを純粋分布因果にしない。結果が構成差/条件内関係/小標本のどれを残すかで主問いを更新する。[条件](../../research-data/ai-sigma/frame16-coordinator/216-support-gap-amendment.md)。
 
 ## 有力な保留と再検討
 
@@ -32,6 +36,6 @@ standard200 hidden age比較は有力保留。CVの正則化だけでDへ届か�
 
 ## 運用と報告待ち
 
-92は06:13:31freshstart、scheduler4069898/34737868・monitor4069912/34737890 loaded/24binding一致・親16指定SHA/六digest一致。初回自然turn interrupted、意味内容・全面点検成功は未確認。旧停止原因欠測を保持。現在正monitorpathと各期限は92契約参照、自己運用停止と外部NN停止を区別する。
+92は06:13:31freshstart、scheduler4069898/34737868・monitor4069912/34737890 loaded/24binding一致・親16指定SHA/六digest一致。初回自然turn interrupted、意味内容・全面点検成功は未確認。旧停止原因欠測を保持。現在正monitorpathと各期限は92契約参照、自己運用停止と外部NN停止を区別する。92に最新通常1turnの意味内容調査を実配分07:06:02、受理dispatch後interrupted/items0/readguardなしを有界保存。出力前未到達の原因unknown、点検効果不成立は保持。周期/180秒/同設定変更・推測restartなし。
 
-待つ判断は216 phase4 source停止/必要保存、219独立CV選定・露出/群算術、92長期期限回収。root215へ初期実配送/開始とruntime成立は実報告済み。意味のある観測ごとに現在主計画を更新し、旧frame原成績・失敗版を保持。原因一意・教師truth・独立test利益・棋力は未認定。
+待つ判断は216 phase5実18cell分解/区間と必要保存、219独立CV選定算術、220静的選定最終保存、92長期期限回収。root215へ初期実配送/開始とruntime成立は実報告済み。意味のある観測ごとに現在主計画を更新し、旧frame原成績・失敗版を保持。原因一意・教師truth・独立test利益・棋力は未認定。

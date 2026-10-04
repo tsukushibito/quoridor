@@ -1,0 +1,114 @@
+{
+  "UTC": "2026-10-04T07:09:01.694879+00:00",
+  "owner": "codex:01a0f31d-6d15-7620-bb63-4b4f878e4746",
+  "issue": "quoridor-4lc.216",
+  "phase": "phase4",
+  "source_child_stopped": "owner actual report received in coordinator turn; separate from helper writes",
+  "process": {
+    "id": "raw-CV-r1",
+    "kind": "static",
+    "UTC": "2026-10-04T06:57:42.129273+00:00",
+    "identity": {
+      "pid": 4102202,
+      "ppid": 4102077,
+      "pgrp": 4102202,
+      "tick": "35003273",
+      "RSS": 0,
+      "cmd": "",
+      "affinity": [
+        2
+      ]
+    },
+    "command": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-fit-gap-analysis/raw-cv-control/run.py"
+    ],
+    "wall_seconds": 2.4638937929994427,
+    "peak_family_RSS": 265625600,
+    "exit": 0,
+    "reason": "completed",
+    "child_waited": true,
+    "remaining": [],
+    "current_exact_identity_absent": true,
+    "samples_charged": 0,
+    "sample_cap": 0,
+    "CPU": [
+      2
+    ],
+    "GPU": 0
+  },
+  "coordinator_scientific_files_snapshot_SHA": {
+    "research-data/ai-sigma/frame16-fit-gap-analysis/raw-cv-control/preregister.json": "5c22120fac2a9673d6e692827d3857a881aceb751d9266ca7ae80b8e8e83e98b",
+    "research-data/ai-sigma/frame16-fit-gap-analysis/raw-cv-control/coefficients-and-folds.json.xz": "10557b1248123543847d5c82b1f163d189bb0f160c26b69d87bf8c01982006bf",
+    "research-data/ai-sigma/frame16-fit-gap-analysis/raw-cv-control/result.json.xz": "00a15b165033f61ec8afef61a642a2c8ae9fedca2b0483020ec7ac2208644382",
+    "research-data/ai-sigma/frame16-fit-gap-analysis/raw-cv-control/OOF-predictions.jsonl.xz": "795d447543388f363a2c9bbf45ab24ba8bba64dfc4d727ce0a1aa7b7e3275793",
+    "research-data/ai-sigma/frame16-fit-gap-analysis/raw-cv-control/residual-analysis.json.xz": "c950f4d7f517a20f6200cb2bb8e561e50add19c5c223c05e69e8e9d935c3e7b2",
+    "research-data/ai-sigma/frame16-fit-gap-analysis/raw-cv-control/full-predictions.jsonl.xz": "f9c153adab4ea3d14a546d6283d6cf7955dc49b440305dbe87e4ea01545b33db",
+    "research-data/ai-sigma/frame16-fit-gap-analysis/raw-cv-control/exposure.json": "b335061895706968517ac7a425364ea2fe5b464bc164377b7fe79d31a9b7a22b",
+    "research-data/ai-sigma/frame16-fit-gap-analysis/raw-cv-control/archive-manifest.json": "920c4cb09cebb607e10ee8492266b2f2103607857ab7b51745ae114d68d47bc4"
+  },
+  "source_preregister_current_SHA_PASS": {
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-fit-gap-analysis/raw-cv-control/run.py": "af8e13143ca51541f556560fa17b191f7e4fe5a48560ec58f4ced278073d0f4b",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-fit-gap-analysis/raw-cv-control/launch.py": "1c16b90d1b100a9a47be303c74d3661fa77aaa7636a6e5f6aab6028f97ecdc7b"
+  },
+  "static_conservative_owner_charge": 139.412996,
+  "total_NN": 29505,
+  "globalNNallstopped_claim": false,
+  "xz_semantics": "scientific payload lossless; gzip wrapper exact bytes not asserted",
+  "independent219_pending": true,
+  "owner_stop_receipt": {
+    "path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame16-fit-gap-analysis/raw-cv-control/science-source-stop-receipt.json",
+    "SHA": "e55d5856c495eb243d0d656c5eac00e77d155d5742f2f2b3ab1e750dee8894fb",
+    "actual_body": {
+      "issue": "quoridor-4lc.216",
+      "phase": 4,
+      "UTC": "2026-10-04T07:09:21.771249+00:00",
+      "scientific_source_writing_stopped": true,
+      "source_stop_scope": [
+        "run.py",
+        "launch.py"
+      ],
+      "source_SHA": {
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-fit-gap-analysis/raw-cv-control/run.py": "af8e13143ca51541f556560fa17b191f7e4fe5a48560ec58f4ced278073d0f4b",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-fit-gap-analysis/raw-cv-control/launch.py": "1c16b90d1b100a9a47be303c74d3661fa77aaa7636a6e5f6aab6028f97ecdc7b"
+      },
+      "preregister_SHA": "5c22120fac2a9673d6e692827d3857a881aceb751d9266ca7ae80b8e8e83e98b",
+      "prereg_source_hashes_current_match": true,
+      "pre_result_sourceGit": "3a7a4ba83d45a8e4599f2240b106a4775828740c",
+      "immutable_input_SHA": {
+        "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-learning/stages/train96.stage.json": "af95eabf3d059982e67cba41fcee0233aaea8a53eaf81a3b1fbae60752d83e75",
+        "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/final-qf1-v2/all144-metadata.jsonl.gz": "1c257a5e440ac50096b56f033ff4e3e183594651d4162e0358326b3f08cf08b1",
+        "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/final-qf1-v2/fixed-exposure-mask.json": "10b502cd9e1c5334e56a3f460ef3edff7f822c8f52f69c3af53529c67c45d5f5",
+        "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/final-qf1-v2/training-labels.jsonl.gz": "fdda7fbaa1a2c97cec271b35406a7481bfa5edbb2e8dd7f48ae2d77299be67fa"
+      },
+      "immutable_result_SHA": {
+        "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame16-fit-gap-analysis/raw-cv-control/result.json.xz": "00a15b165033f61ec8afef61a642a2c8ae9fedca2b0483020ec7ac2208644382",
+        "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame16-fit-gap-analysis/raw-cv-control/coefficients-and-folds.json.xz": "10557b1248123543847d5c82b1f163d189bb0f160c26b69d87bf8c01982006bf",
+        "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame16-fit-gap-analysis/raw-cv-control/OOF-predictions.jsonl.xz": "795d447543388f363a2c9bbf45ab24ba8bba64dfc4d727ce0a1aa7b7e3275793",
+        "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame16-fit-gap-analysis/raw-cv-control/full-predictions.jsonl.xz": "f9c153adab4ea3d14a546d6283d6cf7955dc49b440305dbe87e4ea01545b33db",
+        "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame16-fit-gap-analysis/raw-cv-control/residual-analysis.json.xz": "c950f4d7f517a20f6200cb2bb8e561e50add19c5c223c05e69e8e9d935c3e7b2",
+        "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame16-fit-gap-analysis/raw-cv-control/archive-manifest.json": "920c4cb09cebb607e10ee8492266b2f2103607857ab7b51745ae114d68d47bc4"
+      },
+      "process_path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame16-fit-gap-analysis/raw-cv-control/jobs/raw-CV-r1/process.json",
+      "process_SHA": "df680780a9a1b8e0a11831e78a9530bd77a1782ea57d48b584b87e37b9c8d0bc",
+      "identity": {
+        "pid": 4102202,
+        "tick": "35003273"
+      },
+      "current_exact_science_absent": true,
+      "child_waited": true,
+      "remaining": [],
+      "science_stop_path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame16-fit-gap-analysis/raw-cv-control/stop.json",
+      "science_stop_SHA": "69c41012f8567cf1ff1f83ba7d80cbe8273d480047e7bb2e90b4fe1ced1fd238",
+      "NN_actual_total": 29505,
+      "NN_added": 0,
+      "OR_exposure_owner_diagnostic_already_executed_before_coordinator_no_additional_arithmetic_message": true,
+      "OR_exposure_actual_s": 0.14095567,
+      "OR_exposure_selection_and_mask_changed": false,
+      "new_arithmetic_or_science_authorized": false,
+      "old_scopes_unchanged": true,
+      "pack_and_git_helpers_separate": true
+    }
+  }
+}
