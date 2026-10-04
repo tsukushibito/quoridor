@@ -88,3 +88,35 @@ graph実B平均6.140/6.154は旧B8 6.177/6.191と近い。同期forward約29.37/
 jobだけの1000局外挿は29.50～30.03分、平均約29.77分。資格配賦だけでも29.74～30.27分で、二job平均はほぼ30.00分。さらにpack/Git・共通setup/将来tail/密度変化を含むため全工程30分達成は未認定。60分初期目安に対する余裕は改善するが、実1000完了/生成許可ではない。公開archive4,580,587BをSHA照合（全member独立復元はowner receipt参照）、pack実測.431329秒、parity＋全資格＋pack既知費7.831914秒を再算。旧B8平均との差.639144秒/gameに対し既知helperだけなら約12.25局の回収シナリオ。固有開発/準備・Git費はこのsnapshotでUNKNOWNなので、固定回収局数を認定しない。pack/captureをjobへ二重加算しない。
 
 **次の最大1方向を実観測で更新:** graph固定/GPU24/B8/K64で、新96freshgameを同cohort均衡・新独立lineageとして段階生成し、適格密度・最後の尾部・初期化から記録/回収/保存までの単位費を測る案を優先する。これは次配分の提案であり、本222/221の新生成ではない。今回のgraph利益は小さくないため、直ちにC++移植/配列pumpを併行実装する追加開発費の回収は、この短比較だけでは正当化し切れない。段階量で転送/尾部が全工程目安を阻む場合に、早期案の配列転送＋既Rust pump一介入へ移す。構成維持やgraph sweepを目的化せず、新teachertruth監査/学習診断/旧test再開を増やさない。
+
+## phase3 選定前見解
+
+ユーザーの容易なGraph以外の改善も試す方針を受け、未dispatchの96fresh案を保留し、同222のcodec-control静的開始。phase1/2の60+90=150と必要Git/backupを保持、新source30＋NN0calc30=60、CPU0/RAM224MiB guard。旧117,289,444＋65,536=117,354,980<117,440,512を保守保持し、unknown減額/親追加0。新51,200B forecast内へcompact source/result/report差分と新Git pack/index・temp/metadataを計上する。旧Git/保存物は削除しない。
+
+single-encode＋bits137-onlyは同graph/math/探索/教師を保って薄い境界を変える一packageとして支持する。二つの変更を同時に行う場合、効果を片方だけの原因へ分解しない。新encode-once累積と旧firstpass捨てencodeは測定定義が違い、stdout区間はencode/pipewait混合なので表示減少をexclusive CPU節約にしない。
+
+**最大1懸念:** Uint32Array等のcast前に整数/範囲/型を明示検査する。負数・2^32・小数・bool/nullを型変換で正常bitへ折り返してからfinite判定するだけでは壊れたwireを受入れ得る。小fixtureで不正bitsとNaN/Inf、signed-zeroを含む正しいbitの復元を区別し、同入力旧graph参照とのbit対応を独立に残す。bitsからfloatを作り直して同bitsへ戻る自明な検査だけを数値同等の根拠にしない。長さ/順序/ID・取消旧応答discard/EOFdrainは境界を継承する。全教師truth/全leafの新入口gateは加えない。
+
+新科学sourceが現時点で未公開なら可変版を結果支持にせず、source停止束縛/公開parity/全status/費・分母を待つ。supervisor nullable上限への運用変更通知を保持し、旧runtime/quietを新freeに読み替えない。実loaded・CPU子/物理競合/owner/current/RAMを算術直前に確認し、LLM長activeだけを人数gateにしない。運用source編集0/旧test173読取0/新forward0。
+
+
+## phase3 codec 有限裁定（2026-10-04）
+
+単encode＋137uint32応答のpackageを、同graph B1..8/24active/K64/model/48familyで支持する。停止正本は`codec-control/science-stop.json`、SHAは独立record参照。source現物と公開payload SHAを照合し、旧停止を代用しなかった。新nullable monitor6049/6062のPIDtick、owned回収・次150秒以上、実生成子wait/exact不在を直前確認した点証拠である。
+
+| 条件 | 全予定/GOAL | Rjoint | job秒 | logical / physical NN |
+| --- | ---: | ---: | ---: | ---: |
+| codec主測定 | 48/48 | 1554 | 82.130331 | 81096 / 81204 |
+| codec確認 | 48/48 | 1554 | 76.480338 | 81096 / 81204 |
+
+平均79.305334秒は旧graph平均85.727065秒に対しwall比0.925091、率比1.080975。provider応答byte比0.378904（約62.1%削減）、requestとworker–Rust大配列は残る。新encode_onceは854.339/753.172ms、stop自身のencode/writeを除く累積値。旧firstpassと旧mixed stdout（再encode＋write待ち）とは定義が異なるため、差を排他的CPU節約として足さない。
+
+全96slotのstatus/終局unknownなし、各1554 Rpolicy=Rz=Rjoint、全batch histogramの加重和81096、started/returned/resumed、terminal-noNN18360、discard0を独立照合。summary startup0とは別にgraph capture108/回を物理費へ計上。parityのB1..8×2fixture/ID/finite/旧graph bit一致とCPU許容内は保存receiptに束縛する有限支持であり、現在forward再認証ではない。48root・1554prefix/Action/visitの保存比較とRuleA/P2/π/z資格はowner checker依存を明示する。全raw/deep教師truth、棋力、条件間反復を新独立教師96局とする認定はしない。
+
+phase3実測heavy165.263518秒、入口拒否actualwall UNKNOWNに対する保守5秒を分離。comparisonの`phase3_measuredwall=170.263518`はその5秒を含むため実測のみの名称として採用しない。新NN162840=432+2×81204、旧406620と合わせ569460。旧1.1秒手記/UNKNOWNも保持する。自己検査器v1は先頭16batch例を全batchと誤解して停止したが、full histogramへ修復し、原科学negativeへ変換していない（失敗SHA/最初差をrecord保存）。
+
+1000局job-only27.5366分、資格込み27.7638分は実density32.375/gameの短外挿。owner scenariosのpack/payloadGit込み約28.65分は補助参照で、今回の追加独立算術対象外。開発・dispatch・backup・分布/大規模尾部・保存増分のunknownが残り、全工程30分や実1000完了を認定しない。保守計上を含む回収scenarioと実測回収を混同しない。
+
+次最大1案は、この固定codec+graphで新fresh96の段階生成を、総費・実density・多様性・尾部・保存まで含めて測ること。広いarray/Rustpump/C++移行の回収費を増やす前に30分目安の余裕が実分布でも残るかを判別できる。これは次配分案であり実生成許可ではない。固定順/hostwarm/小標本の交絡によりcodec各要素の唯一原因を断定しない。
+
+新source30＋算術30=60/60停止、旧60＋90=150は保持（総210）。成功算術0.004965秒/peak16,064,512B、NN/model/forward0。失敗修復もこの枠内。source再現は`codec-control/check.py.gz`をstdlib gzipで解凍してexec、timeout30/CPU0/RAM224MiB。未知保持/親予約増0、必要小Git/byte復元/index不変更/backup後に統括へ有限引渡しする。
