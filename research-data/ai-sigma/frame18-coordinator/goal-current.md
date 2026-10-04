@@ -1,6 +1,6 @@
 # 現在のNNUE研究優先順位（frame18）
 
-2026-10-04 11:14UTC。現在の主配分は228独立game段階増量→低LR標準化NNUE学習→最大1候補freeze後の新test、229独立裁定、227私有dynamic manifest adapter準備。追加225負荷均衡scienceは打切り・225/226は停止保存引渡し。三model science実到達/censor・原counterUNKNOWNを未開始へ改竄しない。228/229の実steer acceptedを確認、本人claim/新静的開始は次報告で区別する。新生成/学習結果はまだ未観測。
+2026-10-04 11:23UTC。現在の主配分は228独立game段階増量→低LR標準化NNUE学習→最大1候補freeze後の新test、229独立裁定、227私有dynamic manifest adapter準備。追加225負荷均衡scienceは打切り・225/226は停止保存引渡し。三model science実到達/censor・原counterUNKNOWNを未開始へ改竄しない。228の11:14:24本人claim/in_progressと新scope静的開始/API現SHA一致を確認。229新実steeraccepted/選定前見解を受領、本人claimは次点照合。新生成/学習結果はまだ未観測。
 
 明示新4hは開始10:33:18固定/終了14:33:18UTC、新heavy14:23:18/監督14:28:18/monitor14:31:18。CPU計算合計4論理/RAMcurrent8GiB/保持+有効予約unused12GiB/GPU推論6GiB・各job30min、GPU学習は旧累積2h確認未使用のみ。同saved6role/model-effort-cwd、LLM人数gateなし/Supervisor max_turn_seconds=null、pause/実所有/正runtime/子回収を維持。旧run/費/失敗/成績/個別期限reset0。親mainmirror・運用sourceのsolewriterは92、coordinator編集0。旧開封test選定復帰0、173正式198非学習、共有環境/toolchain/model取得/製品統合/push公開0。最高棋力・未見学習利益は未達。
 
@@ -29,3 +29,7 @@
 Supervisor10:46の改善投資Cへ比較・失敗・資格保存を含める指摘、11:06の無対照なら量接続へ進む判断を選定に反映。LLM active人数で拒否しないが、次dispatchのquietは現在active turnの将来CPUtool不在を示さない。4core測定/生成の実CPUtool競合を明示調整し、自然自己tool/owned回収と十分窓をfresh確認する。14:23重通知/14:28正owned監督scheduler/14:31monitor/14:33証拠は92長期責任、外部job停止は本人証拠で別確認。root/coordinator運用source重複編集0。
 
 配分・receipt正本はresearch-data/ai-sigma/frame18-coordinator/、状態はBeads、必要科学版は研究Git。旧費/失敗/成績を保存し、意味のある観測で主計画を更新する。全役承認/会議/毎run新issue/close専用turnは追加しない。
+
+229新選定前指摘を採用:同samples比較に加え既small400/large1200の非選定secondary等期待samples/game（192576なら266.7）を曲線前固定。量branchはsmall400 anchorにnearest savedstep/G_large、距離/typedmissing保存、追加NN/fit/point/結果後pair選択なし。228へ11:21:47active実配送、主要best/freeze不変更。必要増量は7x96manifestでprocess数固定ではなく、provider307200を守る48等の結果前chunk分割を元2.2m/heavy5400s内で許す。
+
+227必要11Gitbyte/currentSHAを有限受入れ、source/32syntheticchecks/API引渡し完了。owneridleにつきclose専用turn0、holder保護で統括assign/closeが拒否されforce/reclaim/代理actorなし、Beadsに受入れ根拠保存して原owner維持。226必要5Gitbyte/independent zero completecomparisons/source子停止を有限受入れ、旧180/260/late7s偏差とjq管理失敗保持、229実質turn内ownerclose可。これらの管理確認器例外は原producer科学結果を変えない。

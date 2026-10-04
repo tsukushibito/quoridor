@@ -11,7 +11,7 @@
 ## データ数量・結果前条件
 旧frame16新96evaluation-only候補を、理由明記した新manifestでtrainへ再割当。旧evaluation-only版/成績を維持し、独立testと呼ばない。新672game第一候補はfresh480train+96val+96test、6opening cohort各16/96job・各game/family/actionseedが新domainでunique。旧fresh96固定生成sourceのcategory RNGを一ply一回に固定し旧48のfilter内RNGへ戻さない。前96label-freeのstate/history/actualSTM-QF1露出signatureとのORを保存、oldtestlabels/results173は読まない。各tree/ゲームの独立RNG・K64/root64edge63/modeld790/RuleA/P2/pi,z/Graphstartup108/codec/温度/探索規則維持。
 
-最大7つの事前96manifestを全payload/labels計測前に固定し、生成順はnew val96→sealed test96→new train96×5。test labels/教師予測payloadは隔離sealして選定者/学習ローダーへ渡さず、品質資格のaggregateとlabel-free signatureだけ共有。testは候補/条件freeze後に1巡、未見結果を選定へ戻さない。生成が部分停止なら全予定/GOAL/未完了UNKNOWN/NOT_STARTED/zeroeligibleを保持し、適格・完了familyのみの数量を明示する。途中prefixのunknown-zを有効教師へ数えない。同domain再入口の失敗と兄弟traceは保持し、適格datasetに同family二重採用しない。
+最大7つの事前96manifestを全payload/labels計測前に固定し、生成順はnew val96→sealed test96→new train96×5。96はsplit/family計画の単位であってprocess固定数ではない。provider cap307200が長いgame群で打切りを生み得るため、結果前に各manifestを48等の小実行chunkへ分ける選択を許す。同game/domain/seed/K/品質/全planned672を変えず、chunk/startup/全費とcancel/reapを明示しnewgen2.2mNN/heavy5400s内、各hard600/VRAM6GiB内。過去completedの再生成や品質量削減として扱わず、最大7manifestをmax7process制約へ誤読しない。test labels/教師予測payloadは隔離sealして選定者/学習ローダーへ渡さず、品質資格のaggregateとlabel-free signatureだけ共有。testは候補/条件freeze後に1巡、未見結果を選定へ戻さない。生成が部分停止なら全予定/GOAL/未完了UNKNOWN/NOT_STARTED/zeroeligibleを保持し、適格・完了familyのみの数量を明示する。途中prefixのunknown-zを有効教師へ数えない。同domain再入口の失敗と兄弟traceは保持し、適格datasetに同family二重採用しない。
 
 train192=old96+第一newtrain96、train576=old96+全newtrain480を入れ子、fixedval96/test96。曲線前に最大実取得train集合のlabel-free OR maskを固定し小大で共用。旧scale mu/sigmaを固定して条件差を抑え、ラベルjoin/moments/教師評価をval/testへ流出させない。stageごとのtrain-onlyD係数/定数と同gameequal rowweight1/(G*n_game)を保存。局数/row数/lineage/露出/epoch/seen/stepsを別表示、兄弟や内共有をIIDへ格上げ0。
 
@@ -19,6 +19,7 @@ train192=old96+第一newtrain96、train576=old96+全newtrain480を入れ子、fi
 
 ## 学習・判断・必要確認
 全FT/h/out trainable、QF1-H32/tanh同型・標準化距離/AdamLR1e-4WD0/batch128/gameequal/rootmean固定。各stage seed19080311の同初期関数/同共通maskとinitialtensor、fresh optimizer、sampling seed/orderを結果前保存。各stage2000steps=256000training samples固定、early eval points0,1,2,5,10,20,50,100,200,400,800,1200,2000を第一条件。同sampleではepoch約3倍差なので純データ量因果にせず全pipeline比較。保存費/NNcapに入るpoint数の変更は結果前のみ。
+229提案を採用した非選定secondary:full192/576なら既smallstep400とlarge step1200を同期待samples/game=266.7で並記、best/freeze規則は変更しない。数量branchなら曲線前のsmall400 anchor（無ければtypedmissing）に対しlarge savedpointのabs(step/G_large -400/G_small)最小を固定、同距離tieは早いstep、distanceを明記。点追加/補間/結果後pair選択/新NN0。row densityやgameequalはrow epoch同一ではなく純数量因果を認定しない。
 
 train/valのD/定数/initial/plain既結果と同target同指標/rootmean/z/signを区別して曲線、全pergame・有限同forward witness/activeFT観測を保存、追加probeを先行しない。validationは探索選定として明示し、小大のbest checkpointとLASTを比較して最大1候補・NN/D/定数/指標・失敗規則をfreeze→新test96を1巡する。独立testMSE利益とnative接続/棋力/最高目標は別、arena/正式対局を本課題では自動開始しない。小datasetnegativeからデータ十分/NNUE無効/teacher唯一原因を認定0。newtest結果で再選定しない。
 
