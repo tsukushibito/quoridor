@@ -1,0 +1,156 @@
+{
+  "schema": "node-context-fixture-v1",
+  "version": "RuleA-node-context-v1",
+  "checks": 55,
+  "witnesses": [
+    "legal-prefix-0",
+    "legal-prefix-1",
+    "legal-prefix-2",
+    "legal-prefix-3",
+    "legal-prefix-4",
+    "legal-prefix-5",
+    "legal-prefix-6",
+    "legal-prefix-7",
+    "legal-prefix-8",
+    "legal-prefix-9",
+    "legal-prefix-10",
+    "legal-prefix-11",
+    "legal-prefix-12",
+    "legal-prefix-13",
+    "legal-prefix-14",
+    "legal-prefix-15",
+    "legal-prefix-16",
+    "legal-prefix-17",
+    "legal-prefix-18",
+    "legal-prefix-19",
+    "legal-prefix-20",
+    "legal-prefix-21",
+    "legal-prefix-22",
+    "legal-prefix-23",
+    "legal-prefix-24",
+    "legal-prefix-25",
+    "legal-prefix-26",
+    "legal-prefix-27",
+    "legal-prefix-28",
+    "legal-prefix-29",
+    "legal-prefix-30",
+    "legal-prefix-31",
+    "invalidate-side",
+    "invalidate-depth-draw",
+    "invalidate-p1goal",
+    "invalidate-p2goal",
+    "invalidate-history",
+    "invalidate-rem",
+    "invalidate-hsegments",
+    "invalidate-vsegments",
+    "invalidate-anchors",
+    "invalidate-dist",
+    "invalidate-path",
+    "invalidate-legalcache",
+    "clone-identity",
+    "context-generation",
+    "cancel",
+    "dispose",
+    "rule-method",
+    "parent-restoration",
+    "goalP1",
+    "goalP2",
+    "draw200",
+    "history-no-legal",
+    "return-immutable"
+  ],
+  "replay_states": 32,
+  "measurements": [
+    {
+      "round": "AB",
+      "order": [
+        "original",
+        "module"
+      ],
+      "times_ms": {
+        "original": 0.4630949999999956,
+        "module": 65.73394400000001
+      },
+      "checksums": {
+        "original": 39530,
+        "module": 39530
+      },
+      "states": 32,
+      "repeats": 10,
+      "original_cohort_prep_ms": 6.572410000000005,
+      "module_cohort_prep_ms": 2.5649239999999907
+    },
+    {
+      "round": "BA",
+      "order": [
+        "module",
+        "original"
+      ],
+      "times_ms": {
+        "module": 46.85814599999998,
+        "original": 1.7556559999999877
+      },
+      "checksums": {
+        "module": 39530,
+        "original": 39530
+      },
+      "states": 32,
+      "repeats": 10,
+      "module_cohort_prep_ms": 7.916230999999982,
+      "original_cohort_prep_ms": 1.8887750000000096
+    },
+    {
+      "round": "AB2",
+      "order": [
+        "original",
+        "module"
+      ],
+      "times_ms": {
+        "original": 0.011527000000000953,
+        "module": 53.282061999999996
+      },
+      "checksums": {
+        "original": 39530,
+        "module": 39530
+      },
+      "states": 32,
+      "repeats": 10,
+      "original_cohort_prep_ms": 2.608193,
+      "module_cohort_prep_ms": 1.4338460000000168
+    },
+    {
+      "round": "BA2",
+      "order": [
+        "module",
+        "original"
+      ],
+      "times_ms": {
+        "module": 64.81836099999998,
+        "original": 0.014178000000015345
+      },
+      "checksums": {
+        "module": 39530,
+        "original": 39530
+      },
+      "states": 32,
+      "repeats": 10,
+      "module_cohort_prep_ms": 13.859797000000015,
+      "original_cohort_prep_ms": 16.927640999999994
+    }
+  ],
+  "original_total_ms": 2.2444559999999996,
+  "module_total_ms": 230.69251299999996,
+  "ratio": 102.78326373963223,
+  "meaning": "terminal/legal wrappers only; no NN/distance/search/arena speed claim",
+  "state_source_readonly": true,
+  "cache_hit_work": true,
+  "NN": 0,
+  "GPU": 0,
+  "notes": [
+    "full state/history/derived/legal-cache safety stamp and immutable Action copies are charged",
+    "common pre/post preservation assertions outside route timer; module safety stamps inside timer",
+    "timed cohorts legal-cache prepopulated equally; cohort preparation reported outside route",
+    "AB/BA order, one finite script; no unlimited warmups",
+    "prefix fixtures are diagnostics, not new teacher games"
+  ]
+}

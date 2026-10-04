@@ -1,0 +1,27 @@
+{
+  "UTC": "2026-10-04T23:08:49.107846+00:00",
+  "issue": "quoridor-4lc.237",
+  "science_start": "2026-10-04T23:07:47.818539+00:00",
+  "science_stop": "2026-10-04T23:07:48.244474+00:00",
+  "science_wall_s": 0.42593069199938327,
+  "NN": 0,
+  "checks": 55,
+  "all_child_waited": true,
+  "current_exact_absent": true,
+  "source_writer_stopped": true,
+  "module_API": "createNodeContext(State9,nonemptyContextString)->read(s,sameContext,{cancelled:false}) / dispose(); read returns frozen {version,context,terminal,legal}; terminal nodes legal=null",
+  "mutation_policy": "known observed mutation typed rejection/reconstruct-required, no stale State cache rescue; contexts fail closed after mutation/identity/context/cancel",
+  "artifacts": {
+    "tools/ai-sigma-frame19-node-context/fixture.cjs": "6a379edc663f6a477b35852a241c7dab21fc932e3bd6c6b2476505b3c3361005",
+    "tools/ai-sigma-frame19-node-context/launch.py": "28ce99fd8196e4f8bc53e5ba26b2c5e9e3ad4036a727421bda0cff98bd3419dc",
+    "tools/ai-sigma-frame19-node-context/node-context.cjs": "f517d6f398852c7bd09ed0d00fd703d7553fddaee92ed04e292e7c1f0512f591"
+  },
+  "test_scope": "55 finite fixture checks/32 lawful replay states + synthetic finite cases, cache-hit wrapper microcost; not full RuleA proof or arena benefit",
+  "comparison": {
+    "original_ms": 2.2444559999999996,
+    "guarded_module_ms": 230.69251299999996,
+    "ratio": 102.78326373963223
+  },
+  "selection": "rootbest-first higher-priority finite comparison; full-stamp context reuse negative/not integrate into first arena",
+  "all_old_conditions_fees_held": true
+}
