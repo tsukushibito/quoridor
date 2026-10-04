@@ -1,0 +1,25 @@
+{
+  "UTC": "2026-10-04T02:47:23.510246+00:00",
+  "issue": "quoridor-4lc.206",
+  "scienceGit": "646854a1bed40d78c0059c209e28d8b5452cc9f7",
+  "science_source_stopped": true,
+  "science_children": [],
+  "static_charge_seconds": 90,
+  "static_cap_seconds": 120,
+  "notes_backup_exit": 0,
+  "verdict": "mechanism/gate/mask/arithmetic supported; head unseen increment uncertain; no default promotion",
+  "coordinator_acceptance_close": "pending",
+  "new_model_forward": 0,
+  "old_test_labels_read": 0,
+  "management_attempts": [
+    {
+      "command": "python -B metadata heredoc",
+      "exit": 127,
+      "cause": "python alias absent; no script executed"
+    },
+    {
+      "command": "python3 -B metadata heredoc",
+      "status": "retry"
+    }
+  ]
+}
