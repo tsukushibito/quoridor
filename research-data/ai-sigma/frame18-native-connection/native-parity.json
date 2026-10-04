@@ -1,0 +1,168 @@
+{
+  "PASS": true,
+  "implementation": "Node native-hosted scalar f32; not Rust/Wasm",
+  "samples": 1057,
+  "Torch27": true,
+  "max_torch_abs": 8.940696716308594e-8,
+  "max_full_delta_abs": 1.1920928955078125e-7,
+  "tol": {
+    "abs": 0.00001,
+    "rtol": 0.0001
+  },
+  "all_legal_children": 515,
+  "kinds": [
+    "pawn",
+    "h",
+    "v",
+    "jump",
+    "diagonal"
+  ],
+  "roots": [
+    {
+      "id": "initial-p1",
+      "value": 0.06908521056175232
+    },
+    {
+      "id": "asym-hv-p2",
+      "value": -0.2641431391239166
+    },
+    {
+      "id": "straight-jump-p2",
+      "value": -0.07798299193382263
+    },
+    {
+      "id": "fixed-legal-diagonal-p1",
+      "value": -0.04136272892355919
+    }
+  ],
+  "selected": [
+    {
+      "id": "initial-p1/child0",
+      "native": -0.11531409621238708,
+      "torch": -0.11531411111354828
+    },
+    {
+      "id": "initial-p1/child1",
+      "native": 0.21212120354175568,
+      "torch": 0.21212118864059448
+    },
+    {
+      "id": "initial-p1/child2",
+      "native": 0.13539031147956848,
+      "torch": 0.13539035618305206
+    },
+    {
+      "id": "initial-p1/child3",
+      "native": -0.24672631919384003,
+      "torch": -0.24672631919384003
+    },
+    {
+      "id": "initial-p1/child4",
+      "native": -0.12461383640766144,
+      "torch": -0.12461385130882263
+    },
+    {
+      "id": "asym-hv-p2/child0",
+      "native": 0.08696149289608002,
+      "torch": 0.08696147799491882
+    },
+    {
+      "id": "asym-hv-p2/child1",
+      "native": 0.3892434239387512,
+      "torch": 0.3892434537410736
+    },
+    {
+      "id": "asym-hv-p2/child2",
+      "native": 0.5021752119064331,
+      "torch": 0.5021752715110779
+    },
+    {
+      "id": "asym-hv-p2/child3",
+      "native": 0.5212008357048035,
+      "torch": 0.5212008357048035
+    },
+    {
+      "id": "asym-hv-p2/child4",
+      "native": 0.41125982999801636,
+      "torch": 0.41125985980033875
+    },
+    {
+      "id": "straight-jump-p2/child0",
+      "native": 0.3982946574687958,
+      "torch": 0.3982946574687958
+    },
+    {
+      "id": "straight-jump-p2/child1",
+      "native": -0.23445510864257812,
+      "torch": -0.23445510864257812
+    },
+    {
+      "id": "straight-jump-p2/child2",
+      "native": 0.2726845145225525,
+      "torch": 0.2726845443248749
+    },
+    {
+      "id": "straight-jump-p2/child3",
+      "native": 0.21283379197120667,
+      "torch": 0.21283382177352905
+    },
+    {
+      "id": "straight-jump-p2/child4",
+      "native": 0.04974765330553055,
+      "torch": 0.049747686833143234
+    },
+    {
+      "id": "straight-jump-p2/child5",
+      "native": -0.15329159796237946,
+      "torch": -0.15329156816005707
+    },
+    {
+      "id": "fixed-legal-diagonal-p1/child0",
+      "native": 0.3304274082183838,
+      "torch": 0.3304274380207062
+    },
+    {
+      "id": "fixed-legal-diagonal-p1/child1",
+      "native": -0.02100292220711708,
+      "torch": -0.021002981811761856
+    },
+    {
+      "id": "fixed-legal-diagonal-p1/child2",
+      "native": 0.12347813695669174,
+      "torch": 0.12347814440727234
+    },
+    {
+      "id": "fixed-legal-diagonal-p1/child3",
+      "native": -0.25382038950920105,
+      "torch": -0.2538204491138458
+    },
+    {
+      "id": "fixed-legal-diagonal-p1/child4",
+      "native": -0.019513219594955444,
+      "torch": -0.019513200968503952
+    },
+    {
+      "id": "fixed-legal-diagonal-p1/child5",
+      "native": -0.0809016153216362,
+      "torch": -0.08090158551931381
+    },
+    {
+      "id": "fixed-legal-diagonal-p1/child6",
+      "native": 0.056307803839445114,
+      "torch": 0.056307848542928696
+    }
+  ],
+  "parent_copy_buffer_key_history_unchanged": true,
+  "mutable_undo_guarantee": false,
+  "terminal_beforeNN": true,
+  "terminal_NN": 0,
+  "full_including_input_ms": 67.01204407215118,
+  "delta_including_input_ms": 30.131058990955353,
+  "map": {
+    "hits": 683,
+    "misses": 374,
+    "current": 118,
+    "max": 256
+  },
+  "samewall_speed_claim": false
+}
