@@ -42,7 +42,7 @@ for pid,z in table().items():
  if pid==os.getpid() or z['state']=='Z':continue
  try:args=Path(f'/proc/{pid}/cmdline').read_bytes().decode().split('\0');aff=sorted(os.sched_getaffinity(pid))
  except (OSError,UnicodeError):continue
- script=next((a for a in args[1:5]if a.endswith(('.py','.cjs','.js','.sh')) and ' 'not in a and '\n'not in a and Path(a).is_file()),'');arg=' '.join(args)
+ script=next((a for a in args[1:5]if a.endswith(('.py','.cjs','.js','.sh'))),'');arg=' '.join(args)
  if 'tools/ai-sigma-'in script or 'tools/nnue-training/'in script or 'research-data/ai-sigma/'in script or 'tools/research-team/'in script or 'faithful-native'in args[0] or '.artifacts/ai-sigma/continuation-20261001/'in script:
   rss+=z['RSS'];current.append({**z,'affinity':aff,'script':script,'argv':arg[:250]})
   if ('tools/ai-sigma-'in script or 'tools/nnue-training/'in script or 'research-data/ai-sigma/'in script or 'faithful-native'in args[0]) and not script.endswith(('/save_git.py','/save.py','/pack.py')):foreign.append(current[-1])
@@ -55,12 +55,10 @@ for pp in(O/'jobs').glob('*/process.json'):
  if z.get('sample_equivalent')is None and proof.exists():
   pr=json.loads(proof.read_text());assert pr['model_NN_samples']==0 and pr['provider_argument_assert_failed_before_any_model_import']
   z={**z,'sample_equivalent':0,'original_receipt_null_preserved':True}
- if z.get('sample_equivalent')is None and (pp.parent/'provider-init.json').exists():
-  z={**z,'sample_equivalent':z['NN_cap'],'NN_upper_charged_not_observed':True}
  newprior.append(z)
 spent=sum(p['jobwall_seconds']for p in newprior);samples=sum((p.get('sample_equivalent')or 0)for p in newprior);unknown=[p for p in newprior if p.get('sample_equivalent')is None]
 assert not unknown,'PRIOR_NEW_SAMPLE_UNKNOWN'
-assert sum((O/'jobs'/p['run'].replace('balance225-','')/'provider-init.json').exists()for p in newprior)<3 and spent+c['job_seconds']<=1500 and samples+c['NN_cap']<=1050000
+assert len(newprior)<3 and spent+c['job_seconds']<=1500 and samples+c['NN_cap']<=1050000
 assert c['max_batch']==8 and c['active_per_worker']==8 and c['NN_cap']<=350000 and c['job_seconds']<=420
 assert hashlib.sha256((R/'tools/ai-sigma-teacher-throughput/codec-control/provider.py').read_bytes()).hexdigest()=='a422650a8cf01b61870c28e800b4595db7e4699166a5b02518ac23e0cdc8666e','UNCHANGED_PROVIDER_PARITY_REUSE'
 storage=json.loads((O/'storage-admission.json').read_text());assert storage['unused_after_reservation_B']>=0
@@ -103,7 +101,7 @@ with(out/'stdout.txt').open('w')as log:
    if owned:continue
    try:fa=Path(f'/proc/{fp}/cmdline').read_bytes().decode().split('\0')
    except(OSError,UnicodeError):continue
-   fs=next((a for a in fa[1:5]if a.endswith(('.py','.cjs','.js','.sh')) and ' 'not in a and '\n'not in a and Path(a).is_file()),'')
+   fs=next((a for a in fa[1:5]if a.endswith(('.py','.cjs','.js','.sh'))),'')
    if ('tools/ai-sigma-'in fs or 'tools/nnue-training/'in fs or 'research-data/ai-sigma/'in fs or (fa and 'faithful-native'in fa[0]))and not fs.endswith(('/save_git.py','/save.py','/pack.py')):
     save('foreign-compute-detected.json',dict(UTC=utc(),pid=fp,tick=fz['tick'],ppid=fz['ppid'],script=fs,argv=fa[:6],ancestry_seen=sorted(seen)));reason='CURRENT_FOREIGN_COMPUTE_STARTED'
   for z in members:
