@@ -1,6 +1,6 @@
 # 現在のNNUE研究優先順位（frame18）
 
-2026-10-04 11:57UTC。主配分は228独立game段階増量→低LR標準化NNUE学習→最大1候補freeze後の新test、229独立裁定。新val96は96GOAL/4813joint/272858physicalNN/334.530891sをownerから受領、2pack/memberSHA/Gitbytes復元済。新学習は未開始。背景初回失敗1623NNを保持（旧合計274481）、readonly worker schemaのsplit=test拒否に対しworkerwire=evaluation/custodianexport=元testmanifestの私有薄修復。provider/math/seed/教師不変更、成功family置換0。新bg-r2 job8255c4c9…が実running、担当はjobID/notes/backup後Idleへ移る引渡しを受領。点照合では担当まだactive、実Idle/完了配送は未確認。ACK専用steerを送らず、背景終了イベントで本人を再開する。
+2026-10-04 12:07UTC点。主配分は228独立game段階増量→低LR標準化NNUE学習→最大1候補freeze後の新test、229独立裁定。val96=96GOAL/4813joint/272858physicalNN/334.530891sをowner受領。背景公開safe progressではsealed test二chunk各48完了/2395+2452joint/137678+140853physicalNN/157.480190+171.027002s、testラベル/予測利益は未読。旧r1失敗1623NNを保持し、既知生成553012physicalNN（未完chunk・管理費・全team費は含まず）。train増量・学習利益は未観測。Supervisor12:03snapshotで担当Idleを点確認、12:07背景state running/終了result・notification未作成。完了イベントまでACK起床/LLMpollingを加えず、13:05数量branchと固定mask/最大1freeze→一testを維持。
 
 明示新4hは開始10:33:18固定/終了14:33:18UTC、新heavy14:23:18/監督14:28:18/monitor14:31:18。CPU計算合計4論理/RAMcurrent8GiB/保持+有効予約unused12GiB/GPU推論6GiB・各job30min、GPU学習は旧累積2h確認未使用のみ。同saved6role/model-effort-cwd、LLM人数gateなし/Supervisor max_turn_seconds=null、pause/実所有/正runtime/子回収を維持。旧run/費/失敗/成績/個別期限reset0。親mainmirror・運用sourceのsolewriterは92、coordinator編集0。旧開封test選定復帰0、173正式198非学習、共有環境/toolchain/model取得/製品統合/push公開0。最高棋力・未見学習利益は未達。
 
@@ -41,3 +41,5 @@ root230の背景job実装を採用。主checkout sourceGit288c325、scripts/dev/
 11:54UTC background-gen-r1の公開管理receiptを点読取。jobc7b7cec2…child11:48:47→11:48:58 failed/exit1/11.087867s/remaining[] cleanup_complete。guardian公開receiptはtest96-chunk1-r1/10.945371s/1623NN/allwaitexact不在、test raw/labels未読。queueのCalledProcessErrorは根原因不明の終了伝播。notificationはrecipient_not_idleでpending、実Idle/完了再開は未確認。通常修復・原失敗/全分母/NN費保存は228ownerへ返し、13:05生成stop/branchと外側13:07cleanup endを区別。背景tool採用・子終了確認を科学成功にしない。
 
 228背景r2引渡し: sourceGitc484e21c…、supervisor123081/tick36780917・queue123133/tick36781104、testchunk1-r2 actual11:53:53.503867。旧r1 result failedは保持、同turnで回収済みの未配送notificationだけcancelled（deliveredに救済0）。672全manifest/family/seed/品質/roundrobinと12:50新入口/13:05science stop/13:07外側回収を維持。hyp/criticはmetadata/mask/pathhash/safeledgerだけ、testtargetsはsealed。本人Idleはabandonedではなくin_progress所有job、背景終了/不足/失敗で一度元roleへ通知。現物点はrunning/まだactive、到達確認は未来完了イベントで行いLLMpollingを追加しない。
+
+Supervisor12:06節目を採用: validation取得は量不足仮説/学習利益の判定ではなく評価準備。12:03の実Idle点はroot230人工suiteから分けたproduction前半の到達、実完了配送/全子回収は未確認。停止後公開compact/sourceを229既配分へ渡す、metadata集計を独立raw再検算/全test非露出証明へ格上げしない。予定report FileNotFoundErrorは監督の観測不足でproducer科学失敗ではない。今回追加科学/条件/量/役/turnを起こさず、background safeledger一回の点読取で進展と未知を更新。
