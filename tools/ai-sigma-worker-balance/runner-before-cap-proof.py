@@ -49,13 +49,7 @@ for pid,z in table().items():
 assert not foreign,('CURRENT_FOREIGN_SCIENCE_OR_CRITIC',foreign)
 gpu=subprocess.run(['nvidia-smi','--query-compute-apps=pid,process_name,used_gpu_memory','--format=csv,noheader'],capture_output=True,text=True,timeout=5,check=True).stdout.strip();assert not gpu,('CURRENT_GPU',gpu)
 assert rss+6*1024**3<8*1024**3,'PARENT_RSS';assert int(next(x.split()[1]for x in Path('/proc/meminfo').read_text().splitlines()if x.startswith('MemAvailable:')))*1024>6*1024**3
-newprior=[]
-for pp in(O/'jobs').glob('*/process.json'):
- z=json.loads(pp.read_text());proof=pp.parent/'before-model-proof.json'
- if z.get('sample_equivalent')is None and proof.exists():
-  pr=json.loads(proof.read_text());assert pr['model_NN_samples']==0 and pr['provider_argument_assert_failed_before_any_model_import']
-  z={**z,'sample_equivalent':0,'original_receipt_null_preserved':True}
- newprior.append(z)
+newprior=[json.loads(p.read_text())for p in(O/'jobs').glob('*/process.json')]
 spent=sum(p['jobwall_seconds']for p in newprior);samples=sum((p.get('sample_equivalent')or 0)for p in newprior);unknown=[p for p in newprior if p.get('sample_equivalent')is None]
 assert not unknown,'PRIOR_NEW_SAMPLE_UNKNOWN'
 assert len(newprior)<3 and spent+c['job_seconds']<=1500 and samples+c['NN_cap']<=1050000
