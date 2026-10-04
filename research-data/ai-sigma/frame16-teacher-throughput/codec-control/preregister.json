@@ -1,0 +1,91 @@
+{
+  "issue": "quoridor-4lc.221",
+  "phase": 3,
+  "UTC": "2026-10-04T08:51:32.456671+00:00",
+  "selected_package": "Single actual response encoding + bits-only provider wire; broker reconstructs validated f32 logits/value",
+  "same_graph_math_source": true,
+  "graph_source_SHA": "70145f6845a7f8515887c82f06d50329089c727d9615a99536a874b82f684b7c",
+  "model_SHA": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+  "maxB": 8,
+  "active": 24,
+  "workers": [
+    2,
+    4,
+    6
+  ],
+  "management": 0,
+  "torch_ORT_BLAS_threads": 1,
+  "K": 64,
+  "rootN": 64,
+  "edgeSum": 63,
+  "tau": "1 first16newply then argmax",
+  "newply_cap": 200,
+  "games": 48,
+  "openings_SHA": "01cb2af0cd2d9bbbcf3b397d89a608cac7bd776a5eab7e5310a79806595452fb",
+  "same_actionseed": true,
+  "expected_saving": "Remove one discarded encode and redundant 136double/value output. Old stdout9-10s includes encode/pipewait, not all saving promised. Fixed graph forward/root bits reused.",
+  "easy_difference": "Provider tail encode once and id+uint32[137]; broker rejects invalid length/uint32/nonfinite/value/ID and reconstructs f32. No tensor math/input/capture/worker/tree/rule changes.",
+  "broad_options": {
+    "binarywire_Rustpump": "new framing/restart/drain/IDs/nativebuild and interface parity; deferred beyond this small package, not process preservation goal",
+    "C++generation": "get_batch/put_results useful pattern but board/FPU/TT/noise/PCR/solver/teacher mapping require explicit correspondence; no simultaneous port"
+  },
+  "effect_scope": "Both codec changes packaged; no individual cause attribution",
+  "definitions": {
+    "old": "discarded JSON firstpass plus actual secondencode/write; firstpass perresponse cost included hotwire selfmeasurementfield",
+    "new": "exactly one transmitted response json.dumps; encode/write cumulative info/stop for priorresponses, no perresponse selfmeasurementfield; stopownencode/write not recursively included"
+  },
+  "confirmation": "Matched samecandidate second job only if remainingcap/storage/quiet and first timing/sequence ambiguity; preserve firstsuccess, no replacement.",
+  "numeric": {
+    "B": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "fixtures_per_B": 2,
+    "old_graph_startup": 108,
+    "old_graph_requests": 72,
+    "CPUORT_reference": 72,
+    "new_graph_startup": 108,
+    "new_graph_requests": 72,
+    "total_NN": 432,
+    "bitexact": "old graph f32bits137 vs newcodec f32bits137; decoded reencodedf32 mustbitexact",
+    "CPUtol": "abs1e-4+rtol1e-4"
+  },
+  "caps": {
+    "phase3_NN": 362000,
+    "parity_max": 2000,
+    "generation_max_each": 180000,
+    "jobs": 2,
+    "each_s": 300,
+    "phase3_heavy_s": 650,
+    "phase3_static_s": 60,
+    "phase3_management_s": 180,
+    "old_NN": 406620,
+    "original_NN": 900000,
+    "old_static_charge_s": 70,
+    "original_static_cap_s": 180,
+    "old_heavy_conservative_s": 533.4066868470416,
+    "original_heavy_s": 1800,
+    "old_management_charge_s": 150,
+    "original_management_cap_s": 600
+  },
+  "deadline": {
+    "newscience": "2026-10-04T09:15:50Z",
+    "stop": "2026-10-04T09:25:50Z",
+    "save": "2026-10-04T09:38:50Z",
+    "submit": "2026-10-04T09:43:50Z"
+  },
+  "reservation_B": 67108864,
+  "guard_B": 58720256,
+  "forecast_B": 50331648,
+  "old_reserve_B": 134217728,
+  "old_forecast_B": 116807935,
+  "old_source_results_immutable": true,
+  "benchmark_trainmix": false,
+  "oldtest_173_read": false
+}
