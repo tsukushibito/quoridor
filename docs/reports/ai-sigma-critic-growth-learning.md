@@ -1,0 +1,13 @@
+# 独立段階増量・学習接続の有限裁定 / quoridor-4lc.229
+
+226は有限handoff・source/子停止・Git13byte復元・backup・本人close済み。新229はready/show/本人割当/no pause→claim/static開始。source90＋停止後算術180の新270秒配分で、旧226180/222260等は維持する。新8MiBは既poolの確認unusedから、forecast2883584B<4MiB、親増額・unknown減額なし。
+
+現方針の情報価値は、未完了均衡benchmarkより実独立増量と学習へ進み、データ不足を少なくとも条件付きで制約することにある。全量取得や全文レビューを入口gateにしない。旧test・173・新testラベルは未読で、最後の新testは候補/config/mask凍結後だけ必要出力へ限定する。
+
+## 選定前の最大1補足
+
+同256000 samplesは計算量を揃えるが、大stageの1game当たり反復露出はおよそ1/3になる。既存曲線で同samples比較に加え、同程度samples/gameの非選定secondaryを結果前固定する案を返した。全192/576が成立すればsmall400とlarge1200は各266.7 samples/gameで、追加NN/学習/pointを要しない。縮小branchではcurveを見ずに利用可能pairと誤差を固定、欠測を残し、結果後補間・選別やcandidate規則の変更はしない。gameequalとrow密度差から同rowepochや純数量因果とは呼ばない。
+
+公開prepare sourceの現版はonce entropyから新domain/各global UID family・actionseedを作り、1ply1回category RNG、空class/terminalで全proposal拒否、七つの96manifestをラベル測定前に保存する経路だった。これは可変sourceの静的支持で、最終署名・資格・maskやtestseal成功は未認証。testラベル/旧test・173は未読。実算術jobは0で、228停止compactとfreeze→testreceipt到着後の残180秒へ温存する。
+
+統括は226有限停止を受入れ、本人close/backupは既済。229の等pergame露出副対比は採用・228へ配送され、small400 anchorからlarge nearest step/Gを曲線前固定しtypedmissing/距離を保持する。best/freezeは変更しない。source段階を保守90秒計上し、停止後必要算術180秒を残す。科学算術job0、229担当・in_progressを維持する。
