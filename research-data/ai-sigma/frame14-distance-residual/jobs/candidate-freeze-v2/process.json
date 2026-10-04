@@ -1,0 +1,35 @@
+{
+  "id": "candidate-freeze-v2",
+  "kind": "static",
+  "UTC": "2026-10-04T01:21:57.997456+00:00",
+  "identity": {
+    "pid": 3867032,
+    "ppid": 3866962,
+    "pgrp": 3867032,
+    "tick": "32987994",
+    "RSS": 0,
+    "cmd": "",
+    "affinity": [
+      2
+    ]
+  },
+  "command": [
+    "python3",
+    "-B",
+    "tools/ai-sigma-qf1-distance-residual/freeze.py",
+    "candidate"
+  ],
+  "wall_seconds": 0.05305236601270735,
+  "peak_family_RSS": 14602240,
+  "exit": 0,
+  "reason": "completed",
+  "child_waited": true,
+  "remaining": [],
+  "current_exact_identity_absent": true,
+  "samples_charged": 0,
+  "sample_cap": 0,
+  "CPU": [
+    2
+  ],
+  "GPU": 0
+}

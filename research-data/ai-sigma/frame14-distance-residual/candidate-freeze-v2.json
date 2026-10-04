@@ -1,0 +1,145 @@
+{
+  "kind": "QF1-distance-residual-one-fresh-test",
+  "UTC": "2026-10-04T01:21:57.966039+00:00",
+  "condition": "QF1-distance-residual-f32-v1",
+  "artifacts": {
+    "candidate": {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/nnue/frame14-distance-residual-r1/best.pt",
+      "checkpoint_SHA": "6f9c15867b3363b5b5ccbc6f70a5faad59ab225f361b550d8f3b5d94cf197dbf",
+      "B": 52067,
+      "weight_SHA": "52bfc75272f7cfe8ae6ce57eb14b8a9e7848bfba99613c221f77498a8e897576",
+      "step": 0,
+      "samples": 5901,
+      "condition": "QF1-distance-residual-f32-v1"
+    },
+    "best": {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/nnue/frame14-distance-residual-r1/best.pt",
+      "checkpoint_SHA": "6f9c15867b3363b5b5ccbc6f70a5faad59ab225f361b550d8f3b5d94cf197dbf",
+      "B": 52067,
+      "weight_SHA": "52bfc75272f7cfe8ae6ce57eb14b8a9e7848bfba99613c221f77498a8e897576",
+      "step": 0,
+      "samples": 5901,
+      "condition": "QF1-distance-residual-f32-v1"
+    },
+    "last": {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/nnue/frame14-distance-residual-r1/last.pt",
+      "checkpoint_SHA": "5fed180f7fa460b581d62629da7480da90fd35f90d81192df975347f1dfc9e3d",
+      "B": 52067,
+      "weight_SHA": "73acd35974df0ae1b8d8210ca7db5e2b25d79acf5f4f4a1890d9fcc5f4e24646",
+      "step": 2000,
+      "samples": 379921,
+      "condition": "QF1-distance-residual-f32-v1"
+    },
+    "distance_initial": {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/nnue/frame14-distance-residual-r1/initial.pt",
+      "checkpoint_SHA": "36ea9132a7b8969c0404d84f42790fa3bc57bd201e249bb7362950f10de17da0",
+      "B": 52109,
+      "weight_SHA": "52bfc75272f7cfe8ae6ce57eb14b8a9e7848bfba99613c221f77498a8e897576",
+      "step": 0,
+      "samples": 0,
+      "condition": "QF1-distance-residual-f32-v1"
+    },
+    "random_QF1": {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/nnue/frame14-train96-r1/initial.pt",
+      "checkpoint_SHA": "f4a327c33c12ba92218636016af382346bfc175a21095b01521ede9567606428",
+      "weight_SHA": "e5d218c9750d581eab7ca6a114acaa8f3cf5bd24474e3f639280705271fc7ddb",
+      "condition": "QF1-f32-STM-v1",
+      "B": 51605
+    }
+  },
+  "coefficients": {
+    "a": 0.06294242415104226,
+    "b": 8.276425107422213
+  },
+  "coefficient_fit_SHA": "77ce9e79495038b25a4f4a9ffd95dc9f66700aff2c1f96cf08b65fff3c79733c",
+  "model_config": {
+    "feature_version": "QF1",
+    "transformer_width": 32,
+    "hidden_width": 32,
+    "dropout": 0
+  },
+  "train_config": {
+    "model": {
+      "feature_version": "QF1",
+      "transformer_width": 32,
+      "hidden_width": 32,
+      "dropout": 0
+    },
+    "optimizer": {
+      "name": "adam",
+      "lr": 0.001,
+      "weight_decay": 0,
+      "momentum": 0.0
+    },
+    "training": {
+      "steps": 2000,
+      "batch_size": 128,
+      "seed": 19080311,
+      "target": "rootmean",
+      "sampling": "game",
+      "scheduler": "none",
+      "device": "cpu",
+      "threads": 1
+    },
+    "evaluation": {
+      "interval": 100,
+      "batch_size": 1024,
+      "monitor": "game",
+      "early_stopping_patience": 0,
+      "min_delta": 0
+    },
+    "limits": {
+      "seconds": 110,
+      "samples": 500000
+    },
+    "data": {
+      "overlap_policy": "report"
+    }
+  },
+  "train_config_SHA": "c4a3dbde251fa6e07ac8492ba4a6716dc4a4957429b8a35e0bf33019657e2b40",
+  "stage_SHA": "af95eabf3d059982e67cba41fcee0233aaea8a53eaf81a3b1fbae60752d83e75",
+  "validation_SHA": "d4b5b218fcfaaa548fb9a2ee3056f34b21e4ed63143e67f6e7aa94f7934cd7e3",
+  "original_mask_SHA": "10b502cd9e1c5334e56a3f460ef3edff7f822c8f52f69c3af53529c67c45d5f5",
+  "best_step": 0,
+  "candidate_validation_gameMSE": 0.48514681311997876,
+  "constant": 0.01086389238577769,
+  "selection_rule": "fixed validation gameequal rootmeanMSE, step0 included",
+  "paired_comparisons": [
+    [
+      "candidate",
+      "distance_only"
+    ],
+    [
+      "candidate",
+      "constant"
+    ],
+    [
+      "candidate",
+      "random_QF1"
+    ],
+    [
+      "last",
+      "distance_only"
+    ]
+  ],
+  "bootstrap_seed": 20080311,
+  "bootstrap_replicates": 2000,
+  "unique_NN_max": 4,
+  "sample_cap": 12000,
+  "source_freeze": true,
+  "sources": {
+    "tools/ai-sigma-qf1-distance-residual/evaluate.py": "b57bae032ea7f6d2702fe33380853fccfdbe40c2fe3b332a9e8739faa7391d3f",
+    "tools/ai-sigma-qf1-distance-residual/residual_model.py": "7e456d2c86b0e2a8f1d1f0feff1e43446181ddaabc52920cf7fbcd7076149627",
+    "tools/nnue-training/model.py": "12661cac69cff8b01800eb2d3df5be5f8674858d9ce995713b4385da44c74357",
+    "tools/nnue-training/common.py": "876e0e9a610b594db63e62e81ae920684f10e52f71a7cc75e04f8fbadd9ffe04",
+    "tools/nnue-training/frame14_data.py": "f45482fe6d1a4477ee3bf3b080d14d883b1f28c79517cff83e4318b7a90e37b8",
+    "tools/nnue-training/test_contrast.py": "76d1b2a079906aac53d77f15d7e99e006619436aa81a4f2bad5b9f3b23612749"
+  },
+  "test_labels_read": false,
+  "old_test_labels_read": false,
+  "test_reselection": false,
+  "analytical_baselines_no_NN_samples": [
+    "distance_only",
+    "constant"
+  ]
+}

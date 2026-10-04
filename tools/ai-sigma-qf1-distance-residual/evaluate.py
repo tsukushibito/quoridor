@@ -38,9 +38,10 @@ def evaluate(a):
         assert len({r['id'] for r in rows}) == len(rows)
         unique = {(r['condition'], r['weight_SHA']) for r in f['artifacts'].values()}
         assert len(unique) <= 4 and len(unique) * len(rows) <= a.samples <= 12000
-        assert mask['metadata_sha256'] == f['metadata']['SHA']
+        assert mask['new_metadata_SHA'] == f['metadata']['SHA']
+        assert mask['reference_metadata_SHA'] == f['reference_metadata_SHA']
         planned = sorted(g for g, m in mask['games'].items() if m['split'] == 'test')
-        assert len(planned) == 24 and set(r['group'] for r in rows) <= set(planned)
+        assert rows and len(planned) == 24 and set(r['group'] for r in rows) <= set(planned)
         assert f['coefficient_fit_SHA'] == '77ce9e79495038b25a4f4a9ffd95dc9f66700aff2c1f96cf08b65fff3c79733c'
         # Exclusive marker precedes the first fresh test label read; no old test access.
         with (D / 'test-open-once.json').open('x') as file:

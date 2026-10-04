@@ -2,6 +2,7 @@
 import argparse
 import importlib.util
 import json
+import os
 from pathlib import Path
 
 D=Path('research-data/ai-sigma/frame14-distance-residual')
@@ -17,6 +18,14 @@ p.add_argument('--new',default='2026-10-04T02:10:00Z');p.add_argument('--stop',d
 p.add_argument('command',nargs=argparse.REMAINDER);a=p.parse_args()
 if a.command and a.command[0]=='--':a.command=a.command[1:]
 assert a.command and 0<a.seconds<=120
+# Current paired owner includes NN0 replay/export on CPU2 as well as GPU work.
+# Preserve non-overlap for actual model/compute jobs; small Git metadata is allowed.
+for row in m.current():
+    if row['pid']==os.getpid() or row['cmd'].startswith('/bin/bash -c '):
+        continue
+    script=next((x for x in row['cmd'].split() if x.endswith(('.py','.cjs'))),'')
+    if 'tools/ai-sigma-frame14-distance-test/' in script and not script.endswith('/save_git.py'):
+        raise ValueError('paired201 current compute identity '+str((row['pid'],row['tick'],script)))
 prior=[json.loads(x.read_text()) for x in (D/'jobs').glob('*/process.json')]
 assert sum(x['wall_seconds'] for x in prior if x['kind']==a.kind)+a.seconds<=(300 if a.kind=='heavy' else 600)
 assert sum(x['samples_charged'] for x in prior)+a.samples<=500000
