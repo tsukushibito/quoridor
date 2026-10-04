@@ -11,3 +11,7 @@
 all144label-freecontainerは既loaderが読むがtest行をmoments/labeljoin/model/witness前除外、旧standalone testlabels/results/raw/journal/173正式未読。rawparityはtrainvalだけ。
 CPU2single/torch1/RAM2GiBguard1.75、job120s/累science180s/sample200000（予定116111=51200train+59010eval+5901rawparity）/GPU0/warm0。自然CPU0owned/次quiet/foreignheavy/RAM/PIDtickを本人直前admit、他owner/監督interrupt周期変更0。新8MiBは既exp1980MiB確認unusedから、guard6MiB/forecast5MiBinclGit/temp/metadata、旧2118保持/unknown減額/parent追加0。保存不足なら小必要保存へ早停止し具体不足。必要source/config/preregister/run/weights小archive/全attempt/counters/曲線/stop/Git必要byte/indexunchanged/Beadsbackupを保存。
 新science05:30/stop05:35/process05:42/submit05:46UTC（親05:51:38を超えない早側）。5分以内に本人選定・source実開始/最大不足、actualscience/終了は別報告。212意見を根拠に選定済、214見解は届けば反映し全稿承認gate0。成功科学再学習/追加条件0。有限結果/不成立を停止引渡しでclose可、親goalclose0。
+
+## 214選定前提案の採択（成績前）
+213宛・214選定前見解を統括採択、実薄修正。追加条件/NN/gate0。
+after-correction−beforeの実applied f32deltaをAdamproposal/理想sigma倍と別保存し、raw=実applied/sigma、rawbias=実dbprime-sum(実applied*mu/sigma)を用いる。f32roundingで実比と理想sigmaの厳密一致を要求しない。proposal0/適用丸め0は分母0件数/未知ratioとして残し、それ自体を科学faultにしない。元契約「初回有限nonzero proposalとapplied/dwprime比sigma確認」はこの有限丸め比較/zero保留へ訂正、成績前・科学救済変更ではない。nonfinite/誤列/介入未適用など意味上不成立はtyped保存。211/209/旧科学変更0。結果前primary/同seed/batch/400step/資源/期限不変更。214の全稿承認待ちgate0。
