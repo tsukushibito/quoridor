@@ -1,6 +1,8 @@
 # 現在のNNUE研究優先順位（frame18）
 
-2026-10-04 12:07UTC点。主配分は228独立game段階増量→低LR標準化NNUE学習→最大1候補freeze後の新test、229独立裁定。val96=96GOAL/4813joint/272858physicalNN/334.530891sをowner受領。背景公開safe progressではsealed test二chunk各48完了/2395+2452joint/137678+140853physicalNN/157.480190+171.027002s、testラベル/予測利益は未読。旧r1失敗1623NNを保持し、既知生成553012physicalNN（未完chunk・管理費・全team費は含まず）。train増量・学習利益は未観測。Supervisor12:03snapshotで担当Idleを点確認、12:07背景state running/終了result・notification未作成。完了イベントまでACK起床/LLMpollingを加えず、13:05数量branchと固定mask/最大1freeze→一testを維持。
+2026-10-04 12:42UTC生成完了節目。228新672全GOAL/32520Rjoint（π/z同数）、失敗testwire1623込みphysical1849212<2.2m/guardian2175.606740s<5400を停止compactで確認、sampledfamilyRSS2.321GB/currentexactchild空。14pack/memberSHA/Gitbyteは生成ownerの復元証拠、統括は全raw/教師truthを再検算していない。train192=old96+new96、train576=old96+new480、val/test各96完了を12:38:54曲線前quantity-freezeへ固定。今の主仕事は同256000samplesのCPU2学習二stage→validation最大1候補freeze→新test一巡、229有限算術。生成完了を量十分/学習利益/最高棋力へ格上げしない。
+
+背景job8255c4c9は12:39:00exit0/cleanuptrue、12:39:03samejob marker/turn01a106ec配送完了。12:03実Idle点と合わせ、submit→Idle→完了元role再開を一件の実研究利用で有限確認。queuewait800.0733s/source-management80.2929s/外elapsed2712.884sはr2の12chunk+NN0dataset/plan範囲、全14guardian費と重複するため単純加算しない。rootテストslot留保657.929s/人工CPU6.55s/旧失敗1623NNを別保持。旧r1未配送通知cancelはdeliveredに書換え0。
 
 明示新4hは開始10:33:18固定/終了14:33:18UTC、新heavy14:23:18/監督14:28:18/monitor14:31:18。CPU計算合計4論理/RAMcurrent8GiB/保持+有効予約unused12GiB/GPU推論6GiB・各job30min、GPU学習は旧累積2h確認未使用のみ。同saved6role/model-effort-cwd、LLM人数gateなし/Supervisor max_turn_seconds=null、pause/実所有/正runtime/子回収を維持。旧run/費/失敗/成績/個別期限reset0。親mainmirror・運用sourceのsolewriterは92、coordinator編集0。旧開封test選定復帰0、173正式198非学習、共有環境/toolchain/model取得/製品統合/push公開0。最高棋力・未見学習利益は未達。
 
@@ -43,3 +45,5 @@ root230の背景job実装を採用。主checkout sourceGit288c325、scripts/dev/
 228背景r2引渡し: sourceGitc484e21c…、supervisor123081/tick36780917・queue123133/tick36781104、testchunk1-r2 actual11:53:53.503867。旧r1 result failedは保持、同turnで回収済みの未配送notificationだけcancelled（deliveredに救済0）。672全manifest/family/seed/品質/roundrobinと12:50新入口/13:05science stop/13:07外側回収を維持。hyp/criticはmetadata/mask/pathhash/safeledgerだけ、testtargetsはsealed。本人Idleはabandonedではなくin_progress所有job、背景終了/不足/失敗で一度元roleへ通知。現物点はrunning/まだactive、到達確認は未来完了イベントで行いLLMpollingを追加しない。
 
 Supervisor12:06節目を採用: validation取得は量不足仮説/学習利益の判定ではなく評価準備。12:03の実Idle点はroot230人工suiteから分けたproduction前半の到達、実完了配送/全子回収は未確認。停止後公開compact/sourceを229既配分へ渡す、metadata集計を独立raw再検算/全test非露出証明へ格上げしない。予定report FileNotFoundErrorは監督の観測不足でproducer科学失敗ではない。今回追加科学/条件/量/役/turnを起こさず、background safeledger一回の点読取で進展と未知を更新。
+
+生成停止と曲線前固定を受け、13:05不足branchのfull192/576を12:38:54に成立させた（13:05まで待つ固定工程ではない）。最大train共通OR-mask/old尺度/同初期seedとfreshoptimizer/13point、主要same256000seenと非選定secondarysmall400-large1200を維持。229へ生成compact/quantity-freeze/selection-ruleと費範囲・sealed非読取を既270秒内の実質入力として配送、source/算術は228の学習計算に重ねない。主228はcritic全文/算術を開始gateにせずfreshphysical admit後二stageへ。新効率port/追加教師・再split・曲線後mask変更を開始せず、新学習観測で次配分を判断する。

@@ -1,0 +1,115 @@
+{
+  "UTC": "2026-10-04T12:42:55.835063+00:00",
+  "gen_compact": {
+    "UTC": "2026-10-04T12:40:09.329336+00:00",
+    "planned_new_games": 672,
+    "all_GOAL": 672,
+    "counts": {
+      "Rpolicy": 32520,
+      "Rjoint": 32520,
+      "Rz": 32520
+    },
+    "physicalNN_allattempt": 1849212,
+    "genNN_cap": 2200000,
+    "guardian_allattempt_wall_s": 2175.6067399219028,
+    "heavycap_s": 5400,
+    "current_exact_children": [],
+    "sampled_peak_family_RSS": 2320748544,
+    "scope_current_B": 126010256,
+    "allarchive_members_verified_by_generation_owner": true,
+    "testlabels_prefreeze_not_decoded_for_selection": true,
+    "newtest_read_for_generationqualification_only": true,
+    "gen_stop": true,
+    "sourcewriter_stop": true,
+    "learner_NN_started": 0
+  },
+  "background_result": {
+    "job_id": "8255c4c9-300c-495f-9788-f4cd7b7fd35d",
+    "outcome": "succeeded",
+    "error": null,
+    "exit_code": 0,
+    "finished_at": "2026-10-04T12:39:00.102805+00:00",
+    "wall_seconds": 2712.8839453940163,
+    "remaining": [],
+    "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+    "cleanup_complete": true,
+    "log_bytes_seen": 15842,
+    "log_bytes_retained": 15842
+  },
+  "background_notification": {
+    "status": "delivered",
+    "updated_at": "2026-10-04T12:39:03.348553+00:00",
+    "marker": "[research-job:8255c4c9-300c-495f-9788-f4cd7b7fd35d]",
+    "turn_id": "01a106ec-c7ad-77d3-a7d1-cb22b1635a1d"
+  },
+  "quantity_freeze": {
+    "UTC": "2026-10-04T12:38:54.870782+00:00",
+    "planned_new_games": 672,
+    "train_planned": 576,
+    "positive": {
+      "train": 576,
+      "validation": 96,
+      "test": 96
+    },
+    "small_positive": 192,
+    "branch": "full planned192/576 with effective G+ explicitly reported; if missing families, retained plannedzero rows with acquired effective maximum before curves",
+    "holdout_complete": true,
+    "secondary_nonselection": {
+      "small_step": 400,
+      "large_step": 1200,
+      "G_small": 192,
+      "G_large": 576,
+      "distance": 0.0,
+      "rule": "minimum saved abs(step/Glarge-400/Gsmall); tie early; before curves"
+    },
+    "test_target_values_decoded": false
+  },
+  "before_curves_rule": {
+    "primary": "same256000 samples; shared maximumtrain OR mask",
+    "candidate": "lowest validation-primary gameMSE among stage BEST; tie smaller G+ then earlier beststep",
+    "secondary_nonselection": {
+      "small_step": 400,
+      "large_step": 1200,
+      "G_small": 192,
+      "G_large": 576,
+      "distance": 0.0,
+      "rule": "minimum saved abs(step/Glarge-400/Gsmall); tie early; before curves"
+    },
+    "fixed_points": [
+      0,
+      1,
+      2,
+      5,
+      10,
+      20,
+      50,
+      100,
+      200,
+      400,
+      800,
+      1200,
+      2000
+    ],
+    "stages": [
+      {
+        "planned": 192,
+        "G+": 192,
+        "NN_upper": 449732
+      },
+      {
+        "planned": 576,
+        "G+": 576,
+        "NN_upper": 707864
+      }
+    ],
+    "test_labels_read": false,
+    "checkpoints": "necessary private small weight payloads within authorized data scope; final archive in research Git"
+  },
+  "scope": "public stop/aggregate/label-free split/selection rule, sealed target payload unaccessed",
+  "claim": "new672 acquisition and Idle completion event finite support, learning benefit unobserved",
+  "SHA": {
+    "generation-final-stop-compact.json": "10c610b3218dbed3c8a07088faf524a2b5ec2c5c17e4e5cc2457589b2995606a",
+    "dataset-v1/quantity-freeze.json": "d69f945f4e04b5081cc458982f9a526e003234a1f2e7b8e00008ac5262b90254",
+    "learning-plan-v1/before-curves-selection-rule.json": "84caa95114b1e3dc24b88364af4ff5427cbed151d5de0a5cf5b550fa1e2fc3d7"
+  }
+}
