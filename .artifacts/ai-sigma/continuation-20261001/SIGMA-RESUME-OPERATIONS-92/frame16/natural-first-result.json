@@ -1,0 +1,44 @@
+{
+  "at": "2026-10-04T06:18:00.691463+00:00",
+  "thread_status": {
+    "type": "notLoaded"
+  },
+  "official_latest": [
+    {
+      "id": "01a1058b-cf9e-72f3-b934-f7212e61c9d3",
+      "status": "interrupted",
+      "error": null,
+      "startedAt": 1791094411,
+      "completedAt": 1791094595,
+      "item_types": [],
+      "raw_bytes": 197,
+      "raw_sha256": "fd3357625deeb06f3ee17b9456073b1ad3cfb99d9157b7ec47390ce1be7accf7",
+      "text_excerpt": ""
+    }
+  ],
+  "first_live_turn": {
+    "observed_utc": "2026-10-04T06:16:39.138606+00:00",
+    "dispatched": {
+      "at": "2026-10-04T06:13:31.174494+00:00",
+      "event": "dispatched",
+      "run_id": "f3cd2859-2097-41c2-9fc9-16ae8209aaa5",
+      "turn_id": "01a1058b-cf9e-72f3-b934-f7212e61c9d3"
+    },
+    "finished": {
+      "at": "2026-10-04T06:16:36.139223+00:00",
+      "event": "owned_turn_finished",
+      "turn_id": "01a1058b-cf9e-72f3-b934-f7212e61c9d3",
+      "status": "interrupted"
+    },
+    "history_completion_only": true,
+    "semantic_success_pending_independent_critic": true,
+    "source_events": "/workspaces/quoridor/.artifacts/research-team/scheduler-sigma-continuation-20261001/events.jsonl",
+    "source_events_sha256": "64cff27caa9651806c9d870623371a977c366c39c117d6c5030fd08f46909c9b"
+  },
+  "run_id": "f3cd2859-2097-41c2-9fc9-16ae8209aaa5",
+  "guard_directory_present": false,
+  "guard_filenames": [],
+  "natural_observe_finish_success_confirmed": false,
+  "manual_retry_or_forced_tick": false,
+  "future_stop_responsibility_unchanged": true
+}

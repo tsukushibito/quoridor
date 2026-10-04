@@ -15,3 +15,5 @@ scheduler4069898/start34737868、monitor4069912/start34737890、boot ab5e66ac-12
 今回の期限反映は既運用の7path変更で約6分。複数sourceの時刻とhash固定が準備費を生む点は既frame15の配置・設定分離提案を継承し、別層や自動role更新helperは追加していない。将来採用する場合は統括配分・停止窓と最小期限/owned確認で扱い、変更箇所数・準備時間で効果を見る。現運用の修復・研究開始の新gateにはしない。
 
 必要証拠は `.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame16/` の intake/source-fixed/checks/supervisor-resume/startup-commands/running-loaded。自己短期子終了と意図した長期2PIDを分ける。研究Git版と既default index保持は同scopeのgit-record.json、必要Beads notes/backupは同receiptで参照する。
+
+初回自然run f3cd2859-2097-41c2-9fc9-16ae8209aaa5 / turn01a1058b-cf9e-72f3-b934-f7212e61c9d3 は06:16:36UTCにturn_limit/interrupted。read-guard保存dirなし、observe/finish/notes-backupの成立を確認できない。公式状態と必要最新1turnの有界読取を natural-first-result.json に保存し、running-loadedと分けて失敗を保持。追加source変更/二重stop-start/強制tick0、次通常点検06:33:27と既終了責任を維持する。これは216/217の敗北や研究停滞を示す結果ではない。
