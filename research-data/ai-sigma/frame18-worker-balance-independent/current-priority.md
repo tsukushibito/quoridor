@@ -1,0 +1,5 @@
+goal quoridor-4lc /226 substantive priority update after coordinator11:05 point
+
+baseline-r2 modelslot1 censored219.339324s/NNUNKNOWN+budget307200 remains. balanced-r3 modelslot2 censored12.183166s after108 init/NNUNKNOWN remains. Coordinator identified secondoffender80408/tick36484847 supervisor guard.py inspect as actualCPUtool, distinct from former227 shell-read falseclassification. ActiveLLM count is not a gate; nextquiet1154 onlynextdispatch slack, no currentturn futuretoolabsence.
+
+Max1 next direction: remainingcandidate-only slot cannot identify a same-current-host allocation speed benefit because no full baseline survived. Prefer finite NOT_STARTED/handoff and redirect to independent data-stage/trainer connection instead of consuming a third efficiency run merely to complete slots. If owner elects candidate for absolute throughput information, restrict claim to one-run yield/tail/cost and retain unmatched baseline, censored96denominators and unknownNN; never compare with oldframe17 as full currentcontrol. This is an independent priority recommendation, not an approval/start gate. No fourthscience/clock/cap reset.
