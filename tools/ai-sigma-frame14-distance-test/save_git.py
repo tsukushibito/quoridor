@@ -16,7 +16,7 @@ def update(tree,parts,blob):
  data=b''.join(m+b' '+t+b' '+h+b'\t'+n+b'\0' for n,(m,t,h) in items.items());return run(['mktree','-z'],data)
 base=run(['rev-parse','HEAD']).decode();tree=run(['rev-parse',base+'^{tree}']).decode()
 for filename in sys.argv[1:]:
- assert filename.startswith(('tools/ai-sigma-frame14-distance-test/','research-data/ai-sigma/frame14-distance-test/','docs/reports/ai-sigma-experiment-frame14-distance-test.md'))
+ assert filename.startswith(('tools/ai-sigma-frame14-distance-test/','research-data/ai-sigma/frame14-distance-test/','docs/reports/ai-sigma-experiment-distance-test.md'))
  blob=run(['hash-object','-w','--stdin'],Path(filename).read_bytes());tree=update(tree,filename.split('/'),blob).decode()
 commit=run(['commit-tree',tree,'-p',base],b'research(201): save native teacher pipeline source and finite evidence\n').decode();subprocess.run(['git','update-ref','HEAD',commit,base],check=True)
 for filename in sys.argv[1:]:assert run(['show',commit+':'+filename])+b'\n'==Path(filename).read_bytes() or subprocess.check_output(['git','show',commit+':'+filename])==Path(filename).read_bytes()

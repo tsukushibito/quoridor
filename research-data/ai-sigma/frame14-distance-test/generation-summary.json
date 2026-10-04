@@ -1,0 +1,754 @@
+{
+  "issue": "quoridor-4lc.201",
+  "jobs": [
+    {
+      "job": "test",
+      "planned_games": 24,
+      "status_counts": {
+        "GOAL": 24
+      },
+      "Rpolicy": 1122,
+      "Rz": 1122,
+      "Rjoint": 1122,
+      "allattempt_jobwall_s": 83.72390816896223,
+      "rates": {
+        "Rpolicy": 13.401189989073433,
+        "Rz": 13.401189989073433,
+        "Rjoint": 13.401189989073433
+      },
+      "logical_worker_requests": 63329,
+      "physical_provider_samples": 63329,
+      "providerStop": {
+        "sample_cap": 307200,
+        "private_issue": "quoridor-4lc.187",
+        "modelhash": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+        "provider": "torch-folded-dynamicB-v1",
+        "original_ONNX_batch": 1,
+        "batch_min": 1,
+        "batch_max": 8,
+        "dtype": "float32",
+        "TF32": false,
+        "AMP": false,
+        "torch": "2.14.0+cu130",
+        "ORT": "1.30.0",
+        "device": "NVIDIA GeForce RTX 3060",
+        "threads": [
+          1,
+          1
+        ],
+        "CPU_affinity": [
+          0
+        ],
+        "coldinit_s": {
+          "import": 0.7323268839973025,
+          "CPUORT_session": 0.039137840969488025,
+          "graph_weights": 0.054844708007294685,
+          "CUDA_upload_context": 0.3498760450165719
+        },
+        "single_sample_equivalent": 63329,
+        "calls": {
+          "cuda": 9299,
+          "cpuort": 0
+        },
+        "rows": {
+          "cuda": 63329,
+          "cpuort": 0
+        },
+        "RAM_peak_KiB": 1164884,
+        "GPU_allocated_B": 20162048,
+        "GPU_reserved_B": 35651584,
+        "GPU_peak_allocated_B": 23154176,
+        "GPU_peak_reserved_B": 35651584,
+        "exit": {
+          "code": null,
+          "signal": "SIGTERM",
+          "pid": 3863074
+        }
+      },
+      "batch": {
+        "started": 63329,
+        "returned": 63329,
+        "resumed": 63329,
+        "discarded": 0,
+        "rejected_queued": 0,
+        "batches": [
+          {
+            "size": 4,
+            "sent_ms": 5153.964736,
+            "received_ms": 5599.076278,
+            "queue_ms": [
+              0.9520039999997607,
+              0.6963290000003326,
+              0.6404059999995297,
+              0.15473699999984092
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 5599.213235,
+            "received_ms": 5608.889735,
+            "queue_ms": [
+              444.36394500000006,
+              444.35009100000025,
+              444.3403560000006,
+              444.3090689999999,
+              421.36081000000013,
+              421.26192700000047,
+              421.24698200000057,
+              421.2387410000001
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 5608.999748,
+            "received_ms": 5616.574368,
+            "queue_ms": [
+              431.0184140000001,
+              431.012068,
+              431.0056570000006,
+              430.99754200000007,
+              427.07351199999994,
+              426.3476580000006,
+              426.33502099999987,
+              425.91151400000035
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 5616.594784,
+            "received_ms": 5623.805386,
+            "queue_ms": [
+              433.4235920000001,
+              433.1338450000003,
+              432.87829200000033,
+              432.57982399999946,
+              15.194166999999652,
+              14.610396000000037,
+              14.032462999999552,
+              13.471195999999509
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 5623.831326,
+            "received_ms": 5631.684336,
+            "queue_ms": [
+              9.940520000000106,
+              9.930417000000489,
+              9.924409000000196,
+              9.919185000000653,
+              9.861285000000862,
+              9.855317000000468,
+              9.850557000000663,
+              9.845868000000337
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 5631.729165,
+            "received_ms": 5638.588085,
+            "queue_ms": [
+              10.031477999999879,
+              10.021380999999565,
+              10.015572999999677,
+              10.010263000000123,
+              9.947983000000022,
+              9.942622999999912,
+              9.937904999999773,
+              9.933218000000124
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 5638.602848,
+            "received_ms": 5643.234526,
+            "queue_ms": [
+              12.762744999999995,
+              12.554524000000129,
+              12.33398600000055,
+              11.818605000000389,
+              11.786358000000291,
+              11.254706000000624,
+              11.225962000000436,
+              10.697414000000208
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 5643.245696,
+            "received_ms": 5647.870331,
+            "queue_ms": [
+              7.942353999999796,
+              7.589168999999856,
+              7.341242999999849,
+              7.016343000000234,
+              6.5697220000001835,
+              6.300223999999616,
+              5.907091000000037,
+              5.859585999999581
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 5647.881005,
+            "received_ms": 5652.862162,
+            "queue_ms": [
+              6.118317999999817,
+              6.108761000000413,
+              6.10269100000005,
+              6.066055000000233,
+              6.060938000000533,
+              5.991495000000214,
+              5.764020000000528,
+              5.444730000000163
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 5652.875212,
+            "received_ms": 5656.922329,
+            "queue_ms": [
+              8.008598000000347,
+              7.476603000000068,
+              7.44379200000003,
+              6.936687999999776,
+              6.803971000000274,
+              6.196756000000278,
+              6.1532139999999345,
+              5.497808999999506
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 5656.943144,
+            "received_ms": 5662.002208,
+            "queue_ms": [
+              7.238760999999613,
+              6.9012659999998505,
+              6.814135999999962,
+              6.291213999999854,
+              5.918870999999854,
+              5.476572999999917,
+              5.163516999999956,
+              4.791196000000127
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 5662.013517,
+            "received_ms": 5666.954962,
+            "queue_ms": [
+              4.823718999999983,
+              4.5037099999999555,
+              4.222714000000451,
+              3.9883310000004712,
+              3.7053789999999935,
+              3.32745900000009,
+              3.0982530000001134,
+              2.9164049999999406
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 5666.968616,
+            "received_ms": 5672.113384,
+            "queue_ms": [
+              7.655447000000095,
+              7.12123100000008,
+              6.482514999999694,
+              6.194510999999693,
+              5.828051000000414,
+              5.547005999999783,
+              1.796886000000086,
+              1.7884500000000116
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 5672.123996,
+            "received_ms": 5676.513213,
+            "queue_ms": [
+              4.872787000000244,
+              4.570676000000276,
+              4.4631850000005215,
+              4.417215000000397,
+              3.6627240000007077,
+              3.6080959999999322,
+              3.171284000000014,
+              2.9822650000005524
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 5676.524862,
+            "received_ms": 5681.033195,
+            "queue_ms": [
+              7.151813999999831,
+              6.71049099999982,
+              6.214664000000084,
+              6.1096269999998185,
+              6.019675000000461,
+              5.403981000000385,
+              4.669687000000522,
+              2.9084069999998974
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 5681.046321,
+            "received_ms": 5688.727558,
+            "queue_ms": [
+              7.228903999999602,
+              7.0830009999999675,
+              6.550580999999511,
+              6.32713799999965,
+              5.858223999999609,
+              5.558782000000065,
+              4.988177000000178,
+              4.246336000000156
+            ]
+          }
+        ],
+        "receipts": [
+          {
+            "identity": {
+              "run_id": "native201-test-r1",
+              "worker_id": "w2",
+              "game_id": "native201-test-01",
+              "generation": 1,
+              "handle": 1,
+              "token": 1,
+              "request_id": "w2:1"
+            },
+            "wire_id": "nn0.1",
+            "started_ms": 5153.964736,
+            "returned_ms": 5599.076278,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native201-test-r1",
+              "worker_id": "w2",
+              "game_id": "native201-test-04",
+              "generation": 2,
+              "handle": 2,
+              "token": 1,
+              "request_id": "w2:2"
+            },
+            "wire_id": "nn0.2",
+            "started_ms": 5153.964736,
+            "returned_ms": 5599.076278,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native201-test-r1",
+              "worker_id": "w2",
+              "game_id": "native201-test-07",
+              "generation": 3,
+              "handle": 3,
+              "token": 1,
+              "request_id": "w2:3"
+            },
+            "wire_id": "nn0.3",
+            "started_ms": 5153.964736,
+            "returned_ms": 5599.076278,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native201-test-r1",
+              "worker_id": "w2",
+              "game_id": "native201-test-10",
+              "generation": 4,
+              "handle": 4,
+              "token": 1,
+              "request_id": "w2:4"
+            },
+            "wire_id": "nn0.4",
+            "started_ms": 5153.964736,
+            "returned_ms": 5599.076278,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native201-test-r1",
+              "worker_id": "w2",
+              "game_id": "native201-test-13",
+              "generation": 5,
+              "handle": 5,
+              "token": 1,
+              "request_id": "w2:5"
+            },
+            "wire_id": "nn0.5",
+            "started_ms": 5599.213235,
+            "returned_ms": 5608.889735,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native201-test-r1",
+              "worker_id": "w2",
+              "game_id": "native201-test-16",
+              "generation": 6,
+              "handle": 6,
+              "token": 1,
+              "request_id": "w2:6"
+            },
+            "wire_id": "nn0.6",
+            "started_ms": 5599.213235,
+            "returned_ms": 5608.889735,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native201-test-r1",
+              "worker_id": "w2",
+              "game_id": "native201-test-19",
+              "generation": 7,
+              "handle": 7,
+              "token": 1,
+              "request_id": "w2:7"
+            },
+            "wire_id": "nn0.7",
+            "started_ms": 5599.213235,
+            "returned_ms": 5608.889735,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native201-test-r1",
+              "worker_id": "w2",
+              "game_id": "native201-test-22",
+              "generation": 8,
+              "handle": 8,
+              "token": 1,
+              "request_id": "w2:8"
+            },
+            "wire_id": "nn0.8",
+            "started_ms": 5599.213235,
+            "returned_ms": 5608.889735,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native201-test-r1",
+              "worker_id": "w4",
+              "game_id": "native201-test-02",
+              "generation": 1,
+              "handle": 1,
+              "token": 1,
+              "request_id": "w4:1"
+            },
+            "wire_id": "nn0.9",
+            "started_ms": 5599.213235,
+            "returned_ms": 5608.889735,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native201-test-r1",
+              "worker_id": "w4",
+              "game_id": "native201-test-05",
+              "generation": 2,
+              "handle": 2,
+              "token": 1,
+              "request_id": "w4:2"
+            },
+            "wire_id": "nn0.10",
+            "started_ms": 5599.213235,
+            "returned_ms": 5608.889735,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native201-test-r1",
+              "worker_id": "w4",
+              "game_id": "native201-test-08",
+              "generation": 3,
+              "handle": 3,
+              "token": 1,
+              "request_id": "w4:3"
+            },
+            "wire_id": "nn0.11",
+            "started_ms": 5599.213235,
+            "returned_ms": 5608.889735,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native201-test-r1",
+              "worker_id": "w4",
+              "game_id": "native201-test-11",
+              "generation": 4,
+              "handle": 4,
+              "token": 1,
+              "request_id": "w4:4"
+            },
+            "wire_id": "nn0.12",
+            "started_ms": 5599.213235,
+            "returned_ms": 5608.889735,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native201-test-r1",
+              "worker_id": "w4",
+              "game_id": "native201-test-14",
+              "generation": 5,
+              "handle": 5,
+              "token": 1,
+              "request_id": "w4:5"
+            },
+            "wire_id": "nn0.13",
+            "started_ms": 5608.999748,
+            "returned_ms": 5616.574368,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native201-test-r1",
+              "worker_id": "w4",
+              "game_id": "native201-test-17",
+              "generation": 6,
+              "handle": 6,
+              "token": 1,
+              "request_id": "w4:6"
+            },
+            "wire_id": "nn0.14",
+            "started_ms": 5608.999748,
+            "returned_ms": 5616.574368,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native201-test-r1",
+              "worker_id": "w4",
+              "game_id": "native201-test-20",
+              "generation": 7,
+              "handle": 7,
+              "token": 1,
+              "request_id": "w4:7"
+            },
+            "wire_id": "nn0.15",
+            "started_ms": 5608.999748,
+            "returned_ms": 5616.574368,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native201-test-r1",
+              "worker_id": "w4",
+              "game_id": "native201-test-23",
+              "generation": 8,
+              "handle": 8,
+              "token": 1,
+              "request_id": "w4:8"
+            },
+            "wire_id": "nn0.16",
+            "started_ms": 5608.999748,
+            "returned_ms": 5616.574368,
+            "discarded": false
+          }
+        ],
+        "max_pending_games": 24,
+        "batch_histogram": [
+          0,
+          458,
+          562,
+          207,
+          329,
+          386,
+          328,
+          320,
+          6709
+        ],
+        "queue_ms_sum": 566465.1175780067,
+        "queue_ms_max": 444.36394500000006,
+        "provider_pipe_ms": 69268.37032100015
+      },
+      "providerCost": {
+        "batches": 9299,
+        "server_before_JSON_ms": 54762.0463789999,
+        "stages": {
+          "input_parse_ms": 4196.46254799999,
+          "H2D_sync_ms": 3104.4651570000024,
+          "forward_sync_ms": 43208.12005099983,
+          "D2H_sync_ms": 1861.1271230000002
+        }
+      },
+      "sampled_peak_RSS": 2263277568,
+      "all24_status_and_plies": [
+        {
+          "game_id": "native201-test-01",
+          "status": "GOAL",
+          "total_ply": 83,
+          "rows": 75
+        },
+        {
+          "game_id": "native201-test-02",
+          "status": "GOAL",
+          "total_ply": 57,
+          "rows": 45
+        },
+        {
+          "game_id": "native201-test-03",
+          "status": "GOAL",
+          "total_ply": 79,
+          "rows": 63
+        },
+        {
+          "game_id": "native201-test-04",
+          "status": "GOAL",
+          "total_ply": 50,
+          "rows": 30
+        },
+        {
+          "game_id": "native201-test-05",
+          "status": "GOAL",
+          "total_ply": 59,
+          "rows": 35
+        },
+        {
+          "game_id": "native201-test-06",
+          "status": "GOAL",
+          "total_ply": 56,
+          "rows": 28
+        },
+        {
+          "game_id": "native201-test-07",
+          "status": "GOAL",
+          "total_ply": 61,
+          "rows": 53
+        },
+        {
+          "game_id": "native201-test-08",
+          "status": "GOAL",
+          "total_ply": 76,
+          "rows": 64
+        },
+        {
+          "game_id": "native201-test-09",
+          "status": "GOAL",
+          "total_ply": 68,
+          "rows": 52
+        },
+        {
+          "game_id": "native201-test-10",
+          "status": "GOAL",
+          "total_ply": 71,
+          "rows": 51
+        },
+        {
+          "game_id": "native201-test-11",
+          "status": "GOAL",
+          "total_ply": 51,
+          "rows": 27
+        },
+        {
+          "game_id": "native201-test-12",
+          "status": "GOAL",
+          "total_ply": 82,
+          "rows": 54
+        },
+        {
+          "game_id": "native201-test-13",
+          "status": "GOAL",
+          "total_ply": 76,
+          "rows": 68
+        },
+        {
+          "game_id": "native201-test-14",
+          "status": "GOAL",
+          "total_ply": 60,
+          "rows": 48
+        },
+        {
+          "game_id": "native201-test-15",
+          "status": "GOAL",
+          "total_ply": 66,
+          "rows": 50
+        },
+        {
+          "game_id": "native201-test-16",
+          "status": "GOAL",
+          "total_ply": 57,
+          "rows": 37
+        },
+        {
+          "game_id": "native201-test-17",
+          "status": "GOAL",
+          "total_ply": 47,
+          "rows": 23
+        },
+        {
+          "game_id": "native201-test-18",
+          "status": "GOAL",
+          "total_ply": 57,
+          "rows": 29
+        },
+        {
+          "game_id": "native201-test-19",
+          "status": "GOAL",
+          "total_ply": 50,
+          "rows": 42
+        },
+        {
+          "game_id": "native201-test-20",
+          "status": "GOAL",
+          "total_ply": 48,
+          "rows": 36
+        },
+        {
+          "game_id": "native201-test-21",
+          "status": "GOAL",
+          "total_ply": 78,
+          "rows": 62
+        },
+        {
+          "game_id": "native201-test-22",
+          "status": "GOAL",
+          "total_ply": 64,
+          "rows": 44
+        },
+        {
+          "game_id": "native201-test-23",
+          "status": "GOAL",
+          "total_ply": 65,
+          "rows": 41
+        },
+        {
+          "game_id": "native201-test-24",
+          "status": "GOAL",
+          "total_ply": 93,
+          "rows": 65
+        }
+      ],
+      "attempt": {
+        "exit": 0,
+        "stop_reason": null
+      }
+    }
+  ],
+  "Rpolicy": 1122,
+  "Rz": 1122,
+  "Rjoint": 1122,
+  "allattempt_jobwall_s": 83.72390816896223,
+  "planned24": 24,
+  "outputs": {
+    "test": {
+      "teacher": {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-distance-test/test-sealed/test-teacher-rows.jsonl.gz",
+        "SHA256": "fb2577de27d2ab13aca26b023fa344ec78c1a7ea84d5eda73398b462fdd44525",
+        "rows": 1122
+      },
+      "state_journal": {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-distance-test/test-sealed/test-state-journal.jsonl.gz",
+        "SHA256": "c0119ae2379c0873a0f8bf6183833a7ba37b22609a7c259cae69a5eb5ab6a638",
+        "rows": 1122
+      }
+    }
+  },
+  "shared_QF1_exposure_adapter_pending": true,
+  "teacher_truth_or_NI": false
+}
