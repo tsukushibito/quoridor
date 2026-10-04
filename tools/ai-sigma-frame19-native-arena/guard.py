@@ -29,7 +29,7 @@ def foreign(tab,owned={}):
   if own:continue
   try:argv=Path(f'/proc/{pid}/cmdline').read_bytes().decode().split('\0')
   except(OSError,UnicodeError):continue
-  script=next((s for s in argv[1:5]if s.endswith(('.py','.js','.cjs'))and' 'not in s and Path(s).is_file()),'')
+  executable=Path(argv[0]).name if argv else '';is_interpreter=executable.startswith(('python','node'));script=next((s for s in argv[1:5]if is_interpreter and s.endswith(('.py','.js','.cjs'))and' 'not in s and Path(s).is_file()),'')
   if any(s in script for s in ['tools/ai-sigma-','tools/nnue-training/','research-data/ai-sigma/'])or (argv and'faithful-native'in argv[0]):found.append(dict(z,script=script,argv=argv[:6]))
  return found
 assert time.time()<end(c['newscience_deadline'])
@@ -46,7 +46,11 @@ for role in ['scheduler','monitor']:
  z=loaded[role].get('process',loaded[role]);assert str(tab[z['pid']]['tick'])==str(z['start_ticks'])
 assert not foreign(table()),foreign(table())
 gpu=subprocess.check_output(['nvidia-smi','--query-compute-apps=pid,used_gpu_memory','--format=csv,noheader'],text=True,timeout=5).strip();assert not gpu
-prior=[json.loads(p.read_text())for p in(D/'guardians').glob('*/process.json')]
+prior=[]
+for p in(D/'guardians').glob('*/process.json'):
+ z=json.loads(p.read_text());supp=p.with_name('charge-supplement.json')
+ if supp.exists():z['samples_charge']=json.loads(supp.read_text())['samples_charge']
+ prior.append(z)
 assert sum(p['samples_charge']for p in prior)+c['sample_upper']<=4000000
 assert sum(p['wall_s']for p in prior)+c['hard_s']<=1200
 usage=lambda:sum(p.stat().st_size for r in[D,T]for p in r.rglob('*')if p.is_file())
@@ -94,6 +98,6 @@ with(O/'stdout.txt').open('w')as log:
   except ChildProcessError:break
 remaining=group();counter=Path(c['counter_file']);data=json.loads(counter.read_text())if counter.exists()else{}
 samples=data.get('all_samples',data.get('samples'));receipt=dict(UTC=utc(),startUTC=start,endUTC=utc(),exit=code,reason=reason,wall_s=time.monotonic()-st,peak_family_RSS=peak,
- samples_actual=samples,samples_charge=samples if samples is not None else c['sample_upper'],original_unknown=samples is None,
+ samples_actual=samples,samples_charge=(min(c['sample_upper'],samples+8192) if samples is not None and (code!=0 or reason) else samples) if samples is not None else c['sample_upper'],original_unknown=samples is None,inflight_NN_unknown=bool(code!=0 or reason),conservative_inflight_upper=8192 if samples is not None and(code!=0 or reason)else 0,
  tracked=tracked,remaining=remaining,all_child_waited=not remaining,current_exact_absent=not remaining,runner_pid=os.getpid(),runner_tick=table()[os.getpid()]['tick'])
 save('process.json',receipt);print(json.dumps(receipt));raise SystemExit(0 if code==0 and not reason and not remaining else 1)
