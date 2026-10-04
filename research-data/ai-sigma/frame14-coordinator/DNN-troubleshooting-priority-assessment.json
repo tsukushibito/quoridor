@@ -1,0 +1,31 @@
+{
+  "UTC": "2026-10-04T03:19:08.404414+00:00",
+  "trigger": "user asks standard DNN troubleshooting versus current policy",
+  "assessment": "data/view/split/baseline/independent test work reasonable; optimization and early-curve diagnosis insufficient before regularization and head freeze",
+  "source_checks": [
+    "tools/nnue-training/train.py",
+    "tools/nnue-training/model.py",
+    "tools/ai-sigma-qf1-distance-residual/residual_model.py",
+    "frame14-learning/qf1-frame14.json",
+    "three original history.jsonl"
+  ],
+  "observations": {
+    "Adam_lr": 0.001,
+    "first_validation_step": 100,
+    "first_evaluation_epoch_equivalents": [
+      10.517666392769105,
+      5.458422174840085,
+      2.7509133892112616
+    ],
+    "checks": "finite/missing gradients, not layer norms/update ratios/activation dead fraction",
+    "clip": "outer hard clip yields zero gradient outside interval; zero head initially blocks lower-layer loss gradient",
+    "head_freeze": "random lower layers, not pretrained feature finetuning"
+  },
+  "priority_revision": "next authorized frame prioritize limited LR/early epoch curves and gradient/activation/update diagnostics before head-vs-distance arena; preserve original experiments",
+  "next_run_proposal": "same original full QF1 initialization/data/model/loss, short LR comparison such as1e-3,1e-4,1e-5; dense early evaluation in epoch units, train/val plus layer diagnostics; select from validation only; no oldtest selection",
+  "standard_sources": [
+    "https://cs231n.github.io/neural-networks-3/",
+    "https://docs.pytorch.org/tutorials/beginner/basics/optimization_tutorial.html"
+  ],
+  "new_science_authorized_or_started": false
+}

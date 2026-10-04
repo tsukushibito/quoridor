@@ -156,3 +156,6 @@ NNUE学習の未見利益がまだないため、203のdistance-ordering案を�
 
 03:15:36運用期限:92のscheduler-end-stop.jsonを統括実読取。stored scheduler/owned turn限定でpending false・identity_alive false、原因・読取欄は原値保持。外部NN停止やmonitor最終回収は別証拠待ち。
 ユーザーの優先度への問いに対し、head限定を学習率対照より先にした根拠は十分強くなかったと評価。次許可枠では同初期/dataの少数学習率対照＋早期評価間隔を、HEAD対DIST実用診断と比較して優先順位を再選定する。先の次案は実配分・新枠許可ではなく、追加head学習/sweep/test再利用を自動開始しない。
+
+
+ユーザーのDNN定石との比較を受けた優先順位修正:データ/視点/分割/独立test整備は妥当だが、学習率対照と初期曲線/層別勾配・更新量の診断をhead凍結より先に十分行っていなかった。原QF1の最初のval100stepはtrain24/48/96で約10.52/5.46/2.75epoch相当、best0だけではその間の改善を否定できない。次許可枠では同fullQF1/data/init/lossの少数LR短対照＋早期評価・層別勾配/活性/更新比を主候補に引き上げ、HEAD対DIST対局案は後順位へ。clip/zerohead局所制約、teachernoise/分布等の原因は未確定。新run/学習/NN/test/対局開始0、旧記録/旧test選定/枠期限変更0。根拠frame14-coordinator/DNN-troubleshooting-priority-assessment.json。
