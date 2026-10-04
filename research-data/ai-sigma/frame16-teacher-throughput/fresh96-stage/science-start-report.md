@@ -1,0 +1,5 @@
+goal quoridor-4lc /221 phase4 first modelscience actual開始
+SourceGit5dace6a0945ee266ef414d40898372c5b3be03ba/新96fixed openingSHA8fff4511f2afeb0a995395fd86be188afed7ac463415eba7a1e637437cd193d0。新domain96family/actionseed各unique、8..28cohort各16、32slot/core2,4,6/active8。元provider/broker/worker不変更SHA/旧432parityreuse。
+管理入口旧attemptは09:25:58 foreignguardで自己停止・beforemodel0NN proof保持。登録file/モデルspawn前のselfBeadsread孫childrace対策をprivateguardianだけ新prospective版に修復、元process sampleUNKNOWNは上書き0。旧成功再実行0。
+初回モデル科学controller/cold開始 2026-10-04T09:29:43.279707+00:00/PID28083/tick35915672。registered-games/provider-init/corestartsの実物が現れモデルscienceへ到達。新NN300000/全900000残/newonejob300s、実foreignはlogging/selfstop、currentowner/RSS/GPU/newnullablemonitorを直前admit。
+128MiB新subreserve/unused1112645632→978427904、旧128+64MiB/UNKNOWN保持、親追加0。受付/静的と完走は別、全96planned/不明/未開始分母保持。
