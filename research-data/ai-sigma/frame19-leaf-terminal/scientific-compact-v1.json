@@ -1,0 +1,509 @@
+{
+  "UTC": "2026-10-04T23:52:31.254961+00:00",
+  "stop_path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-leaf-terminal/scientific-stop-v1.json",
+  "stop_SHA": "445775e90e3c6f380852174b38278ee5a08a7ca8d144755f2e4f25884293f638",
+  "profile": {
+    "searches": 64,
+    "paired_checks": 48,
+    "baseline_wall_ms": 16061.168549120426,
+    "candidate_wall_ms": 6553.425019919872,
+    "wall_reduction_fraction": 0.5919708457154094,
+    "same_processed_each": 262144,
+    "same_NN_each": 125128,
+    "baseline": {
+      "searches": 32,
+      "wholewall_ms": 16061.168549120426,
+      "NN": 125128,
+      "processed": 262144,
+      "leaf_pawn_fast_nonterminal": 0,
+      "leaf_full_fallback": 0
+    },
+    "candidate": {
+      "searches": 32,
+      "wholewall_ms": 6553.425019919872,
+      "NN": 125128,
+      "processed": 262144,
+      "leaf_pawn_fast_nonterminal": 250436,
+      "leaf_full_fallback": 0
+    },
+    "common_completed_depth": 2,
+    "requested_depth": 3,
+    "partial_depth_discarded": true,
+    "all_values_actions_same": true,
+    "ABBA_rounds": 2,
+    "package_D_redundant_terminal_removal_included": true,
+    "inclusive_spans_not_additive": true
+  },
+  "fixtures": {
+    "checks": 64,
+    "NN": 120,
+    "finite_PASS": true,
+    "first_checker_failure_preserved": true
+  },
+  "optional4": {
+    "planned": 4,
+    "W": 3,
+    "D": 0,
+    "L": 0,
+    "UNKNOWN": 1,
+    "families": 2,
+    "opening_ply": [
+      8,
+      16
+    ],
+    "original_slot1_censor_not_replayed": true,
+    "late_response_erratum_236_preserved": true,
+    "comparison_to_236_NOT_PAIRED": true,
+    "strength_claim": false
+  },
+  "secondary_exact_cases": {
+    "conditions": 16,
+    "NN": 31274,
+    "processed": 63172,
+    "wholewall_ms": 2256.8331679701805,
+    "summaries": [
+      {
+        "caseIndex": 0,
+        "slot": 2,
+        "ply": 27,
+        "source_Action": 11,
+        "source_depth": 2,
+        "conditions": [
+          {
+            "engine": "NNUE",
+            "depth": 1,
+            "legal_count": 94,
+            "max_value": 0.010944350622594357,
+            "argmax_Actions": [
+              142
+            ],
+            "source_selected_gap": 0.10681293066591024
+          },
+          {
+            "engine": "NNUE",
+            "depth": 2,
+            "legal_count": 94,
+            "max_value": -0.16967138648033142,
+            "argmax_Actions": [
+              11
+            ],
+            "source_selected_gap": 0
+          },
+          {
+            "engine": "distance",
+            "depth": 1,
+            "legal_count": 94,
+            "max_value": -1,
+            "argmax_Actions": [
+              11,
+              19,
+              90,
+              91,
+              92,
+              93,
+              94,
+              95,
+              96,
+              98,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104,
+              106,
+              107,
+              108,
+              109,
+              110,
+              111,
+              112,
+              114,
+              115,
+              116,
+              117,
+              118,
+              119,
+              120,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              134,
+              135,
+              136,
+              139,
+              140,
+              142,
+              143,
+              144,
+              147,
+              149,
+              151,
+              154,
+              155,
+              156,
+              157,
+              158,
+              159,
+              160,
+              162,
+              163,
+              164,
+              165,
+              166,
+              167,
+              168,
+              170,
+              171,
+              172,
+              173,
+              174,
+              175,
+              176,
+              178,
+              179,
+              180,
+              181,
+              182,
+              183,
+              184,
+              186,
+              187,
+              188,
+              189,
+              190,
+              191,
+              192,
+              194,
+              195,
+              198,
+              199,
+              200,
+              202,
+              203,
+              204,
+              206,
+              207,
+              208
+            ],
+            "source_selected_gap": 0
+          },
+          {
+            "engine": "distance",
+            "depth": 2,
+            "legal_count": 94,
+            "max_value": -1,
+            "argmax_Actions": [
+              11,
+              19,
+              90,
+              91,
+              92,
+              93,
+              94,
+              95,
+              96,
+              98,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104,
+              106,
+              107,
+              108,
+              109,
+              110,
+              111,
+              112,
+              114,
+              115,
+              116,
+              117,
+              118,
+              119,
+              120,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              134,
+              135,
+              136,
+              139,
+              140,
+              142,
+              143,
+              144,
+              147,
+              149,
+              151,
+              154,
+              155,
+              156,
+              157,
+              158,
+              159,
+              160,
+              162,
+              163,
+              164,
+              165,
+              166,
+              167,
+              168,
+              170,
+              171,
+              172,
+              173,
+              174,
+              175,
+              176,
+              178,
+              179,
+              180,
+              181,
+              182,
+              183,
+              184,
+              186,
+              187,
+              188,
+              189,
+              190,
+              191,
+              192,
+              194,
+              195,
+              198,
+              199,
+              200,
+              202,
+              203,
+              204,
+              206,
+              207,
+              208
+            ],
+            "source_selected_gap": 0
+          }
+        ],
+        "depth2_original_NNUE_value_maxabs": 0.0
+      },
+      {
+        "caseIndex": 1,
+        "slot": 3,
+        "ply": 10,
+        "source_Action": 85,
+        "source_depth": 2,
+        "conditions": [
+          {
+            "engine": "NNUE",
+            "depth": 1,
+            "legal_count": 124,
+            "max_value": 0.5077791213989258,
+            "argmax_Actions": [
+              85
+            ],
+            "source_selected_gap": 0
+          },
+          {
+            "engine": "NNUE",
+            "depth": 2,
+            "legal_count": 124,
+            "max_value": 0.4858770966529846,
+            "argmax_Actions": [
+              85
+            ],
+            "source_selected_gap": 0
+          },
+          {
+            "engine": "distance",
+            "depth": 1,
+            "legal_count": 124,
+            "max_value": 0.03868896886706352,
+            "argmax_Actions": [
+              84,
+              85,
+              92,
+              93,
+              100,
+              101,
+              108,
+              109,
+              116,
+              117
+            ],
+            "source_selected_gap": 0
+          },
+          {
+            "engine": "distance",
+            "depth": 2,
+            "legal_count": 124,
+            "max_value": 0.06038215383887291,
+            "argmax_Actions": [
+              84,
+              85,
+              92,
+              93,
+              100,
+              101,
+              108,
+              109,
+              116,
+              117
+            ],
+            "source_selected_gap": 0
+          }
+        ],
+        "depth2_original_NNUE_value_maxabs": 0.0
+      },
+      {
+        "caseIndex": 2,
+        "slot": 5,
+        "ply": 14,
+        "source_Action": 83,
+        "source_depth": 2,
+        "conditions": [
+          {
+            "engine": "NNUE",
+            "depth": 1,
+            "legal_count": 88,
+            "max_value": -0.2934240400791168,
+            "argmax_Actions": [
+              98
+            ],
+            "source_selected_gap": 0.018542081117630005
+          },
+          {
+            "engine": "NNUE",
+            "depth": 2,
+            "legal_count": 88,
+            "max_value": -0.21396608650684357,
+            "argmax_Actions": [
+              83
+            ],
+            "source_selected_gap": 0
+          },
+          {
+            "engine": "distance",
+            "depth": 1,
+            "legal_count": 88,
+            "max_value": 0.03868896886706352,
+            "argmax_Actions": [
+              82,
+              83,
+              90,
+              91,
+              98,
+              99,
+              106,
+              107,
+              114,
+              115
+            ],
+            "source_selected_gap": 0
+          },
+          {
+            "engine": "distance",
+            "depth": 2,
+            "legal_count": 88,
+            "max_value": 0.06038215383887291,
+            "argmax_Actions": [
+              12,
+              22,
+              82,
+              83,
+              90,
+              91,
+              98,
+              99,
+              106,
+              107,
+              114,
+              115
+            ],
+            "source_selected_gap": 0
+          }
+        ],
+        "depth2_original_NNUE_value_maxabs": 0.0
+      },
+      {
+        "caseIndex": 3,
+        "slot": 7,
+        "ply": 40,
+        "source_Action": 19,
+        "source_depth": 12,
+        "conditions": [
+          {
+            "engine": "NNUE",
+            "depth": 1,
+            "legal_count": 3,
+            "max_value": -0.9421074390411377,
+            "argmax_Actions": [
+              19
+            ],
+            "source_selected_gap": 0
+          },
+          {
+            "engine": "NNUE",
+            "depth": 2,
+            "legal_count": 3,
+            "max_value": -1,
+            "argmax_Actions": [
+              11,
+              19,
+              21
+            ],
+            "source_selected_gap": 0
+          },
+          {
+            "engine": "distance",
+            "depth": 1,
+            "legal_count": 3,
+            "max_value": -0.5557376146316528,
+            "argmax_Actions": [
+              19
+            ],
+            "source_selected_gap": 0
+          },
+          {
+            "engine": "distance",
+            "depth": 2,
+            "legal_count": 3,
+            "max_value": -1,
+            "argmax_Actions": [
+              11,
+              19,
+              21
+            ],
+            "source_selected_gap": 0
+          }
+        ],
+        "depth2_original_NNUE_value_maxabs": null
+      }
+    ],
+    "all_children_fullwindow": true,
+    "old_nonbest_failsoft_not_promoted": true
+  },
+  "caps": {
+    "known_NN": 391088,
+    "charged_NN": 949280,
+    "NNcap": 1500000,
+    "science_wall_s": 38.635902317939326,
+    "science_cap_s": 600
+  },
+  "all_childwait": true,
+  "current_exact_absent": true,
+  "independence": "owner finite checks;241 independent arithmetic pending",
+  "training_test_GPU": 0,
+  "next_max1": "same fixed openings paired baseline/candidate samewall diagnostic to identify package benefit; no automatic execution"
+}
