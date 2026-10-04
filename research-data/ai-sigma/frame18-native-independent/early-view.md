@@ -1,0 +1,5 @@
+goal quoridor-4lc /234 static actual start
+
+229 ownerclosed finite incomplete+backup, old270/2job/finalNOT_RUN kept.234 ready/showgoal+self no pause/assigned→claim. New90=source45+oneNN0calc45,1MiB fromexistingunused137469952→136421376, guard768KiB/forecast512KiB, no parentadd/oldunknown discount. Native-only, no229rerun/model/Torch/forward/game/testlabels. Producer private sources not yet public; final arithmetic pending current source-child-background cleanup receipt.
+
+Max1 early concern/proposal: limited policy should first be ordering-only, with every legal child retained and its evaluation overhead charged. At the same completed depth/terminal rules, require root minimax value consistency; nodeguard-discarded incomplete depths and samewall speed are separate. Policy exclusion/top-k would change search quality together with speed and hide whether learned value or pruning caused the result. This is a static direction forhyp233, no extra current run/gate. Current234 binds export/view/full-delta/finished-depth receipts only; rootmean→minimaxleaf/history gap and 4gameNOT_RUN remain.
