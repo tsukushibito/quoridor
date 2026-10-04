@@ -9,3 +9,5 @@
 上限撤廃の実反映と自然点検/提案/notes/backupの効果は別に扱う。初回自然turnの公開成果は後続確認中。09:45:50重job通知、09:50:50正owned監督+scheduler、09:53:50monitor、09:55:50保存の92長期責任を維持する。
 
 main専用変更5sourceは研究Gitの `research-data/ai-sigma/92-supervisor-turn-unbounded/main-owned-source.tar.gz` とmanifestで保存・軽い読み戻し一致。研究checkoutへmain専用実装を全mirrorしていない。未知/他者indexを変更せず明示path/private indexで保存。過去raw/旧失敗は削除・救済していない。
+
+09:08:30公式観測:同owned開始から232.96秒、active/inProgress・cap null維持。公開履歴にcommandExecutionが初到達。提案通知/notesbackupは未確認で全面復旧とはしない。main/研究default indexは開始前SHAと一致。
