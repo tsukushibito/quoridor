@@ -27,10 +27,16 @@
     "research-data/ai-sigma/frame14-teachers/test-sealed/**",
     ".artifacts/ai-sigma/frame14-teachers/test-sealed/**",
     "research-data/ai-sigma/frame14-teachers/nn0-live-export-attempt1/**",
-    "research-data/ai-sigma/frame14-teachers/test-state-journal.jsonl.gz"
+    "research-data/ai-sigma/frame14-teachers/test-state-journal.jsonl.gz",
+    "research-data/ai-sigma/frame14-teachers/test-sealed/test-partial-labels.jsonl.gz"
   ],
   "actual_pre_freeze_allowlist": "explicit canonical label-free metadata; train and validation labels only; label-free dataset/mask/path+hash manifests. No raw/statejournal/oldpreview/testteacher/testlabels. No claim of OS access isolation in shared worktree.",
   "nonsealed_old_test_named_labels": 0,
   "old_source_result_reclassified": false,
-  "new_science": false
+  "new_science": false,
+  "unsealed_allowed_partial_metadata": [
+    "research-data/ai-sigma/frame14-teachers/partial-qf1-v1/train-canonical.jsonl.gz",
+    "research-data/ai-sigma/frame14-teachers/partial-qf1-v1/validation-canonical.jsonl.gz",
+    "research-data/ai-sigma/frame14-teachers/partial-qf1-v1/test-canonical.jsonl.gz"
+  ]
 }

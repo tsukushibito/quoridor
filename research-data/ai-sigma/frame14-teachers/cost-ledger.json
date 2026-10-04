@@ -1,8 +1,17 @@
 {
   "UTC": "2026-10-03T23:50:09.201454+00:00",
-  "allattempt_science_jobwall": 463.13465577503666,
+  "allattempt_science_jobwall": 691.35614519706,
   "prepare_NN0_jobwall": 0.206989253,
   "scientific_jobs": [
+    {
+      "run": "native194-train04-r1",
+      "startUTC": "2026-10-03T23:59:47.574782+00:00",
+      "endUTC": "2026-10-04T00:01:42.075112+00:00",
+      "jobwall_seconds": 116.5464172270149,
+      "exit": 0,
+      "remaining": [],
+      "source_git": "373013bb9b659fb9ca7be7fedb0bf09356bb242f"
+    },
     {
       "run": "native194-train01-r1",
       "startUTC": "2026-10-03T23:37:08.314431+00:00",
@@ -31,6 +40,15 @@
       "source_git": "f61ba65aead3a4113a5727ea29058a8cb87ad9c8"
     },
     {
+      "run": "native194-train03-r1",
+      "startUTC": "2026-10-03T23:56:34.437178+00:00",
+      "endUTC": "2026-10-03T23:58:24.534570+00:00",
+      "jobwall_seconds": 111.6750721950084,
+      "exit": 0,
+      "remaining": [],
+      "source_git": "373013bb9b659fb9ca7be7fedb0bf09356bb242f"
+    },
+    {
       "run": "native194-test-r1",
       "startUTC": "2026-10-03T23:43:09.070522+00:00",
       "endUTC": "2026-10-03T23:44:49.551859+00:00",
@@ -40,10 +58,27 @@
       "source_git": "f61ba65aead3a4113a5727ea29058a8cb87ad9c8"
     }
   ],
-  "physical_provider_handNN": 266412,
+  "physical_provider_handNN": 397012,
   "unknown_legacy_logical_counter_not_used": true,
   "pipeline_static_elapsed_start": "2026-10-03T23:30:25Z",
   "pipeline_cost_not_production_rate": true,
   "new_heavy_budget_s": 2100,
-  "schema_repair_and_live_preview_NN": 0
+  "schema_repair_and_live_preview_NN": 0,
+  "normal_startup_NN": 0,
+  "debug_model_forward": 0,
+  "helper_costs": {
+    "prepare": 0.206989253,
+    "partial_QF1_export": 2.058942741015926,
+    "failed_heap192_export": "wall unmeasured <=40s hard timeout; NN0/failed source and error preserved",
+    "following_connect_r1_failure": "wall unmeasured <=120s; no commands/NN before failed stale-summary assertion",
+    "old_unmetered_preview_and_interim_export": "NN0, each hard40s; conservative upperbound120s for3 calls",
+    "helper_repair_export": 3.3213774249888957,
+    "helper_final_QF1": 2.8966013729805127,
+    "pack": 0.9641001800191589,
+    "Git_and_reports": "not production rate; finalhelpers separately; LLM/static preparation calendar wall separate"
+  },
+  "measured_production_joint_per_jobsec": 10.119241795422102,
+  "NN0_plus_science_conservative_charged_upper_bound_without_final_Githelpers": 980.80614519706,
+  "pipeline_dataset_ready_UTC": "2026-10-04T00:06:13.316128+00:00",
+  "pipeline_elapsed_from_receipt_s": 2148.316128
 }

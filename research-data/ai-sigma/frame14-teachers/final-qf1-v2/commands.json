@@ -1,0 +1,110 @@
+[
+  {
+    "cmd": [
+      "/home/vscode/.local/bin/node",
+      "/workspaces/quoridor/.worktree/ai-sigma/tools/nnue-training/export_generated.cjs",
+      "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/openings.json",
+      "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/train-teacher-rows.jsonl.gz",
+      "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/final-qf1-v2/train-metadata.jsonl.gz",
+      "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/final-qf1-v2/final-qf1-v2-train-labels.jsonl.gz"
+    ],
+    "wall_s": 1.19341671501752,
+    "exit": 0,
+    "stdout": "{\"rows\":4653,\"metadata_sha256\":\"2118a1c8a51352fa7b0771a6cbbef42ec1b74adeaf0116f171cdc495aa4073f0\",\"labels_sha256\":\"f81cd07c215da46b047002bb5d3954ebeb28bb70e6898afe73353ebad8f754f7\",\"test_labels_remain_generation_owner_only\":true,\"canonical_signature_command\":\"python3 -B tools/nnue-training/frame14.py canonicalize --metadata INPUT.gz --output OUTPUT.gz\"}\n",
+    "stderr": ""
+  },
+  {
+    "cmd": [
+      "python3",
+      "-B",
+      "/workspaces/quoridor/.worktree/ai-sigma/tools/nnue-training/frame14.py",
+      "canonicalize",
+      "--metadata",
+      "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/final-qf1-v2/train-metadata.jsonl.gz",
+      "--output",
+      "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/final-qf1-v2/train-canonical.jsonl.gz"
+    ],
+    "wall_s": 0.17867452197242528,
+    "exit": 0,
+    "stdout": "{\"rows\": 4653, \"sha256\": \"57497833a4057c6e0dfe0785c0f2d779e8406e850902c1f990771743686895b3\", \"labels_read\": false}\n",
+    "stderr": ""
+  },
+  {
+    "cmd": [
+      "/home/vscode/.local/bin/node",
+      "/workspaces/quoridor/.worktree/ai-sigma/tools/nnue-training/export_generated.cjs",
+      "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/openings.json",
+      "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/validation-teacher-rows.jsonl.gz",
+      "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/final-qf1-v2/validation-metadata.jsonl.gz",
+      "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/final-qf1-v2/final-qf1-v2-validation-labels.jsonl.gz"
+    ],
+    "wall_s": 0.519778389018029,
+    "exit": 0,
+    "stdout": "{\"rows\":1248,\"metadata_sha256\":\"937795d9877c4689c610763208a80e0697da35f006c07bbd1f529e25aa701744\",\"labels_sha256\":\"8ce29ba4ffb6d893d9882ec781f9547d9c1be1bfb763a92069a3c598d2ea210a\",\"test_labels_remain_generation_owner_only\":true,\"canonical_signature_command\":\"python3 -B tools/nnue-training/frame14.py canonicalize --metadata INPUT.gz --output OUTPUT.gz\"}\n",
+    "stderr": ""
+  },
+  {
+    "cmd": [
+      "python3",
+      "-B",
+      "/workspaces/quoridor/.worktree/ai-sigma/tools/nnue-training/frame14.py",
+      "canonicalize",
+      "--metadata",
+      "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/final-qf1-v2/validation-metadata.jsonl.gz",
+      "--output",
+      "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/final-qf1-v2/validation-canonical.jsonl.gz"
+    ],
+    "wall_s": 0.07364385400433093,
+    "exit": 0,
+    "stdout": "{\"rows\": 1248, \"sha256\": \"096d7fb591e93d510138beaf7594d778b4cfd4925a029c9d56f8cbea5b192079\", \"labels_read\": false}\n",
+    "stderr": ""
+  },
+  {
+    "cmd": [
+      "/home/vscode/.local/bin/node",
+      "/workspaces/quoridor/.worktree/ai-sigma/tools/nnue-training/export_generated.cjs",
+      "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/openings.json",
+      "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/test-sealed/test-teacher-rows.jsonl.gz",
+      "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/final-qf1-v2/test-metadata.jsonl.gz",
+      "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/test-sealed/final-qf1-v2-test-labels.jsonl.gz"
+    ],
+    "wall_s": 0.4678593080025166,
+    "exit": 0,
+    "stdout": "{\"rows\":1095,\"metadata_sha256\":\"de3ebb842d14a3ba54506ba48ecd84f320a524791d6dc12e989e41c9da9766e1\",\"labels_sha256\":\"f962d47cba027d610966af41b5c719d7888200d614f54a18125ab7a71d8a481e\",\"test_labels_remain_generation_owner_only\":true,\"canonical_signature_command\":\"python3 -B tools/nnue-training/frame14.py canonicalize --metadata INPUT.gz --output OUTPUT.gz\"}\n",
+    "stderr": ""
+  },
+  {
+    "cmd": [
+      "python3",
+      "-B",
+      "/workspaces/quoridor/.worktree/ai-sigma/tools/nnue-training/frame14.py",
+      "canonicalize",
+      "--metadata",
+      "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/final-qf1-v2/test-metadata.jsonl.gz",
+      "--output",
+      "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/final-qf1-v2/test-canonical.jsonl.gz"
+    ],
+    "wall_s": 0.06222333700861782,
+    "exit": 0,
+    "stdout": "{\"rows\": 1095, \"sha256\": \"04f5f734871526e7c05a1352dbd9e01c14de02bcafb6b198fc812ca40ff24247\", \"labels_read\": false}\n",
+    "stderr": ""
+  },
+  {
+    "cmd": [
+      "python3",
+      "-B",
+      "/workspaces/quoridor/.worktree/ai-sigma/tools/nnue-training/frame14.py",
+      "mask",
+      "--metadata",
+      "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/final-qf1-v2/all144-metadata.jsonl.gz",
+      "--output",
+      "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/final-qf1-v2/fixed-exposure-mask.json",
+      "--openings",
+      "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/openings.json"
+    ],
+    "wall_s": 0.16823475999990478,
+    "exit": 0,
+    "stdout": "{\"rows\": 6996, \"games\": 144, \"zero_eligible_games\": []}\n",
+    "stderr": ""
+  }
+]
