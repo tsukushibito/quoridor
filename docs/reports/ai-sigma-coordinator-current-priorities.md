@@ -229,3 +229,8 @@ HEAD対DISTarena、追加L2/headfreeze/幅/target調整、教師増量は保留�
 追加標準化seed19080312は200step valgame .6199875632 vs同seedraw .6573313493（差-.0373437860、18/24改善）、初期関数parity5901max1.49e-8/同batch、80705sample/2.877428s/GPU0/全子停止。元seed .6139164436 vsraw .6598473195と方向再現。元減衰対照のbyteは最終Git931766f4に一致（速報SHAとの比較失敗を保存し最終Git基準へ修復、科学結果不変更）。追加seedのcompact24game平均/分母/差は統括整合確認、214独立認証の範囲外。213累196816/200000と5.952369s/180s、新予約0。
 
 次方針は標準化距離＋LR1e-4＋有望早期窓を保持し、既primaryの元seed normalized200を凍結する候補として新独立testで原raw200/未学習/定数/距離と比較する1単位へ。seedをtestで選ばず、旧開封testを設定へ戻さない。距離基準未超・2jointseed/reusedvalidation・optimizer座標/bias交絡を保持し、NNUE特徴最終性能・棋力・原因唯一を認定しない。追加幅/head/arenaを優先せず、必要な一般化資格を見て次を選ぶ。現在test/追加学習配分0、当枠全modelscience停止。213最終保存/closeと92期限回収を待つ。
+
+
+### frame15新heavy停止・研究課題回収
+
+05:41:38新heavy開始停止を適用。213原減衰と追加seedの科学source/全子停止、原Git931766f4/追加Git4400d163必要byte・archive3member復元/backup0を受入れ、coordinator引継closed。214も原対照独立裁定/保存でclosed。新seedを214独立支持へ拡張しない。196816sample/5.952369s/元caps内、全modelscience終了・追加科学0、最高棋力goal未達。残りは92本人の05:46:38正ownedscheduler/05:49:38monitor/05:51:38最終保存の必要証拠を確認する。全外部NN停止は認定しない。
