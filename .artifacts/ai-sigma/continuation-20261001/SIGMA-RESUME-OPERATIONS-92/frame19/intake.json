@@ -1,0 +1,205 @@
+{
+  "at": "2026-10-04T22:56:19.604572+00:00",
+  "issues": [
+    {
+      "id": "quoridor-4lc",
+      "status": "in_progress",
+      "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+      "labels": [
+        "continuation-active",
+        "frame18"
+      ]
+    },
+    {
+      "id": "quoridor-4lc.92",
+      "status": "in_progress",
+      "assignee": "codex:01a0f31d-99ee-7d63-b162-bc1a59c457c6",
+      "labels": [
+        "continuation-active",
+        "frame18"
+      ]
+    }
+  ],
+  "old_state": {
+    "binding": {
+      "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+      "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+      "target": "supervisor",
+      "dispatch_issue": "quoridor-4lc.40",
+      "contract_file": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+    },
+    "process": null,
+    "phase": "stopped",
+    "recovery_required": false,
+    "last_result": {
+      "at": "2026-10-04T14:28:18.022027+00:00",
+      "event": "process_stopped",
+      "owned_turn_pending": false
+    },
+    "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+    "config_sha256": "5eb54da3757058a11a538e0fcec1fd8121810a5b4fa2333164320ee5a52497fc",
+    "contract_sha256": "854990dcf3aff1f5e8765e464f580fb1d8c8df39f57311ae1214a5a7ee9ae843",
+    "next_at": null,
+    "owned": null
+  },
+  "old_live": {
+    "issue": "quoridor-4lc.92",
+    "frame": 18,
+    "parent_version": 18,
+    "updated_by": "92",
+    "record": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame18/running-loaded.json",
+    "run": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame18-76faf64a-a12e-4d15-8591-947181c91d53",
+    "scheduler": {
+      "pid": 61691,
+      "start_ticks": "36359387",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "monitor": {
+      "started_utc": "2026-10-04T10:43:33.542617+00:00",
+      "process": {
+        "pid": 61711,
+        "start_ticks": "36359409",
+        "state": "R",
+        "rss_bytes": 20574208,
+        "cpu_ticks": 2,
+        "affinity": [
+          0
+        ],
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "command": [
+        "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python",
+        "-B",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/watch.py"
+      ],
+      "script_sha256": "893b7cb0925c99e6a21e9400acf42a1fa11903568d608fdd66ac103a1b41cafa",
+      "operation_epoch_utc": "2026-10-04T10:43:33.145472+00:00",
+      "recovery_issue": "quoridor-4lc.92",
+      "owned_scheduler_expected": {
+        "pid": 61691,
+        "start_ticks": "36359387",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "expected_input_hashes": {
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json": "5eb54da3757058a11a538e0fcec1fd8121810a5b4fa2333164320ee5a52497fc",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json": "854990dcf3aff1f5e8765e464f580fb1d8c8df39f57311ae1214a5a7ee9ae843",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/prompt.md": "4fa7495076bd9340220ca1262ae9d9861631b8ff0eb31db305500bf59a0ec497",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/scheduler.py": "51781d39e23cbeaff0c83b5cf581caf173fc19b91b6ae2b3d189ab6a805dbcb1",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/watch.py": "893b7cb0925c99e6a21e9400acf42a1fa11903568d608fdd66ac103a1b41cafa",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/safe_state.py": "bde9bc1ba3cbe831fef89159a8adab9a86ba7d22815776fcfe12fb0ea541c378",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/report.py": "13b2c32f68fdc4dca68c0f251b68ebfdb838d201ff4ad35b489dec12b75ec7b5",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-supervisor-read-guard/guard.py": "d28d8ed3f8268cfcf7e84b6a6323b227d742c52b1032110261a081b536904caa",
+        "/workspaces/quoridor/.worktree/ai-sigma/docs/design/ai-sigma-contract-supervisor-continuation.md": "bca4ab25e9dbd5fa8e4df08f64d942e26c32d277d1902c3caa509be91b9875cb",
+        "/workspaces/quoridor/.worktree/ai-sigma/docs/design/ai-sigma-continuation-20261001.md": "5433ad662a1caf15e22d097d9f8a42ee42c9946eac1d00e53f8d312a24798e08",
+        "/workspaces/quoridor/.worktree/ai-sigma/.agents/research-team/common.md": "a4fb1d2d22849964398f62f4e67c34d5e2edd0bd045a2c7e7ab63128c0fcb456",
+        "/workspaces/quoridor/.agents/research-team/common.md": "a4fb1d2d22849964398f62f4e67c34d5e2edd0bd045a2c7e7ab63128c0fcb456",
+        "/workspaces/quoridor/.worktree/ai-sigma/.agents/research-team/roles/coordinator.md": "46cc18ccc63eded9112ae9d41da61c4eba1ec7e94309f09a23a63ba19b81060c",
+        "/workspaces/quoridor/.worktree/ai-sigma/.agents/research-team/roles/hypothesis.md": "e860cc9f2f899f3dd54ade42684f46b9a72f5d5317103b28bee3333ce7c6edac",
+        "/workspaces/quoridor/.worktree/ai-sigma/.agents/research-team/roles/experiment.md": "0e5ba654732cca28b5dc1ea6cfa4f7c0666bf19003b4ce96388052ea7582e164",
+        "/workspaces/quoridor/.worktree/ai-sigma/.agents/research-team/roles/critic.md": "f6866411f3e9a34e65055262abbc06e8617e8dcffcf8ba896c2a896d4ac6577f",
+        "/workspaces/quoridor/.worktree/ai-sigma/.agents/research-team/roles/steward.md": "0babbc91e372f4088223bf6de9c2e6166d4926ad23cc95bd44ff3c2b1f4c5879",
+        "/workspaces/quoridor/.worktree/ai-sigma/.agents/research-team/roles/supervisor.md": "4ef68582954eda5513bcaad6bda8a861449188b06f51e4bddb95ccb86e21baa7",
+        "/workspaces/quoridor/.agents/research-team/roles/coordinator.md": "46cc18ccc63eded9112ae9d41da61c4eba1ec7e94309f09a23a63ba19b81060c",
+        "/workspaces/quoridor/.agents/research-team/roles/hypothesis.md": "e860cc9f2f899f3dd54ade42684f46b9a72f5d5317103b28bee3333ce7c6edac",
+        "/workspaces/quoridor/.agents/research-team/roles/experiment.md": "0e5ba654732cca28b5dc1ea6cfa4f7c0666bf19003b4ce96388052ea7582e164",
+        "/workspaces/quoridor/.agents/research-team/roles/critic.md": "f6866411f3e9a34e65055262abbc06e8617e8dcffcf8ba896c2a896d4ac6577f",
+        "/workspaces/quoridor/.agents/research-team/roles/steward.md": "0babbc91e372f4088223bf6de9c2e6166d4926ad23cc95bd44ff3c2b1f4c5879",
+        "/workspaces/quoridor/.agents/research-team/roles/supervisor.md": "4ef68582954eda5513bcaad6bda8a861449188b06f51e4bddb95ccb86e21baa7"
+      },
+      "deadline_utc": "2026-10-04T14:28:18+00:00",
+      "cleanup_deadline_utc": "2026-10-04T14:31:18+00:00",
+      "scope": "bounded state/events; first new epoch ownedturn report; exact owned scheduler deadline/guard stop",
+      "ram_guard_bytes": 1073741824,
+      "allocated_guard_bytes": 117440512,
+      "sampled_not_kernel_enforced": true,
+      "no_NN_build_download_delete_delegation": true
+    }
+  },
+  "old_exact_identity_checks": [
+    {
+      "expected": {
+        "pid": 61691,
+        "start_ticks": "36359387",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "observed": null,
+      "same_identity_alive": false
+    },
+    {
+      "expected": {
+        "pid": 61711,
+        "start_ticks": "36359409",
+        "state": "R",
+        "rss_bytes": 20574208,
+        "cpu_ticks": 2,
+        "affinity": [
+          0
+        ],
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "observed": null,
+      "same_identity_alive": false
+    }
+  ],
+  "old_monitor_ended": {
+    "started_utc": "2026-10-04T10:43:33.542617+00:00",
+    "ended_utc": "2026-10-04T14:28:27.969538+00:00",
+    "process": {
+      "pid": 61711,
+      "start_ticks": "36359409",
+      "state": "R",
+      "rss_bytes": 20574208,
+      "cpu_ticks": 2,
+      "affinity": [
+        0
+      ],
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "reason": "2026-10-04 14:28:18 owned operation deadline",
+    "error": null,
+    "exit_code_if_normal": 0,
+    "self_user_cpu_s": 13.328118,
+    "self_sys_cpu_s": 13.368215,
+    "self_maxrss_kib": 24664,
+    "child_user_cpu_s": 9.033487,
+    "child_sys_cpu_s": 2.570393,
+    "child_maxrss_kib": 239592,
+    "sampled_combined_rss_peak_bytes": 219504640,
+    "allocated_peak_bytes": 35856384,
+    "no_child_command_left_running": true,
+    "own_process_exits_after_this_record": true,
+    "all_research_stopped_claimed": false
+  },
+  "supervisor": {
+    "status": {
+      "type": "idle"
+    },
+    "turns": [
+      {
+        "id": "01a1074c-7771-7323-b673-25b8b4bd57b7",
+        "status": "completed",
+        "error": null
+      }
+    ]
+  },
+  "current6digest": {
+    "coordinator": "52a19638dff9af8fa422afadacf757bf3517223e410f3e1210f6964db6e032f0",
+    "hypothesis": "db6370b3f5d091f5b2155b3cba42b62d4743153b513445066714bdbf7f9e8a04",
+    "experiment": "09c3472d031e94f10263ba518abb57b1c9876e84712ef7d59fca6989b32d9720",
+    "critic": "b5a20ad0f99585ec5d308759dd74aa4db057c34521136abd1c9659f9a8d5c268",
+    "steward": "666d142158dcbf82d898fcacdfb3a1d7409fd1ff43ad34e15b27ca12ee05cb5e",
+    "supervisor": "190683a09f655188d2a92ff01affff45b17ee1d2eb2a00a623e7f995081e67fc"
+  },
+  "resource": {
+    "steward_allocated_bytes": 36544512,
+    "supervisor_held_bytes": 144973824,
+    "supervisor_current_frame_bytes": 3182592,
+    "supervisor_historical_held_bytes": 141791232,
+    "forecast_bytes": 8388608,
+    "additional_reservation_bytes": 0,
+    "historical_parent_charge_released": false
+  },
+  "new_forecast_including_source_git_short2MiB_bytes": 8388608,
+  "additional_reservation_bytes": 0
+}
