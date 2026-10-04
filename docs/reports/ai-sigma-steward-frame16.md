@@ -39,3 +39,5 @@ goal quoridor-4lc / 本人92 frame16有界意味内容調査。最新通常run d
 09:45:50新heavy通知、09:50:50正確owned監督turn＋scheduler停止、09:53:50同identity monitor回収、09:55:50証拠保存を92長期ownerが保持。既自然turnの出力未到達・点検unknownと今回期限更新/loaded成立を分ける。旧停止欠測/turn_limitは保存し、外部NN停止・科学成功・自然点検の全面復旧を認定しない。静的準備/新pipelineを運用全史検査待ちgateにしない。
 
 必要証拠は自己frame16-extension17のintake/orderly-stop/official-stopped/source-fixed/parent-git/supervisor-resume/startup-commands/running-loaded/storage-current。監視開始後source追編集0、必要Git/private indexとappend-notes/backup、短期子終了・意図した長期2PIDを分けて引き渡す。
+
+延長引渡し時のcurrent allocated31,117,312B、開始前からの所有領域増分1,413,120B（旧/新monitor通知保存を含む）と自己metadata filebytesはholding-observed.jsonで区別する。guard次run forecast524288B・自己原scope8MiB目安/112MiB guard/128MiB予約内、追加予約・未知減額0。再開後の初回自然turnも07:41:47 turn_limitとなりownednull。点検unknownは維持し、延長loaded成立を意味内容の復旧へ変更しない。

@@ -1,0 +1,46 @@
+{
+  "at": "2026-10-04T07:41:57.880587+00:00",
+  "phase": "running",
+  "owned": null,
+  "last_result": {
+    "at": "2026-10-04T07:41:47.119194+00:00",
+    "event": "turn_limit"
+  },
+  "processes": [
+    {
+      "pid": 4133634,
+      "start_ticks": "35249387",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "rss_bytes": 121085952,
+      "affinity": [
+        0
+      ]
+    },
+    {
+      "pid": 4133648,
+      "start_ticks": "35249412",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "rss_bytes": 22454272,
+      "affinity": [
+        0
+      ]
+    }
+  ],
+  "loaded_config_sha256": "1f0d8ccf3dcb6d058d66bec168d1ac4f9e5a04510af78bdf46e50e9ac218bb17",
+  "loaded_contract_sha256": "753473ae70e46d676ba2080d5390a92c3e4924f681de7917a72f3b19e82f54cd",
+  "input_hash_mismatches": 0,
+  "parent_sha256": "ae2eda81909c298bf83d72dd9c37809c02841b0f5fec35c30d333ab3bae044e1",
+  "storage": {
+    "steward_allocated_bytes": 31117312,
+    "supervisor_held_bytes": 140951552,
+    "supervisor_current_frame_bytes": 0,
+    "supervisor_historical_held_bytes": 140951552,
+    "forecast_bytes": 524288,
+    "additional_reservation_bytes": 0,
+    "historical_parent_charge_released": false
+  },
+  "short_children_ended": true,
+  "intentional_long_processes": 2,
+  "source_write_stopped": true,
+  "natural_semantic_unknown_preserved": true
+}
