@@ -167,3 +167,9 @@ NNUE学習の未見利益がまだないため、203のdistance-ordering案を�
 HEAD対DISTarena、追加L2/headfreeze/幅/target調整、教師増量は保留。再検討は最適化の実観測が説明を制約する又は有力候補が出た時、必要な独立評価/実用判断を残費から選ぶ。旧testを選定へ戻さず旧173非学習、今回validation診断は独立未見精度とは区別する。
 209 CPU2単1/torch1/RAMguard1.75・heavy600s/各120・samples800000、科学開始04:45/停止04:55/提出05:15。保存8MiBはhyp既64内の197確認unusedから移転して旧retain8/new8、scopeguard6・親増0。210 CPU0短NN0static180s/各60/RAM448・新4MiBはcritic112内、元206charge保持、科学05:20/提出05:35。物理current/owner/PIDtick/RSS/自然窓を直前本人admit、監督運用を止めない。
 92は唯一親/運用writerとして旧frame14 exactstop保持→frame15現207role/registry/prompt binding→validate→実runningloaded→05:41:38重通知/05:46:38supervisor scheduler exactowned/05:49:38monitor/05:51:38必要証拠を実配分。通常受付を本人開始/科学成功/未来運用成功にしない。報告待ちはhyp209選定/実science、critic210早期見解、steward92実runningloaded。root208へ最初配分と運用成立又は障害を短報告する。
+
+210本人206closebackup→新claim04:04:13/static04:06、NN/model/forward0を受領。選定前独立案「全層update比では疎ft active列が希釈される」を採用し、同固定train witnessのstep0比prediction RMS/max・target残差・tanh前/ReLU活性とactive列更新/denom0を予定evalで対応させる。209へ04:06:59 active turn/steer accepted、追加forward全工程gate0/発生費は課金。低LR短窓の終端差を遅い軌跡から分離し到達trainfit/epoch/seen samplesを曲線併記。初期案を実更新し効果確認は209の小観測/210の見解更新を待つ。
+
+209本人受領04:02:48.793798/旧204closebackup0→ready/show/no pause/claim/static、実NN0/科学0。原plainQF1同seed/batchorder・LR1e-3/1e-4/1e-5各400/初期eval10点を登録、110210sample各/330630計/observer追加forward0の予算内案。197current+uniqueGit+残metadata5,209,983<retain8MiBを本人確認、旧16→retain8+new2098振替/親増0/oldunknown減0。新forecast5MiB/guard6・combined57,956,426<58,720,256を保持。210初期見解Git c5c74b3c/10filesbyte/backup0、source-only30/180・計算model0、実metrics待ちで担当210維持。
+
+92 frame15実freshstart04:08:57.007215、scheduler3975993/33989991・monitor3976006/33990012現在running/configcontractloaded/24hash一致/207六digest一致、旧exact2不在。初通常dispatch04:08:56.940122/次04:28:53.228367、period1200/turn180不変、05:41:38/05:46:38/05:49:38/05:51:38owner92。統括実running-loaded.json必要読取/SHA保存、本人209/210開始・選定前修正の実適用と共にroot208へ追報。運用成立を科学成功/未来全面運用成功にしない。次報告待ち担当209 actuallearning/小観測、210必要算術/判断更新、92自然運用。

@@ -1,0 +1,78 @@
+{
+  "UTC": "2026-10-04T04:09:54.549829+00:00",
+  "source": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame15/running-loaded.json",
+  "source_SHA256": "33d74323b5d9511755b099e7b0a6d2cd5c8b5d8922101fcd7ba47c0d6eefb2b0",
+  "record": {
+    "at": "2026-10-04T04:08:57.007215+00:00",
+    "frame": 15,
+    "event": "fresh_start",
+    "run": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame15-d9da6a78-9caf-4c92-8f7e-f540bfdabc79",
+    "parent_sha256": "aadf51c4269a6c36c30585bc24632571a65b1a959f54572a3e7d3815fc5c6532",
+    "parent_edited": false,
+    "207_registry_digests_match": {
+      "coordinator": "103f496e36bd7cfd889d2b7b1ef24911fac56b15e48ce47f7431cae882de51e6",
+      "hypothesis": "45d8fd3ba9d0f02cd3d7b4040188eb0b3ea2b7101ac139656d50a3ae3ec538c6",
+      "experiment": "187dc7b568250d25338ac3f8a3cf372f3a033692e34bc6178ee5dfcb64fc2abe",
+      "critic": "08124b500ec6b7cc35bdca30919a1d3e8a2d7237edc1d127df4e23ca25bb46fd",
+      "steward": "d71ea8194df1982bb043a2d71a418eb08799ebeb8595fe8328c8c63d90b81838",
+      "supervisor": "377da67e53f78153c8110311f3395581b4d272ba993c9166fe8a80aa5adeac16"
+    },
+    "scheduler": {
+      "pid": 3975993,
+      "start_ticks": "33989991",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "monitor": {
+      "pid": 3976006,
+      "start_ticks": "33990012",
+      "state": "R",
+      "rss_bytes": 20598784,
+      "cpu_ticks": 2,
+      "affinity": [
+        0
+      ],
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "phase": "running",
+    "owned": {
+      "run_id": "eb07ba86-8357-4e85-b43c-def98beb9d06",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+      "turn_id": "01a10519-c363-7602-aff9-d3db25427851",
+      "started_at": "2026-10-04T04:08:56.916565+00:00",
+      "max_turn_seconds": 180
+    },
+    "last_result": {
+      "at": "2026-10-04T04:08:56.940122+00:00",
+      "event": "dispatched",
+      "run_id": "eb07ba86-8357-4e85-b43c-def98beb9d06",
+      "turn_id": "01a10519-c363-7602-aff9-d3db25427851"
+    },
+    "next_at_utc": "2026-10-04T04:28:53.228367+00:00",
+    "loaded_config_sha256": "c11b0a4494b1786284a390b746072b3cd5ee80ad44a737d0eacb7a3a5c1ec7d9",
+    "loaded_contract_sha256": "76abe2c2e36bc0cb4bc5405a34367259bcca548d78c13d95efd0d6c558d43e74",
+    "input_hash_mismatch": [],
+    "old_identity_observations": [
+      {
+        "pid": 3762788,
+        "absent": true,
+        "same_identity_running": false,
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      {
+        "pid": 3762803,
+        "absent": true,
+        "same_identity_running": false,
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      }
+    ],
+    "stop_utc": {
+      "heavy": "2026-10-04T05:41:38Z",
+      "supervisor": "2026-10-04T05:46:38Z",
+      "monitor": "2026-10-04T05:49:38Z",
+      "final": "2026-10-04T05:51:38Z"
+    },
+    "source_write_stopped": true,
+    "natural_effect_unconfirmed": true
+  },
+  "scope": "owner current runtime/config/role loading; future science or all-period success not certified"
+}
