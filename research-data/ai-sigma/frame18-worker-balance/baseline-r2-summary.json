@@ -1,0 +1,815 @@
+{
+  "issue": "quoridor-4lc.225",
+  "mode": "baseline-r2",
+  "planned_games": 96,
+  "status_counts": {
+    "GOAL": 71,
+    "REGISTERED_UNFINISHED_UNKNOWN": 21,
+    "NOT_STARTED": 4
+  },
+  "Rpolicy": 3773,
+  "Rz": 3315,
+  "Rjoint": 3315,
+  "unknown_z_rows": 458,
+  "allattempt_jobwall_s": 219.33932374598226,
+  "rates": {
+    "Rpolicy": 17.201657849412932,
+    "Rz": 15.113568982455305,
+    "Rjoint": 15.113568982455305,
+    "games": 0.32369936583840925
+  },
+  "actual_NN": null,
+  "logical_worker_NN": null,
+  "startup": null,
+  "terminal_noNN": 22503,
+  "discarded": null,
+  "batch": null,
+  "providerCost": null,
+  "providerStop": null,
+  "worker_spans": [
+    null,
+    null,
+    null
+  ],
+  "sampled_peak_RSS": 2314489856,
+  "all_slot_plies": [
+    {
+      "id": "native221-fresh96-game-001",
+      "status": "GOAL",
+      "total_ply": 75,
+      "new_rows": 67,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-002",
+      "status": "GOAL",
+      "total_ply": 61,
+      "new_rows": 49,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-003",
+      "status": "GOAL",
+      "total_ply": 66,
+      "new_rows": 50,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-004",
+      "status": "GOAL",
+      "total_ply": 52,
+      "new_rows": 32,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-005",
+      "status": "GOAL",
+      "total_ply": 54,
+      "new_rows": 30,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-006",
+      "status": "GOAL",
+      "total_ply": 66,
+      "new_rows": 38,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-007",
+      "status": "GOAL",
+      "total_ply": 76,
+      "new_rows": 68,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-008",
+      "status": "GOAL",
+      "total_ply": 73,
+      "new_rows": 61,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-009",
+      "status": "GOAL",
+      "total_ply": 63,
+      "new_rows": 47,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-010",
+      "status": "GOAL",
+      "total_ply": 87,
+      "new_rows": 67,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-011",
+      "status": "GOAL",
+      "total_ply": 57,
+      "new_rows": 33,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-012",
+      "status": "GOAL",
+      "total_ply": 68,
+      "new_rows": 40,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-013",
+      "status": "GOAL",
+      "total_ply": 63,
+      "new_rows": 55,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-014",
+      "status": "GOAL",
+      "total_ply": 67,
+      "new_rows": 55,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-015",
+      "status": "GOAL",
+      "total_ply": 46,
+      "new_rows": 30,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-016",
+      "status": "GOAL",
+      "total_ply": 75,
+      "new_rows": 55,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-017",
+      "status": "GOAL",
+      "total_ply": 77,
+      "new_rows": 53,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-018",
+      "status": "GOAL",
+      "total_ply": 47,
+      "new_rows": 19,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-019",
+      "status": "GOAL",
+      "total_ply": 72,
+      "new_rows": 64,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-020",
+      "status": "GOAL",
+      "total_ply": 72,
+      "new_rows": 60,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-021",
+      "status": "GOAL",
+      "total_ply": 76,
+      "new_rows": 60,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-022",
+      "status": "GOAL",
+      "total_ply": 92,
+      "new_rows": 72,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-023",
+      "status": "GOAL",
+      "total_ply": 58,
+      "new_rows": 34,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-024",
+      "status": "GOAL",
+      "total_ply": 75,
+      "new_rows": 47,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-025",
+      "status": "GOAL",
+      "total_ply": 86,
+      "new_rows": 78,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-026",
+      "status": "GOAL",
+      "total_ply": 54,
+      "new_rows": 42,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-027",
+      "status": "GOAL",
+      "total_ply": 71,
+      "new_rows": 55,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-028",
+      "status": "GOAL",
+      "total_ply": 71,
+      "new_rows": 51,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-029",
+      "status": "GOAL",
+      "total_ply": 69,
+      "new_rows": 45,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-030",
+      "status": "GOAL",
+      "total_ply": 72,
+      "new_rows": 44,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-031",
+      "status": "GOAL",
+      "total_ply": 52,
+      "new_rows": 44,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-032",
+      "status": "GOAL",
+      "total_ply": 60,
+      "new_rows": 48,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-033",
+      "status": "GOAL",
+      "total_ply": 51,
+      "new_rows": 35,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-034",
+      "status": "GOAL",
+      "total_ply": 69,
+      "new_rows": 49,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-035",
+      "status": "GOAL",
+      "total_ply": 67,
+      "new_rows": 43,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-036",
+      "status": "GOAL",
+      "total_ply": 45,
+      "new_rows": 17,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-037",
+      "status": "GOAL",
+      "total_ply": 85,
+      "new_rows": 77,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-038",
+      "status": "GOAL",
+      "total_ply": 49,
+      "new_rows": 37,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-039",
+      "status": "GOAL",
+      "total_ply": 58,
+      "new_rows": 42,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-040",
+      "status": "GOAL",
+      "total_ply": 45,
+      "new_rows": 25,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-041",
+      "status": "GOAL",
+      "total_ply": 56,
+      "new_rows": 32,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-042",
+      "status": "GOAL",
+      "total_ply": 46,
+      "new_rows": 18,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-043",
+      "status": "GOAL",
+      "total_ply": 58,
+      "new_rows": 50,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-044",
+      "status": "GOAL",
+      "total_ply": 52,
+      "new_rows": 40,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-045",
+      "status": "GOAL",
+      "total_ply": 75,
+      "new_rows": 59,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-046",
+      "status": "GOAL",
+      "total_ply": 84,
+      "new_rows": 64,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-047",
+      "status": "GOAL",
+      "total_ply": 85,
+      "new_rows": 61,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-048",
+      "status": "GOAL",
+      "total_ply": 47,
+      "new_rows": 19,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-049",
+      "status": "GOAL",
+      "total_ply": 53,
+      "new_rows": 45,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-050",
+      "status": "GOAL",
+      "total_ply": 78,
+      "new_rows": 66,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-051",
+      "status": "GOAL",
+      "total_ply": 54,
+      "new_rows": 38,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-052",
+      "status": "GOAL",
+      "total_ply": 67,
+      "new_rows": 47,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-053",
+      "status": "GOAL",
+      "total_ply": 59,
+      "new_rows": 35,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-054",
+      "status": "GOAL",
+      "total_ply": 70,
+      "new_rows": 42,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-055",
+      "status": "GOAL",
+      "total_ply": 59,
+      "new_rows": 51,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-056",
+      "status": "GOAL",
+      "total_ply": 73,
+      "new_rows": 61,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-057",
+      "status": "GOAL",
+      "total_ply": 67,
+      "new_rows": 51,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-058",
+      "status": "GOAL",
+      "total_ply": 70,
+      "new_rows": 50,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-059",
+      "status": "GOAL",
+      "total_ply": 52,
+      "new_rows": 28,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-060",
+      "status": "GOAL",
+      "total_ply": 55,
+      "new_rows": 27,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-061",
+      "status": "REGISTERED_UNFINISHED_UNKNOWN",
+      "total_ply": null,
+      "new_rows": 42,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-062",
+      "status": "GOAL",
+      "total_ply": 83,
+      "new_rows": 71,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-063",
+      "status": "GOAL",
+      "total_ply": 92,
+      "new_rows": 76,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-064",
+      "status": "REGISTERED_UNFINISHED_UNKNOWN",
+      "total_ply": null,
+      "new_rows": 33,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-065",
+      "status": "GOAL",
+      "total_ply": 57,
+      "new_rows": 33,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-066",
+      "status": "GOAL",
+      "total_ply": 81,
+      "new_rows": 53,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-067",
+      "status": "REGISTERED_UNFINISHED_UNKNOWN",
+      "total_ply": null,
+      "new_rows": 18,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-068",
+      "status": "GOAL",
+      "total_ply": 50,
+      "new_rows": 38,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-069",
+      "status": "GOAL",
+      "total_ply": 71,
+      "new_rows": 55,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-070",
+      "status": "REGISTERED_UNFINISHED_UNKNOWN",
+      "total_ply": null,
+      "new_rows": 15,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-071",
+      "status": "GOAL",
+      "total_ply": 60,
+      "new_rows": 36,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-072",
+      "status": "GOAL",
+      "total_ply": 65,
+      "new_rows": 37,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-073",
+      "status": "REGISTERED_UNFINISHED_UNKNOWN",
+      "total_ply": null,
+      "new_rows": 12,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-074",
+      "status": "REGISTERED_UNFINISHED_UNKNOWN",
+      "total_ply": null,
+      "new_rows": 45,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-075",
+      "status": "GOAL",
+      "total_ply": 63,
+      "new_rows": 47,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-076",
+      "status": "REGISTERED_UNFINISHED_UNKNOWN",
+      "total_ply": null,
+      "new_rows": 10,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-077",
+      "status": "GOAL",
+      "total_ply": 51,
+      "new_rows": 27,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-078",
+      "status": "GOAL",
+      "total_ply": 68,
+      "new_rows": 40,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-079",
+      "status": "REGISTERED_UNFINISHED_UNKNOWN",
+      "total_ply": null,
+      "new_rows": 1,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-080",
+      "status": "REGISTERED_UNFINISHED_UNKNOWN",
+      "total_ply": null,
+      "new_rows": 33,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-081",
+      "status": "REGISTERED_UNFINISHED_UNKNOWN",
+      "total_ply": null,
+      "new_rows": 45,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-082",
+      "status": "REGISTERED_UNFINISHED_UNKNOWN",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-083",
+      "status": "REGISTERED_UNFINISHED_UNKNOWN",
+      "total_ply": null,
+      "new_rows": 19,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-084",
+      "status": "REGISTERED_UNFINISHED_UNKNOWN",
+      "total_ply": null,
+      "new_rows": 37,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-085",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-086",
+      "status": "REGISTERED_UNFINISHED_UNKNOWN",
+      "total_ply": null,
+      "new_rows": 19,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-087",
+      "status": "REGISTERED_UNFINISHED_UNKNOWN",
+      "total_ply": null,
+      "new_rows": 29,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-088",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-089",
+      "status": "REGISTERED_UNFINISHED_UNKNOWN",
+      "total_ply": null,
+      "new_rows": 16,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-090",
+      "status": "REGISTERED_UNFINISHED_UNKNOWN",
+      "total_ply": null,
+      "new_rows": 26,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-091",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-092",
+      "status": "REGISTERED_UNFINISHED_UNKNOWN",
+      "total_ply": null,
+      "new_rows": 14,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-093",
+      "status": "REGISTERED_UNFINISHED_UNKNOWN",
+      "total_ply": null,
+      "new_rows": 18,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-094",
+      "status": "NOT_STARTED",
+      "total_ply": null,
+      "new_rows": 0,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-095",
+      "status": "REGISTERED_UNFINISHED_UNKNOWN",
+      "total_ply": null,
+      "new_rows": 10,
+      "terminal": false,
+      "unknown_z": true
+    },
+    {
+      "id": "native221-fresh96-game-096",
+      "status": "REGISTERED_UNFINISHED_UNKNOWN",
+      "total_ply": null,
+      "new_rows": 16,
+      "terminal": false,
+      "unknown_z": true
+    }
+  ],
+  "qualification_replay_rows": 3773,
+  "qualify_wall_s": 1.711895429,
+  "mixed_into_learner": false,
+  "formal_holdout_read": false,
+  "teacher_truth_or_strength": false,
+  "process": {
+    "exit": -15,
+    "stop_reason": "CURRENT_FOREIGN_COMPUTE_STARTED",
+    "current_exact_absent": true
+  }
+}
