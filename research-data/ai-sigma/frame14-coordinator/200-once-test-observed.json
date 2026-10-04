@@ -1,0 +1,38 @@
+{
+  "UTC": "2026-10-04T01:34:54.299945+00:00",
+  "result_SHA": "ded6701298b3d4d93312bbb473f74b582860d98e1d8797754d56a01ed232ddd5",
+  "games": 24,
+  "eligible_rows": 1122,
+  "unique_NN_models": 3,
+  "samples": 3366,
+  "distance_candidate_game_rootmean_MSE": 0.37102258759085155,
+  "constant_game_rootmean_MSE": 0.770257718823172,
+  "residual_LAST_game_rootmean_MSE": 0.6630638213344181,
+  "distance_game_z_MSE": 0.5581784198185141,
+  "constant_game_z_MSE": 0.9998461772406856,
+  "residual_LAST_game_z_MSE": 0.8487301229034571,
+  "distance_minus_constant": {
+    "delta": -0.3992351312323204,
+    "paired_percentile95": [
+      -0.48399115689980166,
+      -0.3121659293038424
+    ],
+    "game_groups": 24,
+    "bootstrap": 2000,
+    "seed": 20080311
+  },
+  "residual_LAST_minus_distance": {
+    "delta": 0.2920412337435665,
+    "paired_percentile95": [
+      0.03397578919261304,
+      0.5762205287875601
+    ]
+  },
+  "candidate_equals_distance": true,
+  "residual_weight_adoption": false,
+  "research_distance_evaluator_candidate": true,
+  "strength_NI_or_Sigma_equivalence": false,
+  "science_stop_owner_reported": true,
+  "202_final_independent": "pending",
+  "next_selected": "private cheap distance value + bounded iterative alpha-beta, four fresh paired diagnostic games; no new NN training"
+}

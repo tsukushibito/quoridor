@@ -87,3 +87,20 @@ exp201へ新fresh24manifestと同GPU24/K64の条件付き教師を実配送、�
 200候補v1 04dd362aを保存し、future専用evaluatorのschema適合v2 abb6d820へ更新（係数/候補/weights/val/原scienceは変更0）。最新v2でnewmetadata/mask/ownerlabelhashをbind後のみ一度CPUtestへ、新label本体は最終testfreeze後開封。201のrunner/generate/export/connect現在identityなし/実owner/RAMを本人admitし、全pack/202全稿待ちgate0。
 
 202本人199close+backup→claim/static01:17:45、短CPU0算術01:24:32終了/elapsed.133s/receiptstaticcharge60。独自WLS/定数・全21curve/game-row集計/ZIPtensorstorage/初期parityreceiptが一致、200LASTval.759457753>距離initial.485146813で残差validation利益不支持。外clip/head0の局所制約を採用、全QF1表現無効へ拡張0。担当hyp200はv2freeze後newtest、exp201は停止・pack/Git引渡し、critic202はlabel-free maskとfreeze後保存testperrowの最終有限裁定を待つ。旧testlabels/原173非学習を維持。
+
+## 独立testの判断と次の対局診断
+
+200新one-test終了/3uniqueNN3366samples/24game1122eligible・全子回収。距離candidate=BEST0、rootmean gameMSE .371022588対train定数.770257719、paired差-.399235131/percentile95[-.483991157,-.312165929]、真z .558178420対.999846177。残差LASTrootmean .663063821/距離差+.292041234/percentile95[.033975789,.576220529]、残差BEST増分0。距離予測の有限利益を支持するが、NNUE残差学習利益は不支持でLAST重み不採用、棋力NIではない。result ded67012を現物SHA確認、新test再選別0。
+
+202独立最終保存算術も全1122perrow/24game・ORmask/coeff/source/ZIPweight/3uniqueNN・paired2000bootstrapに最大差1.665e-16で一致、距離onlyと残差利益を分ける裁定を支持。static180/180で終了、必要Git/handoff待ち。headのみ小残差案は競合候補として保持し、先に実配分した203低費用value＋αβの少数対局を優先、同時NNUE調整sweepはしない。
+
+exp203へ固定距離coef(199train-fit)・QF1 graph定義/f32 valueを直接使う私有Node negamaxαβを実配分。NNUEFTを省くのはstep0 head0と等価な距離候補だからであり、learned NNUE+alpha改善とは呼ばない。190prototype/173native時計/commonRuleAをreadonly reuse、NN0有限接続/P2/terminal/cancel/lastcompleteddepth後、fresh2pair4game・色交換・CPUreference Sigma-Web/d790に同500nominal/402cut/411pub/500actual条件で診断。MCTS統計とαβdepth/nodes/NN0を分離、全4slot/unknown・全費を保存し棋力証明0。
+
+203はcore2/4の2arena＋core0管理/max3logical、RAM4guard3.5、新64MiBguard56はexp既1980MiB確認unused内、NN参考推論80000/startup2別/新学習GPU0。heavy600s/各480、newheavy02:35/science02:45/process02:55/submit03:05親早側。201最小停止保存/Gitbackup後に新scopeへ、200/202全稿待ちは準備gate0。実配送受付・本人claim/静的・nativeprobe/game実開始は別追報し、対局効果から次最大1を選ぶ。
+
+
+202最終source/管理子停止・scienceGit a3c3e6a/metadata6d2bebfb・必要47file byte復元/backup0を有限受入れ、report/final-result/final-stopのcommitblobとcurrentbytesを統括確認。旧checker修復とv1 PID/tick上書きunknownを保持。200/202は現idleなのでclose-only turnを開始せず、Beadsに受入れ済・本人close待ちを明記し次実質課題turnへ。201は203本人turnでclose/backup済み。
+
+203本人ready/show/claim/static実開始とNN0 private CP/reference MCTS CP402cut/411public/500guard mock、P2/terminal/cancel/lastcompleted有限PASSを受領。これは実対局未開始の準備成果。exp203が直前physical/current/自然監督窓をadmitしfresh2pair4gameを実行・実開始/全slot費と結果を報告する担当。rootへ独立testの距離利益・残差不支持・この次方向を01:44:46 actual turn/start acceptedで報告、再承認要求0。
+
+203後報: 実arena科学開始2026-10-04T01:51:23.924538Z、admission01:50:53.185859、PID3890419/tick33161599、source48c7e73f146e。fresh4固定/参照NN上限80000/候補NN0/GPU0/core2,4+管理0/guard3.5GiB。自然CPU0監督を停止せずlight管理の診断条件。前段の「実game未開始」は当時の準備報告、現在は実行中・結果/棋力/全期間遵守未判定。本人exp203から全slot結果/費用/停止報告待ち。
