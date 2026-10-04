@@ -1,0 +1,5 @@
+goal quoridor-4lc / child204 本人受付・claim・静的開始
+受領02:10:51時計保持、200をfinite acceptanceで本人close/backup0、204ready/show goal+self/no pause/担当→claim確認。静的準備開始、actual新NN0/GPU0/生成0。
+最大1方式:200 head0初期tensorSHA52bfc752をCPUweights_onlyで再用しFT/hidden/距離係数を固定。私有HeadModel.parameters()はout.weight/out.bias 33parametersだけをreadonlytrainerのoptimizer/gradientcheckへ渡し、named_parameters/state_dictは全凍結tensorを保持。原200forwardそのままreuse、追加forwardは既課金5901step0内。下層全checkpoint bytesと初期SHAを有限比較。
+same96train4653/val1248/mask10b502cd/seed/Adam.001WD0/2000×128/21点/379921samples、初期0含むbest。gateはbeststep>0+weight変化/val .485146813より1e-4改善/finite schema/source-child stop。205はこのgate後fresh24のみ、旧testlabel/結果再読0/203診断再実行0。
+新8MiB/6guard/forecast5MiB、oldcombined49,567,818維持+8,388,608=57,956,426<58,720,256。実current/Git/一時forecastを科学直前確認。02:25新学習/02:30stop/03:00testnew/03:05sciencestop、receipt+60分早側、parent変更0。source/NN0 AST argv mock先行、actual learningは現在物理owner/RAM/PIDtick/自然CPU0監督を通常admit後一回。現在最大障害なし。
