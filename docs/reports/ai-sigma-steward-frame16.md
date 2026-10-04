@@ -17,3 +17,9 @@ scheduler4069898/start34737868、monitor4069912/start34737890、boot ab5e66ac-12
 必要証拠は `.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame16/` の intake/source-fixed/checks/supervisor-resume/startup-commands/running-loaded。自己短期子終了と意図した長期2PIDを分ける。研究Git版と既default index保持は同scopeのgit-record.json、必要Beads notes/backupは同receiptで参照する。
 
 初回自然run f3cd2859-2097-41c2-9fc9-16ae8209aaa5 / turn01a1058b-cf9e-72f3-b934-f7212e61c9d3 は06:16:36UTCにturn_limit/interrupted。read-guard保存dirなし、observe/finish/notes-backupの成立を確認できない。公式状態と必要最新1turnの有界読取を natural-first-result.json に保存し、running-loadedと分けて失敗を保持。追加source変更/二重stop-start/強制tick0、次通常点検06:33:27と既終了責任を維持する。これは216/217の敗北や研究停滞を示す結果ではない。
+
+## 最新1通常turnの有限障害調査
+
+goal quoridor-4lc / 本人92 frame16有界意味内容調査。最新通常run d6b5087e/turn01a105b0 は06:53:29 dispatch→06:56:36 interrupted/errornull/last_result turn_limit。公式thread/turns/list limit1 itemsView=fullでもitems0、対応supervisor run/readguard保存dirなし。dispatch受理成立は支持、observe/finish/自己notesbackup・研究外部点検の成立は未確認。観測上は最初の保存出力未到達、それ以前の読取/実行/生成がなぜ未到達かunknownで、読取不足やモデル障害と断定0。最新turn1件とevents末尾64KiB内の同turn2eventのみ保存（範囲/SHAあり）、全史調査0。07:06現在steward実allocated29,663,232B+自scopeforecast65,536Bは既112MiB内、RSS exact2約146MiB/CPU[0]既RAM内、予約追加/旧unknown減額0。source/config/period1200/turn180/同saved settings変更0、推測修正/manualtick/restart/duplicate dispatch0。次通常点検と07:45:50heavy/07:50:50正owned監督scheduler/07:53:50monitor/07:55:50証拠保存は維持、外NN停止未認定。216CV/219算術/220選定gate0。証拠本人frame16/latest-semantic-intake.json/latest-turn-detail.json/latest-event-proof.json。
+
+観測できる失敗地点はdispatch受理後〜最初の記録前。実際に読取を始めたか、LLM生成待ちか、toolへの到達が妨げられたかを区別する履歴がなく、原因unknownを保持する。itemsView=summaryの空itemsだけで判断せず、最新1件のfull返却も0を確認した。小実装修復の根拠は具体化していないためsource切替をしない。
