@@ -1,0 +1,80 @@
+{
+  "issue": "quoridor-4lc.203",
+  "slots": [
+    {
+      "game_id": "distance203-p1-c1",
+      "pair": 1,
+      "family": "frame14-203-db98c2044c37cb0b4f3458367bc3c902a40249404a78fe0852ff01c428d90894",
+      "core": 2,
+      "candidate_player": 1,
+      "status": "NOT_STARTED",
+      "score": null
+    },
+    {
+      "game_id": "distance203-p1-c2",
+      "pair": 1,
+      "family": "frame14-203-db98c2044c37cb0b4f3458367bc3c902a40249404a78fe0852ff01c428d90894",
+      "core": 2,
+      "candidate_player": 2,
+      "status": "NOT_STARTED",
+      "score": null
+    },
+    {
+      "game_id": "distance203-p2-c1",
+      "pair": 2,
+      "family": "frame14-203-b72a091801dd602ef018a771b8f77dfefa66dca787ec7357d73295dc1f3cfae6",
+      "core": 4,
+      "candidate_player": 1,
+      "status": "NOT_STARTED",
+      "score": null
+    },
+    {
+      "game_id": "distance203-p2-c2",
+      "pair": 2,
+      "family": "frame14-203-b72a091801dd602ef018a771b8f77dfefa66dca787ec7357d73295dc1f3cfae6",
+      "core": 4,
+      "candidate_player": 2,
+      "status": "NOT_STARTED",
+      "score": null
+    }
+  ],
+  "planned_games": 4,
+  "pairs": 2,
+  "diagnostic": true,
+  "NI": false,
+  "teacher_training": false,
+  "clock": {
+    "nominal_ms": 500,
+    "cutoff_ms": 402,
+    "public_target_ms": 411,
+    "public_max_ms": 500,
+    "handhard_ms": 2000
+  },
+  "candidate": {
+    "schema": "distance-alpha-v1",
+    "depth": 4,
+    "processednode_cap": 8192,
+    "order": "original RuleA legal order",
+    "TT": false,
+    "policy_heuristic": false,
+    "partial_depth": "discard, last fully completed depth; firstlegal depth0 fallback"
+  },
+  "NN": {
+    "reference_allattempt": 80000,
+    "perarena": 40000,
+    "debug": 32,
+    "startup_separate": 2
+  },
+  "GPU": 0,
+  "heavy_s": 600,
+  "jobhard_s": 480,
+  "management_s": 900,
+  "early_deadlines": {
+    "newheavy": "2026-10-04T02:35:00Z",
+    "science": "2026-10-04T02:45:00Z",
+    "process": "2026-10-04T02:55:00Z",
+    "submit": "2026-10-04T03:05:00Z"
+  },
+  "openingSHA": "a1ca827d0016d43a93a9e09185dfb424736a1b760124961d1e0b52705808afca",
+  "inputs_before_results": true
+}
