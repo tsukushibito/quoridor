@@ -1,0 +1,24 @@
+{
+  "UTC": "2026-10-04T04:03:37.842370+00:00",
+  "hypothesis_issue": "quoridor-4lc.209",
+  "critic_issue": "quoridor-4lc.210",
+  "operations_issue": "quoridor-4lc.92",
+  "selected": "short low-LR and early curves/layer gradients activation update ratio diagnostic using original plain QF1 and fixed train96/val",
+  "reason": "earliest original val100step occurs at2.75epochs(train96); optimization not ruled out before capacity changes",
+  "competing_explanations": [
+    "learning rate/updates/early overfit",
+    "activation/output/scale and information utilization",
+    "history/teacher noise/distribution"
+  ],
+  "important_hold": [
+    "frozen-head vsdistance alpha arena",
+    "additional layer-freeze/L2/width/target sweeps",
+    "fresh teacher independenttest per small adjustment"
+  ],
+  "hold_revisit": "diagnostic establishes optimization behavior or offers useful candidate; then necessary evaluation and remaining cost decide",
+  "owner_methods": "3–4 conditions may be refined before outcomes; one task total budget, no all-role approval",
+  "science_status": "no success claimed; role claim/actual starts await reports",
+  "parent_end": "2026-10-04T05:51:38Z",
+  "previous_server_overload": "previous reception/static read retained; no previous allocations found",
+  "new_roles_or_model_effort_changes": false
+}

@@ -159,3 +159,11 @@ NNUE学習の未見利益がまだないため、203のdistance-ordering案を�
 
 
 ユーザーのDNN定石との比較を受けた優先順位修正:データ/視点/分割/独立test整備は妥当だが、学習率対照と初期曲線/層別勾配・更新量の診断をhead凍結より先に十分行っていなかった。原QF1の最初のval100stepはtrain24/48/96で約10.52/5.46/2.75epoch相当、best0だけではその間の改善を否定できない。次許可枠では同fullQF1/data/init/lossの少数LR短対照＋早期評価・層別勾配/活性/更新比を主候補に引き上げ、HEAD対DIST対局案は後順位へ。clip/zerohead局所制約、teachernoise/分布等の原因は未確定。新run/学習/NN/test/対局開始0、旧記録/旧test選定/枠期限変更0。根拠frame14-coordinator/DNN-troubleshooting-priority-assessment.json。
+
+
+## frame15: 学習診断を実配分
+
+ユーザー明示再開03:51:38–05:51:38UTC。前turn容量失敗の既読・静的結果を引継ぎ、保存delivery重複なしを確認し新209/210を登録。hypothesis209へ原plainQF1/H32・同train96/val/seed/rootmeanの少数LR短対照＋初期曲線・層別gradient/activation/updateを主候補として配分、critic210は選定前から競合説明/安価な代替を独立評価し観測後判断へ継続。0/100step間を未観測のまま容量を先に変えた前優先順位を訂正する。全役承認をgateにせず、同課題/総額内で必要少数条件・修復可。
+HEAD対DISTarena、追加L2/headfreeze/幅/target調整、教師増量は保留。再検討は最適化の実観測が説明を制約する又は有力候補が出た時、必要な独立評価/実用判断を残費から選ぶ。旧testを選定へ戻さず旧173非学習、今回validation診断は独立未見精度とは区別する。
+209 CPU2単1/torch1/RAMguard1.75・heavy600s/各120・samples800000、科学開始04:45/停止04:55/提出05:15。保存8MiBはhyp既64内の197確認unusedから移転して旧retain8/new8、scopeguard6・親増0。210 CPU0短NN0static180s/各60/RAM448・新4MiBはcritic112内、元206charge保持、科学05:20/提出05:35。物理current/owner/PIDtick/RSS/自然窓を直前本人admit、監督運用を止めない。
+92は唯一親/運用writerとして旧frame14 exactstop保持→frame15現207role/registry/prompt binding→validate→実runningloaded→05:41:38重通知/05:46:38supervisor scheduler exactowned/05:49:38monitor/05:51:38必要証拠を実配分。通常受付を本人開始/科学成功/未来運用成功にしない。報告待ちはhyp209選定/実science、critic210早期見解、steward92実runningloaded。root208へ最初配分と運用成立又は障害を短報告する。
