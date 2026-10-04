@@ -202,3 +202,13 @@ HEAD対DISTarena、追加L2/headfreeze/幅/target調整、教師増量は保留�
 
 
 212選定前修正を採択：標準化後の更新を元距離単位へDeltaWd_raw=DeltaWd_prime/sigma、DeltaBias_raw=DeltaBias_prime-sum(DeltaWd_prime*mu/sigma)として併記し、同plannedforwardのfixedwitness差に対応。sameLRで実効stepが変わる交絡を可視化しinput情報/容量増の効果へ読み替えない。21104:49:09 active実steer受理、追加NN/条件/gate0。wrapper本人claim21104:46:12/21204:47:00、212は本人source静的読取30/120、211実NNは未観測のまま待つ。
+
+
+## frame15 標準化対照の実停止と判断
+
+211 actual04:53:55.363652→04:53:58.461697/CPU2single/116111sample/3.098458861s/全wait exactabsent。初期関数全5901paritymaxabs2.235174179e-8/1e-6 PASS、tensorはe5d218c9→51b9a8c0へ変わるが予測保存、batchSHA83eb87b8同一。primary200valgame .6139164436 - oldraw200 .6598473195 = -.0459308759、400 .6487715053、train200 .5485668559/400 .2572832050。同情報容量でconditioning介入の有限利益、距離.4851468131未超・単seed再用val/初期以後optimizer座標とbiascouplingが変わる交絡を保持。212必要保存算術待ち、211原source/科学停止で図表archive/Git/backupだけ。新teacher/test/arena/追加学習の自動実行0。
+
+
+### frame15 211/212受入れと更新量交絡の次対照
+
+211の同初期関数標準化で固定200stepの再用valgameMSE .6598473195→.6139164436、20/24局改善を212独立算術でも支持した。初期parity/同batch/全層/必要Git・停止を受入れ、211closed。距離基準.4851468131未超・単seed/再用validationの限界。初回raw距離列更新が約18.5倍になったので、次213/214は同center/scale/初期補償を保持してAdam距離列proposalをsigma倍に減衰する1対照を選定・実配送。primary200minus211、原raw軌跡完全一致/尺度唯一因果は主張しない。詳細distance-update-contract/selection、予算/期限は親15内。別seed再現は有力保留、fresh独立test/arenaは有望用途の凍結候補と情報価値が得られた時に再検討。
