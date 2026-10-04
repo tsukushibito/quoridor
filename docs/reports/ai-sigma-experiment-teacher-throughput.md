@@ -56,3 +56,29 @@ B24対二回B8平均の観測節約は約.08948秒/game。今回計測できたp
 必要新source・input・qualification・全status・失敗版・cost・stop・rawの小pack/memberSHA・Git byte復元を保存し、defaultindexを変更しない。旧205公開生成費・sourceを有限選定参照したが、旧sealed教師/test評価結果/173のlabelは読み直していない。採否はcoordinatorへ引渡す。学習価値・棋力・最高NNUE研究goal達成とは別である。
 
 再現入口: `tools/ai-sigma-teacher-throughput/runner.py` と各config。科学源3569c1c4fe5290d4396e0f85aa72aa1043278e1d、openingSHA01cb2af0cd2d9bbbcf3b397d89a608cac7bd776a5eab7e5310a79806595452fb。新成功runの再実行は本単位では行わない。
+
+
+## Phase2：別現在配分のCUDA graph replay
+
+上の節は停止したphase1の記録である。新phase2配分でC++基盤再用、Rust多handleと配列転送の統合、active48/B24充填、CUDA graphを比べ、同forwardをcapture/replayする一案を選んだ。C++の共有配列queueは次候補だが、TT/FPU/noise/PCR/solver/教師の規則合わせとビルド・接続検証が必要で、未改変C++を現教師と等価とは仮定しない。Rust側配列pumpも有力だが新codec/取消/復帰とbinary変更の検証費がある。graphは最小接続差で実装できる介入を先に試す判断であり、Node–Rust–Python構成の維持を目的に選んでいない。
+
+一次sourceとして固定751186の[selfplay_cpp.py](https://github.com/bartolomeo3000/SigmaQuoridor/blob/751186344fc52ad0c29bc65922e62c6fa915f006/selfplay_cpp.py)のget_batch/put_resultsを閲覧した。次の配列交換経路の参考であり、教師規則の全照合や実buildは未実施。graphは[PyTorch2.14公式のcapture/replay制約](https://docs.pytorch.org/docs/2.14/notes/cuda.html#cuda-graphs)と現installed graphs.pyに沿い、side-stream暖機、固定shape/address、保持buffer、capture内CPU同期なし、新入力copy→replay→CPU snapshotを使う。単一providerは物理返却/snapshot完了までbufferを再利用せず、既FIFO/ID/queued・inflight取消/drainは変更していない。
+
+同active24/B8/3worker/CPU0,2,4,6/同fresh48/K64/d790/τ/RuleA/合法P2/teacherを維持し、私有providerのみB1〜8をcaptureした。各held sessionのwarm2+capture1は108NN、startupとして全費へ計上。新partial/full numeric preflightは異なる2組のheterogeneous入力でCPUORT/eager/replay各72+startup108=324NN。16fixtureのgraph-eager maxabs0、CPUORTとの差最大7.15e-6は固定abs1e-4+rtol1e-4内。buffer入替/ID/f32finiteを確認した。
+
+| 新phase2順序 | 完走/予定 | Rpolicy/Rz/Rjoint | physical NN | guardian全job秒 | joint行/秒 | 実平均B |
+|---|---:|---:|---:|---:|---:|---:|
+| graph B1〜8 | 48/48 | 1554/1554/1554 | 81204 | 84.9546 | 18.2921 | 6.1399 |
+| 同graph確認 | 48/48 | 1554/1554/1554 | 81204 | 86.4995 | 17.9654 | 6.1539 |
+
+旧B8二回平均116.405994秒に対しgraph平均85.727065秒、wall比.736449（26.36%短縮）、行率比1.357867。旧B24平均112.110926秒からも短縮したがB差とgraph差を一因子へ混ぜない。旧基準→新graphの固定順・hostwarm・小48familyを保持する。新二回の全slot GOAL/fault-censoring-NOT_STARTED0。両回の全1554行で基準とstate/history/features/legal/Action/visitvector一致。rootNN maxabs3.5763e-6/rootmean最大差3.8534e-8を保存。全手RuleA replay/πedge63/終局zを共有算術で確認し、全deep leaf NN・teacher真値・棋力や独立testは認定していない。
+
+provider pipe累積は67.31/67.20秒、forward同期29.37/30.05秒、stdout JSON encode/write9.29/9.88秒、入力parse/構築5.67/5.15秒、H2D4.78/4.22秒、D2H3.23/3.22秒。最後8game尾部27.05/27.40秒。重なるspanなので足して全wallや純GPU演算/hostlaunch費としない。graphによる介入に局所全job利益がある一方、残る輸送・queue・尾部は次律速候補。graph packageには入力buffer再用も含むためhostlaunchだけの唯一原因を主張しない。
+
+実科学は08:26:45 parity、08:27:07 generation、08:29:43同条件確認、08:31:07全生成回収。科学source停止receipt08:32:15。新NN162732（324+81204×2）、総406620/900000、新measuredheavy177.488723/650、全phase measured528.406687秒に旧失敗UNKNOWN/保守5秒を別保持。family peak約2.294GB、Torch allocator peak reserved約369.10MB、full driver/context VRAM peak未計測。各jobのfresh owner/PIDtick/RSS/GPU/正延長17monitor/自然ownedNone/quietと全childwait/exactabsentを保存。旧原三job/600parity/source/result/stopは不変更。
+
+測定済みqualification/pack/Git5.5259秒を2回へ配賦すると1000局約31.04分＋未計測final保存/運用/移管費。jobだけ約29.77分と別扱い。実density32.375行/gameなので必要行率60分8.993、30分17.986。60分初期目標は短測定の見込み内、30分次目安は保存込みでは未成立。1000実完了・将来の局長/分布/heldprovider尾部・保存scaleは未確認。100/1000/10000は費用シナリオのみで実生成を追加許可していない。
+
+観測節約.63914秒/game。追加parity/確認一回/資格/pack/Gitの既知費99.86秒だけなら回収約156局だが、選定・source読取・実装・reasoning費は完全分離未計測である。登録からのnongeneration elapsedも別scenarioへ保存し、完全break-evenとはしない。準備が追加10/30/45分なら約939/2816/4224局の回収が必要。今回graphの追加調整は止め、生成候補として有限引渡す。次最大1案は同教師定義のまま配列転送＋Rust多handle pumpの費・回収を問う薄接続で、現課題から自動開始しない。
+
+科学源36a6ac0663f683bc6f99385dc3a36859212f814e、新payload ca1f0d4737b7cfc3553458420dc59b39022bf36e。新pack4,580,587B/SHAaec48aec86f63ef617c472a09261c2d18afee06424b843812d5b05e7250d53ee、全member byte復元PASS。defaultindex/privateindex不変更、旧128MiB reserve/112MiB guard内で原raw/Git保持、未知減額/親増額0。benchmark教師は学習へ転用しない。phase2資格・効果はowner有限確認で、222の旧phase1独立裁定を新graphへ拡張しない。
