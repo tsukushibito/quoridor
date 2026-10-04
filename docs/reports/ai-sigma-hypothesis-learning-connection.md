@@ -71,3 +71,36 @@ test前freezeにcandidateと両stage BEST/initial・stage別train-onlybaseline�
 ## 本課題の射程と会計
 
 4MiB/guard3MiB/forecast2MiBは225契約のexp263MiB予定内に含まれる227分で、二重予約しない。旧hyp56MiBの未確認保持を減額しない。自域current/source-report+uniqueGit/tmp/残metadataのみ再確認し、science0/source停止/Git必要bytes/defaultindex不変更/Beadsnotes+backup/統括引渡しで有限完了。新NNUE棋力/teachertruth/IIDの認定0。source bindingsとclock/forecastはintake/forecast.jsonに保持する。
+
+
+## phase2 私有manifest adapter準備（2026-10-04、同227）
+
+phase1はGit `821ea3f165b73817bc8abb04feeb6b918a40eda5`、静的read180s上界・科学0・11:00以前の停止を保持した。6必要pathのGit bytesと当時currentを復元比較し一致、backup exit0。統括採択後の新phase2は私有 `tools/ai-sigma-frame18-learning/` のみを追加した。既trainerと旧dataset版は変更していない。
+
+`manifest_adapter.py` は明示game/family/cohort/split、owner-advertised expected_rows、train-family slotと可変stagesを受け取る。最大trainまでの全label-free metadataに共有 `frame14_data.canonical_model_input/make_mask` を適用し、state OR history OR実STM-f32 inputの固定maskを一度生成する。distanceは既STM順なのでP2で二重交換しない。duplicate/missing row・視点/型・兄弟familyのpartition混合・slot不整合を拒否する。0row予定game/familyと0eligibleも全分母へ残し、正のrowを持つfamilyを一様、その内のrowを一様にする元gameequal samplingを記録する。familyとgame数を別fieldにした。
+
+旧evaluation-only new96は、新planに `source_split="evaluation"` のような実原splitを明示した時だけtrain aliasを作る。元ID/groupとsource_splitを残し原版はreadonly。実原splitを推測しない。label artifactの役割変更は生成/学習ownerが後の明示配分で別training-label版として行う必要がある。
+
+CLI `manifest_adapter.py --plan PLAN.json --metadata LABEL_FREE.jsonl.gz [--metadata ...] --out NEW_IMMUTABLE_DIR`。planは `kind="QF1-dynamic-plan"`、games各 `game_id/family/split/cohort/expected_rows`、trainのみ `train_slot`、`stages=[192,576]` 等。stagesはfamily数であり、色交換兄弟が複数gameでも同family/slot/partitionに束ねる。実game数は別出力。ownerの明示rowcountと一致しない入力を成功にしない。
+
+出力はcanonical metadata、fixed-maximum-mask、各N samplingとstage manifest、source/input/plan SHA付きreceipt。training_labels_advertisedが無ければ `QF1-stage-preparation`、広告path/SHAがあれば共有loader互換 `QF1-training-stage` を出せるが、いずれも **training_ready=false / labels_opened=false**。prepは実label本体/hashを読まない。sealed futuretestは広告のみで読み込みなし。私有 `loader.load_training_stage` は後のauthorized学習時にだけtraining label/hash/schema/全最大train+val rowを確認して共有load_stageへ接続する。test join/labelと不一致maskを拒否する。
+
+`config_helper.configuration` は共有resolve_configをreadonly再用してLR1e-4/AdamWD0/gameequal/2000step×128/CPU1/patience0等の許可キーとsample formulaを作る。dense pointsとoldtrain-only scale広告は別settingsに置いた。共有CLIはinterval/raw distanceなので、この準備だけでdense observer・初期関数保存標準化が接続済とは呼ばない。次の必要最小単位は、既209/211の有限hookを使う私有scale+evaluation-schedule runner/evaluator binding（静的15–25分の見積、実モデルparityは次学習配分内）である。全trainerコピーは不要。
+
+### 有限fixtureと失敗の保存
+
+結果前source固定Git `fe2eb08bc1a52be3f8323ea0ed9df802a0628235`。r1はlauncherがruntimeの存在しないstart_fixed/end fieldを参照してNOT_STARTED_ADMISSION、fixture child/NN0を保持。現物のframe_begin_fixed/deadlines.finalへの管理修復だけを別Git `dcdf622d6ad48f0328e0439699633e654a648220` に固定した。共有runtime/科学結果の編集なし。
+
+r2実admissionはgoal/self owner/pause、frame18 current parent/config/contractとscheduler/monitor PIDtick、current foreign compute/RAM/自然CPU0窓を確認した。actualstart11:08:07.065029、stop11:08:07.157659UTC、CPU0単1。合成fixture wall0.026587864s、管理childwall0.098546031s、family current sampledpeak37,310,464B<448MiB。PID83457/tick36506838のwait/currentexact不在を即配送した。自然監督/全hostの全期間無競合保証ではなく直前point admissionと自己owned停止である。
+
+32項目PASS/EXPECTED_REJECTION。dynamic1/3、legacy24/48/96、sibling/slot/ID/missing/schema拒否、零row分母、gameequal、最大mask固定、P2交換同network/f32同値/OR単独排除、label広告をprepで読まない、共有load_stage synthetic-only接続/testlabel拒否、出力immutable、train以外stats不使用・Torch/model/NumPy import0を確認。実dataset/ラベル資格・model forward/fit/train/testevalの証明ではない。全成功/失敗出力はadapter-preparation/jobsへ保持し成功fixtureを再実行/置換していない。
+
+process.jsonのchild_past_peak_RSS_B=231,964,672はRUSAGE_CHILDRENによるmanagerの全既子（先行Beadsを含む）の過去peakでありfixture専用peakではない。旧receiptを変えずpeak-field-clarification.jsonに区別した。current/過去peakを混同しない。管理の最初のBeads notes更新が--notesで既notesを置換した点もmanagement-notes-clarification.jsonに保持する。旧科学・契約・phase1証拠はGit/source/receiptに保持し、以後append-notesのみ使用する。
+
+### 次配分の費用（今回起動していない）
+
+new96を新train aliasに含めfresh480train+96val+96test、計672fresh、train192/576の2段階を第一候補とする。現在52.5min/1000+unknownから96jobの線形目安約5.04min、7job35.3min。各GPU jobは30min上限内に分割しhard900s+回収・総sample/NN capを別配分で固定する。cold/longgame/失敗/quiet/資格/export/保存を含む幅は50–75min、成功補充や実672開始は今回0。保存はraw/Git/一時/残metadataを含む512MiB dataset+32MiB learner案で、exp currentunusedから再確認後だけ移転する。今回の4MiBを二重予約しない。
+
+2CPU学習stageは各120s、256000 train sampleずつ。14固定点で上界は各 `256000 +14*(actual_stage_train_rows+actual_fixed_val_rows)`、典型約449k/707k、計約1.16million。原row/game密度の外挿で、実row数と有限parity/observer追加費を科学前に再計上する。freshtest96の最大3unique NNは典型約14000sample、samplecapとtime/保存を別計上する。最大trainの全metadataが揃いmask固定→曲線選定→candidate+baseline/evaluator/scale/config/weights/mask freeze→test labels一巡、の順序は維持する。672/学習/testをこの227から自動開始しない。
+
+科学的次判断は独立game増量を改善学習条件へ接続する1案を維持する。225の追加最適化投資は本人11:35有限handoffまでで採否し、自動反復しない。速度達成/32 software checksは十分教師量・teachertruth・独立test利益・NNUE棋力の認定ではない。
