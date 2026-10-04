@@ -1,0 +1,2015 @@
+{
+  "phase": "phase2",
+  "splits": {
+    "train": {
+      "ridge": {
+        "rows": 4653,
+        "games": 96,
+        "planned_games": 96,
+        "zero_selected_games": 0,
+        "primary_rows": 4653,
+        "game_equal_conditional": true,
+        "distance_gameMSE": 0.40594373734309525,
+        "NN_gameMSE": 0.20859366150966327,
+        "delta_NN_minus_D": -0.19735007583343064,
+        "NN_rowMSE": 0.22129626824997775,
+        "distance_rowMSE": 0.41391012236849206,
+        "eD_mean": 0.0019409243477764414,
+        "rNN_mean": -0.0003067932777876145,
+        "eD_RMS": 0.6371371417074155,
+        "rNN_RMS": 0.3648737647290175,
+        "residual_prediction_MSE": 0.20859366150966327,
+        "displacement_MSE": 0.13313286418752643,
+        "alignment_cross_E_eD_rNN": 0.16524147001047854,
+        "error_delta_decomposition": "E[rNN^2]-2E[eD*rNN]",
+        "weighted_centered_correlation": 0.710799678938111,
+        "regression_slope_rNN_on_eD": 0.40706034788743056,
+        "sign_agreement_weighted": 0.8172132559002184,
+        "sign_valid_rows": 4451,
+        "gain_games": 84,
+        "loss_games": 12,
+        "per_game": {
+          "frame14-194-198eae4410d836a8aba66595b479d2f01704a0d4d3fd7d00274570446cd9f96a": {
+            "rows": 57,
+            "distance_MSE": 0.5199999251612101,
+            "NN_MSE": 0.22231743574811025
+          },
+          "frame14-194-5460a8d5f915efe1a353a627dd2d7a9bf0af79277721e4c6eb884e0ed1ed026c": {
+            "rows": 50,
+            "distance_MSE": 0.13034822666472398,
+            "NN_MSE": 0.09301108060157272
+          },
+          "frame14-194-d7226721ef791c56ce0450fee87131b41fd678c9b52de4ce2e80067ce9c1014b": {
+            "rows": 55,
+            "distance_MSE": 0.5595778701876046,
+            "NN_MSE": 0.3809140614557139
+          },
+          "frame14-194-2c52586b1919ffa2d68bb16fdeb13a3577c2ce7450b8f742dad89b60180f96ab": {
+            "rows": 60,
+            "distance_MSE": 0.5101651724588203,
+            "NN_MSE": 0.1318176798939459
+          },
+          "frame14-194-b7c2095971578dc11093c97df3aaf03b0bd59edf63467a2f77b8e180ca809994": {
+            "rows": 34,
+            "distance_MSE": 0.5022625466794761,
+            "NN_MSE": 0.15908434781539002
+          },
+          "frame14-194-462dd341d7c0504ff92b5e4d99472b8a3eed2107077485270e20acd752c850ed": {
+            "rows": 32,
+            "distance_MSE": 0.4842625315591632,
+            "NN_MSE": 0.28145032575141604
+          },
+          "frame14-194-2063f1e18f3c23e53bc6ab12018127fd2ad4b750b67f44f745540d917edc1da0": {
+            "rows": 54,
+            "distance_MSE": 0.5515060520889575,
+            "NN_MSE": 0.5224011867682011
+          },
+          "frame14-194-b62851d8711940516208e0a576cfc11b61d574fc939abff2373889704779de4f": {
+            "rows": 80,
+            "distance_MSE": 0.2623292521035089,
+            "NN_MSE": 0.2587793981076305
+          },
+          "frame14-194-6f8cf5c74dd3bf5e8a51164f4c59aaa7d7ee3d131e5a2918353f2fac043cb36d": {
+            "rows": 52,
+            "distance_MSE": 0.2802608370680144,
+            "NN_MSE": 0.1125031298907028
+          },
+          "frame14-194-541dccfd277fae3c8636077403cd6cf9d9af0f6f7ce4223f00ac0d13942e9a0c": {
+            "rows": 83,
+            "distance_MSE": 0.37282837775342664,
+            "NN_MSE": 0.3923868910243359
+          },
+          "frame14-194-d1e61b2748b780721a2004856e481f4835e38d4ff41796c7ea5d96c72d83ef5d": {
+            "rows": 56,
+            "distance_MSE": 0.2405112178865818,
+            "NN_MSE": 0.23202627897585498
+          },
+          "frame14-194-85dd571262200ae89f87e2f43d0722ce32827751f22c81cd07fea748c400ffe0": {
+            "rows": 33,
+            "distance_MSE": 0.44969525156409795,
+            "NN_MSE": 0.05718317713115797
+          },
+          "frame14-194-6142514f0b1d5d17bbee72d1b696307c3440dd0a029ae99226b8bc69d527304e": {
+            "rows": 82,
+            "distance_MSE": 0.7375094980886746,
+            "NN_MSE": 0.3547933787743911
+          },
+          "frame14-194-6a91f6b8820e1a87d96a8285da82f36b9e8f28066a951a6bc28eb8c83b19bf48": {
+            "rows": 38,
+            "distance_MSE": 0.33290505942459325,
+            "NN_MSE": 0.2139666079595571
+          },
+          "frame14-194-29345a45275fdba4ab1dcc7bbaca41edfa96f6b2a687646043d6577e5ff294ea": {
+            "rows": 40,
+            "distance_MSE": 0.3328991620432792,
+            "NN_MSE": 0.20115827736477
+          },
+          "frame14-194-57ff27d3d87cd497de79475e0ecbd8793989a1fcddbc4cd81e13f32e3eb657e0": {
+            "rows": 52,
+            "distance_MSE": 0.3992656689865115,
+            "NN_MSE": 0.21896992396317597
+          },
+          "frame14-194-dede32edbdd6b0f0e51a995f0b53ef53b7703b07b977b69ffdbb6dc996b6ece9": {
+            "rows": 59,
+            "distance_MSE": 0.49332463759856027,
+            "NN_MSE": 0.07854234299044706
+          },
+          "frame14-194-a1925fff4d09b3f128b1e532e88e9c575227b1204da9ab62d80d2bc85d3eeed7": {
+            "rows": 26,
+            "distance_MSE": 0.3122020766764587,
+            "NN_MSE": 0.03756404820073955
+          },
+          "frame14-194-0ef23064aaec24d883bd8d2adb79a0bd3c6199f748dd79b66331e74980fe7971": {
+            "rows": 43,
+            "distance_MSE": 0.24868839197848067,
+            "NN_MSE": 0.23657122799485777
+          },
+          "frame14-194-a9a8098763ccf1c59fcf0639ca83eaae8fa7de8ad6fe36f271f2ea467d120600": {
+            "rows": 42,
+            "distance_MSE": 0.36287574483188645,
+            "NN_MSE": 0.07822133189830509
+          },
+          "frame14-194-a36064b5228847bf4fbde20048c2a35a63c59bcf5ce1c226879d5d56288895ff": {
+            "rows": 72,
+            "distance_MSE": 0.7252117824388045,
+            "NN_MSE": 0.45138198589627165
+          },
+          "frame14-194-f7507c384828afe9a319e60a02e391d2cdd6d8f4638dd9f476725723dc329230": {
+            "rows": 40,
+            "distance_MSE": 0.30709479552506014,
+            "NN_MSE": 0.2877832224584096
+          },
+          "frame14-194-2dd6b527b7e566b79257194aec792854e9e3da197264fe56676f1db0c44e93cd": {
+            "rows": 42,
+            "distance_MSE": 0.34166593497802317,
+            "NN_MSE": 0.05822630843402475
+          },
+          "frame14-194-cf7f434dc49267377d1cd6c838562df7e213f575e86fa0cb5b193737f9d30d59": {
+            "rows": 35,
+            "distance_MSE": 0.44221687219080674,
+            "NN_MSE": 0.0577028083702005
+          },
+          "frame14-194-e40c8caa25a964d3764fffcbfb008c19c58b376bc46207245be63417ebd4f276": {
+            "rows": 60,
+            "distance_MSE": 0.49350446420412813,
+            "NN_MSE": 0.04525724976725069
+          },
+          "frame14-194-f766ab8b89f843cf53c8eb78cafd0112d6c5a757dc87dd5281e3f101e2bb6237": {
+            "rows": 43,
+            "distance_MSE": 0.1090359132600489,
+            "NN_MSE": 0.028309323571883403
+          },
+          "frame14-194-374e9c9267b33d51188b920eae2582ef44cfb93e745b260ab1d19e63fff61a66": {
+            "rows": 45,
+            "distance_MSE": 0.21547537105932318,
+            "NN_MSE": 0.19750781425348035
+          },
+          "frame14-194-3c885dfee9722d1e879c2dffb3192bab2642bbf25f2e1e4eba9a5e3fe088844b": {
+            "rows": 41,
+            "distance_MSE": 0.8192016599599691,
+            "NN_MSE": 0.18861711905770656
+          },
+          "frame14-194-c1d238980294fb082f110cc5925cf21ff1d98072705afcc4dfc109b90b2df056": {
+            "rows": 26,
+            "distance_MSE": 0.8206329534225824,
+            "NN_MSE": 0.12447054958071463
+          },
+          "frame14-194-c1aaf37ab59001c3a75decbbc46b6396e61ea44e446e2c160e6103dec1fa9df4": {
+            "rows": 21,
+            "distance_MSE": 0.9530142901534963,
+            "NN_MSE": 0.13302874613463858
+          },
+          "frame14-194-3dc7fb3847e83adc6fd02462bab66fb94880e136a20052e6c5a3d0a87ac329cf": {
+            "rows": 44,
+            "distance_MSE": 0.5276185023453872,
+            "NN_MSE": 0.0939695544854589
+          },
+          "frame14-194-6bf66cdba6843bae54cd6a33534ee93e0d23c88a2c8277fb0abbe1e29c0c41f1": {
+            "rows": 54,
+            "distance_MSE": 0.45627956405882497,
+            "NN_MSE": 0.2493027445737443
+          },
+          "frame14-194-de523358c42688fc182434cabe59b1e3061561530a1b503d298d3bf46f0e8c4e": {
+            "rows": 65,
+            "distance_MSE": 0.34585876252055947,
+            "NN_MSE": 0.28629675574668895
+          },
+          "frame14-194-c94cbd3897de2ffbea59196a92289ef875572e207ee77430ba97f0c77b7e6638": {
+            "rows": 61,
+            "distance_MSE": 0.9097077300360034,
+            "NN_MSE": 0.4347566612393961
+          },
+          "frame14-194-b27f36fe2306bd2f5074774011ca275ae1ab28e73d5a27a2dfb7bdb0c66158c0": {
+            "rows": 36,
+            "distance_MSE": 0.8373445647702548,
+            "NN_MSE": 0.23614678939288572
+          },
+          "frame14-194-d0839285e9e187aaaab704593fdd1091638b9c6dfd5735db0213cae0a05a6dd0": {
+            "rows": 52,
+            "distance_MSE": 0.26238664512566445,
+            "NN_MSE": 0.10007915339243453
+          },
+          "frame14-194-24cb15bffb0ca780a54c22bb2229fa4c697ecb04c1c6fdc011f3d75237150ae5": {
+            "rows": 42,
+            "distance_MSE": 0.03555647272159671,
+            "NN_MSE": 0.014066339714422458
+          },
+          "frame14-194-6cef749e3e234acc67605c843a5ef5d6830dfd20094f2aabee2718865f48894a": {
+            "rows": 61,
+            "distance_MSE": 0.7985130069141902,
+            "NN_MSE": 0.30063240576090794
+          },
+          "frame14-194-438ccaed30a920cd4e1fe2740d2fde530abacb55798471b53e0202013c7a412e": {
+            "rows": 31,
+            "distance_MSE": 0.30744582058921466,
+            "NN_MSE": 0.45919838266116797
+          },
+          "frame14-194-6c9cce3faa5850c33bd6ab63b875b3f2b7bafc4a751bd79d70c1cbd7eaca1158": {
+            "rows": 25,
+            "distance_MSE": 0.06698033947953325,
+            "NN_MSE": 0.00011129090338551535
+          },
+          "frame14-194-e7296063010924673f3e2174eba4cd97b0077141200852818750d2f0b15c1b9f": {
+            "rows": 37,
+            "distance_MSE": 0.10049610441697951,
+            "NN_MSE": 0.07515931142857904
+          },
+          "frame14-194-f21f83fea024d523fff0ba0d941ec7b570eafe4a3ecfc7edf60d6866d0f53bd4": {
+            "rows": 34,
+            "distance_MSE": 0.2942652994095032,
+            "NN_MSE": 0.06228046675886792
+          },
+          "frame14-194-22bf2d2c0133ae4d758124820a5a5046c7d04dc3c3076c321cd4d56c7e38065d": {
+            "rows": 87,
+            "distance_MSE": 0.4337272065656421,
+            "NN_MSE": 0.29434633224378354
+          },
+          "frame14-194-0fe0138f8cc2e5232b991ed708c3b310876166151dc8ab628703f33fbb28ee96": {
+            "rows": 56,
+            "distance_MSE": 0.36999029961660873,
+            "NN_MSE": 0.2388386620394487
+          },
+          "frame14-194-6fc12c05042ec55b7185dca0b7c191ea1276781a1140058680638f065886dd87": {
+            "rows": 46,
+            "distance_MSE": 0.30446921705971247,
+            "NN_MSE": 0.09582274028650584
+          },
+          "frame14-194-e84b3c0d249e2706591f3fb81f01d9214165ef18178525c5aa857f726a32fab0": {
+            "rows": 59,
+            "distance_MSE": 0.5504751803262329,
+            "NN_MSE": 0.121918916048978
+          },
+          "frame14-194-4a5cb1d39a0502295927d2b535ca36f6fca1df2b7531160a24ece52daf7fc0cb": {
+            "rows": 46,
+            "distance_MSE": 0.28522147546459053,
+            "NN_MSE": 0.037111145602022486
+          },
+          "frame14-194-19dc7d3589fb8e0f27e9602bb59c805e47798329d67fe26c2726fedaadac0897": {
+            "rows": 56,
+            "distance_MSE": 0.5314106295218886,
+            "NN_MSE": 0.663777471375302
+          },
+          "frame14-194-738129934946ec3585f675a60d57e49f1bd57768aa54a0df4a71c80ad5b92936": {
+            "rows": 49,
+            "distance_MSE": 0.6074186174334998,
+            "NN_MSE": 0.36437190710245804
+          },
+          "frame14-194-09b8f2a405348e29f1c9eb675c31f9b22ee6984cdfc99d4d3802a947a0dda93e": {
+            "rows": 65,
+            "distance_MSE": 0.32590080495321777,
+            "NN_MSE": 0.08306678537810439
+          },
+          "frame14-194-3a7455b8411d8f4d46d4c88fad59cb462135f9f07c5bc38d4d7985aa48d5add1": {
+            "rows": 33,
+            "distance_MSE": 0.08594685206797399,
+            "NN_MSE": 0.011070659920569461
+          },
+          "frame14-194-68e1d16386d4a412a1e6829ef3574b7f065e47bc6987b0d4c4224bf28ec82f9c": {
+            "rows": 60,
+            "distance_MSE": 0.7893621605107479,
+            "NN_MSE": 0.5629495853856166
+          },
+          "frame14-194-cecc917b1239b1e1e64bad8654854df6094870d5907ce5d044cd64cfc181614a": {
+            "rows": 37,
+            "distance_MSE": 0.2898980730766027,
+            "NN_MSE": 0.015487965646422387
+          },
+          "frame14-194-4562579575af63c1af9142a3bd3bdeea86a496b33ea1de31338aaeaa846f45a0": {
+            "rows": 54,
+            "distance_MSE": 0.4563182807411447,
+            "NN_MSE": 0.43697283497619555
+          },
+          "frame14-194-6aaa70e3a5a0582ae0fc348d6dd4498a4a6b559df45c830d1360c78a966388c5": {
+            "rows": 49,
+            "distance_MSE": 0.9357846338926782,
+            "NN_MSE": 0.8006781375615329
+          },
+          "frame14-194-2d0d90de7a94efe3b29ac23897785fff8d9e62f10e78d938be73674f2e509dce": {
+            "rows": 67,
+            "distance_MSE": 0.17240977254886264,
+            "NN_MSE": 0.33831978338307134
+          },
+          "frame14-194-bd45bf7b76c5ec609cbf1784bed8c8bf9fb0fa5768034f1bca073485939d4243": {
+            "rows": 72,
+            "distance_MSE": 0.2600604471910646,
+            "NN_MSE": 0.1763440494989987
+          },
+          "frame14-194-5c5e878ea8bd67edfe4f8242dfcffaaacbe7148d0a41d63b9114aeb2d9ce2eb2": {
+            "rows": 50,
+            "distance_MSE": 0.21100596599667004,
+            "NN_MSE": 0.025107923534228877
+          },
+          "frame14-194-915bb2c9351e2603fe9b61ffabede853407b3b0436b23ec69b7175aecbde6a12": {
+            "rows": 39,
+            "distance_MSE": 1.0362806655055137,
+            "NN_MSE": 0.6619619493058353
+          },
+          "frame14-194-d2077d76306777bdb6a24154db5045662359630690ad2d89e64ec7eb6944ded7": {
+            "rows": 58,
+            "distance_MSE": 0.9262851888518289,
+            "NN_MSE": 0.1646211543293293
+          },
+          "frame14-194-c98b04b0d3a6139a7fc4a47dda3048a8a38fc3a65ab64af2f96db2ba2ef797c8": {
+            "rows": 60,
+            "distance_MSE": 0.37928620132770435,
+            "NN_MSE": 0.1009932148017334
+          },
+          "frame14-194-765674cb5c02abf8bbfa6acee13d7cb8790406fd488054cb8359913f26f09224": {
+            "rows": 41,
+            "distance_MSE": 0.07965198963085328,
+            "NN_MSE": 0.05171876702855599
+          },
+          "frame14-194-181fca6e8987af49ca0788d5404c633258f64034b5d668b9b5135dcc55fde507": {
+            "rows": 59,
+            "distance_MSE": 0.4850010037649874,
+            "NN_MSE": 0.2459669154691785
+          },
+          "frame14-194-b66cb11d5234d212b3d69d213761d055d61bd6d3951313f6b1f795cd871daec9": {
+            "rows": 36,
+            "distance_MSE": 0.5028666576738092,
+            "NN_MSE": 0.2211184726743015
+          },
+          "frame14-194-d9dec3e93daaf4bfe68cb5f453ad592f51a6c650de2cad27c0957cdef121d511": {
+            "rows": 43,
+            "distance_MSE": 0.3083816259333406,
+            "NN_MSE": 0.050705171915642964
+          },
+          "frame14-194-d0558692133fabedcf55ffec4a3b9d928bfc23691a943d082a004bafa4be663f": {
+            "rows": 41,
+            "distance_MSE": 0.15654288332314878,
+            "NN_MSE": 0.13146901088292554
+          },
+          "frame14-194-a999ebcec08bc67728a02aea6626a0662a0820fd48af61de2054f24ed433176d": {
+            "rows": 57,
+            "distance_MSE": 0.8739542205542855,
+            "NN_MSE": 0.15922739219387247
+          },
+          "frame14-194-c6bcac67f356db752e6aaee29b9f176a21275d82406c165068861c3f580806e2": {
+            "rows": 53,
+            "distance_MSE": 0.4124337395969156,
+            "NN_MSE": 0.023768090146440265
+          },
+          "frame14-194-618ef685955262ff379cd681b7dfd379b152311ce78de0c5aea5e7ee41c9bf88": {
+            "rows": 50,
+            "distance_MSE": 0.3189034205218416,
+            "NN_MSE": 0.5661673189256639
+          },
+          "frame14-194-906bd7f9e69e6f829dafd4afceb9730e082f7c6bf72dd55e1a485b3994edc328": {
+            "rows": 50,
+            "distance_MSE": 0.19283122000594005,
+            "NN_MSE": 0.07711886836744411
+          },
+          "frame14-194-e55218a3f9b432f0b72cbd19bab75b7495f8e0ae784239fe6b65137695a37508": {
+            "rows": 31,
+            "distance_MSE": 0.2324700901643138,
+            "NN_MSE": 0.4464322386408386
+          },
+          "frame14-194-78386f448b234bf92a8a929eb40da0284d96edb1612fc9f23045c476f1942536": {
+            "rows": 36,
+            "distance_MSE": 0.07239879399223333,
+            "NN_MSE": 0.03199341016294595
+          },
+          "frame14-194-f71cc2ec37f1742b31255e023dc70264fa3e2577b6f5aa5d379e0c9ceee9f5de": {
+            "rows": 64,
+            "distance_MSE": 0.2647436549430682,
+            "NN_MSE": 0.16446662295549275
+          },
+          "frame14-194-471850b03149e7410666be4f7762e4800078d6ffbf3bc903a29b7dce00fdbe2e": {
+            "rows": 55,
+            "distance_MSE": 0.39630623568211626,
+            "NN_MSE": 0.5308479358784158
+          },
+          "frame14-194-92eb4885165ca3296b3771b3089853164fc5e71c0bb8b1235f5747b88eeb903a": {
+            "rows": 57,
+            "distance_MSE": 0.7058236347243437,
+            "NN_MSE": 0.23139209921459314
+          },
+          "frame14-194-ac1bdaf11ac9c1401830036cd45082c872da2c2ecdbe754e55a9b09e87719707": {
+            "rows": 50,
+            "distance_MSE": 0.13212334175949775,
+            "NN_MSE": 0.13354201272139
+          },
+          "frame14-194-c3fbd0c3ccd4cb020732059869ef0261068b4748a22f94ca6540a47a797c72bf": {
+            "rows": 32,
+            "distance_MSE": 0.21179389987015002,
+            "NN_MSE": 0.09742080809031213
+          },
+          "frame14-194-7b53eae3503a6de0e0918f520b5b1fe7ee2e3e26381929b47deeca9bfae7a2a6": {
+            "rows": 43,
+            "distance_MSE": 0.13440892834079082,
+            "NN_MSE": 0.1281957025279633
+          },
+          "frame14-194-30e16b8d38abd80ef4e0aa4f7ca024a91e2ee3e89612ef692d5d413a00619089": {
+            "rows": 68,
+            "distance_MSE": 0.33614136615662316,
+            "NN_MSE": 0.1321938784438281
+          },
+          "frame14-194-5cfab3490bc8f1d37be8e71e19a5f710c89e728533bd60ddb0df9708d9809f94": {
+            "rows": 55,
+            "distance_MSE": 0.11994101624567961,
+            "NN_MSE": 0.009550709860505513
+          },
+          "frame14-194-26e2c35aa64f42b43457c23d7e247660fc0d826b536586a6e3383f84fae0b4d3": {
+            "rows": 28,
+            "distance_MSE": 0.10292700735206409,
+            "NN_MSE": 0.038409609916828034
+          },
+          "frame14-194-f9b63e83d0b11bf0070320164b345131fdd2aea0bb019e68bcc6484eee57a3a7": {
+            "rows": 42,
+            "distance_MSE": 0.24244159748523006,
+            "NN_MSE": 0.10893521859403021
+          },
+          "frame14-194-187c07c3da9e6ed5a1a3f773d40b313c24b2a75425e8acde68408e8d86a79344": {
+            "rows": 45,
+            "distance_MSE": 0.5424947598128718,
+            "NN_MSE": 0.25676766702402387
+          },
+          "frame14-194-80e66dfc7af51e12d989c3664e1d612d0f167fc5cf1cfc42ee1336794d9d7bcf": {
+            "rows": 30,
+            "distance_MSE": 0.29867970316592957,
+            "NN_MSE": 0.21357155331798047
+          },
+          "frame14-194-1c26ace81cac5c715a497960739a4114cdb50e68ca995dc5babcd977d95b802a": {
+            "rows": 45,
+            "distance_MSE": 0.2672132154806072,
+            "NN_MSE": 0.3146089172616098
+          },
+          "frame14-194-8cf6a054d645dc39388e0f2ed7f8a477bf22d872721203f8d513bed76413481b": {
+            "rows": 49,
+            "distance_MSE": 0.1806886769636719,
+            "NN_MSE": 0.26271655143576683
+          },
+          "frame14-194-36b53711319282c1b13b3cf826c8b73d1f1f2ff68c1409c38b3fffe088608ea3": {
+            "rows": 53,
+            "distance_MSE": 0.6357836562603412,
+            "NN_MSE": 0.32326455106155577
+          },
+          "frame14-194-7791f54d9faba397a9b2a76d0cef8ec85a587dd58e7e4091006b38e19ef70921": {
+            "rows": 47,
+            "distance_MSE": 0.9876906641419568,
+            "NN_MSE": 0.3158968390782684
+          },
+          "frame14-194-ced6f9b7043c1d78bd4d3c2fc4f702c26156923ceed57199fe5bc82bade1a819": {
+            "rows": 30,
+            "distance_MSE": 0.2962719611459136,
+            "NN_MSE": 0.12892812013727778
+          },
+          "frame14-194-22c0833aab246ec2282a3c2c1417214a1601cb7242a0455ae3bd5843d27840bd": {
+            "rows": 26,
+            "distance_MSE": 0.41310108139593216,
+            "NN_MSE": 0.32000508339284234
+          },
+          "frame14-194-5233200640c733da5d10b3876198161a1e474a79064605ef6ae7cdaf3f7def0f": {
+            "rows": 57,
+            "distance_MSE": 0.2992989973799144,
+            "NN_MSE": 0.19116230337224116
+          },
+          "frame14-194-7e89d1f941663d10dabb0883025f60ea9db629acae992580cf369976f440bd14": {
+            "rows": 39,
+            "distance_MSE": 0.5739516782407587,
+            "NN_MSE": 0.18652172983068782
+          },
+          "frame14-194-6840c3acb45c0fa680b6e7664686948f5fd36f0055d169063670b9f2222ef8e7": {
+            "rows": 48,
+            "distance_MSE": 0.16682224611201382,
+            "NN_MSE": 0.1979499920181196
+          },
+          "frame14-194-70d5577999559fbc5e8e9a512d290f82d17571dea509c977ad4ca1940b84523c": {
+            "rows": 76,
+            "distance_MSE": 0.09206545032283293,
+            "NN_MSE": 0.21361851835712914
+          },
+          "frame14-194-ac0c7f7facb3351fe7b892219aa77b3de0061c3fb1fe6983864b384ab933b1c0": {
+            "rows": 45,
+            "distance_MSE": 0.38836833378882013,
+            "NN_MSE": 0.10457987580933044
+          },
+          "frame14-194-3f98f38f9878b9ee2c9a04a18ceb02b34b9cf5bf41f7d98bede73d68a0642e1a": {
+            "rows": 34,
+            "distance_MSE": 0.34190600996807397,
+            "NN_MSE": 0.07305121390677594
+          }
+        },
+        "NN_z_MSE_gameweighted": 0.46169052374925723,
+        "distance_z_MSE_gameweighted": 0.6839172559486939,
+        "z_sign_gameweighted": 0.8355784413438735,
+        "z_valid_rows": 4653
+      },
+      "standard400": {
+        "rows": 4653,
+        "games": 96,
+        "planned_games": 96,
+        "zero_selected_games": 0,
+        "primary_rows": 4653,
+        "game_equal_conditional": true,
+        "distance_gameMSE": 0.40594373734309525,
+        "NN_gameMSE": 0.2572832049696333,
+        "delta_NN_minus_D": -0.14866053237346122,
+        "NN_rowMSE": 0.2684784042853156,
+        "distance_rowMSE": 0.41391012236849206,
+        "eD_mean": 0.0019409243477764414,
+        "rNN_mean": -0.008147707209893128,
+        "eD_RMS": 0.6371371417074155,
+        "rNN_RMS": 0.35580579441561117,
+        "residual_prediction_MSE": 0.2572832049696333,
+        "displacement_MSE": 0.12659776333972417,
+        "alignment_cross_E_eD_rNN": 0.1376291478565927,
+        "error_delta_decomposition": "E[rNN^2]-2E[eD*rNN]",
+        "weighted_centered_correlation": 0.6073377735920414,
+        "regression_slope_rNN_on_eD": 0.33907713469820877,
+        "sign_agreement_weighted": 0.693458637349745,
+        "sign_valid_rows": 4653,
+        "gain_games": 69,
+        "loss_games": 27,
+        "per_game": {
+          "frame14-194-198eae4410d836a8aba66595b479d2f01704a0d4d3fd7d00274570446cd9f96a": {
+            "rows": 57,
+            "distance_MSE": 0.5199999251612101,
+            "NN_MSE": 0.24582160688908553
+          },
+          "frame14-194-5460a8d5f915efe1a353a627dd2d7a9bf0af79277721e4c6eb884e0ed1ed026c": {
+            "rows": 50,
+            "distance_MSE": 0.13034822666472398,
+            "NN_MSE": 0.19010062986971835
+          },
+          "frame14-194-d7226721ef791c56ce0450fee87131b41fd678c9b52de4ce2e80067ce9c1014b": {
+            "rows": 55,
+            "distance_MSE": 0.5595778701876046,
+            "NN_MSE": 0.5215361778480279
+          },
+          "frame14-194-2c52586b1919ffa2d68bb16fdeb13a3577c2ce7450b8f742dad89b60180f96ab": {
+            "rows": 60,
+            "distance_MSE": 0.5101651724588203,
+            "NN_MSE": 0.14354742087926942
+          },
+          "frame14-194-b7c2095971578dc11093c97df3aaf03b0bd59edf63467a2f77b8e180ca809994": {
+            "rows": 34,
+            "distance_MSE": 0.5022625466794761,
+            "NN_MSE": 0.34447117046113784
+          },
+          "frame14-194-462dd341d7c0504ff92b5e4d99472b8a3eed2107077485270e20acd752c850ed": {
+            "rows": 32,
+            "distance_MSE": 0.4842625315591632,
+            "NN_MSE": 0.2461362065787312
+          },
+          "frame14-194-2063f1e18f3c23e53bc6ab12018127fd2ad4b750b67f44f745540d917edc1da0": {
+            "rows": 54,
+            "distance_MSE": 0.5515060520889575,
+            "NN_MSE": 0.3882370397846036
+          },
+          "frame14-194-b62851d8711940516208e0a576cfc11b61d574fc939abff2373889704779de4f": {
+            "rows": 80,
+            "distance_MSE": 0.2623292521035089,
+            "NN_MSE": 0.4443995952865574
+          },
+          "frame14-194-6f8cf5c74dd3bf5e8a51164f4c59aaa7d7ee3d131e5a2918353f2fac043cb36d": {
+            "rows": 52,
+            "distance_MSE": 0.2802608370680144,
+            "NN_MSE": 0.10243396790831401
+          },
+          "frame14-194-541dccfd277fae3c8636077403cd6cf9d9af0f6f7ce4223f00ac0d13942e9a0c": {
+            "rows": 83,
+            "distance_MSE": 0.37282837775342664,
+            "NN_MSE": 0.30565444147926807
+          },
+          "frame14-194-d1e61b2748b780721a2004856e481f4835e38d4ff41796c7ea5d96c72d83ef5d": {
+            "rows": 56,
+            "distance_MSE": 0.2405112178865818,
+            "NN_MSE": 0.2678024011112377
+          },
+          "frame14-194-85dd571262200ae89f87e2f43d0722ce32827751f22c81cd07fea748c400ffe0": {
+            "rows": 33,
+            "distance_MSE": 0.44969525156409795,
+            "NN_MSE": 0.13303417820493119
+          },
+          "frame14-194-6142514f0b1d5d17bbee72d1b696307c3440dd0a029ae99226b8bc69d527304e": {
+            "rows": 82,
+            "distance_MSE": 0.7375094980886746,
+            "NN_MSE": 0.25928785005351673
+          },
+          "frame14-194-6a91f6b8820e1a87d96a8285da82f36b9e8f28066a951a6bc28eb8c83b19bf48": {
+            "rows": 38,
+            "distance_MSE": 0.33290505942459325,
+            "NN_MSE": 0.27548379612120905
+          },
+          "frame14-194-29345a45275fdba4ab1dcc7bbaca41edfa96f6b2a687646043d6577e5ff294ea": {
+            "rows": 40,
+            "distance_MSE": 0.3328991620432792,
+            "NN_MSE": 0.25277432532517335
+          },
+          "frame14-194-57ff27d3d87cd497de79475e0ecbd8793989a1fcddbc4cd81e13f32e3eb657e0": {
+            "rows": 52,
+            "distance_MSE": 0.3992656689865115,
+            "NN_MSE": 0.2552254382501501
+          },
+          "frame14-194-dede32edbdd6b0f0e51a995f0b53ef53b7703b07b977b69ffdbb6dc996b6ece9": {
+            "rows": 59,
+            "distance_MSE": 0.49332463759856027,
+            "NN_MSE": 0.17035642107385837
+          },
+          "frame14-194-a1925fff4d09b3f128b1e532e88e9c575227b1204da9ab62d80d2bc85d3eeed7": {
+            "rows": 26,
+            "distance_MSE": 0.3122020766764587,
+            "NN_MSE": 0.076948360964118
+          },
+          "frame14-194-0ef23064aaec24d883bd8d2adb79a0bd3c6199f748dd79b66331e74980fe7971": {
+            "rows": 43,
+            "distance_MSE": 0.24868839197848067,
+            "NN_MSE": 0.2961449447558309
+          },
+          "frame14-194-a9a8098763ccf1c59fcf0639ca83eaae8fa7de8ad6fe36f271f2ea467d120600": {
+            "rows": 42,
+            "distance_MSE": 0.36287574483188645,
+            "NN_MSE": 0.1921983942379733
+          },
+          "frame14-194-a36064b5228847bf4fbde20048c2a35a63c59bcf5ce1c226879d5d56288895ff": {
+            "rows": 72,
+            "distance_MSE": 0.7252117824388045,
+            "NN_MSE": 0.3514763015502197
+          },
+          "frame14-194-f7507c384828afe9a319e60a02e391d2cdd6d8f4638dd9f476725723dc329230": {
+            "rows": 40,
+            "distance_MSE": 0.30709479552506014,
+            "NN_MSE": 0.16817652038723152
+          },
+          "frame14-194-2dd6b527b7e566b79257194aec792854e9e3da197264fe56676f1db0c44e93cd": {
+            "rows": 42,
+            "distance_MSE": 0.34166593497802317,
+            "NN_MSE": 0.20893589710620952
+          },
+          "frame14-194-cf7f434dc49267377d1cd6c838562df7e213f575e86fa0cb5b193737f9d30d59": {
+            "rows": 35,
+            "distance_MSE": 0.44221687219080674,
+            "NN_MSE": 0.15453949433695544
+          },
+          "frame14-194-e40c8caa25a964d3764fffcbfb008c19c58b376bc46207245be63417ebd4f276": {
+            "rows": 60,
+            "distance_MSE": 0.49350446420412813,
+            "NN_MSE": 0.05126414873474314
+          },
+          "frame14-194-f766ab8b89f843cf53c8eb78cafd0112d6c5a757dc87dd5281e3f101e2bb6237": {
+            "rows": 43,
+            "distance_MSE": 0.1090359132600489,
+            "NN_MSE": 0.06593591883335452
+          },
+          "frame14-194-374e9c9267b33d51188b920eae2582ef44cfb93e745b260ab1d19e63fff61a66": {
+            "rows": 45,
+            "distance_MSE": 0.21547537105932318,
+            "NN_MSE": 0.28222065638980814
+          },
+          "frame14-194-3c885dfee9722d1e879c2dffb3192bab2642bbf25f2e1e4eba9a5e3fe088844b": {
+            "rows": 41,
+            "distance_MSE": 0.8192016599599691,
+            "NN_MSE": 0.260937228015655
+          },
+          "frame14-194-c1d238980294fb082f110cc5925cf21ff1d98072705afcc4dfc109b90b2df056": {
+            "rows": 26,
+            "distance_MSE": 0.8206329534225824,
+            "NN_MSE": 0.15453172933035444
+          },
+          "frame14-194-c1aaf37ab59001c3a75decbbc46b6396e61ea44e446e2c160e6103dec1fa9df4": {
+            "rows": 21,
+            "distance_MSE": 0.9530142901534963,
+            "NN_MSE": 0.117157679889175
+          },
+          "frame14-194-3dc7fb3847e83adc6fd02462bab66fb94880e136a20052e6c5a3d0a87ac329cf": {
+            "rows": 44,
+            "distance_MSE": 0.5276185023453872,
+            "NN_MSE": 0.10515480264293832
+          },
+          "frame14-194-6bf66cdba6843bae54cd6a33534ee93e0d23c88a2c8277fb0abbe1e29c0c41f1": {
+            "rows": 54,
+            "distance_MSE": 0.45627956405882497,
+            "NN_MSE": 0.320579739751534
+          },
+          "frame14-194-de523358c42688fc182434cabe59b1e3061561530a1b503d298d3bf46f0e8c4e": {
+            "rows": 65,
+            "distance_MSE": 0.34585876252055947,
+            "NN_MSE": 0.2701358322377313
+          },
+          "frame14-194-c94cbd3897de2ffbea59196a92289ef875572e207ee77430ba97f0c77b7e6638": {
+            "rows": 61,
+            "distance_MSE": 0.9097077300360034,
+            "NN_MSE": 0.26894475332395723
+          },
+          "frame14-194-b27f36fe2306bd2f5074774011ca275ae1ab28e73d5a27a2dfb7bdb0c66158c0": {
+            "rows": 36,
+            "distance_MSE": 0.8373445647702548,
+            "NN_MSE": 0.1641327110471567
+          },
+          "frame14-194-d0839285e9e187aaaab704593fdd1091638b9c6dfd5735db0213cae0a05a6dd0": {
+            "rows": 52,
+            "distance_MSE": 0.26238664512566445,
+            "NN_MSE": 0.06853718598925461
+          },
+          "frame14-194-24cb15bffb0ca780a54c22bb2229fa4c697ecb04c1c6fdc011f3d75237150ae5": {
+            "rows": 42,
+            "distance_MSE": 0.03555647272159671,
+            "NN_MSE": 0.03298548225079789
+          },
+          "frame14-194-6cef749e3e234acc67605c843a5ef5d6830dfd20094f2aabee2718865f48894a": {
+            "rows": 61,
+            "distance_MSE": 0.7985130069141902,
+            "NN_MSE": 0.1669969301431268
+          },
+          "frame14-194-438ccaed30a920cd4e1fe2740d2fde530abacb55798471b53e0202013c7a412e": {
+            "rows": 31,
+            "distance_MSE": 0.30744582058921466,
+            "NN_MSE": 0.7217837018530413
+          },
+          "frame14-194-6c9cce3faa5850c33bd6ab63b875b3f2b7bafc4a751bd79d70c1cbd7eaca1158": {
+            "rows": 25,
+            "distance_MSE": 0.06698033947953325,
+            "NN_MSE": 0.10666357527474739
+          },
+          "frame14-194-e7296063010924673f3e2174eba4cd97b0077141200852818750d2f0b15c1b9f": {
+            "rows": 37,
+            "distance_MSE": 0.10049610441697951,
+            "NN_MSE": 0.2338459169703044
+          },
+          "frame14-194-f21f83fea024d523fff0ba0d941ec7b570eafe4a3ecfc7edf60d6866d0f53bd4": {
+            "rows": 34,
+            "distance_MSE": 0.2942652994095032,
+            "NN_MSE": 0.21349769861670387
+          },
+          "frame14-194-22bf2d2c0133ae4d758124820a5a5046c7d04dc3c3076c321cd4d56c7e38065d": {
+            "rows": 87,
+            "distance_MSE": 0.4337272065656421,
+            "NN_MSE": 0.4453926339212959
+          },
+          "frame14-194-0fe0138f8cc2e5232b991ed708c3b310876166151dc8ab628703f33fbb28ee96": {
+            "rows": 56,
+            "distance_MSE": 0.36999029961660873,
+            "NN_MSE": 0.20381917097337093
+          },
+          "frame14-194-6fc12c05042ec55b7185dca0b7c191ea1276781a1140058680638f065886dd87": {
+            "rows": 46,
+            "distance_MSE": 0.30446921705971247,
+            "NN_MSE": 0.19094659448938642
+          },
+          "frame14-194-e84b3c0d249e2706591f3fb81f01d9214165ef18178525c5aa857f726a32fab0": {
+            "rows": 59,
+            "distance_MSE": 0.5504751803262329,
+            "NN_MSE": 0.24322360162351442
+          },
+          "frame14-194-4a5cb1d39a0502295927d2b535ca36f6fca1df2b7531160a24ece52daf7fc0cb": {
+            "rows": 46,
+            "distance_MSE": 0.28522147546459053,
+            "NN_MSE": 0.07231008062381296
+          },
+          "frame14-194-19dc7d3589fb8e0f27e9602bb59c805e47798329d67fe26c2726fedaadac0897": {
+            "rows": 56,
+            "distance_MSE": 0.5314106295218886,
+            "NN_MSE": 0.6835660084430798
+          },
+          "frame14-194-738129934946ec3585f675a60d57e49f1bd57768aa54a0df4a71c80ad5b92936": {
+            "rows": 49,
+            "distance_MSE": 0.6074186174334998,
+            "NN_MSE": 0.2863843955132202
+          },
+          "frame14-194-09b8f2a405348e29f1c9eb675c31f9b22ee6984cdfc99d4d3802a947a0dda93e": {
+            "rows": 65,
+            "distance_MSE": 0.32590080495321777,
+            "NN_MSE": 0.045772832772398415
+          },
+          "frame14-194-3a7455b8411d8f4d46d4c88fad59cb462135f9f07c5bc38d4d7985aa48d5add1": {
+            "rows": 33,
+            "distance_MSE": 0.08594685206797399,
+            "NN_MSE": 0.07917187675353092
+          },
+          "frame14-194-68e1d16386d4a412a1e6829ef3574b7f065e47bc6987b0d4c4224bf28ec82f9c": {
+            "rows": 60,
+            "distance_MSE": 0.7893621605107479,
+            "NN_MSE": 0.6119098808978413
+          },
+          "frame14-194-cecc917b1239b1e1e64bad8654854df6094870d5907ce5d044cd64cfc181614a": {
+            "rows": 37,
+            "distance_MSE": 0.2898980730766027,
+            "NN_MSE": 0.10655643933344973
+          },
+          "frame14-194-4562579575af63c1af9142a3bd3bdeea86a496b33ea1de31338aaeaa846f45a0": {
+            "rows": 54,
+            "distance_MSE": 0.4563182807411447,
+            "NN_MSE": 0.5132056808727128
+          },
+          "frame14-194-6aaa70e3a5a0582ae0fc348d6dd4498a4a6b559df45c830d1360c78a966388c5": {
+            "rows": 49,
+            "distance_MSE": 0.9357846338926782,
+            "NN_MSE": 0.9701224919874221
+          },
+          "frame14-194-2d0d90de7a94efe3b29ac23897785fff8d9e62f10e78d938be73674f2e509dce": {
+            "rows": 67,
+            "distance_MSE": 0.17240977254886264,
+            "NN_MSE": 0.7366857620570607
+          },
+          "frame14-194-bd45bf7b76c5ec609cbf1784bed8c8bf9fb0fa5768034f1bca073485939d4243": {
+            "rows": 72,
+            "distance_MSE": 0.2600604471910646,
+            "NN_MSE": 0.3848553372696204
+          },
+          "frame14-194-5c5e878ea8bd67edfe4f8242dfcffaaacbe7148d0a41d63b9114aeb2d9ce2eb2": {
+            "rows": 50,
+            "distance_MSE": 0.21100596599667004,
+            "NN_MSE": 0.06833427487090436
+          },
+          "frame14-194-915bb2c9351e2603fe9b61ffabede853407b3b0436b23ec69b7175aecbde6a12": {
+            "rows": 39,
+            "distance_MSE": 1.0362806655055137,
+            "NN_MSE": 0.366901677145394
+          },
+          "frame14-194-d2077d76306777bdb6a24154db5045662359630690ad2d89e64ec7eb6944ded7": {
+            "rows": 58,
+            "distance_MSE": 0.9262851888518289,
+            "NN_MSE": 0.10020145047140475
+          },
+          "frame14-194-c98b04b0d3a6139a7fc4a47dda3048a8a38fc3a65ab64af2f96db2ba2ef797c8": {
+            "rows": 60,
+            "distance_MSE": 0.37928620132770435,
+            "NN_MSE": 0.28218380760569833
+          },
+          "frame14-194-765674cb5c02abf8bbfa6acee13d7cb8790406fd488054cb8359913f26f09224": {
+            "rows": 41,
+            "distance_MSE": 0.07965198963085328,
+            "NN_MSE": 0.11271157885060076
+          },
+          "frame14-194-181fca6e8987af49ca0788d5404c633258f64034b5d668b9b5135dcc55fde507": {
+            "rows": 59,
+            "distance_MSE": 0.4850010037649874,
+            "NN_MSE": 0.19311514632821103
+          },
+          "frame14-194-b66cb11d5234d212b3d69d213761d055d61bd6d3951313f6b1f795cd871daec9": {
+            "rows": 36,
+            "distance_MSE": 0.5028666576738092,
+            "NN_MSE": 0.34920173899161855
+          },
+          "frame14-194-d9dec3e93daaf4bfe68cb5f453ad592f51a6c650de2cad27c0957cdef121d511": {
+            "rows": 43,
+            "distance_MSE": 0.3083816259333406,
+            "NN_MSE": 0.08862317599923362
+          },
+          "frame14-194-d0558692133fabedcf55ffec4a3b9d928bfc23691a943d082a004bafa4be663f": {
+            "rows": 41,
+            "distance_MSE": 0.15654288332314878,
+            "NN_MSE": 0.32049365691668524
+          },
+          "frame14-194-a999ebcec08bc67728a02aea6626a0662a0820fd48af61de2054f24ed433176d": {
+            "rows": 57,
+            "distance_MSE": 0.8739542205542855,
+            "NN_MSE": 0.12499674928427407
+          },
+          "frame14-194-c6bcac67f356db752e6aaee29b9f176a21275d82406c165068861c3f580806e2": {
+            "rows": 53,
+            "distance_MSE": 0.4124337395969156,
+            "NN_MSE": 0.12626878509418832
+          },
+          "frame14-194-618ef685955262ff379cd681b7dfd379b152311ce78de0c5aea5e7ee41c9bf88": {
+            "rows": 50,
+            "distance_MSE": 0.3189034205218416,
+            "NN_MSE": 0.7679324289039852
+          },
+          "frame14-194-906bd7f9e69e6f829dafd4afceb9730e082f7c6bf72dd55e1a485b3994edc328": {
+            "rows": 50,
+            "distance_MSE": 0.19283122000594005,
+            "NN_MSE": 0.2633924491649004
+          },
+          "frame14-194-e55218a3f9b432f0b72cbd19bab75b7495f8e0ae784239fe6b65137695a37508": {
+            "rows": 31,
+            "distance_MSE": 0.2324700901643138,
+            "NN_MSE": 0.5616007028364363
+          },
+          "frame14-194-78386f448b234bf92a8a929eb40da0284d96edb1612fc9f23045c476f1942536": {
+            "rows": 36,
+            "distance_MSE": 0.07239879399223333,
+            "NN_MSE": 0.11489607940271115
+          },
+          "frame14-194-f71cc2ec37f1742b31255e023dc70264fa3e2577b6f5aa5d379e0c9ceee9f5de": {
+            "rows": 64,
+            "distance_MSE": 0.2647436549430682,
+            "NN_MSE": 0.30345665240224645
+          },
+          "frame14-194-471850b03149e7410666be4f7762e4800078d6ffbf3bc903a29b7dce00fdbe2e": {
+            "rows": 55,
+            "distance_MSE": 0.39630623568211626,
+            "NN_MSE": 0.5328209538138566
+          },
+          "frame14-194-92eb4885165ca3296b3771b3089853164fc5e71c0bb8b1235f5747b88eeb903a": {
+            "rows": 57,
+            "distance_MSE": 0.7058236347243437,
+            "NN_MSE": 0.2177667062695039
+          },
+          "frame14-194-ac1bdaf11ac9c1401830036cd45082c872da2c2ecdbe754e55a9b09e87719707": {
+            "rows": 50,
+            "distance_MSE": 0.13212334175949775,
+            "NN_MSE": 0.07710027777815116
+          },
+          "frame14-194-c3fbd0c3ccd4cb020732059869ef0261068b4748a22f94ca6540a47a797c72bf": {
+            "rows": 32,
+            "distance_MSE": 0.21179389987015002,
+            "NN_MSE": 0.2519400334361667
+          },
+          "frame14-194-7b53eae3503a6de0e0918f520b5b1fe7ee2e3e26381929b47deeca9bfae7a2a6": {
+            "rows": 43,
+            "distance_MSE": 0.13440892834079082,
+            "NN_MSE": 0.07258078725758565
+          },
+          "frame14-194-30e16b8d38abd80ef4e0aa4f7ca024a91e2ee3e89612ef692d5d413a00619089": {
+            "rows": 68,
+            "distance_MSE": 0.33614136615662316,
+            "NN_MSE": 0.23971438714542176
+          },
+          "frame14-194-5cfab3490bc8f1d37be8e71e19a5f710c89e728533bd60ddb0df9708d9809f94": {
+            "rows": 55,
+            "distance_MSE": 0.11994101624567961,
+            "NN_MSE": 0.0675280379890028
+          },
+          "frame14-194-26e2c35aa64f42b43457c23d7e247660fc0d826b536586a6e3383f84fae0b4d3": {
+            "rows": 28,
+            "distance_MSE": 0.10292700735206409,
+            "NN_MSE": 0.19341743066676664
+          },
+          "frame14-194-f9b63e83d0b11bf0070320164b345131fdd2aea0bb019e68bcc6484eee57a3a7": {
+            "rows": 42,
+            "distance_MSE": 0.24244159748523006,
+            "NN_MSE": 0.12021104126674426
+          },
+          "frame14-194-187c07c3da9e6ed5a1a3f773d40b313c24b2a75425e8acde68408e8d86a79344": {
+            "rows": 45,
+            "distance_MSE": 0.5424947598128718,
+            "NN_MSE": 0.2369735816628289
+          },
+          "frame14-194-80e66dfc7af51e12d989c3664e1d612d0f167fc5cf1cfc42ee1336794d9d7bcf": {
+            "rows": 30,
+            "distance_MSE": 0.29867970316592957,
+            "NN_MSE": 0.26579428183292314
+          },
+          "frame14-194-1c26ace81cac5c715a497960739a4114cdb50e68ca995dc5babcd977d95b802a": {
+            "rows": 45,
+            "distance_MSE": 0.2672132154806072,
+            "NN_MSE": 0.47882958432925377
+          },
+          "frame14-194-8cf6a054d645dc39388e0f2ed7f8a477bf22d872721203f8d513bed76413481b": {
+            "rows": 49,
+            "distance_MSE": 0.1806886769636719,
+            "NN_MSE": 0.14413530404173497
+          },
+          "frame14-194-36b53711319282c1b13b3cf826c8b73d1f1f2ff68c1409c38b3fffe088608ea3": {
+            "rows": 53,
+            "distance_MSE": 0.6357836562603412,
+            "NN_MSE": 0.3397490287058619
+          },
+          "frame14-194-7791f54d9faba397a9b2a76d0cef8ec85a587dd58e7e4091006b38e19ef70921": {
+            "rows": 47,
+            "distance_MSE": 0.9876906641419568,
+            "NN_MSE": 0.15275387416568423
+          },
+          "frame14-194-ced6f9b7043c1d78bd4d3c2fc4f702c26156923ceed57199fe5bc82bade1a819": {
+            "rows": 30,
+            "distance_MSE": 0.2962719611459136,
+            "NN_MSE": 0.18670562695698717
+          },
+          "frame14-194-22c0833aab246ec2282a3c2c1417214a1601cb7242a0455ae3bd5843d27840bd": {
+            "rows": 26,
+            "distance_MSE": 0.41310108139593216,
+            "NN_MSE": 0.28734257792150586
+          },
+          "frame14-194-5233200640c733da5d10b3876198161a1e474a79064605ef6ae7cdaf3f7def0f": {
+            "rows": 57,
+            "distance_MSE": 0.2992989973799144,
+            "NN_MSE": 0.21358024652046972
+          },
+          "frame14-194-7e89d1f941663d10dabb0883025f60ea9db629acae992580cf369976f440bd14": {
+            "rows": 39,
+            "distance_MSE": 0.5739516782407587,
+            "NN_MSE": 0.30317258065877284
+          },
+          "frame14-194-6840c3acb45c0fa680b6e7664686948f5fd36f0055d169063670b9f2222ef8e7": {
+            "rows": 48,
+            "distance_MSE": 0.16682224611201382,
+            "NN_MSE": 0.1867255319814326
+          },
+          "frame14-194-70d5577999559fbc5e8e9a512d290f82d17571dea509c977ad4ca1940b84523c": {
+            "rows": 76,
+            "distance_MSE": 0.09206545032283293,
+            "NN_MSE": 0.44279511595376586
+          },
+          "frame14-194-ac0c7f7facb3351fe7b892219aa77b3de0061c3fb1fe6983864b384ab933b1c0": {
+            "rows": 45,
+            "distance_MSE": 0.38836833378882013,
+            "NN_MSE": 0.23524592843388142
+          },
+          "frame14-194-3f98f38f9878b9ee2c9a04a18ceb02b34b9cf5bf41f7d98bede73d68a0642e1a": {
+            "rows": 34,
+            "distance_MSE": 0.34190600996807397,
+            "NN_MSE": 0.1340433447385048
+          }
+        },
+        "NN_z_MSE_gameweighted": 0.5096772221149913,
+        "distance_z_MSE_gameweighted": 0.6839172559486939,
+        "z_sign_gameweighted": 0.846419839553703,
+        "z_valid_rows": 4653
+      },
+      "distance_recalibration": {
+        "rows": 4653,
+        "games": 96,
+        "planned_games": 96,
+        "zero_selected_games": 0,
+        "primary_rows": 4653,
+        "game_equal_conditional": true,
+        "distance_gameMSE": 0.40594373734309525,
+        "NN_gameMSE": 0.39629507875427267,
+        "delta_NN_minus_D": -0.009648658588822514,
+        "NN_rowMSE": 0.40567981508136786,
+        "distance_rowMSE": 0.41391012236849206,
+        "eD_mean": 0.0019409243477764414,
+        "rNN_mean": 0.0009303066351747169,
+        "eD_RMS": 0.6371371417074155,
+        "rNN_RMS": 0.04984591433354071,
+        "residual_prediction_MSE": 0.39629507875427267,
+        "displacement_MSE": 0.002484615175746679,
+        "alignment_cross_E_eD_rNN": 0.006066636882284596,
+        "error_delta_decomposition": "E[rNN^2]-2E[eD*rNN]",
+        "weighted_centered_correlation": 0.19100023332198154,
+        "regression_slope_rNN_on_eD": 0.01494021696153316,
+        "sign_agreement_weighted": 0.7228604654005378,
+        "sign_valid_rows": 4380,
+        "gain_games": 71,
+        "loss_games": 25,
+        "per_game": {
+          "frame14-194-198eae4410d836a8aba66595b479d2f01704a0d4d3fd7d00274570446cd9f96a": {
+            "rows": 57,
+            "distance_MSE": 0.5199999251612101,
+            "NN_MSE": 0.49362507388190874
+          },
+          "frame14-194-5460a8d5f915efe1a353a627dd2d7a9bf0af79277721e4c6eb884e0ed1ed026c": {
+            "rows": 50,
+            "distance_MSE": 0.13034822666472398,
+            "NN_MSE": 0.10716139499655013
+          },
+          "frame14-194-d7226721ef791c56ce0450fee87131b41fd678c9b52de4ce2e80067ce9c1014b": {
+            "rows": 55,
+            "distance_MSE": 0.5595778701876046,
+            "NN_MSE": 0.5222622035352239
+          },
+          "frame14-194-2c52586b1919ffa2d68bb16fdeb13a3577c2ce7450b8f742dad89b60180f96ab": {
+            "rows": 60,
+            "distance_MSE": 0.5101651724588203,
+            "NN_MSE": 0.488844105103357
+          },
+          "frame14-194-b7c2095971578dc11093c97df3aaf03b0bd59edf63467a2f77b8e180ca809994": {
+            "rows": 34,
+            "distance_MSE": 0.5022625466794761,
+            "NN_MSE": 0.4662134714989137
+          },
+          "frame14-194-462dd341d7c0504ff92b5e4d99472b8a3eed2107077485270e20acd752c850ed": {
+            "rows": 32,
+            "distance_MSE": 0.4842625315591632,
+            "NN_MSE": 0.5144361417946725
+          },
+          "frame14-194-2063f1e18f3c23e53bc6ab12018127fd2ad4b750b67f44f745540d917edc1da0": {
+            "rows": 54,
+            "distance_MSE": 0.5515060520889575,
+            "NN_MSE": 0.5697203139934347
+          },
+          "frame14-194-b62851d8711940516208e0a576cfc11b61d574fc939abff2373889704779de4f": {
+            "rows": 80,
+            "distance_MSE": 0.2623292521035089,
+            "NN_MSE": 0.23842812503416874
+          },
+          "frame14-194-6f8cf5c74dd3bf5e8a51164f4c59aaa7d7ee3d131e5a2918353f2fac043cb36d": {
+            "rows": 52,
+            "distance_MSE": 0.2802608370680144,
+            "NN_MSE": 0.25269530811398233
+          },
+          "frame14-194-541dccfd277fae3c8636077403cd6cf9d9af0f6f7ce4223f00ac0d13942e9a0c": {
+            "rows": 83,
+            "distance_MSE": 0.37282837775342664,
+            "NN_MSE": 0.39403306701898977
+          },
+          "frame14-194-d1e61b2748b780721a2004856e481f4835e38d4ff41796c7ea5d96c72d83ef5d": {
+            "rows": 56,
+            "distance_MSE": 0.2405112178865818,
+            "NN_MSE": 0.25178729498081237
+          },
+          "frame14-194-85dd571262200ae89f87e2f43d0722ce32827751f22c81cd07fea748c400ffe0": {
+            "rows": 33,
+            "distance_MSE": 0.44969525156409795,
+            "NN_MSE": 0.4052179756682762
+          },
+          "frame14-194-6142514f0b1d5d17bbee72d1b696307c3440dd0a029ae99226b8bc69d527304e": {
+            "rows": 82,
+            "distance_MSE": 0.7375094980886746,
+            "NN_MSE": 0.7643322222084613
+          },
+          "frame14-194-6a91f6b8820e1a87d96a8285da82f36b9e8f28066a951a6bc28eb8c83b19bf48": {
+            "rows": 38,
+            "distance_MSE": 0.33290505942459325,
+            "NN_MSE": 0.34566996823604795
+          },
+          "frame14-194-29345a45275fdba4ab1dcc7bbaca41edfa96f6b2a687646043d6577e5ff294ea": {
+            "rows": 40,
+            "distance_MSE": 0.3328991620432792,
+            "NN_MSE": 0.32919024386414886
+          },
+          "frame14-194-57ff27d3d87cd497de79475e0ecbd8793989a1fcddbc4cd81e13f32e3eb657e0": {
+            "rows": 52,
+            "distance_MSE": 0.3992656689865115,
+            "NN_MSE": 0.3980848819816325
+          },
+          "frame14-194-dede32edbdd6b0f0e51a995f0b53ef53b7703b07b977b69ffdbb6dc996b6ece9": {
+            "rows": 59,
+            "distance_MSE": 0.49332463759856027,
+            "NN_MSE": 0.4615781212319595
+          },
+          "frame14-194-a1925fff4d09b3f128b1e532e88e9c575227b1204da9ab62d80d2bc85d3eeed7": {
+            "rows": 26,
+            "distance_MSE": 0.3122020766764587,
+            "NN_MSE": 0.2802205187654327
+          },
+          "frame14-194-0ef23064aaec24d883bd8d2adb79a0bd3c6199f748dd79b66331e74980fe7971": {
+            "rows": 43,
+            "distance_MSE": 0.24868839197848067,
+            "NN_MSE": 0.22172839930016797
+          },
+          "frame14-194-a9a8098763ccf1c59fcf0639ca83eaae8fa7de8ad6fe36f271f2ea467d120600": {
+            "rows": 42,
+            "distance_MSE": 0.36287574483188645,
+            "NN_MSE": 0.3263932656102635
+          },
+          "frame14-194-a36064b5228847bf4fbde20048c2a35a63c59bcf5ce1c226879d5d56288895ff": {
+            "rows": 72,
+            "distance_MSE": 0.7252117824388045,
+            "NN_MSE": 0.756457619988778
+          },
+          "frame14-194-f7507c384828afe9a319e60a02e391d2cdd6d8f4638dd9f476725723dc329230": {
+            "rows": 40,
+            "distance_MSE": 0.30709479552506014,
+            "NN_MSE": 0.32911860036777274
+          },
+          "frame14-194-2dd6b527b7e566b79257194aec792854e9e3da197264fe56676f1db0c44e93cd": {
+            "rows": 42,
+            "distance_MSE": 0.34166593497802317,
+            "NN_MSE": 0.28546272354736335
+          },
+          "frame14-194-cf7f434dc49267377d1cd6c838562df7e213f575e86fa0cb5b193737f9d30d59": {
+            "rows": 35,
+            "distance_MSE": 0.44221687219080674,
+            "NN_MSE": 0.4068818673234922
+          },
+          "frame14-194-e40c8caa25a964d3764fffcbfb008c19c58b376bc46207245be63417ebd4f276": {
+            "rows": 60,
+            "distance_MSE": 0.49350446420412813,
+            "NN_MSE": 0.4788689156014596
+          },
+          "frame14-194-f766ab8b89f843cf53c8eb78cafd0112d6c5a757dc87dd5281e3f101e2bb6237": {
+            "rows": 43,
+            "distance_MSE": 0.1090359132600489,
+            "NN_MSE": 0.08976186870017476
+          },
+          "frame14-194-374e9c9267b33d51188b920eae2582ef44cfb93e745b260ab1d19e63fff61a66": {
+            "rows": 45,
+            "distance_MSE": 0.21547537105932318,
+            "NN_MSE": 0.20242406266899515
+          },
+          "frame14-194-3c885dfee9722d1e879c2dffb3192bab2642bbf25f2e1e4eba9a5e3fe088844b": {
+            "rows": 41,
+            "distance_MSE": 0.8192016599599691,
+            "NN_MSE": 0.8186773690063818
+          },
+          "frame14-194-c1d238980294fb082f110cc5925cf21ff1d98072705afcc4dfc109b90b2df056": {
+            "rows": 26,
+            "distance_MSE": 0.8206329534225824,
+            "NN_MSE": 0.8040231841472514
+          },
+          "frame14-194-c1aaf37ab59001c3a75decbbc46b6396e61ea44e446e2c160e6103dec1fa9df4": {
+            "rows": 21,
+            "distance_MSE": 0.9530142901534963,
+            "NN_MSE": 0.9520186766918773
+          },
+          "frame14-194-3dc7fb3847e83adc6fd02462bab66fb94880e136a20052e6c5a3d0a87ac329cf": {
+            "rows": 44,
+            "distance_MSE": 0.5276185023453872,
+            "NN_MSE": 0.5111263224298563
+          },
+          "frame14-194-6bf66cdba6843bae54cd6a33534ee93e0d23c88a2c8277fb0abbe1e29c0c41f1": {
+            "rows": 54,
+            "distance_MSE": 0.45627956405882497,
+            "NN_MSE": 0.44375196527980193
+          },
+          "frame14-194-de523358c42688fc182434cabe59b1e3061561530a1b503d298d3bf46f0e8c4e": {
+            "rows": 65,
+            "distance_MSE": 0.34585876252055947,
+            "NN_MSE": 0.3135996280054323
+          },
+          "frame14-194-c94cbd3897de2ffbea59196a92289ef875572e207ee77430ba97f0c77b7e6638": {
+            "rows": 61,
+            "distance_MSE": 0.9097077300360034,
+            "NN_MSE": 0.976221201579166
+          },
+          "frame14-194-b27f36fe2306bd2f5074774011ca275ae1ab28e73d5a27a2dfb7bdb0c66158c0": {
+            "rows": 36,
+            "distance_MSE": 0.8373445647702548,
+            "NN_MSE": 0.8843426128622617
+          },
+          "frame14-194-d0839285e9e187aaaab704593fdd1091638b9c6dfd5735db0213cae0a05a6dd0": {
+            "rows": 52,
+            "distance_MSE": 0.26238664512566445,
+            "NN_MSE": 0.2511880842143184
+          },
+          "frame14-194-24cb15bffb0ca780a54c22bb2229fa4c697ecb04c1c6fdc011f3d75237150ae5": {
+            "rows": 42,
+            "distance_MSE": 0.03555647272159671,
+            "NN_MSE": 0.029764895839086217
+          },
+          "frame14-194-6cef749e3e234acc67605c843a5ef5d6830dfd20094f2aabee2718865f48894a": {
+            "rows": 61,
+            "distance_MSE": 0.7985130069141902,
+            "NN_MSE": 0.8537937452794236
+          },
+          "frame14-194-438ccaed30a920cd4e1fe2740d2fde530abacb55798471b53e0202013c7a412e": {
+            "rows": 31,
+            "distance_MSE": 0.30744582058921466,
+            "NN_MSE": 0.29268955888511655
+          },
+          "frame14-194-6c9cce3faa5850c33bd6ab63b875b3f2b7bafc4a751bd79d70c1cbd7eaca1158": {
+            "rows": 25,
+            "distance_MSE": 0.06698033947953325,
+            "NN_MSE": 0.04701258067488314
+          },
+          "frame14-194-e7296063010924673f3e2174eba4cd97b0077141200852818750d2f0b15c1b9f": {
+            "rows": 37,
+            "distance_MSE": 0.10049610441697951,
+            "NN_MSE": 0.07504120660601908
+          },
+          "frame14-194-f21f83fea024d523fff0ba0d941ec7b570eafe4a3ecfc7edf60d6866d0f53bd4": {
+            "rows": 34,
+            "distance_MSE": 0.2942652994095032,
+            "NN_MSE": 0.2537728528641259
+          },
+          "frame14-194-22bf2d2c0133ae4d758124820a5a5046c7d04dc3c3076c321cd4d56c7e38065d": {
+            "rows": 87,
+            "distance_MSE": 0.4337272065656421,
+            "NN_MSE": 0.4148793508496774
+          },
+          "frame14-194-0fe0138f8cc2e5232b991ed708c3b310876166151dc8ab628703f33fbb28ee96": {
+            "rows": 56,
+            "distance_MSE": 0.36999029961660873,
+            "NN_MSE": 0.3808383241070015
+          },
+          "frame14-194-6fc12c05042ec55b7185dca0b7c191ea1276781a1140058680638f065886dd87": {
+            "rows": 46,
+            "distance_MSE": 0.30446921705971247,
+            "NN_MSE": 0.2780468348093903
+          },
+          "frame14-194-e84b3c0d249e2706591f3fb81f01d9214165ef18178525c5aa857f726a32fab0": {
+            "rows": 59,
+            "distance_MSE": 0.5504751803262329,
+            "NN_MSE": 0.5481167134357018
+          },
+          "frame14-194-4a5cb1d39a0502295927d2b535ca36f6fca1df2b7531160a24ece52daf7fc0cb": {
+            "rows": 46,
+            "distance_MSE": 0.28522147546459053,
+            "NN_MSE": 0.2597862639021599
+          },
+          "frame14-194-19dc7d3589fb8e0f27e9602bb59c805e47798329d67fe26c2726fedaadac0897": {
+            "rows": 56,
+            "distance_MSE": 0.5314106295218886,
+            "NN_MSE": 0.5477665049354462
+          },
+          "frame14-194-738129934946ec3585f675a60d57e49f1bd57768aa54a0df4a71c80ad5b92936": {
+            "rows": 49,
+            "distance_MSE": 0.6074186174334998,
+            "NN_MSE": 0.6023189880737899
+          },
+          "frame14-194-09b8f2a405348e29f1c9eb675c31f9b22ee6984cdfc99d4d3802a947a0dda93e": {
+            "rows": 65,
+            "distance_MSE": 0.32590080495321777,
+            "NN_MSE": 0.3159566356324132
+          },
+          "frame14-194-3a7455b8411d8f4d46d4c88fad59cb462135f9f07c5bc38d4d7985aa48d5add1": {
+            "rows": 33,
+            "distance_MSE": 0.08594685206797399,
+            "NN_MSE": 0.07128371561311084
+          },
+          "frame14-194-68e1d16386d4a412a1e6829ef3574b7f065e47bc6987b0d4c4224bf28ec82f9c": {
+            "rows": 60,
+            "distance_MSE": 0.7893621605107479,
+            "NN_MSE": 0.7849014907682625
+          },
+          "frame14-194-cecc917b1239b1e1e64bad8654854df6094870d5907ce5d044cd64cfc181614a": {
+            "rows": 37,
+            "distance_MSE": 0.2898980730766027,
+            "NN_MSE": 0.25352540598070916
+          },
+          "frame14-194-4562579575af63c1af9142a3bd3bdeea86a496b33ea1de31338aaeaa846f45a0": {
+            "rows": 54,
+            "distance_MSE": 0.4563182807411447,
+            "NN_MSE": 0.4742389327167682
+          },
+          "frame14-194-6aaa70e3a5a0582ae0fc348d6dd4498a4a6b559df45c830d1360c78a966388c5": {
+            "rows": 49,
+            "distance_MSE": 0.9357846338926782,
+            "NN_MSE": 0.9640026045008766
+          },
+          "frame14-194-2d0d90de7a94efe3b29ac23897785fff8d9e62f10e78d938be73674f2e509dce": {
+            "rows": 67,
+            "distance_MSE": 0.17240977254886264,
+            "NN_MSE": 0.16396140393258918
+          },
+          "frame14-194-bd45bf7b76c5ec609cbf1784bed8c8bf9fb0fa5768034f1bca073485939d4243": {
+            "rows": 72,
+            "distance_MSE": 0.2600604471910646,
+            "NN_MSE": 0.23741998072449422
+          },
+          "frame14-194-5c5e878ea8bd67edfe4f8242dfcffaaacbe7148d0a41d63b9114aeb2d9ce2eb2": {
+            "rows": 50,
+            "distance_MSE": 0.21100596599667004,
+            "NN_MSE": 0.19397036754035984
+          },
+          "frame14-194-915bb2c9351e2603fe9b61ffabede853407b3b0436b23ec69b7175aecbde6a12": {
+            "rows": 39,
+            "distance_MSE": 1.0362806655055137,
+            "NN_MSE": 1.059455199800642
+          },
+          "frame14-194-d2077d76306777bdb6a24154db5045662359630690ad2d89e64ec7eb6944ded7": {
+            "rows": 58,
+            "distance_MSE": 0.9262851888518289,
+            "NN_MSE": 0.9672645541241197
+          },
+          "frame14-194-c98b04b0d3a6139a7fc4a47dda3048a8a38fc3a65ab64af2f96db2ba2ef797c8": {
+            "rows": 60,
+            "distance_MSE": 0.37928620132770435,
+            "NN_MSE": 0.34188472126923786
+          },
+          "frame14-194-765674cb5c02abf8bbfa6acee13d7cb8790406fd488054cb8359913f26f09224": {
+            "rows": 41,
+            "distance_MSE": 0.07965198963085328,
+            "NN_MSE": 0.05855732913209743
+          },
+          "frame14-194-181fca6e8987af49ca0788d5404c633258f64034b5d668b9b5135dcc55fde507": {
+            "rows": 59,
+            "distance_MSE": 0.4850010037649874,
+            "NN_MSE": 0.4989200072860272
+          },
+          "frame14-194-b66cb11d5234d212b3d69d213761d055d61bd6d3951313f6b1f795cd871daec9": {
+            "rows": 36,
+            "distance_MSE": 0.5028666576738092,
+            "NN_MSE": 0.4670751064802785
+          },
+          "frame14-194-d9dec3e93daaf4bfe68cb5f453ad592f51a6c650de2cad27c0957cdef121d511": {
+            "rows": 43,
+            "distance_MSE": 0.3083816259333406,
+            "NN_MSE": 0.2869869414518075
+          },
+          "frame14-194-d0558692133fabedcf55ffec4a3b9d928bfc23691a943d082a004bafa4be663f": {
+            "rows": 41,
+            "distance_MSE": 0.15654288332314878,
+            "NN_MSE": 0.11320311548180463
+          },
+          "frame14-194-a999ebcec08bc67728a02aea6626a0662a0820fd48af61de2054f24ed433176d": {
+            "rows": 57,
+            "distance_MSE": 0.8739542205542855,
+            "NN_MSE": 0.912867768567351
+          },
+          "frame14-194-c6bcac67f356db752e6aaee29b9f176a21275d82406c165068861c3f580806e2": {
+            "rows": 53,
+            "distance_MSE": 0.4124337395969156,
+            "NN_MSE": 0.36567328525289017
+          },
+          "frame14-194-618ef685955262ff379cd681b7dfd379b152311ce78de0c5aea5e7ee41c9bf88": {
+            "rows": 50,
+            "distance_MSE": 0.3189034205218416,
+            "NN_MSE": 0.3078589868477365
+          },
+          "frame14-194-906bd7f9e69e6f829dafd4afceb9730e082f7c6bf72dd55e1a485b3994edc328": {
+            "rows": 50,
+            "distance_MSE": 0.19283122000594005,
+            "NN_MSE": 0.15681096390915752
+          },
+          "frame14-194-e55218a3f9b432f0b72cbd19bab75b7495f8e0ae784239fe6b65137695a37508": {
+            "rows": 31,
+            "distance_MSE": 0.2324700901643138,
+            "NN_MSE": 0.21909057442335
+          },
+          "frame14-194-78386f448b234bf92a8a929eb40da0284d96edb1612fc9f23045c476f1942536": {
+            "rows": 36,
+            "distance_MSE": 0.07239879399223333,
+            "NN_MSE": 0.07146200671638353
+          },
+          "frame14-194-f71cc2ec37f1742b31255e023dc70264fa3e2577b6f5aa5d379e0c9ceee9f5de": {
+            "rows": 64,
+            "distance_MSE": 0.2647436549430682,
+            "NN_MSE": 0.23013064712981532
+          },
+          "frame14-194-471850b03149e7410666be4f7762e4800078d6ffbf3bc903a29b7dce00fdbe2e": {
+            "rows": 55,
+            "distance_MSE": 0.39630623568211626,
+            "NN_MSE": 0.3801340389141161
+          },
+          "frame14-194-92eb4885165ca3296b3771b3089853164fc5e71c0bb8b1235f5747b88eeb903a": {
+            "rows": 57,
+            "distance_MSE": 0.7058236347243437,
+            "NN_MSE": 0.7145403003638678
+          },
+          "frame14-194-ac1bdaf11ac9c1401830036cd45082c872da2c2ecdbe754e55a9b09e87719707": {
+            "rows": 50,
+            "distance_MSE": 0.13212334175949775,
+            "NN_MSE": 0.12773397891553936
+          },
+          "frame14-194-c3fbd0c3ccd4cb020732059869ef0261068b4748a22f94ca6540a47a797c72bf": {
+            "rows": 32,
+            "distance_MSE": 0.21179389987015002,
+            "NN_MSE": 0.20617074184040193
+          },
+          "frame14-194-7b53eae3503a6de0e0918f520b5b1fe7ee2e3e26381929b47deeca9bfae7a2a6": {
+            "rows": 43,
+            "distance_MSE": 0.13440892834079082,
+            "NN_MSE": 0.14696538925102465
+          },
+          "frame14-194-30e16b8d38abd80ef4e0aa4f7ca024a91e2ee3e89612ef692d5d413a00619089": {
+            "rows": 68,
+            "distance_MSE": 0.33614136615662316,
+            "NN_MSE": 0.2992315413065667
+          },
+          "frame14-194-5cfab3490bc8f1d37be8e71e19a5f710c89e728533bd60ddb0df9708d9809f94": {
+            "rows": 55,
+            "distance_MSE": 0.11994101624567961,
+            "NN_MSE": 0.09251814925923182
+          },
+          "frame14-194-26e2c35aa64f42b43457c23d7e247660fc0d826b536586a6e3383f84fae0b4d3": {
+            "rows": 28,
+            "distance_MSE": 0.10292700735206409,
+            "NN_MSE": 0.08327014355843496
+          },
+          "frame14-194-f9b63e83d0b11bf0070320164b345131fdd2aea0bb019e68bcc6484eee57a3a7": {
+            "rows": 42,
+            "distance_MSE": 0.24244159748523006,
+            "NN_MSE": 0.23058037778218848
+          },
+          "frame14-194-187c07c3da9e6ed5a1a3f773d40b313c24b2a75425e8acde68408e8d86a79344": {
+            "rows": 45,
+            "distance_MSE": 0.5424947598128718,
+            "NN_MSE": 0.5310539611641426
+          },
+          "frame14-194-80e66dfc7af51e12d989c3664e1d612d0f167fc5cf1cfc42ee1336794d9d7bcf": {
+            "rows": 30,
+            "distance_MSE": 0.29867970316592957,
+            "NN_MSE": 0.26695308559573055
+          },
+          "frame14-194-1c26ace81cac5c715a497960739a4114cdb50e68ca995dc5babcd977d95b802a": {
+            "rows": 45,
+            "distance_MSE": 0.2672132154806072,
+            "NN_MSE": 0.23659976172888444
+          },
+          "frame14-194-8cf6a054d645dc39388e0f2ed7f8a477bf22d872721203f8d513bed76413481b": {
+            "rows": 49,
+            "distance_MSE": 0.1806886769636719,
+            "NN_MSE": 0.20304835363179863
+          },
+          "frame14-194-36b53711319282c1b13b3cf826c8b73d1f1f2ff68c1409c38b3fffe088608ea3": {
+            "rows": 53,
+            "distance_MSE": 0.6357836562603412,
+            "NN_MSE": 0.638426764111369
+          },
+          "frame14-194-7791f54d9faba397a9b2a76d0cef8ec85a587dd58e7e4091006b38e19ef70921": {
+            "rows": 47,
+            "distance_MSE": 0.9876906641419568,
+            "NN_MSE": 1.0336424394575423
+          },
+          "frame14-194-ced6f9b7043c1d78bd4d3c2fc4f702c26156923ceed57199fe5bc82bade1a819": {
+            "rows": 30,
+            "distance_MSE": 0.2962719611459136,
+            "NN_MSE": 0.2562652208361807
+          },
+          "frame14-194-22c0833aab246ec2282a3c2c1417214a1601cb7242a0455ae3bd5843d27840bd": {
+            "rows": 26,
+            "distance_MSE": 0.41310108139593216,
+            "NN_MSE": 0.4062094720358465
+          },
+          "frame14-194-5233200640c733da5d10b3876198161a1e474a79064605ef6ae7cdaf3f7def0f": {
+            "rows": 57,
+            "distance_MSE": 0.2992989973799144,
+            "NN_MSE": 0.268374361471069
+          },
+          "frame14-194-7e89d1f941663d10dabb0883025f60ea9db629acae992580cf369976f440bd14": {
+            "rows": 39,
+            "distance_MSE": 0.5739516782407587,
+            "NN_MSE": 0.5858517278986108
+          },
+          "frame14-194-6840c3acb45c0fa680b6e7664686948f5fd36f0055d169063670b9f2222ef8e7": {
+            "rows": 48,
+            "distance_MSE": 0.16682224611201382,
+            "NN_MSE": 0.1631514666032132
+          },
+          "frame14-194-70d5577999559fbc5e8e9a512d290f82d17571dea509c977ad4ca1940b84523c": {
+            "rows": 76,
+            "distance_MSE": 0.09206545032283293,
+            "NN_MSE": 0.08016970165743612
+          },
+          "frame14-194-ac0c7f7facb3351fe7b892219aa77b3de0061c3fb1fe6983864b384ab933b1c0": {
+            "rows": 45,
+            "distance_MSE": 0.38836833378882013,
+            "NN_MSE": 0.3548939870383338
+          },
+          "frame14-194-3f98f38f9878b9ee2c9a04a18ceb02b34b9cf5bf41f7d98bede73d68a0642e1a": {
+            "rows": 34,
+            "distance_MSE": 0.34190600996807397,
+            "NN_MSE": 0.30266623121165914
+          }
+        },
+        "NN_z_MSE_gameweighted": 0.6748036936228476,
+        "distance_z_MSE_gameweighted": 0.6839172559486939,
+        "z_sign_gameweighted": 0.7535219661766693,
+        "z_valid_rows": 4653
+      }
+    },
+    "validation": {
+      "ridge": {
+        "rows": 1248,
+        "games": 24,
+        "planned_games": 24,
+        "zero_selected_games": 0,
+        "primary_rows": 1248,
+        "game_equal_conditional": true,
+        "distance_gameMSE": 0.48514681311997865,
+        "NN_gameMSE": 0.6127986849565157,
+        "delta_NN_minus_D": 0.12765187183653792,
+        "NN_rowMSE": 0.6101873693171022,
+        "distance_rowMSE": 0.4893138665385534,
+        "eD_mean": -0.00020798936334936883,
+        "rNN_mean": -0.03126420306369464,
+        "eD_RMS": 0.6965248115609225,
+        "rNN_RMS": 0.3852057899633228,
+        "residual_prediction_MSE": 0.6127986849565157,
+        "displacement_MSE": 0.14838350062126754,
+        "alignment_cross_E_eD_rNN": 0.010365814392364805,
+        "error_delta_decomposition": "E[rNN^2]-2E[eD*rNN]",
+        "weighted_centered_correlation": 0.038737953803149365,
+        "regression_slope_rNN_on_eD": 0.021352943921804802,
+        "sign_agreement_weighted": 0.4917324490516256,
+        "sign_valid_rows": 1242,
+        "gain_games": 11,
+        "loss_games": 13,
+        "per_game": {
+          "frame14-194-22163a3bcfa300d36cae0f793b05feb681fe85387beaa41e52dcc580365787dc": {
+            "rows": 49,
+            "distance_MSE": 0.12794584368883208,
+            "NN_MSE": 0.31970181626343275
+          },
+          "frame14-194-5d101fbd606664267432328113536339dd1da744b1740d78f0bf9e80695ec15e": {
+            "rows": 80,
+            "distance_MSE": 0.32293142047404194,
+            "NN_MSE": 0.5557422690777728
+          },
+          "frame14-194-5af48ec6018c87d459599476e194da10d83422c80e1b456bf8b827b8b7985f5c": {
+            "rows": 36,
+            "distance_MSE": 0.31479992533838075,
+            "NN_MSE": 0.7328573370009958
+          },
+          "frame14-194-852bad3e61e8b6c92a4b60a11a2c9d6346626a4bfd0f576534957122f381f71f": {
+            "rows": 29,
+            "distance_MSE": 0.49902917170678984,
+            "NN_MSE": 1.7237982266298861
+          },
+          "frame14-194-1b03b6cab0b15904d8c145cb8167797be483a299b02c9e29b731243a02ff5bb8": {
+            "rows": 47,
+            "distance_MSE": 0.14153694517245147,
+            "NN_MSE": 0.13296808401535845
+          },
+          "frame14-194-c392f2e96abe6988359ca03cb8c282ff88ec0cee8e6b07b04537c8039155d561": {
+            "rows": 46,
+            "distance_MSE": 0.7883758894027051,
+            "NN_MSE": 0.2792176038674391
+          },
+          "frame14-194-d3b66fd8ed240ffe02656228e13a22a7ff6b92182b0f6568a472ac63cf4301df": {
+            "rows": 65,
+            "distance_MSE": 0.5965666706652463,
+            "NN_MSE": 0.5871361786434295
+          },
+          "frame14-194-819afd8b6da580f6e80fd2a7d04a0eb9fcfa1c39037dab6a91cebb0f7ce99c03": {
+            "rows": 33,
+            "distance_MSE": 0.06081867950570328,
+            "NN_MSE": 0.13100437604911294
+          },
+          "frame14-194-f4f8161893e55173ba82a69b94fccb03cdf2b6cdb6945d468fae2acb83910557": {
+            "rows": 52,
+            "distance_MSE": 0.5744517358149418,
+            "NN_MSE": 0.05800053876963388
+          },
+          "frame14-194-7db87526b6afb52be5ad17acf86b828767079accbdb20395637c4b66d2223978": {
+            "rows": 73,
+            "distance_MSE": 0.9418060601771895,
+            "NN_MSE": 1.6580005963985465
+          },
+          "frame14-194-6330b1b80fb88bc233d15cca56b116239fc27dbac5faf9e4825061647f33c064": {
+            "rows": 42,
+            "distance_MSE": 0.22203037617433252,
+            "NN_MSE": 0.10723120761540643
+          },
+          "frame14-194-c4ff2ede01dc584be561afb9b8edaa7cd14c93a00683ad5b9f710b0c5e24f1a5": {
+            "rows": 64,
+            "distance_MSE": 0.4209682882012296,
+            "NN_MSE": 0.4831924872875668
+          },
+          "frame14-194-07914abb55b03cdc0e27b36020dd153d37fd2b8058823e4244f389c387081494": {
+            "rows": 72,
+            "distance_MSE": 0.2828681794891431,
+            "NN_MSE": 0.2338881087820154
+          },
+          "frame14-194-9adac16125deed4e104fdf1f2e105d20033e723025f39470536d0aba207a046c": {
+            "rows": 47,
+            "distance_MSE": 0.9048545760690295,
+            "NN_MSE": 2.0292791892158086
+          },
+          "frame14-194-e35d9e88289e09362678d086e9e3c5a0750a00ca0fed3f64c66f1dbb6aada6ed": {
+            "rows": 46,
+            "distance_MSE": 1.0552529600768705,
+            "NN_MSE": 1.4113562246395397
+          },
+          "frame14-194-871072d47589dd1953750a5ae4973193e6a3b905e6f5e6b2075618a92bf7dd43": {
+            "rows": 47,
+            "distance_MSE": 0.3190040209542227,
+            "NN_MSE": 0.6351590860823064
+          },
+          "frame14-194-13775a908af0f04cf1313ae14652e2c81669149c5ded56e23a34a6c354647d7b": {
+            "rows": 39,
+            "distance_MSE": 0.3560022989197078,
+            "NN_MSE": 0.2082125984970809
+          },
+          "frame14-194-8496a07bf7ac03428d7f36dbc27234a22d6f9071e28c0969cd3712c69e74784c": {
+            "rows": 44,
+            "distance_MSE": 0.0980288489135584,
+            "NN_MSE": 0.04206438814801147
+          },
+          "frame14-194-844e7c9d8b749434def33892e8de8508fff961db1925bb3001eec7dbd702c62f": {
+            "rows": 66,
+            "distance_MSE": 0.3019276412467005,
+            "NN_MSE": 0.9797866828314997
+          },
+          "frame14-194-055f5e724aa0aeac151a13432c061b6c31d131348ac84cb0c4b049daf4f4dc9f": {
+            "rows": 70,
+            "distance_MSE": 0.4374993030326874,
+            "NN_MSE": 0.15368823947215624
+          },
+          "frame14-194-0bc03bc3369648d611058f9ac79cadb5165b83224e9ffa2b9940e8b33724b39b": {
+            "rows": 67,
+            "distance_MSE": 0.5011146932055449,
+            "NN_MSE": 0.5614129556332855
+          },
+          "frame14-194-1edcf6a11299e6fc014c0fcc013f7b6e8b260a072de7d8751f7d4b0e480a18ee": {
+            "rows": 53,
+            "distance_MSE": 0.8819570739731603,
+            "NN_MSE": 0.4870797515332584
+          },
+          "frame14-194-ef9e4acbb9408651e8e9688385378723f6a8e2b80837f5b731de1ab27e786bfc": {
+            "rows": 43,
+            "distance_MSE": 0.3806384358259908,
+            "NN_MSE": 0.5357123089021738
+          },
+          "frame14-194-ece4a978fc95aba80ef6d882eecf97be222dedc19c3c0404931fb1d004c82a84": {
+            "rows": 38,
+            "distance_MSE": 1.1131144768510306,
+            "NN_MSE": 0.6606781836006851
+          }
+        },
+        "NN_z_MSE_gameweighted": 0.9783400131586456,
+        "distance_z_MSE_gameweighted": 0.8225350323496629,
+        "z_sign_gameweighted": 0.6238190550557514,
+        "z_valid_rows": 1248
+      },
+      "standard400": {
+        "rows": 1248,
+        "games": 24,
+        "planned_games": 24,
+        "zero_selected_games": 0,
+        "primary_rows": 1248,
+        "game_equal_conditional": true,
+        "distance_gameMSE": 0.48514681311997865,
+        "NN_gameMSE": 0.6487715052886828,
+        "delta_NN_minus_D": 0.16362469216870373,
+        "NN_rowMSE": 0.6412566981854548,
+        "distance_rowMSE": 0.4893138665385534,
+        "eD_mean": -0.00020798936334936883,
+        "rNN_mean": -0.012852780132044923,
+        "eD_RMS": 0.6965248115609225,
+        "rNN_RMS": 0.43924286217182085,
+        "residual_prediction_MSE": 0.6487715052886828,
+        "displacement_MSE": 0.19293429196889322,
+        "alignment_cross_E_eD_rNN": 0.014654799900094752,
+        "error_delta_decomposition": "E[rNN^2]-2E[eD*rNN]",
+        "weighted_centered_correlation": 0.04791211963572065,
+        "regression_slope_rNN_on_eD": 0.030201430925230765,
+        "sign_agreement_weighted": 0.4178781835585043,
+        "sign_valid_rows": 1248,
+        "gain_games": 9,
+        "loss_games": 15,
+        "per_game": {
+          "frame14-194-22163a3bcfa300d36cae0f793b05feb681fe85387beaa41e52dcc580365787dc": {
+            "rows": 49,
+            "distance_MSE": 0.12794584368883208,
+            "NN_MSE": 0.6255055755440276
+          },
+          "frame14-194-5d101fbd606664267432328113536339dd1da744b1740d78f0bf9e80695ec15e": {
+            "rows": 80,
+            "distance_MSE": 0.32293142047404194,
+            "NN_MSE": 0.8709546288624725
+          },
+          "frame14-194-5af48ec6018c87d459599476e194da10d83422c80e1b456bf8b827b8b7985f5c": {
+            "rows": 36,
+            "distance_MSE": 0.31479992533838075,
+            "NN_MSE": 0.776295033468238
+          },
+          "frame14-194-852bad3e61e8b6c92a4b60a11a2c9d6346626a4bfd0f576534957122f381f71f": {
+            "rows": 29,
+            "distance_MSE": 0.49902917170678984,
+            "NN_MSE": 2.093321049784618
+          },
+          "frame14-194-1b03b6cab0b15904d8c145cb8167797be483a299b02c9e29b731243a02ff5bb8": {
+            "rows": 47,
+            "distance_MSE": 0.14153694517245147,
+            "NN_MSE": 0.33751433301440514
+          },
+          "frame14-194-c392f2e96abe6988359ca03cb8c282ff88ec0cee8e6b07b04537c8039155d561": {
+            "rows": 46,
+            "distance_MSE": 0.7883758894027051,
+            "NN_MSE": 0.20474976194261424
+          },
+          "frame14-194-d3b66fd8ed240ffe02656228e13a22a7ff6b92182b0f6568a472ac63cf4301df": {
+            "rows": 65,
+            "distance_MSE": 0.5965666706652463,
+            "NN_MSE": 0.6304761479981088
+          },
+          "frame14-194-819afd8b6da580f6e80fd2a7d04a0eb9fcfa1c39037dab6a91cebb0f7ce99c03": {
+            "rows": 33,
+            "distance_MSE": 0.06081867950570328,
+            "NN_MSE": 0.32326018602191137
+          },
+          "frame14-194-f4f8161893e55173ba82a69b94fccb03cdf2b6cdb6945d468fae2acb83910557": {
+            "rows": 52,
+            "distance_MSE": 0.5744517358149418,
+            "NN_MSE": 0.05383089155588198
+          },
+          "frame14-194-7db87526b6afb52be5ad17acf86b828767079accbdb20395637c4b66d2223978": {
+            "rows": 73,
+            "distance_MSE": 0.9418060601771895,
+            "NN_MSE": 1.4612288724434481
+          },
+          "frame14-194-6330b1b80fb88bc233d15cca56b116239fc27dbac5faf9e4825061647f33c064": {
+            "rows": 42,
+            "distance_MSE": 0.22203037617433252,
+            "NN_MSE": 0.3020233668485985
+          },
+          "frame14-194-c4ff2ede01dc584be561afb9b8edaa7cd14c93a00683ad5b9f710b0c5e24f1a5": {
+            "rows": 64,
+            "distance_MSE": 0.4209682882012296,
+            "NN_MSE": 0.42471012721733675
+          },
+          "frame14-194-07914abb55b03cdc0e27b36020dd153d37fd2b8058823e4244f389c387081494": {
+            "rows": 72,
+            "distance_MSE": 0.2828681794891431,
+            "NN_MSE": 0.12862094826234916
+          },
+          "frame14-194-9adac16125deed4e104fdf1f2e105d20033e723025f39470536d0aba207a046c": {
+            "rows": 47,
+            "distance_MSE": 0.9048545760690295,
+            "NN_MSE": 1.390247676600375
+          },
+          "frame14-194-e35d9e88289e09362678d086e9e3c5a0750a00ca0fed3f64c66f1dbb6aada6ed": {
+            "rows": 46,
+            "distance_MSE": 1.0552529600768705,
+            "NN_MSE": 0.9915579159349143
+          },
+          "frame14-194-871072d47589dd1953750a5ae4973193e6a3b905e6f5e6b2075618a92bf7dd43": {
+            "rows": 47,
+            "distance_MSE": 0.3190040209542227,
+            "NN_MSE": 1.0335869457812543
+          },
+          "frame14-194-13775a908af0f04cf1313ae14652e2c81669149c5ded56e23a34a6c354647d7b": {
+            "rows": 39,
+            "distance_MSE": 0.3560022989197078,
+            "NN_MSE": 0.3044321825798492
+          },
+          "frame14-194-8496a07bf7ac03428d7f36dbc27234a22d6f9071e28c0969cd3712c69e74784c": {
+            "rows": 44,
+            "distance_MSE": 0.0980288489135584,
+            "NN_MSE": 0.04909192004954992
+          },
+          "frame14-194-844e7c9d8b749434def33892e8de8508fff961db1925bb3001eec7dbd702c62f": {
+            "rows": 66,
+            "distance_MSE": 0.3019276412467005,
+            "NN_MSE": 0.9185579258498073
+          },
+          "frame14-194-055f5e724aa0aeac151a13432c061b6c31d131348ac84cb0c4b049daf4f4dc9f": {
+            "rows": 70,
+            "distance_MSE": 0.4374993030326874,
+            "NN_MSE": 0.19078092462183158
+          },
+          "frame14-194-0bc03bc3369648d611058f9ac79cadb5165b83224e9ffa2b9940e8b33724b39b": {
+            "rows": 67,
+            "distance_MSE": 0.5011146932055449,
+            "NN_MSE": 0.7025443845831123
+          },
+          "frame14-194-1edcf6a11299e6fc014c0fcc013f7b6e8b260a072de7d8751f7d4b0e480a18ee": {
+            "rows": 53,
+            "distance_MSE": 0.8819570739731603,
+            "NN_MSE": 0.7043215231743055
+          },
+          "frame14-194-ef9e4acbb9408651e8e9688385378723f6a8e2b80837f5b731de1ab27e786bfc": {
+            "rows": 43,
+            "distance_MSE": 0.3806384358259908,
+            "NN_MSE": 0.7657791896343832
+          },
+          "frame14-194-ece4a978fc95aba80ef6d882eecf97be222dedc19c3c0404931fb1d004c82a84": {
+            "rows": 38,
+            "distance_MSE": 1.1131144768510306,
+            "NN_MSE": 0.2871246151549883
+          }
+        },
+        "NN_z_MSE_gameweighted": 1.003295824660345,
+        "distance_z_MSE_gameweighted": 0.8225350323496629,
+        "z_sign_gameweighted": 0.5571193168788425,
+        "z_valid_rows": 1248
+      },
+      "distance_recalibration": {
+        "rows": 1248,
+        "games": 24,
+        "planned_games": 24,
+        "zero_selected_games": 0,
+        "primary_rows": 1248,
+        "game_equal_conditional": true,
+        "distance_gameMSE": 0.48514681311997865,
+        "NN_gameMSE": 0.48453975797985477,
+        "delta_NN_minus_D": -0.0006070551401239905,
+        "NN_rowMSE": 0.4903769618192165,
+        "distance_rowMSE": 0.4893138665385534,
+        "eD_mean": -0.00020798936334936883,
+        "rNN_mean": 0.0008825662842617611,
+        "eD_RMS": 0.6965248115609225,
+        "rNN_RMS": 0.051481499684490936,
+        "residual_prediction_MSE": 0.48453975797985477,
+        "displacement_MSE": 0.0026503448097642407,
+        "alignment_cross_E_eD_rNN": 0.0016286999749441156,
+        "error_delta_decomposition": "E[rNN^2]-2E[eD*rNN]",
+        "weighted_centered_correlation": 0.04543244407984608,
+        "regression_slope_rNN_on_eD": 0.0033575067186624634,
+        "sign_agreement_weighted": 0.6813730084440417,
+        "sign_valid_rows": 1242,
+        "gain_games": 15,
+        "loss_games": 9,
+        "per_game": {
+          "frame14-194-22163a3bcfa300d36cae0f793b05feb681fe85387beaa41e52dcc580365787dc": {
+            "rows": 49,
+            "distance_MSE": 0.12794584368883208,
+            "NN_MSE": 0.1034159216183972
+          },
+          "frame14-194-5d101fbd606664267432328113536339dd1da744b1740d78f0bf9e80695ec15e": {
+            "rows": 80,
+            "distance_MSE": 0.32293142047404194,
+            "NN_MSE": 0.2872425627711297
+          },
+          "frame14-194-5af48ec6018c87d459599476e194da10d83422c80e1b456bf8b827b8b7985f5c": {
+            "rows": 36,
+            "distance_MSE": 0.31479992533838075,
+            "NN_MSE": 0.30841763505478637
+          },
+          "frame14-194-852bad3e61e8b6c92a4b60a11a2c9d6346626a4bfd0f576534957122f381f71f": {
+            "rows": 29,
+            "distance_MSE": 0.49902917170678984,
+            "NN_MSE": 0.46321723363672956
+          },
+          "frame14-194-1b03b6cab0b15904d8c145cb8167797be483a299b02c9e29b731243a02ff5bb8": {
+            "rows": 47,
+            "distance_MSE": 0.14153694517245147,
+            "NN_MSE": 0.11326285710159469
+          },
+          "frame14-194-c392f2e96abe6988359ca03cb8c282ff88ec0cee8e6b07b04537c8039155d561": {
+            "rows": 46,
+            "distance_MSE": 0.7883758894027051,
+            "NN_MSE": 0.7832364304791611
+          },
+          "frame14-194-d3b66fd8ed240ffe02656228e13a22a7ff6b92182b0f6568a472ac63cf4301df": {
+            "rows": 65,
+            "distance_MSE": 0.5965666706652463,
+            "NN_MSE": 0.6066613788776495
+          },
+          "frame14-194-819afd8b6da580f6e80fd2a7d04a0eb9fcfa1c39037dab6a91cebb0f7ce99c03": {
+            "rows": 33,
+            "distance_MSE": 0.06081867950570328,
+            "NN_MSE": 0.04836270801109971
+          },
+          "frame14-194-f4f8161893e55173ba82a69b94fccb03cdf2b6cdb6945d468fae2acb83910557": {
+            "rows": 52,
+            "distance_MSE": 0.5744517358149418,
+            "NN_MSE": 0.562795254456019
+          },
+          "frame14-194-7db87526b6afb52be5ad17acf86b828767079accbdb20395637c4b66d2223978": {
+            "rows": 73,
+            "distance_MSE": 0.9418060601771895,
+            "NN_MSE": 0.9750544779583454
+          },
+          "frame14-194-6330b1b80fb88bc233d15cca56b116239fc27dbac5faf9e4825061647f33c064": {
+            "rows": 42,
+            "distance_MSE": 0.22203037617433252,
+            "NN_MSE": 0.18893301649623198
+          },
+          "frame14-194-c4ff2ede01dc584be561afb9b8edaa7cd14c93a00683ad5b9f710b0c5e24f1a5": {
+            "rows": 64,
+            "distance_MSE": 0.4209682882012296,
+            "NN_MSE": 0.4669109469512959
+          },
+          "frame14-194-07914abb55b03cdc0e27b36020dd153d37fd2b8058823e4244f389c387081494": {
+            "rows": 72,
+            "distance_MSE": 0.2828681794891431,
+            "NN_MSE": 0.29998069405018796
+          },
+          "frame14-194-9adac16125deed4e104fdf1f2e105d20033e723025f39470536d0aba207a046c": {
+            "rows": 47,
+            "distance_MSE": 0.9048545760690295,
+            "NN_MSE": 0.9662312972713719
+          },
+          "frame14-194-e35d9e88289e09362678d086e9e3c5a0750a00ca0fed3f64c66f1dbb6aada6ed": {
+            "rows": 46,
+            "distance_MSE": 1.0552529600768705,
+            "NN_MSE": 1.1242488155383703
+          },
+          "frame14-194-871072d47589dd1953750a5ae4973193e6a3b905e6f5e6b2075618a92bf7dd43": {
+            "rows": 47,
+            "distance_MSE": 0.3190040209542227,
+            "NN_MSE": 0.30547997044446107
+          },
+          "frame14-194-13775a908af0f04cf1313ae14652e2c81669149c5ded56e23a34a6c354647d7b": {
+            "rows": 39,
+            "distance_MSE": 0.3560022989197078,
+            "NN_MSE": 0.31055236193680297
+          },
+          "frame14-194-8496a07bf7ac03428d7f36dbc27234a22d6f9071e28c0969cd3712c69e74784c": {
+            "rows": 44,
+            "distance_MSE": 0.0980288489135584,
+            "NN_MSE": 0.08433096198926976
+          },
+          "frame14-194-844e7c9d8b749434def33892e8de8508fff961db1925bb3001eec7dbd702c62f": {
+            "rows": 66,
+            "distance_MSE": 0.3019276412467005,
+            "NN_MSE": 0.32428374961870216
+          },
+          "frame14-194-055f5e724aa0aeac151a13432c061b6c31d131348ac84cb0c4b049daf4f4dc9f": {
+            "rows": 70,
+            "distance_MSE": 0.4374993030326874,
+            "NN_MSE": 0.41593636959460817
+          },
+          "frame14-194-0bc03bc3369648d611058f9ac79cadb5165b83224e9ffa2b9940e8b33724b39b": {
+            "rows": 67,
+            "distance_MSE": 0.5011146932055449,
+            "NN_MSE": 0.5040371103172155
+          },
+          "frame14-194-1edcf6a11299e6fc014c0fcc013f7b6e8b260a072de7d8751f7d4b0e480a18ee": {
+            "rows": 53,
+            "distance_MSE": 0.8819570739731603,
+            "NN_MSE": 0.8781431330001421
+          },
+          "frame14-194-ef9e4acbb9408651e8e9688385378723f6a8e2b80837f5b731de1ab27e786bfc": {
+            "rows": 43,
+            "distance_MSE": 0.3806384358259908,
+            "NN_MSE": 0.3430106340980515
+          },
+          "frame14-194-ece4a978fc95aba80ef6d882eecf97be222dedc19c3c0404931fb1d004c82a84": {
+            "rows": 38,
+            "distance_MSE": 1.1131144768510306,
+            "NN_MSE": 1.1652086702448912
+          }
+        },
+        "NN_z_MSE_gameweighted": 0.824798538578448,
+        "distance_z_MSE_gameweighted": 0.8225350323496629,
+        "z_sign_gameweighted": 0.7203262314712742,
+        "z_valid_rows": 1248
+      }
+    }
+  },
+  "samepass_parity": 0.0,
+  "full_analysis": "research-data/ai-sigma/frame16-fit-gap-analysis/residual-head-control/residual-analysis.json.gz",
+  "walls": "remaining stock",
+  "fixed_reference_lambda": 0.01,
+  "training_optimizer": 0,
+  "new_test": 0,
+  "conclusion": "train improvement; validation worse than distance/scalar reference; residual transfer insufficiency for this fixed readout",
+  "independent_phase2_effect_verified": false
+}
