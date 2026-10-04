@@ -1,0 +1,46 @@
+{
+  "pass": true,
+  "initial_full_tensor_exact": true,
+  "frozen_tensor_exact": {
+    "initial": {
+      "ft.weight": "068872dca58d6cd1101a73fb1f243140d893afe5174d22a4ba8793d3f11e019b",
+      "ft.bias": "8c11754728cf615be8c62f4a8845bc4c62b8ca9df220d37883988bccc06178c2",
+      "h.weight": "2015ef693edefb3e99549b9ae8c0c3c18c5e26e6db3629c8311213450620d7dc",
+      "h.bias": "e29963d8f91e447b609b8fa1a78749c04d4babb506f856111a0c85b436f6b812",
+      "distance_a": "1e1e772850f87878008228172c7b7b616c1813125824f62838001c4cd22b466d",
+      "distance_b": "a7247952e4de8445e458b1b7e424a50a8f4f89c275bc0da72904a4ed5b6e5fb8"
+    },
+    "best": {
+      "ft.weight": "068872dca58d6cd1101a73fb1f243140d893afe5174d22a4ba8793d3f11e019b",
+      "ft.bias": "8c11754728cf615be8c62f4a8845bc4c62b8ca9df220d37883988bccc06178c2",
+      "h.weight": "2015ef693edefb3e99549b9ae8c0c3c18c5e26e6db3629c8311213450620d7dc",
+      "h.bias": "e29963d8f91e447b609b8fa1a78749c04d4babb506f856111a0c85b436f6b812",
+      "distance_a": "1e1e772850f87878008228172c7b7b616c1813125824f62838001c4cd22b466d",
+      "distance_b": "a7247952e4de8445e458b1b7e424a50a8f4f89c275bc0da72904a4ed5b6e5fb8"
+    },
+    "last": {
+      "ft.weight": "068872dca58d6cd1101a73fb1f243140d893afe5174d22a4ba8793d3f11e019b",
+      "ft.bias": "8c11754728cf615be8c62f4a8845bc4c62b8ca9df220d37883988bccc06178c2",
+      "h.weight": "2015ef693edefb3e99549b9ae8c0c3c18c5e26e6db3629c8311213450620d7dc",
+      "h.bias": "e29963d8f91e447b609b8fa1a78749c04d4babb506f856111a0c85b436f6b812",
+      "distance_a": "1e1e772850f87878008228172c7b7b616c1813125824f62838001c4cd22b466d",
+      "distance_b": "a7247952e4de8445e458b1b7e424a50a8f4f89c275bc0da72904a4ed5b6e5fb8"
+    }
+  },
+  "trainable_names": [
+    "out.weight",
+    "out.bias"
+  ],
+  "trainable_parameters": 33,
+  "optimizer_head_only": true,
+  "initial_distance_parity": {
+    "rows": 5901,
+    "max_abs": 9.404309009308776e-08,
+    "max_residual_abs": 0.0,
+    "pass": true
+  },
+  "extra_model_forward": 0,
+  "outerclip_gradient_constraint": "same as200; outside clip gradient0",
+  "read_train4653_validation1248_only": true,
+  "old_test_read": false
+}

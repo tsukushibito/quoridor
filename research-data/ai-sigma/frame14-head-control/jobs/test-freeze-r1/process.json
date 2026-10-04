@@ -1,0 +1,36 @@
+{
+  "id": "test-freeze-r1",
+  "kind": "static",
+  "UTC": "2026-10-04T02:24:39.930044+00:00",
+  "identity": {
+    "pid": 3916252,
+    "ppid": 3916199,
+    "pgrp": 3916252,
+    "tick": "33364355",
+    "RSS": 0,
+    "cmd": "",
+    "affinity": [
+      2
+    ]
+  },
+  "command": [
+    "python3",
+    "-B",
+    "tools/ai-sigma-qf1-head-control/freeze.py",
+    "--manifest",
+    "research-data/ai-sigma/frame14-head-test/canonical-export-r1/dataset-manifest.json"
+  ],
+  "wall_seconds": 0.05948833201546222,
+  "peak_family_RSS": 21823488,
+  "exit": 0,
+  "reason": "completed",
+  "child_waited": true,
+  "remaining": [],
+  "current_exact_identity_absent": true,
+  "samples_charged": 0,
+  "sample_cap": 0,
+  "CPU": [
+    2
+  ],
+  "GPU": 0
+}
