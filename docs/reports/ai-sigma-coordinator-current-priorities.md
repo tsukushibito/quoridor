@@ -106,3 +106,18 @@ exp203へ固定距離coef(199train-fit)・QF1 graph定義/f32 valueを直接使�
 203後報: 実arena科学開始2026-10-04T01:51:23.924538Z、admission01:50:53.185859、PID3890419/tick33161599、source48c7e73f146e。fresh4固定/参照NN上限80000/候補NN0/GPU0/core2,4+管理0/guard3.5GiB。自然CPU0監督を停止せずlight管理の診断条件。前段の「実game未開始」は当時の準備報告、現在は実行中・結果/棋力/全期間遵守未判定。本人exp203から全slot結果/費用/停止報告待ち。
 
 203全4診断終了: owner最終guardian science_start01:50:53.186618Z/stop01:51:44.755268Z、先の01:51:23.924538 pool identity報告UTCとは計測scopeを分け両保存。distance-alpha候補1W3L/unknown0/all4GOAL/201requests/型invalid0/候補NN0/参照NN8840 startup2別。完成depth2/3/4=37/38/25・depth0fallback0/public409.605–413.457ms、allattemptguardian53.339673s/peakRSS1.457GB/全子wait・remainingexact空。機能接続の有限進展、棋力NI/学習NNUE利益認定0。exp203はprefix検算/pack/Git byte/backup/finalhandoff担当を継続、新対局/設定変更自動追加0。計測済depth/壁分岐から次一判別案を受け、追加gameで4局の不確かさを救済しない。
+
+
+## 203受入れとNNUE学習の次の一判別
+
+203 report/arena-summary/science-stopの evidenceGit b328fa9bとcurrentbytesを統括確認し停止/54archive member復元/backupを有限受入れ。4fresh診断は1W3L/unknown0/全4GOAL、prefix249/hand201共有RuleA有限replay、型invalid0/fallback0/late3破棄。全attempt probe/mock/science63.051643s、science53.339673s、保存含む測定subtotal135.261281s・未計測管理CPU/LLMはunknown。対局等価な時計の有限動作と実効果を区別し、Sigma NI/NNUE学習成功へ格上げ0。
+
+NNUE学習の未見利益がまだないため、203のdistance-ordering案を後続search候補に保持し、202の凍結下層＋head-only1条件を次主判別として採用。200λ.1推論縮小案は競合保留、全案並走/sweep0。head容量だけ小さくし同200初期tensorのFT/hiddenを固定、out33parameterだけ同Adam.001/同96train4653+val1248/256000sample/21curveで学習する。距離基準よりvalを改善するかを見て容量/更新への有限感度を判別し、原因を一意にはしない。
+
+204hypothesis actualdelivery02:10:37turn/start、205experiment actualdelivery02:10:51turn/start accepted。本人受領/claim/静的/実NN成功は別追報。205はfresh24の静的manifestだけ先固定、204 BEST>0/weight!=initial/val<distance.48514681311997876−1e-4/schema/科学source停止が全部trueの場合のみ同GPU24/K64一度。新test露出maskはold194144+old20124label-free署名基準ORで固定、test選別/旧test再開0。gate未達なら全24NOT_STARTED科学0で終了し、同NNUE小調整の自動連鎖を増やさない。
+
+204 new8MiB/guard6はhyp64MiB内 combined57,956,426<58,720,256、205 new32MiB/guard28はexp1980MiB unused内。旧195/197/200/201/203の保持減額/予約未確認返却/parent追加0。CPU学習とGPU生成は本人current非競合、204train開始02:25/停止02:30、205newheavy02:45/停止02:55、最終CPUtest03:00開始まで/03:05停止/03:15提出で親期限早側。担当hyp204が次science/gate、exp205が条件付きmetadata/science/stopを報告。200/203closeはこの新実taskturnへ、202はaccepted idle owner次実課題までclose待ち、再承認待ち無し。
+
+後続Beads point確認: 200/203は新204/205の本人実taskturnでclosed、204hyp/205expとも本人担当in_progress。実静的/NN開始/科学成功は本人明示reportを待ち、issue状態だけで認定0。rootへ02:12:58 material方向報告turn/start accepted、通常再確認を要求0。
+
+204本人後報: 02:10:51受領時計維持、200本人close/backup0後ready/show/no pause/claim・実静的準備開始。actual新NN0/GPU0/生成0、private head33 adapterと元200初期tensor52bfc752/frozen下層保持/同379921sampleを準備、source AST/argv/mock後に本人直前admitで一学習。最大現障害なし、科学開始/完了/gateをhyp204待ち。
