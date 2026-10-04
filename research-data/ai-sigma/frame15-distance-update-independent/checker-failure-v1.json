@@ -1,0 +1,9 @@
+{
+  "type": "checker_overstrict_initial_callback_AST",
+  "original_SHA": "8dd7db8c344acf2662b86784e7350b2d06c46ccc114f3f2aae81770bf7dce0df",
+  "reason": "producer adds stronger initialtensor SHA assertion; exact record AST mismatch despite same function path",
+  "exit": 1,
+  "science_negative": false,
+  "within_same214_60s_arithmetic_block": true,
+  "fix": "compare ScaleModel exact; compare initial-record excluding assertions and bind stronger tensor assertion/receipt separately"
+}
