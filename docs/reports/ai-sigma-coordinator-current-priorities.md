@@ -1,6 +1,6 @@
 # 現在のNNUE研究優先順位（frame18）
 
-2026-10-04 11:23UTC。現在の主配分は228独立game段階増量→低LR標準化NNUE学習→最大1候補freeze後の新test、229独立裁定、227私有dynamic manifest adapter準備。追加225負荷均衡scienceは打切り・225/226は停止保存引渡し。三model science実到達/censor・原counterUNKNOWNを未開始へ改竄しない。228の11:14:24本人claim/in_progressと新scope静的開始/API現SHA一致を確認。229新実steeraccepted/選定前見解を受領、本人claimは次点照合。新生成/学習結果はまだ未観測。
+2026-10-04 11:53UTC。主配分は228独立game段階増量→低LR標準化NNUE学習→最大1候補freeze後の新test、229独立裁定。228validationの48chunk二jobは終了・全子wait/currentexact不在、計272858NN/334.530891sをownerから受領。適格教師量の資格は未集計、新学習は未開始。225/226停止有限受入れ、225本人closed、227私有adapter/API/32合成checks受入れ（holder idle、close専用turnなし）。root230背景job/Idle-only完了再開を次の未開始228長時間jobへ採用する薄接線を実配分、現job移管なし。root20人工testsはPASS、実研究jobのIdle/通知は実利用確認待ち。
 
 明示新4hは開始10:33:18固定/終了14:33:18UTC、新heavy14:23:18/監督14:28:18/monitor14:31:18。CPU計算合計4論理/RAMcurrent8GiB/保持+有効予約unused12GiB/GPU推論6GiB・各job30min、GPU学習は旧累積2h確認未使用のみ。同saved6role/model-effort-cwd、LLM人数gateなし/Supervisor max_turn_seconds=null、pause/実所有/正runtime/子回収を維持。旧run/費/失敗/成績/個別期限reset0。親mainmirror・運用sourceのsolewriterは92、coordinator編集0。旧開封test選定復帰0、173正式198非学習、共有環境/toolchain/model取得/製品統合/push公開0。最高棋力・未見学習利益は未達。
 
@@ -33,3 +33,9 @@ Supervisor10:46の改善投資Cへ比較・失敗・資格保存を含める指�
 229新選定前指摘を採用:同samples比較に加え既small400/large1200の非選定secondary等期待samples/game（192576なら266.7）を曲線前固定。量branchはsmall400 anchorにnearest savedstep/G_large、距離/typedmissing保存、追加NN/fit/point/結果後pair選択なし。228へ11:21:47active実配送、主要best/freeze不変更。必要増量は7x96manifestでprocess数固定ではなく、provider307200を守る48等の結果前chunk分割を元2.2m/heavy5400s内で許す。
 
 227必要11Gitbyte/currentSHAを有限受入れ、source/32syntheticchecks/API引渡し完了。owneridleにつきclose専用turn0、holder保護で統括assign/closeが拒否されforce/reclaim/代理actorなし、Beadsに受入れ根拠保存して原owner維持。226必要5Gitbyte/independent zero completecomparisons/source子停止を有限受入れ、旧180/260/late7s偏差とjq管理失敗保持、229実質turn内ownerclose可。これらの管理確認器例外は原producer科学結果を変えない。
+
+root230の背景job実装を採用。主checkout sourceGit288c325、scripts/dev/research-job.py/sh、test/example/docsのみ追加、既scheduler/team/common/registry/228source不変更。人工CPU0単1/fakeRPC試験11:41:57.487681–11:42:04.038652/6.550977s/20PASS/exit0wait、NN/GPU/実研究turn0。root230本人closed/backup。228validation chunk2終了11:38:19.658498/runner107738 tick36670693 exact不在をowner11:39:48・統括11:40:46に確認しテスト窓を留保、解除は11:50:45.929311同active steer accepted。留保elapsed（通信/LLM待ち）を人工試験CPU6.55sと分ける。
+
+次の未開始長時間jobは /workspaces/quoridor/docs/development/research-jobs.md のsubmit→job ID/dir/次判断Beads保存→本人turn終了Idle→完了idle-only再開を適用する。228solewriterが自域config/state-dirと既guardianのcurrentancestor/owner identityへ背景supervisor+commandを薄接線、source版/全attempt/管理CPU・RAM/log/保存を既予算内へ保存。現在生成は移管/interruptしない。pause/所有/digest/end/応答不明保護を継承し、接線不足は具体化して元方式で継続、全稿ACK/人工suite再試験/新科学条件を入口gateにしない。root手順の実配送とproduction Idle/通知成立を区別し、次jobで実到達を確認する。親・個別期限/NNcap/量/13:05branch不変更、92運用source変更なし。
+
+11:54UTC background-gen-r1の公開管理receiptを点読取。jobc7b7cec2…child11:48:47→11:48:58 failed/exit1/11.087867s/remaining[] cleanup_complete。guardian公開receiptはtest96-chunk1-r1/10.945371s/1623NN/allwaitexact不在、test raw/labels未読。queueのCalledProcessErrorは根原因不明の終了伝播。notificationはrecipient_not_idleでpending、実Idle/完了再開は未確認。通常修復・原失敗/全分母/NN費保存は228ownerへ返し、13:05生成stop/branchと外側13:07cleanup endを区別。背景tool採用・子終了確認を科学成功にしない。

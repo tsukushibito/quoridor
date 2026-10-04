@@ -1,0 +1,47 @@
+{
+  "UTC": "2026-10-04T11:53:42.411687+00:00",
+  "observations": {
+    "state.json": {
+      "schema_version": 1,
+      "job_id": "c7b7cec2-9956-4c71-a7a0-c4d6bcd7ce14",
+      "issue": "quoridor-4lc.228",
+      "thread_id": "01a0f31d-6d15-7620-bb63-4b4f878e4746",
+      "phase": "finished",
+      "created_at": "2026-10-04T11:48:44.392807+00:00",
+      "config_sha256": "ffdd10f96f3d30003c604d5a155a4f197089174c384ae940c531e10e7198a0c8",
+      "supervisor": {
+        "pid": 118373,
+        "start_ticks": "36750687",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "updated_at": "2026-10-04T11:48:58.572286+00:00",
+      "child": {
+        "pid": 118448,
+        "start_ticks": "36750993",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "started_at": "2026-10-04T11:48:47.476809+00:00",
+      "outcome": "failed"
+    },
+    "result.json": {
+      "job_id": "c7b7cec2-9956-4c71-a7a0-c4d6bcd7ce14",
+      "outcome": "failed",
+      "error": null,
+      "exit_code": 1,
+      "finished_at": "2026-10-04T11:48:58.560371+00:00",
+      "wall_seconds": 11.087866561021656,
+      "remaining": [],
+      "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+      "cleanup_complete": true,
+      "log_bytes_seen": 1273,
+      "log_bytes_retained": 1273
+    },
+    "notification.json": {
+      "status": "pending",
+      "updated_at": "2026-10-04T11:53:42.022383+00:00",
+      "reason": "recipient_not_idle"
+    }
+  },
+  "coverage": "public background management only; test payload/labels unaccessed",
+  "conclusion": "command exit1 cleaned; idle-only notification correctly pending while recipient active; productionIdle delivery unconfirmed"
+}
