@@ -1,0 +1,108 @@
+{
+  "task": "native-234-saved-v1",
+  "schema": "native-independent-result-v1",
+  "PASS": true,
+  "inputSHA": {
+    "research-data/ai-sigma/frame18-native-connection/science-stop.json": "54618c6654e45228faa8b620a57b94809bdbbf93ab3c437082b105c07c9f9bed",
+    "research-data/ai-sigma/frame18-native-connection/weight-manifest.json": "9bc786e82c3b73a462da4a30e1d884678ef9f7bdb757560dd6bb437fa4b25d40",
+    "research-data/ai-sigma/frame18-native-connection/parity-result.json": "3d7681f01f1f9ae23a818db98eb133e0f0ac1a651cbfc238b02d2404de73bcd7",
+    "research-data/ai-sigma/frame18-native-connection/native-parity.json": "d668d625685905e1fe58a685b4daea7660b9173a12753b8781acb7495a47c8de",
+    "research-data/ai-sigma/frame18-native-connection/search-result.json": "254b1a49c913f7b0f97c2e40ed882f7417297caf406c644a46737c2fd9362baf",
+    "research-data/ai-sigma/frame18-native-connection/fixed-fixtures27.json": "66d3ea8607ca9f6215517712e750a2196c062e3664e449ac533bd778df99d8cc",
+    "research-data/ai-sigma/frame18-native-connection/torch-fixtures27.json": "10b1245ff2ce370980c8ae3b5d851292ea08e1352964c309f526e11979955291",
+    "research-data/ai-sigma/frame15-input-scale-control/scale.json": "68f8b43a0e4408a1546f8fa2652ffdf21f1f7bdcfbac9a25a86ac666b27aa4ee",
+    "research-data/ai-sigma/frame18-native-connection/guardians/parity-r1/process.json": "2b4b7eabdf998a69fd1402be618a95e84cb93ccdfcdaf341a654ba8311396a27",
+    "research-data/ai-sigma/frame18-native-connection/guardians/search-r2/process.json": "acf7d4ba8cade369752aa2ddf2af6ff22514dcc07f6df99a56df35a76c3d244e",
+    "research-data/ai-sigma/frame18-native-connection/search-premodel-failure.json": "c2f20f42c8a1363054b7825d45023d1fabe7d50fafe14ad01b0df688b7abeb0f"
+  },
+  "packing_sizes": [
+    9984,
+    32,
+    2112,
+    32,
+    32,
+    1
+  ],
+  "finite_f32_count": 12193,
+  "fixture_P2_relation_checked": 27,
+  "saved_Torch_native_maxabs": 8.940696716308594e-08,
+  "full_delta_maxabs_receipt_only": 1.1920928955078125e-07,
+  "all_children_receipt_bound": 515,
+  "root_diagnostics": [
+    {
+      "id": "initial-p1",
+      "NNUEdepth": 1,
+      "Ddepth": 2,
+      "NNUEAction": 148,
+      "DAction": 13,
+      "same_action": false,
+      "NNUEprocessed": 2048,
+      "rejected_entry": 1
+    },
+    {
+      "id": "asym-hv-p2",
+      "NNUEdepth": 2,
+      "Ddepth": 2,
+      "NNUEAction": 67,
+      "DAction": 67,
+      "same_action": true,
+      "NNUEprocessed": 501,
+      "rejected_entry": 0
+    },
+    {
+      "id": "straight-jump-p2",
+      "NNUEdepth": 2,
+      "Ddepth": 2,
+      "NNUEAction": 31,
+      "DAction": 31,
+      "same_action": true,
+      "NNUEprocessed": 1039,
+      "rejected_entry": 0
+    },
+    {
+      "id": "fixed-legal-diagonal-p1",
+      "NNUEdepth": 2,
+      "Ddepth": 2,
+      "NNUEAction": 48,
+      "DAction": 48,
+      "same_action": true,
+      "NNUEprocessed": 893,
+      "rejected_entry": 0
+    }
+  ],
+  "cost": {
+    "scientific_NN": 5142,
+    "Torch_parity": 27,
+    "native_parity": 1057,
+    "native_search": 4058,
+    "guardian_s": 2.5821657549822703,
+    "root_wholewall_ms_sum": 560.7184311151505,
+    "search_whole_ms": 574.9793130159378,
+    "nonexclusive_spans_ms": {
+      "terminal_ms": 335.66853046417236,
+      "legal_and_order_ms": 20.017612278461456,
+      "state_copy_next_ms": 59.0410258769989,
+      "accum_input_ms": 54.36090022325516,
+      "evaluator_ms": 79.45598405599594
+    },
+    "terminal_span_largest": true,
+    "initialization_recording_cleanup_not_rootspan": true,
+    "premodel_management_s": 4.3165863520116545,
+    "premodel_NN0_source_supplement": 0,
+    "original_missing_counter_retained": true,
+    "background_wait_s_not_added": 395.5360161360004,
+    "total_team_management_UNKNOWN": true
+  },
+  "newNN": 0,
+  "limits": [
+    "No current forward, PT tensor-content reauthentication or full deep/minimax truth",
+    "SharedRuleA/P2/state fixture and full-delta receipt source dependency retained",
+    "Parent-copy restoration is not mutable undo certification",
+    "Rootmean is not exact leaf utility; history absent from model",
+    "Fixed order/warmcache and unequal completed depths prevent samewall strength claim",
+    "229 final curve/test/bootstrap remains NOT_RUN; not rerun here"
+  ],
+  "next_max1": "Existing profiler points to terminal/legal-check cost: consider one reuse intervention with unchanged legality/history before wider policy or TT; no new job in234",
+  "calc_s": 0.005596834002062678,
+  "peakRSS": 18243584
+}
