@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-native-independent/check-clock-arena.py", line 25, in <module>
+    assert status==('W'if x['winner']==x['NNUE_side']else'D'if x['winner']==0 else'L');assert all(r['clock']['status']=='RECEIVED'for r in rr)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
