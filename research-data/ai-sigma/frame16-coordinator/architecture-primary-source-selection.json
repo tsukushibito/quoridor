@@ -11,5 +11,17 @@
     "Sigma C++ reusable generator portions after exact rule/interface gap",
     "more input supply/activepool with resource checks"
   ],
-  "switch_condition": "small graph wholejob gain or low recovery: increase array/pump priority; do not preserve topology for its own sake"
+  "switch_condition": "small graph wholejob gain or low recovery: increase array/pump priority; do not preserve topology for its own sake",
+  "direct_cpp_core_followup": {
+    "UTC": "2026-10-04T08:32:48.021610+00:00",
+    "links": [
+      "https://github.com/bartolomeo3000/SigmaQuoridor/blob/751186344fc52ad0c29bc65922e62c6fa915f006/cpp/selfplay.hpp",
+      "https://github.com/bartolomeo3000/SigmaQuoridor/blob/751186344fc52ad0c29bc65922e62c6fa915f006/cpp/engine.hpp",
+      "https://github.com/bartolomeo3000/SigmaQuoridor/blob/751186344fc52ad0c29bc65922e62c6fa915f006/setup_cpp.py"
+    ],
+    "checked_scope": "selfplay Config, workerqueue, select_child, backup, rootinit, get_data; engine file opened without full encoding audit",
+    "differences": "float prior/value_sum and float PUCT versus current f64; rootexpansion separate from num_simulations with initialrootbackup, cannot map K64 blindly; virtualvisits, TT/noise/PCR/solver/temp; get_data states/policies/z/plies only vs current rootNN/rootmean/history/lineage teacher witness, additional export needed",
+    "reusable": "GIL-free ready-game workers/shared inferencequeue/array batch-ID routes; need faithful settings/core and teacher boundary verification before speed equivalence",
+    "no_build_download_model_import": true
+  }
 }
