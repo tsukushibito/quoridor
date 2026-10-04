@@ -17,7 +17,7 @@ def table():
 
 def usage():return sum(p.stat().st_size for root in [T,D]for p in root.rglob('*')if p.is_file())
 assert time.time()<end('2026-10-04T09:15:50Z'),'NEWHEAVY_DEADLINE'
-reg=json.loads((D/'preregister.json').read_text());binding=json.loads((O/'source-freeze-v2.json').read_text())
+reg=json.loads((D/'preregister.json').read_text());binding=json.loads((O/'source-freeze-v3.json').read_text())
 for p,h in {**reg['readonly'],**binding['files']}.items():assert hashlib.sha256((R/p).read_bytes()).hexdigest()==h,('SOURCE_CHANGED',p)
 controls=[]
 for issue in ['quoridor-4lc','quoridor-4lc.221']:
@@ -30,10 +30,13 @@ if sch['owned']is None:assert quiet is not None and quiet>=c['job_seconds']+30,'
 # Existing actual script/process admission below must still show no foreign science/critic compute.
 if sch['owned']is not None:assert c.get('allow_owned_LLM_with_physical_guard')is True,'CURRENT_OWNED_PHYSICAL_POLICY_REQUIRED'
 assert c.get('runtime_loaded'),'NEW_RUNTIME_BINDING_REQUIRED'
-loadedpath=Path(c['runtime_loaded']);loaded=json.loads(loadedpath.read_text());assert loaded['parent_version']==17
+loadedpath=Path(c['runtime_loaded']);loaded=json.loads(loadedpath.read_text());assert loaded['max_turn_seconds'] is None and loaded['period_seconds']==1200
+for ip in ['.artifacts/research-team/scheduler-sigma-continuation-20261001/config.json','.artifacts/research-team/scheduler-sigma-continuation-20261001/contract.json']:
+ pass
+assert loaded['parent_sha']==hashlib.sha256((R/'docs/design/ai-sigma-continuation-20261001.md').read_bytes()).hexdigest(),'CURRENT_PARENT_BINDING'
 monitor=Path(c.get('runtime_monitor')or str(Path(loaded['run'])/'monitor-observation.json'));mon=json.loads(monitor.read_text());assert time.time()-monitor.stat().st_mtime<120,'CURRENT_MONITOR_STALE'
 for role in ['scheduler','monitor']:
- z=loaded[role];actual=table().get(z['pid']);assert actual and str(actual['tick'])==str(z['start_ticks']),'RUNTIME_CURRENT_IDENTITY'
+ z=loaded[role].get('process',loaded[role]);actual=table().get(z['pid']);assert actual and str(actual['tick'])==str(z['start_ticks']),'RUNTIME_CURRENT_IDENTITY'
 current=[];foreign=[];rss=0
 for pid,z in table().items():
  if pid==os.getpid() or z['state']=='Z':continue
