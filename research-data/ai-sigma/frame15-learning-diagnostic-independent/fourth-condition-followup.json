@@ -1,0 +1,31 @@
+{
+  "UTC": "2026-10-04T04:24:15.397533+00:00",
+  "issue": "quoridor-4lc.210",
+  "coordinator_finite_acceptance": "original3-condition arithmetic accepted; retainowner for fourth",
+  "previous_static_charge": 120,
+  "static_cap": 180,
+  "remaining_static": 60,
+  "fourth": {
+    "seed": 19080312,
+    "change": "joint initialization and sampling",
+    "LR": 0.0001,
+    "steps": 400,
+    "points": [
+      0,
+      100,
+      200,
+      400
+    ],
+    "primary": "step200 minus own step0",
+    "secondary": [
+      100,
+      400
+    ],
+    "planned_samples": 74804,
+    "all_four_planned_samples": 405434
+  },
+  "status": "await fourth stop/compact observations",
+  "next_admission": "fresh owner/current exact PID-starttick/RSS/supervisorowned/nextCPU0window; no heavy overlap",
+  "new_test_or_model_forward": 0,
+  "deadline_reset": false
+}
