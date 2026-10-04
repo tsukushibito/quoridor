@@ -1,0 +1,35 @@
+node:assert:152
+  throw new AssertionError(obj);
+  ^
+
+AssertionError [ERR_ASSERTION]: goal-side1
+
+{
+  value: 1,
+  winner: 1
+}
+
+    at compare (/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame19-leaf-terminal/fixtures.cjs:5:179)
+    at Object.<anonymous> (/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame19-leaf-terminal/fixtures.cjs:7:200)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: { winner: 1, value: 1 },
+  expected: { winner: 1, value: 1 },
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.21.0
+Traceback (most recent call last):
+  File "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame19-leaf-terminal/run.py", line 4, in <module>
+    subprocess.run(['/home/vscode/.local/bin/node',str(T/'fixtures.cjs'),sys.argv[1]],check=True)
+  File "/usr/lib/python3.11/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/home/vscode/.local/bin/node', '/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame19-leaf-terminal/fixtures.cjs', '/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-leaf-terminal/fixture-profile-settings-r1.json']' returned non-zero exit status 1.
