@@ -1,0 +1,14 @@
+{
+  "main_HEAD_read": "path untracked in main HEAD; expected baseline verified by direct pre195 Git blob",
+  "bounded_history_lookup": {
+    "command": "git log -6 ... -- docs/development/nnue-training.md",
+    "error": "empty filename in tree entry",
+    "resolution": "no history repair; direct c27b305^ doc blob matches main before bytes"
+  },
+  "all_history_audit": false,
+  "receipt_git_check": {
+    "initial_exit": 2,
+    "reason": "Unified diff evidence contains whitespace-only context lines; encode the same patch as JSON",
+    "source_doc_changed": false
+  }
+}
