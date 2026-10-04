@@ -1,0 +1,28 @@
+{
+  "samples": 382075,
+  "train_samples": 256000,
+  "all_training_with_evaluations": 379921,
+  "test_samples": 2154,
+  "warm": 0,
+  "heavy_wall_s": 6.773887429037131,
+  "manager_static_wall_s": 9.946437406004407,
+  "peak_family_RSS_B": 797757440,
+  "CPU": [
+    2
+  ],
+  "torch_threads": 1,
+  "GPU": 0,
+  "all_children_waited": true,
+  "current_exact_remaining": [],
+  "jobs": [
+    "evaluator-preflight-r1",
+    "curves-r1",
+    "candidate-freeze-r1",
+    "test-freeze-save",
+    "test-freeze-r1",
+    "test-r1",
+    "train-r1",
+    "preregister-save",
+    "preflight-r1"
+  ]
+}
