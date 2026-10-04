@@ -11,3 +11,5 @@
 CPU0単1/RAM1GiB、既128MiB予約/112MiB guard内でcurrent保持約34MiBと新runforecast8MiB（source/Git/短期metadata2MiBを含む）を分けてadmit。追加予約/親増額/未知減額/科学実行なし。旧supervisor保持を歴史量として残し、新frame開始以降のallocatedと分ける。main/研究default indexは開始前SHA一致。親相対リンクは各checkoutで存在確認。監視source書込停止、短期子は回収、意図的長期2PIDのみ継続。
 
 14:23:18新heavy開始停止通知、14:28:18正owned監督turnとscheduler停止、14:31:18monitor回収、14:33:18必要証拠保存を同92ownerが所有しin_progressを維持する。起動受入れと自然点検の効果・未来全期間成功・外部NN停止・科学成功は別に扱う。研究静的開始を旧運用全史の確認待ちにしない。
+
+初回自然6fcf4c84/turn01a10683は公式completed/errornull、observe→判断→notes/backup→統括への報告accepted/自己子reapedまで到達した。新225/226/227を動的発見し配分を点検。これは監督1回の有限成立で、研究効果・後続全期間・未来停止は未認定。goal冒頭の旧枠記述と現契約の差は監督が統括へ既経路で報告しており、92は統括所有のgoal本文を変更していない。
