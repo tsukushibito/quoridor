@@ -112,3 +112,22 @@ Codec平均79.305334秒/旧graph85.727065秒、wall比.925091（約7.5%短縮）
 科学source Git48c51dbdeef4b7e114e015ecddc6c429d03c24dd、payload7595553c1a39bf5871a821769adcbf06c19ab332。archive4,571,827B/SHAb0fbba8082ae97e3e968a6c1f86dd632397654c147f4ca4324d02fbea82b61bb、全member byte復元PASS。新64MiB/guard56MiBは既pool内、旧128MiB/phase2forecast116807935B保持・unknown減額/親追加0。defaultindex/privateindex不変更。科学/源停止と必要保存helper作業を区別し、222旧phase1の独立支持を新codecへ拡張しない。
 
 phase3保存段階の追補: report/scenarios Git byte復元2.392360秒を96実行gameへ配賦すると1000局の既知全工程見込みは29.0676分＋未分離dispatch/backup/後続小receipt・production scale費。前の28.6523分を置換せず保存stageを追加した。新actual38,281,105B＋authorized uniqueGit上界6,980,370B＋temp/metadata見込5,242,880B＝50,504,355B<56MiB。新64MiB予約と旧128MiB保持を別会計し、未使用返却0/未知減額0。
+
+
+## phase4 新96lineage・全費段階測定
+
+同停止codecGraph/provider/broker/worker/adapterをSHA束縛してreadonly再用し、新96gameのmanifest・count/metadata対応だけを私有追加した。新entropy/domainのfamily/actionseed各96、opening8/12/16/20/24/28各16、core2/4/6各32/各8handle・GPU24active/B8/.25msflush/K64/root64edge63/tau1最初16newply→argmax/200cap/d790を維持。categoryを各ply一度.5で選び、その合法class内をuniform、最大256proposalのfirstacceptedで全96合法非終端を結果前固定した。旧48benchmark generatorはlegalfilter内でRNGを呼ぶ版なので、今回との入力分布差も明示し旧source/成績を修正していない。全tree1pending・教師定義は不変更。Opening SHA8fff4511f2afeb0a995395fd86be188afed7ac463415eba7a1e637437cd193d0。旧432parityを再forward0、同provider SHAに対して再用。
+
+初回Node管理入口09:25:58.743→.901はforeign-compute guardで停止。登録games/provider-init/corestart未作成で、frozen source順序がm.start(Beadsread)→登録file→provider spawnなのでmodel/NN/game未開始と有限特定した。元processのsampleUNKNOWN/nullは上書きせず、before-model-proof補足へ0NNを保存。検出元をログしていないためexactoriginは未知である。snapshot直後の自owned Beads-read孫childをforeignと誤分類し得るprivateguardianのraceを、currentancestor/PIDtickで照合するprospective管理修復へ。元失敗source/Git/log/1.860330秒は保持、成功science置換は0、他owner interrupt0。
+
+初回モデル科学09:29:43.280→09:34:34.433、guardian293.226300秒/exit0/全96GOAL、Rpolicy=Rz=Rjoint=4603、fault/censoring/NOT_STARTED/unknownz0。各4603手のRuleA replay・特徴history/合法P2Action・root64edge63/π・終局z資格PASS、qualification1.946766秒。Logical NN262849/terminal-noNN31743（計4603×64）、graphstartup108 equivalent含め262957、新phase4 extra NN0、総832417/900000。管理失敗1.860330も含む新allattempt295.086630秒、旧UNKNOWN保守10秒を含む総heavy998.756835/1800を保持。全子wait/currentexactabsence/source停止。sampled familyRSS2.322GB、Torch allocator reserved369.10MB、full driver/context瞬間peak未計測。
+
+新density47.947917joint/game、15.697773joint/s/0.327392game/s、effectiveB7.0795（fullB8 30280batch/partial6848）。cold firstgame4.201293秒、last8tail50.162193秒/last24tail82.860080秒。provider pipe272.009秒/queue累積2533.895秒/forward同期128.065秒/input parse18.927秒/H2D18.727秒/D2H13.437秒、stdout actualwrite34.927秒/encodeonce3.180秒、request1.072GB/reply191.416MB。各spanは重なるのでwholewall/純GPU/hostlaunch/単独原因へ合算しない。Broker maxpending24と各worker8のsource/runtime制約を保存。UTC start＋local elapsed復元のraw active peak26は混合clockの近似でactualhandle26とは認定していない。
+
+全96/4603rowを旧停止QF1入力replayと共有canonical_model_input/feature_signatureでexportした。Metadataと新dataset labelsを別path、roleはevaluation-only datasetcandidateでtrain/val/testへ未割当・学習混合0。Legacy exporterのconsoleにtest-owner字句が残るが、このdataを独立test/OS全人隔離とは認定しない。旧194all144と旧201fresh24のlabel-free metadataに対するstate OR RuleA-history OR実STM f32QF1入力共有0/4603、new内先行rowの署名共有7/4603。参照範囲限定の露出記述でIID・全state/history無共有を証明していない。旧test label/results/173正式非読取。Dataset manifestと全96safe statusを保存し、将来分割/量検証へ再用候補とする。
+
+1000局job-only50.9073分。qualification/pack/member復元.711055秒/payloadGit byte復元4.746201秒までの既知費込み52.1928分＋exportの未分離wall/final保存/dispatch/backup/scale費。必要行率60分13.318866、30分26.637731に対し実15.697773。60分初期は短外挿見込み内だが未測費/将来分布・尾部を残し、30分目安は新仕事量で未達。実1000生成0。100/1000/10000は費用シナリオで、1000pack約75.58MB＋uniqueGit同程度/raw約510.70MBの単純外挿、実scale保持未確認。旧48の約29分をこの分布へ移していない。
+
+次最大1の候補はglobal未開始game queue又はcohort-balanced worker割当で、開始済treeはownerに保持する薄接続。現在i%3 shardではcore2がopening8/20、core4が12/24、core6が16/28となり、32game均等でもNN100785/81855/80209と偏った。尾部と固定cohort-shardの交絡があり、簡単な均衡割当を10–20分の実装/検証見積で先に検討する。仮に30秒/96節約なら開発費のみ回収1920–3840gameだが、tail全部が除ける又は30分達成すると保証しない。輸送配列/Rustpump/C++再用はsource/規則/ID/回収/build差分を含む競合案として保留。今回から新条件/生成を自動開始しない。
+
+Science source5dace6a0945ee266ef414d40898372c5b3be03ba、scientific payloadca8e0084b9465e2435545551b0c84b31142c1ce8。Archive7,256,017B/SHA3f58ced1dfc3d7feb7f3598344fd66e0ed80a25c532a8e5bfb7780d7d6fb193b、全member/Git必要byte復元PASS。新128MiB/guard112MiBを既pool内から計上、旧128/64MiB/216等保持・unknown減額/親追加0。Default/private index不変更。統括09:42有限受入れ221-fresh96-finite-acceptance.jsonに従い必要保存/backup後本人close、最高棋力goal達成とは区別する。
