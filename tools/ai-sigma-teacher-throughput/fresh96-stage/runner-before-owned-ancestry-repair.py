@@ -17,7 +17,7 @@ def table():
 
 def usage():return sum(p.stat().st_size for root in [T,D]for p in root.rglob('*')if p.is_file())
 assert time.time()<end('2026-10-04T09:35:50Z'),'NEWHEAVY_DEADLINE'
-reg=json.loads((D/'preregister.json').read_text());binding=json.loads((O/'source-freeze-v2.json').read_text())
+reg=json.loads((D/'preregister.json').read_text());binding=json.loads((O/'source-freeze.json').read_text())
 for p,h in {**reg['readonly'],**binding['files']}.items():assert hashlib.sha256((R/p).read_bytes()).hexdigest()==h,('SOURCE_CHANGED',p)
 controls=[]
 for issue in ['quoridor-4lc','quoridor-4lc.221']:
@@ -49,13 +49,7 @@ for pid,z in table().items():
 assert not foreign,('CURRENT_FOREIGN_SCIENCE_OR_CRITIC',foreign)
 gpu=subprocess.run(['nvidia-smi','--query-compute-apps=pid,process_name,used_gpu_memory','--format=csv,noheader'],capture_output=True,text=True,timeout=5,check=True).stdout.strip();assert not gpu,('CURRENT_GPU',gpu)
 assert rss+6*1024**3<8*1024**3,'PARENT_RSS';assert int(next(x.split()[1]for x in Path('/proc/meminfo').read_text().splitlines()if x.startswith('MemAvailable:')))*1024>6*1024**3
-prior=[json.loads(p.read_text())for p in(D/'jobs').glob('*/process.json')];newprior=[]
-for pp in (O/'jobs').glob('*/process.json'):
- z=json.loads(pp.read_text());proof=pp.parent/'before-model-proof.json'
- if z.get('sample_equivalent')is None and proof.exists():
-  pr=json.loads(proof.read_text());assert pr['provider_spawn_reached']is False and pr['model_NN_samples']==0
-  z={**z,'sample_equivalent':0,'kind':'control-entry-failure'}
- newprior.append(z)
+prior=[json.loads(p.read_text())for p in(D/'jobs').glob('*/process.json')];newprior=[json.loads(p.read_text())for p in(O/'jobs').glob('*/process.json')]
 spent=703.6702051740737+sum(p['jobwall_seconds']for p in newprior);samples=569460+sum((p.get('sample_equivalent')or 0)for p in newprior);unknown=[p for p in newprior if p.get('sample_equivalent')is None]
 assert not unknown,'PRIOR_NEW_SAMPLE_UNKNOWN';assert spent+c['job_seconds']<=1800 and sum(p['jobwall_seconds']for p in newprior)+c['job_seconds']<=330
 assert samples+c['NN_cap']<=900000 and sum(p['sample_equivalent']for p in newprior)+c['NN_cap']<=301000
@@ -95,17 +89,10 @@ with(out/'stdout.txt').open('w')as log:
   # If an actual foreign scientific script starts during the job, stop this owned job, never interrupt theirs.
   for fp,fz in table().items():
    if fp==os.getpid()or fz['state']=='Z'or(fp,fz['tick'])in tracked:continue
-   # Descendants may spawn between group() and this snapshot; current ancestry still proves owned.
-   ancestry=table();parent=fz['ppid'];seen=set();owned=False
-   while parent in ancestry and parent not in seen:
-    if parent==os.getpid()or(parent,ancestry[parent]['tick'])in tracked:owned=True;break
-    seen.add(parent);parent=ancestry[parent]['ppid']
-   if owned:continue
    try:fa=Path(f'/proc/{fp}/cmdline').read_bytes().decode().split('\0')
    except(OSError,UnicodeError):continue
    fs=next((a for a in fa[1:5]if a.endswith(('.py','.cjs','.js','.sh'))),'')
-   if ('tools/ai-sigma-'in fs or 'tools/nnue-training/'in fs or 'research-data/ai-sigma/'in fs or (fa and 'faithful-native'in fa[0]))and str(T)not in fs and not fs.endswith(('/save_git.py','/save.py','/pack.py')):
-    save('foreign-compute-detected.json',dict(UTC=utc(),pid=fp,tick=fz['tick'],ppid=fz['ppid'],script=fs,argv=fa[:6]));reason='CURRENT_FOREIGN_COMPUTE_STARTED'
+   if ('tools/ai-sigma-'in fs or 'tools/nnue-training/'in fs or 'research-data/ai-sigma/'in fs or (fa and 'faithful-native'in fa[0]))and str(T)not in fs and not fs.endswith(('/save_git.py','/save.py','/pack.py')):reason='CURRENT_FOREIGN_COMPUTE_STARTED'
   for z in members:
    try:
     for tid in Path(f'/proc/{z["pid"]}/task').iterdir():

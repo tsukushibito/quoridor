@@ -1,0 +1,57 @@
+{
+  "issue": "quoridor-4lc.221",
+  "run": "throughput221-phase4-fresh96-r1",
+  "kind": "generation",
+  "max_batch": 8,
+  "startUTC": "2026-10-04T09:25:58.742978+00:00",
+  "endUTC": "2026-10-04T09:25:58.900894+00:00",
+  "jobwall_seconds": 1.8603300139657222,
+  "exit": -15,
+  "stop_reason": "CURRENT_FOREIGN_COMPUTE_STARTED",
+  "runner_pid": 25145,
+  "runner_tick": 35893215,
+  "tracked": [
+    {
+      "pid": 25238,
+      "ppid": 25145,
+      "tick": 35893726,
+      "state": "S",
+      "RSS": 58171392
+    },
+    {
+      "pid": 25253,
+      "ppid": 25145,
+      "tick": 35893730,
+      "state": "Z",
+      "RSS": 0
+    },
+    {
+      "pid": 25256,
+      "ppid": 25145,
+      "tick": 35893731,
+      "state": "Z",
+      "RSS": 0
+    },
+    {
+      "pid": 25257,
+      "ppid": 25145,
+      "tick": 35893731,
+      "state": "R",
+      "RSS": 9584640
+    }
+  ],
+  "remaining": [],
+  "peak_aggregate_RSS": 92762112,
+  "command": [
+    "/home/vscode/.local/bin/node",
+    "--max-old-space-size=192",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-teacher-throughput/fresh96-stage/generate.cjs",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame16-teacher-throughput/fresh96-stage/fresh96-r1-config.json"
+  ],
+  "source_git": "6f92e2ba7b3cba4e4ad5e6ee06e086b4197c1098",
+  "sample_equivalent": null,
+  "NN_cap": 300000,
+  "current_exact_absent": true,
+  "all_child_waited": true,
+  "instant_peak_not_guaranteed": true
+}

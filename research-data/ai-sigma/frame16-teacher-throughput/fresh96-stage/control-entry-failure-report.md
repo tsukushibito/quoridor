@@ -1,0 +1,3 @@
+goal quoridor-4lc /221 phase4管理入口失敗とbounded修復
+Node controller entry09:25:58.743→.901/guardian1.860330s/foreignguard自己停止、全子wait exact不在。registered-games/provider-init/corestartがすべて未作成。frozen source順序はm.start(自ownedBeadsread)→registered-games保存→provider spawn/modelinitなのでモデル/NN/game0・初回科学は未開始と有限特定。元process sampleUNKNOWN/nullは上書きせずbefore-model-proof.json補足へ。
+私有guardianはgroup snapshot直後に自ownedobserver孫childがspawnするとforeignと誤分類し得るため、PIDtick/currentancestorをscan時に照合する薄修復。検出元未保存なのでexactoriginは未確認、他ownerinterrupt0。原failure版/source/log/全96NOT_STARTED保存。科学上限1回は維持し、通常管理入口修復の新runversionで初回モデル科学へ進める。成功science置換0/seed/量変更0/既900000等の残と新300000/300s。

@@ -1,0 +1,174 @@
+{
+  "UTC": "2026-10-04T09:25:58.741895+00:00",
+  "controls": [
+    {
+      "id": "quoridor-4lc",
+      "status": "in_progress",
+      "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+      "labels": [
+        "continuation-active",
+        "frame16",
+        "initial-window-ended"
+      ]
+    },
+    {
+      "id": "quoridor-4lc.221",
+      "status": "in_progress",
+      "assignee": "codex:01a0f31d-6d15-7620-bb63-4b4f878e4746",
+      "labels": [
+        "continuation-active",
+        "frame16",
+        "initial-window-ended"
+      ]
+    }
+  ],
+  "current": [
+    {
+      "pid": 6049,
+      "ppid": 1,
+      "tick": 35765166,
+      "state": "S",
+      "RSS": 128921600,
+      "affinity": [
+        0
+      ],
+      "script": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/scheduler.py",
+      "argv": "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python -B /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/scheduler.py run --config /workspaces/quoridor/.worktree/ai-sigma/.ar"
+    },
+    {
+      "pid": 6062,
+      "ppid": 1,
+      "tick": 35765187,
+      "state": "S",
+      "RSS": 21536768,
+      "affinity": [
+        0
+      ],
+      "script": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/watch.py",
+      "argv": "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python -B /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/watch.py --run-dir /workspaces/quoridor/.worktree/ai-sigma/.artifacts"
+    }
+  ],
+  "foreign": [],
+  "quiet_seconds": 1114.6054611206055,
+  "scheduler": {
+    "binding": {
+      "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+      "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+      "target": "supervisor",
+      "dispatch_issue": "quoridor-4lc.40",
+      "contract_file": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+    },
+    "process": {
+      "pid": 6049,
+      "start_ticks": "35765166",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "phase": "running",
+    "recovery_required": false,
+    "last_result": {
+      "at": "2026-10-04T09:24:38.156784+00:00",
+      "event": "dispatched",
+      "run_id": "69c9bb02-9558-4b53-ac04-c63635a4a2f0",
+      "turn_id": "01a1063a-c88a-7551-9ceb-9c996e6dd10a"
+    },
+    "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+    "config_sha256": "28108643776ef140f3a54dd861e6c0c41da8d61580ee20aae4a6bfa8bef0cf97",
+    "contract_sha256": "9f5ed862b19516a8917a7b8f58e3f991e5f885089c8829cfbad4bd497a2dca9c",
+    "next_at": 1791107073.2956798,
+    "owned": {
+      "run_id": "69c9bb02-9558-4b53-ac04-c63635a4a2f0",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+      "turn_id": "01a1063a-c88a-7551-9ceb-9c996e6dd10a",
+      "started_at": "2026-10-04T09:24:38.143351+00:00",
+      "max_turn_seconds": null
+    }
+  },
+  "monitor_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame16-turn-unbounded-5fd1a60b-d325-4093-bc31-9d8fa52b5910/monitor-observation.json",
+  "monitor_observation": {
+    "at": "2026-10-04T09:25:50.834823+00:00",
+    "process": {
+      "pid": 6062,
+      "start_ticks": "35765187",
+      "state": "R",
+      "rss_bytes": 20398080,
+      "cpu_ticks": 2,
+      "affinity": [
+        0
+      ],
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "scheduler_process": {
+      "pid": 6049,
+      "start_ticks": "35765166",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "scheduler_identity_alive": true,
+    "owned": {
+      "run_id": "69c9bb02-9558-4b53-ac04-c63635a4a2f0",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+      "turn_id": "01a1063a-c88a-7551-9ceb-9c996e6dd10a",
+      "started_at": "2026-10-04T09:24:38.143351+00:00",
+      "max_turn_seconds": null
+    },
+    "last_result": {
+      "at": "2026-10-04T09:24:38.156784+00:00",
+      "event": "dispatched",
+      "run_id": "69c9bb02-9558-4b53-ac04-c63635a4a2f0",
+      "turn_id": "01a1063a-c88a-7551-9ceb-9c996e6dd10a"
+    },
+    "first_dispatched": {
+      "at": "2026-10-04T09:04:37.610227+00:00",
+      "event": "dispatched",
+      "run_id": "db6814e6-42f6-4d0f-9542-abff7c8f46ce",
+      "turn_id": "01a10628-76e7-7383-b425-206411d8c2cf"
+    },
+    "first_owned_turn_finished": {
+      "at": "2026-10-04T09:10:51.759631+00:00",
+      "event": "owned_turn_finished",
+      "turn_id": "01a10628-76e7-7383-b425-206411d8c2cf",
+      "status": "completed"
+    },
+    "sampled_owned_process_rss_peak_bytes": 150192128,
+    "own_scope_allocated_peak_bytes": 32890880,
+    "sample_count": 126,
+    "all_team_pid_zero_claimed": false,
+    "bounded_supervisor_run_allocated_bytes": 266240,
+    "inspection_semantic_success_independently_verified": false
+  },
+  "parent_current_RSS": 150458368,
+  "job_RAM": 6442450944,
+  "RAM_guard": 5905580032,
+  "GPU_current": [],
+  "CPU_cores": [
+    0,
+    2,
+    4,
+    6
+  ],
+  "logical_CPU_max": 4,
+  "prior_jobwall_s": 703.6702051740737,
+  "prior_samples": 569460,
+  "storage_current_B": 1936617,
+  "old_scope_actual_B": 134889799,
+  "new_runtime_loaded_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame16-turn-unbounded/running-loaded.json",
+  "uniqueGit_remaining_forecast_B": 1936617,
+  "all_inclusive_forecast_B": 91953618,
+  "storage_ledger": {
+    "UTC": "2026-10-04T09:24:52.671129+00:00",
+    "experiment_pool_MiB": 1980,
+    "prior_unused_B": 1112645632,
+    "new_reservation_B": 134217728,
+    "unused_after_reservation_B": 978427904,
+    "reservation_B": 134217728,
+    "guard_B": 117440512,
+    "forecast_B": 100663296,
+    "old_scopes_actual_B": 134889799,
+    "old_scopes_actual_upper_B": 175528191,
+    "old128MiB_and_codec64MiB_held": true,
+    "old_unknown_discount_B": 0,
+    "parent_added_B": 0,
+    "source_ledger": "research-data/ai-sigma/frame16-teacher-throughput/codec-control/storage-admission.json"
+  },
+  "physical_current_point_not_allhost_guarantee": true
+}
