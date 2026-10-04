@@ -1,0 +1,35 @@
+{
+  "id": "fourth-preflight-r1",
+  "kind": "static",
+  "UTC": "2026-10-04T04:27:14.353192+00:00",
+  "identity": {
+    "pid": 3991953,
+    "ppid": 3991848,
+    "pgrp": 3991953,
+    "tick": "34100167",
+    "RSS": 0,
+    "cmd": "",
+    "affinity": [
+      2
+    ]
+  },
+  "command": [
+    "python3",
+    "-B",
+    "tools/ai-sigma-learning-diagnostic/seed_run.py",
+    "--preflight"
+  ],
+  "wall_seconds": 0.056964693998452276,
+  "peak_family_RSS": 22179840,
+  "exit": 0,
+  "reason": "completed",
+  "child_waited": true,
+  "remaining": [],
+  "current_exact_identity_absent": true,
+  "samples_charged": 0,
+  "sample_cap": 0,
+  "CPU": [
+    2
+  ],
+  "GPU": 0
+}

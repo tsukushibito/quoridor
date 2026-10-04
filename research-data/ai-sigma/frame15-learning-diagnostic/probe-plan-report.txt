@@ -1,0 +1,2 @@
+goal quoridor-4lc /本人209 有限input感度診断を同許可内で結果前固定。3学習run/sourceは停止版を保持し再学習0。非0grad/earlyval改善があるが距離基準に及ばず、Bの「距離情報利用」を最大1の小probeで判別する。既label-free固定train12witness、同initial/BEST200/LAST400の3checkpointで既疎特徴を保った±1/160 distance方向の局所応答/入力勾配、forward108+追加backward36equivalent=144sample上界、raw管理保守661404<800000/GPU0/120hard以内。synthetic off-manifold感度で合法局面/teacher真値とは呼ばず、ReLU kinkを不正勾配へ変換0。新train/LR条件/target/teacher/test/arena0。critic210 current短job/自然監督窓を通常admit後だけ実行。
+管理累積counter誤課金は原process保存、実NN330630/保守661260を分離し減額救済せず維持。

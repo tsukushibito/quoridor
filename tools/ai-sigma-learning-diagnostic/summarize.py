@@ -23,12 +23,13 @@ old=read_history('research-data/ai-sigma/frame14-learning/runs/frame14-train96-r
 distance=read_history('research-data/ai-sigma/frame14-distance-residual/runs/frame14-distance-residual-r1/history.jsonl')[0]
 preregister=json.loads((D/'preregister.json').read_text())
 result={'issue':'quoridor-4lc.209','UTC':datetime.datetime.now(datetime.timezone.utc).isoformat(),
-        'condition_count':3,'additional_condition':None,'samples':330630,'extra_observer_NN_samples':0,
+        'condition_count':3,'additional_condition':None,'science_samples':330630,'extra_observer_NN_samples':0,
         'old_test_labels_results_read':False,'test_evaluated':False,'validation':'reused exploratory; post-selection intervals are descriptive',
         'coefficient_distance_baseline_from_saved_initial_curve':distance['validation']['rootmean_game_equal_mse'],
         'constant_validation':distance['validation']['constant_game_equal_mse'],
         'commonpoint_comparison_tolerance':1e-12,'conditions':{},'initial_SHAs':[],'batch_order_SHAs':[]}
 csvrows=[];members=[]
+assert not (D/'weights.tar.xz').exists(), 'saved arithmetic success is never overwritten'
 with tarfile.open(D/'weights.tar.xz','w:xz')as archive:
     for run in sorted((D/'runs').iterdir()):
         h=read_history(run/'history.jsonl.gz');o=json.loads((run/'observer.json').read_text());w=read_history(run/'witness.jsonl.gz')
@@ -93,4 +94,4 @@ with tarfile.open(D/'weights.tar.xz','r:xz')as src:
 with (D/'curves.csv').open('w')as file:
     writer=csv.DictWriter(file,fieldnames=list(csvrows[0]));writer.writeheader();writer.writerows(csvrows)
 (D/'diagnostic-result.json').write_text(json.dumps(result,indent=2,allow_nan=False)+'\n')
-print(json.dumps({'conditions':{k:{f:r[f]for f in ['best_step','best_validation_gameMSE','last_train_gameMSE','last_validation_gameMSE','group_intervals']}for k,r in result['conditions'].items()},'samples':result['samples'],'memory_restore':True}))
+print(json.dumps({'conditions':{k:{f:r[f]for f in ['best_step','best_validation_gameMSE','last_train_gameMSE','last_validation_gameMSE','group_intervals']}for k,r in result['conditions'].items()},'samples':result['science_samples'],'memory_restore':True}))

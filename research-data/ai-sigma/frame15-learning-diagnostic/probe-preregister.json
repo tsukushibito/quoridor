@@ -1,0 +1,25 @@
+{
+  "UTC": "2026-10-04T04:25:31.424970+00:00",
+  "question": "Does the observed nonzero learning path actually use the two distance inputs at early BEST versus late fit?",
+  "reason": "Distance-only baseline remains substantially better while finite layers and early LR benefit exist. A local distance sensitivity probe distinguishes unused input from global dead gradients without new training.",
+  "conditions": 3,
+  "new_training_conditions": 0,
+  "checkpoints": [
+    "initial sameSHA",
+    "lr1e-4 BEST200",
+    "lr1e-4 LAST400"
+  ],
+  "witness": "same12 train IDs fixed label-free before earlier science",
+  "delta_each_distance": 0.00625,
+  "s_direction": "self decreases/opponent increases; s=opponent-self changes by2delta",
+  "forward_samples": 108,
+  "additional_input_backward_equivalent_samples": 36,
+  "charged_probe_cap": 144,
+  "full_raw_guard_charge_before_probe": 661260,
+  "raw_guard_forecast": 661404,
+  "sample_cap": 800000,
+  "weights_update": false,
+  "labels_test": false,
+  "synthetic_off_manifold_limit": "Fixed sparse state with local normalized distance perturbation is a sensitivity probe, not a legal game/input feature-parity claim",
+  "method": "3 models x12 rows xbase/plus/minus; baseline value gradient wrt distance only; frozen parameters; no optimizer; all tensor bytes unchanged"
+}
