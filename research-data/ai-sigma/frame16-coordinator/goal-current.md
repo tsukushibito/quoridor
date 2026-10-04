@@ -1,52 +1,49 @@
 # 現在のNNUE研究優先順位（frame16連続延長17）
 
-ユーザー明示の2時間追加を適用。開始2026-10-04 05:55:50 UTCは維持し、終了09:55:50 UTC/18:55:50 JST、通算4時間。新heavy09:45:50、監督09:50:50、monitor09:53:50、最終証拠09:55:50は92所有。CPU4/RAM8GiB/保存12GiB/GPU推論6GiB job30分/同saved六role・model-effort・既GPU学習確認未使用残のみで、資源・累積上限reset0。親17main/mirror writerは92一人。最高棋力goal未達、旧test選定復帰0・173正式198局非学習。
+2026-10-04 09:00 UTC時点。開始05:55:50/終了09:55:50 UTC（18:55:50 JST）、新heavy09:45:50、監督09:50:50、monitor09:53:50、最終保存09:55:50。CPU合計4/RAM current8GiB/保持＋未使用予約12GiB/GPU推論6GiB・1job30分、GPU学習は旧確認未使用残のみ。同saved六role/model-effort、累積cap reset0。親main/mirrorと運用writerは92一人。最高棋力goal未達、旧testを選定へ戻さず173正式198局非学習。
 
-## 現在の主配分
+## 主配分と判断を変える問い
 
-ユーザーの「規模を大きくする前に生成速度を十分高速化」の指示を採用。最大の未解決点は、小規模trainのfit/gapだけではデータ不足を除外できず、桁の違う独立局数検証を現教師生成費で実用にできるか。保存分析が示したearly訓練適合不足/late汎化不足と、raw CVの弱いOOF利益・fixedvalで距離未達は次の量/多様性検証へ残す。旧24/48/96量比較は高LR/粗い初期曲線の交絡があり、小比較negativeを十分量としない。
+ユーザーの「大規模増量前に生成を高速化」「構成維持自体を目的にしない」「Graph以外も簡単なら目安達成後でも実装」を適用する。最大の未解決点は、少数trainのfit/gapだけではデータ不足を除外できず、桁の違う独立局数の検証を同品質・多様性で実用の費用にできるか。保存済みprofileと実sourceで安い冗長処理を先に除き、広いRust pump/配列protocol/C++移植の費用を同時に負わず、品質を保つ有効行とgame/全attempt費で採否を決める。
 
-216を必要保存境界で停止。追加phase6 OOF安定性は実行前にUSER_PRIORITY_REORDER、fit/NN/GPU/childspawn0のNOT_STARTEDを保存。phase1～5履歴を保持し、source/子停止・必要Gitbytes・backupを有限受入れ。本人216close+backupから新221へ移る。追加診断を漫然と継続しない。
+221 experimentの現在主仕事はsingle-encode＋bits-only wireの最大1package。providerの捨てる第一JSON encodeと送信用第二encodeを1回にし、応答ID＋137uint32からbrokerが検査後にf32 logits/valueを復元する。入力/モデル/Graph B1..8/active24/maxB8/flush.25ms/3worker/K64/root64edge63/tau/RuleA/P2/history/探索は保持。二変更同時なので単独因果としない。stdout9～10秒はencode/pipewait混合、全額節約は保証しない。
 
-主221 experimentのB8→B24→B8同fresh48比較は停止保存済み。各48GOAL/1554joint/81096NN、全prefix/手数対応、guardian113.865411/112.110926/118.946577秒。B24は二B8平均より3.6897%短いがB8間差5.08秒・固定順/hostwarm/尾部が残り、既定昇格はしない。実batch平均6.18→7.90、forward同期55.9～65.6秒・pipe90～104秒・最後8完了span34～37秒は重複を含む。初期600数値確認と全三jobの必要Gitbytes/停止receiptを有限受入れ、原失敗UNKNOWNと保守5秒会計を区別。実NN243888/実測job350.917964秒、static45/180を保持し、旧条件source/result/stopは変更しない。221は新phase2の所有を継続する。
+08:48:49同saved experimentへ実配送、claim継続・私有codec-control source準備を受領。sourceGit571d939b、49mock応答/10不正schema・ID/取消/EOF/guardを保存。222独立の最大1指摘はuint32 cast前の型/整数/範囲検査。現wireでNumber.isInteger＋0..4294967295をtyped-array前に確認し採用、NaN/Inf拒否とsigned-zero/subnormal復元を別確認。roundtripだけを数値同等根拠にしない。予定432NNは同異入力oldgraph/CPU対newcodecのbit対応・数値許容を別検証。現時点実parity/生成/速度0、静的mockを科学効果にしない。
 
-ユーザーの構成見直しを採用。Node–Rust–Python/JSON/process配置を保持すること自体を目的にせず、同model/RuleA/K64/教師資格/多様性の有効行とgame/全費を優先する。競合案はSigma C++生成基盤再用、現Rust探索の多数tree pump＋共有GPUqueue/配列転送、入力供給増、held CUDA graph。C++固定751186 selfplay一次sourceを統括が08:26に再閲覧し、thread/game分離と配列get_batch/put_results、TT/noise/FPU/PCR/solver/温度/尾部打切りの設定差を確認。board/model/教師の完全対応は未確認、未変更で忠実Web教師と等価ではない。既native core/array codec/取消回収の接続費を含めて案を比較し、巨大移植・新依存を自動工程にしない。
+最大2生成job各48・hard300秒/physical NN180000、parity含新362000以下、原406620＋新上界768620<900000。新heavy650を原1800残内、新static60を原70/180残内、新管理180を原150/600残内。新64MiB予約/56MiBguardは既experiment1980MiB確認未使用1179754496→1112645632Bから配分。旧221予約128MiB・forecast116807935B保持、unknown減額/親追加0。新science09:15:50/stop09:25:50/save09:38:50/submit09:43:50。[実契約](../../research-data/ai-sigma/frame16-coordinator/221-low-cost-codec-contract.md)。全予定fault/unknown/NOT_STARTEDと停止を保持、成功置換・benchmark訓練混合0。root ACK/全文/全役承認を開始gateにしない。
 
-最大の未解決点はforward同期内のhost launch/演算/待ちと、輸送の排他的支配が未分離なこと。低改修費で最大区間へ介入するCUDA graphを次の最大1対照に選ぶ。独立223のB8-only提案を踏まえ、221本人はB1～8固定形状ごとのcaptureを08:24:51に結果前登録。部分batchも新数値経路なので全B/入力入替/ID/出力snapshot/parityを確認し、warm/captureを全費・NNへ課金。既品質/tree/JSONはこの対照では保持するが、改善が測定変動程度又は回収に乏しければgraph追加最適化を続けず配列転送＋Rust pumpの順位を上げる。GPU演算が主なら言語移植だけの利得を仮定しない。graphは採用未定、学習・棋力利益とは別。
+222同savedへ08:48:50実配送・codec静的開始受領。source30＋停止後必要NN0算術30=新60、CPU0単1/RAM224MiB、旧phase1/2計150を保持。新65536B/forecast51200B、旧117289444＋新=117354980<117440512B。公表停止版source/parity/status/costへ束縛して品質分母・全費・主配分の意味を独立裁定する。旧検算/forward/旧test/173読取を追加しない。[独立契約](../../research-data/ai-sigma/frame16-coordinator/222-low-cost-codec-contract.md)。
 
-新phase2契約を08:16:40に実saved experimentへsteer受理。solewrite architecture-control自域、原三jobはimmutable。最大1新方式・48game以下の最大2job、各hard300/NN250000、preflight5000以下、新NN505000以内/原総900000、重費650以内/原総1800、static新60以内/原180残、既128MiB予約/112guard内のactual+新forecastを再admit。CPU4/RAM8/GPU6と同saved設定不変。newheavy09:15:50/科学stop09:25:50/保存09:40:50/submit09:45:50。役/全文/root ACKは開始gateにしない。[phase2実契約](../../research-data/ai-sigma/frame16-coordinator/221-generation-architecture-phase2-amendment.md)。
+96fresh段階pilotは提案段階で、統括tool構文失敗が実tool呼出前に起き契約/Beads/dispatch0。未配分記録を保持し、最新user steerによりcodecを優先した。96を実生成済み/実配分済みとしない。
 
-独立222の元60/60裁定は三jobの必要算術を支持、B24既定昇格不確か・graph小対照を提案。新phase2は旧capをresetせず別source30+calc60=90秒、128KiBを既critic112MiB内の確認残へ配分し、停止公開receipt後の品質分母/捕捉費/全wall/回収費と主配分変更を問う。223は静的45秒/科学0、保存close+backup済み。実効果待ちを新承認層にしない。
+## 既測定と採用範囲
 
-## 保存分析から残す知見
-
-| 同rootmean/gameequalの観測 | 支持範囲と残る問い |
+| 同環境・model・K64の有限比較 | 実観測と判断 |
 | --- | --- |
-| D train .405944/val .485147、standard200 .548567/.613916、standard400 .257283/.648772 | earlyfit不足とlater汎化差は共存。データ不足や全特徴無効は未判定 |
-| standard400 valgap .163625=.192934変位−.029310 alignment、平均bias/clip小 | 未見残差方向の一致が弱い。単一teacher/history原因は未判定 |
-| learnedhidden固定ridge.01 train .208594/val .612799、scalar参照val .484540 | readout変更の有限改善でも距離未達。217必要算術独立PASS |
-| raw626.01 train .161374/val .781449 | 加法的rawfitの転移不足。このλ/geometryのowner-only診断 |
-| raw5gamefold CV λ1 OOF .382828<foldD .408041、fulltrain .215837/val .548893>D .485147 | 正則化関与の有限支持、λ選択/単partition/少数valを保持。219独立必要算術PASS、旧test/棋力利益なし |
-| OOF→val差 .088960=構成 .002346+within .086704−片側 .000090。OOF/val/差の固定game区間すべて0跨ぎ | 同セル内関係差の記述点推定、OOFfit72/78対full96・小標本で分布因果は不確か。phase5 owner-only |
+| B8→B24→B8 samefresh48 | 各48GOAL/1554joint/81096NN、113.865411/112.110926/118.946577秒。B24時間3.6897%減だがB8間差5.08秒・固定順/hostwarm/尾部が残り既定昇格0。B増-only打切り |
+| Graph B1..8 same48×2 | 84.954613/86.499517秒、平均85.727065対B8平均116.405994。時間26.3551%減/率1.357867。logical81096＋warm/capture108/各81204を課金。有限生成候補として受入れ |
+| Graph品質/費境界 | parity324/16fixture CPUtol PASS・eagergraph0、全1554state/features/history/legal/action/visitsのowner対応・RuleA π/z資格。222必要算術独立PASS。全leaf/教師truth/IID/学習・棋力認定0、固定順hostwarm残る |
 
-216実NN29505、重forwardwall4.815048s。NN0 phase3成功.895876+parsefailure.053226、phase4 2.463894、phase5 .215337。保守static144.628333/180、phase6実未開始。旧成功/失敗/期限/Git保存境界は変更せず、wallと保守chargeと全team費未集計を分ける。walls binsはremainingstockで配置壁複雑さとしない。
+Graph source36a6ac06、科学停止08:32:15/allwait/exactabsent、必要科学bytes ca1f0d47/current保存1f157041、pack4580587B/必要復元PASS。旧三job/600parity immutable、新graph162732NN/177.488723実秒、原含406620NN/528.406687実秒＋旧入口失敗actualUNKNOWN。保守5秒会計は実測と別、旧1.1秒手記を救済しない。static原70/180、管理150/600保持。[有限受入れ](../../research-data/ai-sigma/frame16-coordinator/221-graph-finite-acceptance.json)。source/結果/Git/index保存を受入れたことと生成方式の一般速度/教師品質認定は別。
 
-## 競合案・打切りと次判断
+ユーザー採択目安は同品質K64の初期化・探索・輸送・記録・回収込み1000game60分、次30分。実密度32.375joint/gameで必要8.993/17.986行秒。Graph jobだけ29.766分、既知資格/pack/Git配賦込み31.509675分＋未知freeze/dispatch/backup/将来規模費。初期60は短い外挿の見込み内、全工程30は未成立、実1000 NOT_RUN・現在の1000生成許可なし。K64≠Sigma公開K800品質。改善開発/検証投資と将来productionを分け、回収シナリオを固定保証・新gateにしない。
 
-独立fresh test、standard200 hiddenage、別foldOOF再現、syntheticdistance sanity、追加LR/幅/arenaは保留。今はこれらの小診断を増やすより、データ量/多様性を現実的な費用で検証する生成経路の改善がユーザーの優先である。低コストの保存分析は既報告を再用し、生成の支配費が変わらない時や品質/費用不成立の時に対照を見直す。構成案は言語により排除せず、主張に必要な規則差と実装検証費で選ぶ。巨大基盤/全RuleA再実装を自動前提にしない。
+## 競合案と再検討
 
-ユーザー採択の暫定目標は、現環境/同model/K64/教師資格/多様性を維持した初期化・探索・輸送・記録・回収込み1000局60分、次の目安30分。約49〜50適格行/gameなら約14/28Rjoint行/sだが、実game行密度/unknown/尾部/準備・保存費から再推定する。短benchmark外挿と実1000完了を区別し、現221上限や親期限を増やさない。今1000実生成への自動許可ではない。K64の速度目安とSigma公開K800等の教師品質検証は別。十分高速化を固定倍率のgate/無限最適化にしない。見込独立局数100/1000/10000は費用シナリオで今枠の実生成必須・許可数ではない。候補速度/保持量/準備と有限検証総費から回収局数と増量所要時間を見積もり、改善継続/打切り/将来量比較へ移る判断を具体化する。適格率/速度/学習価値/棋力は別。
+配列転送＋既Rust多handle pumpは有力。framing/ID/取消/復帰/build/interface対応を含み、現JSONのwire量・重複spanだけで排他的支配費を断定しない。薄codec後に全費を阻む輸送/尾部が残り、今後の予定生成で改修検証費が回収できる時に主順位を上げる。
 
-## 実運用
+Sigma固定751186のC++ selfplay一次sourceを統括が再閲覧済み。thread/game分離・配列get_batch/put_resultsは参考再用可能だがTT/noise/FPU/PCR/solver/温度/straggler/float探索とboard/model/教師出力対応の費用が残る。未変更のC++を忠実Web教師と等価としない。新取得/build/共有更新/巨大移植は現在配分なし。
 
-92へ延長17を07:31:41実配送、本人受領開始を受信。旧exact2を秩序停止し親17 main/mirror/Git f893cb82507b921f7572d0581b7d1b5ad1332feb同SHA ae2eda81909c298bf83d72dd9c37809c02841b0f5fec35c30d333ab3bae044e1、実config/contract/prompt/watch/guardへ09時台期限を反映。07:38:42通常freshstart・running loaded、scheduler4133634/35249387・monitor4133648/35249412/同boot、既24hash不一致0/current6digest一致、period1200/turn180維持。rootも07:39:44に独立受入れ。正live pathはframe16-extension17-49170cb6-b27b-4fed-8be1-36f441f2df63、次通常07:58:39。旧停止/turn_limit/点検意味内容unknownは保持し、loaded成功を意味点検/未来停止/外部NN停止へ変換しない。
+223静的独立architecture見解はGraphの低接続費を支持し、Graph利益小ならarraypumpへ変更する分岐を保存。本人closed/backup・科学0、旧費保持。今回のGraph利益は小さくないが、速度目安だけを薄い有益改善の打切り理由にしない。追加Graph sweep・fresh独立test・LR/幅/arena・synthetic診断は現在保留。codecの実全費/qualityから採否を更新し、量/多様性検証へ渡す。
 
-221旧phase1の必要保存は有限受入れ、現在phase2本人準備を確認。実密度32.375joint/gameから1000局60/30分には8.993/17.986joint秒が必要。資格/pack/Git配賦の短比較外挿はB24約39.9分、B8約40.5～42.3分で初期60見込み内/30未達。共通setup/未知開発費/将来尾部は別、実1000完了又は許可ではない。K64をK800同品質としない。222元裁定/223静的提案と新graph実効果を分けて待つ。92長期運用の点検意味内容unknownは維持し、親09:55:50終了は不変。
+## 保存した学習分析の境界
 
-08:28:29 graph-r1第一実測停止を受領。同48GOAL/1554joint/81096logicalNN+108warmcapture、guardian84.954613秒/18.292120joint秒、RSS約2.294GB、exit0/allwait/exactabsent。二B8平均116.405994秒より27.0187%短い点推定、jobだけ1000局29.498分。初期捕捉はjob費へ含むがqualification/pack/Git配賦・未知準備費・反復変動を含む全工程30分達成は未認定。有限資格replay1554はowner支持、公開samecandidate確認は08:29:26に結果前固定して元残cap内freshadmitのみ。主計画はgraph追加チューニングでなく、この1方式の全工程費と必要確認を優先し、結果で採用/打切り/配列pumpへの順位を更新する。
+216は必要phase1～5を保存・本人close済み。phase6はUSER_PRIORITY_REORDERで実science未開始/fit/NN/子0。NN29505・static144.628333/180、旧費reset0。D train .405944/val .485147、standard200 .548567/.613916はearly fit不足、standard400 .257283/.648772はlater汎化差。hiddenridge.01 train .208594/val .612799、raw626.01 .161374/.781449、rawCV λ1 OOF .382828<foldD .408041だがfullval .548893>D。216 phase1/2とCVの必要独立算術を217/219が有限支持、phase3/5はowner-only。OOF→val差 .088960はwithin .086704が記述点推定で主だが固定game区間は0跨ぎ。walls群はremainingstockで配置壁数とは違う。これらからデータ十分/全特徴無効/teacher唯一原因を決めない。旧24/48/96量比較は高LR・粗い早期曲線が交絡し、今後の量検証へ残す。
 
-08:32:15 phase2全source/science停止、parity324+両81204=162732、旧含406620/900000、phase2実177.488723秒/650、旧含528.406687実秒+旧入口失敗UNKNOWNを別保持。確認job86.499517秒、二graph平均85.727065/二B8平均116.405994=0.736449wall、rate1.357867、同1554state/history/action/visit対応のowner有限支持。統括が停止正本/全source現SHA/公開payloadをbind。主配分を追加構成実験からこの1方式の採用に必要な有限品質/全工程費/保存へ更新する。graph細調整・1000局実生成・旧学習診断を自動追加しない。長期データ量/多様性検証用に再用可能な生成方式と所要時間/保持シナリオを具体化し、配列pump/C++の大投資は実増分節約と開発検証費の回収で再検討する。
+## Supervisor復旧と運用所有
 
-ユーザー最新「Graph以外も簡単なら目安達成後でも対応」を採用。96freshpilot案は統括tool構文失敗で実契約/Beads/dispatch0、未配分であることを記録し、薄codec実装へ主配分を変更。providerの捨てる第一JSONencode＋送信用第二encode、bits/logits/value冗長wireをsourceで確認。single-encode＋bits-only wireから受信側uint32/f32復元/ID/finite等を保つ最大1packageを221codec-controlへ実配分、同graph/K64/同fresh48の最大2短jobと必要数値/取消回収確認を原900000NN/heavy1800残内で行う。新NN362000以下/全上界768620、新static60を原残110/管理180を残450、新64MiBは既exp確認unused内/親保存不増。stdout9～10秒はencode/pipewait混合で全額節約保証0。全配列化/Rustpump/C++は接続/所有/取消/build/教師境界費の広い案として保留、容易な薄修正の利益が小さい又は主支配が移れば再検討。速度目安達成のみで有益低費用改善を止めず、開発検証/測定費と期待回収から選ぶ。222新codecsource30+calc30/64KiB別配分、旧150保持。共有環境/model/製品変更なし、1000生成は未許可。
+延長17の親main/mirror/Git f893cb825/指定SHAと09時台期限は07:38:42running-loaded・root07:39:44受入れ済み。旧scheduler4133634/35249387・monitor4133648/35249412の自然4turnは全turn_limit/interrupted/items0、現監督成果なし。起動/loadedを実点検成功へ変換しない。
 
-運用改善のユーザー明示を適用。監督latest4自然turnはpublicitems0/turn_limitで現在監督成果なし、起動/loaded成功を点検成果としない。新有効指示はSupervisor180秒上限撤廃(max_turn_seconds=null等)、period20分/09:50:50運用end/09:53:50monitor/09:55:50親終了/資源/settings維持。92solewriterへ08:48:53に同active実steer受理、main scheduler実装/tests/docsと研究runtimecopy/parent有効本文の修復/nullable回帰/秩序停止更新/実loadedと成果到達を有界配分。rootも同92直接補足を行い適用receiptを確認、統括は二重writer/二重適用turnを作らない。旧4中断/運用gapを保持し、180撤廃は研究jobwall/NN/通信timeout/自己子資源guardの撤廃ではない。codec静的は運用全史/全文待ちgate0、科学直前には正currentruntime・実CPU子/所有/回収をfreshadmitする。
+最新明示user「上限撤廃」はSupervisor 180秒1turn capをnull等で撤廃する。period20分、09:50:50運用end、pause/end exactownedのみ回収/他者turn保護/通信timeout/子資源guard/settings/親終了は維持。92solewriterへ08:48:53同active実steerでmain scheduler/tests/docsと研究copy/config/contract/prompt/有効親本文の秩序停止・nullable回帰・validate・再開/loaded・実点検成果到達を配分。rootの同92直接補足と整合し、統括は重複編集/適用turnを作らない。[契約](../../research-data/ai-sigma/frame16-coordinator/92-unbounded-supervisor-recovery-contract.md)。
+
+旧scheduler08:51:43 operator-stop、ownednull/exactabsence・外部NN停止falseを保持。現在ファイルconfig/contract nullを観測したが新running-loadedは未確認。旧nextquietを新freeとしない。codec静的は継続、実science前に正current runtime/owned/実CPU子/RAM/GPUを本人freshadmitする。LLM active人数だけでは拒否せず、物理競合・所有回収は調整。nullableloadedと180秒越え無中断、実tool→判断/通知の到達を分けて後続観測する。旧4失敗と運用gapは保持する。
