@@ -1,0 +1,11 @@
+# 210 選定前の独立見解
+
+低LR・0/1/2/5/10/20step以降の曲線を優先する選定を支持する。旧100stepが最初の約2.75epochであり、LRを下げても利益がないという根拠はまだなかった。以前のL2/head/方式変更を優先した経緯は、A最適化の未観測を残したものとして保持する。
+
+最大1修正案は、層全体のgradient/weight norm比だけにせず、結果を見る前に固定した少数train witnessについて同じ評価forwardで予測のstep0からの変化量(RMS/最大)、targetとの残差、tanh前出力・ReLU活性を一緒に残すこと。ftは312入力のうち各rowのsparse active IDsだけが使われ、全層normによる希釈や小さい初期biasによる比率の不安定がある。可能なら使用列の実updateと分母0を別fieldにする。既存の予定評価を再用し、観測用の新forwardを当然の前提にしない。追加計算が必要ならsample/wallの費用を明示する。
+
+同initialSHA・同batch order・同sampling・同train exposureでLRの軌跡を比較し、同step/sampleだけでなく保存曲線で到達したtrain誤差も併記する。低LR400stepの改善不足だけでAを反証すると、単なる進行の遅さが交絡する。小LRが早期val利益を示しても、再用val/単seed/複数条件選択なので未見独立利益や原因唯一とはしない。
+
+有限非zero勾配とtrain低MSEはBの全否定ではない。初期出力の飽和・活性と実予測変化が小さいならBの観測を先に見直す。早期train改善とval悪化が並ぶならAの早期過学習とCの分布/history不足は両方残る。tinyfitは既fulltrain fitより新しい検出力がある時だけ採る。plain/residualを混ぜる場合は距離基準・head初期化・clipという変更因子を保持する。
+
+保留は追加L2/width/head sweep・fresh test/arena。早期LR曲線と実更新が判断を変える候補を示すか、全LRで情報が増えない時に再検討する。判定は選定段階であり実観測はまだ未受領、主診断の開始承認gateではない。旧test全種と173holdoutは読取/転用0。

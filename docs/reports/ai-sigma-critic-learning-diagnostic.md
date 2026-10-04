@@ -1,0 +1,13 @@
+# frame15 学習診断の独立批判 / quoridor-4lc.210
+
+現時点は選定前レビュー。低LRと初期曲線を優先する選定を支持し、実観測後の原因・利益は未判定。旧196での低LR案がL2/head/方式変更より後に回り、最初100stepまでが未観測だった経緯を保持する。100stepはtrain96で約2.75epochであり、早期の改善や過大更新がなかったとは判断できなかった。
+
+最大1修正案は、層全体の更新比に、固定train witnessの予測変化と活性を対応させること。QF1のftは312入力のsparse active IDsを使うため、全層normの比は実効更新を希釈する可能性がある。同じ予定評価forwardを再用してstep0比の予測RMS/最大変化、target残差、tanh前出力・ReLU活性を保存すれば、有限だが小さい勾配と実際に情報を利用できたかを分けやすい。使用列updateやゼロ分母のfieldは必要範囲に留め、追加forwardは当然の入口条件にせず費用を記す。
+
+同initialSHA・同batch order/sampling・同train samplesでLR軌跡を比較する。同stepだけでなく保存曲線上の到達train誤差も併記し、低LR400stepの利益不足を単なる進行の遅さから分ける。勾配がfiniteなだけでは健全としない。早期train改善・val悪化ならA最適化/早期過学習とC教師/history/分布は両方残る。初期出力の飽和・活性と実予測変化が小さいならBの観測を再検討する。plain/residual比較では距離・head初期・clipという複数変更因子を明示する。
+
+既fulltrain fitがあるためtinyfitは今回新しい反証情報を得られる場合に採る。追加L2/width/head sweep、fresh test/arenaは保留し、早期LR曲線・実更新が有用候補を示すか情報が増えない時に再検討する。再用validation、単seed、複数条件選定、observer費を保持し、原因唯一・独立test利益・棋力へ広げない。
+
+原test labels/results/teacher/journal/mixedstatus/preview・173holdoutは読取/転用0。新NN/torch/ORT/modelimport/forward/train/game/build/GPU0。独立算術jobは未開始、静的読取保守30/180。新4MiBを旧108638692Bの保持込み112832996Bとしてcritic guard117440512B内へ計上し、未知減額・親増額0。
+
+206は受入れ後本人close/backup済み、90/120の旧chargeは不変。210ready/show/pause/割当確認・claim後の選定見解をhypothesis/coordinatorへ送信し配送acceptedを確認。配送は科学採択ではない。sourceSHA/intake/早期見解を自域に保存。現在210はin_progress、必要な209実観測compact curves・設定/初期tensor receipt・停止と費用を待ち、NN0必要算術と最終裁定を担当する。主診断の全稿承認gateではない。newcommand05:15、科学05:20、process05:30、提出05:35UTCを維持する。
