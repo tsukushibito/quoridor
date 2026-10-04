@@ -1,0 +1,42 @@
+{
+  "process": {
+    "id": "input-sensitivity-r1",
+    "kind": "heavy",
+    "UTC": "2026-10-04T04:36:34.158395+00:00",
+    "identity": {
+      "pid": 3999415,
+      "ppid": 3999362,
+      "pgrp": 3999415,
+      "tick": "34155986",
+      "RSS": 0,
+      "cmd": "",
+      "affinity": [
+        2
+      ]
+    },
+    "command": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "tools/ai-sigma-learning-diagnostic/probe.py"
+    ],
+    "wall_seconds": 1.969778043043334,
+    "peak_family_RSS": 779509760,
+    "exit": 0,
+    "reason": "completed",
+    "child_waited": true,
+    "remaining": [],
+    "current_exact_identity_absent": true,
+    "samples_charged": 144,
+    "sample_cap": 144,
+    "CPU": [
+      2
+    ],
+    "GPU": 0
+  },
+  "source_stop": true,
+  "learning_conditions": 4,
+  "actual_science_samples": 405578,
+  "raw_conservative_samples": 736208,
+  "probe144": 144,
+  "further_NN": "none automatic"
+}
