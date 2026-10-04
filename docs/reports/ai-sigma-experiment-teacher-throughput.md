@@ -82,3 +82,5 @@ provider pipe累積は67.31/67.20秒、forward同期29.37/30.05秒、stdout JSON
 観測節約.63914秒/game。追加parity/確認一回/資格/pack/Gitの既知費99.86秒だけなら回収約156局だが、選定・source読取・実装・reasoning費は完全分離未計測である。登録からのnongeneration elapsedも別scenarioへ保存し、完全break-evenとはしない。準備が追加10/30/45分なら約939/2816/4224局の回収が必要。今回graphの追加調整は止め、生成候補として有限引渡す。次最大1案は同教師定義のまま配列転送＋Rust多handle pumpの費・回収を問う薄接続で、現課題から自動開始しない。
 
 科学源36a6ac0663f683bc6f99385dc3a36859212f814e、新payload ca1f0d4737b7cfc3553458420dc59b39022bf36e。新pack4,580,587B/SHAaec48aec86f63ef617c472a09261c2d18afee06424b843812d5b05e7250d53ee、全member byte復元PASS。defaultindex/privateindex不変更、旧128MiB reserve/112MiB guard内で原raw/Git保持、未知減額/親増額0。benchmark教師は学習へ転用しない。phase2資格・効果はowner有限確認で、222の旧phase1独立裁定を新graphへ拡張しない。
+
+phase2最終保存補足: report/receipt Git保存2.7183秒を96実行gameへ配賦すると、測定済み全工程外挿は1000局31.5097分＋未分離費。前の31.04分を置換せず追加費として保存した。表のphysical NNはproviderの課金single-sample-equivalentで、warm/capture108を保守的に含む。capture中の実GPU kernel実行数を観測した値ではなく、探索要求81096と別欄に保持する。GPU allocatorピークをdriver/context込みVRAM峰値とは呼ばない。
