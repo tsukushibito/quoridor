@@ -68,7 +68,7 @@ def admit():
     loaded = json.loads(loadedpath.read_text())
     sch = json.loads(Path('/workspaces/quoridor/.artifacts/research-team/scheduler-sigma-continuation-20261001/state.json').read_text())
     assert sch['phase'] == 'running' and not sch.get('recovery_required')
-    assert loaded['start_fixed'] == '2026-10-04T10:33:18Z' and loaded['end'] == '2026-10-04T14:33:18Z'
+    assert loaded['frame_begin_fixed'] == '2026-10-04T10:33:18Z' and loaded['deadlines']['final'] == '2026-10-04T14:33:18Z'
     assert loaded['max_turn_seconds'] is None
     assert hashlib.sha256((R / 'docs/design/ai-sigma-continuation-20261001.md').read_bytes()).hexdigest() == loaded['parent_sha']
     assert sch['config_sha256'] == hashlib.sha256(Path(sch['config_path']).read_bytes()).hexdigest()
