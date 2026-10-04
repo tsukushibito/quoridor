@@ -71,3 +71,11 @@ hyp200へ距離基準を初期valueとして保持するQF1H32残差1runを実�
 exp201へ新fresh24manifestと同GPU24/K64の条件付き教師を実配送、旧198seed/24NOT_STARTEDを流用しない。新testmetadata exposureはtrain+val+旧開封testのlabel-free参照を使って固定し、新labelsはcheckpoint/係数/settings/evaluatorfreeze後一度評価。旧testのlabels/結果で再選定しない。test対象は距離のみ・残差候補/LAST・旧QF1random定数を区別、gamepairedとrootmean/z/符号/定数を保存。全120slotの旧構造比較や旧197失敗を救済しない。
 
 200新16MiBはhyp既64MiBのunused/combined56MiBguard内、201新32MiBはexp既1980MiBpool内・返却済198 unused24MiBを再使用可、parent追加0/旧未知減額0。CPU学習とGPU生成は本人current非重複、newheavy02:10/02:00・science02:20/02:10・最終提出02:45/02:35で親早側。問いは既情報を残した学習が未見教師へ移るかで、L2/LR sweepや新監査連鎖は主配分にしない。
+
+## 200gate成立と新独立評価待ち
+
+200学習CPU2単1/2000step/379921samples/5.394997s/全子wait・source凍結。初期5901算術parity PASS。candidate BESTはstep0のtrain-fit距離基準、validation .485146813で定数.678780468・旧QF1initial.690175574の両条件を満たす。残差によるvalidation改善はfalseで、NNUE残差学習成功とは扱わない。gate3d5f52ca、settings115181bf、stop71e112de、candidate/source現物SHAを統括有限確認、旧197/198gate不変。201へ01:16:00現active turn/steerで具体SHA引渡し、固定新24だけ本人resource/currentadmitで生成可、受付≠科学実開始。
+
+01:13監督の距離利益と残差利益の別判定・clip/head0制約・低費用評価器候補を採用。critic202へ新現在NN0有限裁定を実配分し、199本人close/backupをこの実taskturnで行う。先行curve/source/coeff/inputの静的資格と新testのlabel-free maskを確認し、freeze後一度testper-row/pairedgame誤差を独立算術にする。全role承認を生成/評価開始gateにせず、NNforward追加0。既199の全history/CPsum/teacher真値不足は残す。
+
+202はCPU0静的180s/各60/RAM448MiB/既critic112MiB内新4MiB、newcommand02:35/stop02:40/submit03:00。距離only対定数とresidualBEST/LAST対距離onlyを分離、新testを条件選択へ戻さない。採用/不支持は新testreceiptと202の有限裁定から次最大1を選び、量子化/αβ/WDLへの自動連鎖なし。
