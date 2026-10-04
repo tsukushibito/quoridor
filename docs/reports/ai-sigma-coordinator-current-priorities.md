@@ -14,7 +14,7 @@ frame14ユーザー明示4時間再開。開始2026-10-03T23:20:36Z、終了2026
 | 期限運用・主手順mirror | steward / 既quoridor-4lc.92 | 親/92運用bindingを停止窓で更新して同runtime起動・回収。研究手順hyp停止/hash引渡し後だけmain同bytes同期 |
 | 目標・配分・受入れ | coordinator | 本計画・goal説明/契約・有限受入れ、本人報告から次判断を実配分 |
 
-既savedへ実配送済み、本人claim/static開始を受領。194のfirsttrain24は23:37:08–23:39:09で全24GOAL/適格joint1217/physicalNN68292/jobwall122.708701秒。固定val24/test24も全GOAL、各joint1248/1095、初72合計joint3560・jobwall346.506770秒。残train72は元144予定で生成中、最大96mask完成前のval選択/test評価は開始しない。195共通canonical interface-v1停止hashを194へ渡し、64MiB保存移転を実確認した。194旧guardのruntime RSS表示はscheduler/monitorを除外して0だった限界を保存し、後続版はruntimeとnested testを算入する。全期間資源成功や適格教師数を先取りしない。配送accepted/本人claim/static開始/実science成立は別。92runtime準備待ち・critic全文待ちは静的準備のgateではない。生成GPU4core窓とCPU学習/CPU0算術は実process所有/RAM/自然監督予定を直前に確認し重計算を重ねない。主報告待ちは194教師、195ソフト接続と学習/test、196分割/独立結果、92running/loaded。
+既savedへ実配送済み、本人claim/static開始を受領。194は全6job144GOAL・適格6996行（train96=4653/validation24=1248/test24=1095）、allattempt generation691.356145秒・physicalNN397012/startup0、科学最後00:01:42.075112Zでsource runtime/全科学子を停止した。共有RuleA資格と195実canonical APIによるlabel-free全144manifest・最大96固定maskを引渡し、現データのval/testは全行eligible/G+=各24。代表性・IID・教師真値は未認定。最大96mask前の部分48版は履歴として保持し、選定には最終版だけを束縛する。export192heap OOMは管理失敗として保持し、同immutable rawをhelper512/guard896MiBでNN0修復、worker cap/NN科学は変更しない。195へ停止・正本使用可能を実steerし、196へlabel-free実mask検算を実配送した。195の固定LAST比較は別moduleで共有v2を保持し、NN0二check成功・学習modelまだ0の報告。既64MiB保存移転は実確認済み。194全pack/Git全文・196全文は学習の入口gateにせず、195がcurrent所有/RAM/自然監督予定を直前admitして学習へ進む。194旧guardianのruntime RSS表示限界は保存し後続版はruntime/nested testを算入した。配送accepted/本人開始/学習効果は別。主報告待ちは195曲線/freeze/test、196独立mask/test裁定、194必要pack/復元/backup、92期限回収。
 
 ## データ版と3分割・露出
 
@@ -28,7 +28,7 @@ test-sealedは生成保存ownerが保持し、学習ownerは最初はlabel-free�
 
 192環境Git95be80dcと手順訂正5dd29beeを再利用。QF1二視点312+距離2/H32・hidden32/dropout0/rootmean target、Adam.001、gameequal sampling、同fresh初期seed19080311から各stage2000steps×128=256000train samples。eval100step、earlystop patience0で固定量曲線、best checkpointは固定validation gameequal MSEだけで選ぶ。step/sample/epoch/wall、row/game等重み、定数基準、rootmeanと真z/符号/飽和/群別を保存。データ量の差とepoch数の差、教師K64のノイズを保持する。
 
-追加対照はtestを見る前に最大1LR.00025/同96train同steps。全幅LRtargetのsweep0。有限val条件でcandidate/config/checkpointSHA/beststep/valhash/mask/selectionreasonをfreezeする。未学習同初期modelとtrainだけから決めた定数を、独立test主subsetと全行secondaryへ比較し、gameweighted/rowweighted誤差・群別/不確かさ・費を別表示する。curve改善を棋力又はNNUE特徴の最終性能へ拡張しない。
+追加対照はtestを見る前に最大1LR.00025/同96train同steps。全幅LRtargetのsweep0。有限val条件でcandidate/config/checkpointSHA/beststep/valhash/mask/selectionreasonをfreezeする。未学習同初期modelとtrainだけから決めた定数を、独立test主subsetと全行secondaryへ比較し、gameweighted/rowweighted誤差・群別/不確かさ・費を別表示する。 supervisor23:53案を結果前採用し、stage24 LASTとstage96 LASTも同actual256000train samples/同初期SHAで固定diagnostic contrastとして候補freezeに束縛する。同一test一回アクセスで最大4uniqueNNモデル+定数、paired96minus24誤差と増分教師生成/学習/保存費を示し、beststep差を数量効果へ混ぜない。未完了contrastは未知、追加train0/test再選定0。curve改善を棋力又はNNUE特徴の最終性能へ拡張しない。
 
 条件未成立又は改善なしでも全attempt/未知と曲線を保存して終了できる。結果から次の一つの判別実験を選び、データ不足・過学習・分布差・容量・教師noiseを一意に断定しない。有効な候補なら同QF1重み→native evaluator→NNUE+αβ同資源の小対局という次単位/必要教師・予算を提案し、今回自動対局連鎖0。
 

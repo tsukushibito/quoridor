@@ -1,5 +1,5 @@
 {
-  "UTC": "2026-10-03T23:53:20.714228+00:00",
+  "UTC": "2026-10-04T00:09:08.751703+00:00",
   "experiment194": {
     "receipt": "2026-10-03T23:30:25Z",
     "claim_static": "2026-10-03T23:30:54Z",
@@ -16,14 +16,32 @@
     "first72_GOAL": 72,
     "first72_joint": 3560,
     "first72_jobwall": 346.50677023804747,
-    "remaining_train_games": 72,
-    "max96_mask_pending": true,
-    "jobs_scientifically_ended": 4,
+    "remaining_train_games": 0,
+    "max96_mask_pending": false,
+    "jobs_scientifically_ended": 6,
     "train02_start": "2026-10-03T23:45:30.673251Z",
     "train02_stop": "2026-10-03T23:47:25.678162Z",
     "train02_jobwall_s": 116.627886,
-    "remaining_unadmitted_train_games": 48,
-    "next_window": "after natural supervisor23:51:55 finish and current admission"
+    "remaining_unadmitted_train_games": 0,
+    "next_window": "after natural supervisor23:51:55 finish and current admission",
+    "manifest_observed_all144_GOAL": true,
+    "producer_stop_handoff_pending": false,
+    "all144_rows": {
+      "train": 4653,
+      "validation": 1248,
+      "test": 1095
+    },
+    "all6_jobwall_s": 691.35614519706,
+    "science_last_stop": "2026-10-04T00:01:42.075112Z",
+    "current_owned_science_identity_absent_owner_report": true,
+    "Rpolicy": 6996,
+    "Rz": 6996,
+    "Rjoint": 6996,
+    "handNN": 397012,
+    "startup": 0,
+    "final_dataset_interface_handoff": true,
+    "source_runtime_stopped": true,
+    "pack_backup_pending": true
   },
   "hypothesis195": {
     "receipt": "2026-10-03T23:30:36Z",
@@ -37,7 +55,9 @@
     "fake_NN0_stop": "2026-10-03T23:48:49.884Z",
     "mock_wall_s": 0.052313891,
     "actual_model_forward": 0,
-    "interface_v2_handoff_verified": true
+    "interface_v2_handoff_verified": true,
+    "quantity_LAST_contrast_prepared": true,
+    "shared_v2_unchanged_reported": true
   },
   "critic196": {
     "receipt": "2026-10-03T23:30:38Z",
@@ -60,9 +80,9 @@
     }
   },
   "waiting": [
-    "194 remaining five fixed jobs and teacher/exposure export qualification",
-    "195 interface smallmock after GPU quiet and later fixed curves/freeze/test",
-    "196 final manifest/curve/freeze/test finite verdict",
+    "195 fixed curves, candidate and LAST contrast freeze then one test evaluation",
+    "196 final label-free mask and later curve/freeze/test finite verdict",
+    "194 minimal pack/Git restoration/backup final handoff",
     "92 natural supervision and deadline recovery"
   ],
   "new_roles": 0,

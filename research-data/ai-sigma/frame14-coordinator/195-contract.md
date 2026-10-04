@@ -8,3 +8,6 @@
 CPU学習単logical2/torchintra-inter1、CPU0critic/監督とはpool別、重GPU生成job回収後のみadmit。RAM2GiB guard1.75、学習+eval heavy900s/全static管理1200s/sample5000000上限、GPU学習0（未使用残不明）。保存新64MiB/guard56をexperiment2044MiBの確認済未使用から移転してhyp現20MiB保守量と別計上、parent予約追加0、weights/Git/残metadataforecast先計上。実source/dataをコピー増殖せず引用。初ソフト接続00:15目安、学習01:40目安/freeze02:30/test科学02:50硬・処理03:00/提出03:08、新heavy02:45早側。各job120s/回収guard/owner確認、単run samplecapと親終了別。
 完了条件は改善/不確か/不支持のどれでも未見game学習効果を独立test基準で再現判断、候補/未学習/定数/group/mask/費を保存。有効候補なら同feature/evaluator nativeNNUE+αβへ接続し同資源小対局の次1単位/予算を提案、今回対局自動開始0。190独自binaryimport未接続は必要な薄導出だけ将来枠、量子化/T1全実装gate0。NNUE最終性能/最高棋力未認定。
 
+
+## 結果前採択補足（supervisor23:53案、23:57実配送）
+独立testの同一一回アクセスに固定quantity診断を加える。stage24 LASTとstage96 LASTを同actual256000train samples/2000step128/同initialSHAでfreezeし、候補選択は元validationのみ一つを維持。testにはcandidate/initial/24last/96last最大4uniqueNN+train定数、同SHAなら追加forward不要。paired96minus24 rootmean/真z/符号/game群別と増分train02-04生成/学習/輸送/回収/保存既知費を併記、unknown費別。testを設定選定・増量再試行へ戻さない。追加train/run数0、元5m samples/900heavy/56MiBguard内、partial/不成立contrast未知を保持。公開v2API依存を194export接続中に並行変更せず、新モジュール又はexport回収後の明示新版/hashで薄接続する。
