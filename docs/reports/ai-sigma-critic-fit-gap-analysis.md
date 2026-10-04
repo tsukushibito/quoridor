@@ -28,3 +28,24 @@ e=y−D、r=N−Dの恒等式gap=E[r²]−2E[e*r]を全体・排他的binsに適
 shared変換はoracleにimportせず独自算術にしたが、元opaquehistory/RuleA合法性/教師truthは追加認証していない。rootmean蒸留と真z診断を分け、再用validation・同一seed/入力・多群探索・同じtrainで学習したhiddenの限界を保持する。旧testlabels/results/raw/journal/mixedstatus/preview/173正式holdoutは未読、label-free containerのtest行は解析join前に除外した。棋力・独立test効果・NNUE全方式の成否は認定しない。
 
 根拠：`research-data/ai-sigma/frame16-fit-gap-independent/{check.py,result.json,per-game.json.gz,calc-attempt1.json,check-attempt1.py,calc-admission*.json,science-stop.json}`。再現はCPU0の許可済quiet窓で `timeout 60s taskset -c 0 python3 -B research-data/ai-sigma/frame16-fit-gap-independent/check.py`（実行権限・残費は別確認）。原データ/源SHAはresult.json、元216結果/停止は参照のみ。
+
+## phase2：残60秒の追加有限裁定（phase1を保持）
+
+frozen standard400 hidden32のtrain-only ridge λ.01と、同sの2係数距離残差ridgeを独立NN0検算した。**この固定hidden読出しはtrain適合を増やすが、再用validationで距離基準を超えない**。元standard400に対する部分改善を、距離超過・独立test効果・NNUE情報不足の一意原因へ変換しない。
+
+|方式|train gameMSE|validation gameMSE|validation rowMSE|validation 真z gameMSE|
+|---|---:|---:|---:|---:|
+|距離D|.4059437373|.4851468131|.4893138665|.8225350323|
+|standard400|.2572832050|.6487715053|.6412566982|1.0032958247|
+|learned-hidden ridge|.2085936615|.6127986850|.6101873693|.9783400132|
+|距離2係数再調整|.3962950788|.4845397580|.4903769618|.8247985386|
+
+hidden ridgeのvalidation差は対standard400 −.0359728203、対D +.1276518718、対距離再調整 +.1282589270。D比11/24game改善・13悪化。振幅.1483835006−整合減益.0207316288=gap+.1276518718が元gameweightで閉じた。early寄与+.0914436351、middle+.0362082367、late0行/0mass。距離再調整は対D gameMSE−.0006070551/15game改善だがrowMSEは+.0010630953、真zMSEは+.0022635062で符号増分0。微小game平均の改善を全面利益としない。
+
+NPZをZIP/NPYヘッダ・f32 rawstorageとして解析し、5901rowIDs/32列・旧phase1行/labels/予測の一致を照合した。Torch/NumPy/model import・forwardは0。train96の元rowweightでpopulation momentsを再算しf32適用値一致、zero列[3]を確認。独自partial-pivot Gaussian solveで33係数・非penalty intercept・λ.01を再算、正規方程式残差1.11e-16、保存係数との差5.72e-14。scalar s参照もtrain-only moments/2係数を再算した。f32演算のdot積順序差を許容しhidden予測maxabs2.384e-7、距離参照0（新NN認証ではなく保存配列からの算術）。unclipped fitとclip評価を分け、hidden ridge train unclipped MSE .2308200120 vs clipped .2085936615、validation .6306019483 vs .6127986850を保存した。源の`measurements.saturation_fraction`は|prediction|>=.9、本独立結果の`saturation_*`は|prediction|>=1の厳密clip到達率であり別分母・定義。validation hidden ridgeの厳密到達130/1248=.10417、ownerの.9閾値.14984と混ぜない。
+
+hiddenの実由来は固定source/pre-hook/同passprediction receipt/immutableモデルSHAに束縛した有限支持であり、現model forward・全教師truthの再認証はしていない。phase2 preregistration/初期版とscalar追加v2を区別する。scalar参照登録06:31:31はmain hidden job終了06:30:53の後、ownerは主metrics非閲覧と記録する。独立に証明できるのは版/hash/時間の対応までで、全人物理非閲覧保証ではない。referenceは新NN0、主要条件・旧成功数値不変。条件の追記時点を「main実測前」と捏造しない。
+
+主配分は、追加学習を広げず読出しだけで汎化gapを縮められるかを実際に判別した点で有用だった。しかしhidden ridgeを既定候補へ昇格する根拠は不足。最大1の次方向は**次の許可単位でstandard200 hiddenを固定し、同D・同train-only λ.01 ridge・同scalar参照の一対照**。feature学習時期のみを変え、400の適合でhidden側へ残った汎化不足か、この単純読出しで解消できない差かを狭める。追加λ/width/LR/teacher/fresh testを自動先行しない。現在216の29505/30000余裕へ5901を無断追加せず、新配分の採否・費用判断に返す。改善しても時期と表現変化の有限比較であり教師noise/history/分布・表現全方式の一原因断定は残る。
+
+216 phase2 actual5901/total29505<=30000、exit0/wait/currentidentity不在、全heavy4.815047723s（phase1+phase2）、peak familyRSS640339968Bの停止receiptと束縛した。217直前06:37:50に正frame16 monitor ownedNone、次quiet935s、producerPID4083106/tick34842201不在、heavy0、自controller PID/tick/RSS11.2MiB、forecast651264<716800をadmitした点証拠。独立job .48492s/peakRSS70881280B、自己PID4088531/tick34884290を保存。残source読取を含む60秒を元120に加算し**217 total180/180、残0**。旧charge/phase1 source-resultは変更0、追加NN/test/forward0。これ以降は必要保存・復元・backup・handoffのみ。phase2根拠は自域`check-phase2.py,phase2-result.json,phase2-per-game.json.gz,phase2-admission.json,phase2-science-stop.json`。
