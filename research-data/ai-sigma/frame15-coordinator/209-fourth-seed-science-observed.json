@@ -1,0 +1,109 @@
+{
+  "UTC": "2026-10-04T04:33:22.244505+00:00",
+  "issue": "quoridor-4lc.209",
+  "start": {
+    "UTC": "2026-10-04T04:31:27.328510+00:00",
+    "identity": {
+      "pid": 3995327,
+      "ppid": 3995284,
+      "pgrp": 3995327,
+      "tick": "34125486",
+      "RSS": 0,
+      "cmd": "",
+      "affinity": [
+        2
+      ]
+    },
+    "kind": "heavy"
+  },
+  "stop": {
+    "id": "train-seed19080312-r1",
+    "kind": "heavy",
+    "UTC": "2026-10-04T04:31:30.061669+00:00",
+    "identity": {
+      "pid": 3995327,
+      "ppid": 3995284,
+      "pgrp": 3995327,
+      "tick": "34125486",
+      "RSS": 0,
+      "cmd": "",
+      "affinity": [
+        2
+      ]
+    },
+    "command": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "tools/ai-sigma-learning-diagnostic/seed_run.py"
+    ],
+    "wall_seconds": 2.7336317080189474,
+    "peak_family_RSS": 828530688,
+    "exit": 0,
+    "reason": "completed",
+    "child_waited": true,
+    "remaining": [],
+    "current_exact_identity_absent": true,
+    "samples_charged": 74804,
+    "sample_cap": 74804,
+    "CPU": [
+      2
+    ],
+    "GPU": 0
+  },
+  "source_paths": {
+    "job": "research-data/ai-sigma/frame15-learning-diagnostic/jobs/train-seed19080312-r1",
+    "run": "research-data/ai-sigma/frame15-learning-diagnostic/runs/frame15-learning-diagnostic-lr1e-4-seed19080312-r1"
+  },
+  "source_hashes": {
+    "research-data/ai-sigma/frame15-learning-diagnostic/jobs/train-seed19080312-r1/admission.json": "fb257067d5209439014d9a7ac54523566cf3d9146361b22c3dd470fe3861ce56",
+    "research-data/ai-sigma/frame15-learning-diagnostic/jobs/train-seed19080312-r1/owned-current.json": "c508c7cea11ee4243a1ff6f602acdd7f1e7aea2eeb44e9dc006acca9e3a11620",
+    "research-data/ai-sigma/frame15-learning-diagnostic/jobs/train-seed19080312-r1/process.json": "c47c32c802f4fa07e8acda754cde9ee161b878beb646fde36adfb6201749b289",
+    "research-data/ai-sigma/frame15-learning-diagnostic/runs/frame15-learning-diagnostic-lr1e-4-seed19080312-r1/history.jsonl.gz": "0d11e03f0c7815cc263045f0f0dd6759680b9fe72f075f036de51372b0b94cbf",
+    "research-data/ai-sigma/frame15-learning-diagnostic/runs/frame15-learning-diagnostic-lr1e-4-seed19080312-r1/dataset.json": "2e2d7d532a030cf8461c8d010d660daa5290ad45120dd7eaf4be31c8318d26b8",
+    "research-data/ai-sigma/frame15-learning-diagnostic/runs/frame15-learning-diagnostic-lr1e-4-seed19080312-r1/config.json": "12ea42b94aaeffd0caa19b20b6f3f461fbff1c75ae893ecdcb57b00db8738c13",
+    "research-data/ai-sigma/frame15-learning-diagnostic/runs/frame15-learning-diagnostic-lr1e-4-seed19080312-r1/summary.json": "f953faec813cb361291f13bc1dfdeb662cd54add311bd160439a7a21b649d038"
+  },
+  "primary200minus0": -0.026258211555564626,
+  "points": [
+    {
+      "step": 0,
+      "train_gameMSE": 0.7316784652847409,
+      "validation_gameMSE": 0.6835895608168193,
+      "validation_z_gameMSE": 1.003394205129786,
+      "train_samples": 0,
+      "all_samples": 5901
+    },
+    {
+      "step": 100,
+      "train_gameMSE": 0.7033749348439762,
+      "validation_gameMSE": 0.6748874967327517,
+      "validation_z_gameMSE": 0.9948011513768629,
+      "train_samples": 12800,
+      "all_samples": 24602
+    },
+    {
+      "step": 200,
+      "train_gameMSE": 0.6240687350211819,
+      "validation_gameMSE": 0.6573313492612547,
+      "validation_z_gameMSE": 0.9784129750414822,
+      "train_samples": 25600,
+      "all_samples": 43303
+    },
+    {
+      "step": 400,
+      "train_gameMSE": 0.3015493805497628,
+      "validation_gameMSE": 0.7442684293139178,
+      "validation_z_gameMSE": 1.0867617050512386,
+      "train_samples": 51200,
+      "all_samples": 74804
+    }
+  ],
+  "admission_supervisor_owned": {
+    "run_id": "ee941dec-aa29-4292-958f-29acb26b15ea",
+    "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+    "turn_id": "01a1052c-1080-7e53-8c45-3c4cb761dde4",
+    "started_at": "2026-10-04T04:28:56.290062+00:00",
+    "max_turn_seconds": 180
+  },
+  "claims": "early validation pattern reproduced at preselected200 across2 joint initial/sampling seeds; validation reused; distancebaseline still better; final adoption not supported"
+}

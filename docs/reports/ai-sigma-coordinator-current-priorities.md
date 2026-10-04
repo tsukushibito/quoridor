@@ -184,3 +184,8 @@ HEAD対DISTarena、追加L2/headfreeze/幅/target調整、教師増量は保留�
 ## frame15 三条件実観測からの次判断
 
 全層LR.001は20stepで初期valより改善し、旧100step刻みの見落としを実証。LR.0001 best200の再用val .659847は初期/定数以下だが距離.485147未超。210独立見解の別seed再現を同209第四条件として採択し、固定primary200/seed19080312/LR.0001/400step、0/100/200/400曲線の1runを配分。初期とsamplingのjoint seed変更、再用val/条件選定であり独立test改善ではない。低LR1e-5終端は遅い軌跡で棄却しない。tinyfit・幅/clip変更・新teacher/test・arenaは現在低優先、第四再現/勾配所見で再検討する。担当209実受付/開始/primary/停止、210残60内の有限見解。科学総予定405434sample/既800000内、保存・個別期限不変。
+
+
+## frame15 別seed第四条件の実停止と次小観測
+
+固定seed19080312・LR1e-4・primary200は04:31:27–04:31:30 CPU2単1/74804sample/exit0/全wait exactabsent。再用valはowninitial .683589561→200 .657331349（差-.026258212）、400 .744268429。元seed200改善-.030328254と方向再現、joint初期/sampling変更・距離.485147未超・2seed/多点選択限界保持。学習終了後、既提案済12train witness/3checkpointの距離局所感度144sampleを同209内の小sanityとして実配分04:34:16 active steer accepted。初期/訓練後の入力利用Bを小費用で観測し、尺度対照の有用性を選ぶためでありsynthetic合法局面/teachertruthの認定ではない。四学習actual405434、probe予定144/保守736208<800000。210残60/180内で第四＋probe必要保存算術を一短jobで合わせる方針（既実施ならreset0/不足保持）。追加train/teacher/test/arena自動起動0。
