@@ -1,20 +1,26 @@
 # 現在のNNUE研究優先順位（frame16連続延長17）
 
-2026-10-04 09:00 UTC時点。開始05:55:50/終了09:55:50 UTC（18:55:50 JST）、新heavy09:45:50、監督09:50:50、monitor09:53:50、最終保存09:55:50。CPU合計4/RAM current8GiB/保持＋未使用予約12GiB/GPU推論6GiB・1job30分、GPU学習は旧確認未使用残のみ。同saved六role/model-effort、累積cap reset0。親main/mirrorと運用writerは92一人。最高棋力goal未達、旧testを選定へ戻さず173正式198局非学習。
+2026-10-04 09:35 UTC時点。開始05:55:50/終了09:55:50 UTC（18:55:50 JST）、新heavy09:45:50、監督09:50:50、monitor09:53:50、最終保存09:55:50。CPU合計4/RAM current8GiB/保持＋未使用予約12GiB/GPU推論6GiB・1job30分、GPU学習は旧確認未使用残のみ。同saved六role/model-effort、累積cap reset0。親main/mirrorと運用writerは92一人。最高棋力goal未達、旧testを選定へ戻さず173正式198局非学習。
 
-## 主配分と判断を変える問い
+現在の主仕事は成立codecGraph/GPU24/B8/K64を固定した新96familyの段階生成・資格・保存費測定。旧eager平均116.405994秒→Graph85.727065秒（26.3551%減）→codec79.305334秒（7.4909%減）は同48family比較の有限利益として受入れ、一般倍率や単独codec原因へ拡張しない。09:25:58の管理入口はforeign guard停止・原sample UNKNOWNを保持し、モデル登録前のowner source-order証拠でNN0を補足。guardianの自己孫process raceへの薄修復後、同96manifestで初回モデル科学09:29:43→09:34:34、exit0/293.226300秒/262957NN-equivalent、全子wait・exact不在を現物確認。品質/密度/全pipeline費はまだ集計中、追加生成・学習/test開始0。Supervisor自然2回目は最新Graph/codecを取り直し、全費と新96の限界を判断・通知した。
+
+09:21:49/53に同saved221へactive steer/222へ実質phase4 startで、新fresh96一回の実契約を配送。codec二job82.130331/76.480338秒・平均79.305334、oldgraph比wall.925091/rate1.080975/返信bytes.378904。必要6科学payloadGit7595553と独立2f24813の現bytes/停止SHAを有限受入れ、後付けscenarioは科学payloadと別、pack全memberはowner PASS参照。knownpipeline1000約29.0676分＋未知費で30実達成は未認定。
+次の主仕事は固定codecGraph/GPU24/B8/K64で異なる新96lineageの密度・尾部・資格/保存込み費を測るphase4。残33分前後で30–60分想定の配列輸送改修＋品質比較を追加するより、成立方式を実増量に接続する情報価値を優先。array/Rustpump/C++は排除せず、段階量で輸送/尾部が目安を阻み、改修検証費を回収できる時に順位を上げる。新NN301000以内/原全上界870460、heavy330以内/原1800保持、static新40/管理新180を原残内、new128MiBは既exp確認unused内だけ。source/旧科学変更0・actual1000/learn/test0。science新09:35:50/stop09:41:50/save09:49:50/submit09:53:50。222新source20+NN0calc30、new64KiBを既critic残内、旧210保持。
+Supervisor自然db6814e6 completed/observeexit0/notes+backup exit0/判断通知accepted・通信子reapedの正本を受入れ、自然1回の有限復旧。最新Graphを取り落とすselection範囲の限界とnamespace拒否は保持し、冒頭/直近notesを修正。未来/全面成功・科学改善とは別。
+
+## phase3実装の選定・検証・費の保存済み根拠
 
 ユーザーの「大規模増量前に生成を高速化」「構成維持自体を目的にしない」「Graph以外も簡単なら目安達成後でも実装」を適用する。最大の未解決点は、少数trainのfit/gapだけではデータ不足を除外できず、桁の違う独立局数の検証を同品質・多様性で実用の費用にできるか。保存済みprofileと実sourceで安い冗長処理を先に除き、広いRust pump/配列protocol/C++移植の費用を同時に負わず、品質を保つ有効行とgame/全attempt費で採否を決める。
 
 221 experimentの現在主仕事はsingle-encode＋bits-only wireの最大1package。providerの捨てる第一JSON encodeと送信用第二encodeを1回にし、応答ID＋137uint32からbrokerが検査後にf32 logits/valueを復元する。入力/モデル/Graph B1..8/active24/maxB8/flush.25ms/3worker/K64/root64edge63/tau/RuleA/P2/history/探索は保持。二変更同時なので単独因果としない。stdout9～10秒はencode/pipewait混合、全額節約は保証しない。
 
-08:48:49同saved experimentへ実配送、claim継続・私有codec-control source準備を受領。sourceGit571d939b、49mock応答/10不正schema・ID/取消/EOF/guardを保存。222独立の最大1指摘はuint32 cast前の型/整数/範囲検査。現wireでNumber.isInteger＋0..4294967295をtyped-array前に確認し採用、NaN/Inf拒否とsigned-zero/subnormal復元を別確認。roundtripだけを数値同等根拠にしない。予定432NNは同異入力oldgraph/CPU対newcodecのbit対応・数値許容を別検証。現時点実parity/生成/速度0、静的mockを科学効果にしない。
+08:48:49同saved experimentへ実配送、claim継続・私有codec-control source準備を受領。sourceGit571d939b、49mock応答/10不正schema・ID/取消/EOF/guardを保存。222独立の最大1指摘はuint32 cast前の型/整数/範囲検査。現wireでNumber.isInteger＋0..4294967295をtyped-array前に確認し採用、NaN/Inf拒否とsigned-zero/subnormal復元を別確認。roundtripだけを数値同等根拠にしない。予定432NNは同異入力oldgraph/CPU対newcodecのbit対応・数値許容を別検証。静的受領時は実parity/生成/速度0だった。現在は上記432数値と両48実測が成立、static mockだけを効果根拠にしない。
 
 最大2生成job各48・hard300秒/physical NN180000、parity含新362000以下、原406620＋新上界768620<900000。新heavy650を原1800残内、新static60を原70/180残内、新管理180を原150/600残内。新64MiB予約/56MiBguardは既experiment1980MiB確認未使用1179754496→1112645632Bから配分。旧221予約128MiB・forecast116807935B保持、unknown減額/親追加0。新science09:15:50/stop09:25:50/save09:38:50/submit09:43:50。[実契約](../../research-data/ai-sigma/frame16-coordinator/221-low-cost-codec-contract.md)。全予定fault/unknown/NOT_STARTEDと停止を保持、成功置換・benchmark訓練混合0。root ACK/全文/全役承認を開始gateにしない。
 
 222同savedへ08:48:50実配送・codec静的開始受領。source30＋停止後必要NN0算術30=新60、CPU0単1/RAM224MiB、旧phase1/2計150を保持。新65536B/forecast51200B、旧117289444＋新=117354980<117440512B。公表停止版source/parity/status/costへ束縛して品質分母・全費・主配分の意味を独立裁定する。旧検算/forward/旧test/173読取を追加しない。[独立契約](../../research-data/ai-sigma/frame16-coordinator/222-low-cost-codec-contract.md)。
 
-96fresh段階pilotは提案段階で、統括tool構文失敗が実tool呼出前に起き契約/Beads/dispatch0。未配分記録を保持し、最新user steerによりcodecを優先した。96を実生成済み/実配分済みとしない。
+先行した旧96fresh段階pilot案は提案段階で、統括tool構文失敗が実tool呼出前に起き契約/Beads/dispatch0。未配分記録を保持し、最新user steerによりcodecを優先した。この旧未配送案を実生成済み/実配分済みとしない。09:21の新phase4実配分・現96測定とは別履歴。
 
 ## 既測定と採用範囲
 
