@@ -37,6 +37,7 @@ for issue in ['quoridor-4lc','quoridor-4lc.201']:
 gate=json.loads((D/'gate-admission.json').read_text())
 assert gate['passed'] is True and gate['physical_handoff_stopped'] is True,'GATE_NOT_PASSED_OR_NOT_STOPPED'
 assert hashlib.sha256(Path(gate['gate_path']).read_bytes()).hexdigest()==gate['gate_SHA256'],'GATE_SOURCE_CHANGED'
+for f,h in gate['input_bindings_SHA256'].items():assert hashlib.sha256(Path(f).read_bytes()).hexdigest()==h,'GATE_INPUT_BINDING_CHANGED'
 assert c['NN_cap']==307200 and c['job_seconds']==300 and c['science_deadline']=='2026-10-04T02:10:00Z','CONTRACT_CAPS_CHANGED'
 current=[];foreign=[];researchRSS=0
 for pid,row in table().items():

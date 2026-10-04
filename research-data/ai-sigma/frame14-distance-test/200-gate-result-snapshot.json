@@ -1,0 +1,152 @@
+{
+  "issue": "quoridor-4lc.200",
+  "UTC": "2026-10-04T01:13:02.191751+00:00",
+  "status": "GATE_MET",
+  "conditions": {
+    "below_constant": true,
+    "below_random_QF1": true,
+    "finite_input_coefficient_schema": true,
+    "science_child_stopped": true
+  },
+  "candidate_step": 0,
+  "candidate": {
+    "path": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/nnue/frame14-distance-residual-r1/best.pt",
+    "checkpoint_SHA": "6f9c15867b3363b5b5ccbc6f70a5faad59ab225f361b550d8f3b5d94cf197dbf",
+    "B": 52067,
+    "weight_SHA": "52bfc75272f7cfe8ae6ce57eb14b8a9e7848bfba99613c221f77498a8e897576",
+    "step": 0,
+    "samples": 5901,
+    "condition": "QF1-distance-residual-f32-v1"
+  },
+  "candidate_validation_gameMSE": 0.48514681311997876,
+  "distance_initial_gameMSE": 0.48514681311997876,
+  "residual_benefit_validation": false,
+  "fixed_thresholds": {
+    "constant_gameMSE": 0.6787804677332444,
+    "random_QF1_gameMSE": 0.6901755738627967,
+    "margin": 0.0001,
+    "step0_allowed": true,
+    "finite_schema_required": true,
+    "source_child_stop_required": true
+  },
+  "evaluator_settings": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-distance-residual/evaluator-settings.json",
+  "evaluator_settings_SHA": "115181bf1dfad94e078a8e43ae371336c0a4ba8501889724a9eae73dee8b30db",
+  "coefficient_fit_SHA": "77ce9e79495038b25a4f4a9ffd95dc9f66700aff2c1f96cf08b65fff3c79733c",
+  "coefficients": {
+    "a": 0.06294242415104226,
+    "b": 8.276425107422213
+  },
+  "validation_SHA": "d4b5b218fcfaaa548fb9a2ee3056f34b21e4ed63143e67f6e7aa94f7934cd7e3",
+  "mask_SHA": "10b502cd9e1c5334e56a3f460ef3edff7f822c8f52f69c3af53529c67c45d5f5",
+  "training_stop_path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-distance-residual/training-stop.json",
+  "training_stop_SHA": "71e112deda6b80ca75c7c39b9df3775c701b653be03cee0fef1b78cbc64fa3d3",
+  "private_sources": {
+    "tools/ai-sigma-qf1-distance-residual/residual_model.py": "7e456d2c86b0e2a8f1d1f0feff1e43446181ddaabc52920cf7fbcd7076149627",
+    "tools/ai-sigma-qf1-distance-residual/run.py": "0d6222cf0f5e44bed2a7b9a517206052d8c18fb871cf5317d40985cd14f002b9"
+  },
+  "testlabels_read": false,
+  "newtest_slots": [
+    {
+      "slot": 1,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 2,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 3,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 4,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 5,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 6,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 7,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 8,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 9,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 10,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 11,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 12,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 13,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 14,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 15,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 16,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 17,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 18,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 19,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 20,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 21,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 22,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 23,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 24,
+      "status": "NOT_STARTED"
+    }
+  ],
+  "checkpoint_condition": "QF1-distance-residual-f32-v1",
+  "science_samples": 379921,
+  "train_samples": 256000,
+  "strength_claim": false,
+  "old197_gate_unchanged": true,
+  "new_test_generation_fixed_gate_authorized": true
+}
