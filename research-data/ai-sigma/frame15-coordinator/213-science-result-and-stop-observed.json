@@ -1,0 +1,120 @@
+{
+  "UTC": "2026-10-04T05:24:27.247304+00:00",
+  "issue": "quoridor-4lc.213",
+  "input_files": {
+    "research-data/ai-sigma/frame15-distance-update-control/result.json": "54a33f75b372376b64282a470463173b6d07847063b1008cd41107ff9c1979e0",
+    "research-data/ai-sigma/frame15-distance-update-control/initial-function-parity.json": "403b0f0f2c3b91a42e3da8c7b041bcfde1783fb4038ff3caff2b77ad462822d4",
+    "research-data/ai-sigma/frame15-distance-update-control/first-proposal-finite.json": "e6318e2f24745dfdc5389edbdd95eec8e4a054e543f648c35e677c9b03673208",
+    "research-data/ai-sigma/frame15-distance-update-control/science-stop.json": "0910e880dc4a11f8f430f59d49723aab815b50bbf0d642df3ee9cbaae7116330"
+  },
+  "primary": {
+    "step": 200,
+    "attenuated_validation_gameMSE": 0.6593288242421362,
+    "standardized_validation_gameMSE": 0.6139164435565568,
+    "raw_validation_gameMSE": 0.659847319505419,
+    "delta_vs211": 0.0454123806855794,
+    "train_gameMSE": 0.6198396696670401,
+    "val_z_gameMSE": 0.9874485127177722,
+    "val_z_sign_accuracy": 0.5392628205128205,
+    "val_saturation": 0.0,
+    "all_samples": 78709,
+    "train_seen": 25600,
+    "epochs": 5.501826778422523,
+    "elapsed_s": 1.500271005963441
+  },
+  "paired_vs211": {
+    "improved": 4,
+    "worse": 20
+  },
+  "parity": {
+    "PASS": true,
+    "raw_additional_forward_samples": 5901,
+    "scaled_initial_forward_already_charged": 5901,
+    "maxabs": 2.2351741790771484e-08,
+    "atol": 1e-06,
+    "train_rows": 4653,
+    "validation_rows": 1248,
+    "test_rows": 0,
+    "no_step_before_parity": true,
+    "raw_tensor_SHA": "e5d218c9750d581eab7ca6a114acaa8f3cf5bd24474e3f639280705271fc7ddb",
+    "scaled_initial_tensor_SHA": "51b9a8c03b2f8b85952e31602db827b069ae35c4c2c7f0a01b432f82fc64b09e"
+  },
+  "intervention": {
+    "PASS": true,
+    "step": 1,
+    "nonzero_proposal_count": 62,
+    "proposal_zero_unknown_ratio_count": 2,
+    "nonzero_proposal_applied_zero_count": 0,
+    "zero_proposal_or_rounding_zero_is_fault": false,
+    "proposal_to_applied_ratio_by_column": [
+      {
+        "nonzero": 31,
+        "proposal_zero_unknown_ratio": 1,
+        "nonzero_proposal_applied_rounding_zero": 0,
+        "min": 0.05434688925743103,
+        "max": 0.05434843525290489,
+        "expected_sigma": 0.0543474480509758
+      },
+      {
+        "nonzero": 31,
+        "proposal_zero_unknown_ratio": 1,
+        "nonzero_proposal_applied_rounding_zero": 0,
+        "min": 0.05367674306035042,
+        "max": 0.053679320961236954,
+        "expected_sigma": 0.05367854982614517
+      }
+    ],
+    "maxabs_applied_minus_requested": 1.8053469830192626e-10,
+    "max_f32_roundoff_bound": 6.13383477343632e-09,
+    "roundoff_rule": "4*eps*(abs(before)+abs(before+requested)+abs(requested)); applied delta is difference of f32 params",
+    "proposal_moments_unchanged": true,
+    "bias_otherparams_unchanged_afterproposal": true,
+    "optimizer_group_split_or_reset": false,
+    "extra_forward_backward": 0
+  },
+  "stop": {
+    "UTC": "2026-10-04T05:23:18.373065+00:00",
+    "process": {
+      "id": "train-update-r1",
+      "kind": "heavy",
+      "UTC": "2026-10-04T05:21:54.352397+00:00",
+      "identity": {
+        "pid": 4036964,
+        "ppid": 4036914,
+        "pgrp": 4036964,
+        "tick": "34428044",
+        "RSS": 0,
+        "cmd": "",
+        "affinity": [
+          2
+        ]
+      },
+      "command": [
+        "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+        "-B",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-distance-update-control/run.py"
+      ],
+      "wall_seconds": 3.0749410259886645,
+      "peak_family_RSS": 786186240,
+      "exit": 0,
+      "reason": "completed",
+      "child_waited": true,
+      "remaining": [],
+      "current_exact_identity_absent": true,
+      "samples_charged": 116111,
+      "sample_cap": 116111,
+      "CPU": [
+        2
+      ],
+      "GPU": 0
+    },
+    "exact_identity_absent_now": true,
+    "source_science_stopped": true,
+    "newscience_allowed": false,
+    "samples": 116111,
+    "allwait": true,
+    "remaining": []
+  },
+  "producer_preservation": "not yet final; science stop distinct",
+  "independent214": "pending"
+}

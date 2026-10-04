@@ -212,3 +212,8 @@ HEAD対DISTarena、追加L2/headfreeze/幅/target調整、教師増量は保留�
 ### frame15 211/212受入れと更新量交絡の次対照
 
 211の同初期関数標準化で固定200stepの再用valgameMSE .6598473195→.6139164436、20/24局改善を212独立算術でも支持した。初期parity/同batch/全層/必要Git・停止を受入れ、211closed。距離基準.4851468131未超・単seed/再用validationの限界。初回raw距離列更新が約18.5倍になったので、次213/214は同center/scale/初期補償を保持してAdam距離列proposalをsigma倍に減衰する1対照を選定・実配送。primary200minus211、原raw軌跡完全一致/尺度唯一因果は主張しない。詳細distance-update-contract/selection、予算/期限は親15内。別seed再現は有力保留、fresh独立test/arenaは有望用途の凍結候補と情報価値が得られた時に再検討。
+
+
+### 213停止観測：更新増幅を抑えると標準化利益が縮む
+
+固定primary200 valgameMSEは213減衰.6593288242、211標準化.6139164436、209raw.6598473195。減衰−標準化+.0454123807、24局20悪化4改善、同初期関数/同batch、actual116111sample/CPU2science3.074941s/停止全wait。first-proposal実f32PASS/proposalzero2は未知ratio/追加NN0。距離列実効updateが今回の利益に関与したことと整合するが、中心化bias結合・moment/gradientpath・単seed/再用valの留保が残り、raw完全同軌跡/唯一原因ではない。214独立保存算術待ち、213最終Git/backup待ちを分ける。現時点追加科学/test/arena0。
