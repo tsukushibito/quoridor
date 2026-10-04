@@ -16,6 +16,14 @@ frame14ユーザー明示4時間再開。開始2026-10-03T23:20:36Z、終了2026
 
 既savedへ実配送済み、本人claim/static開始を受領。194は全6job144GOAL・適格6996行（train96=4653/validation24=1248/test24=1095）、allattempt generation691.356145秒・physicalNN397012/startup0、科学最後00:01:42.075112Zでsource runtime/全科学子を停止した。共有RuleA資格と195実canonical APIによるlabel-free全144manifest・最大96固定maskを引渡し、現データのval/testは全行eligible/G+=各24。代表性・IID・教師真値は未認定。最大96mask前の部分48版は履歴として保持し、選定には最終版だけを束縛する。export192heap OOMは管理失敗として保持し、同immutable rawをhelper512/guard896MiBでNN0修復、worker cap/NN科学は変更しない。195へ停止・正本使用可能を実steerし、196へlabel-free実mask検算を実配送した。195の固定LAST比較は別moduleで共有v2を保持し、NN0二check成功・学習開始予告の後、00:14:08.640926にtrain24-r1実child（CPU2/PID3802905/starttick32580881）開始報告を受領した。3stage24/48/96はいずれも2000step完了、同initialSHA/各256000train samples、計1019139評価込samples。全beststep0で固定valの学習改善は未確認、学習済み重みへの昇格0。candidate48step0/同初期tensorをfreeze v2 SHA45c27fbfで結果前固定。00:19:26–00:19:28独立test一巡は3uniqueweights3285samples・全子回収。候補rootmean gameMSE.669736対train定数.655448で改善不支持、LAST96minus24+.043023/paired95[-.163854,.251313]で数量効果不確か、重み採用0。196へ最終per-row算術を配送、195へ次最大1競合仮説の判別案を提案依頼した（追加run0）。194有限受入れ済だがBeads所有guardで統括closeは未成立、owneridleで専用turnを作らず次実配分で本人close。既64MiB保存移転は実確認済み。194全pack/Git全文・196全文は学習の入口gateにせず、195がcurrent所有/RAM/自然監督予定を直前admitして学習へ進む。194旧guardianのruntime RSS表示限界は保存し後続版はruntime/nested testを算入した。配送accepted/本人開始/学習効果は別。主報告待ちは195曲線/freeze/test、196独立mask/test裁定、194必要pack/復元/backup、92期限回収。
 
+## 次の最大1判別の現在配分
+
+196最終NN0裁定は全6996署名/mask、63曲線点、1095test per-row、同tensorSHAとpaired2000bootstrap/定数を独自対応し、候補学習不支持・数量効果不確かを支持した。教師π/GOALはproducer/sharedRuleA、後続historyはopaque、forward再認証なしの限界を保持する。
+
+195提案のL2感度を採用し、hypothesis197へAdam weight_decayだけ0→.01/同96train4653/val1248/初期SHA/2000step×128の学習1runを実配送した（00:30:49accepted、00:32:43claim/00:34:03静的開始、NN0）。旧WD0全曲線を対照として再利用する。exp198へfresh24独立testのNN0先行manifest準備を実配送（00:30:52accepted、本人受領00:31:05/claim/24合法NN0manifest準備、NN/GPU0）。新生成はL2 learned beststep>0/初期と異なるweights/val MSEがWD0bestとtrain定数をともに1e-4以上下回る場合だけ。未達なら全24NOT_STARTEDを保存して追加生成を省く。1e-4は数値微差だけの費用起動回避で統計支持ではない。条件達成後はtrain+val+旧testのlabel-free exposureを固定して新test一巡、旧test再開/交換0。197は既19564MiB内の実unusedから16MiB、198はexp1980MiB内の32MiBを直前forecastし、未知旧量減額/親増額0。新CPU学習とGPU生成・自然CPU0監督は本人currentadmissionで非重複。新early heavy01:15/01:10と最終提出01:40/01:35は親より早側。
+
+196の低LR/初期10-100step案は競合候補として保持し、今回は先に配分済みのL2一因子を優先、同時sweepにはしない。正則化量が支持されなければ原因を断定せず、表現/教師視点又は初期学習量の最小判別へ戻す。元144/3stage/testの結果・freeze・guard失敗は変更しない。195最小停止/保存後197へ、194は198実turnで本人close/backup後、新claimした。195は197の現turnで有限受入れ後の本人closeを実依頼済み、196はidleで次実依頼と合わせる所有対応待ち。closeだけの新turn/force takeoverは行わない。
+
 ## データ版と3分割・露出
 
 新fresh144gameをtrain96/validation24/test24へ結果前manifest固定。trainだけfirst24→48→96の入れ子、validationとtestは同じgame/rowで固定する。opening8/12/16/20/24/28plyを各partition均衡、新entropy/domain/family/actionseed、色交換・対称・派生兄弟は同partition。K64/root64edge63/tau1最初16newply→argmax/200newplycapを固定、打切りzunknown/value mask0。187モード反復4528行を独立教師として足さない。
