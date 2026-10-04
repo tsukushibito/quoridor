@@ -25,6 +25,9 @@ for issue in ['quoridor-4lc','quoridor-4lc.221']:
  controls.append({k:q.get(k)for k in ['id','status','assignee','labels']})
 schpath=Path('/workspaces/quoridor/.artifacts/research-team/scheduler-sigma-continuation-20261001/state.json');sch=json.loads(schpath.read_text());assert sch['phase']=='running' and sch['owned']is None and not sch.get('recovery_required');quiet=sch['next_at']-time.time();assert quiet>=c['job_seconds']+30,'SUPERVISOR_QUIET_SHORT'
 monitor=R/'.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame16-extension17-49170cb6-b27b-4fed-8be1-36f441f2df63/monitor-observation.json';mon=json.loads(monitor.read_text());assert time.time()-monitor.stat().st_mtime<120,'CURRENT_MONITOR_STALE'
+loaded=json.loads((R/'.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame16-extension17/running-loaded.json').read_text());assert loaded['parent_version']==17
+for role in ['scheduler','monitor']:
+ z=loaded[role];actual=table().get(z['pid']);assert actual and str(actual['tick'])==str(z['start_ticks']),'RUNTIME_CURRENT_IDENTITY'
 current=[];foreign=[];rss=0
 for pid,z in table().items():
  if pid==os.getpid() or z['state']=='Z':continue
