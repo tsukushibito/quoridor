@@ -84,3 +84,29 @@ provider pipe累積は67.31/67.20秒、forward同期29.37/30.05秒、stdout JSON
 科学源36a6ac0663f683bc6f99385dc3a36859212f814e、新payload ca1f0d4737b7cfc3553458420dc59b39022bf36e。新pack4,580,587B/SHAaec48aec86f63ef617c472a09261c2d18afee06424b843812d5b05e7250d53ee、全member byte復元PASS。defaultindex/privateindex不変更、旧128MiB reserve/112MiB guard内で原raw/Git保持、未知減額/親増額0。benchmark教師は学習へ転用しない。phase2資格・効果はowner有限確認で、222の旧phase1独立裁定を新graphへ拡張しない。
 
 phase2最終保存補足: report/receipt Git保存2.7183秒を96実行gameへ配賦すると、測定済み全工程外挿は1000局31.5097分＋未分離費。前の31.04分を置換せず追加費として保存した。表のphysical NNはproviderの課金single-sample-equivalentで、warm/capture108を保守的に含む。capture中の実GPU kernel実行数を観測した値ではなく、探索要求81096と別欄に保持する。GPU allocatorピークをdriver/context込みVRAM峰値とは呼ばない。
+
+
+## phase3 single-encode / bits-only codec（新現在配分）
+
+Graphの数値・inputcopy/replay/snapshotを維持し、providerが実送信JSONを一回だけencodeする方式と、返信をID＋137 uint32 wordsへ絞ってbrokerでf32再構成する方式を一packageとして試した。uint32のinteger/rangeはcast前、exponent NaN/Inf・value域・ID/順序/shape・roundtripを維持。component別原因は認定しない。広いbinary/Rustpump/C++同時実装はしなかった。試行前の開発見積は5＋10＝15分で実開発全費の実測ではない。
+
+静的mock14checks（10 invalid schema、signed zero/subnormal、B1..8、queued/inflight cancel・stale・EOF・guard）と実432 NN-equivalentの16fixturesを区別する。旧graph→newcodecの各137 f32 bitsは同入力でexact、CPU固定abs1e-4＋rtol1e-4 PASS（最大差7.153e-6）。これは新数値確認であり旧mockからmodel parityへ読み替えていない。各session warm/capture108も課金した。NN-equivalentはcaptureに含む実kernel数の観測ではない。
+
+| 条件 | 全予定/完了 | Rpolicy/Rz/Rjoint | NN-equivalent | cold/cleanup込みjob秒 | joint行/秒 |
+| --- | --- | --- | --- | --- | --- |
+| 旧graph | 48/48 | 1554/1554/1554 | 81204 | 84.9546 | 18.2921 |
+| 旧graph確認 | 48/48 | 1554/1554/1554 | 81204 | 86.4995 | 17.9654 |
+| 新codec | 48/48 | 1554/1554/1554 | 81204 | 82.1303 | 18.9211 |
+| 新codec事前留保確認 | 48/48 | 1554/1554/1554 | 81204 | 76.4803 | 20.3189 |
+
+Codec平均79.305334秒/旧graph85.727065秒、wall比.925091（約7.5%短縮）/行率比1.080975。各新job全48GOAL/fault・censoring・NOT_STARTED0、各1554行全RuleA replay・π63・z資格PASS。旧graph-r1とstate/history/features/legal/action/visit全1554対応、最大rootNN差7.153e-6/rootmean差5.751e-8。小fixtureのbitexactと、実生成の異なるpartialbatchによる有限数値差を分けた。全deep leaf NN/教師真値/棋力・独立game増量は未認定。96実行は同48familyの反復、訓練へ混合0。
+
+実Bmean6.1637/6.1609。provider返信byte約161.53MB→61.20MB（約62%減）、requestは約307.00MBで維持。新json encode once .854/.753秒、actual stdout write7.758/7.557秒。旧encode firstpass2.677/2.648秒は捨てたencodeのみで旧stdout write9.294/9.881秒が二回目encode/pipewaitも含むため直接同定義比較ではない。stop情報はstop自体のencode/writeを除いた先行返信累積。pipe66.853/60.704秒、forward sync31.038/28.690秒、最後8game尾部28.051/25.544秒。spanは重なるので足してwholewall又は純GPU/hostlaunchの原因へしない。確認二回の5.650秒幅・固定順・旧baselineとの時刻差を保持し、hostwarm等をcodec単独効果へ付替えない。
+
+科学はparity09:09:40→09:09:45、main09:09:58→09:11:18、confirmation09:11:31→09:12:45、source/全子停止2026-10-04T09:13:39.804695+00:00。最初のadmissionは現在coordinator保存scriptを検出して子起動前に拒否、NN0/実wall不明・保守5秒を別保持。新nullable 92 runtime6049/tick35765166・monitor6062/35765187と最新binding/currentを再読し、owned LLM長turnだけを人数gateとせず物理foreign science/RAM/GPUをguardした。他owner interrupt0。新NN162840、総569460/900000。phase3実heavy165.263518秒＋前段失敗UNKNOWN保守5、旧heavy533.406687（旧UNKNOWN保守5含む）不変更。family sampledRSS最大2.296GB、GPU allocator reserved369.10MB、全driver/context瞬間峰値は未計測。
+
+この48gameの密度32.375適格行/gameから、1000局job-only27.5366分。qualification＋pack/member復元＋payload Git byte復元4.662秒の既知費を配賦すると28.6523分＋未分離final保存/dispatch/backup/大規模分布・尾部費。60分初期目標は短測定見込み内、30分目安は既知費では内側だが未計測費の余白約1.35分で、実1000完了を認定していない。100/1000/10000はscenarios.jsonの費用シナリオのみ。1000局pack約47.62MB＋uniqueGit同程度、raw約326.66MBの単純外挿、実保持scale未確認。K64を公開Sigma K800と同等教師品質とは呼ばない。
+
+節約点推定.133786秒/game。既知parity/前段admission保守/資格/pack/payloadGit約18.08秒なら回収約135局、確認一回も含め約707局。開発見積900秒と既知検証・確認費を含むと回収約7434局で、実reasoning/選定/運用費は未分離。15分を実開発実測とせず、deltaの変動/順序不確かも保持する。短利益だけで無限調整せず、codecは今後生成の有限候補として引渡す。次最大1の費用検討は残る307MB requestのf32配列転送＋所有/ID/cancel/drain対応で、初期30–60分の実装検証見積と回収局数を測定前に登録する。Rust多handle pump/C++統合は規則・build・回収の差分を含む保留候補で、今回から自動開始しない。
+
+科学source Git48c51dbdeef4b7e114e015ecddc6c429d03c24dd、payload7595553c1a39bf5871a821769adcbf06c19ab332。archive4,571,827B/SHAb0fbba8082ae97e3e968a6c1f86dd632397654c147f4ca4324d02fbea82b61bb、全member byte復元PASS。新64MiB/guard56MiBは既pool内、旧128MiB/phase2forecast116807935B保持・unknown減額/親追加0。defaultindex/privateindex不変更。科学/源停止と必要保存helper作業を区別し、222旧phase1の独立支持を新codecへ拡張しない。

@@ -15,7 +15,9 @@
       "joint_rows": 3237.5,
       "archive_B_estimate": 4762319.791666666,
       "retained_raw_B_estimate": 32665689.583333332,
-      "actual_scale_executed": false
+      "actual_scale_executed": false,
+      "known_pipeline_including_payloadGit_minutes": 2.865227849322078,
+      "archive_plus_uniqueGit_B_estimate": 9524639.583333332
     },
     {
       "games_scenario_only": 1000,
@@ -25,7 +27,9 @@
       "joint_rows": 32375.0,
       "archive_B_estimate": 47623197.916666664,
       "retained_raw_B_estimate": 326656895.8333333,
-      "actual_scale_executed": false
+      "actual_scale_executed": false,
+      "known_pipeline_including_payloadGit_minutes": 28.652278493220777,
+      "archive_plus_uniqueGit_B_estimate": 95246395.83333333
     },
     {
       "games_scenario_only": 10000,
@@ -35,7 +39,9 @@
       "joint_rows": 323750.0,
       "archive_B_estimate": 476231979.1666666,
       "retained_raw_B_estimate": 3266568958.333333,
-      "actual_scale_executed": false
+      "actual_scale_executed": false,
+      "known_pipeline_including_payloadGit_minutes": 286.5227849322078,
+      "archive_plus_uniqueGit_B_estimate": 952463958.3333333
     }
   ],
   "targets": {
@@ -51,9 +57,19 @@
     "development_estimate_s": 900,
     "development_plus_known_recovery_games": 6827.447883734821,
     "development_actual_seconds_unknown": true,
-    "delta_uncertain": "only matched ordered pair; hostwarm/batch/tail/nonconcurrent baseline"
+    "delta_uncertain": "only matched ordered pair; hostwarm/batch/tail/nonconcurrent baseline",
+    "known_incremental_parity_admission_qualification_pack_payloadGit_s": 18.079305032007454,
+    "known_component_recovery_games_including_payloadGit": 135.13594552420943,
+    "900s_development_plus_known_recovery_games": 6862.294470504527,
+    "confirmation_cost_s": 76.48033757699886,
+    "known_with_confirmation_recovery_games": 706.7974509958543,
+    "900s_development_plus_known_confirmation_recovery_games": 7433.955975976172,
+    "beforechild_wall_unknown_conservative5_not_measured": true
   },
   "cost_spans_overlap": true,
   "individual_codec_components_cause": false,
-  "K64_not_K800_quality_equivalence": true
+  "K64_not_K800_quality_equivalence": true,
+  "measured_payload_Git_byte_restore_s": 4.661987371975556,
+  "known_save_extra_s_per_game": 0.04856236845807871,
+  "final_report_Git_backup_other_management": "pending/unknown"
 }
