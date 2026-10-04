@@ -46,3 +46,5 @@ candidateとtrain-fit D(a=.06038215201109912,b=7.925687690687516)を同RuleA、�
 凍結valueのnative-hosted数値と合法探索接続は成立した。rootmean教師精度の利益がleaf効用へ移るか、同時間で距離より有利かは未確認。初期rootのdepth2未完は、評価値の分布、αβcutoff/順序、合法生成、入力/cache/eval費の交絡を含む。NNUEの不支持、教師唯一原因、性能最終認定へ広げない。
 
 評価器側は今回のf32/scale/STM/full-deltaを基準として移植・低費用化を検証可能にした。探索側の次最大1候補は233案の「前完成depth最善root手だけ先頭、残stable・全合法」のordering-only対照。同じ凍結評価器/仕事量で完成depth/nodes/leaf/全費、root等値Actionとfail-soft boundを別に確認し、限定policyも合法手除外ではなく順序だけ・推論費込みへ位置付ける。TT/historyや大きい移植は別検証。新対照/対局/再学習は統括の別配分であり、今枠から自動開始しない。
+
+証拠範囲補足: 全root childのexact値/等値argmax集合は未保存（NOT_RECORDED）。選択Action/valueは最後の完成depthに束縛されるが、非最善childのfail-soft boundをexact値として扱わない。counterfactual orderingはNOT_RUN。66archive member復元とGit e86938e8/68path242723B bytePASS、defaultindex不変更を確認。
