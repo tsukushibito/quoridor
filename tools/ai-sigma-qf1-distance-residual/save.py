@@ -8,5 +8,5 @@ m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
 m.D=Path('research-data/ai-sigma/frame14-distance-residual')
 m.T=Path('tools/ai-sigma-qf1-distance-residual')
 m.DOC=m.D/'unused-doc-scope'
-m.REPORT=Path('docs/reports/ai-sigma-hypothesis-frame14-distance-residual.md')
+m.REPORT=Path('docs/reports/ai-sigma-hypothesis-distance-residual.md')
 m.save(sys.argv[1])
