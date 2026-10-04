@@ -1,0 +1,37 @@
+{
+  "at": "2026-10-04T23:11:41.641723+00:00",
+  "preflight_owner_stop_receipt": {
+    "UTC": "2026-10-04T23:10:37.385193+00:00",
+    "issue": "quoridor-4lc.236",
+    "science_start": "2026-10-04T23:08:58.710778+00:00",
+    "science_stop": "2026-10-04T23:09:07.356918+00:00",
+    "samples": 60880,
+    "guardianwall_s": 8.646149640961085,
+    "peak_RSS": 315637760,
+    "all_child_waited": true,
+    "currentexactabsent": true,
+    "clock_fixture_PASS": true,
+    "bench_searches": 32,
+    "initial_NNUE_depth_ascending": [
+      1,
+      1
+    ],
+    "initial_NNUE_depth_rootbestfirst": [
+      2,
+      2
+    ],
+    "other_time_variation": "fixed order/cache/JIT confounded; not general speedup",
+    "next": "fixed pilot slots1..4,100ms/inputready\u2192parentvalidcomplete t1"
+  },
+  "preflight_receiptSHA": "9e2ff8551dc8195122f3af5e339835578164aa5b05f95755a88dc962eda8c07d",
+  "context_source_hashes": {
+    "tools/ai-sigma-frame19-node-context/fixture.cjs": true,
+    "tools/ai-sigma-frame19-node-context/launch.py": true,
+    "tools/ai-sigma-frame19-node-context/node-context.cjs": true
+  },
+  "context_API_stop_SHA": "4b5a4f69a4d7aacd5aefcf2bde08a2d3980f71ff6d6f73b5ec26a08b3e360028",
+  "context_selection": "negative complete-stamp cost; first arena no merge",
+  "source_read_not_independent_forward": true,
+  "root235_initial_acceptance": "received; no ACK-only wakeup",
+  "arena_result": "pending owner diagnosis; background pilot failed and cleaned, not strength loss"
+}

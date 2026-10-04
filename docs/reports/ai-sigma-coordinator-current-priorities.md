@@ -10,6 +10,16 @@
 
 237の23:07:47.818539～48.244474 NN0 fixture測定では55checks/32合法prefix・ABBA4round/1280同node再生で原wrapper2.244456ms対完全stamp+Actioncopy module230.692513ms、約102.78倍の費用。現方式は速度利益negativeとして不採用、第一arenaへmerge0、rootbest-firstと同wall評価を優先。State無revision下で全history/side/depth/walls/cache/mutation/cancelを守るstamp費の観測であり、同関数内の軽いterminal record再用全般まで無効とはしない。owner停止/APIハンドオフと必要Git保存を待ち、再調整/広いTT移植/新科学を自動追加しない。
 
+23:12実測増分:236 preflightは23:08:58.710778～23:09:07.356918、60880NN/8.646150s/32searchと6clockfixture、全wait/currentexact不在をowner stopped receiptで確認。初期NNUE ascending完成depth1/1→rootbestfirst2/2、他はdepth2。固定順/cache/JITが残る有限診断で一般倍率/棋力認定0。early timer wakeは単調時計残時間を待つprospectivev2修復、旧source/fixture保持。pilot背景r1はfailed/cleanuptrueの入口証拠があり、本人診断と全attempt費へ渡し、通常勝敗にしない。clock/固定探索の機能成立は同時間対局成果と分離。
+
+23:14管理障害反映:pilot-r1 23:10:51.966714～56.240881/4.274171s/45handは同100ms受信内まで進行。foreign receiptは統括Git hash-object入力save-owned.pyをscriptと誤分類。known reply23242NN＋inflight UNKNOWNを元counterと別に8192保守追加、charge31434。原3刻/全planned/censorを保持、性能敗北・clock fault0、prospectivev3は実Python/Node executable-script位置だけを判定。同4slot pilot-r2は元総1200s/4mNN内で通常有界修復、第一arena237merge0。必要統括Git保存は次の停止点へ留保、completionイベントで採否/次slotを判断し無意味polling0。
+
+23:20選定更新:236固定8slot owner結果2W5L1UNKNOWN、後4は2W2L。通常7terminalの敗北を保持、slot1outer100.722574msを敗北補充0。全4process known270156NN/保守278348（旧guardcensor inflight UNKNOWN別）/40.254773s、全wait/exactabsence/source12停止science-stop-v1。統括current12source6payload hashを有限照合PASS、238保存時計/合法/全費算術は23:19:41本人saved役へ元契約turn/start accepted。teacher誤差利益から一般棋力/NIを認定しないし、小WDLだけでNNUE無効とも断定しない。
+
+次実配分239:23:19:28にhypothesis既savedへturn/start accepted、保存手/depth/node/費とRuleA history再生からleaf効用・探索コスト・反復の競合説明を診断。新model/NN/forward/train/対局0、別scope tools/research-data frame19-arena-diagnosis、最大4caseは結果前機械選定規則をsourceへ固定、未知/該当無しはtyped。CPU0単1全120s/各60最多2小job/RAM512guard448、source90管理180、新2MiB guard1.5/forecast1を確認unused59875328→57778176から一度計上、旧予約減額/親追加0。23:40新算術入口/23:45科学stop/23:50保存。238と239のCPU0算術はcurrent物理窓で非重複調整、静的並行とcritic全稿gate0。
+
+選定理由:未見教師MSE利益を示したモデルで同時間native結果は有利と未確認のため、新生成/LR/勝敗反復より既手のdepth・費用・history説明を先に区別する。安いDの探索量とleaf-target意味を混同しない。有力代替の同完成depth再探索/薄eval高速化/TTは保存ケースと排他費・改修検証費から一方向を選ぶまで保留、全機能を先に実装するgate0。237 fullstamp negativeはowner有限完了/本人close、別VM drop-in未検証等限界も保持、第一arenaへmerge0。
+
 236主比較:凍結228 576BEST2000/freeze2bac8f1f/tensorb81792d5/layout12193f32/48772B、尺度68f8b43aとactualSTM/full-deltaの232/234有限対応をreuse。Dは同freeze train-fit a=.06038215201109912/b=7.925687690687516、同f32clip。Node-hostedでRust/Wasm/Sigma性能とは呼ばない。alpha-beta iterative deepening、TTnoise0/全合法/policy除外0。根の前完成depth最善手先頭+残stableを薄candidateにし、未完depthは捨てる。固定4root同node4096/depth1→3でAction昇順vsrootbest-firstを同評価器ごと有限profile、cache/JIT/順序/部分depth/同node≠同完成仕事量の限界を残す。inclusive terminal/合法/clone/input/full-delta/eval/controlを排他CPUへ足さない。
 
 同時間対局は両評価器に同rootbest-first/code/CPU番号2単1/1threadを使う探索的8slot=4合法opening×色交換。100ms/手（search90+delivery10）、入力可能→合法完成action受信まで時計、load/起動/warm/回収をwholejob費へ。empty+190合法8ply+新結果前合法12/20plyprefixを先hash固定、人工board/旧testlabelをgame初期に使わない。最初4slot後、時計/資源/残費が成立すれば残4slot、WDL選別0。全fault/timeout/NO_COMPLETED_DEPTH/未完/NOT_STARTEDを残し、成功補充/成績置換0。普通の機能修復は総費内の新版として旧全attempt保持で可能。RuleA履歴/goal/P2/200plydraw/全合法維持、clock/schema不成立を棋力敗北へ混ぜない。等値Action・failsoft bound/exact・未記録argmaxとcompleteddepth差を区別。depth/nodes/sだけ強さ0、8slotで正式NI/最高棋力0。

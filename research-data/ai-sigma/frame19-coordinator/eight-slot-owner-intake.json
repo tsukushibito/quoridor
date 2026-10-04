@@ -1,0 +1,99 @@
+{
+  "at": "2026-10-04T23:17:12.707627+00:00",
+  "source_status": "public owner outputs; final source-stop binding pending",
+  "eight_slots": [
+    {
+      "slot": 1,
+      "opening": "opening0",
+      "NNUE_side": 1,
+      "status": "UNKNOWN",
+      "hands": 5,
+      "winner": null,
+      "result_NNUE": null,
+      "fault": {
+        "type": "OUTER_DEADLINE",
+        "cause_side": "NNUE",
+        "category": "CLOCK_OR_ENGINE_UNKNOWN",
+        "elapsed_ms": 100.72257399559021
+      }
+    },
+    {
+      "slot": 2,
+      "opening": "opening0",
+      "NNUE_side": 2,
+      "status": "TERMINAL",
+      "hands": 113,
+      "winner": 1,
+      "result_NNUE": "L",
+      "fault": null
+    },
+    {
+      "slot": 3,
+      "opening": "opening1",
+      "NNUE_side": 1,
+      "status": "TERMINAL",
+      "hands": 58,
+      "winner": 2,
+      "result_NNUE": "L",
+      "fault": null
+    },
+    {
+      "slot": 4,
+      "opening": "opening1",
+      "NNUE_side": 2,
+      "status": "TERMINAL",
+      "hands": 7,
+      "winner": 1,
+      "result_NNUE": "L",
+      "fault": null
+    },
+    {
+      "slot": 5,
+      "opening": "opening2",
+      "NNUE_side": 1,
+      "status": "TERMINAL",
+      "hands": 32,
+      "winner": 2,
+      "result_NNUE": "L",
+      "fault": null
+    },
+    {
+      "slot": 6,
+      "opening": "opening2",
+      "NNUE_side": 2,
+      "status": "TERMINAL",
+      "hands": 38,
+      "winner": 2,
+      "result_NNUE": "W",
+      "fault": null
+    },
+    {
+      "slot": 7,
+      "opening": "opening3",
+      "NNUE_side": 1,
+      "status": "TERMINAL",
+      "hands": 22,
+      "winner": 2,
+      "result_NNUE": "L",
+      "fault": null
+    },
+    {
+      "slot": 8,
+      "opening": "opening3",
+      "NNUE_side": 2,
+      "status": "TERMINAL",
+      "hands": 22,
+      "winner": 2,
+      "result_NNUE": "W",
+      "fault": null
+    }
+  ],
+  "WDL": {
+    "W": 2,
+    "D": 0,
+    "L": 5,
+    "UNKNOWN": 1
+  },
+  "not_general_strength": true,
+  "next_question": "separate evaluator leaf utility from evaluation cost/depth and history/repetition via saved per-ply cases; no automatic repeated arena"
+}
