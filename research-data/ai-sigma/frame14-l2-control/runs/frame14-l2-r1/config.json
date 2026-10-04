@@ -1,0 +1,38 @@
+{
+  "model": {
+    "feature_version": "QF1",
+    "transformer_width": 32,
+    "hidden_width": 32,
+    "dropout": 0
+  },
+  "optimizer": {
+    "name": "adam",
+    "lr": 0.001,
+    "weight_decay": 0.01,
+    "momentum": 0.0
+  },
+  "training": {
+    "steps": 2000,
+    "batch_size": 128,
+    "seed": 19080311,
+    "target": "rootmean",
+    "sampling": "game",
+    "scheduler": "none",
+    "device": "cpu",
+    "threads": 1
+  },
+  "evaluation": {
+    "interval": 100,
+    "batch_size": 1024,
+    "monitor": "game",
+    "early_stopping_patience": 0,
+    "min_delta": 0
+  },
+  "limits": {
+    "seconds": 110,
+    "samples": 500000
+  },
+  "data": {
+    "overlap_policy": "report"
+  }
+}
