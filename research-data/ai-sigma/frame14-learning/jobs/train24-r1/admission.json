@@ -1,0 +1,121 @@
+{
+  "UTC": "2026-10-04T00:14:08.640396+00:00",
+  "own": {
+    "id": "quoridor-4lc.195",
+    "status": "in_progress",
+    "assignee": "codex:01a0f31c-2e4b-7170-82c5-69e1428c2418",
+    "labels": [
+      "continuation-active",
+      "frame14",
+      "initial-window-ended"
+    ]
+  },
+  "goal": {
+    "id": "quoridor-4lc",
+    "status": "in_progress",
+    "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+    "labels": [
+      "continuation-active",
+      "frame14",
+      "initial-window-ended"
+    ]
+  },
+  "active": [],
+  "services": [
+    {
+      "pid": 3762788,
+      "ppid": 1,
+      "pgrp": 3762788,
+      "tick": "32327414",
+      "RSS": 190197760,
+      "cmd": "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python -B /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/scheduler.py run --config /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json --state-dir /workspaces/quoridor/.artifacts/research-team/scheduler-sigma-continuation-20261001 ",
+      "affinity": [
+        0
+      ]
+    },
+    {
+      "pid": 3762803,
+      "ppid": 1,
+      "pgrp": 3762803,
+      "tick": "32327429",
+      "RSS": 21831680,
+      "cmd": "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python -B /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/watch.py --run-dir /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame14-ee73f985-00e3-4a1c-960e-1e87143fb693 --expectations /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame14-ee73f985-00e3-4a1c-960e-1e87143fb693/expectations.json ",
+      "affinity": [
+        0
+      ]
+    },
+    {
+      "pid": 3802180,
+      "ppid": 3802176,
+      "pgrp": 3802174,
+      "tick": "32578523",
+      "RSS": 12193792,
+      "cmd": "python3 tools/ai-sigma-frame14-teachers/save_git.py tools/ai-sigma-frame14-teachers/save_git.py tools/ai-sigma-frame14-teachers/pack.py tools/ai-sigma-frame14-teachers/generate.cjs tools/ai-sigma-frame14-teachers/runner.py tools/ai-sigma-frame14-teachers/export.cjs tools/ai-sigma-frame14-teachers/connect.py tools/ai-sigma-frame14-teachers/prepare.cjs tools/ai-sigma-frame14-teachers/README.md research-data/ai-sigma/frame14-teachers/test-state-journal.jsonl.gz research-data/ai-sigma/frame14-teachers/validation-teacher-rows.jsonl.gz research-data/ai-sigma/frame14-teachers/partial-interface-report.md research-data/ai-sigma/frame14-teachers/sealed-boundary-report.md research-data/ai-sigma/frame14-teachers/train02-config.json research-data/ai-sigma/frame14-teachers/train03-config.json research-data/ai-sigma/frame14-teachers/science-source-stop.json research-data/ai-sigma/frame14-teachers/nn0-export-failure-r2.json research-data/ai-sigma/frame14-teachers/train04-config.json research-data/ai-sigma/frame14-teachers/dataset-ready-report.md research-data/ai-sigma/frame14-teachers/interface-binding.json research-data/ai-sigma/frame14-teachers/interface-report.md research-data/ai-sigma/frame14-teachers/all144-status.json research-data/ai-sigma/frame14-teachers/duplication-summary.json research-data/ai-sigma/frame14-teachers/storage-transfer.json research-data/ai-sigma/frame14-teachers/binding.json research-data/ai-sigma/frame14-teachers/storage-final.json research-data/ai-sigma/frame14-teachers/test-config.json research-data/ai-sigma/frame14-teachers/sealed-artifact-manifest.json research-data/ai-sigma/frame14-teachers/all-attempt-evidence.tar.gz research-data/ai-sigma/frame14-teachers/generation-summary.json research-data/ai-sigma/frame14-teachers/validation-config.json research-data/ai-sigma/frame14-teachers/quiet-window-report.md research-data/ai-sigma/frame14-teachers/train-state-journal.jsonl.gz research-data/ai-sigma/frame14-teachers/archive-manifest.json research-data/ai-sigma/frame14-teachers/train01-config.json research-data/ai-sigma/frame14-teachers/preregister.json research-data/ai-sigma/frame14-teachers/science-start-report.md research-data/ai-sigma/frame14-teachers/cost-ledger.json research-data/ai-sigma/frame14-teachers/openings.json research-data/ai-sigma/frame14-teachers/pipeline-operations.json research-data/ai-sigma/frame14-teachers/intake.json research-data/ai-sigma/frame14-teachers/first-train-report.md research-data/ai-sigma/frame14-teachers/first-three-report.md research-data/ai-sigma/frame14-teachers/train-teacher-rows.jsonl.gz research-data/ai-sigma/frame14-teachers/validation-state-journal.jsonl.gz research-data/ai-sigma/frame14-teachers/start-report.md research-data/ai-sigma/frame14-teachers/interface-accepted-report.md research-data/ai-sigma/frame14-teachers/final-qf1-v2/validation-canonical.jsonl.gz research-data/ai-sigma/frame14-teachers/final-qf1-v2/training-labels.jsonl.gz research-data/ai-sigma/frame14-teachers/final-qf1-v2/all144-metadata.jsonl.gz research-data/ai-sigma/frame14-teachers/final-qf1-v2/train-metadata.jsonl.gz research-data/ai-sigma/frame14-teachers/final-qf1-v2/fixed-exposure-mask.json research-data/ai-sigma/frame14-teachers/final-qf1-v2/test-metadata.jsonl.gz research-data/ai-sigma/frame14-teachers/final-qf1-v2/final-qf1-v2-validation-labels.jsonl.gz research-data/ai-sigma/frame14-teachers/final-qf1-v2/train-canonical.jsonl.gz research-data/ai-sigma/frame14-teachers/final-qf1-v2/commands.json research-data/ai-sigma/frame14-teachers/final-qf1-v2/test-canonical.jsonl.gz research-data/ai-sigma/frame14-teachers/final-qf1-v2/final-qf1-v2-train-labels.jsonl.gz research-data/ai-sigma/frame14-teachers/final-qf1-v2/validation-metadata.jsonl.gz research-data/ai-sigma/frame14-teachers/final-qf1-v2/dataset-manifest.json research-data/ai-sigma/frame14-teachers/partial-qf1-v1/validation-canonical.jsonl.gz research-data/ai-sigma/frame14-teachers/partial-qf1-v1/train-metadata.jsonl.gz research-data/ai-sigma/frame14-teachers/partial-qf1-v1/partial-manifest.json research-data/ai-sigma/frame14-teachers/partial-qf1-v1/validation-partial-labels.jsonl.gz research-data/ai-sigma/frame14-teachers/partial-qf1-v1/train-partial-labels.jsonl.gz research-data/ai-sigma/frame14-teachers/partial-qf1-v1/test-metadata.jsonl.gz research-data/ai-sigma/frame14-teachers/partial-qf1-v1/train-canonical.jsonl.gz research-data/ai-sigma/frame14-teachers/partial-qf1-v1/commands.json research-data/ai-sigma/frame14-teachers/partial-qf1-v1/test-canonical.jsonl.gz research-data/ai-sigma/frame14-teachers/partial-qf1-v1/validation-metadata.jsonl.gz research-data/ai-sigma/frame14-teachers/nn0-export-repair-r3/stdout.txt research-data/ai-sigma/frame14-teachers/nn0-export-repair-r3/process.json research-data/ai-sigma/frame14-teachers/test-sealed/test-partial-labels.jsonl.gz research-data/ai-sigma/frame14-teachers/test-sealed/test-teacher-rows.jsonl.gz research-data/ai-sigma/frame14-teachers/test-sealed/test-evidence.tar.gz research-data/ai-sigma/frame14-teachers/test-sealed/final-qf1-v2-test-labels.jsonl.gz research-data/ai-sigma/frame14-teachers/nn0-live-export-attempt1/test-state-journal.jsonl.gz research-data/ai-sigma/frame14-teachers/nn0-live-export-attempt1/validation-teacher-rows.jsonl.gz research-data/ai-sigma/frame14-teachers/nn0-live-export-attempt1/all144-status.json research-data/ai-sigma/frame14-teachers/nn0-live-export-attempt1/qualification.json research-data/ai-sigma/frame14-teachers/nn0-live-export-attempt1/generation-summary.json research-data/ai-sigma/frame14-teachers/nn0-live-export-attempt1/test-teacher-rows.jsonl.gz research-data/ai-sigma/frame14-teachers/nn0-live-export-attempt1/train-state-journal.jsonl.gz research-data/ai-sigma/frame14-teachers/nn0-live-export-attempt1/train-teacher-rows.jsonl.gz research-data/ai-sigma/frame14-teachers/nn0-live-export-attempt1/validation-state-journal.jsonl.gz docs/reports/ai-sigma-experiment-frame14-teachers.md ",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    }
+  ],
+  "scheduler_owned": null,
+  "next_observe": 1791073914.081726,
+  "CPU": [
+    2
+  ],
+  "threads": 1,
+  "RAM_guard": 1879048192,
+  "parent_RSS_forecast": 3445448704,
+  "storage": {
+    "UTC": "2026-10-04T00:14:07.206161+00:00",
+    "transfer_confirmed": true,
+    "transfer_path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/storage-transfer.json",
+    "transfer_sha256": "f7b87f62242f23a20c99dde866ca3558531da140079a110457072761914ae6b5",
+    "reservation_B": 67108864,
+    "guard_B": 58720256,
+    "forecast_B": 52000000,
+    "old_hypothesis_20MiB_discount": 0,
+    "parent_addition": 0,
+    "forecast_includes": "export refs/checkpoints/history/test scalars/Git/temp/all remainingmetadata",
+    "actual_owned_files_B": 174026,
+    "remaining_inclusive_forecast_B": 51825974,
+    "AST_latest_pass": true,
+    "model_loaded": false,
+    "testlabels_read": false
+  },
+  "command": [
+    "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "-B",
+    "tools/nnue-training/train.py",
+    "--data",
+    "research-data/ai-sigma/frame14-learning/stages/train24.stage.json",
+    "--config",
+    "research-data/ai-sigma/frame14-learning/qf1-frame14.json",
+    "--run-id",
+    "frame14-train24-r1",
+    "--output",
+    "research-data/ai-sigma/frame14-learning/runs",
+    "--checkpoints",
+    "models/experiments/nnue"
+  ],
+  "sample_upper": 307765,
+  "newscience": "2026-10-04T02:45:00Z",
+  "stop": "2026-10-04T02:50:00Z"
+}
