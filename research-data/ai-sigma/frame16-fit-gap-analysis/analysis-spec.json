@@ -1,0 +1,42 @@
+{
+  "UTC": "2026-10-04T06:15:07.175032+00:00",
+  "residual_identity": "eD=y-D, rNN=N-D, MSE(N)-MSE(D)=E[rNN\u00b2]-2E[eD*rNN]",
+  "correlation": "gameequal centered Pearson under each fixed label-free subgroup",
+  "sign": "nonzero abs>1e-12, denominator explicitly retained",
+  "Gplus": "gain_games vsdistance on same selected game rows;zero-selectedgames preserved",
+  "groups": {
+    "distance_edges": {
+      "self": [
+        0.0625,
+        0.08749999850988388,
+        0.11249999701976776,
+        0.13750000298023224
+      ],
+      "opponent": [
+        0.05000000074505806,
+        0.07500000298023224,
+        0.10000000149011612,
+        0.13750000298023224
+      ],
+      "difference": [
+        -0.0624999925494194,
+        -0.02499999850988388,
+        0.012499995529651642,
+        0.03750000149011612
+      ]
+    },
+    "fit": "gameequal train-only empirical input quintiles; duplicates collapsed",
+    "labels_used": false,
+    "phase": "ply<40 early;40<=ply<100 middle;100+late (shared trainer)",
+    "cohort": "original opening8/12/16/20/24/28",
+    "walls": "canonical STM ID290..300 selfremaining,301..311 opponentremaining; exact originalQF1 mapping; total0..4/5..9/10..14/15..20; no inferred missing",
+    "clip": "fixed source A+B*(opp-self) f32 then clamp -1,1",
+    "selection": "all label-free groups fixed before new perrowNN; subgroup results exploratory",
+    "train_rows": 4653,
+    "train_games": 96
+  },
+  "selected_target_examples": "none;all predetermined subgroups reported",
+  "walls_exact_source": "QF1 canonical STM active290..300/301..311 remaining;sum withplaced==20",
+  "source_no_forward": true,
+  "217_prospective_adoption": "Each exhaustive disjoint dimension fixed bins: original global rowweights1/(G*n_game), save mass/displacement/cross/signedgap contributions;sum masses=1 and signedgap=global delta. Conditional within-bin gameequal stats remain separate exploratory"
+}
