@@ -1,0 +1,3 @@
+goal quoridor-4lc / critic222 phase2 static started, same owner/no pause/ready+self+goal確認。元三job60/60保持、新source30+停止後NN0calc60=90、128KiB/100KiB forecast、旧unknown減額/parent追加0。
+最大1懸念・方向: graph forward spanの短縮をNode–Rust–Python配置維持の理由にせず、資格・記録込みRjoint/全wall利益が小さければ次を配列転送＋既Rust生成pumpの一介入へ移す判断を提案。転送/queueの重複spanだけでは支配原因を断定せず、C++再用のTT/noise/FPU/PCR/solver/温度/教師差を同品質速度へ読替えない。新speedmargin・新run・全文承認gateは追加しない。
+現mutable sourceの全B1..8二warm+capture合計108課金、static入力上書き→同期→replay→CPUcopyとchanged-input/ID parityの意図を確認。停止版/compact費/parity/資格にbindするまで結果支持ではない。capture/startup/準備/全attemptと旧対照順序交絡を別に最終裁定し、旧三job再算術/forward/旧test173読取0。

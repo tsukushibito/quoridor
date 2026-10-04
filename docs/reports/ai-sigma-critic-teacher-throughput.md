@@ -55,3 +55,36 @@ sampled aggregate RSSは約2.27～2.29GB、Torch reserved peakはB8 35,651,584B/
 **次の最大1案:** B増-onlyはここで打切り、既B8を維持し、held folded forwardのprivate CUDA graph replayを一つの有界費用対照として検討する。同期forward費が大きいことは動機になるが、launch/同期が支配原因と確定したわけではない。capture cold・partial/full shape/ID/parity・VRAM・出力取得込み節約を投資回収と合わせる小比較に絞る。結果が実用費を下げなければ、この経路の最適化を教師増量の前提にしない。本taskでは新forward/第四生成/新取得を開始しない。
 
 停止済みscopeの必要source/result/Gitbyte復元・Beads notes/backupを引き渡し、有限受入れcloseはcoordinator。goal最高棋力は未達のまま。
+
+## phase2 選定前の独立見解（08:30 UTC）
+
+元三jobの60/60と有限裁定を保持し、同222の新architecture-control配分（source30＋停止後NN0算術60=90秒）を静的開始。本人割当/in_progress/no pause、親延長17を再確認した。新128KiBを旧117,158,372Bへ加え117,289,444<117,440,512、旧unknown減額/親追加0。新scopeはGit/temp/metadata込み100KiB forecastを守る。主221のscience開始/完走を本稿承認待ちにしない。
+
+graph B1..8を一条件として先に試す選定を支持する。可変source読取範囲では、全8shapeで二warm＋一captureをsampleに課金（合計108）、現入力をstaticへcopyして同期し、replay出力をCPUへcopyした後に応答する。Bごとのstatic出力再利用が旧入力を返す危険に対して、二fixture/入力変更/ID対応を結果前の有限parity条件へ置いている。TF32/AMP off、同math/K64/一tree一pendingを維持する意図は確認したが、現mutable sourceは停止版の効果・数値支持ではない。cold capture、startup NN、partial/full、cancel/drainと旧原三job対照の順序交絡は最終receiptで区別する。
+
+**最大1の主懸念・方向:** graphを現多段process維持の理由へ変えず、全費に残る転送費を次の構成判断へ明示して渡す。graphでforward spanだけが減り、有効Rjoint/資格・記録込みwholewall利益が小さければ、次を既探索規則を保つ配列転送＋Rust生成pumpの一介入へ移す方が、batch/graph設定の局所反復より問いを進める。これは結果後の新speed marginや追加生成gateではない。転送/queue累積spanは重複を含み、差だけで支配原因は確定しない。C++再用も有力だが、TT/noise/FPU/PCR/solver/温度/教師出力差を同時に持ち込んだ速度を同品質改善へ読替えない。配列境界だけを先に変える案は、その規則差を小さくして費用の判別力を保つ。
+
+停止後compact/parity/資格/全attempt/capture費から、この懸念と選定の優先順位を更新する。新forward/モデルimport/生成/旧test/173読取0、元三job検算再実行0。
+
+## phase2 停止版の有限裁定（08:36 UTC）
+
+**graph B1..8を段階生成の採用候補として有限支持する。全工程1000局30分、hostlaunch単独原因、教師truth/棋力は未認定。** 08:32:15のscience-stop（SHA348044228e862885b35e21c558af4fdd95b5eb29fc47024e9d315e9e03cf83d4）の公開source/payload束縛を現物照合し、科学前08:24:51の登録とparity/二生成processのexit0/wait/全exact不在へbind。直前の正extension17 monitor・owned=None・quiet窓、既科学PID/tick/RAM/保存を確認後、CPU0単1のNN0算術0.016065秒/RSS21,225,472Bを実施・回収した。新source30＋calc60=90/90保守charge、旧三job60/60を保持。旧三jobは保存した独立平均/費の再利用だけで、旧検算を再実行していない。
+
+| graph条件 | 全予定/GOAL | joint | job秒 | joint/秒 | logical/physical NN | capture秒 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 初回 | 48/48 | 1554 | 84.954613 | 18.292120 | 81096/81204 | .388408 |
+| 確認 | 48/48 | 1554 | 86.499517 | 17.965418 | 81096/81204 | .382348 |
+
+独自件数/分母算術では、全slot終局/unknown0、Rpolicy=Rz=Rjoint1554、discard0、全batch histogramの重み付き和とstarted/returned/resumed=logical81096が一致。各physical81204はlogical81096＋warm/capture108で、root1554×64=logical81096＋terminal-noNN18360。legacy summaryのstartup0をcapture無料と解釈せず、別physical-logical差108を保持する。B1..8×二fixtureのCPU/eager/replay各72＋warm/capture108=parity324を再集計。全ID/finite/許容ratio、保存graph-eager差0、CPU比較maxabs7.152557373e-6を照合した。static入力変更・partial/fullが有限receipt内で対応する支持であり、新forward/全入力認証ではない。
+
+両graphの全48slot手数一致、初根48visit/Actionと1554prefixの保存整合を再算。owner公開の全1554row state/features/legal/Action/visit/rootNN/rootmean比較件数と数値許容も照合した。全row比較sourceはhistoryキーのsorted対応を確認するが、criticはhistory全多重集合の値や全leafを独立再生していない。RuleA/P2/π/z資格は共有owner資格receipt参照の限界を継承する。τ・K64・モデル・探索/教師source不変の必要範囲と、同48familyの条件間反復を保持。benchmark96slotを96独立game学習増量へ混合しない。
+
+graph平均85.727065秒/旧B8平均116.405994秒=時間26.3551%短縮、率1.35786748。二graphの差約1.54秒、旧二B8の差約5.08秒より大きな約30.68秒の平均節約が残り、B増だけの小差より採用判断を進めた。ただし旧B8/B24/B8→graph/graphの順序で、新しいB8を挟んでいない。hostwarm・時間帯を完全分離した因果/速度一般証明ではない。
+
+graph実B平均6.140/6.154は旧B8 6.177/6.191と近い。同期forward約29.37/30.05秒、pipe約67.31/67.20秒、最後8game tail約27.05/27.40秒へ短縮。coldは約5.46/4.32秒、captureはjob内で既に支払い済み。graphの実介入がwholewallへ移った有限観測であり、forward_syncがhostlaunch専用費だったという結論ではない。各jobのprovider wireはrequest約307MB/response約162MBを依然運び、配列転送候補を消さないが、bytesや重複spanから排他CPU支配を決めない。sampled aggregate RSS約2.29GB、Torch reserved peak369,098,752Bで旧B8より増える。全物理VRAM/contextや瞬間RSSの独立上界保証ではない。
+
+新全attemptは二生成＋parityの実測177.488723秒/162732NN、原243888を足し全406620NN。原計測350.917964秒と合わせた実測は528.406687秒＋原入口失敗actualUNKNOWN。旧1.1秒概算を救済せず、保守5秒は会計だけ。原900000NN/1800秒とphase2上限505000NN/650秒内を必要算術で照合。資格/pack/Gitや改善固有prepはproductionと別、内包API・累積queue/bridgeを足し込まない。
+
+jobだけの1000局外挿は29.50～30.03分、平均約29.77分。資格配賦だけでも29.74～30.27分で、二job平均はほぼ30.00分。さらにpack/Git・共通setup/将来tail/密度変化を含むため全工程30分達成は未認定。60分初期目安に対する余裕は改善するが、実1000完了/生成許可ではない。公開archive4,580,587BをSHA照合（全member独立復元はowner receipt参照）、pack実測.431329秒、parity＋全資格＋pack既知費7.831914秒を再算。旧B8平均との差.639144秒/gameに対し既知helperだけなら約12.25局の回収シナリオ。固有開発/準備・Git費はこのsnapshotでUNKNOWNなので、固定回収局数を認定しない。pack/captureをjobへ二重加算しない。
+
+**次の最大1方向を実観測で更新:** graph固定/GPU24/B8/K64で、新96freshgameを同cohort均衡・新独立lineageとして段階生成し、適格密度・最後の尾部・初期化から記録/回収/保存までの単位費を測る案を優先する。これは次配分の提案であり、本222/221の新生成ではない。今回のgraph利益は小さくないため、直ちにC++移植/配列pumpを併行実装する追加開発費の回収は、この短比較だけでは正当化し切れない。段階量で転送/尾部が全工程目安を阻む場合に、早期案の配列転送＋既Rust pump一介入へ移す。構成維持やgraph sweepを目的化せず、新teachertruth監査/学習診断/旧test再開を増やさない。
