@@ -152,3 +152,7 @@ NNUE学習の未見利益がまだないため、203のdistance-ordering案を�
 206提案の凍結HEAD対DIST同CPU時間αβ/fresh4診断を次一候補として採択する。ただし03:06UTC現在、必要な実装・数値照合・対局・回収が当初予定03:00開始/03:05停止に収まらず、今枠新実配分・新issue・NN/対局開始0。先の着手予定を実開始にしない。具体比較・予算案はframe14-coordinator/next-head-distance-diagnostic-proposal.md。次枠許可の追加はこの記録から推定しない。
 
 204/205/206は科学・source停止/必要保存受入れ済み、本人closeはactive現在turnでのみ返し、idleをclose専用に再起動しない。残りの報告待ちは92stewardの03:10:36重通知/03:15:36scheduler監督停止/03:18:36monitor/03:20:36必要保存。外部NN全停止や未来運用成功はこの受入れでは保証しない。目標棋力未達を保持して今枠の最終記録・Git・Beadsbackupへ移る。
+
+
+03:15:36運用期限:92のscheduler-end-stop.jsonを統括実読取。stored scheduler/owned turn限定でpending false・identity_alive false、原因・読取欄は原値保持。外部NN停止やmonitor最終回収は別証拠待ち。
+ユーザーの優先度への問いに対し、head限定を学習率対照より先にした根拠は十分強くなかったと評価。次許可枠では同初期/dataの少数学習率対照＋早期評価間隔を、HEAD対DIST実用診断と比較して優先順位を再選定する。先の次案は実配分・新枠許可ではなく、追加head学習/sweep/test再利用を自動開始しない。
