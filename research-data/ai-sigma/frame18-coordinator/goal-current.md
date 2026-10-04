@@ -1,5 +1,7 @@
 # 現在のNNUE研究優先順位（frame18）
 
+14:14更新: 232第二科学14:10:54.813585→14:10:55.466123/4058nativeNN/0.652543s、全2科学5142samples/2.582166s、owner source science stopped/allwait exact不在。science-stop SHA54618c66のsources9/payload6をcurrent照合。固定4root NNUE depth1/2/2/2/D2all、初期NNUE2048processed+entry拒否1でdepth2discard、Action148対D13。残3root双方depth2・Action67/31/48。これは異評価器/枝刈りの診断で同wall棋力0、4gameNOT_RUN。背景待機395.536s/outer397.747sと科学wall0.652543を別保持。234へ既45秒一jobの停止入力を実配送、旧229 final NOT_RUNに戻る検算0。
+
 14:03更新: 232固定27Torch/native/515child full-deltaのowner有限parity PASS、実1084samples/1.929623s/CPU2single、親buffer/key/history保持・terminalNN0。候補layout/scale/freeze不変更。これはmutableundo/全leaf/棋力保証ではない。固定root探索は未完了: 第一background-search-r1は14:02:05exit1/cleanuptrue、現物resultへの点確認だけで原science開始/NN/原因未確認。元失敗保存・既240s/50000/締切内の必要修復はowner判断、成功置換/reset0。
 
 2026-10-04 13:55UTC。新672独立game→低LR標準化QF1学習192/576→576BEST2000凍結→新96test一巡が終了した。owner有限test rootmean gameMSE .260522204対train-fitD .400448510、差−.139926306、固定fit局paired95[−.192885480,−.084129888]、66/96改善。量・反復露出・旧96比率・分布/選定stepが交絡し、純数量因果/十分量/教師真値/IID/棋力は未認定。旧openedtest/173正式198非学習、testから再選定0。
