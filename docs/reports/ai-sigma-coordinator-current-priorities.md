@@ -104,3 +104,5 @@ exp203へ固定距離coef(199train-fit)・QF1 graph定義/f32 valueを直接使�
 203本人ready/show/claim/static実開始とNN0 private CP/reference MCTS CP402cut/411public/500guard mock、P2/terminal/cancel/lastcompleted有限PASSを受領。これは実対局未開始の準備成果。exp203が直前physical/current/自然監督窓をadmitしfresh2pair4gameを実行・実開始/全slot費と結果を報告する担当。rootへ独立testの距離利益・残差不支持・この次方向を01:44:46 actual turn/start acceptedで報告、再承認要求0。
 
 203後報: 実arena科学開始2026-10-04T01:51:23.924538Z、admission01:50:53.185859、PID3890419/tick33161599、source48c7e73f146e。fresh4固定/参照NN上限80000/候補NN0/GPU0/core2,4+管理0/guard3.5GiB。自然CPU0監督を停止せずlight管理の診断条件。前段の「実game未開始」は当時の準備報告、現在は実行中・結果/棋力/全期間遵守未判定。本人exp203から全slot結果/費用/停止報告待ち。
+
+203全4診断終了: owner最終guardian science_start01:50:53.186618Z/stop01:51:44.755268Z、先の01:51:23.924538 pool identity報告UTCとは計測scopeを分け両保存。distance-alpha候補1W3L/unknown0/all4GOAL/201requests/型invalid0/候補NN0/参照NN8840 startup2別。完成depth2/3/4=37/38/25・depth0fallback0/public409.605–413.457ms、allattemptguardian53.339673s/peakRSS1.457GB/全子wait・remainingexact空。機能接続の有限進展、棋力NI/学習NNUE利益認定0。exp203はprefix検算/pack/Git byte/backup/finalhandoff担当を継続、新対局/設定変更自動追加0。計測済depth/壁分岐から次一判別案を受け、追加gameで4局の不確かさを救済しない。
