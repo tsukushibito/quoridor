@@ -1,0 +1,6 @@
+goal quoridor-4lc /221 phase4最小保存引渡し
+Scientific finiteacceptance frame16-coordinator/221-fresh96-finite-acceptance.json受領。全96GOAL/4603joint/293.226300s/262957newNN/832417total、全waitexactabsence/science-source停止。原UNKNOWNentry＋beforemodelsourceorder0NN proof/foreignoriginunknown/oldsource成績不変更。
+sharedRuleA全4603 replay/π/z PASS、metadata/canonical/newlabels separated dataset-manifest path。旧144+24label-freeOR共有0範囲限定/newwithin7、evaluation-only再用datasetcandidate/独立test・学習mix・teachertruth・棋力0。
+Newdensity47.947917/game、1000job50.9073min、資格/pack/payload/reportGitまで既知52.4706min+export/dispatch/backup等unknown、60短外挿/30未達/実1000NOT_RUN。旧48の29minを新分布へ流用0。尾部last8 50.16/last24 82.86sec、approxactive26非handlecount/realbrokerpending24、core-shard/cohort/workload偏り保持。
+Archive7256017B/SHA3f58ced1dfc3d7feb7f3598344fd66e0ed80a25c532a8e5bfb7780d7d6fb193b/memberSHA/Gitbyte復元PASS。scientificpayloadca8e008/reportecfdc37/indexunchanged/privateindex0。新current62291234＋uniqueGit上界13318965＋temp/metadata=80853079<112MiB、128MiB新予約pool内/旧128+64/unknown保持/親追加0/返却0。
+次最大1提案は固定quality/global未開始queue又はcohort-balanced割当の10–20min費検討。今枠新科学0/次枠自動開始0。必要小Git後、このturnで本人221受入close＋backup、親goalclose0。
