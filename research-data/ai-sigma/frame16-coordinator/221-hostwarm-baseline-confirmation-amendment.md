@@ -1,0 +1,3 @@
+goal quoridor-4lc / quoridor-4lc.221 科学前の独立選定提案採用。
+222の最大1提案を採用し、許可済み第三jobはsamecandidateだけに限定せず、baseline→candidate→baseline の現baseline確認を第一候補へ変更します。主条件GPU24active/B8対B24、同fresh48opening/actionseed/K64/model/τ、実NN/全attempt分母は不変更。現在のpreregister旧版は保存し、新補足を結果前に登録してください。全900000NN/1800s/最大3job/各300s/既128MiBscope/CPU4/RAM/GPU/期限を増やさず、残cap/実量が足りる場合だけ。近接差又はcoldinit/尾部/hostwarmに差が偏る等の時に比較順の不確かさを減らすためで、第三成功/同棋譜/222全稿を開始又は採用gateにしない。第三job未実行ならその交絡を不確かと保持。主B24数値parityと実生成はこの配送受付待ちで止めない。追加条件/教師質削減/旧成果書換え0。
+222必要範囲のquality/parity/コスト独立判断は主停止公開compact後、source/identity確認で非重複実施。自己教師/oldtest保護境界不変更。各採否・実適用・効果とbreak-even費を分けてください。

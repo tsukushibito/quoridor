@@ -12,7 +12,7 @@
 
 221上界は最大2主条件＋同条件確認1job、各登録96game以下/active48/B32以下、各hard600s、累積heavy1800s/NN900000(数値確認/startup/失敗含む)、source/math180s/保存管理600s。実量は支配費と費用で絞る。CPU同時計算4論理、jobRAM6GiBguard5.5・親8GiBcurrent、GPU6GiB、新scope128MiB予約/112guardを既experiment1980MiBの確認unused内へ計上、旧保持減額なし。science/currentownership/pause/物理RAM/GPU/正monitor owned/quietを直前admit。新job開始09:25:50/科学停止09:35:50/保存09:45:50/submit09:50:50、親より早く回収。benchmark教師は学習へ自動混合しない。
 
-独立222 criticへ07:39:43実配送/start accepted。対照の仕事量/hostwarm/管理CPU/尾部交絡、品質・新batch数値対応、将来生成の所要時間・保存量と改善総費の回収を問い、主配分変更も提案できる。新static60s/128KiBを既critic112MiB残内、旧219120等reset0。主221の静的開始/実測は全文承認/root再確認待ちにしない。
+独立222 criticへ07:39:43実配送/start accepted。対照の仕事量/hostwarm/管理CPU/尾部交絡、品質・新batch数値対応、将来生成の所要時間・保存量と改善総費の回収を問い、主配分変更も提案できる。新static60s/128KiBを既critic112MiB残内、旧219120等reset0。主221の静的開始/実測は全文承認/root再確認待ちにしない。222選定前のhostwarm/尾部提案を採用し、許可第三jobをsamecandidate限定から必要baseline確認へ変更して07:44:58に実steer。baseline→candidate→baselineを第一候補に残上限内で近接差/cold尾部に必要なら使う。旧preregister保存・prospective補足、全NN/heavy/保存上限不増、第三成功はgateでない。
 
 ## 保存分析から残す知見
 
@@ -31,10 +31,10 @@
 
 独立fresh test、standard200 hiddenage、別foldOOF再現、syntheticdistance sanity、追加LR/幅/arenaは保留。今はこれらの小診断を増やすより、データ量/多様性を現実的な費用で検証する生成経路の改善がユーザーの優先である。低コストの保存分析は既報告を再用し、生成の支配費が変わらない時や品質/費用不成立の時に対照を見直す。言語移植/巨大基盤/全RuleA再実装は先行しない。
 
-十分高速化を固定倍率のgate/無限最適化にしない。見込独立局数100/1000/10000は費用シナリオで今枠の実生成必須・許可数ではない。候補速度/保持量/準備と有限検証総費から回収局数と増量所要時間を見積もり、改善継続/打切り/将来量比較へ移る判断を具体化する。適格率/速度/学習価値/棋力は別。
+ユーザー採択の暫定目標は、現環境/同model/K64/教師資格/多様性を維持した初期化・探索・輸送・記録・回収込み1000局60分、次の目安30分。約49〜50適格行/gameなら約14/28Rjoint行/sだが、実game行密度/unknown/尾部/準備・保存費から再推定する。短benchmark外挿と実1000完了を区別し、現221上限や親期限を増やさない。今1000実生成への自動許可ではない。K64の速度目安とSigma公開K800等の教師品質検証は別。十分高速化を固定倍率のgate/無限最適化にしない。見込独立局数100/1000/10000は費用シナリオで今枠の実生成必須・許可数ではない。候補速度/保持量/準備と有限検証総費から回収局数と増量所要時間を見積もり、改善継続/打切り/将来量比較へ移る判断を具体化する。適格率/速度/学習価値/棋力は別。
 
 ## 実運用
 
 92へ延長17を07:31:41実配送、本人受領開始を受信。旧exact2を秩序停止し親17 main/mirror/Git f893cb82507b921f7572d0581b7d1b5ad1332feb同SHA ae2eda81909c298bf83d72dd9c37809c02841b0f5fec35c30d333ab3bae044e1、実config/contract/prompt/watch/guardへ09時台期限を反映。07:38:42通常freshstart・running loaded、scheduler4133634/35249387・monitor4133648/35249412/同boot、既24hash不一致0/current6digest一致、period1200/turn180維持。rootも07:39:44に独立受入れ。正live pathはframe16-extension17-49170cb6-b27b-4fed-8be1-36f441f2df63、次通常07:58:39。旧停止/turn_limit/点検意味内容unknownは保持し、loaded成功を意味点検/未来停止/外部NN停止へ変換しない。
 
-221本人07:41:47 claim/static実開始を受領。保存205のjob73.55s/pipe61.62s/forward38.14s(重複和非wall)から同active24でmaxB8→24だけを変える薄い案を固定、同fresh48opening/actionseed・baseline→candidate順を保存。新B1..24 heterogeneous CPUORT/CUDA600sample/ID/f32partial確認後のみ候補測定。現NN科学未開始、hostwarm固定順と数値差の経路交絡は保持。現在待つ観測は221実数値確認・quality-preserving測定、222独立選定・必要結果算術。92は新期限で長期責任を継続。219/220の有限保存は受入closed。意味のある結果でこの主配分を更新し、実験完走を最高棋力達成へ読み替えない。
+221本人07:41:47 claim/static実開始を受領。保存205のjob73.55s/pipe61.62s/forward38.14s(重複和非wall)から同active24でmaxB8→24だけを変える薄い案を固定、同fresh48opening/actionseed・baseline→candidate順を保存。新B1..24 heterogeneous CPUORT/CUDA600sample/ID/f32partial確認後のみ候補測定。現NN科学未開始、hostwarm固定順と数値差の経路交絡は保持。実B1..24 parity600全PASS(最大abs9.2983e-6)。B8/B24同fresh48それぞれexit0/wait/exactabsent、owner資格1554joint全48GOAL、同prefix/visit/Action。guardian113.865/112.111s、Rjoint/s13.6477/13.8613、差1.565%近接、実Bmean6.177/7.904。まだB24採用を認定せず、予定第三baselineをnaturalownedNone/quiet330後にfreshadmit。実density32.375joint/gameではjobだけ1000局39.54/38.93分、資格export/packなど別費未加算・実1000未開始。Bを大きくするだけの限界も次判断へ使う。現在待つ観測は第三baselineと残支配費、222独立必要統計。92は新期限で長期責任を継続。219/220の有限保存は受入closed。意味のある結果でこの主配分を更新し、実験完走を最高棋力達成へ読み替えない。
