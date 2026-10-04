@@ -1,0 +1,44 @@
+{
+  "UTC": "2026-10-04T05:33:20.731056+00:00",
+  "process": {
+    "id": "train-scale-seed19080312-r1",
+    "kind": "heavy",
+    "UTC": "2026-10-04T05:32:22.186765+00:00",
+    "identity": {
+      "pid": 4046330,
+      "ppid": 4046287,
+      "pgrp": 4046330,
+      "tick": "34490882",
+      "RSS": 0,
+      "cmd": "",
+      "affinity": [
+        2
+      ]
+    },
+    "command": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-distance-update-control/seed19080312/run.py"
+    ],
+    "wall_seconds": 2.877428295032587,
+    "peak_family_RSS": 894660608,
+    "exit": 0,
+    "reason": "completed",
+    "child_waited": true,
+    "remaining": [],
+    "current_exact_identity_absent": true,
+    "samples_charged": 80705,
+    "sample_cap": 80705,
+    "CPU": [
+      2
+    ],
+    "GPU": 0
+  },
+  "currentexact_absent": true,
+  "allwait": true,
+  "remaining": [],
+  "source_science_stopped": true,
+  "cumulative_heavy_s": 5.952369321021251,
+  "cumulative_samples": 196816,
+  "further_science": false
+}
