@@ -175,3 +175,12 @@ HEAD対DISTarena、追加L2/headfreeze/幅/target調整、教師増量は保留�
 92 frame15実freshstart04:08:57.007215、scheduler3975993/33989991・monitor3976006/33990012現在running/configcontractloaded/24hash一致/207六digest一致、旧exact2不在。初通常dispatch04:08:56.940122/次04:28:53.228367、period1200/turn180不変、05:41:38/05:46:38/05:49:38/05:51:38owner92。統括実running-loaded.json必要読取/SHA保存、本人209/210開始・選定前修正の実適用と共にroot208へ追報。運用成立を科学成功/未来全面運用成功にしない。次報告待ち担当209 actuallearning/小観測、210必要算術/判断更新、92自然運用。
 
 92準備最終8f95dbf4のreport bytes一致を受入れ。final-statusは当commit未収録なので初coorassert失敗を保持し、現statusSHA/snapshotを必要独立記録として保存、全保存Git成功へ読み替え0。deadline分散を既contract参照へ寄せる改善案は次運用配分で保留再検討、今回は追加改修なし。初自然turn04:08:56.940122→04:12:01.215142はhistory status interrupted、点検内容/全面成功は未認定。運用runningload成立とsemanticfinish/外NN停止を分離。92は期限長期in_progress、主209/210継続・承認gate0。
+
+209 observer/preregisterv2反映:固定train12witnessはrowIDhashでmodel/target/loss前選定、予定5901eval同forwardからstep0差RMS/max・target残差・tanh前/ReLU、同minibatchactiveft update/denom0を記録、追加forward/backward0。loaderが旧all144 label-free containerを読むため先のmetadata読取0表現をscience0で訂正、testはlabeljoin/model/witness前除外、旧v1Git13f02c30保持/条件不変。actual初LR1e-3学習04:13:32.853392/PID3980843tick34017983/CPU2single、sample110210上界、GPU/teacher/test0。実終了/効果は209本人小観測待ち、source/metadata修正を結果救済にしない。
+
+209最初LR1e-3全400step/110210samples actual04:13:32.853392→04:13:37.737327/4.884357s/peak858189824/CPU2single/GPU0/exit0全waitexactabsent。sameinitiale5d218c9/densecurveでvalgameMSE.690176→step20 .676582、その後50 .711525/1001.006805。従来100step刻みのbest0が早期改善を除けなかったことを実観測が示す。原曲線/成績変更0、再用val診断でtest利益/唯一原因/採用を先に認定しない。残LR1e-4/1e-5は原3条件の通常jobで追加条件0、主209全observer/3条件観測→210判断更新を待つ。
+
+
+## frame15 三条件実観測からの次判断
+
+全層LR.001は20stepで初期valより改善し、旧100step刻みの見落としを実証。LR.0001 best200の再用val .659847は初期/定数以下だが距離.485147未超。210独立見解の別seed再現を同209第四条件として採択し、固定primary200/seed19080312/LR.0001/400step、0/100/200/400曲線の1runを配分。初期とsamplingのjoint seed変更、再用val/条件選定であり独立test改善ではない。低LR1e-5終端は遅い軌跡で棄却しない。tinyfit・幅/clip変更・新teacher/test・arenaは現在低優先、第四再現/勾配所見で再検討する。担当209実受付/開始/primary/停止、210残60内の有限見解。科学総予定405434sample/既800000内、保存・個別期限不変。

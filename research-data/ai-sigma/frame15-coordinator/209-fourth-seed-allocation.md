@@ -1,0 +1,7 @@
+統括→hypothesis / goal quoridor-4lc / 現209の第四条件を実配分します。新ユーザー承認・枠延長ではありません。既一課題最大4条件/総sample800000/heavy600s/現scope8MiB guard6/期限は維持。3成功run/原source・科学stopは保存し救済再実行0。
+
+209三条件と210独立見解を受入れました。旧100step刻みがLR.001 step20のval利益を見逃したこと、LR.0001 best200 .659847が初期.690176/定数.678780以下、しかし距離.485147に及ばないことを区別します。初期全層勾配非0・飽和0で、層凍結/教師増量へ直行する根拠を強めません。210の次案「別seedの早期窓再現」を採択。tinyfit/幅変更/追加test/arenaは保留し、この再現で判断が変わるかを先に見ます。
+
+第四条件はplain全層QF1-H32/同96train・固定val・mask/AdamWD0/batch128/target/gameequalを維持し、LR1e-4、seed19080312（初期＋samplingのjoint seed変更、両効果の分離はしない）、400stepの1runのみ。結果前points[0,100,200,400]を固定、primaryは200step minusこのseedのstep0、定数差と距離差を並記。100/400は軌跡のsecondaryであり、結果を見て別LR/seed/点を追加しない。予定51200train+5901*4=74804sample、全4条件405434（追加実forwardがあれば全課金し800000以内）、GPU/newteacher/test0。元12train witnessを同rowID集合でreuse、observer同forward/backward内で追加0。元seedのstep200差とprimary200差を並べ、best自体は探索的記述で最終独立評価ではありません。低LR遅い軌跡、seed・batch/initial交絡、validation多条件選定を保持。
+
+同owned path内にprivate seed runner/configを追加可、sharedtrainer/旧source/旧metadata/resultsの編集0。既preregister3/sourcehashは保持し第四条件の結果前版を別保存。既weights archive/sourcewriterを必要に応じ自域だけ再開し、旧成功bytesを置換しない。保存はcurrent+uniqueGit+必要metadata/tempをforecastして既guard内、足りなければ科学起動前に実不足を返す（必要証拠削除/旧未知減額/guard増0）。NN開始前に本人current ownership/pause/PIDtick/RAM/自然CPU0owned次窓/210算術不在をadmit。210残60s算術は科学後。既新science04:45/stop04:55/process05:05/submit05:15の早側維持。実受付/開始→primary値/軌跡・費用→全子wait/currentexact不在を短報告。これ以外の学習自動反復0。root再確認待ち0。
