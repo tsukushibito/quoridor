@@ -1,5 +1,5 @@
 {
-  "UTC": "2026-10-04T00:09:08.751703+00:00",
+  "UTC": "2026-10-04T00:15:38.836309+00:00",
   "experiment194": {
     "receipt": "2026-10-03T23:30:25Z",
     "claim_static": "2026-10-03T23:30:54Z",
@@ -46,18 +46,45 @@
   "hypothesis195": {
     "receipt": "2026-10-03T23:30:36Z",
     "claim_static": true,
-    "science_started": false,
-    "model_forward_started": false,
+    "science_started": true,
+    "model_forward_started": true,
     "source_manager_three_split_prepared": true,
     "software_mock_pending_GPU_quiet": true,
     "test_labels_read": false,
     "six_fake_checks_pass": true,
     "fake_NN0_stop": "2026-10-03T23:48:49.884Z",
     "mock_wall_s": 0.052313891,
-    "actual_model_forward": 0,
+    "actual_model_forward": "started; successful count pending",
     "interface_v2_handoff_verified": true,
     "quantity_LAST_contrast_prepared": true,
-    "shared_v2_unchanged_reported": true
+    "shared_v2_unchanged_reported": true,
+    "first_learning_child_UTC": "2026-10-04T00:14:08.640926+00:00",
+    "first_learning_run": "train24-r1",
+    "first_learning_identity": {
+      "pid": 3802905,
+      "tick": "32580881",
+      "affinity": [
+        2
+      ]
+    },
+    "scientific_success_pending": true,
+    "first_learning_success": true,
+    "first_learning_stop": "2026-10-04T00:14:14.078232+00:00",
+    "first_learning_wall_s": 5.437653899018187,
+    "first_learning_peak_RSS_B": 857710592,
+    "train24_steps": 2000,
+    "train24_best_step": 0,
+    "train24_best_val_game_rootmean_MSE": 0.690175573860047,
+    "train24_samples_charged": 307765,
+    "second_learning_start": "2026-10-04T00:14:44.556125+00:00",
+    "second_learning_identity": {
+      "pid": 3803940,
+      "tick": "32584473",
+      "affinity": [
+        2
+      ]
+    },
+    "learning_effect": "unknown; train24 validation best at untrained step0"
   },
   "critic196": {
     "receipt": "2026-10-03T23:30:38Z",
