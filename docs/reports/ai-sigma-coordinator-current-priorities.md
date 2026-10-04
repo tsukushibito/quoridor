@@ -61,3 +61,13 @@ test-sealedは生成保存ownerが保持し、学習ownerは最初はlabel-free�
 ## 再利用する有限成果
 
 187/191のGPU24適格12.814931行/s対CPUJS8.212635比1.560392は同24/K64の単回固定順・CPU配置差込みの有限利益。RustCPU3UNKNOWN+21NOT_STARTED、7state/20occのtrain-val露出を保持する。190はQF1-H32学習/差分/小αβ接続まで、新valrootmeanMSE.994812>定数.715720で重み不採用。188低LRは退行部分緩和だけ、176既定/181代替保持。旧190ログは4train点とval0/200のみ、192旧曲線は途中valを補完しない。共通trainer旧190重みimport/native/ONNX導出は未接続で、今の新学習conditionと区別する。188保存guard超過/190残225B通常write停止/一部receipt未Gitは保持。旧frame13の停止/成績を今回救済しない。
+
+## 距離情報を保持する残差方式の現在配分
+
+199は固定12witness/sourceview・rawrootmean→teacher→label一致、120train-val終局prefixから5901z対応、距離WLSの再用validation rootmean gameMSE .485146815対train定数.678780468/真z .822535033対.999881918を有限支持。全CPsum/合法deep/教師真値/原因/棋力は未認証、必要3Gitblobとscience stopを受入れた。後続historyや全入力の保証へ拡張しない。
+
+hyp200へ距離基準を初期valueとして保持するQF1H32残差1runを実配分（01:02:42 turn/start accepted、本人受付/claim/NN開始は別追報）。train96/fixedval/2000×128/Adam.001/WD0は維持し、凍結train-only距離係数＋zero残差head→clip(baseline+residual)の新value方式にする。全21曲線で距離初期/BEST/LASTを比較、残差利益なしは距離候補を残す。旧ランダムQF1とinitial条件が異なることを明示する。validationで両固定基準を1e-4下回る候補のみ、exp201の条件付きfresh24独立testへ。初期距離候補を許容するのはtrainでfitした2係数方式の独立評価だからであり、旧197beststep>0のgateは変更しない。
+
+exp201へ新fresh24manifestと同GPU24/K64の条件付き教師を実配送、旧198seed/24NOT_STARTEDを流用しない。新testmetadata exposureはtrain+val+旧開封testのlabel-free参照を使って固定し、新labelsはcheckpoint/係数/settings/evaluatorfreeze後一度評価。旧testのlabels/結果で再選定しない。test対象は距離のみ・残差候補/LAST・旧QF1random定数を区別、gamepairedとrootmean/z/符号/定数を保存。全120slotの旧構造比較や旧197失敗を救済しない。
+
+200新16MiBはhyp既64MiBのunused/combined56MiBguard内、201新32MiBはexp既1980MiBpool内・返却済198 unused24MiBを再使用可、parent追加0/旧未知減額0。CPU学習とGPU生成は本人current非重複、newheavy02:10/02:00・science02:20/02:10・最終提出02:45/02:35で親早側。問いは既情報を残した学習が未見教師へ移るかで、L2/LR sweepや新監査連鎖は主配分にしない。
