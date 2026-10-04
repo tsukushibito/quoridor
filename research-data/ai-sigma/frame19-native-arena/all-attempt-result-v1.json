@@ -1,0 +1,2813 @@
+{
+  "UTC": "2026-10-04T23:17:41.106131+00:00",
+  "issue": "quoridor-4lc.236",
+  "planned_slots": 8,
+  "ledger": [
+    {
+      "slot": 1,
+      "opening": "opening0",
+      "family": "frame19-236-e6b86a906ed4bed1bcb2de17901a38ef-0",
+      "NNUE_side": 1,
+      "D_side": 2,
+      "pilot": true,
+      "status": "UNKNOWN",
+      "startUTC": "2026-10-04T23:13:21.641Z",
+      "hands": 5,
+      "fault": {
+        "type": "OUTER_DEADLINE",
+        "cause_side": "NNUE",
+        "category": "CLOCK_OR_ENGINE_UNKNOWN",
+        "elapsed_ms": 100.72257399559021
+      },
+      "last_prefix": [
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 0,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 7,
+          "orientation": "h"
+        }
+      ],
+      "final_ply": 4,
+      "stop": {
+        "status": "STOP_ACK",
+        "allNN": 2313,
+        "wall_ms": 1.5508040189743042
+      },
+      "endUTC": "2026-10-04T23:13:22.111Z",
+      "prefix": [
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 0,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 7,
+          "orientation": "h"
+        }
+      ]
+    },
+    {
+      "slot": 2,
+      "opening": "opening0",
+      "family": "frame19-236-e6b86a906ed4bed1bcb2de17901a38ef-0",
+      "NNUE_side": 2,
+      "D_side": 1,
+      "pilot": true,
+      "status": "TERMINAL",
+      "startUTC": "2026-10-04T23:13:22.111Z",
+      "hands": 113,
+      "winner": 1,
+      "result_NNUE": "L",
+      "final_ply": 113,
+      "endUTC": "2026-10-04T23:13:32.420Z",
+      "prefix": [
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "slot": 3,
+      "opening": "opening1",
+      "family": "frame19-236-e6b86a906ed4bed1bcb2de17901a38ef-1",
+      "NNUE_side": 1,
+      "D_side": 2,
+      "pilot": true,
+      "status": "TERMINAL",
+      "startUTC": "2026-10-04T23:13:32.421Z",
+      "hands": 58,
+      "winner": 2,
+      "result_NNUE": "L",
+      "final_ply": 66,
+      "endUTC": "2026-10-04T23:13:37.717Z",
+      "prefix": [
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 0,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 3,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        }
+      ]
+    },
+    {
+      "slot": 4,
+      "opening": "opening1",
+      "family": "frame19-236-e6b86a906ed4bed1bcb2de17901a38ef-1",
+      "NNUE_side": 2,
+      "D_side": 1,
+      "pilot": true,
+      "status": "TERMINAL",
+      "startUTC": "2026-10-04T23:13:37.718Z",
+      "hands": 7,
+      "winner": 1,
+      "result_NNUE": "L",
+      "final_ply": 15,
+      "endUTC": "2026-10-04T23:13:38.358Z",
+      "prefix": [
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "slot": 5,
+      "opening": "opening2",
+      "family": "frame19-236-e6b86a906ed4bed1bcb2de17901a38ef-2",
+      "NNUE_side": 1,
+      "D_side": 2,
+      "pilot": false,
+      "status": "TERMINAL",
+      "startUTC": "2026-10-04T23:15:44.216Z",
+      "hands": 32,
+      "winner": 2,
+      "result_NNUE": "L",
+      "final_ply": 44,
+      "endUTC": "2026-10-04T23:15:47.137Z",
+      "prefix": [
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 0,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 3,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        }
+      ]
+    },
+    {
+      "slot": 6,
+      "opening": "opening2",
+      "family": "frame19-236-e6b86a906ed4bed1bcb2de17901a38ef-2",
+      "NNUE_side": 2,
+      "D_side": 1,
+      "pilot": false,
+      "status": "TERMINAL",
+      "startUTC": "2026-10-04T23:15:47.139Z",
+      "hands": 38,
+      "winner": 2,
+      "result_NNUE": "W",
+      "final_ply": 50,
+      "endUTC": "2026-10-04T23:15:50.580Z",
+      "prefix": [
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 0,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        }
+      ]
+    },
+    {
+      "slot": 7,
+      "opening": "opening3",
+      "family": "frame19-236-e6b86a906ed4bed1bcb2de17901a38ef-3",
+      "NNUE_side": 1,
+      "D_side": 2,
+      "pilot": false,
+      "status": "TERMINAL",
+      "startUTC": "2026-10-04T23:15:50.583Z",
+      "hands": 22,
+      "winner": 2,
+      "result_NNUE": "L",
+      "final_ply": 42,
+      "endUTC": "2026-10-04T23:15:52.582Z",
+      "prefix": [
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 0,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        }
+      ]
+    },
+    {
+      "slot": 8,
+      "opening": "opening3",
+      "family": "frame19-236-e6b86a906ed4bed1bcb2de17901a38ef-3",
+      "NNUE_side": 2,
+      "D_side": 1,
+      "pilot": false,
+      "status": "TERMINAL",
+      "startUTC": "2026-10-04T23:15:52.585Z",
+      "hands": 22,
+      "winner": 2,
+      "result_NNUE": "W",
+      "final_ply": 42,
+      "endUTC": "2026-10-04T23:15:54.589Z",
+      "prefix": [
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 0,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        }
+      ]
+    }
+  ],
+  "WDL_NNUE": {
+    "W": 2,
+    "D": 0,
+    "L": 5,
+    "UNKNOWN": 1
+  },
+  "old_failure_attempt": "pilot-r1 guard false positive censoredslot1 45hands preserved, not replaced by pilot-r2",
+  "physical_NN_known": 270156,
+  "inflight_NN_actual": "UNKNOWN for pilot-r1 selfstop",
+  "NN_conservative_charge": 278348,
+  "guardian_science_all_attempt_wall_s": 40.254772759915795,
+  "peak_family_RSS": 315637760,
+  "processes": [
+    {
+      "UTC": "2026-10-04T23:10:56.240869+00:00",
+      "startUTC": "2026-10-04T23:10:51.966714+00:00",
+      "endUTC": "2026-10-04T23:10:56.240881+00:00",
+      "exit": -15,
+      "reason": "FOREIGN_COMPUTE_STARTED",
+      "wall_s": 4.274170628981665,
+      "peak_family_RSS": 304164864,
+      "samples_actual": 23242,
+      "samples_charge": 23242,
+      "original_unknown": false,
+      "tracked": {
+        "391672": 40845955,
+        "391684": 40845958
+      },
+      "remaining": [],
+      "all_child_waited": true,
+      "current_exact_absent": true,
+      "runner_pid": 391498,
+      "runner_tick": 40845635,
+      "run": "pilot-r1",
+      "conservative_charge_with_supplement": 31434
+    },
+    {
+      "UTC": "2026-10-04T23:15:54.665559+00:00",
+      "startUTC": "2026-10-04T23:15:44.152961+00:00",
+      "endUTC": "2026-10-04T23:15:54.665594+00:00",
+      "exit": 0,
+      "reason": null,
+      "wall_s": 10.537496601988096,
+      "peak_family_RSS": 313520128,
+      "samples_actual": 68207,
+      "samples_charge": 68207,
+      "original_unknown": false,
+      "inflight_NN_unknown": false,
+      "conservative_inflight_upper": 0,
+      "tracked": {
+        "397134": 40875192,
+        "397146": 40875195
+      },
+      "remaining": [],
+      "all_child_waited": true,
+      "current_exact_absent": true,
+      "runner_pid": 397004,
+      "runner_tick": 40874772,
+      "run": "later4-r1",
+      "conservative_charge_with_supplement": 68207
+    },
+    {
+      "UTC": "2026-10-04T23:13:38.382779+00:00",
+      "startUTC": "2026-10-04T23:13:21.585838+00:00",
+      "endUTC": "2026-10-04T23:13:38.382790+00:00",
+      "exit": 0,
+      "reason": null,
+      "wall_s": 16.79695588798495,
+      "peak_family_RSS": 315588608,
+      "samples_actual": 117827,
+      "samples_charge": 117827,
+      "original_unknown": false,
+      "inflight_NN_unknown": false,
+      "conservative_inflight_upper": 0,
+      "tracked": {
+        "394509": 40860927,
+        "394517": 40860930
+      },
+      "remaining": [],
+      "all_child_waited": true,
+      "current_exact_absent": true,
+      "runner_pid": 394379,
+      "runner_tick": 40860634,
+      "run": "pilot-r2",
+      "conservative_charge_with_supplement": 117827
+    },
+    {
+      "UTC": "2026-10-04T23:09:07.356884+00:00",
+      "startUTC": "2026-10-04T23:08:58.710778+00:00",
+      "endUTC": "2026-10-04T23:09:07.356918+00:00",
+      "exit": 0,
+      "reason": null,
+      "wall_s": 8.646149640961085,
+      "peak_family_RSS": 315637760,
+      "samples_actual": 60880,
+      "samples_charge": 60880,
+      "original_unknown": false,
+      "tracked": {
+        "389344": 40834620,
+        "389346": 40834622,
+        "389367": 40834628,
+        "389375": 40834640,
+        "389390": 40834645,
+        "389404": 40834659
+      },
+      "remaining": [],
+      "all_child_waited": true,
+      "current_exact_absent": true,
+      "runner_pid": 389201,
+      "runner_tick": 40834338,
+      "run": "preflight-bench-r1",
+      "conservative_charge_with_supplement": 60880
+    }
+  ],
+  "rootcomparison": "initial NNUE depth1 ascending\u21922 rootbestfirst in both repetitions; fixed order/cache/JIT/general strength limits",
+  "strength_NI_claim": false,
+  "independent_checker_PASS": false,
+  "new_forward_authorized": false,
+  "goal_achieved": false
+}
