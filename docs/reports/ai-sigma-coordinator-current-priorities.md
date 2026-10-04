@@ -79,3 +79,11 @@ exp201へ新fresh24manifestと同GPU24/K64の条件付き教師を実配送、�
 01:13監督の距離利益と残差利益の別判定・clip/head0制約・低費用評価器候補を採用。critic202へ新現在NN0有限裁定を実配分し、199本人close/backupをこの実taskturnで行う。先行curve/source/coeff/inputの静的資格と新testのlabel-free maskを確認し、freeze後一度testper-row/pairedgame誤差を独立算術にする。全role承認を生成/評価開始gateにせず、NNforward追加0。既199の全history/CPsum/teacher真値不足は残す。
 
 202はCPU0静的180s/各60/RAM448MiB/既critic112MiB内新4MiB、newcommand02:35/stop02:40/submit03:00。距離only対定数とresidualBEST/LAST対距離onlyを分離、新testを条件選択へ戻さない。採用/不支持は新testreceiptと202の有限裁定から次最大1を選び、量子化/αβ/WDLへの自動連鎖なし。
+
+## 新test教師資格と現在待ち
+
+201実生成01:17:23.218781–01:18:45.121967、allattempt83.723908s/全24GOAL/1122Rpolicy=Rz=Rjoint・同RuleA有限全手replay/全科学子wait。1122行/G+24/全eligible、mask ed0c7706、新metadata8d70f902/manifestbb7ca2e9とimmutable薄interfaceを現物SHAで統括確認、sealedlabels本体/hash再計算0。実job率13.40119行秒は新24分布の観測で、旧194との速度因果比較や全pipeline率にしない。
+
+200候補v1 04dd362aを保存し、future専用evaluatorのschema適合v2 abb6d820へ更新（係数/候補/weights/val/原scienceは変更0）。最新v2でnewmetadata/mask/ownerlabelhashをbind後のみ一度CPUtestへ、新label本体は最終testfreeze後開封。201のrunner/generate/export/connect現在identityなし/実owner/RAMを本人admitし、全pack/202全稿待ちgate0。
+
+202本人199close+backup→claim/static01:17:45、短CPU0算術01:24:32終了/elapsed.133s/receiptstaticcharge60。独自WLS/定数・全21curve/game-row集計/ZIPtensorstorage/初期parityreceiptが一致、200LASTval.759457753>距離initial.485146813で残差validation利益不支持。外clip/head0の局所制約を採用、全QF1表現無効へ拡張0。担当hyp200はv2freeze後newtest、exp201は停止・pack/Git引渡し、critic202はlabel-free maskとfreeze後保存testperrowの最終有限裁定を待つ。旧testlabels/原173非学習を維持。
