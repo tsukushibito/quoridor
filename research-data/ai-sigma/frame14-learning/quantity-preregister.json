@@ -1,0 +1,23 @@
+{
+  "UTC": "2026-10-04T00:05:06.297640+00:00",
+  "quantitycontrast": "stage24 LAST vs stage96 LAST at2000steps*128=256000train samples, freshseed19080311, sameinitialSHA/optimizer/target/feature/fixedvalidationmask",
+  "candidate_selection_unchanged": true,
+  "test_once_models_max": 4,
+  "samecheckpointSHA_reuses_prediction": true,
+  "testcomparisons": [
+    "candidate-initial",
+    "candidate-trainconstant",
+    "96LAST-24LAST rootmean/z/group-sign paired"
+  ],
+  "bootstrap": {
+    "replicates": 2000,
+    "seed": 19580311,
+    "unit": "game/family paired; conditional eligible subset"
+  },
+  "pure_quantity_or_equalepoch_causal_claim": false,
+  "train_budget_increased": false,
+  "testread": false,
+  "source": "tools/nnue-training/test_contrast.py",
+  "source_only_addition": "shared6 interfacev2 unchanged",
+  "NN0_added_checks": "quantity-fake-r1 twoPASS; executable-ast-preflight-r1 PASS; both childwait/currentabsent, model0"
+}

@@ -1,0 +1,41 @@
+{
+  "id": "software-boundaries-r1",
+  "kind": "static",
+  "UTC": "2026-10-03T23:48:49.884140+00:00",
+  "identity": {
+    "pid": 3781098,
+    "ppid": 3781059,
+    "pgrp": 3781098,
+    "tick": "32428926",
+    "RSS": 0,
+    "cmd": "",
+    "affinity": [
+      2
+    ]
+  },
+  "command": [
+    "python3",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tools/nnue-training",
+    "-p",
+    "test_frame14.py",
+    "-v"
+  ],
+  "wall_seconds": 0.05231389100663364,
+  "peak_family_RSS": 14209024,
+  "exit": 0,
+  "reason": "completed",
+  "child_waited": true,
+  "remaining": [],
+  "current_exact_identity_absent": true,
+  "samples_charged": 0,
+  "sample_cap": 0,
+  "CPU": [
+    2
+  ],
+  "GPU": 0
+}

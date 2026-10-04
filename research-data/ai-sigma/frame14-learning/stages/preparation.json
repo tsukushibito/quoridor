@@ -1,0 +1,54 @@
+{
+  "dataset_descriptor": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/final-qf1-v2/dataset-manifest.json",
+  "dataset_descriptor_sha256": "fd7e059296aeba1ada0a9f083e5dca61132ee2d90f5605181b7d727b5c2e7510",
+  "metadata_sha256": "1c257a5e440ac50096b56f033ff4e3e183594651d4162e0358326b3f08cf08b1",
+  "mask_sha256": "10b502cd9e1c5334e56a3f460ef3edff7f822c8f52f69c3af53529c67c45d5f5",
+  "training_labels_sha256": "fdda7fbaa1a2c97cec271b35406a7481bfa5edbb2e8dd7f48ae2d77299be67fa",
+  "test_labels_path_ONLY": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/test-sealed/final-qf1-v2-test-labels.jsonl.gz",
+  "test_labels_SHA_ONLY": "f962d47cba027d610966af41b5c719d7888200d614f54a18125ab7a71d8a481e",
+  "test_labels_opened": false,
+  "stages": [
+    {
+      "stage": 24,
+      "manifest": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-learning/stages/train24.stage.json",
+      "manifest_sha256": "01aab38414194ede1516b9a99b2667386d4af42156d06f6ad033c3fe1101a958",
+      "train_rows": 1217,
+      "actual_train_groups": 24,
+      "validation_all": 1248,
+      "validation_primary": 1248,
+      "validation_sha256": "d4b5b218fcfaaa548fb9a2ee3056f34b21e4ed63143e67f6e7aa94f7934cd7e3",
+      "constant_gameequal": 0.008130883151015098,
+      "predicted_training_samples": 256000,
+      "sample_upper": 307765,
+      "epochs_equivalent": 210.35332785538208
+    },
+    {
+      "stage": 48,
+      "manifest": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-learning/stages/train48.stage.json",
+      "manifest_sha256": "85f6a3bac56e83db6eb86766cfc3628d5fe13cbbd5a0f5b6eb20aa715024b8c1",
+      "train_rows": 2345,
+      "actual_train_groups": 48,
+      "validation_all": 1248,
+      "validation_primary": 1248,
+      "validation_sha256": "d4b5b218fcfaaa548fb9a2ee3056f34b21e4ed63143e67f6e7aa94f7934cd7e3",
+      "constant_gameequal": 0.011134686558057452,
+      "predicted_training_samples": 256000,
+      "sample_upper": 331453,
+      "epochs_equivalent": 109.1684434968017
+    },
+    {
+      "stage": 96,
+      "manifest": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-learning/stages/train96.stage.json",
+      "manifest_sha256": "af95eabf3d059982e67cba41fcee0233aaea8a53eaf81a3b1fbae60752d83e75",
+      "train_rows": 4653,
+      "actual_train_groups": 96,
+      "validation_all": 1248,
+      "validation_primary": 1248,
+      "validation_sha256": "d4b5b218fcfaaa548fb9a2ee3056f34b21e4ed63143e67f6e7aa94f7934cd7e3",
+      "constant_gameequal": 0.01086389238577769,
+      "predicted_training_samples": 256000,
+      "sample_upper": 379921,
+      "epochs_equivalent": 55.01826778422523
+    }
+  ]
+}

@@ -65,9 +65,13 @@ def main(a):
     for r in table:
         cmd=r['cmd']
         if r['pid']==os.getpid() or not cmd or cmd.startswith('/bin/bash -c ') or 'manage_frame14.py' in cmd:continue
+        script=next((x for x in cmd.split() if x.endswith(('.py','.cjs'))), '')
+        # An argument list containing runner.py is not a running model job.
+        # The generation owner's small Git metadata helper is explicitly allowed.
+        if script.endswith('/save_git.py'):services.append(r);continue
         if 'scheduler.py run' in cmd or '/watch.py ' in cmd:services.append(r)
         elif ('tools/ai-sigma-frame14-teachers/' in cmd or 'tools/ai-sigma-manygame-generation/provider.py' in cmd or 'tools/ai-sigma-manygame-generation/worker.cjs' in cmd
-              or ('nnue-training/' in cmd and ('train.py' in cmd or 'frame14.py evaluate' in cmd)) or 'sigma-native-bridge' in cmd):active.append(r)
+              or ('nnue-training/' in cmd and ('train.py' in cmd or 'frame14.py evaluate' in cmd or 'test_contrast.py evaluate' in cmd)) or 'sigma-native-bridge' in cmd):active.append(r)
     if active:raise ValueError('external science/owner active: '+str([(r['pid'],r['tick'],r['cmd'][:120]) for r in active]))
     scheduler=json.loads((ROOT/'.artifacts/research-team/scheduler-sigma-continuation-20261001/state.json').read_text())
     # CPU0 owned observer is separate from this CPU2 single-thread job; save current binding.

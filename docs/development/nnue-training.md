@@ -115,6 +115,17 @@ testは候補/未学習同モデル/train定数を同時比較し、primaryと�
 
 `manage_frame14.py`はCPU2単logical/1thread、family RSS/timeout/子wait/identityと累積費を記録する有限launcher。外部生成scienceが現在存在する間はmock・学習・testを開始しない。NN0境界の追加確認は`test_frame14.py`だけで、旧5softwaretestsや既48game exportを再測定しない。
 
+frame14の事前追加診断では、同じ256000学習samplesの24 LAST対96 LASTを比較する。BESTはstepが異なるため数量contrastに使わない。`test_contrast.py freeze`は候補freezeに加えて両LASTのpath/SHA/config/manifest/2000step/256000samples/同初期tensorSHAを束縛する。`test_contrast.py evaluate`を最終の一巡入口として使用し、候補・未学習・24LAST・96LASTの最大4unique checkpoint SHAと定数を同時評価する。同一SHAの出力は再forwardせず共有する。dataset単位の`test-open-once.json`も排他的に作成し、output名を変えた再testを防ぐ。旧`frame14.py evaluate`と両方を実行しない。
+
+```bash
+python3 -B tools/nnue-training/test_contrast.py freeze \
+  --candidate-freeze CANDIDATE_FREEZE.json --stage24 RUN24 --stage96 RUN96 --output FINAL_FREEZE.json
+/home/vscode/.cache/inference/envs/quoridor-training/bin/python -B tools/nnue-training/test_contrast.py evaluate \
+  --freeze FINAL_FREEZE.json --freeze-sha FINAL_FREEZE_SHA --output ONE_TEST_OUTPUT --samples ADMITTED_SAMPLE_CAP
+```
+
+rootmean/zのpaired gameweighted差とgroup bootstrap、game別符号も保存する。計算予算一定の増量比較であり、純数量因果や等epochの主張ではない。追加診断のNN0確認は`test_quantity.py`だけで、既境界suite全繰返しを要求しない。未完了LASTがある場合はcontrast未知とし、候補単独の評価規則を変更しない。
+
 ## 依存とソフトウェア検証
 
 run.shは既存のtraining Pythonを使い、`QUORIDOR_NNUE_PYTHON` で明示変更できる。共有依存を自動更新しない。plot.shは隔離plot環境を使い、`QUORIDOR_PLOT_PYTHON` で変更できる。
