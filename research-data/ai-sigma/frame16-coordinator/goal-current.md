@@ -49,3 +49,5 @@ Sigma固定751186のC++ selfplay一次sourceを統括が再閲覧済み。thread
 旧scheduler08:51:43 operator-stop、ownednull/exactabsence・外部NN停止falseを保持。現在ファイルconfig/contract nullを観測したが新running-loadedは未確認。旧nextquietを新freeとしない。codec静的は継続、実science前に正current runtime/owned/実CPU子/RAM/GPUを本人freshadmitする。LLM active人数だけでは拒否せず、物理競合・所有回収は調整。nullableloadedと180秒越え無中断、実tool→判断/通知の到達を分けて後続観測する。旧4失敗と運用gapは保持する。
 
 09:06 更新後運用binding受領・現物照合。09:04:33通常freshstart、scheduler6049/35765166・monitor6062/35765187同boot、24currentSHA一致・config/contract/owned null、親mainmirror bcbff49c同SHA。92 checker回収済み。新正monitorを221/222へ実配送し元費内scienceは本人freshphysicsで続行、運用binding待ち解消。実180越え/公開点検成果はまだ未確認、旧失敗/gap保持。
+
+09:08:11 official readで同自然supervisor turn01a10628が214.03秒・active/inProgress/state maxnull。180秒だけの中断なしを実点観測。実点検tool/判断通知/notesbackupの成果はまだ未確認、未来保証0。
