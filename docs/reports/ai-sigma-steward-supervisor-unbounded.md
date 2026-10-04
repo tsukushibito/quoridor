@@ -13,3 +13,5 @@ main専用変更5sourceは研究Gitの `research-data/ai-sigma/92-supervisor-tur
 09:08:30公式観測:同owned開始から232.96秒、active/inProgress・cap null維持。公開履歴にcommandExecutionが初到達。提案通知/notesbackupは未確認で全面復旧とはしない。main/研究default indexは開始前SHAと一致。
 
 09:10公式履歴確認:自然observeは開始211.7秒後に実行、09:08:22 exit0。09:08:41 finishのnotes更新/backupがともにexit0・自己子reaped。主要問いの短記録まで有限成立。追加inspect誤pathのexit2は保持しnamespace拒否を迂回していない。判断・提案通知の完了とwhole-turnはまだ未確認。
+
+初回自然turn completed/errornullを公式履歴で確認。observe→判断/提案→notes/backup→統括の正確active turnへのreport acceptedまで実到達、通信子reaped。自然点検1回の有限復旧として受け入れ可能。後続品質・全期間・研究成果・未来停止は未認定。role namespace読取拒否1件は不足として保持。
