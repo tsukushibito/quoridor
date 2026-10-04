@@ -24,7 +24,7 @@ for issue in ['quoridor-4lc','quoridor-4lc.221']:
  if issue.endswith('.221'):assert q['assignee']=='codex:01a0f31d-6d15-7620-bb63-4b4f878e4746'
  controls.append({k:q.get(k)for k in ['id','status','assignee','labels']})
 schpath=Path('/workspaces/quoridor/.artifacts/research-team/scheduler-sigma-continuation-20261001/state.json');sch=json.loads(schpath.read_text());assert sch['phase']=='running' and sch['owned']is None and not sch.get('recovery_required');quiet=sch['next_at']-time.time();assert quiet>=c['job_seconds']+30,'SUPERVISOR_QUIET_SHORT'
-monitor=R/'.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame16-extension17-49170cb6-b27b-4fed-8be1-36f441f2df63/monitor-observation.json';mon=json.loads(monitor.read_text());assert time.time()-monitor.stat().st_mtime<120,'CURRENT_MONITOR_STALE'
+monitor=R/'.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame16-89597b76-3de7-4fb8-86bc-1fcf5dc505d4/monitor-observation.json';mon=json.loads(monitor.read_text());assert time.time()-monitor.stat().st_mtime<120,'CURRENT_MONITOR_STALE'
 current=[];foreign=[];rss=0
 for pid,z in table().items():
  if pid==os.getpid() or z['state']=='Z':continue
@@ -40,7 +40,7 @@ assert rss+6*1024**3<8*1024**3,'PARENT_RSS';assert int(next(x.split()[1]for x in
 prior=[json.loads(p.read_text())for p in(D/'jobs').glob('*/process.json')];spent=sum(p['jobwall_seconds']for p in prior);samples=sum((p.get('sample_equivalent')or 0)for p in prior);unknown=[p for p in prior if p.get('sample_equivalent')is None];assert spent+c['job_seconds']<=1800;assert not unknown,'PRIOR_SAMPLE_UNKNOWN';assert samples+c['NN_cap']<=900000
 if c['kind']=='generation':
  assert c['max_batch']in[8,24] and c['active_per_worker']==8 and c['NN_cap']<=300000
- if c['max_batch']==24:assert json.loads((D/'parity-pass.json').read_text())['primary']is None,'CANDIDATE_PARITY_REQUIRED'
+ if c['max_batch']==24:assert json.loads((D/'jobs/parity-r1/result.json').read_text())['primary']is None,'CANDIDATE_PARITY_REQUIRED'
  assert sum(p['kind']=='generation'for p in prior)<3
 storage=json.loads((D/'storage-admission.json').read_text());assert storage['unused_after_reservation_B']>=0;assert usage()*2+32*1024**2<112*1024**2,'STORAGE_CURRENT_GIT_FORECAST'
 save('admission.json',dict(UTC=utc(),controls=controls,current=current,foreign=foreign,quiet_seconds=quiet,scheduler=sch,monitor_path=str(monitor),monitor_observation=mon,parent_current_RSS=rss,job_RAM=6*1024**3,RAM_guard=int(5.5*1024**3),GPU_current=[],CPU_cores=[0,2,4,6],logical_CPU_max=4,prior_jobwall_s=spent,prior_samples=samples,storage_current_B=usage(),uniqueGit_remaining_forecast_B=usage()+32*1024**2,storage_ledger=storage,physical_current_point_not_allhost_guarantee=True))
