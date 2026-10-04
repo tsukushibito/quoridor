@@ -63,3 +63,35 @@ raw626はtrain80/96game改善・16悪化、val10/24改善・14悪化。val gap .
 ![固定raw入力ridge比較](../../research-data/ai-sigma/frame16-fit-gap-analysis/raw-linear-control/comparison.png)
 
 同row/gameの全6候補比較はraw-linear-control/matched-all-models.csvに保存（原phase2集計を再用）。
+
+## phase4: train-game whole-pipeline CVでの正則化
+
+raw626のλ=.01では大きいfit-transfer gapがあったため、元train96だけで5gamefoldを固定した。6opening cohortごとに16gameをSHA256(`frame16-216-CV-v1` + NUL + UID)で並べindex%5へ割当。foldは24/18/18/18/18game。各foldのfit側だけで距離WLS、raw列population moments、zero分散処理、残差ridgeをfit。encoderは教師学習済みNNを使わずraw state入力であり、whole-pipelineでheld labelを避けた。全96game平均でOOFを集計し、fold単純平均を使わない。
+
+| λ（固定3点） | OOF gameMSE |
+|---|---:|
+| .01 | .493742890 |
+| 1 | .382828357 |
+| 100 | .405647536 |
+| fold-train-only距離基準 | .408041381 |
+
+OOF最小・1e-10同値なら大λという結果前規則でλ=1を選択した。端点ではない。validationはfold/moments/係数fit/λ選択に不使用。選択後に全train96へ一度fitした距離WLSは既199係数差a1.39e-17/b1.78e-15、f32 D出力maxabs0で対応した。
+
+| fulltrain固定候補 | train gameMSE | 固定val gameMSE |
+|---|---:|---:|
+| λ=.01 raw（既phase3） | .161373671 | .781449457 |
+| CV選択λ=1 raw | .215836922 | .548893455 |
+| D | .405943737 | .485146813 |
+| distance2再校正 | .396228716 | .484525910 |
+
+選択後の固定valは11/24game改善・13悪化（対D）。unclipped train .221499040/val .557235205、clip408/4653・75/1248行。val z gameMSE .893439133対D .822535032、z符号game等重み .640769263。val rootmean gap .063746642はdisplacement .101033191−2×alignment .018643274へ分解され、原gameweightの全排他的bin signed寄与は全体へ戻る。
+
+強い正則化はOOFと固定valをλ=.01より改善し、低正則化の分散/effective game数の関与に整合する。ただし固定valではD未達、OOF→val差も大きい。分布/coverage/teacher/history/CV varianceと非線形関係は残る。OOFや再用valを独立testとしない。λの再選択・追加値・新teacher/test/学習/forwardを行わない。
+
+219の指摘を結果後label-free補助として受け、shared canonical APIによるstate OR history OR actual STM f32 input露出を記録した。foldfit→held4653行とtrain96→val1248行とも共有0/mass0。分母/fold/mask/λを変更しない。216側この診断は06:57job終了後、統括の「219が補助実施・216追加不要」通知より前に約.14秒で既実行していたため、その時系列とsourceを保存し、以後追加算術を行わない。共有0は全非線形入力support/独立分布の保証ではない。
+
+実mathは06:57:39.665747–06:57:42.129273、CPU2/BLAS1 wall2.463894秒/peak265625600B<448MiB、exit0/全wait/currentexact不在。source preflight0.041899秒は保守的5秒課金（preflightのaffinityログは未保持、主mathはCPU2固定）。元static最新130.949103+preflight5+math2.463894+露出補助保守1=139.412996/180秒。Git/report/圧縮保存管理は別。NN actual29505不変、新NN/model/optimizer/backward/GPU/game/test0。
+
+結果payloadはXZへlossless圧縮し、archive-manifestに元uncompressed scientific SHA/復元PASSと元gzip wrapper SHAの来歴を残した。gzip wrapper byte同一は主張せず、必要JSON/JSONL payloadはexact復元済み。科学sourceは当時gzip出力版のまま凍結、正本は各XZとmanifest。source/input/result/currentPIDtick停止bindingはscience-source-stop-receipt.jsonを219/coordinatorへpack前に実配送した。旧phase1/2/3の正本は変更しない。phase4独立219の裁定は別、現在owner自己検証結果。
+
+次最大1案は既保存frozen400hidden32を固定λ=1で再読出しするNN0対照。rawのCVで示唆された正則化をlearned表示へ適用し、元λ=.01からの残差転移を検査できる。raw626とhidden32ではpenalty geometryが異なるので最適λの移植や唯一原因としない。standard200 age案は有力保留、新現在配分前に実行しない。
