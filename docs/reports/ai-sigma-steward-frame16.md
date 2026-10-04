@@ -23,3 +23,19 @@ scheduler4069898/start34737868、monitor4069912/start34737890、boot ab5e66ac-12
 goal quoridor-4lc / 本人92 frame16有界意味内容調査。最新通常run d6b5087e/turn01a105b0 は06:53:29 dispatch→06:56:36 interrupted/errornull/last_result turn_limit。公式thread/turns/list limit1 itemsView=fullでもitems0、対応supervisor run/readguard保存dirなし。dispatch受理成立は支持、observe/finish/自己notesbackup・研究外部点検の成立は未確認。観測上は最初の保存出力未到達、それ以前の読取/実行/生成がなぜ未到達かunknownで、読取不足やモデル障害と断定0。最新turn1件とevents末尾64KiB内の同turn2eventのみ保存（範囲/SHAあり）、全史調査0。07:06現在steward実allocated29,663,232B+自scopeforecast65,536Bは既112MiB内、RSS exact2約146MiB/CPU[0]既RAM内、予約追加/旧unknown減額0。source/config/period1200/turn180/同saved settings変更0、推測修正/manualtick/restart/duplicate dispatch0。次通常点検と07:45:50heavy/07:50:50正owned監督scheduler/07:53:50monitor/07:55:50証拠保存は維持、外NN停止未認定。216CV/219算術/220選定gate0。証拠本人frame16/latest-semantic-intake.json/latest-turn-detail.json/latest-event-proof.json。
 
 観測できる失敗地点はdispatch受理後〜最初の記録前。実際に読取を始めたか、LLM生成待ちか、toolへの到達が妨げられたかを区別する履歴がなく、原因unknownを保持する。itemsView=summaryの空itemsだけで判断せず、最新1件のfull返却も0を確認した。小実装修復の根拠は具体化していないためsource切替をしない。
+
+## 同frame16の連続2時間延長 / 親17
+
+2026-10-04 07:32:30UTCにユーザー明示「時間枠を2時間追加で。」の実配分を受領。ready/showで本人所有・no pause、既6definition digest一致を確認した。開始05:55:50UTCを維持し、終了09:55:50へ同frame16を連続延長する。親main/mirrorを版17・同bytesへ直接更新し、現在配分を大規模増量前の生成効率有限測定へ整合した。187/194 provider readonly再用、同教師/K64/資格・多様性、有効Rjoint/全attempt job wall/game時間/実効batchを判断材料とする。具体量・私有実装は統括配分、100/1000/10000やval/test200は提案で固定義務ではない。旧96不足未除外・高LR/粗curve交絡、旧test/173非学習を維持する。
+
+親Git f893cb82507b921f7572d0581b7d1b5ad1332feb / SHA ae2eda81909c298bf83d72dd9c37809c02841b0f5fec35c30d333ab3bae044e1。旧07:55:50 config/期待hash/停止証拠と個別科学run期限・成績は旧Git/runで保持。root/coordinatorのsource停止後、今回明示許可した親1path以外のmain source/roles/common/registry/研究pipeline・modelに書込0。
+
+旧scheduler4069898/start34737868・monitor4069912/start34737890を正確PID/tick/bootで秩序停止し、stopped/ownednull/recoveryfalse・公式supervisor idleを確認。orderly-stop.jsonはoperator stopとその時点のowned・停止command・旧monitor終了を保存する。監視source変更は停止後、parent/guard/watch/config/contract/prompt/有効契約を固定してからvalidate→同runtime通常fresh start。旧失敗を新成功へ変更していない。
+
+07:38:42.906236UTC actual running/loaded。新scheduler4133634/start35249387、monitor4133648/start35249412、boot ab5e66ac-12ce-49b0-ac55-afe05e3f5216、CPU[0]。24期待hash不一致0・config/contract loaded一致・同6digest。same saved supervisorへ現common/role＋新運用契約/親を公式idle resume、model/effort/cwd/settings不変受理・本文readback不可。再開時の合算current RSS52,805,632B。
+
+旧monitor-endedから実loaded確認までの観測gap 304.284秒、次通常2026-10-04T07:58:39.138866+00:00。通常fresh startの位相差を保存、reloadイベントなし。start_at/guard OPERATION_BEGINは05:55:50のままで、32MiB/112MiB・run cap・累積上限をresetしていない。既自己保存予約内current＋Git/temp/metadata forecast524288B、追加予約0/歴史保持解除0。
+
+09:45:50新heavy通知、09:50:50正確owned監督turn＋scheduler停止、09:53:50同identity monitor回収、09:55:50証拠保存を92長期ownerが保持。既自然turnの出力未到達・点検unknownと今回期限更新/loaded成立を分ける。旧停止欠測/turn_limitは保存し、外部NN停止・科学成功・自然点検の全面復旧を認定しない。静的準備/新pipelineを運用全史検査待ちgateにしない。
+
+必要証拠は自己frame16-extension17のintake/orderly-stop/official-stopped/source-fixed/parent-git/supervisor-resume/startup-commands/running-loaded/storage-current。監視開始後source追編集0、必要Git/private indexとappend-notes/backup、短期子終了・意図した長期2PIDを分けて引き渡す。
