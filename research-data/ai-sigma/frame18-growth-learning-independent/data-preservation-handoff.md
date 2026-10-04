@@ -1,0 +1,3 @@
+goal quoridor-4lc /229 first data finite preservation
+
+Git24a9cd8b0f4aeede48f91985137b3611bc7269b6:14 necessary files byte restore PASS/default index unchanged/private index0. Beads notes updated and backup sync exit0/184ms. Label-free first data arithmetic PASS and PRESTART_BACKGROUND_STOP_BINDING_MISSING remain separate. Later stage/background stop receipts precede arithmetic but do not repair preadmission. Current charge180/270, one final90 arithmetic job remains; wait current learning+test source/child stop, candidatefreeze and one-test outputs. No test labels read/newNN/close/reset. Report docs/reports/ai-sigma-critic-growth-learning.md.

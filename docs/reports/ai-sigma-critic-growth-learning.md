@@ -23,3 +23,13 @@
 同256000 samplesではsmallの期待1333.333 samples/game・samples/rows28.36565、large444.444 samples/game・samples/rows9.32163である。row密度/gameequalのため後者を厳密同rowepochとは呼ばない。非選定副対比400/1200のstep/G距離0は独自再算で規則一致、candidateはvalidation-primary最小・tie小G/早stepのまま。旧scale SHA68f8b43a固定・seed19080311/2000steps×128・LR1e-4/WD0は一致するが、実初期tensor/関数一致は保存parity receipt待ちでモデル再forward認証はしない。
 
 旧費/resetなし、新source90＋データ算術90を保守計上し、最終算術90秒/残1jobをcurve/freeze→一test停止後へ残す。229はcloseせず継続。生成量不足の条件は今回fullで解消したが、純数量因果・NNUE未見利益・棋力は未確認。次判断は固定学習曲線と独立testのrootmean/D/定数差を見て更新し、追加条件を要求しない。
+
+## 最終停止束縛と独立算術の不足（229最終job）
+
+新scientific-final-stop SHA7cffd34e、candidatefreeze SHA2bac8f1fと現source/payload SHA、学習2stage・testの子wait/exactabsence、両background cleanupを最終job開始前に確認した。正frame18 runtime/current物理・RAM・保存admissionはfinal-admission.jsonへ保存した。第一jobのPRESTART_BACKGROUND_STOP_BINDING_MISSINGは消していない。
+
+最終runnerのentrypoint置換が不足し、check-final.pyではなくcheck-data.pyを実行した。13:12:52→13:12:53、exit0/wait/currentexactabsent、新NN0。これは検証側の管理/checker失敗で、原学習やtestの科学負例ではない。実出力はfinal-wrong-entrypoint-output.jsonへ保存し、accepted第一data-result.jsonはGit24a9cd8bからbyte復元した。意図した最終checkerは未実行で、そのコードに含まれるsaturation閾値差も未検証として保存する。
+
+最大2算術job、source90＋第一90＋最終90＝270/270を保持し、追加job/resetは行わない。全13曲線、train-only距離係数、初期関数receiptとtest pergame/pairedbootstrapの独立算術は**未確認**。owner公開結果（candidate gameMSE .260522204、距離 .400448510、差 -.139926306、fixed-fit95%[-.192885480,-.084129888]、66/96改善）はowner参照の射程に留め、独立PASSとはしない。candidate576BEST2000/freeze12:55:09→test12:55:55、onepass96/4847/9694NN、学習＋test1167290NN/35.948383秒は停止receiptへの有限binding。checkpoint/currentforward・教師truth・全人非閲覧・IID・純数量因果・正式棋力の再認証はない。
+
+主配分の見解：本dataset/mask成立とownerの未見教師誤差改善は次の接続を検討する根拠になるが、229の最終独立確認は不足している。次最大1方向は凍結候補のnative NNUE差分更新・探索接続を別の小単位で判別すること。数量追加や開封済test再選定を自動反復せず、棋力利益は別の結果前条件で評価する。新科学を229から開始しない。
