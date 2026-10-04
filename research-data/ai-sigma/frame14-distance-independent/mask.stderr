@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-distance-independent/check.py", line 101, in <module>
+    try: {'early':early,'mask':exposure}[sys.argv[1] if len(sys.argv)>1 else 'early']()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-distance-independent/check.py", line 84, in exposure
+    assert set(mask['games'])==families and mask['new_metadata_SHA']==sha(C/'test-metadata.jsonl.gz') and mask['reference_metadata_SHA']==sha(A/'all144-metadata.jsonl.gz')
+                                                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
