@@ -1,0 +1,72 @@
+{
+  "UTC": "2026-10-04T12:59:16.962953+00:00",
+  "freezeSHA": "2bac8f1f7ad87b83ac0549c01bb32eb0c8d0a2f39a05c717420e20cd668e6a60",
+  "freeze_selected": {
+    "UTC": "2026-10-04T12:55:09.342717+00:00",
+    "selection_rule": "min validation stage BEST; tie smaller G+ then earlierstep",
+    "selected_stage": 576,
+    "selected_G": 576,
+    "best_step": 2000,
+    "validation_gameMSE": 0.30523895728053846,
+    "planned_test_games": 96,
+    "test_label_values_read": false,
+    "bootstrap": {
+      "seed": 2281805,
+      "replicates": 2000,
+      "unit": "game paired fixed predictions; no refit"
+    }
+  },
+  "source_artifact_hash_checks": {
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/learning-checkpoints/frame18-growth228-plan576-positive576-r1/best.pt": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/learning-checkpoints/frame18-growth228-plan576-positive576-r1/initial.pt": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/learning-plan-v1/config-576.json": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/dataset-v1/adapter/canonical.jsonl.gz": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/dataset-v1/adapter/fixed-maximum-mask.json": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/learning-guardian/frame18-growth228-plan192-positive192-r1/process.json": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/learning-guardian/frame18-growth228-plan576-positive576-r1/process.json": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/dataset-v1/quantity-freeze.json": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/learning-plan-v1/before-curves-selection-rule.json": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/learning-plan-v1/baseline-576.json": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame18-data-learning/test.py": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame18-data-learning/scaled_model.py": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame18-data-learning/learning_plan.py": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame18-data-learning/learn_guard.py": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame18-data-learning/freeze_test.py": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/nnue-training/model.py": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/nnue-training/common.py": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/nnue-training/frame14_data.py": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame15-input-scale-control/scale.json": true
+  },
+  "learning_stop": {
+    "UTC": "2026-10-04T12:55:09.342717+00:00",
+    "all_stages_stopped": true,
+    "stops": [
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/learning-guardian/frame18-growth228-plan192-positive192-r1/process.json",
+        "SHA": "0c2f450f194234ca706e49a5dd687d2fbf1cf17d9feb1f125d8dd6d0ea302cf9"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/learning-guardian/frame18-growth228-plan576-positive576-r1/process.json",
+        "SHA": "17aecc2effbc8b48847f822886e7feef9e2c1d3351fae555afadeaf596296904"
+      }
+    ],
+    "samples": 1157596,
+    "wall_s": 33.37905607401626,
+    "selection": {
+      "stage": 576,
+      "step": 2000,
+      "validation_gameMSE": 0.30523895728053846
+    },
+    "test_started": false
+  },
+  "parity_owner_report": {
+    "actual_rows_by_stage": [
+      13838,
+      32276
+    ],
+    "maxabs": 1.49e-08,
+    "status": "PASS, independently pending229; counts actual stage train+val, not additional5901"
+  },
+  "claim": "validation-selected benefit only; independent test pending; no strength claim",
+  "test_sealed_values_accessed_by_coordinator": false
+}

@@ -1,0 +1,168 @@
+{
+  "UTC": "2026-10-04T13:09:35.374158+00:00",
+  "source_payload_process_current_SHA_checks": {
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame18-data-learning/qualify-before-test-wire-repair.cjs.txt": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame18-data-learning/save_git.py": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame18-data-learning/test.py": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame18-data-learning/learning_plan.py": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame18-data-learning/pack.py": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame18-data-learning/generation_queue.py": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame18-data-learning/generate.cjs": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame18-data-learning/gen_guard.py": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame18-data-learning/learn_guard.py": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame18-data-learning/generate-before-test-wire-repair.cjs.txt": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame18-data-learning/gen_guard_background.py": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame18-data-learning/learning_queue.py": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame18-data-learning/train.py": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame18-data-learning/build_dataset.py": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame18-data-learning/freeze_test.py": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame18-data-learning/prepare.cjs": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame18-data-learning/finalize.py": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame18-data-learning/scaled_model.py": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame18-data-learning/qualify.cjs": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/candidate-freeze-v1.json": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/test-evaluation-r1/result.json": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/test-evaluation-r1/pergame.json": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/learning-test-summary.json": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/learning-guardian/frame18-growth228-plan192-positive192-r1/process.json": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/learning-guardian/frame18-growth228-plan576-positive576-r1/process.json": true,
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/learning-guardian/test-r1/process.json": true
+  },
+  "scientific_final_stopSHA": "7cffd34e7aed02022bc7a321c87b26019d6f3d8ba38fc69c89ee2e2189d139a7",
+  "freezeSHA": "2bac8f1f7ad87b83ac0549c01bb32eb0c8d0a2f39a05c717420e20cd668e6a60",
+  "test_resultSHA": "3adc1a3bbb08ee7f924db4ae5a0bbe70993cd9461be68a831974f952dfe87d4e",
+  "test": {
+    "games": 96,
+    "rows": 4847,
+    "excluded": 0,
+    "samples": 9694,
+    "metrics": {
+      "candidate": {
+        "rows": 4847,
+        "games": 96,
+        "rootmean_mse": 0.27877985802565547,
+        "rootmean_game_equal_mse": 0.2605222041631725,
+        "rootmean_rows": 4847,
+        "z_mse": 0.6320250272653893,
+        "z_game_equal_mse": 0.5759404560479984,
+        "z_rows": 4847,
+        "target_mse": 0.27877985802565547,
+        "target_game_equal_mse": 0.2605222041631725,
+        "constant_mse": 0.6672739687630347,
+        "constant_game_equal_mse": 0.6905461098288664,
+        "z_sign_rows": 4847,
+        "z_sign_accuracy": 0.771611305962451,
+        "saturation_fraction": 0.18526923870435322
+      },
+      "initial": {
+        "rows": 4847,
+        "games": 96,
+        "rootmean_mse": 0.6805908465239953,
+        "rootmean_game_equal_mse": 0.7038108362372749,
+        "rootmean_rows": 4847,
+        "z_mse": 1.0140949995105986,
+        "z_game_equal_mse": 1.0140149213847434,
+        "z_rows": 4847,
+        "target_mse": 0.6805908465239953,
+        "target_game_equal_mse": 0.7038108362372749,
+        "constant_mse": 0.6672739687630347,
+        "constant_game_equal_mse": 0.6905461098288664,
+        "z_sign_rows": 4847,
+        "z_sign_accuracy": 0.4947390138229833,
+        "saturation_fraction": 0.0
+      },
+      "distance": {
+        "rows": 4847,
+        "games": 96,
+        "rootmean_mse": 0.39988867469760947,
+        "rootmean_game_equal_mse": 0.40044851038505985,
+        "rootmean_rows": 4847,
+        "z_mse": 0.7466620678053938,
+        "z_game_equal_mse": 0.7180822482138519,
+        "z_rows": 4847,
+        "target_mse": 0.39988867469760947,
+        "target_game_equal_mse": 0.40044851038505985,
+        "constant_mse": 0.6672739687630347,
+        "constant_game_equal_mse": 0.6905461098288664,
+        "z_sign_rows": 4847,
+        "z_sign_accuracy": 0.7256034660614813,
+        "saturation_fraction": 0.09655456983701259
+      },
+      "constant": {
+        "rows": 4847,
+        "games": 96,
+        "rootmean_mse": 0.6672739687630347,
+        "rootmean_game_equal_mse": 0.6905461098288664,
+        "rootmean_rows": 4847,
+        "z_mse": 0.9998903370043806,
+        "z_game_equal_mse": 0.9998720451523986,
+        "z_rows": 4847,
+        "target_mse": 0.6672739687630347,
+        "target_game_equal_mse": 0.6905461098288664,
+        "constant_mse": 0.6672739687630347,
+        "constant_game_equal_mse": 0.6905461098288664,
+        "z_sign_rows": 4847,
+        "z_sign_accuracy": 0.5052609861770168,
+        "saturation_fraction": 0.0
+      }
+    },
+    "bootstrap": {
+      "distance_rootmean": {
+        "games": 96,
+        "delta": -0.13992630622188734,
+        "percentile95": [
+          -0.1928854803594072,
+          -0.08412988843338542
+        ],
+        "gain_games": 66
+      },
+      "distance_z": {
+        "games": 96,
+        "delta": -0.14214179216585346,
+        "percentile95": [
+          -0.23183282607568342,
+          -0.05094431737283132
+        ],
+        "gain_games": 67
+      },
+      "constant_rootmean": {
+        "games": 96,
+        "delta": -0.430023905665694,
+        "percentile95": [
+          -0.5048163819648873,
+          -0.3562461398068013
+        ],
+        "gain_games": 85
+      },
+      "constant_z": {
+        "games": 96,
+        "delta": -0.4239315891044002,
+        "percentile95": [
+          -0.5305944933194875,
+          -0.32031910789897716
+        ],
+        "gain_games": 79
+      },
+      "initial_rootmean": {
+        "games": 96,
+        "delta": -0.44328863207410246,
+        "percentile95": [
+          -0.5184880140552487,
+          -0.36961346730060834
+        ],
+        "gain_games": 85
+      },
+      "initial_z": {
+        "games": 96,
+        "delta": -0.43807446533674493,
+        "percentile95": [
+          -0.5457482314511056,
+          -0.33338486533147593
+        ],
+        "gain_games": 81
+      }
+    }
+  },
+  "claims": "frozen independent-lineage prediction benefit finite support; final229 independent math pending, no IID/solequantity/strength claim",
+  "sourcewriter_stopped": true
+}

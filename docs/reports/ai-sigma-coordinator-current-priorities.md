@@ -1,55 +1,19 @@
 # 現在のNNUE研究優先順位（frame18）
 
-2026-10-04 12:54UTCデータ独立裁定。229初回NN0算術で768uniquegame/family（旧96新版trainalias+新672）、37123rows=4603+32520、train576/val96/test96・192/576入れ子9025/27463rows・共通maxmask・1/(G*n_game)/gameweight1/G・参照dataset OR-exclusion0を確認。旧scaleSHA/seedと400/1200非選定secondary/候補tie規則も保存算術で一致。実初期tensor/functionと曲線/test利益はこの裁定の範囲外。source90+data90=180/270、残90/最終一job、source/子stopと現在必要hash一致を有限受入れ、229は継続しcloseしない。
+2026-10-04 13:55UTC。新672独立game→低LR標準化QF1学習192/576→576BEST2000凍結→新96test一巡が終了した。owner有限test rootmean gameMSE .260522204対train-fitD .400448510、差−.139926306、固定fit局paired95[−.192885480,−.084129888]、66/96改善。量・反復露出・旧96比率・分布/選定stepが交絡し、純数量因果/十分量/教師真値/IID/棋力は未認定。旧openedtest/173正式198非学習、testから再選定0。
 
-学習background jobe18b2b4aは12:47:22.389exit0/cleanuptrue、12:47:25.486samejob marker/turn01a106f4配送を公開管理receiptで確認。算術開始12:48:47は保存時刻上cleanup後だが事前bind未実施のadmissiongapを保持し、後から事前確認済みに書換え0。個別・両stage科学receipt/初期関数/最大1freeze/新test一巡の意味結果は担当報告で次判断へ、生成・schema・mask一致だけで学習利益/量十分/棋力を認定しない。
+229 first label-free data mathは768uniquegame/family、37123rows、train576/val96/test96、小192/大576・共通ORmask/gameequalを有限支持。最終jobは誤ってdata checkerを再実行し、curve/train-fit/test/bootstrap独立検算NOT_RUN。270/270と2jobを保持して追加rerun0。owner利益と独立欠測を併記し、正常exitやデータPASSを最終PASSへ変換しない。b7480d08の停止/失敗/保存を有限不完全handoffとして受入れ、親goalは未達。
 
-背景job8255c4c9は12:39:00exit0/cleanuptrue、12:39:03samejob marker/turn01a106ec配送完了。12:03実Idle点と合わせ、submit→Idle→完了元role再開を一件の実研究利用で有限確認。queuewait800.0733s/source-management80.2929s/外elapsed2712.884sはr2の12chunk+NN0dataset/plan範囲、全14guardian費と重複するため単純加算しない。rootテストslot留保657.929s/人工CPU6.55s/旧失敗1623NNを別保持。旧r1未配送通知cancelはdeliveredに書換え0。
+主な未知は、teacher-rootmean予測利益がminimax leaf評価・手選択・同wall対局効用へ移るか。231静的route93f21a46を採用し、232 experimentへ13:54:12実配送。190 Node-hosted f32 full/delta/RuleAを私有再用、228凍結layout48772Bと明示mu/sigmaを接続。現在時刻から25–40分見積の上側は残枠に収まらないため、まず固定27Torch/native・4root全合法child full/delta/親buffer-key-history復帰を実装する。source ready14:15、新science入口14:17、停止14:20/保存14:27。早く接続出来た場合だけ同NNUE/D・同node固定4root depth1→2（各2048node）、TT/noise/policy合法手除外0。完成depthのみ。小対局4gameは今枠NOT_RUN、Rust/Wasm/Sigma性能とは呼ばない。最大2science job各120s/total240s、forward50000samples、CPU番号2単1/torch1/GPU0、RAM2GiB guard1.75、新16MiB guard14。
 
-明示新4hは開始10:33:18固定/終了14:33:18UTC、新heavy14:23:18/監督14:28:18/monitor14:31:18。CPU計算合計4論理/RAMcurrent8GiB/保持+有効予約unused12GiB/GPU推論6GiB・各job30min、GPU学習は旧累積2h確認未使用のみ。同saved6role/model-effort-cwd、LLM人数gateなし/Supervisor max_turn_seconds=null、pause/実所有/正runtime/子回収を維持。旧run/費/失敗/成績/個別期限reset0。親mainmirror・運用sourceのsolewriterは92、coordinator編集0。旧開封test選定復帰0、173正式198非学習、共有環境/toolchain/model取得/製品統合/push公開0。最高棋力・未見学習利益は未達。
+ユーザー明示の二経路を実配分に反映。評価器側は同探索条件のD対凍結NNUEを機能・固定node診断へ。探索側は233 hypothesisへ13:54:21実配送し、別scopeで同評価器を固定した合法生成/距離/clone/full-delta/controlの支配費と、PV順序/TT/history文脈/make-unmake/cache/根上部policyを総実装検証費・期待同wall利益から選定する。静的source90s/管理90s、新1MiB、モデル/NN/compileなし、source停止14:12/save14:18。全改善実装を比較gateにせず、低prior手を除外しない。広い移植は残時間/規則接続費から保留、凍結モデル接続や計測で律速/効用が判明した時に再検討。
 
-## 判断を変えた観測
+234 criticはnative専用の別90s（source45+停止後NN0calc45）、新1MiB。旧229予算reset/最終test再検算ではない。実argv/task/output識別を事前束縛し、停止source/layout/scale/parity/全status/NN/完成depth/費を一job有限算術。producer子/背景cleanupを事前bindして測定重複0。独立未実施はtyped保存し全文承認gate0。source-stop14:24/save14:29。hypothesis/experiment/critic編集scopeは分離、科学CPUは実資源と測定競合を見て調整する。
 
-最大の未解決は既96trainのfit/gap診断だけでは量・独立game多様性不足を除外できず、実増量で改善設定の学習が距離/定数を超えるか。前枠同48eager平均116.405994→Graph85.727065秒→codec79.305334秒を有限支持。独立new96全GOAL4603joint/密度47.9479・job293.2263s/既知1000約52.4706min+未知、60初期目安短外挿/30未達/実1000NOT_RUN。旧48と新96はopening RNG/仕事量が違うため方式退行比へ変換しない。RuleA/pi/zはowner有限資格/全deep教師truth・K800品質・IID・棋力認定0。
+前225の均衡比較は3modelslot censored、NN実UNKNOWN/上界921600/1.05mを保持し利益不確か。226異論を採用した停止→228増量学習の主配分変更で意味結果が得られた。評価器調整へ偏り、探索の遅さ放置、速度だけの成果を自然Supervisor点検の対象へ継承。新監督層/役本文/92運用変更/ACK専用起床0。
 
-安いcohort均衡は同96 workerNN100785/81855/80209とtailが動機で225へ配分したが、管理/測定競合で完全同host対照が残らなかった。初回arg cap350000とreadonlyprovider<=307200の不整合はimport前4.494708秒/原counterNULLを保存してsource0NN補足。baseline-r2は219.339324秒で227のBeads/source sed shell本文末尾.pyの誤分類により停止、71GOAL/21unfinishedUNKNOWN/4NOT_STARTED、3773policy/3315joint/458zunknown。狭い実argv/path/ancestry修復後balanced-r3は12.183166秒で実supervisor inspect CPUtoolとの競合により停止、96policy/0joint。最後balanced-r4は追加停止steer到着前にモデル開始し27.192243秒で自己taskstop、原PAUSED補足=USER_PRIORITY_REORDER/親ユーザーpauseではない。三科学slotと保守NNupper921600を保持、実NNUNKNOWNを0や上界実測へ変換しない。各全planned96/fault/censor/NOT_STARTED/全attempt費/source/自己子waitexactを保存。
+費用:新672全GOAL32520joint、全attempt1849212physicalNN/guardian2175.606740s（失敗testwire1623込み）。学習+test1167290samples/35.948383s。owner1000job外挿53.9585分、測定管理下限込み56.0875分+未測。r2の既知queuewait800.0733sは全工程達成で無視できず、12chunk外elapsed2712.884はguardianと重複するため単純加算しない。実1000完了/全工程60分保証なし、30分未達。root留保通信657.929sと人工CPU6.55sは別、全留保時間のcompute空保証0。全team/開発実費unknown。速度目安だけを有益な低費用改善の停止理由にしない。
 
-226の「残candidateだけではcurrenthost完全baselineを欠き介入効果を識別できない」異論を採用し11:08:18/22追加science停止を実配送、最後の到着raceも保存。負荷均衡利益は不確か、科学性能lossではない。第三枠の消化/guard反復を目標化せず、独立増量と学習へ主配分を変更。旧成立roundrobin codecGraphを生成候補に維持。広いarray/Rustpump/C++は有力だがframing/取消/build/探索規則差の改修・確認費が先行。新量/尾部/費用で阻害が具体化した時に再検討し、既構成維持そのものを理由に排除しない。
+現在枠は開始10:33:18/終了14:33:18UTC（23:33:18JST）、newheavy14:23:18/監督14:28:18/monitor14:31:18。CPU合計4/RAMcurrent8GiB/保持+予約12GiB/GPU推論6GiB job30分。GPU学習旧2h確認unusedのみ、今学習CPU。same saved/model-effort-cwd/周期1200/turnnull/LLM人数gate0、pause/owner/子回収維持。旧費/失敗/成績/個別run期限変更0。新枠/次枠自動開始0。親mainmirror/runtime単独writer92、current scheduler61691/tick36359387・monitor61711/tick36359409同bootの既loaded根拠、future stopは別確認。運用source編集0。
 
-## 実配分と判断境界
-
-228 sameexperiment: 11:11:43同activeへ実配送accepted。新scope tools/ai-sigma-frame18-data-learning/、research-data/ai-sigma/frame18-data-learning/、専用report。旧225source/子停止点確認後readonlyreuse、225全稿/Git完成待ちなし。旧frame16new96のevaluation-only版を保持した明示train再割当、新最大672=480train+96val+96test、六cohort/新uniquefamily/actionseed。new val→sealedtest→train96x5の事前manifest、benchmark兄弟mix0。train192/576入れ子、largest実trainのlabel-free OR-maskを曲線前固定、old尺度・同initial/seed19080311/Adam1e-4WD0/H32・stage各256000train samples/13earlypointsを第一条件、train-onlyD/定数/gameequalとrootmean/z/signを別保存。epoch差/共有mask/選定点差/oldtrain再用を純数量因果にしない。13:05量不足branchを曲線前に固定し大stage不足/holdout不足はtyped未実施・小診断へ縮小、全量達成をgateにしない。validationで最大1候補freeze→newtest96一巡、旧test/173禁止、test結果を再選定へ戻さない。新genNN2.2m/heavy5400s/各provider307200-hard600、CPUlearn+evalNN2m/heavy900s各300、元費reset0。new gen開始12:50まで/stop13:05、freeze13:50/testnewheavy14:05/stop14:15/保存14:23、親14:33不変。
-
-229 samecritic: 11:13:10同active実配送accepted。元226必要handoff/source停止後新source90+停止後NN0calc180=270s、CPU0/RAM512guard448、新8MiB/guard6/forecast4。新独立scopeと専用report、NN/model/forward/fit/GPU0。必要split/family/weights/mask/scale/曲線/費/初期seed/全status・source-stop/current/freeze/test一巡を有限保存算術。owner RuleA/canonical依存を明示し全raw/deep再認証を新入口にしない。科学停止/current物理後算術、重jobとのchecker競合なし。14:15newcalc/14:20stop/14:25save。
-
-227 samehypothesis: phase1静的選定180s/source停止Git821ea3f1、phase2私有manifest adapterを10:52:51実配分。旧stage max96/mask144接続障害に対し共有trainerを変更せずdynamic family/split/count/gameequal/maxmask/explicit old96aliasを実装。新prep180s+管理120s・既4MiB内/NNmodelreal-label fit0。11:08:07短CPU0fixture32有限checksPASS/expectedrejection/自己waitexact不在、source停止を受領、API/hashの必要引渡しは11:11:45active補足。原欠測admission0fixture/歴史RUSAGEpeakとfixture専用37MBpeakを区別。必要interfaceを228へreadonlyreuse、全稿承認gate0。
-
-初期225256+2262+2274+coordinator1=263MiBは既exp1980pool unused978427904Bから現在admitして残702652416B。228new512MiB+229new8MiBを同残から計画、残157392896B、旧全予約/依存/Git保持・未使用返却認定0/unknown減額0/parent12GiB追加0。新heavy直前実保持/cache/tmp/Git+有効unusedを本人admit。不足は具体再配分/typed停止、値を救済しない。
-
-## 運用・通知
-
-92親18mainmirrorSHA5433ad66…24798e08/sourceGitefac3369、10:43:33freshstart/10:43:37runningloaded、scheduler61691/tick36359387・monitor61711/tick36359409同boot、period1200/turnnull/current24hashと六role一致。coordinator10:45:26点照合/root10:44:10独立14checks受入れ、root224初期handoff完了closedで返信専用再送0。初回自然6fcf4c84 completed/observe→独立判断→notesbackup→通知accepted自己子回収を有限確認、後続全期間/未来stop/科学効果保証ではない。
-
-Supervisor10:46の改善投資Cへ比較・失敗・資格保存を含める指摘、11:06の無対照なら量接続へ進む判断を選定に反映。LLM active人数で拒否しないが、次dispatchのquietは現在active turnの将来CPUtool不在を示さない。4core測定/生成の実CPUtool競合を明示調整し、自然自己tool/owned回収と十分窓をfresh確認する。14:23重通知/14:28正owned監督scheduler/14:31monitor/14:33証拠は92長期責任、外部job停止は本人証拠で別確認。root/coordinator運用source重複編集0。
-
-配分・receipt正本はresearch-data/ai-sigma/frame18-coordinator/、状態はBeads、必要科学版は研究Git。旧費/失敗/成績を保存し、意味のある観測で主計画を更新する。全役承認/会議/毎run新issue/close専用turnは追加しない。
-
-229新選定前指摘を採用:同samples比較に加え既small400/large1200の非選定secondary等期待samples/game（192576なら266.7）を曲線前固定。量branchはsmall400 anchorにnearest savedstep/G_large、距離/typedmissing保存、追加NN/fit/point/結果後pair選択なし。228へ11:21:47active実配送、主要best/freeze不変更。必要増量は7x96manifestでprocess数固定ではなく、provider307200を守る48等の結果前chunk分割を元2.2m/heavy5400s内で許す。
-
-227必要11Gitbyte/currentSHAを有限受入れ、source/32syntheticchecks/API引渡し完了。owneridleにつきclose専用turn0、holder保護で統括assign/closeが拒否されforce/reclaim/代理actorなし、Beadsに受入れ根拠保存して原owner維持。226必要5Gitbyte/independent zero completecomparisons/source子停止を有限受入れ、旧180/260/late7s偏差とjq管理失敗保持、229実質turn内ownerclose可。これらの管理確認器例外は原producer科学結果を変えない。
-
-root230の背景job実装を採用。主checkout sourceGit288c325、scripts/dev/research-job.py/sh、test/example/docsのみ追加、既scheduler/team/common/registry/228source不変更。人工CPU0単1/fakeRPC試験11:41:57.487681–11:42:04.038652/6.550977s/20PASS/exit0wait、NN/GPU/実研究turn0。root230本人closed/backup。228validation chunk2終了11:38:19.658498/runner107738 tick36670693 exact不在をowner11:39:48・統括11:40:46に確認しテスト窓を留保、解除は11:50:45.929311同active steer accepted。留保elapsed（通信/LLM待ち）を人工試験CPU6.55sと分ける。
-
-次の未開始長時間jobは /workspaces/quoridor/docs/development/research-jobs.md のsubmit→job ID/dir/次判断Beads保存→本人turn終了Idle→完了idle-only再開を適用する。228solewriterが自域config/state-dirと既guardianのcurrentancestor/owner identityへ背景supervisor+commandを薄接線、source版/全attempt/管理CPU・RAM/log/保存を既予算内へ保存。現在生成は移管/interruptしない。pause/所有/digest/end/応答不明保護を継承し、接線不足は具体化して元方式で継続、全稿ACK/人工suite再試験/新科学条件を入口gateにしない。root手順の実配送とproduction Idle/通知成立を区別し、次jobで実到達を確認する。親・個別期限/NNcap/量/13:05branch不変更、92運用source変更なし。
-
-11:54UTC background-gen-r1の公開管理receiptを点読取。jobc7b7cec2…child11:48:47→11:48:58 failed/exit1/11.087867s/remaining[] cleanup_complete。guardian公開receiptはtest96-chunk1-r1/10.945371s/1623NN/allwaitexact不在、test raw/labels未読。queueのCalledProcessErrorは根原因不明の終了伝播。notificationはrecipient_not_idleでpending、実Idle/完了再開は未確認。通常修復・原失敗/全分母/NN費保存は228ownerへ返し、13:05生成stop/branchと外側13:07cleanup endを区別。背景tool採用・子終了確認を科学成功にしない。
-
-228背景r2引渡し: sourceGitc484e21c…、supervisor123081/tick36780917・queue123133/tick36781104、testchunk1-r2 actual11:53:53.503867。旧r1 result failedは保持、同turnで回収済みの未配送notificationだけcancelled（deliveredに救済0）。672全manifest/family/seed/品質/roundrobinと12:50新入口/13:05science stop/13:07外側回収を維持。hyp/criticはmetadata/mask/pathhash/safeledgerだけ、testtargetsはsealed。本人Idleはabandonedではなくin_progress所有job、背景終了/不足/失敗で一度元roleへ通知。現物点はrunning/まだactive、到達確認は未来完了イベントで行いLLMpollingを追加しない。
-
-Supervisor12:06節目を採用: validation取得は量不足仮説/学習利益の判定ではなく評価準備。12:03の実Idle点はroot230人工suiteから分けたproduction前半の到達、実完了配送/全子回収は未確認。停止後公開compact/sourceを229既配分へ渡す、metadata集計を独立raw再検算/全test非露出証明へ格上げしない。予定report FileNotFoundErrorは監督の観測不足でproducer科学失敗ではない。今回追加科学/条件/量/役/turnを起こさず、background safeledger一回の点読取で進展と未知を更新。
-
-生成停止と曲線前固定を受け、13:05不足branchのfull192/576を12:38:54に成立させた（13:05まで待つ固定工程ではない）。最大train共通OR-mask/old尺度/同初期seedとfreshoptimizer/13point、主要same256000seenと非選定secondarysmall400-large1200を維持。229へ生成compact/quantity-freeze/selection-ruleと費範囲・sealed非読取を既270秒内の実質入力として配送、source/算術は228の学習計算に重ねない。主228はcritic全文/算術を開始gateにせずfreshphysical admit後二stageへ。新効率port/追加教師・再split・曲線後mask変更を開始せず、新学習観測で次配分を判断する。
-
-learning背景handoffを受領し、jobIDを記録したownerはIdle→二stage終了イベントで再開。予定physical samples449732+707864=1157596<new2m、CPU2single/torch1/GPU0/各300/all900・旧gen費/reset0。12:48:31 critic同active正turnへ、stage間空窓が次576科学不存在を保証しないためbackground learn-r1 command終了/cleanup+owner停止receipt後に算術する具体補足をaccepted。新turn起床/全稿・算術承認gate0、主228は既physics/budgetで継続。testtargetsはfreeze前allowlist外、metadata/mask/pathhash/safeledger＋trainval範囲を保持。source/役/model/期間変更0。
-
-229初回データmath12:48:47→12:48:48.965/CPU0/NN0/exit0waitexact、inner1.107575s/peak328392704B。全attemptNN1849212/guardian2175.606740の算術を独立支持、RuleA/P2/pi/z/fullpack/memberGitはownerの有限参照で全opaquehistory/deep再認証0。量full成立を受け192/576両stage比較の予定を維持するが、samecomputeの期待samples/game1333.3対444.4・sample/row28.37対9.32は交絡として保持。最終229mathは学習/testsource・子停止/backgroundcleanupを前bindしfreshphysical、oldtest173/sealedlabelsはfreeze前未読。全team費/開発思考・キュー/外elapsedをguardianへ単純加算0。
+保存:228 scientificGita9d4b869/finalhandoff3f522fba、ownerclosed/backup0。231必要9byte復元を静的有限受入れ。新23216+2331+2341MiBは231後unused155295744Bから一度計上→136421376B、旧128/64/256/512等とunknown維持、親追加/減額/返却claim0。実admission時に保持/Git/temp/unusedを再確認。必要contract/配分receiptはresearch-data/ai-sigma/frame18-coordinator、状態はBeads。必要結果と未実施を保存し、最高棋力goalはin_progress。
