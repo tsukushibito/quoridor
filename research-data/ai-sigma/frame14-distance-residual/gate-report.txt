@@ -1,0 +1,19 @@
+goal quoridor-4lc / child200 -> exp201 fixed gate handoff
+{
+  "status": "GATE_MET",
+  "conditions": {
+    "below_constant": true,
+    "below_random_QF1": true,
+    "finite_input_coefficient_schema": true,
+    "science_child_stopped": true
+  },
+  "candidate_step": 0,
+  "candidate_validation_gameMSE": 0.48514681311997876,
+  "distance_initial_gameMSE": 0.48514681311997876,
+  "residual_benefit_validation": false,
+  "evaluator_settings_SHA": "115181bf1dfad94e078a8e43ae371336c0a4ba8501889724a9eae73dee8b30db",
+  "training_stop_SHA": "71e112deda6b80ca75c7c39b9df3775c701b653be03cee0fef1b78cbc64fa3d3",
+  "coefficient_fit_SHA": "77ce9e79495038b25a4f4a9ffd95dc9f66700aff2c1f96cf08b65fff3c79733c"
+}
+現物 gate-result.json/evaluator-settings.json/training-stop.json を新自域 frame14-distance-residual へ保存。学習1回2000step/379921samples、5.394997s/810754048B、CPU2single/GPU0、PID3858086 tick32928774 wait/currentexact不在。初期5901算術parity pass/追加forward0。source run.py/residual_model.py freeze・子停止。候補がdistance initialの場合も新200明示gateとして成立、旧197gate変更0。
+exp201は既配分fresh24のみ、旧198opening再利用0/旧testlabels未読。本人は新test前専用evaluator/freezeを準備、labelsはfreeze後の一巡のみ。main root再確認待ち0、受付≠生成開始。

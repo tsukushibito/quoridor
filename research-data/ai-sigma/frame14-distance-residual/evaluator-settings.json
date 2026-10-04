@@ -1,0 +1,51 @@
+{
+  "condition": "QF1-distance-residual-f32-v1",
+  "private_model": "tools/ai-sigma-qf1-distance-residual/residual_model.py",
+  "private_model_SHA": "7e456d2c86b0e2a8f1d1f0feff1e43446181ddaabc52920cf7fbcd7076149627",
+  "coefficients": {
+    "a": 0.06294242415104226,
+    "b": 8.276425107422213
+  },
+  "coefficient_fit_SHA": "77ce9e79495038b25a4f4a9ffd95dc9f66700aff2c1f96cf08b65fff3c79733c",
+  "constant": 0.01086389238577769,
+  "checkpoints": {
+    "initial": {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/nnue/frame14-distance-residual-r1/initial.pt",
+      "checkpoint_SHA": "36ea9132a7b8969c0404d84f42790fa3bc57bd201e249bb7362950f10de17da0",
+      "B": 52109,
+      "weight_SHA": "52bfc75272f7cfe8ae6ce57eb14b8a9e7848bfba99613c221f77498a8e897576",
+      "step": 0,
+      "samples": 0,
+      "condition": "QF1-distance-residual-f32-v1"
+    },
+    "best": {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/nnue/frame14-distance-residual-r1/best.pt",
+      "checkpoint_SHA": "6f9c15867b3363b5b5ccbc6f70a5faad59ab225f361b550d8f3b5d94cf197dbf",
+      "B": 52067,
+      "weight_SHA": "52bfc75272f7cfe8ae6ce57eb14b8a9e7848bfba99613c221f77498a8e897576",
+      "step": 0,
+      "samples": 5901,
+      "condition": "QF1-distance-residual-f32-v1"
+    },
+    "last": {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/nnue/frame14-distance-residual-r1/last.pt",
+      "checkpoint_SHA": "5fed180f7fa460b581d62629da7480da90fd35f90d81192df975347f1dfc9e3d",
+      "B": 52067,
+      "weight_SHA": "73acd35974df0ae1b8d8210ca7db5e2b25d79acf5f4f4a1890d9fcc5f4e24646",
+      "step": 2000,
+      "samples": 379921,
+      "condition": "QF1-distance-residual-f32-v1"
+    }
+  },
+  "config": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-distance-residual/runs/frame14-distance-residual-r1/config.json",
+  "config_SHA": "c4a3dbde251fa6e07ac8492ba4a6716dc4a4957429b8a35e0bf33019657e2b40",
+  "mask_SHA": "10b502cd9e1c5334e56a3f460ef3edff7f822c8f52f69c3af53529c67c45d5f5",
+  "validation_SHA": "d4b5b218fcfaaa548fb9a2ee3056f34b21e4ed63143e67f6e7aa94f7934cd7e3",
+  "stage_SHA": "af95eabf3d059982e67cba41fcee0233aaea8a53eaf81a3b1fbae60752d83e75",
+  "best_step": 0,
+  "best_validation_gameMSE": 0.48514681311997876,
+  "initial_validation_gameMSE": 0.48514681311997876,
+  "samples": 379921,
+  "old_test_read": false,
+  "NN_strength_claim": false
+}
