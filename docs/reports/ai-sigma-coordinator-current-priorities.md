@@ -121,3 +121,34 @@ NNUE学習の未見利益がまだないため、203のdistance-ordering案を�
 後続Beads point確認: 200/203は新204/205の本人実taskturnでclosed、204hyp/205expとも本人担当in_progress。実静的/NN開始/科学成功は本人明示reportを待ち、issue状態だけで認定0。rootへ02:12:58 material方向報告turn/start accepted、通常再確認を要求0。
 
 204本人後報: 02:10:51受領時計維持、200本人close/backup0後ready/show/no pause/claim・実静的準備開始。actual新NN0/GPU0/生成0、private head33 adapterと元200初期tensor52bfc752/frozen下層保持/同379921sampleを準備、source AST/argv/mock後に本人直前admitで一学習。最大現障害なし、科学開始/完了/gateをhyp204待ち。
+
+204実一学習開始02:17:24.148142UTC/PID3910548tick33320766/CPU2torch1/head33/2000step×128/sample379921/GPU0、成功/下層bytes/gateは本人後報待ち。205本人ready/show/claim/static開始02:13:13.944037、fresh24 openingSHA2b1da489固定・NN0合法非終端PASS、全24NOT_STARTED/GATE_PENDING/NN-GPU-game0。205の参照metadataはold194144+old20124 label-freeだけ/sharedsignature再用、gate後quiet350s(init20含む)を本人直前admit。旧200step0 gateの代用0、署名/mask完備の全役承認待ち0。
+
+
+204一学習停止02:17:28.905353Z、4.757569s/379921samples/CPU2/peak780976128B/全wait/currentexact空。元200初期52bfc752同tensor/FT-hidden-距離coefのinitialBESTLAST rawbyte不変/optimizerhead33だけ/5901初期parityはowner有限PASS。BEST600 valgameMSE .48388663696642414、距離.48514681311997876より.00126017615355462改善。これは再用validation選定の小幅な利益で、未見game効果やNNUE強さ認定ではない。
+
+新事前gate19e1ec83全4条件true、stop ced0c8ec/settings d14775aa/BEST f9dff330/weight437b5fde/initial36ea9132/weight52bfc752/source run-headmodel現物hashを統括有限確認。205へ具体停止SHA/GATEを実配送し本人current/quiet350s/RAM/VRAM/owner後のみ固定fresh24一度生成可。候補選び直し・閾値緩和・追加train0、204はevaluator/coef/config/selection/sourceを新label開封前freeze、一度CPUtestへ。全役承認待ちを設けず、205の実scientificstart/immutablehand-offと204のfreeze/test結果をそれぞれ担当から待つ。
+
+
+## Head-only新testの増分は不確か
+
+205条件付きfixedfresh24は科学02:20:56–02:22:06.950491、全24GOAL/1077Rpolicy=Rz=Rjoint/73.545859s/14.643924行秒/NN60575/peak2.262GB/全wait-currentexact空。manifestf928ce56/metadata70760426/mask80b2898aを統括現物SHA確認、label本体prefreeze読取再算0。旧194144+旧20124label-freeOR露出の1077全eligible/G+24/除外0はowner有限資格、独立教師truth/全game代表性認定0。モデル学習と生成は本人非競合、保存全稿は評価gate0。
+
+204候補600/evaluator/config/係数/選定を最終freeze cd04dcc9に束縛後、新labelをone-test02:25:07.505442–02:25:09.521286/core2/exit0/2.016318s/peak797757440/全wait/currentexact空。候補BEST予測reuse・実2unique2154samples/学習と合計382075/GPU0、旧test再読/条件再選定/追加train0。test resultf8248c21現物SHA一致。全新24/1077primary/除外0。
+
+候補rootmean局MSE .431591026対distance .432736865、paired差-.001145839/95[-.009437474,.008442855]、真z局 .673781785対.674556730/差95[-.009882803,.009664876]、符号増分0。rootmean行MSEは.461869403対.460999791で逆方向。距離対定数の有限利益と新headの距離に対する増分を分け、増分は不確か/既定昇格0。容量/過学習/ノイズ/分布の一意原因もNNUE方式無効も認定しない。
+
+206critic actualdispatch02:24:58turn/start、202本人close/backup後206本人claim/staticを受領。新static120/CPU0short・2MiBはcritic112内、旧202180/180保持。0.00126 validation差を複数条件/21checkpoint再用選定から未見利益へ格上げしない独立懸念を採用。新保存per-row/freeze/unique予測/全game/group/ORmask/pairedbootstrapの最大1有限独立裁定を実handoff、freshowner/自然CPU0窓を本人確認したNN0計算のみ、modelforward追加0。
+
+現在報告待ち: critic206の独立結果/次一見解、hyp204・exp205の停止/source/必要Git bytes復元/backup/finalhandoff。test結果から候補を選び直さず、次判別案はこれら最終結果を受けて一つ選ぶ。親03:10:36新heavy/03:15:36監督/03:18:36monitor/03:20:36保存と92責任不変。
+
+204 science652aac92/completion97c4ed63のreport/result/testfreeze3blob currentbytesを統括確認し、51path/3weights archive復元/source-helper-stop/backup0を有限受入れ。heavy学習＋test6.773887s/static43.327152s/382075samples、head増分不確か・weight既定昇格0。hyp204の次距離nativeαβ接続案は203で同距離凍結値・clock/fresh4を実施済み(1W3L)なので追加反復しない。205 source5d59f99a/evidence71ddec30のreport/manifest/mask3blob current一致とowner45paths/28archive復元/stop/backupも有限受入れ。Githelper60stimeout→batched修復は保存失敗のまま保持、科学成功に付替え0。206の有限独立結果と次一見解を待ち、同2000stepや接続診断を自動追加しない。
+
+
+## 206受入れと今枠の科学終了判断
+
+206 science646854a1/metadata c0194496のreport/final-result currentbytes一致、owner24file復元/29入力SHA不変/source子停止/backup0を有限受入れ。head33・下層固定/21curve/元gate/freeze/一巡/全24family1077eligibleの機構を支持。候補-distance局rootmean差-.001145839/95[-.009437474,+.008442855]、行平均は悪化方向、zも区間が0を跨ぎ符号増分0なのでhead未見増分は不確か・既定昇格不支持。教師真値/opaquehistory/実forward/全期間clock/棋力を再認証したものではない。
+
+206提案の凍結HEAD対DIST同CPU時間αβ/fresh4診断を次一候補として採択する。ただし03:06UTC現在、必要な実装・数値照合・対局・回収が当初予定03:00開始/03:05停止に収まらず、今枠新実配分・新issue・NN/対局開始0。先の着手予定を実開始にしない。具体比較・予算案はframe14-coordinator/next-head-distance-diagnostic-proposal.md。次枠許可の追加はこの記録から推定しない。
+
+204/205/206は科学・source停止/必要保存受入れ済み、本人closeはactive現在turnでのみ返し、idleをclose専用に再起動しない。残りの報告待ちは92stewardの03:10:36重通知/03:15:36scheduler監督停止/03:18:36monitor/03:20:36必要保存。外部NN全停止や未来運用成功はこの受入れでは保証しない。目標棋力未達を保持して今枠の最終記録・Git・Beadsbackupへ移る。
