@@ -11,3 +11,5 @@
 main専用変更5sourceは研究Gitの `research-data/ai-sigma/92-supervisor-turn-unbounded/main-owned-source.tar.gz` とmanifestで保存・軽い読み戻し一致。研究checkoutへmain専用実装を全mirrorしていない。未知/他者indexを変更せず明示path/private indexで保存。過去raw/旧失敗は削除・救済していない。
 
 09:08:30公式観測:同owned開始から232.96秒、active/inProgress・cap null維持。公開履歴にcommandExecutionが初到達。提案通知/notesbackupは未確認で全面復旧とはしない。main/研究default indexは開始前SHAと一致。
+
+09:10公式履歴確認:自然observeは開始211.7秒後に実行、09:08:22 exit0。09:08:41 finishのnotes更新/backupがともにexit0・自己子reaped。主要問いの短記録まで有限成立。追加inspect誤pathのexit2は保持しnamespace拒否を迂回していない。判断・提案通知の完了とwhole-turnはまだ未確認。
