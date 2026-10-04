@@ -1,5 +1,7 @@
 # 現在のNNUE研究優先順位（frame18）
 
+14:20更新: 234専用native保存算術は事前source/子/背景cleanup束縛+entrypoint/task/schema識別を保存してPASS。27saved数値/view・layout12193f32/scale・4root完成depth/cap/5142NN/2.582166sを有限支持。新forward/deeptruth/mutableundo/同wall棋力0、229 final曲線/test/bootstrap NOT_RUN/270capを救済しない。次の探索側候補は233 stable root orderingと234 same-node terminal/legal結果再用を競合として保持。inclusive terminal335.668530ms最大の点は排他的支配費の証明ではなく、State合法cacheを2重BFSと数えない。同評価器・完全RuleA/history結果と全合法を保つ実装費/枝刈り/全wallで次判断、今枠新science0。
+
 14:14更新: 232第二科学14:10:54.813585→14:10:55.466123/4058nativeNN/0.652543s、全2科学5142samples/2.582166s、owner source science stopped/allwait exact不在。science-stop SHA54618c66のsources9/payload6をcurrent照合。固定4root NNUE depth1/2/2/2/D2all、初期NNUE2048processed+entry拒否1でdepth2discard、Action148対D13。残3root双方depth2・Action67/31/48。これは異評価器/枝刈りの診断で同wall棋力0、4gameNOT_RUN。背景待機395.536s/outer397.747sと科学wall0.652543を別保持。234へ既45秒一jobの停止入力を実配送、旧229 final NOT_RUNに戻る検算0。
 
 14:03更新: 232固定27Torch/native/515child full-deltaのowner有限parity PASS、実1084samples/1.929623s/CPU2single、親buffer/key/history保持・terminalNN0。候補layout/scale/freeze不変更。これはmutableundo/全leaf/棋力保証ではない。固定root探索は未完了: 第一background-search-r1は14:02:05exit1/cleanuptrue、現物resultへの点確認だけで原science開始/NN/原因未確認。元失敗保存・既240s/50000/締切内の必要修復はowner判断、成功置換/reset0。
