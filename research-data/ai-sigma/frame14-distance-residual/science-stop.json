@@ -1,0 +1,95 @@
+{
+  "UTC": "2026-10-04T01:28:49.577573+00:00",
+  "issue": "quoridor-4lc.200",
+  "all_scientific_source_stopped": true,
+  "all_science_children_waited": true,
+  "source_frozen": {
+    "tools/ai-sigma-qf1-distance-residual/evaluate.py": "b57bae032ea7f6d2702fe33380853fccfdbe40c2fe3b332a9e8739faa7391d3f",
+    "tools/ai-sigma-qf1-distance-residual/residual_model.py": "7e456d2c86b0e2a8f1d1f0feff1e43446181ddaabc52920cf7fbcd7076149627",
+    "tools/nnue-training/model.py": "12661cac69cff8b01800eb2d3df5be5f8674858d9ce995713b4385da44c74357",
+    "tools/nnue-training/common.py": "876e0e9a610b594db63e62e81ae920684f10e52f71a7cc75e04f8fbadd9ffe04",
+    "tools/nnue-training/frame14_data.py": "f45482fe6d1a4477ee3bf3b080d14d883b1f28c79517cff83e4318b7a90e37b8",
+    "tools/nnue-training/test_contrast.py": "76d1b2a079906aac53d77f15d7e99e006619436aa81a4f2bad5b9f3b23612749"
+  },
+  "test_process": {
+    "id": "test-evaluate-r1",
+    "kind": "heavy",
+    "UTC": "2026-10-04T01:27:45.031973+00:00",
+    "identity": {
+      "pid": 3871868,
+      "ppid": 3871685,
+      "pgrp": 3871868,
+      "tick": "33022508",
+      "RSS": 0,
+      "cmd": "",
+      "affinity": [
+        2
+      ]
+    },
+    "command": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "tools/ai-sigma-qf1-distance-residual/evaluate.py",
+      "--freeze",
+      "research-data/ai-sigma/frame14-distance-residual/test-freeze.json",
+      "--freeze-sha",
+      "82b10ae92caa38c36fcee0ff80f1b17185ac0e256c144f169e2d3a87678fd370",
+      "--samples",
+      "3366"
+    ],
+    "wall_seconds": 2.1072642089566216,
+    "peak_family_RSS": 745603072,
+    "exit": 0,
+    "reason": "completed",
+    "child_waited": true,
+    "remaining": [],
+    "current_exact_identity_absent": true,
+    "samples_charged": 3366,
+    "sample_cap": 3366,
+    "CPU": [
+      2
+    ],
+    "GPU": 0
+  },
+  "training_process": {
+    "id": "train-r1",
+    "kind": "heavy",
+    "UTC": "2026-10-04T01:12:11.400576+00:00",
+    "identity": {
+      "pid": 3858086,
+      "ppid": 3858041,
+      "pgrp": 3858086,
+      "tick": "32928774",
+      "RSS": 0,
+      "cmd": "",
+      "affinity": [
+        2
+      ]
+    },
+    "command": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "tools/ai-sigma-qf1-distance-residual/run.py"
+    ],
+    "wall_seconds": 5.394997304014396,
+    "peak_family_RSS": 810754048,
+    "exit": 0,
+    "reason": "completed",
+    "child_waited": true,
+    "remaining": [],
+    "current_exact_identity_absent": true,
+    "samples_charged": 379921,
+    "sample_cap": 379921,
+    "CPU": [
+      2
+    ],
+    "GPU": 0
+  },
+  "scientific_samples": 383287,
+  "heavy_s": 7.5022615129710175,
+  "extra_NN_training_test": 0,
+  "old_test_labels_read": false,
+  "test_once": true,
+  "science_result_SHA": "ded6701298b3d4d93312bbb473f74b582860d98e1d8797754d56a01ed232ddd5",
+  "no_test_reselection": true
+}

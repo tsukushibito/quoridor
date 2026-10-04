@@ -1,0 +1,97 @@
+{
+  "UTC": "2026-10-04T01:33:04.029435+00:00",
+  "own": {
+    "id": "quoridor-4lc.200",
+    "status": "in_progress",
+    "assignee": "codex:01a0f31c-2e4b-7170-82c5-69e1428c2418",
+    "labels": [
+      "continuation-active",
+      "frame14",
+      "initial-window-ended"
+    ]
+  },
+  "goal": {
+    "id": "quoridor-4lc",
+    "status": "in_progress",
+    "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+    "labels": [
+      "continuation-active",
+      "frame14",
+      "initial-window-ended"
+    ]
+  },
+  "active": [],
+  "services": [
+    {
+      "pid": 3762788,
+      "ppid": 1,
+      "pgrp": 3762788,
+      "tick": "32327414",
+      "RSS": 165634048,
+      "cmd": "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python -B /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/scheduler.py run --config /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json --state-dir /workspaces/quoridor/.artifacts/research-team/scheduler-sigma-continuation-20261001 ",
+      "affinity": [
+        0
+      ]
+    },
+    {
+      "pid": 3762803,
+      "ppid": 1,
+      "pgrp": 3762803,
+      "tick": "32327429",
+      "RSS": 21831680,
+      "cmd": "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python -B /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/watch.py --run-dir /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame14-ee73f985-00e3-4a1c-960e-1e87143fb693 --expectations /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame14-ee73f985-00e3-4a1c-960e-1e87143fb693/expectations.json ",
+      "affinity": [
+        0
+      ]
+    }
+  ],
+  "scheduler_owned": {
+    "run_id": "1aadca10-8af3-428b-af45-49e93ec2138e",
+    "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+    "turn_id": "01a1048a-00ad-70b1-855c-134b8dce7f14",
+    "started_at": "2026-10-04T01:31:55.417038+00:00",
+    "max_turn_seconds": 180
+  },
+  "next_observe": 1791078711.938089,
+  "CPU": [
+    2
+  ],
+  "threads": 1,
+  "RAM_guard": 1879048192,
+  "parent_RSS_forecast": 3408691200,
+  "storage": {
+    "transfer_confirmed": true,
+    "reservation_B": 16777216,
+    "guard_B": 14680064,
+    "forecast_B": 12000000,
+    "forecast_breakdown_B": {
+      "all21_history_results": 4000000,
+      "checkpoints": 200000,
+      "source_static": 300000,
+      "plots": 1000000,
+      "test_rows_and_results": 1500000,
+      "unique_Git": 2000000,
+      "temp_and_final_metadata": 3000000
+    },
+    "combined_old_current_residual_plus_new_reservation_B": 49567818,
+    "combined_guard_B": 58720256,
+    "197_keep_full_reservation_B": 16777216,
+    "old195_conservative_and_residual_B": 16013386,
+    "parent_extra": 0,
+    "actual_measure_UTC": "2026-10-04T01:11:52.631553+00:00",
+    "old195_actual_files_B": 5671981,
+    "old195_unique_Git_B": 1913191,
+    "old195_actual_total_B": 7585172,
+    "old195_conservative_current_B": 7624778,
+    "new_current_files_B": 23744,
+    "remaining_metadata_checkpoint_temp_uniqueGit_forecast_B": 12000000
+  },
+  "command": [
+    "python3",
+    "-B",
+    "tools/ai-sigma-qf1-distance-residual/finish_metadata.py"
+  ],
+  "sample_upper": 0,
+  "newscience": "2026-10-04T02:10:00Z",
+  "stop": "2026-10-04T02:20:00Z"
+}
