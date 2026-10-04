@@ -1,0 +1,46 @@
+{
+  "UTC": "2026-10-04T06:17:28.483455+00:00",
+  "process": {
+    "id": "forward4-r1",
+    "kind": "heavy",
+    "UTC": "2026-10-04T06:17:09.786933+00:00",
+    "identity": {
+      "pid": 4073647,
+      "ppid": 4073602,
+      "pgrp": 4073647,
+      "tick": "34759965",
+      "RSS": 0,
+      "cmd": "",
+      "affinity": [
+        2
+      ]
+    },
+    "command": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-fit-gap-analysis/forward.py"
+    ],
+    "wall_seconds": 1.5155444900155999,
+    "peak_family_RSS": 613748736,
+    "exit": 0,
+    "reason": "completed",
+    "child_waited": true,
+    "remaining": [],
+    "current_exact_identity_absent": true,
+    "samples_charged": 23604,
+    "sample_cap": 23604,
+    "CPU": [
+      2
+    ],
+    "GPU": 0
+  },
+  "source_science_stopped": true,
+  "allwait": true,
+  "currentexact_absent": true,
+  "remaining": [],
+  "model_forward_samples": 23604,
+  "GPU": 0,
+  "training_updates": 0,
+  "test_forward": 0,
+  "further_science_authorized": false
+}

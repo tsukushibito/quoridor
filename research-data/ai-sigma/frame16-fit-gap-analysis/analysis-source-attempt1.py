@@ -22,11 +22,10 @@ for split,planned in [('train',96),('validation',24)]:
  global_count=collections.Counter(r['group']for r in q)
  global_weight=lambda r:1/(planned*global_count[r['group']])
  result.setdefault('global_weight_bin_contributions',{})[split]={}
- categories={'cohort':['opening-'+str(v)for v in [8,12,16,20,24,28]],'phase':['early','middle','late'],'self_bin':list(range(5)),'opponent_bin':list(range(5)),'difference_bin':list(range(5)),'walls_bin':list(range(4)),'distance_clip':['saturated','unsaturated']}
- for dim in categories:
-  result['subgroups'][split][dim]={str(v):{n:summarize([r for r in q if r[dim]==v],n,planned)for n in names}for v in categories[dim]}
+ for dim in ['cohort','phase','self_bin','opponent_bin','difference_bin','walls_bin','distance_clip']:
+  result['subgroups'][split][dim]={str(v):{n:summarize([r for r in q if r[dim]==v],n,planned)for n in names}for v in sorted(set(r[dim]for r in q))}
   parts={}
-  for v in categories[dim]:
+  for v in sorted(set(r[dim]for r in q)):
    subset=[r for r in q if r[dim]==v];mass=sum(global_weight(r)for r in subset);parts[str(v)]={'weightmass':mass,'rows':len(subset),'games':len(set(r['group']for r in subset)),'models':{}}
    for n in names:
     disp=sum(global_weight(r)*(r['NN'][n]-r['distance'])**2 for r in subset)
