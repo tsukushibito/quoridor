@@ -1,0 +1,42 @@
+{
+  "issue": "quoridor-4lc.209",
+  "fourth_condition": 4,
+  "process": {
+    "id": "train-seed19080312-r1",
+    "kind": "heavy",
+    "UTC": "2026-10-04T04:31:30.061669+00:00",
+    "identity": {
+      "pid": 3995327,
+      "ppid": 3995284,
+      "pgrp": 3995327,
+      "tick": "34125486",
+      "RSS": 0,
+      "cmd": "",
+      "affinity": [
+        2
+      ]
+    },
+    "command": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "tools/ai-sigma-learning-diagnostic/seed_run.py"
+    ],
+    "wall_seconds": 2.7336317080189474,
+    "peak_family_RSS": 828530688,
+    "exit": 0,
+    "reason": "completed",
+    "child_waited": true,
+    "remaining": [],
+    "current_exact_identity_absent": true,
+    "samples_charged": 74804,
+    "sample_cap": 74804,
+    "CPU": [
+      2
+    ],
+    "GPU": 0
+  },
+  "primary200_minus_own0": -0.026258211555564626,
+  "source_unchanged": true,
+  "new_learning": "none automatic",
+  "probe_samples": 0
+}

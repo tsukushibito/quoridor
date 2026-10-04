@@ -1,0 +1,187 @@
+{
+  "issue": "quoridor-4lc.209",
+  "condition_count": 4,
+  "fourth": {
+    "seed": 19080312,
+    "lr": 0.0001,
+    "primary200_minus_own0": -0.026258211555564626,
+    "original_seed200_minus_own0": -0.030328254357377737,
+    "primary200_minus_constant": -0.021449118471989714,
+    "primary200_minus_distance": 0.17218453614127593,
+    "contrasts": {
+      "primary200_minus_own0": {
+        "groups": 24,
+        "delta": -0.02625821155556461,
+        "percentile95": [
+          -0.06362110477487341,
+          0.010431311592001004
+        ],
+        "seed": 20980312,
+        "replicates": 2000
+      },
+      "primary200_minus_constant": {
+        "groups": 24,
+        "delta": -0.021449118471989704,
+        "percentile95": [
+          -0.059486802904446745,
+          0.01517197615198044
+        ],
+        "seed": 20980312,
+        "replicates": 2000
+      },
+      "primary200_minus_distance": {
+        "groups": 24,
+        "delta": 0.17218453614127593,
+        "percentile95": [
+          0.06279870897837125,
+          0.2941450957224565
+        ],
+        "seed": 20980312,
+        "replicates": 2000
+      }
+    },
+    "curves": [
+      {
+        "step": 0,
+        "samples_seen": 0,
+        "epoch": 0.0,
+        "all_samples": 5901,
+        "wall_s": 0.8781848949729465,
+        "train_rootmean_mse": 0.7136807550071886,
+        "train_rootmean_game_equal_mse": 0.7316784652847409,
+        "train_z_game_equal_mse": 1.0060357318348419,
+        "train_z_sign_accuracy": 0.4951644100580271,
+        "train_saturation_fraction": 0.0,
+        "validation_rootmean_mse": 0.6704653566825178,
+        "validation_rootmean_game_equal_mse": 0.6835895608168193,
+        "validation_z_game_equal_mse": 1.003394205129786,
+        "validation_z_sign_accuracy": 0.4951923076923077,
+        "validation_saturation_fraction": 0.0
+      },
+      {
+        "step": 100,
+        "samples_seen": 12800,
+        "epoch": 2.7509133892112616,
+        "all_samples": 24602,
+        "wall_s": 1.0968007349874824,
+        "train_rootmean_mse": 0.6868593451780967,
+        "train_rootmean_game_equal_mse": 0.7033749348439762,
+        "train_z_game_equal_mse": 0.9759196680680936,
+        "train_z_sign_accuracy": 0.5895121427036321,
+        "train_saturation_fraction": 0.0,
+        "validation_rootmean_mse": 0.6617318008954034,
+        "validation_rootmean_game_equal_mse": 0.6748874967327517,
+        "validation_z_game_equal_mse": 0.9948011513768629,
+        "validation_z_sign_accuracy": 0.5256410256410257,
+        "validation_saturation_fraction": 0.0
+      },
+      {
+        "step": 200,
+        "samples_seen": 25600,
+        "epoch": 5.501826778422523,
+        "all_samples": 43303,
+        "wall_s": 1.2419489820022136,
+        "train_rootmean_mse": 0.6131480354990826,
+        "train_rootmean_game_equal_mse": 0.6240687350211819,
+        "train_z_game_equal_mse": 0.8932612562705095,
+        "train_z_sign_accuracy": 0.7580055877928218,
+        "train_saturation_fraction": 0.0,
+        "validation_rootmean_mse": 0.6438172400414865,
+        "validation_rootmean_game_equal_mse": 0.6573313492612547,
+        "validation_z_game_equal_mse": 0.9784129750414822,
+        "validation_z_sign_accuracy": 0.5448717948717948,
+        "validation_saturation_fraction": 0.0
+      },
+      {
+        "step": 400,
+        "samples_seen": 51200,
+        "epoch": 11.003653556845046,
+        "all_samples": 74804,
+        "wall_s": 1.4969251769944094,
+        "train_rootmean_mse": 0.31115534635123193,
+        "train_rootmean_game_equal_mse": 0.3015493805497628,
+        "train_z_game_equal_mse": 0.5511349184962504,
+        "train_z_sign_accuracy": 0.8201160541586073,
+        "train_saturation_fraction": 0.0008596604341285192,
+        "validation_rootmean_mse": 0.7328536182009063,
+        "validation_rootmean_game_equal_mse": 0.7442684293139178,
+        "validation_z_game_equal_mse": 1.0867617050512386,
+        "validation_z_sign_accuracy": 0.5336538461538461,
+        "validation_saturation_fraction": 0.0
+      }
+    ],
+    "initial_tensor_SHA": "30dcbc64a6e94d176d64e78fade79a3d1a1fc6ef5bc86f95bd8a64de1a8121e4",
+    "batch_order_SHA": "81539be138e6c251f03d623650892faed190a3990ca8ffa365d51d7b9a6fa875",
+    "best_exploratory_only": 200,
+    "process": {
+      "id": "train-seed19080312-r1",
+      "kind": "heavy",
+      "UTC": "2026-10-04T04:31:30.061669+00:00",
+      "identity": {
+        "pid": 3995327,
+        "ppid": 3995284,
+        "pgrp": 3995327,
+        "tick": "34125486",
+        "RSS": 0,
+        "cmd": "",
+        "affinity": [
+          2
+        ]
+      },
+      "command": [
+        "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+        "-B",
+        "tools/ai-sigma-learning-diagnostic/seed_run.py"
+      ],
+      "wall_seconds": 2.7336317080189474,
+      "peak_family_RSS": 828530688,
+      "exit": 0,
+      "reason": "completed",
+      "child_waited": true,
+      "remaining": [],
+      "current_exact_identity_absent": true,
+      "samples_charged": 74804,
+      "sample_cap": 74804,
+      "CPU": [
+        2
+      ],
+      "GPU": 0
+    },
+    "checkpoint_members": [
+      {
+        "member": "frame15-learning-diagnostic-lr1e-4-seed19080312-r1/initial.pt",
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/nnue/frame15-learning-diagnostic-lr1e-4-seed19080312-r1/initial.pt",
+        "B": 51605,
+        "SHA": "feb23d47e71299374baaccb10d4072063056385789adad0f7aa0cbded3101ab8"
+      },
+      {
+        "member": "frame15-learning-diagnostic-lr1e-4-seed19080312-r1/best.pt",
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/nnue/frame15-learning-diagnostic-lr1e-4-seed19080312-r1/best.pt",
+        "B": 51569,
+        "SHA": "032dc3163bcb7198da46a16a775cb7a5ae3b98901e8d1cb1e6c1029e7341643f"
+      },
+      {
+        "member": "frame15-learning-diagnostic-lr1e-4-seed19080312-r1/last.pt",
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/nnue/frame15-learning-diagnostic-lr1e-4-seed19080312-r1/last.pt",
+        "B": 51569,
+        "SHA": "c901a57ae78ac844338a235d73805527413eabe9564775f2462b484f11a414c0"
+      }
+    ],
+    "archive_SHA": "8fe5a506ebb3d01cfc61dbd0900fadea66f11e367eea511f79e49f554f5e5600",
+    "memory_restore_PASS": true,
+    "same12witness_PASS": true,
+    "extra_observer_passes": 0
+  },
+  "actual_science_samples": 405434,
+  "conservative_manager_samples": 736064,
+  "raw_counter_failure_retained": true,
+  "probe_status": "NOT_RUN; information from fourth sufficient for next decision",
+  "new_test_or_training": 0,
+  "limits": [
+    "reused24game validation",
+    "joint initial and sampling seed change",
+    "four-condition selection",
+    "two seeds not an independent test",
+    "teacher rootmean not game strength"
+  ]
+}
