@@ -1,0 +1,53 @@
+{
+  "UTC": "2026-10-04T07:43:00.091656+00:00",
+  "source": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame16-teacher-throughput/preregister.json",
+  "SHA": "48f1a6cc3c706a2439abe80b891224e2a93d56b496eb9e74a2f7e209802e4551",
+  "baseline": "GPU24active/maxB8",
+  "candidate": "same active24/maxB24 only",
+  "same_fresh48_openings_actionseed": true,
+  "parity": {
+    "B": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24
+    ],
+    "heterogeneous_fresh_root_features": true,
+    "comparison": "CPUORT vs foldedCUDA",
+    "atol": 0.0001,
+    "rtol": 0.0001,
+    "samples": 600,
+    "ID_f32_finite": true
+  },
+  "prior_cost": {
+    "jobwall_s": 73.54585913103074,
+    "provider_pipe_s": 61.62094067,
+    "forward_sync_s": 38.135663763,
+    "server_before_JSON_s": 48.238030502,
+    "overlap_not_additive": true,
+    "source": "frame14-head-test/generation-summary.json metrics only; no sealed labels/raw read"
+  },
+  "science_started": false,
+  "hostwarm_fixedorder_limit": true,
+  "conditions_accepted_within_actual_allocation": true
+}

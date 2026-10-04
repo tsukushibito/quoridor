@@ -1,0 +1,6 @@
+goal quoridor-4lc / frame16連続延長17 統括実反映報告。
+開始05:55:50を維持し終了09:55:50/新heavy09:45:50/監督09:50:50/monitor09:53:50/最終09:55:50をcurrent planとgoal有効本文へ反映。資源/model-effort/saved/cumulative上限reset0。
+92へ07:31:41実配送→本人受領開始→07:38:42 actualrunningloaded。親17 f893cb825 mainmirror/Git同SHA ae2eda81、loadedconfig/contract/24hash/current6digest、新exactscheduler4133634/35249387・monitor4133648/35249412を報告受領と必要bytesから確認。rootの07:39:44独立受入れも受領。旧meaninginspectionunknown/turn_limit/旧stop原因欠測/未来停止未認定保持、92長期停止責任継続。
+生成効率化を主課題へ変更。216phase6はscience前NOT_STARTED(USER_PRIORITY_REORDER)、phase1-5保存/currentGit必要bytes/backup有限受入れ、追加診断0。新221 experimentへ07:39:23 turn/start accepted、同saved/in_progress。旧216本人close+backup→private新scope。現在GPU24/B8を基準に短い支配費観測から薄い1改善と必要確認を実装測定へ配分、同K64/model/RuleA/π/z/多様性維持。B>8は新有限数値対応/RAM/VRAM確認、全attemptRjoint/jobwallとactualbatch/phase費を測る。NN900000/heavy1800s/各600s/CPU4RAM6guard5.5GPU6/128MiB既exp1980unused内、旧cap/保持不変。実量は選定後に絞り、最大上界を義務にしない。実装測定結果はまだ未実測。
+222 criticへ07:39:43 turn/start accepted、新静的60s/128KiBを既112MiB残内へ実配分。対照/品質/回収費と主配分も問う、全承認gate0。既分析の訓練適合/汎化差・OOFとval差/広い区間を次量・多様性判断へ保持。100/1000/10000は費用シナリオで自動大規模生成許可数にしない。
+現在計画 docs/reports/ai-sigma-coordinator-current-priorities.md、新221/222契約はframe16-coordinator/teacher-throughput-contract.md・throughput-independent-contract.md。次は担当の具体支配費/条件/実開始/測定から採否・増量費判断を更新し、提案だけで止めない。root追加確認/新役/環境更新/製品push0。

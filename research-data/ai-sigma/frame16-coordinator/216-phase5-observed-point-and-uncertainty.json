@@ -1,0 +1,197 @@
+{
+  "UTC": "2026-10-04T07:26:10.381077+00:00",
+  "phase": "phase5",
+  "owner_only_analysis": true,
+  "source_child_stopped_owner_report": true,
+  "result_SHA": "f2979bf77abfeb361582ea6395542fe7838c0ee391b733e3379ec5c74a2924de",
+  "process": {
+    "id": "support-gap-r1",
+    "kind": "static",
+    "UTC": "2026-10-04T07:20:34.648656+00:00",
+    "identity": {
+      "pid": 4120714,
+      "ppid": 4120541,
+      "pgrp": 4120714,
+      "tick": "35140850",
+      "RSS": 0,
+      "cmd": "",
+      "affinity": [
+        2
+      ]
+    },
+    "command": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-fit-gap-analysis/support-gap-analysis/run.py"
+    ],
+    "wall_seconds": 0.21533677802653983,
+    "peak_family_RSS": 94191616,
+    "exit": 0,
+    "reason": "completed",
+    "child_waited": true,
+    "remaining": [],
+    "current_exact_identity_absent": true,
+    "samples_charged": 0,
+    "sample_cap": 0,
+    "CPU": [
+      2
+    ],
+    "GPU": 0
+  },
+  "originalweights18cells": true,
+  "decomposition": {
+    "composition": 0.002345703197767216,
+    "within": 0.0867041229327498,
+    "unmatched": -9.016028601815757e-05,
+    "gap_difference": 0.08895966584449885,
+    "reconciliation_maxabs": 0.0,
+    "cells": {
+      "opening-8|early": {
+        "kind": "common",
+        "composition": 0.0007153890568421904,
+        "within": 0.022599664194833998,
+        "unmatched": null
+      },
+      "opening-8|middle": {
+        "kind": "common",
+        "composition": -0.0008320216943432405,
+        "within": 0.009864557673288863,
+        "unmatched": null
+      },
+      "opening-8|late": {
+        "kind": "both unobserved",
+        "composition": null,
+        "within": null,
+        "unmatched": null
+      },
+      "opening-12|early": {
+        "kind": "common",
+        "composition": -8.52590175193676e-07,
+        "within": 0.008163309514078091,
+        "unmatched": null
+      },
+      "opening-12|middle": {
+        "kind": "common",
+        "composition": -1.3840508801940978e-05,
+        "within": 0.008898878395529984,
+        "unmatched": null
+      },
+      "opening-12|late": {
+        "kind": "both unobserved",
+        "composition": null,
+        "within": null,
+        "unmatched": null
+      },
+      "opening-16|early": {
+        "kind": "common",
+        "composition": -0.00010901028979283265,
+        "within": 0.014475462033073877,
+        "unmatched": null
+      },
+      "opening-16|middle": {
+        "kind": "common",
+        "composition": 0.00022949134931105842,
+        "within": -0.01279249040331331,
+        "unmatched": null
+      },
+      "opening-16|late": {
+        "kind": "both unobserved",
+        "composition": null,
+        "within": null,
+        "unmatched": null
+      },
+      "opening-20|early": {
+        "kind": "common",
+        "composition": -0.00045585456581485846,
+        "within": 0.029873453606020485,
+        "unmatched": null
+      },
+      "opening-20|middle": {
+        "kind": "common",
+        "composition": -1.3090606548521172e-05,
+        "within": 0.041914478118476706,
+        "unmatched": null
+      },
+      "opening-20|late": {
+        "kind": "one-side-unobserved",
+        "composition": null,
+        "within": null,
+        "unmatched": -9.016028601815757e-05
+      },
+      "opening-24|early": {
+        "kind": "common",
+        "composition": 0.0008098154676779312,
+        "within": 0.004075822096287449,
+        "unmatched": null
+      },
+      "opening-24|middle": {
+        "kind": "common",
+        "composition": 4.7463442762307255e-05,
+        "within": -0.009710881299331089,
+        "unmatched": null
+      },
+      "opening-24|late": {
+        "kind": "both unobserved",
+        "composition": null,
+        "within": null,
+        "unmatched": null
+      },
+      "opening-28|early": {
+        "kind": "common",
+        "composition": 0.0022401774717716203,
+        "within": 0.0004619036500672192,
+        "unmatched": null
+      },
+      "opening-28|middle": {
+        "kind": "common",
+        "composition": -0.000271963335121304,
+        "within": -0.031120034646262482,
+        "unmatched": null
+      },
+      "opening-28|late": {
+        "kind": "both unobserved",
+        "composition": null,
+        "within": null,
+        "unmatched": null
+      }
+    }
+  },
+  "conditional_fixedprediction_intervals": {
+    "OOF": {
+      "groups": 96,
+      "mean_paired_gap": -0.025213023684459712,
+      "percentile95": [
+        -0.07266056169784578,
+        0.02115729978194025
+      ],
+      "seed": 2161605,
+      "replicates": 2000,
+      "fit_and_lambda_fixed": true
+    },
+    "validation": {
+      "groups": 24,
+      "mean_paired_gap": 0.06374664216003914,
+      "percentile95": [
+        -0.06084596880954411,
+        0.19112921589377285
+      ],
+      "seed": 2161605,
+      "replicates": 2000,
+      "fit_and_lambda_fixed": true
+    },
+    "gap_difference": {
+      "mean": 0.08895966584449885,
+      "percentile95": [
+        -0.04133585072530836,
+        0.2239294772619993
+      ],
+      "independent_pool_resampling": true
+    }
+  },
+  "coordinator18termclosure_checked": true,
+  "unique_distribution_cause_supported": false,
+  "NN_added": 0,
+  "static_owner_cumulative": 144.628333,
+  "next_actual_phase6": "fixedlambda1 secondpartition stability",
+  "held_alternative": "knownrepresentable syntheticdistance learning sanity: real newNN budget/preparation required, hold until evidence andremainingtime justify"
+}
