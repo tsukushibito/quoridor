@@ -1,0 +1,48 @@
+{
+  "UTC": "2026-10-04T04:55:25.444340+00:00",
+  "issue": "quoridor-4lc.211",
+  "science_source_stopped": true,
+  "source_SHA": {
+    "tools/ai-sigma-input-scale-control/save_git.py": "275da7790187a1b325fa5d22bd75ff2c60ec4802b85a58d6813b4d19d2ca7ff8",
+    "tools/ai-sigma-input-scale-control/launch.py": "986c143556aaaa9c9db2d73350cb8b49c23fa681904ae60ab05b1e7ed86b04e4",
+    "tools/ai-sigma-input-scale-control/run.py": "dff281ca338563f201840a70947bc927faa279002defb454ae7e757a084b74bb",
+    "tools/ai-sigma-input-scale-control/prepare.py": "194df72eef6c2e30e972181dd46269037450be693fff72afc9295bbe3ae76dbf"
+  },
+  "owned_science": {
+    "id": "train-scale-r1",
+    "kind": "heavy",
+    "UTC": "2026-10-04T04:53:58.461697+00:00",
+    "identity": {
+      "pid": 4015517,
+      "ppid": 4015456,
+      "pgrp": 4015517,
+      "tick": "34260361",
+      "RSS": 0,
+      "cmd": "",
+      "affinity": [
+        2
+      ]
+    },
+    "command": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-input-scale-control/run.py"
+    ],
+    "wall_seconds": 3.098458861000836,
+    "peak_family_RSS": 787820544,
+    "exit": 0,
+    "reason": "completed",
+    "child_waited": true,
+    "remaining": [],
+    "current_exact_identity_absent": true,
+    "samples_charged": 116111,
+    "sample_cap": 116111,
+    "CPU": [
+      2
+    ],
+    "GPU": 0
+  },
+  "new_science": false,
+  "GPU": 0,
+  "teacher_test_game_created": 0
+}
