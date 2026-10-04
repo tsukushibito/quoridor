@@ -1,0 +1,521 @@
+{
+  "rule": "DeltaWd_raw=actualapplied/sigma; dbraw=dbprime-sum(actualapplied*mu/sigma)",
+  "updates": [
+    {
+      "step": 1,
+      "Before_Wd_standardized": {
+        "norm": 0.026779118925333023,
+        "RMS": 0.0033473896328359842,
+        "maxabs": 0.006431791465729475
+      },
+      "After_Adam_proposal_Wd_standardized": {
+        "norm": 0.026861067861318588,
+        "RMS": 0.0033576334826648235,
+        "maxabs": 0.006375099532306194
+      },
+      "After_applied_Wd_standardized": {
+        "norm": 0.026782967150211334,
+        "RMS": 0.0033478708937764168,
+        "maxabs": 0.006426356732845306
+      },
+      "Adam_proposal_Wd_standardized": {
+        "norm": 0.0007873881259001791,
+        "RMS": 9.84235157375224e-05,
+        "maxabs": 0.00010000006295740604
+      },
+      "Ideal_sigma_times_proposal_standardized": {
+        "norm": 4.253000224707648e-05,
+        "RMS": 5.31625028088456e-06,
+        "maxabs": 5.434748345578555e-06
+      },
+      "Applied_Wd_standardized": {
+        "norm": 4.2529834900051355e-05,
+        "RMS": 5.316229362506419e-06,
+        "maxabs": 5.434732884168625e-06
+      },
+      "DeltaBias_standardized": {
+        "norm": 0.0005567813059315085,
+        "RMS": 9.842596045928076e-05,
+        "maxabs": 0.00010000169277191162
+      },
+      "Applied_Wd_raw": {
+        "norm": 0.0007873849826864898,
+        "RMS": 9.842312283581123e-05,
+        "maxabs": 0.00010000103065976873
+      },
+      "Applied_Bias_raw": {
+        "norm": 0.0005615357076749206,
+        "RMS": 9.926642087521031e-05,
+        "maxabs": 0.00012006037286482751
+      },
+      "proposal_vs_raw_maxabs": 3.368768375366926e-09,
+      "proposal_zero_ratio_unknown": 2,
+      "proposal_nonzero_applied_zero": 0,
+      "proposal_moments_unchanged": true,
+      "bias_otherparams_afterproposal_unchanged": true,
+      "raw_bias_rule": "dbprime-sum(actualdwprime*mu/sigma)",
+      "extra_forward_backward": 0,
+      "witness_step0_RMS_change": 0.0013952395441235018,
+      "old_witness_step0_RMS_change": 0.0014434571606371834
+    },
+    {
+      "step": 2,
+      "Before_Wd_standardized": {
+        "norm": 0.026782969012856483,
+        "RMS": 0.0033478708937764168,
+        "maxabs": 0.006426356732845306
+      },
+      "After_Adam_proposal_Wd_standardized": {
+        "norm": 0.026892507448792458,
+        "RMS": 0.003361563431099057,
+        "maxabs": 0.0063778990879654884
+      },
+      "After_applied_Wd_standardized": {
+        "norm": 0.02678840048611164,
+        "RMS": 0.003348550060763955,
+        "maxabs": 0.006421356461942196
+      },
+      "Adam_proposal_Wd_standardized": {
+        "norm": 0.0007367295329459012,
+        "RMS": 9.209119161823764e-05,
+        "maxabs": 0.00010013440623879433
+      },
+      "Ideal_sigma_times_proposal_standardized": {
+        "norm": 3.979340544901788e-05,
+        "RMS": 4.974175681127235e-06,
+        "maxabs": 5.442049314297037e-06
+      },
+      "Applied_Wd_standardized": {
+        "norm": 3.979338725912385e-05,
+        "RMS": 4.974173407390481e-06,
+        "maxabs": 5.442183464765549e-06
+      },
+      "DeltaBias_standardized": {
+        "norm": 0.0005221446044743061,
+        "RMS": 9.230299474438652e-05,
+        "maxabs": 0.00010006502270698547
+      },
+      "Applied_Wd_raw": {
+        "norm": 0.0007367292419075966,
+        "RMS": 9.209115523844957e-05,
+        "maxabs": 0.00010013687278842553
+      },
+      "Applied_Bias_raw": {
+        "norm": 0.0005274639115668833,
+        "RMS": 9.324332495452836e-05,
+        "maxabs": 0.00011107184400316328
+      },
+      "proposal_vs_raw_maxabs": 4.249159246683121e-09,
+      "proposal_zero_ratio_unknown": 2,
+      "proposal_nonzero_applied_zero": 0,
+      "proposal_moments_unchanged": true,
+      "bias_otherparams_afterproposal_unchanged": true,
+      "raw_bias_rule": "dbprime-sum(actualdwprime*mu/sigma)",
+      "extra_forward_backward": 0,
+      "witness_step0_RMS_change": 0.002819249197115034,
+      "old_witness_step0_RMS_change": 0.0029180083695916153
+    },
+    {
+      "step": 5,
+      "Before_Wd_standardized": {
+        "norm": 0.026801710948348045,
+        "RMS": 0.003350213635712862,
+        "maxabs": 0.006412562448531389
+      },
+      "After_Adam_proposal_Wd_standardized": {
+        "norm": 0.02693840302526951,
+        "RMS": 0.0033673003781586885,
+        "maxabs": 0.006392354145646095
+      },
+      "After_applied_Wd_standardized": {
+        "norm": 0.02680865488946438,
+        "RMS": 0.0033510818611830473,
+        "maxabs": 0.00640855822712183
+      },
+      "Adam_proposal_Wd_standardized": {
+        "norm": 0.0007166761788539588,
+        "RMS": 8.958452235674486e-05,
+        "maxabs": 0.00010003498755395412
+      },
+      "Ideal_sigma_times_proposal_standardized": {
+        "norm": 3.870279397233389e-05,
+        "RMS": 4.837849246541737e-06,
+        "maxabs": 5.436646461021155e-06
+      },
+      "Applied_Wd_standardized": {
+        "norm": 3.870282307616435e-05,
+        "RMS": 4.837852884520544e-06,
+        "maxabs": 5.436595529317856e-06
+      },
+      "DeltaBias_standardized": {
+        "norm": 0.00047949867439456284,
+        "RMS": 8.476419316139072e-05,
+        "maxabs": 9.982287883758545e-05
+      },
+      "Applied_Wd_raw": {
+        "norm": 0.0007166767027229071,
+        "RMS": 8.958458784036338e-05,
+        "maxabs": 0.00010003405623137951
+      },
+      "Applied_Bias_raw": {
+        "norm": 0.0004825652576982975,
+        "RMS": 8.530629565939307e-05,
+        "maxabs": 0.00010010915866587311
+      },
+      "proposal_vs_raw_maxabs": 3.8853613659739494e-09,
+      "proposal_zero_ratio_unknown": 2,
+      "proposal_nonzero_applied_zero": 0,
+      "proposal_moments_unchanged": true,
+      "bias_otherparams_afterproposal_unchanged": true,
+      "raw_bias_rule": "dbprime-sum(actualdwprime*mu/sigma)",
+      "extra_forward_backward": 0,
+      "witness_step0_RMS_change": 0.0073379358003602,
+      "old_witness_step0_RMS_change": 0.007594401493018213
+    },
+    {
+      "step": 10,
+      "Before_Wd_standardized": {
+        "norm": 0.0268387570977211,
+        "RMS": 0.0033548446372151375,
+        "maxabs": 0.006391935981810093
+      },
+      "After_Adam_proposal_Wd_standardized": {
+        "norm": 0.026996834203600883,
+        "RMS": 0.0033746042754501104,
+        "maxabs": 0.006414682604372501
+      },
+      "After_applied_Wd_standardized": {
+        "norm": 0.026846878230571747,
+        "RMS": 0.0033558597788214684,
+        "maxabs": 0.00638763140887022
+      },
+      "Adam_proposal_Wd_standardized": {
+        "norm": 0.0007079423521645367,
+        "RMS": 8.849279402056709e-05,
+        "maxabs": 0.00010147318243980408
+      },
+      "Ideal_sigma_times_proposal_standardized": {
+        "norm": 3.8256283005466685e-05,
+        "RMS": 4.782035375683336e-06,
+        "maxabs": 5.5148084356915206e-06
+      },
+      "Applied_Wd_standardized": {
+        "norm": 3.825636304100044e-05,
+        "RMS": 4.782045380125055e-06,
+        "maxabs": 5.514826625585556e-06
+      },
+      "DeltaBias_standardized": {
+        "norm": 0.00035412167198956013,
+        "RMS": 6.260046211536974e-05,
+        "maxabs": 9.319931268692017e-05
+      },
+      "Applied_Wd_raw": {
+        "norm": 0.0007079437491483986,
+        "RMS": 8.849296864354983e-05,
+        "maxabs": 0.00010147351713385433
+      },
+      "Applied_Bias_raw": {
+        "norm": 0.00036086843465454876,
+        "RMS": 6.379312981152907e-05,
+        "maxabs": 9.3729657237418e-05
+      },
+      "proposal_vs_raw_maxabs": 3.805325832217932e-09,
+      "proposal_zero_ratio_unknown": 2,
+      "proposal_nonzero_applied_zero": 0,
+      "proposal_moments_unchanged": true,
+      "bias_otherparams_afterproposal_unchanged": true,
+      "raw_bias_rule": "dbprime-sum(actualdwprime*mu/sigma)",
+      "extra_forward_backward": 0,
+      "witness_step0_RMS_change": 0.013242384668566753,
+      "old_witness_step0_RMS_change": 0.013795603062266662
+    },
+    {
+      "step": 20,
+      "Before_Wd_standardized": {
+        "norm": 0.026923129335045815,
+        "RMS": 0.003365391166880727,
+        "maxabs": 0.006373096723109484
+      },
+      "After_Adam_proposal_Wd_standardized": {
+        "norm": 0.02709091454744339,
+        "RMS": 0.0033863643184304237,
+        "maxabs": 0.006473705172538757
+      },
+      "After_applied_Wd_standardized": {
+        "norm": 0.02693176455795765,
+        "RMS": 0.003366470104083419,
+        "maxabs": 0.006378497462719679
+      },
+      "Adam_proposal_Wd_standardized": {
+        "norm": 0.0007192183402366936,
+        "RMS": 8.99022925295867e-05,
+        "maxabs": 0.00010221125558018684
+      },
+      "Ideal_sigma_times_proposal_standardized": {
+        "norm": 3.8842528738314286e-05,
+        "RMS": 4.855316092289286e-06,
+        "maxabs": 5.486551799549488e-06
+      },
+      "Applied_Wd_standardized": {
+        "norm": 3.8842415960971266e-05,
+        "RMS": 4.855301995121408e-06,
+        "maxabs": 5.486421287059784e-06
+      },
+      "DeltaBias_standardized": {
+        "norm": 0.00026000189245678484,
+        "RMS": 4.59622751805e-05,
+        "maxabs": 7.322430610656738e-05
+      },
+      "Applied_Wd_raw": {
+        "norm": 0.0007192161865532398,
+        "RMS": 8.990203059511259e-05,
+        "maxabs": 0.00010220881813438609
+      },
+      "Applied_Bias_raw": {
+        "norm": 0.0002621728926897049,
+        "RMS": 4.634605647879653e-05,
+        "maxabs": 7.26329380995594e-05
+      },
+      "proposal_vs_raw_maxabs": 4.234607331454754e-09,
+      "proposal_zero_ratio_unknown": 2,
+      "proposal_nonzero_applied_zero": 0,
+      "proposal_moments_unchanged": true,
+      "bias_otherparams_afterproposal_unchanged": true,
+      "raw_bias_rule": "dbprime-sum(actualdwprime*mu/sigma)",
+      "extra_forward_backward": 0,
+      "witness_step0_RMS_change": 0.02045523622696547,
+      "old_witness_step0_RMS_change": 0.021677746445281348
+    },
+    {
+      "step": 50,
+      "Before_Wd_standardized": {
+        "norm": 0.027205143123865128,
+        "RMS": 0.003400642890483141,
+        "maxabs": 0.006519644521176815
+      },
+      "After_Adam_proposal_Wd_standardized": {
+        "norm": 0.02740059420466423,
+        "RMS": 0.003425074042752385,
+        "maxabs": 0.00660426402464509
+      },
+      "After_applied_Wd_standardized": {
+        "norm": 0.02721533179283142,
+        "RMS": 0.0034019164741039276,
+        "maxabs": 0.006524186581373215
+      },
+      "Adam_proposal_Wd_standardized": {
+        "norm": 0.000681087956763804,
+        "RMS": 8.51359945954755e-05,
+        "maxabs": 0.00012040424917358905
+      },
+      "Ideal_sigma_times_proposal_standardized": {
+        "norm": 3.680721056298353e-05,
+        "RMS": 4.600901320372941e-06,
+        "maxabs": 6.543663857883075e-06
+      },
+      "Applied_Wd_standardized": {
+        "norm": 3.680724330479279e-05,
+        "RMS": 4.600905413099099e-06,
+        "maxabs": 6.543663857883075e-06
+      },
+      "DeltaBias_standardized": {
+        "norm": 0.0003794572548940778,
+        "RMS": 6.707919965265319e-05,
+        "maxabs": 9.866058826446533e-05
+      },
+      "Applied_Wd_raw": {
+        "norm": 0.0006810885388404131,
+        "RMS": 8.513606735505164e-05,
+        "maxabs": 0.00012040424917358905
+      },
+      "Applied_Bias_raw": {
+        "norm": 0.0003871906956192106,
+        "RMS": 6.844629388069734e-05,
+        "maxabs": 0.00010063427180284634
+      },
+      "proposal_vs_raw_maxabs": 4.2273313738405704e-09,
+      "proposal_zero_ratio_unknown": 2,
+      "proposal_nonzero_applied_zero": 0,
+      "proposal_moments_unchanged": true,
+      "bias_otherparams_afterproposal_unchanged": true,
+      "raw_bias_rule": "dbprime-sum(actualdwprime*mu/sigma)",
+      "extra_forward_backward": 0,
+      "witness_step0_RMS_change": 0.051876917053013186,
+      "old_witness_step0_RMS_change": 0.055492576512114776
+    },
+    {
+      "step": 100,
+      "Before_Wd_standardized": {
+        "norm": 0.02786128781735897,
+        "RMS": 0.0034826609771698713,
+        "maxabs": 0.006735730450600386
+      },
+      "After_Adam_proposal_Wd_standardized": {
+        "norm": 0.028155647218227386,
+        "RMS": 0.0035194559022784233,
+        "maxabs": 0.00682670995593071
+      },
+      "After_applied_Wd_standardized": {
+        "norm": 0.02787679247558117,
+        "RMS": 0.00348459929227829,
+        "maxabs": 0.006740614306181669
+      },
+      "Adam_proposal_Wd_standardized": {
+        "norm": 0.0007495113532058895,
+        "RMS": 9.368891915073618e-05,
+        "maxabs": 0.0001439591869711876
+      },
+      "Ideal_sigma_times_proposal_standardized": {
+        "norm": 4.051587529829703e-05,
+        "RMS": 5.064484412287129e-06,
+        "maxabs": 7.823814485163894e-06
+      },
+      "Applied_Wd_standardized": {
+        "norm": 4.051585347042419e-05,
+        "RMS": 5.064481683803024e-06,
+        "maxabs": 7.823808118700981e-06
+      },
+      "DeltaBias_standardized": {
+        "norm": 0.0002772993466351181,
+        "RMS": 4.902006185147911e-05,
+        "maxabs": 0.00014687329530715942
+      },
+      "Applied_Wd_raw": {
+        "norm": 0.0007495108875446022,
+        "RMS": 9.368886094307527e-05,
+        "maxabs": 0.00014395907055586576
+      },
+      "Applied_Bias_raw": {
+        "norm": 0.0002801177906803787,
+        "RMS": 4.951829760102555e-05,
+        "maxabs": 0.00014592998195439577
+      },
+      "proposal_vs_raw_maxabs": 4.281901055946946e-09,
+      "proposal_zero_ratio_unknown": 2,
+      "proposal_nonzero_applied_zero": 0,
+      "proposal_moments_unchanged": true,
+      "bias_otherparams_afterproposal_unchanged": true,
+      "raw_bias_rule": "dbprime-sum(actualdwprime*mu/sigma)",
+      "extra_forward_backward": 0,
+      "witness_step0_RMS_change": 0.08900744415440427,
+      "old_witness_step0_RMS_change": 0.09831168949826437
+    },
+    {
+      "step": 200,
+      "Before_Wd_standardized": {
+        "norm": 0.03003249317407608,
+        "RMS": 0.00375406164675951,
+        "maxabs": 0.0074150399304926395
+      },
+      "After_Adam_proposal_Wd_standardized": {
+        "norm": 0.030552804470062256,
+        "RMS": 0.003819100558757782,
+        "maxabs": 0.007573617156594992
+      },
+      "After_applied_Wd_standardized": {
+        "norm": 0.030059989541769028,
+        "RMS": 0.0037574986927211285,
+        "maxabs": 0.007423552218824625
+      },
+      "Adam_proposal_Wd_standardized": {
+        "norm": 0.001020651194266975,
+        "RMS": 0.00012758139928337187,
+        "maxabs": 0.0002376341726630926
+      },
+      "Ideal_sigma_times_proposal_standardized": {
+        "norm": 5.514461008715443e-05,
+        "RMS": 6.893076260894304e-06,
+        "maxabs": 1.2914811122755054e-05
+      },
+      "Applied_Wd_standardized": {
+        "norm": 5.514466465683654e-05,
+        "RMS": 6.8930830821045674e-06,
+        "maxabs": 1.2914882972836494e-05
+      },
+      "DeltaBias_standardized": {
+        "norm": 0.0004944734973832965,
+        "RMS": 8.741139754420146e-05,
+        "maxabs": 0.00021006911993026733
+      },
+      "Applied_Wd_raw": {
+        "norm": 0.0010206521255895495,
+        "RMS": 0.00012758153025060892,
+        "maxabs": 0.0002376354968873784
+      },
+      "Applied_Bias_raw": {
+        "norm": 0.0004995299386791885,
+        "RMS": 8.83052489371039e-05,
+        "maxabs": 0.00021820371330250055
+      },
+      "proposal_vs_raw_maxabs": 4.1763996705412865e-09,
+      "proposal_zero_ratio_unknown": 2,
+      "proposal_nonzero_applied_zero": 0,
+      "proposal_moments_unchanged": true,
+      "bias_otherparams_afterproposal_unchanged": true,
+      "raw_bias_rule": "dbprime-sum(actualdwprime*mu/sigma)",
+      "extra_forward_backward": 0,
+      "witness_step0_RMS_change": 0.1696590693031884,
+      "old_witness_step0_RMS_change": 0.21222043097201093
+    },
+    {
+      "step": 400,
+      "Before_Wd_standardized": {
+        "norm": 0.035950761288404465,
+        "RMS": 0.004493845161050558,
+        "maxabs": 0.008988438174128532
+      },
+      "After_Adam_proposal_Wd_standardized": {
+        "norm": 0.03645407035946846,
+        "RMS": 0.0045567587949335575,
+        "maxabs": 0.00909135490655899
+      },
+      "After_applied_Wd_standardized": {
+        "norm": 0.03597775474190712,
+        "RMS": 0.004497218877077103,
+        "maxabs": 0.008993962779641151
+      },
+      "Adam_proposal_Wd_standardized": {
+        "norm": 0.0007765817572362721,
+        "RMS": 9.707271965453401e-05,
+        "maxabs": 0.00027702702209353447
+      },
+      "Ideal_sigma_times_proposal_standardized": {
+        "norm": 4.2011222831206396e-05,
+        "RMS": 5.2514028539007995e-06,
+        "maxabs": 1.505571162851993e-05
+      },
+      "Applied_Wd_standardized": {
+        "norm": 4.2011401092167944e-05,
+        "RMS": 5.251425591268344e-06,
+        "maxabs": 1.5055760741233826e-05
+      },
+      "DeltaBias_standardized": {
+        "norm": 0.0002457442751619965,
+        "RMS": 4.344185799709521e-05,
+        "maxabs": 0.00011134147644042969
+      },
+      "Applied_Wd_raw": {
+        "norm": 0.0007765850168652833,
+        "RMS": 9.70731271081604e-05,
+        "maxabs": 0.00027702792431227863
+      },
+      "Applied_Bias_raw": {
+        "norm": 0.00024189779651351273,
+        "RMS": 4.2761890654219314e-05,
+        "maxabs": 0.00012056030391249806
+      },
+      "proposal_vs_raw_maxabs": 6.5847416408360004e-09,
+      "proposal_zero_ratio_unknown": 2,
+      "proposal_nonzero_applied_zero": 0,
+      "proposal_moments_unchanged": true,
+      "bias_otherparams_afterproposal_unchanged": true,
+      "raw_bias_rule": "dbprime-sum(actualdwprime*mu/sigma)",
+      "extra_forward_backward": 0,
+      "witness_step0_RMS_change": 0.45770127457630155,
+      "old_witness_step0_RMS_change": 0.5081284116382748
+    }
+  ],
+  "same12train_witnessIDs": true,
+  "extra_forward_backward": 0,
+  "sigma_small_effect": "proposal attenuated by sigma, actual applied f32 recorded; moments retain Adamproposal; rawbias coupling/path differ; no information/capacity added"
+}
