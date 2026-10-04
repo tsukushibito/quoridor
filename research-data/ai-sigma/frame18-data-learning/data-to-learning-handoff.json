@@ -1,0 +1,36 @@
+{
+  "UTC": "2026-10-04T12:44:11.056817+00:00",
+  "all672_GOAL": true,
+  "maxtrain_mask_counts": {
+    "train": {
+      "all": 27463,
+      "eligible": 27463,
+      "excluded": 0
+    },
+    "validation": {
+      "all": 4813,
+      "eligible": 4813,
+      "excluded": 0
+    },
+    "test": {
+      "all": 4847,
+      "eligible": 4847,
+      "excluded": 0
+    }
+  },
+  "secondary_nonselection": {
+    "small_step": 400,
+    "large_step": 1200,
+    "G_small": 192,
+    "G_large": 576,
+    "distance": 0.0,
+    "rule": "minimum saved abs(step/Glarge-400/Gsmall); tie early; before curves"
+  },
+  "same_sample_primary": 256000,
+  "testlabels_selection_read": false,
+  "gen_source_stop": "generation-final-stop-compact.json",
+  "datasetmetadata_SHA": "978b65415ab85f12b1c3bdb5548546647bba8837a6b688fd1fe3fb1407ba11b9",
+  "mask_SHA": "f7ad482322f8690cab73ced92a943032007daf603dc3dd8067cff2e278f0bead",
+  "learning_upper_samples": 1157596,
+  "newtest_independentgame_not_IID": true
+}
