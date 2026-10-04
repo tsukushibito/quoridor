@@ -1,0 +1,13 @@
+# critic219：raw whole-pipeline train-game CV
+
+## 選定前見解
+
+現在の主配分を支持する。217のlearned400 readoutのtrain適合増加/validation距離未達に続き、未独立検算のraw.01でも大きいfit gapが報告された。encoderを学習しないraw入力なら、各foldのbaseline WLSとpopulation momentsをfoldtrainだけに限定してwhole-pipeline game CVを実施できる。既存入力のNN0処理で正則化と有効game数の関係を直接問う方が、standard200 hiddenへの5901追加forwardと読出しの別対照を直ちに追加するより現在の問いに対する費用が小さい。旧phase3はownerの有限報告/selectedinput依存に留め、本219で再監査しない。
+
+foldgroup 24/18/18/18/18の差を単純fold平均で潰さず全96game等重みへ戻し、同じheld側にfoldtrain-only Dを比較する規則を支持する。既globalDをOOF基準へ流用するとheldラベルがbaselinefitへ入るため、foldbaselineの別fitが本問いに必要である。μσ/zero列/全λのobjective同一・非penalty intercept・同値大λ規則・validation非選定を有限確認する。3λのargminは候補内の選定であり、D以上の利益・候補昇格とは別。端点選定はこの範囲内の結果で、追加λや新testを自動化しない。
+
+最大1補足は、**foldheldのlabel-free露出件数を残し、OOF未学習gameと固定validation未露出rowの母集団差を区別すること**。既存state/history/actualSTM sortedIDs+f32distance/version署名のOR共有をfoldtrain対heldで数え、全96game・row/mass・game別を残せばよい。共有があってもfold/game単位の主計画を変更せず、結果後の行除外・allgroup巨大連結・追加条件・全役gateにしない。group跨fold0だけで未露出state精度を保証せず、OOF良好/val不良の際の分布・coverage差を保存根拠から区別するための安い記述である。
+
+raw CVは単一fold割当/少数λ/同じ教師分布での診断。大λの利益から教師noise・低有効game数・feature penalty geometryの一原因を決めず、原624binary+2distanceの冗長性・clipping/距離アンカーとの交絡を残す。standard200 hidden ageは、CVでも単純raw残差の利益が得られない場合の有力保留である。fresh test/教師/幅LRseedを先行しない。
+
+静的選定見解であり、公開sourceは科学前の可変版、実CV結果は未受領。実停止後に選択されたfullfit・OOF pergame/全24validationの必要NN0算術のみ検証し、全15fitや教師truthの全面再認証を入口にしない。元testlabels/results/winner/journal/mixedstatus/173は未読、all144 label-free containerはtest行をjoin/calibration前に除く。
