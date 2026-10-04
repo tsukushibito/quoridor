@@ -189,3 +189,16 @@ HEAD対DISTarena、追加L2/headfreeze/幅/target調整、教師増量は保留�
 ## frame15 別seed第四条件の実停止と次小観測
 
 固定seed19080312・LR1e-4・primary200は04:31:27–04:31:30 CPU2単1/74804sample/exit0/全wait exactabsent。再用valはowninitial .683589561→200 .657331349（差-.026258212）、400 .744268429。元seed200改善-.030328254と方向再現、joint初期/sampling変更・距離.485147未超・2seed/多点選択限界保持。学習終了後、既提案済12train witness/3checkpointの距離局所感度144sampleを同209内の小sanityとして実配分04:34:16 active steer accepted。初期/訓練後の入力利用Bを小費用で観測し、尺度対照の有用性を選ぶためでありsynthetic合法局面/teachertruthの認定ではない。四学習actual405434、probe予定144/保守736208<800000。210残60/180内で第四＋probe必要保存算術を一短jobで合わせる方針（既実施ならreset0/不足保持）。追加train/teacher/test/arena自動起動0。
+
+
+210第四算術はprobe通知前04:33:57に終了済みで保守180/180。primary方向再現/14of24局/全4run405434samplesを有限支持。入力感度の独立検算は未実施として保持しcriticの新算術・残量resetを求めない。producer小probeの根拠範囲を見て次判断する（全役検証待ちgate0）。
+
+
+## frame15 学習診断受入れから入力条件付けの一対照へ
+
+209の4train+固定12局所probe405578sample/15.600525s、source子停止/報告Git current一致/90path・12checkpoint復元・backup・guard内を有限受入れ、本人引継によりcoordinator所有移譲してclose。原LR早期曲線/2seed方向再現は支持、棋力/独立test/唯一原因0。最大1hyp提案fresh24testは、plain候補が距離より大きく劣りval定数利益も小さく不確かのため現在保留し、安定した有用候補/freezeと残費で再検討。局所感度非0は入力未使用を否定する限定観測で、教師真値/尺度唯一原因を認定しない。
+
+同frame15の新問い211exp:train-only距離mu/sigma標準化＋hidden距離重み/bias補償で同初期関数を保存する1条件、原LR1e-4/seed19080311/400step/10eval/primary200-old200。同モデル容量/情報/全層保持、optimizer座標介入と明記。現exp未使用pool内8MiB/RAMguard1.75/NNcap200000/予定116111/CPU2single/GPU0/newteacher,test,arena0。212crit:選定前独立見解→必要compact算術、新static120/新保存1MiBは既112guard内/旧210180不変。実配送21104:45:37/212 receipt別、本人受付開始/実scienceは未観測。science新開始05:05/stop05:15/保存05:30、親05:51:38不変。92長期回収責任不変更。
+
+
+212選定前修正を採択：標準化後の更新を元距離単位へDeltaWd_raw=DeltaWd_prime/sigma、DeltaBias_raw=DeltaBias_prime-sum(DeltaWd_prime*mu/sigma)として併記し、同plannedforwardのfixedwitness差に対応。sameLRで実効stepが変わる交絡を可視化しinput情報/容量増の効果へ読み替えない。21104:49:09 active実steer受理、追加NN/条件/gate0。wrapper本人claim21104:46:12/21204:47:00、212は本人source静的読取30/120、211実NNは未観測のまま待つ。
