@@ -107,3 +107,7 @@ OOF最小・1e-10同値なら大λという結果前規則でλ=1を選択した
 実job07:20:34.433662–07:20:34.648656、CPU2/BLAS1 wall .215337秒、peak94191616B<448MiB、exit0/全wait/currentexact不在。NN/forward/fit/optimizer/backward/GPU/教師/test/game追加0、NN29505不変。元static139.412996+source保守5+math .215337=144.628333/180。phase5 storage guardは統括新配分15MiB、旧phase4の14MiB証拠は不変更。phase5はowner有限確認/統括compact読取、219へ新算術や旧120resetを要求しない。
 
 phase5時点の次1案は既知の表現可能な距離関係target(tanh線形距離、対ReLUで実現可能)の学習sanityだったが、後続統括はphase6 fixedλ1/別fold安定性を優先して実配分した。学習sanity/featureage/hiddenλ1/独立testを自動開始しない。全18cell/元weight/reconciliation/固定prediction bootstrap/game別はsupport-gap-analysis/result.json.gzへ保存。
+
+## Phase6: user priority reorder before science
+
+The fixed-lambda1 second-fold diagnostic was received but no runnable source, scientific process, fold fit or validation evaluation began. It is retained as `NOT_STARTED(USER_PRIORITY_REORDER)`. The coordinator redirected the main plan to teacher-generation efficiency before scaling data. Phases1–5 remain unchanged; phase6 contributes zero NN/fit/GPU and the prior static charge remains144.628333/180s. All216 scientific sources and children are stopped. This does not establish feature invalidity, a distribution cause, independent-test improvement or playing strength.
