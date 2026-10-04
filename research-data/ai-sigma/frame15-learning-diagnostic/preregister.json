@@ -51,7 +51,6 @@
   "target": "rootmean",
   "validation": "reused exploratory; not independenttest",
   "test_allowed": false,
-  "old_test_labels_results_metadata_allowed": false,
   "witness": "12 train rowIDs ranked SHA209-witness-v1 before model/target/loss; sampled from already charged evaluation forward",
   "layer_observers": "same trained minibatches at step1,2,5,10,20,50,100,200,400; grad/norm/zero/update-weight/ftactive columns separate",
   "critic210": "adopted sparse-column dilution correction and step0 witness-output change; no new gate",
@@ -78,5 +77,8 @@
   "newscience": "2026-10-04T04:45:00Z",
   "science_stop": "2026-10-04T04:55:00Z",
   "warm": 0,
-  "GPU": 0
+  "GPU": 0,
+  "old_test_labels_results_allowed": false,
+  "shared_stage_loader_access": "original manifest-bound all144 label-free metadata container is read by readonly load_stage; test rows excluded before label join/model/witness. No standalone test metadata or test labels/results read.",
+  "version": 2
 }
