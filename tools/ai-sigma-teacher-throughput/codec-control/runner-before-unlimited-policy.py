@@ -17,18 +17,14 @@ def table():
 
 def usage():return sum(p.stat().st_size for root in [T,D]for p in root.rglob('*')if p.is_file())
 assert time.time()<end('2026-10-04T09:15:50Z'),'NEWHEAVY_DEADLINE'
-reg=json.loads((D/'preregister.json').read_text());binding=json.loads((O/'source-freeze-v2.json').read_text())
+reg=json.loads((D/'preregister.json').read_text());binding=json.loads((O/'source-freeze.json').read_text())
 for p,h in {**reg['readonly'],**binding['files']}.items():assert hashlib.sha256((R/p).read_bytes()).hexdigest()==h,('SOURCE_CHANGED',p)
 controls=[]
 for issue in ['quoridor-4lc','quoridor-4lc.221']:
  z=subprocess.run(['bash','scripts/dev/beads.sh','show',issue,'--json'],capture_output=True,text=True,timeout=10,check=True);q=json.loads(z.stdout)[0];assert q['status']=='in_progress' and 'paused-by-user' not in q.get('labels',[]),'OWNER_OR_PAUSE'
  if issue.endswith('.221'):assert q['assignee']=='codex:01a0f31d-6d15-7620-bb63-4b4f878e4746'
  controls.append({k:q.get(k)for k in ['id','status','assignee','labels']})
-schpath=Path('/workspaces/quoridor/.artifacts/research-team/scheduler-sigma-continuation-20261001/state.json');sch=json.loads(schpath.read_text());assert sch['phase']=='running' and not sch.get('recovery_required');quiet=sch['next_at']-time.time()if sch.get('next_at')else None
-if sch['owned']is None:assert quiet is not None and quiet>=c['job_seconds']+30,'SUPERVISOR_QUIET_SHORT'
-# User withdrew LLM turn-time cap. An owned LLM turn alone is not a physical CPU job gate.
-# Existing actual script/process admission below must still show no foreign science/critic compute.
-if sch['owned']is not None:assert c.get('allow_owned_LLM_with_physical_guard')is True,'CURRENT_OWNED_PHYSICAL_POLICY_REQUIRED'
+schpath=Path('/workspaces/quoridor/.artifacts/research-team/scheduler-sigma-continuation-20261001/state.json');sch=json.loads(schpath.read_text());assert sch['phase']=='running' and not sch.get('recovery_required');assert sch['owned']is None,'CURRENT_OWNED_REQUIRES_PHYSICAL_HANDOFF';quiet=sch['next_at']-time.time();assert quiet>=c['job_seconds']+30,'SUPERVISOR_QUIET_SHORT'
 assert c.get('runtime_loaded'),'NEW_RUNTIME_BINDING_REQUIRED'
 loadedpath=Path(c['runtime_loaded']);loaded=json.loads(loadedpath.read_text());assert loaded['parent_version']==17
 monitor=Path(c.get('runtime_monitor')or str(Path(loaded['run'])/'monitor-observation.json'));mon=json.loads(monitor.read_text());assert time.time()-monitor.stat().st_mtime<120,'CURRENT_MONITOR_STALE'
@@ -40,9 +36,9 @@ for pid,z in table().items():
  try:args=Path(f'/proc/{pid}/cmdline').read_bytes().decode().split('\0');aff=sorted(os.sched_getaffinity(pid))
  except (OSError,UnicodeError):continue
  script=next((a for a in args[1:5]if a.endswith(('.py','.cjs','.js','.sh'))),'');arg=' '.join(args)
- if 'tools/ai-sigma-'in script or 'tools/nnue-training/'in script or 'research-data/ai-sigma/'in script or 'tools/research-team/'in script or 'faithful-native'in args[0] or '.artifacts/ai-sigma/continuation-20261001/'in script:
+ if 'tools/ai-sigma-'in script or 'tools/nnue-training/'in script or 'tools/research-team/'in script or 'faithful-native'in args[0] or '.artifacts/ai-sigma/continuation-20261001/'in script:
   rss+=z['RSS'];current.append({**z,'affinity':aff,'script':script,'argv':arg[:250]})
-  if ('tools/ai-sigma-'in script or 'tools/nnue-training/'in script or 'research-data/ai-sigma/'in script or 'faithful-native'in args[0]) and str(T)not in script and not script.endswith(('/save_git.py','/save.py','/pack.py')):foreign.append(current[-1])
+  if ('tools/ai-sigma-'in script or 'tools/nnue-training/'in script or 'faithful-native'in args[0]) and str(T)not in script and not script.endswith(('/save_git.py','/save.py','/pack.py')):foreign.append(current[-1])
 assert not foreign,('CURRENT_FOREIGN_SCIENCE_OR_CRITIC',foreign)
 gpu=subprocess.run(['nvidia-smi','--query-compute-apps=pid,process_name,used_gpu_memory','--format=csv,noheader'],capture_output=True,text=True,timeout=5,check=True).stdout.strip();assert not gpu,('CURRENT_GPU',gpu)
 assert rss+6*1024**3<8*1024**3,'PARENT_RSS';assert int(next(x.split()[1]for x in Path('/proc/meminfo').read_text().splitlines()if x.startswith('MemAvailable:')))*1024>6*1024**3
@@ -83,13 +79,6 @@ with(out/'stdout.txt').open('w')as log:
   members=group();family=sum(z['RSS']for z in members)+table()[os.getpid()]['RSS'];peak=max(peak,family)
   if family>=5.5*1024**3:reason='RAM_GUARD'
   if codecusage()+gitupper+4*1024**2>=56*1024**2:reason='STORAGE_GUARD'
-  # If an actual foreign scientific script starts during the job, stop this owned job, never interrupt theirs.
-  for fp,fz in table().items():
-   if fp==os.getpid()or fz['state']=='Z'or(fp,fz['tick'])in tracked:continue
-   try:fa=Path(f'/proc/{fp}/cmdline').read_bytes().decode().split('\0')
-   except(OSError,UnicodeError):continue
-   fs=next((a for a in fa[1:5]if a.endswith(('.py','.cjs','.js','.sh'))),'')
-   if ('tools/ai-sigma-'in fs or 'tools/nnue-training/'in fs or 'research-data/ai-sigma/'in fs or (fa and 'faithful-native'in fa[0]))and str(T)not in fs and not fs.endswith(('/save_git.py','/save.py','/pack.py')):reason='CURRENT_FOREIGN_COMPUTE_STARTED'
   for z in members:
    try:
     for tid in Path(f'/proc/{z["pid"]}/task').iterdir():
