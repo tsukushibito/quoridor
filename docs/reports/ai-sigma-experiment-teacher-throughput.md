@@ -110,3 +110,5 @@ Codec平均79.305334秒/旧graph85.727065秒、wall比.925091（約7.5%短縮）
 節約点推定.133786秒/game。既知parity/前段admission保守/資格/pack/payloadGit約18.08秒なら回収約135局、確認一回も含め約707局。開発見積900秒と既知検証・確認費を含むと回収約7434局で、実reasoning/選定/運用費は未分離。15分を実開発実測とせず、deltaの変動/順序不確かも保持する。短利益だけで無限調整せず、codecは今後生成の有限候補として引渡す。次最大1の費用検討は残る307MB requestのf32配列転送＋所有/ID/cancel/drain対応で、初期30–60分の実装検証見積と回収局数を測定前に登録する。Rust多handle pump/C++統合は規則・build・回収の差分を含む保留候補で、今回から自動開始しない。
 
 科学source Git48c51dbdeef4b7e114e015ecddc6c429d03c24dd、payload7595553c1a39bf5871a821769adcbf06c19ab332。archive4,571,827B/SHAb0fbba8082ae97e3e968a6c1f86dd632397654c147f4ca4324d02fbea82b61bb、全member byte復元PASS。新64MiB/guard56MiBは既pool内、旧128MiB/phase2forecast116807935B保持・unknown減額/親追加0。defaultindex/privateindex不変更。科学/源停止と必要保存helper作業を区別し、222旧phase1の独立支持を新codecへ拡張しない。
+
+phase3保存段階の追補: report/scenarios Git byte復元2.392360秒を96実行gameへ配賦すると1000局の既知全工程見込みは29.0676分＋未分離dispatch/backup/後続小receipt・production scale費。前の28.6523分を置換せず保存stageを追加した。新actual38,281,105B＋authorized uniqueGit上界6,980,370B＋temp/metadata見込5,242,880B＝50,504,355B<56MiB。新64MiB予約と旧128MiB保持を別会計し、未使用返却0/未知減額0。
