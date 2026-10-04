@@ -1,0 +1,39 @@
+{
+  "UTC": "2026-10-04T23:26:08.810490+00:00",
+  "run": "saved-replay-r1",
+  "task": "saved-arena-ruleA-diagnosis",
+  "expected_schema": "frame19-arena-diagnosis-v1",
+  "argv": [
+    "node",
+    "tools/ai-sigma-frame19-arena-diagnosis/diagnose.cjs",
+    "research-data/ai-sigma/frame19-arena-diagnosis/settings-r1.json"
+  ],
+  "sources": {
+    "tools/ai-sigma-native-baseline/reference.cjs": "85cae30273fa481f96ec28fa77eeb5907bb203812c7234f9ffdfd75d337848cf",
+    "tools/ai-sigma-native-baseline/game.js": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+    "tools/ai-sigma-native-baseline/context.js": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+    "tools/ai-sigma-native-baseline/common.cjs": "35a01a1db0dd124ba78c59aa1bff38232d73fd202c41188bb0f4960e71a4424f",
+    "tools/ai-sigma-frame19-arena-diagnosis/launch.py": "e6e761d3838984f6a3d8849b06c682731ae9b2d9b44307d01b5512efb5c80351",
+    "tools/ai-sigma-frame19-arena-diagnosis/diagnose.cjs": "16cf80781c31244aad7215c0dd51e4e28db492470b3b46a60dd42550294d6623",
+    "research-data/ai-sigma/frame19-arena-diagnosis/settings-r1.json": "fd7161552e10b7046b8216afcdf8a390fdbf2b0e10ae0b3a6132fcc9aae44cc0"
+  },
+  "input_SHA": {
+    "research-data/ai-sigma/frame19-native-arena/science-stop-v1.json": "025a689e0b86a345a4d9c1f338244b2cfd53857078e5fe63ff47729f5782f198",
+    "research-data/ai-sigma/frame19-native-arena/all-attempt-result-v1.json": "3f7a19ebdf791d422c74ce9cabc49caf4bd1346dd9207ac0d7d52673be9a17ea",
+    "research-data/ai-sigma/frame19-native-arena/pilot-r2.json": "f3574655412d06c7c82a9ed9b2068edf36693cdff0c1367d06e5a8d518bd202a",
+    "research-data/ai-sigma/frame19-native-arena/later4-r1.json": "97d3b2ca4a801511306ec722a602d83347d59e3963f64f1afd6870d66b9b65b6",
+    "research-data/ai-sigma/frame19-native-arena/pilot-r2-hands.jsonl": "f1c6584d98c2baffe4f3bc3f08aee31a7d0aebd3b58ae397e93930900e968828",
+    "research-data/ai-sigma/frame19-native-arena/later4-r1-hands.jsonl": "4d49f3c3b5fd9298dedda90d27e32d718ef0df7d994afd7367ce7f0de3be8d50",
+    "research-data/ai-sigma/frame19-native-arena/openings8-v1.json": "bfec1e7a4450f8766909944e6a46fedbbba1d197f9fc78dfa3e323ef39f9509c",
+    "research-data/ai-sigma/frame19-native-arena/background-pilot-r2/result.json": "3b747b7e5cec900ff95d543a8e3aacc9b1fc85f6cb01f1e6b9d6680c30736c1f",
+    "research-data/ai-sigma/frame19-native-arena/background-later4-r1/result.json": "a103fbc799a05790ae590386ea7f9d53cdca9f7f9111161a89b16c365e892956"
+  },
+  "CPU": 4,
+  "RAM_guard_B": 469762048,
+  "hard_s": 30,
+  "science_cap_s": 120,
+  "maxjobs": 2,
+  "NN_model_newgame_GPU": 0,
+  "case_rule_before_results": "intake-and-case-preregister.json",
+  "scalar_summaries_no_span_addition": true
+}

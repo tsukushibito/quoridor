@@ -1,0 +1,39 @@
+{
+  "UTC": "2026-10-04T23:20:32.594380+00:00",
+  "receipt_UTC": "2026-10-04T23:19:47Z",
+  "issue": "quoridor-4lc.239",
+  "actor": "codex:01a0f31c-2e4b-7170-82c5-69e1428c2418",
+  "ready_show_goal_self_assigned_no_pause": true,
+  "claim_static_started": true,
+  "source_results_perply_read_before_this_case_rule": false,
+  "cases_max": 4,
+  "case_rule": {
+    "opening_order": "first occurrence in frozen openings8 manifest order",
+    "per_opening_slot_order": "ascending fixed slot index, never winner/loss rank",
+    "priority": [
+      "first adopted action arriving at a prior board+side identity (full history separately compared)",
+      "first adopted NNUE legal wall",
+      "last adopted NNUE action before GOAL terminal",
+      "first adopted NNUE action"
+    ],
+    "within_priority": "ascending slot then chronological ply; later alternatives ignored",
+    "missing": "NOT_AVAILABLE, no substitute opening or newgame",
+    "selection_limits": "post-result exploratory selected diagnostic, not new independent quality test"
+  },
+  "source_read_cap_s": 90,
+  "management_cap_s": 180,
+  "science_cap_s": 120,
+  "jobhard_cap_s": 60,
+  "job_count_max": 2,
+  "CPU": 0,
+  "RAM_guard_B": 469762048,
+  "NN_model_torch_newgame_GPU": 0,
+  "new_reservation_B": 2097152,
+  "guard_B": 1572864,
+  "forecast_limit_B": 1048576,
+  "initial_forecast_B": 720896,
+  "unused_before_B": 59875328,
+  "unused_after_B": 57778176,
+  "parent_added_B": 0,
+  "old_unknown_fee_reservations_held": true
+}
