@@ -1,6 +1,6 @@
 # 現在のNNUE研究優先順位（frame18）
 
-2026-10-04 11:53UTC。主配分は228独立game段階増量→低LR標準化NNUE学習→最大1候補freeze後の新test、229独立裁定。228validationの48chunk二jobは終了・全子wait/currentexact不在、計272858NN/334.530891sをownerから受領。適格教師量の資格は未集計、新学習は未開始。225/226停止有限受入れ、225本人closed、227私有adapter/API/32合成checks受入れ（holder idle、close専用turnなし）。root230背景job/Idle-only完了再開を次の未開始228長時間jobへ採用する薄接線を実配分、現job移管なし。root20人工testsはPASS、実研究jobのIdle/通知は実利用確認待ち。
+2026-10-04 11:57UTC。主配分は228独立game段階増量→低LR標準化NNUE学習→最大1候補freeze後の新test、229独立裁定。新val96は96GOAL/4813joint/272858physicalNN/334.530891sをownerから受領、2pack/memberSHA/Gitbytes復元済。新学習は未開始。背景初回失敗1623NNを保持（旧合計274481）、readonly worker schemaのsplit=test拒否に対しworkerwire=evaluation/custodianexport=元testmanifestの私有薄修復。provider/math/seed/教師不変更、成功family置換0。新bg-r2 job8255c4c9…が実running、担当はjobID/notes/backup後Idleへ移る引渡しを受領。点照合では担当まだactive、実Idle/完了配送は未確認。ACK専用steerを送らず、背景終了イベントで本人を再開する。
 
 明示新4hは開始10:33:18固定/終了14:33:18UTC、新heavy14:23:18/監督14:28:18/monitor14:31:18。CPU計算合計4論理/RAMcurrent8GiB/保持+有効予約unused12GiB/GPU推論6GiB・各job30min、GPU学習は旧累積2h確認未使用のみ。同saved6role/model-effort-cwd、LLM人数gateなし/Supervisor max_turn_seconds=null、pause/実所有/正runtime/子回収を維持。旧run/費/失敗/成績/個別期限reset0。親mainmirror・運用sourceのsolewriterは92、coordinator編集0。旧開封test選定復帰0、173正式198非学習、共有環境/toolchain/model取得/製品統合/push公開0。最高棋力・未見学習利益は未達。
 
@@ -39,3 +39,5 @@ root230の背景job実装を採用。主checkout sourceGit288c325、scripts/dev/
 次の未開始長時間jobは /workspaces/quoridor/docs/development/research-jobs.md のsubmit→job ID/dir/次判断Beads保存→本人turn終了Idle→完了idle-only再開を適用する。228solewriterが自域config/state-dirと既guardianのcurrentancestor/owner identityへ背景supervisor+commandを薄接線、source版/全attempt/管理CPU・RAM/log/保存を既予算内へ保存。現在生成は移管/interruptしない。pause/所有/digest/end/応答不明保護を継承し、接線不足は具体化して元方式で継続、全稿ACK/人工suite再試験/新科学条件を入口gateにしない。root手順の実配送とproduction Idle/通知成立を区別し、次jobで実到達を確認する。親・個別期限/NNcap/量/13:05branch不変更、92運用source変更なし。
 
 11:54UTC background-gen-r1の公開管理receiptを点読取。jobc7b7cec2…child11:48:47→11:48:58 failed/exit1/11.087867s/remaining[] cleanup_complete。guardian公開receiptはtest96-chunk1-r1/10.945371s/1623NN/allwaitexact不在、test raw/labels未読。queueのCalledProcessErrorは根原因不明の終了伝播。notificationはrecipient_not_idleでpending、実Idle/完了再開は未確認。通常修復・原失敗/全分母/NN費保存は228ownerへ返し、13:05生成stop/branchと外側13:07cleanup endを区別。背景tool採用・子終了確認を科学成功にしない。
+
+228背景r2引渡し: sourceGitc484e21c…、supervisor123081/tick36780917・queue123133/tick36781104、testchunk1-r2 actual11:53:53.503867。旧r1 result failedは保持、同turnで回収済みの未配送notificationだけcancelled（deliveredに救済0）。672全manifest/family/seed/品質/roundrobinと12:50新入口/13:05science stop/13:07外側回収を維持。hyp/criticはmetadata/mask/pathhash/safeledgerだけ、testtargetsはsealed。本人Idleはabandonedではなくin_progress所有job、背景終了/不足/失敗で一度元roleへ通知。現物点はrunning/まだactive、到達確認は未来完了イベントで行いLLMpollingを追加しない。

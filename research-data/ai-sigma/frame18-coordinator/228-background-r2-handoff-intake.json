@@ -1,0 +1,46 @@
+{
+  "UTC": "2026-10-04T11:57:21.292530+00:00",
+  "228_owner_report": {
+    "validation_GOAL": 96,
+    "validation_joint": 4813,
+    "validation_physicalNN": 272858,
+    "validation_guardian_wall_s": 334.530891,
+    "old_failed_bg_physicalNN": 1623,
+    "old_charged_physicalNN": 274481,
+    "sourceGit": "c484e21c256d3d53d25ec5ccca38a320d8fba697",
+    "quantity": 672,
+    "slot_hold_wall_s": 657.929,
+    "root_test_CPU_wall_s": 6.550977
+  },
+  "r1_notification": {
+    "status": "cancelled",
+    "updated_at": "2026-10-04T11:53:52.033646+00:00",
+    "reason": "recipient_not_idle"
+  },
+  "r2_state": {
+    "schema_version": 1,
+    "job_id": "8255c4c9-300c-495f-9788-f4cd7b7fd35d",
+    "issue": "quoridor-4lc.228",
+    "thread_id": "01a0f31d-6d15-7620-bb63-4b4f878e4746",
+    "phase": "running",
+    "created_at": "2026-10-04T11:53:46.558732+00:00",
+    "config_sha256": "c18e56d7e2bc82241a33035de56b6b81c60faf429701e1206e74e1d50a67f084",
+    "supervisor": {
+      "pid": 123081,
+      "start_ticks": "36780917",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "updated_at": "2026-10-04T11:53:46.807554+00:00",
+    "child": {
+      "pid": 123133,
+      "start_ticks": "36781104",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "started_at": "2026-10-04T11:53:48.442525+00:00"
+  },
+  "official_recipient_status_at_point": "active",
+  "production_idle_notification": "handoff received, transition and delivery not yet observed",
+  "evidence_scope": "management state and owner aggregate; sealed test labels/results untouched",
+  "next_action": "do not send acknowledgment-only steer; owner ends turn and background completion resumes idle owner",
+  "budget_deadline_changes": false
+}
