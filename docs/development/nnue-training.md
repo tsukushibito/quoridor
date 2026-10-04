@@ -115,7 +115,7 @@ testは候補/未学習同モデル/train定数を同時比較し、primaryと�
 
 `manage_frame14.py`はCPU2単logical/1thread、family RSS/timeout/子wait/identityと累積費を記録する有限launcher。外部生成scienceが現在存在する間はmock・学習・testを開始しない。NN0境界の追加確認は`test_frame14.py`だけで、旧5softwaretestsや既48game exportを再測定しない。
 
-frame14の事前追加診断では、同じ256000学習samplesの24 LAST対96 LASTを比較する。BESTはstepが異なるため数量contrastに使わない。`test_contrast.py freeze`は候補freezeに加えて両LASTのpath/SHA/config/manifest/2000step/256000samples/同初期tensorSHAを束縛する。`test_contrast.py evaluate`を最終の一巡入口として使用し、候補・未学習・24LAST・96LASTの最大4unique checkpoint SHAと定数を同時評価する。同一SHAの出力は再forwardせず共有する。dataset単位の`test-open-once.json`も排他的に作成し、output名を変えた再testを防ぐ。旧`frame14.py evaluate`と両方を実行しない。
+frame14の事前追加診断では、同じ256000学習samplesの24 LAST対96 LASTを比較する。BESTはstepが異なるため数量contrastに使わない。`test_contrast.py freeze`は候補freezeに加えて両LASTのpath/SHA/config/manifest/2000step/256000samples/同初期tensorSHAを束縛する。`test_contrast.py evaluate`を最終の一巡入口として使用し、候補・未学習・24LAST・96LASTの最大4種類の重みと定数を同時評価する。checkpointの保存metadataが違っても、同model設定と実ロードしたfloat32 tensor SHAが同一なら出力を再forwardせず共有し、実unique数とsamplesを記録する。dataset単位の`test-open-once.json`も排他的に作成し、output名を変えた再testを防ぐ。旧`frame14.py evaluate`と両方を実行しない。
 
 ```bash
 python3 -B tools/nnue-training/test_contrast.py freeze \

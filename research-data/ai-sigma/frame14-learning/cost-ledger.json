@@ -1,0 +1,45 @@
+{
+  "UTC": "2026-10-04T00:22:22.718599+00:00",
+  "CPU_affinity": [
+    2
+  ],
+  "torch_threads": [
+    1,
+    1
+  ],
+  "GPU": 0,
+  "samples_total": 1022424,
+  "heavy_jobwall_seconds": 17.674083258025348,
+  "registered_static_jobwall_seconds": 5.852738443936687,
+  "peak_family_RSS_B": 857710592,
+  "all_jobs_waited": true,
+  "generation_receipt": "research-data/ai-sigma/frame14-teachers/cost-ledger.json",
+  "generation_receipt_SHA": "5cbab803c6a062387678d3c1cd241c2439fa929717ebb18149171c4aaef368e7",
+  "incremental_train24_to96_generation_jobwall": {
+    "native194-train04-r1": 116.5464172270149,
+    "native194-train02-r1": 116.6278855369892,
+    "native194-train03-r1": 111.6750721950084
+  },
+  "incremental_train24_to96_generation_total": 344.8493749590125,
+  "all144_generation_jobwall": 691.35614519706,
+  "generation_export_helper_costs": {
+    "prepare": 0.206989253,
+    "partial_QF1_export": 2.058942741015926,
+    "failed_heap192_export": "wall unmeasured <=40s hard timeout; NN0/failed source and error preserved",
+    "following_connect_r1_failure": "wall unmeasured <=120s; no commands/NN before failed stale-summary assertion",
+    "old_unmetered_preview_and_interim_export": "NN0, each hard40s; conservative upperbound120s for3 calls",
+    "helper_repair_export": 3.3213774249888957,
+    "helper_final_QF1": 2.8966013729805127,
+    "pack": 0.9641001800191589,
+    "Git_and_reports": "not production rate; finalhelpers separately; LLM/static preparation calendar wall separate"
+  },
+  "generation_preservation": {
+    "Git_full_save_wall_s": 99.00233086600201,
+    "Git_restore_wall_s": 1.3090203989995643,
+    "separate_from_production_jobwall": true,
+    "additional_small_Git_Beads_reporting_cost": "bounded management helpers; receipts separately"
+  },
+  "own_management_wall_not_fully_timed": "Git/report/Beads short command wall separately in tool receipts; not a production rate",
+  "pipeline_elapsed_receipt_to_test_end_s": 2932.877661,
+  "test_repeated": false
+}

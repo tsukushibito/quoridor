@@ -1,0 +1,40 @@
+{
+  "id": "compare-curves-r1",
+  "kind": "static",
+  "UTC": "2026-10-04T00:21:37.169074+00:00",
+  "identity": {
+    "pid": 3812466,
+    "ppid": 3812384,
+    "pgrp": 3812466,
+    "tick": "32625743",
+    "RSS": 0,
+    "cmd": "",
+    "affinity": [
+      2
+    ]
+  },
+  "command": [
+    "python3",
+    "-B",
+    "tools/nnue-training/compare.py",
+    "--runs",
+    "research-data/ai-sigma/frame14-learning/runs/frame14-train24-r1",
+    "research-data/ai-sigma/frame14-learning/runs/frame14-train48-r1",
+    "research-data/ai-sigma/frame14-learning/runs/frame14-train96-r1",
+    "--output",
+    "research-data/ai-sigma/frame14-learning/curves/comparison"
+  ],
+  "wall_seconds": 0.11276633100351319,
+  "peak_family_RSS": 30932992,
+  "exit": 0,
+  "reason": "completed",
+  "child_waited": true,
+  "remaining": [],
+  "current_exact_identity_absent": true,
+  "samples_charged": 0,
+  "sample_cap": 0,
+  "CPU": [
+    2
+  ],
+  "GPU": 0
+}

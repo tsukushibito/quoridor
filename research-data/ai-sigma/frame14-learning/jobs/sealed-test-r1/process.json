@@ -1,0 +1,45 @@
+{
+  "id": "sealed-test-r1",
+  "kind": "heavy",
+  "UTC": "2026-10-04T00:19:28.877661+00:00",
+  "identity": {
+    "pid": 3809451,
+    "ppid": 3809381,
+    "pgrp": 3809451,
+    "tick": "32612706",
+    "RSS": 9887744,
+    "cmd": "/home/vscode/.cache/inference/envs/quoridor-training/bin/python -B tools/nnue-training/test_contrast.py evaluate --freeze research-data/ai-sigma/frame14-learning/test-freeze-v2.json --freeze-sha 45c27fbf896f7c205b393253fa89a39736fe5ef1805c4c9f7c9dfafd463dd84d --output research-data/ai-sigma/frame14-learning/test-r1 --samples 4380 --seconds 110 ",
+    "affinity": [
+      2
+    ]
+  },
+  "command": [
+    "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "-B",
+    "tools/nnue-training/test_contrast.py",
+    "evaluate",
+    "--freeze",
+    "research-data/ai-sigma/frame14-learning/test-freeze-v2.json",
+    "--freeze-sha",
+    "45c27fbf896f7c205b393253fa89a39736fe5ef1805c4c9f7c9dfafd463dd84d",
+    "--output",
+    "research-data/ai-sigma/frame14-learning/test-r1",
+    "--samples",
+    "4380",
+    "--seconds",
+    "110"
+  ],
+  "wall_seconds": 2.1400847639888525,
+  "peak_family_RSS": 757215232,
+  "exit": 0,
+  "reason": "completed",
+  "child_waited": true,
+  "remaining": [],
+  "current_exact_identity_absent": true,
+  "samples_charged": 3285,
+  "sample_cap": 4380,
+  "CPU": [
+    2
+  ],
+  "GPU": 0
+}

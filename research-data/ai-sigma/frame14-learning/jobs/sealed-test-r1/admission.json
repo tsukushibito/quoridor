@@ -1,0 +1,92 @@
+{
+  "UTC": "2026-10-04T00:19:26.737417+00:00",
+  "own": {
+    "id": "quoridor-4lc.195",
+    "status": "in_progress",
+    "assignee": "codex:01a0f31c-2e4b-7170-82c5-69e1428c2418",
+    "labels": [
+      "continuation-active",
+      "frame14",
+      "initial-window-ended"
+    ]
+  },
+  "goal": {
+    "id": "quoridor-4lc",
+    "status": "in_progress",
+    "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+    "labels": [
+      "continuation-active",
+      "frame14",
+      "initial-window-ended"
+    ]
+  },
+  "active": [],
+  "services": [
+    {
+      "pid": 3762788,
+      "ppid": 1,
+      "pgrp": 3762788,
+      "tick": "32327414",
+      "RSS": 190197760,
+      "cmd": "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python -B /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/scheduler.py run --config /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json --state-dir /workspaces/quoridor/.artifacts/research-team/scheduler-sigma-continuation-20261001 ",
+      "affinity": [
+        0
+      ]
+    },
+    {
+      "pid": 3762803,
+      "ppid": 1,
+      "pgrp": 3762803,
+      "tick": "32327429",
+      "RSS": 21831680,
+      "cmd": "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python -B /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/watch.py --run-dir /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame14-ee73f985-00e3-4a1c-960e-1e87143fb693 --expectations /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame14-ee73f985-00e3-4a1c-960e-1e87143fb693/expectations.json ",
+      "affinity": [
+        0
+      ]
+    }
+  ],
+  "scheduler_owned": null,
+  "next_observe": 1791073913.926039,
+  "CPU": [
+    2
+  ],
+  "threads": 1,
+  "RAM_guard": 1879048192,
+  "parent_RSS_forecast": 3433254912,
+  "storage": {
+    "UTC": "2026-10-04T00:19:09.372085+00:00",
+    "transfer_confirmed": true,
+    "transfer_path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/storage-transfer.json",
+    "transfer_sha256": "f7b87f62242f23a20c99dde866ca3558531da140079a110457072761914ae6b5",
+    "reservation_B": 67108864,
+    "guard_B": 58720256,
+    "forecast_B": 52000000,
+    "old_hypothesis_20MiB_discount": 0,
+    "parent_addition": 0,
+    "forecast_includes": "export refs/checkpoints/history/test scalars/Git/temp/all remainingmetadata",
+    "actual_owned_files_B": 4230265,
+    "remaining_inclusive_forecast_B": 47769735,
+    "AST_latest_pass": true,
+    "model_loaded": false,
+    "testlabels_read": false
+  },
+  "command": [
+    "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "-B",
+    "tools/nnue-training/test_contrast.py",
+    "evaluate",
+    "--freeze",
+    "research-data/ai-sigma/frame14-learning/test-freeze-v2.json",
+    "--freeze-sha",
+    "45c27fbf896f7c205b393253fa89a39736fe5ef1805c4c9f7c9dfafd463dd84d",
+    "--output",
+    "research-data/ai-sigma/frame14-learning/test-r1",
+    "--samples",
+    "4380",
+    "--seconds",
+    "110"
+  ],
+  "sample_upper": 4380,
+  "newscience": "2026-10-04T02:45:00Z",
+  "stop": "2026-10-04T02:50:00Z"
+}

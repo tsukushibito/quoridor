@@ -1,0 +1,44 @@
+{
+  "id": "plot-rootmean-r1",
+  "kind": "static",
+  "UTC": "2026-10-04T00:20:40.721046+00:00",
+  "identity": {
+    "pid": 3811398,
+    "ppid": 3811348,
+    "pgrp": 3811398,
+    "tick": "32620101",
+    "RSS": 0,
+    "cmd": "",
+    "affinity": [
+      2
+    ]
+  },
+  "command": [
+    "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "-B",
+    "tools/nnue-training/plot.py",
+    "--runs",
+    "research-data/ai-sigma/frame14-learning/runs/frame14-train24-r1",
+    "research-data/ai-sigma/frame14-learning/runs/frame14-train48-r1",
+    "research-data/ai-sigma/frame14-learning/runs/frame14-train96-r1",
+    "--axis",
+    "train_samples_seen",
+    "--metric",
+    "rootmean",
+    "--output",
+    "research-data/ai-sigma/frame14-learning/curves/rootmean"
+  ],
+  "wall_seconds": 0.052641466027125716,
+  "peak_family_RSS": 14249984,
+  "exit": 1,
+  "reason": "completed",
+  "child_waited": true,
+  "remaining": [],
+  "current_exact_identity_absent": true,
+  "samples_charged": 0,
+  "sample_cap": 0,
+  "CPU": [
+    2
+  ],
+  "GPU": 0
+}
