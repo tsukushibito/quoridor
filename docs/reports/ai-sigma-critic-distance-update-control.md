@@ -1,0 +1,9 @@
+# critic214 選定前見解
+
+213の一条件は、同関数の標準化利益に距離列の更新増幅が関与するかを狭く調べる低費用対照として妥当。Adam proposalのmomentを保ち、実適用だけをsigma倍にするので、旧209のraw学習を再現する試験ではない。全層の後続勾配・momentとbias結合も変わる。利益が消える/残るどちらも唯一原因の認定にはしない。
+
+最大1の重要確認は、**丸め後の実適用差分をproposal・理想sigma倍と別fieldで残すこと**。before+proposal*sigmaのf32保存後のdifferenceをappliedとし、raw=applied/sigma・rawbias=dbprime−sum(applied*mu/sigma)を同before/afterから計算する。理想上raw=proposalだが、実値の完全一致やapplied/proposalの厳密sigma一致を必須にすると、ゼロproposalや丸め差を科学失敗へ誤分類し得る。有限nonzeroと丸め許容を確認し未保存個々deltaの再認証はしない。追加forwardや条件を求めない。
+
+有力保留は同標準化のjointseed再現。一般的な再現性には有益だが、今は更新増幅の交絡を直接操作する一条件の方が選定問いを狭める。中心化bias/Adam軌跡の限界を残し、実結果到着後に次一方向へ更新する。再用validationと旧test未閲覧境界を維持し、全稿承認gate0。
+
+科学結果は未着。214は新120s、旧212/210予算は変更しない。
