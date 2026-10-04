@@ -95,3 +95,15 @@ OOF最小・1e-10同値なら大λという結果前規則でλ=1を選択した
 結果payloadはXZへlossless圧縮し、archive-manifestに元uncompressed scientific SHA/復元PASSと元gzip wrapper SHAの来歴を残した。gzip wrapper byte同一は主張せず、必要JSON/JSONL payloadはexact復元済み。科学sourceは当時gzip出力版のまま凍結、正本は各XZとmanifest。source/input/result/currentPIDtick停止bindingはscience-source-stop-receipt.jsonを219/coordinatorへpack前に実配送した。旧phase1/2/3の正本は変更しない。phase4独立219の裁定は別、現在owner自己検証結果。
 
 次最大1案は既保存frozen400hidden32を固定λ=1で再読出しするNN0対照。rawのCVで示唆された正則化をlearned表示へ適用し、元λ=.01からの残差転移を検査できる。raw626とhidden32ではpenalty geometryが異なるので最適λの移植や唯一原因としない。standard200 age案は有力保留、新現在配分前に実行しない。
+
+## phase5: 共通支持とgap差の分解
+
+保存λ1 OOF4653行とfullfit validation1248行を同rootmeanへjoinし、既6opening cohort×early/middle/lateの18cellを固定した。重みは元 `1/(96又は24*n_fullgame)`、cell条件付き統計はこの重みをcellmassで正規化した。独自のcell内game等重みへ置換しない。OOFのfoldD/72又は78gamefitと、valのglobalD/96gamefitは異なる。
+
+全gap差 .088959666 = composition .002345703 + within .086704123 +片側未観測 −.000090160。丸め前reconciliation差0。共通セル内の差が点推定の大部分。opening20 lateはOOFのみ、残りlateは両側未観測をunknownで保持した。OOF/val残差相関 .27949/.08421、振幅RMS .26011/.31786。全体constantbias部分は6.77e-6/1.61e-6で小さい。val unclippedgap .072088392→clipped .063746642へ減少するがOOFunclippedは未保存なので、全clip因果は評価しない。
+
+固定予測game-paired bootstrap2000/seed2161605で、OOF差95%[-.072660562,.021157300]、val差[-.060845969,.191129216]、val-minusOOF差[-.041335851,.223929477]。いずれも0を跨ぐ。固定fit・λ選択・overlapfold条件付きの探索区間であり、選択/fold依存の全不確かさを捕えない。within点推定を純粋covariateshift/teachertruthの因果へ変換しない。
+
+実job07:20:34.433662–07:20:34.648656、CPU2/BLAS1 wall .215337秒、peak94191616B<448MiB、exit0/全wait/currentexact不在。NN/forward/fit/optimizer/backward/GPU/教師/test/game追加0、NN29505不変。元static139.412996+source保守5+math .215337=144.628333/180。phase5 storage guardは統括新配分15MiB、旧phase4の14MiB証拠は不変更。phase5はowner有限確認/統括compact読取、219へ新算術や旧120resetを要求しない。
+
+phase5時点の次1案は既知の表現可能な距離関係target(tanh線形距離、対ReLUで実現可能)の学習sanityだったが、後続統括はphase6 fixedλ1/別fold安定性を優先して実配分した。学習sanity/featureage/hiddenλ1/独立testを自動開始しない。全18cell/元weight/reconciliation/固定prediction bootstrap/game別はsupport-gap-analysis/result.json.gzへ保存。
