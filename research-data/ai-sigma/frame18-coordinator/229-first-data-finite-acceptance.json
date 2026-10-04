@@ -1,0 +1,143 @@
+{
+  "UTC": "2026-10-04T12:54:32.773169+00:00",
+  "phase": "229 first data math only",
+  "finite_data_acceptance": true,
+  "resultSHA": "655d112b432ec31484e2423490b18146f0198c2a1e903943f023e83b24a82c2d",
+  "source_hash_checks": {
+    "research-data/ai-sigma/frame18-growth-learning-independent/check-data.py": true,
+    "research-data/ai-sigma/frame18-growth-learning-independent/run-data.py": true
+  },
+  "selected_input_hash_checks": {
+    "research-data/ai-sigma/frame18-data-learning/generation-final-stop-compact.json": true,
+    "research-data/ai-sigma/frame18-data-learning/dataset-v1/quantity-freeze.json": true,
+    "research-data/ai-sigma/frame18-data-learning/dataset-v1/adapter/fixed-maximum-mask.json": true,
+    "research-data/ai-sigma/frame18-data-learning/learning-plan-v1/before-curves-selection-rule.json": true
+  },
+  "aggregate": {
+    "PASS": true,
+    "new_games": 672,
+    "all_planned_with_alias": 768,
+    "partition": {
+      "train": 576,
+      "validation": 96,
+      "test": 96
+    },
+    "rows": 37123,
+    "new_rows": 32520,
+    "alias_rows": 4603,
+    "eligible_rows": {
+      "test": 4847,
+      "train": 27463,
+      "validation": 4813
+    },
+    "zeroeligible_games": 0,
+    "stages": {
+      "192": {
+        "positive_games": 192,
+        "rows": 9025,
+        "cohorts": {
+          "opening-8": 32,
+          "opening-12": 32,
+          "opening-16": 32,
+          "opening-20": 32,
+          "opening-24": 32,
+          "opening-28": 32
+        },
+        "training_samples": 256000,
+        "expected_samples_per_game": 1333.3333333333333,
+        "samples_over_rows": 28.365650969529085,
+        "oldscale_SHA": "68f8b43a0e4408a1546f8fa2652ffdf21f1f7bdcfbac9a25a86ac666b27aa4ee",
+        "seed": 19080311,
+        "actual_initial_tensor_or_function_receipt": "pending; config equality alone is not reauthentication"
+      },
+      "576": {
+        "positive_games": 576,
+        "rows": 27463,
+        "cohorts": {
+          "opening-8": 96,
+          "opening-12": 96,
+          "opening-16": 96,
+          "opening-20": 96,
+          "opening-24": 96,
+          "opening-28": 96
+        },
+        "training_samples": 256000,
+        "expected_samples_per_game": 444.44444444444446,
+        "samples_over_rows": 9.321632742235007,
+        "oldscale_SHA": "68f8b43a0e4408a1546f8fa2652ffdf21f1f7bdcfbac9a25a86ac666b27aa4ee",
+        "seed": 19080311,
+        "actual_initial_tensor_or_function_receipt": "pending; config equality alone is not reauthentication"
+      }
+    },
+    "secondary": {
+      "small_step": 400,
+      "large_step": 1200,
+      "G_small": 192,
+      "G_large": 576,
+      "distance": 0.0,
+      "rule": "minimum saved abs(step/Glarge-400/Gsmall); tie early; before curves"
+    },
+    "physicalNN_allattempt": 1849212,
+    "guardian_allattempt": 2175.6067399219028
+  },
+  "process": {
+    "startUTC": "2026-10-04T12:48:47.315002+00:00",
+    "endUTC": "2026-10-04T12:48:48.964659+00:00",
+    "PID": 173117,
+    "tick": "37111144",
+    "exit": 0,
+    "wait": true,
+    "current_exact_absent": true,
+    "wall": 1.6496535739861429,
+    "reason": null,
+    "newNN": 0,
+    "CPU": [
+      0
+    ],
+    "cap90_no_reset": true
+  },
+  "stop": {
+    "UTC": "2026-10-04T12:52:08.345302+00:00",
+    "stage": "first data arithmetic only; task229 remains active",
+    "source_stopped": [
+      "check-data.py",
+      "run-data.py"
+    ],
+    "sourceSHA": {
+      "research-data/ai-sigma/frame18-growth-learning-independent/check-data.py": "5e2d82a833737ab32960419a6c1aa2817fbfd3c04b98203f7e14f7b7bbe68502",
+      "research-data/ai-sigma/frame18-growth-learning-independent/run-data.py": "89f9f76df9096333779a7b0b1699555e4533eac21ebc116e71c67d42525a9757"
+    },
+    "wait": true,
+    "PID": 173117,
+    "tick": "37111144",
+    "current_exact_absent": true,
+    "source_charge": 90,
+    "data_calc_charge": 90,
+    "remaining_calc_cap": 90,
+    "actualjobs": 1,
+    "newNN": 0
+  },
+  "admission_gap": "math did not prebind backgroundlearn both-command cleanup; posthoc12:47:22.389 cleanup precedes12:48:47 arithmetic; preserve omission and do not retrofit admission",
+  "background_learning_result": {
+    "job_id": "e18b2b4a-49e4-43ed-9000-df47c3d638e7",
+    "outcome": "succeeded",
+    "error": null,
+    "exit_code": 0,
+    "finished_at": "2026-10-04T12:47:22.389586+00:00",
+    "wall_seconds": 182.6351656949846,
+    "remaining": [],
+    "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+    "cleanup_complete": true,
+    "log_bytes_seen": 933,
+    "log_bytes_retained": 933
+  },
+  "background_learning_notification": {
+    "status": "delivered",
+    "updated_at": "2026-10-04T12:47:25.486211+00:00",
+    "marker": "[research-job:e18b2b4a-49e4-43ed-9000-df47c3d638e7]",
+    "turn_id": "01a106f4-712b-78e1-8a9b-69a3b94a35b3"
+  },
+  "scope": "selected current source/metadata hashes, independent saved math only; no labels/test/rootforward re-evaluation",
+  "229_status": "in_progress, remaining90/onefinaljob only after current learning/test and background command stop; no reset",
+  "learning_gain": "not evaluated by this data acceptance"
+}
