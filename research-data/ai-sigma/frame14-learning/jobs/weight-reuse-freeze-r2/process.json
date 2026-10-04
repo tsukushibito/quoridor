@@ -1,0 +1,43 @@
+{
+  "id": "weight-reuse-freeze-r2",
+  "kind": "static",
+  "UTC": "2026-10-04T00:18:47.778861+00:00",
+  "identity": {
+    "pid": 3808595,
+    "ppid": 3808403,
+    "pgrp": 3808595,
+    "tick": "32608801",
+    "RSS": 0,
+    "cmd": "",
+    "affinity": [
+      2
+    ]
+  },
+  "command": [
+    "python3",
+    "-B",
+    "tools/nnue-training/test_contrast.py",
+    "freeze",
+    "--candidate-freeze",
+    "research-data/ai-sigma/frame14-learning/candidate-freeze.json",
+    "--stage24",
+    "research-data/ai-sigma/frame14-learning/runs/frame14-train24-r1",
+    "--stage96",
+    "research-data/ai-sigma/frame14-learning/runs/frame14-train96-r1",
+    "--output",
+    "research-data/ai-sigma/frame14-learning/test-freeze-v2.json"
+  ],
+  "wall_seconds": 0.05271070601884276,
+  "peak_family_RSS": 14254080,
+  "exit": 0,
+  "reason": "completed",
+  "child_waited": true,
+  "remaining": [],
+  "current_exact_identity_absent": true,
+  "samples_charged": 0,
+  "sample_cap": 0,
+  "CPU": [
+    2
+  ],
+  "GPU": 0
+}

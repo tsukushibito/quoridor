@@ -1,6 +1,7 @@
 """One sealed test opening: selected candidate and predeclared last-last contrast."""
 import argparse
 import gzip
+import hashlib
 import json
 from pathlib import Path
 import random
@@ -107,23 +108,30 @@ def evaluate(a):
         import torch
         from model import Model,inputs
         torch.set_num_threads(1);torch.set_num_interop_threads(1);torch.use_deterministic_algorithms(True)
-        x=inputs(rows);predictions={};by_sha={}
+        x=inputs(rows);predictions={};by_weight={};weight_sha_by_model={};reused={}
         for name,r in artifacts.items():
-            h=r['checkpoint_sha256']
-            if h in by_sha:predictions[name]=by_sha[h];continue
             cp=torch.load(r['checkpoint'],map_location='cpu',weights_only=True)
             if cp['model_config']!=r['config']['model'] or cp['dataset_sha256']!=r['dataset_sha256']:raise ValueError('checkpoint provenance')
+            # Checkpoint metadata/filename can differ while the actual weights are identical.
+            h=hashlib.sha256(b''.join(v.detach().cpu().numpy().tobytes() for v in cp['model'].values())).hexdigest()
+            weight_sha_by_model[name]=h
+            if name=='initial' or (name=='candidate' and f['best_step']==0):
+                if h!=f['initial_state_sha256']:raise ValueError('initial weightSHA mismatch')
+            key=(digest(cp['model_config']),h)
+            if key in by_weight:
+                predictions[name]=by_weight[key][1];reused[name]=by_weight[key][0];continue
             model=Model(r['config']['model']);model.load_state_dict(cp['model']);model.eval();values=[]
             with torch.inference_mode():
                 for begin in range(0,len(rows),1024):
                     if time.monotonic()-start>=a.seconds:raise ValueError('test wall limit')
                     end=min(begin+1024,len(rows));count+=end-begin
                     values.extend(model(*(v[begin:end] for v in x)).tolist())
-            by_sha[h]=values;predictions[name]=values
+            by_weight[key]=(name,values);predictions[name]=values
         predictions['constant']=[f['constant']]*len(rows)
         ix=[i for i,r in enumerate(rows) if mask['rows'][r['id']]['primary_eligible']]
         selected=[rows[i] for i in ix]
-        result={'freeze_sha256':a.freeze_sha,'samples':count,'unique_NN_models':unique,'warm':0,'GPU':0,'elapsed_s':time.monotonic()-start,
+        result={'freeze_sha256':a.freeze_sha,'samples':count,'unique_NN_models':len(by_weight),'unique_checkpoint_files':unique,
+                'weight_SHA_by_model':weight_sha_by_model,'prediction_reused':reused,'warm':0,'GPU':0,'elapsed_s':time.monotonic()-start,
                 'planned_test_games':24,'all_rows':len(rows),'primary_rows':len(ix),'actual_test_games':len({r['group'] for r in rows}),
                 'zero_eligible_games':sorted(g for g,v in mask['games'].items() if v['split']=='test' and not v['eligible']),
                 'models':{},'teacher_rootmean_is_not_truth':True,'strength_claim':False,'test_reselection_allowed':False}
