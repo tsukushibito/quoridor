@@ -1,0 +1,25 @@
+{
+  "UTC": "2026-10-04T13:18:11.378265+00:00",
+  "route": "private Node-native-hosted QF1-f32 Scale + full/delta RuleA negamax, no Rust migration in first probe",
+  "candidate_freeze_SHA": "2bac8f1f7ad87b83ac0549c01bb32eb0c8d0a2f39a05c717420e20cd668e6a60",
+  "model_loaded": false,
+  "future_authorization_required": true,
+  "parity_inputs_proposed": 27,
+  "parity_abs": 1e-05,
+  "parity_rtol": 0.0001,
+  "action_roots": 4,
+  "action_nodes_each": 2048,
+  "games_proposed": 4,
+  "game_comparator": "train-fitD same alpha-beta same wall",
+  "heavy_seconds_proposed": 480,
+  "sample_cap_proposed": 1700000,
+  "scope_proposed_B": 16777216,
+  "static_task_real_science": 0,
+  "limits": [
+    "rootmean teacher != minimax leaf truth",
+    "not Rust/Wasm SIMD",
+    "not Sigma strength",
+    "no test reselection",
+    "capacity/history/epoch interactions retained"
+  ]
+}
