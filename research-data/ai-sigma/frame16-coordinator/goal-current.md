@@ -47,3 +47,5 @@ Sigma固定751186のC++ selfplay一次sourceを統括が再閲覧済み。thread
 最新明示user「上限撤廃」はSupervisor 180秒1turn capをnull等で撤廃する。period20分、09:50:50運用end、pause/end exactownedのみ回収/他者turn保護/通信timeout/子資源guard/settings/親終了は維持。92solewriterへ08:48:53同active実steerでmain scheduler/tests/docsと研究copy/config/contract/prompt/有効親本文の秩序停止・nullable回帰・validate・再開/loaded・実点検成果到達を配分。rootの同92直接補足と整合し、統括は重複編集/適用turnを作らない。[契約](../../research-data/ai-sigma/frame16-coordinator/92-unbounded-supervisor-recovery-contract.md)。
 
 旧scheduler08:51:43 operator-stop、ownednull/exactabsence・外部NN停止falseを保持。現在ファイルconfig/contract nullを観測したが新running-loadedは未確認。旧nextquietを新freeとしない。codec静的は継続、実science前に正current runtime/owned/実CPU子/RAM/GPUを本人freshadmitする。LLM active人数だけでは拒否せず、物理競合・所有回収は調整。nullableloadedと180秒越え無中断、実tool→判断/通知の到達を分けて後続観測する。旧4失敗と運用gapは保持する。
+
+09:06 更新後運用binding受領・現物照合。09:04:33通常freshstart、scheduler6049/35765166・monitor6062/35765187同boot、24currentSHA一致・config/contract/owned null、親mainmirror bcbff49c同SHA。92 checker回収済み。新正monitorを221/222へ実配送し元費内scienceは本人freshphysicsで続行、運用binding待ち解消。実180越え/公開点検成果はまだ未確認、旧失敗/gap保持。
