@@ -1,0 +1,47 @@
+{
+  "issue": "quoridor-4lc.92",
+  "frame": "16-extension17",
+  "at": "2026-10-04T09:07:56.094351+00:00",
+  "main_owned_sources": {
+    "scripts/dev/research-scheduler.py": {
+      "sha256": "51492dca1ddc3f67d73a2b119427aafd831623adfd1638bb5251422759b0a770",
+      "bytes": 27515
+    },
+    "tools/research-team/test_scheduler.py": {
+      "sha256": "fc7a93791ee63d757ab26ca4557543ee68f340a5ff9772d8dc01958642d9b935",
+      "bytes": 23530
+    },
+    "tools/research-team/examples/scheduler.json": {
+      "sha256": "8472d3be10788a46eed4c79b87ab4344180e5120e0eaa28ee2441d7d591715ce",
+      "bytes": 542
+    },
+    "tools/research-team/examples/scheduler-contract.json": {
+      "sha256": "645fb14603b7cb165531565e43ea3e7084fdabeba0852b2d5dada8361da2e5a1",
+      "bytes": 210
+    },
+    "docs/development/research-scheduler.md": {
+      "sha256": "8fb33e591b436a1309b4b12bcdaa9a1f3ba0e68bd54477a5b0f4f9c2e52cd584",
+      "bytes": 11558
+    }
+  },
+  "archive": "main-owned-source.tar.gz",
+  "restore_root": "/workspaces/quoridor",
+  "purpose": "Only changed main-owned tooling source; no research checkout full mirror",
+  "model_effort_changed": false,
+  "scientific_execution": false,
+  "future_whole_turn_success": false,
+  "archive_bytes": 17426,
+  "restoration_readback_equal": true,
+  "main_base_commit": "36dfc6b5bd6c8ff9a00016a89455f18c0a790f84",
+  "checker_cpu_window": "standard40 9.327s/runtime28 3.140s/guard15 <1s, CPU0; all ended before generation. 221 updated08:58:26 static scientific_execution0 at08:59 notes.",
+  "source_extra_after_live": "README.md only, not in24watchhash; corrected old180/frame8 generic documentation. Watched executable sources unchanged after09:04start.",
+  "current_storage": {
+    "steward_allocated_bytes": 31985664,
+    "supervisor_held_bytes": 140951552,
+    "supervisor_current_frame_bytes": 0,
+    "supervisor_historical_held_bytes": 140951552,
+    "forecast_bytes": 2097152,
+    "additional_reservation_bytes": 0,
+    "historical_parent_charge_released": false
+  }
+}

@@ -15,6 +15,41 @@ spec=importlib.util.spec_from_file_location('readguard',HERE/'guard.py')
 g=importlib.util.module_from_spec(spec);spec.loader.exec_module(g)
 os.sched_setaffinity(0,{0});os.environ.update(g.ENV)
 os.environ['PYTHONDONTWRITEBYTECODE']='1'
+# Focused nullable owned-clock regression; no live dispatch/history replay.
+if '--unbounded-clock' in sys.argv:
+    import argparse
+    parser=argparse.ArgumentParser();parser.add_argument('--unbounded-clock',action='store_true');parser.add_argument('--output',type=Path,required=True)
+    args=parser.parse_args();args.output.mkdir(parents=True,exist_ok=True)
+    wall=g.OPERATION_BEGIN+dt.timedelta(hours=1);run,turn=str(uuid.uuid4()),str(uuid.uuid4())
+    owned={'run_id':run,'turn_id':turn,'thread_id':g.THREAD,'started_at':wall.isoformat(),'max_turn_seconds':None}
+    b=g.binding(owned,run,turn,wall=wall,mono=1000,boot='fixture');checks=[]
+    def check(name,fn,reject=False):
+        try:fn()
+        except g.Rejected:assert reject,name
+        else:assert not reject,name
+        checks.append(name)
+    for age in (181,1201):check('elapsed-'+str(age),lambda age=age:g.admit(b,'read_start',wall=wall+dt.timedelta(seconds=age),mono=1000+age))
+    check('hard-end',lambda:g.admit(b,'finish',wall=g.OPERATION_END,mono=1000),True)
+    check('finish-reserve',lambda:g.admit(b,'finish',wall=g.OPERATION_END-dt.timedelta(seconds=35),mono=1000,required_seconds=36),True)
+    check('wrong-turn',lambda:g.binding(owned,run,str(uuid.uuid4()),wall=wall,mono=1000),True)
+    check('unknown-limit',lambda:g.binding({k:v for k,v in owned.items() if k!='max_turn_seconds'},run,turn,wall=wall,mono=1000),True)
+    for value in (0,True,-1):check('invalid-'+str(value),lambda value=value:g.binding({**owned,'max_turn_seconds':value},run,turn,wall=wall,mono=1000),True)
+    finite=g.binding({**owned,'max_turn_seconds':180},run,turn,wall=wall,mono=1000,boot='fixture')
+    check('finite-kept',lambda:g.admit(finite,'finish',wall=wall+dt.timedelta(seconds=181),mono=1181),True)
+    migrated=g.binding(owned,run,turn,prior=finite,wall=wall+dt.timedelta(seconds=181),mono=1181,boot='fixture')
+    assert migrated['mapped_start_monotonic']==finite['mapped_start_monotonic'] and migrated['turn_deadline_utc'] is None
+    checks.append('migration-keeps-clock')
+    core=[{'id':g.GOAL,'status':'in_progress','labels':[]},{'id':g.SELF,'status':'in_progress','assignee':'codex:'+g.THREAD,'labels':[]}]
+    check('pause',lambda:g.require_unpaused([core[0],{**core[1],'labels':['paused-by-user']}]),True)
+    check('unknown-owner',lambda:g.require_unpaused([core[0],{**core[1],'assignee':'unknown'}]),True)
+    live=g.binding({**owned,'started_at':(g.utc_now()-dt.timedelta(seconds=181)).isoformat()},run,turn)
+    assert g.run_child([sys.executable,'-B','-c','import json;print(json.dumps({"after180":True}))'],args.output/'child.json',live,timeout=2)['after180']
+    checks.append('real-child-after180')
+    check('child-timeout',lambda:g.run_child([sys.executable,'-B','-c','import time;time.sleep(5)'],args.output/'timeout.json',live,timeout=.1),True)
+    assert json.loads((args.output/'timeout.json').read_text())['reaped']
+    g.write(args.output/'verification.json',{'checks':checks,'passed':len(checks),'live_dispatch':False,'self':g.proc(os.getpid())})
+    print(json.dumps({'passed':len(checks)}));raise SystemExit(0)
+
 # Focused 106 regression mode; no historical scenario replay or live dispatch.
 if '--summary-only' in sys.argv:
     import argparse

@@ -1,10 +1,10 @@
-# 継続枠・運用監督 / quoridor-4lc.40 / 契約18・frame16-extension17
+# 継続枠・運用監督 / quoridor-4lc.40 / 契約19・frame16-turn-unbounded
 
 現c760 common/supervisor本文、[親版17](ai-sigma-continuation-20261001.md)、[研究記録規約](../development/ai-research-experiments.md)を継承。担当supervisor 01a0f6b5-b1bd-7752-b0bb-74a336e459a4、報告coordinator、運用owner92 steward。研究判断は現roleを参照し、過去枠の特定学習手順・条件数を今枠へ重ねない。目標/重要な未観測・競合説明/既知方法・選定/保留の理由・費用・採否/適用/次観測での効果を外部視点から評価する。提案送信・正常稼働・完了件数を効果へ置換しない。
 
 許可は観測/自己issueと短報告/自己tool回収のみ。NN/実験/build/取得/worker/委譲/他者code-config-registry編集/他者interrupt-kill0。現在goal/selfのpause・担当と動的課題/ready/依存/契約をguard observeで有界収集し、必要inspect/refreshと一時障害の各command最大1回retryを残時間内で行える。未知所有/namespace/boot-start-identity不一致/pause/硬期限を迂回しない。取得不能と未計測費用は不明とする。
 
-周期1200秒・owned turn180秒、CPU0単1/RAM1GiB、現在supervisor32MiB/steward112MiB guardを維持。時計はrun/turn/開始/bootへ固定、反復reset0。timeout＋子回収2秒＋報告30秒が収まる新commandだけ開始。observe成立後に短い暫定判断/未確認/根拠をfinishへ先保存、目安開始90秒/必要残り36秒超を守る。90/120秒は計画目安で追加研究判断の恒久禁止ではない。自己子のtimeoutと回収、notes/backup/stop記録を保存する。
+周期1200秒・owned turn時間上限なし（max_turn_seconds=null、ユーザー明示）、CPU0単1/RAM1GiB、現在supervisor32MiB/steward112MiB guardを維持。時計と09:50:50UTCの絶対運用endはrun/turn/開始/bootへ固定、反復reset0。180秒elapsedのみのinterrupt0、前owned activeなら次周期skip/二重開始0。timeout＋子回収2秒＋報告30秒が収まる新commandだけ開始。observe成立後に短い暫定判断/未確認/根拠をfinishへ先保存、必要残り36秒超を絶対運用endに対して確保する。早い保存は推奨で追加研究判断の時間上限ではない。自己子のtimeoutと回収、notes/backup/stop記録を保存する。
 
 wrapperはbeads.sh、DB直読0。pipe4MiB/selected64KiB/guardrun384KiB・失敗余裕8KiB/独立handoff16KiB/notes UTF8最大1024byte/run全体forecast512KiB/command最大24（authorization/finish/backup込み）。元size/SHA/command/exit/選択範囲と不足を保存し同run同selectionは参照再利用。description通常先頭3072byte/notes最新1024byte、不足はfield/offsetの最大8192byte追加readで判別し無言切捨てをpassへしない。過去raw/失敗を保持、cap超過で次spawn0/盲目retry0、旧量減額/移管/予約追加で救済0。実allocated＋forecast検査とwatch標本の限界を区別する。
 

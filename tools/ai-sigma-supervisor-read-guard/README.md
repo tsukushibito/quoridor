@@ -16,11 +16,13 @@ Temporary metadata failures can retry at most once per command. Pause,
 unknown ownership, changed identity/start/boot, and hard deadlines never retry
 or bypass the guard. Every attempt retains timeout/exit/child cleanup evidence.
 
-The turn remains 180 seconds. 90/120 seconds are planning checkpoints;
+An explicit `max_turn_seconds: null` removes the owned turn duration cap.
+90/120 seconds are optional planning checkpoints;
 new metadata commands must fit their full timeout plus child cleanup and a
 30-second reporting reserve. Commands are not launched if they cannot finish.
-Repeated invocation never resets this budget. The current absolute 14:10:49UTC (frame8) operation
-end also applies. Only this invocation's process group is collected; no foreign
+Repeated invocation never resets the original owned clock. The current absolute
+operation end is bound by `OPERATION_END` and the effective operational contract;
+null removes only the duration cap, not pause, operation end, or command timeout. Only this invocation's process group is collected; no foreign
 turn/process is stopped. Go/cgo inherits no artificial 1GiB AS restriction;
 combined RAM is sampled RSS, with unobserved instantaneous peaks disclosed.
 

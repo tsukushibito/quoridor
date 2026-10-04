@@ -1,0 +1,60 @@
+{
+  "at": "2026-10-04T09:07:00.512865+00:00",
+  "thread_status": {
+    "type": "active",
+    "activeFlags": []
+  },
+  "turns": {
+    "data": [
+      {
+        "id": "01a10628-76e7-7383-b425-206411d8c2cf",
+        "items": [],
+        "itemsView": "full",
+        "status": "inProgress",
+        "error": null,
+        "startedAt": 1791104677,
+        "completedAt": null,
+        "durationMs": null
+      }
+    ],
+    "nextCursor": "{\"requestedThreadId\":\"01a0f6b5-b1bd-7752-b0bb-74a336e459a4\",\"rolloutOrdinal\":5330,\"includeAnchor\":false,\"scope\":{\"kind\":\"turns\"}}",
+    "backwardsCursor": "{\"requestedThreadId\":\"01a0f6b5-b1bd-7752-b0bb-74a336e459a4\",\"rolloutOrdinal\":5330,\"includeAnchor\":true,\"scope\":{\"kind\":\"turns\"}}"
+  },
+  "state": {
+    "binding": {
+      "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+      "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+      "target": "supervisor",
+      "dispatch_issue": "quoridor-4lc.40",
+      "contract_file": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+    },
+    "process": {
+      "pid": 6049,
+      "start_ticks": "35765166",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "phase": "running",
+    "recovery_required": false,
+    "last_result": {
+      "at": "2026-10-04T09:06:44.328602+00:00",
+      "event": "error",
+      "error": "Another client is dispatching; retry later"
+    },
+    "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+    "config_sha256": "28108643776ef140f3a54dd861e6c0c41da8d61580ee20aae4a6bfa8bef0cf97",
+    "contract_sha256": "9f5ed862b19516a8917a7b8f58e3f991e5f885089c8829cfbad4bd497a2dca9c",
+    "next_at": 1791105873.8863883,
+    "owned": {
+      "run_id": "db6814e6-42f6-4d0f-9542-abff7c8f46ce",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+      "turn_id": "01a10628-76e7-7383-b425-206411d8c2cf",
+      "started_at": "2026-10-04T09:04:37.594039+00:00",
+      "max_turn_seconds": null
+    }
+  },
+  "owned_age_seconds": 142.918826,
+  "elapsed_interrupt_absent_after180": false,
+  "public_item_types": [],
+  "semantic_recovery_confirmed": false
+}

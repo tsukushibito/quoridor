@@ -1,0 +1,134 @@
+{
+  "signal_at": "2026-10-04T08:51:34.004922+00:00",
+  "checked_at": "2026-10-04T08:51:50.524011+00:00",
+  "exact_monitor": {
+    "pid": 4133648,
+    "start_ticks": "35249412",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+    "state": "D",
+    "rss_bytes": 20746240,
+    "affinity": [
+      0
+    ]
+  },
+  "exact_scheduler": {
+    "pid": 4133634,
+    "start_ticks": "35249387",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "old_run": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame16-extension17-49170cb6-b27b-4fed-8be1-36f441f2df63",
+  "after_state": {
+    "binding": {
+      "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+      "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+      "target": "supervisor",
+      "dispatch_issue": "quoridor-4lc.40",
+      "contract_file": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+    },
+    "process": null,
+    "phase": "stopped",
+    "recovery_required": false,
+    "last_result": {
+      "at": "2026-10-04T08:51:42.918483+00:00",
+      "event": "process_stopped",
+      "owned_turn_pending": false
+    },
+    "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+    "config_sha256": "1f0d8ccf3dcb6d058d66bec168d1ac4f9e5a04510af78bdf46e50e9ac218bb17",
+    "contract_sha256": "753473ae70e46d676ba2080d5390a92c3e4924f681de7917a72f3b19e82f54cd",
+    "next_at": null,
+    "owned": null
+  },
+  "monitor_ended": {
+    "started_utc": "2026-10-04T07:38:39.312665+00:00",
+    "ended_utc": "2026-10-04T08:51:50.288787+00:00",
+    "process": {
+      "pid": 4133648,
+      "start_ticks": "35249412",
+      "state": "R",
+      "rss_bytes": 20398080,
+      "cpu_ticks": 3,
+      "affinity": [
+        0
+      ],
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "reason": "monitor operator stop",
+    "error": null,
+    "exit_code_if_normal": 0,
+    "self_user_cpu_s": 4.732184,
+    "self_sys_cpu_s": 4.774345,
+    "self_maxrss_kib": 24060,
+    "child_user_cpu_s": 6.206097,
+    "child_sys_cpu_s": 1.700772,
+    "child_maxrss_kib": 231756,
+    "sampled_combined_rss_peak_bytes": 170278912,
+    "allocated_peak_bytes": 31178752,
+    "no_child_command_left_running": true,
+    "own_process_exits_after_this_record": true,
+    "all_research_stopped_claimed": false
+  },
+  "scheduler_stop": {
+    "at": "2026-10-04T08:51:43.062673+00:00",
+    "reason": "monitor operator stop",
+    "command_result": {
+      "command": [
+        "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python",
+        "-B",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/scheduler.py",
+        "stop",
+        "--state-dir",
+        "/workspaces/quoridor/.artifacts/research-team/scheduler-sigma-continuation-20261001",
+        "--interrupt-owned-turn"
+      ],
+      "at": "2026-10-04T08:51:43.010873+00:00",
+      "process": {
+        "pid": 4193715,
+        "start_ticks": "35687849",
+        "state": "R",
+        "rss_bytes": 0,
+        "cpu_ticks": 0,
+        "affinity": [
+          0
+        ]
+      },
+      "exit_code": 0,
+      "stdout": "{\"stopped\": true, \"owned_turn_pending\": false}\n",
+      "stderr": "",
+      "reaped": true
+    },
+    "state": {
+      "binding": {
+        "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+        "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+        "target": "supervisor",
+        "dispatch_issue": "quoridor-4lc.40",
+        "contract_file": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+        "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+      },
+      "process": null,
+      "phase": "stopped",
+      "recovery_required": false,
+      "last_result": {
+        "at": "2026-10-04T08:51:42.918483+00:00",
+        "event": "process_stopped",
+        "owned_turn_pending": false
+      },
+      "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+      "config_sha256": "1f0d8ccf3dcb6d058d66bec168d1ac4f9e5a04510af78bdf46e50e9ac218bb17",
+      "contract_sha256": "753473ae70e46d676ba2080d5390a92c3e4924f681de7917a72f3b19e82f54cd",
+      "next_at": null,
+      "owned": null
+    },
+    "read_error": null,
+    "last_valid_state": null,
+    "scheduler_identity_alive": false,
+    "owned_turn_pending": false,
+    "external_NN_processes_stopped": false,
+    "scope": "stored owned scheduler/turn only",
+    "read_failure_not_hidden": true,
+    "no_automatic_restart_or_blind_send": true
+  },
+  "old_failures_not_rewritten": true
+}

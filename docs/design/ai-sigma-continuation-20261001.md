@@ -54,6 +54,6 @@ root/coordinatorは本親main/mirrorの書込を止め、今回版17の期限と
 
 既92stewardが旧scheduler・monitor・owned turnの終了を確認し、同runtimeを同frame16の連続延長版17期限と現行role・registry digestへ束縛する。promptの研究判断は現行supervisor定義を参照し、旧の特定手順を重ねない。validate後に実running/reloaded/loaded・同identity・期限を確認する。研究担当の静的開始を運用全履歴の検査待ちにしない。
 
-周期20分・監督turn180秒、CPU0単1/RAM1GiB・既保存枠・現在の有界guardを維持し、自己tool・owned turnの回収方法を運用契約へ明記する。報告内容がない正常稼働は静かに記録し、重要な改善・節目・異論は統括へ通知する。外部job停止は別に確認する。
+周期20分・監督turn時間上限なし（max_turn_seconds=null、ユーザー明示の上限撤廃）、CPU0単1/RAM1GiB・既保存枠・現在の有界guardを維持し、自己tool・owned turnの回収方法を運用契約へ明記する。報告内容がない正常稼働は静かに記録し、重要な改善・節目・異論は統括へ通知する。外部job停止は別に確認する。
 
 92は09:45:50新heavy停止通知、09:50:50監督schedulerと正確owned回収、09:53:50monitor回収、09:55:50最終証拠を所有する。運用source変更時は秩序ある停止でbindingを更新し、終了済みconfig・停止証拠は書き換えない。報告到着で新枠・上限・pauseを変えず、必要な結果とBeads backupを保存する。

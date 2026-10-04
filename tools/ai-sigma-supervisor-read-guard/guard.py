@@ -104,25 +104,31 @@ def binding(owned, run, turn, prior=None, wall=None, mono=None, boot=None):
     actual_turn = uuid_text(owned.get('turn_id'))
     if turn is not None and uuid_text(turn) != actual_turn:
         raise Rejected('Turn mismatch')
-    if owned.get('thread_id') != THREAD or owned.get('max_turn_seconds') != 180:
+    if owned.get('thread_id') != THREAD or 'max_turn_seconds' not in owned or (owned['max_turn_seconds'] is not None and (type(owned['max_turn_seconds']) is not int or owned['max_turn_seconds'] <= 0)):
         raise Rejected('Wrong target/turn contract')
     start = parse_utc(owned.get('started_at'))
     age = (wall - start).total_seconds()
     if age < 0 or not math.isfinite(mono):
         raise Rejected('Future start/invalid monotonic clock')
     core = {'run_id': run, 'turn_id': actual_turn, 'thread_id': THREAD,
-            'started_at': start.isoformat(), 'boot_id': boot}
+            'started_at': start.isoformat(), 'boot_id': boot, 'max_turn_seconds': owned['max_turn_seconds']}
     if prior:
-        if any(prior.get(k) != v for k, v in core.items()):
+        if any(prior.get(k) != v for k, v in core.items() if k != 'max_turn_seconds'):
             raise Rejected('Binding/start/boot changed; never reset deadline')
         if mono < prior['mapped_start_monotonic']:
             raise Rejected('Monotonic clock went backwards')
+        if 'max_turn_seconds' not in prior:
+            raise Rejected('Unknown prior turn limit')
+        if prior['max_turn_seconds'] != core['max_turn_seconds']:
+            if core['max_turn_seconds'] is not None:
+                raise Rejected('Owned turn limit changed')
+            prior = {**prior, 'max_turn_seconds': None, 'turn_deadline_utc': None}
         return prior
     return {**core, 'mapped_start_monotonic': mono-age, 'calibrated_at_utc': wall.isoformat(),
             'calibrated_at_monotonic': mono,
             'read_start_planning_at_utc': (start+dt.timedelta(seconds=90)).isoformat(),
             'read_finish_planning_at_utc': (start+dt.timedelta(seconds=120)).isoformat(),
-            'turn_deadline_utc': (start+dt.timedelta(seconds=180)).isoformat(),
+            'turn_deadline_utc': None if core['max_turn_seconds'] is None else (start+dt.timedelta(seconds=core['max_turn_seconds'])).isoformat(),
             'initial_mapping_limit': 'Initial UTC-to-monotonic mapping assumes no prior wall-clock jump; future/backwards boot/start is rejected.'}
 
 def age_now(bound, wall=None, mono=None):
@@ -133,10 +139,19 @@ def age_now(bound, wall=None, mono=None):
     return max((wall-parse_utc(bound['started_at'])).total_seconds(),
                mono-bound['mapped_start_monotonic'])
 
+def remaining_seconds(bound, wall=None, mono=None):
+    age = age_now(bound, wall, mono)
+    remaining = min((OPERATION_END-(wall or utc_now())).total_seconds(),
+                    (OPERATION_END-parse_utc(bound['started_at'])).total_seconds()-age)
+    if 'max_turn_seconds' not in bound:
+        raise Rejected('Unknown bound turn limit')
+    if bound['max_turn_seconds'] is not None:
+        remaining = min(remaining, bound['max_turn_seconds']-age)
+    return remaining
+
 def admit(bound, phase, wall=None, mono=None, required_seconds=0):
     age = age_now(bound, wall, mono)
-    # 90/120 are planning checkpoints, not a permanent ban on research reads.
-    remaining = min(180-age, (OPERATION_END-(wall or utc_now())).total_seconds())
+    remaining = remaining_seconds(bound, wall, mono)
     reserve = REPORT_RESERVE if phase in ('read_start', 'read_finish') else 0
     if remaining <= required_seconds+reserve:
         raise Rejected(f'{phase} insufficient remaining time ({remaining:.6f}s; need {required_seconds+reserve}s)')
@@ -330,7 +345,7 @@ def run_child(args, path, bound, phase='read', background=(), timeout=12, return
         raise Rejected('run_retention_cap: next spawn blocked')
     write(ledger, {'count': count+1, 'limit': COMMAND_CAP})
     admit(bound, 'read_start' if phase == 'read' else 'finish', required_seconds=timeout+2)
-    limit = 180-REPORT_RESERVE if phase == 'read' else 180
+    reserve = REPORT_RESERVE if phase == 'read' else 0
     started = stamp(); started['storage_accounting'] = storage
     peak = 0; cause = None
     # AS is intentionally inherited without imposing 1GiB; Go/cgo needs virtual reserve.
@@ -357,7 +372,7 @@ def run_child(args, path, bound, phase='read', background=(), timeout=12, return
                 peak = max(peak, sampled_rss(child.pid, background))
                 if child.poll() is None and not cause:
                     if peak >= 1024**3: cause = 'sampled_combined_RSS_guard'
-                    elif time.monotonic() >= command_deadline or age_now(bound) >= limit-2 or utc_now() >= OPERATION_END-dt.timedelta(seconds=2): cause = 'timeout/deadline'
+                    elif time.monotonic() >= command_deadline or remaining_seconds(bound) <= reserve+2: cause = 'timeout/deadline'
                     if cause: cleanup_group(child)
             child.wait()
         except BaseException as error:
@@ -390,7 +405,7 @@ def run_child(args, path, bound, phase='read', background=(), timeout=12, return
     write(path, row)
     if cause or child.returncode:
         error = bytes(raw['stderr'][-4096:]).decode(errors='replace')
-        transient = (cause == 'timeout/deadline' and age_now(bound) < limit-2) or (not cause and any(x in error.lower() for x in ('database is locked', 'resource temporarily unavailable', 'connection reset', 'temporarily unavailable', 'connection refused')))
+        transient = (cause == 'timeout/deadline' and remaining_seconds(bound) > reserve+2) or (not cause and any(x in error.lower() for x in ('database is locked', 'resource temporarily unavailable', 'connection reset', 'temporarily unavailable', 'connection refused')))
         raise ReadFailed('Owned command failed; child reaped: '+str(cause or error), transient=transient and phase == 'read')
     admit(bound, 'read_finish' if phase == 'read' else 'finish')
     if phase != 'read' and not return_value:
