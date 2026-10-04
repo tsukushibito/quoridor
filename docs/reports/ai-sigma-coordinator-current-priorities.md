@@ -1,6 +1,12 @@
 # 現在のNNUE研究優先順位（frame19）
 
-2026-10-04 23:34UTC。ユーザー明示2時間枠は22:52:46開始固定、10月5日00:52:46UTC終了（09:52:46JST）、新heavy00:42:46/監督exactowned00:47:46/monitor00:50:46。最高棋力は未達。現在は凍結評価器の教師誤差利益がminimax leaf/同wall手選択へ移るかを、評価器の意味と探索費の二経路で問う。
+2026-10-04 23:50UTC。ユーザー明示2時間枠は22:52:46開始固定、10月5日00:52:46UTC終了（09:52:46JST）、新heavy00:42:46/監督exactowned00:47:46/monitor00:50:46。最高棋力は未達。現在は凍結評価器の教師誤差利益がminimax leaf/同wall手選択へ移るかを、評価器の意味と探索費の二経路で問う。
+
+最新の選定と実配分:240葉terminal packageの同固定仕事ABBA2round64searchはbaseline/candidate processed262144・NN125128が一致、48共通completeddepthのvalue/Action/合法有限PASS。wholewall16061.169→6553.425ms、59.20%短縮（round58.50/59.91%）をowner有限支持する。r1 VM checker prototype失敗はactualNN UNKNOWN/保守550000、r2 known250376/22.930650sを分け、計算費59%を全工程/棋力へ広げない。事前条件で固定新4slotへ進んだが、slot1はrealCPU supervisor observe競合で19手後censor/UNKNOWN、known15597+inflight上界8192=23789charge/1.878467s。未開始slots2..4のみ一回は23:43:49 exit0/93841NN/11.341366s/backgroundcleanup済、本人速報の新全4枠は3W0D0L1UNKNOWN、旧slot1censorは成功補充せず原19手/unknown保持。現在charge918006/1.5m・science36.264394/600。二次4caseはdepth1/2全合法rootchild full-window16condition/200000NN120sを結果前登録しbackground受付、実結果は未観測。旧slotを成功補充せず全4分母を保持、今後censor追加反復0。旧236 2W5L1UNKNOWNとのopening差から棋力因果を認定0。
+
+241 criticへ停止後保存算術を23:49:00実dispatch（turn01a10952）→本人23:49:26claim/in_progress、新source45+calc45/最多1job/CPU0single/NN0/新1MiB。停止current source/payload/子・背景cleanupを事前bindし専用task/schema/argvを確かめて、240固定費・全4分母/時計・同horizon保存列と全attemptを必要算術する。主科学の全文承認gate0/旧238180・229finalNOT_RUN reset0。新frame19予約計83MiB、確認unused48340992B。239有限saved診断は21必要Git/current bytesまで統括受入れ済、23:42 actoridleのためclose専用RPC0、Beadsに受入れ記録し本人の次実質turnでclose/backup。ownerclosedと偽記0。
+
+241最大1のengine別内訳を採択・実配送。同保存ABBAからNNUE/Dのmatched nodes/NN/完成深さと全wall/round差を分け、合計59.20%をNNUE障害解消へ広げない。新run/点/条件gate0。二次case背景は23:50:39 exit0/cleanuptrue、結果handoffを待つ。
 
 現在配分:240 experimentは23:29:46実dispatch→23:30:11本人claim/static、葉の合法存在判定を意味不変で軽くする一packageを私有実装測定。239 hypothesisは23:19:28dispatch→23:20:32claim、保存手のNN0診断をCPU4で23:26:47に実施し4caseを選んだ。238 criticは専用時計/全費/共有RuleA replayの有限裁定を180/180・2job内で終えた。静的は並行、実計算はCPU0/2/4の現在物理競合と合計4・RAM8GiBを確認して配分、全役承認/全文/rootACK gate0。状態はBeads、詳細契約・受入れはframe19-coordinator。
 
@@ -18,7 +24,7 @@
 
 資源・個別終了:240新nativeNN1.5m/CPUscience600s/各180s/CPU2single/GPU0/RAM2GiBguard1.75、新8MiBguard7/forecast6。source+fixture/profile23:40～55目安/必要optional00:10頃、新科学入口00:25/科学00:32stop/保存00:40。239 CPU4single/NN0全120s/最多2各60/RAM512guard448、source90管理180、新2MiBguard1.5/forecast1、科学23:45/保存23:50。238旧CPU0single/180/2jobsは保持、新4MiBguard3/forecast2で必要保存/同turnclose。23664MiB/2372MiB等全旧予約・失敗・個別run時計は保持、未使用返却/unknown減額0。
 
-新frame19配分計72MiB（23664+2372+2384+統括2）+2392+2408=82MiBは既exp pool確認未使用135372800Bから一度計上、残49389568B。親保持+有効予約12GiB追加0。各heavy前にcurrent保持/Git/temp/unused/実RSS・CPUを測る。親CPU合計4logical/currentRAM8GiB、GPU推論6GiB/job30min、GPU学習旧累積2hの確認済残だけ（不明はCPU）。same6saved/model-effort-cwd/period1200/turnnull、LLM人数gate0、pause/所有/同役二重開始/応答不明/自己子exact回収維持。新model/共有依存toolchain/外部有料cloud/製品/push公開0。
+新frame19配分計72MiB（23664+2372+2384+統括2）+2392+2408+2411=83MiBは既exp pool確認未使用135372800Bから一度計上、残48340992B。親保持+有効予約12GiB追加0。各heavy前にcurrent保持/Git/temp/unused/実RSS・CPUを測る。親CPU合計4logical/currentRAM8GiB、GPU推論6GiB/job30min、GPU学習旧累積2hの確認済残だけ（不明はCPU）。same6saved/model-effort-cwd/period1200/turnnull、LLM人数gate0、pause/所有/同役二重開始/応答不明/自己子exact回収維持。新model/共有依存toolchain/外部有料cloud/製品/push公開0。
 
 新runtime/root235初期受入れ済。統括23:09:29点でscheduler380692/tick40787373・monitor380701/tick40787392/boot/loaded config-contract SHA/24hash/mainmirror親19/period1200/null/end00:47:46を少数照合PASS。sourceGit e7c3e86、親SHAe7e815ef…c935、通常freshstart23:01:06。92運用solewriter、現在保持約37MB+forecast8MiB内/旧112MiB予約で長期00:42/47/50/52:46回収を所有。自然初回completed/errornullは有限点検成果、未来/全期間停止認定0。root/coordinator親mainmirror/runtime/rolecommon重複編集0、root235close後返信専用起床0。
 

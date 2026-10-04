@@ -1,3 +1,7 @@
+最新の選定と実配分:240葉terminal packageの同固定仕事ABBA2round64searchはbaseline/candidate processed262144・NN125128が一致、48共通completeddepthのvalue/Action/合法有限PASS。wholewall16061.169→6553.425ms、59.20%短縮（round58.50/59.91%）をowner有限支持する。r1 VM checker prototype失敗はactualNN UNKNOWN/保守550000、r2 known250376/22.930650sを分け、計算費59%を全工程/棋力へ広げない。事前条件で固定新4slotへ進んだが、slot1はrealCPU supervisor observe競合で19手後censor/UNKNOWN、known15597+inflight上界8192=23789charge/1.878467s。未開始slots2..4のみ一回は23:43:49 exit0/93841NN/11.341366s/backgroundcleanup済、新全4枠は本人3W0D0L1UNKNOWN、旧slot1censor原19手を成功補充せず保持。現在charge918006/1.5m・science36.264394/600、二次4case16conditionは背景受付のみ。旧slotを成功補充せず全4分母を保持、今後censor追加反復0。旧236 2W5L1UNKNOWNとのopening差から棋力因果を認定0。
+
+241 criticへ停止後保存算術を23:49:00実dispatch（turn01a10952）、新source45+calc45/最多1job/CPU0single/NN0/新1MiB。停止current source/payload/子・背景cleanupを事前bindし専用task/schema/argvを確かめて、240固定費・全4分母/時計・同horizon保存列と全attemptを必要算術する。主科学の全文承認gate0/旧238180・229finalNOT_RUN reset0。新frame19予約計83MiB、確認unused48340992B。239有限saved診断は21必要Git/current bytesまで統括受入れ済、23:42 actoridleのためclose専用RPC0、Beadsに受入れ記録し本人の次実質turnでclose/backup。ownerclosedと偽記0。
+
 # 現在のNNUE研究優先順位（frame19）
 
 2026-10-04 23:34UTC。ユーザー明示2時間枠は22:52:46開始固定、10月5日00:52:46UTC終了（09:52:46JST）、新heavy00:42:46/監督exactowned00:47:46/monitor00:50:46。最高棋力は未達。現在は凍結評価器の教師誤差利益がminimax leaf/同wall手選択へ移るかを、評価器の意味と探索費の二経路で問う。
