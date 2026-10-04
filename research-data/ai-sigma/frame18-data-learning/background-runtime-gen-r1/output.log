@@ -1,0 +1,7 @@
+{"issue": "quoridor-4lc.228", "run": "growth228-test96-chunk1-r1", "kind": "generation", "max_batch": 8, "startUTC": "2026-10-04T11:48:52.167296+00:00", "endUTC": "2026-10-04T11:48:58.510330+00:00", "jobwall_seconds": 10.945370599045418, "exit": 1, "stop_reason": null, "runner_pid": 118458, "runner_tick": 36750999, "remaining": [], "peak_aggregate_RSS": 1563619328, "source_git": "d246c397208eb8653a93584d424424560f8ab2ab", "sample_equivalent": 1623, "NN_cap": 307200, "current_exact_absent": true, "all_child_waited": true, "instant_peak_not_guaranteed": true}
+Traceback (most recent call last):
+  File "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame18-data-learning/generation_queue.py", line 31, in <module>
+    subprocess.run(['/usr/bin/python3','-B',str(T/'gen_guard_background.py'),str(config)],check=True,timeout=340)
+  File "/usr/lib/python3.11/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/usr/bin/python3', '-B', '/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame18-data-learning/gen_guard_background.py', '/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/test96-chunk1-config.json']' returned non-zero exit status 1.

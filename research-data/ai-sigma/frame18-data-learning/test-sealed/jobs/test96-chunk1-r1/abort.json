@@ -1,0 +1,4 @@
+{
+  "reason": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert(row.lineage&&['train','validation','evaluation'].includes(row.split))\n\n    at validate (/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-manygame-generation/schema.cjs:3:661)\n    at game (/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-teacher-throughput/worker.cjs:34:1216)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async lane (/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-teacher-throughput/worker.cjs:37:151)\n    at async Promise.all (index 0)\n    at async games (/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-teacher-throughput/worker.cjs:37:171)",
+  "UTC": "2026-10-04T11:48:58.130Z"
+}

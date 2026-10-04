@@ -1,0 +1,41 @@
+{
+  "primary": "same256000 samples; shared maximumtrain OR mask",
+  "candidate": "lowest validation-primary gameMSE among stage BEST; tie smaller G+ then earlier beststep",
+  "secondary_nonselection": {
+    "small_step": 400,
+    "large_step": 1200,
+    "G_small": 192,
+    "G_large": 576,
+    "distance": 0.0,
+    "rule": "minimum saved abs(step/Glarge-400/Gsmall); tie early; before curves"
+  },
+  "fixed_points": [
+    0,
+    1,
+    2,
+    5,
+    10,
+    20,
+    50,
+    100,
+    200,
+    400,
+    800,
+    1200,
+    2000
+  ],
+  "stages": [
+    {
+      "planned": 192,
+      "G+": 192,
+      "NN_upper": 449732
+    },
+    {
+      "planned": 576,
+      "G+": 576,
+      "NN_upper": 707864
+    }
+  ],
+  "test_labels_read": false,
+  "checkpoints": "necessary private small weight payloads within authorized data scope; final archive in research Git"
+}

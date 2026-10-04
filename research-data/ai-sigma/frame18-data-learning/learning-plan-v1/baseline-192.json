@@ -1,0 +1,51 @@
+{
+  "fit": {
+    "a": 0.06275218768768667,
+    "b": 8.514530974019355,
+    "a_f32": 0.06275218725204468,
+    "b_f32": 8.514531135559082,
+    "constant": 0.01116924389754297,
+    "train_games": 192,
+    "train_rows": 9025,
+    "zero_variance": false,
+    "rule": "train-only gameequal WLS; f32 output clamp; no validation fit"
+  },
+  "metrics": {
+    "train": {
+      "rows": 9025,
+      "games": 192,
+      "rootmean_mse": 0.40253671401928076,
+      "rootmean_game_equal_mse": 0.3920478948167911,
+      "rootmean_rows": 9025,
+      "z_mse": 0.7186258764553448,
+      "z_game_equal_mse": 0.6642714906476703,
+      "z_rows": 9025,
+      "target_mse": 0.40253671401928076,
+      "target_game_equal_mse": 0.3920478948167911,
+      "constant_mse": 0.7064552123575534,
+      "constant_game_equal_mse": 0.7363185482981819,
+      "z_sign_rows": 9025,
+      "z_sign_accuracy": 0.754792243767313,
+      "saturation_fraction": 0.09983379501385041
+    },
+    "validation": {
+      "rows": 4813,
+      "games": 96,
+      "rootmean_mse": 0.4494517303873105,
+      "rootmean_game_equal_mse": 0.4293847573931498,
+      "rootmean_rows": 4813,
+      "z_mse": 0.7556866793996968,
+      "z_game_equal_mse": 0.7062123043350486,
+      "z_rows": 4813,
+      "target_mse": 0.4494517303873105,
+      "target_game_equal_mse": 0.4293847573931498,
+      "constant_mse": 0.6695698277882068,
+      "constant_game_equal_mse": 0.6967052362815207,
+      "z_sign_rows": 4813,
+      "z_sign_accuracy": 0.7375857053812591,
+      "saturation_fraction": 0.10097652191980054
+    }
+  },
+  "stage_SHA": "2373afc34398c8f8f2e474868bd617e8b3e996c8823ce0f303b21d2c36541ae1",
+  "testlabels_read": false
+}
