@@ -1,0 +1,29 @@
+{
+  "issue": "quoridor-4lc.238",
+  "prospective_only": true,
+  "task": "frame19-clock-arena-238-v1",
+  "schema": "frame19-native-independent-v1",
+  "entrypoint": "check-clock-arena.py",
+  "argv": [
+    "python3",
+    "-B",
+    "research-data/ai-sigma/frame19-native-independent/check-clock-arena.py",
+    "--task",
+    "frame19-clock-arena-238-v1",
+    "--input-manifest",
+    "research-data/ai-sigma/frame19-native-independent/stopped-inputs.json",
+    "--out",
+    "research-data/ai-sigma/frame19-native-independent/clock-result.json"
+  ],
+  "inputscope": "only stopped frame19 native arena source/receipt/all8 slots/perply/clock/cost; sharedRuleA optional replay",
+  "forbidden": [
+    "old229 checker/curve/finaltest",
+    "Torch/model import/forward",
+    "oldopenedtest173",
+    "mutable producer scope beforestop"
+  ],
+  "max_jobs": 2,
+  "calc_total_s": 90,
+  "hard_each_s": 60,
+  "not_executed": true
+}
