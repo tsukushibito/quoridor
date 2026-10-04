@@ -1,6 +1,6 @@
 # 現在のNNUE研究優先順位（frame18）
 
-2026-10-04 12:42UTC生成完了節目。228新672全GOAL/32520Rjoint（π/z同数）、失敗testwire1623込みphysical1849212<2.2m/guardian2175.606740s<5400を停止compactで確認、sampledfamilyRSS2.321GB/currentexactchild空。14pack/memberSHA/Gitbyteは生成ownerの復元証拠、統括は全raw/教師truthを再検算していない。train192=old96+new96、train576=old96+new480、val/test各96完了を12:38:54曲線前quantity-freezeへ固定。今の主仕事は同256000samplesのCPU2学習二stage→validation最大1候補freeze→新test一巡、229有限算術。生成完了を量十分/学習利益/最高棋力へ格上げしない。
+2026-10-04 12:49UTC学習節目。新672全GOAL/32520joint/失敗込み1849212NN/2175.606740sは停止compact公開、14pack復元はowner依存範囲。full192/576 train入れ子（9025/27463rows）、固定val96/4813・test96/4847rows、最大train共通OR-mask・old尺度を曲線前固定。参照したdataset範囲のOR exclusion0を全state非共有/IID証明にはしない。背景learning jobe18b2b4a/source2de3217e・queue169284/tick37084384をownerがsubmit、12:44:49はadmission待ち、公開receiptで192stage12:46:46→12:46:57/449732samples/10.664901s/exit0/全子waitexact不在。576stage・両stage完了イベントは未確認、個別validation値だけでD/定数超越や量不足説明を判定しない。主仕事は同256000samples/13pointの二stage比較→最大1候補freeze→新test一巡、229算術は背景queueも停止後に現物admit。
 
 背景job8255c4c9は12:39:00exit0/cleanuptrue、12:39:03samejob marker/turn01a106ec配送完了。12:03実Idle点と合わせ、submit→Idle→完了元role再開を一件の実研究利用で有限確認。queuewait800.0733s/source-management80.2929s/外elapsed2712.884sはr2の12chunk+NN0dataset/plan範囲、全14guardian費と重複するため単純加算しない。rootテストslot留保657.929s/人工CPU6.55s/旧失敗1623NNを別保持。旧r1未配送通知cancelはdeliveredに書換え0。
 
@@ -47,3 +47,5 @@ root230の背景job実装を採用。主checkout sourceGit288c325、scripts/dev/
 Supervisor12:06節目を採用: validation取得は量不足仮説/学習利益の判定ではなく評価準備。12:03の実Idle点はroot230人工suiteから分けたproduction前半の到達、実完了配送/全子回収は未確認。停止後公開compact/sourceを229既配分へ渡す、metadata集計を独立raw再検算/全test非露出証明へ格上げしない。予定report FileNotFoundErrorは監督の観測不足でproducer科学失敗ではない。今回追加科学/条件/量/役/turnを起こさず、background safeledger一回の点読取で進展と未知を更新。
 
 生成停止と曲線前固定を受け、13:05不足branchのfull192/576を12:38:54に成立させた（13:05まで待つ固定工程ではない）。最大train共通OR-mask/old尺度/同初期seedとfreshoptimizer/13point、主要same256000seenと非選定secondarysmall400-large1200を維持。229へ生成compact/quantity-freeze/selection-ruleと費範囲・sealed非読取を既270秒内の実質入力として配送、source/算術は228の学習計算に重ねない。主228はcritic全文/算術を開始gateにせずfreshphysical admit後二stageへ。新効率port/追加教師・再split・曲線後mask変更を開始せず、新学習観測で次配分を判断する。
+
+learning背景handoffを受領し、jobIDを記録したownerはIdle→二stage終了イベントで再開。予定physical samples449732+707864=1157596<new2m、CPU2single/torch1/GPU0/各300/all900・旧gen費/reset0。12:48:31 critic同active正turnへ、stage間空窓が次576科学不存在を保証しないためbackground learn-r1 command終了/cleanup+owner停止receipt後に算術する具体補足をaccepted。新turn起床/全稿・算術承認gate0、主228は既physics/budgetで継続。testtargetsはfreeze前allowlist外、metadata/mask/pathhash/safeledger＋trainval範囲を保持。source/役/model/期間変更0。
