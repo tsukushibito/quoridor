@@ -1,0 +1,104 @@
+{
+  "at": "2026-10-05T12:02:45.573095+00:00",
+  "owner": "92",
+  "frame": 22,
+  "source_write_stopped": true,
+  "short_children_reaped": true,
+  "intentional_long_identities": {
+    "pid": 1202786,
+    "start_ticks": "45448354",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "monitor": {
+    "pid": 1203480,
+    "start_ticks": "45451173",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "Git_index_commit_owner": "coordinator",
+  "private_index_operations": false,
+  "source_paths": [
+    {
+      "path": "docs/design/ai-sigma-continuation-20261001.md",
+      "bytes": 7614,
+      "sha256": "1c88b658e26fdb23420bfc9120ec33f6f08dc72b6dbf8d7735ed6a389415ff34"
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-supervisor-continuation.md",
+      "bytes": 3246,
+      "sha256": "ae9541f99ba073159fdc3be62507ec8285e5a906a1771194f9e925557b8e6034"
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-steward-frame22.md",
+      "bytes": 2185,
+      "sha256": "2d6e05bac69ae8fa8d2c1b81cbe1190c9b77ac08a957a93def75803f50b50221"
+    },
+    {
+      "path": "scripts/dev/research-watch.py",
+      "bytes": 23996,
+      "sha256": "6751f1a49bd01a6db14544af7df5d17af95afba42e3878058a396762cffae14d"
+    },
+    {
+      "path": "research-data/ai-sigma/frame22-steward/binding-admission.json",
+      "bytes": 4901,
+      "sha256": "7eae58bb850516983af5cd1d29a99c0991880755403893c69cc8b8941d2b3935"
+    },
+    {
+      "path": "research-data/ai-sigma/frame22-steward/contract.json",
+      "bytes": 191,
+      "sha256": "3cae6f14a7e5cbb29af46f260af3723081d81a89abb3d615efddeacd73148f85"
+    },
+    {
+      "path": "research-data/ai-sigma/frame22-steward/expectations.json",
+      "bytes": 6813,
+      "sha256": "c4498583544655198514fa907b93fe8402302e26b8b957d82f5bf7c66b875305"
+    },
+    {
+      "path": "research-data/ai-sigma/frame22-steward/old-stop-intake.json",
+      "bytes": 1447,
+      "sha256": "845ec99b36c3e664023db5abbfb8dea536423845a4e6fc728d31cabf66bf9f2b"
+    },
+    {
+      "path": "research-data/ai-sigma/frame22-steward/prompt.md",
+      "bytes": 3605,
+      "sha256": "418d731d90f7585f38e943d95a78291c64272ae4d75df90102e767119bd6ee39"
+    },
+    {
+      "path": "research-data/ai-sigma/frame22-steward/running-loaded.json",
+      "bytes": 2248,
+      "sha256": "887c830688542ef9a29e8ffd84bc5ab87a17d35c382a515c18a01e5b6f8bd55a"
+    },
+    {
+      "path": "research-data/ai-sigma/frame22-steward/scheduler.json",
+      "bytes": 727,
+      "sha256": "819cf7fe5a037a2d6d1bdbefd34efeb7eecd407245f4a5882488f57a2b338f3d"
+    },
+    {
+      "path": "research-data/ai-sigma/frame22-steward/storage-intake-manifest.json",
+      "bytes": 8251,
+      "sha256": "34f16eec36dec8f62ec323a54d31285a48bd13f4f5771e4a5ef87b6a14069581"
+    },
+    {
+      "path": "research-data/ai-sigma/frame22-steward/storage-intake.json",
+      "bytes": 12753,
+      "sha256": "72c1ad90ae801af79ad3d5dc6cd68653ed5747f523cbd665934db74c45053c8e"
+    },
+    {
+      "path": "research-data/ai-sigma/frame22-steward/storage-science-admission.json",
+      "bytes": 14052,
+      "sha256": "2a37b7365f642540fe3862b6641cf1c8eb03a147168ff941c5c5423ebaa6464e"
+    },
+    {
+      "path": "research-data/ai-sigma/frame22-steward/storage-science-manifest.json",
+      "bytes": 9501,
+      "sha256": "2444a0b007490a8cbfae99cea86f79eed6e4ca840988fc3715c8e6bc2a9d0043"
+    }
+  ],
+  "watch_change": "frame labels reference expected.frame; no algorithm/guard/period/RPC changes",
+  "watch_tests": {
+    "count": 8,
+    "result": "PASS"
+  },
+  "formatters": "Ruff scope watch; Prettier scope frame22 configs/registry",
+  "registry_current_operation": "updated to frame22; six role definitions/thread IDs/digests retained",
+  "future_semantic_success_certified": false
+}

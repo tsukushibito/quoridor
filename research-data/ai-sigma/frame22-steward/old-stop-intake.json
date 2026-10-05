@@ -1,0 +1,52 @@
+{
+  "at": "2026-10-05T11:53:15.105676+00:00",
+  "oldstate_reference": "/workspaces/quoridor/.artifacts/research-team/frame21/scheduler/state.json",
+  "oldstate_sha256": "a998960e88a4940a74b55b11486e59bfadfc1ffe4fcca2525908dd75e497ba3b",
+  "state": {
+    "phase": "stopped",
+    "process": null,
+    "owned": null,
+    "recovery_required": false,
+    "fatal_dispatch_error": null,
+    "last_result": {
+      "at": "2026-10-05T10:32:54.020542+00:00",
+      "event": "process_stopped",
+      "owned_turn_pending": false
+    }
+  },
+  "identities": [
+    {
+      "identity": {
+        "pid": 1005983,
+        "start_ticks": "44624026",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "currently_alive": false
+    },
+    {
+      "identity": {
+        "pid": 1009999,
+        "start_ticks": "44636773",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "currently_alive": false
+    }
+  ],
+  "monitor_end": {
+    "at": "2026-10-05T10:32:55.758965+00:00",
+    "process": {
+      "pid": 1009999,
+      "start_ticks": "44636773",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "reason": "operation_end",
+    "error": null,
+    "local_rss_peak_bytes": 237101056,
+    "external_NN_stop_certified": false
+  },
+  "existing_steward_allocated": 2859008,
+  "existing_supervisor_frame21_allocated": 303104,
+  "new_forecast": 3145728,
+  "existing_guard": 117440512,
+  "old_proofs_unchanged": true
+}

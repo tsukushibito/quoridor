@@ -497,7 +497,7 @@ def monitor(expected, out):
                     expected,
                     out,
                     "heavy-job-stop-notice",
-                    "goal quoridor-4lc /92 frame21 新heavy開始停止時刻。各ownerが自己jobを回収。"
+                    f"goal quoridor-4lc /92 frame{expected.get('frame', 'current')} 新heavy開始停止時刻。各ownerが自己jobを回収。"
                     "統括は確保済み枠内時間でSteward終了点検（停止保存・整理/長期保守要否）と必要Supervisor振り返りを実配送し、"
                     "報告の受領採否/未完了の理由・担当・次機会を記録。通知やprocess停止だけで判断完了とせず、自動延長0。"
                     "根拠 " + str(out / "monitor-observation.json"),
@@ -545,7 +545,7 @@ def monitor(expected, out):
             expected,
             out,
             "scheduler-end-report",
-            f"goal quoridor-4lc /92 frame21 scheduler/monitor終了。reason={reason}, error={error}。"
+            f"goal quoridor-4lc /92 frame{expected.get('frame', 'current')} scheduler/monitor終了。reason={reason}, error={error}。"
             "正確owned回収証拠 " + str(out / "scheduler-end-stop.json") + "。外NN停止認定0。"
             "終了点検の判断報告は別責務、未完了なら理由/担当/次機会を引渡し。",
         )

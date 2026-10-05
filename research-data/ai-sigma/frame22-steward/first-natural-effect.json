@@ -1,0 +1,159 @@
+{
+  "at": "2026-10-05T12:04:29.885470+00:00",
+  "run_id": "4e39eb90-30a7-4d12-99e4-9c257881c8db",
+  "exact_turn_id": "01a10bed-093a-7ea0-ba67-f40dfe583efd",
+  "turn_max_seconds": null,
+  "observe_finish": {
+    "observe.json": {
+      "at": "2026-10-05T12:00:39.895238+00:00",
+      "status": "observed",
+      "path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/supervisor/frame22/4e39eb90-30a7-4d12-99e4-9c257881c8db/observe.json",
+      "bytes": 10324,
+      "sha256": "3fdfebb45974fbcbd68bdae80e35c39b108ad247c341b5e7391eeccd38fdd551",
+      "commands": [
+        {
+          "command": [
+            "bash",
+            "/workspaces/quoridor/scripts/dev/beads.sh",
+            "show",
+            "quoridor-4lc",
+            "--json"
+          ],
+          "exit_code": 0,
+          "child_reaped": true,
+          "stdout": {
+            "bytes_read": 334768,
+            "sha256": "cfa30b3d3d352b467b66a30c11c0844e40a326ad25da03f638888c4de7aeaab3",
+            "complete": true
+          }
+        },
+        {
+          "command": [
+            "bash",
+            "/workspaces/quoridor/scripts/dev/beads.sh",
+            "show",
+            "quoridor-4lc.40",
+            "--json"
+          ],
+          "exit_code": 0,
+          "child_reaped": true,
+          "stdout": {
+            "bytes_read": 487936,
+            "sha256": "529eae045cb4a4987faa858b9cbb7260a737792a8ec1a34080c12f55b733b27e",
+            "complete": true
+          }
+        },
+        {
+          "command": [
+            "bash",
+            "/workspaces/quoridor/scripts/dev/beads.sh",
+            "ready",
+            "--json"
+          ],
+          "exit_code": 0,
+          "child_reaped": true,
+          "stdout": {
+            "bytes_read": 3,
+            "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+            "complete": true
+          }
+        }
+      ]
+    },
+    "finish.json": {
+      "at": "2026-10-05T12:01:32.673309+00:00",
+      "status": "observed",
+      "path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/supervisor/frame22/4e39eb90-30a7-4d12-99e4-9c257881c8db/finish.json",
+      "bytes": 15452,
+      "sha256": "bfb0139c7dc0124def211ca445d7a56a55c3f832e34fd6814ca7d8652fa7bbce",
+      "commands": [
+        {
+          "command": [
+            "bash",
+            "/workspaces/quoridor/scripts/dev/beads.sh",
+            "show",
+            "quoridor-4lc",
+            "--json"
+          ],
+          "exit_code": 0,
+          "child_reaped": true,
+          "stdout": {
+            "bytes_read": 334768,
+            "sha256": "cfa30b3d3d352b467b66a30c11c0844e40a326ad25da03f638888c4de7aeaab3",
+            "complete": true
+          }
+        },
+        {
+          "command": [
+            "bash",
+            "/workspaces/quoridor/scripts/dev/beads.sh",
+            "show",
+            "quoridor-4lc.40",
+            "--json"
+          ],
+          "exit_code": 0,
+          "child_reaped": true,
+          "stdout": {
+            "bytes_read": 487936,
+            "sha256": "529eae045cb4a4987faa858b9cbb7260a737792a8ec1a34080c12f55b733b27e",
+            "complete": true
+          }
+        },
+        {
+          "command": [
+            "bash",
+            "/workspaces/quoridor/scripts/dev/beads.sh",
+            "show",
+            "quoridor-4lc.40",
+            "--json"
+          ],
+          "exit_code": 0,
+          "child_reaped": true,
+          "stdout": {
+            "bytes_read": 487936,
+            "sha256": "529eae045cb4a4987faa858b9cbb7260a737792a8ec1a34080c12f55b733b27e",
+            "complete": true
+          }
+        },
+        {
+          "command": [
+            "bash",
+            "/workspaces/quoridor/scripts/dev/beads.sh",
+            "update",
+            "quoridor-4lc.40",
+            "--if-assignee"
+          ],
+          "exit_code": 0,
+          "child_reaped": true,
+          "stdout": {
+            "bytes_read": 97,
+            "sha256": "9785c0693138bc692e6b5ec3f87be2cb0a4350314624108708a23d7ffd813d6f",
+            "complete": true
+          }
+        },
+        {
+          "command": [
+            "bash",
+            "/workspaces/quoridor/scripts/dev/beads.sh",
+            "backup",
+            "sync"
+          ],
+          "exit_code": 0,
+          "child_reaped": true,
+          "stdout": {
+            "bytes_read": 24,
+            "sha256": "0dc7afc81ad34fec17b57bc6b2f8cbd50bc476b41325cde5aa701d2d759b4e64",
+            "complete": true
+          }
+        }
+      ]
+    }
+  },
+  "finish_elapsed_since_owned_start_seconds": 246.518481,
+  "cumulative_wrapper_commands": 17,
+  "notes_backup_commands_reached": true,
+  "previous_missingfile_capfailures_unchanged": true,
+  "only_this_run_finitely_supported": true,
+  "decision_quality_or_science_success_certified": false,
+  "wholeperiod_future_stop_certified": false
+}
