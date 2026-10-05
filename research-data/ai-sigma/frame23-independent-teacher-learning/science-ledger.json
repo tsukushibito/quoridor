@@ -1,0 +1,160 @@
+[
+  {
+    "task": "stage1-256k",
+    "spawned": true,
+    "reserved_NN": 396978,
+    "hard_seconds": 120,
+    "reserved_processed": 416948,
+    "state": "STOPPED",
+    "identity": {
+      "pid": 1537165,
+      "start_ticks": "46989661",
+      "ppid": 1537021,
+      "pgrp": 1537165,
+      "cpu_ticks": 0,
+      "state": "R",
+      "rss": 4096,
+      "cpus": [
+        1
+      ],
+      "argv": []
+    },
+    "actualstart": "2026-10-05T16:14:07.132870+00:00",
+    "exit": 1,
+    "wall_s": 8.783994249009993,
+    "reason": null,
+    "error": "[Errno 2] No such file or directory: '/workspaces/quoridor/.worktree/assets/checkpoints/frame23-independent-teacher-learning/stage1-256k-r1/result.json'",
+    "waited": true,
+    "current_exact_remaining": [],
+    "peak_family_RSS": 860815360,
+    "stopped_at": "2026-10-05T16:14:12.854175+00:00"
+  },
+  {
+    "task": "stage1-256k-r2",
+    "condition": "stage1-256k",
+    "spawned": true,
+    "reserved_NN": 396978,
+    "hard_seconds": 120,
+    "reserved_processed": 416948,
+    "state": "STOPPED",
+    "identity": {
+      "pid": 1547220,
+      "start_ticks": "47032062",
+      "ppid": 1547167,
+      "pgrp": 1547220,
+      "cpu_ticks": 0,
+      "state": "R",
+      "rss": 4096,
+      "cpus": [
+        1
+      ],
+      "argv": []
+    },
+    "actualstart": "2026-10-05T16:21:10.883157+00:00",
+    "exit": 0,
+    "wall_s": 7.453807936049998,
+    "reason": null,
+    "actual_NN": 396978,
+    "actual_processed": 416948,
+    "waited": true,
+    "current_exact_remaining": [],
+    "peak_family_RSS": 992292864,
+    "stopped_at": "2026-10-05T16:21:18.325456+00:00"
+  },
+  {
+    "task": "saved-baseline-validation-r1",
+    "condition": "saved-baseline-validation",
+    "spawned": true,
+    "reserved_NN": 6666,
+    "hard_seconds": 120,
+    "reserved_processed": 26636,
+    "state": "STOPPED",
+    "identity": {
+      "pid": 1567834,
+      "start_ticks": "47152893",
+      "ppid": 1567753,
+      "pgrp": 1567834,
+      "cpu_ticks": 0,
+      "state": "R",
+      "rss": 4096,
+      "cpus": [
+        1
+      ],
+      "argv": []
+    },
+    "actualstart": "2026-10-05T16:41:18.479395+00:00",
+    "exit": 0,
+    "wall_s": 3.7588321829680353,
+    "reason": null,
+    "actual_NN": 6666,
+    "actual_processed": 26636,
+    "waited": true,
+    "current_exact_remaining": [],
+    "peak_family_RSS": 732016640,
+    "stopped_at": "2026-10-05T16:41:22.251985+00:00"
+  },
+  {
+    "task": "stage2-256k-r1",
+    "condition": "stage2-256k",
+    "spawned": true,
+    "reserved_NN": 544308,
+    "hard_seconds": 120,
+    "reserved_processed": 579011,
+    "state": "STOPPED",
+    "identity": {
+      "pid": 1663317,
+      "start_ticks": "47567012",
+      "ppid": 1663203,
+      "pgrp": 1663317,
+      "cpu_ticks": 0,
+      "state": "R",
+      "rss": 4096,
+      "cpus": [
+        1
+      ],
+      "argv": []
+    },
+    "actualstart": "2026-10-05T17:50:17.229244+00:00",
+    "exit": 0,
+    "wall_s": 14.180072384013329,
+    "reason": null,
+    "actual_NN": 544308,
+    "actual_processed": 579011,
+    "waited": true,
+    "current_exact_remaining": [],
+    "peak_family_RSS": 1166557184,
+    "stopped_at": "2026-10-05T17:50:31.429135+00:00"
+  },
+  {
+    "task": "stage2-512k-r1",
+    "condition": "stage2-512k",
+    "spawned": true,
+    "reserved_NN": 886714,
+    "hard_seconds": 120,
+    "reserved_processed": 921417,
+    "state": "STOPPED",
+    "identity": {
+      "pid": 1663926,
+      "start_ticks": "47571235",
+      "ppid": 1663828,
+      "pgrp": 1663926,
+      "cpu_ticks": 0,
+      "state": "R",
+      "rss": 4096,
+      "cpus": [
+        1
+      ],
+      "argv": []
+    },
+    "actualstart": "2026-10-05T17:50:59.444671+00:00",
+    "exit": 0,
+    "wall_s": 15.852354119007941,
+    "reason": null,
+    "actual_NN": 886714,
+    "actual_processed": 921417,
+    "waited": true,
+    "current_exact_remaining": [],
+    "peak_family_RSS": 1171529728,
+    "stopped_at": "2026-10-05T17:51:15.309214+00:00"
+  }
+]

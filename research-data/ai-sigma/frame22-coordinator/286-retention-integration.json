@@ -1,0 +1,73 @@
+{
+  "task": "286 coordinator stopped evidence preservation",
+  "owner": "coordinator sole Git",
+  "reference_manifest": {
+    "path": "research-data/ai-sigma/frame23-public-sigma-z-learning/old286-stopped-handoff-reference-v1.json",
+    "SHA": "e13c72bb856a2f7db069c97a424d9279e5f2ee118569b71d2401bf2158ad2bd0"
+  },
+  "required_13_current_match": true,
+  "persistent_asset_39_current_match": true,
+  "latest_source_archive_18_stream_MATCH": true,
+  "prior_source_archives": [
+    {
+      "path": "research-data/ai-sigma/frame23-independent-teacher-learning/saved-baseline-source-v1.tar.xz",
+      "SHA": "159cdf5efeb8bf7280cdae740f9cc8fae010be0be6c12d0640411f00c8bad9e3",
+      "bytes": 32904,
+      "members_stream_verified": 17
+    },
+    {
+      "path": "research-data/ai-sigma/frame23-independent-teacher-learning/stage1-failed-source-v1.tar.xz",
+      "SHA": "21ad744336039a7f67def38babff52e832136e5719c5c87e40d975cf6ab6f944",
+      "bytes": 30116,
+      "members_stream_verified": 14
+    },
+    {
+      "path": "research-data/ai-sigma/frame23-independent-teacher-learning/stage1-r2-source-v1.tar.xz",
+      "SHA": "7bf20d14c1a7abc6ff5336aec983826fba56bf0acf865a986c6417207a415e08",
+      "bytes": 31268,
+      "members_stream_verified": 15
+    }
+  ],
+  "validation_scalar_archive": {
+    "path": "research-data/ai-sigma/frame22-coordinator/286-validation-scalars.tar.gz",
+    "bytes": 419393,
+    "SHA": "b0ccd60a447a186736746dd902bd1ba218545ff94fba69723a0f4152b77596ee",
+    "members": 39,
+    "all_stream_len_SHA_match": true,
+    "models_or_raw_teacher_copied": false
+  },
+  "source_historical_unused_aggregate_gap": {
+    "file": "aggregate.py",
+    "registered_baseline_SHA": "9d7bd2e054447b725684e88e98592ad7cb261cad86a555795f78fdeb1c2edd7d",
+    "old_bytes": "UNAVAILABLE_UNUSED_BY_SCIENCE",
+    "proof": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teacher-learning/saved-baseline-source-archive-proof-v1.json",
+      "SHA": "c151122974a7f02a7185f5c134a8f4fb8a0174300e3b8709a13e56dc0daa171e"
+    }
+  },
+  "current_public_source_edited": false,
+  "old_assets_moved_or_removed": false,
+  "new_forward_fit_game": 0,
+  "CPU": [0],
+  "management_wall_s": 0.20803002500906587,
+  "stage_paths": [
+    "research-data/ai-sigma/frame23-independent-teacher-learning/final-science-source-stop-v1.json",
+    "research-data/ai-sigma/frame23-independent-teacher-learning/science-ledger.json",
+    "research-data/ai-sigma/frame23-independent-teacher-learning/candidate-external-freeze-v1.json",
+    "research-data/ai-sigma/frame23-independent-teacher-learning/learning-source-before-public-z-v1.tar.xz",
+    "research-data/ai-sigma/frame23-independent-teacher-learning/saved-baseline-source-archive-proof-v1.json",
+    "research-data/ai-sigma/frame23-independent-teacher-learning/stage1-failed-source-archive-proof-v1.json",
+    "research-data/ai-sigma/frame23-independent-teacher-learning/stage1-r2-source-archive-proof-v1.json",
+    "research-data/ai-sigma/frame23-independent-teacher-learning/finalmask-selection-v1/selection.json",
+    "research-data/ai-sigma/frame23-independent-teacher-learning/finalmask-selection-v1/all-finalmask-curves.json",
+    "research-data/ai-sigma/frame23-independent-teacher-learning/finalmask-selection-v1/final-validation-mask.json",
+    "research-data/ai-sigma/frame23-independent-teacher-learning/finalmask-selection-v1/Tseen_final.jsonl.gz",
+    "research-data/ai-sigma/frame23-independent-teacher-learning/finalmask-selection-v1/Vraw.jsonl.gz",
+    "docs/reports/ai-sigma-hypothesis-frame23-data-scale-learning.md",
+    "research-data/ai-sigma/frame23-independent-teacher-learning/saved-baseline-source-v1.tar.xz",
+    "research-data/ai-sigma/frame23-independent-teacher-learning/stage1-failed-source-v1.tar.xz",
+    "research-data/ai-sigma/frame23-independent-teacher-learning/stage1-r2-source-v1.tar.xz",
+    "research-data/ai-sigma/frame23-public-sigma-z-learning/old286-stopped-handoff-reference-v1.json",
+    "research-data/ai-sigma/frame22-coordinator/286-validation-scalars.tar.gz"
+  ]
+}
