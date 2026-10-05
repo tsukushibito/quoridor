@@ -1,0 +1,30 @@
+{
+  "at": "2026-10-05T12:40:18.679948+00:00",
+  "issue": "quoridor-4lc.275",
+  "review_owner": "coordinator; not implementation owner275",
+  "source_preregister_sha256": "e127ac279ed276a55f99c825c98614378aa469ffcbcd0ca5f910a04ee0a24023",
+  "source_points": {
+    "crates/quoridor-ai/src/alphabeta.rs": "5e806a5361ba3e0f1391cd629b4a3513cb9d771a88626a12416a5095ded50a94",
+    "crates/quoridor-nnue/src/lib.rs": "e962ac11fbd3fc2d7a3c9c741d104ccf7a141b057122e2a8c70fe1604a8ad20d",
+    "crates/quoridor-ai/examples/alphabeta_cost.rs": "8b99950c2aa8d25ada32af969e02ea9c031d10605f75fc59ac570fa542c4fe72",
+    "crates/quoridor-ai/tests/nnue_scratch.rs": "475b2b4baa4f0368683be8e49b4b502338e64defe5830a7650b9fb42df80c965"
+  },
+  "semantic_review": {
+    "delta_arithmetic": "owned and reused paths share unchanged ordered subtract/add helper; finite/model/features parent validation retained",
+    "target_storage": "clone_from overwrites both values vectors and reuses capacity; fingerprint/mode/features overwritten on success; parent immutable",
+    "wall_maps": "encode_cached uses parent maps and updates target only; no cache sharing policy or QF1 representation changed",
+    "search_lifetime": "per-search per-ply Option taken before recursion and restored after; rootdepth d uses ply1..d within max_depth+1 slots",
+    "error_restoration": "returned evaluation/cancel/budget errors store target and unmake before propagation; invalid partial child state never published as completed depth",
+    "keys_and_ordering": "TT Key/history/ordering/legal actions/terminal priority unchanged",
+    "quantized_and_distance": "default owned trait path retained; new float-specific into API used by NnueEvaluator; no quantized math or distance formula edits"
+  },
+  "evidence_review": [
+    "read new scratch test source Scalar+SIMD/model-target resize parity, parent immutable checks, owned-vs-reused search snapshots/counters/PV/history, injected update error",
+    "read producer original ten test PASS stdout; final simplified version test PASS comes from owner report until final stop manifest supplied"
+  ],
+  "performance_scope": "small samebinary owned-wrapper fixed-work saving; common scaffold means original production end-to-end speed remains unmeasured; no teacher/strength claim",
+  "independent_test_rerun": false,
+  "independent_source_review": true,
+  "final_merge_ready": "source review supports delta-only; await owner final scientific stop, final byte handoff and final test/comparison identity before integration",
+  "main_merge_done": false
+}

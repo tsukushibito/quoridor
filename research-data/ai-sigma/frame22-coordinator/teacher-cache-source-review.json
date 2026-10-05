@@ -1,0 +1,18 @@
+{
+  "at": "2026-10-05T12:51:02.901522+00:00",
+  "issue": "quoridor-4lc.273",
+  "independent_reviewer": "coordinator, no implementation edits",
+  "source_sha256": "390fc18b796af19b2c93b5d4918f6a643594147b267315a4859d6ca80c482396",
+  "metadata": "quoridor-tensor-row-v2",
+  "checked": [
+    "source-derived state/history/ply/signature/side copied without labels in keys",
+    "ids=P1/P2 explicitly; distance=STM/opponent f32; tensor x ordering unchanged",
+    "existing x/distance/labels writer remains byte-for-byte same source block",
+    "cache.json hashes recomputed including new rows.jsonl; old tensor files remain unchanged",
+    "metadata container includes rootmean/z labels; no sealed-container claim"
+  ],
+  "producer_test_evidence": "build-verified-compact-v2 data6/runner9/ownedlint2 PASS owner evidence; independent native replay not performed",
+  "actual_dataset_cache_received": false,
+  "parent_hypothesis_interface": "274 independently verifies strict order schema and actual new tensor witnesses when data arrive",
+  "history_counts_not_reconstructed": true
+}

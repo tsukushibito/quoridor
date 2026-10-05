@@ -1,0 +1,164 @@
+{
+  "at": "2026-10-05T12:42:01.504655+00:00",
+  "task": "frame22-search-efficiency-275-v1",
+  "attempts": [
+    {
+      "job": "profile-r1",
+      "kind": "science",
+      "guardian_s": 0.11103062803158537,
+      "exit": 0,
+      "native_nn": 14554,
+      "processed": 32000,
+      "waited": true,
+      "exact_absent": true
+    },
+    {
+      "job": "comparison-r1",
+      "kind": "science",
+      "guardian_s": 0.22373647900531068,
+      "exit": 0,
+      "native_nn": 28008,
+      "processed": 42280,
+      "waited": true,
+      "exact_absent": true
+    },
+    {
+      "job": "comparison-r2",
+      "kind": "science",
+      "guardian_s": 0.6420968149905093,
+      "exit": 0,
+      "native_nn": 112032,
+      "processed": 169120,
+      "waited": true,
+      "exact_absent": true
+    },
+    {
+      "job": "comparison-final-r1",
+      "kind": "science",
+      "guardian_s": 0.35883696598466486,
+      "exit": 0,
+      "native_nn": 37344,
+      "processed": 61792,
+      "waited": true,
+      "exact_absent": true
+    },
+    {
+      "job": "comparison-final-r2",
+      "kind": "science",
+      "guardian_s": 0.3298446080298163,
+      "exit": 0,
+      "native_nn": 37344,
+      "processed": 61792,
+      "waited": true,
+      "exact_absent": true
+    },
+    {
+      "job": "build-profile-r1",
+      "kind": "compile_test_lint",
+      "guardian_s": 17.926451309991535,
+      "exit": 0,
+      "cause": null,
+      "native_nn": 0,
+      "processed_charge": 0,
+      "waited": true,
+      "exact_absent": true
+    },
+    {
+      "job": "build-scratch-r1",
+      "kind": "compile_test_lint",
+      "guardian_s": 14.39891498099314,
+      "exit": -15,
+      "cause": "FOREIGN_CPU",
+      "native_nn": 0,
+      "processed_charge": 0,
+      "waited": true,
+      "exact_absent": true
+    },
+    {
+      "job": "build-scratch-r2",
+      "kind": "compile_test_lint",
+      "guardian_s": 9.720763088029344,
+      "exit": 0,
+      "cause": null,
+      "native_nn": 0,
+      "processed_charge": 0,
+      "waited": true,
+      "exact_absent": true
+    },
+    {
+      "job": "test-scratch-r3",
+      "kind": "compile_test_lint",
+      "guardian_s": 23.520574911031872,
+      "exit": 0,
+      "cause": null,
+      "native_nn": 6606,
+      "processed_charge": 600000,
+      "waited": true,
+      "exact_absent": true
+    },
+    {
+      "job": "test-final-r1",
+      "kind": "compile_test_lint",
+      "guardian_s": 0.33724480197997764,
+      "exit": 101,
+      "cause": null,
+      "native_nn": 0,
+      "processed_charge": 0,
+      "waited": true,
+      "exact_absent": true
+    },
+    {
+      "job": "test-final-r2",
+      "kind": "compile_test_lint",
+      "guardian_s": 27.250579732004553,
+      "exit": 0,
+      "cause": null,
+      "native_nn": 7612,
+      "processed_charge": 600000,
+      "waited": true,
+      "exact_absent": true
+    },
+    {
+      "job": "lint-final-r1",
+      "kind": "compile_test_lint",
+      "guardian_s": 7.222830701968633,
+      "exit": 0,
+      "cause": null,
+      "native_nn": 0,
+      "processed_charge": 0,
+      "waited": true,
+      "exact_absent": true
+    },
+    {
+      "job": "build-final-r1",
+      "kind": "compile_test_lint",
+      "guardian_s": 7.691784076974727,
+      "exit": 0,
+      "cause": null,
+      "native_nn": 0,
+      "processed_charge": 0,
+      "waited": true,
+      "exact_absent": true
+    }
+  ],
+  "native_nn_total": 243500,
+  "native_nn_cap": 250000,
+  "known_science_processed": 366984,
+  "test_processed_upper_charge": 1200000,
+  "total_processed_charge": 1566984,
+  "processed_cap": 2000000,
+  "science_jobs": 5,
+  "science_job_cap": 6,
+  "science_guardian_seconds": 1.6655454960418865,
+  "science_seconds_cap": 900,
+  "compile_tests_allattempt_seconds": 108.06914360297378,
+  "compile_tests_seconds_cap": 600,
+  "prestart_management": [
+    "test-scratch-r1 cargo payload path resolution before Popen, wallUNKNOWN",
+    "test-scratch-r2 monitor prior identity absent: NOT_STARTED/0child/NN0"
+  ],
+  "formatter_failure": "formatter-attempt1.json; noNN/model/build",
+  "old_failed_cargo_lock_guard": "build-scratch-r1 foreign exact identity not saved; original UNKNOWN retained/14.3989s cost",
+  "science_closed_no_further_jobs": true,
+  "old_caps": "preserved"
+}

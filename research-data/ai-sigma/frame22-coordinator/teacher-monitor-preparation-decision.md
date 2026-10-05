@@ -1,0 +1,9 @@
+# 273 監視欠測修復・残準備費の配分
+
+qualification-r2 slot1消費/actualNN UNKNOWN+保守620上界/管理inclusive5.428687s/背景inclusive5.638412s/自己TERM回収を保持。これはGPU数値反証ではなく観測管理の失敗です。登録された必要qualification修復枠（slot4相当/0game）を同MAX4/10mNN/3600s内で使い、元qualification結果を成功置換しません。各slotの実起動順も別に保存。
+
+[N/A] per-process memoryはNone/UNKNOWNで保持し、全device memory.usedのfresh数値を6GiB guardへの保守上界として使う修復を支持。device値を専有VRAM実測とは呼ばず、device数値も不明ならtyped不足で開始又は継続を拒否する。GPU computePID所有guard/foreign拒否/全回収は維持し、未知0補完はしない。新version/source/failureを別保存しAST一致+対応formatter/必要小checkを範囲内で行う。
+
+費用判断:実測compile84.239782s/testlint95.718340s=179.958122sは既verification command wallとして全保持し、旧static180への保守charge/原ledger/未測readやLLM UNKNOWNも変更しません。同秒を排他的CPU実費へ読み替えたり二重加算しない。残generation/cache接線は今回の許可されたframe22課題を完結させる必要作業なので、統括が追加の将来NN0 source/設定・opening登録・canonical cacheexport/停止保存準備に合計180sの有界command wallを明示配分します。旧180のresetではなく前向き追加配分です。新実測を別ledgerで積み上げ、未測費はUNKNOWNのまま残す。CPU2logical worker2/infer4、RAM3GiB、既data128/build128/WT8MiB、親CPU4/RAM8/12GiBと期限、NN/GPUscience/MAX4上限は一切増やしません。
+
+新compileが追加で必要ならこの将来180内に必要上界を先に含めてください。多くの読取や全履歴再監査を追加せず、いま必要なguard小修復→資格→同48生成→canonical cache/map/SHAの接続へ進める。十分な残量がなくなれば具体不足・全予定分母を報告。新モデル/依存/環境同期・追加game・新学習0。producer metadata field/test成功はowner証拠、統括source reviewと274実入力チェックとは分離。

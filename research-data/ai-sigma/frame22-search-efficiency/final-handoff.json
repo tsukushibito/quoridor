@@ -1,0 +1,55 @@
+{
+  "at": "2026-10-05T12:52:23.280193+00:00",
+  "issue": "quoridor-4lc.275",
+  "owner": "codex:01a0f31d-8227-7e03-a7e6-915b4918c11b",
+  "adoption": "DEFER_MAIN_HOOK_UNSTABLE_FINAL_COST",
+  "source_correctness": "10tests Scalar/Simd plus finite root/counter parity; independent coordinator readonly source review supports limited invariants",
+  "all_512_comparison_searches": "same original completed-depth2 snapshot and variant counters PASS",
+  "prototype_ratios": [
+    0.9878147478613407,
+    0.9781878588480225
+  ],
+  "final_ratios": [
+    1.0012666961860923,
+    0.9568496057992464
+  ],
+  "source_stop_sha": "08484e063d974d0ad34def4dbacec1889772d11440e2c72ea05da42ddccdf989",
+  "archive_sha": "bfefc34e6ab5222e30753fe6936794901be3948ad00ca6714ef78f3efd44ecc7",
+  "archive_bytes": 60044,
+  "archive_member_restore_count": 112,
+  "current_source4_bytes_match_stop": true,
+  "source_paths": {
+    "crates/quoridor-ai/src/alphabeta.rs": "5e806a5361ba3e0f1391cd629b4a3513cb9d771a88626a12416a5095ded50a94",
+    "crates/quoridor-nnue/src/lib.rs": "e962ac11fbd3fc2d7a3c9c741d104ccf7a141b057122e2a8c70fe1604a8ad20d",
+    "crates/quoridor-ai/examples/alphabeta_cost.rs": "8b99950c2aa8d25ada32af969e02ea9c031d10605f75fc59ac570fa542c4fe72",
+    "crates/quoridor-ai/tests/nnue_scratch.rs": "475b2b4baa4f0368683be8e49b4b502338e64defe5830a7650b9fb42df80c965"
+  },
+  "data_report_paths": [
+    "research-data/ai-sigma/frame22-search-efficiency",
+    "docs/reports/ai-sigma-critic-frame22-search-efficiency.md"
+  ],
+  "integration_owner": "coordinator only; no actor Git/index/commit",
+  "comparisons_only": "persist stopped candidate/source/test; no current main caller hook; remove inactive comparison WT only after coordinator sourcepoint/byte proof and reader ownership confirmation",
+  "native_nn": 243500,
+  "processed_charge": 1566984,
+  "compile_test_allattempt_s": 108.06914360297378,
+  "science_guardian_s": 1.6655454960418865,
+  "storage_scope_allocated_before_pack": 1306624,
+  "scope_with_remaining_forecast": 3403776,
+  "whole_parent_point": 11113521152,
+  "old_unknown_preserved": 134217728,
+  "first_profile_entry_exact_bytes": "NOT_RETAINED; SHA and raw plus original libraries preserved; no complete replay certification",
+  "next_one": "cheap internal encode/maps/ID cost vs fullhistory legal-sequence TT eligible-depth opportunity diagnostic; source-only saved stats do not provide internal spans/key traces",
+  "next_estimate_not_authorization": {
+    "compile_s": 60,
+    "science_s": 30,
+    "native_nn_upper": 12000,
+    "processed_upper": 32000,
+    "output_bytes_forecast": 65536
+  },
+  "all_own_scientific_children_waited": true,
+  "future_allhost_absence_claim": false,
+  "goal": "NOT_ACHIEVED",
+  "backup_and_owner_close": "closed / backup sync exit0 335ms",
+  "close_backup_receipt_sha": "53860a6c2020a87a100fddbded8e5eed59e6a1f575890a1ee3f32fd460435b4b"
+}

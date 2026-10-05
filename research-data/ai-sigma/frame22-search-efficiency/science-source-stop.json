@@ -1,0 +1,42 @@
+{
+  "at": "2026-10-05T12:42:01.516620+00:00",
+  "task": "frame22-search-efficiency-275-v1",
+  "scientific_source_writer_stopped": true,
+  "no_active_science_or_build_children": true,
+  "point_only": true,
+  "last_science_stop": "2026-10-05T12:40:01.967410+00:00",
+  "sources": {
+    "crates/quoridor-ai/src/alphabeta.rs": "5e806a5361ba3e0f1391cd629b4a3513cb9d771a88626a12416a5095ded50a94",
+    "crates/quoridor-nnue/src/lib.rs": "e962ac11fbd3fc2d7a3c9c741d104ccf7a141b057122e2a8c70fe1604a8ad20d",
+    "crates/quoridor-ai/examples/alphabeta_cost.rs": "8b99950c2aa8d25ada32af969e02ea9c031d10605f75fc59ac570fa542c4fe72",
+    "crates/quoridor-ai/tests/nnue_scratch.rs": "475b2b4baa4f0368683be8e49b4b502338e64defe5830a7650b9fb42df80c965"
+  },
+  "source_edit_scope": "only listed4WT source files; main/runner/core/features unchanged",
+  "weights": "b81792d5ba00c6d79b58cada2fc81d84ea822db48c04420b4e269fb9b71841b3",
+  "model_manifest": "1b0a2998edaf7bef84e6a31634b30735b576511a96ec857c45ad429a8ac5ce6b",
+  "core": "a12641610b25fd7bb36b7a3408ed377fdb9c4767e6e5f2edbd792090686c7736",
+  "features": "8711e1b1a6f2e3f32103f70c4a1b8b4cf204c783c0a67e78b7772a880662a2f8",
+  "selected_patch": "2ab7406829d04f02e635461bd3c681eaeaaf29e5e6c3fc3b3c0ef632ec69a3f3",
+  "results": {
+    "comparison-analysis.json": "28311e4973b40b8f496475c729e05d0111531f20799a7cab489d430640a987d2",
+    "cost-and-attempts.json": "88f3c16eddd6e957628c9425a5656e6b1622f174a9cd27b8c0d8faf4c260b4d5"
+  },
+  "allattempt_process_receipts": {
+    "profile-r1": "432f7c46c5333541ddeb1990fccae69a5ab9bf2cf57d87213a580f99037084be",
+    "comparison-r1": "d4b4426acaf1ffe6cf2436f8a6d463fe60342157747889e36bad4099a19dd3bf",
+    "comparison-r2": "b45440496adbb6166a94c41f062ab9e76ace67e5ae77772ebcb29f0d1f2d3b9f",
+    "comparison-final-r1": "5e4c834102115199218779e3c456903ce7ec0e2fcb4b497af38de4f3900d9d77",
+    "comparison-final-r2": "0f246a97b057252f9d016809d4fa40a0b1cc2076abac3a00643e1cb06577990a",
+    "build-profile-r1": "bf5e6f253aa33c8653a43b45aaf69f7255f5443de998e57586c66d509ab59021",
+    "build-scratch-r1": "b4a7d48c53518492907b5c88a7c93b005bf376cb8bd9be7b3a1061278f1e1333",
+    "build-scratch-r2": "4a174e678a90496970f5e64b5b4681b2aa44c76492c3b123e196cd3c34dbcd9c",
+    "test-scratch-r3": "732b4e47852a5694662e6adc72d98961dc06b37fd1e7676859ce3cb4a462c0a6",
+    "test-final-r1": "576403c185be72600932ee7067f0bfee77bbc1cbc91ddbb12d2f59f3a1b78411",
+    "test-final-r2": "05824eeb38e9634a3ca5984305acf55deb6cd02600f15c4f3603e6a25617c20b",
+    "lint-final-r1": "647807996298d38b484c019b415ab761869197f693b963472be4422d1ebae5aa",
+    "build-final-r1": "824ee9691bb387f7c0ff1a36f791db660023e3e59df60f0068fb341ec6221228"
+  },
+  "readers": "Model assets paths above only; all own compiler/native evaluation children waited; no old ai-sigma WT reads",
+  "defaultindex_privateindex_commit_operations": 0,
+  "interpretation": "final timing ratio1.001267/0.956850 variable; no stable production original-v-new or teacher/strength inference"
+}

@@ -1,0 +1,7 @@
+# 275 最終版の性能結論更新
+
+最終版median-sum1.001267を受け、prototype .9878/.9782の小利益を最終main源へ移植しません。統括の独立readonly source reviewは同算術順/parent immutable/深さ別lifetime/unmake error復帰を支持する範囲です（scratch-delta-source-review.json、最終登録4SHA確認済み）。性能支持と別に保持します。
+
+登録済み同finalbinary reverse order確認は元caps内で完結し、科学/source停止と全予定/費/失敗/最終test/resultを返してください。最終系列で方向が安定しなければ、保守費を増やすmain hook追加は見送り、source/tests/resultを比較専用で保存します。一方の有利runだけを採択せず、元production全体比較未実施も保持。NNUE幅・実caller分布が変わった際に再検討できます。これはscratch方式一般の否定ではありません。
+
+次配分候補はadvance内部のencode/maps/ID生成費と、fullhistory保持の合法sequence TT再用機会を比較した安い診断です。今回sourceへ第三介入は追加しません。最終停止時に、保存statsだけでどこまで問えるか・新実測が必要なら実装/検証/計算/保存費を短く返してください。GPU真batchと新教師学習は並行の主課題を維持し、actor数や全稿をgateにしません。
