@@ -1,0 +1,98 @@
+{
+  "schema": "epoch-software-307-verification-v1",
+  "recorded_at": "2026-10-05T23:21:28.890147+00:00",
+  "new_task": "quoridor-4lc.307",
+  "original303_failure_unchanged": true,
+  "new_source_donor_sha": "9ff58ebc895bb130736580fe4a470643ac6b043143ed429e4067f5a136ba5088",
+  "tests20": "PASS",
+  "NN": 0,
+  "model_forward": 0,
+  "source_writer_stopped": true,
+  "command_cumulative_wall": 0.876112864993047,
+  "commands": [
+    {
+      "argv": [
+        "/workspaces/quoridor/tools/research-quality/.venv/bin/ruff",
+        "format",
+        "--config",
+        "tools/research-quality/ruff.toml",
+        "python/quoridor_training/common.py",
+        "python/quoridor_training/train.py",
+        "python/quoridor_training/sampling.py",
+        "python/quoridor_training/test_sampling.py"
+      ],
+      "exit": 0,
+      "wall": 0.11326738697243854,
+      "output": "4 files left unchanged\n"
+    },
+    {
+      "argv": [
+        "/workspaces/quoridor/tools/research-quality/.venv/bin/ruff",
+        "format",
+        "--check",
+        "--config",
+        "tools/research-quality/ruff.toml",
+        "python/quoridor_training/common.py",
+        "python/quoridor_training/train.py",
+        "python/quoridor_training/sampling.py",
+        "python/quoridor_training/test_sampling.py"
+      ],
+      "exit": 0,
+      "wall": 0.10749846399994567,
+      "output": "4 files already formatted\n"
+    },
+    {
+      "argv": [
+        "/workspaces/quoridor/tools/research-quality/.venv/bin/ruff",
+        "check",
+        "--config",
+        "tools/research-quality/ruff.toml",
+        "python/quoridor_training/common.py",
+        "python/quoridor_training/train.py",
+        "python/quoridor_training/sampling.py",
+        "python/quoridor_training/test_sampling.py"
+      ],
+      "exit": 0,
+      "wall": 0.11370422103209421,
+      "output": "All checks passed!\n"
+    },
+    {
+      "argv": [
+        "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+        "-m",
+        "unittest",
+        "quoridor_training.test_sampling",
+        "quoridor_training.test_sharded_cache",
+        "quoridor_training.test_selected_target",
+        "quoridor_training.test_contracts"
+      ],
+      "exit": 0,
+      "wall": 0.5388042149716057,
+      "output": "....................\n----------------------------------------------------------------------\nRan 20 tests in 0.149s\n\nOK\n"
+    }
+  ],
+  "bindings": [
+    {
+      "path": "python/quoridor_training/common.py",
+      "bytes": 9147,
+      "sha256": "13b1bd0ffa87055df0d34232cb450f1db453dc4285e3b2e86d52abbaa77bbf77"
+    },
+    {
+      "path": "python/quoridor_training/train.py",
+      "bytes": 24279,
+      "sha256": "6188563f8a30f7132d89873c19c699b46fb65f109963abcbca962f98a4be985c"
+    },
+    {
+      "path": "python/quoridor_training/sampling.py",
+      "bytes": 1948,
+      "sha256": "b1c5024eeaf3fc216bb02ddf70079ca91c3258a779c5286cd57e9efa256cfb8a"
+    },
+    {
+      "path": "python/quoridor_training/test_sampling.py",
+      "bytes": 2911,
+      "sha256": "6b5cf31f7eafd0c2347b5bd24cecf8f35aaca153a5b65d0f39b73d0938232826"
+    }
+  ],
+  "independent_review": "PENDING",
+  "new_epoch_learning304": "NOT_STARTED"
+}

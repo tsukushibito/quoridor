@@ -129,3 +129,31 @@ Closed experiment本人receipt b7dec77fでold285 liveNN11429000→old8729000＋n
 次判断は自動増量ではなく、事前固定witnessの同completed depthでleaf/root Action/history/native全費を比較する小scopeを第一候補にする。約594familyのIID仮定halfwidth見積は未選定量の目安で、保証・取得/生成許可ではない。現役main sharded cache/固定評価point/native-only/scheduled同forward保存の4pathは停止handoffから統括レビュー中、独立APIとcache五tuple fixtureの必要NN0検証は別conserved source/manage確認後に実施する。298本人20source/5manage移譲は累積UNKNOWNでNOT_CONFIRMED、実移譲0を保持し他ownerの確認unusedへ具体化する。公開重み/新重みの製品採用・深度目標達成・同時間棋力はこの一巡で認定しない。
 
 現役4pathのmainレビュー・formatter/lintと15件NN0検証（shard4＋selected-target8＋既contract3）はPASS。既cache single-pathのmmap/test拒否も確認し、五tupleのbinding/rows list[dict]/tensor先頭次元一致を既testへ追加した。固定評価points/native-only/scheduled同forward保存・sampling実数を単一trainer入口へ接続し、現役手順を更新した。検証command全wall2.482726426秒、新model/forward/train/futurelabels0。289 owner source20だけの確認unusedを前向きにrecipient prep15＋管理5へ配分、旧source880+manage90=新old860+90+15+5の総970秒を保存。Donor manage5 NOT_CONFIRMEDは実移譲0、298 donor0も不変更、過去UNKNOWN・費分類を変更しない。通常統合管理の既coordinator領域に小proofを保持する。
+
+次の実配分は[301の同完了深度診断](../../research-data/ai-sigma/frame22-coordinator/native-z-completed-depth-contract.md)、hypothesis既savedへ全文accepted配送。300評価前witnessの最初の4 prefixを機械固定、新native＋D・完了depth1・一MAX1/30秒/2000NN/5000processed、main binary6a2fc4f再利用/compile0/追加fit・game・futuretargets0。PVS再探索とroot/selectedchild full-delta overheadを含め1760NN保守式、単純836leaf数だけを上界にしない。CLIの全合法手の厳密leaf vectorはNOT_RECORDEDであり、深度・PV・Action・評価回数・history保持・全caller時間の観測に限定する。元300 cohort初報5/6は最新4/6改善・2/6悪化へ訂正、元短報不変更。
+
+Closed owner donor d2594b6eで oldNN8729000=8727000+2000、science11040=11010+30、liveMAX24=23+1、oldactual15/18.2m/MAX30/UNKNOWNを保持。289 unusedsource860=760+新prep80+control20（元manage90 debit0）、29932=retained30＋新2MiB。Old299 current4616192＋Git/temp8MiB=13004800<31457280、new source-only inclusive1.5MiB/cap2は92のfreshglobalと本人forecastへ接続、科学actualstartまだ未認定。静的・fixtureは進め、22:55 science/23:05 source/23:15 saveまでに不成立ならNOT_STARTEDを保存し延長しない。
+
+量案は無期限保留にしない。300実paired SD .4570でgain .03677と同程度の95%halfwidthに約594 familyというIID仮定の目安、検出power保証ではない。96実170255NN/41.7156秒から同密度594は約105万NN/約258秒生成期待、保守は594×200×65＋13block warm468≈772万NN、投影・資格・mask・二model一巡・全源保存/回収は別費。現枠で自動生成せず、次未選定量はcohort依存/wholefamily欠測を含む実有効量と必要効果・全工程25–60分＋保存5–15分という旧概算を更新して具体配分する。4prefix診断は安いから十分な量を置換するものではなく、同horizonで重要特徴/history/leaf値やActionの欠落が見えれば表現・位置経路・TT/orderingの順位を上げる。独立量/同時間棋力・Sigma K800主要手順深度/100–500ms完了深度目標は未達のまま保つ。
+
+## ユーザー指摘による学習設定の再優先（22:38以後）
+
+ユーザー「学習曲線を確認した？ハイパーパラメータを第一に疑うべき。」を採択。統括も保存3runのconfig/curvesを直接読み、[SHA付き実読束](../../research-data/ai-sigma/frame22-coordinator/direct-learning-curves-priority-v1.json)へ保存した。公開290はAdam1e-4/WD0/batch128/no scheduler/dropout0の共通trajectoryでseenだけを変え、LR対照ではない。Train .9244→.4923→.3741→.3636に対しselection1.0140→1.0529→.9757→.9860、公開20inputsの限界を保持する。Native298もstep0/1000/4000/7813でfamily train .6154/.2803/.00519/.000319、selection .6609/.5859/.7479/.8519、train飽和23.2%→88.6%→99.6%。凍結はBEST1000でLAST未使用だが、1000–4000の観測間隔は最良窓の見落としを残す。旧rootmeanに効いた共通低LRをzの適合証拠にせず、学習側の原因順位をLR・露出/早期停止の適否へ改める。教師/分布を主要原因に断定しない。
+
+[302のLR・早期窓対照](../../research-data/ai-sigma/frame22-coordinator/native-z-learning-rate-contrast-contract.md)を新hypothesis契約として全文配送した。301の実jobを割り込ませず自然sourceSTOP/close後、同432T/144V・初期ec4167・特徴/QF1+D/尺度/samplingを固定、LR1e-4対3e-5、各4000step/512000seen、23評価点で早期利益から退行を密に観測する。2fit一課題・追加全項目sweep0、低LRが末尾でも改善中なら未収束打切りとして保持する。主selectionは既探索的native144familyのみ、公開43/RuleA48/96は条件・checkpointの指標に戻さない。予定NN1923656上界/2m、MAX2/180秒、prep220/manage30・新24MiBは既確認unusedへのownerdonor/fresh92/localforecastから具体化、登録を学習開始・改善認定にしない。新scope science23:05/source23:12/save23:20、旧301等deadlineは不変更、親23:26/31/34/36:03内。
+
+正則化/減衰、重複sampling・選定group、必要独立量/位置経路/history/leafhorizon/探索高速化は競合として残す。LRが唯一原因との結論はしない。次の独立評価は別fresh96・新selectedcase＋元native57684865＋D/定数のfreeze-before-label protocolと全費を具体化するが、302内の実行許可には含めない。現開封96を新blindへ戻さず、新candidateの選定改善を未見・棋力へ代用しない。
+
+### 23:18 更新: 狭い固定母集団・学習設定・探索実装
+
+保存curveのtrainほぼゼロ・validation退行から、狭い実効母集団への反復露出、LRと更新量、停止窓、代表的selectionを学習設計の第一群へ戻す。公開43保存18,914,078行はaugmentation/重複込みでunique・教師資格は未測。複数cycleのlabel-blind unique/多様性と未露出selection拡張を、stream展開・資格・全学習/評価/保存費を含めて次の明示配分で比較する。現publicT67937/4996inputs・V19846/20inputs、nativeT14803反復は小コーパスの接続/探索比較に限定し、十分な母集団での方式評価にしない。
+
+旧302はmain旧game復元抽出A/Bを通知前に完了した。A1e-4 BEST1250 .584376578/LAST4000 .747894928、B3e-5 BEST3750 .574644168/LAST4000 .574924200、D .660867274。低LRで退行が遅れる有限結果で、右端未収束・既見144selection・未見棋力未評価を保持。全actual1922704NN/2MAX/22.609762s、旧不均等露出・原sourceと失敗不変更。
+
+303 canonical epoch候補は全eligible行再shuffle・非復元・末尾batch・actual seen/completed/partial/row-count・固定N/(G\*n_g)lossを実装したが、20NN0検証のfloat32 objective assertionが1件失敗した。19/20、formatter/lintPASS、source23:08期限を越えたためFINITE_INCOMPLETE/sourceSTOP。未検証sourceを新epoch学習成功へ変換しない。304の32epoch二LR実学習はNOT_STARTED。最小precision修正・再検証は別307の必要source15前向き確認後に限定し、旧303期限と失敗を保持する。
+
+ユーザーの手跨ぎTT・有効hit改善・MPC要求は独立305/306へ具体登録・existing savedへ実配送した。305は履歴/評価器/規則/選択性の正確性を保持したplayer-owned tableとcaller/counters、306はMulti-ProbCutの浅深OFF校正schema/戦術bypass/TTnamespace/未使用validationのsource準備。compile14はcoor294unused11＋288confirmed3を前向き採択、source・NN/MAXとnew2+.25MiBはdonor/ownerforecast/92確認が実入場条件。校正・実ON/OFF・同時間棋力は未実行で、当枠実装/検証/採否と次必要量を分ける。良いNNUEを探索実装の入口gateにしない。heavy23:26/sourceと各save・親23:31/34/36を不変更。
+
+307の新source15前向き確認9ff58ebc後、float32 assertionのみmachine epsilon相当の許容差へ修正。20NN0検証/RuffformatlintはPASS、source STOP、hypothesis独立read-only review待ち。303元19/20失敗・source期限を成功へ置換しない。304 CLOSED_FINITE_NOT_STARTED/科学0/モデル0、12MiB=retained9.75+TT2+MPC.25の保存移譲だけ成立。次の主学習scopeは `research-data/ai-sigma/frame22-coordinator/next-learning-diversity-and-overfit-scope.md` に担当・複数cycle入力多様性/代表的V/epoch-LR-batch/展開全費・未知/新明示機会を具体化し、今枠の小コーパス反復を追加しない。
+
+307独立ソースレビューは4currentSHA一致/seed全行epoch・tail83先課金・train-only重みを有限受入れ。既存API caveats:active early stop未実装/selected checkpoint露出と全run露出の分離/中断時partial counts未保存/CLIsteps後再validation。正常完了sampler資格とtrainer全中断契約の未完を分け、具体担当・費を `epoch-interruption-accounting-followup-contract.md` に残す。新学習0/304未開始は不変更。

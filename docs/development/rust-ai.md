@@ -60,6 +60,12 @@ CUDAは`cuda-aoti`、TensorRTは`tensorrt`のCargo featureを明示する。`QUO
 
 `evaluation.checkpoints` に初期0から最終stepまでの昇順・重複なし配列を指定すると、その固定stepで選定する。省略時は既定intervalを使う。`artifacts.mode: "native"` はONNXを作らずnative重みを保存する。`artifacts.save_scheduled: true` は既存評価forwardのtrain/全raw validation scalarと行順、checkpoint、native重み、実sampling回数を保存する。資格外validation行の保存値を選定metricへ混ぜず、保存・forward分もrun予算へ含める。
 
+307のsamplerと正常完了経路は20NN0検証・独立ソースレビューを通過した。未実行epoch学習の再開前には、中断時のpartial使用量保存とselected checkpointの露出量を追跡する。現行 `early_stopping_patience` は実際のloop停止に使われず、BEST checkpoint選定とactive early stoppingを区別する。明示checkpointを使うrunでは解決後のconfig stepsを固定し、CLI `--steps` で後から上書きしない。末尾batchもmean lossの一更新であり、全epoch一括勾配や旧sampler軌跡と同じとは扱わない。
+
+固定cacheの既定 `training.sampling: "epoch"` はseed付きで毎epoch全eligible train行を再shuffleし、そのepoch内で各行を一度ずつ使う。末尾が小さいbatchも使い、validation/testは含めない。学習予算の `training.steps` は実行する更新上限で、例えば14803行・batch128なら1epochは116更新、32epochは3712更新・473696seen（末尾83行）になる。Curve/freeze/sampling.jsonは実seen、完了epochと途中fraction、optimizer stepsと各行の使用量を記録する。途中epochを完了epochへ数えない。Epoch曲線の横軸は実epochで、任意の100万seenを標準にしない。
+
+全行均等露出の既定lossは `training.loss_weighting: "row"`。対局・group等重みの目的には `"group"` を明示し、eligible train内の行数N、group数G、当groupの行数nに対して固定重みN/(G×n)を付けた行lossのmeanを使う。全trainの重み平均は1で、batchごとの重み和で再正規化しない。これは全行均等使用とは別の目的で、長い対局の寄与を区別する。公開input groupは真正game IDを保証しない。`row`/`game`の復元抽出は更新数を制限する大きなreplay snapshotや自己対局bufferのsubsampling用に選べる。`game`は既にgroupを均等抽出するので、さらにgroup lossを重ねる設定は拒否する。Sampler変更で旧runの使用量・目的・結果を遡及変更しない。
+
 新モデル・compiled engine・build・展開cacheは保存方針に従う管理外の領域へ置く。Gitにはコード・設定・実験検証データ・SHA付き小manifestを残す。既存の正式holdout、科学結果、凍結入力をソフト移行で書き換えない。
 
 ## 検証とWasm

@@ -27,7 +27,8 @@ DEFAULTS = {
         "batch_size": 128,
         "seed": 19080311,
         "target": "rootmean",
-        "sampling": "row",
+        "sampling": "epoch",
+        "loss_weighting": "row",
         "scheduler": "none",
         "device": "cpu",
         "threads": 1,
@@ -106,7 +107,8 @@ def resolve_config(path=None, overrides=()):
         ("model", "architecture"): ["scaled", "distance_residual"],
         ("optimizer", "name"): ["adam", "adamw", "sgd"],
         ("training", "target"): ["rootmean", "z"],
-        ("training", "sampling"): ["row", "game"],
+        ("training", "sampling"): ["row", "game", "epoch"],
+        ("training", "loss_weighting"): ["row", "group"],
         ("training", "scheduler"): ["none", "cosine"],
         ("training", "device"): ["cpu", "cuda"],
         ("evaluation", "monitor"): ["row", "game"],
@@ -116,6 +118,8 @@ def resolve_config(path=None, overrides=()):
     for (section, key), choices in allowed.items():
         if result[section][key] not in choices:
             raise ValueError(f"invalid {section}.{key}: {result[section][key]}")
+    if result["training"]["sampling"] == "game" and result["training"]["loss_weighting"] != "row":
+        raise ValueError("game sampling already balances groups; do not weight groups twice")
     points = result["evaluation"]["checkpoints"]
     if points is not None and (
         not isinstance(points, list)

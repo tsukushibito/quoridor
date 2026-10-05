@@ -232,6 +232,20 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
     evaluation_validation = ix_validation_raw if scheduled else ix_validation
     primary_in_raw = np.searchsorted(ix_validation_raw, ix_validation)
     sampled_rows = np.zeros(len(rows), dtype=np.int64)
+    from .sampling import EpochSampler, loss_weights
+
+    epoch_sampler = (
+        EpochSampler(ix_train, cfg["training"]["batch_size"], cfg["training"]["seed"])
+        if cfg["training"]["sampling"] == "epoch"
+        else None
+    )
+    training_seen = 0
+    row_loss_weights = np.zeros(len(rows), dtype=np.float32)
+    row_loss_weights[ix_train] = loss_weights(
+        [rows[i]["group"] for i in ix_train], cfg["training"]["loss_weighting"]
+    )
+    objective_weights = torch.as_tensor(row_loss_weights)
+
     if scheduled:
         with gzip.open(output / "validation-order.json.gz", "wt") as stream:
             json.dump([rows[i]["id"] for i in ix_validation_raw], stream)
@@ -280,8 +294,13 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
             {
                 "step": step,
                 "samples": samples,
-                "training_seen": step * cfg["training"]["batch_size"],
-                "row_epoch": step * cfg["training"]["batch_size"] / len(ix_train),
+                "training_seen": training_seen,
+                "row_epoch": training_seen / len(ix_train),
+                "completed_epochs": epoch_sampler.completed_epochs if epoch_sampler else None,
+                "partial_epoch_fraction": epoch_sampler.partial_epoch_fraction
+                if epoch_sampler
+                else None,
+                "loss_weighting": cfg["training"]["loss_weighting"],
                 "validation_forward_rows": len(evaluation_validation),
                 "wall_seconds": time.monotonic() - start,
                 "train": tr,
@@ -303,8 +322,10 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
 
     evaluate(0)
     for step in range(1, cfg["training"]["steps"] + 1):
-        charge(cfg["training"]["batch_size"])
-        if cfg["training"]["sampling"] == "game":
+        charge(epoch_sampler.next_batch_size if epoch_sampler else cfg["training"]["batch_size"])
+        if epoch_sampler is not None:
+            index = epoch_sampler.next_batch()
+        elif cfg["training"]["sampling"] == "game":
             group_ix = torch.randint(
                 len(group_indices),
                 (cfg["training"]["batch_size"],),
@@ -321,10 +342,14 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
             ]
         ix = torch.as_tensor(index, dtype=torch.long)
         np.add.at(sampled_rows, index, 1)
+        training_seen += len(index)
         model.train()
         optimizer.zero_grad(set_to_none=True)
         prediction = model(*batch(ix))
-        loss = torch.nn.functional.mse_loss(prediction, targets[ix].to(device))
+        per_row_loss = torch.nn.functional.mse_loss(
+            prediction, targets[ix].to(device), reduction="none"
+        )
+        loss = (per_row_loss * objective_weights[ix].to(device)).mean()
         if not torch.isfinite(loss):
             raise ValueError("nonfinite training loss")
         loss.backward()
@@ -365,14 +390,24 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
         export(model, cfg, statistics, distance_fit, output / (name + "-model"))
     write(output / "curves.json", curve)
     write(output / "gradients.json", diagnostics)
-    if scheduled:
+    if scheduled or epoch_sampler is not None:
         write(
             output / "sampling.json",
             {
                 "seen": int(sampled_rows.sum()),
                 "mode": cfg["training"]["sampling"],
-                "row_count_order": "immutable loaded sharded row order",
+                "row_count_order": "immutable loaded cache row order",
+                "optimizer_steps": step,
+                "completed_epochs": epoch_sampler.completed_epochs if epoch_sampler else None,
+                "partial_epoch_fraction": epoch_sampler.partial_epoch_fraction
+                if epoch_sampler
+                else None,
+                "training_rows": len(ix_train),
+                "training_indices": ix_train.tolist(),
+                "loss_weighting": cfg["training"]["loss_weighting"],
                 "row_counts": sampled_rows.tolist(),
+                "training_row_min_visits": int(sampled_rows[ix_train].min()),
+                "training_row_max_visits": int(sampled_rows[ix_train].max()),
                 "family_counts": {
                     family: int(sampled_rows[group].sum())
                     for family, group in zip(families, group_indices)
@@ -407,6 +442,10 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
         "best_validation_mse": best_loss,
         "selection_weighting": cfg["evaluation"]["monitor"],
         "evaluation_checkpoints": sorted(evaluation_steps),
+        "training_seen": training_seen,
+        "completed_epochs": epoch_sampler.completed_epochs if epoch_sampler else None,
+        "partial_epoch_fraction": epoch_sampler.partial_epoch_fraction if epoch_sampler else None,
+        "loss_weighting": cfg["training"]["loss_weighting"],
         "artifact_mode": cfg["artifacts"]["mode"],
         "samples": samples,
         "model_sha": sha(output / "best-model" / "manifest.json"),
@@ -427,13 +466,14 @@ def _plot(curves, path):
         '<svg xmlns="http://www.w3.org/2000/svg" width="720" height="390">',
         '<rect width="720" height="390" fill="white"/>',
     ]
-    max_step = max(c["step"] for c in curves) or 1
+    axis = "row_epoch" if all(c.get("completed_epochs") is not None for c in curves) else "step"
+    max_step = max(c[axis] for c in curves) or 1
     max_y = (
         max(c[key]["target_game_equal_mse"] for c in curves for key in ["train", "validation"]) or 1
     )
     for key, color in [("train", "#1261a0"), ("validation", "#c33")]:
         points = " ".join(
-            f"{45 + 630 * c['step'] / max_step:.2f},{320 - 270 * c[key]['target_game_equal_mse'] / max_y:.2f}"
+            f"{45 + 630 * c[axis] / max_step:.2f},{320 - 270 * c[key]['target_game_equal_mse'] / max_y:.2f}"
             for c in curves
         )
         lines.append(
@@ -441,7 +481,7 @@ def _plot(curves, path):
         )
     lines += [
         '<path d="M45 40V320H675" fill="none" stroke="black"/>',
-        '<text x="310" y="360">Optimizer steps</text>',
+        f'<text x="310" y="360">{"Epochs" if axis == "row_epoch" else "Optimizer steps"}</text>',
         '<text x="8" y="25">Game equal MSE</text>',
         "</svg>",
     ]

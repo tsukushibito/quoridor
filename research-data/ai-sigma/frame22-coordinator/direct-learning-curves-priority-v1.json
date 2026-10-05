@@ -1,0 +1,392 @@
+{
+  "UTC": "2026-10-05T22:47:42.577709+00:00",
+  "source_inputs_directly_read": [
+    {
+      "run": "frame23-public-sigma-z-learning/public-z-1m-r1",
+      "source": {
+        "config": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-r1/config.json",
+        "config_SHA": "ae34122a9c76afb2957ce355cee9d8a44f78c1f573546a457f50c5f4038e910c",
+        "curves": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-r1/curves.json",
+        "curves_SHA": "ccabe4cb4da2f87d876b640f71aadee632550dee4c5021639a21fbbd008d9cd4"
+      },
+      "settings": {
+        "model": {
+          "feature_version": "QF1",
+          "transformer_width": 32,
+          "hidden_width": 32,
+          "dropout": 0
+        },
+        "training": {
+          "steps": 7813,
+          "batch_size": 128,
+          "seed": 19080311,
+          "target": "z",
+          "sampling": "row",
+          "scheduler": "none",
+          "device": "cpu",
+          "threads": 1
+        },
+        "optimizer": {
+          "name": "adam",
+          "lr": 0.0001,
+          "weight_decay": 0,
+          "momentum": 0.0
+        },
+        "evaluation": {
+          "interval": 100,
+          "batch_size": 1024,
+          "monitor": "game",
+          "early_stopping_patience": 0,
+          "min_delta": 0
+        }
+      },
+      "points": [
+        {
+          "step": 0,
+          "train_family_mse": 0.9244017280391509,
+          "validation_family_mse": 1.0140109577883625,
+          "train_saturation": 0.0013689153186040007,
+          "validation_saturation": 0.0
+        },
+        {
+          "step": 1,
+          "train_family_mse": 0.9243727986400648,
+          "validation_family_mse": 1.0140029065111988,
+          "train_saturation": 0.0013689153186040007,
+          "validation_saturation": 0.0
+        },
+        {
+          "step": 5,
+          "train_family_mse": 0.9242839356584686,
+          "validation_family_mse": 1.0139860189109928,
+          "train_saturation": 0.0013689153186040007,
+          "validation_saturation": 0.0
+        },
+        {
+          "step": 20,
+          "train_family_mse": 0.9238461654864988,
+          "validation_family_mse": 1.0139175041501889,
+          "train_saturation": 0.0013689153186040007,
+          "validation_saturation": 0.0
+        },
+        {
+          "step": 50,
+          "train_family_mse": 0.9221880879287742,
+          "validation_family_mse": 1.0138264341393792,
+          "train_saturation": 0.0013689153186040007,
+          "validation_saturation": 0.0
+        },
+        {
+          "step": 100,
+          "train_family_mse": 0.9139664889926189,
+          "validation_family_mse": 1.014127960524914,
+          "train_saturation": 0.0013689153186040007,
+          "validation_saturation": 0.0
+        },
+        {
+          "step": 200,
+          "train_family_mse": 0.8517752330137833,
+          "validation_family_mse": 1.0181831604652645,
+          "train_saturation": 0.0014572324359332911,
+          "validation_saturation": 0.0
+        },
+        {
+          "step": 1000,
+          "train_family_mse": 0.4922582639848867,
+          "validation_family_mse": 1.0529299422576794,
+          "train_saturation": 0.17495620942932422,
+          "validation_saturation": 0.0
+        },
+        {
+          "step": 4000,
+          "train_family_mse": 0.39169642947159133,
+          "validation_family_mse": 1.0347159526223861,
+          "train_saturation": 0.4633851951072317,
+          "validation_saturation": 0.0
+        },
+        {
+          "step": 7813,
+          "train_family_mse": 0.37413825201002987,
+          "validation_family_mse": 0.9756914654312713,
+          "train_saturation": 0.5018178606650279,
+          "validation_saturation": 0.0
+        }
+      ]
+    },
+    {
+      "run": "frame23-public-sigma-z-learning/public-z-2m-r1",
+      "source": {
+        "config": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-2m-r1/config.json",
+        "config_SHA": "fe12e0d06aeedb42f1b8dc19ed01ffdbc78d00f0451b82d6dbac980a352ab012",
+        "curves": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-2m-r1/curves.json",
+        "curves_SHA": "5f7aca0d823a6458854c62edf61dc917e084adb3e89415e2996bb6bb9e075ab0"
+      },
+      "settings": {
+        "model": {
+          "feature_version": "QF1",
+          "transformer_width": 32,
+          "hidden_width": 32,
+          "dropout": 0
+        },
+        "training": {
+          "steps": 15625,
+          "batch_size": 128,
+          "seed": 19080311,
+          "target": "z",
+          "sampling": "row",
+          "scheduler": "none",
+          "device": "cpu",
+          "threads": 1
+        },
+        "optimizer": {
+          "name": "adam",
+          "lr": 0.0001,
+          "weight_decay": 0,
+          "momentum": 0.0
+        },
+        "evaluation": {
+          "interval": 100,
+          "batch_size": 1024,
+          "monitor": "game",
+          "early_stopping_patience": 0,
+          "min_delta": 0
+        }
+      },
+      "points": [
+        {
+          "step": 0,
+          "train_family_mse": 0.9244017280391509,
+          "validation_family_mse": 1.0140109577883625,
+          "train_saturation": 0.0013689153186040007,
+          "validation_saturation": 0.0
+        },
+        {
+          "step": 1,
+          "train_family_mse": 0.9243727986400648,
+          "validation_family_mse": 1.0140029065111988,
+          "train_saturation": 0.0013689153186040007,
+          "validation_saturation": 0.0
+        },
+        {
+          "step": 5,
+          "train_family_mse": 0.9242839356584686,
+          "validation_family_mse": 1.0139860189109928,
+          "train_saturation": 0.0013689153186040007,
+          "validation_saturation": 0.0
+        },
+        {
+          "step": 20,
+          "train_family_mse": 0.9238461654864988,
+          "validation_family_mse": 1.0139175041501889,
+          "train_saturation": 0.0013689153186040007,
+          "validation_saturation": 0.0
+        },
+        {
+          "step": 50,
+          "train_family_mse": 0.9221880879287742,
+          "validation_family_mse": 1.0138264341393792,
+          "train_saturation": 0.0013689153186040007,
+          "validation_saturation": 0.0
+        },
+        {
+          "step": 100,
+          "train_family_mse": 0.9139664889926189,
+          "validation_family_mse": 1.014127960524914,
+          "train_saturation": 0.0013689153186040007,
+          "validation_saturation": 0.0
+        },
+        {
+          "step": 200,
+          "train_family_mse": 0.8517752330137833,
+          "validation_family_mse": 1.0181831604652645,
+          "train_saturation": 0.0014572324359332911,
+          "validation_saturation": 0.0
+        },
+        {
+          "step": 1000,
+          "train_family_mse": 0.4922582639848867,
+          "validation_family_mse": 1.0529299422576794,
+          "train_saturation": 0.17495620942932422,
+          "validation_saturation": 0.0
+        },
+        {
+          "step": 4000,
+          "train_family_mse": 0.39169642947159133,
+          "validation_family_mse": 1.0347159526223861,
+          "train_saturation": 0.4633851951072317,
+          "validation_saturation": 0.0
+        },
+        {
+          "step": 7813,
+          "train_family_mse": 0.37413825201002987,
+          "validation_family_mse": 0.9756914654312713,
+          "train_saturation": 0.5018178606650279,
+          "validation_saturation": 0.0
+        },
+        {
+          "step": 10000,
+          "train_family_mse": 0.3705026404846159,
+          "validation_family_mse": 0.9786536625385437,
+          "train_saturation": 0.5056449357492971,
+          "validation_saturation": 0.0
+        },
+        {
+          "step": 12000,
+          "train_family_mse": 0.3667117048311432,
+          "validation_family_mse": 0.9800850079224586,
+          "train_saturation": 0.5097958402637738,
+          "validation_saturation": 0.0
+        },
+        {
+          "step": 15625,
+          "train_family_mse": 0.36363060703758093,
+          "validation_family_mse": 0.9860404689267815,
+          "train_saturation": 0.5249127868466373,
+          "validation_saturation": 0.0
+        }
+      ]
+    },
+    {
+      "run": "frame23-native-outcome-z-learning/native-z-1m-r1",
+      "source": {
+        "config": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-outcome-z-learning/native-z-1m-r1/config.json",
+        "config_SHA": "d5b694a2c088280633d0d18dd10a4d828fac0f6b3d794de1fbc9ef6ccda5eb02",
+        "curves": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-outcome-z-learning/native-z-1m-r1/curves.json",
+        "curves_SHA": "76e9cdc92955e1a36b88e4c618ab1b3d16607613c7814980da0be825dc87a126"
+      },
+      "settings": {
+        "model": {
+          "feature_version": "QF1",
+          "architecture": "distance_residual",
+          "distance_a": 0.0,
+          "distance_b": 8.0,
+          "transformer_width": 32,
+          "hidden_width": 32,
+          "dropout": 0.0
+        },
+        "training": {
+          "steps": 7813,
+          "batch_size": 128,
+          "seed": 19080311,
+          "target": "z",
+          "sampling": "game",
+          "scheduler": "none",
+          "device": "cpu",
+          "threads": 1
+        },
+        "optimizer": {
+          "name": "adam",
+          "lr": 0.0001,
+          "weight_decay": 0.0,
+          "momentum": 0.0
+        },
+        "evaluation": {
+          "interval": 10,
+          "checkpoints": [
+            0,
+            1,
+            5,
+            20,
+            50,
+            100,
+            200,
+            1000,
+            4000,
+            7813
+          ],
+          "batch_size": 1024,
+          "monitor": "game",
+          "early_stopping_patience": 0,
+          "min_delta": 0.0
+        }
+      },
+      "points": [
+        {
+          "step": 0,
+          "train_family_mse": 0.6153874875862496,
+          "validation_family_mse": 0.6608672738504593,
+          "train_saturation": 0.02438694859150172,
+          "validation_saturation": 0.031692372702302976
+        },
+        {
+          "step": 1,
+          "train_family_mse": 0.6153643352157123,
+          "validation_family_mse": 0.6608415855851612,
+          "train_saturation": 0.02438694859150172,
+          "validation_saturation": 0.031692372702302976
+        },
+        {
+          "step": 5,
+          "train_family_mse": 0.6152831078095757,
+          "validation_family_mse": 0.6607531055496796,
+          "train_saturation": 0.02438694859150172,
+          "validation_saturation": 0.031692372702302976
+        },
+        {
+          "step": 20,
+          "train_family_mse": 0.615110821033454,
+          "validation_family_mse": 0.6605756489249708,
+          "train_saturation": 0.02438694859150172,
+          "validation_saturation": 0.031692372702302976
+        },
+        {
+          "step": 50,
+          "train_family_mse": 0.6144383632888494,
+          "validation_family_mse": 0.6599352071330001,
+          "train_saturation": 0.02438694859150172,
+          "validation_saturation": 0.031692372702302976
+        },
+        {
+          "step": 100,
+          "train_family_mse": 0.6123560615323461,
+          "validation_family_mse": 0.6583061471958813,
+          "train_saturation": 0.02438694859150172,
+          "validation_saturation": 0.031692372702302976
+        },
+        {
+          "step": 200,
+          "train_family_mse": 0.6007179736518201,
+          "validation_family_mse": 0.6522363498112673,
+          "train_saturation": 0.026346010943727623,
+          "validation_saturation": 0.033171350095077115
+        },
+        {
+          "step": 1000,
+          "train_family_mse": 0.28025257416145444,
+          "validation_family_mse": 0.5858944176783827,
+          "train_saturation": 0.2321826656758765,
+          "validation_saturation": 0.18444960912740332
+        },
+        {
+          "step": 4000,
+          "train_family_mse": 0.005187532033559194,
+          "validation_family_mse": 0.7478949277500688,
+          "train_saturation": 0.8856312909545362,
+          "validation_saturation": 0.4722163532643144
+        },
+        {
+          "step": 7813,
+          "train_family_mse": 0.0003194659938524906,
+          "validation_family_mse": 0.8518868552180024,
+          "train_saturation": 0.9958792136729041,
+          "validation_saturation": 0.5778575956053243
+        }
+      ]
+    }
+  ],
+  "priority": "Learning LR/exposure/early stopping first; domain/teacher quality not asserted primary cause; not LR unique cause",
+  "new_task": "quoridor-4lc.302",
+  "cases": [
+    {
+      "lr": 0.0001,
+      "steps": 4000
+    },
+    {
+      "lr": 3e-05,
+      "steps": 4000
+    }
+  ],
+  "opened_test_used_for_parameter_selection": false,
+  "old_source_fee_FREEZE_STOP_result_unchanged": true,
+  "actual_new_fit_started": false
+}

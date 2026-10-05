@@ -1,0 +1,44 @@
+{
+  "schema": "epoch-software-303-finite-incomplete-v1",
+  "recorded_at": "2026-10-05T23:13:12.592917+00:00",
+  "status": "FINITE_INCOMPLETE",
+  "source_deadline": "2026-10-05T23:08:00Z",
+  "tests": {
+    "run": 20,
+    "passed": 19,
+    "failed": 1,
+    "failed_test": "test_group_normalization_and_objective",
+    "observed": 2.500000238418579,
+    "expected": 2.5,
+    "reason": "float32 rounding difference 2.384185791015625e-7 exceeds unittest seven-place assertion",
+    "original_failure_preserved": true
+  },
+  "formatter_lint": "PASS",
+  "model_forward": 0,
+  "new_epoch_training": "NOT_STARTED",
+  "source_writer_stopped": true,
+  "independent_review": "PENDING",
+  "future_minimum_fix": "Use explicit float32-appropriate error tolerance for the mathematical objective test, then rerun meaningful suite and read-only review under a new source allocation. No present code correction or rerun.",
+  "bindings": [
+    {
+      "path": "python/quoridor_training/common.py",
+      "bytes": 9147,
+      "sha256": "13b1bd0ffa87055df0d34232cb450f1db453dc4285e3b2e86d52abbaa77bbf77"
+    },
+    {
+      "path": "python/quoridor_training/train.py",
+      "bytes": 24279,
+      "sha256": "6188563f8a30f7132d89873c19c699b46fb65f109963abcbca962f98a4be985c"
+    },
+    {
+      "path": "python/quoridor_training/sampling.py",
+      "bytes": 1948,
+      "sha256": "b1c5024eeaf3fc216bb02ddf70079ca91c3258a779c5286cd57e9efa256cfb8a"
+    },
+    {
+      "path": "python/quoridor_training/test_sampling.py",
+      "bytes": 2828,
+      "sha256": "34d0e3605bf09379c1155e6ee48984f3c97a7e2f24e99461b64a72cf5c804d94"
+    }
+  ]
+}
