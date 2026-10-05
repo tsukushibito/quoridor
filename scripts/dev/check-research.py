@@ -17,6 +17,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[2]
 JS_ROOTS = ("tools/ai-sigma-native", "tools/ai-sigma-common")
+PY_ROOTS = ("python/quoridor_training", "tools/model-export")
 PY_FILES = tuple(
     "tools/nnue-training/" + name + ".py"
     for name in (
@@ -65,7 +66,10 @@ def sources():
             ROOT / "tools/research-quality/test_export.mjs",
         }
     )
-    py = [ROOT / file for file in PY_FILES]
+    py = sorted(
+        {ROOT / file for file in PY_FILES}
+        | {p for directory in PY_ROOTS for p in (ROOT / directory).rglob("*.py")}
+    )
     return js, py
 
 
@@ -103,7 +107,9 @@ def check_boundaries(js, py):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--format", action="store_true", help="Format maintained source only; no tests/jobs"
+        "--format",
+        action="store_true",
+        help="Format maintained source only; no tests/jobs",
     )
     parser.add_argument("--syntax-only", action="store_true")
     args = parser.parse_args()
@@ -113,7 +119,14 @@ def main():
         run("node", "--check", file)
     if args.syntax_only:
         print(
-            json.dumps({"js_syntax": len(js), "python_ast": len(py), "boundary": "PASS", "NN": 0})
+            json.dumps(
+                {
+                    "js_syntax": len(js),
+                    "python_ast": len(py),
+                    "boundary": "PASS",
+                    "NN": 0,
+                }
+            )
         )
         return
     prettier = ROOT / "tools/research-quality/node_modules/.bin/prettier"

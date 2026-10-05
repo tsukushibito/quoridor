@@ -1,0 +1,371 @@
+{
+  "base_commit": "1e50bb3500f9aa9da3c1e0fb97097068ef9addaa",
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 3928,
+      "sha256": "0f3f517003911b104323ce11496b2c6f7db87ecfcef1e91cabe4337b630f4fa8"
+    },
+    {
+      "path": "Cargo.lock",
+      "bytes": 20028,
+      "sha256": "3624f85656fc1fe50c60c8d704cc7ca33b70245a946b21b5f27f51ca3e951f8c"
+    },
+    {
+      "path": "Cargo.toml",
+      "bytes": 284,
+      "sha256": "6cbcf3b38c98492322761e78db908195789021216be51aa37de2888cacd0ab0b"
+    },
+    {
+      "path": "README.md",
+      "bytes": 12122,
+      "sha256": "ed408d714e3884d96bb0ab33d6efaa410a4cdbcc8def44575eb138b526d51480"
+    },
+    {
+      "path": "crates/quoridor-ai/Cargo.toml",
+      "bytes": 453,
+      "sha256": "a880aafe11bb69380558b756235b285a454302f57d832f4b2768c47f3fb64f31"
+    },
+    {
+      "path": "crates/quoridor-ai/src/alphabeta.rs",
+      "bytes": 24856,
+      "sha256": "e3dfd6207caa2a6d38874effd3a260913e95f8b660adf347c7f32593ebc41cf3"
+    },
+    {
+      "path": "crates/quoridor-ai/src/lib.rs",
+      "bytes": 18924,
+      "sha256": "31b128dd0ae781e6916b6f8993cc39ef57b5a65238e4a5cd567b4957176efe6d"
+    },
+    {
+      "path": "crates/quoridor-ai/src/sigma_mcts.rs",
+      "bytes": 15306,
+      "sha256": "dd59988dd7ddae090e1d71b7a17e1ef4f1772151db295c716a1375d84de67eee"
+    },
+    {
+      "path": "crates/quoridor-ai/tests/alphabeta_search.rs",
+      "bytes": 7338,
+      "sha256": "7dfadd8e194e4b138ed78241646fa208c7532730577f67038c7c9771c1a0bfd8"
+    },
+    {
+      "path": "crates/quoridor-ai/tests/sigma_oracle.cjs",
+      "bytes": 1297,
+      "sha256": "d093429527c9c0ef4b792d74850f4a2e39c6f5036c9f0c75944c0a56da5d0fc7"
+    },
+    {
+      "path": "crates/quoridor-ai/tests/sigma_parity.rs",
+      "bytes": 2872,
+      "sha256": "b2530c9a79c1437167f7f799bb0f9c7f3a809aa105b971c7448ab78d85e2cc71"
+    },
+    {
+      "path": "crates/quoridor-core/src/research.rs",
+      "bytes": 15928,
+      "sha256": "c4aaf1ed318be17e6755d54ed9940e02eb9bbeca5e3a8dcdab8a7ad0274ec3b5"
+    },
+    {
+      "path": "crates/quoridor-core/tests/context_undo.rs",
+      "bytes": 1211,
+      "sha256": "6276e95ac2481272590326e77c169d8b71a3be6550d19c37bef6e0178059fe23"
+    },
+    {
+      "path": "crates/quoridor-data/Cargo.toml",
+      "bytes": 393,
+      "sha256": "e709d66b096e9657d125082e3e8111374b4a68b9bf7762bcf48b82d965018736"
+    },
+    {
+      "path": "crates/quoridor-data/src/lib.rs",
+      "bytes": 29339,
+      "sha256": "aa8c08c4f7b52400f583135a6c2757eedcf54466a9d397016dd9c45277a85f40"
+    },
+    {
+      "path": "crates/quoridor-data/tests/datasets.rs",
+      "bytes": 3961,
+      "sha256": "efb03a696eaa5e2853d02fe307e7e4b3ca42d377ec308abea22bd3874a5b2ee9"
+    },
+    {
+      "path": "crates/quoridor-inference/Cargo.toml",
+      "bytes": 421,
+      "sha256": "f06ffee3d5e4ab6ea3b590db0e7bf94b6e6861a91313329ed21e2fe983cb3c4f"
+    },
+    {
+      "path": "crates/quoridor-inference/README.md",
+      "bytes": 2364,
+      "sha256": "c2e44f93c2db443b21385c6fda1a5cc5a3f2be38088f89a64be6327e32630416"
+    },
+    {
+      "path": "crates/quoridor-inference/build.rs",
+      "bytes": 3768,
+      "sha256": "0268e075fe36347adc06755fc12f3e7931520fa543c0629a1296d22edb96c224"
+    },
+    {
+      "path": "crates/quoridor-inference/examples/faults.rs",
+      "bytes": 2703,
+      "sha256": "b52462df062b81dca1dea3594888c53c2d1ee2d1d4b1cf139ffc1127d979b533"
+    },
+    {
+      "path": "crates/quoridor-inference/examples/fixtures.rs",
+      "bytes": 734,
+      "sha256": "86af7c8b1b159f46df0593f7e8bd47ad3b4a18a3e80623ac922dd3d1c2672c4d"
+    },
+    {
+      "path": "crates/quoridor-inference/examples/verify.rs",
+      "bytes": 2399,
+      "sha256": "092ba2645d9bc261ab87c6b5422be5d663766a02040958729ca7f4ff353650e2"
+    },
+    {
+      "path": "crates/quoridor-inference/native/NOTICE.md",
+      "bytes": 1008,
+      "sha256": "ee197b65bac56a9422fc04509bc7c3a3b94ae98a363ff3a31200b932e63976a9"
+    },
+    {
+      "path": "crates/quoridor-inference/native/ONNXRUNTIME-LICENSE",
+      "bytes": 1073,
+      "sha256": "2f07c72751aed99790b8a4869cf2311df85a860b22ded05fa22803587a48922c"
+    },
+    {
+      "path": "crates/quoridor-inference/native/aoti.cpp",
+      "bytes": 6256,
+      "sha256": "2ae9c5532939bede8d6f53028d331818b28f353fd71c83ae29d006e3c0e0a2da"
+    },
+    {
+      "path": "crates/quoridor-inference/native/onnxruntime_c_api.h",
+      "bytes": 332350,
+      "sha256": "71125e66180a991d65c9bdbad4aa20daaa1f7a48c7a5c0fa5f18f250ac839a02"
+    },
+    {
+      "path": "crates/quoridor-inference/native/onnxruntime_ep_c_api.h",
+      "bytes": 45129,
+      "sha256": "b92778f50c36ecdf53d0344e0129a78b306afed653f81bba8a9597e3e6e9546f"
+    },
+    {
+      "path": "crates/quoridor-inference/native/ort.cpp",
+      "bytes": 6103,
+      "sha256": "a82760dd4baa5588e2557f8dd2279ed966dad25cc61cd1987b836f019fc29bdb"
+    },
+    {
+      "path": "crates/quoridor-inference/native/tensorrt.cpp",
+      "bytes": 8927,
+      "sha256": "2153d2069c2a3fceaa76bcf457e2fe48d074b1d01f1fc1134a1772a970a7647f"
+    },
+    {
+      "path": "crates/quoridor-inference/src/cuda.rs",
+      "bytes": 2761,
+      "sha256": "c28d3e9e88d400c94ac69418ab32cc300be088398497ebf2260c643dbbf1e6ed"
+    },
+    {
+      "path": "crates/quoridor-inference/src/lib.rs",
+      "bytes": 9380,
+      "sha256": "8d56d7eb9c7c524abeaef9ab9fffefff27598f9d9ea03d24a1c324a0d328701a"
+    },
+    {
+      "path": "crates/quoridor-inference/src/tensorrt.rs",
+      "bytes": 2851,
+      "sha256": "9eafd968298fc20f812d1faa6aa3f8bb11edab9cc4a4c72b5019457629d2887e"
+    },
+    {
+      "path": "crates/quoridor-nnue/Cargo.toml",
+      "bytes": 462,
+      "sha256": "fb21d093cb8b1a5e430cc3faf220263b9e1d101e6132f7ed11c3465a81cca1bf"
+    },
+    {
+      "path": "crates/quoridor-nnue/README.md",
+      "bytes": 3242,
+      "sha256": "2901cde51cb8992f5a1391cbeade1ea2139fcaa161e23daf8676dbab20584375"
+    },
+    {
+      "path": "crates/quoridor-nnue/examples/benchmark.rs",
+      "bytes": 2870,
+      "sha256": "7cb5aae4b835e0ccf356632e0e5776368ec0db9221ef16ea24a0f1f569c8fd82"
+    },
+    {
+      "path": "crates/quoridor-nnue/src/features.rs",
+      "bytes": 3510,
+      "sha256": "8711e1b1a6f2e3f32103f70c4a1b8b4cf204c783c0a67e78b7772a880662a2f8"
+    },
+    {
+      "path": "crates/quoridor-nnue/src/lib.rs",
+      "bytes": 16818,
+      "sha256": "41c5717aa2489dd31b591bae3b5fc319ccf14779aa04e571d9d0cf017b10c2ae"
+    },
+    {
+      "path": "crates/quoridor-nnue/src/quantized.rs",
+      "bytes": 18689,
+      "sha256": "986362d0fa3040ca893c2f9d50ea65bff5a7e8e4eda1fd821c3c65e6aa56520d"
+    },
+    {
+      "path": "crates/quoridor-nnue/src/simd.rs",
+      "bytes": 4299,
+      "sha256": "8aa839804b8ca942431eca2de4fc01354b618d4f8897452eb5cd89944e1587bc"
+    },
+    {
+      "path": "crates/quoridor-nnue/tests/float_parity.rs",
+      "bytes": 12668,
+      "sha256": "51a9d2554a66c019d42774597bcd0154dfc10834f2783f98ec4c8644abbf65b8"
+    },
+    {
+      "path": "crates/quoridor-runner/Cargo.toml",
+      "bytes": 576,
+      "sha256": "1cfb3fede24467db26743a4acd624bcd14977314b27430ee81694544eddff41b"
+    },
+    {
+      "path": "crates/quoridor-runner/README.md",
+      "bytes": 3707,
+      "sha256": "ef16bb268beb89c7c9b4c4049762993c5b73a610e37aa77e170a85dfa709f837"
+    },
+    {
+      "path": "crates/quoridor-runner/src/config.rs",
+      "bytes": 5938,
+      "sha256": "c8d28f252e50c882ab366f96ddaacaa3ecc3c6ffb9712ec213f8f6b3cb45e3cd"
+    },
+    {
+      "path": "crates/quoridor-runner/src/lib.rs",
+      "bytes": 198,
+      "sha256": "e9ca0a73f2174f1154c030654aa69a80563512a18791a8b341485227126a36b7"
+    },
+    {
+      "path": "crates/quoridor-runner/src/main.rs",
+      "bytes": 7606,
+      "sha256": "7f5291bcbd79958c76e2db1dcf777baa05637205ebb862228fc9a6989efadbf6"
+    },
+    {
+      "path": "crates/quoridor-runner/src/resources.rs",
+      "bytes": 7022,
+      "sha256": "1b3c71287c1d834833a3979606d22d35f76c4607b625753503296eb1f9cefa62"
+    },
+    {
+      "path": "crates/quoridor-runner/src/runtime.rs",
+      "bytes": 55720,
+      "sha256": "aac1c4e1176b278aa8371b4c65de12d0579d96c04fa327b950012906d01227c2"
+    },
+    {
+      "path": "crates/quoridor-runner/tests/config.rs",
+      "bytes": 967,
+      "sha256": "050dc6d68db028e683b4bd487cbaf13f349a6194f6432b7edfdd87951cf9c67f"
+    },
+    {
+      "path": "crates/quoridor-runner/tests/orchestration.rs",
+      "bytes": 4518,
+      "sha256": "c153075d192b6283e4b3137ef8a896da9d96378506da1a46b414cd02e4af9b86"
+    },
+    {
+      "path": "crates/quoridor-wasm/Cargo.toml",
+      "bytes": 1237,
+      "sha256": "f95e164181ecd20373bee35ba0ba9490afcc9ae06fecf61018ccc44f7c541735"
+    },
+    {
+      "path": "crates/quoridor-wasm/src/lib.rs",
+      "bytes": 7597,
+      "sha256": "2795627591ccfa5cc1fa3db9f048af94ae94d60e84724cb3ce3446852f7cbf31"
+    },
+    {
+      "path": "crates/quoridor-wasm/src/nnue.rs",
+      "bytes": 4910,
+      "sha256": "4ebece3987d1966da42b000124d5f4bf22901c4e24ca2cccae3dd15a24a01163"
+    },
+    {
+      "path": "crates/quoridor-wasm/tests/nnue-runtime.cjs",
+      "bytes": 2894,
+      "sha256": "61f7e25386f202fdd5ade320a3f5e49d13078853432127fa07a1e4c2e43b34e5"
+    },
+    {
+      "path": "docs/design/ai-rust-migration.md",
+      "bytes": 6014,
+      "sha256": "9e451cbb9a92a08fb87151a6a0b0fccbc749288315e9f86e319691445fcce8b0"
+    },
+    {
+      "path": "docs/development/ai-research-code.md",
+      "bytes": 14905,
+      "sha256": "e63af2554af96efdeb4b78bc9d683aad03f8e2da6b808291feec4e3057fe6cde"
+    },
+    {
+      "path": "docs/development/rust-ai.md",
+      "bytes": 6129,
+      "sha256": "55b5625e0ca09915ad936ad3e47fc8ef695c3e7e07dcf349efa4996e13a01417"
+    },
+    {
+      "path": "docs/reports/ai-rust-migration.md",
+      "bytes": 8924,
+      "sha256": "73d037cca833c6b59e42f1843063ea1a1248fc24e6f55b4784d7013a78212dc4"
+    },
+    {
+      "path": "python/quoridor_training/README.md",
+      "bytes": 1716,
+      "sha256": "5b17ad600a111c61963e6858894e0e42d928b25377be9c033816d2b98c06bf82"
+    },
+    {
+      "path": "python/quoridor_training/__init__.py",
+      "bytes": 83,
+      "sha256": "b5b56d888753303fb2c22b25398995e4c4b320df03a3c47a4a0cf2f4fa2acd41"
+    },
+    {
+      "path": "python/quoridor_training/binding.py",
+      "bytes": 1514,
+      "sha256": "af656c455349d37ee3397d4c25574c3343c1f82a4d3a3df1448037cb83c37758"
+    },
+    {
+      "path": "python/quoridor_training/cache.py",
+      "bytes": 1702,
+      "sha256": "a79951451f0d67f5e7f9809acb8a04ef9eef0d9fc2cac652bca4fce73cbbf42f"
+    },
+    {
+      "path": "python/quoridor_training/cycle.py",
+      "bytes": 8627,
+      "sha256": "afeb1811816ed7c33dd785ee22232dba26003e5c45d068cdc521339aaf0e6154"
+    },
+    {
+      "path": "python/quoridor_training/test_contracts.py",
+      "bytes": 2465,
+      "sha256": "4bf20848d44355cb04e80a38c595cf71d3a03d5149d89eb4264acc5f71740440"
+    },
+    {
+      "path": "python/quoridor_training/train.py",
+      "bytes": 17840,
+      "sha256": "932879e26299cd115a9e000f3601d4cb882d4a4338abac99627916c32cb7d217"
+    },
+    {
+      "path": "scripts/dev/check-research.py",
+      "bytes": 7005,
+      "sha256": "225e5011398ffe29ab297198e55161f052f750214d5cf4803f449d8cbbfaa04a"
+    },
+    {
+      "path": "tools/model-export/README.md",
+      "bytes": 4343,
+      "sha256": "f271dedadf49a0b138fb4008685024186efbc0c0adb8972dc02665f26fec0ca5"
+    },
+    {
+      "path": "tools/model-export/export.py",
+      "bytes": 4595,
+      "sha256": "133fb9154c3a0fb9b29f98cd8844b2adcb312bdba4e49a7f63677b296f064804"
+    },
+    {
+      "path": "tools/model-export/folded_sigma.py",
+      "bytes": 4813,
+      "sha256": "669fa4d60888e65ab145eabbab554c96931c3e50557ffe4bd11ced98b79da7e0"
+    },
+    {
+      "path": "tools/model-export/install-tensorrt.py",
+      "bytes": 4034,
+      "sha256": "bb6d62575305e30027bcb2366cbb23a56cd1beb4128cacef18b6d85ea309ba5b"
+    },
+    {
+      "path": "tools/model-export/prepare-native.py",
+      "bytes": 3223,
+      "sha256": "ce5fbd382e55c3172775be3ff202753dd6a140819492d5d6f95988444d0b48b1"
+    },
+    {
+      "path": "tools/model-export/setup-native.sh",
+      "bytes": 1556,
+      "sha256": "70fa8434e5e2cc719b3e2a310bff700bbe352582ad5fbd5467a2fa76b4d1ac5f"
+    },
+    {
+      "path": "tools/model-export/source-handoff.json",
+      "bytes": 5930,
+      "sha256": "bca93ee201403e3698d333bd669485c1bdd45e8fbd601a950989c07d97babb9a"
+    },
+    {
+      "path": "tools/model-export/verify-native.py",
+      "bytes": 4260,
+      "sha256": "cf7931c4b8103833a3ef4f6b00d1ab552fcd6ec884fd295cac9f7922b29aae07"
+    }
+  ],
+  "unrelated_memory_session_excluded": true
+}

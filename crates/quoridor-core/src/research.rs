@@ -88,6 +88,15 @@ pub struct SigmaContext {
     overlay: Vec<HistoryKey>,
     synthetic: bool,
 }
+
+/// LIFO transition token. Keeps the parent's path allocation for make/unmake.
+#[derive(Debug)]
+pub struct ContextUndo {
+    position: Position,
+    total_ply: u16,
+    overlay_len: usize,
+    child: Position,
+}
 impl SigmaContext {
     pub fn from_prefix(actions: &[u16]) -> Result<Self, RulesError> {
         if actions.len() > 200 {
@@ -215,10 +224,24 @@ impl SigmaContext {
         if let Some(w) = self.position.winner {
             return Some(if w == self.position.turn { 1.0 } else { -1.0 });
         }
-        if self.total_ply >= 200 || self.raw_legal_ids().is_empty() {
+        if self.total_ply >= 200 || !self.has_legal_move() {
             return Some(0.0);
         }
         None
+    }
+    /// Stop after the first legal move; terminal checks do not enumerate all walls.
+    pub fn has_legal_move(&self) -> bool {
+        if self.position.winner.is_some() || self.total_ply >= 200 {
+            return false;
+        }
+        for (id, legal) in self.position.legal_pawn_mask().iter().enumerate() {
+            if *legal != 0
+                && self.count(self.position.play(id as u16).expect("legal pawn").into()) < 2
+            {
+                return true;
+            }
+        }
+        (0..64).any(|a| self.position.legal_wall(true, a) || self.position.legal_wall(false, a))
     }
     pub fn legal_ids(&self) -> Vec<u16> {
         if self.position.winner.is_some() || self.total_ply >= 200 {
@@ -228,18 +251,56 @@ impl SigmaContext {
         }
     }
     pub fn play(&self, id: u16) -> Result<Self, RulesError> {
-        if self.terminal_value().is_some() {
+        if self.position.winner.is_some() || self.total_ply >= 200 {
             return Err(RulesError::GameOver);
         }
-        if !self.legal_ids().contains(&id) {
+        // Validate just this move, not every wall on the board. A legal move
+        // itself proves that this context is not a no-moves terminal.
+        let p = self.position.play(id)?;
+        if id < 81 && self.count(p.into()) >= 2 {
             return Err(RulesError::IllegalAction);
         }
-        let p = self.position.play(id)?;
         let mut c = self.clone();
         c.position = p;
         c.total_ply += 1;
         c.overlay.push(p.into());
         Ok(c)
+    }
+    pub fn make_move(&mut self, id: u16) -> Result<ContextUndo, RulesError> {
+        if self.position.winner.is_some() || self.total_ply >= 200 {
+            return Err(RulesError::GameOver);
+        }
+        let child = self.position.play(id)?;
+        if id < 81 && self.count(child.into()) >= 2 {
+            return Err(RulesError::IllegalAction);
+        }
+        let undo = ContextUndo {
+            position: self.position,
+            total_ply: self.total_ply,
+            overlay_len: self.overlay.len(),
+            child,
+        };
+        self.position = child;
+        self.total_ply += 1;
+        self.overlay.push(child.into());
+        Ok(undo)
+    }
+    pub fn unmake_move(&mut self, undo: ContextUndo) -> Result<(), RulesError> {
+        if self.position != undo.child
+            || self.total_ply != undo.total_ply + 1
+            || self.overlay.len() != undo.overlay_len + 1
+            || self.overlay.last() != Some(&HistoryKey::from(undo.child))
+        {
+            return Err(RulesError::InvalidUndo);
+        }
+        self.position = undo.position;
+        self.total_ply = undo.total_ply;
+        self.overlay.truncate(undo.overlay_len);
+        Ok(())
+    }
+    /// Exclusive path bytes; the immutable history base is shared by clones.
+    pub fn path_allocated_bytes(&self) -> usize {
+        self.overlay.capacity() * std::mem::size_of::<HistoryKey>()
     }
     /// Raw reference next() after terminal is diagnostic evidence, never a search input.
     #[cfg(feature = "research-diagnostics")]

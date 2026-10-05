@@ -4,8 +4,13 @@ version = "0.1.0"
 edition = "2024"
 [dependencies]
 quoridor-core = { path = "../quoridor-core" }
+quoridor-nnue = { path = "../quoridor-nnue", optional = true }
+web-time = "1"
 
 [features]
 profiling = ["quoridor-core/profiling"]
-research = ["quoridor-core/research"]
+research = ["quoridor-core/research", "dep:quoridor-nnue", "quoridor-nnue/research"]
 research-diagnostics = ["research", "quoridor-core/research-diagnostics"]
+
+[dev-dependencies]
+serde_json = "1"

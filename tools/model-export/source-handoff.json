@@ -1,0 +1,150 @@
+{
+  "schema": "quoridor-inference-source-handoff-v1",
+  "at": "2026-10-05T06:33:46.750466+00:00",
+  "issue": "quoridor-cyo.3",
+  "source_owner": "codex-native-inference",
+  "files": [
+    {
+      "path": "crates/quoridor-inference/Cargo.toml",
+      "sha256": "f06ffee3d5e4ab6ea3b590db0e7bf94b6e6861a91313329ed21e2fe983cb3c4f",
+      "bytes": 421
+    },
+    {
+      "path": "crates/quoridor-inference/README.md",
+      "sha256": "c2e44f93c2db443b21385c6fda1a5cc5a3f2be38088f89a64be6327e32630416",
+      "bytes": 2364
+    },
+    {
+      "path": "crates/quoridor-inference/build.rs",
+      "sha256": "0268e075fe36347adc06755fc12f3e7931520fa543c0629a1296d22edb96c224",
+      "bytes": 3768
+    },
+    {
+      "path": "crates/quoridor-inference/examples/faults.rs",
+      "sha256": "b52462df062b81dca1dea3594888c53c2d1ee2d1d4b1cf139ffc1127d979b533",
+      "bytes": 2703
+    },
+    {
+      "path": "crates/quoridor-inference/examples/fixtures.rs",
+      "sha256": "86af7c8b1b159f46df0593f7e8bd47ad3b4a18a3e80623ac922dd3d1c2672c4d",
+      "bytes": 734
+    },
+    {
+      "path": "crates/quoridor-inference/examples/verify.rs",
+      "sha256": "092ba2645d9bc261ab87c6b5422be5d663766a02040958729ca7f4ff353650e2",
+      "bytes": 2399
+    },
+    {
+      "path": "crates/quoridor-inference/native/NOTICE.md",
+      "sha256": "ee197b65bac56a9422fc04509bc7c3a3b94ae98a363ff3a31200b932e63976a9",
+      "bytes": 1008
+    },
+    {
+      "path": "crates/quoridor-inference/native/ONNXRUNTIME-LICENSE",
+      "sha256": "2f07c72751aed99790b8a4869cf2311df85a860b22ded05fa22803587a48922c",
+      "bytes": 1073
+    },
+    {
+      "path": "crates/quoridor-inference/native/aoti.cpp",
+      "sha256": "2ae9c5532939bede8d6f53028d331818b28f353fd71c83ae29d006e3c0e0a2da",
+      "bytes": 6256
+    },
+    {
+      "path": "crates/quoridor-inference/native/onnxruntime_c_api.h",
+      "sha256": "71125e66180a991d65c9bdbad4aa20daaa1f7a48c7a5c0fa5f18f250ac839a02",
+      "bytes": 332350
+    },
+    {
+      "path": "crates/quoridor-inference/native/onnxruntime_ep_c_api.h",
+      "sha256": "b92778f50c36ecdf53d0344e0129a78b306afed653f81bba8a9597e3e6e9546f",
+      "bytes": 45129
+    },
+    {
+      "path": "crates/quoridor-inference/native/ort.cpp",
+      "sha256": "a82760dd4baa5588e2557f8dd2279ed966dad25cc61cd1987b836f019fc29bdb",
+      "bytes": 6103
+    },
+    {
+      "path": "crates/quoridor-inference/native/tensorrt.cpp",
+      "sha256": "2153d2069c2a3fceaa76bcf457e2fe48d074b1d01f1fc1134a1772a970a7647f",
+      "bytes": 8927
+    },
+    {
+      "path": "crates/quoridor-inference/src/cuda.rs",
+      "sha256": "c28d3e9e88d400c94ac69418ab32cc300be088398497ebf2260c643dbbf1e6ed",
+      "bytes": 2761
+    },
+    {
+      "path": "crates/quoridor-inference/src/lib.rs",
+      "sha256": "8d56d7eb9c7c524abeaef9ab9fffefff27598f9d9ea03d24a1c324a0d328701a",
+      "bytes": 9380
+    },
+    {
+      "path": "crates/quoridor-inference/src/tensorrt.rs",
+      "sha256": "9eafd968298fc20f812d1faa6aa3f8bb11edab9cc4a4c72b5019457629d2887e",
+      "bytes": 2851
+    },
+    {
+      "path": "tools/model-export/README.md",
+      "sha256": "f271dedadf49a0b138fb4008685024186efbc0c0adb8972dc02665f26fec0ca5",
+      "bytes": 4343
+    },
+    {
+      "path": "tools/model-export/export.py",
+      "sha256": "fbc2421b8f727f1b658ef0f9af9a45f7dd4ebe4343edea5e62cfced6df3af694",
+      "bytes": 4625
+    },
+    {
+      "path": "tools/model-export/folded_sigma.py",
+      "sha256": "27b17706a97e738cc45e4becc2caf35177360eb97d6cfd0b8999b375c6dc6c6c",
+      "bytes": 4959
+    },
+    {
+      "path": "tools/model-export/install-tensorrt.py",
+      "sha256": "3ad837a7570861251cfed4b387ad44fb05d4b0a74b17d5350833825885bf4a25",
+      "bytes": 4116
+    },
+    {
+      "path": "tools/model-export/prepare-native.py",
+      "sha256": "e9602912567cea11f7c03e8f36ac5157442d8ae93e141f956a9de784a358a30a",
+      "bytes": 3259
+    },
+    {
+      "path": "tools/model-export/setup-native.sh",
+      "sha256": "70fa8434e5e2cc719b3e2a310bff700bbe352582ad5fbd5467a2fa76b4d1ac5f",
+      "bytes": 1556
+    },
+    {
+      "path": "tools/model-export/verify-native.py",
+      "sha256": "a9af9589ae342ed38a3891dc230b36429ee487d5318788268c63c21f320c2e31",
+      "bytes": 4404
+    }
+  ],
+  "git_index_operations": 0,
+  "gpu_window_released": true,
+  "source_stopped_after_handoff": true,
+  "backend_contract": "InferenceBackend::infer(&mut self, &[[f32;648]]) -> Result<Vec<NetworkOutput>, InferenceError>; logits136, value in [-1,1]",
+  "verified_artifacts": {
+    "source_model_sha256": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+    "aoti_sha256": "054481975aa4807dd55d9a686f0f7728800566c2d8626307f8e4da163caa86be",
+    "tensorrt_sha256": "5be20cf08a1da9bef20d72024e27e18539b1587700a9305bae45ba58994e1527"
+  },
+  "verification_records": [
+    "/home/vscode/.cache/inference/rust-migration/verification-r1/verification.json",
+    "/home/vscode/.cache/inference/rust-migration/faults/faults.json",
+    "/home/vscode/.cache/inference/rust-migration/export/final-inference-tests.log",
+    "/home/vscode/.cache/inference/rust-migration/export/final-inference-clippy.log"
+  ],
+  "environment_manifests": [
+    "/home/vscode/.cache/inference/backends/tensorrt-11.3/manifest.json",
+    "/home/vscode/.cache/inference/rust-migration/cccl/manifest.json"
+  ],
+  "limits": [
+    "CPU original ONNX uses batch1 serial inference in a held native session",
+    "9 finite batch shapes from24 legal-prefix fixtures, fixed backend order and concurrent CPU compilation",
+    "Steady inference speed is not whole-generation or chess-strength equivalence",
+    "Capture exception/VRAM failure recovery compiled and reviewed; actual induced capture/low-VRAM fault not executed",
+    "No runtime SDK binaries/model artifacts committed; optional GPU dependencies remain isolated and external",
+    "Managed model conversion is Python outside the inference hot path; native forwards do not use Python"
+  ]
+}

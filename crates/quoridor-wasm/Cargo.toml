@@ -8,7 +8,8 @@ crate-type = ["cdylib", "rlib"]
 default = []
 rules = ["dep:serde", "dep:serde_json", "dep:ts-rs"]
 ai = ["dep:quoridor-ai", "dep:serde", "dep:serde_json", "dep:ts-rs"]
-research = ["ai", "quoridor-core/research-diagnostics", "quoridor-ai/research-diagnostics"]
+nnue = ["ai", "dep:quoridor-nnue", "dep:js-sys", "quoridor-ai/research"]
+research = ["nnue", "quoridor-core/research-diagnostics", "quoridor-ai/research-diagnostics"]
 [dependencies]
 wasm-bindgen = "0.2"
 serde = { version = "1", features = ["derive"], optional = true }
@@ -16,6 +17,8 @@ serde_json = { version = "1", optional = true }
 ts-rs = { version = "12", optional = true }
 quoridor-core = { path = "../quoridor-core" }
 quoridor-ai = { path = "../quoridor-ai", optional = true }
+quoridor-nnue = { path = "../quoridor-nnue", optional = true }
+js-sys = { version = "0.3", optional = true }
 
 [[bin]]
 name = "generate-protocol"

@@ -78,6 +78,11 @@ fn cursor_follow(next: Position, action: u16, cursor: &RuleCursor) -> RuleCursor
 #[cfg(feature = "research-diagnostics")]
 pub mod research;
 
+#[cfg(feature = "research")]
+pub mod alphabeta;
+#[cfg(feature = "research")]
+pub mod sigma_mcts;
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum SearchError {
     InvalidPosition,

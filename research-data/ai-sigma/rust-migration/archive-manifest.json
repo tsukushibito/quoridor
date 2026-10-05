@@ -1,0 +1,1906 @@
+{
+  "schema": "quoridor-rust-migration-evidence-v1",
+  "archive": "verification-data.tar.gz",
+  "archive_bytes": 1265236,
+  "archive_sha256": "6188702e0db21d79f1ab55d626f7c834664be89a33ca0947c7c5364f024df5cf",
+  "members": [
+    {
+      "path": "environment/cccl-manifest.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/cccl/manifest.json",
+      "bytes": 335,
+      "sha256": "fe57ff6b310f9f8c23c082402b994dc47b0f11f3dd2281ceb82286a644d6c22d"
+    },
+    {
+      "path": "environment/tensorrt-11.3-manifest.json",
+      "original_path": "/home/vscode/.cache/inference/backends/tensorrt-11.3/manifest.json",
+      "bytes": 4367,
+      "sha256": "4f9a156631c2e238e321dcb4d7bd9c90b9c33475c0225a4dfcab88dd52d080ba"
+    },
+    {
+      "path": "inference-faults/corrupt.engine.manifest.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/faults/corrupt.engine.manifest.json",
+      "bytes": 398,
+      "sha256": "7a1944129e077f94c25cec82c5f746af99aa0992363343e75ad2c90472767516"
+    },
+    {
+      "path": "inference-faults/corrupt.pt2.manifest.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/faults/corrupt.pt2.manifest.json",
+      "bytes": 397,
+      "sha256": "d64d2bf6f091f1f7cd8614ba76ab3526580e69f171ce548cd50030ef64d42ff5"
+    },
+    {
+      "path": "inference-faults/faults.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/faults/faults.json",
+      "bytes": 11063,
+      "sha256": "133765af987869c1d6af706dc4a7ec09a4300c263902240a82c09f873e2676e2"
+    },
+    {
+      "path": "inference/graph-b1.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/graph-b1.json",
+      "bytes": 1318,
+      "sha256": "2c4a8d2d1a993d6afa3fd6785a2708e46429f028b02c8e05741b0855bc35fd6a"
+    },
+    {
+      "path": "inference/graph-b16.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/graph-b16.json",
+      "bytes": 23765,
+      "sha256": "ebea86d43784c07a678413b161cd8e4ef49ea4ca47fdbb6a6a3eab3acf0311ee"
+    },
+    {
+      "path": "inference/graph-b2.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/graph-b2.json",
+      "bytes": 2632,
+      "sha256": "88af212dae4ac0951c66877f363b7d8951442b41b00e011cf8555210472885ae"
+    },
+    {
+      "path": "inference/graph-b24.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/graph-b24.json",
+      "bytes": 33763,
+      "sha256": "f4f5105ed9e7c8230b8129f5ac702c6fd06c025219eb27f115d0ed61711cc03d"
+    },
+    {
+      "path": "inference/graph-b3.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/graph-b3.json",
+      "bytes": 3927,
+      "sha256": "5ae8b92a87b17636365363d46717d2375347859fd2b7815122c5bc47e2fd56b0"
+    },
+    {
+      "path": "inference/graph-b5.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/graph-b5.json",
+      "bytes": 6805,
+      "sha256": "2ab284dcc2d63dd97f75ec8d0dc3e0e99874338f8abdf6201a709b09f92e0063"
+    },
+    {
+      "path": "inference/graph-b6.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/graph-b6.json",
+      "bytes": 8235,
+      "sha256": "f4cbe851428b610da90e6c1e8393ba27ba6dfd7c70c02a56cd5f38187c65f3f9"
+    },
+    {
+      "path": "inference/graph-b7.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/graph-b7.json",
+      "bytes": 9669,
+      "sha256": "46879b6b3fc3aa6aec822b5c40fe4fb68c506d8029fe0bbc5fc2cdd87e96d9aa"
+    },
+    {
+      "path": "inference/graph-b8.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/graph-b8.json",
+      "bytes": 11192,
+      "sha256": "5075ac0796bd0e2c2c382dee96f6ce539ef33ebdcaeab325b8fc7525663fed8c"
+    },
+    {
+      "path": "inference/input-b1.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/input-b1.json",
+      "bytes": 3548,
+      "sha256": "4c6b45cbd6b004d26ef76f3661d43b0a7dc34bcc5d9da4a463c38278ce9ce260"
+    },
+    {
+      "path": "inference/input-b16.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/input-b16.json",
+      "bytes": 56910,
+      "sha256": "68bc61d5a49ab7623559379c4f90b366ed1cf0d4994b38c8faf05e3fc7394565"
+    },
+    {
+      "path": "inference/input-b2.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/input-b2.json",
+      "bytes": 7098,
+      "sha256": "2220aa56484c9ce753af470feef3d6b3b8f5e6f6808dc7481cf494e7d0cdc570"
+    },
+    {
+      "path": "inference/input-b24.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/input-b24.json",
+      "bytes": 85252,
+      "sha256": "c37c46c7fd5d0bef8680b0c0d6a3a4695114c5da11ed63ee30cb0d7ad4762332"
+    },
+    {
+      "path": "inference/input-b3.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/input-b3.json",
+      "bytes": 10651,
+      "sha256": "8d0097da1aa26efb2b3c2903ac0bbebed968fc93213cd8a1b2384f3257c027e3"
+    },
+    {
+      "path": "inference/input-b5.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/input-b5.json",
+      "bytes": 17757,
+      "sha256": "41d5a69e185df671843ce249c7d5d2b99c581ac82a613c7d87edc6d0085fab44"
+    },
+    {
+      "path": "inference/input-b6.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/input-b6.json",
+      "bytes": 21316,
+      "sha256": "e00838d1fddaa21a4171494282610623c8bb0f4f12082b024116d1c34d99ecc0"
+    },
+    {
+      "path": "inference/input-b7.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/input-b7.json",
+      "bytes": 24875,
+      "sha256": "95ed5134e5e7e485902ff34744e8d0ef57935775275c5d55bf989bc24d3f88b8"
+    },
+    {
+      "path": "inference/input-b8.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/input-b8.json",
+      "bytes": 28434,
+      "sha256": "731b9cc3eb2dc34b9d969e2dfcd79a4f90c592b761e8b077cba63b6d5e8a6c15"
+    },
+    {
+      "path": "inference/ort-b1.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/ort-b1.json",
+      "bytes": 1325,
+      "sha256": "86465cfa292b14a8036f4c4dcc1df2ef7f53f80cbef4bc897546f3866bc94fff"
+    },
+    {
+      "path": "inference/ort-b16.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/ort-b16.json",
+      "bytes": 23764,
+      "sha256": "c33839b2cfa05a2866f7407d6bfb89ddea8ec40f0943a916e080f1fb0d524f1e"
+    },
+    {
+      "path": "inference/ort-b2.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/ort-b2.json",
+      "bytes": 2633,
+      "sha256": "5b77ecd572b8deb15b2fa24315c07b40826f28e89b3fb8c8e9952dca800d9a16"
+    },
+    {
+      "path": "inference/ort-b24.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/ort-b24.json",
+      "bytes": 33804,
+      "sha256": "d763f305777b4f72bed9d5467ba881246ee5a8180a946f53b0260871286eaa21"
+    },
+    {
+      "path": "inference/ort-b3.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/ort-b3.json",
+      "bytes": 3921,
+      "sha256": "ed5d66f47de422a73e7509fec6500a182fccd55f011546c58280b97ae434bc9e"
+    },
+    {
+      "path": "inference/ort-b5.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/ort-b5.json",
+      "bytes": 6812,
+      "sha256": "ea985d52b17016e1d14de5d351b93ffc1112cfc7c90fb52e139bced30ace79cc"
+    },
+    {
+      "path": "inference/ort-b6.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/ort-b6.json",
+      "bytes": 8243,
+      "sha256": "785b028c81cf01be7ce6563ec38d49ecbb174e626391a5e893682912606c5340"
+    },
+    {
+      "path": "inference/ort-b7.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/ort-b7.json",
+      "bytes": 9684,
+      "sha256": "e405a830d87efb93514a48a2e66600a36e7f1c49b5c09c9e4e8609bccb6951c2"
+    },
+    {
+      "path": "inference/ort-b8.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/ort-b8.json",
+      "bytes": 11207,
+      "sha256": "18a615930ff4d948fe0cff72b78cf061c96a0ab6b235fba750b14f828f1e4f46"
+    },
+    {
+      "path": "inference/tensorrt-b1.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/tensorrt-b1.json",
+      "bytes": 1328,
+      "sha256": "4bc976b1b9a93074f6100857ac34efe53ad0cf34a68bfac5dd6ef3b77287b853"
+    },
+    {
+      "path": "inference/tensorrt-b16.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/tensorrt-b16.json",
+      "bytes": 23792,
+      "sha256": "94f2e9cc4ba464e4382ad6bc12c5db1e683219db9e2850884c5d95faabe85070"
+    },
+    {
+      "path": "inference/tensorrt-b2.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/tensorrt-b2.json",
+      "bytes": 2637,
+      "sha256": "e7eebbc7b7b926ce45cca9a3bf12051023c7940c200fcf4a135f9ed2d4aa7562"
+    },
+    {
+      "path": "inference/tensorrt-b24.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/tensorrt-b24.json",
+      "bytes": 33828,
+      "sha256": "e69b5d8ec37804922736d045a1cf91d75be324e5a711323a86d183a40b685df6"
+    },
+    {
+      "path": "inference/tensorrt-b3.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/tensorrt-b3.json",
+      "bytes": 3932,
+      "sha256": "f418be38f2daa7e3aa913c3e4a257328739a7878eac32bb06ba62f47110f13fa"
+    },
+    {
+      "path": "inference/tensorrt-b5.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/tensorrt-b5.json",
+      "bytes": 6819,
+      "sha256": "c840dcecfc0402f787f0893360af125d7f379a4d710df7451fd7041f410df089"
+    },
+    {
+      "path": "inference/tensorrt-b6.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/tensorrt-b6.json",
+      "bytes": 8247,
+      "sha256": "1dc4e51880c8df99d17e1703536c168a7c711ee22e77479cee116ac076d6973d"
+    },
+    {
+      "path": "inference/tensorrt-b7.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/tensorrt-b7.json",
+      "bytes": 9690,
+      "sha256": "7b3cb2a788576ba3656db35170254b17e30bca0e530950ae12fe0db7e8c6539a"
+    },
+    {
+      "path": "inference/tensorrt-b8.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/tensorrt-b8.json",
+      "bytes": 11217,
+      "sha256": "92b631800cbcfd86152e4dd429b87948397c288a6be880b683f9cedc9bcd5b67"
+    },
+    {
+      "path": "inference/verification.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/verification-r1/verification.json",
+      "bytes": 5892,
+      "sha256": "d3b04bde89d1e0fb9e1eec370c1dc39b91e8a268d28c9f00687b401f9c959563"
+    },
+    {
+      "path": "integration/clippy-final.log",
+      "original_path": ".artifacts/rust-migration/clippy-final.log",
+      "bytes": 629,
+      "sha256": "9f9001d92b6feb65bd151131f0b4c40a5f0ffd8cdea6a173ce940117c6ba670c"
+    },
+    {
+      "path": "integration/clippy.log",
+      "original_path": ".artifacts/rust-migration/clippy.log",
+      "bytes": 1579,
+      "sha256": "62b6fc294eb2d57efaeab331452a51053899156eab643175eee7556a7b8a87a3"
+    },
+    {
+      "path": "integration/mcts-limits.log",
+      "original_path": ".artifacts/rust-migration/mcts-limits.log",
+      "bytes": 722,
+      "sha256": "e73100745ec139a1a7e234bbac4d109ed4e02827275f12570347040e64fc7555"
+    },
+    {
+      "path": "integration/native-cli-final.txt",
+      "original_path": ".artifacts/rust-migration/native-cli-final.txt",
+      "bytes": 226,
+      "sha256": "4e686e4e1520b11b3ad2742f770fc1a4f6c233e5dc32c3e71e9fc273010978d7"
+    },
+    {
+      "path": "integration/native-inference-clippy-final.log",
+      "original_path": ".artifacts/rust-migration/native-inference-clippy-final.log",
+      "bytes": 30827,
+      "sha256": "06f5b310eb040326136f5a5caca260b53902e4cf22ee48e2ac7901eecaf0b3aa"
+    },
+    {
+      "path": "integration/native-release-final.log",
+      "original_path": ".artifacts/rust-migration/native-release-final.log",
+      "bytes": 31163,
+      "sha256": "3ac5dd3e66b029f3f66bd8798c35d489091b5b37d2fc01849d9675609071a9f5"
+    },
+    {
+      "path": "integration/native-runner-clippy-final.log",
+      "original_path": ".artifacts/rust-migration/native-runner-clippy-final.log",
+      "bytes": 30832,
+      "sha256": "472a4dae0e8d9b4ed849d918950078a13d5e6bacd589f6d2487b783630fc74d2"
+    },
+    {
+      "path": "integration/product-ai-final.log",
+      "original_path": ".artifacts/rust-migration/product-ai-final.log",
+      "bytes": 1399,
+      "sha256": "0db4389ee4e7baffdc7392cfa87bfed58b068c72eca507f6217d0057f6f51bb0"
+    },
+    {
+      "path": "integration/product-rules-final.log",
+      "original_path": ".artifacts/rust-migration/product-rules-final.log",
+      "bytes": 1946,
+      "sha256": "cade04ff8c5e3f6590c43a75c194ad10cc0b94e4bdc9be3b8d9f471dfad7e929"
+    },
+    {
+      "path": "integration/python-contracts-final.log",
+      "original_path": ".artifacts/rust-migration/python-contracts-final.log",
+      "bytes": 101,
+      "sha256": "3a315533b81287472852b81ae89b89d0f42abf74b1503c45c2c62712388d3eb1"
+    },
+    {
+      "path": "integration/python-format-adjustment.log",
+      "original_path": ".artifacts/rust-migration/python-format-adjustment.log",
+      "bytes": 45,
+      "sha256": "052f280867a3d6fe5af69118815d215d809d5f50afa74101d87d80e572b9e7e6"
+    },
+    {
+      "path": "integration/python-format-final.log",
+      "original_path": ".artifacts/rust-migration/python-format-final.log",
+      "bytes": 27,
+      "sha256": "75b7030be9d7de96bf4e76e79b1f03f14af8899d169fd8d79564d59167d1ab80"
+    },
+    {
+      "path": "integration/python-lint-final.log",
+      "original_path": ".artifacts/rust-migration/python-lint-final.log",
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": "integration/render-final.log",
+      "original_path": ".artifacts/rust-migration/render-final.log",
+      "bytes": 724,
+      "sha256": "4be577c75e4385aca9fc8383283f837b6b20d35e889eb11d0aa051161d36d537"
+    },
+    {
+      "path": "integration/research-quality-final.log",
+      "original_path": ".artifacts/rust-migration/research-quality-final.log",
+      "bytes": 6734,
+      "sha256": "c2cf6bb95886dfd0cbd5f2da82a20709da7cfa2456ad8263d10f487443efb0dc"
+    },
+    {
+      "path": "integration/research-syntax-final.log",
+      "original_path": ".artifacts/rust-migration/research-syntax-final.log",
+      "bytes": 65,
+      "sha256": "e41b60ff227462895012380bf7813540ff9139714db4dedb50adcadd25e7405b"
+    },
+    {
+      "path": "integration/scaler-parser-regression.log",
+      "original_path": ".artifacts/rust-migration/scaler-parser-regression.log",
+      "bytes": 479,
+      "sha256": "12ee275de3b93409f45c4aa9e78af7e42cf44af37221458bc6a45f26840f1c2a"
+    },
+    {
+      "path": "integration/torch-parity.log",
+      "original_path": ".artifacts/rust-migration/torch-parity.log",
+      "bytes": 441,
+      "sha256": "ddd0b7a1e327822f490986dbe061fd27de9f9fc10231543cd5c356898a3147e4"
+    },
+    {
+      "path": "integration/typecheck-final.log",
+      "original_path": ".artifacts/rust-migration/typecheck-final.log",
+      "bytes": 301,
+      "sha256": "38dfe01519f11282f03fe8f0a7f06c14c9c4f3d963f2eeb93cb3862ecbbfeaf5"
+    },
+    {
+      "path": "integration/wasm-build.log",
+      "original_path": ".artifacts/rust-migration/wasm-build.log",
+      "bytes": 1982,
+      "sha256": "816362c988e4f3a98605f5be2f611b8744e4e681c6dbc96482496dd24f9c08f7"
+    },
+    {
+      "path": "integration/wasm-check-final.log",
+      "original_path": ".artifacts/rust-migration/wasm-check-final.log",
+      "bytes": 842,
+      "sha256": "d30e3f7238de4aa9b34d16ce0c5d460e885afbf62ef65093e61e6013053ca13d"
+    },
+    {
+      "path": "integration/wasm-check.log",
+      "original_path": ".artifacts/rust-migration/wasm-check.log",
+      "bytes": 1678,
+      "sha256": "b8aa94848396a586a49cbbb483ab1d6ced470cb9ee7a9bd887dc8f0ea0a1d3d6"
+    },
+    {
+      "path": "integration/wasm-runtime.json",
+      "original_path": ".artifacts/rust-migration/wasm-runtime.json",
+      "bytes": 124,
+      "sha256": "909c3d81e3d63075866f32e48a5a60d7c2ec1e292381939ede9078dbcc27c0ae"
+    },
+    {
+      "path": "integration/wasm-simd-build.log",
+      "original_path": ".artifacts/rust-migration/wasm-simd-build.log",
+      "bytes": 2021,
+      "sha256": "d7c546e692e0df09602ae4ce80f5b1db0bc752bd2a9bdb91fee488a1c85f1020"
+    },
+    {
+      "path": "integration/wasm-simd-runtime.json",
+      "original_path": ".artifacts/rust-migration/wasm-simd-runtime.json",
+      "bytes": 124,
+      "sha256": "909c3d81e3d63075866f32e48a5a60d7c2ec1e292381939ede9078dbcc27c0ae"
+    },
+    {
+      "path": "integration/workspace-test-final.log",
+      "original_path": ".artifacts/rust-migration/workspace-test-final.log",
+      "bytes": 12526,
+      "sha256": "1c8ee998b95ed3392adb133a9773f1862f37a144c17f22805e7879c10253f32d"
+    },
+    {
+      "path": "integration/workspace-test.log",
+      "original_path": ".artifacts/rust-migration/workspace-test.log",
+      "bytes": 11840,
+      "sha256": "ea9e6571c6617f7741add32c99783e969bf9948e5b0e1b6de418b19895a25530"
+    },
+    {
+      "path": "linux-cycle/arena-release-config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/arena-release-config.json",
+      "bytes": 804,
+      "sha256": "6696bbc98c7269376ecccf9e65abf169fac0b6c94e39069f6889e8ceb5910e8d"
+    },
+    {
+      "path": "linux-cycle/arena-release.log",
+      "original_path": ".artifacts/rust-migration/data-runner/arena-release.log",
+      "bytes": 1590,
+      "sha256": "f141805987e01cbdeace84ddcf47d5edb5b9abef36f411fd678b14455c2d13b1"
+    },
+    {
+      "path": "linux-cycle/bulk-binding.json",
+      "original_path": ".artifacts/rust-migration/data-runner/bulk-binding.json",
+      "bytes": 489,
+      "sha256": "69833a512c437b1c173cb7eaa9bdaa7ef204f3bd399024bba6dc8e3975579815"
+    },
+    {
+      "path": "linux-cycle/clippy-repair.log",
+      "original_path": ".artifacts/rust-migration/data-runner/clippy-repair.log",
+      "bytes": 232,
+      "sha256": "aa798a0154e1893ffb7d20a7693875c4b2c81e8e4cf5a03c55d2d6d8d65784e2"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r1/cycle-config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r1/cycle-config.json",
+      "bytes": 639,
+      "sha256": "cfbb3e162635960231470c6d336069befe070b4dea22c2ff2c43651ba81183b6"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r1/cycle-state.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r1/cycle-state.json",
+      "bytes": 302,
+      "sha256": "b9b6f73744ecb545218a06e1814bf049078dc32c122a0be7527f24ae854dc5b5"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r1/generation-config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r1/generation-config.json",
+      "bytes": 505,
+      "sha256": "497aea25de32f81f4fd9281bca3231d484d852285154968786eff2e85ada2e24"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r1/generation.log",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r1/generation.log",
+      "bytes": 4464,
+      "sha256": "4ed58a187b34c8875981beed5751b869a7c94b8c9b83ab80828c1c23d55a545e"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r1/generation/admission.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r1/generation/admission.json",
+      "bytes": 151,
+      "sha256": "4d178723b4b51daeacc7d048a2b9131b125aaa6d429b9d5505ebd0ee62a13415"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r1/generation/config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r1/generation/config.json",
+      "bytes": 880,
+      "sha256": "5de744cc3732df3776257b944df9dc3b21e72bcb0eac9ef14707f7088fbbd48d"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r1/generation/dataset/manifest.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r1/generation/dataset/manifest.json",
+      "bytes": 2600,
+      "sha256": "e0accf4eb51219b7502492b69cfcf25f2c445eac1e52556bd71beeb2c7cce43e"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r1/generation/dataset/test-000009.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r1/generation/dataset/test-000009.arrow",
+      "bytes": 8449,
+      "sha256": "a52ac7a941e284c2cbb96e43c829d2e8ae3d61da6d4d81ce5532dd4dbc798d9f"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r1/generation/dataset/test-000011.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r1/generation/dataset/test-000011.arrow",
+      "bytes": 10177,
+      "sha256": "4d111a3d1cc69e4a43db0d557cffd2d45623e1a1ec14a4b84a05d961428c7960"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r1/generation/dataset/train-000000.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r1/generation/dataset/train-000000.arrow",
+      "bytes": 8897,
+      "sha256": "0a00926a451e76ecf76dddacfe851d6186e73ac08fedda43e51ccfd7cf3a1b46"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r1/generation/dataset/train-000001.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r1/generation/dataset/train-000001.arrow",
+      "bytes": 8897,
+      "sha256": "f82b881c4253bc5a716d6b0e14d9653fd15ad364790ff99d7d4d91a6efb6f2af"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r1/generation/dataset/train-000002.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r1/generation/dataset/train-000002.arrow",
+      "bytes": 9345,
+      "sha256": "970466c357b87d37416927872319e48b4e6d6d206523f5e6cc51fc7105626a15"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r1/generation/dataset/train-000003.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r1/generation/dataset/train-000003.arrow",
+      "bytes": 8897,
+      "sha256": "926f2e31eb5944c9e172aa0ef315c26e90473c97ad662d58f2a99662cd8e06c3"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r1/generation/dataset/train-000004.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r1/generation/dataset/train-000004.arrow",
+      "bytes": 9281,
+      "sha256": "f3babd3cb2beed2ce4e27552adfc2d941d4e7d43aa0443b9db8f882040363863"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r1/generation/dataset/train-000005.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r1/generation/dataset/train-000005.arrow",
+      "bytes": 10369,
+      "sha256": "7c574cb40f3df594aa49adb1403549b7178d2dc37c12cd381ff31867036a99ba"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r1/generation/dataset/train-000006.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r1/generation/dataset/train-000006.arrow",
+      "bytes": 9025,
+      "sha256": "91e4ae3540e60d733e3b6ab0cbbd14837ec8b449c89da13ba7fd4492800cf811"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r1/generation/dataset/train-000007.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r1/generation/dataset/train-000007.arrow",
+      "bytes": 8065,
+      "sha256": "1ee46d852a1030238b5cd509319f73c9bd3cfaaea9fd7848712c8736824b4c36"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r1/generation/dataset/validation-000008.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r1/generation/dataset/validation-000008.arrow",
+      "bytes": 9345,
+      "sha256": "7db9f835331c58503595794d71bdcd7a73e6322d17e1ad9375b1ad32d55a2189"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r1/generation/dataset/validation-000010.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r1/generation/dataset/validation-000010.arrow",
+      "bytes": 8897,
+      "sha256": "37887b4cfe37886f57537f73fc26bc6b62b36d56435577acb20b59cffe6abaad"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r1/generation/planned.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r1/generation/planned.json",
+      "bytes": 2656,
+      "sha256": "d8a56094154a3a2a8019fdf2489164dcdd1a2e319d42b40e293752641732d1ee"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r1/generation/result.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r1/generation/result.json",
+      "bytes": 12533,
+      "sha256": "4398ec390cf951f3afba392c5f0d9258f47441bc43aa18d6148fd6b9719e1b36"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r1/train-cache.log",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r1/train-cache.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r2/cycle-config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r2/cycle-config.json",
+      "bytes": 639,
+      "sha256": "5343ffd272b6135b9c2e338bcbf0a604a0f4d722dc9b234492d14eca8efedc04"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r2/cycle-state.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r2/cycle-state.json",
+      "bytes": 568,
+      "sha256": "af064d0766ee93005e83f13d3bb845a939089043db0d0d3109b297ea0eefdb27"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r2/generation-config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r2/generation-config.json",
+      "bytes": 505,
+      "sha256": "7c9d138823af24cc5e28767db85a003be68fdf65869ae2e3f766de98bb3468bd"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r2/generation.log",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r2/generation.log",
+      "bytes": 4464,
+      "sha256": "d5f329c6a2e28111642d9670c512a17706b165bd50edf0345f73d5f6b3ef9b6e"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r2/generation/admission.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r2/generation/admission.json",
+      "bytes": 151,
+      "sha256": "61ed6a1b73bc3c69b452d96aa050e986382f217e56b728e3db87526fafbf42f4"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r2/generation/config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r2/generation/config.json",
+      "bytes": 880,
+      "sha256": "bb33b475b470615cbbf098138e15078a779d49521623a758bd9c056805ea826c"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r2/generation/dataset/manifest.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r2/generation/dataset/manifest.json",
+      "bytes": 2600,
+      "sha256": "3d0643f2af8df6e68249f5951325ae9104bb8554b942034cfb6c7499ce5c58c9"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r2/generation/dataset/test-000009.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r2/generation/dataset/test-000009.arrow",
+      "bytes": 8449,
+      "sha256": "9f32542812ca7d2714b6b72a990eb9d11a6cc52a9fc565776fe28603765208ef"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r2/generation/dataset/test-000011.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r2/generation/dataset/test-000011.arrow",
+      "bytes": 10177,
+      "sha256": "cf166c9deb4c65d8866bd1b0eec1d57717120798abe622286cae933e22036d4d"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r2/generation/dataset/train-000000.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r2/generation/dataset/train-000000.arrow",
+      "bytes": 8897,
+      "sha256": "06255c4f21f84fb2147d39727f9096e68efdbb7d21839e1b10cc4150f20e3628"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r2/generation/dataset/train-000001.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r2/generation/dataset/train-000001.arrow",
+      "bytes": 8897,
+      "sha256": "93a402cfa74787d3c2212e497f49d9b6927dc68c386d027756b0c6c71a6ac3bb"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r2/generation/dataset/train-000002.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r2/generation/dataset/train-000002.arrow",
+      "bytes": 9345,
+      "sha256": "6aca2ab6d5ea54f85f467291799008350a8d387811104406af2f9ee64c3e70aa"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r2/generation/dataset/train-000003.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r2/generation/dataset/train-000003.arrow",
+      "bytes": 8897,
+      "sha256": "d6c4bc7e1b8b1d08fd75b4737342f4ab085ba394e1192049e34a3827dee1102e"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r2/generation/dataset/train-000004.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r2/generation/dataset/train-000004.arrow",
+      "bytes": 9281,
+      "sha256": "0064841a6a591f9d45423093b7279dc119dfe18b48b81d2adc5b447edc231d09"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r2/generation/dataset/train-000005.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r2/generation/dataset/train-000005.arrow",
+      "bytes": 10369,
+      "sha256": "8eb318ac802f34bda725b5efbaf3f6f7ab696621d17d042b654f3fad028fe897"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r2/generation/dataset/train-000006.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r2/generation/dataset/train-000006.arrow",
+      "bytes": 9025,
+      "sha256": "5ab6df315fbd895bb636b86d89628077c2dcfef55722010731f95f5546d52a0b"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r2/generation/dataset/train-000007.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r2/generation/dataset/train-000007.arrow",
+      "bytes": 8065,
+      "sha256": "747d6b0478b9401d25710d30dcb60bd01cba2d075e7408079dd6a03499f23286"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r2/generation/dataset/validation-000008.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r2/generation/dataset/validation-000008.arrow",
+      "bytes": 9345,
+      "sha256": "6dfa5e47d5a63207a2a4edb05691581825dffa742f505825130adf519c14b7c4"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r2/generation/dataset/validation-000010.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r2/generation/dataset/validation-000010.arrow",
+      "bytes": 8897,
+      "sha256": "673bad7e7bacfa62a69fb3f3a921a939878876e777f5f1ad2e741ab6d0b9b9ad"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r2/generation/planned.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r2/generation/planned.json",
+      "bytes": 2656,
+      "sha256": "f97b9cd94f736e58a191442f8b7705634c9c7846a41c13dbd9f2229442505c0c"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r2/generation/result.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r2/generation/result.json",
+      "bytes": 12533,
+      "sha256": "19c144a1fa2cf239f8bbd636b3d5c62657b9daa522ed867a06f116f5aa9dcde7"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r2/train-cache.log",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r2/train-cache.log",
+      "bytes": 569,
+      "sha256": "63384a734aea5c36138fc2500d224e39aa4536f7f3e5cf8d6e1317547e011c48"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r2/train.log",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r2/train.log",
+      "bytes": 294,
+      "sha256": "2e1fe0177d494f6c55c92a7da09b79cea93a49a8f5a9c93b8a25d5a52250bb09"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3-arena-release/admission.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3-arena-release/admission.json",
+      "bytes": 169,
+      "sha256": "ca219704d20095a29f04073eb147d044c14a2d3c943733dc34fe886f2799ef30"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3-arena-release/config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3-arena-release/config.json",
+      "bytes": 1207,
+      "sha256": "e377b591c528680b394dcef3951594c1114d0f818f03f150ee1713bab2790449"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3-arena-release/dataset/manifest.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3-arena-release/dataset/manifest.json",
+      "bytes": 1098,
+      "sha256": "872f2cfb7c1c0742048370d83e49dfec37c9998b78062c1e1308a25b83e1375a"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3-arena-release/dataset/test-000000.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3-arena-release/dataset/test-000000.arrow",
+      "bytes": 6017,
+      "sha256": "7d376072f8bdd9a769e1ca168d05ff35ab4e2ff9d4611576578a0a88f7b26e80"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3-arena-release/dataset/test-000001.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3-arena-release/dataset/test-000001.arrow",
+      "bytes": 8193,
+      "sha256": "499dc1a3d065cb091fe6c8d48f29585f6d24fde04c8d6a47c2e2771743e87a38"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3-arena-release/dataset/test-000002.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3-arena-release/dataset/test-000002.arrow",
+      "bytes": 8641,
+      "sha256": "05f9f15911b25407ddc8a4791abc10634c49b4b5f316f45d5301461086ff22cb"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3-arena-release/dataset/test-000003.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3-arena-release/dataset/test-000003.arrow",
+      "bytes": 6273,
+      "sha256": "bc4ac60b813b6494593c8d1af71b3138e28e1ad9ddb9f5530a93b358a49f19ed"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3-arena-release/planned.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3-arena-release/planned.json",
+      "bytes": 928,
+      "sha256": "97f316e38d31b7b8df4d6c3377f3bdf5dfd19f340bd28047aac85352d7ce6914"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3-arena-release/result.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3-arena-release/result.json",
+      "bytes": 3727,
+      "sha256": "f67d9860000de48ea4470abfa2a5f764b42b2c4e417a18b5563d3357fd2f59f9"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/arena-config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/arena-config.json",
+      "bytes": 910,
+      "sha256": "c8712579d90e83470e9fcc4480094538b25b22c8300eab72614b8f65c452ac06"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/arena.log",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/arena.log",
+      "bytes": 1283,
+      "sha256": "350efbb691923b201020569acd939ef5056df5c45db09396a4434a38f62f4d91"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/arena/admission.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/arena/admission.json",
+      "bytes": 151,
+      "sha256": "2306a35bebfa1287e302bdd000ca2521c076e1d0e171513cbdf69e1e0dc13194"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/arena/config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/arena/config.json",
+      "bytes": 1204,
+      "sha256": "0dc318961ef43c5afc793ac255a5a2aaeb90a24247ae3c92567f63302a5ae0a4"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/arena/dataset/manifest.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/arena/dataset/manifest.json",
+      "bytes": 570,
+      "sha256": "d333e35367ce9211d5dc637c4cb7c9d686357b199a6303e8f1b85332f5788fcd"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/arena/dataset/test-000000.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/arena/dataset/test-000000.arrow",
+      "bytes": 6209,
+      "sha256": "0061eb997be8733eb494b8425c25f5535bc1fb68e0edab40e6123284a6172637"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/arena/planned.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/arena/planned.json",
+      "bytes": 896,
+      "sha256": "9d987b7090296eed5285330a4c9c1dba69e6dfbf93c2ed8ae1b656acb4a764e2"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/arena/result.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/arena/result.json",
+      "bytes": 2340,
+      "sha256": "d7ce5255378934234bd4b7b0079aad2762986496adbcb900c9a16de1aaae9a7c"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/cycle-config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/cycle-config.json",
+      "bytes": 639,
+      "sha256": "55d04ec974fed66fae2a8574e817ad34d6e85fa497234c7882417ed481f69779"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/cycle-state.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/cycle-state.json",
+      "bytes": 1119,
+      "sha256": "50ad331d4a3564788e8a58af5da46dd6f21a58c48cd036614cb68e5489582bfa"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/generation-config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/generation-config.json",
+      "bytes": 505,
+      "sha256": "640ca0f2870d3ef473c8e250309abd1ed442531cee23cdf01966653ba05e674e"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/generation.log",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/generation.log",
+      "bytes": 4464,
+      "sha256": "381f4e7c4c76f72a89573d243a1cf68d03ef19bfb16a400a12bf4637a8ffdf83"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/generation/admission.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/generation/admission.json",
+      "bytes": 151,
+      "sha256": "78dc311b9f0f27dab1c7920738eadad8e8aad99fc3c1b01397f074bb58aa4bfa"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/generation/config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/generation/config.json",
+      "bytes": 880,
+      "sha256": "267e4ecbfa88d23274edf62158a4939d2edf5b63ea5165def35abf33ea2b743b"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/generation/dataset/manifest.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/generation/dataset/manifest.json",
+      "bytes": 2600,
+      "sha256": "c80ba58ce46b8d569944ac13103fc3b159e29bcba8f55bdb36cefc1fefa1afd9"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/generation/dataset/test-000009.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/generation/dataset/test-000009.arrow",
+      "bytes": 8449,
+      "sha256": "6c7955639e1a99fca40ebe94982cdff3b4bc32d8a1dd736ddd1bbb20bb5d75de"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/generation/dataset/test-000011.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/generation/dataset/test-000011.arrow",
+      "bytes": 10177,
+      "sha256": "b952a0ea2a65674e7294cacb04c7212292e0103d4dcbc528f60f0e34882fe9c0"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/generation/dataset/train-000000.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/generation/dataset/train-000000.arrow",
+      "bytes": 8897,
+      "sha256": "ac3574424b71c5646c5becf12ccc03fb70ed4b257b265d1b31942c13d8169c04"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/generation/dataset/train-000001.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/generation/dataset/train-000001.arrow",
+      "bytes": 8897,
+      "sha256": "ba78e45320fe86de16855b201e808ffc9ebd2bdb38bc751dff382d81be841f2a"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/generation/dataset/train-000002.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/generation/dataset/train-000002.arrow",
+      "bytes": 9345,
+      "sha256": "b03b624b6baba7005d6c8590d0f7fc7ed565f81d13ef84d28f45be833d2a7b47"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/generation/dataset/train-000003.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/generation/dataset/train-000003.arrow",
+      "bytes": 8897,
+      "sha256": "f03ed47eb1751cf379d12d2d83351aeb0d989771b81ab779ea92af00d1327d65"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/generation/dataset/train-000004.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/generation/dataset/train-000004.arrow",
+      "bytes": 9281,
+      "sha256": "b4d2d1e0f5918df267267eb8f2099d54325a4187ab8d4bdb877b39f7c63dd559"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/generation/dataset/train-000005.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/generation/dataset/train-000005.arrow",
+      "bytes": 10369,
+      "sha256": "ccc701dab16bf55aa42d196887c4236005f8be2d3d8626c7595dc6b15dd6c430"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/generation/dataset/train-000006.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/generation/dataset/train-000006.arrow",
+      "bytes": 9025,
+      "sha256": "04cb0a18d8131e37142af9a02b7036e1e9335024f718b860c603295cfccf5445"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/generation/dataset/train-000007.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/generation/dataset/train-000007.arrow",
+      "bytes": 8065,
+      "sha256": "d73dbd6e7ab254a6a7a94b70c7c4bbcceb068bfe939b85dd4a2b0134c945b14e"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/generation/dataset/validation-000008.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/generation/dataset/validation-000008.arrow",
+      "bytes": 9345,
+      "sha256": "d264b99249307b3eb521d972f2394837870bc0936213e28b772ac4bebd91429a"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/generation/dataset/validation-000010.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/generation/dataset/validation-000010.arrow",
+      "bytes": 8897,
+      "sha256": "b6c3b0d1b738842b5641e9ba2b934dd40d288afab5fb0d37fd1980e6573e4b4d"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/generation/planned.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/generation/planned.json",
+      "bytes": 2656,
+      "sha256": "dadc50c38205f2801ebcb66f010de8241a29c1fe9f4026ae971b19c381d12e45"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/generation/result.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/generation/result.json",
+      "bytes": 12533,
+      "sha256": "085dc3642725214678c72780b214ed7fc491fffd22435b8283358f83c99d8e73"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/learning/best-model/manifest.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/learning/best-model/manifest.json",
+      "bytes": 518,
+      "sha256": "37519e2d66b1fd1fe859dd6bb47c84f709197238c9be710bee6c69a21b9595f6"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/learning/config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/learning/config.json",
+      "bytes": 677,
+      "sha256": "536ef82f39d078c91bf7854b09b01c096be036b7d730847e05f415cf1660af08"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/learning/curves.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/learning/curves.json",
+      "bytes": 6225,
+      "sha256": "b72c5994a0fccaa3b3ed3a9b5feb992e00806899e12de6b1bda03e8d8a0ebf18"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/learning/data.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/learning/data.json",
+      "bytes": 1024,
+      "sha256": "e0dc3c7131d63bc65af2a9c7c6696cbdc362f3860f1c1634b1b7d8dcc6d67685"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/learning/freeze.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/learning/freeze.json",
+      "bytes": 544,
+      "sha256": "2ddf57dc211a9792bf0ba4ffd814babc2202aceaf4bbe6d5d508fbfdf32f0531"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/learning/gradients.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/learning/gradients.json",
+      "bytes": 3224,
+      "sha256": "bed708c26a2db8e64b4b1836ca6d50bc40acd73487a563d53a6eeb77bbcb6038"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/learning/initial-model/manifest.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/learning/initial-model/manifest.json",
+      "bytes": 518,
+      "sha256": "26321cce721425d50654114c7b9c214312df3a5b0e082fd2dc52083020053f56"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/learning/last-model/manifest.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/learning/last-model/manifest.json",
+      "bytes": 518,
+      "sha256": "37519e2d66b1fd1fe859dd6bb47c84f709197238c9be710bee6c69a21b9595f6"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/learning/learning-curves.svg",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/learning/learning-curves.svg",
+      "bytes": 620,
+      "sha256": "b29505434d9671088bd4db7b2548e5392a6efbaa38b000f5005410f1f3a5986c"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/learning/scale.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/learning/scale.json",
+      "bytes": 138,
+      "sha256": "4de2bb3baef80bacd3fdb1759430815f0efd8e742e9df09502c19bf5066adcd4"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/test-cache.log",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/test-cache.log",
+      "bytes": 568,
+      "sha256": "e904d293807c1a9ae8bc844185efeee59a21e35976b29517cc981c627f416527"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/test.log",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/test.log",
+      "bytes": 4172,
+      "sha256": "bd549c0dc6eea78808a4240626849a629de6cb8b6e7a1e1e08c30b2d3dbd5cab"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/test/predictions.npz",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/test/predictions.npz",
+      "bytes": 3224,
+      "sha256": "bb381007c2a0882f1507b05c4f395c7d7d0fad95fc2599b13facfe9fb36ec96f"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/test/result.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/test/result.json",
+      "bytes": 5304,
+      "sha256": "6054d689b2aff7f0cab1e9b7ea5c35a89f7864fc57293923b43263771a3d91ee"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/train-cache.log",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/train-cache.log",
+      "bytes": 569,
+      "sha256": "aa25d1452e63f7dc3466db3e3103ecef058f72f8781aa375929d119518188c62"
+    },
+    {
+      "path": "linux-cycle/cpu-cycle-r3/train.log",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-cycle-r3/train.log",
+      "bytes": 1846,
+      "sha256": "3056a4c3dd4f5e175653342dfb91e5d0ec30297b6d41b3dcdcd6dee6687b0735"
+    },
+    {
+      "path": "linux-cycle/cpu-trt-same-workload.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cpu-trt-same-workload.json",
+      "bytes": 628,
+      "sha256": "640091fa603a30ad45423ad0d9ab6692778725ec3099006c5697ee93ed710f3c"
+    },
+    {
+      "path": "linux-cycle/cycle-config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cycle-config.json",
+      "bytes": 506,
+      "sha256": "f4abbacc38c1c82e6f3bea5b11c1dc94ef46a8f88fb021bb3c2758d632909eff"
+    },
+    {
+      "path": "linux-cycle/cycle-r1.log",
+      "original_path": ".artifacts/rust-migration/data-runner/cycle-r1.log",
+      "bytes": 2113,
+      "sha256": "5ad59cb0c4749f35685706b6fb84ce71aab7752289214d52ffcd788a21607e5f"
+    },
+    {
+      "path": "linux-cycle/cycle-r2-config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cycle-r2-config.json",
+      "bytes": 546,
+      "sha256": "2cbeffd3b494b97b264b243b10e20cc015c92308dcb54abe7c2bb8bf55e5a6af"
+    },
+    {
+      "path": "linux-cycle/cycle-r2.log",
+      "original_path": ".artifacts/rust-migration/data-runner/cycle-r2.log",
+      "bytes": 1255,
+      "sha256": "f6f283fc5efd11391d67a9d9734eec187c16c2f17c50bdc97434f7242170441c"
+    },
+    {
+      "path": "linux-cycle/cycle-r3-config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/cycle-r3-config.json",
+      "bytes": 546,
+      "sha256": "4062c5b8f043bfb676802693787dffa1a6701124546b4dca932d84d1957836db"
+    },
+    {
+      "path": "linux-cycle/cycle-r3.log",
+      "original_path": ".artifacts/rust-migration/data-runner/cycle-r3.log",
+      "bytes": 925,
+      "sha256": "f6ccdc0beee930f96b2116038828366f1c3de8b6024d8dd815c504f88f93dc6a"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-config.json",
+      "bytes": 761,
+      "sha256": "d3536f3c4dd291d673b7349e342af7cf6df957cacc6077ebd241b83562757abe"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/arena-config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/arena-config.json",
+      "bytes": 960,
+      "sha256": "bec04e8dbf06cc3fc271f5c1c407a7de00344dbffa2edc407e7864357dea0a47"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/arena.log",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/arena.log",
+      "bytes": 66,
+      "sha256": "a0abaa495ce64ae01490d2f73723db04c3af7cfddb0efc22cd7cf8f3cdd9d045"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/arena/admission.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/arena/admission.json",
+      "bytes": 176,
+      "sha256": "4e56b7f18a87fb87e9c0377292c39c8aefae2685de812f1e18d55fa45d0c6cee"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/arena/config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/arena/config.json",
+      "bytes": 1208,
+      "sha256": "7a9021ab2c421af08ccb7e2851e87c53611c06ab6147e24f915a6503aed95284"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/arena/planned.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/arena/planned.json",
+      "bytes": 816,
+      "sha256": "95902101416fe35a76eb5ba64c3d6d0731e3dc02bc398522b9bbc7cdec2f8d02"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/arena/result.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/arena/result.json",
+      "bytes": 1719,
+      "sha256": "0106c16ba697c1702814d674949efccbe4d7e25900b051665bcf7020807ba404"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/cycle-config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/cycle-config.json",
+      "bytes": 876,
+      "sha256": "78e375191ada4b528ff9771efc7504af143fbad47b8090b8b7d1400d422a7d14"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/cycle-state.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/cycle-state.json",
+      "bytes": 1112,
+      "sha256": "5686067a0a78ebb6b31ae25827e34e10818577173b52ad38552880266cc6e543"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/generation-config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/generation-config.json",
+      "bytes": 741,
+      "sha256": "5fc75a7885f5c91fa856e8e4b924a8dbbee6caa189180ed98e669b1b104b9af5"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/generation.log",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/generation.log",
+      "bytes": 3284,
+      "sha256": "634897f52a8e932a8223560a13242ef191618ace4e78573524fd888c3cf3af9f"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/generation/admission.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/generation/admission.json",
+      "bytes": 174,
+      "sha256": "e894c82d7d4e104d3bae43a5dc31a5d84fe2c6b8043dfe846f75198adc55f80f"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/generation/config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/generation/config.json",
+      "bytes": 1135,
+      "sha256": "48f276c227eff92852313a7204eef65b19fc97912b6c3813df060c2266a34ac1"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/generation/dataset/manifest.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/generation/dataset/manifest.json",
+      "bytes": 1896,
+      "sha256": "a8934ceb24bda0ccf4e0fffe7c95817123e34c645f8ebfc995fe683c7d9e1caa"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/generation/dataset/test-000002.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/generation/dataset/test-000002.arrow",
+      "bytes": 25473,
+      "sha256": "66a19e76fa6da98aab0d1b8733f637b48839234cc8bbf31bccc8d96ffaa32493"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/generation/dataset/test-000006.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/generation/dataset/test-000006.arrow",
+      "bytes": 28929,
+      "sha256": "00448c1674623f6083f3d2201ab05f259ffa39f9517d0106d672544eb79b83ac"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/generation/dataset/train-000000.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/generation/dataset/train-000000.arrow",
+      "bytes": 20161,
+      "sha256": "7e9923ee5661a9f756feef87300cdcba6fa0d8f4ecd27c9a5e5123a30922a300"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/generation/dataset/train-000001.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/generation/dataset/train-000001.arrow",
+      "bytes": 19841,
+      "sha256": "8287cf912c6adf474f155f09cecbac6b9617835fe0f15c912f2f8d2fac1456e1"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/generation/dataset/train-000004.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/generation/dataset/train-000004.arrow",
+      "bytes": 27841,
+      "sha256": "77d35e6fbfceffafa0ac29c2de69f13ce3f0d2dd83cc489c4c78eef3e919bfae"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/generation/dataset/train-000007.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/generation/dataset/train-000007.arrow",
+      "bytes": 32641,
+      "sha256": "d9b70d915683612ec75d38eb0fb2b69082534b110b51c86e67a0b15682549ccf"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/generation/dataset/validation-000003.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/generation/dataset/validation-000003.arrow",
+      "bytes": 25985,
+      "sha256": "5ca3421cc8c6b4394eae44f215cb9acf7429b85b33a598f19492d218c944b803"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/generation/dataset/validation-000005.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/generation/dataset/validation-000005.arrow",
+      "bytes": 24385,
+      "sha256": "55386672d9249bd9d28983177dfcae6d67dd9dc8b41b5937998995dcd6006d9c"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/generation/planned.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/generation/planned.json",
+      "bytes": 1595,
+      "sha256": "b874edb317e8fb0ce5e8e5155623064ff9b42988511dea66d3da432bcb35e05e"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/generation/result.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/generation/result.json",
+      "bytes": 8708,
+      "sha256": "bcd00002961197e1225146faaefa408631b1c7a67d9e4d053a03cea0086d30db"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/learning/best-model/manifest.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/learning/best-model/manifest.json",
+      "bytes": 520,
+      "sha256": "10914ec26dafe525aaaea7a63173a6a6d156e2c81f99b53824a184a25b51f494"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/learning/config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/learning/config.json",
+      "bytes": 677,
+      "sha256": "536ef82f39d078c91bf7854b09b01c096be036b7d730847e05f415cf1660af08"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/learning/curves.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/learning/curves.json",
+      "bytes": 6181,
+      "sha256": "93992fb7f4f51ebdb519f758f320d6c5dc071f9023531d63608bc26afdc5b29a"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/learning/data.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/learning/data.json",
+      "bytes": 998,
+      "sha256": "4460547f3eece2c625403b0a58356d53a29b8c62f6626f9314b128bd03466d4d"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/learning/freeze.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/learning/freeze.json",
+      "bytes": 543,
+      "sha256": "07989f36392aa45a5c581d1b88f309ebede5a4f45b03e950f881dbe7e8f4c50a"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/learning/gradients.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/learning/gradients.json",
+      "bytes": 3206,
+      "sha256": "faceae683365f2e494ea0e72873d0b1eda2d1a0c77f88f272693b20d15ff5a0e"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/learning/initial-model/manifest.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/learning/initial-model/manifest.json",
+      "bytes": 520,
+      "sha256": "5f6c07d15fd26602d1a1775faf13405ff7dbda6cbb0a6a32b33ccffbcdd2a7cf"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/learning/last-model/manifest.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/learning/last-model/manifest.json",
+      "bytes": 520,
+      "sha256": "10914ec26dafe525aaaea7a63173a6a6d156e2c81f99b53824a184a25b51f494"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/learning/learning-curves.svg",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/learning/learning-curves.svg",
+      "bytes": 615,
+      "sha256": "d7e7571f4e6974ed053b53c7ac97ffd1f48a72f9ad21d32bf1efd603de4eba07"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/learning/scale.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/learning/scale.json",
+      "bytes": 140,
+      "sha256": "9daedb7c4fd04e186074147f7c1978165bcaca7478038e1fd289173de866c4af"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/test-cache.log",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/test-cache.log",
+      "bytes": 568,
+      "sha256": "a08459fe18cdbdd2b842d932e673e8c4df7e07321ef337b1308781efda39ccf1"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/test.log",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/test.log",
+      "bytes": 4034,
+      "sha256": "6b598eca79c9e104cc99c9c2bfbb2d75cca93df65e71aa208e796f3d558ca5e3"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/test/predictions.npz",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/test/predictions.npz",
+      "bytes": 3504,
+      "sha256": "0bacbbda5ec4fd3d92069de8b6d4172f145af03105fb62a7bc88dcbd5b949c9b"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/test/result.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/test/result.json",
+      "bytes": 5166,
+      "sha256": "0b4baaea337a9c9acf57e3dc64d21da68e2d4c1f6891a2a542931526bbebd0fa"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/train-cache.log",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/train-cache.log",
+      "bytes": 569,
+      "sha256": "9ccb8b86f2e6de014a017b7cd4e8ef57c3db2d881883c972d965abe73bbeff2a"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r1/train.log",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r1/train.log",
+      "bytes": 1845,
+      "sha256": "d672bb4d2442560ebd2cfde18c467b44cca63f0ba799cabb5dac8a2c9aeb5c08"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2-config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2-config.json",
+      "bytes": 761,
+      "sha256": "062b5915eb3e8990a0e92f965bf3818f75fc818376bb0b35e105df57003e7ca6"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2.log",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2.log",
+      "bytes": 940,
+      "sha256": "1309f7a3634407b80b75e9b555c0bbb6bf411c8d628f7d9eba5ef3f2ae96770b"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/arena-config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/arena-config.json",
+      "bytes": 961,
+      "sha256": "d012fca197dacd132225fe4870b50ad29ed2533facd2e70f37355ad43dd86bde"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/arena.log",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/arena.log",
+      "bytes": 1481,
+      "sha256": "ec84d96de659a7a56d8a06a00af8989437292f6b2ca59801d7485378ffe683b1"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/arena/admission.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/arena/admission.json",
+      "bytes": 176,
+      "sha256": "30859ed158658cef81e1c92d1078b95ba9ba0e451ea7763b4fc4f6a6ebbec7f9"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/arena/config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/arena/config.json",
+      "bytes": 1209,
+      "sha256": "4dce4c2a4a0c9fc55683f239617681652baf8c6ef16196b341f6878012b00792"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/arena/dataset/manifest.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/arena/dataset/manifest.json",
+      "bytes": 1098,
+      "sha256": "b291d722a80f4281a1e3052fe6e13bdd87d01b184228a1e0becf0073cb279215"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/arena/dataset/test-000000.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/arena/dataset/test-000000.arrow",
+      "bytes": 6017,
+      "sha256": "9637b6a3a707594d9ca393ade811d98e906a02cf3ff426013768ba511d2e2145"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/arena/dataset/test-000001.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/arena/dataset/test-000001.arrow",
+      "bytes": 7553,
+      "sha256": "d3ea7d3c27f7128bbdc7dc62981af271620c1e21aaffc565d045aa14f749a045"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/arena/dataset/test-000002.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/arena/dataset/test-000002.arrow",
+      "bytes": 6785,
+      "sha256": "bd97928f3ec1ab144b854a119fcffe9f266ad6766b93f16499083689155a8dfe"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/arena/dataset/test-000003.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/arena/dataset/test-000003.arrow",
+      "bytes": 7169,
+      "sha256": "2e2a6d4baf9d5dfac8fd1d0c141aa102472f7121110f992c3c7d12564a10ada7"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/arena/planned.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/arena/planned.json",
+      "bytes": 816,
+      "sha256": "83c9855006865a8d3e4d15b774fbd35634ceeb347725f5ce7e95b9ea70d5a423"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/arena/result.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/arena/result.json",
+      "bytes": 3420,
+      "sha256": "24c6388c7539e2616d31fe839ce6fab6a7e5ad76f20c2d6fcf1e10f458f01d49"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/cycle-config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/cycle-config.json",
+      "bytes": 876,
+      "sha256": "7de09d48298f60fd035b11655d4775964cde2d0e82059b4e33f3a4b75ef90971"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/cycle-state.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/cycle-state.json",
+      "bytes": 1134,
+      "sha256": "fbaf056c1edfb941e4ee4c0a56f2f060648d7b4fe1a96e1b983e4ac7675472f7"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/generation-config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/generation-config.json",
+      "bytes": 741,
+      "sha256": "092eb7b6d0980b70bf142e42259ef3b105800b930436f3f641a9da69c28db2ad"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/generation.log",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/generation.log",
+      "bytes": 3283,
+      "sha256": "2dbbab364e8d79e539c9fdd667843ee8109beb4cc2f7eff1f6c0e993090b1c2d"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/generation/admission.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/generation/admission.json",
+      "bytes": 174,
+      "sha256": "e1b67274c34a38b83dcd5ff961e7ee565232a098d209d102ffe4fc17e9709bfc"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/generation/config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/generation/config.json",
+      "bytes": 1135,
+      "sha256": "2e70140f94938de3eec19d96da7416319fff012ac04de877b2072216bd3da7b2"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/generation/dataset/manifest.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/generation/dataset/manifest.json",
+      "bytes": 1896,
+      "sha256": "fcffd1ff61c2144e1fb5b97fc2a199670ab36a63e1552e2f005d3b374ba08dc4"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/generation/dataset/test-000002.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/generation/dataset/test-000002.arrow",
+      "bytes": 25473,
+      "sha256": "2784238a7f59b0dfb92314de156b39535ba1da863a8edff1f8e5a67ae91ee2fc"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/generation/dataset/test-000006.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/generation/dataset/test-000006.arrow",
+      "bytes": 28929,
+      "sha256": "8f1d0d206658a9453bc64b15197a401c7a39f8ccdd610735d92ccad283d3585e"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/generation/dataset/train-000000.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/generation/dataset/train-000000.arrow",
+      "bytes": 20161,
+      "sha256": "b603b6694ec64c4e8c451482ca08f1481f9dbf2e804fa8e7beec2df74792879f"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/generation/dataset/train-000001.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/generation/dataset/train-000001.arrow",
+      "bytes": 19841,
+      "sha256": "aa396a2816f51871d47389d9527603c776f66ea0efc56b8360da4db1b7b6871d"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/generation/dataset/train-000004.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/generation/dataset/train-000004.arrow",
+      "bytes": 27841,
+      "sha256": "c2850697e9fea4b7668164d11e43369a3463201e344e4ce188135b7823b62668"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/generation/dataset/train-000007.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/generation/dataset/train-000007.arrow",
+      "bytes": 32641,
+      "sha256": "2186de902913b9908a2ed814aa13c532984a49dfbcebd5d33eed5258b42a8b41"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/generation/dataset/validation-000003.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/generation/dataset/validation-000003.arrow",
+      "bytes": 25985,
+      "sha256": "4969cc823c5ede4a55c9eb2add307d1d7d5916f0636c7d67f7103e15d61692a7"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/generation/dataset/validation-000005.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/generation/dataset/validation-000005.arrow",
+      "bytes": 24385,
+      "sha256": "35432fb7b074fc6619c3202cf97612f5f7dd2e43b61a841adbe195d4adca7647"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/generation/planned.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/generation/planned.json",
+      "bytes": 1595,
+      "sha256": "21355b5419088cdbb7866401c33c5d4f2035f9aa6f315cad895bb108e96c1644"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/generation/result.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/generation/result.json",
+      "bytes": 8707,
+      "sha256": "1af448c2dd02302b416d0f2edaaa2081a6cf8744a78c71c9e0734546308d2a4b"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/learning/best-model/manifest.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/learning/best-model/manifest.json",
+      "bytes": 520,
+      "sha256": "10914ec26dafe525aaaea7a63173a6a6d156e2c81f99b53824a184a25b51f494"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/learning/config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/learning/config.json",
+      "bytes": 677,
+      "sha256": "536ef82f39d078c91bf7854b09b01c096be036b7d730847e05f415cf1660af08"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/learning/curves.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/learning/curves.json",
+      "bytes": 6181,
+      "sha256": "cad9273968c78f62f391f723a15e91f72504c8da74e9ae76a674ebf31b2c8a13"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/learning/data.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/learning/data.json",
+      "bytes": 998,
+      "sha256": "1e5ccba696cc26c6dc7da71246f0d8b7db94fa01ab4b535d9e79000d43a3d5bf"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/learning/freeze.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/learning/freeze.json",
+      "bytes": 543,
+      "sha256": "5dd1f8ae4d417da53551ee8f1594f94fe72691d918f8acf8ede5e80d55766f25"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/learning/gradients.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/learning/gradients.json",
+      "bytes": 3206,
+      "sha256": "faceae683365f2e494ea0e72873d0b1eda2d1a0c77f88f272693b20d15ff5a0e"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/learning/initial-model/manifest.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/learning/initial-model/manifest.json",
+      "bytes": 520,
+      "sha256": "5f6c07d15fd26602d1a1775faf13405ff7dbda6cbb0a6a32b33ccffbcdd2a7cf"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/learning/last-model/manifest.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/learning/last-model/manifest.json",
+      "bytes": 520,
+      "sha256": "10914ec26dafe525aaaea7a63173a6a6d156e2c81f99b53824a184a25b51f494"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/learning/learning-curves.svg",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/learning/learning-curves.svg",
+      "bytes": 615,
+      "sha256": "d7e7571f4e6974ed053b53c7ac97ffd1f48a72f9ad21d32bf1efd603de4eba07"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/learning/scale.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/learning/scale.json",
+      "bytes": 140,
+      "sha256": "9daedb7c4fd04e186074147f7c1978165bcaca7478038e1fd289173de866c4af"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/test-cache.log",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/test-cache.log",
+      "bytes": 568,
+      "sha256": "61f16ddd156edcc54e6f09814849991cf64683df75430ec60eb40fcaa6e8a66b"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/test.log",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/test.log",
+      "bytes": 4034,
+      "sha256": "8b4b8a0b386e4c64ffe4554adc7e88e91e6c580e7d47c4cb0f32954ac60e6383"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/test/predictions.npz",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/test/predictions.npz",
+      "bytes": 3504,
+      "sha256": "0bacbbda5ec4fd3d92069de8b6d4172f145af03105fb62a7bc88dcbd5b949c9b"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/test/result.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/test/result.json",
+      "bytes": 5166,
+      "sha256": "92ec02eda2535df56e8e8a7b86052f265253cec4824e1b3b98ad4139f0f0cff5"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/train-cache.log",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/train-cache.log",
+      "bytes": 569,
+      "sha256": "4422acd41d2bbf8b94604291ef4c28cfb5995d28216df0eebf7514dcf75e6daf"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle-r2/train.log",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle-r2/train.log",
+      "bytes": 1845,
+      "sha256": "cf79e1883f1ceb6664a70b9fe8efee16753e5f8cb5a7e6d87e37c2a513981a0d"
+    },
+    {
+      "path": "linux-cycle/gpu-cycle.log",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-cycle.log",
+      "bytes": 1186,
+      "sha256": "72c43cbdb5323cbd654ce49001c244d40cb13fe70e9c7cbb3692cfd703ad5e9c"
+    },
+    {
+      "path": "linux-cycle/gpu-student-native-parity.json",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-student-native-parity.json",
+      "bytes": 187,
+      "sha256": "14e55c2beff5ca9ea51e44bf2a552cd77b0138ff4dc86ec55efd6ed0f49c72ca"
+    },
+    {
+      "path": "linux-cycle/gpu-student-native.jsonl",
+      "original_path": ".artifacts/rust-migration/data-runner/gpu-student-native.jsonl",
+      "bytes": 30729,
+      "sha256": "4a2a0042d4012c983165d6a86ece6015c149a7509d589088b7f3fd70b5357bd0"
+    },
+    {
+      "path": "linux-cycle/mcts-ort-config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/mcts-ort-config.json",
+      "bytes": 754,
+      "sha256": "0563802ad660742e507dc2aac83ef1753b601499a6c23e3031389f549cc13fc6"
+    },
+    {
+      "path": "linux-cycle/mcts-ort-r1/admission.json",
+      "original_path": ".artifacts/rust-migration/data-runner/mcts-ort-r1/admission.json",
+      "bytes": 174,
+      "sha256": "b617b884c95a3fdf906c19d0056a7c79b63c41aad9419b0b48c8c6fe4e7e13ea"
+    },
+    {
+      "path": "linux-cycle/mcts-ort-r1/config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/mcts-ort-r1/config.json",
+      "bytes": 1275,
+      "sha256": "fa7777a72442a740b2cca2615568ffd1e8f3ad2f76cd5929126c61cf804e4347"
+    },
+    {
+      "path": "linux-cycle/mcts-ort-r1/dataset/manifest.json",
+      "original_path": ".artifacts/rust-migration/data-runner/mcts-ort-r1/dataset/manifest.json",
+      "bytes": 1896,
+      "sha256": "fe22ab61797a7494a9b4e91d9f438e935859a56261ac5b34c782b52179e68624"
+    },
+    {
+      "path": "linux-cycle/mcts-ort-r1/dataset/test-000002.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/mcts-ort-r1/dataset/test-000002.arrow",
+      "bytes": 25345,
+      "sha256": "8b8b6820ad1f38274866aea59048b61dc8b05448fb270e24fd17d469c95448df"
+    },
+    {
+      "path": "linux-cycle/mcts-ort-r1/dataset/test-000006.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/mcts-ort-r1/dataset/test-000006.arrow",
+      "bytes": 28417,
+      "sha256": "b978a58b7b9d483e40ca9e787dc5326f4cac6e3b3ca31910db8fa89722989232"
+    },
+    {
+      "path": "linux-cycle/mcts-ort-r1/dataset/train-000000.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/mcts-ort-r1/dataset/train-000000.arrow",
+      "bytes": 19649,
+      "sha256": "d556c802bf2c6a84fc0533e712fdc4c5ba1c73b64af465c8a3c959e5eb0a425d"
+    },
+    {
+      "path": "linux-cycle/mcts-ort-r1/dataset/train-000001.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/mcts-ort-r1/dataset/train-000001.arrow",
+      "bytes": 19521,
+      "sha256": "5ea996ef02d6e8c569cc3b5c082846f9ebd2cee0ff4d2e6850ebda6c8667efcd"
+    },
+    {
+      "path": "linux-cycle/mcts-ort-r1/dataset/train-000004.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/mcts-ort-r1/dataset/train-000004.arrow",
+      "bytes": 28353,
+      "sha256": "fad39c2fe1622966b45771a06e7bade1bcf2b01eee90e5277eb08a5a9a7802f7"
+    },
+    {
+      "path": "linux-cycle/mcts-ort-r1/dataset/train-000007.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/mcts-ort-r1/dataset/train-000007.arrow",
+      "bytes": 32449,
+      "sha256": "bc907fd786a0775416f77fdaa928b760a85c3692be278828dd7fe1c049fba65a"
+    },
+    {
+      "path": "linux-cycle/mcts-ort-r1/dataset/validation-000003.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/mcts-ort-r1/dataset/validation-000003.arrow",
+      "bytes": 26113,
+      "sha256": "2a30ba5e92adde11b96e41d049bad9407f9d3d5473d9dc8a6ac8c97be7a52b9d"
+    },
+    {
+      "path": "linux-cycle/mcts-ort-r1/dataset/validation-000005.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/mcts-ort-r1/dataset/validation-000005.arrow",
+      "bytes": 23809,
+      "sha256": "314c725ad1f4f93d931386b5a3b93ad5764df2176c385f1e291e788b99909a9f"
+    },
+    {
+      "path": "linux-cycle/mcts-ort-r1/planned.json",
+      "original_path": ".artifacts/rust-migration/data-runner/mcts-ort-r1/planned.json",
+      "bytes": 1587,
+      "sha256": "db67f3f3c1310bafce42ef2f4b191993807dec6f53ffeae53605d716d7820231"
+    },
+    {
+      "path": "linux-cycle/mcts-ort-r1/result.json",
+      "original_path": ".artifacts/rust-migration/data-runner/mcts-ort-r1/result.json",
+      "bytes": 8698,
+      "sha256": "7aec18a60c0ac4c13187d41ff04475b72a229fe323045bfe9856a5acae85c4ee"
+    },
+    {
+      "path": "linux-cycle/mcts-ort.log",
+      "original_path": ".artifacts/rust-migration/data-runner/mcts-ort.log",
+      "bytes": 3437,
+      "sha256": "0074e5ca2a96ccd98557cb7874d9e3ec00bbebd331a4648b504762cdfb013597"
+    },
+    {
+      "path": "linux-cycle/mcts-trt-config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/mcts-trt-config.json",
+      "bytes": 618,
+      "sha256": "6323290d4776d1c141bd154132c52d1e1174505374501b42887bb04989499814"
+    },
+    {
+      "path": "linux-cycle/mcts-trt-r1/admission.json",
+      "original_path": ".artifacts/rust-migration/data-runner/mcts-trt-r1/admission.json",
+      "bytes": 174,
+      "sha256": "7feeb2bb696a519884d00d366428c492ce495c0c987b6eaa2d93c1b07aa34ad7"
+    },
+    {
+      "path": "linux-cycle/mcts-trt-r1/config.json",
+      "original_path": ".artifacts/rust-migration/data-runner/mcts-trt-r1/config.json",
+      "bytes": 1122,
+      "sha256": "c2841b33bb9c2faf4bfab12d6ac58a5508f6b54a27ed3fe52cb35ad383a0a31b"
+    },
+    {
+      "path": "linux-cycle/mcts-trt-r1/dataset/manifest.json",
+      "original_path": ".artifacts/rust-migration/data-runner/mcts-trt-r1/dataset/manifest.json",
+      "bytes": 1896,
+      "sha256": "6362a82bcf27c376d91c5c5f9c3c0c0625abdbbd050223b53defe3671e5fd474"
+    },
+    {
+      "path": "linux-cycle/mcts-trt-r1/dataset/test-000002.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/mcts-trt-r1/dataset/test-000002.arrow",
+      "bytes": 25473,
+      "sha256": "25bfacc3ba708ce9c552649bd17023bf433ee08cb377d4e6a15ee239e701c554"
+    },
+    {
+      "path": "linux-cycle/mcts-trt-r1/dataset/test-000006.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/mcts-trt-r1/dataset/test-000006.arrow",
+      "bytes": 28929,
+      "sha256": "5447d7c7bfe75474f8610f476279ad57a35b344475c487f7bd0eb9c151087be5"
+    },
+    {
+      "path": "linux-cycle/mcts-trt-r1/dataset/train-000000.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/mcts-trt-r1/dataset/train-000000.arrow",
+      "bytes": 20161,
+      "sha256": "5c3407a7904394ab04836a12b2df31660ab515a4c0c69ed79d3ffc72ec9c0e8a"
+    },
+    {
+      "path": "linux-cycle/mcts-trt-r1/dataset/train-000001.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/mcts-trt-r1/dataset/train-000001.arrow",
+      "bytes": 19841,
+      "sha256": "84519f169da3036f4a222dafa956599a56da668a712488ee805754820a101456"
+    },
+    {
+      "path": "linux-cycle/mcts-trt-r1/dataset/train-000004.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/mcts-trt-r1/dataset/train-000004.arrow",
+      "bytes": 27841,
+      "sha256": "a8a05c8a622a26d365896812108becbb53f328d398cb333df110ebfa47f5ab4c"
+    },
+    {
+      "path": "linux-cycle/mcts-trt-r1/dataset/train-000007.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/mcts-trt-r1/dataset/train-000007.arrow",
+      "bytes": 32641,
+      "sha256": "11d87614ebedf990b954dd93223332208fa2d1be908d7ad9321ab29fe2376648"
+    },
+    {
+      "path": "linux-cycle/mcts-trt-r1/dataset/validation-000003.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/mcts-trt-r1/dataset/validation-000003.arrow",
+      "bytes": 25985,
+      "sha256": "4625557ca9ef30fde63c08455509fc40b29b6d6283daa48c24ea4f647c51ede1"
+    },
+    {
+      "path": "linux-cycle/mcts-trt-r1/dataset/validation-000005.arrow",
+      "original_path": ".artifacts/rust-migration/data-runner/mcts-trt-r1/dataset/validation-000005.arrow",
+      "bytes": 24385,
+      "sha256": "1d8dfbb326d7d509918815e3fdd717175997406271d12baba7da340b798b0f5d"
+    },
+    {
+      "path": "linux-cycle/mcts-trt-r1/planned.json",
+      "original_path": ".artifacts/rust-migration/data-runner/mcts-trt-r1/planned.json",
+      "bytes": 1587,
+      "sha256": "5d43c8ccbc02fae6185bbd2fbfa1f9242ce8b3783fc5fe879ca5c2d524a0b62b"
+    },
+    {
+      "path": "linux-cycle/mcts-trt-r1/result.json",
+      "original_path": ".artifacts/rust-migration/data-runner/mcts-trt-r1/result.json",
+      "bytes": 8699,
+      "sha256": "27ef9c0771ec756fc2c1b9f6e9422c35954a0661265c85eeea2acf891c68acb6"
+    },
+    {
+      "path": "linux-cycle/mcts-trt.log",
+      "original_path": ".artifacts/rust-migration/data-runner/mcts-trt.log",
+      "bytes": 3275,
+      "sha256": "d2f5dc613d699e29647b23a0a90c3f935ef6c18c8ffcb7e3c44a3b87b764da02"
+    },
+    {
+      "path": "linux-cycle/python-format-repair.log",
+      "original_path": ".artifacts/rust-migration/data-runner/python-format-repair.log",
+      "bytes": 43,
+      "sha256": "75a1a0b84df254a5914206de15dfb687d14e0be3046751da61f2b4b66da13a6b"
+    },
+    {
+      "path": "linux-cycle/python-lint-repair.log",
+      "original_path": ".artifacts/rust-migration/data-runner/python-lint-repair.log",
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": "linux-cycle/python-tests-final.log",
+      "original_path": ".artifacts/rust-migration/data-runner/python-tests-final.log",
+      "bytes": 101,
+      "sha256": "372ee57a30b8a8b17bb056a0814266786a922da7dcf4139f4f9a2457745d6424"
+    },
+    {
+      "path": "linux-cycle/python-tests-repair.log",
+      "original_path": ".artifacts/rust-migration/data-runner/python-tests-repair.log",
+      "bytes": 101,
+      "sha256": "fd3429f6a39b0337f73fcc2e93bc92cfa556334244053e19baf5f74b054988a4"
+    },
+    {
+      "path": "linux-cycle/python-tests.log",
+      "original_path": ".artifacts/rust-migration/data-runner/python-tests.log",
+      "bytes": 101,
+      "sha256": "2c37d50a88147ca2ebd5197d74ee37d462dab650d793512e849814c28d5a38f0"
+    },
+    {
+      "path": "linux-cycle/release-build-current.log",
+      "original_path": ".artifacts/rust-migration/data-runner/release-build-current.log",
+      "bytes": 32492,
+      "sha256": "db87528a91b227bc35737de26b399d12a2960db98d6a1b80efd66a2d1fff4d50"
+    },
+    {
+      "path": "linux-cycle/release-build-final.log",
+      "original_path": ".artifacts/rust-migration/data-runner/release-build-final.log",
+      "bytes": 31163,
+      "sha256": "1f5f8e80022bef3e9c04ba7756699dc950710cfb7a2e19d334e1799ee1414088"
+    },
+    {
+      "path": "linux-cycle/release-build-r2.log",
+      "original_path": ".artifacts/rust-migration/data-runner/release-build-r2.log",
+      "bytes": 31085,
+      "sha256": "29f53fa8a1c20b5f1eda6aa4e1963c11ed3e15d07e1c912a0f04fa38ed825548"
+    },
+    {
+      "path": "linux-cycle/release-build.log",
+      "original_path": ".artifacts/rust-migration/data-runner/release-build.log",
+      "bytes": 32275,
+      "sha256": "a29f89d3df8d046706cade36046307808d7ae0a5dbf61eaef60b058067c4ba61"
+    },
+    {
+      "path": "linux-cycle/source-handoff-repair.json",
+      "original_path": ".artifacts/rust-migration/data-runner/source-handoff-repair.json",
+      "bytes": 6697,
+      "sha256": "0f6cf94aab748ec9a3f767e73de2668ac38b0c4882ad80510c88801dba572dc1"
+    },
+    {
+      "path": "linux-cycle/source-handoff.json",
+      "original_path": ".artifacts/rust-migration/data-runner/source-handoff.json",
+      "bytes": 5790,
+      "sha256": "ecf544c52ae52d31a51fcbe9a4b7a70393de6f4009eaabe4a2d18e5da4a6f9cc"
+    },
+    {
+      "path": "linux-cycle/student-native-parity.json",
+      "original_path": ".artifacts/rust-migration/data-runner/student-native-parity.json",
+      "bytes": 107,
+      "sha256": "dddfe643d508fc24572b9c5a9caefd64a37b022d759717c93001d1bb8c75620a"
+    },
+    {
+      "path": "linux-cycle/student-native.jsonl",
+      "original_path": ".artifacts/rust-migration/data-runner/student-native.jsonl",
+      "bytes": 44660,
+      "sha256": "056028f0fcf2f8f1f3c86c2505621c93219bdf6c111e3ca0df28b996c8734096"
+    },
+    {
+      "path": "linux-cycle/unit-tests-final.log",
+      "original_path": ".artifacts/rust-migration/data-runner/unit-tests-final.log",
+      "bytes": 2681,
+      "sha256": "c6ecbf36007ebf80a33ee5aa7fc4b65597320236ed579964d9bb38ed7d43f418"
+    },
+    {
+      "path": "linux-cycle/unit-tests-repair.log",
+      "original_path": ".artifacts/rust-migration/data-runner/unit-tests-repair.log",
+      "bytes": 3248,
+      "sha256": "f9ea3dbcefd91f3f73d07fc546a9db6c4838eed743d5705e344aed95e0a36d9b"
+    },
+    {
+      "path": "linux-cycle/unit-tests.log",
+      "original_path": ".artifacts/rust-migration/data-runner/unit-tests.log",
+      "bytes": 2897,
+      "sha256": "6363ce19a8f49e9df9d7fdf08d59e3f57c6ae093ce8f8b90368c96f7fc9f3d15"
+    },
+    {
+      "path": "model-manifests/sigma.engine.manifest.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/export/sigma.engine.manifest.json",
+      "bytes": 841,
+      "sha256": "8533efeccbb530fbecc4b880adef5770f7a53c6b4dc0b7075b59d4e0cd8a31c8"
+    },
+    {
+      "path": "model-manifests/sigma.pt2.manifest.json",
+      "original_path": "/home/vscode/.cache/inference/rust-migration/export/sigma.pt2.manifest.json",
+      "bytes": 800,
+      "sha256": "509db2e9ce94a9b862fb60ff2dc738db1f0b85c394d65af694bfef08e139b4b5"
+    }
+  ],
+  "all_members_restore_verified": true,
+  "models_builds_tensor_caches_included": false
+}

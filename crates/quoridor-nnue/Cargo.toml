@@ -1,0 +1,20 @@
+[package]
+name = "quoridor-nnue"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+quoridor-core = { path = "../quoridor-core" }
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["float_roundtrip"] }
+sha2 = "0.10"
+
+[dev-dependencies]
+quoridor-core = { path = "../quoridor-core", features = ["research"] }
+
+[features]
+research = ["quoridor-core/research"]
+
+[[example]]
+name = "benchmark"
+required-features = ["research"]

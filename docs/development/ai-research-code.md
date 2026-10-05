@@ -4,6 +4,10 @@ main `/workspaces/quoridor` が持続的研究のコード・文書・保存デ�
 
 ## 機能と依存方向
 
+新しい評価・探索・対局生成の正本はRust crateです。[Rust AI運用](rust-ai.md)にビルド、設定、学習cycleを示します。`quoridor-core`→`quoridor-nnue`/`quoridor-ai`→`quoridor-runner`と依存し、native推論SDKとArrowデータはそれぞれ`quoridor-inference`・`quoridor-data`へ分離します。`python/quoridor_training`はbulk tensorを読み、PyTorch学習・曲線・freeze/test・モデル出力を行います。探索ノードやNN要求のたびにPython/Node/JSONを通す構成は新経路では使いません。
+
+以下の`tools/`配置とコマンドは互換検証・過去run再現の案内です。JavaScriptの独立ルール/評価oracleと旧固定recipeは履歴条件の再現用に保持し、新経路の正本にはしません。
+
 ```text
 main
 ├─ tools/ai-sigma-native/            ルール → QF1/NNUE → 探索 → arena
@@ -25,7 +29,7 @@ main
 
 共通moduleから`ai-sigma-frame*`・過去issueへ逆依存しません。実験の問い・固定条件・版・期限・CPU番号・モデル/入力pathはcallerのrun設定に置きます。同じ機構の次実験を作る際は共通APIへ条件を渡し、source全コピーを新frameへ増殖させません。独立checkerの算術・判断と、比較を成立させるための凍結実装は意図して分離し、その独立性の範囲を報告に示します。
 
-## 現役入口と凍結境界
+## 互換入口と凍結境界
 
 | 利用目的 | 現役入口・契約 | 過去境界 |
 | --- | --- | --- |
@@ -38,11 +42,11 @@ main
 
 保守移行前の原recipeと比較用sourceはGit `a0c43016e0a10e252fd06405f6cf893f6c434a30`で再現できます。新共通moduleへ移行したcallerで過去結果を遡及再評価しません。過去runは記録されたGit/必要差分/入力hashを使います。まだ現役treeにある旧recipeは科学記録の参照元であり、今後の共通実装の正本ではありません。削除やshim撤去は、現callerが無く、原版・未Git差分・必要入力が復元可能と確認してから行います。
 
-### 生成のrun設定
+### 旧JavaScript生成のrun設定
 
 `config.cjs:validateConfig/checkStart`が新入口の設定契約です。必須なのはissue/goal/owner/run ID、開始cutoff・科学deadline・親end、job/cleanup秒、絶対pathのopenings・新output・Beads wrapper、worker ID/CPU/game割当、RAM/output guard、runtime model/path/hash・ORT版・通信timeout、教師K/探索量・温度規則、batch/pending/reply上限です。GPU modeは既provider command/args/timeoutも明示します。CPUJS/RustCPU/GPUを区別し、run設定で新しい科学条件を勝手に変えません。管理CPUも含め親合計内に配分します。`resources.logical_cpu_limit`はworkerと管理affinityの和集合を束縛します。GPU modeでは`gpu_id`/VRAM guardを明示し、未知の競合processを空きへ換算しません。
 
-### 学習の入口
+### 互換学習の入口
 
 `run.sh`は`QUORIDOR_NNUE_PYTHON`（既定は永続training env）を使い、`learner.py`へ渡します。`--data`にはQF1 JSON/JSONL/gzipまたはhash-bound `.stage.json`、`--run-id`には新ID、`--config`/`--set`には科学契約で決めた条件を指定します。`--output`はlive領域、`--checkpoints`は明示したignoredモデル領域へ向けます。`--scale-statistics`は事前固定したSTM float32統計pathで、省略時はraw距離です。`--dry-run`は入力/設定の確認だけでTorch import・モデルforward・学習を行いません。custom model factoryを使うcallerは`model_sources`を渡し、実sourceをrun hashへ束縛します。
 

@@ -1,0 +1,103 @@
+{
+  "schema": "quoridor-rust-migration-verification-v1",
+  "primary_platform": "Linux native x86_64",
+  "wasm_role": "one product deployment path",
+  "checks": [
+    {
+      "name": "workspace-tests",
+      "command": "cargo test --locked --workspace --features quoridor-wasm/research --jobs 1",
+      "result": "pass",
+      "archive_log": "integration/workspace-test-final.log"
+    },
+    {
+      "name": "workspace-clippy",
+      "command": "cargo clippy --locked --workspace --features quoridor-wasm/research --all-targets --jobs 1 -- -D warnings",
+      "result": "pass",
+      "archive_log": "integration/clippy-final.log"
+    },
+    {
+      "name": "native-gpu-runner-clippy",
+      "command": "cargo clippy --locked -p quoridor-runner --features cuda-aoti,tensorrt --all-targets --jobs 1 -- -D warnings",
+      "result": "pass",
+      "archive_log": "integration/native-runner-clippy-final.log"
+    },
+    {
+      "name": "native-gpu-inference-clippy",
+      "command": "cargo clippy --locked -p quoridor-inference --all-features --all-targets --jobs 1 -- -D warnings",
+      "result": "pass",
+      "archive_log": "integration/native-inference-clippy-final.log"
+    },
+    {
+      "name": "linux-release",
+      "command": "cargo build --locked --release -p quoridor-runner --features cuda-aoti,tensorrt --jobs 1",
+      "result": "pass",
+      "archive_log": "integration/native-release-final.log"
+    },
+    {
+      "name": "wasm-product-check",
+      "command": "cargo check --locked -p quoridor-wasm --features nnue --target wasm32-unknown-unknown --jobs 1",
+      "result": "pass",
+      "archive_log": "integration/wasm-check-final.log"
+    },
+    {
+      "name": "product-rules-tests",
+      "command": "cargo test --locked -p quoridor-wasm --no-default-features --features rules --jobs 1",
+      "result": "pass",
+      "archive_log": "integration/product-rules-final.log"
+    },
+    {
+      "name": "product-ai-tests",
+      "command": "cargo test --locked -p quoridor-wasm --no-default-features --features ai --jobs 1",
+      "result": "pass",
+      "archive_log": "integration/product-ai-final.log"
+    },
+    {
+      "name": "python-contracts",
+      "command": "PYTHONPATH=python TRAINING_PYTHON -m unittest quoridor_training.test_contracts",
+      "result": "pass",
+      "archive_log": "integration/python-contracts-final.log"
+    },
+    {
+      "name": "research-quality",
+      "command": "python3 scripts/dev/check-research.py",
+      "result": "pass",
+      "archive_log": "integration/research-quality-final.log"
+    },
+    {
+      "name": "web-typecheck",
+      "command": "npm run typecheck",
+      "result": "pass",
+      "archive_log": "integration/typecheck-final.log"
+    },
+    {
+      "name": "web-render",
+      "command": "npm run test:render",
+      "result": "pass",
+      "archive_log": "integration/render-final.log"
+    },
+    {
+      "name": "actual-pytorch",
+      "command": "QUORIDOR_TORCH_PYTHON=TRAINING_PYTHON cargo test -p quoridor-nnue --features research --test float_parity actual_pytorch -- --ignored --nocapture",
+      "result": "pass",
+      "archive_log": "integration/torch-parity.log"
+    }
+  ],
+  "workspace_passed": 72,
+  "workspace_failed": 0,
+  "workspace_ignored": 1,
+  "ignored_pytorch_executed_separately": true,
+  "actual_cycle": "linux-cycle/gpu-cycle-r2/cycle-state.json",
+  "actual_student_parity": "linux-cycle/gpu-student-native-parity.json",
+  "all_default_weights_unchanged": true,
+  "research_scheduler_restarted": false,
+  "source_manifest": "source-manifest.json",
+  "generation_comparison": "native-generation-comparison.json",
+  "archive_manifest": "archive-manifest.json",
+  "limitations": [
+    "finite same8K32 CPU/TRT fixed-order comparison; no universal throughput guarantee",
+    "small student0W4L; not strongest AI or learning improvement",
+    "historical alpha rows descriptiveidentity preserved; correctedcontentidentity and PV independently tested",
+    "post-experiment metadata and style repairs did not rerun historical science",
+    "builds/SDK/model outputs remain ignored; all selected experiment archive members restore verified"
+  ]
+}

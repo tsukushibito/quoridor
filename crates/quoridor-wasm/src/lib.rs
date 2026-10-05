@@ -1,5 +1,10 @@
 use wasm_bindgen::prelude::*;
 
+#[cfg(feature = "nnue")]
+mod nnue;
+#[cfg(feature = "nnue")]
+pub use nnue::NnueEngine;
+
 #[cfg(any(feature = "rules", feature = "ai"))]
 pub mod wire;
 

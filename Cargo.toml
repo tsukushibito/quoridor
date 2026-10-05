@@ -1,3 +1,12 @@
 [workspace]
 resolver = "2"
-members = ["crates/quoridor-core", "crates/quoridor-ai", "crates/quoridor-wasm"]
+members = [
+  "crates/quoridor-core", "crates/quoridor-ai", "crates/quoridor-wasm",
+  "crates/quoridor-nnue", "crates/quoridor-inference", "crates/quoridor-data",
+  "crates/quoridor-runner",
+]
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 1

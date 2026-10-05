@@ -1,0 +1,18 @@
+[package]
+name = "quoridor-runner"
+version = "0.1.0"
+edition = "2024"
+[features]
+default = []
+cuda-aoti = ["quoridor-inference/cuda-aoti"]
+tensorrt = ["quoridor-inference/tensorrt"]
+[dependencies]
+quoridor-core = { path = "../quoridor-core", features = ["research"] }
+quoridor-nnue = { path = "../quoridor-nnue" }
+quoridor-ai = { path = "../quoridor-ai", features = ["research"] }
+quoridor-data = { path = "../quoridor-data" }
+quoridor-inference = { path = "../quoridor-inference" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+libc = "0.2"

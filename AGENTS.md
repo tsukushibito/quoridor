@@ -30,6 +30,7 @@
 | 研究の目標・現在の許可枠 | [研究目標](docs/design/ai-sigma-research-goal.md)、[現行実行枠](docs/design/ai-sigma-continuation-20261001.md)、担当契約 |
 | 研究の分担・通信・監督運用 | [チーム設計](docs/design/ai-research-team.md)、運用変更時はmain checkoutの`docs/development/research-scheduler.md` |
 | 再実行・コード版・データ・配置境界 | [研究実行と記録](docs/development/ai-research-experiments.md)、[現役入口・機能境界・保存/検査](docs/development/ai-research-code.md) |
+| Rust評価/探索・CPU/GPU生成・学習cycle | [Rust AI運用](docs/development/rust-ai.md)、[crateとモデル境界](docs/design/ai-rust-migration.md) |
 | worktree・モデル・依存・保存先の変更や整理 | [保存方針](.devcontainer/storage-policy.md) |
 
 mainが持続的研究の統合正本。並行変更・比較にはmanaged worktreeを使い、旧`.worktree/ai-sigma`の凍結入力を保護する。役割・文書・現役sourceの恒常mirrorは作らない。並行writerのGit index/commitは一人の統合担当だけが操作し、変更pathと停止を引き渡す。

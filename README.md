@@ -14,10 +14,11 @@ AI研究は競合仮説と実験を並行し、結果から修正・再確認・
 | --- | --- |
 | `apps/web/` | 製品Web UI・Three.js描画・Worker側の連携 |
 | `packages/engine-bridge/` | TypeScriptとRust/Wasmを結ぶプロトコル・bridge |
-| `crates/quoridor-core/`, `quoridor-ai/`, `quoridor-wasm/` | Rustのルール、AI、Wasm公開境界 |
-| `tools/ai-sigma-native/` | 現役ルール・QF1特徴・NNUE/探索・native arena・MCTS教師アダプター |
-| `tools/ai-sigma-common/`, `tools/ai-sigma-manygame-generation/` | 再利用する教師/IPC/回収と、明示run設定を使う多game生成入口 |
-| `tools/nnue-training/` | 汎用QF1入力・学習入口と、明示した凍結frame14互換境界 |
+| `crates/quoridor-core/`, `quoridor-nnue/`, `quoridor-ai/`, `quoridor-wasm/` | Rustのルール・差分評価・αβ/PVS/TT・MCTS・CPU/Wasm公開境界 |
+| `crates/quoridor-inference/`, `quoridor-data/`, `quoridor-runner/` | 常駐CPU/GPU推論・Arrowデータ・並列生成/arena/学習cycle入口 |
+| `python/quoridor_training/`, `tools/model-export/` | bulk入力のPyTorch学習・曲線/freeze/test・nativeモデル変換 |
+| `tools/ai-sigma-native/`, `ai-sigma-common/`, `ai-sigma-manygame-generation/` | 独立互換oracleと過去runの再現入口。新しい探索・生成はRust側 |
+| `tools/nnue-training/` | 学習設定・モデル定義の共通部と、凍結frame14互換境界 |
 | その他`tools/` | 補助ツール・独立checker・版付きの過去recipe |
 | `scripts/`, `scripts/dev/` | ビルド・生成・検証入口と開発環境/Beads/研究通信の操作 |
 | `tests/` | 製品のrender/audio/e2e検証・fixture |
