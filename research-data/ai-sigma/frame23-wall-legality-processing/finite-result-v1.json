@@ -1,0 +1,114 @@
+{
+  "task": "frame23-wall-legality-288-v1",
+  "schema": "wall-legality-final-v1",
+  "at": "2026-10-05T17:45:35.565980+00:00",
+  "quality": "FINITE_PASS",
+  "all_search_pairs": 56,
+  "completed_depth": 2,
+  "NN": 36732,
+  "processed": 114658,
+  "MAX_science_consumed": 2,
+  "ratios": [
+    {
+      "run": "package-r1",
+      "stage": "forward",
+      "engine": "D",
+      "n": 4,
+      "ratio_of_sums": 0.45456557762017447,
+      "adverse": []
+    },
+    {
+      "run": "package-r1",
+      "stage": "forward",
+      "engine": "L",
+      "n": 4,
+      "ratio_of_sums": 0.7407280705632682,
+      "adverse": [
+        {
+          "root": "initial",
+          "sample": 1,
+          "ratio": 1.0627969250491514
+        }
+      ]
+    },
+    {
+      "run": "package-r1",
+      "stage": "reverse",
+      "engine": "D",
+      "n": 4,
+      "ratio_of_sums": 0.4281810006109574,
+      "adverse": []
+    },
+    {
+      "run": "package-r1",
+      "stage": "reverse",
+      "engine": "L",
+      "n": 4,
+      "ratio_of_sums": 0.5570486339825259,
+      "adverse": []
+    },
+    {
+      "run": "confirmation-r1",
+      "stage": "forward",
+      "engine": "D",
+      "n": 8,
+      "ratio_of_sums": 0.3868754279004195,
+      "adverse": []
+    },
+    {
+      "run": "confirmation-r1",
+      "stage": "forward",
+      "engine": "L",
+      "n": 8,
+      "ratio_of_sums": 0.6606919685584153,
+      "adverse": [
+        {
+          "root": "initial",
+          "sample": 1,
+          "ratio": 1.182925873013141
+        },
+        {
+          "root": "jump-p2",
+          "sample": 1,
+          "ratio": 1.3349484062885637
+        }
+      ]
+    },
+    {
+      "run": "confirmation-r1",
+      "stage": "reverse",
+      "engine": "D",
+      "n": 8,
+      "ratio_of_sums": 0.33479495089527045,
+      "adverse": []
+    },
+    {
+      "run": "confirmation-r1",
+      "stage": "reverse",
+      "engine": "L",
+      "n": 8,
+      "ratio_of_sums": 0.5212706848487424,
+      "adverse": []
+    }
+  ],
+  "fullproduction_and_MCTS_Rjoint": "NOT_MEASURED",
+  "errors_retained": [
+    "submit state-dir Errno17",
+    "build selfstop FOREIGN_CPU real285",
+    "confirmation prelude relative cwd paths caused format NOT_RUN; actual absolute argv/config registration verified"
+  ],
+  "source_cap_conservative": 60,
+  "management_cap_conservative": 30,
+  "compile_background_charge": 98.122459989,
+  "lint_child_wall": 0.354958418,
+  "compile_conservative_with_final_checks": 117,
+  "compile_cap": 120,
+  "known_science_guard_wall": 1.054482004,
+  "science_parent_guard_admission_and_post_collection_cost": "UNKNOWN; not included in child wall",
+  "science_prospective_bound": 135,
+  "science_cap": 240,
+  "source_and_management_unknown_read_LLM_control": "preserved, not represented as zero",
+  "old_caps_reset": false,
+  "integration_owner": "coordinator",
+  "main_source_and_index_writes_by_critic": false
+}

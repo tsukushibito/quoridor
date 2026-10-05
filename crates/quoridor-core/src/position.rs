@@ -239,6 +239,18 @@ impl Position {
         mask
     }
     pub fn legal_wall(self, horizontal: bool, anchor: u8) -> bool {
+        if !self.wall_geometry(horizontal, anchor) {
+            return false;
+        }
+        let mut candidate = self;
+        if horizontal {
+            candidate.horizontal |= 1u64 << anchor;
+        } else {
+            candidate.vertical |= 1u64 << anchor;
+        }
+        candidate.reachable(0) && candidate.reachable(1)
+    }
+    fn wall_geometry(self, horizontal: bool, anchor: u8) -> bool {
         if self.winner.is_some() || anchor >= 64 || self.walls_remaining[self.turn as usize] == 0 {
             return false;
         }
@@ -254,13 +266,7 @@ impl Position {
         } else if (row > 0 && self.has_v(anchor - 8)) || (row < 7 && self.has_v(anchor + 8)) {
             return false;
         }
-        let mut candidate = self;
-        if horizontal {
-            candidate.horizontal |= 1u64 << anchor;
-        } else {
-            candidate.vertical |= 1u64 << anchor;
-        }
-        candidate.reachable(0) && candidate.reachable(1)
+        true
     }
     /// Ascending common Action ID order; the same generator serves Game and AI.
     pub fn legal_action_ids(self) -> Vec<u16> {
@@ -275,13 +281,30 @@ impl Position {
                 ids.push(cell as u16);
             }
         }
+        if self.walls_remaining[self.turn as usize] == 0 {
+            return ids;
+        }
+        // The skip proof assumes the unmodified board already has both routes.
+        // Removing more edges cannot repair an unreachable baseline; retain the
+        // old public API's behavior for unchecked Position values too.
+        let edges = WallEdges::of(self);
+        if !edges.both_reachable(self.pawns) {
+            return ids;
+        }
+        let mut posts = WallPosts::of(self);
         for anchor in 0..64u8 {
-            if self.legal_wall(true, anchor) {
+            if self.wall_geometry(true, anchor)
+                && (!posts.closes_cycle(true, anchor)
+                    || edges.with_wall(true, anchor).both_reachable(self.pawns))
+            {
                 ids.push(81 + anchor as u16);
             }
         }
         for anchor in 0..64u8 {
-            if self.legal_wall(false, anchor) {
+            if self.wall_geometry(false, anchor)
+                && (!posts.closes_cycle(false, anchor)
+                    || edges.with_wall(false, anchor).both_reachable(self.pawns))
+            {
                 ids.push(145 + anchor as u16);
             }
         }
@@ -339,11 +362,46 @@ fn neighbors(cell: u8) -> [Option<u8>; 4] {
 }
 
 /// Source cells of blocked south/east edges; the graph is undirected.
+#[derive(Clone, Copy)]
 struct WallEdges {
     south: u128,
     east: u128,
 }
 impl WallEdges {
+    fn with_wall(self, horizontal: bool, anchor: u8) -> Self {
+        let cell = (anchor as u32 / 8) * 9 + anchor as u32 % 8;
+        if horizontal {
+            Self {
+                south: self.south | (3u128 << cell),
+                ..self
+            }
+        } else {
+            Self {
+                east: self.east | (((1u128 << 9) | 1) << cell),
+                ..self
+            }
+        }
+    }
+    fn reaches(&self, pawn: u8, goal: u128) -> bool {
+        if pawn >= 81 {
+            return false;
+        }
+        let mut frontier = 1u128 << pawn;
+        let mut reached = frontier;
+        loop {
+            if frontier & goal != 0 {
+                return true;
+            }
+            frontier = self.expand(frontier) & !reached;
+            if frontier == 0 {
+                return false;
+            }
+            reached |= frontier;
+        }
+    }
+    fn both_reachable(&self, pawns: [u8; 2]) -> bool {
+        self.reaches(pawns[0], 0x1ffu128 << 72) && self.reaches(pawns[1], 0x1ff)
+    }
     #[inline]
     fn of(p: Position) -> Self {
         let (mut south, mut east) = (0, 0);
@@ -380,5 +438,79 @@ impl WallEdges {
         let east = ((frontier & !self.east & !COL8) << 1) & BOARD;
         let west = (frontier >> 1) & !self.east & !COL8;
         south | north | east | west
+    }
+}
+
+/// Caller-local obstacle graph on the 10x10 lattice of cell corners. All border
+/// posts are connected by the board's outer boundary. A length-two wall has
+/// three posts: its two ends AND its midpoint. Adding its two segments can
+/// disconnect cells only if at least two of these posts were already connected.
+/// This conservative planar-dual check only skips reachability for forest
+/// additions; every possible cycle still gets an exact pawn-to-goal check.
+struct WallPosts {
+    parent: [u8; 100],
+    rank: [u8; 100],
+}
+impl WallPosts {
+    fn of(p: Position) -> Self {
+        let mut graph = Self {
+            parent: std::array::from_fn(|i| i as u8),
+            rank: [0; 100],
+        };
+        for row in 0..10 {
+            for col in 0..10 {
+                if row == 0 || row == 9 || col == 0 || col == 9 {
+                    graph.parent[row * 10 + col] = 0;
+                }
+            }
+        }
+        graph.rank[0] = 7;
+        for horizontal in [true, false] {
+            let mut bits = if horizontal { p.horizontal } else { p.vertical };
+            while bits != 0 {
+                let anchor = bits.trailing_zeros() as u8;
+                let [a, m, b] = Self::posts(horizontal, anchor);
+                graph.union(a, m);
+                graph.union(m, b);
+                bits &= bits - 1;
+            }
+        }
+        graph
+    }
+    fn posts(horizontal: bool, anchor: u8) -> [u8; 3] {
+        let row = anchor / 8;
+        let col = anchor % 8;
+        if horizontal {
+            let a = (row + 1) * 10 + col;
+            [a, a + 1, a + 2]
+        } else {
+            let a = row * 10 + col + 1;
+            [a, a + 10, a + 20]
+        }
+    }
+    fn find(&mut self, mut post: u8) -> u8 {
+        while self.parent[post as usize] != post {
+            let parent = self.parent[post as usize];
+            self.parent[post as usize] = self.parent[parent as usize];
+            post = parent;
+        }
+        post
+    }
+    fn union(&mut self, a: u8, b: u8) {
+        let (mut a, mut b) = (self.find(a), self.find(b));
+        if a == b {
+            return;
+        }
+        if self.rank[a as usize] < self.rank[b as usize] {
+            std::mem::swap(&mut a, &mut b);
+        }
+        self.parent[b as usize] = a;
+        if self.rank[a as usize] == self.rank[b as usize] {
+            self.rank[a as usize] += 1;
+        }
+    }
+    fn closes_cycle(&mut self, horizontal: bool, anchor: u8) -> bool {
+        let [a, m, b] = Self::posts(horizontal, anchor).map(|post| self.find(post));
+        a == m || m == b || a == b
     }
 }

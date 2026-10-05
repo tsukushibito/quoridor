@@ -1,0 +1,44 @@
+{
+  "task": "288-main-independent-adoption",
+  "at": "2026-10-05T18:06:32.424093+00:00",
+  "source_stop_SHA": "12bb0c63ce55925c7ef267cdb43618b17600f5823cf4dfab4dccc4d847eaa019",
+  "candidate_SHA": "5c9248ac880197f4b7d18c3a1ef5ba9e9b252c63ae02b3c149cc2e7df596db2c",
+  "original_pack_SHA": "374a36031113b11a897e2468914ecd8296acf0db113ca5ba591762356506dfc7",
+  "independent_archive_members_SHA_len_PASS": 24,
+  "source_review": [
+    "Planar dual obstacle graph: all border posts joined; all three candidate wall posts checked; pair connection only permits exact fallback, never rejects legal action by cycle alone.",
+    "Base reachability checked once; edge removal cannot repair invalid/unreachable baseline; standalone legal_wall remains exact.",
+    "WallEdges masks shared within generator; geometry and ascending Action order unchanged; Position Copy fields unchanged."
+  ],
+  "main_sources": {
+    "crates/quoridor-core/src/position.rs": "6cb132a4e3f68c7cb739a926aad1ae5f0c8ad12ca8df60d22fb8fcc1c1aa173a",
+    "crates/quoridor-core/tests/wall_legality.rs": "ec1e6da59ce9d309099334c4ad51eb7665ab8b46ee9131d30081eb521b14ca36"
+  },
+  "excluded": [
+    "caller_cost_counts research-only counter hook",
+    "wall_work",
+    "old private AI/NNUE scaffolds"
+  ],
+  "verification": {
+    "path": "research-data/ai-sigma/frame22-coordinator/main-wall-legality-validation/result.json",
+    "SHA": "bbb64fd6e73d82322c285aae9970ff6c1278a52ad663a5a2067858db471b9060",
+    "tests_passed": 4,
+    "Clippy_core_lib": "PASS",
+    "NN": 0,
+    "wall_seconds": 10.45287154300604,
+    "peakRSS": 262668288,
+    "waited_leader_recorded_current_exact_absent": true,
+    "first_attempt": "Foreign compute self-stop 1.198120s; original immediate remaining2 retained; later current exact identity absent point; original wait of grandchildren not reconstructed.",
+    "cumulative_main_wall": 11.65099154599011,
+    "cap": 60
+  },
+  "performance_owner_evidence": {
+    "pairs": 56,
+    "NN": 36732,
+    "processed": 114658,
+    "L_sum_ratios": [0.740728, 0.557049, 0.660692, 0.521271],
+    "adverse_individual_ratios": [1.062797, 1.182926, 1.334948],
+    "wholeproduction_MCTS_samewall_strength": "NOT_CERTIFIED"
+  },
+  "decision": "Adopt core generator and independent scalar oracle correctness tests. Main integration changes strip comparative counter hook; original science bytes remain in pack."
+}
