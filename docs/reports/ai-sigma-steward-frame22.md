@@ -56,3 +56,30 @@ Hypothesisは280後に公式idleとなったため14:23:54に同savedへ正式re
 残る不足は282最終wait/source/保全proof、279のmain採用・通常Git統合の確定、各停止済み比較の次用途決定である。担当と次機会は上記の通り。これは整理判断を未実施のままにする理由ではなく、判断に従う実整理を安全な停止・保存点へ分ける理由である。科学readerの本人点証拠は全host/未来不在の保証ではない。
 
 現在点証拠は[運用・保存余裕](../../research-data/ai-sigma/frame22-steward/ending-operation-intake.json)、[科学停止/参照hash・局所保持](../../research-data/ai-sigma/frame22-steward/ending-science-intake.json)、[Hypothesis正式idle適用](../../research-data/ai-sigma/frame22-steward/hypothesis-idle-refresh-completed.json)。今回判断と停止pathを統括へ渡し、通常Git保存・採否/次配分へ接続する。
+
+## 連続延長23の終了判断（2026-10-05 23:32 UTC）
+
+この追記は開始11:36:03を保持した延長23の有限な終了点検であり、上の初期frame22観測・期限を変更しない。新heavyの許可は23:26:03で終了し、自動延長しない。監督運用の停止と科学ownerの停止は別に確認する。
+
+23:32:24の本人読取では、scheduler1896572/tick48616397とmonitor1896590/tick48616438は同bootでexact不在、stateはstopped/processnull/ownednull。最後の正owned turn01a10e62-9443-7bf0-b34a-9753b94aca6aは公式completed/errornullでSupervisorはidle。scheduler eventsの正owned完了23:30:52.652656、deadline停止23:31:05.242722、process停止23:31:05.251061を区別する。23:31:03に対する約2.3秒の遅れを期限内成功へ置換しない。通常stop子はexit0/reaped、monitor-endedはoperation_end/errornull、23:31:08の別backupもexit0/reaped。heavy通知の配送受理23:26:14.818588は通知証拠であり、全科学の停止時刻ではない。24入力hash検査は例外なしで一致した。
+
+監督monitorは23:34:03より前に通常終了している。23:34の回収確認と23:36:03までの必要保存では、本人の同exact2/state・小receipt・source停止を再確認し通常Git単一ownerへ引き渡す。未来の停止、全host/子孫の不在、外NN停止、全期間正常は認定しない。本人読取のAppServer初回probeは接続context不足でRPC送信前に失敗し、既APIの正しいcontextで訂正した。運用source変更や未知配送再送は行っていない。
+
+### 保護と整理の採否
+
+必要raw/scalars/curves/原失敗/receipt/凍結mask・labelrelease・復元済archive、assetsのmodel/checkpoint/input、Git、DB/lock、依存環境、必要release、保存中/具体比較中WTを保持する。閉課題の費・UNKNOWN・原上限は変えない。最終aggregate全再scanは行わず、23:10:34のdirected観測12426055680B/cap12884901888B/UNKNOWN134217728Bと、その後の保存済みconserved root overlayを参照する。この標本を現在freeや未測growthゼロの保証としない。本人keeper読取20299776Bに既forecast3145728Bと今回小証拠256KiBを保守追加しても112MiB以内であり、親増額はない。
+
+今回、全体再編・全cache削除・旧WT撤去・比較binary削除を見送る。主理由は、main正本と永続assetsの分離が現callerで使われ、今回の主要残課題は運用finishの時間費と科学的設計・評価の不足だからである。新しい構成破綻や二重正本の根拠なしに再編費を増やさない。TTの比較用source/binaryやWTは、統括の採否、必要source/dataのGit保存・復元、最後の読者停止、次の具体比較用途終了が揃った時に対象を限定して再検討する。担当92、実削除は次の明示配分で行う。現在保全未確認のdirty/ignored情報を捨てない。
+
+### 科学・writer/readerの有限範囲
+
+統括からTT305 compile8.1888s/exit0/waitを受領したが、最終functional/本人source・reader停止は本依頼時点で未受領。担当Critic/統括が元期限と最終proofを保存し、未確認なら未完了として次機会へ引き渡す。92のown2停止で代替しない。
+
+MPC306はschema/validator/target-free準備と17NN0 fixture、policy OFFまでで、core/search/calibration fit/係数は未実装・未実行。source23:23:44/save23:25:26は個別期限を超えた原記録として保持し、期限PASSにしない。304はNOT_STARTED/closedで、12MiBのdata-only移譲を科学の転用許可へ読替えない。303の旧19/20と期限失敗を保持する。307の新float32修正/20tests/独立reviewは新配分の有限範囲であり、旧303全成功ではない。API部分会計・選定時exposure・active stoppingの残論点は308の担当と次の明示機会へ返す。最高棋力の目標は未達である。
+
+### 未完了の長期保守と次の機会
+
+- **Coordinator恒久idle定義適用**：283の正active全文適用と保存済みdigestは有効だが、23:32の公式Coordinatorはactiveのため恒久idle refreshは未実施。担当92。自然idle後の次の明示保守許可、または次研究枠の準備時に同saved/settingsで正式適用し、active割込や終了後の新role turnを行わない。
+- **finish全経路の信頼性**：per-command小receipt・exact ownchild回収、累積25秒・spawn marker・lstat再用の改善は有限支持がある。一方、freshallocated等の累積費からbackup未到達が残り、wholefinishは未成立。別backup成功はこの欠測を消さない。担当92。次の明示ソフト保守配分で管理metadata読取の重複とbackup到達の費をmock/実receiptから評価し、freshallocated/認証/所有を保持する案を選ぶ。live適用は科学reader自然停止＋Supidle/ownednoneの通常停止窓のみ。新timeout/cap/層や科学入口gateを増やさない。
+
+以上は通知・process停止から独立した整理/保守の判断である。今回の実施は有界読取、判断と必要小証拠の保存・引渡しに限定した。停止点の根拠は[stop-point-v1](../../research-data/ai-sigma/frame23-steward/ending-inspection/stop-point-v1.json)、会計とdata移譲は[既steward証拠](../../research-data/ai-sigma/frame23-steward/)を参照する。92/親goalはcloseしない。

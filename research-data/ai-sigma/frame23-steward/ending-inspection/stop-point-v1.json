@@ -1,0 +1,119 @@
+{
+  "at": "2026-10-05T23:32:24.635585+00:00",
+  "phase": "stopped",
+  "process": null,
+  "owned": null,
+  "last_result": {
+    "at": "2026-10-05T23:31:05.251061+00:00",
+    "event": "process_stopped",
+    "owned_turn_pending": false
+  },
+  "current24_check": null,
+  "scheduler_expected": {
+    "pid": 1896572,
+    "start_ticks": "48616397",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "scheduler_exact_alive": false,
+  "monitor_expected": {
+    "pid": 1896590,
+    "start_ticks": "48616438",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "monitor_exact_alive": false,
+  "deadlines": {
+    "heavy": "2026-10-05T23:26:03Z",
+    "supervisor": "2026-10-05T23:31:03Z",
+    "monitor": "2026-10-05T23:34:03Z",
+    "final": "2026-10-05T23:36:03Z"
+  },
+  "steward_allocated_B": 20299776,
+  "keeper_guard_B": 117440512,
+  "supervisor_allocated_B": 5865472,
+  "official": {
+    "supervisor": {
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+      "status": {
+        "type": "idle"
+      },
+      "latest_turn": [
+        {
+          "id": "01a10e62-9443-7bf0-b34a-9753b94aca6a",
+          "status": "completed",
+          "error": null,
+          "startedAt": 1791242703,
+          "completedAt": 1791243048
+        }
+      ]
+    },
+    "coordinator": {
+      "thread_id": "01a0f31b-3409-75f2-a30e-453a50484f94",
+      "status": {
+        "type": "active",
+        "activeFlags": []
+      },
+      "latest_turn": [
+        {
+          "id": "01a10e03-3597-72b0-8bc9-e6263ff6ae69",
+          "status": "inProgress",
+          "error": null,
+          "startedAt": 1791236453,
+          "completedAt": null
+        }
+      ]
+    }
+  },
+  "receipts": {
+    "heavy-job-stop-notice-delivery.json": {
+      "path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22-extension23/heavy-job-stop-notice-delivery.json",
+      "bytes": 1776,
+      "sha256": "1107d1b35c4d59fa7dc3485a11310c6f6a946b4ef73367ae0fb88e8fe6bdc96f",
+      "at": "2026-10-05T23:26:14.818588+00:00",
+      "exit_code": 0,
+      "child_reaped": true,
+      "reason": null,
+      "error": null
+    },
+    "scheduler-end-stop.json": {
+      "path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22-extension23/scheduler-end-stop.json",
+      "bytes": 1585,
+      "sha256": "924b7c588ebdd7258dfabc7dcab119ea8dcd952143dbb57a6314beba77ab3b49",
+      "at": "2026-10-05T23:31:05.333043+00:00",
+      "exit_code": 0,
+      "child_reaped": true,
+      "reason": null,
+      "error": null
+    },
+    "monitor-ended.json": {
+      "path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22-extension23/monitor-ended.json",
+      "bytes": 294,
+      "sha256": "45d5d3f605610f15874a0c8919713c9910dac2db42421203bde52009834a9a3f",
+      "at": "2026-10-05T23:31:05.340902+00:00",
+      "exit_code": null,
+      "child_reaped": null,
+      "reason": "operation_end",
+      "error": null
+    },
+    "scheduler-end-report-delivery.json": {
+      "path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22-extension23/scheduler-end-report-delivery.json",
+      "bytes": 1775,
+      "sha256": "eadb9546b8a43a53f1adc16231bf43cb2e4e38bea49ba4a35d6b1a2bba6bfb88",
+      "at": "2026-10-05T23:31:07.732721+00:00",
+      "exit_code": 0,
+      "child_reaped": true,
+      "reason": null,
+      "error": null
+    },
+    "backup-receipt.json": {
+      "path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22-extension23/backup-receipt.json",
+      "bytes": 958,
+      "sha256": "57be7ed70ce42a1e9f8e6ca23d042f17ddeab37ce08798f89c9c32684f51fac3",
+      "at": "2026-10-05T23:31:08.644034+00:00",
+      "exit_code": 0,
+      "child_reaped": true,
+      "reason": null,
+      "error": null
+    }
+  },
+  "probe_correction": "Initial read-only AppServer probe omitted async context; failed before thread RPC; corrected context, no delivery retry or source change."
+}
