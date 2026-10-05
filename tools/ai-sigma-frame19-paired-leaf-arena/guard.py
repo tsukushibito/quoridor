@@ -36,7 +36,7 @@ assert time.time()<end(c['newscience_deadline'])
 for issue in ['quoridor-4lc','quoridor-4lc.242']:
  q=json.loads(subprocess.check_output(['bash','scripts/dev/beads.sh','show',issue,'--json'],text=True,timeout=10))[0]
  assert q['status']=='in_progress'and'paused-by-user'not in q.get('labels',[])
- if issue.endswith('.240'):assert q['assignee']=='codex:01a0f31d-6d15-7620-bb63-4b4f878e4746'
+ if issue.endswith('.242'):assert q['assignee']=='codex:01a0f31d-6d15-7620-bb63-4b4f878e4746'
 for p,h in c['sources'].items():assert hashlib.sha256(Path(p).read_bytes()).hexdigest()==h,p
 sch=json.loads(Path('/workspaces/quoridor/.artifacts/research-team/scheduler-sigma-continuation-20261001/state.json').read_text());assert sch['phase']=='running'and not sch.get('recovery_required')
 quiet=sch['next_at']-time.time();assert quiet>=c['hard_s']+30,dict(reason='INSUFFICIENT_PROSPECTIVE_QUIET',quiet=quiet)
