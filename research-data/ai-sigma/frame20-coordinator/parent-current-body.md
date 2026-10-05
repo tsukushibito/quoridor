@@ -17,3 +17,5 @@
 246 criticを01:09:14 turn01a1099b-98ef-7b93-b9cc-4f6e17e2081fへ実配分。242保存済全8時計/費/共有RuleA依存合法とmatched inputの最多1NN0job、source45+calc45/CPU0/新1MiB。旧独立課題上限をresetせず、新242管理停止束とcurrentframe20物理を事前bind、244科学と実競合なら自然停止点へ。専用entry/task/schema識別を固定、全稿承認を主配分gateにしない。
 
 01:08Supervisorの当前frame参照提案を受領。Beadsgoal/currentprioritiesは01:07の自然更新でframe20本文/labelへ修正済み（Supervisor snapshotは更新前版）。旧scientific成果と現在管理版を区別し、次点検の全面読取は要求しない。
+
+01:14UTC更新:244 frame20-v2初回job01:13:57.468855→.536002 exit1/CPU4single/0.070796s/NN0/processed4、jump fixture assertionでUNSETTLED。本比較16condition全NOT_RUN、clip/tanh極値由来/効果UNKNOWN。MAX1消費、追加job/reset/成功救済0。owner全wait/currentexact不在とadmissionを別保持、現在必要failure/source/stop/Git/notesbackupの有限不完了引渡しへ。242管理復旧と246専用保存算術は独立に継続、新NNUE学習/arenaをこの失敗から自動配分0。

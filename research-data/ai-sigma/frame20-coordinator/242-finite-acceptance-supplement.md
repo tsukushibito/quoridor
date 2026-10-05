@@ -1,0 +1,3 @@
+goal quoridor-4lc /242同active有限受入れ。統括現物 newphase-stop-v2/stats-v2/compact-v2/process-v2/config-v2・actualargv源SHAの一致、専用task/schema/out、exit0/waitexact/NN0/MAX1/source停止を確認。owner有限集計を242-finite-recovery-acceptance.jsonへ受入れ、独立246のPASS/全deep/棋力は別。必要Gitbyte/原失敗費・Beads本人closebackupを同実質turnで完了可、全稿ACK/close専用turn不要。
+244初回科学はjump fixture assertion exit1/processed4/16condition全NOT_RUN/NN0/MAX1消費。現在その必要保存だけ、提案one-divergenceを旧244同jobへ追加救済0。唯一divergenceは同input/commondepth1値Action一致、finaldepth1→2でAction4→133、bothWという探索的資料として保持し新science起動0。
+247.1運用更新窓は92が正2identity停止、rootのみmain2pathwriter。242source管理保存は続行、他CPUjobを旧bindingでadmit0。02:41/46/49/51:02不変。

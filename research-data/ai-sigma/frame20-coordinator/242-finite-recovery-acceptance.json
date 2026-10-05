@@ -1,0 +1,65 @@
+{
+  "UTC": "2026-10-05T01:17:47.259214+00:00",
+  "issue": "quoridor-4lc.242",
+  "scope": "owner finite recovery acceptance; dedicated arithmetic reference, not critic-independent full replay",
+  "checks": {
+    "stats-v2.json": true,
+    "compact-v2.json": true,
+    "process-v2.json": true,
+    "config-v2.json": true,
+    "source": true,
+    "task_schema": true,
+    "process_wait": true,
+    "source_stop": true
+  },
+  "stats_SHA": "8492e686bafd3c1a7b12ae0d9188f086cc1df36c858169d52fd2e7fbbb83b78e",
+  "new_stop_SHA": "de7a5e774b8150587526c0aa76197c4429baeab767e5f7decd38b63664295fba",
+  "slots": 8,
+  "terminal": 8,
+  "WDL": {
+    "baseline": {
+      "W": 2,
+      "D": 0,
+      "L": 2
+    },
+    "candidate": {
+      "W": 2,
+      "D": 0,
+      "L": 2
+    }
+  },
+  "same_inputs": 128,
+  "common_depth_value_checks": 481,
+  "same_depth_output_differences": 0,
+  "old_science": {
+    "NN": 258903,
+    "guardian_wall_s": 31.73198343697004,
+    "controller_family_wall_ms": 30762.177705049515,
+    "startup_to_ready_ms": [
+      28.50881999731064,
+      31.30187898874283
+    ],
+    "background_wall_s": 46.62543286604341,
+    "control_wait_s": [
+      0.0022719340049661696,
+      0.0029723549960181117,
+      0.0008858910296112299
+    ],
+    "peak_family_RSS_B": 326377472,
+    "NNcaps_not_reset": true
+  },
+  "limits": [
+    "2family/4paired color positions/8games;not 8independent openings",
+    "package applied to bothNNUE andD;relativeWDL cannot isolate absoluteengine improvement",
+    "different reached states,32768 bothnodecap,partial depth discarded,TT0/noise0/policy0",
+    "sameinput comparisons use recorded board+side+canonical count-history;common completeddepth only;equalargmax unavailable",
+    "branchcache/JIT/order/clock sampling;not formalNI or unseen strength",
+    "old236/2408192 and differentprefix results not directcausal control",
+    "oldscience unchanged/oldopenedtest no read/newforward0",
+    "LLMfailed cost UNKNOWN;known sciencewall and background/control spans not additive"
+  ],
+  "source_calc_complete": true,
+  "owner_action": "finish necessary Gitbyte/notes/closebackup in same substantive turn; no dedicated ACK wake",
+  "extra_science": false,
+  "goal_complete": false
+}
