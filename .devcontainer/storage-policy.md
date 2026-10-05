@@ -16,7 +16,7 @@ This project keeps generated state out of the host checkout and separates caches
 
 When worktree mode is `volume`, create and remove worktrees only with `scripts/dev/manage_worktree.sh`.
 The helper places them below `.worktree`, locks every managed worktree, refuses dirty removal, and never deletes branches.
-The main checkout remains the integration checkout; perform task work in a managed worktree.
+The main checkout is the durable canonical research checkout. Use managed worktrees for parallel changes and comparisons, with one writer per file and one integration owner for normal Git index/commit operations. Do not maintain perpetual copies of roles, documentation or active source. The retained `.worktree/ai-sigma` is a frozen reference and asset location, not a second source of truth; protect its untracked files, models, expanded inputs and volume paths.
 
 ## Beads
 
@@ -33,7 +33,11 @@ Framework and CUDA package versions remain project-managed; this Dev Container o
 
 ## AI research data
 
-Preserve experiment and verification data in the research branch under `research-data/ai-sigma/`. Keep small configurations, summaries and reproduction manifests directly in Git; use compressed per-experiment/run archives for large observations and necessary logs. `.artifacts/ai-sigma/` is the live-output and extraction workspace. Verify Git preservation and restoration, and maintain active readers' paths, before removing redundant working copies. This is local research Git storage; it does not authorize pushing or publishing data.
+Preserve experiment and verification data in the canonical main Git history under `research-data/ai-sigma/`. Keep small configurations, summaries and reproduction manifests directly in Git; use compressed per-experiment/run archives for large observations and necessary logs. `.artifacts/ai-sigma/` is the live-output and extraction workspace. Verify Git preservation and restoration, and maintain active readers' paths, before removing redundant working copies. This is local research Git storage; it does not authorize pushing or publishing data.
+
+Resolve code, data, live output, legacy models and shared environments through `research-paths.json`; record resolved absolute asset paths and hashes in each run. Moving the code checkout does not require copying models or changing the shared environment. New models/checkpoints belong in an explicitly bound ignored asset location; retained legacy paths remain valid until their readers and reproduction manifests are migrated.
+
+Use `scripts/dev/research-storage.py` with a directed roots/reservations manifest to account for current allocated bytes and overlaps. Shared Git, dependencies and uv cache have explicit categories; same device/inode storage is charged once, and reservation accounting adds only its unused portion. Logical file bytes, inode allocation, reflink physical sharing and past peak are distinct. Unknown retained storage stays unknown, never free capacity. The current bounded observation and unresolved attribution are in `research-data/ai-sigma/262-maintainability/storage-current.json`; it does not authorize parent-budget admission.
 
 Reproducible, unused binaries, Wasm builds, build caches and duplicate source copies are disposable. Preserve uncommitted source, active runtime files and the minimum shared inputs/models/dependencies needed for reproduction. Account for Git storage and temporary migration copies within the existing research storage limit. See `docs/development/ai-research-experiments.md` for the current rules.
 

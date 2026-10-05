@@ -1,0 +1,52 @@
+{
+  "at": "2026-10-05T05:15:52.967086+00:00",
+  "command": "taskset -c 0 python3 scripts/dev/check-research.py",
+  "exit": 0,
+  "JS_syntax": 49,
+  "Python_AST": 17,
+  "native_tests": 39,
+  "training_input_tests": 8,
+  "learner_tests": 6,
+  "save_storage_tests": 14,
+  "generation_tests": 18,
+  "client_tests": 11,
+  "source_export_tests": 3,
+  "clock_checks": 6,
+  "Rust_protocol_tests": 5,
+  "Rust_shared_IPC": "PASS",
+  "stdout_SHA256": "4b1434807a09af947d08d00e13966b49b0f62b664baa70cfe102413c77c9b155",
+  "stderr_SHA256": "673c1db7565fcc1deb80c1eed9bda18b0ab599a8c7a85b5ca27f685bb52be5a7",
+  "results_stdout": "Checking formatting...\nAll matched files use Prettier code style!\n17 files already formatted\nAll checks passed!\n✔ explicit arena budgets/resources/paths refuse collisions and insufficient collection time (2.468841ms)\n✔ planned denominator rejects unknown/duplicate slot or opening and illegal prefix before spawning (5.312225ms)\n✔ initialization refusal is recorded with all slots retained and child close in finally (4.915437ms)\n✔ pause/ownership refusal precedes child spawn; existing evidence never truncated (2.672305ms)\n✔ new output has a measured run cap including snapshot and terminal recording reserve (1.150918ms)\n✔ normal replies require a finite monotone global NN counter before adoption (24.383535ms)\n✔ isolated rule factory matches legal order, f32 input, history and successors (25.436568ms)\n✔ QF1 STM ids, normalized distances and cache lifecycle preserve baseline (10.309136ms)\n✔ weight codec is finite strict f32 and feature full/delta preserves parent (24.87085ms)\n✔ history/terminal priority and explicit search configuration preserve completed-depth behavior (55.539397ms)\n✔ MCTS reference factory exports current closure without starting a process/model (17.118121ms)\n✔ current controller owns and closes its mock reference child without neural work (133.649818ms)\n✔ scaled manifest binds exact weight hash/shape and finite positive STM statistics (5.456817ms)\n✔ weight path physical size refuses before reading unexpected large input (0.810047ms)\n✔ controller timeout rejects pending work and recalls the declared owned descendant (713.429284ms)\n✔ controller json rejects pending work and recalls the declared owned descendant (513.988028ms)\n✔ controller unknown rejects pending work and recalls the declared owned descendant (494.284847ms)\n✔ controller exit rejects pending work and recalls the declared owned descendant (514.246509ms)\n✔ close during active IPC waits for cancellation and child close instead of CLOSE_ACTIVE (145.758942ms)\n✔ current worker prevents duplicate init and rejects unspecified/non-finite search budgets before search (67.920379ms)\n✔ ownership declaration refuses a live unrelated process and never signals it (86.870775ms)\n✔ canonical candidate cancellation joins the active bridge and frees it before child pipe close (246.259717ms)\n✔ stdio close unknown returns a bounded receipt without inventing collection (17.59614ms)\n✔ positive caps and affinity are validated before spawning (2.194174ms)\n✔ affinity/spawnArgs work and stale identity is discarded before validation (46.826169ms)\n✔ one pending waiter and one request per worker (349.918327ms)\n✔ late result is not adopted and is recorded by stop (227.012841ms)\n✔ complete parse plus validation is inside the outer clock (116.87702ms)\n✔ broken stdin produces typed failure and owned collection (23.334142ms)\n✔ queue overflow is typed and bounded {\"maxQueueMessages\":2} (21.985744ms)\n✔ queue overflow is typed and bounded {\"maxQueueBytes\":80} (26.954421ms)\n✔ invalid/oversized reply reaps owned child: large-line (22.187177ms)\n✔ invalid/oversized reply reaps owned child: unterminated-large (22.986105ms)\n✔ invalid/oversized reply reaps owned child: malformed (22.687414ms)\n✔ request byte overflow and stale metadata byte overflow are bounded (82.977147ms)\n✔ spawn error has no invented pid or signal and still observes close (3.169499ms)\n✔ exit is distinct from stdio close and repeated close is idempotent (266.112826ms)\n✔ unresponsive owned child is TERM/KILL collected after bounded stop (177.949761ms)\n✔ close cancels pending request without adopting output; EOF is explicit (76.416891ms)\nℹ tests 39\nℹ suites 0\nℹ pass 39\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 5121.692147\n{\"rows\": 2, \"sha256\": \"ee649277df72fec6fda837ae4af5a70be9da7a0c239b79f9603e5b7fd158f563\", \"labels_read\": false}\n{\"clock_fixture_PASS\":true,\"checks\":6,\"samples\":0}\n✔ identity preserves the old wire contract and rejects non-finite feature bits (47.54668ms)\n✔ batch broker supports every partial batch and preserves request attribution (15.534883ms)\n✔ cancel keeps physical in-flight ownership and rejects stale generation (0.398511ms)\n✔ queued cancel and sample cap refuse before a provider call (3.604531ms)\n✔ unknown attribution or bad float32 output quarantines every affected request (1.688179ms)\n✔ game pool preserves old synthetic search output, has no frame default and frees exact trees (214.480455ms)\n✔ backend cancel failure still attempts free, never reports cleanup success (1.974788ms)\n✔ worker IPC rejects duplicate/stale token and waits for the explicit drain acknowledgement (0.928623ms)\n✔ teacher schema target conventions match frozen recipe and diagnostics stay ineligible (71.932514ms)\n✔ config requires explicit environment, scientific settings, ownership and stop clocks (0.893934ms)\n✔ FIFO pipe serializes requests and close waits for the exact child (26.881068ms)\n✔ timeout quarantines queued requests; SIGTERM-resistant owned child is reclaimed (77.120876ms)\n✔ spawn failure produces a close receipt and does not leave a waiting child promise (10.068587ms)\n✔ worker client dispatch/unknown-message routing and exact owned close use real IPC without NN (33.98877ms)\n✔ real generation worker rejects missing runtime before any initialization or model call (169.414024ms)\n✔ model provenance mismatch refuses the new driver before output or child start (231.601499ms)\n✔ VRAM accounting parser rejects unknown/external owners without invoking a GPU tool (4.093228ms)\n✔ expired or paused run-control refuses before starting a wrapper read (3.938754ms)\nℹ tests 18\nℹ suites 0\nℹ pass 18\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 1030.470843\n✔ source export binds current bytes and protects existing destination (3.20068ms)\n✔ invalid, science, temp, symlink and oversize sources refuse before creating output (1.538257ms)\n✔ destination and scope are explicit; tracked source tree is never replaced (2.097012ms)\nℹ tests 3\nℹ suites 0\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 72.700493\n{\"js_syntax\": 49, \"python_ast\": 17, \"boundary\": \"PASS\", \"NN\": 0, \"framework_import\": 0}\n",
+  "results_stderr": "........\n----------------------------------------------------------------------\nRan 8 tests in 0.203s\n\nOK\n......\n----------------------------------------------------------------------\nRan 6 tests in 0.314s\n\nOK\n..............\n----------------------------------------------------------------------\nRan 14 tests in 0.371s\n\nOK\n...........\n----------------------------------------------------------------------\nRan 11 tests in 0.047s\n\nOK\n",
+  "NN_forward": 0,
+  "training": 0,
+  "games": 0,
+  "GPU": 0,
+  "scheduler_start": 0,
+  "prior_failures_preserved": [
+    {
+      "phase": "bridge",
+      "detail": "standard cache offline ryu missing; existing explicit cache used; diagnostic fixture correction only",
+      "evidence": "tools/ai-sigma-native/bridge/verification.json"
+    },
+    {
+      "phase": "transport fixture",
+      "detail": "stdin.destroy did not close actual fd; small chunks allowed queue drain; fixture corrected to exact closed fd/one bounded burst",
+      "first_pass": 14,
+      "first_fail": 2,
+      "final_pass": 16
+    },
+    {
+      "phase": "arena config migration",
+      "detail": "old minimal fixture lacked mandatory ownership fields; updated to current config/denominator refusal tests"
+    },
+    {
+      "phase": "generation fixture",
+      "detail": "management affinity mismatch before model-hash refusal; child now explicitly pinned to declared CPU"
+    },
+    {
+      "phase": "client test environment",
+      "detail": "system Python lacked websockets; checker uses existing separate team env, no install"
+    }
+  ]
+}

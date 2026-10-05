@@ -1,0 +1,18 @@
+{
+  "scope": "/workspaces/quoridor/.artifacts/refactor262/dependencies/uv",
+  "reason": "owned isolated Ruff acquisition cache; installed environment and pinned requirements retained",
+  "logical_filebytes": 38888745,
+  "allocated_inodebytes": 38907904,
+  "active_consumers": [],
+  "installed_ruff": "/workspaces/quoridor/tools/research-quality/.venv/bin/ruff",
+  "installed_version": "ruff 0.13.1",
+  "restoration": "UV_CACHE_DIR=<new-owned-cache> uv pip install --python tools/research-quality/.venv/bin/python --no-deps -r tools/research-quality/python-requirements.txt",
+  "shared_env_cache_models_deleted": false,
+  "current_reservation_reduction": null,
+  "operation": "owned acquisition cache removed",
+  "scope_after_allocated_bytes": 0,
+  "installed_ruff_SHA256_before": "b2576c0128fd8b2200a4b5b19eeb4c1f08f5bfdf67a178d8ed0425089ed7dcdb",
+  "installed_ruff_SHA256_after": "b2576c0128fd8b2200a4b5b19eeb4c1f08f5bfdf67a178d8ed0425089ed7dcdb",
+  "installed_version_after": "ruff 0.13.1",
+  "physical_freed_bytes": "unknown: hardlink/reflink sharing; path removal is not parent reservation release"
+}

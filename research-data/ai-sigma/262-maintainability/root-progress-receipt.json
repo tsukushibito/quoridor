@@ -1,0 +1,7 @@
+{
+  "method": "turn/steer",
+  "result": {
+    "turnId": "01a10a5b-b6b0-7131-a009-3fb1ff612e06"
+  },
+  "body": "262.1保守進捗: main正本のnative/shared generation/trainingを並行改定。NN0学習26件、native7件とclock6件、generation14件、normalindex/容量14件の局所検証。main client cwd許可、official idle各roleのcwd移行を実施(設定不変/実研究turn0)、active cwdは自然idleまでpending。旧scheduler停止維持。品質toolは専用lockでprettier3.6.2/ruff0.13.1、共有env変更0。全7テーマの実改善は未完了、統合検査/文書/小保存整理/最終引渡しを続行。Git履歴errorはRootへ移譲して追加調査停止。子既limitedreadのみ: rev-list末尾175 tree直後の空path c9e9e4ef72bb1f7a88023320a64523cb86cd1841 と前6728ccca4b788cf9e34130307293be4c5ed6ffbaは未検証候補、科学喪失とは未認定。Rootだけindex/commit、我々Gitindex書込0。"
+}

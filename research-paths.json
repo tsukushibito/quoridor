@@ -1,0 +1,14 @@
+{
+  "schema": "quoridor-research-layout-v1",
+  "code_root": ".",
+  "data_root": "research-data/ai-sigma",
+  "live_root": ".artifacts/ai-sigma",
+  "models": ".worktree/ai-sigma/models/experiments",
+  "legacy_reference_root": ".worktree/ai-sigma",
+  "environments": {
+    "training": "/home/vscode/.cache/inference/envs/quoridor-training",
+    "team": "/home/vscode/.cache/inference/envs/quoridor-research-team"
+  },
+  "cache": "/home/vscode/.cache/inference/uv",
+  "notes": "Code/data are canonical in main. Legacy model and expanded input paths are retained assets, not another code source. New runs bind explicit absolute resolved paths and hashes."
+}

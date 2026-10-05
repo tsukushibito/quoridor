@@ -28,7 +28,7 @@
 
 ## 所有・記録・受入れ
 
-研究worktreeは `/workspaces/quoridor/.worktree/ai-sigma`、ブランチは `codex/ai-sigma`。一つの編集範囲の担当は一人。各課題で所有範囲を明記する。コード・契約・設計と実験・検証データは研究Git、状態・所有・依存はBeadsで管理する。保存データは `research-data/ai-sigma/`、実行中出力・展開は `.artifacts/ai-sigma/`、モデルは `models/experiments/`、依存は研究専用cacheを使う。Git版・run ID・入力参照・再現command・必要な結果/ログと停止状態を残し、再生成できる未使用物は[記録規約](../development/ai-research-experiments.md)と[保存方針](../../.devcontainer/storage-policy.md)に従って整理する。
+持続的研究の統合正本はmain `/workspaces/quoridor`。managed worktreeは並行変更・比較に使い、旧 `/workspaces/quoridor/.worktree/ai-sigma` は凍結参照と既モデル・入力pathを保護する領域とする。roles・docs・現役sourceを恒常mirrorしない。[現役コードと配置](../development/ai-research-code.md)と `research-paths.json` を参照する。一つの編集範囲の担当は一人。各課題で所有範囲を明記する。コード・契約・設計と実験・検証データは研究Git、状態・所有・依存はBeadsで管理する。保存データは `research-data/ai-sigma/`、実行中出力・展開は `.artifacts/ai-sigma/`、モデル・依存は`research-paths.json`から解決する永続資産pathを明示して共有参照する。Git版・run ID・入力参照・再現command・必要な結果/ログと停止状態を残し、再生成できる未使用物は[記録規約](../development/ai-research-experiments.md)と[保存方針](../../.devcontainer/storage-policy.md)に従って整理する。
 
 主checkout・他worktreeの既存作業を保持する。UI/描画/M2を研究で再開せず、製品統合・push・公開は対象外。調査は不支持・失敗・未完了終了でも停止・記録・引渡し後に課題として完了できる。目標達成は正式な棋力判定による。
 

@@ -1,0 +1,8 @@
+'use strict';
+const assert = require('assert');
+function mode(c) {
+  assert.equal(c.leaf_package, true, 'FIXED_LEAF_PACKAGE_REQUIRED');
+  assert(['clip', 'tanh'].includes(c.distance_mode), 'DISTANCE_MODE_REQUIRED');
+  return { leafPackage: true, distanceMode: c.distance_mode };
+}
+module.exports = { mode };

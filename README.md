@@ -4,7 +4,7 @@
 
 実写の室内HDRIを背景と材質の環境光・反射に使い、木製テーブルの上に木製盤を置いた空間を表示します。生成木目、面取り、塗膜、GTAOによる接触部の遮蔽を組み合わせています。IBLに、HDRIの主光源方向から計算したDirectionalLightと影を加えています。採用アセットの出所・ライセンス・生成プロンプトと検証結果は[テーブル空間の描画強化報告](docs/reports/tabletop-rendering.md)に記録します。
 
-今後のAIはPVネットワーク + MCTS + 終盤ソルバを目指します。実装研究はClaustrophobiaとSigmaQuoridorを中心に進めます。最初の棋力目標は、同じ計算資源・思考時間でのSigmaQuoridor同等水準です。Ka・gorisanson・Titanium・Claustrophobia・Ishtar / Zero-Inkは参考比較とします。参照優先度と比較条件の正本は[AI設計・目標](docs/design/quoridor-3d-webapp-design-rust-wasm-v1.md#89-参考aiの優先度と役割)に記載しています。
+現在の主作業は、**NNUE型で最強のQuoridor AI**を目指す研究です。NNUE評価とαβ探索を主候補とし、SigmaQuoridor同等は段階目標・比較基準です。既存PV/MCTSは教師生成・基準実装・対照として再利用します。現在の目標と評価境界は[研究目標](docs/design/ai-sigma-research-goal.md)、仮説は[NNUE研究方針](docs/design/ai-nnue-research.md)を参照してください。製品のRust B0 AIと描画の実装状況は上記のままです。
 
 AI研究は競合仮説と実験を並行し、結果から修正・再確認・別案へ進めます。性能・探索・推論・生成などを固定の逐次工程にせず、許可範囲と総予算で統括が配分します。小規模診断と正式棋力評価は区別し、現在のSigma同等水準は未立証です。[研究チーム](docs/design/ai-research-team.md)と[実行・記録規約](docs/development/ai-research-experiments.md)を参照してください。
 
@@ -15,15 +15,20 @@ AI研究は競合仮説と実験を並行し、結果から修正・再確認・
 | `apps/web/` | 製品Web UI・Three.js描画・Worker側の連携 |
 | `packages/engine-bridge/` | TypeScriptとRust/Wasmを結ぶプロトコル・bridge |
 | `crates/quoridor-core/`, `quoridor-ai/`, `quoridor-wasm/` | Rustのルール、AI、Wasm公開境界 |
-| `tools/` | 研究・補助ツール。`ai-sigma-*`は研究ブランチ側の試作/再利用基盤/独立検証で、現状は共通機能も混在 |
+| `tools/ai-sigma-native/` | 現役ルール・QF1特徴・NNUE/探索・native arena・MCTS教師アダプター |
+| `tools/ai-sigma-common/`, `tools/ai-sigma-manygame-generation/` | 再利用する教師/IPC/回収と、明示run設定を使う多game生成入口 |
+| `tools/nnue-training/` | 汎用QF1入力・学習入口と、明示した凍結frame14互換境界 |
+| その他`tools/` | 補助ツール・独立checker・版付きの過去recipe |
 | `scripts/`, `scripts/dev/` | ビルド・生成・検証入口と開発環境/Beads/研究通信の操作 |
 | `tests/` | 製品のrender/audio/e2e検証・fixture |
 | `docs/design/`, `development/`, `reports/` | 設計・運用規約・実施結果と限界 |
-| `research-data/ai-sigma/` | 研究ブランチ側のGit保存データ・設定・要約・圧縮観測 |
+| `research-data/ai-sigma/` | mainのGit保存データ・設定・要約・圧縮観測 |
 | `.artifacts/`, `artifacts/` | ローカル運用/出力・データ展開・一時物、Playwrightブラウザ等。研究の出力は`.artifacts/ai-sigma/` |
-| `models/experiments/`・外部cache | 研究モデルと共有依存。保存先/配布条件は[保存方針](.devcontainer/storage-policy.md)参照 |
+| `research-paths.json`で参照する実験モデル・外部cache | 研究モデルと共有依存。保存先/配布条件は[保存方針](.devcontainer/storage-policy.md)参照 |
 
-研究ブランチは`codex/ai-sigma`、研究worktreeは`.worktree/ai-sigma`。研究側だけのパスを製品mainへ移動・統合したという説明ではない。今後の共通化や配置境界は[研究規約](docs/development/ai-research-experiments.md#研究コード設定データの配置)を参照し、既存コードの移動は担当・予算を定めて別途適用する。文書を探す入口は[AGENTS.mdのインデックス](AGENTS.md#文書インデックス)。
+main `/workspaces/quoridor` が持続的研究の統合正本です。並行変更・比較にはmanaged worktreeを使い、roles・docs・現役sourceを恒常mirrorしません。旧`.worktree/ai-sigma`は凍結参照と既モデル/展開入力の永続pathとして保護し、編集先にはしません。コードと永続入力の参照は[`research-paths.json`](research-paths.json)、機能境界・実入口・凍結recipe・保存/検査手順は[研究コードの保守案内](docs/development/ai-research-code.md)にまとめています。文書を探す入口は[AGENTS.mdのインデックス](AGENTS.md#文書インデックス)。
+
+研究sourceの軽量検査は`python3 scripts/dev/check-research.py`、対象の整形は同コマンドの`--format`を使います。製品build・学習・モデルforward・対局を起動しません。研究専用の整形依存は`tools/research-quality/`で固定し、製品npmと共有学習環境へ混ぜません。
 
 ## ローカルで起動
 
@@ -66,6 +71,6 @@ PREVIEW_PORT=4273 npm run verify:production   # テストフック付き本番�
 
 普通の本番バンドル（テストフックなし）は`npm run build`後に`npm run preview`で起動し、別シェルで`PLAYWRIGHT_BROWSERS_PATH=./artifacts/playwright node scripts/smoke-ordinary-production.mjs`を実行します。サブパスへ置く場合は`APP_BASE=/quoridor/ npm run build -w @quoridor/web`で構築します。Wasm更新後はページを完全に再読み込みしてください。
 
-生成物を含まないソースからの検証には`node scripts/export-fresh-source.mjs`を使います。`artifacts/fresh-source-phase4/source`へGitの追跡ファイルと未コミットの実装ソースをまとめて書き出し、同階層にSHA256一覧を記録します。未コミットの実装も含めるため、`git archive HEAD`とは異なります。そのディレクトリへ移り、上記の`source scripts/dev/project-env.sh`、`npm ci`、`npm run check`、`npm run build`、`npm run verify:production`を実行します。Playwrightのブラウザキャッシュのみ共有できます。生成Wasm、`target/`、`node_modules/`、`dist/`、スクリーンショットはGitから除外します。
+生成物を含まないソース検証では、明示した新しい出力先へ `node scripts/export-fresh-source.mjs --scope product --destination <新出力先> --max-bytes 67108864` で書き出します。main内なら `.artifacts/` 配下、外部なら既存親directoryを使い、既存出力先は拒否します。現在WTの選択sourceとSHA256を `source-manifest.json` に保存し、モデル・科学データ・runtime・一時sessionを含めません。研究sourceのみなら `--scope research`、限定集合なら `--paths-file <相対path配列.json>` を使います。全成果保存の代用ではなく、未コミットsourceを含むため `git archive HEAD` とも異なります。製品検証は書き出したdirectoryで、上記の `source scripts/dev/project-env.sh`、`npm ci`、`npm run check`、`npm run build`、`npm run verify:production` を実行できます。研究の軽量検査は別入口で、製品buildを起動しません。生成Wasm、`target/`、`node_modules/`、`dist/`、スクリーンショットはGitから除外します。
 
 Rust DTOの正本は`crates/quoridor-wasm/src/wire.rs`です。変更した場合は`npm run codegen:protocol`とfixture生成スクリプトを実行し、`npm run check`で差分が残らないことを確かめてください。新しい盤面HUDと保存開始フローの検証は[UI/UX改善報告](docs/reports/ui-ux-improvement.md)、従来のM1自動検証結果と制限は[受入報告](docs/reports/m1-acceptance.md)、AI探索は[Phase3報告](docs/reports/phase3-baseline-ai.md)、描画互換性は[Phase0報告](docs/reports/compatibility-baseline.md)に記録します。独立した`tools/webgpu-smoke`はこのnpmワークスペースに含めていません。

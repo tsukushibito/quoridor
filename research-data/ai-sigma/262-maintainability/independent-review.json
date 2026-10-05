@@ -1,0 +1,195 @@
+{
+  "schema": "repository-maintenance-independent-review-v1",
+  "at": "2026-10-05T04:47:53.837511+00:00",
+  "issue": "quoridor-4lc.262.1.3",
+  "mode": "bounded read-only; no test execution or neural/scientific work",
+  "source_sha256": {
+    "tools/ai-sigma-native/reference.cjs": "897f52efbd61993fe789f4bf6773d40dae6fc76f396caa180ae1fa7d05d4ba49",
+    "tools/ai-sigma-native/rules.cjs": "162846e0d9bdfefa8cf268861a884bb037943a0ccaeb6b89a109f9801b60cb72",
+    "tools/ai-sigma-native/features.cjs": "934160176d2a2bba156aa7e2e8432ad28615b544ee6603f5d0a3a13b98456985",
+    "tools/ai-sigma-native/weights.cjs": "17e6a83a8bd3d3caeef69d213f4e1c8e28e07d8253dfdbfa6f483562906d9398",
+    "tools/ai-sigma-native/nnue.cjs": "6f8678604e952c449bf7d2697124a3b8327ec95acb579329d9e440f8ed795646",
+    "tools/ai-sigma-native/search.cjs": "077ad1983de12048f35796a4f1156e01c671eb40e98bff8e6b0d3de5e1d5e482",
+    "tools/ai-sigma-native/controller.cjs": "4f809186a944446d773f1d20d6e5ecf79513630c7b08341134682129bbda01a0",
+    "tools/ai-sigma-native/arena/config.cjs": "569dc981821f30edf01fe9dc21ddb72dc160ca8e0397278c4ab652633ce4d998",
+    "tools/ai-sigma-native/arena/protocol.cjs": "925a35c65ca1c96445d011f42e47878ceac7f06b714ff3165c1caa5917560e43",
+    "tools/ai-sigma-native/arena/worker.cjs": "165851ec14f32e0a35accfd693d20b0b55478ebf2ac93a40b08c758ef1dfac51",
+    "tools/ai-sigma-native/arena/run.cjs": "cd9b2502a1fb24ae999f68a9488f83dc4a21fb8507c22836316029a82297b6c0",
+    "tools/ai-sigma-native/mcts-worker.cjs": "ccc138f580dbca6867fde3070262af9dfa37b27324ec91dd55e5e57f39ded8a3",
+    "scripts/dev/research-team.py": "c6b09f989c390ae99b4e21d5cd4dbffa52f67feb03a8da0da1523fc9ebec728d",
+    "research-paths.json": "379112cb709c47c87e8114fa21be1b55d92c279e82f40cad783ed3b3830fe151",
+    "tools/ai-sigma-native/tests/contracts.test.cjs": "4bf3442f4636272c6512706f6893e5935238c1940a1f67dc73e9ec5c0ab860f4",
+    "tools/research-team/test_client.py": "5cdb67771177d4c55d23027ab2fa13907eff454f9ff0e3efcf18b4a28b250146"
+  },
+  "findings": [
+    {
+      "id": "R1",
+      "priority": "high",
+      "path": "tools/ai-sigma-native/arena/run.cjs",
+      "line": 15,
+      "finding": "Worker spawn, READY assertion, hands stream creation and first counter write precede try/finally; initialization timeout/schema or output I/O failure can escape child recovery.",
+      "recommendation": "Wrap complete owned lifetime in try/finally; use NN0 fake worker startup failure to verify actual child closure."
+    },
+    {
+      "id": "R2",
+      "priority": "high",
+      "path": "tools/ai-sigma-native/arena/config.cjs",
+      "finding": "Config excludes lexical input/output collisions but not pre-existing output files or alias/inode collisions. run uses default truncating createWriteStream/writeFileSync. Existing results can be overwritten.",
+      "recommendation": "Reserve a fresh attempt output atomically; reject existing targets and protected input aliases before spawning/writing; NN0 fixture preserves existing bytes."
+    },
+    {
+      "id": "R3",
+      "priority": "high",
+      "path": "tools/ai-sigma-native/arena/run.cjs",
+      "line": 27,
+      "finding": "Configured slots need not exist in manifest; selected ledger can be empty, yet every(TERMINAL) produces clock_valid true and attempted_slots reports requested IDs. Missing/duplicate openings and slot identities also lack complete preflight.",
+      "recommendation": "Validate manifest and exact requested slot closure/nonempty planned denominator before child creation."
+    },
+    {
+      "id": "R4",
+      "priority": "high",
+      "path": "tools/ai-sigma-native/controller.cjs",
+      "line": 94,
+      "finding": "close on an active/faulted MCTS worker eventually kills parent only; worker CLOSE_ACTIVE throws before closing its ORT/nativeBridge children, whose identities are not owned/recovered by controller. Duplicate init also permits replacement children.",
+      "recommendation": "Track and recover exact child-tree identities on startup/failure/active shutdown; reject duplicate init; verify mock descendant failure cleanup without neural work."
+    },
+    {
+      "id": "R5",
+      "priority": "medium",
+      "path": "tools/ai-sigma-native/nnue.cjs",
+      "line": 7,
+      "finding": "Manifest validation is feature string only; weight content hash, mu/sigma shape/finite/positive and distance_fit finite parameters are not validated. Distance infinity may silently clip to a valid-looking value.",
+      "recommendation": "Validate explicit manifest/hash and preprocessing/evaluator input contract before READY. Use finite synthetic binary and invalid-manifest NN0 fixtures."
+    },
+    {
+      "id": "R6",
+      "priority": "medium",
+      "path": "tools/ai-sigma-native/arena/protocol.cjs",
+      "finding": "stdin writes have no stream error handler and output queue is unbounded; close waits exit rather than stdio close. EPIPE/spawn failure/unsolicited output can escape bounded recovery.",
+      "recommendation": "Quarantine stream errors, bound pending output, await close event for process+stdio receipt; use fake worker lifecycle/overflow tests."
+    },
+    {
+      "id": "R7",
+      "priority": "high",
+      "path": "tools/ai-sigma-native/arena/run.cjs",
+      "finding": "Run checks end only at per-hand loop start; one request and fixed stop/close grace can exceed end. No visible pause/issue-owner/RAM/output run control or explicit handoff to an outer guarded owner in this executable entry.",
+      "recommendation": "Bind required owner/issue/resource controls and cleanup reserve, or make entry a guarded callable with verified controlling caller. Do not add hidden historical deadline defaults."
+    },
+    {
+      "id": "R8",
+      "priority": "medium",
+      "path": "scripts/dev/research-team.py",
+      "line": 371,
+      "finding": "New registry code_cwd idle dispatch and refresh response limitation are implemented, but existing tests contain no code_cwd refresh/default-dispatch coverage; idle-to-active re-read should preserve active execution or refuse safely.",
+      "recommendation": "Mock code_cwd main while thread metadata is legacy, verifying idle start cwd, active exact steer without cwd override, refresh same settings and safe race."
+    }
+  ],
+  "positive_observations": [
+    "Canonical native imports no historical frame module; VM State factories isolate caller classes.",
+    "Features and weight float32 arithmetic retain old sparse STM ordering and delta copy semantics by source inspection.",
+    "Search adopts only completed depths, checks explicit node/deadline/depth and preserves typed cancel/limit refusal.",
+    "Client preserves saved model/effort and refuses active cwd migration; configured cwd and historic metadata are explicitly distinguished.",
+    "research-paths separates canonical code/data/live from retained legacy assets and shared dependencies; runtime start is absent in reviewed maintenance path."
+  ],
+  "limitations": [
+    "No NN/model/forward/game/GPU/test or AppServer call executed by this review.",
+    "Findings concern observed source; implementer may be concurrently fixing them. SHA snapshot is for handoff, not all-history guarantee.",
+    "No unintended changes to existing labels/splits/results observed in reviewed source; scientific equivalence of unexecuted real inference is unverified.",
+    "Frozen oracles are explicit tests only; this review does not independently certify full original rule behavior or model parity."
+  ],
+  "source_write_stopped": true,
+  "requested_followup": "Root implementation and focused NN0 regressions for actual deficiencies; then bounded verification of changed endpoints.",
+  "followup_reviews": [
+    {
+      "at": "2026-10-05T05:09:11.718350+00:00",
+      "mode": "finite read-only source review; parent owns test execution; no test/RPC/science execution",
+      "source_sha256": {
+        "tools/ai-sigma-native/nnue.cjs": "466b551d745c601659972aaeb80aae72248cba1f7a6a42e9b3bc88845ead6662",
+        "tools/ai-sigma-native/controller.cjs": "5cf41e4a9634375ff860d3a60554a7393d3461d4229704c9c296c544348d0536",
+        "tools/ai-sigma-native/process.cjs": "3f90a47bd68f7f7e4e1f3cf1a6e32ee32b806defefe21772f2a5d55c1001648d",
+        "tools/ai-sigma-native/mcts-worker.cjs": "7a89412d69ae85fe608e37e362f1cdf002ff68f6d70398d737ca831af0076d0b",
+        "tools/ai-sigma-native/arena/config.cjs": "88f48f6b88b5c00674c88cd5efe020b812db6472932f84e6284d22fea302be44",
+        "tools/ai-sigma-native/arena/protocol.cjs": "b54427a6cf83fa01587cd9ecac1504174b23c94feb82c33b946ed630966e1a73",
+        "tools/ai-sigma-native/arena/run.cjs": "f3e98a13aff1682bcf054c4228e4a86570681631aedcc9048b96958a8561272e",
+        "tools/ai-sigma-common/process/owned-tree.cjs": "c8484036bad9fa206f63a3911456ff56f9e6d50db6926335ea6d1618dcad76cd",
+        "tools/ai-sigma-common/process/run-control.cjs": "0db71f157f3ed00d9afc112779c50a4e7ae93bccae54114c5476df2ee5d536d0",
+        "scripts/dev/research-team.py": "320d1450263669a2d5bb9c8b9d67122a75803ad3de71f90cc810193d683892be",
+        "tools/research-team/test_client.py": "596c14ae607be9c58b6b5d0bcea78c896d4b5d71dce1e3415cc4443c04d102ee",
+        "tools/ai-sigma-native/tests/arena.test.cjs": "9c7cd5e7fa14072d4f2cfd4ebb9d83b7ca82c0b68e5a427d1f0daf5f48b263e0",
+        "tools/ai-sigma-native/tests/controller.test.cjs": "8d97bf4674b3ff5d8a66193ff6393c9c898552c10afe8afecd5d4b97e78df0e4",
+        "research-paths.json": "379112cb709c47c87e8114fa21be1b55d92c279e82f40cad783ed3b3830fe151"
+      },
+      "original_findings_disposition": {
+        "R1": "source-supported repair: READY and owned child lifetime now inside try/finally; init failures retain selected ledger",
+        "R2": "source-supported repair: exclusive fresh output directory, resolved parent alias check and wx files",
+        "R3": "source-supported repair: exact nonempty selected planned denominator and legal opening preflight before spawn",
+        "R4": "source-supported duplicate-init/cancel/owned descendant repair; remaining bounded stdio-close issue F3 below",
+        "R5": "source-supported manifest hash/shape/finiteness repair; actual file size prehash issue F1 below",
+        "R6": "source-supported repair: stream errors quarantine, message/bytes caps and stdio close receipt",
+        "R7": "source-supported repair: current issue/pause RunControl, RAM/output forecasts, deadline collection reserve; result counter issue F2 below",
+        "R8": "source-supported repair: future idle task explicit code_cwd, active steer preservation and mocked race refusal"
+      },
+      "remaining_findings": [
+        {
+          "id": "F1",
+          "path": "tools/ai-sigma-native/nnue.cjs",
+          "priority": "medium",
+          "finding": "Manifest declares weights_B=48772, but hash reads actual weights file before actual size validation; a mistaken large-file path can bypass pre-read RAM admission.",
+          "requested_fix": "Stat actual weights and require expected bytes before readFileSync hashing."
+        },
+        {
+          "id": "F2",
+          "path": "tools/ai-sigma-native/arena/run.cjs",
+          "priority": "high",
+          "finding": "Normal RESULT response with missing/noninteger allNN bypasses global counter validation; counter only checked when Number.isSafeInteger is true.",
+          "requested_fix": "Require allNN safe integer on adopted RESULT, then monotonic/cap checks."
+        },
+        {
+          "id": "F3",
+          "path": "tools/ai-sigma-native/controller.cjs",
+          "priority": "medium",
+          "finding": "After finite owned recovery, closeOwned awaits stdio close indefinitely; remaining/unresolved process or inherited descriptor can prevent unknown receipt.",
+          "requested_fix": "Bound close-event await by existing timeout and return typed unknown retaining ownership evidence."
+        }
+      ],
+      "limitations": [
+        "Parent executing integrated tests; reviewer did not duplicate them or claim test PASS from source inspection.",
+        "Official idle resume accepted configured main cwd does not rewrite historical thread metadata. Future default client idle tasks bind main explicitly; actual next authorized turn cwd remains pending, and this is not treated as an unresolved maintenance defect.",
+        "No scientific inference/game/label/split/runtime start performed; real inference equivalence and future operations remain unverified."
+      ],
+      "writer_scope": "this existing review JSON only; original findings preserved; other source writers parent-owned"
+    },
+    {
+      "at": "2026-10-05T05:10:09.004885+00:00",
+      "mode": "read-only recheck of three stopped source corrections; integrated tests delegated to parent",
+      "source_sha256": {
+        "tools/ai-sigma-native/nnue.cjs": "6aa35555790a79c35b2a15ac80e6111db870405aabf0581f2cfe869840f2f8f8",
+        "tools/ai-sigma-native/arena/run.cjs": "e57778e128cb2a2796fb79d03a2c55e84d494417d6342c0966d5efd8ebe801a6",
+        "tools/ai-sigma-native/controller.cjs": "e79db017623e933e52745c3c766e0fd15ae8ceaac7c423ec07fdec752e67a390"
+      },
+      "resolved_findings": [
+        {
+          "id": "F1",
+          "resolution": "nnue.load checks actual file isFile and size ===48772 before SHA readFileSync; static source supports bounded expected weight read."
+        },
+        {
+          "id": "F2",
+          "resolution": "Any returned clock.response requires safe integer allNN and monotonic/cap bounds before updating or recording adoption. No-response remains typed clock failure/unknown; it cannot claim a returned valid counter."
+        },
+        {
+          "id": "F3",
+          "resolution": "closeOwned waits stdio-close only pipeTimeoutMs after exact owned recovery; returns exit=null, STDIO_COLLECTION_TIMEOUT and stdio_collected=false with retained ownership evidence on timeout."
+        }
+      ],
+      "conclusion": "No unresolved major finding in the bounded endpoints reviewed. R1-R8 and F1-F3 corrections are source-supported; this does not independently assert parent test results or scientific equivalence.",
+      "remaining_constraints": [
+        "Integrated NN0 regression results are owned by parent and were not duplicated by reviewer.",
+        "Next explicitly authorized scientific/runtime turn must confirm actual saved execution cwd; historical thread metadata is not used to reject accepted configured-main placement.",
+        "Scientific NN/real inference/game/label/split behavior and future monitor function are unexecuted here.",
+        "Original findings and intermediate snapshots remain in this receipt; formatting-only source changes may update SHA without semantic change."
+      ],
+      "source_write_stopped": true,
+      "reviewer_child_processes": "No persistent child process started by read-only review; short read/receipt commands exited."
+    }
+  ]
+}

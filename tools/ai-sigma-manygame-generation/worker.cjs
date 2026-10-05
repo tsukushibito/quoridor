@@ -1,40 +1,421 @@
 'use strict';
-const fs=require('fs'),path=require('path'),assert=require('assert'),{performance}=require('perf_hooks');
-const {Pipe}=require('./pipe.cjs'),{GamePool}=require('./gamepool.cjs'),{Broker}=require('./broker.cjs'),I=require('./identity.cjs'),{target,validate}=require('./schema.cjs'),{Engine}=require('../ai-sigma-native-checkpoint-teacher/controller.cjs');
-const {r}=require('../ai-sigma-native-baseline/reference.cjs').createReference(),ROOT=path.resolve(__dirname,'../..'),core=+process.argv[2],out=process.argv[3],worker='w'+core;
-fs.mkdirSync(out,{recursive:true});let mode,datasetMode,run,engine,rust,ort,pool,broker,aborted=false,usedNN=0,generation=0,API_ms=0,pipe_ms=0,startup=0;const pending=new Map,waits=new Map;let waitId=0;
-const save=(n,x)=>fs.writeFileSync(out+'/'+n,JSON.stringify(x)+'\n'),write=(n,x)=>fs.appendFileSync(out+'/'+n,JSON.stringify(x)+'\n');
-const unwrap=x=>{if(!x.ok)throw Error(x.error?.message??x.error);return x.data;};
-class Registry{
- async call(q){return unwrap(await rust.ask(q));}
- async new(f,g,K){let state=r.fromPrefix([]),prefix=[];for(const a of f.legal_prefix){prefix.push(r.rustAction(state,a));state=state.next(a)}return(await this.call({op:'new',prefix,simulations:K,generation:g,trace:false})).handle;}
- begin(h,g){return this.call({op:'begin',handle:h,generation:g});}
- resume(h,g,t,n){return this.call({op:'resume',handle:h,generation:g,token:t,logits:n.logits,value:n.value});}
- checkpoint(h,g){return this.call({op:'checkpoint',handle:h,generation:g});}
- cancel(h,g){return this.call({op:'cancel',handle:h,generation:g});}
- free(h){return this.call({op:'free',handle:h});}
+
+const fs = require('fs');
+const path = require('path');
+const assert = require('assert');
+const { performance } = require('perf_hooks');
+const { validateWorkerSettings } = require('./config.cjs');
+const { WorkerBroker } = require('../ai-sigma-common/generation/worker-broker.cjs');
+const { Pipe } = require('../ai-sigma-common/process/json-line.cjs');
+const { GamePool } = require('../ai-sigma-common/generation/game-pool.cjs');
+const { Broker } = require('../ai-sigma-common/generation/batch-broker.cjs');
+const { target, validate } = require('../ai-sigma-common/generation/teacher-schema.cjs');
+const { Engine } = require('../ai-sigma-native/controller.cjs');
+const { r } = require('../ai-sigma-native/reference.cjs').createReference();
+
+const core = Number(process.argv[2]);
+const out = process.argv[3];
+let worker = 'w' + core;
+let settings, mode, datasetMode, run, engine, rust, ort, pool, broker;
+let aborted = false;
+let usedNN = 0,
+  generation = 0,
+  API_ms = 0,
+  pipe_ms = 0,
+  startup = 0;
+fs.mkdirSync(out, { recursive: true });
+const save = (name, value) => fs.writeFileSync(path.join(out, name), JSON.stringify(value) + '\n');
+const append = (name, value) =>
+  fs.appendFileSync(path.join(out, name), JSON.stringify(value) + '\n');
+const remote = new WorkerBroker((message) => process.send(message));
+
+function unwrap(response) {
+  if (!response.ok) throw Error(response.error?.message ?? response.error);
+  return response.data;
 }
-const remote={infer:(identity,features_bits648)=>new Promise((resolve,reject)=>{pending.set(identity.request_id,{identity,resolve,reject});process.send({kind:'infer',identity,features_bits648});}),cancel:(w,g,generation,run)=>{process.send({kind:'cancel',worker:w,game:g,generation,run});return{pending:true}},quiescentGame:(w,g,run)=>new Promise(resolve=>{const id='drain.'+(++waitId);waits.set(id,resolve);process.send({kind:'wait_game',worker:w,game:g,run,id});})};
-async function init(q){mode=q.mode;datasetMode=q.datasetMode??mode;run=q.run;const started=performance.now();let info;
- if(mode==='CPUJS'){engine=new Engine('reference');info=await engine.init(false);assert.equal(info.info.version,'1.30.0');assert.deepStrictEqual(info.info.affinity,[core]);startup=1;}
- else{rust=new Pipe(ROOT+'/.artifacts/ai-sigma/resume-20261003/NATIVE-BASELINE/build/target/release/faithful-native',[],{timeoutMs:10000});if(mode==='RustCPU'){ort=new Pipe('/home/vscode/.cache/inference/envs/quoridor-training/bin/python',['-u',ROOT+'/tools/ai-sigma-native-baseline/ort.py',ROOT+'/models/experiments/ai-sigma/reference/sigma-pcr250/best.onnx'],{timeoutMs:10000});info=unwrap(await ort.ask({op:'info'}));assert.equal(info.version,'1.30.0');assert.deepStrictEqual(info.providers,['CPUExecutionProvider']);assert.deepStrictEqual(info.affinity,[core]);broker=new Broker(async items=>{const rows=[];for(const item of items){const t=performance.now();const n=unwrap(await ort.ask({op:'infer',features_bits:item.features_bits648}));API_ms+=n.API_ms;pipe_ms+=performance.now()-t;rows.push({id:item.id,logits:n.logits,value:n.value,f32bits137:n.NN_bits});}return rows;},{replyCap:102400});}else broker=remote;pool=new GamePool(worker,new Registry(),broker,{run,maxHandles:8});}
- save('init.json',{info,mode,startup_NN:startup,wall_ms:performance.now()-started});return{info,mode,startup_NN:startup};}
-async function search(spec,state,prefix){const g=++generation,t=performance.now();let d;
- if(mode==='CPUJS'){let count=0;const ans=await engine.request({op:'search',legal_prefix:prefix,generation:g,K:64,final_only:true,NN_limit:102400-usedNN,watchdog_ms:30000,trace:false},()=>count++);d=ans.data;usedNN+=d.NN_calls;assert(!d.primary,d.primary?.message);assert.equal(count,1);assert.equal(JSON.stringify(d.root_state),JSON.stringify(r.portState(state)));API_ms+=d.spans.reduce((s,x)=>s+x.API_ms,0);pipe_ms+=d.spans.reduce((s,x)=>s+x.pipe_ms,0);}
- else{const z=await pool.search(spec.game_id,{K:64,generation:g,fixture:{legal_prefix:prefix}});usedNN+=z.counters.started;if(z.typed)throw Error(z.typed);d={cp:z.cp,first_NN:z.first_NN,last_leafNN:z.last_leafNN,NN_calls:z.counters.returned,discardedNN:z.counters.discarded,terminal_noNN:z.counters.completed-(z.counters.returned-z.counters.discarded)};const root=r.portState(state);assert(z.firstPending,'ROOT_NN_MISSING');for(const k of ['key','legal','turn','ply'])assert.equal(JSON.stringify(z.firstPending[k]),JSON.stringify(root[k]),'ROOT_BINDING_'+k);const canonical=x=>[...x].sort((a,b)=>a[0]<b[0]?-1:a[0]>b[0]?1:0);assert.equal(JSON.stringify(canonical(z.firstPending.history)),JSON.stringify(canonical(root.history)),'ROOT_BINDING_HISTORY_MEMBERSHIP_COUNTS');assert.equal(JSON.stringify(z.first_NN.features_bits),JSON.stringify(root.features_bits));}
- assert(!aborted,'CONTROL_ABORT');assert(d.cp&&d.cp.root_visits===64&&d.cp.simulations===64,'K64_INCOMPLETE');return{...d,wall_ms:performance.now()-t};}
-function rng(seed){let x=parseInt(seed.slice(0,8),16)||1;return()=>{x^=x<<13;x^=x>>>17;x^=x<<5;x>>>=0;return x/4294967296}}
-async function game(spec){let state,prefix,newply=0,rows=[],result=null;const start=performance.now(),random=rng(spec.sampling_seed);write('starts.jsonl',{game_id:spec.game_id,UTC:new Date().toISOString(),family:spec.family});
- if(!spec.generated){const x={game_id:spec.game_id,status:'GENERATION_UNKNOWN',winner:null,rows:0};write('games.jsonl',x);return x;}
- prefix=structuredClone(spec.opening.legal_prefix);state=r.fromPrefix(prefix);
- try{while(true){if(aborted)throw Error('CONTROL_ABORT');const terminal=r.terminalResult(state);if(terminal){result={status:terminal.winner?'GOAL':state.depth>=200?'DRAW200':'DRAW_NOLEGAL',winner:terminal.winner};break;}if(newply>=200){result={status:'NEWPLY_CAP_UNKNOWN',winner:null};break;}
- const d=await search(spec,state,prefix),cp=d.cp,legal=state.getLegalActions(),mapping=legal.map(a=>{const ix=r.actionToIndex(a,9);return[r.rustAction(state,a),state.getCurrentPlayer()===2?r.vertPolicyPermutation(9)[ix]:ix]}),order=mapping.map(m=>m[0]),visits=Array(136).fill(0);
- assert.equal(JSON.stringify(cp.root_edges.map(e=>e[0])),JSON.stringify(order),'LEGAL_ORDER');for(const [a,p,n,sum]of cp.root_edges){const m=mapping.find(x=>x[0]===a);assert(m);visits[m[1]]=n;}const edgeSum=visits.reduce((s,v)=>s+v,0);assert.equal(edgeSum,63);let action;
- if(newply<16){let u=random()*edgeSum;for(const e of cp.root_edges){u-=e[2];if(u<0){action=e[0];break;}}}else{const max=Math.max(...cp.root_edges.map(e=>e[2]));action=cp.root_edges.find(e=>e[2]===max)[0];}assert(order.includes(action),'ACTION_LEGAL');
- const row={row_id:spec.game_id+'-'+datasetMode+'-ply-'+state.depth,game_id:spec.game_id,family:spec.family,lineage:spec.family+'|'+datasetMode,split:spec.split,side:state.getCurrentPlayer(),ply:state.depth,new_ply:newply,state_key:state._positionKey(),history_counts:Array.from(state.position_history),history_reconstruction:"frozen opening plus preceding row actions",features648_bits:d.first_NN.features_bits,NN137_bits:d.first_NN.NN_bits,legal_order209:order,mapping136:mapping,visits136:visits,pi136:visits.map(x=>x/63),rootN:64,edgeSum:63,rootNN:d.first_NN.value,rootmean:cp.root_mean,leafNN:d.last_leafNN,rootNN_view:'root side-to-move',rootmean_view:'root side-to-move',NN_completed:d.NN_calls-d.discardedNN,terminal_noNN:d.terminal_noNN,NN_discarded:d.discardedNN,action209:action,action:legal[order.indexOf(action)],tau:newply<16?1:0,model:'d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d',provider:mode==='CPUJS'||mode==='RustCPU'?'CPUORT1.30/intra-inter1/SEQUENTIAL':'TorchCUDA-folded-dynamicB/TF32off/AMPoff',search:'C1/FPU.2/f64/firsttie/trueMean/root64edge63',seed:spec.sampling_seed,source:process.env.SIGMA_SOURCE??null,wall_ms:d.wall_ms,z_p1:null,z_stm:null,value_eligible:false};validate(row,64);rows.push(row);write('raw-rows.jsonl',row);prefix=[...prefix,row.action];state=state.next(row.action);newply++;}}
- catch(e){result={status:'CONTROL_OR_ENGINE_OR_SCHEMA_UNKNOWN',winner:null,error:e.stack};aborted=true;pool?.stop();engine?.stopCurrent();process.send({kind:'fault',game:spec.game_id,error:e.stack});}
- const x={game_id:spec.game_id,mode,family:spec.family,lineage:spec.family+'|'+datasetMode,split:spec.split,core,datasetMode,...result,rows:rows.length,legal_prefix:prefix,plies:state.depth,elapsed_ms:performance.now()-start};write('games.jsonl',x);for(const row of rows){target(row,x.winner);validate(row,64);}return x;}
-async function games(q){const results=[],queue=[...q.games];async function lane(){while(queue.length&&!aborted){const spec=queue.shift();results.push(await game(spec));}}await Promise.all(Array.from({length:q.active},()=>lane()));return{results,usedNN,unstarted:queue.map(x=>x.game_id)};}
-async function close(){aborted=true;pool?.stop();if(pool?.games.size||pending.size||waits.size)throw Error('CLOSE_NONZERO');if(mode==='RustCPU'){await broker.quiescent();broker.stop();}const exits=[];if(engine)exits.push(await engine.close());if(ort)exits.push(await ort.close());if(rust)exits.push(await rust.close());const x={usedNN,startup_NN:startup,API_ms,pipe_ms,exits,bridge:rust?{calls:rust.calls,request_bytes:rust.requestBytes,response_bytes:rust.responseBytes}:null,zero:{handles:pool?.games.size??0,pending:pending.size,waits:waits.size}};save('close.json',x);return x;}
-process.on('message',q=>{if(q.kind==='reply'){const p=pending.get(q.request_id);if(!p)return;pending.delete(q.request_id);if(q.error)p.reject(Error(q.error));else if(I.key(q.data.identity)!==I.key(p.identity))p.reject(Error('REPLY_IDENTITY'));else p.resolve(q.data);return;}if(q.kind==='drained'){waits.get(q.id)?.();waits.delete(q.id);return;}if(q.kind==='abort'){aborted=true;pool?.stop();engine?.stopCurrent();return;}
- void(async()=>{if(q.op==='init')return init(q);if(q.op==='games')return games(q);if(q.op==='close')return close();throw Error('OP')})().then(data=>{process.send({id:q.id,data});if(q.op==='close')process.disconnect()}).catch(e=>process.send({id:q.id,error:e.stack}));});
+
+class Registry {
+  async call(request) {
+    return unwrap(await rust.ask(request));
+  }
+  async new(fixture, generation, K) {
+    let state = r.fromPrefix([]);
+    const prefix = [];
+    for (const action of fixture.legal_prefix) {
+      prefix.push(r.rustAction(state, action));
+      state = state.next(action);
+    }
+    return (await this.call({ op: 'new', prefix, simulations: K, generation, trace: false }))
+      .handle;
+  }
+  begin(handle, generation) {
+    return this.call({ op: 'begin', handle, generation });
+  }
+  resume(handle, generation, token, NN) {
+    return this.call({
+      op: 'resume',
+      handle,
+      generation,
+      token,
+      logits: NN.logits,
+      value: NN.value,
+    });
+  }
+  checkpoint(handle, generation) {
+    return this.call({ op: 'checkpoint', handle, generation });
+  }
+  cancel(handle, generation) {
+    return this.call({ op: 'cancel', handle, generation });
+  }
+  free(handle) {
+    return this.call({ op: 'free', handle });
+  }
+}
+
+async function init(request) {
+  settings = validateWorkerSettings(request, request.mode);
+  mode = request.mode;
+  datasetMode = request.datasetMode ?? mode;
+  run = request.run;
+  worker = request.worker_id ?? worker;
+  const started = performance.now();
+  let info;
+  if (mode === 'CPUJS') {
+    engine = new Engine('reference', settings.runtime.model, settings.runtime);
+    info = await engine.init(false);
+    assert.equal(info.info.version, settings.runtime.expectedORTVersion);
+    assert.deepStrictEqual(info.info.affinity, [core]);
+    startup = 1;
+  } else {
+    rust = new Pipe(settings.runtime.nativeBridge, [], {
+      timeoutMs: settings.runtime.pipeTimeoutMs,
+    });
+    if (mode === 'RustCPU') {
+      ort = new Pipe(
+        settings.runtime.python,
+        ['-u', settings.runtime.ortScript, settings.runtime.model],
+        {
+          timeoutMs: settings.runtime.pipeTimeoutMs,
+        },
+      );
+      info = unwrap(await ort.ask({ op: 'info' }));
+      assert.equal(info.version, settings.runtime.expectedORTVersion);
+      assert.deepStrictEqual(info.providers, ['CPUExecutionProvider']);
+      assert.deepStrictEqual(info.affinity, [core]);
+      broker = new Broker(
+        async (items) => {
+          const rows = [];
+          for (const item of items) {
+            const started = performance.now();
+            const NN = unwrap(await ort.ask({ op: 'infer', features_bits: item.features_bits648 }));
+            API_ms += NN.API_ms;
+            pipe_ms += performance.now() - started;
+            rows.push({ id: item.id, logits: NN.logits, value: NN.value, f32bits137: NN.NN_bits });
+          }
+          return rows;
+        },
+        { ...request.broker, replyCap: settings.teacher.sampleCap },
+      );
+    } else broker = remote;
+    pool = new GamePool(worker, new Registry(), broker, {
+      run,
+      maxHandles: request.active_per_worker,
+    });
+  }
+  save('init.json', { info, mode, startup_NN: startup, wall_ms: performance.now() - started });
+  return { info, mode, startup_NN: startup };
+}
+
+async function search(spec, state, prefix) {
+  const currentGeneration = ++generation,
+    started = performance.now(),
+    K = settings.teacher.K;
+  let data;
+  if (mode === 'CPUJS') {
+    let checkpoints = 0;
+    const answer = await engine.request(
+      {
+        op: 'search',
+        legal_prefix: prefix,
+        generation: currentGeneration,
+        K,
+        final_only: true,
+        NN_limit: settings.teacher.sampleCap - usedNN,
+        watchdog_ms: settings.runtime.pipeTimeoutMs,
+        trace: false,
+      },
+      () => checkpoints++,
+    );
+    data = answer.data;
+    usedNN += data.NN_calls;
+    assert(!data.primary, data.primary?.message);
+    assert.equal(checkpoints, 1);
+    assert.equal(JSON.stringify(data.root_state), JSON.stringify(r.portState(state)));
+    API_ms += data.spans.reduce((sum, span) => sum + span.API_ms, 0);
+    pipe_ms += data.spans.reduce((sum, span) => sum + span.pipe_ms, 0);
+  } else {
+    const result = await pool.search(spec.game_id, {
+      K,
+      generation: currentGeneration,
+      fixture: { legal_prefix: prefix },
+    });
+    usedNN += result.counters.started;
+    if (result.typed) throw Error(result.typed);
+    data = {
+      cp: result.cp,
+      first_NN: result.first_NN,
+      last_leafNN: result.last_leafNN,
+      NN_calls: result.counters.returned,
+      discardedNN: result.counters.discarded,
+      terminal_noNN:
+        result.counters.completed - (result.counters.returned - result.counters.discarded),
+    };
+    const root = r.portState(state);
+    assert(result.firstPending, 'ROOT_NN_MISSING');
+    for (const field of ['key', 'legal', 'turn', 'ply']) {
+      assert.equal(
+        JSON.stringify(result.firstPending[field]),
+        JSON.stringify(root[field]),
+        'ROOT_BINDING_' + field,
+      );
+    }
+    const canonical = (values) =>
+      [...values].sort((a, b) => (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0));
+    assert.equal(
+      JSON.stringify(canonical(result.firstPending.history)),
+      JSON.stringify(canonical(root.history)),
+      'ROOT_BINDING_HISTORY_MEMBERSHIP_COUNTS',
+    );
+    assert.equal(JSON.stringify(result.first_NN.features_bits), JSON.stringify(root.features_bits));
+  }
+  assert(!aborted, 'CONTROL_ABORT');
+  assert(data.cp && data.cp.root_visits === K && data.cp.simulations === K, 'SEARCH_K_INCOMPLETE');
+  return { ...data, wall_ms: performance.now() - started };
+}
+
+function randomGenerator(seed) {
+  let value = parseInt(seed.slice(0, 8), 16) || 1;
+  return () => {
+    value ^= value << 13;
+    value ^= value >>> 17;
+    value ^= value << 5;
+    value >>>= 0;
+    return value / 4294967296;
+  };
+}
+
+function chooseAction(checkpoint, edgeSum, newPly, random) {
+  if (newPly < settings.teacher.temperaturePlies) {
+    let remaining = random() * edgeSum;
+    for (const edge of checkpoint.root_edges) {
+      remaining -= edge[2];
+      if (remaining < 0) return edge[0];
+    }
+  } else {
+    const maximum = Math.max(...checkpoint.root_edges.map((edge) => edge[2]));
+    return checkpoint.root_edges.find((edge) => edge[2] === maximum)[0];
+  }
+}
+
+function teacherRow(spec, state, data, newPly, random) {
+  const checkpoint = data.cp,
+    legal = state.getLegalActions();
+  const mapping = legal.map((action) => {
+    const index = r.actionToIndex(action, 9);
+    return [
+      r.rustAction(state, action),
+      state.getCurrentPlayer() === 2 ? r.vertPolicyPermutation(9)[index] : index,
+    ];
+  });
+  const order = mapping.map((entry) => entry[0]),
+    visits = Array(136).fill(0);
+  assert.equal(
+    JSON.stringify(checkpoint.root_edges.map((edge) => edge[0])),
+    JSON.stringify(order),
+    'LEGAL_ORDER',
+  );
+  for (const [action, , count] of checkpoint.root_edges) {
+    const entry = mapping.find((entry) => entry[0] === action);
+    assert(entry);
+    visits[entry[1]] = count;
+  }
+  const edgeSum = visits.reduce((sum, count) => sum + count, 0);
+  assert.equal(edgeSum, settings.teacher.K - 1);
+  const action = chooseAction(checkpoint, edgeSum, newPly, random);
+  assert(order.includes(action), 'ACTION_LEGAL');
+  return {
+    row_id: spec.game_id + '-' + datasetMode + '-ply-' + state.depth,
+    game_id: spec.game_id,
+    family: spec.family,
+    lineage: spec.family + '|' + datasetMode,
+    split: spec.split,
+    side: state.getCurrentPlayer(),
+    ply: state.depth,
+    new_ply: newPly,
+    state_key: state._positionKey(),
+    history_counts: Array.from(state.position_history),
+    history_reconstruction: 'frozen opening plus preceding row actions',
+    features648_bits: data.first_NN.features_bits,
+    NN137_bits: data.first_NN.NN_bits,
+    legal_order209: order,
+    mapping136: mapping,
+    visits136: visits,
+    pi136: visits.map((count) => count / edgeSum),
+    rootN: settings.teacher.K,
+    edgeSum,
+    rootNN: data.first_NN.value,
+    rootmean: checkpoint.root_mean,
+    leafNN: data.last_leafNN,
+    rootNN_view: 'root side-to-move',
+    rootmean_view: 'root side-to-move',
+    NN_completed: data.NN_calls - data.discardedNN,
+    terminal_noNN: data.terminal_noNN,
+    NN_discarded: data.discardedNN,
+    action209: action,
+    action: legal[order.indexOf(action)],
+    tau: newPly < settings.teacher.temperaturePlies ? 1 : 0,
+    model: settings.teacher.modelSHA256,
+    provider: settings.teacher.providerLabel,
+    search: settings.teacher.searchLabel,
+    seed: spec.sampling_seed,
+    source: process.env.SIGMA_SOURCE ?? null,
+    wall_ms: data.wall_ms,
+    z_p1: null,
+    z_stm: null,
+    value_eligible: false,
+  };
+}
+
+async function game(spec) {
+  const rows = [],
+    started = performance.now(),
+    random = randomGenerator(spec.sampling_seed);
+  let newPly = 0,
+    result;
+  append('starts.jsonl', {
+    game_id: spec.game_id,
+    UTC: new Date().toISOString(),
+    family: spec.family,
+  });
+  if (!spec.generated) {
+    const unknown = { game_id: spec.game_id, status: 'GENERATION_UNKNOWN', winner: null, rows: 0 };
+    append('games.jsonl', unknown);
+    return unknown;
+  }
+  let prefix = structuredClone(spec.opening.legal_prefix),
+    state = r.fromPrefix(prefix);
+  try {
+    while (true) {
+      if (aborted) throw Error('CONTROL_ABORT');
+      const terminal = r.terminalResult(state);
+      if (terminal) {
+        // Rule draw threshold and the run's new-ply censor are distinct conditions.
+        result = {
+          status: terminal.winner ? 'GOAL' : state.depth >= 200 ? 'DRAW200' : 'DRAW_NOLEGAL',
+          winner: terminal.winner,
+        };
+        break;
+      }
+      if (newPly >= settings.teacher.maxNewPlies) {
+        result = { status: 'NEWPLY_CAP_UNKNOWN', winner: null };
+        break;
+      }
+      const data = await search(spec, state, prefix),
+        row = teacherRow(spec, state, data, newPly, random);
+      validate(row, settings.teacher.K);
+      rows.push(row);
+      append('raw-rows.jsonl', row);
+      prefix = [...prefix, row.action];
+      state = state.next(row.action);
+      newPly++;
+    }
+  } catch (error) {
+    result = { status: 'CONTROL_OR_ENGINE_OR_SCHEMA_UNKNOWN', winner: null, error: error.stack };
+    aborted = true;
+    pool?.stop();
+    engine?.stopCurrent();
+    process.send({ kind: 'fault', game: spec.game_id, error: error.stack });
+  }
+  const completed = {
+    game_id: spec.game_id,
+    mode,
+    family: spec.family,
+    lineage: spec.family + '|' + datasetMode,
+    split: spec.split,
+    core,
+    datasetMode,
+    ...result,
+    rows: rows.length,
+    legal_prefix: prefix,
+    plies: state.depth,
+    elapsed_ms: performance.now() - started,
+  };
+  append('games.jsonl', completed);
+  for (const row of rows) {
+    target(row, completed.winner);
+    validate(row, settings.teacher.K);
+  }
+  return completed;
+}
+
+async function games(request) {
+  const results = [],
+    queue = [...request.games];
+  async function lane() {
+    while (queue.length && !aborted) results.push(await game(queue.shift()));
+  }
+  await Promise.all(Array.from({ length: request.active }, lane));
+  return { results, usedNN, unstarted: queue.map((spec) => spec.game_id) };
+}
+
+async function close() {
+  aborted = true;
+  pool?.stop();
+  if (pool?.games.size || remote.pending.size || remote.waits.size) throw Error('CLOSE_NONZERO');
+  if (mode === 'RustCPU') {
+    await broker.quiescent();
+    broker.stop();
+  }
+  const exits = [];
+  if (engine) exits.push(await engine.close());
+  if (ort) exits.push(await ort.close());
+  if (rust) exits.push(await rust.close());
+  const receipt = {
+    usedNN,
+    startup_NN: startup,
+    API_ms,
+    pipe_ms,
+    exits,
+    bridge: rust
+      ? { calls: rust.calls, request_bytes: rust.requestBytes, response_bytes: rust.responseBytes }
+      : null,
+    zero: {
+      handles: pool?.games.size ?? 0,
+      pending: remote.pending.size,
+      waits: remote.waits.size,
+    },
+  };
+  save('close.json', receipt);
+  return receipt;
+}
+
+process.on('message', (request) => {
+  if (remote.handle(request)) return;
+  if (request.kind === 'abort') {
+    aborted = true;
+    pool?.stop();
+    engine?.stopCurrent();
+    return;
+  }
+  void (async () => {
+    if (request.op === 'init') return init(request);
+    if (request.op === 'games') return games(request);
+    if (request.op === 'close') return close();
+    throw Error('OP');
+  })()
+    .then((data) => {
+      process.send({ id: request.id, data });
+      if (request.op === 'close') process.disconnect();
+    })
+    .catch((error) => process.send({ id: request.id, error: error.stack }));
+});

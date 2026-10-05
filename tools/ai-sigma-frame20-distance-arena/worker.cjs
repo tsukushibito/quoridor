@@ -1,5 +1,5 @@
 'use strict';
-const fs=require('fs'),readline=require('readline'),{search,now,n,q}=require('./engine.cjs');
+const fs=require('fs'),readline=require('readline'),{search,now,n,q}=require('../ai-sigma-native/search.cjs');
 const {mode}=require('./schema.cjs');
 const loaded=n.load(process.argv[2]);let allNN=0,active=null,latest=-1;
 const emit=x=>process.stdout.write(JSON.stringify(x)+'\n');emit({type:'READY',pid:process.pid,allNN});

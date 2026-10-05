@@ -1,0 +1,18 @@
+{
+ "cap_bytes":12884901888,
+ "unknown_retained_bytes":null,
+ "roots":[
+  {"name":"main research code","category":"code","path":"/workspaces/quoridor/tools","exclude":["node_modules",".venv","__pycache__","target"]},
+  {"name":"main preserved research data","category":"data","path":"/workspaces/quoridor/research-data/ai-sigma"},
+  {"name":"shared Git objects","category":"git","path":"/workspaces/quoridor/.git"},
+  {"name":"retained legacy data/code","category":"legacy-assets","path":"/workspaces/quoridor/.worktree/ai-sigma","exclude":[".artifacts","node_modules","__pycache__","target",".venv"]},
+  {"name":"retained legacy live/extraction","category":"legacy-live","path":"/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma"},
+  {"name":"training environment","category":"shared-dependencies","path":"/home/vscode/.cache/inference/envs/quoridor-training"},
+  {"name":"team environment","category":"shared-dependencies","path":"/home/vscode/.cache/inference/envs/quoridor-research-team"},
+  {"name":"uv shared cache","category":"shared-cache","path":"/home/vscode/.cache/inference/uv"},
+  {"name":"new quality environment","category":"quality","path":"/workspaces/quoridor/tools/research-quality/.venv"},
+  {"name":"new quality npm dependency","category":"quality","path":"/workspaces/quoridor/tools/research-quality/node_modules"}
+ ],
+ "reservations":[],
+ "notes":"Directed repository/dependency allocation snapshot. Main runtime/backups/product caches are not fully attributed; null unknown is a refusal to claim parent admission. Prior unknowns remain in original ledgers; no reset. Shared environments are attributed separately without asserting exclusion from parent12GiB."
+}

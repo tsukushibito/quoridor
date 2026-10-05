@@ -1,0 +1,663 @@
+{
+  "at": "2026-10-05T05:16:02.150281+00:00",
+  "task": "quoridor-4lc.262.1",
+  "stage": "source stopped; external Root acceptance/normal-index commit pending",
+  "source_writers_stopped": true,
+  "short_children_stopped": true,
+  "project_Git_index_commit_refs_mutated_by_Steward": false,
+  "runtime_restarted": false,
+  "protected_untracked": [
+    ":memory:.ses"
+  ],
+  "paths": [
+    {
+      "path": ".devcontainer/storage-policy.md",
+      "bytes": 6931,
+      "sha256": "9a6cc540debb18f7c4bffd61eb4d91340c3fe8b6d22d6d4a26fc770052206ed1"
+    },
+    {
+      "path": "AGENTS.md",
+      "bytes": 3767,
+      "sha256": "18a04d17a85afda5dfc7c217c1b269be77039332fc6b03a78316851bfb3827ac"
+    },
+    {
+      "path": "README.md",
+      "bytes": 11892,
+      "sha256": "688d7b7004597e545f4b420c87e6d48f716a565bfbe6662fef67ba08e87bcafd"
+    },
+    {
+      "path": "docs/design/ai-research-team.md",
+      "bytes": 22167,
+      "sha256": "5423410bfc82e156f9d35405bd9a09fbffec786711dd93e443b4df2f8d6a471a"
+    },
+    {
+      "path": "docs/design/ai-sigma-research-goal.md",
+      "bytes": 7164,
+      "sha256": "9817d13b7fd9d2981d920877e978e4ebf1de2d42756318f6a54cd6f69c9f7f99"
+    },
+    {
+      "path": "docs/development/ai-research-code.md",
+      "bytes": 13819,
+      "sha256": "62ab397a5926bb839040d7fb01385c228acd86d55fad19036cf131c8660f79eb"
+    },
+    {
+      "path": "docs/development/ai-research-experiments.md",
+      "bytes": 12925,
+      "sha256": "ae0d8e3ad2acaab1beaddc13eeb405ef0d2321c5e4486a9256f37cff359d940e"
+    },
+    {
+      "path": "docs/reports/ai-research-refactoring262.md",
+      "bytes": 11904,
+      "sha256": "0a961c0dfcf5efeb4aa5e9b1500c8d7497419559b7d2249911bd7f1ac344710f"
+    },
+    {
+      "path": "research-data/ai-sigma/262-maintainability/arena-clock.json",
+      "bytes": 6185,
+      "sha256": "250ed508fdd9a04cc984c5a945aba246729b859a9616beb3f4bc84b7bcfcd385"
+    },
+    {
+      "path": "research-data/ai-sigma/262-maintainability/changed-paths.json",
+      "bytes": 5919,
+      "sha256": "ec2b49070e217e6a5c5125dac7f8f0ad02a3830a6ef70b2e013bf3ab45bc54c4"
+    },
+    {
+      "path": "research-data/ai-sigma/262-maintainability/cleanup-quality-cache.json",
+      "bytes": 1105,
+      "sha256": "245db6d2357d7c31de290ca09ca8a7343798c7d2ff7aba2488121a3b52e664bf"
+    },
+    {
+      "path": "research-data/ai-sigma/262-maintainability/independent-review.json",
+      "bytes": 14869,
+      "sha256": "89cea27dd098c8a98a2b69fe90d2e85cfb13d15bc07388c51bae329c1dae0d8f"
+    },
+    {
+      "path": "research-data/ai-sigma/262-maintainability/root-progress-correction.json",
+      "bytes": 1130,
+      "sha256": "034aace21dbb96bccf11d460d5c4d420117997464d4cef2e236c1f62e4fac1aa"
+    },
+    {
+      "path": "research-data/ai-sigma/262-maintainability/root-progress-receipt.json",
+      "bytes": 945,
+      "sha256": "b1c26404140fde7c5c2b3355693db062d208f73d5a66e17fcce72d4164f5dfdd"
+    },
+    {
+      "path": "research-data/ai-sigma/262-maintainability/session-layout-observed.json",
+      "bytes": 1437,
+      "sha256": "37cf7b6cbe13be3bc62ee7e9a39c9b0f0835bf7631c8bfb7347d85e24795c341"
+    },
+    {
+      "path": "research-data/ai-sigma/262-maintainability/session-layout.json",
+      "bytes": 3861,
+      "sha256": "3f79d2a3e4df55419715afc657a70cc0e6401dfd9819a6498ccee5a63f644abc"
+    },
+    {
+      "path": "research-data/ai-sigma/262-maintainability/storage-current.json",
+      "bytes": 4337,
+      "sha256": "27e4de24c830b983f9f6c059a719757e83f7e6c1d51ee4786f992608b7cdbea9"
+    },
+    {
+      "path": "research-data/ai-sigma/262-maintainability/storage-scope.json",
+      "bytes": 1695,
+      "sha256": "c24271fd10517672888cf264e5df5290a8ab65e34bb2388c155fd7e30759afdb"
+    },
+    {
+      "path": "research-data/ai-sigma/262-maintainability/verification.json",
+      "bytes": 8632,
+      "sha256": "e5db2cb22bbcb9697a22677efa5e9d5f7dd8c7061736642b2f728789fcc4c57b"
+    },
+    {
+      "path": "research-paths.json",
+      "bytes": 653,
+      "sha256": "379112cb709c47c87e8114fa21be1b55d92c279e82f40cad783ed3b3830fe151"
+    },
+    {
+      "path": "scripts/dev/check-research.py",
+      "bytes": 6693,
+      "sha256": "2a51e562d3a790b303bbcfc275a8791596b9d00030e2df4d64526cca349320a7"
+    },
+    {
+      "path": "scripts/dev/research-save.py",
+      "bytes": 6878,
+      "sha256": "e5dac444ebb6775e503ec48376d671df4e156b53041c9b67209baed24c1f64c4"
+    },
+    {
+      "path": "scripts/dev/research-storage.py",
+      "bytes": 5558,
+      "sha256": "24e6a8182fecb968559228e270567036163933983acd60a3e420329056aa3d95"
+    },
+    {
+      "path": "scripts/dev/research-team.py",
+      "bytes": 25538,
+      "sha256": "320d1450263669a2d5bb9c8b9d67122a75803ad3de71f90cc810193d683892be"
+    },
+    {
+      "path": "scripts/export-fresh-source.mjs",
+      "bytes": 5751,
+      "sha256": "6a7eac1a1b45dcbc00300b56cfe4f1efdd26421c9dc2c186304dd39668df2b31"
+    },
+    {
+      "path": "tools/ai-sigma-common/generation/batch-broker.cjs",
+      "bytes": 8414,
+      "sha256": "19435bb3356146816453ff73a8e1de7f1b97e7ee887f77939a1d6e3eba57ed08"
+    },
+    {
+      "path": "tools/ai-sigma-common/generation/diagnostic-record.cjs",
+      "bytes": 1657,
+      "sha256": "3cd4c12f797d73c4861ffb342a6f9c1e7db416144eea3b6fb62b56988d42c28d"
+    },
+    {
+      "path": "tools/ai-sigma-common/generation/game-pool.cjs",
+      "bytes": 5266,
+      "sha256": "c6c494ffd4fad965befc0d7f460a502d188afe4beceed358db9e23ba607cb97c"
+    },
+    {
+      "path": "tools/ai-sigma-common/generation/identity.cjs",
+      "bytes": 1468,
+      "sha256": "4a443d1d412ab0a9a34f087fcd7d232ec84a5d83febcfc9a646f344bb7f2de16"
+    },
+    {
+      "path": "tools/ai-sigma-common/generation/teacher-schema.cjs",
+      "bytes": 1576,
+      "sha256": "0b252a7a7e9c92fc57b04e787a79aaed0e9d2b9cdb988fc57d097c6cb61705de"
+    },
+    {
+      "path": "tools/ai-sigma-common/generation/worker-broker.cjs",
+      "bytes": 2008,
+      "sha256": "1c201ca19d7e2628f0e7eedcb4d47e5e850b58b8f7cc72911a1b35ba8c6e23f7"
+    },
+    {
+      "path": "tools/ai-sigma-common/process/gpu-guard.cjs",
+      "bytes": 1323,
+      "sha256": "007483096b965f2baadef419717ef8693d6a2affccc25fb8a8492a4e3fe65602"
+    },
+    {
+      "path": "tools/ai-sigma-common/process/json-line.cjs",
+      "bytes": 4123,
+      "sha256": "dbf80c99cf326329483a1df402ddefad317461f30f4eeb6be063d470a9e98cfa"
+    },
+    {
+      "path": "tools/ai-sigma-common/process/owned-tree.cjs",
+      "bytes": 2477,
+      "sha256": "c8484036bad9fa206f63a3911456ff56f9e6d50db6926335ea6d1618dcad76cd"
+    },
+    {
+      "path": "tools/ai-sigma-common/process/run-control.cjs",
+      "bytes": 2805,
+      "sha256": "0db71f157f3ed00d9afc112779c50a4e7ae93bccae54114c5476df2ee5d536d0"
+    },
+    {
+      "path": "tools/ai-sigma-common/process/worker-client.cjs",
+      "bytes": 3506,
+      "sha256": "dcb2107254f21cbbd5a0d38dbd9913eec0b011cacaca46ab0568c02da0343ee0"
+    },
+    {
+      "path": "tools/ai-sigma-frame20-distance-arena/arena.cjs",
+      "bytes": 4527,
+      "sha256": "4b32c4a4b5e93f7684208fc646cb2a63fd32e4674c7db43305552c569eb473bc"
+    },
+    {
+      "path": "tools/ai-sigma-frame20-distance-arena/protocol.cjs",
+      "bytes": 3300,
+      "sha256": "1e93443cd18a21ab8d50f7d6eac689664d7ec5216604adea31d68592fbf888f0"
+    },
+    {
+      "path": "tools/ai-sigma-frame20-distance-arena/worker.cjs",
+      "bytes": 1412,
+      "sha256": "e189faf530badfd7e2b690fd535167c9feb7a1571e91de3637e24317b721b030"
+    },
+    {
+      "path": "tools/ai-sigma-manygame-generation/README.md",
+      "bytes": 5990,
+      "sha256": "4a71a44e86d98f8d46342e81dbbeb7cfc33f34cb983a3cd7b1ccc60ae32b3f59"
+    },
+    {
+      "path": "tools/ai-sigma-manygame-generation/broker.cjs",
+      "bytes": 281,
+      "sha256": "a6b22d7c60286aed32d41eb57db21bbf2be16a795cfcb0e43f9fa370613fcc36"
+    },
+    {
+      "path": "tools/ai-sigma-manygame-generation/config.cjs",
+      "bytes": 6125,
+      "sha256": "4c69fbf19e349b4f9560f31dce5cfd3e869e0cda4d4603360cdc4fb2edc44e16"
+    },
+    {
+      "path": "tools/ai-sigma-manygame-generation/edge-mock.cjs",
+      "bytes": 3191,
+      "sha256": "354b99ac5484e00dd236a88339baf50e3f3026fed800313333a84845107a6dcd"
+    },
+    {
+      "path": "tools/ai-sigma-manygame-generation/export.cjs",
+      "bytes": 6586,
+      "sha256": "e67e7f3236985f84b5f980d68276d7daa927b4577c5da6d25603eb5cc80b8268"
+    },
+    {
+      "path": "tools/ai-sigma-manygame-generation/fake-provider.cjs",
+      "bytes": 1887,
+      "sha256": "34664540d92ee5f09f7c31dd7c98495d115f085c2a9e58e5cd76e4a54e5f6a90"
+    },
+    {
+      "path": "tools/ai-sigma-manygame-generation/gamepool.cjs",
+      "bytes": 529,
+      "sha256": "f49456ea923b737c591999998c9aa6eddf8d67cf20d962a4989ca1b884f1e365"
+    },
+    {
+      "path": "tools/ai-sigma-manygame-generation/generate-run.cjs",
+      "bytes": 10896,
+      "sha256": "22ccc34d73ace476a63b95f0d5f16122f064d411107f1e722f27b0557e9505d9"
+    },
+    {
+      "path": "tools/ai-sigma-manygame-generation/generate.cjs",
+      "bytes": 5223,
+      "sha256": "488e924612cc3adf876481f85dbea107e1da99e940df21a5410570baa0941cfc"
+    },
+    {
+      "path": "tools/ai-sigma-manygame-generation/identity.cjs",
+      "bytes": 277,
+      "sha256": "4bceae8e567ccfb9106f9e0059649fe9ac4b705abad53deea0224cba20bc2c91"
+    },
+    {
+      "path": "tools/ai-sigma-manygame-generation/mock-registry.cjs",
+      "bytes": 1563,
+      "sha256": "47ef7de6ed45299748f28452677988ad82be0c741e8292a7c11d959f9dc3a3e7"
+    },
+    {
+      "path": "tools/ai-sigma-manygame-generation/mock-worker.cjs",
+      "bytes": 1266,
+      "sha256": "7e78cc1216909e3420b7bb8a76c9c94d4311f9f022fd26aafc38314d5a014994"
+    },
+    {
+      "path": "tools/ai-sigma-manygame-generation/mock.cjs",
+      "bytes": 8138,
+      "sha256": "3ccbb4a573cefa3535cc727c3fccedc85724b9a678de666446143b8689f96301"
+    },
+    {
+      "path": "tools/ai-sigma-manygame-generation/parity.cjs",
+      "bytes": 2168,
+      "sha256": "ce2a5af825eae327ddb511a4bc96b765701d6222dfe5d7c99b119c218ac13fbe"
+    },
+    {
+      "path": "tools/ai-sigma-manygame-generation/pipe.cjs",
+      "bytes": 275,
+      "sha256": "9d14e32f6c182df067d00b4044f611a99d40afee09e139f91375aade0f41f770"
+    },
+    {
+      "path": "tools/ai-sigma-manygame-generation/probe.cjs",
+      "bytes": 1293,
+      "sha256": "1b36778114c8280b69b64c63d0fbbda51d9dc96e69a04adbfd79eb9a1de3b3d0"
+    },
+    {
+      "path": "tools/ai-sigma-manygame-generation/schema.cjs",
+      "bytes": 283,
+      "sha256": "a87157d105940fc8486989b4335f7379b2047693a9051c87478aecf50d06daec"
+    },
+    {
+      "path": "tools/ai-sigma-manygame-generation/teacher-interface.cjs",
+      "bytes": 322,
+      "sha256": "ae4395f5efab74815b805f9eb5543362d4f94ffbe2716999359e0b45406f2e17"
+    },
+    {
+      "path": "tools/ai-sigma-manygame-generation/test-protocol.cjs",
+      "bytes": 16869,
+      "sha256": "07f9d90840006375c2af04154820c010349aa15d1a722e9f482e81c387dbe34e"
+    },
+    {
+      "path": "tools/ai-sigma-manygame-generation/worker.cjs",
+      "bytes": 13900,
+      "sha256": "cfd8a928d24ee4219da3578fd2e5ce6c944ec6d8b74d23d0d3b074a78d1a43a2"
+    },
+    {
+      "path": "tools/ai-sigma-native/README.md",
+      "bytes": 2249,
+      "sha256": "6d3f979b0ade2115366b6c3685c30b67cc12867aa83486a04a6d5b5815d1d908"
+    },
+    {
+      "path": "tools/ai-sigma-native/arena/clock-fixture.cjs",
+      "bytes": 1717,
+      "sha256": "aa81b04617a732fad3275d2c210cad428d75b03868d085b934a4f071db79e7c9"
+    },
+    {
+      "path": "tools/ai-sigma-native/arena/config.cjs",
+      "bytes": 5183,
+      "sha256": "88f48f6b88b5c00674c88cd5efe020b812db6472932f84e6284d22fea302be44"
+    },
+    {
+      "path": "tools/ai-sigma-native/arena/fake-worker.cjs",
+      "bytes": 998,
+      "sha256": "1037e415f02b16fa07f1b7208ec5ff9c18436b869f5585553676f1ebfd720317"
+    },
+    {
+      "path": "tools/ai-sigma-native/arena/protocol.cjs",
+      "bytes": 14753,
+      "sha256": "b54427a6cf83fa01587cd9ecac1504174b23c94feb82c33b946ed630966e1a73"
+    },
+    {
+      "path": "tools/ai-sigma-native/arena/run.cjs",
+      "bytes": 11148,
+      "sha256": "e57778e128cb2a2796fb79d03a2c55e84d494417d6342c0966d5efd8ebe801a6"
+    },
+    {
+      "path": "tools/ai-sigma-native/arena/schema.cjs",
+      "bytes": 308,
+      "sha256": "4e63272d14f42e1f8d521bdfc9ce72b5f12f6e9ff02cc4e11a03123a2ab180d7"
+    },
+    {
+      "path": "tools/ai-sigma-native/arena/worker.cjs",
+      "bytes": 1830,
+      "sha256": "165851ec14f32e0a35accfd693d20b0b55478ebf2ac93a40b08c758ef1dfac51"
+    },
+    {
+      "path": "tools/ai-sigma-native/bridge/Cargo.lock",
+      "bytes": 2824,
+      "sha256": "d0568a38ed13c537c3ab96abe3a0585e82258da1a3a5e64ee4ab18df07211b24"
+    },
+    {
+      "path": "tools/ai-sigma-native/bridge/Cargo.toml",
+      "bytes": 626,
+      "sha256": "50040ffc7f9a0e45c3e8008e1b3b3de72134512f16546bffe5567f98773fb630"
+    },
+    {
+      "path": "tools/ai-sigma-native/bridge/README.md",
+      "bytes": 3837,
+      "sha256": "ca67ccccc21e8ae5777603afc0814628da50a87606338d3a1c685136398a9f25"
+    },
+    {
+      "path": "tools/ai-sigma-native/bridge/build.sh",
+      "bytes": 336,
+      "sha256": "002580af180afba946c24a4507248bd8d5c9818b1e26d133309a6491f72b58e5"
+    },
+    {
+      "path": "tools/ai-sigma-native/bridge/provenance.json",
+      "bytes": 1071,
+      "sha256": "0e34c0421e671475568a80eb36d163b2a94d55b822428dafc150a6a1ec0642b2"
+    },
+    {
+      "path": "tools/ai-sigma-native/bridge/src/context.rs",
+      "bytes": 3347,
+      "sha256": "1d9ce7931ac400daff9e9db31027b7bc907d1dfacda5228e4f98c97903c560cc"
+    },
+    {
+      "path": "tools/ai-sigma-native/bridge/src/lib.rs",
+      "bytes": 15941,
+      "sha256": "cf4ff7547285b4fdde298c6a0c4eccfa2432b0c8a09df41fecfe29c430859c95"
+    },
+    {
+      "path": "tools/ai-sigma-native/bridge/src/main.rs",
+      "bytes": 542,
+      "sha256": "9374561e1486c6dc88e8e7a4d7f5e79b16f2617629343029b1c42de0f2499239"
+    },
+    {
+      "path": "tools/ai-sigma-native/bridge/tests/line-protocol.cjs",
+      "bytes": 1875,
+      "sha256": "8f34fc3169b234b9668f7eafabdd5062f3e928fdb8f6d57315a17d9650f3bb62"
+    },
+    {
+      "path": "tools/ai-sigma-native/bridge/tests/protocol.rs",
+      "bytes": 5886,
+      "sha256": "7d76d42e46b9f0e7cc38f61f97e8f68ed60af5130828dfe21c3d0529ac11f2e3"
+    },
+    {
+      "path": "tools/ai-sigma-native/bridge/verification.json",
+      "bytes": 2637,
+      "sha256": "254673c47ea0cbb835312cf57e9725faed9d82a520f1d58c3b881eb5a38146b0"
+    },
+    {
+      "path": "tools/ai-sigma-native/control.cjs",
+      "bytes": 187,
+      "sha256": "1d8276e75ea7e16a4e435125f9370b1137b8492bacf2efaf57be3108f911ad25"
+    },
+    {
+      "path": "tools/ai-sigma-native/controller.cjs",
+      "bytes": 5485,
+      "sha256": "e79db017623e933e52745c3c766e0fd15ae8ceaac7c423ec07fdec752e67a390"
+    },
+    {
+      "path": "tools/ai-sigma-native/features.cjs",
+      "bytes": 2830,
+      "sha256": "934160176d2a2bba156aa7e2e8432ad28615b544ee6603f5d0a3a13b98456985"
+    },
+    {
+      "path": "tools/ai-sigma-native/inference/ort.py",
+      "bytes": 2729,
+      "sha256": "1e8afdeeaec55cd2fa1bf1d427a66e784831272492e2461a9d44421b830d39b9"
+    },
+    {
+      "path": "tools/ai-sigma-native/leaf.cjs",
+      "bytes": 1256,
+      "sha256": "4866c46e0fdc372e476aa24d4e42479f62bc343b7da2ccd1cf0297dd65ac8ff7"
+    },
+    {
+      "path": "tools/ai-sigma-native/mcts-worker.cjs",
+      "bytes": 14304,
+      "sha256": "7a89412d69ae85fe608e37e362f1cdf002ff68f6d70398d737ca831af0076d0b"
+    },
+    {
+      "path": "tools/ai-sigma-native/mcts/core.js",
+      "bytes": 5626,
+      "sha256": "a6edfac28f02a687ad6737103778912e0a2d19542db8b5c505f6bbbf7937ba6b"
+    },
+    {
+      "path": "tools/ai-sigma-native/mcts/trace.js",
+      "bytes": 2728,
+      "sha256": "f2a43599849308b0042bae811117c21a0499db70fe3dd93de5a1d3ee79656815"
+    },
+    {
+      "path": "tools/ai-sigma-native/nnue.cjs",
+      "bytes": 2830,
+      "sha256": "6aa35555790a79c35b2a15ac80e6111db870405aabf0581f2cfe869840f2f8f8"
+    },
+    {
+      "path": "tools/ai-sigma-native/process.cjs",
+      "bytes": 3340,
+      "sha256": "3f90a47bd68f7f7e4e1f3cf1a6e32ee32b806defefe21772f2a5d55c1001648d"
+    },
+    {
+      "path": "tools/ai-sigma-native/provenance.json",
+      "bytes": 3259,
+      "sha256": "b6c50e3485ff83a68f8194c58026c4c6f6fc686afc1605882e3bd1da217c9082"
+    },
+    {
+      "path": "tools/ai-sigma-native/reference.cjs",
+      "bytes": 1625,
+      "sha256": "897f52efbd61993fe789f4bf6773d40dae6fc76f396caa180ae1fa7d05d4ba49"
+    },
+    {
+      "path": "tools/ai-sigma-native/rules.cjs",
+      "bytes": 663,
+      "sha256": "162846e0d9bdfefa8cf268861a884bb037943a0ccaeb6b89a109f9801b60cb72"
+    },
+    {
+      "path": "tools/ai-sigma-native/rules/context.js",
+      "bytes": 2728,
+      "sha256": "90e16881452494772ec8f80ddf099a427c57f34f3fd847b41caa6f3901dcfe7f"
+    },
+    {
+      "path": "tools/ai-sigma-native/rules/game.js",
+      "bytes": 27800,
+      "sha256": "da1f413d8dfcde95fb8fdc2147723c13dc11d8e22d8a50682ab50e1477369701"
+    },
+    {
+      "path": "tools/ai-sigma-native/search.cjs",
+      "bytes": 8328,
+      "sha256": "e778b34d3cc0e6147c51beb157e8ac2ecd6cc61a9399ad8fe1c0b287c0ba51ef"
+    },
+    {
+      "path": "tools/ai-sigma-native/tests/arena.test.cjs",
+      "bytes": 6640,
+      "sha256": "1377ab563a99b03179547d548f53189e6feb0160b2d22b549f97818f408c11e2"
+    },
+    {
+      "path": "tools/ai-sigma-native/tests/contracts.test.cjs",
+      "bytes": 7737,
+      "sha256": "9ac30e9b3a005de30cc8d0bae3fa4f7a2281be954a4871b7846fbe55748a5a18"
+    },
+    {
+      "path": "tools/ai-sigma-native/tests/controller.test.cjs",
+      "bytes": 6658,
+      "sha256": "41e6f1f29f83c945098ac3b9addc98025777f6cade94cb24c8f206be564d5c4d"
+    },
+    {
+      "path": "tools/ai-sigma-native/tests/fake-controller.cjs",
+      "bytes": 3209,
+      "sha256": "62730c702e0fe24da364374fe9344f3aed05809ec85c43b0da21d45c6b177740"
+    },
+    {
+      "path": "tools/ai-sigma-native/tests/fake-transport.cjs",
+      "bytes": 2639,
+      "sha256": "49c15e197fa320ae405cd705b6aa862b729cfb18f636728ea1624126e7aab752"
+    },
+    {
+      "path": "tools/ai-sigma-native/tests/transport.test.cjs",
+      "bytes": 7097,
+      "sha256": "f5e9a778ac109945eb8a9a594af85b0cb962f24af459d36ac07e95203bf38f2a"
+    },
+    {
+      "path": "tools/ai-sigma-native/weights.cjs",
+      "bytes": 1947,
+      "sha256": "17e6a83a8bd3d3caeef69d213f4e1c8e28e07d8253dfdbfa6f483562906d9398"
+    },
+    {
+      "path": "tools/nnue-training/README.md",
+      "bytes": 2656,
+      "sha256": "08374d40f9357760165cf83b7379f884a4a8d703b6efbdb5772732f407ca4449"
+    },
+    {
+      "path": "tools/nnue-training/common.py",
+      "bytes": 6476,
+      "sha256": "095efc07fa2098dfcf72f50a0eb80f58a0f2f727579f32a205c1849c4facf38d"
+    },
+    {
+      "path": "tools/nnue-training/dataset.py",
+      "bytes": 6052,
+      "sha256": "45bf0b5ac1b7d306edc74e1ab53dd09a275af2ad6010fb6a296866bdb3485212"
+    },
+    {
+      "path": "tools/nnue-training/export_generated.cjs",
+      "bytes": 3792,
+      "sha256": "b5fe7fc732fbee0ba2587acf4bcf5b3bb5bc27d5511e67dae311e474700b4bde"
+    },
+    {
+      "path": "tools/nnue-training/exposure.py",
+      "bytes": 2668,
+      "sha256": "ecd2fc41622d16d20c3a5de34a96d0da3f67e17332e2888d65e8c787b30f67ed"
+    },
+    {
+      "path": "tools/nnue-training/frame14_data.py",
+      "bytes": 789,
+      "sha256": "ff0e5cf3410ccc076b4d303bf60fbdbfc0309b2f3e10c58e2ba24bcead2962af"
+    },
+    {
+      "path": "tools/nnue-training/learner.py",
+      "bytes": 17158,
+      "sha256": "968e2a443132f2ea952d38c99881af2b80496c57c8f8403f235316c006e4b4aa"
+    },
+    {
+      "path": "tools/nnue-training/metadata.py",
+      "bytes": 1549,
+      "sha256": "4f45fd268511986cf8a9c35bb368ef872f1611dbff1653f70195930b5e26c6f5"
+    },
+    {
+      "path": "tools/nnue-training/model.py",
+      "bytes": 1407,
+      "sha256": "1c13b2c5947bcd632ff7fbfe488b4b14e955223e35aa788e7755fa77f65d2e5d"
+    },
+    {
+      "path": "tools/nnue-training/qf1.py",
+      "bytes": 2455,
+      "sha256": "4eee0e0abf3a6410505c79a69d606090bc5bb1b3e0912bf7629a11b040b5a07a"
+    },
+    {
+      "path": "tools/nnue-training/run.sh",
+      "bytes": 316,
+      "sha256": "48f877c5f98947acadb94604c7bec0b55c508101f935fcf918955b4aed5f0412"
+    },
+    {
+      "path": "tools/nnue-training/scaled_model.py",
+      "bytes": 3112,
+      "sha256": "e590c89e7e4c195da4ea771ee4cd0d4835c910390f49d24b651c89a06b24a5f0"
+    },
+    {
+      "path": "tools/nnue-training/test_input_contract.py",
+      "bytes": 8566,
+      "sha256": "5c17af7c28e6bc82dcf44d4a7168bd9cbed90624fd787b7298d9d40aad214c08"
+    },
+    {
+      "path": "tools/nnue-training/test_learner_entry.py",
+      "bytes": 5397,
+      "sha256": "90fc10b37b6645b6192bd0fd1ad9e53e2c74524fd1a38cd99945bbee164737bb"
+    },
+    {
+      "path": "tools/research-quality/.prettierrc.json",
+      "bytes": 60,
+      "sha256": "feb5fe3d45cd4754e9503e02f5a7bfff5b8b8a55370c1479c20a02a9aea06e1e"
+    },
+    {
+      "path": "tools/research-quality/package-lock.json",
+      "bytes": 785,
+      "sha256": "8b6d9f5fce154308a1490c09d8f30adf40821d4bdc533416d02b1e555d31f472"
+    },
+    {
+      "path": "tools/research-quality/package.json",
+      "bytes": 176,
+      "sha256": "ee8d2d2ed7623d514cb31e5305722b6f5d1f2503525f2125a55970bfe61b3828"
+    },
+    {
+      "path": "tools/research-quality/python-requirements.txt",
+      "bytes": 96,
+      "sha256": "220b391d1d21a2711e5c4867cea59ef7e10e023ec383064de4883b3e544e482b"
+    },
+    {
+      "path": "tools/research-quality/ruff.toml",
+      "bytes": 71,
+      "sha256": "134db01059d75ad35e62f62f9934708cd7e133f335a70fbff904c52696bf2a28"
+    },
+    {
+      "path": "tools/research-quality/test_export.mjs",
+      "bytes": 2406,
+      "sha256": "fb2935dda92538cccb6bf15ef90cb396c6da97013ff6f7257d0509638b0ca098"
+    },
+    {
+      "path": "tools/research-quality/test_maintenance.py",
+      "bytes": 12598,
+      "sha256": "51dd56679a3305f4941be5b6b20531f1d364cc30e604d87df542f7c5dbf17f53"
+    },
+    {
+      "path": "tools/research-team/test_client.py",
+      "bytes": 12128,
+      "sha256": "596c14ae607be9c58b6b5d0bcea78c896d4b5d71dce1e3415cc4443c04d102ee"
+    }
+  ],
+  "logical_selected_bytes": 612145,
+  "unique_new_maintenance_roots_allocated_bytes": 71495680,
+  "new_storage_forecast_ceiling_bytes": 536870912,
+  "scope_note": "New code/quality deps/owned tests/build only; not a discount of historical/shared retention or physical-space estimate",
+  "history_error_owner": "Root263; no continued investigation",
+  "known_limitations": [
+    "official resume accepted but 4 legacy historical cwd readbacks unchanged; next authorized client idle turn explicitly binds main cwd and requires effect check",
+    "storage admission remains unknown; old/shared retained bytes not reduced",
+    "scientific model parity/performance/game/training not run"
+  ],
+  "report": "docs/reports/ai-research-refactoring262.md",
+  "normal_index_admission": {
+    "head": "f1479032047a1b33e77218a2ab2908ff62f2eb37",
+    "index": "normal; unstaged",
+    "logical_file_bytes": 634989,
+    "git_forecast_upper_bytes": 1777882
+  },
+  "diff_check": "PASS",
+  "normal_index_check_command": "python3 scripts/dev/research-save.py check --paths-file research-data/ai-sigma/262-maintainability/changed-paths.json",
+  "runtime_observation": {
+    "phase": "stopped",
+    "process": null,
+    "owned_turn": null,
+    "recovery_required": false,
+    "state_sha256": "12ff5dc7132cb6a9e6e8ab6041b1d8753a1e9be7637e6ef29dc75677b8d741b2",
+    "operation": "readonly; expired binding left untouched"
+  },
+  "short_child_observation": {
+    "at": "2026-10-05T05:17:33.935923+00:00",
+    "known_fixture_or_bridge_processes": [],
+    "unknown_or_other_owner_signals": 0
+  },
+  "new_save_upper_including_Git_bytes": 73273562,
+  "latest_handoff_at": "2026-10-05T05:17:33.935957+00:00"
+}

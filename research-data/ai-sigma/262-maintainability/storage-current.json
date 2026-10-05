@@ -1,0 +1,150 @@
+{
+  "schema": "quoridor-current-storage-v1",
+  "at": "2026-10-05T04:32:53.482697+00:00",
+  "metric": "unique dev/inode st_blocks; reflink shared physical extents unknown",
+  "roots": [
+    {
+      "name": "main research code",
+      "category": "code",
+      "path": "/workspaces/quoridor/tools",
+      "exclude": [
+        "node_modules",
+        ".venv",
+        "__pycache__",
+        "target"
+      ],
+      "logical_file_bytes": 10880066,
+      "allocated_inode_bytes": 14426112,
+      "overlap_allocated_bytes": 0,
+      "files": 1911,
+      "symlinks": 0,
+      "missing": false
+    },
+    {
+      "name": "main preserved research data",
+      "category": "data",
+      "path": "/workspaces/quoridor/research-data/ai-sigma",
+      "logical_file_bytes": 508871734,
+      "allocated_inode_bytes": 519405568,
+      "overlap_allocated_bytes": 0,
+      "files": 6226,
+      "symlinks": 0,
+      "missing": false
+    },
+    {
+      "name": "shared Git objects",
+      "category": "git",
+      "path": "/workspaces/quoridor/.git",
+      "logical_file_bytes": 446096335,
+      "allocated_inode_bytes": 470790144,
+      "overlap_allocated_bytes": 0,
+      "files": 14679,
+      "symlinks": 0,
+      "missing": false
+    },
+    {
+      "name": "retained legacy data/code",
+      "category": "legacy-assets",
+      "path": "/workspaces/quoridor/.worktree/ai-sigma",
+      "exclude": [
+        ".artifacts",
+        "node_modules",
+        "__pycache__",
+        "target",
+        ".venv"
+      ],
+      "logical_file_bytes": 834760932,
+      "allocated_inode_bytes": 861732864,
+      "overlap_allocated_bytes": 0,
+      "files": 9294,
+      "symlinks": 0,
+      "missing": false
+    },
+    {
+      "name": "retained legacy live/extraction",
+      "category": "legacy-live",
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma",
+      "logical_file_bytes": 1270722698,
+      "allocated_inode_bytes": 1338081280,
+      "overlap_allocated_bytes": 0,
+      "files": 23652,
+      "symlinks": 25,
+      "missing": false
+    },
+    {
+      "name": "training environment",
+      "category": "shared-dependencies",
+      "path": "/home/vscode/.cache/inference/envs/quoridor-training",
+      "logical_file_bytes": 5712060235,
+      "allocated_inode_bytes": 5773676544,
+      "overlap_allocated_bytes": 0,
+      "files": 21502,
+      "symlinks": 4,
+      "missing": false
+    },
+    {
+      "name": "team environment",
+      "category": "shared-dependencies",
+      "path": "/home/vscode/.cache/inference/envs/quoridor-research-team",
+      "logical_file_bytes": 1191786,
+      "allocated_inode_bytes": 1495040,
+      "overlap_allocated_bytes": 0,
+      "files": 104,
+      "symlinks": 4,
+      "missing": false
+    },
+    {
+      "name": "uv shared cache",
+      "category": "shared-cache",
+      "path": "/home/vscode/.cache/inference/uv",
+      "logical_file_bytes": 5737335329,
+      "allocated_inode_bytes": 5794734080,
+      "overlap_allocated_bytes": 954368,
+      "files": 20278,
+      "symlinks": 48,
+      "missing": false
+    },
+    {
+      "name": "new quality environment",
+      "category": "quality",
+      "path": "/workspaces/quoridor/tools/research-quality/.venv",
+      "logical_file_bytes": 36806455,
+      "allocated_inode_bytes": 36843520,
+      "overlap_allocated_bytes": 0,
+      "files": 25,
+      "symlinks": 4,
+      "missing": false
+    },
+    {
+      "name": "new quality npm dependency",
+      "category": "quality",
+      "path": "/workspaces/quoridor/tools/research-quality/node_modules",
+      "logical_file_bytes": 8458900,
+      "allocated_inode_bytes": 8544256,
+      "overlap_allocated_bytes": 0,
+      "files": 57,
+      "symlinks": 1,
+      "missing": false
+    }
+  ],
+  "category_current_allocated_bytes": {
+    "code": 14426112,
+    "data": 519405568,
+    "git": 470790144,
+    "legacy-assets": 861732864,
+    "legacy-live": 1338081280,
+    "shared-dependencies": 5775171584,
+    "shared-cache": 5794734080,
+    "quality": 45387776
+  },
+  "retained_allocated_inode_bytes": 14819729408,
+  "reservations": [],
+  "unknown_retained_bytes": null,
+  "current_plus_unused_known_bytes": 14819729408,
+  "cap_bytes": 12884901888,
+  "admission": "unknown",
+  "errors": [],
+  "past_peak_bytes": "not added to current; refer to original run receipts",
+  "unknown_is_free": false,
+  "deleted": false
+}

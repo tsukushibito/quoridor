@@ -1,0 +1,38 @@
+'use strict';
+
+const assert = require('assert');
+
+// Winner and value conventions match the existing teacher wire format.
+function target(row, winner) {
+  row.z_p1 = winner == null ? null : winner === 0 ? 0 : winner === 1 ? 1 : -1;
+  row.z_stm = row.z_p1 == null ? null : row.side === 1 ? row.z_p1 : -row.z_p1;
+  row.value_eligible = row.z_stm !== null;
+  return row;
+}
+
+function validate(row, K) {
+  assert(row.features648_bits.length === 648);
+  assert(row.NN137_bits.length === 137);
+  assert(row.rootN === K && row.edgeSum === K - 1);
+  assert(row.pi136.length === 136 && row.visits136.length === 136);
+  assert(row.legal_order209.length === row.mapping136.length);
+  const legal = new Set(row.mapping136.map((mapping) => mapping[1]));
+  assert(Math.abs(row.pi136.reduce((sum, value) => sum + value, 0) - 1) < 1e-12);
+  assert(
+    row.pi136.every(
+      (value, index) => Number.isFinite(value) && value >= 0 && (!value || legal.has(index)),
+    ),
+  );
+  assert(row.visits136.reduce((sum, count) => sum + count, 0) === K - 1);
+  assert(row.mapping136.some((mapping) => mapping[0] === row.action209));
+  assert(Number.isFinite(row.rootNN) && Number.isFinite(row.rootmean));
+  assert(row.NN_completed + row.terminal_noNN === K);
+  assert(row.lineage && ['train', 'validation', 'evaluation'].includes(row.split));
+  assert([null, -1, 0, 1].includes(row.z_p1) && [null, -1, 0, 1].includes(row.z_stm));
+  assert(
+    row.z_p1 === null ? row.z_stm === null : row.z_stm === (row.side === 1 ? row.z_p1 : -row.z_p1),
+  );
+  return true;
+}
+
+module.exports = { target, validate };

@@ -1,5 +1,5 @@
 'use strict';
-const {spawn}=require('child_process'),readline=require('readline'),{now}=require('./engine.cjs');
+const {spawn}=require('child_process'),readline=require('readline'),{now}=require('../ai-sigma-native/search.cjs');
 class Worker{
  constructor(manifest,script=__dirname+'/worker.cjs',extra=[]){this.queue=[];this.waiter=null;this.exit=null;this.stderr='';this.p=spawn('/home/vscode/.local/bin/node',[script,manifest,...extra],{stdio:['pipe','pipe','pipe']});this.p.stderr.on('data',b=>{this.stderr=(this.stderr+b).slice(-8192)});this.p.on('error',e=>this.push({type:'PROCESS_ERROR',reason:String(e)}));this.p.on('exit',(code,signal)=>{this.exit={code,signal};this.push({type:'EOF',...this.exit})});readline.createInterface({input:this.p.stdout}).on('line',line=>{try{this.push(JSON.parse(line))}catch(e){this.push({type:'SCHEMA_ERROR',reason:String(e)})}})}
  push(x){if(this.waiter){const f=this.waiter;this.waiter=null;f(x)}else this.queue.push(x)}
