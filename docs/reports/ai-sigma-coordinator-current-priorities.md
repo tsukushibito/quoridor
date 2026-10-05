@@ -1,6 +1,6 @@
 # 現在の研究選定 — frame22
 
-2026-10-05 11:36:03–15:36:03 UTC。新heavy入口15:26:03、監督正owned15:31:03、monitor15:34:03、必要保存15:36:03。課題候補は[改善課題集合](../design/ai-nnue-optimization-agenda.md)に集約し、担当・着手・依存はBeadsを正本とする。
+2026-10-05 11:36:03–23:36:03 UTC。Root283によるユーザー明示の連続8時間追加。新heavy入口23:26:03、監督正owned23:31:03、monitor23:34:03、必要保存23:36:03。旧個別runの期限・caps・結果・費を遡及変更しない。課題候補は[改善課題集合](../design/ai-nnue-optimization-agenda.md)に集約し、担当・着手・依存はBeadsを正本とする。
 
 目標は距離を超えるNNUE最高棋力。期待利益が現れない原因を、教師情報と分布、学習転移、特徴と尺度、探索接続、評価費と到達深度に分けて実測する。小不支持・未成立・不足量を方式全体の断念へ一般化しない。
 
@@ -68,3 +68,13 @@ Supervisor run f1a5552aの節目評価を受入れた。次診断12000NNは旧27
 14:30 279 source停止1139cd22から、統括が別ownerとしてmask/full81/cache supplierと保存96rawrow/48pairを独立確認、全Action/valuebits/PV/depth/node/TT/NN/親復帰一致とL比 .724421/.829737を再算した。六archive7/7/113/7/2/5memberをstream SHA/len確認して、generic Position maps/NNUE supplier/cacheと独立oracle/P2/geometry/undo/terminal jumpの正しさテストをmainへ採用する。比較用microcost/envmodel診断/旧AI+NNUElib hookはarchive-only、科学時bytesは不変更。主入口READMEも更新。main限定NN0検証4PASS/19.979994秒/peak252858368B/全waitexact、追加release16MiBは旧275128の保守112156672内で保持。production探索全費/他width/全教師MCTS/同wall棋力は未測、profile率を保証値にしない。
 
 Supervisor1a7c0825の現枠振返りを受領し採択。既自然点検と今回変化の再用で、教師1720行→1328train/392selection、lambda方向/幅の有限診断、別owner解析とcritic source修復→最適化、統括採否/監督留保の効果を確認した。D超え未見転移/最高棋力と全工程CPU/GPU/LLM費は未達/UNKNOWN。追加全役点検を増やさず、15:00十分性判断は282実結果/不足、279 main保存、92保守判断の不足だけをowner/次機会へ返す。通知を判断完了へ変換せず終了4時刻は固定。
+
+14:54 283追加8hを受領。Root3roleの改定は共通/変更3役を正本で確認し、重要代替の未見積もりを保留理由だけにしない責務を現配分へ適用。親/運用solewriter92はframe22-extension23の新正stateへrunningloaded14/14を確認、scheduler1430721/46503900・monitor1430738/46503929。旧frame22 stopped state/旧failuresは保持する。新追加GPU学習・取得・共有環境変更0、累積/UNKNOWN/旧予約reset0。
+
+282旧資格296NNは有限PASS、旧測定HARD_TIMEOUT180.516275秒/4complete条件、92UNKNOWN+12NOT_AVAILABLEでphase母集団は未成立。source-bound5708NNは元guard UNKNOWN保守98296と別で割引しない。全32root P1、late予定4欠測を保持。出力File無buffer/全record再書込をsourceで確認したため、同root/K/model/searchのoutput-only修復一回MAX3へ明示配分した。旧100kから追加50kを別課金し合計150k、元科学300秒維持/新hard90、旧4MiB+追加2MiBを273確認unusedから移転。science14:57/save15:05の個別期限を親延長で救済しない。現在operation選択を新runtimeへbindしてからowner freshadmit、不足なら修復NOT_STARTED。詳細282-serialization-repair-amendment.md。
+
+284 / hypothesisへ独立family入れ子の必要規模・全費とK/位置付き情報/leaf案の比較を実配送accepted。約5981→10000→30000train positionsは設計仮案で理論必要最低数でない。273観測35.8row/game・guardian.8643秒/gameを点推定とし、24–80row/game、実観測の1–3倍game秒を初期不確実区間に置けば、追加4k行は50–167新train family、追加24k行は300–1000 family、生成のみ概算0.7–7.2分/4.3–43.2分（資格・開局・保存・独立検証群・tail・学習別）。旧分布/新tau1/長さ差の仮定であり実保証0。この範囲でも追加8h内の候補として十分比較可能で、低費K診断だけへ配分を閉じない。
+
+暫定推奨は独立family登録/分割を先固定し、同条件K64の追加trainを完整familyで約1万へ先に到達させ、そのyield/全費で約3万へ同入れ子を更新する段階設計。段階2の条件は物理/取得費/品質/露出の成立で、段階1モデルの小candidate成功を必須gateにしない。固定旧valと新未選定family検証を区別し、同256kseenの量比較に加え量に対応した学習露出を別対照で検討する。代表性/十分量/棋力の証明にしない。284早報15:10を受けて生成・学習の具体条件/NN/保存上限を別Beadsへ配分、Root再承認待ち0。K修復は短窓、増量の静的設計は並行、重要観測の不足を小候補の成否へ従属させない。
+
+旧14:16/14:35 Supervisor振返りと92の14:27整理判断は旧節目の有限結果として再用。追加8hの終了点検は22:45–23:00頃に直近結果と不足だけを既ownerへ配送し、新4期限で実回収/保存を確認する。旧予定時刻に点検したことを新未来終了成功へ付替えない。
