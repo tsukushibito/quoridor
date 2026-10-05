@@ -1,0 +1,91 @@
+{
+  "at": "2026-10-05T19:13:46.484721+00:00",
+  "watch_source": {
+    "path": "scripts/dev/research-watch.py",
+    "sha256": "8bdf36f0905a3112e68b115a05d81015e4bc4de7ba0be43dfdd2c45d37f4f5ec"
+  },
+  "original_refs": [
+    {
+      "path": ".artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/d3edcbd1-0c27-45e4-978f-26a0f30b7ca7/finish.json",
+      "bytes": 14450,
+      "sha256": "5feae46316ed0d8f50ab13541d882949788b74cb5d7de307acd260c8070ad93c"
+    },
+    {
+      "path": ".artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/d3edcbd1-0c27-45e4-978f-26a0f30b7ca7/finish-interruption.json",
+      "bytes": 365,
+      "sha256": "eb20737102e15fa96fa7329ba9578477259d772de47db11d5e66583df65ec012"
+    },
+    {
+      "path": ".artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/d3edcbd1-0c27-45e4-978f-26a0f30b7ca7/backup-recovery.json",
+      "bytes": 433,
+      "sha256": "2567e885a5529f6959bd288ddf4e6e42325b42aa94903b47f47d1c046245234b"
+    }
+  ],
+  "original_finish_status": "unavailable",
+  "original_reason": "observer interrupted by signal 15",
+  "original_start_at": "2026-10-05T18:48:47.482966+00:00",
+  "successful_show_receipts": [
+    {
+      "completed_at": "2026-10-05T18:48:56.945088+00:00",
+      "command_head": [
+        "bash",
+        "/workspaces/quoridor/scripts/dev/beads.sh",
+        "show",
+        "quoridor-4lc",
+        "--json"
+      ],
+      "stdout_bytes": 363846,
+      "stdout_sha256": "313dbd31e96ef50516db5a8517e1d6a9116891bd373c24b31c13a13d7d897add",
+      "child_reaped": true
+    },
+    {
+      "completed_at": "2026-10-05T18:49:02.364765+00:00",
+      "command_head": [
+        "bash",
+        "/workspaces/quoridor/scripts/dev/beads.sh",
+        "show",
+        "quoridor-4lc.40",
+        "--json"
+      ],
+      "stdout_bytes": 525281,
+      "stdout_sha256": "65b85796ed6b2f344fb328c5ff526a0d87a59ade59b30288196e27765782fa46",
+      "child_reaped": true
+    },
+    {
+      "completed_at": "2026-10-05T18:49:07.751989+00:00",
+      "command_head": [
+        "bash",
+        "/workspaces/quoridor/scripts/dev/beads.sh",
+        "show",
+        "quoridor-4lc.40",
+        "--json"
+      ],
+      "stdout_bytes": 525281,
+      "stdout_sha256": "65b85796ed6b2f344fb328c5ff526a0d87a59ade59b30288196e27765782fa46",
+      "child_reaped": true
+    }
+  ],
+  "notes_append_in_original_finish": false,
+  "backup_in_original_finish": false,
+  "separate_backup_success": true,
+  "duplicate_self_read_stdout_identical": true,
+  "static_full_finish_bounds": {
+    "commands": 5,
+    "admit_invocations": 6,
+    "inputhash_read_invocations": 144,
+    "keeper_supervisor_inode_tree_walk_invocations": 12,
+    "per_command25_plus_recovery6_seconds_sum": 155,
+    "upper_bound_excludes_filesystem_RPC_scheduling_latency": true,
+    "fits_whole25_from_source_alone": false
+  },
+  "proposed_combined_authorization_bounds": {
+    "commands": 3,
+    "admit_invocations": 4,
+    "inputhash_read_invocations": 96,
+    "keeper_supervisor_inode_tree_walk_invocations": 8,
+    "per_command25_plus_recovery6_seconds_sum": 93,
+    "three_commands_still_do_not_prove_whole25": true
+  },
+  "exact_latency_split_between_guard_DB_read_and_serialization": "UNKNOWN; original receipts log completion points, not individual stage elapsed",
+  "science_forward_or_live_source_changes": false
+}

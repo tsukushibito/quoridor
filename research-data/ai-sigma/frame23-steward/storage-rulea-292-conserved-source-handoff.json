@@ -1,0 +1,68 @@
+{
+  "at": "2026-10-05T19:27:18.339514+00:00",
+  "issue": "quoridor-4lc.92",
+  "source_write_stopped": true,
+  "writer": "codex:01a0f31d-99ee-7d63-b162-bc1a59c457c6",
+  "paths": [
+    {
+      "path": "research-data/ai-sigma/frame23-steward/storage-rulea-292-pending.json",
+      "bytes": 1655,
+      "sha256": "878abb749e9cc7d8028cced5f87d0788b7da4f93d256500441e3f137ee83c99a"
+    },
+    {
+      "path": "research-data/ai-sigma/frame23-steward/storage-rulea-292-conserved-manifest.json",
+      "bytes": 7069,
+      "sha256": "29c484b19c70fa8b6c1403bb4750450b3ca7b6bd1cd497abbf45e9df59b9d8db"
+    },
+    {
+      "path": "research-data/ai-sigma/frame23-steward/storage-rulea-292-conserved-current.json",
+      "bytes": 27905,
+      "sha256": "dd02e166aad859f03cc6e4bf876d5c964b18836625d006eee22417c3afa467f2"
+    },
+    {
+      "path": "research-data/ai-sigma/frame23-steward/storage-rulea-292-conserved-admission.json",
+      "bytes": 4830,
+      "sha256": "6a52c440e468ca5b7338e3140835ef683f5ce9745ebd17fb81b67677ec83952d"
+    }
+  ],
+  "save_manifest_self": true,
+  "git_owner": "coordinator only normal index/commit",
+  "runtime_roles_registry_science_modified": false,
+  "old_observations_preserved": true,
+  "directed_measurement_errors": 0,
+  "children_finished_waited": true,
+  "long_scheduler_monitor_intentionally_running": true,
+  "no_NN_GPU_build_payload_or_deletion": true,
+  "deliveries": [
+    {
+      "role": "coordinator",
+      "thread": "01a0f31b-3409-75f2-a30e-453a50484f94",
+      "exact_turn": "01a10d02-f637-7012-8890-9b216a1f22ce",
+      "method": "turn/steer",
+      "accepted": {
+        "turnId": "01a10d02-f637-7012-8890-9b216a1f22ce"
+      }
+    },
+    {
+      "role": "experiment",
+      "thread": "01a0f31d-6d15-7620-bb63-4b4f878e4746",
+      "exact_turn": "01a10d87-9dee-71e0-a90c-d6bebd70b764",
+      "method": "turn/steer",
+      "accepted": {
+        "turnId": "01a10d87-9dee-71e0-a90c-d6bebd70b764"
+      }
+    },
+    {
+      "role": "critic",
+      "thread": "01a0f31d-8227-7e03-a7e6-915b4918c11b",
+      "exact_turn": "01a10d6c-8635-7cb1-b506-b6c01640dcca",
+      "method": "turn/steer",
+      "accepted": {
+        "turnId": "01a10d6c-8635-7cb1-b506-b6c01640dcca"
+      }
+    }
+  ],
+  "science_fresh_owner_physics_required": true,
+  "deadlines_unchanged": ["23:26:03", "23:31:03", "23:34:03", "23:36:03"],
+  "keeper_existing_forecast_bytes": 262144
+}

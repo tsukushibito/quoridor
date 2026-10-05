@@ -1,0 +1,159 @@
+{
+  "at": "2026-10-05T19:19:28.600233+00:00",
+  "goal": "quoridor-4lc",
+  "owner": "92",
+  "base_manifest": {
+    "path": "research-data/ai-sigma/frame23-steward/storage-public-z-v2-manifest.json",
+    "sha256": "e09e2c1529598196fa47d1b97a2f532dcf7408209c004ff685f1543bfc576364"
+  },
+  "conserved_public_split": {
+    "old640_bytes": 671088640,
+    "new_public576_bytes": 603979776,
+    "new29264_bytes": 67108864,
+    "additional_aggregate_bytes": 0
+  },
+  "changed_scope_reservations": [
+    {
+      "category": "frame23-future-learning-checkpoint-output-upper",
+      "reserved_bytes": 67108864,
+      "owner": "286",
+      "basis": "v4 actualsource reclassification into same64; old planned paths preserved",
+      "scope_paths": [
+        "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-independent-teacher-learning",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teacher-learning",
+        "/workspaces/quoridor/.worktree/assets/checkpoints/sigma-public-fix-z",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-learning",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning",
+        "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning"
+      ]
+    },
+    {
+      "category": "frame23-287-independent-evaluation-growth-upper",
+      "reserved_bytes": 4194304,
+      "owner": "287",
+      "basis": "sameold2874MiB includes293 new512KiB, no second review reservation; owner oldcurrent+newforecast accepted",
+      "scope_paths": [
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-evaluation",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-rootmean-saved-arithmetic"
+      ]
+    },
+    {
+      "category": "frame23-public-z-import-growth-upper",
+      "owner": "existing experiment, current allocation by Coordinator",
+      "reserved_bytes": 603979776,
+      "scope_paths": [
+        "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-import"
+      ],
+      "basis": "289 stopped donor confirmed actual+necessaryGit/temp fits576; 64MiB moves to292, original640 unchanged historically"
+    },
+    {
+      "category": "frame23-292-rulea-transfer-growth-upper",
+      "owner": "292",
+      "reserved_bytes": 67108864,
+      "scope_paths": [
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer",
+        "/workspaces/quoridor/.worktree/assets/inputs/frame23-rulea-z-transfer"
+      ],
+      "basis": "prospective from public640 to576, new64; owner new56MiB inclusive forecast/donor actual confirmed; no parent increase"
+    }
+  ],
+  "actual_source_category_reclassification": "v4 oldincludeddata actualsource nowexcludedancestor+same64 category once",
+  "roots_added_or_current_declared": [
+    {
+      "name": "public Sigma fixed-z input assets",
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z",
+      "category": "frame23-public-z-import-growth-upper"
+    },
+    {
+      "name": "public Sigma fixed-z importer source and data",
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-import",
+      "category": "frame23-public-z-import-growth-upper"
+    },
+    {
+      "name": "public Sigma fixed-z checkpoint assets",
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/sigma-public-fix-z",
+      "category": "frame23-future-learning-checkpoint-output-upper"
+    },
+    {
+      "name": "public Sigma fixed-z learning source and data",
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-learning",
+      "category": "frame23-future-learning-checkpoint-output-upper"
+    },
+    {
+      "name": "public Sigma fixed-z review source and data",
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-review",
+      "category": "frame23-public-z-review-growth-upper"
+    },
+    {
+      "name": "290 actualsource corrected",
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning",
+      "category": "frame23-future-learning-checkpoint-output-upper"
+    },
+    {
+      "name": "290 actualcheckpoint corrected",
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning",
+      "category": "frame23-future-learning-checkpoint-output-upper"
+    },
+    {
+      "name": "293 new arithmetic source/results",
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-rootmean-saved-arithmetic",
+      "category": "frame23-287-independent-evaluation-growth-upper"
+    },
+    {
+      "name": "292 RuleA transfer 0",
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer",
+      "category": "frame23-292-rulea-transfer-growth-upper"
+    },
+    {
+      "name": "292 RuleA transfer 1",
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/frame23-rulea-z-transfer",
+      "category": "frame23-292-rulea-transfer-growth-upper"
+    }
+  ],
+  "declared_missing_at_point": [
+    {
+      "name": "public Sigma fixed-z checkpoint assets",
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/sigma-public-fix-z",
+      "category": "frame23-future-learning-checkpoint-output-upper",
+      "observation": "declared not yet created; corresponding unchanged/conserved cap remains reserved"
+    },
+    {
+      "name": "public Sigma fixed-z learning source and data",
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-learning",
+      "category": "frame23-future-learning-checkpoint-output-upper",
+      "observation": "declared not yet created; corresponding unchanged/conserved cap remains reserved"
+    }
+  ],
+  "unknown_retained_bytes": 134217728,
+  "cap_bytes": 12884901888,
+  "old_receipts_modified": false,
+  "runtime_source_state_registry_modified": false,
+  "owner_forecast_references": [
+    {
+      "path": "research-data/ai-sigma/frame23-rulea-z-transfer/resource-transfer-and-forecast-v1.json",
+      "bytes": 1397,
+      "sha256": "f69739e503032a979f5605a83d16ca0d7aa49471de7e666d3dd3512de3fcce9a"
+    },
+    {
+      "path": "research-data/ai-sigma/frame23-sigma-public-z-import/donor-289-to-292-prospective-admission-v1.json",
+      "bytes": 1650,
+      "sha256": "dae9447629e24f73056c22dc257e83b1c864b1f511b64c8647b52e73761bc0d1"
+    },
+    {
+      "path": "research-data/ai-sigma/frame23-rootmean-saved-arithmetic/donor-transfer-acceptance-v1.json",
+      "bytes": 1608,
+      "sha256": "6fccf605d37589d55849f5e8b139fb67e98139e027a49dbdf24e9903ed50b689"
+    },
+    {
+      "path": "research-data/ai-sigma/frame23-sigma-public-z-review/budget-transfer-to293-v4.json",
+      "bytes": 968,
+      "sha256": "6a807c2b760197379aad58233043676452efa87a10944d5049917c61e728e98e"
+    },
+    {
+      "path": "research-data/ai-sigma/frame23-steward/storage-public-z-learning-source-path-v4.json",
+      "bytes": 6998,
+      "sha256": "60d223b7496683b31d88489e56315611bfc0eeba5b10a697fddd60b690c0b810"
+    }
+  ]
+}

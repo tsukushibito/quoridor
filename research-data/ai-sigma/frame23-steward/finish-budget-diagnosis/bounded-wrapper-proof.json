@@ -1,0 +1,37 @@
+{
+  "at": "2026-10-05T19:13:46.452402+00:00",
+  "command": [
+    "bash",
+    "scripts/dev/beads.sh",
+    "show",
+    "quoridor-4lc",
+    "quoridor-4lc.40",
+    "--json",
+    "--brief-deps"
+  ],
+  "exit": 0,
+  "wall_seconds": 1.5707423759740777,
+  "child_waited": true,
+  "stdout_bytes": 526824,
+  "stdout_sha256": "0945a785dd1c6634052f40f47293904397cf1984e587adaf2458ad4c56c228e8",
+  "stderr_bytes": 0,
+  "selected_ownership_fields": [
+    {
+      "id": "quoridor-4lc",
+      "status": "in_progress",
+      "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+      "labels": ["continuation-active", "current-priorities", "frame22", "frame23"],
+      "updated_at": "2026-10-05T19:09:49Z"
+    },
+    {
+      "id": "quoridor-4lc.40",
+      "status": "in_progress",
+      "assignee": "codex:01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+      "labels": ["initial-window-ended"],
+      "updated_at": "2026-10-05T19:09:12Z"
+    }
+  ],
+  "dependencies_identity_only": true,
+  "raw_stdout_saved": false,
+  "notes_descriptions_scientific_targets_copied": false
+}
