@@ -1,0 +1,71 @@
+{
+  "task": "native-z-fresh-evaluation-299-block00-export-v1",
+  "argv": [
+    "/usr/bin/python3",
+    "-B",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/export.py",
+    "--config",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/block00-export-config-v1.json"
+  ],
+  "exit": 0,
+  "reason": null,
+  "waited": true,
+  "identity": {
+    "pid": 1946329,
+    "start_ticks": "48899558",
+    "ppid": 1946280,
+    "pgrp": 1946329,
+    "cpu_ticks": 0,
+    "state": "R",
+    "rss": 4096,
+    "cpus": [
+      2
+    ],
+    "argv": []
+  },
+  "recorded_children": [
+    {
+      "pid": 1946329,
+      "start_ticks": "48899558",
+      "ppid": 1946280,
+      "pgrp": 1946329,
+      "cpu_ticks": 29,
+      "state": "D",
+      "rss": 19599360,
+      "cpus": [
+        2
+      ],
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/export.py",
+        "--config",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/block00-export-config-v1.json"
+      ]
+    },
+    {
+      "pid": 1946331,
+      "start_ticks": "48899587",
+      "ppid": 1946329,
+      "pgrp": 1946329,
+      "cpu_ticks": 10,
+      "state": "R",
+      "rss": 4276224,
+      "cpus": [
+        2
+      ],
+      "argv": [
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teachers/read-metadata-v1",
+        "/workspaces/quoridor/.worktree/assets/inputs/frame23-native-z-fresh-evaluation/block00-native-r1/dataset",
+        "/workspaces/quoridor/.worktree/assets/inputs/frame23-native-z-fresh-evaluation/block00-private.tmp.jsonl"
+      ]
+    }
+  ],
+  "current_exact_remaining": [],
+  "peak_RSS": 22597632,
+  "GPU_peak_sampled_bytes": 0,
+  "GPU_sample_count": 0,
+  "command_wall_s": 1.6602401660056785,
+  "management_inclusive_wall_s": 3.996820313972421,
+  "NN": 0
+}

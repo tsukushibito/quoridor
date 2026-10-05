@@ -1,0 +1,72 @@
+{
+  "task": "native-z-fresh-evaluation-299-block00-generation-v1",
+  "argv": [
+    "/usr/bin/python3",
+    "-B",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teachers/generate-block-v2.py",
+    "--config",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/block00-pipeline-v1.json"
+  ],
+  "exit": 0,
+  "reason": null,
+  "waited": true,
+  "identity": {
+    "pid": 1942767,
+    "start_ticks": "48883252",
+    "ppid": 1942591,
+    "pgrp": 1942767,
+    "cpu_ticks": 0,
+    "state": "R",
+    "rss": 8192,
+    "cpus": [
+      2
+    ],
+    "argv": []
+  },
+  "recorded_children": [
+    {
+      "pid": 1942767,
+      "start_ticks": "48883252",
+      "ppid": 1942591,
+      "pgrp": 1942767,
+      "cpu_ticks": 3,
+      "state": "S",
+      "rss": 17248256,
+      "cpus": [
+        2
+      ],
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teachers/generate-block-v2.py",
+        "--config",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/block00-pipeline-v1.json"
+      ]
+    },
+    {
+      "pid": 1942770,
+      "start_ticks": "48883265",
+      "ppid": 1942767,
+      "pgrp": 1942767,
+      "cpu_ticks": 1390,
+      "state": "R",
+      "rss": 512536576,
+      "cpus": [
+        4
+      ],
+      "argv": [
+        "/workspaces/quoridor/.artifacts/rust-migration/target/release/quoridor-runner",
+        "selfplay",
+        "--config",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/block00-native-v1.json"
+      ]
+    }
+  ],
+  "current_exact_remaining": [],
+  "peak_RSS": 529784832,
+  "GPU_peak_sampled_bytes": 1688207360,
+  "GPU_sample_count": 15,
+  "command_wall_s": 18.95338542899117,
+  "management_inclusive_wall_s": 24.03851174400188,
+  "NN": "scientific counters; missing counter UNKNOWN"
+}

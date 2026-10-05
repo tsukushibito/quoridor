@@ -1,0 +1,33 @@
+{
+  "task": "native-z-fresh-evaluation-299-v1",
+  "schema": "native-z-fresh-evaluation-preregister-v1",
+  "namespace": "frame23-native-z-fresh-evaluation-299-v1",
+  "planned": 96,
+  "cohort_pairs": [
+    [8, 9],
+    [12, 13],
+    [16, 17],
+    [20, 21],
+    [24, 25],
+    [28, 29]
+  ],
+  "cohorts": [8, 9, 12, 13, 16, 17, 20, 21, 24, 25, 28, 29],
+  "per_length": 8,
+  "prefix_seed": 593842414629539151,
+  "block_seeds": [9147605881960221814, 1563610912378147030],
+  "run_ids": ["frame23-299-rulea48-block00-r1", "frame23-299-rulea48-block01-r1"],
+  "science_stop": "2026-10-05T22:55:00+00:00",
+  "registration_order": "ordinal then opening-length pair/side; first4 ordinal per block, sixpair x2side x4 each block",
+  "sibling_rule": "canonical exact and LR/180color prefix lineage keys excluded vs all old registered and current; input-state overlaps remain independent mask obligation",
+  "labels_outcomes_model_predictions_used": false,
+  "K": 64,
+  "temperature": 1.0,
+  "active_games": 48,
+  "batch": 8,
+  "worker": 2,
+  "infer": 4,
+  "maxplies": 200,
+  "MAX2": true,
+  "future_labels": "sealed until exact candidate/settings/selectionstop/exposuremask/independentrule freeze",
+  "no_refill_no_label_reselection": true
+}

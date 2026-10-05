@@ -1,0 +1,22 @@
+{
+  "issue": "quoridor-4lc.299",
+  "goal_issue": "quoridor-4lc",
+  "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+  "role": "experiment",
+  "cwd": "/workspaces/quoridor/.worktree/frame22-teacher",
+  "argv": [
+    "/usr/bin/python3",
+    "-B",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/control.py",
+    "--config",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/block00-guardian-v1.json"
+  ],
+  "end_at": "2026-10-05T22:55:00Z",
+  "notify_until": "2026-10-05T23:15:00Z",
+  "max_runtime_seconds": 330,
+  "control_interval_seconds": 30,
+  "notify_interval_seconds": 10,
+  "request_timeout_seconds": 25,
+  "log_max_bytes": 65536,
+  "resource_contract": "/workspaces/quoridor/research-data/ai-sigma/frame22-coordinator/native-z-fresh-evaluation-contract.md"
+}

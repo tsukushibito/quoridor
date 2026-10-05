@@ -1,0 +1,50 @@
+{
+  "schema": "native-z-fresh-evaluation-targetblind-outcome-enum-fixture-v1",
+  "NN": 0,
+  "synthetic_only": true,
+  "model_labels_read": 0,
+  "actual_raw_schema": "native-z-fresh-evaluation-sealed-games-v1/games[*].outcome",
+  "canonical_sidecar_schema": "native-z-fresh-evaluation-canonical-terminated-games-v1",
+  "source_SHA": "83d37bdbd0e631751aa24faddbcd999121b367f26ce6c16b94bd8589e2a78583",
+  "fixtures": [
+    {
+      "synthetic_status": "goal",
+      "source_reason": null,
+      "canonical_reason": "GOAL",
+      "eligible": true
+    },
+    {
+      "synthetic_status": "goal",
+      "source_reason": null,
+      "canonical_reason": "GOAL",
+      "eligible": true
+    },
+    {
+      "synthetic_status": "draw",
+      "source_reason": null,
+      "canonical_reason": "RULEA_200_PLY_DRAW",
+      "eligible": true
+    },
+    {
+      "synthetic_status": "draw",
+      "source_reason": null,
+      "canonical_reason": "RULEA_NO_HISTORY_LEGAL_DRAW",
+      "eligible": true
+    },
+    {
+      "synthetic_status": "unknown",
+      "source_reason": "ply_cap_before_terminal",
+      "canonical_reason": "UNKNOWN:ply_cap_before_terminal",
+      "eligible": false
+    },
+    {
+      "synthetic_status": "unknown",
+      "source_reason": "cancelled",
+      "canonical_reason": "UNKNOWN:cancelled",
+      "eligible": false
+    }
+  ],
+  "rejected_unknown_casing_cap_as_draw_missing_winner_boolean_winner_missing_reason": true,
+  "command_wall_s": 0.002392889990005642,
+  "actual_canonical_sidecar": "will emit only after generation/source naturalstop; originalnested provenance unchanged/SEALED"
+}

@@ -1,0 +1,161 @@
+{
+  "task": "native-z-fresh-evaluation-299-v1",
+  "schema": "native-z-fresh-evaluation-scientific-source-stop-v1",
+  "UTC": "2026-10-05T21:44:11.841226+00:00",
+  "actual_last_model_stop": "2026-10-05T21:37:35.296432+00:00",
+  "science_MAX2_consumed": 2,
+  "planned": 96,
+  "GOAL": 96,
+  "rows": 3280,
+  "physical_NN": 170255,
+  "shape_warm_NN": 72,
+  "science_command_s": 41.71562933101086,
+  "native_wholejobs_s": 36.271878156999996,
+  "known_source_prep_fixture_export_s": 11.629016901921263,
+  "known_management_nonoverlap_outerguard_bg_s": 17.175536494061816,
+  "other_read_format_report_Beads_LLM_control": "UNKNOWN not0; nestedspans notadded",
+  "source_cap_s": 100,
+  "management_cap_s": 30,
+  "sourcewriter_all5_newPython_stopped": true,
+  "source_hashes": {
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/prepare.py": "d227efa78f0d4fed800edf0155c85da918aef8b3101e520f2c4cd7819f41b5c6",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/export.py": "b10f71ef1cf5559560a99c650983d882402957836cf62621032b7a64ba98b1d6",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/control.py": "5533a658ec02ed4e79786f73824040af4779e02221b3ef4dcd9506edee843a14",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/canonical_games.py": "7881f62a7a8f8ca1561d668fa1bac20b45841a48591241f7a47b8a50d8b36f42",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/schema-fixture-v1/fixture-native.py": "978a0d5986c324b655057cc71bba722076a7ad4c4fc511f94218a0b9318a8612"
+  },
+  "recorded5_processwait_currentexactabsence": [
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/prepare-r1/process.json",
+      "SHA": "7662d99c8ca3000d440d71d013468a0fc871a0ed34e50e28d6bff7923386cc3e",
+      "identity": {
+        "pid": 1939167,
+        "start_ticks": "48867286",
+        "ppid": 1939085,
+        "pgrp": 1939167,
+        "cpu_ticks": 0,
+        "state": "R",
+        "rss": 4096,
+        "cpus": [
+          2
+        ],
+        "argv": []
+      },
+      "exit": 0,
+      "waited": true,
+      "currentexact_absent": true
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/block00-generation-r1/process.json",
+      "SHA": "40cc149356d06d7b43c501c470b7906cd62a3d4788328f25c1d51b1e09fbb935",
+      "identity": {
+        "pid": 1942767,
+        "start_ticks": "48883252",
+        "ppid": 1942591,
+        "pgrp": 1942767,
+        "cpu_ticks": 0,
+        "state": "R",
+        "rss": 8192,
+        "cpus": [
+          2
+        ],
+        "argv": []
+      },
+      "exit": 0,
+      "waited": true,
+      "currentexact_absent": true
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/block00-export-r1/process.json",
+      "SHA": "7c777266cbfda06f043582da0f7d65ae67b73110f1b29d095f89a5163b5160ac",
+      "identity": {
+        "pid": 1946329,
+        "start_ticks": "48899558",
+        "ppid": 1946280,
+        "pgrp": 1946329,
+        "cpu_ticks": 0,
+        "state": "R",
+        "rss": 4096,
+        "cpus": [
+          2
+        ],
+        "argv": []
+      },
+      "exit": 0,
+      "waited": true,
+      "currentexact_absent": true
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/block01-generation-r1/process.json",
+      "SHA": "4b0f9303792a8e882d6d07a43879225f1f3ae759a46aa3ab42014964eea1edac",
+      "identity": {
+        "pid": 1951258,
+        "start_ticks": "48929406",
+        "ppid": 1951126,
+        "pgrp": 1951258,
+        "cpu_ticks": 0,
+        "state": "R",
+        "rss": 8192,
+        "cpus": [
+          2
+        ],
+        "argv": []
+      },
+      "exit": 0,
+      "waited": true,
+      "currentexact_absent": true
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/block01-export-r1/process.json",
+      "SHA": "a0261e0f7b7c6fcd9ec52c8746f80de60a988ef0aafc8c8614f3255ac21c2fc1",
+      "identity": {
+        "pid": 1956128,
+        "start_ticks": "48951856",
+        "ppid": 1955967,
+        "pgrp": 1956128,
+        "cpu_ticks": 0,
+        "state": "D",
+        "rss": 7860224,
+        "cpus": [
+          2
+        ],
+        "argv": [
+          "/usr/bin/python3",
+          "-B",
+          "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/export.py",
+          "--config",
+          "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/block01-export-config-v1.json"
+        ]
+      },
+      "exit": 0,
+      "waited": true,
+      "currentexact_absent": true
+    }
+  ],
+  "metadata_two_canonical_commands": {
+    "unifiedexec_exit0_waited": true,
+    "PIDtick_NOT_RECORDED": "original tool call metadata only/no subprocess orNN; no fabricated exactidentity",
+    "outputs_currentSHA": [
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/frame23-native-z-fresh-evaluation/block00-canonical-terminated-games-v1.json",
+        "B": 76980,
+        "SHA": "6e8158bc1368d8da874ba0dec228b23ee3fcb4b1b0b40dd328c320d3dd226305"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/frame23-native-z-fresh-evaluation/block01-canonical-terminated-games-v1.json",
+        "B": 79195,
+        "SHA": "c696a43580a179881d65763b75c528c02623c6e9c2304076cfa7ca48df0ec88a"
+      }
+    ]
+  },
+  "background2_cleanup_complete": true,
+  "scalar_z_vsSTM_terminal_join": true,
+  "immutable_targetfree_handoff": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/both-blocks-target-free-handoff-v1.json",
+    "B": 3596,
+    "SHA": "e74757a551194003723a04d6e1f66be5f0d7a54c6d7c2d0c53e5f01042cd0b38"
+  },
+  "no_extra_model_science": true,
+  "old_scopes_actual_failed_UNKNOWN_unchanged": true,
+  "whole_other_readers_stopped": "NOT_CLAIMED; 300 mayread publicrefs laterlabels originalprotocol"
+}

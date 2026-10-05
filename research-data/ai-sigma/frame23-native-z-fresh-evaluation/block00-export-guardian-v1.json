@@ -1,0 +1,53 @@
+{
+  "run_dir": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/block00-export-r1",
+  "task": "native-z-fresh-evaluation-299-block00-export-v1",
+  "issue": "quoridor-4lc.299",
+  "goal": "quoridor-4lc",
+  "owner": "codex:01a0f31d-6d15-7620-bb63-4b4f878e4746",
+  "kind": "build",
+  "NN0_prep_not_compile": true,
+  "GPU": false,
+  "cpu_cores": [2],
+  "ram_guard": 536870912,
+  "loaded": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/runtime-binding-v1.json",
+  "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+  "end_at": "2026-10-05T23:05:00Z",
+  "storage_evidence": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/storage-binding-v1.json",
+    "SHA": "100dac1d360343a584041c743d81249418afae9f0390df733af4ebc3a2c26af6",
+    "data_forecast": 25165824,
+    "scope_cap": 33554432
+  },
+  "source_hashes": {
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/export.py": "b10f71ef1cf5559560a99c650983d882402957836cf62621032b7a64ba98b1d6",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/registered-family-map-v1.json": "49c2c947abf5e2f1facecc2dac592675cc6f2c8fa3699ee91f300efe7a779ee2",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/block00-generation-result-v1.json": "928acac3e194d25e3e913d4050c0e661fb2453f88fb525beca8b40634f73f7aa",
+    "/workspaces/quoridor/.worktree/assets/inputs/frame23-native-z-fresh-evaluation/block00-native-r1/result.json": "81dc297979bc796d522159c9c4795e11cf31570c98f637de3ebbe60dfe396d97",
+    "/workspaces/quoridor/.worktree/assets/inputs/frame23-native-z-fresh-evaluation/block00-native-r1/dataset/manifest.json": "d0704f3d51339b9d9572d416fd4b9f549570bf9d8370d226b49bcbdb9036973b",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teachers/read-metadata-v1": "e9b816e6a1914efbb90983090e45d4f634ecd84352c73656568381b0e2884cde",
+    "/workspaces/quoridor/.artifacts/rust-migration/target/release/sigma-import": "e7c25987d432eacb5af218a222ed3437fd37ec3bd6315de9ed82caab16923681",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/control.py": "5533a658ec02ed4e79786f73824040af4779e02221b3ef4dcd9506edee843a14",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teachers/control-v1.py": "28fcc80cd4131133f42013a1b55687ae4b6814a2dab1433f4e92b7bad57b37e6",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/control.py": "71fdb724f40314556085d067f8bd77576d115bde4394a9964b206f74a58366e5",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/block00-export-config-v1.json": "9a4b4714d772339c27cd1cf94655a8ee691f664f11982df9e7f6c985e2dd9b33"
+  },
+  "cwd": "/workspaces/quoridor/.worktree/frame22-teacher",
+  "env": {
+    "LD_LIBRARY_PATH": "/home/vscode/.cache/inference/backends/tensorrt-11.3/lib:/home/vscode/.cache/inference/envs/quoridor-training/lib/python3.14/site-packages/nvidia/cu13/lib"
+  },
+  "hard_seconds": 20,
+  "argv": [
+    "/usr/bin/python3",
+    "-B",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/export.py",
+    "--config",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/block00-export-config-v1.json"
+  ],
+  "expected": [
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/block00-export-result-v1.json",
+      "task": "native-z-fresh-evaluation-299-block00-export-v1",
+      "schema": "native-z-fresh-evaluation-export-v1"
+    }
+  ]
+}

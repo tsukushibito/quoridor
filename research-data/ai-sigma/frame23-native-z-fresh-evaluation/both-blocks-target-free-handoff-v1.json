@@ -1,0 +1,72 @@
+{
+  "task": "native-z-fresh-evaluation-299-v1",
+  "schema": "native-z-fresh-evaluation-combined-targetfree-handoff-v1",
+  "planned": 96,
+  "started": 96,
+  "GOAL": 96,
+  "draw": 0,
+  "UNKNOWN": 0,
+  "NOT_STARTED": 0,
+  "zeroeligible": 0,
+  "rows": 3280,
+  "blocks": [
+    {
+      "block": 0,
+      "planned": 48,
+      "GOAL": 48,
+      "rows": 1549,
+      "public_handoff": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/block00-target-free-handoff-v1.json",
+        "B": 2675,
+        "SHA": "827aeac2b3845efcebedcf575d940d5ef7c06b52c6459415c5d2f7c60fa2eae4"
+      },
+      "targetfree_refs": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/block00-target-free-inputs-v1.jsonl.gz",
+        "B": 237480,
+        "SHA": "4599e5b38fe903d4ae2a4e5e9f90309e81541e83bba8c42caa51f3bd09959952"
+      },
+      "targetfree_uncompressed_SHA": "a6b91f0a29cb0e51401a265b05c83841310a436c8b5cfab233a53b32a9d8f0cb",
+      "registered_family_map": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/registered-family-map-v1.json",
+        "B": 82875,
+        "SHA": "49c2c947abf5e2f1facecc2dac592675cc6f2c8fa3699ee91f300efe7a779ee2"
+      },
+      "sealed_sidecar_schema": "native-z-fresh-evaluation-canonical-terminated-games-v1",
+      "private_scalar_still_sealed": true,
+      "alias_join": "native_family_alias + id, canonical_family via immutable registered map",
+      "input_schema": "actualSTM_ids[STM,opponent]/distance rawf32bits[STM,opponent]/literalprefix/history available"
+    },
+    {
+      "block": 1,
+      "planned": 48,
+      "GOAL": 48,
+      "rows": 1731,
+      "public_handoff": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/block01-target-free-handoff-v1.json",
+        "B": 2675,
+        "SHA": "a6167b0001fd322187d73f511710cd26cb9e8f92616ea159ca1102bc9325c8fa"
+      },
+      "targetfree_refs": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/block01-target-free-inputs-v1.jsonl.gz",
+        "B": 264941,
+        "SHA": "119f0f73fc341c3db826c08744d6260468c75946c91d2f0712eb821fce00835f"
+      },
+      "targetfree_uncompressed_SHA": "ad63fa713c3c1be68def5afd6bf1149e63a5033038c751a7d431c8bd7eda8f41",
+      "registered_family_map": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/registered-family-map-v1.json",
+        "B": 82875,
+        "SHA": "49c2c947abf5e2f1facecc2dac592675cc6f2c8fa3699ee91f300efe7a779ee2"
+      },
+      "sealed_sidecar_schema": "native-z-fresh-evaluation-canonical-terminated-games-v1",
+      "private_scalar_still_sealed": true,
+      "alias_join": "native_family_alias + id, canonical_family via immutable registered map",
+      "input_schema": "actualSTM_ids[STM,opponent]/distance rawf32bits[STM,opponent]/literalprefix/history available"
+    }
+  ],
+  "prefix_seed_UID_registration": "result-before-input labels, no oldrelatedprefix/actionseed duplicate, IID/game independence not automatic",
+  "history_cross_public": "UNAVAILABLE/UNVERIFIED, no nonexposure proof from hash alone",
+  "full_next_steps": "300 independent exposure toallseenNativeT+ALLrawnewV+publicT/V; one exactnewcandidate+public49dbc/D+constant/settings/source-selector-stop+Tseenunion/finalmask/evalrulefreeze before scalar release",
+  "labels_targets_and_winner_in_public": false,
+  "no_corpus_copy_forward_build": true,
+  "independent_predictions_and_teachertruth": "NOT_RUN by producer"
+}
