@@ -1,0 +1,59 @@
+{
+  "task": "native-terminal-z-independent-300-v1",
+  "started": "2026-10-05T22:20:47.442477+00:00",
+  "ended": "2026-10-05T22:20:48.751392+00:00",
+  "wall_seconds": 1.3089328500209376,
+  "exit_code": 0,
+  "cause": null,
+  "waited": true,
+  "recorded_identities": [
+    {
+      "pid": 1993551,
+      "ppid": 1993516,
+      "pgid": 1993551,
+      "tick": "49191037",
+      "cpu": 53,
+      "rss": 66527232,
+      "argv": [
+        "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+        "-B",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-independent-review/pipeline.py",
+        "--registration",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-independent-review/scientific-registration-v1.json"
+      ],
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    {
+      "pid": 1993580,
+      "ppid": 1993551,
+      "pgid": 1993551,
+      "tick": "49191130",
+      "cpu": 0,
+      "rss": 0,
+      "argv": [],
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    {
+      "pid": 1993581,
+      "ppid": 1993551,
+      "pgid": 1993551,
+      "tick": "49191133",
+      "cpu": 0,
+      "rss": 2260992,
+      "argv": [
+        "/workspaces/quoridor/.artifacts/rust-migration/target/release/route-feature-diagnose-public-z-290-v1",
+        "model",
+        "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-native-framing-v2/step7813-model/manifest.json"
+      ],
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    }
+  ],
+  "current_exact_remaining": [],
+  "peak_RSS": 101621760,
+  "purpose_output_PASS": true,
+  "NN": 6704,
+  "conservative_NN_charge": 6704,
+  "MAX_consumed": 1,
+  "no_automatic_retry": true,
+  "foreign_on_stop": []
+}

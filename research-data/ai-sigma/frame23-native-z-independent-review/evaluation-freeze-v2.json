@@ -1,0 +1,727 @@
+{
+  "task": "native-z-targetfree-freeze-300-v1",
+  "schema": "native-z-independent-input-mask-freeze-300-v1",
+  "UTC": "2026-10-05T22:18:39.538798+00:00",
+  "candidate_bindings": {
+    "native": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/candidate-freeze-v1.json",
+      "SHA": "5768486550449fda256f70de2196bc1c3e6831ec52828b984a19eacbe673e0b6"
+    },
+    "public": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/final-saved-freeze-v1/candidate-freeze-v1.json",
+      "SHA": "49dbc1ec576bd7ccd97d4dc17d744a5153ff1de18b43716a6330542302c39706"
+    },
+    "native_source_stop": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/source-reader-selector-stop-final-v1.json",
+      "SHA": "575f3df495a00b174c0f1a31aca47967d03ff5aa9026206d7aa0c7061edafccc",
+      "B": 5552
+    },
+    "producer_source_stop": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/scientific-source-stop-v1.json",
+      "SHA": "0775e11ad4b7634fd4c8fa810a4c9a1eb0887166be9e46bf5a28430f395f51d4"
+    },
+    "settings_scale": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame22-teacher-transfer-B-r1/scale.json",
+      "SHA": "175f07713409994d0d4c99768267695b0a91ec100baabf202fb4518b56cbdfed",
+      "B": 142
+    },
+    "initial": {
+      "checkpoint": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-outcome-z-learning/native-z-1m-r1/initial.pt",
+        "SHA": "1fef087b31ea6199ac6e9d619f65678f5c2421c63341cfba094c72fc958a2e8c",
+        "B": 52245
+      },
+      "native_manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-outcome-z-learning/native-z-1m-r1/initial-model/manifest.json",
+        "SHA": "757c3360502ccdddecc0f39164794d8367d33e693d02def579be6d06c3a49add",
+        "B": 847
+      },
+      "native_weights": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-outcome-z-learning/native-z-1m-r1/initial-model/weights.f32",
+        "SHA": "ec4167ccb5042cfe937b23850a1b52d1cd9cf6c3fb1d348627bfe6cc7d023cc5",
+        "B": 49284
+      },
+      "equal_D_zerohead": true
+    },
+    "native_config": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/training-config-v1.json",
+      "SHA": "dee0995b36126107e44387cba05d08f45cf49d3d503a973b59b3680307cef7f5",
+      "B": 877
+    },
+    "public_config": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/public-z-1m-config-v1.json",
+      "SHA": "ae34122a9c76afb2957ce355cee9d8a44f78c1f573546a457f50c5f4038e910c",
+      "B": 667
+    }
+  },
+  "models": {
+    "native": {
+      "manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-outcome-z-learning/native-z-1m-r1/best-model/manifest.json",
+        "SHA": "3177ff545094829627abd545b9d2eab160102d95bd04e85f9016da76dd7f2728",
+        "B": 847
+      },
+      "weights": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-outcome-z-learning/native-z-1m-r1/best-model/weights.f32",
+        "SHA": "1f8d8c28c9a863a73a56bb457424cbaf9c9c1e4a94ab9e6cb85620ffa6123b8c",
+        "B": 49284
+      },
+      "binary": {
+        "path": "/workspaces/quoridor/.artifacts/rust-migration/target/release/route-feature-diagnose-public-z-290-v1",
+        "SHA": "9f72e7404a36b2154cd36fc2530200a819ea77146d7fc9252e6b4d6f77ebd221",
+        "B": 894720
+      },
+      "binary_scope": "stopped comparison Scalar/SIMD/full-delta v3 API; production-maintained parity separately source-bound"
+    },
+    "public": {
+      "manifest": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-native-framing-v2/step7813-model/manifest.json",
+        "SHA": "02d6f34afd165bde8cff351721b9a7af38d73763f8c8d60417cb5625a5a52710",
+        "B": 847
+      },
+      "weights": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-native-framing-v2/step7813-model/weights.f32",
+        "SHA": "213309171e60c23c708a55b7009e14f3b5f9a6cc4e8fdc5f173c9a195a0a4a47",
+        "B": 49284
+      },
+      "binary": {
+        "path": "/workspaces/quoridor/.artifacts/rust-migration/target/release/route-feature-diagnose-public-z-290-v1",
+        "SHA": "9f72e7404a36b2154cd36fc2530200a819ea77146d7fc9252e6b4d6f77ebd221",
+        "B": 894720
+      },
+      "binary_scope": "stopped comparison Scalar/SIMD/full-delta v3 API; production-maintained parity separately source-bound"
+    }
+  },
+  "constant": {
+    "value": 0.021603728106769263,
+    "train_only_family_equal": true,
+    "independent_summary_mean_check": true,
+    "families": 432,
+    "source": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/actual-sharded-qualification-v1.json",
+      "SHA": "0bcde43394b1e41c7d1f836c9b694fcf69fc17711b9a3ceede5d00393d8a28eb",
+      "B": 55821
+    }
+  },
+  "terminal_schema": {
+    "goal_status": "goal",
+    "goal_terminal_reason": "GOAL",
+    "draw_terminal_reasons": [
+      "RULEA_200_PLY_DRAW",
+      "RULEA_NO_HISTORY_LEGAL_DRAW"
+    ],
+    "unknown_statuses": [
+      "unknown"
+    ],
+    "draw_rule_source_SHA": "66d06e2332255a01ead0d0033ecaddba0b4b812bbfc8220c4dbb5bc2726e1a29",
+    "canonical_source": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/canonical_games.py",
+      "SHA": "7881f62a7a8f8ca1561d668fa1bac20b45841a48591241f7a47b8a50d8b36f42"
+    }
+  },
+  "target_free_inputs": [
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/block00-target-free-inputs-v1.jsonl.gz",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/block01-target-free-inputs-v1.jsonl.gz"
+  ],
+  "all_input_bindings": {
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/Tseen-input-references.jsonl.gz": "e289b2ba7dcd24d6429714d0ec264d261b97312736bdaed47855773ea1403ad9",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teachers/block00-targetfree-private-native-v2.jsonl": "0923238ad24ea11451b94771a19f77b963ed634408eaab9f7eda3db90a47ee2d",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teachers/block01-targetfree-private-native-v2.jsonl": "372c3f908d926ae3dc7f6866b26a54c772a5c6b0898235fce663437428c62486",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teachers/block02-targetfree-private-native-v2.jsonl": "25875440edffd6d96300e4f2712fc0a844db7da35c483cc66689ebf26b865751",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teachers/block03-targetfree-private-native-v8.jsonl": "7ef736851b01886e30dd1410cfb612d6b77704fab69fcaea748bbfe5b91aae47",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teachers/block04-targetfree-private-native-v8.jsonl": "8783e1e05ba1d62a2a56190d2d13d6b9f420e3b609ef5e26b06a35f60cb68e3c",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teachers/block05-targetfree-private-native-v10.jsonl": "8fc31aaf8f0d0ecfac6941992e6b95c3ef2617fdf23b27f2c44ee8af49ed8533",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teachers/block06-targetfree-private-native-v10.jsonl": "50ff524038eb0030983553c6fa5fabf54a177d8c6ef76a864cdad63c8bb8030b",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teachers/block07-targetfree-private-native-v10.jsonl": "4d15dfea558988273785d98201bd01541edc48828ba4e58896cd917edff31f3c",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teachers/block08-targetfree-private-native-v10.jsonl": "b7f4fbf4f40d307099eb757612845c23fdee5f37291e6ef805305d1f6f6489e7",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teachers/block09-targetfree-private-native-v10.jsonl": "66e790f1e3d0ce8956bf8fa0cf4ae5768e6fa3acd93816c2ec5317943e425c0d",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teachers/block10-targetfree-private-native-v10.jsonl": "7b0bccf029c318055285e5090889800f601ab67ee43701eb4a4efabf50d2f5b0",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teachers/block11-targetfree-private-native-v10.jsonl": "0ba0f82c6da4cbdf91259a483c25e372c2ee0e3927c246f02cc63d9b1e0a713c",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/Vraw-input-references.jsonl.gz": "68f54e61eb9734e83c32ed3c28bf2ecb8dd64664f107a432db8eaff3b2b4fd3b",
+    "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0041/input-references.jsonl.gz": "8cdac8586d3499cc171a91f53cb04b9e2242417db3685183b52f4a91427a4bff",
+    "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-r1/Tseen-references.jsonl.gz": "9be6290ee2edf9bf7d7cf365b459b3727538e0c400f9db759928f3f2755e7179",
+    "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0042/input-references.jsonl.gz": "674109c3f17ba389635fc93cca04a47052f6c01e13030325e204fcab63aec3ea",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/block00-target-free-inputs-v1.jsonl.gz": "4599e5b38fe903d4ae2a4e5e9f90309e81541e83bba8c42caa51f3bd09959952",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/block01-target-free-inputs-v1.jsonl.gz": "119f0f73fc341c3db826c08744d6260468c75946c91d2f0712eb821fce00835f",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/both-blocks-target-free-handoff-v1.json": "e74757a551194003723a04d6e1f66be5f0d7a54c6d7c2d0c53e5f01042cd0b38",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/candidate-freeze-v1.json": "5768486550449fda256f70de2196bc1c3e6831ec52828b984a19eacbe673e0b6",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/final-saved-freeze-v1/candidate-freeze-v1.json": "49dbc1ec576bd7ccd97d4dc17d744a5153ff1de18b43716a6330542302c39706",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/source-reader-selector-stop-final-v1.json": "575f3df495a00b174c0f1a31aca47967d03ff5aa9026206d7aa0c7061edafccc",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/actual-sharded-qualification-v1.json": "0bcde43394b1e41c7d1f836c9b694fcf69fc17711b9a3ceede5d00393d8a28eb",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/registered-family-map-v1.json": "49c2c947abf5e2f1facecc2dac592675cc6f2c8fa3699ee91f300efe7a779ee2",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/scientific-source-stop-v1.json": "0775e11ad4b7634fd4c8fa810a4c9a1eb0887166be9e46bf5a28430f395f51d4",
+    "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-outcome-z-learning/native-z-1m-r1/best-model/manifest.json": "3177ff545094829627abd545b9d2eab160102d95bd04e85f9016da76dd7f2728",
+    "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-outcome-z-learning/native-z-1m-r1/best-model/weights.f32": "1f8d8c28c9a863a73a56bb457424cbaf9c9c1e4a94ab9e6cb85620ffa6123b8c",
+    "/workspaces/quoridor/.artifacts/rust-migration/target/release/route-feature-diagnose-public-z-290-v1": "9f72e7404a36b2154cd36fc2530200a819ea77146d7fc9252e6b4d6f77ebd221",
+    "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-native-framing-v2/step7813-model/manifest.json": "02d6f34afd165bde8cff351721b9a7af38d73763f8c8d60417cb5625a5a52710",
+    "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-native-framing-v2/step7813-model/weights.f32": "213309171e60c23c708a55b7009e14f3b5f9a6cc4e8fdc5f173c9a195a0a4a47",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-independent-review/entry_guard.py": "955a88b7742e05612bfd6534b38e8162ecc846730c9ac51812edd73f6093545c",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-independent-review/evaluation_math.py": "1e4d113b20af325b01da2884b4c72c38a22198f37906089103d4bed77af10b60",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-independent-review/freeze_inputs.py": "38371f1cdf3779551f5d81f7c4c5cf8e74fd4b7d6e3c7454dda026ab46e38c38",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-independent-review/pipeline.py": "b21cbce70254e9eaba7bc323948366867f923e2f2e3944a8e49c96afe6e1aa88",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-independent-review/prepare_registration.py": "ce3e47cd6b23a11a525d2f4b13d207ed3f9b7d9e74182206999df909b57e94ad",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-independent-review/process_inspection.py": "7d19071a97118ceb16856fb2f560610517311602ed6d5bace08898f0e22d004a",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/canonical_games.py": "7881f62a7a8f8ca1561d668fa1bac20b45841a48591241f7a47b8a50d8b36f42",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-independent-review/register_entry.py": "5c1e50a80d8f56abd9cb7069daeafca9a6f47453e9537d87901325aaa26e48bc",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-independent-review/pre-freeze-entry-guard-v1.py.gz": "79a71042780b28793d5fc277c69fdc3990332c8bcdbd644d0823d7e480e1c1bc",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-independent-review/guard-management-boundary-correction-v1.json": "ea5cd110e09937fca152a2dd5bab02b02b65cbda3ce64da3d0c23882f194b9b8"
+  },
+  "reference_counts": {
+    "native_Tseen": 14803,
+    "native_Vraw": 4733,
+    "public_Tseen": 67937,
+    "public_Vraw": 19965
+  },
+  "planned_families": 96,
+  "raw_rows": 3280,
+  "eligible_input_rows": 3280,
+  "per_family": {
+    "frame23-299-family-000000": {
+      "raw": 42,
+      "eligible_input": 42,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000001": {
+      "raw": 37,
+      "eligible_input": 37,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000002": {
+      "raw": 33,
+      "eligible_input": 33,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000003": {
+      "raw": 41,
+      "eligible_input": 41,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000004": {
+      "raw": 49,
+      "eligible_input": 49,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000005": {
+      "raw": 46,
+      "eligible_input": 46,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000006": {
+      "raw": 56,
+      "eligible_input": 56,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000007": {
+      "raw": 20,
+      "eligible_input": 20,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000008": {
+      "raw": 19,
+      "eligible_input": 19,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000009": {
+      "raw": 25,
+      "eligible_input": 25,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000010": {
+      "raw": 19,
+      "eligible_input": 19,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000011": {
+      "raw": 19,
+      "eligible_input": 19,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000012": {
+      "raw": 51,
+      "eligible_input": 51,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000013": {
+      "raw": 61,
+      "eligible_input": 61,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000014": {
+      "raw": 29,
+      "eligible_input": 29,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000015": {
+      "raw": 34,
+      "eligible_input": 34,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000016": {
+      "raw": 48,
+      "eligible_input": 48,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000017": {
+      "raw": 24,
+      "eligible_input": 24,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000018": {
+      "raw": 14,
+      "eligible_input": 14,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000019": {
+      "raw": 23,
+      "eligible_input": 23,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000020": {
+      "raw": 21,
+      "eligible_input": 21,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000021": {
+      "raw": 24,
+      "eligible_input": 24,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000022": {
+      "raw": 22,
+      "eligible_input": 22,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000023": {
+      "raw": 17,
+      "eligible_input": 17,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000024": {
+      "raw": 46,
+      "eligible_input": 46,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000025": {
+      "raw": 69,
+      "eligible_input": 69,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000026": {
+      "raw": 48,
+      "eligible_input": 48,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000027": {
+      "raw": 28,
+      "eligible_input": 28,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000028": {
+      "raw": 52,
+      "eligible_input": 52,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000029": {
+      "raw": 34,
+      "eligible_input": 34,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000030": {
+      "raw": 29,
+      "eligible_input": 29,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000031": {
+      "raw": 26,
+      "eligible_input": 26,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000032": {
+      "raw": 23,
+      "eligible_input": 23,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000033": {
+      "raw": 18,
+      "eligible_input": 18,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000034": {
+      "raw": 19,
+      "eligible_input": 19,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000035": {
+      "raw": 19,
+      "eligible_input": 19,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000036": {
+      "raw": 64,
+      "eligible_input": 64,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000037": {
+      "raw": 58,
+      "eligible_input": 58,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000038": {
+      "raw": 39,
+      "eligible_input": 39,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000039": {
+      "raw": 19,
+      "eligible_input": 19,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000040": {
+      "raw": 39,
+      "eligible_input": 39,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000041": {
+      "raw": 27,
+      "eligible_input": 27,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000042": {
+      "raw": 18,
+      "eligible_input": 18,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000043": {
+      "raw": 21,
+      "eligible_input": 21,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000044": {
+      "raw": 20,
+      "eligible_input": 20,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000045": {
+      "raw": 19,
+      "eligible_input": 19,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000046": {
+      "raw": 17,
+      "eligible_input": 17,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000047": {
+      "raw": 23,
+      "eligible_input": 23,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000048": {
+      "raw": 54,
+      "eligible_input": 54,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000049": {
+      "raw": 82,
+      "eligible_input": 82,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000050": {
+      "raw": 46,
+      "eligible_input": 46,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000051": {
+      "raw": 54,
+      "eligible_input": 54,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000052": {
+      "raw": 49,
+      "eligible_input": 49,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000053": {
+      "raw": 68,
+      "eligible_input": 68,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000054": {
+      "raw": 21,
+      "eligible_input": 21,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000055": {
+      "raw": 19,
+      "eligible_input": 19,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000056": {
+      "raw": 19,
+      "eligible_input": 19,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000057": {
+      "raw": 17,
+      "eligible_input": 17,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000058": {
+      "raw": 40,
+      "eligible_input": 40,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000059": {
+      "raw": 14,
+      "eligible_input": 14,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000060": {
+      "raw": 51,
+      "eligible_input": 51,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000061": {
+      "raw": 61,
+      "eligible_input": 61,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000062": {
+      "raw": 42,
+      "eligible_input": 42,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000063": {
+      "raw": 34,
+      "eligible_input": 34,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000064": {
+      "raw": 45,
+      "eligible_input": 45,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000065": {
+      "raw": 49,
+      "eligible_input": 49,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000066": {
+      "raw": 25,
+      "eligible_input": 25,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000067": {
+      "raw": 19,
+      "eligible_input": 19,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000068": {
+      "raw": 27,
+      "eligible_input": 27,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000069": {
+      "raw": 13,
+      "eligible_input": 13,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000070": {
+      "raw": 23,
+      "eligible_input": 23,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000071": {
+      "raw": 19,
+      "eligible_input": 19,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000072": {
+      "raw": 68,
+      "eligible_input": 68,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000073": {
+      "raw": 65,
+      "eligible_input": 65,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000074": {
+      "raw": 51,
+      "eligible_input": 51,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000075": {
+      "raw": 35,
+      "eligible_input": 35,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000076": {
+      "raw": 31,
+      "eligible_input": 31,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000077": {
+      "raw": 47,
+      "eligible_input": 47,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000078": {
+      "raw": 23,
+      "eligible_input": 23,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000079": {
+      "raw": 21,
+      "eligible_input": 21,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000080": {
+      "raw": 12,
+      "eligible_input": 12,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000081": {
+      "raw": 20,
+      "eligible_input": 20,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000082": {
+      "raw": 13,
+      "eligible_input": 13,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000083": {
+      "raw": 16,
+      "eligible_input": 16,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000084": {
+      "raw": 83,
+      "eligible_input": 83,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000085": {
+      "raw": 54,
+      "eligible_input": 54,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000086": {
+      "raw": 40,
+      "eligible_input": 40,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000087": {
+      "raw": 50,
+      "eligible_input": 50,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000088": {
+      "raw": 32,
+      "eligible_input": 32,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000089": {
+      "raw": 47,
+      "eligible_input": 47,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000090": {
+      "raw": 20,
+      "eligible_input": 20,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000091": {
+      "raw": 17,
+      "eligible_input": 17,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000092": {
+      "raw": 32,
+      "eligible_input": 32,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000093": {
+      "raw": 26,
+      "eligible_input": 26,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000094": {
+      "raw": 20,
+      "eligible_input": 20,
+      "OR_excluded": 0
+    },
+    "frame23-299-family-000095": {
+      "raw": 17,
+      "eligible_input": 17,
+      "OR_excluded": 0
+    }
+  },
+  "zeroeligible_input_families": 0,
+  "OR_reasons_overlap_not_additive": {},
+  "raw_row_order_SHA": "5e8d1c3ebc4d73676681f951a2f1435c6cdfea88af39e9751a7ec9768dc5ccef",
+  "eligible_row_order_SHA": "5e8d1c3ebc4d73676681f951a2f1435c6cdfea88af39e9751a7ec9768dc5ccef",
+  "eligible_bitset": "//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8=",
+  "mask_encoding": "LSB-per-row raw_row_order_SHA; not label based",
+  "native_witness_indices": [
+    783,
+    784,
+    670,
+    671,
+    636,
+    637,
+    740,
+    741,
+    1041,
+    1042,
+    862,
+    863,
+    1241,
+    1242,
+    147,
+    148,
+    14,
+    15,
+    104,
+    105,
+    50,
+    51,
+    167,
+    168
+  ],
+  "physicalNN_upper": 6704,
+  "MAX_science": 1,
+  "science_seconds": 180,
+  "primary": "family-equal terminal z MSE on identical eligible rows, all96 planned/unknown/zeroeligible kept; no missing imputation",
+  "secondary": "rowweighted sign/calibration/saturation/cohort/opening_side/STM/plyphase",
+  "paired_bootstrap": {
+    "unit": "family",
+    "seed": 30080311,
+    "repetitions": 2000,
+    "percentiles": [
+      0.025,
+      0.975
+    ],
+    "fixedfits": true,
+    "iid_precision_assumed": false
+  },
+  "native_tolerance": {
+    "abs": 1e-05,
+    "rtol": 0.0001
+  },
+  "future_labels_read": false,
+  "no_reselection_refill_retrain": true,
+  "history_cross_public_unavailable_opaque_stateframe_limit": true,
+  "state_key_literal_equal_not_full_state_independence": true,
+  "literal_null_never_matches": true,
+  "teachertruth_or_samewall_strength": false,
+  "entry_SHA": "38371f1cdf3779551f5d81f7c4c5cf8e74fd4b7d6e3c7454dda026ab46e38c38",
+  "registration_SHA": "d76e23b3655e5097edc4e9928f86cecf43d9905baeb40c19c9690245aa5e0e90",
+  "source_binding_revision": 2,
+  "prior_freeze_retained": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-independent-review/evaluation-freeze-v1.json",
+    "SHA": "c2c3b4c6014edf1a07b6cc4f36321e84872788c1df8ff8678bb4e4c9c9688026"
+  },
+  "revision_reason": "Only admission management source bindings reconciled before label release; expected exit1 for retained learner auxiliary failure and real storage cap field. Input masks, model/settings/constant, score math, witness choice, seed and termination rules identical.",
+  "algorithmic_fields_identical_to_v1": true
+}

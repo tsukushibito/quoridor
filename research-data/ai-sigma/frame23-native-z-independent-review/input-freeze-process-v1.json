@@ -1,0 +1,25 @@
+{
+  "task": "native-z-targetfree-freeze-300-v1",
+  "argv": [
+    "/usr/bin/taskset",
+    "-c",
+    "3",
+    "python3",
+    "-B",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-independent-review/freeze_inputs.py",
+    "--registration",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-independent-review/freeze-input-registration-v1.json"
+  ],
+  "started": "2026-10-05T22:09:56.074237+00:00",
+  "ended": "2026-10-05T22:10:10.536551+00:00",
+  "wall_seconds": 14.469223666994367,
+  "pid": 1983855,
+  "tick": "49125872",
+  "exit_code": 0,
+  "waited": true,
+  "current_exact_absent": true,
+  "peak_RSS_B": 169783296,
+  "NN": 0,
+  "future_labels_read": false,
+  "budget_class": "source/preparation100, not scientific MAX1"
+}
