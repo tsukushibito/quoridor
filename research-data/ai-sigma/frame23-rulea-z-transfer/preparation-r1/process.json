@@ -1,0 +1,70 @@
+{
+  "task": "rulea-z-transfer-292-prepare-v1",
+  "argv": [
+    "/usr/bin/python3",
+    "-B",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/prepare.py",
+    "--config",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/prepare-config-v1.json"
+  ],
+  "exit": 0,
+  "reason": null,
+  "waited": true,
+  "identity": {
+    "pid": 1783219,
+    "start_ticks": "48120361",
+    "ppid": 1783108,
+    "pgrp": 1783219,
+    "cpu_ticks": 0,
+    "state": "R",
+    "rss": 4096,
+    "cpus": [
+      2
+    ],
+    "argv": []
+  },
+  "recorded_children": [
+    {
+      "pid": 1783219,
+      "start_ticks": "48120361",
+      "ppid": 1783108,
+      "pgrp": 1783219,
+      "cpu_ticks": 2,
+      "state": "S",
+      "rss": 18194432,
+      "cpus": [
+        2
+      ],
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/prepare.py",
+        "--config",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/prepare-config-v1.json"
+      ]
+    },
+    {
+      "pid": 1783220,
+      "start_ticks": "48120370",
+      "ppid": 1783219,
+      "pgrp": 1783219,
+      "cpu_ticks": 18,
+      "state": "D",
+      "rss": 193556480,
+      "cpus": [
+        2
+      ],
+      "argv": [
+        "/workspaces/quoridor/.artifacts/rust-migration/target/release/teacher-qualify",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/native-prepare-config-v1.json"
+      ]
+    }
+  ],
+  "current_exact_remaining": [],
+  "peak_RSS": 211750912,
+  "GPU_peak_sampled_bytes": 0,
+  "GPU_sample_count": 0,
+  "command_wall_s": 3.2481832819757983,
+  "management_inclusive_wall_s": 6.06957503198646,
+  "NN": 0
+}

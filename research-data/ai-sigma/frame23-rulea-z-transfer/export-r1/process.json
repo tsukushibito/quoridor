@@ -1,0 +1,60 @@
+{
+  "task": "rulea-z-transfer-292-export-v1",
+  "argv": [
+    "/usr/bin/python3",
+    "-B",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/export.py",
+    "--config",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/export-config-v1.json"
+  ],
+  "exit": 0,
+  "reason": null,
+  "waited": true,
+  "identity": {
+    "pid": 1792403,
+    "start_ticks": "48152756",
+    "ppid": 1792306,
+    "pgrp": 1792403,
+    "cpu_ticks": 0,
+    "state": "R",
+    "rss": 2719744,
+    "cpus": [
+      2
+    ],
+    "argv": [
+      "/usr/bin/python3",
+      "-B",
+      "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/export.py",
+      "--config",
+      "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/export-config-v1.json"
+    ]
+  },
+  "recorded_children": [
+    {
+      "pid": 1792403,
+      "start_ticks": "48152756",
+      "ppid": 1792306,
+      "pgrp": 1792403,
+      "cpu_ticks": 17,
+      "state": "R",
+      "rss": 21135360,
+      "cpus": [
+        2
+      ],
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/export.py",
+        "--config",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/export-config-v1.json"
+      ]
+    }
+  ],
+  "current_exact_remaining": [],
+  "peak_RSS": 21135360,
+  "GPU_peak_sampled_bytes": 0,
+  "GPU_sample_count": 0,
+  "command_wall_s": 1.227038763987366,
+  "management_inclusive_wall_s": 4.842253412003629,
+  "NN": 0
+}

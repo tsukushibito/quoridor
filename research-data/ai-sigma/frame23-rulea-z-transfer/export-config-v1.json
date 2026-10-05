@@ -1,0 +1,28 @@
+{
+  "task": "rulea-z-transfer-292-export-v1",
+  "family_map": "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/registered-family-map-v1.json",
+  "native_root": "/workspaces/quoridor/.worktree/assets/inputs/frame23-rulea-z-transfer/native-r1",
+  "dataset": "/workspaces/quoridor/.worktree/assets/inputs/frame23-rulea-z-transfer/native-r1/dataset",
+  "input_reader": "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teachers/read-metadata-v1",
+  "scalar_reader": "/workspaces/quoridor/.artifacts/rust-migration/target/release/sigma-import",
+  "private_projection_temp": "/workspaces/quoridor/.worktree/assets/inputs/frame23-rulea-z-transfer/private-native-inputs-v1.jsonl",
+  "private_projection_gz": "/workspaces/quoridor/.worktree/assets/inputs/frame23-rulea-z-transfer/private-native-inputs-v1.jsonl.gz",
+  "public_projection_temp": "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/target-free-input-references-v1.jsonl",
+  "public_projection_gz": "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/target-free-input-references-v1.jsonl.gz",
+  "sealed_scalar_temp": "/workspaces/quoridor/.worktree/assets/inputs/frame23-rulea-z-transfer/sealed-z-rootmean-scalars-v1.jsonl",
+  "sealed_scalar_gz": "/workspaces/quoridor/.worktree/assets/inputs/frame23-rulea-z-transfer/sealed-z-rootmean-scalars-v1.jsonl.gz",
+  "public_handoff": "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/target-free-handoff-v1.json",
+  "output": "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/export-result-v1.json",
+  "producer_source_SHA": "390fc18b796af19b2c93b5d4918f6a643594147b267315a4859d6ca80c482396",
+  "source_hashes": {
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/export.py": "e4fa2cb2ad6d898607be894faa29175b185bf72c25f1851595393d7fd00f11e4",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/registered-family-map-v1.json": "50a347d175af1b93b87bdbe56accc4c745c860885b7f8a9db3c755739ee95834",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/generation-result-v1.json": "c17f4a48d67fce35282e39ed0610bcab66f4e10bf382396d5d7a85380f922c33",
+    "/workspaces/quoridor/.worktree/assets/inputs/frame23-rulea-z-transfer/native-r1/result.json": "80a1f1c59eee719a84c368aab2bb2eb3cd473dd84d7e883e2fc067b6a79ba280",
+    "/workspaces/quoridor/.worktree/assets/inputs/frame23-rulea-z-transfer/native-r1/dataset/manifest.json": "5e14c062f3252de352fb6e89d1196fb8eabd343e570e09944cb6e089990705ca",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teachers/read-metadata-v1": "e9b816e6a1914efbb90983090e45d4f634ecd84352c73656568381b0e2884cde",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teachers/read-metadata-v2.rs": "95f738ade174bb459655cc8f6481b0faed9d63d089f2a303599b348eb2fd9d54",
+    "/workspaces/quoridor/.artifacts/rust-migration/target/release/sigma-import": "e7c25987d432eacb5af218a222ed3437fd37ec3bd6315de9ed82caab16923681",
+    "/workspaces/quoridor/.worktree/frame22-teacher/crates/quoridor-runner/src/bin/sigma-import.rs": "210e3e31468b470abaf5b33055a95f79209ebd961e526f7148427eb68ee219fe"
+  }
+}

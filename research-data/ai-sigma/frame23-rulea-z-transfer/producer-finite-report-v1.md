@@ -1,0 +1,17 @@
+# RuleA z転移観測のproducer有限結果
+
+292の一回生成は全48familyがGOALで完了し、1668行が適格でした。開始P1/P2は24/24、12cohort各4です。新domain/seed/prefixをlabels前に登録し、旧48/旧285のprefixとactionseed重複を拒否しました。登録lineageの独立性の範囲であり、IIDや全State非共有は証明していません。
+
+実NNは88516（要求88480＋初回shape warm36）、native wholejob15.639029648秒、guardianのchild command17.589136922秒です。guardian inclusive20.522897649秒と背景inclusive20.908482091秒は包摂するため加算しません。RSS sample peak533876736B、VRAM sample peak1688207360Bは、per-process N/A時にはwhole-device保守上界で専有量ではありません。独立forward/棋力は未測定です。
+
+前準備NN0 command3.248183282秒、投影NN0 command1.227038764秒、三guardianのoutside-child management費は別台帳に保存しました。未計測のread、LLM、通信、整形等を0としていません。compile0、science MAX1消費、再生成/成功補充0。旧289/285の費・失敗・UNKNOWN・予約は別保存し、今回のsource300/manage180/data64MiB/700kNNは前向きconserved移譲です。
+
+既273のnative producer/モデルd790/TRT B8/fill2ms/active48/K64/τ1/200ply/worker2 infer4をread-only reuseしました。winnerを先に判定し、RuleAの200plyまたはhistory-legal手なしは真正draw0、runner独自cap/取消/faultはUNKNOWNでz欠測と区別するsourceを確認しました。今回は全GOALなのでdrawの実例はありません。rootmeanは任意の別値として保全し、zやleaf真値へ読み替えていません。
+
+全1668rowのcomplete prefixを既native readerでreplayし、state/history literal hash/plyに対応させました。P1/P2 idsをSTM/oppへ一回だけ交換し、元STM distanceのf32bitsを保持しました。全target-free projectionのwhitelistにz/rootmean/pi/winner/予測/損失はありません。private projection、public refs、sealed scalarの圧縮復元SHAを全stream照合しました。dense cacheの二重保存は行っていません。
+
+291へtarget-free refsとfamily/count/hashを渡しました。公開モデルcandidate/config/settingsと独立評価規則のfreeze前はproducerだけが新zを保有します。独立ownerは全public savedstage実seen unionとALL rawqualified validation（z0含む）へのOR露出除外を固定し、一candidate＋D＋定数を一巡比較します。public history欠測をliteral不一致だけで非露出保証へ読み替えません。1668×3=5004予測は予算見積であり、291の実残費とmask後分母の確認が必要です。
+
+public0043 recorded decisive outcomesと、この新RuleA complete gamesは別分布・別分母です。今回の生成完了からNNUE転移利益、同wall棋力、最高goalを認定しません。次判断は凍結候補のgame等重みpaired誤差とphase/距離領域を独立に測り、教師目標・表現・量の競合を更新することです。追加fit/arena/quantityを自動開始しません。
+
+source/task/schema/argv/currentbyte、全planned prefix、三process wait/currentexact不在、背景cleanupをscientific-stop-v1.jsonへ束縛しました。source/解析コードRuff format/check/lintはPASS、guardの実interpreter位置分類5合成fixtureもNN0 PASSです。owner有限証拠と統括採否/critic独立評価は分けます。必要Gitはcoordinatorだけが操作し、assetsはreader停止までimmutable保護します。

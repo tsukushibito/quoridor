@@ -1,0 +1,36 @@
+{
+  "task": "rulea-z-transfer-292-source-proof-v1",
+  "schema": "rulea-z-transfer-source-proof-v1",
+  "compile": 0,
+  "readonly_producer_binary_SHA": "ad85e7b84183924f68ddbcf2186c522a7092cc9eb0948444c678ff8b8a96ef5e",
+  "readonly_prepare_binary_SHA": "6a67a65201d37ee3a5c9ed46bba343ba5757c151409d7b22822f42d99b18d252",
+  "compiled_producer_data_source_SHA_from_stopped285": "390fc18b796af19b2c93b5d4918f6a643594147b267315a4859d6ca80c482396",
+  "current_importer_data_source_is_separate": true,
+  "NN_upper": 624036,
+  "max_decision_roots": 9600,
+  "NN_per_root_upper": 65,
+  "warm_unique_B1to8_upper": 36,
+  "NN_source_refs": [
+    "runtime.rs:616 Search limits K64",
+    "runtime.rs:1021 NN count += batch input count; :1024 firstshape warm n once",
+    "Search.advance at most K completions plus initial root forward, terminal NN0"
+  ],
+  "NN_total_reserved": 700000,
+  "processed_vs_allocated": "not equated; original native snapshots only report allocated_nodes_peak/advance_calls; missing totalallocated UNKNOWN",
+  "terminal_rulea": [
+    "winner first => +/-1",
+    "total_ply>=200 or no history-legal move => Some(0)",
+    "runner checks contextterminal before independent maxplies cap; independent cap/foreign/cancel unknown preserves zNone"
+  ],
+  "seed": "runtime game.seed=run_seed XOR ((local_id+1)*0x9e3779b97f4a7c15), tau selection after snapshot; Search generation is not independent RNG seed",
+  "fixed_fill_ms": 2,
+  "opening_selection": "teacher-qualify prepare returns before backend creation, firstaccepted legal nonterminal only",
+  "P2": "row.side=1+totalply%2, idsP1P2->STM_then_opponent, distancebits alreadySTM, no double swap",
+  "old_source_proof": "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teachers/block11-pipeline-result-v10.json",
+  "changed_rust_source": false,
+  "frozen_python_sha": {
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/prepare.py": "c2157a3e7957885f7589a9a3604649660019408c8528f595e1e8ca53e6d9a874",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/export.py": "e4fa2cb2ad6d898607be894faa29175b185bf72c25f1851595393d7fd00f11e4"
+  },
+  "static_AST_parse": "PASS"
+}

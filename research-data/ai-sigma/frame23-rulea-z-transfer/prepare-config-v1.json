@@ -1,0 +1,35 @@
+{
+  "task": "rulea-z-transfer-292-prepare-v1",
+  "preregister": "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/preregister-v1.json",
+  "native_prepare": "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/native-prepare-config-v1.json",
+  "native_template": "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teachers/block09-native-v2.json",
+  "old_label_free_family_maps": [
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teachers/registered-family-map-v2.json",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/registered-family-map-v1.json"
+  ],
+  "native_output": "/workspaces/quoridor/.worktree/assets/inputs/frame23-rulea-z-transfer/native-r1",
+  "native_config": "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/native-generation-v1.json",
+  "family_map": "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/registered-family-map-v1.json",
+  "output": "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/prepare-result-v1.json",
+  "argv": [
+    "/usr/bin/taskset",
+    "-c",
+    "2",
+    "/workspaces/quoridor/.artifacts/rust-migration/target/release/teacher-qualify",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/native-prepare-config-v1.json"
+  ],
+  "source_hashes": {
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/prepare.py": "c2157a3e7957885f7589a9a3604649660019408c8528f595e1e8ca53e6d9a874",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/preregister-v1.json": "f384e3757a64404110c6d62cb8d8989b022519de27e37b92f2dedf09d469d622",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/native-prepare-config-v1.json": "1f7d7f4b26322e63b643f37e9949e4bb73c02ba9bb8de4a9a0e7c57d69a6c0b4",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teachers/registered-family-map-v2.json": "9bda564e21e67c8294566c00d6752d9fec2d31aeae3e3735a5a317e21f08337d",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/registered-family-map-v1.json": "90dea9468794fac505fdccfdd376d6ac7364b4fa95921e6679dfa5434db1fcb1",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teachers/block09-native-v2.json": "5b443a63740b4d632612e5eebedc6607aece21bb6bdf009c106b6a9226cd92c5",
+    "/workspaces/quoridor/.artifacts/rust-migration/target/release/teacher-qualify": "6a67a65201d37ee3a5c9ed46bba343ba5757c151409d7b22822f42d99b18d252",
+    "/workspaces/quoridor/.artifacts/rust-migration/target/release/quoridor-runner": "ad85e7b84183924f68ddbcf2186c522a7092cc9eb0948444c678ff8b8a96ef5e",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teachers/read-metadata-v1": "e9b816e6a1914efbb90983090e45d4f634ecd84352c73656568381b0e2884cde",
+    "/workspaces/quoridor/.worktree/frame22-teacher/crates/quoridor-runner/src/runtime.rs": "66d06e2332255a01ead0d0033ecaddba0b4b812bbfc8220c4dbb5bc2726e1a29",
+    "/workspaces/quoridor/.worktree/frame22-teacher/crates/quoridor-runner/src/config.rs": "325e936917259b7ea3f9f7957b0817503d4bd8fdf7752e4f3dd51708351657cc",
+    "/workspaces/quoridor/.worktree/frame22-teacher/crates/quoridor-core/src/research.rs": "c4aaf1ed318be17e6755d54ed9940e02eb9bbeca5e3a8dcdab8a7ad0274ec3b5"
+  }
+}

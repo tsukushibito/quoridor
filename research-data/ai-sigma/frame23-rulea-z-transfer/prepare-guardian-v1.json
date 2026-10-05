@@ -1,0 +1,49 @@
+{
+  "run_dir": "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/preparation-r1",
+  "task": "rulea-z-transfer-292-prepare-v1",
+  "issue": "quoridor-4lc.292",
+  "goal": "quoridor-4lc",
+  "owner": "codex:01a0f31d-6d15-7620-bb63-4b4f878e4746",
+  "kind": "build",
+  "NN0_prep_not_compile": true,
+  "GPU": false,
+  "cpu_cores": [
+    2
+  ],
+  "ram_guard": 536870912,
+  "loaded": "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/runtime-binding-v1.json",
+  "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+  "end_at": "2026-10-05T21:00:00Z",
+  "storage_evidence": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-steward/storage-rulea-292-conserved-current.json",
+    "SHA": "dd02e166aad859f03cc6e4bf876d5c964b18836625d006eee22417c3afa467f2",
+    "data_forecast": 58720256,
+    "scope_cap": 67108864
+  },
+  "source_hashes": {
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/prepare.py": "c2157a3e7957885f7589a9a3604649660019408c8528f595e1e8ca53e6d9a874",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/prepare-config-v1.json": "253471be8848a10a63dc797464a16ae24e787d62488ac0d6b318133eb51347ae",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/native-prepare-config-v1.json": "1f7d7f4b26322e63b643f37e9949e4bb73c02ba9bb8de4a9a0e7c57d69a6c0b4",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/preregister-v1.json": "f384e3757a64404110c6d62cb8d8989b022519de27e37b92f2dedf09d469d622",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teachers/control-v1.py": "28fcc80cd4131133f42013a1b55687ae4b6814a2dab1433f4e92b7bad57b37e6"
+  },
+  "cwd": "/workspaces/quoridor/.worktree/frame22-teacher",
+  "env": {
+    "LD_LIBRARY_PATH": "/home/vscode/.cache/inference/backends/tensorrt-11.3/lib:/home/vscode/.cache/inference/envs/quoridor-training/lib/python3.14/site-packages/nvidia/cu13/lib"
+  },
+  "hard_seconds": 30,
+  "argv": [
+    "/usr/bin/python3",
+    "-B",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/prepare.py",
+    "--config",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/prepare-config-v1.json"
+  ],
+  "expected": [
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/prepare-result-v1.json",
+      "task": "rulea-z-transfer-292-prepare-v1",
+      "schema": "rulea-z-transfer-preparation-v1"
+    }
+  ]
+}
