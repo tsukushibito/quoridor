@@ -1,0 +1,1 @@
+goal quoridor-4lc /92 frame22 scheduler/monitor終了。reason=operator_stop, error=None。正確owned回収証拠 /workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22/scheduler-end-stop.json。外NN停止認定0。終了点検の判断報告は別責務、未完了なら理由/担当/次機会を引渡し。

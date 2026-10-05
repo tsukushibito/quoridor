@@ -1,0 +1,50 @@
+{
+  "at": "2026-10-05T12:16:02.597659+00:00",
+  "state": {
+    "phase": "running",
+    "process": {
+      "pid": 1202786,
+      "start_ticks": "45448354",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "owned": null,
+    "recovery_required": false,
+    "fatal_dispatch_error": null,
+    "last_result": {
+      "at": "2026-10-05T12:07:12.700372+00:00",
+      "event": "owned_turn_finished",
+      "turn_id": "01a10bed-093a-7ea0-ba67-f40dfe583efd",
+      "status": "completed"
+    }
+  },
+  "supervisor_status": {
+    "type": "notLoaded"
+  },
+  "supervisor_latest": [
+    {
+      "id": "01a10bed-093a-7ea0-ba67-f40dfe583efd",
+      "status": "completed"
+    }
+  ],
+  "coordinator": {
+    "id": "01a0f31b-3409-75f2-a30e-453a50484f94",
+    "status": {
+      "type": "active",
+      "activeFlags": []
+    },
+    "cwd": "/workspaces/quoridor",
+    "model": "gpt-6.1-sol",
+    "reasoningEffort": "high"
+  },
+  "scheduler_alive": true,
+  "monitor_process": {
+    "pid": 1203480,
+    "start_ticks": "45451173",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "monitor_alive": true,
+  "steward_allocated": 11563008,
+  "new_forecast": 2097152,
+  "guard": 117440512,
+  "safe_to_stop": false
+}

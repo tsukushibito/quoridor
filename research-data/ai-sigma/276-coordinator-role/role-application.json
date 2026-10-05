@@ -1,0 +1,57 @@
+{
+  "application": "active_full_supplement",
+  "delivery": {
+    "method": "turn/steer",
+    "thread_id": "01a0f31b-3409-75f2-a30e-453a50484f94",
+    "turn_id": "01a10bdf-c9f3-7e93-b153-0fec2ddae086",
+    "accepted": true
+  },
+  "permanent_idle_refresh": "pending",
+  "pending_owner": "既運用owner92、自然idle停止窓で公式refresh。Root276へ引渡し可能",
+  "next_opportunity": "Coordinator自然idle、frame22監督end以前の停止窓又は次明示運用機会",
+  "at": "2026-10-05T12:19:44.960880+00:00",
+  "role_sha256": "b1c32f2a5e4c4d1003b3b85e5e6b3dbd072c7a5176ef60200ec64df1a7cd06e5",
+  "combined_definition_sha256": "dff086567d6e345495c3d83c24f1facffb03638f0e8e1cbc877adb1d59ef03d7",
+  "full_saved_text_sha256": "ad046d7aaca1686bd8278f2ad6e3d79aa8e50ce9600842aad8e50fe426153fae",
+  "prior": {
+    "id": "01a0f31b-3409-75f2-a30e-453a50484f94",
+    "cwd": "/workspaces/quoridor",
+    "model": "gpt-6.1-sol",
+    "reasoningEffort": "high",
+    "status": {
+      "type": "active",
+      "activeFlags": []
+    }
+  },
+  "after": {
+    "id": "01a0f31b-3409-75f2-a30e-453a50484f94",
+    "cwd": "/workspaces/quoridor",
+    "model": "gpt-6.1-sol",
+    "reasoningEffort": "high",
+    "status": {
+      "type": "active",
+      "activeFlags": []
+    }
+  },
+  "binding_changes": [
+    {
+      "path": "/workspaces/quoridor/.agents/research-team/roles/coordinator.md",
+      "before": "cbe7e1a085929caf414b17001397ef620fc724c74bad332dde40d6dfb055f4d1",
+      "after": "b1c32f2a5e4c4d1003b3b85e5e6b3dbd072c7a5176ef60200ec64df1a7cd06e5"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+      "before": "bf246c75c4ff3360a2581e4176006c9e33888a837bb385cf4e734364a0090cea",
+      "after": "a0e3abd431dc08ed91f8ebb8046918dc0f49aa4f3667bbd3ddca7c8a798fb60b"
+    }
+  ],
+  "six_digests": {
+    "coordinator": "dff086567d6e345495c3d83c24f1facffb03638f0e8e1cbc877adb1d59ef03d7",
+    "hypothesis": "db6370b3f5d091f5b2155b3cba42b62d4743153b513445066714bdbf7f9e8a04",
+    "experiment": "09c3472d031e94f10263ba518abb57b1c9876e84712ef7d59fca6989b32d9720",
+    "critic": "b5a20ad0f99585ec5d308759dd74aa4db057c34521136abd1c9659f9a8d5c268",
+    "steward": "4825793a827508fba70c7a5ea0984e5a6dd7dcf03a430ef6613e263a5b07fc2e",
+    "supervisor": "c206b1b9e517358b9bcfdff10a9852fe2841ed3b67f290090988c2b3926cf78b"
+  },
+  "role_write_by_steward": false
+}
