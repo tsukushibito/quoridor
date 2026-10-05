@@ -1,0 +1,125 @@
+{
+  "at": "2026-10-05T20:20:44.198774+00:00",
+  "owned_run": {
+    "run_id": "78de4bb8-2173-4e8e-828d-a9737db56983",
+    "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+    "turn_id": "01a10db7-2d8c-77b2-8851-9912c51768a3",
+    "started_at": "2026-10-05T20:17:50.918059+00:00",
+    "max_turn_seconds": null
+  },
+  "status": "unavailable",
+  "whole_period_certified": false,
+  "source": {
+    "path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/78de4bb8-2173-4e8e-828d-a9737db56983/finish.json",
+    "bytes": 12340,
+    "sha256": "46a2ebba59ca7227f178961201a9eadf4319a97457026ed4842d02d9f485442c"
+  },
+  "finish": {
+    "append": "outcome_unknown_check_original_receipts_before_retry",
+    "backup": "not_reached",
+    "blind_retry": false
+  },
+  "budget": {
+    "outer_seconds": 25,
+    "elapsed_seconds": 17.244816188991535,
+    "remaining_seconds": 7.75518357596593,
+    "phases": [
+      {
+        "phase": "notes cap",
+        "elapsed_seconds": 0.0015320079983212054,
+        "status": "completed"
+      },
+      {
+        "phase": "previous append check",
+        "elapsed_seconds": 0.006127225991804153,
+        "status": "completed"
+      },
+      {
+        "phase": "admit.input_hashes",
+        "elapsed_seconds": 0.09463085501920432,
+        "status": "completed"
+      },
+      {
+        "phase": "admit.state",
+        "elapsed_seconds": 0.002399004006292671,
+        "status": "completed"
+      },
+      {
+        "phase": "admit.storage",
+        "elapsed_seconds": 4.574231430015061,
+        "status": "completed"
+      },
+      {
+        "phase": "admit.rss",
+        "elapsed_seconds": 0.00019398197764530778,
+        "status": "completed"
+      },
+      {
+        "phase": "admit.input_hashes",
+        "elapsed_seconds": 0.031077790015842766,
+        "status": "completed"
+      },
+      {
+        "phase": "admit.state",
+        "elapsed_seconds": 0.0014470780151896179,
+        "status": "completed"
+      },
+      {
+        "phase": "admit.storage",
+        "elapsed_seconds": 5.017046262975782,
+        "status": "completed"
+      },
+      {
+        "phase": "admit.rss",
+        "elapsed_seconds": 0.0006193430162966251,
+        "status": "completed"
+      },
+      {
+        "phase": "command receipt reserve",
+        "elapsed_seconds": 0.20075916597852483,
+        "status": "completed"
+      },
+      {
+        "phase": "command receipt started",
+        "elapsed_seconds": 0.22074397397227585
+      },
+      {
+        "phase": "command receipt completed",
+        "elapsed_seconds": 0.03732778300764039
+      },
+      {
+        "phase": "capture and reap",
+        "elapsed_seconds": 1.7095749180298299
+      },
+      {
+        "phase": "batch authentication",
+        "elapsed_seconds": 0.005790198978502303,
+        "status": "completed"
+      },
+      {
+        "phase": "admit.input_hashes",
+        "elapsed_seconds": 0.05997920798836276,
+        "status": "completed"
+      },
+      {
+        "phase": "admit.state",
+        "elapsed_seconds": 0.001645376964006573,
+        "status": "completed"
+      },
+      {
+        "phase": "admit.storage",
+        "elapsed_seconds": 5.366497433977202,
+        "status": "unconfirmed"
+      }
+    ],
+    "whole_outer_success_certified": false
+  },
+  "command_count": 1,
+  "commands": [
+    {
+      "exit": 0,
+      "reaped": true,
+      "refusal": null
+    }
+  ]
+}

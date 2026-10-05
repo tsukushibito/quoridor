@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+from contextlib import contextmanager
 from datetime import datetime, timezone
 import hashlib
 import fcntl
@@ -17,6 +18,7 @@ import subprocess
 import sys
 import time
 
+PROCESS_STARTED = time.monotonic()
 _spec = importlib.util.spec_from_file_location(
     "scheduler", Path(__file__).with_name("research-scheduler.py")
 )
@@ -30,6 +32,67 @@ RUN_CAP = 512 * 1024
 
 class Unavailable(ValueError):
     pass
+
+
+class FinishBudget:
+    """One existing outer 25-second work budget, including admission and recording."""
+
+    def __init__(self, started):
+        self.started = started
+        self.deadline = started + 25
+        # Existing command reserve: six seconds for TERM/KILL waits, four for records.
+        self.work_deadline = self.deadline - 10
+        self.phases = []
+
+    def require(self, phase, *, reserve=10):
+        remaining = self.deadline - time.monotonic()
+        if remaining <= reserve:
+            raise Unavailable(f"finish cumulative remaining insufficient at {phase}; spawn refused")
+        return remaining - reserve
+
+    @contextmanager
+    def phase(self, name):
+        started = time.monotonic()
+        status = "unconfirmed"
+        try:
+            self.require(name)
+            yield
+            self.require(name)
+            status = "completed"
+        finally:
+            self.phases.append(
+                {"phase": name, "elapsed_seconds": time.monotonic() - started, "status": status}
+            )
+
+    def summary(self):
+        return {
+            "outer_seconds": 25,
+            "elapsed_seconds": time.monotonic() - self.started,
+            "remaining_seconds": max(0, self.deadline - time.monotonic()),
+            "phases": self.phases,
+            "whole_outer_success_certified": False,
+        }
+
+    def receipt_summary(self):
+        return {key: value for key, value in self.summary().items() if key != "phases"}
+
+    @contextmanager
+    def recording(self, name):
+        """Cleanup evidence is attempted even when work time is exhausted."""
+        started = time.monotonic()
+        try:
+            yield
+        finally:
+            self.phases.append({"phase": name, "elapsed_seconds": time.monotonic() - started})
+
+
+@contextmanager
+def phase(budget, name):
+    if budget is None:
+        yield
+    else:
+        with budget.phase(name):
+            yield
 
 
 def allocated(paths):
@@ -97,10 +160,12 @@ def select_issue(item):
     return result
 
 
-def state_read(expected):
+def state_read(expected, budget=None):
     last = None
     for attempt in range(5):
         try:
+            if budget:
+                budget.require("state read")
             path = Path(expected["state_dir"]) / "state.json"
             with path.open("rb") as stream:
                 raw = stream.read(3 * 1024**2 + 1)
@@ -130,8 +195,10 @@ def state_read(expected):
     raise Unavailable(f"bounded state read failed: {last}")
 
 
-def check_inputs(expected):
+def check_inputs(expected, budget=None):
     for name, digest in expected["input_hashes"].items():
+        if budget:
+            budget.require("input hash")
         if hashlib.sha256(Path(name).read_bytes()).hexdigest() != digest:
             raise Unavailable(f"input binding changed: {name}")
 
@@ -168,27 +235,33 @@ def owned_rss(expected):
     return total
 
 
-def admit(expected, *, forecast=0):
-    check_inputs(expected)
+def admit(expected, *, forecast=0, budget=None):
+    with phase(budget, "admit.input_hashes"):
+        check_inputs(expected, budget)
     if datetime.now(UTC) >= scheduler.timestamp(expected["deadlines"]["supervisor"]):
         raise Unavailable("operation end; command spawn refused")
-    state = state_read(expected)
+    with phase(budget, "admit.state"):
+        state = state_read(expected, budget)
     if not scheduler.alive(expected["process"]) or state["phase"] != "running":
         raise Unavailable("runtime is not currently running")
-    if (
-        allocated(expected["steward_paths"]) + expected["steward_forecast_bytes"]
-        > expected["steward_guard_bytes"]
-    ):
-        raise Unavailable("current steward allocation/forecast exceeds guard")
-    if allocated(expected["supervisor_paths"]) + forecast > expected["supervisor_guard_bytes"]:
-        raise Unavailable("current supervisor allocation/forecast exceeds guard")
-    if owned_rss(expected) >= expected["rss_guard_bytes"]:
-        raise Unavailable("current local management RSS guard")
+    with phase(budget, "admit.storage"):
+        if (
+            allocated(expected["steward_paths"]) + expected["steward_forecast_bytes"]
+            > expected["steward_guard_bytes"]
+        ):
+            raise Unavailable("current steward allocation/forecast exceeds guard")
+        if allocated(expected["supervisor_paths"]) + forecast > expected["supervisor_guard_bytes"]:
+            raise Unavailable("current supervisor allocation/forecast exceeds guard")
+    with phase(budget, "admit.rss"):
+        if owned_rss(expected) >= expected["rss_guard_bytes"]:
+            raise Unavailable("current local management RSS guard")
     return state
 
 
-def capture(argv, root, timeout=25, *, receipt=None):
+def capture(argv, root, timeout=25, *, receipt=None, budget=None):
     """Bound pipes/time and persist direct-child cleanup even on soft interruption."""
+    if budget:
+        budget.require("capture before spawn")
     child = subprocess.Popen(
         argv, cwd=root, stdout=subprocess.PIPE, stderr=subprocess.PIPE, start_new_session=True
     )
@@ -200,6 +273,8 @@ def capture(argv, root, timeout=25, *, receipt=None):
     hashes = {key: hashlib.sha256() for key in buffers}
     sizes = {key: 0 for key in buffers}
     deadline = time.monotonic() + timeout
+    if budget:
+        deadline = min(deadline, budget.work_deadline)
     refused = None
     code = None
     interrupted = None
@@ -218,6 +293,7 @@ def capture(argv, root, timeout=25, *, receipt=None):
             "child_reaped": code is not None,
             "child_exact_alive": scheduler.alive(identity),
             "process_group_absence_certified": False,
+            "cumulative_budget": budget.receipt_summary() if budget else None,
             "streams": {
                 name: {
                     "bytes_read": sizes[name],
@@ -257,12 +333,14 @@ def capture(argv, root, timeout=25, *, receipt=None):
             if refused and child.poll() is None and scheduler.alive(identity):
                 os.killpg(child.pid, signal.SIGTERM)
             try:
-                code = child.wait(timeout=3)
+                wait = min(3, max(0, budget.deadline - 4 - time.monotonic())) if budget else 3
+                code = child.wait(timeout=wait)
             except subprocess.TimeoutExpired:
                 refused = refused or "child_wait_timeout"
                 if child.poll() is None and scheduler.alive(identity):
                     os.killpg(child.pid, signal.SIGKILL)
-                code = child.wait(timeout=3)
+                wait = min(3, max(0, budget.deadline - 4 - time.monotonic())) if budget else 3
+                code = child.wait(timeout=wait)
         except (OSError, subprocess.TimeoutExpired) as error:
             recovery_error = type(error).__name__
             refused = refused or "child_recovery_unconfirmed"
@@ -277,8 +355,13 @@ def capture(argv, root, timeout=25, *, receipt=None):
     return {name: data.decode("utf-8") for name, data in buffers.items()}, metadata("completed")
 
 
-def wrapper(expected, args, records, *, selection=True):
-    admit(expected, forecast=expected["supervisor_forecast_bytes"])
+def wrapper(expected, args, records, *, selection=True, budget=None):
+    state = admit(expected, forecast=expected["supervisor_forecast_bytes"], budget=budget)
+    if budget:
+        owned = state.get("owned")
+        if not owned or owned.get("run_id") != Path(expected["_output"]).parent.name:
+            raise Unavailable("finish no longer belongs to current exact owned turn")
+        budget.require("command reservation")
     budget_path = Path(expected["_output"]).parent / "command-budget.json"
     budget_path.parent.mkdir(parents=True, exist_ok=True)
     with budget_path.with_suffix(".lock").open("a") as lock:
@@ -309,19 +392,29 @@ def wrapper(expected, args, records, *, selection=True):
         )
         if len(json.dumps(compact, ensure_ascii=False).encode()) > 4096:
             raise Unavailable("child receipt overflow; no silent truncated pass")
-        save_record(child_record, expected, compact)
+        timing = (
+            phase(budget, "command receipt reserve")
+            if meta["phase"] == "reserved"
+            else budget.recording("command receipt " + meta["phase"])
+            if budget
+            else phase(None, "")
+        )
+        with timing:
+            save_record(child_record, expected, compact)
 
     # Refuse before spawn if the run has no room for a small receipt.
     persist_child({"phase": "reserved", "child_reaped": False})
-    text, meta = capture(
-        command,
-        expected["root"],
-        timeout=min(25, remaining - 10),
-        receipt=persist_child,
-    )
+    kwargs = {"timeout": min(25, remaining - 10), "receipt": persist_child}
+    if budget:
+        kwargs["timeout"] = min(kwargs["timeout"], budget.require("capture"))
+        kwargs["budget"] = budget
+    with budget.recording("capture and reap") if budget else phase(None, ""):
+        text, meta = capture(command, expected["root"], **kwargs)
     records.append(meta)
     if meta["exit_code"] or meta["refusal"]:
         raise Unavailable(f"wrapper failed: {meta}")
+    if budget:
+        budget.require("command result selection")
     if selection:
         value = json.loads(text["stdout"])
         value = value if isinstance(value, list) else [value]
@@ -381,62 +474,106 @@ def save_record(output, expected, value):
     scheduler.atomic_json(output, value)
 
 
+def finish_items(values, expected):
+    """Authenticate the exact batch; dependency compaction never weakens ownership."""
+    ids = {"quoridor-4lc", "quoridor-4lc.40"}
+    if (
+        not isinstance(values, list)
+        or len(values) != 2
+        or any(not isinstance(item, dict) for item in values)
+        or {item.get("id") for item in values} != ids
+    ):
+        raise Unavailable("finish authentication ID set/count refused")
+    items = {item["id"]: item for item in values}
+    for item in items.values():
+        labels = item.get("labels")
+        if (
+            item.get("status") not in ("open", "in_progress")
+            or not isinstance(labels, list)
+            or any(not isinstance(label, str) for label in labels)
+            or "paused-by-user" in labels
+        ):
+            raise Unavailable("finish issue status/pause refused")
+    registry = json.loads(Path(expected["binding"]["registry"]).read_text())
+    goal_owner = "codex:" + registry["roles"]["coordinator"]["thread_id"]
+    if items["quoridor-4lc"].get("assignee") != goal_owner:
+        raise Unavailable("finish goal ownership refused")
+    own = items["quoridor-4lc.40"]
+    if (
+        own.get("assignee") != "codex:" + expected["binding"]["thread_id"]
+        or own.get("status") != "in_progress"
+    ):
+        raise Unavailable("finish issue ownership refused")
+    return own
+
+
+def previous_append(output, budget):
+    """Existing per-command receipts protect against duplicate append, even after timeout."""
+    paths = list(output.parent.glob("command-*-child.json"))
+    if len(paths) > 24:
+        raise Unavailable("run receipt count exceeds existing command cap")
+    for path in paths:
+        budget.require("previous command receipt")
+        with path.open("rb") as stream:
+            raw = stream.read(4097)
+        if len(raw) > 4096:
+            raise Unavailable("previous command receipt overflow")
+        row = json.loads(raw)
+        if row.get("command_head", [])[2:4] == ["update", "quoridor-4lc.40"]:
+            confirmed = (
+                row.get("phase") == "completed"
+                and row.get("child_reaped") is True
+                and row.get("exit_code") == 0
+                and row.get("refusal") is None
+            )
+            outcome = "confirmed" if confirmed else "unknown"
+            raise Unavailable(
+                f"previous append outcome {outcome}; no duplicate retry; inspect {path} and history"
+            )
+
+
 def observer(args, expected):
     output = Path(args.output).resolve()
     if Path(expected["supervisor_output"]).resolve() not in output.parents:
         raise Unavailable("output namespace refused before command spawn")
     records = []
     expected["_output"] = args.output
+    budget = FinishBudget(PROCESS_STARTED) if args.command == "finish" else None
     result = {"at": datetime.now(UTC).isoformat(), "mode": args.command, "status": "unconfirmed"}
+    finish = {"append": "not_started", "backup": "not_reached", "blind_retry": False}
     try:
-        state = admit(expected, forecast=expected["supervisor_forecast_bytes"])
+        if budget:
+            with budget.phase("notes cap"):
+                with Path(args.notes_file).open("rb") as stream:
+                    raw_note = stream.read(1025)
+                if len(raw_note) > 1024:
+                    raise Unavailable("notes cap; next spawn refused")
+                note = raw_note.decode("utf-8")
+            with budget.phase("previous append check"):
+                previous_append(output, budget)
+        state = admit(expected, forecast=expected["supervisor_forecast_bytes"], budget=budget)
         owned = state.get("owned")
         run_id = Path(args.output).parent.name
         if not owned or owned.get("run_id") != run_id:
             raise Unavailable("output run does not belong to current exact owned turn")
-        for issue in ("quoridor-4lc", "quoridor-4lc.40"):
-            value = wrapper(expected, ["show", issue, "--json"], records)[0]
-            if value.get("status") not in ("open", "in_progress") or "paused-by-user" in (
-                value.get("labels") or []
-            ):
-                raise Unavailable("issue pause/authorization refused")
-        if args.command == "observe":
-            wrapper(expected, ["ready", "--json"], records)
-        elif args.command == "inspect":
-            if not args.issue.startswith("quoridor-4lc"):
-                raise Unavailable("issue namespace refused")
-            value = wrapper(expected, ["show", args.issue, "--json"], records)[0]
-            if args.field:
-                data = (value.get(args.field) or "").encode()
-                if args.offset < 0:
-                    raise Unavailable("negative field offset")
-                selection = data[args.offset : args.offset + 8192]
-                records[-1]["additional_field"] = {
-                    "field": args.field,
-                    "range": [args.offset, args.offset + len(selection)],
-                    "source_bytes": len(data),
-                    "source_sha256": hashlib.sha256(data).hexdigest(),
-                    "text": selection.decode("utf-8", errors="ignore"),
-                    "remaining_bytes": max(0, len(data) - args.offset - len(selection)),
-                }
-        else:
-            note = Path(args.notes_file).read_text()
-            if len(note.encode()) > 1024:
-                raise Unavailable("notes cap; next spawn refused")
-            items = wrapper(expected, ["show", "quoridor-4lc.40", "--json"], records)
-            if (
-                items[0].get("assignee") != "codex:" + expected["binding"]["thread_id"]
-                or items[0].get("status") != "in_progress"
-                or "paused-by-user" in (items[0].get("labels") or [])
-            ):
-                raise Unavailable("finish issue ownership/pause refused")
+        if budget:
+            values = wrapper(
+                expected,
+                ["show", "quoridor-4lc", "quoridor-4lc.40", "--json", "--brief-deps"],
+                records,
+                budget=budget,
+            )
+            with budget.phase("batch authentication"):
+                own = finish_items(values, expected)
+            budget.require("append before spawn")
+            finish["append"] = "outcome_unknown_check_original_receipts_before_retry"
             wrapper(
                 expected,
                 [
                     "update",
                     "quoridor-4lc.40",
                     "--if-assignee",
-                    items[0]["assignee"],
+                    own["assignee"],
                     "--if-status",
                     "in_progress",
                     "--append-notes",
@@ -444,13 +581,57 @@ def observer(args, expected):
                 ],
                 records,
                 selection=False,
+                budget=budget,
             )
-            wrapper(expected, ["backup", "sync"], records, selection=False)
+            finish["append"] = "completed"
+            budget.require("backup before spawn")
+            finish["backup"] = "outcome_unknown_check_original_receipts"
+            wrapper(expected, ["backup", "sync"], records, selection=False, budget=budget)
+            finish["backup"] = "completed"
+            budget.require("result recording", reserve=4)
+        else:
+            for issue in ("quoridor-4lc", "quoridor-4lc.40"):
+                value = wrapper(expected, ["show", issue, "--json"], records)[0]
+                if value.get("status") not in ("open", "in_progress") or "paused-by-user" in (
+                    value.get("labels") or []
+                ):
+                    raise Unavailable("issue pause/authorization refused")
+            if args.command == "observe":
+                wrapper(expected, ["ready", "--json"], records)
+            elif args.command == "inspect":
+                if not args.issue.startswith("quoridor-4lc"):
+                    raise Unavailable("issue namespace refused")
+                value = wrapper(expected, ["show", args.issue, "--json"], records)[0]
+                if args.field:
+                    data = (value.get(args.field) or "").encode()
+                    if args.offset < 0:
+                        raise Unavailable("negative field offset")
+                    selection = data[args.offset : args.offset + 8192]
+                    records[-1]["additional_field"] = {
+                        "field": args.field,
+                        "range": [args.offset, args.offset + len(selection)],
+                        "source_bytes": len(data),
+                        "source_sha256": hashlib.sha256(data).hexdigest(),
+                        "text": selection.decode("utf-8", errors="ignore"),
+                        "remaining_bytes": max(0, len(data) - args.offset - len(selection)),
+                    }
         result.update(status="observed", owned=state.get("owned"))
-    except (OSError, ValueError) as error:
+    except (OSError, ValueError, KeyError, TypeError) as error:
         result.update(status="unavailable", reason=str(error))
     result["commands"] = records
+    if budget:
+        result["finish"] = finish
+        result["cumulative_budget"] = budget.summary()
+        # A backup not reached/uncertain is independently visible even if the final record fails.
+        save_record(
+            output.with_name("finish-backup.json"),
+            expected,
+            {"at": datetime.now(UTC).isoformat(), **finish, "whole_finish_observed": False},
+        )
     save_record(args.output, expected, result)
+    if budget and time.monotonic() >= budget.deadline:
+        result.update(status="unavailable", reason="finish recording exceeded cumulative deadline")
+        save_record(args.output, expected, result)
     print(json.dumps(result, ensure_ascii=False))
     return 0 if result["status"] == "observed" else 2
 

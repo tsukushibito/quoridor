@@ -1,6 +1,9 @@
 """Read/ownership/record contracts; no real scheduler or App Server is started."""
 
 import importlib.util
+import contextlib
+import io
+from types import SimpleNamespace
 import json
 import signal
 import subprocess
@@ -225,6 +228,250 @@ class CaptureTests(unittest.TestCase):
             self.assertTrue(first["child_reaped"])
             self.assertFalse(second["child_reaped"])
             self.assertNotIn("stdout", first)
+
+    def test_cumulative_capture_exhaustion_never_spawns(self):
+        budget = w.FinishBudget(0)
+        with (
+            patch.object(w.time, "monotonic", return_value=16),
+            patch.object(w.subprocess, "Popen") as spawn,
+        ):
+            with self.assertRaises(w.Unavailable):
+                w.capture(["mock"], ".", budget=budget)
+            spawn.assert_not_called()
+
+    def test_reap_waits_do_not_reset_cumulative_remaining(self):
+        child = MagicMock(pid=900001)
+        child.poll.return_value = None
+        child.wait.side_effect = [subprocess.TimeoutExpired("mock", 0), -9]
+        selector = MagicMock()
+        selector.get_map.return_value = {"pipe": 1}
+        now = [0.0]
+        budget = w.FinishBudget(0)
+
+        def interrupt(*_):
+            now[0] = 22
+            raise w.Unavailable("mock late soft stop")
+
+        selector.select.side_effect = interrupt
+        receipts = []
+        with (
+            patch.object(w.time, "monotonic", side_effect=lambda: now[0]),
+            patch.object(w.subprocess, "Popen", return_value=child),
+            patch.object(w.selectors, "DefaultSelector", return_value=selector),
+            patch.object(w.scheduler, "process_identity", return_value={"pid": child.pid}),
+            patch.object(w.scheduler, "alive", return_value=True),
+            patch.object(w.os, "killpg"),
+        ):
+            with self.assertRaises(w.Unavailable):
+                w.capture(["mock"], ".", budget=budget, receipt=receipts.append)
+        self.assertEqual([c.kwargs["timeout"] for c in child.wait.call_args_list], [0, 0])
+        self.assertTrue(receipts[-1]["child_reaped"])
+        self.assertFalse(receipts[-1]["process_group_absence_certified"])
+
+
+class FinishTests(unittest.TestCase):
+    @contextlib.contextmanager
+    def fixture(self, *, notes="bounded", items=None, duration=0, admit_duration=0):
+        with tempfile.TemporaryDirectory() as name:
+            root = Path(name)
+            registry = root / "registry.json"
+            registry.write_text(json.dumps({"roles": {"coordinator": {"thread_id": "coord"}}}))
+            note = root / "notes.txt"
+            note.write_text(notes)
+            output = root / "run" / "finish.json"
+            expected = {
+                "root": name,
+                "_output": str(output),
+                "supervisor_output": name,
+                "supervisor_forecast_bytes": 512 * 1024,
+                "deadlines": {"supervisor": "2099-01-01T00:00:00Z"},
+                "binding": {"thread_id": "saved", "registry": str(registry)},
+            }
+            args = SimpleNamespace(command="finish", output=str(output), notes_file=str(note))
+            state = {"owned": {"run_id": "run"}}
+            current = [0.0]
+            calls = []
+            items = (
+                items
+                if items is not None
+                else [
+                    {
+                        "id": "quoridor-4lc",
+                        "status": "in_progress",
+                        "assignee": "codex:coord",
+                        "labels": [],
+                    },
+                    {
+                        "id": "quoridor-4lc.40",
+                        "status": "in_progress",
+                        "assignee": "codex:saved",
+                        "labels": [],
+                    },
+                ]
+            )
+
+            def admit(*_args, **_kwargs):
+                current[0] += admit_duration
+                return state
+
+            def capture(argv, _root, *, timeout, receipt, budget):
+                calls.append({"args": argv[2:], "timeout": timeout})
+                receipt({"phase": "started", "child_reaped": False})
+                current[0] += duration
+                meta = {"phase": "completed", "exit_code": 0, "refusal": None, "child_reaped": True}
+                receipt(meta)
+                text = json.dumps(items) if argv[2] == "show" else "ok"
+                return {"stdout": text, "stderr": ""}, meta
+
+            with (
+                patch.object(w, "PROCESS_STARTED", 0),
+                patch.object(w.time, "monotonic", side_effect=lambda: current[0]),
+                patch.object(w, "admit", side_effect=admit),
+                patch.object(w, "capture", side_effect=capture),
+                contextlib.redirect_stdout(io.StringIO()),
+            ):
+                yield args, expected, calls, current
+
+    def test_finish_authenticates_one_batch_and_preserves_conditional_order(self):
+        with self.fixture() as (args, expected, calls, _):
+            self.assertEqual(w.observer(args, expected), 0)
+            self.assertEqual([x["args"][0] for x in calls], ["show", "update", "backup"])
+            self.assertEqual(
+                calls[0]["args"],
+                ["show", "quoridor-4lc", "quoridor-4lc.40", "--json", "--brief-deps"],
+            )
+            self.assertIn("--if-assignee", calls[1]["args"])
+            self.assertIn("--if-status", calls[1]["args"])
+            result = json.loads(Path(args.output).read_text())
+            self.assertEqual(result["finish"]["append"], "completed")
+            self.assertEqual(result["finish"]["backup"], "completed")
+            self.assertFalse(result["cumulative_budget"]["whole_outer_success_certified"])
+
+    def test_notes_cap_refuses_before_any_read_admission_or_child(self):
+        with self.fixture(notes="x" * 1025) as (args, expected, calls, _):
+            self.assertEqual(w.observer(args, expected), 2)
+            self.assertEqual(calls, [])
+            self.assertEqual(
+                json.loads(Path(args.output).with_name("finish-backup.json").read_text())["backup"],
+                "not_reached",
+            )
+            w.admit.assert_not_called()
+
+    def test_malformed_ids_status_owner_and_pause_never_append(self):
+        good = [
+            {
+                "id": "quoridor-4lc",
+                "status": "in_progress",
+                "assignee": "codex:coord",
+                "labels": [],
+            },
+            {
+                "id": "quoridor-4lc.40",
+                "status": "in_progress",
+                "assignee": "codex:saved",
+                "labels": [],
+            },
+        ]
+        variants = [[good[0]], [good[1], good[1]], [good[0], {**good[1], "id": "foreign"}]]
+        for index, field, value in [
+            (0, "assignee", "foreign"),
+            (1, "assignee", "foreign"),
+            (1, "status", "open"),
+            (0, "status", "closed"),
+            (1, "labels", ["paused-by-user"]),
+            (0, "labels", "malformed"),
+        ]:
+            rows = [dict(x) for x in good]
+            rows[index][field] = value
+            variants.append(rows)
+        for rows in variants:
+            with self.subTest(rows=rows), self.fixture(items=rows) as (args, expected, calls, _):
+                self.assertEqual(w.observer(args, expected), 2)
+                self.assertEqual([x["args"][0] for x in calls], ["show"])
+
+    def test_admission_and_storage_time_consume_same_budget_before_spawn(self):
+        with self.fixture(admit_duration=8) as (args, expected, calls, _):
+            self.assertEqual(w.observer(args, expected), 2)
+            self.assertEqual(calls, [])
+            self.assertIn(
+                "cumulative remaining", json.loads(Path(args.output).read_text())["reason"]
+            )
+
+    def test_each_timeout_shrinks_and_backup_not_reached_is_recorded(self):
+        with self.fixture(duration=8) as (args, expected, calls, _):
+            self.assertEqual(w.observer(args, expected), 2)
+            self.assertEqual([x["args"][0] for x in calls], ["show", "update"])
+            self.assertEqual([x["timeout"] for x in calls], [15, 7])
+            separate = json.loads(Path(args.output).with_name("finish-backup.json").read_text())
+            self.assertEqual(separate["backup"], "not_reached")
+            self.assertFalse(separate["whole_finish_observed"])
+
+    def test_unknown_append_outcome_prevents_duplicate_retry(self):
+        with self.fixture() as (args, expected, calls, _):
+            original = w.capture.side_effect
+
+            def fail_append(argv, root, **kwargs):
+                if argv[2] == "update":
+                    kwargs["receipt"]({"phase": "started", "child_reaped": False})
+                    raise w.Unavailable("communication outcome unknown")
+                return original(argv, root, **kwargs)
+
+            w.capture.side_effect = fail_append
+            self.assertEqual(w.observer(args, expected), 2)
+            before = w.capture.call_count
+            self.assertEqual(w.observer(args, expected), 2)
+            self.assertEqual(w.capture.call_count, before)
+            result = json.loads(Path(args.output).read_text())
+            self.assertIn("previous append outcome unknown", result["reason"])
+
+    def test_confirmed_append_also_never_duplicates_on_repeat(self):
+        with self.fixture() as (args, expected, calls, _):
+            self.assertEqual(w.observer(args, expected), 0)
+            before = w.capture.call_count
+            self.assertEqual(w.observer(args, expected), 2)
+            self.assertEqual(w.capture.call_count, before)
+            self.assertIn(
+                "previous append outcome confirmed",
+                json.loads(Path(args.output).read_text())["reason"],
+            )
+
+    def test_owned_change_in_wrapper_prevents_spawn(self):
+        with self.fixture() as (args, expected, calls, _):
+            w.admit.side_effect = [{"owned": {"run_id": "run"}}, {"owned": {"run_id": "other"}}]
+            self.assertEqual(w.observer(args, expected), 2)
+            self.assertEqual(calls, [])
+
+    def test_original_backup_failure_remains_uncertain_not_whole_finish_success(self):
+        with self.fixture() as (args, expected, calls, _):
+            original = w.capture.side_effect
+
+            def fail_backup(argv, root, **kwargs):
+                if argv[2] == "backup":
+                    kwargs["receipt"]({"phase": "started", "child_reaped": False})
+                    raise w.Unavailable("backup communication unknown")
+                return original(argv, root, **kwargs)
+
+            w.capture.side_effect = fail_backup
+            self.assertEqual(w.observer(args, expected), 2)
+            separate = json.loads(Path(args.output).with_name("finish-backup.json").read_text())
+            self.assertEqual(separate["append"], "completed")
+            self.assertIn("unknown", separate["backup"])
+            self.assertFalse(separate["whole_finish_observed"])
+
+    def test_recording_overrun_cannot_leave_observed_result(self):
+        with self.fixture() as (args, expected, _calls, clock):
+            original = w.save_record
+
+            def delayed(path, exp, value):
+                original(path, exp, value)
+                if Path(path).name == "finish.json":
+                    clock[0] += 30
+
+            with patch.object(w, "save_record", side_effect=delayed):
+                self.assertEqual(w.observer(args, expected), 2)
+            result = json.loads(Path(args.output).read_text())
+            self.assertEqual(result["status"], "unavailable")
+            self.assertIn("recording exceeded", result["reason"])
 
 
 if __name__ == "__main__":
