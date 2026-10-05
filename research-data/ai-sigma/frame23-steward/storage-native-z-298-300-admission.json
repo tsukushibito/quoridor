@@ -1,0 +1,74 @@
+{
+  "at": "2026-10-05T21:23:40.275385+00:00",
+  "measurement_at": "2026-10-05T21:23:38.393268+00:00",
+  "status": "FRESH_GLOBAL_WITHIN_CONSERVED_NATIVE_Z",
+  "conditions": {
+    "global12GiB": true,
+    "old285necessarywithin288": true,
+    "old292necessarywithin32": true,
+    "old287_293necessarywithin3_5": true,
+    "298_scope_within": true,
+    "299_scope_within": true,
+    "300_scope_within": true
+  },
+  "retained": 11033595904,
+  "effective_unused": 1248174080,
+  "UNKNOWN": 134217728,
+  "total": 12415987712,
+  "cap": 12884901888,
+  "margin": 468914176,
+  "errors": [],
+  "donors": {
+    "285_current": 210825216,
+    "285_necessary": 286322688,
+    "292_current": 2150400,
+    "292_necessary": 18927616,
+    "287_293_current": 1335296,
+    "287_293_necessary": 1859584
+  },
+  "recipients": {
+    "298": {
+      "roots": [
+        "research-data/ai-sigma/frame23-native-outcome-z-learning",
+        ".worktree/assets/checkpoints/frame23-native-outcome-z-learning"
+      ],
+      "fresh_allocated": 585728,
+      "inclusive_forecast": 33554432,
+      "cap": 33554432,
+      "scope_within": true,
+      "current_not_additive_to_inclusive_forecast": true,
+      "own_forecast_receipt": "PENDING own298 actual forecast at manifest"
+    },
+    "299": {
+      "roots": [
+        "research-data/ai-sigma/frame23-native-z-fresh-evaluation",
+        ".worktree/assets/inputs/frame23-native-z-fresh-evaluation"
+      ],
+      "fresh_allocated": 225280,
+      "inclusive_forecast": 25165824,
+      "cap": 33554432,
+      "scope_within": true,
+      "current_not_additive_to_inclusive_forecast": true,
+      "own_forecast_receipt": "BOUND owner recipient receipt"
+    },
+    "300": {
+      "roots": ["research-data/ai-sigma/frame23-native-z-independent-review"],
+      "fresh_allocated": 12288,
+      "inclusive_forecast": 491520,
+      "cap": 524288,
+      "scope_within": true,
+      "current_not_additive_to_inclusive_forecast": true,
+      "own_forecast_receipt": "BOUND owner recipient receipt"
+    }
+  },
+  "oldlearning64_public576_coor7_5_297_0_5_otherbounds_preserved": true,
+  "old_unknown_not_discounted": true,
+  "additional_parent": 0,
+  "newWT_build_growth": 0,
+  "science_permission_not_derived_from_storage": true,
+  "each_entry_owner_currentforecast_loaded_physics_required": true,
+  "runtime_source_registry_reservation_original_receipts_unchanged": true,
+  "measurement_wall_s": 85.9781655719853,
+  "measurement_cpu_s": 3.5161406810000004,
+  "maxrss_KiB": 48036
+}
