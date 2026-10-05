@@ -1,0 +1,4 @@
+92 source停止18pathを通常mainGit dabee4e1722cf97f8c128f1bfcdb2365c7857351へ保存し全byte/SHAをsolewriter manifestと比較一致。source-stopped.json/first-natural-effect等を含む steward-git-byte-point.json が統括証拠。親/source/registry再編集0、運用維持長期責任継続、初自然observe/finish有限受入れ。
+新WT /workspaces/quoridor/.worktree/frame22-teacher 管理helperlockedで実作成、base1818b79、sourcegrowth273既8MiB内。次必要freshcurrentrootcoverageへ追加。既frame21-search/featuresは新275/274再用、旧source/evidence保持を明記。source/admission/currentforecastsの科学上限を別課金reset0。
+Root276coordinator.md solewriter/276.1安全窓受領。科学owner既scope継続しsource重複編集0。定義変更時は統括も正本責務/権限/独立性を一度読むが毎配分全文/全役ACK0。自己実装独立評価別ownerの線を採用（273resources/APIは統括、275nnue/ai変更は統括又は独立scientificownerへ具体有限review、274model学習解釈は統括/Sup）し、追加全役gateを作らない。新active補足/恒久idle正式適用を区別、未知RPC盲目再送0。科学外processを本人から停止しない。
+'''

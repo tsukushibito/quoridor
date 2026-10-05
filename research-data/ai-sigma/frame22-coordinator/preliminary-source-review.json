@@ -1,0 +1,38 @@
+{
+  "at": "2026-10-05T12:32:36.125671+00:00",
+  "review_owner": "coordinator separate from source owners273 and275",
+  "sourcepoints": [
+    {
+      "path": ".worktree/frame22-teacher/crates/quoridor-runner/src/resources.rs",
+      "sha256": "65307f8f2bb7b3b1d96d02f08b712ddf6941ed123706cbeebf1bd7c2c5c95f51"
+    },
+    {
+      "path": ".worktree/frame22-teacher/crates/quoridor-runner/src/config.rs",
+      "sha256": "325e936917259b7ea3f9f7957b0817503d4bd8fdf7752e4f3dd51708351657cc"
+    },
+    {
+      "path": ".worktree/frame22-teacher/crates/quoridor-runner/src/runtime.rs",
+      "sha256": "66d06e2332255a01ead0d0033ecaddba0b4b812bbfc8220c4dbb5bc2726e1a29"
+    },
+    {
+      "path": ".worktree/frame21-search/crates/quoridor-nnue/src/lib.rs",
+      "sha256": "e962ac11fbd3fc2d7a3c9c741d104ccf7a141b057122e2a8c70fe1604a8ad20d"
+    },
+    {
+      "path": ".worktree/frame21-search/crates/quoridor-ai/src/alphabeta.rs",
+      "sha256": "5e806a5361ba3e0f1391cd629b4a3513cb9d771a88626a12416a5095ded50a94"
+    },
+    {
+      "path": ".worktree/frame21-search/crates/quoridor-ai/tests/nnue_scratch.rs",
+      "sha256": "475b2b4baa4f0368683be8e49b4b502338e64defe5830a7650b9fb42df80c965"
+    }
+  ],
+  "reviewed": {
+    "273": "opt-in runtime only; default admission preserved; process affinity+effective cpuset+online topology; unique physical; finite quota workers+inference+2 host reserve; same RAM bound; actual worker2/infer4 needs guardian admission",
+    "275": "same remove/add arithmetic in helper; output Vec clone_from capacity retained; immutable parent; per-ply child take/store excludes recursive alias; unmake on returned error; original keys/history/order unchanged; per-depth allocation maxdepth sizing checked at final sourcepoint"
+  },
+  "results_limit": "275 small fixed-work medians; source currently being simplified after nonbeneficial leaf scratch; final stop SHA/tests required before main merge",
+  "remaining": "273 cache metadata implementation and input checks;275 final source/test handoff",
+  "independent_runtime_or_scientific_rerun": false,
+  "main_adoption_certified": false
+}

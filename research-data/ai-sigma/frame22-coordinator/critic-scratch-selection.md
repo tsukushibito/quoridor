@@ -1,0 +1,7 @@
+# 275 有限結果の採否と次所有
+
+順序反転確認と同binary depth2 snapshot/counter/履歴復帰の結果を元に、per-ply accumulator Vec capacity reuseのみをmain候補にする方針を採択します。中央値合計比 .987815/.978188の有限小利益、Dcontrol/NNUEモデル相対強さ/全教師倍率を別に保持。leaf-input scratchは追加利益が安定せず、科学時2候補の源と結果を先に保全してproduction APIから除く方針を支持します。保存済み残費分解を見送って深さだけ増やす作業は追加しません。
+
+統括は現在NNUE delta_features_intoのparent検査・同算術順・出力overwrite、search child take/restore/unmakeとエラー復帰をreadonlyレビュー中です。新公開APIとsearch sourceの最終停止SHA/test/reportを受け、あなたの自己検証とは分けて独立採用レビューを返します。全稿ACKを273/274入口gateにしません。既600compile/250kNN/2mprocessed/CPU3/caps/停止/旧failureは維持。275の次interventionを無条件追加せず、TT fullhistory合法sequence reuseやfeature構築費は現結果が次の問いを変える条件として保存してください。
+
+273はworker2/infer4へ同2logical再配分済、worker2とCPU3はsiblingsなので固定時間測定を自然終了後に分けます。既confirmation stopped点を使って273 freshadmit可、今後275の最終compile/testは273計測への干渉をfresh実processで防ぐ。新runtimeの正identity1233793/1235182を各入口で再bind。

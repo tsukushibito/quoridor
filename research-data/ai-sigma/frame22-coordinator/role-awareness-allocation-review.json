@@ -1,0 +1,44 @@
+{
+  "at": "2026-10-05T12:30:42.355900+00:00",
+  "role_revision": "276",
+  "read_current_definitions": [
+    {
+      "path": ".agents/research-team/common.md",
+      "sha256": "a4fb1d2d22849964398f62f4e67c34d5e2edd0bd045a2c7e7ab63128c0fcb456"
+    },
+    {
+      "path": ".agents/research-team/roles/coordinator.md",
+      "sha256": "b1c32f2a5e4c4d1003b3b85e5e6b3dbd072c7a5176ef60200ec64df1a7cd06e5"
+    },
+    {
+      "path": ".agents/research-team/roles/hypothesis.md",
+      "sha256": "e860cc9f2f899f3dd54ade42684f46b9a72f5d5317103b28bee3333ce7c6edac"
+    },
+    {
+      "path": ".agents/research-team/roles/experiment.md",
+      "sha256": "0e5ba654732cca28b5dc1ea6cfa4f7c0666bf19003b4ce96388052ea7582e164"
+    },
+    {
+      "path": ".agents/research-team/roles/critic.md",
+      "sha256": "f6866411f3e9a34e65055262abbc06e8617e8dcffcf8ba896c2a896d4ac6577f"
+    },
+    {
+      "path": ".agents/research-team/roles/steward.md",
+      "sha256": "e41e4338f7956902a19461db46fb0c490ccca9f3fb0155d6dd0c1c4c37bc2a6b"
+    },
+    {
+      "path": ".agents/research-team/roles/supervisor.md",
+      "sha256": "d628c8a208a5874dba8e436f75aab323780301d3416ab641e8c271f8f06148dd"
+    }
+  ],
+  "allocation_review": {
+    "273": "experiment implementation/resources/data; coordinator independent source review;274 label-free input verification",
+    "274": "hypothesis Python analysis/learning; coordinator and supervisor interpret evidence independently",
+    "275": "critic implements search optimization; coordinator separate source review/adoption; supervisor allocation review",
+    "92": "steward operation/storage/end-maintenance; coordinator acceptance",
+    "40": "supervisor independent coordinator/team evaluation, observer only"
+  },
+  "all_role_ack_gate": false,
+  "repeated_full_read_per_allocation": false,
+  "scientific_improvement_certified": false
+}

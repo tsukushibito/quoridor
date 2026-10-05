@@ -1,0 +1,9 @@
+# 273 追加実配分: CPU topology と teacher cache 接続
+
+同quoridor-4lc.273の有効追補。CPU2/3同physicalによる資格未実施を保持し、worker logical2 / inference logical4の計2logicalへ明示再配分する。CPU上限・RAM3GiB・VRAM6GiB・NN10m・MAX4・48family/96trajectory/36train12selectionval・期限は増やさない。host2physical reserve/affinity/cgroup/quotaを既optin admissionで再確認。275 CPU3とはworker2がsiblingsなので、固定時間比較は自然停止後に行い、GPU全job費測定とも重ねない。新current runtimeは276 receipt scheduler1233793/tick45593355・monitor1235182/tick45599721で、旧identityを代用しない。各入口で本人freshadmitする。
+
+新solewriter pathを273のmanagedWT /workspaces/quoridor/.worktree/frame22-teacher に追加する: crates/quoridor-data/src/lib.rs の write_tensor_cache と、その変更を検証する同crateの必要testだけ。問いは新教師入力の露出maskとPython/native parityを、既cacheから追加feature再計算・別JSON全コピーなしで可能にすること。現在TeacherRowにあるstate_key/history_key/ply/feature_signature/side/ids/distanceを rows.jsonl の同rowへ保持する。idsはP1/P2順かSTM順かを名称とschemaで明記（現TeacherRow idsはP1/P2、tensor xはSTM順）。distanceは現STM順f32とsideを保存。history_keyからfullhistory/countを捏造しない。現在tensor x/distance/labelsのbytesと意味は変更しない。新fieldは既source由来でlabelsから計算しない。
+
+必要検証はP1/P2のmetadataとtensor対応、既tensorfiles byte同一、eligible/allow_test境界・欠測を必要範囲で確認、rustfmtと該当crate test。新copy/cacheには原manifest/SHAとcanonical condition/family/登録split/全planned分母をbindし、train/selectionvalは別manifest、兄弟条件の二重露出0。新metadata等は既data128MiB/build128MiB内でforecastし、足りなければ具体量を通常報告。独立レビューは実装停止pointを受けて統括がsource/test根拠を確認し、274がPython入力・label-free mask/parityを別ownerとして確認する。全roleACK・96完走・全稿を科学入口gateへしない。
+
+既qualification/生成規則/ラベル/モデル/K64/温度/順序/総科学budgetは変更しない。CPU topology拒否・旧数量v1/v3未実行・276停止窓を保持。登録済みcanonical片conditionの完成groupsを早期immutable handoffし、274 Bprefix12/24/36の判断を可能にする。source停止path/SHAと必要cache interfaceを次通常報告へ。

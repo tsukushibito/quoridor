@@ -1,0 +1,7 @@
+# 274 teacher cache interface 配分通知
+
+同274既scopeの追補。273のmanagedWTに crates/quoridor-data/src/lib.rs::write_tensor_cache と必要testのsolewriter範囲を明示追加し実配送accepted済み。既 rows.jsonl に state_key/history_key/ply/feature_signature/side/ids(P1P2順を明記)/distance(STM順)を保持し、x/distance/labels tensorbytesは変えない。新metadataはlabel-free露出判定とPython/native入力検証に使う。別canonical全コピーやfeature再計算を義務にしない。273原sourceの停止pointは統括がレビュー、274はPython接続・OR rowmask/parityを別ownerとして確認。273の自己testを独立確認に換算しない。
+
+現在276役改定の通常再開receipt: scheduler1233793/tick45593355、monitor1235182/tick45599721、current24/6digest/14checks PASS。各heavy入口はfresh本人admit、古いidentityは代用0。GPU273はworker2/infer4の同2logicalへ再配分（旧2,3はsiblings拒否を保持）。275短固定時間確認は別自然窓、fitの時計比較と重ねない。
+
+既Bprefix12/24/36最大一つ・14:15prefix0 NOT_RUN・same256k seen/common初期/尺度・旧val固定・新12selection診断・tau1/epoch差・NN750k/予算/期限は不変更。metadataと実教師handoffの待ちは担当273/issue273、待つ判断はeligible新train完整groupと新入力対応。96attempt完走や全稿ACKを待たない。教師rootmean/z不一致は期待値の真値ではなく、学習への転移と合わせて次target/loss案を判断する。
