@@ -1,0 +1,45 @@
+{
+  "at": "2026-10-05T01:35:22.132501+00:00",
+  "owned": null,
+  "phase": "stopped",
+  "scheduler_exact_absent": true,
+  "monitor_exact_absent": true,
+  "old_run": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame20-role247-0a4ee12d-f6bf-4b9b-92c2-da186cc631db",
+  "monitor_ended": {
+    "started_utc": "2026-10-05T01:18:59.368306+00:00",
+    "ended_utc": "2026-10-05T01:35:22.046491+00:00",
+    "process": {
+      "pid": 499467,
+      "start_ticks": "41615327",
+      "state": "R",
+      "rss_bytes": 20639744,
+      "cpu_ticks": 2,
+      "affinity": [
+        0
+      ],
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "reason": "monitor operator stop",
+    "error": null,
+    "exit_code_if_normal": 0,
+    "self_user_cpu_s": 1.081055,
+    "self_sys_cpu_s": 0.920766,
+    "self_maxrss_kib": 28632,
+    "child_user_cpu_s": 6.785751,
+    "child_sys_cpu_s": 2.068404,
+    "child_maxrss_kib": 250148,
+    "sampled_combined_rss_peak_bytes": 156008448,
+    "allocated_peak_bytes": 41639936,
+    "no_child_command_left_running": true,
+    "own_process_exits_after_this_record": true,
+    "all_research_stopped_claimed": false
+  },
+  "main_write_allowed_paths": [
+    "/workspaces/quoridor/.agents/research-team/roles/steward.md"
+  ],
+  "root_only_main_writer": true,
+  "steward_main_edit": false,
+  "source_before_sha256": {
+    "/workspaces/quoridor/.agents/research-team/roles/steward.md": "4976eba642dc2bcc5075f4fc1abfe192d778273a96342a2098495b39bd074c0d"
+  }
+}
