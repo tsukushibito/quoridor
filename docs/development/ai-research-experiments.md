@@ -73,10 +73,10 @@ mainが持続的研究の統合正本で、managed worktreeは並行変更・比
 
 | 境界 | 現在の配置と保守ルール |
 | --- | --- |
-| ルール・特徴・NNUE・探索・native arena | `tools/ai-sigma-native/`。共通機能からframe/過去issueへ逆依存せず、実callerがこの境界を使う |
-| 教師生成・プロセス/IPC | `tools/ai-sigma-common/`に共通契約、`tools/ai-sigma-manygame-generation/generate-run.cjs`に明示run設定の入口。期限/所有/CPU/モデルpath・hashをrunに結び付ける |
-| 学習入力・学習入口 | `tools/nnue-training/qf1.py`・`dataset.py`・`learner.py`。教師label/split/lineageは入力の契約として保持し、旧frame14固定規則を汎用入力へ埋め込まない |
-| 独立検証・凍結recipe | 独立の判定を共通実装で置換しない。旧結果の再現は記録Git版と必要差分から行う。保守移行前のrecipeは`a0c43016e0a10e252fd06405f6cf893f6c434a30`で参照できる |
+| ルール・特徴・NNUE・探索・native arena | `crates/quoridor-core`・`quoridor-nnue`・`quoridor-ai`・`quoridor-runner`。Linux主経路、Wasmは製品経路 |
+| 教師生成・推論queue・回収 | `quoridor-runner`・`quoridor-inference`。モデル/版/予算/所有をrun設定へ結び付ける |
+| 学習入力・学習入口 | `quoridor-data`のArrow/mmapと`python/quoridor_training/`。モデル/設定/尺度も同packageが所有 |
+| 独立検証・旧recipe | 旧Node実装・比較コードは削除済み。旧recipeは記録Git版から復元する。移行前一式は`54a294a`、[削除報告](../reports/ai-retired-code-cleanup.md)を参照 |
 | 保存データと作業領域 | Git正本は`research-data/ai-sigma/`、live/展開/tmpは`.artifacts/ai-sigma/`。モデル・env/cacheは永続入力として明示参照し、保存/復元・使用中pathを確認してから所有一時物を整理する |
 
 並行writerはファイル単位で担当を分け、Git index/commitは統合担当一人が操作する。全writerの停止と明示pathを引き渡し、`scripts/dev/research-save.py check`で通常index・既stage・一時物・保存forecastを確認し、Git担当が`save`を実行する。private indexでHEADだけ更新する旧保存helperは将来の標準に使わない。既stage/未保存変更をresetして整合させず、保存失敗時のstageも確認用に保持する。

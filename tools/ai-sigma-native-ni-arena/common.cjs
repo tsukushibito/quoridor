@@ -1,1 +1,0 @@
-'use strict';const fs=require('fs'),path=require('path'),{now}=require('../ai-sigma-native-baseline/common.cjs');const ROOT=path.resolve(__dirname,'../..'),A=ROOT+'/.artifacts/ai-sigma/resume-20261003/NATIVE-NI-ARENA',D=ROOT+'/research-data/ai-sigma/173-native-ni-arena';const save=(p,x)=>fs.writeFileSync(p,JSON.stringify(x,null,2)+'\n');module.exports={ROOT,A,D,now,save};

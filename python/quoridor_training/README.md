@@ -1,7 +1,6 @@
 # Native data learning cycle
 
-The package consumes Rust-produced, verified memory-mapped tensors. It reuses
-`tools/nnue-training` configuration/model/measurement code. There is no Python board
+The package consumes Rust-produced, verified memory-mapped tensors. Configuration, models, scaling and measurements live in this package. There is no Python board
 reconstruction in the training hot path. `binding.features(library, prefixes)` optionally
 calls the `quoridor-data` C ABI once per bulk batch (build `-p quoridor-data` to obtain its
 shared library).

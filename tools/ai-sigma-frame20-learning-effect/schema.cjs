@@ -1,1 +1,0 @@
-'use strict';const assert=require('assert');exports.mode=c=>{assert.equal(c.leaf_package,true);assert.equal(c.distance_mode,'clip');assert(['L','I'].includes(c.model_id));return{leafPackage:true,distanceMode:'clip'}};

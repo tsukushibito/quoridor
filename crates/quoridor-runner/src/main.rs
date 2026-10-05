@@ -15,6 +15,9 @@ fn argument(args: &[String], name: &str) -> Result<String> {
         .ok_or_else(|| format!("missing value {name}").into())
 }
 fn main() {
+    // Disable before dlopen/CreateEnv can initialize ORT's telemetry SDK.
+    // SAFETY: entrypoint initialization, before this program starts any threads.
+    unsafe { std::env::set_var("ORT_DISABLE_TELEMETRY", "1") };
     if let Err(e) = execute() {
         eprintln!("{e}");
         std::process::exit(1)
@@ -42,20 +45,9 @@ fn execute() -> Result<()> {
             let action = args
                 .get(1)
                 .map(String::as_str)
-                .ok_or("dataset requires import/cache/inspect")?;
+                .ok_or("dataset requires cache/inspect/evaluate")?;
             let input = PathBuf::from(argument(&args, "--input")?);
             match action {
-                "import" => {
-                    let output = PathBuf::from(argument(&args, "--output")?);
-                    let mut rows = quoridor_data::import_legacy(&input)?;
-                    let manifest = quoridor_data::write_dataset(
-                        &output,
-                        &mut rows,
-                        !args.iter().any(|a| a == "--uncompressed"),
-                        4096,
-                    )?;
-                    println!("{}", serde_json::to_string(&manifest)?);
-                }
                 "cache" => {
                     let output = PathBuf::from(argument(&args, "--output")?);
                     let manifest = quoridor_data::write_tensor_cache(

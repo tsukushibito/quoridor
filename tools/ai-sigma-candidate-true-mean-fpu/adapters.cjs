@@ -1,3 +1,0 @@
-const fs=require('fs'),path=require('path'),base=require('../ai-sigma-diverse-prefix/adapters.cjs');
-function script(n){if(n==='main')return base.script('main')+'\n'+fs.readFileSync(path.resolve(__dirname,'../ai-sigma-deep-node-comparison/deep-input.js'),'utf8')+'\n'+fs.readFileSync(__dirname+'/mean-main.js','utf8');if(n==='reference')return fs.readFileSync(path.resolve(__dirname,'../ai-sigma-actual-boundary-repair/reference-core.js'),'utf8');if(n==='worker')return fs.readFileSync(__dirname+'/mean-worker.js','utf8');return base.script(n);}
-module.exports={script,bindings:()=>({...base.bindings(),private_factor:'unvisitedQ only, identical trueMean ledger both variants'})};

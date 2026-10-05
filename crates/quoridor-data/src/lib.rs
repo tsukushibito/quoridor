@@ -15,7 +15,7 @@ use sha2::{Digest, Sha256};
 use std::{
     collections::{BTreeMap, BTreeSet},
     fs::{self, File, OpenOptions},
-    io::{BufRead, BufReader, BufWriter, Read, Write},
+    io::{BufWriter, Read, Write},
     path::{Path, PathBuf},
 };
 pub type Result<T> = std::result::Result<T, Box<dyn std::error::Error + Send + Sync>>;
@@ -46,10 +46,6 @@ pub enum Teacher {
         #[serde(default)]
         pv: Vec<u16>,
     },
-    Legacy {
-        rootmean: Option<f32>,
-        source: String,
-    },
     InputOnly,
 }
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -67,7 +63,6 @@ impl Teacher {
             } else {
                 *value
             }),
-            Self::Legacy { rootmean, .. } => *rootmean,
             Self::InputOnly => None,
         }
     }
@@ -425,62 +420,6 @@ pub fn read_dataset(path: &Path, allow_test: bool) -> Result<Vec<TeacherRow>> {
     }
     Ok(rows)
 }
-/// Legacy QF1 imports keep target provenance explicit; they are not claimed to
-/// prove a legal prefix when the old artifact did not save one.
-pub fn import_legacy(path: &Path) -> Result<Vec<TeacherRow>> {
-    let source_sha = file_sha(path)?;
-    let reader = BufReader::new(File::open(path)?);
-    let mut rows = Vec::new();
-    for (n, line) in reader.lines().enumerate() {
-        let v: serde_json::Value = serde_json::from_str(&line?)?;
-        if v.get("teacher").is_some() {
-            rows.push(serde_json::from_value(v)?);
-            continue;
-        }
-        let ids: [Vec<u16>; 2] = serde_json::from_value(v["ids"].clone())?;
-        let distance: [f32; 2] = serde_json::from_value(v["distance"].clone())?;
-        let side = v["side"].as_u64().ok_or("legacy side")? as u8;
-        let split = match v["split"].as_str().ok_or("legacy split")? {
-            "train" => Split::Train,
-            "validation" => Split::Validation,
-            "test" => Split::Test,
-            _ => return Err("legacy split".into()),
-        };
-        let value = v["rootmean"].as_f64().map(|x| x as f32);
-        let mut r = TeacherRow {
-            id: v["id"]
-                .as_str()
-                .map(str::to_string)
-                .unwrap_or_else(|| format!("legacy-{n}")),
-            game: v["group"].as_str().ok_or("legacy group")?.into(),
-            family: v["exposure_group"]
-                .as_str()
-                .unwrap_or(v["group"].as_str().unwrap())
-                .into(),
-            split,
-            ply: 0,
-            prefix: Vec::new(),
-            state_key: v["state_key"].as_str().unwrap_or("").into(),
-            history_key: v["history_key"].as_str().unwrap_or("").into(),
-            ids,
-            distance,
-            side,
-            action: None,
-            teacher: Teacher::Legacy {
-                rootmean: value,
-                source: format!("legacy-QF1-import:sha256:{}", source_sha),
-            },
-            z: v["z"].as_f64().map(|x| x as f32),
-            eligible: v["primary_eligible"].as_bool().unwrap_or(true),
-            model_sha: "legacy-unbound".into(),
-            feature_signature: String::new(),
-        };
-        r.feature_signature = r.signature();
-        r.validate()?;
-        rows.push(r)
-    }
-    Ok(rows)
-}
 #[derive(Debug, Serialize, Deserialize)]
 pub struct TensorCache {
     pub rows: usize,
@@ -558,7 +497,7 @@ pub fn write_tensor_cache(dataset: &Path, output: &Path, allow_test: bool) -> Re
         }
         serde_json::to_writer(
             &mut meta,
-            &serde_json::json!({"id":r.id,"group":r.family,"game":r.game,"split":r.split,"primary_eligible":r.eligible,"teacher_type":match r.teacher{Teacher::Mcts{..}=>"mcts",Teacher::AlphaBeta{..}=>"alpha_beta_bounded_search_value",Teacher::Legacy{..}=>"legacy_rootmean",Teacher::InputOnly=>"input_only"},"rootmean":r.teacher.value(),"z":r.z}),
+            &serde_json::json!({"id":r.id,"group":r.family,"game":r.game,"split":r.split,"primary_eligible":r.eligible,"teacher_type":match r.teacher{Teacher::Mcts{..}=>"mcts",Teacher::AlphaBeta{..}=>"alpha_beta_bounded_search_value",Teacher::InputOnly=>"input_only"},"rootmean":r.teacher.value(),"z":r.z}),
         )?;
         meta.write_all(b"\n")?;
         Ok(())

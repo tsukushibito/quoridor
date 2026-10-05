@@ -39,86 +39,49 @@ fn export(p: &std::path::Path, w: &[f32]) {
     fs::write(p.join("model.json"),serde_json::to_vec(&json!({"feature":"QF1-f32-STM-scaled-v1","weights":"weights.f32","weights_SHA":format!("{:x}",Sha256::digest(&bytes)),"weights_B":bytes.len(),"little_endian_f32":w.len(),"mu_f32":[0.08f32,0.09f32],"sigma_f32":[0.05f32,0.06f32],"distance_fit":{"a":0.01f32,"b":7.0}})).unwrap()).unwrap();
 }
 #[test]
-fn native_qf1_matches_javascript_full_delta_all_legal_children() {
-    let t = Topology::default();
-    let w = weights(t);
-    let p = tmp();
-    export(&p, &w);
-    let m = Model::load(p.join("model.json")).unwrap();
-    let repo = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
-    let script = r#"const n=require(process.argv[1]+'/tools/ai-sigma-native/nnue.cjs');const m=n.load(process.argv[2]);let out=[];for(const prefix of [[],[81,163],[13,67,22,58,31,49,40,31],[13,67,22,58,31,49,40,108]]){let s=n.q.r.fromPrefix([]);for(let id of prefix){let a=s.getLegalActions().find(a=>n.q.r.rustAction(s,a)===id);if(!a)throw Error('fixture illegal '+id);s=s.next(a);}const full=n.q.full(s,m.w);let row={prefix,ids:full.ids,distance:full.distance,side:full.side-1,value:n.valueScaled(full,m.w,m.m),children:[]};for(const action of s.getLegalActions()){const id=n.q.r.rustAction(s,action);const child=s.next(action),d=n.q.delta(full,child,m.w);row.children.push({id,ids:d.ids,distance:d.distance,side:d.side-1,value:n.valueScaled(d,m.w,m.m)});}out.push(row);}console.log(JSON.stringify(out));"#;
-    let out = Command::new("node")
-        .arg("-e")
-        .arg(script)
-        .arg(&repo)
-        .arg(p.join("model.json"))
-        .output()
-        .unwrap();
-    assert!(
-        out.status.success(),
-        "{}",
-        String::from_utf8_lossy(&out.stderr)
-    );
-    let rows: serde_json::Value = serde_json::from_slice(&out.stdout).unwrap();
-    for row in rows.as_array().unwrap() {
-        let prefix: Vec<u16> = serde_json::from_value(row["prefix"].clone()).unwrap();
+fn native_full_delta_simd_and_parent_preservation_all_legal_children() {
+    let m = model(Topology::default());
+    for prefix in [
+        vec![],
+        vec![81, 163],
+        vec![13, 67, 22, 58, 31, 49, 40, 31],
+        vec![13, 67, 22, 58, 31, 49, 40, 108],
+    ] {
         let c = SigmaContext::from_prefix(&prefix).unwrap();
-        let a = m.full(c.position()).unwrap();
-        let check = |a: &quoridor_nnue::Accumulator, r: &serde_json::Value| {
-            let ids: [Vec<u16>; 2] = serde_json::from_value(r["ids"].clone()).unwrap();
-            assert_eq!(a.features.ids, ids);
-            assert_eq!(a.features.side, r["side"].as_u64().unwrap() as u8);
-            for i in 0..2 {
-                assert_eq!(
-                    a.features.distance[i],
-                    r["distance"][i].as_f64().unwrap() as f32
-                );
-            }
-            assert!(
-                (m.evaluate(a).unwrap() - r["value"].as_f64().unwrap() as f32).abs() <= 1e-6,
-                "prefix {prefix:?}"
-            );
-        };
-        check(&a, row);
-        let parent_bits: Vec<u32> = a.values.iter().flatten().map(|v| v.to_bits()).collect();
+        let parent = m.full(c.position()).unwrap();
+        let parent_bits: Vec<u32> = parent
+            .values
+            .iter()
+            .flatten()
+            .map(|v| v.to_bits())
+            .collect();
         let simd = m.full_mode(c.position(), EvaluationMode::Simd).unwrap();
         assert_eq!(
-            m.evaluate(&a).unwrap().to_bits(),
+            m.evaluate(&parent).unwrap().to_bits(),
             m.evaluate(&simd).unwrap().to_bits()
         );
-        let legal: Vec<u16> = row["children"]
-            .as_array()
-            .unwrap()
-            .iter()
-            .map(|r| r["id"].as_u64().unwrap() as u16)
-            .collect();
-        let mut expected = c.legal_ids();
-        expected.sort_unstable();
-        let mut actual = legal.clone();
-        actual.sort_unstable();
-        assert_eq!(expected, actual);
-        for r in row["children"].as_array().unwrap() {
-            let child = c.play(r["id"].as_u64().unwrap() as u16).unwrap();
-            let d = m.delta(&a, child.position()).unwrap();
-            check(&d, r);
+        for action in c.legal_ids() {
+            let child = c.play(action).unwrap();
+            let delta = m.delta(&parent, child.position()).unwrap();
             let full = m.full(child.position()).unwrap();
-            assert!((m.evaluate(&d).unwrap() - m.evaluate(&full).unwrap()).abs() < 1e-5);
-            let ds = m.delta(&simd, child.position()).unwrap();
+            assert_eq!(delta.features, full.features);
+            assert!((m.evaluate(&delta).unwrap() - m.evaluate(&full).unwrap()).abs() < 1e-5);
+            let delta_simd = m.delta(&simd, child.position()).unwrap();
             assert_eq!(
-                m.evaluate(&d).unwrap().to_bits(),
-                m.evaluate(&ds).unwrap().to_bits()
+                m.evaluate(&delta).unwrap().to_bits(),
+                m.evaluate(&delta_simd).unwrap().to_bits()
             );
         }
         assert_eq!(
             parent_bits,
-            a.values
+            parent
+                .values
                 .iter()
                 .flatten()
                 .map(|v| v.to_bits())
                 .collect::<Vec<_>>()
         );
     }
-    fs::remove_dir_all(p).unwrap();
 }
 #[test]
 fn scalable_topology_and_quantized_roundtrip_checked_overflow() {

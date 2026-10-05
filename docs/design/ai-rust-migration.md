@@ -14,7 +14,7 @@ Use actual available resources instead of expired CPU4/RAM8/VRAM6 allocations. R
 
 `quoridor-core` owns legal rules, history, make/unmake and path calculation. `quoridor-nnue` owns sparse encoding, immutable weights, accumulators and CPU inference. `quoridor-ai` owns alpha-beta/PVS/TT and Sigma-faithful typed MCTS. Native-only `quoridor-inference` owns CPU ORT and CUDA AOTInductor/TensorRT adapters. `quoridor-data` owns Arrow records/manifests and bulk learning input. `quoridor-runner` owns selfplay/arena/benchmark/dataset/cycle, independent trees, bounded queues, deadlines and output. `quoridor-wasm` consumes only portable CPU libraries. GPU libraries never enter portable core/search dependencies.
 
-Python/PyTorch owns training, analysis and model conversion. There is no Python, JSON or subprocess round-trip for a search node or neural leaf. Runtime C/C++ shims are native SDK adapters; Rust owns their buffers, lifetimes and queue. Old JavaScript is an independent compatibility oracle, not the production engine.
+Python/PyTorch owns training, analysis and model conversion. There is no Python, JSON or subprocess round-trip for a search node or neural leaf. Runtime C/C++ shims are native SDK adapters; Rust owns their buffers, lifetimes and queue. Retired JavaScript engines, compatibility wrappers and cross-implementation test oracles are removed. Restore historical code from its recorded Git revision only when needed; current runtime tests exercise Rust and Wasm directly.
 
 ## Runtime interfaces
 

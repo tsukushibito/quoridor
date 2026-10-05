@@ -18,6 +18,15 @@
 - The five roles use independent saved sessions on the existing App Server. Research follows competing hypotheses and experiments; it is not a fixed sequential implementation pipeline.
 - Role instructions alone do not authorize research execution or recursive delegation. Each task needs its Beads issue, scope, worktree/write owner, resource budget, and verification contract. Team setup does not resume deferred AI implementation or start training.
 
+## 保守と削除の方針
+
+- 保守コストを低くすることを優先し、現役の入口と正本を一つにする。
+- 旧実装との互換性維持を目的にコードを残さない。不要になった実装・API・shim・比較テスト・実験別コピー・依存・案内は削除し、過去版の再構成元はGit履歴とする。
+- 実施中または具体的に予定した旧版との直接比較に必要なコードは、対象・用途・撤去条件を明示して比較専用に保持する。比較実行時のGit復元を前提にせず、現役経路から分離し、比較終了後は不要分を削除する。
+- 「将来使うかもしれない」「過去runをそのまま実行できる」という理由だけで旧経路を維持しない。移行時は呼出側と現在の手順も更新して、旧経路を撤去する。
+- 現役の製品・研究機能と、その正しさを確認するテストは維持する。Gitで再構成できない実験検証データ・モデル・入力・未保存変更は、不要コードの削除と区別する。
+- 必要ならディレクトリ構成も改める。小変更の継続や既存配置の維持を目的にせず、到達構成・責務・依存境界を明確にする。
+
 ## 文書インデックス
 
 作業に関係する項目から参照する。全資料を毎回読むことや、ここに全ファイルを列挙することは求めない。

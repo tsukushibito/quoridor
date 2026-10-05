@@ -1,0 +1,161 @@
+{
+  "issue": "quoridor-42t",
+  "restore_commit": "54a294aa7ca0fb6a10b3cf3768ed3c8a36308f5c",
+  "removed_files": 1912,
+  "removed_logical_bytes": 9950973,
+  "node_oracles_retained": false,
+  "historical_scientific_data_changed": false,
+  "comparisons_policy": "Keep only currently required direct-comparison versions in a separate scope with removal conditions. Do not restore during comparison execution.",
+  "verification": {
+    "rust_workspace_passed": 71,
+    "rust_ignored_external_torch": 1,
+    "rust_clippy": "PASS",
+    "linux_release_build": "PASS",
+    "wasm_runtime": {
+      "schema": "wasm-nnue-runtime-v1",
+      "fixtures": 3,
+      "scalar_simd_exact": true,
+      "completed_depth": 1,
+      "callback_cancel": true,
+      "hash_rejection": true
+    },
+    "python_loader_contracts": 3,
+    "model_load": {
+      "model_package_import": "PASS",
+      "existing_checkpoint_load": "PASS",
+      "rows": 321,
+      "forward_samples": 3,
+      "train_steps": 0,
+      "onnx_sidecar_exists": false,
+      "default_config": "PASS"
+    },
+    "maintenance_tests": 14,
+    "export_tests": 3,
+    "team_client_tests": 11,
+    "typecheck": "PASS",
+    "render_tests": 6,
+    "product_boundary": "PASS",
+    "fresh_source_export": {
+      "entries": 793,
+      "logical_bytes": 5375378,
+      "current_rust_python_included": true,
+      "retired_scopes_excluded": true,
+      "python_loader_tests": 3,
+      "temporary_copy_removed": true
+    }
+  },
+  "telemetry": {
+    "reproduced_by": "onnxruntime 1.30.0 import alone",
+    "baseline_strace_opens": [
+      "openat(AT_FDCWD, \":memory:.ses\", O_RDONLY) = -1 ENOENT",
+      "openat(AT_FDCWD, \":memory:.ses\", O_WRONLY|O_CREAT|O_TRUNC, 0666)"
+    ],
+    "sidecar_bytes": 51,
+    "suppression": "ORT_DISABLE_TELEMETRY=1 before library initialization",
+    "python_package_import_no_file_open": true,
+    "native_release_no_file_open": true,
+    "native_real_ort_nn_calls": 4,
+    "sidecar_present": false
+  },
+  "native_ort_result": {
+    "admission": {
+      "inference_core": null,
+      "memory_available": 19382898688,
+      "memory_limit": 2147483648,
+      "reserved_physical": [
+        16,
+        18
+      ],
+      "worker_cores": [
+        0
+      ]
+    },
+    "fixed_work": true,
+    "model_sha": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+    "records": [
+      {
+        "action": 13,
+        "depth": 0,
+        "engine": "mcts",
+        "fixture": 0,
+        "nn_calls": 1,
+        "nodes": 132,
+        "repeat": 0,
+        "seconds": 0.005124441,
+        "simulations": 1,
+        "value": 0.21437488496303558,
+        "warm": true
+      },
+      {
+        "action": 13,
+        "depth": 0,
+        "engine": "mcts",
+        "fixture": 0,
+        "nn_calls": 1,
+        "nodes": 132,
+        "repeat": 1,
+        "seconds": 0.004028744,
+        "simulations": 1,
+        "value": 0.21437488496303558,
+        "warm": false
+      },
+      {
+        "action": 13,
+        "depth": 0,
+        "engine": "mcts",
+        "fixture": 0,
+        "nn_calls": 1,
+        "nodes": 132,
+        "repeat": 2,
+        "seconds": 0.003913486,
+        "simulations": 1,
+        "value": 0.21437488496303558,
+        "warm": false
+      },
+      {
+        "action": 13,
+        "depth": 0,
+        "engine": "mcts",
+        "fixture": 0,
+        "nn_calls": 1,
+        "nodes": 132,
+        "repeat": 3,
+        "seconds": 0.004044848,
+        "simulations": 1,
+        "value": 0.21437488496303558,
+        "warm": false
+      }
+    ],
+    "run_id": "telemetry-integration",
+    "schema": "quoridor-search-benchmark-v1",
+    "total_seconds": 0.087451611,
+    "warm_separate": true
+  },
+  "manifest_gzip_sha256": "9df3fa4b5f28ea52db94c72a8d068d5e1f3d28e47826c90777f74f836cfa80fc",
+  "removed_obsolete_benchmark_build_outputs": [
+    {
+      "path": ".artifacts/rust-migration/target/release/examples/libnode_comparison-57184e173ce406ca.rmeta",
+      "logical_bytes": 0
+    },
+    {
+      "path": ".artifacts/rust-migration/target/release/examples/node_comparison",
+      "logical_bytes": 1007464
+    },
+    {
+      "path": ".artifacts/rust-migration/target/release/examples/node_comparison-481d319be8b5b23c",
+      "logical_bytes": 1007464
+    },
+    {
+      "path": ".artifacts/rust-migration/target/release/examples/node_comparison-481d319be8b5b23c.d",
+      "logical_bytes": 368
+    },
+    {
+      "path": ".artifacts/rust-migration/target/release/examples/node_comparison-57184e173ce406ca.d",
+      "logical_bytes": 507
+    },
+    {
+      "path": ".artifacts/rust-migration/target/release/examples/node_comparison.d",
+      "logical_bytes": 1516
+    }
+  ]
+}

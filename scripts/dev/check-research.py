@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Scoped research syntax, formatting, dependency boundaries and NN0 contracts.
 
-No build, framework import, model forward, game, dataset expansion or scheduler start.
+No build, Torch/ORT import, model forward, game, dataset expansion or scheduler start.
 Use --format to modify only maintained source; frozen recipes/vendor/raw are excluded.
 """
 
@@ -11,45 +11,20 @@ import ast
 import json
 import os
 from pathlib import Path
-import re
 import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[2]
-JS_ROOTS = ("tools/ai-sigma-native", "tools/ai-sigma-common")
 PY_ROOTS = ("python/quoridor_training", "tools/model-export")
-PY_FILES = tuple(
-    "tools/nnue-training/" + name + ".py"
-    for name in (
-        "common",
-        "model",
-        "qf1",
-        "dataset",
-        "exposure",
-        "metadata",
-        "learner",
-        "scaled_model",
-        "test_input_contract",
-        "test_learner_entry",
-    )
-) + (
+PY_FILES = (
     "scripts/dev/research-save.py",
     "scripts/dev/research-storage.py",
     "scripts/dev/check-research.py",
     "scripts/dev/research-team.py",
     "tools/research-team/test_client.py",
-    "tools/ai-sigma-native/inference/ort.py",
     "tools/research-quality/test_maintenance.py",
 )
-CALLERS = (
-    "tools/ai-sigma-manygame-generation/worker.cjs",
-    "tools/ai-sigma-manygame-generation/pipe.cjs",
-    "tools/ai-sigma-manygame-generation/gamepool.cjs",
-    "tools/ai-sigma-manygame-generation/broker.cjs",
-    "tools/ai-sigma-manygame-generation/config.cjs",
-    "tools/ai-sigma-manygame-generation/generate-run.cjs",
-    "tools/nnue-training/export_generated.cjs",
-)
+CALLERS = ("crates/quoridor-wasm/tests/nnue-runtime.cjs",)
 
 
 def run(*args):
@@ -58,9 +33,7 @@ def run(*args):
 
 def sources():
     js = sorted(
-        {p for directory in JS_ROOTS for p in (ROOT / directory).rglob("*.cjs")}
-        | {p for directory in JS_ROOTS for p in (ROOT / directory).rglob("*.js")}
-        | {ROOT / p for p in CALLERS if (ROOT / p).exists()}
+        {ROOT / p for p in CALLERS}
         | {
             ROOT / "scripts/export-fresh-source.mjs",
             ROOT / "tools/research-quality/test_export.mjs",
@@ -73,31 +46,10 @@ def sources():
     return js, py
 
 
-def check_boundaries(js, py):
-    # Maintained libraries cannot import old experiments. Only explicit tests use frozen oracles.
-    for file in js:
-        if "/tests/" in str(file):
-            continue
-        if not any(file.is_relative_to(ROOT / directory) for directory in JS_ROOTS):
-            continue
-        for target in re.findall(r"require\(['\"]([^'\"]+)['\"]\)", file.read_text()):
-            if not target.startswith("."):
-                continue
-            resolved = (file.parent / target).resolve()
-            if not any(resolved.is_relative_to(ROOT / directory) for directory in JS_ROOTS):
-                raise ValueError(
-                    f"Maintained module imports frozen/outside boundary: {file}: {target}"
-                )
+def check_boundaries(py):
     for file in py:
         tree = ast.parse(file.read_text(), filename=str(file))
-        if file.name in {
-            "qf1.py",
-            "dataset.py",
-            "exposure.py",
-            "metadata.py",
-            "learner.py",
-            "scaled_model.py",
-        }:
+        if file.is_relative_to(ROOT / "python/quoridor_training"):
             for node in ast.walk(tree):
                 if isinstance(node, ast.ImportFrom) and (node.module or "").startswith("frame"):
                     raise ValueError(f"Generic API imports frame recipe: {file}: {node.module}")
@@ -114,7 +66,7 @@ def main():
     parser.add_argument("--syntax-only", action="store_true")
     args = parser.parse_args()
     js, py = sources()
-    check_boundaries(js, py)
+    check_boundaries(py)
     for file in js:
         run("node", "--check", file)
     if args.syntax_only:
@@ -153,37 +105,19 @@ def main():
     run(ruff, "check", "--config", ROOT / "tools/research-quality/ruff.toml", *py)
     if args.format:
         return
-    run(
-        "node",
-        "--test",
-        "--test-concurrency=1",
-        *sorted((ROOT / "tools/ai-sigma-native/tests").glob("*.test.cjs")),
-    )
-    # Explicit safe tests: old workbench's full discover would train a model.
-    for name in ("test_input_contract.py", "test_learner_entry.py"):
-        run(
-            sys.executable,
-            "-B",
-            "-m",
-            "unittest",
-            "discover",
-            "-s",
-            "tools/nnue-training",
-            "-p",
-            name,
-        )
-    if (ROOT / "tools/research-quality/test_maintenance.py").exists():
-        run(sys.executable, "-B", "tools/research-quality/test_maintenance.py")
-    run(
-        "node",
-        "tools/ai-sigma-native/arena/clock-fixture.cjs",
-        ROOT / ".artifacts/research-quality-clock.json",
-    )
-    run(
-        "node",
-        "--test",
-        "--test-concurrency=1",
-        "tools/ai-sigma-manygame-generation/test-protocol.cjs",
+    run(sys.executable, "-B", "tools/research-quality/test_maintenance.py")
+    layout = json.loads((ROOT / "research-paths.json").read_text())
+    training_env = Path(os.environ.get("QUORIDOR_TRAINING_ENV", layout["environments"]["training"]))
+    training_python = training_env / "bin/python"
+    if not training_python.exists():
+        parser.error("Existing training environment required for tensor-loader contracts")
+    env = {**os.environ, "PYTHONPATH": str(ROOT / "python"), "ORT_DISABLE_TELEMETRY": "1"}
+    subprocess.run(
+        [str(training_python), "-B", "-m", "unittest", "quoridor_training.test_contracts"],
+        cwd=ROOT,
+        env=env,
+        check=True,
+        timeout=60,
     )
     run("node", "--test", "tools/research-quality/test_export.mjs")
     layout = json.loads((ROOT / "research-paths.json").read_text())
@@ -211,7 +145,7 @@ def main():
                 "python_ast": len(py),
                 "boundary": "PASS",
                 "NN": 0,
-                "framework_import": 0,
+                "neural_framework_import": 0,
             }
         )
     )

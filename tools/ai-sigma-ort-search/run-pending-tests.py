@@ -1,3 +1,0 @@
-import pathlib,subprocess,json
-cache=pathlib.Path('/home/vscode/.cache/inference/research/ai-sigma/ort-search/target/release/deps');bins=[p for p in cache.glob('ai_sigma_ort_search-*') if p.is_file() and p.suffix=='' and p.stat().st_mode&0o100];binary=max(bins,key=lambda p:p.stat().st_mtime);subprocess.run([str(binary),'--test-threads=1'],check=True)
-pathlib.Path('../../.artifacts/ai-sigma/runs/SIGMA-ORT-SEARCH/spy-gate.json').write_text(json.dumps({'tests':9,'passed':True,'fixture_configs':28*5,'original_shared_sync_comparison':True,'history_edges_values_visits_stats_exact':True,'terminal_nn_zero':True,'arena_node_depth':True,'discard_faults':True,'affinity':[2],'extra_continuation_allocator_unmeasured':True},indent=2))

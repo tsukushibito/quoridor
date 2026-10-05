@@ -14,10 +14,15 @@ import { fileURLToPath } from 'node:url';
 
 const scopes = {
   research: [
-    'tools/ai-sigma-native/',
-    'tools/ai-sigma-common/',
-    'tools/nnue-training/',
-    'tools/ai-sigma-manygame-generation/',
+    'crates/',
+    'python/',
+    'tools/model-export/',
+    'tools/research-team/',
+    'tools/training/',
+    'Cargo.toml',
+    'Cargo.lock',
+    'rust-toolchain.toml',
+    'scripts/export-fresh-source.mjs',
     'tools/research-quality/',
     'scripts/dev/',
     'docs/',

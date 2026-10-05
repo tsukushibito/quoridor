@@ -1,20 +1,17 @@
 """Bulk native tensor loader with the maintained QF1 Model and configuration.
 
 Validation selects a checkpoint; test is opened only by a later frozen invocation.
-Model/optimizer definitions are imported from the maintained training tools.
+Model/optimizer definitions live in this package.
 """
 
 import argparse
 import json
-import sys
 import time
 from pathlib import Path
 import numpy as np
 from .cache import load, sha
 
-TOOLS = Path(__file__).resolve().parents[2] / "tools" / "nnue-training"
-sys.path.insert(0, str(TOOLS))
-from common import resolve_config, measurements  # noqa: E402 - maintained model code path above
+from .common import resolve_config, measurements
 
 
 def write(path, value):
@@ -66,7 +63,7 @@ def export(model, config, statistics, distance_fit, path):
 
 def train(cache, output, config_path=None, steps=None):
     import torch
-    from scaled_model import build_model
+    from .scaled_model import build_model
 
     start = time.monotonic()
     cfg = resolve_config(config_path)
@@ -361,7 +358,7 @@ def _plot(curves, path):
 
 def test(cache, training, output):
     import torch
-    from scaled_model import build_model
+    from .scaled_model import build_model
 
     training = Path(training)
     freeze_path = training / "freeze.json"

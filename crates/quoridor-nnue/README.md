@@ -31,7 +31,7 @@ per-layer scales, biases, and checksum-bound i16 weights. Dense and sparse integ
 accumulations check overflow; SIMD madd pair bounds are guarded. Numeric parity
 alone does not establish the quantized model's playing strength.
 
-`cargo test -p quoridor-nnue --features research` checks JavaScript full/delta/undo
+`cargo test -p quoridor-nnue --features research` checks native full/delta/undo
 and every legal child on initial, asymmetric-wall, P2 jump, and blocked-jump
 fixtures, plus scalable formats, browser byte loading, SIMD exactness, integer
 roundtrips, checksum rejection, and overflow. Actual PyTorch parity is explicitly

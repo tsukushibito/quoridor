@@ -11,7 +11,7 @@ cargo build --release -p quoridor-runner
 "$CARGO_TARGET_DIR/release/quoridor-runner" --help
 ```
 
-`selfplay`、`arena`、`benchmark`、`cycle`は`--config CONFIG.json`を受ける。`dataset import/cache/inspect`は`--input`と必要に応じ`--output`を受ける。`dataset evaluate`は追加で`--model MANIFEST --output PREDICTIONS.jsonl`、任意で`--simd`を受ける。runごとに新しい出力ディレクトリを選び、既存出力を上書きしない。対局・モデル・資源・期限を明示する設定が再現単位で、過去のframe名や期限を新runへ暗黙採用しない。
+`selfplay`、`arena`、`benchmark`、`cycle`は`--config CONFIG.json`を受ける。`dataset cache/inspect`は`--input`と必要に応じ`--output`を受ける。`dataset evaluate`は追加で`--model MANIFEST --output PREDICTIONS.jsonl`、任意で`--simd`を受ける。runごとに新しい出力ディレクトリを選び、既存出力を上書きしない。対局・モデル・資源・期限を明示する設定が再現単位で、過去のframe名や期限を新runへ暗黙採用しない。
 
 CPUだけで接続を確認する設定例:
 
@@ -50,11 +50,11 @@ CUDAは`cuda-aoti`、TensorRTは`tensorrt`のCargo featureを明示する。`QUO
 
 ## データと学習
 
-`quoridor-data`は圧縮Arrow shard、SHA付きmanifest、family分割とinput/state/history露出maskを保存する。MCTSの訪問/方策/rootmean、αβの深度/score/bound、終局WDLは別フィールドで、教師方式を暗黙に混合しない。旧JSONLはimportで由来を保持する。
+`quoridor-data`は圧縮Arrow shard、SHA付きmanifest、family分割とinput/state/history露出maskを保存する。MCTSの訪問/方策/rootmean、αβの深度/score/bound、終局WDLは別フィールドで、教師方式を暗黙に混合しない。新runはこの形式で生成する。旧JSONLの変換入口は削除し、必要なら旧Git版から復元する。
 
 `dataset cache`はRustで特徴をまとめて展開し、mmap可能なfloat tensorを作る。Pythonの学習loopで盤面再生やJSON解析を繰り返さない。通常cacheはtest shardを開かない。候補freeze後だけ`--allow-test`を明示し、そのtestを設定選定へ戻さない。OSの閲覧禁止を主張する仕組みではなく、APIと実行手順の分離である。
 
-`python/quoridor_training`は既存`tools/nnue-training`のモデル/設定定義を再用し、低stepを含むtrain/validation曲線・gradient・checkpoint・native f32重み・ONNXを出す。学習量や容量の変更は版付き設定で行う。train-only距離尺度、game等重み、定数/距離基準と未見testを分けて確認する。
+`python/quoridor_training`内のモデル/設定定義を使い、低stepを含むtrain/validation曲線・gradient・checkpoint・native f32重み・ONNXを出す。学習量や容量の変更は版付き設定で行う。train-only距離尺度、game等重み、定数/距離基準と未見testを分けて確認する。
 
 新モデル・compiled engine・build・展開cacheは保存方針に従う管理外の領域へ置く。Gitにはコード・設定・実験検証データ・SHA付き小manifestを残す。既存の正式holdout、科学結果、凍結入力をソフト移行で書き換えない。
 

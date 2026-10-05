@@ -1,9 +1,0 @@
-'use strict';
-const fs=require('fs'),crypto=require('crypto'),assert=require('assert'),{q,n}=require('./engine.cjs');const out=process.argv[2];assert(!fs.existsSync(out));
-const entropy=crypto.randomBytes(16).toString('hex');let x=parseInt(entropy.slice(0,8),16)>>>0;function rnd(){x^=x<<13;x^=x>>>17;x^=x<<5;return(x>>>0)/4294967296}
-const p8=[];for(let i=0;i<3;i++)p8.push({type:'pawn',direction:[0,1]},{type:'pawn',direction:[0,-1]});p8.push({type:'pawn',direction:[0,1]},{type:'wall',x:4,y:5,orientation:'h'});
-const prefixes=[[],p8],attempts=[];
-for(const ply of[12,20]){let accepted=null;for(let attempt=0;attempt<256;attempt++){let s=q.r.fromPrefix([]),p=[],failure=null;for(let j=0;j<ply;j++){if(q.r.terminalResult(s)){failure='EARLY_TERMINAL';break}const legal=s.getLegalActions();const a=legal[Math.floor(rnd()*legal.length)];p.push(JSON.parse(JSON.stringify(a)));s=s.next(a)}if(!failure&&q.r.terminalResult(s))failure='FINAL_TERMINAL';attempts.push({ply,attempt,status:failure??'ACCEPTED'});if(!failure){accepted=p;break}}assert(accepted,'PREFIX_256_ATTEMPTS');prefixes.push(accepted)}
-const openings=prefixes.map((prefix,i)=>{const s=q.r.fromPrefix(prefix);assert(!q.r.terminalResult(s));return{id:'opening'+i,family:'frame19-236-'+entropy+'-'+i,opening_ply:prefix.length,prefix,key:s._positionKey(),history:n.history(s),legal_count:s.getLegalActions().length}});
-const slots=openings.flatMap((o,i)=>[1,2].map(p=>({slot:i*2+p,opening:o.id,family:o.family,NNUE_side:p,D_side:3-p,pilot:i<2,status:'NOT_STARTED'})));
-fs.writeFileSync(out,JSON.stringify({UTC:new Date().toISOString(),entropy,kind:'fixed8-diagnostic-prefix-v1',openings,slots,attempts,training_mix:false,oldtest_read:false},null,2)+'\n');console.log(JSON.stringify({openings:openings.map(o=>({id:o.id,ply:o.opening_ply,legal:o.legal_count})),slots:slots.length}));
