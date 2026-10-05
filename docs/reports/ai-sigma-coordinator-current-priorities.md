@@ -14,7 +14,7 @@
 
 287は実装ownerと別に入力・mask・凍結条件をレビューし、freeze後だけ96future familyでNNUE/D/旧Bの一巡を評価する。rootmean/zを含むraw metadataをlabel-freeと呼ばず、公開whitelist入力とsealed path/hashのみを先に渡す。共通参照はVraw＝旧1248＋旧選定392＋新48、Told＝全5981、Tseen＝全保存学習段階で見たtrain union。未来maskはTseenと全Vrawを参照する。履歴UNVERIFIED/有効family数/lineage/選定による精度不足を保持し、誤差利益から棋力は認定しない。仕様は [入力と共通mask](../../research-data/ai-sigma/frame22-coordinator/nested-mask-and-targetfree-interface.md)。
 
-第二段は実OR0と収量33.354行/familyから登録T3–15（最大13追加完整48block、全T768）を選び、全Vraw除外後old5981込み初めて約30000に達したprefixで止める。予測31597行、NN累積保守8635167/最大19entry。ORが増え768で不足なら追加を自動実行せず必要実量/費を返す。285のV6提案は最大912T/16blockで20%OR時も約3万となる有力reserveだが、現OR0では初回768を選びT16+を保留する。線形全science command約502秒、source/archive/public/private/alias/Git/未測read/LLMは別費。量を第一段D利益の条件にしない。
+第二段は実OR0と収量33.354行/familyから登録T3–15（最大13追加完整48block、全T768）を選び、全Vraw除外後old5981込み初めて約30000に達したprefixで止める。予測31597行、NN累積保守8635167/最大19entry。第一追加T3全48GOAL/1645行/OR除外0、train累積192T6448＋old5981＝12429を有限確認、7gen/609297NN/科学178.850148秒。T720約30161/T768約31773を更新予測として置く。ORが増え768で不足なら追加を自動実行せず必要実量/費を返す。285のV6提案は最大912T/16blockで20%OR時も約3万となる有力reserveだが、現OR0では初回768を選びT16+を保留する。線形全science command約502秒、source/archive/public/private/alias/Git/未測read/LLMは別費。量を第一段D利益の条件にしない。
 
 92のfresh16:21:58はretained10266832896＋unused/旧bounds1956900864＋UNKNOWN134217728＝12357951488B<12884901888、margin526950400/errors0。285両root現82669568/unused991072256、286checkpoint根を含め17694720/unused49414144、287147456/unused8241152を同保管枠へ一本化。data1GiB/build32/learner64/reviewer8と旧全保持を維持し削除/free/reset0。各heavyのCPU/RAM/GPU/正runtime/版・入力は本人fresh admission。
 
