@@ -31,6 +31,12 @@ Quoridor AI models are an explicit exception: repository-local storage is allowe
 
 Framework and CUDA package versions remain project-managed; this Dev Container only exposes the NVIDIA GPU and persistent cache.
 
+## AI research data
+
+Preserve experiment and verification data in the research branch under `research-data/ai-sigma/`. Keep small configurations, summaries and reproduction manifests directly in Git; use compressed per-experiment/run archives for large observations and necessary logs. `.artifacts/ai-sigma/` is the live-output and extraction workspace. Verify Git preservation and restoration, and maintain active readers' paths, before removing redundant working copies. This is local research Git storage; it does not authorize pushing or publishing data.
+
+Reproducible, unused binaries, Wasm builds, build caches and duplicate source copies are disposable. Preserve uncommitted source, active runtime files and the minimum shared inputs/models/dependencies needed for reproduction. Account for Git storage and temporary migration copies within the existing research storage limit. See `docs/development/ai-research-experiments.md` for the current rules.
+
 Godot remains on software rendering (`LIBGL_ALWAYS_SOFTWARE=1`). NVIDIA access is for inference compute, not editor or Xvfb rendering.
 
 ## Toolchain updates

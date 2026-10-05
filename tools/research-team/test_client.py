@@ -3,6 +3,9 @@
 import asyncio
 import importlib.util
 import json
+import tempfile
+import os
+from types import SimpleNamespace
 from pathlib import Path
 import unittest
 from unittest.mock import AsyncMock, patch
@@ -61,6 +64,54 @@ class DispatchSafety(unittest.TestCase):
         )
         self.assertEqual(method, "turn/start")
         self.assertEqual(set(params), {"threadId", "input"})
+
+
+class SessionCountRegression(unittest.IsolatedAsyncioTestCase):
+    async def test_task_and_report_only_read_target_even_with_many_active_roles(self):
+        class FakeAppServer(client.AppServer):
+            def __init__(self, *_):
+                self.calls = []
+                self.active = False
+            async def __aenter__(self): return self
+            async def __aexit__(self, *_): pass
+            async def request(self, method, params):
+                self.calls.append((method, params))
+                if method == 'thread/read':
+                    # Other registered roles/root could be active or unavailable;
+                    # delivery must not read them for admission.
+                    if params['threadId'] != 'target': raise AssertionError('non-target read')
+                    return {'thread': {'id': 'target', 'status': {'type': 'active' if self.active else 'idle'}}}
+                if method == 'thread/turns/list': return {'data': [{'id': 'exact', 'status': 'inProgress'}]}
+                if method == 'turn/start': return {'turn': {'id': 'new'}}
+                if method == 'turn/steer': return {'turnId': params['expectedTurnId']}
+                raise AssertionError(method)
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            body = root/'body.md'; body.write_text('evidence')
+            definitions = root/'.agents/research-team'
+            (definitions/'roles').mkdir(parents=True)
+            (definitions/'common.md').write_text('common')
+            (definitions/'roles/experiment.md').write_text('role')
+            _, digest = client.role_definition('experiment', root)
+            registry = root/'registry.json'
+            registry.write_text(json.dumps({'schema_version': 1, 'project_root': str(root),
+                'definitions_root': str(root), 'roles': {'experiment': {'thread_id': 'target', 'definition_sha256': digest},
+                **{f'other{i}': {'thread_id': f'active{i}'} for i in range(4)}, 'steward': {'thread_id': 'sender'}}}))
+            server = FakeAppServer()
+            args = SimpleNamespace(command='send', issue='task', registry=str(registry), role='experiment',
+                                   body_file=str(body), cwd=None, max_active_sessions=3)
+            def command_json(command):
+                return {'status': 'running', 'socketPath': 'FAKE'} if command[0] == 'codex' else [{'id':'task','status':'in_progress','labels':[]}]
+            with patch.object(client, 'project_root', return_value=root), patch.object(client, 'command_json', side_effect=command_json), \
+                 patch.object(client, 'AppServer', return_value=server), patch.dict(os.environ, CODEX_THREAD_ID='sender'):
+                for command in ('send', 'report'):
+                    args.command=command; args.to='experiment'; server.active=False
+                    self.assertEqual((await client.run(args))['method'], 'turn/start')
+                    server.active=True
+                    result=await client.run(args)
+                    self.assertEqual(result['method'], 'turn/steer')
+                    self.assertEqual(result['turn_id'], 'exact')
+                self.assertEqual(sum(m=='turn/start' for m,_ in server.calls), 2)
 
 
 class FakeSocket:

@@ -22,6 +22,7 @@ class FakeServer:
         self.threads = {'target': {'id': 'target', 'status': {'type': 'idle'}}}
         self.turns = []
         self.calls = []
+        self.reads = []
         self.lose_response = False
         self.stop_confirms = True
 
@@ -32,6 +33,7 @@ class FakeServer:
         pass
 
     async def read_thread(self, thread):
+        self.reads.append(thread)
         return self.threads[thread]
 
     async def request(self, method, params):
@@ -123,6 +125,48 @@ class EngineTests(Fixture, unittest.IsolatedAsyncioTestCase):
         self.finish()
         self.temp.cleanup()
 
+    def unbounded(self):
+        self.raw['max_turn_seconds'] = None
+        self.contract['max_turn_seconds'] = None
+        (self.root / 'contract.json').write_text(json.dumps(self.contract))
+        self.write_config()
+        self.assertTrue(self.engine.reload())
+
+    async def test_unbounded_elapsed_and_next_period_no_interrupt_or_double_start(self):
+        self.unbounded()
+        await self.engine.tick()
+        self.now += timedelta(seconds=181)
+        await self.engine.tick(due=False)
+        self.now += timedelta(seconds=1800)
+        await self.engine.tick()
+        self.assertIsNone(self.engine.state['owned']['max_turn_seconds'])
+        self.assertEqual(sum(m == 'turn/start' for m, _ in self.server.calls), 1)
+        self.assertFalse(any(m == 'turn/interrupt' for m, _ in self.server.calls))
+
+    async def test_removing_current_owned_limit_retains_clock(self):
+        await self.engine.tick()
+        start = self.engine.state['owned']['started_at']
+        self.unbounded()
+        self.now += timedelta(seconds=301)
+        await self.engine.tick(due=False)
+        self.assertEqual(self.engine.state['owned']['started_at'], start)
+        self.assertIsNone(self.engine.state['owned']['max_turn_seconds'])
+        self.assertFalse(any(m == 'turn/interrupt' for m, _ in self.server.calls))
+
+    async def test_unbounded_pause_and_end_only_interrupt_owned(self):
+        for trigger in ('pause', 'end'):
+            self.server.calls.clear(); self.server.turns.clear()
+            self.server.threads['target']['status']['type'] = 'idle'
+            self.engine.state['owned'] = None
+            self.backend.issues['monitor']['labels'] = []
+            self.now = datetime(2026, 10, 1, tzinfo=timezone.utc)
+            self.unbounded(); await self.engine.tick()
+            self.server.turns.insert(0, {'id': 'external', 'status': 'inProgress', 'items': []})
+            if trigger == 'pause': self.backend.issues['monitor']['labels'] = ['paused-by-user']
+            else: self.now += timedelta(hours=2)
+            await self.engine.tick(due=False)
+            self.assertEqual([p['turnId'] for m, p in self.server.calls if m == 'turn/interrupt'], ['owned'])
+
     async def test_dispatch_and_skip_active_without_steer(self):
         self.assertTrue(await self.engine.tick())
         self.assertEqual(self.engine.state['owned']['turn_id'], 'owned')
@@ -142,15 +186,16 @@ class EngineTests(Fixture, unittest.IsolatedAsyncioTestCase):
         resume = next(p for m, p in self.server.calls if m == 'thread/resume')
         self.assertEqual(set(resume), {'threadId', 'excludeTurns'})
 
-    async def test_limit_and_contract_does_not_expand(self):
+    async def test_other_active_sessions_do_not_block_target(self):
         for i in range(4):
             name = f'other{i}'
             self.registry['roles'][name] = {'thread_id': name}
             self.server.threads[name] = {'id': name, 'status': {'type': 'active'}}
         (self.root / 'registry.json').write_text(json.dumps(self.registry))
         await self.engine.tick()
-        self.assertEqual(self.engine.state['last_result']['reason'], 'active_limit')
-        self.assertFalse(any(m == 'turn/start' for m, _ in self.server.calls))
+        self.assertEqual(sum(m == 'turn/start' for m, _ in self.server.calls), 1)
+        self.assertTrue(all(t == 'target' for t in self.server.reads))
+        self.assertEqual(self.engine.state['owned']['turn_id'], 'owned')
 
     async def test_deadline_interrupts_exact_owned_turn(self):
         await self.engine.tick()
@@ -282,7 +327,7 @@ class ClientCapacityTests(Fixture, unittest.IsolatedAsyncioTestCase):
         self.finish()
         self.temp.cleanup()
 
-    async def test_existing_client_new_turn_limit_and_active_report(self):
+    async def test_existing_client_ignores_legacy_count_limit(self):
         from types import SimpleNamespace
         from unittest.mock import AsyncMock
         for i in range(3):
@@ -301,9 +346,9 @@ class ClientCapacityTests(Fixture, unittest.IsolatedAsyncioTestCase):
         with patch.object(s.team, 'project_root', return_value=self.root), \
              patch.object(s.team, 'command_json', side_effect=json_command), \
              patch.object(s.team, 'AppServer', return_value=self.server):
-            with self.assertRaisesRegex(s.team.TeamError, 'limit'):
-                await s.team.run(args)
-            self.server.deliver.assert_not_awaited()
+            self.assertTrue((await s.team.run(args))['accepted'])
+            self.server.deliver.assert_awaited_once()
+            self.server.deliver.reset_mock()
             # Existing active turn can receive evidence even with all slots occupied.
             self.server.threads['target']['status']['type'] = 'active'
             self.assertTrue((await s.team.run(args))['accepted'])
@@ -322,13 +367,27 @@ class SettingsTests(Fixture, unittest.TestCase):
     def test_config_validation_and_reload_retains_old(self):
         original = self.engine.config['config_sha256']
         for key, value in [('interval_seconds', 0), ('interval_seconds', True), ('end_at', '2027-01-01'),
-                           ('end_at', '2027-01-01T00:00:00Z'), ('max_active_sessions', 5), ('max_turn_seconds', 301)]:
+                           ('end_at', '2027-01-01T00:00:00Z'), ('max_active_sessions', False), ('max_turn_seconds', 301)]:
             old = self.raw[key]
             self.raw[key] = value
             self.write_config()
             self.assertFalse(self.engine.reload(), (key, value))
             self.assertEqual(self.engine.config['config_sha256'], original)
             self.raw[key] = old
+
+    def test_deprecated_session_fields_accept_null_and_ignore_legacy_mismatch(self):
+        for value in (None, 99):
+            self.raw['max_active_sessions'] = value
+            self.write_config()
+            self.assertTrue(self.engine.reload())
+
+    def test_nullable_turn_authorization_and_invalid_values(self):
+        for configured, authorized, accepted in ((None,None,True),(300,None,True),(None,300,False),(0,None,False),(True,None,False),(-1,None,False)):
+            self.raw['max_turn_seconds'] = configured
+            self.contract['max_turn_seconds'] = authorized
+            (self.root / 'contract.json').write_text(json.dumps(self.contract))
+            self.write_config()
+            self.assertEqual(self.engine.reload(), accepted, (configured,authorized))
 
     def test_rotation(self):
         self.engine.config['log_max_bytes'] = 200

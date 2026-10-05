@@ -85,7 +85,7 @@ def load_config(path, root):
     for key in ("enabled", "run_on_start"):
         if type(c[key]) is not bool:
             raise SchedulerError(f"{key} must be boolean")
-    for key in ("interval_seconds", "max_active_sessions", "request_timeout_seconds", "max_turn_seconds",
+    for key in ("interval_seconds", "request_timeout_seconds",
                 "log_max_bytes", "log_backups"):
         positive(c[key], key)
     for key in ("target", "dispatch_issue"):
@@ -108,10 +108,17 @@ def load_config(path, root):
         raise SchedulerError("observation_only must be boolean")
     if c.get("observed_issue") and not contract["observation_only"]:
         raise SchedulerError("observed_issue requires an observation-only contract")
-    for key in ("max_active_sessions", "max_turn_seconds"):
-        positive(contract[key], key)
-        if c[key] > contract[key]:
-            raise SchedulerError(f"{key} exceeds contract")
+    # Deprecated session-count fields accept null or legacy positive integers,
+    # but never gate dispatch or increase physical resource authorization.
+    for value in (c["max_active_sessions"], contract["max_active_sessions"]):
+        if value is not None:
+            positive(value, "max_active_sessions")
+    for value in (c["max_turn_seconds"], contract["max_turn_seconds"]):
+        if value is not None:
+            positive(value, "max_turn_seconds")
+    authorized_limit = contract["max_turn_seconds"]
+    if authorized_limit is not None and (c["max_turn_seconds"] is None or c["max_turn_seconds"] > authorized_limit):
+        raise SchedulerError("max_turn_seconds exceeds contract")
     end = timestamp(c["end_at"])
     if end > timestamp(contract["end_at"]):
         raise SchedulerError("end_at exceeds contract; configuration cannot extend authorization")
@@ -286,9 +293,16 @@ class Engine:
         expired = False
         owned = self.state.get("owned")
         if owned:
+            if "max_turn_seconds" not in owned or (owned["max_turn_seconds"] is not None and (type(owned["max_turn_seconds"]) is not int or owned["max_turn_seconds"] <= 0)):
+                raise SchedulerError("Unknown owned turn limit")
+            if c["max_turn_seconds"] is None and owned["max_turn_seconds"] is not None:
+                previous_limit = owned["max_turn_seconds"]
+                owned["max_turn_seconds"] = None
+                self.record("owned_turn_limit_removed", previous_limit=previous_limit, turn_id=owned.get("turn_id"))
             wall_elapsed = (self.now() - timestamp(owned["started_at"])).total_seconds()
             mono_elapsed = self.owned_elapsed + time.monotonic() - (self.owned_mono or time.monotonic())
-            expired = max(wall_elapsed, mono_elapsed) >= min(owned["max_turn_seconds"], c["max_turn_seconds"])
+            limits = [value for value in (owned["max_turn_seconds"], c["max_turn_seconds"]) if value is not None]
+            expired = bool(limits) and max(wall_elapsed, mono_elapsed) >= min(limits)
         if reason and not owned:
             self.record("stopped", reason=reason)
             return False
@@ -321,13 +335,9 @@ class Engine:
                 entry = team.role_entry(data, c["target"])
                 if entry["thread_id"] != c["thread_id"]:
                     raise SchedulerError("Target thread changed; reload required")
-                states = [await server.read_thread(item["thread_id"]) for item in data["roles"].values()]
-                target = next(item for item in states if item["id"] == c["thread_id"])
+                target = await server.read_thread(c["thread_id"])
                 if target["status"]["type"] == "active":
                     self.record("skipped", reason="target_active")
-                    return True
-                if sum(item["status"]["type"] == "active" for item in states) >= c["max_active_sessions"]:
-                    self.record("skipped", reason="active_limit")
                     return True
                 if target["status"]["type"] == "notLoaded":
                     await server.request("thread/resume", {"threadId": c["thread_id"], "excludeTurns": True})

@@ -353,11 +353,6 @@ async def run(args: argparse.Namespace) -> dict | list:
         # Recheck immediately before dispatch; a late report cannot unpause an issue.
         with dispatch_lock(root):
             require_issue(args.issue, root)
-            target = await server.read_thread(thread_id)
-            if target["status"]["type"] != "active":
-                states = [await server.read_thread(item["thread_id"]) for item in data["roles"].values()]
-                if sum(item["status"]["type"] == "active" for item in states) >= args.max_active_sessions:
-                    raise TeamError("Active session limit reached; retry later")
             return await server.deliver(thread_id, body, cwd)
 
 
@@ -380,7 +375,7 @@ def parser() -> argparse.ArgumentParser:
         if name == "send":
             item.add_argument("--body-file", required=True)
             item.add_argument("--cwd")
-            item.add_argument("--max-active-sessions", type=int, default=3, help="Contract-authorized active team limit (default 3)")
+            item.add_argument("--max-active-sessions", type=int, default=None, help="Deprecated compatibility option; session counts do not restrict delivery")
         if name == "read":
             item.add_argument("--limit", type=int, choices=range(1, 11), default=1)
         if name == "wait":
@@ -389,14 +384,12 @@ def parser() -> argparse.ArgumentParser:
     report.add_argument("--to", choices=ROLES, default="coordinator")
     report.add_argument("--issue", required=True)
     report.add_argument("--body-file", required=True)
-    report.add_argument("--max-active-sessions", type=int, default=3, help="Contract-authorized active team limit (default 3)")
+    report.add_argument("--max-active-sessions", type=int, default=None, help="Deprecated compatibility option; session counts do not restrict delivery")
     return result
 
 
 def main() -> None:
     args = parser().parse_args()
-    if getattr(args, "max_active_sessions", 1) <= 0:
-        raise SystemExit("--max-active-sessions must be positive")
     if args.command == "wait" and not 0 < args.timeout <= 50:
         raise SystemExit("--timeout must be greater than 0 and no more than 50 seconds")
     try:
