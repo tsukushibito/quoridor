@@ -1,0 +1,657 @@
+{
+  "at": "2026-10-05T03:16:56.685470+00:00",
+  "issue": {
+    "id": "quoridor-4lc.259",
+    "status": "in_progress",
+    "assignee": "codex:01a0f31d-99ee-7d63-b162-bc1a59c457c6",
+    "labels": null
+  },
+  "authorization": "Independent repository diagnosis, no research-frame deadline reuse",
+  "resource_admission": {
+    "steward_allocated_bytes": 45977600,
+    "supervisor_held_bytes": 147906560,
+    "supervisor_current_frame_bytes": 1802240,
+    "supervisor_historical_held_bytes": 146104320,
+    "forecast_bytes": 8388608,
+    "additional_reservation_bytes": 0,
+    "historical_parent_charge_released": false
+  },
+  "runtime": {
+    "phase": "stopped",
+    "owned": null,
+    "process": null,
+    "recovery_required": false
+  },
+  "old_scheduler": {
+    "pid": 556338,
+    "start_ticks": "41842377",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "old_monitor": {
+    "pid": 556359,
+    "start_ticks": "41842391",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "old_identities_absent": true,
+  "relevant_processes": [
+    {
+      "pid": 580187,
+      "executable": "sh",
+      "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+      "state": "S",
+      "rss_bytes": 1609728,
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    },
+    {
+      "pid": 580218,
+      "executable": "node",
+      "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+      "state": "S",
+      "rss_bytes": 80195584,
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    },
+    {
+      "pid": 580389,
+      "executable": "sh",
+      "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+      "state": "S",
+      "rss_bytes": 1478656,
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    },
+    {
+      "pid": 580447,
+      "executable": "node",
+      "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+      "state": "S",
+      "rss_bytes": 80547840,
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    },
+    {
+      "pid": 617572,
+      "executable": "sh",
+      "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+      "state": "S",
+      "rss_bytes": 1519616,
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    },
+    {
+      "pid": 617631,
+      "executable": "node",
+      "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+      "state": "S",
+      "rss_bytes": 80719872,
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    },
+    {
+      "pid": 617652,
+      "executable": "sh",
+      "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+      "state": "S",
+      "rss_bytes": 1486848,
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    },
+    {
+      "pid": 617675,
+      "executable": "node",
+      "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+      "state": "S",
+      "rss_bytes": 80637952,
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    },
+    {
+      "pid": 617792,
+      "executable": "sh",
+      "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+      "state": "S",
+      "rss_bytes": 1478656,
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    },
+    {
+      "pid": 617813,
+      "executable": "node",
+      "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+      "state": "S",
+      "rss_bytes": 80949248,
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    },
+    {
+      "pid": 633379,
+      "executable": "sh",
+      "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+      "state": "S",
+      "rss_bytes": 1503232,
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    },
+    {
+      "pid": 633399,
+      "executable": "node",
+      "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+      "state": "S",
+      "rss_bytes": 54980608,
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    },
+    {
+      "pid": 634901,
+      "executable": "bash",
+      "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+      "state": "S",
+      "rss_bytes": 3108864,
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    }
+  ],
+  "active_issue_rows_limited30": [
+    {
+      "id": "quoridor-4lc.92",
+      "title": "新4時間枠の監督・monitor起動と停止責任",
+      "assignee": "codex:01a0f31d-99ee-7d63-b162-bc1a59c457c6",
+      "status": "in_progress",
+      "labels": [
+        "continuation-active",
+        "frame20"
+      ]
+    },
+    {
+      "id": "quoridor-4lc.75",
+      "title": "準備factory待ちも手deadlineで打切り新m32実入口を同経路へ結線",
+      "assignee": "codex:01a0f31d-6d15-7620-bb63-4b4f878e4746",
+      "status": "in_progress",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ]
+    },
+    {
+      "id": "quoridor-4lc.74",
+      "title": "新m32静的計画と最終streaming接続の独立裁定",
+      "assignee": "codex:01a0f31d-8227-7e03-a7e6-915b4918c11b",
+      "status": "in_progress",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ]
+    },
+    {
+      "id": "quoridor-4lc.73",
+      "title": "新ready/public時計版の別m32比較条件を勝敗前登録",
+      "assignee": "codex:01a0f31c-2e4b-7170-82c5-69e1428c2418",
+      "status": "in_progress",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ]
+    },
+    {
+      "id": "quoridor-4lc.72",
+      "title": "engine別の数値検査を最小修正し同main接続11要求を完了検証",
+      "assignee": "codex:01a0f31d-6d15-7620-bb63-4b4f878e4746",
+      "status": "in_progress",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ]
+    },
+    {
+      "id": "quoridor-4lc.71",
+      "title": "streaming共通readyと審判後stampを最小修正しfresh/実入口を検証",
+      "assignee": "codex:01a0f31d-6d15-7620-bb63-4b4f878e4746",
+      "status": "in_progress",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ]
+    },
+    {
+      "id": "quoridor-4lc.70",
+      "title": "streaming実接続の保存余裕と元load例外保存を修正し同mainを実検証",
+      "assignee": "codex:01a0f31d-6d15-7620-bb63-4b4f878e4746",
+      "status": "in_progress",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ]
+    },
+    {
+      "id": "quoridor-4lc.68",
+      "title": "streaming新比較入口の保存重複・最終stampを修正し共通backendへ結線",
+      "assignee": "codex:01a0f31d-6d15-7620-bb63-4b4f878e4746",
+      "status": "in_progress",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ]
+    },
+    {
+      "id": "quoridor-4lc.67",
+      "title": "共通streamingブラウザ比較の新96局事前登録と同入口mockを固定",
+      "assignee": "codex:01a0f31c-2e4b-7170-82c5-69e1428c2418",
+      "status": "in_progress",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ]
+    },
+    {
+      "id": "quoridor-4lc.62",
+      "title": "随時snapshotの独立再検証と全体配送遅延の判別",
+      "assignee": "codex:01a0f31c-2e4b-7170-82c5-69e1428c2418",
+      "status": "in_progress",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ]
+    },
+    {
+      "id": "quoridor-4lc.61",
+      "title": "監督役割見直し判断を保存sessionとlive schedulerへ安全適用",
+      "assignee": "codex:01a0f31d-99ee-7d63-b162-bc1a59c457c6",
+      "status": "in_progress",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ]
+    },
+    {
+      "id": "quoridor-4lc.57",
+      "title": "新しい均一readiness時計校正の事前プロトコル",
+      "assignee": "codex:01a0f31c-2e4b-7170-82c5-69e1428c2418",
+      "status": "in_progress",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ]
+    },
+    {
+      "id": "quoridor-4lc.56",
+      "title": "専用kernel所有境界と実fixed5回収freshの独立検証",
+      "assignee": "codex:01a0f31d-8227-7e03-a7e6-915b4918c11b",
+      "status": "in_progress",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ]
+    },
+    {
+      "id": "quoridor-4lc.54",
+      "title": "単一job専用subreaperのカーネルadoption所有境界を検証",
+      "assignee": "codex:01a0f31d-6d15-7620-bb63-4b4f878e4746",
+      "status": "in_progress",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ]
+    },
+    {
+      "id": "quoridor-4lc.53",
+      "title": "翌10:00終了のscheduler契約/config/monitor更新と実反映確認",
+      "assignee": "codex:01a0f31d-99ee-7d63-b162-bc1a59c457c6",
+      "status": "in_progress",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ]
+    },
+    {
+      "id": "quoridor-4lc.44",
+      "title": "監視異常によるscheduler早期停止の原因確認と復旧",
+      "assignee": "codex:01a0f31d-99ee-7d63-b162-bc1a59c457c6",
+      "status": "in_progress",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ]
+    },
+    {
+      "id": "quoridor-4lc.40",
+      "title": "継続枠の観測監督と停滞・資源・期限点検",
+      "assignee": "codex:01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+      "status": "in_progress",
+      "labels": [
+        "initial-window-ended"
+      ]
+    },
+    {
+      "id": "quoridor-4lc.39",
+      "title": "ORT候補の最終入口と復旧gateを継続枠で完了",
+      "assignee": "codex:01a0f31d-6d15-7620-bb63-4b4f878e4746",
+      "status": "in_progress",
+      "labels": [
+        "initial-window-ended"
+      ]
+    },
+    {
+      "id": "quoridor-4lc.38",
+      "title": "継続枠の監督scheduler実運用と資源基準更新",
+      "assignee": "codex:01a0f31d-99ee-7d63-b162-bc1a59c457c6",
+      "status": "in_progress",
+      "labels": [
+        "initial-window-ended"
+      ]
+    },
+    {
+      "id": "quoridor-bh9",
+      "title": "M1: 学習不要AIで対局できるWebアプリ",
+      "assignee": "codex:01a0eaf2-93cf-7bb0-be52-6e18ad3f791b",
+      "status": "in_progress",
+      "labels": [
+        "needs-human-review"
+      ]
+    },
+    {
+      "id": "quoridor-4lc.259",
+      "title": "Stewardによるリポジトリ整理・長期保守の現状診断",
+      "assignee": "codex:01a0f31d-99ee-7d63-b162-bc1a59c457c6",
+      "status": "in_progress",
+      "labels": null
+    },
+    {
+      "id": "quoridor-4lc.55",
+      "title": "新期限scheduler初回turnの独立本文・時間gate照合",
+      "assignee": "codex:01a0f31d-8227-7e03-a7e6-915b4918c11b",
+      "status": "in_progress",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ]
+    },
+    {
+      "id": "quoridor-4lc",
+      "title": "自律AI研究: NNUE型Quoridor AIの最高棋力へ到達",
+      "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+      "status": "in_progress",
+      "labels": [
+        "continuation-active",
+        "frame20"
+      ]
+    }
+  ],
+  "indexes": {
+    "main": {
+      "path": "/workspaces/quoridor/.git/index",
+      "sha256": "d832858bd1d55fa3129cc6ec97d1ed47f245e5f52d7e7ab6383f6dff6b0d56e3",
+      "bytes": 28867,
+      "head": "288c325c02e8600fc2f870736fbc48287d585da8"
+    },
+    "research": {
+      "path": "/workspaces/quoridor/.git/worktrees/ai-sigma/index",
+      "sha256": "59880a1d93833b8a0ea250e9a2b1270c41ceb9f6666da9ab0edeb48991817072",
+      "bytes": 66688,
+      "head": "a3d46fd2a1f2f031ccbc4d4ceb0d18b880c089e2"
+    }
+  },
+  "read_only_except_report_and_this_evidence_directory": true,
+  "initial_terminal_output_truncated": true,
+  "findings_use_subsequent_bounded_aggregates": true
+}

@@ -1,0 +1,2314 @@
+{
+  "at": "2026-10-05T03:25:57.747616+00:00",
+  "HEAD": "a3d46fd2a1f2f031ccbc4d4ceb0d18b880c089e2",
+  "missing_HEAD_paths": [
+    ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/bounded-records/private-index.lock",
+    ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame10-guard-repair/private-final-index.lock",
+    ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame11-extension/private-index.lock",
+    ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame12/private-index.lock",
+    ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame13/private-index.lock",
+    ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame14-training-mirror/private-index.lock",
+    ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame14/private-index.lock",
+    ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame15/private-index.lock",
+    ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame16-extension17/private-index.lock",
+    ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame16-turn-unbounded/private-index.lock",
+    ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame16/private-index.lock",
+    "research-data/ai-sigma/160-pv-pipeline-bootstrap/private.index.lock",
+    "research-data/ai-sigma/174-gpu-inference/Git-final.json",
+    "research-data/ai-sigma/174-gpu-inference/Git-source.json",
+    "research-data/ai-sigma/174-gpu-inference/NN0-check.json",
+    "research-data/ai-sigma/174-gpu-inference/NN0-stdio.json",
+    "research-data/ai-sigma/174-gpu-inference/final-report.md",
+    "research-data/ai-sigma/174-gpu-inference/handoff.json",
+    "research-data/ai-sigma/174-gpu-inference/manager-current.json",
+    "research-data/ai-sigma/174-gpu-inference/manager-stop.json",
+    "research-data/ai-sigma/174-gpu-inference/preparation-delivery.json",
+    "research-data/ai-sigma/174-gpu-inference/preparation-report.md",
+    "research-data/ai-sigma/174-gpu-inference/start-delivery.json",
+    "research-data/ai-sigma/174-gpu-inference/start-report.md",
+    "research-data/ai-sigma/174-gpu-inference/wait-r1-stop.json",
+    "scripts/dev/research-scheduler.py",
+    "tools/research-team/examples/scheduler-contract.json",
+    "tools/research-team/examples/scheduler.json",
+    "tools/research-team/test_scheduler.py"
+  ],
+  "exporter_enumeration": {
+    "command": "git ls-files -z --cached --others --exclude-standard",
+    "existing_HEAD_paths_omitted_count": 516,
+    "omitted_by_top_path": {
+      ".artifacts/ai-sigma": 516
+    },
+    "sample": [
+      ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/FRAME-END-FLOW-258/close-backup.json",
+      ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/FRAME-END-FLOW-258/completion-report-receipt.json",
+      ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/FRAME-END-FLOW-258/completion-report.txt",
+      ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/FRAME-END-FLOW-258/coordinator-idle-application.json",
+      ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/FRAME-END-FLOW-258/coordinator-instructions.txt",
+      ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/FRAME-END-FLOW-258/final-handoff-receipt.json",
+      ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/FRAME-END-FLOW-258/final-handoff.txt",
+      ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/FRAME-END-FLOW-258/main-index-before.json",
+      ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/FRAME-END-FLOW-258/next-frame-binding-handoff.json",
+      ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/FRAME-END-FLOW-258/own-source-change.json",
+      ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/FRAME-END-FLOW-258/research-index-before.json",
+      ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/FRAME-END-FLOW-258/resource-admission.json"
+    ],
+    "script_was_NOT_executed": true
+  },
+  "scoped_capacity": [
+    [
+      ".artifacts/ai-sigma/resume-20261003",
+      {
+        "files": 2927,
+        "logical": 462891102,
+        "allocated": 470233088,
+        "HEAD_logical": 0,
+        "HEAD_allocated": 0
+      }
+    ],
+    [
+      ".artifacts/ai-sigma/resume-20261002",
+      {
+        "files": 6615,
+        "logical": 338376855,
+        "allocated": 355811328,
+        "HEAD_logical": 2074,
+        "HEAD_allocated": 4096
+      }
+    ],
+    [
+      ".artifacts/ai-sigma/continuation-20261001",
+      {
+        "files": 11726,
+        "logical": 221823572,
+        "allocated": 246595584,
+        "HEAD_logical": 1425432,
+        "HEAD_allocated": 2928640
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame16-teacher-throughput",
+      {
+        "files": 409,
+        "logical": 196907548,
+        "allocated": 198070272,
+        "HEAD_logical": 38028964,
+        "HEAD_allocated": 38453248
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame18-data-learning",
+      {
+        "files": 616,
+        "logical": 153981765,
+        "allocated": 155648000,
+        "HEAD_logical": 153981765,
+        "HEAD_allocated": 155648000
+      }
+    ],
+    [
+      ".artifacts/ai-sigma/runs",
+      {
+        "files": 1545,
+        "logical": 112806647,
+        "allocated": 115802112,
+        "HEAD_logical": 0,
+        "HEAD_allocated": 0
+      }
+    ],
+    [
+      ".artifacts/ai-sigma/frame14-teachers",
+      {
+        "files": 168,
+        "logical": 74716059,
+        "allocated": 75194368,
+        "HEAD_logical": 0,
+        "HEAD_allocated": 0
+      }
+    ],
+    [
+      "research-data/ai-sigma/archives",
+      {
+        "files": 75,
+        "logical": 63983416,
+        "allocated": 64135168,
+        "HEAD_logical": 63983416,
+        "HEAD_allocated": 64135168
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame18-worker-balance",
+      {
+        "files": 138,
+        "logical": 61566581,
+        "allocated": 61984768,
+        "HEAD_logical": 12561107,
+        "HEAD_allocated": 12734464
+      }
+    ],
+    [
+      "research-data/ai-sigma/173-native-ni-arena",
+      {
+        "files": 51,
+        "logical": 51331897,
+        "allocated": 51458048,
+        "HEAD_logical": 51331897,
+        "HEAD_allocated": 51458048
+      }
+    ],
+    [
+      ".artifacts/ai-sigma/reference",
+      {
+        "files": 12,
+        "logical": 25047435,
+        "allocated": 25071616,
+        "HEAD_logical": 0,
+        "HEAD_allocated": 0
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame14-teachers",
+      {
+        "files": 82,
+        "logical": 22022067,
+        "allocated": 22241280,
+        "HEAD_logical": 22022067,
+        "HEAD_allocated": 22241280
+      }
+    ],
+    [
+      "research-data/ai-sigma/176-native-teacher-pipeline",
+      {
+        "files": 59,
+        "logical": 19761614,
+        "allocated": 19927040,
+        "HEAD_logical": 6585841,
+        "HEAD_allocated": 6750208
+      }
+    ],
+    [
+      "research-data/ai-sigma/151-sigma-web-port",
+      {
+        "files": 70,
+        "logical": 14424458,
+        "allocated": 14598144,
+        "HEAD_logical": 14424458,
+        "HEAD_allocated": 14598144
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame10-baseline-gap",
+      {
+        "files": 30,
+        "logical": 12261519,
+        "allocated": 12324864,
+        "HEAD_logical": 12261519,
+        "HEAD_allocated": 12324864
+      }
+    ],
+    [
+      ".artifacts/ai-sigma/frame14-distance-test",
+      {
+        "files": 28,
+        "logical": 11885625,
+        "allocated": 11972608,
+        "HEAD_logical": 0,
+        "HEAD_allocated": 0
+      }
+    ],
+    [
+      ".artifacts/ai-sigma/frame14-head-test",
+      {
+        "files": 28,
+        "logical": 11251954,
+        "allocated": 11333632,
+        "HEAD_logical": 0,
+        "HEAD_allocated": 0
+      }
+    ],
+    [
+      "research-data/ai-sigma/119-diverse-prefix",
+      {
+        "files": 35,
+        "logical": 8565660,
+        "allocated": 8646656,
+        "HEAD_logical": 8565660,
+        "HEAD_allocated": 8646656
+      }
+    ],
+    [
+      "research-data/ai-sigma/103-cooperative-arena",
+      {
+        "files": 53,
+        "logical": 8025271,
+        "allocated": 8155136,
+        "HEAD_logical": 8025271,
+        "HEAD_allocated": 8155136
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame16-fit-gap-analysis",
+      {
+        "files": 137,
+        "logical": 7175279,
+        "allocated": 7520256,
+        "HEAD_logical": 7175279,
+        "HEAD_allocated": 7520256
+      }
+    ],
+    [
+      "research-data/ai-sigma/187-manygame-generation",
+      {
+        "files": 54,
+        "logical": 7197401,
+        "allocated": 7344128,
+        "HEAD_logical": 7197401,
+        "HEAD_allocated": 7344128
+      }
+    ],
+    [
+      "research-data/ai-sigma/165-native-baseline",
+      {
+        "files": 49,
+        "logical": 6609773,
+        "allocated": 6746112,
+        "HEAD_logical": 6609773,
+        "HEAD_allocated": 6746112
+      }
+    ],
+    [
+      "research-data/ai-sigma/117-cpu-sigma-comparison",
+      {
+        "files": 44,
+        "logical": 6577090,
+        "allocated": 6684672,
+        "HEAD_logical": 6577090,
+        "HEAD_allocated": 6684672
+      }
+    ],
+    [
+      "research-data/ai-sigma/181-checkpoint-teacher",
+      {
+        "files": 41,
+        "logical": 6469369,
+        "allocated": 6574080,
+        "HEAD_logical": 6469369,
+        "HEAD_allocated": 6574080
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame14-learning",
+      {
+        "files": 164,
+        "logical": 5104667,
+        "allocated": 5533696,
+        "HEAD_logical": 5092468,
+        "HEAD_allocated": 5513216
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame20-distance-arena",
+      {
+        "files": 81,
+        "logical": 4845556,
+        "allocated": 5070848,
+        "HEAD_logical": 683781,
+        "HEAD_allocated": 905216
+      }
+    ],
+    [
+      "research-data/ai-sigma/110-c-factor-browser",
+      {
+        "files": 12,
+        "logical": 4783009,
+        "allocated": 4812800,
+        "HEAD_logical": 4783009,
+        "HEAD_allocated": 4812800
+      }
+    ],
+    [
+      ".artifacts/ai-sigma/analysis",
+      {
+        "files": 18,
+        "logical": 4625454,
+        "allocated": 4657152,
+        "HEAD_logical": 0,
+        "HEAD_allocated": 0
+      }
+    ],
+    [
+      "research-data/ai-sigma/summaries",
+      {
+        "files": 110,
+        "logical": 4041770,
+        "allocated": 4272128,
+        "HEAD_logical": 4041770,
+        "HEAD_allocated": 4272128
+      }
+    ],
+    [
+      "research-data/ai-sigma/134-local-move-quality",
+      {
+        "files": 28,
+        "logical": 3777457,
+        "allocated": 3842048,
+        "HEAD_logical": 3777457,
+        "HEAD_allocated": 3842048
+      }
+    ],
+    [
+      "research-data/ai-sigma/107-cp-frame",
+      {
+        "files": 8,
+        "logical": 3739128,
+        "allocated": 3747840,
+        "HEAD_logical": 3739128,
+        "HEAD_allocated": 3747840
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame19-paired-leaf-arena",
+      {
+        "files": 89,
+        "logical": 3480662,
+        "allocated": 3731456,
+        "HEAD_logical": 734909,
+        "HEAD_allocated": 983040
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame14-distance-residual",
+      {
+        "files": 132,
+        "logical": 3171158,
+        "allocated": 3502080,
+        "HEAD_logical": 3157875,
+        "HEAD_allocated": 3481600
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame19-native-arena",
+      {
+        "files": 110,
+        "logical": 3088185,
+        "allocated": 3399680,
+        "HEAD_logical": 3079770,
+        "HEAD_allocated": 3387392
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame15-learning-diagnostic",
+      {
+        "files": 194,
+        "logical": 2840232,
+        "allocated": 3309568,
+        "HEAD_logical": 2826343,
+        "HEAD_allocated": 3284992
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame14-distance-test",
+      {
+        "files": 42,
+        "logical": 3102303,
+        "allocated": 3215360,
+        "HEAD_logical": 3102303,
+        "HEAD_allocated": 3215360
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame14-head-control",
+      {
+        "files": 111,
+        "logical": 2899809,
+        "allocated": 3182592,
+        "HEAD_logical": 2888886,
+        "HEAD_allocated": 3162112
+      }
+    ],
+    [
+      "research-data/ai-sigma/155-sigma-web-port-games-independent",
+      {
+        "files": 80,
+        "logical": 2971922,
+        "allocated": 3178496,
+        "HEAD_logical": 2971922,
+        "HEAD_allocated": 3178496
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame14-l2-control",
+      {
+        "files": 74,
+        "logical": 2928130,
+        "allocated": 3112960,
+        "HEAD_logical": 2921414,
+        "HEAD_allocated": 3096576
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame14-head-test",
+      {
+        "files": 39,
+        "logical": 2957187,
+        "allocated": 3067904,
+        "HEAD_logical": 2957187,
+        "HEAD_allocated": 3067904
+      }
+    ],
+    [
+      "research-data/ai-sigma/159-cpu-concurrency",
+      {
+        "files": 20,
+        "logical": 2589429,
+        "allocated": 2629632,
+        "HEAD_logical": 2589429,
+        "HEAD_allocated": 2629632
+      }
+    ],
+    [
+      "research-data/ai-sigma/118-cpu-sigma-independent",
+      {
+        "files": 17,
+        "logical": 2582658,
+        "allocated": 2625536,
+        "HEAD_logical": 2582658,
+        "HEAD_allocated": 2625536
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame19-leaf-terminal",
+      {
+        "files": 125,
+        "logical": 2038958,
+        "allocated": 2396160,
+        "HEAD_logical": 962437,
+        "HEAD_allocated": 1310720
+      }
+    ],
+    [
+      "research-data/ai-sigma/112-player-workers",
+      {
+        "files": 13,
+        "logical": 2265505,
+        "allocated": 2301952,
+        "HEAD_logical": 2265505,
+        "HEAD_allocated": 2301952
+      }
+    ],
+    [
+      ".artifacts/ai-sigma/closeout",
+      {
+        "files": 10,
+        "logical": 1947011,
+        "allocated": 1970176,
+        "HEAD_logical": 0,
+        "HEAD_allocated": 0
+      }
+    ],
+    [
+      ".artifacts/ai-sigma/verification",
+      {
+        "files": 246,
+        "logical": 1378472,
+        "allocated": 1859584,
+        "HEAD_logical": 0,
+        "HEAD_allocated": 0
+      }
+    ],
+    [
+      ".artifacts/ai-sigma/reference-fixtures",
+      {
+        "files": 30,
+        "logical": 1687831,
+        "allocated": 1757184,
+        "HEAD_logical": 0,
+        "HEAD_allocated": 0
+      }
+    ],
+    [
+      ".artifacts/ai-sigma/frame14-distance-alpha-arena",
+      {
+        "files": 54,
+        "logical": 1551065,
+        "allocated": 1687552,
+        "HEAD_logical": 0,
+        "HEAD_allocated": 0
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame15-distance-update-control",
+      {
+        "files": 77,
+        "logical": 1382446,
+        "allocated": 1605632,
+        "HEAD_logical": 1382446,
+        "HEAD_allocated": 1605632
+      }
+    ],
+    [
+      "research-data/ai-sigma/163-fixed-cycle",
+      {
+        "files": 17,
+        "logical": 1393426,
+        "allocated": 1441792,
+        "HEAD_logical": 1393426,
+        "HEAD_allocated": 1441792
+      }
+    ],
+    [
+      "research-data/ai-sigma/170-native-runtime-ready",
+      {
+        "files": 20,
+        "logical": 1201098,
+        "allocated": 1257472,
+        "HEAD_logical": 1201098,
+        "HEAD_allocated": 1257472
+      }
+    ],
+    [
+      "research-data/ai-sigma/111-c-factor-independent",
+      {
+        "files": 8,
+        "logical": 1093578,
+        "allocated": 1105920,
+        "HEAD_logical": 1093578,
+        "HEAD_allocated": 1105920
+      }
+    ],
+    [
+      "research-data/ai-sigma/140-candidate-true-mean-fpu",
+      {
+        "files": 27,
+        "logical": 998600,
+        "allocated": 1069056,
+        "HEAD_logical": 998600,
+        "HEAD_allocated": 1069056
+      }
+    ],
+    [
+      "research-data/ai-sigma/132-deep-node-comparison",
+      {
+        "files": 21,
+        "logical": 1001661,
+        "allocated": 1052672,
+        "HEAD_logical": 1001661,
+        "HEAD_allocated": 1052672
+      }
+    ],
+    [
+      "research-data/ai-sigma/156-nnue-feature-cost",
+      {
+        "files": 22,
+        "logical": 921875,
+        "allocated": 983040,
+        "HEAD_logical": 921875,
+        "HEAD_allocated": 983040
+      }
+    ],
+    [
+      "research-data/ai-sigma/retention-99",
+      {
+        "files": 23,
+        "logical": 859046,
+        "allocated": 925696,
+        "HEAD_logical": 859046,
+        "HEAD_allocated": 925696
+      }
+    ],
+    [
+      ".artifacts/ai-sigma/plans",
+      {
+        "files": 142,
+        "logical": 532649,
+        "allocated": 917504,
+        "HEAD_logical": 0,
+        "HEAD_allocated": 0
+      }
+    ],
+    [
+      "research-data/ai-sigma/137-fixed-policy-cost",
+      {
+        "files": 24,
+        "logical": 808204,
+        "allocated": 872448,
+        "HEAD_logical": 808204,
+        "HEAD_allocated": 872448
+      }
+    ],
+    [
+      "research-data/ai-sigma/97-tail-transport",
+      {
+        "files": 11,
+        "logical": 845585,
+        "allocated": 868352,
+        "HEAD_logical": 845585,
+        "HEAD_allocated": 868352
+      }
+    ],
+    [
+      "research-data/ai-sigma/168-native-stageA-independent",
+      {
+        "files": 23,
+        "logical": 797655,
+        "allocated": 868352,
+        "HEAD_logical": 797655,
+        "HEAD_allocated": 868352
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame15-input-scale-control",
+      {
+        "files": 38,
+        "logical": 715004,
+        "allocated": 819200,
+        "HEAD_logical": 715004,
+        "HEAD_allocated": 819200
+      }
+    ],
+    [
+      "research-data/ai-sigma/180-native-k800-time",
+      {
+        "files": 13,
+        "logical": 672602,
+        "allocated": 708608,
+        "HEAD_logical": 672602,
+        "HEAD_allocated": 708608
+      }
+    ],
+    [
+      "research-data/ai-sigma/105-cooperative-arena-independent",
+      {
+        "files": 2,
+        "logical": 673946,
+        "allocated": 679936,
+        "HEAD_logical": 673946,
+        "HEAD_allocated": 679936
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame16-coordinator",
+      {
+        "files": 123,
+        "logical": 239249,
+        "allocated": 573440,
+        "HEAD_logical": 239028,
+        "HEAD_allocated": 569344
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame14-l2-test",
+      {
+        "files": 20,
+        "logical": 498015,
+        "allocated": 557056,
+        "HEAD_logical": 498015,
+        "HEAD_allocated": 557056
+      }
+    ],
+    [
+      ".artifacts/ai-sigma/dispatch",
+      {
+        "files": 112,
+        "logical": 200967,
+        "allocated": 536576,
+        "HEAD_logical": 0,
+        "HEAD_allocated": 0
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame14-coordinator",
+      {
+        "files": 122,
+        "logical": 163594,
+        "allocated": 536576,
+        "HEAD_logical": 163242,
+        "HEAD_allocated": 532480
+      }
+    ],
+    [
+      "research-data/ai-sigma/166-native-comparison-scope",
+      {
+        "files": 15,
+        "logical": 459877,
+        "allocated": 503808,
+        "HEAD_logical": 459877,
+        "HEAD_allocated": 503808
+      }
+    ],
+    [
+      "research-data/ai-sigma/172-native-ni-efficient",
+      {
+        "files": 22,
+        "logical": 436302,
+        "allocated": 491520,
+        "HEAD_logical": 47527,
+        "HEAD_allocated": 102400
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame20-coordinator",
+      {
+        "files": 102,
+        "logical": 166090,
+        "allocated": 475136,
+        "HEAD_logical": 165869,
+        "HEAD_allocated": 471040
+      }
+    ],
+    [
+      "research-data/ai-sigma/126-same-input-budget",
+      {
+        "files": 15,
+        "logical": 436307,
+        "allocated": 471040,
+        "HEAD_logical": 436307,
+        "HEAD_allocated": 471040
+      }
+    ],
+    [
+      "research-data/ai-sigma/123-completed-fpu",
+      {
+        "files": 12,
+        "logical": 443137,
+        "allocated": 466944,
+        "HEAD_logical": 443137,
+        "HEAD_allocated": 466944
+      }
+    ],
+    [
+      "research-data/ai-sigma/160-pv-pipeline-bootstrap",
+      {
+        "files": 19,
+        "logical": 403357,
+        "allocated": 458752,
+        "HEAD_logical": 402089,
+        "HEAD_allocated": 454656
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame10-coordinator-start",
+      {
+        "files": 79,
+        "logical": 259055,
+        "allocated": 446464,
+        "HEAD_logical": 259055,
+        "HEAD_allocated": 446464
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame15-coordinator",
+      {
+        "files": 90,
+        "logical": 136693,
+        "allocated": 417792,
+        "HEAD_logical": 136351,
+        "HEAD_allocated": 413696
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame15-learning-diagnostic-independent",
+      {
+        "files": 56,
+        "logical": 269806,
+        "allocated": 413696,
+        "HEAD_logical": 266417,
+        "HEAD_allocated": 397312
+      }
+    ],
+    [
+      "research-data/ai-sigma/109-browser-sab-independent",
+      {
+        "files": 4,
+        "logical": 406157,
+        "allocated": 413696,
+        "HEAD_logical": 406157,
+        "HEAD_allocated": 413696
+      }
+    ],
+    [
+      "research-data/ai-sigma/129-tactical-evaluation",
+      {
+        "files": 13,
+        "logical": 368587,
+        "allocated": 397312,
+        "HEAD_logical": 368587,
+        "HEAD_allocated": 397312
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame18-native-connection",
+      {
+        "files": 64,
+        "logical": 218374,
+        "allocated": 393216,
+        "HEAD_logical": 218374,
+        "HEAD_allocated": 393216
+      }
+    ],
+    [
+      "research-data/ai-sigma/185-manygame-runtime-preparation",
+      {
+        "files": 32,
+        "logical": 308409,
+        "allocated": 393216,
+        "HEAD_logical": 305329,
+        "HEAD_allocated": 385024
+      }
+    ],
+    [
+      "research-data/ai-sigma/125-completed-fpu-independent",
+      {
+        "files": 26,
+        "logical": 328069,
+        "allocated": 389120,
+        "HEAD_logical": 328069,
+        "HEAD_allocated": 389120
+      }
+    ],
+    [
+      "research-data/ai-sigma/113-player-workers-independent",
+      {
+        "files": 11,
+        "logical": 352719,
+        "allocated": 385024,
+        "HEAD_logical": 352719,
+        "HEAD_allocated": 385024
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame14-distance-independent",
+      {
+        "files": 51,
+        "logical": 260216,
+        "allocated": 376832,
+        "HEAD_logical": 251294,
+        "HEAD_allocated": 356352
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame16-fit-gap-independent",
+      {
+        "files": 72,
+        "logical": 194776,
+        "allocated": 364544,
+        "HEAD_logical": 194776,
+        "HEAD_allocated": 364544
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame18-coordinator",
+      {
+        "files": 80,
+        "logical": 150625,
+        "allocated": 360448,
+        "HEAD_logical": 148187,
+        "HEAD_allocated": 352256
+      }
+    ],
+    [
+      "research-data/ai-sigma/133-deep-node-independent",
+      {
+        "files": 18,
+        "logical": 313807,
+        "allocated": 356352,
+        "HEAD_logical": 313807,
+        "HEAD_allocated": 356352
+      }
+    ],
+    [
+      "research-data/ai-sigma/188-value-lr-control",
+      {
+        "files": 40,
+        "logical": 233645,
+        "allocated": 352256,
+        "HEAD_logical": 220570,
+        "HEAD_allocated": 331776
+      }
+    ],
+    [
+      "research-data/ai-sigma/135-local-move-independent",
+      {
+        "files": 22,
+        "logical": 281442,
+        "allocated": 339968,
+        "HEAD_logical": 281442,
+        "HEAD_allocated": 339968
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame14-independent",
+      {
+        "files": 75,
+        "logical": 144886,
+        "allocated": 335872,
+        "HEAD_logical": 138493,
+        "HEAD_allocated": 327680
+      }
+    ],
+    [
+      "research-data/ai-sigma/177-gpu-batch-provider",
+      {
+        "files": 30,
+        "logical": 244392,
+        "allocated": 319488,
+        "HEAD_logical": 241433,
+        "HEAD_allocated": 311296
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame14-distance-alpha-arena",
+      {
+        "files": 23,
+        "logical": 244804,
+        "allocated": 315392,
+        "HEAD_logical": 244804,
+        "HEAD_allocated": 315392
+      }
+    ],
+    [
+      "research-data/ai-sigma/143-wallless-label-independent",
+      {
+        "files": 12,
+        "logical": 282284,
+        "allocated": 311296,
+        "HEAD_logical": 282284,
+        "HEAD_allocated": 311296
+      }
+    ],
+    [
+      "research-data/ai-sigma/100-cooperative-clock-independent",
+      {
+        "files": 17,
+        "logical": 255845,
+        "allocated": 286720,
+        "HEAD_logical": 255845,
+        "HEAD_allocated": 286720
+      }
+    ],
+    [
+      "research-data/ai-sigma/144-wallless-ai-sensitivity",
+      {
+        "files": 22,
+        "logical": 229050,
+        "allocated": 278528,
+        "HEAD_logical": 229050,
+        "HEAD_allocated": 278528
+      }
+    ],
+    [
+      "research-data/ai-sigma/191-manygame-independent",
+      {
+        "files": 46,
+        "logical": 162479,
+        "allocated": 274432,
+        "HEAD_logical": 156798,
+        "HEAD_allocated": 262144
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame16-raw-cv-independent",
+      {
+        "files": 43,
+        "logical": 163857,
+        "allocated": 270336,
+        "HEAD_logical": 163857,
+        "HEAD_allocated": 270336
+      }
+    ],
+    [
+      "research-data/ai-sigma/179-native-teacher-independent",
+      {
+        "files": 35,
+        "logical": 167689,
+        "allocated": 262144,
+        "HEAD_logical": 167262,
+        "HEAD_allocated": 258048
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame14-head-independent",
+      {
+        "files": 28,
+        "logical": 192566,
+        "allocated": 258048,
+        "HEAD_logical": 183250,
+        "HEAD_allocated": 237568
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame19-coordinator",
+      {
+        "files": 58,
+        "logical": 76387,
+        "allocated": 253952,
+        "HEAD_logical": 67487,
+        "HEAD_allocated": 212992
+      }
+    ],
+    [
+      "research-data/ai-sigma/150-sigma-web-port-conformance",
+      {
+        "files": 15,
+        "logical": 214103,
+        "allocated": 249856,
+        "HEAD_logical": 210863,
+        "HEAD_allocated": 245760
+      }
+    ],
+    [
+      "research-data/ai-sigma/154-nnue-preliminary",
+      {
+        "files": 47,
+        "logical": 149020,
+        "allocated": 249856,
+        "HEAD_logical": 148863,
+        "HEAD_allocated": 245760
+      }
+    ],
+    [
+      "research-data/ai-sigma/122-diverse-prefix-independent",
+      {
+        "files": 13,
+        "logical": 209485,
+        "allocated": 241664,
+        "HEAD_logical": 209485,
+        "HEAD_allocated": 241664
+      }
+    ],
+    [
+      "research-data/ai-sigma/190-nnue-qf1-prototype",
+      {
+        "files": 50,
+        "logical": 103641,
+        "allocated": 241664,
+        "HEAD_logical": 99454,
+        "HEAD_allocated": 229376
+      }
+    ],
+    [
+      "research-data/ai-sigma/115-webgpu-measure",
+      {
+        "files": 3,
+        "logical": 226917,
+        "allocated": 233472,
+        "HEAD_logical": 226917,
+        "HEAD_allocated": 233472
+      }
+    ],
+    [
+      "research-data/ai-sigma/127-tactical-oracle",
+      {
+        "files": 11,
+        "logical": 201663,
+        "allocated": 233472,
+        "HEAD_logical": 201663,
+        "HEAD_allocated": 233472
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame15-input-scale-independent",
+      {
+        "files": 42,
+        "logical": 115151,
+        "allocated": 229376,
+        "HEAD_logical": 113858,
+        "HEAD_allocated": 217088
+      }
+    ],
+    [
+      "research-data/ai-sigma/141-true-mean-fpu-saved-independent",
+      {
+        "files": 9,
+        "logical": 207990,
+        "allocated": 229376,
+        "HEAD_logical": 207990,
+        "HEAD_allocated": 229376
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame18-learning-connection-view",
+      {
+        "files": 53,
+        "logical": 73878,
+        "allocated": 225280,
+        "HEAD_logical": 63058,
+        "HEAD_allocated": 196608
+      }
+    ],
+    [
+      "research-data/ai-sigma/162-pv-cpu-smoke",
+      {
+        "files": 29,
+        "logical": 151322,
+        "allocated": 225280,
+        "HEAD_logical": 151322,
+        "HEAD_allocated": 225280
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame20-paired-independent",
+      {
+        "files": 23,
+        "logical": 151653,
+        "allocated": 221184,
+        "HEAD_logical": 149949,
+        "HEAD_allocated": 212992
+      }
+    ],
+    [
+      "research-data/ai-sigma/171-gpu-route-choice",
+      {
+        "files": 23,
+        "logical": 156989,
+        "allocated": 221184,
+        "HEAD_logical": 155196,
+        "HEAD_allocated": 217088
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame20-one-root-leaf",
+      {
+        "files": 32,
+        "logical": 129230,
+        "allocated": 217088,
+        "HEAD_logical": 129230,
+        "HEAD_allocated": 217088
+      }
+    ],
+    [
+      "research-data/ai-sigma/169-native-games-independent",
+      {
+        "files": 31,
+        "logical": 121219,
+        "allocated": 204800,
+        "HEAD_logical": 121219,
+        "HEAD_allocated": 204800
+      }
+    ],
+    [
+      "research-data/ai-sigma/quoridor-4lc.192-learning-tools",
+      {
+        "files": 8,
+        "logical": 188207,
+        "allocated": 204800,
+        "HEAD_logical": 188207,
+        "HEAD_allocated": 204800
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame15-distance-update-independent",
+      {
+        "files": 38,
+        "logical": 99907,
+        "allocated": 200704,
+        "HEAD_logical": 98343,
+        "HEAD_allocated": 188416
+      }
+    ],
+    [
+      "research-data/ai-sigma/259-repository-diagnosis",
+      {
+        "files": 5,
+        "logical": 174006,
+        "allocated": 184320,
+        "HEAD_logical": 0,
+        "HEAD_allocated": 0
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame14-representation-audit",
+      {
+        "files": 38,
+        "logical": 92293,
+        "allocated": 180224,
+        "HEAD_logical": 85869,
+        "HEAD_allocated": 172032
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame18-growth-learning-independent",
+      {
+        "files": 30,
+        "logical": 78623,
+        "allocated": 172032,
+        "HEAD_logical": 77067,
+        "HEAD_allocated": 159744
+      }
+    ],
+    [
+      "research-data/ai-sigma/175-native-epoch2-independent",
+      {
+        "files": 30,
+        "logical": 91604,
+        "allocated": 172032,
+        "HEAD_logical": 85145,
+        "HEAD_allocated": 155648
+      }
+    ],
+    [
+      "research-data/ai-sigma/186-value-game-diagnostic",
+      {
+        "files": 25,
+        "logical": 96905,
+        "allocated": 163840,
+        "HEAD_logical": 94776,
+        "HEAD_allocated": 159744
+      }
+    ],
+    [
+      "research-data/ai-sigma/131-tactical-saved-independent",
+      {
+        "files": 22,
+        "logical": 104715,
+        "allocated": 163840,
+        "HEAD_logical": 104715,
+        "HEAD_allocated": 163840
+      }
+    ],
+    [
+      "research-data/ai-sigma/182-k800-cost-independent",
+      {
+        "files": 25,
+        "logical": 104506,
+        "allocated": 163840,
+        "HEAD_logical": 104079,
+        "HEAD_allocated": 159744
+      }
+    ],
+    [
+      "research-data/ai-sigma/153-sigma-web-port-saved-independent",
+      {
+        "files": 28,
+        "logical": 86198,
+        "allocated": 155648,
+        "HEAD_logical": 82695,
+        "HEAD_allocated": 151552
+      }
+    ],
+    [
+      "research-data/ai-sigma/184-checkpoint-teacher-independent",
+      {
+        "files": 31,
+        "logical": 78298,
+        "allocated": 155648,
+        "HEAD_logical": 78298,
+        "HEAD_allocated": 155648
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame19-arena-diagnosis",
+      {
+        "files": 23,
+        "logical": 91287,
+        "allocated": 155648,
+        "HEAD_logical": 82654,
+        "HEAD_allocated": 131072
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame19-native-independent",
+      {
+        "files": 27,
+        "logical": 85218,
+        "allocated": 155648,
+        "HEAD_logical": 83354,
+        "HEAD_allocated": 147456
+      }
+    ],
+    [
+      "research-data/ai-sigma/138-fixed-cost-saved-independent",
+      {
+        "files": 13,
+        "logical": 111909,
+        "allocated": 151552,
+        "HEAD_logical": 111909,
+        "HEAD_allocated": 151552
+      }
+    ],
+    [
+      "research-data/ai-sigma/142-wallless-oracle",
+      {
+        "files": 15,
+        "logical": 114955,
+        "allocated": 151552,
+        "HEAD_logical": 114955,
+        "HEAD_allocated": 151552
+      }
+    ],
+    [
+      "research-data/ai-sigma/136-policy-factor-choice",
+      {
+        "files": 28,
+        "logical": 75347,
+        "allocated": 147456,
+        "HEAD_logical": 75347,
+        "HEAD_allocated": 147456
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame20-learning-effect",
+      {
+        "files": 25,
+        "logical": 80860,
+        "allocated": 143360,
+        "HEAD_logical": 80860,
+        "HEAD_allocated": 143360
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame20-distance-arena-independent",
+      {
+        "files": 21,
+        "logical": 70843,
+        "allocated": 135168,
+        "HEAD_logical": 68560,
+        "HEAD_allocated": 118784
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame19-leaf-terminal-independent",
+      {
+        "files": 19,
+        "logical": 83355,
+        "allocated": 131072,
+        "HEAD_logical": 81523,
+        "HEAD_allocated": 122880
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame20-distance-provenance-repair",
+      {
+        "files": 23,
+        "logical": 51534,
+        "allocated": 122880,
+        "HEAD_logical": 47026,
+        "HEAD_allocated": 110592
+      }
+    ],
+    [
+      "research-data/ai-sigma/164-native-route-choice",
+      {
+        "files": 23,
+        "logical": 52111,
+        "allocated": 118784,
+        "HEAD_logical": 49982,
+        "HEAD_allocated": 114688
+      }
+    ],
+    [
+      "research-data/ai-sigma/161-formal-clock",
+      {
+        "files": 20,
+        "logical": 67707,
+        "allocated": 118784,
+        "HEAD_logical": 67707,
+        "HEAD_allocated": 118784
+      }
+    ],
+    [
+      "research-data/ai-sigma/174-gpu-inference",
+      {
+        "files": 13,
+        "logical": 95413,
+        "allocated": 118784,
+        "HEAD_logical": 93476,
+        "HEAD_allocated": 114688
+      }
+    ],
+    [
+      "research-data/ai-sigma/178-teacher-design",
+      {
+        "files": 23,
+        "logical": 56920,
+        "allocated": 118784,
+        "HEAD_logical": 56493,
+        "HEAD_allocated": 114688
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame19-distance-provenance",
+      {
+        "files": 23,
+        "logical": 24281,
+        "allocated": 102400,
+        "HEAD_logical": 19151,
+        "HEAD_allocated": 77824
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame13-coordinator",
+      {
+        "files": 18,
+        "logical": 57985,
+        "allocated": 98304,
+        "HEAD_logical": 57624,
+        "HEAD_allocated": 94208
+      }
+    ],
+    [
+      "research-data/ai-sigma/139-next-information-choice",
+      {
+        "files": 20,
+        "logical": 37326,
+        "allocated": 98304,
+        "HEAD_logical": 37326,
+        "HEAD_allocated": 98304
+      }
+    ],
+    [
+      "research-data/ai-sigma/130-deep-discrimination",
+      {
+        "files": 21,
+        "logical": 34739,
+        "allocated": 94208,
+        "HEAD_logical": 34739,
+        "HEAD_allocated": 94208
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame19-node-context",
+      {
+        "files": 22,
+        "logical": 28080,
+        "allocated": 90112,
+        "HEAD_logical": 20068,
+        "HEAD_allocated": 65536
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame10-gap-sampling",
+      {
+        "files": 17,
+        "logical": 43302,
+        "allocated": 90112,
+        "HEAD_logical": 43302,
+        "HEAD_allocated": 90112
+      }
+    ],
+    [
+      "research-data/ai-sigma/121-comparison-information",
+      {
+        "files": 13,
+        "logical": 51672,
+        "allocated": 86016,
+        "HEAD_logical": 51672,
+        "HEAD_allocated": 86016
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame16-throughput-independent",
+      {
+        "files": 14,
+        "logical": 57737,
+        "allocated": 86016,
+        "HEAD_logical": 52819,
+        "HEAD_allocated": 69632
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame20-saved-distance-selection",
+      {
+        "files": 12,
+        "logical": 43736,
+        "allocated": 77824,
+        "HEAD_logical": 39817,
+        "HEAD_allocated": 65536
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame18-worker-balance-independent",
+      {
+        "files": 14,
+        "logical": 35825,
+        "allocated": 77824,
+        "HEAD_logical": 33306,
+        "HEAD_allocated": 69632
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame18-native-independent",
+      {
+        "files": 15,
+        "logical": 32652,
+        "allocated": 77824,
+        "HEAD_logical": 31019,
+        "HEAD_allocated": 65536
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame10-gap-design",
+      {
+        "files": 14,
+        "logical": 37423,
+        "allocated": 73728,
+        "HEAD_logical": 34943,
+        "HEAD_allocated": 69632
+      }
+    ],
+    [
+      "research-data/ai-sigma/183-manygame-gpu-plan",
+      {
+        "files": 19,
+        "logical": 25059,
+        "allocated": 73728,
+        "HEAD_logical": 25059,
+        "HEAD_allocated": 73728
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame19-leaf-meaning-selection",
+      {
+        "files": 16,
+        "logical": 14427,
+        "allocated": 65536,
+        "HEAD_logical": 10864,
+        "HEAD_allocated": 45056
+      }
+    ],
+    [
+      "research-data/ai-sigma/158-formal-ni-plan",
+      {
+        "files": 14,
+        "logical": 20616,
+        "allocated": 65536,
+        "HEAD_logical": 20616,
+        "HEAD_allocated": 65536
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame18-native-connection-view",
+      {
+        "files": 14,
+        "logical": 17330,
+        "allocated": 57344,
+        "HEAD_logical": 14349,
+        "HEAD_allocated": 45056
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame18-search-efficiency-view",
+      {
+        "files": 13,
+        "logical": 12876,
+        "allocated": 53248,
+        "HEAD_logical": 7212,
+        "HEAD_allocated": 32768
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame16-generation-architecture-view",
+      {
+        "files": 12,
+        "logical": 12691,
+        "allocated": 49152,
+        "HEAD_logical": 9483,
+        "HEAD_allocated": 36864
+      }
+    ],
+    [
+      "research-data/ai-sigma/116-evaluation-plan",
+      {
+        "files": 9,
+        "logical": 22567,
+        "allocated": 45056,
+        "HEAD_logical": 22567,
+        "HEAD_allocated": 45056
+      }
+    ],
+    [
+      "research-data/ai-sigma/106-supervisor-summary",
+      {
+        "files": 6,
+        "logical": 32669,
+        "allocated": 40960,
+        "HEAD_logical": 32669,
+        "HEAD_allocated": 40960
+      }
+    ],
+    [
+      "research-data/ai-sigma/145-matched-policy-quality-choice",
+      {
+        "files": 6,
+        "logical": 24986,
+        "allocated": 40960,
+        "HEAD_logical": 24986,
+        "HEAD_allocated": 40960
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame16-residual-readout-view",
+      {
+        "files": 10,
+        "logical": 9962,
+        "allocated": 40960,
+        "HEAD_logical": 7107,
+        "HEAD_allocated": 28672
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame16-generalization-selection",
+      {
+        "files": 10,
+        "logical": 10152,
+        "allocated": 40960,
+        "HEAD_logical": 7093,
+        "HEAD_allocated": 28672
+      }
+    ],
+    [
+      "research-data/ai-sigma/102-tooling-boundary",
+      {
+        "files": 7,
+        "logical": 17605,
+        "allocated": 36864,
+        "HEAD_logical": 17495,
+        "HEAD_allocated": 32768
+      }
+    ],
+    [
+      "research-data/ai-sigma/92-supervisor-turn-unbounded",
+      {
+        "files": 2,
+        "logical": 19437,
+        "allocated": 24576,
+        "HEAD_logical": 19437,
+        "HEAD_allocated": 24576
+      }
+    ],
+    [
+      "research-data/ai-sigma/104-coordinator-session-policy",
+      {
+        "files": 5,
+        "logical": 9432,
+        "allocated": 24576,
+        "HEAD_logical": 9432,
+        "HEAD_allocated": 24576
+      }
+    ],
+    [
+      "research-data/ai-sigma/frame9-coordinator-ending",
+      {
+        "files": 5,
+        "logical": 6477,
+        "allocated": 20480,
+        "HEAD_logical": 6477,
+        "HEAD_allocated": 20480
+      }
+    ],
+    [
+      "research-data/ai-sigma/quoridor-4lc.207-roles",
+      {
+        "files": 5,
+        "logical": 9485,
+        "allocated": 20480,
+        "HEAD_logical": 9485,
+        "HEAD_allocated": 20480
+      }
+    ],
+    [
+      "research-data/ai-sigma/104-session-policy",
+      {
+        "files": 3,
+        "logical": 12733,
+        "allocated": 20480,
+        "HEAD_logical": 12733,
+        "HEAD_allocated": 20480
+      }
+    ],
+    [
+      "research-data/ai-sigma/92-frame8-selection",
+      {
+        "files": 1,
+        "logical": 4372,
+        "allocated": 8192,
+        "HEAD_logical": 4372,
+        "HEAD_allocated": 8192
+      }
+    ],
+    [
+      "research-data/ai-sigma/92-frame19",
+      {
+        "files": 1,
+        "logical": 5430,
+        "allocated": 8192,
+        "HEAD_logical": 5430,
+        "HEAD_allocated": 8192
+      }
+    ],
+    [
+      "research-data/ai-sigma/92-frame7",
+      {
+        "files": 1,
+        "logical": 6067,
+        "allocated": 8192,
+        "HEAD_logical": 6067,
+        "HEAD_allocated": 8192
+      }
+    ],
+    [
+      "research-data/ai-sigma/92-frame18",
+      {
+        "files": 1,
+        "logical": 5415,
+        "allocated": 8192,
+        "HEAD_logical": 5415,
+        "HEAD_allocated": 8192
+      }
+    ],
+    [
+      "research-data/ai-sigma/120-role-value",
+      {
+        "files": 1,
+        "logical": 5042,
+        "allocated": 8192,
+        "HEAD_logical": 5042,
+        "HEAD_allocated": 8192
+      }
+    ],
+    [
+      "research-data/ai-sigma/92-frame8",
+      {
+        "files": 1,
+        "logical": 4412,
+        "allocated": 8192,
+        "HEAD_logical": 4412,
+        "HEAD_allocated": 8192
+      }
+    ],
+    [
+      "research-data/ai-sigma/resource-ledger.json",
+      {
+        "files": 1,
+        "logical": 2016,
+        "allocated": 4096,
+        "HEAD_logical": 2016,
+        "HEAD_allocated": 4096
+      }
+    ],
+    [
+      "research-data/ai-sigma/92-frame16",
+      {
+        "files": 1,
+        "logical": 1529,
+        "allocated": 4096,
+        "HEAD_logical": 1529,
+        "HEAD_allocated": 4096
+      }
+    ],
+    [
+      "research-data/ai-sigma/124-milestone",
+      {
+        "files": 1,
+        "logical": 1373,
+        "allocated": 4096,
+        "HEAD_logical": 1373,
+        "HEAD_allocated": 4096
+      }
+    ],
+    [
+      "research-data/ai-sigma/92-frame14",
+      {
+        "files": 1,
+        "logical": 869,
+        "allocated": 4096,
+        "HEAD_logical": 869,
+        "HEAD_allocated": 4096
+      }
+    ],
+    [
+      "research-data/ai-sigma/92-frame11-extension",
+      {
+        "files": 1,
+        "logical": 700,
+        "allocated": 4096,
+        "HEAD_logical": 700,
+        "HEAD_allocated": 4096
+      }
+    ],
+    [
+      "research-data/ai-sigma/92-frame10-guard-repair",
+      {
+        "files": 1,
+        "logical": 1551,
+        "allocated": 4096,
+        "HEAD_logical": 1551,
+        "HEAD_allocated": 4096
+      }
+    ],
+    [
+      "research-data/ai-sigma/92-frame10",
+      {
+        "files": 1,
+        "logical": 1133,
+        "allocated": 4096,
+        "HEAD_logical": 1133,
+        "HEAD_allocated": 4096
+      }
+    ],
+    [
+      "research-data/ai-sigma/92-frame15",
+      {
+        "files": 1,
+        "logical": 925,
+        "allocated": 4096,
+        "HEAD_logical": 925,
+        "HEAD_allocated": 4096
+      }
+    ],
+    [
+      "research-data/ai-sigma/258-frame-end-flow",
+      {
+        "files": 1,
+        "logical": 3472,
+        "allocated": 4096,
+        "HEAD_logical": 3472,
+        "HEAD_allocated": 4096
+      }
+    ],
+    [
+      "research-data/ai-sigma/92-frame9",
+      {
+        "files": 1,
+        "logical": 976,
+        "allocated": 4096,
+        "HEAD_logical": 976,
+        "HEAD_allocated": 4096
+      }
+    ],
+    [
+      "research-data/ai-sigma/92-frame13",
+      {
+        "files": 1,
+        "logical": 804,
+        "allocated": 4096,
+        "HEAD_logical": 804,
+        "HEAD_allocated": 4096
+      }
+    ],
+    [
+      "research-data/ai-sigma/252-supervisor-role-effect",
+      {
+        "files": 1,
+        "logical": 3767,
+        "allocated": 4096,
+        "HEAD_logical": 3767,
+        "HEAD_allocated": 4096
+      }
+    ],
+    [
+      "research-data/ai-sigma/92-frame20",
+      {
+        "files": 1,
+        "logical": 1707,
+        "allocated": 4096,
+        "HEAD_logical": 1707,
+        "HEAD_allocated": 4096
+      }
+    ],
+    [
+      "research-data/ai-sigma/92-bounded-records",
+      {
+        "files": 1,
+        "logical": 913,
+        "allocated": 4096,
+        "HEAD_logical": 913,
+        "HEAD_allocated": 4096
+      }
+    ],
+    [
+      "research-data/ai-sigma/92-frame14-training-mirror",
+      {
+        "files": 1,
+        "logical": 1446,
+        "allocated": 4096,
+        "HEAD_logical": 1446,
+        "HEAD_allocated": 4096
+      }
+    ],
+    [
+      "research-data/ai-sigma/92-frame12",
+      {
+        "files": 1,
+        "logical": 628,
+        "allocated": 4096,
+        "HEAD_logical": 628,
+        "HEAD_allocated": 4096
+      }
+    ],
+    [
+      "research-data/ai-sigma/247-cleanup-role",
+      {
+        "files": 1,
+        "logical": 1218,
+        "allocated": 4096,
+        "HEAD_logical": 1218,
+        "HEAD_allocated": 4096
+      }
+    ],
+    [
+      "research-data/ai-sigma/250-maintainability-role",
+      {
+        "files": 1,
+        "logical": 1860,
+        "allocated": 4096,
+        "HEAD_logical": 1860,
+        "HEAD_allocated": 4096
+      }
+    ]
+  ],
+  "large_scoped_files": [
+    {
+      "path": "research-data/ai-sigma/173-native-ni-arena/openings.json",
+      "logical": 29393237,
+      "allocated": 29396992,
+      "in_HEAD": true
+    },
+    {
+      "path": ".artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/ort-wasm-simd-threaded.jsep.wasm",
+      "logical": 23914392,
+      "allocated": 23916544,
+      "in_HEAD": false
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/restore-minimum/port151-stageA-r2/runs/port151-stageA-r2/browser-result.json",
+      "logical": 17535637,
+      "allocated": 17539072,
+      "in_HEAD": false
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/restore-minimum/port151-stageA-r1/runs/port151-stageA-r1/browser-result.json",
+      "logical": 17536361,
+      "allocated": 17539072,
+      "in_HEAD": false
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageA-r2/browser-result.json",
+      "logical": 17535637,
+      "allocated": 17539072,
+      "in_HEAD": false
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageA-r1/browser-result.json",
+      "logical": 17536361,
+      "allocated": 17539072,
+      "in_HEAD": false
+    },
+    {
+      "path": "research-data/ai-sigma/frame16-teacher-throughput/fresh96-stage/jobs/fresh96-firstscience/core2/raw-rows.jsonl",
+      "logical": 17398021,
+      "allocated": 17403904,
+      "in_HEAD": false
+    },
+    {
+      "path": "research-data/ai-sigma/archives/runs/SIGMA-PAIRED-MATCHES.tar.gz",
+      "logical": 16220139,
+      "allocated": 16220160,
+      "in_HEAD": true
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/NATIVE-NI-ARENA/runs/native173-quality-e2-r1/result.json",
+      "logical": 15262182,
+      "allocated": 15265792,
+      "in_HEAD": false
+    },
+    {
+      "path": "research-data/ai-sigma/frame16-teacher-throughput/fresh96-stage/jobs/fresh96-firstscience/core4/raw-rows.jsonl",
+      "logical": 14313665,
+      "allocated": 14319616,
+      "in_HEAD": false
+    },
+    {
+      "path": "research-data/ai-sigma/frame16-teacher-throughput/fresh96-stage/jobs/fresh96-firstscience/core6/raw-rows.jsonl",
+      "logical": 14124461,
+      "allocated": 14131200,
+      "in_HEAD": false
+    },
+    {
+      "path": "research-data/ai-sigma/176-native-teacher-pipeline/gpu-root-parity.json",
+      "logical": 13175773,
+      "allocated": 13176832,
+      "in_HEAD": false
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/NATIVE-BASELINE/runs/native165-mechanism-r1/result.json",
+      "logical": 13141705,
+      "allocated": 13144064,
+      "in_HEAD": false
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261002/CPU-SIGMA-INDEPENDENT/saved-input.json",
+      "logical": 12733003,
+      "allocated": 12734464,
+      "in_HEAD": false
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261002/CP-FRAME/runs/frame7-asym-pair-r1/browser-result.json",
+      "logical": 12660669,
+      "allocated": 12660736,
+      "in_HEAD": false
+    },
+    {
+      "path": "research-data/ai-sigma/frame18-worker-balance/jobs/baseline-r2/core4/raw-rows.jsonl",
+      "logical": 12603494,
+      "allocated": 12611584,
+      "in_HEAD": false
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261002/PLAYER-WORKERS/runs/p112-asym-pair-r1/browser-result.json",
+      "logical": 12550088,
+      "allocated": 12550144,
+      "in_HEAD": false
+    },
+    {
+      "path": "research-data/ai-sigma/frame18-worker-balance/jobs/baseline-r2/core6/raw-rows.jsonl",
+      "logical": 12484181,
+      "allocated": 12488704,
+      "in_HEAD": false
+    },
+    {
+      "path": "research-data/ai-sigma/frame18-worker-balance/jobs/baseline-r2/core2/raw-rows.jsonl",
+      "logical": 12347015,
+      "allocated": 12353536,
+      "in_HEAD": false
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261002/C-FACTOR-BROWSER/runs/c110-asym-pair-r1/browser-result.json",
+      "logical": 11988090,
+      "allocated": 11988992,
+      "in_HEAD": false
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261002/CP-FRAME/runs/frame7-asym-pair-r1/rows.json",
+      "logical": 11542013,
+      "allocated": 11542528,
+      "in_HEAD": false
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261002/C-FACTOR-BROWSER/runs/c110-asym-pair-r1/rows.json",
+      "logical": 10924231,
+      "allocated": 10928128,
+      "in_HEAD": false
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261002/PLAYER-WORKERS/runs/p112-initial-pair-r1/browser-result.json",
+      "logical": 10866395,
+      "allocated": 10866688,
+      "in_HEAD": false
+    },
+    {
+      "path": "research-data/ai-sigma/frame18-data-learning/learning-evidence-v1.tar.gz",
+      "logical": 10478945,
+      "allocated": 10481664,
+      "in_HEAD": true
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261002/C-FACTOR-BROWSER/runs/c110-initial-pair-r1/browser-result.json",
+      "logical": 10063256,
+      "allocated": 10063872,
+      "in_HEAD": false
+    }
+  ],
+  "source_examples": [
+    {
+      "path": "tools/ai-sigma-native-baseline/game.js",
+      "bytes": 27877,
+      "lines": 671,
+      "max_line_chars": 109,
+      "sha256": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+      "matches_HEAD": true,
+      "references": []
+    },
+    {
+      "path": "tools/ai-sigma-arena-matches/game.js",
+      "bytes": 27877,
+      "lines": 671,
+      "max_line_chars": 109,
+      "sha256": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+      "matches_HEAD": false,
+      "references": []
+    },
+    {
+      "path": "tools/ai-sigma-manygame-generation/gamepool.cjs",
+      "bytes": 4557,
+      "lines": 24,
+      "max_line_chars": 1314,
+      "sha256": "7fc6ee6c63e71048ea6edd2b649417965d70cd39df70f6ba2771160a5ad0bab4",
+      "matches_HEAD": true,
+      "references": [
+        {
+          "line": 2,
+          "text": "const I=require('./identity.cjs');"
+        }
+      ]
+    },
+    {
+      "path": "tools/ai-sigma-manygame-generation/pause-monitor.cjs",
+      "bytes": 6690,
+      "lines": 12,
+      "max_line_chars": 2923,
+      "sha256": "265f7c8aa34f9a7f7f06f2ac2441546bd3ab7c36519196a70704351c61bddbea",
+      "matches_HEAD": true,
+      "references": [
+        {
+          "line": 1,
+          "text": "'use strict';const fs=require('fs'),path=require('path'),{execFile}=require('child_process'),{Ledger}=require('../ai-sigma-actual-boundary-repair/owned-ledger.cjs');const ROOT=path.resolve(__dirname,'../..'); // Private read/late-failure adapter; shared original is read-only."
+        },
+        {
+          "line": 5,
+          "text": "function createMonitor({out,subjectIssue,deadlineUTC,diagnosticCase=null,windowEndUTC='2026-10-02T00:50:00Z'}){const deadline=Date.parse(deadlineUTC);if(!Number.isFinite(deadline)||!Number.isFinite(Date.parse(windowEndUTC))||deadline>Date.parse(windowEndUTC))throw typed('MONITOR_CONTROL_DEADLINE_INVALID');let failureListener=null,transportRetryUsed=false;let state='UNREADY',failure=null,inflight=null,timer=null,closed=false;const rows=[],pending=new Map(),self=identity(process.pid),ledger=observerLedger(self);"
+        },
+        {
+          "line": 8,
+          "text": "function read(id,attempt=0){return new Promise((resolve,reject)=>{const startUTC=new Date().toISOString(),capture=out+'/beads-read-'+id+'.json',child=execFile(diagnosticCase==='timeout-once'?process.execPath:'bash',diagnosticCase==='timeout-once'?['-e',`require('fs').writeFileSync(process.argv[1],JSON.stringify([{id:process.argv[2],status:'in_progress',labels:[]}]))`,capture,id]:['-c','bash \"$1\" show \"$2\" --json | python3 \"$4\" > \"$3\"','concurrency159-read',ROOT+'/scripts/dev/beads.sh',id,capture,__dirname+'/compact-beads.py'],{encoding:'utf8',timeout:diagnosticCase==='timeout-once'&&id==='quoridor-4lc'&&attempt===0?1:10000,env:{...process.env"
+        }
+      ]
+    },
+    {
+      "path": "tools/ai-sigma-worker-balance/generate.cjs",
+      "bytes": 5755,
+      "lines": 11,
+      "max_line_chars": 1247,
+      "sha256": "48eb1f6d91ef2edf23d84a1a31465b3a2efbf03886033635b6049066b7b4e1ae",
+      "matches_HEAD": true,
+      "references": [
+        {
+          "line": 1,
+          "text": "'use strict';const fs=require('fs'),path=require('path'),{spawn}=require('child_process'),{performance}=require('perf_hooks'),{Broker}=require('../ai-sigma-teacher-throughput/codec-control/broker.cjs'),{Pipe}=require('../ai-sigma-teacher-throughput/pipe.cjs'),{createMonitor}=require('../ai-sigma-manygame-generation/pause-monitor.cjs');"
+        },
+        {
+          "line": 6,
+          "text": "(async()=>{const m=createMonitor({out,subjectIssue:c.issue,deadlineUTC:c.science_deadline,windowEndUTC:'2026-10-04T14:33:18Z'}),closed=[],results=[];let primary=null,info=null,providerStop=null;const timer=setTimeout(()=>abort('JOB420_HARD_LIMIT_PRE_CLEANUP'),(c.job_seconds-8)*1000);"
+        },
+        {
+          "line": 7,
+          "text": "try{await m.start(e=>abort(e.message));save('registered-games.json',specs);if(c.mode.startsWith('GPU')){provider=new Pipe('/home/vscode/.cache/inference/envs/quoridor-training/bin/python',['-u',ROOT+'/tools/ai-sigma-teacher-throughput/codec-control/provider.py','--sample-cap',''+c.NN_cap,'--max-batch',''+c.max_batch],{timeoutMs:30000});const z=await provider.ask({op:'info',request_id:'init'});if(!z.ok||z.request_id!=='init')throw Error('PROVIDER_INIT');info=z.result;save('provider-init.json',info);broker=new Broker(async items=>{const request_id='batch.'+(++providerSeq),z=await provider.ask({op:'infer_batch',request_id,backend:'cuda',items});"
+        }
+      ]
+    },
+    {
+      "path": "tools/ai-sigma-frame20-distance-arena/engine.cjs",
+      "bytes": 6088,
+      "lines": 37,
+      "max_line_chars": 736,
+      "sha256": "2df5153faca52f27f15b562d19bb5a7ce4b1c0ef5ba368afd20fbed06f0f3a2c",
+      "matches_HEAD": true,
+      "references": [
+        {
+          "line": 2,
+          "text": "const assert=require('assert'),n=require('../ai-sigma-frame18-native-connection/native.cjs'),{q}=n,adapter=require('../ai-sigma-frame19-leaf-terminal/leaf.cjs');"
+        }
+      ]
+    },
+    {
+      "path": "tools/ai-sigma-frame18-native-connection/native.cjs",
+      "bytes": 1213,
+      "lines": 8,
+      "max_line_chars": 448,
+      "sha256": "18aa7999984e68d57a36b1dba69c7deb8a08afd4aec2a6ef436013c03493b0ee",
+      "matches_HEAD": true,
+      "references": [
+        {
+          "line": 2,
+          "text": "const q=require('../ai-sigma-nnue-qf1-prototype/qf1.cjs'),fs=require('fs'),assert=require('assert');"
+        }
+      ]
+    },
+    {
+      "path": "tools/ai-sigma-nnue-qf1-prototype/qf1.cjs",
+      "bytes": 4410,
+      "lines": 15,
+      "max_line_chars": 696,
+      "sha256": "ed54a84b90a0e8effe5737b959aaa6fd16ec4c3cdf054aee2cae58e6446012d3",
+      "matches_HEAD": true,
+      "references": [
+        {
+          "line": 2,
+          "text": "const fs=require('fs'),assert=require('assert');"
+        },
+        {
+          "line": 3,
+          "text": "const {createReference}=require('../ai-sigma-native-baseline/reference.cjs');const{r}=createReference();"
+        }
+      ]
+    },
+    {
+      "path": "tools/nnue-training/model.py",
+      "bytes": 1342,
+      "lines": 34,
+      "max_line_chars": 94,
+      "sha256": "12661cac69cff8b01800eb2d3df5be5f8674858d9ce995713b4385da44c74357",
+      "matches_HEAD": true,
+      "references": [
+        {
+          "line": 4,
+          "text": "from frame14_data import canonical_model_input"
+        }
+      ]
+    },
+    {
+      "path": "tools/nnue-training/frame14_data.py",
+      "bytes": 4635,
+      "lines": 106,
+      "max_line_chars": 133,
+      "sha256": "f45482fe6d1a4477ee3bf3b080d14d883b1f28c79517cff83e4318b7a90e37b8",
+      "matches_HEAD": true,
+      "references": []
+    },
+    {
+      "path": "tools/ai-sigma-frame20-learning-effect/save_git.py",
+      "bytes": 2206,
+      "lines": 38,
+      "max_line_chars": 191,
+      "sha256": "8cb83255b44764cd4a709821f83095c1d0f1eac00b30fc7d674ad215839c47b8",
+      "matches_HEAD": true,
+      "references": [
+        {
+          "line": 32,
+          "text": " result=subprocess.run(['git','update-ref','HEAD',commit,base],capture_output=True)"
+        }
+      ]
+    },
+    {
+      "path": "scripts/export-fresh-source.mjs",
+      "bytes": 1504,
+      "lines": 27,
+      "max_line_chars": 125,
+      "sha256": "a9c25703df1e640ce0698620f259f1923d90eefb8afc7a0822f5d51f79ece4be",
+      "matches_HEAD": true,
+      "references": [
+        {
+          "line": 10,
+          "text": "const listed = execFileSync('git', ['ls-files', '-z', '--cached', '--others', '--exclude-standard']);"
+        }
+      ]
+    }
+  ],
+  "archive_sample": {
+    "path": "research-data/ai-sigma/frame20-learning-effect/necessary-pack-v1.tar.gz",
+    "compressed_bytes": 25179,
+    "in_HEAD": true,
+    "members": 30,
+    "sample": [
+      {
+        "member": "docs/reports/ai-sigma-experiment-frame20-learning-effect.md",
+        "bytes": 5280,
+        "sha256": "575dd809c62ccbf705810a76de5388a5bee0555f75a6ba21e5a3a3f4af024fbf",
+        "matches_current": true
+      },
+      {
+        "member": "research-data/ai-sigma/frame20-learning-effect/background-config-r1.json",
+        "bytes": 841,
+        "sha256": "8f88bff3173aa68ea6271ca03eeeeb27f61ab16efd2a162713e104a06a39ccdd",
+        "matches_current": true
+      },
+      {
+        "member": "research-data/ai-sigma/frame20-learning-effect/background-science-r1/config.json",
+        "bytes": 841,
+        "sha256": "8f88bff3173aa68ea6271ca03eeeeb27f61ab16efd2a162713e104a06a39ccdd",
+        "matches_current": true
+      }
+    ],
+    "extraction_to_disk": false,
+    "all_archives_verified": false
+  }
+}

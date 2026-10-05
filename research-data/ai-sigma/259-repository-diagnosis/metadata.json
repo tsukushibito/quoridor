@@ -1,0 +1,4498 @@
+{
+  "at": "2026-10-05T03:19:08.385797+00:00",
+  "measurement": "current stat metadata, per-root inode de-dup; logical vs allocated separately",
+  "symlink_targets_followed": false,
+  "scopes": {
+    "main": {
+      "root": "/workspaces/quoridor",
+      "excluded_top_level": [
+        ".git",
+        ".worktree"
+      ],
+      "top_level_total": {
+        "files": 12126,
+        "logical_bytes": 2313248814,
+        "allocated_bytes": 2335059968
+      },
+      "directory_groups": {
+        ".gitattributes": {
+          "files": 1,
+          "logical_bytes": 113,
+          "allocated_bytes": 0
+        },
+        ".gitignore": {
+          "files": 1,
+          "logical_bytes": 310,
+          "allocated_bytes": 0
+        },
+        "AGENTS.md": {
+          "files": 1,
+          "logical_bytes": 3352,
+          "allocated_bytes": 4096
+        },
+        "Cargo.lock": {
+          "files": 1,
+          "logical_bytes": 6911,
+          "allocated_bytes": 8192
+        },
+        "Cargo.toml": {
+          "files": 1,
+          "logical_bytes": 108,
+          "allocated_bytes": 0
+        },
+        "LICENSE": {
+          "files": 1,
+          "logical_bytes": 11357,
+          "allocated_bytes": 12288
+        },
+        "package-lock.json": {
+          "files": 1,
+          "logical_bytes": 44070,
+          "allocated_bytes": 45056
+        },
+        "package.json": {
+          "files": 1,
+          "logical_bytes": 2074,
+          "allocated_bytes": 4096
+        },
+        "playwright.audio.config.ts": {
+          "files": 1,
+          "logical_bytes": 1004,
+          "allocated_bytes": 4096
+        },
+        "playwright.config.ts": {
+          "files": 1,
+          "logical_bytes": 486,
+          "allocated_bytes": 4096
+        },
+        "README.md": {
+          "files": 1,
+          "logical_bytes": 10727,
+          "allocated_bytes": 12288
+        },
+        "rust-toolchain.toml": {
+          "files": 1,
+          "logical_bytes": 152,
+          "allocated_bytes": 0
+        },
+        ":memory:.ses": {
+          "files": 1,
+          "logical_bytes": 51,
+          "allocated_bytes": 0
+        },
+        ".agents/lead-sidekick": {
+          "files": 1,
+          "logical_bytes": 445,
+          "allocated_bytes": 0
+        },
+        ".agents/research-team": {
+          "files": 10,
+          "logical_bytes": 25119,
+          "allocated_bytes": 45056
+        },
+        ".agents/skills": {
+          "files": 42,
+          "logical_bytes": 220752,
+          "allocated_bytes": 278528
+        },
+        ".artifacts/environment-main-build.log": {
+          "files": 1,
+          "logical_bytes": 2897,
+          "allocated_bytes": 4096
+        },
+        ".artifacts/ux-main-build.log": {
+          "files": 1,
+          "logical_bytes": 3504,
+          "allocated_bytes": 4096
+        },
+        ".artifacts/ux-main-desktop.png": {
+          "files": 1,
+          "logical_bytes": 89850,
+          "allocated_bytes": 90112
+        },
+        ".artifacts/ux-main-flow-smoke.log": {
+          "files": 1,
+          "logical_bytes": 272,
+          "allocated_bytes": 0
+        },
+        ".artifacts/ux-main-smoke.log": {
+          "files": 1,
+          "logical_bytes": 101,
+          "allocated_bytes": 0
+        },
+        ".artifacts/beads": {
+          "files": 17,
+          "logical_bytes": 1521316,
+          "allocated_bytes": 1548288
+        },
+        ".artifacts/beads-backup": {
+          "files": 38,
+          "logical_bytes": 142078975,
+          "allocated_bytes": 142172160
+        },
+        ".artifacts/environments": {
+          "files": 4,
+          "logical_bytes": 1186067,
+          "allocated_bytes": 1196032
+        },
+        ".artifacts/research-team": {
+          "files": 493,
+          "logical_bytes": 7202183,
+          "allocated_bytes": 8024064
+        },
+        ".artifacts/tabletop": {
+          "files": 146,
+          "logical_bytes": 58024370,
+          "allocated_bytes": 58281984
+        },
+        ".artifacts/title-help": {
+          "files": 41,
+          "logical_bytes": 17362386,
+          "allocated_bytes": 17448960
+        },
+        ".artifacts/title-help-main": {
+          "files": 1,
+          "logical_bytes": 8147,
+          "allocated_bytes": 8192
+        },
+        ".artifacts/ui-ux-evaluation": {
+          "files": 22,
+          "logical_bytes": 7139144,
+          "allocated_bytes": 7180288
+        },
+        ".artifacts/ux-research": {
+          "files": 4,
+          "logical_bytes": 228549,
+          "allocated_bytes": 237568
+        },
+        ".artifacts/web-preview": {
+          "files": 2,
+          "logical_bytes": 7,
+          "allocated_bytes": 0
+        },
+        ".artifacts/worktree-cleanup": {
+          "files": 856,
+          "logical_bytes": 250554017,
+          "allocated_bytes": 252178432
+        },
+        ".codex/config.toml": {
+          "files": 1,
+          "logical_bytes": 62,
+          "allocated_bytes": 0
+        },
+        ".devcontainer/devcontainer-lock.json": {
+          "files": 1,
+          "logical_bytes": 627,
+          "allocated_bytes": 4096
+        },
+        ".devcontainer/devcontainer.json": {
+          "files": 1,
+          "logical_bytes": 4004,
+          "allocated_bytes": 4096
+        },
+        ".devcontainer/Dockerfile": {
+          "files": 1,
+          "logical_bytes": 3440,
+          "allocated_bytes": 4096
+        },
+        ".devcontainer/install-godot.sh": {
+          "files": 1,
+          "logical_bytes": 1585,
+          "allocated_bytes": 4096
+        },
+        ".devcontainer/post-create.sh": {
+          "files": 1,
+          "logical_bytes": 1844,
+          "allocated_bytes": 4096
+        },
+        ".devcontainer/start-sshd.sh": {
+          "files": 1,
+          "logical_bytes": 166,
+          "allocated_bytes": 0
+        },
+        ".devcontainer/storage-policy.md": {
+          "files": 1,
+          "logical_bytes": 5486,
+          "allocated_bytes": 8192
+        },
+        ".devcontainer/toolchain.lock.json": {
+          "files": 1,
+          "logical_bytes": 5733,
+          "allocated_bytes": 8192
+        },
+        ".devcontainer/update-toolchain.sh": {
+          "files": 1,
+          "logical_bytes": 7564,
+          "allocated_bytes": 8192
+        },
+        "apps/web": {
+          "files": 99,
+          "logical_bytes": 74915644,
+          "allocated_bytes": 75116544
+        },
+        "artifacts/lead-integration-build.log": {
+          "files": 1,
+          "logical_bytes": 4444,
+          "allocated_bytes": 8192
+        },
+        "artifacts/lead-integration-install.log": {
+          "files": 1,
+          "logical_bytes": 141,
+          "allocated_bytes": 0
+        },
+        "artifacts/lead-integration-smoke.log": {
+          "files": 1,
+          "logical_bytes": 101,
+          "allocated_bytes": 0
+        },
+        "artifacts/phase1-performance-tabletop-production-root.json": {
+          "files": 1,
+          "logical_bytes": 2022,
+          "allocated_bytes": 4096
+        },
+        "artifacts/phase1-performance-tabletop-production-subpath.json": {
+          "files": 1,
+          "logical_bytes": 1999,
+          "allocated_bytes": 4096
+        },
+        "artifacts/phase2-dev-narrow.png": {
+          "files": 1,
+          "logical_bytes": 250358,
+          "allocated_bytes": 253952
+        },
+        "artifacts/phase2-tabletop-production-root-desktop.png": {
+          "files": 1,
+          "logical_bytes": 854336,
+          "allocated_bytes": 856064
+        },
+        "artifacts/phase2-tabletop-production-root-narrow.png": {
+          "files": 1,
+          "logical_bytes": 250358,
+          "allocated_bytes": 253952
+        },
+        "artifacts/phase2-tabletop-production-subpath-desktop.png": {
+          "files": 1,
+          "logical_bytes": 854336,
+          "allocated_bytes": 856064
+        },
+        "artifacts/phase2-tabletop-production-subpath-narrow.png": {
+          "files": 1,
+          "logical_bytes": 250358,
+          "allocated_bytes": 253952
+        },
+        "artifacts/phase3-tabletop-production-root-desktop.png": {
+          "files": 1,
+          "logical_bytes": 830823,
+          "allocated_bytes": 831488
+        },
+        "artifacts/phase3-tabletop-production-root-measurements.json": {
+          "files": 1,
+          "logical_bytes": 630,
+          "allocated_bytes": 4096
+        },
+        "artifacts/phase3-tabletop-production-root-narrow.png": {
+          "files": 1,
+          "logical_bytes": 93600,
+          "allocated_bytes": 94208
+        },
+        "artifacts/phase3-tabletop-production-subpath-desktop.png": {
+          "files": 1,
+          "logical_bytes": 830823,
+          "allocated_bytes": 831488
+        },
+        "artifacts/phase3-tabletop-production-subpath-measurements.json": {
+          "files": 1,
+          "logical_bytes": 623,
+          "allocated_bytes": 4096
+        },
+        "artifacts/phase3-tabletop-production-subpath-narrow.png": {
+          "files": 1,
+          "logical_bytes": 93600,
+          "allocated_bytes": 94208
+        },
+        "artifacts/phase4-tabletop-production-root-desktop.png": {
+          "files": 1,
+          "logical_bytes": 866642,
+          "allocated_bytes": 868352
+        },
+        "artifacts/phase4-tabletop-production-root-narrow.png": {
+          "files": 1,
+          "logical_bytes": 97042,
+          "allocated_bytes": 98304
+        },
+        "artifacts/phase4-tabletop-production-subpath-desktop.png": {
+          "files": 1,
+          "logical_bytes": 866642,
+          "allocated_bytes": 868352
+        },
+        "artifacts/phase4-tabletop-production-subpath-narrow.png": {
+          "files": 1,
+          "logical_bytes": 97042,
+          "allocated_bytes": 98304
+        },
+        "artifacts/ux-tabletop-production-root-1280x720.png": {
+          "files": 1,
+          "logical_bytes": 863579,
+          "allocated_bytes": 864256
+        },
+        "artifacts/ux-tabletop-production-root-1440x900.png": {
+          "files": 1,
+          "logical_bytes": 1177125,
+          "allocated_bytes": 1179648
+        },
+        "artifacts/ux-tabletop-production-root-1920x1080.png": {
+          "files": 1,
+          "logical_bytes": 1841594,
+          "allocated_bytes": 1843200
+        },
+        "artifacts/ux-tabletop-production-root-390x844.png": {
+          "files": 1,
+          "logical_bytes": 245710,
+          "allocated_bytes": 245760
+        },
+        "artifacts/ux-tabletop-production-subpath-1280x720.png": {
+          "files": 1,
+          "logical_bytes": 617063,
+          "allocated_bytes": 618496
+        },
+        "artifacts/ux-tabletop-production-subpath-1440x900.png": {
+          "files": 1,
+          "logical_bytes": 1177125,
+          "allocated_bytes": 1179648
+        },
+        "artifacts/ux-tabletop-production-subpath-1920x1080.png": {
+          "files": 1,
+          "logical_bytes": 1841594,
+          "allocated_bytes": 1843200
+        },
+        "artifacts/ux-tabletop-production-subpath-390x844.png": {
+          "files": 1,
+          "logical_bytes": 245710,
+          "allocated_bytes": 245760
+        },
+        "artifacts/playwright": {
+          "files": 679,
+          "logical_bytes": 1315803309,
+          "allocated_bytes": 1316433920
+        },
+        "crates/quoridor-ai": {
+          "files": 4,
+          "logical_bytes": 22652,
+          "allocated_bytes": 28672
+        },
+        "crates/quoridor-core": {
+          "files": 5,
+          "logical_bytes": 30664,
+          "allocated_bytes": 32768
+        },
+        "crates/quoridor-wasm": {
+          "files": 8,
+          "logical_bytes": 38343,
+          "allocated_bytes": 57344
+        },
+        "docs/design": {
+          "files": 11,
+          "logical_bytes": 500286,
+          "allocated_bytes": 520192
+        },
+        "docs/development": {
+          "files": 6,
+          "logical_bytes": 64215,
+          "allocated_bytes": 73728
+        },
+        "docs/misc": {
+          "files": 2,
+          "logical_bytes": 34911,
+          "allocated_bytes": 40960
+        },
+        "docs/reports": {
+          "files": 21,
+          "logical_bytes": 160751,
+          "allocated_bytes": 200704
+        },
+        "node_modules/.package-lock.json": {
+          "files": 1,
+          "logical_bytes": 19000,
+          "allocated_bytes": 20480
+        },
+        "node_modules/@dimforge": {
+          "files": 51,
+          "logical_bytes": 7522790,
+          "allocated_bytes": 7593984
+        },
+        "node_modules/@fontsource": {
+          "files": 2319,
+          "logical_bytes": 80398272,
+          "allocated_bytes": 85229568
+        },
+        "node_modules/@oxc-project": {
+          "files": 4,
+          "logical_bytes": 44596,
+          "allocated_bytes": 53248
+        },
+        "node_modules/@playwright": {
+          "files": 11,
+          "logical_bytes": 28544,
+          "allocated_bytes": 57344
+        },
+        "node_modules/@rolldown": {
+          "files": 11,
+          "logical_bytes": 19171326,
+          "allocated_bytes": 19189760
+        },
+        "node_modules/@tweenjs": {
+          "files": 8,
+          "logical_bytes": 161333,
+          "allocated_bytes": 172032
+        },
+        "node_modules/@types": {
+          "files": 1064,
+          "logical_bytes": 4526360,
+          "allocated_bytes": 6266880
+        },
+        "node_modules/@typescript": {
+          "files": 114,
+          "logical_bytes": 27945990,
+          "allocated_bytes": 28229632
+        },
+        "node_modules/@webgpu": {
+          "files": 4,
+          "logical_bytes": 124868,
+          "allocated_bytes": 135168
+        },
+        "node_modules/detect-libc": {
+          "files": 8,
+          "logical_bytes": 26437,
+          "allocated_bytes": 36864
+        },
+        "node_modules/fdir": {
+          "files": 7,
+          "logical_bytes": 53291,
+          "allocated_bytes": 69632
+        },
+        "node_modules/fflate": {
+          "files": 17,
+          "logical_bytes": 796742,
+          "allocated_bytes": 847872
+        },
+        "node_modules/lightningcss": {
+          "files": 14,
+          "logical_bytes": 513814,
+          "allocated_bytes": 544768
+        },
+        "node_modules/lightningcss-linux-x64-gnu": {
+          "files": 4,
+          "logical_bytes": 10048780,
+          "allocated_bytes": 10055680
+        },
+        "node_modules/meshoptimizer": {
+          "files": 21,
+          "logical_bytes": 263497,
+          "allocated_bytes": 303104
+        },
+        "node_modules/nanoid": {
+          "files": 25,
+          "logical_bytes": 25291,
+          "allocated_bytes": 69632
+        },
+        "node_modules/picocolors": {
+          "files": 7,
+          "logical_bytes": 6373,
+          "allocated_bytes": 24576
+        },
+        "node_modules/picomatch": {
+          "files": 10,
+          "logical_bytes": 93759,
+          "allocated_bytes": 110592
+        },
+        "node_modules/playwright": {
+          "files": 62,
+          "logical_bytes": 5094512,
+          "allocated_bytes": 5218304
+        },
+        "node_modules/playwright-core": {
+          "files": 114,
+          "logical_bytes": 13453369,
+          "allocated_bytes": 13684736
+        },
+        "node_modules/postcss": {
+          "files": 55,
+          "logical_bytes": 218290,
+          "allocated_bytes": 315392
+        },
+        "node_modules/rolldown": {
+          "files": 54,
+          "logical_bytes": 852997,
+          "allocated_bytes": 950272
+        },
+        "node_modules/source-map-js": {
+          "files": 18,
+          "logical_bytes": 139872,
+          "allocated_bytes": 167936
+        },
+        "node_modules/three": {
+          "files": 1263,
+          "logical_bytes": 20443256,
+          "allocated_bytes": 22986752
+        },
+        "node_modules/tinyglobby": {
+          "files": 7,
+          "logical_bytes": 39288,
+          "allocated_bytes": 61440
+        },
+        "node_modules/typescript": {
+          "files": 416,
+          "logical_bytes": 2497498,
+          "allocated_bytes": 3104768
+        },
+        "node_modules/undici-types": {
+          "files": 48,
+          "logical_bytes": 120779,
+          "allocated_bytes": 221184
+        },
+        "node_modules/vite": {
+          "files": 37,
+          "logical_bytes": 2375009,
+          "allocated_bytes": 2441216
+        },
+        "packages/engine-bridge": {
+          "files": 22,
+          "logical_bytes": 357242,
+          "allocated_bytes": 389120
+        },
+        "research-data/ai-sigma": {
+          "files": 3,
+          "logical_bytes": 28907,
+          "allocated_bytes": 36864
+        },
+        "scripts/build-wasm.mjs": {
+          "files": 1,
+          "logical_bytes": 973,
+          "allocated_bytes": 4096
+        },
+        "scripts/check-boundaries.mjs": {
+          "files": 1,
+          "logical_bytes": 550,
+          "allocated_bytes": 4096
+        },
+        "scripts/codegen-protocol.mjs": {
+          "files": 1,
+          "logical_bytes": 1135,
+          "allocated_bytes": 4096
+        },
+        "scripts/doctor.mjs": {
+          "files": 1,
+          "logical_bytes": 1369,
+          "allocated_bytes": 4096
+        },
+        "scripts/export-fresh-source.mjs": {
+          "files": 1,
+          "logical_bytes": 1504,
+          "allocated_bytes": 4096
+        },
+        "scripts/generate-ai-fixtures.mjs": {
+          "files": 1,
+          "logical_bytes": 1111,
+          "allocated_bytes": 4096
+        },
+        "scripts/generate-fixtures.mjs": {
+          "files": 1,
+          "logical_bytes": 1154,
+          "allocated_bytes": 4096
+        },
+        "scripts/smoke-ordinary-production.mjs": {
+          "files": 1,
+          "logical_bytes": 1606,
+          "allocated_bytes": 4096
+        },
+        "scripts/verify-production.mjs": {
+          "files": 1,
+          "logical_bytes": 2424,
+          "allocated_bytes": 4096
+        },
+        "scripts/dev": {
+          "files": 24,
+          "logical_bytes": 256488,
+          "allocated_bytes": 307200
+        },
+        "target/.rustc_info.json": {
+          "files": 1,
+          "logical_bytes": 2478,
+          "allocated_bytes": 4096
+        },
+        "target/CACHEDIR.TAG": {
+          "files": 1,
+          "logical_bytes": 177,
+          "allocated_bytes": 0
+        },
+        "target/release": {
+          "files": 181,
+          "logical_bytes": 81476262,
+          "allocated_bytes": 81674240
+        },
+        "target/wasm32-unknown-unknown": {
+          "files": 163,
+          "logical_bytes": 27168122,
+          "allocated_bytes": 27295744
+        },
+        "test-results/.last-run.json": {
+          "files": 1,
+          "logical_bytes": 45,
+          "allocated_bytes": 0
+        },
+        "tests/audio": {
+          "files": 1,
+          "logical_bytes": 2467,
+          "allocated_bytes": 4096
+        },
+        "tests/e2e": {
+          "files": 15,
+          "logical_bytes": 179787,
+          "allocated_bytes": 212992
+        },
+        "tests/fixtures": {
+          "files": 2,
+          "logical_bytes": 19773,
+          "allocated_bytes": 24576
+        },
+        "tests/render": {
+          "files": 1,
+          "logical_bytes": 2755,
+          "allocated_bytes": 4096
+        },
+        "tools/research-team": {
+          "files": 11,
+          "logical_bytes": 135295,
+          "allocated_bytes": 155648
+        },
+        "tools/training": {
+          "files": 3,
+          "logical_bytes": 52116,
+          "allocated_bytes": 57344
+        },
+        "tools/webgpu-smoke": {
+          "files": 3346,
+          "logical_bytes": 114963619,
+          "allocated_bytes": 121049088
+        }
+      },
+      "symlink_sample": [
+        {
+          "path": "artifacts/playwright/webkit-2359/minibrowser-gtk/lib/libjavascriptcoregtk-6.0.so.1",
+          "target": "libjavascriptcoregtk-6.0.so.1.9.0"
+        },
+        {
+          "path": "artifacts/playwright/webkit-2359/minibrowser-gtk/lib/libwebkitgtk-6.0.so.4",
+          "target": "libwebkitgtk-6.0.so.4.20.0"
+        },
+        {
+          "path": "artifacts/playwright/webkit-2359/minibrowser-gtk/sys/lib/libbacktrace.so.0",
+          "target": "libbacktrace.so.0.0.0"
+        },
+        {
+          "path": "artifacts/playwright/webkit-2359/minibrowser-gtk/sys/lib/libbrotlicommon.so.1",
+          "target": "libbrotlicommon.so.1.0.7"
+        },
+        {
+          "path": "artifacts/playwright/webkit-2359/minibrowser-gtk/sys/lib/libbrotlidec.so.1",
+          "target": "libbrotlidec.so.1.0.7"
+        },
+        {
+          "path": "artifacts/playwright/webkit-2359/minibrowser-gtk/sys/lib/libbrotlienc.so.1",
+          "target": "libbrotlienc.so.1.0.7"
+        },
+        {
+          "path": "artifacts/playwright/webkit-2359/minibrowser-gtk/sys/lib/libjxl.so.0.8",
+          "target": "libjxl.so.0.8.2"
+        },
+        {
+          "path": "artifacts/playwright/webkit-2359/minibrowser-gtk/sys/lib/libsoup-3.0.so.0",
+          "target": "libsoup-3.0.so.0.7.4"
+        },
+        {
+          "path": "artifacts/playwright/webkit-2359/minibrowser-wpe/lib/libWPEWebKit-2.0.so.1",
+          "target": "libWPEWebKit-2.0.so.1.12.0"
+        },
+        {
+          "path": "artifacts/playwright/webkit-2359/minibrowser-wpe/sys/lib/libbacktrace.so.0",
+          "target": "libbacktrace.so.0.0.0"
+        },
+        {
+          "path": "artifacts/playwright/webkit-2359/minibrowser-wpe/sys/lib/libbrotlicommon.so.1",
+          "target": "libbrotlicommon.so.1.0.7"
+        },
+        {
+          "path": "artifacts/playwright/webkit-2359/minibrowser-wpe/sys/lib/libbrotlidec.so.1",
+          "target": "libbrotlidec.so.1.0.7"
+        },
+        {
+          "path": "artifacts/playwright/webkit-2359/minibrowser-wpe/sys/lib/libbrotlienc.so.1",
+          "target": "libbrotlienc.so.1.0.7"
+        },
+        {
+          "path": "artifacts/playwright/webkit-2359/minibrowser-wpe/sys/lib/libjxl.so.0.8",
+          "target": "libjxl.so.0.8.2"
+        },
+        {
+          "path": "artifacts/playwright/webkit-2359/minibrowser-wpe/sys/lib/libsoup-3.0.so.0",
+          "target": "libsoup-3.0.so.0.7.4"
+        },
+        {
+          "path": "node_modules/.bin/nanoid",
+          "target": "../nanoid/bin/nanoid.cjs"
+        },
+        {
+          "path": "node_modules/.bin/playwright",
+          "target": "../@playwright/test/cli.js"
+        },
+        {
+          "path": "node_modules/.bin/playwright-core",
+          "target": "../playwright-core/cli.js"
+        },
+        {
+          "path": "node_modules/.bin/rolldown",
+          "target": "../rolldown/bin/cli.mjs"
+        },
+        {
+          "path": "node_modules/.bin/tsc",
+          "target": "../typescript/bin/tsc"
+        },
+        {
+          "path": "node_modules/.bin/vite",
+          "target": "../vite/bin/vite.js"
+        },
+        {
+          "path": "node_modules/@quoridor/engine-bridge",
+          "target": "../../packages/engine-bridge"
+        },
+        {
+          "path": "node_modules/@quoridor/web",
+          "target": "../../apps/web"
+        },
+        {
+          "path": "tools/webgpu-smoke/node_modules/three",
+          "target": ".pnpm/three@0.186.1/node_modules/three"
+        },
+        {
+          "path": "tools/webgpu-smoke/node_modules/typescript",
+          "target": ".pnpm/typescript@7.0.2/node_modules/typescript"
+        },
+        {
+          "path": "tools/webgpu-smoke/node_modules/vite",
+          "target": ".pnpm/vite@8.3.1/node_modules/vite"
+        },
+        {
+          "path": "tools/webgpu-smoke/node_modules/.pnpm/@playwright+test@1.63.0/node_modules/playwright",
+          "target": "../../playwright@1.63.0/node_modules/playwright"
+        },
+        {
+          "path": "tools/webgpu-smoke/node_modules/.pnpm/@types+three@0.186.0/node_modules/fflate",
+          "target": "../../fflate@0.8.3/node_modules/fflate"
+        },
+        {
+          "path": "tools/webgpu-smoke/node_modules/.pnpm/@types+three@0.186.0/node_modules/meshoptimizer",
+          "target": "../../meshoptimizer@1.1.1/node_modules/meshoptimizer"
+        },
+        {
+          "path": "tools/webgpu-smoke/node_modules/.pnpm/@types+three@0.186.0/node_modules/@dimforge/rapier3d-compat",
+          "target": "../../../@dimforge+rapier3d-compat@0.12.0/node_modules/@dimforge/rapier3d-compat"
+        },
+        {
+          "path": "tools/webgpu-smoke/node_modules/.pnpm/@types+three@0.186.0/node_modules/@tweenjs/tween.js",
+          "target": "../../../@tweenjs+tween.js@23.1.3/node_modules/@tweenjs/tween.js"
+        },
+        {
+          "path": "tools/webgpu-smoke/node_modules/.pnpm/@types+three@0.186.0/node_modules/@types/stats.js",
+          "target": "../../../@types+stats.js@0.17.4/node_modules/@types/stats.js"
+        },
+        {
+          "path": "tools/webgpu-smoke/node_modules/.pnpm/@types+three@0.186.0/node_modules/@types/webxr",
+          "target": "../../../@types+webxr@0.5.24/node_modules/@types/webxr"
+        },
+        {
+          "path": "tools/webgpu-smoke/node_modules/.pnpm/fdir@6.5.0_picomatch@4.0.7/node_modules/picomatch",
+          "target": "../../picomatch@4.0.7/node_modules/picomatch"
+        },
+        {
+          "path": "tools/webgpu-smoke/node_modules/.pnpm/lightningcss@1.33.0/node_modules/detect-libc",
+          "target": "../../detect-libc@2.1.2/node_modules/detect-libc"
+        },
+        {
+          "path": "tools/webgpu-smoke/node_modules/.pnpm/lightningcss@1.33.0/node_modules/lightningcss-linux-x64-gnu",
+          "target": "../../lightningcss-linux-x64-gnu@1.33.0/node_modules/lightningcss-linux-x64-gnu"
+        },
+        {
+          "path": "tools/webgpu-smoke/node_modules/.pnpm/node_modules/detect-libc",
+          "target": "../detect-libc@2.1.2/node_modules/detect-libc"
+        },
+        {
+          "path": "tools/webgpu-smoke/node_modules/.pnpm/node_modules/fdir",
+          "target": "../fdir@6.5.0_picomatch@4.0.7/node_modules/fdir"
+        },
+        {
+          "path": "tools/webgpu-smoke/node_modules/.pnpm/node_modules/fflate",
+          "target": "../fflate@0.8.3/node_modules/fflate"
+        },
+        {
+          "path": "tools/webgpu-smoke/node_modules/.pnpm/node_modules/lightningcss",
+          "target": "../lightningcss@1.33.0/node_modules/lightningcss"
+        }
+      ],
+      "read_errors": [],
+      "largest_files": [
+        {
+          "path": "artifacts/playwright/chromium-1243/chrome-linux64/chrome",
+          "logical_bytes": 293285184,
+          "allocated_bytes": 293285888
+        },
+        {
+          "path": "artifacts/playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell",
+          "logical_bytes": 197422408,
+          "allocated_bytes": 197423104
+        },
+        {
+          "path": "artifacts/playwright/firefox-1543/firefox/libxul.so",
+          "logical_bytes": 184352280,
+          "allocated_bytes": 184352768
+        },
+        {
+          "path": "artifacts/playwright/webkit-2359/minibrowser-wpe/lib/libWPEWebKit-2.0.so.1.12.0",
+          "logical_bytes": 138680896,
+          "allocated_bytes": 138682368
+        },
+        {
+          "path": ".artifacts/beads-backup/jdsjji6joc02soae90109qdks7jq4kg2.darc",
+          "logical_bytes": 135895856,
+          "allocated_bytes": 135897088
+        },
+        {
+          "path": "artifacts/playwright/webkit-2359/minibrowser-gtk/lib/libwebkitgtk-6.0.so.4.20.0",
+          "logical_bytes": 107846496,
+          "allocated_bytes": 107847680
+        },
+        {
+          "path": "artifacts/playwright/firefox-1543/firefox/browser/omni.ja",
+          "logical_bytes": 55861585,
+          "allocated_bytes": 55865344
+        },
+        {
+          "path": "artifacts/playwright/firefox-1543/firefox/omni.ja",
+          "logical_bytes": 44608972,
+          "allocated_bytes": 44609536
+        },
+        {
+          "path": "artifacts/playwright/webkit-2359/minibrowser-gtk/lib/libjavascriptcoregtk-6.0.so.1.9.0",
+          "logical_bytes": 34253088,
+          "allocated_bytes": 34254848
+        },
+        {
+          "path": "node_modules/@typescript/typescript-linux-x64/lib/tsc",
+          "logical_bytes": 24101026,
+          "allocated_bytes": 24104960
+        },
+        {
+          "path": "tools/webgpu-smoke/node_modules/.pnpm/@typescript+typescript-linux-x64@7.0.2/node_modules/@typescript/typescript-linux-x64/lib/tsc",
+          "logical_bytes": 24101026,
+          "allocated_bytes": 24104960
+        },
+        {
+          "path": "artifacts/playwright/chromium-1243/chrome-linux64/resources.pak",
+          "logical_bytes": 22961380,
+          "allocated_bytes": 22962176
+        },
+        {
+          "path": "artifacts/playwright/chromium-1243/chrome-linux64/WidevineCdm/_platform_specific/linux_x64/libwidevinecdm.so",
+          "logical_bytes": 21965296,
+          "allocated_bytes": 21966848
+        },
+        {
+          "path": ".artifacts/worktree-cleanup/quoridor-g22/environment-presets/evidence/.artifacts/environments/handoff.patch",
+          "logical_bytes": 19951541,
+          "allocated_bytes": 19951616
+        },
+        {
+          "path": ".artifacts/worktree-cleanup/quoridor-g22/webapp-title-help/evidence/.artifacts/title-help/integration/background/handoff.patch",
+          "logical_bytes": 19951541,
+          "allocated_bytes": 19951616
+        },
+        {
+          "path": "node_modules/@rolldown/binding-linux-x64-gnu/rolldown-binding.linux-x64-gnu.node",
+          "logical_bytes": 19144640,
+          "allocated_bytes": 19144704
+        },
+        {
+          "path": "tools/webgpu-smoke/node_modules/.pnpm/@rolldown+binding-linux-x64-gnu@1.2.11/node_modules/@rolldown/binding-linux-x64-gnu/rolldown-binding.linux-x64-gnu.node",
+          "logical_bytes": 19144640,
+          "allocated_bytes": 19144704
+        },
+        {
+          "path": "artifacts/playwright/webkit-2359/minibrowser-wpe/sys/lib/libjxl.so.0.8.2",
+          "logical_bytes": 16191136,
+          "allocated_bytes": 16191488
+        },
+        {
+          "path": "target/release/deps/libwasm_bindgen_macro_support-96b6d5f6f9eab2aa.rlib",
+          "logical_bytes": 14971746,
+          "allocated_bytes": 14974976
+        },
+        {
+          "path": "target/release/deps/libsyn-da2938b0fb9d0016.rlib",
+          "logical_bytes": 12158182,
+          "allocated_bytes": 12161024
+        }
+      ],
+      "git": {
+        "head": "288c325c02e8600fc2f870736fbc48287d585da8",
+        "index_entries": 247,
+        "head_entries": 247,
+        "head_only_count": 0,
+        "head_only_sample": [],
+        "head_only_existing_count": 0,
+        "index_only_count": 0,
+        "index_only_sample": [],
+        "same_path_index_vs_HEAD_blob_difference_count": 0,
+        "same_path_index_vs_HEAD_blob_difference_sample": [],
+        "HEAD_paths_missing_from_worktree_count": 0,
+        "HEAD_paths_missing_sample": [],
+        "default_status_counts": {
+          " M": 20
+        },
+        "default_status_sample": {
+          " M": [
+            ".agents/research-team/common.md",
+            ".agents/research-team/roles/coordinator.md",
+            ".agents/research-team/roles/critic.md",
+            ".agents/research-team/roles/experiment.md",
+            ".agents/research-team/roles/hypothesis.md",
+            ".agents/research-team/roles/steward.md",
+            ".agents/research-team/templates/experiment-contract.md",
+            ".agents/research-team/templates/handoff.md"
+          ]
+        },
+        "physical_files_by_git_category_relative_to_HEAD": {
+          "HEAD_tracked": {
+            "files": 247,
+            "logical_bytes": 32334471,
+            "allocated_bytes": 32759808
+          },
+          "untracked": {
+            "files": 17,
+            "logical_bytes": 138180,
+            "allocated_bytes": 172032
+          },
+          "ignored": {
+            "files": 11874,
+            "logical_bytes": 2288058902,
+            "allocated_bytes": 2309439488
+          }
+        },
+        "untracked_sample": [
+          ":memory:.ses",
+          ".agents/research-team/roles/supervisor.md",
+          "docs/design/ai-nnue-feature-design.md",
+          "docs/design/ai-nnue-research.md",
+          "docs/design/ai-sigma-comparison-protocol.md",
+          "docs/design/ai-sigma-continuation-20261001.md",
+          "docs/design/ai-sigma-contract-experiment-actual-boundary-repair.md",
+          "docs/design/ai-sigma-contract-experiment-nn-schema-cost.md",
+          "docs/design/ai-sigma-contract-hypothesis-saved-nn46-independent.md",
+          "docs/development/ai-research-experiments.md",
+          "docs/development/nnue-training.md",
+          "docs/reports/ai-research-priority215.md",
+          "docs/reports/ai-research-team-general-roles207.md",
+          "docs/reports/ai-sigma-design-review-role-alignment.md",
+          "research-data/ai-sigma/frame20-sigma-opening-value/measurement-source.py",
+          "research-data/ai-sigma/frame20-sigma-opening-value/receipt.json",
+          "research-data/ai-sigma/frame20-sigma-opening-value/result.json"
+        ],
+        "classification_note": "HEAD membership, not stale default-index membership; symlinks not followed"
+      }
+    },
+    "research": {
+      "root": "/workspaces/quoridor/.worktree/ai-sigma",
+      "excluded_top_level": [],
+      "top_level_total": {
+        "files": 38730,
+        "logical_bytes": 2302640457,
+        "allocated_bytes": 2394431488
+      },
+      "directory_groups": {
+        ".git": {
+          "files": 1,
+          "logical_bytes": 53,
+          "allocated_bytes": 4096
+        },
+        "package-lock.json": {
+          "files": 1,
+          "logical_bytes": 44070,
+          "allocated_bytes": 45056
+        },
+        "playwright.config.ts": {
+          "files": 1,
+          "logical_bytes": 486,
+          "allocated_bytes": 4096
+        },
+        "Cargo.toml": {
+          "files": 1,
+          "logical_bytes": 108,
+          "allocated_bytes": 4096
+        },
+        "Cargo.lock": {
+          "files": 1,
+          "logical_bytes": 6911,
+          "allocated_bytes": 8192
+        },
+        "AGENTS.md": {
+          "files": 1,
+          "logical_bytes": 3352,
+          "allocated_bytes": 4096
+        },
+        "rust-toolchain.toml": {
+          "files": 1,
+          "logical_bytes": 152,
+          "allocated_bytes": 4096
+        },
+        "package.json": {
+          "files": 1,
+          "logical_bytes": 2074,
+          "allocated_bytes": 4096
+        },
+        "playwright.audio.config.ts": {
+          "files": 1,
+          "logical_bytes": 1004,
+          "allocated_bytes": 4096
+        },
+        "LICENSE": {
+          "files": 1,
+          "logical_bytes": 11357,
+          "allocated_bytes": 12288
+        },
+        "README.md": {
+          "files": 1,
+          "logical_bytes": 10727,
+          "allocated_bytes": 12288
+        },
+        ".gitignore": {
+          "files": 1,
+          "logical_bytes": 310,
+          "allocated_bytes": 4096
+        },
+        ":memory:.ses": {
+          "files": 1,
+          "logical_bytes": 51,
+          "allocated_bytes": 4096
+        },
+        ".gitattributes": {
+          "files": 1,
+          "logical_bytes": 113,
+          "allocated_bytes": 4096
+        },
+        ".agents/research-team": {
+          "files": 10,
+          "logical_bytes": 25119,
+          "allocated_bytes": 45056
+        },
+        ".agents/skills": {
+          "files": 42,
+          "logical_bytes": 220752,
+          "allocated_bytes": 327680
+        },
+        ".agents/lead-sidekick": {
+          "files": 1,
+          "logical_bytes": 445,
+          "allocated_bytes": 4096
+        },
+        ".devcontainer/devcontainer.json": {
+          "files": 1,
+          "logical_bytes": 4004,
+          "allocated_bytes": 4096
+        },
+        ".devcontainer/post-create.sh": {
+          "files": 1,
+          "logical_bytes": 1844,
+          "allocated_bytes": 4096
+        },
+        ".devcontainer/install-godot.sh": {
+          "files": 1,
+          "logical_bytes": 1585,
+          "allocated_bytes": 4096
+        },
+        ".devcontainer/toolchain.lock.json": {
+          "files": 1,
+          "logical_bytes": 5733,
+          "allocated_bytes": 8192
+        },
+        ".devcontainer/Dockerfile": {
+          "files": 1,
+          "logical_bytes": 3440,
+          "allocated_bytes": 4096
+        },
+        ".devcontainer/devcontainer-lock.json": {
+          "files": 1,
+          "logical_bytes": 627,
+          "allocated_bytes": 4096
+        },
+        ".devcontainer/update-toolchain.sh": {
+          "files": 1,
+          "logical_bytes": 7564,
+          "allocated_bytes": 8192
+        },
+        ".devcontainer/start-sshd.sh": {
+          "files": 1,
+          "logical_bytes": 166,
+          "allocated_bytes": 4096
+        },
+        ".devcontainer/storage-policy.md": {
+          "files": 1,
+          "logical_bytes": 5486,
+          "allocated_bytes": 8192
+        },
+        "node_modules/.package-lock.json": {
+          "files": 1,
+          "logical_bytes": 19000,
+          "allocated_bytes": 20480
+        },
+        "node_modules/@types": {
+          "files": 1064,
+          "logical_bytes": 4526360,
+          "allocated_bytes": 7680000
+        },
+        "node_modules/@dimforge": {
+          "files": 51,
+          "logical_bytes": 7522790,
+          "allocated_bytes": 7647232
+        },
+        "node_modules/fflate": {
+          "files": 17,
+          "logical_bytes": 796742,
+          "allocated_bytes": 847872
+        },
+        "node_modules/undici-types": {
+          "files": 48,
+          "logical_bytes": 120779,
+          "allocated_bytes": 253952
+        },
+        "node_modules/vite": {
+          "files": 37,
+          "logical_bytes": 2375009,
+          "allocated_bytes": 2473984
+        },
+        "node_modules/fdir": {
+          "files": 7,
+          "logical_bytes": 53291,
+          "allocated_bytes": 69632
+        },
+        "node_modules/detect-libc": {
+          "files": 8,
+          "logical_bytes": 26437,
+          "allocated_bytes": 45056
+        },
+        "node_modules/@fontsource": {
+          "files": 2319,
+          "logical_bytes": 80398272,
+          "allocated_bytes": 85422080
+        },
+        "node_modules/source-map-js": {
+          "files": 18,
+          "logical_bytes": 139872,
+          "allocated_bytes": 184320
+        },
+        "node_modules/@tweenjs": {
+          "files": 8,
+          "logical_bytes": 161333,
+          "allocated_bytes": 172032
+        },
+        "node_modules/@webgpu": {
+          "files": 4,
+          "logical_bytes": 124868,
+          "allocated_bytes": 135168
+        },
+        "node_modules/picocolors": {
+          "files": 7,
+          "logical_bytes": 6373,
+          "allocated_bytes": 28672
+        },
+        "node_modules/typescript": {
+          "files": 416,
+          "logical_bytes": 2497498,
+          "allocated_bytes": 3686400
+        },
+        "node_modules/postcss": {
+          "files": 55,
+          "logical_bytes": 218290,
+          "allocated_bytes": 352256
+        },
+        "node_modules/three": {
+          "files": 1263,
+          "logical_bytes": 20443256,
+          "allocated_bytes": 23330816
+        },
+        "node_modules/playwright-core": {
+          "files": 114,
+          "logical_bytes": 13453369,
+          "allocated_bytes": 13742080
+        },
+        "node_modules/picomatch": {
+          "files": 10,
+          "logical_bytes": 93759,
+          "allocated_bytes": 118784
+        },
+        "node_modules/playwright": {
+          "files": 62,
+          "logical_bytes": 5094512,
+          "allocated_bytes": 5242880
+        },
+        "node_modules/@rolldown": {
+          "files": 11,
+          "logical_bytes": 19171326,
+          "allocated_bytes": 19202048
+        },
+        "node_modules/@typescript": {
+          "files": 114,
+          "logical_bytes": 27945990,
+          "allocated_bytes": 28237824
+        },
+        "node_modules/@oxc-project": {
+          "files": 4,
+          "logical_bytes": 44596,
+          "allocated_bytes": 57344
+        },
+        "node_modules/nanoid": {
+          "files": 25,
+          "logical_bytes": 25291,
+          "allocated_bytes": 102400
+        },
+        "node_modules/rolldown": {
+          "files": 54,
+          "logical_bytes": 852997,
+          "allocated_bytes": 978944
+        },
+        "node_modules/lightningcss": {
+          "files": 14,
+          "logical_bytes": 513814,
+          "allocated_bytes": 548864
+        },
+        "node_modules/@playwright": {
+          "files": 11,
+          "logical_bytes": 28544,
+          "allocated_bytes": 61440
+        },
+        "node_modules/meshoptimizer": {
+          "files": 21,
+          "logical_bytes": 263497,
+          "allocated_bytes": 311296
+        },
+        "node_modules/tinyglobby": {
+          "files": 7,
+          "logical_bytes": 39288,
+          "allocated_bytes": 61440
+        },
+        "node_modules/lightningcss-linux-x64-gnu": {
+          "files": 4,
+          "logical_bytes": 10048780,
+          "allocated_bytes": 10059776
+        },
+        "tests/e2e": {
+          "files": 15,
+          "logical_bytes": 180114,
+          "allocated_bytes": 212992
+        },
+        "tests/fixtures": {
+          "files": 2,
+          "logical_bytes": 19773,
+          "allocated_bytes": 24576
+        },
+        "tests/render": {
+          "files": 1,
+          "logical_bytes": 2755,
+          "allocated_bytes": 4096
+        },
+        "tests/audio": {
+          "files": 1,
+          "logical_bytes": 2467,
+          "allocated_bytes": 4096
+        },
+        "docs/misc": {
+          "files": 2,
+          "logical_bytes": 34911,
+          "allocated_bytes": 40960
+        },
+        "docs/reports": {
+          "files": 394,
+          "logical_bytes": 2225297,
+          "allocated_bytes": 3010560
+        },
+        "docs/development": {
+          "files": 5,
+          "logical_bytes": 57214,
+          "allocated_bytes": 65536
+        },
+        "docs/design": {
+          "files": 188,
+          "logical_bytes": 1463324,
+          "allocated_bytes": 1843200
+        },
+        "tools/ai-sigma-c-factor-browser": {
+          "files": 17,
+          "logical_bytes": 158191,
+          "allocated_bytes": 192512
+        },
+        "tools/ai-sigma-diagnostic-arena": {
+          "files": 5,
+          "logical_bytes": 36696,
+          "allocated_bytes": 45056
+        },
+        "tools/ai-sigma-search-policy-differential": {
+          "files": 3,
+          "logical_bytes": 17009,
+          "allocated_bytes": 20480
+        },
+        "tools/ai-sigma-nnue-qf1-prototype": {
+          "files": 6,
+          "logical_bytes": 27818,
+          "allocated_bytes": 40960
+        },
+        "tools/ai-sigma-next-information-choice": {
+          "files": 2,
+          "logical_bytes": 9113,
+          "allocated_bytes": 12288
+        },
+        "tools/ai-sigma-frame18-learning": {
+          "files": 5,
+          "logical_bytes": 32492,
+          "allocated_bytes": 45056
+        },
+        "tools/ai-sigma-actual-driver-independent": {
+          "files": 3,
+          "logical_bytes": 8989,
+          "allocated_bytes": 16384
+        },
+        "tools/ai-sigma-streaming-snapshot": {
+          "files": 52,
+          "logical_bytes": 237540,
+          "allocated_bytes": 327680
+        },
+        "tools/ai-sigma-remaining-evidence-plan": {
+          "files": 4,
+          "logical_bytes": 15828,
+          "allocated_bytes": 28672
+        },
+        "tools/ai-sigma-gpu-batch-provider": {
+          "files": 10,
+          "logical_bytes": 36591,
+          "allocated_bytes": 61440
+        },
+        "tools/ai-sigma-inference-probe": {
+          "files": 10,
+          "logical_bytes": 51964,
+          "allocated_bytes": 73728
+        },
+        "tools/ai-sigma-player-workers": {
+          "files": 8,
+          "logical_bytes": 62783,
+          "allocated_bytes": 77824
+        },
+        "tools/ai-sigma-frame18-native-connection": {
+          "files": 9,
+          "logical_bytes": 24011,
+          "allocated_bytes": 45056
+        },
+        "tools/ai-sigma-frame20-distance-provenance-repair": {
+          "files": 2,
+          "logical_bytes": 19430,
+          "allocated_bytes": 24576
+        },
+        "tools/ai-sigma-inference-release": {
+          "files": 13,
+          "logical_bytes": 65502,
+          "allocated_bytes": 102400
+        },
+        "tools/webgpu-smoke": {
+          "files": 9,
+          "logical_bytes": 38462,
+          "allocated_bytes": 69632
+        },
+        "tools/ai-sigma-deep-node-independent": {
+          "files": 9,
+          "logical_bytes": 46587,
+          "allocated_bytes": 61440
+        },
+        "tools/ai-sigma-sigma-web-port-saved-independent": {
+          "files": 6,
+          "logical_bytes": 311798,
+          "allocated_bytes": 323584
+        },
+        "tools/ai-sigma-frame8-evaluation-plan": {
+          "files": 2,
+          "logical_bytes": 6315,
+          "allocated_bytes": 8192
+        },
+        "tools/ai-sigma-fixed-cycle": {
+          "files": 11,
+          "logical_bytes": 49767,
+          "allocated_bytes": 73728
+        },
+        "tools/ai-sigma-fixed-cost-saved-independent": {
+          "files": 3,
+          "logical_bytes": 22274,
+          "allocated_bytes": 28672
+        },
+        "tools/ai-sigma-worker-balance": {
+          "files": 11,
+          "logical_bytes": 71020,
+          "allocated_bytes": 94208
+        },
+        "tools/ai-sigma-comparison-information": {
+          "files": 2,
+          "logical_bytes": 13353,
+          "allocated_bytes": 20480
+        },
+        "tools/ai-sigma-native-ni-arena": {
+          "files": 23,
+          "logical_bytes": 137267,
+          "allocated_bytes": 192512
+        },
+        "tools/ai-sigma-completed-fpu": {
+          "files": 11,
+          "logical_bytes": 56756,
+          "allocated_bytes": 86016
+        },
+        "tools/ai-sigma-baseline-gap-frame10": {
+          "files": 14,
+          "logical_bytes": 90445,
+          "allocated_bytes": 114688
+        },
+        "tools/ai-sigma-wallless-ai-sensitivity": {
+          "files": 12,
+          "logical_bytes": 68082,
+          "allocated_bytes": 98304
+        },
+        "tools/ai-sigma-root-factor-correct-n": {
+          "files": 5,
+          "logical_bytes": 21050,
+          "allocated_bytes": 32768
+        },
+        "tools/ai-sigma-arena-matches": {
+          "files": 25,
+          "logical_bytes": 172042,
+          "allocated_bytes": 225280
+        },
+        "tools/ai-sigma-gpu-inference": {
+          "files": 6,
+          "logical_bytes": 29428,
+          "allocated_bytes": 40960
+        },
+        "tools/ai-sigma-cooperative-arena": {
+          "files": 9,
+          "logical_bytes": 52611,
+          "allocated_bytes": 65536
+        },
+        "tools/ai-sigma-webgpu-measure": {
+          "files": 4,
+          "logical_bytes": 25673,
+          "allocated_bytes": 32768
+        },
+        "tools/ai-sigma-frame19-leaf-terminal": {
+          "files": 13,
+          "logical_bytes": 41731,
+          "allocated_bytes": 73728
+        },
+        "tools/ai-sigma-frame19-paired-leaf-arena": {
+          "files": 10,
+          "logical_bytes": 36293,
+          "allocated_bytes": 61440
+        },
+        "tools/ai-sigma-streaming-early-seal": {
+          "files": 58,
+          "logical_bytes": 273016,
+          "allocated_bytes": 380928
+        },
+        "tools/ai-sigma-web-reference": {
+          "files": 8,
+          "logical_bytes": 47255,
+          "allocated_bytes": 73728
+        },
+        "tools/ai-sigma-deep-discrimination": {
+          "files": 3,
+          "logical_bytes": 11602,
+          "allocated_bytes": 20480
+        },
+        "tools/ai-sigma-qf1-distance-residual": {
+          "files": 10,
+          "logical_bytes": 36629,
+          "allocated_bytes": 65536
+        },
+        "tools/ai-sigma-ort-search": {
+          "files": 22,
+          "logical_bytes": 119004,
+          "allocated_bytes": 167936
+        },
+        "tools/ai-sigma-local-move-independent": {
+          "files": 9,
+          "logical_bytes": 50174,
+          "allocated_bytes": 69632
+        },
+        "tools/ai-sigma-nn-schema-cost": {
+          "files": 20,
+          "logical_bytes": 119747,
+          "allocated_bytes": 155648
+        },
+        "tools/ai-sigma-manygame-plan": {
+          "files": 2,
+          "logical_bytes": 7550,
+          "allocated_bytes": 12288
+        },
+        "tools/ai-sigma-ort-entry-final": {
+          "files": 25,
+          "logical_bytes": 147172,
+          "allocated_bytes": 184320
+        },
+        "tools/ai-sigma-detached-ownership": {
+          "files": 43,
+          "logical_bytes": 221474,
+          "allocated_bytes": 290816
+        },
+        "tools/ai-sigma-kernel-ownership": {
+          "files": 48,
+          "logical_bytes": 234559,
+          "allocated_bytes": 315392
+        },
+        "tools/ai-sigma-streaming-startup-watchdog": {
+          "files": 40,
+          "logical_bytes": 166909,
+          "allocated_bytes": 258048
+        },
+        "tools/ai-sigma-streaming-runtime-final": {
+          "files": 31,
+          "logical_bytes": 171593,
+          "allocated_bytes": 237568
+        },
+        "tools/ai-sigma-ort-checkpoint": {
+          "files": 21,
+          "logical_bytes": 122869,
+          "allocated_bytes": 151552
+        },
+        "tools/ai-sigma-diagnostic-arena-independent": {
+          "files": 6,
+          "logical_bytes": 50621,
+          "allocated_bytes": 61440
+        },
+        "tools/ai-sigma-actual-boundary-repair": {
+          "files": 50,
+          "logical_bytes": 206077,
+          "allocated_bytes": 323584
+        },
+        "tools/ai-sigma-native-route-choice": {
+          "files": 2,
+          "logical_bytes": 4784,
+          "allocated_bytes": 8192
+        },
+        "tools/ai-sigma-diverse-prefix": {
+          "files": 13,
+          "logical_bytes": 74233,
+          "allocated_bytes": 102400
+        },
+        "tools/ai-sigma-frame20-distance-arena-independent": {
+          "files": 4,
+          "logical_bytes": 30461,
+          "allocated_bytes": 36864
+        },
+        "tools/research-team": {
+          "files": 3,
+          "logical_bytes": 57904,
+          "allocated_bytes": 65536
+        },
+        "tools/ai-sigma-native-k800-time": {
+          "files": 11,
+          "logical_bytes": 49083,
+          "allocated_bytes": 69632
+        },
+        "tools/ai-sigma-streaming-numeric-order": {
+          "files": 37,
+          "logical_bytes": 155685,
+          "allocated_bytes": 237568
+        },
+        "tools/ai-sigma-saved-nn46-independent": {
+          "files": 2,
+          "logical_bytes": 23197,
+          "allocated_bytes": 28672
+        },
+        "tools/ai-sigma-web-port-conformance": {
+          "files": 3,
+          "logical_bytes": 280623,
+          "allocated_bytes": 286720
+        },
+        "tools/ai-sigma-sigma-web-port-games-independent": {
+          "files": 7,
+          "logical_bytes": 341520,
+          "allocated_bytes": 348160
+        },
+        "tools/ai-sigma-puct-factor": {
+          "files": 13,
+          "logical_bytes": 100708,
+          "allocated_bytes": 122880
+        },
+        "tools/ai-sigma-input-scale-control": {
+          "files": 5,
+          "logical_bytes": 17163,
+          "allocated_bytes": 24576
+        },
+        "tools/ai-sigma-teacher-throughput": {
+          "files": 54,
+          "logical_bytes": 277940,
+          "allocated_bytes": 389120
+        },
+        "tools/ai-sigma-frame19-native-arena": {
+          "files": 12,
+          "logical_bytes": 29367,
+          "allocated_bytes": 57344
+        },
+        "tools/ai-sigma-policy-factor-choice": {
+          "files": 3,
+          "logical_bytes": 13572,
+          "allocated_bytes": 20480
+        },
+        "tools/ai-sigma-fixed-policy-cost": {
+          "files": 15,
+          "logical_bytes": 78916,
+          "allocated_bytes": 106496
+        },
+        "tools/ai-sigma-matched-policy-quality-choice": {
+          "files": 2,
+          "logical_bytes": 7848,
+          "allocated_bytes": 12288
+        },
+        "tools/ai-sigma-supervisor-role-review": {
+          "files": 4,
+          "logical_bytes": 40202,
+          "allocated_bytes": 45056
+        },
+        "tools/ai-sigma-streaming-matches": {
+          "files": 12,
+          "logical_bytes": 76832,
+          "allocated_bytes": 94208
+        },
+        "tools/ai-sigma-cpu-sigma-independent": {
+          "files": 7,
+          "logical_bytes": 57160,
+          "allocated_bytes": 69632
+        },
+        "tools/ai-sigma-formal-clock": {
+          "files": 4,
+          "logical_bytes": 350833,
+          "allocated_bytes": 356352
+        },
+        "tools/ai-sigma-pv-cpu-smoke": {
+          "files": 4,
+          "logical_bytes": 31165,
+          "allocated_bytes": 36864
+        },
+        "tools/ai-sigma-native-checkpoint-teacher": {
+          "files": 20,
+          "logical_bytes": 84681,
+          "allocated_bytes": 122880
+        },
+        "tools/ai-sigma-frame14-l2-test": {
+          "files": 8,
+          "logical_bytes": 33003,
+          "allocated_bytes": 49152
+        },
+        "tools/ai-sigma-fit-gap-analysis": {
+          "files": 24,
+          "logical_bytes": 85634,
+          "allocated_bytes": 139264
+        },
+        "tools/ai-sigma-frame19-node-context": {
+          "files": 3,
+          "logical_bytes": 15990,
+          "allocated_bytes": 20480
+        },
+        "tools/ai-sigma-continuation-matches": {
+          "files": 37,
+          "logical_bytes": 210154,
+          "allocated_bytes": 266240
+        },
+        "tools/ai-sigma-distance-update-control": {
+          "files": 7,
+          "logical_bytes": 27752,
+          "allocated_bytes": 40960
+        },
+        "tools/ai-sigma-ort-cleanup-repair": {
+          "files": 32,
+          "logical_bytes": 189414,
+          "allocated_bytes": 237568
+        },
+        "tools/ai-sigma-cooperative-arena-independent": {
+          "files": 9,
+          "logical_bytes": 59215,
+          "allocated_bytes": 77824
+        },
+        "tools/ai-sigma-value-game-diagnostic": {
+          "files": 3,
+          "logical_bytes": 15849,
+          "allocated_bytes": 24576
+        },
+        "tools/ai-sigma-scheduler-deadline-update": {
+          "files": 4,
+          "logical_bytes": 35930,
+          "allocated_bytes": 40960
+        },
+        "tools/ai-sigma-nn-search": {
+          "files": 21,
+          "logical_bytes": 116760,
+          "allocated_bytes": 159744
+        },
+        "tools/ai-sigma-streaming-entry-repair": {
+          "files": 36,
+          "logical_bytes": 163721,
+          "allocated_bytes": 237568
+        },
+        "tools/ai-sigma-same-input-budget": {
+          "files": 9,
+          "logical_bytes": 46827,
+          "allocated_bytes": 69632
+        },
+        "tools/ai-sigma-frame10-gap-design": {
+          "files": 4,
+          "logical_bytes": 265552,
+          "allocated_bytes": 274432
+        },
+        "tools/ai-sigma-distance-alpha-arena": {
+          "files": 10,
+          "logical_bytes": 37633,
+          "allocated_bytes": 53248
+        },
+        "tools/ai-sigma-frame20-one-root-leaf": {
+          "files": 4,
+          "logical_bytes": 21964,
+          "allocated_bytes": 32768
+        },
+        "tools/ai-sigma-frame14-head-test": {
+          "files": 9,
+          "logical_bytes": 38146,
+          "allocated_bytes": 53248
+        },
+        "tools/ai-sigma-frame18-data-learning": {
+          "files": 22,
+          "logical_bytes": 85472,
+          "allocated_bytes": 131072
+        },
+        "tools/ai-sigma-streaming-complete-clock": {
+          "files": 33,
+          "logical_bytes": 149152,
+          "allocated_bytes": 221184
+        },
+        "tools/ai-sigma-frame19-distance-provenance": {
+          "files": 2,
+          "logical_bytes": 17920,
+          "allocated_bytes": 24576
+        },
+        "tools/ai-sigma-local-move-quality": {
+          "files": 12,
+          "logical_bytes": 85372,
+          "allocated_bytes": 110592
+        },
+        "tools/ai-sigma-frame20-distance-arena": {
+          "files": 12,
+          "logical_bytes": 38893,
+          "allocated_bytes": 69632
+        },
+        "tools/ai-sigma-tail-transport": {
+          "files": 13,
+          "logical_bytes": 75702,
+          "allocated_bytes": 102400
+        },
+        "tools/ai-sigma-candidate-true-mean-fpu": {
+          "files": 23,
+          "logical_bytes": 152640,
+          "allocated_bytes": 200704
+        },
+        "tools/ai-sigma-critical-roles-v2": {
+          "files": 3,
+          "logical_bytes": 33615,
+          "allocated_bytes": 40960
+        },
+        "tools/ai-sigma-isolated-nn-cost": {
+          "files": 16,
+          "logical_bytes": 94959,
+          "allocated_bytes": 118784
+        },
+        "tools/ai-sigma-native-comparison-scope": {
+          "files": 3,
+          "logical_bytes": 356211,
+          "allocated_bytes": 364544
+        },
+        "tools/ai-sigma-true-mean-fpu-saved-independent": {
+          "files": 4,
+          "logical_bytes": 24916,
+          "allocated_bytes": 28672
+        },
+        "tools/ai-sigma-arena": {
+          "files": 13,
+          "logical_bytes": 97557,
+          "allocated_bytes": 126976
+        },
+        "tools/ai-sigma-native-stageA-independent": {
+          "files": 7,
+          "logical_bytes": 406664,
+          "allocated_bytes": 421888
+        },
+        "tools/ai-sigma-formal-ni-plan": {
+          "files": 2,
+          "logical_bytes": 328697,
+          "allocated_bytes": 331776
+        },
+        "tools/ai-sigma-native-baseline": {
+          "files": 41,
+          "logical_bytes": 285599,
+          "allocated_bytes": 376832
+        },
+        "tools/ai-sigma-streaming-comparison32-plan": {
+          "files": 8,
+          "logical_bytes": 57514,
+          "allocated_bytes": 73728
+        },
+        "tools/ai-sigma-cooperative-clock-independent": {
+          "files": 11,
+          "logical_bytes": 70950,
+          "allocated_bytes": 90112
+        },
+        "tools/ai-sigma-learning-diagnostic": {
+          "files": 11,
+          "logical_bytes": 40970,
+          "allocated_bytes": 65536
+        },
+        "tools/ai-sigma-sigma-web-port": {
+          "files": 20,
+          "logical_bytes": 112168,
+          "allocated_bytes": 151552
+        },
+        "tools/ai-sigma-player-workers-independent": {
+          "files": 6,
+          "logical_bytes": 45724,
+          "allocated_bytes": 57344
+        },
+        "tools/ai-sigma-frame14-distance-test": {
+          "files": 10,
+          "logical_bytes": 37834,
+          "allocated_bytes": 57344
+        },
+        "tools/ai-sigma-frame19-arena-diagnosis": {
+          "files": 2,
+          "logical_bytes": 18828,
+          "allocated_bytes": 24576
+        },
+        "tools/ai-sigma-completed-fpu-independent": {
+          "files": 9,
+          "logical_bytes": 40671,
+          "allocated_bytes": 61440
+        },
+        "tools/ai-sigma-frame14-teachers": {
+          "files": 8,
+          "logical_bytes": 34801,
+          "allocated_bytes": 53248
+        },
+        "tools/nnue-training": {
+          "files": 23,
+          "logical_bytes": 103085,
+          "allocated_bytes": 155648
+        },
+        "tools/ai-sigma-wallless-oracle": {
+          "files": 8,
+          "logical_bytes": 36098,
+          "allocated_bytes": 57344
+        },
+        "tools/ai-sigma-ort-entry-continuation": {
+          "files": 33,
+          "logical_bytes": 207005,
+          "allocated_bytes": 258048
+        },
+        "tools/ai-sigma-value-lr-control": {
+          "files": 3,
+          "logical_bytes": 19856,
+          "allocated_bytes": 24576
+        },
+        "tools/ai-sigma-native-games-independent": {
+          "files": 6,
+          "logical_bytes": 398375,
+          "allocated_bytes": 409600
+        },
+        "tools/ai-sigma-native-teacher-pipeline": {
+          "files": 32,
+          "logical_bytes": 131878,
+          "allocated_bytes": 204800
+        },
+        "tools/ai-sigma-experiment-policy": {
+          "files": 3,
+          "logical_bytes": 38669,
+          "allocated_bytes": 45056
+        },
+        "tools/ai-sigma-supervisor-read-guard": {
+          "files": 3,
+          "logical_bytes": 56263,
+          "allocated_bytes": 61440
+        },
+        "tools/ai-sigma-frame10-gap-sampling": {
+          "files": 3,
+          "logical_bytes": 267539,
+          "allocated_bytes": 274432
+        },
+        "tools/ai-sigma-frame20-learning-effect": {
+          "files": 12,
+          "logical_bytes": 32677,
+          "allocated_bytes": 65536
+        },
+        "tools/ai-sigma-qf1-head-control": {
+          "files": 10,
+          "logical_bytes": 29799,
+          "allocated_bytes": 53248
+        },
+        "tools/ai-sigma-fair-streaming": {
+          "files": 64,
+          "logical_bytes": 309633,
+          "allocated_bytes": 425984
+        },
+        "tools/ai-sigma-manygame-runtime-preparation": {
+          "files": 16,
+          "logical_bytes": 51362,
+          "allocated_bytes": 86016
+        },
+        "tools/ai-sigma-cpu-sigma-frame8": {
+          "files": 10,
+          "logical_bytes": 52346,
+          "allocated_bytes": 73728
+        },
+        "tools/ai-sigma-frame20-paired-independent": {
+          "files": 4,
+          "logical_bytes": 22106,
+          "allocated_bytes": 28672
+        },
+        "tools/ai-sigma-scheduler-monitor-recovery": {
+          "files": 5,
+          "logical_bytes": 28212,
+          "allocated_bytes": 32768
+        },
+        "tools/ai-sigma-wallless-label-independent": {
+          "files": 8,
+          "logical_bytes": 51634,
+          "allocated_bytes": 65536
+        },
+        "tools/training": {
+          "files": 3,
+          "logical_bytes": 52116,
+          "allocated_bytes": 57344
+        },
+        "tools/ai-sigma-cp-frame": {
+          "files": 14,
+          "logical_bytes": 81165,
+          "allocated_bytes": 114688
+        },
+        "tools/ai-sigma-native-runtime-ready": {
+          "files": 13,
+          "logical_bytes": 102619,
+          "allocated_bytes": 131072
+        },
+        "tools/ai-sigma-tactical-evaluation": {
+          "files": 9,
+          "logical_bytes": 54454,
+          "allocated_bytes": 73728
+        },
+        "tools/ai-sigma-deep-node-comparison": {
+          "files": 24,
+          "logical_bytes": 194059,
+          "allocated_bytes": 249856
+        },
+        "tools/ai-sigma-tactical-saved-independent": {
+          "files": 5,
+          "logical_bytes": 30466,
+          "allocated_bytes": 36864
+        },
+        "tools/ai-sigma-browser-sab-independent": {
+          "files": 5,
+          "logical_bytes": 40275,
+          "allocated_bytes": 45056
+        },
+        "tools/ai-sigma-cpu-concurrency": {
+          "files": 12,
+          "logical_bytes": 56697,
+          "allocated_bytes": 77824
+        },
+        "tools/ai-sigma-tactical-oracle": {
+          "files": 3,
+          "logical_bytes": 19288,
+          "allocated_bytes": 24576
+        },
+        "tools/ai-sigma-pv-pipeline-bootstrap": {
+          "files": 2,
+          "logical_bytes": 11787,
+          "allocated_bytes": 16384
+        },
+        "tools/ai-sigma-nnue-feature-cost": {
+          "files": 10,
+          "logical_bytes": 72321,
+          "allocated_bytes": 90112
+        },
+        "tools/ai-sigma-ort-rematches": {
+          "files": 22,
+          "logical_bytes": 138508,
+          "allocated_bytes": 167936
+        },
+        "tools/ai-sigma-nnue-preliminary": {
+          "files": 3,
+          "logical_bytes": 298664,
+          "allocated_bytes": 303104
+        },
+        "tools/ai-sigma-diverse-prefix-independent": {
+          "files": 7,
+          "logical_bytes": 49324,
+          "allocated_bytes": 65536
+        },
+        "tools/ai-sigma-c-factor-independent": {
+          "files": 8,
+          "logical_bytes": 73262,
+          "allocated_bytes": 81920
+        },
+        "tools/ai-sigma-manygame-generation": {
+          "files": 29,
+          "logical_bytes": 128862,
+          "allocated_bytes": 200704
+        },
+        ".codex/config.toml": {
+          "files": 1,
+          "logical_bytes": 62,
+          "allocated_bytes": 4096
+        },
+        "packages/engine-bridge": {
+          "files": 22,
+          "logical_bytes": 356548,
+          "allocated_bytes": 425984
+        },
+        "crates/quoridor-ai": {
+          "files": 7,
+          "logical_bytes": 48470,
+          "allocated_bytes": 65536
+        },
+        "crates/quoridor-wasm": {
+          "files": 10,
+          "logical_bytes": 48074,
+          "allocated_bytes": 73728
+        },
+        "crates/quoridor-core": {
+          "files": 11,
+          "logical_bytes": 63595,
+          "allocated_bytes": 86016
+        },
+        "apps/web": {
+          "files": 79,
+          "logical_bytes": 64663106,
+          "allocated_bytes": 64851968
+        },
+        "scripts/generate-fixtures.mjs": {
+          "files": 1,
+          "logical_bytes": 1154,
+          "allocated_bytes": 4096
+        },
+        "scripts/codegen-protocol.mjs": {
+          "files": 1,
+          "logical_bytes": 1135,
+          "allocated_bytes": 4096
+        },
+        "scripts/doctor.mjs": {
+          "files": 1,
+          "logical_bytes": 1369,
+          "allocated_bytes": 4096
+        },
+        "scripts/generate-ai-fixtures.mjs": {
+          "files": 1,
+          "logical_bytes": 1111,
+          "allocated_bytes": 4096
+        },
+        "scripts/smoke-ordinary-production.mjs": {
+          "files": 1,
+          "logical_bytes": 1606,
+          "allocated_bytes": 4096
+        },
+        "scripts/verify-production.mjs": {
+          "files": 1,
+          "logical_bytes": 2424,
+          "allocated_bytes": 4096
+        },
+        "scripts/build-wasm.mjs": {
+          "files": 1,
+          "logical_bytes": 973,
+          "allocated_bytes": 4096
+        },
+        "scripts/check-boundaries.mjs": {
+          "files": 1,
+          "logical_bytes": 550,
+          "allocated_bytes": 4096
+        },
+        "scripts/export-fresh-source.mjs": {
+          "files": 1,
+          "logical_bytes": 1504,
+          "allocated_bytes": 4096
+        },
+        "scripts/dev": {
+          "files": 19,
+          "logical_bytes": 91159,
+          "allocated_bytes": 135168
+        },
+        "research-data/ai-sigma": {
+          "files": 6530,
+          "logical_bytes": 738043949,
+          "allocated_bytes": 755404800
+        },
+        ".artifacts/ai-sigma": {
+          "files": 23652,
+          "logical_bytes": 1270722698,
+          "allocated_bytes": 1325400064
+        },
+        "models/experiments": {
+          "files": 42,
+          "logical_bytes": 13679833,
+          "allocated_bytes": 13750272
+        }
+      },
+      "symlink_sample": [
+        {
+          "path": "node_modules/.bin/vite",
+          "target": "../vite/bin/vite.js"
+        },
+        {
+          "path": "node_modules/.bin/tsc",
+          "target": "../typescript/bin/tsc"
+        },
+        {
+          "path": "node_modules/.bin/playwright-core",
+          "target": "../playwright-core/cli.js"
+        },
+        {
+          "path": "node_modules/.bin/playwright",
+          "target": "../@playwright/test/cli.js"
+        },
+        {
+          "path": "node_modules/.bin/nanoid",
+          "target": "../nanoid/bin/nanoid.cjs"
+        },
+        {
+          "path": "node_modules/.bin/rolldown",
+          "target": "../rolldown/bin/cli.mjs"
+        },
+        {
+          "path": "node_modules/@quoridor/engine-bridge",
+          "target": "../../packages/engine-bridge"
+        },
+        {
+          "path": "node_modules/@quoridor/web",
+          "target": "../../apps/web"
+        },
+        {
+          "path": ".artifacts/ai-sigma/continuation-20261001/CRITIC-ACTUAL-DRIVER-MINIMAL/upstream/proof-report-input.md",
+          "target": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-ACTUAL-BOUNDARY-REPAIR/runs/v2/proof-report-input.md"
+        },
+        {
+          "path": ".artifacts/ai-sigma/continuation-20261001/CRITIC-ACTUAL-DRIVER-MINIMAL/upstream/entry-manifest.json",
+          "target": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-ACTUAL-BOUNDARY-REPAIR/runs/v2/entry-manifest.json"
+        },
+        {
+          "path": ".artifacts/ai-sigma/continuation-20261001/CRITIC-ACTUAL-DRIVER-MINIMAL/upstream/source-frozen.json",
+          "target": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-ACTUAL-BOUNDARY-REPAIR/runs/v2/source-frozen.json"
+        },
+        {
+          "path": ".artifacts/ai-sigma/continuation-20261001/CRITIC-ACTUAL-DRIVER-MINIMAL/upstream/runtime-gate-control.json",
+          "target": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-ACTUAL-BOUNDARY-REPAIR/runs/v2/runtime-gate-control.json"
+        },
+        {
+          "path": ".artifacts/ai-sigma/continuation-20261001/SIGMA-DETACHED-OWNERSHIP/t/org.chromium.Chromium.eAI1xS/SingletonCookie",
+          "target": "7018778845864186683"
+        },
+        {
+          "path": ".artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-ENTRY-REPAIR/t/org.chromium.Chromium.ncmjxG/SingletonCookie",
+          "target": "10209784184246183437"
+        },
+        {
+          "path": ".artifacts/ai-sigma/continuation-20261001/SIGMA-CONTINUATION-ENTRY/t/org.chromium.Chromium.6j4dea/SingletonCookie",
+          "target": "123587310666506759"
+        },
+        {
+          "path": ".artifacts/ai-sigma/resume-20261003/FIXED-CYCLE/runs/t/org.chromium.Chromium.0INpK0/SingletonCookie",
+          "target": "1784011697448975055"
+        },
+        {
+          "path": ".artifacts/ai-sigma/resume-20261003/BASELINE-GAP/runs/t/playwright_chromiumdev_profile-qw4GAA/SingletonLock",
+          "target": "docker-desktop-2959422"
+        },
+        {
+          "path": ".artifacts/ai-sigma/resume-20261003/BASELINE-GAP/runs/t/playwright_chromiumdev_profile-qw4GAA/SingletonSocket",
+          "target": "/proc/2959235/cwd/t/org.chromium.Chromium.d5ifHw/SingletonSocket"
+        },
+        {
+          "path": ".artifacts/ai-sigma/resume-20261003/BASELINE-GAP/runs/t/playwright_chromiumdev_profile-qw4GAA/SingletonCookie",
+          "target": "3828032678600839678"
+        },
+        {
+          "path": ".artifacts/ai-sigma/resume-20261003/BASELINE-GAP/runs/t/org.chromium.Chromium.d5ifHw/SingletonCookie",
+          "target": "3828032678600839678"
+        },
+        {
+          "path": ".artifacts/ai-sigma/resume-20261003/CPU-CONCURRENCY/runs/t/org.chromium.Chromium.rhouxO/SingletonCookie",
+          "target": "14996477051324185517"
+        },
+        {
+          "path": ".artifacts/ai-sigma/resume-20261003/CPU-CONCURRENCY/runs/t/playwright_chromiumdev_profile-wPUrEH/SingletonLock",
+          "target": "docker-desktop-3094005"
+        },
+        {
+          "path": ".artifacts/ai-sigma/resume-20261003/CPU-CONCURRENCY/runs/t/playwright_chromiumdev_profile-wPUrEH/SingletonSocket",
+          "target": "/proc/3093863/cwd/t/org.chromium.Chromium.rhouxO/SingletonSocket"
+        },
+        {
+          "path": ".artifacts/ai-sigma/resume-20261003/CPU-CONCURRENCY/runs/t/playwright_chromiumdev_profile-wPUrEH/SingletonCookie",
+          "target": "14996477051324185517"
+        },
+        {
+          "path": ".artifacts/ai-sigma/resume-20261002/WEBGPU-MEASURE/runs/t/playwright_chromiumdev_profile-L47dJP/SingletonLock",
+          "target": "docker-desktop-2401795"
+        },
+        {
+          "path": ".artifacts/ai-sigma/resume-20261002/WEBGPU-MEASURE/runs/t/playwright_chromiumdev_profile-L47dJP/SingletonSocket",
+          "target": "/proc/2401719/cwd/t/org.chromium.Chromium.Oh1DPQ/SingletonSocket"
+        },
+        {
+          "path": ".artifacts/ai-sigma/resume-20261002/WEBGPU-MEASURE/runs/t/playwright_chromiumdev_profile-L47dJP/SingletonCookie",
+          "target": "10899408514869919135"
+        },
+        {
+          "path": ".artifacts/ai-sigma/resume-20261002/WEBGPU-MEASURE/runs/t/org.chromium.Chromium.Oh1DPQ/SingletonCookie",
+          "target": "10899408514869919135"
+        },
+        {
+          "path": ".artifacts/ai-sigma/resume-20261002/BROWSER-SAB-INDEPENDENT/runs/t/playwright_chromiumdev_profile-V1Tgpn/SingletonLock",
+          "target": "docker-desktop-2217793"
+        },
+        {
+          "path": ".artifacts/ai-sigma/resume-20261002/BROWSER-SAB-INDEPENDENT/runs/t/playwright_chromiumdev_profile-V1Tgpn/SingletonSocket",
+          "target": "/proc/2217700/cwd/t/org.chromium.Chromium.04g5i8/SingletonSocket"
+        },
+        {
+          "path": ".artifacts/ai-sigma/resume-20261002/BROWSER-SAB-INDEPENDENT/runs/t/playwright_chromiumdev_profile-V1Tgpn/SingletonCookie",
+          "target": "12779706951370571086"
+        },
+        {
+          "path": ".artifacts/ai-sigma/resume-20261002/BROWSER-SAB-INDEPENDENT/runs/t/org.chromium.Chromium.04g5i8/SingletonCookie",
+          "target": "12779706951370571086"
+        },
+        {
+          "path": ".artifacts/ai-sigma/resume-20261002/CP-FRAME/t/org.chromium.Chromium.SvOeZr/SingletonCookie",
+          "target": "6142779916004399454"
+        }
+      ],
+      "read_errors": [],
+      "largest_files": [
+        {
+          "path": "research-data/ai-sigma/173-native-ni-arena/openings.json",
+          "logical_bytes": 29393237,
+          "allocated_bytes": 29396992
+        },
+        {
+          "path": "node_modules/@typescript/typescript-linux-x64/lib/tsc",
+          "logical_bytes": 24101026,
+          "allocated_bytes": 24104960
+        },
+        {
+          "path": ".artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/ort-wasm-simd-threaded.jsep.wasm",
+          "logical_bytes": 23914392,
+          "allocated_bytes": 23916544
+        },
+        {
+          "path": "node_modules/@rolldown/binding-linux-x64-gnu/rolldown-binding.linux-x64-gnu.node",
+          "logical_bytes": 19144640,
+          "allocated_bytes": 19144704
+        },
+        {
+          "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/restore-minimum/port151-stageA-r1/runs/port151-stageA-r1/browser-result.json",
+          "logical_bytes": 17536361,
+          "allocated_bytes": 17539072
+        },
+        {
+          "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageA-r1/browser-result.json",
+          "logical_bytes": 17536361,
+          "allocated_bytes": 17539072
+        },
+        {
+          "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/restore-minimum/port151-stageA-r2/runs/port151-stageA-r2/browser-result.json",
+          "logical_bytes": 17535637,
+          "allocated_bytes": 17539072
+        },
+        {
+          "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageA-r2/browser-result.json",
+          "logical_bytes": 17535637,
+          "allocated_bytes": 17539072
+        },
+        {
+          "path": "research-data/ai-sigma/frame16-teacher-throughput/fresh96-stage/jobs/fresh96-firstscience/core2/raw-rows.jsonl",
+          "logical_bytes": 17398021,
+          "allocated_bytes": 17403904
+        },
+        {
+          "path": "research-data/ai-sigma/archives/runs/SIGMA-PAIRED-MATCHES.tar.gz",
+          "logical_bytes": 16220139,
+          "allocated_bytes": 16220160
+        },
+        {
+          "path": ".artifacts/ai-sigma/resume-20261003/NATIVE-NI-ARENA/runs/native173-quality-e2-r1/result.json",
+          "logical_bytes": 15262182,
+          "allocated_bytes": 15265792
+        },
+        {
+          "path": "research-data/ai-sigma/frame16-teacher-throughput/fresh96-stage/jobs/fresh96-firstscience/core4/raw-rows.jsonl",
+          "logical_bytes": 14313665,
+          "allocated_bytes": 14319616
+        },
+        {
+          "path": "research-data/ai-sigma/frame16-teacher-throughput/fresh96-stage/jobs/fresh96-firstscience/core6/raw-rows.jsonl",
+          "logical_bytes": 14124461,
+          "allocated_bytes": 14131200
+        },
+        {
+          "path": "research-data/ai-sigma/176-native-teacher-pipeline/gpu-root-parity.json",
+          "logical_bytes": 13175773,
+          "allocated_bytes": 13176832
+        },
+        {
+          "path": ".artifacts/ai-sigma/resume-20261003/NATIVE-BASELINE/runs/native165-mechanism-r1/result.json",
+          "logical_bytes": 13141705,
+          "allocated_bytes": 13144064
+        },
+        {
+          "path": ".artifacts/ai-sigma/resume-20261002/CPU-SIGMA-INDEPENDENT/saved-input.json",
+          "logical_bytes": 12733003,
+          "allocated_bytes": 12734464
+        },
+        {
+          "path": ".artifacts/ai-sigma/resume-20261002/CP-FRAME/runs/frame7-asym-pair-r1/browser-result.json",
+          "logical_bytes": 12660669,
+          "allocated_bytes": 12660736
+        },
+        {
+          "path": "research-data/ai-sigma/frame18-worker-balance/jobs/baseline-r2/core4/raw-rows.jsonl",
+          "logical_bytes": 12603494,
+          "allocated_bytes": 12611584
+        },
+        {
+          "path": ".artifacts/ai-sigma/resume-20261002/PLAYER-WORKERS/runs/p112-asym-pair-r1/browser-result.json",
+          "logical_bytes": 12550088,
+          "allocated_bytes": 12550144
+        },
+        {
+          "path": "research-data/ai-sigma/frame18-worker-balance/jobs/baseline-r2/core6/raw-rows.jsonl",
+          "logical_bytes": 12484181,
+          "allocated_bytes": 12488704
+        }
+      ],
+      "git": {
+        "head": "a3d46fd2a1f2f031ccbc4d4ceb0d18b880c089e2",
+        "index_entries": 534,
+        "head_entries": 8155,
+        "head_only_count": 7621,
+        "head_only_sample": [
+          ".agents/research-team/common.md",
+          ".agents/research-team/roles/coordinator.md",
+          ".agents/research-team/roles/critic.md",
+          ".agents/research-team/roles/experiment.md",
+          ".agents/research-team/roles/hypothesis.md",
+          ".agents/research-team/roles/steward.md",
+          ".agents/research-team/roles/supervisor.md",
+          ".agents/research-team/templates/experiment-contract.md",
+          ".agents/research-team/templates/handoff.md",
+          ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/FRAME-END-FLOW-258/close-backup.json",
+          ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/FRAME-END-FLOW-258/completion-report-receipt.json",
+          ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/FRAME-END-FLOW-258/completion-report.txt"
+        ],
+        "head_only_existing_count": 7592,
+        "index_only_count": 0,
+        "index_only_sample": [],
+        "same_path_index_vs_HEAD_blob_difference_count": 3,
+        "same_path_index_vs_HEAD_blob_difference_sample": [
+          ".devcontainer/storage-policy.md",
+          "AGENTS.md",
+          "README.md"
+        ],
+        "HEAD_paths_missing_from_worktree_count": 29,
+        "HEAD_paths_missing_sample": [
+          ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/bounded-records/private-index.lock",
+          ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame10-guard-repair/private-final-index.lock",
+          ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame11-extension/private-index.lock",
+          ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame12/private-index.lock",
+          ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame13/private-index.lock",
+          ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame14-training-mirror/private-index.lock",
+          ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame14/private-index.lock",
+          ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame15/private-index.lock",
+          ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame16-extension17/private-index.lock",
+          ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame16-turn-unbounded/private-index.lock",
+          ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame16/private-index.lock",
+          "research-data/ai-sigma/160-pv-pipeline-bootstrap/private.index.lock",
+          "research-data/ai-sigma/174-gpu-inference/Git-final.json",
+          "research-data/ai-sigma/174-gpu-inference/Git-source.json",
+          "research-data/ai-sigma/174-gpu-inference/NN0-check.json"
+        ],
+        "default_status_counts": {
+          "D ": 7621,
+          "MM": 3,
+          " M": 9
+        },
+        "default_status_sample": {
+          "D ": [
+            ".agents/research-team/common.md",
+            ".agents/research-team/roles/coordinator.md",
+            ".agents/research-team/roles/critic.md",
+            ".agents/research-team/roles/experiment.md",
+            ".agents/research-team/roles/hypothesis.md",
+            ".agents/research-team/roles/steward.md",
+            ".agents/research-team/roles/supervisor.md",
+            ".agents/research-team/templates/experiment-contract.md"
+          ],
+          "MM": [
+            ".devcontainer/storage-policy.md",
+            "AGENTS.md",
+            "README.md"
+          ],
+          " M": [
+            "crates/quoridor-ai/Cargo.toml",
+            "crates/quoridor-ai/src/lib.rs",
+            "crates/quoridor-core/Cargo.toml",
+            "crates/quoridor-core/src/lib.rs",
+            "crates/quoridor-core/src/position.rs",
+            "crates/quoridor-wasm/Cargo.toml",
+            "crates/quoridor-wasm/src/lib.rs",
+            "docs/design/quoridor-3d-webapp-design-rust-wasm-v1.md"
+          ]
+        },
+        "physical_files_by_git_category_relative_to_HEAD": {
+          "untracked": {
+            "files": 1581,
+            "logical_bytes": 238616229,
+            "allocated_bytes": 242118656
+          },
+          "HEAD_tracked": {
+            "files": 8126,
+            "logical_bytes": 549323182,
+            "allocated_bytes": 570130432
+          },
+          "ignored": {
+            "files": 29027,
+            "logical_bytes": 1516375809,
+            "allocated_bytes": 1583865856
+          }
+        },
+        "untracked_sample": [
+          ".git",
+          ":memory:.ses",
+          ".agents/research-team/templates/goal-contract.md",
+          "docs/reports/ai-sigma-coordinator-cleanup-repair-review.md",
+          "docs/reports/ai-sigma-hypothesis-match-analysis.md",
+          "docs/reports/ai-sigma-coordinator-deadline-v2-received.md",
+          "docs/reports/ai-sigma-experiment-streaming-runtime-final.md",
+          "docs/reports/ai-sigma-coordinator-streaming-early-seal-review.md",
+          "docs/reports/ai-sigma-coordinator-nn-search-acceptance.md",
+          "docs/reports/ai-sigma-steward-supervisor-read-guard.md",
+          "docs/reports/ai-sigma-coordinator-actual-boundary76-next.md",
+          "docs/reports/ai-sigma-critic-scheduler-live.md",
+          "docs/reports/ai-sigma-experiment-streaming-numeric-order.md",
+          "docs/reports/ai-sigma-coordinator-root-ablation-v2-acceptance.md",
+          "docs/reports/ai-sigma-coordinator-root79-nn80-independent-handoff.md",
+          "docs/reports/ai-sigma-hypothesis-root-factor-correct-n.md",
+          "docs/reports/ai-sigma-hypothesis-inference.md",
+          "docs/reports/ai-sigma-coordinator-puct-factor-acceptance.md",
+          "docs/reports/ai-sigma-experiment-nn-search.md",
+          "docs/reports/ai-sigma-coordinator-start.md",
+          "docs/reports/ai-sigma-critic-time-correction.md",
+          "docs/reports/ai-sigma-coordinator-read-guard-acceptance.md",
+          "docs/reports/ai-sigma-initial-results.md",
+          "docs/reports/ai-sigma-coordinator-cleanup-repair-acceptance.md",
+          "docs/reports/ai-sigma-coordinator-final-entry-acceptance.md"
+        ],
+        "classification_note": "HEAD membership, not stale default-index membership; symlinks not followed"
+      }
+    }
+  },
+  "shared_git": {
+    "root": "/workspaces/quoridor/.git",
+    "directory_groups": {
+      "COMMIT_EDITMSG": {
+        "files": 1,
+        "logical_bytes": 61,
+        "allocated_bytes": 0
+      },
+      "config": {
+        "files": 1,
+        "logical_bytes": 738,
+        "allocated_bytes": 4096
+      },
+      "description": {
+        "files": 1,
+        "logical_bytes": 73,
+        "allocated_bytes": 0
+      },
+      "FETCH_HEAD": {
+        "files": 1,
+        "logical_bytes": 234,
+        "allocated_bytes": 0
+      },
+      "HEAD": {
+        "files": 1,
+        "logical_bytes": 21,
+        "allocated_bytes": 0
+      },
+      "index": {
+        "files": 1,
+        "logical_bytes": 28867,
+        "allocated_bytes": 32768
+      },
+      "ORIG_HEAD": {
+        "files": 1,
+        "logical_bytes": 41,
+        "allocated_bytes": 0
+      },
+      "packed-refs": {
+        "files": 1,
+        "logical_bytes": 2507,
+        "allocated_bytes": 4096
+      },
+      "gk/config": {
+        "files": 1,
+        "logical_bytes": 61,
+        "allocated_bytes": 0
+      },
+      "hooks/applypatch-msg.sample": {
+        "files": 1,
+        "logical_bytes": 478,
+        "allocated_bytes": 0
+      },
+      "hooks/commit-msg.sample": {
+        "files": 1,
+        "logical_bytes": 896,
+        "allocated_bytes": 4096
+      },
+      "hooks/fsmonitor-watchman.sample": {
+        "files": 1,
+        "logical_bytes": 4726,
+        "allocated_bytes": 8192
+      },
+      "hooks/post-checkout": {
+        "files": 1,
+        "logical_bytes": 282,
+        "allocated_bytes": 0
+      },
+      "hooks/post-commit": {
+        "files": 1,
+        "logical_bytes": 278,
+        "allocated_bytes": 0
+      },
+      "hooks/post-merge": {
+        "files": 1,
+        "logical_bytes": 276,
+        "allocated_bytes": 0
+      },
+      "hooks/post-update.sample": {
+        "files": 1,
+        "logical_bytes": 189,
+        "allocated_bytes": 0
+      },
+      "hooks/pre-applypatch.sample": {
+        "files": 1,
+        "logical_bytes": 424,
+        "allocated_bytes": 0
+      },
+      "hooks/pre-commit.sample": {
+        "files": 1,
+        "logical_bytes": 1649,
+        "allocated_bytes": 4096
+      },
+      "hooks/pre-merge-commit.sample": {
+        "files": 1,
+        "logical_bytes": 416,
+        "allocated_bytes": 0
+      },
+      "hooks/pre-push": {
+        "files": 1,
+        "logical_bytes": 272,
+        "allocated_bytes": 0
+      },
+      "hooks/pre-push.sample": {
+        "files": 1,
+        "logical_bytes": 1374,
+        "allocated_bytes": 4096
+      },
+      "hooks/pre-rebase.sample": {
+        "files": 1,
+        "logical_bytes": 4898,
+        "allocated_bytes": 8192
+      },
+      "hooks/pre-receive.sample": {
+        "files": 1,
+        "logical_bytes": 544,
+        "allocated_bytes": 0
+      },
+      "hooks/prepare-commit-msg.sample": {
+        "files": 1,
+        "logical_bytes": 1492,
+        "allocated_bytes": 4096
+      },
+      "hooks/push-to-checkout.sample": {
+        "files": 1,
+        "logical_bytes": 2783,
+        "allocated_bytes": 4096
+      },
+      "hooks/sendemail-validate.sample": {
+        "files": 1,
+        "logical_bytes": 2308,
+        "allocated_bytes": 4096
+      },
+      "hooks/update.sample": {
+        "files": 1,
+        "logical_bytes": 3650,
+        "allocated_bytes": 4096
+      },
+      "info/exclude": {
+        "files": 1,
+        "logical_bytes": 240,
+        "allocated_bytes": 0
+      },
+      "info/refs": {
+        "files": 1,
+        "logical_bytes": 4703,
+        "allocated_bytes": 8192
+      },
+      "lfs/cache": {
+        "files": 1,
+        "logical_bytes": 24,
+        "allocated_bytes": 0
+      },
+      "logs/HEAD": {
+        "files": 1,
+        "logical_bytes": 4923,
+        "allocated_bytes": 8192
+      },
+      "logs/refs": {
+        "files": 20,
+        "logical_bytes": 173337,
+        "allocated_bytes": 188416
+      },
+      "objects/00": {
+        "files": 48,
+        "logical_bytes": 52816,
+        "allocated_bytes": 143360
+      },
+      "objects/01": {
+        "files": 57,
+        "logical_bytes": 609626,
+        "allocated_bytes": 679936
+      },
+      "objects/02": {
+        "files": 74,
+        "logical_bytes": 242590,
+        "allocated_bytes": 380928
+      },
+      "objects/03": {
+        "files": 49,
+        "logical_bytes": 74840,
+        "allocated_bytes": 172032
+      },
+      "objects/04": {
+        "files": 68,
+        "logical_bytes": 3418343,
+        "allocated_bytes": 3538944
+      },
+      "objects/05": {
+        "files": 61,
+        "logical_bytes": 1685387,
+        "allocated_bytes": 1789952
+      },
+      "objects/06": {
+        "files": 44,
+        "logical_bytes": 106519,
+        "allocated_bytes": 176128
+      },
+      "objects/07": {
+        "files": 62,
+        "logical_bytes": 94089,
+        "allocated_bytes": 217088
+      },
+      "objects/08": {
+        "files": 50,
+        "logical_bytes": 243403,
+        "allocated_bytes": 315392
+      },
+      "objects/09": {
+        "files": 59,
+        "logical_bytes": 569438,
+        "allocated_bytes": 647168
+      },
+      "objects/0a": {
+        "files": 45,
+        "logical_bytes": 547991,
+        "allocated_bytes": 622592
+      },
+      "objects/0b": {
+        "files": 52,
+        "logical_bytes": 496146,
+        "allocated_bytes": 581632
+      },
+      "objects/0c": {
+        "files": 57,
+        "logical_bytes": 66389,
+        "allocated_bytes": 159744
+      },
+      "objects/0d": {
+        "files": 53,
+        "logical_bytes": 1529529,
+        "allocated_bytes": 1605632
+      },
+      "objects/0e": {
+        "files": 42,
+        "logical_bytes": 100345,
+        "allocated_bytes": 167936
+      },
+      "objects/0f": {
+        "files": 61,
+        "logical_bytes": 98384,
+        "allocated_bytes": 192512
+      },
+      "objects/10": {
+        "files": 57,
+        "logical_bytes": 4823654,
+        "allocated_bytes": 4927488
+      },
+      "objects/11": {
+        "files": 59,
+        "logical_bytes": 354863,
+        "allocated_bytes": 442368
+      },
+      "objects/12": {
+        "files": 55,
+        "logical_bytes": 227123,
+        "allocated_bytes": 315392
+      },
+      "objects/13": {
+        "files": 69,
+        "logical_bytes": 1099936,
+        "allocated_bytes": 1204224
+      },
+      "objects/14": {
+        "files": 61,
+        "logical_bytes": 860368,
+        "allocated_bytes": 966656
+      },
+      "objects/15": {
+        "files": 61,
+        "logical_bytes": 887741,
+        "allocated_bytes": 991232
+      },
+      "objects/16": {
+        "files": 47,
+        "logical_bytes": 68381,
+        "allocated_bytes": 159744
+      },
+      "objects/17": {
+        "files": 38,
+        "logical_bytes": 39123,
+        "allocated_bytes": 106496
+      },
+      "objects/18": {
+        "files": 60,
+        "logical_bytes": 104430,
+        "allocated_bytes": 204800
+      },
+      "objects/19": {
+        "files": 48,
+        "logical_bytes": 933577,
+        "allocated_bytes": 1024000
+      },
+      "objects/1a": {
+        "files": 61,
+        "logical_bytes": 259759,
+        "allocated_bytes": 372736
+      },
+      "objects/1b": {
+        "files": 64,
+        "logical_bytes": 9421411,
+        "allocated_bytes": 9535488
+      },
+      "objects/1c": {
+        "files": 68,
+        "logical_bytes": 308244,
+        "allocated_bytes": 425984
+      },
+      "objects/1d": {
+        "files": 68,
+        "logical_bytes": 150944,
+        "allocated_bytes": 262144
+      },
+      "objects/1e": {
+        "files": 32,
+        "logical_bytes": 1451726,
+        "allocated_bytes": 1511424
+      },
+      "objects/1f": {
+        "files": 43,
+        "logical_bytes": 313510,
+        "allocated_bytes": 401408
+      },
+      "objects/20": {
+        "files": 58,
+        "logical_bytes": 1016731,
+        "allocated_bytes": 1126400
+      },
+      "objects/21": {
+        "files": 42,
+        "logical_bytes": 3533449,
+        "allocated_bytes": 3596288
+      },
+      "objects/22": {
+        "files": 50,
+        "logical_bytes": 273136,
+        "allocated_bytes": 348160
+      },
+      "objects/23": {
+        "files": 69,
+        "logical_bytes": 1194001,
+        "allocated_bytes": 1323008
+      },
+      "objects/24": {
+        "files": 58,
+        "logical_bytes": 139289,
+        "allocated_bytes": 237568
+      },
+      "objects/25": {
+        "files": 56,
+        "logical_bytes": 2357909,
+        "allocated_bytes": 2449408
+      },
+      "objects/26": {
+        "files": 74,
+        "logical_bytes": 167455,
+        "allocated_bytes": 274432
+      },
+      "objects/27": {
+        "files": 59,
+        "logical_bytes": 101909,
+        "allocated_bytes": 200704
+      },
+      "objects/28": {
+        "files": 48,
+        "logical_bytes": 215172,
+        "allocated_bytes": 307200
+      },
+      "objects/29": {
+        "files": 41,
+        "logical_bytes": 88243,
+        "allocated_bytes": 176128
+      },
+      "objects/2a": {
+        "files": 52,
+        "logical_bytes": 63056,
+        "allocated_bytes": 147456
+      },
+      "objects/2b": {
+        "files": 40,
+        "logical_bytes": 1247543,
+        "allocated_bytes": 1310720
+      },
+      "objects/2c": {
+        "files": 47,
+        "logical_bytes": 55659,
+        "allocated_bytes": 135168
+      },
+      "objects/2d": {
+        "files": 57,
+        "logical_bytes": 243221,
+        "allocated_bytes": 344064
+      },
+      "objects/2e": {
+        "files": 67,
+        "logical_bytes": 649480,
+        "allocated_bytes": 782336
+      },
+      "objects/2f": {
+        "files": 65,
+        "logical_bytes": 88742,
+        "allocated_bytes": 184320
+      },
+      "objects/30": {
+        "files": 58,
+        "logical_bytes": 201465,
+        "allocated_bytes": 303104
+      },
+      "objects/31": {
+        "files": 48,
+        "logical_bytes": 822946,
+        "allocated_bytes": 884736
+      },
+      "objects/32": {
+        "files": 63,
+        "logical_bytes": 216984,
+        "allocated_bytes": 323584
+      },
+      "objects/33": {
+        "files": 61,
+        "logical_bytes": 257228,
+        "allocated_bytes": 356352
+      },
+      "objects/34": {
+        "files": 46,
+        "logical_bytes": 3569342,
+        "allocated_bytes": 3649536
+      },
+      "objects/35": {
+        "files": 63,
+        "logical_bytes": 336386,
+        "allocated_bytes": 454656
+      },
+      "objects/36": {
+        "files": 56,
+        "logical_bytes": 457078,
+        "allocated_bytes": 544768
+      },
+      "objects/37": {
+        "files": 48,
+        "logical_bytes": 204553,
+        "allocated_bytes": 274432
+      },
+      "objects/38": {
+        "files": 52,
+        "logical_bytes": 451621,
+        "allocated_bytes": 516096
+      },
+      "objects/39": {
+        "files": 57,
+        "logical_bytes": 5985671,
+        "allocated_bytes": 6078464
+      },
+      "objects/3a": {
+        "files": 45,
+        "logical_bytes": 1931954,
+        "allocated_bytes": 2007040
+      },
+      "objects/3b": {
+        "files": 55,
+        "logical_bytes": 867761,
+        "allocated_bytes": 970752
+      },
+      "objects/3c": {
+        "files": 68,
+        "logical_bytes": 127735,
+        "allocated_bytes": 241664
+      },
+      "objects/3d": {
+        "files": 55,
+        "logical_bytes": 1634940,
+        "allocated_bytes": 1728512
+      },
+      "objects/3e": {
+        "files": 57,
+        "logical_bytes": 2405358,
+        "allocated_bytes": 2494464
+      },
+      "objects/3f": {
+        "files": 43,
+        "logical_bytes": 789095,
+        "allocated_bytes": 868352
+      },
+      "objects/40": {
+        "files": 53,
+        "logical_bytes": 151835,
+        "allocated_bytes": 233472
+      },
+      "objects/41": {
+        "files": 66,
+        "logical_bytes": 111269,
+        "allocated_bytes": 225280
+      },
+      "objects/42": {
+        "files": 52,
+        "logical_bytes": 124576,
+        "allocated_bytes": 217088
+      },
+      "objects/43": {
+        "files": 54,
+        "logical_bytes": 113508,
+        "allocated_bytes": 204800
+      },
+      "objects/44": {
+        "files": 53,
+        "logical_bytes": 2403893,
+        "allocated_bytes": 2498560
+      },
+      "objects/45": {
+        "files": 46,
+        "logical_bytes": 435381,
+        "allocated_bytes": 520192
+      },
+      "objects/46": {
+        "files": 55,
+        "logical_bytes": 79937,
+        "allocated_bytes": 167936
+      },
+      "objects/47": {
+        "files": 57,
+        "logical_bytes": 280833,
+        "allocated_bytes": 372736
+      },
+      "objects/48": {
+        "files": 58,
+        "logical_bytes": 7322937,
+        "allocated_bytes": 7413760
+      },
+      "objects/49": {
+        "files": 57,
+        "logical_bytes": 402652,
+        "allocated_bytes": 503808
+      },
+      "objects/4a": {
+        "files": 51,
+        "logical_bytes": 64223,
+        "allocated_bytes": 163840
+      },
+      "objects/4b": {
+        "files": 74,
+        "logical_bytes": 1351115,
+        "allocated_bytes": 1486848
+      },
+      "objects/4c": {
+        "files": 52,
+        "logical_bytes": 131062,
+        "allocated_bytes": 208896
+      },
+      "objects/4d": {
+        "files": 55,
+        "logical_bytes": 1128192,
+        "allocated_bytes": 1232896
+      },
+      "objects/4e": {
+        "files": 65,
+        "logical_bytes": 2385000,
+        "allocated_bytes": 2514944
+      },
+      "objects/4f": {
+        "files": 73,
+        "logical_bytes": 141911,
+        "allocated_bytes": 258048
+      },
+      "objects/50": {
+        "files": 59,
+        "logical_bytes": 99249,
+        "allocated_bytes": 188416
+      },
+      "objects/51": {
+        "files": 62,
+        "logical_bytes": 309345,
+        "allocated_bytes": 401408
+      },
+      "objects/52": {
+        "files": 56,
+        "logical_bytes": 2837355,
+        "allocated_bytes": 2949120
+      },
+      "objects/53": {
+        "files": 63,
+        "logical_bytes": 1592515,
+        "allocated_bytes": 1703936
+      },
+      "objects/54": {
+        "files": 57,
+        "logical_bytes": 605520,
+        "allocated_bytes": 720896
+      },
+      "objects/55": {
+        "files": 46,
+        "logical_bytes": 1192765,
+        "allocated_bytes": 1265664
+      },
+      "objects/56": {
+        "files": 55,
+        "logical_bytes": 2499956,
+        "allocated_bytes": 2588672
+      },
+      "objects/57": {
+        "files": 52,
+        "logical_bytes": 527802,
+        "allocated_bytes": 593920
+      },
+      "objects/58": {
+        "files": 59,
+        "logical_bytes": 1434307,
+        "allocated_bytes": 1531904
+      },
+      "objects/59": {
+        "files": 43,
+        "logical_bytes": 737016,
+        "allocated_bytes": 798720
+      },
+      "objects/5a": {
+        "files": 59,
+        "logical_bytes": 102891,
+        "allocated_bytes": 204800
+      },
+      "objects/5b": {
+        "files": 51,
+        "logical_bytes": 959647,
+        "allocated_bytes": 1040384
+      },
+      "objects/5c": {
+        "files": 77,
+        "logical_bytes": 566755,
+        "allocated_bytes": 692224
+      },
+      "objects/5d": {
+        "files": 70,
+        "logical_bytes": 7077580,
+        "allocated_bytes": 7192576
+      },
+      "objects/5e": {
+        "files": 60,
+        "logical_bytes": 1633173,
+        "allocated_bytes": 1744896
+      },
+      "objects/5f": {
+        "files": 53,
+        "logical_bytes": 65549,
+        "allocated_bytes": 151552
+      },
+      "objects/60": {
+        "files": 61,
+        "logical_bytes": 2547866,
+        "allocated_bytes": 2633728
+      },
+      "objects/61": {
+        "files": 46,
+        "logical_bytes": 287053,
+        "allocated_bytes": 356352
+      },
+      "objects/62": {
+        "files": 72,
+        "logical_bytes": 181916,
+        "allocated_bytes": 307200
+      },
+      "objects/63": {
+        "files": 58,
+        "logical_bytes": 400892,
+        "allocated_bytes": 503808
+      },
+      "objects/64": {
+        "files": 48,
+        "logical_bytes": 95422,
+        "allocated_bytes": 159744
+      },
+      "objects/65": {
+        "files": 68,
+        "logical_bytes": 180966,
+        "allocated_bytes": 286720
+      },
+      "objects/66": {
+        "files": 40,
+        "logical_bytes": 1724837,
+        "allocated_bytes": 1798144
+      },
+      "objects/67": {
+        "files": 76,
+        "logical_bytes": 2273345,
+        "allocated_bytes": 2408448
+      },
+      "objects/68": {
+        "files": 59,
+        "logical_bytes": 1167937,
+        "allocated_bytes": 1269760
+      },
+      "objects/69": {
+        "files": 58,
+        "logical_bytes": 329179,
+        "allocated_bytes": 430080
+      },
+      "objects/6a": {
+        "files": 72,
+        "logical_bytes": 132689,
+        "allocated_bytes": 241664
+      },
+      "objects/6b": {
+        "files": 52,
+        "logical_bytes": 187232,
+        "allocated_bytes": 290816
+      },
+      "objects/6c": {
+        "files": 59,
+        "logical_bytes": 237132,
+        "allocated_bytes": 319488
+      },
+      "objects/6d": {
+        "files": 53,
+        "logical_bytes": 195648,
+        "allocated_bytes": 286720
+      },
+      "objects/6e": {
+        "files": 60,
+        "logical_bytes": 83935,
+        "allocated_bytes": 196608
+      },
+      "objects/6f": {
+        "files": 48,
+        "logical_bytes": 113214,
+        "allocated_bytes": 204800
+      },
+      "objects/70": {
+        "files": 55,
+        "logical_bytes": 254397,
+        "allocated_bytes": 348160
+      },
+      "objects/71": {
+        "files": 68,
+        "logical_bytes": 1774983,
+        "allocated_bytes": 1880064
+      },
+      "objects/72": {
+        "files": 62,
+        "logical_bytes": 885083,
+        "allocated_bytes": 1011712
+      },
+      "objects/73": {
+        "files": 66,
+        "logical_bytes": 1833927,
+        "allocated_bytes": 1925120
+      },
+      "objects/74": {
+        "files": 71,
+        "logical_bytes": 141893,
+        "allocated_bytes": 245760
+      },
+      "objects/75": {
+        "files": 65,
+        "logical_bytes": 333939,
+        "allocated_bytes": 462848
+      },
+      "objects/76": {
+        "files": 51,
+        "logical_bytes": 1676784,
+        "allocated_bytes": 1765376
+      },
+      "objects/77": {
+        "files": 60,
+        "logical_bytes": 8958475,
+        "allocated_bytes": 9056256
+      },
+      "objects/78": {
+        "files": 56,
+        "logical_bytes": 108627,
+        "allocated_bytes": 184320
+      },
+      "objects/79": {
+        "files": 55,
+        "logical_bytes": 78879,
+        "allocated_bytes": 176128
+      },
+      "objects/7a": {
+        "files": 58,
+        "logical_bytes": 305412,
+        "allocated_bytes": 397312
+      },
+      "objects/7b": {
+        "files": 60,
+        "logical_bytes": 2802493,
+        "allocated_bytes": 2904064
+      },
+      "objects/7c": {
+        "files": 61,
+        "logical_bytes": 2802338,
+        "allocated_bytes": 2904064
+      },
+      "objects/7d": {
+        "files": 59,
+        "logical_bytes": 567535,
+        "allocated_bytes": 655360
+      },
+      "objects/7e": {
+        "files": 60,
+        "logical_bytes": 852617,
+        "allocated_bytes": 958464
+      },
+      "objects/7f": {
+        "files": 50,
+        "logical_bytes": 277079,
+        "allocated_bytes": 339968
+      },
+      "objects/80": {
+        "files": 49,
+        "logical_bytes": 3231427,
+        "allocated_bytes": 3297280
+      },
+      "objects/81": {
+        "files": 55,
+        "logical_bytes": 227798,
+        "allocated_bytes": 319488
+      },
+      "objects/82": {
+        "files": 54,
+        "logical_bytes": 109964,
+        "allocated_bytes": 212992
+      },
+      "objects/83": {
+        "files": 50,
+        "logical_bytes": 836649,
+        "allocated_bytes": 929792
+      },
+      "objects/84": {
+        "files": 51,
+        "logical_bytes": 1208344,
+        "allocated_bytes": 1323008
+      },
+      "objects/85": {
+        "files": 54,
+        "logical_bytes": 91054,
+        "allocated_bytes": 163840
+      },
+      "objects/86": {
+        "files": 55,
+        "logical_bytes": 880814,
+        "allocated_bytes": 983040
+      },
+      "objects/87": {
+        "files": 56,
+        "logical_bytes": 274602,
+        "allocated_bytes": 376832
+      },
+      "objects/88": {
+        "files": 46,
+        "logical_bytes": 841816,
+        "allocated_bytes": 921600
+      },
+      "objects/89": {
+        "files": 53,
+        "logical_bytes": 1285211,
+        "allocated_bytes": 1376256
+      },
+      "objects/8a": {
+        "files": 48,
+        "logical_bytes": 570834,
+        "allocated_bytes": 651264
+      },
+      "objects/8b": {
+        "files": 56,
+        "logical_bytes": 199344,
+        "allocated_bytes": 299008
+      },
+      "objects/8c": {
+        "files": 44,
+        "logical_bytes": 903888,
+        "allocated_bytes": 987136
+      },
+      "objects/8d": {
+        "files": 53,
+        "logical_bytes": 920001,
+        "allocated_bytes": 1007616
+      },
+      "objects/8e": {
+        "files": 48,
+        "logical_bytes": 1591116,
+        "allocated_bytes": 1675264
+      },
+      "objects/8f": {
+        "files": 66,
+        "logical_bytes": 203394,
+        "allocated_bytes": 307200
+      },
+      "objects/90": {
+        "files": 55,
+        "logical_bytes": 1688351,
+        "allocated_bytes": 1798144
+      },
+      "objects/91": {
+        "files": 69,
+        "logical_bytes": 416093,
+        "allocated_bytes": 548864
+      },
+      "objects/92": {
+        "files": 51,
+        "logical_bytes": 5760640,
+        "allocated_bytes": 5853184
+      },
+      "objects/93": {
+        "files": 52,
+        "logical_bytes": 93054,
+        "allocated_bytes": 167936
+      },
+      "objects/94": {
+        "files": 52,
+        "logical_bytes": 4422355,
+        "allocated_bytes": 4517888
+      },
+      "objects/95": {
+        "files": 41,
+        "logical_bytes": 77057,
+        "allocated_bytes": 155648
+      },
+      "objects/96": {
+        "files": 57,
+        "logical_bytes": 126211,
+        "allocated_bytes": 237568
+      },
+      "objects/97": {
+        "files": 62,
+        "logical_bytes": 686956,
+        "allocated_bytes": 790528
+      },
+      "objects/98": {
+        "files": 63,
+        "logical_bytes": 866967,
+        "allocated_bytes": 966656
+      },
+      "objects/99": {
+        "files": 51,
+        "logical_bytes": 1176590,
+        "allocated_bytes": 1282048
+      },
+      "objects/9a": {
+        "files": 50,
+        "logical_bytes": 234433,
+        "allocated_bytes": 327680
+      },
+      "objects/9b": {
+        "files": 64,
+        "logical_bytes": 3378546,
+        "allocated_bytes": 3481600
+      },
+      "objects/9c": {
+        "files": 54,
+        "logical_bytes": 887878,
+        "allocated_bytes": 995328
+      },
+      "objects/9d": {
+        "files": 50,
+        "logical_bytes": 55663,
+        "allocated_bytes": 135168
+      },
+      "objects/9e": {
+        "files": 53,
+        "logical_bytes": 208876,
+        "allocated_bytes": 282624
+      },
+      "objects/9f": {
+        "files": 50,
+        "logical_bytes": 112023,
+        "allocated_bytes": 200704
+      },
+      "objects/a0": {
+        "files": 52,
+        "logical_bytes": 311737,
+        "allocated_bytes": 393216
+      },
+      "objects/a1": {
+        "files": 58,
+        "logical_bytes": 4886232,
+        "allocated_bytes": 4988928
+      },
+      "objects/a2": {
+        "files": 63,
+        "logical_bytes": 1438948,
+        "allocated_bytes": 1523712
+      },
+      "objects/a3": {
+        "files": 62,
+        "logical_bytes": 2918889,
+        "allocated_bytes": 3022848
+      },
+      "objects/a4": {
+        "files": 54,
+        "logical_bytes": 2321561,
+        "allocated_bytes": 2424832
+      },
+      "objects/a5": {
+        "files": 52,
+        "logical_bytes": 196352,
+        "allocated_bytes": 286720
+      },
+      "objects/a6": {
+        "files": 63,
+        "logical_bytes": 1893844,
+        "allocated_bytes": 1974272
+      },
+      "objects/a7": {
+        "files": 55,
+        "logical_bytes": 94756,
+        "allocated_bytes": 188416
+      },
+      "objects/a8": {
+        "files": 61,
+        "logical_bytes": 94986,
+        "allocated_bytes": 204800
+      },
+      "objects/a9": {
+        "files": 66,
+        "logical_bytes": 459135,
+        "allocated_bytes": 569344
+      },
+      "objects/aa": {
+        "files": 51,
+        "logical_bytes": 646935,
+        "allocated_bytes": 720896
+      },
+      "objects/ab": {
+        "files": 47,
+        "logical_bytes": 75361,
+        "allocated_bytes": 147456
+      },
+      "objects/ac": {
+        "files": 48,
+        "logical_bytes": 1375901,
+        "allocated_bytes": 1445888
+      },
+      "objects/ad": {
+        "files": 57,
+        "logical_bytes": 337438,
+        "allocated_bytes": 450560
+      },
+      "objects/ae": {
+        "files": 51,
+        "logical_bytes": 265362,
+        "allocated_bytes": 356352
+      },
+      "objects/af": {
+        "files": 58,
+        "logical_bytes": 3435050,
+        "allocated_bytes": 3526656
+      },
+      "objects/b0": {
+        "files": 41,
+        "logical_bytes": 287801,
+        "allocated_bytes": 352256
+      },
+      "objects/b1": {
+        "files": 61,
+        "logical_bytes": 10515134,
+        "allocated_bytes": 10608640
+      },
+      "objects/b2": {
+        "files": 53,
+        "logical_bytes": 122789,
+        "allocated_bytes": 196608
+      },
+      "objects/b3": {
+        "files": 49,
+        "logical_bytes": 111360,
+        "allocated_bytes": 188416
+      },
+      "objects/b4": {
+        "files": 49,
+        "logical_bytes": 516921,
+        "allocated_bytes": 593920
+      },
+      "objects/b5": {
+        "files": 56,
+        "logical_bytes": 167411,
+        "allocated_bytes": 237568
+      },
+      "objects/b6": {
+        "files": 59,
+        "logical_bytes": 715030,
+        "allocated_bytes": 827392
+      },
+      "objects/b7": {
+        "files": 45,
+        "logical_bytes": 101407,
+        "allocated_bytes": 192512
+      },
+      "objects/b8": {
+        "files": 59,
+        "logical_bytes": 281577,
+        "allocated_bytes": 380928
+      },
+      "objects/b9": {
+        "files": 60,
+        "logical_bytes": 750484,
+        "allocated_bytes": 847872
+      },
+      "objects/ba": {
+        "files": 62,
+        "logical_bytes": 3778264,
+        "allocated_bytes": 3895296
+      },
+      "objects/bb": {
+        "files": 57,
+        "logical_bytes": 240617,
+        "allocated_bytes": 335872
+      },
+      "objects/bc": {
+        "files": 62,
+        "logical_bytes": 329543,
+        "allocated_bytes": 466944
+      },
+      "objects/bd": {
+        "files": 67,
+        "logical_bytes": 1576217,
+        "allocated_bytes": 1691648
+      },
+      "objects/be": {
+        "files": 50,
+        "logical_bytes": 111033,
+        "allocated_bytes": 184320
+      },
+      "objects/bf": {
+        "files": 58,
+        "logical_bytes": 394681,
+        "allocated_bytes": 491520
+      },
+      "objects/c0": {
+        "files": 62,
+        "logical_bytes": 486401,
+        "allocated_bytes": 585728
+      },
+      "objects/c1": {
+        "files": 49,
+        "logical_bytes": 93829,
+        "allocated_bytes": 184320
+      },
+      "objects/c2": {
+        "files": 77,
+        "logical_bytes": 314305,
+        "allocated_bytes": 417792
+      },
+      "objects/c3": {
+        "files": 44,
+        "logical_bytes": 2471477,
+        "allocated_bytes": 2560000
+      },
+      "objects/c4": {
+        "files": 64,
+        "logical_bytes": 2669574,
+        "allocated_bytes": 2781184
+      },
+      "objects/c5": {
+        "files": 69,
+        "logical_bytes": 674017,
+        "allocated_bytes": 811008
+      },
+      "objects/c6": {
+        "files": 57,
+        "logical_bytes": 855074,
+        "allocated_bytes": 954368
+      },
+      "objects/c7": {
+        "files": 62,
+        "logical_bytes": 139574,
+        "allocated_bytes": 245760
+      },
+      "objects/c8": {
+        "files": 53,
+        "logical_bytes": 2343184,
+        "allocated_bytes": 2441216
+      },
+      "objects/c9": {
+        "files": 52,
+        "logical_bytes": 503865,
+        "allocated_bytes": 569344
+      },
+      "objects/ca": {
+        "files": 64,
+        "logical_bytes": 1503671,
+        "allocated_bytes": 1609728
+      },
+      "objects/cb": {
+        "files": 65,
+        "logical_bytes": 709919,
+        "allocated_bytes": 823296
+      },
+      "objects/cc": {
+        "files": 50,
+        "logical_bytes": 1600634,
+        "allocated_bytes": 1683456
+      },
+      "objects/cd": {
+        "files": 57,
+        "logical_bytes": 900009,
+        "allocated_bytes": 987136
+      },
+      "objects/ce": {
+        "files": 64,
+        "logical_bytes": 298291,
+        "allocated_bytes": 413696
+      },
+      "objects/cf": {
+        "files": 66,
+        "logical_bytes": 302887,
+        "allocated_bytes": 442368
+      },
+      "objects/d0": {
+        "files": 50,
+        "logical_bytes": 1637884,
+        "allocated_bytes": 1699840
+      },
+      "objects/d1": {
+        "files": 66,
+        "logical_bytes": 2892920,
+        "allocated_bytes": 3026944
+      },
+      "objects/d2": {
+        "files": 55,
+        "logical_bytes": 179986,
+        "allocated_bytes": 282624
+      },
+      "objects/d3": {
+        "files": 39,
+        "logical_bytes": 60322,
+        "allocated_bytes": 143360
+      },
+      "objects/d4": {
+        "files": 42,
+        "logical_bytes": 64345,
+        "allocated_bytes": 147456
+      },
+      "objects/d5": {
+        "files": 57,
+        "logical_bytes": 1049078,
+        "allocated_bytes": 1146880
+      },
+      "objects/d6": {
+        "files": 51,
+        "logical_bytes": 80521,
+        "allocated_bytes": 180224
+      },
+      "objects/d7": {
+        "files": 54,
+        "logical_bytes": 777043,
+        "allocated_bytes": 864256
+      },
+      "objects/d8": {
+        "files": 47,
+        "logical_bytes": 1202403,
+        "allocated_bytes": 1253376
+      },
+      "objects/d9": {
+        "files": 64,
+        "logical_bytes": 1494418,
+        "allocated_bytes": 1589248
+      },
+      "objects/da": {
+        "files": 54,
+        "logical_bytes": 61638,
+        "allocated_bytes": 135168
+      },
+      "objects/db": {
+        "files": 46,
+        "logical_bytes": 4944862,
+        "allocated_bytes": 5025792
+      },
+      "objects/dc": {
+        "files": 65,
+        "logical_bytes": 301603,
+        "allocated_bytes": 380928
+      },
+      "objects/dd": {
+        "files": 55,
+        "logical_bytes": 456399,
+        "allocated_bytes": 548864
+      },
+      "objects/de": {
+        "files": 62,
+        "logical_bytes": 1790785,
+        "allocated_bytes": 1896448
+      },
+      "objects/df": {
+        "files": 63,
+        "logical_bytes": 166225,
+        "allocated_bytes": 262144
+      },
+      "objects/e0": {
+        "files": 64,
+        "logical_bytes": 538285,
+        "allocated_bytes": 663552
+      },
+      "objects/e1": {
+        "files": 64,
+        "logical_bytes": 1423284,
+        "allocated_bytes": 1523712
+      },
+      "objects/e2": {
+        "files": 60,
+        "logical_bytes": 306321,
+        "allocated_bytes": 425984
+      },
+      "objects/e3": {
+        "files": 60,
+        "logical_bytes": 902496,
+        "allocated_bytes": 1011712
+      },
+      "objects/e4": {
+        "files": 55,
+        "logical_bytes": 2562292,
+        "allocated_bytes": 2654208
+      },
+      "objects/e5": {
+        "files": 51,
+        "logical_bytes": 250603,
+        "allocated_bytes": 307200
+      },
+      "objects/e6": {
+        "files": 52,
+        "logical_bytes": 637341,
+        "allocated_bytes": 729088
+      },
+      "objects/e7": {
+        "files": 60,
+        "logical_bytes": 472627,
+        "allocated_bytes": 544768
+      },
+      "objects/e8": {
+        "files": 61,
+        "logical_bytes": 251244,
+        "allocated_bytes": 348160
+      },
+      "objects/e9": {
+        "files": 42,
+        "logical_bytes": 59761,
+        "allocated_bytes": 131072
+      },
+      "objects/ea": {
+        "files": 61,
+        "logical_bytes": 2055858,
+        "allocated_bytes": 2170880
+      },
+      "objects/eb": {
+        "files": 73,
+        "logical_bytes": 878743,
+        "allocated_bytes": 1007616
+      },
+      "objects/ec": {
+        "files": 60,
+        "logical_bytes": 119289,
+        "allocated_bytes": 225280
+      },
+      "objects/ed": {
+        "files": 49,
+        "logical_bytes": 157521,
+        "allocated_bytes": 237568
+      },
+      "objects/ee": {
+        "files": 50,
+        "logical_bytes": 225376,
+        "allocated_bytes": 315392
+      },
+      "objects/ef": {
+        "files": 53,
+        "logical_bytes": 84883,
+        "allocated_bytes": 172032
+      },
+      "objects/f0": {
+        "files": 56,
+        "logical_bytes": 124897,
+        "allocated_bytes": 225280
+      },
+      "objects/f1": {
+        "files": 65,
+        "logical_bytes": 4867716,
+        "allocated_bytes": 4976640
+      },
+      "objects/f2": {
+        "files": 53,
+        "logical_bytes": 2842459,
+        "allocated_bytes": 2940928
+      },
+      "objects/f3": {
+        "files": 69,
+        "logical_bytes": 104139,
+        "allocated_bytes": 204800
+      },
+      "objects/f4": {
+        "files": 47,
+        "logical_bytes": 84261,
+        "allocated_bytes": 163840
+      },
+      "objects/f5": {
+        "files": 36,
+        "logical_bytes": 49849,
+        "allocated_bytes": 122880
+      },
+      "objects/f6": {
+        "files": 50,
+        "logical_bytes": 69476,
+        "allocated_bytes": 131072
+      },
+      "objects/f7": {
+        "files": 42,
+        "logical_bytes": 305497,
+        "allocated_bytes": 368640
+      },
+      "objects/f8": {
+        "files": 59,
+        "logical_bytes": 1293211,
+        "allocated_bytes": 1380352
+      },
+      "objects/f9": {
+        "files": 44,
+        "logical_bytes": 40219,
+        "allocated_bytes": 94208
+      },
+      "objects/fa": {
+        "files": 50,
+        "logical_bytes": 409803,
+        "allocated_bytes": 516096
+      },
+      "objects/fb": {
+        "files": 54,
+        "logical_bytes": 221638,
+        "allocated_bytes": 307200
+      },
+      "objects/fc": {
+        "files": 51,
+        "logical_bytes": 72131,
+        "allocated_bytes": 159744
+      },
+      "objects/fd": {
+        "files": 51,
+        "logical_bytes": 1612982,
+        "allocated_bytes": 1716224
+      },
+      "objects/fe": {
+        "files": 66,
+        "logical_bytes": 721280,
+        "allocated_bytes": 827392
+      },
+      "objects/ff": {
+        "files": 48,
+        "logical_bytes": 95187,
+        "allocated_bytes": 167936
+      },
+      "objects/info": {
+        "files": 3,
+        "logical_bytes": 32813,
+        "allocated_bytes": 32768
+      },
+      "objects/pack": {
+        "files": 20,
+        "logical_bytes": 175756179,
+        "allocated_bytes": 175800320
+      },
+      "refs/codex": {
+        "files": 16,
+        "logical_bytes": 656,
+        "allocated_bytes": 0
+      },
+      "refs/heads": {
+        "files": 1,
+        "logical_bytes": 41,
+        "allocated_bytes": 0
+      },
+      "refs/remotes": {
+        "files": 1,
+        "logical_bytes": 30,
+        "allocated_bytes": 0
+      },
+      "worktrees/ai-sigma": {
+        "files": 8,
+        "logical_bytes": 229577,
+        "allocated_bytes": 233472
+      },
+      "worktrees/research-team": {
+        "files": 7,
+        "logical_bytes": 26047,
+        "allocated_bytes": 28672
+      },
+      "worktrees/scheduler": {
+        "files": 7,
+        "logical_bytes": 26048,
+        "allocated_bytes": 28672
+      },
+      "worktrees/webapp-presentation": {
+        "files": 9,
+        "logical_bytes": 26644,
+        "allocated_bytes": 32768
+      }
+    },
+    "allocated_bytes": 467386368,
+    "count_objects_v": "count: 14340\nsize: 284120\nin-pack: 9316\npacks: 6\nsize-pack: 171337\nprune-packable: 0\ngarbage: 1\nsize-garbage: 4\n",
+    "read_errors": []
+  },
+  "source_duplication": {
+    "scanned_small_research_source_files": 1742,
+    "exact_duplicate_groups": 124,
+    "redundant_source_logical_bytes": 2802178,
+    "representative_groups": [
+      {
+        "bytes_per_file": 27877,
+        "sha256": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+        "paths": [
+          "tools/ai-sigma-actual-boundary-repair/game.js",
+          "tools/ai-sigma-arena-matches/game.js",
+          "tools/ai-sigma-arena/game.js",
+          "tools/ai-sigma-continuation-matches/game.js",
+          "tools/ai-sigma-detached-ownership/game.js",
+          "tools/ai-sigma-fair-streaming/game.js",
+          "tools/ai-sigma-isolated-nn-cost/game.js",
+          "tools/ai-sigma-kernel-ownership/game.js",
+          "tools/ai-sigma-native-baseline/game.js",
+          "tools/ai-sigma-nn-schema-cost/game.js",
+          "tools/ai-sigma-nnue-feature-cost/game.js",
+          "tools/ai-sigma-ort-checkpoint/game.js",
+          "tools/ai-sigma-ort-cleanup-repair/game.js",
+          "tools/ai-sigma-ort-entry-continuation/game.js",
+          "tools/ai-sigma-ort-entry-final/game.js",
+          "tools/ai-sigma-ort-rematches/game.js",
+          "tools/ai-sigma-streaming-comparison32-plan/game.js",
+          "tools/ai-sigma-streaming-complete-clock/game.js",
+          "tools/ai-sigma-streaming-early-seal/game.js",
+          "tools/ai-sigma-streaming-entry-repair/game.js",
+          "tools/ai-sigma-streaming-matches/game.js",
+          "tools/ai-sigma-streaming-numeric-order/game.js",
+          "tools/ai-sigma-streaming-runtime-final/game.js",
+          "tools/ai-sigma-streaming-snapshot/game.js",
+          "tools/ai-sigma-streaming-startup-watchdog/game.js"
+        ],
+        "redundant_logical_bytes": 669048
+      },
+      {
+        "bytes_per_file": 19596,
+        "sha256": "0faec2f42d3a3364effa2ed725c34169ea3c8f79e6c5305f09e238850faa0106",
+        "paths": [
+          "tools/ai-sigma-continuation-matches/reference-worker.js",
+          "tools/ai-sigma-detached-ownership/reference-worker.js",
+          "tools/ai-sigma-fair-streaming/reference-worker.js",
+          "tools/ai-sigma-kernel-ownership/reference-worker.js",
+          "tools/ai-sigma-streaming-early-seal/reference-worker.js",
+          "tools/ai-sigma-streaming-snapshot/reference-worker.js"
+        ],
+        "redundant_logical_bytes": 97980
+      },
+      {
+        "bytes_per_file": 18394,
+        "sha256": "9fad536fcaaafb858bb588621a421fa71a62fe7339c97cdf13fbdea06aad6c44",
+        "paths": [
+          "tools/ai-sigma-c-factor-browser/baseline/src/lib.rs",
+          "tools/ai-sigma-c-factor-browser/c1/src/lib.rs",
+          "tools/ai-sigma-deep-node-comparison/baseline/src/lib.rs",
+          "tools/ai-sigma-ort-search/src/lib.rs",
+          "tools/ai-sigma-puct-factor/src/lib.rs"
+        ],
+        "redundant_logical_bytes": 73576
+      },
+      {
+        "bytes_per_file": 10154,
+        "sha256": "cbbaf766b1c64c2c609e079c92000589e6750946ee96e627b9217d21cd976070",
+        "paths": [
+          "tools/ai-sigma-continuation-matches/browser.cjs",
+          "tools/ai-sigma-detached-ownership/browser.cjs",
+          "tools/ai-sigma-kernel-ownership/browser.cjs",
+          "tools/ai-sigma-ort-checkpoint/browser.cjs",
+          "tools/ai-sigma-ort-cleanup-repair/browser.cjs",
+          "tools/ai-sigma-ort-entry-continuation/browser.cjs",
+          "tools/ai-sigma-ort-entry-final/browser.cjs",
+          "tools/ai-sigma-ort-rematches/browser.cjs"
+        ],
+        "redundant_logical_bytes": 71078
+      },
+      {
+        "bytes_per_file": 6267,
+        "sha256": "5447032ffa50109b5b0c24411eb3ed5e14bb9536c84c7cc6cfdc73fac5ffe32d",
+        "paths": [
+          "tools/ai-sigma-actual-boundary-repair/cleanup.cjs",
+          "tools/ai-sigma-fair-streaming/cleanup.cjs",
+          "tools/ai-sigma-isolated-nn-cost/cleanup.cjs",
+          "tools/ai-sigma-kernel-ownership/cleanup.cjs",
+          "tools/ai-sigma-nn-schema-cost/cleanup.cjs",
+          "tools/ai-sigma-streaming-complete-clock/cleanup.cjs",
+          "tools/ai-sigma-streaming-early-seal/cleanup.cjs",
+          "tools/ai-sigma-streaming-entry-repair/cleanup.cjs",
+          "tools/ai-sigma-streaming-numeric-order/cleanup.cjs",
+          "tools/ai-sigma-streaming-runtime-final/cleanup.cjs",
+          "tools/ai-sigma-streaming-snapshot/cleanup.cjs",
+          "tools/ai-sigma-streaming-startup-watchdog/cleanup.cjs"
+        ],
+        "redundant_logical_bytes": 68937
+      },
+      {
+        "bytes_per_file": 12350,
+        "sha256": "3b1340552a98e520068ac5c9e8f2fffaffc0831bf6eb0142f9cf9a059af5cf4a",
+        "paths": [
+          "tools/ai-sigma-c-factor-browser/baseline/src/research.rs",
+          "tools/ai-sigma-c-factor-browser/c1/src/research.rs",
+          "tools/ai-sigma-deep-node-comparison/baseline/src/research.rs",
+          "tools/ai-sigma-deep-node-comparison/trace/src/research.rs",
+          "tools/ai-sigma-ort-search/src/research.rs",
+          "tools/ai-sigma-puct-factor/src/research.rs"
+        ],
+        "redundant_logical_bytes": 61750
+      },
+      {
+        "bytes_per_file": 12026,
+        "sha256": "8625ab5f55019e958f8cbe84ea3034dbb7cb804acaf26063cb8639cfbe616e49",
+        "paths": [
+          "tools/ai-sigma-continuation-matches/entry-gate.cjs",
+          "tools/ai-sigma-detached-ownership/entry-gate.cjs",
+          "tools/ai-sigma-fair-streaming/entry-gate.cjs",
+          "tools/ai-sigma-kernel-ownership/entry-gate.cjs",
+          "tools/ai-sigma-streaming-early-seal/entry-gate.cjs",
+          "tools/ai-sigma-streaming-snapshot/entry-gate.cjs"
+        ],
+        "redundant_logical_bytes": 60130
+      },
+      {
+        "bytes_per_file": 2248,
+        "sha256": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+        "paths": [
+          "tools/ai-sigma-actual-boundary-repair/context.js",
+          "tools/ai-sigma-arena-matches/context.js",
+          "tools/ai-sigma-arena/context.js",
+          "tools/ai-sigma-continuation-matches/context.js",
+          "tools/ai-sigma-detached-ownership/context.js",
+          "tools/ai-sigma-fair-streaming/context.js",
+          "tools/ai-sigma-isolated-nn-cost/context.js",
+          "tools/ai-sigma-kernel-ownership/context.js",
+          "tools/ai-sigma-native-baseline/context.js",
+          "tools/ai-sigma-nn-schema-cost/context.js",
+          "tools/ai-sigma-nnue-feature-cost/context.js",
+          "tools/ai-sigma-ort-checkpoint/context.js",
+          "tools/ai-sigma-ort-cleanup-repair/context.js",
+          "tools/ai-sigma-ort-entry-continuation/context.js",
+          "tools/ai-sigma-ort-entry-final/context.js",
+          "tools/ai-sigma-ort-rematches/context.js",
+          "tools/ai-sigma-puct-factor/context.js",
+          "tools/ai-sigma-streaming-comparison32-plan/context.js",
+          "tools/ai-sigma-streaming-complete-clock/context.js",
+          "tools/ai-sigma-streaming-early-seal/context.js",
+          "tools/ai-sigma-streaming-entry-repair/context.js",
+          "tools/ai-sigma-streaming-matches/context.js",
+          "tools/ai-sigma-streaming-numeric-order/context.js",
+          "tools/ai-sigma-streaming-runtime-final/context.js",
+          "tools/ai-sigma-streaming-snapshot/context.js",
+          "tools/ai-sigma-streaming-startup-watchdog/context.js",
+          "tools/ai-sigma-web-reference/context.js"
+        ],
+        "redundant_logical_bytes": 58448
+      },
+      {
+        "bytes_per_file": 18920,
+        "sha256": "060ad68a6c97ebdef2575c88eb9f79a30b1099fb58a00f8921ddd5ef55beae31",
+        "paths": [
+          "tools/ai-sigma-ort-cleanup-repair/reference-worker.js",
+          "tools/ai-sigma-ort-entry-continuation/reference-worker.js",
+          "tools/ai-sigma-ort-entry-final/reference-worker.js",
+          "tools/ai-sigma-ort-rematches/reference-worker.js"
+        ],
+        "redundant_logical_bytes": 56760
+      },
+      {
+        "bytes_per_file": 28218,
+        "sha256": "7d6873a7cab441bfe1bcf291e752da5cacfbe54bf55e5568d3112c930366c2cb",
+        "paths": [
+          "tools/ai-sigma-c-factor-browser/baseline/src/kernel.rs",
+          "tools/ai-sigma-deep-node-comparison/baseline/src/kernel.rs",
+          "tools/ai-sigma-ort-search/src/kernel.rs"
+        ],
+        "redundant_logical_bytes": 56436
+      },
+      {
+        "bytes_per_file": 5928,
+        "sha256": "ea3525b13cbbabd0390058e8288704f25790459c748c5ef3e35312440b50b22c",
+        "paths": [
+          "tools/ai-sigma-continuation-matches/mock.cjs",
+          "tools/ai-sigma-detached-ownership/mock.cjs",
+          "tools/ai-sigma-fair-streaming/mock.cjs",
+          "tools/ai-sigma-kernel-ownership/mock.cjs",
+          "tools/ai-sigma-ort-cleanup-repair/mock.cjs",
+          "tools/ai-sigma-ort-entry-continuation/mock.cjs",
+          "tools/ai-sigma-ort-entry-final/mock.cjs",
+          "tools/ai-sigma-streaming-early-seal/mock.cjs",
+          "tools/ai-sigma-streaming-snapshot/mock.cjs"
+        ],
+        "redundant_logical_bytes": 47424
+      },
+      {
+        "bytes_per_file": 6703,
+        "sha256": "748fe01dfebf5e524465ef69255acf0026154188b9002a5338ca790ca092e7f7",
+        "paths": [
+          "tools/ai-sigma-actual-boundary-repair/early-cache.cjs",
+          "tools/ai-sigma-fair-streaming/early-cache.cjs",
+          "tools/ai-sigma-streaming-complete-clock/early-cache.cjs",
+          "tools/ai-sigma-streaming-entry-repair/early-cache.cjs",
+          "tools/ai-sigma-streaming-matches/source65-early-cache.cjs",
+          "tools/ai-sigma-streaming-numeric-order/early-cache.cjs",
+          "tools/ai-sigma-streaming-runtime-final/early-cache.cjs",
+          "tools/ai-sigma-streaming-startup-watchdog/early-cache.cjs"
+        ],
+        "redundant_logical_bytes": 46921
+      },
+      {
+        "bytes_per_file": 5835,
+        "sha256": "e8f858b2d41605b8ae8e699aaa4a5ae43d2d7c2f4eb6c7c061f194bf355a9361",
+        "paths": [
+          "tools/ai-sigma-actual-boundary-repair/checkpoint.js",
+          "tools/ai-sigma-fair-streaming/checkpoint.js",
+          "tools/ai-sigma-streaming-complete-clock/checkpoint.js",
+          "tools/ai-sigma-streaming-early-seal/checkpoint.js",
+          "tools/ai-sigma-streaming-entry-repair/checkpoint.js",
+          "tools/ai-sigma-streaming-numeric-order/checkpoint.js",
+          "tools/ai-sigma-streaming-runtime-final/checkpoint.js",
+          "tools/ai-sigma-streaming-snapshot/checkpoint.js",
+          "tools/ai-sigma-streaming-startup-watchdog/checkpoint.js"
+        ],
+        "redundant_logical_bytes": 46680
+      },
+      {
+        "bytes_per_file": 14091,
+        "sha256": "28029a212c4dbf01ccefef1702b5972e555b9b63609b9bfd54fcb0f59116949a",
+        "paths": [
+          "tools/ai-sigma-fair-streaming/arena.cjs",
+          "tools/ai-sigma-kernel-ownership/arena.cjs",
+          "tools/ai-sigma-streaming-early-seal/arena.cjs",
+          "tools/ai-sigma-streaming-snapshot/arena.cjs"
+        ],
+        "redundant_logical_bytes": 42273
+      },
+      {
+        "bytes_per_file": 4051,
+        "sha256": "052fdcf65312f7a69c4c4d1a6ae96426dba317a31614d2ded485053b878000b5",
+        "paths": [
+          "tools/ai-sigma-continuation-matches/verify.py",
+          "tools/ai-sigma-detached-ownership/verify.py",
+          "tools/ai-sigma-fair-streaming/verify.py",
+          "tools/ai-sigma-kernel-ownership/verify.py",
+          "tools/ai-sigma-ort-checkpoint/verify.py",
+          "tools/ai-sigma-ort-cleanup-repair/verify.py",
+          "tools/ai-sigma-ort-entry-continuation/verify.py",
+          "tools/ai-sigma-ort-entry-final/verify.py",
+          "tools/ai-sigma-ort-rematches/verify.py",
+          "tools/ai-sigma-streaming-early-seal/verify.py",
+          "tools/ai-sigma-streaming-snapshot/verify.py"
+        ],
+        "redundant_logical_bytes": 40510
+      },
+      {
+        "bytes_per_file": 5770,
+        "sha256": "50d29bb855da3846953125b37dcc895f8e47ced80686cb34e4c515bdcba05e20",
+        "paths": [
+          "tools/ai-sigma-continuation-matches/checkpoint.js",
+          "tools/ai-sigma-detached-ownership/checkpoint.js",
+          "tools/ai-sigma-kernel-ownership/checkpoint.js",
+          "tools/ai-sigma-ort-checkpoint/checkpoint.js",
+          "tools/ai-sigma-ort-cleanup-repair/checkpoint.js",
+          "tools/ai-sigma-ort-entry-continuation/checkpoint.js",
+          "tools/ai-sigma-ort-entry-final/checkpoint.js",
+          "tools/ai-sigma-ort-rematches/checkpoint.js"
+        ],
+        "redundant_logical_bytes": 40390
+      },
+      {
+        "bytes_per_file": 3788,
+        "sha256": "c245c9c0aaaea06e1b595fa0e670ef81e6f34a7e873106a3982ae8aba1e719c8",
+        "paths": [
+          "tools/ai-sigma-continuation-matches/worker.js",
+          "tools/ai-sigma-detached-ownership/worker.js",
+          "tools/ai-sigma-fair-streaming/worker.js",
+          "tools/ai-sigma-kernel-ownership/worker.js",
+          "tools/ai-sigma-ort-checkpoint/worker.js",
+          "tools/ai-sigma-ort-cleanup-repair/worker.js",
+          "tools/ai-sigma-ort-entry-continuation/worker.js",
+          "tools/ai-sigma-ort-entry-final/worker.js",
+          "tools/ai-sigma-ort-rematches/worker.js",
+          "tools/ai-sigma-streaming-early-seal/worker.js",
+          "tools/ai-sigma-streaming-snapshot/worker.js"
+        ],
+        "redundant_logical_bytes": 37880
+      },
+      {
+        "bytes_per_file": 5206,
+        "sha256": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05",
+        "paths": [
+          "tools/ai-sigma-actual-boundary-repair/reference-core.js",
+          "tools/ai-sigma-fair-streaming/reference-core.js",
+          "tools/ai-sigma-native-baseline/reference-core-browser-adapter.js",
+          "tools/ai-sigma-streaming-complete-clock/reference-core.js",
+          "tools/ai-sigma-streaming-entry-repair/reference-core.js",
+          "tools/ai-sigma-streaming-numeric-order/reference-core.js",
+          "tools/ai-sigma-streaming-runtime-final/reference-core.js",
+          "tools/ai-sigma-streaming-startup-watchdog/reference-core.js"
+        ],
+        "redundant_logical_bytes": 36442
+      },
+      {
+        "bytes_per_file": 3578,
+        "sha256": "54de62f22e7f6faf92467166718f114db9b13561da22f748b8c630747f50d1a8",
+        "paths": [
+          "tools/ai-sigma-continuation-matches/arena-integration.cjs",
+          "tools/ai-sigma-detached-ownership/arena-integration.cjs",
+          "tools/ai-sigma-fair-streaming/arena-integration.cjs",
+          "tools/ai-sigma-kernel-ownership/arena-integration.cjs",
+          "tools/ai-sigma-ort-checkpoint/arena-integration.cjs",
+          "tools/ai-sigma-ort-cleanup-repair/arena-integration.cjs",
+          "tools/ai-sigma-ort-entry-continuation/arena-integration.cjs",
+          "tools/ai-sigma-ort-entry-final/arena-integration.cjs",
+          "tools/ai-sigma-ort-rematches/arena-integration.cjs",
+          "tools/ai-sigma-streaming-early-seal/arena-integration.cjs",
+          "tools/ai-sigma-streaming-snapshot/arena-integration.cjs"
+        ],
+        "redundant_logical_bytes": 35780
+      },
+      {
+        "bytes_per_file": 4463,
+        "sha256": "214f735ae3586a3cdd9487d601cbe4eb7228353024952d05465d4a9f05dd580a",
+        "paths": [
+          "tools/ai-sigma-continuation-matches/final-gate.cjs",
+          "tools/ai-sigma-detached-ownership/final-gate.cjs",
+          "tools/ai-sigma-fair-streaming/final-gate.cjs",
+          "tools/ai-sigma-kernel-ownership/final-gate.cjs",
+          "tools/ai-sigma-ort-cleanup-repair/final-gate.cjs",
+          "tools/ai-sigma-ort-entry-continuation/final-gate.cjs",
+          "tools/ai-sigma-ort-entry-final/final-gate.cjs",
+          "tools/ai-sigma-streaming-early-seal/final-gate.cjs",
+          "tools/ai-sigma-streaming-snapshot/final-gate.cjs"
+        ],
+        "redundant_logical_bytes": 35704
+      }
+    ],
+    "excluded": "deps/build/target/node_modules, files >512KiB; no history-wide scan",
+    "deletion_eligibility_proven": false
+  },
+  "research_tool_directories": {
+    "ai-sigma-actual-boundary-repair": 50,
+    "ai-sigma-actual-driver-independent": 3,
+    "ai-sigma-arena": 13,
+    "ai-sigma-arena-matches": 25,
+    "ai-sigma-baseline-gap-frame10": 14,
+    "ai-sigma-browser-sab-independent": 5,
+    "ai-sigma-c-factor-browser": 17,
+    "ai-sigma-c-factor-independent": 8,
+    "ai-sigma-candidate-true-mean-fpu": 23,
+    "ai-sigma-comparison-information": 2,
+    "ai-sigma-completed-fpu": 11,
+    "ai-sigma-completed-fpu-independent": 9,
+    "ai-sigma-continuation-matches": 37,
+    "ai-sigma-cooperative-arena": 9,
+    "ai-sigma-cooperative-arena-independent": 9,
+    "ai-sigma-cooperative-clock-independent": 11,
+    "ai-sigma-cp-frame": 14,
+    "ai-sigma-cpu-concurrency": 12,
+    "ai-sigma-cpu-sigma-frame8": 10,
+    "ai-sigma-cpu-sigma-independent": 7,
+    "ai-sigma-critical-roles-v2": 3,
+    "ai-sigma-deep-discrimination": 3,
+    "ai-sigma-deep-node-comparison": 24,
+    "ai-sigma-deep-node-independent": 9,
+    "ai-sigma-detached-ownership": 43,
+    "ai-sigma-diagnostic-arena": 5,
+    "ai-sigma-diagnostic-arena-independent": 6,
+    "ai-sigma-distance-alpha-arena": 10,
+    "ai-sigma-distance-update-control": 7,
+    "ai-sigma-diverse-prefix": 13,
+    "ai-sigma-diverse-prefix-independent": 7,
+    "ai-sigma-experiment-policy": 3,
+    "ai-sigma-fair-streaming": 64,
+    "ai-sigma-fit-gap-analysis": 24,
+    "ai-sigma-fixed-cost-saved-independent": 3,
+    "ai-sigma-fixed-cycle": 11,
+    "ai-sigma-fixed-policy-cost": 15,
+    "ai-sigma-formal-clock": 4,
+    "ai-sigma-formal-ni-plan": 2,
+    "ai-sigma-frame10-gap-design": 4,
+    "ai-sigma-frame10-gap-sampling": 3,
+    "ai-sigma-frame14-distance-test": 10,
+    "ai-sigma-frame14-head-test": 9,
+    "ai-sigma-frame14-l2-test": 8,
+    "ai-sigma-frame14-teachers": 8,
+    "ai-sigma-frame18-data-learning": 22,
+    "ai-sigma-frame18-learning": 5,
+    "ai-sigma-frame18-native-connection": 9,
+    "ai-sigma-frame19-arena-diagnosis": 2,
+    "ai-sigma-frame19-distance-provenance": 2,
+    "ai-sigma-frame19-leaf-terminal": 13,
+    "ai-sigma-frame19-native-arena": 12,
+    "ai-sigma-frame19-node-context": 3,
+    "ai-sigma-frame19-paired-leaf-arena": 10,
+    "ai-sigma-frame20-distance-arena": 12,
+    "ai-sigma-frame20-distance-arena-independent": 4,
+    "ai-sigma-frame20-distance-provenance-repair": 2,
+    "ai-sigma-frame20-learning-effect": 12,
+    "ai-sigma-frame20-one-root-leaf": 4,
+    "ai-sigma-frame20-paired-independent": 4,
+    "ai-sigma-frame8-evaluation-plan": 2,
+    "ai-sigma-gpu-batch-provider": 10,
+    "ai-sigma-gpu-inference": 6,
+    "ai-sigma-inference-probe": 10,
+    "ai-sigma-inference-release": 13,
+    "ai-sigma-input-scale-control": 5,
+    "ai-sigma-isolated-nn-cost": 16,
+    "ai-sigma-kernel-ownership": 48,
+    "ai-sigma-learning-diagnostic": 11,
+    "ai-sigma-local-move-independent": 9,
+    "ai-sigma-local-move-quality": 12,
+    "ai-sigma-manygame-generation": 29,
+    "ai-sigma-manygame-plan": 2,
+    "ai-sigma-manygame-runtime-preparation": 16,
+    "ai-sigma-matched-policy-quality-choice": 2,
+    "ai-sigma-native-baseline": 41,
+    "ai-sigma-native-checkpoint-teacher": 20,
+    "ai-sigma-native-comparison-scope": 3,
+    "ai-sigma-native-games-independent": 6,
+    "ai-sigma-native-k800-time": 11,
+    "ai-sigma-native-ni-arena": 23,
+    "ai-sigma-native-route-choice": 2,
+    "ai-sigma-native-runtime-ready": 13,
+    "ai-sigma-native-stageA-independent": 7,
+    "ai-sigma-native-teacher-pipeline": 32,
+    "ai-sigma-next-information-choice": 2,
+    "ai-sigma-nn-schema-cost": 20,
+    "ai-sigma-nn-search": 21,
+    "ai-sigma-nnue-feature-cost": 10,
+    "ai-sigma-nnue-preliminary": 3,
+    "ai-sigma-nnue-qf1-prototype": 6,
+    "ai-sigma-ort-checkpoint": 21,
+    "ai-sigma-ort-cleanup-repair": 32,
+    "ai-sigma-ort-entry-continuation": 33,
+    "ai-sigma-ort-entry-final": 25,
+    "ai-sigma-ort-rematches": 22,
+    "ai-sigma-ort-search": 22,
+    "ai-sigma-player-workers": 8,
+    "ai-sigma-player-workers-independent": 6,
+    "ai-sigma-policy-factor-choice": 3,
+    "ai-sigma-puct-factor": 13,
+    "ai-sigma-pv-cpu-smoke": 4,
+    "ai-sigma-pv-pipeline-bootstrap": 2,
+    "ai-sigma-qf1-distance-residual": 10,
+    "ai-sigma-qf1-head-control": 10,
+    "ai-sigma-remaining-evidence-plan": 4,
+    "ai-sigma-root-factor-correct-n": 5,
+    "ai-sigma-same-input-budget": 9,
+    "ai-sigma-saved-nn46-independent": 2,
+    "ai-sigma-scheduler-deadline-update": 4,
+    "ai-sigma-scheduler-monitor-recovery": 5,
+    "ai-sigma-search-policy-differential": 3,
+    "ai-sigma-sigma-web-port": 20,
+    "ai-sigma-sigma-web-port-games-independent": 7,
+    "ai-sigma-sigma-web-port-saved-independent": 6,
+    "ai-sigma-streaming-comparison32-plan": 8,
+    "ai-sigma-streaming-complete-clock": 33,
+    "ai-sigma-streaming-early-seal": 58,
+    "ai-sigma-streaming-entry-repair": 36,
+    "ai-sigma-streaming-matches": 12,
+    "ai-sigma-streaming-numeric-order": 37,
+    "ai-sigma-streaming-runtime-final": 31,
+    "ai-sigma-streaming-snapshot": 52,
+    "ai-sigma-streaming-startup-watchdog": 40,
+    "ai-sigma-supervisor-read-guard": 3,
+    "ai-sigma-supervisor-role-review": 4,
+    "ai-sigma-tactical-evaluation": 9,
+    "ai-sigma-tactical-oracle": 3,
+    "ai-sigma-tactical-saved-independent": 5,
+    "ai-sigma-tail-transport": 13,
+    "ai-sigma-teacher-throughput": 54,
+    "ai-sigma-true-mean-fpu-saved-independent": 4,
+    "ai-sigma-value-game-diagnostic": 3,
+    "ai-sigma-value-lr-control": 3,
+    "ai-sigma-wallless-ai-sensitivity": 12,
+    "ai-sigma-wallless-label-independent": 8,
+    "ai-sigma-wallless-oracle": 8,
+    "ai-sigma-web-port-conformance": 3,
+    "ai-sigma-web-reference": 8,
+    "ai-sigma-webgpu-measure": 4,
+    "ai-sigma-worker-balance": 11,
+    "nnue-training": 23,
+    "research-team": 3,
+    "training": 3,
+    "webgpu-smoke": 9
+  }
+}
