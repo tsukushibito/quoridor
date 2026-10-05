@@ -1,0 +1,317 @@
+{
+  "task": "frame22-independent-data-planning-284-v1",
+  "schema": "data-scale-scenarios-v1",
+  "status": "PASS",
+  "basis": {
+    "families": 48,
+    "eligible_rows": 1720,
+    "eligible_rows_per_family": 35.833333333333336,
+    "train_rows_per_family": 36.888888888888886,
+    "observed_family_row_min": 15,
+    "observed_family_row_max": 80,
+    "physical_NN_per_family": 1908.3958333333333,
+    "physical_NN_per_row": 53.257558139534886,
+    "generation_guardian_s": 41.48473014798947,
+    "known_opening_cache_s_per_family": 1.0137185741053447,
+    "B_fit_guardian_s": 4.925750071997754,
+    "B_training_eval_samples": 328290,
+    "B_peak_RSS_B": 886513664,
+    "Arrow_bytes": 675376,
+    "cache_bytes": 5778862,
+    "cache_file_bytes": {
+      "cache.json": 648,
+      "distance.f32": 13760,
+      "labels.f32": 13760,
+      "rows.jsonl": 1457574,
+      "x.f32": 4293120
+    },
+    "Arrow_plus_cache_bytes_per_row": 3752.463953488372,
+    "new_scope_no_label_body_reads": true
+  },
+  "design_targets": [
+    {
+      "design_train_positions": 6000,
+      "incremental_rows": 19,
+      "complete_families_nominal": 1,
+      "families_assumed_20_to70_rows": [
+        1,
+        1
+      ],
+      "families_observed_15_to80_envelope": [
+        1,
+        2
+      ],
+      "same256k_row_epoch": 42.666666666666664,
+      "additional512k_row_epoch": 85.33333333333333
+    },
+    {
+      "design_train_positions": 10000,
+      "incremental_rows": 4019,
+      "complete_families_nominal": 109,
+      "families_assumed_20_to70_rows": [
+        58,
+        201
+      ],
+      "families_observed_15_to80_envelope": [
+        51,
+        268
+      ],
+      "same256k_row_epoch": 25.6,
+      "additional512k_row_epoch": 51.2
+    },
+    {
+      "design_train_positions": 30000,
+      "incremental_rows": 24019,
+      "complete_families_nominal": 652,
+      "families_assumed_20_to70_rows": [
+        344,
+        1201
+      ],
+      "families_observed_15_to80_envelope": [
+        301,
+        1602
+      ],
+      "same256k_row_epoch": 8.533333333333333,
+      "additional512k_row_epoch": 17.066666666666666
+    }
+  ],
+  "rosters": [
+    {
+      "name": "stage1_expected_crossing",
+      "new_train_families": 144,
+      "new_selection_families": 48,
+      "sealed_future_eval_families": 96,
+      "total_new_unique_families": 288,
+      "48_family_jobs": 6,
+      "total_train_rows_nominal": 11293.0,
+      "total_new_rows_nominal": 10320.0,
+      "NN_nominal": 549618.0,
+      "NN_working_20to70rows_40to80NNperrow": [
+        230400,
+        1612800
+      ],
+      "NN_registered_200ply_K64_guard": 3686616,
+      "known_generation_opening_cache_minutes_nominal": 4.865849155705655,
+      "generation_working_minutes": [
+        2.6599999999999997,
+        14.0
+      ],
+      "generation_stress_upper_minutes_3x": 38.0,
+      "preparation_qualification_recording_extra_minutes": [
+        15,
+        45
+      ],
+      "new_Arrow_plus_cache_bytes_nominal": 38725428,
+      "conservative_data_forecast_bytes": 189124184,
+      "projection_not_performance_guarantee": true
+    },
+    {
+      "name": "stage1_max",
+      "new_train_families": 240,
+      "new_selection_families": 48,
+      "sealed_future_eval_families": 96,
+      "total_new_unique_families": 384,
+      "48_family_jobs": 8,
+      "total_train_rows_nominal": 14834.333333333332,
+      "total_new_rows_nominal": 13760.0,
+      "NN_nominal": 732824.0,
+      "NN_working_20to70rows_40to80NNperrow": [
+        307200,
+        2150400
+      ],
+      "NN_registered_200ply_K64_guard": 4915488,
+      "known_generation_opening_cache_minutes_nominal": 6.4877988742742065,
+      "generation_working_minutes": [
+        3.546666666666667,
+        18.666666666666668
+      ],
+      "generation_stress_upper_minutes_3x": 50.666666666666664,
+      "preparation_qualification_recording_extra_minutes": [
+        15,
+        45
+      ],
+      "new_Arrow_plus_cache_bytes_nominal": 51633904,
+      "conservative_data_forecast_bytes": 252165578,
+      "projection_not_performance_guarantee": true
+    },
+    {
+      "name": "stage2_expected_crossing",
+      "new_train_families": 672,
+      "new_selection_families": 48,
+      "sealed_future_eval_families": 96,
+      "total_new_unique_families": 816,
+      "48_family_jobs": 17,
+      "total_train_rows_nominal": 30770.333333333332,
+      "total_new_rows_nominal": 29240.000000000004,
+      "NN_nominal": 1557251.0,
+      "NN_working_20to70rows_40to80NNperrow": [
+        652800,
+        4569600
+      ],
+      "NN_registered_200ply_K64_guard": 10445412,
+      "known_generation_opening_cache_minutes_nominal": 13.786572607832687,
+      "generation_working_minutes": [
+        7.536666666666667,
+        39.666666666666664
+      ],
+      "generation_stress_upper_minutes_3x": 107.66666666666667,
+      "preparation_qualification_recording_extra_minutes": [
+        15,
+        45
+      ],
+      "new_Arrow_plus_cache_bytes_nominal": 109722047,
+      "conservative_data_forecast_bytes": 535851853,
+      "projection_not_performance_guarantee": true
+    },
+    {
+      "name": "stage2_max",
+      "new_train_families": 1248,
+      "new_selection_families": 48,
+      "sealed_future_eval_families": 96,
+      "total_new_unique_families": 1392,
+      "48_family_jobs": 29,
+      "total_train_rows_nominal": 52018.33333333333,
+      "total_new_rows_nominal": 49880.0,
+      "NN_nominal": 2656487.0,
+      "NN_working_20to70rows_40to80NNperrow": [
+        1113600,
+        7795200
+      ],
+      "NN_registered_200ply_K64_guard": 17818644,
+      "known_generation_opening_cache_minutes_nominal": 23.518270919244,
+      "generation_working_minutes": [
+        12.856666666666666,
+        67.66666666666667
+      ],
+      "generation_stress_upper_minutes_3x": 183.66666666666666,
+      "preparation_qualification_recording_extra_minutes": [
+        15,
+        45
+      ],
+      "new_Arrow_plus_cache_bytes_nominal": 187172902,
+      "conservative_data_forecast_bytes": 914100220,
+      "projection_not_performance_guarantee": true
+    }
+  ],
+  "learning": [
+    {
+      "train_rows_design": 6000,
+      "train_seen": 256000,
+      "evaluations": 10,
+      "same_row_epoch": 42.666666666666664,
+      "new_selection_rows_nominal": 1720,
+      "oldval_rows": 1248,
+      "total_train_eval_sample_upper_nominal": 345680,
+      "B_guardian_sample_rate_short_extrapolation_s": 5.186674235853007,
+      "model_load_fit_export_eval_parity_allowance_s": [
+        15,
+        120
+      ],
+      "RAM_guard_proposed_B": 1879048192
+    },
+    {
+      "train_rows_design": 6000,
+      "train_seen": 512000,
+      "evaluations": 15,
+      "same_row_epoch": 85.33333333333333,
+      "new_selection_rows_nominal": 1720,
+      "oldval_rows": 1248,
+      "total_train_eval_sample_upper_nominal": 646520,
+      "B_guardian_sample_rate_short_extrapolation_s": 9.70055724069569,
+      "model_load_fit_export_eval_parity_allowance_s": [
+        15,
+        120
+      ],
+      "RAM_guard_proposed_B": 1879048192
+    },
+    {
+      "train_rows_design": 10000,
+      "train_seen": 256000,
+      "evaluations": 10,
+      "same_row_epoch": 25.6,
+      "new_selection_rows_nominal": 1720,
+      "oldval_rows": 1248,
+      "total_train_eval_sample_upper_nominal": 385680,
+      "B_guardian_sample_rate_short_extrapolation_s": 5.786844825514313,
+      "model_load_fit_export_eval_parity_allowance_s": [
+        15,
+        120
+      ],
+      "RAM_guard_proposed_B": 1879048192
+    },
+    {
+      "train_rows_design": 10000,
+      "train_seen": 512000,
+      "evaluations": 15,
+      "same_row_epoch": 51.2,
+      "new_selection_rows_nominal": 1720,
+      "oldval_rows": 1248,
+      "total_train_eval_sample_upper_nominal": 706520,
+      "B_guardian_sample_rate_short_extrapolation_s": 10.60081312518765,
+      "model_load_fit_export_eval_parity_allowance_s": [
+        15,
+        120
+      ],
+      "RAM_guard_proposed_B": 1879048192
+    },
+    {
+      "train_rows_design": 30000,
+      "train_seen": 256000,
+      "evaluations": 10,
+      "same_row_epoch": 8.533333333333333,
+      "new_selection_rows_nominal": 1720,
+      "oldval_rows": 1248,
+      "total_train_eval_sample_upper_nominal": 585680,
+      "B_guardian_sample_rate_short_extrapolation_s": 8.787697773820843,
+      "model_load_fit_export_eval_parity_allowance_s": [
+        15,
+        120
+      ],
+      "RAM_guard_proposed_B": 1879048192
+    },
+    {
+      "train_rows_design": 30000,
+      "train_seen": 512000,
+      "evaluations": 15,
+      "same_row_epoch": 17.066666666666666,
+      "new_selection_rows_nominal": 1720,
+      "oldval_rows": 1248,
+      "total_train_eval_sample_upper_nominal": 1006520,
+      "B_guardian_sample_rate_short_extrapolation_s": 15.102092547647445,
+      "model_load_fit_export_eval_parity_allowance_s": [
+        15,
+        120
+      ],
+      "RAM_guard_proposed_B": 1879048192
+    }
+  ],
+  "paired_sigma_reused12": 0.022281368577834203,
+  "precision_examples_not_power_guarantees": [
+    {
+      "desired_95_halfwidth": 0.01,
+      "normal_approx_family_count": 20
+    },
+    {
+      "desired_95_halfwidth": 0.005,
+      "normal_approx_family_count": 77
+    }
+  ],
+  "source_SHA": {
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/comparison-v1.json": "a59a287f41ff23fa78500be611f726f29cd152c47fbe730619e30df830b1a5a0",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/cost-scenarios-v1.json": "ba96ae38dc82363da5523c8e9f2816018210b8a3cea2fec86efd6e515d8a88ff",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/274-cache-handoff-v1.json": "aa9063f7c5f25e6b26671b0226533010775fd7c4674b6245d99cce680787187d",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/manifest.json": "99e07617d8eedf771f3de4450708421392c1b68c3cba74240006c53212aea2d0",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/canonical-active48-cache-v1/cache.json": "44f9d240a5daf06c51a0e83925d61157f98c4bd6b87cd5b56c6f2bb7bf7012fb",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/B-summary.json": "3bf8f9c226363836e10610c16d165d420ef1d18d2b3f31f2e8dd514af96e9b6f",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-residual-penalty/summary-v1.json": "87c2b48c3235458302e8ea15b8870d6dfdc4de1c456e5b5d7d14c4aa3e4a6080",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-residual-penalty/saved-comparison-v1.json": "703816db3fadef1a7074b41b3cc29fd0df52dc67c5e8528947d40992d2943739"
+  },
+  "new_NN": 0,
+  "model_import": 0,
+  "teacher_or_old_test_label_body_reads": 0,
+  "wall_seconds": 0.2955401039798744,
+  "peak_RSS_B": 16572416,
+  "CPU_affinity": [
+    1
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "task": "frame22-independent-data-planning-284-amendment285-v2",
+  "schema": "data-scale-allocation-comparison-v2",
+  "at": "2026-10-05T15:11:06.555599+00:00",
+  "contract_path": "/workspaces/quoridor/research-data/ai-sigma/frame22-coordinator/nested-independent-teacher-contract.md",
+  "contract_SHA": "ba34cee53157891a2a825f6580fbd3220f33d20957b90b4732c7f1b8fc3e8b8a",
+  "parent_end": "2026-10-05T23:36:03Z",
+  "old284_v1_preserved": true,
+  "285_actual_not_hypothesis_approval": true,
+  "packing_proposal": [
+    {
+      "job": 1,
+      "train": 192,
+      "selection": 64,
+      "sealed_eval": 0
+    },
+    {
+      "job": 2,
+      "train": 192,
+      "selection": 0,
+      "sealed_eval": 64
+    },
+    {
+      "job": 3,
+      "train": 256,
+      "selection": 0,
+      "sealed_eval": 0
+    },
+    {
+      "job": 4,
+      "train": 256,
+      "selection": 0,
+      "sealed_eval": 0
+    },
+    {
+      "job": 5,
+      "train": 128,
+      "selection": 0,
+      "sealed_eval": 0
+    }
+  ],
+  "qualification_max1_plus_generation5_entry_fit": true,
+  "phase1_320families_requires_two_entries_in_this_packing": true,
+  "scenarios": [
+    {
+      "name": "stage1",
+      "new_train_families": 192,
+      "new_selection_families": 64,
+      "new_future_eval_families": 64,
+      "new_unique_families": 320,
+      "old_plus_new_train_nominal": 13063.666666666666,
+      "old_plus_new_train_yield20to70": [
+        9821,
+        19421
+      ],
+      "needed_mean_yield_for_target": 20.932291666666668,
+      "known_generation_opening_cache_center_minutes": 5.406499061895172,
+      "working_generation_minutes": [
+        2.5666666666666664,
+        15.0
+      ],
+      "stress_generation_upper_minutes": 41.666666666666664,
+      "physical_NN_center": 610686.6666666666,
+      "working_NN_20to70rows_40to80NNperrow": [
+        256000,
+        1792000
+      ],
+      "Arrow_cache_center_B": 43028254,
+      "retained_Git_temp_forecast_B_70rows_factor2p5": 210137982
+    },
+    {
+      "name": "stage2_max",
+      "new_train_families": 1024,
+      "new_selection_families": 64,
+      "new_future_eval_families": 64,
+      "new_unique_families": 1152,
+      "old_plus_new_train_nominal": 43755.22222222222,
+      "old_plus_new_train_yield20to70": [
+        26461,
+        77661
+      ],
+      "needed_mean_yield_for_target": 23.4560546875,
+      "known_generation_opening_cache_center_minutes": 19.46339662282262,
+      "working_generation_minutes": [
+        8.806666666666665,
+        49.666666666666664
+      ],
+      "stress_generation_upper_minutes": 145.66666666666666,
+      "physical_NN_center": 2198472.0,
+      "working_NN_20to70rows_40to80NNperrow": [
+        921600,
+        6451200
+      ],
+      "Arrow_cache_center_B": 154901712,
+      "retained_Git_temp_forecast_B_70rows_factor2p5": 756496734
+    }
+  ],
+  "NN_guard_1152x200x65": 14976000,
+  "allocated_17m_retained": true,
+  "learning_proposal": [
+    {
+      "name": "10k_256k",
+      "train_rows": 10199,
+      "seen": 256000,
+      "evaluations": 10,
+      "eval_row_count": 13741,
+      "total_samples": 393410,
+      "CPU_guardian_center_s_short_extrapolation": 5.90282779196636
+    },
+    {
+      "name": "30k_work_512k_single_trajectory",
+      "train_rows": 30199,
+      "seen": 512000,
+      "evaluations": 15,
+      "eval_row_count": 33741,
+      "total_samples": 1018115,
+      "CPU_guardian_center_s_short_extrapolation": 15.276066997325517
+    }
+  ],
+  "new_fresh_fit_trajectories": 2,
+  "fixed_quantity_work_comparison": "5981 savedB / 10k@2000 / largest@2000; largest@4000 work control shares exact first2000 batches",
+  "new_eval_rows_nominal": 2294,
+  "max_unique_NN_models_for_future_eval": 4,
+  "total_NN_learning_eval_parity_nominal_upper": 1423995,
+  "future_CPU_sample_budget_recommendation": 2000000,
+  "rebind_actual_rows_before_learning": true,
+  "future_eval64_normal_halfwidth_sigma12_reference": 0.0054589353015693795,
+  "future_eval64_normal_halfwidth_double_sigma_stress": 0.010917870603138759,
+  "future_eval64_sufficient_proof": false,
+  "NN": 0,
+  "model_import": 0,
+  "wall_seconds": 0.0930673360126093,
+  "peak_RSS_B": 16211968
+}
