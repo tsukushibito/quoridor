@@ -53,3 +53,13 @@ cleanup receiptsのpath別事前st_blocks合計は「対象pathの量」であ�
 広いcache削除や追加の全repo監査は見送り。現物対応と既保存データの確認を実移行の必要範囲で行う方が保守費と情報損失の危険を下げる。次の再検討契機は読者の停止proof、資産resolverへの実caller更新、新しい保持rootや再構成費の増加。担当は1d2.1 Steward、Git保存は統括、最終受入れはRoot。枠内に移行全体の完了を求めず未完了を次の独立保守機会へ引き渡す。
 
 10:25:31のscheduler結果はdispatch lock競合（Another client is dispatching）で、ownedはnone。09:45のobserve/finish到達や10:13の公式completedを、今回競合の成功や全面監督品質へ付替えない。正確運用終了の確認は以下の最終receiptへ追記する。外部科学job停止は各owner証拠が別に必要。
+
+## 最終運用回収（10:33:34現在読取）
+
+heavy終了準備通知は10:27台に公式配送exit0・child回収。schedulerは10:32:54.020542にprocess_stopped/owned_turn_pending=false、monitorは10:32:55.758965にoperation_end/errornullを保存した。10:33:34の本人読取でstate stopped/processnull/ownednull、scheduler1005983/tick44624026・monitor1009999/tick44636773の正identity不在を確認。24入力は終了時点で全SHA一致し、period1200/null・既期限を維持した。monitor停止commandはalready_absent/ownedpendingfalseで、scheduler自身の終了記録と合わせ現在回収を支持する。全過去期間や外部NNの終了をこの証拠から保証しない。
+
+必要原receipt・state・24入力の終了時SHAはresearch-data/ai-sigma/frame21-steward/operation-end-receipt.jsonへ保存した。枠終了点検の整理/長期構成判断は上記のとおり。科学/監督の新起動は行わず、未完了の資産移行・旧ai-sigma撤去は独立保守1d2.1へ継続し、科学契約と旧期限を延長しない。Git統合はcoordinatorの明示path保存、本人の必要notes/backup後に終了証拠を引き渡す。
+
+統括後着の独立通知では、定期scheduler ownedに属さない直接配送Supervisor turn01a10b9e-a098-7630-ae8e-ee5949c45b38が運用終了時未終了で、統括が10:33:33に正確ID interruptを受理した。これは09/10時台の定期owned回収とは別で、39秒遅れを期限内成功へ置換しない。追加振り返りは未完了（担当Supervisor、次の許可枠で既10:10点検と残不足を再用）として保持し、研究終了後の新turnを起動しない。本人が他者turnをinterruptした事実はない。
+
+統括の終端共有では266/268/271科学・読者停止と保存が確認され、旧Sigma読者の最後は10:26。本人の現物と停止proofを併せて独立保守1d2.1の移行へ接続する。271/268は別WT保存版を保護し、defaultQF1/棋力maincodeへの採用と科学保存を混同しない。

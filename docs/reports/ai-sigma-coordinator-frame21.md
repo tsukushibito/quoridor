@@ -37,3 +37,7 @@ QF1は二視点312疎入力と駒位置の距離2値で、全距離mapは入力�
 終了点検は92がheavy10:27:54、scheduler/正owned10:32:54、monitor10:35:54、保存10:37:54を所有。実終了証拠はその報告で確認する。この稿の作成時点では未来回収を完了認定しない。旧229 final NOT_RUN、旧失敗・未知・期限・成績、親最高目標未達は維持する。
 
 参照: [265特徴選定](ai-sigma-hypothesis-frame21-feature-cause.md)、[267同仕事探索](ai-sigma-critic-frame21-search-efficiency.md)、268 managed WTのroute-control report/handoff、266 model-causeのscientific-stop-v1/compact/cost-ledger、271 managed WTのmcts-cost result/science-stop、[92運用・整理](ai-sigma-steward-frame21.md)。
+
+終了追記: 92はschedulerを10:32:54.020542、monitorを10:32:55.758965にoperation_end/errornullで終了し、正確2identity不在/ownednull/24hash一致を確認した。科学owner266/268/267/271は停止・回収・必要保存を報告した。統括の最終振り返り追補は同savedの直接配送turnが期限時点に未終了で、10:33:33の正確ID interrupt後に公式interruptedを確認した。39秒遅れた回収確認を期限内成功に読み替えず、追補判断はSupervisor担当/次許可枠へ未完了として渡す。10:10自然点検は再用する。
+
+main採用79fc729、科学/判断保存eb58f31。経路prototypeはfeature branch c55f115/a5cfa73に実装・旧科学・未来整形源を保存し、現QF1の既定評価器を置換していない。MCTS費診断源はsearch branch6c3acdd、mainには報告/必要データを保存した。各current byte復元点と現点差はframe21-coordinator/final-git-points.jsonで区別する。Git操作所有は最後の保存後Rootへ独立1d2作業のため解放し、研究を再開する許可とはしない。
