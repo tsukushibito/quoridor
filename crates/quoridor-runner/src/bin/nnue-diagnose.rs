@@ -487,7 +487,16 @@ fn run(c: &Config, start: Instant) -> Result<Value> {
                 )?;
                 if !adopt {
                     status = "UNKNOWN";
-                    reason = Some("CLOCK_OR_NO_COMPLETED_DEPTH".into());
+                    reason = Some(
+                        if r.completed_depth == 0 {
+                            "NO_COMPLETED_DEPTH"
+                        } else if !legal {
+                            "ILLEGAL_COMPLETED_ACTION"
+                        } else {
+                            "LATE_VALID_COMPLETED_ACTION"
+                        }
+                        .into(),
+                    );
                     break;
                 }
                 let action = r.action.unwrap();
