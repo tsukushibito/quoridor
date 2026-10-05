@@ -19,12 +19,23 @@ spec.loader.exec_module(client)
 class LayoutSafety(unittest.TestCase):
     def test_main_and_managed_worktree_are_explicit_write_destinations(self):
         root = Path("/project")
-        with patch.object(client, "project_root", return_value=root):
+        records = SimpleNamespace(
+            stdout="worktree /project\n\nworktree /project/.worktree/task\n\n"
+        )
+        with (
+            patch.object(client, "project_root", return_value=root),
+            patch.object(client.subprocess, "run", return_value=records),
+        ):
             self.assertEqual(client.resolve_task_cwd("/project", root), "/project")
             self.assertEqual(
                 client.resolve_task_cwd("/project/.worktree/task", root), "/project/.worktree/task"
             )
-            for target in ("/project/tools", "/project/.worktree/ai-sigma"):
+            for target in (
+                "/project/tools",
+                "/project/.worktree/retired",
+                "/project/.worktree/assets",
+                "/project/.worktree/assets/models",
+            ):
                 with self.assertRaises(client.TeamError):
                     client.resolve_task_cwd(target, root)
         with patch.object(client, "project_root", return_value=Path("/other")):

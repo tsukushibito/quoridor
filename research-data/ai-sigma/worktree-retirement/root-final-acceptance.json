@@ -1,0 +1,33 @@
+{
+  "at": "2026-10-05T11:15:31.213689+00:00",
+  "issue": "quoridor-1d2",
+  "source_handoff_sha256": "4075ca3556daa2679b6c9d6b9ba795e3d61eab88a1105d63893bba8a8e07870e",
+  "handoff_paths_verified": 19,
+  "asset_mapping_paths_verified": 76,
+  "unique_assets": 64,
+  "worktree_entries": [
+    ".beads-access.lock",
+    ".beads-state",
+    ".beads-state.gate.lock",
+    "assets",
+    "frame21-features",
+    "frame21-search"
+  ],
+  "retired_five_absent": true,
+  "protected_DB_and_two_worktrees": true,
+  "tests": {
+    "asset_resolver": 6,
+    "research_client": 11,
+    "result": "PASS"
+  },
+  "scoped_current_source_retired_path_search": "no matches",
+  "git_diff_check": "PASS",
+  "scientific_run_started": false,
+  "source_writer_stopped": true,
+  "proc_read_limit": "root-owned process metadata permissions missing; no whole-host absence claim",
+  "quality": {
+    "ruff_format_check": "PASS with tools/research-quality/ruff.toml",
+    "ruff_lint": "PASS with same config",
+    "initial_default_config_attempt": "would reformat: default88 differs from project100; no source modification"
+  }
+}

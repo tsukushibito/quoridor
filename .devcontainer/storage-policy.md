@@ -5,6 +5,7 @@ This project keeps generated state out of the host checkout and separates caches
 | Data | Location | Persistence |
 | --- | --- | --- |
 | Managed Git worktrees | `${containerWorkspaceFolder}/.worktree` | `volume` mode |
+| Research models/checkpoints/inputs | `${containerWorkspaceFolder}/.worktree/assets` | same worktrees named volume; independent of checkouts |
 | Shared Beads database | `${containerWorkspaceFolder}/.worktree/.beads-state` | worktrees named volume; independent of individual worktrees |
 | Beads full database backup | `${containerWorkspaceFolder}/.artifacts/beads-backup` | host checkout, Git-ignored; not protection against host loss |
 | Godot editor/import cache | `/home/vscode/.cache/godot` | named volume |
@@ -16,7 +17,7 @@ This project keeps generated state out of the host checkout and separates caches
 
 When worktree mode is `volume`, create and remove worktrees only with `scripts/dev/manage_worktree.sh`.
 The helper places them below `.worktree`, locks every managed worktree, refuses dirty removal, and never deletes branches.
-The main checkout is the durable canonical research checkout. Use managed worktrees for parallel changes and comparisons, with one writer per file and one integration owner for normal Git index/commit operations. Do not maintain perpetual copies of roles, documentation or active source. The retained `.worktree/ai-sigma` is a frozen reference and asset location, not a second source of truth; protect its untracked files, models, expanded inputs and volume paths.
+The main checkout is the durable canonical research checkout. Use managed worktrees for parallel changes and comparisons, with one writer per file and one integration owner for normal Git index/commit operations. Do not maintain perpetual copies of roles, documentation or active source. Keep required models, checkpoints and inputs under `.worktree/assets/` on the same persistent volume, independent of code checkouts. Preserve the shared Beads database and locks and all active worktrees. Retire obsolete checkouts only after preserving unique information, verifying restoration and waiting for asset readers to stop naturally; use the managed helper for registered worktrees. Record original-to-current asset paths without changing historical run records. Do not retain compatibility symlinks or obsolete source trees as assets.
 
 ## Beads
 
@@ -27,7 +28,7 @@ Use `bash scripts/dev/beads.sh` from any worktree to access the shared embedded 
 When GPU mode is `nvidia`, place See-Through, DWPose, Hugging Face, Torch, and similar model downloads under `$INFERENCE_CACHE_DIR`.
 The generated environment maps Hugging Face hub/Xet/assets and Torch caches into that directory. Do not place these general-purpose model weights in the repository or in `/home/vscode/.codex`.
 
-Quoridor AI models are an explicit exception: repository-local storage is allowed. Only final adopted models and their provenance, distribution terms, hash, size, and feature-schema manifests belong in Git, under `apps/web/public/models/`. Keep all experimental, comparison, and intermediate training models under `models/experiments/`, excluded from Git regardless of size. Add the ignore rule when that directory is introduced. Check the final model's distribution size before adoption.
+Quoridor AI models are an explicit exception: repository-local storage is allowed. Only final adopted models and their provenance, distribution terms, hash, size, and feature-schema manifests belong in Git, under `apps/web/public/models/`. Keep experimental and comparison models under `.worktree/assets/models/` and intermediate training checkpoints under `.worktree/assets/checkpoints/`, excluded from Git regardless of size. Resolve these persistent assets through `research-paths.json`; do not bind them to a disposable code checkout. Check the final model's distribution size before adoption.
 
 Framework and CUDA package versions remain project-managed; this Dev Container only exposes the NVIDIA GPU and persistent cache.
 

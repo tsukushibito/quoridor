@@ -65,7 +65,7 @@ App Serverから現在の状態を読み、idleなら `turn/start`、activeな�
 
 ## 環境と整理
 
-mainを持続的研究の統合正本とし、並行変更・比較には管理worktreeを使う。一つの範囲の担当を一人に決め、Git index/commitは統合担当一人が操作する。roles・docs・現役sourceは恒常mirrorせず、旧研究worktreeは凍結参照と既入力pathを保護する。[現役機能と配置](../development/ai-research-code.md)・`research-paths.json`でコードと永続入力を分ける。依存環境・出力先を実験ごとに区別し、更新中の共有環境やCPU/GPU競合下で正式な性能比較をしない。長時間ジョブは実行プログラムがPID/ジョブID、ログ、チェックポイント、終了状態を保存する。
+mainを持続的研究の統合正本とし、並行変更・比較には管理worktreeを使う。一つの範囲の担当を一人に決め、Git index/commitは統合担当一人が操作する。roles・docs・現役sourceは恒常mirrorせず、必要モデル・checkpoint・入力は同一永続volumeの`.worktree/assets/`へ分類しコードcheckoutから分離する。使用中資産は自然停止・書込停止後に移行し、旧絶対pathは対応manifestで追跡する。共有DB・lockと作業中worktreeを保持し、旧checkoutは未保存情報の保全と復元確認後に管理helperで撤去する。[現役機能と配置](../development/ai-research-code.md)・`research-paths.json`でコードと永続入力を分ける。依存環境・出力先を実験ごとに区別し、更新中の共有環境やCPU/GPU競合下で正式な性能比較をしない。長時間ジョブは実行プログラムがPID/ジョブID、ログ、チェックポイント、終了状態を保存する。
 
 基盤担当は研究枠の終了・再利用、重複や容量の増加、依存衝突、再現失敗などの節目で、整理の必要性を必ず判断する。前回以降の変化を中心に、開発・検証・保存の総費用から実施の範囲・担当・時期、または見送り理由と再検討の契機を既存issue・報告へ短く残す。整理の実施量を成果指標にせず、毎runの全体監査・整理実施・追加の定期呼出しを義務にしない。実施時は実行中プロセス・成果物の参照を確認し、採用物、再現に必要な証拠、再生成できる一時物を区別する。許可された一時物だけを整理し、失敗の知見、小さなmanifest、必要なcheckpointを残す。[storage policy](../../.devcontainer/storage-policy.md)に従う。
 

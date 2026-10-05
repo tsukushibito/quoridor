@@ -19,6 +19,8 @@ PY_ROOTS = ("python/quoridor_training", "tools/model-export")
 PY_FILES = (
     "scripts/dev/research-save.py",
     "scripts/dev/research-storage.py",
+    "scripts/dev/research-assets.py",
+    "scripts/dev/test_research_assets.py",
     "scripts/dev/check-research.py",
     "scripts/dev/research-team.py",
     "tools/research-team/test_client.py",
@@ -106,6 +108,7 @@ def main():
     if args.format:
         return
     run(sys.executable, "-B", "tools/research-quality/test_maintenance.py")
+    run(sys.executable, "-B", "scripts/dev/test_research_assets.py")
     layout = json.loads((ROOT / "research-paths.json").read_text())
     training_env = Path(os.environ.get("QUORIDOR_TRAINING_ENV", layout["environments"]["training"]))
     training_python = training_env / "bin/python"

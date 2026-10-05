@@ -31,7 +31,7 @@ Export writes `artifact.manifest.json` with source-model/artifact hashes, shapes
 backend/runtime versions, FP32 settings and conversion time.
 
 ```sh
-QUORIDOR_MODEL=.worktree/ai-sigma/models/experiments/ai-sigma/reference/sigma-pcr250/best.onnx
+QUORIDOR_MODEL="$(python3 scripts/dev/research-assets.py --kind models --name ai-sigma/reference/sigma-pcr250/best.onnx)"
 QUORIDOR_EXPORT=/home/vscode/.cache/inference/rust-migration/export
 /home/vscode/.cache/inference/envs/quoridor-training/bin/python \
   tools/model-export/export.py --model "$QUORIDOR_MODEL" \

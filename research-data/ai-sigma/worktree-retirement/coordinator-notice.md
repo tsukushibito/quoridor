@@ -1,0 +1,9 @@
+# 同root activeから構成整理の実行引渡し
+
+ユーザーが「共有DB・作業中worktree・必要資産だけを残す構成にして」と実行指示。新保守親quoridor-1d2はroot受入れ、既stewardのquoridor-1d2.1に実作業を配分。契約全文はresearch-data/ai-sigma/worktree-retirement/contract.md。研究frame21の配分・期限・新科学許可は変更せず、今回保守は研究枠と独立して完了まで行う。
+
+stewardが旧research-team/scheduler/webapp-presentation/未登録ai-sigma-frame18-data-learningの未保存情報を先に保護して撤去し、旧ai-sigmaの必要モデル・入力を同volume .worktree/assetsへ移行後、current resolver/配置文書を更新して旧WTを撤去する。frame21-features/searchとDBは保持、raw/model/科学を消失させない。現266/267/268の使用中入力は変えず自然stop後移行する。新保守source writerはsteward、root重複編集0。
+
+main通常Git統合はcoordinator所有を維持。stewardの保存path/hashを統合するか、統括の現在統合が完了した時点でrootへGit操作所有を明示解放する。helperによる旧worktree撤去の登録操作窓も同時Git操作を避けて調整する。新仕事受付だけで整理成功とはしない。現在実研究へ重読取/圧縮が競合しない窓をstewardが合わせる。全稿承認/user/rootACKを研究の入口gateにしない。
+
+rootも本作業を完了まで追跡・確認する。既frame21 .92の期限停止責任はstewardがそのまま維持。新role/model設定変更・研究interrupt・自動研究延長0。

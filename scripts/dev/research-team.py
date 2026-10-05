@@ -61,8 +61,21 @@ def resolve_task_cwd(cwd: str, root: Path) -> str:
         raise TeamError("Use this project's main checkout or a managed worktree")
     if target != root and root / ".worktree" not in target.parents:
         raise TeamError("Use this project's main checkout or a managed worktree")
-    if target == root / ".worktree/ai-sigma":
-        raise TeamError("The integrated ai-sigma worktree is a frozen input/reference path")
+    if target != root:
+        records = subprocess.run(
+            ["git", "-C", str(root), "worktree", "list", "--porcelain"],
+            capture_output=True,
+            text=True,
+            check=True,
+            timeout=10,
+        )
+        registered = {
+            Path(line.removeprefix("worktree ")).resolve()
+            for line in records.stdout.splitlines()
+            if line.startswith("worktree ")
+        }
+        if target not in registered:
+            raise TeamError("Task cwd must be a registered code checkout; assets are not code")
     return str(target)
 
 

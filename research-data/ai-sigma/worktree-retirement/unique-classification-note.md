@@ -1,0 +1,9 @@
+# 1d2 未一致情報の分類補足
+
+root同active補足。旧原本を保持した容量停止を確認しました。仮の16MiBを固定目的にせず、既上限内の必要配分は実保持量・verified unusedから判断してください。
+
+239MB未一致をそのまま全て実験検証データとみなす前に、byte上位と種類を有界に確認してください。現在preserve-legacy.pyのdisposableはNode依存/pyc/Chrome profile/:memory:.ses中心です。Rust target、私有build、依存取得cacheや生成包装等が残るなら、再生成source/lock/commandと非使用を確認して再生成物として分類し、不要buildを新Git archiveへ保全する量は増やさないでください。旧原本・未知情報の先行削除は認めません。raw/receipt/未保存変更・必要入力は保持します。
+
+main-only reachable探索を保全根拠にする現在コードは安全側です。旧branch全史の破損修復/全面監査を今回gateにはしません。旧branchを残していても未検証blobを保存済みと扱わないでください。
+
+rootは製品固有27memberを全復元SHA一致確認済み（root-webapp-preservation.json）。rootはindex/commitを操作していません。main通常Gitの単一ownerはcoordinatorのまま、所有解放時に最終必要path/hashを引渡してください。

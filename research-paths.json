@@ -1,14 +1,17 @@
 {
-  "schema": "quoridor-research-layout-v1",
+  "schema": "quoridor-research-layout-v2",
   "code_root": ".",
   "data_root": "research-data/ai-sigma",
   "live_root": ".artifacts/ai-sigma",
-  "models": ".worktree/ai-sigma/models/experiments",
-  "legacy_reference_root": ".worktree/ai-sigma",
+  "models": ".worktree/assets/models",
   "environments": {
     "training": "/home/vscode/.cache/inference/envs/quoridor-training",
     "team": "/home/vscode/.cache/inference/envs/quoridor-research-team"
   },
   "cache": "/home/vscode/.cache/inference/uv",
-  "notes": "Code/data are canonical in main. Legacy model and expanded input paths are retained assets, not another code source. New runs bind explicit absolute resolved paths and hashes."
+  "notes": "Main owns code and Git evidence; persistent volume assets are independent of managed code checkouts. Old run paths stay immutable and resolve via the migration manifest. Existing environments/cache unchanged.",
+  "asset_root": ".worktree/assets",
+  "checkpoints": ".worktree/assets/checkpoints",
+  "inputs": ".worktree/assets/inputs",
+  "asset_migration_manifest": "research-data/ai-sigma/1d2-worktree-consolidation/asset-migration.json"
 }

@@ -12,6 +12,12 @@
 - Respect an explicit user pause. An issue becoming ready or a late agent notification does not by itself authorize resuming paused work.
 - Until Beads installation and shared storage are verified, report that setup is incomplete; do not claim tasks were registered or automatically resume work paused for that setup.
 
+## コードの整形
+
+- 変更したすべての手書きコードは、言語に対応するフォーマッタとプロジェクトの設定で整形してから、検証・レビュー・引渡しを行う。Rustだけでなく、Python、JavaScript/TypeScript、シェルスクリプトなどにも適用する。手書きの設定ファイルも対応する整形対象とする。
+- 整形は担当する変更範囲に限定し、他担当の変更、生成物、vendor、凍結した比較用ソース・実験検証データを巻き込まない。対応ツールが未整備の言語も対象から外さず、整形方法を決め、不足が残る場合は引渡しに明示する。
+- 具体的な手順は[共通作業手順](docs/development/beads-workflow.md#コード変更の仕上げ)を参照する。保存時・commit時の自動適用は必須としない。
+
 ## AI research team
 
 - When the user invokes the AI research team, follow [the team design](docs/design/ai-research-team.md) and the common and role instructions in `.agents/research-team/`.
@@ -42,6 +48,6 @@
 | Rust評価/探索・CPU/GPU生成・学習cycle | [Rust AI運用](docs/development/rust-ai.md)、[crateとモデル境界](docs/design/ai-rust-migration.md) |
 | worktree・モデル・依存・保存先の変更や整理 | [保存方針](.devcontainer/storage-policy.md) |
 
-mainが持続的研究の統合正本。並行変更・比較にはmanaged worktreeを使い、旧`.worktree/ai-sigma`の凍結入力を保護する。役割・文書・現役sourceの恒常mirrorは作らない。並行writerのGit index/commitは一人の統合担当だけが操作し、変更pathと停止を引き渡す。
+mainが持続的研究の統合正本。並行変更・比較にはmanaged worktreeを使い、必要なモデル・checkpoint・入力は同じ永続volumeの`.worktree/assets/`へ分類する。共有Beads DB・lockと作業中worktreeを保護し、旧checkoutは未保存情報の保全・復元確認と読者停止後に管理helperで撤去する。役割・文書・現役sourceの恒常mirrorは作らない。並行writerのGit index/commitは一人の統合担当だけが操作し、変更pathと停止を引き渡す。
 
 構成説明とこの案内はstewardが利用実態に応じて見直す。新しい必読資料や定期監査を一律に増やさない。

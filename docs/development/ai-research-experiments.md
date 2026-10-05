@@ -69,7 +69,7 @@
 
 ## 研究コード・設定・データの配置
 
-mainが持続的研究の統合正本で、managed worktreeは並行変更・比較に用いる。現役のコード・role・文書を旧研究worktreeへ恒常mirrorしない。旧`.worktree/ai-sigma`の未追跡物、既モデル・入力・共有volume参照は保護し、[`research-paths.json`](../../research-paths.json)でコードと永続資産の参照を分ける。現役入口と依存図は[研究コードの保守案内](ai-research-code.md)を参照する。
+mainが持続的研究の統合正本で、managed worktreeは並行変更・比較に用いる。現役のコード・role・文書を旧研究worktreeへ恒常mirrorしない。必要モデル・checkpoint・入力は同volumeの`.worktree/assets/`へ分類し、[`research-paths.json`](../../research-paths.json)でコードと永続資産の参照を分ける。旧checkoutの未保存情報はGit/圧縮記録へ保存して復元を確認し、資産readerの自然停止と移動対応manifestのSHA照合後に撤去する。原runの旧絶対path・SHAは遡及更新しない。現役入口と依存図は[研究コードの保守案内](ai-research-code.md)を参照する。
 
 | 境界 | 現在の配置と保守ルール |
 | --- | --- |

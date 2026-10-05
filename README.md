@@ -25,7 +25,7 @@ AI研究は競合仮説と実験を並行し、結果から修正・再確認・
 | `.artifacts/`, `artifacts/` | ローカル運用/出力・データ展開・一時物、Playwrightブラウザ等。研究の出力は`.artifacts/ai-sigma/` |
 | `research-paths.json`で参照する実験モデル・外部cache | 研究モデルと共有依存。保存先/配布条件は[保存方針](.devcontainer/storage-policy.md)参照 |
 
-main `/workspaces/quoridor` が持続的研究の統合正本です。並行変更・比較にはmanaged worktreeを使い、roles・docs・現役sourceを恒常mirrorしません。旧`.worktree/ai-sigma`は凍結参照と既モデル/展開入力の永続pathとして保護し、編集先にはしません。コードと永続入力の参照は[`research-paths.json`](research-paths.json)、機能境界・実入口・凍結recipe・保存/検査手順は[研究コードの保守案内](docs/development/ai-research-code.md)にまとめています。文書を探す入口は[AGENTS.mdのインデックス](AGENTS.md#文書インデックス)。
+main `/workspaces/quoridor` が持続的研究の統合正本です。並行変更・比較にはmanaged worktreeを使い、roles・docs・現役sourceを恒常mirrorしません。必要なモデル・checkpoint・入力は同じ永続volumeの`.worktree/assets/`で保持し、コードcheckoutと分離します。共有DB・lockと作業中worktreeを保持し、旧checkoutの撤去は情報保全・復元確認と読者停止後に行います。旧runの絶対pathは移動対応manifestで追跡し、互換symlinkや旧source一式を残しません。コードと永続入力の参照は[`research-paths.json`](research-paths.json)、機能境界・実入口・凍結recipe・保存/検査手順は[研究コードの保守案内](docs/development/ai-research-code.md)にまとめています。文書を探す入口は[AGENTS.mdのインデックス](AGENTS.md#文書インデックス)。
 
 研究sourceの軽量検査は`python3 scripts/dev/check-research.py`、対象の整形は同コマンドの`--format`を使います。製品build・学習・モデルforward・対局を起動しません。研究専用の整形依存は`tools/research-quality/`で固定し、製品npmと共有学習環境へ混ぜません。
 

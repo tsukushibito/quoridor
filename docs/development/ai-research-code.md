@@ -1,6 +1,6 @@
 # 研究コードの配置と保守
 
-Linuxネイティブを主経路とし、評価・探索・対局・推論queue・教師生成はRust、学習・解析・モデル変換はPythonを使う。具体的なビルドとrun設定は[運用手順](rust-ai.md)、学習は[学習手順](nnue-training.md)を参照する。コード正本はmain。旧worktreeのモデルや入力は`research-paths.json`に示す永続資産であり、現役コードの別正本ではない。
+Linuxネイティブを主経路とし、評価・探索・対局・推論queue・教師生成はRust、学習・解析・モデル変換はPythonを使う。具体的なビルドとrun設定は[運用手順](rust-ai.md)、学習は[学習手順](nnue-training.md)を参照する。コード正本はmain。モデル・checkpoint・入力は`research-paths.json`に示す`.worktree/assets/`の永続資産であり、コードcheckoutから分離する。移行中の使用資産は自然停止まで旧pathを保護する。旧runの参照は移動対応manifestで追跡し、原結果を書換えない。
 
 主要ディレクトリの責務と検索の切替点は[crates](../../crates/README.md)、[tools](../../tools/README.md)、[scripts](../../scripts/README.md)、[docs](../README.md)、[保存データ](../../research-data/README.md)から選ぶ。主要構成・公開入口を移す変更では、担当ownerが対応READMEとこの案内も更新する。全階層への案内配置や新しい全資料必読・定期全体監査を義務にしない。
 
@@ -52,3 +52,12 @@ Gitにはコード・設定・必要な実験検証データを保存する。�
 `node scripts/export-fresh-source.mjs --scope research --destination <新出力先> --max-bytes 67108864`は現役crate、Python、管理・品質ツールと文書を書き出す。モデル・科学データ・runtime・一時sessionは含まない。限定集合は`--paths-file`で指定できる。既存出力やindexは上書きしない。
 
 ONNX Runtime 1.30.0はtelemetry初期化時に`:memory:.ses`を生成する。`project-env.sh`とDevContainer設定は`ORT_DISABLE_TELEMETRY=1`を指定し、runner・学習package・環境診断もORT読み込み前に無効化する。任意の外部PythonからORTを直接読み込む場合も、この環境変数を先に設定する。既存コンテナの新設定は`source scripts/dev/project-env.sh`で適用できる。
+
+
+### 永続資産と旧pathの追跡
+
+`research-paths.json`のmodels/checkpoints/inputsは`.worktree/assets/`のカテゴリを指す。コードcheckoutを保存先にしない。現在の資産解決は`python3 scripts/dev/research-assets.py --kind models --name ai-sigma/reference/sigma-pcr250/best.onnx`。内容確認を伴う場合だけ`--sha256`を付ける。旧payloadの絶対pathは`--legacy-path <original-path>`で移動対応manifestへ照合できる。未対応・欠落・範囲外参照・SHA不一致はエラーとし、旧worktreeへのfallbackやsymlinkを作らない。
+
+旧weight-manifestは元の絶対pathのままmain Gitへ保持する。現在のNNUE descriptorは`--kind models --name legacy/frame18-native-connection/manifest.json`で解決し、相対weights参照だけを移行先へ更新した。重み・特徴・scale・教師ラベル・split・旧runの条件は変更していない。新runは現在の解決済path/SHAを自身の設定へbindし、旧run原記録を上書きしない。既入力の移動は自然停止・子回収とbyte確認後に同volume renameで行う。資産移動・チェックは学習/推論/対局を起動しない。
+
+軽量検証は`python3 -B scripts/dev/test_research_assets.py`。資産解決、欠落、path traversal、symlink範囲外、旧payloadのSHA/size変化を合成fixtureで確認する。旧checkoutの撤去では未保存情報のGit/圧縮保存と復元を確認し、registered checkoutは`manage_worktree.sh remove`、Git操作窓は単一統合ownerと合わせる。保全・移動対応は`research-data/ai-sigma/1d2-worktree-consolidation/`、製品固有証拠は`research-data/worktree-consolidation/1d2/`へ分けて保存する。[今回の移行・復元・撤去結果](../reports/ai-sigma-worktree-consolidation.md)を参照する。

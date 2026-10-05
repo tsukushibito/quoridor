@@ -1,0 +1,255 @@
+{
+  "roots": [
+    {
+      "name": "main research code",
+      "category": "code",
+      "path": "/workspaces/quoridor/tools",
+      "exclude": [
+        "node_modules",
+        ".venv",
+        "__pycache__",
+        "target",
+        "target"
+      ]
+    },
+    {
+      "name": "main preserved research data",
+      "category": "data",
+      "path": "/workspaces/quoridor/research-data/ai-sigma"
+    },
+    {
+      "name": "shared Git objects",
+      "category": "git",
+      "path": "/workspaces/quoridor/.git"
+    },
+    {
+      "name": "retained legacy data/code",
+      "category": "legacy-assets",
+      "path": "/workspaces/quoridor/.worktree/ai-sigma",
+      "exclude": [
+        ".artifacts",
+        "node_modules",
+        "__pycache__",
+        "target",
+        ".venv"
+      ]
+    },
+    {
+      "name": "retained legacy live/extraction",
+      "category": "legacy-live",
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma"
+    },
+    {
+      "name": "training environment",
+      "category": "shared-dependencies",
+      "path": "/home/vscode/.cache/inference/envs/quoridor-training"
+    },
+    {
+      "name": "team environment",
+      "category": "shared-dependencies",
+      "path": "/home/vscode/.cache/inference/envs/quoridor-research-team"
+    },
+    {
+      "name": "uv shared cache",
+      "category": "shared-cache",
+      "path": "/home/vscode/.cache/inference/uv"
+    },
+    {
+      "name": "new quality environment",
+      "category": "quality",
+      "path": "/workspaces/quoridor/tools/research-quality/.venv"
+    },
+    {
+      "name": "new quality npm dependency",
+      "category": "quality",
+      "path": "/workspaces/quoridor/tools/research-quality/node_modules"
+    },
+    {
+      "name": "current native Rust code",
+      "category": "code",
+      "path": "/workspaces/quoridor/crates",
+      "exclude": [
+        "target"
+      ]
+    },
+    {
+      "name": "current Python training source",
+      "category": "code",
+      "path": "/workspaces/quoridor/python",
+      "exclude": [
+        "__pycache__"
+      ]
+    },
+    {
+      "name": "current management/source procedures",
+      "category": "code",
+      "path": "/workspaces/quoridor/scripts/dev"
+    },
+    {
+      "name": "current main research live",
+      "category": "live",
+      "path": "/workspaces/quoridor/.artifacts/ai-sigma"
+    },
+    {
+      "name": "current native release/build workspace",
+      "category": "live-build",
+      "path": "/workspaces/quoridor/.artifacts/rust-migration"
+    },
+    {
+      "name": "current scheduler operation metadata",
+      "category": "live",
+      "path": "/workspaces/quoridor/.artifacts/research-team/frame21"
+    },
+    {
+      "name": "previous research cache",
+      "category": "shared-reprocache",
+      "path": "/home/vscode/.cache/inference/research"
+    },
+    {
+      "name": "held TensorRT backend",
+      "category": "shared-dependencies",
+      "path": "/home/vscode/.cache/inference/backends"
+    },
+    {
+      "name": "current Rust migration compiled/cache",
+      "category": "shared-cache",
+      "path": "/home/vscode/.cache/inference/rust-migration"
+    },
+    {
+      "name": "managed Python interpreters",
+      "category": "shared-dependencies",
+      "path": "/home/vscode/.cache/inference/python"
+    },
+    {
+      "name": "management current and historical metadata",
+      "category": "live",
+      "path": "/workspaces/quoridor/.artifacts/research-team"
+    },
+    {
+      "name": "previous refactor proofs",
+      "category": "live",
+      "path": "/workspaces/quoridor/.artifacts/refactor262"
+    },
+    {
+      "name": "current canonical design/report/procedure",
+      "category": "code",
+      "path": "/workspaces/quoridor/docs"
+    },
+    {
+      "name": "current saved role source",
+      "category": "code",
+      "path": "/workspaces/quoridor/.agents/research-team"
+    },
+    {
+      "name": "inference tiny plotcache",
+      "category": "shared-cache",
+      "path": "/home/vscode/.cache/inference/matplotlib"
+    },
+    {
+      "name": "retained migrated assets",
+      "category": "assets",
+      "path": "/workspaces/quoridor/.worktree/assets"
+    },
+    {
+      "name": "active feature worktree",
+      "category": "code",
+      "path": "/workspaces/quoridor/.worktree/frame21-features"
+    },
+    {
+      "name": "active search worktree",
+      "category": "code",
+      "path": "/workspaces/quoridor/.worktree/frame21-search"
+    },
+    {
+      "name": "cleanup live metadata",
+      "category": "live",
+      "path": "/workspaces/quoridor/.artifacts/worktree-cleanup"
+    }
+  ],
+  "cap_bytes": 12884901888,
+  "unknown_retained_bytes": 134217728,
+  "reservations": [
+    {
+      "category": "conservative-92-remaining-management",
+      "reserved_bytes": 117440512,
+      "owner": "92",
+      "basis": "full bound conservatively adds already held too; actual unused never larger"
+    },
+    {
+      "category": "v8-unused-pool-before268-transfer-conservative",
+      "reserved_bytes": 7446528,
+      "basis": "v8 pool includes2684MiB also conservatively within10MiB forecast; no previous135372800 added"
+    },
+    {
+      "category": "worktree-preservation-growth",
+      "owner": "root/1d2.1",
+      "reserved_bytes": 167772160,
+      "basis": "counted compressed unique archive+uniqueGit+metadata 155838058B; new160MiB bound, original conservative reservations unchanged"
+    }
+  ],
+  "outside_scope_protected": [
+    {
+      "path": "/workspaces/quoridor/artifacts",
+      "reason": "production phase1/2/3 screenshot/Playwright evidence; never used/read by NNUE research; preserve no delete"
+    },
+    {
+      "path": "/workspaces/quoridor/apps",
+      "reason": "product source/build boundary; current common Rust counted separately; preserve"
+    },
+    {
+      "path": "/workspaces/quoridor/node_modules",
+      "reason": "product/maintenance Node environment outside science; preserve"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/webapp-m1",
+      "reason": "different Beads product goal; no current research use; preserve"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/.beads-state",
+      "reason": "shared task service state across goals, not science dataset; preserve"
+    }
+  ],
+  "forecast_bytes": 220200960,
+  "forecast_note": "192MiB release additions (266/267/26864MiB each), sparseWT2+6MiB, source/results2+4+4MiB transferred allocations; 112MiB/32MiB remaining and old active-unused pool separately bound without overlap by Coordinator.",
+  "unknown_note": "Original unknown retained/remaining reservations not zeroed by this measurement; scoped roots+observed corrections supplied for Coordinator aggregate admission",
+  "unknown_bound_basis": "128MiB directed residual/small-scope attribution envelope within current cap; original6,588,000,723B overlapping historical envelope unchanged. Known research roots now observed incl outside old262 cache/backends/Python/runtime/source. No whole-host guarantee; new root or growth beyond explicit forecast requires new admission.",
+  "original_charge_reference": "research-data/ai-sigma/resource-ledger.json conditional_envelope.old_unknown_conservative_charge_unchanged; not rewritten, fresh current inode observation replaces current use of overlapping historical envelope.",
+  "closure": "Old WT frozen inputs/data/source/models+Git+main current research/data/build/live+both registered env+UV+old research Cargo/npm cache+TensorRT+Python and migrationcache+historical management+small old research WTs. Historical completed scope unused ceilings are not new job reservations.",
+  "verified_absent_roots_not_current_use": [
+    {
+      "name": "old research team WT",
+      "category": "legacy-assets",
+      "path": "/workspaces/quoridor/.worktree/research-team"
+    },
+    {
+      "name": "old scheduler WT",
+      "category": "legacy-assets",
+      "path": "/workspaces/quoridor/.worktree/scheduler"
+    },
+    {
+      "name": "previous data learning WT",
+      "category": "legacy-assets",
+      "path": "/workspaces/quoridor/.worktree/ai-sigma-frame18-data-learning"
+    }
+  ],
+  "completed_future_reservations_released": [
+    {
+      "category": "new-frame21-build-source-science-growth",
+      "reserved_bytes": 220200960,
+      "owner": "266/267/268",
+      "basis": "192MiB shared release growth+8MiB sparse source+10MiB science, conservative full growth independent of current retained"
+    },
+    {
+      "category": "conservative-40-remaining-management",
+      "reserved_bytes": 33554432,
+      "owner": "40",
+      "basis": "full bound conservatively adds already held too"
+    },
+    {
+      "category": "coordinator-management-growth",
+      "reserved_bytes": 2097152,
+      "owner": "coordinator"
+    }
+  ],
+  "release_basis": "2026-10-05 frame21 final owner report: all scientific sources/children stopped, all research tasks closed/backup, scheduler/monitor exactstop, coordinator Git owner released. Current retained actual files stay fully charged. Old manifests/caps/raw not edited. These ended job growth forecasts are not new outstanding jobs."
+}

@@ -1,0 +1,7 @@
+# 同steward activeへの限定scope補足
+
+rootのAGENTS.md整形規約編集は既にsource停止、Git統合担当へ引渡し済み。新asset配置へcurrent案内を合わせるため、今回1d2.1の文書scopeにmain AGENTS.mdの配置案内、README.md、docs/design/ai-research-team.mdの配置説明だけを追加する。rootはこれらを並行編集しない。既整形規約等の無関係な本文は保持する。
+
+役common/roles/registry、現在の科学契約と保存原結果の旧絶対pathは遡及変更しない。既current runtimeのbinding対象を変更する必要がある場合は92の自然停止点で扱い、現在研究のsource/bindingを途中で破らない。旧モデル/入力のSHAを保持し移動対応manifestで原run参照を追跡する。追加の全体監査・学習・NN検査・保守ゲートは不要。
+
+main Git統合ownerはcoordinator、rootの未コミットAGENTS/beads-workflow整形規約を含む他者変更を保持して統合する。現在role/モデル設定・研究期限・parent保存上限は変更しない。

@@ -1,0 +1,417 @@
+{
+  "schema": "quoridor-current-storage-v1",
+  "at": "2026-10-05T10:46:40.713238+00:00",
+  "metric": "unique dev/inode st_blocks; reflink shared physical extents unknown",
+  "roots": [
+    {
+      "name": "main research code",
+      "category": "code",
+      "path": "/workspaces/quoridor/tools",
+      "exclude": [
+        "node_modules",
+        ".venv",
+        "__pycache__",
+        "target",
+        "target"
+      ],
+      "logical_file_bytes": 1174300,
+      "allocated_inode_bytes": 1245184,
+      "overlap_allocated_bytes": 0,
+      "files": 41,
+      "symlinks": 0,
+      "missing": false
+    },
+    {
+      "name": "main preserved research data",
+      "category": "data",
+      "path": "/workspaces/quoridor/research-data/ai-sigma",
+      "logical_file_bytes": 511945116,
+      "allocated_inode_bytes": 523280384,
+      "overlap_allocated_bytes": 0,
+      "files": 6622,
+      "symlinks": 0,
+      "missing": false
+    },
+    {
+      "name": "shared Git objects",
+      "category": "git",
+      "path": "/workspaces/quoridor/.git",
+      "logical_file_bytes": 463781652,
+      "allocated_inode_bytes": 490520576,
+      "overlap_allocated_bytes": 0,
+      "files": 16334,
+      "symlinks": 0,
+      "missing": false
+    },
+    {
+      "name": "retained legacy data/code",
+      "category": "legacy-assets",
+      "path": "/workspaces/quoridor/.worktree/ai-sigma",
+      "exclude": [
+        ".artifacts",
+        "node_modules",
+        "__pycache__",
+        "target",
+        ".venv"
+      ],
+      "logical_file_bytes": 815314798,
+      "allocated_inode_bytes": 842153984,
+      "overlap_allocated_bytes": 0,
+      "files": 9218,
+      "symlinks": 0,
+      "missing": false
+    },
+    {
+      "name": "retained legacy live/extraction",
+      "category": "legacy-live",
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma",
+      "logical_file_bytes": 1270722698,
+      "allocated_inode_bytes": 1338081280,
+      "overlap_allocated_bytes": 0,
+      "files": 23652,
+      "symlinks": 25,
+      "missing": false
+    },
+    {
+      "name": "training environment",
+      "category": "shared-dependencies",
+      "path": "/home/vscode/.cache/inference/envs/quoridor-training",
+      "logical_file_bytes": 5727479861,
+      "allocated_inode_bytes": 5790285824,
+      "overlap_allocated_bytes": 0,
+      "files": 21953,
+      "symlinks": 4,
+      "missing": false
+    },
+    {
+      "name": "team environment",
+      "category": "shared-dependencies",
+      "path": "/home/vscode/.cache/inference/envs/quoridor-research-team",
+      "logical_file_bytes": 1191786,
+      "allocated_inode_bytes": 1495040,
+      "overlap_allocated_bytes": 0,
+      "files": 104,
+      "symlinks": 4,
+      "missing": false
+    },
+    {
+      "name": "uv shared cache",
+      "category": "shared-cache",
+      "path": "/home/vscode/.cache/inference/uv",
+      "logical_file_bytes": 835240415,
+      "allocated_inode_bytes": 856518656,
+      "overlap_allocated_bytes": 954368,
+      "files": 7384,
+      "symlinks": 38,
+      "missing": false
+    },
+    {
+      "name": "new quality environment",
+      "category": "quality",
+      "path": "/workspaces/quoridor/tools/research-quality/.venv",
+      "logical_file_bytes": 36806455,
+      "allocated_inode_bytes": 36843520,
+      "overlap_allocated_bytes": 0,
+      "files": 25,
+      "symlinks": 4,
+      "missing": false
+    },
+    {
+      "name": "new quality npm dependency",
+      "category": "quality",
+      "path": "/workspaces/quoridor/tools/research-quality/node_modules",
+      "logical_file_bytes": 8458900,
+      "allocated_inode_bytes": 8544256,
+      "overlap_allocated_bytes": 0,
+      "files": 57,
+      "symlinks": 1,
+      "missing": false
+    },
+    {
+      "name": "current native Rust code",
+      "category": "code",
+      "path": "/workspaces/quoridor/crates",
+      "exclude": [
+        "target"
+      ],
+      "logical_file_bytes": 867216,
+      "allocated_inode_bytes": 1015808,
+      "overlap_allocated_bytes": 0,
+      "files": 78,
+      "symlinks": 0,
+      "missing": false
+    },
+    {
+      "name": "current Python training source",
+      "category": "code",
+      "path": "/workspaces/quoridor/python",
+      "exclude": [
+        "__pycache__"
+      ],
+      "logical_file_bytes": 43129,
+      "allocated_inode_bytes": 65536,
+      "overlap_allocated_bytes": 0,
+      "files": 10,
+      "symlinks": 0,
+      "missing": false
+    },
+    {
+      "name": "current management/source procedures",
+      "category": "code",
+      "path": "/workspaces/quoridor/scripts/dev",
+      "logical_file_bytes": 340628,
+      "allocated_inode_bytes": 401408,
+      "overlap_allocated_bytes": 0,
+      "files": 33,
+      "symlinks": 0,
+      "missing": false
+    },
+    {
+      "name": "current main research live",
+      "category": "live",
+      "path": "/workspaces/quoridor/.artifacts/ai-sigma",
+      "logical_file_bytes": 1916138,
+      "allocated_inode_bytes": 2887680,
+      "overlap_allocated_bytes": 0,
+      "files": 627,
+      "symlinks": 0,
+      "missing": false
+    },
+    {
+      "name": "current native release/build workspace",
+      "category": "live-build",
+      "path": "/workspaces/quoridor/.artifacts/rust-migration",
+      "logical_file_bytes": 471985118,
+      "allocated_inode_bytes": 474460160,
+      "overlap_allocated_bytes": 0,
+      "files": 1950,
+      "symlinks": 0,
+      "missing": false
+    },
+    {
+      "name": "current scheduler operation metadata",
+      "category": "live",
+      "path": "/workspaces/quoridor/.artifacts/research-team/frame21",
+      "logical_file_bytes": 23115,
+      "allocated_inode_bytes": 77824,
+      "overlap_allocated_bytes": 0,
+      "files": 23,
+      "symlinks": 0,
+      "missing": false
+    },
+    {
+      "name": "previous research cache",
+      "category": "shared-reprocache",
+      "path": "/home/vscode/.cache/inference/research",
+      "logical_file_bytes": 346477512,
+      "allocated_inode_bytes": 375341056,
+      "overlap_allocated_bytes": 0,
+      "files": 7588,
+      "symlinks": 9,
+      "missing": false
+    },
+    {
+      "name": "held TensorRT backend",
+      "category": "shared-dependencies",
+      "path": "/home/vscode/.cache/inference/backends",
+      "logical_file_bytes": 1174345062,
+      "allocated_inode_bytes": 1174548480,
+      "overlap_allocated_bytes": 0,
+      "files": 47,
+      "symlinks": 8,
+      "missing": false
+    },
+    {
+      "name": "current Rust migration compiled/cache",
+      "category": "shared-cache",
+      "path": "/home/vscode/.cache/inference/rust-migration",
+      "logical_file_bytes": 72566502,
+      "allocated_inode_bytes": 79478784,
+      "overlap_allocated_bytes": 0,
+      "files": 2667,
+      "symlinks": 9,
+      "missing": false
+    },
+    {
+      "name": "managed Python interpreters",
+      "category": "shared-dependencies",
+      "path": "/home/vscode/.cache/inference/python",
+      "logical_file_bytes": 107833796,
+      "allocated_inode_bytes": 118583296,
+      "overlap_allocated_bytes": 0,
+      "files": 3755,
+      "symlinks": 1049,
+      "missing": false
+    },
+    {
+      "name": "management current and historical metadata",
+      "category": "live",
+      "path": "/workspaces/quoridor/.artifacts/research-team",
+      "logical_file_bytes": 15702410,
+      "allocated_inode_bytes": 16670720,
+      "overlap_allocated_bytes": 77824,
+      "files": 701,
+      "symlinks": 0,
+      "missing": false
+    },
+    {
+      "name": "previous refactor proofs",
+      "category": "live",
+      "path": "/workspaces/quoridor/.artifacts/refactor262",
+      "logical_file_bytes": 25668774,
+      "allocated_inode_bytes": 25796608,
+      "overlap_allocated_bytes": 0,
+      "files": 120,
+      "symlinks": 0,
+      "missing": false
+    },
+    {
+      "name": "current canonical design/report/procedure",
+      "category": "code",
+      "path": "/workspaces/quoridor/docs",
+      "logical_file_bytes": 3935251,
+      "allocated_inode_bytes": 5160960,
+      "overlap_allocated_bytes": 0,
+      "files": 610,
+      "symlinks": 0,
+      "missing": false
+    },
+    {
+      "name": "current saved role source",
+      "category": "code",
+      "path": "/workspaces/quoridor/.agents/research-team",
+      "logical_file_bytes": 26651,
+      "allocated_inode_bytes": 53248,
+      "overlap_allocated_bytes": 0,
+      "files": 10,
+      "symlinks": 0,
+      "missing": false
+    },
+    {
+      "name": "inference tiny plotcache",
+      "category": "shared-cache",
+      "path": "/home/vscode/.cache/inference/matplotlib",
+      "logical_file_bytes": 43281,
+      "allocated_inode_bytes": 49152,
+      "overlap_allocated_bytes": 0,
+      "files": 1,
+      "symlinks": 0,
+      "missing": false
+    },
+    {
+      "name": "retained migrated assets",
+      "category": "assets",
+      "path": "/workspaces/quoridor/.worktree/assets",
+      "logical_file_bytes": 18827480,
+      "allocated_inode_bytes": 19120128,
+      "overlap_allocated_bytes": 0,
+      "files": 65,
+      "symlinks": 0,
+      "missing": false
+    },
+    {
+      "name": "active feature worktree",
+      "category": "code",
+      "path": "/workspaces/quoridor/.worktree/frame21-features",
+      "logical_file_bytes": 3668234,
+      "allocated_inode_bytes": 4579328,
+      "overlap_allocated_bytes": 0,
+      "files": 266,
+      "symlinks": 0,
+      "missing": false
+    },
+    {
+      "name": "active search worktree",
+      "category": "code",
+      "path": "/workspaces/quoridor/.worktree/frame21-search",
+      "logical_file_bytes": 1807884,
+      "allocated_inode_bytes": 2576384,
+      "overlap_allocated_bytes": 0,
+      "files": 225,
+      "symlinks": 0,
+      "missing": false
+    },
+    {
+      "name": "cleanup live metadata",
+      "category": "live",
+      "path": "/workspaces/quoridor/.artifacts/worktree-cleanup",
+      "logical_file_bytes": 258098568,
+      "allocated_inode_bytes": 259780608,
+      "overlap_allocated_bytes": 0,
+      "files": 886,
+      "symlinks": 0,
+      "missing": false
+    }
+  ],
+  "category_current_allocated_bytes": {
+    "code": 15097856,
+    "data": 523280384,
+    "git": 490520576,
+    "legacy-assets": 842153984,
+    "legacy-live": 1338081280,
+    "shared-dependencies": 7084912640,
+    "shared-cache": 936046592,
+    "quality": 45387776,
+    "live": 305213440,
+    "live-build": 474460160,
+    "shared-reprocache": 375341056,
+    "assets": 19120128
+  },
+  "retained_allocated_inode_bytes": 12449615872,
+  "reservations": [
+    {
+      "category": "new-frame21-build-source-science-growth",
+      "reserved_bytes": 220200960,
+      "owner": "266/267/268",
+      "basis": "192MiB shared release growth+8MiB sparse source+10MiB science, conservative full growth independent of current retained",
+      "current_allocated_bytes": 0,
+      "unused_bytes": 220200960
+    },
+    {
+      "category": "conservative-92-remaining-management",
+      "reserved_bytes": 117440512,
+      "owner": "92",
+      "basis": "full bound conservatively adds already held too; actual unused never larger",
+      "current_allocated_bytes": 0,
+      "unused_bytes": 117440512
+    },
+    {
+      "category": "conservative-40-remaining-management",
+      "reserved_bytes": 33554432,
+      "owner": "40",
+      "basis": "full bound conservatively adds already held too",
+      "current_allocated_bytes": 0,
+      "unused_bytes": 33554432
+    },
+    {
+      "category": "coordinator-management-growth",
+      "reserved_bytes": 2097152,
+      "owner": "coordinator",
+      "current_allocated_bytes": 0,
+      "unused_bytes": 2097152
+    },
+    {
+      "category": "v8-unused-pool-before268-transfer-conservative",
+      "reserved_bytes": 7446528,
+      "basis": "v8 pool includes2684MiB also conservatively within10MiB forecast; no previous135372800 added",
+      "current_allocated_bytes": 0,
+      "unused_bytes": 7446528
+    },
+    {
+      "category": "worktree-preservation-growth",
+      "owner": "root/1d2.1",
+      "reserved_bytes": 167772160,
+      "basis": "counted compressed unique archive+uniqueGit+metadata 155838058B; new160MiB bound, original conservative reservations unchanged",
+      "current_allocated_bytes": 0,
+      "unused_bytes": 167772160
+    }
+  ],
+  "unknown_retained_bytes": 134217728,
+  "current_plus_unused_known_bytes": 13132345344,
+  "cap_bytes": 12884901888,
+  "admission": "over",
+  "errors": [],
+  "past_peak_bytes": "not added to current; refer to original run receipts",
+  "unknown_is_free": false,
+  "deleted": false
+}

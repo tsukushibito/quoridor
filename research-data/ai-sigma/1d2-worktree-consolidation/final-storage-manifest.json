@@ -1,0 +1,211 @@
+{
+  "roots": [
+    {
+      "name": "main research code",
+      "category": "code",
+      "path": "/workspaces/quoridor/tools",
+      "exclude": [
+        "node_modules",
+        ".venv",
+        "__pycache__",
+        "target",
+        "target"
+      ]
+    },
+    {
+      "name": "main preserved research data",
+      "category": "data",
+      "path": "/workspaces/quoridor/research-data/ai-sigma"
+    },
+    {
+      "name": "shared Git objects",
+      "category": "git",
+      "path": "/workspaces/quoridor/.git"
+    },
+    {
+      "name": "training environment",
+      "category": "shared-dependencies",
+      "path": "/home/vscode/.cache/inference/envs/quoridor-training"
+    },
+    {
+      "name": "team environment",
+      "category": "shared-dependencies",
+      "path": "/home/vscode/.cache/inference/envs/quoridor-research-team"
+    },
+    {
+      "name": "uv shared cache",
+      "category": "shared-cache",
+      "path": "/home/vscode/.cache/inference/uv"
+    },
+    {
+      "name": "new quality environment",
+      "category": "quality",
+      "path": "/workspaces/quoridor/tools/research-quality/.venv"
+    },
+    {
+      "name": "new quality npm dependency",
+      "category": "quality",
+      "path": "/workspaces/quoridor/tools/research-quality/node_modules"
+    },
+    {
+      "name": "current native Rust code",
+      "category": "code",
+      "path": "/workspaces/quoridor/crates",
+      "exclude": [
+        "target"
+      ]
+    },
+    {
+      "name": "current Python training source",
+      "category": "code",
+      "path": "/workspaces/quoridor/python",
+      "exclude": [
+        "__pycache__"
+      ]
+    },
+    {
+      "name": "current management/source procedures",
+      "category": "code",
+      "path": "/workspaces/quoridor/scripts/dev"
+    },
+    {
+      "name": "current main research live",
+      "category": "live",
+      "path": "/workspaces/quoridor/.artifacts/ai-sigma"
+    },
+    {
+      "name": "current native release/build workspace",
+      "category": "live-build",
+      "path": "/workspaces/quoridor/.artifacts/rust-migration"
+    },
+    {
+      "name": "current scheduler operation metadata",
+      "category": "live",
+      "path": "/workspaces/quoridor/.artifacts/research-team/frame21"
+    },
+    {
+      "name": "previous research cache",
+      "category": "shared-reprocache",
+      "path": "/home/vscode/.cache/inference/research"
+    },
+    {
+      "name": "held TensorRT backend",
+      "category": "shared-dependencies",
+      "path": "/home/vscode/.cache/inference/backends"
+    },
+    {
+      "name": "current Rust migration compiled/cache",
+      "category": "shared-cache",
+      "path": "/home/vscode/.cache/inference/rust-migration"
+    },
+    {
+      "name": "managed Python interpreters",
+      "category": "shared-dependencies",
+      "path": "/home/vscode/.cache/inference/python"
+    },
+    {
+      "name": "management current and historical metadata",
+      "category": "live",
+      "path": "/workspaces/quoridor/.artifacts/research-team"
+    },
+    {
+      "name": "previous refactor proofs",
+      "category": "live",
+      "path": "/workspaces/quoridor/.artifacts/refactor262"
+    },
+    {
+      "name": "current canonical design/report/procedure",
+      "category": "code",
+      "path": "/workspaces/quoridor/docs"
+    },
+    {
+      "name": "current saved role source",
+      "category": "code",
+      "path": "/workspaces/quoridor/.agents/research-team"
+    },
+    {
+      "name": "inference tiny plotcache",
+      "category": "shared-cache",
+      "path": "/home/vscode/.cache/inference/matplotlib"
+    },
+    {
+      "name": "persistent assets after reader stop",
+      "path": "/workspaces/quoridor/.worktree/assets",
+      "category": "retained-assets"
+    },
+    {
+      "name": "generic preserved product quality evidence",
+      "path": "/workspaces/quoridor/research-data/worktree-consolidation/1d2",
+      "category": "maintenance-evidence"
+    },
+    {
+      "name": "current sparse search worktree",
+      "path": "/workspaces/quoridor/.worktree/frame21-search",
+      "category": "active-source-data"
+    },
+    {
+      "name": "current sparse features worktree",
+      "path": "/workspaces/quoridor/.worktree/frame21-features",
+      "category": "active-source-data"
+    },
+    {
+      "name": "current maintenance read/proofs",
+      "path": "/workspaces/quoridor/.artifacts/worktree-cleanup/1d2",
+      "category": "maintenance-live"
+    },
+    {
+      "name": "current maintenance live receipts and tooling",
+      "category": "maintenance-live",
+      "path": "/workspaces/quoridor/.artifacts/worktree-cleanup/1d2"
+    }
+  ],
+  "cap_bytes": 12884901888,
+  "unknown_retained_bytes": 134217728,
+  "reservations": [
+    {
+      "category": "conservative-92-remaining-management",
+      "reserved_bytes": 117440512,
+      "owner": "92",
+      "basis": "full bound conservatively adds already held too; actual unused never larger"
+    },
+    {
+      "category": "v8-unused-pool-before268-transfer-conservative",
+      "reserved_bytes": 7446528,
+      "basis": "v8 pool includes2684MiB also conservatively within10MiB forecast; no previous135372800 added"
+    },
+    {
+      "category": "Root-1d2-maintenance-growth-conservative",
+      "reserved_bytes": 167772160,
+      "owner": "Root maintenance",
+      "basis": "Root explicit160MiB; full additional conservative forecast including portions already retained. Original historical92guard remains unchanged."
+    }
+  ],
+  "outside_scope_protected": [
+    {
+      "path": "/workspaces/quoridor/artifacts",
+      "reason": "production phase1/2/3 screenshot/Playwright evidence; never used/read by NNUE research; preserve no delete"
+    },
+    {
+      "path": "/workspaces/quoridor/apps",
+      "reason": "product source/build boundary; current common Rust counted separately; preserve"
+    },
+    {
+      "path": "/workspaces/quoridor/node_modules",
+      "reason": "product/maintenance Node environment outside science; preserve"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/webapp-m1",
+      "reason": "different Beads product goal; no current research use; preserve"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/.beads-state",
+      "reason": "shared task service state across goals, not science dataset; preserve"
+    }
+  ],
+  "forecast_bytes": 167772160,
+  "forecast_note": "Root released completed future science/build/Supervisor/coordinator growth only for maintenance current accounting. Retained files and original historical manifests/caps unchanged;92/v8 and unknown kept conservatively. No new science.",
+  "unknown_note": "Original unknown retained/remaining reservations not zeroed by this measurement; scoped roots+observed corrections supplied for Coordinator aggregate admission",
+  "unknown_bound_basis": "128MiB directed residual/small-scope attribution envelope within current cap; original6,588,000,723B overlapping historical envelope unchanged. Known research roots now observed incl outside old262 cache/backends/Python/runtime/source. No whole-host guarantee; new root or growth beyond explicit forecast requires new admission.",
+  "original_charge_reference": "research-data/ai-sigma/resource-ledger.json conditional_envelope.old_unknown_conservative_charge_unchanged; not rewritten, fresh current inode observation replaces current use of overlapping historical envelope.",
+  "closure": "Prior directed roots retained incl shared env/Git/cache/native/main source/data, registered search/features, persistent assets; retired legacy checkout/live no longer exists. Maintenance receipts added. Product artifacts/apps/unrelated worktrees remain protected outside science."
+}

@@ -1,0 +1,5 @@
+# Root復元確認と保全Gitへの引渡し
+
+Rootはlegacy-unique.tar.xz全7010member/192,924,639復元byte、全SHA、catalogとarchiveSHAを独立確認PASS。root-legacy-preservation.jsonへ保存。76oldpath/64unique assetの全SHA/size、CLI旧SigmaONNX→newasset、6resolver testsもPASS。通常Git/indexはRootのみ。
+
+旧ai-sigma撤去に先立つ保全commitへ進めます。停止済み保全payload/catalog/分類根拠/必要移行manifestの明示path+SHAとwriter停止を短く同activeで引渡してください。docsや最終capacity/reportの仕上げを同時に待つ必要はありません。Rootは保全必要pathだけstage/commitし、Git復元byte確認後にai-sigma helper撤去窓を同activeへ返します。現在index書込0、登録解除0。
