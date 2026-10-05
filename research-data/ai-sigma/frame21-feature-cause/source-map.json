@@ -1,0 +1,111 @@
+{
+  "issue": "quoridor-4lc.265",
+  "UTC": "2026-10-05T08:57:55.204468+00:00",
+  "local": [
+    {
+      "path": "research-data/ai-sigma/frame21-coordinator/feature-cause-contract.md",
+      "SHA256": "db2a0493b64b652cb5a429b727887e601f7ce498d5f84ecc6147ff64944fa02e",
+      "bytes": 3308,
+      "purpose": "static source or saved train/validation only"
+    },
+    {
+      "path": "docs/design/ai-nnue-feature-design.md",
+      "SHA256": "6331af8f3f01856c0c4be777b933571d81b2dae3676369fbd37163d8d8a6771f",
+      "bytes": 28615,
+      "purpose": "static source or saved train/validation only"
+    },
+    {
+      "path": "crates/quoridor-ai/src/alphabeta.rs",
+      "SHA256": "e3dfd6207caa2a6d38874effd3a260913e95f8b660adf347c7f32593ebc41cf3",
+      "bytes": 24856,
+      "purpose": "static source or saved train/validation only"
+    },
+    {
+      "path": "crates/quoridor-core/src/position.rs",
+      "SHA256": "b12e79a99cf3441cf4acebbea1b827dce24b02db6fb2269021964872535e3ab6",
+      "bytes": 10880,
+      "purpose": "static source or saved train/validation only"
+    },
+    {
+      "path": "crates/quoridor-nnue/src/features.rs",
+      "SHA256": "8711e1b1a6f2e3f32103f70c4a1b8b4cf204c783c0a67e78b7772a880662a2f8",
+      "bytes": 3510,
+      "purpose": "static source or saved train/validation only"
+    },
+    {
+      "path": "crates/quoridor-nnue/src/lib.rs",
+      "SHA256": "41c5717aa2489dd31b591bae3b5fc319ccf14779aa04e571d9d0cf017b10c2ae",
+      "bytes": 16818,
+      "purpose": "static source or saved train/validation only"
+    },
+    {
+      "path": "crates/quoridor-data/src/lib.rs",
+      "SHA256": "c9f12b7208615e23c9f55c00c61fd35e1435c5c1084491955392ee04d0dd6853",
+      "bytes": 26851,
+      "purpose": "static source or saved train/validation only"
+    },
+    {
+      "path": "python/quoridor_training/model.py",
+      "SHA256": "2baeb2323d98c2422d49045b02dacf1838a0ff1a1e6add631620adb53246b86a",
+      "bytes": 825,
+      "purpose": "static source or saved train/validation only"
+    },
+    {
+      "path": "python/quoridor_training/scaled_model.py",
+      "SHA256": "e8fb84f2463f6ccc5727042d4461b64938fd3617fe338de616a360cf62ea73d2",
+      "bytes": 2730,
+      "purpose": "static source or saved train/validation only"
+    },
+    {
+      "path": "python/quoridor_training/train.py",
+      "SHA256": "de6e9f3c7b2995108a78cc9fc33581db9749590d67260736640a842523149157",
+      "bytes": 17653,
+      "purpose": "static source or saved train/validation only"
+    },
+    {
+      "path": "python/quoridor_training/common.py",
+      "SHA256": "a33900a8d7ca02b2e2651bb0722cf67ab7b3d6f1f1c5cf2d61215822eb5eda8b",
+      "bytes": 5681,
+      "purpose": "static source or saved train/validation only"
+    },
+    {
+      "path": "research-data/ai-sigma/frame14-distance-residual/runs/frame14-distance-residual-r1/summary.json",
+      "SHA256": "2089c1dc01a0bda5323b6ec5180f0917951c018ac1187d69e6a2711db7ce8eea",
+      "bytes": 92328,
+      "purpose": "static source or saved train/validation only"
+    },
+    {
+      "path": "research-data/ai-sigma/frame16-fit-gap-analysis/residual-head-control/result.json",
+      "SHA256": "60a1b20b3dcb4b4480267eebd5b6e2dbf41c32ba7f79ef416dfff3777516082d",
+      "bytes": 4351,
+      "purpose": "static source or saved train/validation only"
+    },
+    {
+      "path": "research-data/ai-sigma/frame16-fit-gap-analysis/science-result-report.md",
+      "SHA256": "3f88222ea5006de1ba6bb385ee9bd76c1938498d93727a7dad0c73d1621fb81e",
+      "bytes": 1627,
+      "purpose": "static source or saved train/validation only"
+    }
+  ],
+  "public": [
+    {
+      "repository": "SigmaQuoridor",
+      "commit": "751186344fc52ad0c29bc65922e62c6fa915f006",
+      "path": "game.py",
+      "URL": "https://github.com/bartolomeo3000/SigmaQuoridor/blob/751186344fc52ad0c29bc65922e62c6fa915f006/game.py",
+      "observed": "8x9x9: pawn/walls/reserves/full goal distance fields; vertical P2 flip; /80"
+    },
+    {
+      "repository": "Claustrophobia",
+      "commit": "ae093653e62ad700e201706fa5ed767093d0d68e",
+      "path": "src/encode.rs",
+      "URL": "https://github.com/Plaaasma/Claustrophobia/blob/ae093653e62ad700e201706fa5ed767093d0d68e/src/encode.rs",
+      "commit_resolution": "readonly GitHub commits/main API, then review pinned raw source",
+      "observed": "canonical180; 16 base planes include goal distance fields/path membership/legal walls/distance difference/threat fields; optional20 adds wall saliency; /20 clipping",
+      "intent_not_proof": "reduce need for CNN to emulate graph computation"
+    }
+  ],
+  "code_import_download": false,
+  "scientific_jobs": 0,
+  "adopted_QFT1_features": "local hypothesis, not attributed as verbatim reference design"
+}

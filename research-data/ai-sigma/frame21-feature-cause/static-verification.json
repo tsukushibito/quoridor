@@ -1,0 +1,85 @@
+{
+  "issue": "quoridor-4lc.265",
+  "UTC": "2026-10-05T09:01:55.027460+00:00",
+  "kind": "static self-review, no execution of research model/code",
+  "checks": {
+    "local_source_bind": true,
+    "public_commit_pinned": true,
+    "max_one_recommended_contrast": true,
+    "old_clip_vs_current_tanh_distinguished": true,
+    "representability_not_optimization_proof": true,
+    "teacher_error_not_samewall_strength": true,
+    "old_failure_not_replaced": true,
+    "old_test_and_173_not_analysis_inputs": true,
+    "no_source_copy_no_retired_trainer": true,
+    "Git_index_untouched_by_this_actor": true
+  },
+  "source_checks": [
+    {
+      "path": "research-data/ai-sigma/frame21-coordinator/feature-cause-contract.md",
+      "SHA_same": true
+    },
+    {
+      "path": "docs/design/ai-nnue-feature-design.md",
+      "SHA_same": true
+    },
+    {
+      "path": "crates/quoridor-ai/src/alphabeta.rs",
+      "SHA_same": true
+    },
+    {
+      "path": "crates/quoridor-core/src/position.rs",
+      "SHA_same": true
+    },
+    {
+      "path": "crates/quoridor-nnue/src/features.rs",
+      "SHA_same": true
+    },
+    {
+      "path": "crates/quoridor-nnue/src/lib.rs",
+      "SHA_same": true
+    },
+    {
+      "path": "crates/quoridor-data/src/lib.rs",
+      "SHA_same": true
+    },
+    {
+      "path": "python/quoridor_training/model.py",
+      "SHA_same": true
+    },
+    {
+      "path": "python/quoridor_training/scaled_model.py",
+      "SHA_same": true
+    },
+    {
+      "path": "python/quoridor_training/train.py",
+      "SHA_same": true
+    },
+    {
+      "path": "python/quoridor_training/common.py",
+      "SHA_same": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame14-distance-residual/runs/frame14-distance-residual-r1/summary.json",
+      "SHA_same": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame16-fit-gap-analysis/residual-head-control/result.json",
+      "SHA_same": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame16-fit-gap-analysis/science-result-report.md",
+      "SHA_same": true
+    }
+  ],
+  "scientific_CPU_jobs": 0,
+  "NN_samples": 0,
+  "new_train_arena_GPU": 0,
+  "actual_owned_children_current": 0,
+  "managed_report_child_waited_exit0": true,
+  "source_report_stop_UTC": "2026-10-05T09:01:55.027460+00:00",
+  "read_management_conservative_charge_s": 180,
+  "cap_s": 180,
+  "old_caps_reset": false,
+  "next_science_authorized_here": false
+}
