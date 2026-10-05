@@ -6,7 +6,7 @@ managed_root="$workspace_root/.worktree"
 lock_reason="managed by setup-godot-devcontainer"
 
 usage() {
-  echo "Usage: $0 create <name> <branch> [start-point] | lock-existing | verify | remove <name>" >&2
+  echo "Usage: $0 create <name> <branch> [start-point] | create-sparse <name> <branch> <start-point> <directory>... | lock-existing | verify | remove <name>" >&2
 }
 
 valid_name() {
@@ -57,15 +57,17 @@ verify_locks() {
 
 create_worktree() {
   local name="${1:-}" branch="${2:-}" start_point="${3:-HEAD}" target
+  local checkout_args=()
+  if [[ "${4:-}" == no-checkout ]]; then checkout_args=(--no-checkout); fi
   valid_name "$name" || { echo "Invalid worktree name: $name" >&2; exit 2; }
   git check-ref-format --branch "$branch" >/dev/null
   target="$managed_root/$name"
   [[ ! -e "$target" ]] || { echo "Worktree path already exists: $target" >&2; exit 1; }
   mkdir -p "$managed_root"
   if git -C "$workspace_root" show-ref --verify --quiet "refs/heads/$branch"; then
-    git -C "$workspace_root" worktree add --lock --reason "$lock_reason" "$target" "$branch"
+    git -C "$workspace_root" worktree add "${checkout_args[@]}" --lock --reason "$lock_reason" "$target" "$branch"
   else
-    git -C "$workspace_root" worktree add --lock --reason "$lock_reason" -b "$branch" "$target" "$start_point"
+    git -C "$workspace_root" worktree add "${checkout_args[@]}" --lock --reason "$lock_reason" -b "$branch" "$target" "$start_point"
   fi
 }
 
@@ -93,6 +95,11 @@ remove_worktree() {
 require_volume_mode
 case "${1:-}" in
   create) [[ $# -ge 3 && $# -le 4 ]] || { usage; exit 2; }; create_worktree "$2" "$3" "${4:-HEAD}" ;;
+  create-sparse)
+    [[ $# -ge 5 ]] || { usage; exit 2; }
+    create_worktree "$2" "$3" "$4" no-checkout
+    git -C "$managed_root/$2" sparse-checkout set --cone --sparse-index -- "${@:5}"
+    ;;
   lock-existing) [[ $# -eq 1 ]] || { usage; exit 2; }; lock_existing ;;
   verify) [[ $# -eq 1 ]] || { usage; exit 2; }; verify_locks ;;
   remove) [[ $# -eq 2 ]] || { usage; exit 2; }; remove_worktree "$2" ;;
