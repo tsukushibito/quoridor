@@ -1,0 +1,489 @@
+{
+  "at": "2026-10-05T20:47:41.647158+00:00",
+  "goal": "quoridor-4lc",
+  "owner": "92",
+  "base_current": {
+    "path": "research-data/ai-sigma/frame23-steward/storage-294-295-current.json",
+    "sha256": "d00a3d41fdcf0df0c96e004ceb6ffcbc1650218c20d3bb007ffcbd916354723b"
+  },
+  "roots": [
+    {
+      "name": "main research code",
+      "path": "/workspaces/quoridor/tools",
+      "category": "code",
+      "exclude": ["node_modules", ".venv", "__pycache__", "target", "target"]
+    },
+    {
+      "name": "main preserved research data",
+      "path": "/workspaces/quoridor/research-data/ai-sigma",
+      "category": "data",
+      "exclude": [
+        "frame23-independent-teachers",
+        "frame23-independent-teacher-learning",
+        "frame23-independent-evaluation",
+        "frame23-wall-legality-processing",
+        "sigma-public-fix-z",
+        "frame23-sigma-public-z-import",
+        "frame23-sigma-public-z-learning",
+        "frame23-sigma-public-z-review",
+        "frame23-public-sigma-z-learning",
+        "frame23-rulea-z-transfer",
+        "frame23-rootmean-saved-arithmetic",
+        "frame23-frozen-z-saved-arithmetic",
+        "frame23-public-z-residual-diagnostic"
+      ]
+    },
+    {
+      "name": "shared Git objects",
+      "path": "/workspaces/quoridor/.git",
+      "category": "git"
+    },
+    {
+      "name": "training environment",
+      "path": "/home/vscode/.cache/inference/envs/quoridor-training",
+      "category": "shared-dependencies"
+    },
+    {
+      "name": "team environment",
+      "path": "/home/vscode/.cache/inference/envs/quoridor-research-team",
+      "category": "shared-dependencies"
+    },
+    {
+      "name": "uv shared cache",
+      "path": "/home/vscode/.cache/inference/uv",
+      "category": "shared-cache"
+    },
+    {
+      "name": "new quality environment",
+      "path": "/workspaces/quoridor/tools/research-quality/.venv",
+      "category": "quality"
+    },
+    {
+      "name": "new quality npm dependency",
+      "path": "/workspaces/quoridor/tools/research-quality/node_modules",
+      "category": "quality"
+    },
+    {
+      "name": "current native Rust code",
+      "path": "/workspaces/quoridor/crates",
+      "category": "code",
+      "exclude": ["target"]
+    },
+    {
+      "name": "current Python training source",
+      "path": "/workspaces/quoridor/python",
+      "category": "code",
+      "exclude": ["__pycache__"]
+    },
+    {
+      "name": "current management/source procedures",
+      "path": "/workspaces/quoridor/scripts/dev",
+      "category": "code"
+    },
+    {
+      "name": "current main research live",
+      "path": "/workspaces/quoridor/.artifacts/ai-sigma",
+      "category": "live"
+    },
+    {
+      "name": "current native release/build workspace",
+      "path": "/workspaces/quoridor/.artifacts/rust-migration",
+      "category": "live-build"
+    },
+    {
+      "name": "current scheduler operation metadata",
+      "path": "/workspaces/quoridor/.artifacts/research-team/frame21",
+      "category": "live"
+    },
+    {
+      "name": "previous research cache",
+      "path": "/home/vscode/.cache/inference/research",
+      "category": "shared-reprocache"
+    },
+    {
+      "name": "held TensorRT backend",
+      "path": "/home/vscode/.cache/inference/backends",
+      "category": "shared-dependencies"
+    },
+    {
+      "name": "current Rust migration compiled/cache",
+      "path": "/home/vscode/.cache/inference/rust-migration",
+      "category": "shared-cache"
+    },
+    {
+      "name": "managed Python interpreters",
+      "path": "/home/vscode/.cache/inference/python",
+      "category": "shared-dependencies"
+    },
+    {
+      "name": "management current and historical metadata",
+      "path": "/workspaces/quoridor/.artifacts/research-team",
+      "category": "live"
+    },
+    {
+      "name": "previous refactor proofs",
+      "path": "/workspaces/quoridor/.artifacts/refactor262",
+      "category": "live"
+    },
+    {
+      "name": "current canonical design/report/procedure",
+      "path": "/workspaces/quoridor/docs",
+      "category": "code"
+    },
+    {
+      "name": "current saved role source",
+      "path": "/workspaces/quoridor/.agents/research-team",
+      "category": "code"
+    },
+    {
+      "name": "inference tiny plotcache",
+      "path": "/home/vscode/.cache/inference/matplotlib",
+      "category": "shared-cache"
+    },
+    {
+      "name": "persistent assets after reader stop",
+      "path": "/workspaces/quoridor/.worktree/assets",
+      "category": "retained-assets",
+      "exclude": [
+        "frame23-independent-teachers",
+        "frame23-independent-teacher-learning",
+        "sigma-public-fix-z",
+        "frame23-sigma-public-z-import",
+        "frame23-sigma-public-z-learning",
+        "frame23-sigma-public-z-review",
+        "frame23-public-sigma-z-learning",
+        "frame23-rulea-z-transfer"
+      ]
+    },
+    {
+      "name": "generic preserved product quality evidence",
+      "path": "/workspaces/quoridor/research-data/worktree-consolidation/1d2",
+      "category": "maintenance-evidence"
+    },
+    {
+      "name": "current sparse search worktree",
+      "path": "/workspaces/quoridor/.worktree/frame21-search",
+      "category": "active-source-data"
+    },
+    {
+      "name": "current sparse features worktree",
+      "path": "/workspaces/quoridor/.worktree/frame21-features",
+      "category": "active-source-data"
+    },
+    {
+      "name": "current maintenance read/proofs",
+      "path": "/workspaces/quoridor/.artifacts/worktree-cleanup/1d2",
+      "category": "maintenance-live"
+    },
+    {
+      "name": "current maintenance live receipts and tooling",
+      "path": "/workspaces/quoridor/.artifacts/worktree-cleanup/1d2",
+      "category": "maintenance-live"
+    },
+    {
+      "name": "frame22 steward metadata",
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-steward",
+      "category": "frame22-management"
+    },
+    {
+      "name": "frame22 live runtime",
+      "path": "/workspaces/quoridor/.artifacts/research-team/frame22",
+      "category": "frame22-management"
+    },
+    {
+      "name": "reused teacher managed WT",
+      "path": "/workspaces/quoridor/.worktree/frame22-teacher",
+      "category": "active-source-data"
+    },
+    {
+      "name": "current extension23 runtime",
+      "path": "/workspaces/quoridor/.artifacts/research-team/frame22-extension23",
+      "category": "live"
+    },
+    {
+      "name": "Root role-awareness preserved evidence",
+      "path": "/workspaces/quoridor/.artifacts/role-awareness-update",
+      "category": "management-evidence"
+    },
+    {
+      "name": "current research-data/ai-sigma/frame23-independent-teachers",
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teachers",
+      "category": "frame23-285-additional-data-cache-Git-temp-source-upper"
+    },
+    {
+      "name": "current .worktree/assets/inputs/frame23-independent-teachers",
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/frame23-independent-teachers",
+      "category": "frame23-285-additional-data-cache-Git-temp-source-upper"
+    },
+    {
+      "name": "current research-data/ai-sigma/frame23-independent-teacher-learning",
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teacher-learning",
+      "category": "frame23-future-learning-checkpoint-output-upper"
+    },
+    {
+      "name": "current research-data/ai-sigma/frame23-independent-evaluation",
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-evaluation",
+      "category": "frame23-287-independent-evaluation-growth-upper"
+    },
+    {
+      "name": "current .worktree/assets/checkpoints/frame23-independent-teacher-learning",
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-independent-teacher-learning",
+      "category": "frame23-future-learning-checkpoint-output-upper"
+    },
+    {
+      "name": "current288wall-legality source/data",
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-wall-legality-processing",
+      "category": "frame23-288-wall-legality-data-growth-upper"
+    },
+    {
+      "name": "public Sigma fixed-z importer source and data",
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-import",
+      "category": "frame23-public-z-import-growth-upper"
+    },
+    {
+      "name": "public Sigma fixed-z input assets",
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z",
+      "category": "frame23-public-z-import-growth-upper"
+    },
+    {
+      "name": "public Sigma fixed-z review source and data",
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-review",
+      "category": "frame23-public-z-review-growth-upper"
+    },
+    {
+      "name": "290 actualsource corrected",
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning",
+      "category": "frame23-future-learning-checkpoint-output-upper"
+    },
+    {
+      "name": "290 actualcheckpoint corrected",
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning",
+      "category": "frame23-future-learning-checkpoint-output-upper"
+    },
+    {
+      "name": "293 new arithmetic source/results",
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-rootmean-saved-arithmetic",
+      "category": "frame23-287-independent-evaluation-growth-upper"
+    },
+    {
+      "name": "292 RuleA transfer 0",
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer",
+      "category": "frame23-292-rulea-transfer-growth-upper"
+    },
+    {
+      "name": "292 RuleA transfer 1",
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/frame23-rulea-z-transfer",
+      "category": "frame23-292-rulea-transfer-growth-upper"
+    },
+    {
+      "name": "295 frozen saved arithmetic",
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-frozen-z-saved-arithmetic",
+      "category": "frame23-295-frozen-z-arithmetic-growth-upper"
+    },
+    {
+      "name": "294 main sharedtarget explicitly included once in ancestor live-build",
+      "path": "/workspaces/quoridor/.artifacts/rust-migration/target",
+      "category": "live-build"
+    },
+    {
+      "name": "297 savedscalar diagnostic source/results",
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-public-z-residual-diagnostic",
+      "category": "frame23-297-public-z-residual-diagnostic-growth-upper"
+    }
+  ],
+  "reservations": [
+    {
+      "category": "conservative-92-remaining-management",
+      "reserved_bytes": 117440512,
+      "owner": "92",
+      "basis": "full bound conservatively adds already held too; actual unused never larger"
+    },
+    {
+      "category": "v8-unused-pool-before268-transfer-conservative",
+      "reserved_bytes": 7446528,
+      "basis": "v8 pool includes2684MiB also conservatively within10MiB forecast; no previous135372800 added"
+    },
+    {
+      "category": "Root-1d2-maintenance-growth-conservative",
+      "reserved_bytes": 167772160,
+      "owner": "Root maintenance",
+      "basis": "Root explicit160MiB; full additional conservative forecast including portions already retained. Original historical92guard remains unchanged."
+    },
+    {
+      "category": "frame22-new-metadata-forecast",
+      "reserved_bytes": 3145728,
+      "owner": "92",
+      "basis": "new config/contract/prompt/expectations, stop/runtime receipts and unique Git; within existing112MiB envelope, no reset"
+    },
+    {
+      "category": "frame22-273-scope-growth",
+      "reserved_bytes": 276824064,
+      "owner": "273",
+      "basis": "coordinator allocation data128/build128/WT8; current held separate, no old reset"
+    },
+    {
+      "category": "frame22-274-scope-growth",
+      "reserved_bytes": 109051904,
+      "owner": "274",
+      "basis": "data32/build64/WT8"
+    },
+    {
+      "category": "frame22-275-scope-growth",
+      "reserved_bytes": 150994944,
+      "owner": "275",
+      "basis": "data8/build128/WT8"
+    },
+    {
+      "category": "frame22-coordinator-management-growth",
+      "reserved_bytes": 7864320,
+      "owner": "coordinator",
+      "basis": "current donor8MiB ->7.5MiB plus297 inclusive512KiB; historical cap/receipts unchanged"
+    },
+    {
+      "category": "frame22-supervisor-current-output-growth",
+      "reserved_bytes": 33554432,
+      "owner": "40",
+      "basis": "existing32MiB numerical bound newframe output, historical output still retained"
+    },
+    {
+      "category": "frame23-285-additional-data-cache-Git-temp-source-upper",
+      "reserved_bytes": 335544320,
+      "owner": "285",
+      "basis": "owner stopped verified donor retained320 +newmainsharedbuild32 conserve prior352; necessary Git/temp64+final8 within retained cap; original raw limits unchanged"
+    },
+    {
+      "category": "frame23-285-shared-release-additional-growth-upper",
+      "reserved_bytes": 33554432,
+      "owner": "285",
+      "basis": "new incremental build forecast; shared current already observed once, old build reservations retained"
+    },
+    {
+      "category": "frame23-future-learning-checkpoint-output-upper",
+      "reserved_bytes": 67108864,
+      "owner": "286",
+      "basis": "v4 actualsource reclassification into same64; old planned paths preserved",
+      "scope_paths": [
+        "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-independent-teacher-learning",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teacher-learning",
+        "/workspaces/quoridor/.worktree/assets/checkpoints/sigma-public-fix-z",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-learning",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning",
+        "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning"
+      ]
+    },
+    {
+      "category": "frame23-287-independent-evaluation-growth-upper",
+      "reserved_bytes": 4194304,
+      "owner": "287",
+      "basis": "sameold2874MiB includes293 new512KiB, no second review reservation; owner oldcurrent+newforecast accepted",
+      "scope_paths": [
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-evaluation",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-rootmean-saved-arithmetic"
+      ]
+    },
+    {
+      "category": "frame23-288-wall-legality-data-growth-upper",
+      "reserved_bytes": 2097152,
+      "owner": "288",
+      "basis": "2MiB from287future-unused confirmed by owner3MiBforecast and adoptedCoordinator; no new parent capacity; compile/science admission independent",
+      "scope_paths": [
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-wall-legality-processing"
+      ]
+    },
+    {
+      "category": "frame23-288-sharedbuild-growth-upper",
+      "reserved_bytes": 33554432,
+      "owner": "288",
+      "basis": "prospective from285data32MiB, old285build32MiB preserved; extra sharedtarget growth, no old target/Git free inference",
+      "scope_paths": ["/workspaces/quoridor/.artifacts/rust-migration/target"]
+    },
+    {
+      "category": "frame23-public-z-import-growth-upper",
+      "owner": "existing experiment, current allocation by Coordinator",
+      "reserved_bytes": 603979776,
+      "scope_paths": [
+        "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-import"
+      ],
+      "basis": "289 stopped donor confirmed actual+necessaryGit/temp fits576; 64MiB moves to292, original640 unchanged historically"
+    },
+    {
+      "category": "frame23-public-z-review-growth-upper",
+      "owner": "existing critic, current allocation by Coordinator",
+      "reserved_bytes": 1835008,
+      "scope_paths": ["/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-review"],
+      "basis": "closed291 donor old1.75/new2950.25 conserve old2; current+Git/temp owner bounded; failure/MAX/old2 science retained"
+    },
+    {
+      "category": "frame23-292-rulea-transfer-growth-upper",
+      "owner": "292",
+      "reserved_bytes": 67108864,
+      "scope_paths": [
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer",
+        "/workspaces/quoridor/.worktree/assets/inputs/frame23-rulea-z-transfer"
+      ],
+      "basis": "prospective from public640 to576, new64; owner new56MiB inclusive forecast/donor actual confirmed; no parent increase"
+    },
+    {
+      "category": "frame23-294-sharedbuild-growth-upper",
+      "owner": "294 coordinator",
+      "reserved_bytes": 33554432,
+      "scope_paths": ["/workspaces/quoridor/.artifacts/rust-migration/target"],
+      "basis": "prospective incremental growth32 from old285352->320; current whole sharedtarget retained in live-build once, not consumed against this additional growth cap",
+      "growth_not_whole_root_cap": true
+    },
+    {
+      "category": "frame23-295-frozen-z-arithmetic-growth-upper",
+      "owner": "295 critic",
+      "reserved_bytes": 262144,
+      "scope_paths": [
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-frozen-z-saved-arithmetic"
+      ],
+      "basis": "prospective from old2912MiB to1.75; newinclusive245760 contains current; no raw/model/predictions copy or parent increase"
+    },
+    {
+      "category": "frame23-297-public-z-residual-diagnostic-growth-upper",
+      "reserved_bytes": 524288,
+      "owner": "297 hypothesis",
+      "scope_paths": [
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-public-z-residual-diagnostic"
+      ],
+      "basis": "prospective conserved from coordinator8MiB, source/results/archive/Git/temp inclusive512KiB; no NN/forward/model copies"
+    }
+  ],
+  "unknown_retained_bytes": 134217728,
+  "cap_bytes": 12884901888,
+  "donor_refs": [
+    {
+      "path": "research-data/ai-sigma/frame22-coordinator/residual-diagnostic-storage-donor-v1.json",
+      "sha256": "7d242c67a74c422b849a680ad55415644c9fd07e7c0c1660b390af20f705c1da",
+      "bytes": 656
+    },
+    {
+      "path": "research-data/ai-sigma/frame22-coordinator/residual-saved-selection-diagnostic-contract.md",
+      "sha256": "5c6aa4165da8adfe44050ceced7d0aba026bd2239f74b0c254d673dced4e0d94",
+      "bytes": 4615
+    }
+  ],
+  "additional_parent_bytes": 0,
+  "conservation": {
+    "old285352_to320_plus_mainbuild32": true,
+    "old2912_to1_75_plus_new0_25": true,
+    "oldlearning64_review4_293_allotherbounds_preserved": true,
+    "coordinator8_to7_5_plus_297_0_5": true
+  },
+  "coordinator512KiB_new_forecast": "inside existing8MiB full conservative global bound; local current+forecast verified separately, source genericroots already retained",
+  "runtime_source_registry_changed": false,
+  "deleted": false,
+  "base_manifest": {
+    "path": "research-data/ai-sigma/frame23-steward/storage-294-295-manifest.json",
+    "sha256": "d28d64642420184faebd8e41d9f6f6d3d75ab60127d54c112633b4f2e2059767"
+  },
+  "297_prospective_root": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-public-z-residual-diagnostic",
+    "present": true,
+    "future_coverage": "explicit reservation plus main research-data root; no whole-root free inference"
+  },
+  "new_parent_bytes": 0,
+  "runtime_source_changed": false
+}

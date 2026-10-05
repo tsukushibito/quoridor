@@ -1,0 +1,56 @@
+{
+  "at": "2026-10-05T20:44:16.980898+00:00",
+  "keeper_current": 16060416,
+  "existing_forecast": 3145728,
+  "new_phase_upper": 262144,
+  "keeper_cap": 117440512,
+  "science_guard_candidates": [],
+  "same_uid_permission_misses": [],
+  "scope": "registered job/native/cargo current sameUID; not all host or future",
+  "official_supervisor": {
+    "status": {
+      "type": "idle"
+    },
+    "turn": "01a10dc9-7900-72e2-9b60-90a1191710ea",
+    "turnstatus": "completed"
+  },
+  "old_state": {
+    "binding": {
+      "config_path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22-extension23/scheduler.json",
+      "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+      "target": "supervisor",
+      "dispatch_issue": "quoridor-4lc.40",
+      "contract_file": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22-extension23/contract.json",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+    },
+    "process": {
+      "pid": 1869614,
+      "start_ticks": "48452591",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "phase": "running",
+    "recovery_required": false,
+    "last_result": {
+      "at": "2026-10-05T20:43:22.831963+00:00",
+      "event": "owned_turn_finished",
+      "turn_id": "01a10dc9-7900-72e2-9b60-90a1191710ea",
+      "status": "completed"
+    },
+    "config_path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22-extension23/scheduler.json",
+    "config_sha256": "c2c5919b6442a7489feda7075a2ceadb4d8e2b437beae1800646747b709af7ab",
+    "contract_sha256": "8f53a64f1ed41c0a2a869ead6699032b0cfc8de431581c3cbb6346b34661888c",
+    "owned": null,
+    "next_at": 1791233866.0554867
+  },
+  "old_scheduler": {
+    "pid": 1869614,
+    "start_ticks": "48452591",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "old_monitor": {
+    "pid": 1869632,
+    "start_ticks": "48452619",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "source_changed": false
+}

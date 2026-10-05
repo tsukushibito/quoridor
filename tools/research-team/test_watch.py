@@ -30,6 +30,21 @@ class WatchTests(unittest.TestCase):
                 w.allocated([root, a]), root.stat().st_blocks * 512 + a.stat().st_blocks * 512
             )
 
+    def test_allocation_uses_lstat_mode_without_following_symlinks(self):
+        with tempfile.TemporaryDirectory() as name, tempfile.TemporaryDirectory() as other:
+            root = Path(name)
+            external = Path(other)
+            (external / "not_charged").write_bytes(b"x" * 8192)
+            (root / "outside").symlink_to(external, target_is_directory=True)
+            (root / "cycle").symlink_to(root, target_is_directory=True)
+            (root / "dangling").symlink_to(root / "absent")
+            expected = sum(p.lstat().st_blocks * 512 for p in [root, *root.iterdir()])
+            with (
+                patch.object(Path, "is_dir", side_effect=AssertionError("duplicate stat")),
+                patch.object(Path, "is_symlink", side_effect=AssertionError("duplicate lstat")),
+            ):
+                self.assertEqual(w.allocated([root, root / "absent"]), expected)
+
     def test_selection_keeps_overflow_source_hash_without_copying_history(self):
         item = {"id": "x", "notes": "n" * 100000, "description": "d" * 10000}
         result = w.select_issue(item)
@@ -239,6 +254,16 @@ class CaptureTests(unittest.TestCase):
                 w.capture(["mock"], ".", budget=budget)
             spawn.assert_not_called()
 
+    def test_popen_failure_keeps_spawn_count_zero(self):
+        budget = w.FinishBudget(0)
+        with (
+            patch.object(w.time, "monotonic", return_value=0),
+            patch.object(w.subprocess, "Popen", side_effect=OSError("spawn failed")),
+        ):
+            with self.assertRaises(OSError):
+                w.capture(["mock"], ".", budget=budget)
+        self.assertEqual(budget.spawn_count, 0)
+
     def test_reap_waits_do_not_reset_cumulative_remaining(self):
         child = MagicMock(pid=900001)
         child.poll.return_value = None
@@ -264,6 +289,7 @@ class CaptureTests(unittest.TestCase):
         ):
             with self.assertRaises(w.Unavailable):
                 w.capture(["mock"], ".", budget=budget, receipt=receipts.append)
+        self.assertEqual(budget.spawn_count, 1)
         self.assertEqual([c.kwargs["timeout"] for c in child.wait.call_args_list], [0, 0])
         self.assertTrue(receipts[-1]["child_reaped"])
         self.assertFalse(receipts[-1]["process_group_absence_certified"])
@@ -315,6 +341,7 @@ class FinishTests(unittest.TestCase):
                 return state
 
             def capture(argv, _root, *, timeout, receipt, budget):
+                budget.spawn_count += 1
                 calls.append({"args": argv[2:], "timeout": timeout})
                 receipt({"phase": "started", "child_reaped": False})
                 current[0] += duration
@@ -406,12 +433,48 @@ class FinishTests(unittest.TestCase):
             self.assertEqual(separate["backup"], "not_reached")
             self.assertFalse(separate["whole_finish_observed"])
 
+    def test_append_admission_refusal_records_no_child_started(self):
+        with self.fixture() as (args, expected, calls, _):
+            good = {"owned": {"run_id": "run"}}
+            w.admit.side_effect = [good, good, w.Unavailable("fresh storage refused")]
+            self.assertEqual(w.observer(args, expected), 2)
+            result = json.loads(Path(args.output).read_text())
+            self.assertEqual(result["finish"]["append"], "not_started")
+            self.assertEqual(result["cumulative_budget"]["spawn_count"], 1)
+            self.assertEqual([x["args"][0] for x in calls], ["show"])
+
+    def test_failed_popen_is_not_an_unknown_append(self):
+        with self.fixture() as (args, expected, calls, _):
+            original = w.capture.side_effect
+
+            def fail_spawn(argv, root, **kwargs):
+                if argv[2] == "update":
+                    raise OSError("Popen refused before child exists")
+                return original(argv, root, **kwargs)
+
+            w.capture.side_effect = fail_spawn
+            self.assertEqual(w.observer(args, expected), 2)
+            self.assertEqual(
+                json.loads(Path(args.output).read_text())["finish"]["append"], "not_started"
+            )
+
+    def test_backup_admission_refusal_is_not_communication_unknown(self):
+        with self.fixture() as (args, expected, calls, _):
+            good = {"owned": {"run_id": "run"}}
+            w.admit.side_effect = [good, good, good, w.Unavailable("fresh storage refused")]
+            self.assertEqual(w.observer(args, expected), 2)
+            result = json.loads(Path(args.output).read_text())
+            self.assertEqual(result["finish"]["append"], "completed")
+            self.assertEqual(result["finish"]["backup"], "not_reached")
+            self.assertEqual(result["cumulative_budget"]["spawn_count"], 2)
+
     def test_unknown_append_outcome_prevents_duplicate_retry(self):
         with self.fixture() as (args, expected, calls, _):
             original = w.capture.side_effect
 
             def fail_append(argv, root, **kwargs):
                 if argv[2] == "update":
+                    kwargs["budget"].spawn_count += 1
                     kwargs["receipt"]({"phase": "started", "child_reaped": False})
                     raise w.Unavailable("communication outcome unknown")
                 return original(argv, root, **kwargs)
@@ -447,6 +510,7 @@ class FinishTests(unittest.TestCase):
 
             def fail_backup(argv, root, **kwargs):
                 if argv[2] == "backup":
+                    kwargs["budget"].spawn_count += 1
                     kwargs["receipt"]({"phase": "started", "child_reaped": False})
                     raise w.Unavailable("backup communication unknown")
                 return original(argv, root, **kwargs)

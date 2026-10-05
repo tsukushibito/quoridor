@@ -1,0 +1,253 @@
+{
+  "at": "2026-10-05T20:50:00.854508+00:00",
+  "run_id": "fb160d07-214c-45b2-aac3-cebd77a59ece",
+  "source_paths": [
+    {
+      "path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/fb160d07-214c-45b2-aac3-cebd77a59ece/command-01-child.json",
+      "bytes": 1122,
+      "sha256": "40005c9d5998f85ee0e96884e35d2e26d028b15fefaafa97a36dee82806d4224"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/fb160d07-214c-45b2-aac3-cebd77a59ece/command-02-child.json",
+      "bytes": 1125,
+      "sha256": "cc457a5b3c2d79ead675946df195d2def24eac9d58c0c98bdcac324812d43fc3"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/fb160d07-214c-45b2-aac3-cebd77a59ece/command-03-child.json",
+      "bytes": 1101,
+      "sha256": "ff3a35e127f7f8b34fd1dd7eac2fedec24408f907bbae6cfdcd512682f7782ab"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/fb160d07-214c-45b2-aac3-cebd77a59ece/command-04-child.json",
+      "bytes": 1323,
+      "sha256": "0c5d8f034a30d9f8e2b2c187548d70d99147ae94886c722c915c513b7230e21d"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/fb160d07-214c-45b2-aac3-cebd77a59ece/command-05-child.json",
+      "bytes": 1359,
+      "sha256": "364bc625bd04e9b70be3441cb427df33ef8e759f3791f8566ed59a7c5b12e75d"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/fb160d07-214c-45b2-aac3-cebd77a59ece/command-06-child.json",
+      "bytes": 1122,
+      "sha256": "c3fe34ae2a3a947802d5883f1086374b5d5caa3917eb43c8b741e1ef6d0b06f1"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/fb160d07-214c-45b2-aac3-cebd77a59ece/command-07-child.json",
+      "bytes": 1125,
+      "sha256": "4ef763abcabbda82cef3c888f57811cf1ca78a0a47efbf998f6733beb4c9fce9"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/fb160d07-214c-45b2-aac3-cebd77a59ece/command-08-child.json",
+      "bytes": 1126,
+      "sha256": "6eaafca7c00cf88ba3deb651a480fef4c18e5613b2bb40a93c0eb0bcec75842c"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/fb160d07-214c-45b2-aac3-cebd77a59ece/finish-backup.json",
+      "bytes": 157,
+      "sha256": "c46dbfed76f021103e6006b352d7695ae2be874c9304a0cc939d01473ba57e79"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/fb160d07-214c-45b2-aac3-cebd77a59ece/finish.json",
+      "bytes": 15679,
+      "sha256": "0db5b28bc4726bf4e16b60629216ec69330b682ff061965e6ee3f1eb40b21063"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/fb160d07-214c-45b2-aac3-cebd77a59ece/observe.json",
+      "bytes": 16983,
+      "sha256": "392d1eb89d28b28c8397414869327bf2c9755a0a27fdcfd0ff06caf2e9f41556"
+    }
+  ],
+  "finish_status": "unavailable",
+  "reason": "finish cumulative remaining insufficient at admit.storage; spawn refused",
+  "finish": {
+    "append": "completed",
+    "backup": "not_reached",
+    "blind_retry": false
+  },
+  "budget": {
+    "outer_seconds": 25,
+    "spawn_count": 2,
+    "elapsed_seconds": 15.347723886021413,
+    "remaining_seconds": 9.652275896980427,
+    "phases": [
+      {
+        "phase": "notes cap",
+        "elapsed_seconds": 0.017677235009614378,
+        "status": "completed"
+      },
+      {
+        "phase": "previous append check",
+        "elapsed_seconds": 0.10305225400952622,
+        "status": "completed"
+      },
+      {
+        "phase": "admit.input_hashes",
+        "elapsed_seconds": 0.2706381609896198,
+        "status": "completed"
+      },
+      {
+        "phase": "admit.state",
+        "elapsed_seconds": 0.012803021003492177,
+        "status": "completed"
+      },
+      {
+        "phase": "admit.storage",
+        "elapsed_seconds": 3.012363309971988,
+        "status": "completed"
+      },
+      {
+        "phase": "admit.rss",
+        "elapsed_seconds": 0.00038313400000333786,
+        "status": "completed"
+      },
+      {
+        "phase": "admit.input_hashes",
+        "elapsed_seconds": 0.1983401320176199,
+        "status": "completed"
+      },
+      {
+        "phase": "admit.state",
+        "elapsed_seconds": 0.0038000859785825014,
+        "status": "completed"
+      },
+      {
+        "phase": "admit.storage",
+        "elapsed_seconds": 2.8681138269603252,
+        "status": "completed"
+      },
+      {
+        "phase": "admit.rss",
+        "elapsed_seconds": 0.00027771800523623824,
+        "status": "completed"
+      },
+      {
+        "phase": "command receipt reserve",
+        "elapsed_seconds": 0.03343727899482474,
+        "status": "completed"
+      },
+      {
+        "phase": "command receipt started",
+        "elapsed_seconds": 0.03815213096095249
+      },
+      {
+        "phase": "command receipt completed",
+        "elapsed_seconds": 0.03618559997994453
+      },
+      {
+        "phase": "capture and reap",
+        "elapsed_seconds": 1.4872240099939518
+      },
+      {
+        "phase": "batch authentication",
+        "elapsed_seconds": 0.0032675110269337893,
+        "status": "completed"
+      },
+      {
+        "phase": "admit.input_hashes",
+        "elapsed_seconds": 0.0493706600391306,
+        "status": "completed"
+      },
+      {
+        "phase": "admit.state",
+        "elapsed_seconds": 0.0018081949674524367,
+        "status": "completed"
+      },
+      {
+        "phase": "admit.storage",
+        "elapsed_seconds": 2.498213851999026,
+        "status": "completed"
+      },
+      {
+        "phase": "admit.rss",
+        "elapsed_seconds": 0.0003203939995728433,
+        "status": "completed"
+      },
+      {
+        "phase": "command receipt reserve",
+        "elapsed_seconds": 0.10273396503180265,
+        "status": "completed"
+      },
+      {
+        "phase": "command receipt started",
+        "elapsed_seconds": 0.13070083200000226
+      },
+      {
+        "phase": "command receipt completed",
+        "elapsed_seconds": 0.06430636899312958
+      },
+      {
+        "phase": "capture and reap",
+        "elapsed_seconds": 1.1283867709571496
+      },
+      {
+        "phase": "admit.input_hashes",
+        "elapsed_seconds": 0.06163192103849724,
+        "status": "completed"
+      },
+      {
+        "phase": "admit.state",
+        "elapsed_seconds": 0.0022604630212299526,
+        "status": "completed"
+      },
+      {
+        "phase": "admit.storage",
+        "elapsed_seconds": 3.1366510589723475,
+        "status": "unconfirmed"
+      }
+    ],
+    "whole_outer_success_certified": false
+  },
+  "command_receipts": [
+    {
+      "name": "command-01-child.json",
+      "phase": "completed",
+      "exit_code": 0,
+      "child_reaped": true
+    },
+    {
+      "name": "command-02-child.json",
+      "phase": "completed",
+      "exit_code": 0,
+      "child_reaped": true
+    },
+    {
+      "name": "command-03-child.json",
+      "phase": "completed",
+      "exit_code": 0,
+      "child_reaped": true
+    },
+    {
+      "name": "command-04-child.json",
+      "phase": "completed",
+      "exit_code": 0,
+      "child_reaped": true
+    },
+    {
+      "name": "command-05-child.json",
+      "phase": "completed",
+      "exit_code": 0,
+      "child_reaped": true
+    },
+    {
+      "name": "command-06-child.json",
+      "phase": "completed",
+      "exit_code": 0,
+      "child_reaped": true
+    },
+    {
+      "name": "command-07-child.json",
+      "phase": "completed",
+      "exit_code": 0,
+      "child_reaped": true
+    },
+    {
+      "name": "command-08-child.json",
+      "phase": "completed",
+      "exit_code": 0,
+      "child_reaped": true
+    }
+  ],
+  "whole_finish_certified": false,
+  "interpretation": "batch and conditionalappend completed exit0/reaped; backup guard refused before Popen. Original oldnoappend refusal remains unchanged. Newmarker not_reached accurate. No blind retry, no backup success certified from append."
+}

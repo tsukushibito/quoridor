@@ -1,0 +1,22 @@
+{
+  "at": "2026-10-05T20:50:57.184258+00:00",
+  "removed_only_owned_redundant_candidate_and_two_import_symlinks": [
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/finish-metadata-query/research-watch.py",
+      "bytes": 35040,
+      "sha256": "20dcbc20dc7e85ed5e1eaeefba7c118670e8ebc0e9b1244255a03427ce62df9c",
+      "preserved_current_source": "/workspaces/quoridor/scripts/dev/research-watch.py",
+      "reconstruction": "source-versions.json + prospective.patch and base Git140840fa; current main equal bytes"
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/research-team/finish-metadata-query/test_watch.py",
+      "bytes": 24987,
+      "sha256": "4ab9775258fb9aa4bb998aed9669d64ff5e9c211605fc56990a1b20ac640241f",
+      "preserved_current_source": "/workspaces/quoridor/tools/research-team/test_watch.py",
+      "reconstruction": "source-versions.json + prospective.patch and base Git140840fa; current main equal bytes"
+    }
+  ],
+  "new_main_sources_and_all_test_receipts_retained": true,
+  "forecast_check_initial": "180224 phase +60027 uniqueGit +32768 future =273019 >262144; future not admitted until known temporary duplicate removal",
+  "data_model_dependency_delete": false
+}

@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 import selectors
 import signal
+import stat
 import subprocess
 import sys
 import time
@@ -43,6 +44,7 @@ class FinishBudget:
         # Existing command reserve: six seconds for TERM/KILL waits, four for records.
         self.work_deadline = self.deadline - 10
         self.phases = []
+        self.spawn_count = 0
 
     def require(self, phase, *, reserve=10):
         remaining = self.deadline - time.monotonic()
@@ -67,6 +69,7 @@ class FinishBudget:
     def summary(self):
         return {
             "outer_seconds": 25,
+            "spawn_count": self.spawn_count,
             "elapsed_seconds": time.monotonic() - self.started,
             "remaining_seconds": max(0, self.deadline - time.monotonic()),
             "phases": self.phases,
@@ -103,15 +106,15 @@ def allocated(paths):
     while stack:
         path = stack.pop()
         try:
-            stat = path.lstat()
+            info = path.lstat()
         except FileNotFoundError:
             continue
-        key = (stat.st_dev, stat.st_ino)
+        key = (info.st_dev, info.st_ino)
         if key in seen:
             continue
         seen.add(key)
-        total += stat.st_blocks * 512
-        if path.is_dir() and not path.is_symlink():
+        total += info.st_blocks * 512
+        if stat.S_ISDIR(info.st_mode):
             stack.extend(path.iterdir())
     return total
 
@@ -265,6 +268,8 @@ def capture(argv, root, timeout=25, *, receipt=None, budget=None):
     child = subprocess.Popen(
         argv, cwd=root, stdout=subprocess.PIPE, stderr=subprocess.PIPE, start_new_session=True
     )
+    if budget:
+        budget.spawn_count += 1
     identity = scheduler.process_identity(child.pid)
     streams = selectors.DefaultSelector()
     streams.register(child.stdout, selectors.EVENT_READ, "stdout")
@@ -566,28 +571,36 @@ def observer(args, expected):
             with budget.phase("batch authentication"):
                 own = finish_items(values, expected)
             budget.require("append before spawn")
-            finish["append"] = "outcome_unknown_check_original_receipts_before_retry"
-            wrapper(
-                expected,
-                [
-                    "update",
-                    "quoridor-4lc.40",
-                    "--if-assignee",
-                    own["assignee"],
-                    "--if-status",
-                    "in_progress",
-                    "--append-notes",
-                    note,
-                ],
-                records,
-                selection=False,
-                budget=budget,
-            )
-            finish["append"] = "completed"
+            before_append = budget.spawn_count
+            try:
+                wrapper(
+                    expected,
+                    [
+                        "update",
+                        "quoridor-4lc.40",
+                        "--if-assignee",
+                        own["assignee"],
+                        "--if-status",
+                        "in_progress",
+                        "--append-notes",
+                        note,
+                    ],
+                    records,
+                    selection=False,
+                    budget=budget,
+                )
+                finish["append"] = "completed"
+            finally:
+                if budget.spawn_count > before_append and finish["append"] != "completed":
+                    finish["append"] = "outcome_unknown_check_original_receipts_before_retry"
             budget.require("backup before spawn")
-            finish["backup"] = "outcome_unknown_check_original_receipts"
-            wrapper(expected, ["backup", "sync"], records, selection=False, budget=budget)
-            finish["backup"] = "completed"
+            before_backup = budget.spawn_count
+            try:
+                wrapper(expected, ["backup", "sync"], records, selection=False, budget=budget)
+                finish["backup"] = "completed"
+            finally:
+                if budget.spawn_count > before_backup and finish["backup"] != "completed":
+                    finish["backup"] = "outcome_unknown_check_original_receipts"
             budget.require("result recording", reserve=4)
         else:
             for issue in ("quoridor-4lc", "quoridor-4lc.40"):

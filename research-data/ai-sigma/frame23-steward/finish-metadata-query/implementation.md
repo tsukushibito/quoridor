@@ -1,0 +1,21 @@
+# Finishのmetadata queryと子起動表示の修正
+
+既outer25秒とfresh admissionを維持する。allocatedは取得したlstatのmodeからdirectoryを判定し、追加stat/lstatを省く。毎呼出しで全指定rootを新規計測し、directory/symlink自身のallocated block、dev-inode重複除外、hardlink重複除外を維持する。symlinkを辿らず、欠落のみskip、その他の読取エラーは成功へ変換しない。
+
+FinishBudgetのspawn_countはPopen成功直後に増やす。同append/backup wrapperで子起動がなければ元not_started/not_reachedを保持し、子起動後の未確定のみoutcome_unknownを示す。条件付きappend、原receipt確認による二重append拒否、backup別receipt、既回収/記録reserveとcapsを変更しない。
+
+31mock PASS。旧canonical版はGit 140840fa1e9a3a37f963aa893877446dd8a43d25のmain2pathを参照する。テスト対象・source SHAはsource-versions.json、fresh会計比較はmetadata-cost-comparison.jsonを参照。旧keeper/Supervisor量16031744/4235264 byteと新量が一致した。旧→新の一対測定ではkeeper2.046→1.180秒、Supervisor0.771→1.446秒で、cache/現host変動の交絡がある。全finishの将来成功や科学速度改善を認定しない。
+
+旧natural78de4bb8のtyped admit.storage不足とappend/backup child未開始、旧markerの不正確さは原receipt/overlayを保持する。今回安全窓は科学/guard reader自然停止と公式Supervisor idle/正ownednullが条件。active turnを中断せず、窓待ちを科学gateにしない。period1200/null、23:26/31/34/36:03ZとCoordinator恒久idle pendingは別責務として維持する。
+
+## 実適用
+
+20:43:38 UTCの公式Supervisor idle/owned null後、dispatch lock下の同UID science/guard reader候補なしと旧正2identityを確認した。monitor正identityだけへpidfd SIGTERMし、通常scheduler stopの正owned回収へ接続。旧1869614/t48452591・1869632/t48452619は20:44:34に不在、旧停止証拠は別gzipへ保存した。科学childへのsignal・強制tick・旧state消去を行っていない。
+
+新watch20dcbc20、tests4ab97752を候補SHA一致で適用し、24期待inputのwatch項目だけ更新した。validateと通常startを経て新scheduler1896572/t48616397・monitor1896590/t48616438同bootがrunning/loaded。config c2c5919b・contract8f53a64fとregistry/prompt/役定義は不変更。running-loaded-current.jsonの16check PASS、31mockは候補と実source SHA一致で再用、実main2pathのRuff format/check・diffcheckもPASS。新loadedを統括正activeへ配送し、短source窓を解除済み。
+
+初回自然run fb160d07のobserveは観測時点でobserved、3wrapper exit0/reaped。finish全体はまだ未到達なので未成立として残す。長期の23:26/31/34/36:03 UTC回収は既92責任、Coordinator恒久idle pendingとは分ける。通常Git/indexは統括単独、Stewardはsourceと必要証拠の停止manifestを渡す。
+
+## 最初の自然finish実効果
+
+同run fb160d07のfinish原receiptを読取保存した。one batch showとconditional appendはexit0/reaped、spawn_count2、append completedに到達した。次backupのfresh admit.storageが累積残量不足を返し、backup childは未開始、表示not_reachedである。finish unavailable/15.3477秒を保ち、whole finish成立とはしない。4storage phase合計約11.5153秒、各2.498〜3.137秒が残支配費。旧run78de4bb8の3storage14.9578秒と異なるhost/回数の観測なので全経路倍率は認定しない。次回の適用判断材料はfirst-natural-effect.json、原runの全記録SHA付きgzipを保持した。今回採択された修正は実適用済みで、追加のtimeout/cap拡大や自動再finishは行わない。

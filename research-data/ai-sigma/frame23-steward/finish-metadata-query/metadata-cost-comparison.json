@@ -1,0 +1,35 @@
+{
+  "at": "2026-10-05T20:41:24.853115+00:00",
+  "measurements": [
+    {
+      "version": "old",
+      "category": "keeper",
+      "allocated_bytes": 16031744,
+      "wall_seconds": 2.046088457980659,
+      "cpu_seconds": 0.06270576300000003
+    },
+    {
+      "version": "old",
+      "category": "supervisor",
+      "allocated_bytes": 4235264,
+      "wall_seconds": 0.7712830119999126,
+      "cpu_seconds": 0.027119024999999963
+    },
+    {
+      "version": "proposed",
+      "category": "keeper",
+      "allocated_bytes": 16031744,
+      "wall_seconds": 1.1801009540213272,
+      "cpu_seconds": 0.047255567000000054
+    },
+    {
+      "version": "proposed",
+      "category": "supervisor",
+      "allocated_bytes": 4235264,
+      "wall_seconds": 1.4457616650033742,
+      "cpu_seconds": 0.05977490399999996
+    }
+  ],
+  "order": "old then proposed; cache and live growth may affect timing; no future guarantee",
+  "fresh_each_call": true
+}
