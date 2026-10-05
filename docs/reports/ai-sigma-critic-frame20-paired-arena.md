@@ -21,6 +21,6 @@
 
 原科学のNNは5500+145573+107830=258903、guardianは0.7944091790122911+17.69134636997478+13.246227887982968=31.73198343697004秒。背景wait・controller内部・外elapsedは重なりを排他費へ加算せず、旧LLM/保存管理未知費はUNKNOWNのまま。本独立jobの0.168094秒は別費である。旧241固定仕事59.20%（NNUE54.38%/D65.14%）の費利益と本samewall WDL不変は異なる問いであり、両engineへ適用したpackageの相対WDLから個別絶対棋力効果は分解できない。
 
-次の最大1方向は、費用上のpackage採用を維持し、固定openingのWDL反復を増やす前にrootmean蒸留値の葉での意味・history反復/horizonを小さい同入力同horizon診断で判断すること。現在244の停止保存診断を優先し、本課題から新NN・条件・arenaを自動追加しない。旧openedtest/173正式198は未読、旧229最終独立PASS0を維持する。
+次の最大1方向は、費用上のpackage採用を維持し、固定openingのWDL反復を増やす前にrootmean蒸留値の葉での意味・history反復/horizonを小さい同入力同horizon診断で判断すること。後着統括補足: 244は旧fixture誤りで16条件NOT_RUNのままclosed、再開しない。新別248は修復fixtureのD極値由来を問う診断で、242唯一分岐との保存key対応はなく直接原因説明にしない。本246から新NN・条件・arenaを自動追加しない。旧openedtest/173正式198は未読、旧229最終独立PASS0を維持する。
 
 再現入口は専用run-paired.py（当時binding/期限/MAX1を固定するため、現在再実行を許可するものではない）。`stopped-inputs.json`、`admission.json`、`process.json`、`result.json`、`replay.json`、原PRESTART不足が保存根拠。Gitbyte/index/Beadsbackupは管理receiptへ結び付け、独立科学支持と管理保存完了を分ける。
