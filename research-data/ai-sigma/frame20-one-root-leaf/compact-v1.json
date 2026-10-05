@@ -1,0 +1,418 @@
+{
+  "UTC": "2026-10-05T02:11:21.058Z",
+  "task": "one-root-leaf-254-v1",
+  "schema": "one-root-leaf-v1",
+  "status": "COMPLETED",
+  "planned": 6,
+  "unique_roots": 1,
+  "processed": 357,
+  "NN": 122,
+  "root_legal_Actions": [
+    21,
+    29
+  ],
+  "root_order": "Action ascending diagnostic; old rootbest sequence not reconstructed",
+  "input_reconstruction": {
+    "PASS": true,
+    "key": "2,2|2,5|0|0,4;0,7;1,0;2,1;2,5;3,0;3,3;5,0;7,4|0,2;1,1;1,5;2,4;2,6;3,2;4,4;4,6;5,3;7,6",
+    "side": 1,
+    "ply": 44,
+    "history_SHA": "0ec475d57131761ec8c0948a75c9802f5f3354272856e34f7bdc30487ad25d0c",
+    "full_prefix_SHA": "9a7cc3629c1b696284e40b007eed573ca987cf8176700253225349a86b00320f"
+  },
+  "model": {
+    "weights_SHA": "b81792d5ba00c6d79b58cada2fc81d84ea822db48c04420b4e269fb9b71841b3",
+    "feature": "QF1-f32-STM-scaled-v1",
+    "mu_f32": [
+      0.10343921929597855,
+      0.09714682400226593
+    ],
+    "sigma_f32": [
+      0.0543474480509758,
+      0.05367854982614517
+    ],
+    "distance_fit": {
+      "a": 0.06038215201109912,
+      "b": 7.925687690687516
+    }
+  },
+  "wholewall_ms": 89.59987699985504,
+  "conditions": [
+    {
+      "depth": 1,
+      "engine": "NNUE",
+      "status": "COMPLETED",
+      "processed": 3,
+      "NN": 2,
+      "wall_ms": 0.9551439881324768,
+      "min_value": -0.9907166361808777,
+      "max_value": -0.9835182428359985,
+      "argmax_Actions": [
+        29
+      ],
+      "strict_first_Action": 29,
+      "next_distinct_gap": 0.00719839334487915,
+      "next_distinct_gap_reason": "finite distinct second value",
+      "saved_actions": {
+        "21": {
+          "value": -0.9907166361808777,
+          "argmax": false,
+          "gap": 0.00719839334487915
+        },
+        "29": {
+          "value": -0.9835182428359985,
+          "argmax": true,
+          "gap": 0
+        }
+      },
+      "root_extremum_origins": {
+        "nonterminalNNUE": {
+          "count": 1,
+          "propagated": [
+            -0.9835182428359985,
+            -0.9835182428359985
+          ],
+          "NNUE_leaf_STM": [
+            0.9835182428359985,
+            0.9835182428359985
+          ],
+          "witness": {
+            "ply": 45,
+            "side": 2,
+            "key": "2,3|2,5|1|0,4;0,7;1,0;2,1;2,5;3,0;3,3;5,0;7,4|0,2;1,1;1,5;2,4;2,6;3,2;4,4;4,6;5,3;7,6",
+            "history_SHA": "812ca8e695d173ce11b4cd7e454326298e6f4e6458ca84f907ab455f6c96949f",
+            "sign": -1,
+            "terminal": null,
+            "value_leaf_STM": 0.9835182428359985,
+            "propagated_value": -0.9835182428359985
+          }
+        }
+      }
+    },
+    {
+      "depth": 1,
+      "engine": "Dclip",
+      "status": "COMPLETED",
+      "processed": 3,
+      "NN": 0,
+      "wall_ms": 0.5293350219726562,
+      "min_value": -1,
+      "max_value": -1,
+      "argmax_Actions": [
+        21,
+        29
+      ],
+      "strict_first_Action": 21,
+      "next_distinct_gap": null,
+      "next_distinct_gap_reason": "ALL_VALUES_TIED",
+      "saved_actions": {
+        "21": {
+          "value": -1,
+          "argmax": true,
+          "gap": 0
+        },
+        "29": {
+          "value": -1,
+          "argmax": true,
+          "gap": 0
+        }
+      },
+      "root_extremum_origins": {
+        "nonterminalPretransformAbsUge1": {
+          "count": 2,
+          "propagated": [
+            -1,
+            -1
+          ],
+          "raw_u_leaf_STM": [
+            1.447377324104309,
+            1.6455196142196655
+          ],
+          "clip_leaf_STM": [
+            1,
+            1
+          ],
+          "tanh_leaf_STM": [
+            0.8951730728149414,
+            0.9282402396202087
+          ],
+          "witness": {
+            "ply": 45,
+            "side": 2,
+            "key": "3,2|2,5|1|0,4;0,7;1,0;2,1;2,5;3,0;3,3;5,0;7,4|0,2;1,1;1,5;2,4;2,6;3,2;4,4;4,6;5,3;7,6",
+            "history_SHA": "1f60b319025d3cf6bd1b512bab01f3c4dc093606d8bf117033bec978d90fad8c",
+            "sign": -1,
+            "terminal": null,
+            "raw_u_leaf_STM": 1.6455196142196655,
+            "clip_leaf_STM": 1,
+            "tanh_leaf_STM": 0.9282402396202087,
+            "value_leaf_STM": 1,
+            "propagated_value": -1
+          }
+        }
+      }
+    },
+    {
+      "depth": 1,
+      "engine": "Dtanh",
+      "status": "COMPLETED",
+      "processed": 3,
+      "NN": 0,
+      "wall_ms": 0.6231499910354614,
+      "min_value": -0.9282402396202087,
+      "max_value": -0.8951730728149414,
+      "argmax_Actions": [
+        29
+      ],
+      "strict_first_Action": 29,
+      "next_distinct_gap": 0.033067166805267334,
+      "next_distinct_gap_reason": "finite distinct second value",
+      "saved_actions": {
+        "21": {
+          "value": -0.9282402396202087,
+          "argmax": false,
+          "gap": 0.033067166805267334
+        },
+        "29": {
+          "value": -0.8951730728149414,
+          "argmax": true,
+          "gap": 0
+        }
+      },
+      "root_extremum_origins": {
+        "nonterminalPretransformAbsUge1": {
+          "count": 1,
+          "propagated": [
+            -0.8951730728149414,
+            -0.8951730728149414
+          ],
+          "raw_u_leaf_STM": [
+            1.447377324104309,
+            1.447377324104309
+          ],
+          "clip_leaf_STM": [
+            1,
+            1
+          ],
+          "tanh_leaf_STM": [
+            0.8951730728149414,
+            0.8951730728149414
+          ],
+          "witness": {
+            "ply": 45,
+            "side": 2,
+            "key": "2,3|2,5|1|0,4;0,7;1,0;2,1;2,5;3,0;3,3;5,0;7,4|0,2;1,1;1,5;2,4;2,6;3,2;4,4;4,6;5,3;7,6",
+            "history_SHA": "812ca8e695d173ce11b4cd7e454326298e6f4e6458ca84f907ab455f6c96949f",
+            "sign": -1,
+            "terminal": null,
+            "raw_u_leaf_STM": 1.447377324104309,
+            "clip_leaf_STM": 1,
+            "tanh_leaf_STM": 0.8951730728149414,
+            "value_leaf_STM": 0.8951730728149414,
+            "propagated_value": -0.8951730728149414
+          }
+        }
+      }
+    },
+    {
+      "depth": 2,
+      "engine": "NNUE",
+      "status": "COMPLETED",
+      "processed": 115,
+      "NN": 112,
+      "wall_ms": 29.590812981128693,
+      "min_value": -0.9951441884040833,
+      "max_value": -0.9893707036972046,
+      "argmax_Actions": [
+        29
+      ],
+      "strict_first_Action": 29,
+      "next_distinct_gap": 0.005773484706878662,
+      "next_distinct_gap_reason": "finite distinct second value",
+      "saved_actions": {
+        "21": {
+          "value": -0.9951441884040833,
+          "argmax": false,
+          "gap": 0.005773484706878662
+        },
+        "29": {
+          "value": -0.9893707036972046,
+          "argmax": true,
+          "gap": 0
+        }
+      },
+      "root_extremum_origins": {
+        "nonterminalNNUE": {
+          "count": 1,
+          "propagated": [
+            -0.9893707036972046,
+            -0.9893707036972046
+          ],
+          "NNUE_leaf_STM": [
+            -0.9893707036972046,
+            -0.9893707036972046
+          ],
+          "witness": {
+            "ply": 46,
+            "side": 1,
+            "key": "2,3|2,4|0|0,4;0,7;1,0;2,1;2,5;3,0;3,3;5,0;7,4|0,2;1,1;1,5;2,4;2,6;3,2;4,4;4,6;5,3;7,6",
+            "history_SHA": "f50c7b460ab400ebcc5f6f972eae62ed71f4de82fb2c98f81f2d84c534a49959",
+            "sign": 1,
+            "terminal": null,
+            "value_leaf_STM": -0.9893707036972046,
+            "propagated_value": -0.9893707036972046
+          }
+        }
+      }
+    },
+    {
+      "depth": 2,
+      "engine": "Dclip",
+      "status": "COMPLETED",
+      "processed": 115,
+      "NN": 0,
+      "wall_ms": 15.06723701953888,
+      "min_value": -1,
+      "max_value": -1,
+      "argmax_Actions": [
+        21,
+        29
+      ],
+      "strict_first_Action": 21,
+      "next_distinct_gap": null,
+      "next_distinct_gap_reason": "ALL_VALUES_TIED",
+      "saved_actions": {
+        "21": {
+          "value": -1,
+          "argmax": true,
+          "gap": 0
+        },
+        "29": {
+          "value": -1,
+          "argmax": true,
+          "gap": 0
+        }
+      },
+      "root_extremum_origins": {
+        "nonterminalPretransformAbsUge1": {
+          "count": 112,
+          "propagated": [
+            -1,
+            -1
+          ],
+          "raw_u_leaf_STM": [
+            -1.7228975296020508,
+            -1.3266130685806274
+          ],
+          "clip_leaf_STM": [
+            -1,
+            -1
+          ],
+          "tanh_leaf_STM": [
+            -0.9382109642028809,
+            -0.8684191107749939
+          ],
+          "witness": {
+            "ply": 46,
+            "side": 1,
+            "key": "3,2|2,4|0|0,4;0,7;1,0;2,1;2,5;3,0;3,3;5,0;7,4|0,2;1,1;1,5;2,4;2,6;3,2;4,4;4,6;5,3;7,6",
+            "history_SHA": "6016af5e17ddccac00d29117729d457f39bdeefd9393118fefc74be244752d75",
+            "sign": 1,
+            "terminal": null,
+            "raw_u_leaf_STM": -1.623826503753662,
+            "clip_leaf_STM": -1,
+            "tanh_leaf_STM": -0.9251773953437805,
+            "value_leaf_STM": -1,
+            "propagated_value": -1
+          }
+        }
+      }
+    },
+    {
+      "depth": 2,
+      "engine": "Dtanh",
+      "status": "COMPLETED",
+      "processed": 115,
+      "NN": 0,
+      "wall_ms": 16.33176600933075,
+      "min_value": -0.9382109642028809,
+      "max_value": -0.9095227718353271,
+      "argmax_Actions": [
+        29
+      ],
+      "strict_first_Action": 29,
+      "next_distinct_gap": 0.02868819236755371,
+      "next_distinct_gap_reason": "finite distinct second value",
+      "saved_actions": {
+        "21": {
+          "value": -0.9382109642028809,
+          "argmax": false,
+          "gap": 0.02868819236755371
+        },
+        "29": {
+          "value": -0.9095227718353271,
+          "argmax": true,
+          "gap": 0
+        }
+      },
+      "root_extremum_origins": {
+        "nonterminalPretransformAbsUge1": {
+          "count": 1,
+          "propagated": [
+            -0.9095227718353271,
+            -0.9095227718353271
+          ],
+          "raw_u_leaf_STM": [
+            -1.5247553586959839,
+            -1.5247553586959839
+          ],
+          "clip_leaf_STM": [
+            -1,
+            -1
+          ],
+          "tanh_leaf_STM": [
+            -0.9095227718353271,
+            -0.9095227718353271
+          ],
+          "witness": {
+            "ply": 46,
+            "side": 1,
+            "key": "2,3|2,5|0|0,4;0,7;1,0;1,2;2,1;2,5;3,0;3,3;5,0;7,4|0,2;1,1;1,5;2,4;2,6;3,2;4,4;4,6;5,3;7,6",
+            "history_SHA": "d1313abb4ae22a55467113a6f9b4b1fc377da73ecd296bcb413c6337860abacd",
+            "sign": 1,
+            "terminal": null,
+            "raw_u_leaf_STM": -1.5247553586959839,
+            "clip_leaf_STM": -1,
+            "tanh_leaf_STM": -0.9095227718353271,
+            "value_leaf_STM": -0.9095227718353271,
+            "propagated_value": -0.9095227718353271
+          }
+        }
+      }
+    }
+  ],
+  "stop_SHA": "1ce86d373b69b72bb3e3d5cdb5cfd6445e3345ec055a735b6b3a7db38d6ef78e",
+  "process": {
+    "UTC": "2026-10-05T02:11:21.255812+00:00",
+    "startUTC": "2026-10-05T02:11:21.020779+00:00",
+    "endUTC": "2026-10-05T02:11:21.255826+00:00",
+    "exit": 0,
+    "reason": null,
+    "wall_s": 0.23505314497742802,
+    "peak_family_RSS": 90529792,
+    "samples_actual": 122,
+    "samples_charge": 122,
+    "original_unknown": false,
+    "inflight_NN_unknown": false,
+    "conservative_inflight_upper": 0,
+    "tracked": {
+      "573892": 41929806
+    },
+    "remaining": [],
+    "all_child_waited": true,
+    "current_exact_absent": true,
+    "runner_pid": 573743,
+    "runner_tick": 41929379
+  },
+  "result_SHA": "a560c26f3a2f05cdb701a8bd2a5e17e0525b46c839b375b64c3a61ddbb1d4071"
+}
