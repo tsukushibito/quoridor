@@ -13,3 +13,13 @@ ready/show goal/self、本人in_progress・pauseなしを確認。旧scheduler38
 既112MiB guard内の現在allocated＋forecast8MiB（source/Git/短metadata2MiB含む）を再admit、旧sup歴史保持を減額せず追加予約/親増額/unknown割引0。main/研究default index開始前SHA一致・親の相対リンク存在確認。source/短期子停止、意図的長期2PIDのみ継続。最小証拠はframe20/intake.json/first-attempt-failure.json/state-recovery.json/recovered-running-loaded.json/handoff-current.json。根拠rawは既runに保持し全source/履歴を複写しない。既active root/coordinatorへ速報受理、Beads append-notes/backup・92 in_progressを継続する。研究静的を今回の受入れ待ちにしない。
 
 後続01:06:34公式同newturnはcontextCompactionを経てinProgress/errornull・公開commandExecutionあり。本人saved guardのobservation.json生成と元SHA/bytesを01:07頃に限定確認した（frame20/first-observe-effect.json）。新自然点検toolの到達を有限支持し、finish/notesbackup/提案の到達や判断品質・全期間成功はこの一件から推定しない。監視対象sourceの追加変更なし。
+
+## 247.1 整理要否の節目判断を役割運用へ反映
+
+root247がmain role/team設計各1段落を変更・01:15:25書込停止。92はownedなし/公式supervisor idleで自己2identityを秩序停止して安全窓を先に作り、指定2pathだけ研究mirrorした。節目では前回からの変化を中心に整理要否を必ず判断し、実施範囲・owner・時期又は見送り理由/再検討契機を既存issue・報告へ短く残す。実施量を成果指標にせず、毎run全体監査・整理実施・追加定期LLMを要求しない。
+
+steward digest edd25cec3408317a744e7a9ffab427328a405fec2c7c4f093e8a8c80d533a2ec、全6digest/mainmirror一致、現common+role全文を正確な同active saved turnへsteer受理。モデルeffort/cwd不変、active適用と常設developer適用/readback非対応を区別する。本人の恒久idle refreshは本turn終了後rootが同saved公式refreshで仕上げるpendingとして引渡す。新turn/他者interruptなし。
+
+source固定後、同runtime通常freshstart01:18:59頃、scheduler499454/tick41615309・monitor499467/tick41615327同boot。実running/configcontract loaded不変更・24期待hash一致、更新はmain/研究steward roleの期待hash2個だけ。period1200/null、02:41:02/02:46:02/02:49:02/02:51:02の92停止保存責任維持。旧next_atと再開next_at/実gapを自己ROLE-MILESTONE-247/running-loaded.jsonへ保存、通常start位相で強制tickなし。main2pathはroot solewriter、本人main編集0/役common他定義編集0/科学条件変更0。
+
+今回整理・削除は実行しない。現在増分は役割mirror・小さい回復証拠と新運用bindingで、実allocated+小forecastは既112MiB guard内。現運用sourceと読取/復旧の失敗証拠は参照中で維持する。今枠終了では、前回以降に増えた停止済展開・重複保存・現役参照/復元の有無を必要範囲だけ判断し、対象のowner/時期又は利用中・再現上の保持理由と再検討契機をこの既92報告へ短く追記する通常運用へ接続する。新全体監査・台帳・一律保存減額は追加しない。

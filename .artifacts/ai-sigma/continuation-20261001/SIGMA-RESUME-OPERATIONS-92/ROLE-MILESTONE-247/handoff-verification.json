@@ -1,0 +1,95 @@
+{
+  "at": "2026-10-05T01:21:13.142022+00:00",
+  "issue": "quoridor-4lc.247.1",
+  "main_written_by_steward": false,
+  "two_mirrors_equal": true,
+  "steward_digest": "edd25cec3408317a744e7a9ffab427328a405fec2c7c4f093e8a8c80d533a2ec",
+  "six_digests_match": true,
+  "active_fulltext": {
+    "at": "2026-10-05T01:17:40.175086+00:00",
+    "method": "turn/steer",
+    "thread_id": "01a0f31d-99ee-7d63-b162-bc1a59c457c6",
+    "exact_turn_id": "01a1099e-e5a2-7882-8b76-4be9aad3a691",
+    "accepted": true,
+    "response_turn_id": "01a1099e-e5a2-7882-8b76-4be9aad3a691",
+    "full_text_sha256": "d793773b5f4c2fcc9a0e89c8f345628a2cc33700ff9af0a5b8ac7babea1dc2c3",
+    "definition_sha256_before": "666d142158dcbf82d898fcacdfb3a1d7409fd1ff43ad34e15b27ca12ee05cb5e",
+    "definition_sha256_after": "edd25cec3408317a744e7a9ffab427328a405fec2c7c4f093e8a8c80d533a2ec",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+    "permanent_idle_refresh_pending": true,
+    "permanent_owner": "root247",
+    "developer_readback_supported": false,
+    "new_turn_started": false
+  },
+  "permanent_self_idle_refresh_pending_to_root": true,
+  "phase": "running",
+  "state": {
+    "binding": {
+      "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+      "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+      "target": "supervisor",
+      "dispatch_issue": "quoridor-4lc.40",
+      "contract_file": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+    },
+    "process": {
+      "pid": 499454,
+      "start_ticks": "41615309",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "phase": "running",
+    "recovery_required": false,
+    "last_result": {
+      "at": "2026-10-05T01:19:04.723583+00:00",
+      "event": "dispatched",
+      "run_id": "370dbbce-8c86-4e9c-81b9-2ead82b8c3b0",
+      "turn_id": "01a109a4-9a0f-7913-b4dd-f2cb0d4ae84c"
+    },
+    "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+    "config_sha256": "e443a6132c3b01f58424aadbbce9cc03c1a6e52f9fd1bbd0531d0c882719cbdd",
+    "contract_sha256": "c4028354d50fb0291cef7652325931a8eabdeb46564e3378fcc9cc9e79a28193",
+    "next_at": 1791164339.164948,
+    "owned": {
+      "run_id": "370dbbce-8c86-4e9c-81b9-2ead82b8c3b0",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+      "turn_id": "01a109a4-9a0f-7913-b4dd-f2cb0d4ae84c",
+      "started_at": "2026-10-05T01:19:04.704398+00:00",
+      "max_turn_seconds": null
+    }
+  },
+  "scheduler": {
+    "pid": 499454,
+    "start_ticks": "41615309",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "monitor": {
+    "pid": 499467,
+    "start_ticks": "41615327",
+    "state": "R",
+    "rss_bytes": 20639744,
+    "cpu_ticks": 2,
+    "affinity": [
+      0
+    ],
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "input_count": 24,
+  "input_mismatch_count": 0,
+  "default_indexes_unchanged": true,
+  "resource": {
+    "steward_allocated_bytes": 40505344,
+    "supervisor_held_bytes": 146706432,
+    "supervisor_current_frame_bytes": 602112,
+    "supervisor_historical_held_bytes": 146104320,
+    "forecast_bytes": 2097152,
+    "additional_reservation_bytes": 0,
+    "historical_parent_charge_released": false
+  },
+  "cleanup_execution": false,
+  "future_cleanup_judgment": "frame20 end in existing .92 report; changes since last decision only; plan owner timing or defer reason/trigger",
+  "source_write_stopped": true,
+  "short_child_remaining_after_completion": 0,
+  "intentional_long_processes": 2
+}
