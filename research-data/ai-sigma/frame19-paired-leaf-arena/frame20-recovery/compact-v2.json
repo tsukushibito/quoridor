@@ -1,0 +1,362 @@
+{
+  "UTC": "2026-10-05T01:11:53.181377+00:00",
+  "task": "frame20-paired-recovery-242-v1",
+  "schema": "paired-recovery-v1",
+  "NN": 0,
+  "model": 0,
+  "GPU": 0,
+  "planned8": 8,
+  "all_terminal": 8,
+  "UNKNOWN": 0,
+  "NOT_STARTED": 0,
+  "families": 2,
+  "color_swaps": true,
+  "per_variant_NNUE_WDL": {
+    "baseline": {
+      "W": 2,
+      "D": 0,
+      "L": 2
+    },
+    "candidate": {
+      "W": 2,
+      "D": 0,
+      "L": 2
+    }
+  },
+  "service_all_adopted_hands": 338,
+  "all_clock_t1_le100_mode_id_generation_key_history_legal_saved_validation": true,
+  "legal_verification_scope": "saved acceptance plus immutable arena validation source;no new RuleA replay or independent legality proof",
+  "metrics": [
+    {
+      "variant": "baseline",
+      "engine": "NNUE",
+      "planned_games": 4,
+      "terminal_games": 4,
+      "NNUE_WDL": {
+        "L": 2,
+        "W": 2
+      },
+      "received_hands": 80,
+      "completed_depth_counts": {
+        "1": 3,
+        "2": 50,
+        "5": 2,
+        "4": 14,
+        "13": 1,
+        "17": 1,
+        "3": 9
+      },
+      "completed_depth_mean": 2.825,
+      "processed_nodes": 142378,
+      "NN": 107899,
+      "D_evals": 0,
+      "nodecap_reached_hands": 0,
+      "nodecap_reached_rate": 0.0,
+      "typed_stop_counts": {
+        "INTERNAL_DEADLINE": 80
+      },
+      "partial_depth_discarded_hands": 80,
+      "elapsed_mean_ms": 91.08569559976459,
+      "elapsed_max_ms": 97.08816599845886,
+      "clock_slack_min_ms": 2.9118340015411377,
+      "late_count": 0,
+      "latevalid_count": 0,
+      "whole_search_ms_sum": 7034.020136117935,
+      "clock_elapsed_ms_sum": 7286.855647981167,
+      "timer_callback_recorded": 0,
+      "scope": "different reached states/workload;aggregate ratios not fixedwork/causal engine benefit"
+    },
+    {
+      "variant": "baseline",
+      "engine": "distance",
+      "planned_games": 4,
+      "terminal_games": 4,
+      "NNUE_WDL": {
+        "L": 2,
+        "W": 2
+      },
+      "received_hands": 80,
+      "completed_depth_counts": {
+        "2": 23,
+        "3": 27,
+        "5": 12,
+        "14": 1,
+        "19": 1,
+        "17": 1,
+        "6": 4,
+        "4": 10,
+        "64": 1
+      },
+      "completed_depth_mean": 4.5625,
+      "processed_nodes": 193761,
+      "NN": 0,
+      "D_evals": 141919,
+      "nodecap_reached_hands": 0,
+      "nodecap_reached_rate": 0.0,
+      "typed_stop_counts": {
+        "INTERNAL_DEADLINE": 79,
+        "null": 1
+      },
+      "partial_depth_discarded_hands": 79,
+      "elapsed_mean_ms": 90.08933534920216,
+      "elapsed_max_ms": 94.57430094480515,
+      "clock_slack_min_ms": 5.425699055194855,
+      "late_count": 0,
+      "latevalid_count": 0,
+      "whole_search_ms_sum": 6969.383451223373,
+      "clock_elapsed_ms_sum": 7207.1468279361725,
+      "timer_callback_recorded": 0,
+      "scope": "different reached states/workload;aggregate ratios not fixedwork/causal engine benefit"
+    },
+    {
+      "variant": "candidate",
+      "engine": "NNUE",
+      "planned_games": 4,
+      "terminal_games": 4,
+      "NNUE_WDL": {
+        "L": 2,
+        "W": 2
+      },
+      "received_hands": 89,
+      "completed_depth_counts": {
+        "2": 56,
+        "5": 3,
+        "4": 11,
+        "13": 1,
+        "16": 1,
+        "1": 1,
+        "7": 6,
+        "8": 1,
+        "64": 1,
+        "3": 8
+      },
+      "completed_depth_mean": 3.808988764044944,
+      "processed_nodes": 185829,
+      "NN": 145504,
+      "D_evals": 0,
+      "nodecap_reached_hands": 0,
+      "nodecap_reached_rate": 0.0,
+      "typed_stop_counts": {
+        "INTERNAL_DEADLINE": 88,
+        "null": 1
+      },
+      "partial_depth_discarded_hands": 88,
+      "elapsed_mean_ms": 89.87462573305945,
+      "elapsed_max_ms": 93.87699496746063,
+      "clock_slack_min_ms": 6.123005032539368,
+      "late_count": 0,
+      "latevalid_count": 0,
+      "whole_search_ms_sum": 7738.752727270126,
+      "clock_elapsed_ms_sum": 7998.8416902422905,
+      "timer_callback_recorded": 0,
+      "scope": "different reached states/workload;aggregate ratios not fixedwork/causal engine benefit"
+    },
+    {
+      "variant": "candidate",
+      "engine": "distance",
+      "planned_games": 4,
+      "terminal_games": 4,
+      "NNUE_WDL": {
+        "L": 2,
+        "W": 2
+      },
+      "received_hands": 89,
+      "completed_depth_counts": {
+        "2": 19,
+        "3": 36,
+        "5": 7,
+        "13": 1,
+        "19": 1,
+        "17": 1,
+        "7": 6,
+        "6": 5,
+        "9": 1,
+        "8": 2,
+        "4": 9,
+        "64": 1
+      },
+      "completed_depth_mean": 4.797752808988764,
+      "processed_nodes": 270670,
+      "NN": 0,
+      "D_evals": 207203,
+      "nodecap_reached_hands": 0,
+      "nodecap_reached_rate": 0.0,
+      "typed_stop_counts": {
+        "INTERNAL_DEADLINE": 88,
+        "null": 1
+      },
+      "partial_depth_discarded_hands": 88,
+      "elapsed_mean_ms": 90.16826351505986,
+      "elapsed_max_ms": 95.11375504732132,
+      "clock_slack_min_ms": 4.88624495267868,
+      "late_count": 0,
+      "latevalid_count": 0,
+      "whole_search_ms_sum": 7732.787249922752,
+      "clock_elapsed_ms_sum": 8024.975452840328,
+      "timer_callback_recorded": 0,
+      "scope": "different reached states/workload;aggregate ratios not fixedwork/causal engine benefit"
+    }
+  ],
+  "paired_games": [
+    {
+      "baseline_slot": 1,
+      "candidate_slot": 2,
+      "family": "frame19-242-81276a26289a64dda5f1a0c4218fd2dd-0",
+      "NNUE_side": 1,
+      "baseline_result": "L",
+      "candidate_result": "L",
+      "baseline_hands": 46,
+      "candidate_hands": 46,
+      "starting_prefix_same": true,
+      "all_final_prefix_identical": true,
+      "matched_input_hands": 46,
+      "same_exact_prefix_matches": 46,
+      "final_Action_disagreements_on_matched_inputs": 0,
+      "common_depth_value_checks": 180,
+      "common_depth_value_faults": 0,
+      "common_depth_Action_differences": 0
+    },
+    {
+      "baseline_slot": 4,
+      "candidate_slot": 3,
+      "family": "frame19-242-81276a26289a64dda5f1a0c4218fd2dd-0",
+      "NNUE_side": 2,
+      "baseline_result": "W",
+      "candidate_result": "W",
+      "baseline_hands": 50,
+      "candidate_hands": 50,
+      "starting_prefix_same": true,
+      "all_final_prefix_identical": true,
+      "matched_input_hands": 50,
+      "same_exact_prefix_matches": 50,
+      "final_Action_disagreements_on_matched_inputs": 0,
+      "common_depth_value_checks": 147,
+      "common_depth_value_faults": 0,
+      "common_depth_Action_differences": 0
+    },
+    {
+      "baseline_slot": 5,
+      "candidate_slot": 6,
+      "family": "frame19-242-81276a26289a64dda5f1a0c4218fd2dd-1",
+      "NNUE_side": 1,
+      "baseline_result": "W",
+      "candidate_result": "W",
+      "baseline_hands": 33,
+      "candidate_hands": 51,
+      "starting_prefix_same": true,
+      "all_final_prefix_identical": false,
+      "matched_input_hands": 1,
+      "same_exact_prefix_matches": 1,
+      "final_Action_disagreements_on_matched_inputs": 1,
+      "common_depth_value_checks": 1,
+      "common_depth_value_faults": 0,
+      "common_depth_Action_differences": 0
+    },
+    {
+      "baseline_slot": 8,
+      "candidate_slot": 7,
+      "family": "frame19-242-81276a26289a64dda5f1a0c4218fd2dd-1",
+      "NNUE_side": 2,
+      "baseline_result": "L",
+      "candidate_result": "L",
+      "baseline_hands": 31,
+      "candidate_hands": 31,
+      "starting_prefix_same": true,
+      "all_final_prefix_identical": true,
+      "matched_input_hands": 31,
+      "same_exact_prefix_matches": 31,
+      "final_Action_disagreements_on_matched_inputs": 0,
+      "common_depth_value_checks": 153,
+      "common_depth_value_faults": 0,
+      "common_depth_Action_differences": 0
+    }
+  ],
+  "matched_engine_summaries": [
+    {
+      "engine": "NNUE",
+      "same_input_pairs": 64,
+      "candidate_deeper": 4,
+      "same_depth": 59,
+      "candidate_shallower": 1,
+      "mean_depth_delta": 0.046875,
+      "final_Action_changed": 1,
+      "common_depth_value_checks": 178,
+      "common_depth_value_maxabs": 0.0,
+      "common_depth_Action_diff": 0
+    },
+    {
+      "engine": "distance",
+      "same_input_pairs": 64,
+      "candidate_deeper": 4,
+      "same_depth": 58,
+      "candidate_shallower": 2,
+      "mean_depth_delta": 0.03125,
+      "final_Action_changed": 0,
+      "common_depth_value_checks": 303,
+      "common_depth_value_maxabs": 0.0,
+      "common_depth_Action_diff": 0
+    }
+  ],
+  "old_science": {
+    "NN": 258903,
+    "guardian_wall_s": 31.73198343697004,
+    "controller_family_wall_ms": 30762.177705049515,
+    "startup_to_ready_ms": [
+      28.50881999731064,
+      31.30187898874283
+    ],
+    "background_wall_s": 46.62543286604341,
+    "control_wait_s": [
+      0.0022719340049661696,
+      0.0029723549960181117,
+      0.0008858910296112299
+    ],
+    "peak_family_RSS_B": 326377472,
+    "NNcaps_not_reset": true
+  },
+  "limits": [
+    "2family/4paired color positions/8games;not 8independent openings",
+    "package applied to bothNNUE andD;relativeWDL cannot isolate absoluteengine improvement",
+    "different reached states,32768 bothnodecap,partial depth discarded,TT0/noise0/policy0",
+    "sameinput comparisons use recorded board+side+canonical count-history;common completeddepth only;equalargmax unavailable",
+    "branchcache/JIT/order/clock sampling;not formalNI or unseen strength",
+    "old236/2408192 and differentprefix results not directcausal control",
+    "oldscience unchanged/oldopenedtest no read/newforward0",
+    "LLMfailed cost UNKNOWN;known sciencewall and background/control spans not additive"
+  ],
+  "management_math_wall_s": 0.02179054298903793,
+  "stats_path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-paired-leaf-arena/frame20-recovery/stats-v2.json",
+  "stats_SHA": "8492e686bafd3c1a7b12ae0d9188f086cc1df36c858169d52fd2e7fbbb83b78e",
+  "new_process": {
+    "UTC": "2026-10-05T01:11:53.198344+00:00",
+    "startUTC": "2026-10-05T01:11:53.124824+00:00",
+    "endUTC": "2026-10-05T01:11:53.198355+00:00",
+    "task": "frame20-paired-recovery-242-v1",
+    "schema": "paired-recovery-v1",
+    "argv": [
+      "/usr/bin/python3",
+      "-B",
+      "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame19-paired-leaf-arena/frame20-recovery/phase_v2.py",
+      "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-paired-leaf-arena/frame20-recovery/config-v2.json"
+    ],
+    "pid": 491747,
+    "tick": 41572665,
+    "exit": 0,
+    "wall_s": 0.07353988802060485,
+    "peak_RSS_B": 26501120,
+    "waited": true,
+    "current_exact_absent": true,
+    "NN": 0,
+    "model": 0,
+    "GPU": 0,
+    "expected_output": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-paired-leaf-arena/frame20-recovery/stats-v2.json",
+    "post_output_matched": true,
+    "output_SHA": "8492e686bafd3c1a7b12ae0d9188f086cc1df36c858169d52fd2e7fbbb83b78e"
+  },
+  "old_stop_SHA": "bc674adf1e461c6df407d0096f14c2ddb87b5cb1aee9c7f7e39859d11d12ae71",
+  "source_SHA": "d450216d559b94fe1bb31af44a8a1b354ea6111e398b93fa1a7de4499531c806",
+  "newphase_source_stopped": true,
+  "new_NN_charge": 0,
+  "new_reservation": 0,
+  "old_fees_changed": false
+}

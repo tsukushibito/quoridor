@@ -1,0 +1,46 @@
+{
+  "UTC": "2026-10-05T01:14:55.029443+00:00",
+  "scope": "saved 242 matched input;no new NN/selection against oldtest",
+  "case": {
+    "baseline_slot": 5,
+    "candidate_slot": 6,
+    "family": "frame19-242-81276a26289a64dda5f1a0c4218fd2dd-1",
+    "NNUE_side": 1,
+    "engine": "NNUE",
+    "input_key": "4,1|4,8|0|0,7;1,4;2,7;3,2;3,4;4,3;6,7|0,1;0,6;1,1;1,3;2,1;4,1;5,7;6,5",
+    "history_SHA": "0a0910ec8cc7e224a86241bb0d27e809806920729c7bf870fb27548facdb5992",
+    "baseline_ply": 16,
+    "candidate_ply": 16,
+    "same_exact_prefix": true,
+    "baseline_completed_depth": 1,
+    "candidate_completed_depth": 2,
+    "completed_depth_delta": 1,
+    "baseline_processed": 295,
+    "candidate_processed": 2013,
+    "baseline_NN": 255,
+    "candidate_NN": 1823,
+    "baseline_Action": 4,
+    "candidate_Action": 133,
+    "final_Action_equal": false,
+    "same_final_completed_depth": false,
+    "baseline_elapsed_ms": 93.89497697353363,
+    "candidate_elapsed_ms": 90.65363395214081,
+    "common_completed_depths": [
+      {
+        "depth": 1,
+        "baseline_value": -0.7106375098228455,
+        "candidate_value": -0.7106375098228455,
+        "maxabs": 0.0,
+        "value_under_fixed_tol": true,
+        "baseline_Action": 4,
+        "candidate_Action": 4,
+        "Action_equal": true,
+        "equal_argmax_set": "NOT_RECORDED",
+        "nonbest_allchild_exact": "NOT_RECORDED"
+      }
+    ],
+    "scope": "same recorded board+side+RuleA count-history input;search partial/horizon can differ"
+  },
+  "next_max1": "244 existing leaf/value/history diagnosis may reuse this saved input and commondepth1 versus newcompleted2;no automatic newarena/readout/TT",
+  "newforward": 0
+}
