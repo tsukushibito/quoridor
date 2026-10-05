@@ -1,0 +1,140 @@
+{
+  "status": "COMPLETE_NEW_SAVED_ARITHMETIC",
+  "source_commandwall_conservative_seconds": 8,
+  "source_cap": 10,
+  "manage_claim_donor_notification_known_seconds": 6.820129085,
+  "manage_cap": 10,
+  "manage_remaining_forecast_seconds": 3,
+  "science_seconds": 1.1711182069848292,
+  "science_cap": 30,
+  "NN": 0,
+  "MAX_consumed": 1,
+  "MAX_cap": 1,
+  "scope_allocated": 151552,
+  "necessary_uniqueGit_temp_metadata_forecast": 65536,
+  "scope_sum": 217088,
+  "scope_cap": 262144,
+  "source_stop_SHA": "b9bd644bcedbbd220048826efe308c704d621dffd7b9c5bb6c8f1aad3ee78752",
+  "archive_SHA": "36ca852cc180a8dc65e558ed0cd8465bd8429463a69c5ac417f2a40a284a431e",
+  "original_read_LLM_control": "UNKNOWN",
+  "old291_275source80manage_2jobs1.721708699_MAX2_failure_originalNNUNKNOWN_upper0_NOT_RUN_retained": true,
+  "oldscope_cap": 1835008,
+  "newscope_cap": 262144,
+  "combined2MiB_unchanged": true,
+  "public_and_RuleA_result": {
+    "public0043": {
+      "candidate": {
+        "rowweighted": {
+          "MSE": 1.1112936094759978,
+          "sign": 0.5029272372456092,
+          "bias": 0.2963602563940354,
+          "saturation": 0.0
+        },
+        "groupequal": {
+          "MSE": 1.1123810069464133,
+          "sign": 0.5034702531078843,
+          "bias": 0.29820874792681307,
+          "saturation": 0.0
+        }
+      },
+      "D": {
+        "rowweighted": {
+          "MSE": 1.0,
+          "sign": 0.0,
+          "bias": -0.005854474491218288,
+          "saturation": 0.0
+        },
+        "groupequal": {
+          "MSE": 1.0,
+          "sign": 0.0,
+          "bias": -0.006940506215768499,
+          "saturation": 0.0
+        }
+      },
+      "constant": {
+        "rowweighted": {
+          "MSE": 0.9999658799964461,
+          "sign": 0.5029272372456092,
+          "bias": -0.00039353273635702206,
+          "saturation": 0.0
+        },
+        "groupequal": {
+          "MSE": 0.9999540184844627,
+          "sign": 0.5034702531078843,
+          "bias": -0.0014795644609072733,
+          "saturation": 0.0
+        }
+      }
+    },
+    "RuleA48": {
+      "candidate": {
+        "rowweighted": {
+          "MSE": 1.4599011659393335,
+          "sign": 0.5533573141486811,
+          "bias": -0.026495328017820913,
+          "saturation": 0.1906474820143885
+        },
+        "groupequal": {
+          "MSE": 1.502603045872717,
+          "sign": 0.5404780605417405,
+          "bias": -0.025949157731304767,
+          "saturation": 0.19090857295657612
+        }
+      },
+      "D": {
+        "rowweighted": {
+          "MSE": 0.6686823976889291,
+          "sign": 0.7511990407673861,
+          "bias": -0.04744388898320907,
+          "saturation": 0.0
+        },
+        "groupequal": {
+          "MSE": 0.6148462922582846,
+          "sign": 0.8002633172459873,
+          "bias": -0.04751634410110459,
+          "saturation": 0.0
+        }
+      },
+      "constant": {
+        "rowweighted": {
+          "MSE": 0.9998464809146628,
+          "sign": 0.5083932853717026,
+          "bias": -0.011325628988544095,
+          "saturation": 0.0
+        },
+        "groupequal": {
+          "MSE": 0.9997993224224874,
+          "sign": 0.5105521846189564,
+          "bias": -0.015643427483051642,
+          "saturation": 0.0
+        }
+      }
+    }
+  },
+  "RuleA_candidate_minus_D": {
+    "mean": 0.8877567536144327,
+    "95percentile": [
+      0.5922742789722851,
+      1.2006278978242453
+    ],
+    "negative": 12,
+    "zero": 0,
+    "positive": 36,
+    "families": 48,
+    "seed": 29180311,
+    "repetitions": 2000,
+    "fixedfits": true,
+    "cohort_correlation_limit": true
+  },
+  "public_counts": {
+    "raw_rows": 19359,
+    "raw_reason_unknown_zero": 23,
+    "raw_decisive": 19336,
+    "input_exposure_excluded": 15770,
+    "input_eligible_rows": 3589,
+    "input_eligible_reason_unknown_zero_excluded": 2
+  },
+  "public_game_CI": "UNDEFINED",
+  "next_max1": "train/selection-only fixed residual amplitude regularization versus D, as later separately allocated experiment; no newscience here",
+  "parent_goal_complete": false
+}

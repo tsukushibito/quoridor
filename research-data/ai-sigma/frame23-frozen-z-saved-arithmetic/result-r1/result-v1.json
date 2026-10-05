@@ -1,0 +1,236 @@
+{
+  "task": "frozen-z-saved-arithmetic-295-v1",
+  "schema": "frozen-public-rulea-z-arithmetic-295-v1",
+  "PASS": true,
+  "UTC": "2026-10-05T20:13:09.373956+00:00",
+  "NN": 0,
+  "model_forward": false,
+  "train_only_constant_verification": {
+    "rows": 67937,
+    "mean": 0.005460941754861121,
+    "PASS": true
+  },
+  "futurelabels_read": true,
+  "public_counts": {
+    "raw_rows": 19359,
+    "raw_reason_unknown_zero": 23,
+    "raw_decisive": 19336,
+    "input_exposure_excluded": 15770,
+    "input_eligible_rows": 3589,
+    "input_eligible_reason_unknown_zero_excluded": 2
+  },
+  "public_planned_groups": 10,
+  "public_metric_rows": 3587,
+  "public_metric_inputgroups": 2,
+  "public_zeroeligible_groups": 8,
+  "public_zero_excluded_per_group": {
+    "sigma-canonical-input:211cd88fdcea01cb961ce477ae763cd067978f189510d2201dfc4aded008c283": 1,
+    "sigma-canonical-input:333bc2cdd09d2cb9c0feba37e23ca09b0b6699e78224f5e492b7f748ec729052": 1
+  },
+  "public_independent_game_CI": "UNDEFINED",
+  "public_phase_absoluteP2_history_game": "UNAVAILABLE",
+  "RuleA_planned_families": 48,
+  "RuleA_status": {
+    "goal": 48
+  },
+  "RuleA_terminal_reason": "GOAL",
+  "old291_MAX2_failure_NOT_RUN_preserved": true,
+  "RuleA_metric_rows": 1668,
+  "RuleA_zeroeligible_families": 0,
+  "RuleA_true_draw_games": 0,
+  "winner_to_STM_z_independent_arithmetic": true,
+  "sharedRuleA_teachertruth_dependency": true,
+  "RuleA_paired": {
+    "candidateminusD:MSE": {
+      "mean": 0.8877567536144327,
+      "95percentile": [
+        0.5922742789722851,
+        1.2006278978242453
+      ],
+      "negative": 12,
+      "zero": 0,
+      "positive": 36,
+      "families": 48,
+      "seed": 29180311,
+      "repetitions": 2000,
+      "fixedfits": true,
+      "cohort_correlation_limit": true
+    },
+    "candidateminusD:sign": {
+      "mean": -0.25978525670424674,
+      "95percentile": [
+        -0.3635880965026533,
+        -0.16218548626969895
+      ],
+      "negative": 31,
+      "zero": 5,
+      "positive": 12,
+      "families": 48,
+      "seed": 29180311,
+      "repetitions": 2000,
+      "fixedfits": true,
+      "cohort_correlation_limit": true
+    },
+    "candidateminusconstant:MSE": {
+      "mean": 0.50280372345023,
+      "95percentile": [
+        0.18277910596135225,
+        0.8307255566764928
+      ],
+      "negative": 17,
+      "zero": 0,
+      "positive": 31,
+      "families": 48,
+      "seed": 29180311,
+      "repetitions": 2000,
+      "fixedfits": true,
+      "cohort_correlation_limit": true
+    },
+    "candidateminusconstant:sign": {
+      "mean": 0.029925875922784145,
+      "95percentile": [
+        -0.064601507200529,
+        0.1221450261167622
+      ],
+      "negative": 19,
+      "zero": 8,
+      "positive": 21,
+      "families": 48,
+      "seed": 29180311,
+      "repetitions": 2000,
+      "fixedfits": true,
+      "cohort_correlation_limit": true
+    },
+    "Dminusconstant:MSE": {
+      "mean": -0.38495303016420285,
+      "95percentile": [
+        -0.461423541959849,
+        -0.302743616901969
+      ],
+      "negative": 43,
+      "zero": 0,
+      "positive": 5,
+      "families": 48,
+      "seed": 29180311,
+      "repetitions": 2000,
+      "fixedfits": true,
+      "cohort_correlation_limit": true
+    },
+    "Dminusconstant:sign": {
+      "mean": 0.2897111326270309,
+      "95percentile": [
+        0.230305254886569,
+        0.3449395299288938
+      ],
+      "negative": 7,
+      "zero": 0,
+      "positive": 41,
+      "families": 48,
+      "seed": 29180311,
+      "repetitions": 2000,
+      "fixedfits": true,
+      "cohort_correlation_limit": true
+    }
+  },
+  "body_seconds": 1.0120827700011432,
+  "entry_SHA": "c132a706f3dd9b214eec18115070a969b26e2fa24762af1614bf57d33dbb2249",
+  "registration_SHA": "bd4bcf41672a9bb23e6be6eb523a310e200ae0aecafa3cb51210849c3eb83ae1",
+  "frozen_evaluation_SHA": "8e842b0b43508ea40954e49a63e2f94fcc5bfd65c0b97c33354a0d724da09adb",
+  "limits": [
+    "Public recorded +/-1 outcomes and native qualified input are conditional evidence, not certified complete legal game trajectories",
+    "2 public retained inputgroups are not independent games; no game CI inferred",
+    "RuleA48 fixed cohorts/opening distribution/family correlation; conditional fixedfits bootstrap not universal precision guarantee",
+    "Source reader/native model finite parity/sharedRuleA dependencies, not full deep truth or samewall strength",
+    "No test-result reselection/refill/retraining/arena; public and RuleA denominators kept separate"
+  ],
+  "metrics": {
+    "public0043": {
+      "candidate": {
+        "rowweighted": {
+          "MSE": 1.1112936094759978,
+          "sign": 0.5029272372456092,
+          "bias": 0.2963602563940354,
+          "saturation": 0.0
+        },
+        "groupequal": {
+          "MSE": 1.1123810069464133,
+          "sign": 0.5034702531078843,
+          "bias": 0.29820874792681307,
+          "saturation": 0.0
+        }
+      },
+      "D": {
+        "rowweighted": {
+          "MSE": 1.0,
+          "sign": 0.0,
+          "bias": -0.005854474491218288,
+          "saturation": 0.0
+        },
+        "groupequal": {
+          "MSE": 1.0,
+          "sign": 0.0,
+          "bias": -0.006940506215768499,
+          "saturation": 0.0
+        }
+      },
+      "constant": {
+        "rowweighted": {
+          "MSE": 0.9999658799964461,
+          "sign": 0.5029272372456092,
+          "bias": -0.00039353273635702206,
+          "saturation": 0.0
+        },
+        "groupequal": {
+          "MSE": 0.9999540184844627,
+          "sign": 0.5034702531078843,
+          "bias": -0.0014795644609072733,
+          "saturation": 0.0
+        }
+      }
+    },
+    "RuleA48": {
+      "candidate": {
+        "rowweighted": {
+          "MSE": 1.4599011659393335,
+          "sign": 0.5533573141486811,
+          "bias": -0.026495328017820913,
+          "saturation": 0.1906474820143885
+        },
+        "groupequal": {
+          "MSE": 1.502603045872717,
+          "sign": 0.5404780605417405,
+          "bias": -0.025949157731304767,
+          "saturation": 0.19090857295657612
+        }
+      },
+      "D": {
+        "rowweighted": {
+          "MSE": 0.6686823976889291,
+          "sign": 0.7511990407673861,
+          "bias": -0.04744388898320907,
+          "saturation": 0.0
+        },
+        "groupequal": {
+          "MSE": 0.6148462922582846,
+          "sign": 0.8002633172459873,
+          "bias": -0.04751634410110459,
+          "saturation": 0.0
+        }
+      },
+      "constant": {
+        "rowweighted": {
+          "MSE": 0.9998464809146628,
+          "sign": 0.5083932853717026,
+          "bias": -0.011325628988544095,
+          "saturation": 0.0
+        },
+        "groupequal": {
+          "MSE": 0.9997993224224874,
+          "sign": 0.5105521846189564,
+          "bias": -0.015643427483051642,
+          "saturation": 0.0
+        }
+      }
+    }
+  }
+}

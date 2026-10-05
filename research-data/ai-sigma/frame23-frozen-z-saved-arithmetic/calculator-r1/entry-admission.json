@@ -1,0 +1,20 @@
+{
+  "task": "frozen-z-saved-arithmetic-295-v1",
+  "at": "2026-10-05T20:13:06.621963+00:00",
+  "argv": [
+    "/usr/bin/taskset",
+    "-c",
+    "3",
+    "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "-B",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-frozen-z-saved-arithmetic/score_saved_z.py",
+    "--registration",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-frozen-z-saved-arithmetic/registration-v1.json"
+  ],
+  "entry_SHA": "c132a706f3dd9b214eec18115070a969b26e2fa24762af1614bf57d33dbb2249",
+  "guard_SHA": "4412f9f73527e7fcd6b70341462180faa5079d54554fc734e3fc2196ffe3c2ee",
+  "registration_SHA": "bd4bcf41672a9bb23e6be6eb523a310e200ae0aecafa3cb51210849c3eb83ae1",
+  "expected_output": "result-r1/result-v1.json",
+  "expected_schema": "frozen-public-rulea-z-arithmetic-295-v1",
+  "foreign_compute": []
+}

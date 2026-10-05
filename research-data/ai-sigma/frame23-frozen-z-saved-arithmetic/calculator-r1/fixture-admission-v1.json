@@ -1,0 +1,95 @@
+{
+  "task": "frozen-z-saved-arithmetic-295-v1",
+  "at": "2026-10-05T20:13:08.244141+00:00",
+  "identity": {
+    "pid": 1865314,
+    "ppid": 2009,
+    "tick": "48424415",
+    "argv": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "research-data/ai-sigma/frame23-frozen-z-saved-arithmetic/guard_saved_z.py",
+      "--registration",
+      "/workspaces/quoridor/research-data/ai-sigma/frame23-frozen-z-saved-arithmetic/registration-v1.json"
+    ]
+  },
+  "argv": [
+    "research-data/ai-sigma/frame23-frozen-z-saved-arithmetic/guard_saved_z.py",
+    "--registration",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-frozen-z-saved-arithmetic/registration-v1.json"
+  ],
+  "entry_SHA": "f516ca5b6cbc6c1048cef9d89057815f6f69aeb5af32ff0ea83d7d3db8a89561",
+  "current24": {
+    "/workspaces/quoridor/scripts/dev/research-scheduler.py": true,
+    "/workspaces/quoridor/scripts/dev/research-watch.py": true,
+    "/workspaces/quoridor/scripts/dev/research-team.py": true,
+    "/workspaces/quoridor/scripts/dev/research-scheduler.sh": true,
+    "/workspaces/quoridor/scripts/dev/research-team.sh": true,
+    "/workspaces/quoridor/scripts/dev/beads.sh": true,
+    "/workspaces/quoridor/scripts/dev/project-env.sh": true,
+    "/workspaces/quoridor/research-paths.json": true,
+    "/workspaces/quoridor/scripts/dev/research-job.py": true,
+    "/workspaces/quoridor/scripts/dev/research-job.sh": true,
+    "/workspaces/quoridor/scripts/dev/research-storage.py": true,
+    "/workspaces/quoridor/docs/design/ai-sigma-continuation-20261001.md": true,
+    "/workspaces/quoridor/docs/design/ai-sigma-contract-supervisor-continuation.md": true,
+    "/workspaces/quoridor/docs/design/ai-sigma-contract-steward-frame22.md": true,
+    "/workspaces/quoridor/.agents/research-team/common.md": true,
+    "/workspaces/quoridor/.agents/research-team/roles/coordinator.md": true,
+    "/workspaces/quoridor/.agents/research-team/roles/hypothesis.md": true,
+    "/workspaces/quoridor/.agents/research-team/roles/experiment.md": true,
+    "/workspaces/quoridor/.agents/research-team/roles/critic.md": true,
+    "/workspaces/quoridor/.agents/research-team/roles/steward.md": true,
+    "/workspaces/quoridor/.artifacts/research-team/registry.json": true,
+    "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22-extension23/scheduler.json": true,
+    "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22-extension23/contract.json": true,
+    "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22-extension23/prompt.md": true
+  },
+  "runtime": [
+    {
+      "pid": 1713022,
+      "ppid": 1,
+      "tick": "47793131",
+      "argv": [
+        "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python",
+        "-B",
+        "/workspaces/quoridor/scripts/dev/research-scheduler.py",
+        "run",
+        "--config",
+        "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22-extension23/scheduler.json",
+        "--state-dir",
+        "/workspaces/quoridor/.artifacts/research-team/frame22-extension23/scheduler"
+      ]
+    },
+    {
+      "pid": 1713041,
+      "ppid": 1,
+      "tick": "47793161",
+      "argv": [
+        "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python",
+        "-B",
+        "scripts/dev/research-watch.py",
+        "monitor",
+        "--expectations",
+        "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22-extension23/expectations.json",
+        "--run-dir",
+        "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22-extension23"
+      ]
+    }
+  ],
+  "config_SHA": "c2c5919b6442a7489feda7075a2ceadb4d8e2b437beae1800646747b709af7ab",
+  "contract_SHA": "8f53a64f1ed41c0a2a869ead6699032b0cfc8de431581c3cbb6346b34661888c",
+  "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+  "current_RSS": 22433792,
+  "MemAvailable": 17546592256,
+  "storage_point_SHA": "6590085d94d3b804dd15fe82b492d1cc764b2efba24b747dd3432589cb58cb96",
+  "storage_point_at": "2026-10-05T17:37:05.320178+00:00",
+  "own_allocated": 4096,
+  "own_Git_temp_metadata_forecast": 524288,
+  "model_GPU_or_asset_reader": false,
+  "owned": null,
+  "foreign_compute": [],
+  "point_only": true,
+  "NN": 0,
+  "synthetic_only_no_label_or_model_reader": true
+}
