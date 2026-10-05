@@ -1,0 +1,19 @@
+{
+  "task": "frame20-distance-provenance-244-v2",
+  "schema": "distance-provenance-v2",
+  "coefficient_manifest": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-native-connection/weight-manifest.json",
+  "cases_manifest": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-leaf-terminal/exact-cases-preregister-v1.json",
+  "old_exact": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-leaf-terminal/exact-cases-r1.json",
+  "output": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-distance-provenance/phase20-v2/result.json.gz",
+  "counter": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-distance-provenance/phase20-v2/counter.json",
+  "internal_hard_ms": 85000,
+  "processed_cap": 65536,
+  "abs_tol": 1e-07,
+  "rel_tol": 1e-07,
+  "rounding": "ds=f32(distance/80), diff=f32(ds1-ds0), u=f32(f32(a)+f32(f32(b)*diff)); clip clamp[-1,1]; tanh=f32(Math.tanh(u))",
+  "argv": [
+    "/home/vscode/.local/bin/node",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame19-distance-provenance/phase20-v2/provenance.cjs",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-distance-provenance/phase20-v2/settings.json"
+  ]
+}
