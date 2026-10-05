@@ -1,0 +1,10 @@
+{
+  "old_source_SHA": "5d05d2108328ce1496fbce3165d12dcc12b290e9c01e022020200ffcc28b1fb7",
+  "old_manager_SHA": "c3389094d62d64ce0608be0f75ecad7e1195e8b7b73015141361fb7b2f42f2a7",
+  "old_failed_assertion": "assert(s.getLegalActions().some(a=>a.type==='pawn'&&Math.abs(a.direction[1])===2));",
+  "new_assertion": "const jump=s.getLegalActions().find(a=>a.type==='pawn'&&a.direction[0]===0&&a.direction[1]===-1&&s._pawnDest(a)[1]===s.player2pos[1]-2);assert(jump);assert.deepEqual(Array.from(s.next(jump).player2pos),Array.from(s._pawnDest(jump)));assert.equal(s.getCurrentPlayer(),2);",
+  "source_changes": "task/schema/issue scope, relative input-definition import, jump landing fixture only; numeric and provenance algorithm unchanged",
+  "manager_changes": "new deadlines and ROLE247 current loaded24hash, 242 newstop/exactPID, old244 and 246 wait/exact absence",
+  "old_sources_modified": false,
+  "new_model_import_forward": 0
+}
