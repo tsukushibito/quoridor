@@ -14,6 +14,9 @@ __all__ = [
 DEFAULTS = {
     "model": {
         "feature_version": "QF1",
+        "architecture": "scaled",
+        "distance_a": 0.0,
+        "distance_b": 8.0,
         "transformer_width": 32,
         "hidden_width": 32,
         "dropout": 0.0,
@@ -92,8 +95,13 @@ def resolve_config(path=None, overrides=()):
         or result["model"]["dropout"] >= 1
     ):
         raise ValueError("lr/seconds must be positive; dropout must be below 1")
+    for name in ("distance_a", "distance_b"):
+        value = result["model"][name]
+        if type(value) not in (int, float) or not math.isfinite(value):
+            raise ValueError("finite model coefficient required: " + name)
     allowed = {
         ("model", "feature_version"): ["QF1"],
+        ("model", "architecture"): ["scaled", "distance_residual"],
         ("optimizer", "name"): ["adam", "adamw", "sgd"],
         ("training", "target"): ["rootmean", "z"],
         ("training", "sampling"): ["row", "game"],

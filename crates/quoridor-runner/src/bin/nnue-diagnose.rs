@@ -1,10 +1,10 @@
 //! Configured native feature/value/search diagnostics; no training or fixed experiment inputs.
 use quoridor_ai::alphabeta::{
-    self, DistanceEvaluator, EvalAccumulator, NnueEvaluator, SearchError, SearchLimits,
-    StaticEvaluator,
+    self, DistanceEvaluator, EvalAccumulator, NnueEvaluator, ResidualEvaluator, SearchError,
+    SearchLimits, StaticEvaluator,
 };
 use quoridor_core::research::SigmaContext;
-use quoridor_nnue::{Model, encode_qf1};
+use quoridor_nnue::{Model, encode_qf1, residual::ResidualModel};
 use serde::Deserialize;
 use serde_json::{Value, json};
 use std::{
@@ -271,24 +271,24 @@ fn prepare(c: &Config, start: Instant) -> Result<Value> {
 fn run(c: &Config, start: Instant) -> Result<Value> {
     let nn = Arc::new(AtomicU64::new(0));
     let mut evaluators = Vec::new();
-    let mut models = Vec::new();
     let mut load_rows = Vec::new();
     for e in &c.engines {
         let t = Instant::now();
-        let (inner, neural, model): (Arc<dyn StaticEvaluator>, bool, Option<Arc<Model>>) =
-            match e.kind.as_str() {
-                "nnue" => {
-                    let m = Arc::new(Model::load(e.manifest.as_ref().ok_or("manifest")?)?);
-                    (Arc::new(NnueEvaluator::new(Arc::clone(&m))), true, Some(m))
-                }
-                "distance" => (
-                    Arc::new(DistanceEvaluator::new(e.a.ok_or("a")?, e.b.ok_or("b")?)),
-                    false,
-                    None,
-                ),
-                _ => return Err("engine kind".into()),
-            };
-        models.push(model);
+        let (inner, neural): (Arc<dyn StaticEvaluator>, bool) = match e.kind.as_str() {
+            "nnue" => {
+                let m = Arc::new(Model::load(e.manifest.as_ref().ok_or("manifest")?)?);
+                (Arc::new(NnueEvaluator::new(m)), true)
+            }
+            "distance_residual" => {
+                let m = Arc::new(ResidualModel::load(e.manifest.as_ref().ok_or("manifest")?)?);
+                (Arc::new(ResidualEvaluator::new(m)), true)
+            }
+            "distance" => (
+                Arc::new(DistanceEvaluator::new(e.a.ok_or("a")?, e.b.ok_or("b")?)),
+                false,
+            ),
+            _ => return Err("engine kind".into()),
+        };
         evaluators.push(Counted {
             inner,
             neural,
@@ -319,9 +319,12 @@ fn run(c: &Config, start: Instant) -> Result<Value> {
                     e.evaluate(&s, a.as_ref())?
                 };
                 values.push(json!({"engine":c.engines[i].id,"value":v,"evaluation_s":t.elapsed().as_secs_f64()}));
-                if let Some(m) = &models[i] {
-                    let parent = m.full(s.position())?;
-                    let before = parent.values.clone();
+                if e.neural {
+                    let parent = e.prepare_context(&s)?;
+                    let before = match &parent {
+                        Some(EvalAccumulator::Float(a)) => a.values.clone(),
+                        _ => return Err("FLOAT_PARITY_ACCUMULATOR".into()),
+                    };
                     let legal = s.legal_ids();
                     let mut selected: Vec<_> = legal.iter().copied().filter(|a| *a < 81).collect();
                     for range in [81..145, 145..209] {
@@ -332,18 +335,21 @@ fn run(c: &Config, start: Instant) -> Result<Value> {
                     for a in selected {
                         guard(c, start, nn.load(Ordering::Relaxed), processed)?;
                         let child = s.play(a)?;
-                        let full = m.full(child.position())?;
-                        let delta = m.delta(&parent, child.position())?;
+                        let full = e.prepare_context(&child)?;
+                        let delta = e.advance_context(parent.as_ref(), &child)?;
                         let (vf, vd) = if let Some(x) = child.terminal_value() {
                             (x * 2., x * 2.)
                         } else {
-                            nn.fetch_add(2, Ordering::Relaxed);
-                            (m.evaluate(&full)?, m.evaluate(&delta)?)
+                            (
+                                e.evaluate(&child, full.as_ref())?,
+                                e.evaluate(&child, delta.as_ref())?,
+                            )
                         };
                         if (vf - vd).abs() > 1e-5 + 1e-4 * vf.abs() {
                             return Err("FULL_DELTA_PARITY".into());
                         }
-                        if parent.values != before {
+                        if !matches!(&parent, Some(EvalAccumulator::Float(a)) if a.values == before)
+                        {
                             return Err("PARENT_MUTATION".into());
                         }
                         predictions.push(json!({"root":root,"child_action":a,"engine":c.engines[i].id,"feature":feature(&child)?,"full":vf,"delta":vd,"terminal":child.terminal_value(),"parent_preserved":true}));

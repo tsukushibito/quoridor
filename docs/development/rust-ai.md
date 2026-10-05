@@ -26,7 +26,7 @@ CPUだけで接続を確認する設定例:
   "train_games": 8,
   "validation_games": 2,
   "wall_seconds": 300,
-  "engines": [{"kind": "distance", "depth": 1, "max_nodes": 4000}],
+  "engines": [{ "kind": "distance", "depth": 1, "max_nodes": 4000 }],
   "cycle": {
     "python": "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
     "steps": 10,
@@ -72,3 +72,11 @@ node crates/quoridor-wasm/tests/nnue-runtime.cjs \
 ```
 
 製品は従来通りrulesとaiを別artifactへビルドする。`nnue` featureはWorker用`NnueEngine`を追加し、checksum検証済み重み、STM評価、反復深化/PVS/TTをnativeと共有する。完了深度ごとの通知をWorkerが共有cacheへ保存できる。ノードごとのJavaScript callbackは使わない。Wasm SIMDを使う場合は`-C target-feature=+simd128`付きartifactを別途作り、対応環境で選択する。既定artifactはscalar fallbackを維持する。
+
+### QF1＋固定距離の残差モデル
+
+現役学習入口 `python -m quoridor_training.train train --cache <train-validation-cache> --output <new-output> --config <config>` は `model.architecture` を `scaled` または `distance_residual` で明示する。残差方式は既存QF1の両視点FTを保ち、距離2値と予約されたゼロ4値をhidden層へ渡す。固定距離logitの係数は `model.distance_a` / `distance_b`（既定0/8）。`--scale <moments.json>` を指定すると明示した距離尺度を用い、指定しなければtrainだけから推定する。主教師は `training.target: "z"`、選定重みは `evaluation.monitor: "row"` または `"game"`（入力group単位）。公開データのgroupは対局IDを保証せず、独立gameの指標と呼ばない。公開z=0の終了理由が不明な場合はimport時の資格除外を保ち、真正RuleA draw=0と区別する。
+
+残差exportは `quoridor-nnue-distance-residual-v3` / `QF1-route4-f32-STM-scaled-residual-v3` の明示形式。教師情報は `training-target.json` に保存し、strict native manifestへ未知フィールドを混ぜない。現在のnative消費側は `route_mode: "zero4"` のみを受け入れ、Enabled DAGは明示拒否する。既存scaled/quantizedモデルへ残差重みを読み替えない。
+
+`nnue-diagnose` の既存engine設定で `kind: "distance_residual"` とmanifestを指定すると、`ResidualEvaluator` を介して履歴付きAlphaBetaへ接続する。full/SIMD/deltaのFTと壁距離map再利用、親accumulatorの保持を用いる。モデルをロードできたこと、有限parity、深度到達を同時間棋力の証明へ置き換えない。今回の公開z checkpointはRuleA48への転移利益が支持されておらず、既定製品モデルへ採用していない。

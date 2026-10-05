@@ -1,0 +1,25 @@
+{
+  "task": "quoridor-4lc.294",
+  "name": "test-r1",
+  "argv": [
+    "cargo",
+    "test",
+    "--offline",
+    "--release",
+    "-j",
+    "1",
+    "-p",
+    "quoridor-nnue",
+    "--features",
+    "research",
+    "--test",
+    "residual",
+    "--",
+    "--nocapture"
+  ],
+  "remaining_compile_seconds": 25.717306332,
+  "hard_seconds": 20.0,
+  "NN_charge": 18,
+  "functional_MAX_consumed": 1,
+  "original_build_wait_UNKNOWN_preserved": true
+}

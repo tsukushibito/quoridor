@@ -1,0 +1,19 @@
+{
+  "task": "quoridor-4lc.294",
+  "name": "default-check-r1",
+  "hard_seconds": 10,
+  "remaining_compile_seconds": 13.3367708340298,
+  "NN_charge": 0,
+  "argv": [
+    "cargo",
+    "check",
+    "--offline",
+    "--release",
+    "-j",
+    "1",
+    "-p",
+    "quoridor-nnue",
+    "--lib",
+    "--no-default-features"
+  ]
+}

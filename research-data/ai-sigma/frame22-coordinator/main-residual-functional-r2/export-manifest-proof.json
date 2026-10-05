@@ -1,0 +1,40 @@
+{
+  "feature": "QF1-route4-f32-STM-scaled-residual-v3",
+  "weights": "weights.f32",
+  "weights_SHA": "213309171e60c23c708a55b7009e14f3b5f9a6cc4e8fdc5f173c9a195a0a4a47",
+  "weights_B": 49284,
+  "little_endian_f32": 12321,
+  "mu_f32": [
+    0.10654684901237488,
+    0.09998925775289536
+  ],
+  "sigma_f32": [
+    0.05518728867173195,
+    0.05442364513874054
+  ],
+  "distance_fit": {
+    "a": 0.0,
+    "b": 8.0
+  },
+  "schema": "quoridor-nnue-distance-residual-v3",
+  "value_perspective": "side-to-move",
+  "value_parameterization": "fixed-distance-logit-plus-linear-residual-tanh",
+  "dense_feature_version": "shortest-dag4-f32-STM-v1",
+  "route_mode": "zero4",
+  "route_mu_f32": [
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "route_sigma_f32": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "topology": {
+    "ft_width": 32,
+    "hidden_width": 32
+  }
+}

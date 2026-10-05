@@ -1,6 +1,7 @@
 //! Native iterative deepening / PVS over the history-correct Sigma rule cursor.
 //! No speculative pruning. A result is published only after a whole root depth.
 use quoridor_core::{Position, RulesError, research::SigmaContext};
+use quoridor_nnue::residual::ResidualModel;
 use quoridor_nnue::{Accumulator, EvaluationMode, Model, QuantizedAccumulator, QuantizedModel};
 use std::{
     collections::hash_map::DefaultHasher,
@@ -188,6 +189,64 @@ impl StaticEvaluator for NnueEvaluator {
         match a {
             Some(EvalAccumulator::Float(a)) => Ok(self.model.evaluate(a)?),
             _ => Err(SearchError::Evaluation("missing float accumulator".into())),
+        }
+    }
+}
+#[derive(Debug, Clone)]
+pub struct ResidualEvaluator {
+    pub model: Arc<ResidualModel>,
+    pub mode: EvaluationMode,
+}
+impl ResidualEvaluator {
+    pub fn new(model: Arc<ResidualModel>) -> Self {
+        Self {
+            model,
+            mode: EvaluationMode::Scalar,
+        }
+    }
+    pub fn with_mode(mut self, mode: EvaluationMode) -> Self {
+        self.mode = mode;
+        self
+    }
+}
+impl StaticEvaluator for ResidualEvaluator {
+    fn prepare_context(&self, c: &SigmaContext) -> Result<Option<EvalAccumulator>> {
+        Ok(Some(EvalAccumulator::Float(
+            self.model.full_context(c, self.mode)?,
+        )))
+    }
+    fn advance_context(
+        &self,
+        a: Option<&EvalAccumulator>,
+        c: &SigmaContext,
+    ) -> Result<Option<EvalAccumulator>> {
+        match a {
+            Some(EvalAccumulator::Float(a)) => Ok(Some(EvalAccumulator::Float(
+                self.model.delta_context(a, c)?,
+            ))),
+            _ => self.prepare_context(c),
+        }
+    }
+
+    fn prepare(&self, p: Position) -> Result<Option<EvalAccumulator>> {
+        Ok(Some(EvalAccumulator::Float(
+            self.model.full_mode(p, self.mode)?,
+        )))
+    }
+    fn advance(&self, a: Option<&EvalAccumulator>, p: Position) -> Result<Option<EvalAccumulator>> {
+        match a {
+            Some(EvalAccumulator::Float(a)) => {
+                Ok(Some(EvalAccumulator::Float(self.model.delta(a, p)?)))
+            }
+            _ => self.prepare(p),
+        }
+    }
+    fn evaluate(&self, _c: &SigmaContext, a: Option<&EvalAccumulator>) -> Result<f32> {
+        match a {
+            Some(EvalAccumulator::Float(a)) => Ok(self.model.evaluate(a)?),
+            _ => Err(SearchError::Evaluation(
+                "missing residual accumulator".into(),
+            )),
         }
     }
 }

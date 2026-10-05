@@ -81,3 +81,23 @@ CPU合計4logical/currentRAM8GiB/保持cachetemp＋有効unused12GiB。運用CPU
 292の新RuleA48familyは19:25:37までに全48GOAL/1668局面を取得、88516physicalNN（warm36内数）/native15.639030秒で停止した。NN0の完全prefix/history/STM入力投影は1668全rowの厳密target-free whitelist、圧縮/展開SHAを保持。291別ownerは1668入力署名・ALLrawpublicV/T OR0・1648distinctを確認したが、公開形式のhistory/絶対side不可用とRuleAとのstateframe差から全履歴非露出を保証しない。候補/config/settings/独立evalrule/実mask freeze後だけproducer labelsを解放し、一候補/D/定数を別の48game分母で測る。今回実draw0 gameは0で、一般の真正RuleA draw資格と混同しない。57member停止source/payload stream復元を統括確認、61必要pathをGit `1a9d961958e466efe0ea5c4d6d753b434a8fea2f`/current/blob全SHA一致で保存、sealed labelsはstageしていない。
 
 92の19:20:25 freshはretained11013795840＋unused1253060608＋UNKNOWN134217728=12401074176<12884901888、margin483827712/errors0。public576＋新29264は同640、293は旧4MiB内、learning旧＋新は同64MiB current58499072/残8609792を本人次entry forecastへ使う。指定storage/finish静的診断9pathはGit `043cbbbf9c5aa5dfcb3d35a92762e702fb1f4ef2`でcurrent/blob一致。finishはbatched goal/self認証と同finish内self再用、outer25秒の同累積残からadmit/記録/回収予約込みstage費を派生、開始不足spawn0・appendunknown非盲retryを既keeper範囲のprospective実装へ採択した。batchだけでwhole25秒完了を保証せず、科学reader自然停止＋Supervisor公式idle/ownednullの通常安全窓で92だけが適用し、次自然finishのphase/notes/backup実到達を判断する。原timeout/最初の自然5PASS/後続未完了は変更しない。
+
+## 公開zの凍結評価と現役入口への接続
+
+公開290はMAX4・保守5019991NN・6427878processed・61.968954秒で有限終了した。選定規則を維持して1m step7813を一候補に凍結し、selector/modelreader/sourceを停止した。Main selected-target検査は `ed6ba9dad9890164df65561b960bad6a914128c5` で選択ラベルの資格へ修正、rootmean無し/z有効の8件＋既3件、計11件PASS。NNUE残差の現役統合は[294契約](../../research-data/ai-sigma/frame22-coordinator/maintained-residual-integration-contract.md)へ配分する。QF1疎入力＋固定距離Dと4zero slotの数学・保存形式を保ち、generic学習/export/native loader/AlphaBeta evaluatorへ接続する。既消費側がないEnabled DAG scaffoldや旧frame loaderは主経路へコピーしない。科学重み・比較binaryは不変、コンパイル70.717306332秒/source120/functional1000NN・MAX2/30秒は確認済みunusedから移譲し、fresh保管・物理入口を別に確認する。
+
+291は5329NNの凍結予測を完了したが、採点で `status=goal` を `GOAL` と誤認しMAX2を消費、最終z MSE/sign/CIはNOT_RUNのまま有限不完全として閉じた。原failure/targets開封後の条件・予測・mask/sourceは変更しない。最大の判断欠落は新RuleA48の終局z転移であり、既予測のNN0集計は追加学習・生成より低費でこの欠落を直接埋める。Supervisor3f9b3cbdの独立推奨とも整合し、[295契約](../../research-data/ai-sigma/frame22-coordinator/frozen-z-saved-arithmetic-contract.md)をcritic既savedへ実配送した。明示native schemaと一意join/argv/資格分母を合成fixtureで確認し、新MAX1/30秒/NN0の別結果へ保存する。旧291 source285の保守275から10、manage90の保守80から10、旧保存2MiBを1.75MiB＋新256KiBへ分ける保守移譲で、原消費・UNKNOWNを割り引かない。
+
+評価は公開19359→input mask3589/2入力群/8zeroeligibleと、RuleA1668/48family/OR0を別分母で扱う。公開game/history不可用とRuleA lineage/cohortの限界を保持し、公開小MSEを独立game/棋力利益へ変換しない。結果でAの多様public unique量、必要true-game量、教師/表現/探索の総費比較を更新する。新fit/LR/seen loop・family補充はこの配分に含めない。
+
+92のfinish累積案は26mock PASS・applycheck成立、停止10pathを `1bc81143df79a354c0a317e292c6ea583bc9509f` に保存した。Patch内の空context行だけdiffcheck警告を保持し、非patch範囲はPASS。Live適用は自然科学/guard-reader停止＋Supervisor公式idle/ownednullで92が担う。Hypの完了通知controller3件は20:10:21時点で通常cancel後exact不在、science結果bytesは不変であり、全host/未来quietの保証には使わない。研究は有効bindingのfresh入口で継続する。
+
+## 20:38以後の正式判断と現役接線
+
+295は既凍結予測だけの新NN0集計を1.171118秒で完了した。公開0043はmask3589から理由不明z0を2行除外し、3587行/2入力群/8zeroeligible。Group MSE候補1.112381007/D1/定数.999954018で利益不支持、gameCI未定義。RuleA48/1668はfamily MSE候補1.502603046/D.614846292/定数.999799322、候補−D+.887756754・95%[+.592274279,+1.200627898]、12改善36悪化、sign.540478対D.800263、飽和19.09%。この固定domainへの転移は支持されず、同時間棋力/NNUE全体/純target原因への結論にしない。元291/287 failure/MAX/NOT_RUNは保存し、別295結果・停止22pathをGit cdc19baへ保存した。
+
+次の判別はtrain/selection-onlyの残差振幅・有効入力重複重みと、真正終局教師domain/表現・多様公開unique量・探索全費を競合する。開封済み今回testを振幅選定又は新独立testへ戻さず、診断から必要新評価量/担当/全費を決める。追加LR/seen loopや小candidate成功を入口にしない。既576完全自前教師のzは再生成せず使える競合資産だが、旧285はclosed/生成許可0のまま、新scopeとmask・学習・未選定評価の契約でのみ使う。
+
+Mainのgeneric QF1+D Zero4接線は[有限受入れ](ai-sigma-coordinator-frame23-maintained-residual-integration.md)の範囲で成立した。Original build guardのwaitUNKNOWNを45秒、CLI必須引数漏れを902NN/MAX2で保持し、別296の40NN/10秒枠を同旧枠から前向き分配した。P1/P2の保存weights byteSHA・native full_context/delta_context/親履歴・Torch値は22native+2Torch/最大差4.47e-8で一致、depthsは結果前に空へ固定した新用途で完成探索深度はNOT_RUN。Default feature独立check、2release correctness tests、3configuration tests、library ClippyはPASS。Compile59.595038888/70.717306332、288の20秒移譲は原117/120で不成立、3秒も未使用。科学weights性能昇格0。
+
+92の停止21pathはGit 140840f/current/blob SHA一致、新watch5a48b3b4・正1869614/1869632/current24/loaded15PASSを保持。初自然finishは17.244816秒のtyped admit.storage残量不足でappend/backup child未開始、storage3walk14.9578秒が支配費。Wholefinishは未成立。Fresh allocated検査を残しlstat mode再用などmetadata query重複削減とnoappendspawn marker精度のprospective改善を92既Keeper内・次自然sciencequiet/Supidle窓へ採択、outer/caps/期限/科学gateを追加しない。

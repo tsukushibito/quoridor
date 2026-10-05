@@ -1,0 +1,38 @@
+{
+  "at": "2026-10-05T20:37:09.038465+00:00",
+  "exit": 0,
+  "cause": null,
+  "seconds": 0.23361382697476074,
+  "peakRSS": 18653184,
+  "argv": [
+    "/usr/bin/taskset",
+    "-c",
+    "3",
+    "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "-m",
+    "unittest",
+    "quoridor_training.test_residual_config"
+  ],
+  "waited": true,
+  "recorded": [
+    {
+      "pid": 1888108,
+      "ppid": 1888102,
+      "group": 1888108,
+      "tick": "48568857",
+      "cpu": 4,
+      "rss": 18653184,
+      "argv": [
+        "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+        "-m",
+        "unittest",
+        "quoridor_training.test_residual_config"
+      ]
+    }
+  ],
+  "current_exact_remaining": [],
+  "NN": 0,
+  "task": "quoridor-4lc.296",
+  "whole_suite": "NOT_RUN",
+  "original_science_sources": "preserved separately"
+}

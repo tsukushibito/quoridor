@@ -1,0 +1,72 @@
+{
+  "at": "2026-10-05T20:37:32.118131+00:00",
+  "current24": {
+    "/workspaces/quoridor/scripts/dev/research-scheduler.py": true,
+    "/workspaces/quoridor/scripts/dev/research-watch.py": true,
+    "/workspaces/quoridor/scripts/dev/research-team.py": true,
+    "/workspaces/quoridor/scripts/dev/research-scheduler.sh": true,
+    "/workspaces/quoridor/scripts/dev/research-team.sh": true,
+    "/workspaces/quoridor/scripts/dev/beads.sh": true,
+    "/workspaces/quoridor/scripts/dev/project-env.sh": true,
+    "/workspaces/quoridor/research-paths.json": true,
+    "/workspaces/quoridor/scripts/dev/research-job.py": true,
+    "/workspaces/quoridor/scripts/dev/research-job.sh": true,
+    "/workspaces/quoridor/scripts/dev/research-storage.py": true,
+    "/workspaces/quoridor/docs/design/ai-sigma-continuation-20261001.md": true,
+    "/workspaces/quoridor/docs/design/ai-sigma-contract-supervisor-continuation.md": true,
+    "/workspaces/quoridor/docs/design/ai-sigma-contract-steward-frame22.md": true,
+    "/workspaces/quoridor/.agents/research-team/common.md": true,
+    "/workspaces/quoridor/.agents/research-team/roles/coordinator.md": true,
+    "/workspaces/quoridor/.agents/research-team/roles/hypothesis.md": true,
+    "/workspaces/quoridor/.agents/research-team/roles/experiment.md": true,
+    "/workspaces/quoridor/.agents/research-team/roles/critic.md": true,
+    "/workspaces/quoridor/.agents/research-team/roles/steward.md": true,
+    "/workspaces/quoridor/.artifacts/research-team/registry.json": true,
+    "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22-extension23/scheduler.json": true,
+    "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22-extension23/contract.json": true,
+    "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22-extension23/prompt.md": true
+  },
+  "runtime": [
+    {
+      "pid": 1869614,
+      "start_ticks": "48452591",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    {
+      "pid": 1869632,
+      "start_ticks": "48452619",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    }
+  ],
+  "foreign": [],
+  "storage_SHA": "990b9ce06de7b4e09df131d7936734d338c872260215879de7a664daf5b656d8",
+  "NN": 0,
+  "CPU": 3,
+  "compile_cap": 70.717306332,
+  "main_source_SHA": {
+    "crates/quoridor-nnue/src/residual.rs": "f898c5b4528a404fe4c56f4e5245483eb6b9522eca3548360c16b20e127eac8c",
+    "crates/quoridor-nnue/src/lib.rs": "e0c3770849726e39c7282f6ef24bd1e85c05a3b1ec0d7afad208ea30472118f7",
+    "crates/quoridor-ai/src/alphabeta.rs": "1caa46e6d3b17b6211e21ccc7ccf625e972f7e884b6b273227c1dbe5dc8d2f8e",
+    "crates/quoridor-runner/src/bin/nnue-diagnose.rs": "8df66e5abaa0932dd7b7728ed071ed0761e1347f2096e9edd624ed51ea44b4af",
+    "crates/quoridor-nnue/tests/residual.rs": "1b3f29f2b6528093fd017414b76fcabdc1970b19b24f4a68d3e4b7f27fc69492"
+  },
+  "registration": {
+    "task": "quoridor-4lc.294",
+    "name": "default-check-r1",
+    "hard_seconds": 10,
+    "remaining_compile_seconds": 13.3367708340298,
+    "NN_charge": 0,
+    "argv": [
+      "cargo",
+      "check",
+      "--offline",
+      "--release",
+      "-j",
+      "1",
+      "-p",
+      "quoridor-nnue",
+      "--lib",
+      "--no-default-features"
+    ]
+  }
+}

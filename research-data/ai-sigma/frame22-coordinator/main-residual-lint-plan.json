@@ -1,0 +1,28 @@
+{
+  "task": "quoridor-4lc.294",
+  "name": "lint-r1",
+  "argv": [
+    "cargo",
+    "clippy",
+    "--offline",
+    "--release",
+    "-j",
+    "1",
+    "-p",
+    "quoridor-nnue",
+    "-p",
+    "quoridor-ai",
+    "--lib",
+    "--features",
+    "research",
+    "--",
+    "-D",
+    "warnings",
+    "-A",
+    "clippy::too_many_arguments"
+  ],
+  "remaining_compile_seconds": 16.166168465023794,
+  "hard_seconds": 12.0,
+  "NN_charge": 0,
+  "lint_exception": "typed native manifest constructor matches eight schema fields; no general warnings suppression"
+}

@@ -22,6 +22,18 @@ def metrics(rows, prediction, target, constant):
     return measurements(rows, prediction.tolist(), target, constant)
 
 
+def build_model(config, statistics):
+    if config.get("architecture", "scaled") == "distance_residual":
+        from .residual_model import DistanceResidualModel
+
+        return DistanceResidualModel(
+            config, statistics, a=config["distance_a"], b=config["distance_b"]
+        )
+    from .scaled_model import build_model as build_scaled
+
+    return build_scaled(config, statistics)
+
+
 def export(model, config, statistics, distance_fit, path):
     path = Path(path)
     path.mkdir()
@@ -57,13 +69,38 @@ def export(model, config, statistics, distance_fit, path):
             "hidden_width": config["model"]["hidden_width"],
         }
         manifest["value_perspective"] = "side-to-move"
+    if config["model"].get("architecture", "scaled") == "distance_residual":
+        from .residual_model import FEATURE_VERSION, ROUTE_VERSION
+
+        for key in ("transformer_width", "hidden_width", "source_kind"):
+            manifest.pop(key, None)
+        manifest.update(
+            {
+                "schema": "quoridor-nnue-distance-residual-v3",
+                "feature": FEATURE_VERSION,
+                "value_perspective": "side-to-move",
+                "value_parameterization": "fixed-distance-logit-plus-linear-residual-tanh",
+                "dense_feature_version": ROUTE_VERSION,
+                "route_mode": "zero4",
+                "route_mu_f32": [0.0] * 4,
+                "route_sigma_f32": [1.0] * 4,
+                "topology": {
+                    "ft_width": config["model"]["transformer_width"],
+                    "hidden_width": config["model"]["hidden_width"],
+                },
+                "distance_fit": {
+                    "a": config["model"]["distance_a"],
+                    "b": config["model"]["distance_b"],
+                },
+            }
+        )
+    write(path / "training-target.json", {"training_target": config["training"]["target"]})
     write(path / "manifest.json", manifest)
     return path / "manifest.json"
 
 
-def train(cache, output, config_path=None, steps=None):
+def train(cache, output, config_path=None, steps=None, *, scale_path=None):
     import torch
-    from .scaled_model import build_model
 
     start = time.monotonic()
     cfg = resolve_config(config_path)
@@ -115,6 +152,12 @@ def train(cache, output, config_path=None, steps=None):
     design = np.column_stack([np.ones(len(ix_train)), difference])
     fit, *_ = np.linalg.lstsq(design, labels[ix_train, column].astype(np.float64), rcond=None)
     distance_fit = {"a": float(np.float32(fit[0])), "b": float(np.float32(fit[1]))}
+    if scale_path is not None:
+        from .scaled_model import validate_statistics
+
+        statistics = validate_statistics(json.loads(Path(scale_path).read_text()))
+    if cfg["model"]["architecture"] == "distance_residual":
+        distance_fit = {"a": cfg["model"]["distance_a"], "b": cfg["model"]["distance_b"]}
     model = build_model(cfg["model"], statistics).to(device)
     initial_state = {k: v.detach().cpu().clone() for k, v in model.state_dict().items()}
     # Keep the corpus mapped on CPU. Only bounded batches enter GPU memory.
@@ -146,7 +189,7 @@ def train(cache, output, config_path=None, steps=None):
         else None
     )
     output = Path(output)
-    output.mkdir()
+    output.mkdir(parents=True)
     write(output / "config.json", cfg)
     write(output / "scale.json", statistics)
     write(
@@ -208,7 +251,9 @@ def train(cache, output, config_path=None, steps=None):
             pval = predict(ix_validation)
         tr = metrics([rows[i] for i in ix_train], ptrain, target, constant)
         va = metrics(selection_rows, pval, target, constant)
-        loss = va["target_game_equal_mse"]
+        loss = va[
+            "target_mse" if cfg["evaluation"]["monitor"] == "row" else "target_game_equal_mse"
+        ]
         curve.append(
             {
                 "step": step,
@@ -310,7 +355,8 @@ def train(cache, output, config_path=None, steps=None):
     freeze = {
         "schema": "quoridor-candidate-freeze-v1",
         "best_step": best_step,
-        "best_validation_game_mse": best_loss,
+        "best_validation_mse": best_loss,
+        "selection_weighting": cfg["evaluation"]["monitor"],
         "samples": samples,
         "model_sha": sha(output / "best-model" / "manifest.json"),
         "weights_sha": sha(output / "best-model" / "weights.f32"),
@@ -353,7 +399,6 @@ def _plot(curves, path):
 
 def test(cache, training, output):
     import torch
-    from .scaled_model import build_model
 
     training = Path(training)
     freeze_path = training / "freeze.json"
@@ -378,7 +423,7 @@ def test(cache, training, output):
     td = torch.from_numpy(distance[test_index])
     side = torch.ones(len(test_index), dtype=torch.long)
     output = Path(output)
-    output.mkdir()
+    output.mkdir(parents=True)
     predictions, reports = {}, {}
     selected_rows = [rows[i] for i in test_index]
     primary = np.array([i for i, r in enumerate(selected_rows) if r["primary_eligible"]])
@@ -432,10 +477,17 @@ def main():
     parser.add_argument("--output", required=True)
     parser.add_argument("--config")
     parser.add_argument("--steps", type=int)
+    parser.add_argument(
+        "--scale", help="explicit distance moments JSON; otherwise train-only moments"
+    )
     parser.add_argument("--training")
     args = parser.parse_args()
     if args.command == "train":
-        print(json.dumps(train(args.cache, args.output, args.config, args.steps)))
+        print(
+            json.dumps(
+                train(args.cache, args.output, args.config, args.steps, scale_path=args.scale)
+            )
+        )
     else:
         if not args.training:
             parser.error("test requires --training")

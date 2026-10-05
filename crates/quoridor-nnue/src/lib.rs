@@ -2,6 +2,7 @@
 //! scalar float oracle, order-preserving SIMD, and checked integer quantization.
 mod features;
 mod quantized;
+pub mod residual;
 mod simd;
 pub use features::{FEATURE_COUNT, Features, encode_qf1};
 pub use quantized::{QuantizedAccumulator, QuantizedModel};

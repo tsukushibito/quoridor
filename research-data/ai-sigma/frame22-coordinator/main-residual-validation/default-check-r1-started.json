@@ -1,0 +1,42 @@
+{
+  "PID": 1888417,
+  "identity": {
+    "pid": 1888417,
+    "ppid": 1888410,
+    "group": 1888417,
+    "tick": "48571190",
+    "cpu": 0,
+    "rss": 184320,
+    "argv": [
+      "/usr/bin/taskset",
+      "-c",
+      "3",
+      "cargo",
+      "check",
+      "--offline",
+      "--release",
+      "-j",
+      "1",
+      "-p",
+      "quoridor-nnue",
+      "--lib",
+      "--no-default-features"
+    ]
+  },
+  "argv": [
+    "/usr/bin/taskset",
+    "-c",
+    "3",
+    "cargo",
+    "check",
+    "--offline",
+    "--release",
+    "-j",
+    "1",
+    "-p",
+    "quoridor-nnue",
+    "--lib",
+    "--no-default-features"
+  ],
+  "source_SHA": "779a64f7b1421dbe597ec51810b22f9b21b2cd42e3192801b38c0c1321ce8f69"
+}

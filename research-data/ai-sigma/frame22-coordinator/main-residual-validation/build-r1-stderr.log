@@ -1,0 +1,17 @@
+   Compiling quoridor-nnue v0.1.0 (/workspaces/quoridor/crates/quoridor-nnue)
+   Compiling quoridor-ai v0.1.0 (/workspaces/quoridor/crates/quoridor-ai)
+   Compiling quoridor-data v0.1.0 (/workspaces/quoridor/crates/quoridor-data)
+   Compiling quoridor-runner v0.1.0 (/workspaces/quoridor/crates/quoridor-runner)
+warning: value assigned to `status` is never read
+   --> crates/quoridor-runner/src/bin/nnue-diagnose.rs:412:30
+    |
+412 |             let mut status = "STARTED";
+    |                              ^^^^^^^^^ this value is reassigned later and never used
+...
+419 |                     status = "TERMINAL";
+    |                     ------------------- `status` is overwritten here before the previous value is read
+    |
+    = note: `#[warn(unused_assignments)]` (part of `#[warn(unused)]`) on by default
+
+warning: `quoridor-runner` (bin "nnue-diagnose") generated 1 warning
+    Finished `release` profile [optimized] target(s) in 26.55s
