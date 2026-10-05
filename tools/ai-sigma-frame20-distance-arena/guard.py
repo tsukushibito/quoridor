@@ -40,7 +40,17 @@ for issue in ['quoridor-4lc','quoridor-4lc.249']:
 for p,h in c['sources'].items():assert hashlib.sha256(Path(p).read_bytes()).hexdigest()==h,p
 sch=json.loads(Path('/workspaces/quoridor/.artifacts/research-team/scheduler-sigma-continuation-20261001/state.json').read_text());assert sch['phase']=='running'and not sch.get('recovery_required')
 quiet=sch['next_at']-time.time();assert quiet>=c['hard_s']+30,dict(reason='INSUFFICIENT_PROSPECTIVE_QUIET',quiet=quiet)
-loaded=json.loads(Path(c['runtime_loaded']).read_text());assert loaded['config']['start_at']=='2026-10-05T00:51:02Z' and loaded['final_utc']=='2026-10-05T02:51:02Z'
+loaded_path=Path(c['runtime_loaded']);loaded=json.loads(loaded_path.read_text())
+if loaded['scheduler']['pid']!=sch['process']['pid'] or str(loaded['scheduler']['start_ticks'])!=str(sch['process']['start_ticks']):
+ candidates=[]
+ for path in (R/'.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92').glob('**/running-loaded.json'):
+  try:
+   x=json.loads(path.read_text())
+   if x.get('config',{}).get('start_at')=='2026-10-05T00:51:02Z'and x['scheduler']['pid']==sch['process']['pid']and str(x['scheduler']['start_ticks'])==str(sch['process']['start_ticks']):candidates.append((path,x))
+  except(KeyError,OSError,ValueError):pass
+ assert len(candidates)==1,dict(reason='NEW_CURRENT_LOADED_NOT_YET_UNIQUE',candidates=len(candidates))
+ loaded_path,loaded=candidates[0]
+assert loaded['config']['start_at']=='2026-10-05T00:51:02Z' and loaded['final_utc']=='2026-10-05T02:51:02Z'
 mon=Path(loaded['run'])/'monitor-observation.json';assert time.time()-mon.stat().st_mtime<120
 for p,h in loaded['monitor']['expected_input_hashes'].items():assert hashlib.sha256(Path(p).read_bytes()).hexdigest()==h,dict(current_binding_mismatch=p)
 for role in ['scheduler','monitor']:
@@ -64,7 +74,7 @@ usage=lambda:sum(p.stat().st_size for r in[D,T]for p in r.rglob('*')if p.is_file
 assert usage()+2*1024**2<7*1024**2
 assert int(next(x.split()[1]for x in Path('/proc/meminfo').read_text().splitlines()if x.startswith('MemAvailable:')))*1024>2*1024**3
 parentRSS=sum(tab[p]['RSS']for p in anc);assert parentRSS+2*1024**3<8*1024**3
-save('admission.json',dict(UTC=utc(),scheduler=sch,quiet_s=quiet,current_foreign=[],GPU=[],LLM_owned_not_population_gate=sch.get('owned'),owned_control_ancestor_PIDticks=anc,parent_RSS=parentRSS,storage_current_B=usage(),CPU=[2],torch_threads=1,RAM_guard=896*1024**2,allhost_guarantee=False))
+save('admission.json',dict(UTC=utc(),scheduler=sch,loaded_path=str(loaded_path),loaded_SHA=hashlib.sha256(loaded_path.read_bytes()).hexdigest(),current_loaded=loaded,quiet_s=quiet,current_foreign=[],GPU=[],LLM_owned_not_population_gate=sch.get('owned'),owned_control_ancestor_PIDticks=anc,parent_RSS=parentRSS,storage_current_B=usage(),CPU=[2],torch_threads=1,RAM_guard=896*1024**2,allhost_guarantee=False))
 env=os.environ.copy();env.update(OMP_NUM_THREADS='1',MKL_NUM_THREADS='1',OPENBLAS_NUM_THREADS='1',BLIS_NUM_THREADS='1',PYTHONDONTWRITEBYTECODE='1',UV_NO_SYNC='1',UV_OFFLINE='1')
 cmd=c['command']
 st=time.monotonic();start=utc();tracked={};reason=None;peak=0
