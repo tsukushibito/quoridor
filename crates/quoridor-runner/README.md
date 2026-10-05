@@ -16,6 +16,16 @@ and RAM; an externally restricted single-core smoke shares its synchronous provi
 with the waiting worker. These guards are finite runtime measurements, not hard realtime
 or whole-host resource guarantees.
 
+Optional `inference_cpu_core` selects an inference owner separately from explicit
+`cpu_cores`. The requested worker and inference CPUs must lie in the process affinity
+and effective cpuset, use distinct physical cores, and leave two physical host cores
+and sufficient quota/RAM available. Omitting this setting preserves automatic admission.
+The `pump` report records initialization, cleanup, queue, completion and output spans;
+these inclusive spans overlap. Logical `nn_calls` exclude startup forwards. The separate
+`backend_warmup_nn` estimate counts first-used TensorRT batch shapes for a fresh backend;
+a supplied backend may already be warm, so this estimate is not an exact physical count
+for reused providers.
+
 Engine `mcts` uses faithful Sigma f64 search plus the configured model. `distance`,
 `nnue` and `nnue_quantized` use native iterative alpha-beta; `nnue` supports `simd:true`.
 Selfplay fixes work with `simulations`; alpha-beta depth/node/time limits are separate.
@@ -24,7 +34,10 @@ A real rule terminal draw qualifies. Reports `nn_calls` count logical MCTS leaf 
 provider graph captures/startup kernels are not included in that logical count.
 
 Dataset commands import explicit legacy teachers, build SHA-bound hot tensor caches,
-inspect and evaluate exported native weights. `--allow-test` is required to read sealed
+inspect and evaluate exported native weights. Tensor-cache `rows.jsonl` binds the
+source state/history keys, ply and side. Metadata IDs use P1/P2 order; the stored dense
+views and f32 distance pair use side-to-move/opponent order. Metadata can contain
+selection labels; label-free exposure checks select only the identifying fields. `--allow-test` is required to read sealed
 test shards. Alpha-beta raw terminal scores ±2 remain in provenance; their training
 value maps only those proved terminal scores to ±1. MCTS means, alpha-beta values and
 legacy labels have separate target types; the learner rejects implicit mixing.
@@ -54,3 +67,12 @@ parameters for distance). The identities are calculated once at initialization a
 in `evaluator-identities.json`. Completed principal variations are stored with alpha-beta
 labels; old records lacking PV retain an empty legacy default. Historical descriptive
 `alpha-beta-static` identities are not rewritten.
+
+The `teacher-qualify` binary (feature `tensorrt`) prepares legal opening prefixes or
+checks configured CPU/GPU inputs and fixed K64 roots. It loads installed local providers
+and performs model forwards in qualification mode; it is not a lightweight check.
+Numeric tolerances and legal visit accounting gate its finite result, while reported
+Action/policy agreement is a separate observation. See
+[`src/bin/teacher-qualify.rs`](src/bin/teacher-qualify.rs) and the
+[research execution policy](../../docs/development/ai-research-experiments.md) before
+running a diagnostic.

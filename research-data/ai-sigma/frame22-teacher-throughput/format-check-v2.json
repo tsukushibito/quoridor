@@ -1,0 +1,6 @@
+{
+  "Rust": "owned rustfmt edition2024 PASS",
+  "Python": "verify-build-v2.py stdlib AST unparse formatter/parse/idempotence; prior Ruff path no longer present; no environment install",
+  "Ruff_unavailable": "tools/research-quality/.venv/bin/ruff absent; uv --no-sync failed preserved as management limitation",
+  "JSON": "json.dumps indent2 final newline"
+}

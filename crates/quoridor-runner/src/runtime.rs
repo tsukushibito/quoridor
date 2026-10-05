@@ -36,6 +36,12 @@ pub struct Outcome {
     pub reason: Option<String>,
     pub nn_calls: u64,
     pub moves: Vec<u16>,
+    #[serde(default)]
+    pub advance_calls: u64,
+    #[serde(default)]
+    pub terminal_no_nn: u64,
+    #[serde(default)]
+    pub allocated_nodes_peak: usize,
 }
 #[derive(Debug, Serialize, Deserialize)]
 pub struct RunReport {
@@ -56,10 +62,40 @@ pub struct RunReport {
     pub model_sha: Option<String>,
     pub process_id: u32,
     pub all_workers_joined: bool,
+    #[serde(default)]
+    pub pump: PumpProfile,
+}
+/// Inclusive spans; queue/CPU/backend phases overlap and are not summed as exclusive wall.
+#[derive(Debug, Default, Serialize, Deserialize)]
+pub struct PumpProfile {
+    pub backend_initialization_seconds: f64,
+    pub backend_cleanup_seconds: f64,
+    pub queue_wait_seconds_sum: f64,
+    pub queue_wait_seconds_max: f64,
+    pub queued_requests_peak: usize,
+    pub recording_seconds: f64,
+    pub finalization_seconds: f64,
+    pub completions: Vec<CompletionTiming>,
+    pub first16_complete_seconds: Option<f64>,
+    pub first16_complete_rows: usize,
+    pub backend_warmup_nn: u64,
+    pub censored_rows: usize,
+    pub advance_calls: u64,
+    pub terminal_no_nn: u64,
+    pub allocated_nodes_peak: usize,
+}
+#[derive(Debug, Serialize, Deserialize)]
+pub struct CompletionTiming {
+    pub game: usize,
+    pub status: String,
+    pub elapsed_seconds: f64,
+    pub rows: usize,
+    pub nn_calls: u64,
 }
 struct Request {
     id: RequestId,
     input: Box<[f32; 648]>,
+    created: Instant,
     reply: Sender<Response>,
 }
 struct Response {
@@ -89,6 +125,9 @@ struct Game {
     root_nn: Option<f32>,
     rng: Rng,
     nn: u64,
+    advance_calls: u64,
+    terminal_no_nn: u64,
+    allocated_nodes_peak: usize,
 }
 #[derive(Clone)]
 pub struct Rng(u64);
@@ -338,9 +377,17 @@ fn unknown(p: &Planned, reason: String) -> Outcome {
         reason: Some(reason),
         nn_calls: 0,
         moves: p.opening.clone(),
+        advance_calls: 0,
+        terminal_no_nn: 0,
+        allocated_nodes_peak: 0,
     }
 }
-fn finish(game: Game, status: &str, reason: Option<String>) -> (Outcome, Vec<TeacherRow>) {
+fn finish(mut game: Game, status: &str, reason: Option<String>) -> (Outcome, Vec<TeacherRow>) {
+    if let Some(search) = &game.search {
+        let snapshot = search.snapshot();
+        game.terminal_no_nn += u64::from(snapshot.terminal_no_nn);
+        game.allocated_nodes_peak = game.allocated_nodes_peak.max(snapshot.nodes);
+    }
     let value = game.context.terminal_value();
     let turn = game.context.position().turn;
     let winner = value.and_then(|v| {
@@ -383,6 +430,9 @@ fn finish(game: Game, status: &str, reason: Option<String>) -> (Outcome, Vec<Tea
             reason,
             nn_calls: game.nn,
             moves: game.prefix,
+            advance_calls: game.advance_calls,
+            terminal_no_nn: game.terminal_no_nn,
+            allocated_nodes_peak: game.allocated_nodes_peak,
         },
         rows,
     )
@@ -427,6 +477,9 @@ fn play_completed(game: &mut Game, action: u16, teacher: Teacher, model_sha: &st
     game.context = game.context.play(action).map_err(|e| format!("{e:?}"))?;
     game.prefix.push(action);
     game.rows.push(row);
+    if let Some(search) = &game.search {
+        game.terminal_no_nn += u64::from(search.snapshot().terminal_no_nn);
+    }
     game.generation += 1;
     game.search = None;
     game.pending = None;
@@ -466,6 +519,9 @@ fn worker(
                         root_nn: None,
                         rng: Rng::new(seed),
                         nn: 0,
+                        advance_calls: 0,
+                        terminal_no_nn: 0,
+                        allocated_nodes_peak: 0,
                     })
                 }
                 Err(e) => {
@@ -569,6 +625,7 @@ fn worker(
                     }
                 }
                 if failure.is_none() {
+                    g.advance_calls += 1;
                     match g.search.as_mut().unwrap().advance() {
                         Ok(Progress::Advanced) => progressed = true,
                         Ok(Progress::NeedInference { token, features }) => {
@@ -582,6 +639,7 @@ fn worker(
                                 .send(Event::Request(Request {
                                     id,
                                     input: features,
+                                    created: Instant::now(),
                                     reply: reply_tx.clone(),
                                 }))
                                 .is_err()
@@ -592,6 +650,7 @@ fn worker(
                         }
                         Ok(Progress::Complete) => {
                             let s = g.search.as_ref().unwrap().snapshot();
+                            g.allocated_nodes_peak = g.allocated_nodes_peak.max(s.nodes);
                             if let Some(action) =
                                 choose(&s.edges, s.action, config.temperature, &mut g.rng)
                             {
@@ -701,13 +760,26 @@ fn run_inner(
     }
     let _affinity = crate::resources::AffinityGuard::capture()?;
     let start = Instant::now();
-    let admission = crate::resources::admit(
-        config.workers.min(config.games),
-        &config.cpu_cores,
-        config.inference.is_some(),
-        config.host_ram_reserve,
-        config.max_memory_bytes,
-    )?;
+    let admission = if let Some(core) = config.inference_cpu_core {
+        if config.inference.is_none() {
+            return Err("explicit inference core requires backend".into());
+        }
+        crate::resources::admit_explicit(
+            config.workers.min(config.games),
+            &config.cpu_cores,
+            core,
+            config.host_ram_reserve,
+            config.max_memory_bytes,
+        )?
+    } else {
+        crate::resources::admit(
+            config.workers.min(config.games),
+            &config.cpu_cores,
+            config.inference.is_some(),
+            config.host_ram_reserve,
+            config.max_memory_bytes,
+        )?
+    };
     let limit = admission.memory_limit;
     if config.output.exists() {
         return Err("output exists; choose a new run/output".into());
@@ -746,6 +818,8 @@ fn run_inner(
             .open(config.output.join("evaluator-identities.json"))?,
         &evaluators.iter().map(|e| &e.identity).collect::<Vec<_>>(),
     )?;
+    let mut pump = PumpProfile::default();
+    let backend_start = Instant::now();
     let mut backend = if let Some(backend) = provided {
         if config
             .inference
@@ -758,6 +832,7 @@ fn run_inner(
     } else {
         make_backend(config)?
     };
+    pump.backend_initialization_seconds = backend_start.elapsed().as_secs_f64();
     if let Some(core) = admission.inference_core {
         crate::resources::pin(core)?;
     }
@@ -819,8 +894,12 @@ fn run_inner(
                 pending.push_back(r)
             }
             Ok(Event::Finished(o, r)) => {
-                if o.status != "unknown" {
-                    row_count += r.len();
+                let record_start = Instant::now();
+                record_completion(&mut pump, &o, r.len(), start);
+                if !r.is_empty() {
+                    if o.status != "unknown" {
+                        row_count += r.len();
+                    }
                     if let Some(writer) = dataset_writer.as_mut() {
                         let forecast = r.iter().try_fold(16384u64, |n, row| {
                             serde_json::to_vec(row).map(|v| n + v.len() as u64 * 3)
@@ -844,6 +923,7 @@ fn run_inner(
                         }
                     }
                 }
+                pump.recording_seconds += record_start.elapsed().as_secs_f64();
                 outcomes.push(o)
             }
             Ok(Event::WorkerStopped) => live -= 1,
@@ -861,8 +941,12 @@ fn run_inner(
                     pending.push_back(r)
                 }
                 Event::Finished(o, r) => {
-                    if o.status != "unknown" {
-                        row_count += r.len();
+                    let record_start = Instant::now();
+                    record_completion(&mut pump, &o, r.len(), start);
+                    if !r.is_empty() {
+                        if o.status != "unknown" {
+                            row_count += r.len();
+                        }
                         if let Some(writer) = dataset_writer.as_mut() {
                             let forecast = r.iter().try_fold(16384u64, |n, row| {
                                 serde_json::to_vec(row).map(|v| n + v.len() as u64 * 3)
@@ -886,6 +970,7 @@ fn run_inner(
                             }
                         }
                     }
+                    pump.recording_seconds += record_start.elapsed().as_secs_f64();
                     outcomes.push(o)
                 }
                 Event::WorkerStopped => live -= 1,
@@ -917,7 +1002,13 @@ fn run_inner(
             {
                 continue;
             }
+            pump.queued_requests_peak = pump.queued_requests_peak.max(pending.len());
             let requests: Vec<_> = pending.drain(..n).collect();
+            for r in &requests {
+                let wait = r.created.elapsed().as_secs_f64();
+                pump.queue_wait_seconds_sum += wait;
+                pump.queue_wait_seconds_max = pump.queue_wait_seconds_max.max(wait);
+            }
             first_pending = if pending.is_empty() {
                 None
             } else {
@@ -928,6 +1019,10 @@ fn run_inner(
             let result = b.infer(&input);
             inference_seconds += t.elapsed().as_secs_f64();
             nn_calls += n as u64;
+            if !batches.contains_key(&n) && b.metadata().backend.starts_with("cuda-tensorrt") {
+                // Native state(batch) performs exactly one warm n-row forward on first use.
+                pump.backend_warmup_nn += n as u64;
+            }
             *batches.entry(n).or_insert(0) += 1;
             match result {
                 Ok(outputs) if outputs.len() == n => {
@@ -974,8 +1069,12 @@ fn run_inner(
         }
     }
     outcomes.sort_by_key(|o| o.game);
+    let cleanup_start = Instant::now();
+    drop(backend);
+    pump.backend_cleanup_seconds = cleanup_start.elapsed().as_secs_f64();
     let mut dataset = None;
     let mut eligible_rows = 0;
+    let finalize_start = Instant::now();
     if let Some(writer) = dataset_writer {
         match writer.finish() {
             Ok(manifest) => {
@@ -985,6 +1084,7 @@ fn run_inner(
             Err(error) => stopped = Some(format!("dataset_finalize:{error}")),
         }
     }
+    pump.finalization_seconds = finalize_start.elapsed().as_secs_f64();
     let score = if mode == "arena" {
         let valid: Vec<_> = outcomes.iter().filter(|o| o.status != "unknown").collect();
         if valid.is_empty() {
@@ -1028,6 +1128,7 @@ fn run_inner(
         model_sha: config.inference.as_ref().map(|i| i.model_sha.clone()),
         process_id: std::process::id(),
         all_workers_joined: joined,
+        pump,
     };
     serde_json::to_writer_pretty(
         OpenOptions::new()
@@ -1045,6 +1146,30 @@ fn run_inner(
         .into());
     }
     Ok(report)
+}
+fn record_completion(pump: &mut PumpProfile, outcome: &Outcome, rows: usize, start: Instant) {
+    if outcome.status == "unknown" {
+        pump.censored_rows += rows;
+    }
+    pump.advance_calls += outcome.advance_calls;
+    pump.terminal_no_nn += outcome.terminal_no_nn;
+    pump.allocated_nodes_peak = pump.allocated_nodes_peak.max(outcome.allocated_nodes_peak);
+    pump.completions.push(CompletionTiming {
+        game: outcome.game,
+        status: outcome.status.clone(),
+        elapsed_seconds: start.elapsed().as_secs_f64(),
+        rows,
+        nn_calls: outcome.nn_calls,
+    });
+    let complete: Vec<_> = pump
+        .completions
+        .iter()
+        .filter(|c| c.status != "unknown")
+        .collect();
+    if complete.len() == 16 && pump.first16_complete_seconds.is_none() {
+        pump.first16_complete_seconds = Some(start.elapsed().as_secs_f64());
+        pump.first16_complete_rows = complete.iter().map(|c| c.rows).sum();
+    }
 }
 fn dir_bytes(path: &Path) -> Result<u64> {
     let mut n = 0;
@@ -1096,6 +1221,9 @@ fn run_owned(
                 reason: Some(format!("initialization:{error}")),
                 nn_calls: 0,
                 moves: Vec::new(),
+                advance_calls: 0,
+                terminal_no_nn: 0,
+                allocated_nodes_peak: 0,
             })
             .collect::<Vec<_>>();
         let report = RunReport {
@@ -1116,6 +1244,7 @@ fn run_owned(
             model_sha: config.inference.as_ref().map(|i| i.model_sha.clone()),
             process_id: std::process::id(),
             all_workers_joined: true,
+            pump: PumpProfile::default(),
         };
         if let Ok(file) = OpenOptions::new()
             .create_new(true)

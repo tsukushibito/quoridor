@@ -118,6 +118,179 @@ pub fn admit(
         memory_available: available,
     })
 }
+/// Explicit per-job allocation does not redefine host headroom as process affinity.
+pub fn admit_explicit(
+    workers: usize,
+    requested: &[usize],
+    inference_core: usize,
+    reserve: u64,
+    maximum: Option<u64>,
+) -> Result<Admission> {
+    let status = fs::read_to_string("/proc/self/status")?;
+    let affinity = cpu_list(
+        status
+            .lines()
+            .find_map(|l| l.strip_prefix("Cpus_allowed_list:"))
+            .ok_or("CPU affinity unavailable")?,
+    )?;
+    let effective = cpu_list(&fs::read_to_string("/sys/fs/cgroup/cpuset.cpus.effective")?)?;
+    let online = cpu_list(&fs::read_to_string("/sys/devices/system/cpu/online")?)?;
+    let mut topology = BTreeMap::new();
+    for cpu in online.into_iter().filter(|c| effective.contains(c)) {
+        let base = format!("/sys/devices/system/cpu/cpu{cpu}/topology");
+        topology.insert(
+            cpu,
+            (
+                number(&format!("{base}/physical_package_id"))
+                    .ok_or("package topology unavailable")?,
+                number(&format!("{base}/core_id")).ok_or("core topology unavailable")?,
+            ),
+        );
+    }
+    let raw = fs::read_to_string("/sys/fs/cgroup/cpu.max")?;
+    let values: Vec<_> = raw.split_whitespace().collect();
+    let quota = if values.first() == Some(&"max") {
+        None
+    } else {
+        if values.len() != 2 {
+            return Err("invalid cgroup quota".into());
+        }
+        let period = values[1].parse::<u64>()?;
+        if period == 0 {
+            return Err("invalid cgroup quota period".into());
+        }
+        Some(values[0].parse::<u64>()? as f64 / period as f64)
+    };
+    let reserved = explicit_cpu_selection(
+        workers,
+        requested,
+        inference_core,
+        &affinity,
+        &topology,
+        quota,
+    )?;
+    let available = available_memory();
+    let limit = admitted_memory(available, reserve, maximum)?;
+    Ok(Admission {
+        worker_cores: requested.to_vec(),
+        inference_core: Some(inference_core),
+        reserved_physical: reserved,
+        memory_limit: limit,
+        memory_available: available,
+    })
+}
+fn admitted_memory(available: u64, reserve: u64, maximum: Option<u64>) -> Result<u64> {
+    let usable = available.saturating_sub(reserve);
+    let limit = maximum.map(|m| m.min(usable)).unwrap_or(usable);
+    if limit < 64 * 1024 * 1024 {
+        return Err("RAM/cgroup reserve leaves insufficient memory".into());
+    }
+    Ok(limit)
+}
+fn explicit_cpu_selection(
+    workers: usize,
+    requested: &[usize],
+    inference: usize,
+    affinity: &[usize],
+    topology: &BTreeMap<usize, (u64, u64)>,
+    quota: Option<f64>,
+) -> Result<Vec<usize>> {
+    if workers == 0 || requested.len() != workers {
+        return Err("explicit workers require exact cpu_cores".into());
+    }
+    let mut occupied = BTreeSet::new();
+    for cpu in requested.iter().copied().chain(std::iter::once(inference)) {
+        if !affinity.contains(&cpu) {
+            return Err("explicit CPU outside process affinity".into());
+        }
+        let pair = topology
+            .get(&cpu)
+            .ok_or("explicit CPU outside effective cpuset")?;
+        if !occupied.insert(*pair) {
+            return Err("explicit CPU duplicates physical sibling".into());
+        }
+    }
+    if quota.is_some_and(|q| !q.is_finite() || q < (workers + 3) as f64) {
+        return Err("cgroup quota cannot retain two host cores".into());
+    }
+    let mut free = BTreeMap::new();
+    for (cpu, pair) in topology {
+        if !occupied.contains(pair) {
+            free.entry(*pair).or_insert(*cpu);
+        }
+    }
+    if free.len() < 2 {
+        return Err("host topology cannot retain two physical cores".into());
+    }
+    Ok(free.values().copied().take(2).collect())
+}
+#[cfg(test)]
+mod explicit_tests {
+    use super::*;
+    fn topology() -> BTreeMap<usize, (u64, u64)> {
+        [
+            (0, (0, 0)),
+            (1, (0, 1)),
+            (2, (0, 2)),
+            (3, (0, 3)),
+            (12, (0, 2)),
+        ]
+        .into_iter()
+        .collect()
+    }
+    #[test]
+    fn narrowed_affinity_retains_host_headroom() {
+        assert_eq!(
+            explicit_cpu_selection(1, &[2], 3, &[2, 3], &topology(), Some(4.)).unwrap(),
+            vec![0, 1]
+        );
+    }
+    #[test]
+    fn rejects_unavailable_siblings_and_quota() {
+        assert!(explicit_cpu_selection(1, &[2], 0, &[2, 3], &topology(), None).is_err());
+        assert!(explicit_cpu_selection(1, &[2], 12, &[2, 12], &topology(), None).is_err());
+        assert!(explicit_cpu_selection(2, &[2], 3, &[2, 3], &topology(), None).is_err());
+        assert!(explicit_cpu_selection(1, &[2], 3, &[2, 3], &topology(), Some(3.99)).is_err());
+        assert!(
+            explicit_cpu_selection(
+                1,
+                &[2],
+                3,
+                &[2, 3],
+                &[(2, (0, 2)), (3, (0, 3))].into_iter().collect(),
+                None
+            )
+            .is_err()
+        );
+        assert!(
+            explicit_cpu_selection(
+                1,
+                &[2],
+                3,
+                &[2, 3],
+                &[(0, (0, 0)), (1, (0, 1)), (2, (0, 2))]
+                    .into_iter()
+                    .collect(),
+                None
+            )
+            .is_err()
+        );
+    }
+    #[test]
+    fn memory_guard_keeps_reserve() {
+        assert_eq!(
+            admitted_memory(
+                1024 * 1024 * 1024,
+                128 * 1024 * 1024,
+                Some(256 * 1024 * 1024)
+            )
+            .unwrap(),
+            256 * 1024 * 1024
+        );
+        assert!(admitted_memory(128 * 1024 * 1024, 128 * 1024 * 1024, None).is_err());
+    }
+}
+
 pub fn pin(core: usize) -> Result<()> {
     unsafe {
         let mut set: libc::cpu_set_t = std::mem::zeroed();

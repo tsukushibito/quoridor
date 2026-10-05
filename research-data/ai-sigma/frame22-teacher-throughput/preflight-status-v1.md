@@ -1,0 +1,3 @@
+goal quoridor-4lc /273 12:17現点。Build12:12:22submit→12:13:14背景cleanup、command46.064161s/peak421670912/10sourceSHA2binarySHA一致、CPU2/NN0。限定affinity/sibling/quota/memory及び元stale/cancel/onepending含9unit PASS、unit全子waitexact。run128MiBincrementalbuild枠:target旧463663104→現479895552、差16232448(他writer共有incrementを含む観測、個別全属認定0)、fresh採択128MiB内。
+今回library/main/newqualificationbinaryのclippyへ限定変更:最初--binsで旧readonlynnue-diagnose unused-assignmentに失敗(9.533829s/NN0)を保存。限定lint再入口は12:17時currentstate stopped/ownedNone/processNoneで模型/子を開始せずNN0、新binding待ち。LLM人数gateでなく実loaded不足、旧runningreceipt代用0。科学MAX4は未消費/モデル0、資格config/sourceprospective固定済。
+最大不足は現在runtime正式再loaded、その他開発/sourceは続行。oldscriptや新env取得0。ready-after-bindingで所有pathsource／限定lint→開口NN0→資格MAX1→同48×2へ。ソース停止コピーは同owner、全役承認gate0。

@@ -1,0 +1,22 @@
+{
+  "issue": "quoridor-4lc.273",
+  "goal_issue": "quoridor-4lc",
+  "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+  "role": "experiment",
+  "cwd": "/workspaces/quoridor/.worktree/frame22-teacher",
+  "argv": [
+    "/usr/bin/python3",
+    "-B",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/control.py",
+    "--config",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/qualification-guardian-v1.json"
+  ],
+  "end_at": "2026-10-05T15:15:00Z",
+  "notify_until": "2026-10-05T15:36:03Z",
+  "max_runtime_seconds": 150,
+  "control_interval_seconds": 30,
+  "notify_interval_seconds": 10,
+  "request_timeout_seconds": 25,
+  "log_max_bytes": 8192,
+  "resource_contract": "/workspaces/quoridor/research-data/ai-sigma/frame22-coordinator/experiment-contract.md"
+}

@@ -1,0 +1,99 @@
+{
+  "task": "resident-teacher-273-v2",
+  "schema": "resident-teacher-plan-v1",
+  "UTC": "2026-10-05T12:03:23.719769+00:00",
+  "question": "same K/model/rules resident GPU true batch qualified rows per all-attempt jobwall",
+  "conditions": [
+    {
+      "name": "resident24",
+      "active_games": 24
+    },
+    {
+      "name": "resident48",
+      "active_games": 48
+    }
+  ],
+  "fixed": {
+    "max_batch": 8,
+    "fill_ms": 2,
+    "workers": 1,
+    "cpu_cores": [
+      2,
+      3
+    ],
+    "K": 64,
+    "max_plies": 200,
+    "temperature": 1,
+    "model_SHA": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+    "engine_SHA": "5be20cf08a1da9bef20d72024e27e18539b1587700a9305bae45ba58994e1527",
+    "graph": true,
+    "mcts_max_nodes": 16384,
+    "mcts_max_depth": 200,
+    "mcts_max_bytes": 16777216,
+    "one_pending_per_tree": true,
+    "terminal_no_NN": true
+  },
+  "planned_jobs": [
+    {
+      "slot": 1,
+      "games": 0,
+      "purpose": "few fixed root plus B1..8/CPU-GPU qualification",
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 2,
+      "games": 48,
+      "unique_families": 48,
+      "purpose": "resident24 fixed planned manifest, forecast at first16 completed without resetting wholejob",
+      "status": "NOT_STARTED",
+      "train": 36,
+      "validation": 12
+    },
+    {
+      "slot": 3,
+      "games": 48,
+      "unique_new_families": 0,
+      "purpose": "resident48 same manifest/pergame seed; paired siblings not doubled for learning",
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 4,
+      "games": 0,
+      "purpose": "necessary bounded qualification repair only if budget permits; no extra selfplay",
+      "status": "NOT_STARTED"
+    }
+  ],
+  "max_unique_games": 48,
+  "max_attempt_games": 96,
+  "selection": "quality eligible data per whole guardian wall; trajectory/work/host-order differences retained, no minimum speed gate",
+  "gpu_numeric_tolerance": {
+    "abs": 0.0001,
+    "rel": 0.0001
+  },
+  "logical_NN_upper_generation": 1228800,
+  "warm_NN_upper_generation": 72,
+  "processed_bound": "Completed root K64, path depth<=200; max200 plies per planned game, each advance simulation <=201 node inspections conservatively. 96*200*64*201=246988800 conservative inspected-node upper, allocated per-root <=16384 distinct slots, measured advance invocations/NN/terminal count separately.",
+  "splits": "36train/12selection-validation families predetermined; repeated condition belongs same exposure group, canonical accepted single trajectory per family for learner.",
+  "temperature_note": "current native runner keeps configured tau for all generated plies. Both conditions preserve this current rule; no claim of identity with historical first16-newply->argmax path",
+  "unknown_rows": "preserve ineligible partial teacher rows and all planned outcomes; no success substitution",
+  "source_edit": "measurement/CPU admission only, no ai/core/search/model math changes",
+  "preregister_status": "prospective v2 supersedes unexecuted quantity v1, preserves old source/version",
+  "caps": {
+    "NN": 10000000,
+    "science_jobs": 4,
+    "job_seconds": 900,
+    "science_seconds": 3600,
+    "VRAM_bytes": 6442450944,
+    "RAM_bytes": 3221225472,
+    "data_forecast_bytes": 134217728,
+    "release_forecast_bytes": 134217728,
+    "WT_forecast_bytes": 8388608
+  },
+  "competition": [
+    "AOTI package exists but TRT avoids loading Torch runtime/greater RAM",
+    "different fill/batch size after observed filling",
+    "broader array/pump if native transfer remains dominant",
+    "target/distribution/feature work is separately owned"
+  ],
+  "first16": "Record first16 completed elapsed/eligible rows/NN/output forecast of first48 job; actual wholejob stays continuous, no state/config change or first16-only rate declared wholejob."
+}

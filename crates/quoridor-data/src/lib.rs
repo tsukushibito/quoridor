@@ -497,7 +497,23 @@ pub fn write_tensor_cache(dataset: &Path, output: &Path, allow_test: bool) -> Re
         }
         serde_json::to_writer(
             &mut meta,
-            &serde_json::json!({"id":r.id,"group":r.family,"game":r.game,"split":r.split,"primary_eligible":r.eligible,"teacher_type":match r.teacher{Teacher::Mcts{..}=>"mcts",Teacher::AlphaBeta{..}=>"alpha_beta_bounded_search_value",Teacher::InputOnly=>"input_only"},"rootmean":r.teacher.value(),"z":r.z}),
+            &serde_json::json!({
+                "metadata_schema": "quoridor-tensor-row-v2",
+                "id": r.id, "group": r.family, "game": r.game, "split": r.split,
+                "primary_eligible": r.eligible,
+                "state_key": r.state_key, "history_key": r.history_key,
+                "ply": r.ply, "feature_signature": r.feature_signature,
+                "side": r.side,
+                "ids": r.ids, "ids_order": "P1_then_P2",
+                "distance": r.distance, "distance_order": "STM_then_opponent_f32",
+                "tensor_view_order": "STM_then_opponent",
+                "teacher_type": match r.teacher {
+                    Teacher::Mcts { .. } => "mcts",
+                    Teacher::AlphaBeta { .. } => "alpha_beta_bounded_search_value",
+                    Teacher::InputOnly => "input_only",
+                },
+                "rootmean": r.teacher.value(), "z": r.z,
+            }),
         )?;
         meta.write_all(b"\n")?;
         Ok(())

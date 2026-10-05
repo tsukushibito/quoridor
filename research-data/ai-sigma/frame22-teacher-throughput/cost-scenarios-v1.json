@@ -1,0 +1,38 @@
+{
+  "schema": "teacher-cost-scenarios-v1",
+  "basis": "48-family fixed workload, repeat equivalent job costs; short extrapolation, not generated1000",
+  "eligible_rows_per_game": 35.833333333333336,
+  "required_Rjoint_1000_in60min": 9.953703703703704,
+  "required_Rjoint_1000_in30min": 19.90740740740741,
+  "selected_Rjoint_wholejob": 41.46103864878,
+  "production_including_opening_cache_bytecheck_per_game_s": 1.0137185741053447,
+  "scenarios": [
+    {
+      "games": 100,
+      "guardian_generation_minutes": 1.4404420190274119,
+      "known_generation_opening_cache_minutes": 1.6895309568422412,
+      "unmeasured_dispatch_git_backup_scale_tail": "UNKNOWN"
+    },
+    {
+      "games": 1000,
+      "guardian_generation_minutes": 14.40442019027412,
+      "known_generation_opening_cache_minutes": 16.895309568422412,
+      "unmeasured_dispatch_git_backup_scale_tail": "UNKNOWN"
+    },
+    {
+      "games": 10000,
+      "guardian_generation_minutes": 144.0442019027412,
+      "known_generation_opening_cache_minutes": 168.9530956842241,
+      "unmeasured_dispatch_git_backup_scale_tail": "UNKNOWN"
+    }
+  ],
+  "actual1000": "NOT_RUN",
+  "known_investment_command_s": 257.76095432805596,
+  "known_investment_plus_baseline_comparison_s": 304.6136543130269,
+  "observed_delta_s_per_game": 0.11183270493711461,
+  "break_even_known_commands_games": 2304.879904970547,
+  "break_even_including_baseline_comparison_games": 2723.8333766881187,
+  "development_read_LLM_actual": "UNKNOWN",
+  "fixed_order_drift_and_one_repeat_uncertainty": true,
+  "stronger_teacher_K800_equivalence": false
+}

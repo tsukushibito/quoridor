@@ -1,0 +1,130 @@
+{
+  "CPU_NN": 292,
+  "GPU_logical_NN": 292,
+  "GPU_warm_NN": 36,
+  "abs_tol": 0.00009999999747378752,
+  "float_checks": 4932,
+  "initialization_seconds": 0.203144079,
+  "max_abs": 5.364418029785156e-6,
+  "model_SHA": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+  "physical_NN": 620,
+  "rel_tol": 0.00009999999747378752,
+  "roots": [
+    {
+      "CPU": {
+        "action": 13,
+        "nn": 64,
+        "root_mean": 0.18547489441698417,
+        "root_visits": 64,
+        "terminal_no_nn": 0
+      },
+      "GPU": {
+        "action": 13,
+        "nn": 64,
+        "root_mean": 0.18547491787467152,
+        "root_visits": 64,
+        "terminal_no_nn": 0
+      },
+      "all_tree_bitexact_gate": false,
+      "fixture": 0,
+      "policy_l1": 0.0,
+      "prefix": [],
+      "same_action": true
+    },
+    {
+      "CPU": {
+        "action": 23,
+        "nn": 64,
+        "root_mean": 0.19424810825148597,
+        "root_visits": 64,
+        "terminal_no_nn": 0
+      },
+      "GPU": {
+        "action": 23,
+        "nn": 64,
+        "root_mean": 0.19424807766336016,
+        "root_visits": 64,
+        "terminal_no_nn": 0
+      },
+      "all_tree_bitexact_gate": false,
+      "fixture": 1,
+      "policy_l1": 0.0,
+      "prefix": [
+        13,
+        67,
+        81,
+        66,
+        14,
+        65
+      ],
+      "same_action": true
+    },
+    {
+      "CPU": {
+        "action": 23,
+        "nn": 64,
+        "root_mean": -0.7488208971917629,
+        "root_visits": 64,
+        "terminal_no_nn": 0
+      },
+      "GPU": {
+        "action": 23,
+        "nn": 64,
+        "root_mean": -0.7488209633156657,
+        "root_visits": 64,
+        "terminal_no_nn": 0
+      },
+      "all_tree_bitexact_gate": false,
+      "fixture": 2,
+      "policy_l1": 0.0,
+      "prefix": [
+        13,
+        67,
+        81,
+        66,
+        14,
+        65,
+        143,
+        126,
+        150,
+        64,
+        141,
+        151
+      ],
+      "same_action": true
+    },
+    {
+      "CPU": {
+        "action": 31,
+        "nn": 64,
+        "root_mean": -0.10325438258587383,
+        "root_visits": 64,
+        "terminal_no_nn": 0
+      },
+      "GPU": {
+        "action": 31,
+        "nn": 64,
+        "root_mean": -0.10325434074911755,
+        "root_visits": 64,
+        "terminal_no_nn": 0
+      },
+      "all_tree_bitexact_gate": false,
+      "fixture": 3,
+      "policy_l1": 0.0,
+      "prefix": [
+        13,
+        67,
+        22,
+        58,
+        31,
+        49,
+        40
+      ],
+      "same_action": true
+    }
+  ],
+  "schema": "teacher-qualification-v1",
+  "status": "FINITE_PASS",
+  "task": "resident-teacher-273-qualification-v1",
+  "whole_seconds": 1.750811302
+}

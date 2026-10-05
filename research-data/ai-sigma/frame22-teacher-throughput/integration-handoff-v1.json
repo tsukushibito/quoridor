@@ -1,0 +1,852 @@
+{
+  "issue": "quoridor-4lc.273",
+  "source_stopped": true,
+  "no_active_science": true,
+  "code": [
+    {
+      "WT_path": "/workspaces/quoridor/.worktree/frame22-teacher/crates/quoridor-runner/Cargo.toml",
+      "main_destination": "/workspaces/quoridor/crates/quoridor-runner/Cargo.toml",
+      "SHA": "1b6ee35b55b28ae339900872dcdabe3b689641f543e31115f4d7c44b41609acd"
+    },
+    {
+      "WT_path": "/workspaces/quoridor/.worktree/frame22-teacher/crates/quoridor-runner/src/config.rs",
+      "main_destination": "/workspaces/quoridor/crates/quoridor-runner/src/config.rs",
+      "SHA": "325e936917259b7ea3f9f7957b0817503d4bd8fdf7752e4f3dd51708351657cc"
+    },
+    {
+      "WT_path": "/workspaces/quoridor/.worktree/frame22-teacher/crates/quoridor-runner/src/resources.rs",
+      "main_destination": "/workspaces/quoridor/crates/quoridor-runner/src/resources.rs",
+      "SHA": "65307f8f2bb7b3b1d96d02f08b712ddf6941ed123706cbeebf1bd7c2c5c95f51"
+    },
+    {
+      "WT_path": "/workspaces/quoridor/.worktree/frame22-teacher/crates/quoridor-runner/src/runtime.rs",
+      "main_destination": "/workspaces/quoridor/crates/quoridor-runner/src/runtime.rs",
+      "SHA": "66d06e2332255a01ead0d0033ecaddba0b4b812bbfc8220c4dbb5bc2726e1a29"
+    },
+    {
+      "WT_path": "/workspaces/quoridor/.worktree/frame22-teacher/crates/quoridor-runner/src/bin/teacher-qualify.rs",
+      "main_destination": "/workspaces/quoridor/crates/quoridor-runner/src/bin/teacher-qualify.rs",
+      "SHA": "dd3dac4bf64e4d0ce3e9791ddbc451f127e107fc93fc82261ff52f9afd6cd9b5"
+    },
+    {
+      "WT_path": "/workspaces/quoridor/.worktree/frame22-teacher/crates/quoridor-data/src/lib.rs",
+      "main_destination": "/workspaces/quoridor/crates/quoridor-data/src/lib.rs",
+      "SHA": "390fc18b796af19b2c93b5d4918f6a643594147b267315a4859d6ca80c482396"
+    },
+    {
+      "WT_path": "/workspaces/quoridor/.worktree/frame22-teacher/crates/quoridor-data/tests/datasets.rs",
+      "main_destination": "/workspaces/quoridor/crates/quoridor-data/tests/datasets.rs",
+      "SHA": "1440765d164c112ed3bfca0ef7121df5d38043bf9a8cea6c03f1e086176fdfe4"
+    }
+  ],
+  "evidence_paths": [
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/274-cache-handoff-v1.json",
+      "SHA": "aa9063f7c5f25e6b26671b0226533010775fd7c4674b6245d99cce680787187d"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-background-v1.json",
+      "SHA": "9cd9b7aa0d74291526929d21c9f921403592da9f18b24ec44fddc7e30f56fa30"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-guardian-v1.json",
+      "SHA": "8dd00ba324fe431d85a5344c394f249adc1ce622fe62d357190ebaff21d4f413"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-native-config-v1.json",
+      "SHA": "1e76ba3307e4885712adfd11b54c88ef794c0146999e44694601aed7bf337382"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-pipeline-config-v1.json",
+      "SHA": "b947155dc134de831f4a250a772f036c937437d79c2f6baea1f5e39c093cef45"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-pipeline-result-v1.json",
+      "SHA": "18670eb416f06770f12d2f178e19dc715898227146ca600c044ccc135ab6c623"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-verified-compact-v1.json",
+      "SHA": "2924258d7216ed4dcfdc707285b82b75bec0ff8e730080a203590866091a65a9"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-background-v1.json",
+      "SHA": "3589b063ad38a273004d88631ffd879ce18984c371c2b60a7e0acbc8937165c7"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-guardian-v1.json",
+      "SHA": "892e8ed6cda49f8f370ad6c81855742cf406d52b59298179e4aeb2e8296a49b1"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-native-config-v1.json",
+      "SHA": "f51c2abe3213b14825d4e138cbdb8d570d890c6ca51ed33fbdf265572dde246d"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-pipeline-config-v1.json",
+      "SHA": "1fc349ef1199a43a515b23dcca0ea7f385ae098e49cf9199b1fc2cca6cc73f93"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-pipeline-result-v1.json",
+      "SHA": "bd61adda223676b786783b48f5a2963f79ffdc423811f893fae519fb45dcbaed"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/backend-static-binding.json",
+      "SHA": "632fae027cd764e42358ed4a008972b2ab5ad7c44409c45289fbb4c2fa6ae66a"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/build-background-v1.json",
+      "SHA": "68cdda04e5f84895f5ad04223f957145d8db7c9d8558e0c25d6d16e999b5b858"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/build-background-v2.json",
+      "SHA": "de1e8b70c4a6eaee2e6afc4b3c2b5e9fefe6559cc01c0141103806b1a1402354"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/build-guardian-v1.json",
+      "SHA": "95f279f9cb61b2049e38eeb399ffba30808088ea1f79f31d9c5008df839bf89d"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/build-guardian-v2.json",
+      "SHA": "00fa5ecf2d395f099eddb74df93768ab56532795ecbf7ecefda8529460dee02b"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/build-storage-before.json",
+      "SHA": "16119f76671c093eab32f3e548d01b1f74672663eff2b978197cf26238f46111"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/build-verification-v2.json",
+      "SHA": "ca43cceb466928d0e13ac7d52372839273386b587cfc31f53315d42428dd4025"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/build-verified-compact-v2.json",
+      "SHA": "5e3a550879342e94bb722cc7081e08e0883b68504baf2c837eab06cf32bf1964"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/build-verifier-format-current-v3.json",
+      "SHA": "fc6e76edd1a23c775826f62683889fd2a065b3014c79a94ea1abd85319ec8b31"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/canonical-cache-guardian-v1.json",
+      "SHA": "b1be3612f5d0ce0f6f58974796e992ac51eecd9bc527fe4ec7fe62a7aca0baa6"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/canonical-cache-proof-v1.json",
+      "SHA": "c4f71d0df06e4e0fb77e37c8539f7558b49b20fbc99accc371a7af8f0bd83138"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/comparison-v1.json",
+      "SHA": "a59a287f41ff23fa78500be611f726f29cd152c47fbe730619e30df830b1a5a0"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/cost-ledger-pre-model-v1.json",
+      "SHA": "0c4abf621f525295f378f24be02bf88b26435ea76b0f81117dc8dc534d8895e0"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/cost-scenarios-v1.json",
+      "SHA": "ba96ae38dc82363da5523c8e9f2816018210b8a3cea2fec86efd6e515d8a88ff"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/CPU-topology-block-v1.json",
+      "SHA": "c12c2b4127df90da60cdbd29b4fb2f271ee2d3062f1abaa2d7e586b898485cb1"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/final-caps-storage-v1.json",
+      "SHA": "99e372c18d3534b8aa9b02b2efbcea22f4d1f31c22b241c802efb83fa874eabd"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/format-check-v1.json",
+      "SHA": "75e34fad95526df5edd3223742b256aa74125186fe41e72af3153b9c52f5f217"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/format-check-v2.json",
+      "SHA": "acfd2007a7a1f4d60057892522e69cd9aa6b090770e7f42195a148a89c2cff89"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/gpuNA-fixture-v3.json",
+      "SHA": "d1f27682ae0c5647df48394617422c64ee9b0f741979726e04c5defc44e2c836"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/lint-guardian-v1.json",
+      "SHA": "e0ca9ea7ae9459691c6ef5fe8581375ae1fb592e15b2efaacac82b953a04dc8a"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/lint-guardian-v2.json",
+      "SHA": "39b7b55008a96941fa89bfd15028cad3a001463f50ca5160d7bb36a689a93c9b"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/necessary-archive-proof-v1.json",
+      "SHA": "e6be5d7133067dfe88cfe8d16d8dbfd54c4d4731fa81825ed5feade6895f20ab"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/NN0-prep-ledger-final-v1.json",
+      "SHA": "896ada72ee6fd66bf90a8202ef82802398f375194db9af34223cce1d0e235c27"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/NN0-prep-ledger-v1.json",
+      "SHA": "c731a630169fe71a3ca0080d8d931f094548930ba7ec6f2aa5c102fdf493dc77"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/NN0-prep-ledger-v2.json",
+      "SHA": "bfbbc0434ed05f1ee1bb486aae2caa415de7ea704e1dec888aa9104953b11481"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/NN0-prep-ledger-v3.json",
+      "SHA": "54c6c1d8ff97425f3b34f19c7af594c17589a3e329de5c62f7cc2f12ab0cde55"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/NN0-prep-ledger-v4.json",
+      "SHA": "cbf8d592540694ce31fad2662f087096a3033acfbc3776e3b4944be287b3eca2"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/opening-firstaccepted-v2.json",
+      "SHA": "a942123c3a2ccf47476a2d6629be641de4c96a9b6e0932ae4be6befbfc707969"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/prebuild-current-v2.json",
+      "SHA": "ed8d65b6387666bd5b2401a67fccd5dbcfab2fb46743c8739655031d1969f228"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/prepare-config-v1.json",
+      "SHA": "db218ad8b0272274f735bbd942c539f8c71029b5779febfcfbde4c56151500c2"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/prepare-config-v2.json",
+      "SHA": "1015316447cb27ed5d1b7dc3a57a6d27f86c514c8ed0d05473e3f53af604d5e8"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/prepare-guardian-v1.json",
+      "SHA": "1982a122b64ebe6703ae64c3523692890d4975759d5f2020aabccff6172dada2"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/prepare-guardian-v2.json",
+      "SHA": "70f37ccdf8d951f612183cee293581f48e19d7dd7d2dd49f522e9f8963ee134c"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/preregister-v1.json",
+      "SHA": "2b64f40c09ca5f190977d8ac776b5919e25de4454f0f3022ee0a01e4ce6bcd25"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/preregister-v2.json",
+      "SHA": "24b891306fb193304b5c8695f330c0ed3a1198a084cc2d644b8adeee10978022"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/preregister-v3.json",
+      "SHA": "37889301b81b79562e8fa76fbac5423e4be02014d8ac9400552efca687b88640"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/preregister-v4.json",
+      "SHA": "3ee959fd1412d75587fb4ccba63c12e2ca842e93ff136cf37f39f67c68bcf1bc"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/preregister-v5.json",
+      "SHA": "689cb64fae12d8a179adb0e7bd8d6184b7e031062f0a489a7e2189565893e446"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/process-archive-proof-v1.json",
+      "SHA": "b195bf67541c6d87e55acdd9aa204c70f61ef99c4ef89db758bc253da44d2d36"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/producer-scientific-stop-v1.json",
+      "SHA": "e72ef2b5fd3ddd85a2e85ebcdafc510ee6699c7c49aaffc2a615a24219c8484f"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/python-format-v4-proof.json",
+      "SHA": "7798d2e3dbb2839a137a9e25564955928579171c6b6417698dd975084d8778a7"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/qualification-background-v1.json",
+      "SHA": "b33fbe8af7907c283d603c664c08774e31f0e72a4a78ede69193e7ae03663753"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/qualification-background-v2.json",
+      "SHA": "1f96cd08bc43436ad33202ba1f342f19b41480ff62070f5468fda72407edda58"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/qualification-background-v3.json",
+      "SHA": "c50d45cfdac98c069816cefc055215bf6272deb457ec8958ee1a878be3401750"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/qualification-config-v1.json",
+      "SHA": "9c839fcf39d7245955c63c4ed5e051edf2da8328ad4ed8fa63ab8fdaf421024b"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/qualification-config-v2.json",
+      "SHA": "73c58dde22c86536f97bffaa9f365109375848d7553e23ec943189957c3837e2"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/qualification-config-v3.json",
+      "SHA": "2f77b3418796798b5ca2b959f3ae61d5863ad57cbab7af16dea7d735a194bbb2"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/qualification-guardian-v1.json",
+      "SHA": "f10a279151c93ba2d10bed0094858c210c705e7b265272442ea9b28378bfef1d"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/qualification-guardian-v2.json",
+      "SHA": "7a299c763a88296bf4b552ea639a9d31f4e543d2524dcbca0b65da8b6bfcc6fa"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/qualification-guardian-v3.json",
+      "SHA": "e92eb01f214b54c2a2d2b602c1a81cedcf940c6fad1ccc5526078a05448723b3"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/qualification-result-v3.json",
+      "SHA": "898cf68ca06452645c6fddbf70493df84f489ad49e4a15243e8cb091c5c5ea02"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/qualification-verified-v3.json",
+      "SHA": "0f94b80121e591c04719abdbe9b4ac6faff9b22be322bbee58deeb01038e5f8b"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/registered-family-map-v1.json",
+      "SHA": "90dea9468794fac505fdccfdd376d6ac7364b4fa95921e6679dfa5434db1fcb1"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/registered-selection-validation-groups-v1.json",
+      "SHA": "7d1dbfb555b28b63dc18438e6be6aec697cbd3c82b74c464f96fc9486b2059b9"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/registered-train-groups-v1.json",
+      "SHA": "bd07069910a6912fefb514302f70759daa9e0e65ade22bb00f7bad7d73c65d11"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/registered-train-prefix12-groups-v1.json",
+      "SHA": "191431a06d5c970607c54b9248a71ab5482767f2b496e6a312a87d9adff64922"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/registered-train-prefix24-groups-v1.json",
+      "SHA": "b0aca112c02e6896754ebb765b38cc5f898a4c0c04e6c1d58e74adf7319f187c"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/registered-train-prefix36-groups-v1.json",
+      "SHA": "bd07069910a6912fefb514302f70759daa9e0e65ade22bb00f7bad7d73c65d11"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/report-append-proof-v1.json",
+      "SHA": "7f0cb130bb0113349493ab7e471472e2dde976836c8040c890529a1303d92ab3"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/runtime-binding-276-v1.json",
+      "SHA": "773372a0b063a77b4682a51da4e15582094b53cc489f5e0ca50b526bc4fcbc33"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/selection-validation-cache-manifest-v1.json",
+      "SHA": "13dc6f8f231ca0f26bb1c9fc5abe209e56a0c5bee53be0979579550cfc82dfac"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/source-freeze-build-v1.json",
+      "SHA": "d0eecd4b7816352e04dead4eb183e8731096afa2ebeedd04413feea732de191e"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/storage-before-active48-v1.json",
+      "SHA": "c2135238bc5dd007c3b299829d53810792962e14f1bb4cf95f3b0c13cc69dea3"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/storage-before-generation-v1.json",
+      "SHA": "538931b16180c025e2f95ed9a45204cbb87d0741691a2341085efb02a22ca941"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/test-guardian-v1.json",
+      "SHA": "bf130dd0e5999925dd9d919abf4aa51bcbb814c2327e8803fd3d80a2e21cf52f"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/train-cache-manifest-v1.json",
+      "SHA": "53e3f326d05459ce118dd8684f2e5163a4b2ebb86ebba9b32820641ee4723463"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-stop-active48-submit.md",
+      "SHA": "986f96abcc179782c973326d1723ccbe7350c16b1b4e2e373d7beab0d192d9b8"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-submit-report-v1.md",
+      "SHA": "c43d83508135d78839f59f52a20ca3b3ce11f48c07df538226daf7b8e53dbeed"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/admission-api-plan.md",
+      "SHA": "d36ae9217672766b463b951b4f712b4371a8a273dc3b20d0637348862a55eb83"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/build-submit-report.md",
+      "SHA": "b25976026b8e90534fc0eb44fff6195dba89a0219154c54b00a6ba6e4733e7a2"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/cache-interface-v2.md",
+      "SHA": "7b31a87e27053a6f64efc36ec16932e098588eed2f86b1cfd518e9962f031d10"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/canonical-handoff-report-v1.md",
+      "SHA": "9bd436d302ecc97eb9eecdd733c3748bb8207fc44039b8bb17f2e528eabdf4cb"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/early-report.md",
+      "SHA": "d01c241b001c0d9f474d2f5b5f6071deb455dbd40331dcba1fc49ab2055bbab4"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/physical-reassignment-request.md",
+      "SHA": "b12e02470775952dc356af4604b228b1d41d9a75192dc236ee635ec8d3f9aa56"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/preflight-status-v1.md",
+      "SHA": "08392475d09ad4f68b0b46771cc43a6186852a7548dd901e44df6c671e868e40"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/qualification-failure-v2.md",
+      "SHA": "a16c6fe2783cc2b75bc4a9a23dd0a0c98135348c70b12519f20a0f1bcc651aa8"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/qualification-repair-submit-v3.md",
+      "SHA": "8920689b20580061a267fc8ea8e0bcc0b8257f6e812c11d74cd982dd11bbce6e"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/qualification-submit-v2.md",
+      "SHA": "9b93806a5347f1002dc4f3c867d1174c345328fd987e7fa80fe03da1b104ffae"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/quantity-correction-v2.md",
+      "SHA": "05f9b62d0861933f343457d95fc7e951d38dc2d68ffd947a1af81b73e7cf1430"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/transfer-interface-preview.md",
+      "SHA": "1a613e603bf04b53645cd24b31f259a0f1a57ac4e93226c4626def887f0a961e"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/necessary-source-evidence-v1.tar.gz",
+      "SHA": "aef47795260ba011e079021638fcaaba2aaa602e18d541871930cec561325c43"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/process-and-raw-binding-v1.tar.gz",
+      "SHA": "ec5a87a24d09848f5f10aebbc5c650c0e665c9ffd7d3980b815b5530ab3c09c1"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000000.arrow",
+      "SHA": "5344ab7d0b85870dce0f6b76d8081df566dd0ad9c8ffe03220357d86d0301ede"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000001.arrow",
+      "SHA": "ab9dc35cd40c96e6d762c227073b4dbadd12df4d32b4d550d3191fcbbf20cc3d"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000002.arrow",
+      "SHA": "9de999b2e54f5a21bed3e1ea9ddf58be64fc70c90d30ea92ee40b34401887c5d"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000003.arrow",
+      "SHA": "b895b96d9be85471114894891789caf7b157b51f235e9c05288ac9db642fba39"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000004.arrow",
+      "SHA": "6473c89d07828dc13d99ea116ddbb90806532b942bde8c934c044acf78d87580"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000005.arrow",
+      "SHA": "d995cdff54e71400dd577aa0fb1b5cb03fe70a6c60b2389156a5d4d8de7f9134"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000006.arrow",
+      "SHA": "8e72316d7b6f8ca44794de9b6183d3426fd32d36a73c7f026f9f0571c8735644"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000007.arrow",
+      "SHA": "c31ec016aa5ca25b06cc34c6d0535c37adfc760068f4f9ce55b76ac9ffb0b56c"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000008.arrow",
+      "SHA": "e01dce179dc262f10c8ee299d2bb12a63830ce84c98923d6d10f2cacd558f049"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000009.arrow",
+      "SHA": "353f1610faa9bf19793e9a0542c4e711ee2e4c94d9fb4743e74b7d019ebac9c4"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000010.arrow",
+      "SHA": "27773051dab43e22d0dd894b1ff9ce59bd750f1ba18ea95cfb6bab75160c0c67"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000011.arrow",
+      "SHA": "cd45934d6a76ae13c1dadf894a107d9b8f0fc86625c733da593297aaa6020cac"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000012.arrow",
+      "SHA": "75433434d07e254743f40e6b09620e6a6143e73ea30986e43830ba0c8127da11"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000013.arrow",
+      "SHA": "f197e88c70ee32ef6665e1a457dd596193ed7cdfc7bae332f9266161d34f4e90"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000014.arrow",
+      "SHA": "1508bdbeeb570e0e61eebe916b00d32537b29141adad794bc04a74d657773561"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000015.arrow",
+      "SHA": "d3b4f2294f35739ee70d1ab4c4198149d3aa916eecdb83056e88dc14b30a9750"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000016.arrow",
+      "SHA": "aa0a02df3aa4976a37b04f3b62c9571f52c63b8f69a8208de7a262f9784e2f0a"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000017.arrow",
+      "SHA": "cadef257298a7b2a399a6c9c92570a02fc2733505b469edb8a7254a8d8bdd82f"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000018.arrow",
+      "SHA": "4cf37e53953f283bb3b29132e2981df67542222598049bfdc114a5037b087302"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000019.arrow",
+      "SHA": "4a994d17a69808859ddffc550d5d9c6d5d74c2d3e40493105ac3338f98b32c0b"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000020.arrow",
+      "SHA": "30bdf7e1e4b275d5db9efe618a283550bdaf0aaf0fdbd93ef477e0f546c41c4e"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000021.arrow",
+      "SHA": "ae50395904c74abe3ac368073899576234cc6136ba31d6e14fc8874299165ef9"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000022.arrow",
+      "SHA": "af4bfb29e7dd4b655ab70cecc3ed80d887b57129ab1daccf34bd033650923f02"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000023.arrow",
+      "SHA": "5ed62c1598fdcd3e5c619662ad1d268efa029685f3c70a4cf5a5d64edfa1d6fd"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000024.arrow",
+      "SHA": "bec6a75adc6392088e95e3b07ce2cf968b9224830b93861d9f013f24e68b61d0"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000025.arrow",
+      "SHA": "29d4ccf923c8cf8d4a844d38679724027be2ae9950709b698dd799954f2f193b"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000026.arrow",
+      "SHA": "8f34d17ff838ae83a7128d2e4b7084c3c48f9ed846b314c8c95f0eca68207cc3"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000027.arrow",
+      "SHA": "3d961c184fcaa3d76f38d37f3aebcc887f715a783a506fb6f845a5e09d165e2e"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000028.arrow",
+      "SHA": "16dcc9dd1a891078f08469cb5ad635b986cf8248ed4a1ef39d352f56d5289c6b"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000029.arrow",
+      "SHA": "fe63cda91fc65b4dc4c3704f253a3bc037ed1714a9a4693a3eeede8445c0f46b"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000034.arrow",
+      "SHA": "016c3498c8c589403d538f3843407df47b8ffda9f4ec5698f1d3cfbfd9caaba3"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000035.arrow",
+      "SHA": "0b03770fa26a47482c6a08a061b4281aec0ef1d91f9b9006c020fc3362ec6160"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000037.arrow",
+      "SHA": "1b4ea7bf698f1ea098fb55ff854abe8e055fdd02661ff5f93b46b5a2ad0dfd44"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000041.arrow",
+      "SHA": "d589cc80480f851f7260e2b3f25eb3330a1c8704ecf94cfc226a9d275d3592e8"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000042.arrow",
+      "SHA": "3edef5744751810f17a95eeede9eaef0aac0b0923f4518956cfb91c694a04d58"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/train-000044.arrow",
+      "SHA": "0d5824795929a1bea07ec7cf7ea7c23ffbbb4a6d27de8c41e040e490e26dc237"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/validation-000030.arrow",
+      "SHA": "552e7d5240cb2155bafd7abdc7b3423de00a8446da668d5f6b0fbd9095b90225"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/validation-000031.arrow",
+      "SHA": "a5902fa4b476b59238016458d249bf220007f18f45b9a9447916fdcf969090f9"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/validation-000032.arrow",
+      "SHA": "4c7cf028c15c02e4d5bc8f80ddc0d3e7e4cd9c902ee91053426afb84066bd431"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/validation-000033.arrow",
+      "SHA": "bcf4109539abc0d196404655a51b96a725fc9f006abfbf6d9aed8ec3749da6f4"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/validation-000036.arrow",
+      "SHA": "5b5b1396d34a5b84e7b9cd7307eff99ee447365a41a5db9878623dde98d22490"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/validation-000038.arrow",
+      "SHA": "9b03cca6d99724f675fc62c6c28d723d1b13d4ac7f345d00b57c11dfe2b30e77"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/validation-000039.arrow",
+      "SHA": "a20d791f3b84ea76f35e331a5c7b9befc45d971f09e313d62e65c246877c3b1a"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/validation-000040.arrow",
+      "SHA": "5264256549cc8ce61ca0a8edd5aeb0f6825f2adb814b4e4ece0ebf8a056e9a45"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/validation-000043.arrow",
+      "SHA": "0466ae6b663f6868094836f5f64b6c136128651b4332514aa9a7abba15417008"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/validation-000045.arrow",
+      "SHA": "bc72eecaa2b0fb3343679be8cfb087e9784d0d05adc00b9a7319b82835a5f355"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/validation-000046.arrow",
+      "SHA": "896cf31ddedfc83522895aa59c50436858d861e3b63dc924cf612fdfe7d9c26c"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/validation-000047.arrow",
+      "SHA": "c0d93e59a98ff0e3c06d83a04cbe22d69d0391a8402270fe66074dcf70acb910"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/dataset/manifest.json",
+      "SHA": "54dbd19ca3c325fd5704580294ca736fa9c6407626ea98d938ac1c3a7cf630a4"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active24-r1-data/result.json",
+      "SHA": "91c81b1fd49c879554b385f4ba41f7dd7fd9a3ca015dce19a2f653032940ef60"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000000.arrow",
+      "SHA": "db4ab3f8fff1fd8285d2cb64d5080143f525640ccaa8cb02cc8cc14ade5c2bab"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000001.arrow",
+      "SHA": "935dbfb132058b55164195b604342b5a2e8575c869315e144dd1fc151c9260d4"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000002.arrow",
+      "SHA": "4d73ea2c21dc2ec86e6f9f9f7631086d3a220aba14a6a6e84e529475c642dfdd"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000003.arrow",
+      "SHA": "ca9a065fcf4f0dfa19c83b881812770af97ff81ef62fd0b2aef1f11227368d0a"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000007.arrow",
+      "SHA": "496c68a8cef697c6b21c1314414c71b202cc434f71b4167cb08a782189eb5bc1"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000008.arrow",
+      "SHA": "dd28704d2eb05574a95e98a68a1b48966c589d67771a4c03deba781d9c3b3127"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000009.arrow",
+      "SHA": "0fea40fbacb7f64b2104146b1650e85cb21528461fd65590f258f9bfaac2ccae"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000010.arrow",
+      "SHA": "2ffded3ffa48d32f5d17fcdae0429e7cf06b75165feda6c93bbf0a582b496856"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000013.arrow",
+      "SHA": "3693fcec8094d0340049a80dfb25356d30e2c21fe22a812398b0d314a6a75d53"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000014.arrow",
+      "SHA": "85363b5a71446d2aa8c3e6074361f5fc53cbba4a2e45f28dbce9dc98488fbdc0"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000015.arrow",
+      "SHA": "588a6d967c37b2e2787de232ca3e28cd45ee019ba86e0730f7b39b2f5f60acfb"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000016.arrow",
+      "SHA": "0a5fb023c42a39fd152536a6dbe4d033ff94f91b502b5ae0f5fda21533d4860b"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000017.arrow",
+      "SHA": "c6af1952ba024ffed09780b2be98ea4af36498e96a09ead3bbd5c348ec940479"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000019.arrow",
+      "SHA": "776bad363353ea1a289451ee6536b72109c8a465273b6d61194ab02b626e0f17"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000020.arrow",
+      "SHA": "fe728d529dc6c89be1ef1c42c90b3804ca72b68e55ef389ca386cc97a7ba0df8"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000021.arrow",
+      "SHA": "1a21aa47e59aea03529a927fcc30aeacc715852aa8121a08526311255f997b7b"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000022.arrow",
+      "SHA": "7021d816d7d8480766fc737ea0e852a625abdfbf4948b1b2ca8c36082b11bc93"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000023.arrow",
+      "SHA": "da2276f475c59f4de2e090b76525a9f5c7fb39afbfcd5837afaf7c68474864da"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000026.arrow",
+      "SHA": "0c4e4737b2ef9b138563a14e29dc780ebd12d0b0a1c6c23bd4d2f3a63a54685a"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000027.arrow",
+      "SHA": "0b73d4c3653417fa7e27d8cd714e378a53428af066032582eb83a2d1be3dce88"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000028.arrow",
+      "SHA": "c168eea9b4b2cbcab744db21402db6919a58bcf992db79f540822bbc73f8cfb5"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000029.arrow",
+      "SHA": "5a77f9f4751b5b526eba24a347b040887cf8528edb49bb53f7039ca5f87f6a05"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000030.arrow",
+      "SHA": "e4ab2d496d3ef1963df38569b2bcb3162267ec3eae055e90141b64d7c848370f"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000032.arrow",
+      "SHA": "1d0cb269073a61d78c2825562ce75f168e94de0daa31fd519860c18414f8a2d2"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000033.arrow",
+      "SHA": "6c3cbf7eb7c49a61756da70aa97f0f8b950418021a405ed57731064f875bd90f"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000034.arrow",
+      "SHA": "bba91271cbb335c4189d448c207f6eafdbb040895de77d2743d421ebec2fe17d"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000036.arrow",
+      "SHA": "42dc935f80517901d67ccc29bde6232c830ea07341e555cb709e356f0a3f5025"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000037.arrow",
+      "SHA": "b796e64a8da6b200385ae5044d069286264d90f2f1afd3cefb178a9b93a5693b"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000038.arrow",
+      "SHA": "1a93dfd5e2f6e1cff3ed6733f57d682a37b4eb17d5910417f84b6a346cbadc49"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000039.arrow",
+      "SHA": "c5039c7a3c796d7beeefc5acbea6d782e4f1f5b9de12cb60b70527619aebb137"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000041.arrow",
+      "SHA": "13dacbf7d28e3302d646ab7b26d2c1c7b9022240ddc8abcd1abedbac92b547f7"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000042.arrow",
+      "SHA": "46211c185f38c9dc20b5e044b8bc5390490201750fe107a75f997b2d23b1fcb5"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000043.arrow",
+      "SHA": "21e8c682ff675558089363d2a2e090c55f61a9ae593b56427ae8b84972159610"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000045.arrow",
+      "SHA": "5dad2b5399e27200f55f0e663805f51ab4a2de68e4a68f688890951ea59eb53b"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000046.arrow",
+      "SHA": "0c618b2834ecec1d0d9844ba1d43f54f7d97d07a83faa3c82fb0613ed048bfc5"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/train-000047.arrow",
+      "SHA": "ac728254051c2996165ce3d7e571d647acccc815e9c8e540675b53b18b4c163d"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/validation-000004.arrow",
+      "SHA": "ada9de4aa8fbe01ac0a97fb9d1521104363ce4f773bae81bff62c26752c83cc9"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/validation-000005.arrow",
+      "SHA": "a12b311b643eae1700f3f86f0829c7444036eaa384e607a4e4eb038212c60bab"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/validation-000006.arrow",
+      "SHA": "a3887212b12208bf933016eb69457446e984cf71610b04183f27ce20dad42c35"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/validation-000011.arrow",
+      "SHA": "5099e781d426f973bf81a97bcfd1904c592fc592988139df8e73e8756a5c8bf0"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/validation-000012.arrow",
+      "SHA": "ee15cd4195972ef14ed649d32029bda1f041435dc659d5144cf450d0e848aa40"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/validation-000018.arrow",
+      "SHA": "98a1c5da7d8374e6b3dc261e8049a69d9db572534a4fd32d7d029dfe254a6b67"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/validation-000024.arrow",
+      "SHA": "cc874bd78c98f1715d3eabcd6d2dd69a13888bfbb5ca56e66f5b83ea1669dca0"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/validation-000025.arrow",
+      "SHA": "c1986bedcc677fdfeb3dc2c58055f0179891fd35fc7974a6fc2faaf1e7407e68"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/validation-000031.arrow",
+      "SHA": "4462289711dfca70eafade228b9b617585af7acb2331701ac6080a9c13cf241a"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/validation-000035.arrow",
+      "SHA": "4576187280f9fc17a10b075cbafde1aec8def93c6e40fa6f52e634f96c0d359a"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/validation-000040.arrow",
+      "SHA": "2c51505e6c1cefdbf729bc68ba0e0e640b7087a9cc03165f4cf38acb38f29604"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/validation-000044.arrow",
+      "SHA": "0404820179b4abeed7b740b1008b7e2a623c1c29746f5bd4f69fd475b33c512a"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/dataset/manifest.json",
+      "SHA": "99e07617d8eedf771f3de4450708421392c1b68c3cba74240006c53212aea2d0"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data/result.json",
+      "SHA": "9ef6df2cc573d026fa5795a84e4ca204914eacde7a8bb6b94ec129220d0700ec"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/control.py",
+      "SHA": "88e916f51b4aa35cc05ad969fde01a1af8d53639eba06a96b6c107c6f9d8497e"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/control-gpuNA-v3.py",
+      "SHA": "2372fe0d2ce3742ba0298b6561a89fecde1fc607809ca7c8b263bd31678ed950"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/control-current-v4.py",
+      "SHA": "24b31a086900e6bc0ea6dd3d526b4257967074afaa461d424baf4494a91e1017"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/native-pipeline-v1.py",
+      "SHA": "7f16d34c4f942fc6ac05d18875e9486451d3dc8902eb627437584d879cb4a50c"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/verify-build-v2.py",
+      "SHA": "a955b1d586cdd3d8d86bc6ba71a01accf4ccbc391249e0ccb78a8d2c88ab180a"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/verify-build-current-v3.py",
+      "SHA": "6242f398a48c88cd8c983c96194dbb7e64788c83e45f92ebfc8abd2a769f1e81"
+    }
+  ],
+  "report": {
+    "path": "/workspaces/quoridor/docs/reports/ai-sigma-experiment-teacher-throughput.md",
+    "SHA": "2336c4b3ae6c0aee8e1936330eab14b0000e1de0e8b1ce972bd21f41ded81c67"
+  },
+  "compiled_bin_and_cache": "live metadata protected by hashes, not copied into Git; canonical cache reader274 continues",
+  "cache_retrieval": "274-cache-handoff-v1.json",
+  "index_and_commit_owner": "coordinator",
+  "producer_privateindex_or_commit": false
+}

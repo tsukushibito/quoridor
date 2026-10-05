@@ -1,0 +1,1 @@
+273 結果前数量v2を固定。未実行v1の16+48×2+32(144attempt)案は採用せず保存。新上界96は48planned×2比較の全trajectoryに適用、最大48新familyと明記する。資格0game→resident24 48game(最初16complete点forecast、全job継続)→resident48同48/seed。36train12selection-val、同family両条件は兄弟で学習量を倍増0。4番entryは必要資格修復のみ0game、旧MAX4/総60分/10m維持。独立増量へのtradeoffは本枠48family、actualactive48の比較を優先し残32を自動生成0。所有CPU接線/queue/NNwarm/capture/sourceprepを進行、まだモデル/GPUscience0。

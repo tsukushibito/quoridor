@@ -1,0 +1,5 @@
+goal quoridor-4lc /273 本人ready/show owner/no-pause確認→claim/static実開始11:55。現Sigma d790 TensorRT engine5be20cf0実SHA一致/maxB24/runtime11.3、既nativeGPUgraph B1..8経路が存在。新engine取得不要、まず既B8/fill2ms/worker1/active24対48の設定対照を選ぶ。
+最大1懸念:resources::admitはaffinityからhost2physical+inference1を自動除外するため、契約CPU2,3の限定affinityでは現CPU選定が成立しない可能性。runtimeだけで黙ってcoreを増やさず、具体admissionと必要小API差を調べる。WT/storage fresh admission後にrunner scopeで計測を足す。静的はmainreadonly。
+Native backendは各batchshape初回state()内の1warmforwardをNN計数へ含めていない。maxB8全shapeなら36startupNN追加を別課金し、capture/初回費もwholejobへ含める。現actual_batchesは本当に1enqueueV3へのn入力、APIrequest束だけと区別できる。queue/tail/初期化・資格/回収を測定予定。
+最初16game以下、train/selection-valを先固定、全planned分母/K64/教師π,z/独立RNG保持。最初結果をhypへ早渡し。続く同48比較と残独立gameは全96独立/4job/10mNN内で固定する。処理上界はK64×200plyとtree limitsから事前明示する。
+競合はAOTI(同package存在)/batchfill改善/IPC・tail、担当外TT/move-picker/教師目標・D保持残差。現在CPU API99.1%だけからGPU効果/hostlaunch原因は断定0。まだbuild/science/モデルinit0。新128MiBdata+128MiBrelease+8MiB疎WTのfreshadmit/WT作成を必要とするが全史/ACKをstaticgateにしない。

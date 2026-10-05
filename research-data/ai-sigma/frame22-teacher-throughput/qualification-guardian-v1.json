@@ -1,0 +1,64 @@
+{
+  "run_dir": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/qualification-r1",
+  "task": "resident-teacher-273-qualification-v1",
+  "issue": "quoridor-4lc.273",
+  "goal": "quoridor-4lc",
+  "owner": "codex:01a0f31d-6d15-7620-bb63-4b4f878e4746",
+  "kind": "science",
+  "GPU": true,
+  "cpu_cores": [
+    2,
+    3
+  ],
+  "ram_guard": 3221225472,
+  "loaded": "/workspaces/quoridor/research-data/ai-sigma/frame22-steward/running-loaded.json",
+  "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+  "end_at": "2026-10-05T15:15:00Z",
+  "storage_evidence": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-steward/storage-science-admission.json",
+    "SHA": "2a37b7365f642540fe3862b6641cf1c8eb03a147168ff941c5c5423ebaa6464e",
+    "release_growth_cap": 134217728,
+    "data_forecast": 134217728,
+    "WT_forecast": 8388608
+  },
+  "source_hashes": {
+    "/workspaces/quoridor/.worktree/frame22-teacher/crates/quoridor-runner/src/config.rs": "325e936917259b7ea3f9f7957b0817503d4bd8fdf7752e4f3dd51708351657cc",
+    "/workspaces/quoridor/.worktree/frame22-teacher/crates/quoridor-runner/src/runtime.rs": "d882d8bb0123dffc70ee0135e9ce34b6d0d0a26adf806610cff4e7aa2051002b",
+    "/workspaces/quoridor/.worktree/frame22-teacher/crates/quoridor-runner/src/resources.rs": "65307f8f2bb7b3b1d96d02f08b712ddf6941ed123706cbeebf1bd7c2c5c95f51",
+    "/workspaces/quoridor/.worktree/frame22-teacher/crates/quoridor-runner/src/bin/teacher-qualify.rs": "65449aefb75b1aa35aa80b570d515ce1d9e90ce34937e8bec0694526b5910b5c",
+    "/workspaces/quoridor/.worktree/frame22-teacher/crates/quoridor-runner/Cargo.toml": "1b6ee35b55b28ae339900872dcdabe3b689641f543e31115f4d7c44b41609acd",
+    "/workspaces/quoridor/.worktree/frame22-teacher/crates/quoridor-inference/native/tensorrt.cpp": "2153d2069c2a3fceaa76bcf457e2fe48d074b1d01f1fc1134a1772a970a7647f",
+    "/workspaces/quoridor/.worktree/frame22-teacher/crates/quoridor-inference/src/tensorrt.rs": "9eafd968298fc20f812d1faa6aa3f8bb11edab9cc4a4c72b5019457629d2887e",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/control.py": "88e916f51b4aa35cc05ad969fde01a1af8d53639eba06a96b6c107c6f9d8497e",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/preregister-v4.json": "3ee959fd1412d75587fb4ccba63c12e2ca842e93ff136cf37f39f67c68bcf1bc",
+    "/workspaces/quoridor/.worktree/frame22-teacher/Cargo.lock": "3624f85656fc1fe50c60c8d704cc7ca33b70245a946b21b5f27f51ca3e951f8c",
+    "/workspaces/quoridor/.artifacts/rust-migration/target/release/teacher-qualify": "85b1de5215acdb5b7de4646a574906f850b125a715a242b208831c11f8db12f3",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/qualification-config-v1.json": "9c839fcf39d7245955c63c4ed5e051edf2da8328ad4ed8fa63ab8fdaf421024b",
+    "/workspaces/quoridor/.worktree/assets/models/ai-sigma/reference/sigma-pcr250/best.onnx": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+    "/home/vscode/.cache/inference/rust-migration/export/sigma.engine": "5be20cf08a1da9bef20d72024e27e18539b1587700a9305bae45ba58994e1527",
+    "/home/vscode/.cache/inference/rust-migration/export/sigma.engine.manifest.json": "8533efeccbb530fbecc4b880adef5770f7a53c6b4dc0b7075b59d4e0cd8a31c8"
+  },
+  "cwd": "/workspaces/quoridor/.worktree/frame22-teacher",
+  "env": {
+    "CARGO_TARGET_DIR": "/workspaces/quoridor/.artifacts/rust-migration/target",
+    "CARGO_BUILD_JOBS": "1",
+    "QUORIDOR_TENSORRT_ROOT": "/home/vscode/.cache/inference/backends/tensorrt-11.3",
+    "QUORIDOR_CUDA_ROOT": "/home/vscode/.cache/inference/envs/quoridor-training/lib/python3.14/site-packages/nvidia/cu13",
+    "LD_LIBRARY_PATH": "/home/vscode/.cache/inference/backends/tensorrt-11.3/lib:/home/vscode/.cache/inference/envs/quoridor-training/lib/python3.14/site-packages/nvidia/cu13/lib"
+  },
+  "hard_seconds": 120,
+  "argv": [
+    "/usr/bin/taskset",
+    "-c",
+    "2,3",
+    "/workspaces/quoridor/.artifacts/rust-migration/target/release/teacher-qualify",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/qualification-config-v1.json"
+  ],
+  "expected": [
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/qualification-result-v1.json",
+      "task": "resident-teacher-273-qualification-v1",
+      "schema": "teacher-qualification-v1"
+    }
+  ]
+}

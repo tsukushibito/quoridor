@@ -82,6 +82,9 @@ pub struct Config {
     pub openings: Vec<Vec<u16>>,
     #[serde(default)]
     pub cpu_cores: Vec<usize>,
+    /// Opt-in inference owner core; workers must then be explicit too.
+    #[serde(default)]
+    pub inference_cpu_core: Option<usize>,
     #[serde(default)]
     pub engines: Vec<Engine>,
     #[serde(default)]

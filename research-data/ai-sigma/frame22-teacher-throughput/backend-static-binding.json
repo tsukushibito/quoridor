@@ -1,0 +1,48 @@
+{
+  "UTC": "2026-10-05T11:57:11.951665+00:00",
+  "engine_path": "/home/vscode/.cache/inference/rust-migration/export/sigma.engine",
+  "engine_bytes": 12101556,
+  "engine_SHA": "5be20cf08a1da9bef20d72024e27e18539b1587700a9305bae45ba58994e1527",
+  "matches_manifest": true,
+  "manifest": {
+    "schema": "quoridor-native-inference-v1",
+    "backend": "tensorrt",
+    "source_model_sha256": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+    "artifact_sha256": "5be20cf08a1da9bef20d72024e27e18539b1587700a9305bae45ba58994e1527",
+    "artifact": "sigma.engine",
+    "input_shape": [
+      "batch",
+      8,
+      9,
+      9
+    ],
+    "output_shapes": [
+      [
+        "batch",
+        136
+      ],
+      [
+        "batch",
+        1
+      ]
+    ],
+    "dtype": "float32",
+    "max_batch": 24,
+    "torch": "2.14.0+cu130",
+    "cuda": "13.0",
+    "device": "cuda:0",
+    "tf32": false,
+    "amp": false,
+    "export_seconds": 8.899112340004649,
+    "source_sha256": "8cc1f90f60bee18fcc955854b535443b045cd8a5a392a25701a6291244a66ec7",
+    "folded_model_source_sha256": "c85613506eb60f20557852314d9515dba15f23c2e1aae8bb57409de1e8af6f1d",
+    "runtime_version": "11.3.0.99"
+  },
+  "source": {
+    "crates/quoridor-runner/src/runtime.rs": "aac1c4e1176b278aa8371b4c65de12d0579d96c04fa327b950012906d01227c2",
+    "crates/quoridor-runner/src/resources.rs": "1b3c71287c1d834833a3979606d22d35f76c4607b625753503296eb1f9cefa62",
+    "crates/quoridor-inference/native/tensorrt.cpp": "2153d2069c2a3fceaa76bcf457e2fe48d074b1d01f1fc1134a1772a970a7647f"
+  },
+  "NN": 0,
+  "GPU_initialization": false
+}

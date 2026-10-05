@@ -1,0 +1,75 @@
+{
+  "run_dir": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1",
+  "task": "resident-teacher-273-active48-v1",
+  "issue": "quoridor-4lc.273",
+  "goal": "quoridor-4lc",
+  "owner": "codex:01a0f31d-6d15-7620-bb63-4b4f878e4746",
+  "kind": "science",
+  "GPU": true,
+  "cpu_cores": [
+    2,
+    4
+  ],
+  "ram_guard": 3221225472,
+  "loaded": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/runtime-binding-276-v1.json",
+  "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+  "end_at": "2026-10-05T15:15:00Z",
+  "storage_evidence": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/storage-before-active48-v1.json",
+    "SHA": "c2135238bc5dd007c3b299829d53810792962e14f1bb4cf95f3b0c13cc69dea3",
+    "release_growth_cap": 134217728,
+    "data_forecast": 134217728,
+    "WT_forecast": 8388608
+  },
+  "source_hashes": {
+    "/workspaces/quoridor/.worktree/frame22-teacher/crates/quoridor-runner/src/config.rs": "325e936917259b7ea3f9f7957b0817503d4bd8fdf7752e4f3dd51708351657cc",
+    "/workspaces/quoridor/.worktree/frame22-teacher/crates/quoridor-runner/src/runtime.rs": "66d06e2332255a01ead0d0033ecaddba0b4b812bbfc8220c4dbb5bc2726e1a29",
+    "/workspaces/quoridor/.worktree/frame22-teacher/crates/quoridor-runner/src/resources.rs": "65307f8f2bb7b3b1d96d02f08b712ddf6941ed123706cbeebf1bd7c2c5c95f51",
+    "/workspaces/quoridor/.worktree/frame22-teacher/crates/quoridor-runner/src/bin/teacher-qualify.rs": "dd3dac4bf64e4d0ce3e9791ddbc451f127e107fc93fc82261ff52f9afd6cd9b5",
+    "/workspaces/quoridor/.worktree/frame22-teacher/crates/quoridor-runner/Cargo.toml": "1b6ee35b55b28ae339900872dcdabe3b689641f543e31115f4d7c44b41609acd",
+    "/workspaces/quoridor/.worktree/frame22-teacher/crates/quoridor-inference/native/tensorrt.cpp": "2153d2069c2a3fceaa76bcf457e2fe48d074b1d01f1fc1134a1772a970a7647f",
+    "/workspaces/quoridor/.worktree/frame22-teacher/crates/quoridor-inference/src/tensorrt.rs": "9eafd968298fc20f812d1faa6aa3f8bb11edab9cc4a4c72b5019457629d2887e",
+    "/workspaces/quoridor/.worktree/frame22-teacher/Cargo.lock": "3624f85656fc1fe50c60c8d704cc7ca33b70245a946b21b5f27f51ca3e951f8c",
+    "/workspaces/quoridor/.artifacts/rust-migration/target/release/teacher-qualify": "6a67a65201d37ee3a5c9ed46bba343ba5757c151409d7b22822f42d99b18d252",
+    "/workspaces/quoridor/.worktree/assets/models/ai-sigma/reference/sigma-pcr250/best.onnx": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+    "/home/vscode/.cache/inference/rust-migration/export/sigma.engine": "5be20cf08a1da9bef20d72024e27e18539b1587700a9305bae45ba58994e1527",
+    "/home/vscode/.cache/inference/rust-migration/export/sigma.engine.manifest.json": "8533efeccbb530fbecc4b880adef5770f7a53c6b4dc0b7075b59d4e0cd8a31c8",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/preregister-v5.json": "689cb64fae12d8a179adb0e7bd8d6184b7e031062f0a489a7e2189565893e446",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/verify-build-v2.py": "a955b1d586cdd3d8d86bc6ba71a01accf4ccbc391249e0ccb78a8d2c88ab180a",
+    "/workspaces/quoridor/.worktree/frame22-teacher/crates/quoridor-data/src/lib.rs": "390fc18b796af19b2c93b5d4918f6a643594147b267315a4859d6ca80c482396",
+    "/workspaces/quoridor/.worktree/frame22-teacher/crates/quoridor-data/tests/datasets.rs": "1440765d164c112ed3bfca0ef7121df5d38043bf9a8cea6c03f1e086176fdfe4",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/qualification-config-v3.json": "2f77b3418796798b5ca2b959f3ae61d5863ad57cbab7af16dea7d735a194bbb2",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/control-current-v4.py": "24b31a086900e6bc0ea6dd3d526b4257967074afaa461d424baf4494a91e1017",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/native-pipeline-v1.py": "7f16d34c4f942fc6ac05d18875e9486451d3dc8902eb627437584d879cb4a50c",
+    "/workspaces/quoridor/.artifacts/rust-migration/target/release/quoridor-runner": "ad85e7b84183924f68ddbcf2186c522a7092cc9eb0948444c678ff8b8a96ef5e",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-native-config-v1.json": "f51c2abe3213b14825d4e138cbdb8d570d890c6ca51ed33fbdf265572dde246d",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-pipeline-config-v1.json": "1fc349ef1199a43a515b23dcca0ea7f385ae098e49cf9199b1fc2cca6cc73f93",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/registered-family-map-v1.json": "90dea9468794fac505fdccfdd376d6ac7364b4fa95921e6679dfa5434db1fcb1"
+  },
+  "cwd": "/workspaces/quoridor/.worktree/frame22-teacher",
+  "env": {
+    "CARGO_TARGET_DIR": "/workspaces/quoridor/.artifacts/rust-migration/target",
+    "CARGO_BUILD_JOBS": "1",
+    "QUORIDOR_TENSORRT_ROOT": "/home/vscode/.cache/inference/backends/tensorrt-11.3",
+    "QUORIDOR_CUDA_ROOT": "/home/vscode/.cache/inference/envs/quoridor-training/lib/python3.14/site-packages/nvidia/cu13",
+    "LD_LIBRARY_PATH": "/home/vscode/.cache/inference/backends/tensorrt-11.3/lib:/home/vscode/.cache/inference/envs/quoridor-training/lib/python3.14/site-packages/nvidia/cu13/lib"
+  },
+  "hard_seconds": 900,
+  "argv": [
+    "/usr/bin/taskset",
+    "-c",
+    "2,4",
+    "/usr/bin/python3",
+    "-B",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/native-pipeline-v1.py",
+    "--config",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-pipeline-config-v1.json"
+  ],
+  "expected": [
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-pipeline-result-v1.json",
+      "task": "resident-teacher-273-active48-v1",
+      "schema": "resident-teacher-pipeline-v1"
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "task": "resident-teacher-273-build-v2",
+  "schema": "teacher-build-verification-v1",
+  "records": [
+    {
+      "argv": [
+        "cargo",
+        "build",
+        "--offline",
+        "--release",
+        "--features",
+        "tensorrt",
+        "-p",
+        "quoridor-runner",
+        "--bin",
+        "quoridor-runner",
+        "--bin",
+        "teacher-qualify"
+      ],
+      "exit": 0,
+      "wall_s": 38.17562081897631
+    },
+    {
+      "argv": [
+        "cargo",
+        "test",
+        "--offline",
+        "--release",
+        "-p",
+        "quoridor-data"
+      ],
+      "exit": 0,
+      "wall_s": 35.749988538969774
+    },
+    {
+      "argv": [
+        "cargo",
+        "test",
+        "--offline",
+        "--release",
+        "--features",
+        "tensorrt",
+        "-p",
+        "quoridor-runner",
+        "--lib"
+      ],
+      "exit": 0,
+      "wall_s": 24.407838406972587
+    },
+    {
+      "argv": [
+        "cargo",
+        "clippy",
+        "--offline",
+        "--release",
+        "--features",
+        "tensorrt",
+        "-p",
+        "quoridor-runner",
+        "--lib",
+        "--bin",
+        "quoridor-runner",
+        "--bin",
+        "teacher-qualify",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "wall_s": 7.309413117007352
+    },
+    {
+      "argv": [
+        "cargo",
+        "clippy",
+        "--offline",
+        "--release",
+        "-p",
+        "quoridor-data",
+        "--tests",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "wall_s": 2.942277484049555
+    }
+  ],
+  "NN": 0
+}

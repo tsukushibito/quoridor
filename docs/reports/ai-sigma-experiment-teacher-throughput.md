@@ -131,3 +131,29 @@ phase3保存段階の追補: report/scenarios Git byte復元2.392360秒を96実�
 次最大1の候補はglobal未開始game queue又はcohort-balanced worker割当で、開始済treeはownerに保持する薄接続。現在i%3 shardではcore2がopening8/20、core4が12/24、core6が16/28となり、32game均等でもNN100785/81855/80209と偏った。尾部と固定cohort-shardの交絡があり、簡単な均衡割当を10–20分の実装/検証見積で先に検討する。仮に30秒/96節約なら開発費のみ回収1920–3840gameだが、tail全部が除ける又は30分達成すると保証しない。輸送配列/Rustpump/C++再用はsource/規則/ID/回収/build差分を含む競合案として保留。今回から新条件/生成を自動開始しない。
 
 Science source5dace6a0945ee266ef414d40898372c5b3be03ba、scientific payloadca8e0084b9465e2435545551b0c84b31142c1ce8。Archive7,256,017B/SHA3f58ced1dfc3d7feb7f3598344fd66e0ed80a25c532a8e5bfb7780d7d6fb193b、全member/Git必要byte復元PASS。新128MiB/guard112MiBを既pool内から計上、旧128/64MiB/216等保持・unknown減額/親追加0。Default/private index不変更。統括09:42有限受入れ221-fresh96-finite-acceptance.jsonに従い必要保存/backup後本人close、最高棋力goal達成とは区別する。
+
+
+## frame22 / 273 現役native resident GPUとteacher cache
+
+既TensorRT11.3 engine（5be20cf0、model d790）を新取得なしで再用し、native true batch B1..8 / fill2ms / worker1のactive24対48を比較した。両条件は同48登録family・同prefix・同game seed、K64/root64/edge63・現行RuleA/history/P2・temperature1を全生成plyで固定した。旧生成のfirst16→argmaxとは分布が異なり、旧Node/Python生成からの純速度倍率や純数量効果は認定しない。独立familyは48、反復96trajectoryの一側だけをcanonicalとする。36trainと12selection-validationは結果前にcohortごと6/2で固定し、未見testとは呼ばない。
+
+| 条件 | GOAL/予定 | 適格joint行 | physical NN（warm含む） | native内部秒 | guardian全attempt秒 | joint行/秒 | 平均B | 最後8局tail秒 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| active24 | 48/48 | 1720 | 91603 | 30.8392 | 46.8527 | 36.7108 | 7.0861 | 10.8683 |
+| active48 | 48/48 | 1720 | 91603 | 27.5191 | 41.4847 | 41.4610 | 7.5153 | 6.6730 |
+
+全48のAction列・手数・logical NN91567・terminal-no-NN18513・advance呼出111425が両条件で一致した。root仕事量は91567+18513=1720×64に対応する。advance呼出はvisited/processed-node数ではなく、allocated-node peak6595も別指標である。active48は事前の適格行/全guardian費基準でcanonicalに選定し、時間11.46%減・行率12.94%増を今回の有限観測として支持する。固定順・hostwarm・単一反復を保持し、一般速度保証やactive数単独の因果ではない。queue累積173.188/304.721秒やbackend15.259/13.647秒は重なるspanで全wallへ加算しない。実poolはqueued peak24/47で露出した。first16完了は11.708/11.351秒、389/305行で、同job内forecastであり条件切替や都合よいwholejob切取りをしていない。
+
+native内部wallの外にprefix再生/入場等があり、guardian command43.629/38.004秒、background47.026/41.790秒を別記録した。初期化.163/.183秒・cleanup.0147/.0144秒・記録2.349/1.547秒・dataset finalization2.493/2.992秒は包含境界を持つ。RSS peak526.0/535.3MB、GPU whole-device保守上界1.661/1.722GB。per-process used_memoryは[N/A]なので専有VRAMの実測はUNKNOWNを保ち、device全体のfresh数値を6GiB guardへ用いた。
+
+CPU2/3は同physicalで旧入場が不成立だった。明示worker2/inference4へ再配分し、affinity/cpuset/physical sibling/host2physical reserve/quota/memoryをopt-in admissionで検査した。default admissionは維持し、新APIの合成3testと既runtime6testが通った。実native主threadはcore4を記録し、worker pin2はsource/成功admissionに基づく（全threadの連続測定ではない）。parent/ROLE276 current24と正scheduler/monitor PIDtick、owner/pause/current physicalを各入口でbindし、LLM active人数を拒否gateにしていない。
+
+資格r2は監視側のint('[N/A]')失敗で自己TERMとなり、科学slot1/NN UNKNOWN+保守620を保持した。別prospective guardの6小case確認後、許可済み0game修復slot4で620physicalNN（CPU292/GPU292/warm36）を実行。B1..8の4932floatはmaxabs5.3644e-6でabs1e-4+rtol1e-4内、固定4rootの合法Action・root64/edge63・πL1は一致した。全tree bitexact/teacher真値/棋力の認定ではない。実起動順は失敗資格→必要資格修復→active24→active48で、MAX4を全消費し追加科学はない。known NN183826と失敗UNKNOWN上界620を分け、保守charge184446を保存した。
+
+canonical active48 cacheは1328行/36train・392行/12selection-val。rows.jsonl v2に元state_key/history_key/ply/feature_signature/sideとids(P1/P2順)、distance(STM/opponent f32順)を保持し、xのSTM並びとdistance/labels既存byte意味は変更しない。data6testとowned lintが成功し、実1720行のmetadata→tensor/label bytesもownerが確認した。history hashからfullhistory/countは推測せず、旧hash形式との互換性は未確認。sharedmetadataには許可されたselection labelsがあり、label-freeなのはmask/partitionのpredicateである。train/selection manifestを分け、登録prefix12/24/36 group arrays、cache/source SHA・停止・全子回収を274-cache-handoff-v1.jsonで学習担当へ渡した。統括source review、274独立Python mask/parity/fitとowner証拠を区別する。学習改善・最高棋力は本生成速度から認定しない。
+
+旧verification179.958122秒（compile84.239782/testlint95.718340のcommand wall）とNN0追加準備180秒は別台帳に保持した。追加のopening3.687459秒、current保管全量測定62.086639秒、cache export3.267899秒、全row bytecheck.218403秒、archive復元.165580秒を計測し、LLM/read/development未測費はUNKNOWN。CPU実費と包含wallを同一視せず、旧失敗・旧caps/予約のresetはない。fresh current+全旧reservation+未知は11,092,606,976B<12GiB、元data128/build128/WT8MiB内で保持し、未知減額なし。必要source/evidence42member archive64,053Bの復元SHAが通った。Git/index/commitは統括のみ。
+
+この密度35.8333適格行/gameの短外挿では、1000局guardian生成14.40分、opening/cache/bytecheck配賦込み既知16.90分＋dispatch/Git/backup/大規模tail未知となる。60分に必要9.954行/秒、30分に19.907行/秒に対して今回41.461行/秒だが、実1000局はNOT_RUN、K800教師品質と同等ではない。100/1000/10000はcost-scenarios-v1.jsonの費用シナリオだけで実増量許可ではない。今回の既知準備/検証/失敗command投資257.76秒を観測差.11183秒/gameで割ると回収約2305局、baseline比較費も含め約2724局。未知開発費と順序変動を含む確定回収ではない。
+
+次最大1はこの36新trainを既96trainへ登録順で接続する同256k-seen D保持残差の対照（274別契約）である。teacher費を量/転移検査へ結び、追加pool/batch反復は行わない。より広いarray/pump/AOTIや特徴・目標/履歴の競合案はagendaに保持する。速度だけで研究goalを達成とせず、未見評価と棋力は別段階に残す。

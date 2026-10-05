@@ -1,0 +1,60 @@
+{
+  "mode": "prepare",
+  "output": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/opening-firstaccepted-v2.json",
+  "seed": 5728402889386702966,
+  "model": "/workspaces/quoridor/.worktree/assets/models/ai-sigma/reference/sigma-pcr250/best.onnx",
+  "library": "/home/vscode/.cache/inference/envs/quoridor-training/lib/python3.14/site-packages/onnxruntime/capi/libonnxruntime.so.1.30.0",
+  "engine": "/home/vscode/.cache/inference/rust-migration/export/sigma.engine",
+  "model_sha": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+  "roots": [
+    [],
+    [
+      13,
+      67,
+      81,
+      66,
+      14,
+      65
+    ],
+    [
+      13,
+      67,
+      81,
+      66,
+      14,
+      65,
+      143,
+      126,
+      150,
+      64,
+      141,
+      151
+    ],
+    [
+      13,
+      67,
+      22,
+      58,
+      31,
+      49,
+      40
+    ]
+  ],
+  "opening_lengths": [
+    8,
+    12,
+    16,
+    20,
+    24,
+    28
+  ],
+  "openings_per_length": 8,
+  "abs_tol": 0.0001,
+  "rel_tol": 0.0001,
+  "worker_cores": [
+    2
+  ],
+  "inference_core": 4,
+  "host_ram_reserve": 1073741824,
+  "memory_limit": 3221225472
+}

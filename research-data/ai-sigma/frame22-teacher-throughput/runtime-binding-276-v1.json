@@ -1,0 +1,54 @@
+{
+  "at": "2026-10-05T12:22:38.188350+00:00",
+  "checks": {
+    "running": true,
+    "scheduler_exact": true,
+    "monitor_exact": true,
+    "monitor_binding": true,
+    "old_scheduler_absent": true,
+    "old_monitor_absent": true,
+    "loaded_config": true,
+    "loaded_contract": true,
+    "current24": true,
+    "period1200": true,
+    "null_limits": true,
+    "end_unchanged": true,
+    "state_recovery_clear": true,
+    "monitor_running": true
+  },
+  "scheduler": {
+    "pid": 1233793,
+    "start_ticks": "45593355",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "monitor": {
+    "pid": 1235182,
+    "start_ticks": "45599721",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "owned": {
+    "run_id": "da3b7e3b-cb1b-449d-96cb-9e10b7dfe9ce",
+    "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+    "turn_id": "01a10c03-266f-7aa1-a7b9-5302388541dc",
+    "started_at": "2026-10-05T12:21:35.427210+00:00",
+    "max_turn_seconds": null
+  },
+  "config_sha256": "819cf7fe5a037a2d6d1bdbefd34efeb7eecd407245f4a5882488f57a2b338f3d",
+  "contract_sha256": "3cae6f14a7e5cbb29af46f260af3723081d81a89abb3d615efddeacd73148f85",
+  "deadlines": {
+    "heavy": "2026-10-05T15:26:03Z",
+    "supervisor": "2026-10-05T15:31:03Z",
+    "monitor": "2026-10-05T15:34:03Z",
+    "final": "2026-10-05T15:36:03Z"
+  },
+  "period": 1200,
+  "max_turn_seconds": null,
+  "gap_start": "2026-10-05T12:16:56.411457+00:00",
+  "gap_end": "2026-10-05T12:22:38.188403+00:00",
+  "natural_semantic_effect_certified": false,
+  "external_NN_stop_certified": false,
+  "management_checker_failure_preserved": "/workspaces/quoridor/.artifacts/research-team/coordinator-role276/post-start-check-failure.json",
+  "duplicate_start": false,
+  "state_dir": "/workspaces/quoridor/.artifacts/research-team/frame22/scheduler",
+  "origin": "276-coordinator-role/runtime-applied.json; task-owned pointer, freshly validated by guardian each entrance"
+}

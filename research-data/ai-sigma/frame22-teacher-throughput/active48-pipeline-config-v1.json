@@ -1,0 +1,20 @@
+{
+  "task": "resident-teacher-273-active48-v1",
+  "native_config": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-native-config-v1.json",
+  "native_config_SHA": "f51c2abe3213b14825d4e138cbdb8d570d890c6ca51ed33fbdf265572dde246d",
+  "family_map_SHA": "90dea9468794fac505fdccfdd376d6ac7364b4fa95921e6679dfa5434db1fcb1",
+  "native_run_id": "frame22-273-active48-r1",
+  "native_output": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-r1-data",
+  "model_SHA": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+  "physical_NN_upper": 614436,
+  "output": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-pipeline-result-v1.json",
+  "argv": [
+    "/usr/bin/taskset",
+    "-c",
+    "2,4",
+    "/workspaces/quoridor/.artifacts/rust-migration/target/release/quoridor-runner",
+    "selfplay",
+    "--config",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-native-config-v1.json"
+  ]
+}

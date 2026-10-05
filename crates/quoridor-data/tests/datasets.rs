@@ -123,3 +123,89 @@ fn old_alpha_teacher_has_legacy_empty_pv_and_new_pv_roundtrips() {
     let restored: Teacher = serde_json::from_slice(&serde_json::to_vec(&new).unwrap()).unwrap();
     assert!(matches!(restored,Teacher::AlphaBeta{pv,..} if pv==vec![13,67]));
 }
+
+#[test]
+fn cache_metadata_preserves_perspectives_tensor_bytes_and_missing_labels() {
+    let d = dir("metadata");
+    let c = SigmaContext::from_prefix(&[13]).unwrap();
+    let mut p2 = TeacherRow::from_context(
+        "p2".into(),
+        "p2".into(),
+        "p2".into(),
+        Split::Validation,
+        vec![13],
+        &c,
+        Some(c.legal_ids()[0]),
+        Teacher::InputOnly,
+        "model".into(),
+    )
+    .unwrap();
+    p2.eligible = false;
+    let mut rows = vec![row("p1", Split::Train), p2, row("sealed", Split::Test)];
+    write_dataset(&d, &mut rows, true, 1).unwrap();
+    for allow_test in [false, true] {
+        let output = dir("metadata-cache");
+        let cache = write_tensor_cache(&d, &output, allow_test).unwrap();
+        let expected_rows = read_dataset(&d, allow_test).unwrap();
+        assert_eq!(cache.rows, expected_rows.len());
+        let mut legacy_x = Vec::new();
+        let mut legacy_d = Vec::new();
+        let mut legacy_labels = Vec::new();
+        let metadata: Vec<serde_json::Value> = std::fs::read_to_string(output.join("rows.jsonl"))
+            .unwrap()
+            .lines()
+            .map(|s| serde_json::from_str(s).unwrap())
+            .collect();
+        for (r, m) in expected_rows.iter().zip(&metadata) {
+            let stm = usize::from(r.side - 1);
+            for view in [stm, 1 - stm] {
+                let mut dense = [0f32; FEATURE_COUNT];
+                for id in &r.ids[view] {
+                    dense[usize::from(*id)] = 1.0;
+                }
+                for value in dense {
+                    legacy_x.extend(value.to_le_bytes());
+                }
+            }
+            for value in r.distance {
+                legacy_d.extend(value.to_le_bytes());
+            }
+            for value in [
+                r.teacher.value().unwrap_or(f32::NAN),
+                r.z.unwrap_or(f32::NAN),
+            ] {
+                legacy_labels.extend(value.to_le_bytes());
+            }
+            assert_eq!(m["metadata_schema"], "quoridor-tensor-row-v2");
+            assert_eq!(m["state_key"], r.state_key);
+            assert_eq!(m["history_key"], r.history_key);
+            assert_eq!(m["feature_signature"], r.signature());
+            assert_eq!(m["ply"], r.ply);
+            assert_eq!(m["side"], r.side);
+            assert_eq!(m["ids"], serde_json::json!(r.ids));
+            assert_eq!(m["ids_order"], "P1_then_P2");
+            assert_eq!(m["distance"], serde_json::json!(r.distance));
+            assert_eq!(m["distance_order"], "STM_then_opponent_f32");
+            assert_eq!(m["primary_eligible"], r.eligible);
+            assert!(m.get("full_history").is_none());
+            if r.id == "p2" {
+                assert_eq!(r.side, 2);
+                assert!(m["rootmean"].is_null());
+                assert!(m["z"].is_null());
+                assert!(!r.eligible);
+            }
+        }
+        assert_eq!(std::fs::read(output.join("x.f32")).unwrap(), legacy_x);
+        assert_eq!(
+            std::fs::read(output.join("distance.f32")).unwrap(),
+            legacy_d
+        );
+        assert_eq!(
+            std::fs::read(output.join("labels.f32")).unwrap(),
+            legacy_labels
+        );
+        assert_eq!(metadata.iter().any(|m| m["id"] == "sealed"), allow_test);
+        std::fs::remove_dir_all(output).unwrap();
+    }
+    std::fs::remove_dir_all(d).unwrap();
+}
