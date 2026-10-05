@@ -1,0 +1,541 @@
+{
+  "unique_contents": 7010,
+  "raw_bytes": 192924639,
+  "archive_counted_bytes": 76870453,
+  "new_archive_plus_unique_Git_and_metadata_upper_bytes": 155838058,
+  "reclassified_cache_bytes": 48714781,
+  "originals_untouched": true,
+  "active_old_refs": [],
+  "source_checks": [
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/private/Cargo.toml",
+      "bytes": 584,
+      "sha256": "57e3173114c234ff39b0dd976e913fa142358d8f0eb426ec87e61668344bcade",
+      "source_matches_original_build_binding": true,
+      "git_reachable_and_restored": true
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/private/Cargo.lock",
+      "bytes": 2824,
+      "sha256": "d0568a38ed13c537c3ab96abe3a0585e82258da1a3a5e64ee4ab18df07211b24",
+      "source_matches_original_build_binding": true,
+      "git_reachable_and_restored": true
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/private/src/context.rs",
+      "bytes": 3332,
+      "sha256": "9ba343646347329e1c5a21bacba8032c04e762e80653bce20d55b2518e54114e",
+      "source_matches_original_build_binding": true,
+      "git_reachable_and_restored": true
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/private/src/lib.rs",
+      "bytes": 10903,
+      "sha256": "b554bdfeda920ac40fa70fceb7404562bba3b6c0dd7df09ce21c5b97156af9fc",
+      "source_matches_original_build_binding": true,
+      "git_reachable_and_restored": true
+    }
+  ],
+  "cache_classification": [
+    {
+      "path": ".artifacts/ai-sigma/analysis/SIGMA-ROOT-SELECTION-ABLATION/diagnostic",
+      "bytes": 4551368,
+      "reason": "unused native executable; diagnostic.rs/template/preparation source retained in preservation catalog"
+    },
+    {
+      "path": ".artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/ort-wasm-simd-threaded.jsep.mjs",
+      "bytes": 53602,
+      "reason": "unused checkout-local ORT Web 1.21 dependency; original URL/version/SHA/download/license metadata preserved; active native ORT env untouched"
+    },
+    {
+      "path": ".artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/ort-wasm-simd-threaded.jsep.wasm",
+      "bytes": 23914392,
+      "reason": "unused checkout-local ORT Web 1.21 dependency; original URL/version/SHA/download/license metadata preserved; active native ORT env untouched"
+    },
+    {
+      "path": ".artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/ort.min.js",
+      "bytes": 347787,
+      "reason": "unused checkout-local ORT Web 1.21 dependency; original URL/version/SHA/download/license metadata preserved; active native ORT env untouched"
+    },
+    {
+      "path": ".artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/upstream-ort.min.js",
+      "bytes": 347787,
+      "reason": "unused checkout-local ORT Web 1.21 dependency; original URL/version/SHA/download/license metadata preserved; active native ORT env untouched"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/.rustc_info.json",
+      "bytes": 2478,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/release/.cargo-artifact-lock",
+      "bytes": 0,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/release/.cargo-build-lock",
+      "bytes": 0,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/release/.cargo-lock",
+      "bytes": 0,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/release/.fingerprint/serde_core-641e8f2271ad72bd/build-script-build-script-build",
+      "bytes": 16,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/release/.fingerprint/serde_core-641e8f2271ad72bd/build-script-build-script-build.json",
+      "bytes": 442,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/release/.fingerprint/serde_core-641e8f2271ad72bd/dep-build-script-build-script-build",
+      "bytes": 14,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/release/.fingerprint/serde_core-641e8f2271ad72bd/invoked.timestamp",
+      "bytes": 48,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/release/.fingerprint/serde_json-09be2c3f9c4f40e2/build-script-build-script-build",
+      "bytes": 16,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/release/.fingerprint/serde_json-09be2c3f9c4f40e2/build-script-build-script-build.json",
+      "bytes": 539,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/release/.fingerprint/serde_json-09be2c3f9c4f40e2/dep-build-script-build-script-build",
+      "bytes": 14,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/release/.fingerprint/serde_json-09be2c3f9c4f40e2/invoked.timestamp",
+      "bytes": 48,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/release/build/serde_core-641e8f2271ad72bd/build-script-build",
+      "bytes": 588544,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/release/build/serde_core-641e8f2271ad72bd/build_script_build-641e8f2271ad72bd",
+      "bytes": 588544,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/release/build/serde_core-641e8f2271ad72bd/build_script_build-641e8f2271ad72bd.d",
+      "bytes": 803,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/release/build/serde_json-09be2c3f9c4f40e2/build-script-build",
+      "bytes": 463440,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/release/build/serde_json-09be2c3f9c4f40e2/build_script_build-09be2c3f9c4f40e2",
+      "bytes": 463440,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/release/build/serde_json-09be2c3f9c4f40e2/build_script_build-09be2c3f9c4f40e2.d",
+      "bytes": 803,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/CACHEDIR.TAG",
+      "bytes": 177,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.cargo-artifact-lock",
+      "bytes": 0,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.cargo-build-lock",
+      "bytes": 0,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.cargo-lock",
+      "bytes": 0,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/ai-sigma-ort-search-9268d331b4fff53e/dep-lib-ai_sigma_ort_search",
+      "bytes": 50,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/ai-sigma-ort-search-9268d331b4fff53e/invoked.timestamp",
+      "bytes": 48,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/ai-sigma-ort-search-9268d331b4fff53e/lib-ai_sigma_ort_search",
+      "bytes": 16,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/ai-sigma-ort-search-9268d331b4fff53e/lib-ai_sigma_ort_search.json",
+      "bytes": 722,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/itoa-192e77e6c59fa1b1/dep-lib-itoa",
+      "bytes": 14,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/itoa-192e77e6c59fa1b1/invoked.timestamp",
+      "bytes": 48,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/itoa-192e77e6c59fa1b1/lib-itoa",
+      "bytes": 16,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/itoa-192e77e6c59fa1b1/lib-itoa.json",
+      "bytes": 399,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/memchr-bc7749947673b7c8/dep-lib-memchr",
+      "bytes": 14,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/memchr-bc7749947673b7c8/invoked.timestamp",
+      "bytes": 48,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/memchr-bc7749947673b7c8/lib-memchr",
+      "bytes": 16,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/memchr-bc7749947673b7c8/lib-memchr.json",
+      "bytes": 508,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/quoridor-ai-b4b554cdf2359ca0/dep-lib-quoridor_ai",
+      "bytes": 51,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/quoridor-ai-b4b554cdf2359ca0/invoked.timestamp",
+      "bytes": 48,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/quoridor-ai-b4b554cdf2359ca0/lib-quoridor_ai",
+      "bytes": 16,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/quoridor-ai-b4b554cdf2359ca0/lib-quoridor_ai.json",
+      "bytes": 556,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/quoridor-core-1598ff49620408f5/dep-lib-quoridor_core",
+      "bytes": 89,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/quoridor-core-1598ff49620408f5/invoked.timestamp",
+      "bytes": 48,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/quoridor-core-1598ff49620408f5/lib-quoridor_core",
+      "bytes": 16,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/quoridor-core-1598ff49620408f5/lib-quoridor_core.json",
+      "bytes": 496,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/ryu-1ef1862212590a0c/dep-lib-ryu",
+      "bytes": 14,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/ryu-1ef1862212590a0c/invoked.timestamp",
+      "bytes": 48,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/ryu-1ef1862212590a0c/lib-ryu",
+      "bytes": 16,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/ryu-1ef1862212590a0c/lib-ryu.json",
+      "bytes": 408,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/serde_core-3c7552459f1e42b5/dep-lib-serde_core",
+      "bytes": 99,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/serde_core-3c7552459f1e42b5/invoked.timestamp",
+      "bytes": 48,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/serde_core-3c7552459f1e42b5/lib-serde_core",
+      "bytes": 16,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/serde_core-3c7552459f1e42b5/lib-serde_core.json",
+      "bytes": 539,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/serde_core-e94baaa2fa833fd7/run-build-script-build-script-build",
+      "bytes": 16,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/serde_core-e94baaa2fa833fd7/run-build-script-build-script-build.json",
+      "bytes": 355,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/serde_json-0407980c6a11bf7c/run-build-script-build-script-build",
+      "bytes": 16,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/serde_json-0407980c6a11bf7c/run-build-script-build-script-build.json",
+      "bytes": 356,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/serde_json-f0cfdaf2d9fa353d/dep-lib-serde_json",
+      "bytes": 14,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/serde_json-f0cfdaf2d9fa353d/invoked.timestamp",
+      "bytes": 48,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/serde_json-f0cfdaf2d9fa353d/lib-serde_json",
+      "bytes": 16,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/.fingerprint/serde_json-f0cfdaf2d9fa353d/lib-serde_json.json",
+      "bytes": 863,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/ai_sigma_ort_search.d",
+      "bytes": 787,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/ai_sigma_ort_search.wasm",
+      "bytes": 282867,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/build/serde_core-e94baaa2fa833fd7/invoked.timestamp",
+      "bytes": 48,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/build/serde_core-e94baaa2fa833fd7/out/private.rs",
+      "bytes": 90,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/build/serde_core-e94baaa2fa833fd7/output",
+      "bytes": 484,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/build/serde_core-e94baaa2fa833fd7/root-output",
+      "bytes": 172,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/build/serde_core-e94baaa2fa833fd7/stderr",
+      "bytes": 0,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/build/serde_json-0407980c6a11bf7c/invoked.timestamp",
+      "bytes": 48,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/build/serde_json-0407980c6a11bf7c/output",
+      "bytes": 132,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/build/serde_json-0407980c6a11bf7c/root-output",
+      "bytes": 172,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/build/serde_json-0407980c6a11bf7c/stderr",
+      "bytes": 0,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/deps/ai_sigma_ort_search.d",
+      "bytes": 607,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/deps/ai_sigma_ort_search.wasm",
+      "bytes": 282867,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/deps/itoa-192e77e6c59fa1b1.d",
+      "bytes": 1645,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/deps/libai_sigma_ort_search.rlib",
+      "bytes": 339912,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/deps/libitoa-192e77e6c59fa1b1.rlib",
+      "bytes": 84512,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/deps/libitoa-192e77e6c59fa1b1.rmeta",
+      "bytes": 79005,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/deps/libmemchr-bc7749947673b7c8.rlib",
+      "bytes": 631670,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/deps/libmemchr-bc7749947673b7c8.rmeta",
+      "bytes": 608504,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/deps/libquoridor_ai-b4b554cdf2359ca0.rlib",
+      "bytes": 194452,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/deps/libquoridor_ai-b4b554cdf2359ca0.rmeta",
+      "bytes": 165070,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/deps/libquoridor_core-1598ff49620408f5.rlib",
+      "bytes": 280358,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/deps/libquoridor_core-1598ff49620408f5.rmeta",
+      "bytes": 97061,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/deps/libryu-1ef1862212590a0c.rlib",
+      "bytes": 82368,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/deps/libryu-1ef1862212590a0c.rmeta",
+      "bytes": 59765,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/deps/libserde_core-3c7552459f1e42b5.rlib",
+      "bytes": 5115488,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/deps/libserde_core-3c7552459f1e42b5.rmeta",
+      "bytes": 5058393,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/deps/libserde_json-f0cfdaf2d9fa353d.rlib",
+      "bytes": 1917230,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/deps/libserde_json-f0cfdaf2d9fa353d.rmeta",
+      "bytes": 1715110,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/deps/memchr-bc7749947673b7c8.d",
+      "bytes": 11944,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/deps/quoridor_ai-b4b554cdf2359ca0.d",
+      "bytes": 1114,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/deps/quoridor_core-1598ff49620408f5.d",
+      "bytes": 1738,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/deps/ryu-1ef1862212590a0c.d",
+      "bytes": 7472,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/deps/serde_core-3c7552459f1e42b5.d",
+      "bytes": 12484,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/deps/serde_json-f0cfdaf2d9fa353d.d",
+      "bytes": 10117,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/libai_sigma_ort_search.d",
+      "bytes": 790,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/target/wasm32-unknown-unknown/release/libai_sigma_ort_search.rlib",
+      "bytes": 339912,
+      "reason": "unused private Cargo target; original source/lock SHA and exact build command/version preserved"
+    }
+  ]
+}
