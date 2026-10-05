@@ -1,0 +1,139 @@
+{
+  "at": "2026-10-05T15:52:53.870200+00:00",
+  "goal": "quoridor-4lc",
+  "operation_owner": "quoridor-4lc.92",
+  "new_science_owner_issue": "quoridor-4lc.287",
+  "existing_producer_issue": "quoridor-4lc.285",
+  "same_64MiB_learner_issue": "quoridor-4lc.286",
+  "new_scope": "research-data/ai-sigma/frame23-independent-evaluation",
+  "new_287_source_result_uniqueGit_temp_forecast_bytes": 8388608,
+  "new_287_WT_bytes": 0,
+  "new_287_release_bytes": 0,
+  "old275_unused_transfer": false,
+  "references": {
+    "manifest": {
+      "path": "research-data/ai-sigma/frame23-steward/storage-287-manifest.json",
+      "bytes": 17612,
+      "sha256": "2fdb6033180fa0bf9a31f1013121d8c91906b2dc1820b9a600b20bd315a791ae"
+    },
+    "measurement": {
+      "path": "research-data/ai-sigma/frame23-steward/storage-287-current.json",
+      "bytes": 19054,
+      "sha256": "4ecca23c6ef2ab9ae9d4b16083caeaf8db99a2855e5dc244641320f9a07bd530"
+    },
+    "previous_stage2_receipt": {
+      "path": "research-data/ai-sigma/frame23-steward/storage-285-stage2-admission.json",
+      "bytes": 5214,
+      "sha256": "52a4278d5477a822fa9107508b6917691044dd9ae26b8b626412753f185a30a6"
+    },
+    "review_contract": {
+      "path": "research-data/ai-sigma/frame22-coordinator/nested-data-independent-review-contract.md",
+      "bytes": 4899,
+      "sha256": "cec63cc4bf9db7ca5a60f365b97eaf1ff55fa6fed487d784cf2604448c54507f"
+    },
+    "learning_contract": {
+      "path": "research-data/ai-sigma/frame22-coordinator/nested-data-learning-contract.md",
+      "bytes": 7455,
+      "sha256": "62ea872094ce74699e7ad9b8ac888b2cbc8960517357ec82da764c751769f7b7"
+    },
+    "previous_Git_point": {
+      "path": ".artifacts/research-team/frame22/285-storage-git-point.json",
+      "bytes": 796,
+      "sha256": "ca4ad4c9e5b050018957544f49b88f08fa2433bad72e54f422850a32f6e20554"
+    }
+  },
+  "previous_8path_commit": "87c56ec436bdb7674d89d98089729186ecdb2b01",
+  "measurement_at": "2026-10-05T15:51:39.996248+00:00",
+  "fresh_retained_allocated_inode_bytes": 10221244416,
+  "reservation_unused_or_conservative_upper_bytes": 1993617408,
+  "unknown_retained_bytes": 134217728,
+  "conservative_current_plus_unused_forecast_unknown_bytes": 12349079552,
+  "cap_bytes": 12884901888,
+  "conservative_margin_bytes": 535822336,
+  "storage_admission": "within",
+  "errors": [],
+  "frame23_current_scope_reservations": [
+    {
+      "category": "frame23-285-additional-data-cache-Git-temp-source-upper",
+      "reserved_bytes": 1073741824,
+      "owner": "285",
+      "basis": "stage2 data/cache/necessary uniqueGit/temp/source 1GiB REPLACES stage1 448MiB, never added to it; old scopes unchanged",
+      "current_allocated_bytes": 63664128,
+      "unused_bytes": 1010077696
+    },
+    {
+      "category": "frame23-285-shared-release-additional-growth-upper",
+      "reserved_bytes": 33554432,
+      "owner": "285",
+      "basis": "new incremental build forecast; shared current already observed once, old build reservations retained",
+      "current_allocated_bytes": 0,
+      "unused_bytes": 33554432
+    },
+    {
+      "category": "frame23-future-learning-checkpoint-output-upper",
+      "reserved_bytes": 67108864,
+      "owner": "286",
+      "basis": "same previously reserved64MiB mapped to assigned286 data/checkpoint roots; not an additional64MiB; release0; storage itself does not authorize learning",
+      "scope_paths": [
+        "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-independent-teacher-learning",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teacher-learning"
+      ],
+      "current_allocated_bytes": 86016,
+      "unused_bytes": 67022848
+    },
+    {
+      "category": "frame23-287-independent-evaluation-growth-upper",
+      "reserved_bytes": 8388608,
+      "owner": "287",
+      "basis": "new explicit source/result/necessaryGit/temp allocation; no transfer from275, no extraWT/release",
+      "scope_paths": ["/workspaces/quoridor/research-data/ai-sigma/frame23-independent-evaluation"],
+      "current_allocated_bytes": 45056,
+      "unused_bytes": 8343552
+    }
+  ],
+  "frame23_combined_cap_bytes": 1182793728,
+  "old_bounds_preserved": true,
+  "old_stage2_receipts_changed": false,
+  "same_286_forecast_not_added_again": true,
+  "unknown_is_free": false,
+  "cleanup_performed": false,
+  "actual_unused_partition": "New285/286/287 scope directories excluded from parent traversal and separately observed with matching reservation category; current held plus max(0,reservation-current) counted once. Shared Git/WT/build attribution and old scope upper bounds remain conservative extra padding; never credited as free. Nonexistent futurecheckpoint directory remains forecast, not evidence loss. Parent assets/data cover its future creation.",
+  "rootcoverage": "Previous directed research roots +same stored teacher/learning roots +new287evaluation current directory. Product outside-scope assets remain protected; no wholehost or futureabsence claim.",
+  "current_runtime": {
+    "at": "2026-10-05T15:52:53.857717+00:00",
+    "phase": "running",
+    "scheduler": {
+      "pid": 1430721,
+      "start_ticks": "46503900",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "scheduler_exact_alive": true,
+    "monitor": {
+      "pid": 1430738,
+      "start_ticks": "46503929",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "monitor_exact_alive": true,
+    "owned": null,
+    "input_count": 24,
+    "input24_match": true,
+    "loaded_config_match": true,
+    "loaded_contract_match": true,
+    "deadlines": {
+      "heavy": "2026-10-05T23:26:03Z",
+      "supervisor": "2026-10-05T23:31:03Z",
+      "monitor": "2026-10-05T23:34:03Z",
+      "final": "2026-10-05T23:36:03Z"
+    }
+  },
+  "keeper_allocated_bytes": 12283904,
+  "keeper_current_plus_forecast_bytes": 17526784,
+  "keeper_guard_bytes": 117440512,
+  "keeper_remaining_forecast_bytes": 5242880,
+  "current_local_management_rss_bytes": 284549120,
+  "storage_only": true,
+  "new_science_or_learning_job_authorized_by_receipt": false,
+  "physics_scope": "each scienceowner uses own Beads contract, fresh exact input/model/mask freeze, CPU/RAM/VRAM and non-overlap admission; no labels/forward content read in this measurement",
+  "future_evaluation_labels_read": false,
+  "scientific_success_certified": false
+}
