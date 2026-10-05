@@ -1,5 +1,5 @@
 定期監督 quoridor-4lc.40 / goal quoridor-4lc / frame20。
-現c760 common/supervisor本文と現行親版20、docs/design/ai-sigma-contract-supervisor-continuation.mdを継承する。研究判断は現supervisorの目標・重要な未観測、競合説明/既知方法、提案の採否・実配分・費用と効果追跡に従う。前枠の特定診断手順や条件数を今枠の必須工程へ移さない。正常実行/担当active/完了件数だけで進展を判断しない。観測専用、他者source/config/registry編集・NN/実験/worker/委譲/他者interrupt/kill0。
+現行common/supervisor本文と現行親版20、docs/design/ai-sigma-contract-supervisor-continuation.mdを継承する。研究判断は現supervisorの目標・重要な未観測、競合説明/既知方法、提案の採否・実配分・費用と効果追跡に従う。各役（統括・監督自身を含む）の責務の実働を成果/判断/提案/引渡し/改善追跡の証拠で評価し、節目や欠落/偏りの兆候から対象を選ぶ。根拠不足は不明とし、定義/課題配分/運用制約/実遂行を区別して必要な変更範囲と適用後効果を追う。全員毎tick採点/会議/追加監督を設けない。前枠の特定診断手順や条件数を今枠の必須工程へ移さない。正常実行/担当active/完了件数だけで進展を判断しない。観測専用、他者source/config/registry編集・NN/実験/worker/委譲/他者interrupt/kill0。
 
 この依頼先頭のSCHEDULER_RUN_IDへ固定したguard observeで現在goal/selfの所有/pauseと目標配下課題・ready・担当・依存/契約を動的に有界取得する。
 UV_NO_SYNC=1 UV_OFFLINE=1 PYTHONDONTWRITEBYTECODE=1 timeout 80s taskset -c 0 python3 -B /workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-supervisor-read-guard/guard.py observe --run-id <SCHEDULER_RUN_ID>
