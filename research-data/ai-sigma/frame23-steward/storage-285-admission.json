@@ -1,0 +1,88 @@
+{
+  "at": "2026-10-05T15:06:53.029438+00:00",
+  "goal": "quoridor-4lc",
+  "operation_owner": "quoridor-4lc.92",
+  "science_owner_issue": "quoridor-4lc.285",
+  "contract_reference": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-coordinator/nested-independent-teacher-contract.md",
+    "bytes": 6737,
+    "sha256": "ba34cee53157891a2a825f6580fbd3220f33d20957b90b4732c7f1b8fc3e8b8a"
+  },
+  "measurement_at": "2026-10-05T15:05:03.002535+00:00",
+  "fresh_retained_allocated_inode_bytes": 10156285952,
+  "unknown_retained_bytes": 134217728,
+  "all_reservation_remaining_or_conservative_upper_bytes": 1445044224,
+  "new_285_data_cache_source_Git_temp_bytes": 469762048,
+  "new_285_shared_build_bytes": 33554432,
+  "new_future_learner_checkpoint_output_forecast_bytes": 67108864,
+  "new_total_forecast_bytes": 570425344,
+  "conservative_current_plus_forecast_unknown_bytes": 11735547904,
+  "cap_bytes": 12884901888,
+  "conservative_margin_bytes": 1149353984,
+  "errors": [],
+  "storage_admission": "WITHIN_REQUESTED_NEW_544MiB_AND_OLD_BOUNDS",
+  "new_285_scope_paths": [
+    "research-data/ai-sigma/frame23-independent-teachers",
+    ".worktree/assets/inputs/frame23-independent-teachers"
+  ],
+  "future_learning_forecast_paths": [
+    ".worktree/assets/checkpoints/frame23-independent-teacher-learning",
+    "research-data/ai-sigma/frame23-independent-teacher-learning"
+  ],
+  "reused_WT": {
+    "path": "/workspaces/quoridor/.worktree/frame22-teacher",
+    "new_WT_allocation": 0,
+    "fresh_covered": true
+  },
+  "old_science_caps_costs_and_receipts_changed": false,
+  "old_reservations_decreased": false,
+  "unknown_is_free": false,
+  "cleanup_performed": false,
+  "old284_transfer": "1MiB inside old274/280 32MiB pool; no additional1MiB parent allocation",
+  "reservations_metric_limit": "Old category bounds preserved in full where exact used-part attribution is unavailable: these extra upper bounds are conservative, not proven reusable unused or renewed historical job permissions. No subtraction of these amounts is used to establish within.",
+  "effective_growth_bound_includes": {
+    "92": 117440512,
+    "Supervisor_old_plus_extension": 33554432,
+    "coordinator": 8388608,
+    "273_274_275_old_scopes": 536870912,
+    "v8_old_pool": 7446528,
+    "old_Rootmaintenance_conservative_residual": 167772160
+  },
+  "current_runtime": {
+    "phase": "running",
+    "scheduler": {
+      "pid": 1430721,
+      "start_ticks": "46503900",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "monitor": {
+      "pid": 1430738,
+      "start_ticks": "46503929",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "owned": null,
+    "input24_match": true,
+    "loaded_config_match": true,
+    "loaded_contract_match": true,
+    "deadlines": {
+      "heavy": "2026-10-05T23:26:03Z",
+      "supervisor": "2026-10-05T23:31:03Z",
+      "monitor": "2026-10-05T23:34:03Z",
+      "final": "2026-10-05T23:36:03Z"
+    }
+  },
+  "keeper_allocated_bytes": 12120064,
+  "keeper_current_plus_remaining_forecast_bytes": 17362944,
+  "keeper_guard_bytes": 117440512,
+  "physics_scope": "storage only; each heavy owner must fresh admit CPU/RAM/cgroup/VRAM/foreign compute and non-overlapping timed work",
+  "GPU_CPU_learning_job_authorized_by_receipt": false,
+  "scientific_success_certified": false,
+  "read_only_data_race_scope": "directed live observation, errors0; future growth bounded separately, not a whole-host freeze",
+  "storage-285-manifest.json_sha256": "ad0e37e3897c8ff57f6468720f3b4ad1836f23c1ff10b1ed083e5e0cdae3592f",
+  "storage-285-current.json_sha256": "86bff2a97c3e9736e86b99ddf978c59bbc5991e27dee138e6d4c5be3e8bc7a53",
+  "manifest_before_format_sha256": "ac4f895a7bcc21d3149bc52b01312d185594fd4b5b326f7f11ff50b8460220f5",
+  "format_correction": {
+    "at": "2026-10-05T15:14:19.656663+00:00",
+    "reason": "initial Prettier check identified manifest layout only; corrected before normal Git handoff; observation/accounting amounts unchanged"
+  }
+}

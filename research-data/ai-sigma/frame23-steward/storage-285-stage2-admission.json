@@ -1,0 +1,126 @@
+{
+  "at": "2026-10-05T15:16:15.854046+00:00",
+  "goal": "quoridor-4lc",
+  "operation_owner": "quoridor-4lc.92",
+  "science_owner_issue": "quoridor-4lc.285",
+  "stage": 2,
+  "contract_reference": {
+    "path": "research-data/ai-sigma/frame22-coordinator/nested-independent-teacher-contract.md",
+    "bytes": 6737,
+    "sha256": "ba34cee53157891a2a825f6580fbd3220f33d20957b90b4732c7f1b8fc3e8b8a"
+  },
+  "result_before_amendment_reference": {
+    "path": "research-data/ai-sigma/frame22-coordinator/nested-independent-teacher-amendment-v2.md",
+    "bytes": 4059,
+    "sha256": "c05eacf991b7f9cac4f09ba5fb49f30035572bc7e2bdf0f7fe4196fd46168a83"
+  },
+  "stage1_reference": {
+    "path": "research-data/ai-sigma/frame23-steward/storage-285-admission.json",
+    "bytes": 3995,
+    "sha256": "19765b0d93688adb8712856ff285b5bb42bb12cb0418167977c98042d6ae5822"
+  },
+  "manifest_reference": {
+    "path": "research-data/ai-sigma/frame23-steward/storage-285-stage2-manifest.json",
+    "bytes": 12448,
+    "sha256": "4f771698b2fb8dbf091f39914688fc221cbd4c7a907775a16d1f13120bfbb382"
+  },
+  "measurement_reference": {
+    "path": "research-data/ai-sigma/frame23-steward/storage-285-stage2-current.json",
+    "bytes": 16328,
+    "sha256": "8ff4de02cb3d58f5832a2603f7a54dcc9092990c79c6ca6ec4b2823dbecb4eee"
+  },
+  "measurement_at": "2026-10-05T15:15:10.154929+00:00",
+  "fresh_retained_allocated_inode_bytes": 10156511232,
+  "all_reservation_remaining_or_conservative_upper_bytes": 2049024000,
+  "unknown_retained_bytes": 134217728,
+  "new_285_data_cache_source_Git_temp_bytes": 1073741824,
+  "replaces_stage1_data_forecast_bytes": 469762048,
+  "increment_from_stage1_bytes": 603979776,
+  "new_285_shared_build_bytes": 33554432,
+  "future_separately_assigned_learner_checkpoint_output_forecast_bytes": 67108864,
+  "new_total_forecast_bytes": 1174405120,
+  "conservative_current_plus_forecast_unknown_bytes": 12339752960,
+  "cap_bytes": 12884901888,
+  "conservative_margin_bytes": 545148928,
+  "storage_admission": "within",
+  "errors": [],
+  "old_bounds_and_unknown_preserved": true,
+  "old_448_and_new1024_added_together": false,
+  "cleanup_performed": false,
+  "unknown_is_free": false,
+  "new_scope_paths": [
+    "research-data/ai-sigma/frame23-independent-teachers",
+    ".worktree/assets/inputs/frame23-independent-teachers"
+  ],
+  "future_learning_forecast_paths": [
+    ".worktree/assets/checkpoints/frame23-independent-teacher-learning",
+    "research-data/ai-sigma/frame23-independent-teacher-learning"
+  ],
+  "reused_WT": {
+    "path": "/workspaces/quoridor/.worktree/frame22-teacher",
+    "new_WT_allocation": 0,
+    "fresh_covered": true
+  },
+  "reservations_metric_limit": "Old category bounds preserved in full where exact used-part attribution is unavailable: these extra upper bounds are conservative, not proven reusable unused or renewed historical job permissions. No subtraction of these amounts is used to establish within.",
+  "effective_growth_bound_includes": {
+    "92": 117440512,
+    "Supervisor_old_plus_extension": 33554432,
+    "coordinator": 8388608,
+    "273_274_275_old_scopes": 536870912,
+    "v8_old_pool": 7446528,
+    "old_Rootmaintenance_conservative_residual": 167772160
+  },
+  "stage_family_bounds": {
+    "stage1_train": 240,
+    "selection": 48,
+    "sealed_future_evaluation": 96,
+    "stage1_total": 384,
+    "stage2_train_max": 1248,
+    "stage2_total_max": 1392
+  },
+  "current_runtime": {
+    "at": "2026-10-05T15:16:15.853907+00:00",
+    "phase": "running",
+    "scheduler": {
+      "pid": 1430721,
+      "start_ticks": "46503900",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "scheduler_exact_alive": true,
+    "monitor": {
+      "pid": 1430738,
+      "start_ticks": "46503929",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "monitor_exact_alive": true,
+    "owned": {
+      "run_id": "2621bfcd-432a-4c7f-a232-2ca4ea095958",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+      "turn_id": "01a10ca0-513a-7683-aead-3cf9f1d06982",
+      "started_at": "2026-10-05T15:13:15.553664+00:00",
+      "max_turn_seconds": null
+    },
+    "input_count": 24,
+    "input24_match": true,
+    "loaded_config_match": true,
+    "loaded_contract_match": true,
+    "deadlines": {
+      "heavy": "2026-10-05T23:26:03Z",
+      "supervisor": "2026-10-05T23:31:03Z",
+      "monitor": "2026-10-05T23:34:03Z",
+      "final": "2026-10-05T23:36:03Z"
+    }
+  },
+  "keeper_allocated_bytes": 12193792,
+  "keeper_current_plus_remaining_forecast_bytes": 17436672,
+  "keeper_guard_bytes": 117440512,
+  "keeper_forecast_includes": {
+    "existing_remaining_management": 3145728,
+    "new_metadata_and_uniqueGit_upper": 2097152
+  },
+  "current_local_management_rss_bytes": 190369792,
+  "physics_scope": "storage only; each heavy owner must fresh admit CPU/RAM/cgroup/VRAM/foreign compute and non-overlapping timed work; Stage2 science requires Coordinator actualforecast/quantity adoption from amended contract",
+  "learning_job_authorized_by_receipt": false,
+  "scientific_success_certified": false,
+  "future_storage_scope": "unforeseen root or actual growth beyond forecast requires new admission; current full bounds already include uniqueGit/temp/source"
+}
