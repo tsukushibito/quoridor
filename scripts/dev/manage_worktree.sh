@@ -99,6 +99,7 @@ case "${1:-}" in
     [[ $# -ge 5 ]] || { usage; exit 2; }
     create_worktree "$2" "$3" "$4" no-checkout
     git -C "$managed_root/$2" sparse-checkout set --cone --sparse-index -- "${@:5}"
+    git -C "$managed_root/$2" read-tree -mu HEAD
     ;;
   lock-existing) [[ $# -eq 1 ]] || { usage; exit 2; }; lock_existing ;;
   verify) [[ $# -eq 1 ]] || { usage; exit 2; }; verify_locks ;;

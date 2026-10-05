@@ -1,0 +1,57 @@
+{
+  "schema": "managed-sparse-handoff-v1",
+  "storage_receipt": ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame21/storage-current-admission.json",
+  "base_git": "ca75221",
+  "locks": "PASS helper verify",
+  "roots": [
+    {
+      "name": "frame21-search",
+      "path": "/workspaces/quoridor/.worktree/frame21-search",
+      "allocated_bytes": 1675264,
+      "forecast": 2097152,
+      "checks": {
+        "Cargo.toml": true,
+        "Cargo.lock": true,
+        "AGENTS.md": true,
+        "crates/quoridor-core/src/position.rs": true,
+        "crates/quoridor-nnue/src/features.rs": true,
+        "scripts/dev/beads.sh": true
+      },
+      "HEAD": "ca7522195dfb8a9b60fabee3022825045074620b",
+      "sparse": [
+        ".agents/research-team",
+        "crates",
+        "docs/development",
+        "scripts/dev"
+      ],
+      "status": ""
+    },
+    {
+      "name": "frame21-features",
+      "path": "/workspaces/quoridor/.worktree/frame21-features",
+      "allocated_bytes": 1818624,
+      "forecast": 6291456,
+      "checks": {
+        "Cargo.toml": true,
+        "Cargo.lock": true,
+        "AGENTS.md": true,
+        "crates/quoridor-core/src/position.rs": true,
+        "crates/quoridor-nnue/src/features.rs": true,
+        "scripts/dev/beads.sh": true
+      },
+      "HEAD": "ca7522195dfb8a9b60fabee3022825045074620b",
+      "sparse": [
+        ".agents/research-team",
+        "crates",
+        "docs/development",
+        "python/quoridor_training",
+        "scripts/dev",
+        "tools/training"
+      ],
+      "status": ""
+    }
+  ],
+  "integration_owner": "coordinator",
+  "builds": "NOT_STARTED",
+  "initial_checkout_failure": "no-checkout set alone left empty; read-tree -mu HEAD populated sparse-selected paths before writerhandoff, helper fixed"
+}

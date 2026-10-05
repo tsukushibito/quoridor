@@ -1,0 +1,48 @@
+{
+  "schema": "managed-sparse-layout-v1",
+  "reason": "before actualcreation remove bulkdesign/report checkout to respect2MiBsearch forecast; no data copied",
+  "integration_owner": "coordinator",
+  "target_start": "ca75221 main explicit frozen sharedsource",
+  "targets": [
+    {
+      "name": "frame21-search",
+      "branch": "codex/frame21-search",
+      "dirs": [
+        "crates",
+        ".agents/research-team",
+        "docs/development",
+        "scripts/dev"
+      ],
+      "source_allocated_forecast": 2097152,
+      "build_extra_forecast": 67108864,
+      "writer": "critic267",
+      "docs_rule": "main canonical docs referenced readonly by absolutepath; writer creates only own new report/result directories"
+    },
+    {
+      "name": "frame21-features",
+      "branch": "codex/frame21-features",
+      "dirs": [
+        "crates",
+        "python/quoridor_training",
+        "tools/training",
+        ".agents/research-team",
+        "docs/development",
+        "scripts/dev"
+      ],
+      "source_allocated_forecast": 6291456,
+      "build_extra_forecast": 67108864,
+      "writer": "hypothesis268",
+      "docs_rule": "main canonical docs referenced readonly by absolutepath; writer creates only own new report/result directories"
+    }
+  ],
+  "shared_build_path": ".artifacts/rust-migration/target",
+  "protected": [
+    ".worktree/ai-sigma assets",
+    "release runner",
+    "uncommitted source",
+    "current environments"
+  ],
+  "admission": "PENDING92 fresh directed allocated+unused forecast, no creation yet",
+  "overlap_rule": "single Git/index setup by coordinator, disjoint coreAI vs NNUE-data-Python writer; actualtiming experiments sequential",
+  "revision": 2
+}
