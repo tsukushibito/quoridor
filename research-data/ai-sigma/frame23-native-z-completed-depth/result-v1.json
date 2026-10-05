@@ -1,0 +1,289 @@
+{
+  "task": "native-z-completed-depth-301-v1",
+  "schema": "native-z-completed-depth-result-301-v1",
+  "status": "FINITE_SAME_COMPLETED_DEPTH1",
+  "native_output_SHA": "18e4f37d9020aa76ab6a2abc76f0849265c3a7fb623c14d6cc8f597bd07e1c8f",
+  "config_SHA": "9842df3ec805d61c3b3c68eb2f380c24946d94e10419452d1772a76a1864714c",
+  "NN": 456,
+  "processed": 822,
+  "command_whole_s": 0.12295610597357154,
+  "native_whole_s": 0.06279524,
+  "pairs": [
+    {
+      "root": 0,
+      "input_id": "game-0-ply-10",
+      "canonical_family": "frame23-299-family-000000",
+      "side": 1,
+      "requested_completed_depth": 1,
+      "native": {
+        "Action": 125,
+        "NN": 105,
+        "TT_hits": 0,
+        "argmax_all_exact": "NOT_RECORDED",
+        "completed": [
+          {
+            "Action": 125,
+            "depth": 1,
+            "elapsed_s": 0.000416542,
+            "evaluations": 105,
+            "nodes": 106,
+            "value": 0.04432828351855278
+          }
+        ],
+        "completed_depth": 1,
+        "delta_updates": 105,
+        "engine": "native-z-BEST1000",
+        "evaluations": 105,
+        "nodes": 106,
+        "pv": [
+          125
+        ],
+        "requested_depth": 1,
+        "root": 0,
+        "stop": "DepthComplete",
+        "value": 0.04432828351855278,
+        "wall_s": 0.000622606
+      },
+      "D": {
+        "Action": 133,
+        "NN": 0,
+        "TT_hits": 0,
+        "argmax_all_exact": "NOT_RECORDED",
+        "completed": [
+          {
+            "Action": 133,
+            "depth": 1,
+            "elapsed_s": 0.00025418,
+            "evaluations": 104,
+            "nodes": 105,
+            "value": 0.1973753124475479
+          }
+        ],
+        "completed_depth": 1,
+        "delta_updates": 0,
+        "engine": "D0b8",
+        "evaluations": 104,
+        "nodes": 105,
+        "pv": [
+          133
+        ],
+        "requested_depth": 1,
+        "root": 0,
+        "stop": "DepthComplete",
+        "value": 0.1973753124475479,
+        "wall_s": 0.000255528
+      },
+      "Action_changed": true,
+      "native_minus_D_value": -0.15304702892899513,
+      "full_legal_leaf_vector": "NOT_RECORDED"
+    },
+    {
+      "root": 1,
+      "input_id": "game-0-ply-11",
+      "canonical_family": "frame23-299-family-000000",
+      "side": 2,
+      "requested_completed_depth": 1,
+      "native": {
+        "Action": 140,
+        "NN": 102,
+        "TT_hits": 0,
+        "argmax_all_exact": "NOT_RECORDED",
+        "completed": [
+          {
+            "Action": 140,
+            "depth": 1,
+            "elapsed_s": 0.000212636,
+            "evaluations": 102,
+            "nodes": 103,
+            "value": 0.21472835540771484
+          }
+        ],
+        "completed_depth": 1,
+        "delta_updates": 102,
+        "engine": "native-z-BEST1000",
+        "evaluations": 102,
+        "nodes": 103,
+        "pv": [
+          140
+        ],
+        "requested_depth": 1,
+        "root": 1,
+        "stop": "DepthComplete",
+        "value": 0.21472835540771484,
+        "wall_s": 0.000214381
+      },
+      "D": {
+        "Action": 58,
+        "NN": 0,
+        "TT_hits": 0,
+        "argmax_all_exact": "NOT_RECORDED",
+        "completed": [
+          {
+            "Action": 58,
+            "depth": 1,
+            "elapsed_s": 0.000408036,
+            "evaluations": 101,
+            "nodes": 102,
+            "value": -0.0
+          }
+        ],
+        "completed_depth": 1,
+        "delta_updates": 0,
+        "engine": "D0b8",
+        "evaluations": 101,
+        "nodes": 102,
+        "pv": [
+          58
+        ],
+        "requested_depth": 1,
+        "root": 1,
+        "stop": "DepthComplete",
+        "value": -0.0,
+        "wall_s": 0.000410408
+      },
+      "Action_changed": true,
+      "native_minus_D_value": 0.21472835540771484,
+      "full_legal_leaf_vector": "NOT_RECORDED"
+    },
+    {
+      "root": 2,
+      "input_id": "game-1-ply-10",
+      "canonical_family": "frame23-299-family-000001",
+      "side": 1,
+      "requested_completed_depth": 1,
+      "native": {
+        "Action": 117,
+        "NN": 101,
+        "TT_hits": 0,
+        "argmax_all_exact": "NOT_RECORDED",
+        "completed": [
+          {
+            "Action": 117,
+            "depth": 1,
+            "elapsed_s": 0.000174828,
+            "evaluations": 101,
+            "nodes": 102,
+            "value": -0.3532894551753998
+          }
+        ],
+        "completed_depth": 1,
+        "delta_updates": 101,
+        "engine": "native-z-BEST1000",
+        "evaluations": 101,
+        "nodes": 102,
+        "pv": [
+          117
+        ],
+        "requested_depth": 1,
+        "root": 2,
+        "stop": "DepthComplete",
+        "value": -0.3532894551753998,
+        "wall_s": 0.000176035
+      },
+      "D": {
+        "Action": 13,
+        "NN": 0,
+        "TT_hits": 0,
+        "argmax_all_exact": "NOT_RECORDED",
+        "completed": [
+          {
+            "Action": 13,
+            "depth": 1,
+            "elapsed_s": 0.000125384,
+            "evaluations": 98,
+            "nodes": 99,
+            "value": -0.0
+          }
+        ],
+        "completed_depth": 1,
+        "delta_updates": 0,
+        "engine": "D0b8",
+        "evaluations": 98,
+        "nodes": 99,
+        "pv": [
+          13
+        ],
+        "requested_depth": 1,
+        "root": 2,
+        "stop": "DepthComplete",
+        "value": -0.0,
+        "wall_s": 0.000131733
+      },
+      "Action_changed": true,
+      "native_minus_D_value": -0.3532894551753998,
+      "full_legal_leaf_vector": "NOT_RECORDED"
+    },
+    {
+      "root": 3,
+      "input_id": "game-1-ply-11",
+      "canonical_family": "frame23-299-family-000001",
+      "side": 2,
+      "requested_completed_depth": 1,
+      "native": {
+        "Action": 140,
+        "NN": 102,
+        "TT_hits": 0,
+        "argmax_all_exact": "NOT_RECORDED",
+        "completed": [
+          {
+            "Action": 140,
+            "depth": 1,
+            "elapsed_s": 0.000173115,
+            "evaluations": 102,
+            "nodes": 103,
+            "value": 0.6755048036575317
+          }
+        ],
+        "completed_depth": 1,
+        "delta_updates": 102,
+        "engine": "native-z-BEST1000",
+        "evaluations": 102,
+        "nodes": 103,
+        "pv": [
+          140
+        ],
+        "requested_depth": 1,
+        "root": 3,
+        "stop": "DepthComplete",
+        "value": 0.6755048036575317,
+        "wall_s": 0.000174421
+      },
+      "D": {
+        "Action": 140,
+        "NN": 0,
+        "TT_hits": 0,
+        "argmax_all_exact": "NOT_RECORDED",
+        "completed": [
+          {
+            "Action": 140,
+            "depth": 1,
+            "elapsed_s": 0.000116795,
+            "evaluations": 101,
+            "nodes": 102,
+            "value": 0.29131263494491577
+          }
+        ],
+        "completed_depth": 1,
+        "delta_updates": 0,
+        "engine": "D0b8",
+        "evaluations": 101,
+        "nodes": 102,
+        "pv": [
+          140
+        ],
+        "requested_depth": 1,
+        "root": 3,
+        "stop": "DepthComplete",
+        "value": 0.29131263494491577,
+        "wall_s": 0.000120382
+      },
+      "Action_changed": false,
+      "native_minus_D_value": 0.38419216871261597,
+      "full_legal_leaf_vector": "NOT_RECORDED"
+    }
+  ],
+  "parent_history_preserved": true,
+  "full_legal_leaf_value_vector": "NOT_RECORDED",
+  "no_labels_models_fit_newgames": true,
+  "samewall_strength_or_deep_truth": false
+}

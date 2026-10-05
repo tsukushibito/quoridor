@@ -1,0 +1,484 @@
+{
+  "task": "native-z-completed-depth-input-301-v1",
+  "schema": "native-z-fixed-input-witnesses-301-v1",
+  "UTC": "2026-10-05T22:32:15.750983+00:00",
+  "prelabel_freeze": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-independent-review/evaluation-freeze-v2.json",
+    "SHA": "5be19b4de964244cf96036231702dbb481efcd540bd1d458ff22a297fc3febea"
+  },
+  "selection_rule": "first four native_witness_indices from prelabel freeze; no values/sign/targets",
+  "indices": [
+    783,
+    784,
+    670,
+    671
+  ],
+  "total_reference_rows": 3280,
+  "rows": [
+    {
+      "id": "game-0-ply-10",
+      "canonical_family": "frame23-299-family-000000",
+      "native_family_alias": "frame23-299-rulea48-block00-r1-family-000000",
+      "partition": "sealed_rulea_transfer_observation",
+      "side": 1,
+      "ply": 10,
+      "cohort": 8,
+      "cohort_pair": 0,
+      "opening_side": 1,
+      "state_key": "4,1|4,7|0|1,6;4,3|0,4;1,2;2,7;3,6;5,7;7,3",
+      "history_key": "62684dfb60f6c0196b9fbc9096c495b1a9f049c5607470bb1ca51ff33b4cecaf",
+      "history_literal": [
+        [
+          "4,0|4,8|0||",
+          1
+        ],
+        [
+          "4,0|4,8|0|4,3|5,7",
+          1
+        ],
+        [
+          "4,0|4,8|0|4,3|0,4;1,2;5,7",
+          1
+        ],
+        [
+          "4,0|4,8|0|4,3|0,4;1,2;2,7;3,6;5,7",
+          1
+        ],
+        [
+          "4,0|4,8|0|1,6;4,3|0,4;1,2;2,7;3,6;5,7;7,3",
+          1
+        ],
+        [
+          "4,0|4,8|1||5,7",
+          1
+        ],
+        [
+          "4,0|4,8|1|4,3|0,4;5,7",
+          1
+        ],
+        [
+          "4,0|4,8|1|4,3|0,4;1,2;2,7;5,7",
+          1
+        ],
+        [
+          "4,0|4,8|1|1,6;4,3|0,4;1,2;2,7;3,6;5,7",
+          1
+        ],
+        [
+          "4,1|4,7|0|1,6;4,3|0,4;1,2;2,7;3,6;5,7;7,3",
+          1
+        ],
+        [
+          "4,1|4,8|1|1,6;4,3|0,4;1,2;2,7;3,6;5,7;7,3",
+          1
+        ]
+      ],
+      "history_key_format": "SHA256(serde_json(sorted_sigma_history_counts_vec))",
+      "actualSTM_ids": [
+        [
+          13,
+          148,
+          190,
+          211,
+          243,
+          257,
+          258,
+          277,
+          284,
+          287,
+          296,
+          307
+        ],
+        [
+          13,
+          148,
+          176,
+          197,
+          228,
+          231,
+          238,
+          257,
+          258,
+          272,
+          296,
+          307
+        ]
+      ],
+      "ids_order": "STM_then_opponent",
+      "STM_distance_f32bits": [
+        1036831949,
+        1036831949
+      ],
+      "distance_order": "STM_then_opponent_f32_le",
+      "input_signature": "0b41a224f782dc88af8d1d699c6e6bec62ab75c30b369b013adf784b2c7dbbaf",
+      "prefix": [
+        206,
+        109,
+        177,
+        162,
+        203,
+        196,
+        130,
+        176,
+        13,
+        67
+      ],
+      "producer_schema": "quoridor-teacher-v1",
+      "producer_source_SHA": "390fc18b796af19b2c93b5d4918f6a643594147b267315a4859d6ca80c482396"
+    },
+    {
+      "id": "game-0-ply-11",
+      "canonical_family": "frame23-299-family-000000",
+      "native_family_alias": "frame23-299-rulea48-block00-r1-family-000000",
+      "partition": "sealed_rulea_transfer_observation",
+      "side": 2,
+      "ply": 11,
+      "cohort": 8,
+      "cohort_pair": 0,
+      "opening_side": 1,
+      "state_key": "4,2|4,7|1|1,6;4,3|0,4;1,2;2,7;3,6;5,7;7,3",
+      "history_key": "f99e68b32ce798ec452ddb170f069d29a565be5040e0416551716124a93d678d",
+      "history_literal": [
+        [
+          "4,0|4,8|0||",
+          1
+        ],
+        [
+          "4,0|4,8|0|4,3|5,7",
+          1
+        ],
+        [
+          "4,0|4,8|0|4,3|0,4;1,2;5,7",
+          1
+        ],
+        [
+          "4,0|4,8|0|4,3|0,4;1,2;2,7;3,6;5,7",
+          1
+        ],
+        [
+          "4,0|4,8|0|1,6;4,3|0,4;1,2;2,7;3,6;5,7;7,3",
+          1
+        ],
+        [
+          "4,0|4,8|1||5,7",
+          1
+        ],
+        [
+          "4,0|4,8|1|4,3|0,4;5,7",
+          1
+        ],
+        [
+          "4,0|4,8|1|4,3|0,4;1,2;2,7;5,7",
+          1
+        ],
+        [
+          "4,0|4,8|1|1,6;4,3|0,4;1,2;2,7;3,6;5,7",
+          1
+        ],
+        [
+          "4,1|4,7|0|1,6;4,3|0,4;1,2;2,7;3,6;5,7;7,3",
+          1
+        ],
+        [
+          "4,1|4,8|1|1,6;4,3|0,4;1,2;2,7;3,6;5,7;7,3",
+          1
+        ],
+        [
+          "4,2|4,7|1|1,6;4,3|0,4;1,2;2,7;3,6;5,7;7,3",
+          1
+        ]
+      ],
+      "history_key_format": "SHA256(serde_json(sorted_sigma_history_counts_vec))",
+      "actualSTM_ids": [
+        [
+          13,
+          139,
+          176,
+          197,
+          228,
+          231,
+          238,
+          257,
+          258,
+          272,
+          296,
+          307
+        ],
+        [
+          22,
+          148,
+          190,
+          211,
+          243,
+          257,
+          258,
+          277,
+          284,
+          287,
+          296,
+          307
+        ]
+      ],
+      "ids_order": "STM_then_opponent",
+      "STM_distance_f32bits": [
+        1036831949,
+        1035154227
+      ],
+      "distance_order": "STM_then_opponent_f32_le",
+      "input_signature": "ced877a7482ba42536e9f9b389b660689e183b1e862df7c662d83176f0d9ce97",
+      "prefix": [
+        206,
+        109,
+        177,
+        162,
+        203,
+        196,
+        130,
+        176,
+        13,
+        67,
+        22
+      ],
+      "producer_schema": "quoridor-teacher-v1",
+      "producer_source_SHA": "390fc18b796af19b2c93b5d4918f6a643594147b267315a4859d6ca80c482396"
+    },
+    {
+      "id": "game-1-ply-10",
+      "canonical_family": "frame23-299-family-000001",
+      "native_family_alias": "frame23-299-rulea48-block00-r1-family-000001",
+      "partition": "sealed_rulea_transfer_observation",
+      "side": 1,
+      "ply": 10,
+      "cohort": 9,
+      "cohort_pair": 0,
+      "opening_side": 2,
+      "state_key": "4,0|4,7|0|0,7;1,5;5,7;7,0|2,3;2,6;3,0;3,4;4,2",
+      "history_key": "3501956532b9c19bfab173112fb0617aa2417e5cf7022be58bd0a4ce873f88c1",
+      "history_literal": [
+        [
+          "4,0|4,7|0|0,7;1,5;5,7;7,0|2,3;2,6;3,0;3,4;4,2",
+          1
+        ],
+        [
+          "4,0|4,8|0||",
+          1
+        ],
+        [
+          "4,0|4,8|0|0,7;1,5|",
+          1
+        ],
+        [
+          "4,0|4,8|0|0,7;1,5|3,0;3,4",
+          1
+        ],
+        [
+          "4,0|4,8|0|0,7;1,5;5,7|3,0;3,4;4,2",
+          1
+        ],
+        [
+          "4,0|4,8|0|0,7;1,5;5,7;7,0|2,6;3,0;3,4;4,2",
+          1
+        ],
+        [
+          "4,0|4,8|1|1,5|",
+          1
+        ],
+        [
+          "4,0|4,8|1|0,7;1,5|3,0",
+          1
+        ],
+        [
+          "4,0|4,8|1|0,7;1,5;5,7|3,0;3,4",
+          1
+        ],
+        [
+          "4,0|4,8|1|0,7;1,5;5,7|2,6;3,0;3,4;4,2",
+          1
+        ],
+        [
+          "4,0|4,8|1|0,7;1,5;5,7;7,0|2,3;2,6;3,0;3,4;4,2",
+          1
+        ]
+      ],
+      "history_key_format": "SHA256(serde_json(sorted_sigma_history_counts_vec))",
+      "actualSTM_ids": [
+        [
+          4,
+          148,
+          169,
+          203,
+          218,
+          223,
+          229,
+          246,
+          252,
+          261,
+          276,
+          295,
+          307
+        ],
+        [
+          13,
+          157,
+          164,
+          169,
+          184,
+          218,
+          239,
+          254,
+          263,
+          269,
+          286,
+          296,
+          306
+        ]
+      ],
+      "ids_order": "STM_then_opponent",
+      "STM_distance_f32bits": [
+        1036831949,
+        1035154227
+      ],
+      "distance_order": "STM_then_opponent_f32_le",
+      "input_signature": "8ddb205de30627fc6c1896069fd8e6ec03f005d0b5a35101a3e6aeed5fa82fda",
+      "prefix": [
+        122,
+        137,
+        148,
+        180,
+        142,
+        165,
+        195,
+        88,
+        171,
+        67
+      ],
+      "producer_schema": "quoridor-teacher-v1",
+      "producer_source_SHA": "390fc18b796af19b2c93b5d4918f6a643594147b267315a4859d6ca80c482396"
+    },
+    {
+      "id": "game-1-ply-11",
+      "canonical_family": "frame23-299-family-000001",
+      "native_family_alias": "frame23-299-rulea48-block00-r1-family-000001",
+      "partition": "sealed_rulea_transfer_observation",
+      "side": 2,
+      "ply": 11,
+      "cohort": 9,
+      "cohort_pair": 0,
+      "opening_side": 2,
+      "state_key": "4,1|4,7|1|0,7;1,5;5,7;7,0|2,3;2,6;3,0;3,4;4,2",
+      "history_key": "6c32abdbb96c6940455f0068ca0d8fcd19082d087ed878fc1e8ce0f4a504afd4",
+      "history_literal": [
+        [
+          "4,0|4,7|0|0,7;1,5;5,7;7,0|2,3;2,6;3,0;3,4;4,2",
+          1
+        ],
+        [
+          "4,0|4,8|0||",
+          1
+        ],
+        [
+          "4,0|4,8|0|0,7;1,5|",
+          1
+        ],
+        [
+          "4,0|4,8|0|0,7;1,5|3,0;3,4",
+          1
+        ],
+        [
+          "4,0|4,8|0|0,7;1,5;5,7|3,0;3,4;4,2",
+          1
+        ],
+        [
+          "4,0|4,8|0|0,7;1,5;5,7;7,0|2,6;3,0;3,4;4,2",
+          1
+        ],
+        [
+          "4,0|4,8|1|1,5|",
+          1
+        ],
+        [
+          "4,0|4,8|1|0,7;1,5|3,0",
+          1
+        ],
+        [
+          "4,0|4,8|1|0,7;1,5;5,7|3,0;3,4",
+          1
+        ],
+        [
+          "4,0|4,8|1|0,7;1,5;5,7|2,6;3,0;3,4;4,2",
+          1
+        ],
+        [
+          "4,0|4,8|1|0,7;1,5;5,7;7,0|2,3;2,6;3,0;3,4;4,2",
+          1
+        ],
+        [
+          "4,1|4,7|1|0,7;1,5;5,7;7,0|2,3;2,6;3,0;3,4;4,2",
+          1
+        ]
+      ],
+      "history_key_format": "SHA256(serde_json(sorted_sigma_history_counts_vec))",
+      "actualSTM_ids": [
+        [
+          13,
+          148,
+          164,
+          169,
+          184,
+          218,
+          239,
+          254,
+          263,
+          269,
+          286,
+          296,
+          306
+        ],
+        [
+          13,
+          148,
+          169,
+          203,
+          218,
+          223,
+          229,
+          246,
+          252,
+          261,
+          276,
+          295,
+          307
+        ]
+      ],
+      "ids_order": "STM_then_opponent",
+      "STM_distance_f32bits": [
+        1035154227,
+        1035154227
+      ],
+      "distance_order": "STM_then_opponent_f32_le",
+      "input_signature": "b34e55437d4a7b2912e2d50ec8494eca40fe1f5377aaab7cb21d697aed8eb1cd",
+      "prefix": [
+        122,
+        137,
+        148,
+        180,
+        142,
+        165,
+        195,
+        88,
+        171,
+        67,
+        13
+      ],
+      "producer_schema": "quoridor-teacher-v1",
+      "producer_source_SHA": "390fc18b796af19b2c93b5d4918f6a643594147b267315a4859d6ca80c482396"
+    }
+  ],
+  "referenced_files": {
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/block00-target-free-inputs-v1.jsonl.gz": "4599e5b38fe903d4ae2a4e5e9f90309e81541e83bba8c42caa51f3bd09959952",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation/block01-target-free-inputs-v1.jsonl.gz": "119f0f73fc341c3db826c08744d6260468c75946c91d2f0712eb821fce00835f"
+  },
+  "raw_order_SHA_as_registered": "5e8d1c3ebc4d73676681f951a2f1435c6cdfea88af39e9751a7ec9768dc5ccef",
+  "raw_order_semantics": "same concatenated target-free file order as freeze, no postlabel reordering",
+  "labels_loaded": false
+}

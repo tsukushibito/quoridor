@@ -1,0 +1,31 @@
+{
+  "task": "native-z-completed-depth-301-v1",
+  "UTC": "2026-10-05T22:38:20.000496+00:00",
+  "exit": 0,
+  "reason": null,
+  "command_wall_s": 0.12295610597357154,
+  "sampled_manager_family_peak_RSS_B": 26505216,
+  "child_waited": true,
+  "recorded_children": [
+    {
+      "pid": 2015829,
+      "start_ticks": "49296324",
+      "ppid": 2015771,
+      "pgrp": 2015829,
+      "cpu_ticks": 0,
+      "state": "D",
+      "rss": 5586944,
+      "cpus": [
+        3
+      ],
+      "argv": [
+        "/workspaces/quoridor/.artifacts/rust-migration/target/release/nnue-diagnose",
+        "--config",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-completed-depth/native-config-v1.json"
+      ]
+    }
+  ],
+  "currentexact": [],
+  "current_process_group": [],
+  "MAX1_consumed": true
+}

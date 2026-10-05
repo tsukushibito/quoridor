@@ -1,0 +1,81 @@
+{
+  "mode": "diagnose",
+  "output": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-completed-depth/native-output-v1.json",
+  "counter": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-completed-depth/native-counter-v1.json",
+  "prefixes": [
+    [
+      206,
+      109,
+      177,
+      162,
+      203,
+      196,
+      130,
+      176,
+      13,
+      67
+    ],
+    [
+      206,
+      109,
+      177,
+      162,
+      203,
+      196,
+      130,
+      176,
+      13,
+      67,
+      22
+    ],
+    [
+      122,
+      137,
+      148,
+      180,
+      142,
+      165,
+      195,
+      88,
+      171,
+      67
+    ],
+    [
+      122,
+      137,
+      148,
+      180,
+      142,
+      165,
+      195,
+      88,
+      171,
+      67,
+      13
+    ]
+  ],
+  "engines": [
+    {
+      "id": "native-z-BEST1000",
+      "kind": "distance_residual",
+      "manifest": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-outcome-z-learning/native-z-1m-r1/best-model/manifest.json"
+    },
+    {
+      "id": "D0b8",
+      "kind": "distance",
+      "a": 0.0,
+      "b": 8.0
+    }
+  ],
+  "depths": [
+    1
+  ],
+  "max_nodes": 2048,
+  "nn_cap": 2000,
+  "processed_cap": 5000,
+  "wall_seconds": 30.0,
+  "max_plies": 200,
+  "cpu_core": 3,
+  "ram_limit": 469762048,
+  "host_ram_reserve": 1073741824
+}
