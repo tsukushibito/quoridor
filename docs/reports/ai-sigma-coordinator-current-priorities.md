@@ -8,87 +8,40 @@
 
 284の保存のみNN0解析を採択し、独立familyの入れ子増量を主配分にする。約5981→1万→3万train行は仮の観測規模で最低必要量ではない。小candidateのD超えを量の入口にせず、完成48familyブロックの除外後yield・準備/生成/資格/保存/学習の全費・代表性・物理上限で段階2を判断する。K診断は有力な別案だが、282は4条件だけを回収した母集団欠測で、安定性/方式負支持を示さない。位置付き距離場・壁効果やleaf/horizonの意味も保留し、量・学習仕事・未選定評価の結果で再比較する。
 
-285の実登録正本はv2の1248train＋48selection＋96sealed future＝1392family、12cohort/P1P2均衡/48family block/new UID・seed domain。旧1152/64/64案は未実行のGit履歴として保持する。初段は最大240train＋48selection＋96future（384family）、段階2はactualforecastを統括が採択後に同入れ子を拡げる。block00は48GOAL/1527適格行/82000 physicalNN/command26.044432秒/guardian29.334519秒、除外前平均31.8125行/familyで旧nominal36.89より低い。生成成功を十分量や学習利益に代えず、追加のcomplete blockで実量を更新する。target-free whitelist metadataと停止immutable cacheは公開済み、履歴の旧形式との互換性は未確認。
+285の実登録正本はv2の1248train＋48selection＋96sealed future＝1392family、12cohort/P1P2均衡/48family block/new UID・seed domain。旧1152/64/64案は未実行のGit履歴として保持する。初段は最大240train＋48selection＋96future（384family）、段階2はactualforecastを統括が採択後に同入れ子を拡げる。最初96trainは96GOAL/3146適格行/166528 physicalNN/command科学52.907474秒。block00は48GOAL/1527適格行/82000 physicalNN/command26.044432秒/guardian29.334519秒、除外前平均31.8125行/familyで旧nominal36.89より低い。生成成功を十分量や学習利益に代えず、追加のcomplete blockで実量を更新する。target-free whitelist metadataと停止immutable cacheは公開済み、履歴の旧形式との互換性は未確認。
 
 286は同D保持H32/zero4/旧scale/common初期/λ0/K64教師で約1万256kseen、約3万256kseen、同3万512kseenの三学習を比較する。量と追加学習仕事を分け、τ1/cohort/epoch差を純量効果へ帰属しない。予定curveとrowID付き予測を保存し、全validation raw参照に対してtrainを先に除外、全段実使用train unionに対する共通finalval maskで再集計する。新selection48入力参照待ちは実データ条件で、全1392/全稿/Root ACKは入口にしない。D未達でもvalidation規則で観測用NNUE一つをfreezeし、採用保留と未選定観測を区別する。
 
 287は実装ownerと別に入力・mask・凍結条件をレビューし、freeze後だけ96future familyでNNUE/D/旧Bの一巡を評価する。rootmean/zを含むraw metadataをlabel-freeと呼ばず、公開whitelist入力とsealed path/hashのみを先に渡す。共通参照はVraw＝旧1248＋旧選定392＋新48、Told＝全5981、Tseen＝全保存学習段階で見たtrain union。未来maskはTseenと全Vrawを参照する。履歴UNVERIFIED/有効family数/lineage/選定による精度不足を保持し、誤差利益から棋力は認定しない。仕様は [入力と共通mask](../../research-data/ai-sigma/frame22-coordinator/nested-mask-and-targetfree-interface.md)。
 
-92の15:15:10 Stage2保管観測はretained10156511232＋全reservation2049024000＋UNKNOWN134217728＝12339752960B<12884901888B、margin545148928B。data1GiBは初段448MiBを置換し追加576MiBだけ、release32MiB/future learner64MiB/旧全保守枠を保持した。287新8MiBは別fresh確認を92へ配送済み、旧pool unusedを流用しない。各heavyのCPU/RAM/GPU/正runtime/版・入力は本人fresh admission、保管内を全未来の保証にしない。
+92の15:15:10 Stage2保管観測はretained10156511232＋全reservation2049024000＋UNKNOWN134217728＝12339752960B<12884901888B、margin545148928B。data1GiBは初段448MiBを置換し追加576MiBだけ、release32MiB/future learner64MiB/旧全保守枠を保持した。287新8MiBは別fresh15:51:39で確認し、保持10221244416＋旧bounds込みunused/保守1993617408＋UNKNOWN134217728＝12349079552B、margin535822336B。285現量63664128B/unused1010077696B、286現86016/unused67022848、287現45056/unused8343552を含め実量と未使用の二重加算を避け、旧pool unused流用/未知割引0。各heavyのCPU/RAM/GPU/正runtime/版・入力は本人fresh admission、保管内を全未来の保証にしない。
 
-以降の時刻付き記述は過去の選定根拠として保持する。現在の入口・分割・参照優先は上記と現契約を使う。
+旧時刻付き選定過程はGit `2fb0de977dbb87bf1112098d58b4db63cd8d96d5` とBeadsの既notesに保存済み。現在計画へ別の進捗台帳を重複させず、以下は現選定を変える有限根拠と次の判断を保持する。
 
-## 初期の選定
+## 選定を変えた保存結果
 
-- **273 / experiment**: 既resident GPUとnative pumpの真batchを測る。前枠CPU推論APIが固定K64 root費の99.1%を占めたため、core改良を重ねるより教師の有効行/全job秒を変える可能性が高い。既TensorRT B8/fill2ms/worker1、activegames24/48で同48familyを各48trajectory、総96trajectoryを結果前固定する。canonicalは片側だけ36train/12選定validation、追加32は未実行保留。限定affinityとhost reserveを分ける明示inference coreの小APIを実装する。実topologyで2/3同physicalを検出し、worker2/inference4の同2logicalへ再配分した。AOTI/CUDA等は利用可能性と全費で代替を選ぶ。
-- **274 / hypothesis**: 保存train-only教師のrootmean/z/距離・局面group対応を分析し、独立game量又は教師目標の小CPU学習対照を実施する。旧A/Bの400step悪化は転移不足を示唆するが、DAG4一般否定にならない。新教師の全局完了を待つ固定工程にせず、登録train ID順の完整12/24/36prefixの最大一つを使う。Aは既96train/256000seenの実学習を完了しBEST200旧選定val .478510425、原前枠との対応を保持した。Bは96+新train、同seen・同初期尺度で比較し、epoch差・tau1生成分布差を残す。新12validationは選定用で未見評価とは呼ばない。
-- **275 / critic**: u128採用後のTT手跨ぎ、ordering、NNUE scratch/差分費を比較して最大残費へ実装を選ぶ。初回4root D/L profileでL advance44.64%/evaluate20.81%、TT97hit/0cutoffだったため、同算術順accumulatorとleaf入力scratchを最大2候補に選んだ。3variant同binaryの順序反転確認でdepth2のAction/値bits/仕事/履歴復帰が一致し、two-candidate prototypeのdelta capacity再用は中央値合計比 .9878/.9782だった。一方leaf hook除去後の最終版は合計比1.001267で、prototypeの約1.2–2.2%減を最終版の利益へ移植できない。最終同binary順序反転確認は既caps内で登録済み、現在は速度利益・main採用を保留する。leaf入力scratchの追加利益は安定せず、保存後にproduction hookを除く方針を採択する。最終源停止pointで統括が実装レビュー・必要テスト根拠を独立確認して採用を判断する。手跨ぎTTはこのwithin-searchだけで棄却せず、合法sequence再利用の機会を保留する。共通coreだけでMCTS教師倍率が上がるとは扱わない。
-- **92 / steward**: 親有効版22、現在runtimeとassets binding、fresh保管admission、既周期監督、終了回収と長期保守判断を所有する。本人claim/publictool、11:57:26新running/loaded、current24hash/正2identityを確認。全新growth込保管11061895168B<12GiB/errors0、最初自然observe/finish/notesbackupが有界到達した。未来全期間・科学・判断品質保証と区別する。
+| 観測                                                                                                                                       | 支持する判断と限界                                                                                                                                                                      |
+| ------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 273: 同48familyのGPU active24/48で全Action列・手数・NN仕事一致。wholeguardian46.852700→41.484730秒、適格1720行、率+12.94%                  | 現active48を教師生成へ使用。固定順/hostwarmがありCPU全生成対照は無い。開発・資格・失敗・保存込みcycle費や棋力倍率ではない。                                                             |
+| 274: 同256kseen、旧train4653＋新1328でB BEST旧val .479679対A .478510、新selection392でD .392634対B .399173                                 | 少数family追加でBEST転移利益は未支持。LAST退行縮小を保持するが、量/tau1/epoch/historyの競合が残り十分量の反証ではない。                                                                 |
+| 278/280: 同入力・教師のλ1補正幅対照。primary新selection .397369対旧B .399173/D .392634、LAST .553384対B .921886                            | 幅制約による退行抑制は限定支持、D超え未支持。追加λ/LR sweepを採らず、独立量と学習仕事を測る。12group再用の選定で未見評価ではない。middleの総寄与は露出massを含みphase固有原因ではない。 |
+| 277/279: actualchild診断でmapbuildがadvance内部66.73%。generic全81 u128 map採用、all81 oracleと96search意味一致、L同仕事比 .724421/.829737 | main供給経路の同情報最適化を採用。D比/wholeprocess方向が揺れ、内部比からwhole探索・MCTS教師・同wall棋力を推定しない。旧scratch hookは性能不安定でmain不採用。                           |
+| 282: K64/256/1024の旧主測定timeout、4complete/92UNKNOWN/12NOT_AVAILABLE。1opening/P1 rootだけで値・Action変化                              | K感度の母集団未成立。generation引数をseedとした前提は撤回。BufWriter修復fixture/buildは成立したが個別期限で修復科学NOT_STARTED、旧MAX/cost/UNKNOWNを親延長で救済しない。                |
 
-## 保留と再検討
+## 競合と規模・全費の比較
 
-全距離map・壁効果・bottleneck等の情報拡張は保持する。教師残差が経路位置情報へ依存する証拠、十分な独立量でも転移しない条件、取得・評価費の見通しで再配分する。LMR/選択探索は正確性を保つ枝の費と品質を見た後、戦術診断・同時間効用を含めて比較する。正式棋力反復は前枠24slotのNNcap打切りを解消する現実的forecastと多様拮抗openingが必要で、未成立を利益なしに変換しない。
+増量を主に選ぶ理由は、従来の新36familyが小さくtau/epochも交絡し、必要量を観測する理由を小candidate成功へ従属させられないこと、かつ現生成経路で追加8hに対する全費を概算できたこと。284のworking20–70行/familyで約1万には58–201追加train family、約3万には344–1201という広い範囲を置いた。生成 .45–2.5秒/family＋5–20秒/jobの仮定では登録最大1392familyの生成約12.9–67.7分、準備/資格/partition/mask/export/記録15–45分を別に見積もる。3倍stressでは生成約184分。これは保証でなく、prefix長/tail/停止回収/学習/保存・Git/未測LLMを含め実blockの費で更新する。1万/3万は理論最低量ではない。
 
-## 実行境界と終了
+同256kseenの入れ子二条件と同最大corpus512kseen一条件により、量と学習仕事を比較する。game一様→row一様なので単純row epochだけで露出を要約せず、family samplecountsも記録する。原旧B savedを再学習せず、共通初期・旧scale・λ0を保持する。全予定曲線/終点/同mask・全分母を残し、最良小checkpointだけで有利な結論へ交換しない。
 
-並行source所有は各契約へ、Git/indexは統括一人。CPU合計4/currentRAM8GiB/保持+有効unused12GiBをfresh currentと全forecastで確認する。各固定時間比較は他計算と重ねず、CPU学習とGPU生成は実資源余裕で調整する。旧cap/予約/unknownをresetしない。15:00までを目安にSupervisor終了振返りの必要範囲を既自然報告から選び、92の整理・長期保守判断と並行して受領・採否を残す。自動延長しない。173正式198非学習、開封test非選定、旧失敗・期限・成績を保持。最高目標は未達。
+決定的K感度は教師投資の情報価値が高い競合。準備済32root×K64/256/1024は旧未成立を尊重し、新実施は記録費を含む別具体配分を必要とする。高Kも真値でなく、固定repeatを独立教師数やseed分散へ数えない。位置付き距離場/壁効果はQF1の疎壁/駒IDで関係を学ぶ帰納バイアスの改善候補で、全map直接入力が無いだけで盤面情報欠落を断定しない。cache/full-delta/undo/Scale/P2/学習/同時間leaf費を含む一群の設計と概算を必要とする。rootmeanからminimax leafへのhorizon/history用途差、TT合法sequenceの有効depthも有力保留。教師→特徴→量を恒久順序にせず、増量のyield/転移/実全費又は対照前提の崩れで次に最大一つを再配分する。
 
-12:10 Supervisor自然点検の提案を採択する。同seen対照は同学習仕事の比較で、各epoch・実steps/seen/学習wall・生成初期化/輸送/保存/回収を含む総費は別に返す。Dにも効く探索改善からNNUE相対強さを代弁しない。新役定義coordinator.mdはRoot276単独writer、92が安全窓/binding/session適用、統括は源重複編集せず新正本保存後に責務・権限・独立性を一度確認する。自己実装の独立評価は別ownerで行い、毎配分の全文再読・全役ACKは増やさない。
+## 実行・所有・終了
 
-12:29 役改定276の指定34pathを20ba314へbyte/SHA一致で保存。改定時にcommonと自分含む6役を正本から一度確認した。273 teacher cache metadataの薄拡張は同teacher WT quoridor-data/lib.rs+必要test、統括sourceレビューと274入力・label-free mask検証を分離して実配分。276の現在runtimeはscheduler1233793/45593355・monitor1235182/45599721へ通常再開済み。恒久idle refreshは92 pendingで科学gateにしない。
+mainが正本、撤去旧checkoutを呼ばない。各契約のsource ownerは一人、統括だけ通常Git/indexを操作する。科学時源・原失敗・必要データは停止path/SHAと復元証拠を保存し、過去版はGit履歴を基本にする。製品採用・push公開、新モデル/依存取得、共有環境更新、未知資産削除、新GPU学習は追加許可無し。173正式198非学習・旧開封test非選定を保持する。
 
-274 pre-B v2はfit/stats前のtrain group選択、state/history/実STM f32入力のOR除外、同cacheのselection labelsとlabel-free mask predicateの区別を明記した。統括のPython readonly初期reviewでこれらの境界を確認、実教師cache/対応group/hashと新入力parityは273→274の後続実観測として保持。fake checksをproducer独立認証へ読み替えない。
+CPU合計4logical/currentRAM8GiB/保持cachetemp＋有効unused12GiB。運用CPU0/1GiB、285worker2/infer4（2/3はphysical siblings）、286CPU1、287CPU3。新固定時間比較・GPU生成・CPU fitを本人fresh physicsで非競合とし、人数/全役ACKをbusyの代わりにしない。GPU推論VRAM6GiB/一job30分、学習はCPUのみ。過去caps/失敗/UNKNOWN/既予約をresetしない。285初段NN5m/科学3600秒、第二段はactual採択後の累積18.2m/12000秒以内、286学習3m/MAX5、287評価100k/MAX2という現在契約を使う。未使用予約の返却はcurrent実量/未使用を確認してからで、historicalcapをfreeと呼ばない。
 
-12:39 275の最終版で性能結論を更新。別owner source reviewは同算術・親不変・per-ply所有・エラー復帰・鍵/探索順の保持を支持するが、性能の支持とは別である。最終版の方向が安定しなければ保守費を増やすmain hook追加は見送り、比較専用源と証拠を保存してNNUE幅/呼出側分布等の変化で再検討する。prototype有利系列だけを採用理由にしない。残advance内部費とTT実sequenceは有力保留案として、科学停止後の次判断で費と判別力を比較する。
+22:45–23:00頃、直近Supervisor報告を再用して目標貢献・機会損失・役実働・累積費/不足の振返りを確保し、92へ停止保存に加え限定整理/長期保守判断を実配送する。既全体cache wipe/再編は見送り、科学比較源/WTは必要保存・読者停止・具体次用途で整理判断する。92は正owned/scheduler23:31:03・monitor23:34:03、各scientistは自己child wait/現在identity不在/source停止、統括は必要保存23:36:03を確認する。通知だけを判断完了にせず、不足は理由・担当・次機会を記録する。自動延長0、最高棋力未達なら親をcloseしない。Coordinator恒久idle refreshは92の自然安全窓pending責任で、現active適用と科学入口を区別する。
 
-273のmetadata v2は明示P1/P2 ids・STM distance/view orderを保持し、統括の別owner source reviewで既tensor writer不変を確認した。実新cache/parity/Bは未成立。GPU資格slot1は[N/A]監視整数化で自己停止し、数学反証ではなくUNKNOWN NN+620保守課金を保持、MAX4内必要0game修復へ。旧verification179.958s/旧static180保守charge/未測UNKNOWNを保持し、残接線に将来NN0準備180sを明示追加配分した（親物理・NN/GPU/MAX4不増、旧reset0）。現在GPU成功を先取りしない。
-
-275最終版の順序反転は .956850、前回1.001267と方向が揺れた。統括は4source SHAと保存全attempt NN243500/processedcharge1566984の和を独立確認し、source correctnessを有限受入れ、main源追加は保留する。必要比較源/dataはGit保全し、特定有利runの改善率を保証しない。Supervisor12:41提案のCPU比範囲も採択:273 GPU24/48同family比較はGPU内対照で、旧CPU4root費を全生成倍率へ外挿しない。今回は適格教師と絶対全job費を優先し、追加CPU全生成jobを必須gateにしない。CPU比が次配分を変える場合に別の有限対照を選ぶ。
-
-13:00 節目: 273資格修復は620 physicalNNで有限PASS、active24は48/48終局・1720適格行（train1328/selection392）、全attempt guardian46.852700秒で36.7108行/秒を記録した。同登録48のactive48を次の既slot3で実測中。canonical一条件の停止cache→274 Bを主接線として優先する。GPU内対照/絶対費を使い、CPU全生成比・教師leaf真値・棋力は未認定。275比較専用4sourceを9d7e02dへbyte/SHA一致保存し、archive112member復元を独立確認、main hooks追加は見送る。次探索配分は安いadvance内部 encode/maps/ID費と合法fullhistory sequence TT機会の診断に限定し、改善実装を先に決めない。既scratch反復より次判断の情報価値が高く、正式棋力比較は教師/B結果と現実的NN費を待つ。
-
-277 / criticへ実配分: advance内部encode/maps/ID取得費と合法sequence fullhistory TTのusable-depth機会を最大1低費用診断で比較する。CPU3単一、compile/test60秒・科学30秒/NN12000/processed32000を別課題へ明示配分し旧275課金は保持。新source/data1MiBとrelease16MiBは旧275確認unused内から移転し、aggregate予約は増やさない。改善実装を先取りせず、273 active48→274 Bの固定計時計算を優先して自然回収後に実測する。main採用判断は統括の別owner判断とする。
-
-13:06 教師接線成立: active24/48は同48family各48GOAL、同1720適格行/Action列/NN仕事。active48全attempt41.484730秒・41.4610行/秒、active24 46.852700秒・36.7108行/秒に対し時間-11.4571%/率+12.9396%。固定実行順/hostwarm/重複spanの限界を保持し、CPU全生成比較は未実施。事前規則でcanonical active48一側を採択し、36train1328/12selection392の停止immutablecacheを274へ実配送、coorはstop/metadata/familymap/cachemanifest SHAを確認。274 v6 fake誤記8PASS1FAILは管理不足として保持し、v7 schema拒否修復後に一Bをfreshadmitする。旧historyキー形式互換未確認を非露出保証へ読み替えず、state/実STM入力の独立mask/parityとcoverageを分ける。277計時は13:15までB入口を有限優先し、B actualstopで早期解放、静的準備は継続。
-
-Supervisor run f1a5552aの節目評価を受入れた。次診断12000NNは旧275残6500では実施できないという費用異論は、別277の新明示NN12000/30秒配分で解決済みで、旧275課金/capは不変更。新課題の配分と保存後の追加NNを分離し親全費へ残す。273 attempt46.852700/41.484730秒は各条件の全attempt境界であり、verification179.958122秒・資格失敗/修復・開局/保管・cacheexport・274学習を含む全cycle費ではない。全CPU/GPU/LLM実費合計はUNKNOWN、科学取得と転移・棋力を分離する。今回と前回自然報告を15:00の振返り十分性判断へ再用し、結果不足だけを追加依頼する。
-
-13:12 274 Bの実対照が成立:同初期ec4167/old train-only尺度/256000seen、新36game1328行+旧4653行=5981train、旧val1248固定。BEST200 B .479678768対A .478510425でbest旧teacherMSE利益は未支持。一方末期2000stepはB train .032026/oldval .679028対A .030967/.849425で劣化が小さい。最有利指標だけを採用せずbest/lateとtau1・epoch・旧選定val再用交絡を別記する。実新入力P2/STM parity、同初期D bit、state/実入力露出mask有限PASS。history literal一致0を全history非露出へ広げない。既job4新392selectionの最大5unique予測1960NNを次解釈へ使う予定、棋力/未見test0。旧v6 fake8PASS1FAIL管理修復の原記録は保持。
-
-13:23 273停止source7pathと必要data/reportをf289a8aへ全211path current Gitbyte一致で統合、42/76member archiveを独立stream復元確認。限定core opt-inと現在metadata/計測入口をmain採用、モデル/棋力採用0。fresh backend warm estimateと再用providerの物理NNの限界をrunner READMEへ明記、274 livecache保持。1000gameの14.404分guardian/既知準備込み16.895分は短い48gameからの線形シナリオでactual NOT_RUN/K800同等0、未知開発/dispatch/Git/保存/scale-tail込み費とは区別する。
-
-274新selection全12game392行の5unique1960NN実測も終了、cum645692/MAX750k・全4slot終了。Dinitial gameMSE .392634対A/B BEST .399633/.399173、z MSE .630042対 .635317/.635439でBEST利益は未支持。sign accuracy .72449対 .76786/.75という別差、late退行減少を捨てず、教師MSE/符号/真値/棋力を同一指標へしない。278 experimentへ保存予測のgroup/phase解析から次1を特徴情報/teacher→leaf目標/過適合対策の候補集合で選ぶNN0課題を実配分（commandwall90秒/管理60、CPU4単logical/RAM512MiB、source/output1MiBは273128の確認unusedから移転、newMLjob/forward/生成0）。役名で実装を固定せず別owner274モデルの分析へ。最初13:45/停止14:00、改善実験の選定はその根拠から枠内に行う。
-
-277初診断observerがimmutable playの戻りを子へ反映せず、親503計時の支持を撤回、TT短PV assert失敗を保持。元PASSjson/源/ログとknownNN1006+UNKNOWN上界2500=3506 charge・slot1消費を保存。統括はprospective child/nextの実戻り代入・親不変/ply+1/full-delta対応・短PV typed処理をsourceで確認し、同NN12000/processed32000/科学30秒/compiletest60内でMAX2へ修復1slotを明示追加した。repairはadvance503=1006NN+first registered initial TT最大4500NNのみ、累積≤9012;2root全再run/短PV救済depth追加0。初失敗を全NNUE/core費の反証にせず、修復実測が次配分を変える範囲へ絞る。
-
-13:34 277修復はactualchild503/full-delta tolerance・親不変/ply+1を支持、旧親計時を撤回したまま保持。両goal whole81mapが観測advanceの66.73%、sortedIDs10.42%だったため、次は同情報のbitparallel wholemapを共通core/NNUEへ実装し同値oracle/同depth-node全費で検証する新279をcriticへ配分する。TTは短PVで未測、根拠なく手跨ぎ改造へ移らない。旧277 NNcharge6735/12000/compile54.745/60/MAX2を保持、新介入の予算は別契約、storage2MiBとrelease32MiBは旧275確認unused内移転。教師側は278保存予測の独立選定へ274提案K64/K256安定性対照を追補し、regularization/位置付き経路/teacher→leafの競合から次1を選ぶ。新selection BEST MSE不支持を方式全否定にしない。Supervisor13:21提案は新selectionが旧selectionと同方向の不支持だった点を採用し、量/step/LRの盲目増量を見送る理由へ反映する。
-
-13:40 278の独立保存予測解析を採択し280 hypothesisへ実装/小CPU学習を実配送。次1は同B5981train/QF1/teacher/initial/scale/batch/256000seenで(v−Dinitial)^2のgameequal λ1罰則のみを追加する。primary200step固定、BESTを後付け選び直さない。newselection gap+.006539のdisplacement .006185と不利alignment、LAST幅/方向退行から転移制約を先に問う。K64/K256序盤教師安定性対照は有力だが、今回主signed悪化がmiddleであり同native費で制約できる案を先行。r縮小だけでDと旧B双方への予測利益が出ない時はteacher/位置付き経路情報の順位へ移す。新課題NN450k/科学180秒/CPU1/RAM2GiB/data8MiBは旧274確認unused移転、旧274645692/MAX4と未知は原保持。278の誤差解析は別owner274モデルに対する評価であり、273自己teacher解析部分の独立性と区別する。
-
-13:49 Root281の役割改善方針を現在選定へ適用。280λ1は方法仮説であり、安く現契約内に試せることだけを優先理由にしない。hypothesisへ、目標/実観測/未解決/残資源を示して、teacher安定性・rootmean→leaf接続、位置付き距離場/壁効果、独立familyと学習量を含む競合の期待効果/情報価値/全工程費/不確実性・本来必要観測量を比較し推奨順位/変更条件を返す実追補を配送する。全比較/固定採点/一案機械停止0。12selection/36newfamilyでは教師MSEも棋力一般化も十分とはせず、新未選定familyの確認や同時間探索の必要量/費は根拠とUNKNOWNを返す。Root3role solewriter、92安全窓の現bindingへ整合、coor重複編集0。新SHA受領時に責務/権限/独立性を一度確認し、変更のない全役毎回ACKを増やさない。
-
-13:53 Supervisor94586の重要留保を採択:middle総signed寄与はnewselection露出mass.872026を含み、phase固有問題の順位/序盤教師K不確実性の低順位を示さない。λ1先行の根拠を同teacher/feature/native費の転移制約という判別へ置き、教師安定性/位置付き情報/必要独立量を排除しない。280への通常active補足と現在計画へ反映、現在方法を機械停止/全層試験を追加しない。279全81oracle/同depth-node全費と品質を待ち、277内部費率を全探索改善へ外挿0。15:00振返りは今回+既自然報告を再用し、280効果/279全費・history未確認・独立棋力など不足を具体担当/次機会へ返す。
-
-13:56 280結果前のhypothesis競合比較を受入れた（selection-view SHAは280-before-result-selection-adoption.json）。λ1は同teacher/input/evaluatorで有利方向を残して不利幅を制約できるかの一仮説。K/seed teacher安定性とrootmean→leaf/horizon、位置付き距離場/壁効果、独立family分布と十分な学習量を、目標効果/情報価値/全工程費/不足観測と変更条件で比較している。現12groupや36newtrainでは十分量を確定せず、新未選定family差のσ/必要精度から概算量を設定する際も小標本・非IID/選定を含む保守性と実取得費が必要。primary200がDと旧B双方へ方向を伴って改善すれば凍結一candidateの未選定family評価を先にし、D縮小だけなら教師安定性/leaf情報の一診断へ移し、λ/LR自動反復はしない。高Kも真値ではなくphase均衡prefix/seed内分散/終局horizonの分母が要る。279同情報map最適化のwhole費は別実結果待ちで、全稿gate0。runtimeはRoot281役適用のoperator_stop/processnull/ownednull点であり、科学入口の正currentloaded確認と方法選定の承認待ちを混同しない。
-
-14:15 更新: 281補正版53pathを270ad708へ全current/blob bytesSHA一致で保存、冗長旧/提案7コピーは除外した。新3role責務/独立性を正本から確認し、毎配分の全文再読/全役ACKは追加しない。Supervisor aa33f9ddの留保を採択:教師→特徴→量を恒久順序にせず、QF1疎壁/駒IDからの関係帰納バイアスと直接全map入力を区別する。不足量のため利益未検出という説明も保持し、小candidate成功だけを量の入口にしない。群数概算は区間幅の計画で、検出力/相関/選定を満たす必要量の確定値でない。
-
-280λ1は13:57に科学停止、primary旧val .480183/新selection .397369対旧B .479679/.399173、D .489404/.392634。幅RMS .078645→.055165、LAST悪化は減ったがprimary新D超えは未支持。追加λ/LR sweepは配分しない。新280 alignmentは−2r(teacher−D)の悪化側符号で+.001692、displacement .003043と合わせDgap+.004735であり、旧278のalignmentと符号定義が反転している。正alignmentを有利方向と誤読しない。元条件/旧費/新329250相当NN/全失敗保持、棋力昇格0。
-
-次の教師案はsource前提を訂正: Search::with_limits第2引数はgenerationでseedではない。fixedroot repeatに独立RNG/noiseがなく、tau RNGはsnapshot後Action選択。元seed分散案を撤回し原文保持、決定的K64/K256/K1024の探索量感度をphase均衡/完全prefixで問う。一root各K一回にして同出力4repeatへの支出を情報価値のある第三Kへ振る。高Kも真値ではなくrootmean→leaf/horizon/同時間棋力は別不足。experiment既savedへ新明示MAX2/総300秒/NN100k/CPU2/GPU6GiB/compile120、data4MiBは273123+2781+新4=旧128内移転、sharedbuild32は既128内未使用に束縛する。phase各train6/selection6最大12、late不足はNOT_AVAILABLEで埋めない。根拠・有力代替・必要量と費はteacher-budget-sensitivity-contract.md、全稿承認待ち0。
-
-279は14:12有限自己検証で全81 oracle/3018NN parityと全96 searchrow意味一致、NN31026、L同仕事中央値合計比 .724421/.829737を報告した。D対照 .958327/1.063151と全process .771508/1.050005の揺れを保持し、全job/MCTS倍率へ換算しない。core+NNUE supplier候補はsource停止SHA/必要packから統括が別owner source reviewとmain経路採否を行う。自己検証を独立評価へ読み替えず、追加scienceなしで引渡し保存を待つ。教師診断CPU2は279 CPU3の自己停止後freshadmit、同physical非競合を保持する。
-
-14:30 279 source停止1139cd22から、統括が別ownerとしてmask/full81/cache supplierと保存96rawrow/48pairを独立確認、全Action/valuebits/PV/depth/node/TT/NN/親復帰一致とL比 .724421/.829737を再算した。六archive7/7/113/7/2/5memberをstream SHA/len確認して、generic Position maps/NNUE supplier/cacheと独立oracle/P2/geometry/undo/terminal jumpの正しさテストをmainへ採用する。比較用microcost/envmodel診断/旧AI+NNUElib hookはarchive-only、科学時bytesは不変更。主入口READMEも更新。main限定NN0検証4PASS/19.979994秒/peak252858368B/全waitexact、追加release16MiBは旧275128の保守112156672内で保持。production探索全費/他width/全教師MCTS/同wall棋力は未測、profile率を保証値にしない。
-
-Supervisor1a7c0825の現枠振返りを受領し採択。既自然点検と今回変化の再用で、教師1720行→1328train/392selection、lambda方向/幅の有限診断、別owner解析とcritic source修復→最適化、統括採否/監督留保の効果を確認した。D超え未見転移/最高棋力と全工程CPU/GPU/LLM費は未達/UNKNOWN。追加全役点検を増やさず、15:00十分性判断は282実結果/不足、279 main保存、92保守判断の不足だけをowner/次機会へ返す。通知を判断完了へ変換せず終了4時刻は固定。
-
-14:54 283追加8hを受領。Root3roleの改定は共通/変更3役を正本で確認し、重要代替の未見積もりを保留理由だけにしない責務を現配分へ適用。親/運用solewriter92はframe22-extension23の新正stateへrunningloaded14/14を確認、scheduler1430721/46503900・monitor1430738/46503929。旧frame22 stopped state/旧failuresは保持する。新追加GPU学習・取得・共有環境変更0、累積/UNKNOWN/旧予約reset0。
-
-282旧資格296NNは有限PASS、旧測定HARD_TIMEOUT180.516275秒/4complete条件、92UNKNOWN+12NOT_AVAILABLEでphase母集団は未成立。source-bound5708NNは元guard UNKNOWN保守98296と別で割引しない。全32root P1、late予定4欠測を保持。出力File無buffer/全record再書込をsourceで確認したため、同root/K/model/searchのoutput-only修復一回MAX3へ明示配分した。旧100kから追加50kを別課金し合計150k、元科学300秒維持/新hard90、旧4MiB+追加2MiBを273確認unusedから移転。science14:57/save15:05の個別期限を親延長で救済しない。現在operation選択を新runtimeへbindしてからowner freshadmit、不足なら修復NOT_STARTED。詳細282-serialization-repair-amendment.md。
-
-284 / hypothesisへ独立family入れ子の必要規模・全費とK/位置付き情報/leaf案の比較を実配送accepted。約5981→10000→30000train positionsは設計仮案で理論必要最低数でない。273観測35.8row/game・guardian.8643秒/gameを点推定とし、24–80row/game、実観測の1–3倍game秒を初期不確実区間に置けば、追加4k行は50–167新train family、追加24k行は300–1000 family、生成のみ概算0.7–7.2分/4.3–43.2分（資格・開局・保存・独立検証群・tail・学習別）。旧分布/新tau1/長さ差の仮定であり実保証0。この範囲でも追加8h内の候補として十分比較可能で、低費K診断だけへ配分を閉じない。
-
-暫定推奨は独立family登録/分割を先固定し、同条件K64の追加trainを完整familyで約1万へ先に到達させ、そのyield/全費で約3万へ同入れ子を更新する段階設計。段階2の条件は物理/取得費/品質/露出の成立で、段階1モデルの小candidate成功を必須gateにしない。固定旧valと新未選定family検証を区別し、同256kseenの量比較に加え量に対応した学習露出を別対照で検討する。代表性/十分量/棋力の証明にしない。284早報15:10を受けて生成・学習の具体条件/NN/保存上限を別Beadsへ配分、Root再承認待ち0。K修復は短窓、増量の静的設計は並行、重要観測の不足を小候補の成否へ従属させない。
-
-旧14:16/14:35 Supervisor振返りと92の14:27整理判断は旧節目の有限結果として再用。追加8hの終了点検は22:45–23:00頃に直近結果と不足だけを既ownerへ配送し、新4期限で実回収/保存を確認する。旧予定時刻に点検したことを新未来終了成功へ付替えない。
+設計詳細: [教師生成](../../research-data/ai-sigma/frame22-coordinator/nested-independent-teacher-contract.md)、[学習](../../research-data/ai-sigma/frame22-coordinator/nested-data-learning-contract.md)、[独立評価](../../research-data/ai-sigma/frame22-coordinator/nested-data-independent-review-contract.md)。状態・担当・次判断はBeads285/286/287と親を正本とする。
