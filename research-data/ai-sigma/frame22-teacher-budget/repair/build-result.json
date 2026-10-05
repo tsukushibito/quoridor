@@ -1,0 +1,75 @@
+{
+  "task": "teacher-budget-282-repair-build",
+  "schema": "teacher-budget-build-v1",
+  "NN": 0,
+  "records": [
+    {
+      "argv": [
+        "rustc",
+        "--edition",
+        "2024",
+        "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-budget/repair/serializer_check.rs",
+        "--extern",
+        "serde_json=/workspaces/quoridor/.artifacts/rust-migration/target/release/deps/libserde_json-0dd12f463af021ff.rlib",
+        "-L",
+        "dependency=/workspaces/quoridor/.artifacts/rust-migration/target/release/deps",
+        "-C",
+        "strip=debuginfo",
+        "-C",
+        "opt-level=1",
+        "-o",
+        "/workspaces/quoridor/.artifacts/rust-migration/target/release/examples/teacher_serializer_check"
+      ],
+      "exit": 0,
+      "wall_s": 1.177455639000982
+    },
+    {
+      "argv": [
+        "/workspaces/quoridor/.artifacts/rust-migration/target/release/examples/teacher_serializer_check",
+        "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-budget/repair/serializer-fixture.json"
+      ],
+      "exit": 0,
+      "wall_s": 0.022016464034095407
+    },
+    {
+      "argv": [
+        "cargo",
+        "build",
+        "--release",
+        "--offline",
+        "--locked",
+        "-p",
+        "quoridor-runner",
+        "--features",
+        "tensorrt",
+        "--example",
+        "teacher_budget"
+      ],
+      "exit": 0,
+      "wall_s": 16.004292474943213
+    },
+    {
+      "argv": [
+        "cargo",
+        "clippy",
+        "--release",
+        "--offline",
+        "--locked",
+        "-p",
+        "quoridor-runner",
+        "--features",
+        "tensorrt",
+        "--example",
+        "teacher_budget",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "wall_s": 2.703505278972443
+    }
+  ],
+  "byte_exact_decode": true,
+  "binary_SHA": "61279695634132a59a1e713bb9b6521b1d3d1bbaee786b63d0f655935a136e60",
+  "whole_s": 19.92513804801274
+}

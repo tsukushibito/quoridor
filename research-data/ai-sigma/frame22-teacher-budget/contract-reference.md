@@ -1,0 +1,1 @@
+quoridor-4lc.282 active Beads全文を契約正本。MAX2 science/100000NN/300s/CPU2single/RAM2GiB guard1.75/GPU6GiB、compiletest120s、prep180管理90、4MiB旧273unused移転。frame22終了15:36:03、source科学14:50/保存15:00。旧273/278費・失敗・予約保持。

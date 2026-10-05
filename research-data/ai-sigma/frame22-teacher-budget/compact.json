@@ -1,0 +1,64 @@
+{
+  "task": "teacher-budget-282-v1",
+  "schema": "teacher-budget-compact-v1",
+  "status": "INCONCLUSIVE_HARD_TIMEOUT_RECORDING",
+  "complete_conditions": 4,
+  "unknown_conditions": 92,
+  "missing_conditions": 12,
+  "paired_roots": 1,
+  "K64_to1024": {
+    "id": "game-0-ply-8",
+    "phase": "opening",
+    "split": "train",
+    "K_pair": [
+      64,
+      1024
+    ],
+    "action": [
+      13,
+      3
+    ],
+    "action_change": true,
+    "rootmean": [
+      -0.21036740225827089,
+      -0.36665168526491243
+    ],
+    "delta_rootmean": -0.15628428300664154,
+    "D0_8": 0.0,
+    "D_residual": [
+      -0.21036740225827089,
+      -0.36665168526491243
+    ],
+    "pi_L1_edge_visit_normalized": 1.272820369594563,
+    "edge_visit_mass": [
+      63,
+      1023
+    ],
+    "search_seconds": [
+      0.133532795,
+      1.3117134
+    ],
+    "terminal_origin": [
+      null,
+      null
+    ],
+    "highK_is_truth": false
+  },
+  "physical_NN_source_bound": 5708,
+  "physical_NN_conservative_upper": 98296,
+  "allocated_source_bound": 540248,
+  "fees": {
+    "compile_lint_command_s": 35.78050296596484,
+    "science_command_s": 195.6362284849165,
+    "NN0_prepare_analysis_command_s": 10.715030550025403,
+    "wrappers_overlap_not_added_to_science": true,
+    "unmeasured_read_thinking_management": "UNKNOWN",
+    "prior_task_fees_unchanged": true
+  },
+  "all_processes_wait_current_exact_absent": true,
+  "all_background_cleanup": true,
+  "source_archive_restore": true,
+  "independent_review": false,
+  "no_seed_variance": true,
+  "highK_truth": false
+}

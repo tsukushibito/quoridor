@@ -1,0 +1,51 @@
+{
+  "task": "teacher-budget-282-v1",
+  "argv": [
+    "/usr/bin/taskset",
+    "-c",
+    "2",
+    "/workspaces/quoridor/.artifacts/rust-migration/target/release/examples/teacher_budget",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-budget/prepare-config.json"
+  ],
+  "exit": 0,
+  "reason": null,
+  "waited": true,
+  "identity": {
+    "pid": 1391483,
+    "start_ticks": "46337655",
+    "ppid": 1391434,
+    "pgrp": 1391483,
+    "cpu_ticks": 0,
+    "state": "R",
+    "rss": 4096,
+    "cpus": [
+      2
+    ],
+    "argv": []
+  },
+  "recorded_children": [
+    {
+      "pid": 1391483,
+      "start_ticks": "46337655",
+      "ppid": 1391434,
+      "pgrp": 1391483,
+      "cpu_ticks": 85,
+      "state": "D",
+      "rss": 198254592,
+      "cpus": [
+        2
+      ],
+      "argv": [
+        "/workspaces/quoridor/.artifacts/rust-migration/target/release/examples/teacher_budget",
+        "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-budget/prepare-config.json"
+      ]
+    }
+  ],
+  "current_exact_remaining": [],
+  "peak_RSS": 198254592,
+  "GPU_peak_sampled_bytes": 0,
+  "GPU_sample_count": 0,
+  "command_wall_s": 10.30856140900869,
+  "management_inclusive_wall_s": 12.585327627020888,
+  "NN": 0
+}

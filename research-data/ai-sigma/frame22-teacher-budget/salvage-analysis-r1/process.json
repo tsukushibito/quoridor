@@ -1,0 +1,53 @@
+{
+  "task": "teacher-budget-282-v1",
+  "argv": [
+    "/usr/bin/taskset",
+    "-c",
+    "2",
+    "/usr/bin/python3",
+    "-B",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-budget/salvage_analysis.py"
+  ],
+  "exit": 0,
+  "reason": null,
+  "waited": true,
+  "identity": {
+    "pid": 1418748,
+    "start_ticks": "46438034",
+    "ppid": 1418665,
+    "pgrp": 1418748,
+    "cpu_ticks": 0,
+    "state": "R",
+    "rss": 4096,
+    "cpus": [
+      2
+    ],
+    "argv": []
+  },
+  "recorded_children": [
+    {
+      "pid": 1418748,
+      "start_ticks": "46438034",
+      "ppid": 1418665,
+      "pgrp": 1418748,
+      "cpu_ticks": 0,
+      "state": "D",
+      "rss": 8167424,
+      "cpus": [
+        2
+      ],
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-budget/salvage_analysis.py"
+      ]
+    }
+  ],
+  "current_exact_remaining": [],
+  "peak_RSS": 8167424,
+  "GPU_peak_sampled_bytes": 0,
+  "GPU_sample_count": 0,
+  "command_wall_s": 0.4064691410167143,
+  "management_inclusive_wall_s": 2.3952892999514006,
+  "NN": 0
+}

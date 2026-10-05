@@ -1,0 +1,56 @@
+{
+  "run_dir": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-budget/repair/build-r3",
+  "task": "teacher-budget-282-repair-build",
+  "issue": "quoridor-4lc.282",
+  "goal": "quoridor-4lc",
+  "owner": "codex:01a0f31d-6d15-7620-bb63-4b4f878e4746",
+  "kind": "build",
+  "GPU": false,
+  "cpu_cores": [
+    2
+  ],
+  "ram_guard": 1879048192,
+  "loaded": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-budget/runtime-binding.json",
+  "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+  "end_at": "2026-10-05T14:57:00Z",
+  "storage_evidence": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-steward/storage-science-admission.json",
+    "SHA": "2a37b7365f642540fe3862b6641cf1c8eb03a147168ff941c5c5423ebaa6464e",
+    "release_growth_cap": 33554432,
+    "data_forecast": 6291456,
+    "WT_forecast": 8388608
+  },
+  "source_hashes": {
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-budget/control.py": "e4d2f381117cd4b7d666ec74280d0db4962ad681493a57cbc4bee4b04949c805",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-budget/runtime-binding.json": "2ddb7c46674f102ed2576fee10bb9a65f083c4650c440fe8f1afa8e5e3691f8d",
+    "/workspaces/quoridor/.worktree/frame22-teacher/crates/quoridor-runner/examples/teacher_budget.rs": "0975998e06bf6de64d68f2282f33c858578a4f0bcef600627f4554dfce591d31",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-budget/build_lint.py": "e863d12a68361d969a919103277d73e4c7ba230b03eec6bf77b480dcb42611e3",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-budget/repair/build.py": "c03de76f05626cdb8f04d63ff4eaf04f29e4cf4437c27abc4ee423642401776f",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-budget/repair/serializer_check.rs": "8cbc0249098a21a1042621cee2455d8db55bc332df934e3c8d021e3003b6c2b6"
+  },
+  "cwd": "/workspaces/quoridor/.worktree/frame22-teacher",
+  "env": {
+    "CARGO_TARGET_DIR": "/workspaces/quoridor/.artifacts/rust-migration/target",
+    "CARGO_BUILD_JOBS": "1",
+    "QUORIDOR_TENSORRT_ROOT": "/home/vscode/.cache/inference/backends/tensorrt-11.3",
+    "QUORIDOR_CUDA_ROOT": "/home/vscode/.cache/inference/envs/quoridor-training/lib/python3.14/site-packages/nvidia/cu13",
+    "LD_LIBRARY_PATH": "/home/vscode/.cache/inference/backends/tensorrt-11.3/lib:/home/vscode/.cache/inference/envs/quoridor-training/lib/python3.14/site-packages/nvidia/cu13/lib",
+    "PATH": "/usr/local/cargo/bin:/usr/local/bin:/usr/bin:/bin"
+  },
+  "hard_seconds": 25,
+  "argv": [
+    "/usr/bin/taskset",
+    "-c",
+    "2",
+    "/usr/bin/python3",
+    "-B",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-budget/repair/build.py"
+  ],
+  "expected": [
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-budget/repair/build-result.json",
+      "task": "teacher-budget-282-repair-build",
+      "schema": "teacher-budget-build-v1"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "task": "teacher-budget-282-build-v2",
+  "schema": "teacher-budget-build-v1",
+  "NN": 0,
+  "records": [
+    {
+      "argv": [
+        "/usr/local/cargo/bin/cargo",
+        "build",
+        "--release",
+        "--offline",
+        "--locked",
+        "-p",
+        "quoridor-runner",
+        "--features",
+        "tensorrt",
+        "--example",
+        "teacher_budget"
+      ],
+      "exit": 0,
+      "wall_s": 14.431830851943232
+    },
+    {
+      "argv": [
+        "/usr/local/cargo/bin/cargo",
+        "clippy",
+        "--release",
+        "--offline",
+        "--locked",
+        "-p",
+        "quoridor-runner",
+        "--features",
+        "tensorrt",
+        "--example",
+        "teacher_budget",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "wall_s": 2.7319567250087857
+    }
+  ],
+  "wall_s": 17.1638294380391
+}

@@ -1,0 +1,38 @@
+{
+  "UTC": "2026-10-05T14:23:05.324289+00:00",
+  "task": "teacher-budget-282-build-v1",
+  "argv": [
+    "/usr/bin/taskset",
+    "-c",
+    "2",
+    "/usr/local/cargo/bin/cargo",
+    "build",
+    "--release",
+    "--offline",
+    "--locked",
+    "-p",
+    "quoridor-runner",
+    "--features",
+    "tensorrt",
+    "--example",
+    "teacher_budget"
+  ],
+  "identity": {
+    "pid": 1387515,
+    "start_ticks": "46323078",
+    "ppid": 1387348,
+    "pgrp": 1387515,
+    "cpu_ticks": 0,
+    "state": "R",
+    "rss": 4096,
+    "cpus": [
+      2
+    ],
+    "argv": []
+  },
+  "current_ancestors": [
+    1,
+    1387276,
+    1387348
+  ]
+}

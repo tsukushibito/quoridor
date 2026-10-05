@@ -1,0 +1,2971 @@
+{
+  "CPU_reference_NN": 130,
+  "RNG_seed_variance_measured": false,
+  "allocated_nodes": 24914,
+  "backend": "cuda-tensorrt-graph",
+  "backend_init_seconds": 0.17610977,
+  "highK_is_truth": false,
+  "logical_GPU_NN": 130,
+  "mode": "qualify",
+  "model_SHA": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+  "new_games": 0,
+  "physical_NN": 296,
+  "records": [
+    {
+      "cpu": {
+        "K": 64,
+        "action": 13,
+        "advance_invocations_not_processed_nodes": 65,
+        "allocated_nodes": 6264,
+        "edges": [
+          {
+            "action": 13,
+            "prior": 0.3795996388420835,
+            "value_sum": 9.609522253274918,
+            "visits": 56
+          },
+          {
+            "action": 3,
+            "prior": 0.17222560976102363,
+            "value_sum": 1.9379501496441662,
+            "visits": 4
+          },
+          {
+            "action": 5,
+            "prior": 0.041774222437591164,
+            "value_sum": 0.6635912656784058,
+            "visits": 1
+          },
+          {
+            "action": 81,
+            "prior": 0.004797368185008491,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 145,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 82,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 146,
+            "prior": 0.0072597507997980695,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 83,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 147,
+            "prior": 0.004615668798912792,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 84,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 148,
+            "prior": 0.008630405397841791,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 85,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 149,
+            "prior": 0.004776577097019532,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 86,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 150,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 87,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 151,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 88,
+            "prior": 0.004024570940875358,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 152,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 89,
+            "prior": 0.011723531719147438,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 153,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 90,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 154,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 155,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 157,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 94,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 158,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 95,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 159,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 96,
+            "prior": 0.0021612387263550913,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 160,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 97,
+            "prior": 0.03596510833930507,
+            "value_sum": 0.6516026258468628,
+            "visits": 1
+          },
+          {
+            "action": 161,
+            "prior": 0.002782562026060985,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 98,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 162,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 99,
+            "prior": 0.0022128576679225974,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 163,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 100,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 164,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 101,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 165,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 102,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 166,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 103,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 167,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 104,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 168,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 105,
+            "prior": 0.1030855271270036,
+            "value_sum": 0.7273904085159302,
+            "visits": 1
+          },
+          {
+            "action": 106,
+            "prior": 0.008323323469547932,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 170,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 107,
+            "prior": 0.0030315326472294384,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 171,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 108,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 172,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 109,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 173,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 110,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 174,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 111,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 175,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 112,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 176,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 114,
+            "prior": 0.006001557692170997,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 178,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 115,
+            "prior": 0.004594233323045257,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 179,
+            "prior": 0.003701683606055213,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 116,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 180,
+            "prior": 0.0044154688344720545,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 181,
+            "prior": 0.00419576930020623,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 183,
+            "prior": 0.0026101644111280707,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 120,
+            "prior": 0.014392276408761681,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 184,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 186,
+            "prior": 0.00300090547617469,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 190,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 127,
+            "prior": 0.003666385058533444,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 191,
+            "prior": 0.0020551552235956723,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 128,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 192,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 129,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 193,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 130,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 194,
+            "prior": 0.004301869190822452,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 131,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 195,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 135,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 199,
+            "prior": 0.0021196159790876678,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 136,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 200,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 137,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 201,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 138,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 202,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 139,
+            "prior": 0.003548362005141372,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 203,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 140,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 141,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 205,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 143,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 207,
+            "prior": 0.002328492827550086,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 144,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 208,
+            "prior": 0.0020296938097218555,
+            "value_sum": 0.0,
+            "visits": 0
+          }
+        ],
+        "fault": null,
+        "generation": 1,
+        "generation_is_not_seed": true,
+        "legal": [
+          3,
+          5,
+          13,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100,
+          101,
+          102,
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111,
+          112,
+          114,
+          115,
+          116,
+          120,
+          127,
+          128,
+          129,
+          130,
+          131,
+          135,
+          136,
+          137,
+          138,
+          139,
+          140,
+          141,
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149,
+          150,
+          151,
+          152,
+          153,
+          154,
+          155,
+          157,
+          158,
+          159,
+          160,
+          161,
+          162,
+          163,
+          164,
+          165,
+          166,
+          167,
+          168,
+          170,
+          171,
+          172,
+          173,
+          174,
+          175,
+          176,
+          178,
+          179,
+          180,
+          181,
+          183,
+          184,
+          186,
+          190,
+          191,
+          192,
+          193,
+          194,
+          195,
+          199,
+          200,
+          201,
+          202,
+          203,
+          205,
+          207,
+          208
+        ],
+        "logical_NN": 64,
+        "max_depth": 18,
+        "root_nn": 0.12652583420276642,
+        "root_visits": 64,
+        "rootmean": -0.2103676698243362,
+        "seconds": 0.236930553,
+        "status": "COMPLETE",
+        "terminal_no_NN": 0,
+        "terminal_origin": null
+      },
+      "gpu": {
+        "K": 64,
+        "action": 13,
+        "advance_invocations_not_processed_nodes": 65,
+        "allocated_nodes": 6264,
+        "edges": [
+          {
+            "action": 13,
+            "prior": 0.3795996147429807,
+            "value_sum": 9.60950656235218,
+            "visits": 56
+          },
+          {
+            "action": 3,
+            "prior": 0.17222543458012923,
+            "value_sum": 1.9379495806060731,
+            "visits": 4
+          },
+          {
+            "action": 5,
+            "prior": 0.04177424966479154,
+            "value_sum": 0.6635910868644714,
+            "visits": 1
+          },
+          {
+            "action": 81,
+            "prior": 0.004797371311790923,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 145,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 82,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 146,
+            "prior": 0.007259752069768154,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 83,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 147,
+            "prior": 0.0046156707068071645,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 84,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 148,
+            "prior": 0.008630402792286893,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 85,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 149,
+            "prior": 0.004776583626728571,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 86,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 150,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 87,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 151,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 88,
+            "prior": 0.004024576442571807,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 152,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 89,
+            "prior": 0.01172350581893086,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 153,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 90,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 154,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 155,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 157,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 94,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 158,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 95,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 159,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 96,
+            "prior": 0.002161240650266317,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 160,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 97,
+            "prior": 0.03596508890654448,
+            "value_sum": 0.6516021490097046,
+            "visits": 1
+          },
+          {
+            "action": 161,
+            "prior": 0.002782563839652463,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 98,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 162,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 99,
+            "prior": 0.002212856999851763,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 163,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 100,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 164,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 101,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 165,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 102,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 166,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 103,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 167,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 104,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 168,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 105,
+            "prior": 0.1030856434701492,
+            "value_sum": 0.7273905873298645,
+            "visits": 1
+          },
+          {
+            "action": 106,
+            "prior": 0.008323338816630697,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 170,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 107,
+            "prior": 0.0030315360686412897,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 171,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 108,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 172,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 109,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 173,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 110,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 174,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 111,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 175,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 112,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 176,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 114,
+            "prior": 0.006001565896461373,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 178,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 115,
+            "prior": 0.004594238508133516,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 179,
+            "prior": 0.0037016754281094023,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 116,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 180,
+            "prior": 0.004415473817805291,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 181,
+            "prior": 0.00419577703663735,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 183,
+            "prior": 0.002610164245420272,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 120,
+            "prior": 0.014392275495059684,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 184,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 186,
+            "prior": 0.00300089670001386,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 190,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 127,
+            "prior": 0.003666376958570962,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 191,
+            "prior": 0.0020551546031358546,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 128,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 192,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 129,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 193,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 130,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 194,
+            "prior": 0.0043018678920704444,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 131,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 195,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 135,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 199,
+            "prior": 0.0021196168552344574,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 136,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 200,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 137,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 201,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 138,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 202,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 139,
+            "prior": 0.003548366855847429,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 203,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 140,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 141,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 205,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 143,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 207,
+            "prior": 0.0023284937900364677,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 144,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 208,
+            "prior": 0.0020296946486991667,
+            "value_sum": 0.0,
+            "visits": 0
+          }
+        ],
+        "fault": null,
+        "generation": 1,
+        "generation_is_not_seed": true,
+        "legal": [
+          3,
+          5,
+          13,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100,
+          101,
+          102,
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111,
+          112,
+          114,
+          115,
+          116,
+          120,
+          127,
+          128,
+          129,
+          130,
+          131,
+          135,
+          136,
+          137,
+          138,
+          139,
+          140,
+          141,
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149,
+          150,
+          151,
+          152,
+          153,
+          154,
+          155,
+          157,
+          158,
+          159,
+          160,
+          161,
+          162,
+          163,
+          164,
+          165,
+          166,
+          167,
+          168,
+          170,
+          171,
+          172,
+          173,
+          174,
+          175,
+          176,
+          178,
+          179,
+          180,
+          181,
+          183,
+          184,
+          186,
+          190,
+          191,
+          192,
+          193,
+          194,
+          195,
+          199,
+          200,
+          201,
+          202,
+          203,
+          205,
+          207,
+          208
+        ],
+        "logical_NN": 64,
+        "max_depth": 18,
+        "root_nn": 0.12652622163295746,
+        "root_visits": 64,
+        "rootmean": -0.21036740225827089,
+        "seconds": 0.071547123,
+        "status": "COMPLETE",
+        "terminal_no_NN": 0,
+        "terminal_origin": null
+      },
+      "id": "game-0-ply-8",
+      "input_history_replay": "PASS",
+      "maxabs": 3.337860107421875e-6,
+      "prefix": [
+        196,
+        133,
+        125,
+        123,
+        177,
+        206,
+        118,
+        92
+      ],
+      "side": 1
+    },
+    {
+      "cpu": {
+        "K": 64,
+        "action": 75,
+        "advance_invocations_not_processed_nodes": 65,
+        "allocated_nodes": 6193,
+        "edges": [
+          {
+            "action": 67,
+            "prior": 0.07350796024810502,
+            "value_sum": 0.6612034440040588,
+            "visits": 1
+          },
+          {
+            "action": 75,
+            "prior": 0.6711158622175797,
+            "value_sum": -10.15984731912613,
+            "visits": 62
+          },
+          {
+            "action": 77,
+            "prior": 0.027636918282370138,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 81,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 145,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 82,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 146,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 83,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 147,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 84,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 148,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 85,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 149,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 86,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 150,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 87,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 151,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 88,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 152,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 89,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 153,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 90,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 154,
+            "prior": 0.0016733548332622647,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 155,
+            "prior": 0.001763500405669376,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 157,
+            "prior": 0.0052634967794841225,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 94,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 158,
+            "prior": 0.002554314424770001,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 95,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 159,
+            "prior": 0.0016769944980845732,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 96,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 160,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 97,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 161,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 98,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 162,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 99,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 163,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 100,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 164,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 101,
+            "prior": 0.002041777189844187,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 165,
+            "prior": 0.0017886980998317338,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 102,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 166,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 103,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 167,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 104,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 168,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 105,
+            "prior": 0.006209097871186847,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 106,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 170,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 107,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 171,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 108,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 172,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 109,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 173,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 110,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 174,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 111,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 175,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 112,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 176,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 114,
+            "prior": 0.003272084007566173,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 178,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 115,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 179,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 116,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 180,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 181,
+            "prior": 0.006728581475497214,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 183,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 120,
+            "prior": 0.003948263647971536,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 184,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 186,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 190,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 127,
+            "prior": 0.004348475876260057,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 191,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 128,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 192,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 129,
+            "prior": 0.009020480507157938,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 193,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 130,
+            "prior": 0.008779801371294405,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 194,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 131,
+            "prior": 0.017747957463650592,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 195,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 135,
+            "prior": 0.0026469628669447422,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 199,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 136,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 200,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 137,
+            "prior": 0.008662919577025198,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 201,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 138,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 202,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 139,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 203,
+            "prior": 0.0024386685562210325,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 140,
+            "prior": 0.007190132212736112,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 141,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 205,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 143,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 207,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 144,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 208,
+            "prior": 0.0016453632606011222,
+            "value_sum": 0.0,
+            "visits": 0
+          }
+        ],
+        "fault": null,
+        "generation": 1,
+        "generation_is_not_seed": true,
+        "legal": [
+          67,
+          75,
+          77,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100,
+          101,
+          102,
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111,
+          112,
+          114,
+          115,
+          116,
+          120,
+          127,
+          128,
+          129,
+          130,
+          131,
+          135,
+          136,
+          137,
+          138,
+          139,
+          140,
+          141,
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149,
+          150,
+          151,
+          152,
+          153,
+          154,
+          155,
+          157,
+          158,
+          159,
+          160,
+          161,
+          162,
+          163,
+          164,
+          165,
+          166,
+          167,
+          168,
+          170,
+          171,
+          172,
+          173,
+          174,
+          175,
+          176,
+          178,
+          179,
+          180,
+          181,
+          183,
+          184,
+          186,
+          190,
+          191,
+          192,
+          193,
+          194,
+          195,
+          199,
+          200,
+          201,
+          202,
+          203,
+          205,
+          207,
+          208
+        ],
+        "logical_NN": 64,
+        "max_depth": 18,
+        "root_nn": 0.6453530192375183,
+        "root_visits": 64,
+        "rootmean": 0.15849995147436857,
+        "seconds": 0.233550593,
+        "status": "COMPLETE",
+        "terminal_no_NN": 0,
+        "terminal_origin": null
+      },
+      "gpu": {
+        "K": 64,
+        "action": 75,
+        "advance_invocations_not_processed_nodes": 65,
+        "allocated_nodes": 6193,
+        "edges": [
+          {
+            "action": 67,
+            "prior": 0.07350770463678807,
+            "value_sum": 0.6612036228179932,
+            "visits": 1
+          },
+          {
+            "action": 75,
+            "prior": 0.6711164086403302,
+            "value_sum": -10.159828402101994,
+            "visits": 62
+          },
+          {
+            "action": 77,
+            "prior": 0.02763688148198013,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 81,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 145,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 82,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 146,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 83,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 147,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 84,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 148,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 85,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 149,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 86,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 150,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 87,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 151,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 88,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 152,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 89,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 153,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 90,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 154,
+            "prior": 0.001673353402996192,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 155,
+            "prior": 0.0017634963756496004,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 157,
+            "prior": 0.005263489770789002,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 94,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 158,
+            "prior": 0.00255431285051717,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 95,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 159,
+            "prior": 0.0016769934645339223,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 96,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 160,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 97,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 161,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 98,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 162,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 99,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 163,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 100,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 164,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 101,
+            "prior": 0.0020417725238954716,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 165,
+            "prior": 0.0017886957180615593,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 102,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 166,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 103,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 167,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 104,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 168,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 105,
+            "prior": 0.0062090940444496975,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 106,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 170,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 107,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 171,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 108,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 172,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 109,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 173,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 110,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 174,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 111,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 175,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 112,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 176,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 114,
+            "prior": 0.0032720734095785654,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 178,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 115,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 179,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 116,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 180,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 181,
+            "prior": 0.006728582141251711,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 183,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 120,
+            "prior": 0.003948264979969164,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 184,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 186,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 190,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 127,
+            "prior": 0.004348477343274439,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 191,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 128,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 192,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 129,
+            "prior": 0.009020490002288217,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 193,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 130,
+            "prior": 0.008779812706351444,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 194,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 131,
+            "prior": 0.017747912673894688,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 195,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 135,
+            "prior": 0.0026469637599317803,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 199,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 136,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 200,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 137,
+            "prior": 0.00866293282658729,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 201,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 138,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 202,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 139,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 203,
+            "prior": 0.0024386693789373005,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 140,
+            "prior": 0.007190124352857137,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 141,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 205,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 143,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 207,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 144,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          },
+          {
+            "action": 208,
+            "prior": 0.0016453606774061928,
+            "value_sum": 0.0,
+            "visits": 0
+          }
+        ],
+        "fault": null,
+        "generation": 1,
+        "generation_is_not_seed": true,
+        "legal": [
+          67,
+          75,
+          77,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100,
+          101,
+          102,
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111,
+          112,
+          114,
+          115,
+          116,
+          120,
+          127,
+          128,
+          129,
+          130,
+          131,
+          135,
+          136,
+          137,
+          138,
+          139,
+          140,
+          141,
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149,
+          150,
+          151,
+          152,
+          153,
+          154,
+          155,
+          157,
+          158,
+          159,
+          160,
+          161,
+          162,
+          163,
+          164,
+          165,
+          166,
+          167,
+          168,
+          170,
+          171,
+          172,
+          173,
+          174,
+          175,
+          176,
+          178,
+          179,
+          180,
+          181,
+          183,
+          184,
+          186,
+          190,
+          191,
+          192,
+          193,
+          194,
+          195,
+          199,
+          200,
+          201,
+          202,
+          203,
+          205,
+          207,
+          208
+        ],
+        "logical_NN": 64,
+        "max_depth": 18,
+        "root_nn": 0.6453531980514526,
+        "root_visits": 64,
+        "rootmean": 0.15849965589586645,
+        "seconds": 0.086280612,
+        "status": "COMPLETE",
+        "terminal_no_NN": 0,
+        "terminal_origin": null
+      },
+      "id": "game-0-ply-9",
+      "input_history_replay": "PASS",
+      "maxabs": 3.5762786865234375e-6,
+      "prefix": [
+        196,
+        133,
+        125,
+        123,
+        177,
+        206,
+        118,
+        92,
+        13
+      ],
+      "side": 2
+    }
+  ],
+  "replay_seconds": 1.5250731979999999,
+  "rootnoise": false,
+  "schema": "teacher-budget-v1",
+  "status": "RECORDED",
+  "task": "teacher-budget-282-v1",
+  "warm_NN": 36,
+  "whole_seconds": 2.443875907
+}

@@ -1,0 +1,48 @@
+--- 
++++ 
+@@ -129,6 +129,12 @@
+         json!({"K":k,"status":if complete {"COMPLETE"}else{"CENSORED"},"fault":fault,"action":v.action,"rootmean":v.root_mean,"root_nn":first,"root_visits":v.root_visits,"logical_NN":v.nn_calls,"terminal_no_NN":v.terminal_no_nn,"allocated_nodes":v.nodes,"max_depth":v.max_depth,"advance_invocations_not_processed_nodes":advances,"terminal_origin":v.terminal_value,"legal":legal,"edges":edges,"seconds":start.elapsed().as_secs_f64(),"generation":1,"generation_is_not_seed":true}),
+     )
+ }
++fn write_json(path: &std::path::Path, value: &Value) -> Result<()> {
++    let mut writer = std::io::BufWriter::new(File::create(path)?);
++    serde_json::to_writer(&mut writer, value)?;
++    std::io::Write::flush(&mut writer)?;
++    Ok(())
++}
+ fn run() -> Result<()> {
+     let cfg: Config = serde_json::from_reader(File::open(
+         std::env::args().nth(1).ok_or("config required")?,
+@@ -160,8 +166,8 @@
+     let replay_s = start.elapsed().as_secs_f64();
+     let input_records: Vec<_> = inputs.iter().map(|(r,_)|json!({"id":r.id,"group":r.family,"ply":r.ply,"side":r.side,"prefix":r.prefix,"prefix_SHA":format!("{:x}",Sha256::digest(serde_json::to_vec(&r.prefix).unwrap())),"state_key":r.state_key,"history_key":r.history_key,"ids":r.ids,"distance":r.distance,"feature_signature":r.feature_signature,"replay":"PASS"})).collect();
+     if cfg.mode == "prepare" {
+-        serde_json::to_writer(
+-            File::create(cfg.output)?,
++        write_json(
++            &cfg.output,
+             &json!({"task":cfg.task,"schema":cfg.schema,"mode":cfg.mode,"records":input_records,"NN":0,"replay_seconds":replay_s}),
+         )?;
+         return Ok(());
+@@ -224,8 +230,8 @@
+                 allocated += result["allocated_nodes"].as_u64().unwrap() as usize;
+                 let d = (8.0f32 * (r.distance[1] - r.distance[0])).tanh();
+                 records.push(json!({"id":r.id,"group":r.family,"phase":root.phase,"split":root.split,"ply":r.ply,"prefix":r.prefix,"state_key":r.state_key,"history_key":r.history_key,"feature_signature":r.feature_signature,"side":r.side,"distance":r.distance,"D0_8":d,"saved_teacher":r.teacher,"result":result}));
+-                serde_json::to_writer(
+-                    File::create(cfg.output.with_extension("partial.json"))?,
++                write_json(
++                    &cfg.output.with_extension("partial.json"),
+                     &json!({"task":cfg.task,"schema":cfg.schema,"partial":true,"records":records,"logical_NN":calls,"warm_NN":warm_nn,"allocated_nodes":allocated}),
+                 )?;
+             }
+@@ -234,8 +240,8 @@
+     if calls + cpu_calls + warm_nn > cfg.nn_cap || allocated > cfg.allocated_cap {
+         return Err("TOTAL_COUNTER_CAP".into());
+     }
+-    serde_json::to_writer(
+-        File::create(cfg.output)?,
++    write_json(
++        &cfg.output,
+         &json!({"task":cfg.task,"schema":cfg.schema,"mode":cfg.mode,"status":"RECORDED","records":records,"model_SHA":cfg.model_sha,"backend":gpu.metadata().backend,"logical_GPU_NN":calls,"CPU_reference_NN":cpu_calls,"warm_NN":warm_nn,"physical_NN":calls+cpu_calls+warm_nn,"allocated_nodes":allocated,"replay_seconds":replay_s,"backend_init_seconds":init_s,"whole_seconds":start.elapsed().as_secs_f64(),"rootnoise":false,"RNG_seed_variance_measured":false,"new_games":0,"highK_is_truth":false}),
+     )?;
+     Ok(())

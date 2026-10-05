@@ -1,0 +1,970 @@
+{
+  "task": "teacher-budget-282-v1",
+  "schema": "teacher-budget-repair-stop-v1",
+  "status": "NOT_STARTED",
+  "reason": "CURRENT_RUNTIME_RECOVERY_THEN_INSUFFICIENT_FULL_HARD90_PLUS_REAP_BEFORE_14_57",
+  "initial_runtime_refusal": "oldframe22stopped/processNULL NN0/build0",
+  "new_runtime_actual": "frame23 scheduler1430721/46503900 monitor1430738/46503929; build freshguard PASS",
+  "new_science_NN": 0,
+  "new_science_seconds": 0,
+  "science_MAX3_authorized": true,
+  "scientific_actual_entries_total": 2,
+  "last_science_slot_unused": true,
+  "original_failures_unchanged": true,
+  "old_guard_UNKNOWN_charge": 98296,
+  "new_science50000_upper_authorized": 50000,
+  "new_allocated8m_upper_authorized": 8000000,
+  "no_deadline_extension": true,
+  "compile_and_fixture": {
+    "task": "teacher-budget-282-repair-build",
+    "schema": "teacher-budget-build-v1",
+    "NN": 0,
+    "records": [
+      {
+        "argv": [
+          "rustc",
+          "--edition",
+          "2024",
+          "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-budget/repair/serializer_check.rs",
+          "--extern",
+          "serde_json=/workspaces/quoridor/.artifacts/rust-migration/target/release/deps/libserde_json-0dd12f463af021ff.rlib",
+          "-L",
+          "dependency=/workspaces/quoridor/.artifacts/rust-migration/target/release/deps",
+          "-C",
+          "strip=debuginfo",
+          "-C",
+          "opt-level=1",
+          "-o",
+          "/workspaces/quoridor/.artifacts/rust-migration/target/release/examples/teacher_serializer_check"
+        ],
+        "exit": 0,
+        "wall_s": 1.177455639000982
+      },
+      {
+        "argv": [
+          "/workspaces/quoridor/.artifacts/rust-migration/target/release/examples/teacher_serializer_check",
+          "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-budget/repair/serializer-fixture.json"
+        ],
+        "exit": 0,
+        "wall_s": 0.022016464034095407
+      },
+      {
+        "argv": [
+          "cargo",
+          "build",
+          "--release",
+          "--offline",
+          "--locked",
+          "-p",
+          "quoridor-runner",
+          "--features",
+          "tensorrt",
+          "--example",
+          "teacher_budget"
+        ],
+        "exit": 0,
+        "wall_s": 16.004292474943213
+      },
+      {
+        "argv": [
+          "cargo",
+          "clippy",
+          "--release",
+          "--offline",
+          "--locked",
+          "-p",
+          "quoridor-runner",
+          "--features",
+          "tensorrt",
+          "--example",
+          "teacher_budget",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "exit": 0,
+        "wall_s": 2.703505278972443
+      }
+    ],
+    "byte_exact_decode": true,
+    "binary_SHA": "61279695634132a59a1e713bb9b6521b1d3d1bbaee786b63d0f655935a136e60",
+    "whole_s": 19.92513804801274
+  },
+  "NN0_compile_guard_command_s": 20.26459936099127,
+  "NN0_compile_management_inclusive_s": 22.26453640201362,
+  "byte_fixture_same_function_as_compiled": true,
+  "source_frozen_at": "2026-10-05T14:57:41.926061+00:00",
+  "all_wait_current_exact_absent": true,
+  "original_stage_root_counts": {
+    "planned": 36,
+    "registered": 32,
+    "missing": 4
+  },
+  "old_phase_sensitivity": "NOT_ESTABLISHED",
+  "condition_denominator": [
+    {
+      "id": "game-0-ply-8",
+      "group": "frame22-273-active48-r1-family-000000",
+      "phase": "opening",
+      "split": "train",
+      "ply": 8,
+      "K": 64,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-0-ply-8",
+      "group": "frame22-273-active48-r1-family-000000",
+      "phase": "opening",
+      "split": "train",
+      "ply": 8,
+      "K": 256,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-0-ply-8",
+      "group": "frame22-273-active48-r1-family-000000",
+      "phase": "opening",
+      "split": "train",
+      "ply": 8,
+      "K": 1024,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-1-ply-8",
+      "group": "frame22-273-active48-r1-family-000001",
+      "phase": "opening",
+      "split": "train",
+      "ply": 8,
+      "K": 64,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-1-ply-8",
+      "group": "frame22-273-active48-r1-family-000001",
+      "phase": "opening",
+      "split": "train",
+      "ply": 8,
+      "K": 256,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-1-ply-8",
+      "group": "frame22-273-active48-r1-family-000001",
+      "phase": "opening",
+      "split": "train",
+      "ply": 8,
+      "K": 1024,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-2-ply-8",
+      "group": "frame22-273-active48-r1-family-000002",
+      "phase": "opening",
+      "split": "train",
+      "ply": 8,
+      "K": 64,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-2-ply-8",
+      "group": "frame22-273-active48-r1-family-000002",
+      "phase": "opening",
+      "split": "train",
+      "ply": 8,
+      "K": 256,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-2-ply-8",
+      "group": "frame22-273-active48-r1-family-000002",
+      "phase": "opening",
+      "split": "train",
+      "ply": 8,
+      "K": 1024,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-3-ply-8",
+      "group": "frame22-273-active48-r1-family-000003",
+      "phase": "opening",
+      "split": "train",
+      "ply": 8,
+      "K": 64,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-3-ply-8",
+      "group": "frame22-273-active48-r1-family-000003",
+      "phase": "opening",
+      "split": "train",
+      "ply": 8,
+      "K": 256,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-3-ply-8",
+      "group": "frame22-273-active48-r1-family-000003",
+      "phase": "opening",
+      "split": "train",
+      "ply": 8,
+      "K": 1024,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-4-ply-8",
+      "group": "frame22-273-active48-r1-family-000004",
+      "phase": "opening",
+      "split": "train",
+      "ply": 8,
+      "K": 64,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-4-ply-8",
+      "group": "frame22-273-active48-r1-family-000004",
+      "phase": "opening",
+      "split": "train",
+      "ply": 8,
+      "K": 256,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-4-ply-8",
+      "group": "frame22-273-active48-r1-family-000004",
+      "phase": "opening",
+      "split": "train",
+      "ply": 8,
+      "K": 1024,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-5-ply-8",
+      "group": "frame22-273-active48-r1-family-000005",
+      "phase": "opening",
+      "split": "train",
+      "ply": 8,
+      "K": 64,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-5-ply-8",
+      "group": "frame22-273-active48-r1-family-000005",
+      "phase": "opening",
+      "split": "train",
+      "ply": 8,
+      "K": 256,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-5-ply-8",
+      "group": "frame22-273-active48-r1-family-000005",
+      "phase": "opening",
+      "split": "train",
+      "ply": 8,
+      "K": 1024,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-36-ply-8",
+      "group": "frame22-273-active48-r1-family-000036",
+      "phase": "opening",
+      "split": "validation",
+      "ply": 8,
+      "K": 64,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-36-ply-8",
+      "group": "frame22-273-active48-r1-family-000036",
+      "phase": "opening",
+      "split": "validation",
+      "ply": 8,
+      "K": 256,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-36-ply-8",
+      "group": "frame22-273-active48-r1-family-000036",
+      "phase": "opening",
+      "split": "validation",
+      "ply": 8,
+      "K": 1024,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-37-ply-8",
+      "group": "frame22-273-active48-r1-family-000037",
+      "phase": "opening",
+      "split": "validation",
+      "ply": 8,
+      "K": 64,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-37-ply-8",
+      "group": "frame22-273-active48-r1-family-000037",
+      "phase": "opening",
+      "split": "validation",
+      "ply": 8,
+      "K": 256,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-37-ply-8",
+      "group": "frame22-273-active48-r1-family-000037",
+      "phase": "opening",
+      "split": "validation",
+      "ply": 8,
+      "K": 1024,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-38-ply-12",
+      "group": "frame22-273-active48-r1-family-000038",
+      "phase": "opening",
+      "split": "validation",
+      "ply": 12,
+      "K": 64,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-38-ply-12",
+      "group": "frame22-273-active48-r1-family-000038",
+      "phase": "opening",
+      "split": "validation",
+      "ply": 12,
+      "K": 256,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-38-ply-12",
+      "group": "frame22-273-active48-r1-family-000038",
+      "phase": "opening",
+      "split": "validation",
+      "ply": 12,
+      "K": 1024,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-39-ply-12",
+      "group": "frame22-273-active48-r1-family-000039",
+      "phase": "opening",
+      "split": "validation",
+      "ply": 12,
+      "K": 64,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-39-ply-12",
+      "group": "frame22-273-active48-r1-family-000039",
+      "phase": "opening",
+      "split": "validation",
+      "ply": 12,
+      "K": 256,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-39-ply-12",
+      "group": "frame22-273-active48-r1-family-000039",
+      "phase": "opening",
+      "split": "validation",
+      "ply": 12,
+      "K": 1024,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-40-ply-16",
+      "group": "frame22-273-active48-r1-family-000040",
+      "phase": "opening",
+      "split": "validation",
+      "ply": 16,
+      "K": 64,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-40-ply-16",
+      "group": "frame22-273-active48-r1-family-000040",
+      "phase": "opening",
+      "split": "validation",
+      "ply": 16,
+      "K": 256,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-40-ply-16",
+      "group": "frame22-273-active48-r1-family-000040",
+      "phase": "opening",
+      "split": "validation",
+      "ply": 16,
+      "K": 1024,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-41-ply-16",
+      "group": "frame22-273-active48-r1-family-000041",
+      "phase": "opening",
+      "split": "validation",
+      "ply": 16,
+      "K": 64,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-41-ply-16",
+      "group": "frame22-273-active48-r1-family-000041",
+      "phase": "opening",
+      "split": "validation",
+      "ply": 16,
+      "K": 256,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-41-ply-16",
+      "group": "frame22-273-active48-r1-family-000041",
+      "phase": "opening",
+      "split": "validation",
+      "ply": 16,
+      "K": 1024,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-0-ply-20",
+      "group": "frame22-273-active48-r1-family-000000",
+      "phase": "middle",
+      "split": "train",
+      "ply": 20,
+      "K": 64,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-0-ply-20",
+      "group": "frame22-273-active48-r1-family-000000",
+      "phase": "middle",
+      "split": "train",
+      "ply": 20,
+      "K": 256,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-0-ply-20",
+      "group": "frame22-273-active48-r1-family-000000",
+      "phase": "middle",
+      "split": "train",
+      "ply": 20,
+      "K": 1024,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-1-ply-20",
+      "group": "frame22-273-active48-r1-family-000001",
+      "phase": "middle",
+      "split": "train",
+      "ply": 20,
+      "K": 64,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-1-ply-20",
+      "group": "frame22-273-active48-r1-family-000001",
+      "phase": "middle",
+      "split": "train",
+      "ply": 20,
+      "K": 256,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-1-ply-20",
+      "group": "frame22-273-active48-r1-family-000001",
+      "phase": "middle",
+      "split": "train",
+      "ply": 20,
+      "K": 1024,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-2-ply-20",
+      "group": "frame22-273-active48-r1-family-000002",
+      "phase": "middle",
+      "split": "train",
+      "ply": 20,
+      "K": 64,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-2-ply-20",
+      "group": "frame22-273-active48-r1-family-000002",
+      "phase": "middle",
+      "split": "train",
+      "ply": 20,
+      "K": 256,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-2-ply-20",
+      "group": "frame22-273-active48-r1-family-000002",
+      "phase": "middle",
+      "split": "train",
+      "ply": 20,
+      "K": 1024,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-3-ply-20",
+      "group": "frame22-273-active48-r1-family-000003",
+      "phase": "middle",
+      "split": "train",
+      "ply": 20,
+      "K": 64,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-3-ply-20",
+      "group": "frame22-273-active48-r1-family-000003",
+      "phase": "middle",
+      "split": "train",
+      "ply": 20,
+      "K": 256,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-3-ply-20",
+      "group": "frame22-273-active48-r1-family-000003",
+      "phase": "middle",
+      "split": "train",
+      "ply": 20,
+      "K": 1024,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-4-ply-20",
+      "group": "frame22-273-active48-r1-family-000004",
+      "phase": "middle",
+      "split": "train",
+      "ply": 20,
+      "K": 64,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-4-ply-20",
+      "group": "frame22-273-active48-r1-family-000004",
+      "phase": "middle",
+      "split": "train",
+      "ply": 20,
+      "K": 256,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-4-ply-20",
+      "group": "frame22-273-active48-r1-family-000004",
+      "phase": "middle",
+      "split": "train",
+      "ply": 20,
+      "K": 1024,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-5-ply-20",
+      "group": "frame22-273-active48-r1-family-000005",
+      "phase": "middle",
+      "split": "train",
+      "ply": 20,
+      "K": 64,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-5-ply-20",
+      "group": "frame22-273-active48-r1-family-000005",
+      "phase": "middle",
+      "split": "train",
+      "ply": 20,
+      "K": 256,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-5-ply-20",
+      "group": "frame22-273-active48-r1-family-000005",
+      "phase": "middle",
+      "split": "train",
+      "ply": 20,
+      "K": 1024,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-36-ply-20",
+      "group": "frame22-273-active48-r1-family-000036",
+      "phase": "middle",
+      "split": "validation",
+      "ply": 20,
+      "K": 64,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-36-ply-20",
+      "group": "frame22-273-active48-r1-family-000036",
+      "phase": "middle",
+      "split": "validation",
+      "ply": 20,
+      "K": 256,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-36-ply-20",
+      "group": "frame22-273-active48-r1-family-000036",
+      "phase": "middle",
+      "split": "validation",
+      "ply": 20,
+      "K": 1024,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-37-ply-20",
+      "group": "frame22-273-active48-r1-family-000037",
+      "phase": "middle",
+      "split": "validation",
+      "ply": 20,
+      "K": 64,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-37-ply-20",
+      "group": "frame22-273-active48-r1-family-000037",
+      "phase": "middle",
+      "split": "validation",
+      "ply": 20,
+      "K": 256,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-37-ply-20",
+      "group": "frame22-273-active48-r1-family-000037",
+      "phase": "middle",
+      "split": "validation",
+      "ply": 20,
+      "K": 1024,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-38-ply-20",
+      "group": "frame22-273-active48-r1-family-000038",
+      "phase": "middle",
+      "split": "validation",
+      "ply": 20,
+      "K": 64,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-38-ply-20",
+      "group": "frame22-273-active48-r1-family-000038",
+      "phase": "middle",
+      "split": "validation",
+      "ply": 20,
+      "K": 256,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-38-ply-20",
+      "group": "frame22-273-active48-r1-family-000038",
+      "phase": "middle",
+      "split": "validation",
+      "ply": 20,
+      "K": 1024,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-39-ply-20",
+      "group": "frame22-273-active48-r1-family-000039",
+      "phase": "middle",
+      "split": "validation",
+      "ply": 20,
+      "K": 64,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-39-ply-20",
+      "group": "frame22-273-active48-r1-family-000039",
+      "phase": "middle",
+      "split": "validation",
+      "ply": 20,
+      "K": 256,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-39-ply-20",
+      "group": "frame22-273-active48-r1-family-000039",
+      "phase": "middle",
+      "split": "validation",
+      "ply": 20,
+      "K": 1024,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-40-ply-20",
+      "group": "frame22-273-active48-r1-family-000040",
+      "phase": "middle",
+      "split": "validation",
+      "ply": 20,
+      "K": 64,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-40-ply-20",
+      "group": "frame22-273-active48-r1-family-000040",
+      "phase": "middle",
+      "split": "validation",
+      "ply": 20,
+      "K": 256,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-40-ply-20",
+      "group": "frame22-273-active48-r1-family-000040",
+      "phase": "middle",
+      "split": "validation",
+      "ply": 20,
+      "K": 1024,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-41-ply-20",
+      "group": "frame22-273-active48-r1-family-000041",
+      "phase": "middle",
+      "split": "validation",
+      "ply": 20,
+      "K": 64,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-41-ply-20",
+      "group": "frame22-273-active48-r1-family-000041",
+      "phase": "middle",
+      "split": "validation",
+      "ply": 20,
+      "K": 256,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-41-ply-20",
+      "group": "frame22-273-active48-r1-family-000041",
+      "phase": "middle",
+      "split": "validation",
+      "ply": 20,
+      "K": 1024,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-0-ply-60",
+      "group": "frame22-273-active48-r1-family-000000",
+      "phase": "late",
+      "split": "train",
+      "ply": 60,
+      "K": 64,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-0-ply-60",
+      "group": "frame22-273-active48-r1-family-000000",
+      "phase": "late",
+      "split": "train",
+      "ply": 60,
+      "K": 256,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-0-ply-60",
+      "group": "frame22-273-active48-r1-family-000000",
+      "phase": "late",
+      "split": "train",
+      "ply": 60,
+      "K": 1024,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-1-ply-60",
+      "group": "frame22-273-active48-r1-family-000001",
+      "phase": "late",
+      "split": "train",
+      "ply": 60,
+      "K": 64,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-1-ply-60",
+      "group": "frame22-273-active48-r1-family-000001",
+      "phase": "late",
+      "split": "train",
+      "ply": 60,
+      "K": 256,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-1-ply-60",
+      "group": "frame22-273-active48-r1-family-000001",
+      "phase": "late",
+      "split": "train",
+      "ply": 60,
+      "K": 1024,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-4-ply-60",
+      "group": "frame22-273-active48-r1-family-000004",
+      "phase": "late",
+      "split": "train",
+      "ply": 60,
+      "K": 64,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-4-ply-60",
+      "group": "frame22-273-active48-r1-family-000004",
+      "phase": "late",
+      "split": "train",
+      "ply": 60,
+      "K": 256,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-4-ply-60",
+      "group": "frame22-273-active48-r1-family-000004",
+      "phase": "late",
+      "split": "train",
+      "ply": 60,
+      "K": 1024,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-6-ply-60",
+      "group": "frame22-273-active48-r1-family-000006",
+      "phase": "late",
+      "split": "train",
+      "ply": 60,
+      "K": 64,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-6-ply-60",
+      "group": "frame22-273-active48-r1-family-000006",
+      "phase": "late",
+      "split": "train",
+      "ply": 60,
+      "K": 256,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-6-ply-60",
+      "group": "frame22-273-active48-r1-family-000006",
+      "phase": "late",
+      "split": "train",
+      "ply": 60,
+      "K": 1024,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-7-ply-60",
+      "group": "frame22-273-active48-r1-family-000007",
+      "phase": "late",
+      "split": "train",
+      "ply": 60,
+      "K": 64,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-7-ply-60",
+      "group": "frame22-273-active48-r1-family-000007",
+      "phase": "late",
+      "split": "train",
+      "ply": 60,
+      "K": 256,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-7-ply-60",
+      "group": "frame22-273-active48-r1-family-000007",
+      "phase": "late",
+      "split": "train",
+      "ply": 60,
+      "K": 1024,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-9-ply-60",
+      "group": "frame22-273-active48-r1-family-000009",
+      "phase": "late",
+      "split": "train",
+      "ply": 60,
+      "K": 64,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-9-ply-60",
+      "group": "frame22-273-active48-r1-family-000009",
+      "phase": "late",
+      "split": "train",
+      "ply": 60,
+      "K": 256,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-9-ply-60",
+      "group": "frame22-273-active48-r1-family-000009",
+      "phase": "late",
+      "split": "train",
+      "ply": 60,
+      "K": 1024,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-36-ply-60",
+      "group": "frame22-273-active48-r1-family-000036",
+      "phase": "late",
+      "split": "validation",
+      "ply": 60,
+      "K": 64,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-36-ply-60",
+      "group": "frame22-273-active48-r1-family-000036",
+      "phase": "late",
+      "split": "validation",
+      "ply": 60,
+      "K": 256,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-36-ply-60",
+      "group": "frame22-273-active48-r1-family-000036",
+      "phase": "late",
+      "split": "validation",
+      "ply": 60,
+      "K": 1024,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-40-ply-60",
+      "group": "frame22-273-active48-r1-family-000040",
+      "phase": "late",
+      "split": "validation",
+      "ply": 60,
+      "K": 64,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-40-ply-60",
+      "group": "frame22-273-active48-r1-family-000040",
+      "phase": "late",
+      "split": "validation",
+      "ply": 60,
+      "K": 256,
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "game-40-ply-60",
+      "group": "frame22-273-active48-r1-family-000040",
+      "phase": "late",
+      "split": "validation",
+      "ply": 60,
+      "K": 1024,
+      "status": "NOT_STARTED"
+    }
+  ]
+}

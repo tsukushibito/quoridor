@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-05T14:23:50.765379+00:00",
+  "submit_exit": 1,
+  "message": "state.json not present at initial return; same state-dir now actualrunning",
+  "no_retry": true,
+  "actual_state": {
+    "schema_version": 1,
+    "job_id": "1df47d50-32bc-4bfa-b92c-a4d9a20bc4a9",
+    "issue": "quoridor-4lc.282",
+    "thread_id": "01a0f31d-6d15-7620-bb63-4b4f878e4746",
+    "phase": "finished",
+    "created_at": "2026-10-05T14:22:59.056840+00:00",
+    "config_sha256": "c9fa1bf4a0acbbc903a9dc35f3311b9fe22d5366a2977973c3a696c9b443b600",
+    "supervisor": {
+      "pid": 1387276,
+      "start_ticks": "46322455",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "updated_at": "2026-10-05T14:23:23.908770+00:00",
+    "child": {
+      "pid": 1387348,
+      "start_ticks": "46322652",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "started_at": "2026-10-05T14:23:01.062650+00:00",
+    "outcome": "succeeded"
+  },
+  "actual_child_compile_observed": true
+}
