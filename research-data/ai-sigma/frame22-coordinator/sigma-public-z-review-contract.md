@@ -7,3 +7,5 @@
 新科学NN/sample上界100k/MAX2/600秒/各<=300、source300/test60/manage120、CPU3/RAMguard1.75/GPU0。既287確認unused50kのうち旧一巡上界20kを保護し残30k移譲＋旧285unused70kから新100k、旧285前向きcapは6m学習移譲と合わせ12.13m。新data2MiB案は旧2876MiBうち確認unused2へ、旧2874+新2不変更、actualforecast fresh92成立前heavyなし。独立z比較NNUE+D+定数(分析的baselineNN0)、必要旧Bを比較するならtarget混同を防ぎ同z基準/予算内に事前登録。row/group/cycle/重複除外分母とMSE/sign/calibration、paired差不確かさ、同時間強度未確認を保存。gameUIDが不明ならCIを独立game CIとしない。
 
 NNUE＋αβは実用評価精度と低費評価・ordering・枝刈りで同時間に広く深い応手を読むことを狙う。深度は1着手=1ply。Sigma K800の最大到達深度、主要最多訪問手順/可能なら訪問重み葉深度と、αβの完了反復深化/PV/node/leaf/実時間は別指標。最深1枝を固定深度の義務にせず、未完iterationを完成深度にしない。既保存counterを再用し、新K800測定を学習gateにしない。最終棋力は同時間対局で別確認。
+
+18時台の必要verification配分補足: 291本人test1/60秒・synthetic6fixtures1944距離成立・compile0/new build予定0を根拠に未使用test40秒を289へ移譲。291 test上限20秒、原使用1秒とsource300/科学100k/MAX2/同封印条件は不変。289 compile/testは180→220秒、原166.064828/失敗/LTOtimeoutを保持し最後necessary test+lint一entry最大50秒。追加親予算/NN/resetはない。具体remaining不足は実入口前に返す。

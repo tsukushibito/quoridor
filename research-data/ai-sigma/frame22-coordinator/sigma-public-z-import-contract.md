@@ -9,3 +9,5 @@
 予算: NN0 source/import/検証1800秒、compile/test180秒、management300秒、CPU decoder1logical/RAMguard1.75GiB、buildは288短窓自然回収後。download compressed<=96MiB、data/raw/cache/Git/temp総640MiB案は旧285992から移す確認済unusedのみ、旧285352MiB保全との合計不変更。92 fresh成立前本体取得/展開なし。新assets inputs/sigma-public-fix-z、research-data/ai-sigma/frame23-sigma-public-z-import。NPZ→compact canonicalを主体に、dense x永続二重copyを抑制。numeric z/入力視点/左右/P2 fixtureとcached x距離/labels bytesを確認。停止immutable train/valとtarget-free evaluation refs・sealed hashをhypothesis/criticへ。
 
 NNUE＋αβは実用評価精度と低費評価・ordering・枝刈りで同時間に広く深い応手を読むことを狙う。深度は1着手=1ply。Sigma K800の最大到達深度、主要最多訪問手順/可能なら訪問重み葉深度と、αβの完了反復深化/PV/node/leaf/実時間は別指標。最深1枝を固定深度の義務にせず、未完iterationを完成深度にしない。既保存counterを再用し、新K800測定を学習gateにしない。最終棋力は同時間対局で別確認。
+
+18時台の前向き移譲: 291 test未使用40秒を289の必要NN0verificationへ。compile/test180→220秒、旧166.064828秒・原失敗/timeout保持、次必要integration+Clippy一entry最大50秒。旧cap内で既登録されたv5を途中変更しない。数学/モデル/データ/許容差0変更、whole library再buildを形式的gateにせず必要compiled fixture/Clippyを正sourceへ束縛する。追加親予算0。

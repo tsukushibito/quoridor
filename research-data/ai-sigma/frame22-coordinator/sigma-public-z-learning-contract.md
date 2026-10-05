@@ -11,3 +11,5 @@
 candidateはselection rule/checkpoint/config/nativeweights/settings/final input union/mask/終了規則をfuture labels前にfreeze。D未超過でも観測用NNUE一つをfreezeし採用判断と未選定観測を分離。公開evalはcritic別owner1巡、開封後再選定/救済なし。native出力は連続期待結果、旧rootmeanMSEと値比較しない。
 
 NNUE＋αβは実用評価精度と低費評価・ordering・枝刈りで同時間に広く深い応手を読むことを狙う。深度は1着手=1ply。Sigma K800の最大到達深度、主要最多訪問手順/可能なら訪問重み葉深度と、αβの完了反復深化/PV/node/leaf/実時間は別指標。最深1枝を固定深度の義務にせず、未完iterationを完成深度にしない。既保存counterを再用し、新K800測定を学習gateにしない。最終棋力は同時間対局で別確認。
+
+290薄native API所有追補: hypothesisのみmanaged frame21-features/crates/quoridor-runner/src/bin/route-feature-diagnose.rsのモデルparity出力へ既ResidualModel::full_simdを使うsimd値fieldを追加できる。数学/特徴/旧286源binaryは変更せず、新公開zだけsource/binarySHAを束縛し追加NNを6m式へ課金。既test120秒remaining内compile+必要CLI testを最大45秒予約、env/dependency取得0。数学を編集する独立範囲追加はない。formatter/lint/薄field review/source停止を統括へ返し、main現役native経路の別owner統合は統括が行う。
