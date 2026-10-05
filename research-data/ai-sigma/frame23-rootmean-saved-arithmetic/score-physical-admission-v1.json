@@ -1,0 +1,102 @@
+{
+  "task": "frame23-rootmean-saved-arithmetic-293-v1",
+  "at": "2026-10-05T19:29:02.848290+00:00",
+  "identity": {
+    "pid": 1794765,
+    "ppid": 2009,
+    "tick": "48159840",
+    "argv": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "/workspaces/quoridor/research-data/ai-sigma/frame23-rootmean-saved-arithmetic/calculation_guard.py"
+    ]
+  },
+  "argv": [
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-rootmean-saved-arithmetic/calculation_guard.py"
+  ],
+  "current24": {
+    "/workspaces/quoridor/scripts/dev/research-scheduler.py": true,
+    "/workspaces/quoridor/scripts/dev/research-watch.py": true,
+    "/workspaces/quoridor/scripts/dev/research-team.py": true,
+    "/workspaces/quoridor/scripts/dev/research-scheduler.sh": true,
+    "/workspaces/quoridor/scripts/dev/research-team.sh": true,
+    "/workspaces/quoridor/scripts/dev/beads.sh": true,
+    "/workspaces/quoridor/scripts/dev/project-env.sh": true,
+    "/workspaces/quoridor/research-paths.json": true,
+    "/workspaces/quoridor/scripts/dev/research-job.py": true,
+    "/workspaces/quoridor/scripts/dev/research-job.sh": true,
+    "/workspaces/quoridor/scripts/dev/research-storage.py": true,
+    "/workspaces/quoridor/docs/design/ai-sigma-continuation-20261001.md": true,
+    "/workspaces/quoridor/docs/design/ai-sigma-contract-supervisor-continuation.md": true,
+    "/workspaces/quoridor/docs/design/ai-sigma-contract-steward-frame22.md": true,
+    "/workspaces/quoridor/.agents/research-team/common.md": true,
+    "/workspaces/quoridor/.agents/research-team/roles/coordinator.md": true,
+    "/workspaces/quoridor/.agents/research-team/roles/hypothesis.md": true,
+    "/workspaces/quoridor/.agents/research-team/roles/experiment.md": true,
+    "/workspaces/quoridor/.agents/research-team/roles/critic.md": true,
+    "/workspaces/quoridor/.agents/research-team/roles/steward.md": true,
+    "/workspaces/quoridor/.artifacts/research-team/registry.json": true,
+    "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22-extension23/scheduler.json": true,
+    "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22-extension23/contract.json": true,
+    "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22-extension23/prompt.md": true
+  },
+  "runtime": [
+    {
+      "pid": 1713022,
+      "ppid": 1,
+      "tick": "47793131",
+      "argv": [
+        "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python",
+        "-B",
+        "/workspaces/quoridor/scripts/dev/research-scheduler.py",
+        "run",
+        "--config",
+        "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22-extension23/scheduler.json",
+        "--state-dir",
+        "/workspaces/quoridor/.artifacts/research-team/frame22-extension23/scheduler"
+      ]
+    },
+    {
+      "pid": 1713041,
+      "ppid": 1,
+      "tick": "47793161",
+      "argv": [
+        "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python",
+        "-B",
+        "scripts/dev/research-watch.py",
+        "monitor",
+        "--expectations",
+        "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22-extension23/expectations.json",
+        "--run-dir",
+        "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22-extension23"
+      ]
+    }
+  ],
+  "config_SHA": "c2c5919b6442a7489feda7075a2ceadb4d8e2b437beae1800646747b709af7ab",
+  "contract_SHA": "8f53a64f1ed41c0a2a869ead6699032b0cfc8de431581c3cbb6346b34661888c",
+  "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+  "current_RSS": 19365888,
+  "MemAvailable": 17459736576,
+  "storage_point_SHA": "6590085d94d3b804dd15fe82b492d1cc764b2efba24b747dd3432589cb58cb96",
+  "storage_point_at": "2026-10-05T17:37:05.320178+00:00",
+  "own_allocated": 57344,
+  "own_Git_temp_metadata_forecast": 524288,
+  "model_GPU_or_asset_reader": "saved predictions and released old rootmean scalar labels only; no model/0043",
+  "owned": {
+    "run_id": "6fefee78-da5d-4034-a3e1-29e5d14d01cc",
+    "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+    "turn_id": "01a10d89-88f4-72c2-a98a-382fe6053bef",
+    "started_at": "2026-10-05T19:27:59.665627+00:00",
+    "max_turn_seconds": null
+  },
+  "foreign_compute": [],
+  "point_only": true,
+  "NN": 0,
+  "synthetic_only_no_label_or_model_reader": false,
+  "physical_helper_SHA": "f516ca5b6cbc6c1048cef9d89057815f6f69aeb5af32ff0ea83d7d3db8a89561",
+  "entry_SHA": "7405176799da5cdfb7622a4cbb1587da3b5a35a70f67e3c2de1c586b520735b6",
+  "targets_opened": false,
+  "new_runtime_loaded_SHA": "d78a64f2bb47d6d909d690dc164ffef68b814a5ab07d1b8e04002da3f945a372",
+  "latest_aggregate_coverage_SHA": "6a52c440e468ca5b7338e3140835ef683f5ce9745ebd17fb81b67677ec83952d",
+  "physical_helper_storage_point_is_older": true
+}

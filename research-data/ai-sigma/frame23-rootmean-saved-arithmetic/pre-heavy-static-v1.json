@@ -1,0 +1,36 @@
+{
+  "task": "frame23-rootmean-saved-arithmetic-293-v1",
+  "at": "2026-10-05T19:20:43.265778+00:00",
+  "source_command_conservative_s": 5,
+  "source_cap_s": 15,
+  "manage_conservative_s": 10,
+  "manage_cap_s": 30,
+  "calculation_command_s": 0,
+  "MAX_consumed": 0,
+  "NN": 0,
+  "guard_SHA": "873c431d75a8eaf0777d433a8b74ecdce167d00d73802c49a97a5402d1f812e1",
+  "entry_SHA": "7405176799da5cdfb7622a4cbb1587da3b5a35a70f67e3c2de1c586b520735b6",
+  "argument_mock": {
+    "task": "frame23-rootmean-saved-arithmetic-293-v1",
+    "schema": "registration-argument-mock-293-v1",
+    "PASS": true,
+    "entry_SHA": "7405176799da5cdfb7622a4cbb1587da3b5a35a70f67e3c2de1c586b520735b6",
+    "registration_path_exactly_once": true,
+    "argv": [
+      "research-data/ai-sigma/frame23-rootmean-saved-arithmetic/evaluate_saved.py",
+      "--registration",
+      "research-data/ai-sigma/frame23-rootmean-saved-arithmetic/argument-mock-registration-v1.json",
+      "--mock"
+    ],
+    "targets_read": false,
+    "NN": 0
+  },
+  "source_formula": "old287 scalar arithmetic copied readonly, only explicit registration argparse/newtask+scope/gzipoutput; primary/bootstrap unchanged",
+  "new_scope_allocated": 32768,
+  "old287_allocated": 1056768,
+  "new_total_forecast_B": 524288,
+  "combined_old_reservation_B": 4194304,
+  "heavy_admission": "PENDING fresh92conserved coverage/currentphysics; no calc started",
+  "old287": "closed/MAX2/failedARGV/rawUNKNOWN+NN0sourceproof preserved; no oldsource writes",
+  "public0043": "SEALED"
+}

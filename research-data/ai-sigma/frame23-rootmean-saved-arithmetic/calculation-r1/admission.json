@@ -1,0 +1,21 @@
+{
+  "task": "frame23-rootmean-saved-arithmetic-293-v1",
+  "schema": "guarded-rootmean-recovery-293-v1",
+  "at": "2026-10-05T19:29:01.846041+00:00",
+  "argv": [
+    "/usr/bin/taskset",
+    "-c",
+    "3",
+    "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "-B",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-rootmean-saved-arithmetic/evaluate_saved.py",
+    "--registration",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-rootmean-saved-arithmetic/registration-v1.json"
+  ],
+  "entry_SHA": "7405176799da5cdfb7622a4cbb1587da3b5a35a70f67e3c2de1c586b520735b6",
+  "guard_SHA": "7b8f85c50a8ed0e93e8b24cdf5b11d9547d711685d9a8eb960ba96da8793f24a",
+  "registration_SHA": "5a875d248817d4f3279120fddabd7d5eac945abd05e71ec533afd5680de8f97c",
+  "foreign_compute": [],
+  "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+  "expected_output": "result-v1.json.gz"
+}

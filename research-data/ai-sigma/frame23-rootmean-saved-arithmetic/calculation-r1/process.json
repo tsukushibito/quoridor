@@ -1,0 +1,36 @@
+{
+  "task": "frame23-rootmean-saved-arithmetic-293-v1",
+  "schema": "guarded-rootmean-recovery-293-v1",
+  "started": "2026-10-05T19:29:02.940481+00:00",
+  "ended": "2026-10-05T19:29:03.357651+00:00",
+  "wall_seconds": 0.41720322699984536,
+  "exit_code": 0,
+  "cause": null,
+  "peak_RSS": 58814464,
+  "recorded_identities": [
+    {
+      "pid": 1794773,
+      "ppid": 1794765,
+      "pgid": 1794773,
+      "tick": "48159963",
+      "cpu": 20,
+      "rss": 57749504,
+      "argv": [
+        "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+        "-B",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-rootmean-saved-arithmetic/evaluate_saved.py",
+        "--registration",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-rootmean-saved-arithmetic/registration-v1.json"
+      ],
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    }
+  ],
+  "waited": true,
+  "remaining": [],
+  "current_exact_absent": true,
+  "output_identity_PASS": true,
+  "NN": 0,
+  "conservative_NN_charge": 0,
+  "scientific_MAX_consumed": 1,
+  "targets_opened": true
+}

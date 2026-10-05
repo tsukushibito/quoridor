@@ -1,0 +1,114 @@
+{
+  "task": "frame23-rootmean-saved-arithmetic-293-v1",
+  "PASS": true,
+  "rows": 3453,
+  "planned_family": 96,
+  "equalfamily": {
+    "candidate": {
+      "rootmeanMSE": 0.26027020818943963,
+      "zMSE": 0.5415596777328751,
+      "zsign": 0.7939709384401795,
+      "rootmeanbias": 0.006990164951775367,
+      "saturation": 0.0876862179322847
+    },
+    "D": {
+      "rootmeanMSE": 0.3910271587555451,
+      "zMSE": 0.6139667811878954,
+      "zsign": 0.7761010663205181,
+      "rootmeanbias": -0.04889977262260905,
+      "saturation": 0.0037760416666666667
+    },
+    "oldB": {
+      "rootmeanMSE": 0.38211256528191706,
+      "zMSE": 0.6059361835255669,
+      "zsign": 0.8387146710055818,
+      "rootmeanbias": 0.022866277206862184,
+      "saturation": 0.004427083333333333
+    }
+  },
+  "primary": {
+    "mean": -0.1307569505661055,
+    "95percentile": [
+      -0.18424350735884243,
+      -0.06754381146893818
+    ],
+    "negative": 76,
+    "zero": 0,
+    "positive": 20,
+    "n_family": 96,
+    "bootstrap_seed": 28780311,
+    "repetitions": 2000,
+    "fixed_fits": true
+  },
+  "z_difference": {
+    "mean": -0.07240710345502048,
+    "95percentile": [
+      -0.1544167709211453,
+      0.024548019424704956
+    ],
+    "negative": 65,
+    "zero": 0,
+    "positive": 31,
+    "n_family": 96,
+    "bootstrap_seed": 28780311,
+    "repetitions": 2000,
+    "fixed_fits": true
+  },
+  "candidate_vs_oldB_zsign": {
+    "mean": -0.044743732565402254,
+    "95percentile": [
+      -0.08701527761661426,
+      -0.0033162531431586966
+    ],
+    "negative": 37,
+    "zero": 38,
+    "positive": 21,
+    "n_family": 96,
+    "bootstrap_seed": 28780311,
+    "repetitions": 2000,
+    "fixed_fits": true
+  },
+  "NN": 0,
+  "process": {
+    "task": "frame23-rootmean-saved-arithmetic-293-v1",
+    "schema": "guarded-rootmean-recovery-293-v1",
+    "started": "2026-10-05T19:29:02.940481+00:00",
+    "ended": "2026-10-05T19:29:03.357651+00:00",
+    "wall_seconds": 0.41720322699984536,
+    "exit_code": 0,
+    "cause": null,
+    "peak_RSS": 58814464,
+    "recorded_identities": [
+      {
+        "pid": 1794773,
+        "ppid": 1794765,
+        "pgid": 1794773,
+        "tick": "48159963",
+        "cpu": 20,
+        "rss": 57749504,
+        "argv": [
+          "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+          "-B",
+          "/workspaces/quoridor/research-data/ai-sigma/frame23-rootmean-saved-arithmetic/evaluate_saved.py",
+          "--registration",
+          "/workspaces/quoridor/research-data/ai-sigma/frame23-rootmean-saved-arithmetic/registration-v1.json"
+        ],
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      }
+    ],
+    "waited": true,
+    "remaining": [],
+    "current_exact_absent": true,
+    "output_identity_PASS": true,
+    "NN": 0,
+    "conservative_NN_charge": 0,
+    "scientific_MAX_consumed": 1,
+    "targets_opened": true
+  },
+  "old287_unchanged": true,
+  "sourcecharge_conservative": 10,
+  "sourcecap": 15,
+  "managementcharge_before_final_save_conservative": 20,
+  "managementcap": 30,
+  "source_and_read_LL M_UNKNOWN": true
+}
