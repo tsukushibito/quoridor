@@ -1,0 +1,116 @@
+{
+  "purpose": "saved prediction arithmetic only; no new model or forward",
+  "old_validation": {
+    "D": 0.4894036546554201,
+    "B200": 0.47967876797704606,
+    "B2000": 0.6790276693353352,
+    "penalty200": 0.4801827578215107,
+    "penalty2000": 0.48581632701076854
+  },
+  "newselection": {
+    "step200": {
+      "penalty": 0.39736880851436984,
+      "B": 0.39917330821120817,
+      "D": 0.39263407579270954,
+      "groups": {
+        "minus_D": {
+          "differences": {
+            "frame22-273-active48-r1-family-000045": -0.016262275706325102,
+            "frame22-273-active48-r1-family-000044": -0.006861297187673476,
+            "frame22-273-active48-r1-family-000043": -0.030740325398433216,
+            "frame22-273-active48-r1-family-000046": 0.04356174281644404,
+            "frame22-273-active48-r1-family-000047": -0.0030505644273818855,
+            "frame22-273-active48-r1-family-000042": 0.010917905199533895,
+            "frame22-273-active48-r1-family-000041": 0.030032675575080936,
+            "frame22-273-active48-r1-family-000039": -0.010884670784589934,
+            "frame22-273-active48-r1-family-000038": 0.010728568169235397,
+            "frame22-273-active48-r1-family-000040": -0.013559591344743605,
+            "frame22-273-active48-r1-family-000037": 0.03162441686510831,
+            "frame22-273-active48-r1-family-000036": 0.011310208883668516
+          },
+          "mean": 0.004734732721660323,
+          "gain": 6,
+          "loss": 6,
+          "ties": 0,
+          "sd": 0.022281368577834203
+        },
+        "minus_B": {
+          "differences": {
+            "frame22-273-active48-r1-family-000045": -0.002861058725175003,
+            "frame22-273-active48-r1-family-000044": -0.0013976450041408017,
+            "frame22-273-active48-r1-family-000043": 0.0037785799057462044,
+            "frame22-273-active48-r1-family-000046": -0.008174923806794243,
+            "frame22-273-active48-r1-family-000047": -0.002720035817865174,
+            "frame22-273-active48-r1-family-000042": 0.00045567490272335753,
+            "frame22-273-active48-r1-family-000041": -0.0036942583979514,
+            "frame22-273-active48-r1-family-000039": 0.0006936655217659876,
+            "frame22-273-active48-r1-family-000038": -0.0018253266066323715,
+            "frame22-273-active48-r1-family-000040": 0.00011922226255867141,
+            "frame22-273-active48-r1-family-000037": -0.00368593571145881,
+            "frame22-273-active48-r1-family-000036": -0.0023419548848365723
+          },
+          "mean": -0.0018044996968383461,
+          "gain": 8,
+          "loss": 4,
+          "ties": 0,
+          "sd": 0.0029591666735689667
+        }
+      }
+    },
+    "last": {
+      "penalty": 0.5533842646172182,
+      "B": 0.9218864250493269,
+      "D": 0.39263407579270954,
+      "groups": {
+        "minus_D": {
+          "differences": {
+            "frame22-273-active48-r1-family-000045": -0.036226481450301606,
+            "frame22-273-active48-r1-family-000044": 0.020870813843245795,
+            "frame22-273-active48-r1-family-000043": -0.1325397255330443,
+            "frame22-273-active48-r1-family-000046": 0.888059236875112,
+            "frame22-273-active48-r1-family-000047": -0.024730786243438024,
+            "frame22-273-active48-r1-family-000042": 0.22804429156135114,
+            "frame22-273-active48-r1-family-000041": 0.14574232953431232,
+            "frame22-273-active48-r1-family-000039": 0.017402356936076002,
+            "frame22-273-active48-r1-family-000038": -0.11810638911084792,
+            "frame22-273-active48-r1-family-000040": -0.18731666494774735,
+            "frame22-273-active48-r1-family-000037": 0.9568951186727926,
+            "frame22-273-active48-r1-family-000036": 0.17090816575659296
+          },
+          "mean": 0.16075018882450864,
+          "gain": 5,
+          "loss": 7,
+          "ties": 0,
+          "sd": 0.3773026827015864
+        },
+        "minus_B": {
+          "differences": {
+            "frame22-273-active48-r1-family-000045": 0.14490023943374153,
+            "frame22-273-active48-r1-family-000044": 0.05454954556012495,
+            "frame22-273-active48-r1-family-000043": 0.02730169149055646,
+            "frame22-273-active48-r1-family-000046": -1.3950499996433585,
+            "frame22-273-active48-r1-family-000047": -0.33227899487934176,
+            "frame22-273-active48-r1-family-000042": -0.518232494426214,
+            "frame22-273-active48-r1-family-000041": -0.8193159467888355,
+            "frame22-273-active48-r1-family-000039": -0.3538956876512138,
+            "frame22-273-active48-r1-family-000038": 0.24480254744740343,
+            "frame22-273-active48-r1-family-000040": 0.054611979134754594,
+            "frame22-273-active48-r1-family-000037": -1.08473433548419,
+            "frame22-273-active48-r1-family-000036": -0.4446844693787321
+          },
+          "mean": -0.3685021604321087,
+          "gain": 7,
+          "loss": 5,
+          "ties": 0,
+          "sd": 0.5182272358513073
+        }
+      }
+    }
+  },
+  "management_reader_failure": {
+    "error": "KeyError validation on old compact B-summary curves",
+    "science": 0,
+    "repair": "read existing full curves.json without forward"
+  },
+  "independent_test": false
+}

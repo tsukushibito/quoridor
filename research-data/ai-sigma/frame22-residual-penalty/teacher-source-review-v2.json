@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-05T14:03:33.354037+00:00",
+  "source_SHA": {
+    "/workspaces/quoridor/crates/quoridor-ai/src/sigma_mcts.rs": "dd59988dd7ddae090e1d71b7a17e1ef4f1772151db295c716a1375d84de67eee",
+    "/workspaces/quoridor/crates/quoridor-runner/src/runtime.rs": "66d06e2332255a01ead0d0033ecaddba0b4b812bbfc8220c4dbb5bc2726e1a29",
+    "/workspaces/quoridor/crates/quoridor-data/src/lib.rs": "390fc18b796af19b2c93b5d4918f6a643594147b267315a4859d6ca80c482396"
+  },
+  "important_correction": "Search::with_limits second argument is generation, not random seed. benchmark repeat0..3 changes generation; fixed root MCTS currently deterministic, no root RNG/noise field. Repeats are not independent stochastic teacher samples.",
+  "stochastic_temperature": "runtime choose uses per-game rng for Action sampling after root snapshot, not fixed-root rootmean seed variance",
+  "old_proposal_preserved": "selection-view.md and 274 next-one-proposal.txt contain now-corrected seed interpretation",
+  "next_meaningful_contrast": "fixed complete-context roots K64 vsK256; repeat warm+steady all charged but no claim of independent teacher seeds",
+  "full_context_source": "TeacherRow.prefix Vec<u16> exists; history reconstruction must use this exact prefix and RuleA, not hashes",
+  "scientific_NN": 0,
+  "code_changes": 0
+}
