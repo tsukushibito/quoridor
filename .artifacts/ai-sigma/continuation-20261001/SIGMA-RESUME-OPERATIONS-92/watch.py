@@ -180,7 +180,7 @@ def stop_owned(reason):
     write('scheduler-end-stop.json',row)
     notify('scheduler-end-report','quoridor-4lc.92 deadline scheduler停止。\n'+
            '詳細 '+str(OUT/'scheduler-end-stop.json')+'。owned_turn_pending='+str(pending)+
-           '、scheduler_identity_alive='+str(alive)+'。原因/読取欠測を保持、外部NN停止認定0。')
+           '、scheduler_identity_alive='+str(alive)+'。原因/読取欠測を保持、外部NN停止認定0。枠終了又は異常な早期停止なら、統括は残時間内で成立する終了点検をstewardへ実配分し判断報告を受領する。未配送/未報告/期限不足/所有・通信不明は理由/担当/次の許可機会へ未完了引渡し。設定更新の一時停止は枠終了としない。自動延長/期限後研究job0。')
 
 boot=Path('/proc/sys/kernel/random/boot_id').read_text().strip()
 myself=proc(os.getpid());myself['boot_id']=boot
@@ -200,7 +200,7 @@ try:
         if dt.datetime.now(UTC)>=END: reason='2026-10-05 02:46:02 owned operation deadline';stop_owned(reason);break
         if dt.datetime.now(UTC)>=HEAVY and not heavy_notified:
             heavy_notified=True
-            notify('heavy-job-stop-notice','quoridor-4lc.92 / 2026-10-05 02:41:02UTC到達。新しい重いjobの開始を止め、各ownerが自己jobを回収。監督02:46:02/monitor02:49:02/証拠02:51:02。外部NN停止は認定しない。')
+            notify('heavy-job-stop-notice','quoridor-4lc.92 / 2026-10-05 02:41:02UTC到達。新しい重いjobの開始を止め、各ownerが自己jobを回収。監督02:46:02/monitor02:49:02/証拠02:51:02。統括は配分時に確保した同枠内の残時間/軽い資源でstewardへ終了点検（停止・保存/引渡しと整理要否/長期構成判断）を実配送し、判断報告を受領して採否/次配分を記録する。通知やプロセス停止だけで判断完了としない。未配送/未報告/期限不足/所有・通信不明は理由/担当/次の許可機会へ未完了引渡し、自動延長/期限後研究job0。外部NN停止は認定しない。')
         state=readstate();owned=state.get('owned');p=state.get('process')
         # New bounded-record runs only. Existing historical evidence is untouched.
         bounded_run_bytes=None
@@ -271,7 +271,7 @@ try:
             write('scheduler-end-stop.json',{'at':now(),'reason':reason,'state':state,
                   'owned_turn_pending':bool(owned),'external_NN_processes_stopped':False})
             notify('scheduler-end-report','quoridor-4lc.92 / scheduler早期停止を観測。詳細 '+
-                   str(OUT/'scheduler-end-stop.json')+'。owned turn未確認なら正確IDで回収要。外部NN停止認定0。');break
+                   str(OUT/'scheduler-end-stop.json')+'。owned turn未確認なら正確IDで回収要。外部NN停止認定0。統括は残時間内で可能な終了点検をstewardへ実配分し、停止保存と整理要否/長期構成の判断報告を受領する。未完了は理由/担当/次の許可機会へ引渡し、期限延長や期限後研究jobで救済しない。');break
         time.sleep(10)
 except Exception as e:
     reason='monitor abnormal exit';last_error=str(e);exit_code=1
