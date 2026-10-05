@@ -17,3 +17,5 @@
 資源は旧verifiedunused29466624から統括1+2461+2481+2498+2511+2531+2544+2564MiBを一度計上、新計21MiB、残7446528B。storage-allocation-v8.json。旧24216MiB/2441MiB/全旧予約とUNKNOWN保持、返却/reset/親追加0。CPU合計4logical/RAMcurrent8GiB/保持+有効unused12GiB、GPU旧残不明ならCPU。全実装/管理/LLM中断/研究総実費UNKNOWN、elapsed/予約を実CPU費へ代入しない。
 
 228owner未見teacherMSE .260522204対D.400448510は有限予測利益だけ。229final独立curve/trainfit/testbootstrap NOT_RUN/270/MAX2は新裁定で救済0。旧173正式198非学習/開封test非選定・全旧失敗/UNKNOWN/成績/期限を保持。NNUE最高棋力/Sigma同等/IID/teachertruth未認定。詳細証拠は各既報告とowner scope/Gitを参照し本文へ全履歴を再コピーしない。
+
+02:35開始局面方針（root255ユーザー共有）:同2prefixのSigma raw P1開始値は8ply−.6504098177/16ply+.4746417999（各1NN/探索0、正本 /workspaces/quoridor/research-data/ai-sigma/frame20-sigma-opening-value/、勝率・確定勝敗ではない）。現256結果前固定局面/条件/旧成績は変更0。同盤面側勝ちの小2局面WDL一致から一般同等性/学習利益なしを認定しない。未来棋力評価は即勝ち/浅い強制勝敗・開始評価/距離差/残壁/多様性/色交換を考慮し、拮抗した多様な局面を主に、偏った局面は別層能力診断。Sigma単閾値を万能gateにしない。教師生成は優勢/劣勢/拮抗/終盤/勝敗直結も保ち、構成比/重複/有効教師量/費を把握、容易な勝敗偏重を避ける。訓練分布と評価選定を同一化しない。今枠追加生成/対局/試験/期限・資源変更0。詳細opening-purpose-policy.md、担当選定/Supervisor自然検出力点検へ通常共有。

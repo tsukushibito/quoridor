@@ -13,3 +13,5 @@
 旧229final独立NOT_RUN/173正式198非学習/開封test非選定、旧失敗/UNKNOWN/費/期限不変更。旧予約・累積reset/discount/返却claim0。資源CPU合計4logical/RAMcurrent8GiB/保存+unused12GiB、GPU旧確認unusedのみ。same6savedモデルeffortcwd、LLM人数gate0、自己job exact回収・通信不明保護を維持。新科学/モデル取得/製品統合push公開を追加せず、現在許可内の別scopeだけ進める。
 
 研究判断/費/保留再検討と実配分の詳細は docs/reports/ai-sigma-coordinator-current-priorities.md、各既owner report/Beadsと frame20-coordinator acceptance/契約/allocations を参照。
+
+02:35開始局面方針（root255ユーザー共有）:同2prefixのSigma raw P1開始値は8ply−.6504098177/16ply+.4746417999（各1NN/探索0、正本 /workspaces/quoridor/research-data/ai-sigma/frame20-sigma-opening-value/、勝率・確定勝敗ではない）。現256結果前固定局面/条件/旧成績は変更0。同盤面側勝ちの小2局面WDL一致から一般同等性/学習利益なしを認定しない。未来棋力評価は即勝ち/浅い強制勝敗・開始評価/距離差/残壁/多様性/色交換を考慮し、拮抗した多様な局面を主に、偏った局面は別層能力診断。Sigma単閾値を万能gateにしない。教師生成は優勢/劣勢/拮抗/終盤/勝敗直結も保ち、構成比/重複/有効教師量/費を把握、容易な勝敗偏重を避ける。訓練分布と評価選定を同一化しない。今枠追加生成/対局/試験/期限・資源変更0。詳細opening-purpose-policy.md、担当選定/Supervisor自然検出力点検へ通常共有。
