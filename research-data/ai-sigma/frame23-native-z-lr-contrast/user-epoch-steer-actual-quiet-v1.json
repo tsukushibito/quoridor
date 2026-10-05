@@ -1,0 +1,65 @@
+{
+  "schema": "lr-302-old-randomdraw-science-reader-quiet-before-epoch-change-v1",
+  "UTC": "2026-10-05T22:57:40.247708+00:00",
+  "cases": [
+    {
+      "case": "A",
+      "actualstart": "2026-10-05T22:55:10.004914+00:00",
+      "actualstop": "2026-10-05T22:55:21.484924+00:00",
+      "initial_PIDtick": {
+        "pid": 2037422,
+        "start_ticks": "49397372",
+        "ppid": 2037321,
+        "pgrp": 2037422,
+        "cpu_ticks": 0,
+        "state": "R",
+        "rss": 4096,
+        "cpus": [
+          1
+        ],
+        "argv": []
+      },
+      "all_fit_parity_readers_reaped": true,
+      "NN": 961352,
+      "best_step": 1250,
+      "best_zMSE": 0.5843765775360874
+    },
+    {
+      "case": "B",
+      "actualstart": "2026-10-05T22:55:56.285608+00:00",
+      "actualstop": "2026-10-05T22:56:07.395750+00:00",
+      "initial_PIDtick": {
+        "pid": 2038413,
+        "start_ticks": "49402001",
+        "ppid": 2038312,
+        "pgrp": 2038413,
+        "cpu_ticks": 0,
+        "state": "R",
+        "rss": 4096,
+        "cpus": [
+          1
+        ],
+        "argv": []
+      },
+      "all_fit_parity_readers_reaped": true,
+      "NN": 961352,
+      "best_step": 3750,
+      "best_zMSE": 0.574644168484578
+    }
+  ],
+  "MAX2_consumed": 2,
+  "actualNN_total": 1922704,
+  "source_modelreader_trainer_STOP": true,
+  "future_main_reader_started": false,
+  "source_snapshot": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-lr-contrast/main-scientific-source-before-user-epoch-revision-v1.tar.gz",
+    "SHA": "105c7aea83c0f95a0295d2e695083f09b2228888bff1c1fc914660f18b4625a5",
+    "B": 18317
+  },
+  "stream_restore_PASS": true,
+  "old_sampling": "gameuniform->rowuniform replacement; bothactual512000seen; no truecompletedepochs claim",
+  "user_epoch_instruction": "prospective only, notapplied toalreadyspawnedcompletedA/B",
+  "new_epoch_science": "NOT_STARTED/unallocated remainingMAX0; no third case or capreset",
+  "main_source_writer": "coordinator canedit; hypothesis subsequentcollector only savedJSON/f32/metadata no main imports",
+  "old_reg_config_output_bytes_unchanged": true
+}

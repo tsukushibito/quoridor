@@ -1,0 +1,62 @@
+{
+  "schema": "mpc-preparation-source-stop-v1",
+  "UTC": "2026-10-05T23:25:26.144398+00:00",
+  "issue": "quoridor-4lc.306",
+  "source_stopped": true,
+  "scientific_children": [],
+  "science_MAX": 0,
+  "NN": 0,
+  "compile": 0,
+  "source_current": {
+    "calibration-plan-v1.json": {
+      "SHA": "6b57211cac2109d7318f9cffd36787ee53d0e470b14675f888367566524dc0cb",
+      "B": 4410,
+      "mtime_UTC": "2026-10-05T23:23:44.139230+00:00"
+    },
+    "calibration-record.schema.json": {
+      "SHA": "a9a459d5c1777a84fd835863913e2b06e1ac2d91fe430a01a9bcf5a80ee132c1",
+      "B": 7534,
+      "mtime_UTC": "2026-10-05T23:23:44.133159+00:00"
+    },
+    "fixture-result-v1.json": {
+      "SHA": "721963413a4a778f4f4345dd9a729bf16899c4de5a2d1f4b8b3f6ea7af2a64bf",
+      "B": 878,
+      "mtime_UTC": "2026-10-05T23:25:26.017476+00:00"
+    },
+    "owner-local-forecast-v1.json": {
+      "SHA": "efcd0541cafc28e8540edf920c2a17c1f1096acd6ed7f054668e457265ee0a22",
+      "B": 550,
+      "mtime_UTC": "2026-10-05T23:19:59.507296+00:00"
+    },
+    "owner-local-forecast-v2.json": {
+      "SHA": "8e1c5c575fb10d2ae0cd926cf8903fa80457192f13b1c8010e9fbd9808c6372c",
+      "B": 536,
+      "mtime_UTC": "2026-10-05T23:23:44.196473+00:00"
+    },
+    "prepare.py": {
+      "SHA": "51759afa8842e3c563ca7fa0a9f8d00067797eca2bbb688677d988090e558e0e",
+      "B": 7177,
+      "mtime_UTC": "2026-10-05T23:23:44.468124+00:00"
+    },
+    "saved-evidence-inventory-v1.json": {
+      "SHA": "2026a57a068573214024e0952c5db77d07ea49b018c833517ea4d31fc6353b8e",
+      "B": 1842,
+      "mtime_UTC": "2026-10-05T23:23:44.125295+00:00"
+    }
+  },
+  "fixtures_synthetic": 17,
+  "finite_fixture_PASS": true,
+  "formatter_check_lint": "PASS",
+  "MPC_core_calibration_adoption": "NOT_IMPLEMENTED/NOT_RUN",
+  "policy_enabled": false,
+  "oldscope_science_reopened": false,
+  "storage_overlay": {
+    "path": "research-data/ai-sigma/frame23-steward/storage-tt305-mpc306-overlay-v1.json",
+    "SHA": "4dc275a39f72838751917e2d2627c8fd3223c339607af19c89fd6d990f2d3904"
+  },
+  "source_stop_deadline": "2026-10-05T23:23:00Z",
+  "actual_stop_after_deadline": true,
+  "late_reason": "bounded static record/forecast preparation and subsequent verification/stop recording exceeded source target; no extra scientific budget or deadline granted",
+  "metadata_fixture_current_control": "CPU1taskset/exit0/unifiedexec waited; PIDtick NOT_RECORDED, no subprocess/model worker spawned",
+  "cost": "recorded shell durations separate; LLM/read/browser/control UNKNOWN, no exclusive CPU claim"
+}

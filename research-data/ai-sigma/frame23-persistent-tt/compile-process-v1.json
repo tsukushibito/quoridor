@@ -1,0 +1,28 @@
+{
+  "argv": [
+    "/usr/bin/taskset",
+    "-c",
+    "3",
+    "cargo",
+    "check",
+    "--offline",
+    "--release",
+    "-p",
+    "quoridor-runner",
+    "--lib",
+    "-j",
+    "1"
+  ],
+  "identity": {
+    "pid": 2076276,
+    "tick": "49576276"
+  },
+  "exit": 0,
+  "reason": null,
+  "waited": true,
+  "current_exact_absent": true,
+  "command_wall_s": 8.18883359094616,
+  "MAX1_used": true,
+  "NN": 0,
+  "no_rerun": true
+}

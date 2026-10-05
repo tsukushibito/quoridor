@@ -1,0 +1,66 @@
+{
+  "issue": "quoridor-4lc.305",
+  "UTC": "2026-10-05T23:27:29.462936+00:00",
+  "source_writer_STOP": true,
+  "source_paths": {
+    "crates/quoridor-ai/src/alphabeta.rs": {
+      "before_SHA": "1caa46e6d3b17b6211e21ccc7ccf625e972f7e884b6b273227c1dbe5dc8d2f8e",
+      "after_SHA": "745e39a82222c38ba327106913281f49ea343b590329f80676e97bcd7aee5e7c",
+      "after_B": 32782
+    },
+    "crates/quoridor-runner/src/runtime.rs": {
+      "before_SHA": "66d06e2332255a01ead0d0033ecaddba0b4b812bbfc8220c4dbb5bc2726e1a29",
+      "after_SHA": "969b9feca1c108cdf69e089326279824e629ee3b8865e4c341086e1e9eaf8990",
+      "after_B": 62251
+    }
+  },
+  "source_edit_stopped_at": "2026-10-05T23:23:01Z (1s source target deviation retained)",
+  "compile": {
+    "argv": [
+      "/usr/bin/taskset",
+      "-c",
+      "3",
+      "cargo",
+      "check",
+      "--offline",
+      "--release",
+      "-p",
+      "quoridor-runner",
+      "--lib",
+      "-j",
+      "1"
+    ],
+    "identity": {
+      "pid": 2076276,
+      "tick": "49576276"
+    },
+    "exit": 0,
+    "reason": null,
+    "waited": true,
+    "current_exact_absent": true,
+    "command_wall_s": 8.18883359094616,
+    "MAX1_used": true,
+    "NN": 0,
+    "no_rerun": true
+  },
+  "format_check_EXIT0": true,
+  "lint": "NOT_RUN no second compile permitted",
+  "functional_fixtures": "NOT_RUN",
+  "useful_TT_hits_or_cost_gain": "NOT_MEASURED",
+  "adopted": false,
+  "canonical_source_state": "uncommitted/unadopted prototype; coordinator sole review/integration/revert owner, no silent product adoption",
+  "source_pack": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-persistent-tt/canonical-prototype-source-v1.tar.xz",
+    "SHA": "5dfa049181c7be463df95e6197caf7523bd4332b16fb75aa4b1b20862cd60223",
+    "stream_byte_restore_PASS": true
+  },
+  "limitations": [
+    "Initial overlay-status admission predicate failure before compiler: NN0/MAX0 preserved. Corrected single compiler ran once.",
+    "Corrected compile admission current24/identities bound; its foreign snapshot and per-source SHA were omitted. Earlier point foreign[] is not future guarantee; provenance gap retained.",
+    "Caller uses persistent sessions but does not serialize/aggregate new TT counters; public SearchStats exposes them only.",
+    "No source functional fixtures were implemented before cutoff; no collision/model-reset/history/terminal runtime claim.",
+    "One-shot Table now also bounded4096/1MiB; this changes capacity from previous default, independently assess caller total memory/replacement impact.",
+    "Existing trained/model source/caps/results untouched; no NNUE success gate."
+  ],
+  "future_required": "Explicit next opportunity: 15-30min source fixtures+caller TT counter output, compile/test estimate60-120s oneCPU, bounded functional<=30s/<=2000nativeNN (Distance oracles NN0); exact history namespace tests before adopting; then registered legal sequence useful-hit cost comparison. These estimates are not permission."
+}

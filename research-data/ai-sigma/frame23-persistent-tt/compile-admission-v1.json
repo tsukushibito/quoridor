@@ -1,0 +1,31 @@
+{
+  "argv": [
+    "/usr/bin/taskset",
+    "-c",
+    "3",
+    "cargo",
+    "check",
+    "--offline",
+    "--release",
+    "-p",
+    "quoridor-runner",
+    "--lib",
+    "-j",
+    "1"
+  ],
+  "hard_s": 14,
+  "MAX1": true,
+  "current24": true,
+  "scheduler": {
+    "pid": 1896572,
+    "start_ticks": "48616397",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "monitor": {
+    "pid": 1896590,
+    "start_ticks": "48616438",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "owned": null,
+  "overlay_SHA": "4dc275a39f72838751917e2d2627c8fd3223c339607af19c89fd6d990f2d3904"
+}

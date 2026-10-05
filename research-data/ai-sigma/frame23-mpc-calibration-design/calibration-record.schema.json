@@ -1,0 +1,384 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:quoridor:mpc-calibration-record:v1",
+  "type": "object",
+  "required": [
+    "model_sha",
+    "scale_sha",
+    "rules_sha",
+    "search_sha",
+    "calibration_version",
+    "input_sha",
+    "history_sha",
+    "group",
+    "split_version",
+    "side",
+    "partition",
+    "mpc_mode",
+    "tt_origin",
+    "extensions_reductions",
+    "tactical",
+    "shallow",
+    "deep"
+  ],
+  "properties": {
+    "model_sha": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scale_sha": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rules_sha": {
+      "type": "string",
+      "minLength": 1
+    },
+    "search_sha": {
+      "type": "string",
+      "minLength": 1
+    },
+    "calibration_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "input_sha": {
+      "type": "string",
+      "minLength": 1
+    },
+    "history_sha": {
+      "type": "string",
+      "minLength": 1
+    },
+    "group": {
+      "type": "string",
+      "minLength": 1
+    },
+    "split_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "side": {
+      "enum": [
+        1,
+        2
+      ]
+    },
+    "partition": {
+      "enum": [
+        "calibration",
+        "unused_validation"
+      ]
+    },
+    "mpc_mode": {
+      "const": "OFF"
+    },
+    "tt_origin": {
+      "const": "FULL_WIDTH"
+    },
+    "extensions_reductions": {
+      "const": "DISABLED"
+    },
+    "tactical": {
+      "type": "object",
+      "required": [
+        "immediate_goal",
+        "forced_defense",
+        "jump",
+        "wall_block"
+      ],
+      "properties": {
+        "immediate_goal": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "forced_defense": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "jump": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "wall_block": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      }
+    },
+    "shallow": {
+      "type": "object",
+      "required": [
+        "requested_depth",
+        "completed_depth",
+        "status",
+        "bound",
+        "window",
+        "value",
+        "origin",
+        "processed",
+        "NN",
+        "wall_s"
+      ],
+      "properties": {
+        "requested_depth": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "completed_depth": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "status": {
+          "enum": [
+            "COMPLETED",
+            "UNKNOWN"
+          ]
+        },
+        "bound": {
+          "enum": [
+            "EXACT",
+            "LOWER",
+            "UPPER",
+            "UNAVAILABLE"
+          ]
+        },
+        "window": {
+          "const": [
+            -2.1,
+            2.1
+          ]
+        },
+        "value": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "origin": {
+          "enum": [
+            "TERMINAL",
+            "NONTERMINAL",
+            "UNAVAILABLE"
+          ]
+        },
+        "processed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "NN": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "wall_s": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "UNKNOWN"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "COMPLETED"
+              },
+              "origin": {
+                "const": "NONTERMINAL"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "number",
+                "minimum": -1,
+                "maximum": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "COMPLETED"
+              },
+              "origin": {
+                "const": "TERMINAL"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "enum": [
+                  -2,
+                  0,
+                  2
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "deep": {
+      "type": "object",
+      "required": [
+        "requested_depth",
+        "completed_depth",
+        "status",
+        "bound",
+        "window",
+        "value",
+        "origin",
+        "processed",
+        "NN",
+        "wall_s"
+      ],
+      "properties": {
+        "requested_depth": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "completed_depth": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "status": {
+          "enum": [
+            "COMPLETED",
+            "UNKNOWN"
+          ]
+        },
+        "bound": {
+          "enum": [
+            "EXACT",
+            "LOWER",
+            "UPPER",
+            "UNAVAILABLE"
+          ]
+        },
+        "window": {
+          "const": [
+            -2.1,
+            2.1
+          ]
+        },
+        "value": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "origin": {
+          "enum": [
+            "TERMINAL",
+            "NONTERMINAL",
+            "UNAVAILABLE"
+          ]
+        },
+        "processed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "NN": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "wall_s": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "UNKNOWN"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "COMPLETED"
+              },
+              "origin": {
+                "const": "NONTERMINAL"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "number",
+                "minimum": -1,
+                "maximum": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "COMPLETED"
+              },
+              "origin": {
+                "const": "TERMINAL"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "enum": [
+                  -2,
+                  0,
+                  2
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "$comment": "Cross-field exact completion/depth order/prelabel partition/tactical bypass additionally checked by prepare.validate. Does not authenticate scientific producer proof."
+}

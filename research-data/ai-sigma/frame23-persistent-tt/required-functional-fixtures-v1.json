@@ -1,0 +1,17 @@
+{
+  "status": "NOT_RUN_NOT_BUILT_BEFORE_SOURCE_CUTOFF",
+  "required_next_fixtures": [
+    "same board different repetition/history and totalply never numeric hit",
+    "P1/P2 legal sequence state +parentrestore compare newSession vs fresh exactdepth",
+    "same-history Exactcache numeric reuse and shallow order-only counters",
+    "illegal storedbest never cutoff/order; wrong fullKey collision never Exact",
+    "newgame reset and evaluator/rules/MPC namespace switch clear all",
+    "terminal +/-2 beforecachedscore; cancellation discards uncommittedgeneration",
+    "retainedbytes <=1MiB and slots<=4096; replacement heap bookkeeping",
+    "per-player actual root depth3 then two real plies gives usable fullhistory reuse if key survives"
+  ],
+  "native_NN_this_task": 0,
+  "functional_MAX1_consumed": 0,
+  "functional_science_NOT_STARTED": true,
+  "remaining_execution_requires_new_explicit_opportunity": true
+}

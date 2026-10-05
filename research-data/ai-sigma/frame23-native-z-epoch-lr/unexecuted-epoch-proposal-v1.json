@@ -1,0 +1,70 @@
+{
+  "schema": "epoch-lr-unexecuted-proposal-v1",
+  "status": "NOT_EXECUTABLE_PROPOSAL",
+  "train_rows": 14803,
+  "train_families": 432,
+  "raw_selection_rows": 4733,
+  "selection_families": 144,
+  "corpus_shard_sha256": "f1542ab9b90a72c1868cf9534d74b56df40345c878b97e1e96beeef82ed94d20",
+  "selection": "Previously seen/exploratory; not blind validation.",
+  "sampling": "All eligible rows once per seed-shuffled epoch, tail batch retained.",
+  "family_objective_weight": "N/(432*n_g)",
+  "exposure_objective_distinction": "Full-row uniform exposure; family-equal expected squared-error objective. Different coverage and RNG sequence from old gameuniform->rowuniform.",
+  "seed": 19080311,
+  "batch": 128,
+  "tail_batch": 83,
+  "epochs": 32,
+  "steps_per_epoch": 116,
+  "steps": 3712,
+  "actual_seen_if_complete": 473696,
+  "evaluation_epochs": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    18,
+    20,
+    24,
+    28,
+    32
+  ],
+  "cases": [
+    {
+      "case": "A",
+      "lr": 0.0001
+    },
+    {
+      "case": "B",
+      "lr": 3e-05
+    }
+  ],
+  "model": "QF1+D H32 zero4/rawD(0,8)/oldscale/common fresh zerohead",
+  "optimizer": "Adam WD0/scheduler none/dropout0",
+  "criterion": "Minimum family-equal zMSE; ties earlier/less seen, then A.",
+  "planned_nn_per_case": 903488,
+  "planned_two_case_nn_plus_max_parity": 1807976,
+  "prospective_caps": {
+    "nn": 2000000,
+    "processed": 2200000,
+    "MAX": 2,
+    "science_seconds": 180,
+    "data_bytes": 12582912
+  },
+  "actual_all_conditions": "NOT_STARTED",
+  "allocation_policy": "Original donor/reserve held; no inferred refund, discount or cap reset.",
+  "end_still_improving": "Right-censored; no automatic extension.",
+  "forbidden_criteria": "Opened public43/RuleA48/96 and test errors."
+}

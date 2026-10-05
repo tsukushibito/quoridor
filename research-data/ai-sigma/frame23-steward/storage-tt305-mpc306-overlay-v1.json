@@ -1,0 +1,91 @@
+{
+  "at": "2026-10-05T23:22:50.419462+00:00",
+  "schema": "305-306-conserved-root-coverage-overlay-v1",
+  "base_global": {
+    "path": "research-data/ai-sigma/frame23-steward/storage-epoch-303-304-admission.json",
+    "sha256": "5ca6668cb5102f7f1b173f1ae706ef40ac2c0630de09040faa80cc19062d14c6",
+    "measurement_at": "2026-10-05T23:10:34.001390+00:00",
+    "total": 12426055680,
+    "cap": 12884901888,
+    "margin": 458846208,
+    "UNKNOWN": 134217728
+  },
+  "refs": [
+    {
+      "path": "research-data/ai-sigma/frame23-native-z-epoch-lr/donor-storage-305-306-v1.json",
+      "bytes": 1417,
+      "sha256": "4409ee080c64160c4a9e9a7a27c5996899424ad671350592a2d8a63c0d4e0697"
+    },
+    {
+      "path": "research-data/ai-sigma/frame23-persistent-tt/recipient-resources-v1.json",
+      "bytes": 648,
+      "sha256": "81cb4331a544d65de473603e0c159377695bf0da74ffc70f5d2ae093b8848025"
+    },
+    {
+      "path": "research-data/ai-sigma/frame23-mpc-calibration-design/owner-local-forecast-v1.json",
+      "bytes": 550,
+      "sha256": "efcd0541cafc28e8540edf920c2a17c1f1096acd6ed7f054668e457265ee0a22"
+    },
+    {
+      "path": "research-data/ai-sigma/frame23-sigma-public-z-import/closed-donor-tt305-mpc306-v1.json",
+      "bytes": 3200,
+      "sha256": "fd204b9ff930a459cad9c5945f0f3994f5c1094e199f79feb43b364f1aca47db"
+    },
+    {
+      "path": "research-data/ai-sigma/frame22-coordinator/persistent-tt-compile-donor-v1.json",
+      "bytes": 892,
+      "sha256": "5546bc5e0973587b752f0e710c262b4812139e0282e340c7a831587487794dc1"
+    }
+  ],
+  "304": {
+    "current": 49152,
+    "retained_inclusive": 262144,
+    "reservation": 10223616,
+    "status": "NOT_STARTED/oldscience0/no newscience transfer"
+  },
+  "305": {
+    "exact_root": "/workspaces/quoridor/research-data/ai-sigma/frame23-persistent-tt",
+    "current": 40960,
+    "inclusive_forecast": 1048576,
+    "reservation": 2097152,
+    "sharedtarget_growth": 16777216,
+    "existing_sharedtarget_bounds_full_held": "unchanged old32+32+32 additional-growth budgets; percompile owner actualforecast andphysics required; no newparent"
+  },
+  "306": {
+    "exact_root": "/workspaces/quoridor/research-data/ai-sigma/frame23-mpc-calibration-design",
+    "current": 12288,
+    "inclusive_forecast": 196608,
+    "reservation": 262144,
+    "science_NN_compile": 0
+  },
+  "sum_reserved": 12582912,
+  "same_existing_reserved12": 12582912,
+  "current_not_added_twice_to_inclusive_forecasts": true,
+  "status": "CONSERVATION_ROOTS_AND_OWNER_FORECASTS_BOUND",
+  "no_global_rescan": true,
+  "base_current_and_pending_unmodified": true,
+  "parent_capacity_increase": 0,
+  "UNKNOWN_discount": false,
+  "science_NN_source_compile_budgets_separate_confirmed_refs_not_inferred_from_storage": true,
+  "runtime_current24": true,
+  "runtime_running_exact2": true,
+  "runtime_watch_role_registry_stopstart_edit": false,
+  "keeper": {
+    "current": 20279296,
+    "oldforecast": 3145728,
+    "overlay_source_Git_metadata_upper": 131072,
+    "guard": 117440512,
+    "within": true
+  },
+  "entry_foreignsource_physics_ownership_peak_actual_forecast_required": true,
+  "deadlines": {
+    "source": "23:23",
+    "save": "23:25",
+    "parent": {
+      "heavy": "2026-10-05T23:26:03Z",
+      "supervisor": "2026-10-05T23:31:03Z",
+      "monitor": "2026-10-05T23:34:03Z",
+      "final": "2026-10-05T23:36:03Z"
+    }
+  }
+}

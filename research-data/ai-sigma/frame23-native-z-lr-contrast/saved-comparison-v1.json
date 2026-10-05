@@ -1,0 +1,383 @@
+{
+  "schema": "native-z-LR-saved-comparison-302-v1",
+  "sampling_exact_counts_equal": true,
+  "sampling_refs": {
+    "A": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-A-r1/sampling.json",
+      "SHA": "6bb63a83777441ad23f7d6462a94db2aa2d506f08ee68ff6ae309349f686121a",
+      "B": 169825
+    },
+    "B": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-B-r1/sampling.json",
+      "SHA": "6bb63a83777441ad23f7d6462a94db2aa2d506f08ee68ff6ae309349f686121a",
+      "B": 169825
+    }
+  },
+  "batch_sequence_record": "not individually persisted; deterministicsame source/seed and exact sampling count equality; do notclaima storedfullorder proof",
+  "real_randomdraw_counts": {
+    "seen": 512000,
+    "row_min": 5,
+    "row_max": 144
+  },
+  "actual_completed_full_epochs": null,
+  "proxy_row_epochs": 34.58758359791934,
+  "A_old298_commonpoint_weights": [
+    {
+      "step": 0,
+      "new_A_SHA": "ec4167ccb5042cfe937b23850a1b52d1cd9cf6c3fb1d348627bfe6cc7d023cc5",
+      "old298_A_SHA": "ec4167ccb5042cfe937b23850a1b52d1cd9cf6c3fb1d348627bfe6cc7d023cc5",
+      "same_byte": true
+    },
+    {
+      "step": 1,
+      "new_A_SHA": "c5a5811f41b0df3a23ecf841bbeb85d895b8179c64be83c5ea3840d4353765de",
+      "old298_A_SHA": "c5a5811f41b0df3a23ecf841bbeb85d895b8179c64be83c5ea3840d4353765de",
+      "same_byte": true
+    },
+    {
+      "step": 5,
+      "new_A_SHA": "17f5aec520c3764d8711b23e8e0557c5e5b757f69e825efebd0663ab560ab9f5",
+      "old298_A_SHA": "17f5aec520c3764d8711b23e8e0557c5e5b757f69e825efebd0663ab560ab9f5",
+      "same_byte": true
+    },
+    {
+      "step": 20,
+      "new_A_SHA": "89a9e8f5be92b1e92e4d282d08ae59c0f2f557ffc06cec39323dde38fbbfe81f",
+      "old298_A_SHA": "89a9e8f5be92b1e92e4d282d08ae59c0f2f557ffc06cec39323dde38fbbfe81f",
+      "same_byte": true
+    },
+    {
+      "step": 50,
+      "new_A_SHA": "4dfa4c488e554defb2ac1f356334740d0507f0dcb59f77d56cdafb1f96674a85",
+      "old298_A_SHA": "4dfa4c488e554defb2ac1f356334740d0507f0dcb59f77d56cdafb1f96674a85",
+      "same_byte": true
+    },
+    {
+      "step": 100,
+      "new_A_SHA": "0156cf7efe2dbfeca34e6dd11fb3cfeaf8281310182e6880690142096e3f1ecd",
+      "old298_A_SHA": "0156cf7efe2dbfeca34e6dd11fb3cfeaf8281310182e6880690142096e3f1ecd",
+      "same_byte": true
+    },
+    {
+      "step": 200,
+      "new_A_SHA": "0d0fb438249106a7e9b63c16b1e65e6507cc1265901f9704d8e910741f495a12",
+      "old298_A_SHA": "0d0fb438249106a7e9b63c16b1e65e6507cc1265901f9704d8e910741f495a12",
+      "same_byte": true
+    },
+    {
+      "step": 1000,
+      "new_A_SHA": "1f8d8c28c9a863a73a56bb457424cbaf9c9c1e4a94ab9e6cb85620ffa6123b8c",
+      "old298_A_SHA": "1f8d8c28c9a863a73a56bb457424cbaf9c9c1e4a94ab9e6cb85620ffa6123b8c",
+      "same_byte": true
+    },
+    {
+      "step": 4000,
+      "new_A_SHA": "0b5d74dd92365b18dfa98cc9bd4e68b8f747edeaf17b14c9171235cb34e6ff99",
+      "old298_A_SHA": "0b5d74dd92365b18dfa98cc9bd4e68b8f747edeaf17b14c9171235cb34e6ff99",
+      "same_byte": true
+    }
+  ],
+  "per_case": {
+    "A": {
+      "best_step": 1250,
+      "best_seen": 160000,
+      "best_zMSE": 0.5843765775360874,
+      "last_zMSE": 0.7478949277500688,
+      "last_train_zMSE": 0.005187532033559194,
+      "last_train_saturation": 0.8856312909545362,
+      "LR": 0.0001,
+      "displacement": [
+        {
+          "step": 0,
+          "parameter_displacement_L2": 0.0,
+          "seen": 0,
+          "LR_times_steps_proxy_not_Adam_updates": 0.0
+        },
+        {
+          "step": 1,
+          "parameter_displacement_L2": 0.0005477189450605154,
+          "seen": 128,
+          "LR_times_steps_proxy_not_Adam_updates": 0.0001
+        },
+        {
+          "step": 5,
+          "parameter_displacement_L2": 0.01907765785857113,
+          "seen": 640,
+          "LR_times_steps_proxy_not_Adam_updates": 0.0005
+        },
+        {
+          "step": 20,
+          "parameter_displacement_L2": 0.06337168102753418,
+          "seen": 2560,
+          "LR_times_steps_proxy_not_Adam_updates": 0.002
+        },
+        {
+          "step": 50,
+          "parameter_displacement_L2": 0.17178916537096933,
+          "seen": 6400,
+          "LR_times_steps_proxy_not_Adam_updates": 0.005
+        },
+        {
+          "step": 100,
+          "parameter_displacement_L2": 0.39461547942785596,
+          "seen": 12800,
+          "LR_times_steps_proxy_not_Adam_updates": 0.01
+        },
+        {
+          "step": 200,
+          "parameter_displacement_L2": 0.9526923101186523,
+          "seen": 25600,
+          "LR_times_steps_proxy_not_Adam_updates": 0.02
+        },
+        {
+          "step": 400,
+          "parameter_displacement_L2": 2.1545791209023233,
+          "seen": 51200,
+          "LR_times_steps_proxy_not_Adam_updates": 0.04
+        },
+        {
+          "step": 600,
+          "parameter_displacement_L2": 3.0757977145009168,
+          "seen": 76800,
+          "LR_times_steps_proxy_not_Adam_updates": 0.060000000000000005
+        },
+        {
+          "step": 800,
+          "parameter_displacement_L2": 3.8079049138015444,
+          "seen": 102400,
+          "LR_times_steps_proxy_not_Adam_updates": 0.08
+        },
+        {
+          "step": 1000,
+          "parameter_displacement_L2": 4.383805552129405,
+          "seen": 128000,
+          "LR_times_steps_proxy_not_Adam_updates": 0.1
+        },
+        {
+          "step": 1250,
+          "parameter_displacement_L2": 4.979970280067265,
+          "seen": 160000,
+          "LR_times_steps_proxy_not_Adam_updates": 0.125
+        },
+        {
+          "step": 1500,
+          "parameter_displacement_L2": 5.465107541769385,
+          "seen": 192000,
+          "LR_times_steps_proxy_not_Adam_updates": 0.15
+        },
+        {
+          "step": 1750,
+          "parameter_displacement_L2": 5.888572429795015,
+          "seen": 224000,
+          "LR_times_steps_proxy_not_Adam_updates": 0.17500000000000002
+        },
+        {
+          "step": 2000,
+          "parameter_displacement_L2": 6.248475884838306,
+          "seen": 256000,
+          "LR_times_steps_proxy_not_Adam_updates": 0.2
+        },
+        {
+          "step": 2250,
+          "parameter_displacement_L2": 6.553009097042153,
+          "seen": 288000,
+          "LR_times_steps_proxy_not_Adam_updates": 0.225
+        },
+        {
+          "step": 2500,
+          "parameter_displacement_L2": 6.807472695630038,
+          "seen": 320000,
+          "LR_times_steps_proxy_not_Adam_updates": 0.25
+        },
+        {
+          "step": 2750,
+          "parameter_displacement_L2": 7.020197881409204,
+          "seen": 352000,
+          "LR_times_steps_proxy_not_Adam_updates": 0.275
+        },
+        {
+          "step": 3000,
+          "parameter_displacement_L2": 7.206495533400913,
+          "seen": 384000,
+          "LR_times_steps_proxy_not_Adam_updates": 0.3
+        },
+        {
+          "step": 3250,
+          "parameter_displacement_L2": 7.376443032340694,
+          "seen": 416000,
+          "LR_times_steps_proxy_not_Adam_updates": 0.325
+        },
+        {
+          "step": 3500,
+          "parameter_displacement_L2": 7.523280463061428,
+          "seen": 448000,
+          "LR_times_steps_proxy_not_Adam_updates": 0.35000000000000003
+        },
+        {
+          "step": 3750,
+          "parameter_displacement_L2": 7.643996344683844,
+          "seen": 480000,
+          "LR_times_steps_proxy_not_Adam_updates": 0.375
+        },
+        {
+          "step": 4000,
+          "parameter_displacement_L2": 7.755629632924803,
+          "seen": 512000,
+          "LR_times_steps_proxy_not_Adam_updates": 0.4
+        }
+      ]
+    },
+    "B": {
+      "best_step": 3750,
+      "best_seen": 480000,
+      "best_zMSE": 0.574644168484578,
+      "last_zMSE": 0.5749242003511239,
+      "last_train_zMSE": 0.24990214590623658,
+      "last_train_saturation": 0.26001486185232725,
+      "LR": 3e-05,
+      "displacement": [
+        {
+          "step": 0,
+          "parameter_displacement_L2": 0.0,
+          "seen": 0,
+          "LR_times_steps_proxy_not_Adam_updates": 0.0
+        },
+        {
+          "step": 1,
+          "parameter_displacement_L2": 0.00016431568411589507,
+          "seen": 128,
+          "LR_times_steps_proxy_not_Adam_updates": 3e-05
+        },
+        {
+          "step": 5,
+          "parameter_displacement_L2": 0.005436872039926445,
+          "seen": 640,
+          "LR_times_steps_proxy_not_Adam_updates": 0.00015000000000000001
+        },
+        {
+          "step": 20,
+          "parameter_displacement_L2": 0.018653729720742727,
+          "seen": 2560,
+          "LR_times_steps_proxy_not_Adam_updates": 0.0006000000000000001
+        },
+        {
+          "step": 50,
+          "parameter_displacement_L2": 0.05057890585849363,
+          "seen": 6400,
+          "LR_times_steps_proxy_not_Adam_updates": 0.0015
+        },
+        {
+          "step": 100,
+          "parameter_displacement_L2": 0.11488437919279243,
+          "seen": 12800,
+          "LR_times_steps_proxy_not_Adam_updates": 0.003
+        },
+        {
+          "step": 200,
+          "parameter_displacement_L2": 0.2801468387918571,
+          "seen": 25600,
+          "LR_times_steps_proxy_not_Adam_updates": 0.006
+        },
+        {
+          "step": 400,
+          "parameter_displacement_L2": 0.6093968319678577,
+          "seen": 51200,
+          "LR_times_steps_proxy_not_Adam_updates": 0.012
+        },
+        {
+          "step": 600,
+          "parameter_displacement_L2": 0.9426390310674988,
+          "seen": 76800,
+          "LR_times_steps_proxy_not_Adam_updates": 0.018000000000000002
+        },
+        {
+          "step": 800,
+          "parameter_displacement_L2": 1.3012954775084058,
+          "seen": 102400,
+          "LR_times_steps_proxy_not_Adam_updates": 0.024
+        },
+        {
+          "step": 1000,
+          "parameter_displacement_L2": 1.6591391532527042,
+          "seen": 128000,
+          "LR_times_steps_proxy_not_Adam_updates": 0.030000000000000002
+        },
+        {
+          "step": 1250,
+          "parameter_displacement_L2": 2.075768302067168,
+          "seen": 160000,
+          "LR_times_steps_proxy_not_Adam_updates": 0.0375
+        },
+        {
+          "step": 1500,
+          "parameter_displacement_L2": 2.400640918259385,
+          "seen": 192000,
+          "LR_times_steps_proxy_not_Adam_updates": 0.045
+        },
+        {
+          "step": 1750,
+          "parameter_displacement_L2": 2.6926005252386696,
+          "seen": 224000,
+          "LR_times_steps_proxy_not_Adam_updates": 0.0525
+        },
+        {
+          "step": 2000,
+          "parameter_displacement_L2": 2.964934796987029,
+          "seen": 256000,
+          "LR_times_steps_proxy_not_Adam_updates": 0.060000000000000005
+        },
+        {
+          "step": 2250,
+          "parameter_displacement_L2": 3.213073224497,
+          "seen": 288000,
+          "LR_times_steps_proxy_not_Adam_updates": 0.0675
+        },
+        {
+          "step": 2500,
+          "parameter_displacement_L2": 3.4435901639404607,
+          "seen": 320000,
+          "LR_times_steps_proxy_not_Adam_updates": 0.075
+        },
+        {
+          "step": 2750,
+          "parameter_displacement_L2": 3.659950459725377,
+          "seen": 352000,
+          "LR_times_steps_proxy_not_Adam_updates": 0.0825
+        },
+        {
+          "step": 3000,
+          "parameter_displacement_L2": 3.8660974378296484,
+          "seen": 384000,
+          "LR_times_steps_proxy_not_Adam_updates": 0.09
+        },
+        {
+          "step": 3250,
+          "parameter_displacement_L2": 4.0599634426905515,
+          "seen": 416000,
+          "LR_times_steps_proxy_not_Adam_updates": 0.0975
+        },
+        {
+          "step": 3500,
+          "parameter_displacement_L2": 4.247798892132024,
+          "seen": 448000,
+          "LR_times_steps_proxy_not_Adam_updates": 0.105
+        },
+        {
+          "step": 3750,
+          "parameter_displacement_L2": 4.4187183701359745,
+          "seen": 480000,
+          "LR_times_steps_proxy_not_Adam_updates": 0.1125
+        },
+        {
+          "step": 4000,
+          "parameter_displacement_L2": 4.586681596187075,
+          "seen": 512000,
+          "LR_times_steps_proxy_not_Adam_updates": 0.12000000000000001
+        }
+      ]
+    }
+  },
+  "selection_exploratory_not_blind": true,
+  "user_full_epoch_revision": "NOT_STARTED; priorMAX2spent beforesteer, no retrospective replacement",
+  "lowerLR_end": "one small valuptick3750\u21924000; optimum/convergence rightboundary uncertainty remains; noextension"
+}

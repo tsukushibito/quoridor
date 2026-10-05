@@ -1,0 +1,27 @@
+{
+  "mode": "diagnose",
+  "output": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-lr-contrast/native-parity-A.json",
+  "counter": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-lr-contrast/native-parity-counter-A.json",
+  "prefixes": [
+    [],
+    [
+      13
+    ]
+  ],
+  "engines": [
+    {
+      "id": "case-A",
+      "kind": "distance_residual",
+      "manifest": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-A-r1/best-model/manifest.json"
+    }
+  ],
+  "depths": [],
+  "max_nodes": 500,
+  "nn_cap": 120,
+  "processed_cap": 1000,
+  "wall_seconds": 5.0,
+  "max_plies": 200,
+  "cpu_core": 1,
+  "ram_limit": 1879048192,
+  "host_ram_reserve": 1073741824
+}

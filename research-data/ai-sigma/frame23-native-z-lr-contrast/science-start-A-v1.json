@@ -1,0 +1,38 @@
+{
+  "case": "A",
+  "task": "native-z-lr-A-302-v1",
+  "UTC": "2026-10-05T22:55:10.004914+00:00",
+  "identity": {
+    "pid": 2037422,
+    "start_ticks": "49397372",
+    "ppid": 2037321,
+    "pgrp": 2037422,
+    "cpu_ticks": 0,
+    "state": "R",
+    "rss": 4096,
+    "cpus": [
+      1
+    ],
+    "argv": []
+  },
+  "argv": [
+    "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "-B",
+    "-m",
+    "quoridor_training.train",
+    "train",
+    "--cache",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/sharded-cache-v1.json",
+    "--output",
+    "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-A-r1",
+    "--config",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-lr-contrast/config-A-v1.json",
+    "--scale",
+    "/workspaces/quoridor/.worktree/assets/checkpoints/frame22-teacher-transfer-B-r1/scale.json"
+  ],
+  "source_SHA": "067c4faca874124cdb304ea16f3b9aca4387dbcff72b7834ef3f2acb283d7065",
+  "registration_SHA": "f10de65d9ffdc82558ec0ee583d90245182d486977482004c5b1b04da6fc51e6",
+  "MAX2_entry": 1,
+  "NN_reserved": 961828,
+  "processed_reserved": 1010000
+}

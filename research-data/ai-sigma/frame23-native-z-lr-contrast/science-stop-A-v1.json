@@ -1,0 +1,83 @@
+{
+  "case": "A",
+  "UTC": "2026-10-05T22:55:21.484924+00:00",
+  "phases": [
+    {
+      "phase": "fit",
+      "exit": 0,
+      "waited": true,
+      "exact": [],
+      "pgrp": []
+    },
+    {
+      "phase": "saved-parity",
+      "exit": 0,
+      "waited": true,
+      "exact": [],
+      "pgrp": []
+    }
+  ],
+  "recorded_children": [
+    {
+      "pid": 2037422,
+      "start_ticks": "49397372",
+      "ppid": 2037321,
+      "pgrp": 2037422,
+      "cpu_ticks": 780,
+      "state": "Z",
+      "rss": 0,
+      "cpus": [
+        1
+      ],
+      "argv": []
+    },
+    {
+      "pid": 2037679,
+      "start_ticks": "49398388",
+      "ppid": 2037321,
+      "pgrp": 2037679,
+      "cpu_ticks": 93,
+      "state": "R",
+      "rss": 567246848,
+      "cpus": [
+        1
+      ],
+      "argv": [
+        "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+        "-B",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-lr-contrast/post_fit.py",
+        "--registration",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-lr-contrast/registration-v1.json",
+        "--case",
+        "A"
+      ]
+    },
+    {
+      "pid": 2037690,
+      "start_ticks": "49398490",
+      "ppid": 2037679,
+      "pgrp": 2037679,
+      "cpu_ticks": 0,
+      "state": "D",
+      "rss": 548323328,
+      "cpus": [
+        1
+      ],
+      "argv": [
+        "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+        "-B",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-lr-contrast/post_fit.py",
+        "--registration",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-lr-contrast/registration-v1.json",
+        "--case",
+        "A"
+      ]
+    }
+  ],
+  "reason": null,
+  "command_wall_s": 11.481860010011587,
+  "sampled_family_peak_RSS_B": 1119715328,
+  "purpose_PASS": true,
+  "actual_NN": 961352,
+  "processed_reserved": 1010000
+}

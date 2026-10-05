@@ -1,0 +1,337 @@
+{
+  "schema": "native-z-LR-observational-candidate-freeze-302-v1",
+  "UTC": "2026-10-05T22:59:53.976881+00:00",
+  "selection_rule": "minimum saved144-family zMSE; tie earlierseen thencaseA",
+  "candidate": {
+    "case": "B",
+    "LR": 3e-05,
+    "step": 3750,
+    "selected_seen": 480000,
+    "full_case_seen": 512000,
+    "checkpoint": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-B-r1/step3750.pt",
+      "SHA": "a36625a0cd6c9d375c39aeda1c58982610fa77db226095b3d16b5dab0846f76d",
+      "B": 52641
+    },
+    "native_manifest": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-B-r1/best-model/manifest.json",
+      "SHA": "505d8dcc65f54ac3dc2ecf1215be991ec93566ea8a86f59bc85f9b24b1eac143",
+      "B": 847
+    },
+    "native_weights": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-B-r1/best-model/weights.f32",
+      "SHA": "d3af3c7c699bd6c6d45a1078addc7d8d1fe3de4c765ba488e6066e996f0e6e46",
+      "B": 49284
+    },
+    "target_metadata": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-B-r1/best-model/training-target.json",
+      "SHA": "5364b416539c68eff8bd0cb16806ba7f7aaac1e3b21d3a4ffe5c9ab6b31de0e8",
+      "B": 29
+    },
+    "config": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-lr-contrast/config-B-v1.json",
+      "SHA": "1bfade98f8ef62e6c3ba1ddf3529f81e5738cc5235bdc9a56df276a8f717cf18",
+      "B": 1027
+    },
+    "selection_zMSE": 0.574644168484578
+  },
+  "scale": {
+    "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame22-teacher-transfer-B-r1/scale.json",
+    "SHA": "175f07713409994d0d4c99768267695b0a91ec100baabf202fb4518b56cbdfed",
+    "B": 142
+  },
+  "initial_SHA": "ec4167ccb5042cfe937b23850a1b52d1cd9cf6c3fb1d348627bfe6cc7d023cc5",
+  "cache": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/sharded-cache-v1.json",
+    "SHA": "f1542ab9b90a72c1868cf9534d74b56df40345c878b97e1e96beeef82ed94d20",
+    "B": 2332159
+  },
+  "Tseen": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/Tseen-input-references.jsonl.gz",
+    "SHA": "e289b2ba7dcd24d6429714d0ec264d261b97312736bdaed47855773ea1403ad9",
+    "B": 1892863
+  },
+  "ALLrawV": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/Vraw-input-references.jsonl.gz",
+    "SHA": "68f54e61eb9734e83c32ed3c28bf2ecb8dd64664f107a432db8eaff3b2b4fd3b",
+    "B": 606972
+  },
+  "rows": {
+    "T": 14803,
+    "ALLrawV": 4733,
+    "Tfamily": 432,
+    "Vfamily": 144
+  },
+  "sampling": "OLDgameuniform\u2192rowuniform replacement; newall-rowepoch instructionnotexecuted",
+  "stop_before_main_revision": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-lr-contrast/user-epoch-steer-actual-quiet-v1.json",
+    "SHA": "7e33c6a0638f4cd9fe043504ae36c65320a25666f2c18d448a7e7c515c1c307c",
+    "B": 2130
+  },
+  "new_weights_native_parity": {
+    "A": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-lr-contrast/case-A-result-v1.json",
+      "SHA": "f0e8020c9f1a56cbfeba90ec568c20619f4843a710104d777f2a9d7ae8e2dca0",
+      "B": 5259
+    },
+    "B": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-lr-contrast/case-B-result-v1.json",
+      "SHA": "038484e0d275a4667aed0ab35fcaac04df053a557042af373efbb75f7316f0fe",
+      "B": 5311
+    }
+  },
+  "saved_sameforward": {
+    "A": {
+      "roworder": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-A-r1/validation-order.json.gz",
+        "SHA": "51679f17566fa0b55a7c6d531df863cd39694a9240f7076dce647db4b4a6cc7c",
+        "B": 13069
+      },
+      "scalars": [
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-A-r1/validation-step0.f32",
+          "SHA": "59c6c6f49fbba18a15cea91057a064a62c9ddb03fe636848dcb54167d7a095dc",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-A-r1/validation-step1.f32",
+          "SHA": "5bdd1708e505cef2c73a32d337731a43c1ec31daafc36fa443284f9953e525cf",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-A-r1/validation-step5.f32",
+          "SHA": "72f5a8f43dcf7c86ed3df74ddd8e494a1d15a1c3665a770ab2ca2d85918d21bb",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-A-r1/validation-step20.f32",
+          "SHA": "fdd50a05a9bcb4a2b0468e29cf4eaaad37e044a2d3eb56e9bd7abe48733d65a3",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-A-r1/validation-step50.f32",
+          "SHA": "c029a53853b66e930ee388538f54eea5c69879483e909af7e2a6c26ee9d0829c",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-A-r1/validation-step100.f32",
+          "SHA": "245c45463e552f1c203fb6aca7ee21434bf7acc1b52aaab98d7bb06aec89e047",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-A-r1/validation-step200.f32",
+          "SHA": "42f7f2074378e047365493e065bde4fb98f167746fa48a90eb7e784ccd4bbd53",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-A-r1/validation-step400.f32",
+          "SHA": "dd2513e0f81a80132e88841b520314af1297dcfc37ec7c2ae33974dd679737e9",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-A-r1/validation-step600.f32",
+          "SHA": "23c5ac4f037efd54be1f727fbb4d91fe389d818d07196c8f7ce939f90236abbd",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-A-r1/validation-step800.f32",
+          "SHA": "fb5db62c24ef54ef92e559e099de46b034e03774ece291654502e8fdd04ebc9f",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-A-r1/validation-step1000.f32",
+          "SHA": "e1007b9c20a57adf30cd7f5636bef3786a5f679b14d9ef797cbd625504465025",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-A-r1/validation-step1250.f32",
+          "SHA": "14a304b2dc439a512177c0b0a82a8aa9e274fbd1a6f747c5a929f1fe90911b20",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-A-r1/validation-step1500.f32",
+          "SHA": "f8509a1ffa66846dc1c345de2545c308780a4df570e2d7306ee350402c2eaaee",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-A-r1/validation-step1750.f32",
+          "SHA": "4ea6c9133288e8bdbdc17912544494b520237fcde17e5fa42f9e2509f0783714",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-A-r1/validation-step2000.f32",
+          "SHA": "73e4821c383144cfbc55a0ed49a9f1d53835d0ddc5e8360544245bc5c10c5b41",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-A-r1/validation-step2250.f32",
+          "SHA": "2c66394cc0e4f18a16ffadb23ca0c5ad369e5e67e8b2bcc0b1290edafc702570",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-A-r1/validation-step2500.f32",
+          "SHA": "b405ad7de03b477f2b5892fc1be3c497d514d23b186f99da7b6720a73d38bd8d",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-A-r1/validation-step2750.f32",
+          "SHA": "436666b052d3f0e3bc1503273bdce66fae437b33edba48870f8a2fc1bf23bd1c",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-A-r1/validation-step3000.f32",
+          "SHA": "e4f3eeb8f89ac01c9527e720d0665a20e8afed6078747946a7e04c1edaadc160",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-A-r1/validation-step3250.f32",
+          "SHA": "eb7ddd116f1058dfa187253ce93c26819abc40b3bf7e31bafbd525311ebee18b",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-A-r1/validation-step3500.f32",
+          "SHA": "e7f40fc7b9442f9285b6193861aec474d5eb35a20975337ce67fa4b646003fe5",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-A-r1/validation-step3750.f32",
+          "SHA": "9dab7fd19185f7b1ae0de07f5a379abb60dcf9c4724bf14c26c91e34bde979d4",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-A-r1/validation-step4000.f32",
+          "SHA": "94840a137bdaa2231b69cb40e4fb7965fe8b3a05a1480f2d47651cdefbbbf1c8",
+          "B": 18932
+        }
+      ]
+    },
+    "B": {
+      "roworder": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-B-r1/validation-order.json.gz",
+        "SHA": "ca62ecaa0a84b50d95d434b5e3b238835749a52d3c72ae70aa197be066047498",
+        "B": 13069
+      },
+      "scalars": [
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-B-r1/validation-step0.f32",
+          "SHA": "59c6c6f49fbba18a15cea91057a064a62c9ddb03fe636848dcb54167d7a095dc",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-B-r1/validation-step1.f32",
+          "SHA": "e1e5cfc1a8c0c4f483c7ebf2627e61b152ed0e17d2d4be1139e287f47f5befcf",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-B-r1/validation-step5.f32",
+          "SHA": "17cc92cce223f2adb86899482eb52f3ef415304cc3a9a1eecee938841e09343f",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-B-r1/validation-step20.f32",
+          "SHA": "518769bac4c799071a39fe81f00dad9826825bd860e566459fe4758ad08b0bd1",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-B-r1/validation-step50.f32",
+          "SHA": "5e182e5163a8e267320392ecafeccc3389870840931c854482bb8f0a76ea30d4",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-B-r1/validation-step100.f32",
+          "SHA": "13d4b7a22c3feca5dc3c1acaabf8ea7ebb74e3f8269956f252fe6ac1f2c07b1f",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-B-r1/validation-step200.f32",
+          "SHA": "1d1a25e5db030fa4d16396dbf9f597f5ff1dbe2bc84389c413bfce234e79534f",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-B-r1/validation-step400.f32",
+          "SHA": "f78d6e54d2cd9ff1d6aa64309c52288340757a46018a71658020734b382ca3bc",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-B-r1/validation-step600.f32",
+          "SHA": "05a9e767cec4529cc9682613e635c87a5c9d10cd5f5a07f0d1e14bab031cedd6",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-B-r1/validation-step800.f32",
+          "SHA": "946a439db562155fe50d58336faaaf1969cdbfe2672ba89f1062a737c109655d",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-B-r1/validation-step1000.f32",
+          "SHA": "450c824653975283528a163128730c5c0ce1c5ab4a8b8344946d0f1cece672d3",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-B-r1/validation-step1250.f32",
+          "SHA": "c73b444191b6b2b34f281950cc521ad210845a8d5696dad7da977c7698a6a57d",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-B-r1/validation-step1500.f32",
+          "SHA": "56ff35442e1e4c811dc2604c2b8103ae1dbff48d5dad239a35a0426e158ed535",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-B-r1/validation-step1750.f32",
+          "SHA": "4ec937c57a18fdee749ede20d812b7db9ebc3d335dfa9a280a92401049cbf80a",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-B-r1/validation-step2000.f32",
+          "SHA": "6a7e2a3d80e125697efea37919345a5183d2669ed3d7df5b33f0940cdde92e60",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-B-r1/validation-step2250.f32",
+          "SHA": "5a931d86da14db2e2f7937359ada1a3820b367df1e9700f945aaad2932d4282c",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-B-r1/validation-step2500.f32",
+          "SHA": "7a1128ac0215ba28309dda8189d70ac5996a120b157df2a70ab16879e96c3ace",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-B-r1/validation-step2750.f32",
+          "SHA": "72830a898d50b04e5c18f06ff9d9f98e644cecc0bb3a1f6ab7cda3072de6e9c0",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-B-r1/validation-step3000.f32",
+          "SHA": "c4229d7dcef2228d3c206eb8003ee5b08537f3da68a43f90d9dc017f56d9d248",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-B-r1/validation-step3250.f32",
+          "SHA": "9aeb010fc4af2008baa6d5bdbab5f4381021a006fa563bf236bf2be96997dcfd",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-B-r1/validation-step3500.f32",
+          "SHA": "d47697d79c621eafa66829532a365ccaa2d90e774f73d6c9fdbc3a863fae8261",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-B-r1/validation-step3750.f32",
+          "SHA": "b757e3275334a2ff37697f66f640002ba0e1e778dca52ea0a87ff65cbd4f7a5b",
+          "B": 18932
+        },
+        {
+          "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-z-lr-contrast/case-B-r1/validation-step4000.f32",
+          "SHA": "f947bcf6f408d10121054219edc0ec25888be947287fd0a58086cc541c3fcab0",
+          "B": 18932
+        }
+      ]
+    }
+  },
+  "no_opened_eval_as_criterion": true,
+  "future_eval_newprotocol_needed": true,
+  "default_model_adopted": false,
+  "rawtargets_notcopied": true
+}

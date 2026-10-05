@@ -1,0 +1,40 @@
+{
+  "task": "mpc-calibration-preparation-306-v1",
+  "sources": [
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-completed-depth/result-v1.json",
+      "SHA": "74b93942fcd74530342dd4379f3d6d70c5f0aabfb737c2d3b76ab23d6b97de3d",
+      "B": 7435,
+      "status": "FINITE_SAME_COMPLETED_DEPTH1",
+      "current_calibration_eligible": false,
+      "reason": "Four roots, two evaluators, completed depth1 only: no same-model shallow/deep pair."
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame21-model-cause/stage-a-r1/result.json",
+      "SHA": "c23491fa53c98a77e2e090360d9ed30ca7e93975fb37c57fde2329e1e0a150e5",
+      "B": 1745,
+      "status": "PASS",
+      "current_calibration_eligible": false,
+      "reason": "16 prefixes with legacy L/I and search depths; old binary/model binding. Current 305 exact OFF namespace, tactical flags and root-origin proofs absent."
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame20-one-root-leaf/result-r1.json",
+      "SHA": "a560c26f3a2f05cdb701a8bd2a5e17e0525b46c839b375b64c3a61ddbb1d4071",
+      "B": 26947,
+      "status": "COMPLETED",
+      "current_calibration_eligible": false,
+      "reason": "One root full-window child vectors depths1/2, legacy Node evaluator/source/scale. Not current maintained Rust calibration; no cohort or unused-validation denominator."
+    }
+  ],
+  "eligible_current_paired_depth_records": 0,
+  "pair_searches_executed": 0,
+  "fit": "NOT_RUN",
+  "missing": [
+    "same-input same-evaluator full-width OFF exact shallow/deep values",
+    "depth and extensions/reductions/terminal-origin proof",
+    "target-free independent family split",
+    "phase wall-stock/contact/near-goal metadata",
+    "tail/false-cut unused validation",
+    "shallow-check plus caller-inclusive cost"
+  ]
+}

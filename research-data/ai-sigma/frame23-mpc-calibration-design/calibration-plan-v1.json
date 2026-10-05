@@ -1,0 +1,105 @@
+{
+  "task": "mpc-calibration-preparation-306-v1",
+  "policy_enabled": false,
+  "calibration_artifact": null,
+  "fitted_a_b_sigma_T": null,
+  "schema_version": "mpc-calibration-record-v1",
+  "split": {
+    "version": "mpc-group-split-v1",
+    "predicate": "SHA256(version:family-and-related-view-group), first8bytes little-endian modulo4; bucket0 unused-validation, otherscalibration",
+    "labels_scores_not_read_for_split": true,
+    "joint_family_symmetry_side_views": "samegroup, never independent validation",
+    "all_before_scores": true
+  },
+  "phase": {
+    "ply": "opening<20/middle20..59/late>=60",
+    "wall_stock": "0/1..3/4..10 eachside",
+    "contact": "pawn-adjacency/jump availability source-confirmed, UNKNOWN separate",
+    "near_goal": "exact legal distance<=2 eitherplayer; not inferred from learned value",
+    "sparse_strata": "no pooled fallback to permit cuts; report NOT_CALIBRATED"
+  },
+  "regression": {
+    "orientation": "deep=a*shallow+b+error, same actual root STM",
+    "fit": "calibration groups only; group-equal leastsquares or robust alternative preregistered before collection",
+    "a_b_sigma": "NOT_FITTED; no coefficients transplanted",
+    "interval": "separate lower/upper prediction tails including coefficient uncertainty; family-heldout tail validation, normality not assumed",
+    "multiple_depth_checks": "confidence budget across check depths, sides, phases predeclared; desired error bound requires next allocation",
+    "cuts": "upper-cut only validated lower predicted deep>=beta; lower-cut only validated upper predicted deep<=alpha",
+    "unknown_terminal_tactical_PV": "bypass/no cutoff",
+    "activation": "OFF until current binding, fit, unused false-cut coverage and caller cost demonstrated; correlation alone insufficient"
+  },
+  "TT": {
+    "namespace_binding": [
+      "model",
+      "scale",
+      "rules",
+      "search",
+      "history/state",
+      "calibration_version",
+      "OFF/ON",
+      "EXACT_FULLWIDTH/MPC_APPROXIMATE"
+    ],
+    "approximate_into_OFF_exact": "FORBIDDEN",
+    "ON_cuts": "tag directional approximate lower/upper, never promote exact; separate namespace",
+    "TT_persistent_305": "separate owner, not implemented here"
+  },
+  "validation": {
+    "false_upper": "claimed>=beta yet paired full-width deep<beta",
+    "false_lower": "claimed<=alpha yet paired full-width deep>alpha",
+    "record": "all trials/noncuts/abstentions/tactical/terminal/capped/deep UNKNOWN; no successful-row refill",
+    "CI": "group-level two-sided tail/false-cut uncertainty with cohort dependence; heldout clusters not row-independent",
+    "samewall": "requires later OFF/ON caller outcome/cost, not fit residual alone"
+  },
+  "future_pilot_ESTIMATE_NOT_AUTHORIZATION": {
+    "input": "mechanical target-free existing full-history families, 32 distinct groups, fixed shallow/deep1/2 initially; family split independent of score",
+    "searches": 64,
+    "processed_safety_upper": 2097152,
+    "D_analytic_NN": 0,
+    "native_if_later_allocated_NN_upper": 2097152,
+    "science_wall_s_upper_assumption": 6.4,
+    "compile_test_s_estimate_range": [
+      30,
+      120
+    ],
+    "capture_core_source_s_estimate_range": [
+      900,
+      1800
+    ],
+    "input_replay_NN0_s_estimate_range": [
+      10,
+      30
+    ],
+    "fit_and_validation_NN0_s_estimate_range": [
+      5,
+      20
+    ],
+    "caller_OFF_ON_measurement_s_estimate_range": [
+      60,
+      180
+    ],
+    "save_reap_manage_s_estimate_range": [
+      30,
+      60
+    ],
+    "total_cycle_s_estimate_range": [
+      1041.4,
+      2216.4
+    ],
+    "retention_estimate_B_range": [
+      1048576,
+      4194304
+    ],
+    "limits": "These are explicit assumptions, not measured. Tiny validation subset cannot certify rare false cuts. Zero errors in n independent groups has one-sided95%upper1-0.05^(1/n); correlations widen uncertainty. Larger unused validation e.g299 independent groups required even for1%one-sided bound withzero errors; two-sided/multiple-strata needmore. No core implementation/calibration/test/adoption complete."
+  },
+  "references": [
+    {
+      "title": "Buro1997 Experiments with Multi-ProbCut",
+      "url": "https://skatgame.net/mburo/ps/improve.pdf"
+    },
+    {
+      "title": "Buro2002 author Multi-ProbCut slides, regression and staged checks",
+      "url": "https://skatgame.net/mburo/ps/mpc.pdf"
+    }
+  ],
+  "NN_science_compile_MAX": 0
+}

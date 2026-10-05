@@ -1,0 +1,66 @@
+{
+  "schema": "native-z-epoch-lr-finite-not-started-v1",
+  "issue": "quoridor-4lc.304",
+  "owner": "codex:01a0f31c-2e4b-7170-82c5-69e1428c2418",
+  "recorded_at": "2026-10-05T23:18:26.680675+00:00",
+  "status": "NOT_STARTED",
+  "reason": "303 source deadline 23:08 passed; canonical source stopped and unqualified: 19/20 NN0 tests, float32 seven-place assertion failure.",
+  "release_authority": "User latest delivery explicitly limits 304 to static metadata/read-only contract/notes/close/backup.",
+  "source_qualification_receipt": {
+    "path": "research-data/ai-sigma/frame22-coordinator/epoch-software-303-finite-incomplete-v1.json",
+    "bytes": 1610,
+    "sha256": "344f7fa51d036af6ef9bd38ac646ca531d7bbada7de3a85e3d9b2f90309a2143"
+  },
+  "donor_accepted": {
+    "path": "research-data/ai-sigma/frame23-sigma-public-z-import/closed-donor-epoch-303-304-v2.json",
+    "bytes": 7734,
+    "sha256": "499305b124c9ed4b71cdb8b33dd54b55e167a1815975e8a7b9c1ab21a6520311"
+  },
+  "original_contract": {
+    "path": "research-data/ai-sigma/frame22-coordinator/native-z-epoch-lr-contract.md",
+    "bytes": 4429,
+    "sha256": "3fb9ea2fe3b6c8f47faa113ccaa006d7a8dd45a08663314f2255689a5d65b7d9"
+  },
+  "keeper_point": {
+    "path": "research-data/ai-sigma/frame23-steward/storage-epoch-303-304-admission.json",
+    "bytes": 2069,
+    "sha256": "5ca6668cb5102f7f1b173f1ae706ef40ac2c0630de09040faa80cc19062d14c6"
+  },
+  "failed_assertion": {
+    "observed": 2.500000238418579,
+    "expected": 2.5,
+    "absolute_difference": 2.384185791015625e-07,
+    "outcome": "ORIGINAL_FAILURE_PRESERVED"
+  },
+  "actual": {
+    "science_jobs_started": 0,
+    "science_max_consumed": 0,
+    "model_nn": 0,
+    "fit_seen": 0,
+    "forward": 0,
+    "main_import": 0,
+    "modelreader_started": false,
+    "owned_science_children_spawned": []
+  },
+  "actions_not_authorized": [
+    "303 correction or verification rerun",
+    "epoch fit",
+    "main import/forward",
+    "third302 fit",
+    "budget reset",
+    "deadline extension"
+  ],
+  "interpretation": "Software qualification incomplete; no negative inference about epoch learning, LR, generalization or strength.",
+  "prior_tasks": "302 remains closed; all original 298/300/301/302 results, costs, failures, UNKNOWN and frozen bytes retained.",
+  "costs": {
+    "new_prep_cap_seconds": 80,
+    "new_control_cap_seconds": 20,
+    "compile_actual": 0,
+    "science_actual": 0,
+    "LLM_read_control_unmeasured": "UNKNOWN",
+    "older_costs": "UNCHANGED"
+  },
+  "source_deadline": "2026-10-05T23:21:00Z",
+  "save_deadline": "2026-10-05T23:25:00Z",
+  "parent_goal": "ACTIVE_UNMET"
+}

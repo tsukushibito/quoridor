@@ -1,0 +1,440 @@
+--- a/crates/quoridor-ai/src/alphabeta.rs
++++ b/crates/quoridor-ai/src/alphabeta.rs
+@@ -334,6 +334,15 @@
+     pub terminal: u64,
+     pub cutoffs: u64,
+     pub tt_hits: u64,
++    pub tt_probes: u64,
++    pub tt_usable_depth: u64,
++    pub tt_order_only: u64,
++    pub tt_collisions: u64,
++    pub tt_replacements: u64,
++    pub tt_capacity_skips: u64,
++    pub tt_illegal_moves: u64,
++    pub tt_retained_bytes: usize,
++    pub tt_generation: u64,
+     pub tt_cutoffs: u64,
+     pub pvs_researches: u64,
+     pub delta_updates: u64,
+@@ -396,6 +405,7 @@
+     Upper,
+ }
+ struct Entry {
++    generation: u64,
+     key: Key,
+     depth: u16,
+     value: f32,
+@@ -404,15 +414,24 @@
+ }
+ struct Table {
+     slots: Vec<Option<Entry>>,
++    generation: u64,
++    committed: u64,
++    heap_bytes: usize,
+ }
+ impl Table {
+     fn new(n: usize) -> Result<Self> {
++        let n = n.min(4096);
+         let mut slots = Vec::new();
+         slots
+             .try_reserve_exact(n)
+             .map_err(|_| SearchError::Limits("transposition table allocation".into()))?;
+         slots.resize_with(n, || None);
+-        Ok(Self { slots })
++        Ok(Self {
++            slots,
++            generation: 0,
++            committed: 0,
++            heap_bytes: 0,
++        })
+     }
+     fn get(&self, key: &Key) -> Option<&Entry> {
+         if self.slots.is_empty() {
+@@ -423,17 +442,69 @@
+                 .filter(|e| e.key == *key)
+         }
+     }
+-    fn insert(&mut self, e: Entry) {
++    fn retained_bytes(&self) -> usize {
++        self.slots.capacity() * std::mem::size_of::<Option<Entry>>() + self.heap_bytes
++    }
++    fn clear(&mut self) {
++        for slot in &mut self.slots {
++            *slot = None;
++        }
++        self.heap_bytes = 0;
++        self.generation = 0;
++        self.committed = 0;
++    }
++    fn next_generation(&mut self) {
++        if self.generation == u64::MAX {
++            self.clear();
++        }
++        self.generation += 1;
++    }
++    fn discard_uncommitted(&mut self) {
++        for slot in &mut self.slots {
++            if slot.as_ref().is_some_and(|e| e.generation > self.committed) {
++                self.heap_bytes -= slot.as_ref().unwrap().key.history.capacity()
++                    * std::mem::size_of::<([u8; 2], u8, u64, u64, u16)>();
++                *slot = None;
++            }
++        }
++    }
++    fn probe(&self, key: &Key, stats: &mut SearchStats) -> Option<(u16, f32, Bound, Option<u16>)> {
++        stats.tt_probes += 1;
++        if self.slots.is_empty() {
++            return None;
++        }
++        let entry = self.slots[(key.hash() % self.slots.len() as u64) as usize].as_ref()?;
++        if entry.key != *key {
++            stats.tt_collisions += 1;
++            return None;
++        }
++        stats.tt_hits += 1;
++        Some((entry.depth, entry.value, entry.bound, entry.best))
++    }
++    fn insert(&mut self, mut e: Entry, stats: &mut SearchStats) {
+         if self.slots.is_empty() {
+             return;
+         }
+         let i = (e.key.hash() % self.slots.len() as u64) as usize;
+         if self.slots[i]
+             .as_ref()
+-            .is_none_or(|old| old.key != e.key || e.depth >= old.depth)
++            .is_some_and(|old| old.generation == self.generation && old.depth > e.depth)
+         {
+-            self.slots[i] = Some(e);
+-        }
++            return;
++        }
++        let item_bytes = |e: &Entry| {
++            e.key.history.capacity() * std::mem::size_of::<([u8; 2], u8, u64, u64, u16)>()
++        };
++        let old = self.slots[i].as_ref().map_or(0, item_bytes);
++        let new = item_bytes(&e);
++        if self.retained_bytes() - old + new > 1024 * 1024 {
++            stats.tt_capacity_skips += 1;
++            return;
++        }
++        stats.tt_replacements += u64::from(self.slots[i].is_some());
++        self.heap_bytes = self.heap_bytes - old + new;
++        e.generation = self.generation;
++        self.slots[i] = Some(e);
+     }
+ }
+ enum Interrupted {
+@@ -458,7 +529,7 @@
+     cancel: &'a AtomicBool,
+     start: Instant,
+     deadline: Option<Instant>,
+-    table: Table,
++    table: &'a mut Table,
+     stats: SearchStats,
+     killers: Vec<[Option<u16>; 2]>,
+     history: [u64; 209],
+@@ -578,22 +649,32 @@
+             None
+         };
+         let mut tt_move = None;
+-        if let Some(e) = key.as_ref().and_then(|k| self.table.get(k)) {
+-            self.stats.tt_hits += 1;
+-            tt_move = e.best;
+-            if e.depth >= depth {
+-                match e.bound {
+-                    Bound::Exact => {
++        if let Some((stored_depth, value, bound, best)) = key
++            .as_ref()
++            .and_then(|k| self.table.probe(k, &mut self.stats))
++        {
++            if best.is_some_and(|action| c.legal_ids().contains(&action)) {
++                tt_move = best;
++                // A different horizon is ordering information, not this depth's exact value.
++                if stored_depth == depth {
++                    self.stats.tt_usable_depth += 1;
++                    match bound {
++                        Bound::Exact => {
++                            self.stats.tt_cutoffs += 1;
++                            return Ok(value);
++                        }
++                        Bound::Lower => alpha = alpha.max(value),
++                        Bound::Upper => beta = beta.min(value),
++                    }
++                    if alpha >= beta {
+                         self.stats.tt_cutoffs += 1;
+-                        return Ok(e.value);
++                        return Ok(value);
+                     }
+-                    Bound::Lower => alpha = alpha.max(e.value),
+-                    Bound::Upper => beta = beta.min(e.value),
++                } else {
++                    self.stats.tt_order_only += 1;
+                 }
+-                if alpha >= beta {
+-                    self.stats.tt_cutoffs += 1;
+-                    return Ok(e.value);
+-                }
++            } else {
++                self.stats.tt_illegal_moves += 1;
+             }
+         }
+         let moves = self.ordered(c, tt_move, ply)?;
+@@ -635,19 +716,23 @@
+         }
+         self.control()?;
+         if let Some(key) = key {
+-            self.table.insert(Entry {
+-                key,
+-                depth,
+-                value,
+-                bound: if value <= alpha_original {
+-                    Bound::Upper
+-                } else if value >= beta_original {
+-                    Bound::Lower
+-                } else {
+-                    Bound::Exact
++            self.table.insert(
++                Entry {
++                    generation: 0,
++                    key,
++                    depth,
++                    value,
++                    bound: if value <= alpha_original {
++                        Bound::Upper
++                    } else if value >= beta_original {
++                        Bound::Lower
++                    } else {
++                        Bound::Exact
++                    },
++                    best,
+                 },
+-                best,
+-            });
++                &mut self.stats,
++            );
+         }
+         Ok(value)
+     }
+@@ -659,6 +744,24 @@
+         previous: Option<u16>,
+     ) -> NodeResult<(u16, f32)> {
+         self.enter()?;
++        let mut previous = previous;
++        if self.limits.use_tt {
++            if let Some((stored_depth, value, bound, best)) =
++                self.table.probe(&Key::of(c), &mut self.stats)
++            {
++                if best.is_some_and(|action| c.legal_ids().contains(&action)) {
++                    previous = previous.or(best);
++                    if stored_depth == depth && matches!(bound, Bound::Exact) {
++                        self.stats.tt_usable_depth += 1;
++                        self.stats.tt_cutoffs += 1;
++                        return Ok((best.unwrap(), value));
++                    }
++                    self.stats.tt_order_only += 1;
++                } else {
++                    self.stats.tt_illegal_moves += 1;
++                }
++            }
++        }
+         let moves = self.ordered(c, previous, 0)?;
+         self.control()?;
+         let mut value = f32::NEG_INFINITY;
+@@ -683,13 +786,17 @@
+             "no legal root actions".into(),
+         )))?;
+         if self.limits.use_tt {
+-            self.table.insert(Entry {
+-                key: Key::of(c),
+-                depth,
+-                value,
+-                bound: Bound::Exact,
+-                best: Some(best),
+-            });
++            self.table.insert(
++                Entry {
++                    generation: 0,
++                    key: Key::of(c),
++                    depth,
++                    value,
++                    bound: Bound::Exact,
++                    best: Some(best),
++                },
++                &mut self.stats,
++            );
+         }
+         Ok((best, value))
+     }
+@@ -759,6 +866,73 @@
+     cancel: &AtomicBool,
+     orderer: Option<&dyn MoveOrderer>,
+     on_completed: &mut dyn FnMut(&SearchResult),
++) -> Result<SearchResult> {
++    let mut table = Table::new(if limits.use_tt { limits.tt_entries } else { 0 })?;
++    search_in_table(
++        root,
++        evaluator,
++        limits,
++        cancel,
++        orderer,
++        on_completed,
++        &mut table,
++    )
++}
++
++/// Numerical entries belong to this explicit immutable evaluation/rule/profile namespace.
++#[derive(Debug, Clone, PartialEq, Eq)]
++pub struct SearchNamespace {
++    pub evaluator: String,
++    pub rules: String,
++    pub selectivity: String,
++}
++/// A player/game owns this bounded table across its real move sequence.
++/// New games explicitly reset or create a session; namespace switches clear all entries.
++pub struct SearchSession {
++    namespace: SearchNamespace,
++    table: Table,
++}
++impl SearchSession {
++    pub fn new(namespace: SearchNamespace, capacity: usize) -> Result<Self> {
++        Ok(Self {
++            namespace,
++            table: Table::new(capacity)?,
++        })
++    }
++    pub fn reset(&mut self, namespace: SearchNamespace) {
++        self.namespace = namespace;
++        self.table.clear();
++    }
++    pub fn search(
++        &mut self,
++        root: &SigmaContext,
++        evaluator: &dyn StaticEvaluator,
++        namespace: &SearchNamespace,
++        limits: &SearchLimits,
++        cancel: &AtomicBool,
++    ) -> Result<SearchResult> {
++        if &self.namespace != namespace {
++            self.reset(namespace.clone());
++        }
++        search_in_table(
++            root,
++            evaluator,
++            limits,
++            cancel,
++            None,
++            &mut |_| {},
++            &mut self.table,
++        )
++    }
++}
++fn search_in_table(
++    root: &SigmaContext,
++    evaluator: &dyn StaticEvaluator,
++    limits: &SearchLimits,
++    cancel: &AtomicBool,
++    orderer: Option<&dyn MoveOrderer>,
++    on_completed: &mut dyn FnMut(&SearchResult),
++    table: &mut Table,
+ ) -> Result<SearchResult> {
+     let start = Instant::now();
+     if limits.max_depth == 0 || limits.max_nodes == 0 || limits.max_depth > 200 {
+@@ -791,7 +965,7 @@
+         cancel,
+         start,
+         deadline,
+-        table: Table::new(if limits.use_tt { limits.tt_entries } else { 0 })?,
++        table,
+         stats: SearchStats::default(),
+         killers: vec![[None; 2]; limits.max_depth as usize + 1],
+         history: [0; 209],
+@@ -816,6 +990,7 @@
+         let a = evaluator.prepare_context(&c)?;
+         state.control()?;
+         for depth in 1..=limits.max_depth {
++            state.table.next_generation();
+             let (action, value) = state.root_depth(&mut c, a.as_ref(), depth, result.action)?;
+             let pv = state.pv(&c, action, depth);
+             state.control()?;
+@@ -825,14 +1000,19 @@
+             result.pv = pv;
+             result.stats = state.stats.clone();
+             result.elapsed = state.start.elapsed();
++            state.table.committed = state.table.generation;
+             on_completed(&result);
+         }
+         Ok(())
+     })();
++    if run.is_err() {
++        state.table.discard_uncommitted();
++    }
+     if c.position() != root.position()
+         || c.total_ply() != root.total_ply()
+         || c.history_counts() != root.history_counts()
+     {
++        state.table.clear();
+         return Err(SearchError::Root(
+             "search did not restore root history".into(),
+         ));
+@@ -842,6 +1022,8 @@
+         Err(Interrupted::Stop(s)) => result.stop = s,
+         Err(Interrupted::Error(e)) => return Err(e),
+     }
++    state.stats.tt_retained_bytes = state.table.retained_bytes();
++    state.stats.tt_generation = state.table.generation;
+     result.stats = state.stats;
+     result.elapsed = state.start.elapsed();
+     Ok(result)
+--- a/crates/quoridor-runner/src/runtime.rs
++++ b/crates/quoridor-runner/src/runtime.rs
+@@ -120,6 +120,7 @@
+     prefix: Vec<u16>,
+     rows: Vec<TeacherRow>,
+     search: Option<Search>,
++    alpha_sessions: Vec<Option<alphabeta::SearchSession>>,
+     pending: Option<RequestId>,
+     generation: u64,
+     root_nn: Option<f32>,
+@@ -514,6 +515,7 @@
+                         prefix,
+                         rows: Vec::new(),
+                         search: None,
++                        alpha_sessions: (0..config.engines.len()).map(|_| None).collect(),
+                         pending: None,
+                         generation: 1,
+                         root_nn: None,
+@@ -694,13 +696,33 @@
+                     use_pvs: true,
+                     use_tt: true,
+                 };
+-                match alphabeta::search(
++                let namespace = alphabeta::SearchNamespace {
++                    evaluator: format!(
++                        "{}:simd={}",
++                        evaluators[engine_index].identity.row_identity, e.simd
++                    ),
++                    rules: "Sigma-RuleA-full-history-terminal-ply-v1".into(),
++                    selectivity: "fullwidth-PVS-MPC-OFF-v1".into(),
++                };
++                if g.alpha_sessions[engine_index].is_none() {
++                    match alphabeta::SearchSession::new(namespace.clone(), limits.tt_entries) {
++                        Ok(session) => g.alpha_sessions[engine_index] = Some(session),
++                        Err(error) => {
++                            let game = games.swap_remove(index);
++                            let (outcome, rows) = finish(game, "unknown", Some(error.to_string()));
++                            let _ = events.send(Event::Finished(outcome, rows));
++                            continue;
++                        }
++                    }
++                }
++                match g.alpha_sessions[engine_index].as_mut().unwrap().search(
+                     &g.context,
+                     evaluators[engine_index]
+                         .evaluator
+                         .as_ref()
+                         .unwrap()
+                         .as_ref(),
++                    &namespace,
+                     &limits,
+                     &cancel,
+                 ) {
