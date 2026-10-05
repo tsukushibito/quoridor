@@ -1,0 +1,144 @@
+{
+  "at": "2026-10-05T14:20:53.692890+00:00",
+  "task": "frame22-map-efficiency-279-v1",
+  "scientific_source_writer_stopped": true,
+  "scientific_jobs_stopped": true,
+  "new_science_allowed_here": false,
+  "sources": {
+    "crates/quoridor-core/src/position.rs": {
+      "path": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-core/src/position.rs",
+      "sha256": "76154715f0de72b189f1bc958bf6a773d205cbe49cf4e955e3639205fa3d73f0",
+      "bytes": 13201
+    },
+    "crates/quoridor-core/tests/whole_maps.rs": {
+      "path": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-core/tests/whole_maps.rs",
+      "sha256": "a8f0cfa9a7b7cd66071c2f1af698cba52032df17e28904767b807e1c5b96797c",
+      "bytes": 7286
+    },
+    "crates/quoridor-nnue/src/features.rs": {
+      "path": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-nnue/src/features.rs",
+      "sha256": "d3e87cdf78c6988246ec98863292024a76c1abd6e891a5978d9dc8fb817ed212",
+      "bytes": 3404
+    },
+    "crates/quoridor-nnue/tests/map_regression.rs": {
+      "path": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-nnue/tests/map_regression.rs",
+      "sha256": "88ac7d743254fb2d30f0c46c9982ffe01495bc546a9053c810e912260847ca7f",
+      "bytes": 4505
+    },
+    "crates/quoridor-runner/examples/map_work.rs": {
+      "path": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-runner/examples/map_work.rs",
+      "sha256": "eaf026a08d4745561ec8a67766592ff65c5e75bca4fa8c871fe48079f78c1e74",
+      "bytes": 3654
+    }
+  },
+  "comparison_only_do_not_merge": {
+    "crates/quoridor-ai/src/alphabeta.rs": {
+      "path": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-ai/src/alphabeta.rs",
+      "sha256": "cb7d8696fc2847f08824bb4f92242dc63bec2dbfc66d57703913a286540f084a"
+    },
+    "crates/quoridor-nnue/src/lib.rs": {
+      "path": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-nnue/src/lib.rs",
+      "sha256": "e29f047f04a9da7a47a531f103fb74d01418a8dc587a97d4585700d588990346"
+    }
+  },
+  "main_adoption_paths": [
+    "crates/quoridor-core/src/position.rs",
+    "crates/quoridor-nnue/src/features.rs"
+  ],
+  "main_add_test_paths": [
+    "crates/quoridor-core/tests/whole_maps.rs",
+    "crates/quoridor-nnue/tests/map_regression.rs"
+  ],
+  "generic_benchmark_path": "crates/quoridor-runner/examples/map_work.rs",
+  "source_model_path": "/workspaces/quoridor/.worktree/assets/models/legacy/frame18-native-connection/manifest.json",
+  "model_manifest_sha": "1b0a2998edaf7bef84e6a31634b30735b576511a96ec857c45ad429a8ac5ce6b",
+  "model_weights_sha": "b81792d5ba00c6d79b58cada2fc81d84ea822db48c04420b4e269fb9b71841b3",
+  "model_reader_scope_stopped": true,
+  "counters": {
+    "native_NN": 31026,
+    "processed": 58536,
+    "science_jobs": 3,
+    "scientific_wall_seconds": 0.7838241219869815,
+    "compile_test_wall_seconds": 105.24400940397754
+  },
+  "scientific_processes": {
+    "quality-r1": {
+      "process_sha": "e58c61b2e3da2352316f897100223860d6bcd6b007e80da6fdc33913bfbb2add",
+      "start": "2026-10-05T14:11:55.185845+00:00",
+      "end": "2026-10-05T14:11:55.413039+00:00",
+      "leader": {
+        "pid": 1372192,
+        "ppid": 1372163,
+        "pgid": 1372192,
+        "tick": 46256029,
+        "cpu": 0,
+        "rss": 16384,
+        "argv": [
+          "/usr/bin/taskset",
+          "-c",
+          "3",
+          "python3",
+          "/workspaces/quoridor/research-data/ai-sigma/frame22-map-efficiency/run_joined.py",
+          "quality"
+        ],
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "allwait": true,
+      "remaining": [],
+      "currentexactabsent": true
+    },
+    "forward-r1": {
+      "process_sha": "d2b2fefaf4f93d96ff1f95862d334b50c681e9d327e5c95d123364c2c2cf6986",
+      "start": "2026-10-05T14:12:13.328615+00:00",
+      "end": "2026-10-05T14:12:13.651967+00:00",
+      "leader": {
+        "pid": 1372502,
+        "ppid": 1372499,
+        "pgid": 1372502,
+        "tick": 46257843,
+        "cpu": 0,
+        "rss": 143360,
+        "argv": [
+          "/usr/bin/taskset",
+          "-c",
+          "3",
+          "python3",
+          "/workspaces/quoridor/research-data/ai-sigma/frame22-map-efficiency/run_joined.py",
+          "forward"
+        ],
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "allwait": true,
+      "remaining": [],
+      "currentexactabsent": true
+    },
+    "reverse-r1": {
+      "process_sha": "9658be8d1ae16fbb1efb9dbba49733de3de3a8bea58294465af64f1db585c610",
+      "start": "2026-10-05T14:12:26.767361+00:00",
+      "end": "2026-10-05T14:12:27.000561+00:00",
+      "leader": {
+        "pid": 1372843,
+        "ppid": 1372838,
+        "pgid": 1372843,
+        "tick": 46259189,
+        "cpu": 0,
+        "rss": 102400,
+        "argv": [
+          "/usr/bin/taskset",
+          "-c",
+          "3",
+          "python3",
+          "/workspaces/quoridor/research-data/ai-sigma/frame22-map-efficiency/run_joined.py",
+          "reverse"
+        ],
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "allwait": true,
+      "remaining": [],
+      "currentexactabsent": true
+    }
+  },
+  "scope_limit": "own jobs/PID-starttick only; no allhost/future guarantee",
+  "independent_readonly_adoption_review": "coordinator user message after measured report: mask/all81/STM/cache source reasonable; prototype scaffold excluded; performance limits retained",
+  "science_end": "2026-10-05T14:12:27.000561+00:00"
+}

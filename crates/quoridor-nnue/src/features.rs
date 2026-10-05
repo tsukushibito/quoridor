@@ -36,7 +36,7 @@ pub(crate) fn encode_cached(
         _ => Arc::new(WallMaps {
             horizontal: p.horizontal,
             vertical: p.vertical,
-            distances: [distance_map(p, 8), distance_map(p, 0)],
+            distances: p.wall_distance_maps(),
         }),
     };
     let ids = std::array::from_fn(|player| {
@@ -75,35 +75,27 @@ pub(crate) fn encode_cached(
         maps,
     ))
 }
-fn distance_map(p: Position, goal: u8) -> [u8; 81] {
-    let mut distance = [81u8; 81];
-    let mut queue = [0u8; 81];
-    let mut head = 0;
-    let mut end = 0;
-    for x in 0..9u8 {
-        let cell = goal * 9 + x;
-        distance[cell as usize] = 0;
-        queue[end] = cell;
-        end += 1;
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn map_cache_pawn_share_wall_replace_and_unreachable() {
+        let p = Position::default();
+        let (_, maps) = encode_cached(p, None).unwrap();
+        let (_, pawn_maps) = encode_cached(p.play(13).unwrap(), Some(&maps)).unwrap();
+        assert!(Arc::ptr_eq(&maps, &pawn_maps));
+        let (_, wall_maps) = encode_cached(p.play(81).unwrap(), Some(&maps)).unwrap();
+        assert!(!Arc::ptr_eq(&maps, &wall_maps));
+        let isolated = Position {
+            horizontal: 255,
+            ..p
+        };
+        assert!(matches!(
+            encode_cached(isolated, None),
+            Err(Error::Input(_))
+        ));
+        let (_, original_again) = encode_cached(p, Some(&maps)).unwrap();
+        assert!(Arc::ptr_eq(&maps, &original_again));
     }
-    while head < end {
-        let c = queue[head];
-        head += 1;
-        for n in [
-            if c / 9 < 8 { Some(c + 9) } else { None },
-            if c / 9 > 0 { Some(c - 9) } else { None },
-            if c % 9 < 8 { Some(c + 1) } else { None },
-            if c % 9 > 0 { Some(c - 1) } else { None },
-        ]
-        .into_iter()
-        .flatten()
-        {
-            if distance[n as usize] == 81 && p.is_edge_open(c, n) {
-                distance[n as usize] = distance[c as usize] + 1;
-                queue[end] = n;
-                end += 1;
-            }
-        }
-    }
-    distance
 }

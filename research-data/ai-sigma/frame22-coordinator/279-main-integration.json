@@ -1,0 +1,71 @@
+{
+  "task": "279-main-integration",
+  "actor": "coordinator separate owner",
+  "source_stop_SHA": "1139cd2294c7794410ed3e1f499b96a805893680fd74cf2e6292a94c8a1fc9bc",
+  "original_source_math_preserved": true,
+  "main_paths": [
+    "crates/quoridor-core/src/position.rs",
+    "crates/quoridor-nnue/src/features.rs",
+    "crates/quoridor-core/tests/whole_maps.rs"
+  ],
+  "management_changes": [
+    "remove experiment tag from cache test name",
+    "retain correctness subset; omit fixedqueue performance control/microcost"
+  ],
+  "excluded": [
+    "privateAI/lib scaffold",
+    "environment-specific MAP279_MODEL tests",
+    "map_work comparison example"
+  ],
+  "independent_archives": [
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-map-efficiency/bit-source-v1.tar.xz",
+      "members": 7,
+      "stream_SHA_len_PASS": true
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-map-efficiency/bit-source.tar.xz",
+      "members": 7,
+      "stream_SHA_len_PASS": true
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-map-efficiency/evidence.tar.xz",
+      "members": 113,
+      "stream_SHA_len_PASS": true
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-map-efficiency/final-source.tar.xz",
+      "members": 7,
+      "stream_SHA_len_PASS": true
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-map-efficiency/quality-source-v2.tar.xz",
+      "members": 2,
+      "stream_SHA_len_PASS": true
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-map-efficiency/queue-source.tar.xz",
+      "members": 5,
+      "stream_SHA_len_PASS": true
+    }
+  ],
+  "main_verification": {
+    "result": ".artifacts/research-team/frame22/main-maps-validation/result.json",
+    "SHA": "6803d1c0774629c0691469db19b16bce5666fd1179b42306882a89829975eb7b",
+    "exit": 0,
+    "tests_passed": 4,
+    "wall_seconds": 19.9799935320043,
+    "peak_family_RSS": 252858368,
+    "NN": 0,
+    "all_owned_waited_exact_absent": true,
+    "scope": "main all81 independent queue/P2 geometry/unreachable/legalprefix/historyundo/terminaljump plus pawnmap share/wall replace/inputerror cache unit"
+  },
+  "shared_release_guard": "old27545MiB observed +27716+27932+coor16MiB =112156672 <134217728; oldunknown128MiB unchanged",
+  "wholeproduction_speed_or_MCTS_strength": "NOT_CERTIFIED",
+  "main_source_current": {
+    "crates/quoridor-core/src/position.rs": "76154715f0de72b189f1bc958bf6a773d205cbe49cf4e955e3639205fa3d73f0",
+    "crates/quoridor-nnue/src/features.rs": "80e1d95af972510b4f161d9fe028069a5498952d6d64a221e56977e5f4fb0b71",
+    "crates/quoridor-core/tests/whole_maps.rs": "b5930780e2edead3eb4a7927ae8a6e12765334e479a4766f8ce20c0593b4cb60"
+  },
+  "decision": "adopt generic core fullmap supplier and NNUE immutable cache; source/counter correctness finite and same-work L improvement in both orders; no guaranteed production ratio/teacher gain/strength"
+}

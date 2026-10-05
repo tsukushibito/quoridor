@@ -1,0 +1,261 @@
+{
+  "task": "frame22-map-efficiency-279-v1",
+  "schema": "map-efficiency-summary-v1",
+  "at": "2026-10-05T14:16:24.225501+00:00",
+  "comparisons": {
+    "forward": {
+      "order": [
+        "queue",
+        "bit"
+      ],
+      "matched_rows": 32,
+      "total_rows": 64,
+      "snapshots_and_counters_equal": true,
+      "engines": {
+        "D": {
+          "steady_prefix_medians_ns": {
+            "queue": {
+              "initial": 1167332,
+              "jump-p2": 897787,
+              "opening": 1259533,
+              "walled-midgame": 1095166
+            },
+            "bit": {
+              "initial": 1139097,
+              "jump-p2": 843070,
+              "opening": 1189924,
+              "walled-midgame": 1063539
+            }
+          },
+          "median_sum_ns": {
+            "queue": 4419818,
+            "bit": 4235630
+          },
+          "bit_over_queue": 0.9583267908316587,
+          "per_prefix_ratio": {
+            "initial": 0.9758123652911083,
+            "jump-p2": 0.9390534725942791,
+            "opening": 0.9447342784984594,
+            "walled-midgame": 0.9711212729394448
+          }
+        },
+        "L": {
+          "steady_prefix_medians_ns": {
+            "queue": {
+              "initial": 3408036,
+              "jump-p2": 2419429,
+              "opening": 2244305,
+              "walled-midgame": 1689698
+            },
+            "bit": {
+              "initial": 2343639,
+              "jump-p2": 1589416,
+              "opening": 1738128,
+              "walled-midgame": 1400234
+            }
+          },
+          "median_sum_ns": {
+            "queue": 9761468,
+            "bit": 7071417
+          },
+          "bit_over_queue": 0.7244214702132917,
+          "per_prefix_ratio": {
+            "initial": 0.6876802357721573,
+            "jump-p2": 0.6569384759792497,
+            "opening": 0.7744615816477707,
+            "walled-midgame": 0.8286889136401889
+          }
+        }
+      },
+      "whole_ns": {
+        "queue": 62816665,
+        "bit": 48463574
+      },
+      "whole_bit_over_queue": 0.7715082295438639,
+      "model_load_ns": {
+        "queue": 1308206,
+        "bit": 688421
+      },
+      "whole_scope": "internal process includes load/setup/rootwork/printing; external child+guardian separate inclusive spans"
+    },
+    "reverse": {
+      "order": [
+        "bit",
+        "queue"
+      ],
+      "matched_rows": 16,
+      "total_rows": 32,
+      "snapshots_and_counters_equal": true,
+      "engines": {
+        "D": {
+          "steady_prefix_medians_ns": {
+            "queue": {
+              "initial": 1105894,
+              "jump-p2": 837307,
+              "opening": 1189641,
+              "walled-midgame": 1039748
+            },
+            "bit": {
+              "initial": 1173856,
+              "jump-p2": 870452,
+              "opening": 1215490,
+              "walled-midgame": 1176295
+            }
+          },
+          "median_sum_ns": {
+            "queue": 4172590,
+            "bit": 4436093
+          },
+          "bit_over_queue": 1.0631509446171323,
+          "per_prefix_ratio": {
+            "initial": 1.0614543527679867,
+            "jump-p2": 1.039585241733319,
+            "opening": 1.0217284037789551,
+            "walled-midgame": 1.1313270138533569
+          }
+        },
+        "L": {
+          "steady_prefix_medians_ns": {
+            "queue": {
+              "initial": 3196815,
+              "jump-p2": 2073788,
+              "opening": 2142699,
+              "walled-midgame": 1687372
+            },
+            "bit": {
+              "initial": 2433017,
+              "jump-p2": 1634710,
+              "opening": 2047203,
+              "walled-midgame": 1436232
+            }
+          },
+          "median_sum_ns": {
+            "queue": 9100674,
+            "bit": 7551162
+          },
+          "bit_over_queue": 0.829736566764176,
+          "per_prefix_ratio": {
+            "initial": 0.7610753202797159,
+            "jump-p2": 0.7882724752964141,
+            "opening": 0.9554319108750225,
+            "walled-midgame": 0.8511650068864482
+          }
+        }
+      },
+      "whole_ns": {
+        "queue": 29358935,
+        "bit": 30827037
+      },
+      "whole_bit_over_queue": 1.0500052879983555,
+      "model_load_ns": {
+        "queue": 730570,
+        "bit": 1798037
+      },
+      "whole_scope": "internal process includes load/setup/rootwork/printing; external child+guardian separate inclusive spans"
+    }
+  },
+  "quality": "PASS finite graph and 1006 Scalar/Simd child feature/value comparisons; full/delta maxabs1.1920929e-7",
+  "map_micro": {
+    "rows": [
+      {
+        "sample": 0,
+        "warm": true,
+        "variant": "queue",
+        "maps": 489,
+        "elapsed_ns": 404217
+      },
+      {
+        "sample": 0,
+        "warm": true,
+        "variant": "bit",
+        "maps": 489,
+        "elapsed_ns": 74068
+      },
+      {
+        "sample": 1,
+        "warm": false,
+        "variant": "bit",
+        "maps": 489,
+        "elapsed_ns": 72600
+      },
+      {
+        "sample": 1,
+        "warm": false,
+        "variant": "queue",
+        "maps": 489,
+        "elapsed_ns": 400248
+      },
+      {
+        "sample": 2,
+        "warm": false,
+        "variant": "queue",
+        "maps": 489,
+        "elapsed_ns": 455937
+      },
+      {
+        "sample": 2,
+        "warm": false,
+        "variant": "bit",
+        "maps": 489,
+        "elapsed_ns": 75931
+      },
+      {
+        "sample": 3,
+        "warm": false,
+        "variant": "bit",
+        "maps": 489,
+        "elapsed_ns": 72975
+      },
+      {
+        "sample": 3,
+        "warm": false,
+        "variant": "queue",
+        "maps": 489,
+        "elapsed_ns": 410250
+      }
+    ],
+    "steady_medians_ns": {
+      "queue": 410250,
+      "bit": 72975
+    },
+    "bit_over_queue": 0.17787934186471663,
+    "scope": "489 changed-wall child maps; includes masks+both81 materialization; excludes Arc/cache and inference; timer instrumented micro not search speed"
+  },
+  "cache_observer": {
+    "pawn_count": 28,
+    "wall_count": 978,
+    "pawn_advance_ns": 13564,
+    "wall_advance_ns": 488621,
+    "scope": "inclusive actual delta_context; map/IDs/FT/validation mixed, cannot add to whole search"
+  },
+  "counters": {
+    "native_NN": 31026,
+    "processed": 58536,
+    "science_jobs": 3,
+    "scientific_wall_seconds": 0.7838241219869815,
+    "compile_test_wall_seconds": 105.24400940397754
+  },
+  "management_failures": {
+    "processes": {
+      "lint-example-r1/process.json": {
+        "exit_code": 101,
+        "cause": null,
+        "wall_seconds": 0.11320701701333746,
+        "status": null
+      }
+    },
+    "other": [
+      "build-bit-r1 prestart stale runtime; no child/model/NN",
+      "pre-science controller artifact allowlist omitted quoridor_nnue, corrected before any child",
+      "saved-stat scratch snippet numeric fixture selector produced empty median; no NN/forward/science attempt",
+      "initial communication dispatch lock and later coordinator role refresh rejection held"
+    ]
+  },
+  "limits": [
+    "4 fixed roots/depth2/old width32 model, short steady samples; host/order drift",
+    "owned old275/277 comparison scaffold; scratch disabled; normal main end-to-end not measured",
+    "same rules core oracle dependency outside independent queue graph; no deep teacher/model truth",
+    "Sigma648 caller unmodified; MCTS/fullgameRjoint/samewall strength unknown",
+    "source and evidence self-verification requires separate coordinator adoption review"
+  ]
+}

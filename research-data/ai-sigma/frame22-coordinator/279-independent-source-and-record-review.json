@@ -1,0 +1,43 @@
+{
+  "independent_read_only": true,
+  "new_model_import_forward_NN": 0,
+  "source_scope": [
+    "WallEdges mask/expand",
+    "Position whole81 reverse frontier",
+    "NNUE cache supplier/STM distance/pawnshare",
+    "independent graph oracle tests"
+  ],
+  "source_math_finite_review": "undirected reverse mask projection same wall graph; shared edges once; board/row mask and unreachable81; IDs/STM division/weights/order/history unchanged",
+  "records": {
+    "forward": {
+      "matched_rows": 32,
+      "all_snapshot_counter_fields_equal_except_elapsed": true,
+      "median_sum_ratios": {
+        "D": 0.9583267908316587,
+        "L": 0.7244214702132917
+      }
+    },
+    "reverse": {
+      "matched_rows": 16,
+      "all_snapshot_counter_fields_equal_except_elapsed": true,
+      "median_sum_ratios": {
+        "D": 1.0631509446171323,
+        "L": 0.829736566764176
+      }
+    }
+  },
+  "nativeNN_in_saved_all_attempts": 31026,
+  "nodes_in_saved_all_attempts": 58536,
+  "current_source_sha": {
+    ".worktree/frame21-search/crates/quoridor-core/src/position.rs": "76154715f0de72b189f1bc958bf6a773d205cbe49cf4e955e3639205fa3d73f0",
+    ".worktree/frame21-search/crates/quoridor-nnue/src/features.rs": "d3e87cdf78c6988246ec98863292024a76c1abd6e891a5978d9dc8fb817ed212"
+  },
+  "independence_limits": [
+    "saved actor-produced fixtures/scaffold; source/counter/arithmetic checked separately",
+    "no independent production end-to-end timing",
+    "4roots depth2/host/order/layout variability",
+    "model learning/wholeteacher/MCTS/strength unknown"
+  ],
+  "main_adoption_candidate": "generic core maps+NNUE supplier/cache and correctness tests only; comparison scaffold/environment-dependent model tests frozen in evidence",
+  "main_verification_pending": true
+}

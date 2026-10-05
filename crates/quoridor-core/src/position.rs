@@ -163,33 +163,7 @@ impl Position {
         if player > 1 || self.pawns[player] >= 81 {
             return None;
         }
-        const BOARD: u128 = (1u128 << 81) - 1;
-        const COL8: u128 = (1u128 << 8)
-            | (1u128 << 17)
-            | (1u128 << 26)
-            | (1u128 << 35)
-            | (1u128 << 44)
-            | (1u128 << 53)
-            | (1u128 << 62)
-            | (1u128 << 71)
-            | (1u128 << 80);
-        // Source cells of blocked south/east edges. Construction is part of
-        // every scalar distance call; this is not a cached full distance map.
-        let (mut hblock, mut vblock) = (0u128, 0u128);
-        let mut walls = self.horizontal;
-        while walls != 0 {
-            let anchor = walls.trailing_zeros();
-            let cell = (anchor / 8) * 9 + anchor % 8;
-            hblock |= 3u128 << cell;
-            walls &= walls - 1;
-        }
-        walls = self.vertical;
-        while walls != 0 {
-            let anchor = walls.trailing_zeros();
-            let cell = (anchor / 8) * 9 + anchor % 8;
-            vblock |= ((1u128 << 9) | 1) << cell;
-            walls &= walls - 1;
-        }
+        let edges = WallEdges::of(self);
         let goal = if player == 0 { 0x1ffu128 << 72 } else { 0x1ff };
         let mut frontier = 1u128 << self.pawns[player];
         let mut reached = frontier;
@@ -198,17 +172,37 @@ impl Position {
             if frontier & goal != 0 {
                 return Some(distance);
             }
-            let south = ((frontier & !hblock) << 9) & BOARD;
-            let north = (frontier >> 9) & !hblock;
-            let east = ((frontier & !vblock & !COL8) << 1) & BOARD;
-            let west = (frontier >> 1) & !vblock & !COL8;
-            frontier = (south | north | east | west) & !reached;
+            frontier = edges.expand(frontier) & !reached;
             if frontier == 0 {
                 return None;
             }
             reached |= frontier;
             distance += 1;
         }
+    }
+    /// Whole wall-only distances to the two goal rows, indexed by absolute player.
+    /// Unreachable cells are 81. Pawns, jumps and side to move do not obstruct
+    /// this graph. Like wall_distance, this does not validate a game position.
+    /// The blocked-edge masks are built once and shared by both reverse BFSes.
+    pub fn wall_distance_maps(self) -> [[u8; 81]; 2] {
+        let edges = WallEdges::of(self);
+        std::array::from_fn(|player| {
+            let mut result = [81u8; 81];
+            let mut frontier = if player == 0 { 0x1ffu128 << 72 } else { 0x1ff };
+            let mut reached = frontier;
+            let mut distance = 0;
+            while frontier != 0 {
+                let mut cells = frontier;
+                while cells != 0 {
+                    result[cells.trailing_zeros() as usize] = distance;
+                    cells &= cells - 1;
+                }
+                frontier = edges.expand(frontier) & !reached;
+                reached |= frontier;
+                distance += 1;
+            }
+            result
+        })
     }
     pub fn legal_pawn_mask(self) -> [u8; 81] {
         let mut mask = [0; 81];
@@ -342,4 +336,49 @@ fn step(cell: u8, direction: usize) -> Option<u8> {
 }
 fn neighbors(cell: u8) -> [Option<u8>; 4] {
     [step(cell, 0), step(cell, 1), step(cell, 2), step(cell, 3)]
+}
+
+/// Source cells of blocked south/east edges; the graph is undirected.
+struct WallEdges {
+    south: u128,
+    east: u128,
+}
+impl WallEdges {
+    #[inline]
+    fn of(p: Position) -> Self {
+        let (mut south, mut east) = (0, 0);
+        let mut walls = p.horizontal;
+        while walls != 0 {
+            let anchor = walls.trailing_zeros();
+            let cell = (anchor / 8) * 9 + anchor % 8;
+            south |= 3u128 << cell;
+            walls &= walls - 1;
+        }
+        walls = p.vertical;
+        while walls != 0 {
+            let anchor = walls.trailing_zeros();
+            let cell = (anchor / 8) * 9 + anchor % 8;
+            east |= ((1u128 << 9) | 1) << cell;
+            walls &= walls - 1;
+        }
+        Self { south, east }
+    }
+    #[inline]
+    fn expand(&self, frontier: u128) -> u128 {
+        const BOARD: u128 = (1u128 << 81) - 1;
+        const COL8: u128 = (1u128 << 8)
+            | (1u128 << 17)
+            | (1u128 << 26)
+            | (1u128 << 35)
+            | (1u128 << 44)
+            | (1u128 << 53)
+            | (1u128 << 62)
+            | (1u128 << 71)
+            | (1u128 << 80);
+        let south = ((frontier & !self.south) << 9) & BOARD;
+        let north = (frontier >> 9) & !self.south;
+        let east = ((frontier & !self.east & !COL8) << 1) & BOARD;
+        let west = (frontier >> 1) & !self.east & !COL8;
+        south | north | east | west
+    }
 }

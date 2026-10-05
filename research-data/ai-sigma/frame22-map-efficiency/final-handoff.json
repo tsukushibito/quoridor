@@ -1,0 +1,164 @@
+{
+  "at": "2026-10-05T14:23:05.023280+00:00",
+  "task": "frame22-map-efficiency-279-v1",
+  "issue": "quoridor-4lc.279",
+  "outcome": "FINITE_QUALITY_PASS_SAMEWORK_NNUE_TIME_SAVING_SOURCE_ADOPTION_CANDIDATE",
+  "science_and_source_stopped": true,
+  "science_stop_path": "/workspaces/quoridor/research-data/ai-sigma/frame22-map-efficiency/source-science-stop.json",
+  "science_stop_sha": "1139cd2294c7794410ed3e1f499b96a805893680fd74cf2e6292a94c8a1fc9bc",
+  "summary_path": "/workspaces/quoridor/research-data/ai-sigma/frame22-map-efficiency/summary.json",
+  "summary_sha": "f1c9d41ef436e074ed8a3a8d4919eec6e45c20ff69ef22c73c6c2c9409a3abba",
+  "report_path": "/workspaces/quoridor/docs/reports/ai-sigma-critic-frame22-map-efficiency.md",
+  "report_sha": "4c63d6d543befb3153b3541c3a58e14b053dd49edf5b490d03d4de715c1fd7f7",
+  "archives": [
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-map-efficiency/bit-source-v1.tar.xz",
+      "sha": "bd0dc3a3c61f97dc8a7ca6a3fc90f94345e51f36b89c054f0fc220f5f57b4f27",
+      "bytes": 16604,
+      "member_count": 7,
+      "stream_restore_all": true
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-map-efficiency/bit-source.tar.xz",
+      "sha": "ef4cdf897fd2af4721ea06dba62a097cc683d8dc4e318dd01cadf3564c90f209",
+      "bytes": 16424,
+      "member_count": 7,
+      "stream_restore_all": true
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-map-efficiency/evidence.tar.xz",
+      "sha": "f81fa3c4b1d3f14e572b0cebdd7006da82d9c3bc92327013bcd7c20673e22fe0",
+      "bytes": 39244,
+      "member_count": 113,
+      "stream_restore_all": true
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-map-efficiency/final-source.tar.xz",
+      "sha": "31b88c6d6f409a05c149f897b7b15b4e1dfa72297025b5a632852d7c0d67ec42",
+      "bytes": 17148,
+      "member_count": 7,
+      "stream_restore_all": true
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-map-efficiency/quality-source-v2.tar.xz",
+      "sha": "bdec246783667be0b797a29e4e4720572adf2332c6702bfe7f8e486bdee63f79",
+      "bytes": 3200,
+      "member_count": 2,
+      "stream_restore_all": true
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-map-efficiency/queue-source.tar.xz",
+      "sha": "7136512edca062de4635504adc2d0c7089a4bee6c84fcf7a74a67102700032ea",
+      "bytes": 14980,
+      "member_count": 5,
+      "stream_restore_all": true
+    }
+  ],
+  "adoption_paths": [
+    "crates/quoridor-core/src/position.rs",
+    "crates/quoridor-nnue/src/features.rs"
+  ],
+  "additional_test_paths": [
+    "crates/quoridor-core/tests/whole_maps.rs (correctness subset only)",
+    "crates/quoridor-nnue/src/features.rs cache correctness test (tag removed by coordinator)"
+  ],
+  "generic_benchmark": "archive-only, do not integrate",
+  "exclude_from_main": {
+    "crates/quoridor-ai/src/alphabeta.rs": {
+      "path": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-ai/src/alphabeta.rs",
+      "sha256": "cb7d8696fc2847f08824bb4f92242dc63bec2dbfc66d57703913a286540f084a"
+    },
+    "crates/quoridor-nnue/src/lib.rs": {
+      "path": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-nnue/src/lib.rs",
+      "sha256": "e29f047f04a9da7a47a531f103fb74d01418a8dc587a97d4585700d588990346"
+    }
+  },
+  "current_source_manifest": {
+    "crates/quoridor-core/src/position.rs": {
+      "path": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-core/src/position.rs",
+      "sha256": "76154715f0de72b189f1bc958bf6a773d205cbe49cf4e955e3639205fa3d73f0",
+      "bytes": 13201
+    },
+    "crates/quoridor-core/tests/whole_maps.rs": {
+      "path": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-core/tests/whole_maps.rs",
+      "sha256": "a8f0cfa9a7b7cd66071c2f1af698cba52032df17e28904767b807e1c5b96797c",
+      "bytes": 7286
+    },
+    "crates/quoridor-nnue/src/features.rs": {
+      "path": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-nnue/src/features.rs",
+      "sha256": "d3e87cdf78c6988246ec98863292024a76c1abd6e891a5978d9dc8fb817ed212",
+      "bytes": 3404
+    },
+    "crates/quoridor-nnue/tests/map_regression.rs": {
+      "path": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-nnue/tests/map_regression.rs",
+      "sha256": "88ac7d743254fb2d30f0c46c9982ffe01495bc546a9053c810e912260847ca7f",
+      "bytes": 4505
+    },
+    "crates/quoridor-runner/examples/map_work.rs": {
+      "path": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-runner/examples/map_work.rs",
+      "sha256": "eaf026a08d4745561ec8a67766592ff65c5e75bca4fa8c871fe48079f78c1e74",
+      "bytes": 3654
+    }
+  },
+  "counters": {
+    "native_NN": 31026,
+    "processed": 58536,
+    "science_jobs": 3,
+    "scientific_wall_seconds": 0.7838241219869815,
+    "compile_test_wall_seconds": 105.24400940397754
+  },
+  "native_NN_actual": 31026,
+  "NN_source_or_management_failures": 0,
+  "sourcepreparation_commandwall_conservative_charge": 180,
+  "sourcepreparation_budget": 180,
+  "management_budget": 90,
+  "management_completion": "archive/manifest/storage/Beads/report smallbounded operations; not science",
+  "compiletest_actual_charge": 105.24400940397754,
+  "scientific_actual_charge": 0.7838241219869815,
+  "source_format_lint": "rustfmt check + core/NNUE/example clippy passed; Ruff format/check + report Prettier passed; generated frozen runconfig scientificbytes retained",
+  "old275_caps_kept": true,
+  "old277_caps_kept": true,
+  "TT_shortPV_still_unmeasured": true,
+  "wholeproduction_and_MCTS_speedup": "UNKNOWN",
+  "samewall_strength": "NOT_RUN",
+  "new_model_width_transfer": "NOT_RUN",
+  "Git_operations_by_owner": 0,
+  "Git_save_owner": "coordinator",
+  "Git_source_bytes_reconstruction": "final-source.tar.xz seven members stream hash verified, current source equal; queue comparison in immutable queue-source archive; evidence113 stream equal",
+  "selfverification_not_independent_adoption": true,
+  "coordinator_readonly_source_review_received": true,
+  "next_max1": "adopt only common core+features after independent review; next width/model caller minimal samework check when changed, no automatic optimization rerun",
+  "goal_achieved": false,
+  "storage": {
+    "at": "2026-10-05T14:22:09.208918+00:00",
+    "scope_allocated": 1142784,
+    "report_allocated": 8192,
+    "uniqueGit_additional_forecast": 393216,
+    "temp_remaining_forecast": 32768,
+    "metadata_remaining_forecast": 131072,
+    "scope_reserve": 2097152,
+    "scope_retained_old275_reserve": 5242880,
+    "old275_known_stop_forecast": 3403776,
+    "old277_retained_reserve": 1048576,
+    "old277_known_stop_forecast": 1003520,
+    "old_scientific_bytes_preserved": true,
+    "shared_current": 510169088,
+    "shared_start_reference": 522436608,
+    "shared_additional_observed_growth": 0,
+    "shared_reserved_newgrowth": 33554432,
+    "shared_reclaimed_difference_not_discounted": true,
+    "shared_old275_retained_reserve": 134217728,
+    "WT_current": 2641920,
+    "WT_reserve": 8388608,
+    "unknown_retained": 134217728,
+    "parent_addition": 0,
+    "scope_current_plus_remaining_forecast": 1708032,
+    "scope_admission": "within"
+  },
+  "active_own_model_readers_after_science": false,
+  "adoption_boundary_path": "/workspaces/quoridor/research-data/ai-sigma/frame22-map-efficiency/adoption-boundary-v2.json",
+  "adoption_boundary_sha": "192766463711b4282a7f4591b46b8dcaea7ffd0e1feec2980266503c3397dc01",
+  "model_regression_test_main_adoption": false,
+  "previous_handoff_sha": "facf9a602bae80bcef9e95ef275105114fa5e228a3217f7c2e7a3a30f22f2b36",
+  "report_sha_management_update_after_science": true
+}

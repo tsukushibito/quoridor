@@ -10,7 +10,10 @@ QF1 has 312 sparse features per absolute player perspective. P2 rotates both axe
 This is deliberately different from Sigma's 648-channel input canonicalization.
 `encode_qf1(Position)` validates an external board. The research-only typed
 `full_context`/`delta_context` accept a checked `SigmaContext` and reuse complete
-wall-distance maps across pawn moves. No global mutable evaluator or map cache is
+wall-distance maps across pawn moves. Wall changes obtain both full maps through
+`Position::wall_distance_maps`; pawn moves retain the immutable shared maps.
+The cache behavior is checked in [features.rs](src/features.rs).
+No global mutable evaluator or map cache is
 shared by independent searches.
 
 The legacy `QF1-f32-STM-scaled-v1` manifest remains H32/H32 with 12193 little-endian

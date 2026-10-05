@@ -1,0 +1,25 @@
+{
+  "at": "2026-10-05T14:23:05.023280+00:00",
+  "main_paths": [
+    "crates/quoridor-core/src/position.rs",
+    "crates/quoridor-nnue/src/features.rs"
+  ],
+  "main_correctness_tests": "wholemap independent oracle/rotation/legal prefix children history undo/terminal/jump; cache sharing test; coordinator removes experiment tags",
+  "exclude_from_main": [
+    "whole_maps.rs queue_control + whole_maps_finite_cost",
+    "MAP279_MODEL-dependent map_regression.rs",
+    "map_work.rs",
+    "private AI/lib275277 scaffold"
+  ],
+  "science_sources_unchanged": true,
+  "coordinator_integration_management_diff": "remove comparison functions and experimenttag from main-test copy only, not original science archives",
+  "shared_conservative_oldnet": 45047808,
+  "shared_277_reserved": 16777216,
+  "shared_279_reserved": 33554432,
+  "shared_coordinator_proposed": 16777216,
+  "shared_combined": 112156672,
+  "shared_old275_cap": 134217728,
+  "parent_addition": 0,
+  "unknown_discount": 0,
+  "current_point_only": true
+}

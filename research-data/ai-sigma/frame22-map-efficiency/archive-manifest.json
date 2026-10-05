@@ -1,0 +1,1042 @@
+{
+  "task": "frame22-map-efficiency-279-v1",
+  "at": "2026-10-05T14:20:55.021669+00:00",
+  "archives": [
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-map-efficiency/bit-source-v1.tar.xz",
+      "bytes": 16604,
+      "sha256": "bd0dc3a3c61f97dc8a7ca6a3fc90f94345e51f36b89c054f0fc220f5f57b4f27",
+      "members": [
+        {
+          "member": "crates/quoridor-core/src/position.rs",
+          "bytes": 13201,
+          "sha256": "76154715f0de72b189f1bc958bf6a773d205cbe49cf4e955e3639205fa3d73f0",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "crates/quoridor-nnue/src/features.rs",
+          "bytes": 3404,
+          "sha256": "d3e87cdf78c6988246ec98863292024a76c1abd6e891a5978d9dc8fb817ed212",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "crates/quoridor-nnue/src/lib.rs",
+          "bytes": 18849,
+          "sha256": "e29f047f04a9da7a47a531f103fb74d01418a8dc587a97d4585700d588990346",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "crates/quoridor-ai/src/alphabeta.rs",
+          "bytes": 26042,
+          "sha256": "cb7d8696fc2847f08824bb4f92242dc63bec2dbfc66d57703913a286540f084a",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "crates/quoridor-runner/examples/map_work.rs",
+          "bytes": 3654,
+          "sha256": "eaf026a08d4745561ec8a67766592ff65c5e75bca4fa8c871fe48079f78c1e74",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "crates/quoridor-core/tests/whole_maps.rs",
+          "bytes": 4515,
+          "sha256": "b5930780e2edead3eb4a7927ae8a6e12765334e479a4766f8ce20c0593b4cb60",
+          "current_equal": false,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "crates/quoridor-nnue/tests/map_regression.rs",
+          "bytes": 3805,
+          "sha256": "9b8df7816bc2baa79e49be715ec057fc2d1c1e7492dbc3def6c0a9e62c21d264",
+          "current_equal": false,
+          "stream_restore_verified": true
+        }
+      ],
+      "stream_restore_all": true
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-map-efficiency/bit-source.tar.xz",
+      "bytes": 16424,
+      "sha256": "ef4cdf897fd2af4721ea06dba62a097cc683d8dc4e318dd01cadf3564c90f209",
+      "members": [
+        {
+          "member": "crates/quoridor-core/src/position.rs",
+          "bytes": 13201,
+          "sha256": "76154715f0de72b189f1bc958bf6a773d205cbe49cf4e955e3639205fa3d73f0",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "crates/quoridor-nnue/src/features.rs",
+          "bytes": 2577,
+          "sha256": "ddc194ebcca3d4d0f9cfc9f457af4a2570bd3064aabcda1f98ff9389d9019fb1",
+          "current_equal": false,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "crates/quoridor-nnue/src/lib.rs",
+          "bytes": 18849,
+          "sha256": "e29f047f04a9da7a47a531f103fb74d01418a8dc587a97d4585700d588990346",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "crates/quoridor-ai/src/alphabeta.rs",
+          "bytes": 26042,
+          "sha256": "cb7d8696fc2847f08824bb4f92242dc63bec2dbfc66d57703913a286540f084a",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "crates/quoridor-runner/examples/map_work.rs",
+          "bytes": 3654,
+          "sha256": "eaf026a08d4745561ec8a67766592ff65c5e75bca4fa8c871fe48079f78c1e74",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "crates/quoridor-core/tests/whole_maps.rs",
+          "bytes": 4515,
+          "sha256": "b5930780e2edead3eb4a7927ae8a6e12765334e479a4766f8ce20c0593b4cb60",
+          "current_equal": false,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "crates/quoridor-nnue/tests/map_regression.rs",
+          "bytes": 3805,
+          "sha256": "9b8df7816bc2baa79e49be715ec057fc2d1c1e7492dbc3def6c0a9e62c21d264",
+          "current_equal": false,
+          "stream_restore_verified": true
+        }
+      ],
+      "stream_restore_all": true
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-map-efficiency/evidence.tar.xz",
+      "bytes": 39244,
+      "sha256": "f81fa3c4b1d3f14e572b0cebdd7006da82d9c3bc92327013bcd7c20673e22fe0",
+      "members": [
+        {
+          "member": "adoption.patch",
+          "bytes": 7102,
+          "sha256": "e197509414f46bed2f24f6637fe54b1cf219c58b98d40ef60e4fcc433d53c621",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "bit-binary.json",
+          "bytes": 1978,
+          "sha256": "390afa19e677e059a05d29f29e2f6a7955dfa7adb2bddbcee024235727ea23fe",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "bit-source-binding-v1.json",
+          "bytes": 1590,
+          "sha256": "e9516fbd8f583b7cffaa11383a11a706f2d352bfd59deb7e8a0edc0a5fbd9e0a",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "bit-source-binding.json",
+          "bytes": 1551,
+          "sha256": "de36afc684761b912f1da5e3318c73fde207d41256fed07ccb354f3670ae4c77",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "build-bit-r1-prestart.json",
+          "bytes": 773,
+          "sha256": "37ab642623c2b8ffad10d7c7903f9c1560339f85d27ca15ca34057f8302b0003",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "build-bit-r2/actual-start.json",
+          "bytes": 726,
+          "sha256": "dd5e2c9114257c57fec6aaae09029ebb865d9241f599fd515b893836c93fd9c7",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "build-bit-r2/admission.json",
+          "bytes": 6432,
+          "sha256": "f3ae7074730e5755ca4e7fef0db78543d79479d3e2f5d4ae3056f18d89fbc838",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "build-bit-r2/process.json",
+          "bytes": 66665,
+          "sha256": "300bb8fec7211967507a52bf143ef7a164b90fcb9c3e11a8c634c5a0c49fe40b",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "build-bit-r2/stderr.log",
+          "bytes": 475,
+          "sha256": "e7f511616963141ea26d5867d080f6f59cad1b21e2573a6be5ac28bf783eb432",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "build-bit-r2/stdout.log",
+          "bytes": 70377,
+          "sha256": "0f2593694fb61c08bc5203c1663d2d8fad062a5e29abbe898aeb5ef861c15b98",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "build-coretests-r1/actual-start.json",
+          "bytes": 954,
+          "sha256": "be8da9e946c5ffa4ae189ca6ff21cc42cf4bffffeee17926975f90c60c8a4bc5",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "build-coretests-r1/admission.json",
+          "bytes": 6539,
+          "sha256": "c490cec17233ed0ad1109196c993d37874242a1133e37840f3fa0ed7c245c297",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "build-coretests-r1/process.json",
+          "bytes": 63424,
+          "sha256": "9b7b5c07eade1480943dcf7e8c1b3778f6e2acd1c756ceefa901c074eee43eda",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "build-coretests-r1/stderr.log",
+          "bytes": 166,
+          "sha256": "a71a72f64dccee58394ff4b82cb2573e0be6c3d30bb03dc25459852c4a06d86c",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "build-coretests-r1/stdout.log",
+          "bytes": 4095,
+          "sha256": "5280b882cdfbecf8c14f475a2f4c278341b78bb9fb3cd55de53b7d3f6121abf4",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "build-coretests-r2/actual-start.json",
+          "bytes": 954,
+          "sha256": "187e1e8df88a3accce4de253da203502bf9ed6a781feaad70140b74107368bf5",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "build-coretests-r2/admission.json",
+          "bytes": 6261,
+          "sha256": "b59058a26d9405cef51b368f060915deb732b9ff3adcda8e6a67b4319d0f534e",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "build-coretests-r2/process.json",
+          "bytes": 22013,
+          "sha256": "3a85e4b16fbaafb9d58909843439e7d32258a6d3c37ab50c7a8d9815d5010a7f",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "build-coretests-r2/stderr.log",
+          "bytes": 165,
+          "sha256": "2fabeb6a43ec2962ac582628b156046cf41508e1abc59d72f7d5e7124ae877e7",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "build-coretests-r2/stdout.log",
+          "bytes": 4091,
+          "sha256": "6792c6770d450c6038298cfc12da2d79d263441b5e1a10c9f366ccb69c1c81e5",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "build-nnuetests-r1/actual-start.json",
+          "bytes": 860,
+          "sha256": "1d2587c76147d19052c73ea0b60158d1e415741c20164e089f7663c924187adc",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "build-nnuetests-r1/admission.json",
+          "bytes": 6216,
+          "sha256": "d4e9926150460fba71c9db87b8f7ec58fc22b0a6516d2b98639c316931666bba",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "build-nnuetests-r1/process.json",
+          "bytes": 52036,
+          "sha256": "3c66b84dc814c93f2bfe5958e678265c162c6e78ef15856a65e6a098f76849f2",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "build-nnuetests-r1/stderr.log",
+          "bytes": 166,
+          "sha256": "d99c06cfc7577c4363d1ac28c8bdbbdaf0778d2d05c5c174b1381a87cb300772",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "build-nnuetests-r1/stdout.log",
+          "bytes": 27440,
+          "sha256": "29226fb1b834a70e06fb97b18471e6ebbc419f8380cb8f14c1735a67415294a3",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "build-nnuetests-r2/actual-start.json",
+          "bytes": 860,
+          "sha256": "7eeba75f09cbf1d7daed2f4df6eecd2659ec5cf232b2b57265eee580059d0c03",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "build-nnuetests-r2/admission.json",
+          "bytes": 6217,
+          "sha256": "cd03ee734e977337681d9ea4e89bd13a4b57d345801ff53d80be8c322591c81e",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "build-nnuetests-r2/process.json",
+          "bytes": 30614,
+          "sha256": "c1bea165b482286f17d47f0347f3137770d0e7737943504f25e8636d373b44c9",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "build-nnuetests-r2/stderr.log",
+          "bytes": 165,
+          "sha256": "c3ec98ba3c09d231192fe3bd75545c5d6d7345a8f226af1ffc2c6306cb3fb218",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "build-nnuetests-r2/stdout.log",
+          "bytes": 27438,
+          "sha256": "22740e193a5dcc29cd57007611e40b38c3588bdd87bf6f35067ac78e88da6db8",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "build-queue-r1/actual-start.json",
+          "bytes": 725,
+          "sha256": "c40bd957f761fbf323d15b106b28879fbebde617a2de510288d79184601d50e7",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "build-queue-r1/admission.json",
+          "bytes": 6155,
+          "sha256": "08c931557305521265ec715f2e3ebcf30fa20773c7ad7753eebd3bf40999b572",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "build-queue-r1/process.json",
+          "bytes": 71410,
+          "sha256": "d56c433a43a27272d71160fa07436bbdd5491ed48c51cb7164f1373f69d963aa",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "build-queue-r1/stderr.log",
+          "bytes": 578,
+          "sha256": "0770e9d0679db61ab269fdb9c7208ca9b016dccf7c7273f8c48e13d588fb7f88",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "build-queue-r1/stdout.log",
+          "bytes": 70378,
+          "sha256": "4f1f0a6450f3fe17da795a60a2898c58510479432e61c8f16237f5b495af304a",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "early-plan.txt",
+          "bytes": 1041,
+          "sha256": "aaa8596448cf71be2e7f2bdcc61edde861287802290a1267e95569535732413d",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "forward-bit-stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "forward-bit-stdout.log",
+          "bytes": 12617,
+          "sha256": "84bb0b6b003678162747908c4b7d315ddf0558cffdb1587bad4dfc2ed57307f4",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "forward-children.json",
+          "bytes": 980,
+          "sha256": "f6b2e75c2a5e7f2313588e19afaa920b43a3c6256b661ffbb4ddabb7f4dc7cd5",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "forward-config.json",
+          "bytes": 1745,
+          "sha256": "8f55e7a1c94de375b85b6b3a20e5c359596b2e9ce02d4871650eccf8bbf3eec6",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "forward-queue-stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "forward-queue-stdout.log",
+          "bytes": 12619,
+          "sha256": "c52e45af64d867d32330351c3af5dd69b5240ec17a93ae8ead15ad5b3110c985",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "forward-r1/actual-start.json",
+          "bytes": 606,
+          "sha256": "3751e6d88a4da3d5914bb79b5910d5c102d1467d91373daae633c95968dd1d7e",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "forward-r1/admission.json",
+          "bytes": 6091,
+          "sha256": "ea40ecc44c3cd97e67c4583adc46887e84f4a4fd566f531af7438ba0d343815d",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "forward-r1/process.json",
+          "bytes": 1399,
+          "sha256": "d2b2fefaf4f93d96ff1f95862d334b50c681e9d327e5c95d123364c2c2cf6986",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "forward-r1/stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "forward-r1/stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "forward-result.json",
+          "bytes": 1469,
+          "sha256": "b1c3d874b60217c1f290cbbb21b3ebbd190890695699a44b03e33fabd701d91c",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "initial-source-and-storage.json",
+          "bytes": 2218,
+          "sha256": "5dcf2557ffaf6a75a05fbb3738535bf27b2e685d073eed8e9713b04faa194f83",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "lint-core-r1/actual-start.json",
+          "bytes": 840,
+          "sha256": "b5eb4a393dd77862cff24b24f38ff1220ede62de372cfdf000d344aead70ce0f",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "lint-core-r1/admission.json",
+          "bytes": 6206,
+          "sha256": "dccef9808bac636a97635a117dacc401327ed6446ac0d519f555d28e9c74b452",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "lint-core-r1/process.json",
+          "bytes": 4847,
+          "sha256": "f68268588afebf3997e1c634ebc443f78c7d9b133dc89637cdff3a960aa79e50",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "lint-core-r1/stderr.log",
+          "bytes": 165,
+          "sha256": "dc3a707af3bae2ac11ac9a6151874dd706f7ae21c2a8a788db8e0b22526888e7",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "lint-core-r1/stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "lint-example-r1/actual-start.json",
+          "bytes": 818,
+          "sha256": "33401c24ff73aa6d8107957d6519e8fa8561a3981f5ee00bbea5a91b719e0ebb",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "lint-example-r1/admission.json",
+          "bytes": 6194,
+          "sha256": "c1e25d6ff4e4bc200129cf5ab10c3af1e1dcfa1de55f9731bf14939429f5c679",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "lint-example-r1/process.json",
+          "bytes": 1364,
+          "sha256": "ecd674019b20596b5bc81e528f846f02145ddc299c3ff1cf4f59914dabce9523",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "lint-example-r1/stderr.log",
+          "bytes": 175,
+          "sha256": "ff67bc65c778d692295fd12619ea740e96040a9af2d69e5b19870b198a61d30e",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "lint-example-r1/stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "lint-example-r2/actual-start.json",
+          "bytes": 746,
+          "sha256": "e372660201215f18abd6564d5bb68f68f4793c6d99d84da5c6d660ec716570bc",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "lint-example-r2/admission.json",
+          "bytes": 6161,
+          "sha256": "c76311e67821cf7ebd05bd65fa1b97a0703804de2a040147e9f585e397f7cc74",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "lint-example-r2/process.json",
+          "bytes": 38963,
+          "sha256": "d390035c656fc2beb92f610c4feffcc3d709287169dd3bb91656641efd38ca1d",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "lint-example-r2/stderr.log",
+          "bytes": 690,
+          "sha256": "e8582191bae2edbac66e1f337f01dddbc2e9842584af62355a3b902bcabb9637",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "lint-example-r2/stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "lint-nnue-r1/actual-start.json",
+          "bytes": 848,
+          "sha256": "cbdaab8756a6f4b835e32726a1c5f1e55239599c772e389895935f49ac4a1b6f",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "lint-nnue-r1/admission.json",
+          "bytes": 6210,
+          "sha256": "210ff8bd5e8787869b27f9765ea70b138defd2dad926a0cbd989645ee2df86c4",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "lint-nnue-r1/process.json",
+          "bytes": 5922,
+          "sha256": "9d806c1c6652718c2275fb021e07654288e2b81f76d8161d8fddeaee3fff4724",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "lint-nnue-r1/stderr.log",
+          "bytes": 165,
+          "sha256": "e11cf03127ba5322e0299d093b64267bb7e697a69bbc6773248cc530af981a66",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "lint-nnue-r1/stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "management-errors.json",
+          "bytes": 691,
+          "sha256": "d7ee50ef3e066deed680d87c12e41ff6824c5b3dd842ed276adb890d36ca1326",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "measured-window-report.txt",
+          "bytes": 1410,
+          "sha256": "af85b96ac2fd8a27ee1da37bad2c0da46fa8c78dd181938ee18ebd5ec5e80bd8",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "post-science-goal-owner.json",
+          "bytes": 659,
+          "sha256": "72e0d4a08bce0da4810d01d2bcf7a708fd9804c2d87576d6a48fd96f62fbd460",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "precompile-storage.json",
+          "bytes": 564,
+          "sha256": "bc81c2b5c8658d4a2171539acdef750fd38e482230370c013af64d0bc36f99c3",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "preregister.json",
+          "bytes": 1509,
+          "sha256": "f0c7a8e90bb35385782bc43e3abcffe42df95ebc733a85d51edd6042e76bd7e9",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "quality-children.json",
+          "bytes": 2295,
+          "sha256": "f4387b47d29c7c73a2d903c0ca12ad4ca5550edc4c98bc281632f09a83098b76",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "quality-context_undo-stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "quality-context_undo-stdout.log",
+          "bytes": 242,
+          "sha256": "151061f5ef2fee4e65038f7d5e88387aafb85368cd8a1b997f4ef2cd04d13e5e",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "quality-map_regression-stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "quality-map_regression-stdout.log",
+          "bytes": 411,
+          "sha256": "082ecc508ec6ddd609b06e813ce393449070da61cfcc5f21404fe9676d397413",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "quality-quoridor_nnue-stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "quality-quoridor_nnue-stdout.log",
+          "bytes": 194,
+          "sha256": "209d6ae466f78d37c50c6247e0764984a23151aecd2180387d885ef11979ea3c",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "quality-r1/actual-start.json",
+          "bytes": 605,
+          "sha256": "eb68a9f7b0a86c06512da12c1822c5ac07152628e2ff43dc4877659c1bd67887",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "quality-r1/admission.json",
+          "bytes": 6090,
+          "sha256": "914d85c8eefb60d5c16777add5c191b3cc9d98a08c4a1f65fad808e978993565",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "quality-r1/process.json",
+          "bytes": 1476,
+          "sha256": "e58c61b2e3da2352316f897100223860d6bcd6b007e80da6fdc33913bfbb2add",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "quality-r1/stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "quality-r1/stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "quality-registration-v2.json",
+          "bytes": 879,
+          "sha256": "e16b8907fa9c7fd50140d7d34dc48bf759f163d6030e4aa03ddf890cd93a446c",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "quality-result.json",
+          "bytes": 2764,
+          "sha256": "697c4d45bc36b9a40f3976cca48116fb1422eca49b6a3d0d66e71670e2134504",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "quality-rules-stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "quality-rules-stdout.log",
+          "bytes": 962,
+          "sha256": "4e8de87cc3f67da8595eaa7f192d4db7cdf6fd879cd95d59f2e9523744f0f3be",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "quality-whole_maps-stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "quality-whole_maps-stdout.log",
+          "bytes": 1269,
+          "sha256": "23881380cce58c40c77b9ac596dd5eec30b43b0f436bbcc44252015a39b50a86",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "quality-window-report.txt",
+          "bytes": 810,
+          "sha256": "1aabccf47b1a8b1887e65605b92131b3830358b90f7239afb2a4026554ffd30d",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "queue-binary.json",
+          "bytes": 1220,
+          "sha256": "162ccb325bce664d93345982c1f8b9df4bb516ed1deba88167f891172f438f9e",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "queue-source-binding.json",
+          "bytes": 845,
+          "sha256": "81a0628cb1060f7cc860c581603287ada08bf5eee26c0b7e4fb7a378184fc777",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "reverse-bit-stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "reverse-bit-stdout.log",
+          "bytes": 6391,
+          "sha256": "3748f7afec55004a475cb3a4e0408606518735a50fbea161107e2d628dba5132",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "reverse-children.json",
+          "bytes": 978,
+          "sha256": "4ad30e5de014dd0c0d610fdbf0498b6686796a2ee019e385c429b7fe7d46030f",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "reverse-config.json",
+          "bytes": 1745,
+          "sha256": "cb5fe3e20c155ab7e015168fcbea21220ffa9fe35efc7ce1c044a63b6f6d6aea",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "reverse-queue-stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "reverse-queue-stdout.log",
+          "bytes": 6390,
+          "sha256": "412c792034d1c098141b2aa79c889d595f8ee11663d0d0aa2f8fc68aa73c0f25",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "reverse-r1/actual-start.json",
+          "bytes": 606,
+          "sha256": "bf89d6e5995356bf0b0293bec0d52bb4ff188258f61c6cd10e08210f73865fcb",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "reverse-r1/admission.json",
+          "bytes": 6091,
+          "sha256": "86db6e6bf66121e147ef8a0e4219f3d0c1c4f209da9bfbdcf7159b0283389d20",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "reverse-r1/process.json",
+          "bytes": 1106,
+          "sha256": "9658be8d1ae16fbb1efb9dbba49733de3de3a8bea58294465af64f1db585c610",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "reverse-r1/stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "reverse-r1/stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "reverse-result.json",
+          "bytes": 1466,
+          "sha256": "90cebc5c9ed8ed73f39b11b461c64e581b11259ebe44d9315e6d325935bbbfd6",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "run_guard.py",
+          "bytes": 9632,
+          "sha256": "b0c956f0a892b516591205492de17ff7635f3bb5d04e29d266b32708efe80662",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "run_joined.py",
+          "bytes": 5254,
+          "sha256": "94c47e138e38c2439a95cde9a0077504328084d1a4fcbbf1b3f67d3a76e5dc0f",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "runtime-window-report.txt",
+          "bytes": 633,
+          "sha256": "45a1950adef82ba40fc4b960a6baf69a2ec2d894f57fc493445230ce1ef74b51",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "source-science-stop.json",
+          "bytes": 5488,
+          "sha256": "1139cd2294c7794410ed3e1f499b96a805893680fd74cf2e6292a94c8a1fc9bc",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "summarize_saved.py",
+          "bytes": 6607,
+          "sha256": "eac606d649c4243ef61794e364849fc863517a396df4eaa63416a8c9224fd511",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "summary.json",
+          "bytes": 7513,
+          "sha256": "f1c9d41ef436e074ed8a3a8d4919eec6e45c20ff69ef22c73c6c2c9409a3abba",
+          "current_equal": true,
+          "stream_restore_verified": true
+        }
+      ],
+      "stream_restore_all": true
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-map-efficiency/final-source.tar.xz",
+      "bytes": 17148,
+      "sha256": "31b88c6d6f409a05c149f897b7b15b4e1dfa72297025b5a632852d7c0d67ec42",
+      "members": [
+        {
+          "member": "crates/quoridor-core/src/position.rs",
+          "bytes": 13201,
+          "sha256": "76154715f0de72b189f1bc958bf6a773d205cbe49cf4e955e3639205fa3d73f0",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "crates/quoridor-core/tests/whole_maps.rs",
+          "bytes": 7286,
+          "sha256": "a8f0cfa9a7b7cd66071c2f1af698cba52032df17e28904767b807e1c5b96797c",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "crates/quoridor-nnue/src/features.rs",
+          "bytes": 3404,
+          "sha256": "d3e87cdf78c6988246ec98863292024a76c1abd6e891a5978d9dc8fb817ed212",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "crates/quoridor-nnue/tests/map_regression.rs",
+          "bytes": 4505,
+          "sha256": "88ac7d743254fb2d30f0c46c9982ffe01495bc546a9053c810e912260847ca7f",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "crates/quoridor-runner/examples/map_work.rs",
+          "bytes": 3654,
+          "sha256": "eaf026a08d4745561ec8a67766592ff65c5e75bca4fa8c871fe48079f78c1e74",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "crates/quoridor-ai/src/alphabeta.rs",
+          "bytes": 26042,
+          "sha256": "cb7d8696fc2847f08824bb4f92242dc63bec2dbfc66d57703913a286540f084a",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "crates/quoridor-nnue/src/lib.rs",
+          "bytes": 18849,
+          "sha256": "e29f047f04a9da7a47a531f103fb74d01418a8dc587a97d4585700d588990346",
+          "current_equal": true,
+          "stream_restore_verified": true
+        }
+      ],
+      "stream_restore_all": true
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-map-efficiency/quality-source-v2.tar.xz",
+      "bytes": 3200,
+      "sha256": "bdec246783667be0b797a29e4e4720572adf2332c6702bfe7f8e486bdee63f79",
+      "members": [
+        {
+          "member": "crates/quoridor-core/tests/whole_maps.rs",
+          "bytes": 7286,
+          "sha256": "a8f0cfa9a7b7cd66071c2f1af698cba52032df17e28904767b807e1c5b96797c",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "crates/quoridor-nnue/tests/map_regression.rs",
+          "bytes": 4505,
+          "sha256": "88ac7d743254fb2d30f0c46c9982ffe01495bc546a9053c810e912260847ca7f",
+          "current_equal": true,
+          "stream_restore_verified": true
+        }
+      ],
+      "stream_restore_all": true
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-map-efficiency/queue-source.tar.xz",
+      "bytes": 14980,
+      "sha256": "7136512edca062de4635504adc2d0c7089a4bee6c84fcf7a74a67102700032ea",
+      "members": [
+        {
+          "member": "crates/quoridor-core/src/position.rs",
+          "bytes": 13201,
+          "sha256": "76154715f0de72b189f1bc958bf6a773d205cbe49cf4e955e3639205fa3d73f0",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "crates/quoridor-nnue/src/features.rs",
+          "bytes": 3510,
+          "sha256": "8711e1b1a6f2e3f32103f70c4a1b8b4cf204c783c0a67e78b7772a880662a2f8",
+          "current_equal": false,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "crates/quoridor-nnue/src/lib.rs",
+          "bytes": 18849,
+          "sha256": "e29f047f04a9da7a47a531f103fb74d01418a8dc587a97d4585700d588990346",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "crates/quoridor-ai/src/alphabeta.rs",
+          "bytes": 26042,
+          "sha256": "cb7d8696fc2847f08824bb4f92242dc63bec2dbfc66d57703913a286540f084a",
+          "current_equal": true,
+          "stream_restore_verified": true
+        },
+        {
+          "member": "crates/quoridor-runner/examples/map_work.rs",
+          "bytes": 3654,
+          "sha256": "eaf026a08d4745561ec8a67766592ff65c5e75bca4fa8c871fe48079f78c1e74",
+          "current_equal": true,
+          "stream_restore_verified": true
+        }
+      ],
+      "stream_restore_all": true
+    }
+  ],
+  "frozen_old_variants_not_replaced": true
+}
