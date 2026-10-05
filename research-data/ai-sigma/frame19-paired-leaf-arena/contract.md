@@ -1,0 +1,17 @@
+goal quoridor-4lc /frame19明示2h22:52:46–10/5 00:52:46。新heavy00:42:46/監督00:47:46/monitor00:50:46、旧各task費/NN/失敗/期限/予約reset0、173正式198/旧openedtest選定復帰0。same saved model-effort-cwd/LLM数gate0/period1200/turnnull、親mainmirror/runtime solewriter92/source変更0、新model依存toolchain/product/push公開0。ready/show goal+self nopauseassigned→claim、240科学source停止正本SHAを確認後新私有scope。240必要保存/closebackupをこの実質turn内で先に完了して移るが全稿/241承認は入口gateでない。
+
+問い:240同固定仕事費用利益を同開始局面・同clockのNNUE対Dへ移したとき、配送/完成depth/nodeguard到達とWDLにどの差が現れるか。240全4=3W1UNKNOWNは旧236とprefix非paired、棋力改善因果の根拠にならなかったためpaired一介入だけを比較する。評価器を再学習・旧test選び直し0。NNUE leafrootmean意味/history/feature・D tie/clipは競合説明として保持。狙いはpackageの同wall効用の探索的判別、一般棋力/NI/最高goal認定0。
+
+solewrite tools/ai-sigma-frame19-paired-leaf-arena/、research-data/ai-sigma/frame19-paired-leaf-arena/、docs/reports/ai-sigma-experiment-frame19-paired-leaf-arena.md。240停止source/model/sharedRuleA/236final protocolはreadonly。新16MiBはexistingunused48340992→31563776から一度計上、guard14MiB/forecast12、全Git/temp/metadata込。旧unknown予約割引/親追加0。既f32weightpath+SHAreuse、PT/dataset全copy0。
+
+最大1薄接線:240停止engineと同一探索制御/rootbest/FT-delta数学を私有copyしてleaf_packageのresult前booleanをwireへ通す。baselineは葉も元fullterminalと元D重複term式、candidateは240葉pawn存在+fullfallback/Dknown-nonterminal。内部/root fulllegal、全RuleA winner200draw/history/P2/jump/parentbuffer復帰・TTnoise0/policy0を両条件同じにする。worker emit modeと設定/sourceSHAを束縛、古い版のarena結果を本比較の一側として再用0。safe boolean型・protocol generation/key/history/finite/legal/current100ms親完全parsevalidation・内90ms/未完depthdiscard/strictgreater tieを固定。前240原fixture64/ABBAのsavedproofを再用し、今回mode接線の有限合成schemaと数根/同完成深さの値対応だけ必要検証（全旧6fixtureを新版全面証明としない）。新main時計/childwaitの不足はtypedfault。
+
+結果前2合法opening/prefix/family/seed/hashをfreeze、2family×色交換2×package2=全8slot。case/openingは勝敗/新curveを見て選び直さず固定生成し、各family/色にbaselinecandidate同prefix。各family4slot順序はbaseline-candidate-candidate-baseline等の均衡順を結果前固定、全planned/0row/UNKNOWN/censor/NOT_STARTEDと実attempt費保持。独立8opening/正式未見testと呼ばない。原4slot旧240の成功再実行でなく新8slot新contract。成功補充/結果WDLで継続条件変更0、開始済censorを再開0。少数負け/勝ちからNNUE一般性0。
+
+各condition CPU2single/GPU0/同外100ms inputavailable→親完全合法Action受信、内90ms。安全nodecap32768を両package・両評価器共通に結果前登録する（旧236/2408192との直接速度棋力比ではない）。cap到達率/消費/完成depthとclock内余裕を併記し、両側nodecapで切れた対比を100ms全効用の証明にしない。入力/worker cold初期化は別、両model同load、branchcache/JIT/条件順の限界保持。親 timer callbackだけでtimeを決めずmonotonic>=100/completevalidation<=100とgenerationを照合、latevalidRESULTは非採用、UNKNOWN普通loss補完0。必要STOP/EOFreap/原child保護を維持。
+
+全新nativeNN2m/科学600s/各job180s、CPU2single/RAM2GiBguard1.75、GPU0。fixture/preflight/全8/faultinflight32768上界/必要NN0回収も同費。最大3モデル科学job:一有限接線fixture＋新8を2family各4slotの2job、未開始groupのみ残時間/物理/費で開始し、censor同group再実行0。startup/assertmodel前入口修復は有限管理費へ原failure保存、budget/clock増0。精度/同node測定の追加条件run0。基盤TT/方策/accumulator遅延/新training追加0。
+
+実CPUはcurrentframe19 monitor/scheduler PIDtick/ownedとRAM/GPU/source・全保持保存を本人freshadmit、241停止版NN0算術とはCPU0の必要窓を調整しheavyへ競合させない。静的は並行し、241全文/rootACK待ちでなく実exactcompute回収点で判断。自然Supervisor toolに重なる測定を開始しないようcurrentownedquietを見るが未来全freeを仮定0。長jobは230submit→jobIDnotes→Idle→完了一度通知、backgroundcommand新ancestor正identityをprivateforeign guardへ束縛。realforeign始動selfstopを他者kill/免除へ変えない。
+
+薄実装10–15分見積、接線準備00:10目安、firstscience入口00:16/全新science入口00:22stop/全科学00:28stop/save00:38（親00:42/52不変）。今23:56起点を取り直して親2h延長0。上側見積で収まらないならtypedNOT_STARTEDを残し保存、clock/cap追加や新条件救済0。早report max1/frame19累積全費/比較とUnknownを区別、main有限完了を本人closebackup。次選定は同prefix/action/depth/clock/fixed費と全8WDLで量/表現と探索改善の寄与を更新、探索自体の速さを目的化しない。
