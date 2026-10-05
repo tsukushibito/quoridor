@@ -1,0 +1,64 @@
+{
+  "schema": "native-node-cpu-benchmark-v1",
+  "fixtures": [
+    [],
+    [
+      13
+    ],
+    [
+      107
+    ]
+  ],
+  "fixture_names": [
+    "initial-p1",
+    "pawn-step-p2",
+    "horizontal-wall-p2"
+  ],
+  "nnue_iterations": 5000,
+  "nnue_depth": 2,
+  "nnue_warm": 1,
+  "nnue_steady": 5,
+  "mcts_k": 800,
+  "mcts_warm": 1,
+  "mcts_steady": 3,
+  "core": 2,
+  "sequential_engines": true,
+  "order": "alternates each round, rotates scalar/SIMD/Node within NNUE rounds",
+  "model": "/workspaces/quoridor/.artifacts/rust-migration/data-runner/gpu-cycle-r2/learning/best-model/manifest.json",
+  "model_manifest_sha": "10914ec26dafe525aaaea7a63173a6a6d156e2c81f99b53824a184a25b51f494",
+  "weights_sha": "c0c0f021e9c092c225d1e4eeea156a712d41dec4cc3dce6f4b4930a0b98e60d3",
+  "inference": {
+    "backend": "ort",
+    "model": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/ai-sigma/reference/sigma-pcr250/best.onnx",
+    "model_sha": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+    "library": "/home/vscode/.cache/inference/envs/quoridor-training/lib/python3.14/site-packages/onnxruntime/capi/libonnxruntime.so.1.30.0",
+    "device": 0,
+    "cuda_graph": false
+  },
+  "binary_sha": "ca487ea83ee8c4ab161d4e3603b62d3bc7fca5358b120662ae78d77f590259ab",
+  "node_source_sha": "bf535d816ba188baf15eb30248f57ac4be024241ac0be5acfb6a30fb9d9cc78d",
+  "node_version": "v24.21.0",
+  "host_affinity": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "start_utc": "2026-10-05T07:55:00Z"
+}

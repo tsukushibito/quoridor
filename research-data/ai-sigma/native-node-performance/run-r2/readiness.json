@@ -1,0 +1,68 @@
+{
+  "rust": {
+    "admission": {
+      "inference_core": null,
+      "memory_available": 19338747904,
+      "memory_limit": 2147483648,
+      "reserved_physical": [
+        16,
+        18
+      ],
+      "worker_cores": [
+        2
+      ]
+    },
+    "init_seconds": 0.067967534,
+    "pid": 905833,
+    "ready": true
+  },
+  "node": {
+    "ready": true,
+    "init_seconds": 0.279347713,
+    "info": {
+      "version": "1.30.0",
+      "numpy": "2.5.3",
+      "providers": [
+        "CPUExecutionProvider"
+      ],
+      "intra": 1,
+      "inter": 1,
+      "sequential": true,
+      "init_ms": 27.7070360025391,
+      "PID": 905853,
+      "affinity": [
+        2
+      ],
+      "input": [
+        [
+          "input",
+          [
+            1,
+            8,
+            9,
+            9
+          ],
+          "tensor(float)"
+        ]
+      ],
+      "output": [
+        [
+          "policy_logits",
+          [
+            1,
+            136
+          ],
+          "tensor(float)"
+        ],
+        [
+          "value",
+          [
+            1,
+            1
+          ],
+          "tensor(float)"
+        ]
+      ]
+    }
+  }
+}

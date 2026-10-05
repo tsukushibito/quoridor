@@ -1,0 +1,435 @@
+{
+  "summaries": [
+    {
+      "operation": "eval",
+      "fixture": "initial-p1",
+      "variant": "rust-scalar",
+      "node_median_seconds": 0.03702695500000004,
+      "rust_median_seconds": 0.002725312,
+      "node_min_max": [
+        0.03615241399999991,
+        0.038659546999999975
+      ],
+      "rust_min_max": [
+        0.002575075,
+        0.004465883
+      ],
+      "node_over_rust_ratio": 13.586317823427205,
+      "node_nodes": null,
+      "rust_nodes": null,
+      "node_evaluations": 5000,
+      "rust_evaluations": 5000
+    },
+    {
+      "operation": "eval",
+      "fixture": "initial-p1",
+      "variant": "rust-simd",
+      "node_median_seconds": 0.03702695500000004,
+      "rust_median_seconds": 0.002786822,
+      "node_min_max": [
+        0.03615241399999991,
+        0.038659546999999975
+      ],
+      "rust_min_max": [
+        0.00263881,
+        0.005353894
+      ],
+      "node_over_rust_ratio": 13.286444200598403,
+      "node_nodes": null,
+      "rust_nodes": null,
+      "node_evaluations": 5000,
+      "rust_evaluations": 5000
+    },
+    {
+      "operation": "eval",
+      "fixture": "pawn-step-p2",
+      "variant": "rust-scalar",
+      "node_median_seconds": 0.039157414000000015,
+      "rust_median_seconds": 0.002575433,
+      "node_min_max": [
+        0.035575293999999986,
+        0.04069460099999992
+      ],
+      "rust_min_max": [
+        0.002561027,
+        0.002985312
+      ],
+      "node_over_rust_ratio": 15.204206050011791,
+      "node_nodes": null,
+      "rust_nodes": null,
+      "node_evaluations": 5000,
+      "rust_evaluations": 5000
+    },
+    {
+      "operation": "eval",
+      "fixture": "pawn-step-p2",
+      "variant": "rust-simd",
+      "node_median_seconds": 0.039157414000000015,
+      "rust_median_seconds": 0.002757578,
+      "node_min_max": [
+        0.035575293999999986,
+        0.04069460099999992
+      ],
+      "rust_min_max": [
+        0.002706012,
+        0.003260375
+      ],
+      "node_over_rust_ratio": 14.199929793463689,
+      "node_nodes": null,
+      "rust_nodes": null,
+      "node_evaluations": 5000,
+      "rust_evaluations": 5000
+    },
+    {
+      "operation": "eval",
+      "fixture": "horizontal-wall-p2",
+      "variant": "rust-scalar",
+      "node_median_seconds": 0.03518532400000004,
+      "rust_median_seconds": 0.00268851,
+      "node_min_max": [
+        0.034846406999999996,
+        0.035816422000000105
+      ],
+      "rust_min_max": [
+        0.002572259,
+        0.002845972
+      ],
+      "node_over_rust_ratio": 13.08729519324832,
+      "node_nodes": null,
+      "rust_nodes": null,
+      "node_evaluations": 5000,
+      "rust_evaluations": 5000
+    },
+    {
+      "operation": "eval",
+      "fixture": "horizontal-wall-p2",
+      "variant": "rust-simd",
+      "node_median_seconds": 0.03518532400000004,
+      "rust_median_seconds": 0.002811814,
+      "node_min_max": [
+        0.034846406999999996,
+        0.035816422000000105
+      ],
+      "rust_min_max": [
+        0.00272374,
+        0.003168913
+      ],
+      "node_over_rust_ratio": 12.513389576977723,
+      "node_nodes": null,
+      "rust_nodes": null,
+      "node_evaluations": 5000,
+      "rust_evaluations": 5000
+    },
+    {
+      "operation": "search",
+      "fixture": "initial-p1",
+      "variant": "rust-scalar",
+      "node_median_seconds": 0.02859050699999989,
+      "rust_median_seconds": 0.015960099,
+      "node_min_max": [
+        0.023631530000000112,
+        0.032634581000000024
+      ],
+      "rust_min_max": [
+        0.015801764,
+        0.020710318
+      ],
+      "node_over_rust_ratio": 1.7913740384693035,
+      "node_nodes": 530,
+      "rust_nodes": 530,
+      "node_evaluations": 397,
+      "rust_evaluations": 397
+    },
+    {
+      "operation": "search",
+      "fixture": "initial-p1",
+      "variant": "rust-simd",
+      "node_median_seconds": 0.02859050699999989,
+      "rust_median_seconds": 0.016375447,
+      "node_min_max": [
+        0.023631530000000112,
+        0.032634581000000024
+      ],
+      "rust_min_max": [
+        0.015832454,
+        0.017143543
+      ],
+      "node_over_rust_ratio": 1.7459375002099111,
+      "node_nodes": 530,
+      "rust_nodes": 530,
+      "node_evaluations": 397,
+      "rust_evaluations": 397
+    },
+    {
+      "operation": "search",
+      "fixture": "pawn-step-p2",
+      "variant": "rust-scalar",
+      "node_median_seconds": 0.022721114999999827,
+      "rust_median_seconds": 0.016452236,
+      "node_min_max": [
+        0.019675469000000247,
+        0.03429460800000015
+      ],
+      "rust_min_max": [
+        0.016229151,
+        0.020141934
+      ],
+      "node_over_rust_ratio": 1.3810350763263928,
+      "node_nodes": 657,
+      "rust_nodes": 660,
+      "node_evaluations": 524,
+      "rust_evaluations": 526
+    },
+    {
+      "operation": "search",
+      "fixture": "pawn-step-p2",
+      "variant": "rust-simd",
+      "node_median_seconds": 0.022721114999999827,
+      "rust_median_seconds": 0.018250496,
+      "node_min_max": [
+        0.019675469000000247,
+        0.03429460800000015
+      ],
+      "rust_min_max": [
+        0.016028063,
+        0.018637009
+      ],
+      "node_over_rust_ratio": 1.2449587671480176,
+      "node_nodes": 657,
+      "rust_nodes": 660,
+      "node_evaluations": 524,
+      "rust_evaluations": 526
+    },
+    {
+      "operation": "search",
+      "fixture": "horizontal-wall-p2",
+      "variant": "rust-scalar",
+      "node_median_seconds": 0.047207770999999864,
+      "rust_median_seconds": 0.01690642,
+      "node_min_max": [
+        0.04116776999999956,
+        0.04831736099999989
+      ],
+      "rust_min_max": [
+        0.016027557,
+        0.017266514
+      ],
+      "node_over_rust_ratio": 2.7922984877933867,
+      "node_nodes": 1217,
+      "rust_nodes": 779,
+      "node_evaluations": 1088,
+      "rust_evaluations": 648
+    },
+    {
+      "operation": "search",
+      "fixture": "horizontal-wall-p2",
+      "variant": "rust-simd",
+      "node_median_seconds": 0.047207770999999864,
+      "rust_median_seconds": 0.016593067,
+      "node_min_max": [
+        0.04116776999999956,
+        0.04831736099999989
+      ],
+      "rust_min_max": [
+        0.016032875,
+        0.021885287
+      ],
+      "node_over_rust_ratio": 2.8450298549388044,
+      "node_nodes": 1217,
+      "rust_nodes": 779,
+      "node_evaluations": 1088,
+      "rust_evaluations": 648
+    },
+    {
+      "operation": "mcts",
+      "fixture": "initial-p1",
+      "variant": "rust-scalar",
+      "node_median_seconds": 3.5422886850000013,
+      "rust_median_seconds": 3.057788007,
+      "node_min_max": [
+        3.513723497999999,
+        3.5538771510000005
+      ],
+      "rust_min_max": [
+        3.043409285,
+        3.110420206
+      ],
+      "node_over_rust_ratio": 1.1584480928340566,
+      "node_nodes": null,
+      "rust_nodes": null,
+      "node_evaluations": null,
+      "rust_evaluations": null
+    },
+    {
+      "operation": "mcts",
+      "fixture": "pawn-step-p2",
+      "variant": "rust-scalar",
+      "node_median_seconds": 3.6367529739999953,
+      "rust_median_seconds": 3.070561022,
+      "node_min_max": [
+        3.549851168000001,
+        3.688863855999996
+      ],
+      "rust_min_max": [
+        3.033275562,
+        3.078238873
+      ],
+      "node_over_rust_ratio": 1.1843936492202354,
+      "node_nodes": null,
+      "rust_nodes": null,
+      "node_evaluations": null,
+      "rust_evaluations": null
+    },
+    {
+      "operation": "mcts",
+      "fixture": "horizontal-wall-p2",
+      "variant": "rust-scalar",
+      "node_median_seconds": 3.4982616620000044,
+      "rust_median_seconds": 3.045964507,
+      "node_min_max": [
+        3.4581168469999977,
+        3.5240709670000068
+      ],
+      "rust_min_max": [
+        3.043128737,
+        3.086862092
+      ],
+      "node_over_rust_ratio": 1.1484906189683335,
+      "node_nodes": null,
+      "rust_nodes": null,
+      "node_evaluations": null,
+      "rust_evaluations": null
+    }
+  ],
+  "parity": [
+    {
+      "op": "eval",
+      "fixture": 0,
+      "variant": "rust-scalar",
+      "value_max_abs": 0.0
+    },
+    {
+      "op": "eval",
+      "fixture": 0,
+      "variant": "rust-simd",
+      "value_max_abs": 0.0
+    },
+    {
+      "op": "eval",
+      "fixture": 1,
+      "variant": "rust-scalar",
+      "value_max_abs": 0.0
+    },
+    {
+      "op": "eval",
+      "fixture": 1,
+      "variant": "rust-simd",
+      "value_max_abs": 0.0
+    },
+    {
+      "op": "eval",
+      "fixture": 2,
+      "variant": "rust-scalar",
+      "value_max_abs": 0.0
+    },
+    {
+      "op": "eval",
+      "fixture": 2,
+      "variant": "rust-simd",
+      "value_max_abs": 0.0
+    },
+    {
+      "op": "search",
+      "fixture": 0,
+      "variant": "rust-scalar",
+      "value_max_abs": 0.0,
+      "action_equal": true,
+      "action_node": 13,
+      "action_rust": 13
+    },
+    {
+      "op": "search",
+      "fixture": 0,
+      "variant": "rust-simd",
+      "value_max_abs": 0.0,
+      "action_equal": true,
+      "action_node": 13,
+      "action_rust": 13
+    },
+    {
+      "op": "search",
+      "fixture": 1,
+      "variant": "rust-scalar",
+      "value_max_abs": 0.0,
+      "action_equal": true,
+      "action_node": 75,
+      "action_rust": 75
+    },
+    {
+      "op": "search",
+      "fixture": 1,
+      "variant": "rust-simd",
+      "value_max_abs": 0.0,
+      "action_equal": true,
+      "action_node": 75,
+      "action_rust": 75
+    },
+    {
+      "op": "search",
+      "fixture": 2,
+      "variant": "rust-scalar",
+      "value_max_abs": 0.0,
+      "action_equal": true,
+      "action_node": 75,
+      "action_rust": 75
+    },
+    {
+      "op": "search",
+      "fixture": 2,
+      "variant": "rust-simd",
+      "value_max_abs": 0.0,
+      "action_equal": true,
+      "action_node": 75,
+      "action_rust": 75
+    },
+    {
+      "op": "mcts",
+      "fixture": 0,
+      "variant": "rust-scalar",
+      "value_max_abs": 0.0,
+      "action_equal": true,
+      "action_node": 13,
+      "action_rust": 13,
+      "root_visits_equal": true,
+      "nn_calls_equal": true,
+      "edge_visits_equal": true,
+      "edge_value_max_abs": 0.0
+    },
+    {
+      "op": "mcts",
+      "fixture": 1,
+      "variant": "rust-scalar",
+      "value_max_abs": 0.0,
+      "action_equal": true,
+      "action_node": 67,
+      "action_rust": 67,
+      "root_visits_equal": true,
+      "nn_calls_equal": true,
+      "edge_visits_equal": true,
+      "edge_value_max_abs": 0.0
+    },
+    {
+      "op": "mcts",
+      "fixture": 2,
+      "variant": "rust-scalar",
+      "value_max_abs": 0.0,
+      "action_equal": true,
+      "action_node": 67,
+      "action_rust": 67,
+      "root_visits_equal": true,
+      "nn_calls_equal": true,
+      "edge_visits_equal": true,
+      "edge_value_max_abs": 0.0
+    }
+  ]
+}
