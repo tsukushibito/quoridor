@@ -1,0 +1,110 @@
+{
+  "at": "2026-10-05T17:19:26.851749+00:00",
+  "issue": "quoridor-4lc.92",
+  "decision": "adopt prospective per-command receipts and exact direct-child bounded cleanup; do not apply to live watched source during science",
+  "live_source_modified": false,
+  "runtime_restarted": false,
+  "original_refs": [
+    {
+      "path": ".artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/48a8c153-3dbe-43c7-a197-57112f9c56c5/finish-outer-timeout.json",
+      "bytes": 420,
+      "sha256": "507f0fa5de0f9a3197c3ac536b7015b8a88fd38bd3c0450cba22176fd34d51e6"
+    },
+    {
+      "path": ".artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/48a8c153-3dbe-43c7-a197-57112f9c56c5/finish-timeout-process-observation-exact.json",
+      "bytes": 328,
+      "sha256": "fcb9db21ddc6ec71e959ff747492f3ee84dfa6634a268fd93fab5e251a0e68dd"
+    },
+    {
+      "path": ".artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/48a8c153-3dbe-43c7-a197-57112f9c56c5/finish-retry1.json",
+      "bytes": 15888,
+      "sha256": "71651540fcfad3e8850461cc9b375b753401803f267ff38f5a3b3d2edbc9a21b"
+    },
+    {
+      "path": ".artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/48a8c153-3dbe-43c7-a197-57112f9c56c5/self-stop.json",
+      "bytes": 1814,
+      "sha256": "f3883f90208bb162d3755b907d9af25e486f830634ae27466c9a038dbb54c652"
+    }
+  ],
+  "original_gap": {
+    "outer_exit": 124,
+    "original_child_wait": "UNAVAILABLE",
+    "exact_argv_absence_is_not_historical_reaping": true,
+    "bounded_retry": "five wrapper exits 0/reaped; does not repair original evidence"
+  },
+  "current_binding": {
+    "input_count": 24,
+    "all_current_match": true,
+    "watch": {
+      "path": "scripts/dev/research-watch.py",
+      "bytes": 23996,
+      "sha256": "6751f1a49bd01a6db14544af7df5d17af95afba42e3878058a396762cffae14d"
+    },
+    "phase": "running",
+    "scheduler_identity": {
+      "pid": 1430721,
+      "start_ticks": "46503900",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "scheduler_exact_alive": true,
+    "owned_at_point": {
+      "run_id": "57ce1135-708e-4692-820e-32544ce0d092",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+      "turn_id": "01a10d0e-1e37-7b72-a31e-a00ef8a08a2a",
+      "started_at": "2026-10-05T17:13:11.460175+00:00",
+      "max_turn_seconds": null
+    },
+    "deadlines": {
+      "heavy": "2026-10-05T23:26:03Z",
+      "supervisor": "2026-10-05T23:31:03Z",
+      "monitor": "2026-10-05T23:34:03Z",
+      "final": "2026-10-05T23:36:03Z"
+    }
+  },
+  "budget": {
+    "proposal_allocated_bytes": 57344,
+    "keeper_current_including_proposal_bytes": 12374016,
+    "existing_remaining_forecast_bytes": 3145728,
+    "prospective_new_and_unique_git_upper_bytes": 262144,
+    "keeper_guard_bytes": 117440512,
+    "combined_bytes": 15781888,
+    "within": true,
+    "management_cpu": "CPU0 one logical; mocks only",
+    "ram_cap_bytes": 1073741824
+  },
+  "checks": {
+    "mock_contracts_and_related_existing_checks": 14,
+    "passed": 14,
+    "real_subprocess_or_rpc_in_mock": false,
+    "ruff_project_format_check": "PASS",
+    "ruff_project_lint": "PASS",
+    "git_apply_check_without_apply": "PASS",
+    "semantic_natural_finish_effect": "UNCONFIRMED; no live apply"
+  },
+  "limits": {
+    "record_cap_bytes": 65536,
+    "run_cap_bytes": 524288,
+    "new_child_receipt_logical_cap_bytes": 4096,
+    "run_command_cap": 24,
+    "caps_increased": false,
+    "per_command_allocated_upper_bytes": 12288,
+    "all_24_commands_allocated_upper_bytes": 294912,
+    "remaining_run_space_admission_required": true,
+    "SIGKILL_or_host_failure": "started/reserved receipt remains unreaped/unknown; cleanup cannot be guaranteed",
+    "direct_child_wait_not_all_descendant_absence": true
+  },
+  "next_opportunity": {
+    "owner": "existing Steward92, coordinated with scientific owners",
+    "condition": "science readers/jobs/current guards naturally quiescent; exact Supervisor idle/ownednone; exact scheduler/monitor orderly stop before live source and binding update",
+    "cost_forecast": "CPU0 single <=60s mock/check/validate budget; managed stop/bind/start within existing deadline and reservation",
+    "steps": [
+      "preserve old run/stop evidence",
+      "apply source and focused tests, format and check",
+      "update only owned expected watch SHA/binding; validate",
+      "normal same runtime start; loaded/current24hash/exact2 verification",
+      "next natural finish must reach per-command completion, notes and backup; no force tick"
+    ],
+    "if_window_unavailable": "leave prospective patch unapplied; owner92 at ending-preparation or next explicitly authorized operating window; no deadline extension"
+  },
+  "coordinator_permanent_idle_refresh": "separate existing pending responsibility; not a science admission gate"
+}

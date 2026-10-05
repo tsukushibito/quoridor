@@ -6,19 +6,19 @@
 
 ## 追加8時間の現在選定
 
-284の保存のみNN0解析を採択し、独立familyの入れ子増量を主配分にする。約5981→1万→3万train行は仮の観測規模で最低必要量ではない。小candidateのD超えを量の入口にせず、完成48familyブロックの除外後yield・準備/生成/資格/保存/学習の全費・代表性・物理上限で段階2を判断する。K診断は有力な別案だが、282は4条件だけを回収した母集団欠測で、安定性/方式負支持を示さない。位置付き距離場・壁効果やleaf/horizonの意味も保留し、量・学習仕事・未選定評価の結果で再比較する。
+ユーザーの公開Sigmaデータによる学習指示を主配分へ反映し、実終局の手番視点zを主教師にする。rootmeanは探索推定の診断欄として別に保持する。固定source `bartolomeo3000/SigmaQuoridor@751186344fc52ad0c29bc65922e62c6fa915f006` の9×9 fix公開43NPZは圧縮合計1,664,424,671B。初期subsetはcycle0041 train/0042 selection/0043評価、圧縮計66,500,512B。scratch321cycleの全データを取得したとは扱わない。actual shape/dtype/視点/augmentation・ライセンスとcanonical変換の資格を確認して、十分な実行可能量をCPU学習へ渡す。対局ID/完全履歴が公開されていない場合は欠測を明記し、cycle/shard・左右兄弟・入力露出で分割する。row分割を独立対局評価に読み替えない。
 
-285の実登録正本はv2の1248train＋48selection＋96sealed future＝1392family、12cohort/P1P2均衡/48family block/new UID・seed domain。旧1152/64/64案は未実行のGit履歴として保持する。初段は最大240train＋48selection＋96future（384family）、段階2はactualforecastを統括が採択後に同入れ子を拡げる。第一段144train＋固定48selectionは全GOAL、train4803/selection1645行。286の独立NN0前処理で全Vraw3285へのOR除外0、old5981込みtrain10784/276groupsを確認した。固定future96は追加で3453raw入力参照を公開しラベル封印、最終OR適格数は未測。初段6モデルentry計522699 physicalNN（warm216込み）/科学158.456377秒で、旧部分counterを再加算しない。block00は48GOAL/1527適格行/82000 physicalNN/command26.044432秒/guardian29.334519秒、除外前平均31.8125行/familyで旧nominal36.89より低い。生成成功を十分量や学習利益に代えず、追加のcomplete blockで実量を更新する。target-free whitelist metadataと停止immutable cacheは公開済み、履歴の旧形式との互換性は未確認。
+Beads289 experimentは旧285停止保存後、managed frame22-teacherで現役外部終局教師schema/importer/cacheを所有。290 hypothesisは旧286源保存後、frame21-featuresで選択targetに基づくteacher検査を修正し、target=z CPU初期学習を所有する。291 criticは別ownerとしてSTM/P2/変換/露出とcandidate/mask/settings freezeをレビューし、0043封印ラベルはfreeze後に一巡だけ評価する。289/290/291の契約はこの文書末尾から参照。現役経路へ接続し、rootmean=z捏造や恒久実験shimを増やさない。
 
-286は同D保持H32/zero4/旧scale/common初期/λ0/K64教師で約1万256kseen、約3万256kseen、同3万512kseenの三学習を比較する。量と追加学習仕事を分け、τ1/cohort/epoch差を純量効果へ帰属しない。予定curveとrowID付き予測を保存し、全validation raw参照に対してtrainを先に除外、全段実使用train unionに対する共通finalval maskで再集計する。固定新selection48のraw入力参照が停止handoffで到着し、286へ実配送済み。第一段r1はcheckpoint親不足でevaluate/学習loop前に停止、予約396978NN/entry1を保守保持。同条件prospective r2は396978NN/7.453808秒/peak992292864Bで完走した。primary2000の旧固定val .353338対D .489404、新48 .389866対D .405141は暫定改善、旧12 .485642対D .392634は悪化。全予定曲線/予測を保持し、最終共通mask/未選定評価/棋力の利益へ広げない。D未達でもvalidation規則で観測用NNUE一つをfreezeし、採用保留と未選定観測を区別する。
+285はT0–11の576train familyから19536行を全Vraw OR除外後保持し、旧5981込み25517行で終了。575GOAL＋1規則DRAW、UNKNOWN0をowner有限確認。48selection1645/96future3453入力参照と封印条件は不変更。15gen/1300810 physicalNN(warm540)/science348.753878秒、source260/manage160/原UNKNOWNを保持。T12–15はprep予約不足の後、ユーザー新方向への配分変更でNOT_STARTED。追加source280は採らず、30kNOT_REACHEDを25k成功へ交換しない。immutable handoff fe44d854/source-stop6e4cdadcは新scopeの源移譲根拠でありteachertruth/棋力証明ではない。
 
-287は実装ownerと別に入力・mask・凍結条件をレビューし、freeze後だけ96future familyでNNUE/D/旧Bの一巡を評価する。rootmean/zを含むraw metadataをlabel-freeと呼ばず、公開whitelist入力とsealed path/hashのみを先に渡す。共通参照はVraw＝旧1248＋旧選定392＋新48、Told＝全5981、Tseen＝全保存学習段階で見たtrain union。未来maskはTseenと全Vrawを参照する。履歴UNVERIFIED/有効family数/lineage/選定による精度不足を保持し、誤差利益から棋力は認定しない。仕様は [入力と共通mask](../../research-data/ai-sigma/frame22-coordinator/nested-mask-and-targetfree-interface.md)。
+旧286の約1万256kseenは管理r1失敗保全後r2成功、新48の暫定利益と旧12悪化を保持。旧B LAST/BEST全Vraw評価まで3/MAX5・保守800622NNを消費済み。残2fitはactual25517の同256k/512kseenを残3m内で再束縛して短窓で比較する。予定30k未達を明示し、新z importer静的作業と並行、288固定時間窓とは非競合。旧287は旧rootmean candidate/共通mask/freeze後96future一巡という条件を保持し、新z評価へ結果を付け替えない。成立しない工程は理由/担当/次機会を引き渡す。
 
-第二段は実OR0と収量33.354行/familyから登録T3–15（最大13追加完整48block、全T768）を選び、全Vraw除外後old5981込み初めて約30000に達したprefixで止める。予測31597行、NN累積保守8635167/最大19entry。第一追加T3全48GOAL/1645行/OR除外0、train累積192T6448＋old5981＝12429を有限確認、7gen/609297NN/科学178.850148秒。T720約30161/T768約31773を更新予測として置く。ORが増え768で不足なら追加を自動実行せず必要実量/費を返す。285のV6提案は最大912T/16blockで20%OR時も約3万となる有力reserveだが、現OR0では初回768を選びT16+を保留する。線形全science command約502秒、source/archive/public/private/alias/Git/未測read/LLMは別費。量を第一段D利益の条件にしない。
+新public data640MiBは旧285992MiBの確認済unusedからの移譲案、旧285必要保護352MiBとの合計不変更。92 fresh actual/保存/Git/temp/headroom確認前にNPZ本体取得/展開しない。旧28664MiBに新checkpointを合算し、旧2876MiBから新review2MiBへの移譲は必要旧一巡を保護してcurrentforecastで判断する。未確認unusedをfreeにしない。新CPU学習6m sample-equivalentと新レビュー100kの移譲は旧285/287の確認済未使用枠で前向きに束縛し、生成NNと学習sampleの単価同一は主張せず実wallを別記する。
 
-92のfresh16:21:58はretained10266832896＋unused/旧bounds1956900864＋UNKNOWN134217728＝12357951488B<12884901888、margin526950400/errors0。285両root現82669568/unused991072256、286checkpoint根を含め17694720/unused49414144、287147456/unused8241152を同保管枠へ一本化。data1GiB/build32/learner64/reviewer8と旧全保持を維持し削除/free/reset0。各heavyのCPU/RAM/GPU/正runtime/版・入力は本人fresh admission。
+## 探索性能の狙い
 
-旧時刻付き選定過程はGit `2fb0de977dbb87bf1112098d58b4db63cd8d96d5` とBeadsの既notesに保存済み。現在計画へ別の進捗台帳を重複させず、以下は現選定を変える有限根拠と次の判断を保持する。
+NNUE＋αβは実用評価精度を保ち、低費評価・ordering・枝刈りで同時間に広く深い応手を読む。双方1着手=1ply。Sigma K800の最大到達深度・最多訪問手順・可能なら訪問重み葉深度を代表局面の目安とし、最深一本をαβ固定必達深度へ置換しない。αβは所定100/500ms等で完了した反復深化深度/PV/node/leaf/実時間を記録し、未完iterationを数えない。既depthcounterを先に再用し、未測K800を新学習gateにしない。評価精度・単体速度・局所span・深度到達は棋力の代用でなく、最終優位は同時間対局で検証する。
 
 ## 選定を変えた保存結果
 
@@ -32,7 +32,7 @@
 
 ## 競合と規模・全費の比較
 
-増量を主に選ぶ理由は、従来の新36familyが小さくtau/epochも交絡し、必要量を観測する理由を小candidate成功へ従属させられないこと、かつ現生成経路で追加8hに対する全費を概算できたこと。284のworking20–70行/familyで約1万には58–201追加train family、約3万には344–1201という広い範囲を置いた。生成 .45–2.5秒/family＋5–20秒/jobの仮定では登録最大1392familyの生成約12.9–67.7分、準備/資格/partition/mask/export/記録15–45分を別に見積もる。3倍stressでは生成約184分。これは保証でなく、prefix長/tail/停止回収/学習/保存・Git/未測LLMを含め実blockの費で更新する。1万/3万は理論最低量ではない。
+旧増量は小candidate成功を必要量のgateにせず配分し、実576family/25517行まで取得した。現在はユーザーの公開z教師指示を優先し、残生成より公開入力変換・学習・未選定観測へ費を配る。公開fix教師の版/強さ、終局zの分散、history欠測、rootmeanとminimax leafの用途差は競合として残す。旧生成・資格・保存費と新download/展開/資格/cache/CPU学習全費を区別し、安い形式診断だけを主成果にしない。
 
 同256kseenの入れ子二条件と同最大corpus512kseen一条件により、量と学習仕事を比較する。game一様→row一様なので単純row epochだけで露出を要約せず、family samplecountsも記録する。原旧B savedを再学習せず、共通初期・旧scale・λ0を保持する。全予定曲線/終点/同mask・全分母を残し、最良小checkpointだけで有利な結論へ交換しない。
 
@@ -55,3 +55,5 @@ CPU合計4logical/currentRAM8GiB/保持cachetemp＋有効unused12GiB。運用CPU
 22:45–23:00頃、直近Supervisor報告を再用して目標貢献・機会損失・役実働・累積費/不足の振返りを確保し、92へ停止保存に加え限定整理/長期保守判断を実配送する。既全体cache wipe/再編は見送り、科学比較源/WTは必要保存・読者停止・具体次用途で整理判断する。92は正owned/scheduler23:31:03・monitor23:34:03、各scientistは自己child wait/現在identity不在/source停止、統括は必要保存23:36:03を確認する。通知だけを判断完了にせず、不足は理由・担当・次機会を記録する。自動延長0、最高棋力未達なら親をcloseしない。Coordinator恒久idle refreshは92の自然安全窓pending責任で、現active適用と科学入口を区別する。
 
 設計詳細: [教師生成](../../research-data/ai-sigma/frame22-coordinator/nested-independent-teacher-contract.md)、[学習](../../research-data/ai-sigma/frame22-coordinator/nested-data-learning-contract.md)、[独立評価](../../research-data/ai-sigma/frame22-coordinator/nested-data-independent-review-contract.md)。状態・担当・次判断はBeads285/286/287と親を正本とする。
+
+新現役契約: [公開z取得・変換](../../research-data/ai-sigma/frame22-coordinator/sigma-public-z-import-contract.md)、[公開z CPU学習](../../research-data/ai-sigma/frame22-coordinator/sigma-public-z-learning-contract.md)、[公開z独立評価](../../research-data/ai-sigma/frame22-coordinator/sigma-public-z-review-contract.md)。
