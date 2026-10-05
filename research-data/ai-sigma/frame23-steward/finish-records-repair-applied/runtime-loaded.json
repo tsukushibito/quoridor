@@ -1,0 +1,57 @@
+{
+  "at": "2026-10-05T18:28:17.607686+00:00",
+  "checks": {
+    "running": true,
+    "scheduler_exact": true,
+    "monitor_exact": true,
+    "monitor_scheduler_match": true,
+    "config_loaded": true,
+    "contract_loaded": true,
+    "current24": true,
+    "old_scheduler_absent": true,
+    "old_monitor_absent": true,
+    "period1200": true,
+    "unbounded": true,
+    "no_session_gate": true,
+    "deadlines_preserved": true,
+    "source_current": true
+  },
+  "scheduler": {
+    "pid": 1713022,
+    "start_ticks": "47793131",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "monitor": {
+    "pid": 1713041,
+    "start_ticks": "47793161",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "watch_sha256": "8bdf36f0905a3112e68b115a05d81015e4bc4de7ba0be43dfdd2c45d37f4f5ec",
+  "config_sha256": "c2c5919b6442a7489feda7075a2ceadb4d8e2b437beae1800646747b709af7ab",
+  "contract_sha256": "8f53a64f1ed41c0a2a869ead6699032b0cfc8de431581c3cbb6346b34661888c",
+  "owned": {
+    "run_id": "a3fb6d1d-22d7-44ff-bcac-8295ebaaf69e",
+    "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+    "turn_id": "01a10d52-a0a4-78a0-8234-54712c0f31f3",
+    "started_at": "2026-10-05T18:28:01.252912+00:00",
+    "max_turn_seconds": null
+  },
+  "deadlines": {
+    "heavy": "2026-10-05T23:26:03Z",
+    "supervisor": "2026-10-05T23:31:03Z",
+    "monitor": "2026-10-05T23:34:03Z",
+    "final": "2026-10-05T23:36:03Z"
+  },
+  "semantic_finish_success_certified": false,
+  "external_NN_stop_certified": false,
+  "coordinator_permanent_refresh": "separate pending; active preserved",
+  "verification_environment_limitation": "initial system python3 lacked websockets; rerun with existing research-team env succeeded without dependency changes",
+  "six_digest_checks": {
+    "coordinator": true,
+    "hypothesis": true,
+    "experiment": true,
+    "critic": true,
+    "steward": true,
+    "supervisor": true
+  }
+}

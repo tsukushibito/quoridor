@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-05T18:29:55.476962+00:00",
+  "keeper_allocated_bytes": 13598720,
+  "existing_remaining_forecast_bytes": 3145728,
+  "additional_source_uniqueGit_metadata_forecast_bytes": 262144,
+  "guard_bytes": 117440512,
+  "total_bytes": 17006592,
+  "within": true,
+  "resource_scope": "CPU0 single management; RAM1GiB existing; no scientific job; no cap/reservation reset",
+  "supervisor_record_cap_bytes": 65536,
+  "supervisor_run_cap_bytes": 524288,
+  "mock_tests": {
+    "command": "UV_NO_SYNC=1 UV_OFFLINE=1 PYTHONDONTWRITEBYTECODE=1 taskset -c 0 /home/vscode/.cache/inference/envs/quoridor-research-team/bin/python -B tools/research-team/test_watch.py",
+    "tests": 14,
+    "elapsed_seconds": 0.203,
+    "result": "PASS",
+    "real_Popen_signals_RPC_science_in_tests": false
+  },
+  "checks": [
+    "scoped Ruff format/check PASS",
+    "scoped Ruff format --check PASS",
+    "git diff --check PASS",
+    "existing scheduler validate exit0 valid/expiredfalse"
+  ],
+  "source_setup_failures": [
+    "first proc candidate matched own bash -c source text; no signal/source modification before corrected classification",
+    "system python3 lacked websockets; existing managed environment rerun succeeded"
+  ]
+}

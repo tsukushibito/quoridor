@@ -1,0 +1,40 @@
+{
+  "command": [
+    "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python",
+    "-B",
+    "/workspaces/quoridor/scripts/dev/research-scheduler.py",
+    "stop",
+    "--state-dir",
+    "/workspaces/quoridor/.artifacts/research-team/frame22-extension23/scheduler",
+    "--interrupt-owned-turn"
+  ],
+  "exit_code": 0,
+  "refusal": null,
+  "child_reaped": true,
+  "streams": {
+    "stdout": {
+      "bytes_read": 47,
+      "sha256": "eb001387239f811eed2b5d68d6ee1887b912449beb01afd1105cb973663219a7",
+      "complete": true
+    },
+    "stderr": {
+      "bytes_read": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "complete": true
+    }
+  },
+  "selection": {
+    "stdout": {
+      "text": "{\"stopped\": true, \"owned_turn_pending\": false}\n",
+      "source_bytes": 47,
+      "sha256": "eb001387239f811eed2b5d68d6ee1887b912449beb01afd1105cb973663219a7",
+      "overflow": false
+    },
+    "stderr": {
+      "text": "",
+      "source_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "overflow": false
+    }
+  }
+}

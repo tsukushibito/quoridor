@@ -187,11 +187,12 @@ def admit(expected, *, forecast=0):
     return state
 
 
-def capture(argv, root, timeout=25):
-    """Bound pipe bytes and wall time, then reap the exact child process group."""
+def capture(argv, root, timeout=25, *, receipt=None):
+    """Bound pipes/time and persist direct-child cleanup even on soft interruption."""
     child = subprocess.Popen(
         argv, cwd=root, stdout=subprocess.PIPE, stderr=subprocess.PIPE, start_new_session=True
     )
+    identity = scheduler.process_identity(child.pid)
     streams = selectors.DefaultSelector()
     streams.register(child.stdout, selectors.EVENT_READ, "stdout")
     streams.register(child.stderr, selectors.EVENT_READ, "stderr")
@@ -200,7 +201,36 @@ def capture(argv, root, timeout=25):
     sizes = {key: 0 for key in buffers}
     deadline = time.monotonic() + timeout
     refused = None
+    code = None
+    interrupted = None
+    recovery_error = None
+
+    def metadata(phase):
+        return {
+            "at": datetime.now(UTC).isoformat(),
+            "phase": phase,
+            "command": argv,
+            "child_identity": identity,
+            "parent_identity": scheduler.process_identity(os.getpid()),
+            "exit_code": code,
+            "refusal": refused,
+            "recovery_error": recovery_error,
+            "child_reaped": code is not None,
+            "child_exact_alive": scheduler.alive(identity),
+            "process_group_absence_certified": False,
+            "streams": {
+                name: {
+                    "bytes_read": sizes[name],
+                    "sha256": hashes[name].hexdigest(),
+                    "complete": phase == "completed" and refused is None,
+                }
+                for name in buffers
+            },
+        }
+
     try:
+        if receipt:
+            receipt(metadata("started"))
         while streams.get_map():
             if time.monotonic() >= deadline:
                 refused = "command_timeout"
@@ -219,32 +249,32 @@ def capture(argv, root, timeout=25):
                 buffers[name].extend(chunk)
             if refused:
                 break
-        if refused:
-            os.killpg(child.pid, signal.SIGTERM)
-        try:
-            code = child.wait(timeout=3)
-        except subprocess.TimeoutExpired:
-            os.killpg(child.pid, signal.SIGKILL)
-            code = child.wait(timeout=3)
+    except BaseException as error:
+        interrupted = error
+        refused = "capture_interrupted:" + type(error).__name__
     finally:
-        streams.close()
-        child.stdout.close()
-        child.stderr.close()
-    metadata = {
-        "command": argv,
-        "exit_code": code,
-        "refusal": refused,
-        "child_reaped": True,
-        "streams": {
-            name: {
-                "bytes_read": sizes[name],
-                "sha256": hashes[name].hexdigest(),
-                "complete": refused is None,
-            }
-            for name in buffers
-        },
-    }
-    return {name: data.decode("utf-8") for name, data in buffers.items()}, metadata
+        try:
+            if refused and child.poll() is None and scheduler.alive(identity):
+                os.killpg(child.pid, signal.SIGTERM)
+            try:
+                code = child.wait(timeout=3)
+            except subprocess.TimeoutExpired:
+                refused = refused or "child_wait_timeout"
+                if child.poll() is None and scheduler.alive(identity):
+                    os.killpg(child.pid, signal.SIGKILL)
+                code = child.wait(timeout=3)
+        except (OSError, subprocess.TimeoutExpired) as error:
+            recovery_error = type(error).__name__
+            refused = refused or "child_recovery_unconfirmed"
+        finally:
+            streams.close()
+            child.stdout.close()
+            child.stderr.close()
+        if receipt:
+            receipt(metadata("completed"))
+    if interrupted is not None:
+        raise interrupted
+    return {name: data.decode("utf-8") for name, data in buffers.items()}, metadata("completed")
 
 
 def wrapper(expected, args, records, *, selection=True):
@@ -265,10 +295,29 @@ def wrapper(expected, args, records, *, selection=True):
     ).total_seconds()
     if remaining < 36:
         raise Unavailable("insufficient command/cleanup/report time; spawn refused")
+    command = ["bash", str(Path(expected["root"]) / "scripts/dev/beads.sh"), *args]
+    child_record = Path(expected["_output"]).parent / f"command-{count + 1:02d}-child.json"
+
+    def persist_child(meta):
+        compact = {key: value for key, value in meta.items() if key != "command"}
+        encoded = json.dumps(command, ensure_ascii=False).encode()
+        compact.update(
+            command_head=command[:6],
+            command_bytes=len(encoded),
+            command_sha256=hashlib.sha256(encoded).hexdigest(),
+            wrapper_ordinal=count + 1,
+        )
+        if len(json.dumps(compact, ensure_ascii=False).encode()) > 4096:
+            raise Unavailable("child receipt overflow; no silent truncated pass")
+        save_record(child_record, expected, compact)
+
+    # Refuse before spawn if the run has no room for a small receipt.
+    persist_child({"phase": "reserved", "child_reaped": False})
     text, meta = capture(
-        ["bash", str(Path(expected["root"]) / "scripts/dev/beads.sh"), *args],
+        command,
         expected["root"],
         timeout=min(25, remaining - 10),
+        receipt=persist_child,
     )
     records.append(meta)
     if meta["exit_code"] or meta["refusal"]:
@@ -586,7 +635,21 @@ def main():
         parser.error(
             "bounded operation requires --output and inspect --issue / finish --notes-file"
         )
-    return observer(args, expected)
+    previous = {}
+
+    def interrupt_observation(signum, _frame):
+        # Let the current owned capture finish bounded cleanup after the first soft signal.
+        for sig in (signal.SIGTERM, signal.SIGINT):
+            signal.signal(sig, signal.SIG_IGN)
+        raise Unavailable(f"observer interrupted by signal {signum}")
+
+    try:
+        for sig in (signal.SIGTERM, signal.SIGINT):
+            previous[sig] = signal.signal(sig, interrupt_observation)
+        return observer(args, expected)
+    finally:
+        for sig, handler in previous.items():
+            signal.signal(sig, handler)
 
 
 if __name__ == "__main__":

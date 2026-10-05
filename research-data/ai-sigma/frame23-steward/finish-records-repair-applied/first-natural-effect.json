@@ -1,0 +1,320 @@
+{
+  "at": "2026-10-05T18:32:09.016706+00:00",
+  "run_id": "a3fb6d1d-22d7-44ff-bcac-8295ebaaf69e",
+  "source_watch_sha256": "8bdf36f0905a3112e68b115a05d81015e4bc4de7ba0be43dfdd2c45d37f4f5ec",
+  "selected_records": {
+    "observe.json": {
+      "path": ".artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/a3fb6d1d-22d7-44ff-bcac-8295ebaaf69e/observe.json",
+      "bytes": 12249,
+      "sha256": "6f423cf58e2473447be24217fd5e774fe31f7bf9443e0db3fe1340373bc5caec",
+      "at": "2026-10-05T18:28:08.072437+00:00",
+      "status": "observed",
+      "commands": [
+        {
+          "command_head": [
+            "bash",
+            "/workspaces/quoridor/scripts/dev/beads.sh",
+            "show",
+            "quoridor-4lc",
+            "--json"
+          ],
+          "phase": "completed",
+          "exit_code": 0,
+          "refusal": null,
+          "child_reaped": true,
+          "child_exact_alive": false
+        },
+        {
+          "command_head": [
+            "bash",
+            "/workspaces/quoridor/scripts/dev/beads.sh",
+            "show",
+            "quoridor-4lc.40",
+            "--json"
+          ],
+          "phase": "completed",
+          "exit_code": 0,
+          "refusal": null,
+          "child_reaped": true,
+          "child_exact_alive": false
+        },
+        {
+          "command_head": ["bash", "/workspaces/quoridor/scripts/dev/beads.sh", "ready", "--json"],
+          "phase": "completed",
+          "exit_code": 0,
+          "refusal": null,
+          "child_reaped": true,
+          "child_exact_alive": false
+        }
+      ]
+    },
+    "finish.json": {
+      "path": ".artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/a3fb6d1d-22d7-44ff-bcac-8295ebaaf69e/finish.json",
+      "bytes": 18342,
+      "sha256": "45bc79cc80f91b8c43b061e1b77e23f99f097b48d464fbdf836bb9a96f8663d5",
+      "at": "2026-10-05T18:28:45.897809+00:00",
+      "status": "observed",
+      "commands": [
+        {
+          "command_head": [
+            "bash",
+            "/workspaces/quoridor/scripts/dev/beads.sh",
+            "show",
+            "quoridor-4lc",
+            "--json"
+          ],
+          "phase": "completed",
+          "exit_code": 0,
+          "refusal": null,
+          "child_reaped": true,
+          "child_exact_alive": false
+        },
+        {
+          "command_head": [
+            "bash",
+            "/workspaces/quoridor/scripts/dev/beads.sh",
+            "show",
+            "quoridor-4lc.40",
+            "--json"
+          ],
+          "phase": "completed",
+          "exit_code": 0,
+          "refusal": null,
+          "child_reaped": true,
+          "child_exact_alive": false
+        },
+        {
+          "command_head": [
+            "bash",
+            "/workspaces/quoridor/scripts/dev/beads.sh",
+            "show",
+            "quoridor-4lc.40",
+            "--json"
+          ],
+          "phase": "completed",
+          "exit_code": 0,
+          "refusal": null,
+          "child_reaped": true,
+          "child_exact_alive": false
+        },
+        {
+          "command_head": [
+            "bash",
+            "/workspaces/quoridor/scripts/dev/beads.sh",
+            "update",
+            "quoridor-4lc.40",
+            "--if-assignee",
+            "codex:01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+          ],
+          "phase": "completed",
+          "exit_code": 0,
+          "refusal": null,
+          "child_reaped": true,
+          "child_exact_alive": false
+        },
+        {
+          "command_head": ["bash", "/workspaces/quoridor/scripts/dev/beads.sh", "backup", "sync"],
+          "phase": "completed",
+          "exit_code": 0,
+          "refusal": null,
+          "child_reaped": true,
+          "child_exact_alive": false
+        }
+      ]
+    }
+  },
+  "per_command_receipts": [
+    {
+      "path": ".artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/a3fb6d1d-22d7-44ff-bcac-8295ebaaf69e/command-01-child.json",
+      "bytes": 1093,
+      "sha256": "84058b12e88512bba570262003fc52a0716de55c757ed94806fbcb75c452c068",
+      "phase": "completed",
+      "wrapper_ordinal": 1,
+      "exit_code": 0,
+      "refusal": null,
+      "child_reaped": true,
+      "child_exact_alive": false
+    },
+    {
+      "path": ".artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/a3fb6d1d-22d7-44ff-bcac-8295ebaaf69e/command-02-child.json",
+      "bytes": 1096,
+      "sha256": "ae9b2e4ee889a07b449fbbcbc209e722205f00ff41e2101aba118537839d8140",
+      "phase": "completed",
+      "wrapper_ordinal": 2,
+      "exit_code": 0,
+      "refusal": null,
+      "child_reaped": true,
+      "child_exact_alive": false
+    },
+    {
+      "path": ".artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/a3fb6d1d-22d7-44ff-bcac-8295ebaaf69e/command-03-child.json",
+      "bytes": 1069,
+      "sha256": "fa7098ec96a6e204c948d271285dedcee146b3b2e244e15fd94ac07c8921bd32",
+      "phase": "completed",
+      "wrapper_ordinal": 3,
+      "exit_code": 0,
+      "refusal": null,
+      "child_reaped": true,
+      "child_exact_alive": false
+    },
+    {
+      "path": ".artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/a3fb6d1d-22d7-44ff-bcac-8295ebaaf69e/command-04-child.json",
+      "bytes": 1093,
+      "sha256": "c98cff99808e27200b63372c03d018587ccd2edb0e7401faf8ceb2779fd49fb2",
+      "phase": "completed",
+      "wrapper_ordinal": 4,
+      "exit_code": 0,
+      "refusal": null,
+      "child_reaped": true,
+      "child_exact_alive": false
+    },
+    {
+      "path": ".artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/a3fb6d1d-22d7-44ff-bcac-8295ebaaf69e/command-05-child.json",
+      "bytes": 1096,
+      "sha256": "ee6d642d85cbf1dfb940be717d6f130d845e7d0ab195e793217b647d7bba533e",
+      "phase": "completed",
+      "wrapper_ordinal": 5,
+      "exit_code": 0,
+      "refusal": null,
+      "child_reaped": true,
+      "child_exact_alive": false
+    },
+    {
+      "path": ".artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/a3fb6d1d-22d7-44ff-bcac-8295ebaaf69e/command-06-child.json",
+      "bytes": 1096,
+      "sha256": "75e9716100a8fb70032e334a3fc6d6cfca28f3941b08799d95cf97bff0f047ca",
+      "phase": "completed",
+      "wrapper_ordinal": 6,
+      "exit_code": 0,
+      "refusal": null,
+      "child_reaped": true,
+      "child_exact_alive": false
+    },
+    {
+      "path": ".artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/a3fb6d1d-22d7-44ff-bcac-8295ebaaf69e/command-07-child.json",
+      "bytes": 1152,
+      "sha256": "e3c9c416f8d9341d9b33f6f309c43db907132d2b8009ba8ccfbfef908b8de8dc",
+      "phase": "completed",
+      "wrapper_ordinal": 7,
+      "exit_code": 0,
+      "refusal": null,
+      "child_reaped": true,
+      "child_exact_alive": false
+    },
+    {
+      "path": ".artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/a3fb6d1d-22d7-44ff-bcac-8295ebaaf69e/command-08-child.json",
+      "bytes": 1069,
+      "sha256": "9a808627cb17f9b6362f6675f7ee8984a9d7acbb952c93112299022546241a75",
+      "phase": "completed",
+      "wrapper_ordinal": 8,
+      "exit_code": 0,
+      "refusal": null,
+      "child_reaped": true,
+      "child_exact_alive": false
+    },
+    {
+      "path": ".artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/a3fb6d1d-22d7-44ff-bcac-8295ebaaf69e/command-09-child.json",
+      "bytes": 1093,
+      "sha256": "39bef3c650a0472b5dc32ae1a4d1e1357739f7bcf991d181819efc6ee9ca54fe",
+      "phase": "completed",
+      "wrapper_ordinal": 9,
+      "exit_code": 0,
+      "refusal": null,
+      "child_reaped": true,
+      "child_exact_alive": false
+    },
+    {
+      "path": ".artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/a3fb6d1d-22d7-44ff-bcac-8295ebaaf69e/command-10-child.json",
+      "bytes": 1097,
+      "sha256": "31ac418f1c2655553bfc5b5e550e16713cbdddb5e679437e9fb790ca5d804760",
+      "phase": "completed",
+      "wrapper_ordinal": 10,
+      "exit_code": 0,
+      "refusal": null,
+      "child_reaped": true,
+      "child_exact_alive": false
+    },
+    {
+      "path": ".artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/a3fb6d1d-22d7-44ff-bcac-8295ebaaf69e/command-11-child.json",
+      "bytes": 1097,
+      "sha256": "3a106873d89344fcee1c1cacb03ffff26fe0d76b4a8a93d8f0c90070adc96b9a",
+      "phase": "completed",
+      "wrapper_ordinal": 11,
+      "exit_code": 0,
+      "refusal": null,
+      "child_reaped": true,
+      "child_exact_alive": false
+    },
+    {
+      "path": ".artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/a3fb6d1d-22d7-44ff-bcac-8295ebaaf69e/command-12-child.json",
+      "bytes": 1094,
+      "sha256": "70758b7703b426da8ce9bde28b08fd64573296ae65672c06327efa955ddd31fc",
+      "phase": "completed",
+      "wrapper_ordinal": 12,
+      "exit_code": 0,
+      "refusal": null,
+      "child_reaped": true,
+      "child_exact_alive": false
+    },
+    {
+      "path": ".artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/a3fb6d1d-22d7-44ff-bcac-8295ebaaf69e/command-13-child.json",
+      "bytes": 1097,
+      "sha256": "6f582bdaca5c0b20d925419b4a7c6dfbf62b759259d5d2bcf7dfae5e43b12b54",
+      "phase": "completed",
+      "wrapper_ordinal": 13,
+      "exit_code": 0,
+      "refusal": null,
+      "child_reaped": true,
+      "child_exact_alive": false
+    },
+    {
+      "path": ".artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/a3fb6d1d-22d7-44ff-bcac-8295ebaaf69e/command-14-child.json",
+      "bytes": 1098,
+      "sha256": "b2ec9e3cb513f31b06de37c0299c9647c0aa4ee50b019286c91ab38a2fec6911",
+      "phase": "completed",
+      "wrapper_ordinal": 14,
+      "exit_code": 0,
+      "refusal": null,
+      "child_reaped": true,
+      "child_exact_alive": false
+    },
+    {
+      "path": ".artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/a3fb6d1d-22d7-44ff-bcac-8295ebaaf69e/command-15-child.json",
+      "bytes": 1094,
+      "sha256": "d5e16e1608b639b4375ba784de9a70c90437a95423d6defe12406ce681577080",
+      "phase": "completed",
+      "wrapper_ordinal": 15,
+      "exit_code": 0,
+      "refusal": null,
+      "child_reaped": true,
+      "child_exact_alive": false
+    },
+    {
+      "path": ".artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/a3fb6d1d-22d7-44ff-bcac-8295ebaaf69e/command-16-child.json",
+      "bytes": 1097,
+      "sha256": "184ed323b05fb6c7c0463d7857049cb4a6a0aa15d07070670e09012f8b681d04",
+      "phase": "completed",
+      "wrapper_ordinal": 16,
+      "exit_code": 0,
+      "refusal": null,
+      "child_reaped": true,
+      "child_exact_alive": false
+    },
+    {
+      "path": ".artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/a3fb6d1d-22d7-44ff-bcac-8295ebaaf69e/command-17-child.json",
+      "bytes": 1098,
+      "sha256": "c724d73b00321c4c457d1091ad2e242f08da85685e7dc59b3c1aef2a0c5ea0ba",
+      "phase": "completed",
+      "wrapper_ordinal": 17,
+      "exit_code": 0,
+      "refusal": null,
+      "child_reaped": true,
+      "child_exact_alive": false
+    }
+  ],
+  "finite_effect": "ordinary observe + finish five wrappers exit0/reaped; notes append and backup reached; 17 currently saved per-command receipts completed",
+  "soft_interrupt_recovery": "mock verified only; this ordinary run had no outer stop",
+  "prior_timeout_original_wait_unknown_preserved": true,
+  "whole_period_future_semantic_success_certified": false,
+  "original_run_files_modified": false
+}

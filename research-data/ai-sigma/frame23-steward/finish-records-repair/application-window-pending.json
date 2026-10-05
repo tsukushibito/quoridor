@@ -1,0 +1,74 @@
+{
+  "at": "2026-10-05T18:15:53.562174+00:00",
+  "issue": "quoridor-4lc.92",
+  "phase": "existing prospective repair, canonical test integration ready; application not yet safe",
+  "main_watch_modified": false,
+  "main_tests_modified": false,
+  "latest_gap_refs": [
+    {
+      "path": ".artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/55d26b6a-6b1f-4360-80b6-b89e1c0c06a7/finish-timeout.json",
+      "bytes": 334,
+      "sha256": "91d11f9c11fd6e19b2532f43bb5f3ef2c05fec2bb3f50d320bc4bf12d9d83f12"
+    },
+    {
+      "path": ".artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/55d26b6a-6b1f-4360-80b6-b89e1c0c06a7/backup-recovery.json",
+      "bytes": 324,
+      "sha256": "f6d33dc1b0bb386e8f921e68cc88da1d5bd0e40f151a1e1b159f6f15652f82db"
+    },
+    {
+      "path": ".artifacts/ai-sigma/continuation-20261001/supervisor/frame22-extension23/55d26b6a-6b1f-4360-80b6-b89e1c0c06a7/self-stop.json",
+      "bytes": 1948,
+      "sha256": "38f5caa529d400dde612ba6158f3e9be9b2d58bc58e0752d627adc9c1d9455e6"
+    }
+  ],
+  "original_55d26b_childwait": "UNAVAILABLE preserved; separate backup exit0 does not restore original wait",
+  "natural_supervisor_current": {
+    "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+    "status": {
+      "type": "active",
+      "activeFlags": []
+    },
+    "latest_turn": {
+      "id": "01a10d45-05e9-78b2-9806-3a9acab86f0a",
+      "status": "inProgress",
+      "error": null
+    }
+  },
+  "scientific_point": "latest289quality-r5 exit0/wait/currentexact[]; selected proc scientific candidates absent at18:11 point, not futureabsence",
+  "scientific_window_coordination": {
+    "recipient": "existing Coordinator active",
+    "request_receipt_path": ".artifacts/research-team/finish-records-repair/window-coordination.json",
+    "accepted": true,
+    "owner_window_reply": "pending"
+  },
+  "canonical_test_diff": {
+    "path": "research-data/ai-sigma/frame23-steward/finish-records-repair/test-watch-prospective.patch",
+    "target": "tools/research-team/test_watch.py",
+    "base_sha256": "f8668f3d0b363746bd17e232d3678b76ddcefb79111e37569909dd107ab35d28",
+    "new_mock_cases": 6,
+    "existing_cases": 8,
+    "isolated_candidate_result": "14/14PASS; no subprocess/RPC/DB/science"
+  },
+  "blocker": "natural Supervisor turn01a10d45 currently inProgress; do not interrupt or stop/edit24hash while owned active. Await actual natural idle and scientific current-entry guard quiet coordination.",
+  "long_deadlines_unchanged": "23:26:03/23:31:03/23:34:03/23:36:03",
+  "Coordinator_permanent_refresh": "separate pending, no active interrupt",
+  "current_runtime": {
+    "at": "2026-10-05T18:16:57.071516+00:00",
+    "phase": "running",
+    "owned": {
+      "run_id": "3a00f60c-2477-4375-9e83-1e27f018fb46",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+      "turn_id": "01a10d45-05e9-78b2-9806-3a9acab86f0a",
+      "started_at": "2026-10-05T18:13:09.689426+00:00",
+      "max_turn_seconds": null
+    },
+    "current24hash_match": true,
+    "scheduler_exact_alive": true,
+    "main_watch_sha256": "6751f1a49bd01a6db14544af7df5d17af95afba42e3878058a396762cffae14d",
+    "keeper_current": 14360576,
+    "existing_remaining_forecast_bytes": 3145728,
+    "new_patch_evidence_Git_upper_bytes": 262144,
+    "current_plus_all_forecast_bytes": 17768448,
+    "keeper_guard_bytes": 117440512
+  }
+}
