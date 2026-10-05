@@ -11,7 +11,7 @@ from pathlib import Path
 import numpy as np
 from .cache import load, sha
 
-from .common import resolve_config, measurements
+from .common import resolve_config, measurements, selected_teacher_types, validate_target_tensor
 
 
 def write(path, value):
@@ -79,15 +79,10 @@ def train(cache, output, config_path=None, steps=None):
     if device == "cuda":
         torch.cuda.manual_seed_all(cfg["training"]["seed"])
     binding, rows, x, distances, labels = load(cache)
-    teacher_types = {
-        r["teacher_type"]
-        for r in rows
-        if r["split"] in ("train", "validation") and r["rootmean"] is not None
-    }
-    if len(teacher_types) != 1:
-        raise ValueError("teacher types must not be mixed implicitly: " + str(teacher_types))
     target = cfg["training"]["target"]
     column = {"rootmean": 0, "z": 1}[target]
+    teacher_types = selected_teacher_types(rows, target)
+    validate_target_tensor(rows, labels[:, column], target)
     ix_train = np.array(
         [
             i

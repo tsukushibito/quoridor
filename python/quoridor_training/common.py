@@ -108,6 +108,54 @@ def resolve_config(path=None, overrides=()):
     return result
 
 
+def target_value(row, target):
+    """Validate only the selected target; absent auxiliary labels stay absent."""
+    if target not in ("rootmean", "z"):
+        raise ValueError("unsupported training target")
+    value = row.get(target)
+    if value is None:
+        return None
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        raise ValueError("selected target must be a number or null")
+    if not math.isfinite(value) or not -1 <= value <= 1:
+        raise ValueError("selected target must be finite within [-1,1]")
+    return float(value)
+
+
+def selected_teacher_types(rows, target):
+    """Teacher provenance follows eligible selected labels, never rootmean alone."""
+    types = set()
+    for row in rows:
+        if row["split"] not in ("train", "validation"):
+            raise ValueError("training labels must exclude test/unknown partitions")
+        value = target_value(row, target)
+        if not row["primary_eligible"] or value is None:
+            continue
+        kind = row.get("teacher_type")
+        if not isinstance(kind, str) or not kind:
+            raise ValueError("eligible selected target needs teacher provenance")
+        types.add(kind)
+    if len(types) != 1:
+        raise ValueError("teacher types must not be mixed implicitly: " + str(types))
+    return types
+
+
+def validate_target_tensor(rows, values, target):
+    """Bind metadata to the chosen f32 column; missing labels are NaN, not zero."""
+    import struct
+
+    if len(rows) != len(values):
+        raise ValueError("target tensor row count differs")
+    for row, tensor in zip(rows, values):
+        value = target_value(row, target)
+        tensor = float(tensor)
+        if value is None:
+            if not math.isnan(tensor):
+                raise ValueError("missing selected target must have NaN tensor")
+        elif not math.isfinite(tensor) or struct.pack("<f", value) != struct.pack("<f", tensor):
+            raise ValueError("selected target metadata/tensor f32 mismatch")
+
+
 def measurements(rows, values, target, constant):
     if len(rows) != len(values) or any(not math.isfinite(v) for v in values):
         raise ValueError("invalid predictions")

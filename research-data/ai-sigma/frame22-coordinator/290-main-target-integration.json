@@ -1,0 +1,55 @@
+{
+  "source_owner_stop": {
+    "path": "research-data/ai-sigma/frame23-public-sigma-z-learning/selector-modelreader-stop-v1.json",
+    "SHA": "9b98d2be8154b29510ac65f2c504cde689576beffbad91912dc8c7bd6c737b26"
+  },
+  "adopted_main_paths": [
+    "python/quoridor_training/common.py",
+    "python/quoridor_training/train.py",
+    "python/quoridor_training/test_selected_target.py"
+  ],
+  "independent_review": "teacher provenance and f32 tensor metadata validation use selected target; rootmean absent with z valid is permitted; no label fabrication; eligible teacher mixtures/test partitions/nonfinite invalid target refused; missing selected label remains NaN; native proved draw0 retained",
+  "source_management_diff": "train.py integrates selected-target binding only; original public scientific callback/architecture changes not yet adopted",
+  "Ruff_format_check_lint": "PASS",
+  "main_tests": {
+    "argv": [
+      "taskset",
+      "-c",
+      "0",
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "-m",
+      "unittest",
+      "quoridor_training.test_selected_target",
+      "quoridor_training.test_contracts"
+    ],
+    "actualstart": "2026-10-05T19:44:30.190550+00:00",
+    "wall_seconds": 0.2514708620146848,
+    "exit": 0,
+    "waited": true,
+    "maxRSS_bytes": 36986880,
+    "CPU_affinity": [
+      0
+    ],
+    "model_forward": false,
+    "new_training": false,
+    "system_python_missing_numpy_failure_preserved": true,
+    "time_utility_missing_attempt_no_child_preserved": true,
+    "source_SHA": {
+      "python/quoridor_training/common.py": "8bca062a8d1b7598e363313562407c171cc687278a77381e4218180b9c2ddcbd",
+      "python/quoridor_training/train.py": "c665c4760465bdac85c3956e31be69b9253938cdf3a51b6cce85da6f1c2bccb1",
+      "python/quoridor_training/test_selected_target.py": "440c2c435908f02e42bbf95b885a43e6a7cf0cfdf20f1afdedfed100128bdc0e"
+    }
+  },
+  "test_count": 11,
+  "full_training_or_native_architecture_integration": "NOT_RUN; maintained residual/native paths still pending",
+  "original_1m_science_failure_preserved": true,
+  "new_model_forward": false,
+  "new_fit": false,
+  "validation_archive": {
+    "path": "research-data/ai-sigma/frame22-coordinator/290-main-target-validation.tar.gz",
+    "SHA": "64a6fc0de470dfe1ab199320cd61c6ffed868984044b7794452b62f94ea01f38",
+    "members": 7,
+    "stream_byte_restore": true
+  }
+}
