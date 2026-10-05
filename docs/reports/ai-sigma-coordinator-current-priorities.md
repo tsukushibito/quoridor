@@ -105,3 +105,13 @@ Mainのgeneric QF1+D Zero4接線は[有限受入れ](ai-sigma-coordinator-frame2
 297はhypothesis本人がready/show/担当pauseを確認してclaim/staticを開始、41/42だけと保存step7813 scalar19846f32へjoinを準備した。[残差振幅・重複診断契約](../../research-data/ai-sigma/frame22-coordinator/residual-saved-selection-diagnostic-contract.md)を既savedへ全文実配送accepted。Closed289本人のunused source100/manage30受入れは原費/UNKNOWNを保持する。保存は同coor8MiB→old7.5＋新512KiB、新parent0、92fresh両rootcoverage待ちの間は科学0。Gamma固定6値・epsilon1e-6、trainpred未保存はUNAVAILABLE、新fit/forward/game/testtarget0。Science21:40/source21:50/save22:05、実判別・費から次の最大1の数量付き配分を更新する。
 
 92はmetadataquery lstat mode再用/appendbackup Popen事実のmarkerを31mock後に自然safe窓で実適用、20:45:41 loaded16/current24/6digest PASS、正1896572/t48616397＋1896590/t48616438、watch20dcbc20。新entryはこの本人freshbindingを使い、firstnaturalwholefinishの実効果は別に確認する。Former20:18正2/累積storagetyped不足/原UNKNOWNは不変更、恒久cooridle refreshは別pending。
+
+## 真正終局zへの次配分
+
+297は保存train/selectionだけの一算術を1.675972秒/NN0で完了した。Selection19846/20inputsではrow最良γ.75 MSE.969491490、入力群等重み最良γ1 .944369132で順位が反転した。γ0/1保存値復元差0、clip/saturation0、selection17/20とtrain740/4996inputgroupsに記録z競合、trainpredはUNAVAILABLE。普遍的振幅過大や教師誤り・新candidate改善を支持しない。停止20member archiveの全byte/currentSHAを統括照合し、元candidate49dbc/科学MAX1を不変更に保存する。
+
+[298の一学習](../../research-data/ai-sigma/frame22-coordinator/native-outcome-z-learning-contract.md)をhypothesis、[299の新96family生成](../../research-data/ai-sigma/frame22-coordinator/native-z-fresh-evaluation-contract.md)をexperiment、[300の独立一巡](../../research-data/ai-sigma/frame22-coordinator/native-z-independent-review-contract.md)をcriticへ登録・全文配送した。旧285576完整familyの真正終局zを各block/cohort/side内で432train/144selectionへラベル前固定し、現役sharded-reference cache/trainerを通す。Gameuniform→rowuniform・同1000064seen/7813stepの一QF1+D/Zero4候補、旧seen corpus再用は探索的選定で純target/quantity因果や新blindvalidationではない。新96は六openingcohort×二side×八family、未選定domain/seedを結果前固定し、候補D利益を生成のgateにしない。
+
+Closed experiment本人receipt b7dec77fでold285 liveNN11429000→old8729000＋newlearner1400000＋producer1250000＋review50000を確認。元18.2m/actual1300810/UNKNOWN/closed科学不変更。旧285320→288＋learner32MiB、旧29264→32＋producer32MiB、source2891280→880＋learner300＋producer100、source292300→200＋review100、manage292180→90＋各30は元全費/必要保全を残す。Review512KiBは旧2874MiBから本人retentionを確認し、science旧28512000から新960秒の別保存と92fresh三scope/global会計をheavy入口へ束縛する。静的実装・固定分割・独立schema確認は並行して進める。親追加容量/時間/NNresetは0。
+
+真z転移は新候補＋固定公開49dbc＋D＋train-only定数を同fresheligible96familyで一巡比較し、全rawselection/全actualtrain/publicbaseline seen入力へのOR、終局/censor/zeroeligible、paired差と系譜/cohort依存を保持。96はpilotで感度保証ではなく、actual分散・有効独立量/全費から必要未選定量を更新する。公開unique調査はgame/history/終局reason欠測を解消せず次順位、振幅制約は重み順位反転で優先を下げる。真正zでもD未達/重要入力欠落/同depth leaf-Action不一致なら表現・horizon/ordering/探索費の順位を上げる。小成功を必要規模の恒久入口にしない。Science22:55/source23:05/save23:15、親23四期限不変更。

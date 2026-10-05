@@ -1,0 +1,120 @@
+{
+  "schema": "saved-amplitude-registration-297-v1",
+  "UTC": "2026-10-05T20:55:13.381350+00:00",
+  "task": "saved-residual-amplitude-297-v1",
+  "scope": "/workspaces/quoridor/research-data/ai-sigma/frame23-public-z-residual-diagnostic",
+  "owner": "codex:01a0f31c-2e4b-7170-82c5-69e1428c2418",
+  "gamma": [
+    0,
+    0.125,
+    0.25,
+    0.5,
+    0.75,
+    1
+  ],
+  "epsilon": 1e-06,
+  "formula": "p_gamma=f32(tanh(f64(f32(0+8*f32(dopp-dself)))+gamma*(atanh(clip(f64(saved_p),+-[1-1e-6]))-f64(Dlogit))))",
+  "restore_tol_abs": 1e-06,
+  "restore_tol_rtol": 1e-06,
+  "freeze": "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/final-saved-freeze-v1/candidate-freeze-v1.json",
+  "caches": [
+    {
+      "cycle": 41,
+      "split": "train",
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0041/cache",
+      "manifest_SHA": "dcd31e019ad94adfb7b222de27504740254058ae02c3e7380af511487af6d335"
+    },
+    {
+      "cycle": 42,
+      "split": "validation",
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0042/cache",
+      "manifest_SHA": "1b57d69fe38d050eff0d9f8484ca1455516e7c8b415547f76d9d5813188d0ea8"
+    }
+  ],
+  "scalar": {
+    "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-r1/validation-step7813.f32",
+    "SHA": "062d75efe9a17f3d58b6b5775b1503ef7ba128193f0df98ede768e5a52c4add3",
+    "B": 79384
+  },
+  "initial_scalar": {
+    "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-r1/validation-step0.f32",
+    "SHA": "800e84ab171521847470a4b2a2403e0ea52e31f2a6f34f33adc7503ea0d72e47",
+    "B": 79384
+  },
+  "validation_order": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-r1/validation-order.json.gz",
+  "known_rows": {
+    "Tseen": 67937,
+    "rawT": 79769,
+    "ALLrawV": 19965,
+    "decisiveV": 19846,
+    "selection_input_groups": 20
+  },
+  "prediction_order": "native immutable rows eligible decisive subset == validation-order.json.gz exact ID sequence; all row unique; no arbitrary sorting",
+  "grouping": "actual QF1 STM IDs + rawdistance f32 bits; producer group correspondence checked; independentgame/history unavailable",
+  "groupweight": "row mean and equal actual input group means separate; no formalCI",
+  "trainpred": "UNAVAILABLE; no train*.f32 saved, no forward to fill",
+  "input_SHA": {
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/final-saved-freeze-v1/candidate-freeze-v1.json": "49dbc1ec576bd7ccd97d4dc17d744a5153ff1de18b43716a6330542302c39706",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/public-z-1m-registration-v1.json": "cbb192215dd69db4cc288fdc589bc0dcf188d4af7259c5219182ee872e7c5423",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/final-saved-freeze-v1/saved-curve-summary-v1.json": "793cac9d4e8df664b19971419dd14a017599c00db2d5309667a48ec5d0f40293",
+    "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-r1/validation-step7813.f32": "062d75efe9a17f3d58b6b5775b1503ef7ba128193f0df98ede768e5a52c4add3",
+    "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-r1/validation-step0.f32": "800e84ab171521847470a4b2a2403e0ea52e31f2a6f34f33adc7503ea0d72e47",
+    "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-r1/validation-order.json.gz": "1b77fc6de8db237d5b9fd278767d692612243983f9821cc7ad4d0d4409c87ae3",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-public-z-residual-diagnostic/diagnose.py": "b314c074046c9a5fa22d12f88df1c448116a4b42575e35b1192ed49555eea7d6",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-public-z-residual-diagnostic/manage.py": "236e9e9733ecd2e1284c914c0271a2a4b4206101bf1e89bf8f0abe34e9e55eef",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teachers/control-v1.py": "28fcc80cd4131133f42013a1b55687ae4b6814a2dab1433f4e92b7bad57b37e6",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/public-z-1m-config-v1.json": "ae34122a9c76afb2957ce355cee9d8a44f78c1f573546a457f50c5f4038e910c",
+    "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-r1/step7813.pt": "f93447588e6a6924edf4f605c90bf92db8f70ebf53b86b3ef58ff0adb2a9ce24",
+    "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-native-framing-v2/step7813-model/manifest.json": "02d6f34afd165bde8cff351721b9a7af38d73763f8c8d60417cb5625a5a52710",
+    "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-native-framing-v2/step7813-model/weights.f32": "213309171e60c23c708a55b7009e14f3b5f9a6cc4e8fdc5f173c9a195a0a4a47",
+    "/workspaces/quoridor/.worktree/assets/checkpoints/frame22-teacher-transfer-B-r1/scale.json": "175f07713409994d0d4c99768267695b0a91ec100baabf202fb4518b56cbdfed",
+    "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-r1/Tseen-references.jsonl.gz": "9be6290ee2edf9bf7d7cf365b459b3727538e0c400f9db759928f3f2755e7179",
+    "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-r1/Vraw-references.jsonl.gz": "f3cc870b3344500a13d40f3a93810ee4b6846b867c2bd4ad69a740e2beb3e991",
+    "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0041/cache/cache.json": "dcd31e019ad94adfb7b222de27504740254058ae02c3e7380af511487af6d335",
+    "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0042/cache/cache.json": "1b57d69fe38d050eff0d9f8484ca1455516e7c8b415547f76d9d5813188d0ea8"
+  },
+  "source": "/workspaces/quoridor/research-data/ai-sigma/frame23-public-z-residual-diagnostic/diagnose.py",
+  "source_SHA": "b314c074046c9a5fa22d12f88df1c448116a4b42575e35b1192ed49555eea7d6",
+  "process_helpers": "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teachers/control-v1.py",
+  "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+  "loaded": "/workspaces/quoridor/research-data/ai-sigma/frame23-steward/finish-metadata-query/running-loaded-current.json",
+  "storage": "/workspaces/quoridor/research-data/ai-sigma/frame23-steward/storage-297-admission.json",
+  "storage_SHA": "ffb2cbe57345e0c59f281042ffc5400fdb2ee710b5b13083822eccd4bbb99336",
+  "python": "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+  "end_at": "2026-10-05T21:40:00Z",
+  "NN": 0,
+  "science_MAX": 1,
+  "hard_s": 15,
+  "compile": 0,
+  "CPU": [
+    1
+  ],
+  "RAM_guard_B": 1879048192,
+  "source_cap_s": 100,
+  "manage_cap_s": 30,
+  "future_result_Git_temp_metadata_upper_B": 425984,
+  "output": "/workspaces/quoridor/research-data/ai-sigma/frame23-public-z-residual-diagnostic/result-v1.json",
+  "expected_schema": "saved-residual-amplitude-diagnostic-v1",
+  "allowed_label_partitions": [
+    "0041train",
+    "0042selection"
+  ],
+  "future_label_paths": [],
+  "argv": [
+    "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "-B",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-public-z-residual-diagnostic/diagnose.py",
+    "--registration",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-public-z-residual-diagnostic/registration-v2.json"
+  ],
+  "prior_registration": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-public-z-residual-diagnostic/registration-v1.json",
+    "SHA": "deb6e5fd4bb23af56aa0b2145974e4a5edebe0f060a0123a4e534d62bb296fb7",
+    "scientific_entered": false
+  },
+  "result_serialization": "compact lossless JSON to remain within inclusive512KiB; no formula/condition change",
+  "original_source_precompact": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-public-z-residual-diagnostic/diagnose-precompact-source-v1.py.gz",
+    "SHA": "80f61a568239c81d3ffcc740ffb76f568eb98e1030600bbbc4118c413aac89a7"
+  }
+}
