@@ -1,0 +1,74 @@
+{
+  "UTC": "2026-10-05T02:06:17.100739+00:00",
+  "issue": "quoridor-4lc.254",
+  "task": "one-root-leaf-254-v1",
+  "schema": "one-root-leaf-v1",
+  "conditions": [
+    {
+      "depth": 1,
+      "engine": "NNUE",
+      "status": "NOT_RUN"
+    },
+    {
+      "depth": 1,
+      "engine": "Dclip",
+      "status": "NOT_RUN"
+    },
+    {
+      "depth": 1,
+      "engine": "Dtanh",
+      "status": "NOT_RUN"
+    },
+    {
+      "depth": 2,
+      "engine": "NNUE",
+      "status": "NOT_RUN"
+    },
+    {
+      "depth": 2,
+      "engine": "Dclip",
+      "status": "NOT_RUN"
+    },
+    {
+      "depth": 2,
+      "engine": "Dtanh",
+      "status": "NOT_RUN"
+    }
+  ],
+  "order": "depth1 NNUE/Dclip/Dtanh then depth2 NNUE/Dclip/Dtanh",
+  "rootchild_order": "Action ascending; diagnostic order separate from oldrootbest",
+  "search": "fullwindow exhaustive all legal finite horizon, no alpha-beta pruning: all extremal origins can be recorded",
+  "NNUE": "same full/delta/native/frozen228 input and f32; no optimizer/Torch",
+  "D": "same249 f32rawu/clip/tanh, terminal first; absu>=1 pretransform count, not endpoint",
+  "processed_cap": 65536,
+  "NN_cap": 20000,
+  "MAX1": true,
+  "hard_s": 90,
+  "internal_s": 85,
+  "initial_function_tolerance": {
+    "abs": 1e-05,
+    "rtol": 0.0001
+  },
+  "timing": {
+    "new_entry": "2026-10-05T02:25:00Z",
+    "science_stop": "2026-10-05T02:27:00Z",
+    "save": "2026-10-05T02:34:00Z",
+    "parent_end": "2026-10-05T02:51:02Z"
+  },
+  "storage": {
+    "reservation": 4194304,
+    "guard": 3670016,
+    "forecast": 3145728,
+    "pool_before": 15835136,
+    "pool_after": 11640832,
+    "parent_add": 0,
+    "unknown_discount": 0
+  },
+  "limits": [
+    "same selected root, not6roots",
+    "finitehorizon truth notbadmove/strategic truth/IID/NI",
+    "old failsoft/full argmax unknown untouched",
+    "partial children not adopted",
+    "no arena/training/depth3/new source outside sole scope"
+  ]
+}

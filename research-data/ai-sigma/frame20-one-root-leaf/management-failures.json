@@ -1,0 +1,28 @@
+[
+  {
+    "UTC": "2026-10-05T02:08:23.587471+00:00",
+    "argv": [
+      "/home/vscode/.local/bin/node",
+      "--check",
+      "tools/ai-sigma-frame20-one-root-leaf/diagnose.cjs"
+    ],
+    "exit": 1,
+    "typed": "SOURCE_SYNTAX_UNEXPECTED_END",
+    "science_jobs": 0,
+    "NN": 0,
+    "modelread": 0,
+    "cause": "endpoint function closing brace missing",
+    "source_version_saved_before_repair": true
+  },
+  {
+    "UTC": "2026-10-05T02:09:18.084006+00:00",
+    "typed": "GIT_HEAD_CAS_CONCURRENT_OWNER_SAVE",
+    "exit": 128,
+    "old_HEAD": "7c3a8c3b3783f58a18cb2ca8091f342051b1a45a",
+    "observed_HEAD": "60a90a62c0cad4241a6a103bfda31a327b5f8c01",
+    "created_failure_source_commit": "a384810e30c43d9ffe0b0c6742b042db4e950bd0",
+    "science_jobs": 0,
+    "NN": 0,
+    "repair": "fresh HEAD rebuild own subtree only; failed source commit retained as additional parent"
+  }
+]
