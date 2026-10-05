@@ -1,0 +1,48 @@
+{
+  "at": "2026-10-05T19:43:29.970949+00:00",
+  "scope": "same-uid current target arguments only; not all-host or future absence proof",
+  "candidate_processes": [
+    {
+      "pid": 1713041,
+      "start_ticks": "47793161",
+      "executable_basename": "python",
+      "selected_arguments": [
+        "scripts/dev/research-watch.py"
+      ],
+      "self_or_registered_management": true
+    },
+    {
+      "pid": 1752325,
+      "start_ticks": "48003800",
+      "executable_basename": "python",
+      "selected_arguments": [
+        "/workspaces/quoridor/scripts/dev/research-job.py",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/background-public-z-1m-r1"
+      ],
+      "self_or_registered_management": false
+    },
+    {
+      "pid": 1764200,
+      "start_ticks": "48056006",
+      "executable_basename": "python",
+      "selected_arguments": [
+        "/workspaces/quoridor/scripts/dev/research-job.py",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/background-public-z-1m-parity-v2"
+      ],
+      "self_or_registered_management": false
+    },
+    {
+      "pid": 1803526,
+      "start_ticks": "48192044",
+      "executable_basename": "python",
+      "selected_arguments": [
+        "/workspaces/quoridor/scripts/dev/research-job.py",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/background-final-saved-freeze-v1"
+      ],
+      "self_or_registered_management": false
+    }
+  ],
+  "errors": [],
+  "science_interrupted": false,
+  "source_edited": false
+}
