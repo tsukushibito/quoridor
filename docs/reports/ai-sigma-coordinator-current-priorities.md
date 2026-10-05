@@ -58,4 +58,8 @@ CPU合計4logical/currentRAM8GiB/保持cachetemp＋有効unused12GiB。運用CPU
 
 新現役契約: [公開z取得・変換](../../research-data/ai-sigma/frame22-coordinator/sigma-public-z-import-contract.md)、[公開z CPU学習](../../research-data/ai-sigma/frame22-coordinator/sigma-public-z-learning-contract.md)、[公開z独立評価](../../research-data/ai-sigma/frame22-coordinator/sigma-public-z-review-contract.md)。
 
+初期3NPZの66,500,512Bは固定Gitblob照合を経て取得済み。最初の変換はstatesのfinite/range検査でラベル読取・native変換・cache作成前に停止した。続く診断のprivate NumPy header API不成立も保存し、public APIによる最初の512行のplane別診断へ修正する。元入力・値域を変更せず、実保存encodingと現変換器の仮定を切り分ける。公開データ無効や学習方式の負結果とは判断しない。完全入力groupの80k/20k/20kは結果前の予定上限であり、actual資格・有効分母はまだ成立していない。655,129,760Bの保守forecastはraw/currentを含む総量で、現在量へ再加算しない。旧287の一巡予測7002NNは停止保存済みで、既native readerによる3453行の小ラベル投影を受けた後、追加forwardなしで採点する。新公開0043の封印は別に維持する。
+
+92のfinish修復は自然Supervisor idle/ownednullと科学読者停止窓で適用・通常再開まで成立した。新watch/current24、scheduler1713022/tick47793131・monitor1713041/tick47793161とrunningloaded14/14を保存した。最初の自然点検は17command receiptと5wrapperのwait/notes/backup成立を有限確認した。旧timeout/原wait欠測は保持し、全期間成功やprocess group全不存在へ広げない。停止manifestの21pathを通常Git `8dae82101281bd1c261ec4994f8ccb82c05b4368`へ保存、全current/blob byteSHA一致。短source窓を解除し、289の診断・実変換、旧287の算術採点、290のimmutable資格後CPU学習を各fresh newloaded/物理検査から進める。
+
 288の停止源と24member archiveを統括別ownerでbyte/SHA確認、core generator＋4件の独立scalar BFS oracle testsのみmain採用。両端/中点/全border DSU、基準到達性、閉路候補への正確fallbackを保持。比較hook/旧AI・NNUE scaffoldはarchive-only。main限定release4tests/core Clippy PASS（10.452872s/NN0/記録currentexact無し）、最初のforeign compute自己停止1.198120sと原remaining2は保全。56同仕事pair/NNUE合計比は有限支持で、個別悪化/短timers/wholeproduction・MCTS・棋力未測を残す。[main受入れ](../../research-data/ai-sigma/frame22-coordinator/288-main-integration.json)。
