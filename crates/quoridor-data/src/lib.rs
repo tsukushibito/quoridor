@@ -46,6 +46,16 @@ pub enum Teacher {
         #[serde(default)]
         pv: Vec<u16>,
     },
+    /// Recorded STM terminal outcome with no search value or reconstructed history.
+    ExternalOutcome {
+        source: String,
+        revision: String,
+        shard: String,
+        row_index: u64,
+        input_frame: String,
+        termination_reason: Option<String>,
+        unavailable: Vec<String>,
+    },
     InputOnly,
 }
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -63,7 +73,7 @@ impl Teacher {
             } else {
                 *value
             }),
-            Self::InputOnly => None,
+            Self::ExternalOutcome { .. } | Self::InputOnly => None,
         }
     }
 }
@@ -179,6 +189,35 @@ impl TeacherRow {
         }
         if self.feature_signature != self.signature() {
             return Err("feature signature mismatch".into());
+        }
+        if let Teacher::ExternalOutcome {
+            source,
+            revision,
+            shard,
+            input_frame,
+            termination_reason,
+            unavailable,
+            ..
+        } = &self.teacher
+            && (source.is_empty()
+                || revision.is_empty()
+                || shard.is_empty()
+                || input_frame != "STM_canonical_own_goal_row8_absolute_side_unavailable"
+                || self.game != "UNAVAILABLE"
+                || !self.prefix.is_empty()
+                || !self.history_key.is_empty()
+                || self.ply != 0
+                || self.action.is_some()
+                || !["game", "history", "ply", "prefix", "absolute_side"]
+                    .iter()
+                    .all(|key| unavailable.iter().any(|s| s == key))
+                || self.z.is_none()
+                || self.z.is_some_and(|z| ![-1.0, 0.0, 1.0].contains(&z))
+                || (self.eligible
+                    && self.z == Some(0.)
+                    && termination_reason.as_deref() != Some("proven_rule_draw")))
+        {
+            return Err("invalid external outcome provenance/availability".into());
         }
         if let Teacher::Mcts {
             edges,
@@ -499,10 +538,10 @@ pub fn write_tensor_cache(dataset: &Path, output: &Path, allow_test: bool) -> Re
             &mut meta,
             &serde_json::json!({
                 "metadata_schema": "quoridor-tensor-row-v2",
-                "id": r.id, "group": r.family, "game": r.game, "split": r.split,
+                "id": r.id, "group": r.family, "game": if matches!(r.teacher, Teacher::ExternalOutcome { .. }) { None } else { Some(&r.game) }, "split": r.split,
                 "primary_eligible": r.eligible,
                 "state_key": r.state_key, "history_key": r.history_key,
-                "ply": r.ply, "feature_signature": r.feature_signature,
+                "ply": if matches!(r.teacher, Teacher::ExternalOutcome { .. }) { None } else { Some(r.ply) }, "feature_signature": r.feature_signature,
                 "side": r.side,
                 "ids": r.ids, "ids_order": "P1_then_P2",
                 "distance": r.distance, "distance_order": "STM_then_opponent_f32",
@@ -510,9 +549,11 @@ pub fn write_tensor_cache(dataset: &Path, output: &Path, allow_test: bool) -> Re
                 "teacher_type": match r.teacher {
                     Teacher::Mcts { .. } => "mcts",
                     Teacher::AlphaBeta { .. } => "alpha_beta_bounded_search_value",
+                    Teacher::ExternalOutcome { .. } => "external_terminal_outcome",
                     Teacher::InputOnly => "input_only",
                 },
                 "rootmean": r.teacher.value(), "z": r.z,
+                "external_provenance": if matches!(r.teacher, Teacher::ExternalOutcome { .. }) { Some(&r.teacher) } else { None },
             }),
         )?;
         meta.write_all(b"\n")?;
@@ -784,4 +825,224 @@ pub unsafe extern "C" fn quoridor_qf1_bulk(
         side[i] = 1;
     }
     0
+}
+
+/// Decode the original Sigma eight-plane STM input. This constructs a canonical
+/// position, not an absolute P1/P2 identity or a replay/history context.
+pub fn sigma_plane_position(planes: &[f32; 648]) -> Result<quoridor_core::Position> {
+    use quoridor_core::Position;
+    if planes.iter().any(|v| !v.is_finite()) {
+        return Err("nonfinite Sigma input".into());
+    }
+    let mut p = Position::default();
+    for player in 0..2 {
+        let plane = &planes[player * 81..(player + 1) * 81];
+        let cells: Vec<_> = plane
+            .iter()
+            .enumerate()
+            .filter(|(_, v)| **v == 1.)
+            .map(|(i, _)| i)
+            .collect();
+        if cells.len() != 1 || plane.iter().any(|v| *v != 0. && *v != 1.) {
+            return Err("Sigma pawn plane is not one-hot".into());
+        }
+        p.pawns[player] = cells[0] as u8;
+        let remain = &planes[(4 + player) * 81..(5 + player) * 81];
+        let count = (remain[0] * 10.).round();
+        if !(0. ..=10.).contains(&count) || remain.iter().any(|v| (*v - count / 10.).abs() > 1e-6) {
+            return Err("Sigma remaining-wall plane".into());
+        }
+        p.walls_remaining[player] = count as u8;
+    }
+    let h = &planes[162..243];
+    let v = &planes[243..324];
+    if h.iter().chain(v).any(|x| *x != 0. && *x != 1.)
+        || h[72..].iter().any(|x| *x != 0.)
+        || (0..9).any(|y| v[y * 9 + 8] != 0.)
+    {
+        return Err("Sigma wall segments/padding".into());
+    }
+    for y in 0..8 {
+        let mut x = 0;
+        while x < 9 {
+            if h[y * 9 + x] == 0. {
+                x += 1;
+                continue;
+            }
+            if x >= 8 || h[y * 9 + x + 1] != 1. {
+                return Err("unpaired horizontal segment".into());
+            }
+            p.horizontal |= 1 << (y * 8 + x);
+            x += 2;
+        }
+    }
+    for x in 0..8 {
+        let mut y = 0;
+        while y < 9 {
+            if v[y * 9 + x] == 0. {
+                y += 1;
+                continue;
+            }
+            if y >= 8 || v[(y + 1) * 9 + x] != 1. {
+                return Err("unpaired vertical segment".into());
+            }
+            p.vertical |= 1 << (y * 8 + x);
+            y += 2;
+        }
+    }
+    p = p.checked()?;
+    // Includes both complete81 wall-only distance maps and canonical goal sides.
+    let expected = quoridor_core::research::features(p);
+    if planes
+        .iter()
+        .zip(expected)
+        .any(|(a, b)| (*a - b).abs() > 1e-6)
+    {
+        return Err("Sigma all-plane/native wall-distance mismatch".into());
+    }
+    Ok(p)
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct OutcomeImportConfig {
+    pub source: String,
+    pub revision: String,
+    pub shard: String,
+    pub split: Split,
+    pub records: usize,
+    pub output: PathBuf,
+}
+
+/// Framing: little-endian original row index(u64), 648f32 original STM planes,
+/// one f32 recorded z. The upstream fixed-NPZ decoder supplies whole groups.
+pub fn import_sigma_outcomes<R: Read>(
+    mut input: R,
+    config: &OutcomeImportConfig,
+) -> Result<serde_json::Value> {
+    let mut writer = DatasetWriter::new(&config.output, true)?;
+    let mut buffer = [0u8; 8 + 649 * 4];
+    let mut rows = Vec::with_capacity(512);
+    let mut zero = 0usize;
+    let mut positive = 0usize;
+    let mut negative = 0usize;
+    let mut previous = None;
+    for _ in 0..config.records {
+        input.read_exact(&mut buffer)?;
+        let index = u64::from_le_bytes(buffer[..8].try_into()?);
+        if previous.is_some_and(|old| old >= index) {
+            return Err("input row order/duplicate index".into());
+        }
+        previous = Some(index);
+        let planes: [f32; 648] = std::array::from_fn(|i| {
+            f32::from_le_bytes(
+                buffer[8 + i * 4..12 + i * 4]
+                    .try_into()
+                    .expect("fixed chunk"),
+            )
+        });
+        let z = f32::from_le_bytes(buffer[2600..2604].try_into()?);
+        if ![-1., 0., 1.].contains(&z) {
+            return Err("external z must be recorded finite-1/0/1".into());
+        }
+        let position = sigma_plane_position(&planes)?;
+        let f = quoridor_nnue::encode_qf1(position)?;
+        let input_sha = hex_digest(&buffer[8..2600]);
+        let mut row = TeacherRow {
+            id: format!("{}:{}:{index}", config.revision, config.shard),
+            game: "UNAVAILABLE".into(),
+            family: format!("sigma-canonical-input:{input_sha}"),
+            split: config.split.clone(),
+            ply: 0,
+            prefix: Vec::new(),
+            state_key: HistoryKey::from(position).sigma_string(),
+            history_key: String::new(),
+            ids: f.ids,
+            distance: f.distance,
+            side: 1,
+            action: None,
+            teacher: Teacher::ExternalOutcome {
+                source: config.source.clone(),
+                revision: config.revision.clone(),
+                shard: config.shard.clone(),
+                row_index: index,
+                input_frame: "STM_canonical_own_goal_row8_absolute_side_unavailable".into(),
+                termination_reason: None,
+                unavailable: ["game", "history", "ply", "prefix", "absolute_side"]
+                    .map(String::from)
+                    .to_vec(),
+            },
+            z: Some(z),
+            eligible: z != 0.,
+            model_sha: String::new(),
+            feature_signature: String::new(),
+        };
+        row.feature_signature = row.signature();
+        row.validate()?;
+        match z {
+            0. => zero += 1,
+            1. => positive += 1,
+            _ => negative += 1,
+        }
+        rows.push(row);
+        if rows.len() == 512 {
+            writer.push(&rows)?;
+            rows.clear();
+        }
+    }
+    if input.read(&mut [0u8; 1])? != 0 {
+        return Err("trailing framed rows".into());
+    }
+    writer.push(&rows)?;
+    let manifest = writer.finish()?;
+    Ok(
+        serde_json::json!({"schema":"external-recorded-outcomes-v1", "records":config.records,
+        "positive":positive,"negative":negative,"zero":zero,"zero_status":"EXCLUDED_TERMINATION_REASON_UNAVAILABLE",
+        "primary_target":"decisive recorded STM outcomes conditional on±1", "manifest":manifest,
+        "history_game_absolute_side":"UNAVAILABLE; canonical side1 does not identify realP1/P2", "NN":0}),
+    )
+}
+
+/// Target-free whitelist; sealed teacher values never appear in this projection.
+pub fn write_input_references(dataset: &Path, output: &Path, allow_test: bool) -> Result<usize> {
+    let mut out = BufWriter::new(
+        OpenOptions::new()
+            .create_new(true)
+            .write(true)
+            .open(output)?,
+    );
+    let mut count = 0;
+    for_each_row(dataset, allow_test, |r| {
+        let p = (r.side - 1) as usize;
+        let external = match &r.teacher {
+            Teacher::ExternalOutcome {
+                source,
+                revision,
+                shard,
+                row_index,
+                input_frame,
+                unavailable,
+                ..
+            } => Some(
+                serde_json::json!({"source":source,"revision":revision,"shard":shard,"original_row_index":row_index,"input_frame":input_frame,"unavailable":unavailable}),
+            ),
+            _ => None,
+        };
+        serde_json::to_writer(
+            &mut out,
+            &serde_json::json!({
+                "schema":"quoridor-input-reference-v1", "id":r.id,"family":r.family,"partition":r.split,
+                "side":r.side,"side_frame":if external.is_some() {"canonicalSTM_only"} else {"actualP1P2"},
+                "state_key":r.state_key,"history_key":if r.history_key.is_empty() {None} else {Some(&r.history_key)},
+                "history_format":if r.history_key.is_empty() {"UNAVAILABLE"} else {"nativeSigmaContextSHA"},
+                "actualSTM_ids":[&r.ids[p],&r.ids[1-p]],"ids_order":"STM_then_opponent",
+                "STM_distance_f32bits":r.distance.map(f32::to_bits),"distance_order":"STM_then_opponent",
+                "input_signature":r.feature_signature,"external_input_provenance":external,
+            }),
+        )?;
+        out.write_all(b"\n")?;
+        count += 1;
+        Ok(())
+    })?;
+    out.flush()?;
+    Ok(count)
 }

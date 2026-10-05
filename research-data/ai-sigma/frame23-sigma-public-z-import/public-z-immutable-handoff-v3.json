@@ -1,0 +1,165 @@
+{
+  "task": "sigma-public-z-import-289-v1",
+  "schema": "public-z-immutable-handoff-v3",
+  "UTC": "2026-10-05T18:54:04.445890+00:00",
+  "source_commit": "751186344fc52ad0c29bc65922e62c6fa915f006",
+  "source_result": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-import/canonical-import-result-r2.json",
+    "SHA": "dbed1a625b2bace3ef8e5c7775c78541aa27ad7dc91f3fccde22389e09a1d559"
+  },
+  "finite_stop": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-import/canonical-import-r2-finite-stop.json",
+    "SHA": "85cca9e2dd7d87ac2e3579a2ae46a468b36435aadd059ddd3f99ef313aff8949"
+  },
+  "binary_SHA": "e7c25987d432eacb5af218a222ed3437fd37ec3bd6315de9ed82caab16923681",
+  "train_validation": [
+    {
+      "cycle": 41,
+      "partition": "train",
+      "NPZ_SHA": "0b49337c3ebce0342472bc6b73933ae38c0ada780bdf1da991c03644c458cba2",
+      "original_rows": 148967,
+      "selected_rows": 79769,
+      "groups": 5055,
+      "input_qualification": {
+        "candidate_rows": 79998,
+        "candidate_groups": 5168,
+        "excluded_groups": 113,
+        "excluded_rows": 229,
+        "rejected_row_reasons": {
+          "Sigma remaining-wall plane": 229
+        },
+        "qualification_path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0041/private-input-qualification.jsonl",
+        "qualification_SHA": "68d3231b29f9c4adcbb33a7cbdecbbf5698f21623c2d0eecc0e17d9af98af775",
+        "group_rule": "any invalid member excludes whole original-input group; no refill"
+      },
+      "native_dataset": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0041/dataset",
+      "manifest_SHA": "c97dc00fe83098d750e4ae51cc57d86300d16966ad8a31115278ef1f7225a215",
+      "cache": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0041/cache",
+      "cache_SHA": "dcd31e019ad94adfb7b222de27504740254058ae02c3e7380af511487af6d335",
+      "target_free_refs": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0041/input-references.jsonl.gz",
+      "refs_SHA": "8cdac8586d3499cc171a91f53cb04b9e2242417db3685183b52f4a91427a4bff",
+      "refs_uncompressed_SHA": "9e80f6facec80fc60529346bf906dc40df33770b3d27af9641a3b778efca37ab",
+      "refs_format": "gzip JSONL target-free; all input-qualified rows including public z0",
+      "input_selection_SHA": "4eb90de10b535773e0de126a09488fdfa5d63e7843d5458ea587a4a316b9db83",
+      "raw_LR_bytes": "PASS, entire secondhalf excluded",
+      "wall_distance_check": "native all648planes including all81 maps each selected original",
+      "source_math": "unchanged native QF1/STM + recorded z only, rootmean absent",
+      "eligibility": "z0 excluded termination-reason-unavailable, raw preserved",
+      "labels": "authorized train/selection",
+      "NN": 0,
+      "wall_s": 5.530424588010646,
+      "positive": 38469,
+      "negative": 38386,
+      "zero": 2914,
+      "eligible_rows": 76855,
+      "full_source_recorded_outcome_counts": {
+        "raw_rows": 297934,
+        "raw_zero": 9280,
+        "original_rows": 148967,
+        "original_zero": 4640,
+        "raw_positive": 145172,
+        "raw_negative": 143482,
+        "zero_status": "EXCLUDED_TERMINATION_REASON_UNAVAILABLE",
+        "provenance": "recorded source outcomes, terminal reason/game ID unavailable",
+        "future_label_summary": "authorized training/selection"
+      },
+      "cache_metadata": {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0041/cache/rows.jsonl",
+        "SHA": "e780bd7d68fa60c44a7e944143545ce0765ec0689fbcdb141cb0848846096703"
+      },
+      "candidate_selection": {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0041/candidate-input-selection-frozen.json",
+        "SHA": "0a547eb2ed45efb4a5cbe2734c1484e0f1206edfdc92d7885b4860053275bc80"
+      },
+      "qualified_selection": {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0041/input-selection-frozen.json",
+        "SHA": "4eb90de10b535773e0de126a09488fdfa5d63e7843d5458ea587a4a316b9db83"
+      }
+    },
+    {
+      "cycle": 42,
+      "partition": "validation",
+      "NPZ_SHA": "fc0d0646f0742ee458eec68c20a37638970858aaaa5500a4981ed8f18e718afc",
+      "original_rows": 140967,
+      "selected_rows": 19965,
+      "groups": 20,
+      "input_qualification": {
+        "candidate_rows": 19965,
+        "candidate_groups": 20,
+        "excluded_groups": 0,
+        "excluded_rows": 0,
+        "rejected_row_reasons": {},
+        "qualification_path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0042/private-input-qualification.jsonl",
+        "qualification_SHA": "f2e84c4e6d7907e4e5eccf7d5181ea3311fbecb5792273c8141c619038723462",
+        "group_rule": "any invalid member excludes whole original-input group; no refill"
+      },
+      "native_dataset": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0042/dataset",
+      "manifest_SHA": "0ae2549b1a673060f4ab1f2640ee40f5a1c898168bbb5a3f321edae423482309",
+      "cache": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0042/cache",
+      "cache_SHA": "1b57d69fe38d050eff0d9f8484ca1455516e7c8b415547f76d9d5813188d0ea8",
+      "target_free_refs": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0042/input-references.jsonl.gz",
+      "refs_SHA": "674109c3f17ba389635fc93cca04a47052f6c01e13030325e204fcab63aec3ea",
+      "refs_uncompressed_SHA": "4afadb6993ee21a10c648107170b0eed1562a6c372d8a49318fdb07e84ae9fca",
+      "refs_format": "gzip JSONL target-free; all input-qualified rows including public z0",
+      "input_selection_SHA": "121d3695b37b8aa41355213bfd5211aab0bdb5f763955bff6371af5feef72ecb",
+      "raw_LR_bytes": "PASS, entire secondhalf excluded",
+      "wall_distance_check": "native all648planes including all81 maps each selected original",
+      "source_math": "unchanged native QF1/STM + recorded z only, rootmean absent",
+      "eligibility": "z0 excluded termination-reason-unavailable, raw preserved",
+      "labels": "authorized train/selection",
+      "NN": 0,
+      "wall_s": 2.515955087961629,
+      "positive": 9837,
+      "negative": 10009,
+      "zero": 119,
+      "eligible_rows": 19846,
+      "full_source_recorded_outcome_counts": {
+        "raw_rows": 281934,
+        "raw_zero": 3840,
+        "original_rows": 140967,
+        "original_zero": 1920,
+        "raw_positive": 140188,
+        "raw_negative": 137906,
+        "zero_status": "EXCLUDED_TERMINATION_REASON_UNAVAILABLE",
+        "provenance": "recorded source outcomes, terminal reason/game ID unavailable",
+        "future_label_summary": "authorized training/selection"
+      },
+      "cache_metadata": {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0042/cache/rows.jsonl",
+        "SHA": "2b0e251e0e37f2a97836c1ac678a1978cd99e7b226694061cd920f6e0c346119"
+      },
+      "candidate_selection": {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0042/candidate-input-selection-frozen.json",
+        "SHA": "b9662f4e28e1ae936b95e5349959414455e8a53c111dae98a1efecedf27ea07c"
+      },
+      "qualified_selection": {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0042/input-selection-frozen.json",
+        "SHA": "121d3695b37b8aa41355213bfd5211aab0bdb5f763955bff6371af5feef72ecb"
+      }
+    }
+  ],
+  "future_target_free": {
+    "cycle": 43,
+    "rows": 19359,
+    "original_rows": 117171,
+    "input_groups": 10,
+    "partition": "futureevaluation",
+    "target_free_refs": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/input-references.jsonl.gz",
+    "refs_SHA": "9fdc1049a37f5dff6f396868143f4b8a9d30c7447c33d4c5c5dba6df491a75af",
+    "refs_uncompressed_SHA": "e6a73ed29e070a290be8caf2283159268809c00a874cb49fbfc43a9a065ce75b",
+    "input_selection_SHA": "8f1d20bdf77ca8ea2ea04a3ef1ed8915ade65e983d6d6597102d8199731750bf",
+    "producer_sealed_cache_manifest_SHA": "8ab0d6c83035d015d76db81c39d0cbbe528af50c82a55ff4ea6b7dc1a64a67ef",
+    "producer_sealed_dataset_manifest_SHA": "d0e6132f863726fe40b5ddd0895050d114d3783c0fe371a69b5c55e0dd2ab339",
+    "labels": "not released; independent candidate/config/mask/settingsfreeze protocol required",
+    "history_game_absolute_side": "UNAVAILABLE"
+  },
+  "exposure_diagnostic": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-import/target-free-input-exposure-r1.json",
+    "SHA": "fa4955baa0a2203529c1a0fc0de8b86c6aaebfc6f28febf6b35b34afa6b91328"
+  },
+  "eligibility": "decisive recorded\u00b11; public z0 exclusion reasonunavailable; inputrefs retain z0 beforelabel predicate",
+  "mask": "learner/critic freeze ALLactualusedtrain and ALLrawqualifiedval separately; refs target-free and actual sparseSTM signature checked; nullhistory never literal sharedhistory proof",
+  "support": "train5055/selection20/future10 original-input groups; not independent game counts; future rawval OR15770/19359 leaves at most3589 before finaltrainmask and z eligibility",
+  "producer_evidence": "owner finite source/whole648plane/all81map/cachebyte/inputgroup checks; independent reviewer/parity/scoring separate",
+  "NN": 0
+}

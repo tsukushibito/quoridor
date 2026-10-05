@@ -1,0 +1,99 @@
+{
+  "task": "289-main-source-and-retention-adoption",
+  "at": "2026-10-05T19:16:07.730318+00:00",
+  "owner_stop_SHA": "80f981dbfdcfa6beec8174abdd6ccb9c78db2d29e450d95605d35b4d296c4904",
+  "independent_archive_stream_len_SHA_members": 269,
+  "source_review": [
+    "ExternalOutcome holds recorded z separately from missing search value, explicit provenance/unavailable history/game/side. Cache metadata nulls unavailable game/ply/rootmean.",
+    "Eight-plane decoder requires finite one-hot pawns, exact segment pairing/padding, bounded stock and native full648 planes including both81 maps; absolute side is not invented.",
+    "Original index monotonic framing/finite discrete outcome/trailing payload check. Public input references whitelist excludes targets.",
+    "Integration adds discrete outcome validation and fractional0.5 negative test only; frozen original dataset/source/weights unchanged."
+  ],
+  "main_sources": {
+    "crates/quoridor-data/src/lib.rs": "6b6dfd50d439b2f31a053839f83d38d2a47a92ef1afa0345ca1370af88bf169a",
+    "crates/quoridor-data/tests/external_outcomes.rs": "88fe416b27552d7d9efe919e5baa2a0e70c929e268caefd07fba66e56caaa22b",
+    "crates/quoridor-runner/src/bin/sigma-import.rs": "210e3e31468b470abaf5b33055a95f79209ebd961e526f7148427eb68ee219fe"
+  },
+  "scientific_library_reconstruction": {
+    "main_path": "crates/quoridor-data/src/lib.rs",
+    "remove_exact_line": "                || self.z.is_some_and(|z| ![-1.0, 0.0, 1.0].contains(&z))\n",
+    "expected_SHA": "bdff64b446ddfd0675da32afade62b2f1915c8161a01efd4e43a9eaf89d1508e",
+    "verified": true
+  },
+  "verification": {
+    "main-public-z-validation": {
+      "seconds": 31.27692582603777,
+      "peakRSS": 441536512,
+      "exit": 0,
+      "waited": true,
+      "current_exact_remaining": [],
+      "NN": 0,
+      "result_SHA": "eab0e90ba98975e69d0b477edc1d65b7b6825b710651e1914e0851928b64697d"
+    },
+    "main-public-z-lint": {
+      "seconds": 6.354776296007913,
+      "peakRSS": 275619840,
+      "exit": 0,
+      "waited": true,
+      "current_exact_remaining": [],
+      "NN": 0,
+      "result_SHA": "6b63c61cb751ffeacb8fbac07c4490b44ceaa05bb647ed45b0d540b7816f20ef"
+    }
+  },
+  "old_coordinator_60s_known_cumulative": 49.28269366803579,
+  "tests_passed": 2,
+  "Clippy_data_and_genericCLI": "PASS",
+  "NN": 0,
+  "whole_historical_suite": "NOT_RUN; owner original incomplete LTO attempts preserved",
+  "new_archive": {
+    "path": "research-data/ai-sigma/frame22-coordinator/289-main-validation-records.tar.gz",
+    "bytes": 10785,
+    "SHA": "b19ee62972bd7664085c4a8b5e584072b5c811d5ff6040c41b08372a669e6c50",
+    "members": {
+      "research-data/ai-sigma/frame22-coordinator/main-public-z-validation/admission.json": {
+        "SHA": "d30f2d15ec34b7df9ba5ee10a0367824e5f2108421e6071be99e4cc4638c8933",
+        "bytes": 2746
+      },
+      "research-data/ai-sigma/frame22-coordinator/main-public-z-validation/result.json": {
+        "SHA": "eab0e90ba98975e69d0b477edc1d65b7b6825b710651e1914e0851928b64697d",
+        "bytes": 65859
+      },
+      "research-data/ai-sigma/frame22-coordinator/main-public-z-validation/stderr.log": {
+        "SHA": "ebb5e629dd798b9ca30a2936d363ea359850d29680e6ea8f26952dae29a6cfdf",
+        "bytes": 420
+      },
+      "research-data/ai-sigma/frame22-coordinator/main-public-z-validation/stdout.log": {
+        "SHA": "f5c7f0793aa14e0c623d65cf247f5edf3630922b279f90910422ad453084d838",
+        "bytes": 244
+      },
+      "research-data/ai-sigma/frame22-coordinator/main-public-z-lint/admission.json": {
+        "SHA": "b6a29b51f4168845f6505b0eb56244d6f44203f97c5572e71585c800fee2c130",
+        "bytes": 2746
+      },
+      "research-data/ai-sigma/frame22-coordinator/main-public-z-lint/result.json": {
+        "SHA": "6b63c61cb751ffeacb8fbac07c4490b44ceaa05bb647ed45b0d540b7816f20ef",
+        "bytes": 14928
+      },
+      "research-data/ai-sigma/frame22-coordinator/main-public-z-lint/stderr.log": {
+        "SHA": "2017d05af61e2b4fdc92ef95d0b4943758331fc7cd24d1ea16820a06ae1f9e44",
+        "bytes": 452
+      },
+      "research-data/ai-sigma/frame22-coordinator/main-public-z-lint/stdout.log": {
+        "SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      ".artifacts/research-team/frame22/check-main-public-z.py": {
+        "SHA": "8deea5cf3a7d0669205faa74c3880f00c61d71875b1bcae83c322861e410469a",
+        "bytes": 6947
+      },
+      ".artifacts/research-team/frame22/check-main-public-z-lint.py": {
+        "SHA": "e72aeed304c1fe3268c26872ce9a43d7cc748cf9023050d3db0f61277b88e280",
+        "bytes": 7035
+      }
+    },
+    "stream_restore": "PASS"
+  },
+  "model_corpus_strength_adoption": "NOT_CERTIFIED",
+  "immutable_inputs": "remain assets, no new raw/cache/model copy",
+  "index_owner": "coordinator"
+}

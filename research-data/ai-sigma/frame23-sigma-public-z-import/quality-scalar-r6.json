@@ -1,0 +1,65 @@
+{
+  "task": "sigma-public-z-import-289-v1",
+  "schema": "importer-quality-v2",
+  "UTC": "2026-10-05T18:39:56.441880+00:00",
+  "steps": [
+    {
+      "argv": [
+        "cargo",
+        "build",
+        "--offline",
+        "--release",
+        "-j",
+        "1",
+        "-p",
+        "quoridor-runner",
+        "--bin",
+        "sigma-import"
+      ],
+      "hard": 32,
+      "exit": 0,
+      "wall_s": 25.95772844000021
+    },
+    {
+      "argv": [
+        "cargo",
+        "clippy",
+        "--offline",
+        "--release",
+        "-j",
+        "1",
+        "-p",
+        "quoridor-data",
+        "-p",
+        "quoridor-runner",
+        "--bin",
+        "sigma-import",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "hard": 10,
+      "exit": 0,
+      "wall_s": 3.4762999619706534
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-import/check-qualifier.py",
+        "--binary",
+        "/workspaces/quoridor/.artifacts/rust-migration/target/release/sigma-import",
+        "--out",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-import/qualifier-framing-r6.jsonl"
+      ],
+      "hard": 2,
+      "exit": 0,
+      "wall_s": 0.216959958022926
+    }
+  ],
+  "wall_s": 29.651092824991792,
+  "binary": "/workspaces/quoridor/.artifacts/rust-migration/target/release/sigma-import",
+  "binary_SHA": "e7c25987d432eacb5af218a222ed3437fd37ec3bd6315de9ed82caab16923681",
+  "previous_cargo_test": "timeout during library-test LTO; completed owned integration executables reused with exact hashes",
+  "NN": 0
+}
