@@ -23,3 +23,13 @@ steward digest edd25cec3408317a744e7a9ffab427328a405fec2c7c4f093e8a8c80d533a2ec�
 source固定後、同runtime通常freshstart01:18:59頃、scheduler499454/tick41615309・monitor499467/tick41615327同boot。実running/configcontract loaded不変更・24期待hash一致、更新はmain/研究steward roleの期待hash2個だけ。period1200/null、02:41:02/02:46:02/02:49:02/02:51:02の92停止保存責任維持。旧next_atと再開next_at/実gapを自己ROLE-MILESTONE-247/running-loaded.jsonへ保存、通常start位相で強制tickなし。main2pathはroot solewriter、本人main編集0/役common他定義編集0/科学条件変更0。
 
 今回整理・削除は実行しない。現在増分は役割mirror・小さい回復証拠と新運用bindingで、実allocated+小forecastは既112MiB guard内。現運用sourceと読取/復旧の失敗証拠は参照中で維持する。今枠終了では、前回以降に増えた停止済展開・重複保存・現役参照/復元の有無を必要範囲だけ判断し、対象のowner/時期又は利用中・再現上の保持理由と再検討契機をこの既92報告へ短く追記する通常運用へ接続する。新全体監査・台帳・一律保存減額は追加しない。
+
+## 250.1 長期保守の構成判断を役割運用へ反映
+
+root250のmain steward role一ファイル書込停止SHA2b683ce6…e77700を照合し、研究mirrorを同bytes化。局所修正蓄積による重複・責務混在・依存複雑化・現役不明確を捉え、長期の構成妥当性を判断する。構造改善が必要なら到達構成・保守ルール・移行方法を一体設計し、変更量の小ささを目的にせず必要規模・時期を選ぶ。安全な段階移行とowner実施・効果確認まで追う。今回の実体再配置・整理削除・新構造設計は実施しない。既存節目の通常判断へ接続する。
+
+steward digest b062f87a…add6d、同saved正確active turnへ現common+role全文steer受理、モデルeffort/cwd不変。恒久idle developer更新は自然idle後root250担当pending。local dispatch lock初回拒否はRPC前で、記録後一回有界再試行。曖昧な配送再送なし。source Git f953ee522f0f3a4fa1a6c666cdbeb50a243d9d2b。
+
+01:40:11通常freshstartでscheduler530611/tick41742601・monitor530624/tick41742628同boot。running/loaded config-contract実SHA/24期待hash一致、更新はmain/研究role期待hash2個、period1200/null・02:41/46/49/51:02不変。旧gap/通常start位相のnext_at差はROLE-MAINTENANCE-250/running-loaded.jsonへ保持。root独立14/14受入れ .artifacts/research-team/steward-maintainability250/runtime-root-acceptance.json。自然点検品質・構造改善効果・科学成果・未来停止をこの適用から認定しない。
+
+必要証拠 research-data/ai-sigma/250-maintainability-role/verification.json。既112MiB内の現在allocated＋2MiB forecast、旧保持減額/追加予約なし、default index保持。本人250.1をclose/backupし、92は長期2identityと停止保存責任を継続所有する。新全体監査・台帳・全役承認を追加しない。
