@@ -4,6 +4,20 @@
 
 目標は距離を超えるNNUE最高棋力。期待利益が現れない原因を、教師情報と分布、学習転移、特徴と尺度、探索接続、評価費と到達深度に分けて実測する。小不支持・未成立・不足量を方式全体の断念へ一般化しない。
 
+## 追加8時間の現在選定
+
+284の保存のみNN0解析を採択し、独立familyの入れ子増量を主配分にする。約5981→1万→3万train行は仮の観測規模で最低必要量ではない。小candidateのD超えを量の入口にせず、完成48familyブロックの除外後yield・準備/生成/資格/保存/学習の全費・代表性・物理上限で段階2を判断する。K診断は有力な別案だが、282は4条件だけを回収した母集団欠測で、安定性/方式負支持を示さない。位置付き距離場・壁効果やleaf/horizonの意味も保留し、量・学習仕事・未選定評価の結果で再比較する。
+
+285の実登録正本はv2の1248train＋48selection＋96sealed future＝1392family、12cohort/P1P2均衡/48family block/new UID・seed domain。旧1152/64/64案は未実行のGit履歴として保持する。初段は最大240train＋48selection＋96future（384family）、段階2はactualforecastを統括が採択後に同入れ子を拡げる。block00は48GOAL/1527適格行/82000 physicalNN/command26.044432秒/guardian29.334519秒、除外前平均31.8125行/familyで旧nominal36.89より低い。生成成功を十分量や学習利益に代えず、追加のcomplete blockで実量を更新する。target-free whitelist metadataと停止immutable cacheは公開済み、履歴の旧形式との互換性は未確認。
+
+286は同D保持H32/zero4/旧scale/common初期/λ0/K64教師で約1万256kseen、約3万256kseen、同3万512kseenの三学習を比較する。量と追加学習仕事を分け、τ1/cohort/epoch差を純量効果へ帰属しない。予定curveとrowID付き予測を保存し、全validation raw参照に対してtrainを先に除外、全段実使用train unionに対する共通finalval maskで再集計する。新selection48入力参照待ちは実データ条件で、全1392/全稿/Root ACKは入口にしない。D未達でもvalidation規則で観測用NNUE一つをfreezeし、採用保留と未選定観測を区別する。
+
+287は実装ownerと別に入力・mask・凍結条件をレビューし、freeze後だけ96future familyでNNUE/D/旧Bの一巡を評価する。rootmean/zを含むraw metadataをlabel-freeと呼ばず、公開whitelist入力とsealed path/hashのみを先に渡す。共通参照はVraw＝旧1248＋旧選定392＋新48、Told＝全5981、Tseen＝全保存学習段階で見たtrain union。未来maskはTseenと全Vrawを参照する。履歴UNVERIFIED/有効family数/lineage/選定による精度不足を保持し、誤差利益から棋力は認定しない。仕様は [入力と共通mask](../../research-data/ai-sigma/frame22-coordinator/nested-mask-and-targetfree-interface.md)。
+
+92の15:15:10 Stage2保管観測はretained10156511232＋全reservation2049024000＋UNKNOWN134217728＝12339752960B<12884901888B、margin545148928B。data1GiBは初段448MiBを置換し追加576MiBだけ、release32MiB/future learner64MiB/旧全保守枠を保持した。287新8MiBは別fresh確認を92へ配送済み、旧pool unusedを流用しない。各heavyのCPU/RAM/GPU/正runtime/版・入力は本人fresh admission、保管内を全未来の保証にしない。
+
+以降の時刻付き記述は過去の選定根拠として保持する。現在の入口・分割・参照優先は上記と現契約を使う。
+
 ## 初期の選定
 
 - **273 / experiment**: 既resident GPUとnative pumpの真batchを測る。前枠CPU推論APIが固定K64 root費の99.1%を占めたため、core改良を重ねるより教師の有効行/全job秒を変える可能性が高い。既TensorRT B8/fill2ms/worker1、activegames24/48で同48familyを各48trajectory、総96trajectoryを結果前固定する。canonicalは片側だけ36train/12選定validation、追加32は未実行保留。限定affinityとhost reserveを分ける明示inference coreの小APIを実装する。実topologyで2/3同physicalを検出し、worker2/inference4の同2logicalへ再配分した。AOTI/CUDA等は利用可能性と全費で代替を選ぶ。
