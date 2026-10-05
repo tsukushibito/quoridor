@@ -1,0 +1,47 @@
+{
+  "at": "2026-10-05T13:55:30.199994+00:00",
+  "checks": {
+    "running": true,
+    "scheduler_exact": true,
+    "monitor_exact": true,
+    "monitor_binding": true,
+    "old_scheduler_absent": true,
+    "old_monitor_absent": true,
+    "loaded_config": true,
+    "loaded_contract": true,
+    "current24": true,
+    "six_digests": true,
+    "period1200": true,
+    "null_caps": true,
+    "end_unchanged": true,
+    "monitor_running": true
+  },
+  "scheduler": {
+    "pid": 1351785,
+    "start_ticks": "46157199",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "monitor": {
+    "pid": 1351801,
+    "start_ticks": "46157223",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "owned": null,
+  "config_sha256": "819cf7fe5a037a2d6d1bdbefd34efeb7eecd407245f4a5882488f57a2b338f3d",
+  "contract_sha256": "3cae6f14a7e5cbb29af46f260af3723081d81a89abb3d615efddeacd73148f85",
+  "current_prompt_sha256": "527e4097279f8890d767da61f56f57a949782d5b5cb7a440f8f4bdfd2e0dcc71",
+  "prompt_readback": "fixed source/config references; actual full turn-input getter not asserted",
+  "deadlines": {
+    "heavy": "2026-10-05T15:26:03Z",
+    "supervisor": "2026-10-05T15:31:03Z",
+    "monitor": "2026-10-05T15:34:03Z",
+    "final": "2026-10-05T15:36:03Z"
+  },
+  "period": 1200,
+  "max_turn_seconds": null,
+  "gap_start": "2026-10-05T13:49:40.368820+00:00",
+  "gap_end": "2026-10-05T13:55:30.200845+00:00",
+  "second_start": false,
+  "semantic_effect_certified": false,
+  "external_NN_stop_certified": false
+}

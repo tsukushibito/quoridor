@@ -1,0 +1,41 @@
+{
+  "command": [
+    "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python",
+    "-B",
+    "/workspaces/quoridor/scripts/dev/research-team.py",
+    "report",
+    "--issue",
+    "quoridor-4lc.92",
+    "--body-file",
+    "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22/scheduler-end-report.md"
+  ],
+  "exit_code": 0,
+  "refusal": null,
+  "child_reaped": true,
+  "streams": {
+    "stdout": {
+      "bytes_read": 157,
+      "sha256": "521d327704302fd2c36aa212acc39d1a9fdbf9134f7e4d518f4d49c25c3a78c0",
+      "complete": true
+    },
+    "stderr": {
+      "bytes_read": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "complete": true
+    }
+  },
+  "selection": {
+    "stdout": {
+      "text": "{\n  \"method\": \"turn/steer\",\n  \"thread_id\": \"01a0f31b-3409-75f2-a30e-453a50484f94\",\n  \"turn_id\": \"01a10c33-53a4-78d1-8418-f3b59f98f910\",\n  \"accepted\": true\n}\n",
+      "source_bytes": 157,
+      "sha256": "521d327704302fd2c36aa212acc39d1a9fdbf9134f7e4d518f4d49c25c3a78c0",
+      "overflow": false
+    },
+    "stderr": {
+      "text": "",
+      "source_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "overflow": false
+    }
+  }
+}

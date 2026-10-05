@@ -1,0 +1,53 @@
+{
+  "at": "2026-10-05T13:57:44.954171+00:00",
+  "issue": "quoridor-4lc.281",
+  "checks": {
+    "root_three_role_hashes": true,
+    "sessions_current_role_hashes": true,
+    "saved_full_text_hashes": true,
+    "application_acceptance": true,
+    "six_registry_digests": true,
+    "settings_and_threads_unchanged": true,
+    "twentyfour_current_inputs": true,
+    "state_running": true,
+    "scheduler_exact_alive": true,
+    "monitor_exact_alive": true,
+    "old_exact_absent": true,
+    "loaded_config_contract": true,
+    "period_null_deadlines": true,
+    "monitor_binding": true
+  },
+  "passed": 14,
+  "total": 14,
+  "source_hashes": {
+    "hypothesis": "f9f14fb6b4645c77042663583e42cdf1b808ae28ee09ef3c44541538a23ca079",
+    "coordinator": "5773544d96eaad37e806e3b46a1e20a65eb9a95506b4b78eef7cccc5e502682a",
+    "supervisor": "aa4954b349f969224df6e465e7c593a317a7d54e9845fd13247195ed55e8096d"
+  },
+  "permanent_pending": {
+    "issue": "quoridor-4lc.281.1",
+    "owner": "quoridor-4lc.92 / steward existing owner",
+    "roles": {
+      "hypothesis": {
+        "method": "active_full_supplement",
+        "delivery": {
+          "method": "turn/steer",
+          "thread_id": "01a0f31c-2e4b-7170-82c5-69e1428c2418",
+          "turn_id": "01a10c49-9947-7dd3-a580-b98fb13287e2",
+          "accepted": true
+        },
+        "permanent_idle_refresh": "pending",
+        "pending_owner": "92 existing operation owner",
+        "next_opportunity": "hypothesis自然idleの正式refresh/運用停止窓。新科学gate/interruptなし"
+      }
+    },
+    "coordinator_276_pending": "resolved: official Coordinator idle refresh accepted 2026-10-05T13:52:08.442087+00:00 with latest281 common+role; prior276 receipt unchanged",
+    "science_gate": false
+  },
+  "limitations": [
+    "公式受理でdeveloper本文getterは非対応",
+    "役割適用と自然選定の品質・将来全期間成功は別"
+  ],
+  "root_source_write_stopped": true,
+  "root_index_commit_operations": false
+}

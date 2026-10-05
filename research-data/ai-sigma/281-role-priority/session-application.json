@@ -1,0 +1,112 @@
+{
+  "hypothesis": {
+    "at": "2026-10-05T13:52:07.471389+00:00",
+    "application": {
+      "method": "active_full_supplement",
+      "delivery": {
+        "method": "turn/steer",
+        "thread_id": "01a0f31c-2e4b-7170-82c5-69e1428c2418",
+        "turn_id": "01a10c49-9947-7dd3-a580-b98fb13287e2",
+        "accepted": true
+      },
+      "permanent_idle_refresh": "pending",
+      "pending_owner": "92 existing operation owner",
+      "next_opportunity": "hypothesis自然idleの正式refresh/運用停止窓。新科学gate/interruptなし"
+    },
+    "definition_sha256": "591b3c22b5a703abb34b8c11d579dfd79048a8577d82a215807b97b0398c230b",
+    "full_saved_text_sha256": "ec3b5a386e9885fe3ff9c39e28098651531b7e1acb6971c708b33c5c7d1f92c8",
+    "role_sha256": "f9f14fb6b4645c77042663583e42cdf1b808ae28ee09ef3c44541538a23ca079",
+    "prior": {
+      "id": "01a0f31c-2e4b-7170-82c5-69e1428c2418",
+      "status": {
+        "type": "active",
+        "activeFlags": []
+      },
+      "cwd": "/workspaces/quoridor",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high"
+    },
+    "after": {
+      "id": "01a0f31c-2e4b-7170-82c5-69e1428c2418",
+      "status": {
+        "type": "active",
+        "activeFlags": []
+      },
+      "cwd": "/workspaces/quoridor",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high"
+    }
+  },
+  "coordinator": {
+    "at": "2026-10-05T13:52:08.442087+00:00",
+    "application": {
+      "method": "official_idle_refresh",
+      "response": {
+        "role": "coordinator",
+        "refreshed": true,
+        "definition_sha256": "bdfa28ce0dbf9557a1e42c8cdf9ced9b60e7cbe1bcfb6e60b4d47fa20be0c472",
+        "configured_cwd": "/workspaces/quoridor",
+        "cwd_readback": "thread metadata may retain historical cwd; idle task dispatch binds configured cwd"
+      },
+      "permanent_idle_refresh": "accepted",
+      "readback_limitation": "developer getterなし、公式受理と保存全文hashで範囲を明示"
+    },
+    "definition_sha256": "bdfa28ce0dbf9557a1e42c8cdf9ced9b60e7cbe1bcfb6e60b4d47fa20be0c472",
+    "full_saved_text_sha256": "05915d29e8f0abd5dc6b1255dd92d4211881462120ac6750bd4c51bbbe43290f",
+    "role_sha256": "5773544d96eaad37e806e3b46a1e20a65eb9a95506b4b78eef7cccc5e502682a",
+    "prior": {
+      "id": "01a0f31b-3409-75f2-a30e-453a50484f94",
+      "status": {
+        "type": "idle"
+      },
+      "cwd": "/workspaces/quoridor",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high"
+    },
+    "after": {
+      "id": "01a0f31b-3409-75f2-a30e-453a50484f94",
+      "status": {
+        "type": "idle"
+      },
+      "cwd": "/workspaces/quoridor",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high"
+    }
+  },
+  "supervisor": {
+    "at": "2026-10-05T13:52:09.349686+00:00",
+    "application": {
+      "method": "official_idle_refresh",
+      "response": {
+        "role": "supervisor",
+        "refreshed": true,
+        "definition_sha256": "09ecbd31b62579b05c362528c581c51415570659a768c2915e62be4a3cb3b050",
+        "configured_cwd": "/workspaces/quoridor",
+        "cwd_readback": "thread metadata may retain historical cwd; idle task dispatch binds configured cwd"
+      },
+      "permanent_idle_refresh": "accepted",
+      "readback_limitation": "developer getterなし、公式受理と保存全文hashで範囲を明示"
+    },
+    "definition_sha256": "09ecbd31b62579b05c362528c581c51415570659a768c2915e62be4a3cb3b050",
+    "full_saved_text_sha256": "66dcd2d9400949316e2fc98fda0f89ee620a464220e2951d87049fa195e852f0",
+    "role_sha256": "aa4954b349f969224df6e465e7c593a317a7d54e9845fd13247195ed55e8096d",
+    "prior": {
+      "id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+      "status": {
+        "type": "idle"
+      },
+      "cwd": "/workspaces/quoridor",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high"
+    },
+    "after": {
+      "id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+      "status": {
+        "type": "idle"
+      },
+      "cwd": "/workspaces/quoridor",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high"
+    }
+  }
+}
