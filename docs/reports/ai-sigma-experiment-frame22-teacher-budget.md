@@ -8,11 +8,11 @@ Sigma d790、既TensorRT engine 5be20cf0、常駐Graph B1..8・この診断の�
 
 登録はラベルを見る前のmetadataのみ。ply<20/20–59/60以上、phase内family昇順、最初eligible row、一family一root。完全prefixをRuleA再生しstate/history/side/ids/STM距離/feature_signatureを元Arrow行へ照合した。history hashから履歴を推測していない。
 
-| phase | 登録train | 登録selection | 予定から不足 |
-|---|---:|---:|---:|
-| opening | 6 | 6 | 0 |
-| middle | 6 | 6 | 0 |
-| late | 6 | 2 | selection4 |
+| phase   | 登録train | 登録selection | 予定から不足 |
+| ------- | --------: | ------------: | -----------: |
+| opening |         6 |             6 |            0 |
+| middle  |         6 |             6 |            0 |
+| late    |         6 |             2 |   selection4 |
 
 36予定root中32登録、各K64/256/1024で108予定条件中96登録/12NOT_AVAILABLE。全32登録rootはP1であり、同family跨phaseの相関もある。後からP2や別familyへ補充しない。既selectionは開封済み資料で未見testではない。
 
@@ -28,12 +28,12 @@ Sigma d790、既TensorRT engine 5be20cf0、常駐Graph B1..8・この診断の�
 
 ## 回収できた値
 
-| root | K | Action | rootmean | search秒 |
-|---|---:|---:|---:|---:|
-| game0 ply8 | 64 | 13 | −0.210367 | .133533 |
-| game0 ply8 | 256 | 3 | −0.230061 | .310183 |
-| game0 ply8 | 1024 | 3 | −0.366652 | 1.311713 |
-| game1 ply8 | 256 | 13 | −0.436365 | .838388 |
+| root       |    K | Action |  rootmean | search秒 |
+| ---------- | ---: | -----: | --------: | -------: |
+| game0 ply8 |   64 |     13 | −0.210367 |  .133533 |
+| game0 ply8 |  256 |      3 | −0.230061 |  .310183 |
+| game0 ply8 | 1024 |      3 | −0.366652 | 1.311713 |
+| game1 ply8 |  256 |     13 | −0.436365 |  .838388 |
 
 同rootで全3Kを比較できるのはopening/train/P1の1rootのみ。K64→1024はΔrootmean=−.156284、Action13→3、edge visit正規化πL1=1.272820。D0,8=0に対する残差は全K負、符号は変わらない。K256→1024はAction3を維持して値−.136591、πL1=.344891。末尾terminal originはnull。これで高Kの正しさ/有用leaf教師/棋力利益は判定できない。中盤・終盤・selectionの感度はNOT_ESTABLISHED。
 
