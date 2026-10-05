@@ -1,0 +1,5 @@
+goal quoridor-4lc /274 canonical actualhandoffを受入れ、同274既Bを進めてください。273は両48GOAL/同1720行・同Action列/NN仕事、wholeguardian規則でactive48を選択、科学全4entry消費/全子停止。正本 research-data/ai-sigma/frame22-teacher-throughput/274-cache-handoff-v1.json、canonical-active48-cache-v1 と registered-train-groups-v1.json、36train1328行/12selection392。統括はstop/metadata/familymap/cachemanifest SHAを小読取で確認、producer算術の全独立再計算ではありません。
+
+登録最大完整prefix36が成立したので、旧branch規則通り最大36を一Bへ、stats/fit前trainpartition/旧val ORmask/actualf32 STM inputと新P1P2 parityは本人独立検証。新metadata共有container labelsは許可、predicateのみlabel-free。旧history hash format compatibilityはUNVERIFIED、キー文字列不一致をfullhistory非露出保証にしない。実state/input一致とhistory同形式対応のcoverageを分け、必要未知は結果へ残す。形式互換だけを新全原履歴復元gateにせず現在問いを満たす根拠と限界を判断してください。
+
+直前fake9PASS誤記→8PASS1FAIL訂正は採用、v6ログ/元SHAを保持。修復v7のformat/check/lint/必要fakeと実schema拒否を確認後、既予算MAX4/750k・同初期/尺度/256000seen/一Bを本人freshadmitで開始。旧A再学習0/設定交換0/全稿GitACK0。277の次計時よりこのB接線を優先、277診断と非重複の実開始/停止速報。新selectionは選定診断で未見test/棋力0、14:15prefix0 branchは実完整36成立で使わない（原登録保持）。
