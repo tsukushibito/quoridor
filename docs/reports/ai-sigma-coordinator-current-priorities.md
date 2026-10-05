@@ -32,3 +32,5 @@
 275最終版の順序反転は .956850、前回1.001267と方向が揺れた。統括は4source SHAと保存全attempt NN243500/processedcharge1566984の和を独立確認し、source correctnessを有限受入れ、main源追加は保留する。必要比較源/dataはGit保全し、特定有利runの改善率を保証しない。Supervisor12:41提案のCPU比範囲も採択:273 GPU24/48同family比較はGPU内対照で、旧CPU4root費を全生成倍率へ外挿しない。今回は適格教師と絶対全job費を優先し、追加CPU全生成jobを必須gateにしない。CPU比が次配分を変える場合に別の有限対照を選ぶ。
 
 13:00 節目: 273資格修復は620 physicalNNで有限PASS、active24は48/48終局・1720適格行（train1328/selection392）、全attempt guardian46.852700秒で36.7108行/秒を記録した。同登録48のactive48を次の既slot3で実測中。canonical一条件の停止cache→274 Bを主接線として優先する。GPU内対照/絶対費を使い、CPU全生成比・教師leaf真値・棋力は未認定。275比較専用4sourceを9d7e02dへbyte/SHA一致保存し、archive112member復元を独立確認、main hooks追加は見送る。次探索配分は安いadvance内部 encode/maps/ID費と合法fullhistory sequence TT機会の診断に限定し、改善実装を先に決めない。既scratch反復より次判断の情報価値が高く、正式棋力比較は教師/B結果と現実的NN費を待つ。
+
+277 / criticへ実配分: advance内部encode/maps/ID取得費と合法sequence fullhistory TTのusable-depth機会を最大1低費用診断で比較する。CPU3単一、compile/test60秒・科学30秒/NN12000/processed32000を別課題へ明示配分し旧275課金は保持。新source/data1MiBとrelease16MiBは旧275確認unused内から移転し、aggregate予約は増やさない。改善実装を先取りせず、273 active48→274 Bの固定計時計算を優先して自然回収後に実測する。main採用判断は統括の別owner判断とする。
