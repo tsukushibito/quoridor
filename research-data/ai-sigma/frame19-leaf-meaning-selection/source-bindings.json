@@ -1,0 +1,32 @@
+{
+  "UTC": "2026-10-05T00:00:53.913006+00:00",
+  "issue": "quoridor-4lc.243",
+  "readonly_sources_and_compact_SHA": {
+    "research-data/ai-sigma/frame19-leaf-terminal/scientific-stop-v1.json": "445775e90e3c6f380852174b38278ee5a08a7ca8d144755f2e4f25884293f638",
+    "research-data/ai-sigma/frame19-leaf-terminal/scientific-compact-v1.json": "2a4a5b4f4a5877afb0aab588ca5e466110b3c5bf2628f8870389567a12c1641c",
+    "tools/ai-sigma-frame19-leaf-terminal/leaf.cjs": "1600315d7e5c86a3d6766a2575fb142bb709d8b6db77a143db3cc97d2474a299",
+    "tools/ai-sigma-frame19-leaf-terminal/engine.cjs": "bb3b12ccc31098ce0815b3a4d47423466f9f9aba38ac74359774da1190f35a34",
+    "tools/ai-sigma-frame19-leaf-terminal/exact-cases.cjs": "53889df85bbae1898c9dafa296c034f2d1aafdca0afb46a9269dd042e3e218c9",
+    "tools/ai-sigma-frame18-native-connection/native.cjs": "18aa7999984e68d57a36b1dba69c7deb8a08afd4aec2a6ef436013c03493b0ee",
+    "tools/ai-sigma-nnue-qf1-prototype/qf1.cjs": "ed54a84b90a0e8effe5737b959aaa6fd16ec4c3cdf054aee2cae58e6446012d3",
+    "tools/ai-sigma-native-baseline/reference.cjs": "85cae30273fa481f96ec28fa77eeb5907bb203812c7234f9ffdfd75d337848cf",
+    "tools/ai-sigma-native-baseline/context.js": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+    "tools/ai-sigma-native-baseline/game.js": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+    "tools/ai-sigma-native-baseline/reference-core-native.js": "9670b29d07489a568206b739cf4acdf5477a3c4f0a22f5e8fee2332166201705",
+    "research-data/ai-sigma/frame18-native-connection/weight-manifest.json": "9bc786e82c3b73a462da4a30e1d884678ef9f7bdb757560dd6bb437fa4b25d40",
+    "research-data/ai-sigma/frame19-coordinator/paired-leaf-arena-contract.md": "38a2825ccadd4dc6e18ee10c80ff884b5452bbe3db07e9b89ffb8a5688db5e64",
+    "research-data/ai-sigma/frame19-coordinator/239-finite-acceptance.json": "5683c905760f6d8e5b6fe231a5f5ce43d1737122e885acae996e2a3fd6fcc621"
+  },
+  "specified_stop_compact_SHA_PASS": true,
+  "read_scope": "only compact source/metadata, no weights/model/rawteacher/openedtest labels or results",
+  "partial_path_discovery_errors": [
+    "qf1/native.cjs absent",
+    "frame18-native-connection/{prepare,export,adapter}.py absent",
+    "ai-sigma-fidelity-port and ai-sigma-native-teacher absent"
+  ],
+  "path_errors_scientific_failure": false,
+  "source_read_upper_s": 60,
+  "newscientific_CPUjob_NN_model_forward_Torch_GPU": 0,
+  "242_paired_result_read": false,
+  "parent_old_fee_unknown_unmodified": true
+}
