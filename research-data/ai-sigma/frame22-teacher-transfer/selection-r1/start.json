@@ -1,0 +1,73 @@
+{
+  "at": "2026-10-05T13:14:45.074596+00:00",
+  "identity": {
+    "pid": 1306290,
+    "tick": "45912836"
+  },
+  "registration": {
+    "at": "2026-10-05T13:14:30.056221+00:00",
+    "name": "selection-r1",
+    "scope": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer",
+    "sample_upper": 1960,
+    "hard_seconds": 120,
+    "argv": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/evaluate_selection.py",
+      "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/selection-diagnostic-freeze-v1.json"
+    ],
+    "source_SHA": {
+      "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/evaluate_selection.py": "72cd11617b2eec490f2a2dc0057d0ee06a3e665b86e3b91d2123cc96f498ca77",
+      "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/manage.py": "d0fb8b9175405a4e2b473a9f6f8a57a53a86a9b892ba1621c34166e5533e9364",
+      "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/selection-diagnostic-freeze-v1.json": "65ce4f5d13163aca6aa7e2af53ae1f1d566826398e160b3ef7b76aa4eabcca17",
+      "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/route_training.py": "6c46340c4e405f41b746aa1d9fdc7391a86352b15fe07320b064a764b0959c2f",
+      "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/residual_model.py": "6c9aedc1cb0893d6bb6e0cc90eec3fd8ffb069dbe2350af0536aa66d172e746e",
+      "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/train.py": "af4c97f0a9428c7c003d8498b17c0baa200d361f4ecede121c3cfb9171e51cda",
+      "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/scaled_model.py": "e8fb84f2463f6ccc5727042d4461b64938fd3617fe338de616a360cf62ea73d2",
+      "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/cache.py": "a79951451f0d67f5e7f9809acb8a04ef9eef0d9fc2cac652bca4fce73cbbf42f",
+      "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/common.py": "a33900a8d7ca02b2e2651bb0722cf67ab7b3d6f1f1c5cf2d61215822eb5eda8b",
+      "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/model.py": "2baeb2323d98c2422d49045b02dacf1838a0ff1a1e6add631620adb53246b86a"
+    },
+    "expected_task": "frame22-teacher-transfer-274-selection-v1",
+    "expected_schema": "selection-evaluation-v1",
+    "input_SHA": {
+      "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/canonical-active48-cache-v1/cache.json": "44f9d240a5daf06c51a0e83925d61157f98c4bd6b87cd5b56c6f2bb7bf7012fb",
+      "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/274-cache-handoff-v1.json": "aa9063f7c5f25e6b26671b0226533010775fd7c4674b6245d99cce680787187d",
+      "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/producer-scientific-stop-v1.json": "e72ef2b5fd3ddd85a2e85ebcdafc510ee6699c7c49aaffc2a615a24219c8484f",
+      "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/registered-train-groups-v1.json": "bd07069910a6912fefb514302f70759daa9e0e65ade22bb00f7bad7d73c65d11",
+      "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/registered-selection-validation-groups-v1.json": "7d1dbfb555b28b63dc18438e6be6aec697cbd3c82b74c464f96fc9486b2059b9",
+      "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/canonical-active48-cache-v1/distance.f32": "83bd8ce33ea2806d617ae01ca2e5a8627dd346f178044b582b7af58a59aef16a",
+      "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/canonical-active48-cache-v1/labels.f32": "4a9a65eb58d61432301559c7702d7a902d6433789109ba0fe01b8bde389d244f",
+      "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/canonical-active48-cache-v1/rows.jsonl": "af7ee7ea1d0253a86195d65d2d106bcc8b553e06b2210f916b9255bff5d887bd",
+      "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/canonical-active48-cache-v1/x.f32": "93902f920cb8734b240d09539705ab4521532727e804fea5dfafd98c1bb4ae52",
+      "/workspaces/quoridor/.worktree/assets/checkpoints/frame22-teacher-transfer-A-r1/initial.pt": "32c6411657e90c2c412135487336f46f9b43bc9a8c49fc3fb6146ba2742304c3",
+      "/workspaces/quoridor/.worktree/assets/checkpoints/frame22-teacher-transfer-A-r1/initial-model/manifest.json": "c386511c79b935064287eb9abc33cfe3f024bf79dcaca7b18e2c11dc5d4c85c9",
+      "/workspaces/quoridor/.worktree/assets/checkpoints/frame22-teacher-transfer-A-r1/initial-model/weights.f32": "ec4167ccb5042cfe937b23850a1b52d1cd9cf6c3fb1d348627bfe6cc7d023cc5",
+      "/workspaces/quoridor/.worktree/assets/checkpoints/frame22-teacher-transfer-A-r1/scale.json": "175f07713409994d0d4c99768267695b0a91ec100baabf202fb4518b56cbdfed",
+      "/workspaces/quoridor/.worktree/assets/checkpoints/frame22-teacher-transfer-A-r1/config.json": "6c257693b97aad63cf95c82278d1e8347fde3c1c553556918a7fedeaaa2b78ef",
+      "/workspaces/quoridor/.worktree/assets/checkpoints/frame22-teacher-transfer-A-r1/data.json": "41d787b642aea97d71f5a2eaa3acc8f0940e2cc048c1fe56417463586d50a9e3",
+      "/workspaces/quoridor/.worktree/assets/checkpoints/frame22-teacher-transfer-A-r1/freeze.json": "0a1e021788f60844624600ad373cc83c62743920ff78dbbb036853dc34a71ffb",
+      "/workspaces/quoridor/.worktree/assets/checkpoints/frame22-teacher-transfer-A-r1/best.pt": "b8d2619c144dfdabf331d720f574e95e1d601aca4f2ec7b50d13a747f7d819a1",
+      "/workspaces/quoridor/.worktree/assets/checkpoints/frame22-teacher-transfer-A-r1/best-model/manifest.json": "eb3da9d3efa354dae7011e5ba7af65e832a86782fa0bd110692eeeb259c116ff",
+      "/workspaces/quoridor/.worktree/assets/checkpoints/frame22-teacher-transfer-A-r1/best-model/weights.f32": "19b02da6338fc7e5a2f1d43e803015fa84bb426c213a54f134f05d49bc493441",
+      "/workspaces/quoridor/.worktree/assets/checkpoints/frame22-teacher-transfer-A-r1/last.pt": "1bb3598d1643a8c0ba70f332f96d7daad57fbfe50a6b535c08ba49c1b9b94118",
+      "/workspaces/quoridor/.worktree/assets/checkpoints/frame22-teacher-transfer-A-r1/last-model/manifest.json": "33a294297a3966c1b1067bc84ea036165bfd773fa51792580b173f1c3c3a6d4d",
+      "/workspaces/quoridor/.worktree/assets/checkpoints/frame22-teacher-transfer-A-r1/last-model/weights.f32": "fecef25d4dda5853fb57786a349aa390ac41cbab01c9c0345ecc36ed80abb785",
+      "/workspaces/quoridor/.worktree/assets/checkpoints/frame22-teacher-transfer-B-r1/best.pt": "0fb4f641baa303f6acaa9b9a8c1be393366cc53b5e31bfc41dcbb9dcb7ba67be",
+      "/workspaces/quoridor/.worktree/assets/checkpoints/frame22-teacher-transfer-B-r1/best-model/manifest.json": "34bc594081519fc450fe6e06b886d934c902eca3a2823a427171d52c5fbd2a06",
+      "/workspaces/quoridor/.worktree/assets/checkpoints/frame22-teacher-transfer-B-r1/best-model/weights.f32": "8cb6bd48a8ca922c2cf217265a611353eee3aec44740d44713d9008ce047e0d7",
+      "/workspaces/quoridor/.worktree/assets/checkpoints/frame22-teacher-transfer-B-r1/scale.json": "175f07713409994d0d4c99768267695b0a91ec100baabf202fb4518b56cbdfed",
+      "/workspaces/quoridor/.worktree/assets/checkpoints/frame22-teacher-transfer-B-r1/config.json": "20b524984228dec074bf151bdebcd3eb74caaf746488ea3f5f83cc677851f7c8",
+      "/workspaces/quoridor/.worktree/assets/checkpoints/frame22-teacher-transfer-B-r1/data.json": "b2d5500dd800e21037da841d061c31e4a4fa95626d8bd6ba157b46dea0d91839",
+      "/workspaces/quoridor/.worktree/assets/checkpoints/frame22-teacher-transfer-B-r1/freeze.json": "61fd1b6ec20cc05c1a4f07a533ffe51472fd0d4dc6a162baccd2539dcc2a653d",
+      "/workspaces/quoridor/.worktree/assets/checkpoints/frame22-teacher-transfer-B-r1/last.pt": "1ccf75b086baef6eb806ab00c887841b23f4ae08873cefb0ff10e38856d8b462",
+      "/workspaces/quoridor/.worktree/assets/checkpoints/frame22-teacher-transfer-B-r1/last-model/manifest.json": "673f56931315ae6d75665e05b7ef936b572f5a7a0f41fc65663d591e9483180a",
+      "/workspaces/quoridor/.worktree/assets/checkpoints/frame22-teacher-transfer-B-r1/last-model/weights.f32": "6f55a679df5a53e883f8295a86604a5aaaaf9e76e5e98efdbd317d88cf36f205"
+    },
+    "candidate_selection_locked": "A BEST200 and B BEST200 selected only fixed oldval, newselection for diagnosis only",
+    "no_training": true,
+    "MAXscience_jobs": 4,
+    "cumulative_upper_NN": 645692
+  },
+  "admission_SHA": "4259b4e9334f641ba1de8e4353818bb283cd17b785330d316bff99caaeae09a6"
+}

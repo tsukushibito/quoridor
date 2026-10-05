@@ -1,0 +1,101 @@
+{
+  "at": "2026-10-05T12:59:18.119114+00:00",
+  "producer_manifest": "research-data/ai-sigma/frame22-teacher-throughput/registered-family-map-v1.json",
+  "producer_manifest_SHA": "90dea9468794fac505fdccfdd376d6ac7364b4fa95921e6679dfa5434db1fcb1",
+  "validation": "saved registration map/order only, no result/teacher/forward",
+  "planned_train": 36,
+  "planned_selection_val": 12,
+  "future_test": 0,
+  "train_order": [
+    "frame22-273-family-000000",
+    "frame22-273-family-000001",
+    "frame22-273-family-000002",
+    "frame22-273-family-000003",
+    "frame22-273-family-000004",
+    "frame22-273-family-000005",
+    "frame22-273-family-000006",
+    "frame22-273-family-000007",
+    "frame22-273-family-000008",
+    "frame22-273-family-000009",
+    "frame22-273-family-000010",
+    "frame22-273-family-000011",
+    "frame22-273-family-000012",
+    "frame22-273-family-000013",
+    "frame22-273-family-000014",
+    "frame22-273-family-000015",
+    "frame22-273-family-000016",
+    "frame22-273-family-000017",
+    "frame22-273-family-000018",
+    "frame22-273-family-000019",
+    "frame22-273-family-000020",
+    "frame22-273-family-000021",
+    "frame22-273-family-000022",
+    "frame22-273-family-000023",
+    "frame22-273-family-000024",
+    "frame22-273-family-000025",
+    "frame22-273-family-000026",
+    "frame22-273-family-000027",
+    "frame22-273-family-000028",
+    "frame22-273-family-000029",
+    "frame22-273-family-000030",
+    "frame22-273-family-000031",
+    "frame22-273-family-000032",
+    "frame22-273-family-000033",
+    "frame22-273-family-000034",
+    "frame22-273-family-000035"
+  ],
+  "selectionval_order": [
+    "frame22-273-family-000036",
+    "frame22-273-family-000037",
+    "frame22-273-family-000038",
+    "frame22-273-family-000039",
+    "frame22-273-family-000040",
+    "frame22-273-family-000041",
+    "frame22-273-family-000042",
+    "frame22-273-family-000043",
+    "frame22-273-family-000044",
+    "frame22-273-family-000045",
+    "frame22-273-family-000046",
+    "frame22-273-family-000047"
+  ],
+  "prefix_cohorts": {
+    "12": {
+      "8": 6,
+      "12": 6
+    },
+    "24": {
+      "8": 6,
+      "12": 6,
+      "16": 6,
+      "20": 6
+    },
+    "36": {
+      "8": 6,
+      "12": 6,
+      "16": 6,
+      "20": 6,
+      "24": 6,
+      "28": 6
+    }
+  },
+  "selection_cohorts": {
+    "8": 2,
+    "12": 2,
+    "16": 2,
+    "20": 2,
+    "24": 2,
+    "28": 2
+  },
+  "partial_prefix_confound": "prefix12 coversopening8/12 only, prefix24 covers8/12/16/20; subsetnotpurequantity, completion+opening-cohort truncation recorded; do not reselectgroups",
+  "B_rule_unchanged": true,
+  "B": "NOT_STARTED",
+  "producer_actual_generation_announcement": {
+    "job": "d7a9d83e-7346-4073-945b-779025aa034a",
+    "child_pid": 1279209,
+    "start_tick": "45799527",
+    "start": "2026-10-05T12:55:52.562564+00:00",
+    "physics": "workerCPU2/inferCPU4; owner report only, nextfit requires freshabsence"
+  },
+  "qualification": "owner FINITE_PASS620physicalNN; ownNNbudgetunchanged",
+  "producer_failure": "oldfailedr2UNKNOWN620preserved, not ourscience"
+}

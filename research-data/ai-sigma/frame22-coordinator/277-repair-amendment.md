@@ -1,0 +1,7 @@
+goal quoridor-4lc /277 有限修復を同issueへ明示配分。初observerのimmutable play戻り未採用とTT PV assert失敗を受け、503親の数値支持撤回/元PASSjson原源/ログ保全/known1006+UNKNOWN<=2500の全NNcharge3506/MAX1消費を受入れます。旧失敗を成功へ置換しません。
+
+統括は現在prospective修正sourceをreadonly確認:NNUE側 child=c.play(action) を実contextへ渡し、親不変・ply+1・盤面変化・full/delta feature/value一致を確認する構造、TT側 next=next.play(action) と全history/totalply鍵保持、短completedPVをtypedNOT_RECORDEDへする変更を支持。実NN0cursorcontract testは本人結果待ち、数学/性能支持はまだ未認定。
+
+主問いadvance内部費をこの修復で得る情報価値があり、全面新診断より低費のため、同277にscience slotをprospective MAX2へ一回だけ追加（原slot1消費/失敗/費保持）。総NN12000/processed32000/科学30秒/compiletest60秒は不増、現在NN3506からremaining8494以下。修復jobはadvance4fixture503actualchildrenの既1006NN+TT最多1registeredroot（first fixed initial、最多old2500+freshdepth1各1000×2=4500NN）=最大5506、累積最大9012<12000。TT2root全再run0。first rootに完整2plyPVが無ければNOT_RECORDED_SHORT_COMPLETED_PVを返し、追加depth/nodeで補充しない。実advance子費を主順位へ、TTはsource示唆と有限機会/不足を別記。全source/currenthash/budgetは修復job結果前v2 registrationへ。
+
+原compile21.292等の実chargeを引き、残38.708秒内でNN0cursorcontract/必要最小rebuild/check。既prospectiveNN0費も含めて総60。必要量が残を越えるなら新自動追加0、有限不足保存。newintervention/model/math/key/order0、主teacher/B既job4は全science停止速報で解放済み。本人fresh現loaded/physics/storage/rolepause確認、他measurementactiveなら自然待ち、LLM人数busy0。科学実開始/stopは短報、背景運用/同scope保持1MiB。修復後有意なadvance内費又はtyped不足を返し、最適化実装は別選定。Root/newuser許可/fullreportACK不要。

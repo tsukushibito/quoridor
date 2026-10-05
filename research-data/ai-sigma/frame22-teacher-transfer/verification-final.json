@@ -1,0 +1,85 @@
+{
+  "at": "2026-10-05T13:31:30.180259+00:00",
+  "task": "frame22-teacher-transfer-274-final-code-quality-v1",
+  "steps": [
+    {
+      "step": "format",
+      "argv": [
+        "/workspaces/quoridor/tools/research-quality/.venv/bin/ruff",
+        "format",
+        "--config",
+        "/workspaces/quoridor/tools/research-quality/ruff.toml",
+        "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/train.py",
+        "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/route_training.py",
+        "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/analyze.py",
+        "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/manage.py",
+        "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/admit.py",
+        "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/test_adapter.py",
+        "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/evaluate_selection.py"
+      ],
+      "exit": 0,
+      "command_wall_s": 0.12306693702703342,
+      "log": "final-format.log"
+    },
+    {
+      "step": "format_check",
+      "argv": [
+        "/workspaces/quoridor/tools/research-quality/.venv/bin/ruff",
+        "format",
+        "--check",
+        "--config",
+        "/workspaces/quoridor/tools/research-quality/ruff.toml",
+        "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/train.py",
+        "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/route_training.py",
+        "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/analyze.py",
+        "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/manage.py",
+        "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/admit.py",
+        "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/test_adapter.py",
+        "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/evaluate_selection.py"
+      ],
+      "exit": 0,
+      "command_wall_s": 0.07182189298328012,
+      "log": "final-format_check.log"
+    },
+    {
+      "step": "lint",
+      "argv": [
+        "/workspaces/quoridor/tools/research-quality/.venv/bin/ruff",
+        "check",
+        "--config",
+        "/workspaces/quoridor/tools/research-quality/ruff.toml",
+        "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/train.py",
+        "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/route_training.py",
+        "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/analyze.py",
+        "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/manage.py",
+        "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/admit.py",
+        "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/test_adapter.py",
+        "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/evaluate_selection.py"
+      ],
+      "exit": 0,
+      "command_wall_s": 0.09469912602799013,
+      "log": "final-lint.log"
+    }
+  ],
+  "AST": "PASS",
+  "changed_files": 7,
+  "source_SHA": {
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/train.py": "af4c97f0a9428c7c003d8498b17c0baa200d361f4ecede121c3cfb9171e51cda",
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/route_training.py": "6c46340c4e405f41b746aa1d9fdc7391a86352b15fe07320b064a764b0959c2f",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/analyze.py": "59ebf10cfeb0ac7dbc4070c2d70084aacc7ab654368d94e70848940a893f4145",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/manage.py": "d0fb8b9175405a4e2b473a9f6f8a57a53a86a9b892ba1621c34166e5533e9364",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/admit.py": "8621616ba1143dbea6bec931d4f11d90742847f0cee1818fa3f7fb984e826f62",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/test_adapter.py": "299a2e9f82d2f022483b19f5d6e6583742c3ae2adbf1dc207755eb915ed6db73",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/evaluate_selection.py": "72cd11617b2eec490f2a2dc0057d0ee06a3e665b86e3b91d2123cc96f498ca77"
+  },
+  "format_semantic_or_byte_changes": false,
+  "frozen_science_sources_unchanged": true,
+  "scientific_jobs_added": 0,
+  "Torch_import": 0,
+  "test_basis": [
+    "software-adapter-check-v7.log",
+    "software-adapter-check-v8.log",
+    "software-cache-check.log"
+  ],
+  "failed_test_preserved": "software-adapter-check-v6.log"
+}

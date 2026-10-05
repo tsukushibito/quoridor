@@ -1,0 +1,102 @@
+{
+  "at": "2026-10-05T13:17:43.946207+00:00",
+  "task": "frame22-teacher-transfer-274-selection-v1",
+  "status": "PASS",
+  "stop": {
+    "name": "selection-r1",
+    "sample_upper": 1960,
+    "state": "STOPPED",
+    "identity": {
+      "pid": 1306290,
+      "tick": "45912836"
+    },
+    "exit": 0,
+    "reason": null,
+    "wall_seconds": 1.7541026060353033,
+    "peak_family_RSS": 627560448,
+    "remaining_exact": [],
+    "waited": true,
+    "at": "2026-10-05T13:14:46.826002+00:00"
+  },
+  "metrics": {
+    "Initial": {
+      "rows": 392,
+      "games": 12,
+      "rootmean_mse": 0.43765848291721876,
+      "rootmean_game_equal_mse": 0.39263407579270954,
+      "z_mse": 0.708539763713941,
+      "z_game_equal_mse": 0.6300415695925045,
+      "z_sign_accuracy": 0.7244897959183674,
+      "saturation_fraction": 0.012755102040816327,
+      "constant_game_equal_mse": 0.7704502498454554
+    },
+    "A_BEST200": {
+      "rows": 392,
+      "games": 12,
+      "rootmean_mse": 0.4467701087724352,
+      "rootmean_game_equal_mse": 0.3996325806044025,
+      "z_mse": 0.7166011740091784,
+      "z_game_equal_mse": 0.63531681108121,
+      "z_sign_accuracy": 0.7678571428571429,
+      "saturation_fraction": 0.015306122448979591,
+      "constant_game_equal_mse": 0.7704502498454554
+    },
+    "A_LAST2000": {
+      "rows": 392,
+      "games": 12,
+      "rootmean_mse": 1.0116775062455194,
+      "rootmean_game_equal_mse": 0.9792970416621601,
+      "z_mse": 1.223684553105637,
+      "z_game_equal_mse": 1.1650815055842332,
+      "z_sign_accuracy": 0.5841836734693877,
+      "saturation_fraction": 0.27040816326530615,
+      "constant_game_equal_mse": 0.7704502498454554
+    },
+    "B_BEST200": {
+      "rows": 392,
+      "games": 12,
+      "rootmean_mse": 0.44658226660197226,
+      "rootmean_game_equal_mse": 0.39917330821120817,
+      "z_mse": 0.7172872902638394,
+      "z_game_equal_mse": 0.6354386505883443,
+      "z_sign_accuracy": 0.75,
+      "saturation_fraction": 0.015306122448979591,
+      "constant_game_equal_mse": 0.7704143616269166
+    },
+    "B_LAST2000": {
+      "rows": 392,
+      "games": 12,
+      "rootmean_mse": 0.9911970835955973,
+      "rootmean_game_equal_mse": 0.9218864250493269,
+      "z_mse": 1.203107347622389,
+      "z_game_equal_mse": 1.1024887564909938,
+      "z_sign_accuracy": 0.5918367346938775,
+      "saturation_fraction": 0.2193877551020408,
+      "constant_game_equal_mse": 0.7704143616269166
+    }
+  },
+  "mask": {
+    "predicate": "state OR history OR actual STM-f32 input against oldtrain+oldval+largestnewtrain",
+    "labels_used": false,
+    "planned_groups": 12,
+    "observed_groups": 12,
+    "zeroeligible_groups": 0,
+    "absent_planned_groups": 0,
+    "matches_by_rule": {
+      "state": 0,
+      "history_string": 0,
+      "actual_input": 0,
+      "OR": 0
+    },
+    "history_cross_format_coverage": "UNVERIFIED; literal equality only, no full-history nonexposure guarantee"
+  },
+  "total_NN_samples": 645692,
+  "scientific_jobs_consumed": 4,
+  "MAX4_exhausted": true,
+  "no_further_science": true,
+  "models_frozen_before_newselection": true,
+  "selection_only": true,
+  "independent_test": false,
+  "candidate_reselection": false,
+  "teacher_precision_is_not_strength": true
+}

@@ -1,0 +1,48 @@
+{
+  "at": "2026-10-05T12:10:49.856635+00:00",
+  "task": "frame22-teacher-transfer-274-B-selection-v1",
+  "primary_factor": "new canonical independent train families; rootmean target and all optimizer/model settings fixed",
+  "new_plan": "273 v4 resident24 canonical; resident48 paired copy is not another family",
+  "planned_train_families": 36,
+  "planned_selection_val_families": 12,
+  "future_unseen_eval": 0,
+  "partial_rule": "at first immutable qualified owner handoff choose largest completed registered train-ID prefix in {12,24,36}; one B only; no choose by labels/loss/winner; missing/partial planned groups retained; if none12 by14:15 B NOT_RUN",
+  "old_selection_val": "fixed1248/24, existing primary mask; new train exposure against oldval must be checked label-free before fit; preserve oldval by excluding conflicting newtrain rows with full denominator",
+  "new_selection_val": "separate exploration diagnostic, never independent frozen test",
+  "max_new_train_rows": 7200,
+  "max_new_selection_val_rows": 2400,
+  "evaluations": [
+    0,
+    1,
+    5,
+    20,
+    50,
+    100,
+    200,
+    400,
+    1000,
+    2000
+  ],
+  "same_train_samples": 256000,
+  "A_learning_eval_NN": 315010,
+  "B_upper_learning_eval_NN": 387010,
+  "A_parity_NN": 216,
+  "B_parity_upper_NN": 324,
+  "newselection_eval_upper_NN": 12000,
+  "total_upper_NN": 714560,
+  "contract_total_NN": 750000,
+  "MAXscience_jobs": 4,
+  "completed_jobs": [
+    "analysis-r1",
+    "A-r1"
+  ],
+  "remaining_planned_jobs": [
+    "B-r1 fit plus parity",
+    "newselection-only diagnostic"
+  ],
+  "teacher_tau_distribution_confound": true,
+  "same_initial_scale": "fixed oldtrain96 train-only mu/sigma, fixed route statistics with zero4 postmask; head0 a0b8",
+  "same_initial_weight_SHA": "ec4167ccb5042cfe937b23850a1b52d1cd9cf6c3fb1d348627bfe6cc7d023cc5",
+  "teacher_K": 64,
+  "test_or_oldopened_read": false
+}

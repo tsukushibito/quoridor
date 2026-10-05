@@ -1,0 +1,51 @@
+{
+  "at": "2026-10-05T13:28:08.652902+00:00",
+  "failed_preregister": "preparation-handoff-v6.json",
+  "preserved_false_claim": "fake_checks=9 was mistaken; log is authoritative 8PASS1FAIL",
+  "failed_log": "software-adapter-check-v6.log",
+  "failed_log_SHA": "a75c7ea16567af811aa7483a1c2504968c3c4b83b05097c3aa9590f99be51849",
+  "failed_source_SHA": {
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/train.py": "af4c97f0a9428c7c003d8498b17c0baa200d361f4ecede121c3cfb9171e51cda",
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/route_training.py": "b57e2e98ad43e59dc92db723030ae7bb1097ee11390a56443f5977f5d47555f6",
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/residual_model.py": "6c9aedc1cb0893d6bb6e0cc90eec3fd8ffb069dbe2350af0536aa66d172e746e",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/analyze.py": "59ebf10cfeb0ac7dbc4070c2d70084aacc7ab654368d94e70848940a893f4145",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/manage.py": "d0fb8b9175405a4e2b473a9f6f8a57a53a86a9b892ba1621c34166e5533e9364",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/admit.py": "8621616ba1143dbea6bec931d4f11d90742847f0cee1818fa3f7fb984e826f62",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/test_adapter.py": "299a2e9f82d2f022483b19f5d6e6583742c3ae2adbf1dc207755eb915ed6db73",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/evaluate_selection.py": "d84c6495fa4d6880b70597fbad844dd541349068b4c8d5b5b977469e6bc56182"
+  },
+  "failed_source_full_bytes": "NOT_ARCHIVED_AT_FAILURE; source hashes and failure log preserved; no fabricated reconstruction",
+  "cause": "prospective string replacement did not insert order validation in formatted comprehension; format alone did not catch missing semantic guard",
+  "prospective_fix": "required metadata fields and actual metadata_schema/view order check inserted before B; original A and failed receipt unchanged",
+  "fixed_logs": {
+    "software-adapter-check-v7.log": "7c758af7411e05fc2e6c4fb89045f7a03d9a5957d5305092903a23a66373d034",
+    "software-adapter-check-v8.log": "5684d13977a1f6829bcd5f644c72b35ab6f8d42951d571a5f230c4cc35a359f3"
+  },
+  "fixed_checks": "9PASS",
+  "fixed_science_source_SHA": {
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/train.py": "af4c97f0a9428c7c003d8498b17c0baa200d361f4ecede121c3cfb9171e51cda",
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/route_training.py": "6c46340c4e405f41b746aa1d9fdc7391a86352b15fe07320b064a764b0959c2f",
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/residual_model.py": "6c9aedc1cb0893d6bb6e0cc90eec3fd8ffb069dbe2350af0536aa66d172e746e",
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/cache.py": "a79951451f0d67f5e7f9809acb8a04ef9eef0d9fc2cac652bca4fce73cbbf42f",
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/scaled_model.py": "e8fb84f2463f6ccc5727042d4461b64938fd3617fe338de616a360cf62ea73d2",
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/common.py": "a33900a8d7ca02b2e2651bb0722cf67ab7b3d6f1f1c5cf2d61215822eb5eda8b",
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/model.py": "2baeb2323d98c2422d49045b02dacf1838a0ff1a1e6add631620adb53246b86a",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/manage.py": "d0fb8b9175405a4e2b473a9f6f8a57a53a86a9b892ba1621c34166e5533e9364",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/B-config.json": "b72c6e6b9def4a405b1344dceb2f4a1c170652b6eb8a342fcc58a98dc5c9a0ef",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/fixed-scale.json": "175f07713409994d0d4c99768267695b0a91ec100baabf202fb4518b56cbdfed",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/evaluation-points.json": "59d1d2396758c2c254a97ca1fbda948e14da47c068e8360c94e049c707452804",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/registered-train-groups-v1.json": "bd07069910a6912fefb514302f70759daa9e0e65ade22bb00f7bad7d73c65d11",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/274-cache-handoff-v1.json": "aa9063f7c5f25e6b26671b0226533010775fd7c4674b6245d99cce680787187d",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/producer-scientific-stop-v1.json": "e72ef2b5fd3ddd85a2e85ebcdafc510ee6699c7c49aaffc2a615a24219c8484f",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/active48-native-config-v1.json": "f51c2abe3213b14825d4e138cbdb8d570d890c6ca51ed33fbdf265572dde246d",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/registered-family-map-v1.json": "90dea9468794fac505fdccfdd376d6ac7364b4fa95921e6679dfa5434db1fcb1",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/canonical-active48-cache-v1/cache.json": "44f9d240a5daf06c51a0e83925d61157f98c4bd6b87cd5b56c6f2bb7bf7012fb",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/canonical-active48-cache-v1/distance.f32": "83bd8ce33ea2806d617ae01ca2e5a8627dd346f178044b582b7af58a59aef16a",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/canonical-active48-cache-v1/labels.f32": "4a9a65eb58d61432301559c7702d7a902d6433789109ba0fe01b8bde389d244f",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/canonical-active48-cache-v1/rows.jsonl": "af7ee7ea1d0253a86195d65d2d106bcc8b553e06b2210f916b9255bff5d887bd",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/canonical-active48-cache-v1/x.f32": "93902f920cb8734b240d09539705ab4521532727e804fea5dfafd98c1bb4ae52",
+    "/workspaces/quoridor/.artifacts/rust-migration/target/release/route-feature-diagnose": "d6b38555bd1ae07addba66dfa1a18eac96c868e1e8ee7c27a18545a9f68f7aa7"
+  },
+  "A_retrain": 0,
+  "scientific_failure": false
+}

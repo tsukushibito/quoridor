@@ -1,0 +1,40 @@
+{
+  "task": "274 owner closed necessary evidence preservation",
+  "owner_manifest_SHA": "0665f46bce4133d3d8416c7e79b67eb48305382ceb092c20cfc42a9463caeb60",
+  "main_paths_verified": 94,
+  "archive_restore": [
+    {
+      "archive": "A-learning-artifacts.tar.gz",
+      "members": 17,
+      "PASS": true
+    },
+    {
+      "archive": "B-learning-artifacts.tar.gz",
+      "members": 17,
+      "PASS": true
+    },
+    {
+      "archive": "A-science-source.tar.xz",
+      "members": 8,
+      "PASS": true
+    },
+    {
+      "archive": "B-science-source.tar.xz",
+      "members": 8,
+      "PASS": true
+    },
+    {
+      "archive": "selection-results.tar.gz",
+      "members": 3,
+      "PASS": true
+    },
+    {
+      "archive": "selection-science-source.tar.xz",
+      "members": 10,
+      "PASS": true
+    }
+  ],
+  "WT_two_active_future_writer_paths": "not staged; immutable A/B source archives preserve science bytes",
+  "adoption": "evidence/analysis scripts only; no model/product/Rust prototype strength adoption",
+  "history_crossformat": "UNVERIFIED"
+}

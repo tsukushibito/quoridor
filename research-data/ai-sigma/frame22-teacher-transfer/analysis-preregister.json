@@ -1,0 +1,22 @@
+{
+  "name": "analysis-r1",
+  "scope": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer",
+  "sample_upper": 0,
+  "hard_seconds": 30,
+  "argv": [
+    "/usr/bin/python3",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/analyze.py",
+    "--intake",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/intake.json",
+    "--output",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/analysis.json"
+  ],
+  "source_SHA": {
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/analyze.py": "59ebf10cfeb0ac7dbc4070c2d70084aacc7ab654368d94e70848940a893f4145",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/manage.py": "d0fb8b9175405a4e2b473a9f6f8a57a53a86a9b892ba1621c34166e5533e9364",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/intake.json": "e60659bf0e99a2559fad8fd415036bcbb1385a8811ecf2b883cd0f470e5c70ae"
+  },
+  "expected_task": "frame22-teacher-transfer-274-analysis-v1",
+  "expected_schema": "teacher-analysis-v1",
+  "expected_rows": 5901
+}

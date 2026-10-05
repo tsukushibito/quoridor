@@ -1,0 +1,525 @@
+{
+  "at": "2026-10-05T13:14:30.654787+00:00",
+  "epoch": 1791206070.654816,
+  "frame": 22,
+  "name": "selection-r1",
+  "hash_checks": {
+    "/workspaces/quoridor/scripts/dev/research-scheduler.py": true,
+    "/workspaces/quoridor/scripts/dev/research-watch.py": true,
+    "/workspaces/quoridor/scripts/dev/research-team.py": true,
+    "/workspaces/quoridor/scripts/dev/research-scheduler.sh": true,
+    "/workspaces/quoridor/scripts/dev/research-team.sh": true,
+    "/workspaces/quoridor/scripts/dev/beads.sh": true,
+    "/workspaces/quoridor/scripts/dev/project-env.sh": true,
+    "/workspaces/quoridor/research-paths.json": true,
+    "/workspaces/quoridor/scripts/dev/research-job.py": true,
+    "/workspaces/quoridor/scripts/dev/research-job.sh": true,
+    "/workspaces/quoridor/scripts/dev/research-storage.py": true,
+    "/workspaces/quoridor/docs/design/ai-sigma-continuation-20261001.md": true,
+    "/workspaces/quoridor/docs/design/ai-sigma-contract-supervisor-continuation.md": true,
+    "/workspaces/quoridor/docs/design/ai-sigma-contract-steward-frame22.md": true,
+    "/workspaces/quoridor/.agents/research-team/common.md": true,
+    "/workspaces/quoridor/.agents/research-team/roles/coordinator.md": true,
+    "/workspaces/quoridor/.agents/research-team/roles/hypothesis.md": true,
+    "/workspaces/quoridor/.agents/research-team/roles/experiment.md": true,
+    "/workspaces/quoridor/.agents/research-team/roles/critic.md": true,
+    "/workspaces/quoridor/.agents/research-team/roles/steward.md": true,
+    "/workspaces/quoridor/.artifacts/research-team/registry.json": true,
+    "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22/scheduler.json": true,
+    "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22/contract.json": true,
+    "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22/prompt.md": true
+  },
+  "scheduler_identity": {
+    "pid": 1233793,
+    "start_ticks": "45593355",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "scheduler_exact": true,
+  "monitor_identity": {
+    "pid": 1235182,
+    "start_ticks": "45599721",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "monitor_exact": true,
+  "registry_frame": 22,
+  "phase": "running",
+  "owned": null,
+  "natural_next_epoch": 1791206490.5677443,
+  "foreign_compute": [],
+  "memory": {
+    "MemAvailable": 17766813696
+  },
+  "CPU": 1,
+  "GPU": 0,
+  "storage_path": "/workspaces/quoridor/research-data/ai-sigma/frame22-steward/storage-science-admission.json",
+  "storage_SHA": "2a37b7365f642540fe3862b6641cf1c8eb03a147168ff941c5c5423ebaa6464e",
+  "storage": {
+    "schema": "quoridor-current-storage-v1",
+    "at": "2026-10-05T11:59:57.864468+00:00",
+    "metric": "unique dev/inode st_blocks; reflink shared physical extents unknown",
+    "roots": [
+      {
+        "name": "main research code",
+        "category": "code",
+        "path": "/workspaces/quoridor/tools",
+        "exclude": [
+          "node_modules",
+          ".venv",
+          "__pycache__",
+          "target",
+          "target"
+        ],
+        "logical_file_bytes": 1174693,
+        "allocated_inode_bytes": 1249280,
+        "overlap_allocated_bytes": 0,
+        "files": 41,
+        "symlinks": 0,
+        "missing": false
+      },
+      {
+        "name": "main preserved research data",
+        "category": "data",
+        "path": "/workspaces/quoridor/research-data/ai-sigma",
+        "logical_file_bytes": 521146164,
+        "allocated_inode_bytes": 532611072,
+        "overlap_allocated_bytes": 0,
+        "files": 6691,
+        "symlinks": 0,
+        "missing": false
+      },
+      {
+        "name": "shared Git objects",
+        "category": "git",
+        "path": "/workspaces/quoridor/.git",
+        "logical_file_bytes": 471325728,
+        "allocated_inode_bytes": 498302976,
+        "overlap_allocated_bytes": 0,
+        "files": 16476,
+        "symlinks": 0,
+        "missing": false
+      },
+      {
+        "name": "training environment",
+        "category": "shared-dependencies",
+        "path": "/home/vscode/.cache/inference/envs/quoridor-training",
+        "logical_file_bytes": 5727479861,
+        "allocated_inode_bytes": 5790285824,
+        "overlap_allocated_bytes": 0,
+        "files": 21953,
+        "symlinks": 4,
+        "missing": false
+      },
+      {
+        "name": "team environment",
+        "category": "shared-dependencies",
+        "path": "/home/vscode/.cache/inference/envs/quoridor-research-team",
+        "logical_file_bytes": 1191786,
+        "allocated_inode_bytes": 1495040,
+        "overlap_allocated_bytes": 0,
+        "files": 104,
+        "symlinks": 4,
+        "missing": false
+      },
+      {
+        "name": "uv shared cache",
+        "category": "shared-cache",
+        "path": "/home/vscode/.cache/inference/uv",
+        "logical_file_bytes": 835240415,
+        "allocated_inode_bytes": 856518656,
+        "overlap_allocated_bytes": 954368,
+        "files": 7384,
+        "symlinks": 38,
+        "missing": false
+      },
+      {
+        "name": "new quality environment",
+        "category": "quality",
+        "path": "/workspaces/quoridor/tools/research-quality/.venv",
+        "logical_file_bytes": 36806455,
+        "allocated_inode_bytes": 36843520,
+        "overlap_allocated_bytes": 0,
+        "files": 25,
+        "symlinks": 4,
+        "missing": false
+      },
+      {
+        "name": "new quality npm dependency",
+        "category": "quality",
+        "path": "/workspaces/quoridor/tools/research-quality/node_modules",
+        "logical_file_bytes": 8458900,
+        "allocated_inode_bytes": 8544256,
+        "overlap_allocated_bytes": 0,
+        "files": 57,
+        "symlinks": 1,
+        "missing": false
+      },
+      {
+        "name": "current native Rust code",
+        "category": "code",
+        "path": "/workspaces/quoridor/crates",
+        "exclude": [
+          "target"
+        ],
+        "logical_file_bytes": 867216,
+        "allocated_inode_bytes": 1015808,
+        "overlap_allocated_bytes": 0,
+        "files": 78,
+        "symlinks": 0,
+        "missing": false
+      },
+      {
+        "name": "current Python training source",
+        "category": "code",
+        "path": "/workspaces/quoridor/python",
+        "exclude": [
+          "__pycache__"
+        ],
+        "logical_file_bytes": 43129,
+        "allocated_inode_bytes": 65536,
+        "overlap_allocated_bytes": 0,
+        "files": 10,
+        "symlinks": 0,
+        "missing": false
+      },
+      {
+        "name": "current management/source procedures",
+        "category": "code",
+        "path": "/workspaces/quoridor/scripts/dev",
+        "logical_file_bytes": 341119,
+        "allocated_inode_bytes": 401408,
+        "overlap_allocated_bytes": 0,
+        "files": 33,
+        "symlinks": 0,
+        "missing": false
+      },
+      {
+        "name": "current main research live",
+        "category": "live",
+        "path": "/workspaces/quoridor/.artifacts/ai-sigma",
+        "logical_file_bytes": 1929033,
+        "allocated_inode_bytes": 2912256,
+        "overlap_allocated_bytes": 0,
+        "files": 635,
+        "symlinks": 0,
+        "missing": false
+      },
+      {
+        "name": "current native release/build workspace",
+        "category": "live-build",
+        "path": "/workspaces/quoridor/.artifacts/rust-migration",
+        "logical_file_bytes": 471985118,
+        "allocated_inode_bytes": 474460160,
+        "overlap_allocated_bytes": 0,
+        "files": 1950,
+        "symlinks": 0,
+        "missing": false
+      },
+      {
+        "name": "current scheduler operation metadata",
+        "category": "live",
+        "path": "/workspaces/quoridor/.artifacts/research-team/frame21",
+        "logical_file_bytes": 23115,
+        "allocated_inode_bytes": 77824,
+        "overlap_allocated_bytes": 0,
+        "files": 23,
+        "symlinks": 0,
+        "missing": false
+      },
+      {
+        "name": "previous research cache",
+        "category": "shared-reprocache",
+        "path": "/home/vscode/.cache/inference/research",
+        "logical_file_bytes": 346477512,
+        "allocated_inode_bytes": 375341056,
+        "overlap_allocated_bytes": 0,
+        "files": 7588,
+        "symlinks": 9,
+        "missing": false
+      },
+      {
+        "name": "held TensorRT backend",
+        "category": "shared-dependencies",
+        "path": "/home/vscode/.cache/inference/backends",
+        "logical_file_bytes": 1174345062,
+        "allocated_inode_bytes": 1174548480,
+        "overlap_allocated_bytes": 0,
+        "files": 47,
+        "symlinks": 8,
+        "missing": false
+      },
+      {
+        "name": "current Rust migration compiled/cache",
+        "category": "shared-cache",
+        "path": "/home/vscode/.cache/inference/rust-migration",
+        "logical_file_bytes": 72566502,
+        "allocated_inode_bytes": 79478784,
+        "overlap_allocated_bytes": 0,
+        "files": 2667,
+        "symlinks": 9,
+        "missing": false
+      },
+      {
+        "name": "managed Python interpreters",
+        "category": "shared-dependencies",
+        "path": "/home/vscode/.cache/inference/python",
+        "logical_file_bytes": 107833796,
+        "allocated_inode_bytes": 118583296,
+        "overlap_allocated_bytes": 0,
+        "files": 3755,
+        "symlinks": 1049,
+        "missing": false
+      },
+      {
+        "name": "management current and historical metadata",
+        "category": "live",
+        "path": "/workspaces/quoridor/.artifacts/research-team",
+        "logical_file_bytes": 15704813,
+        "allocated_inode_bytes": 16674816,
+        "overlap_allocated_bytes": 77824,
+        "files": 708,
+        "symlinks": 0,
+        "missing": false
+      },
+      {
+        "name": "previous refactor proofs",
+        "category": "live",
+        "path": "/workspaces/quoridor/.artifacts/refactor262",
+        "logical_file_bytes": 25668774,
+        "allocated_inode_bytes": 25796608,
+        "overlap_allocated_bytes": 0,
+        "files": 120,
+        "symlinks": 0,
+        "missing": false
+      },
+      {
+        "name": "current canonical design/report/procedure",
+        "category": "code",
+        "path": "/workspaces/quoridor/docs",
+        "logical_file_bytes": 3948194,
+        "allocated_inode_bytes": 5173248,
+        "overlap_allocated_bytes": 0,
+        "files": 613,
+        "symlinks": 0,
+        "missing": false
+      },
+      {
+        "name": "current saved role source",
+        "category": "code",
+        "path": "/workspaces/quoridor/.agents/research-team",
+        "logical_file_bytes": 26651,
+        "allocated_inode_bytes": 53248,
+        "overlap_allocated_bytes": 0,
+        "files": 10,
+        "symlinks": 0,
+        "missing": false
+      },
+      {
+        "name": "inference tiny plotcache",
+        "category": "shared-cache",
+        "path": "/home/vscode/.cache/inference/matplotlib",
+        "logical_file_bytes": 43281,
+        "allocated_inode_bytes": 49152,
+        "overlap_allocated_bytes": 0,
+        "files": 1,
+        "symlinks": 0,
+        "missing": false
+      },
+      {
+        "name": "persistent assets after reader stop",
+        "path": "/workspaces/quoridor/.worktree/assets",
+        "category": "retained-assets",
+        "logical_file_bytes": 18827480,
+        "allocated_inode_bytes": 19120128,
+        "overlap_allocated_bytes": 0,
+        "files": 65,
+        "symlinks": 0,
+        "missing": false
+      },
+      {
+        "name": "generic preserved product quality evidence",
+        "path": "/workspaces/quoridor/research-data/worktree-consolidation/1d2",
+        "category": "maintenance-evidence",
+        "logical_file_bytes": 13672603,
+        "allocated_inode_bytes": 13676544,
+        "overlap_allocated_bytes": 0,
+        "files": 2,
+        "symlinks": 0,
+        "missing": false
+      },
+      {
+        "name": "current sparse search worktree",
+        "path": "/workspaces/quoridor/.worktree/frame21-search",
+        "category": "active-source-data",
+        "logical_file_bytes": 1813928,
+        "allocated_inode_bytes": 2588672,
+        "overlap_allocated_bytes": 0,
+        "files": 226,
+        "symlinks": 0,
+        "missing": false
+      },
+      {
+        "name": "current sparse features worktree",
+        "path": "/workspaces/quoridor/.worktree/frame21-features",
+        "category": "active-source-data",
+        "logical_file_bytes": 3668234,
+        "allocated_inode_bytes": 4579328,
+        "overlap_allocated_bytes": 0,
+        "files": 266,
+        "symlinks": 0,
+        "missing": false
+      },
+      {
+        "name": "current maintenance read/proofs",
+        "path": "/workspaces/quoridor/.artifacts/worktree-cleanup/1d2",
+        "category": "maintenance-live",
+        "logical_file_bytes": 11871065,
+        "allocated_inode_bytes": 12611584,
+        "overlap_allocated_bytes": 0,
+        "files": 490,
+        "symlinks": 0,
+        "missing": false
+      },
+      {
+        "name": "current maintenance live receipts and tooling",
+        "category": "maintenance-live",
+        "path": "/workspaces/quoridor/.artifacts/worktree-cleanup/1d2",
+        "logical_file_bytes": 11871065,
+        "allocated_inode_bytes": 0,
+        "overlap_allocated_bytes": 12611584,
+        "files": 490,
+        "symlinks": 0,
+        "missing": false
+      },
+      {
+        "name": "frame22 steward metadata",
+        "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-steward",
+        "category": "frame22-management",
+        "logical_file_bytes": 39101,
+        "allocated_inode_bytes": 0,
+        "overlap_allocated_bytes": 57344,
+        "files": 6,
+        "symlinks": 0,
+        "missing": false
+      },
+      {
+        "name": "frame22 live runtime",
+        "path": "/workspaces/quoridor/.artifacts/research-team/frame22",
+        "category": "frame22-management",
+        "logical_file_bytes": 2403,
+        "allocated_inode_bytes": 0,
+        "overlap_allocated_bytes": 4096,
+        "files": 7,
+        "symlinks": 0,
+        "missing": false
+      }
+    ],
+    "category_current_allocated_bytes": {
+      "code": 7958528,
+      "data": 532611072,
+      "git": 498302976,
+      "shared-dependencies": 7084912640,
+      "shared-cache": 936046592,
+      "quality": 45387776,
+      "live": 45461504,
+      "live-build": 474460160,
+      "shared-reprocache": 375341056,
+      "retained-assets": 19120128,
+      "maintenance-evidence": 13676544,
+      "active-source-data": 7168000,
+      "maintenance-live": 12611584,
+      "frame22-management": 0
+    },
+    "retained_allocated_inode_bytes": 10053058560,
+    "reservations": [
+      {
+        "category": "conservative-92-remaining-management",
+        "reserved_bytes": 117440512,
+        "owner": "92",
+        "basis": "full bound conservatively adds already held too; actual unused never larger",
+        "current_allocated_bytes": 0,
+        "unused_bytes": 117440512
+      },
+      {
+        "category": "v8-unused-pool-before268-transfer-conservative",
+        "reserved_bytes": 7446528,
+        "basis": "v8 pool includes2684MiB also conservatively within10MiB forecast; no previous135372800 added",
+        "current_allocated_bytes": 0,
+        "unused_bytes": 7446528
+      },
+      {
+        "category": "Root-1d2-maintenance-growth-conservative",
+        "reserved_bytes": 167772160,
+        "owner": "Root maintenance",
+        "basis": "Root explicit160MiB; full additional conservative forecast including portions already retained. Original historical92guard remains unchanged.",
+        "current_allocated_bytes": 0,
+        "unused_bytes": 167772160
+      },
+      {
+        "category": "frame22-new-metadata-forecast",
+        "reserved_bytes": 3145728,
+        "owner": "92",
+        "basis": "new config/contract/prompt/expectations, stop/runtime receipts and unique Git; within existing112MiB envelope, no reset",
+        "current_allocated_bytes": 0,
+        "unused_bytes": 3145728
+      },
+      {
+        "category": "frame22-273-scope-growth",
+        "reserved_bytes": 276824064,
+        "owner": "273",
+        "basis": "coordinator allocation data128/build128/WT8; current held separate, no old reset",
+        "current_allocated_bytes": 0,
+        "unused_bytes": 276824064
+      },
+      {
+        "category": "frame22-274-scope-growth",
+        "reserved_bytes": 109051904,
+        "owner": "274",
+        "basis": "data32/build64/WT8",
+        "current_allocated_bytes": 0,
+        "unused_bytes": 109051904
+      },
+      {
+        "category": "frame22-275-scope-growth",
+        "reserved_bytes": 150994944,
+        "owner": "275",
+        "basis": "data8/build128/WT8",
+        "current_allocated_bytes": 0,
+        "unused_bytes": 150994944
+      },
+      {
+        "category": "frame22-coordinator-management-growth",
+        "reserved_bytes": 8388608,
+        "owner": "coordinator",
+        "basis": "new8MiB within confirmed headroom; old pools not reset",
+        "current_allocated_bytes": 0,
+        "unused_bytes": 8388608
+      },
+      {
+        "category": "frame22-supervisor-current-output-growth",
+        "reserved_bytes": 33554432,
+        "owner": "40",
+        "basis": "existing32MiB numerical bound newframe output, historical output still retained",
+        "current_allocated_bytes": 0,
+        "unused_bytes": 33554432
+      }
+    ],
+    "unknown_retained_bytes": 134217728,
+    "current_plus_unused_known_bytes": 11061895168,
+    "cap_bytes": 12884901888,
+    "admission": "within",
+    "errors": [],
+    "past_peak_bytes": "not added to current; refer to original run receipts",
+    "unknown_is_free": false,
+    "deleted": false
+  },
+  "scope_current": 966656,
+  "scope_forecast": 33554432,
+  "WT_build_separate": true,
+  "manager_parent": {
+    "pid": 2009,
+    "tick": "104512"
+  },
+  "point_only": true,
+  "hard_seconds": 120,
+  "PASS": true
+}

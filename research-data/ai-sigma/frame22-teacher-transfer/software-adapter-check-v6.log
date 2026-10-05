@@ -1,0 +1,14 @@
+....F....
+======================================================================
+FAIL: test_native_metadata_schema_field_matches_published_writer (__main__.Adapter.test_native_metadata_schema_field_matches_published_writer)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/test_adapter.py", line 165, in test_native_metadata_schema_field_matches_published_writer
+    with self.assertRaisesRegex(ValueError, "view orders differ"):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.008s
+
+FAILED (failures=1)
