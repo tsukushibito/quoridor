@@ -1,0 +1,42 @@
+{
+  "task": "native-outcome-z-fit-298-v1",
+  "schema": "native-z-fit-result-v1",
+  "status": "FINITE_FIT_COMPLETED",
+  "UTC": "2026-10-05T21:48:13.567847+00:00",
+  "registration_SHA": "bf78d11204be4d19131ee5f59940a6b0c22170aad22a7b5d4d6faca196a59519",
+  "total_NN": 1195424,
+  "processed": 1234496,
+  "training_seen": 1000064,
+  "freeze": {
+    "schema": "quoridor-candidate-freeze-v1",
+    "best_step": 1000,
+    "best_validation_mse": 0.5858944176783827,
+    "selection_weighting": "game",
+    "evaluation_checkpoints": [
+      0,
+      1,
+      5,
+      20,
+      50,
+      100,
+      200,
+      1000,
+      4000,
+      7813
+    ],
+    "artifact_mode": "native",
+    "samples": 1195424,
+    "model_sha": "3177ff545094829627abd545b9d2eab160102d95bd04e85f9016da76dd7f2728",
+    "weights_sha": "1f8d8c28c9a863a73a56bb457424cbaf9c9c1e4a94ab9e6cb85620ffa6123b8c",
+    "initial_weights_sha": "ec4167ccb5042cfe937b23850a1b52d1cd9cf6c3fb1d348627bfe6cc7d023cc5",
+    "dataset_sha": "f1542ab9b90a72c1868cf9534d74b56df40345c878b97e1e96beeef82ed94d20",
+    "test_opened": false,
+    "wall_seconds": 9.879251386038959
+  },
+  "checkpoint_root": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-outcome-z-learning/native-z-1m-r1",
+  "old_corpus_selection_not_blind": true,
+  "new_future_labels_opened": false,
+  "ONNX_forward": 0,
+  "extra_model_forward": 0,
+  "sameforward_scalars_and_scheduledweights": true
+}

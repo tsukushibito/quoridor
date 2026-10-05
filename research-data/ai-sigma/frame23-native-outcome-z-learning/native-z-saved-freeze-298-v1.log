@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/freeze_saved.py", line 203, in <module>
+    main()
+    ~~~~^^
+  File "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/freeze_saved.py", line 37, in main
+    [i for i, r in enumerate(rows) if r["split"] == "train" and r["primary_eligible"]]
+                                      ~^^^^^^^^^
+IndexError: only integers, slices (`:`), ellipsis (`...`), numpy.newaxis (`None`) and integer or boolean arrays are valid indices

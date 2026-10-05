@@ -1,0 +1,190 @@
+{
+  "schema": "native-outcome-z-candidate-freeze-298-v1",
+  "UTC": "2026-10-05T21:59:57.920952+00:00",
+  "construction": "management-only path/hash binding of saved trainer freeze; failed extra reaggregation NOT_COMPLETED",
+  "selection_rule": "minimum registered family-equal zMSE across ten points; tie earliest/lesswork; D-notbeaten still observed NNUE",
+  "candidate": {
+    "condition": "native-z-1m",
+    "step": 1000,
+    "training_seen_at_checkpoint": 128000,
+    "full_run_seen": 1000064,
+    "selection_mse": 0.5858944176783827,
+    "checkpoint": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-outcome-z-learning/native-z-1m-r1/step1000.pt",
+      "SHA": "689d07e7bfe1a1430fca2a96c0c50d0486daba2460ec5f3b92ec2535a1195448",
+      "B": 52641
+    },
+    "native_manifest": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-outcome-z-learning/native-z-1m-r1/best-model/manifest.json",
+      "SHA": "3177ff545094829627abd545b9d2eab160102d95bd04e85f9016da76dd7f2728",
+      "B": 847
+    },
+    "native_weights": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-outcome-z-learning/native-z-1m-r1/best-model/weights.f32",
+      "SHA": "1f8d8c28c9a863a73a56bb457424cbaf9c9c1e4a94ab9e6cb85620ffa6123b8c",
+      "B": 49284
+    },
+    "target_metadata": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-outcome-z-learning/native-z-1m-r1/best-model/training-target.json",
+      "SHA": "5364b416539c68eff8bd0cb16806ba7f7aaac1e3b21d3a4ffe5c9ab6b31de0e8",
+      "B": 29
+    },
+    "config": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/training-config-v1.json",
+      "SHA": "dee0995b36126107e44387cba05d08f45cf49d3d503a973b59b3680307cef7f5",
+      "B": 877
+    }
+  },
+  "initial": {
+    "checkpoint": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-outcome-z-learning/native-z-1m-r1/initial.pt",
+      "SHA": "1fef087b31ea6199ac6e9d619f65678f5c2421c63341cfba094c72fc958a2e8c",
+      "B": 52245
+    },
+    "native_manifest": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-outcome-z-learning/native-z-1m-r1/initial-model/manifest.json",
+      "SHA": "757c3360502ccdddecc0f39164794d8367d33e693d02def579be6d06c3a49add",
+      "B": 847
+    },
+    "native_weights": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-outcome-z-learning/native-z-1m-r1/initial-model/weights.f32",
+      "SHA": "ec4167ccb5042cfe937b23850a1b52d1cd9cf6c3fb1d348627bfe6cc7d023cc5",
+      "B": 49284
+    },
+    "equal_D_zerohead": true
+  },
+  "baselines": {
+    "D": {
+      "a_f32": 0.0,
+      "b_f32": 8.0,
+      "formula": "tanh(f32(0+8*f32(rawSTM_dopp-dself))); native tanh f64\u2192f32",
+      "selection_family_zMSE": 0.6608672738504593
+    },
+    "constant": {
+      "value": 0.021603728106769263,
+      "train_only_family_equal": true,
+      "train_family_summary": {
+        "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/actual-sharded-qualification-v1.json",
+        "SHA": "0bcde43394b1e41c7d1f836c9b694fcf69fc17711b9a3ceede5d00393d8a28eb",
+        "B": 55821
+      },
+      "selection_family_zMSE": 0.9994672627760733
+    },
+    "public_frozen_baseline": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/final-saved-freeze-v1/candidate-freeze-v1.json",
+      "SHA": "49dbc1ec576bd7ccd97d4dc17d744a5153ff1de18b43716a6330542302c39706",
+      "B": 11720
+    }
+  },
+  "model_settings": {
+    "feature": "QF1 bothviews sparse312+D zero4 H32",
+    "schema": "quoridor-nnue-distance-residual-v3",
+    "value_perspective": "actual STM (P1P2\u2192STM bound)",
+    "route_mode": "zero4",
+    "D_a_f32": 0.0,
+    "D_b_f32": 8.0,
+    "scale": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame22-teacher-transfer-B-r1/scale.json",
+      "SHA": "175f07713409994d0d4c99768267695b0a91ec100baabf202fb4518b56cbdfed",
+      "B": 142
+    },
+    "native_binary": {
+      "path": "/workspaces/quoridor/.artifacts/rust-migration/target/release/nnue-diagnose",
+      "SHA": "6a2fc4fd3c7e933c621380743bc3909bc574aba1083c9002333744ac0455afbf",
+      "B": 1125496
+    },
+    "native_SIMD_comparison_only_binary": {
+      "path": "/workspaces/quoridor/.artifacts/rust-migration/target/release/route-feature-diagnose-public-z-290-v1",
+      "SHA": "9f72e7404a36b2154cd36fc2530200a819ea77146d7fc9252e6b4d6f77ebd221",
+      "B": 894720
+    },
+    "model_source": {
+      "path": "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/residual_model.py",
+      "SHA": "2104e17f9d091b263acc99b60744a2e834e6b32c1db1a2db62a22a4c94b55f9b",
+      "B": 2443
+    },
+    "actual_sampling_seed": 19080312,
+    "model_initial_seed": 19080311,
+    "sampler": "game uniform then row uniform; maintained generator(seed+1)",
+    "native_parity": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/saved-parity-result-v1.json",
+      "SHA": "386635486a76be22d4091a26726aa9cc242bcc3656dc077f00b27bfbda2f9b70",
+      "B": 679
+    }
+  },
+  "references": {
+    "Tseen": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/Tseen-input-references.jsonl.gz",
+      "SHA": "e289b2ba7dcd24d6429714d0ec264d261b97312736bdaed47855773ea1403ad9",
+      "B": 1892863
+    },
+    "Vraw": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/Vraw-input-references.jsonl.gz",
+      "SHA": "68f54e61eb9734e83c32ed3c28bf2ecb8dd64664f107a432db8eaff3b2b4fd3b",
+      "B": 606972
+    },
+    "Tseen_rows": 14803,
+    "ALLrawV_rows": 4733,
+    "Tseen_union": "all eligible train conservative across all scheduled/best/last saved weights; no removal based on realized sampling",
+    "fullhistory": "literal SHA and resolvable private input-only prefix witness path/SHA/localID; crosspublic unavailable",
+    "dataset": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/sharded-cache-v1.json",
+      "SHA": "f1542ab9b90a72c1868cf9534d74b56df40345c878b97e1e96beeef82ed94d20",
+      "B": 2332159
+    },
+    "split": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/registered-family-split-v1.json",
+      "SHA": "bd7b05262a7827331f2c89dc3383bc533e53ffc603ba2444995ee2455fbf2bf1",
+      "B": 561586
+    },
+    "sampling": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-native-outcome-z-learning/native-z-1m-r1/sampling.json",
+      "SHA": "224a804ef002dcf8bf783bda2de6f57b198b776dc275901ea8525a96d94223e2",
+      "B": 172927
+    },
+    "public_exposure_reference": "publicbaseline freeze49dbc references canonicalTseen67937 plusALLrawV19965; no publictarget opened"
+  },
+  "source_stop": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/source-reader-selector-stop-final-v1.json",
+    "SHA": "575f3df495a00b174c0f1a31aca47967d03ff5aa9026206d7aa0c7061edafccc",
+    "B": 5552
+  },
+  "science_stops": [
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/native-outcome-z-fit-298-v1-stop.json",
+      "SHA": "ab566f51374955ac973c4e751d624e321f6422bd875f88beea22e6bd69cf706b",
+      "B": 636
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/native-z-saved-parity-298-v1-stop.json",
+      "SHA": "07c8e8acf2af85be7d3ee63d9b0a9355188627b6f0cd96c177699ff84a6d8ed0",
+      "B": 1670
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/native-z-saved-freeze-298-v1-stop.json",
+      "SHA": "4907ba57858213e5e6085b3d915d709b0306f6160820aa6cb5c9a5c0389f78c5",
+      "B": 578
+    }
+  ],
+  "fit_result": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/fit-result-v1.json",
+    "SHA": "7751dd38672c2bfb51f063756b7a8ff8ece2a9de5c716701ddb834203ff91629",
+    "B": 1417
+  },
+  "parity": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/saved-parity-result-v1.json",
+    "SHA": "386635486a76be22d4091a26726aa9cc242bcc3656dc077f00b27bfbda2f9b70",
+    "B": 679
+  },
+  "auxiliary_reaggregation": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/freeze-auxiliary-failure-v1.json",
+    "SHA": "d9ecf25e64f3964a8a781d15ee6503730c25dd2619182d982fc83ce29dad1d03",
+    "B": 1140
+  },
+  "new_future_labels_opened": false,
+  "known_oldcorpus_newselection_not_blind": true,
+  "train_families": 432,
+  "selection_families": 144,
+  "samewall_strength_certified": false,
+  "future_candidate_reselection_allowed": false
+}

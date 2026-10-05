@@ -1,0 +1,502 @@
+--- a/python/quoridor_training/cache.py
++++ b/python/quoridor_training/cache.py
+@@ -14,8 +14,110 @@
+     return digest.hexdigest()
+ 
+ 
++def _validate_inputs(rows, x, distance):
++    for row, features, d in zip(rows, x, distance):
++        if (
++            row.get("ids_order") != "P1_then_P2"
++            or row.get("distance_order") != "STM_then_opponent_f32"
++            or row.get("tensor_view_order") != "STM_then_opponent"
++            or row.get("side") not in (1, 2)
++        ):
++            raise ValueError("sharded input view metadata")
++        ids = row["ids"] if row["side"] == 1 else row["ids"][::-1]
++        if len(ids) != 2 or any(
++            view != np.flatnonzero(tensor).tolist() for view, tensor in zip(ids, features)
++        ):
++            raise ValueError("sharded STM sparse IDs/tensor differ")
++        if not np.isin(features, (0, 1)).all():
++            raise ValueError("sharded sparse feature values")
++        if np.asarray(row["distance"], dtype="<f4").tobytes() != d.astype("<f4").tobytes():
++            raise ValueError("sharded STM distance f32 metadata/tensor differ")
++
++
++def _load_sharded(path, manifest):
++    if set(manifest) != {"schema", "feature_count", "rows", "shards", "references"}:
++        raise ValueError("unknown or missing sharded manifest fields")
++    if (
++        manifest["schema"] != "quoridor-sharded-training-cache-v1"
++        or manifest["feature_count"] != 312
++    ):
++        raise ValueError("sharded cache version/features")
++    if not manifest["shards"] or type(manifest["rows"]) is not int or manifest["rows"] <= 0:
++        raise ValueError("sharded cache rows")
++    for ref in manifest["references"]:
++        if set(ref) != {"path", "SHA"} or sha(ref["path"]) != ref["SHA"]:
++            raise ValueError("sharded reference binding")
++    result_rows, arrays, seen_namespaces, seen_children = [], [], set(), set()
++    seen_families = set()
++    for shard in manifest["shards"]:
++        if set(shard) != {"path", "manifest_SHA", "namespace", "family_map", "rows"}:
++            raise ValueError("unknown or missing shard fields")
++        child = Path(shard["path"]).resolve()
++        namespace = shard["namespace"]
++        if not isinstance(namespace, str) or not namespace or namespace in seen_namespaces:
++            raise ValueError("shard namespace missing/duplicate")
++        if child in seen_children or not child.is_dir():
++            raise ValueError("shard duplicate/path")
++        seen_namespaces.add(namespace)
++        seen_children.add(child)
++        if sha(child / "cache.json") != shard["manifest_SHA"]:
++            raise ValueError("child cache manifest changed")
++        binding, rows, x, d, y = load(child, allow_test=False)
++        if binding.get("schema") == "quoridor-sharded-training-cache-v1":
++            raise ValueError("nested sharded manifest unsupported")
++        if any(row["split"] != "train" for row in rows):
++            raise ValueError("only original training shards can be repartitioned")
++        _validate_inputs(rows, x, d)
++        if len(shard["rows"]) != len(rows):
++            raise ValueError("shard row denominator incomplete")
++        if set(shard["family_map"]) != {r["group"] for r in rows}:
++            raise ValueError("shard family map incomplete")
++        for native_family, assignment in shard["family_map"].items():
++            if set(assignment) != {"canonical_family", "partition"} or assignment[
++                "partition"
++            ] not in ("train", "validation"):
++                raise ValueError("future/test or invalid family assignment")
++            if (
++                not isinstance(assignment["canonical_family"], str)
++                or not assignment["canonical_family"]
++            ):
++                raise ValueError("canonical family UID")
++            if assignment["canonical_family"] in seen_families:
++                raise ValueError("canonical family duplicated across trajectories/shards")
++            seen_families.add(assignment["canonical_family"])
++        for i, (row, overlay) in enumerate(zip(rows, shard["rows"])):
++            if set(overlay) != {"index", "id", "primary_eligible"}:
++                raise ValueError("unknown row overlay fields")
++            if overlay["index"] != i or overlay["id"] != row["id"]:
++                raise ValueError("shard row index/identity/order mismatch")
++            if type(overlay["primary_eligible"]) is not bool:
++                raise ValueError("row mask must be explicit boolean")
++            assignment = shard["family_map"][row["group"]]
++            result_rows.append(
++                {
++                    **row,
++                    "source_id": row["id"],
++                    "source_group": row["group"],
++                    "id": namespace + ":" + row["id"],
++                    "split": assignment["partition"],
++                    "group": assignment["canonical_family"],
++                    "primary_eligible": row["primary_eligible"] and overlay["primary_eligible"],
++                }
++            )
++        arrays.append((x, d, y))
++    if len(result_rows) != manifest["rows"] or len({r["id"] for r in result_rows}) != len(
++        result_rows
++    ):
++        raise ValueError("sharded total rows/namespace identity")
++    binding = {**manifest, "dataset_sha": sha(path)}
++    return binding, result_rows, *(np.concatenate([a[i] for a in arrays]) for i in range(3))
++
++
+ def load(path, allow_test=False):
+     path = Path(path)
++    if path.is_file():
++        manifest = json.loads(path.read_text())
++        return _load_sharded(path, manifest)
+     manifest = json.loads((path / "cache.json").read_text())
+     if manifest["feature_count"] != 312 or manifest["rows"] <= 0:
+         raise ValueError("cache feature/row schema")
+--- a/python/quoridor_training/common.py
++++ b/python/quoridor_training/common.py
+@@ -34,6 +34,7 @@
+     },
+     "evaluation": {
+         "interval": 10,
++        "checkpoints": None,
+         "batch_size": 1024,
+         "monitor": "game",
+         "early_stopping_patience": 5,
+@@ -41,6 +42,7 @@
+     },
+     "limits": {"seconds": 60.0, "samples": 500000},
+     "data": {"overlap_policy": "error"},
++    "artifacts": {"mode": "native_onnx", "save_scheduled": False},
+ }
+ 
+ 
+@@ -109,10 +111,25 @@
+         ("training", "device"): ["cpu", "cuda"],
+         ("evaluation", "monitor"): ["row", "game"],
+         ("data", "overlap_policy"): ["error", "report"],
++        ("artifacts", "mode"): ["native", "native_onnx"],
+     }
+     for (section, key), choices in allowed.items():
+         if result[section][key] not in choices:
+             raise ValueError(f"invalid {section}.{key}: {result[section][key]}")
++    points = result["evaluation"]["checkpoints"]
++    if points is not None and (
++        not isinstance(points, list)
++        or not points
++        or any(type(v) is not int or v < 0 or v > result["training"]["steps"] for v in points)
++        or points != sorted(set(points))
++        or points[0] != 0
++        or points[-1] != result["training"]["steps"]
++    ):
++        raise ValueError(
++            "explicit evaluation checkpoints must be unique sorted initial-to-last steps"
++        )
++    if type(result["artifacts"]["save_scheduled"]) is not bool:
++        raise ValueError("artifacts.save_scheduled must be boolean")
+     return result
+ 
+ 
+--- a/python/quoridor_training/train.py
++++ b/python/quoridor_training/train.py
+@@ -5,6 +5,7 @@
+ """
+ 
+ import argparse
++import gzip
+ import json
+ import time
+ from pathlib import Path
+@@ -138,26 +139,31 @@
+         ],
+         dtype=np.int64,
+     )
++    ix_validation_raw = np.array(
++        [i for i, r in enumerate(rows) if r["split"] == "validation"], dtype=np.int64
++    )
+     if not len(ix_train) or not len(ix_validation):
+         raise ValueError("nonempty eligible train and unexposed validation required")
+     families = {}
+     for i in ix_train:
+         families.setdefault(rows[i]["group"], []).append(float(labels[i, column]))
+     constant = float(np.mean([np.mean(values) for values in families.values()]))
+-    mu = distances[ix_train].mean(axis=0, dtype=np.float64).astype(np.float32)
+-    sigma = distances[ix_train].std(axis=0, dtype=np.float64).astype(np.float32)
+-    sigma = np.maximum(sigma, np.float32(1e-4))
+-    statistics = {"mu_f32": mu.tolist(), "sigma_f32": sigma.tolist()}
+-    difference = (distances[ix_train, 1] - distances[ix_train, 0]).astype(np.float64)
+-    design = np.column_stack([np.ones(len(ix_train)), difference])
+-    fit, *_ = np.linalg.lstsq(design, labels[ix_train, column].astype(np.float64), rcond=None)
+-    distance_fit = {"a": float(np.float32(fit[0])), "b": float(np.float32(fit[1]))}
+     if scale_path is not None:
+         from .scaled_model import validate_statistics
+ 
+         statistics = validate_statistics(json.loads(Path(scale_path).read_text()))
++    else:
++        mu = distances[ix_train].mean(axis=0, dtype=np.float64).astype(np.float32)
++        sigma = distances[ix_train].std(axis=0, dtype=np.float64).astype(np.float32)
++        sigma = np.maximum(sigma, np.float32(1e-4))
++        statistics = {"mu_f32": mu.tolist(), "sigma_f32": sigma.tolist()}
+     if cfg["model"]["architecture"] == "distance_residual":
+         distance_fit = {"a": cfg["model"]["distance_a"], "b": cfg["model"]["distance_b"]}
++    else:
++        difference = (distances[ix_train, 1] - distances[ix_train, 0]).astype(np.float64)
++        design = np.column_stack([np.ones(len(ix_train)), difference])
++        fit, *_ = np.linalg.lstsq(design, labels[ix_train, column].astype(np.float64), rcond=None)
++        distance_fit = {"a": float(np.float32(fit[0])), "b": float(np.float32(fit[1]))}
+     model = build_model(cfg["model"], statistics).to(device)
+     initial_state = {k: v.detach().cpu().clone() for k, v in model.state_dict().items()}
+     # Keep the corpus mapped on CPU. Only bounded batches enter GPU memory.
+@@ -214,8 +220,23 @@
+     group_offsets = np.concatenate([[0], np.cumsum(group_lengths)[:-1]])
+     group_flat = np.concatenate(group_indices)
+     selection_rows = [rows[i] for i in ix_validation]
+-    evaluation_steps = {0, 1, 2, 5, 10, 20, 50, 100, cfg["training"]["steps"]}
+-    evaluation_steps.update(range(0, cfg["training"]["steps"] + 1, cfg["evaluation"]["interval"]))
++    points = cfg["evaluation"]["checkpoints"]
++    if points is None:
++        evaluation_steps = {0, 1, 2, 5, 10, 20, 50, 100, cfg["training"]["steps"]}
++        evaluation_steps.update(
++            range(0, cfg["training"]["steps"] + 1, cfg["evaluation"]["interval"])
++        )
++    else:
++        evaluation_steps = set(points)
++    scheduled = cfg["artifacts"]["save_scheduled"]
++    evaluation_validation = ix_validation_raw if scheduled else ix_validation
++    primary_in_raw = np.searchsorted(ix_validation_raw, ix_validation)
++    sampled_rows = np.zeros(len(rows), dtype=np.int64)
++    if scheduled:
++        with gzip.open(output / "validation-order.json.gz", "wt") as stream:
++            json.dump([rows[i]["id"] for i in ix_validation_raw], stream)
++        with gzip.open(output / "train-order.json.gz", "wt") as stream:
++            json.dump([rows[i]["id"] for i in ix_train], stream)
+ 
+     def charge(n):
+         nonlocal samples
+@@ -244,11 +265,12 @@
+ 
+     def evaluate(step):
+         nonlocal best_step, best_loss, best_state
+-        charge(len(ix_train) + len(ix_validation))
++        charge(len(ix_train) + len(evaluation_validation))
+         model.eval()
+         with torch.inference_mode():
+             ptrain = predict(ix_train)
+-            pval = predict(ix_validation)
++            praw = predict(evaluation_validation)
++        pval = praw[primary_in_raw] if scheduled else praw
+         tr = metrics([rows[i] for i in ix_train], ptrain, target, constant)
+         va = metrics(selection_rows, pval, target, constant)
+         loss = va[
+@@ -258,6 +280,9 @@
+             {
+                 "step": step,
+                 "samples": samples,
++                "training_seen": step * cfg["training"]["batch_size"],
++                "row_epoch": step * cfg["training"]["batch_size"] / len(ix_train),
++                "validation_forward_rows": len(evaluation_validation),
+                 "wall_seconds": time.monotonic() - start,
+                 "train": tr,
+                 "validation": va,
+@@ -266,6 +291,14 @@
+         if loss < best_loss - cfg["evaluation"]["min_delta"]:
+             best_step, best_loss = step, loss
+             best_state = {k: v.detach().cpu().clone() for k, v in model.state_dict().items()}
++        if scheduled:
++            ptrain.astype("<f4").tofile(output / f"train-step{step}.f32")
++            praw.astype("<f4").tofile(output / f"validation-step{step}.f32")
++            torch.save(
++                {"model": model.state_dict(), "model_config": cfg["model"], "scale": statistics},
++                output / f"step{step}.pt",
++            )
++            export(model, cfg, statistics, distance_fit, output / f"step{step}-model")
+         return ptrain
+ 
+     evaluate(0)
+@@ -287,6 +320,7 @@
+                 ).numpy()
+             ]
+         ix = torch.as_tensor(index, dtype=torch.long)
++        np.add.at(sampled_rows, index, 1)
+         model.train()
+         optimizer.zero_grad(set_to_none=True)
+         prediction = model(*batch(ix))
+@@ -331,32 +365,49 @@
+         export(model, cfg, statistics, distance_fit, output / (name + "-model"))
+     write(output / "curves.json", curve)
+     write(output / "gradients.json", diagnostics)
++    if scheduled:
++        write(
++            output / "sampling.json",
++            {
++                "seen": int(sampled_rows.sum()),
++                "mode": cfg["training"]["sampling"],
++                "row_count_order": "immutable loaded sharded row order",
++                "row_counts": sampled_rows.tolist(),
++                "family_counts": {
++                    family: int(sampled_rows[group].sum())
++                    for family, group in zip(families, group_indices)
++                },
++            },
++        )
+     model.load_state_dict(best_state)
+     model.eval()
+     # ONNX is a cold interchange artifact. Rust NNUE consumes the compact raw
+     # weights above; no Python or ONNX inference is performed in each search node.
+     witness = (tx[:1].cpu(), td[:1].cpu(), side[:1].cpu())
+     model = model.cpu()
+-    torch.onnx.export(
+-        model,
+-        witness,
+-        str(output / "best.onnx"),
+-        input_names=["features", "distance", "side"],
+-        output_names=["value"],
+-        dynamic_axes={
+-            "features": {0: "batch"},
+-            "distance": {0: "batch"},
+-            "side": {0: "batch"},
+-            "value": {0: "batch"},
+-        },
+-        opset_version=17,
+-        dynamo=False,
+-    )
++    if cfg["artifacts"]["mode"] == "native_onnx":
++        torch.onnx.export(
++            model,
++            witness,
++            str(output / "best.onnx"),
++            input_names=["features", "distance", "side"],
++            output_names=["value"],
++            dynamic_axes={
++                "features": {0: "batch"},
++                "distance": {0: "batch"},
++                "side": {0: "batch"},
++                "value": {0: "batch"},
++            },
++            opset_version=17,
++            dynamo=False,
++        )
+     freeze = {
+         "schema": "quoridor-candidate-freeze-v1",
+         "best_step": best_step,
+         "best_validation_mse": best_loss,
+         "selection_weighting": cfg["evaluation"]["monitor"],
++        "evaluation_checkpoints": sorted(evaluation_steps),
++        "artifact_mode": cfg["artifacts"]["mode"],
+         "samples": samples,
+         "model_sha": sha(output / "best-model" / "manifest.json"),
+         "weights_sha": sha(output / "best-model" / "weights.f32"),
+--- a/python/quoridor_training/test_sharded_cache.py
++++ b/python/quoridor_training/test_sharded_cache.py
+@@ -0,0 +1,153 @@
++"""NN0 checks for referenced partitions, input order and scheduled config."""
++
++import copy
++import json
++from pathlib import Path
++import tempfile
++import unittest
++
++import numpy as np
++
++from .cache import load, sha
++from .common import resolve_config
++
++
++class ShardedCacheTests(unittest.TestCase):
++    def setUp(self):
++        self.directory = tempfile.TemporaryDirectory()
++        self.addCleanup(self.directory.cleanup)
++        self.root = Path(self.directory.name)
++        self.shards = []
++        for number, side in enumerate((1, 2)):
++            child = self.root / str(number)
++            child.mkdir()
++            x = np.zeros((1, 2, 312), dtype="<f4")
++            x[0, 0, 4] = 1
++            x[0, 1, 9] = 1
++            d = np.asarray([[0.1, 0.2]], dtype="<f4")
++            y = np.asarray([[np.nan, 0 if side == 2 else 1]], dtype="<f4")
++            x.tofile(child / "x.f32")
++            d.tofile(child / "distance.f32")
++            y.tofile(child / "labels.f32")
++            row = {
++                "id": "same-local-id",
++                "group": "native-family",
++                "split": "train",
++                "primary_eligible": True,
++                "side": side,
++                "ids": [[4], [9]] if side == 1 else [[9], [4]],
++                "ids_order": "P1_then_P2",
++                "tensor_view_order": "STM_then_opponent",
++                "distance_order": "STM_then_opponent_f32",
++                "distance": d[0].tolist(),
++                "rootmean": None,
++                "z": float(y[0, 1]),
++                "teacher_type": "fixture",
++            }
++            (child / "rows.jsonl").write_text(json.dumps(row) + "\n")
++            files = ["x.f32", "distance.f32", "labels.f32", "rows.jsonl"]
++            (child / "cache.json").write_text(
++                json.dumps(
++                    {
++                        "rows": 1,
++                        "feature_count": 312,
++                        "allow_test": False,
++                        "dataset_sha": "fixture",
++                        "sha256": {name: sha(child / name) for name in files},
++                    }
++                )
++            )
++            self.shards.append(
++                {
++                    "path": str(child),
++                    "manifest_SHA": sha(child / "cache.json"),
++                    "namespace": f"run{number}",
++                    "family_map": {
++                        "native-family": {
++                            "canonical_family": f"family{number}",
++                            "partition": "train" if number == 0 else "validation",
++                        }
++                    },
++                    "rows": [{"index": 0, "id": "same-local-id", "primary_eligible": True}],
++                }
++            )
++        self.manifest = {
++            "schema": "quoridor-sharded-training-cache-v1",
++            "feature_count": 312,
++            "rows": 2,
++            "shards": self.shards,
++            "references": [],
++        }
++
++    def run_manifest(self, value):
++        path = self.root / "shards.json"
++        path.write_text(json.dumps(value))
++        return load(path)
++
++    def test_namespace_p2_draw_and_original_bytes(self):
++        before = [sha(Path(s["path"]) / "labels.f32") for s in self.shards]
++        binding, rows, x, d, y = self.run_manifest(self.manifest)
++        self.assertEqual([r["id"] for r in rows], ["run0:same-local-id", "run1:same-local-id"])
++        self.assertEqual([r["split"] for r in rows], ["train", "validation"])
++        self.assertEqual(x.shape, (2, 2, 312))
++        self.assertEqual(d[1].tobytes(), np.asarray([0.1, 0.2], dtype="<f4").tobytes())
++        self.assertTrue(np.isnan(y[:, 0]).all())
++        self.assertEqual(y[1, 1], 0)
++        self.assertEqual(before, [sha(Path(s["path"]) / "labels.f32") for s in self.shards])
++        self.assertEqual(binding["dataset_sha"], sha(self.root / "shards.json"))
++
++    def test_unknown_future_missing_rows_bad_uid_and_mask_rejected(self):
++        variants = []
++        value = copy.deepcopy(self.manifest)
++        value["unknown"] = True
++        variants.append(value)
++        value = copy.deepcopy(self.manifest)
++        value["shards"][1]["family_map"]["native-family"]["partition"] = "test"
++        variants.append(value)
++        value = copy.deepcopy(self.manifest)
++        value["shards"][0]["rows"] = []
++        variants.append(value)
++        value = copy.deepcopy(self.manifest)
++        value["shards"][1]["namespace"] = "run0"
++        variants.append(value)
++        value = copy.deepcopy(self.manifest)
++        value["shards"][1]["family_map"]["native-family"]["canonical_family"] = "family0"
++        variants.append(value)
++        value = copy.deepcopy(self.manifest)
++        value["shards"][0]["rows"][0]["primary_eligible"] = 1
++        variants.append(value)
++        value = copy.deepcopy(self.manifest)
++        value["shards"][0]["rows"][0]["index"] = 1
++        variants.append(value)
++        for value in variants:
++            with self.subTest(value=value), self.assertRaises(ValueError):
++                self.run_manifest(value)
++
++    def test_child_hash_and_distance_corruption_rejected(self):
++        child = Path(self.shards[0]["path"])
++        with (child / "distance.f32").open("ab") as stream:
++            stream.write(b"bad")
++        with self.assertRaises(ValueError):
++            self.run_manifest(self.manifest)
++
++    def test_explicit_schedule_and_native_only_defaults(self):
++        defaults = resolve_config()
++        self.assertEqual(defaults["artifacts"]["mode"], "native_onnx")
++        self.assertIsNone(defaults["evaluation"]["checkpoints"])
++        good = resolve_config(
++            overrides=(
++                "training.steps=7813",
++                "evaluation.checkpoints=[0,1,5,20,50,100,200,1000,4000,7813]",
++                'artifacts.mode="native"',
++                "artifacts.save_scheduled=true",
++            )
++        )
++        self.assertEqual(len(good["evaluation"]["checkpoints"]), 10)
++        self.assertTrue(good["artifacts"]["save_scheduled"])
++        for wrong in ("[0,1,1,200]", "[1,200]", "[0,5]", "[0,true,200]"):
++            with self.assertRaises(ValueError):
++                resolve_config(overrides=("evaluation.checkpoints=" + wrong,))
++
++
++if __name__ == "__main__":
++    unittest.main()

@@ -1,0 +1,120 @@
+[
+  {
+    "task": "native-outcome-z-fit-298-v1",
+    "MAX3_entry": 1,
+    "actualstart": "2026-10-05T21:48:02.797336+00:00",
+    "identity": {
+      "pid": 1963482,
+      "start_ticks": "48994484",
+      "ppid": 1963368,
+      "pgrp": 1963482,
+      "cpu_ticks": 0,
+      "state": "D",
+      "rss": 9850880,
+      "cpus": [
+        1
+      ],
+      "argv": [
+        "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+        "-B",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/run_fit.py",
+        "--registration",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/fit-registration-v1.json"
+      ]
+    },
+    "argv": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/run_fit.py",
+      "--registration",
+      "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/fit-registration-v1.json"
+    ],
+    "source_SHA": "9a9840d582bec4082fe1885f7be08504e44a2dc45759eb2dac2e2ae8101ae093",
+    "NN": null,
+    "hard_s": 120,
+    "reserved_NN": 1195424,
+    "reserved_processed": 1234496,
+    "source_and_science_cost_classification": "science separate; oldcaps unchanged",
+    "command_wall_s": 11.39609889802523,
+    "actual_NN": 1195424,
+    "actual_processed": 1234496
+  },
+  {
+    "task": "native-z-saved-parity-298-v1",
+    "MAX3_entry": 2,
+    "actualstart": "2026-10-05T21:52:33.520755+00:00",
+    "identity": {
+      "pid": 1968869,
+      "start_ticks": "49021569",
+      "ppid": 1968795,
+      "pgrp": 1968869,
+      "cpu_ticks": 0,
+      "state": "R",
+      "rss": 9719808,
+      "cpus": [
+        1
+      ],
+      "argv": [
+        "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+        "-B",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/parity_saved.py",
+        "--registration",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/saved-parity-registration-v1.json"
+      ]
+    },
+    "argv": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/parity_saved.py",
+      "--registration",
+      "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/saved-parity-registration-v1.json"
+    ],
+    "source_SHA": "de820755678d4f6f9760a968ff3a49e8da052a4e156e51e7bbff9ba266117706",
+    "NN": null,
+    "hard_s": 30,
+    "reserved_NN": 1000,
+    "reserved_processed": 3000,
+    "source_and_science_cost_classification": "science separate; oldcaps unchanged",
+    "command_wall_s": 1.2891554579837248,
+    "actual_NN": 312,
+    "actual_processed": 132
+  },
+  {
+    "task": "native-z-saved-freeze-298-v1",
+    "MAX3_entry": 3,
+    "actualstart": "2026-10-05T21:57:43.152781+00:00",
+    "identity": {
+      "pid": 1973014,
+      "start_ticks": "49052548",
+      "ppid": 1972942,
+      "pgrp": 1973014,
+      "cpu_ticks": 0,
+      "state": "R",
+      "rss": 9023488,
+      "cpus": [
+        1
+      ],
+      "argv": [
+        "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+        "-B",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/freeze_saved.py",
+        "--registration",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/final-freeze-registration-v2.json"
+      ]
+    },
+    "argv": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/freeze_saved.py",
+      "--registration",
+      "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/final-freeze-registration-v2.json"
+    ],
+    "source_SHA": "b2759673aa539e3fba2e6d2f741f721e23ff38cd1d705f5e48c0cc23868e23e1",
+    "NN": null,
+    "hard_s": 30,
+    "reserved_NN": 0,
+    "reserved_processed": 50000,
+    "source_and_science_cost_classification": "science separate; oldcaps unchanged",
+    "command_wall_s": 1.3585116430185735
+  }
+]

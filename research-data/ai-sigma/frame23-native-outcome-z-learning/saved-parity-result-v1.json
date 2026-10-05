@@ -1,0 +1,22 @@
+{
+  "task": "native-z-saved-parity-298-v1",
+  "schema": "native-z-saved-parity-result-v1",
+  "status": "FINITE_PARITY_PASS",
+  "total_NN": 312,
+  "processed": 132,
+  "maintained_native_NN": 180,
+  "Torch_NN": 24,
+  "comparison_SIMD_NN": 108,
+  "maxabs": {
+    "Torch_scalar": 8.940696716308594e-08,
+    "ScalarSIMD": 8.940696716308594e-08,
+    "full_delta": 1.1920928955078125e-07
+  },
+  "P2_STM_f32bits": "PASS",
+  "terminal_draw_priority": "PASS",
+  "full_delta_parent_return": "PASS",
+  "witness_rows": 12,
+  "native_model_engines": 2,
+  "SIMD_scope": "existing stopped comparison-only binary; maintained CLI SIMD field unavailable",
+  "no_new_fit_game_future_labels": true
+}

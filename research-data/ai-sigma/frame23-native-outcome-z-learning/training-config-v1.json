@@ -1,0 +1,52 @@
+{
+  "model": {
+    "architecture": "distance_residual",
+    "feature_version": "QF1",
+    "distance_a": 0.0,
+    "distance_b": 8.0,
+    "transformer_width": 32,
+    "hidden_width": 32,
+    "dropout": 0.0
+  },
+  "optimizer": {
+    "name": "adam",
+    "lr": 0.0001,
+    "weight_decay": 0.0
+  },
+  "training": {
+    "steps": 7813,
+    "batch_size": 128,
+    "seed": 19080311,
+    "target": "z",
+    "sampling": "game",
+    "scheduler": "none",
+    "device": "cpu",
+    "threads": 1
+  },
+  "evaluation": {
+    "checkpoints": [
+      0,
+      1,
+      5,
+      20,
+      50,
+      100,
+      200,
+      1000,
+      4000,
+      7813
+    ],
+    "batch_size": 1024,
+    "monitor": "game",
+    "early_stopping_patience": 0,
+    "min_delta": 0.0
+  },
+  "artifacts": {
+    "mode": "native",
+    "save_scheduled": true
+  },
+  "limits": {
+    "seconds": 110.0,
+    "samples": 1195424
+  }
+}

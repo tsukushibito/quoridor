@@ -1,0 +1,2190 @@
+{
+  "task": "native-z-sharded-actual-schema-298-v1",
+  "UTC": "2026-10-05T21:37:17.938284+00:00",
+  "schema": "sharded-input-qualification-v1",
+  "loader_SHA": "f1542ab9b90a72c1868cf9534d74b56df40345c878b97e1e96beeef82ed94d20",
+  "rows": 19536,
+  "train": 14803,
+  "rawselection": 4733,
+  "trainfamilies": 432,
+  "inputshape": [
+    19536,
+    2,
+    312
+  ],
+  "distance_dtype": "float32",
+  "target_dtype": "float32",
+  "teacher_types": [
+    "mcts"
+  ],
+  "all_tensor_metadata_qualified": true,
+  "all_target_f32_metadata_equal": true,
+  "family_constant": 0.021603728106769263,
+  "train_family_summary": [
+    {
+      "canonical_family": "frame23-285-v2-family-000000",
+      "eligible_rows": 52,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000001",
+      "eligible_rows": 59,
+      "z_mean": 0.01694915254237288
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000002",
+      "eligible_rows": 51,
+      "z_mean": 0.0196078431372549
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000004",
+      "eligible_rows": 40,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000005",
+      "eligible_rows": 33,
+      "z_mean": 0.030303030303030304
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000006",
+      "eligible_rows": 31,
+      "z_mean": 0.03225806451612903
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000007",
+      "eligible_rows": 23,
+      "z_mean": 0.043478260869565216
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000008",
+      "eligible_rows": 19,
+      "z_mean": 0.05263157894736842
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000009",
+      "eligible_rows": 34,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000010",
+      "eligible_rows": 17,
+      "z_mean": 0.058823529411764705
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000011",
+      "eligible_rows": 20,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000014",
+      "eligible_rows": 53,
+      "z_mean": 0.018867924528301886
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000015",
+      "eligible_rows": 50,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000016",
+      "eligible_rows": 41,
+      "z_mean": 0.024390243902439025
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000020",
+      "eligible_rows": 17,
+      "z_mean": 0.058823529411764705
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000021",
+      "eligible_rows": 20,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000023",
+      "eligible_rows": 19,
+      "z_mean": 0.05263157894736842
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000024",
+      "eligible_rows": 70,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000025",
+      "eligible_rows": 27,
+      "z_mean": 0.037037037037037035
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000027",
+      "eligible_rows": 54,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000028",
+      "eligible_rows": 41,
+      "z_mean": 0.024390243902439025
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000029",
+      "eligible_rows": 58,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000030",
+      "eligible_rows": 23,
+      "z_mean": 0.043478260869565216
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000031",
+      "eligible_rows": 22,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000034",
+      "eligible_rows": 12,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000036",
+      "eligible_rows": 58,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000037",
+      "eligible_rows": 31,
+      "z_mean": 0.03225806451612903
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000038",
+      "eligible_rows": 45,
+      "z_mean": 0.022222222222222223
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000039",
+      "eligible_rows": 57,
+      "z_mean": 0.017543859649122806
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000041",
+      "eligible_rows": 33,
+      "z_mean": 0.030303030303030304
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000042",
+      "eligible_rows": 20,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000043",
+      "eligible_rows": 18,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000044",
+      "eligible_rows": 18,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000045",
+      "eligible_rows": 21,
+      "z_mean": 0.047619047619047616
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000046",
+      "eligible_rows": 15,
+      "z_mean": 0.06666666666666667
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000047",
+      "eligible_rows": 12,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000048",
+      "eligible_rows": 52,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000049",
+      "eligible_rows": 53,
+      "z_mean": 0.018867924528301886
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000052",
+      "eligible_rows": 35,
+      "z_mean": 0.02857142857142857
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000055",
+      "eligible_rows": 27,
+      "z_mean": 0.037037037037037035
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000056",
+      "eligible_rows": 22,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000057",
+      "eligible_rows": 13,
+      "z_mean": 0.07692307692307693
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000058",
+      "eligible_rows": 16,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000059",
+      "eligible_rows": 15,
+      "z_mean": 0.06666666666666667
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000060",
+      "eligible_rows": 39,
+      "z_mean": 0.02564102564102564
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000061",
+      "eligible_rows": 49,
+      "z_mean": 0.02040816326530612
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000062",
+      "eligible_rows": 65,
+      "z_mean": 0.015384615384615385
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000063",
+      "eligible_rows": 49,
+      "z_mean": 0.02040816326530612
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000065",
+      "eligible_rows": 35,
+      "z_mean": 0.02857142857142857
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000066",
+      "eligible_rows": 21,
+      "z_mean": 0.047619047619047616
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000068",
+      "eligible_rows": 19,
+      "z_mean": 0.05263157894736842
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000069",
+      "eligible_rows": 17,
+      "z_mean": 0.058823529411764705
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000070",
+      "eligible_rows": 18,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000072",
+      "eligible_rows": 36,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000074",
+      "eligible_rows": 54,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000075",
+      "eligible_rows": 57,
+      "z_mean": 0.017543859649122806
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000076",
+      "eligible_rows": 52,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000077",
+      "eligible_rows": 34,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000078",
+      "eligible_rows": 16,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000079",
+      "eligible_rows": 31,
+      "z_mean": 0.03225806451612903
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000082",
+      "eligible_rows": 17,
+      "z_mean": 0.058823529411764705
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000083",
+      "eligible_rows": 15,
+      "z_mean": 0.06666666666666667
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000085",
+      "eligible_rows": 76,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000086",
+      "eligible_rows": 46,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000087",
+      "eligible_rows": 49,
+      "z_mean": 0.02040816326530612
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000088",
+      "eligible_rows": 16,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000089",
+      "eligible_rows": 53,
+      "z_mean": 0.018867924528301886
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000090",
+      "eligible_rows": 22,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000091",
+      "eligible_rows": 25,
+      "z_mean": 0.04
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000092",
+      "eligible_rows": 19,
+      "z_mean": 0.05263157894736842
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000093",
+      "eligible_rows": 13,
+      "z_mean": 0.07692307692307693
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000095",
+      "eligible_rows": 18,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000096",
+      "eligible_rows": 88,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000098",
+      "eligible_rows": 51,
+      "z_mean": 0.0196078431372549
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000099",
+      "eligible_rows": 53,
+      "z_mean": 0.018867924528301886
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000100",
+      "eligible_rows": 48,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000101",
+      "eligible_rows": 63,
+      "z_mean": 0.015873015873015872
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000102",
+      "eligible_rows": 19,
+      "z_mean": 0.05263157894736842
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000103",
+      "eligible_rows": 27,
+      "z_mean": 0.037037037037037035
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000104",
+      "eligible_rows": 23,
+      "z_mean": 0.043478260869565216
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000105",
+      "eligible_rows": 31,
+      "z_mean": 0.03225806451612903
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000107",
+      "eligible_rows": 20,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000108",
+      "eligible_rows": 60,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000109",
+      "eligible_rows": 43,
+      "z_mean": 0.023255813953488372
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000110",
+      "eligible_rows": 40,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000111",
+      "eligible_rows": 53,
+      "z_mean": 0.018867924528301886
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000114",
+      "eligible_rows": 21,
+      "z_mean": 0.047619047619047616
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000115",
+      "eligible_rows": 23,
+      "z_mean": 0.043478260869565216
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000116",
+      "eligible_rows": 24,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000117",
+      "eligible_rows": 18,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000118",
+      "eligible_rows": 16,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000120",
+      "eligible_rows": 64,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000121",
+      "eligible_rows": 35,
+      "z_mean": 0.02857142857142857
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000123",
+      "eligible_rows": 54,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000124",
+      "eligible_rows": 43,
+      "z_mean": 0.023255813953488372
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000125",
+      "eligible_rows": 27,
+      "z_mean": 0.037037037037037035
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000127",
+      "eligible_rows": 18,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000128",
+      "eligible_rows": 15,
+      "z_mean": 0.06666666666666667
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000130",
+      "eligible_rows": 22,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000131",
+      "eligible_rows": 18,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000133",
+      "eligible_rows": 63,
+      "z_mean": 0.015873015873015872
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000134",
+      "eligible_rows": 51,
+      "z_mean": 0.0196078431372549
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000136",
+      "eligible_rows": 41,
+      "z_mean": 0.024390243902439025
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000137",
+      "eligible_rows": 23,
+      "z_mean": 0.043478260869565216
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000138",
+      "eligible_rows": 18,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000141",
+      "eligible_rows": 18,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000142",
+      "eligible_rows": 28,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000143",
+      "eligible_rows": 18,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000144",
+      "eligible_rows": 68,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000146",
+      "eligible_rows": 46,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000147",
+      "eligible_rows": 35,
+      "z_mean": 0.02857142857142857
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000148",
+      "eligible_rows": 45,
+      "z_mean": 0.022222222222222223
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000150",
+      "eligible_rows": 16,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000151",
+      "eligible_rows": 33,
+      "z_mean": 0.030303030303030304
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000154",
+      "eligible_rows": 18,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000155",
+      "eligible_rows": 17,
+      "z_mean": 0.058823529411764705
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000156",
+      "eligible_rows": 39,
+      "z_mean": 0.02564102564102564
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000157",
+      "eligible_rows": 57,
+      "z_mean": 0.017543859649122806
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000158",
+      "eligible_rows": 37,
+      "z_mean": 0.02702702702702703
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000160",
+      "eligible_rows": 32,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000161",
+      "eligible_rows": 35,
+      "z_mean": 0.02857142857142857
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000162",
+      "eligible_rows": 20,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000164",
+      "eligible_rows": 15,
+      "z_mean": 0.06666666666666667
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000165",
+      "eligible_rows": 19,
+      "z_mean": 0.05263157894736842
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000169",
+      "eligible_rows": 70,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000171",
+      "eligible_rows": 67,
+      "z_mean": 0.014925373134328358
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000173",
+      "eligible_rows": 45,
+      "z_mean": 0.022222222222222223
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000174",
+      "eligible_rows": 19,
+      "z_mean": 0.05263157894736842
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000175",
+      "eligible_rows": 21,
+      "z_mean": 0.047619047619047616
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000176",
+      "eligible_rows": 11,
+      "z_mean": 0.09090909090909091
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000177",
+      "eligible_rows": 25,
+      "z_mean": 0.04
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000178",
+      "eligible_rows": 20,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000179",
+      "eligible_rows": 23,
+      "z_mean": 0.043478260869565216
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000180",
+      "eligible_rows": 41,
+      "z_mean": 0.024390243902439025
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000181",
+      "eligible_rows": 63,
+      "z_mean": 0.015873015873015872
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000182",
+      "eligible_rows": 57,
+      "z_mean": 0.017543859649122806
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000183",
+      "eligible_rows": 46,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000184",
+      "eligible_rows": 31,
+      "z_mean": 0.03225806451612903
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000185",
+      "eligible_rows": 24,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000187",
+      "eligible_rows": 27,
+      "z_mean": 0.037037037037037035
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000188",
+      "eligible_rows": 17,
+      "z_mean": 0.058823529411764705
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000189",
+      "eligible_rows": 21,
+      "z_mean": 0.047619047619047616
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000190",
+      "eligible_rows": 20,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000191",
+      "eligible_rows": 20,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000192",
+      "eligible_rows": 56,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000193",
+      "eligible_rows": 66,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000194",
+      "eligible_rows": 28,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000197",
+      "eligible_rows": 21,
+      "z_mean": 0.047619047619047616
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000198",
+      "eligible_rows": 17,
+      "z_mean": 0.058823529411764705
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000199",
+      "eligible_rows": 21,
+      "z_mean": 0.047619047619047616
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000200",
+      "eligible_rows": 22,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000201",
+      "eligible_rows": 19,
+      "z_mean": 0.05263157894736842
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000202",
+      "eligible_rows": 14,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000203",
+      "eligible_rows": 20,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000204",
+      "eligible_rows": 64,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000205",
+      "eligible_rows": 61,
+      "z_mean": 0.01639344262295082
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000206",
+      "eligible_rows": 45,
+      "z_mean": 0.022222222222222223
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000207",
+      "eligible_rows": 45,
+      "z_mean": 0.022222222222222223
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000208",
+      "eligible_rows": 21,
+      "z_mean": 0.047619047619047616
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000210",
+      "eligible_rows": 28,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000214",
+      "eligible_rows": 30,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000217",
+      "eligible_rows": 51,
+      "z_mean": 0.0196078431372549
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000219",
+      "eligible_rows": 27,
+      "z_mean": 0.037037037037037035
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000220",
+      "eligible_rows": 32,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000221",
+      "eligible_rows": 35,
+      "z_mean": 0.02857142857142857
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000222",
+      "eligible_rows": 21,
+      "z_mean": 0.047619047619047616
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000223",
+      "eligible_rows": 23,
+      "z_mean": 0.043478260869565216
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000224",
+      "eligible_rows": 20,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000225",
+      "eligible_rows": 27,
+      "z_mean": 0.037037037037037035
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000227",
+      "eligible_rows": 18,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000228",
+      "eligible_rows": 76,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000230",
+      "eligible_rows": 43,
+      "z_mean": 0.023255813953488372
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000231",
+      "eligible_rows": 73,
+      "z_mean": 0.0136986301369863
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000232",
+      "eligible_rows": 35,
+      "z_mean": 0.02857142857142857
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000233",
+      "eligible_rows": 39,
+      "z_mean": 0.02564102564102564
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000235",
+      "eligible_rows": 16,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000236",
+      "eligible_rows": 28,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000237",
+      "eligible_rows": 18,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000238",
+      "eligible_rows": 20,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000239",
+      "eligible_rows": 13,
+      "z_mean": 0.07692307692307693
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000241",
+      "eligible_rows": 37,
+      "z_mean": 0.02702702702702703
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000242",
+      "eligible_rows": 48,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000244",
+      "eligible_rows": 44,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000245",
+      "eligible_rows": 19,
+      "z_mean": 0.05263157894736842
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000246",
+      "eligible_rows": 23,
+      "z_mean": 0.043478260869565216
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000247",
+      "eligible_rows": 19,
+      "z_mean": 0.05263157894736842
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000248",
+      "eligible_rows": 17,
+      "z_mean": 0.058823529411764705
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000249",
+      "eligible_rows": 21,
+      "z_mean": 0.047619047619047616
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000250",
+      "eligible_rows": 18,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000251",
+      "eligible_rows": 12,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000252",
+      "eligible_rows": 42,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000253",
+      "eligible_rows": 73,
+      "z_mean": 0.0136986301369863
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000254",
+      "eligible_rows": 49,
+      "z_mean": 0.02040816326530612
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000255",
+      "eligible_rows": 55,
+      "z_mean": 0.01818181818181818
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000257",
+      "eligible_rows": 27,
+      "z_mean": 0.037037037037037035
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000259",
+      "eligible_rows": 20,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000264",
+      "eligible_rows": 60,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000266",
+      "eligible_rows": 43,
+      "z_mean": 0.023255813953488372
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000267",
+      "eligible_rows": 53,
+      "z_mean": 0.018867924528301886
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000268",
+      "eligible_rows": 37,
+      "z_mean": 0.02702702702702703
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000269",
+      "eligible_rows": 43,
+      "z_mean": 0.023255813953488372
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000270",
+      "eligible_rows": 23,
+      "z_mean": 0.043478260869565216
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000272",
+      "eligible_rows": 24,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000273",
+      "eligible_rows": 24,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000274",
+      "eligible_rows": 19,
+      "z_mean": 0.05263157894736842
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000275",
+      "eligible_rows": 22,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000276",
+      "eligible_rows": 56,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000277",
+      "eligible_rows": 29,
+      "z_mean": 0.034482758620689655
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000279",
+      "eligible_rows": 48,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000280",
+      "eligible_rows": 26,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000282",
+      "eligible_rows": 25,
+      "z_mean": 0.04
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000283",
+      "eligible_rows": 29,
+      "z_mean": 0.034482758620689655
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000284",
+      "eligible_rows": 31,
+      "z_mean": 0.03225806451612903
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000285",
+      "eligible_rows": 23,
+      "z_mean": 0.043478260869565216
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000286",
+      "eligible_rows": 20,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000287",
+      "eligible_rows": 18,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000288",
+      "eligible_rows": 64,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000289",
+      "eligible_rows": 39,
+      "z_mean": 0.02564102564102564
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000291",
+      "eligible_rows": 40,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000292",
+      "eligible_rows": 30,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000293",
+      "eligible_rows": 39,
+      "z_mean": 0.02564102564102564
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000294",
+      "eligible_rows": 64,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000295",
+      "eligible_rows": 35,
+      "z_mean": 0.02857142857142857
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000297",
+      "eligible_rows": 23,
+      "z_mean": 0.043478260869565216
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000298",
+      "eligible_rows": 19,
+      "z_mean": 0.05263157894736842
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000301",
+      "eligible_rows": 66,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000302",
+      "eligible_rows": 33,
+      "z_mean": 0.030303030303030304
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000303",
+      "eligible_rows": 47,
+      "z_mean": 0.02127659574468085
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000305",
+      "eligible_rows": 17,
+      "z_mean": 0.058823529411764705
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000308",
+      "eligible_rows": 24,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000310",
+      "eligible_rows": 19,
+      "z_mean": 0.05263157894736842
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000311",
+      "eligible_rows": 25,
+      "z_mean": 0.04
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000312",
+      "eligible_rows": 75,
+      "z_mean": 0.013333333333333334
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000313",
+      "eligible_rows": 36,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000314",
+      "eligible_rows": 66,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000315",
+      "eligible_rows": 46,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000316",
+      "eligible_rows": 43,
+      "z_mean": 0.023255813953488372
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000318",
+      "eligible_rows": 14,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000319",
+      "eligible_rows": 41,
+      "z_mean": 0.024390243902439025
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000320",
+      "eligible_rows": 24,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000321",
+      "eligible_rows": 15,
+      "z_mean": 0.06666666666666667
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000323",
+      "eligible_rows": 17,
+      "z_mean": 0.058823529411764705
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000324",
+      "eligible_rows": 47,
+      "z_mean": 0.02127659574468085
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000326",
+      "eligible_rows": 48,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000328",
+      "eligible_rows": 53,
+      "z_mean": 0.018867924528301886
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000329",
+      "eligible_rows": 45,
+      "z_mean": 0.022222222222222223
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000330",
+      "eligible_rows": 36,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000331",
+      "eligible_rows": 19,
+      "z_mean": 0.05263157894736842
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000332",
+      "eligible_rows": 23,
+      "z_mean": 0.043478260869565216
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000333",
+      "eligible_rows": 23,
+      "z_mean": 0.043478260869565216
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000334",
+      "eligible_rows": 10,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000335",
+      "eligible_rows": 20,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000336",
+      "eligible_rows": 44,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000337",
+      "eligible_rows": 39,
+      "z_mean": 0.02564102564102564
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000338",
+      "eligible_rows": 56,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000339",
+      "eligible_rows": 47,
+      "z_mean": 0.02127659574468085
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000340",
+      "eligible_rows": 33,
+      "z_mean": 0.030303030303030304
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000341",
+      "eligible_rows": 27,
+      "z_mean": 0.037037037037037035
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000342",
+      "eligible_rows": 22,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000343",
+      "eligible_rows": 23,
+      "z_mean": 0.043478260869565216
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000344",
+      "eligible_rows": 14,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000345",
+      "eligible_rows": 27,
+      "z_mean": 0.037037037037037035
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000346",
+      "eligible_rows": 13,
+      "z_mean": 0.07692307692307693
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000347",
+      "eligible_rows": 17,
+      "z_mean": 0.058823529411764705
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000348",
+      "eligible_rows": 70,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000350",
+      "eligible_rows": 51,
+      "z_mean": 0.0196078431372549
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000351",
+      "eligible_rows": 37,
+      "z_mean": 0.02702702702702703
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000352",
+      "eligible_rows": 26,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000353",
+      "eligible_rows": 43,
+      "z_mean": 0.023255813953488372
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000354",
+      "eligible_rows": 19,
+      "z_mean": 0.05263157894736842
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000355",
+      "eligible_rows": 21,
+      "z_mean": 0.047619047619047616
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000357",
+      "eligible_rows": 19,
+      "z_mean": 0.05263157894736842
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000358",
+      "eligible_rows": 16,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000360",
+      "eligible_rows": 59,
+      "z_mean": 0.01694915254237288
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000361",
+      "eligible_rows": 70,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000363",
+      "eligible_rows": 39,
+      "z_mean": 0.02564102564102564
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000365",
+      "eligible_rows": 39,
+      "z_mean": 0.02564102564102564
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000366",
+      "eligible_rows": 52,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000367",
+      "eligible_rows": 21,
+      "z_mean": 0.047619047619047616
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000368",
+      "eligible_rows": 18,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000370",
+      "eligible_rows": 22,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000371",
+      "eligible_rows": 19,
+      "z_mean": 0.05263157894736842
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000373",
+      "eligible_rows": 59,
+      "z_mean": 0.01694915254237288
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000374",
+      "eligible_rows": 71,
+      "z_mean": 0.014084507042253521
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000376",
+      "eligible_rows": 25,
+      "z_mean": 0.04
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000380",
+      "eligible_rows": 38,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000381",
+      "eligible_rows": 19,
+      "z_mean": 0.05263157894736842
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000383",
+      "eligible_rows": 23,
+      "z_mean": 0.043478260869565216
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000384",
+      "eligible_rows": 63,
+      "z_mean": 0.015873015873015872
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000386",
+      "eligible_rows": 45,
+      "z_mean": 0.022222222222222223
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000389",
+      "eligible_rows": 25,
+      "z_mean": 0.04
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000391",
+      "eligible_rows": 18,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000392",
+      "eligible_rows": 23,
+      "z_mean": 0.043478260869565216
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000393",
+      "eligible_rows": 19,
+      "z_mean": 0.05263157894736842
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000394",
+      "eligible_rows": 13,
+      "z_mean": 0.07692307692307693
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000395",
+      "eligible_rows": 21,
+      "z_mean": 0.047619047619047616
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000396",
+      "eligible_rows": 40,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000397",
+      "eligible_rows": 63,
+      "z_mean": 0.015873015873015872
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000399",
+      "eligible_rows": 37,
+      "z_mean": 0.02702702702702703
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000400",
+      "eligible_rows": 48,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000401",
+      "eligible_rows": 31,
+      "z_mean": 0.03225806451612903
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000402",
+      "eligible_rows": 18,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000404",
+      "eligible_rows": 19,
+      "z_mean": 0.05263157894736842
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000407",
+      "eligible_rows": 13,
+      "z_mean": 0.07692307692307693
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000409",
+      "eligible_rows": 58,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000410",
+      "eligible_rows": 48,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000411",
+      "eligible_rows": 45,
+      "z_mean": 0.022222222222222223
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000412",
+      "eligible_rows": 36,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000413",
+      "eligible_rows": 23,
+      "z_mean": 0.043478260869565216
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000414",
+      "eligible_rows": 22,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000415",
+      "eligible_rows": 21,
+      "z_mean": 0.047619047619047616
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000417",
+      "eligible_rows": 23,
+      "z_mean": 0.043478260869565216
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000418",
+      "eligible_rows": 9,
+      "z_mean": 0.1111111111111111
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000420",
+      "eligible_rows": 65,
+      "z_mean": 0.015384615384615385
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000421",
+      "eligible_rows": 53,
+      "z_mean": 0.018867924528301886
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000422",
+      "eligible_rows": 65,
+      "z_mean": 0.015384615384615385
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000423",
+      "eligible_rows": 65,
+      "z_mean": 0.015384615384615385
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000424",
+      "eligible_rows": 47,
+      "z_mean": 0.02127659574468085
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000426",
+      "eligible_rows": 36,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000427",
+      "eligible_rows": 21,
+      "z_mean": 0.047619047619047616
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000428",
+      "eligible_rows": 24,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000429",
+      "eligible_rows": 22,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000430",
+      "eligible_rows": 16,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000431",
+      "eligible_rows": 15,
+      "z_mean": 0.06666666666666667
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000432",
+      "eligible_rows": 46,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000433",
+      "eligible_rows": 59,
+      "z_mean": 0.01694915254237288
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000435",
+      "eligible_rows": 37,
+      "z_mean": 0.02702702702702703
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000436",
+      "eligible_rows": 50,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000438",
+      "eligible_rows": 28,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000439",
+      "eligible_rows": 20,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000442",
+      "eligible_rows": 20,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000445",
+      "eligible_rows": 46,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000446",
+      "eligible_rows": 47,
+      "z_mean": 0.02127659574468085
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000447",
+      "eligible_rows": 55,
+      "z_mean": 0.01818181818181818
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000449",
+      "eligible_rows": 84,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000451",
+      "eligible_rows": 15,
+      "z_mean": 0.06666666666666667
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000452",
+      "eligible_rows": 19,
+      "z_mean": 0.05263157894736842
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000453",
+      "eligible_rows": 19,
+      "z_mean": 0.05263157894736842
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000454",
+      "eligible_rows": 16,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000455",
+      "eligible_rows": 16,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000456",
+      "eligible_rows": 68,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000458",
+      "eligible_rows": 46,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000459",
+      "eligible_rows": 58,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000460",
+      "eligible_rows": 42,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000461",
+      "eligible_rows": 23,
+      "z_mean": 0.043478260869565216
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000462",
+      "eligible_rows": 24,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000463",
+      "eligible_rows": 23,
+      "z_mean": 0.043478260869565216
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000464",
+      "eligible_rows": 14,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000465",
+      "eligible_rows": 27,
+      "z_mean": 0.037037037037037035
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000467",
+      "eligible_rows": 23,
+      "z_mean": 0.043478260869565216
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000468",
+      "eligible_rows": 51,
+      "z_mean": 0.0196078431372549
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000469",
+      "eligible_rows": 73,
+      "z_mean": 0.0136986301369863
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000470",
+      "eligible_rows": 60,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000472",
+      "eligible_rows": 38,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000473",
+      "eligible_rows": 43,
+      "z_mean": 0.023255813953488372
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000474",
+      "eligible_rows": 31,
+      "z_mean": 0.03225806451612903
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000476",
+      "eligible_rows": 18,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000477",
+      "eligible_rows": 30,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000478",
+      "eligible_rows": 23,
+      "z_mean": 0.043478260869565216
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000479",
+      "eligible_rows": 23,
+      "z_mean": 0.043478260869565216
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000480",
+      "eligible_rows": 63,
+      "z_mean": 0.015873015873015872
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000481",
+      "eligible_rows": 53,
+      "z_mean": 0.018867924528301886
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000482",
+      "eligible_rows": 29,
+      "z_mean": 0.034482758620689655
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000483",
+      "eligible_rows": 60,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000484",
+      "eligible_rows": 29,
+      "z_mean": 0.034482758620689655
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000485",
+      "eligible_rows": 42,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000487",
+      "eligible_rows": 15,
+      "z_mean": 0.06666666666666667
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000488",
+      "eligible_rows": 18,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000489",
+      "eligible_rows": 15,
+      "z_mean": 0.06666666666666667
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000490",
+      "eligible_rows": 24,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000491",
+      "eligible_rows": 39,
+      "z_mean": 0.02564102564102564
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000492",
+      "eligible_rows": 83,
+      "z_mean": 0.012048192771084338
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000494",
+      "eligible_rows": 53,
+      "z_mean": 0.018867924528301886
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000495",
+      "eligible_rows": 47,
+      "z_mean": 0.02127659574468085
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000496",
+      "eligible_rows": 59,
+      "z_mean": 0.01694915254237288
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000498",
+      "eligible_rows": 25,
+      "z_mean": 0.04
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000502",
+      "eligible_rows": 19,
+      "z_mean": 0.05263157894736842
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000503",
+      "eligible_rows": 18,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000505",
+      "eligible_rows": 54,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000507",
+      "eligible_rows": 47,
+      "z_mean": 0.02127659574468085
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000509",
+      "eligible_rows": 21,
+      "z_mean": 0.047619047619047616
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000510",
+      "eligible_rows": 18,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000511",
+      "eligible_rows": 19,
+      "z_mean": 0.05263157894736842
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000512",
+      "eligible_rows": 29,
+      "z_mean": 0.034482758620689655
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000513",
+      "eligible_rows": 22,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000514",
+      "eligible_rows": 16,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000516",
+      "eligible_rows": 43,
+      "z_mean": 0.023255813953488372
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000517",
+      "eligible_rows": 34,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000518",
+      "eligible_rows": 58,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000520",
+      "eligible_rows": 48,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000521",
+      "eligible_rows": 31,
+      "z_mean": 0.03225806451612903
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000522",
+      "eligible_rows": 32,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000523",
+      "eligible_rows": 33,
+      "z_mean": 0.030303030303030304
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000524",
+      "eligible_rows": 20,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000525",
+      "eligible_rows": 19,
+      "z_mean": 0.05263157894736842
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000527",
+      "eligible_rows": 30,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000528",
+      "eligible_rows": 41,
+      "z_mean": 0.024390243902439025
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000529",
+      "eligible_rows": 55,
+      "z_mean": 0.01818181818181818
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000530",
+      "eligible_rows": 63,
+      "z_mean": 0.015873015873015872
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000532",
+      "eligible_rows": 50,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000533",
+      "eligible_rows": 45,
+      "z_mean": 0.022222222222222223
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000535",
+      "eligible_rows": 19,
+      "z_mean": 0.05263157894736842
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000536",
+      "eligible_rows": 20,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000537",
+      "eligible_rows": 16,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000538",
+      "eligible_rows": 20,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000539",
+      "eligible_rows": 22,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000541",
+      "eligible_rows": 61,
+      "z_mean": 0.01639344262295082
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000543",
+      "eligible_rows": 31,
+      "z_mean": 0.03225806451612903
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000545",
+      "eligible_rows": 46,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000546",
+      "eligible_rows": 19,
+      "z_mean": 0.05263157894736842
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000547",
+      "eligible_rows": 19,
+      "z_mean": 0.05263157894736842
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000549",
+      "eligible_rows": 17,
+      "z_mean": 0.058823529411764705
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000552",
+      "eligible_rows": 67,
+      "z_mean": 0.014925373134328358
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000553",
+      "eligible_rows": 61,
+      "z_mean": 0.01639344262295082
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000554",
+      "eligible_rows": 57,
+      "z_mean": 0.017543859649122806
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000555",
+      "eligible_rows": 53,
+      "z_mean": 0.018867924528301886
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000556",
+      "eligible_rows": 31,
+      "z_mean": 0.03225806451612903
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000557",
+      "eligible_rows": 20,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000558",
+      "eligible_rows": 19,
+      "z_mean": 0.05263157894736842
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000559",
+      "eligible_rows": 17,
+      "z_mean": 0.058823529411764705
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000560",
+      "eligible_rows": 16,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000562",
+      "eligible_rows": 18,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000563",
+      "eligible_rows": 18,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000564",
+      "eligible_rows": 68,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000566",
+      "eligible_rows": 46,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000567",
+      "eligible_rows": 35,
+      "z_mean": 0.02857142857142857
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000568",
+      "eligible_rows": 57,
+      "z_mean": 0.017543859649122806
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000570",
+      "eligible_rows": 24,
+      "z_mean": 0.0
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000572",
+      "eligible_rows": 23,
+      "z_mean": 0.043478260869565216
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000573",
+      "eligible_rows": 27,
+      "z_mean": 0.037037037037037035
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000574",
+      "eligible_rows": 11,
+      "z_mean": 0.09090909090909091
+    },
+    {
+      "canonical_family": "frame23-285-v2-family-000575",
+      "eligible_rows": 23,
+      "z_mean": 0.043478260869565216
+    }
+  ],
+  "NN": 0,
+  "Torch_imported": false,
+  "source_command_s": 0.9805421770433895,
+  "processed": 19536,
+  "no_disk_dense_copy": true
+}

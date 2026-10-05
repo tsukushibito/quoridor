@@ -1,0 +1,63 @@
+{
+  "schema": "native-z-maintained-source-handoff-298-v1",
+  "owner": "hypothesis",
+  "WT": "/workspaces/quoridor/.worktree/frame21-features",
+  "STOP": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/source-reader-selector-stop-final-v1.json",
+    "SHA": "575f3df495a00b174c0f1a31aca47967d03ff5aa9026206d7aa0c7061edafccc",
+    "B": 5552
+  },
+  "owned_changes": [
+    {
+      "path": "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/cache.py",
+      "SHA": "9f68c3e58a9b6d65ee058836785568c8fef1cdfff32c57a0279e5aabad59bd1e",
+      "B": 7029
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/common.py",
+      "SHA": "2f0fec646598be8662200f32a97aadc018271ed7ccf85f1166426f01d4fbd779",
+      "B": 8852
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/train.py",
+      "SHA": "40062ffc567d47591e9c91efd63afbbd96f5f0dae8171c69e6855a40e8582604",
+      "B": 22163
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/test_sharded_cache.py",
+      "SHA": "f85db36b0ece6001524bf855f940546e262ea26f5385ee0e850b62ccae1909ee",
+      "B": 6230
+    }
+  ],
+  "readonly_dependency": {
+    "path": "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/residual_model.py",
+    "SHA": "2104e17f9d091b263acc99b60744a2e834e6b32c1db1a2db62a22a4c94b55f9b",
+    "B": 2443
+  },
+  "patch": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/maintained-source-diff-v1.patch",
+    "SHA": "afa09ed28d13c8bf6896adcdaf57c378ada6204f62aba6a123d8851ed5126451",
+    "B": 22326
+  },
+  "native_math_changes": false,
+  "main_writer": "coordinator",
+  "source_archive": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/scientific-source-pack-v1.tar.gz",
+    "SHA": "f1ba2c388322743eff31e69a2b2628fc991531869c7f45bbcc557f9cc71b89d2",
+    "B": 36366
+  },
+  "tests": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/NN0-sharded-tests-final-v1.log",
+    "SHA": "03e2ce7efb78ca7222db4c9a68781f9953dd3bd674b491cc52a8a4986d74e6f4",
+    "B": 102
+  },
+  "interfaces": [
+    "cache.load strict hash-bound sharded reference manifest; original childcache immutable/primary row overlay",
+    "config.evaluation.checkpoints and artifacts native/save_scheduled; defaults preserved",
+    "train sameforward scheduled scalars/weights and actual sampling counts; rawselection mapped toeligible metric",
+    "explicit old scale validates directly; no new moments; fixedD params bypass unused OLS"
+  ],
+  "not_main_integration_or_independent_review": true,
+  "auxiliary_freeze_wrong_API_NOT_COMPLETED": true,
+  "unused_old_route_scaffold_not_requested_for_main": true
+}

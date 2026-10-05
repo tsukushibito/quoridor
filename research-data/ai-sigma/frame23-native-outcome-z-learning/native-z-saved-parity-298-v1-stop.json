@@ -1,0 +1,66 @@
+{
+  "task": "native-z-saved-parity-298-v1",
+  "UTC": "2026-10-05T21:52:34.789957+00:00",
+  "exit": 0,
+  "reason": null,
+  "command_wall_s": 1.2856332539813593,
+  "manager_sampled_family_peak_RSS_B": 590774272,
+  "waited": true,
+  "recorded_children": [
+    {
+      "pid": 1968869,
+      "start_ticks": "49021569",
+      "ppid": 1968795,
+      "pgrp": 1968869,
+      "cpu_ticks": 94,
+      "state": "R",
+      "rss": 570175488,
+      "cpus": [
+        1
+      ],
+      "argv": [
+        "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+        "-B",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/parity_saved.py",
+        "--registration",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/saved-parity-registration-v1.json"
+      ]
+    },
+    {
+      "pid": 1968898,
+      "start_ticks": "49021661",
+      "ppid": 1968869,
+      "pgrp": 1968869,
+      "cpu_ticks": 0,
+      "state": "D",
+      "rss": 1576960,
+      "cpus": [
+        1
+      ],
+      "argv": [
+        "/workspaces/quoridor/.artifacts/rust-migration/target/release/nnue-diagnose",
+        "--config",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-native-outcome-z-learning/native-parity-config-v1.json"
+      ]
+    },
+    {
+      "pid": 1968906,
+      "start_ticks": "49021666",
+      "ppid": 1968869,
+      "pgrp": 1968869,
+      "cpu_ticks": 0,
+      "state": "D",
+      "rss": 0,
+      "cpus": [
+        1
+      ],
+      "argv": []
+    }
+  ],
+  "currentexact": [],
+  "current_process_group": [],
+  "MAX3_entry_consumed": 2,
+  "NN": 312,
+  "processed": 132,
+  "purpose_schema_PASS": true
+}
