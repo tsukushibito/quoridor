@@ -1,0 +1,7 @@
+goal quoridor-4lc / experiment278 claim13:28:41、NN0保存解析停止13:33:47。392row/12game、CPU4single/peak19.31MB、NN/model/fit/game0。原rowgame metricsと全排他的bin signed contributionを1e-12有限照合PASS。入口r1は全hostRSSを研究RAMへ比較した管理refusal0解析、原source/processを保持。r2はresearchruntime/scienceRSS・hostavailableを分離してfreshloaded24/PIDtick/ownedNone/foreign[]でexit0/waitexact。
+
+最大1推薦:同D保持zero4/H32/B5981train・同game sampling/initial/scale/seed/batch/256000seenで、出力補正r=N−Dのgameequal二乗をlambda1でpenaltyする1学習対照。fixed200step primary、元curve/BESTはsecondary、新条件fitは本278ではNOT_RUN。B BEST新selection gap+.006539=.006185displacement−(−.000354alignment)、r平均+.072611/RMS.078645/中心corr−.1851、6gain6loss/固定game区間[-.006643,.019668]。不利distance群signed+.026441と有利群−.018125が相殺。B LAST gap+.529252/負alignment−.187656、幅増だけは優先しない。game samplingは既実装なので追加案にしない。
+
+274のK64→K256教師安定性案も有力。新selection rootmean/z符号gameweight96.69%はteachertruthやleaf一致証明でなく、旧序盤誤差大は保持。ただ今回BEST/LAST悪化の主signed量はmiddleで、低費用outputpenaltyは同teacher/feature/inference mathを固定して転移を直接制約できるので先行推薦。penaltyでtrainfitを弱めた結果だけを情報十分性へ変換しない。改善がD/両選定集合に及ばずr縮小だけなら教師安定性か位置付き経路場へ順位変更、λ自動sweep0。位置付き全経路場/壁効果は265一次source-mapに根拠ありDAG4負例で棄却0、277actualchild timing不成立なのでnative増費UNKNOWN。
+
+予測費はfuture準備15–25min/fixture数秒/fit約5–10s＋評価parity（274 B実4.93s参考）/保持2MiB目安、数値native経路は同shapeで追加特徴演算0、違う値による枝刈り仕事量差は未測。今は新fit/生成/arenaを開始しない。解析actor273自己teacherと274別ownerモデルの評価を区別、独立採否は統括。詳細result.json/source/preregister/process-r1,r2公開、必要report/hash/closebackupへ。highestgoal未達/旧費caps保持。

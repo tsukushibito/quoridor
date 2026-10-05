@@ -1,0 +1,131 @@
+{
+  "at": "2026-10-05T13:35:37.318828+00:00",
+  "task": "frame22-advance-tt-277-v1",
+  "status": "ADVANCE_FINITE_PASS_TT_TYPED_MISSING",
+  "source_stop_path": "/workspaces/quoridor/research-data/ai-sigma/frame22-advance-tt-diagnostic/science-source-stop-v2.json",
+  "source_stop_sha": "d0fcf468724160affeaaff40866b01f6a7f179c8a9e6953ee90f428a9616ee61",
+  "result_path": "/workspaces/quoridor/research-data/ai-sigma/frame22-advance-tt-diagnostic/finite-analysis-v2.json",
+  "result_sha": "1c681c7cc3c92527f634e4168f0d3f3885ee99bc86d299fbdd6bac9cebba95b1",
+  "report_path": "/workspaces/quoridor/docs/reports/ai-sigma-critic-frame22-advance-tt-diagnostic.md",
+  "report_sha": "65ce1a82b4a789349b00534c27a91eedf3cc1df99346f216ff184e566af18955",
+  "source_packs": [
+    {
+      "archive": "failed-science-source.tar.xz",
+      "bytes": 18592,
+      "sha256": "322598ed35ec70666d93504f10327293e45b41bf57ae937cf98e584d53c068e6",
+      "members": [
+        {
+          "member": "crates/quoridor-nnue/src/lib.rs",
+          "bytes": 18849,
+          "sha256": "e29f047f04a9da7a47a531f103fb74d01418a8dc587a97d4585700d588990346",
+          "current_byte_equal": "ORIGINAL_PREREGISTER_BOUND"
+        },
+        {
+          "member": "crates/quoridor-nnue/src/features.rs",
+          "bytes": 4175,
+          "sha256": "8e93d77c9c7d5c039a8268cd2760378c9a189b54cfe8504c94672c341a00dad7",
+          "current_byte_equal": "ORIGINAL_PREREGISTER_BOUND"
+        },
+        {
+          "member": "crates/quoridor-nnue/src/diagnostic277.rs",
+          "bytes": 3966,
+          "sha256": "59437d52b3a41c3d774bcf75ce5bcda7a932edc4723e597a27a34994c9003c32",
+          "current_byte_equal": "ORIGINAL_PREREGISTER_BOUND"
+        },
+        {
+          "member": "crates/quoridor-ai/src/alphabeta.rs",
+          "bytes": 26042,
+          "sha256": "cb7d8696fc2847f08824bb4f92242dc63bec2dbfc66d57703913a286540f084a",
+          "current_byte_equal": "ORIGINAL_PREREGISTER_BOUND"
+        },
+        {
+          "member": "crates/quoridor-ai/src/diagnostic277.rs",
+          "bytes": 6180,
+          "sha256": "9dc70a2192adcea968b252d3d4421fc8da146664502a52f1600da5cc28a4f359",
+          "current_byte_equal": "ORIGINAL_PREREGISTER_BOUND"
+        },
+        {
+          "member": "diagnostic/preregister.json",
+          "bytes": 2381,
+          "sha256": "6c40b1a32927f82b08d178b79b79c4b4f7b90f579f7bb14296d890db9b81450e",
+          "current_byte_equal": "ORIGINAL_PREREGISTER_BOUND"
+        },
+        {
+          "member": "diagnostic/run_guard.py",
+          "bytes": 9550,
+          "sha256": "32248eb2eb3b72c03460adbe1beb935465e2b163cac03c2ee2fe920377b02770",
+          "current_byte_equal": "ORIGINAL_PREREGISTER_BOUND"
+        },
+        {
+          "member": "diagnostic/run_science.py",
+          "bytes": 2964,
+          "sha256": "872215b356e7eae1248669bdd0edc55d859dbcc903c0f4aef89b7e001bef6077",
+          "current_byte_equal": "ORIGINAL_PREREGISTER_BOUND"
+        }
+      ],
+      "stream_restore_SHA_PASS": true
+    },
+    {
+      "archive": "repair-source.tar.xz",
+      "bytes": 16616,
+      "sha256": "bf9b305755e6788330a4eb49ff702c121273f1a35da46c975636bf5465cdfb44",
+      "members": [
+        {
+          "member": "crates/quoridor-nnue/src/lib.rs",
+          "bytes": 18849,
+          "sha256": "e29f047f04a9da7a47a531f103fb74d01418a8dc587a97d4585700d588990346",
+          "current_byte_equal": true
+        },
+        {
+          "member": "crates/quoridor-nnue/src/features.rs",
+          "bytes": 4175,
+          "sha256": "8e93d77c9c7d5c039a8268cd2760378c9a189b54cfe8504c94672c341a00dad7",
+          "current_byte_equal": true
+        },
+        {
+          "member": "crates/quoridor-nnue/src/diagnostic277.rs",
+          "bytes": 4032,
+          "sha256": "efd6ec4eea079e1bd084b11a58fcbccc5b6b9609299766662bee719e2d1f0933",
+          "current_byte_equal": true
+        },
+        {
+          "member": "crates/quoridor-ai/src/alphabeta.rs",
+          "bytes": 26042,
+          "sha256": "cb7d8696fc2847f08824bb4f92242dc63bec2dbfc66d57703913a286540f084a",
+          "current_byte_equal": true
+        },
+        {
+          "member": "crates/quoridor-ai/src/diagnostic277.rs",
+          "bytes": 7715,
+          "sha256": "ade7460291f2251243a924766f9ff2d8d113208bcdeb283c383387ee8633066f",
+          "current_byte_equal": true
+        },
+        {
+          "member": "diagnostic/preregister-v2.json",
+          "bytes": 3338,
+          "sha256": "151a7218f9d847659d3a89275104124c60755e299d18ad2bd63b11d10d43c72a",
+          "current_byte_equal": true
+        },
+        {
+          "member": "diagnostic/run_repair.py",
+          "bytes": 3009,
+          "sha256": "1c6fea27aab006ac16a3f814f3fa4ed2086b8c70ad0b71f0faa19e8702856645",
+          "current_byte_equal": true
+        }
+      ],
+      "stream_restore_SHA_PASS": true
+    }
+  ],
+  "science_evidence_pack": "diagnostic-evidence.tar.xz",
+  "old_failure_retained": true,
+  "scientific_argument": "actualchild wallmapbuild dominates finite advance; TT no usable-key observation",
+  "next_max1": "NNUE two-goal whole81map exact bitfrontier intervention, separately allocated and validated; no implementation now",
+  "science_NO_MORE": true,
+  "NN_charge": 6735,
+  "processed_charge": 5000,
+  "compile_test_seconds": 54.74518209602684,
+  "science_seconds": 0.43608323601074517,
+  "current_storage_point_plus_forecast": 1003520,
+  "coordinator_solo_Git_save_pending": true,
+  "owner_close_backup_pending": true
+}

@@ -1,0 +1,32 @@
+{
+  "archive_restore": [
+    {
+      "issue": "277",
+      "pack": "failed-science-source.tar.xz",
+      "members": 8,
+      "PASS": true
+    },
+    {
+      "issue": "277",
+      "pack": "repair-source.tar.xz",
+      "members": 7,
+      "PASS": true
+    },
+    {
+      "issue": "277",
+      "pack": "diagnostic-evidence.tar.xz",
+      "members": 64,
+      "PASS": true
+    },
+    {
+      "issue": "278",
+      "members": 20,
+      "PASS": true,
+      "postclose_report_original_prefix_PASS": true
+    }
+  ],
+  "277_old_parent_cost": "INVALID original evidence preserved",
+  "277_private_source": "frozen source archives retained; no main instrumentation adoption",
+  "278_current_report": "postclose append preserves original 20member archive report bytes",
+  "performance_or_strength": "not certified"
+}

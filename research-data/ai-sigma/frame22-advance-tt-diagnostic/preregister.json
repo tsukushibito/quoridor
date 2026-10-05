@@ -1,0 +1,47 @@
+{
+  "task": "frame22-advance-tt-277-v1",
+  "schema": "advance-tt-diagnostic-config-v1",
+  "model": "/workspaces/quoridor/.worktree/assets/models/legacy/frame18-native-connection/manifest.json",
+  "fixtures": [
+    {
+      "name": "initial",
+      "prefix": []
+    },
+    {
+      "name": "opening",
+      "prefix": [13, 67, 81, 66, 14, 65]
+    },
+    {
+      "name": "walled-midgame",
+      "prefix": [13, 67, 81, 66, 14, 65, 143, 126, 150, 64, 141, 151]
+    },
+    {
+      "name": "jump-p2",
+      "prefix": [13, 67, 22, 58, 31, 49, 40]
+    }
+  ],
+  "advance_output": "/workspaces/quoridor/research-data/ai-sigma/frame22-advance-tt-diagnostic/advance-result.json",
+  "tt_output": "/workspaces/quoridor/research-data/ai-sigma/frame22-advance-tt-diagnostic/tt-result.json",
+  "science_max_jobs": 1,
+  "science_hard_seconds": 30,
+  "native_nn_upper": 10006,
+  "native_nn_cap": 12000,
+  "processed_upper": 9000,
+  "processed_cap": 32000,
+  "compile_test_cap_seconds": 60,
+  "management_static_cap_seconds": 60,
+  "source_hashes": {
+    "crates/quoridor-nnue/src/lib.rs": "e29f047f04a9da7a47a531f103fb74d01418a8dc587a97d4585700d588990346",
+    "crates/quoridor-nnue/src/features.rs": "8e93d77c9c7d5c039a8268cd2760378c9a189b54cfe8504c94672c341a00dad7",
+    "crates/quoridor-nnue/src/diagnostic277.rs": "59437d52b3a41c3d774bcf75ce5bcda7a932edc4723e597a27a34994c9003c32",
+    "crates/quoridor-ai/src/alphabeta.rs": "cb7d8696fc2847f08824bb4f92242dc63bec2dbfc66d57703913a286540f084a",
+    "crates/quoridor-ai/src/diagnostic277.rs": "9dc70a2192adcea968b252d3d4421fc8da146664502a52f1600da5cc28a4f359"
+  },
+  "model_manifest_sha": "1b0a2998edaf7bef84e6a31634b30735b576511a96ec857c45ad429a8ac5ce6b",
+  "weight_sha": "b81792d5ba00c6d79b58cada2fc81d84ea822db48c04420b4e269fb9b71841b3",
+  "baseline_sourcepoint": "9d7e02d1d69ee47817a2f4a38ce259774624c799",
+  "scratch_enabled": false,
+  "TT_selection": "initial/P1 and jump-p2/P2; old3depth2500node; completedPV first1/2ply legal states; fresh1depth1000node each; fullKey/history/ply/bound/depth; no retained table usage; boundexact matches require samehorizon",
+  "timing_scope": "4prefix all503legal children owned delta; cfg(test) disjoint internal spans and callerinclusive; full accumulator parity samechild adds503NN but excluded from timers; one short observing sample no production speedratio",
+  "at": "2026-10-05T13:16:43.874080+00:00"
+}

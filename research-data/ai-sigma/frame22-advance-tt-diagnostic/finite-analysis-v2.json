@@ -1,0 +1,185 @@
+{
+  "task": "frame22-advance-tt-277-v1",
+  "schema": "advance-tt-finite-analysis-v2",
+  "status": "ADVANCE_FINITE_PASS_TT_PARTIAL",
+  "actual_repair_native_nn": 3229,
+  "old_nn_charge": 3506,
+  "cumulative_nn_charge": 6735,
+  "repair_processed": 2500,
+  "old_processed_unknown_upper": 2500,
+  "cumulative_processed_charge": 5000,
+  "rows": 503,
+  "advance_ns": 776967,
+  "evaluate_ns": 289011,
+  "exclusive_order": [
+    "map_cachehit",
+    "two_goal_wallmaps_build",
+    "sorted_IDs",
+    "STM_distance_lookup",
+    "parent_feature_validation",
+    "two_values_clone",
+    "IDs_difference_plus_FT_arithmetic_and_finite"
+  ],
+  "exclusive_ns": [
+    277,
+    518499,
+    80923,
+    7190,
+    39074,
+    11362,
+    55240
+  ],
+  "exclusive_fraction_of_advance": [
+    0.0003565144980417444,
+    0.6673372228164131,
+    0.10415242861022411,
+    0.009253932277690044,
+    0.05029042417502931,
+    0.014623529699459565,
+    0.0710969706564114
+  ],
+  "observer_and_uninstrumented_remainder_ns": 64402,
+  "map_hit": 14,
+  "map_build": 489,
+  "parent_feature_full_parity_all": true,
+  "max_delta_full_abs": 1.1920928955078125e-07,
+  "value_bit_differences": 344,
+  "timing_scope": "one observing sample across4prefix actual503children, no timing replica/errorband or production speedratio; nestedspans not added to inclusiveadvance",
+  "TT": {
+    "actual_cross_search_reuse": false,
+    "model_fingerprint": [
+      11,
+      39,
+      190,
+      53,
+      73,
+      236,
+      239,
+      67,
+      161,
+      52,
+      245,
+      107,
+      231,
+      37,
+      112,
+      96,
+      255,
+      236,
+      189,
+      120,
+      88,
+      208,
+      25,
+      228,
+      254,
+      209,
+      238,
+      226,
+      80,
+      150,
+      90,
+      228
+    ],
+    "native_nn": 2223,
+    "processed": 2500,
+    "rows": [
+      {
+        "fixture": "initial",
+        "old_search": {
+          "action": 148,
+          "completed_depth": 2,
+          "delta_updates": 2498,
+          "native_nn": 2223,
+          "nodes": 2500,
+          "pv": [
+            148
+          ],
+          "stop": "NodeLimit",
+          "tt_cutoffs": 0,
+          "tt_hits": 8,
+          "value_bits": 1009405380
+        },
+        "prefix": [],
+        "retained_entries": 261,
+        "steps": [],
+        "steps_status": "NOT_RECORDED_SHORT_COMPLETED_PV"
+      }
+    ],
+    "schema": "fullhistory-tt-opportunity-v1",
+    "scope": "potential exact fullhistory key matches only; table captured after possibly partial depth3; legal completed PV states; different-depth bounds not exact truth; fresh-root vs delta float paths can differ; model generation/schema external to current search-local key",
+    "scratch_reuse_enabled": false,
+    "status": "PASS",
+    "task": "frame22-advance-tt-277-v1"
+  },
+  "by_fixture": [
+    {
+      "fixture": "initial",
+      "n": 131,
+      "advance_ns": 197659,
+      "evaluate_ns": 77646,
+      "exclusive_ns": [
+        65,
+        133552,
+        20296,
+        1864,
+        9369,
+        3237,
+        12587
+      ],
+      "map_build_fraction": 0.6756687021587684,
+      "maxabs": 8.940696716308594e-08
+    },
+    {
+      "fixture": "jump-p2",
+      "n": 132,
+      "advance_ns": 194498,
+      "evaluate_ns": 73531,
+      "exclusive_ns": [
+        74,
+        131201,
+        20548,
+        1872,
+        9165,
+        2803,
+        11972
+      ],
+      "map_build_fraction": 0.6745622062951804,
+      "maxabs": 8.940696716308594e-08
+    },
+    {
+      "fixture": "opening",
+      "n": 129,
+      "advance_ns": 194590,
+      "evaluate_ns": 72087,
+      "exclusive_ns": [
+        77,
+        130335,
+        20241,
+        1853,
+        9696,
+        2863,
+        12989
+      ],
+      "map_build_fraction": 0.6697928978878668,
+      "maxabs": 9.313225746154785e-08
+    },
+    {
+      "fixture": "walled-midgame",
+      "n": 111,
+      "advance_ns": 190220,
+      "evaluate_ns": 65747,
+      "exclusive_ns": [
+        61,
+        123411,
+        19838,
+        1601,
+        10844,
+        2459,
+        17692
+      ],
+      "map_build_fraction": 0.64878035958364,
+      "maxabs": 1.1920928955078125e-07
+    }
+  ]
+}

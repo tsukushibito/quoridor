@@ -1,0 +1,89 @@
+{
+  "task": "frame22-advance-tt-277-v1",
+  "schema": "advance-tt-diagnostic-config-v1",
+  "model": "/workspaces/quoridor/.worktree/assets/models/legacy/frame18-native-connection/manifest.json",
+  "fixtures": [
+    {
+      "name": "initial",
+      "prefix": []
+    },
+    {
+      "name": "opening",
+      "prefix": [
+        13,
+        67,
+        81,
+        66,
+        14,
+        65
+      ]
+    },
+    {
+      "name": "walled-midgame",
+      "prefix": [
+        13,
+        67,
+        81,
+        66,
+        14,
+        65,
+        143,
+        126,
+        150,
+        64,
+        141,
+        151
+      ]
+    },
+    {
+      "name": "jump-p2",
+      "prefix": [
+        13,
+        67,
+        22,
+        58,
+        31,
+        49,
+        40
+      ]
+    }
+  ],
+  "advance_output": "/workspaces/quoridor/research-data/ai-sigma/frame22-advance-tt-diagnostic/repair-advance-result.json",
+  "tt_output": "/workspaces/quoridor/research-data/ai-sigma/frame22-advance-tt-diagnostic/repair-tt-result.json",
+  "science_max_jobs": 2,
+  "science_hard_seconds": 30,
+  "native_nn_upper": 10006,
+  "native_nn_cap": 12000,
+  "processed_upper": 9000,
+  "processed_cap": 32000,
+  "compile_test_cap_seconds": 60,
+  "management_static_cap_seconds": 60,
+  "source_hashes": {
+    "crates/quoridor-nnue/src/lib.rs": "e29f047f04a9da7a47a531f103fb74d01418a8dc587a97d4585700d588990346",
+    "crates/quoridor-nnue/src/features.rs": "8e93d77c9c7d5c039a8268cd2760378c9a189b54cfe8504c94672c341a00dad7",
+    "crates/quoridor-nnue/src/diagnostic277.rs": "efd6ec4eea079e1bd084b11a58fcbccc5b6b9609299766662bee719e2d1f0933",
+    "crates/quoridor-ai/src/alphabeta.rs": "cb7d8696fc2847f08824bb4f92242dc63bec2dbfc66d57703913a286540f084a",
+    "crates/quoridor-ai/src/diagnostic277.rs": "ade7460291f2251243a924766f9ff2d8d113208bcdeb283c383387ee8633066f"
+  },
+  "model_manifest_sha": "1b0a2998edaf7bef84e6a31634b30735b576511a96ec857c45ad429a8ac5ce6b",
+  "weight_sha": "b81792d5ba00c6d79b58cada2fc81d84ea822db48c04420b4e269fb9b71841b3",
+  "baseline_sourcepoint": "9d7e02d1d69ee47817a2f4a38ce259774624c799",
+  "scratch_enabled": false,
+  "TT_selection": "first fixed initial only; no extra depth/node when short completedPV; old3depth2500node then at most2fresh1depth1000node; no TT secondroot rerun",
+  "timing_scope": "4prefix all503legal children owned delta; cfg(test) disjoint internal spans and callerinclusive; full accumulator parity samechild adds503NN but excluded from timers; one short observing sample no production speedratio",
+  "at": "2026-10-05T13:27:16.294570+00:00",
+  "revision": "prospective-repair-v2",
+  "old_attempt_NN_charge": 3506,
+  "old_science_seconds": 0.21680058899801224,
+  "compile_test_used_seconds": 34.85879038600251,
+  "compile_test_remaining_seconds": 25.14120961399749,
+  "repair_native_nn_upper": 5506,
+  "repair_processed_upper": 4500,
+  "remaining_native_NN_cap": 8494,
+  "TT_registered_roots": [
+    "initial"
+  ],
+  "input_assertions": "child = c.play(action); parent unchanged; ply+1; position changed; delta/fullfeatures equal; finite delta/fullvalue tolerance2e-6; original503fixedchildren",
+  "repair_authorization": "coordinator user-message277 finite repair MAX2; total science30/compiletest60/NN12000/processed32000 unchanged",
+  "controller_sha": "1c6fea27aab006ac16a3f814f3fa4ed2086b8c70ad0b71f0faa19e8702856645"
+}

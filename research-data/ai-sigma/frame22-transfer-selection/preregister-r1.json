@@ -1,0 +1,46 @@
+{
+  "task": "frame22-transfer-selection-278-v1",
+  "schema": "transfer-selection-v1",
+  "at": "2026-10-05T13:32:37.593342+00:00",
+  "input_SHA": {
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/A-summary.json": "6917aa9c4796d09a78bb7b9d03cd6204534767fb27c5a9edd43a6be7220ad280",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/B-summary.json": "3bf8f9c226363836e10610c16d165d420ef1d18d2b3f31f2e8dd514af96e9b6f",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/A-config.json": "0b430b3f8e6c13ae5c0289b26f7e87df5c97bf2f59601480d8b2d6d536087c91",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/B-config.json": "b72c6e6b9def4a405b1344dceb2f4a1c170652b6eb8a342fcc58a98dc5c9a0ef",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/selection-summary.json": "8179242d2cca37e98165e3a2ed593fc84f43574f20d9bc2c6427d25c907840aa",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/newselection-result-r1/result.json": "fee53c6180bca95b82302d1083485c72a0fd4303c8ac160a1e8943dd2a9079e9",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/newselection-result-r1/mask.json": "cee8fc711c33f4aab67f031e7a4e58c37c273c902c7990d0bb6d42cbc21262b9",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-transfer/newselection-result-r1/row-predictions.jsonl.gz": "f7c1fbb14a82aef9ef04edc21027293675ac4e02534dd56e58ba054a2876cdc9",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/canonical-active48-cache-v1/rows.jsonl": "af7ee7ea1d0253a86195d65d2d106bcc8b553e06b2210f916b9255bff5d887bd",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/registered-family-map-v1.json": "90dea9468794fac505fdccfdd376d6ac7364b4fa95921e6679dfa5434db1fcb1",
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-throughput/final-caps-storage-v1.json": "99e372c18d3534b8aa9b02b2efbcea22f4d1f31c22b241c802efb83fa874eabd"
+  },
+  "source_SHA": "4254f1534ebbedf1398f3cdf975e1409d66655ffaf9283c07f534a59f83d4fc9",
+  "bins": {
+    "phase": "opening<20;middle20..59;late>=60",
+    "distance_diff": "80*(opp-self) < -1, [-1,1], >1; f32 tolerance1e-5",
+    "remaining_stock": "QF1 self290..300 + opp301..311:0..5,6..12,13..20; not placedwalls",
+    "cohort": "registered prefix8/12/16/20/24/28"
+  },
+  "weight": "original1/(12*n_game); all exclusive contributions sum to overall",
+  "bootstrap": {
+    "N": 2000,
+    "seed": 2782201,
+    "BminusA_seed": 2782202,
+    "fixed_game_prediction_only": true
+  },
+  "NN": 0,
+  "no_new_fit": true,
+  "known_selection_already_opened": true,
+  "CPU": 4,
+  "RAM": 536870912,
+  "hard_seconds": 30,
+  "analysis_source_cap90": true,
+  "storage": {
+    "old273": 133169152,
+    "new278": 1048576,
+    "old_actualforecast": 21696512,
+    "aggregate_unchanged": 134217728
+  },
+  "future_intervention_not_executed": true
+}

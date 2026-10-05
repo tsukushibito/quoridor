@@ -1,0 +1,69 @@
+{
+  "at": "2026-10-05T13:32:37.864454+00:00",
+  "operation": {
+    "frame": 22,
+    "owner_issue": "quoridor-4lc.92",
+    "state_dir": "/workspaces/quoridor/.artifacts/research-team/frame22/scheduler",
+    "config_path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22/scheduler.json",
+    "expectations_path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22/expectations.json",
+    "supervisor_end_at": "2026-10-05T15:31:03Z",
+    "max_turn_seconds": null,
+    "source_root": "/workspaces/quoridor"
+  },
+  "phase": "running",
+  "owned": null,
+  "next_at": 1791207690.014148,
+  "scheduler": {
+    "pid": 1233793,
+    "start_ticks": "45593355",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "monitor": {
+    "pid": 1235182,
+    "start_ticks": "45599721",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "input_checks": {
+    "/workspaces/quoridor/scripts/dev/research-scheduler.py": true,
+    "/workspaces/quoridor/scripts/dev/research-watch.py": true,
+    "/workspaces/quoridor/scripts/dev/research-team.py": true,
+    "/workspaces/quoridor/scripts/dev/research-scheduler.sh": true,
+    "/workspaces/quoridor/scripts/dev/research-team.sh": true,
+    "/workspaces/quoridor/scripts/dev/beads.sh": true,
+    "/workspaces/quoridor/scripts/dev/project-env.sh": true,
+    "/workspaces/quoridor/research-paths.json": true,
+    "/workspaces/quoridor/scripts/dev/research-job.py": true,
+    "/workspaces/quoridor/scripts/dev/research-job.sh": true,
+    "/workspaces/quoridor/scripts/dev/research-storage.py": true,
+    "/workspaces/quoridor/docs/design/ai-sigma-continuation-20261001.md": true,
+    "/workspaces/quoridor/docs/design/ai-sigma-contract-supervisor-continuation.md": true,
+    "/workspaces/quoridor/docs/design/ai-sigma-contract-steward-frame22.md": true,
+    "/workspaces/quoridor/.agents/research-team/common.md": true,
+    "/workspaces/quoridor/.agents/research-team/roles/coordinator.md": true,
+    "/workspaces/quoridor/.agents/research-team/roles/hypothesis.md": true,
+    "/workspaces/quoridor/.agents/research-team/roles/experiment.md": true,
+    "/workspaces/quoridor/.agents/research-team/roles/critic.md": true,
+    "/workspaces/quoridor/.agents/research-team/roles/steward.md": true,
+    "/workspaces/quoridor/.artifacts/research-team/registry.json": true,
+    "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22/scheduler.json": true,
+    "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22/contract.json": true,
+    "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22/prompt.md": true
+  },
+  "foreign_science": [],
+  "current_all_process_RSS_upper": 9734332416,
+  "CPU": 4,
+  "logical_count": 1,
+  "GPU": 0,
+  "RAM_limit": 536870912,
+  "scope_current": 16384,
+  "scope_forecast": 1048576,
+  "storage_transfer": {
+    "old273_reserve": 133169152,
+    "old273_actual_forecast": 21696512,
+    "new278_reserve": 1048576,
+    "aggregate_unchanged": 134217728,
+    "unknown_discount": 0
+  },
+  "point_only": true,
+  "PASS": false
+}
