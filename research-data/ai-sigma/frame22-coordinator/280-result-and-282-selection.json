@@ -1,0 +1,39 @@
+{
+  "owner_summary": "research-data/ai-sigma/frame22-residual-penalty/summary-v1.json",
+  "owner_result_sha": "980f21e9218af9d68880a82ecb021ee4d5128155b5f52bcfc751e4059f92172f",
+  "actual_NN_with_fixture_upper": 329250,
+  "actual_stop": {
+    "name": "fit-selection-r1",
+    "sample_upper": 330074,
+    "state": "STOPPED",
+    "identity": {
+      "pid": 1354757,
+      "tick": "46167694"
+    },
+    "exit": 0,
+    "reason": null,
+    "wall_seconds": 5.8636341509991325,
+    "peak_family_RSS": 941821952,
+    "remaining_exact": [],
+    "waited": true,
+    "at": "2026-10-05T13:57:18.172780+00:00"
+  },
+  "independent_source_review": "residual-penalty-independent-source-review.json",
+  "alignment_definition_correction": "280 uses -2*r*(teacher-D), positive is an adverse signed contribution; old278 uses opposite sign",
+  "primary_oldval": 0.480182758,
+  "primary_newselection": 0.39736880851436984,
+  "D_newselection": 0.392634076,
+  "D_surpassing_primary_supported": false,
+  "late_regression_mitigated_owner_observation": true,
+  "adoption": "no candidate-strength or D-surpassing claim; no lambda sweep",
+  "teacher_source_correction": "Search generation is not RNG seed; fixedroot deterministic; tau after root snapshot",
+  "new_task": "quoridor-4lc.282",
+  "new_selection_reason": "same root budget sensitivity after primary penalty shrinks residual but lacks D-superior new transfer",
+  "alternatives_retained": [
+    "position-dependent paths/wall effects",
+    "rootmean to minimax-leaf/horizon meaning",
+    "independent family/distribution/learning scale"
+  ],
+  "sequence_permanent_gate": false,
+  "supervisor_aa33_caveats_adopted": true
+}
