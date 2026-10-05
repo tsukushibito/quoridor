@@ -8,13 +8,15 @@
 
 284の保存のみNN0解析を採択し、独立familyの入れ子増量を主配分にする。約5981→1万→3万train行は仮の観測規模で最低必要量ではない。小candidateのD超えを量の入口にせず、完成48familyブロックの除外後yield・準備/生成/資格/保存/学習の全費・代表性・物理上限で段階2を判断する。K診断は有力な別案だが、282は4条件だけを回収した母集団欠測で、安定性/方式負支持を示さない。位置付き距離場・壁効果やleaf/horizonの意味も保留し、量・学習仕事・未選定評価の結果で再比較する。
 
-285の実登録正本はv2の1248train＋48selection＋96sealed future＝1392family、12cohort/P1P2均衡/48family block/new UID・seed domain。旧1152/64/64案は未実行のGit履歴として保持する。初段は最大240train＋48selection＋96future（384family）、段階2はactualforecastを統括が採択後に同入れ子を拡げる。第一段144train＋固定48selectionは全GOAL、train4803/selection1645行。old5981込みtrain10784は全Vraw OR除外前で、accepted約1万の実行数は286の前処理待ち。固定future96は追加で3453raw入力参照を公開しラベル封印、最終OR適格数は未測。初段6モデルentry計522699 physicalNN（warm216込み）/科学158.456377秒で、旧部分counterを再加算しない。block00は48GOAL/1527適格行/82000 physicalNN/command26.044432秒/guardian29.334519秒、除外前平均31.8125行/familyで旧nominal36.89より低い。生成成功を十分量や学習利益に代えず、追加のcomplete blockで実量を更新する。target-free whitelist metadataと停止immutable cacheは公開済み、履歴の旧形式との互換性は未確認。
+285の実登録正本はv2の1248train＋48selection＋96sealed future＝1392family、12cohort/P1P2均衡/48family block/new UID・seed domain。旧1152/64/64案は未実行のGit履歴として保持する。初段は最大240train＋48selection＋96future（384family）、段階2はactualforecastを統括が採択後に同入れ子を拡げる。第一段144train＋固定48selectionは全GOAL、train4803/selection1645行。286の独立NN0前処理で全Vraw3285へのOR除外0、old5981込みtrain10784/276groupsを確認した。固定future96は追加で3453raw入力参照を公開しラベル封印、最終OR適格数は未測。初段6モデルentry計522699 physicalNN（warm216込み）/科学158.456377秒で、旧部分counterを再加算しない。block00は48GOAL/1527適格行/82000 physicalNN/command26.044432秒/guardian29.334519秒、除外前平均31.8125行/familyで旧nominal36.89より低い。生成成功を十分量や学習利益に代えず、追加のcomplete blockで実量を更新する。target-free whitelist metadataと停止immutable cacheは公開済み、履歴の旧形式との互換性は未確認。
 
-286は同D保持H32/zero4/旧scale/common初期/λ0/K64教師で約1万256kseen、約3万256kseen、同3万512kseenの三学習を比較する。量と追加学習仕事を分け、τ1/cohort/epoch差を純量効果へ帰属しない。予定curveとrowID付き予測を保存し、全validation raw参照に対してtrainを先に除外、全段実使用train unionに対する共通finalval maskで再集計する。固定新selection48のraw入力参照が停止handoffで到着し、286へ実配送済み。全1392/全稿/Root ACKを待たず、全Vraw maskとactualcounterを束縛して第一段短fitへ接続する。D未達でもvalidation規則で観測用NNUE一つをfreezeし、採用保留と未選定観測を区別する。
+286は同D保持H32/zero4/旧scale/common初期/λ0/K64教師で約1万256kseen、約3万256kseen、同3万512kseenの三学習を比較する。量と追加学習仕事を分け、τ1/cohort/epoch差を純量効果へ帰属しない。予定curveとrowID付き予測を保存し、全validation raw参照に対してtrainを先に除外、全段実使用train unionに対する共通finalval maskで再集計する。固定新selection48のraw入力参照が停止handoffで到着し、286へ実配送済み。第一段r1はcheckpoint親不足でevaluate/学習loop前に停止、予約396978NN/entry1を保守保持。同条件prospective r2は396978NN/7.453808秒/peak992292864Bで完走した。primary2000の旧固定val .353338対D .489404、新48 .389866対D .405141は暫定改善、旧12 .485642対D .392634は悪化。全予定曲線/予測を保持し、最終共通mask/未選定評価/棋力の利益へ広げない。D未達でもvalidation規則で観測用NNUE一つをfreezeし、採用保留と未選定観測を区別する。
 
 287は実装ownerと別に入力・mask・凍結条件をレビューし、freeze後だけ96future familyでNNUE/D/旧Bの一巡を評価する。rootmean/zを含むraw metadataをlabel-freeと呼ばず、公開whitelist入力とsealed path/hashのみを先に渡す。共通参照はVraw＝旧1248＋旧選定392＋新48、Told＝全5981、Tseen＝全保存学習段階で見たtrain union。未来maskはTseenと全Vrawを参照する。履歴UNVERIFIED/有効family数/lineage/選定による精度不足を保持し、誤差利益から棋力は認定しない。仕様は [入力と共通mask](../../research-data/ai-sigma/frame22-coordinator/nested-mask-and-targetfree-interface.md)。
 
-92の15:15:10 Stage2保管観測はretained10156511232＋全reservation2049024000＋UNKNOWN134217728＝12339752960B<12884901888B、margin545148928B。data1GiBは初段448MiBを置換し追加576MiBだけ、release32MiB/future learner64MiB/旧全保守枠を保持した。287新8MiBは別fresh15:51:39で確認し、保持10221244416＋旧bounds込みunused/保守1993617408＋UNKNOWN134217728＝12349079552B、margin535822336B。285現量63664128B/unused1010077696B、286現86016/unused67022848、287現45056/unused8343552を含め実量と未使用の二重加算を避け、旧pool unused流用/未知割引0。各heavyのCPU/RAM/GPU/正runtime/版・入力は本人fresh admission、保管内を全未来の保証にしない。
+第二段は実OR0と収量33.354行/familyから登録T3–15（最大13追加完整48block、全T768）を選び、全Vraw除外後old5981込み初めて約30000に達したprefixで止める。予測31597行、NN累積保守8635167/最大19entry。ORが増え768で不足なら追加を自動実行せず必要実量/費を返す。285のV6提案は最大912T/16blockで20%OR時も約3万となる有力reserveだが、現OR0では初回768を選びT16+を保留する。線形全science command約502秒、source/archive/public/private/alias/Git/未測read/LLMは別費。量を第一段D利益の条件にしない。
+
+92のfresh16:21:58はretained10266832896＋unused/旧bounds1956900864＋UNKNOWN134217728＝12357951488B<12884901888、margin526950400/errors0。285両root現82669568/unused991072256、286checkpoint根を含め17694720/unused49414144、287147456/unused8241152を同保管枠へ一本化。data1GiB/build32/learner64/reviewer8と旧全保持を維持し削除/free/reset0。各heavyのCPU/RAM/GPU/正runtime/版・入力は本人fresh admission。
 
 旧時刻付き選定過程はGit `2fb0de977dbb87bf1112098d58b4db63cd8d96d5` とBeadsの既notesに保存済み。現在計画へ別の進捗台帳を重複させず、以下は現選定を変える有限根拠と次の判断を保持する。
 
@@ -35,6 +37,14 @@
 同256kseenの入れ子二条件と同最大corpus512kseen一条件により、量と学習仕事を比較する。game一様→row一様なので単純row epochだけで露出を要約せず、family samplecountsも記録する。原旧B savedを再学習せず、共通初期・旧scale・λ0を保持する。全予定曲線/終点/同mask・全分母を残し、最良小checkpointだけで有利な結論へ交換しない。
 
 決定的K感度は教師投資の情報価値が高い競合。準備済32root×K64/256/1024は旧未成立を尊重し、新実施は記録費を含む別具体配分を必要とする。高Kも真値でなく、固定repeatを独立教師数やseed分散へ数えない。位置付き距離場/壁効果はQF1の疎壁/駒IDで関係を学ぶ帰納バイアスの改善候補で、全map直接入力が無いだけで盤面情報欠落を断定しない。cache/full-delta/undo/Scale/P2/学習/同時間leaf費を含む一群の設計と概算を必要とする。rootmeanからminimax leafへのhorizon/history用途差、TT合法sequenceの有効depthも有力保留。教師→特徴→量を恒久順序にせず、増量のyield/転移/実全費又は対照前提の崩れで次に最大一つを再配分する。
+
+## 同情報の処理最適化
+
+RootのClaustrophobia取込み依頼をBeads288へ実配分する。担当criticの279実装経験を使い、287のfuture封印/独立学習評価は保持、自作最適化のmain採用は別owner統括がsource/結果をレビューする。main legal_action_ids候補ごとのgeometry＋両reachableとplay再検査を対象に、壁端点/中点/盤端を含む障害グラフで閉路を作り得ない場合だけ正確到達性を省く案を第一候補とする。caller-local再構築/再用対context rollbackの全費を比較し、boolean必要距離/共有edgesが有効なら最大2介入内で試す。全81mapやQF1数学は維持する。脅威planeは現消費側不要、最短path filterを合法手削除へ使わず、局所距離差分は影響伝播/undo費の再比較候補として保留。
+
+managed frame21-searchにcore/必要correctness tests/専用診断だけ別writer、旧comparative scaffoldは停止保存後current mainへ必要pathだけ整合。合法Action全集合/P2/jump/terminal/壁密度/中点閉路/maze/全81/NNUE full-delta/親履歴復帰のoracleを先行。同model/depth/node/action/value/countersで局所費と全探索時間/RAM/init/undoを分け、teacher/GPU/samewall強度倍率へ外挿しない。perf未検出で区間timers/countersを用い取得0。
+
+確認済unusedからの移譲案は285 source60/compile120/data32MiB→288 source60/compile120/build32MiB、287 NN50k/science240/manage30/data2MiB→288同各枠。成立後285source240/compile60/data992MiB、287NN50k/science360/manage150/data6MiB、MAX2/評価3モデル/封印条件は維持。288CPU3single/RAMguard1.75/NN50k/processed250k/MAX3/science240秒/data2MiB。実currentunused/必要残費をownerと92が確認し、未成立項目は使用しない。親追加0/UNKNOWN保持、静的編集は並行し主生成/fitと計測窓を重ねない。詳細は[壁合法性処理契約](../../research-data/ai-sigma/frame22-coordinator/wall-legality-processing-contract.md)。
 
 ## 実行・所有・終了
 

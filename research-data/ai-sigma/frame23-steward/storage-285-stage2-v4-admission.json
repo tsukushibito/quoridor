@@ -1,0 +1,166 @@
+{
+  "at": "2026-10-05T16:23:19.873710+00:00",
+  "goal": "quoridor-4lc",
+  "operation_owner": "quoridor-4lc.92",
+  "science_owner_issues": ["quoridor-4lc.285", "quoridor-4lc.286", "quoridor-4lc.287"],
+  "phase": "285-stage2-allocation-v4",
+  "references": {
+    "manifest": {
+      "path": "research-data/ai-sigma/frame23-steward/storage-285-stage2-v4-manifest.json",
+      "bytes": 18568,
+      "sha256": "4e95e1ebbb4331ed875c2136ec62da89ab7fc4d85a32667b5283b231da278969"
+    },
+    "measurement": {
+      "path": "research-data/ai-sigma/frame23-steward/storage-285-stage2-v4-current.json",
+      "bytes": 19525,
+      "sha256": "8d50efce20760545468c8d61843ba5c17599117638f95cb901909e669d917543"
+    },
+    "allocation": {
+      "path": "research-data/ai-sigma/frame22-coordinator/nested-independent-teacher-stage2-allocation.md",
+      "bytes": 4058,
+      "sha256": "375d169ad9a3c225a4c62bcc73577c10bde9d96ac3b971e1d91dce76c53d9d46"
+    },
+    "previous287receipt": {
+      "path": "research-data/ai-sigma/frame23-steward/storage-287-admission.json",
+      "bytes": 6321,
+      "sha256": "b418cd4a7fb05e3533887a15444db414eda880197615701a8d21537f7f38f675"
+    }
+  },
+  "additional_new_allocation_bytes": 0,
+  "measurement_at": "2026-10-05T16:21:58.313215+00:00",
+  "fresh_retained_allocated_inode_bytes": 10266832896,
+  "reservation_unused_or_conservative_upper_bytes": 1956900864,
+  "unknown_retained_bytes": 134217728,
+  "conservative_current_plus_unused_forecast_unknown_bytes": 12357951488,
+  "cap_bytes": 12884901888,
+  "conservative_margin_bytes": 526950400,
+  "storage_admission": "within",
+  "errors": [],
+  "current_scope_reservations": [
+    {
+      "category": "frame23-285-additional-data-cache-Git-temp-source-upper",
+      "reserved_bytes": 1073741824,
+      "owner": "285",
+      "basis": "stage2 data/cache/necessary uniqueGit/temp/source 1GiB REPLACES stage1 448MiB, never added to it; old scopes unchanged",
+      "current_allocated_bytes": 82669568,
+      "unused_bytes": 991072256
+    },
+    {
+      "category": "frame23-285-shared-release-additional-growth-upper",
+      "reserved_bytes": 33554432,
+      "owner": "285",
+      "basis": "new incremental build forecast; shared current already observed once, old build reservations retained",
+      "current_allocated_bytes": 0,
+      "unused_bytes": 33554432
+    },
+    {
+      "category": "frame23-future-learning-checkpoint-output-upper",
+      "reserved_bytes": 67108864,
+      "owner": "286",
+      "basis": "same previously reserved64MiB mapped to assigned286 data/checkpoint roots; not an additional64MiB; release0; storage itself does not authorize learning",
+      "scope_paths": [
+        "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-independent-teacher-learning",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teacher-learning"
+      ],
+      "current_allocated_bytes": 17694720,
+      "unused_bytes": 49414144
+    },
+    {
+      "category": "frame23-287-independent-evaluation-growth-upper",
+      "reserved_bytes": 8388608,
+      "owner": "287",
+      "basis": "new explicit source/result/necessaryGit/temp allocation; no transfer from275, no extraWT/release",
+      "scope_paths": ["/workspaces/quoridor/research-data/ai-sigma/frame23-independent-evaluation"],
+      "current_allocated_bytes": 147456,
+      "unused_bytes": 8241152
+    }
+  ],
+  "owner_prior_scope_unique_82526208_bytes_added_to_current": false,
+  "old_allocation_bounds_changed": false,
+  "old87c56_and093618_receipts_changed": false,
+  "old_bounds_preserved": true,
+  "unknown_is_free": false,
+  "cleanup_performed": false,
+  "reused_teacher_WT_coverage": [
+    {
+      "name": "reused teacher managed WT",
+      "path": "/workspaces/quoridor/.worktree/frame22-teacher",
+      "category": "active-source-data",
+      "logical_file_bytes": 3470676,
+      "allocated_inode_bytes": 4734976,
+      "overlap_allocated_bytes": 0,
+      "files": 524,
+      "symlinks": 0,
+      "missing": false
+    }
+  ],
+  "new_checkpoint_root_coverage": [
+    {
+      "name": "current .worktree/assets/checkpoints/frame23-independent-teacher-learning",
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-independent-teacher-learning",
+      "category": "frame23-future-learning-checkpoint-output-upper",
+      "logical_file_bytes": 12309908,
+      "allocated_inode_bytes": 12546048,
+      "overlap_allocated_bytes": 0,
+      "files": 64,
+      "symlinks": 0,
+      "missing": false
+    }
+  ],
+  "actual_unused_partition": "Current scope roots excluded from parent traversal then measured once with matching reservation; held+max(0,cap-held). 1GiB includes newraw/private/public/cache/source/archive/necessaryuniqueGit/temp envelope; sharedGit/WT/build attribution still conservatively padded rather than declared free. All old reservations/full conservative bounds and128MiB unknown preserved. Owner prior82,526,208B is not added to a later scope point.",
+  "scope_forecast_caps_bytes": {
+    "285_data": 1073741824,
+    "285_release": 33554432,
+    "286_same_learning": 67108864,
+    "287_evaluation": 8388608
+  },
+  "adopted_science_quantity_reference_only": {
+    "additional_T3_to15_max_blocks": 13,
+    "additional_families_per_block": 48,
+    "total_T_max": 768,
+    "first_complete_prefix_stop": "about30k actual rows after registered Vraw OR; no automatic T16+",
+    "old_cumulative_NN_cap": 18200000,
+    "old_MAX_entries": 30,
+    "old_science_seconds": 12000,
+    "current_NN_forecast_including_old_522699": 8635167,
+    "current_entry_upper": 19,
+    "costs_reset": false
+  },
+  "current_runtime": {
+    "at": "2026-10-05T16:23:19.868540+00:00",
+    "phase": "running",
+    "scheduler": {
+      "pid": 1430721,
+      "start_ticks": "46503900",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "scheduler_exact_alive": true,
+    "monitor": {
+      "pid": 1430738,
+      "start_ticks": "46503929",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "monitor_exact_alive": true,
+    "owned": null,
+    "input_count": 24,
+    "input24_match": true,
+    "loaded_config_match": true,
+    "loaded_contract_match": true,
+    "deadlines": {
+      "heavy": "2026-10-05T23:26:03Z",
+      "supervisor": "2026-10-05T23:31:03Z",
+      "monitor": "2026-10-05T23:34:03Z",
+      "final": "2026-10-05T23:36:03Z"
+    }
+  },
+  "keeper_allocated_bytes": 12382208,
+  "keeper_current_plus_forecast_bytes": 17625088,
+  "keeper_guard_bytes": 117440512,
+  "current_local_management_rss_bytes": 273350656,
+  "storage_only": true,
+  "new_science_or_learning_job_authorized_by_receipt": false,
+  "physics_scope": "Freshwithin is storage condition only; eachowner exactcurrentloaded/CPU2,4/RAM/GPU/foreigncompute/inputSHA admission. If286fit running, wait natural exact stop; no interrupt. Futurelabels sealed/candidate+finalmask freeze unchanged.",
+  "future_evaluation_labels_or_model_content_read": false,
+  "scientific_success_certified": false,
+  "Coordinator_permanent_idle_refresh": "92 pending only actual naturalidle safe window; no runtime stop to kill science"
+}

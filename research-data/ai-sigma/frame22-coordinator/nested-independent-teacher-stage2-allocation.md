@@ -1,0 +1,17 @@
+# 285 第二段の具体量と資源配分
+
+親quoridor-4lc/既285内、同1392 v2 UID/seed/split/K64/τ1/B8/fill2ms/model/sourceを保持。286 NN0実入力maskで第一段旧5981＋新144T4803＝10784行、全新train OR除外0を確認、Vraw旧1248＋旧392＋新1645＝3285固定。第一段r1は保存先親の管理失敗でforward0、原費を保持した同条件r2は396978NN/7.453808秒で完走。primary新48選定MSE .389866対D .405141は暫定改善、旧12選定 .485642対D .392634は悪化で、共通最終mask/未選定評価前に一般利益を認定しない。次段はその成功やD利益を入口にしない。原counter/失敗/保守reserved/UNKNOWNを保持する。
+
+285 actualforecast-proposal-v4を採択する。生成実量は6entry/288family/522699physicalNN/warm216/科学158.456377秒、scopeunique82526208B。T33.354行/familyの点推定と全費の未知を保持する。次は登録Tblock3–15の最大13完整48blockを一順序で生成し、全T768family以内・旧5981込み約31597行の予測を置く。各immutableblockを既Vraw3285へlabel-free ORで除外した実行数が初めて約30000に達した完整prefixで停止・手渡す。閾値は観測規模で理論最低数ではない。768到達でも不足なら全分母/費を返し、T16以降/最大1248を自動追加しない。label/loss/勝敗でblock/row交換・成功補充0。第一段144Tは入れ子に残す。固定48selection/96sealedを交換・再生成しない。
+
+今回追加の保守NN上界13×(48×200×65＋warm36)＝8112468、原522699を加えて8635167以内というcurrentforecastを用いる。元第二段全上限18.2m/科学12000秒/MAX30はstage1込みの累積で、今回見積を元費へのresetにしない。Science entries今回最大6＋13＝19（元の未使用qualification枠を実行回数へ偽加算しない）、各元guardian≤600秒/nativehard420/reap30/推論VRAM6GiB/一job30分を保持。literalGC/model warm/failed/unknownが別発生なら実counterへ加算し、上界不成立なら次entry前に止めて具体不足を返す。
+
+既実6job command平均26.4094秒を点予測に使うと追加約343.3秒/累積501.8秒、保存済み最長blockの線形追加約460.9秒。3倍stressでは追加約1382.8秒を置く。prefix準備/export/private/publicmetadata/alias/ref-check/停止回収/Git・未測read/LLMの時間は別で、科学時計の和を全cycle費と呼ばない。新budget-clarification-v7のNN0prep既知132.378138秒（30秒timeout込み）、compile失敗/collector literal失敗のUNKNOWNを保持し、元source300/manage180/compile180の累積残量から計上する。残source費不足なら原費を付替えず必要最少手順と費を返す。
+
+保管はdata1GiB（初段448MiBを置換。下記処理最適化への32MiB移譲成立後はdata992MiB）＋sharedrelease32MiB＋learner64MiB＋reviewer新8MiB＋旧全保持/有効unused/UNKNOWN128MiBをfresh全量に含める。82526208Bをwholecapから割引したfreeとせず、実source/raw/cache/public/private/archive/必要Git/tmpとremainingunusedを各scope内で一本化する。新許可の追加保管枠・WT・release・依存/モデル取得0。92の現在freshwithin/cap/coverageを受領してから重い入口、各科学ownerは直前newframe23 current24/正2/loaded/owner/nopause/CPU2worker+4infer/RAMguard1.75/GPU6/foreign実計算/sourceinputSHAを独自admitする。古い点のfreeやLLM人数を使わない。
+
+第一段短fit/parityは優先。286が実runningなら自然回収のactualstop/PIDtick absenceから次生成、他者interrupt0。preflight修復中のstatic/source費はNN0で並行し、物理quietを無期限予約しない。entry間で286/287の必要重計算受付を調整、計時計測を重ねない。学習の3mNN内実上界は286がactualovershoot/curve/共通maskを前束縛し、本配分からGPU学習/追加fit許可を読み取らない。futurelabelsはproducersealed、候補とfinalmaskfreeze後の別287一巡だけ。
+
+最初の追加48stopを通常速報し、actualmasked yield/bytes/全費で残prefixforecastを更新。Scientificsource22:45/save23:00、親heavy23:26/scheduler23:31/monitor23:34/save23:36:03不変更。問いを量/仕事/転移とし、K/位置付き情報/leaf/履歴の競合を保留して、新結果と必要規模/全費から次最大1を選ぶ。
+
+処理最適化を別所有で並行するため、285の確認済unusedからdata32MiB→別optimizer sharedbuild32MiB、compile/test120秒→optimizer120秒、source/read60秒→optimizer60秒を prospective 移譲する。285変更後data992MiB/source240秒/compile60秒、manage180秒と科学上限は不変更。既132.378138秒と未知費は消さず、compile全attempt/必要残手順が60秒内で成立するか本人確認し、不足なら移譲項目を未成立として具体費を返す。移譲成立前にoptimizerがこの項目を使用0。285次生成は既frozen binary/compile0で進め、手元current全保管1GiB内をstricter992MiBへ縮める確認と本人freshphysicsから開始可。現data約82.7MB、次段768T physical概算261MB/safety2.5約653MBは992MiB内の見積で、必要Git/tmp/UNKNOWNのfree扱い0。新sharedbuildを92がcoverageへ追加し保管総量を再確認、初段teacher利益や全役ACKを入口にしない。
