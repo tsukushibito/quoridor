@@ -1,0 +1,36 @@
+{
+  "goal": "quoridor-4lc",
+  "producer_issue": "quoridor-4lc.285",
+  "reviewer_issue": "quoridor-4lc.287",
+  "source_handoff": "research-data/ai-sigma/frame23-independent-teachers/sealed96-public-reference-handoff-v4.json",
+  "source_SHA": "234b99f5d2aea57c09585c206d04c107e9cc185daa6f2495a864b942b9f5cc6a",
+  "coordinator_scope": [
+    "Read public-only descriptor and verify source SHA",
+    "Two public input file SHA check; no sealed target/raw/densecache read"
+  ],
+  "planned_future_families": 96,
+  "raw_input_reference_rows": 3453,
+  "future_eligible_after_final_OR": "NOT_MEASURED",
+  "history_cross_old_format": "UNVERIFIED",
+  "teacher_truth_or_whole_legal_replay_independently_checked": false,
+  "model_evaluation_started_or_passed": false,
+  "allocation": "Reviewer may process explicit public input metadata only. One candidate/baselines/config/checkpoint/settings/stop+final mask must freeze before labels release/model forwarding. Stage2 prepare estimated masked yield/wholecost/actualbytes in existing producer NN0 scope; adoption independent of stage1 D advantage.",
+  "owner_first_stage_cumulative": {
+    "generation_entries": 6,
+    "families": 288,
+    "train_rows": 4803,
+    "selection_rows": 1645,
+    "future_input_rows": 3453,
+    "physicalNN": 522699,
+    "included_warm_NN": 216,
+    "guardian_science_s": 158.456377408
+  },
+  "earlier_count_readded": false,
+  "management_failure_kept": "Original sealed_future_eval collector mismatch vs registeredsealed_futureevaluation; failure UNKNOWN/inclusive .200796, newv4 source separate",
+  "new_deadline_or_cap_reset": false,
+  "dispatch_refs": [
+    ".artifacts/research-team/frame22/285-sealed96-to-287-receipt.json",
+    ".artifacts/research-team/frame22/285-stage1-physics-release-to-286-receipt.json",
+    ".artifacts/research-team/frame22/285-stage2-actual-forecast-request-receipt.json"
+  ]
+}
