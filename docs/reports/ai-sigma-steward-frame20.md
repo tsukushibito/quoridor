@@ -43,3 +43,5 @@ Supervisor digest cf9521cf…9c108、現common+role全文と既runtime suffixを
 source Git f3fdbabda34dfdf9c708c7c2460cef3080868612。通常freshstart01:56:47頃、scheduler556338/tick41842377・monitor556359/tick41842391同boot。running/loaded実config-contractSHA/24期待hash一致、更新4hash（main/研究supervisor role・prompt・運用契約）のみ。初回受付中ownedturnnull標本は保持、後続で正newturn01a109c7-2f55-7c43-8420-11a6c052e8f8が公式active/inProgress/errornull・dispatched/recoveryfalseとなった。period1200/null、02:41/46/49/51:02不変更、通常startのgap/next_at差をROLE-RESPONSIBILITIES-252/running-loaded.jsonへ保存。
 
 必要証拠 research-data/ai-sigma/252-supervisor-role-effect/verification.json。現在allocated＋2MiB forecast既112MiB内、旧保持減額/親増額なし、両default index保持。source/短期子停止、意図的長期2identityと停止責任は92が保持。今回全役採点・各役大規模再設計・科学条件変更・配置変更は開始しない。役割更新の受理/loadedと自然点検の遂行改善・判断品質・未来停止保証は別として後続既点検で評価する。
+
+252.1 root受入れ: main/研究新Supervisor本文・6digest・公式idle更新同settings受理/保存全文hashと実runtime14/24期待hashを独立照合。根拠 .artifacts/research-team/supervisor-role-effect252/root-acceptance.json。自然判断品質は今後の既運用で評価し、本人source・短期子停止/close/backup後も92長期回収を維持。
