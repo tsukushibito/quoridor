@@ -56,6 +56,10 @@ CUDAは`cuda-aoti`、TensorRTは`tensorrt`のCargo featureを明示する。`QUO
 
 `python/quoridor_training`内のモデル/設定定義を使い、低stepを含むtrain/validation曲線・gradient・checkpoint・native f32重み・ONNXを出す。学習量や容量の変更は版付き設定で行う。train-only距離尺度、game等重み、定数/距離基準と未見testを分けて確認する。
 
+学習の `--cache` は単一cacheディレクトリ、または `quoridor-sharded-training-cache-v1` のJSON manifestを受ける。後者は元train cacheをSHA付きで参照し、namespaceとfamily単位のtrain/validation割当、全行の資格maskを明示する。元tensorや終局ラベルを複製・書換せず、testや未来ラベルを取り込まない。`cache.load` の戻り値は `(binding, rows, x, distance, labels)`、`rows` は辞書のリストで、全tensorの先頭次元と行数が一致する。
+
+`evaluation.checkpoints` に初期0から最終stepまでの昇順・重複なし配列を指定すると、その固定stepで選定する。省略時は既定intervalを使う。`artifacts.mode: "native"` はONNXを作らずnative重みを保存する。`artifacts.save_scheduled: true` は既存評価forwardのtrain/全raw validation scalarと行順、checkpoint、native重み、実sampling回数を保存する。資格外validation行の保存値を選定metricへ混ぜず、保存・forward分もrun予算へ含める。
+
 新モデル・compiled engine・build・展開cacheは保存方針に従う管理外の領域へ置く。Gitにはコード・設定・実験検証データ・SHA付き小manifestを残す。既存の正式holdout、科学結果、凍結入力をソフト移行で書き換えない。
 
 ## 検証とWasm

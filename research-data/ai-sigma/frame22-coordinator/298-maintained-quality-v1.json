@@ -1,0 +1,125 @@
+{
+  "schema": "maintained-sharded-cache-quality-coordinator-v1",
+  "UTC": "2026-10-05T22:26:08.397858+00:00",
+  "issue": "quoridor-4lc",
+  "donor_source20_confirmed_SHA": "ef720c623dedb2bee6c91aa85043ede33ef98c10902cbc649617e0b690ea3de6",
+  "allocation": "prospective unused source20 split into recipient preparation15 + management5; donor source860/manage90 unchanged; original category/UNKNOWN unchanged",
+  "conserved_sum_s": [970, 970],
+  "prior_298_transfer": 0,
+  "old289_management_transfer": 0,
+  "newscience_NN_MAX_compile": 0,
+  "futurelabels_read": false,
+  "budget_prep_s": 15,
+  "budget_management_s": 5,
+  "owner": "coordinator",
+  "commands": [
+    {
+      "argv": [
+        "tools/research-quality/.venv/bin/ruff",
+        "format",
+        "--config",
+        "tools/research-quality/ruff.toml",
+        "python/quoridor_training/cache.py",
+        "python/quoridor_training/common.py",
+        "python/quoridor_training/train.py",
+        "python/quoridor_training/test_sharded_cache.py"
+      ],
+      "wall_s": 0.38369943003635854,
+      "exit": 0,
+      "log": "/workspaces/quoridor/.artifacts/research-team/frame22/298-main-quality-0.log",
+      "log_SHA": "383df188576f1eee9b833e5e2f7d5d2f4b5a2c3a05e57a27613153e344923a48",
+      "output": "4 files left unchanged\n"
+    },
+    {
+      "argv": [
+        "tools/research-quality/.venv/bin/ruff",
+        "format",
+        "--check",
+        "--config",
+        "tools/research-quality/ruff.toml",
+        "python/quoridor_training/cache.py",
+        "python/quoridor_training/common.py",
+        "python/quoridor_training/train.py",
+        "python/quoridor_training/test_sharded_cache.py"
+      ],
+      "wall_s": 0.08865578501718119,
+      "exit": 0,
+      "log": "/workspaces/quoridor/.artifacts/research-team/frame22/298-main-quality-1.log",
+      "log_SHA": "177f260a5645724013185e4b140c7045cc39e56c0c97b120f5cb23599f85f0de",
+      "output": "4 files already formatted\n"
+    },
+    {
+      "argv": [
+        "tools/research-quality/.venv/bin/ruff",
+        "check",
+        "--config",
+        "tools/research-quality/ruff.toml",
+        "python/quoridor_training/cache.py",
+        "python/quoridor_training/common.py",
+        "python/quoridor_training/train.py",
+        "python/quoridor_training/test_sharded_cache.py"
+      ],
+      "wall_s": 0.19846142502501607,
+      "exit": 0,
+      "log": "/workspaces/quoridor/.artifacts/research-team/frame22/298-main-quality-2.log",
+      "log_SHA": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "output": "All checks passed!\n"
+    },
+    {
+      "argv": [
+        "tools/research-quality/node_modules/.bin/prettier",
+        "--write",
+        "docs/development/rust-ai.md",
+        "docs/reports/ai-sigma-coordinator-current-priorities.md"
+      ],
+      "wall_s": 0.7204418139881454,
+      "exit": 0,
+      "log": "/workspaces/quoridor/.artifacts/research-team/frame22/298-main-quality-3.log",
+      "log_SHA": "1aef5e8e4135c597c2876e3896d21a1f46adce900e48c7cbd5e0cedabb688716",
+      "output": "docs/development/rust-ai.md 213ms (unchanged)\ndocs/reports/ai-sigma-coordinator-current-priorities.md 217ms (unchanged)\n"
+    },
+    {
+      "argv": [
+        "tools/research-quality/node_modules/.bin/prettier",
+        "--check",
+        "docs/development/rust-ai.md",
+        "docs/reports/ai-sigma-coordinator-current-priorities.md"
+      ],
+      "wall_s": 0.6946931940037757,
+      "exit": 0,
+      "log": "/workspaces/quoridor/.artifacts/research-team/frame22/298-main-quality-4.log",
+      "log_SHA": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20",
+      "output": "Checking formatting...\nAll matched files use Prettier code style!\n"
+    },
+    {
+      "argv": [
+        "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+        "-m",
+        "unittest",
+        "quoridor_training.test_sharded_cache",
+        "quoridor_training.test_selected_target",
+        "quoridor_training.test_contracts"
+      ],
+      "wall_s": 0.3967747780261561,
+      "exit": 0,
+      "log": "/workspaces/quoridor/.artifacts/research-team/frame22/298-main-quality-5.log",
+      "log_SHA": "ba94d178800206803172b26f14a07f06dc731980572da814ba8c530a099f3094",
+      "output": "...............\n----------------------------------------------------------------------\nRan 15 tests in 0.025s\n\nOK\n"
+    }
+  ],
+  "quality_PASS": true,
+  "charged_prep_s": 2.482726426096633,
+  "NN0_tests": 15,
+  "api_tuple_rows_lengths_asserted": true,
+  "management_entry_outer_minus_command_s": 0.06260157190263271,
+  "current_source_SHA": {
+    "python/quoridor_training/cache.py": "1bd9e88b5efbf70a9b85c97de21a79ef999ad58a4f5f65a010cd4e1a1dc1d06f",
+    "python/quoridor_training/common.py": "2f0fec646598be8662200f32a97aadc018271ed7ccf85f1166426f01d4fbd779",
+    "python/quoridor_training/train.py": "40062ffc567d47591e9c91efd63afbbd96f5f0dae8171c69e6855a40e8582604",
+    "python/quoridor_training/test_sharded_cache.py": "8449dbad210dcee2f96d8cab2f416e81ea5e0be646d5e772d58735b0d90fe558"
+  },
+  "same_frozen_science_bytes_not_edited": true,
+  "recipient_management_not_borrowed_from_old28990": true,
+  "prospective_source_category_split_not_old_cost_reclassification": true,
+  "read_LLM_prior_management_unknown_retained": true
+}

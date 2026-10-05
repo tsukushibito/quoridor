@@ -5,6 +5,7 @@ Model/optimizer definitions live in this package.
 """
 
 import argparse
+import gzip
 import json
 import time
 from pathlib import Path
@@ -138,26 +139,31 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
         ],
         dtype=np.int64,
     )
+    ix_validation_raw = np.array(
+        [i for i, r in enumerate(rows) if r["split"] == "validation"], dtype=np.int64
+    )
     if not len(ix_train) or not len(ix_validation):
         raise ValueError("nonempty eligible train and unexposed validation required")
     families = {}
     for i in ix_train:
         families.setdefault(rows[i]["group"], []).append(float(labels[i, column]))
     constant = float(np.mean([np.mean(values) for values in families.values()]))
-    mu = distances[ix_train].mean(axis=0, dtype=np.float64).astype(np.float32)
-    sigma = distances[ix_train].std(axis=0, dtype=np.float64).astype(np.float32)
-    sigma = np.maximum(sigma, np.float32(1e-4))
-    statistics = {"mu_f32": mu.tolist(), "sigma_f32": sigma.tolist()}
-    difference = (distances[ix_train, 1] - distances[ix_train, 0]).astype(np.float64)
-    design = np.column_stack([np.ones(len(ix_train)), difference])
-    fit, *_ = np.linalg.lstsq(design, labels[ix_train, column].astype(np.float64), rcond=None)
-    distance_fit = {"a": float(np.float32(fit[0])), "b": float(np.float32(fit[1]))}
     if scale_path is not None:
         from .scaled_model import validate_statistics
 
         statistics = validate_statistics(json.loads(Path(scale_path).read_text()))
+    else:
+        mu = distances[ix_train].mean(axis=0, dtype=np.float64).astype(np.float32)
+        sigma = distances[ix_train].std(axis=0, dtype=np.float64).astype(np.float32)
+        sigma = np.maximum(sigma, np.float32(1e-4))
+        statistics = {"mu_f32": mu.tolist(), "sigma_f32": sigma.tolist()}
     if cfg["model"]["architecture"] == "distance_residual":
         distance_fit = {"a": cfg["model"]["distance_a"], "b": cfg["model"]["distance_b"]}
+    else:
+        difference = (distances[ix_train, 1] - distances[ix_train, 0]).astype(np.float64)
+        design = np.column_stack([np.ones(len(ix_train)), difference])
+        fit, *_ = np.linalg.lstsq(design, labels[ix_train, column].astype(np.float64), rcond=None)
+        distance_fit = {"a": float(np.float32(fit[0])), "b": float(np.float32(fit[1]))}
     model = build_model(cfg["model"], statistics).to(device)
     initial_state = {k: v.detach().cpu().clone() for k, v in model.state_dict().items()}
     # Keep the corpus mapped on CPU. Only bounded batches enter GPU memory.
@@ -214,8 +220,23 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
     group_offsets = np.concatenate([[0], np.cumsum(group_lengths)[:-1]])
     group_flat = np.concatenate(group_indices)
     selection_rows = [rows[i] for i in ix_validation]
-    evaluation_steps = {0, 1, 2, 5, 10, 20, 50, 100, cfg["training"]["steps"]}
-    evaluation_steps.update(range(0, cfg["training"]["steps"] + 1, cfg["evaluation"]["interval"]))
+    points = cfg["evaluation"]["checkpoints"]
+    if points is None:
+        evaluation_steps = {0, 1, 2, 5, 10, 20, 50, 100, cfg["training"]["steps"]}
+        evaluation_steps.update(
+            range(0, cfg["training"]["steps"] + 1, cfg["evaluation"]["interval"])
+        )
+    else:
+        evaluation_steps = set(points)
+    scheduled = cfg["artifacts"]["save_scheduled"]
+    evaluation_validation = ix_validation_raw if scheduled else ix_validation
+    primary_in_raw = np.searchsorted(ix_validation_raw, ix_validation)
+    sampled_rows = np.zeros(len(rows), dtype=np.int64)
+    if scheduled:
+        with gzip.open(output / "validation-order.json.gz", "wt") as stream:
+            json.dump([rows[i]["id"] for i in ix_validation_raw], stream)
+        with gzip.open(output / "train-order.json.gz", "wt") as stream:
+            json.dump([rows[i]["id"] for i in ix_train], stream)
 
     def charge(n):
         nonlocal samples
@@ -244,11 +265,12 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
 
     def evaluate(step):
         nonlocal best_step, best_loss, best_state
-        charge(len(ix_train) + len(ix_validation))
+        charge(len(ix_train) + len(evaluation_validation))
         model.eval()
         with torch.inference_mode():
             ptrain = predict(ix_train)
-            pval = predict(ix_validation)
+            praw = predict(evaluation_validation)
+        pval = praw[primary_in_raw] if scheduled else praw
         tr = metrics([rows[i] for i in ix_train], ptrain, target, constant)
         va = metrics(selection_rows, pval, target, constant)
         loss = va[
@@ -258,6 +280,9 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
             {
                 "step": step,
                 "samples": samples,
+                "training_seen": step * cfg["training"]["batch_size"],
+                "row_epoch": step * cfg["training"]["batch_size"] / len(ix_train),
+                "validation_forward_rows": len(evaluation_validation),
                 "wall_seconds": time.monotonic() - start,
                 "train": tr,
                 "validation": va,
@@ -266,6 +291,14 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
         if loss < best_loss - cfg["evaluation"]["min_delta"]:
             best_step, best_loss = step, loss
             best_state = {k: v.detach().cpu().clone() for k, v in model.state_dict().items()}
+        if scheduled:
+            ptrain.astype("<f4").tofile(output / f"train-step{step}.f32")
+            praw.astype("<f4").tofile(output / f"validation-step{step}.f32")
+            torch.save(
+                {"model": model.state_dict(), "model_config": cfg["model"], "scale": statistics},
+                output / f"step{step}.pt",
+            )
+            export(model, cfg, statistics, distance_fit, output / f"step{step}-model")
         return ptrain
 
     evaluate(0)
@@ -287,6 +320,7 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
                 ).numpy()
             ]
         ix = torch.as_tensor(index, dtype=torch.long)
+        np.add.at(sampled_rows, index, 1)
         model.train()
         optimizer.zero_grad(set_to_none=True)
         prediction = model(*batch(ix))
@@ -331,32 +365,49 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
         export(model, cfg, statistics, distance_fit, output / (name + "-model"))
     write(output / "curves.json", curve)
     write(output / "gradients.json", diagnostics)
+    if scheduled:
+        write(
+            output / "sampling.json",
+            {
+                "seen": int(sampled_rows.sum()),
+                "mode": cfg["training"]["sampling"],
+                "row_count_order": "immutable loaded sharded row order",
+                "row_counts": sampled_rows.tolist(),
+                "family_counts": {
+                    family: int(sampled_rows[group].sum())
+                    for family, group in zip(families, group_indices)
+                },
+            },
+        )
     model.load_state_dict(best_state)
     model.eval()
     # ONNX is a cold interchange artifact. Rust NNUE consumes the compact raw
     # weights above; no Python or ONNX inference is performed in each search node.
     witness = (tx[:1].cpu(), td[:1].cpu(), side[:1].cpu())
     model = model.cpu()
-    torch.onnx.export(
-        model,
-        witness,
-        str(output / "best.onnx"),
-        input_names=["features", "distance", "side"],
-        output_names=["value"],
-        dynamic_axes={
-            "features": {0: "batch"},
-            "distance": {0: "batch"},
-            "side": {0: "batch"},
-            "value": {0: "batch"},
-        },
-        opset_version=17,
-        dynamo=False,
-    )
+    if cfg["artifacts"]["mode"] == "native_onnx":
+        torch.onnx.export(
+            model,
+            witness,
+            str(output / "best.onnx"),
+            input_names=["features", "distance", "side"],
+            output_names=["value"],
+            dynamic_axes={
+                "features": {0: "batch"},
+                "distance": {0: "batch"},
+                "side": {0: "batch"},
+                "value": {0: "batch"},
+            },
+            opset_version=17,
+            dynamo=False,
+        )
     freeze = {
         "schema": "quoridor-candidate-freeze-v1",
         "best_step": best_step,
         "best_validation_mse": best_loss,
         "selection_weighting": cfg["evaluation"]["monitor"],
+        "evaluation_checkpoints": sorted(evaluation_steps),
+        "artifact_mode": cfg["artifacts"]["mode"],
         "samples": samples,
         "model_sha": sha(output / "best-model" / "manifest.json"),
         "weights_sha": sha(output / "best-model" / "weights.f32"),

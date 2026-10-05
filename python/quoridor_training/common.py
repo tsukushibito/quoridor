@@ -34,6 +34,7 @@ DEFAULTS = {
     },
     "evaluation": {
         "interval": 10,
+        "checkpoints": None,
         "batch_size": 1024,
         "monitor": "game",
         "early_stopping_patience": 5,
@@ -41,6 +42,7 @@ DEFAULTS = {
     },
     "limits": {"seconds": 60.0, "samples": 500000},
     "data": {"overlap_policy": "error"},
+    "artifacts": {"mode": "native_onnx", "save_scheduled": False},
 }
 
 
@@ -109,10 +111,25 @@ def resolve_config(path=None, overrides=()):
         ("training", "device"): ["cpu", "cuda"],
         ("evaluation", "monitor"): ["row", "game"],
         ("data", "overlap_policy"): ["error", "report"],
+        ("artifacts", "mode"): ["native", "native_onnx"],
     }
     for (section, key), choices in allowed.items():
         if result[section][key] not in choices:
             raise ValueError(f"invalid {section}.{key}: {result[section][key]}")
+    points = result["evaluation"]["checkpoints"]
+    if points is not None and (
+        not isinstance(points, list)
+        or not points
+        or any(type(v) is not int or v < 0 or v > result["training"]["steps"] for v in points)
+        or points != sorted(set(points))
+        or points[0] != 0
+        or points[-1] != result["training"]["steps"]
+    ):
+        raise ValueError(
+            "explicit evaluation checkpoints must be unique sorted initial-to-last steps"
+        )
+    if type(result["artifacts"]["save_scheduled"]) is not bool:
+        raise ValueError("artifacts.save_scheduled must be boolean")
     return result
 
 
