@@ -33,3 +33,13 @@ steward digest b062f87a…add6d、同saved正確active turnへ現common+role全�
 01:40:11通常freshstartでscheduler530611/tick41742601・monitor530624/tick41742628同boot。running/loaded config-contract実SHA/24期待hash一致、更新はmain/研究role期待hash2個、period1200/null・02:41/46/49/51:02不変。旧gap/通常start位相のnext_at差はROLE-MAINTENANCE-250/running-loaded.jsonへ保持。root独立14/14受入れ .artifacts/research-team/steward-maintainability250/runtime-root-acceptance.json。自然点検品質・構造改善効果・科学成果・未来停止をこの適用から認定しない。
 
 必要証拠 research-data/ai-sigma/250-maintainability-role/verification.json。既112MiB内の現在allocated＋2MiB forecast、旧保持減額/追加予約なし、default index保持。本人250.1をclose/backupし、92は長期2identityと停止保存責任を継続所有する。新全体監査・台帳・全役承認を追加しない。
+
+## 252.1 各ロールの責務の実働評価をSupervisor運用へ反映
+
+root252がmain supervisor role1pathを書込停止、SHA4802db9f…19ae8f。本人252.1claim・pause/担当・正ownedなし/公式自然idleを確認し、旧scheduler530611/41742601・monitor530624/41742628を秩序停止して主編集窓を通知した。根拠から各役の成果/判断/提案/引渡し/改善追跡を評価し、統括と監督自身も対象とする新役本文を研究mirrorへ同bytes反映。根拠不足を不明とし、不足原因を定義/課題配分/運用制約/実遂行に分け、必要な変更範囲と適用後効果を追う。節目・兆候に応じ対象を選び、全員毎tick採点/会議/追加監督/全承認は追加しない。
+
+Supervisor digest cf9521cf…9c108、現common+role全文と既runtime suffixを同saved公式idle thread/resumeで受理、同model/effort/cwd・設定overrideなし。developer本文readback非対応と受理を区別。自己steward定義変更/pendingなし。prompt先頭の研究判断と運用契約23の有効本文を直接整合し、旧c760参照を現行role参照へ置換、役全文のprompt複写なし。
+
+source Git f3fdbabda34dfdf9c708c7c2460cef3080868612。通常freshstart01:56:47頃、scheduler556338/tick41842377・monitor556359/tick41842391同boot。running/loaded実config-contractSHA/24期待hash一致、更新4hash（main/研究supervisor role・prompt・運用契約）のみ。初回受付中ownedturnnull標本は保持、後続で正newturn01a109c7-2f55-7c43-8420-11a6c052e8f8が公式active/inProgress/errornull・dispatched/recoveryfalseとなった。period1200/null、02:41/46/49/51:02不変更、通常startのgap/next_at差をROLE-RESPONSIBILITIES-252/running-loaded.jsonへ保存。
+
+必要証拠 research-data/ai-sigma/252-supervisor-role-effect/verification.json。現在allocated＋2MiB forecast既112MiB内、旧保持減額/親増額なし、両default index保持。source/短期子停止、意図的長期2identityと停止責任は92が保持。今回全役採点・各役大規模再設計・科学条件変更・配置変更は開始しない。役割更新の受理/loadedと自然点検の遂行改善・判断品質・未来停止保証は別として後続既点検で評価する。
