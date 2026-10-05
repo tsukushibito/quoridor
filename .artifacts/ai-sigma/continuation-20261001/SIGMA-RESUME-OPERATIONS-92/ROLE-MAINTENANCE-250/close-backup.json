@@ -1,0 +1,43 @@
+{
+  "at": "2026-10-05T01:47:22.309813+00:00",
+  "operations": [
+    {
+      "operation": [
+        "update",
+        "quoridor-4lc.250.1"
+      ],
+      "exit_code": 0,
+      "stdout": "✓ Updated issue: quoridor-4lc.250.1 — 長期保守責任のSteward定義を保存運用へ適用\n",
+      "stderr": ""
+    },
+    {
+      "operation": [
+        "update",
+        "quoridor-4lc.92"
+      ],
+      "exit_code": 0,
+      "stdout": "✓ Updated issue: quoridor-4lc.92 — 新4時間枠の監督・monitor起動と停止責任\n",
+      "stderr": ""
+    },
+    {
+      "operation": [
+        "close",
+        "quoridor-4lc.250.1"
+      ],
+      "exit_code": 0,
+      "stdout": "✓ Closed quoridor-4lc.250.1 — 長期保守責任のSteward定義を保存運用へ適用: 指定1role mirror/digest/正active全文適用・実runningloaded24hash・root14/14受入れ完了。必要Git/report保存、root恒久idle refreshへ引渡し。配置変更/削除は今回scopeなし。\n",
+      "stderr": ""
+    },
+    {
+      "operation": [
+        "backup",
+        "sync"
+      ],
+      "exit_code": 0,
+      "stdout": "\nBackup synced in 404ms\n",
+      "stderr": ""
+    }
+  ],
+  "92_long_scope_in_progress": true,
+  "permanent_idle_pending_root": true
+}
