@@ -1,0 +1,203 @@
+{
+  "at": "2026-10-05T16:49:54.526554+00:00",
+  "goal": "quoridor-4lc",
+  "operation_owner": "quoridor-4lc.92",
+  "recipient_issue": "quoridor-4lc.288",
+  "status": "DONOR_ACCEPTED_COORDINATOR_ADOPTED_CURRENT_STORAGE_WITHIN",
+  "references": {
+    "measurement_manifest_unchanged_quantities": {
+      "path": "research-data/ai-sigma/frame23-steward/storage-288-prospective-manifest.json",
+      "bytes": 21904,
+      "sha256": "d2b9ca3d75c43021a7677e6d487ca3a0b43ed9fc782bb7aa249e5d3ea073a64d"
+    },
+    "fresh_measurement": {
+      "path": "research-data/ai-sigma/frame23-steward/storage-288-accepted-current.json",
+      "bytes": 21195,
+      "sha256": "2c512b6b4f3d211e27a121b138bea58a5d4318236e1ac531bec82294dcb13d14"
+    },
+    "previous_pending_receipt": {
+      "path": "research-data/ai-sigma/frame23-steward/storage-288-prospective-admission.json",
+      "bytes": 8873,
+      "sha256": "9ebc20d57ab71100241752b2a35789544f788e702b110733f6728c4fdf16a267"
+    },
+    "owner285acceptance": {
+      "path": "research-data/ai-sigma/frame23-independent-teachers/stage2-transfer-acceptance-v8.json",
+      "bytes": 2204,
+      "sha256": "dde166b479c030fd51fa33e9932ba7c4fcbe1e3c254f272e3f244ca10ac6a7d8"
+    },
+    "owner287forecast": {
+      "path": "research-data/ai-sigma/frame23-independent-evaluation/resource-transfer-to-288-proposal-v1.json",
+      "bytes": 1514,
+      "sha256": "6abd08aa4ff804fef7bcc9f1ebb145b046fef5c2c749a1be09570e35229ba4c1"
+    },
+    "contract": {
+      "path": "research-data/ai-sigma/frame22-coordinator/wall-legality-processing-contract.md",
+      "bytes": 6861,
+      "sha256": "d72f68c585c04d6cbb6c05aa833a770d40a4ab3d888219caf1d91f1056c20782"
+    }
+  },
+  "measurement_at": "2026-10-05T16:48:01.033605+00:00",
+  "fresh_retained_allocated_inode_bytes": 10265972736,
+  "reservation_unused_or_conservative_upper_bytes": 1959755776,
+  "unknown_retained_bytes": 134217728,
+  "conservative_current_plus_unused_unknown_bytes": 12359946240,
+  "cap_bytes": 12884901888,
+  "conservative_margin_bytes": 524955648,
+  "storage_admission": "within",
+  "errors": [],
+  "additional_aggregate_allocation_bytes": 0,
+  "frame23_combined_caps_bytes": 1182793728,
+  "storage_transfers_bytes": {
+    "285_data_to_288_sharedbuild": 33554432,
+    "287_data_to_288_data": 2097152
+  },
+  "current_scope_reservations": [
+    {
+      "category": "frame23-285-additional-data-cache-Git-temp-source-upper",
+      "reserved_bytes": 1040187392,
+      "owner": "285",
+      "basis": "prospective992MiB from prior1GiB; only32MiB transferred to288sharedbuild, no deletion/current-byte discount; owner future forecast/counters separate",
+      "current_allocated_bytes": 83828736,
+      "unused_bytes": 956358656
+    },
+    {
+      "category": "frame23-285-shared-release-additional-growth-upper",
+      "reserved_bytes": 33554432,
+      "owner": "285",
+      "basis": "new incremental build forecast; shared current already observed once, old build reservations retained",
+      "current_allocated_bytes": 0,
+      "unused_bytes": 33554432
+    },
+    {
+      "category": "frame23-future-learning-checkpoint-output-upper",
+      "reserved_bytes": 67108864,
+      "owner": "286",
+      "basis": "same previously reserved64MiB mapped to assigned286 data/checkpoint roots; not an additional64MiB; release0; storage itself does not authorize learning",
+      "scope_paths": [
+        "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-independent-teacher-learning",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teacher-learning"
+      ],
+      "current_allocated_bytes": 13668352,
+      "unused_bytes": 53440512
+    },
+    {
+      "category": "frame23-287-independent-evaluation-growth-upper",
+      "reserved_bytes": 6291456,
+      "owner": "287",
+      "basis": "prospective6MiB from prior8MiB; owner current147456+future3MiB<6MiB confirmed and Coordinator adopted, only2MiB to288data; original cap/cost receipts retained",
+      "scope_paths": ["/workspaces/quoridor/research-data/ai-sigma/frame23-independent-evaluation"],
+      "current_allocated_bytes": 151552,
+      "unused_bytes": 6139904
+    },
+    {
+      "category": "frame23-288-wall-legality-data-growth-upper",
+      "reserved_bytes": 2097152,
+      "owner": "288",
+      "basis": "2MiB from287future-unused confirmed by owner3MiBforecast and adoptedCoordinator; no new parent capacity; compile/science admission independent",
+      "scope_paths": [
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-wall-legality-processing"
+      ],
+      "current_allocated_bytes": 8192,
+      "unused_bytes": 2088960
+    },
+    {
+      "category": "frame23-288-sharedbuild-growth-upper",
+      "reserved_bytes": 33554432,
+      "owner": "288",
+      "basis": "prospective from285data32MiB, old285build32MiB preserved; extra sharedtarget growth, no old target/Git free inference",
+      "scope_paths": ["/workspaces/quoridor/.artifacts/rust-migration/target"],
+      "current_allocated_bytes": 0,
+      "unused_bytes": 33554432
+    }
+  ],
+  "donor285_T768_safety_forecast_bytes": 652716907,
+  "donor285_data_cap_after_transfer_bytes": 1040187392,
+  "donor287_current_plus_owner_future_forecast_bytes": 3297280,
+  "donor287_cap_after_transfer_bytes": 6291456,
+  "donor_time_NN_transfers": "Owner285 source132.378138known/240 and compile4.558812646known/60/newcompile0 with oldUNKNOWN retained accepted; owner287 NN/science/manage/data prospective accepted. Coordinator adoption via sameactive input. Executed old costs/caps not rewritten or inferred reset. Source/NN clocks remain owner controlled.",
+  "previous_pending_condition_resolved": true,
+  "original_measurement_template_pending_annotations": "Preserved pre-acceptance annotations in prospective input/oldreceipt; both donor confirmations and effective status are recorded here, not rewritten into historical observation.",
+  "previous_receipts_changed": false,
+  "keeper112_Supervisor32_coordinator8_old512_unknown_padding_preserved": true,
+  "cleanup_new_capacity_or_unknown_free": false,
+  "WT_reuse_coverage": [
+    {
+      "name": "current sparse search worktree",
+      "path": "/workspaces/quoridor/.worktree/frame21-search",
+      "category": "active-source-data",
+      "logical_file_bytes": 1860460,
+      "allocated_inode_bytes": 2654208,
+      "overlap_allocated_bytes": 0,
+      "files": 234,
+      "symlinks": 0,
+      "missing": false
+    }
+  ],
+  "shared_target_coverage": [
+    {
+      "name": "current native release/build workspace",
+      "category": "live-build",
+      "path": "/workspaces/quoridor/.artifacts/rust-migration",
+      "scope_note": "whole existing sharedtarget/live included once; new288build32MiB remains prospective additional upper bound because growth ownership not exactly partitioned",
+      "logical_file_bytes": 529711467,
+      "allocated_inode_bytes": 532643840,
+      "overlap_allocated_bytes": 0,
+      "files": 2374,
+      "symlinks": 0,
+      "missing": false
+    }
+  ],
+  "new_scope_coverage": [
+    {
+      "name": "current288wall-legality source/data",
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-wall-legality-processing",
+      "category": "frame23-288-wall-legality-data-growth-upper",
+      "logical_file_bytes": 3671,
+      "allocated_inode_bytes": 8192,
+      "overlap_allocated_bytes": 0,
+      "files": 2,
+      "symlinks": 0,
+      "missing": false
+    }
+  ],
+  "new_WT_bytes": 0,
+  "new288_sharedbuild_increment_bytes": 33554432,
+  "old285_sharedbuild_increment_preserved_bytes": 33554432,
+  "current_runtime": {
+    "at": "2026-10-05T16:49:54.518163+00:00",
+    "phase": "running",
+    "scheduler": {
+      "pid": 1430721,
+      "start_ticks": "46503900",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "scheduler_exact_alive": true,
+    "monitor": {
+      "pid": 1430738,
+      "start_ticks": "46503929",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "monitor_exact_alive": true,
+    "owned": null,
+    "input_count": 24,
+    "input24_match": true,
+    "loaded_config_match": true,
+    "loaded_contract_match": true,
+    "deadlines": {
+      "heavy": "2026-10-05T23:26:03Z",
+      "supervisor": "2026-10-05T23:31:03Z",
+      "monitor": "2026-10-05T23:34:03Z",
+      "final": "2026-10-05T23:36:03Z"
+    }
+  },
+  "keeper_allocated_bytes": 12550144,
+  "keeper_current_plus_forecast_bytes": 17793024,
+  "keeper_guard_bytes": 117440512,
+  "current_local_management_rss_bytes": 273403904,
+  "storage_only": true,
+  "288_science_or_compile_started_by92": false,
+  "owner_execution_admission": "Each288/285/286 owner must fresh physical CPU/RAM/currentloaded/input/source/foreigncompute before own entry; recent286stop is a point, not futurequiet. Donor proof+aggregate receipt fulfills allocation/storage conditions, not a launched job or quality success.",
+  "scientific_success_certified": false,
+  "future_evaluation_labels_or_models_read": false,
+  "pending_idle_refresh": "Coordinator permanent refresh only actual naturalidle safe window, no runtime stopping to kill science;92 responsible"
+}
