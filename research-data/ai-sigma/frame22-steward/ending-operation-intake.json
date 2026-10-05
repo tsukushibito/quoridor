@@ -1,0 +1,45 @@
+{
+  "at": "2026-10-05T14:23:53.182466+00:00",
+  "issue": "quoridor-4lc.92",
+  "checks": {
+    "input24_match": true,
+    "phase_running": true,
+    "scheduler_exact": true,
+    "monitor_exact": true,
+    "loaded_config": true,
+    "loaded_contract": true
+  },
+  "scheduler": {
+    "pid": 1351785,
+    "start_ticks": "46157199",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "monitor": {
+    "pid": 1351801,
+    "start_ticks": "46157223",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "owned": null,
+  "last_result": {
+    "at": "2026-10-05T14:23:34.286366+00:00",
+    "event": "owned_turn_finished",
+    "turn_id": "01a10c6b-737c-7e42-913f-091cba15f361",
+    "status": "completed"
+  },
+  "deadlines": {
+    "heavy": "2026-10-05T15:26:03Z",
+    "supervisor": "2026-10-05T15:31:03Z",
+    "monitor": "2026-10-05T15:34:03Z",
+    "final": "2026-10-05T15:36:03Z"
+  },
+  "steward_storage": {
+    "allocated_bytes": 11907072,
+    "remaining_forecast_bytes": 5767168,
+    "guard_bytes": 117440512,
+    "within": true,
+    "ending_metadata_Git_forecast_bytes": 524288,
+    "unknown_discount": 0,
+    "new_reservation": 0
+  },
+  "scientific_process_guarantee": false
+}

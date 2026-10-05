@@ -1,0 +1,212 @@
+{
+  "at": "2026-10-05T14:25:51.877755+00:00",
+  "evidence_references": [
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-residual-penalty/final-receipt-v1.json",
+      "bytes": 5453,
+      "sha256": "95a7105129e7ab594451cc2774cadf6eedeb06631d50f17859f58898daa88900"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-map-efficiency/source-science-stop.json",
+      "bytes": 5488,
+      "sha256": "1139cd2294c7794410ed3e1f499b96a805893680fd74cf2e6292a94c8a1fc9bc"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-map-efficiency/final-handoff.json",
+      "bytes": 7714,
+      "sha256": "25c287bdf31f5ce4f6144b50ed5535c8bff353d067bef3a7c5331240eb7e1e63"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-map-efficiency/storage-final.json",
+      "bytes": 903,
+      "sha256": "76bab9017bca1da374db4bb6b8a763bdc58db82af7c7e4d0f52a6e2aab09439d"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame22-teacher-budget/plan-v1.json",
+      "bytes": 7810,
+      "sha256": "aa9730f1082bbc4650aed035dbc57aa1c0782a646f6d7bdafd820156d5c6576d"
+    }
+  ],
+  "local_allocated": {
+    ".worktree/frame21-search": 2641920,
+    ".worktree/frame21-features": 4603904,
+    ".worktree/frame22-teacher": 4734976,
+    "research-data/ai-sigma/frame22-map-efficiency": 1179648,
+    "research-data/ai-sigma/frame22-residual-penalty": 1630208,
+    "research-data/ai-sigma/frame22-teacher-budget": 200704
+  },
+  "coverage_limit": "selected current WT/science roots only; aggregate 11:59 admission is historical, not fresh free capacity",
+  "unknown_retained_bytes": 134217728,
+  "deletions": 0,
+  "scope_reservation_reset": false,
+  "science_stop": {
+    "280": {
+      "science_stopped_at": "2026-10-05T13:57:18.172780+00:00",
+      "source_report_stopped_at": "2026-10-05T14:16:20.189521+00:00",
+      "waited": true,
+      "exact_identity_current": {
+        "pid": 1354757,
+        "expected_tick": "46167694",
+        "current_tick": null,
+        "present": false
+      },
+      "all_science_wait_remaining": [],
+      "readers": {
+        "self_old_input_model_reading_stopped": true,
+        "required_paths_preserved": true,
+        "other_reader_allhost_guarantee": false,
+        "asset_deletion_authorized": false
+      },
+      "storage": {
+        "new_current_including_scope_assets_report_changed_source_B": 4455231,
+        "uniqueGit_upper_B": 2097152,
+        "tmp_remaining_metadata_B": 524288,
+        "combined_forecast_B": 7076671,
+        "reservation_B": 8388608,
+        "within": true,
+        "old274_forecast_B": 11585201,
+        "old274_retain_B": 25165824,
+        "old274_plus_new280_total_reservation_B": 33554432,
+        "unknown_discount": 0,
+        "parent_extra": 0,
+        "old_WT8MiB_build64MiB_separate_preserved": true
+      }
+    },
+    "279": {
+      "at": "2026-10-05T14:20:53.692890+00:00",
+      "scientific_source_writer_stopped": true,
+      "scientific_jobs_stopped": true,
+      "model_reader_scope_stopped": true,
+      "scientific_processes": {
+        "quality-r1": {
+          "process_sha": "e58c61b2e3da2352316f897100223860d6bcd6b007e80da6fdc33913bfbb2add",
+          "start": "2026-10-05T14:11:55.185845+00:00",
+          "end": "2026-10-05T14:11:55.413039+00:00",
+          "leader": {
+            "pid": 1372192,
+            "ppid": 1372163,
+            "pgid": 1372192,
+            "tick": 46256029,
+            "cpu": 0,
+            "rss": 16384,
+            "argv": [
+              "/usr/bin/taskset",
+              "-c",
+              "3",
+              "python3",
+              "/workspaces/quoridor/research-data/ai-sigma/frame22-map-efficiency/run_joined.py",
+              "quality"
+            ],
+            "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+          },
+          "allwait": true,
+          "remaining": [],
+          "currentexactabsent": true
+        },
+        "forward-r1": {
+          "process_sha": "d2b2fefaf4f93d96ff1f95862d334b50c681e9d327e5c95d123364c2c2cf6986",
+          "start": "2026-10-05T14:12:13.328615+00:00",
+          "end": "2026-10-05T14:12:13.651967+00:00",
+          "leader": {
+            "pid": 1372502,
+            "ppid": 1372499,
+            "pgid": 1372502,
+            "tick": 46257843,
+            "cpu": 0,
+            "rss": 143360,
+            "argv": [
+              "/usr/bin/taskset",
+              "-c",
+              "3",
+              "python3",
+              "/workspaces/quoridor/research-data/ai-sigma/frame22-map-efficiency/run_joined.py",
+              "forward"
+            ],
+            "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+          },
+          "allwait": true,
+          "remaining": [],
+          "currentexactabsent": true
+        },
+        "reverse-r1": {
+          "process_sha": "9658be8d1ae16fbb1efb9dbba49733de3de3a8bea58294465af64f1db585c610",
+          "start": "2026-10-05T14:12:26.767361+00:00",
+          "end": "2026-10-05T14:12:27.000561+00:00",
+          "leader": {
+            "pid": 1372843,
+            "ppid": 1372838,
+            "pgid": 1372843,
+            "tick": 46259189,
+            "cpu": 0,
+            "rss": 102400,
+            "argv": [
+              "/usr/bin/taskset",
+              "-c",
+              "3",
+              "python3",
+              "/workspaces/quoridor/research-data/ai-sigma/frame22-map-efficiency/run_joined.py",
+              "reverse"
+            ],
+            "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+          },
+          "allwait": true,
+          "remaining": [],
+          "currentexactabsent": true
+        }
+      },
+      "scope_limit": "own jobs/PID-starttick only; no allhost/future guarantee"
+    },
+    "282": {
+      "state": "allocated/in_progress; no final wait/source-stop proof in this intake",
+      "plan_at": "2026-10-05T14:20:40.377965+00:00",
+      "registered_root_count": 32,
+      "reservation": {
+        "old273": 128974848,
+        "old278": 1048576,
+        "new282": 4194304,
+        "aggregate": 134217728,
+        "old273actualforecast": 21696512,
+        "build_incremental32MiB_within_old128": true,
+        "unknown_discount": 0
+      },
+      "owner": "experiment",
+      "next_stop_proof_due": "2026-10-05T14:50:00Z"
+    }
+  },
+  "latest_natural_effect": {
+    "observe.json": {
+      "at": "2026-10-05T14:15:44.893250+00:00",
+      "mode": "observe",
+      "status": "observed",
+      "path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/supervisor/frame22/1a7c0825-027a-4047-8404-a20464b6c333/observe.json",
+      "bytes": 14988,
+      "sha256": "94c267661c3db0918c3eae53ffd04dd02b0eb040634f2bffe10535d3b855fe35",
+      "commands_all_exit0_reaped": true
+    },
+    "finish.json": {
+      "at": "2026-10-05T14:16:22.535236+00:00",
+      "mode": "finish",
+      "status": "observed",
+      "path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/supervisor/frame22/1a7c0825-027a-4047-8404-a20464b6c333/finish.json",
+      "bytes": 15414,
+      "sha256": "90af1a822062cd15cc9435b02686b44081f96ac012f35ee5b95f8f3c3df7cc32",
+      "commands_all_exit0_reaped": true
+    },
+    "notification.json": {
+      "at": "2026-10-05T14:23:18.186569+00:00",
+      "delivery": "accepted",
+      "exit": 0,
+      "path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/supervisor/frame22/1a7c0825-027a-4047-8404-a20464b6c333/notification.json",
+      "bytes": 795,
+      "sha256": "e637da3b42e98c1b096c0c5becc16fefb19e6fd4d59b5772af95897c4619217b"
+    },
+    "self-stop.json": {
+      "at": "2026-10-05T14:23:18.208749+00:00",
+      "notes_backup_saved": true,
+      "own_children_reaped": true,
+      "path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/supervisor/frame22/1a7c0825-027a-4047-8404-a20464b6c333/self-stop.json",
+      "bytes": 1336,
+      "sha256": "81c23c35e74a87b68d01dd69adf01d87a16f20bc5b7d65e3cb89dffe90279593"
+    }
+  }
+}
