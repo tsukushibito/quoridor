@@ -1,0 +1,105 @@
+{
+  "UTC": "2026-10-03T12:36:28.167259+00:00",
+  "issue": "quoridor-4lc.186",
+  "necessary_Git_checks": [
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-value-game-diagnostic.md",
+      "Git": "31343f7affba2a64572e0349b9394412e5877db1",
+      "SHA256": "eb9e0c0bc443feed31799b352c5436074d8879bb0f1a0bd8584b3dd2afc8fe44"
+    },
+    {
+      "path": "research-data/ai-sigma/186-value-game-diagnostic/results.json",
+      "Git": "9f60024ced986f452869c611e365b7d87fdd8c69",
+      "SHA256": "569b7901ad83c0cc0c95ca1972e5aa4011d896729ac2dcd1855caddd5c0fd75b"
+    },
+    {
+      "path": "research-data/ai-sigma/186-value-game-diagnostic/contributions.json",
+      "Git": "9f60024ced986f452869c611e365b7d87fdd8c69",
+      "SHA256": "c48c1cd84bf8e42e9140b175c3d30efe2cd714e3e4bbf10fa2eb9f955e081c0e"
+    },
+    {
+      "path": "research-data/ai-sigma/186-value-game-diagnostic/per-row.jsonl.gz",
+      "Git": "9f60024ced986f452869c611e365b7d87fdd8c69",
+      "SHA256": "e3ad152157dfe9d12c8b1b60c7f9500ffcd0a0faea792115e6b1fe02d1e928e0"
+    },
+    {
+      "path": "research-data/ai-sigma/186-value-game-diagnostic/preregister.json",
+      "Git": "9f60024ced986f452869c611e365b7d87fdd8c69",
+      "SHA256": "f2b9fd91d8006def5d0aaaec0d81ff6b478621ae91321943c67512b96c966da1"
+    },
+    {
+      "path": "research-data/ai-sigma/186-value-game-diagnostic/source-binding.json",
+      "Git": "9f60024ced986f452869c611e365b7d87fdd8c69",
+      "SHA256": "f25945538e66f1d0fdf8a13b8931612f18923270dd203310c78e608dc4182cc5"
+    },
+    {
+      "path": "research-data/ai-sigma/186-value-game-diagnostic/science-stop.json",
+      "Git": "9f60024ced986f452869c611e365b7d87fdd8c69",
+      "SHA256": "c83ead1d9bfe88bf5232db813f85896a30db79057aec17214cb669f503cf00f2"
+    },
+    {
+      "path": "research-data/ai-sigma/186-value-game-diagnostic/input-after.json",
+      "Git": "9f60024ced986f452869c611e365b7d87fdd8c69",
+      "SHA256": "bf4e43e382d0f76f97e7822d3be693ad8bfe14fd7723dda74a1c9fe95618bde4"
+    },
+    {
+      "path": "research-data/ai-sigma/186-value-game-diagnostic/process-stop.json",
+      "Git": "9f60024ced986f452869c611e365b7d87fdd8c69",
+      "SHA256": "a84399dd11c26e22b7256b4923629717efaacc363b7e9e5fa8c66c4711c84995"
+    }
+  ],
+  "finite_result": "new3of4 value regress;015 large wrong-sign saturation;all8groups piCE improved;receipt12withinpreregisteredtol",
+  "scientific_scope": "validation-only2CPUbatch/1004sample; no train/GPU/game/formalholdout",
+  "current_adoption": "176 baseline retained/181 alternative; no strength/NI/uniquecause",
+  "next_proposal": "same parent/data/seed/200steps128, LR .01->.0025 one future boundedCPUtrial; no automatic execution",
+  "defer_reason": "at12:34:43 less3min to parent newheavycut12:37:38; cannot responsibly prepare/admit/finish new independentrun now",
+  "goal_achieved": false,
+  "coordinator_perrow_arithmetic": {
+    "rows": 502,
+    "gamegroups": 8,
+    "value_mse_scalar_match_tol": 1e-06,
+    "game_means": {
+      "native176-teacher-013": {
+        "rows": 53,
+        "old_MSE": 0.3315492183813509,
+        "new_MSE": 0.19090552487463322
+      },
+      "native176-teacher-002": {
+        "rows": 59,
+        "old_MSE": 0.1843935193462392,
+        "new_MSE": 0.0931697440160028
+      },
+      "native176-teacher-020": {
+        "rows": 39,
+        "old_MSE": 1.1945237532640114,
+        "new_MSE": 1.193325978059035
+      },
+      "native176-teacher-005": {
+        "rows": 70,
+        "old_MSE": 1.0878159457019396,
+        "new_MSE": 0.3831163294613361
+      },
+      "native181-teacher-015": {
+        "rows": 70,
+        "old_MSE": 2.5497968520436967,
+        "new_MSE": 3.656517713410514
+      },
+      "native181-teacher-004": {
+        "rows": 65,
+        "old_MSE": 0.5809162923922906,
+        "new_MSE": 0.8566116365102622
+      },
+      "native181-teacher-005": {
+        "rows": 52,
+        "old_MSE": 1.8304589906564126,
+        "new_MSE": 1.018053052517084
+      },
+      "native181-teacher-008": {
+        "rows": 94,
+        "old_MSE": 1.659002074535857,
+        "new_MSE": 1.9539474721284622
+      }
+    }
+  },
+  "owner_final_metadata_backup": "31343f7affba2a64572e0349b9394412e5877db1; Beads note confirms backup complete"
+}

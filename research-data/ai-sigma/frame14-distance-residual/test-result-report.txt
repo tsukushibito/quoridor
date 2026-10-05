@@ -1,0 +1,234 @@
+goal quoridor-4lc / child200 one-test終了・exactidentity回収速報
+{
+  "samples": 3366,
+  "unique_NN_models": 3,
+  "prediction_reused": {
+    "best": "candidate",
+    "distance_initial": "candidate"
+  },
+  "planned_test_games": 24,
+  "actual_test_games": 24,
+  "eligible_test_games": 24,
+  "all_rows": 1122,
+  "primary_rows": 1122,
+  "excluded_rows": 0,
+  "zero_eligible_games": [],
+  "distance_initial_maxabs": 0.0
+}
+{
+  "candidate": {
+    "rows": 1122,
+    "games": 24,
+    "rootmean_mse": 0.35509007228146927,
+    "rootmean_game_equal_mse": 0.37102258759085155,
+    "rootmean_rows": 1122,
+    "z_mse": 0.5736346132970471,
+    "z_game_equal_mse": 0.5581784198185141,
+    "z_rows": 1122,
+    "target_mse": 0.35509007228146927,
+    "target_game_equal_mse": 0.37102258759085155,
+    "constant_mse": 0.7354009632645396,
+    "constant_game_equal_mse": 0.770257718823172,
+    "z_sign_rows": 1122,
+    "z_sign_accuracy": 0.7976827094474154,
+    "saturation_fraction": 0.10695187165775401
+  },
+  "last": {
+    "rows": 1122,
+    "games": 24,
+    "rootmean_mse": 0.6229464553729377,
+    "rootmean_game_equal_mse": 0.6630638213344181,
+    "rootmean_rows": 1122,
+    "z_mse": 0.8502317730830118,
+    "z_game_equal_mse": 0.8487301229034571,
+    "z_rows": 1122,
+    "target_mse": 0.6229464553729377,
+    "target_game_equal_mse": 0.6630638213344181,
+    "constant_mse": 0.7354009632645396,
+    "constant_game_equal_mse": 0.770257718823172,
+    "z_sign_rows": 1122,
+    "z_sign_accuracy": 0.6666666666666666,
+    "saturation_fraction": 0.3146167557932264
+  },
+  "distance_only": {
+    "rows": 1122,
+    "games": 24,
+    "rootmean_mse": 0.35509007228146927,
+    "rootmean_game_equal_mse": 0.37102258759085155,
+    "rootmean_rows": 1122,
+    "z_mse": 0.5736346132970471,
+    "z_game_equal_mse": 0.5581784198185141,
+    "z_rows": 1122,
+    "target_mse": 0.35509007228146927,
+    "target_game_equal_mse": 0.37102258759085155,
+    "constant_mse": 0.7354009632645396,
+    "constant_game_equal_mse": 0.770257718823172,
+    "z_sign_rows": 1122,
+    "z_sign_accuracy": 0.7976827094474154,
+    "saturation_fraction": 0.10695187165775401
+  },
+  "constant": {
+    "rows": 1122,
+    "games": 24,
+    "rootmean_mse": 0.7354009632645396,
+    "rootmean_game_equal_mse": 0.770257718823172,
+    "rootmean_rows": 1122,
+    "z_mse": 0.9998856414329406,
+    "z_game_equal_mse": 0.9998461772406856,
+    "z_rows": 1122,
+    "target_mse": 0.7354009632645396,
+    "target_game_equal_mse": 0.770257718823172,
+    "constant_mse": 0.7354009632645396,
+    "constant_game_equal_mse": 0.770257718823172,
+    "z_sign_rows": 1122,
+    "z_sign_accuracy": 0.5053475935828877,
+    "saturation_fraction": 0.0
+  },
+  "random_QF1": {
+    "rows": 1122,
+    "games": 24,
+    "rootmean_mse": 0.7443054909884572,
+    "rootmean_game_equal_mse": 0.7802789135994915,
+    "rootmean_rows": 1122,
+    "z_mse": 1.0075712201459088,
+    "z_game_equal_mse": 1.008426855158159,
+    "z_rows": 1122,
+    "target_mse": 0.7443054909884572,
+    "target_game_equal_mse": 0.7802789135994915,
+    "constant_mse": 0.7354009632645396,
+    "constant_game_equal_mse": 0.770257718823172,
+    "z_sign_rows": 1122,
+    "z_sign_accuracy": 0.4946524064171123,
+    "saturation_fraction": 0.0
+  }
+}
+paired game2000bootstrap seed20080311:
+{
+  "rootmean": {
+    "candidate_minus_distance_only": {
+      "groups": 24,
+      "delta": 0.0,
+      "percentile95": [
+        0.0,
+        0.0
+      ],
+      "seed": 20080311,
+      "replicates": 2000
+    },
+    "candidate_minus_constant": {
+      "groups": 24,
+      "delta": -0.3992351312323204,
+      "percentile95": [
+        -0.48399115689980166,
+        -0.3121659293038424
+      ],
+      "seed": 20080311,
+      "replicates": 2000
+    },
+    "candidate_minus_random_QF1": {
+      "groups": 24,
+      "delta": -0.4092563260086399,
+      "percentile95": [
+        -0.494024238675038,
+        -0.32049092081593045
+      ],
+      "seed": 20080311,
+      "replicates": 2000
+    },
+    "last_minus_distance_only": {
+      "groups": 24,
+      "delta": 0.2920412337435665,
+      "percentile95": [
+        0.03397578919261304,
+        0.5762205287875601
+      ],
+      "seed": 20080311,
+      "replicates": 2000
+    }
+  },
+  "z": {
+    "candidate_minus_distance_only": {
+      "groups": 24,
+      "delta": 0.0,
+      "percentile95": [
+        0.0,
+        0.0
+      ],
+      "seed": 20080311,
+      "replicates": 2000
+    },
+    "candidate_minus_constant": {
+      "groups": 24,
+      "delta": -0.4416677574221715,
+      "percentile95": [
+        -0.533687303631685,
+        -0.3383672886652922
+      ],
+      "seed": 20080311,
+      "replicates": 2000
+    },
+    "candidate_minus_random_QF1": {
+      "groups": 24,
+      "delta": -0.4502484353396449,
+      "percentile95": [
+        -0.5437952968971165,
+        -0.3471785087091827
+      ],
+      "seed": 20080311,
+      "replicates": 2000
+    },
+    "last_minus_distance_only": {
+      "groups": 24,
+      "delta": 0.2905517030849429,
+      "percentile95": [
+        -0.01151942880139288,
+        0.6284842808160499
+      ],
+      "seed": 20080311,
+      "replicates": 2000
+    }
+  },
+  "z_sign": {
+    "candidate_minus_distance_only": {
+      "groups": 24,
+      "delta": 0.0,
+      "percentile95": [
+        0.0,
+        0.0
+      ],
+      "seed": 20080311,
+      "replicates": 2000
+    },
+    "candidate_minus_constant": {
+      "groups": 24,
+      "delta": 0.30591029556630717,
+      "percentile95": [
+        0.2303432971535924,
+        0.3778187769767196
+      ],
+      "seed": 20080311,
+      "replicates": 2000
+    },
+    "candidate_minus_random_QF1": {
+      "groups": 24,
+      "delta": 0.31842178350409595,
+      "percentile95": [
+        0.24017903771670024,
+        0.3927649300888337
+      ],
+      "seed": 20080311,
+      "replicates": 2000
+    },
+    "last_minus_distance_only": {
+      "groups": 24,
+      "delta": -0.14039277283974824,
+      "percentile95": [
+        -0.3048634249156912,
+        0.00641914066808557
+      ],
+      "seed": 20080311,
+      "replicates": 2000
+    }
+  }
+}
+CPU2/GPU0 testjob2.107264s/745603072B/PID3871868 tick33022508 allwait/currentexact不在。train+test全383287sample/heavy7.502262s。source/science停止、必要curve/png/svg/stop/perrowあり。結果SHAded6701298b3d4d93312bbb473f74b582860d98e1d8797754d56a01ed232ddd5。候補選び直し/旧test再読/追加train/test0、teacherrootmean≠真値/棋力0。保存/Git/backup作業のみ継続。

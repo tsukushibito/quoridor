@@ -1,0 +1,25 @@
+{
+  "exact_failed_turn_preserved": true,
+  "new_usage_failure_stops": true,
+  "second_dispatch_attempted": false,
+  "initial_fixture_missing_enabled": "corrected before retry, source unchanged",
+  "rows": [
+    {
+      "event": "owned_turn_finished",
+      "turn_id": "exact-turn",
+      "status": "failed"
+    },
+    {
+      "event": "stopped",
+      "reason": "usageLimitExceeded",
+      "error": {
+        "turn_id": "exact-turn",
+        "error": {
+          "codexErrorInfo": "usageLimitExceeded",
+          "message": "mock quota failure"
+        }
+      }
+    }
+  ],
+  "mock_only": true
+}

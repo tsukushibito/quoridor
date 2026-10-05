@@ -1,0 +1,71 @@
+{
+  "issue": "quoridor-4lc.154",
+  "max_next_proposal": 1,
+  "selected": "wall-only distance-map cache + fixed-player sparse-feature total-cost diagnostic",
+  "status": "future coordinator allocation required; not implemented/executed154",
+  "question": "Does safe wall-only goal-map reuse and <=4 changed313 entries reduce total legal-generation/encoding/make-unmake cost enough to prioritize a small NNUE evaluator + alpha-beta private prototype?",
+  "source_evidence": [
+    "research.rs features() builds2 full 81-cell goal BFS per call and recanonicalizes P2",
+    "position.rs wall_distance() wall-only graph ignores pawns",
+    "SigmaContext history counts/ply affect repetition legal and draw200 while features() ignores them",
+    "151 saved4root state/features/leaf NN/rootmean available but game outcome missing; export/313/holdout pipeline absent"
+  ],
+  "competitors": [
+    "BFS/legal-wall generation may dominate beyond evaluation",
+    "memory/hash/cache overhead or high wall-branch churn cancels reuse",
+    "dense path/interaction features may be required for learning despite sparse speed",
+    "313 without context can alias labels for histories with different legal/terminal states",
+    "teacher rootmean may inherit weak limitedK MCTS bias"
+  ],
+  "owner": "experiment, one private writer; independent critic minimal saved parity arithmetic; coordinator acceptance",
+  "private_scope_candidate": "tools/ai-sigma-nnue-feature-cost/ and corresponding research-data/report only; shared crates/source/models readonly",
+  "inputs_before_results": [
+    "151 initial-p1/reference",
+    "151 asym-hv-p2/reference",
+    "151 frame10-prefix-13/reference",
+    "151 frame10-prefix-14/reference"
+  ],
+  "conditions": {
+    "new_NN_training_game_model": 0,
+    "RuleA": "pinned actual-served StageA rule hash and same legal history",
+    "paths": "up to16 fixed ordered root legal actions per input, root action order before timings; first8pawn if present and first8wall if present; no replacement from later states",
+    "repeat": "one correctness traversal, one warm traversal,64 predetermined repeats per variant; AB/BA alternate by fixedinput index, no adaptive sampling",
+    "caps": "4inputs,<=64 selectedroot action branches, no rollout/search; each browser job<=30s/aggregate<=60s; static commands<=120s; writer20min; review10min; parent absolute deadlines prevail",
+    "CPU": "static0 and browser2 singlelogical; browser RAM allowance coordinated within parent8GiB; forecast self<=1MiB only if combinedguard verified",
+    "variants": "same fixed-coordinate313 plus2distance output; uncached2goal BFS vs immutable goal-map cache; dense648 only structural baseline/cost description, no model-output quality comparison",
+    "map_key": "graph rule/version + H64 + V64 + goal row; 9x9 fixed geometry; pair of maps goal8/0",
+    "full_state_teacher_TT": "pawns + wallcounts + H/V + side + totalply + normalized history counts + rules/source/evaluator version; no board-only TT bound reuse",
+    "wallchange": "new immutable maps or lookup by exact new wallbits; no mutate parent; restore prior map handle on unmake; bounded cache capacity/evictions saved",
+    "features": "313=162pawn+128wall+22remaining-onehot+1binaryturn; fixedplayer/fixedcoordinate; pawn<=3 changed entries, wall<=4 for normal actions; compare full encode vs delta and restoration",
+    "late_distance": "two scalar pawn lookups in fixedplayer maps; distance difference optional redundant not separately changedfactor",
+    "no_claim": "JS browser timing is algorithm/feature plumbing diagnostic, not Rust/Wasm NNUE speed, alpha-beta throughput or strength"
+  },
+  "required_checks": [
+    "all81 cells/map against uncached sameRuleA baseline",
+    "root/child features exactly equal full/delta; legal_action list equality",
+    "goal/draw/history-aware terminal evaluated before NNUE; no unreachable fallback replacing undefined",
+    "jump/diagonal, pawn-move mapreuse, H/V wall invalidation, cache hit/miss/eviction and parent restoration fixtures",
+    "same walls changed pawn/side/history do not change wall-only map but may change legal/terminal/TT",
+    "no action/legalhistory adjustment from elapsed performance"
+  ],
+  "measure_denominators": [
+    "selectedlegal root branches and evaluatedstates",
+    "full BFS calls/cachehits/misses",
+    "legal generation and reachability checks",
+    "feature encode/delta changedentries",
+    "map lookup/copy/cache hashbytes",
+    "make/unmake and context/TT key construction",
+    "aggregate elapsed/CPU only if directly recorded",
+    "cold/warm/time-order separated; costs not converted to chess strength"
+  ],
+  "decisions": {
+    "parity_failure": "stop optimization path; keep uncached correct rules, repair private key/history/restore bug, no speed claim",
+    "cache_positive_total": "if every fixedinput total cost lower with parity and acceptableboundedmemory, prioritize private sparse NNUE evaluator+alpha-beta skeleton under a new allocation; no performance/chess-strength acceptance",
+    "cache_mixed_or_null": "retain uncached/smallimmutableparentmaps; investigate measured legal-wall/BFS or key overhead, stop general cache extension on this set",
+    "bottleneck_elsewhere": "change implementation target to measured legal generation/make-unmake/TT work, no artificial NNUE upgrade",
+    "missing_input_or_source": "return unresolved with no substitutes/new NN; no teacher-ready claim"
+  },
+  "teacher_decision": "candidate primary target is saved rootmean at declared teacher budget, with raw rootNN and game outcomes separate. Do not average targets or infer outcomes. Source/label bias and context aliases require later independent training/evaluation.",
+  "NNUE_advantage": "unmeasured",
+  "baseline_stages": "151 currentmechanism/StageB is teacher/reference stage; owntraining not complete; NNUEcomparison not run; PV completion not perpetual gate"
+}

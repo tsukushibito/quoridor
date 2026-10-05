@@ -1,0 +1,63 @@
+{
+  "UTC": "2026-10-02T23:12:49.717612+00:00",
+  "rows": [
+    {
+      "role": "hypothesis",
+      "thread_id": "01a0f31c-2e4b-7170-82c5-69e1428c2418",
+      "status": {
+        "type": "systemError"
+      },
+      "lastturns": [
+        {
+          "id": "01a0fe08-9376-7592-89f2-eb688428dbc9",
+          "status": "completed",
+          "error": null,
+          "startedAt": 1790968370,
+          "completedAt": 1790969533
+        },
+        {
+          "id": "01a0fe35-9c3e-7993-8ed7-7e3d91593744",
+          "status": "failed",
+          "error": {
+            "message": "You\u2019ve hit your usage limit. Visit https://chatgpt.com/codex/settings/usage to purchase more credits or try again at Oct 7th, 2026 12:55 PM.",
+            "codexErrorInfo": "usageLimitExceeded",
+            "additionalDetails": null,
+            "misalignment": null
+          },
+          "startedAt": 1790971321,
+          "completedAt": 1790972007
+        }
+      ]
+    },
+    {
+      "role": "supervisor",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+      "status": {
+        "type": "systemError"
+      },
+      "lastturns": [
+        {
+          "id": "01a0fe2d-4df8-7ff1-8329-75377b6f30ac",
+          "status": "completed",
+          "error": null,
+          "startedAt": 1790970777,
+          "completedAt": 1790970865
+        },
+        {
+          "id": "01a0fe3f-9b25-7ed2-9254-146e2c638976",
+          "status": "failed",
+          "error": {
+            "message": "You\u2019ve hit your usage limit. Visit https://chatgpt.com/codex/settings/usage to purchase more credits or try again at Oct 7th, 2026 12:55 PM.",
+            "codexErrorInfo": "usageLimitExceeded",
+            "additionalDetails": null,
+            "misalignment": null
+          },
+          "startedAt": 1790971976,
+          "completedAt": 1790972009
+        }
+      ]
+    }
+  ],
+  "restart_or_settings_mutation": false,
+  "old_contract_extended": false
+}

@@ -1,0 +1,85 @@
+{
+  "at": "2026-10-05T04:01:43.805846+00:00",
+  "staged_tree": "a9cbe493252c494bd2ff300bea259937d1b07fd3",
+  "research_paths": 9405,
+  "research_data_paths_identical": 6221,
+  "nonidentical_research_paths_resolved_to_current_main": [
+    "scripts/dev/research-scheduler.py",
+    "tools/research-team/examples/scheduler-contract.json",
+    "tools/research-team/examples/scheduler.json",
+    "tools/research-team/test_scheduler.py"
+  ],
+  "main_paths_preserved": 263,
+  "role_definitions_preserved": true,
+  "merge_parents": [
+    "1e425c0b7fa43dda59af1b7b0dc8c53a7a51b2fa",
+    "307dffcf52b80be402e5190d5e1af5978edca056"
+  ],
+  "verified_at": "2026-10-05T04:05:43.582735+00:00",
+  "checkpoints": {
+    "main": {
+      "before": "288c325c02e8600fc2f870736fbc48287d585da8",
+      "checkpoint": "1e425c0b7fa43dda59af1b7b0dc8c53a7a51b2fa",
+      "staging_backup_commit": "cd6d65e63ab12d2e96cc493434ca576474f447f0",
+      "original_index_backup": "/workspaces/quoridor/.artifacts/research-team/main-integration261/main-index.before",
+      "saved_overlays": 36,
+      "working_files_not_rewritten": true
+    },
+    "research": {
+      "before": "bbf846ede73f22b0c0fe3e4cdf3732dafb5b4625",
+      "checkpoint": "307dffcf52b80be402e5190d5e1af5978edca056",
+      "staging_backup_commit": "500f68181549de5474572c62290a2c516fcf537e",
+      "original_index_backup": "/workspaces/quoridor/.artifacts/research-team/main-integration261/research-index.before",
+      "saved_overlays": 1259,
+      "working_files_not_rewritten": true
+    }
+  },
+  "tests": [
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 /home/vscode/.cache/inference/envs/quoridor-research-team/bin/python -B -m unittest discover -s tools/research-team -p test_*.py",
+      "passed": 60
+    },
+    {
+      "command": "CARGO_BUILD_JOBS=2 cargo test --locked --offline -p quoridor-core -p quoridor-ai --all-features",
+      "passed": 31
+    },
+    {
+      "command": "CARGO_BUILD_JOBS=2 cargo test --locked --offline -p quoridor-core -p quoridor-ai",
+      "passed": 24
+    },
+    {
+      "command": "CARGO_BUILD_JOBS=2 cargo test --locked --offline -p quoridor-wasm --no-default-features --features research",
+      "passed": 2
+    },
+    {
+      "command": "CARGO_BUILD_JOBS=2 cargo test --locked --offline -p quoridor-wasm --no-default-features --features rules",
+      "passed": 6
+    }
+  ],
+  "registry_definition_root": "/workspaces/quoridor",
+  "runtime_state": {
+    "phase": "stopped",
+    "process": null,
+    "owned": null,
+    "recovery_required": false
+  },
+  "backup_refs": [
+    "codex/pre-main-integration261-main",
+    "codex/pre-main-integration261-main-staging",
+    "codex/pre-main-integration261-research",
+    "codex/pre-main-integration261-research-staging"
+  ],
+  "archive_backed_untracked_duplicates_not_added": 336,
+  "scope": {
+    "refactor": false,
+    "worktree_removal": false,
+    "session_cwd_migration": false,
+    "research_resume": false,
+    "push": false
+  },
+  "limitations": [
+    "Existing scientific/raw-data and historical report whitespace was not rewritten.",
+    "Wasm crate feature tests run on host; no new browser match or training run.",
+    "Ignored models, cache and original worktree data remain at their existing paths."
+  ]
+}

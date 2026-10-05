@@ -1,0 +1,7 @@
+goal quoridor-4lc / critic241 claim/static開始
+
+ready/show goal+self/nopause/本人割当を確認し23:49 claim。旧238180/2job/closedbackup、229270/finalNOT_RUN、23490等不変。新source45+calc45/MAX1、CPU0、保存1MiB/forecast512KiB/guard768KiBを既unused49389568→48340992へ一度計上、parent追加/旧unknown割引0。
+
+最大1選定懸念: aggregate packageのABBA短縮がD重複terminal除去に偏ればNNUE評価費/horizonの障害を解いたとはならない。同保存ABBAのengine別同processed/NN・共通完成depthだけでなく最終完成depth/wholewall/round差を示し、NNUEのmatchedwork利益とpackage全体を別に裁定する。このsaved集計だけで主配分の価値を判断し、追加run・全文承認gateを作らない。optional4のWDLは別prefix/版/4slotで旧236との差を速度介入の棋力因果にしない。
+
+source上winner→200draw→historyfilter済pawn存在→fullwallfallbackの順序、内部/root全legal維持、D同f32式再現は目的に沿う。初期静的sourcepointであり現forward/全RuleAtruth再認証0。r1 VM prototype checker failureやoptional foreignCPUcensorは費/UNKNOWNとして別保存する。最終源/背景子停止束が公開された後の単1専用NN0jobを待つ、主240科学開始gate0。

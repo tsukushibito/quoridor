@@ -1,0 +1,95 @@
+{
+  "UTC": "2026-10-03T11:18:32.570280+00:00",
+  "readonly_sources": {
+    "tools/ai-sigma-native-baseline/private/src/lib.rs": {
+      "bytes": 11300,
+      "sha256": "bcd41464e7aa76c3970384b36d41087feb2087b5af7f311bfc6a3b6bf11a2b2e"
+    },
+    "tools/ai-sigma-native-baseline/private/src/main.rs": {
+      "bytes": 388,
+      "sha256": "8e775ccc526c0169cfc260764a20dbf591d7c9da7f211bc094968d8d1a5122f2"
+    },
+    "tools/ai-sigma-native-baseline/reference.cjs": {
+      "bytes": 1475,
+      "sha256": "85cae30273fa481f96ec28fa77eeb5907bb203812c7234f9ffdfd75d337848cf"
+    },
+    "tools/ai-sigma-native-baseline/common.cjs": {
+      "bytes": 2552,
+      "sha256": "35a01a1db0dd124ba78c59aa1bff38232d73fd202c41188bb0f4960e71a4424f"
+    },
+    "tools/ai-sigma-native-checkpoint-teacher/engine.cjs": {
+      "bytes": 8232,
+      "sha256": "f6c2fd2a7a0aeea2225f16899b1056fc6392678cc3bc5e9dbb74495a39676eb3"
+    },
+    "tools/ai-sigma-native-checkpoint-teacher/worker.cjs": {
+      "bytes": 6020,
+      "sha256": "332af668240a6537cfbf777416828566c22f1636778b4d073fdbd8a4f24d3cdf"
+    },
+    "tools/ai-sigma-native-teacher-pipeline/gpu-transport.cjs": {
+      "bytes": 5287,
+      "sha256": "39bfd1b56aa89ddcb331b33f4df9c84048bb00a9942679aebe834051270e2560"
+    },
+    "tools/ai-sigma-gpu-batch-provider/broker.cjs": {
+      "bytes": 1863,
+      "sha256": "edf8a01c9ee157b25ac5a276522e77f63c67b117485f7bdc0aa9d8ca5f430357"
+    },
+    "tools/ai-sigma-gpu-batch-provider/provider.py": {
+      "bytes": 5255,
+      "sha256": "68117891b1f3403a5f07148e27a2b44b6ad8fbd9f462b9fbddfcb02212b6baaa"
+    },
+    "research-data/ai-sigma/177-gpu-batch-provider/results.json": {
+      "bytes": 44069,
+      "sha256": "7564aa61dc414f5821be16a78ad580475c3326a11f98ff18733a96bdd2f6948d"
+    }
+  },
+  "cache_presence": {
+    ".artifacts/ai-sigma/reference-fixtures/SIGMA-PARITY-PLAN/sources": {
+      "exists": true,
+      "matching_immediate_names": []
+    },
+    "/home/vscode/.cache/inference/envs/quoridor-training/lib/python3.14/site-packages": {
+      "exists": true,
+      "matching_immediate_names": []
+    },
+    "/home/vscode/.cache/torch_extensions": {
+      "exists": false,
+      "matching_immediate_names": []
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-BASELINE/build/target/release": {
+      "exists": true,
+      "matching_immediate_names": [
+        "faithful-native.d",
+        "faithful-native"
+      ]
+    },
+    "limit": "known directories immediate listing only; no global cache scan; absence here is not host-wide absence"
+  },
+  "public_source_view": {
+    "immutable_url": "https://raw.githubusercontent.com/bartolomeo3000/SigmaQuoridor/751186344fc52ad0c29bc65922e62c6fa915f006/selfplay_cpp.py",
+    "GitHub_blob_view": "CACHE_MISS",
+    "raw_view": "SUCCESS; browser memory only, no downloaded source saved",
+    "lines": [
+      84,
+      85,
+      86,
+      87,
+      208,
+      211,
+      239,
+      249
+    ],
+    "new_source_download_save": false
+  },
+  "read_after_unchanged": {
+    "tools/ai-sigma-native-baseline/private/src/lib.rs": true,
+    "tools/ai-sigma-native-baseline/private/src/main.rs": true,
+    "tools/ai-sigma-native-baseline/reference.cjs": true,
+    "tools/ai-sigma-native-baseline/common.cjs": true,
+    "tools/ai-sigma-native-checkpoint-teacher/engine.cjs": true,
+    "tools/ai-sigma-native-checkpoint-teacher/worker.cjs": true,
+    "tools/ai-sigma-native-teacher-pipeline/gpu-transport.cjs": true,
+    "tools/ai-sigma-gpu-batch-provider/broker.cjs": true,
+    "tools/ai-sigma-gpu-batch-provider/provider.py": true,
+    "research-data/ai-sigma/177-gpu-batch-provider/results.json": true
+  }
+}

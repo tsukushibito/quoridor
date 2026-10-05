@@ -1,0 +1,76 @@
+{
+  "schema": "leaf-terminal-replay-v1",
+  "task": "frame19-leaf-replay-241-v1",
+  "PASS": true,
+  "newNN": 0,
+  "slots": [
+    {
+      "slot": 1,
+      "status": "UNKNOWN",
+      "adopted": 19,
+      "final_ply": 27,
+      "winner": null,
+      "legal_prefix": true,
+      "history_bound": true
+    },
+    {
+      "slot": 2,
+      "status": "TERMINAL",
+      "adopted": 48,
+      "final_ply": 56,
+      "winner": 2,
+      "legal_prefix": true,
+      "history_bound": true
+    },
+    {
+      "slot": 3,
+      "status": "TERMINAL",
+      "adopted": 41,
+      "final_ply": 57,
+      "winner": 1,
+      "legal_prefix": true,
+      "history_bound": true
+    },
+    {
+      "slot": 4,
+      "status": "TERMINAL",
+      "adopted": 34,
+      "final_ply": 50,
+      "winner": 2,
+      "legal_prefix": true,
+      "history_bound": true
+    }
+  ],
+  "adopted_total": 142,
+  "P2_adopted": 70,
+  "cases": [
+    {
+      "caseIndex": 0,
+      "prefix_history_SHA_bound": true,
+      "legal_count": 94,
+      "source_Action_legal": true
+    },
+    {
+      "caseIndex": 1,
+      "prefix_history_SHA_bound": true,
+      "legal_count": 124,
+      "source_Action_legal": true
+    },
+    {
+      "caseIndex": 2,
+      "prefix_history_SHA_bound": true,
+      "legal_count": 88,
+      "source_Action_legal": true
+    },
+    {
+      "caseIndex": 3,
+      "prefix_history_SHA_bound": true,
+      "legal_count": 3,
+      "source_Action_legal": true
+    }
+  ],
+  "limits": [
+    "shared RuleA, not independent rule implementation",
+    "saved full-window value arithmetic; no re-evaluation of leaf or deep truth"
+  ]
+}

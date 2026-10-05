@@ -1,0 +1,16 @@
+/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port-games-independent/replay.cjs:3
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8')),sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex'),eq=(a,b)=>JSON.stringify(a)===JSON.stringify(b),check=(v,m)=>{if(!v)throw Error(m)};
+                                                                                                                                                                                                    ^
+
+Error: row state/history port151-stageB-group1-r1-7 {"saved":[["3,1|5,7|0||",1],["3,1|5,8|1||",1],["3,2|5,6|0||",1],["3,2|5,7|1||",1],["3,3|5,5|0|0,1;7,6|",1],["3,3|5,5|0||",1],["3,3|5,5|1|0,1|",1],["3,3|5,6|1||",1],["4,0|4,8|0||",1],["4,1|4,8|1||",1],["4,1|5,8|0||",1]],"actual":[["3,1|5,7|0||",1],["3,1|5,8|1||",1],["3,2|5,6|0||",1],["3,2|5,7|1||",1],["3,3|5,5|0||",1],["3,3|5,5|0|0,1;7,6|",1],["3,3|5,5|1|0,1|",1],["3,3|5,6|1||",1],["4,0|4,8|0||",1],["4,1|4,8|1||",1],["4,1|5,8|0||",1]],"savedkey":"3,3|5,5|0|0,1;7,6|","actualkey":"3,3|5,5|0|0,1;7,6|"}
+    at check (/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port-games-independent/replay.cjs:3:203)
+    at Object.<anonymous> (/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port-games-independent/replay.cjs:25:52)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+
+Node.js v24.21.0

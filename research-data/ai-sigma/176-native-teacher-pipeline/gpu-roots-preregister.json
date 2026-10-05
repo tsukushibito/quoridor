@@ -1,0 +1,33 @@
+{
+  "issue": "quoridor-4lc.176",
+  "UTC": "2026-10-03T09:49:25.001558+00:00",
+  "source": {
+    "tools/ai-sigma-native-teacher-pipeline/gpu-transport.cjs": "39bfd1b56aa89ddcb331b33f4df9c84048bb00a9942679aebe834051270e2560",
+    "tools/ai-sigma-native-teacher-pipeline/gpu-engine.cjs": "42a05bd6a6108ef33b2647b5cf3b8e811c14bc287ea3d2accdd08dbd4a7d26f8",
+    "tools/ai-sigma-native-teacher-pipeline/gpu-provider.py": "600fb5403f7051b19be36a258a1b4145f571e789b2f5a826c332dab384e01fae",
+    "tools/ai-sigma-native-teacher-pipeline/gpu-controller.cjs": "44cb44d42ac44e155fa6de48b76ea994888ec5bf83b3dcd08f772febccab8b16",
+    "tools/ai-sigma-native-teacher-pipeline/gpu-adapter.py": "1d3a232faebb0bdb05ec3d10bf30857c9f59374d4fbd5217f18b7f345f2f0478",
+    "tools/ai-sigma-native-teacher-pipeline/gpu-broker.cjs": "edf8a01c9ee157b25ac5a276522e77f63c67b117485f7bdc0aa9d8ca5f430357",
+    "tools/ai-sigma-native-teacher-pipeline/gpu-parity.cjs": "a645f04756f1ce32d23052d48d2a4dd4df3197b8d6a09640ce015843ac0dd7d2",
+    "tools/ai-sigma-native-teacher-pipeline/gpu-mock.cjs": "de2e80c95a1c52cf9a8ded00bf7bde7c7c3b16b04db62cc0e55e16b7fa62f50a",
+    "tools/ai-sigma-native-teacher-pipeline/gpu-schema.py": "1f70bc781724fd9bb97a888fb32d86e6905c7ef07df37b3340d2d21cd9c4ce81"
+  },
+  "original177cap": 512,
+  "privateprovidercap": 1024,
+  "provider_maxallowed": 40000,
+  "inputs": "original176 own generated first4 root order unchanged",
+  "planned_searches": 8,
+  "K": 64,
+  "rootN": 64,
+  "edgeSum": 63,
+  "CPU_mode": "one CPU2 heldORT serial4",
+  "GPU_mode": "one heldproviderCPU0, three enginesCPU2/4/6, first3 concurrent then4th firstengine",
+  "batch": 2,
+  "flush_target_ms": 0.25,
+  "one_pending_per_independent_search": true,
+  "tol": "abs1e-4+rtol1e-4 root firstNN; discrete Action/visits/path separate, no rounding rescue",
+  "qualifying": "legal mask/input/K/return zero/provider source and root tol; remainingtree incomplete",
+  "NN_max": 512,
+  "startup_separate": 4,
+  "next_conditional": "new3CPU/new3GPU games frozen before any efficiency game, not teacher24 replacement"
+}

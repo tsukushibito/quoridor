@@ -1,0 +1,37 @@
+{
+  "UTC": "2026-10-04T09:24:52.671261+00:00",
+  "issue": "quoridor-4lc.221",
+  "phase": 4,
+  "main_condition": "fixed codecGraph/GPU24active maxB8 / fresh96 onejob",
+  "planned_games": 96,
+  "opening_ply_counts": {
+    "8": 16,
+    "12": 16,
+    "16": 16,
+    "20": 16,
+    "24": 16,
+    "28": 16
+  },
+  "K64_root64edge63": true,
+  "provider_math_unchanged": true,
+  "parity432_readonly_reuse": true,
+  "new_game_maxNN": 300000,
+  "total_NN_prior": 569460,
+  "total_cap": 900000,
+  "new_maxheavy_s": 330,
+  "old_heavy_with_unknown_conservative": 703.6702051740737,
+  "static_new_upper40_old_upper130": true,
+  "management_new_upper180_old_upper330": true,
+  "newscience": "2026-10-04T09:35:50Z",
+  "stop": "2026-10-04T09:41:50Z",
+  "save": "2026-10-04T09:49:50Z",
+  "dataset_role": "reusable productioncandidate; evaluation-only metadata without assigned train-val-test split; no learningmix",
+  "opening_generator": "label-free firstaccepted max256; choose pawn/wall category once .5 then legal uniform; new entropy domain",
+  "no_oldlabel_or_holdout_read": true,
+  "oldlabel_free_reference_allowlist": [
+    "research-data/ai-sigma/frame14-teachers/final-qf1-v2/all144-metadata.jsonl.gz",
+    "research-data/ai-sigma/frame14-distance-test/canonical-export-r1/test-metadata.jsonl.gz"
+  ],
+  "default_index_unchanged": true,
+  "openings_SHA": "8fff4511f2afeb0a995395fd86be188afed7ac463415eba7a1e637437cd193d0"
+}

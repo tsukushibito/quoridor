@@ -1,0 +1,1 @@
+goal quoridor-4lc /195:本人ready/showで割当確認、pause無し、claim済み。23:30:36UTC受領、実静的準備開始。新NN/science0。既192 sourceを再用しsplit/露出mask/freeze後test専用評価を接続する。最大1現在不足: fresh144gameの結果前split/生成schemaと実物引渡し未確認。testラベルはfreezeまで未読、学習は生成heavy回収後に直前admit。64MiB移転の確認とforecastを保存する。

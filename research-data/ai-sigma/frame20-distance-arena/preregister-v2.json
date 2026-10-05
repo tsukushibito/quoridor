@@ -1,0 +1,42 @@
+{
+  "UTC": "2026-10-05T01:39:21.944630+00:00",
+  "issue": "quoridor-4lc.249",
+  "primary": "samewall NNUE versus Dclip/tanh exploratory relative WDL and service",
+  "task": "frame20-distance-arena-249-v1",
+  "schema": "distance-arena-v1",
+  "science_jobs": 3,
+  "NNcap": 1000000,
+  "heavy_s": 600,
+  "family_job_NNcap": 490000,
+  "preflight_NNcap": 20000,
+  "nodecap": 32768,
+  "inner_ms": 90,
+  "outer_completevalidation_ms": 100,
+  "entry": "2026-10-05T02:02:00Z",
+  "stop": "2026-10-05T02:08:00Z",
+  "family_continuation": "only fresh physics,remaining cap and clock; no WDL decision/no censored restart",
+  "storage": {
+    "reservation": 8388608,
+    "guard": 7340032,
+    "forecast": 6291456,
+    "pool_unused_before": 26320896,
+    "after": 17932288,
+    "new_parent": 0,
+    "unknown_discount": 0
+  },
+  "limitations": [
+    "same2prefix,not8independent",
+    "bothmodel/package fixed",
+    "Math.tanhf32 endpoints possible",
+    "aggregate different states not fixedwork",
+    "no oldtestlabel/readfit/training",
+    "equalargmax/allchild exact NOT_RECORDED"
+  ],
+  "version": "v2-prospective-transform-scope",
+  "D_counter_definition": {
+    "D_nonterminal_saturated": "pretransform abs(f32 u)>=1 count; NOT tanh output endpoint count",
+    "D_evals": "all nonterminal D leaf evaluations, including abs(u)<1",
+    "terminal": "search terminal nodes, prior winner/draw/nolegal evaluation; separate denominator",
+    "tanh_scope": "changes every nonterminal u, Math.tanh cost and relative calibration to terminal +/-1; not saturation removal only"
+  }
+}

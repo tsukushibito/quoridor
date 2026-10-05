@@ -1,0 +1,50 @@
+{
+  "LR": 0.0025,
+  "seed": 18180311,
+  "steps": 200,
+  "minibatch": 128,
+  "ledger": [
+    {
+      "step": 1,
+      "total": 3.1025733947753906,
+      "CE": 2.411255121231079,
+      "MSE": 0.6913183331489563
+    },
+    {
+      "step": 20,
+      "total": 3.2321362495422363,
+      "CE": 2.501901149749756,
+      "MSE": 0.7302351593971252
+    },
+    {
+      "step": 50,
+      "total": 3.0911242961883545,
+      "CE": 2.455507516860962,
+      "MSE": 0.6356167793273926
+    },
+    {
+      "step": 100,
+      "total": 3.2253611087799072,
+      "CE": 2.632094621658325,
+      "MSE": 0.593266487121582
+    },
+    {
+      "step": 200,
+      "total": 3.0986783504486084,
+      "CE": 2.6140565872192383,
+      "MSE": 0.4846217930316925
+    }
+  ],
+  "minibatch_sequence_SHA256": "a2995b0a9b0e3a864e5b5a74b28081e6bfa32bf52f92e2ce7059f2641fdbfbea",
+  "checkpoint_SHA256": "c9bf3d807f1843c67fe134f5c401411531d438a5c2c7723d36ce160fc564f9be",
+  "checkpoint_bytes": 104281,
+  "weights_only_reload_bit_equal": true,
+  "reload_forward": 0,
+  "sample_counter": {
+    "forward_calls": 202,
+    "samples": 26604,
+    "warm": 0,
+    "train_steps": 200,
+    "GPU": 0
+  }
+}

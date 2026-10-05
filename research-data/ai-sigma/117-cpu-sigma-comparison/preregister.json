@@ -1,0 +1,79 @@
+{
+  "issue": "quoridor-4lc.117",
+  "frame": 8,
+  "received": "2026-10-02T10:50:29Z",
+  "registeredUTC": "2026-10-02T10:56:02.539691+00:00",
+  "code_base112": "3682ab7b520024735e79e42eea79c982897c3957",
+  "seed_glue": "propagated through main->producer->runOwned/ABI->owned/cache; reference first-tie remains deterministic",
+  "game_cap": 12,
+  "max_total_public": 2400,
+  "functional_cap": 20,
+  "pairs": [
+    {
+      "pair": 1,
+      "seed": 1979,
+      "fixture": "initial-p1",
+      "color_order": [
+        1,
+        2
+      ],
+      "config": "pair1.config.json"
+    },
+    {
+      "pair": 2,
+      "seed": 1979,
+      "fixture": "asym-hv-p2",
+      "color_order": [
+        1,
+        2
+      ],
+      "config": "pair2.config.json"
+    },
+    {
+      "pair": 3,
+      "seed": 1979,
+      "fixture": "straight-jump-p2",
+      "color_order": [
+        1,
+        2
+      ],
+      "config": "pair3.config.json"
+    },
+    {
+      "pair": 4,
+      "seed": 2098,
+      "fixture": "initial-p1",
+      "color_order": [
+        1,
+        2
+      ],
+      "config": "pair4.config.json"
+    },
+    {
+      "pair": 5,
+      "seed": 2098,
+      "fixture": "asym-hv-p2",
+      "color_order": [
+        1,
+        2
+      ],
+      "config": "pair5.config.json"
+    },
+    {
+      "pair": 6,
+      "seed": 2098,
+      "fixture": "straight-jump-p2",
+      "color_order": [
+        1,
+        2
+      ],
+      "config": "pair6.config.json"
+    }
+  ],
+  "per_game_max_total_ply": 200,
+  "goal_priority": true,
+  "\u6b63\u5f0fNI": false,
+  "old_WDL_combined": false,
+  "code_Git": "9eb3510b01e47d5e49e6f0412937c80223b71fb0",
+  "pre-NN_mock_failure": "r1 used JSON object key order to compare wall Actions; corrected to strict canonical Action identity, old failure saved; no game started"
+}

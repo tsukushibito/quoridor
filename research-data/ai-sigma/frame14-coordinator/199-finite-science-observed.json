@@ -1,0 +1,51 @@
+{
+  "UTC": "2026-10-04T01:02:05.102436+00:00",
+  "result_SHA": "77ce9e79495038b25a4f4a9ffd95dc9f66700aff2c1f96cf08b65fff3c79733c",
+  "status": "PASS_FINITE_VIEW_FIELDS_AND_DISTANCE_ARITHMETIC",
+  "fit": {
+    "a": 0.06294242415104226,
+    "b": 8.276425107422213,
+    "mean_s": -0.006292394492709307,
+    "variance_s": 0.0044082851818389905,
+    "covariance_s_rootmean": 0.03648484215964952,
+    "constant_train_gameequal": 0.01086389238577769,
+    "zero_variance": false,
+    "rule": "unclipped train-only WLS, then clip(-1,1); s=f32(opponent)-f32(self)",
+    "train_weight": "1/(96*n_game)",
+    "validation_used_in_fit": false
+  },
+  "validation": {
+    "distance": {
+      "rows": 1248,
+      "games": 24,
+      "rootmean_row_MSE": 0.4893138676453408,
+      "rootmean_game_MSE": 0.4851468145499493,
+      "z_row_MSE": 0.8436015120747007,
+      "z_game_MSE": 0.822535032693548,
+      "z_sign_row": 0.7107371794871795,
+      "z_sign_game": 0.7203262314712727
+    },
+    "constant": {
+      "rows": 1248,
+      "games": 24,
+      "rootmean_row_MSE": 0.6660051545754645,
+      "rootmean_game_MSE": 0.6787804677332444,
+      "z_row_MSE": 0.9999091031503511,
+      "z_game_MSE": 0.9998819181685931,
+      "z_sign_row": 0.5048076923076923,
+      "z_sign_game": 0.5054332733792045
+    }
+  },
+  "witness_scope": 12,
+  "trainval_z_rows": 5901,
+  "source_limits": [
+    "12 label-free-selected witnesses only for full648/QF1 field transform",
+    "Terminal winner check from saved120 final pawn prefixes, no full RuleA independent legality replay",
+    "No saved CP sums at witnesses; rootmean field source chain and raw/teacher/label binding only",
+    "No new NN/forward, no test reads; validation is reused diagnosis not independent test",
+    "Rootmean teacher is not true value; regression is a single train-only analytical baseline"
+  ],
+  "science_stop_observed": true,
+  "final_Git_backup_handoff": "pending; not a next static preparation gate",
+  "next_selected": "one baseline-initialized QF1 residual run and new independent test; no old test reuse"
+}

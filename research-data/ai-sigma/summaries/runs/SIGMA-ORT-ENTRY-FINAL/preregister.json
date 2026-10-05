@@ -1,0 +1,242 @@
+{
+  "issue": "quoridor-4lc.32",
+  "version": 1,
+  "classification": "exploratory finite fixed population; never formal NI",
+  "platform": "browser",
+  "m": 10,
+  "total_games": 20,
+  "pool_sha256": "ac11691ffa521a86ffce2cff40dfdbebee5d283a83f70abfe36f43028b72ad9d",
+  "eligible_indices": [
+    1,
+    2,
+    3,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    26,
+    27,
+    28,
+    29,
+    30,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    45,
+    46,
+    48,
+    49,
+    50,
+    52,
+    53,
+    54,
+    55,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63
+  ],
+  "old_excluded_indices": [
+    25,
+    4,
+    51,
+    0,
+    47,
+    44,
+    56,
+    31
+  ],
+  "selection_seed": 2026100204,
+  "order_seed": 2026100205,
+  "selection_rule": "ascending eligible; rejection xorshift32 Fisher-Yates; first10",
+  "order_rule": "shuffle selected with order seed, then draw each color order from same PRNG",
+  "selected_indices": [
+    10,
+    6,
+    45,
+    39,
+    42,
+    43,
+    33,
+    12,
+    32,
+    27
+  ],
+  "block_order": [
+    {
+      "pool_index": 32,
+      "id": "holdout-proposal-32",
+      "platform": "browser",
+      "candidate_color_order": [
+        2,
+        1
+      ]
+    },
+    {
+      "pool_index": 12,
+      "id": "holdout-proposal-12",
+      "platform": "browser",
+      "candidate_color_order": [
+        2,
+        1
+      ]
+    },
+    {
+      "pool_index": 39,
+      "id": "holdout-proposal-39",
+      "platform": "browser",
+      "candidate_color_order": [
+        2,
+        1
+      ]
+    },
+    {
+      "pool_index": 10,
+      "id": "holdout-proposal-10",
+      "platform": "browser",
+      "candidate_color_order": [
+        2,
+        1
+      ]
+    },
+    {
+      "pool_index": 6,
+      "id": "holdout-proposal-06",
+      "platform": "browser",
+      "candidate_color_order": [
+        2,
+        1
+      ]
+    },
+    {
+      "pool_index": 42,
+      "id": "holdout-proposal-42",
+      "platform": "browser",
+      "candidate_color_order": [
+        1,
+        2
+      ]
+    },
+    {
+      "pool_index": 43,
+      "id": "holdout-proposal-43",
+      "platform": "browser",
+      "candidate_color_order": [
+        2,
+        1
+      ]
+    },
+    {
+      "pool_index": 33,
+      "id": "holdout-proposal-33",
+      "platform": "browser",
+      "candidate_color_order": [
+        2,
+        1
+      ]
+    },
+    {
+      "pool_index": 27,
+      "id": "holdout-proposal-27",
+      "platform": "browser",
+      "candidate_color_order": [
+        2,
+        1
+      ]
+    },
+    {
+      "pool_index": 45,
+      "id": "holdout-proposal-45",
+      "platform": "browser",
+      "candidate_color_order": [
+        1,
+        2
+      ]
+    }
+  ],
+  "T_ms": 500,
+  "g_ms": 91,
+  "search_seed": 1979,
+  "candidate": {
+    "PUCT": 1.5,
+    "Q0": 0,
+    "simulations": 4096,
+    "max_nodes": 512,
+    "max_depth": 24,
+    "step": 1,
+    "fallback": 0
+  },
+  "reference": {
+    "cpuct": 1,
+    "FPU": 0.2,
+    "temperature": 0,
+    "order": "fixed upstream",
+    "fallback": 0
+  },
+  "scoring": {
+    "win": 1,
+    "draw": 0.5,
+    "loss": 0,
+    "Xi": "mean same-prefix color pair",
+    "L": "max(0, meanXi-sqrt(log(20)/(2*10)))",
+    "old_results_pooling": false
+  },
+  "retry": {
+    "pair_max": 1,
+    "global_max": 2,
+    "same_prefix_seed": true,
+    "replacement": false,
+    "all_attempts_retained": true
+  },
+  "responsibility": {
+    "candidate_fault": "candidate loss",
+    "reference_timeout": "reference loss",
+    "reference_model_NN_fault": "pair invalid",
+    "identity_referee_infrastructure": "pair invalid",
+    "incomplete": "no complete result"
+  },
+  "rules": {
+    "total_ply": 200,
+    "prefix_included": true,
+    "goal_priority": true,
+    "third_repeat_forbidden": true,
+    "no_legal": "draw"
+  },
+  "input_validation": {
+    "pool64": 64,
+    "golden_excluded": 19,
+    "calibration": "subset of excluded legal golden",
+    "unknown_training_overlap": "unverified"
+  },
+  "future_stop_utc": "2026-10-01T03:55:00Z",
+  "worst_remaining_seconds": 2760,
+  "NN_browser_game_holdout_sends": 0
+}

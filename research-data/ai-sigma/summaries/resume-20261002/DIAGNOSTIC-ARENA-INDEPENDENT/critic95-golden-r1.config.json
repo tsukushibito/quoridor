@@ -1,0 +1,47 @@
+{
+  "issue": "quoridor-4lc.95",
+  "run_kind": "exploratory-diagnostic",
+  "diagnostic": true,
+  "actual_go": false,
+  "holdout": false,
+  "run_id": "critic95-golden-r1",
+  "stage": "golden",
+  "fixture_id": "initial-p1",
+  "prefix_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "games_before": 0,
+  "candidate_color_order": [
+    1,
+    2
+  ],
+  "seed": 1979,
+  "model_sha256": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+  "affinity": [
+    2
+  ],
+  "NNthreads": 1,
+  "clock": {
+    "T": 500,
+    "reserve": 89,
+    "commit": 9,
+    "cutoff": 402,
+    "seal": 411
+  },
+  "processing_deadline": "2026-10-02T03:05:39Z",
+  "startup_root_NN_per_session": 6,
+  "clock_accounting": "next t0 after previous owned stopACK; cause t0 through stopACK retained",
+  "runtime_seconds_cap": 2400,
+  "run_seconds_cap": 600,
+  "RAM": 4294967296,
+  "RSSguard": 3758096384,
+  "storageguard": 117440512,
+  "planned_order": [
+    "golden2",
+    "four-ply4",
+    "initial pair colors1,2",
+    "optional up to8 games; each extension preregistered"
+  ],
+  "git": "dca3588570c293cb1883456901f4fa3f25a9ad4b",
+  "RAM_bytes": 3221225472,
+  "current_RSS_guard_bytes": 2684354560,
+  "storage_guard_bytes": 14680064
+}

@@ -1,0 +1,147 @@
+{
+  "issue": "quoridor-4lc.165",
+  "run": "native165-mechanism-r1",
+  "raw_SHA256": "dee3d3b52839b3c8ba50c082abba835be6f0784c61617a37ccfa550811113286",
+  "StageA_finite_supported": true,
+  "StageB_allowed": true,
+  "first_discrete_difference": null,
+  "first_numeric_difference": {
+    "kind": "edge_prior",
+    "fixture": "initial-p1",
+    "index": [
+      1,
+      76
+    ],
+    "left": 0.0011302381770128896,
+    "right": 0.0011302381770128894
+  },
+  "first_ledger_difference": null,
+  "pairs": [
+    {
+      "fixture": "initial-p1",
+      "finite_supported": true,
+      "CPs": 32,
+      "NN": 32,
+      "max_prior_difference": 2.168404344971009e-19,
+      "max_score_difference": 1.1102230246251565e-16,
+      "max_ledger_difference": 0
+    },
+    {
+      "fixture": "asym-hv-p2",
+      "finite_supported": true,
+      "CPs": 32,
+      "NN": 32,
+      "max_prior_difference": 1.734723475976807e-18,
+      "max_score_difference": 0,
+      "max_ledger_difference": 0
+    },
+    {
+      "fixture": "straight-jump-p2",
+      "finite_supported": true,
+      "CPs": 32,
+      "NN": 32,
+      "max_prior_difference": 1.3877787807814457e-17,
+      "max_score_difference": 1.1102230246251565e-16,
+      "max_ledger_difference": 0
+    },
+    {
+      "fixture": "frame10-prefix-13",
+      "finite_supported": true,
+      "CPs": 32,
+      "NN": 32,
+      "max_prior_difference": 6.938893903907228e-18,
+      "max_score_difference": 1.1102230246251565e-16,
+      "max_ledger_difference": 0
+    },
+    {
+      "fixture": "frame10-prefix-14",
+      "finite_supported": true,
+      "CPs": 32,
+      "NN": 32,
+      "max_prior_difference": 3.469446951953614e-18,
+      "max_score_difference": 0,
+      "max_ledger_difference": 0
+    }
+  ],
+  "native_vs_old_Wasm_root_only": [
+    {
+      "fixture": "initial-p1",
+      "input_bits_exact": true,
+      "different_f32_count": 22,
+      "first_difference": {
+        "index": 1,
+        "native": 1.0479377508163452,
+        "old_Wasm": 1.0479378700256348,
+        "delta": -1.1920928955078125e-07
+      },
+      "max_abs_difference": 2.384185791015625e-06,
+      "compatibility_abs1e4_rel1e4": true,
+      "providers_differ": true,
+      "no_crossbackend_discrete_claim": true
+    },
+    {
+      "fixture": "asym-hv-p2",
+      "input_bits_exact": true,
+      "different_f32_count": 43,
+      "first_difference": {
+        "index": 0,
+        "native": 5.935825824737549,
+        "old_Wasm": 5.935824871063232,
+        "delta": 9.5367431640625e-07
+      },
+      "max_abs_difference": 3.5762786865234375e-06,
+      "compatibility_abs1e4_rel1e4": true,
+      "providers_differ": true,
+      "no_crossbackend_discrete_claim": true
+    },
+    {
+      "fixture": "straight-jump-p2",
+      "input_bits_exact": true,
+      "different_f32_count": 34,
+      "first_difference": {
+        "index": 1,
+        "native": 0.5530123710632324,
+        "old_Wasm": 0.5530126094818115,
+        "delta": -2.384185791015625e-07
+      },
+      "max_abs_difference": 3.0994415283203125e-06,
+      "compatibility_abs1e4_rel1e4": true,
+      "providers_differ": true,
+      "no_crossbackend_discrete_claim": true
+    },
+    {
+      "fixture": "frame10-prefix-13",
+      "input_bits_exact": true,
+      "different_f32_count": 64,
+      "first_difference": {
+        "index": 0,
+        "native": 2.760375499725342,
+        "old_Wasm": 2.7603769302368164,
+        "delta": -1.430511474609375e-06
+      },
+      "max_abs_difference": 3.5762786865234375e-06,
+      "compatibility_abs1e4_rel1e4": true,
+      "providers_differ": true,
+      "no_crossbackend_discrete_claim": true
+    },
+    {
+      "fixture": "frame10-prefix-14",
+      "input_bits_exact": true,
+      "different_f32_count": 48,
+      "first_difference": {
+        "index": 0,
+        "native": 5.053226947784424,
+        "old_Wasm": 5.053227424621582,
+        "delta": -4.76837158203125e-07
+      },
+      "max_abs_difference": 3.0994415283203125e-06,
+      "compatibility_abs1e4_rel1e4": true,
+      "providers_differ": true,
+      "no_crossbackend_discrete_claim": true
+    }
+  ],
+  "hand_NN": 320,
+  "startup_NN": 2,
+  "sameK_not_sameCPU_or_strength": true,
+  "ledger_floating_not_mislabeled_discrete": true
+}

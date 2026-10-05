@@ -1,0 +1,76 @@
+{
+  "issue": "quoridor-4lc.161",
+  "UTC": "2026-10-03T03:36:01.267Z",
+  "rule": {
+    "cutoff": 402,
+    "adopt": 411,
+    "public": 500,
+    "cycle": 1000,
+    "startLate": 5
+  },
+  "tests": [
+    {
+      "name": "same rule both engine labels",
+      "pass": true
+    },
+    {
+      "name": "upper crossing no midpoint rescue",
+      "pass": true
+    },
+    {
+      "name": "upper equal cutoff rejected",
+      "pass": true
+    },
+    {
+      "name": "all after cutoff determinate timing rejection",
+      "pass": true
+    },
+    {
+      "name": "missing upper interval unknown",
+      "pass": true
+    },
+    {
+      "name": "stale generation and illegal action",
+      "pass": true
+    },
+    {
+      "name": "late read retains previously admitted cache",
+      "pass": true
+    },
+    {
+      "name": "public500 is separate from402",
+      "pass": true
+    },
+    {
+      "name": "tail after500 but before1000 does not shorten next allowance",
+      "pass": true
+    },
+    {
+      "name": "early ACK not a clock reset",
+      "pass": true
+    },
+    {
+      "name": "missing ACK active tail or counter mismatch failclosed",
+      "pass": true
+    },
+    {
+      "name": "tail cycle overrun and main lateness unknown quality",
+      "pass": true
+    },
+    {
+      "name": "worker-only crossing preserves uncertainty",
+      "pass": true
+    },
+    {
+      "name": "real SAB atomic coherent read NN0",
+      "pass": true
+    }
+  ],
+  "NN": 0,
+  "Chrome": 0,
+  "workers_created": 0,
+  "kernelCPU_measured": false,
+  "teacher_or_AI_calls": 0,
+  "source_SHA256": "fa773d5f933f701f755f75b673b72aaad6fa4811992e24a6a3cb116bad62d7b2",
+  "formalReady": false
+}

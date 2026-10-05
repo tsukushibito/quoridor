@@ -1,0 +1,22 @@
+{
+  "issue": "quoridor-4lc.201",
+  "UTC": "2026-10-04T01:24:08.114885+00:00",
+  "hyp_candidate_freeze_path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-distance-residual/candidate-freeze-v2.json",
+  "hyp_candidate_freeze_SHA": "abb6d820af93c44a36ddb6c2a13a12a6711b30e923fd046f454e85fdfcdd62ee",
+  "testlabel_analysis_by_generation_owner": false,
+  "prefreeze_allowlist": [
+    "canonical-export-r1/test-canonical.jsonl.gz",
+    "canonical-export-r1/fixed-newtest-mask.json",
+    "test-interface-handoff.json",
+    "all24-slot-status.json",
+    "openings.json"
+  ],
+  "protected_label_containing_paths": [
+    "test-sealed/**",
+    ".artifacts/ai-sigma/frame14-distance-test/test-sealed/**"
+  ],
+  "role_claim": "hash/path only until dedicated200 freeze binds metadata/mask; no OS all-user isolation guarantee",
+  "superseded_hyp_freeze_v1_SHA": "04dd362acb84601941d4782c45d69daecc1ce265e65967e7887847cb05871129",
+  "hyp_freeze_v2_interface_only": true,
+  "freeze_v2_claim": "candidate/coefficient/weights/val fixed; schema bind update before labels evaluation, sharedcanonical unchanged"
+}

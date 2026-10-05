@@ -1,0 +1,21 @@
+{
+  "UTC": "2026-10-03T05:50:47.224716+00:00",
+  "attempts": [
+    {
+      "phase": "final report r1",
+      "exit": 1,
+      "message": "research-team: Another client is dispatching; retry later",
+      "transport_bytes": 0,
+      "science_failure": false
+    },
+    {
+      "phase": "delivery preservation r1",
+      "exit": 1,
+      "message": "JSONDecodeError because transport was empty after rejected dispatch",
+      "Git_mutation_started": false,
+      "science_failure": false
+    }
+  ],
+  "retry_limit": 2,
+  "new_NN": 0
+}

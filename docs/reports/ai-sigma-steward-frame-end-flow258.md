@@ -1,0 +1,11 @@
+# 終了点検のソフト運用整備 / quoridor-4lc.258.1
+
+ユーザー「反映して」による次枠向け整備のみ。終了済frame20の新研究再開・runtime再start・旧期限延長はない。本人ready/show・割当・pauseを確認しclaim。旧scheduler556338/41842377・monitor556359/41842391は正identity現在不在、state stopped/processnull/ownednone/recoveryfalse、Coordinator/Supervisor公式idleを確認した。state/monitor-ended原bytes・親frame20・失効config/contract・終了証拠は保持した。
+
+root solewriterのmain coordinator/steward role・team設計3path書込停止を実hashで照合し、研究mirrorと2role digestを整合。Coordinatorの現common+role全文は同saved公式idle thread/resume同model/effort/cwdで受理。Stewardの全文は同saved正activeへ適用、恒久developer idle更新は本turn終了後root258担当pending。developer readback非対応と受理・自然運用品質を区別する。新role turnやACK専用turnは起動しない。
+
+本人solewriterのmain docs/development/research-scheduler.md終了手順を研究mirrorと同bytesに更新し、既watch heavy準備/終了・早期停止の通知文を変更。配分時に同枠内終了点検の時間/軽資源を確保→既準備通知→Coordinator実課題配送→Steward停止保存と整理/長期構成の判断報告→Coordinator受領/採否又は未完了理由/担当/次機会の引渡しを通す。停止記録と判断報告を混同せず、設定更新一時停止を枠終了へ読み替えない。未報告・期限不足・所有/通信不明で自動延長/期限後研究jobをしない。整理実行/全repo監査/全員ACK/会議/新helper/キュー/cron/定期LLMは追加しない。
+
+watchは通知文字列だけの差分で構文AST確認、文字列を除いたASTが元版と一致。必要4path main/研究一致・6digest・保存全文hash/同settings/停止維持を確認。旧runtimeや旧24入力の期待hashを上書きせず、next-frame-binding-handoff.jsonに現在24source参照と変更5hash（main/研究2roleとwatch）を非active候補として保存。新許可・新期限・validate/start時にbindingを作る引渡しで、失効configへloaded成功を主張しない。
+
+現allocated＋new2MiB forecast既112MiB内・RAM512MiB軽量、親追加/未知減額/NN/GPU/game/build/依存取得/削除なし。主3pathはrootwriterを保持し本人main書込なし、主scheduler終了手順のみ本人main編集。必要版と小記録は研究Git/private indexで保存しdefault index/他者sourceを保持。適用成功と将来の自然起床・終了判断の実働は別として、次の許可枠で効果を見る。本人258.1close/backup、root258/92/親goalはcloseしない。

@@ -1,0 +1,965 @@
+{
+  "task": "frame20-distance-arena-independent-251-v1",
+  "schema": "distance-arena-independent-v1",
+  "PASS": true,
+  "newNN": 0,
+  "planned8": 8,
+  "statuses": {
+    "TERMINAL": 8
+  },
+  "permodeWDL": {
+    "clip": {
+      "L": 2,
+      "W": 2
+    },
+    "tanh": {
+      "L": 2,
+      "W": 2
+    }
+  },
+  "slots": [
+    {
+      "slot": 1,
+      "opening": "opening0",
+      "family": "frame19-242-81276a26289a64dda5f1a0c4218fd2dd-0",
+      "distance_mode": "clip",
+      "NNUE_side": 1,
+      "status": "TERMINAL",
+      "hands": 46,
+      "winner": 2,
+      "result_NNUE": "L",
+      "fault": null,
+      "reason": null
+    },
+    {
+      "slot": 2,
+      "opening": "opening0",
+      "family": "frame19-242-81276a26289a64dda5f1a0c4218fd2dd-0",
+      "distance_mode": "tanh",
+      "NNUE_side": 1,
+      "status": "TERMINAL",
+      "hands": 46,
+      "winner": 2,
+      "result_NNUE": "L",
+      "fault": null,
+      "reason": null
+    },
+    {
+      "slot": 3,
+      "opening": "opening0",
+      "family": "frame19-242-81276a26289a64dda5f1a0c4218fd2dd-0",
+      "distance_mode": "tanh",
+      "NNUE_side": 2,
+      "status": "TERMINAL",
+      "hands": 50,
+      "winner": 2,
+      "result_NNUE": "W",
+      "fault": null,
+      "reason": null
+    },
+    {
+      "slot": 4,
+      "opening": "opening0",
+      "family": "frame19-242-81276a26289a64dda5f1a0c4218fd2dd-0",
+      "distance_mode": "clip",
+      "NNUE_side": 2,
+      "status": "TERMINAL",
+      "hands": 52,
+      "winner": 2,
+      "result_NNUE": "W",
+      "fault": null,
+      "reason": null
+    },
+    {
+      "slot": 5,
+      "opening": "opening1",
+      "family": "frame19-242-81276a26289a64dda5f1a0c4218fd2dd-1",
+      "distance_mode": "tanh",
+      "NNUE_side": 1,
+      "status": "TERMINAL",
+      "hands": 33,
+      "winner": 1,
+      "result_NNUE": "W",
+      "fault": null,
+      "reason": null
+    },
+    {
+      "slot": 6,
+      "opening": "opening1",
+      "family": "frame19-242-81276a26289a64dda5f1a0c4218fd2dd-1",
+      "distance_mode": "clip",
+      "NNUE_side": 1,
+      "status": "TERMINAL",
+      "hands": 51,
+      "winner": 1,
+      "result_NNUE": "W",
+      "fault": null,
+      "reason": null
+    },
+    {
+      "slot": 7,
+      "opening": "opening1",
+      "family": "frame19-242-81276a26289a64dda5f1a0c4218fd2dd-1",
+      "distance_mode": "clip",
+      "NNUE_side": 2,
+      "status": "TERMINAL",
+      "hands": 31,
+      "winner": 1,
+      "result_NNUE": "L",
+      "fault": null,
+      "reason": null
+    },
+    {
+      "slot": 8,
+      "opening": "opening1",
+      "family": "frame19-242-81276a26289a64dda5f1a0c4218fd2dd-1",
+      "distance_mode": "tanh",
+      "NNUE_side": 2,
+      "status": "TERMINAL",
+      "hands": 31,
+      "winner": 1,
+      "result_NNUE": "L",
+      "fault": null,
+      "reason": null
+    }
+  ],
+  "service_recorded": 340,
+  "service_accepted": 340,
+  "service_statuses": {
+    "RECEIVED": 340
+  },
+  "latevalid_discarded": 0,
+  "metrics": [
+    {
+      "mode": "clip",
+      "engine": "NNUE",
+      "accepted_hands": 90,
+      "completeddepth_counts": {
+        "2": 56,
+        "5": 3,
+        "4": 4,
+        "13": 1,
+        "16": 1,
+        "1": 1,
+        "3": 10,
+        "10": 1,
+        "14": 1,
+        "17": 1,
+        "19": 1,
+        "21": 1,
+        "24": 1,
+        "7": 6,
+        "8": 1,
+        "64": 1
+      },
+      "depth_mean": 4.688888888888889,
+      "processed": 185749,
+      "NN": 138715,
+      "D_evals": 0,
+      "pretransform_abs_u_ge1": 0,
+      "terminal_nodes": 3609,
+      "D_raw_min": null,
+      "D_raw_max": null,
+      "nodecap_hands": 0,
+      "elapsed_mean_ms": 89.99813728001382,
+      "elapsed_max_ms": 98.57098001241684,
+      "slack_min_ms": 1.4290199875831604,
+      "partial_discarded_hands": 89,
+      "searchwhole_sum_ms": 7798.607737064362
+    },
+    {
+      "mode": "clip",
+      "engine": "distance",
+      "accepted_hands": 90,
+      "completeddepth_counts": {
+        "2": 19,
+        "3": 36,
+        "5": 6,
+        "14": 2,
+        "19": 1,
+        "17": 1,
+        "7": 4,
+        "15": 1,
+        "20": 1,
+        "22": 1,
+        "26": 1,
+        "30": 1,
+        "6": 3,
+        "9": 1,
+        "8": 3,
+        "4": 8,
+        "64": 1
+      },
+      "depth_mean": 5.866666666666666,
+      "processed": 268351,
+      "NN": 0,
+      "D_evals": 193313,
+      "pretransform_abs_u_ge1": 18230,
+      "terminal_nodes": 5765,
+      "D_raw_min": -2.31732439994812,
+      "D_raw_max": 2.5371596813201904,
+      "nodecap_hands": 0,
+      "elapsed_mean_ms": 90.05327907734447,
+      "elapsed_max_ms": 93.55046397447586,
+      "slack_min_ms": 6.449536025524139,
+      "partial_discarded_hands": 89,
+      "searchwhole_sum_ms": 7829.245118141174
+    },
+    {
+      "mode": "tanh",
+      "engine": "NNUE",
+      "accepted_hands": 80,
+      "completeddepth_counts": {
+        "2": 50,
+        "5": 1,
+        "4": 15,
+        "12": 1,
+        "16": 1,
+        "1": 2,
+        "3": 10
+      },
+      "depth_mean": 2.8125,
+      "processed": 164755,
+      "NN": 129527,
+      "D_evals": 0,
+      "pretransform_abs_u_ge1": 0,
+      "terminal_nodes": 2193,
+      "D_raw_min": null,
+      "D_raw_max": null,
+      "nodecap_hands": 0,
+      "elapsed_mean_ms": 90.87238380387426,
+      "elapsed_max_ms": 98.77936697006226,
+      "slack_min_ms": 1.2206330299377441,
+      "partial_discarded_hands": 80,
+      "searchwhole_sum_ms": 7021.400113463402
+    },
+    {
+      "mode": "tanh",
+      "engine": "distance",
+      "accepted_hands": 80,
+      "completeddepth_counts": {
+        "2": 20,
+        "3": 30,
+        "5": 12,
+        "14": 1,
+        "19": 1,
+        "17": 1,
+        "6": 4,
+        "4": 10,
+        "64": 1
+      },
+      "depth_mean": 4.6,
+      "processed": 240691,
+      "NN": 0,
+      "D_evals": 186271,
+      "pretransform_abs_u_ge1": 24907,
+      "terminal_nodes": 3794,
+      "D_raw_min": -2.31732439994812,
+      "D_raw_max": 2.339017391204834,
+      "nodecap_hands": 0,
+      "elapsed_mean_ms": 90.15047727674246,
+      "elapsed_max_ms": 94.94457298517227,
+      "slack_min_ms": 5.055427014827728,
+      "partial_discarded_hands": 79,
+      "searchwhole_sum_ms": 6983.72955596447
+    }
+  ],
+  "sameinput": [
+    {
+      "engine": "NNUE",
+      "sameinput_pairs": 57,
+      "tanh_deeper": 0,
+      "same_depth": 55,
+      "shallower": 2,
+      "final_Action_changed": 1,
+      "processed_delta_sum": 1187,
+      "NN_delta_sum": 864,
+      "elapsed_delta_mean_ms": 0.09128758258986891,
+      "commondepth_columns": 150,
+      "common_value_maxabs": 0.0,
+      "common_Action_changes": 0,
+      "D_value_Action_change_allowed": false
+    },
+    {
+      "engine": "distance",
+      "sameinput_pairs": 58,
+      "tanh_deeper": 0,
+      "same_depth": 57,
+      "shallower": 1,
+      "final_Action_changed": 1,
+      "processed_delta_sum": 8338,
+      "NN_delta_sum": 0,
+      "elapsed_delta_mean_ms": 0.1848820725391651,
+      "commondepth_columns": 275,
+      "common_value_maxabs": 0.21132487058639526,
+      "common_Action_changes": 6,
+      "D_value_Action_change_allowed": true
+    }
+  ],
+  "pairwitness_first12": [
+    {
+      "clip_slot": 1,
+      "tanh_slot": 2,
+      "engine": "NNUE",
+      "input_SHA": "374ca54918a481867e4063f16a91122176b091228c8bd6a16a9c83eeeae6c064",
+      "clip_depth": 2,
+      "tanh_depth": 2,
+      "clip_Action": 13,
+      "tanh_Action": 13,
+      "processed_delta": 2011,
+      "NN_delta": 1880,
+      "elapsed_delta_ms": -1.5984320044517517,
+      "common": [
+        {
+          "engine": "NNUE",
+          "depth": 1,
+          "clip_value": 0.215995654463768,
+          "tanh_value": 0.215995654463768,
+          "maxabs": 0.0,
+          "Action_equal": true
+        },
+        {
+          "engine": "NNUE",
+          "depth": 2,
+          "clip_value": 0.23794952034950256,
+          "tanh_value": 0.23794952034950256,
+          "maxabs": 0.0,
+          "Action_equal": true
+        }
+      ]
+    },
+    {
+      "clip_slot": 1,
+      "tanh_slot": 2,
+      "engine": "distance",
+      "input_SHA": "8c15c4df0a3f1232580023a54248aa462ae19fc5db9168283c7a347b248b16d7",
+      "clip_depth": 2,
+      "tanh_depth": 2,
+      "clip_Action": 67,
+      "tanh_Action": 67,
+      "processed_delta": 2198,
+      "NN_delta": 0,
+      "elapsed_delta_ms": 2.8315410017967224,
+      "common": [
+        {
+          "engine": "distance",
+          "depth": 1,
+          "clip_value": -0.06038215383887291,
+          "tanh_value": -0.060308877378702164,
+          "maxabs": 7.327646017074585e-05,
+          "Action_equal": true
+        },
+        {
+          "engine": "distance",
+          "depth": 2,
+          "clip_value": -0.13776002824306488,
+          "tanh_value": -0.13689513504505157,
+          "maxabs": 0.0008648931980133057,
+          "Action_equal": true
+        }
+      ]
+    },
+    {
+      "clip_slot": 1,
+      "tanh_slot": 2,
+      "engine": "NNUE",
+      "input_SHA": "bd01a4798b9464c7d4c3e491b5e12fc862a2d3b2aacf57dd3365619cc5ccf18f",
+      "clip_depth": 2,
+      "tanh_depth": 2,
+      "clip_Action": 91,
+      "tanh_Action": 91,
+      "processed_delta": 721,
+      "NN_delta": 603,
+      "elapsed_delta_ms": 0.3590640425682068,
+      "common": [
+        {
+          "engine": "NNUE",
+          "depth": 1,
+          "clip_value": 0.3138107359409332,
+          "tanh_value": 0.3138107359409332,
+          "maxabs": 0.0,
+          "Action_equal": true
+        },
+        {
+          "engine": "NNUE",
+          "depth": 2,
+          "clip_value": 0.18295633792877197,
+          "tanh_value": 0.18295633792877197,
+          "maxabs": 0.0,
+          "Action_equal": true
+        }
+      ]
+    },
+    {
+      "clip_slot": 1,
+      "tanh_slot": 2,
+      "engine": "distance",
+      "input_SHA": "701d1ac6ff3c8eaf5f1c25f93666740b49765599097db398313b6f6b91623bea",
+      "clip_depth": 2,
+      "tanh_depth": 2,
+      "clip_Action": 58,
+      "tanh_Action": 58,
+      "processed_delta": 852,
+      "NN_delta": 0,
+      "elapsed_delta_ms": -0.008102953433990479,
+      "common": [
+        {
+          "engine": "distance",
+          "depth": 1,
+          "clip_value": -0.15945321321487427,
+          "tanh_value": -0.1581154316663742,
+          "maxabs": 0.001337781548500061,
+          "Action_equal": true
+        },
+        {
+          "engine": "distance",
+          "depth": 2,
+          "clip_value": -0.13776002824306488,
+          "tanh_value": -0.13689513504505157,
+          "maxabs": 0.0008648931980133057,
+          "Action_equal": true
+        }
+      ]
+    },
+    {
+      "clip_slot": 1,
+      "tanh_slot": 2,
+      "engine": "NNUE",
+      "input_SHA": "07b2a24a1343179f80f3b77797549f36c16a1ecf1ba8987d65158a2f002b60c5",
+      "clip_depth": 2,
+      "tanh_depth": 2,
+      "clip_Action": 22,
+      "tanh_Action": 22,
+      "processed_delta": 400,
+      "NN_delta": 392,
+      "elapsed_delta_ms": -0.0724329948425293,
+      "common": [
+        {
+          "engine": "NNUE",
+          "depth": 1,
+          "clip_value": 0.25650903582572937,
+          "tanh_value": 0.25650903582572937,
+          "maxabs": 0.0,
+          "Action_equal": true
+        },
+        {
+          "engine": "NNUE",
+          "depth": 2,
+          "clip_value": 0.08852639049291611,
+          "tanh_value": 0.08852639049291611,
+          "maxabs": 0.0,
+          "Action_equal": true
+        }
+      ]
+    },
+    {
+      "clip_slot": 1,
+      "tanh_slot": 2,
+      "engine": "distance",
+      "input_SHA": "77441cf58bccdae4ffe9d87fc1bb5824f130320859ca123ce7bda238bff2af67",
+      "clip_depth": 2,
+      "tanh_depth": 2,
+      "clip_Action": 101,
+      "tanh_Action": 101,
+      "processed_delta": 999,
+      "NN_delta": 0,
+      "elapsed_delta_ms": -0.7078969478607178,
+      "common": [
+        {
+          "engine": "distance",
+          "depth": 1,
+          "clip_value": -0.15945321321487427,
+          "tanh_value": -0.1581154316663742,
+          "maxabs": 0.001337781548500061,
+          "Action_equal": true
+        },
+        {
+          "engine": "distance",
+          "depth": 2,
+          "clip_value": -0.13776002824306488,
+          "tanh_value": -0.13689513504505157,
+          "maxabs": 0.0008648931980133057,
+          "Action_equal": true
+        }
+      ]
+    },
+    {
+      "clip_slot": 1,
+      "tanh_slot": 2,
+      "engine": "NNUE",
+      "input_SHA": "a7ef77f904818ed75234cec3958c963ba76c807bbe9c85c761d19637e1858aa8",
+      "clip_depth": 2,
+      "tanh_depth": 2,
+      "clip_Action": 23,
+      "tanh_Action": 23,
+      "processed_delta": 335,
+      "NN_delta": 329,
+      "elapsed_delta_ms": 0.027682006359100342,
+      "common": [
+        {
+          "engine": "NNUE",
+          "depth": 1,
+          "clip_value": 0.5792003273963928,
+          "tanh_value": 0.5792003273963928,
+          "maxabs": 0.0,
+          "Action_equal": true
+        },
+        {
+          "engine": "NNUE",
+          "depth": 2,
+          "clip_value": 0.5027377605438232,
+          "tanh_value": 0.5027377605438232,
+          "maxabs": 0.0,
+          "Action_equal": true
+        }
+      ]
+    },
+    {
+      "clip_slot": 1,
+      "tanh_slot": 2,
+      "engine": "distance",
+      "input_SHA": "b1e0ee38073d22517bb02a8bfd9f10bfeb159064101adcc4de99cb6454daee58",
+      "clip_depth": 2,
+      "tanh_depth": 2,
+      "clip_Action": 103,
+      "tanh_Action": 103,
+      "processed_delta": 138,
+      "NN_delta": 0,
+      "elapsed_delta_ms": -0.0017339587211608887,
+      "common": [
+        {
+          "engine": "distance",
+          "depth": 1,
+          "clip_value": -0.06038215383887291,
+          "tanh_value": -0.060308877378702164,
+          "maxabs": 7.327646017074585e-05,
+          "Action_equal": true
+        },
+        {
+          "engine": "distance",
+          "depth": 2,
+          "clip_value": -0.03868896886706352,
+          "tanh_value": -0.03866967558860779,
+          "maxabs": 1.9293278455734253e-05,
+          "Action_equal": true
+        }
+      ]
+    },
+    {
+      "clip_slot": 1,
+      "tanh_slot": 2,
+      "engine": "NNUE",
+      "input_SHA": "a9799eebc499da9f3c309f3cadb5eb52d1468be4de8443e0be3a3f6a6753e46e",
+      "clip_depth": 2,
+      "tanh_depth": 2,
+      "clip_Action": 88,
+      "tanh_Action": 88,
+      "processed_delta": -622,
+      "NN_delta": -545,
+      "elapsed_delta_ms": -0.5666000247001648,
+      "common": [
+        {
+          "engine": "NNUE",
+          "depth": 1,
+          "clip_value": 0.6000078320503235,
+          "tanh_value": 0.6000078320503235,
+          "maxabs": 0.0,
+          "Action_equal": true
+        },
+        {
+          "engine": "NNUE",
+          "depth": 2,
+          "clip_value": 0.5062124133110046,
+          "tanh_value": 0.5062124133110046,
+          "maxabs": 0.0,
+          "Action_equal": true
+        }
+      ]
+    },
+    {
+      "clip_slot": 1,
+      "tanh_slot": 2,
+      "engine": "distance",
+      "input_SHA": "039d47ce01f59af06e7a06f087f78b14d6fa59a6432ca14e02a6d7f8f9a5834b",
+      "clip_depth": 2,
+      "tanh_depth": 2,
+      "clip_Action": 157,
+      "tanh_Action": 157,
+      "processed_delta": 435,
+      "NN_delta": 0,
+      "elapsed_delta_ms": -0.034979045391082764,
+      "common": [
+        {
+          "engine": "distance",
+          "depth": 1,
+          "clip_value": 0.13776008784770966,
+          "tanh_value": 0.13689519464969635,
+          "maxabs": 0.0008648931980133057,
+          "Action_equal": true
+        },
+        {
+          "engine": "distance",
+          "depth": 2,
+          "clip_value": 0.15945327281951904,
+          "tanh_value": 0.15811549127101898,
+          "maxabs": 0.001337781548500061,
+          "Action_equal": true
+        }
+      ]
+    },
+    {
+      "clip_slot": 1,
+      "tanh_slot": 2,
+      "engine": "NNUE",
+      "input_SHA": "e6821ce00b6e10a4818fee025e30aa04c1b7fd78e8f55a5be881f6d881f1fc6b",
+      "clip_depth": 2,
+      "tanh_depth": 2,
+      "clip_Action": 98,
+      "tanh_Action": 98,
+      "processed_delta": 785,
+      "NN_delta": 753,
+      "elapsed_delta_ms": 0.20160096883773804,
+      "common": [
+        {
+          "engine": "NNUE",
+          "depth": 1,
+          "clip_value": 0.6364554762840271,
+          "tanh_value": 0.6364554762840271,
+          "maxabs": 0.0,
+          "Action_equal": true
+        },
+        {
+          "engine": "NNUE",
+          "depth": 2,
+          "clip_value": 0.5517002940177917,
+          "tanh_value": 0.5517002940177917,
+          "maxabs": 0.0,
+          "Action_equal": true
+        }
+      ]
+    },
+    {
+      "clip_slot": 1,
+      "tanh_slot": 2,
+      "engine": "distance",
+      "input_SHA": "e831ad7b2fedaa37f727ddb9500e01d4fb6a7dfa196bde90b18bffb72ccf403f",
+      "clip_depth": 2,
+      "tanh_depth": 2,
+      "clip_Action": 118,
+      "tanh_Action": 118,
+      "processed_delta": 123,
+      "NN_delta": 0,
+      "elapsed_delta_ms": 0.3566020727157593,
+      "common": [
+        {
+          "engine": "distance",
+          "depth": 1,
+          "clip_value": 0.23683109879493713,
+          "tanh_value": 0.232500359416008,
+          "maxabs": 0.004330739378929138,
+          "Action_equal": true
+        },
+        {
+          "engine": "distance",
+          "depth": 2,
+          "clip_value": 0.2585243880748749,
+          "tanh_value": 0.25291481614112854,
+          "maxabs": 0.005609571933746338,
+          "Action_equal": true
+        }
+      ]
+    }
+  ],
+  "all_pair_columns_SHA": "ec5009bff1671f50892a62ba4757899c4808bbbfa1c9d5c28cd7127de365afae",
+  "knownNN": 273742,
+  "chargedNN": 273742,
+  "allattempt_guardian_wall_s": 32.09923797601368,
+  "processes": [
+    {
+      "path": "research-data/ai-sigma/frame20-distance-arena/guardians/family0-r1/process.json",
+      "startUTC": "2026-10-05T01:46:56.027991+00:00",
+      "endUTC": "2026-10-05T01:47:13.818880+00:00",
+      "exit": 0,
+      "reason": null,
+      "wall_s": 17.821079367015045,
+      "actualNN": 156272,
+      "chargedNN": 156272,
+      "original_unknown": false,
+      "inflight_unknown": false,
+      "inflight_upper": 0,
+      "wait": true,
+      "current_exact_absent": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame20-distance-arena/guardians/family1-r1/process.json",
+      "startUTC": "2026-10-05T01:48:49.839462+00:00",
+      "endUTC": "2026-10-05T01:49:03.101056+00:00",
+      "exit": 0,
+      "reason": null,
+      "wall_s": 13.26159801898757,
+      "actualNN": 111970,
+      "chargedNN": 111970,
+      "original_unknown": false,
+      "inflight_unknown": false,
+      "inflight_upper": 0,
+      "wait": true,
+      "current_exact_absent": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame20-distance-arena/guardians/preflight-r1/process.json",
+      "startUTC": "2026-10-05T01:45:29.945283+00:00",
+      "endUTC": "2026-10-05T01:45:30.961840+00:00",
+      "exit": 0,
+      "reason": null,
+      "wall_s": 1.0165605900110677,
+      "actualNN": 5500,
+      "chargedNN": 5500,
+      "original_unknown": false,
+      "inflight_unknown": false,
+      "inflight_upper": 0,
+      "wait": true,
+      "current_exact_absent": true
+    }
+  ],
+  "static_source_core_exact": [
+    "function terminal(",
+    "function ordered(",
+    "function child(",
+    "function delta(",
+    "function negamax("
+  ],
+  "frozen_weight_binding": {
+    "manifest_SHA": "9bc786e82c3b73a462da4a30e1d884678ef9f7bdb757560dd6bb437fa4b25d40",
+    "tensor_file_SHA": "b81792d5ba00c6d79b58cada2fc81d84ea822db48c04420b4e269fb9b71841b3",
+    "distance_fit": {
+      "a": 0.06038215201109912,
+      "b": 7.925687690687516
+    },
+    "same_settings_weight_path": true,
+    "new_forward_certification": false
+  },
+  "saved_preflight_commondepth_parity": [
+    {
+      "root": "initial-p1",
+      "engine": "NNUE",
+      "depth": 1,
+      "maxabs": 0.0,
+      "Action_equal": true
+    },
+    {
+      "root": "initial-p1",
+      "engine": "NNUE",
+      "depth": 2,
+      "maxabs": 0.0,
+      "Action_equal": true
+    },
+    {
+      "root": "initial-p1",
+      "engine": "distance",
+      "depth": 1,
+      "maxabs": 0.0,
+      "Action_equal": true
+    },
+    {
+      "root": "initial-p1",
+      "engine": "distance",
+      "depth": 2,
+      "maxabs": 0.0,
+      "Action_equal": true
+    },
+    {
+      "root": "asym-hv-p2",
+      "engine": "NNUE",
+      "depth": 1,
+      "maxabs": 0.0,
+      "Action_equal": true
+    },
+    {
+      "root": "asym-hv-p2",
+      "engine": "NNUE",
+      "depth": 2,
+      "maxabs": 0.0,
+      "Action_equal": true
+    },
+    {
+      "root": "asym-hv-p2",
+      "engine": "distance",
+      "depth": 1,
+      "maxabs": 0.0,
+      "Action_equal": true
+    },
+    {
+      "root": "asym-hv-p2",
+      "engine": "distance",
+      "depth": 2,
+      "maxabs": 0.0,
+      "Action_equal": true
+    }
+  ],
+  "saved_current_clock_fixture": [
+    {
+      "mode": "valid",
+      "adopted": true,
+      "status": "RECEIVED",
+      "elapsed_ms": 1.4157870411872864,
+      "obsolete_discard_count": 0
+    },
+    {
+      "mode": "stale",
+      "adopted": true,
+      "status": "RECEIVED",
+      "elapsed_ms": 0.7279190421104431,
+      "obsolete_discard_count": 1
+    },
+    {
+      "mode": "late",
+      "adopted": false,
+      "status": "OUTER_DEADLINE",
+      "elapsed_ms": 101.14975899457932,
+      "obsolete_discard_count": 0
+    },
+    {
+      "mode": "incomplete",
+      "adopted": false,
+      "status": "RECEIVED",
+      "elapsed_ms": 1.410884976387024,
+      "obsolete_discard_count": 0
+    },
+    {
+      "mode": "eof",
+      "adopted": false,
+      "status": "EOF",
+      "elapsed_ms": 2.458589017391205,
+      "obsolete_discard_count": 0
+    },
+    {
+      "mode": "parse-validation-overshoot",
+      "adopted": false,
+      "status": "OUTER_DEADLINE",
+      "elapsed_ms": 116.06295204162598,
+      "obsolete_discard_count": 0
+    }
+  ],
+  "preflight_provenance194_owner_reference": 194,
+  "numeric_scope": "D nonterminal clip versus f32 tanh same f32 u; stats raw_ge1 not tanh endpoint",
+  "sharedRuleA": {
+    "task": "frame20-distance-replay-251-v1",
+    "schema": "distance-replay-v1",
+    "PASS": true,
+    "newNN": 0,
+    "slots": [
+      {
+        "slot": 1,
+        "status": "TERMINAL",
+        "recorded": 46,
+        "adopted": 46,
+        "winner": 2,
+        "legal_prefix": true,
+        "history_bound": true,
+        "all_root_legal_count": true
+      },
+      {
+        "slot": 2,
+        "status": "TERMINAL",
+        "recorded": 46,
+        "adopted": 46,
+        "winner": 2,
+        "legal_prefix": true,
+        "history_bound": true,
+        "all_root_legal_count": true
+      },
+      {
+        "slot": 3,
+        "status": "TERMINAL",
+        "recorded": 50,
+        "adopted": 50,
+        "winner": 2,
+        "legal_prefix": true,
+        "history_bound": true,
+        "all_root_legal_count": true
+      },
+      {
+        "slot": 4,
+        "status": "TERMINAL",
+        "recorded": 52,
+        "adopted": 52,
+        "winner": 2,
+        "legal_prefix": true,
+        "history_bound": true,
+        "all_root_legal_count": true
+      },
+      {
+        "slot": 5,
+        "status": "TERMINAL",
+        "recorded": 33,
+        "adopted": 33,
+        "winner": 1,
+        "legal_prefix": true,
+        "history_bound": true,
+        "all_root_legal_count": true
+      },
+      {
+        "slot": 6,
+        "status": "TERMINAL",
+        "recorded": 51,
+        "adopted": 51,
+        "winner": 1,
+        "legal_prefix": true,
+        "history_bound": true,
+        "all_root_legal_count": true
+      },
+      {
+        "slot": 7,
+        "status": "TERMINAL",
+        "recorded": 31,
+        "adopted": 31,
+        "winner": 1,
+        "legal_prefix": true,
+        "history_bound": true,
+        "all_root_legal_count": true
+      },
+      {
+        "slot": 8,
+        "status": "TERMINAL",
+        "recorded": 31,
+        "adopted": 31,
+        "winner": 1,
+        "legal_prefix": true,
+        "history_bound": true,
+        "all_root_legal_count": true
+      }
+    ],
+    "recorded": 340,
+    "adopted": 340,
+    "P2": 168,
+    "late_valid_discarded": 0,
+    "dependency": "shared RuleA; no independent rule/NN/leaf/deep truth"
+  },
+  "child": {
+    "argv": [
+      "node",
+      "--max-old-space-size=384",
+      "tools/ai-sigma-frame20-distance-arena-independent/replay-distance.cjs",
+      "--task",
+      "frame20-distance-replay-251-v1",
+      "--out",
+      "research-data/ai-sigma/frame20-distance-arena-independent/replay.json"
+    ],
+    "PID": 560892,
+    "tick": "41860023",
+    "exit": 0,
+    "wait": true,
+    "current_exact_absent": true
+  },
+  "all_exact_argmax": "NOT_RECORDED",
+  "limits": [
+    "2same original242 opening/family color swaps; not IID/new8opening",
+    "different reachedstates aggregates not matchedwork",
+    "Dtransform changes samehorizon value/action by design; not arithmetic fault",
+    "tanh evaluation cost and terminal-relative calibration also change",
+    "NNUE and deep leaf truth not reforward-certified; owner parity receipts finite",
+    "shared RuleA, saved monotonic clock; no independent full rules/timer proof",
+    "old244/229 NOT_RUN and oldtest173 unchanged/unread; no result-selection reopening",
+    "background/management unknown costs not additive exclusive spans"
+  ]
+}

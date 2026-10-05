@@ -1,0 +1,111 @@
+{
+  "UTC": "2026-10-04T23:13:07.747154+00:00",
+  "original_process_receipt_unchanged": true,
+  "model_started": true,
+  "ledger": [
+    {
+      "slot": 1,
+      "opening": "opening0",
+      "family": "frame19-236-e6b86a906ed4bed1bcb2de17901a38ef-0",
+      "NNUE_side": 1,
+      "D_side": 2,
+      "pilot": true,
+      "status": "UNKNOWN",
+      "cause": "GUARD_FALSE_POSITIVE_MANAGEMENT_GIT",
+      "completed_received_hands": 45,
+      "last_received_ply": 44
+    },
+    {
+      "slot": 2,
+      "opening": "opening0",
+      "family": "frame19-236-e6b86a906ed4bed1bcb2de17901a38ef-0",
+      "NNUE_side": 2,
+      "D_side": 1,
+      "pilot": true,
+      "status": "NOT_STARTED",
+      "reason": "PREVIOUS_GUARD_SELFSTOP"
+    },
+    {
+      "slot": 3,
+      "opening": "opening1",
+      "family": "frame19-236-e6b86a906ed4bed1bcb2de17901a38ef-1",
+      "NNUE_side": 1,
+      "D_side": 2,
+      "pilot": true,
+      "status": "NOT_STARTED",
+      "reason": "PREVIOUS_GUARD_SELFSTOP"
+    },
+    {
+      "slot": 4,
+      "opening": "opening1",
+      "family": "frame19-236-e6b86a906ed4bed1bcb2de17901a38ef-1",
+      "NNUE_side": 2,
+      "D_side": 1,
+      "pilot": true,
+      "status": "NOT_STARTED",
+      "reason": "PREVIOUS_GUARD_SELFSTOP"
+    },
+    {
+      "slot": 5,
+      "opening": "opening2",
+      "family": "frame19-236-e6b86a906ed4bed1bcb2de17901a38ef-2",
+      "NNUE_side": 1,
+      "D_side": 2,
+      "pilot": false,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 6,
+      "opening": "opening2",
+      "family": "frame19-236-e6b86a906ed4bed1bcb2de17901a38ef-2",
+      "NNUE_side": 2,
+      "D_side": 1,
+      "pilot": false,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 7,
+      "opening": "opening3",
+      "family": "frame19-236-e6b86a906ed4bed1bcb2de17901a38ef-3",
+      "NNUE_side": 1,
+      "D_side": 2,
+      "pilot": false,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 8,
+      "opening": "opening3",
+      "family": "frame19-236-e6b86a906ed4bed1bcb2de17901a38ef-3",
+      "NNUE_side": 2,
+      "D_side": 1,
+      "pilot": false,
+      "status": "NOT_STARTED"
+    }
+  ],
+  "known_completed_reply_NN": 23242,
+  "inflight_NN_actual": "UNKNOWN",
+  "conservative_inflight_upper": 8192,
+  "samples_charge_conservative": 31434,
+  "offender": {
+    "UTC": "2026-10-04T23:10:56.221385+00:00",
+    "offenders": [
+      {
+        "pid": 391813,
+        "ppid": 391801,
+        "tick": 40846374,
+        "state": "D",
+        "RSS": 4366336,
+        "script": "research-data/ai-sigma/frame19-coordinator/save-owned.py",
+        "argv": [
+          "git",
+          "hash-object",
+          "-w",
+          "--",
+          "research-data/ai-sigma/frame19-coordinator/save-owned.py",
+          ""
+        ]
+      }
+    ]
+  },
+  "scientific_loss": false
+}

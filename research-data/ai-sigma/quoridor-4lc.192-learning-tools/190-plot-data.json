@@ -1,0 +1,110 @@
+{
+  "source": "research-data/ai-sigma/190-nnue-qf1-prototype/learning.json.gz",
+  "sha256": "f549d40eba9f24752cd7459da6f619df5b8e52b95d24f32d4795ed3b62f6723d",
+  "train_steps": 200,
+  "ledger": [
+    {
+      "step": 1,
+      "rootmeanMSE": 0.6480010747909546
+    },
+    {
+      "step": 50,
+      "rootmeanMSE": 0.21550561487674713
+    },
+    {
+      "step": 100,
+      "rootmeanMSE": 0.060570165514945984
+    },
+    {
+      "step": 200,
+      "rootmeanMSE": 0.016534101217985153
+    }
+  ],
+  "endpoints": {
+    "train": {
+      "rows": 2260,
+      "games": 40,
+      "trainmean_constant_rootmeanMSE": 0.628972987808068,
+      "before": {
+        "rootmeanMSE": 0.6375154912550496,
+        "zMSE": 1.0077986107704342,
+        "z_rows": 2260,
+        "sign_correct": 1118,
+        "saturated": 0,
+        "mean_value": -0.09768715047862678
+      },
+      "after": {
+        "rootmeanMSE": 0.01687386774890419,
+        "zMSE": 0.36372170352602934,
+        "z_rows": 2260,
+        "sign_correct": 1985,
+        "saturated": 883,
+        "mean_value": 0.002889427025668504
+      }
+    },
+    "validation": {
+      "rows": 502,
+      "games": 8,
+      "trainmean_constant_rootmeanMSE": 0.6975659299920254,
+      "before": {
+        "rootmeanMSE": 0.7040419907784499,
+        "zMSE": 1.0051496800549125,
+        "z_rows": 502,
+        "sign_correct": 249,
+        "saturated": 0,
+        "mean_value": -0.09677172003247111
+      },
+      "after": {
+        "rootmeanMSE": 0.6465611888817298,
+        "zMSE": 0.9390644939178225,
+        "z_rows": 502,
+        "sign_correct": 329,
+        "saturated": 156,
+        "mean_value": -0.0029569734641595696
+      }
+    },
+    "validation_old": {
+      "rows": 221,
+      "games": 4,
+      "trainmean_constant_rootmeanMSE": 0.6744826149620912,
+      "before": {
+        "rootmeanMSE": 0.6873631349865112,
+        "zMSE": 1.012021085907237,
+        "z_rows": 221,
+        "sign_correct": 109,
+        "saturated": 0,
+        "mean_value": -0.10105839624528971
+      },
+      "after": {
+        "rootmeanMSE": 0.20376212814660916,
+        "zMSE": 0.6239577587263013,
+        "z_rows": 221,
+        "sign_correct": 162,
+        "saturated": 30,
+        "mean_value": -0.00769804571481312
+      }
+    },
+    "validation_new": {
+      "rows": 281,
+      "games": 4,
+      "trainmean_constant_rootmeanMSE": 0.7157204233073828,
+      "before": {
+        "rootmeanMSE": 0.717159525048978,
+        "zMSE": 0.9997454782991695,
+        "z_rows": 281,
+        "sign_correct": 140,
+        "saturated": 0,
+        "mean_value": -0.09340034834907997
+      },
+      "after": {
+        "rootmeanMSE": 0.9948124074670024,
+        "zMSE": 1.186888652200122,
+        "z_rows": 281,
+        "sign_correct": 167,
+        "saturated": 126,
+        "mean_value": 0.0007717701920483831
+      }
+    }
+  },
+  "intermediate_validation_recorded": false
+}

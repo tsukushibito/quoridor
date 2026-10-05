@@ -1,0 +1,11 @@
+goal quoridor-4lc/frame19明示2h22:52:46→10/5 00:52:46、heavy00:42:46/監督00:47:46/monitor00:50:46維持。same saved model-effort-cwd/LLM人数gate0、source92親運用編集0/旧238229234費・原結果/173正式198非学習不変。新model依存toolchain/productpush0。本人239保存診断21Git/current bytesを統括239-finite-acceptance.json受入れ済、acceptance配送時actoridleにつきclose専用wake0だった。この新実質task turnで旧239必要受入れ確認→本人close/backupを行い、新ready/showgoalself/nopause/assigned→claim/static。
+
+問い:240同depth1/2の全rootchild exact列によって、凍結NNUErootmean教師をminimax leafへ接続する意味・horizon/history、D clip等値/strictgreater ordering、depth費の競合説明はどこまで絞れるか。242同prefix同wallpaired一介入と並行staticで評価器側の次選定を具体化する。旧4caseは選択後の探索的診断、badmove真値/未見性能認定0、未来NNUEfitを自動起動しない。
+
+solewrite research-data/ai-sigma/frame19-leaf-meaning-selection/ と docs/reports/ai-sigma-hypothesis-frame19-leaf-meaning.md。新1MiBは確認existingunused31563776→30515200一度計上、guard768KiB/forecast512KiB Git/temp/metadata込み。旧2392MiB・旧全予約unknown減額/parent追加0。新source-read60秒/管理90秒、科学CPUjob0/NN/model/Torch/forward/fit/game/GPU0。別heavyにNN0算術を重ねない。停止compact/saved sourceの必要範囲の静的読取・文書だけ、producer全rawteacher/PT/testtarget/173labels読取0。
+
+参照:240 stopped scientific-stop-v1.json SHA445775e90e3c6f380852174b38278ee5a08a7ca8d144755f2e4f25884293f638/current12source10payloadは統括有限bindPASS、scientific-compact-v1.json SHA2a4a5b4f4a5877afb0aab588ca5e466110b3c5bf2628f8870389567a12c1641c のsecondary summaries16condition/4case。最初3caseNNUEdepth2max値Actionは旧239同sourceログ一致、最後case3depth2全3手−1同値だが旧depth12と同条件比較0。D firstcase大量−1argmaxはclip/terminal/leaf差をsource/formulaから説明候補へ、元failsoft nonbestと今回fullwindowexactを混同0。q入力STMdistancef32/80、D a+ b*(dopp−dself) clip[-1,1]、NNUE tanhSTM/terminal先処理との意味関係、terminal negamax符号/odd-even/historyを必要source範囲で読む。
+
+最大1次案を結果から選ぶ。目標はteacherMSE調整反復ではなく同探索資源の手選択利益。新leaf-target/calibration/features/history/探索制御の競合と実装・検証・取得費を短く比較し、NNUE本体変更を自明に優先しない。数局面で決められなければtypedUNKNOWNと最小次測定を残す。242paired結果を新選定前必須gateとせず、未観測は明示、全roleapproval/新run追加要求0。再学習ならtrain-only fitとvalfreeze/旧openedtest非選定/新独立評価の条件・原scale/model/元teacher品質を尊重する未来具体案だけ。
+
+source/report stop00:12/必要保存handoff00:18、親終了延長0。現在任意CPUjobや232240source edit0、newpairedclock/seed/conditions変更0。max1early見解を即handoff、実効果/深い真値/最高棋力認定0。本人有限検証後同turnclose/notes/backup、242開始/完了を本稿待ちにしない。

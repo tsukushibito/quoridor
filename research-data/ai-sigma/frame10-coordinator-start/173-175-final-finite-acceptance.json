@@ -1,0 +1,195 @@
+{
+  "UTC": "2026-10-03T08:09:52.619916+00:00",
+  "issues": [
+    "quoridor-4lc.173",
+    "quoridor-4lc.175"
+  ],
+  "decision": "ACCEPT_STOPPED_INCONCLUSIVE_TASKS_CLOSE_INDIVIDUALS_ONLY",
+  "owner_Gits": [
+    "5a7ce76e100a8399dc53b73e9eb37607d9d1abf2",
+    "c2594a30ca6943e7f79db96bd2c87ecf5479f486"
+  ],
+  "critic_Gits": [
+    "470059eadd2a4d1a4e5bc827b9728eaef9da8127",
+    "38056ff118d5b51531081334c67231490cd4ee65"
+  ],
+  "owner_intake": "173-final-owner-intake.json",
+  "independent_Git_current_verified": 15,
+  "blocks_pairs_games": [
+    33,
+    99,
+    198
+  ],
+  "WDL": [
+    95,
+    0,
+    103
+  ],
+  "mean": 0.4797979797979798,
+  "wealth": [
+    1.8850575878116762,
+    0.43847935098694685
+  ],
+  "both_threshold_unreached": true,
+  "quality_unknown_registered": 0,
+  "future_unregistered_capacity": 1002,
+  "capacity_identification_interval": [
+    "19/240",
+    "1097/1200"
+  ],
+  "clock_correspondence": {
+    "public": 8268,
+    "errors": [],
+    "maxima": {
+      "receive_ms": {
+        "value": 401.99543499946594,
+        "game": "native173-e2-game-0185",
+        "generation": 2491,
+        "core": 6
+      },
+      "admit_ms": {
+        "value": 401.99864998459816,
+        "game": "native173-e2-game-0119",
+        "generation": 1540,
+        "core": 6
+      },
+      "firstCP_ms": {
+        "value": 120.74030300974846,
+        "game": "native173-e2-game-0014",
+        "generation": 207,
+        "core": 2
+      },
+      "public_actual_ms": {
+        "value": 420.9554470181465,
+        "game": "native173-e2-game-0008",
+        "generation": 100,
+        "core": 2
+      },
+      "cut_actual_ms": {
+        "value": 411.9989809989929,
+        "game": "native173-e2-game-0133",
+        "generation": 1829,
+        "core": 2
+      },
+      "cleanup_after_public_ms": {
+        "value": 14.666054993867874,
+        "game": "native173-e2-game-0163",
+        "generation": 2331,
+        "core": 2
+      },
+      "API_total_ms": {
+        "value": 357.2159490431659,
+        "game": "native173-e2-game-0093",
+        "generation": 1216,
+        "core": 4
+      },
+      "pipe_total_ms": {
+        "value": 411.98211708664894,
+        "game": "native173-e2-game-0151",
+        "generation": 2125,
+        "core": 2
+      },
+      "common_legal_preparation_ms": {
+        "value": 6.5788609981536865,
+        "game": "native173-e2-game-0057",
+        "generation": 786,
+        "core": 4
+      },
+      "previous_zero_to_t0_ms": {
+        "value": 44938.441655009985,
+        "game": "native173-e2-game-0105",
+        "generation": 1318,
+        "core": 4
+      }
+    },
+    "sums": {
+      "firstCP_ms": 185197.3866739869,
+      "public_actual_ms": 3396599.3158019483,
+      "cut_actual_ms": 3322193.5771076083,
+      "cleanup_after_public_ms": 1248.5459195673466,
+      "API_total_ms": 2372418.194860744,
+      "pipe_total_ms": 2819002.4308643937,
+      "common_legal_preparation_ms": 314.88906157016754,
+      "NN_calls": 537460,
+      "NN_returned": 537460,
+      "NN_discarded": 7271,
+      "terminal_noNN": 1484984,
+      "CP_received": 2015173,
+      "CP_admitted": 2008555,
+      "CP_late_discarded": 6618,
+      "CP_schema_rejected": 0,
+      "previous_zero_to_t0_ms": 1225912.1171075106
+    }
+  },
+  "old_epoch_separate": true,
+  "formal_holdout_training": false,
+  "independent_source_children_stopped": true,
+  "management_failures_retained": [
+    "175 preserve-r1/r2 failure logs and versions; successful source/results not rerun"
+  ],
+  "limits": [
+    "stationary conditional mean not proved",
+    "finite timestamps do not prove CPUcycle/drift/clockprecision",
+    "no deep independent RuleA replay/allhost guarantee",
+    "native fixedSigma-Web not browser or SigmaC++ equivalence"
+  ],
+  "goal_achieved": false,
+  "new_execution": 0,
+  "next_direction": "prospective distinct native learning-lineage teacher generation pi/rootmean/z -> learner; no automatic run/frame",
+  "ops92": "steward sole owner08:10:21/08:13:21/08:15:21 still pending",
+  "management_scope_repair_supplement": {
+    "scientific_data_unchanged": true,
+    "r1": "absolute own path created empty root tree entry, commit2b8659496452ae92673322f5807213ac4a87d1c9",
+    "r2": "ls-tree rejected empty entry",
+    "r3": "raw-tree scoped repair removed only own empty entry; relative owned paths; other entries retained",
+    "data_git": "470059eadd2a4d1a4e5bc827b9728eaef9da8127",
+    "handoff_git": "38056ff118d5b51531081334c67231490cd4ee65",
+    "delivery_git": "44d9d1ece033fc0666a65c44a766e02f8a93b3f8",
+    "current_root_readable": true,
+    "proof": "coordinator ls-tree and own current matches verified before acceptance"
+  },
+  "ops92_scheduler_stop_intake": {
+    "path": ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-bounded-records-finish-first-5ce4e18f-c72d-42e3-8c1d-e8586e4abac0/scheduler-end-stop.json",
+    "UTC": "2026-10-03T08:11:42.285202+00:00",
+    "raw": {
+      "at": "2026-10-03T08:10:27.475653+00:00",
+      "reason": "2026-10-03 08:10:21 owned operation deadline",
+      "command_result": {
+        "command_not_needed": true,
+        "reason": "stored scheduler not alive; retain unknown/pending ownership"
+      },
+      "state": {
+        "binding": {
+          "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+          "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+          "target": "supervisor",
+          "dispatch_issue": "quoridor-4lc.40",
+          "contract_file": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+          "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+        },
+        "process": null,
+        "phase": "stopped",
+        "recovery_required": false,
+        "last_result": {
+          "at": "2026-10-03T08:10:21.166905+00:00",
+          "event": "process_stopped",
+          "owned_turn_pending": false
+        },
+        "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+        "config_sha256": "92741398bfab243db7b478774e8b7b020930b4f6e9febe350989ac4f2d18ce00",
+        "contract_sha256": "5232d0d338e11a110bd3a05d5483ceb7d9f1bc635227f0245ece21510bf2db89",
+        "next_at": null,
+        "owned": null
+      },
+      "read_error": null,
+      "last_valid_state": null,
+      "scheduler_identity_alive": false,
+      "owned_turn_pending": false,
+      "external_NN_processes_stopped": false,
+      "scope": "stored owned scheduler/turn only",
+      "read_failure_not_hidden": true,
+      "no_automatic_restart_or_blind_send": true
+    },
+    "limitations": "monitor/evidence final still pending; does not certify external NN termination"
+  }
+}

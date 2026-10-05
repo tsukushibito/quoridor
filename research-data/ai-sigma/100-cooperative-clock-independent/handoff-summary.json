@@ -1,0 +1,218 @@
+{
+  "issue": "quoridor-4lc.100",
+  "UTC": "2026-10-02T03:57:17.793438+00:00",
+  "judgement": "finite cooperative new-NN suppression and completed cp retention supported; neither Worker-deadline violation-rate improvement nor general ACK transport improvement established",
+  "saved97": {
+    "public": 36,
+    "NN_hand": 331,
+    "startup": 6,
+    "cutoff_afterNN_baseline": 8,
+    "cooperative": 0,
+    "postpublic_NN_baseline": 2,
+    "postpublic_cooperative": 0,
+    "all_Workerstop_upper_le500": 36,
+    "ACKlate": 1,
+    "reverse_paired_ACK_ms": 47.28071400523186
+  },
+  "independent100": {
+    "planned": 8,
+    "completed": 8,
+    "legal_before500": 8,
+    "NNhand": 72,
+    "startup": 6,
+    "baseline_aftercutoff": 2,
+    "cooperative_aftercutoff": 0,
+    "baseline_afterpublic": 1,
+    "cooperative_afterpublic": 0,
+    "Workerstop_upper_le500": 8,
+    "ACKlate": 0,
+    "NN_begin": "2026-10-02T03:45:31.097055+00:00",
+    "NN_end": "2026-10-02T03:45:45.166902+00:00"
+  },
+  "NN0_generation_hardfault_budget_mock": true,
+  "numeric": [
+    {
+      "label": "saved97",
+      "rows": 36,
+      "features": 23328,
+      "NN": 4932,
+      "prior": 4632,
+      "p2": 24,
+      "maxNN": 3.5762786865234375e-06,
+      "maxPrior": 1.620060892992825e-06,
+      "reference_value_is_Q_not_rootNN": true
+    },
+    {
+      "label": "independent100",
+      "rows": 8,
+      "features": 5184,
+      "NN": 1096,
+      "prior": 1048,
+      "p2": 0,
+      "maxNN": 2.384185791015625e-06,
+      "maxPrior": 1.620060892992825e-06,
+      "reference_value_is_Q_not_rootNN": true
+    }
+  ],
+  "specification_vs_design": {
+    "cooperative_factor": "candidate passes lo-transformed t0/T/g98; reference checks lo-transformed Node402 before work and inference; same completed snapshot transport and unchanged original search kernel",
+    "clock_quantization_padding_ms": 0.1,
+    "normal_budget_keeps_finished_cp": "VM normal budget + observed cache support, hardfault and generation discard distinct",
+    "scope": "new-work suppression, no synchronous NN interruption; reference has no post-inference absoluteD hard guard, so long in-flight run may outliveD while public older snapshot remains frozen",
+    "utility": "bounds avoidable new work, can shorten residual ACK wait; ACK also contains Worker/page/Node dispatch, clone/JSON/validation/OS; 47.281ms reverse row forbids universal gain",
+    "next_minimal": "same fixed inputs/matched AB-BA, instrument producer JSON/clone, page binding queue and Node receiver work separately; preserve kernel/session.run distinction and all outcome rows"
+  },
+  "limits": [
+    "same initial independent8 only; no new independent P2 NN",
+    "API await is not kernel execution interval",
+    "20/40ms observation cannot guarantee instantaneous peak/allCPU/no external load",
+    "post-run shared dependency Git capture does not fabricate pre-first-read ledger",
+    "BEADS_READ_ERROR context canceled during teardown preserved, not explicit pause or NN negative",
+    "forced controlled/currentabsence not natural or whole-period guarantee",
+    "config Git points upstream83, exact independent runtime overlay997 identified by started/source hashes",
+    "all prior32/NI/Sigma unmet, deadlines/scope/guard/RSS/affinity failures unchanged"
+  ],
+  "owned_stop": "source-runtime-stop-final.json",
+  "actual_go": false,
+  "formal_fairness": false,
+  "NI": false,
+  "games": 0,
+  "holdout_sends": 0,
+  "total_New_storage_conservative": {
+    "UTC": "2026-10-02T03:53:58.628936+00:00",
+    "new_current_allocated": 3375104,
+    "observed_new_peak_before_Git_copy": 4136960,
+    "new_guard": 6291456,
+    "additional_Git_objects_conservative_reserve": 524288,
+    "combined_observed_referenced_scopes": 19476480,
+    "combined_guard": 117440512,
+    "scopes": [
+      {
+        "path": ".artifacts/ai-sigma/verification/CRITIC-ORT-CHECKPOINT",
+        "allocated": 360448
+      },
+      {
+        "path": ".artifacts/ai-sigma/verification/CRITIC-ORT-SEARCH",
+        "allocated": 241664
+      },
+      {
+        "path": ".artifacts/ai-sigma/verification/CRITIC-WEB",
+        "allocated": 86016
+      },
+      {
+        "path": ".artifacts/ai-sigma/verification/CRITIC-PUCT-FACTOR",
+        "allocated": 73728
+      },
+      {
+        "path": ".artifacts/ai-sigma/verification/CRITIC-NN-SEARCH",
+        "allocated": 131072
+      },
+      {
+        "path": ".artifacts/ai-sigma/verification/CRITIC-MATCH-RESULTS",
+        "allocated": 98304
+      },
+      {
+        "path": ".artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY",
+        "allocated": 229376
+      },
+      {
+        "path": ".artifacts/ai-sigma/verification/CRITIC-CONTEXT",
+        "allocated": 61440
+      },
+      {
+        "path": ".artifacts/ai-sigma/verification/CRITIC-PROFILE-PARITY",
+        "allocated": 61440
+      },
+      {
+        "path": ".artifacts/ai-sigma/verification/CRITIC-INFERENCE",
+        "allocated": 106496
+      },
+      {
+        "path": ".artifacts/ai-sigma/verification/CRITIC-MATCHES-GATE",
+        "allocated": 229376
+      },
+      {
+        "path": ".artifacts/ai-sigma/verification/CRITIC-ARENA",
+        "allocated": 176128
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/CRITIC-STREAMING-SNAPSHOT",
+        "allocated": 49152
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/CRITIC-STREAMING-ENTRY-FINAL",
+        "allocated": 2879488
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/CRITIC-STREAMING-READY32",
+        "allocated": 753664
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/CRITIC-ACTUAL-DRIVER-MINIMAL",
+        "allocated": 282624
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/CRITIC-ORT-ENTRY",
+        "allocated": 278528
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/CRITIC-DEADLINE-FIRST-TURN",
+        "allocated": 241664
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/CRITIC-FAIR-STREAMING",
+        "allocated": 1142784
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/CRITIC-STREAMING-EARLY-SEAL",
+        "allocated": 798720
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/CRITICAL-ROLES-V2-HANDOFF",
+        "allocated": 155648
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/CRITIC-STARTUP-WATCHDOG",
+        "allocated": 528384
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/CRITIC-ROOT-NN",
+        "allocated": 73728
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP",
+        "allocated": 2240512
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/CRITIC-CONTINUATION-NOGO",
+        "allocated": 299008
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/CRITIC-SCHEDULER-LIVE",
+        "allocated": 307200
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/CRITIC-ORT-CLEANUP-REPAIR",
+        "allocated": 1261568
+      },
+      {
+        "path": ".artifacts/ai-sigma/resume-20261002/DIAGNOSTIC-ARENA-INDEPENDENT",
+        "allocated": 2654208
+      },
+      {
+        "path": ".artifacts/ai-sigma/resume-20261002/COOPERATIVE-CLOCK-INDEPENDENT",
+        "allocated": 3014656
+      }
+    ],
+    "reservation_not_reset": true,
+    "instant_peak_totalhost_allholding_not_guaranteed": true,
+    "prior95_recorded_combined_held_not_reduced_by_partial_scan": 80461824,
+    "conservative_combined_carry_plus_new_peak_and_Git": 85123072
+  },
+  "failures_preserved": [
+    "mock-r1: ESM .js require exports empty; VM module adapter fixed checker only",
+    "numeric-r1: prefix hash uses legal_prefix rather than Rust action prefix; corrected checker only",
+    "final-evidence-r1: omitted clock rounding padding .1ms in independent interval formula; exact original .1ms restored in checker"
+  ],
+  "source_processing_stop_UTC": "2026-10-02T03:57:17.793438+00:00"
+}

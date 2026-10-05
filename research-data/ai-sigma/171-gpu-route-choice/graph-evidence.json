@@ -1,0 +1,4080 @@
+{
+  "model": "models/experiments/ai-sigma/reference/sigma-pcr250/best.onnx",
+  "model_bytes": 11663428,
+  "model_sha256": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+  "IR": 8,
+  "opset": [
+    {
+      "": 17
+    }
+  ],
+  "inputs": [
+    {
+      "name": "input",
+      "elem_type": 1,
+      "shape": [
+        1,
+        8,
+        9,
+        9
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "name": "policy_logits",
+      "elem_type": 1,
+      "shape": [
+        1,
+        136
+      ]
+    },
+    {
+      "name": "value",
+      "elem_type": 1,
+      "shape": [
+        1,
+        1
+      ]
+    }
+  ],
+  "ops": {
+    "Conv": 24,
+    "Relu": 29,
+    "Add": 13,
+    "Constant": 58,
+    "Slice": 12,
+    "BatchNormalization": 6,
+    "ReduceMean": 5,
+    "ReduceMax": 4,
+    "Concat": 6,
+    "Gemm": 7,
+    "Unsqueeze": 6,
+    "Mul": 2,
+    "ReduceSum": 2,
+    "Gather": 2,
+    "Reshape": 2,
+    "Tanh": 1
+  },
+  "initializers": [
+    {
+      "name": "residuals.2.conv1.weight",
+      "dtype": 1,
+      "shape": [
+        128,
+        128,
+        3,
+        3
+      ],
+      "bytes": 589824,
+      "raw_sha256": "5e559850249e73c8cf1b553440650be948b7f87eaad331a3db61ff124e3c7c79",
+      "external": 0
+    },
+    {
+      "name": "residuals.2.bn1_reg.weight",
+      "dtype": 1,
+      "shape": [
+        96
+      ],
+      "bytes": 384,
+      "raw_sha256": "4101a671f3085e8f45b477888b581b53c17fe82438ebfe7bebfe51e8ba66744d",
+      "external": 0
+    },
+    {
+      "name": "residuals.2.bn1_reg.bias",
+      "dtype": 1,
+      "shape": [
+        96
+      ],
+      "bytes": 384,
+      "raw_sha256": "a02734716ec43a35ea7c5572c37f679932b518caead91ef76fc30b6bf3dae705",
+      "external": 0
+    },
+    {
+      "name": "residuals.2.bn1_reg.running_mean",
+      "dtype": 1,
+      "shape": [
+        96
+      ],
+      "bytes": 384,
+      "raw_sha256": "e04e101ea255fc2bafc69a2b308b337fe246a151d19ec77fbce8f584d16b754c",
+      "external": 0
+    },
+    {
+      "name": "residuals.2.bn1_reg.running_var",
+      "dtype": 1,
+      "shape": [
+        96
+      ],
+      "bytes": 384,
+      "raw_sha256": "011ac448b4f1b9933f32e91b437a3cb5a9d704de40a55192b51cd73f5e615b23",
+      "external": 0
+    },
+    {
+      "name": "residuals.2.bn1_pool.weight",
+      "dtype": 1,
+      "shape": [
+        32
+      ],
+      "bytes": 128,
+      "raw_sha256": "49fd30a80d04a3983eb134a674c65fe284565d88aa2924815c19bb0b82ed2e40",
+      "external": 0
+    },
+    {
+      "name": "residuals.2.bn1_pool.bias",
+      "dtype": 1,
+      "shape": [
+        32
+      ],
+      "bytes": 128,
+      "raw_sha256": "993a322756bb2e756d793e019416c0e6a6f6963a46fb8995f6fd14a6b212051a",
+      "external": 0
+    },
+    {
+      "name": "residuals.2.bn1_pool.running_mean",
+      "dtype": 1,
+      "shape": [
+        32
+      ],
+      "bytes": 128,
+      "raw_sha256": "eae5463a2ecd234e26d8ee8819a035b5287cc15bc97446d83466ddd4e14fe42c",
+      "external": 0
+    },
+    {
+      "name": "residuals.2.bn1_pool.running_var",
+      "dtype": 1,
+      "shape": [
+        32
+      ],
+      "bytes": 128,
+      "raw_sha256": "34a878f45867a0400117ef603fcf84b0ac1dd03624d8320383b1e1c71d5b97cf",
+      "external": 0
+    },
+    {
+      "name": "residuals.2.gpool_fc.weight",
+      "dtype": 1,
+      "shape": [
+        96,
+        64
+      ],
+      "bytes": 24576,
+      "raw_sha256": "d7f3bea3d0ad115922c8a803e5f16d2a2da473b903c468938aba1e2117f6b383",
+      "external": 0
+    },
+    {
+      "name": "residuals.2.gpool_fc.bias",
+      "dtype": 1,
+      "shape": [
+        96
+      ],
+      "bytes": 384,
+      "raw_sha256": "96c4405e52b90e6c25adb6b0d403e8463d77bb68ae50ceed982035cf556c7705",
+      "external": 0
+    },
+    {
+      "name": "residuals.5.conv1.weight",
+      "dtype": 1,
+      "shape": [
+        128,
+        128,
+        3,
+        3
+      ],
+      "bytes": 589824,
+      "raw_sha256": "2ed393bf94d279ccb70f113097b604b88d94dd203cd77ab2bdd9f91257b21389",
+      "external": 0
+    },
+    {
+      "name": "residuals.5.bn1_reg.weight",
+      "dtype": 1,
+      "shape": [
+        96
+      ],
+      "bytes": 384,
+      "raw_sha256": "c67ef7523abe1338d7d7c413afca61a90834cd97ae8362710a878eed8b0e4fbb",
+      "external": 0
+    },
+    {
+      "name": "residuals.5.bn1_reg.bias",
+      "dtype": 1,
+      "shape": [
+        96
+      ],
+      "bytes": 384,
+      "raw_sha256": "d6d8a6b7f0f7606fda78802e931aac329417f559678e9dbd68d70acf7e053def",
+      "external": 0
+    },
+    {
+      "name": "residuals.5.bn1_reg.running_mean",
+      "dtype": 1,
+      "shape": [
+        96
+      ],
+      "bytes": 384,
+      "raw_sha256": "fb246bd434f7d0a902e5a4f7532782431bf233345176d2935bf55ef828c0de6c",
+      "external": 0
+    },
+    {
+      "name": "residuals.5.bn1_reg.running_var",
+      "dtype": 1,
+      "shape": [
+        96
+      ],
+      "bytes": 384,
+      "raw_sha256": "0ecf1b6c5a1545d271306cfbd6b0281c02bfec91d0eb5aa0e356c4d2ed30739d",
+      "external": 0
+    },
+    {
+      "name": "residuals.5.bn1_pool.weight",
+      "dtype": 1,
+      "shape": [
+        32
+      ],
+      "bytes": 128,
+      "raw_sha256": "fe6ca4c6cd3377ec8905c2c16e9ab52c3814b50bb908afbb803a721cc5170968",
+      "external": 0
+    },
+    {
+      "name": "residuals.5.bn1_pool.bias",
+      "dtype": 1,
+      "shape": [
+        32
+      ],
+      "bytes": 128,
+      "raw_sha256": "031308bba96ed6e074e179bff2dd4c4cfc2ca7661d15a2bc5d7f70ade9c64bee",
+      "external": 0
+    },
+    {
+      "name": "residuals.5.bn1_pool.running_mean",
+      "dtype": 1,
+      "shape": [
+        32
+      ],
+      "bytes": 128,
+      "raw_sha256": "319e7998a75e4faff02644ecb378fa4ff3f9c005fdced0d1865957a9d59fd23c",
+      "external": 0
+    },
+    {
+      "name": "residuals.5.bn1_pool.running_var",
+      "dtype": 1,
+      "shape": [
+        32
+      ],
+      "bytes": 128,
+      "raw_sha256": "d0d49670455c5e2e59e1301c53b74f7f7767e7eec23d18b7f73ff894badcab7a",
+      "external": 0
+    },
+    {
+      "name": "residuals.5.gpool_fc.weight",
+      "dtype": 1,
+      "shape": [
+        96,
+        64
+      ],
+      "bytes": 24576,
+      "raw_sha256": "d863a850a8e6fe609761dbb3e39e98b74fdeb0e982b3f4f20544118840f83e05",
+      "external": 0
+    },
+    {
+      "name": "residuals.5.gpool_fc.bias",
+      "dtype": 1,
+      "shape": [
+        96
+      ],
+      "bytes": 384,
+      "raw_sha256": "2f150af59b4207a9a8a4e458bb20f522785ef589b35ef4948a384024b2f4ef15",
+      "external": 0
+    },
+    {
+      "name": "residuals.8.conv1.weight",
+      "dtype": 1,
+      "shape": [
+        128,
+        128,
+        3,
+        3
+      ],
+      "bytes": 589824,
+      "raw_sha256": "83c9c0cb80032e5716d8fe0f51d10930a357474c1fb6252eb12aaa21ddee5acb",
+      "external": 0
+    },
+    {
+      "name": "residuals.8.bn1_reg.weight",
+      "dtype": 1,
+      "shape": [
+        96
+      ],
+      "bytes": 384,
+      "raw_sha256": "1eab21319436e6489965c92619d393b11fb1bcc91e3eecbd9e66ff288a143500",
+      "external": 0
+    },
+    {
+      "name": "residuals.8.bn1_reg.bias",
+      "dtype": 1,
+      "shape": [
+        96
+      ],
+      "bytes": 384,
+      "raw_sha256": "cdad36b8df2acaa901a45c6f18380c59b76e80ebad10fceddf2058a045fd88a1",
+      "external": 0
+    },
+    {
+      "name": "residuals.8.bn1_reg.running_mean",
+      "dtype": 1,
+      "shape": [
+        96
+      ],
+      "bytes": 384,
+      "raw_sha256": "6f4082ac64ced9e6ed127e87e55406093e1543f09a3bfec65b848a23522ab5bc",
+      "external": 0
+    },
+    {
+      "name": "residuals.8.bn1_reg.running_var",
+      "dtype": 1,
+      "shape": [
+        96
+      ],
+      "bytes": 384,
+      "raw_sha256": "41ad3d79f51b7ed0a416f397d9af23a81d6fc8cb23f206753e86a08b558354bd",
+      "external": 0
+    },
+    {
+      "name": "residuals.8.bn1_pool.weight",
+      "dtype": 1,
+      "shape": [
+        32
+      ],
+      "bytes": 128,
+      "raw_sha256": "61ab0ea06e39b0060cdc03b21aabbc3bd09153a44837e75d9a85c1bd98629247",
+      "external": 0
+    },
+    {
+      "name": "residuals.8.bn1_pool.bias",
+      "dtype": 1,
+      "shape": [
+        32
+      ],
+      "bytes": 128,
+      "raw_sha256": "8d47e87efe98fa27493882dbe8b55a2d1b9aaf2e812f270254c73f36eabf70fd",
+      "external": 0
+    },
+    {
+      "name": "residuals.8.bn1_pool.running_mean",
+      "dtype": 1,
+      "shape": [
+        32
+      ],
+      "bytes": 128,
+      "raw_sha256": "6163f73f0faec23c0716d087db15be1203b41517b89a34c69b1121151f83c9a2",
+      "external": 0
+    },
+    {
+      "name": "residuals.8.bn1_pool.running_var",
+      "dtype": 1,
+      "shape": [
+        32
+      ],
+      "bytes": 128,
+      "raw_sha256": "cfeabc2ae7ab0dcaa7f1a7d03de07e1dd4f443b762e4b5f930c7ef05d1d77092",
+      "external": 0
+    },
+    {
+      "name": "residuals.8.gpool_fc.weight",
+      "dtype": 1,
+      "shape": [
+        96,
+        64
+      ],
+      "bytes": 24576,
+      "raw_sha256": "274390a33b19a47409e81f431d912f1d2d1dd6c0525f70d2cec91fe48d7e8355",
+      "external": 0
+    },
+    {
+      "name": "residuals.8.gpool_fc.bias",
+      "dtype": 1,
+      "shape": [
+        96
+      ],
+      "bytes": 384,
+      "raw_sha256": "8e09512a913bf493bde5e6e2a3a80eaf6351fe44a8bddf4fe3e3d2575cdf5023",
+      "external": 0
+    },
+    {
+      "name": "policy_pawn_fc1.weight",
+      "dtype": 1,
+      "shape": [
+        64,
+        384
+      ],
+      "bytes": 98304,
+      "raw_sha256": "f9f643c4daeaca7da3d8f4198698902a71574c6b281523e4845e295eb3a1add4",
+      "external": 0
+    },
+    {
+      "name": "policy_pawn_fc1.bias",
+      "dtype": 1,
+      "shape": [
+        64
+      ],
+      "bytes": 256,
+      "raw_sha256": "2e2e3e4fc90bc5fc50d7032dbadc62eb6e6f6721095cf89e5fe392839a960f76",
+      "external": 0
+    },
+    {
+      "name": "policy_pawn_fc2.weight",
+      "dtype": 1,
+      "shape": [
+        8,
+        64
+      ],
+      "bytes": 2048,
+      "raw_sha256": "39171520f82698a792e6dca1c8a5f91772f2d25d7ae493b4b733ac10c4d2803e",
+      "external": 0
+    },
+    {
+      "name": "policy_pawn_fc2.bias",
+      "dtype": 1,
+      "shape": [
+        8
+      ],
+      "bytes": 32,
+      "raw_sha256": "7f271f3b29437f6b6ae7a6b4d178dccd6c1d32ad3194cf41471b6507cae84b68",
+      "external": 0
+    },
+    {
+      "name": "value_pool_fc.weight",
+      "dtype": 1,
+      "shape": [
+        128,
+        64
+      ],
+      "bytes": 32768,
+      "raw_sha256": "68789b6baff8f14cdbc3f5745ca8b189a2ac8110315ad19dc2bbe0427106a57c",
+      "external": 0
+    },
+    {
+      "name": "value_pool_fc.bias",
+      "dtype": 1,
+      "shape": [
+        128
+      ],
+      "bytes": 512,
+      "raw_sha256": "414250a1c56ab80c299af9d41016b56f2cdd176b97473fa54d288e8034feaa34",
+      "external": 0
+    },
+    {
+      "name": "value_fc2.weight",
+      "dtype": 1,
+      "shape": [
+        1,
+        128
+      ],
+      "bytes": 512,
+      "raw_sha256": "d86da1b87011040303ee47edb673154234b5b243b328322413cdb3c7586e5710",
+      "external": 0
+    },
+    {
+      "name": "value_fc2.bias",
+      "dtype": 1,
+      "shape": [
+        1
+      ],
+      "bytes": 4,
+      "raw_sha256": "b81428f4968ee5c91ea4f269c978f669492cf3b45040ecc2060cfeb2b983b164",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_439",
+      "dtype": 1,
+      "shape": [
+        128,
+        8,
+        3,
+        3
+      ],
+      "bytes": 36864,
+      "raw_sha256": "2368519deb36f9f2f10ba2f0bb405ab73c5881050ed748bc726794452a65f634",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_440",
+      "dtype": 1,
+      "shape": [
+        128
+      ],
+      "bytes": 512,
+      "raw_sha256": "313d5f1c6880dff1701edce82a43120394d160bdbbf6f5464a9f87e547c8d410",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_442",
+      "dtype": 1,
+      "shape": [
+        128,
+        128,
+        3,
+        3
+      ],
+      "bytes": 589824,
+      "raw_sha256": "36d0e24795cfbfea027b28b78a1dce280145192142bb550f62882dff68e92a5a",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_443",
+      "dtype": 1,
+      "shape": [
+        128
+      ],
+      "bytes": 512,
+      "raw_sha256": "c4a060b692f0e27f96a3a9f9d18b15c8cd82d0b693247c3b1ee7c1c61b4df860",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_445",
+      "dtype": 1,
+      "shape": [
+        128,
+        128,
+        3,
+        3
+      ],
+      "bytes": 589824,
+      "raw_sha256": "80b234a73f74daeff74c87998979b9d40281d340524c42896cb9c1f610e21b51",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_446",
+      "dtype": 1,
+      "shape": [
+        128
+      ],
+      "bytes": 512,
+      "raw_sha256": "1ec63ec6ebc02bf0dd877cae8856923854a2889566c585a7a745d93cf2676c3a",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_448",
+      "dtype": 1,
+      "shape": [
+        128,
+        128,
+        3,
+        3
+      ],
+      "bytes": 589824,
+      "raw_sha256": "a6c4a4c3b1ba0734aae9a203b6023adf6d69a69632e62220b9a723d08898496e",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_449",
+      "dtype": 1,
+      "shape": [
+        128
+      ],
+      "bytes": 512,
+      "raw_sha256": "50e3e2a6fa4f62955252a38cd9588f02fbec6a432275954806c77b949be2d40d",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_451",
+      "dtype": 1,
+      "shape": [
+        128,
+        128,
+        3,
+        3
+      ],
+      "bytes": 589824,
+      "raw_sha256": "4a332ffc7142401702dd8ad3fbbd804f15572993146cd2bc216ba098db49279f",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_452",
+      "dtype": 1,
+      "shape": [
+        128
+      ],
+      "bytes": 512,
+      "raw_sha256": "ebe0bae8012d38ac4b09a583c7523e0b38b2c78bdf973f62873ccb86629a29fc",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_454",
+      "dtype": 1,
+      "shape": [
+        128,
+        96,
+        3,
+        3
+      ],
+      "bytes": 442368,
+      "raw_sha256": "c7ee90eeb65f0d7a66130280944587513b51feb71ecf1b010740c2478503be83",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_455",
+      "dtype": 1,
+      "shape": [
+        128
+      ],
+      "bytes": 512,
+      "raw_sha256": "9096dfb80f8679417416e86f7b522e896c41493ac16de865ce421307657a722e",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_457",
+      "dtype": 1,
+      "shape": [
+        128,
+        128,
+        3,
+        3
+      ],
+      "bytes": 589824,
+      "raw_sha256": "e0b7826aa70cbaa5250076b288b89f8877a199a8107a0b6824bdfbfa673d8656",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_458",
+      "dtype": 1,
+      "shape": [
+        128
+      ],
+      "bytes": 512,
+      "raw_sha256": "5c042413966ff6371c087d1a52b1ceeb62870374c21a2226977f89cbf233b73f",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_460",
+      "dtype": 1,
+      "shape": [
+        128,
+        128,
+        3,
+        3
+      ],
+      "bytes": 589824,
+      "raw_sha256": "b647ced292ab14f707d7df61b9137c22a10b3fb615f0f81f4a1388adfabde3f5",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_461",
+      "dtype": 1,
+      "shape": [
+        128
+      ],
+      "bytes": 512,
+      "raw_sha256": "74fd6d0b5bd24a34a40bd68674aae165c3447875ddca1cb32b7858bc5a7045e7",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_463",
+      "dtype": 1,
+      "shape": [
+        128,
+        128,
+        3,
+        3
+      ],
+      "bytes": 589824,
+      "raw_sha256": "30b17e1a900a862523b7604da704a7d2eb95f5a546e119958ab987107bca27e8",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_464",
+      "dtype": 1,
+      "shape": [
+        128
+      ],
+      "bytes": 512,
+      "raw_sha256": "1862862be493ae3f6c49945f04c244711485a863b301344f1b7d2808451edaf2",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_466",
+      "dtype": 1,
+      "shape": [
+        128,
+        128,
+        3,
+        3
+      ],
+      "bytes": 589824,
+      "raw_sha256": "5779956559bff72253555ea1bb78b76ab904ca690901327407487e84392493c8",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_467",
+      "dtype": 1,
+      "shape": [
+        128
+      ],
+      "bytes": 512,
+      "raw_sha256": "b4bab8d608978987b3a80ef3f7d5764931947b7b0d1101621e0813a555c1624d",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_469",
+      "dtype": 1,
+      "shape": [
+        128,
+        96,
+        3,
+        3
+      ],
+      "bytes": 442368,
+      "raw_sha256": "4d03935dad15d32f2b297c0e813cb2f709c31f711950318d07236604ff5c5bee",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_470",
+      "dtype": 1,
+      "shape": [
+        128
+      ],
+      "bytes": 512,
+      "raw_sha256": "6947d2d6e1d18de608af1ff8aff68b0f5de7cea8117c1bf779bfcf46702f5788",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_472",
+      "dtype": 1,
+      "shape": [
+        128,
+        128,
+        3,
+        3
+      ],
+      "bytes": 589824,
+      "raw_sha256": "0a2a6cab7b403c1ed855ad7cc251cec76c19344d0c902f11e9474c2143b9f712",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_473",
+      "dtype": 1,
+      "shape": [
+        128
+      ],
+      "bytes": 512,
+      "raw_sha256": "18e5c2f52103be11b6c387aedb9e3b7e3f37dd05285f5db78310b1b296f9506c",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_475",
+      "dtype": 1,
+      "shape": [
+        128,
+        128,
+        3,
+        3
+      ],
+      "bytes": 589824,
+      "raw_sha256": "7a9cf7b3726bbf73acf047ac4371016963a8954e752cd52fd7647d4b6581e7d2",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_476",
+      "dtype": 1,
+      "shape": [
+        128
+      ],
+      "bytes": 512,
+      "raw_sha256": "fd4804d27d943d0bfaf26adbacb2744630a92217141090683c04e8d9cc75ba9c",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_478",
+      "dtype": 1,
+      "shape": [
+        128,
+        128,
+        3,
+        3
+      ],
+      "bytes": 589824,
+      "raw_sha256": "21a98b19d8b200ece125ed0430506d00010080156a5dd28d2ee346ded96dd4c6",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_479",
+      "dtype": 1,
+      "shape": [
+        128
+      ],
+      "bytes": 512,
+      "raw_sha256": "00af7ae9a0235b7e433bc89f107b6cdf08f22ff8dc8dec1711946afde0a4843e",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_481",
+      "dtype": 1,
+      "shape": [
+        128,
+        128,
+        3,
+        3
+      ],
+      "bytes": 589824,
+      "raw_sha256": "e1e6156eba619d22b4d70de814191f8ec53633965a57dde9804ff0c8c24f3d64",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_482",
+      "dtype": 1,
+      "shape": [
+        128
+      ],
+      "bytes": 512,
+      "raw_sha256": "c95a792a1a24b110909103d189771f3526c73d0bde545b8a011d1f6bf216ac35",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_484",
+      "dtype": 1,
+      "shape": [
+        128,
+        96,
+        3,
+        3
+      ],
+      "bytes": 442368,
+      "raw_sha256": "15700898ff522c7025e3b4917c948605bd1aef5fa87b7c0ee581ecf77ea197d0",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_485",
+      "dtype": 1,
+      "shape": [
+        128
+      ],
+      "bytes": 512,
+      "raw_sha256": "0fb23bea02c765a0ef75dd1afe5c3b1abfbb75e885670e098c3992b36535b9ff",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_487",
+      "dtype": 1,
+      "shape": [
+        128,
+        128,
+        3,
+        3
+      ],
+      "bytes": 589824,
+      "raw_sha256": "90a2fe752943fc37043d8c9da928c76842cf5117fe46fd388c6eddaf9f223fcf",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_488",
+      "dtype": 1,
+      "shape": [
+        128
+      ],
+      "bytes": 512,
+      "raw_sha256": "504ae2174bd8316494a3f87f2c000e4fc3fe722c84bb431dbe73e5b25c3aa78a",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_490",
+      "dtype": 1,
+      "shape": [
+        128,
+        128,
+        3,
+        3
+      ],
+      "bytes": 589824,
+      "raw_sha256": "510f29e18ede9791b7b0b26002f4f1b09ad0cae4f818f29c32d68352b8d5be65",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_491",
+      "dtype": 1,
+      "shape": [
+        128
+      ],
+      "bytes": 512,
+      "raw_sha256": "6c80ac9b0e5b9b9754adadce5ceb8a0f4603bb6c82e7ea5ca97ce026b898a1ba",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_493",
+      "dtype": 1,
+      "shape": [
+        1,
+        128,
+        1,
+        1
+      ],
+      "bytes": 512,
+      "raw_sha256": "a038530f8c207b4acfa56f89a934affc6ace0021a69edaab7daf8a5c16b41bcf",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_494",
+      "dtype": 1,
+      "shape": [
+        1
+      ],
+      "bytes": 4,
+      "raw_sha256": "7dd4314869f4468cb505e3e80f97edd376fa0be7a7a4c4a0a40875e62661405e",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_496",
+      "dtype": 1,
+      "shape": [
+        1,
+        128,
+        1,
+        1
+      ],
+      "bytes": 512,
+      "raw_sha256": "0c9b0e20b7a07991f78e7f9a4aa09c5c30c8aece0f7acac85e4d8fa72aeb61d4",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_497",
+      "dtype": 1,
+      "shape": [
+        1
+      ],
+      "bytes": 4,
+      "raw_sha256": "8dd06edc4b7683a1f13391e6c3b2d987da91394230c4f4c80fe76b7b4ec288c4",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_499",
+      "dtype": 1,
+      "shape": [
+        32,
+        128,
+        1,
+        1
+      ],
+      "bytes": 16384,
+      "raw_sha256": "dc779dc7dbae14d0b5dd15f6ce07dfc06d899921c4f8bf1c93c1cbf4c3fc4eca",
+      "external": 0
+    },
+    {
+      "name": "onnx::Conv_500",
+      "dtype": 1,
+      "shape": [
+        32
+      ],
+      "bytes": 128,
+      "raw_sha256": "b037b8d055b0ae60bf7e81e2a70907651de92f88c4a5aa194ba39448106e648e",
+      "external": 0
+    }
+  ],
+  "nodes": [
+    {
+      "name": "/conv/Conv",
+      "op": "Conv",
+      "inputs": [
+        "input",
+        "onnx::Conv_439",
+        "onnx::Conv_440"
+      ],
+      "outputs": [
+        "/conv/Conv_output_0"
+      ],
+      "attrs": {
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "/Relu",
+      "op": "Relu",
+      "inputs": [
+        "/conv/Conv_output_0"
+      ],
+      "outputs": [
+        "/Relu_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.0/conv1/Conv",
+      "op": "Conv",
+      "inputs": [
+        "/Relu_output_0",
+        "onnx::Conv_442",
+        "onnx::Conv_443"
+      ],
+      "outputs": [
+        "/residuals/residuals.0/conv1/Conv_output_0"
+      ],
+      "attrs": {
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "/residuals/residuals.0/Relu",
+      "op": "Relu",
+      "inputs": [
+        "/residuals/residuals.0/conv1/Conv_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.0/Relu_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.0/conv2/Conv",
+      "op": "Conv",
+      "inputs": [
+        "/residuals/residuals.0/Relu_output_0",
+        "onnx::Conv_445",
+        "onnx::Conv_446"
+      ],
+      "outputs": [
+        "/residuals/residuals.0/conv2/Conv_output_0"
+      ],
+      "attrs": {
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "/residuals/residuals.0/Add",
+      "op": "Add",
+      "inputs": [
+        "/residuals/residuals.0/conv2/Conv_output_0",
+        "/Relu_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.0/Add_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.0/Relu_1",
+      "op": "Relu",
+      "inputs": [
+        "/residuals/residuals.0/Add_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.0/Relu_1_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.1/conv1/Conv",
+      "op": "Conv",
+      "inputs": [
+        "/residuals/residuals.0/Relu_1_output_0",
+        "onnx::Conv_448",
+        "onnx::Conv_449"
+      ],
+      "outputs": [
+        "/residuals/residuals.1/conv1/Conv_output_0"
+      ],
+      "attrs": {
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "/residuals/residuals.1/Relu",
+      "op": "Relu",
+      "inputs": [
+        "/residuals/residuals.1/conv1/Conv_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.1/Relu_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.1/conv2/Conv",
+      "op": "Conv",
+      "inputs": [
+        "/residuals/residuals.1/Relu_output_0",
+        "onnx::Conv_451",
+        "onnx::Conv_452"
+      ],
+      "outputs": [
+        "/residuals/residuals.1/conv2/Conv_output_0"
+      ],
+      "attrs": {
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "/residuals/residuals.1/Add",
+      "op": "Add",
+      "inputs": [
+        "/residuals/residuals.1/conv2/Conv_output_0",
+        "/residuals/residuals.0/Relu_1_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.1/Add_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.1/Relu_1",
+      "op": "Relu",
+      "inputs": [
+        "/residuals/residuals.1/Add_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.1/Relu_1_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.2/conv1/Conv",
+      "op": "Conv",
+      "inputs": [
+        "/residuals/residuals.1/Relu_1_output_0",
+        "residuals.2.conv1.weight"
+      ],
+      "outputs": [
+        "/residuals/residuals.2/conv1/Conv_output_0"
+      ],
+      "attrs": {
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "/residuals/residuals.2/Constant",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/residuals/residuals.2/Constant_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [],
+          "raw_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+        }
+      }
+    },
+    {
+      "name": "/residuals/residuals.2/Constant_1",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/residuals/residuals.2/Constant_1_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8"
+        }
+      }
+    },
+    {
+      "name": "/residuals/residuals.2/Constant_2",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/residuals/residuals.2/Constant_2_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+        }
+      }
+    },
+    {
+      "name": "/residuals/residuals.2/Constant_3",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/residuals/residuals.2/Constant_3_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "a3fd08764e225228ee3e534d14ba14b56418d9f2c40c4b529cc9df6acafaff13"
+        }
+      }
+    },
+    {
+      "name": "/residuals/residuals.2/Constant_4",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/residuals/residuals.2/Constant_4_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8"
+        }
+      }
+    },
+    {
+      "name": "/residuals/residuals.2/Slice",
+      "op": "Slice",
+      "inputs": [
+        "/residuals/residuals.2/conv1/Conv_output_0",
+        "/residuals/residuals.2/Constant_2_output_0",
+        "/residuals/residuals.2/Constant_3_output_0",
+        "/residuals/residuals.2/Constant_1_output_0",
+        "/residuals/residuals.2/Constant_4_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.2/Slice_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.2/bn1_reg/BatchNormalization",
+      "op": "BatchNormalization",
+      "inputs": [
+        "/residuals/residuals.2/Slice_output_0",
+        "residuals.2.bn1_reg.weight",
+        "residuals.2.bn1_reg.bias",
+        "residuals.2.bn1_reg.running_mean",
+        "residuals.2.bn1_reg.running_var"
+      ],
+      "outputs": [
+        "/residuals/residuals.2/bn1_reg/BatchNormalization_output_0"
+      ],
+      "attrs": {
+        "epsilon": 9.999999747378752e-06,
+        "momentum": 0.8999999761581421,
+        "training_mode": 0
+      }
+    },
+    {
+      "name": "/residuals/residuals.2/Constant_5",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/residuals/residuals.2/Constant_5_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8"
+        }
+      }
+    },
+    {
+      "name": "/residuals/residuals.2/Constant_6",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/residuals/residuals.2/Constant_6_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "a3fd08764e225228ee3e534d14ba14b56418d9f2c40c4b529cc9df6acafaff13"
+        }
+      }
+    },
+    {
+      "name": "/residuals/residuals.2/Constant_7",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/residuals/residuals.2/Constant_7_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "6a69a6cc7473a16302890cd2a9e93e347281f6ea0e1bb784e589753bed0b3324"
+        }
+      }
+    },
+    {
+      "name": "/residuals/residuals.2/Constant_8",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/residuals/residuals.2/Constant_8_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8"
+        }
+      }
+    },
+    {
+      "name": "/residuals/residuals.2/Slice_1",
+      "op": "Slice",
+      "inputs": [
+        "/residuals/residuals.2/conv1/Conv_output_0",
+        "/residuals/residuals.2/Constant_6_output_0",
+        "/residuals/residuals.2/Constant_7_output_0",
+        "/residuals/residuals.2/Constant_5_output_0",
+        "/residuals/residuals.2/Constant_8_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.2/Slice_1_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.2/bn1_pool/BatchNormalization",
+      "op": "BatchNormalization",
+      "inputs": [
+        "/residuals/residuals.2/Slice_1_output_0",
+        "residuals.2.bn1_pool.weight",
+        "residuals.2.bn1_pool.bias",
+        "residuals.2.bn1_pool.running_mean",
+        "residuals.2.bn1_pool.running_var"
+      ],
+      "outputs": [
+        "/residuals/residuals.2/bn1_pool/BatchNormalization_output_0"
+      ],
+      "attrs": {
+        "epsilon": 9.999999747378752e-06,
+        "momentum": 0.8999999761581421,
+        "training_mode": 0
+      }
+    },
+    {
+      "name": "/residuals/residuals.2/Relu",
+      "op": "Relu",
+      "inputs": [
+        "/residuals/residuals.2/bn1_pool/BatchNormalization_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.2/Relu_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "Constant_85",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "onnx::ReduceSum_218"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            2
+          ],
+          "raw_sha256": "fe6d3d3bb5dd778af1128cc7b2b33668d51b9a52dfc8f2342be37ddc06a0072d"
+        }
+      }
+    },
+    {
+      "name": "/residuals/residuals.2/ReduceMean",
+      "op": "ReduceMean",
+      "inputs": [
+        "/residuals/residuals.2/Relu_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.2/ReduceMean_output_0"
+      ],
+      "attrs": {
+        "axes": [
+          2,
+          3
+        ],
+        "keepdims": 0
+      }
+    },
+    {
+      "name": "/residuals/residuals.2/ReduceMax",
+      "op": "ReduceMax",
+      "inputs": [
+        "/residuals/residuals.2/Relu_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.2/ReduceMax_output_0"
+      ],
+      "attrs": {
+        "axes": [
+          2,
+          3
+        ],
+        "keepdims": 0
+      }
+    },
+    {
+      "name": "/residuals/residuals.2/Concat",
+      "op": "Concat",
+      "inputs": [
+        "/residuals/residuals.2/ReduceMean_output_0",
+        "/residuals/residuals.2/ReduceMax_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.2/Concat_output_0"
+      ],
+      "attrs": {
+        "axis": 1
+      }
+    },
+    {
+      "name": "/residuals/residuals.2/gpool_fc/Gemm",
+      "op": "Gemm",
+      "inputs": [
+        "/residuals/residuals.2/Concat_output_0",
+        "residuals.2.gpool_fc.weight",
+        "residuals.2.gpool_fc.bias"
+      ],
+      "outputs": [
+        "/residuals/residuals.2/gpool_fc/Gemm_output_0"
+      ],
+      "attrs": {
+        "alpha": 1.0,
+        "beta": 1.0,
+        "transB": 1
+      }
+    },
+    {
+      "name": "/residuals/residuals.2/Constant_9",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/residuals/residuals.2/Constant_9_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "d86e8112f3c4c4442126f8e9f44f16867da487f29052bf91b810457db34209a4"
+        }
+      }
+    },
+    {
+      "name": "/residuals/residuals.2/Unsqueeze",
+      "op": "Unsqueeze",
+      "inputs": [
+        "/residuals/residuals.2/gpool_fc/Gemm_output_0",
+        "/residuals/residuals.2/Constant_9_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.2/Unsqueeze_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.2/Constant_10",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/residuals/residuals.2/Constant_10_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "35be322d094f9d154a8aba4733b8497f180353bd7ae7b0a15f90b586b549f28b"
+        }
+      }
+    },
+    {
+      "name": "/residuals/residuals.2/Unsqueeze_1",
+      "op": "Unsqueeze",
+      "inputs": [
+        "/residuals/residuals.2/Unsqueeze_output_0",
+        "/residuals/residuals.2/Constant_10_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.2/Unsqueeze_1_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.2/Add",
+      "op": "Add",
+      "inputs": [
+        "/residuals/residuals.2/bn1_reg/BatchNormalization_output_0",
+        "/residuals/residuals.2/Unsqueeze_1_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.2/Add_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.2/Relu_1",
+      "op": "Relu",
+      "inputs": [
+        "/residuals/residuals.2/Add_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.2/Relu_1_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.2/conv2/Conv",
+      "op": "Conv",
+      "inputs": [
+        "/residuals/residuals.2/Relu_1_output_0",
+        "onnx::Conv_454",
+        "onnx::Conv_455"
+      ],
+      "outputs": [
+        "/residuals/residuals.2/conv2/Conv_output_0"
+      ],
+      "attrs": {
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "/residuals/residuals.2/Add_1",
+      "op": "Add",
+      "inputs": [
+        "/residuals/residuals.2/conv2/Conv_output_0",
+        "/residuals/residuals.1/Relu_1_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.2/Add_1_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.2/Relu_2",
+      "op": "Relu",
+      "inputs": [
+        "/residuals/residuals.2/Add_1_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.2/Relu_2_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.3/conv1/Conv",
+      "op": "Conv",
+      "inputs": [
+        "/residuals/residuals.2/Relu_2_output_0",
+        "onnx::Conv_457",
+        "onnx::Conv_458"
+      ],
+      "outputs": [
+        "/residuals/residuals.3/conv1/Conv_output_0"
+      ],
+      "attrs": {
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "/residuals/residuals.3/Relu",
+      "op": "Relu",
+      "inputs": [
+        "/residuals/residuals.3/conv1/Conv_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.3/Relu_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.3/conv2/Conv",
+      "op": "Conv",
+      "inputs": [
+        "/residuals/residuals.3/Relu_output_0",
+        "onnx::Conv_460",
+        "onnx::Conv_461"
+      ],
+      "outputs": [
+        "/residuals/residuals.3/conv2/Conv_output_0"
+      ],
+      "attrs": {
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "/residuals/residuals.3/Add",
+      "op": "Add",
+      "inputs": [
+        "/residuals/residuals.3/conv2/Conv_output_0",
+        "/residuals/residuals.2/Relu_2_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.3/Add_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.3/Relu_1",
+      "op": "Relu",
+      "inputs": [
+        "/residuals/residuals.3/Add_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.3/Relu_1_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.4/conv1/Conv",
+      "op": "Conv",
+      "inputs": [
+        "/residuals/residuals.3/Relu_1_output_0",
+        "onnx::Conv_463",
+        "onnx::Conv_464"
+      ],
+      "outputs": [
+        "/residuals/residuals.4/conv1/Conv_output_0"
+      ],
+      "attrs": {
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "/residuals/residuals.4/Relu",
+      "op": "Relu",
+      "inputs": [
+        "/residuals/residuals.4/conv1/Conv_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.4/Relu_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.4/conv2/Conv",
+      "op": "Conv",
+      "inputs": [
+        "/residuals/residuals.4/Relu_output_0",
+        "onnx::Conv_466",
+        "onnx::Conv_467"
+      ],
+      "outputs": [
+        "/residuals/residuals.4/conv2/Conv_output_0"
+      ],
+      "attrs": {
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "/residuals/residuals.4/Add",
+      "op": "Add",
+      "inputs": [
+        "/residuals/residuals.4/conv2/Conv_output_0",
+        "/residuals/residuals.3/Relu_1_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.4/Add_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.4/Relu_1",
+      "op": "Relu",
+      "inputs": [
+        "/residuals/residuals.4/Add_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.4/Relu_1_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.5/conv1/Conv",
+      "op": "Conv",
+      "inputs": [
+        "/residuals/residuals.4/Relu_1_output_0",
+        "residuals.5.conv1.weight"
+      ],
+      "outputs": [
+        "/residuals/residuals.5/conv1/Conv_output_0"
+      ],
+      "attrs": {
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "/residuals/residuals.5/Constant",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/residuals/residuals.5/Constant_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8"
+        }
+      }
+    },
+    {
+      "name": "/residuals/residuals.5/Constant_1",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/residuals/residuals.5/Constant_1_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+        }
+      }
+    },
+    {
+      "name": "/residuals/residuals.5/Constant_2",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/residuals/residuals.5/Constant_2_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "a3fd08764e225228ee3e534d14ba14b56418d9f2c40c4b529cc9df6acafaff13"
+        }
+      }
+    },
+    {
+      "name": "/residuals/residuals.5/Constant_3",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/residuals/residuals.5/Constant_3_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8"
+        }
+      }
+    },
+    {
+      "name": "/residuals/residuals.5/Slice",
+      "op": "Slice",
+      "inputs": [
+        "/residuals/residuals.5/conv1/Conv_output_0",
+        "/residuals/residuals.5/Constant_1_output_0",
+        "/residuals/residuals.5/Constant_2_output_0",
+        "/residuals/residuals.5/Constant_output_0",
+        "/residuals/residuals.5/Constant_3_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.5/Slice_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.5/bn1_reg/BatchNormalization",
+      "op": "BatchNormalization",
+      "inputs": [
+        "/residuals/residuals.5/Slice_output_0",
+        "residuals.5.bn1_reg.weight",
+        "residuals.5.bn1_reg.bias",
+        "residuals.5.bn1_reg.running_mean",
+        "residuals.5.bn1_reg.running_var"
+      ],
+      "outputs": [
+        "/residuals/residuals.5/bn1_reg/BatchNormalization_output_0"
+      ],
+      "attrs": {
+        "epsilon": 9.999999747378752e-06,
+        "momentum": 0.8999999761581421,
+        "training_mode": 0
+      }
+    },
+    {
+      "name": "/residuals/residuals.5/Constant_4",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/residuals/residuals.5/Constant_4_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8"
+        }
+      }
+    },
+    {
+      "name": "/residuals/residuals.5/Constant_5",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/residuals/residuals.5/Constant_5_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "a3fd08764e225228ee3e534d14ba14b56418d9f2c40c4b529cc9df6acafaff13"
+        }
+      }
+    },
+    {
+      "name": "/residuals/residuals.5/Constant_6",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/residuals/residuals.5/Constant_6_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "6a69a6cc7473a16302890cd2a9e93e347281f6ea0e1bb784e589753bed0b3324"
+        }
+      }
+    },
+    {
+      "name": "/residuals/residuals.5/Constant_7",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/residuals/residuals.5/Constant_7_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8"
+        }
+      }
+    },
+    {
+      "name": "/residuals/residuals.5/Slice_1",
+      "op": "Slice",
+      "inputs": [
+        "/residuals/residuals.5/conv1/Conv_output_0",
+        "/residuals/residuals.5/Constant_5_output_0",
+        "/residuals/residuals.5/Constant_6_output_0",
+        "/residuals/residuals.5/Constant_4_output_0",
+        "/residuals/residuals.5/Constant_7_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.5/Slice_1_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.5/bn1_pool/BatchNormalization",
+      "op": "BatchNormalization",
+      "inputs": [
+        "/residuals/residuals.5/Slice_1_output_0",
+        "residuals.5.bn1_pool.weight",
+        "residuals.5.bn1_pool.bias",
+        "residuals.5.bn1_pool.running_mean",
+        "residuals.5.bn1_pool.running_var"
+      ],
+      "outputs": [
+        "/residuals/residuals.5/bn1_pool/BatchNormalization_output_0"
+      ],
+      "attrs": {
+        "epsilon": 9.999999747378752e-06,
+        "momentum": 0.8999999761581421,
+        "training_mode": 0
+      }
+    },
+    {
+      "name": "/residuals/residuals.5/Relu",
+      "op": "Relu",
+      "inputs": [
+        "/residuals/residuals.5/bn1_pool/BatchNormalization_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.5/Relu_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.5/ReduceMean",
+      "op": "ReduceMean",
+      "inputs": [
+        "/residuals/residuals.5/Relu_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.5/ReduceMean_output_0"
+      ],
+      "attrs": {
+        "axes": [
+          2,
+          3
+        ],
+        "keepdims": 0
+      }
+    },
+    {
+      "name": "/residuals/residuals.5/ReduceMax",
+      "op": "ReduceMax",
+      "inputs": [
+        "/residuals/residuals.5/Relu_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.5/ReduceMax_output_0"
+      ],
+      "attrs": {
+        "axes": [
+          2,
+          3
+        ],
+        "keepdims": 0
+      }
+    },
+    {
+      "name": "/residuals/residuals.5/Concat",
+      "op": "Concat",
+      "inputs": [
+        "/residuals/residuals.5/ReduceMean_output_0",
+        "/residuals/residuals.5/ReduceMax_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.5/Concat_output_0"
+      ],
+      "attrs": {
+        "axis": 1
+      }
+    },
+    {
+      "name": "/residuals/residuals.5/gpool_fc/Gemm",
+      "op": "Gemm",
+      "inputs": [
+        "/residuals/residuals.5/Concat_output_0",
+        "residuals.5.gpool_fc.weight",
+        "residuals.5.gpool_fc.bias"
+      ],
+      "outputs": [
+        "/residuals/residuals.5/gpool_fc/Gemm_output_0"
+      ],
+      "attrs": {
+        "alpha": 1.0,
+        "beta": 1.0,
+        "transB": 1
+      }
+    },
+    {
+      "name": "/residuals/residuals.5/Constant_8",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/residuals/residuals.5/Constant_8_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "d86e8112f3c4c4442126f8e9f44f16867da487f29052bf91b810457db34209a4"
+        }
+      }
+    },
+    {
+      "name": "/residuals/residuals.5/Unsqueeze",
+      "op": "Unsqueeze",
+      "inputs": [
+        "/residuals/residuals.5/gpool_fc/Gemm_output_0",
+        "/residuals/residuals.5/Constant_8_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.5/Unsqueeze_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.5/Constant_9",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/residuals/residuals.5/Constant_9_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "35be322d094f9d154a8aba4733b8497f180353bd7ae7b0a15f90b586b549f28b"
+        }
+      }
+    },
+    {
+      "name": "/residuals/residuals.5/Unsqueeze_1",
+      "op": "Unsqueeze",
+      "inputs": [
+        "/residuals/residuals.5/Unsqueeze_output_0",
+        "/residuals/residuals.5/Constant_9_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.5/Unsqueeze_1_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.5/Add",
+      "op": "Add",
+      "inputs": [
+        "/residuals/residuals.5/bn1_reg/BatchNormalization_output_0",
+        "/residuals/residuals.5/Unsqueeze_1_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.5/Add_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.5/Relu_1",
+      "op": "Relu",
+      "inputs": [
+        "/residuals/residuals.5/Add_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.5/Relu_1_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.5/conv2/Conv",
+      "op": "Conv",
+      "inputs": [
+        "/residuals/residuals.5/Relu_1_output_0",
+        "onnx::Conv_469",
+        "onnx::Conv_470"
+      ],
+      "outputs": [
+        "/residuals/residuals.5/conv2/Conv_output_0"
+      ],
+      "attrs": {
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "/residuals/residuals.5/Add_1",
+      "op": "Add",
+      "inputs": [
+        "/residuals/residuals.5/conv2/Conv_output_0",
+        "/residuals/residuals.4/Relu_1_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.5/Add_1_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.5/Relu_2",
+      "op": "Relu",
+      "inputs": [
+        "/residuals/residuals.5/Add_1_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.5/Relu_2_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.6/conv1/Conv",
+      "op": "Conv",
+      "inputs": [
+        "/residuals/residuals.5/Relu_2_output_0",
+        "onnx::Conv_472",
+        "onnx::Conv_473"
+      ],
+      "outputs": [
+        "/residuals/residuals.6/conv1/Conv_output_0"
+      ],
+      "attrs": {
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "/residuals/residuals.6/Relu",
+      "op": "Relu",
+      "inputs": [
+        "/residuals/residuals.6/conv1/Conv_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.6/Relu_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.6/conv2/Conv",
+      "op": "Conv",
+      "inputs": [
+        "/residuals/residuals.6/Relu_output_0",
+        "onnx::Conv_475",
+        "onnx::Conv_476"
+      ],
+      "outputs": [
+        "/residuals/residuals.6/conv2/Conv_output_0"
+      ],
+      "attrs": {
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "/residuals/residuals.6/Add",
+      "op": "Add",
+      "inputs": [
+        "/residuals/residuals.6/conv2/Conv_output_0",
+        "/residuals/residuals.5/Relu_2_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.6/Add_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.6/Relu_1",
+      "op": "Relu",
+      "inputs": [
+        "/residuals/residuals.6/Add_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.6/Relu_1_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.7/conv1/Conv",
+      "op": "Conv",
+      "inputs": [
+        "/residuals/residuals.6/Relu_1_output_0",
+        "onnx::Conv_478",
+        "onnx::Conv_479"
+      ],
+      "outputs": [
+        "/residuals/residuals.7/conv1/Conv_output_0"
+      ],
+      "attrs": {
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "/residuals/residuals.7/Relu",
+      "op": "Relu",
+      "inputs": [
+        "/residuals/residuals.7/conv1/Conv_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.7/Relu_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.7/conv2/Conv",
+      "op": "Conv",
+      "inputs": [
+        "/residuals/residuals.7/Relu_output_0",
+        "onnx::Conv_481",
+        "onnx::Conv_482"
+      ],
+      "outputs": [
+        "/residuals/residuals.7/conv2/Conv_output_0"
+      ],
+      "attrs": {
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "/residuals/residuals.7/Add",
+      "op": "Add",
+      "inputs": [
+        "/residuals/residuals.7/conv2/Conv_output_0",
+        "/residuals/residuals.6/Relu_1_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.7/Add_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.7/Relu_1",
+      "op": "Relu",
+      "inputs": [
+        "/residuals/residuals.7/Add_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.7/Relu_1_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.8/conv1/Conv",
+      "op": "Conv",
+      "inputs": [
+        "/residuals/residuals.7/Relu_1_output_0",
+        "residuals.8.conv1.weight"
+      ],
+      "outputs": [
+        "/residuals/residuals.8/conv1/Conv_output_0"
+      ],
+      "attrs": {
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "/residuals/residuals.8/Constant",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/residuals/residuals.8/Constant_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8"
+        }
+      }
+    },
+    {
+      "name": "/residuals/residuals.8/Constant_1",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/residuals/residuals.8/Constant_1_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+        }
+      }
+    },
+    {
+      "name": "/residuals/residuals.8/Constant_2",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/residuals/residuals.8/Constant_2_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "a3fd08764e225228ee3e534d14ba14b56418d9f2c40c4b529cc9df6acafaff13"
+        }
+      }
+    },
+    {
+      "name": "/residuals/residuals.8/Constant_3",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/residuals/residuals.8/Constant_3_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8"
+        }
+      }
+    },
+    {
+      "name": "/residuals/residuals.8/Slice",
+      "op": "Slice",
+      "inputs": [
+        "/residuals/residuals.8/conv1/Conv_output_0",
+        "/residuals/residuals.8/Constant_1_output_0",
+        "/residuals/residuals.8/Constant_2_output_0",
+        "/residuals/residuals.8/Constant_output_0",
+        "/residuals/residuals.8/Constant_3_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.8/Slice_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.8/bn1_reg/BatchNormalization",
+      "op": "BatchNormalization",
+      "inputs": [
+        "/residuals/residuals.8/Slice_output_0",
+        "residuals.8.bn1_reg.weight",
+        "residuals.8.bn1_reg.bias",
+        "residuals.8.bn1_reg.running_mean",
+        "residuals.8.bn1_reg.running_var"
+      ],
+      "outputs": [
+        "/residuals/residuals.8/bn1_reg/BatchNormalization_output_0"
+      ],
+      "attrs": {
+        "epsilon": 9.999999747378752e-06,
+        "momentum": 0.8999999761581421,
+        "training_mode": 0
+      }
+    },
+    {
+      "name": "/residuals/residuals.8/Constant_4",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/residuals/residuals.8/Constant_4_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8"
+        }
+      }
+    },
+    {
+      "name": "/residuals/residuals.8/Constant_5",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/residuals/residuals.8/Constant_5_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "a3fd08764e225228ee3e534d14ba14b56418d9f2c40c4b529cc9df6acafaff13"
+        }
+      }
+    },
+    {
+      "name": "/residuals/residuals.8/Constant_6",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/residuals/residuals.8/Constant_6_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "6a69a6cc7473a16302890cd2a9e93e347281f6ea0e1bb784e589753bed0b3324"
+        }
+      }
+    },
+    {
+      "name": "/residuals/residuals.8/Constant_7",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/residuals/residuals.8/Constant_7_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8"
+        }
+      }
+    },
+    {
+      "name": "/residuals/residuals.8/Slice_1",
+      "op": "Slice",
+      "inputs": [
+        "/residuals/residuals.8/conv1/Conv_output_0",
+        "/residuals/residuals.8/Constant_5_output_0",
+        "/residuals/residuals.8/Constant_6_output_0",
+        "/residuals/residuals.8/Constant_4_output_0",
+        "/residuals/residuals.8/Constant_7_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.8/Slice_1_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.8/bn1_pool/BatchNormalization",
+      "op": "BatchNormalization",
+      "inputs": [
+        "/residuals/residuals.8/Slice_1_output_0",
+        "residuals.8.bn1_pool.weight",
+        "residuals.8.bn1_pool.bias",
+        "residuals.8.bn1_pool.running_mean",
+        "residuals.8.bn1_pool.running_var"
+      ],
+      "outputs": [
+        "/residuals/residuals.8/bn1_pool/BatchNormalization_output_0"
+      ],
+      "attrs": {
+        "epsilon": 9.999999747378752e-06,
+        "momentum": 0.8999999761581421,
+        "training_mode": 0
+      }
+    },
+    {
+      "name": "/residuals/residuals.8/Relu",
+      "op": "Relu",
+      "inputs": [
+        "/residuals/residuals.8/bn1_pool/BatchNormalization_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.8/Relu_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.8/ReduceMean",
+      "op": "ReduceMean",
+      "inputs": [
+        "/residuals/residuals.8/Relu_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.8/ReduceMean_output_0"
+      ],
+      "attrs": {
+        "axes": [
+          2,
+          3
+        ],
+        "keepdims": 0
+      }
+    },
+    {
+      "name": "/residuals/residuals.8/ReduceMax",
+      "op": "ReduceMax",
+      "inputs": [
+        "/residuals/residuals.8/Relu_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.8/ReduceMax_output_0"
+      ],
+      "attrs": {
+        "axes": [
+          2,
+          3
+        ],
+        "keepdims": 0
+      }
+    },
+    {
+      "name": "/residuals/residuals.8/Concat",
+      "op": "Concat",
+      "inputs": [
+        "/residuals/residuals.8/ReduceMean_output_0",
+        "/residuals/residuals.8/ReduceMax_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.8/Concat_output_0"
+      ],
+      "attrs": {
+        "axis": 1
+      }
+    },
+    {
+      "name": "/residuals/residuals.8/gpool_fc/Gemm",
+      "op": "Gemm",
+      "inputs": [
+        "/residuals/residuals.8/Concat_output_0",
+        "residuals.8.gpool_fc.weight",
+        "residuals.8.gpool_fc.bias"
+      ],
+      "outputs": [
+        "/residuals/residuals.8/gpool_fc/Gemm_output_0"
+      ],
+      "attrs": {
+        "alpha": 1.0,
+        "beta": 1.0,
+        "transB": 1
+      }
+    },
+    {
+      "name": "/residuals/residuals.8/Constant_8",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/residuals/residuals.8/Constant_8_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "d86e8112f3c4c4442126f8e9f44f16867da487f29052bf91b810457db34209a4"
+        }
+      }
+    },
+    {
+      "name": "/residuals/residuals.8/Unsqueeze",
+      "op": "Unsqueeze",
+      "inputs": [
+        "/residuals/residuals.8/gpool_fc/Gemm_output_0",
+        "/residuals/residuals.8/Constant_8_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.8/Unsqueeze_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.8/Constant_9",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/residuals/residuals.8/Constant_9_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "35be322d094f9d154a8aba4733b8497f180353bd7ae7b0a15f90b586b549f28b"
+        }
+      }
+    },
+    {
+      "name": "/residuals/residuals.8/Unsqueeze_1",
+      "op": "Unsqueeze",
+      "inputs": [
+        "/residuals/residuals.8/Unsqueeze_output_0",
+        "/residuals/residuals.8/Constant_9_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.8/Unsqueeze_1_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.8/Add",
+      "op": "Add",
+      "inputs": [
+        "/residuals/residuals.8/bn1_reg/BatchNormalization_output_0",
+        "/residuals/residuals.8/Unsqueeze_1_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.8/Add_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.8/Relu_1",
+      "op": "Relu",
+      "inputs": [
+        "/residuals/residuals.8/Add_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.8/Relu_1_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.8/conv2/Conv",
+      "op": "Conv",
+      "inputs": [
+        "/residuals/residuals.8/Relu_1_output_0",
+        "onnx::Conv_484",
+        "onnx::Conv_485"
+      ],
+      "outputs": [
+        "/residuals/residuals.8/conv2/Conv_output_0"
+      ],
+      "attrs": {
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "/residuals/residuals.8/Add_1",
+      "op": "Add",
+      "inputs": [
+        "/residuals/residuals.8/conv2/Conv_output_0",
+        "/residuals/residuals.7/Relu_1_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.8/Add_1_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.8/Relu_2",
+      "op": "Relu",
+      "inputs": [
+        "/residuals/residuals.8/Add_1_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.8/Relu_2_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.9/conv1/Conv",
+      "op": "Conv",
+      "inputs": [
+        "/residuals/residuals.8/Relu_2_output_0",
+        "onnx::Conv_487",
+        "onnx::Conv_488"
+      ],
+      "outputs": [
+        "/residuals/residuals.9/conv1/Conv_output_0"
+      ],
+      "attrs": {
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "/residuals/residuals.9/Relu",
+      "op": "Relu",
+      "inputs": [
+        "/residuals/residuals.9/conv1/Conv_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.9/Relu_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.9/conv2/Conv",
+      "op": "Conv",
+      "inputs": [
+        "/residuals/residuals.9/Relu_output_0",
+        "onnx::Conv_490",
+        "onnx::Conv_491"
+      ],
+      "outputs": [
+        "/residuals/residuals.9/conv2/Conv_output_0"
+      ],
+      "attrs": {
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "kernel_shape": [
+          3,
+          3
+        ],
+        "pads": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "strides": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "/residuals/residuals.9/Add",
+      "op": "Add",
+      "inputs": [
+        "/residuals/residuals.9/conv2/Conv_output_0",
+        "/residuals/residuals.8/Relu_2_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.9/Add_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/residuals/residuals.9/Relu_1",
+      "op": "Relu",
+      "inputs": [
+        "/residuals/residuals.9/Add_output_0"
+      ],
+      "outputs": [
+        "/residuals/residuals.9/Relu_1_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/Constant",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/Constant_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8"
+        }
+      }
+    },
+    {
+      "name": "/Constant_1",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/Constant_1_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+        }
+      }
+    },
+    {
+      "name": "/Constant_2",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/Constant_2_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8"
+        }
+      }
+    },
+    {
+      "name": "/Constant_3",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/Constant_3_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8"
+        }
+      }
+    },
+    {
+      "name": "/Slice",
+      "op": "Slice",
+      "inputs": [
+        "input",
+        "/Constant_1_output_0",
+        "/Constant_2_output_0",
+        "/Constant_output_0",
+        "/Constant_3_output_0"
+      ],
+      "outputs": [
+        "/Slice_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/Constant_4",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/Constant_4_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8"
+        }
+      }
+    },
+    {
+      "name": "/Constant_5",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/Constant_5_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8"
+        }
+      }
+    },
+    {
+      "name": "/Constant_6",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/Constant_6_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "d86e8112f3c4c4442126f8e9f44f16867da487f29052bf91b810457db34209a4"
+        }
+      }
+    },
+    {
+      "name": "/Constant_7",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/Constant_7_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8"
+        }
+      }
+    },
+    {
+      "name": "/Slice_1",
+      "op": "Slice",
+      "inputs": [
+        "input",
+        "/Constant_5_output_0",
+        "/Constant_6_output_0",
+        "/Constant_4_output_0",
+        "/Constant_7_output_0"
+      ],
+      "outputs": [
+        "/Slice_1_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/Mul",
+      "op": "Mul",
+      "inputs": [
+        "/residuals/residuals.9/Relu_1_output_0",
+        "/Slice_output_0"
+      ],
+      "outputs": [
+        "/Mul_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/ReduceSum",
+      "op": "ReduceSum",
+      "inputs": [
+        "/Mul_output_0",
+        "onnx::ReduceSum_218"
+      ],
+      "outputs": [
+        "/ReduceSum_output_0"
+      ],
+      "attrs": {
+        "keepdims": 0
+      }
+    },
+    {
+      "name": "/Mul_1",
+      "op": "Mul",
+      "inputs": [
+        "/residuals/residuals.9/Relu_1_output_0",
+        "/Slice_1_output_0"
+      ],
+      "outputs": [
+        "/Mul_1_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/ReduceSum_1",
+      "op": "ReduceSum",
+      "inputs": [
+        "/Mul_1_output_0",
+        "onnx::ReduceSum_218"
+      ],
+      "outputs": [
+        "/ReduceSum_1_output_0"
+      ],
+      "attrs": {
+        "keepdims": 0
+      }
+    },
+    {
+      "name": "/ReduceMean",
+      "op": "ReduceMean",
+      "inputs": [
+        "/residuals/residuals.9/Relu_1_output_0"
+      ],
+      "outputs": [
+        "/ReduceMean_output_0"
+      ],
+      "attrs": {
+        "axes": [
+          2,
+          3
+        ],
+        "keepdims": 0
+      }
+    },
+    {
+      "name": "/Concat",
+      "op": "Concat",
+      "inputs": [
+        "/ReduceSum_output_0",
+        "/ReduceSum_1_output_0",
+        "/ReduceMean_output_0"
+      ],
+      "outputs": [
+        "/Concat_output_0"
+      ],
+      "attrs": {
+        "axis": 1
+      }
+    },
+    {
+      "name": "/policy_pawn_fc1/Gemm",
+      "op": "Gemm",
+      "inputs": [
+        "/Concat_output_0",
+        "policy_pawn_fc1.weight",
+        "policy_pawn_fc1.bias"
+      ],
+      "outputs": [
+        "/policy_pawn_fc1/Gemm_output_0"
+      ],
+      "attrs": {
+        "alpha": 1.0,
+        "beta": 1.0,
+        "transB": 1
+      }
+    },
+    {
+      "name": "/Relu_1",
+      "op": "Relu",
+      "inputs": [
+        "/policy_pawn_fc1/Gemm_output_0"
+      ],
+      "outputs": [
+        "/Relu_1_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/policy_pawn_fc2/Gemm",
+      "op": "Gemm",
+      "inputs": [
+        "/Relu_1_output_0",
+        "policy_pawn_fc2.weight",
+        "policy_pawn_fc2.bias"
+      ],
+      "outputs": [
+        "/policy_pawn_fc2/Gemm_output_0"
+      ],
+      "attrs": {
+        "alpha": 1.0,
+        "beta": 1.0,
+        "transB": 1
+      }
+    },
+    {
+      "name": "/policy_h_conv/Conv",
+      "op": "Conv",
+      "inputs": [
+        "/residuals/residuals.9/Relu_1_output_0",
+        "onnx::Conv_493",
+        "onnx::Conv_494"
+      ],
+      "outputs": [
+        "/policy_h_conv/Conv_output_0"
+      ],
+      "attrs": {
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "kernel_shape": [
+          1,
+          1
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "strides": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "/Relu_2",
+      "op": "Relu",
+      "inputs": [
+        "/policy_h_conv/Conv_output_0"
+      ],
+      "outputs": [
+        "/Relu_2_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/Gather",
+      "op": "Gather",
+      "inputs": [
+        "/Relu_2_output_0",
+        "/residuals/residuals.2/Constant_output_0"
+      ],
+      "outputs": [
+        "/Gather_output_0"
+      ],
+      "attrs": {
+        "axis": 1
+      }
+    },
+    {
+      "name": "/Constant_8",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/Constant_8_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8"
+        }
+      }
+    },
+    {
+      "name": "/Constant_9",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/Constant_9_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+        }
+      }
+    },
+    {
+      "name": "/Constant_10",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/Constant_10_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "6cc16abd70eefb90dc0ba0d14fb088630873b2c6ad943f7442356735984c35a3"
+        }
+      }
+    },
+    {
+      "name": "/Constant_11",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/Constant_11_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8"
+        }
+      }
+    },
+    {
+      "name": "/Slice_2",
+      "op": "Slice",
+      "inputs": [
+        "/Gather_output_0",
+        "/Constant_9_output_0",
+        "/Constant_10_output_0",
+        "/Constant_8_output_0",
+        "/Constant_11_output_0"
+      ],
+      "outputs": [
+        "/Slice_2_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/Constant_12",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/Constant_12_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "d86e8112f3c4c4442126f8e9f44f16867da487f29052bf91b810457db34209a4"
+        }
+      }
+    },
+    {
+      "name": "/Constant_13",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/Constant_13_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+        }
+      }
+    },
+    {
+      "name": "/Constant_14",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/Constant_14_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "6cc16abd70eefb90dc0ba0d14fb088630873b2c6ad943f7442356735984c35a3"
+        }
+      }
+    },
+    {
+      "name": "/Constant_15",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/Constant_15_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8"
+        }
+      }
+    },
+    {
+      "name": "/Slice_3",
+      "op": "Slice",
+      "inputs": [
+        "/Slice_2_output_0",
+        "/Constant_13_output_0",
+        "/Constant_14_output_0",
+        "/Constant_12_output_0",
+        "/Constant_15_output_0"
+      ],
+      "outputs": [
+        "/Slice_3_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/Constant_16",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/Constant_16_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            2
+          ],
+          "raw_sha256": "db0550d553e2a146e34164d19cd55f006c38d700d8f9a4e3ba2c889a1d7c26b2"
+        }
+      }
+    },
+    {
+      "name": "/Constant_17",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/Constant_17_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            2
+          ],
+          "raw_sha256": "db0550d553e2a146e34164d19cd55f006c38d700d8f9a4e3ba2c889a1d7c26b2"
+        }
+      }
+    },
+    {
+      "name": "/Reshape",
+      "op": "Reshape",
+      "inputs": [
+        "/Slice_3_output_0",
+        "/Constant_16_output_0"
+      ],
+      "outputs": [
+        "/Reshape_output_0"
+      ],
+      "attrs": {
+        "allowzero": 0
+      }
+    },
+    {
+      "name": "/policy_v_conv/Conv",
+      "op": "Conv",
+      "inputs": [
+        "/residuals/residuals.9/Relu_1_output_0",
+        "onnx::Conv_496",
+        "onnx::Conv_497"
+      ],
+      "outputs": [
+        "/policy_v_conv/Conv_output_0"
+      ],
+      "attrs": {
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "kernel_shape": [
+          1,
+          1
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "strides": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "/Relu_3",
+      "op": "Relu",
+      "inputs": [
+        "/policy_v_conv/Conv_output_0"
+      ],
+      "outputs": [
+        "/Relu_3_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/Gather_1",
+      "op": "Gather",
+      "inputs": [
+        "/Relu_3_output_0",
+        "/residuals/residuals.2/Constant_output_0"
+      ],
+      "outputs": [
+        "/Gather_1_output_0"
+      ],
+      "attrs": {
+        "axis": 1
+      }
+    },
+    {
+      "name": "/Constant_18",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/Constant_18_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8"
+        }
+      }
+    },
+    {
+      "name": "/Constant_19",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/Constant_19_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+        }
+      }
+    },
+    {
+      "name": "/Constant_20",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/Constant_20_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "6cc16abd70eefb90dc0ba0d14fb088630873b2c6ad943f7442356735984c35a3"
+        }
+      }
+    },
+    {
+      "name": "/Constant_21",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/Constant_21_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8"
+        }
+      }
+    },
+    {
+      "name": "/Slice_4",
+      "op": "Slice",
+      "inputs": [
+        "/Gather_1_output_0",
+        "/Constant_19_output_0",
+        "/Constant_20_output_0",
+        "/Constant_18_output_0",
+        "/Constant_21_output_0"
+      ],
+      "outputs": [
+        "/Slice_4_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/Constant_22",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/Constant_22_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "d86e8112f3c4c4442126f8e9f44f16867da487f29052bf91b810457db34209a4"
+        }
+      }
+    },
+    {
+      "name": "/Constant_23",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/Constant_23_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+        }
+      }
+    },
+    {
+      "name": "/Constant_24",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/Constant_24_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "6cc16abd70eefb90dc0ba0d14fb088630873b2c6ad943f7442356735984c35a3"
+        }
+      }
+    },
+    {
+      "name": "/Constant_25",
+      "op": "Constant",
+      "inputs": [],
+      "outputs": [
+        "/Constant_25_output_0"
+      ],
+      "attrs": {
+        "value": {
+          "dtype": 7,
+          "shape": [
+            1
+          ],
+          "raw_sha256": "7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8"
+        }
+      }
+    },
+    {
+      "name": "/Slice_5",
+      "op": "Slice",
+      "inputs": [
+        "/Slice_4_output_0",
+        "/Constant_23_output_0",
+        "/Constant_24_output_0",
+        "/Constant_22_output_0",
+        "/Constant_25_output_0"
+      ],
+      "outputs": [
+        "/Slice_5_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/Reshape_1",
+      "op": "Reshape",
+      "inputs": [
+        "/Slice_5_output_0",
+        "/Constant_17_output_0"
+      ],
+      "outputs": [
+        "/Reshape_1_output_0"
+      ],
+      "attrs": {
+        "allowzero": 0
+      }
+    },
+    {
+      "name": "/Concat_1",
+      "op": "Concat",
+      "inputs": [
+        "/policy_pawn_fc2/Gemm_output_0",
+        "/Reshape_output_0",
+        "/Reshape_1_output_0"
+      ],
+      "outputs": [
+        "policy_logits"
+      ],
+      "attrs": {
+        "axis": 1
+      }
+    },
+    {
+      "name": "/value_conv/Conv",
+      "op": "Conv",
+      "inputs": [
+        "/residuals/residuals.9/Relu_1_output_0",
+        "onnx::Conv_499",
+        "onnx::Conv_500"
+      ],
+      "outputs": [
+        "/value_conv/Conv_output_0"
+      ],
+      "attrs": {
+        "dilations": [
+          1,
+          1
+        ],
+        "group": 1,
+        "kernel_shape": [
+          1,
+          1
+        ],
+        "pads": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "strides": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "/Relu_4",
+      "op": "Relu",
+      "inputs": [
+        "/value_conv/Conv_output_0"
+      ],
+      "outputs": [
+        "/Relu_4_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/ReduceMean_1",
+      "op": "ReduceMean",
+      "inputs": [
+        "/Relu_4_output_0"
+      ],
+      "outputs": [
+        "/ReduceMean_1_output_0"
+      ],
+      "attrs": {
+        "axes": [
+          2,
+          3
+        ],
+        "keepdims": 0
+      }
+    },
+    {
+      "name": "/ReduceMax",
+      "op": "ReduceMax",
+      "inputs": [
+        "/Relu_4_output_0"
+      ],
+      "outputs": [
+        "/ReduceMax_output_0"
+      ],
+      "attrs": {
+        "axes": [
+          2,
+          3
+        ],
+        "keepdims": 0
+      }
+    },
+    {
+      "name": "/Concat_2",
+      "op": "Concat",
+      "inputs": [
+        "/ReduceMean_1_output_0",
+        "/ReduceMax_output_0"
+      ],
+      "outputs": [
+        "/Concat_2_output_0"
+      ],
+      "attrs": {
+        "axis": 1
+      }
+    },
+    {
+      "name": "/value_pool_fc/Gemm",
+      "op": "Gemm",
+      "inputs": [
+        "/Concat_2_output_0",
+        "value_pool_fc.weight",
+        "value_pool_fc.bias"
+      ],
+      "outputs": [
+        "/value_pool_fc/Gemm_output_0"
+      ],
+      "attrs": {
+        "alpha": 1.0,
+        "beta": 1.0,
+        "transB": 1
+      }
+    },
+    {
+      "name": "/Relu_5",
+      "op": "Relu",
+      "inputs": [
+        "/value_pool_fc/Gemm_output_0"
+      ],
+      "outputs": [
+        "/Relu_5_output_0"
+      ],
+      "attrs": {}
+    },
+    {
+      "name": "/value_fc2/Gemm",
+      "op": "Gemm",
+      "inputs": [
+        "/Relu_5_output_0",
+        "value_fc2.weight",
+        "value_fc2.bias"
+      ],
+      "outputs": [
+        "/value_fc2/Gemm_output_0"
+      ],
+      "attrs": {
+        "alpha": 1.0,
+        "beta": 1.0,
+        "transB": 1
+      }
+    },
+    {
+      "name": "/Tanh",
+      "op": "Tanh",
+      "inputs": [
+        "/value_fc2/Gemm_output_0"
+      ],
+      "outputs": [
+        "value"
+      ],
+      "attrs": {}
+    }
+  ],
+  "sources": {
+    ".artifacts/ai-sigma/reference-fixtures/SIGMA-PARITY-PLAN/sources/dual_network.py": {
+      "bytes": 27874,
+      "sha256": "c1b4e74d0cdff688580dd29a3cdea4b5fb498c6020324924936066702f301502"
+    },
+    ".artifacts/ai-sigma/reference-fixtures/SIGMA-PARITY-PLAN/sources/export_onnx.py": {
+      "bytes": 4087,
+      "sha256": "ab56635c59d00d0cd818ffbdf583c5e881105b204d6cdc7d97bd0718f46be2d8"
+    },
+    ".artifacts/ai-sigma/reference-fixtures/SIGMA-PARITY-PLAN/model-manifest.json": {
+      "bytes": 2490,
+      "sha256": "07b29a65ceacabdac2981d12736a2d28c26a265bd2604a7f2b8c9de80290c604"
+    }
+  },
+  "elapsed_s": 0.08483576774597168,
+  "peak_RSS_KiB": 86600,
+  "NN_modelsession_forward_CUDA": 0
+}

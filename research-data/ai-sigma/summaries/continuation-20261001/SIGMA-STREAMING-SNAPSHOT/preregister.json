@@ -1,0 +1,250 @@
+{
+  "issue": "quoridor-4lc.59",
+  "registered_UTC": "2026-10-01T14:30:24.059072+00:00",
+  "notification_frequency": "every completed owned checkpoint before macrotask yield",
+  "cases": [
+    {
+      "kind": "fixed_compare",
+      "fixture": "initial-p1",
+      "simulations": 8,
+      "T_ms": 5000,
+      "request_id": "STREAM-59-01",
+      "generation": 100
+    },
+    {
+      "kind": "deadline",
+      "fixture": "initial-p1",
+      "T_ms": 100,
+      "repeat": 1,
+      "request_id": "STREAM-59-02",
+      "generation": 101
+    },
+    {
+      "kind": "deadline",
+      "fixture": "initial-p1",
+      "T_ms": 100,
+      "repeat": 2,
+      "request_id": "STREAM-59-03",
+      "generation": 102
+    },
+    {
+      "kind": "deadline",
+      "fixture": "initial-p1",
+      "T_ms": 500,
+      "repeat": 1,
+      "request_id": "STREAM-59-04",
+      "generation": 103
+    },
+    {
+      "kind": "deadline",
+      "fixture": "initial-p1",
+      "T_ms": 500,
+      "repeat": 2,
+      "request_id": "STREAM-59-05",
+      "generation": 104
+    },
+    {
+      "kind": "fixed_compare",
+      "fixture": "asym-hv-p2",
+      "simulations": 8,
+      "T_ms": 5000,
+      "request_id": "STREAM-59-06",
+      "generation": 105
+    },
+    {
+      "kind": "deadline",
+      "fixture": "asym-hv-p2",
+      "T_ms": 100,
+      "repeat": 1,
+      "request_id": "STREAM-59-07",
+      "generation": 106
+    },
+    {
+      "kind": "deadline",
+      "fixture": "asym-hv-p2",
+      "T_ms": 100,
+      "repeat": 2,
+      "request_id": "STREAM-59-08",
+      "generation": 107
+    },
+    {
+      "kind": "deadline",
+      "fixture": "asym-hv-p2",
+      "T_ms": 500,
+      "repeat": 1,
+      "request_id": "STREAM-59-09",
+      "generation": 108
+    },
+    {
+      "kind": "deadline",
+      "fixture": "asym-hv-p2",
+      "T_ms": 500,
+      "repeat": 2,
+      "request_id": "STREAM-59-10",
+      "generation": 109
+    },
+    {
+      "kind": "fixed_compare",
+      "fixture": "straight-jump-p2",
+      "simulations": 8,
+      "T_ms": 5000,
+      "request_id": "STREAM-59-11",
+      "generation": 110
+    },
+    {
+      "kind": "deadline",
+      "fixture": "straight-jump-p2",
+      "T_ms": 100,
+      "repeat": 1,
+      "request_id": "STREAM-59-12",
+      "generation": 111
+    },
+    {
+      "kind": "deadline",
+      "fixture": "straight-jump-p2",
+      "T_ms": 100,
+      "repeat": 2,
+      "request_id": "STREAM-59-13",
+      "generation": 112
+    },
+    {
+      "kind": "deadline",
+      "fixture": "straight-jump-p2",
+      "T_ms": 500,
+      "repeat": 1,
+      "request_id": "STREAM-59-14",
+      "generation": 113
+    },
+    {
+      "kind": "deadline",
+      "fixture": "straight-jump-p2",
+      "T_ms": 500,
+      "repeat": 2,
+      "request_id": "STREAM-59-15",
+      "generation": 114
+    },
+    {
+      "kind": "completed-nonyield",
+      "fixture": "initial-p1",
+      "T_ms": 100,
+      "nonyield_after_cp": 1,
+      "nonyield_ms": 300,
+      "request_id": "STREAM-59-16",
+      "generation": 115
+    },
+    {
+      "kind": "before-first",
+      "fixture": "initial-p1",
+      "T_ms": 100,
+      "before_first_nn_busy_ms": 200,
+      "request_id": "STREAM-59-17",
+      "generation": 116
+    },
+    {
+      "kind": "delay-notifications",
+      "fixture": "initial-p1",
+      "T_ms": 100,
+      "notify_delay_ms": 200,
+      "request_id": "STREAM-59-18",
+      "generation": 117
+    },
+    {
+      "kind": "invalid-notifications",
+      "fixture": "initial-p1",
+      "T_ms": 100,
+      "notification_injection": "nonfinite",
+      "request_id": "STREAM-59-19",
+      "generation": 118
+    },
+    {
+      "kind": "foreign-prefix",
+      "fixture": "initial-p1",
+      "T_ms": 100,
+      "notification_injection": "foreign-prefix",
+      "request_id": "STREAM-59-20",
+      "generation": 119
+    },
+    {
+      "kind": "duplicate-order",
+      "fixture": "initial-p1",
+      "T_ms": 100,
+      "notification_injection": "duplicate",
+      "request_id": "STREAM-59-21",
+      "generation": 120
+    },
+    {
+      "kind": "fault-preseal",
+      "fixture": "initial-p1",
+      "T_ms": 100,
+      "hardfault_after_cp": 1,
+      "request_id": "STREAM-59-22",
+      "generation": 121
+    },
+    {
+      "kind": "cancel",
+      "fixture": "initial-p1",
+      "T_ms": 100,
+      "cancel_after_ms": 50,
+      "request_id": "STREAM-59-23",
+      "generation": 122
+    },
+    {
+      "kind": "caller-busy",
+      "fixture": "initial-p1",
+      "T_ms": 100,
+      "busy_on_first_snapshot": 200,
+      "request_id": "STREAM-59-24",
+      "generation": 123
+    },
+    {
+      "kind": "terminal",
+      "fixture": "goal-win-legal-replay",
+      "T_ms": 100,
+      "request_id": "STREAM-59-25",
+      "generation": 124
+    },
+    {
+      "kind": "terminal-artificial",
+      "fixture": "synthetic-total-ply-200",
+      "T_ms": 100,
+      "request_id": "STREAM-59-26",
+      "generation": 126
+    }
+  ],
+  "denominator": {
+    "all_planned_cases": 26,
+    "fixed_compare_requests": 6,
+    "deadline_cases": 12,
+    "injected_cases": 9,
+    "terminal_cases": 2
+  },
+  "fixed_8_exact_gate": "all 8 cp action/tree/history/root_edges/stats; timestamps and identity metadata excluded, generation equal in each pair",
+  "T_candidates_ms": [
+    100,
+    500
+  ],
+  "no_fallback": true,
+  "hardfault": "received before seal discards whole request; unseen or postseal fault cannot retrospectively change sealed action; all faults recorded and owned worker stopped before fresh",
+  "no_cp": "NO_COMPLETED_SNAPSHOT Action=null checkpoint=false",
+  "after_seal_observation_ms": 400,
+  "NN_crossing": "start<deadline<=end actual ORT, artificial preNN/nonyield separate",
+  "clock": "browser caller t0 immutable input available before prefix conversion to encoded sealed JSON delivery; Node transport final stamp separately recorded and total includes it",
+  "no_hard_realtime": true,
+  "window_max_seconds": 300,
+  "newjob_cutoff": "2026-10-01T15:13:11Z",
+  "processing_stop": "2026-10-01T15:18:11Z",
+  "actual_go": false,
+  "holdout": 0,
+  "games": 0,
+  "model_sha256": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+  "PUCT": 1.5,
+  "Q0": 0,
+  "seed": 1979,
+  "max_nodes": 512,
+  "max_depth": 24,
+  "CPU": [
+    2
+  ],
+  "NN_threads": 1,
+  "artificial_terminal": "numeric/context diagnostic only, never game continuation"
+}

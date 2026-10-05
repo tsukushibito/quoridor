@@ -1,0 +1,163 @@
+
+ crates/quoridor-core/src/research.rs 190 267
+190:     pub fn history_counts(&self) -> Vec<(HistoryKey, u16)> {
+191:         let mut m: BTreeMap<_, _> = self.base.iter().copied().collect();
+192:         for &k in &self.overlay {
+193:             *m.entry(k).or_default() += 1;
+194:         }
+195:         m.into_iter().collect()
+196:     }
+197:     /// Reference raw mask can be nonempty after goal/ply-200. Never use it to expand a terminal.
+198:     pub fn raw_legal_ids(&self) -> Vec<u16> {
+199:         let geometric = Position {
+200:             winner: None,
+201:             ..self.position
+202:         };
+203:         geometric
+204:             .legal_action_ids()
+205:             .into_iter()
+206:             .filter(|&id| {
+207:                 id >= 81
+208:                     || self.count(HistoryKey::from(
+209:                         geometric.play(id).expect("geometric legal action"),
+210:                     )) < 2
+211:             })
+212:             .collect()
+213:     }
+214:     pub fn terminal_value(&self) -> Option<f32> {
+215:         if let Some(w) = self.position.winner {
+216:             return Some(if w == self.position.turn { 1.0 } else { -1.0 });
+217:         }
+218:         if self.total_ply >= 200 || self.raw_legal_ids().is_empty() {
+219:             return Some(0.0);
+220:         }
+221:         None
+222:     }
+223:     pub fn legal_ids(&self) -> Vec<u16> {
+224:         if self.position.winner.is_some() || self.total_ply >= 200 {
+225:             Vec::new()
+226:         } else {
+227:             self.raw_legal_ids()
+228:         }
+229:     }
+230:     pub fn play(&self, id: u16) -> Result<Self, RulesError> {
+231:         if self.terminal_value().is_some() {
+232:             return Err(RulesError::GameOver);
+233:         }
+234:         if !self.legal_ids().contains(&id) {
+235:             return Err(RulesError::IllegalAction);
+236:         }
+237:         let p = self.position.play(id)?;
+238:         let mut c = self.clone();
+239:         c.position = p;
+240:         c.total_ply += 1;
+241:         c.overlay.push(p.into());
+242:         Ok(c)
+243:     }
+244:     /// Raw reference next() after terminal is diagnostic evidence, never a search input.
+245:     #[cfg(feature = "research-diagnostics")]
+246:     pub fn raw_next_diagnostic(&self, id: u16) -> Result<Self, RulesError> {
+247:         if !self.raw_legal_ids().contains(&id) {
+248:             return Err(RulesError::IllegalAction);
+249:         }
+250:         let mut p = Position {
+251:             winner: None,
+252:             ..self.position
+253:         }
+254:         .play(id)?;
+255:         p.winner = if p.pawns[0] / 9 == 8 {
+256:             Some(0)
+257:         } else if p.pawns[1] / 9 == 0 {
+258:             Some(1)
+259:         } else {
+260:             None
+261:         };
+262:         let mut c = self.clone();
+263:         c.position = p;
+264:         c.total_ply += 1;
+265:         c.overlay.push(p.into());
+266:         c.synthetic = true;
+267:         Ok(c)
+
+ crates/quoridor-core/src/research.rs 350 421
+350: pub fn features(p: Position) -> [f32; 648] {
+351:     fn distances(p: Position, goal: u8) -> [u8; 81] {
+352:         let mut d = [81; 81];
+353:         let mut q = VecDeque::with_capacity(81);
+354:         for x in 0..9 {
+355:             let cell = goal * 9 + x;
+356:             d[cell as usize] = 0;
+357:             q.push_back(cell);
+358:         }
+359:         while let Some(c) = q.pop_front() {
+360:             let x = c % 9;
+361:             let y = c / 9;
+362:             for n in [
+363:                 if y < 8 { Some(c + 9) } else { None },
+364:                 if y > 0 { Some(c - 9) } else { None },
+365:                 if x < 8 { Some(c + 1) } else { None },
+366:                 if x > 0 { Some(c - 1) } else { None },
+367:             ]
+368:             .into_iter()
+369:             .flatten()
+370:             {
+371:                 if d[n as usize] == 81 && p.is_edge_open(c, n) {
+372:                     d[n as usize] = d[c as usize] + 1;
+373:                     q.push_back(n);
+374:                 }
+375:             }
+376:         }
+377:         d
+378:     }
+379:     let mut h = [0; 81];
+380:     let mut v = [0; 81];
+381:     for a in 0..64u8 {
+382:         let x = a % 8;
+383:         let y = a / 8;
+384:         if p.has_h(a) {
+385:             h[(y * 9 + x) as usize] = 1;
+386:             h[(y * 9 + x + 1) as usize] = 1;
+387:         }
+388:         if p.has_v(a) {
+389:             v[(y * 9 + x) as usize] = 1;
+390:             v[((y + 1) * 9 + x) as usize] = 1;
+391:         }
+392:     }
+393:     let maps = [distances(p, 8), distances(p, 0)];
+394:     let own = p.turn as usize;
+395:     let other = own ^ 1;
+396:     let flip = p.turn == 1;
+397:     let mut f = [0.; 648];
+398:     let canonical = |c: u8| if flip { (8 - c / 9) * 9 + c % 9 } else { c };
+399:     f[canonical(p.pawns[own]) as usize] = 1.;
+400:     f[81 + canonical(p.pawns[other]) as usize] = 1.;
+401:     for y in 0..9 {
+402:         for x in 0..9 {
+403:             let i = y * 9 + x;
+404:             let src = if flip { (8 - y) * 9 + x } else { i };
+405:             f[162 + i] = if y == 8 {
+406:                 0.
+407:             } else {
+408:                 h[if flip { (7 - y) * 9 + x } else { i }] as f32
+409:             };
+410:             f[243 + i] = v[src] as f32;
+411:             f[324 + i] = (p.walls_remaining[own] as f64 / 10.) as f32;
+412:             f[405 + i] = (p.walls_remaining[other] as f64 / 10.) as f32;
+413:             f[486 + i] = if maps[own][src] == 81 {
+414:                 1.
+415:             } else {
+416:                 (maps[own][src] as f64 / 80.) as f32
+417:             };
+418:             f[567 + i] = if maps[other][src] == 81 {
+419:                 1.
+420:             } else {
+421:                 (maps[other][src] as f64 / 80.) as f32
+
+FIXTURE STRUCTURE
+initial-p1 ['id', 'classification', 'tags', 'legal_prefix', 'synthetic_context', 'board', 'history_count_key', 'history_counts', 'current_key_count', 'legal_actions', 'legal_sigma136_mask', 'raw_features_float32', 'P2_permutation136', 'canonical_legal_indices', 'probes', 'terminal'] legal-replay
+asym-hv-p2 ['id', 'classification', 'tags', 'legal_prefix', 'synthetic_context', 'board', 'history_count_key', 'history_counts', 'current_key_count', 'legal_actions', 'legal_sigma136_mask', 'raw_features_float32', 'P2_permutation136', 'canonical_legal_indices', 'probes', 'terminal'] legal-replay
+straight-jump-p2 ['id', 'classification', 'tags', 'legal_prefix', 'synthetic_context', 'board', 'history_count_key', 'history_counts', 'current_key_count', 'legal_actions', 'legal_sigma136_mask', 'raw_features_float32', 'P2_permutation136', 'canonical_legal_indices', 'probes', 'terminal'] legal-replay
+frame10-prefix-13 ['id', 'classification', 'generation_seed', 'legal_prefix', 'history_count_key', 'history_counts', 'board', 'player', 'features_bits', 'legal_ids'] legal-replay
+frame10-prefix-14 ['id', 'classification', 'generation_seed', 'legal_prefix', 'history_count_key', 'history_counts', 'board', 'player', 'features_bits', 'legal_ids'] legal-replay
+
+STAGEA RAW PATH INVENTORY

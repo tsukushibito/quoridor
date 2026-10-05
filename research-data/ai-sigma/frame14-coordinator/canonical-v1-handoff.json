@@ -1,0 +1,31 @@
+{
+  "UTC": "2026-10-03T23:39:51.477786+00:00",
+  "source_interface": {
+    "UTC": "2026-10-03T23:38:37.216990+00:00",
+    "sources_stopped_for_interface": {
+      "tools/nnue-training/frame14_data.py": "f45482fe6d1a4477ee3bf3b080d14d883b1f28c79517cff83e4318b7a90e37b8",
+      "tools/nnue-training/export_generated.cjs": "5195a4abecaee507ea9155b4383843a4370783fa6ea20c33f9f442576f98a1c2"
+    },
+    "canonical_API": "frame14_data.canonical_model_input(row) -> [QF1-f32-STM-v1, STM sorted ids, opponent sorted ids, STM distance2 uint32 f32bits]; feature_signature(row) -> canonical digest",
+    "export": "node tools/nnue-training/export_generated.cjs OPENINGS.json ROWS.jsonl.gz META.jsonl.gz LABELS.jsonl.gz; generated-owner only for test. Then python3 -B tools/nnue-training/frame14.py canonicalize --metadata META.jsonl.gz --output META-canonical.jsonl.gz",
+    "wire": "test evaluation restored only when opening manifest split=test; train_slot from partition_slot; historySHA includes version,state,side,canonical history",
+    "test_read_by_hypothesis": false,
+    "mock_status": "not executed during current194GPUheavy; planned smallfake before real NN",
+    "source_interface_frozen": true
+  },
+  "current_hash_matches": {
+    "tools/nnue-training/frame14_data.py": true,
+    "tools/nnue-training/export_generated.cjs": true
+  },
+  "model_NN_job_rerun": false,
+  "mock_not_yet_certified": true,
+  "196_phase_evidenceGit": "38e3b8802773ff4e48d3d23f0ff49fd76ff189d9",
+  "196_phase_metadataGit": "efe3eeebf6d7dcf6416d18debab9d48e1d39c32a",
+  "196_keep_in_progress_finaltest_pending": true,
+  "194_actual_science_admission": "2026-10-03T23:37:08.313810Z",
+  "completed_teacher_games_not_yet_confirmed": true,
+  "storage_transfer_source": "research-data/ai-sigma/frame14-teachers/storage-transfer.json",
+  "hyp195_once_bytes": 67108864,
+  "exp_effective_after_bytes": 2076180480,
+  "parent_added_bytes": 0
+}

@@ -1,0 +1,269 @@
+{
+  "issue": "quoridor-4lc.209",
+  "UTC": "2026-10-04T04:16:37.493178+00:00",
+  "conditions": [
+    {
+      "condition": "lr1e-3",
+      "start": "2026-10-04T04:13:32.853392+00:00",
+      "stop": "2026-10-04T04:13:37.737327+00:00",
+      "wall_s": 4.884356970025692,
+      "all_samples": 110210,
+      "best_step": 20,
+      "best_validation_gameMSE": 0.6765819429007335,
+      "last_train_gameMSE": 0.010014408584871815,
+      "last_validation_gameMSE": 1.0374466698803413,
+      "curve": [
+        {
+          "step": 0,
+          "train_gameMSE": 0.737418315062487,
+          "val_gameMSE": 0.6901755738627967,
+          "seen": 0,
+          "epoch": 0.0
+        },
+        {
+          "step": 1,
+          "train_gameMSE": 0.7330972904184551,
+          "val_gameMSE": 0.6873891023963424,
+          "seen": 128,
+          "epoch": 0.027509133892112615
+        },
+        {
+          "step": 2,
+          "train_gameMSE": 0.7290231819205407,
+          "val_gameMSE": 0.6850677160198712,
+          "seen": 256,
+          "epoch": 0.05501826778422523
+        },
+        {
+          "step": 5,
+          "train_gameMSE": 0.7195558745031517,
+          "val_gameMSE": 0.6803827926612639,
+          "seen": 640,
+          "epoch": 0.13754566946056307
+        },
+        {
+          "step": 10,
+          "train_gameMSE": 0.7093581723609418,
+          "val_gameMSE": 0.6793539374427167,
+          "seen": 1280,
+          "epoch": 0.27509133892112614
+        },
+        {
+          "step": 20,
+          "train_gameMSE": 0.6774577580936455,
+          "val_gameMSE": 0.6765819429007335,
+          "seen": 2560,
+          "epoch": 0.5501826778422523
+        },
+        {
+          "step": 50,
+          "train_gameMSE": 0.3639957130864983,
+          "val_gameMSE": 0.7115249746268552,
+          "seen": 6400,
+          "epoch": 1.3754566946056308
+        },
+        {
+          "step": 100,
+          "train_gameMSE": 0.10135161315270268,
+          "val_gameMSE": 1.006805151442156,
+          "seen": 12800,
+          "epoch": 2.7509133892112616
+        },
+        {
+          "step": 200,
+          "train_gameMSE": 0.030859068849989568,
+          "val_gameMSE": 1.04993632197856,
+          "seen": 25600,
+          "epoch": 5.501826778422523
+        },
+        {
+          "step": 400,
+          "train_gameMSE": 0.010014408584871815,
+          "val_gameMSE": 1.0374466698803413,
+          "seen": 51200,
+          "epoch": 11.003653556845046
+        }
+      ]
+    },
+    {
+      "condition": "lr1e-4",
+      "start": "2026-10-04T04:14:22.870973+00:00",
+      "stop": "2026-10-04T04:14:25.851202+00:00",
+      "wall_s": 2.9805434119771235,
+      "all_samples": 110210,
+      "best_step": 200,
+      "best_validation_gameMSE": 0.659847319505419,
+      "last_train_gameMSE": 0.31832485586489806,
+      "last_validation_gameMSE": 0.7196768814218523,
+      "curve": [
+        {
+          "step": 0,
+          "train_gameMSE": 0.737418315062487,
+          "val_gameMSE": 0.6901755738627967,
+          "seen": 0,
+          "epoch": 0.0
+        },
+        {
+          "step": 1,
+          "train_gameMSE": 0.7369669212946359,
+          "val_gameMSE": 0.6898847854683682,
+          "seen": 128,
+          "epoch": 0.027509133892112615
+        },
+        {
+          "step": 2,
+          "train_gameMSE": 0.736498495489253,
+          "val_gameMSE": 0.6895874136901233,
+          "seen": 256,
+          "epoch": 0.05501826778422523
+        },
+        {
+          "step": 5,
+          "train_gameMSE": 0.7351153512702223,
+          "val_gameMSE": 0.6886433129396706,
+          "seen": 640,
+          "epoch": 0.13754566946056307
+        },
+        {
+          "step": 10,
+          "train_gameMSE": 0.7331862767314726,
+          "val_gameMSE": 0.687475573276023,
+          "seen": 1280,
+          "epoch": 0.27509133892112614
+        },
+        {
+          "step": 20,
+          "train_gameMSE": 0.7301303120548083,
+          "val_gameMSE": 0.6860022374275525,
+          "seen": 2560,
+          "epoch": 0.5501826778422523
+        },
+        {
+          "step": 50,
+          "train_gameMSE": 0.720251277382102,
+          "val_gameMSE": 0.6813486484639736,
+          "seen": 6400,
+          "epoch": 1.3754566946056308
+        },
+        {
+          "step": 100,
+          "train_gameMSE": 0.7034293745706676,
+          "val_gameMSE": 0.6770578240003715,
+          "seen": 12800,
+          "epoch": 2.7509133892112616
+        },
+        {
+          "step": 200,
+          "train_gameMSE": 0.6205573459396171,
+          "val_gameMSE": 0.659847319505419,
+          "seen": 25600,
+          "epoch": 5.501826778422523
+        },
+        {
+          "step": 400,
+          "train_gameMSE": 0.31832485586489806,
+          "val_gameMSE": 0.7196768814218523,
+          "seen": 51200,
+          "epoch": 11.003653556845046
+        }
+      ]
+    },
+    {
+      "condition": "lr1e-5",
+      "start": "2026-10-04T04:14:47.360894+00:00",
+      "stop": "2026-10-04T04:14:50.392739+00:00",
+      "wall_s": 3.03221462800866,
+      "all_samples": 110210,
+      "best_step": 400,
+      "best_validation_gameMSE": 0.6826405857350277,
+      "last_train_gameMSE": 0.7235576496178192,
+      "last_validation_gameMSE": 0.6826405857350277,
+      "curve": [
+        {
+          "step": 0,
+          "train_gameMSE": 0.737418315062487,
+          "val_gameMSE": 0.6901755738627967,
+          "seen": 0,
+          "epoch": 0.0
+        },
+        {
+          "step": 1,
+          "train_gameMSE": 0.7373730854932804,
+          "val_gameMSE": 0.6901463306090126,
+          "seen": 128,
+          "epoch": 0.027509133892112615
+        },
+        {
+          "step": 2,
+          "train_gameMSE": 0.7373256520695941,
+          "val_gameMSE": 0.6901160688013296,
+          "seen": 256,
+          "epoch": 0.05501826778422523
+        },
+        {
+          "step": 5,
+          "train_gameMSE": 0.7371826381212641,
+          "val_gameMSE": 0.6900179094300763,
+          "seen": 640,
+          "epoch": 0.13754566946056307
+        },
+        {
+          "step": 10,
+          "train_gameMSE": 0.7369751423248303,
+          "val_gameMSE": 0.6898878497146935,
+          "seen": 1280,
+          "epoch": 0.27509133892112614
+        },
+        {
+          "step": 20,
+          "train_gameMSE": 0.7366288311035399,
+          "val_gameMSE": 0.6897029616078125,
+          "seen": 2560,
+          "epoch": 0.5501826778422523
+        },
+        {
+          "step": 50,
+          "train_gameMSE": 0.7354332403157966,
+          "val_gameMSE": 0.6889651235610036,
+          "seen": 6400,
+          "epoch": 1.3754566946056308
+        },
+        {
+          "step": 100,
+          "train_gameMSE": 0.7335819424879729,
+          "val_gameMSE": 0.687846016419407,
+          "seen": 12800,
+          "epoch": 2.7509133892112616
+        },
+        {
+          "step": 200,
+          "train_gameMSE": 0.7302282670487319,
+          "val_gameMSE": 0.6859550481718052,
+          "seen": 25600,
+          "epoch": 5.501826778422523
+        },
+        {
+          "step": 400,
+          "train_gameMSE": 0.7235576496178192,
+          "val_gameMSE": 0.6826405857350277,
+          "seen": 51200,
+          "epoch": 11.003653556845046
+        }
+      ]
+    }
+  ],
+  "science_samples": 330630,
+  "extra_observer_forward_backward": 0,
+  "all_children_waited": true,
+  "current_exact_remaining": [],
+  "source_science_stopped": true,
+  "source_SHA": {
+    "tools/ai-sigma-learning-diagnostic/run.py": "af0b6397d7250d8551105a4a490d3fe2effbdd83c62c53adde76aa5f54a1d511",
+    "tools/ai-sigma-learning-diagnostic/observer.py": "12aad0227412f4e6f3a52c495c5fdea5b6f0e7ce7e41a3aada3f42347341dbfb"
+  },
+  "shared_initial_SHA": "e5d218c9750d581eab7ca6a114acaa8f3cf5bd24474e3f639280705271fc7ddb",
+  "shared_batch400_SHA": "83eb87b84b93624cd96ff7fac2b860f8fe38af2b5015a86462377a06ffd17771",
+  "newtest": 0,
+  "GPU": 0,
+  "new_science_plan": "none automatic"
+}

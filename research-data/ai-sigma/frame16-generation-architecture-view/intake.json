@@ -1,0 +1,65 @@
+{
+  "issue": "quoridor-4lc.223",
+  "receipt_UTC": "2026-10-04T08:14:31Z",
+  "static_start_UTC": "2026-10-04T08:14:48Z",
+  "claim": "ready/show self and goal/no pause/selfassigned then claim exit0",
+  "scope": "static read only; no scientific CPU/model/import/forward/game/teacher/test/GPU",
+  "read_charge_upper_s": 45,
+  "old220_charge_unchanged_s": 30,
+  "sources": {
+    "tools/ai-sigma-teacher-throughput/provider.py": {
+      "SHA256": "a93f0654f928ed26f8ae45e5cd369d888e68e30d6ec198bcbf3143ad32bbd731",
+      "B": 5937
+    },
+    "tools/ai-sigma-teacher-throughput/adapter.py": {
+      "SHA256": "bcaff195d60ec6f7d19dcbe6a6a8b97960bbeffc8e646589a3af71e5ebed1a83",
+      "B": 4257
+    },
+    "tools/ai-sigma-teacher-throughput/worker.cjs": {
+      "SHA256": "1006a89d211d904e5d0bb1d52e689698a5ee3b2f2e6004b27a98e5ab6de7ac1b",
+      "B": 10530
+    },
+    "tools/ai-sigma-teacher-throughput/broker.cjs": {
+      "SHA256": "fe7f8f0172f9aee22c13f8b8fa0aa356d69a3303074216d4c890ca8b0d0429ed",
+      "B": 5532
+    },
+    "tools/ai-sigma-teacher-throughput/pipe.cjs": {
+      "SHA256": "c143f96713e125bf1c4c4bf2451f30850fd9a10ef01b4bfbfec5e7a6cf2fb6b8",
+      "B": 2179
+    },
+    "tools/ai-sigma-native-baseline/private/src/lib.rs": {
+      "SHA256": "bcd41464e7aa76c3970384b36d41087feb2087b5af7f311bfc6a3b6bf11a2b2e",
+      "B": 11300
+    },
+    "tools/ai-sigma-manygame-generation/gamepool.cjs": {
+      "SHA256": "7fc6ee6c63e71048ea6edd2b649417965d70cd39df70f6ba2771160a5ad0bab4",
+      "B": 4557
+    },
+    "research-data/ai-sigma/frame16-teacher-throughput/baseline-summary.json": {
+      "SHA256": "82743c651cb44f589f7e6449b097f85e518a07e6e7c8adad8f18e74f6f2f8b1e",
+      "B": 25472
+    },
+    "research-data/ai-sigma/frame16-teacher-throughput/candidate-summary.json": {
+      "SHA256": "0fe74d36248df809dd3de411d7fd6d1c3824df51be35b0e9762b3f083eb0b21f",
+      "B": 27867
+    },
+    "research-data/ai-sigma/frame16-teacher-throughput/baseline-confirmation-summary.json": {
+      "SHA256": "fba3d887fbd0620127703a40917e5f764b92638b319423a3999c4ae384b8dce0",
+      "B": 25827
+    },
+    "research-data/ai-sigma/frame16-teacher-throughput/cost-target-scenarios.json": {
+      "SHA256": "1f6cadeb2887a1eca4367d85c930e22f7b3d471f24bc937fec4076e51bbc9ad2",
+      "B": 8687
+    },
+    "research-data/ai-sigma/183-manygame-gpu-plan/source-evidence.json": {
+      "SHA256": "40a06aef92749130f11f73c9c71e3b6f5fb307586f79287a5bc70b2e298f7b10",
+      "B": 3633
+    },
+    "docs/reports/ai-sigma-hypothesis-initial.md": {
+      "SHA256": "8b4938e6bd1774a5313f808f8c5c0de3a67618c00cc63a4cd6efd404fde9a032",
+      "B": 29413
+    }
+  },
+  "Cpp_scope_limit": "cached fixed fixture immediate source names and research reference path search found no C++ selfplay source; prior183 publication reading preserved. No host-wide absence or unavailable C++ runtime claim. No new retrieval/import/compile.",
+  "static_start_clock_precision": "08:14 minute observed tool sequence; 08:14:48 is an approximate log timestamp, not an independently sampled start clock"
+}

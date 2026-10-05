@@ -1,0 +1,99 @@
+{
+  "issue": "quoridor-4lc.165",
+  "fixed_web_Git": "751186344fc52ad0c29bc65922e62c6fa915f006",
+  "source_policy_reference": "research saved actual-boundary-repair core; function correspondence150/151; research operational instrumentation distinct",
+  "policy_unchanged": [
+    "bestChild",
+    "expandNode",
+    "backup",
+    "selectLeaf",
+    "pickFromVisits",
+    "legal order",
+    "P2",
+    "FPU",
+    "C1",
+    "root outside loop"
+  ],
+  "adapter_difference": "remove2 research browser per-root/per-simulation setTimeout(0) yields; originalWeb progress approx40 differs; native engineprocess asyncIPC keeps controller responsive",
+  "old_adapter": {
+    "path": "tools/ai-sigma-native-baseline/reference-core-browser-adapter.js",
+    "SHA256": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05"
+  },
+  "new_adapter": {
+    "path": "tools/ai-sigma-native-baseline/reference-core-native.js",
+    "SHA256": "94ae4c315b671569e99d60091dca8fdcb69b1ad042e5e9e945e323a39a803ae7"
+  },
+  "diff": "--- tools/ai-sigma-native-baseline/reference-core-browser-adapter.js\n+++ tools/ai-sigma-native-baseline/reference-core-native.js\n@@ -75,10 +75,10 @@\n async function runMCTS(state,numSims,evaluator,cancelToken,onProgress=null){\n  const c=clockContext,root=new MCTSNode(state);let checkpoint=null;\n  function commit(){const finishStart=stamp();check(c);const p=pickFromVisits(root.children,0);if(p)checkpoint={action:p.action,at:stamp(),rootVisits:root.visitCount,simulations:c.simulations};check(c);c.checkpoint=checkpoint;c.spans.push({kind:'finish',start:finishStart,end:stamp()});if(c.onComplete)c.onComplete(root);}\n- try{check(c,true);const initVal=await expandNode(root,evaluator);check(c);backup(root,initVal);commit();c.rootFinished=stamp();await new Promise(r=>setTimeout(r,0));\n+ try{check(c,true);const initVal=await expandNode(root,evaluator);check(c);backup(root,initVal);commit();c.rootFinished=stamp();/* native: no browser artificial timer; dedicated process + NN IPC */\n   for(let i=0;i<numSims;i++){check(c,true);const begin=stamp(),leaf=selectLeaf(root);leaf.ensureState();check(c);let value;\n    const t=terminalResult(leaf.state);if(t)value=t.value;else value=await expandNode(leaf,evaluator);\n-   check(c);backup(leaf,value);check(c);c.simulations++;commit();c.steps.push(stamp()-begin);await new Promise(r=>setTimeout(r,0));\n+   check(c);backup(leaf,value);check(c);c.simulations++;commit();c.steps.push(stamp()-begin);/* native: no browser artificial timer; dedicated process + NN IPC */\n   }\n  }catch(e){if(e.message!=='guard')throw e;c.stopped='guard';}\n  check(c);return root;\n",
+  "bound_sources": {
+    "tools/ai-sigma-native-baseline/admission.py": "97c7507d3d86cbabb0b77648da18c0a4bb38ab08d7f30ed6f730775acb45d196",
+    "tools/ai-sigma-native-baseline/build.cjs": "3e339fdc81fec79dda2dc4cf5c326ae9ab8a3c0adfae31b57825d34156e79085",
+    "tools/ai-sigma-native-baseline/check-stageA.py": "c1a3d85db5bcdf3c980c3c7db9f5d2582d21d2e978c05a874042d58039ebc47d",
+    "tools/ai-sigma-native-baseline/clock.cjs": "555cdfc95c3f9a42e196a400351753a902b9d998d75469c8fb3b7ce77278fa2b",
+    "tools/ai-sigma-native-baseline/common.cjs": "df81c11661f37d8da170c80e459349a62a4c5aa4242ea026b885b5ecd63dadbf",
+    "tools/ai-sigma-native-baseline/context.js": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+    "tools/ai-sigma-native-baseline/control-mock.cjs": "3c7c8af18ea74774420a0788a982556f15c2038c8dc9565dd5c28f2a1d60b6fe",
+    "tools/ai-sigma-native-baseline/controller.cjs": "0a8c8727b3144187127f20ccdc37ef95044c591c95e7d7a99ba1b92c56f56572",
+    "tools/ai-sigma-native-baseline/diagnose.cjs": "63a0eda954135eb41b10af7762b7e1dc379e000eed8f19aca88b447687a82bf3",
+    "tools/ai-sigma-native-baseline/engine.cjs": "f265a94e782363b55b99db7b64d7a06b7df41cd965f16b0a638c1945f9a47504",
+    "tools/ai-sigma-native-baseline/game.js": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+    "tools/ai-sigma-native-baseline/oracle.cjs": "52774d00488b92a281cae03ad3bf4ecddad0ab2732bb6b932b3b1fc2f208f0db",
+    "tools/ai-sigma-native-baseline/ort.py": "a1385fa48b07a2e5fb34d105e13d06556efed100b127a3667dfd0daa25111565",
+    "tools/ai-sigma-native-baseline/pause-monitor.cjs": "3da03be6ecd7ac5dd9a374f81ea9292c1ea43abeb4a9ed10bfc93bc1279a4527",
+    "tools/ai-sigma-native-baseline/private/Cargo.lock": "d0568a38ed13c537c3ab96abe3a0585e82258da1a3a5e64ee4ab18df07211b24",
+    "tools/ai-sigma-native-baseline/private/Cargo.toml": "4b2423a9a2e4c72d01739c999c7c2e70a970e23a5e2ad4ec1a8a7111fd523ed5",
+    "tools/ai-sigma-native-baseline/private/deps/quoridor-ai/Cargo.toml": "ffc097c7efb403c7086c30113d11fa6fa8355ef8940884732bbcdbca152f8370",
+    "tools/ai-sigma-native-baseline/private/deps/quoridor-ai/src/lib.rs": "5ab5eca5c23814dbaa0162b25e8fe710e58cdb7139c0fa4e3e2f794dc041555a",
+    "tools/ai-sigma-native-baseline/private/deps/quoridor-ai/src/research.rs": "c1a632be1177bd8c4fe6b81d36365577bf4f953f58c5c6abd8bc9e9ba6ed770e",
+    "tools/ai-sigma-native-baseline/private/deps/quoridor-core/Cargo.toml": "9e952267d75fd8b1cd51f72916e8fb97869f38d5ba4893a0ecedc297ebb74a27",
+    "tools/ai-sigma-native-baseline/private/deps/quoridor-core/src/game.rs": "543995676fb46cc4e80d0fccb650875eb901a4b4d71187788ee09dfbaf01a420",
+    "tools/ai-sigma-native-baseline/private/deps/quoridor-core/src/lib.rs": "24dc7084072d14e4f8a8ebd6572df4ddd2722b10b43178c250358f0a9f0befb0",
+    "tools/ai-sigma-native-baseline/private/deps/quoridor-core/src/position.rs": "b12e79a99cf3441cf4acebbea1b827dce24b02db6fb2269021964872535e3ab6",
+    "tools/ai-sigma-native-baseline/private/deps/quoridor-core/src/profiling.rs": "1e26d96b6d443b4d54261e7e3cb742290f223b7e84ba450e3c2cf261af38255f",
+    "tools/ai-sigma-native-baseline/private/deps/quoridor-core/src/research.rs": "5785963dc1bce7828e1d0bb32f5b48623e238aa24c2966f61a9843b6f219f524",
+    "tools/ai-sigma-native-baseline/private/src/context.rs": "9ba343646347329e1c5a21bacba8032c04e762e80653bce20d55b2518e54114e",
+    "tools/ai-sigma-native-baseline/private/src/lib.rs": "bcd41464e7aa76c3970384b36d41087feb2087b5af7f311bfc6a3b6bf11a2b2e",
+    "tools/ai-sigma-native-baseline/private/src/main.rs": "8e775ccc526c0169cfc260764a20dbf591d7c9da7f211bc094968d8d1a5122f2",
+    "tools/ai-sigma-native-baseline/reference-core-browser-adapter.js": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05",
+    "tools/ai-sigma-native-baseline/reference-core-native.js": "94ae4c315b671569e99d60091dca8fdcb69b1ad042e5e9e945e323a39a803ae7",
+    "tools/ai-sigma-native-baseline/reference.cjs": "5c2574b1539d7d84f0a5b3710f3da3399715657a91577d577ffed8da9cf29eef",
+    "tools/ai-sigma-native-baseline/runner.py": "a3eeb4162fb79c7376f42975d8be8a2625f21563f2a7d43be6b74aad371f962f",
+    "tools/ai-sigma-native-baseline/trace-reference.js": "056c98b85d4003835dba54b6170249114e46b20146a1be0f691490e39aba92f0"
+  },
+  "compiler": "rustc 1.98.1 (48a229cea 2026-09-01)\nbinary: rustc\ncommit-hash: 48a229ceaefd4985c50990b14116b6d856af0985\ncommit-date: 2026-09-01\nhost: x86_64-unknown-linux-gnu\nrelease: 1.98.1\nLLVM version: 22.1.8\n",
+  "build": {
+    "command": [
+      "cargo",
+      "build",
+      "--release",
+      "--offline",
+      "--locked",
+      "--bin",
+      "faithful-native",
+      "--manifest-path",
+      "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-native-baseline/private/Cargo.toml"
+    ],
+    "elapsed_ms": 10073.988003998995,
+    "exit": {
+      "code": 0,
+      "signal": null
+    },
+    "environment": {
+      "CARGO_HOME": "/home/vscode/.cache/inference/research/ai-sigma/ort-search/cargo-home",
+      "CARGO_TARGET_DIR": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/NATIVE-BASELINE/build/target",
+      "jobs": 1,
+      "offline": true,
+      "locked": true
+    },
+    "binary": {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/NATIVE-BASELINE/build/target/release/faithful-native",
+      "bytes": 805664,
+      "SHA256": "166dd0c4f5eef9cd02a189e9e8bb4811bd307f6545db83a07e7180ea410e96f8"
+    }
+  },
+  "old_Wasm_backend": "ORT1.21 CPU/Wasm1thread",
+  "native_backend": "existing PythonORT1.30 CPU provider intra1/inter1 sequential; version not rewritten as old",
+  "GPU": 0,
+  "shared_environment_updates": 0,
+  "NN0_actual_oracle": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/NATIVE-BASELINE/runs/native165-oracle-r3/oracle.json",
+  "NN0_control_mock": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/NATIVE-BASELINE/runs/native165-control-mock-r2/mock.json"
+}

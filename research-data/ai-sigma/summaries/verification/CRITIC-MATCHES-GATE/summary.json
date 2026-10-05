@@ -1,0 +1,863 @@
+{
+  "issue": "quoridor-4lc.22",
+  "contract": "SIGMA-MATCHES-GATE v1 trial1",
+  "verdict": "NO-GO / incomplete corrected final-runtime+entry gate",
+  "jobs": [
+    {
+      "name": "entry-static",
+      "start": "2026-09-30T23:18:46.553780+00:00",
+      "end": "2026-09-30T23:18:46.615843+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining_pids": [],
+      "peak_group_plus_runner_rss_bytes": 584626176,
+      "peak_storage_bytes": 1344627,
+      "tracked_processes": [
+        {
+          "pid": 762596,
+          "start_ticks": 6321295,
+          "pgid": 762596,
+          "maxrss_bytes": 21209088,
+          "max_cpu_ticks": 0,
+          "max_threads": 2,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        }
+      ],
+      "cmd": [
+        "node",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-MATCHES-GATE/stage/entry-check.cjs"
+      ]
+    },
+    {
+      "name": "numeric-native",
+      "start": "2026-09-30T23:17:19.220276+00:00",
+      "end": "2026-09-30T23:17:19.331415+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining_pids": [],
+      "peak_group_plus_runner_rss_bytes": 611753984,
+      "peak_storage_bytes": 1284040,
+      "tracked_processes": [
+        {
+          "pid": 762173,
+          "start_ticks": 6312558,
+          "pgid": 762173,
+          "maxrss_bytes": 48336896,
+          "max_cpu_ticks": 4,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        }
+      ],
+      "cmd": [
+        "/home/vscode/.cache/inference/research/ai-sigma/arena-matches/target/release/ai-sigma-arena-matches",
+        "diagnose",
+        "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/ai-sigma/reference/sigma-pcr250/best.onnx",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-MATCHES-GATE/stage/golden-numeric-input.json",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-MATCHES-GATE/stage/numeric-native.json"
+      ]
+    },
+    {
+      "name": "independent",
+      "start": "2026-09-30T23:15:02.181383+00:00",
+      "end": "2026-09-30T23:15:02.643053+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining_pids": [],
+      "peak_group_plus_runner_rss_bytes": 633208832,
+      "peak_storage_bytes": 330027,
+      "tracked_processes": [
+        {
+          "pid": 761293,
+          "start_ticks": 6298850,
+          "pgid": 761293,
+          "maxrss_bytes": 69791744,
+          "max_cpu_ticks": 8,
+          "max_threads": 7,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 761300,
+          "start_ticks": 6298866,
+          "pgid": 761293,
+          "maxrss_bytes": 11145216,
+          "max_cpu_ticks": 0,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 761301,
+          "start_ticks": 6298878,
+          "pgid": 761293,
+          "maxrss_bytes": 0,
+          "max_cpu_ticks": 0,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        }
+      ],
+      "cmd": [
+        "node",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-MATCHES-GATE/stage/independent.cjs"
+      ]
+    },
+    {
+      "name": "final-runtime",
+      "start": "2026-09-30T23:16:04.009133+00:00",
+      "end": "2026-09-30T23:16:24.273010+00:00",
+      "exit": 1,
+      "stop_reason": null,
+      "remaining_pids": [],
+      "peak_group_plus_runner_rss_bytes": 2061914112,
+      "peak_storage_bytes": 16166547,
+      "tracked_processes": [
+        {
+          "pid": 761587,
+          "start_ticks": 6305035,
+          "pgid": 761587,
+          "maxrss_bytes": 352366592,
+          "max_cpu_ticks": 156,
+          "max_threads": 11,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 761602,
+          "start_ticks": 6305085,
+          "pgid": 761587,
+          "maxrss_bytes": 9711616,
+          "max_cpu_ticks": 0,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 761603,
+          "start_ticks": 6305087,
+          "pgid": 761587,
+          "maxrss_bytes": 49471488,
+          "max_cpu_ticks": 239,
+          "max_threads": 2,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 761609,
+          "start_ticks": 6305095,
+          "pgid": 761609,
+          "maxrss_bytes": 301494272,
+          "max_cpu_ticks": 97,
+          "max_threads": 34,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 761618,
+          "start_ticks": 6305160,
+          "pgid": 761609,
+          "maxrss_bytes": 68825088,
+          "max_cpu_ticks": 5,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 761619,
+          "start_ticks": 6305161,
+          "pgid": 761609,
+          "maxrss_bytes": 68231168,
+          "max_cpu_ticks": 3,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 761639,
+          "start_ticks": 6305200,
+          "pgid": 761609,
+          "maxrss_bytes": 65499136,
+          "max_cpu_ticks": 2,
+          "max_threads": 8,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 761647,
+          "start_ticks": 6305202,
+          "pgid": 761609,
+          "maxrss_bytes": 113795072,
+          "max_cpu_ticks": 8,
+          "max_threads": 9,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 761657,
+          "start_ticks": 6305217,
+          "pgid": 761609,
+          "maxrss_bytes": 50311168,
+          "max_cpu_ticks": 1,
+          "max_threads": 8,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 761677,
+          "start_ticks": 6305240,
+          "pgid": 761609,
+          "maxrss_bytes": 137117696,
+          "max_cpu_ticks": 18,
+          "max_threads": 12,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 761684,
+          "start_ticks": 6305245,
+          "pgid": 761609,
+          "maxrss_bytes": 464850944,
+          "max_cpu_ticks": 663,
+          "max_threads": 14,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 761756,
+          "start_ticks": 6306438,
+          "pgid": 761587,
+          "maxrss_bytes": 9781248,
+          "max_cpu_ticks": 0,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 761757,
+          "start_ticks": 6306443,
+          "pgid": 761587,
+          "maxrss_bytes": 40361984,
+          "max_cpu_ticks": 83,
+          "max_threads": 2,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 761759,
+          "start_ticks": 6306451,
+          "pgid": 761759,
+          "maxrss_bytes": 299499520,
+          "max_cpu_ticks": 85,
+          "max_threads": 34,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 761773,
+          "start_ticks": 6306488,
+          "pgid": 761759,
+          "maxrss_bytes": 68366336,
+          "max_cpu_ticks": 1,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 761774,
+          "start_ticks": 6306488,
+          "pgid": 761759,
+          "maxrss_bytes": 68501504,
+          "max_cpu_ticks": 2,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 761794,
+          "start_ticks": 6306518,
+          "pgid": 761759,
+          "maxrss_bytes": 65675264,
+          "max_cpu_ticks": 1,
+          "max_threads": 8,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 761803,
+          "start_ticks": 6306520,
+          "pgid": 761759,
+          "maxrss_bytes": 116674560,
+          "max_cpu_ticks": 7,
+          "max_threads": 9,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 761812,
+          "start_ticks": 6306527,
+          "pgid": 761759,
+          "maxrss_bytes": 49299456,
+          "max_cpu_ticks": 0,
+          "max_threads": 8,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 761832,
+          "start_ticks": 6306548,
+          "pgid": 761759,
+          "maxrss_bytes": 136482816,
+          "max_cpu_ticks": 18,
+          "max_threads": 12,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 761839,
+          "start_ticks": 6306554,
+          "pgid": 761759,
+          "maxrss_bytes": 463568896,
+          "max_cpu_ticks": 231,
+          "max_threads": 13,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        }
+      ],
+      "cmd": [
+        "node",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-MATCHES-GATE/stage/runtime.cjs"
+      ]
+    },
+    {
+      "name": "independent-numeric",
+      "start": "2026-09-30T23:18:46.396922+00:00",
+      "end": "2026-09-30T23:18:46.455696+00:00",
+      "exit": 1,
+      "stop_reason": null,
+      "remaining_pids": [],
+      "peak_group_plus_runner_rss_bytes": 584601600,
+      "peak_storage_bytes": 1326133,
+      "tracked_processes": [
+        {
+          "pid": 762587,
+          "start_ticks": 6321280,
+          "pgid": 762587,
+          "maxrss_bytes": 21184512,
+          "max_cpu_ticks": 0,
+          "max_threads": 2,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        }
+      ],
+      "cmd": [
+        "node",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-MATCHES-GATE/stage/numeric-independent.cjs"
+      ]
+    },
+    {
+      "name": "independent-numeric-corrected",
+      "start": "2026-09-30T23:19:13.450881+00:00",
+      "end": "2026-09-30T23:19:13.511200+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining_pids": [],
+      "peak_group_plus_runner_rss_bytes": 584638464,
+      "peak_storage_bytes": 1371860,
+      "tracked_processes": [
+        {
+          "pid": 762735,
+          "start_ticks": 6323986,
+          "pgid": 762735,
+          "maxrss_bytes": 21221376,
+          "max_cpu_ticks": 0,
+          "max_threads": 2,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        }
+      ],
+      "cmd": [
+        "node",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-MATCHES-GATE/stage/numeric-independent.cjs"
+      ]
+    }
+  ],
+  "stop": {
+    "issue": "quoridor-4lc.22",
+    "UTC": "2026-09-30T23:20:13.821188+00:00",
+    "tracked_PID0": true,
+    "remaining": 0,
+    "identities": [],
+    "processing_deadline": "2026-09-30T23:28:00Z",
+    "runtime_stop_reserve_start": "2026-09-30T23:23:00Z",
+    "reason": "minimum gate not fully established; first runtime all21 passed, restart candidate warm late rejected; stop NN diagnostics and report no-go",
+    "NN_after_this_record": false,
+    "other_kills": 0,
+    "ports_created": 0
+  },
+  "input_integrity": {
+    "checks": 219,
+    "unchanged": 218,
+    "changes": [
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/docs/reports/ai-sigma-experiment-matches.md",
+        "sha256": "652bfa6000401c203f5c4d6ac422bacebeae590f358430afb4b1f67c36e65631",
+        "actual": "8e43bc81817ac05e86a37d051672cc3bbbb84c1c36d7fe7a7dae56d6f6a4f031",
+        "same": false
+      }
+    ],
+    "note": "source-final/ready/report may be reversioned by authorized .21 writer; do not claim critic mutations or frozen latest validation"
+  },
+  "numeric": {
+    "rows": [
+      {
+        "platform": "native",
+        "id": "initial-p1",
+        "legal": 131
+      },
+      {
+        "platform": "wasm",
+        "id": "initial-p1",
+        "legal": 131
+      },
+      {
+        "platform": "native",
+        "id": "asym-hv-p2",
+        "legal": 123
+      },
+      {
+        "platform": "wasm",
+        "id": "asym-hv-p2",
+        "legal": 123
+      },
+      {
+        "platform": "native",
+        "id": "straight-jump-p2",
+        "legal": 132
+      },
+      {
+        "platform": "wasm",
+        "id": "straight-jump-p2",
+        "legal": 132
+      }
+    ],
+    "count": 1594,
+    "fail": 0,
+    "maxdiff": 8.821487426757812e-06
+  },
+  "mock": {
+    "rows": 27,
+    "pass": true
+  },
+  "runtime": {
+    "golden": 21,
+    "golden_all_pass": true,
+    "terminal": 3,
+    "terminal_NN": 0,
+    "timeout_elapsed_ms": 11.129963003098965,
+    "timeout_action_publication": 0,
+    "fresh_native_success": 2,
+    "fresh_candidate_warm": "LATE_RESPONSE 504.22425799816847ms rejected",
+    "fresh_reference_unexecuted": true,
+    "job_exit": 1,
+    "full_runtime_success": false,
+    "holdout": 0
+  },
+  "cleanup": {
+    "old_submitted_snapshot": "repeat abort/close still pending after100ms",
+    "revised_arena_SHA": "974df78ca1c403644da3aae5f9a1324734f2d0e0ada7449c54f4311a62d67e29",
+    "new_copy": "repeat abort/close settled",
+    "separate_versions": true
+  },
+  "entry": {
+    "final_manifest_available": true,
+    "final_manifest_independently_validated": false,
+    "draft_hash": "533b1dffd3a61669be9d6b68976047b09055d363f3847fd0a8f0f2d8c316d1e5",
+    "final_manifest_hash_checks": 23,
+    "all_match": true,
+    "source_write_stop_utc": "2026-09-30T23:19:45.660890+00:00",
+    "final_static_only": true,
+    "final_entry_runtime_executed": false,
+    "ready_sha256": "74504e867cf106efc5349f90e82e7615d7492c050571bc7692d06241fa4edb22",
+    "warm_correction": "final withArena warmReference=true; initial-golden reference warm present, independent actual final replay not performed"
+  },
+  "draft_entry_findings": [
+    "Draft missing reference warm was fixed in final snapshot; final warm+cleanup/restart integration not independently runtime-tested",
+    "candidate MODEL_HASH classified invalid_pair by shared game classifier; contract requires candidate NN failures as engine loss; only fixed reference model failure invalidates pair"
+  ],
+  "failed_checks_preserved": [
+    "numeric Python wrong136to209 KeyError",
+    "numeric Node wrong order identity assertion; corrected legal-set/id-mapped prior verification passed",
+    "fresh Wasm warm late rejection makes runtime exit1"
+  ],
+  "unverified": [
+    "latest entry frozen hash/stop and dry orchestration",
+    "T500 delay late independently injected",
+    "new final game-loop runtime",
+    "fresh reference after warm rejection",
+    "build fingerprint full chain",
+    "deep overlay actual NN/arena",
+    "true legal200/no-legal",
+    "rawview/entropy/training overlap"
+  ],
+  "resources": {
+    "peak_rss_bytes": 2061914112,
+    "all_observed_CPU2": true,
+    "GPU": 0,
+    "build": 0,
+    "download": 0,
+    "new_storage_guard": 117440512,
+    "RSS_guard": 2684354560,
+    "sampling_limit": "50ms monitor can miss short-lived TIDs/instantaneous peaks; no formal uncontended window"
+  },
+  "static_processing_stop_utc": "2026-09-30T23:21:57.704070+00:00",
+  "final_revision_runtime": {
+    "start": "2026-09-30T23:22:53.397352+00:00",
+    "end": "2026-09-30T23:23:00.041429+00:00",
+    "exit": -15,
+    "stop_reason": "processing_deadline",
+    "peak_group_plus_runner_rss_bytes": 2027569152,
+    "remaining_pids": [],
+    "tracked_processes": [
+      {
+        "pid": 764711,
+        "start_ticks": 6345990,
+        "pgid": 764711,
+        "maxrss_bytes": 270340096,
+        "max_cpu_ticks": 99,
+        "max_threads": 11,
+        "affinities": [
+          [
+            2
+          ]
+        ]
+      },
+      {
+        "pid": 764720,
+        "start_ticks": 6346032,
+        "pgid": 764711,
+        "maxrss_bytes": 49057792,
+        "max_cpu_ticks": 46,
+        "max_threads": 2,
+        "affinities": [
+          [
+            2
+          ]
+        ]
+      },
+      {
+        "pid": 764719,
+        "start_ticks": 6346030,
+        "pgid": 764711,
+        "maxrss_bytes": 9768960,
+        "max_cpu_ticks": 1,
+        "max_threads": 1,
+        "affinities": [
+          [
+            2
+          ]
+        ]
+      },
+      {
+        "pid": 764726,
+        "start_ticks": 6346041,
+        "pgid": 764726,
+        "maxrss_bytes": 298659840,
+        "max_cpu_ticks": 84,
+        "max_threads": 34,
+        "affinities": [
+          [
+            2
+          ]
+        ]
+      },
+      {
+        "pid": 764733,
+        "start_ticks": 6346060,
+        "pgid": 764726,
+        "maxrss_bytes": 68530176,
+        "max_cpu_ticks": 2,
+        "max_threads": 1,
+        "affinities": [
+          [
+            2
+          ]
+        ]
+      },
+      {
+        "pid": 764734,
+        "start_ticks": 6346060,
+        "pgid": 764726,
+        "maxrss_bytes": 68669440,
+        "max_cpu_ticks": 2,
+        "max_threads": 1,
+        "affinities": [
+          [
+            2
+          ]
+        ]
+      },
+      {
+        "pid": 764754,
+        "start_ticks": 6346076,
+        "pgid": 764726,
+        "maxrss_bytes": 65470464,
+        "max_cpu_ticks": 1,
+        "max_threads": 8,
+        "affinities": [
+          [
+            2
+          ]
+        ]
+      },
+      {
+        "pid": 764763,
+        "start_ticks": 6346079,
+        "pgid": 764726,
+        "maxrss_bytes": 115662848,
+        "max_cpu_ticks": 8,
+        "max_threads": 9,
+        "affinities": [
+          [
+            2
+          ]
+        ]
+      },
+      {
+        "pid": 764773,
+        "start_ticks": 6346089,
+        "pgid": 764726,
+        "maxrss_bytes": 49901568,
+        "max_cpu_ticks": 0,
+        "max_threads": 8,
+        "affinities": [
+          [
+            2
+          ]
+        ]
+      },
+      {
+        "pid": 764794,
+        "start_ticks": 6346115,
+        "pgid": 764726,
+        "maxrss_bytes": 136024064,
+        "max_cpu_ticks": 17,
+        "max_threads": 12,
+        "affinities": [
+          [
+            2
+          ]
+        ]
+      },
+      {
+        "pid": 764801,
+        "start_ticks": 6346120,
+        "pgid": 764726,
+        "maxrss_bytes": 465666048,
+        "max_cpu_ticks": 287,
+        "max_threads": 13,
+        "affinities": [
+          [
+            2
+          ]
+        ]
+      }
+    ],
+    "cmd": [
+      "node",
+      "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-MATCHES-GATE/stage/final-revision.cjs"
+    ],
+    "pass": false,
+    "golden_rows": [
+      {
+        "engine": "native",
+        "accepted": true,
+        "error": null,
+        "elapsed_ms": 415.0437339991331,
+        "nn_calls": 58,
+        "fallback": 0
+      },
+      {
+        "engine": "candidate",
+        "accepted": true,
+        "error": null,
+        "elapsed_ms": 438.8234950006008,
+        "nn_calls": 8,
+        "fallback": 0
+      },
+      {
+        "engine": "reference",
+        "accepted": true,
+        "error": null,
+        "elapsed_ms": 432.9272820055485,
+        "nn_calls": 19,
+        "fallback": 0
+      }
+    ],
+    "watchdog": {
+      "engine": "native",
+      "id": "initial-p1",
+      "request_id": "764711-1028-c74d53c0-9686-4b73-adf9-9897cdbeb3b5",
+      "request": {
+        "kind": "request",
+        "type": "search",
+        "id": "initial-p1",
+        "request_id": "764711-1028-c74d53c0-9686-4b73-adf9-9897cdbeb3b5",
+        "prefix": [],
+        "legal_prefix": [],
+        "seed": 1979,
+        "generation": 1028,
+        "clock_t0_ms": 63466064.905668005,
+        "t0": 63466064.905668005,
+        "T_ms": 10,
+        "guard_ms": 0,
+        "g_ms": 0,
+        "simulations": 4096,
+        "max_nodes": 512,
+        "max_depth": 24,
+        "limits": {
+          "maxSimulations": 100000
+        },
+        "node_t0_ms": 63466064.923257,
+        "node_deadline_ms": 63466074.923257,
+        "page_offset_ms": 1790747113491.7915,
+        "page_error_ms": 0.36904296875,
+        "diagnostic_step_delay_ms": 500,
+        "terminal_diagnostic": false
+      },
+      "T_ms": 10,
+      "g_ms": 0,
+      "generation": 1028,
+      "t0_ms": 63466064.923257,
+      "received_after_validation_ms": 63466075.730947,
+      "elapsed_ms": 10.807690002024174,
+      "late": true,
+      "overshoot_ms": 0.8076900020241737,
+      "stale": true,
+      "error": "NO_RESPONSE_TIMEOUT",
+      "illegal": false,
+      "legal": false,
+      "accepted": false,
+      "fallback": 0,
+      "checkpoint": false,
+      "terminal": null,
+      "nn_ms": [],
+      "step_ms": [],
+      "finish_ms": 0,
+      "transport_ms": null,
+      "clock_error_ms": 0.01104749691081047,
+      "raw": {
+        "transaction_error": "NO_RESPONSE_TIMEOUT",
+        "detail": "reason pending: deadline reached without verified response",
+        "discarded": true,
+        "request_id": "764711-1028-c74d53c0-9686-4b73-adf9-9897cdbeb3b5",
+        "watchdog_at_ms": 63466075.36335,
+        "overshoot_ms": 0.440092995762825,
+        "cleanup_status": "pending; reuse forbidden"
+      }
+    },
+    "fresh_restart_success": false
+  },
+  "stop_final": {
+    "issue": "quoridor-4lc.22",
+    "UTC": "2026-09-30T23:24:11.105591+00:00",
+    "last_job_end": "2026-09-30T23:23:00.041429+00:00",
+    "reason": "processing_deadline",
+    "exit": -15,
+    "remaining": 0,
+    "all_tracked_PID0": true,
+    "identities": [],
+    "NN_after_this_record": false,
+    "processing_deadline": "23:28:00Z",
+    "runtime_reserve_boundary": "23:23:00Z",
+    "other_kills": 0,
+    "ports_created": 0,
+    "reserve_overshoot_seconds": 0.041429
+  },
+  "evidence_limit": "Own withArena used common startup/clock/stderr paths across sessions; auxiliary earlier session files overwritten, request/response raw and process logs retained. Original evidence paths unchanged."
+}

@@ -1,0 +1,671 @@
+{
+  "issue": "quoridor-4lc.140",
+  "before_new_NN": true,
+  "inputs": [
+    {
+      "id": "diverse-prefix-mid-pair2-color2-new8",
+      "board": {
+        "total_ply": 13,
+        "walls_remaining": [
+          6,
+          7
+        ],
+        "turn": 1
+      },
+      "history_count_key": "4,3|4,5|1|0,5;2,2;4,2|4,7;5,5;6,4;7,1",
+      "history_counts": [
+        [
+          "4,0|4,8|0||",
+          1
+        ],
+        [
+          "4,0|4,8|0|0,5|5,5",
+          1
+        ],
+        [
+          "4,0|4,8|0|0,5|5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,0|4,8|1|0,5|",
+          1
+        ],
+        [
+          "4,0|4,8|1|0,5|5,5;6,4",
+          1
+        ],
+        [
+          "4,1|4,7|0|0,5|5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,1|4,8|1|0,5|5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,2|4,6|0|0,5|5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,2|4,7|1|0,5|5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|4,5|0|0,5;4,2|4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|4,5|0|0,5|5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|4,5|1|0,5;2,2;4,2|4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|4,5|1|0,5;4,2|5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|4,6|1|0,5|5,5;6,4;7,1",
+          1
+        ]
+      ],
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 2,
+          "orientation": "h"
+        }
+      ],
+      "legal_ids": [
+        58,
+        40,
+        48,
+        50,
+        81,
+        145,
+        82,
+        146,
+        83,
+        147,
+        84,
+        148,
+        85,
+        149,
+        86,
+        150,
+        87,
+        151,
+        88,
+        89,
+        153,
+        90,
+        154,
+        91,
+        155,
+        92,
+        156,
+        93,
+        157,
+        94,
+        158,
+        95,
+        159,
+        97,
+        161,
+        162,
+        164,
+        166,
+        103,
+        167,
+        104,
+        105,
+        169,
+        106,
+        170,
+        107,
+        171,
+        108,
+        172,
+        109,
+        173,
+        110,
+        174,
+        111,
+        112,
+        176,
+        113,
+        177,
+        114,
+        178,
+        115,
+        179,
+        116,
+        180,
+        117,
+        181,
+        118,
+        120,
+        184,
+        186,
+        123,
+        187,
+        124,
+        188,
+        125,
+        189,
+        127,
+        128,
+        192,
+        129,
+        193,
+        130,
+        194,
+        131,
+        195,
+        132,
+        196,
+        133,
+        134,
+        135,
+        199,
+        136,
+        200,
+        137,
+        201,
+        138,
+        202,
+        139,
+        203,
+        140,
+        204,
+        142,
+        206,
+        143,
+        207,
+        144,
+        208
+      ]
+    },
+    {
+      "id": "diverse-prefix-mid-pair2-color2-new16",
+      "board": {
+        "total_ply": 21,
+        "walls_remaining": [
+          4,
+          5
+        ],
+        "turn": 1
+      },
+      "history_count_key": "3,4|5,4|1|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+      "history_counts": [
+        [
+          "3,4|5,4|1|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,0|4,8|0||",
+          1
+        ],
+        [
+          "4,0|4,8|0|0,5|5,5",
+          1
+        ],
+        [
+          "4,0|4,8|0|0,5|5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,0|4,8|1|0,5|",
+          1
+        ],
+        [
+          "4,0|4,8|1|0,5|5,5;6,4",
+          1
+        ],
+        [
+          "4,1|4,7|0|0,5|5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,1|4,8|1|0,5|5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,2|4,6|0|0,5|5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,2|4,7|1|0,5|5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|4,5|0|0,1;0,5;2,2;4,2;4,6|0,2;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|4,5|0|0,5;2,2;4,2|0,2;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|4,5|0|0,5;4,2|4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|4,5|0|0,5|5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|4,5|1|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|4,5|1|0,1;0,5;2,2;4,2|0,2;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|4,5|1|0,5;2,2;4,2|4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|4,5|1|0,5;4,2|5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|4,6|1|0,5|5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,3|5,5|0|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,4|5,4|0|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+          1
+        ],
+        [
+          "4,4|5,5|1|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+          1
+        ]
+      ],
+      "legal_prefix": [
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        }
+      ],
+      "legal_ids": [
+        50,
+        32,
+        40,
+        42,
+        81,
+        145,
+        82,
+        83,
+        147,
+        84,
+        148,
+        85,
+        149,
+        86,
+        150,
+        87,
+        151,
+        88,
+        91,
+        155,
+        92,
+        156,
+        93,
+        157,
+        94,
+        158,
+        95,
+        159,
+        164,
+        166,
+        103,
+        167,
+        104,
+        105,
+        106,
+        170,
+        107,
+        171,
+        108,
+        172,
+        109,
+        173,
+        110,
+        111,
+        112,
+        176,
+        113,
+        177,
+        114,
+        178,
+        115,
+        179,
+        116,
+        180,
+        117,
+        181,
+        118,
+        120,
+        184,
+        186,
+        123,
+        187,
+        124,
+        188,
+        125,
+        189,
+        127,
+        128,
+        192,
+        129,
+        193,
+        130,
+        194,
+        131,
+        195,
+        196,
+        135,
+        199,
+        136,
+        200,
+        137,
+        201,
+        138,
+        202,
+        139,
+        203,
+        140,
+        204,
+        142,
+        206,
+        143,
+        207,
+        144,
+        208
+      ]
+    }
+  ],
+  "input_SHA256": "5a2064169747855d2d6c173b40c5a087e96baa632e5ff2409dc5237a059f916f",
+  "source_binding_SHA256": "317ff7f56cc8e7dcaa57987376a79ea5cffa05d902d1f736a87b9d404cf348b5",
+  "mechanism_order": [
+    {
+      "fixture_id": "diverse-prefix-mid-pair2-color2-new8",
+      "variant": "original",
+      "K": 32
+    },
+    {
+      "fixture_id": "diverse-prefix-mid-pair2-color2-new8",
+      "variant": "q0",
+      "K": 32
+    },
+    {
+      "fixture_id": "diverse-prefix-mid-pair2-color2-new8",
+      "variant": "fpu",
+      "K": 32
+    },
+    {
+      "fixture_id": "diverse-prefix-mid-pair2-color2-new16",
+      "variant": "fpu",
+      "K": 32
+    },
+    {
+      "fixture_id": "diverse-prefix-mid-pair2-color2-new16",
+      "variant": "q0",
+      "K": 32
+    },
+    {
+      "fixture_id": "diverse-prefix-mid-pair2-color2-new16",
+      "variant": "original",
+      "K": 32
+    }
+  ],
+  "K_definition": "rootincluded32sim, observedrootN32/edge31, terminal-noNN separate",
+  "hand_NN_max": 192,
+  "startup_NN": 6,
+  "sessions": 2,
+  "mean_definition": "actualnode own-side sum once per visit; rootinitial included; pseudo leaf excluded; ancestry alternating",
+  "N0": "mean absent, no division; artificial scoreQ0; normal expanded select follows a completedbackup",
+  "factor_only": "unvisitedQ0 versus f32(trueMean-.2f32sqrt(visitedOriginalPriorSum)); visitedQ unchanged",
+  "parity": "rootfeatures/rawNN/prior/allcompletedrootedges/Action/NN/depth/cap exact; addedlayoutarena reportedseparately",
+  "quality_exit": "parity/meanunresolved or allActionunchanged or input3FPU133 =>endquality0; onlynewlegalAction outsideinput3[161,133],input4[32,42] eligible allsuchstates",
+  "quality_order": [
+    "baseline_rep1",
+    "FPU_rep1",
+    "FPU_rep2",
+    "baseline_rep2"
+  ],
+  "quality_max_rollouts": 8,
+  "quality_job_max_seconds": 180,
+  "quality_policy": "bothfixedSigma C1/FPU.2/first/temp0/originalorder, T500 cutoff402 adopt411 bounded2sample seed1979 totaltotalply200 goalpriority",
+  "quality_denominator": "forcedP2score win1/draw.5/loss0, typedresponsibilityloss separateinvalid/unfinished; sharedJudge/automation/lateflagspriority, unknownsharedFAULTunfinished",
+  "no_scientific_success_replacement": true,
+  "no_extra_parity_NN": true,
+  "numeric_float_transport": "Rust JSON f32 restored byMath.fround formean/signformula gates; exactoriginal/Q0 JSON CP parity",
+  "finite_bounds": "postselected2lost-lineinputs; notIID/holdout/generaloracle/119cause/500mscandidateperformance",
+  "optional_nonroot_nodes_max": 7,
+  "static_fixture_ref": {
+    "path": ".artifacts/ai-sigma/resume-20261002/CANDIDATE-TRUE-MEAN-FPU/mock.json",
+    "SHA256": "88d20c735ff0c82f7339f4d2bcf02734122d1aa86b4e54a19d7a6b2f455ca2eb",
+    "actual_private_Wasm_NN0": true,
+    "real_terminal_observed": false
+  }
+}

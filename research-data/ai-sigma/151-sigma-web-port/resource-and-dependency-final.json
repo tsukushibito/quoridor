@@ -1,0 +1,229 @@
+{
+  "issue": "quoridor-4lc.151",
+  "UTC": "2026-10-03T02:10:03.961764+00:00",
+  "managed_wall_seconds_by_kind": {
+    "stageB": 444.92958899999996,
+    "protocol": 4.468836,
+    "stageA": 56.353615000000005,
+    "build": 7.701045000000001
+  },
+  "budgets_seconds": {
+    "protocol": 300,
+    "build": 180,
+    "stageA": 300,
+    "stageB": 1800
+  },
+  "managed_wall_caps_supported": true,
+  "NN_stageA_hand": 640,
+  "NN_stageA_startup": 12,
+  "NN_stageB_startup": 24,
+  "all_attempts": [
+    {
+      "run": "port151-stageB-group3-r1",
+      "kind": "stageB",
+      "start": "2026-10-03T01:54:43.608525+00:00",
+      "end": "2026-10-03T01:56:23.801626+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "peak_current_RSS": 1805660160
+    },
+    {
+      "run": "port151-static-r4",
+      "kind": "protocol",
+      "start": "2026-10-03T01:40:29.083026+00:00",
+      "end": "2026-10-03T01:40:29.655281+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "peak_current_RSS": 107986944
+    },
+    {
+      "run": "port151-stageB-group2-r1",
+      "kind": "stageB",
+      "start": "2026-10-03T01:51:37.847702+00:00",
+      "end": "2026-10-03T01:53:18.156540+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "peak_current_RSS": 1842262016
+    },
+    {
+      "run": "port151-stageB-generate-r1",
+      "kind": "stageB",
+      "start": "2026-10-03T01:43:04.813417+00:00",
+      "end": "2026-10-03T01:43:11.376000+00:00",
+      "exit": 1,
+      "stop_reason": null,
+      "peak_current_RSS": 1215909888
+    },
+    {
+      "run": "port151-static-r1",
+      "kind": "protocol",
+      "start": "2026-10-03T01:29:02.737897+00:00",
+      "end": "2026-10-03T01:29:03.107491+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "peak_current_RSS": 99315712
+    },
+    {
+      "run": "port151-pack-r1",
+      "kind": "protocol",
+      "start": "2026-10-03T02:09:30.711071+00:00",
+      "end": "2026-10-03T02:09:32.551105+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "peak_current_RSS": 57647104
+    },
+    {
+      "run": "port151-stageB-group4-r1",
+      "kind": "stageB",
+      "start": "2026-10-03T01:57:40.377067+00:00",
+      "end": "2026-10-03T01:59:31.444851+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "peak_current_RSS": 1834688512
+    },
+    {
+      "run": "port151-stageA-r2",
+      "kind": "stageA",
+      "start": "2026-10-03T01:40:59.678549+00:00",
+      "end": "2026-10-03T01:41:28.650164+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "peak_current_RSS": 1853460480
+    },
+    {
+      "run": "port151-stageB-group1-r1",
+      "kind": "stageB",
+      "start": "2026-10-03T01:47:42.719290+00:00",
+      "end": "2026-10-03T01:49:42.419889+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "peak_current_RSS": 1842323456
+    },
+    {
+      "run": "port151-static-r2",
+      "kind": "protocol",
+      "start": "2026-10-03T01:30:01.010705+00:00",
+      "end": "2026-10-03T01:30:01.531060+00:00",
+      "exit": 1,
+      "stop_reason": null,
+      "peak_current_RSS": 93433856
+    },
+    {
+      "run": "port151-static-r3",
+      "kind": "protocol",
+      "start": "2026-10-03T01:31:17.272853+00:00",
+      "end": "2026-10-03T01:31:17.811785+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "peak_current_RSS": 107765760
+    },
+    {
+      "run": "port151-build-r3",
+      "kind": "build",
+      "start": "2026-10-03T01:39:30.895960+00:00",
+      "end": "2026-10-03T01:39:32.560695+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "peak_current_RSS": 242778112
+    },
+    {
+      "run": "port151-stageA-r1",
+      "kind": "stageA",
+      "start": "2026-10-03T01:32:09.863020+00:00",
+      "end": "2026-10-03T01:32:37.245020+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "peak_current_RSS": 1700102144
+    },
+    {
+      "run": "port151-stageB-generate-r2",
+      "kind": "stageB",
+      "start": "2026-10-03T01:45:16.527023+00:00",
+      "end": "2026-10-03T01:45:23.623707+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "peak_current_RSS": 1332211712
+    },
+    {
+      "run": "port151-static-r5",
+      "kind": "protocol",
+      "start": "2026-10-03T01:46:20.913459+00:00",
+      "end": "2026-10-03T01:46:21.411552+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "peak_current_RSS": 149463040
+    },
+    {
+      "run": "port151-build-r2",
+      "kind": "build",
+      "start": "2026-10-03T01:24:58.734883+00:00",
+      "end": "2026-10-03T01:25:04.771193+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "peak_current_RSS": 341848064
+    }
+  ],
+  "current_allocated_bytes": 216137728,
+  "owner_reservation_bytes": 268435456,
+  "unused_reservation_bytes": 52297728,
+  "storage_guard_bytes": 234881024,
+  "old149_and_unknown_old_retention_not_reduced": true,
+  "old_entry": 2147483648,
+  "additional_parent_reservation": 0,
+  "peak_browser_plus_Node_current_RSS": 1853460480,
+  "browser_guard_RSS": 5905580032,
+  "extra_short_read_edit_git_communication_wall_not_centrally_measured": true,
+  "those_costs_not_assigned_zero_or_hidden_in_NN": true,
+  "CPU_threads_all_owned_managed_sample_affinity_check": "process receipts; CPU0 protocol / CPU2 build and browser; ORT each1",
+  "sameK_not_sameCPU_APIawait_not_kernelCPU": true,
+  "readonly_dependencies_after_equal": [
+    {
+      "path": "crates/quoridor-core/Cargo.toml",
+      "before": "9e952267d75fd8b1cd51f72916e8fb97869f38d5ba4893a0ecedc297ebb74a27",
+      "current": "9e952267d75fd8b1cd51f72916e8fb97869f38d5ba4893a0ecedc297ebb74a27"
+    },
+    {
+      "path": "crates/quoridor-core/src/game.rs",
+      "before": "543995676fb46cc4e80d0fccb650875eb901a4b4d71187788ee09dfbaf01a420",
+      "current": "543995676fb46cc4e80d0fccb650875eb901a4b4d71187788ee09dfbaf01a420"
+    },
+    {
+      "path": "crates/quoridor-core/src/lib.rs",
+      "before": "24dc7084072d14e4f8a8ebd6572df4ddd2722b10b43178c250358f0a9f0befb0",
+      "current": "24dc7084072d14e4f8a8ebd6572df4ddd2722b10b43178c250358f0a9f0befb0"
+    },
+    {
+      "path": "crates/quoridor-core/src/position.rs",
+      "before": "b12e79a99cf3441cf4acebbea1b827dce24b02db6fb2269021964872535e3ab6",
+      "current": "b12e79a99cf3441cf4acebbea1b827dce24b02db6fb2269021964872535e3ab6"
+    },
+    {
+      "path": "crates/quoridor-core/src/profiling.rs",
+      "before": "1e26d96b6d443b4d54261e7e3cb742290f223b7e84ba450e3c2cf261af38255f",
+      "current": "1e26d96b6d443b4d54261e7e3cb742290f223b7e84ba450e3c2cf261af38255f"
+    },
+    {
+      "path": "crates/quoridor-core/src/research.rs",
+      "before": "5785963dc1bce7828e1d0bb32f5b48623e238aa24c2966f61a9843b6f219f524",
+      "current": "5785963dc1bce7828e1d0bb32f5b48623e238aa24c2966f61a9843b6f219f524"
+    },
+    {
+      "path": "crates/quoridor-ai/Cargo.toml",
+      "before": "ffc097c7efb403c7086c30113d11fa6fa8355ef8940884732bbcdbca152f8370",
+      "current": "ffc097c7efb403c7086c30113d11fa6fa8355ef8940884732bbcdbca152f8370"
+    },
+    {
+      "path": "crates/quoridor-ai/src/lib.rs",
+      "before": "5ab5eca5c23814dbaa0162b25e8fe710e58cdb7139c0fa4e3e2f794dc041555a",
+      "current": "5ab5eca5c23814dbaa0162b25e8fe710e58cdb7139c0fa4e3e2f794dc041555a"
+    },
+    {
+      "path": "crates/quoridor-ai/src/research.rs",
+      "before": "c1a632be1177bd8c4fe6b81d36365577bf4f953f58c5c6abd8bc9e9ba6ed770e",
+      "current": "c1a632be1177bd8c4fe6b81d36365577bf4f953f58c5c6abd8bc9e9ba6ed770e"
+    }
+  ],
+  "models_ORIGINAL_reference_unchanged_by_owner": true,
+  "Git_archive_forecast_bytes": 12946521,
+  "current_plus_Git_forecast_under_guard": true
+}

@@ -1,0 +1,3 @@
+goal quoridor-4lc /本人209 ready/show/no pause/assigned→claim/静的開始。受領04:02:48.793798Z、旧204 finiteaccept根拠でclose+backup0。新NN0/科学0/GPU0。
+主不足は0→100step（2.75epoch）の未観測、全層のLR1e-3中心の条件不足。原plain QF1-H32の同seed/同batchorderでLR1e-3/1e-4/1e-5各400step、eval0/1/2/5/10/20/50/100/200/400を候補として結果前登録。各110210sample/3計330630。 observerは同minibatchのforward/backwardだけからft/h/out gradzero/norm・ReLU活性/dead・更新/weight比・出力target/距離尺度を集約し追加forward0。早期だけ改善なら更新量/earlystopを次案、正常勾配で全LR不支持なら表現/教師/分布の説明を保持、0gradient/飽和ならその有限原因を先に判別。
+197current+uniqueGit+残metadata=5209983<retain8MiB確認、既16→retain8+新2098へ振替・親増額/旧未知減額0。新forecast5MiB/guard6、shared保守57956426<58720256維持。 critic210選定前意見は到着時反映、全承認待ち0、旧testlabel/results/metadata読取0。

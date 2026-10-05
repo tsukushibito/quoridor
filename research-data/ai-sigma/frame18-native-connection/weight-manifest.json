@@ -1,0 +1,55 @@
+{
+  "feature": "QF1-f32-STM-scaled-v1",
+  "weights": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-native-connection/candidate.f32",
+  "weights_SHA": "b81792d5ba00c6d79b58cada2fc81d84ea822db48c04420b4e269fb9b71841b3",
+  "weights_B": 48772,
+  "checkpoint_SHA": "81c1effc6a3228c337b52a38efec07a0952d6e8b898fa8387cffed0e13c5436b",
+  "freeze_SHA": "2bac8f1f7ad87b83ac0549c01bb32eb0c8d0a2f39a05c717420e20cd668e6a60",
+  "names": [
+    "ft.weight",
+    "ft.bias",
+    "h.weight",
+    "h.bias",
+    "out.weight",
+    "out.bias"
+  ],
+  "shapes": [
+    [
+      32,
+      312
+    ],
+    [
+      32
+    ],
+    [
+      32,
+      66
+    ],
+    [
+      32
+    ],
+    [
+      1,
+      32
+    ],
+    [
+      1
+    ]
+  ],
+  "little_endian_f32": 12193,
+  "mu_f32": [
+    0.10343921929597855,
+    0.09714682400226593
+  ],
+  "sigma_f32": [
+    0.0543474480509758,
+    0.05367854982614517
+  ],
+  "scale_SHA": "68f8b43a0e4408a1546f8fa2652ffdf21f1f7bdcfbac9a25a86ac666b27aa4ee",
+  "h_export_recompensation": false,
+  "runtime": "f32((d_f32-mu_f32)/sigma_f32), actualSTM concat; no double distance swap",
+  "distance_fit": {
+    "a": 0.06038215201109912,
+    "b": 7.925687690687516
+  }
+}

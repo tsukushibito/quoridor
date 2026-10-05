@@ -1,0 +1,17 @@
+# 最終責任分類と実entry復旧gate
+
+quoridor-4lc.23 / SIGMA-FINAL-ENTRY-GATE / 試行1 / 版1。critic→coordinator。目標ai-sigma-research-goal.md版1全文/common/critic/AGENTS/team/design/storage/handoff/比較protocol継承。ai-sigma/codex/ai-sigma、追加agent/build/取得/依存sync/学習/GPU/対局/holdout送信0。静的準備は今開始、NNruntimeは.21revision3最終sourcewrite停止とselfPID0の実manifest+統括steerが届いた後だけ。既知.22accepted特徴/数値gate/21goldenを全面反復しない。
+
+.22report SHA617bc9d59a2ec3c807362a5b680f15fd8016abaa3569bcf1b9e86f3d0e183b26を全文読む。no-go理由はcandidateMODEL_HASH/nonzero fallbackがinvalid_pairへ分類され契約違反、finalentrycleanup/restart/warm/reclock未完了。旧504.224mslate安全拒否と新最終golden3engine/timeout通過は支持、tail保証/全復旧は不支持。auxsessionログの上書き、期限/原source改変監査限界も保持。旧.20negative finding/46.58秒期限逸脱、.22numericindex補助失敗、原219中writerreport1更新をkernel変更と混同しない。
+
+入力.21契約版2/preregister-v2SHAf7cc977b7a5406707a7addddeaafe18fad60753dc3de16f5cf9e5f196ebf5f3b/entry-ready旧SHA74504e...db22/旧snapshot read-only。experiment修正revision3の最終manifest/checks/sourcewrite-stop/PID0が届くまでruntime0。新write verification/CRITIC-FINAL-ENTRY/、専用cache/temp inference/research/ai-sigma/critic-final-entry/、docs/reports/ai-sigma-critic-final-entry.mdのみ。自己copyへ実input/outputpath/temp/deadline変更をpatch/hash保存、原tool/artifact/raw/モデル/lock/source/DBへの追加書込0。NNnative9a7e...635b68/immutableWasm891cd...f328/modeld790...908d/kernel/PUCT/weights不変を実hashで確認。
+
+静的独立分類: actual submitにvalid transaction error envelopeを入れresponse.engineを保持してclassifyFailureまで通す。native/candidate MODEL_HASH/NNerror/nonzero fallbackは候補engine_loss、reference同モデルerror/fallbackだけinvalidpair、identity/refereeIPCはinvalid、deadline/無応答はreason付き責任lossとして保存。誤ってreference_model_failed等structured aliasをdefaultlossへ流さない。実request error/caller公開checkpoint0まで既検証経路をsourceとmockで確認、自然障害発生を主張しない。fixedmodel破壊/weights再取得は不要。
+
+entry独立execute mockはsource読取後、32game全採番/16block/先後同prefix/seed1979/選択先頭8/再現selection2026100202とorder2026100203/FisherYates xorshift rejectionで再検算。prereg/pool U64実SHA/旧v1保持、retry1/global2/no replacement/nooutcome選別/pause/00:45deadline1.5sreserve/既run拒否/tokenhash/T500g91照合を確認。人工score/mockpoolは実勝敗0。importでengine起動0、actual --runは実行しない。
+
+最終実entry realBackendを安全export等の同関数から使用（違うwithArenaだけの成功で代替しない）。固定initial goldenだけ、session1 load/warm/reclock→native/Wasm/reference各1T500/g91合法checkpoint/fallback0/producerIDgen一致→nativeT10 stepdelay500で期限前wakeなし/discard/Action0→旧backend stop/wait+descendantPID0→session2 fresh load/warm/reclock→三engine各1T500/g91を1回固定実行。各session新pathでstartup/clock/stderr/raw/command/hash保存し上書き0、全hashruntime直前後を確認。ここで任意lateは救済しない。安全拒否と「復旧が全完了」を別判定し、失敗は同条件有利な反復を選ばずno-go返す。追加T500 delayは余裕があれば少数だけ、実害保証/キャンセル中同期NN中断/latencytail保証は主張しない。旧未完了deepoverlay/arena/合法200/no-legal/rawview/entropy/trainingoverlap/fullfingerprintは今回scope外で保持。
+
+CPU2単1全helper/TID/monitor、RAM3GiB guard2.5/new128MiB guard112/GPU0、1系列NNjob、jobtimeout90秒か残処理時間の小さい方。writer NN/compile停止証拠後にだけ実NN、root同時役数3以内。privateTMP/XDG/proc短aliasrealpath/PIDstarttick/50ms資源/clock/SMT/host負荷を記録、otherskill0/port0、外部完全無負荷/瞬間peak保証なし。新保存/sourceと原前後hashをまとめ自己PGID回収。
+
+保守起点issue作成23:28:17Z、処理停止23:44:00Z、提出/書込停止23:48:00Z/global01:17:58Z延長なし。23:41以降は新runtime0、最後3分でstop JSON/selfPID0を先保存、報告短文<=1600字+JSON。原.22の5分reserveが実runtimeを途中打切りした事実を残し、同条件だらだら反復0。もし停止manifest届かずruntime不可なら静的限定/no-goを返す。最終kernel/版/T/m/score凍結は統括だけ、holdout engine送信/実対局/採用0。ready/show目標/自.23とpause確認、自.23claimのみ、.22は統括限定支持/分類no-go受入れと旧失敗保持理由で本人close可。backup/show/report --issue quoridor-4lcでcoordinatorへ最終gateを返す。

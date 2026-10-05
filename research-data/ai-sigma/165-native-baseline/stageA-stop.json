@@ -1,0 +1,60 @@
+{
+  "issue": "quoridor-4lc.165",
+  "phase": "StageA native mechanism",
+  "source_Git": "a09279c",
+  "last_heavy_end": "2026-10-03T04:57:01.936784+00:00",
+  "outer_remaining": [],
+  "outer_unknown_adopted": [],
+  "Model_engine_exit": {
+    "candidate": {
+      "receipt": {
+        "exit": [
+          {
+            "code": 0,
+            "signal": null
+          },
+          {
+            "code": 0,
+            "signal": null
+          }
+        ],
+        "NN_total": 160,
+        "startup_separate": 1
+      },
+      "exit": {
+        "code": 0,
+        "signal": null
+      },
+      "stderr": ""
+    },
+    "reference": {
+      "receipt": {
+        "exit": [
+          {
+            "code": 0,
+            "signal": null
+          }
+        ],
+        "NN_total": 160,
+        "startup_separate": 1
+      },
+      "exit": {
+        "code": 0,
+        "signal": null
+      },
+      "stderr": ""
+    }
+  },
+  "main_monitor_callbacks": {
+    "state": "READY",
+    "pending": [],
+    "timer": false,
+    "late_typed_control": null
+  },
+  "handNN": 320,
+  "startup_separate": 2,
+  "successful10_not_repeated": true,
+  "StageB0_so_far": true,
+  "phase_process_stopped_not_all_period_or_allhost": true,
+  "source_write_continues_only_new_private_StageB_adapter": true
+}

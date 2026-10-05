@@ -1,0 +1,2504 @@
+{
+  "issue": "quoridor-4lc.180",
+  "groups": [
+    {
+      "fixture": "initial-p1",
+      "engine": {
+        "candidate": {
+          "steady_n": 4,
+          "median_ms": 7192.8285020291805,
+          "min_ms": 6835.6214389801025,
+          "max_ms": 7969.448003053665,
+          "steady_times_ms": [
+            6908.578681051731,
+            7969.448003053665,
+            6835.6214389801025,
+            7477.07832300663
+          ],
+          "warm_ms": [
+            5961.134535968304
+          ],
+          "NN_actual": [
+            800,
+            800,
+            800,
+            800
+          ],
+          "terminal_noNN": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "NN_API_sum_ms": [
+            3829.4596709893085,
+            4456.69286174234,
+            3812.7238080487587,
+            3999.288859020453
+          ],
+          "NN_pipe_sum_ms": [
+            4866.282326340675,
+            5700.145311117172,
+            4812.983077943325,
+            5317.269146740437
+          ],
+          "bridge": [
+            {
+              "count": 2404,
+              "request_bytes": 905055,
+              "response_bytes": 7657465,
+              "wall_ms": 2021.9673919081688,
+              "ops": {
+                "raw": 1,
+                "new": 1,
+                "begin": 800,
+                "resume": 800,
+                "checkpoint": 800,
+                "cancel": 1,
+                "free": 1
+              }
+            },
+            {
+              "count": 2404,
+              "request_bytes": 905055,
+              "response_bytes": 7657465,
+              "wall_ms": 2251.1158913969994,
+              "ops": {
+                "raw": 1,
+                "new": 1,
+                "begin": 800,
+                "resume": 800,
+                "checkpoint": 800,
+                "cancel": 1,
+                "free": 1
+              }
+            },
+            {
+              "count": 2404,
+              "request_bytes": 905055,
+              "response_bytes": 7657465,
+              "wall_ms": 2003.1029749512672,
+              "ops": {
+                "raw": 1,
+                "new": 1,
+                "begin": 800,
+                "resume": 800,
+                "checkpoint": 800,
+                "cancel": 1,
+                "free": 1
+              }
+            },
+            {
+              "count": 2404,
+              "request_bytes": 905055,
+              "response_bytes": 7657465,
+              "wall_ms": 2140.322988629341,
+              "ops": {
+                "raw": 1,
+                "new": 1,
+                "begin": 800,
+                "resume": 800,
+                "checkpoint": 800,
+                "cancel": 1,
+                "free": 1
+              }
+            }
+          ]
+        },
+        "reference": {
+          "steady_n": 4,
+          "median_ms": 5439.502968013287,
+          "min_ms": 4775.513882994652,
+          "max_ms": 5949.743152022362,
+          "steady_times_ms": [
+            4775.513882994652,
+            5325.7156910300255,
+            5949.743152022362,
+            5553.290244996548
+          ],
+          "warm_ms": [
+            5367.813687026501
+          ],
+          "NN_actual": [
+            800,
+            800,
+            800,
+            800
+          ],
+          "terminal_noNN": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "NN_API_sum_ms": [
+            3793.0441540665925,
+            4077.0752108073793,
+            4358.571935968939,
+            4025.5162628600374
+          ],
+          "NN_pipe_sum_ms": [
+            4528.709885537624,
+            5080.764264523983,
+            5602.730882883072,
+            5196.012119293213
+          ],
+          "bridge": [
+            {
+              "count": 0,
+              "request_bytes": 0,
+              "response_bytes": 0,
+              "wall_ms": 0,
+              "ops": {}
+            },
+            {
+              "count": 0,
+              "request_bytes": 0,
+              "response_bytes": 0,
+              "wall_ms": 0,
+              "ops": {}
+            },
+            {
+              "count": 0,
+              "request_bytes": 0,
+              "response_bytes": 0,
+              "wall_ms": 0,
+              "ops": {}
+            },
+            {
+              "count": 0,
+              "request_bytes": 0,
+              "response_bytes": 0,
+              "wall_ms": 0,
+              "ops": {}
+            }
+          ]
+        }
+      },
+      "C_over_R_median_ratio": 1.3223319381065206,
+      "paired_C_over_R": [
+        1.4466670708785516,
+        1.4964088331783114,
+        1.148893534447218,
+        1.3464231101090733
+      ],
+      "finite_correspondence": [
+        {
+          "slot": 0,
+          "rootNN_bits_exact": true,
+          "features_bits_exact": true,
+          "root_state_exact": true,
+          "root_action_visits_exact": true,
+          "root_legal_order_exact": true,
+          "root_mean_absdiff": 0.0,
+          "root_edge_numeric_max_absdiff": 2.168404344971009e-19
+        },
+        {
+          "slot": 1,
+          "rootNN_bits_exact": true,
+          "features_bits_exact": true,
+          "root_state_exact": true,
+          "root_action_visits_exact": true,
+          "root_legal_order_exact": true,
+          "root_mean_absdiff": 0.0,
+          "root_edge_numeric_max_absdiff": 0.0
+        },
+        {
+          "slot": 2,
+          "rootNN_bits_exact": true,
+          "features_bits_exact": true,
+          "root_state_exact": true,
+          "root_action_visits_exact": true,
+          "root_legal_order_exact": true,
+          "root_mean_absdiff": 0.0,
+          "root_edge_numeric_max_absdiff": 2.168404344971009e-19
+        },
+        {
+          "slot": 3,
+          "rootNN_bits_exact": true,
+          "features_bits_exact": true,
+          "root_state_exact": true,
+          "root_action_visits_exact": true,
+          "root_legal_order_exact": true,
+          "root_mean_absdiff": 0.0,
+          "root_edge_numeric_max_absdiff": 0.0
+        },
+        {
+          "slot": 4,
+          "rootNN_bits_exact": true,
+          "features_bits_exact": true,
+          "root_state_exact": true,
+          "root_action_visits_exact": true,
+          "root_legal_order_exact": true,
+          "root_mean_absdiff": 0.0,
+          "root_edge_numeric_max_absdiff": 0.0
+        },
+        {
+          "slot": 5,
+          "rootNN_bits_exact": true,
+          "features_bits_exact": true,
+          "root_state_exact": true,
+          "root_action_visits_exact": true,
+          "root_legal_order_exact": true,
+          "root_mean_absdiff": 0.0,
+          "root_edge_numeric_max_absdiff": 2.168404344971009e-19
+        },
+        {
+          "slot": 6,
+          "rootNN_bits_exact": true,
+          "features_bits_exact": true,
+          "root_state_exact": true,
+          "root_action_visits_exact": true,
+          "root_legal_order_exact": true,
+          "root_mean_absdiff": 0.0,
+          "root_edge_numeric_max_absdiff": 0.0
+        },
+        {
+          "slot": 7,
+          "rootNN_bits_exact": true,
+          "features_bits_exact": true,
+          "root_state_exact": true,
+          "root_action_visits_exact": true,
+          "root_legal_order_exact": true,
+          "root_mean_absdiff": 0.0,
+          "root_edge_numeric_max_absdiff": 2.168404344971009e-19
+        },
+        {
+          "slot": 8,
+          "rootNN_bits_exact": true,
+          "features_bits_exact": true,
+          "root_state_exact": true,
+          "root_action_visits_exact": true,
+          "root_legal_order_exact": true,
+          "root_mean_absdiff": 0.0,
+          "root_edge_numeric_max_absdiff": 2.168404344971009e-19
+        },
+        {
+          "slot": 9,
+          "rootNN_bits_exact": true,
+          "features_bits_exact": true,
+          "root_state_exact": true,
+          "root_action_visits_exact": true,
+          "root_legal_order_exact": true,
+          "root_mean_absdiff": 0.0,
+          "root_edge_numeric_max_absdiff": 0.0
+        }
+      ]
+    },
+    {
+      "fixture": "asym-hv-p2",
+      "engine": {
+        "candidate": {
+          "steady_n": 4,
+          "median_ms": 7406.863145530224,
+          "min_ms": 7213.096988976002,
+          "max_ms": 7450.865541994572,
+          "steady_times_ms": [
+            7400.303295016289,
+            7213.096988976002,
+            7450.865541994572,
+            7413.422996044159
+          ],
+          "warm_ms": [
+            6591.4181669950485
+          ],
+          "NN_actual": [
+            800,
+            800,
+            800,
+            800
+          ],
+          "terminal_noNN": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "NN_API_sum_ms": [
+            4153.347267536446,
+            4019.7568428120576,
+            4139.806400693487,
+            4165.821082191542
+          ],
+          "NN_pipe_sum_ms": [
+            5466.559975922108,
+            5328.9822326898575,
+            5548.980881631374,
+            5484.831534862518
+          ],
+          "bridge": [
+            {
+              "count": 2404,
+              "request_bytes": 1023087,
+              "response_bytes": 7713254,
+              "wall_ms": 1916.515593290329,
+              "ops": {
+                "raw": 1,
+                "new": 1,
+                "begin": 800,
+                "resume": 800,
+                "checkpoint": 800,
+                "cancel": 1,
+                "free": 1
+              }
+            },
+            {
+              "count": 2404,
+              "request_bytes": 1023087,
+              "response_bytes": 7713254,
+              "wall_ms": 1857.7563851475716,
+              "ops": {
+                "raw": 1,
+                "new": 1,
+                "begin": 800,
+                "resume": 800,
+                "checkpoint": 800,
+                "cancel": 1,
+                "free": 1
+              }
+            },
+            {
+              "count": 2404,
+              "request_bytes": 1023087,
+              "response_bytes": 7713254,
+              "wall_ms": 1882.0640820860863,
+              "ops": {
+                "raw": 1,
+                "new": 1,
+                "begin": 800,
+                "resume": 800,
+                "checkpoint": 800,
+                "cancel": 1,
+                "free": 1
+              }
+            },
+            {
+              "count": 2404,
+              "request_bytes": 1023087,
+              "response_bytes": 7713254,
+              "wall_ms": 1906.9825186729431,
+              "ops": {
+                "raw": 1,
+                "new": 1,
+                "begin": 800,
+                "resume": 800,
+                "checkpoint": 800,
+                "cancel": 1,
+                "free": 1
+              }
+            }
+          ]
+        },
+        "reference": {
+          "steady_n": 4,
+          "median_ms": 5590.051760017872,
+          "min_ms": 5404.923048019409,
+          "max_ms": 6224.756401002407,
+          "steady_times_ms": [
+            5615.868579030037,
+            5404.923048019409,
+            5564.234941005707,
+            6224.756401002407
+          ],
+          "warm_ms": [
+            5882.756421983242
+          ],
+          "NN_actual": [
+            800,
+            800,
+            800,
+            800
+          ],
+          "terminal_noNN": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "NN_API_sum_ms": [
+            4106.022594147362,
+            4094.1419224254787,
+            4120.60363299679,
+            4449.53566120239
+          ],
+          "NN_pipe_sum_ms": [
+            5290.5002027750015,
+            5144.098537266254,
+            5308.877678632736,
+            5923.640212595463
+          ],
+          "bridge": [
+            {
+              "count": 0,
+              "request_bytes": 0,
+              "response_bytes": 0,
+              "wall_ms": 0,
+              "ops": {}
+            },
+            {
+              "count": 0,
+              "request_bytes": 0,
+              "response_bytes": 0,
+              "wall_ms": 0,
+              "ops": {}
+            },
+            {
+              "count": 0,
+              "request_bytes": 0,
+              "response_bytes": 0,
+              "wall_ms": 0,
+              "ops": {}
+            },
+            {
+              "count": 0,
+              "request_bytes": 0,
+              "response_bytes": 0,
+              "wall_ms": 0,
+              "ops": {}
+            }
+          ]
+        }
+      },
+      "C_over_R_median_ratio": 1.3250079719309331,
+      "paired_C_over_R": [
+        1.3177486600468946,
+        1.3345420323087085,
+        1.339063792415614,
+        1.1909579296710044
+      ],
+      "finite_correspondence": [
+        {
+          "slot": 10,
+          "rootNN_bits_exact": true,
+          "features_bits_exact": true,
+          "root_state_exact": true,
+          "root_action_visits_exact": true,
+          "root_legal_order_exact": true,
+          "root_mean_absdiff": 0.0,
+          "root_edge_numeric_max_absdiff": 1.734723475976807e-18
+        },
+        {
+          "slot": 11,
+          "rootNN_bits_exact": true,
+          "features_bits_exact": true,
+          "root_state_exact": true,
+          "root_action_visits_exact": true,
+          "root_legal_order_exact": true,
+          "root_mean_absdiff": 0.0,
+          "root_edge_numeric_max_absdiff": 0.0
+        },
+        {
+          "slot": 12,
+          "rootNN_bits_exact": true,
+          "features_bits_exact": true,
+          "root_state_exact": true,
+          "root_action_visits_exact": true,
+          "root_legal_order_exact": true,
+          "root_mean_absdiff": 0.0,
+          "root_edge_numeric_max_absdiff": 1.734723475976807e-18
+        },
+        {
+          "slot": 13,
+          "rootNN_bits_exact": true,
+          "features_bits_exact": true,
+          "root_state_exact": true,
+          "root_action_visits_exact": true,
+          "root_legal_order_exact": true,
+          "root_mean_absdiff": 0.0,
+          "root_edge_numeric_max_absdiff": 0.0
+        },
+        {
+          "slot": 14,
+          "rootNN_bits_exact": true,
+          "features_bits_exact": true,
+          "root_state_exact": true,
+          "root_action_visits_exact": true,
+          "root_legal_order_exact": true,
+          "root_mean_absdiff": 0.0,
+          "root_edge_numeric_max_absdiff": 0.0
+        },
+        {
+          "slot": 15,
+          "rootNN_bits_exact": true,
+          "features_bits_exact": true,
+          "root_state_exact": true,
+          "root_action_visits_exact": true,
+          "root_legal_order_exact": true,
+          "root_mean_absdiff": 0.0,
+          "root_edge_numeric_max_absdiff": 1.734723475976807e-18
+        },
+        {
+          "slot": 16,
+          "rootNN_bits_exact": true,
+          "features_bits_exact": true,
+          "root_state_exact": true,
+          "root_action_visits_exact": true,
+          "root_legal_order_exact": true,
+          "root_mean_absdiff": 0.0,
+          "root_edge_numeric_max_absdiff": 0.0
+        },
+        {
+          "slot": 17,
+          "rootNN_bits_exact": true,
+          "features_bits_exact": true,
+          "root_state_exact": true,
+          "root_action_visits_exact": true,
+          "root_legal_order_exact": true,
+          "root_mean_absdiff": 0.0,
+          "root_edge_numeric_max_absdiff": 1.734723475976807e-18
+        },
+        {
+          "slot": 18,
+          "rootNN_bits_exact": true,
+          "features_bits_exact": true,
+          "root_state_exact": true,
+          "root_action_visits_exact": true,
+          "root_legal_order_exact": true,
+          "root_mean_absdiff": 0.0,
+          "root_edge_numeric_max_absdiff": 1.734723475976807e-18
+        },
+        {
+          "slot": 19,
+          "rootNN_bits_exact": true,
+          "features_bits_exact": true,
+          "root_state_exact": true,
+          "root_action_visits_exact": true,
+          "root_legal_order_exact": true,
+          "root_mean_absdiff": 0.0,
+          "root_edge_numeric_max_absdiff": 0.0
+        }
+      ]
+    },
+    {
+      "fixture": "straight-jump-p2",
+      "engine": {
+        "candidate": {
+          "steady_n": 4,
+          "median_ms": 7225.083132982254,
+          "min_ms": 6894.508121013641,
+          "max_ms": 8215.754851996899,
+          "steady_times_ms": [
+            7159.407283008099,
+            7290.758982956409,
+            6894.508121013641,
+            8215.754851996899
+          ],
+          "warm_ms": [
+            6548.037688970566
+          ],
+          "NN_actual": [
+            800,
+            800,
+            800,
+            800
+          ],
+          "terminal_noNN": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "NN_API_sum_ms": [
+            4169.349740317557,
+            4348.2005967525765,
+            4085.3811593842693,
+            4814.293608826119
+          ],
+          "NN_pipe_sum_ms": [
+            5655.405158102512,
+            5727.026382684708,
+            5439.719492256641,
+            6585.056727826595
+          ],
+          "bridge": [
+            {
+              "count": 2404,
+              "request_bytes": 969798,
+              "response_bytes": 8054662,
+              "wall_ms": 1483.160414636135,
+              "ops": {
+                "raw": 1,
+                "new": 1,
+                "begin": 800,
+                "resume": 800,
+                "checkpoint": 800,
+                "cancel": 1,
+                "free": 1
+              }
+            },
+            {
+              "count": 2404,
+              "request_bytes": 969798,
+              "response_bytes": 8054662,
+              "wall_ms": 1536.8486735224724,
+              "ops": {
+                "raw": 1,
+                "new": 1,
+                "begin": 800,
+                "resume": 800,
+                "checkpoint": 800,
+                "cancel": 1,
+                "free": 1
+              }
+            },
+            {
+              "count": 2404,
+              "request_bytes": 969798,
+              "response_bytes": 8054662,
+              "wall_ms": 1433.6184515357018,
+              "ops": {
+                "raw": 1,
+                "new": 1,
+                "begin": 800,
+                "resume": 800,
+                "checkpoint": 800,
+                "cancel": 1,
+                "free": 1
+              }
+            },
+            {
+              "count": 2404,
+              "request_bytes": 969798,
+              "response_bytes": 8054662,
+              "wall_ms": 1595.2783290147781,
+              "ops": {
+                "raw": 1,
+                "new": 1,
+                "begin": 800,
+                "resume": 800,
+                "checkpoint": 800,
+                "cancel": 1,
+                "free": 1
+              }
+            }
+          ]
+        },
+        "reference": {
+          "steady_n": 4,
+          "median_ms": 5877.197127997875,
+          "min_ms": 5566.990610003471,
+          "max_ms": 6076.107342004776,
+          "steady_times_ms": [
+            5793.497611999512,
+            5566.990610003471,
+            6076.107342004776,
+            5960.896643996239
+          ],
+          "warm_ms": [
+            6341.985792994499
+          ],
+          "NN_actual": [
+            800,
+            800,
+            800,
+            800
+          ],
+          "terminal_noNN": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "NN_API_sum_ms": [
+            4181.021935888566,
+            4161.364736792166,
+            4421.550250146538,
+            4301.841459586285
+          ],
+          "NN_pipe_sum_ms": [
+            5470.45587092638,
+            5296.149750769138,
+            5804.720041751862,
+            5668.803199291229
+          ],
+          "bridge": [
+            {
+              "count": 0,
+              "request_bytes": 0,
+              "response_bytes": 0,
+              "wall_ms": 0,
+              "ops": {}
+            },
+            {
+              "count": 0,
+              "request_bytes": 0,
+              "response_bytes": 0,
+              "wall_ms": 0,
+              "ops": {}
+            },
+            {
+              "count": 0,
+              "request_bytes": 0,
+              "response_bytes": 0,
+              "wall_ms": 0,
+              "ops": {}
+            },
+            {
+              "count": 0,
+              "request_bytes": 0,
+              "response_bytes": 0,
+              "wall_ms": 0,
+              "ops": {}
+            }
+          ]
+        }
+      },
+      "C_over_R_median_ratio": 1.2293416360944063,
+      "paired_C_over_R": [
+        1.235765984986256,
+        1.3096409700881215,
+        1.134691626224437,
+        1.3782750050316226
+      ],
+      "finite_correspondence": [
+        {
+          "slot": 20,
+          "rootNN_bits_exact": true,
+          "features_bits_exact": true,
+          "root_state_exact": true,
+          "root_action_visits_exact": true,
+          "root_legal_order_exact": true,
+          "root_mean_absdiff": 0.0,
+          "root_edge_numeric_max_absdiff": 1.3877787807814457e-17
+        },
+        {
+          "slot": 21,
+          "rootNN_bits_exact": true,
+          "features_bits_exact": true,
+          "root_state_exact": true,
+          "root_action_visits_exact": true,
+          "root_legal_order_exact": true,
+          "root_mean_absdiff": 0.0,
+          "root_edge_numeric_max_absdiff": 0.0
+        },
+        {
+          "slot": 22,
+          "rootNN_bits_exact": true,
+          "features_bits_exact": true,
+          "root_state_exact": true,
+          "root_action_visits_exact": true,
+          "root_legal_order_exact": true,
+          "root_mean_absdiff": 0.0,
+          "root_edge_numeric_max_absdiff": 1.3877787807814457e-17
+        },
+        {
+          "slot": 23,
+          "rootNN_bits_exact": true,
+          "features_bits_exact": true,
+          "root_state_exact": true,
+          "root_action_visits_exact": true,
+          "root_legal_order_exact": true,
+          "root_mean_absdiff": 0.0,
+          "root_edge_numeric_max_absdiff": 0.0
+        },
+        {
+          "slot": 24,
+          "rootNN_bits_exact": true,
+          "features_bits_exact": true,
+          "root_state_exact": true,
+          "root_action_visits_exact": true,
+          "root_legal_order_exact": true,
+          "root_mean_absdiff": 0.0,
+          "root_edge_numeric_max_absdiff": 0.0
+        },
+        {
+          "slot": 25,
+          "rootNN_bits_exact": true,
+          "features_bits_exact": true,
+          "root_state_exact": true,
+          "root_action_visits_exact": true,
+          "root_legal_order_exact": true,
+          "root_mean_absdiff": 0.0,
+          "root_edge_numeric_max_absdiff": 1.3877787807814457e-17
+        },
+        {
+          "slot": 26,
+          "rootNN_bits_exact": true,
+          "features_bits_exact": true,
+          "root_state_exact": true,
+          "root_action_visits_exact": true,
+          "root_legal_order_exact": true,
+          "root_mean_absdiff": 0.0,
+          "root_edge_numeric_max_absdiff": 0.0
+        },
+        {
+          "slot": 27,
+          "rootNN_bits_exact": true,
+          "features_bits_exact": true,
+          "root_state_exact": true,
+          "root_action_visits_exact": true,
+          "root_legal_order_exact": true,
+          "root_mean_absdiff": 0.0,
+          "root_edge_numeric_max_absdiff": 1.3877787807814457e-17
+        },
+        {
+          "slot": 28,
+          "rootNN_bits_exact": true,
+          "features_bits_exact": true,
+          "root_state_exact": true,
+          "root_action_visits_exact": true,
+          "root_legal_order_exact": true,
+          "root_mean_absdiff": 0.0,
+          "root_edge_numeric_max_absdiff": 1.3877787807814457e-17
+        },
+        {
+          "slot": 29,
+          "rootNN_bits_exact": true,
+          "features_bits_exact": true,
+          "root_state_exact": true,
+          "root_action_visits_exact": true,
+          "root_legal_order_exact": true,
+          "root_mean_absdiff": 0.0,
+          "root_edge_numeric_max_absdiff": 0.0
+        }
+      ]
+    }
+  ],
+  "all30status": [
+    {
+      "fixture": "initial-p1",
+      "engine": "candidate",
+      "phase": "warm",
+      "slot": 0,
+      "status": "COMPLETE"
+    },
+    {
+      "fixture": "initial-p1",
+      "engine": "reference",
+      "phase": "warm",
+      "slot": 1,
+      "status": "COMPLETE"
+    },
+    {
+      "fixture": "initial-p1",
+      "engine": "candidate",
+      "phase": "steady",
+      "slot": 2,
+      "status": "COMPLETE"
+    },
+    {
+      "fixture": "initial-p1",
+      "engine": "reference",
+      "phase": "steady",
+      "slot": 3,
+      "status": "COMPLETE"
+    },
+    {
+      "fixture": "initial-p1",
+      "engine": "reference",
+      "phase": "steady",
+      "slot": 4,
+      "status": "COMPLETE"
+    },
+    {
+      "fixture": "initial-p1",
+      "engine": "candidate",
+      "phase": "steady",
+      "slot": 5,
+      "status": "COMPLETE"
+    },
+    {
+      "fixture": "initial-p1",
+      "engine": "reference",
+      "phase": "steady",
+      "slot": 6,
+      "status": "COMPLETE"
+    },
+    {
+      "fixture": "initial-p1",
+      "engine": "candidate",
+      "phase": "steady",
+      "slot": 7,
+      "status": "COMPLETE"
+    },
+    {
+      "fixture": "initial-p1",
+      "engine": "candidate",
+      "phase": "steady",
+      "slot": 8,
+      "status": "COMPLETE"
+    },
+    {
+      "fixture": "initial-p1",
+      "engine": "reference",
+      "phase": "steady",
+      "slot": 9,
+      "status": "COMPLETE"
+    },
+    {
+      "fixture": "asym-hv-p2",
+      "engine": "candidate",
+      "phase": "warm",
+      "slot": 10,
+      "status": "COMPLETE"
+    },
+    {
+      "fixture": "asym-hv-p2",
+      "engine": "reference",
+      "phase": "warm",
+      "slot": 11,
+      "status": "COMPLETE"
+    },
+    {
+      "fixture": "asym-hv-p2",
+      "engine": "candidate",
+      "phase": "steady",
+      "slot": 12,
+      "status": "COMPLETE"
+    },
+    {
+      "fixture": "asym-hv-p2",
+      "engine": "reference",
+      "phase": "steady",
+      "slot": 13,
+      "status": "COMPLETE"
+    },
+    {
+      "fixture": "asym-hv-p2",
+      "engine": "reference",
+      "phase": "steady",
+      "slot": 14,
+      "status": "COMPLETE"
+    },
+    {
+      "fixture": "asym-hv-p2",
+      "engine": "candidate",
+      "phase": "steady",
+      "slot": 15,
+      "status": "COMPLETE"
+    },
+    {
+      "fixture": "asym-hv-p2",
+      "engine": "reference",
+      "phase": "steady",
+      "slot": 16,
+      "status": "COMPLETE"
+    },
+    {
+      "fixture": "asym-hv-p2",
+      "engine": "candidate",
+      "phase": "steady",
+      "slot": 17,
+      "status": "COMPLETE"
+    },
+    {
+      "fixture": "asym-hv-p2",
+      "engine": "candidate",
+      "phase": "steady",
+      "slot": 18,
+      "status": "COMPLETE"
+    },
+    {
+      "fixture": "asym-hv-p2",
+      "engine": "reference",
+      "phase": "steady",
+      "slot": 19,
+      "status": "COMPLETE"
+    },
+    {
+      "fixture": "straight-jump-p2",
+      "engine": "candidate",
+      "phase": "warm",
+      "slot": 20,
+      "status": "COMPLETE"
+    },
+    {
+      "fixture": "straight-jump-p2",
+      "engine": "reference",
+      "phase": "warm",
+      "slot": 21,
+      "status": "COMPLETE"
+    },
+    {
+      "fixture": "straight-jump-p2",
+      "engine": "candidate",
+      "phase": "steady",
+      "slot": 22,
+      "status": "COMPLETE"
+    },
+    {
+      "fixture": "straight-jump-p2",
+      "engine": "reference",
+      "phase": "steady",
+      "slot": 23,
+      "status": "COMPLETE"
+    },
+    {
+      "fixture": "straight-jump-p2",
+      "engine": "reference",
+      "phase": "steady",
+      "slot": 24,
+      "status": "COMPLETE"
+    },
+    {
+      "fixture": "straight-jump-p2",
+      "engine": "candidate",
+      "phase": "steady",
+      "slot": 25,
+      "status": "COMPLETE"
+    },
+    {
+      "fixture": "straight-jump-p2",
+      "engine": "reference",
+      "phase": "steady",
+      "slot": 26,
+      "status": "COMPLETE"
+    },
+    {
+      "fixture": "straight-jump-p2",
+      "engine": "candidate",
+      "phase": "steady",
+      "slot": 27,
+      "status": "COMPLETE"
+    },
+    {
+      "fixture": "straight-jump-p2",
+      "engine": "candidate",
+      "phase": "steady",
+      "slot": 28,
+      "status": "COMPLETE"
+    },
+    {
+      "fixture": "straight-jump-p2",
+      "engine": "reference",
+      "phase": "steady",
+      "slot": 29,
+      "status": "COMPLETE"
+    }
+  ],
+  "searches_completed": 30,
+  "NN_actual": 24000,
+  "terminal_noNN": 0,
+  "discarded": 0,
+  "cache_hits": 0,
+  "startup_actual": 6,
+  "initializations": [
+    {
+      "fixture": "initial-p1",
+      "engine": "candidate",
+      "total_ms": 180.1364579796791,
+      "init": {
+        "info": {
+          "version": "1.30.0",
+          "numpy": "2.5.3",
+          "providers": [
+            "CPUExecutionProvider"
+          ],
+          "intra": 1,
+          "inter": 1,
+          "sequential": true,
+          "init_ms": 25.29954497003928,
+          "PID": 3431513,
+          "affinity": [
+            2
+          ],
+          "input": [
+            [
+              "input",
+              [
+                1,
+                8,
+                9,
+                9
+              ],
+              "tensor(float)"
+            ]
+          ],
+          "output": [
+            [
+              "policy_logits",
+              [
+                1,
+                136
+              ],
+              "tensor(float)"
+            ],
+            [
+              "value",
+              [
+                1,
+                1
+              ],
+              "tensor(float)"
+            ]
+          ]
+        },
+        "startup": {
+          "count": 1,
+          "wall_ms": 6.6401219964027405,
+          "API_ms": 5.120337998960167,
+          "root_NN_bits": [
+            1087451906,
+            1065755347,
+            1051670580,
+            1034180542,
+            1082803902,
+            1082253155,
+            1071897910,
+            1072886288,
+            1055553816,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1051732344,
+            1082975738,
+            0,
+            1057666496,
+            0,
+            0,
+            1055246272,
+            0,
+            1083028392,
+            1048752072,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1046179056,
+            1055247344,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1050930984,
+            1032615136,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1059201152,
+            1049044312,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1035921728,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1038464128,
+            1027341824,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1046185239
+          ]
+        },
+        "identities": [
+          {
+            "pid": 3431501,
+            "start_ticks": 27689640,
+            "ppid": 3431438
+          },
+          {
+            "pid": 3431512,
+            "start_ticks": 27689643,
+            "ppid": 3431501
+          },
+          {
+            "pid": 3431513,
+            "start_ticks": 27689643,
+            "ppid": 3431501
+          }
+        ]
+      }
+    },
+    {
+      "fixture": "initial-p1",
+      "engine": "reference",
+      "total_ms": 140.1372919678688,
+      "init": {
+        "info": {
+          "version": "1.30.0",
+          "numpy": "2.5.3",
+          "providers": [
+            "CPUExecutionProvider"
+          ],
+          "intra": 1,
+          "inter": 1,
+          "sequential": true,
+          "init_ms": 31.448724039364606,
+          "PID": 3431524,
+          "affinity": [
+            2
+          ],
+          "input": [
+            [
+              "input",
+              [
+                1,
+                8,
+                9,
+                9
+              ],
+              "tensor(float)"
+            ]
+          ],
+          "output": [
+            [
+              "policy_logits",
+              [
+                1,
+                136
+              ],
+              "tensor(float)"
+            ],
+            [
+              "value",
+              [
+                1,
+                1
+              ],
+              "tensor(float)"
+            ]
+          ]
+        },
+        "startup": {
+          "count": 1,
+          "wall_ms": 4.881742000579834,
+          "API_ms": 4.251512000337243,
+          "root_NN_bits": [
+            1087451906,
+            1065755347,
+            1051670580,
+            1034180542,
+            1082803902,
+            1082253155,
+            1071897910,
+            1072886288,
+            1055553816,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1051732344,
+            1082975738,
+            0,
+            1057666496,
+            0,
+            0,
+            1055246272,
+            0,
+            1083028392,
+            1048752072,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1046179056,
+            1055247344,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1050930984,
+            1032615136,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1059201152,
+            1049044312,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1035921728,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1038464128,
+            1027341824,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1046185239
+          ]
+        },
+        "identities": [
+          {
+            "pid": 3431517,
+            "start_ticks": 27689658,
+            "ppid": 3431438
+          },
+          {
+            "pid": 3431524,
+            "start_ticks": 27689660,
+            "ppid": 3431517
+          }
+        ]
+      }
+    },
+    {
+      "fixture": "asym-hv-p2",
+      "engine": "candidate",
+      "total_ms": 213.21076101064682,
+      "init": {
+        "info": {
+          "version": "1.30.0",
+          "numpy": "2.5.3",
+          "providers": [
+            "CPUExecutionProvider"
+          ],
+          "intra": 1,
+          "inter": 1,
+          "sequential": true,
+          "init_ms": 35.63676500925794,
+          "PID": 3433078,
+          "affinity": [
+            2
+          ],
+          "input": [
+            [
+              "input",
+              [
+                1,
+                8,
+                9,
+                9
+              ],
+              "tensor(float)"
+            ]
+          ],
+          "output": [
+            [
+              "policy_logits",
+              [
+                1,
+                136
+              ],
+              "tensor(float)"
+            ],
+            [
+              "value",
+              [
+                1,
+                1
+              ],
+              "tensor(float)"
+            ]
+          ]
+        },
+        "startup": {
+          "count": 1,
+          "wall_ms": 8.740794956684113,
+          "API_ms": 5.390713980887085,
+          "root_NN_bits": [
+            1087451906,
+            1065755347,
+            1051670580,
+            1034180542,
+            1082803902,
+            1082253155,
+            1071897910,
+            1072886288,
+            1055553816,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1051732344,
+            1082975738,
+            0,
+            1057666496,
+            0,
+            0,
+            1055246272,
+            0,
+            1083028392,
+            1048752072,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1046179056,
+            1055247344,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1050930984,
+            1032615136,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1059201152,
+            1049044312,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1035921728,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1038464128,
+            1027341824,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1046185239
+          ]
+        },
+        "identities": [
+          {
+            "pid": 3433070,
+            "start_ticks": 27695913,
+            "ppid": 3431438
+          },
+          {
+            "pid": 3433077,
+            "start_ticks": 27695917,
+            "ppid": 3433070
+          },
+          {
+            "pid": 3433078,
+            "start_ticks": 27695917,
+            "ppid": 3433070
+          }
+        ]
+      }
+    },
+    {
+      "fixture": "asym-hv-p2",
+      "engine": "reference",
+      "total_ms": 224.59991598129272,
+      "init": {
+        "info": {
+          "version": "1.30.0",
+          "numpy": "2.5.3",
+          "providers": [
+            "CPUExecutionProvider"
+          ],
+          "intra": 1,
+          "inter": 1,
+          "sequential": true,
+          "init_ms": 36.15740599343553,
+          "PID": 3433087,
+          "affinity": [
+            2
+          ],
+          "input": [
+            [
+              "input",
+              [
+                1,
+                8,
+                9,
+                9
+              ],
+              "tensor(float)"
+            ]
+          ],
+          "output": [
+            [
+              "policy_logits",
+              [
+                1,
+                136
+              ],
+              "tensor(float)"
+            ],
+            [
+              "value",
+              [
+                1,
+                1
+              ],
+              "tensor(float)"
+            ]
+          ]
+        },
+        "startup": {
+          "count": 1,
+          "wall_ms": 11.34247499704361,
+          "API_ms": 10.65467402804643,
+          "root_NN_bits": [
+            1087451906,
+            1065755347,
+            1051670580,
+            1034180542,
+            1082803902,
+            1082253155,
+            1071897910,
+            1072886288,
+            1055553816,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1051732344,
+            1082975738,
+            0,
+            1057666496,
+            0,
+            0,
+            1055246272,
+            0,
+            1083028392,
+            1048752072,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1046179056,
+            1055247344,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1050930984,
+            1032615136,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1059201152,
+            1049044312,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1035921728,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1038464128,
+            1027341824,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1046185239
+          ]
+        },
+        "identities": [
+          {
+            "pid": 3433080,
+            "start_ticks": 27695934,
+            "ppid": 3431438
+          },
+          {
+            "pid": 3433087,
+            "start_ticks": 27695940,
+            "ppid": 3433080
+          }
+        ]
+      }
+    },
+    {
+      "fixture": "straight-jump-p2",
+      "engine": "candidate",
+      "total_ms": 145.54165595769882,
+      "init": {
+        "info": {
+          "version": "1.30.0",
+          "numpy": "2.5.3",
+          "providers": [
+            "CPUExecutionProvider"
+          ],
+          "intra": 1,
+          "inter": 1,
+          "sequential": true,
+          "init_ms": 33.04028796264902,
+          "PID": 3434336,
+          "affinity": [
+            2
+          ],
+          "input": [
+            [
+              "input",
+              [
+                1,
+                8,
+                9,
+                9
+              ],
+              "tensor(float)"
+            ]
+          ],
+          "output": [
+            [
+              "policy_logits",
+              [
+                1,
+                136
+              ],
+              "tensor(float)"
+            ],
+            [
+              "value",
+              [
+                1,
+                1
+              ],
+              "tensor(float)"
+            ]
+          ]
+        },
+        "startup": {
+          "count": 1,
+          "wall_ms": 4.656665027141571,
+          "API_ms": 4.1799910250119865,
+          "root_NN_bits": [
+            1087451906,
+            1065755347,
+            1051670580,
+            1034180542,
+            1082803902,
+            1082253155,
+            1071897910,
+            1072886288,
+            1055553816,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1051732344,
+            1082975738,
+            0,
+            1057666496,
+            0,
+            0,
+            1055246272,
+            0,
+            1083028392,
+            1048752072,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1046179056,
+            1055247344,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1050930984,
+            1032615136,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1059201152,
+            1049044312,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1035921728,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1038464128,
+            1027341824,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1046185239
+          ]
+        },
+        "identities": [
+          {
+            "pid": 3434328,
+            "start_ticks": 27702445,
+            "ppid": 3431438
+          },
+          {
+            "pid": 3434335,
+            "start_ticks": 27702447,
+            "ppid": 3434328
+          },
+          {
+            "pid": 3434336,
+            "start_ticks": 27702448,
+            "ppid": 3434328
+          }
+        ]
+      }
+    },
+    {
+      "fixture": "straight-jump-p2",
+      "engine": "reference",
+      "total_ms": 163.74268698692322,
+      "init": {
+        "info": {
+          "version": "1.30.0",
+          "numpy": "2.5.3",
+          "providers": [
+            "CPUExecutionProvider"
+          ],
+          "intra": 1,
+          "inter": 1,
+          "sequential": true,
+          "init_ms": 37.849718995857984,
+          "PID": 3434345,
+          "affinity": [
+            2
+          ],
+          "input": [
+            [
+              "input",
+              [
+                1,
+                8,
+                9,
+                9
+              ],
+              "tensor(float)"
+            ]
+          ],
+          "output": [
+            [
+              "policy_logits",
+              [
+                1,
+                136
+              ],
+              "tensor(float)"
+            ],
+            [
+              "value",
+              [
+                1,
+                1
+              ],
+              "tensor(float)"
+            ]
+          ]
+        },
+        "startup": {
+          "count": 1,
+          "wall_ms": 4.791891992092133,
+          "API_ms": 4.31113998638466,
+          "root_NN_bits": [
+            1087451906,
+            1065755347,
+            1051670580,
+            1034180542,
+            1082803902,
+            1082253155,
+            1071897910,
+            1072886288,
+            1055553816,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1051732344,
+            1082975738,
+            0,
+            1057666496,
+            0,
+            0,
+            1055246272,
+            0,
+            1083028392,
+            1048752072,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1046179056,
+            1055247344,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1050930984,
+            1032615136,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1059201152,
+            1049044312,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1035921728,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1038464128,
+            1027341824,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1046185239
+          ]
+        },
+        "identities": [
+          {
+            "pid": 3434338,
+            "start_ticks": 27702460,
+            "ppid": 3431438
+          },
+          {
+            "pid": 3434345,
+            "start_ticks": 27702463,
+            "ppid": 3434338
+          }
+        ]
+      }
+    }
+  ],
+  "stop": {
+    "UTC": "2026-10-03T10:42:28.753Z",
+    "qualification": null,
+    "closings": [
+      {
+        "fixture": "initial-p1",
+        "engine": "candidate",
+        "close": {
+          "receipt": {
+            "exit": [
+              {
+                "code": 0,
+                "signal": null
+              },
+              {
+                "code": 0,
+                "signal": null
+              }
+            ],
+            "NN_total": 4000,
+            "startup_separate": 1
+          },
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "stderr": ""
+        }
+      },
+      {
+        "fixture": "initial-p1",
+        "engine": "reference",
+        "close": {
+          "receipt": {
+            "exit": [
+              {
+                "code": 0,
+                "signal": null
+              }
+            ],
+            "NN_total": 4000,
+            "startup_separate": 1
+          },
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "stderr": ""
+        }
+      },
+      {
+        "fixture": "asym-hv-p2",
+        "engine": "candidate",
+        "close": {
+          "receipt": {
+            "exit": [
+              {
+                "code": 0,
+                "signal": null
+              },
+              {
+                "code": 0,
+                "signal": null
+              }
+            ],
+            "NN_total": 4000,
+            "startup_separate": 1
+          },
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "stderr": ""
+        }
+      },
+      {
+        "fixture": "asym-hv-p2",
+        "engine": "reference",
+        "close": {
+          "receipt": {
+            "exit": [
+              {
+                "code": 0,
+                "signal": null
+              }
+            ],
+            "NN_total": 4000,
+            "startup_separate": 1
+          },
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "stderr": ""
+        }
+      },
+      {
+        "engine": "candidate",
+        "close": {
+          "receipt": {
+            "exit": [
+              {
+                "code": 0,
+                "signal": null
+              },
+              {
+                "code": 0,
+                "signal": null
+              }
+            ],
+            "NN_total": 4000,
+            "startup_separate": 1
+          },
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "stderr": ""
+        }
+      },
+      {
+        "engine": "reference",
+        "close": {
+          "receipt": {
+            "exit": [
+              {
+                "code": 0,
+                "signal": null
+              }
+            ],
+            "NN_total": 4000,
+            "startup_separate": 1
+          },
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "stderr": ""
+        }
+      }
+    ],
+    "NN_actual": 24000,
+    "rows": 30,
+    "monitor_state": "READY"
+  },
+  "process_summary": {
+    "start": "2026-10-03T10:39:12.439212+00:00",
+    "end": "2026-10-03T10:42:28.807528+00:00",
+    "exit": 0,
+    "stop_reason": null,
+    "peak_group_plus_runner_RSS": 790249472,
+    "remaining": [],
+    "unknown_adopted": [],
+    "all_observed_TIDs_at_assigned_CPU": true,
+    "affinity_violations": []
+  },
+  "unknown_costs": [
+    "exclusive feature/legal/BFS cost",
+    "exclusive MCTS CPU",
+    "exclusive parse/record cost",
+    "instrumentation-free counterfactual",
+    "kernelCPU attribution"
+  ],
+  "interpretation": "sameK800 finite native-hosted fixedWeb JS vs faithful Rust via current JSON bridge; no C++/Wasm/NI/fullteacher-speed extrapolation"
+}

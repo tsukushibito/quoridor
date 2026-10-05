@@ -1,0 +1,57 @@
+{
+  "reason": "owner completed phase4 scientific payload losslessly compacted to XZ; no condition/prediction/result changes; phase1/2/3 untouched; original gzip wrapper SHA retained as provenance",
+  "restore": "lzma.decompress(path.read_bytes()) restores exact original JSON/JSONL payload; optionally gzip wrapper for reader, wrapper SHA not claimed",
+  "members": [
+    {
+      "original_path": "research-data/ai-sigma/frame16-fit-gap-analysis/raw-cv-control/OOF-predictions.jsonl.gz",
+      "original_gzip_SHA": "7d7b15fe857c4bac03e44812628f600450781afeb1e837ceec7ed100854f1b2c",
+      "scientific_payload_SHA": "558f5988a57770ba66e890d5a89f871bf38979bef8b37f774286af900d3ed95c",
+      "scientific_payload_bytes": 1168068,
+      "archive": "research-data/ai-sigma/frame16-fit-gap-analysis/raw-cv-control/OOF-predictions.jsonl.xz",
+      "archive_SHA": "795d447543388f363a2c9bbf45ab24ba8bba64dfc4d727ce0a1aa7b7e3275793",
+      "archive_bytes": 139040,
+      "restore_payload_PASS": true
+    },
+    {
+      "original_path": "research-data/ai-sigma/frame16-fit-gap-analysis/raw-cv-control/coefficients-and-folds.json.gz",
+      "original_gzip_SHA": "8a85d595feabcc88c7ae34af12be301cf0a90cc5c4ca09d1ad213c9dfa9cb25a",
+      "scientific_payload_SHA": "677b54c26a96519de9e8ea1eb56c276ae920bb55b3ad78db8246134b11ac921c",
+      "scientific_payload_bytes": 569660,
+      "archive": "research-data/ai-sigma/frame16-fit-gap-analysis/raw-cv-control/coefficients-and-folds.json.xz",
+      "archive_SHA": "10557b1248123543847d5c82b1f163d189bb0f160c26b69d87bf8c01982006bf",
+      "archive_bytes": 133352,
+      "restore_payload_PASS": true
+    },
+    {
+      "original_path": "research-data/ai-sigma/frame16-fit-gap-analysis/raw-cv-control/full-predictions.jsonl.gz",
+      "original_gzip_SHA": "bc3bae534b142299f4f8bafb0f8d84eb52665d28547b19c84fd525b92cca4341",
+      "scientific_payload_SHA": "93d98927fa0945e52bd621dc1bdcc7d0e4429d332fda624e40e64a75afe07e17",
+      "scientific_payload_bytes": 643663,
+      "archive": "research-data/ai-sigma/frame16-fit-gap-analysis/raw-cv-control/full-predictions.jsonl.xz",
+      "archive_SHA": "f9c153adab4ea3d14a546d6283d6cf7955dc49b440305dbe87e4ea01545b33db",
+      "archive_bytes": 71380,
+      "restore_payload_PASS": true
+    },
+    {
+      "original_path": "research-data/ai-sigma/frame16-fit-gap-analysis/raw-cv-control/residual-analysis.json.gz",
+      "original_gzip_SHA": "6e618b90cf645413207d15c7085916b2ed8b55a4ba1f2fc83bac016e09d22e92",
+      "scientific_payload_SHA": "a16eb9ebb8ae65c8aa4cfc8b526f6bb13fc76baef6bcf222884cf6129e40c420",
+      "scientific_payload_bytes": 978302,
+      "archive": "research-data/ai-sigma/frame16-fit-gap-analysis/raw-cv-control/residual-analysis.json.xz",
+      "archive_SHA": "c950f4d7f517a20f6200cb2bb8e561e50add19c5c223c05e69e8e9d935c3e7b2",
+      "archive_bytes": 106488,
+      "restore_payload_PASS": true
+    },
+    {
+      "original_path": "research-data/ai-sigma/frame16-fit-gap-analysis/raw-cv-control/result.json.gz",
+      "original_gzip_SHA": "9b7ea6bd82331154d4b3a86c9eac296c44132783841887ec0a3865ca49d5c3c4",
+      "scientific_payload_SHA": "1e3b9ecbce6f0050770f4aa7a5fadd01c849bbc0cc73920feedcf248862b79f9",
+      "scientific_payload_bytes": 88840,
+      "archive": "research-data/ai-sigma/frame16-fit-gap-analysis/raw-cv-control/result.json.xz",
+      "archive_SHA": "00a15b165033f61ec8afef61a642a2c8ae9fedca2b0483020ec7ac2208644382",
+      "archive_bytes": 13900,
+      "restore_payload_PASS": true
+    }
+  ],
+  "management_wall_s": 0.5872607170022093
+}

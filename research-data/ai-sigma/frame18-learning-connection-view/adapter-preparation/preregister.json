@@ -1,0 +1,31 @@
+{
+  "UTC": "2026-10-04T11:07:13.147164+00:00",
+  "issue": "quoridor-4lc.227",
+  "phase": 2,
+  "kind": "synthetic-label-free-software-preparation",
+  "fixture": "tools/ai-sigma-frame18-learning/fixture.py",
+  "sources": "source-freeze.json",
+  "real_dataset_rows": 0,
+  "real_labels": 0,
+  "model": 0,
+  "NN": 0,
+  "train": 0,
+  "test_eval": 0,
+  "fixture_max_seconds": 5,
+  "CPU": [
+    0
+  ],
+  "RAM_guard_B": 469762048,
+  "no_future_generation_authorization": true,
+  "required_checks": [
+    "dynamic counts",
+    "same family partition",
+    "duplicate and missing rows",
+    "STM/types",
+    "zero-row denominator",
+    "gameequal weights",
+    "fixed maximum mask",
+    "no train statistics from validation/test",
+    "legacy96 stages"
+  ]
+}

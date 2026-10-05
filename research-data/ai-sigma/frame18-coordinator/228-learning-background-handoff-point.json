@@ -1,0 +1,90 @@
+{
+  "UTC": "2026-10-04T12:46:56.908309+00:00",
+  "scope": "public management/plan only, sealed test labels unaccessed",
+  "data-to-learning-handoff.json": {
+    "UTC": "2026-10-04T12:44:11.056817+00:00",
+    "all672_GOAL": true,
+    "maxtrain_mask_counts": {
+      "train": {
+        "all": 27463,
+        "eligible": 27463,
+        "excluded": 0
+      },
+      "validation": {
+        "all": 4813,
+        "eligible": 4813,
+        "excluded": 0
+      },
+      "test": {
+        "all": 4847,
+        "eligible": 4847,
+        "excluded": 0
+      }
+    },
+    "secondary_nonselection": {
+      "small_step": 400,
+      "large_step": 1200,
+      "G_small": 192,
+      "G_large": 576,
+      "distance": 0.0,
+      "rule": "minimum saved abs(step/Glarge-400/Gsmall); tie early; before curves"
+    },
+    "same_sample_primary": 256000,
+    "testlabels_selection_read": false,
+    "gen_source_stop": "generation-final-stop-compact.json",
+    "datasetmetadata_SHA": "978b65415ab85f12b1c3bdb5548546647bba8837a6b688fd1fe3fb1407ba11b9",
+    "mask_SHA": "f7ad482322f8690cab73ced92a943032007daf603dc3dd8067cff2e278f0bead",
+    "learning_upper_samples": 1157596,
+    "newtest_independentgame_not_IID": true
+  },
+  "background-runtime-learn-r1/state.json": {
+    "schema_version": 1,
+    "job_id": "e18b2b4a-49e4-43ed-9000-df47c3d638e7",
+    "issue": "quoridor-4lc.228",
+    "thread_id": "01a0f31d-6d15-7620-bb63-4b4f878e4746",
+    "phase": "running",
+    "created_at": "2026-10-04T12:44:16.659443+00:00",
+    "config_sha256": "c199da9e4d38fa0c609c9f8404f75838080a7b4c83ce349900ddcefcba65015b",
+    "supervisor": {
+      "pid": 169184,
+      "start_ticks": "37084067",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "updated_at": "2026-10-04T12:44:16.915013+00:00",
+    "child": {
+      "pid": 169284,
+      "start_ticks": "37084384",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "started_at": "2026-10-04T12:44:19.850806+00:00"
+  },
+  "background-runtime-learn-r1/result.json": {
+    "not_yet_present": true
+  },
+  "background-runtime-learn-r1/notification.json": {
+    "not_yet_present": true
+  },
+  "first_stage_process_point": {
+    "UTC": "2026-10-04T12:46:57.345993+00:00",
+    "startUTC": "2026-10-04T12:46:46.681134+00:00",
+    "endUTC": "2026-10-04T12:46:57.346026+00:00",
+    "exit": 0,
+    "reason": null,
+    "wall_s": 10.664900603005663,
+    "peak_family_RSS": 996073472,
+    "samples_actual": 449732,
+    "samples_charge": 449732,
+    "original_unknown": false,
+    "tracked": {
+      "171524": 37099076,
+      "171554": 37099350
+    },
+    "remaining": [],
+    "all_child_waited": true,
+    "current_exact_absent": true,
+    "runner_pid": 171460,
+    "runner_tick": 37098903
+  },
+  "first_stage_metric_claim": "no D/constant or larger-stage benefit claim from individual progress",
+  "independent_calc_coordination": "active-only steer12:48:31, wait background learning command stop, no idle acknowledgment turn"
+}

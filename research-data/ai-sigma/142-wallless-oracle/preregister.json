@@ -1,0 +1,41 @@
+{
+  "issue": "quoridor-4lc.142",
+  "frame": 9,
+  "board": 9,
+  "initial_walls_each": 10,
+  "attempt_limit": 4,
+  "prefix_cap": 160,
+  "cases": [
+    {
+      "id": "P1-race",
+      "side": 1,
+      "seed": 41001,
+      "wall_candidates": "V anchors x[0,1,2,6,7] y[0,2,4,6] all20; FisherYates xorshift32(seed+attempt), place legal in that order",
+      "pawn_script": "6 alternating pairs: P1 north each; P2 west at pair0 then south five; target P1[4,6],P2[3,3],sideP1"
+    },
+    {
+      "id": "P2-corridor",
+      "side": 2,
+      "seed": 41002,
+      "wall_candidates": "same20, seed+attempt shuffle",
+      "pawn_script": "6pairs: P1 east at pair0 then north five; P2 south each; final P1 west; target P1[4,5],P2[4,2],sideP2"
+    }
+  ],
+  "accept": "first complete legal prefix hitting exact target, bothremaining0, nonterminal, multiple pawn actions; reject terminal/illegal/targetmissing/prefix>160, allattempts saved",
+  "no_AI_selection": true,
+  "depth": 6,
+  "applied_node_cap": 20000,
+  "node_count": "root1 plus each actually applied legal edge including terminal/depthlimit leaves; unexpanded action placeholder not applied,nodecount0",
+  "watchdog_ms": 20000,
+  "terminal_payoff": "goal rootplayer1/opponent-1 priority; actualRuleA draw0",
+  "limits": "[-1,1] unknown, not heuristic draw",
+  "minimax": "fixed rootplayer, ownturn interval componentwise max, opponentturn componentwise min; exhaustive alllegal root/child moves; no pruning/cache",
+  "proof": "compact full tree parentindex/rawpolicyAction/side/lower/upper/reason/applied; reconstruct from legal prefix and State.next. RootAction intervals separate, no winning-only completion.",
+  "mock_plan": [
+    "abstract terminal/max/min perspective",
+    "depth/node/time unknown interval",
+    "graph cap1",
+    "legal prefix jump and near-goal prior to scientificgeneration"
+  ],
+  "result_selection": "no replacement for trivial/allunknown/alltie; no label-driven algorithm changes"
+}

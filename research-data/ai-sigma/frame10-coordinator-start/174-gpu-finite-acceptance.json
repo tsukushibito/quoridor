@@ -1,0 +1,148 @@
+{
+  "result_git": "1e220cccb5eeaa5bc0c4d5742d64506d81df4c61",
+  "maxima": {
+    "CPUORT-torchCPU": {
+      "policy": 3.874301910400391e-06,
+      "value": 6.854534149169922e-07
+    },
+    "CPUORT-torchCUDA": {
+      "policy": 5.7220458984375e-06,
+      "value": 3.5762786865234375e-07
+    },
+    "torchCPU-torchCUDA": {
+      "policy": 4.351139068603516e-06,
+      "value": 1.043081283569336e-06
+    }
+  },
+  "binding": [
+    {
+      "file": "tools/ai-sigma-gpu-inference/adapter.py",
+      "saved_sha": "04d0e586538385b988ec5755923f9f6d37abb884431127c20402c7b37b63d067",
+      "current_same": true
+    },
+    {
+      "file": "tools/ai-sigma-gpu-inference/measure.py",
+      "saved_sha": "7b6ea17a832ae8d91cc44ea6cfcbed2d739ab9a4b1ef12608e4b9e138742c9b6",
+      "current_same": true
+    },
+    {
+      "file": "research-data/ai-sigma/174-gpu-inference/preregister.json",
+      "saved_sha": "602f74eb9de83404c818087f739b3b31c9394fa8a26812a481160afb300f18d9",
+      "current_same": true
+    },
+    {
+      "file": "docs/reports/ai-sigma-hypothesis-gpu-inference.md",
+      "saved_sha": "9adeed37ae088c20638645ebb9618ca8d5a6477bd54282f176dd61d5c4b1dbd4",
+      "current_same": true
+    }
+  ],
+  "archive_sha": "a8c9f06077d22a1077adc057e21ff5575905ba214db5fc711b7447d1be3f62a8",
+  "archive_members": 16,
+  "stop": {
+    "manager_pid": 3277697,
+    "manager_starttick": "26408146",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+    "wait_start_epoch": 1791011143.0546198,
+    "waiting": false,
+    "attempts": [],
+    "model_jobs_started": 1,
+    "launch_epoch": 1791011146.088846,
+    "hard_deadline_epoch": 1791011266.088846,
+    "command": [
+      "taskset",
+      "-c",
+      "0",
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-gpu-inference/measure.py"
+    ],
+    "child_identity": {
+      "pid": 3277775,
+      "starttick": "26408453",
+      "ppid": 3277697,
+      "pgid": 3277775,
+      "RSS": 1548288,
+      "state": "D"
+    },
+    "end_epoch": 1791011148.4151099,
+    "exit": 0,
+    "stop_reason": null,
+    "peak_child_plus_manager_RSS_B": 1220665344,
+    "tracked": [
+      {
+        "pid": 3277775,
+        "starttick": "26408453",
+        "ppid": 3277697,
+        "pgid": 3277775,
+        "RSS": 0,
+        "state": "Z"
+      }
+    ],
+    "owned_wait_remaining": [],
+    "current_child_exact_identity_present": false,
+    "model_job_elapsed_s": 2.3263466358184814
+  },
+  "timing": {
+    "CPUORT": {
+      "median_ms": 3.5707744999999997,
+      "min_ms": 3.355101,
+      "max_ms": 4.02618,
+      "warm_ms": 4.488446
+    },
+    "torchCPU": {
+      "median_ms": 6.005743,
+      "min_ms": 5.750483,
+      "max_ms": 8.676075,
+      "warm_ms": 7.974999
+    },
+    "torchCUDA": {
+      "median_ms": 2.100652,
+      "min_ms": 1.942975,
+      "max_ms": 3.813368,
+      "warm_ms": 2.686464
+    }
+  },
+  "UTC": "2026-10-03T07:18:51.858197+00:00",
+  "issue": "quoridor-4lc.174",
+  "decision": "FINITE_ACCEPTANCE",
+  "owner_handoff": {
+    "UTC": "2026-10-03T07:12:19.417244+00:00",
+    "issue": "quoridor-4lc.174",
+    "source_Git": "1885bb3c651685d602bd48db74e85e7386242123",
+    "result_Git": "1e220cccb5eeaa5bc0c4d5742d64506d81df4c61",
+    "Git_stream_byte_restore_verified_paths": [
+      "tools/ai-sigma-gpu-inference/check_static.py",
+      "tools/ai-sigma-gpu-inference/measure.py",
+      "tools/ai-sigma-gpu-inference/save_git.py",
+      "tools/ai-sigma-gpu-inference/launch.py",
+      "tools/ai-sigma-gpu-inference/adapter.py",
+      "tools/ai-sigma-gpu-inference/pipe_smoke.py",
+      "research-data/ai-sigma/174-gpu-inference/inputs.json",
+      "research-data/ai-sigma/174-gpu-inference/preregister.json",
+      "research-data/ai-sigma/174-gpu-inference/source-binding.json",
+      "docs/reports/ai-sigma-hypothesis-gpu-inference.md",
+      "run-records.tar.gz/all16members"
+    ],
+    "science_stopped": true,
+    "scientific_source_write_stopped": true,
+    "owned_child_wait_remaining": [],
+    "accepted_delivery_before_final": "01a10097-3fbf-78b3-91f2-059ac259e5d4",
+    "acceptance_owner": "coordinator",
+    "new_scientific_work": 0,
+    "Beads_backup_sync": "success 2026-10-03T07:12 UTC, Backup synced in304ms",
+    "self_issue_notes_saved": true,
+    "report_received_not_acceptance": true
+  },
+  "storage_erratum": {
+    "actual_check_failure": "scope allocated180224 + all4commit delta objects82313=262537B, 393B above256KiB forecast; combined stillwithin15MiB",
+    "first_forecast240092B_underestimated_Git_metadata": "retained delta objects82313 not previous39388; all attempts/failures retained",
+    "repair": "verified compression of owned stopped post-run metadata only; old/other data deletion0; reservation change0"
+  },
+  "limitations": [
+    "5 saved inputs, 8 steady batch1; no native pipe total speed/WDL proof",
+    "source frozen current matched and archive saved output arithmetic; no new GPU/NN replay",
+    "storage forecast first underestimated; corrected retained total259784<262144 does not prove full-period resource success",
+    "current process absent/waited receipts not whole-host/perpetual termination proof"
+  ],
+  "adoption": "Keep existing CPU173 formal condition; GPU adapter retained as prospective teacher-provider candidate; no automatic next GPU diagnostic allocation"
+}

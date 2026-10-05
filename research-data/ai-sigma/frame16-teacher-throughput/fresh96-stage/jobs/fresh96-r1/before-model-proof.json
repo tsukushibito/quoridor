@@ -1,0 +1,16 @@
+{
+  "UTC": "2026-10-04T09:28:48.058337+00:00",
+  "controller_entry_started": true,
+  "model_science_started": false,
+  "provider_spawn_reached": false,
+  "model_NN_samples": 0,
+  "modelread": 0,
+  "game_started": 0,
+  "registered_games_file_absent": true,
+  "source_order_proof": "generate.cjs: await m.start -> save registered-games -> spawn provider -> init model -> workers; registered-games absent. Imports Broker/Pipe/pausemonitor have no model initialization. All observed children were node/control Beads-read descendants before that save; allwait exactabsence.",
+  "likely_guard_fault": "owned observer compact-beads child can spawn between group snapshot and foreign scan; matches missing ancestry guard. Detector did not log offender so exact origin is not independently certain.",
+  "original_process_receipt_retained": true,
+  "original_UNKNOWN_sample_value_not_overwritten": true,
+  "scientific_generation_count": 0,
+  "planned96_NOT_STARTED": true
+}

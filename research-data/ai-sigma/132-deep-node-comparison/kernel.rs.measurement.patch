@@ -1,0 +1,91 @@
+diff --git a/tools/ai-sigma-deep-node-comparison/baseline/src/kernel.rs b/tools/ai-sigma-deep-node-comparison/trace/src/kernel.rs
+index eedcc38..0a60bdc 100644
+--- a/tools/ai-sigma-deep-node-comparison/baseline/src/kernel.rs
++++ b/tools/ai-sigma-deep-node-comparison/trace/src/kernel.rs
+@@ -220,6 +220,7 @@ pub struct SearchSession<E: Evaluator = B0Evaluator> {
+     limits: SearchLimits,
+     seed: u64,
+     stats: SearchStats,
++    pub(crate) deep_trace: Vec<serde_json::Value>,
+     #[cfg(feature = "research")]
+     research_context: Option<SigmaContext>,
+ }
+@@ -253,6 +254,7 @@ impl<E: Evaluator> SearchSession<E> {
+             evaluator,
+             limits,
+             seed,
++            deep_trace: Vec::new(),
+             #[cfg(feature = "research")]
+             research_context: None,
+             stats: SearchStats {
+@@ -637,7 +639,7 @@ impl PendingSearch {
+         let (position, expand) = loop {
+             let p = s.nodes[index].position;
+             if let Some(value) = cursor_terminal(p, &cursor) {
+-                Self::backup(s, index, path, leaf_is_node, value);
++                Self::backup(s, index, path, leaf_is_node, value, &cursor);
+                 s.stats.simulations += 1;
+                 return Ok(None);
+             }
+@@ -665,7 +667,7 @@ impl PendingSearch {
+                 s.stats.budget_exhausted = true;
+                 leaf_is_node = false;
+                 if let Some(value) = cursor_terminal(next, &cursor) {
+-                    Self::backup(s, index, path, leaf_is_node, value);
++                    Self::backup(s, index, path, leaf_is_node, value, &cursor);
+                     s.stats.simulations += 1;
+                     return Ok(None);
+                 }
+@@ -724,7 +726,7 @@ impl PendingSearch {
+         } else {
+             output.value
+         };
+-        Self::backup(&mut self.search, c.index, c.path, c.leaf_is_node, value);
++        Self::backup(&mut self.search, c.index, c.path, c.leaf_is_node, value, &c.request.context);
+         self.search.stats.simulations += 1;
+         self.calls += 1;
+         Ok(())
+@@ -735,7 +737,21 @@ impl PendingSearch {
+         path: Vec<(usize, usize)>,
+         leaf_is_node: bool,
+         mut value: f32,
++        cursor: &RuleCursor,
+     ) {
++        let selected = leaf_is_node && s.deep_trace.len() < 8
++            && !s.deep_trace.iter().any(|v| v["node_index"].as_u64() == Some(index as u64));
++        let before = if selected {
++            Some(serde_json::json!({
++                "node_index":index,"leaf_visits":s.nodes[index].visits,
++                "path":path.iter().map(|&(p,e)| {let edge=&s.nodes[p].edges[e];
++                    serde_json::json!({"parent_index":p,"child_index":edge.child,"action":edge.action,
++                        "parent_visits":s.nodes[p].visits,"edge_visits":edge.visits,"edge_value_sum":edge.value_sum})
++                }).collect::<Vec<_>>()
++            }))
++        } else {None};
++        let leaf_value = value;
++        let trace_path = if selected {path.clone()} else {Vec::new()};
+         s.stats.max_depth_reached = s.stats.max_depth_reached.max(path.len() as u8);
+         if leaf_is_node {
+             s.nodes[index].visits += 1
+@@ -747,6 +763,21 @@ impl PendingSearch {
+             e.value_sum += value;
+             s.nodes[parent].visits += 1;
+         }
++        if let Some(pre) = before {
++            let ctx = cursor.as_ref().expect("trace research context");
++            let position = ctx.position();
++            s.deep_trace.push(serde_json::json!({
++                "node_index":index,"key":quoridor_core::research::HistoryKey::from(position).sigma_string(),
++                "ply":ctx.total_ply(),"history":ctx.history_counts().iter().map(|(k,n)|(k.sigma_string(),*n)).collect::<Vec<_>>(),
++                "features_bits":quoridor_core::research::features(position).map(f32::to_bits).to_vec(),
++                "turn":position.turn,"terminal":ctx.terminal_value(),"winner":position.winner,
++                "leaf_side_value":leaf_value,"pre":pre,"post_leaf_visits":s.nodes[index].visits,
++                "post_path":trace_path.iter().map(|&(p,e)| {let edge=&s.nodes[p].edges[e];
++                    serde_json::json!({"parent_index":p,"child_index":edge.child,"action":edge.action,
++                        "parent_visits":s.nodes[p].visits,"edge_visits":edge.visits,"edge_value_sum":edge.value_sum})
++                }).collect::<Vec<_>>(),"parentQ_missing":true,"node_valueSum_missing":true
++            }));
++        }
+     }
+     pub fn checkpoint(&mut self, g: u32) -> Result<SearchResult, String> {
+         self.guard(g)?;

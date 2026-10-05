@@ -1,0 +1,155 @@
+{
+  "PASS": true,
+  "original_weights": "1/(split_G*fullgame_nrows)",
+  "dimensions": {
+    "train": {
+      "cohort": {
+        "weightmass": 0.9999999999999971,
+        "signed_gap_sum": {
+          "plain200": 0.2146136086262348,
+          "plain400": -0.0876188814536352,
+          "standard200": 0.14262311850233353,
+          "standard400": -0.14866053237346155
+        },
+        "zero_row_bins": []
+      },
+      "phase": {
+        "weightmass": 1.0000000000000058,
+        "signed_gap_sum": {
+          "plain200": 0.2146136086262351,
+          "plain400": -0.08761888145363528,
+          "standard200": 0.14262311850233317,
+          "standard400": -0.14866053237346172
+        },
+        "zero_row_bins": []
+      },
+      "self_bin": {
+        "weightmass": 0.9999999999999976,
+        "signed_gap_sum": {
+          "plain200": 0.21461360862623471,
+          "plain400": -0.08761888145363553,
+          "standard200": 0.14262311850233356,
+          "standard400": -0.14866053237346147
+        },
+        "zero_row_bins": []
+      },
+      "opponent_bin": {
+        "weightmass": 0.999999999999998,
+        "signed_gap_sum": {
+          "plain200": 0.21461360862623488,
+          "plain400": -0.08761888145363564,
+          "standard200": 0.1426231185023335,
+          "standard400": -0.14866053237346144
+        },
+        "zero_row_bins": []
+      },
+      "difference_bin": {
+        "weightmass": 0.9999999999999968,
+        "signed_gap_sum": {
+          "plain200": 0.21461360862623474,
+          "plain400": -0.08761888145363542,
+          "standard200": 0.14262311850233356,
+          "standard400": -0.14866053237346133
+        },
+        "zero_row_bins": []
+      },
+      "walls_bin": {
+        "weightmass": 1.0000000000000038,
+        "signed_gap_sum": {
+          "plain200": 0.21461360862623485,
+          "plain400": -0.0876188814536352,
+          "standard200": 0.1426231185023333,
+          "standard400": -0.1486605323734622
+        },
+        "zero_row_bins": []
+      },
+      "distance_clip": {
+        "weightmass": 1.0000000000000122,
+        "signed_gap_sum": {
+          "plain200": 0.21461360862623477,
+          "plain400": -0.08761888145363557,
+          "standard200": 0.1426231185023331,
+          "standard400": -0.14866053237346133
+        },
+        "zero_row_bins": []
+      }
+    },
+    "validation": {
+      "cohort": {
+        "weightmass": 0.9999999999999999,
+        "signed_gap_sum": {
+          "plain200": 0.1747005063608041,
+          "plain400": 0.23453006819874644,
+          "standard200": 0.12876963046509035,
+          "standard400": 0.16362469216870393
+        },
+        "zero_row_bins": []
+      },
+      "phase": {
+        "weightmass": 1.0000000000000036,
+        "signed_gap_sum": {
+          "plain200": 0.174700506360804,
+          "plain400": 0.2345300681987461,
+          "standard200": 0.12876963046509032,
+          "standard400": 0.16362469216870376
+        },
+        "zero_row_bins": [
+          "late"
+        ]
+      },
+      "self_bin": {
+        "weightmass": 0.9999999999999989,
+        "signed_gap_sum": {
+          "plain200": 0.1747005063608041,
+          "plain400": 0.23453006819874656,
+          "standard200": 0.1287696304650903,
+          "standard400": 0.16362469216870387
+        },
+        "zero_row_bins": []
+      },
+      "opponent_bin": {
+        "weightmass": 0.9999999999999987,
+        "signed_gap_sum": {
+          "plain200": 0.17470050636080406,
+          "plain400": 0.2345300681987466,
+          "standard200": 0.12876963046509027,
+          "standard400": 0.16362469216870393
+        },
+        "zero_row_bins": []
+      },
+      "difference_bin": {
+        "weightmass": 0.9999999999999987,
+        "signed_gap_sum": {
+          "plain200": 0.17470050636080403,
+          "plain400": 0.23453006819874656,
+          "standard200": 0.1287696304650903,
+          "standard400": 0.1636246921687039
+        },
+        "zero_row_bins": []
+      },
+      "walls_bin": {
+        "weightmass": 1.0000000000000018,
+        "signed_gap_sum": {
+          "plain200": 0.17470050636080403,
+          "plain400": 0.23453006819874603,
+          "standard200": 0.12876963046509038,
+          "standard400": 0.16362469216870373
+        },
+        "zero_row_bins": []
+      },
+      "distance_clip": {
+        "weightmass": 1.0000000000000018,
+        "signed_gap_sum": {
+          "plain200": 0.17470050636080398,
+          "plain400": 0.23453006819874653,
+          "standard200": 0.12876963046509035,
+          "standard400": 0.1636246921687037
+        },
+        "zero_row_bins": []
+      }
+    }
+  },
+  "allbin_globalgap_atol": 1e-12,
+  "conditional_bin_metrics_separate": true,
+  "NN_added": 0
+}

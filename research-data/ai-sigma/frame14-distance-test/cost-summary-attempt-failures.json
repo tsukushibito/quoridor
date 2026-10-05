@@ -1,0 +1,22 @@
+{
+  "scientific_results_unchanged": true,
+  "new_NN": 0,
+  "attempts": [
+    {
+      "type": "NN0_DISPLAY_SCHEMA",
+      "error": "TypeError: integer divided by list batches",
+      "effect": "cost ledger updated; qualified display not written"
+    },
+    {
+      "type": "NN0_DISPLAY_SCHEMA",
+      "error": "AttributeError: list histogram has no values",
+      "effect": "display not written"
+    },
+    {
+      "type": "NN0_DISPLAY_SCHEMA",
+      "error": "KeyError: job instead of jobs[0]",
+      "effect": "schema inspection only"
+    }
+  ],
+  "correction": "histogram indexed by batch size; count=sum(histogram); retained batches is bounded trace of 16 records"
+}

@@ -1,0 +1,154 @@
+{
+  "issue": "quoridor-4lc.126",
+  "received_UTC": "2026-10-02T13:34:22+00:00",
+  "processing_deadline": "2026-10-02T13:54:22+00:00",
+  "newjob_deadline": "2026-10-02T13:51:22+00:00",
+  "submission_deadline": "2026-10-02T14:04:22+00:00",
+  "base_Git": "115b7e74e10607b0ccec600faae36f18df28b403",
+  "owner": "codex:01a0f31d-6d15-7620-bb63-4b4f878e4746",
+  "no_pause_confirmed": true,
+  "run_id": "budget126-measure-r1",
+  "kind": "budget",
+  "frame": 8,
+  "seed": 1979,
+  "pin_owned_TIDs": true,
+  "forecast_bytes": 20971520,
+  "minimum_remaining_heavy_seconds": 120,
+  "dependency_stop": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/125-completed-fpu-independent/runtime-source-stopped-before-report.json",
+  "prefix_document": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/119-diverse-prefix/prefix-document.json",
+  "prefix_SHA256": "c8104df06585717c54900e02afcf62a9133a91fdfc2a25732da38dcc7b286e27",
+  "input_order": [
+    "diverse-prefix-1",
+    "diverse-prefix-2",
+    "diverse-prefix-3",
+    "diverse-prefix-7"
+  ],
+  "requirements": [
+    {
+      "fixture_id": "diverse-prefix-1",
+      "engine": "candidate",
+      "phase": "warm",
+      "engine_repetition": 0
+    },
+    {
+      "fixture_id": "diverse-prefix-1",
+      "engine": "reference",
+      "phase": "warm",
+      "engine_repetition": 0
+    },
+    {
+      "fixture_id": "diverse-prefix-1",
+      "engine": "candidate",
+      "phase": "steady",
+      "engine_repetition": 1
+    },
+    {
+      "fixture_id": "diverse-prefix-1",
+      "engine": "reference",
+      "phase": "steady",
+      "engine_repetition": 1
+    },
+    {
+      "fixture_id": "diverse-prefix-1",
+      "engine": "reference",
+      "phase": "steady",
+      "engine_repetition": 2
+    },
+    {
+      "fixture_id": "diverse-prefix-1",
+      "engine": "candidate",
+      "phase": "steady",
+      "engine_repetition": 2
+    },
+    {
+      "fixture_id": "diverse-prefix-2",
+      "engine": "reference",
+      "phase": "steady",
+      "engine_repetition": 1
+    },
+    {
+      "fixture_id": "diverse-prefix-2",
+      "engine": "candidate",
+      "phase": "steady",
+      "engine_repetition": 1
+    },
+    {
+      "fixture_id": "diverse-prefix-2",
+      "engine": "candidate",
+      "phase": "steady",
+      "engine_repetition": 2
+    },
+    {
+      "fixture_id": "diverse-prefix-2",
+      "engine": "reference",
+      "phase": "steady",
+      "engine_repetition": 2
+    },
+    {
+      "fixture_id": "diverse-prefix-3",
+      "engine": "candidate",
+      "phase": "steady",
+      "engine_repetition": 1
+    },
+    {
+      "fixture_id": "diverse-prefix-3",
+      "engine": "reference",
+      "phase": "steady",
+      "engine_repetition": 1
+    },
+    {
+      "fixture_id": "diverse-prefix-3",
+      "engine": "reference",
+      "phase": "steady",
+      "engine_repetition": 2
+    },
+    {
+      "fixture_id": "diverse-prefix-3",
+      "engine": "candidate",
+      "phase": "steady",
+      "engine_repetition": 2
+    },
+    {
+      "fixture_id": "diverse-prefix-7",
+      "engine": "reference",
+      "phase": "steady",
+      "engine_repetition": 1
+    },
+    {
+      "fixture_id": "diverse-prefix-7",
+      "engine": "candidate",
+      "phase": "steady",
+      "engine_repetition": 1
+    },
+    {
+      "fixture_id": "diverse-prefix-7",
+      "engine": "candidate",
+      "phase": "steady",
+      "engine_repetition": 2
+    },
+    {
+      "fixture_id": "diverse-prefix-7",
+      "engine": "reference",
+      "phase": "steady",
+      "engine_repetition": 2
+    }
+  ],
+  "adopt_ms": 411,
+  "sample_interval_ms": 5,
+  "CPU": [
+    2
+  ],
+  "NN_threads_each": 1,
+  "RAM": 6442450944,
+  "RSS_guard": 5905580032,
+  "model_sessions": 2,
+  "diagnostic": true,
+  "actual_go": false,
+  "games": [],
+  "schedule": [],
+  "dynamic_plies": 0,
+  "post_requirement_both_zero": true,
+  "requirement_timeout_ms": 20000,
+  "startup_NN": 6,
+  "Git": "5c6b54c6816d595752377355d7b0622dfca27b66"
+}

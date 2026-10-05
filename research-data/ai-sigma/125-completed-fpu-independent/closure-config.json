@@ -1,0 +1,47 @@
+{
+  "issue": "quoridor-4lc.125",
+  "frame": 8,
+  "kind": "protocol",
+  "run_id": "p125-closure",
+  "processing_deadline": "2026-10-02T13:31:50Z",
+  "newjob_deadline": "2026-10-02T13:28:50Z",
+  "seed": 1979,
+  "K": 32,
+  "count_timeout_ms": 20000,
+  "input_order": [
+    "diverse-prefix-1",
+    "straight-jump-p2"
+  ],
+  "searches": [
+    {
+      "fixture_id": "diverse-prefix-1",
+      "condition": "B",
+      "K": 32
+    },
+    {
+      "fixture_id": "diverse-prefix-1",
+      "condition": "C",
+      "K": 32
+    },
+    {
+      "fixture_id": "straight-jump-p2",
+      "condition": "C",
+      "K": 32
+    },
+    {
+      "fixture_id": "straight-jump-p2",
+      "condition": "B",
+      "K": 32
+    }
+  ],
+  "games": [],
+  "schedule": [],
+  "dynamic_plies": 0,
+  "adopt_ms": 411,
+  "sample_interval_ms": 10,
+  "pin_owned_TIDs": false,
+  "primary_actual_tree_limit": 4,
+  "new_games": 0,
+  "startup_separate": true,
+  "tree_history_cache_carry": false
+}

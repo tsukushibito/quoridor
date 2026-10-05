@@ -1,0 +1,103 @@
+{
+  "issue": "quoridor-4lc.162",
+  "contractGit": "80ac54933f06f92e81a08419ee1bbb19a5df3df2",
+  "run": "cpu-toy162-r1",
+  "scientific_training_runs": 1,
+  "source_fixture_path": "research-data/ai-sigma/160-pv-pipeline-bootstrap/fixtures.jsonl",
+  "source_fixture_sha256": "978b3a9eb51e9b994e8d5c56bd97bbd1281797be0e3d925b42b9dfcb2c71cd2e",
+  "source_dataGit": "509491462be8b2e11888564f5403c48330e8bda6",
+  "rows": [
+    {
+      "fixture": "initial-p1",
+      "group": "9eddcf1f2b956bc946cb13ad4f123c16ebe6b82d7bb19eaf28cd45997a9dc17f",
+      "split": "train",
+      "side": 0,
+      "K": 32
+    },
+    {
+      "fixture": "asym-hv-p2",
+      "group": "b94894f0b4c86a7ef9412c0740f0bd232c7d638cc1a099d8ebd9ac954d57a13d",
+      "split": "train",
+      "side": 1,
+      "K": 32
+    },
+    {
+      "fixture": "straight-jump-p2",
+      "group": "bd0ff54fc7239a4ec88282c5fd49a63d4db93c82bffff2fef3e8fcd06c171c9b",
+      "split": "train",
+      "side": 1,
+      "K": 32
+    },
+    {
+      "fixture": "frame10-prefix-13",
+      "group": "6112d039bef546fb918586da0bc6c29e98bb8c436283e545182f3e9b99c56686",
+      "split": "validation",
+      "side": 1,
+      "K": 32
+    },
+    {
+      "fixture": "frame10-prefix-14",
+      "group": "9ee2a31315118d628bb22e71d3db865a979cc4e0b5937ceaa952cd987fca4dc8",
+      "split": "train",
+      "side": 1,
+      "K": 32
+    }
+  ],
+  "model": {
+    "input": 648,
+    "hidden": 16,
+    "activation": "ReLU",
+    "policy_logits": 136,
+    "value": 1,
+    "value_activation": "tanh",
+    "dtype": "float32",
+    "device": "cpu",
+    "initialization": "new initial random weights, not Sigma continued",
+    "seed": 80311
+  },
+  "optimizer": {
+    "name": "SGD",
+    "learning_rate": 0.01,
+    "steps": 20,
+    "batch": "all train4, same order as saved JSONL",
+    "momentum": 0,
+    "weight_decay": 0,
+    "implementation": "CPU no_grad parameter.add_(grad,alpha=-.01); exact zero-momentum zero-decay SGD, no optimizer CUDA graph hooks"
+  },
+  "loss": "mean masked legal cross entropy of pi136 + MSE(rootmean_stm)",
+  "target": "K32 budget-limited search distillation; game_z missing, not substituted",
+  "mask": "illegal logits -1e9, finite f32; no legal move omitted",
+  "split": "saved4train1validation reused diagnostic only",
+  "threading": {
+    "torch_intra_op": 1,
+    "torch_inter_op": 1,
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "CUDA_VISIBLE_DEVICES": "",
+    "CUDA_API_calls": 0
+  },
+  "checkpoint": "state_dict only, torch.load weights_only=True map_location=cpu; bit-equal weights and reload forward",
+  "ONNX": {
+    "export": "existing legacy dynamo=False exporter",
+    "opset": 17,
+    "rows": 5,
+    "providers": [
+      "CPUExecutionProvider"
+    ],
+    "ORT_intra_op": 1,
+    "ORT_inter_op": 1,
+    "atol": 1e-05,
+    "rtol": 0.0001,
+    "parity": "raw logits136 and tanh value all5; abs_error <=atol+rtol*abs(torch)"
+  },
+  "outcomes_do_not_change_structure_steps_threshold": true,
+  "zero_new_teacher_game_Chrome_GPU": true,
+  "job_watchdog_seconds": 90,
+  "toy_total_seconds": 120,
+  "RSS_guard_bytes": 939524096,
+  "scope_forecast_bytes": 524288,
+  "Git_objects_forecast_bytes": 163840,
+  "private_index_bytes": 0,
+  "storage_git_method": "object tree commit plumbing without shared/default index",
+  "absence_vs_natural_all_period": "current identity only"
+}

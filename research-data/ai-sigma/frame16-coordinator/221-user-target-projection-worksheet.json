@@ -1,0 +1,24 @@
+{
+  "UTC": "2026-10-04T08:01:41.598131+00:00",
+  "benchmark_games_per_condition": 48,
+  "Rjoint_per_condition_owner": 1554,
+  "rows_per_game": 32.375,
+  "target_seconds_per_1000": [
+    3600,
+    1800
+  ],
+  "required_Rjoint_per_s_at_actual_density": [
+    8.993055555555555,
+    17.98611111111111
+  ],
+  "production_guardian_projections_min": {
+    "baseline": 39.53660101180706,
+    "candidate": 38.92740472814088
+  },
+  "pipeline_qualification_export_pack_time": "pending measured subtotal; not assumed zero",
+  "additional_generation_authorized": false,
+  "K_quality": "K64 qualified distinct from K800",
+  "break_even_formula": "For same complete quality workload: incremental measured improvement+verification cost / measured savings per completed game. Extrapolation is conditional; overlapping phase costs not additive. Unknown prep/LLM cost remains unknown.",
+  "third_baseline": "preselected pending supervisor owned recovery/fresh admission",
+  "next_decision": "After third, use actual batch distribution and exclusive vs overlapping phase costs to choose continuing optimization or moving to future size/diversity validation, not just another diagnostic."
+}

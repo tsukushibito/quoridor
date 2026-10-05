@@ -1,0 +1,52 @@
+{
+  "observed_UTC": "2026-10-04T03:16:23.125791+00:00",
+  "source_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame14-ee73f985-00e3-4a1c-960e-1e87143fb693/scheduler-end-stop.json",
+  "source_SHA256": "63530098ee09d3e512f624f9e37811830c16c2fc89e15f03e1587f5812fdd139",
+  "source_bytes": 1617,
+  "owner_report": {
+    "owned_turn_pending": false,
+    "scheduler_identity_alive": false
+  },
+  "source_record": {
+    "at": "2026-10-04T03:15:37.024539+00:00",
+    "reason": "2026-10-04 03:15:36 owned operation deadline",
+    "command_result": {
+      "command_not_needed": true,
+      "reason": "stored scheduler not alive; retain unknown/pending ownership"
+    },
+    "state": {
+      "binding": {
+        "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+        "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+        "target": "supervisor",
+        "dispatch_issue": "quoridor-4lc.40",
+        "contract_file": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+        "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+      },
+      "process": null,
+      "phase": "stopped",
+      "recovery_required": false,
+      "last_result": {
+        "at": "2026-10-04T03:15:36.037698+00:00",
+        "event": "process_stopped",
+        "owned_turn_pending": false
+      },
+      "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+      "config_sha256": "b0656b16312748feaa123d3b877acedfcb2ee7709a32be2de42572fd1d9ed5eb",
+      "contract_sha256": "b58f6ea58608194ec62b55bfb0a7dc588e4baa3b43b0430029ad0b8de54ac539",
+      "next_at": null,
+      "owned": null
+    },
+    "read_error": null,
+    "last_valid_state": null,
+    "scheduler_identity_alive": false,
+    "owned_turn_pending": false,
+    "external_NN_processes_stopped": false,
+    "scope": "stored owned scheduler/turn only",
+    "read_failure_not_hidden": true,
+    "no_automatic_restart_or_blind_send": true
+  },
+  "external_NN_stop_certified": false,
+  "missing_cause_or_read_fields": "retained verbatim in source_record",
+  "waiting_owner": "steward92 monitor recovery and final evidence"
+}

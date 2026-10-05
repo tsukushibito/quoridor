@@ -1,0 +1,361 @@
+{
+  "issue": "quoridor-4lc.160",
+  "run": "bootstrap-r1",
+  "selection_before_read": [
+    "initial-p1",
+    "asym-hv-p2",
+    "straight-jump-p2",
+    "frame10-prefix-13",
+    "frame10-prefix-14"
+  ],
+  "original_raw_copied": false,
+  "new_NN": 0,
+  "new_training": 0,
+  "source_metadata": {
+    "source-bindings.json": {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageA-r2/source-bindings.json",
+      "bytes": 2782,
+      "sha256": "57bb540f68e8dca517ce3a1e8156be88befd081ad518e58f19b886857bed7038",
+      "content": {
+        "policy": "faithful fixed Sigma-Web f64 bundle; research CP/SAB/clock/strictfault adapter distinct",
+        "old_base_readonly": {
+          "main": {
+            "path": "tools/ai-sigma-player-workers/player-main.js",
+            "original_SHA256": "610e899acd43215efc9fa3a08f3c337248639505a57196e1a730a91f7afde4a8",
+            "adapted_SHA256": "70da5cb426efaff819cd1de4dc9ba08f4b7a3944fd08888b59a649f2bddc997f"
+          },
+          "worker": {
+            "path": "tools/ai-sigma-player-workers/player-worker.js",
+            "original_SHA256": "fd5f5b72a836164133b22f718d58ef31d2d4b0f8a4887070e1ac9346112de5e8",
+            "adapted_SHA256": "26bdf8f24715dd75ed22b43c15fa4ffc2f3c1c32231971e9f48b6cc21c763212"
+          },
+          "producer": {
+            "path": "tools/ai-sigma-tail-transport/early-worker.js",
+            "original_SHA256": "9494e33e7204be208262914c04ea5eb0d7985872a6d7ebc6e4084d84729097d4",
+            "adapted_SHA256": "1e6a4d661def2f54bbaf915c6928d4df25f32cd719f3ae10e584aeefa238190b"
+          },
+          "checkpoint": {
+            "path": "tools/ai-sigma-tail-transport/checkpoint.js",
+            "original_SHA256": "2b736d696a099350bf724b40dd858fc3afe11ce17a1c143f3029e5fcd2f28d8c",
+            "adapted_SHA256": "494581d5ce5fc38e7afb753d9ca92e0f49bb71ed516762b7ea48a0c6d89e1119"
+          },
+          "cache": {
+            "path": "tools/ai-sigma-actual-boundary-repair/early-cache.cjs",
+            "original_SHA256": "748fe01dfebf5e524465ef69255acf0026154188b9002a5338ca790ca092e7f7",
+            "adapted_SHA256": "a547e67cc4cfa6cfce8b40234381b48c9126a7accbee8e121351d822d8cbf8ac"
+          },
+          "reference": {
+            "path": "tools/ai-sigma-actual-boundary-repair/reference-core.js",
+            "SHA256": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05",
+            "unchanged": true
+          },
+          "local": {
+            "input.js": "e19b31fb860131718635c8db843343a7ec967f1867b80eeb263abf9419c8b5a2",
+            "main.js": "b265b29617566d2a376327ed54343deb80b5bdcea6275b5a14dfc289cf6f6532",
+            "adapters.cjs": "942cdfe2aec182c8579743393594e6629069d234ffc5494089dfe2ede4b2ad6f"
+          }
+        },
+        "local": {
+          "adapters.cjs": "177adf0dd1154c621f8f6a453abf48110f65b40187426a89344ab715f366b22e",
+          "port-worker.js": "f82e3e1a10572576c0efa2088b00eaf62610cef18e6b71f7d7ebc9c506723d8a",
+          "port-main.js": "757948b178e424aedb698196a67cbbfed01fff4ab6e000be9b17078097265a20"
+        },
+        "served": {
+          "main": "264a2bbb7e9482753000d4e34de78b8e5f8f913acb62976187323cf4c6c66af6",
+          "worker": "f82e3e1a10572576c0efa2088b00eaf62610cef18e6b71f7d7ebc9c506723d8a",
+          "producer": "e566da94469926f7abbdc0816efa7671d5a49f016d6eeb06dd060b7e44f8c577",
+          "checkpoint": "494581d5ce5fc38e7afb753d9ca92e0f49bb71ed516762b7ea48a0c6d89e1119",
+          "cache": "a547e67cc4cfa6cfce8b40234381b48c9126a7accbee8e121351d822d8cbf8ac",
+          "reference": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05"
+        }
+      }
+    },
+    "actual-served-source.json": {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageA-r2/actual-served-source.json",
+      "bytes": 4821,
+      "sha256": "e4507ac93932d589b3612f97081ada5958bdb8f61b7a624c17e1cbf684cb7c34",
+      "content": {
+        "/game.js": {
+          "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/game.js",
+          "bytes": 27877,
+          "SHA256": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5"
+        },
+        "/context.js": {
+          "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/context.js",
+          "bytes": 2248,
+          "SHA256": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c"
+        },
+        "/shared-best-action.js": {
+          "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-cp-frame/shared-best-action.cjs",
+          "bytes": 5444,
+          "SHA256": "37491ac0e9f2fb20b564fb2699ac58c3dfc35bff84ca888cd39b40036359132a"
+        },
+        "/numeric-browser.js": {
+          "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-cp-frame/numeric-browser.js",
+          "bytes": 2710,
+          "SHA256": "027ff2fbaffc6e3b53925a7205fe2c989d1f49903a4601b6eab0aa49af6e851f"
+        },
+        "/player-control.js": {
+          "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-player-workers/player-control.cjs",
+          "bytes": 1579,
+          "SHA256": "3b87d63253cd93267ccc9419bfddd334a3cbe5cacba4d98da9328109a3f33e5c"
+        },
+        "/early-page.js": {
+          "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-player-workers/player-main.js",
+          "bytes": 41612,
+          "SHA256": "264a2bbb7e9482753000d4e34de78b8e5f8f913acb62976187323cf4c6c66af6"
+        },
+        "/early-worker.js": {
+          "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-player-workers/player-worker.js",
+          "bytes": 5384,
+          "SHA256": "f82e3e1a10572576c0efa2088b00eaf62610cef18e6b71f7d7ebc9c506723d8a"
+        },
+        "/protocol-worker.js": {
+          "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-cp-frame/protocol-worker.js",
+          "bytes": 627,
+          "SHA256": "5f74daff7279fcf9e3697fe538e280480705e42ba63c88b2a6789efa6d26d77c"
+        },
+        "/player-base.js": {
+          "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-player-workers/player-worker.js",
+          "bytes": 6118,
+          "SHA256": "26bdf8f24715dd75ed22b43c15fa4ffc2f3c1c32231971e9f48b6cc21c763212"
+        },
+        "/snapshot-cache.js": {
+          "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/early-cache.cjs",
+          "bytes": 6724,
+          "SHA256": "a547e67cc4cfa6cfce8b40234381b48c9126a7accbee8e121351d822d8cbf8ac"
+        },
+        "/original-worker.js": {
+          "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-tail-transport/early-worker.js",
+          "bytes": 12266,
+          "SHA256": "e566da94469926f7abbdc0816efa7671d5a49f016d6eeb06dd060b7e44f8c577"
+        },
+        "/ort/ort.min.js": {
+          "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/ort.min.js",
+          "bytes": 347787,
+          "SHA256": "95c6f6611837cb50449cb6a0c092145bf493ac64cd0d004033cefc977366e7cb"
+        },
+        "/candidate-host.js": {
+          "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/host.js",
+          "bytes": 3586,
+          "SHA256": "dc6cf3e24774e5e6b52c8cf346090f53f261e58b0c7fda1e6d674c7142983d02"
+        },
+        "/checkpoint.js": {
+          "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-tail-transport/checkpoint.js",
+          "bytes": 6228,
+          "SHA256": "494581d5ce5fc38e7afb753d9ca92e0f49bb71ed516762b7ea48a0c6d89e1119"
+        },
+        "/reference-core.js": {
+          "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/reference-core.js",
+          "bytes": 5206,
+          "SHA256": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05"
+        },
+        "/reference-control-run.js": {
+          "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/reference-control-run.js",
+          "bytes": 1056,
+          "SHA256": "87dbd43b34f23793c36806ad41a09fda723b5f7b7b10745c0df8b055e3039a0c"
+        },
+        "/b.wasm": {
+          "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/faithful.wasm",
+          "bytes": 282867,
+          "SHA256": "500181795b373f69f6f2214ee1a77e12767e2f342e15a56ab5e27d0a0453f2c2"
+        },
+        "/model.onnx": {
+          "path": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/ai-sigma/reference/sigma-pcr250/best.onnx",
+          "bytes": 11663428,
+          "SHA256": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d"
+        },
+        "/ort/ort-wasm-simd-threaded.jsep.mjs": {
+          "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/ort-wasm-simd-threaded.jsep.mjs",
+          "bytes": 53602,
+          "SHA256": "b69c8812bf2d8356dd248fef0abb35e22d1f05f9c593ca34d4b942f35ea93592"
+        },
+        "/ort/ort-wasm-simd-threaded.jsep.wasm": {
+          "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/ort-wasm-simd-threaded.jsep.wasm",
+          "bytes": 23914392,
+          "SHA256": "0663b902fb3937883a34375926bdfe3e1c86cd4c99cbc04c06a7cdf46c78bdde"
+        }
+      }
+    },
+    "model-load.json": {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageA-r2/model-load.json",
+      "bytes": 987,
+      "sha256": "f5f8b8526fb898bbea9d8b76c4b1a131da11eb1cb31621346ef01ace465a81ff",
+      "content": {
+        "kind": "ready",
+        "threads": 1,
+        "proxy": false,
+        "handles": 0,
+        "activeNN": 0,
+        "players": [
+          {
+            "kind": "ready",
+            "digest": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+            "threads": 1,
+            "proxy": false,
+            "model_load_ms": 1812.0399999916553,
+            "compile_ms": 22.849999994039536,
+            "handles": 0,
+            "activeNN": 0,
+            "producer_post_begin_ms": 1790991666644.94,
+            "worker_engine": "candidate",
+            "engine": "candidate"
+          },
+          {
+            "kind": "ready",
+            "digest": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+            "threads": 1,
+            "proxy": false,
+            "model_load_ms": 1586.699999988079,
+            "compile_ms": 91.81000000238419,
+            "handles": 0,
+            "activeNN": 0,
+            "producer_post_begin_ms": 1790991669256.675,
+            "worker_engine": "reference",
+            "engine": "reference"
+          }
+        ],
+        "wall_ms": 4955.831623017788,
+        "model_ready_outside_first_input_only": true
+      }
+    },
+    "config.json": {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageA-r2/config.json",
+      "bytes": 1882,
+      "sha256": "a6769cbda0633c3cbdddddcefa129ccd92760b0e425eedb187a5fd5aa6ffa939",
+      "content": {
+        "issue": "quoridor-4lc.151",
+        "frame": 10,
+        "seed": 1979,
+        "processing_deadline": "2026-10-03T03:17:36.232260+00:00",
+        "newjob_deadline": "2026-10-03T03:07:36.232260+00:00",
+        "pin_owned_TIDs": true,
+        "minimum_remaining_heavy_seconds": 15,
+        "kind": "stageA",
+        "run_id": "port151-stageA-r2",
+        "forecast_bytes": 16777216,
+        "searches": [
+          {
+            "fixture_id": "initial-p1",
+            "engine": "candidate",
+            "K": 32,
+            "ordinal": 1
+          },
+          {
+            "fixture_id": "initial-p1",
+            "engine": "reference",
+            "K": 32,
+            "ordinal": 2
+          },
+          {
+            "fixture_id": "asym-hv-p2",
+            "engine": "reference",
+            "K": 32,
+            "ordinal": 3
+          },
+          {
+            "fixture_id": "asym-hv-p2",
+            "engine": "candidate",
+            "K": 32,
+            "ordinal": 4
+          },
+          {
+            "fixture_id": "straight-jump-p2",
+            "engine": "candidate",
+            "K": 32,
+            "ordinal": 5
+          },
+          {
+            "fixture_id": "straight-jump-p2",
+            "engine": "reference",
+            "K": 32,
+            "ordinal": 6
+          },
+          {
+            "fixture_id": "frame10-prefix-13",
+            "engine": "reference",
+            "K": 32,
+            "ordinal": 7
+          },
+          {
+            "fixture_id": "frame10-prefix-13",
+            "engine": "candidate",
+            "K": 32,
+            "ordinal": 8
+          },
+          {
+            "fixture_id": "frame10-prefix-14",
+            "engine": "candidate",
+            "K": 32,
+            "ordinal": 9
+          },
+          {
+            "fixture_id": "frame10-prefix-14",
+            "engine": "reference",
+            "K": 32,
+            "ordinal": 10
+          }
+        ],
+        "fixed_input_path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/151-sigma-web-port/stageA-inputs.json",
+        "fixed_input_SHA256": "dc205f8d7e00ee52aca51845ddbca5e3085d0aebdb22c3f4ceb6fa139cd10954",
+        "binary_SHA256": "500181795b373f69f6f2214ee1a77e12767e2f342e15a56ab5e27d0a0453f2c2",
+        "repair_of": "port151-stageA-r1",
+        "scientific_old_success_not_replaced": true
+      }
+    },
+    "crates/quoridor-core/src/research.rs": {
+      "bytes": 13547,
+      "current_sha256": "5785963dc1bce7828e1d0bb32f5b48623e238aa24c2966f61a9843b6f219f524",
+      "current_read_only_not_run_source_proof": true
+    },
+    "tools/ai-sigma-actual-boundary-repair/game.js": {
+      "bytes": 27877,
+      "current_sha256": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+      "current_read_only_not_run_source_proof": true
+    },
+    "tools/ai-sigma-actual-boundary-repair/reference-core.js": {
+      "bytes": 5206,
+      "current_sha256": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05",
+      "current_read_only_not_run_source_proof": true
+    },
+    "scripts/dev/training.sh": {
+      "bytes": 355,
+      "current_sha256": "4963d21bd86780e48705cff20b3c9b2bc0b601e513cbb0ceae04ecbcb1e72aa4",
+      "current_read_only_not_run_source_proof": true
+    },
+    "tools/training/pyproject.toml": {
+      "bytes": 549,
+      "current_sha256": "727f682b25493588726ee7f6ccbb2743c21fd086e17cabbc36225d0b493fc437",
+      "current_read_only_not_run_source_proof": true
+    }
+  },
+  "training_environment": {
+    "path": "/home/vscode/.cache/inference/envs/quoridor-training",
+    "static_installed_metadata": {
+      "onnx-1.23.0.dist-info": [
+        "Name: onnx",
+        "Version: 1.23.0"
+      ],
+      "numpy-2.5.3.dist-info": [
+        "Name: numpy",
+        "Version: 2.5.3"
+      ],
+      "onnxruntime-1.30.0.dist-info": [
+        "Name: onnxruntime",
+        "Version: 1.30.0"
+      ],
+      "onnxscript-0.7.2.dist-info": [
+        "Name: onnxscript",
+        "Version: 0.7.2"
+      ],
+      "torch-2.14.0+cu130.dist-info": [
+        "Name: torch",
+        "Version: 2.14.0+cu130"
+      ]
+    },
+    "torch_import": false,
+    "training_entrypoint": "scripts/dev/training.sh (environment launcher, no selfplay/trainer)",
+    "known_model": "models/experiments/ai-sigma/reference/sigma-pcr250/best.onnx",
+    "PyTorch_architecture_state_dict_transfer": "missing in inspected local training scope; no full-history absence claim"
+  }
+}

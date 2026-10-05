@@ -1,0 +1,58 @@
+{
+  "subreaper_set_rc": 0,
+  "subreaper_get_rc": 0,
+  "subreaper_value": 1,
+  "kernel_boundary": {
+    "valid": true,
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+    "launcher": {
+      "pid": 2627748,
+      "ppid": 2627744,
+      "pgid": 2627744,
+      "start_ticks": 20960544,
+      "state": "R",
+      "rss": 17887232,
+      "utime_ticks": 1,
+      "stime_ticks": 0
+    },
+    "root": {
+      "pid": 2627749,
+      "ppid": 2627748,
+      "pgid": 2627749,
+      "start_ticks": 20960546,
+      "state": "R",
+      "rss": 7876608,
+      "utime_ticks": 0,
+      "stime_ticks": 0
+    },
+    "initial_children": [],
+    "spawn_count": 1,
+    "single_thread_initial": true,
+    "sole_explicit_root": true
+  },
+  "runner_pid": 2627748,
+  "runner_starttick": 20960544,
+  "child_pid": 2627749,
+  "child_starttick": 20960546,
+  "PGID": 2627749,
+  "startUTC": "2026-10-02T15:58:10.306953+00:00",
+  "git_commit": null,
+  "run_id": null,
+  "command": [
+    "python3",
+    "-B",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-tactical-saved-independent/closure.py"
+  ],
+  "cwd": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-tactical-saved-independent",
+  "deadline": 1790956750.3147821,
+  "affinity": [
+    0
+  ],
+  "guardRSS": 939524096,
+  "contractRAM": 1073741824,
+  "guard_basis": "current_proc_rss_runner_plus_owned_children",
+  "runner_initial_ru_maxrss": 18051072,
+  "guardStorage": 2097152,
+  "temp": "/proc/2627748/cwd/t",
+  "temp_realpath": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261002/TACTICAL-SAVED-INDEPENDENT/runs/t"
+}

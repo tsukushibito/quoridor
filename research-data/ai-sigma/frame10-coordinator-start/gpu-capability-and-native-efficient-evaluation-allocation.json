@@ -1,0 +1,46 @@
+{
+  "UTC": "2026-10-03T06:28:24.523239+00:00",
+  "GPU_actual_CUDA_root": {
+    "kind": "root user-question GPU capability probe",
+    "nvidia_smi": {
+      "name": "NVIDIA GeForce RTX 3060",
+      "driver": "591.86",
+      "memory_total_MiB": 12288,
+      "memory_used_before_MiB": 1498
+    },
+    "torch": "2.14.0+cu130",
+    "cuda_build": "13.0",
+    "cuda_available": true,
+    "device_count": 1,
+    "device_name": "NVIDIA GeForce RTX 3060",
+    "cuda_small_add_result": [
+      2.0
+    ],
+    "cuda_allocated_bytes": 1024,
+    "cuda_reserved_bytes": 2097152,
+    "peak_rss_KiB": 658552,
+    "process_exit": 0,
+    "model_load": false,
+    "model_inference": false,
+    "training": false,
+    "environment_update": false
+  },
+  "GPU_model_inference_unmeasured": true,
+  "170_science_stop_SHA256": "b3e9abb87275a1c155b3f8f7efdb31c66972409dc3e92aebad5c507d4e8dde4e",
+  "17040_receipt": "owner finite40 COMPLETE/currentstop/actualadmit/public/zero; raw independent fullcheck pending, packing active",
+  "170_storage_erratum": "forecast privateindex undercount; guardlowerbound exceeded44255B, removedindex/currentreturned, no budgetincrease or scientificloss",
+  "new_tasks": [
+    {
+      "issue": "quoridor-4lc.171",
+      "role": "hypothesis",
+      "path": "docs/design/ai-sigma-contract-hypothesis-gpu-route.md"
+    },
+    {
+      "issue": "quoridor-4lc.172",
+      "role": "critic",
+      "path": "docs/design/ai-sigma-contract-critic-native-ni-efficient.md"
+    }
+  ],
+  "stat_rule": "unadopted proposal; 5pp/one-sided95 preserved/new native dataset only",
+  "main_next": "native quality and teacher rows, no GPU/mainNI claim"
+}

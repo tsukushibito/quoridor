@@ -1,0 +1,37 @@
+{
+  "version": "train96-gameequal-population-f32-v1",
+  "train_rows": 4653,
+  "train_games": 96,
+  "mu64": [
+    0.10343921666968488,
+    0.09714682217697558
+  ],
+  "population_var64": [
+    0.0029536451998757895,
+    0.002881386773759533
+  ],
+  "mu_f32": [
+    0.10343921929597855,
+    0.09714682400226593
+  ],
+  "sigma_f32": [
+    0.0543474480509758,
+    0.05367854982614517
+  ],
+  "mu_bits": [
+    1037293553,
+    1036449002
+  ],
+  "sigma_bits": [
+    1029610350,
+    1029430794
+  ],
+  "rule": "mu=mean_game(mean_row(d)); var=mean_game(mean_row((d-mu64)^2)); sigma=f32(sqrt(var)); actual mu=f32(mu64), z=(d-mu)/sigma in Torch f32",
+  "zero_variance": "sigma1; typed zero_variance_columns retained",
+  "zero_variance_columns": [],
+  "STM_order": "shared canonical_model_input, no second rotation",
+  "labels_used": false,
+  "test_excluded_before_moments": true,
+  "stage_SHA": "af95eabf3d059982e67cba41fcee0233aaea8a53eaf81a3b1fbae60752d83e75",
+  "metadata_SHA": "1c257a5e440ac50096b56f033ff4e3e183594651d4162e0358326b3f08cf08b1"
+}

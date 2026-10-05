@@ -1,0 +1,83 @@
+{
+  "UTC": "2026-10-05T02:43:49.917595+00:00",
+  "task": "learning-effect-256-v1",
+  "schema": "learning-effect-v1",
+  "status": "NOT_STARTED",
+  "reason": "CURRENT_WINDOW_UNAVAILABLE",
+  "planned_all_slots": 4,
+  "ledger": [
+    {
+      "slot": 1,
+      "opening": "opening0",
+      "family": "frame19-242-81276a26289a64dda5f1a0c4218fd2dd-0",
+      "L_side": 1,
+      "NNUE_side": 1,
+      "distance_mode": "clip",
+      "status": "NOT_STARTED",
+      "reason": "CURRENT_WINDOW_UNAVAILABLE",
+      "teacher_or_game_result_exists": false
+    },
+    {
+      "slot": 2,
+      "opening": "opening0",
+      "family": "frame19-242-81276a26289a64dda5f1a0c4218fd2dd-0",
+      "L_side": 2,
+      "NNUE_side": 2,
+      "distance_mode": "clip",
+      "status": "NOT_STARTED",
+      "reason": "CURRENT_WINDOW_UNAVAILABLE",
+      "teacher_or_game_result_exists": false
+    },
+    {
+      "slot": 3,
+      "opening": "opening1",
+      "family": "frame19-242-81276a26289a64dda5f1a0c4218fd2dd-1",
+      "L_side": 2,
+      "NNUE_side": 2,
+      "distance_mode": "clip",
+      "status": "NOT_STARTED",
+      "reason": "CURRENT_WINDOW_UNAVAILABLE",
+      "teacher_or_game_result_exists": false
+    },
+    {
+      "slot": 4,
+      "opening": "opening1",
+      "family": "frame19-242-81276a26289a64dda5f1a0c4218fd2dd-1",
+      "L_side": 1,
+      "NNUE_side": 1,
+      "distance_mode": "clip",
+      "status": "NOT_STARTED",
+      "reason": "CURRENT_WINDOW_UNAVAILABLE",
+      "teacher_or_game_result_exists": false
+    }
+  ],
+  "model_science_jobs": 0,
+  "background_commands": 1,
+  "science_MAX1_remaining_not_reused": true,
+  "native_NN": 0,
+  "Torch_NN": 0,
+  "model_initialization": 0,
+  "Torch_import": 0,
+  "optimizer_training": 0,
+  "GPU": 0,
+  "processed": 0,
+  "parity": "NOT_RUN",
+  "I_status": "RECIPE_BOUND_NOT_INITIALIZED",
+  "WDL": {
+    "W": 0,
+    "D": 0,
+    "L": 0,
+    "UNKNOWN": 0,
+    "NOT_STARTED": 4
+  },
+  "background_exit": 2,
+  "background_wall_s": 175.5128935900284,
+  "control_wait_s": 175.2753874650225,
+  "scientific_wall_s": 0,
+  "actual_CPU_conflict_during_wait": "NOT_MEASURED; model guardian never started",
+  "wait_predicate": "phase running AND owned None AND current next_at-now>=165 AND loaded matching exact scheduler; stricter owned condition prevented physical admission",
+  "LLM_population_gate": false,
+  "source_runtime_execution_certified": false,
+  "strength_claim": false,
+  "fresh_opening_or_holdout": false
+}

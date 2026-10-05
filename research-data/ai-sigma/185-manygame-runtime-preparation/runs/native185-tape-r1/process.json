@@ -1,0 +1,46 @@
+{
+  "issue": "quoridor-4lc.185",
+  "run": "native185-tape-r1",
+  "UTC": "2026-10-03T11:58:51.374896+00:00",
+  "jobwall_seconds": 3.0744717600173317,
+  "exit": 0,
+  "stop_reason": null,
+  "command": [
+    "node",
+    "--max-old-space-size=192",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-manygame-runtime-preparation/tape.cjs",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/185-manygame-runtime-preparation/runs/native185-tape-r1"
+  ],
+  "runner_pid": 3498649,
+  "tracked": [
+    {
+      "pid": 3498725,
+      "ppid": 3498649,
+      "tick": 28167425,
+      "state": "S",
+      "RSS": 70574080
+    },
+    {
+      "pid": 3498739,
+      "ppid": 3498725,
+      "tick": 28167433,
+      "state": "R",
+      "RSS": 4087808
+    },
+    {
+      "pid": 3498740,
+      "ppid": 3498725,
+      "tick": 28167433,
+      "state": "S",
+      "RSS": 71946240
+    }
+  ],
+  "remaining": [],
+  "peak_aggregate_RSS": 173146112,
+  "scope_allocated": 315392,
+  "mock_reply_upper_bound": 64,
+  "NN": 0,
+  "model_sessions": 0,
+  "GPU": 0,
+  "sampled_resource_limits_not_full_host_guarantee": true
+}

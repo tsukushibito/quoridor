@@ -1,0 +1,1051 @@
+{
+  "issue": "quoridor-4lc.23",
+  "experiment": "SIGMA-FINAL-ENTRY-GATE",
+  "trial": 1,
+  "contract": 1,
+  "verdict": "LIMITED GATE SUPPORTED: responsibility split, exact entry realBackend two sessions, fixed schedule/mocks; coordinator decides actual matches",
+  "manifest_SHA256": "7c7608b05f5719827e635bd3cc603339990d833c2d57d985af841cf5b8a56080",
+  "source_checks": 28,
+  "source_before_after_unchanged": true,
+  "runtime": {
+    "pass": true,
+    "sessions": [
+      {
+        "session": 1,
+        "golden": [
+          {
+            "engine": "native",
+            "accepted": true,
+            "elapsed": 415.5648159980774
+          },
+          {
+            "engine": "candidate",
+            "accepted": true,
+            "elapsed": 459.18075899779797
+          },
+          {
+            "engine": "reference",
+            "accepted": true,
+            "elapsed": 415.1109250038862
+          }
+        ]
+      },
+      {
+        "session": 2,
+        "golden": [
+          {
+            "engine": "native",
+            "accepted": true,
+            "elapsed": 415.4474929943681
+          },
+          {
+            "engine": "candidate",
+            "accepted": true,
+            "elapsed": 459.54998299479485
+          },
+          {
+            "engine": "reference",
+            "accepted": true,
+            "elapsed": 424.17483200132847
+          }
+        ]
+      }
+    ],
+    "NNRequests": 7,
+    "holdout": 0,
+    "realEntryBackend": true,
+    "scope": "fixed golden only; no game execution"
+  },
+  "watchdog": {
+    "elapsed_ms": 14.592280998826027,
+    "overshoot_ms": 4.592280998826027,
+    "at_ms": 64238520.200358,
+    "T_ms": 10,
+    "accepted": false,
+    "action": null,
+    "safe_reject_not_latency_guarantee": true
+  },
+  "classification": {
+    "pass": true,
+    "boundaries": 21,
+    "evidence": "stage/classification-final.json"
+  },
+  "entry_mock": {
+    "pass": true,
+    "scheduled": 32,
+    "completed": 32,
+    "retries": 2,
+    "starts": 3,
+    "stops": 3,
+    "pause": "PAUSED",
+    "expiry": "PROCESSING_DEADLINE_OR_SIGNAL",
+    "holdout_engine_sends": 0,
+    "actual_outcomes": 0
+  },
+  "preregistration": {
+    "pass": true,
+    "selected": [
+      25,
+      4,
+      51,
+      0,
+      47,
+      44,
+      56,
+      31
+    ],
+    "order_generator": [
+      {
+        "arrangement": "interleave",
+        "colors": "after",
+        "bitrule": 0
+      }
+    ],
+    "v2_is_fixed_v1_filter": true,
+    "blocks": 16,
+    "games": 32,
+    "seed": 1979,
+    "holdout_engine_sends": 0
+  },
+  "stop": {
+    "issue": "quoridor-4lc.23",
+    "UTC": "2026-09-30T23:37:05.672494+00:00",
+    "last_NN_end": "2026-09-30T23:35:58.216352+00:00",
+    "all_tracked_PID0": true,
+    "remaining": 0,
+    "identities": [],
+    "reason": "fixed two-session realEntry runtime complete exit0; no further NN runtime",
+    "NN_after_this_record": false,
+    "runtime_reserve": "23:41:00Z",
+    "ports_created": 0,
+    "other_kills": 0,
+    "final_safety_observation_UTC": "2026-09-30T23:39:21.934584+00:00"
+  },
+  "jobs": [
+    {
+      "name": "classification-prep",
+      "start": "2026-09-30T23:32:17.911466+00:00",
+      "end": "2026-09-30T23:32:17.969280+00:00",
+      "exit": 1,
+      "stop_reason": null,
+      "remaining_pids": [],
+      "cmd": [
+        "node",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classify-independent.cjs"
+      ],
+      "peak_group_plus_runner_rss_bytes": 584556544,
+      "peak_storage_bytes": 233654,
+      "tracked_processes": [
+        {
+          "pid": 768931,
+          "start_ticks": 6402461,
+          "pgid": 768931,
+          "maxrss_bytes": 21139456,
+          "max_cpu_ticks": 0,
+          "max_threads": 2,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        }
+      ],
+      "tracked_cpu_seconds": 0.0,
+      "input_code_sha256": {
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/game.js": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/candidate-worker.js": "b5b86c08f49547ea018c2a126379c4506cfa6a3e685cf9de5849e71b0e5b325c",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/reference-worker.js": "6293a10027b7954bdbdbe02b85ad0da13708858bb7c296d49ac13c9a2513371d",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classify-independent.cjs": "21129383ad757b5d0ed398ab817d5dffe34cabac30ef0d1349916acd64744775",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/arena.cjs": "c02e3baa1a3cc8d5d1d64559b55ab254ec89dc0daeaeecd72c91cd7d46feff1a",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/revision3-integration.cjs": "a2374de89278c812ab6ca118b0272353d079f71bdb5f8bc7064e5825510af27f",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/candidate-host.js": "b40e7611b9f351783f7f838c05aa3c9b72aa9c7152d35ad7cececb5f7a3115d1",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/clock-ping.py": "e755e683c754650009de857f2945a6a6fe13514f289260d6ce598d9d9c2f7870",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/match-entry.cjs": "337468b3964ef8e8d73e35b85efd628db9cfb7afc1296077120bd88000144d26",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/game-loop.cjs": "342a4e8d0d74e46bb6d0939e9bc6cb7a502f8c5958f79c54a9789515989816c2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/runner.py": "4bd21b21f9ae456ec5d360e8bb03b0423b141e62e70370272a7da566dff164fc",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/transaction.cjs": "9d325e9e5083d771615300ce312c1d5f2e388acdf5340c4d2dc9e11a3e1656c4",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/inputs-before.json": "10ff9613ea412448e7dd911f67e53f97cfb8c07b7ebdb331373b0a9ee192190f",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/arena-page.js": "9f3ae3497523c5802c44e1802801878ef02e8a0c4d6776ae69fff77ca74452cd",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/judge.cjs": "a43bed42482ae21a3620449df37b08596bc9fabef31936b27d6c95254fdc7577",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/revision3-classify.cjs": "7eabedbe8f80c42bbc5d7cbb53e4c6ad57cd35e013f2285050f647190fa4caf1",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/entry-dry-test.cjs": "9ad69b748cffa615611501b554bce2baca08282ccb0864e41a0567125a4f0c65",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/context.js": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/prepare.cjs": "ffdd148a541493411b754ec51a4cefe7458931a5e455de7eee092475765d4636",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-tests.cjs": "30ccc0dc9693eac6b262a9431fef763d4d1352f6281c8a062eaa2ac37f03b5ac",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/numeric-check.cjs": "f6c6a94ca6b70170cda494f95fb1a098fb6480cf1f1f1f912d265058757790e2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/runner-revision3.py": "d707ec5afb1d734bde180d942b9e0a4744ec3f40708f665e7526628a4729fe97"
+      }
+    },
+    {
+      "name": "classification-corrected",
+      "start": "2026-09-30T23:33:07.117653+00:00",
+      "end": "2026-09-30T23:33:07.174808+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining_pids": [],
+      "cmd": [
+        "node",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classify-independent.cjs"
+      ],
+      "peak_group_plus_runner_rss_bytes": 584658944,
+      "peak_storage_bytes": 245208,
+      "tracked_processes": [
+        {
+          "pid": 769175,
+          "start_ticks": 6407383,
+          "pgid": 769175,
+          "maxrss_bytes": 21241856,
+          "max_cpu_ticks": 0,
+          "max_threads": 2,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        }
+      ],
+      "tracked_cpu_seconds": 0.0,
+      "input_code_sha256": {
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classification-prep.process.json": "9353b90a08f448d33ed44b9657a98e1da735c34a2f7efa6fa43c8e762b44015d",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/game.js": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/candidate-worker.js": "b5b86c08f49547ea018c2a126379c4506cfa6a3e685cf9de5849e71b0e5b325c",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/reference-worker.js": "6293a10027b7954bdbdbe02b85ad0da13708858bb7c296d49ac13c9a2513371d",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classify-independent.cjs": "6c253260d5596e068a6dcf4d43427a3242adf15e61ecb379224f8eddf5888c46",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-correction.json": "08d2901e68ba7579939136a5a4b1372e3bfc59830524adcd659e029a9215fac9",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/arena.cjs": "c02e3baa1a3cc8d5d1d64559b55ab254ec89dc0daeaeecd72c91cd7d46feff1a",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/revision3-integration.cjs": "a2374de89278c812ab6ca118b0272353d079f71bdb5f8bc7064e5825510af27f",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/candidate-host.js": "b40e7611b9f351783f7f838c05aa3c9b72aa9c7152d35ad7cececb5f7a3115d1",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/clock-ping.py": "e755e683c754650009de857f2945a6a6fe13514f289260d6ce598d9d9c2f7870",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/match-entry.cjs": "337468b3964ef8e8d73e35b85efd628db9cfb7afc1296077120bd88000144d26",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/game-loop.cjs": "342a4e8d0d74e46bb6d0939e9bc6cb7a502f8c5958f79c54a9789515989816c2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/runner.py": "4bd21b21f9ae456ec5d360e8bb03b0423b141e62e70370272a7da566dff164fc",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/transaction.cjs": "9d325e9e5083d771615300ce312c1d5f2e388acdf5340c4d2dc9e11a3e1656c4",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/inputs-before.json": "10ff9613ea412448e7dd911f67e53f97cfb8c07b7ebdb331373b0a9ee192190f",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/arena-page.js": "9f3ae3497523c5802c44e1802801878ef02e8a0c4d6776ae69fff77ca74452cd",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/judge.cjs": "a43bed42482ae21a3620449df37b08596bc9fabef31936b27d6c95254fdc7577",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/revision3-classify.cjs": "7eabedbe8f80c42bbc5d7cbb53e4c6ad57cd35e013f2285050f647190fa4caf1",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/entry-dry-test.cjs": "9ad69b748cffa615611501b554bce2baca08282ccb0864e41a0567125a4f0c65",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/context.js": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/prepare.cjs": "ffdd148a541493411b754ec51a4cefe7458931a5e455de7eee092475765d4636",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-tests.cjs": "30ccc0dc9693eac6b262a9431fef763d4d1352f6281c8a062eaa2ac37f03b5ac",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/numeric-check.cjs": "f6c6a94ca6b70170cda494f95fb1a098fb6480cf1f1f1f912d265058757790e2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/runner-revision3.py": "d707ec5afb1d734bde180d942b9e0a4744ec3f40708f665e7526628a4729fe97"
+      }
+    },
+    {
+      "name": "entry-final-mock",
+      "start": "2026-09-30T23:37:05.857829+00:00",
+      "end": "2026-09-30T23:37:05.916522+00:00",
+      "exit": 1,
+      "stop_reason": null,
+      "remaining_pids": [],
+      "cmd": [
+        "node",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/entry-independent.cjs"
+      ],
+      "peak_group_plus_runner_rss_bytes": 584593408,
+      "peak_storage_bytes": 948543,
+      "tracked_processes": [
+        {
+          "pid": 771332,
+          "start_ticks": 6431266,
+          "pgid": 771332,
+          "maxrss_bytes": 21176320,
+          "max_cpu_ticks": 0,
+          "max_threads": 2,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        }
+      ],
+      "tracked_cpu_seconds": 0.0,
+      "input_code_sha256": {
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classification-prep.process.json": "9353b90a08f448d33ed44b9657a98e1da735c34a2f7efa6fa43c8e762b44015d",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/empty-manifest.json": "eb974a7f5ec1b337afeb736d5f5f55eb466edf8c0efbe67fec328b9db844faf1",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classification-corrected.process.json": "1f672830d4b6f10b6fc18084e22bc0258fdd9a6296223f5829d98db5b3defcc9",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/game.js": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/candidate-worker.js": "b5b86c08f49547ea018c2a126379c4506cfa6a3e685cf9de5849e71b0e5b325c",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/reference-worker.js": "6293a10027b7954bdbdbe02b85ad0da13708858bb7c296d49ac13c9a2513371d",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classification-final.process.json": "37486aa935ab61b582c08e5076bb90e63133ad2a8a78ad2e9128a819d3faddd3",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classify-independent.cjs": "a91eafca40e5ae73ad1c266cecb091f111b3e25f981b2b8720ccc836358defc5",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-correction.json": "08d2901e68ba7579939136a5a4b1372e3bfc59830524adcd659e029a9215fac9",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/arena.cjs": "c02e3baa1a3cc8d5d1d64559b55ab254ec89dc0daeaeecd72c91cd7d46feff1a",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/revision3-integration.cjs": "a2374de89278c812ab6ca118b0272353d079f71bdb5f8bc7064e5825510af27f",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/candidate-host.js": "b40e7611b9f351783f7f838c05aa3c9b72aa9c7152d35ad7cececb5f7a3115d1",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/entry-independent.json": "cb9922623dab87aa9b00e6546d058cec4bbd3e42f8cec3198656f7d0b602e6c3",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/clock-ping.py": "e755e683c754650009de857f2945a6a6fe13514f289260d6ce598d9d9c2f7870",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/preregister-independent.py": "c0b0249738187639987f28d6d1394394f3a6185e9b20527ac908394dbc610164",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/match-entry.cjs": "2d0e9d759934cc411133d701a0eeabec2bedde5ddc2c035af23a36309480fbe7",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/game-loop.cjs": "342a4e8d0d74e46bb6d0939e9bc6cb7a502f8c5958f79c54a9789515989816c2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classification-final.json": "51ee2d641918fd30e08f2aff53535d270938804c2b6de0c3149b4ca10192c662",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/runner.py": "4bd21b21f9ae456ec5d360e8bb03b0423b141e62e70370272a7da566dff164fc",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/transaction.cjs": "9d325e9e5083d771615300ce312c1d5f2e388acdf5340c4d2dc9e11a3e1656c4",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/inputs-before.json": "10ff9613ea412448e7dd911f67e53f97cfb8c07b7ebdb331373b0a9ee192190f",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/preregister-static.process.json": "6040003943f8873494150daa4e9b023a2f970522a1598fd19d598930ca515960",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/arena-page.js": "9f3ae3497523c5802c44e1802801878ef02e8a0c4d6776ae69fff77ca74452cd",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/entry-independent.cjs": "ee7ed004b13aac897b1f0dcd451c5c4de62e09d64758ecb54b7e3a84262dfd71",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/judge.cjs": "a43bed42482ae21a3620449df37b08596bc9fabef31936b27d6c95254fdc7577",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/revision3-classify.cjs": "7eabedbe8f80c42bbc5d7cbb53e4c6ad57cd35e013f2285050f647190fa4caf1",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classification-independent.json": "ee0b8ffa4164d823ac40b7cb0eced3598d5e00502de0806347567f2c04f82e32",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/entry-dry-test.cjs": "9ad69b748cffa615611501b554bce2baca08282ccb0864e41a0567125a4f0c65",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/context.js": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/final-entry-integration.process.json": "97e86b25993095067b0bf35005bd0d960a7ee13773029e7e736086b0c074211c",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/prepare.cjs": "ffdd148a541493411b754ec51a4cefe7458931a5e455de7eee092475765d4636",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-tests.cjs": "30ccc0dc9693eac6b262a9431fef763d4d1352f6281c8a062eaa2ac37f03b5ac",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/entry-prep-mock.process.json": "18e402772d53cc8f7e8e9b1df0e72b4e8d7b258aa4bc05ef01ab9e81b8cf4822",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/numeric-check.cjs": "f6c6a94ca6b70170cda494f95fb1a098fb6480cf1f1f1f912d265058757790e2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/runner-revision3.py": "d707ec5afb1d734bde180d942b9e0a4744ec3f40708f665e7526628a4729fe97",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/final-integration.cjs": "d41295a81d07e569e15dd6d90e0723243d8e9d234913a32cacb67c1717cf4d69",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/preregister-independent.json": "833b61b2cfa83e8862bb30e1bdbe77ad5a8491ff66136f116ec3b62ae784c7f5",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-1.json": "a837bbbef98d025a482d016db94b86217145ce9d47ec6c39cbb1e109c0e09358",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-9.json": "eac25e33f156f1e069ef09d04d086a535b388cedabe6ffb63c2ce4cb5cd8cd8c",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-16.json": "6bc0095f78eeb5484dc2396ad51ada8361a966b38915da8fb84af306451790bf",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-2.json": "af893896f30a5e9ab029eb401617e8e6aef3cad18526502c4d4f816e2b9aa2d6",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/summary.json": "d53cd463bd1cf5ff06e3768aa2d9960002cb148e4bcfc6895661ab260ebac504",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-6.json": "2c741bf9163c091e9a80cbc2d5c20812decc5c2ebe85195b567949bfb5cd687d",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-13.json": "aba1f7c22334c1bef62147af8aa615d8bad6b5ae99d55427fcdca398e6f29d67",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-7.json": "852f6c6dd8c09fdeeeb66221252b76cc397b8e028e5735b4ddb04a77327324c1",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-3.json": "b6e5006a4288c0b959a3baa611aba951dcac90e03bbcae6e4a05f1e90de5b3e9",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-11.json": "ae323b44419b32fe71bc4906311099a19894b6878cfc2b938f56e082e72a2fca",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/results-table.json": "d84305fab720d1839adbe1418b549a87cacd8ed4c9d0ebac398a81ce6681d50d",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-10.json": "7b3ac4eeabc5fde361a68b8bcdee75556215804812b887dea48fe92b70e77095",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-12.json": "f7a8d1bdc1eab4dc1bce21f1cc046be47c203200b6553d26edf1ff6d7d454cea",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-4.json": "198945a1ca6623ca98b8e5fb8187e102c68f150f84419b7bfbffb39c4648cf79",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-5.json": "34a1d4da844e4443697c685d4a35ce6723e7081027eeff5081cfb9142aa34205",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-8.json": "b81dd5bfb1b6dd51845b9a045d8668ac43c616cdf1618b12fde65770b84c3a90",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-15.json": "88eb3b8aa7ea5463caef7596dee4dbe7349fe108733189c999360f505e24507e",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/checkpoint.json": "5d4d430312e5112f6175fcefe2d821f7a36663feec436222672cc5b801d5c024",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-14.json": "70f0c0d4e32454dc81974082a4fca0ecf59b7ab0e3ef3e41c70d99967148422d",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-expiry/summary.json": "e8a253cea6ab518c16de64ea8e4c467ce8869a21e357ea9a129f2f87edf0c99f",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-expiry/results-table.json": "7634d9b339c3ebb9d5065fafba6ee33895d4a35f4b6943f26438a1b9e49122fe",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-expiry/checkpoint.json": "9f25913534b91b7ee7d86969219c23d6f10b67e80ef02c503d827ae385dd9d5e",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-pause/summary.json": "0649954eb53a3858f9891981c475fdf415ff350a5f3384469dcef403379d519a",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-pause/results-table.json": "7634d9b339c3ebb9d5065fafba6ee33895d4a35f4b6943f26438a1b9e49122fe",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-pause/checkpoint.json": "c0ba0e8d5dc1e58f570bdbd0e3136ced89aec1567d20abd223e5d6f06b32a659"
+      }
+    },
+    {
+      "name": "classification-final",
+      "start": "2026-09-30T23:37:05.702983+00:00",
+      "end": "2026-09-30T23:37:05.761434+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining_pids": [],
+      "cmd": [
+        "node",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classify-independent.cjs"
+      ],
+      "peak_group_plus_runner_rss_bytes": 584658944,
+      "peak_storage_bytes": 882728,
+      "tracked_processes": [
+        {
+          "pid": 771323,
+          "start_ticks": 6431251,
+          "pgid": 771323,
+          "maxrss_bytes": 21241856,
+          "max_cpu_ticks": 0,
+          "max_threads": 2,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        }
+      ],
+      "tracked_cpu_seconds": 0.0,
+      "input_code_sha256": {
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classification-prep.process.json": "9353b90a08f448d33ed44b9657a98e1da735c34a2f7efa6fa43c8e762b44015d",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/empty-manifest.json": "eb974a7f5ec1b337afeb736d5f5f55eb466edf8c0efbe67fec328b9db844faf1",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classification-corrected.process.json": "1f672830d4b6f10b6fc18084e22bc0258fdd9a6296223f5829d98db5b3defcc9",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/game.js": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/candidate-worker.js": "b5b86c08f49547ea018c2a126379c4506cfa6a3e685cf9de5849e71b0e5b325c",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/reference-worker.js": "6293a10027b7954bdbdbe02b85ad0da13708858bb7c296d49ac13c9a2513371d",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classify-independent.cjs": "a91eafca40e5ae73ad1c266cecb091f111b3e25f981b2b8720ccc836358defc5",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-correction.json": "08d2901e68ba7579939136a5a4b1372e3bfc59830524adcd659e029a9215fac9",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/arena.cjs": "c02e3baa1a3cc8d5d1d64559b55ab254ec89dc0daeaeecd72c91cd7d46feff1a",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/revision3-integration.cjs": "a2374de89278c812ab6ca118b0272353d079f71bdb5f8bc7064e5825510af27f",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/candidate-host.js": "b40e7611b9f351783f7f838c05aa3c9b72aa9c7152d35ad7cececb5f7a3115d1",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/entry-independent.json": "cb9922623dab87aa9b00e6546d058cec4bbd3e42f8cec3198656f7d0b602e6c3",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/clock-ping.py": "e755e683c754650009de857f2945a6a6fe13514f289260d6ce598d9d9c2f7870",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/preregister-independent.py": "c0b0249738187639987f28d6d1394394f3a6185e9b20527ac908394dbc610164",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/match-entry.cjs": "2d0e9d759934cc411133d701a0eeabec2bedde5ddc2c035af23a36309480fbe7",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/game-loop.cjs": "342a4e8d0d74e46bb6d0939e9bc6cb7a502f8c5958f79c54a9789515989816c2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/runner.py": "4bd21b21f9ae456ec5d360e8bb03b0423b141e62e70370272a7da566dff164fc",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/transaction.cjs": "9d325e9e5083d771615300ce312c1d5f2e388acdf5340c4d2dc9e11a3e1656c4",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/inputs-before.json": "10ff9613ea412448e7dd911f67e53f97cfb8c07b7ebdb331373b0a9ee192190f",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/preregister-static.process.json": "6040003943f8873494150daa4e9b023a2f970522a1598fd19d598930ca515960",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/arena-page.js": "9f3ae3497523c5802c44e1802801878ef02e8a0c4d6776ae69fff77ca74452cd",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/entry-independent.cjs": "ee7ed004b13aac897b1f0dcd451c5c4de62e09d64758ecb54b7e3a84262dfd71",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/judge.cjs": "a43bed42482ae21a3620449df37b08596bc9fabef31936b27d6c95254fdc7577",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/revision3-classify.cjs": "7eabedbe8f80c42bbc5d7cbb53e4c6ad57cd35e013f2285050f647190fa4caf1",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classification-independent.json": "ee0b8ffa4164d823ac40b7cb0eced3598d5e00502de0806347567f2c04f82e32",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/entry-dry-test.cjs": "9ad69b748cffa615611501b554bce2baca08282ccb0864e41a0567125a4f0c65",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/context.js": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/final-entry-integration.process.json": "97e86b25993095067b0bf35005bd0d960a7ee13773029e7e736086b0c074211c",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/prepare.cjs": "ffdd148a541493411b754ec51a4cefe7458931a5e455de7eee092475765d4636",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-tests.cjs": "30ccc0dc9693eac6b262a9431fef763d4d1352f6281c8a062eaa2ac37f03b5ac",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/entry-prep-mock.process.json": "18e402772d53cc8f7e8e9b1df0e72b4e8d7b258aa4bc05ef01ab9e81b8cf4822",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/numeric-check.cjs": "f6c6a94ca6b70170cda494f95fb1a098fb6480cf1f1f1f912d265058757790e2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/runner-revision3.py": "d707ec5afb1d734bde180d942b9e0a4744ec3f40708f665e7526628a4729fe97",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/final-integration.cjs": "d41295a81d07e569e15dd6d90e0723243d8e9d234913a32cacb67c1717cf4d69",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/preregister-independent.json": "833b61b2cfa83e8862bb30e1bdbe77ad5a8491ff66136f116ec3b62ae784c7f5",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-1.json": "a837bbbef98d025a482d016db94b86217145ce9d47ec6c39cbb1e109c0e09358",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-9.json": "eac25e33f156f1e069ef09d04d086a535b388cedabe6ffb63c2ce4cb5cd8cd8c",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-16.json": "6bc0095f78eeb5484dc2396ad51ada8361a966b38915da8fb84af306451790bf",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-2.json": "af893896f30a5e9ab029eb401617e8e6aef3cad18526502c4d4f816e2b9aa2d6",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/summary.json": "d53cd463bd1cf5ff06e3768aa2d9960002cb148e4bcfc6895661ab260ebac504",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-6.json": "2c741bf9163c091e9a80cbc2d5c20812decc5c2ebe85195b567949bfb5cd687d",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-13.json": "aba1f7c22334c1bef62147af8aa615d8bad6b5ae99d55427fcdca398e6f29d67",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-7.json": "852f6c6dd8c09fdeeeb66221252b76cc397b8e028e5735b4ddb04a77327324c1",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-3.json": "b6e5006a4288c0b959a3baa611aba951dcac90e03bbcae6e4a05f1e90de5b3e9",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-11.json": "ae323b44419b32fe71bc4906311099a19894b6878cfc2b938f56e082e72a2fca",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/results-table.json": "d84305fab720d1839adbe1418b549a87cacd8ed4c9d0ebac398a81ce6681d50d",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-10.json": "7b3ac4eeabc5fde361a68b8bcdee75556215804812b887dea48fe92b70e77095",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-12.json": "f7a8d1bdc1eab4dc1bce21f1cc046be47c203200b6553d26edf1ff6d7d454cea",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-4.json": "198945a1ca6623ca98b8e5fb8187e102c68f150f84419b7bfbffb39c4648cf79",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-5.json": "34a1d4da844e4443697c685d4a35ce6723e7081027eeff5081cfb9142aa34205",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-8.json": "b81dd5bfb1b6dd51845b9a045d8668ac43c616cdf1618b12fde65770b84c3a90",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-15.json": "88eb3b8aa7ea5463caef7596dee4dbe7349fe108733189c999360f505e24507e",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/checkpoint.json": "5d4d430312e5112f6175fcefe2d821f7a36663feec436222672cc5b801d5c024",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-14.json": "70f0c0d4e32454dc81974082a4fca0ecf59b7ab0e3ef3e41c70d99967148422d",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-expiry/summary.json": "e8a253cea6ab518c16de64ea8e4c467ce8869a21e357ea9a129f2f87edf0c99f",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-expiry/results-table.json": "7634d9b339c3ebb9d5065fafba6ee33895d4a35f4b6943f26438a1b9e49122fe",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-expiry/checkpoint.json": "9f25913534b91b7ee7d86969219c23d6f10b67e80ef02c503d827ae385dd9d5e",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-pause/summary.json": "0649954eb53a3858f9891981c475fdf415ff350a5f3384469dcef403379d519a",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-pause/results-table.json": "7634d9b339c3ebb9d5065fafba6ee33895d4a35f4b6943f26438a1b9e49122fe",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-pause/checkpoint.json": "c0ba0e8d5dc1e58f570bdbd0e3136ced89aec1567d20abd223e5d6f06b32a659"
+      }
+    },
+    {
+      "name": "preregister-static",
+      "start": "2026-09-30T23:33:49.783776+00:00",
+      "end": "2026-09-30T23:33:49.845336+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining_pids": [],
+      "cmd": [
+        "python3",
+        "-B",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/preregister-independent.py"
+      ],
+      "peak_group_plus_runner_rss_bytes": 570687488,
+      "peak_storage_bytes": 306457,
+      "tracked_processes": [
+        {
+          "pid": 769857,
+          "start_ticks": 6411651,
+          "pgid": 769857,
+          "maxrss_bytes": 7270400,
+          "max_cpu_ticks": 0,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        }
+      ],
+      "tracked_cpu_seconds": 0.0,
+      "input_code_sha256": {
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classification-prep.process.json": "9353b90a08f448d33ed44b9657a98e1da735c34a2f7efa6fa43c8e762b44015d",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classification-corrected.process.json": "1f672830d4b6f10b6fc18084e22bc0258fdd9a6296223f5829d98db5b3defcc9",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/game.js": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/candidate-worker.js": "b5b86c08f49547ea018c2a126379c4506cfa6a3e685cf9de5849e71b0e5b325c",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/reference-worker.js": "6293a10027b7954bdbdbe02b85ad0da13708858bb7c296d49ac13c9a2513371d",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classify-independent.cjs": "6c253260d5596e068a6dcf4d43427a3242adf15e61ecb379224f8eddf5888c46",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-correction.json": "08d2901e68ba7579939136a5a4b1372e3bfc59830524adcd659e029a9215fac9",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/arena.cjs": "c02e3baa1a3cc8d5d1d64559b55ab254ec89dc0daeaeecd72c91cd7d46feff1a",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/revision3-integration.cjs": "a2374de89278c812ab6ca118b0272353d079f71bdb5f8bc7064e5825510af27f",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/candidate-host.js": "b40e7611b9f351783f7f838c05aa3c9b72aa9c7152d35ad7cececb5f7a3115d1",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/clock-ping.py": "e755e683c754650009de857f2945a6a6fe13514f289260d6ce598d9d9c2f7870",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/preregister-independent.py": "c0b0249738187639987f28d6d1394394f3a6185e9b20527ac908394dbc610164",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/match-entry.cjs": "337468b3964ef8e8d73e35b85efd628db9cfb7afc1296077120bd88000144d26",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/game-loop.cjs": "342a4e8d0d74e46bb6d0939e9bc6cb7a502f8c5958f79c54a9789515989816c2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/runner.py": "4bd21b21f9ae456ec5d360e8bb03b0423b141e62e70370272a7da566dff164fc",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/transaction.cjs": "9d325e9e5083d771615300ce312c1d5f2e388acdf5340c4d2dc9e11a3e1656c4",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/inputs-before.json": "10ff9613ea412448e7dd911f67e53f97cfb8c07b7ebdb331373b0a9ee192190f",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/arena-page.js": "9f3ae3497523c5802c44e1802801878ef02e8a0c4d6776ae69fff77ca74452cd",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/judge.cjs": "a43bed42482ae21a3620449df37b08596bc9fabef31936b27d6c95254fdc7577",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/revision3-classify.cjs": "7eabedbe8f80c42bbc5d7cbb53e4c6ad57cd35e013f2285050f647190fa4caf1",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classification-independent.json": "ee0b8ffa4164d823ac40b7cb0eced3598d5e00502de0806347567f2c04f82e32",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/entry-dry-test.cjs": "9ad69b748cffa615611501b554bce2baca08282ccb0864e41a0567125a4f0c65",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/context.js": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/prepare.cjs": "ffdd148a541493411b754ec51a4cefe7458931a5e455de7eee092475765d4636",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-tests.cjs": "30ccc0dc9693eac6b262a9431fef763d4d1352f6281c8a062eaa2ac37f03b5ac",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/numeric-check.cjs": "f6c6a94ca6b70170cda494f95fb1a098fb6480cf1f1f1f912d265058757790e2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/runner-revision3.py": "d707ec5afb1d734bde180d942b9e0a4744ec3f40708f665e7526628a4729fe97"
+      }
+    },
+    {
+      "name": "final-entry-integration",
+      "start": "2026-09-30T23:35:45.262595+00:00",
+      "end": "2026-09-30T23:35:58.216352+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining_pids": [],
+      "cmd": [
+        "node",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/final-integration.cjs"
+      ],
+      "peak_group_plus_runner_rss_bytes": 2061697024,
+      "peak_storage_bytes": 25397716,
+      "tracked_processes": [
+        {
+          "pid": 770758,
+          "start_ticks": 6423203,
+          "pgid": 770758,
+          "maxrss_bytes": 346619904,
+          "max_cpu_ticks": 117,
+          "max_threads": 11,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 770772,
+          "start_ticks": 6423256,
+          "pgid": 770758,
+          "maxrss_bytes": 9691136,
+          "max_cpu_ticks": 0,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 770774,
+          "start_ticks": 6423258,
+          "pgid": 770758,
+          "maxrss_bytes": 38117376,
+          "max_cpu_ticks": 45,
+          "max_threads": 2,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 770781,
+          "start_ticks": 6423267,
+          "pgid": 770781,
+          "maxrss_bytes": 330928128,
+          "max_cpu_ticks": 84,
+          "max_threads": 34,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 770790,
+          "start_ticks": 6423320,
+          "pgid": 770781,
+          "maxrss_bytes": 68653056,
+          "max_cpu_ticks": 1,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 770791,
+          "start_ticks": 6423321,
+          "pgid": 770781,
+          "maxrss_bytes": 68751360,
+          "max_cpu_ticks": 2,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 770816,
+          "start_ticks": 6423337,
+          "pgid": 770781,
+          "maxrss_bytes": 65613824,
+          "max_cpu_ticks": 2,
+          "max_threads": 8,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 770824,
+          "start_ticks": 6423338,
+          "pgid": 770781,
+          "maxrss_bytes": 115638272,
+          "max_cpu_ticks": 6,
+          "max_threads": 9,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 770836,
+          "start_ticks": 6423343,
+          "pgid": 770781,
+          "maxrss_bytes": 49385472,
+          "max_cpu_ticks": 0,
+          "max_threads": 8,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 770856,
+          "start_ticks": 6423364,
+          "pgid": 770781,
+          "maxrss_bytes": 136486912,
+          "max_cpu_ticks": 17,
+          "max_threads": 12,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 770863,
+          "start_ticks": 6423369,
+          "pgid": 770781,
+          "maxrss_bytes": 463478784,
+          "max_cpu_ticks": 282,
+          "max_threads": 15,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 770902,
+          "start_ticks": 6423880,
+          "pgid": 770758,
+          "maxrss_bytes": 9662464,
+          "max_cpu_ticks": 0,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 770903,
+          "start_ticks": 6423882,
+          "pgid": 770758,
+          "maxrss_bytes": 49577984,
+          "max_cpu_ticks": 43,
+          "max_threads": 2,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 770905,
+          "start_ticks": 6423890,
+          "pgid": 770905,
+          "maxrss_bytes": 312463360,
+          "max_cpu_ticks": 88,
+          "max_threads": 34,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 770913,
+          "start_ticks": 6423936,
+          "pgid": 770905,
+          "maxrss_bytes": 68829184,
+          "max_cpu_ticks": 1,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 770914,
+          "start_ticks": 6423937,
+          "pgid": 770905,
+          "maxrss_bytes": 69050368,
+          "max_cpu_ticks": 2,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 770939,
+          "start_ticks": 6423958,
+          "pgid": 770905,
+          "maxrss_bytes": 65810432,
+          "max_cpu_ticks": 2,
+          "max_threads": 8,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 770948,
+          "start_ticks": 6423961,
+          "pgid": 770905,
+          "maxrss_bytes": 116539392,
+          "max_cpu_ticks": 7,
+          "max_threads": 9,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 770957,
+          "start_ticks": 6423972,
+          "pgid": 770905,
+          "maxrss_bytes": 49971200,
+          "max_cpu_ticks": 0,
+          "max_threads": 8,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 770978,
+          "start_ticks": 6424001,
+          "pgid": 770905,
+          "maxrss_bytes": 137043968,
+          "max_cpu_ticks": 18,
+          "max_threads": 12,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 770985,
+          "start_ticks": 6424005,
+          "pgid": 770905,
+          "maxrss_bytes": 465170432,
+          "max_cpu_ticks": 282,
+          "max_threads": 14,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        }
+      ],
+      "tracked_cpu_seconds": 9.99,
+      "input_code_sha256": {
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classification-prep.process.json": "9353b90a08f448d33ed44b9657a98e1da735c34a2f7efa6fa43c8e762b44015d",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/empty-manifest.json": "eb974a7f5ec1b337afeb736d5f5f55eb466edf8c0efbe67fec328b9db844faf1",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classification-corrected.process.json": "1f672830d4b6f10b6fc18084e22bc0258fdd9a6296223f5829d98db5b3defcc9",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/game.js": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/candidate-worker.js": "b5b86c08f49547ea018c2a126379c4506cfa6a3e685cf9de5849e71b0e5b325c",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/reference-worker.js": "6293a10027b7954bdbdbe02b85ad0da13708858bb7c296d49ac13c9a2513371d",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classify-independent.cjs": "6c253260d5596e068a6dcf4d43427a3242adf15e61ecb379224f8eddf5888c46",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-correction.json": "08d2901e68ba7579939136a5a4b1372e3bfc59830524adcd659e029a9215fac9",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/arena.cjs": "c02e3baa1a3cc8d5d1d64559b55ab254ec89dc0daeaeecd72c91cd7d46feff1a",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/revision3-integration.cjs": "a2374de89278c812ab6ca118b0272353d079f71bdb5f8bc7064e5825510af27f",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/candidate-host.js": "b40e7611b9f351783f7f838c05aa3c9b72aa9c7152d35ad7cececb5f7a3115d1",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/entry-independent.json": "cb9922623dab87aa9b00e6546d058cec4bbd3e42f8cec3198656f7d0b602e6c3",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/clock-ping.py": "e755e683c754650009de857f2945a6a6fe13514f289260d6ce598d9d9c2f7870",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/preregister-independent.py": "c0b0249738187639987f28d6d1394394f3a6185e9b20527ac908394dbc610164",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/match-entry.cjs": "2d0e9d759934cc411133d701a0eeabec2bedde5ddc2c035af23a36309480fbe7",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/game-loop.cjs": "342a4e8d0d74e46bb6d0939e9bc6cb7a502f8c5958f79c54a9789515989816c2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/runner.py": "4bd21b21f9ae456ec5d360e8bb03b0423b141e62e70370272a7da566dff164fc",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/transaction.cjs": "9d325e9e5083d771615300ce312c1d5f2e388acdf5340c4d2dc9e11a3e1656c4",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/inputs-before.json": "10ff9613ea412448e7dd911f67e53f97cfb8c07b7ebdb331373b0a9ee192190f",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/preregister-static.process.json": "6040003943f8873494150daa4e9b023a2f970522a1598fd19d598930ca515960",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/arena-page.js": "9f3ae3497523c5802c44e1802801878ef02e8a0c4d6776ae69fff77ca74452cd",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/entry-independent.cjs": "38e6b27a6040e9bfcc00c8418dcf685bcd9b21a3223500646b62093d1a162b29",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/judge.cjs": "a43bed42482ae21a3620449df37b08596bc9fabef31936b27d6c95254fdc7577",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/revision3-classify.cjs": "7eabedbe8f80c42bbc5d7cbb53e4c6ad57cd35e013f2285050f647190fa4caf1",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classification-independent.json": "ee0b8ffa4164d823ac40b7cb0eced3598d5e00502de0806347567f2c04f82e32",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/entry-dry-test.cjs": "9ad69b748cffa615611501b554bce2baca08282ccb0864e41a0567125a4f0c65",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/context.js": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/prepare.cjs": "ffdd148a541493411b754ec51a4cefe7458931a5e455de7eee092475765d4636",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-tests.cjs": "30ccc0dc9693eac6b262a9431fef763d4d1352f6281c8a062eaa2ac37f03b5ac",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/entry-prep-mock.process.json": "18e402772d53cc8f7e8e9b1df0e72b4e8d7b258aa4bc05ef01ab9e81b8cf4822",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/numeric-check.cjs": "f6c6a94ca6b70170cda494f95fb1a098fb6480cf1f1f1f912d265058757790e2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/runner-revision3.py": "d707ec5afb1d734bde180d942b9e0a4744ec3f40708f665e7526628a4729fe97",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/final-integration.cjs": "d41295a81d07e569e15dd6d90e0723243d8e9d234913a32cacb67c1717cf4d69",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/preregister-independent.json": "833b61b2cfa83e8862bb30e1bdbe77ad5a8491ff66136f116ec3b62ae784c7f5",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-1.json": "a837bbbef98d025a482d016db94b86217145ce9d47ec6c39cbb1e109c0e09358",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-9.json": "eac25e33f156f1e069ef09d04d086a535b388cedabe6ffb63c2ce4cb5cd8cd8c",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-16.json": "6bc0095f78eeb5484dc2396ad51ada8361a966b38915da8fb84af306451790bf",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-2.json": "af893896f30a5e9ab029eb401617e8e6aef3cad18526502c4d4f816e2b9aa2d6",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/summary.json": "d53cd463bd1cf5ff06e3768aa2d9960002cb148e4bcfc6895661ab260ebac504",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-6.json": "2c741bf9163c091e9a80cbc2d5c20812decc5c2ebe85195b567949bfb5cd687d",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-13.json": "aba1f7c22334c1bef62147af8aa615d8bad6b5ae99d55427fcdca398e6f29d67",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-7.json": "852f6c6dd8c09fdeeeb66221252b76cc397b8e028e5735b4ddb04a77327324c1",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-3.json": "b6e5006a4288c0b959a3baa611aba951dcac90e03bbcae6e4a05f1e90de5b3e9",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-11.json": "ae323b44419b32fe71bc4906311099a19894b6878cfc2b938f56e082e72a2fca",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/results-table.json": "d84305fab720d1839adbe1418b549a87cacd8ed4c9d0ebac398a81ce6681d50d",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-10.json": "7b3ac4eeabc5fde361a68b8bcdee75556215804812b887dea48fe92b70e77095",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-12.json": "f7a8d1bdc1eab4dc1bce21f1cc046be47c203200b6553d26edf1ff6d7d454cea",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-4.json": "198945a1ca6623ca98b8e5fb8187e102c68f150f84419b7bfbffb39c4648cf79",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-5.json": "34a1d4da844e4443697c685d4a35ce6723e7081027eeff5081cfb9142aa34205",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-8.json": "b81dd5bfb1b6dd51845b9a045d8668ac43c616cdf1618b12fde65770b84c3a90",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-15.json": "88eb3b8aa7ea5463caef7596dee4dbe7349fe108733189c999360f505e24507e",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/checkpoint.json": "5d4d430312e5112f6175fcefe2d821f7a36663feec436222672cc5b801d5c024",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-14.json": "70f0c0d4e32454dc81974082a4fca0ecf59b7ab0e3ef3e41c70d99967148422d",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-expiry/summary.json": "e8a253cea6ab518c16de64ea8e4c467ce8869a21e357ea9a129f2f87edf0c99f",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-expiry/results-table.json": "7634d9b339c3ebb9d5065fafba6ee33895d4a35f4b6943f26438a1b9e49122fe",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-expiry/checkpoint.json": "9f25913534b91b7ee7d86969219c23d6f10b67e80ef02c503d827ae385dd9d5e",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-pause/summary.json": "0649954eb53a3858f9891981c475fdf415ff350a5f3384469dcef403379d519a",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-pause/results-table.json": "7634d9b339c3ebb9d5065fafba6ee33895d4a35f4b6943f26438a1b9e49122fe",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-pause/checkpoint.json": "c0ba0e8d5dc1e58f570bdbd0e3136ced89aec1567d20abd223e5d6f06b32a659"
+      }
+    },
+    {
+      "name": "entry-prep-mock",
+      "start": "2026-09-30T23:34:43.629900+00:00",
+      "end": "2026-09-30T23:34:43.688194+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining_pids": [],
+      "cmd": [
+        "node",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/entry-independent.cjs"
+      ],
+      "peak_group_plus_runner_rss_bytes": 584630272,
+      "peak_storage_bytes": 321980,
+      "tracked_processes": [
+        {
+          "pid": 770275,
+          "start_ticks": 6417037,
+          "pgid": 770275,
+          "maxrss_bytes": 21213184,
+          "max_cpu_ticks": 0,
+          "max_threads": 2,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        }
+      ],
+      "tracked_cpu_seconds": 0.0,
+      "input_code_sha256": {
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classification-prep.process.json": "9353b90a08f448d33ed44b9657a98e1da735c34a2f7efa6fa43c8e762b44015d",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classification-corrected.process.json": "1f672830d4b6f10b6fc18084e22bc0258fdd9a6296223f5829d98db5b3defcc9",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/game.js": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/candidate-worker.js": "b5b86c08f49547ea018c2a126379c4506cfa6a3e685cf9de5849e71b0e5b325c",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/reference-worker.js": "6293a10027b7954bdbdbe02b85ad0da13708858bb7c296d49ac13c9a2513371d",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classify-independent.cjs": "6c253260d5596e068a6dcf4d43427a3242adf15e61ecb379224f8eddf5888c46",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-correction.json": "08d2901e68ba7579939136a5a4b1372e3bfc59830524adcd659e029a9215fac9",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/arena.cjs": "c02e3baa1a3cc8d5d1d64559b55ab254ec89dc0daeaeecd72c91cd7d46feff1a",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/revision3-integration.cjs": "a2374de89278c812ab6ca118b0272353d079f71bdb5f8bc7064e5825510af27f",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/candidate-host.js": "b40e7611b9f351783f7f838c05aa3c9b72aa9c7152d35ad7cececb5f7a3115d1",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/clock-ping.py": "e755e683c754650009de857f2945a6a6fe13514f289260d6ce598d9d9c2f7870",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/preregister-independent.py": "c0b0249738187639987f28d6d1394394f3a6185e9b20527ac908394dbc610164",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/match-entry.cjs": "337468b3964ef8e8d73e35b85efd628db9cfb7afc1296077120bd88000144d26",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/game-loop.cjs": "342a4e8d0d74e46bb6d0939e9bc6cb7a502f8c5958f79c54a9789515989816c2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/runner.py": "4bd21b21f9ae456ec5d360e8bb03b0423b141e62e70370272a7da566dff164fc",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/transaction.cjs": "9d325e9e5083d771615300ce312c1d5f2e388acdf5340c4d2dc9e11a3e1656c4",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/inputs-before.json": "10ff9613ea412448e7dd911f67e53f97cfb8c07b7ebdb331373b0a9ee192190f",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/preregister-static.process.json": "6040003943f8873494150daa4e9b023a2f970522a1598fd19d598930ca515960",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/arena-page.js": "9f3ae3497523c5802c44e1802801878ef02e8a0c4d6776ae69fff77ca74452cd",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/entry-independent.cjs": "38e6b27a6040e9bfcc00c8418dcf685bcd9b21a3223500646b62093d1a162b29",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/judge.cjs": "a43bed42482ae21a3620449df37b08596bc9fabef31936b27d6c95254fdc7577",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/revision3-classify.cjs": "7eabedbe8f80c42bbc5d7cbb53e4c6ad57cd35e013f2285050f647190fa4caf1",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classification-independent.json": "ee0b8ffa4164d823ac40b7cb0eced3598d5e00502de0806347567f2c04f82e32",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/entry-dry-test.cjs": "9ad69b748cffa615611501b554bce2baca08282ccb0864e41a0567125a4f0c65",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/context.js": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/prepare.cjs": "ffdd148a541493411b754ec51a4cefe7458931a5e455de7eee092475765d4636",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-tests.cjs": "30ccc0dc9693eac6b262a9431fef763d4d1352f6281c8a062eaa2ac37f03b5ac",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/numeric-check.cjs": "f6c6a94ca6b70170cda494f95fb1a098fb6480cf1f1f1f912d265058757790e2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/runner-revision3.py": "d707ec5afb1d734bde180d942b9e0a4744ec3f40708f665e7526628a4729fe97",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/preregister-independent.json": "833b61b2cfa83e8862bb30e1bdbe77ad5a8491ff66136f116ec3b62ae784c7f5"
+      }
+    },
+    {
+      "name": "entry-final-mock-corrected",
+      "start": "2026-09-30T23:37:54.900382+00:00",
+      "end": "2026-09-30T23:37:54.960999+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining_pids": [],
+      "cmd": [
+        "node",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/entry-independent.cjs"
+      ],
+      "peak_group_plus_runner_rss_bytes": 584781824,
+      "peak_storage_bytes": 1096998,
+      "tracked_processes": [
+        {
+          "pid": 771556,
+          "start_ticks": 6436172,
+          "pgid": 771556,
+          "maxrss_bytes": 21364736,
+          "max_cpu_ticks": 0,
+          "max_threads": 6,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        }
+      ],
+      "tracked_cpu_seconds": 0.0,
+      "input_code_sha256": {
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classification-prep.process.json": "9353b90a08f448d33ed44b9657a98e1da735c34a2f7efa6fa43c8e762b44015d",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/empty-manifest.json": "eb974a7f5ec1b337afeb736d5f5f55eb466edf8c0efbe67fec328b9db844faf1",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classification-corrected.process.json": "1f672830d4b6f10b6fc18084e22bc0258fdd9a6296223f5829d98db5b3defcc9",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/entry-final-mock.process.json": "0ed9a3f3061c62d04c8a3e1aa039b91d4338dc739b8e9b5203f1d9d07976434a",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/game.js": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/candidate-worker.js": "b5b86c08f49547ea018c2a126379c4506cfa6a3e685cf9de5849e71b0e5b325c",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/reference-worker.js": "6293a10027b7954bdbdbe02b85ad0da13708858bb7c296d49ac13c9a2513371d",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classification-final.process.json": "37486aa935ab61b582c08e5076bb90e63133ad2a8a78ad2e9128a819d3faddd3",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classify-independent.cjs": "a91eafca40e5ae73ad1c266cecb091f111b3e25f981b2b8720ccc836358defc5",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-correction.json": "08d2901e68ba7579939136a5a4b1372e3bfc59830524adcd659e029a9215fac9",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/arena.cjs": "c02e3baa1a3cc8d5d1d64559b55ab254ec89dc0daeaeecd72c91cd7d46feff1a",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/revision3-integration.cjs": "a2374de89278c812ab6ca118b0272353d079f71bdb5f8bc7064e5825510af27f",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/token-check-correction.json": "39f1cd04eb29c46ccb89137a52341cf1191535f1a9794541be4d7d5e6a9aa707",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/candidate-host.js": "b40e7611b9f351783f7f838c05aa3c9b72aa9c7152d35ad7cececb5f7a3115d1",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/entry-independent.json": "cb9922623dab87aa9b00e6546d058cec4bbd3e42f8cec3198656f7d0b602e6c3",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/clock-ping.py": "e755e683c754650009de857f2945a6a6fe13514f289260d6ce598d9d9c2f7870",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/preregister-independent.py": "c0b0249738187639987f28d6d1394394f3a6185e9b20527ac908394dbc610164",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/match-entry.cjs": "2d0e9d759934cc411133d701a0eeabec2bedde5ddc2c035af23a36309480fbe7",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/game-loop.cjs": "342a4e8d0d74e46bb6d0939e9bc6cb7a502f8c5958f79c54a9789515989816c2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classification-final.json": "51ee2d641918fd30e08f2aff53535d270938804c2b6de0c3149b4ca10192c662",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/runner.py": "4bd21b21f9ae456ec5d360e8bb03b0423b141e62e70370272a7da566dff164fc",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/transaction.cjs": "9d325e9e5083d771615300ce312c1d5f2e388acdf5340c4d2dc9e11a3e1656c4",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/inputs-before.json": "10ff9613ea412448e7dd911f67e53f97cfb8c07b7ebdb331373b0a9ee192190f",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/preregister-static.process.json": "6040003943f8873494150daa4e9b023a2f970522a1598fd19d598930ca515960",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/arena-page.js": "9f3ae3497523c5802c44e1802801878ef02e8a0c4d6776ae69fff77ca74452cd",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/entry-independent.cjs": "7b259bdc7f10e6b11f6b399038ca467204a62f903f19acdce07f58c51028589e",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/judge.cjs": "a43bed42482ae21a3620449df37b08596bc9fabef31936b27d6c95254fdc7577",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/revision3-classify.cjs": "7eabedbe8f80c42bbc5d7cbb53e4c6ad57cd35e013f2285050f647190fa4caf1",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/classification-independent.json": "ee0b8ffa4164d823ac40b7cb0eced3598d5e00502de0806347567f2c04f82e32",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/entry-dry-test.cjs": "9ad69b748cffa615611501b554bce2baca08282ccb0864e41a0567125a4f0c65",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/context.js": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/final-entry-integration.process.json": "97e86b25993095067b0bf35005bd0d960a7ee13773029e7e736086b0c074211c",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/prepare.cjs": "ffdd148a541493411b754ec51a4cefe7458931a5e455de7eee092475765d4636",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-tests.cjs": "30ccc0dc9693eac6b262a9431fef763d4d1352f6281c8a062eaa2ac37f03b5ac",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/entry-prep-mock.process.json": "18e402772d53cc8f7e8e9b1df0e72b4e8d7b258aa4bc05ef01ab9e81b8cf4822",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/numeric-check.cjs": "f6c6a94ca6b70170cda494f95fb1a098fb6480cf1f1f1f912d265058757790e2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/runner-revision3.py": "d707ec5afb1d734bde180d942b9e0a4744ec3f40708f665e7526628a4729fe97",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/final-integration.cjs": "d41295a81d07e569e15dd6d90e0723243d8e9d234913a32cacb67c1717cf4d69",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/preregister-independent.json": "833b61b2cfa83e8862bb30e1bdbe77ad5a8491ff66136f116ec3b62ae784c7f5",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-1.json": "a837bbbef98d025a482d016db94b86217145ce9d47ec6c39cbb1e109c0e09358",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-9.json": "eac25e33f156f1e069ef09d04d086a535b388cedabe6ffb63c2ce4cb5cd8cd8c",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-16.json": "6bc0095f78eeb5484dc2396ad51ada8361a966b38915da8fb84af306451790bf",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-2.json": "af893896f30a5e9ab029eb401617e8e6aef3cad18526502c4d4f816e2b9aa2d6",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/summary.json": "d53cd463bd1cf5ff06e3768aa2d9960002cb148e4bcfc6895661ab260ebac504",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-6.json": "2c741bf9163c091e9a80cbc2d5c20812decc5c2ebe85195b567949bfb5cd687d",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-13.json": "aba1f7c22334c1bef62147af8aa615d8bad6b5ae99d55427fcdca398e6f29d67",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-7.json": "852f6c6dd8c09fdeeeb66221252b76cc397b8e028e5735b4ddb04a77327324c1",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-3.json": "b6e5006a4288c0b959a3baa611aba951dcac90e03bbcae6e4a05f1e90de5b3e9",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-11.json": "ae323b44419b32fe71bc4906311099a19894b6878cfc2b938f56e082e72a2fca",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/results-table.json": "d84305fab720d1839adbe1418b549a87cacd8ed4c9d0ebac398a81ce6681d50d",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-10.json": "7b3ac4eeabc5fde361a68b8bcdee75556215804812b887dea48fe92b70e77095",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-12.json": "f7a8d1bdc1eab4dc1bce21f1cc046be47c203200b6553d26edf1ff6d7d454cea",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-4.json": "198945a1ca6623ca98b8e5fb8187e102c68f150f84419b7bfbffb39c4648cf79",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-5.json": "34a1d4da844e4443697c685d4a35ce6723e7081027eeff5081cfb9142aa34205",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-8.json": "b81dd5bfb1b6dd51845b9a045d8668ac43c616cdf1618b12fde65770b84c3a90",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-15.json": "88eb3b8aa7ea5463caef7596dee4dbe7349fe108733189c999360f505e24507e",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/checkpoint.json": "5d4d430312e5112f6175fcefe2d821f7a36663feec436222672cc5b801d5c024",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-complete/pair-14.json": "70f0c0d4e32454dc81974082a4fca0ecf59b7ab0e3ef3e41c70d99967148422d",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-expiry/summary.json": "e8a253cea6ab518c16de64ea8e4c467ce8869a21e357ea9a129f2f87edf0c99f",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-expiry/results-table.json": "7634d9b339c3ebb9d5065fafba6ee33895d4a35f4b6943f26438a1b9e49122fe",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-expiry/checkpoint.json": "9f25913534b91b7ee7d86969219c23d6f10b67e80ef02c503d827ae385dd9d5e",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-final-expiry/summary.json": "e8a253cea6ab518c16de64ea8e4c467ce8869a21e357ea9a129f2f87edf0c99f",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-final-expiry/results-table.json": "7634d9b339c3ebb9d5065fafba6ee33895d4a35f4b6943f26438a1b9e49122fe",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-final-expiry/checkpoint.json": "9f25913534b91b7ee7d86969219c23d6f10b67e80ef02c503d827ae385dd9d5e",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-pause/summary.json": "0649954eb53a3858f9891981c475fdf415ff350a5f3384469dcef403379d519a",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-pause/results-table.json": "7634d9b339c3ebb9d5065fafba6ee33895d4a35f4b6943f26438a1b9e49122fe",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-pause/checkpoint.json": "c0ba0e8d5dc1e58f570bdbd0e3136ced89aec1567d20abd223e5d6f06b32a659",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-final-pause/summary.json": "0649954eb53a3858f9891981c475fdf415ff350a5f3384469dcef403379d519a",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-final-pause/results-table.json": "7634d9b339c3ebb9d5065fafba6ee33895d4a35f4b6943f26438a1b9e49122fe",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-final-pause/checkpoint.json": "acbb8e711fd4d660911bc8c7e335ff963658bb15be94683d6e615ea81385a2a7",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-final-complete/pair-1.json": "a837bbbef98d025a482d016db94b86217145ce9d47ec6c39cbb1e109c0e09358",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-final-complete/pair-9.json": "eac25e33f156f1e069ef09d04d086a535b388cedabe6ffb63c2ce4cb5cd8cd8c",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-final-complete/pair-16.json": "6bc0095f78eeb5484dc2396ad51ada8361a966b38915da8fb84af306451790bf",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-final-complete/pair-2.json": "af893896f30a5e9ab029eb401617e8e6aef3cad18526502c4d4f816e2b9aa2d6",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-final-complete/summary.json": "d53cd463bd1cf5ff06e3768aa2d9960002cb148e4bcfc6895661ab260ebac504",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-final-complete/pair-6.json": "2c741bf9163c091e9a80cbc2d5c20812decc5c2ebe85195b567949bfb5cd687d",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-final-complete/pair-13.json": "aba1f7c22334c1bef62147af8aa615d8bad6b5ae99d55427fcdca398e6f29d67",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-final-complete/pair-7.json": "852f6c6dd8c09fdeeeb66221252b76cc397b8e028e5735b4ddb04a77327324c1",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-final-complete/pair-3.json": "b6e5006a4288c0b959a3baa611aba951dcac90e03bbcae6e4a05f1e90de5b3e9",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-final-complete/pair-11.json": "ae323b44419b32fe71bc4906311099a19894b6878cfc2b938f56e082e72a2fca",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-final-complete/results-table.json": "d84305fab720d1839adbe1418b549a87cacd8ed4c9d0ebac398a81ce6681d50d",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-final-complete/pair-10.json": "7b3ac4eeabc5fde361a68b8bcdee75556215804812b887dea48fe92b70e77095",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-final-complete/pair-12.json": "f7a8d1bdc1eab4dc1bce21f1cc046be47c203200b6553d26edf1ff6d7d454cea",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-final-complete/pair-4.json": "198945a1ca6623ca98b8e5fb8187e102c68f150f84419b7bfbffb39c4648cf79",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-final-complete/pair-5.json": "34a1d4da844e4443697c685d4a35ce6723e7081027eeff5081cfb9142aa34205",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-final-complete/pair-8.json": "b81dd5bfb1b6dd51845b9a045d8668ac43c616cdf1618b12fde65770b84c3a90",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-final-complete/pair-15.json": "88eb3b8aa7ea5463caef7596dee4dbe7349fe108733189c999360f505e24507e",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-final-complete/checkpoint.json": "fba81a08eba24aafd00527a8617a59994540a775be05c3a0a7b5daa6f58226ab",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY/stage/mock-final-complete/pair-14.json": "70f0c0d4e32454dc81974082a4fca0ecf59b7ab0e3ef3e41c70d99967148422d"
+      }
+    }
+  ],
+  "resources": {
+    "current_storage_bytes": 1274744,
+    "max_observed_RSS_bytes": 2061697024,
+    "max_storage_peak_bytes": 25397716,
+    "all_observed_thread_CPU2": true,
+    "sampling_ms": 50,
+    "momentary_peak_and_external_load_not_proved": true,
+    "GPU": 0,
+    "download": 0,
+    "build": 0,
+    "matches": 0,
+    "holdout_engine_sends": 0,
+    "other_kills": 0
+  },
+  "failures_kept": [
+    "initial mock reference error incorrectly included Action3; corrected producer-faithful envelope",
+    "token test expected old error but final fixed manifest guard correctly ran first; independently asserted both guards after correction"
+  ],
+  "unverified": [
+    "full official 32game execution",
+    "T500/g91 tail safety",
+    "T500 delay optional run",
+    "atomic checkpoint crash/disk-error recovery",
+    "all wrong token permutations and existing-directory CLI execution",
+    "pause delivery while synchronous NN",
+    "all build fingerprint chain",
+    "deep NN overlay/arena",
+    "true legal200/no-legal",
+    "rawview/entropy/training overlap"
+  ],
+  "limits_preserved": [
+    ".20 processing deadline excess46.580233seconds+",
+    ".22 old warm late504.224ms/new restart reserve abort/aux path reuse/.numeric checker errors",
+    "old role RSS/affinity/TMP failures not erased"
+  ]
+}

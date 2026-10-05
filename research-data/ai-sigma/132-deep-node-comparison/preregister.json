@@ -1,0 +1,108 @@
+{
+  "config_SHA256": "c8fb1552d5a3ce3aea94af7c7c7b3746a89523a86c769230a07b77d514ed1b90",
+  "raw_prefix_SHA256": "8a401d08512761b19c30169e93048899bd911b83d4fe1c07458a2f8262f1f6ef",
+  "input_order": [
+    "diverse-prefix-mid-pair1-color1-new8",
+    "diverse-prefix-mid-pair1-color1-new16",
+    "diverse-prefix-mid-pair2-color2-new8",
+    "diverse-prefix-mid-pair2-color2-new16"
+  ],
+  "parity_searches": [
+    {
+      "phase": "parity",
+      "fixture_id": "diverse-prefix-mid-pair1-color1-new8",
+      "engine": "candidate",
+      "instrumented": false,
+      "K": 8
+    },
+    {
+      "phase": "parity",
+      "fixture_id": "diverse-prefix-mid-pair1-color1-new8",
+      "engine": "candidate",
+      "instrumented": true,
+      "K": 8
+    },
+    {
+      "phase": "parity",
+      "fixture_id": "diverse-prefix-mid-pair1-color1-new8",
+      "engine": "reference",
+      "instrumented": false,
+      "K": 8
+    },
+    {
+      "phase": "parity",
+      "fixture_id": "diverse-prefix-mid-pair1-color1-new8",
+      "engine": "reference",
+      "instrumented": true,
+      "K": 8
+    }
+  ],
+  "primary_searches": [
+    {
+      "phase": "primary",
+      "fixture_id": "diverse-prefix-mid-pair1-color1-new8",
+      "engine": "candidate",
+      "instrumented": true,
+      "K": 32
+    },
+    {
+      "phase": "primary",
+      "fixture_id": "diverse-prefix-mid-pair1-color1-new8",
+      "engine": "reference",
+      "instrumented": true,
+      "K": 32
+    },
+    {
+      "phase": "primary",
+      "fixture_id": "diverse-prefix-mid-pair1-color1-new16",
+      "engine": "reference",
+      "instrumented": true,
+      "K": 32
+    },
+    {
+      "phase": "primary",
+      "fixture_id": "diverse-prefix-mid-pair1-color1-new16",
+      "engine": "candidate",
+      "instrumented": true,
+      "K": 32
+    },
+    {
+      "phase": "primary",
+      "fixture_id": "diverse-prefix-mid-pair2-color2-new8",
+      "engine": "candidate",
+      "instrumented": true,
+      "K": 32
+    },
+    {
+      "phase": "primary",
+      "fixture_id": "diverse-prefix-mid-pair2-color2-new8",
+      "engine": "reference",
+      "instrumented": true,
+      "K": 32
+    },
+    {
+      "phase": "primary",
+      "fixture_id": "diverse-prefix-mid-pair2-color2-new16",
+      "engine": "reference",
+      "instrumented": true,
+      "K": 32
+    },
+    {
+      "phase": "primary",
+      "fixture_id": "diverse-prefix-mid-pair2-color2-new16",
+      "engine": "candidate",
+      "instrumented": true,
+      "K": 32
+    }
+  ],
+  "trace_cap": 8,
+  "selection": "root + first seven unique nonroot nodes to complete evaluation or terminal backup; no result-dependent replacement",
+  "same_input_exact_history_features_required": true,
+  "numeric_threshold": "abs1e-4 + rtol1e-4",
+  "whole_wrapper_not_kernelCPU": true,
+  "source_Git": "edbf29ac29208616a8d20b859db497acb30f0f42",
+  "source_baseline_binary_bytes_match": true,
+  "independent_source_reproof": false,
+  "games": 0,
+  "P2_rollout": 0
+}

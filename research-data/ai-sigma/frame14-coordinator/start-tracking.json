@@ -1,0 +1,123 @@
+{
+  "UTC": "2026-10-04T00:17:31.264485+00:00",
+  "experiment194": {
+    "receipt": "2026-10-03T23:30:25Z",
+    "claim_static": "2026-10-03T23:30:54Z",
+    "science_started": true,
+    "first_job_start": "2026-10-03T23:37:08.314431Z",
+    "first_job_stop": "2026-10-03T23:39:09.439625Z",
+    "first24_GOAL": 24,
+    "first_raw_rows": 1217,
+    "first_Rjoint_qualified": 1217,
+    "jobwall_seconds": 122.708701,
+    "provider_physical_NN": 68292,
+    "old_guard_parent_RSS_display_limit": "runtime path match omitted scheduler/monitor and displayed0; known point services158MiB+RAM6GiB within parent8; allperiod parent bound not certified",
+    "future_guard_fix": "include runtime RSS/nested test process allocated and exp1980MiB",
+    "first72_GOAL": 72,
+    "first72_joint": 3560,
+    "first72_jobwall": 346.50677023804747,
+    "remaining_train_games": 0,
+    "max96_mask_pending": false,
+    "jobs_scientifically_ended": 6,
+    "train02_start": "2026-10-03T23:45:30.673251Z",
+    "train02_stop": "2026-10-03T23:47:25.678162Z",
+    "train02_jobwall_s": 116.627886,
+    "remaining_unadmitted_train_games": 0,
+    "next_window": "after natural supervisor23:51:55 finish and current admission",
+    "manifest_observed_all144_GOAL": true,
+    "producer_stop_handoff_pending": false,
+    "all144_rows": {
+      "train": 4653,
+      "validation": 1248,
+      "test": 1095
+    },
+    "all6_jobwall_s": 691.35614519706,
+    "science_last_stop": "2026-10-04T00:01:42.075112Z",
+    "current_owned_science_identity_absent_owner_report": true,
+    "Rpolicy": 6996,
+    "Rz": 6996,
+    "Rjoint": 6996,
+    "handNN": 397012,
+    "startup": 0,
+    "final_dataset_interface_handoff": true,
+    "source_runtime_stopped": true,
+    "pack_backup_pending": true
+  },
+  "hypothesis195": {
+    "receipt": "2026-10-03T23:30:36Z",
+    "claim_static": true,
+    "science_started": true,
+    "model_forward_started": true,
+    "source_manager_three_split_prepared": true,
+    "software_mock_pending_GPU_quiet": true,
+    "test_labels_read": false,
+    "six_fake_checks_pass": true,
+    "fake_NN0_stop": "2026-10-03T23:48:49.884Z",
+    "mock_wall_s": 0.052313891,
+    "actual_model_forward": "started; successful count pending",
+    "interface_v2_handoff_verified": true,
+    "quantity_LAST_contrast_prepared": true,
+    "shared_v2_unchanged_reported": true,
+    "first_learning_child_UTC": "2026-10-04T00:14:08.640926+00:00",
+    "first_learning_run": "train24-r1",
+    "first_learning_identity": {
+      "pid": 3802905,
+      "tick": "32580881",
+      "affinity": [
+        2
+      ]
+    },
+    "scientific_success_pending": true,
+    "first_learning_success": true,
+    "first_learning_stop": "2026-10-04T00:14:14.078232+00:00",
+    "first_learning_wall_s": 5.437653899018187,
+    "first_learning_peak_RSS_B": 857710592,
+    "train24_steps": 2000,
+    "train24_best_step": 0,
+    "train24_best_val_game_rootmean_MSE": 0.690175573860047,
+    "train24_samples_charged": 307765,
+    "second_learning_start": "2026-10-04T00:14:44.556125+00:00",
+    "second_learning_identity": {
+      "pid": 3803940,
+      "tick": "32584473",
+      "affinity": [
+        2
+      ]
+    },
+    "learning_effect": "not supported on fixed validation; test still pending",
+    "three_stages_success": true,
+    "all_samples": 1019139,
+    "all_training_samples_per_stage": 256000,
+    "all_steps_per_stage": 2000,
+    "all_beststep0": true,
+    "science_three_children_stopped_owner_report": true
+  },
+  "critic196": {
+    "receipt": "2026-10-03T23:30:38Z",
+    "claim_static": true,
+    "science_NN": 0
+  },
+  "steward92": {
+    "frame14_runtime_start": "2026-10-03T23:31:58.393729Z",
+    "running_loaded_24hash": true,
+    "future_allperiod_success": false
+  },
+  "root_first_report_delivery": {
+    "method": "turn/steer",
+    "thread_id": "01a0f2e9-357d-7ef3-a2fe-b16f80accda5",
+    "turn_id": "01a10411-8d3a-7f23-888c-50872adfbf62",
+    "accepted": true,
+    "UTC": "2026-10-03T23:33:02.328132+00:00",
+    "states_before": {
+      "root": "active"
+    }
+  },
+  "waiting": [
+    "195 fixed curves, candidate and LAST contrast freeze then one test evaluation",
+    "196 final label-free mask and later curve/freeze/test finite verdict",
+    "194 minimal pack/Git restoration/backup final handoff",
+    "92 natural supervision and deadline recovery"
+  ],
+  "new_roles": 0,
+  "owner_close_goal": false
+}

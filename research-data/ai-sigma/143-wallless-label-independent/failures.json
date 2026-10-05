@@ -1,0 +1,34 @@
+{
+  "attempts": [
+    {
+      "run": "p143-label-r1",
+      "type": "wrapper admission not connected before Node spawn; entry failed ENOENT and blocked Chrome",
+      "Node_spawn": 1,
+      "Chrome_spawn": 0,
+      "solver_started": 0,
+      "scientific_negative": false,
+      "source_Git": "e70a71b",
+      "repair": "runner now calls own admit and launch_if_allowed before child Popen"
+    },
+    {
+      "run": "p143-label-r2",
+      "exit": 0,
+      "source_actual_Git": "885eb8e",
+      "env_Git_label": "candidate-r2",
+      "env_label_is_not_a_Git_ID": true,
+      "actual_source_verified_by_full_launchhash_to_Git_blob": true,
+      "solver_started_completed": 2,
+      "scientific_success_repetition": 0
+    }
+  ],
+  "metadata_corrections": [
+    {
+      "scope": "self final closure identity denominator",
+      "original_outer_static_count": 43,
+      "add_inner_only_short_children": 3,
+      "new_count": 46,
+      "original_heavy_end_unchanged": true,
+      "scientific_rerun": 0
+    }
+  ]
+}

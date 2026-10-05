@@ -1,0 +1,10 @@
+{
+  "r1": {
+    "error": "history list order equality assertion; both counts maps equal after sorting",
+    "old_expression": "a['trace'][0]['history']==b['trace'][0]['history']",
+    "correct_expression": "sorted(a['trace'][0]['history'])==sorted(b['trace'][0]['history'])",
+    "failed_source_SHA_record": "saved136-r1.started.json",
+    "meaning": "checker assumption, not history/NN mismatch",
+    "initial_schema_read": "132 browser has deep_results not rows; KeyError retained as read failure"
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "received_utc": "2026-10-03T00:27:48.859040+00:00",
+  "process_deadline": "2026-10-03T00:52:48.859040+00:00",
+  "report_deadline": "2026-10-03T01:02:48.859040+00:00",
+  "issues": {
+    "quoridor-4lc": {
+      "id": "quoridor-4lc",
+      "status": "in_progress",
+      "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ]
+    },
+    "quoridor-4lc.92": {
+      "id": "quoridor-4lc.92",
+      "status": "open",
+      "assignee": "codex:01a0f31d-99ee-7d63-b162-bc1a59c457c6",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ]
+    }
+  },
+  "ready_ids": [
+    "quoridor-4lc.92",
+    "quoridor-4lc.147",
+    "quoridor-4lc.148",
+    "quoridor-4lc.149"
+  ],
+  "parent_sha256": "25f7eabd32bf67b07c511c8f3cae57ee18047b78a4be485266331854a5751238",
+  "contract_git": "40243b25804f8e929a6af5680c02a2b70bef39d1",
+  "commands": [
+    {
+      "args": [
+        "ready",
+        "--json"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "show",
+        "quoridor-4lc",
+        "--json"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "show",
+        "quoridor-4lc.92",
+        "--json"
+      ],
+      "exit": 0,
+      "stderr": ""
+    },
+    {
+      "args": [
+        "update",
+        "quoridor-4lc.92",
+        "--status",
+        "in_progress",
+        "--notes",
+        "\u67a010\u5951\u7d047\u53d7\u9818/\u672c\u4eba\u62c5\u5f53\u78ba\u8a8d\u30fb\u73fe\u5728scope\u958b\u59cb 2026-10-03T00:27:48.859040+00:00\u3002\u89aamain/mirror SHA25f7eabd\u4e00\u81f4\u3001pause\u306a\u3057\u3002\u51e6\u74062026-10-03T00:52:48.859040+00:00/\u63d0\u51fa2026-10-03T01:02:48.859040+00:00\u65e9\u5074\u300204:05:21 heavy\u901a\u77e5/04:10:21\u76e3\u7763\u505c\u6b62/04:13:21monitor\u56de\u53ce/04:15:21\u4fdd\u5b58\u309292\u6240\u6709\u3002\u65e7frame9\u6709\u9650\u53d7\u5165\u308c\u3092\u4fdd\u6301\u3001\u65e7\u4e0d\u8db3/\u6210\u7e3e/\u671f\u9650\u5909\u66f40\u3002"
+      ],
+      "exit": 0,
+      "stderr": "warning: quoridor-4lc.92: --notes replaced existing notes (use --append-notes to preserve history)\n"
+    }
+  ]
+}

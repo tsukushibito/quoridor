@@ -1,0 +1,1446 @@
+{
+  "issue": "quoridor-4lc.14",
+  "experiment": "SIGMA-CONTEXT-CRITIC",
+  "independent": {
+    "cases": [
+      {
+        "id": "initial-p1",
+        "classification": "legal-replay",
+        "nodes": 32,
+        "terminal_nodes": 0,
+        "evaluations": 32,
+        "linked_edges": 31,
+        "root_count": 1,
+        "strict_native_wasm": true,
+        "reference_root_transition_and_path_history": true,
+        "spy_backup_mass_signs": true
+      },
+      {
+        "id": "initial-p2",
+        "classification": "legal-replay",
+        "nodes": 32,
+        "terminal_nodes": 0,
+        "evaluations": 32,
+        "linked_edges": 31,
+        "root_count": 1,
+        "strict_native_wasm": true,
+        "reference_root_transition_and_path_history": true,
+        "spy_backup_mass_signs": true
+      },
+      {
+        "id": "asym-h-p2",
+        "classification": "legal-replay",
+        "nodes": 32,
+        "terminal_nodes": 0,
+        "evaluations": 32,
+        "linked_edges": 31,
+        "root_count": 1,
+        "strict_native_wasm": true,
+        "reference_root_transition_and_path_history": true,
+        "spy_backup_mass_signs": true
+      },
+      {
+        "id": "asym-hv-p1",
+        "classification": "legal-replay",
+        "nodes": 32,
+        "terminal_nodes": 0,
+        "evaluations": 32,
+        "linked_edges": 31,
+        "root_count": 1,
+        "strict_native_wasm": true,
+        "reference_root_transition_and_path_history": true,
+        "spy_backup_mass_signs": true
+      },
+      {
+        "id": "asym-hv-p2",
+        "classification": "legal-replay",
+        "nodes": 32,
+        "terminal_nodes": 0,
+        "evaluations": 32,
+        "linked_edges": 31,
+        "root_count": 1,
+        "strict_native_wasm": true,
+        "reference_root_transition_and_path_history": true,
+        "spy_backup_mass_signs": true
+      },
+      {
+        "id": "straight-jump-p2",
+        "classification": "legal-replay",
+        "nodes": 32,
+        "terminal_nodes": 0,
+        "evaluations": 32,
+        "linked_edges": 31,
+        "root_count": 1,
+        "strict_native_wasm": true,
+        "reference_root_transition_and_path_history": true,
+        "spy_backup_mass_signs": true
+      },
+      {
+        "id": "behind-wall-diagonal-p2",
+        "classification": "legal-replay",
+        "nodes": 32,
+        "terminal_nodes": 0,
+        "evaluations": 32,
+        "linked_edges": 31,
+        "root_count": 1,
+        "strict_native_wasm": true,
+        "reference_root_transition_and_path_history": true,
+        "spy_backup_mass_signs": true
+      },
+      {
+        "id": "adjacent-wall-blocked",
+        "classification": "legal-replay",
+        "nodes": 32,
+        "terminal_nodes": 0,
+        "evaluations": 32,
+        "linked_edges": 31,
+        "root_count": 1,
+        "strict_native_wasm": true,
+        "reference_root_transition_and_path_history": true,
+        "spy_backup_mass_signs": true
+      },
+      {
+        "id": "board-edge-diagonal-p2",
+        "classification": "legal-replay",
+        "nodes": 29,
+        "terminal_nodes": 1,
+        "evaluations": 28,
+        "linked_edges": 28,
+        "root_count": 1,
+        "strict_native_wasm": true,
+        "reference_root_transition_and_path_history": true,
+        "spy_backup_mass_signs": true
+      },
+      {
+        "id": "repeat-before-first-return",
+        "classification": "legal-replay",
+        "nodes": 32,
+        "terminal_nodes": 0,
+        "evaluations": 32,
+        "linked_edges": 31,
+        "root_count": 1,
+        "strict_native_wasm": true,
+        "reference_root_transition_and_path_history": true,
+        "spy_backup_mass_signs": true
+      },
+      {
+        "id": "repeat-initial-count2",
+        "classification": "legal-replay",
+        "nodes": 32,
+        "terminal_nodes": 0,
+        "evaluations": 32,
+        "linked_edges": 31,
+        "root_count": 2,
+        "strict_native_wasm": true,
+        "reference_root_transition_and_path_history": true,
+        "spy_backup_mass_signs": true
+      },
+      {
+        "id": "repeat-before-third-return",
+        "classification": "legal-replay",
+        "nodes": 32,
+        "terminal_nodes": 0,
+        "evaluations": 32,
+        "linked_edges": 31,
+        "root_count": 2,
+        "strict_native_wasm": true,
+        "reference_root_transition_and_path_history": true,
+        "spy_backup_mass_signs": true
+      },
+      {
+        "id": "simulation-overlay-count2",
+        "classification": "synthetic-history-context",
+        "nodes": 32,
+        "terminal_nodes": 0,
+        "evaluations": 32,
+        "linked_edges": 31,
+        "root_count": 1,
+        "strict_native_wasm": true,
+        "reference_root_transition_and_path_history": true,
+        "spy_backup_mass_signs": true
+      },
+      {
+        "id": "sibling-a-after-cycle",
+        "classification": "legal-replay",
+        "nodes": 32,
+        "terminal_nodes": 0,
+        "evaluations": 32,
+        "linked_edges": 31,
+        "root_count": 2,
+        "strict_native_wasm": true,
+        "reference_root_transition_and_path_history": true,
+        "spy_backup_mass_signs": true
+      },
+      {
+        "id": "sibling-b-after-cycle",
+        "classification": "legal-replay",
+        "nodes": 32,
+        "terminal_nodes": 0,
+        "evaluations": 32,
+        "linked_edges": 31,
+        "root_count": 1,
+        "strict_native_wasm": true,
+        "reference_root_transition_and_path_history": true,
+        "spy_backup_mass_signs": true
+      },
+      {
+        "id": "sibling-root-restored",
+        "classification": "legal-replay",
+        "nodes": 32,
+        "terminal_nodes": 0,
+        "evaluations": 32,
+        "linked_edges": 31,
+        "root_count": 2,
+        "strict_native_wasm": true,
+        "reference_root_transition_and_path_history": true,
+        "spy_backup_mass_signs": true
+      },
+      {
+        "id": "synthetic-root-double-count",
+        "classification": "synthetic-history-context",
+        "nodes": 32,
+        "terminal_nodes": 0,
+        "evaluations": 32,
+        "linked_edges": 31,
+        "root_count": 1,
+        "strict_native_wasm": true,
+        "reference_root_transition_and_path_history": true,
+        "spy_backup_mass_signs": true
+      },
+      {
+        "id": "reachability-closure-forbidden",
+        "classification": "legal-replay",
+        "nodes": 32,
+        "terminal_nodes": 0,
+        "evaluations": 32,
+        "linked_edges": 31,
+        "root_count": 1,
+        "strict_native_wasm": true,
+        "reference_root_transition_and_path_history": true,
+        "spy_backup_mass_signs": true
+      },
+      {
+        "id": "all-walls-spent",
+        "classification": "legal-replay",
+        "nodes": 32,
+        "terminal_nodes": 0,
+        "evaluations": 32,
+        "linked_edges": 31,
+        "root_count": 1,
+        "strict_native_wasm": true,
+        "reference_root_transition_and_path_history": true,
+        "spy_backup_mass_signs": true
+      },
+      {
+        "id": "one-wall-in-hand",
+        "classification": "legal-replay",
+        "nodes": 32,
+        "terminal_nodes": 0,
+        "evaluations": 32,
+        "linked_edges": 31,
+        "root_count": 1,
+        "strict_native_wasm": true,
+        "reference_root_transition_and_path_history": true,
+        "spy_backup_mass_signs": true
+      },
+      {
+        "id": "synthetic-no-legal-move-draw",
+        "classification": "synthetic-history-context",
+        "nodes": 1,
+        "terminal_nodes": 1,
+        "evaluations": 0,
+        "linked_edges": 0,
+        "root_count": 1,
+        "strict_native_wasm": true,
+        "reference_root_transition_and_path_history": true,
+        "spy_backup_mass_signs": true
+      },
+      {
+        "id": "synthetic-total-ply-198",
+        "classification": "synthetic-total-ply-context",
+        "nodes": 32,
+        "terminal_nodes": 0,
+        "evaluations": 32,
+        "linked_edges": 31,
+        "root_count": 2,
+        "strict_native_wasm": true,
+        "reference_root_transition_and_path_history": true,
+        "spy_backup_mass_signs": true
+      },
+      {
+        "id": "synthetic-total-ply-199",
+        "classification": "synthetic-total-ply-context",
+        "nodes": 32,
+        "terminal_nodes": 31,
+        "evaluations": 1,
+        "linked_edges": 31,
+        "root_count": 0,
+        "strict_native_wasm": true,
+        "reference_root_transition_and_path_history": true,
+        "spy_backup_mass_signs": true
+      },
+      {
+        "id": "synthetic-total-ply-200",
+        "classification": "synthetic-total-ply-context",
+        "nodes": 1,
+        "terminal_nodes": 1,
+        "evaluations": 0,
+        "linked_edges": 0,
+        "root_count": 2,
+        "strict_native_wasm": true,
+        "reference_root_transition_and_path_history": true,
+        "spy_backup_mass_signs": true
+      },
+      {
+        "id": "goal-before-last-step",
+        "classification": "legal-replay",
+        "nodes": 32,
+        "terminal_nodes": 0,
+        "evaluations": 32,
+        "linked_edges": 31,
+        "root_count": 1,
+        "strict_native_wasm": true,
+        "reference_root_transition_and_path_history": true,
+        "spy_backup_mass_signs": true
+      },
+      {
+        "id": "synthetic-ply198-before-goal",
+        "classification": "synthetic-total-ply-context",
+        "nodes": 32,
+        "terminal_nodes": 0,
+        "evaluations": 32,
+        "linked_edges": 31,
+        "root_count": 1,
+        "strict_native_wasm": true,
+        "reference_root_transition_and_path_history": true,
+        "spy_backup_mass_signs": true
+      },
+      {
+        "id": "goal-win-legal-replay",
+        "classification": "legal-replay",
+        "nodes": 1,
+        "terminal_nodes": 1,
+        "evaluations": 0,
+        "linked_edges": 0,
+        "root_count": 1,
+        "strict_native_wasm": true,
+        "reference_root_transition_and_path_history": true,
+        "spy_backup_mass_signs": true
+      },
+      {
+        "id": "synthetic-goal-at200",
+        "classification": "synthetic-total-ply-context",
+        "nodes": 1,
+        "terminal_nodes": 1,
+        "evaluations": 0,
+        "linked_edges": 0,
+        "root_count": 1,
+        "strict_native_wasm": true,
+        "reference_root_transition_and_path_history": true,
+        "spy_backup_mass_signs": true
+      }
+    ],
+    "nodes": 769,
+    "terminal_nodes": 36,
+    "transitions": 3187,
+    "features": 18144,
+    "linked_edges": 741,
+    "terminal_roots": 4,
+    "reference_source_sha256": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+    "completed_utc": "2026-09-30T21:04:36.184Z",
+    "pid": 702788
+  },
+  "normal": {
+    "cases": [
+      {
+        "case": "initial",
+        "action": 13,
+        "stats": {
+          "simulations": 192,
+          "nodes": 192,
+          "edges": 24670,
+          "arena_bytes": 819750,
+          "high_water_bytes": 819750,
+          "max_depth_reached": 5,
+          "policy_fallbacks": 0,
+          "value_fallbacks": 0,
+          "budget_exhausted": false
+        },
+        "all_three_variants_and_originals_equal": true
+      },
+      {
+        "case": "opening",
+        "action": 23,
+        "stats": {
+          "simulations": 192,
+          "nodes": 192,
+          "edges": 24130,
+          "arena_bytes": 802470,
+          "high_water_bytes": 802470,
+          "max_depth_reached": 7,
+          "policy_fallbacks": 0,
+          "value_fallbacks": 0,
+          "budget_exhausted": false
+        },
+        "all_three_variants_and_originals_equal": true
+      },
+      {
+        "case": "walled-midgame",
+        "action": 83,
+        "stats": {
+          "simulations": 192,
+          "nodes": 192,
+          "edges": 20725,
+          "arena_bytes": 693510,
+          "high_water_bytes": 693510,
+          "max_depth_reached": 5,
+          "policy_fallbacks": 0,
+          "value_fallbacks": 0,
+          "budget_exhausted": false
+        },
+        "all_three_variants_and_originals_equal": true
+      },
+      {
+        "case": "p2",
+        "action": 67,
+        "stats": {
+          "simulations": 192,
+          "nodes": 192,
+          "edges": 24652,
+          "arena_bytes": 819174,
+          "high_water_bytes": 819174,
+          "max_depth_reached": 4,
+          "policy_fallbacks": 0,
+          "value_fallbacks": 0,
+          "budget_exhausted": false
+        },
+        "all_three_variants_and_originals_equal": true
+      },
+      {
+        "case": "jump-p2",
+        "action": 31,
+        "stats": {
+          "simulations": 192,
+          "nodes": 192,
+          "edges": 24690,
+          "arena_bytes": 820390,
+          "high_water_bytes": 820390,
+          "max_depth_reached": 5,
+          "policy_fallbacks": 0,
+          "value_fallbacks": 0,
+          "budget_exhausted": false
+        },
+        "all_three_variants_and_originals_equal": true
+      },
+      {
+        "case": "many-walls",
+        "action": 5,
+        "stats": {
+          "simulations": 192,
+          "nodes": 192,
+          "edges": 14775,
+          "arena_bytes": 503110,
+          "high_water_bytes": 503110,
+          "max_depth_reached": 5,
+          "policy_fallbacks": 0,
+          "value_fallbacks": 0,
+          "budget_exhausted": false
+        },
+        "all_three_variants_and_originals_equal": true
+      }
+    ],
+    "jobs": [
+      {
+        "case": "initial",
+        "variant": "baseline",
+        "pid": 702984,
+        "exit": 0,
+        "command": [
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-FIXED-QUEUE/baseline-native",
+          "initial",
+          "off",
+          "3"
+        ],
+        "sha256": "7ab2253c8f9556b2ff7f8feb187457277b01e3f4521d594c6a6e0486fa7d0166"
+      },
+      {
+        "case": "initial",
+        "variant": "off",
+        "pid": 702986,
+        "exit": 0,
+        "command": [
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-RULE-FEATURE-PARITY/standard-off-native",
+          "initial",
+          "off",
+          "3"
+        ],
+        "sha256": "87b7c17b7a70f482496918d3f5a7b21de5ad76a9b62200cafeee3d5b51045bf4"
+      },
+      {
+        "case": "initial",
+        "variant": "research-normal",
+        "pid": 702987,
+        "exit": 0,
+        "command": [
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-RULE-FEATURE-PARITY/standard-research-native",
+          "initial",
+          "off",
+          "3"
+        ],
+        "sha256": "6c9a3f36d336d427433d814b2c332befa026da5b651a427d1244a343d47dc1d6"
+      },
+      {
+        "case": "opening",
+        "variant": "baseline",
+        "pid": 702988,
+        "exit": 0,
+        "command": [
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-FIXED-QUEUE/baseline-native",
+          "opening",
+          "off",
+          "3"
+        ],
+        "sha256": "7ab2253c8f9556b2ff7f8feb187457277b01e3f4521d594c6a6e0486fa7d0166"
+      },
+      {
+        "case": "opening",
+        "variant": "off",
+        "pid": 702989,
+        "exit": 0,
+        "command": [
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-RULE-FEATURE-PARITY/standard-off-native",
+          "opening",
+          "off",
+          "3"
+        ],
+        "sha256": "87b7c17b7a70f482496918d3f5a7b21de5ad76a9b62200cafeee3d5b51045bf4"
+      },
+      {
+        "case": "opening",
+        "variant": "research-normal",
+        "pid": 702990,
+        "exit": 0,
+        "command": [
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-RULE-FEATURE-PARITY/standard-research-native",
+          "opening",
+          "off",
+          "3"
+        ],
+        "sha256": "6c9a3f36d336d427433d814b2c332befa026da5b651a427d1244a343d47dc1d6"
+      },
+      {
+        "case": "walled-midgame",
+        "variant": "baseline",
+        "pid": 702991,
+        "exit": 0,
+        "command": [
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-FIXED-QUEUE/baseline-native",
+          "walled-midgame",
+          "off",
+          "3"
+        ],
+        "sha256": "7ab2253c8f9556b2ff7f8feb187457277b01e3f4521d594c6a6e0486fa7d0166"
+      },
+      {
+        "case": "walled-midgame",
+        "variant": "off",
+        "pid": 702993,
+        "exit": 0,
+        "command": [
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-RULE-FEATURE-PARITY/standard-off-native",
+          "walled-midgame",
+          "off",
+          "3"
+        ],
+        "sha256": "87b7c17b7a70f482496918d3f5a7b21de5ad76a9b62200cafeee3d5b51045bf4"
+      },
+      {
+        "case": "walled-midgame",
+        "variant": "research-normal",
+        "pid": 702994,
+        "exit": 0,
+        "command": [
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-RULE-FEATURE-PARITY/standard-research-native",
+          "walled-midgame",
+          "off",
+          "3"
+        ],
+        "sha256": "6c9a3f36d336d427433d814b2c332befa026da5b651a427d1244a343d47dc1d6"
+      },
+      {
+        "case": "p2",
+        "variant": "baseline",
+        "pid": 702995,
+        "exit": 0,
+        "command": [
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-FIXED-QUEUE/baseline-native",
+          "p2",
+          "off",
+          "3"
+        ],
+        "sha256": "7ab2253c8f9556b2ff7f8feb187457277b01e3f4521d594c6a6e0486fa7d0166"
+      },
+      {
+        "case": "p2",
+        "variant": "off",
+        "pid": 702996,
+        "exit": 0,
+        "command": [
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-RULE-FEATURE-PARITY/standard-off-native",
+          "p2",
+          "off",
+          "3"
+        ],
+        "sha256": "87b7c17b7a70f482496918d3f5a7b21de5ad76a9b62200cafeee3d5b51045bf4"
+      },
+      {
+        "case": "p2",
+        "variant": "research-normal",
+        "pid": 702997,
+        "exit": 0,
+        "command": [
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-RULE-FEATURE-PARITY/standard-research-native",
+          "p2",
+          "off",
+          "3"
+        ],
+        "sha256": "6c9a3f36d336d427433d814b2c332befa026da5b651a427d1244a343d47dc1d6"
+      },
+      {
+        "case": "jump-p2",
+        "variant": "baseline",
+        "pid": 702998,
+        "exit": 0,
+        "command": [
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-FIXED-QUEUE/baseline-native",
+          "jump-p2",
+          "off",
+          "3"
+        ],
+        "sha256": "7ab2253c8f9556b2ff7f8feb187457277b01e3f4521d594c6a6e0486fa7d0166"
+      },
+      {
+        "case": "jump-p2",
+        "variant": "off",
+        "pid": 702999,
+        "exit": 0,
+        "command": [
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-RULE-FEATURE-PARITY/standard-off-native",
+          "jump-p2",
+          "off",
+          "3"
+        ],
+        "sha256": "87b7c17b7a70f482496918d3f5a7b21de5ad76a9b62200cafeee3d5b51045bf4"
+      },
+      {
+        "case": "jump-p2",
+        "variant": "research-normal",
+        "pid": 703000,
+        "exit": 0,
+        "command": [
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-RULE-FEATURE-PARITY/standard-research-native",
+          "jump-p2",
+          "off",
+          "3"
+        ],
+        "sha256": "6c9a3f36d336d427433d814b2c332befa026da5b651a427d1244a343d47dc1d6"
+      },
+      {
+        "case": "many-walls",
+        "variant": "baseline",
+        "pid": 703001,
+        "exit": 0,
+        "command": [
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-FIXED-QUEUE/baseline-native",
+          "many-walls",
+          "off",
+          "3"
+        ],
+        "sha256": "7ab2253c8f9556b2ff7f8feb187457277b01e3f4521d594c6a6e0486fa7d0166"
+      },
+      {
+        "case": "many-walls",
+        "variant": "off",
+        "pid": 703002,
+        "exit": 0,
+        "command": [
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-RULE-FEATURE-PARITY/standard-off-native",
+          "many-walls",
+          "off",
+          "3"
+        ],
+        "sha256": "87b7c17b7a70f482496918d3f5a7b21de5ad76a9b62200cafeee3d5b51045bf4"
+      },
+      {
+        "case": "many-walls",
+        "variant": "research-normal",
+        "pid": 703003,
+        "exit": 0,
+        "command": [
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-RULE-FEATURE-PARITY/standard-research-native",
+          "many-walls",
+          "off",
+          "3"
+        ],
+        "sha256": "6c9a3f36d336d427433d814b2c332befa026da5b651a427d1244a343d47dc1d6"
+      }
+    ],
+    "binary_hashes": {
+      "baseline": "7ab2253c8f9556b2ff7f8feb187457277b01e3f4521d594c6a6e0486fa7d0166",
+      "off": "87b7c17b7a70f482496918d3f5a7b21de5ad76a9b62200cafeee3d5b51045bf4",
+      "research-normal": "6c9a3f36d336d427433d814b2c332befa026da5b651a427d1244a343d47dc1d6"
+    },
+    "speed_claim": false
+  },
+  "test_binary": {
+    "binary": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/build/native/debug/deps/quoridor_ai-7e34bb245ccf403d",
+    "sha256": "a7ecca222b124d43ce1eec4eb185df478a634b518b6fae33afae53a48f2b5c60",
+    "original_log": "core-ai-all-feature-tests2.log",
+    "scope": "4 research unit tests in original logged binary; no new build; exact final source attribution not reconstructed from Cargo fingerprint"
+  },
+  "four_saved_tests_exit": 0,
+  "runtime_jobs": [
+    {
+      "name": "native",
+      "runner_pid": 701045,
+      "pid": 701046,
+      "pgid": 701046,
+      "start": "2026-09-30T20:59:42.540064+00:00",
+      "cmd": [
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-RULE-FEATURE-PARITY/native-research-parity-final",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-RULE-FEATURE-PARITY/reference-input/fixtures.json"
+      ],
+      "affinity": [
+        2
+      ],
+      "baseline_bytes": 102638,
+      "deadline": 1790802651.0,
+      "temporary_alias": "/proc/701045/cwd/t",
+      "temporary_alias_resolved": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-CONTEXT/t",
+      "job_end": 1790802102.5394566,
+      "end": "2026-09-30T21:00:11.331838+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "peak_group_plus_runner_rss_bytes": 102043648,
+      "peak_storage_bytes": 4297622,
+      "final_storage_bytes": 4657073,
+      "remaining_pids": [],
+      "log_sha256": "20fc252f2ff57408ce9b1254727de05a3cbb570140c7062c811918fa880cd322",
+      "children_usage": {
+        "user_s": 27.206707,
+        "system_s": 0.041417999999999996,
+        "maxrss_kib": 83592
+      },
+      "tracked_processes": [
+        {
+          "pid": 701046,
+          "start_ticks": 5486567,
+          "pgid": 701046,
+          "maxrss_bytes": 85598208,
+          "max_cpu_ticks": 2723,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        }
+      ],
+      "tracked_cpu_seconds": 27.23,
+      "temporary_roots": [
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-CONTEXT/t",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-CONTEXT/browser-cache"
+      ]
+    },
+    {
+      "name": "wasm",
+      "runner_pid": 701815,
+      "pid": 701824,
+      "pgid": 701824,
+      "start": "2026-09-30T21:01:32.037355+00:00",
+      "cmd": [
+        "node",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-CONTEXT/browser-parity-final.mjs"
+      ],
+      "affinity": [
+        2
+      ],
+      "baseline_bytes": 9213770,
+      "deadline": 1790802651.0,
+      "temporary_alias": "/proc/701815/cwd/t",
+      "temporary_alias_resolved": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-CONTEXT/t",
+      "job_end": 1790802212.0366874,
+      "end": "2026-09-30T21:01:37.362859+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "peak_group_plus_runner_rss_bytes": 1151758336,
+      "peak_storage_bytes": 14730619,
+      "final_storage_bytes": 13768600,
+      "remaining_pids": [],
+      "log_sha256": "d2c24bb461b0c9aa430d42a0d236fae5ceb55cbe2fa301f590414d7e3faba255",
+      "children_usage": {
+        "user_s": 0.545169,
+        "system_s": 0.391325,
+        "maxrss_kib": 198252
+      },
+      "tracked_processes": [
+        {
+          "pid": 701824,
+          "start_ticks": 5497519,
+          "pgid": 701824,
+          "maxrss_bytes": 168259584,
+          "max_cpu_ticks": 31,
+          "max_threads": 11,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 701846,
+          "start_ticks": 5497547,
+          "pgid": 701846,
+          "maxrss_bytes": 194818048,
+          "max_cpu_ticks": 51,
+          "max_threads": 35,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 701847,
+          "start_ticks": 5497609,
+          "pgid": 701846,
+          "maxrss_bytes": 17395712,
+          "max_cpu_ticks": 0,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 701848,
+          "start_ticks": 5497612,
+          "pgid": 701847,
+          "maxrss_bytes": 17395712,
+          "max_cpu_ticks": 0,
+          "max_threads": 2,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 701853,
+          "start_ticks": 5497622,
+          "pgid": 701846,
+          "maxrss_bytes": 68554752,
+          "max_cpu_ticks": 2,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 701854,
+          "start_ticks": 5497622,
+          "pgid": 701846,
+          "maxrss_bytes": 68390912,
+          "max_cpu_ticks": 4,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 701875,
+          "start_ticks": 5497667,
+          "pgid": 701846,
+          "maxrss_bytes": 75444224,
+          "max_cpu_ticks": 3,
+          "max_threads": 26,
+          "affinities": [
+            [
+              2
+            ],
+            [
+              0
+            ]
+          ]
+        },
+        {
+          "pid": 701879,
+          "start_ticks": 5497670,
+          "pgid": 701846,
+          "maxrss_bytes": 115666944,
+          "max_cpu_ticks": 7,
+          "max_threads": 9,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 701906,
+          "start_ticks": 5497682,
+          "pgid": 701846,
+          "maxrss_bytes": 49725440,
+          "max_cpu_ticks": 0,
+          "max_threads": 8,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 701931,
+          "start_ticks": 5497710,
+          "pgid": 701846,
+          "maxrss_bytes": 136028160,
+          "max_cpu_ticks": 18,
+          "max_threads": 12,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 701938,
+          "start_ticks": 5497716,
+          "pgid": 701846,
+          "maxrss_bytes": 69066752,
+          "max_cpu_ticks": 0,
+          "max_threads": 9,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 701939,
+          "start_ticks": 5497716,
+          "pgid": 701846,
+          "maxrss_bytes": 214437888,
+          "max_cpu_ticks": 234,
+          "max_threads": 10,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        }
+      ],
+      "tracked_cpu_seconds": 3.5,
+      "temporary_roots": [
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-CONTEXT/t",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-CONTEXT/browser-cache"
+      ]
+    },
+    {
+      "name": "reference",
+      "runner_pid": 702471,
+      "pid": 702472,
+      "pgid": 702472,
+      "start": "2026-09-30T21:03:33.093383+00:00",
+      "cmd": [
+        "node",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-CONTEXT/reference-transitions.mjs"
+      ],
+      "affinity": [
+        2
+      ],
+      "baseline_bytes": 13779321,
+      "deadline": 1790802651.0,
+      "temporary_alias": "/proc/702471/cwd/t",
+      "temporary_alias_resolved": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-CONTEXT/t",
+      "job_end": 1790802333.0930123,
+      "end": "2026-09-30T21:03:33.387147+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "peak_group_plus_runner_rss_bytes": 107925504,
+      "peak_storage_bytes": 13779884,
+      "final_storage_bytes": 15426176,
+      "remaining_pids": [],
+      "log_sha256": "451e9561aeae32c178db2178c2f7c712f1d34c1e5b6bdd8ee94f1c65ca137e74",
+      "children_usage": {
+        "user_s": 0.24066099999999999,
+        "system_s": 0.020395,
+        "maxrss_kib": 90936
+      },
+      "tracked_processes": [
+        {
+          "pid": 702472,
+          "start_ticks": 5509629,
+          "pgid": 702472,
+          "maxrss_bytes": 91308032,
+          "max_cpu_ticks": 24,
+          "max_threads": 7,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        }
+      ],
+      "tracked_cpu_seconds": 0.24,
+      "temporary_roots": [
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-CONTEXT/t",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-CONTEXT/browser-cache"
+      ]
+    },
+    {
+      "name": "independent",
+      "runner_pid": 702787,
+      "pid": 702788,
+      "pgid": 702788,
+      "start": "2026-09-30T21:04:35.424232+00:00",
+      "cmd": [
+        "node",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-CONTEXT/independent.mjs"
+      ],
+      "affinity": [
+        2
+      ],
+      "baseline_bytes": 15431403,
+      "deadline": 1790802651.0,
+      "temporary_alias": "/proc/702787/cwd/t",
+      "temporary_alias_resolved": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-CONTEXT/t",
+      "job_end": 1790802395.4236622,
+      "end": "2026-09-30T21:04:36.216084+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "peak_group_plus_runner_rss_bytes": 329211904,
+      "peak_storage_bytes": 15442071,
+      "final_storage_bytes": 15442071,
+      "remaining_pids": [],
+      "log_sha256": "e9495118f9ff3c52d3c9040e1b0a63c42fb1679b3c4faaae49b4132daf3cdc0d",
+      "children_usage": {
+        "user_s": 0.638724,
+        "system_s": 0.10126099999999999,
+        "maxrss_kib": 305392
+      },
+      "tracked_processes": [
+        {
+          "pid": 702788,
+          "start_ticks": 5515863,
+          "pgid": 702788,
+          "maxrss_bytes": 312557568,
+          "max_cpu_ticks": 71,
+          "max_threads": 7,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        }
+      ],
+      "tracked_cpu_seconds": 0.71,
+      "temporary_roots": [
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-CONTEXT/t",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-CONTEXT/browser-cache"
+      ]
+    },
+    {
+      "name": "research-tests",
+      "runner_pid": 702798,
+      "pid": 702799,
+      "pgid": 702799,
+      "start": "2026-09-30T21:04:36.253104+00:00",
+      "cmd": [
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/build/native/debug/deps/quoridor_ai-7e34bb245ccf403d",
+        "--test-threads=1",
+        "--nocapture"
+      ],
+      "affinity": [
+        2
+      ],
+      "baseline_bytes": 15443017,
+      "deadline": 1790802651.0,
+      "temporary_alias": "/proc/702798/cwd/t",
+      "temporary_alias_resolved": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-CONTEXT/t",
+      "job_end": 1790802396.2528107,
+      "end": "2026-09-30T21:04:41.243648+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "peak_group_plus_runner_rss_bytes": 20733952,
+      "peak_storage_bytes": 15444178,
+      "final_storage_bytes": 15444396,
+      "remaining_pids": [],
+      "log_sha256": "db930d36884ca64d6a94b48ea6447d5ec7f78b4c90f2f3b801350dca8168d53b",
+      "children_usage": {
+        "user_s": 4.711373,
+        "system_s": 0.003945,
+        "maxrss_kib": 16000
+      },
+      "tracked_processes": [
+        {
+          "pid": 702799,
+          "start_ticks": 5515946,
+          "pgid": 702799,
+          "maxrss_bytes": 3858432,
+          "max_cpu_ticks": 470,
+          "max_threads": 2,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        }
+      ],
+      "tracked_cpu_seconds": 4.7,
+      "temporary_roots": [
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-CONTEXT/t",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-CONTEXT/browser-cache"
+      ]
+    },
+    {
+      "name": "normal",
+      "runner_pid": 702982,
+      "pid": 702983,
+      "pgid": 702983,
+      "start": "2026-09-30T21:05:18.240944+00:00",
+      "cmd": [
+        "python3",
+        "-B",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-CONTEXT/normal.py"
+      ],
+      "affinity": [
+        2
+      ],
+      "baseline_bytes": 15447767,
+      "deadline": 1790802651.0,
+      "temporary_alias": "/proc/702982/cwd/t",
+      "temporary_alias_resolved": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-CONTEXT/t",
+      "job_end": 1790802438.2402558,
+      "end": "2026-09-30T21:05:19.498866+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "peak_group_plus_runner_rss_bytes": 37081088,
+      "peak_storage_bytes": 15742300,
+      "final_storage_bytes": 15765171,
+      "remaining_pids": [],
+      "log_sha256": "7112bacbecb20e79ca7542797e1d55098a2ae9b80bb360e5fe986e78c73c26b2",
+      "children_usage": {
+        "user_s": 1.111717,
+        "system_s": 0.03361,
+        "maxrss_kib": 17004
+      },
+      "tracked_processes": [
+        {
+          "pid": 702983,
+          "start_ticks": 5520146,
+          "pgid": 702983,
+          "maxrss_bytes": 17248256,
+          "max_cpu_ticks": 3,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 702984,
+          "start_ticks": 5520148,
+          "pgid": 702983,
+          "maxrss_bytes": 3264512,
+          "max_cpu_ticks": 7,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 702986,
+          "start_ticks": 5520156,
+          "pgid": 702983,
+          "maxrss_bytes": 2777088,
+          "max_cpu_ticks": 5,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 702987,
+          "start_ticks": 5520164,
+          "pgid": 702983,
+          "maxrss_bytes": 3067904,
+          "max_cpu_ticks": 6,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 702988,
+          "start_ticks": 5520172,
+          "pgid": 702983,
+          "maxrss_bytes": 3145728,
+          "max_cpu_ticks": 5,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 702989,
+          "start_ticks": 5520179,
+          "pgid": 702983,
+          "maxrss_bytes": 3117056,
+          "max_cpu_ticks": 7,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 702990,
+          "start_ticks": 5520187,
+          "pgid": 702983,
+          "maxrss_bytes": 3035136,
+          "max_cpu_ticks": 5,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 702991,
+          "start_ticks": 5520194,
+          "pgid": 702983,
+          "maxrss_bytes": 2838528,
+          "max_cpu_ticks": 5,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 702993,
+          "start_ticks": 5520202,
+          "pgid": 702983,
+          "maxrss_bytes": 3190784,
+          "max_cpu_ticks": 6,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 702994,
+          "start_ticks": 5520210,
+          "pgid": 702983,
+          "maxrss_bytes": 2985984,
+          "max_cpu_ticks": 5,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 702995,
+          "start_ticks": 5520217,
+          "pgid": 702983,
+          "maxrss_bytes": 3088384,
+          "max_cpu_ticks": 6,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 702996,
+          "start_ticks": 5520225,
+          "pgid": 702983,
+          "maxrss_bytes": 3223552,
+          "max_cpu_ticks": 7,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 702997,
+          "start_ticks": 5520234,
+          "pgid": 702983,
+          "maxrss_bytes": 3100672,
+          "max_cpu_ticks": 5,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 702998,
+          "start_ticks": 5520241,
+          "pgid": 702983,
+          "maxrss_bytes": 2928640,
+          "max_cpu_ticks": 2,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 702999,
+          "start_ticks": 5520246,
+          "pgid": 702983,
+          "maxrss_bytes": 3276800,
+          "max_cpu_ticks": 5,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 703000,
+          "start_ticks": 5520252,
+          "pgid": 702983,
+          "maxrss_bytes": 3035136,
+          "max_cpu_ticks": 3,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 703001,
+          "start_ticks": 5520256,
+          "pgid": 702983,
+          "maxrss_bytes": 2838528,
+          "max_cpu_ticks": 3,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 703002,
+          "start_ticks": 5520261,
+          "pgid": 702983,
+          "maxrss_bytes": 2711552,
+          "max_cpu_ticks": 3,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        },
+        {
+          "pid": 703003,
+          "start_ticks": 5520266,
+          "pgid": 702983,
+          "maxrss_bytes": 2740224,
+          "max_cpu_ticks": 3,
+          "max_threads": 1,
+          "affinities": [
+            [
+              2
+            ]
+          ]
+        }
+      ],
+      "tracked_cpu_seconds": 0.91,
+      "temporary_roots": [
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-CONTEXT/t",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-CONTEXT/browser-cache"
+      ]
+    }
+  ],
+  "browser": {
+    "pid": 701824,
+    "browserVersion": "153.0.8010.12",
+    "affinity": "Cpus_allowed_list:\t2",
+    "gpuInference": 0,
+    "elapsedMs": 2610.2000000029802,
+    "memoryBefore": 1114112,
+    "memoryAfter": 67633152,
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36"
+  },
+  "originals_unchanged": 282,
+  "failure": {
+    "utc": "2026-09-30T21:01:31.959521+00:00",
+    "failure": "rglob iterator FileNotFoundError during browser.close temporary profile cleanup",
+    "wrapper_exit": 1,
+    "child_exists_after_failure": false,
+    "resource_measurement_complete": false,
+    "other_process_kills": 0,
+    "runner_v1_sha256": "431ff03ca4f9420e946b904e0bb6c27d9e65da33aa03d7cd979f49c6d39f3163",
+    "runner_v2_sha256": "6d0c51f3660aa245080c6a97f34c3b4a3f02caedaff7da0bfb8d2641b2f8dd85"
+  },
+  "affinity_exceptions": [
+    {
+      "pid": 701875,
+      "start_ticks": 5497667,
+      "affinities": [
+        [
+          2
+        ],
+        [
+          0
+        ]
+      ]
+    }
+  ],
+  "max_observed_rss_bytes": 1151758336,
+  "max_observed_storage_bytes": 15742300,
+  "all_trial_resource_compliant": false,
+  "signed_zero_helper_failure_preserved": true,
+  "finalizer_false_positive_parent_shell_chrome_match": true,
+  "remaining_tracked_pids": [],
+  "remaining_chrome_alias_pids": [],
+  "temp_remaining": [],
+  "HTTP_server_used": false,
+  "port_opened": false,
+  "other_process_killed": 0,
+  "build_download_NN_GPU_training_duels_agents": 0,
+  "processing_stopped_utc": "2026-09-30T21:09:57.962362+00:00"
+}

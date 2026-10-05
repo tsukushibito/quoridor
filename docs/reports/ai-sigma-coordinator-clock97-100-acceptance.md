@@ -1,0 +1,15 @@
+# 97協調時計と100独立検証の限定受入れ
+
+2026-10-02、coordinator。実producer Git83bb0ce、97保存1051ad6と100独立実行overlay997e274/検算保存dd34acdを区別して受入れる。97/100はsource・NN停止済み、100現在idleを04:07:55外部確認した。今回の支持は新NN開始抑止と完成checkpoint保持であり、一般ACK高速化・Worker期限違反率改善・正式公平性・NI・Sigma同等・製品採用は未成立。
+
+独立100は研究Git/archive必要6ファイルから97保存36を再算し、23328特徴bits/4932NN/4632priorと固定混合閾値/有限性/合法集合/engine固有順/Action136-P2対応を確認した。原cutoff後NN8/公開後2、協調0/0、全36合法公開。両条件ともWorker停止上限が500ms内なので、違反率が改善したとは言わない。原候補warm ACK508.092msに対しWorker停止上限491.005msであり、ACKwallをengine計算500ms超過へ読み替えない。協調側ACKが47.281ms遅い行も全分母へ含まれる。
+
+独立一窓initial両engine×原/協調×warm1/sample1の8/8が合法期限内、手NN72/startup6別。cutoff後原2/公開後1→協調0/0、Worker停止全<=500/ACK超過0。steady各側1組の差は候補−51.307/参照−6.338ms、反復精度やtail保証ではない。独立8の5184特徴bits/1096NN/1048priorを確認、P2追加0。保存97P2の24根と独立実initial8を別分母で扱う。
+
+正常予算停止で完成CPを保持し、硬fault/世代変更では所有cp破棄を少数NN0で確認した。lo offsetでNode402/D500を早側Worker時刻へ変換し、候補新NN前/参照新仕事とNN前を抑止する変更は採用可能な有限根拠を得た。同期NN割込みではなく、参照には推論後absolute-D検査がないので長い進行中推論の停止硬保証はない。snapshot/private_done/stopped順・payloadを同じに保ち、C/FPU/order/tie/finish/caps/kernel/modelは変更していない。CPの公開後不変と次t0>=旧ACK0を維持する。
+
+100 archive SHA462862a72a148c5604a4b1eea202bce6a8c968c4c5cf2c31554a0c4511daac5dを統括実照合した。handoff SHA c8398cc8c5f1b29ed2e4bd87670c559eeb906660a873d2ef0f205ae8244d16aa、stop SHA309fb633ccf77bb666a4a1ed589ae99272e9705b648ad08caa7140b0c1ceebfa。全8searchACK/Modeldrop0、inner forced controlledPID0とouter同identityadoption/wait・88identity不在を別証拠として保持。NN14.070秒/RSS1,418,432,512B、保存peak4,136,960B。終了時BEADS_READ_ERROR contextcanceledはcallback/pending0確認を伴い、pauseやNN負例へ変換しない。静的checker三修正・原失敗/log、post-run依存Git捕捉の限界、瞬間peak/終了子CPU/一般tree未保証を保持する。
+
+次の103はこの協調時計を同diagnostic arenaへ接続し、固定3goldenの色交換最大6局を現予算内で実行する新課題。旧93版別WDLと合算せず、合法goalとtyped責任loss/partialを別記、Worker停止区間とACK配送を分類する。新通知payload削減/FIFO変更を同時適用しない。102の基盤品質検討と文書整理は研究診断の新gateにしない。新指示/根拠は別契約、上限と05:49:12終了は不変。103実配送状態はBeads/dispatch receipt参照。
+
+正本research-data/ai-sigma/{97-tail-transport,100-cooperative-clock-independent}/のmanifest/handoff/保存算術/independent8/stop、docs/reports/ai-sigma-critic-cooperative-clock-independent.md。新共通データの全文複製や全史再検証は行わない。Sigma未達/NI未立証/旧32局非統合/旧各失敗・期限を保持する。

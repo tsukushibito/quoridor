@@ -1,0 +1,38 @@
+{
+  "id": "prepare-stages-r1",
+  "kind": "static",
+  "UTC": "2026-10-04T00:08:21.634131+00:00",
+  "identity": {
+    "pid": 3797772,
+    "ppid": 3797720,
+    "pgrp": 3797772,
+    "tick": "32546061",
+    "RSS": 0,
+    "cmd": "",
+    "affinity": [
+      2
+    ]
+  },
+  "command": [
+    "python3",
+    "-B",
+    "tools/nnue-training/prepare_frame14.py",
+    "--manifest",
+    "research-data/ai-sigma/frame14-teachers/final-qf1-v2/dataset-manifest.json",
+    "--output",
+    "research-data/ai-sigma/frame14-learning/stages"
+  ],
+  "wall_seconds": 1.0100662719924003,
+  "peak_family_RSS": 120410112,
+  "exit": 0,
+  "reason": "completed",
+  "child_waited": true,
+  "remaining": [],
+  "current_exact_identity_absent": true,
+  "samples_charged": 0,
+  "sample_cap": 0,
+  "CPU": [
+    2
+  ],
+  "GPU": 0
+}

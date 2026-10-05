@@ -1,0 +1,7 @@
+goal quoridor-4lc / 本文148 停止保存・最終報告。source/data/report Git538f11a8f1566b5a3d06f8ad0385c49927645f94。速報の採択9bafd9ef12298d2b587599f12ea02b4ba5f21123をbind、149への配送を受領。最大1案は4/5/12/13ply各8のAI結果なしclass-balanced合法prefix、32pair/64game色交換の現Q0/C1.5対fixedSigma同wall比較。master61041 SHA256混合表SHAa82f2d01875180aa6a4a53be6e62d1ae11b9ab01ef2b3d37e5a1b40a7ede5c04・最大8attempt・旧119全8の一律除外・新重複保持・層巡回/色交互を採択、C145とsamecompleted自動追加は保留。重大異論0。
+
+主meanは全64予定の未知識別区間。32pairを独立boundedと追加仮定した両側参考Hoeffding幅.2400807で、固定PRNG/重複/時間driftの独立性・被覆は立証0。sameboard-side winnerを捨てずXi=.5として感度限界を残す。欠測/fault/運用score/純品質を分け、.5を跨ぐ又は混在なら差未確定・現政策維持。差が出てもこの分布の次改善/別事前登録検証の優先で一般棋力/NI/Sigma認定0。
+
+採択signatureはtrueState key+正規化history_counts+side。静的結果の旧ply/key一覧はinventoryだけで完全signature構成/照合ではありません。原historyを落とさない採択定義を優先、149の生成実装責務を新gateにしません。NN/Chrome/game/build/新合法状態0。static-r1の32slot/256seed/色層順/欠測算術pass、wall.021902s/CPU.015856s/waitRSS15294464B、source/input前後SHA一致、owned child自然終了wait済/currentidentity不在、remainingunknown0。全host/全期間保証0。
+
+新手最大12256/名目思考6128s。初期案7680sは見積りで、採択実heavy7200s（生成込み、job600s）を優先。完走保証0、未完了と層欠測を全分母に保持。旧保持11560048B減額0＋新scope2MiB forecast=13657200B<combined14MiB、親予約追加0。Git stream必要全files復元一致・backup sync成功。正本docs/reports/ai-sigma-hypothesis-frame10-gap-sampling.md、research-data/ai-sigma/frame10-gap-sampling/{proposal,adoption,static-results,static-run,stop,git-restore,beads-handoff-backup}.json。実受領00:28:22.929797/10分速報配送済、早側処理00:48:22.929797/提出00:53:22.929797 reset0。aggregate管理command時間の厳密合計と完全old signature/AI gapは未測・未実施として保持。受入れcoordinator、goal/他者close0。

@@ -1,0 +1,57 @@
+{
+  "main": {
+    ".agents/research-team/roles/coordinator.md": "46cc18ccc63eded9112ae9d41da61c4eba1ec7e94309f09a23a63ba19b81060c",
+    ".agents/research-team/roles/steward.md": "2b683ce6ad7a5f8f8234551cfea7c06a1d0045f744106c12c38c6d3e04e77700",
+    "docs/design/ai-research-team.md": "1cbd6d9a36e088ff22126f7fb37ac3cd62cbb9bf9dc57e5b2850ef17c3741e59",
+    "docs/development/research-scheduler.md": "8fb33e591b436a1309b4b12bcdaa9a1f3ba0e68bd54477a5b0f4f9c2e52cd584"
+  },
+  "research": {
+    ".agents/research-team/roles/coordinator.md": "46cc18ccc63eded9112ae9d41da61c4eba1ec7e94309f09a23a63ba19b81060c",
+    ".agents/research-team/roles/steward.md": "2b683ce6ad7a5f8f8234551cfea7c06a1d0045f744106c12c38c6d3e04e77700",
+    "docs/design/ai-research-team.md": "1cbd6d9a36e088ff22126f7fb37ac3cd62cbb9bf9dc57e5b2850ef17c3741e59",
+    "docs/development/research-scheduler.md": null
+  },
+  "watch_sha256": "45ca8d9048aca07430e3daf4f5b7eba48902d3cb174027304d0ae0cd4fec2d1e",
+  "registry_roles": {
+    "coordinator": {
+      "thread_id": "01a0f31b-3409-75f2-a30e-453a50484f94",
+      "definition_sha256": "52a19638dff9af8fa422afadacf757bf3517223e410f3e1210f6964db6e032f0",
+      "initial_model": "gpt-6.1-sol",
+      "initial_effort": "high"
+    },
+    "hypothesis": {
+      "thread_id": "01a0f31c-2e4b-7170-82c5-69e1428c2418",
+      "definition_sha256": "db6370b3f5d091f5b2155b3cba42b62d4743153b513445066714bdbf7f9e8a04",
+      "initial_model": "gpt-6.1-sol",
+      "initial_effort": "high"
+    },
+    "experiment": {
+      "thread_id": "01a0f31d-6d15-7620-bb63-4b4f878e4746",
+      "definition_sha256": "09c3472d031e94f10263ba518abb57b1c9876e84712ef7d59fca6989b32d9720",
+      "initial_model": "gpt-6.1-sol",
+      "initial_effort": "high"
+    },
+    "critic": {
+      "thread_id": "01a0f31d-8227-7e03-a7e6-915b4918c11b",
+      "definition_sha256": "b5a20ad0f99585ec5d308759dd74aa4db057c34521136abd1c9659f9a8d5c268",
+      "initial_model": "gpt-6.1-sol",
+      "initial_effort": "high"
+    },
+    "steward": {
+      "thread_id": "01a0f31d-99ee-7d63-b162-bc1a59c457c6",
+      "definition_sha256": "b062f87a63bf02046fa77116a0597097a97464a5bb75fc4193a026b31f6add6d",
+      "initial_model": "gpt-6.1-sol",
+      "initial_effort": "high"
+    },
+    "supervisor": {
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+      "definition_sha256": "cf9521cf3269d67bcb93bd41503dd1984937470b3e75437ad6c013b52cd9c108",
+      "initial_model": "gpt-6.1-sol",
+      "initial_effort": "high",
+      "bootstrap_turn_id": "01a0f6b5-b4a3-71b0-8241-aa3161ac3daf"
+    }
+  },
+  "parent_sha256": "35c583376c2afc6ab79c9b2e4ae230c187175ca30224fa3e9914072f8a65f7fb",
+  "expired_config_sha256": "e443a6132c3b01f58424aadbbce9cc03c1a6e52f9fd1bbd0531d0c882719cbdd",
+  "expired_contract_sha256": "c4028354d50fb0291cef7652325931a8eabdeb46564e3378fcc9cc9e79a28193"
+}

@@ -1,0 +1,58 @@
+{
+  "at": "2026-10-05T01:52:42.561900+00:00",
+  "state": {
+    "binding": {
+      "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+      "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+      "target": "supervisor",
+      "dispatch_issue": "quoridor-4lc.40",
+      "contract_file": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+    },
+    "process": {
+      "pid": 530611,
+      "start_ticks": "41742601",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "phase": "running",
+    "recovery_required": false,
+    "last_result": {
+      "at": "2026-10-05T01:45:27.403493+00:00",
+      "event": "owned_turn_finished",
+      "turn_id": "01a109b7-fbb1-7432-9820-af08f65e0108",
+      "status": "completed"
+    },
+    "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+    "config_sha256": "e443a6132c3b01f58424aadbbce9cc03c1a6e52f9fd1bbd0531d0c882719cbdd",
+    "contract_sha256": "c4028354d50fb0291cef7652325931a8eabdeb46564e3378fcc9cc9e79a28193",
+    "next_at": 1791165610.2920399,
+    "owned": null
+  },
+  "official_supervisor": {
+    "id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+    "status": {
+      "type": "idle"
+    },
+    "model": "gpt-6.1-sol",
+    "reasoningEffort": "high",
+    "cwd": "/workspaces/quoridor/.worktree/ai-sigma"
+  },
+  "latest_turns": [
+    {
+      "id": "01a109b7-fbb1-7432-9820-af08f65e0108",
+      "status": "completed",
+      "error": null
+    }
+  ],
+  "live_run": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame20-role250-3a3f18a9-ce6d-4f2e-a0ba-0cd01ba9838a",
+  "scheduler": {
+    "pid": 530611,
+    "start_ticks": "41742601",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "monitor": {
+    "pid": 530624,
+    "start_ticks": "41742628",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  }
+}

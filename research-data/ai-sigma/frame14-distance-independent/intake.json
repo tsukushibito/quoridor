@@ -1,0 +1,44 @@
+{
+  "issue": "quoridor-4lc.202",
+  "UTC": "2026-10-04T01:17:45.610678+00:00",
+  "receipt_observed": "2026-10-04T01:16:39Z",
+  "199_owner_close_backup_done": true,
+  "ready_goal_self_no_pause_claim": true,
+  "actor": "codex:01a0f31d-8227-7e03-a7e6-915b4918c11b",
+  "mode": "source static actual start; heavy calculation requires fresh admission",
+  "jobs_current": [
+    {
+      "pid": 3862979,
+      "tick": "32960509",
+      "RSS": 197259264,
+      "affinity": [
+        0
+      ],
+      "cmd": "node --max-old-space-size=192 /workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame14-distance-test/generate.cjs /workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-distance-test/test-config.json "
+    }
+  ],
+  "supervisor_owned": null,
+  "observed": "2026-10-04T01:17:37.226152+00:00",
+  "storage": {
+    "old_forecast_retained": 102347236,
+    "newscope_including_git_temp_metadata": 4194304,
+    "forecast": 106541540,
+    "guard": 117440512,
+    "oldunknown_retained": 88190086,
+    "parent_addition": 0,
+    "old_discount": 0
+  },
+  "NN_GPU_model_forward_train_game_test_read": 0,
+  "old199_static_charge": 90,
+  "new_static_cap": 180,
+  "CPU": [
+    0
+  ],
+  "RAM_guard": 469762048,
+  "deadlines": {
+    "newcommand": "2026-10-04T02:35:00Z",
+    "staticstop": "2026-10-04T02:40:00Z",
+    "process": "2026-10-04T02:50:00Z",
+    "submit": "2026-10-04T03:00:00Z"
+  }
+}

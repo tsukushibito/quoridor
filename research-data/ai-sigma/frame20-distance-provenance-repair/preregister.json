@@ -1,0 +1,83 @@
+{
+  "UTC": "2026-10-05T01:24:46.269297+00:00",
+  "issue": "quoridor-4lc.248",
+  "phase": "frame20-repair-v1",
+  "sources": {
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-leaf-terminal/exact-cases-preregister-v1.json": "9a1e94b9d99ffa042e8de5a3669e52d70b3a9720b670b366e6ddfe696eebd804",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-native-connection/weight-manifest.json": "9bc786e82c3b73a462da4a30e1d884678ef9f7bdb757560dd6bb437fa4b25d40",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-leaf-terminal/exact-cases-r1.json": "78b27470c2c00ee44a25a17204de206443a923eb21e92dd6677df08c1b032180",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-nnue-qf1-prototype/qf1.cjs": "ed54a84b90a0e8effe5737b959aaa6fd16ec4c3cdf054aee2cae58e6446012d3",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-native-baseline/reference.cjs": "85cae30273fa481f96ec28fa77eeb5907bb203812c7234f9ffdfd75d337848cf",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-native-baseline/game.js": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-native-baseline/context.js": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-native-baseline/reference-core-native.js": "9670b29d07489a568206b739cf4acdf5477a3c4f0a22f5e8fee2332166201705",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-native-baseline/trace-reference.js": "056c98b85d4003835dba54b6170249114e46b20146a1be0f691490e39aba92f0",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-native-baseline/common.cjs": "35a01a1db0dd124ba78c59aa1bff38232d73fd202c41188bb0f4960e71a4424f",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-leaf-terminal/scientific-stop-v1.json": "445775e90e3c6f380852174b38278ee5a08a7ca8d144755f2e4f25884293f638",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-leaf-terminal/scientific-compact-v1.json": "2a4a5b4f4a5877afb0aab588ca5e466110b3c5bf2628f8870389567a12c1641c",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-paired-leaf-arena/scientific-stop-v1.json": "bc674adf1e461c6df407d0096f14c2ddb87b5cb1aee9c7f7e39859d11d12ae71",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame20-distance-provenance-repair/launch.py": "18fb034d29c5106edd3b5e38da313f1d277f286d15ac45ddd4499a2589bb9fcb",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame20-distance-provenance-repair/provenance.cjs": "27608d1391ef95fbb07a4c941a58291220b0610dab86ad890a8d8e8bd17fd8c5",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame20-distance-provenance-repair/settings.json": "f8ae0ce65dd4fc44e217e1b1d9ed2785756a504d6d428e46e9a2a2d03c0dd2cc",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-distance-provenance/phase20-v2/process.json": "c2896c08240bf85d5e119dc1b0c2498f2d1bc97abf0a2b163b97dffcf622f1ce",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-distance-provenance/phase20-v2/stop.json": "b0244e38f8583fca10307d1f4e09dd6404c37214ead8ac133ad89ebbd316a082",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-paired-leaf-arena/frame20-recovery/newphase-stop-v2.json": "de7a5e774b8150587526c0aa76197c4429baeab767e5f7decd38b63664295fba",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-paired-leaf-arena/frame20-recovery/process-v2.json": "1b1283f35eecff2818befb13138a21000419ffb83c2d08d51fb912c118972a45",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame20-paired-independent/process.json": "6e6e73254b77905efdf6b52ee5e9e1edb0814fa31ffe71f3d56e69ba4a631340"
+  },
+  "producer_stop": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-paired-leaf-arena/scientific-stop-v1.json",
+  "producer_background_results": [
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-paired-leaf-arena/background-preflight-r1/result.json",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-paired-leaf-arena/background-family0-r1/result.json",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-paired-leaf-arena/background-family1-r1/result.json"
+  ],
+  "conditions": "4cases x clip/tanh x depth1/2 = 16; sorted Action; strictgreater; all tied extrema union; full window",
+  "fixture_count": 6,
+  "processed_cap": 65536,
+  "science_MAXjobs": 1,
+  "hard_s": 90,
+  "CPU": [
+    4
+  ],
+  "family_guard_B": 469762048,
+  "NN_GPU": 0,
+  "pre_registered_oldclip_tol": {
+    "abs": 1e-07,
+    "rtol": 1e-07
+  },
+  "output_size_guard_B": 98304,
+  "origin_completeness": "all exhaustive finite-depth max/min ties; nonextremal leaves excluded; terminalWin/Loss flipped peredge; raw clip tanh keep leaf STM; propagated range and witness.sign node STM",
+  "preregistered_before_science": true,
+  "successful_job_not_replaceable": true,
+  "weights_PT_dataset_read": false,
+  "producer_newstop": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-paired-leaf-arena/frame20-recovery/newphase-stop-v2.json",
+  "producer_newprocess": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-paired-leaf-arena/frame20-recovery/process-v2.json",
+  "additional_stopped_processes": [
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-distance-provenance/phase20-v2/process.json",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame20-paired-independent/process.json"
+  ],
+  "old244MAX1_not_reset": true,
+  "new_task_MAX1": 1,
+  "source_read_cap_s": 60,
+  "producer_source9_current_SHA": {
+    "tools/ai-sigma-frame19-paired-leaf-arena/save_git.py": "e9cba52166ae4ea29b7e8b3606268ea572be5ffe938eb5b5a8f9e2255d3f74f0",
+    "tools/ai-sigma-frame19-paired-leaf-arena/arena.cjs": "d574e6242005f6f29a4357551ae7e4ff3483c611cc29323a7883c8092ba0e058",
+    "tools/ai-sigma-frame19-paired-leaf-arena/schema.cjs": "f7a0ff32501f55dbd38ec1fa384fa3b8b9d6db38fd6d3ec1cfad30d7526ef5b9",
+    "tools/ai-sigma-frame19-paired-leaf-arena/worker.cjs": "c1f5186f393582a3ae34b5c3c729ae4b956ebfe819300eab53d29b5c71606277",
+    "tools/ai-sigma-frame19-paired-leaf-arena/wait_and_run.py": "71979fec149ac86a354f89f5b357573542ef0ff0baac01ea23ae3438fea03f2f",
+    "tools/ai-sigma-frame19-paired-leaf-arena/guard.py": "8e59e7eeccf02c351fd5a4063104b625da691c57a801dbfc62c4165f42d5dd36",
+    "tools/ai-sigma-frame19-paired-leaf-arena/preflight.cjs": "47499926c175f4a8a223605a8fe0bad25f8397affc671a19936f333c77cfcc1c",
+    "tools/ai-sigma-frame19-paired-leaf-arena/engine.cjs": "404f4ab6f288bf46dfeeedb19d112ecde96f03cd7e3cf673f19aecee11588c08",
+    "tools/ai-sigma-frame19-paired-leaf-arena/prepare.cjs": "c3e2681d61322dd36725d641d7d2c98f9690d0b61025631bf54eea12c0a63ce4"
+  },
+  "producer_payload7_current_SHA": {
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-paired-leaf-arena/openings8-v1.json": "cca9c84c98a810b9a113c693287726ce1dc0a594952d63ba49b147bab57413aa",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-paired-leaf-arena/preflight-r1.json": "4ca8b31375082a574ec1cf53562499912f8493f2e0a08e36cfbe9a586b71ab10",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-paired-leaf-arena/family0-r1.json": "895ed9e1e3ee7fbd784695e020c5a81bf094e81e35c8b6a13398013ca69bd692",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-paired-leaf-arena/family1-r1.json": "669d252bbb2920913dda237c9bf351f4d550f6eb307bd7d143ed42c9350f8f70",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-paired-leaf-arena/family0-r1-hands.jsonl": "7367b90400c54def996228eeb43e6da2536d7ffb7b75cafb9b9955aa626bf0d7",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-paired-leaf-arena/family1-r1-hands.jsonl": "ec691938c06bb42ceda93c451b97ccde0c5cbbe30aae598817d419dd43111e95",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-paired-leaf-arena/preregister-v1.json": "c57e5920e304fa144461226500571e131a122a8c7c0c23f5969e8cdc6ba4b954"
+  },
+  "producer_advertised_frozen_sourcepayload_SHA_PASS": true
+}

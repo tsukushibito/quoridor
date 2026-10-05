@@ -1,0 +1,1697 @@
+{
+  "issue": "quoridor-4lc.151",
+  "run": "port151-stageB-group3-r1",
+  "UTC": "2026-10-03T01:57:38.308253+00:00",
+  "start": "2026-10-03T01:54:43.608525+00:00",
+  "end": "2026-10-03T01:56:23.801626+00:00",
+  "exit": 0,
+  "stop_reason": null,
+  "inner_controlled": {
+    "remaining_pids": 0,
+    "forced": true,
+    "graceful_error": null,
+    "waited": true,
+    "registration_ack": true,
+    "registered": 184
+  },
+  "inner_proof_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/outer-controlled-stop.json",
+  "outer_ownedwait_returned": true,
+  "outer_remaining": [],
+  "outer_unknown": [],
+  "current_sameidentity": [],
+  "identity_count": 282,
+  "peak_current_RSS": 1805660160,
+  "retained_current": 125300736,
+  "source_launch_hash": "0232a84866a3840c3819b58c19580fb4a56d7ede85bf18e4d2f1b28654109ccc",
+  "source_current_hash": "0232a84866a3840c3819b58c19580fb4a56d7ede85bf18e4d2f1b28654109ccc",
+  "files": {
+    "summary": {
+      "issue": "quoridor-4lc.151",
+      "kind": "stageB",
+      "run": "port151-stageB-group3-r1",
+      "startup_NN": 6,
+      "model_sessions": 2,
+      "hand_NN": 0,
+      "started": 4,
+      "planned": 4,
+      "primary": null,
+      "secondary": []
+    },
+    "finally-model-drop": {
+      "players": [
+        {
+          "kind": "dropped",
+          "handles": 0,
+          "activeNN": 0,
+          "at_ms": 1790992583427.0898,
+          "producer_post_begin_ms": 1790992583427.0999,
+          "worker_engine": "candidate"
+        },
+        {
+          "kind": "dropped",
+          "handles": 0,
+          "activeNN": 0,
+          "at_ms": 1790992583427.8552,
+          "producer_post_begin_ms": 1790992583427.86,
+          "worker_engine": "reference"
+        }
+      ],
+      "handles": 0,
+      "activeNN": 0
+    },
+    "main-timers-stop": {
+      "main_timers": 0,
+      "pending_messages": []
+    },
+    "monitor-callback-stop": {
+      "timer": false,
+      "busy": false,
+      "waited": true
+    },
+    "pause-monitor-stop": {
+      "UTC": "2026-10-03T01:56:23.379Z",
+      "state": "READY",
+      "failure": null,
+      "deadlineUTC": "2026-10-03T03:17:36.232260+00:00",
+      "subjectIssue": "quoridor-4lc.151",
+      "rows": [
+        {
+          "pid": 3025710,
+          "starttick": 24541196,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:54:43.672Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc",
+          "PID": 3025710,
+          "startUTC": "2026-10-03T01:54:43.672Z",
+          "endUTC": "2026-10-03T01:54:44.666Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 202339,
+          "output_SHA256": "e7a0a564a6031c11f3c1330e34a3be81dd9c6ecfd94418b7c747f55c784d4a58",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3025729,
+          "starttick": 24541296,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:54:44.668Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc.151",
+          "PID": 3025729,
+          "startUTC": "2026-10-03T01:54:44.668Z",
+          "endUTC": "2026-10-03T01:54:45.454Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 203649,
+          "output_SHA256": "075ded14fbf772c6539aa138d19be641ca8a326cf05012fce53f180c6f43d761",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.151.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3025779,
+          "starttick": 24541475,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "S",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:54:46.456Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc",
+          "PID": 3025779,
+          "startUTC": "2026-10-03T01:54:46.456Z",
+          "endUTC": "2026-10-03T01:54:48.270Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 202339,
+          "output_SHA256": "e7a0a564a6031c11f3c1330e34a3be81dd9c6ecfd94418b7c747f55c784d4a58",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3025898,
+          "starttick": 24541656,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "S",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:54:48.271Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc.151",
+          "PID": 3025898,
+          "startUTC": "2026-10-03T01:54:48.271Z",
+          "endUTC": "2026-10-03T01:54:50.458Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 203649,
+          "output_SHA256": "075ded14fbf772c6539aa138d19be641ca8a326cf05012fce53f180c6f43d761",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.151.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3025953,
+          "starttick": 24541882,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:54:50.523Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc",
+          "PID": 3025953,
+          "startUTC": "2026-10-03T01:54:50.523Z",
+          "endUTC": "2026-10-03T01:54:53.294Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 202339,
+          "output_SHA256": "e7a0a564a6031c11f3c1330e34a3be81dd9c6ecfd94418b7c747f55c784d4a58",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3026010,
+          "starttick": 24542160,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:54:53.295Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc.151",
+          "PID": 3026010,
+          "startUTC": "2026-10-03T01:54:53.295Z",
+          "endUTC": "2026-10-03T01:54:55.530Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 203649,
+          "output_SHA256": "075ded14fbf772c6539aa138d19be641ca8a326cf05012fce53f180c6f43d761",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.151.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3026063,
+          "starttick": 24542426,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:54:55.968Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc",
+          "PID": 3026063,
+          "startUTC": "2026-10-03T01:54:55.968Z",
+          "endUTC": "2026-10-03T01:54:57.663Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 202339,
+          "output_SHA256": "e7a0a564a6031c11f3c1330e34a3be81dd9c6ecfd94418b7c747f55c784d4a58",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3026102,
+          "starttick": 24542596,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:54:57.666Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc.151",
+          "PID": 3026102,
+          "startUTC": "2026-10-03T01:54:57.666Z",
+          "endUTC": "2026-10-03T01:55:00.204Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 203649,
+          "output_SHA256": "075ded14fbf772c6539aa138d19be641ca8a326cf05012fce53f180c6f43d761",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.151.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3026184,
+          "starttick": 24542927,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:55:00.979Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc",
+          "PID": 3026184,
+          "startUTC": "2026-10-03T01:55:00.979Z",
+          "endUTC": "2026-10-03T01:55:02.518Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 202339,
+          "output_SHA256": "e7a0a564a6031c11f3c1330e34a3be81dd9c6ecfd94418b7c747f55c784d4a58",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3026210,
+          "starttick": 24543081,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "S",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:55:02.520Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc.151",
+          "PID": 3026210,
+          "startUTC": "2026-10-03T01:55:02.520Z",
+          "endUTC": "2026-10-03T01:55:04.094Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 203649,
+          "output_SHA256": "075ded14fbf772c6539aa138d19be641ca8a326cf05012fce53f180c6f43d761",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.151.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3026277,
+          "starttick": 24543328,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:55:04.983Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc",
+          "PID": 3026277,
+          "startUTC": "2026-10-03T01:55:04.983Z",
+          "endUTC": "2026-10-03T01:55:07.210Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 203244,
+          "output_SHA256": "52aa0e3158d5b8e7c285179710fbc1c95c4a5aa7f314fb8dcd5cf392c8fe8d00",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3026375,
+          "starttick": 24543550,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:55:07.212Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc.151",
+          "PID": 3026375,
+          "startUTC": "2026-10-03T01:55:07.212Z",
+          "endUTC": "2026-10-03T01:55:09.344Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 204552,
+          "output_SHA256": "d00cd73e165bfe3f693a67faf1b7bf681bd48926661b7dfbe06032e9759805bc",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.151.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3026466,
+          "starttick": 24543829,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:55:09.996Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc",
+          "PID": 3026466,
+          "startUTC": "2026-10-03T01:55:09.996Z",
+          "endUTC": "2026-10-03T01:55:12.392Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 203243,
+          "output_SHA256": "0a82552d4dc8d484bd0211a2b2f88f2d1ca5853a8a7aaadc64af12ffc887c503",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3026528,
+          "starttick": 24544069,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "S",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:55:12.394Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc.151",
+          "PID": 3026528,
+          "startUTC": "2026-10-03T01:55:12.394Z",
+          "endUTC": "2026-10-03T01:55:14.543Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 204552,
+          "output_SHA256": "d00cd73e165bfe3f693a67faf1b7bf681bd48926661b7dfbe06032e9759805bc",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.151.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3026586,
+          "starttick": 24544358,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "S",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:55:15.268Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc",
+          "PID": 3026586,
+          "startUTC": "2026-10-03T01:55:15.268Z",
+          "endUTC": "2026-10-03T01:55:17.378Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 203243,
+          "output_SHA256": "0a82552d4dc8d484bd0211a2b2f88f2d1ca5853a8a7aaadc64af12ffc887c503",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3026815,
+          "starttick": 24544569,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:55:17.382Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc.151",
+          "PID": 3026815,
+          "startUTC": "2026-10-03T01:55:17.382Z",
+          "endUTC": "2026-10-03T01:55:19.580Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 204552,
+          "output_SHA256": "d00cd73e165bfe3f693a67faf1b7bf681bd48926661b7dfbe06032e9759805bc",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.151.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3026854,
+          "starttick": 24544859,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:55:20.278Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc",
+          "PID": 3026854,
+          "startUTC": "2026-10-03T01:55:20.278Z",
+          "endUTC": "2026-10-03T01:55:21.892Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 203243,
+          "output_SHA256": "0a82552d4dc8d484bd0211a2b2f88f2d1ca5853a8a7aaadc64af12ffc887c503",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3026881,
+          "starttick": 24545021,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:55:21.893Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc.151",
+          "PID": 3026881,
+          "startUTC": "2026-10-03T01:55:21.893Z",
+          "endUTC": "2026-10-03T01:55:23.496Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 204552,
+          "output_SHA256": "d00cd73e165bfe3f693a67faf1b7bf681bd48926661b7dfbe06032e9759805bc",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.151.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3026943,
+          "starttick": 24545260,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:55:24.283Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc",
+          "PID": 3026943,
+          "startUTC": "2026-10-03T01:55:24.283Z",
+          "endUTC": "2026-10-03T01:55:26.364Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 203243,
+          "output_SHA256": "0a82552d4dc8d484bd0211a2b2f88f2d1ca5853a8a7aaadc64af12ffc887c503",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3026976,
+          "starttick": 24545468,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:55:26.370Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc.151",
+          "PID": 3026976,
+          "startUTC": "2026-10-03T01:55:26.370Z",
+          "endUTC": "2026-10-03T01:55:27.946Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 204552,
+          "output_SHA256": "d00cd73e165bfe3f693a67faf1b7bf681bd48926661b7dfbe06032e9759805bc",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.151.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3027007,
+          "starttick": 24545660,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:55:28.292Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc",
+          "PID": 3027007,
+          "startUTC": "2026-10-03T01:55:28.292Z",
+          "endUTC": "2026-10-03T01:55:29.854Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 203243,
+          "output_SHA256": "0a82552d4dc8d484bd0211a2b2f88f2d1ca5853a8a7aaadc64af12ffc887c503",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3027043,
+          "starttick": 24545817,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:55:29.856Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc.151",
+          "PID": 3027043,
+          "startUTC": "2026-10-03T01:55:29.856Z",
+          "endUTC": "2026-10-03T01:55:31.817Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 204552,
+          "output_SHA256": "d00cd73e165bfe3f693a67faf1b7bf681bd48926661b7dfbe06032e9759805bc",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.151.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3027100,
+          "starttick": 24546061,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:55:32.299Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc",
+          "PID": 3027100,
+          "startUTC": "2026-10-03T01:55:32.299Z",
+          "endUTC": "2026-10-03T01:55:34.689Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 203243,
+          "output_SHA256": "0a82552d4dc8d484bd0211a2b2f88f2d1ca5853a8a7aaadc64af12ffc887c503",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3027202,
+          "starttick": 24546300,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:55:34.692Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc.151",
+          "PID": 3027202,
+          "startUTC": "2026-10-03T01:55:34.692Z",
+          "endUTC": "2026-10-03T01:55:36.223Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 204552,
+          "output_SHA256": "d00cd73e165bfe3f693a67faf1b7bf681bd48926661b7dfbe06032e9759805bc",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.151.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3027228,
+          "starttick": 24546499,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:55:36.685Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc",
+          "PID": 3027228,
+          "startUTC": "2026-10-03T01:55:36.685Z",
+          "endUTC": "2026-10-03T01:55:38.304Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 203243,
+          "output_SHA256": "0a82552d4dc8d484bd0211a2b2f88f2d1ca5853a8a7aaadc64af12ffc887c503",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3027265,
+          "starttick": 24546661,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:55:38.305Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc.151",
+          "PID": 3027265,
+          "startUTC": "2026-10-03T01:55:38.305Z",
+          "endUTC": "2026-10-03T01:55:40.428Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 204552,
+          "output_SHA256": "d00cd73e165bfe3f693a67faf1b7bf681bd48926661b7dfbe06032e9759805bc",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.151.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3027312,
+          "starttick": 24546900,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "S",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:55:40.694Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc",
+          "PID": 3027312,
+          "startUTC": "2026-10-03T01:55:40.694Z",
+          "endUTC": "2026-10-03T01:55:42.561Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 203243,
+          "output_SHA256": "0a82552d4dc8d484bd0211a2b2f88f2d1ca5853a8a7aaadc64af12ffc887c503",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3027340,
+          "starttick": 24547088,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:55:42.567Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc.151",
+          "PID": 3027340,
+          "startUTC": "2026-10-03T01:55:42.567Z",
+          "endUTC": "2026-10-03T01:55:44.230Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 204552,
+          "output_SHA256": "d00cd73e165bfe3f693a67faf1b7bf681bd48926661b7dfbe06032e9759805bc",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.151.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3027366,
+          "starttick": 24547302,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:55:44.691Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc",
+          "PID": 3027366,
+          "startUTC": "2026-10-03T01:55:44.691Z",
+          "endUTC": "2026-10-03T01:55:46.217Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 203243,
+          "output_SHA256": "0a82552d4dc8d484bd0211a2b2f88f2d1ca5853a8a7aaadc64af12ffc887c503",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3027403,
+          "starttick": 24547455,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:55:46.224Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc.151",
+          "PID": 3027403,
+          "startUTC": "2026-10-03T01:55:46.224Z",
+          "endUTC": "2026-10-03T01:55:48.262Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 204552,
+          "output_SHA256": "d00cd73e165bfe3f693a67faf1b7bf681bd48926661b7dfbe06032e9759805bc",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.151.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3027449,
+          "starttick": 24547702,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:55:48.695Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc",
+          "PID": 3027449,
+          "startUTC": "2026-10-03T01:55:48.695Z",
+          "endUTC": "2026-10-03T01:55:50.345Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 203243,
+          "output_SHA256": "0a82552d4dc8d484bd0211a2b2f88f2d1ca5853a8a7aaadc64af12ffc887c503",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3027478,
+          "starttick": 24547868,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:55:50.346Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc.151",
+          "PID": 3027478,
+          "startUTC": "2026-10-03T01:55:50.346Z",
+          "endUTC": "2026-10-03T01:55:52.127Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 204552,
+          "output_SHA256": "d00cd73e165bfe3f693a67faf1b7bf681bd48926661b7dfbe06032e9759805bc",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.151.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3027504,
+          "starttick": 24548104,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:55:52.703Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc",
+          "PID": 3027504,
+          "startUTC": "2026-10-03T01:55:52.703Z",
+          "endUTC": "2026-10-03T01:55:54.446Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 203243,
+          "output_SHA256": "0a82552d4dc8d484bd0211a2b2f88f2d1ca5853a8a7aaadc64af12ffc887c503",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3027542,
+          "starttick": 24548278,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:55:54.451Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc.151",
+          "PID": 3027542,
+          "startUTC": "2026-10-03T01:55:54.451Z",
+          "endUTC": "2026-10-03T01:55:56.761Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 204552,
+          "output_SHA256": "d00cd73e165bfe3f693a67faf1b7bf681bd48926661b7dfbe06032e9759805bc",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.151.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3027605,
+          "starttick": 24548556,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:55:57.238Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc",
+          "PID": 3027605,
+          "startUTC": "2026-10-03T01:55:57.238Z",
+          "endUTC": "2026-10-03T01:55:58.834Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 203243,
+          "output_SHA256": "0a82552d4dc8d484bd0211a2b2f88f2d1ca5853a8a7aaadc64af12ffc887c503",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3027627,
+          "starttick": 24548716,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "S",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:55:58.835Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc.151",
+          "PID": 3027627,
+          "startUTC": "2026-10-03T01:55:58.835Z",
+          "endUTC": "2026-10-03T01:56:00.336Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 204552,
+          "output_SHA256": "d00cd73e165bfe3f693a67faf1b7bf681bd48926661b7dfbe06032e9759805bc",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.151.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3027665,
+          "starttick": 24548959,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:56:01.259Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc",
+          "PID": 3027665,
+          "startUTC": "2026-10-03T01:56:01.259Z",
+          "endUTC": "2026-10-03T01:56:02.954Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 203243,
+          "output_SHA256": "0a82552d4dc8d484bd0211a2b2f88f2d1ca5853a8a7aaadc64af12ffc887c503",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3027701,
+          "starttick": 24549128,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "S",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:56:02.956Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc.151",
+          "PID": 3027701,
+          "startUTC": "2026-10-03T01:56:02.956Z",
+          "endUTC": "2026-10-03T01:56:05.415Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 204552,
+          "output_SHA256": "d00cd73e165bfe3f693a67faf1b7bf681bd48926661b7dfbe06032e9759805bc",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.151.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3027758,
+          "starttick": 24549460,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:56:06.277Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc",
+          "PID": 3027758,
+          "startUTC": "2026-10-03T01:56:06.277Z",
+          "endUTC": "2026-10-03T01:56:07.877Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 203243,
+          "output_SHA256": "0a82552d4dc8d484bd0211a2b2f88f2d1ca5853a8a7aaadc64af12ffc887c503",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3027783,
+          "starttick": 24549621,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:56:07.882Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc.151",
+          "PID": 3027783,
+          "startUTC": "2026-10-03T01:56:07.882Z",
+          "endUTC": "2026-10-03T01:56:09.504Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 204552,
+          "output_SHA256": "d00cd73e165bfe3f693a67faf1b7bf681bd48926661b7dfbe06032e9759805bc",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.151.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3027812,
+          "starttick": 24549862,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:56:10.289Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc",
+          "PID": 3027812,
+          "startUTC": "2026-10-03T01:56:10.289Z",
+          "endUTC": "2026-10-03T01:56:11.951Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 203243,
+          "output_SHA256": "0a82552d4dc8d484bd0211a2b2f88f2d1ca5853a8a7aaadc64af12ffc887c503",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3027847,
+          "starttick": 24550029,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:56:11.952Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc.151",
+          "PID": 3027847,
+          "startUTC": "2026-10-03T01:56:11.952Z",
+          "endUTC": "2026-10-03T01:56:14.247Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 204552,
+          "output_SHA256": "d00cd73e165bfe3f693a67faf1b7bf681bd48926661b7dfbe06032e9759805bc",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.151.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3027896,
+          "starttick": 24550263,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:56:14.285Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc",
+          "PID": 3027896,
+          "startUTC": "2026-10-03T01:56:14.285Z",
+          "endUTC": "2026-10-03T01:56:16.591Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 203243,
+          "output_SHA256": "0a82552d4dc8d484bd0211a2b2f88f2d1ca5853a8a7aaadc64af12ffc887c503",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3027924,
+          "starttick": 24550495,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:56:16.598Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc.151",
+          "PID": 3027924,
+          "startUTC": "2026-10-03T01:56:16.598Z",
+          "endUTC": "2026-10-03T01:56:18.366Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 204552,
+          "output_SHA256": "d00cd73e165bfe3f693a67faf1b7bf681bd48926661b7dfbe06032e9759805bc",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.151.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3027951,
+          "starttick": 24550767,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:56:19.327Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc",
+          "PID": 3027951,
+          "startUTC": "2026-10-03T01:56:19.327Z",
+          "endUTC": "2026-10-03T01:56:20.965Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 203243,
+          "output_SHA256": "0a82552d4dc8d484bd0211a2b2f88f2d1ca5853a8a7aaadc64af12ffc887c503",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3027995,
+          "starttick": 24550931,
+          "PPID": 3025703,
+          "ppid": 3025703,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3025703,
+            "starttick": 24541193,
+            "PPID": 3025606,
+            "ppid": 3025606,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:56:20.966Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc.151",
+          "PID": 3027995,
+          "startUTC": "2026-10-03T01:56:20.966Z",
+          "endUTC": "2026-10-03T01:56:23.298Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "output_bytes": 204552,
+          "output_SHA256": "d00cd73e165bfe3f693a67faf1b7bf681bd48926661b7dfbe06032e9759805bc",
+          "output_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-group3-r1/beads-read-quoridor-4lc.151.json",
+          "attempt": 0,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        }
+      ],
+      "pending_children": [],
+      "clock_cost_not_subtracted": true,
+      "all_owned_read_callbacks_waited": true,
+      "signal_unknown": 0,
+      "active_monitor_timer": false
+    }
+  },
+  "natural_allperiod_allhost_not_asserted": true
+}

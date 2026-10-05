@@ -1,0 +1,38 @@
+{
+  "UTC": "2026-10-04T00:09:38.598043+00:00",
+  "stage_preparation_sha256": "dcf330b5534936d13e80516b2bce9e98409747b0dc56d8887d954f5bcf9b5416",
+  "input_descriptor": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/final-qf1-v2/dataset-manifest.json",
+  "input_descriptor_sha256": "fd7e059296aeba1ada0a9f083e5dca61132ee2d90f5605181b7d727b5c2e7510",
+  "mask_sha256": "10b502cd9e1c5334e56a3f460ef3edff7f822c8f52f69c3af53529c67c45d5f5",
+  "metadata_sha256": "1c257a5e440ac50096b56f033ff4e3e183594651d4162e0358326b3f08cf08b1",
+  "sealed_test_labels_SHA_ONLY": "f962d47cba027d610966af41b5c719d7888200d614f54a18125ab7a71d8a481e",
+  "training_samples_fixed": 256000,
+  "stages": [
+    24,
+    48,
+    96
+  ],
+  "sample_upper_3training": 1019139,
+  "test_max4sample_upper": 4380,
+  "LR_control": "not used; coordinator latest requires original3stage without additional condition selection",
+  "test_opened": false,
+  "feature_rule": "QF1-f32-STM-v1 / samecanonical for actualforward",
+  "quantity_fixed_last": "24LAST-vs96LAST 2000step/256000 train samples",
+  "scientific_source_SHA": {
+    "frame14_data.py": "f45482fe6d1a4477ee3bf3b080d14d883b1f28c79517cff83e4318b7a90e37b8",
+    "frame14.py": "f08cc5177f1ab4f808f97ea260ec99ab7d5ce233c9d190b15118fc099dba71b7",
+    "plot.py": "81081a71814a3a9955a759411f84bd1a2ac8a057161f4af9b813eccace41fb3b",
+    "test_contrast.py": "1e92b0888bfbdd454fb491a7812bd58f832b279a91cea7a2f28d2b30cdebe9f7",
+    "test_frame14.py": "406d10d1604e4f7ecd837d974e82114f0d4b32070b192d2eac6118d8edf8b7e9",
+    "common.py": "876e0e9a610b594db63e62e81ae920684f10e52f71a7cc75e04f8fbadd9ffe04",
+    "preflight_frame14.py": "61284ee9862d30db18e4272388f388bbfaa0ceb4bd9bccd1c623387315f279b0",
+    "prepare_frame14.py": "600827ac18fa7551df731c8173fd93ad5c318415bbf416fcf6758ae8fa2ecd7c",
+    "test_workbench.py": "d192d07f9a0be11ed99a6e7343e33dd51f3287be7a7aa65b5d0e06280519e613",
+    "train.py": "665848e238d6a7976b83c53b0c13cdb87f9e65f4a75329560d6a98afbe9863d3",
+    "manage_frame14.py": "cf13f3e0e1cf5d2784cad19b64d7cb1917d099785cb7f515b40a3abd927c2286",
+    "compare.py": "92fe702e3abef15e0f74e0edb185fec1b55108a4c3e9bd030402062a640af2e9",
+    "test_quantity.py": "2cc7e642c24c6d1c81d56e341e3ee887ca7b06def9a3c6781c18806e765f6898",
+    "save_research.py": "d203b3379fa293afe76299ad3bba1347b5a774f733f72181d5fe8dca7b838089",
+    "model.py": "12661cac69cff8b01800eb2d3df5be5f8674858d9ce995713b4385da44c74357"
+  }
+}

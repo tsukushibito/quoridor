@@ -1,0 +1,595 @@
+{
+  "issue": "quoridor-4lc.141",
+  "UTC": "2026-10-02T19:25:41.716313+00:00",
+  "source_write_stopped": true,
+  "Chrome_NN_Wasm_build_model_game": 0,
+  "own_source_hashafter": {
+    "tools/ai-sigma-true-mean-fpu-saved-independent/numeric.cjs": "b88214595d9bab822f753783017d183741e80a5005ab401b04de2da15b324cb6",
+    "tools/ai-sigma-true-mean-fpu-saved-independent/close.py": "68d431442cf4c87d97398e6f5604af75d848bc98124a1035e294907c063550e9",
+    "tools/ai-sigma-true-mean-fpu-saved-independent/managed.py": "f0f79faff81423b51547059740dd08ed12f62521b8889710c1d3ee3c5e02f1cc",
+    "tools/ai-sigma-true-mean-fpu-saved-independent/check.py": "5bd938134e62b5f8adc2f7864c593e82c80d5e8dc8124e4d5ad31efbca16c847"
+  },
+  "managed_runs": [
+    {
+      "run": "check-r1",
+      "command": [
+        "python3",
+        "tools/ai-sigma-true-mean-fpu-saved-independent/check.py"
+      ],
+      "UTC_start": "2026-10-02T19:18:02.928700+00:00",
+      "UTC_end": "2026-10-02T19:18:03.862854+00:00",
+      "wall_s": 0.9341707119892817,
+      "exit": 1,
+      "reason": null,
+      "peak_observed_RSS": 56475648,
+      "CPU": [
+        0
+      ],
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "owned": [
+        {
+          "pid": 2775926,
+          "start_ticks": 22160163,
+          "pgrp": 2775926
+        },
+        {
+          "pid": 2775930,
+          "start_ticks": 22160173,
+          "pgrp": 2775930
+        },
+        {
+          "pid": 2775931,
+          "start_ticks": 22160177,
+          "pgrp": 2775930
+        },
+        {
+          "pid": 2775932,
+          "start_ticks": 22160185,
+          "pgrp": 2775930
+        },
+        {
+          "pid": 2775933,
+          "start_ticks": 22160193,
+          "pgrp": 2775930
+        },
+        {
+          "pid": 2775934,
+          "start_ticks": 22160199,
+          "pgrp": 2775930
+        },
+        {
+          "pid": 2775936,
+          "start_ticks": 22160205,
+          "pgrp": 2775930
+        },
+        {
+          "pid": 2775937,
+          "start_ticks": 22160209,
+          "pgrp": 2775930
+        },
+        {
+          "pid": 2775938,
+          "start_ticks": 22160214,
+          "pgrp": 2775930
+        },
+        {
+          "pid": 2775941,
+          "start_ticks": 22160230,
+          "pgrp": 2775930
+        },
+        {
+          "pid": 2775942,
+          "start_ticks": 22160249,
+          "pgrp": 2775930
+        },
+        {
+          "pid": 2775943,
+          "start_ticks": 22160254,
+          "pgrp": 2775930
+        }
+      ],
+      "remaining": [],
+      "unknown_not_signalled": true,
+      "short_child_between_samples_missing": true
+    },
+    {
+      "run": "check-r2",
+      "command": [
+        "python3",
+        "tools/ai-sigma-true-mean-fpu-saved-independent/check.py"
+      ],
+      "UTC_start": "2026-10-02T19:21:42.944427+00:00",
+      "UTC_end": "2026-10-02T19:21:45.338044+00:00",
+      "wall_s": 2.393641592003405,
+      "exit": 0,
+      "reason": null,
+      "peak_observed_RSS": 54792192,
+      "CPU": [
+        0
+      ],
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "owned": [
+        {
+          "pid": 2778238,
+          "start_ticks": 22182165,
+          "pgrp": 2778238
+        },
+        {
+          "pid": 2778240,
+          "start_ticks": 22182182,
+          "pgrp": 2778240
+        },
+        {
+          "pid": 2778241,
+          "start_ticks": 22182185,
+          "pgrp": 2778240
+        },
+        {
+          "pid": 2778242,
+          "start_ticks": 22182210,
+          "pgrp": 2778240
+        },
+        {
+          "pid": 2778243,
+          "start_ticks": 22182217,
+          "pgrp": 2778240
+        },
+        {
+          "pid": 2778244,
+          "start_ticks": 22182222,
+          "pgrp": 2778240
+        },
+        {
+          "pid": 2778245,
+          "start_ticks": 22182227,
+          "pgrp": 2778240
+        },
+        {
+          "pid": 2778247,
+          "start_ticks": 22182244,
+          "pgrp": 2778240
+        },
+        {
+          "pid": 2778248,
+          "start_ticks": 22182259,
+          "pgrp": 2778240
+        },
+        {
+          "pid": 2778249,
+          "start_ticks": 22182265,
+          "pgrp": 2778240
+        },
+        {
+          "pid": 2778250,
+          "start_ticks": 22182271,
+          "pgrp": 2778240
+        },
+        {
+          "pid": 2778251,
+          "start_ticks": 22182274,
+          "pgrp": 2778240
+        },
+        {
+          "pid": 2778252,
+          "start_ticks": 22182294,
+          "pgrp": 2778240
+        },
+        {
+          "pid": 2778253,
+          "start_ticks": 22182309,
+          "pgrp": 2778240
+        },
+        {
+          "pid": 2778254,
+          "start_ticks": 22182313,
+          "pgrp": 2778240
+        },
+        {
+          "pid": 2778255,
+          "start_ticks": 22182327,
+          "pgrp": 2778240
+        },
+        {
+          "pid": 2778259,
+          "start_ticks": 22182333,
+          "pgrp": 2778240
+        },
+        {
+          "pid": 2778264,
+          "start_ticks": 22182338,
+          "pgrp": 2778240
+        },
+        {
+          "pid": 2778265,
+          "start_ticks": 22182342,
+          "pgrp": 2778240
+        },
+        {
+          "pid": 2778266,
+          "start_ticks": 22182361,
+          "pgrp": 2778240
+        },
+        {
+          "pid": 2778267,
+          "start_ticks": 22182366,
+          "pgrp": 2778240
+        },
+        {
+          "pid": 2778268,
+          "start_ticks": 22182369,
+          "pgrp": 2778240
+        },
+        {
+          "pid": 2778269,
+          "start_ticks": 22182372,
+          "pgrp": 2778240
+        },
+        {
+          "pid": 2778270,
+          "start_ticks": 22182376,
+          "pgrp": 2778240
+        },
+        {
+          "pid": 2778271,
+          "start_ticks": 22182393,
+          "pgrp": 2778240
+        }
+      ],
+      "remaining": [],
+      "unknown_not_signalled": true,
+      "short_child_between_samples_missing": true
+    },
+    {
+      "run": "check-r3",
+      "command": [
+        "python3",
+        "tools/ai-sigma-true-mean-fpu-saved-independent/check.py"
+      ],
+      "UTC_start": "2026-10-02T19:23:36.640679+00:00",
+      "UTC_end": "2026-10-02T19:23:39.891231+00:00",
+      "wall_s": 3.2505747720133513,
+      "exit": 0,
+      "reason": null,
+      "peak_observed_RSS": 57315328,
+      "CPU": [
+        0
+      ],
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "owned": [
+        {
+          "pid": 2779642,
+          "start_ticks": 22193536,
+          "pgrp": 2779642
+        },
+        {
+          "pid": 2779647,
+          "start_ticks": 22193556,
+          "pgrp": 2779647
+        },
+        {
+          "pid": 2779648,
+          "start_ticks": 22193559,
+          "pgrp": 2779647
+        },
+        {
+          "pid": 2779650,
+          "start_ticks": 22193582,
+          "pgrp": 2779647
+        },
+        {
+          "pid": 2779651,
+          "start_ticks": 22193615,
+          "pgrp": 2779647
+        },
+        {
+          "pid": 2779652,
+          "start_ticks": 22193623,
+          "pgrp": 2779647
+        },
+        {
+          "pid": 2779653,
+          "start_ticks": 22193632,
+          "pgrp": 2779647
+        },
+        {
+          "pid": 2779654,
+          "start_ticks": 22193646,
+          "pgrp": 2779647
+        },
+        {
+          "pid": 2779656,
+          "start_ticks": 22193668,
+          "pgrp": 2779647
+        },
+        {
+          "pid": 2779657,
+          "start_ticks": 22193698,
+          "pgrp": 2779647
+        },
+        {
+          "pid": 2779658,
+          "start_ticks": 22193724,
+          "pgrp": 2779647
+        },
+        {
+          "pid": 2779662,
+          "start_ticks": 22193744,
+          "pgrp": 2779647
+        },
+        {
+          "pid": 2779667,
+          "start_ticks": 22193764,
+          "pgrp": 2779647
+        },
+        {
+          "pid": 2779668,
+          "start_ticks": 22193771,
+          "pgrp": 2779647
+        },
+        {
+          "pid": 2779669,
+          "start_ticks": 22193777,
+          "pgrp": 2779647
+        },
+        {
+          "pid": 2779670,
+          "start_ticks": 22193782,
+          "pgrp": 2779647
+        },
+        {
+          "pid": 2779671,
+          "start_ticks": 22193789,
+          "pgrp": 2779647
+        },
+        {
+          "pid": 2779672,
+          "start_ticks": 22193804,
+          "pgrp": 2779647
+        },
+        {
+          "pid": 2779673,
+          "start_ticks": 22193816,
+          "pgrp": 2779647
+        },
+        {
+          "pid": 2779674,
+          "start_ticks": 22193824,
+          "pgrp": 2779647
+        },
+        {
+          "pid": 2779675,
+          "start_ticks": 22193830,
+          "pgrp": 2779647
+        },
+        {
+          "pid": 2779676,
+          "start_ticks": 22193835,
+          "pgrp": 2779647
+        },
+        {
+          "pid": 2779687,
+          "start_ticks": 22193841,
+          "pgrp": 2779647
+        },
+        {
+          "pid": 2779692,
+          "start_ticks": 22193855,
+          "pgrp": 2779647
+        },
+        {
+          "pid": 2779694,
+          "start_ticks": 22193865,
+          "pgrp": 2779647
+        }
+      ],
+      "remaining": [],
+      "unknown_not_signalled": true,
+      "short_child_between_samples_missing": true
+    },
+    {
+      "run": "check-r4",
+      "command": [
+        "python3",
+        "tools/ai-sigma-true-mean-fpu-saved-independent/check.py"
+      ],
+      "UTC_start": "2026-10-02T19:24:36.596789+00:00",
+      "UTC_end": "2026-10-02T19:24:39.797504+00:00",
+      "wall_s": 3.2007331019849516,
+      "exit": 0,
+      "reason": null,
+      "peak_observed_RSS": 53817344,
+      "CPU": [
+        0
+      ],
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "owned": [
+        {
+          "pid": 2780454,
+          "start_ticks": 22199547,
+          "pgrp": 2780454
+        },
+        {
+          "pid": 2780460,
+          "start_ticks": 22199554,
+          "pgrp": 2780460
+        },
+        {
+          "pid": 2780461,
+          "start_ticks": 22199556,
+          "pgrp": 2780460
+        },
+        {
+          "pid": 2780462,
+          "start_ticks": 22199576,
+          "pgrp": 2780460
+        },
+        {
+          "pid": 2780464,
+          "start_ticks": 22199595,
+          "pgrp": 2780460
+        },
+        {
+          "pid": 2780465,
+          "start_ticks": 22199627,
+          "pgrp": 2780460
+        },
+        {
+          "pid": 2780466,
+          "start_ticks": 22199646,
+          "pgrp": 2780460
+        },
+        {
+          "pid": 2780467,
+          "start_ticks": 22199665,
+          "pgrp": 2780460
+        },
+        {
+          "pid": 2780469,
+          "start_ticks": 22199687,
+          "pgrp": 2780460
+        },
+        {
+          "pid": 2780470,
+          "start_ticks": 22199705,
+          "pgrp": 2780460
+        },
+        {
+          "pid": 2780471,
+          "start_ticks": 22199730,
+          "pgrp": 2780460
+        },
+        {
+          "pid": 2780472,
+          "start_ticks": 22199743,
+          "pgrp": 2780460
+        },
+        {
+          "pid": 2780479,
+          "start_ticks": 22199761,
+          "pgrp": 2780460
+        },
+        {
+          "pid": 2780480,
+          "start_ticks": 22199772,
+          "pgrp": 2780460
+        },
+        {
+          "pid": 2780482,
+          "start_ticks": 22199791,
+          "pgrp": 2780460
+        },
+        {
+          "pid": 2780483,
+          "start_ticks": 22199804,
+          "pgrp": 2780460
+        },
+        {
+          "pid": 2780484,
+          "start_ticks": 22199816,
+          "pgrp": 2780460
+        },
+        {
+          "pid": 2780495,
+          "start_ticks": 22199824,
+          "pgrp": 2780460
+        },
+        {
+          "pid": 2780500,
+          "start_ticks": 22199829,
+          "pgrp": 2780460
+        },
+        {
+          "pid": 2780501,
+          "start_ticks": 22199834,
+          "pgrp": 2780460
+        },
+        {
+          "pid": 2780502,
+          "start_ticks": 22199838,
+          "pgrp": 2780460
+        },
+        {
+          "pid": 2780503,
+          "start_ticks": 22199842,
+          "pgrp": 2780460
+        },
+        {
+          "pid": 2780504,
+          "start_ticks": 22199847,
+          "pgrp": 2780460
+        },
+        {
+          "pid": 2780505,
+          "start_ticks": 22199852,
+          "pgrp": 2780460
+        },
+        {
+          "pid": 2780507,
+          "start_ticks": 22199866,
+          "pgrp": 2780460
+        }
+      ],
+      "remaining": [],
+      "unknown_not_signalled": true,
+      "short_child_between_samples_missing": true
+    },
+    {
+      "run": "numeric-r1",
+      "command": [
+        "node",
+        "--max-old-space-size=192",
+        "tools/ai-sigma-true-mean-fpu-saved-independent/numeric.cjs"
+      ],
+      "UTC_start": "2026-10-02T19:23:28.609314+00:00",
+      "UTC_end": "2026-10-02T19:23:28.765733+00:00",
+      "wall_s": 0.15643754601478577,
+      "exit": 0,
+      "reason": null,
+      "peak_observed_RSS": 102690816,
+      "CPU": [
+        0
+      ],
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "owned": [
+        {
+          "pid": 2779560,
+          "start_ticks": 22192736,
+          "pgrp": 2779560
+        },
+        {
+          "pid": 2779562,
+          "start_ticks": 22192753,
+          "pgrp": 2779562
+        },
+        {
+          "pid": 2779569,
+          "start_ticks": 22192757,
+          "pgrp": 2779562
+        },
+        {
+          "pid": 2779570,
+          "start_ticks": 22192757,
+          "pgrp": 2779562
+        }
+      ],
+      "remaining": [],
+      "unknown_not_signalled": true,
+      "short_child_between_samples_missing": true
+    }
+  ],
+  "owned_observed_identity_count": 91,
+  "current_same_identity": [],
+  "read_errors": [],
+  "remaining_unknown_observed": false,
+  "current_absence_not_natural_fullperiod_allhost": true,
+  "short_child_between_samples_missing": true,
+  "managed_wall_s": 9.935557724005776,
+  "max_observed_RSS": 102690816,
+  "CPU": [
+    0
+  ],
+  "each_command_60_s": true,
+  "managed_180_s": true,
+  "RAM_guard": 469762048,
+  "readonly_short_intake_commands_outside_managed_clock": true
+}

@@ -1,0 +1,435 @@
+{
+  "at": "2026-10-03T02:55:35.441341+00:00",
+  "natural_run": "8407c748-49bb-46cb-8a85-15a09a9bb5ac",
+  "turn_id": "01a0ffae-45a5-7ca0-91a3-9dc033743804",
+  "observation": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/supervisor/8407c748-49bb-46cb-8a85-15a09a9bb5ac/read-guard/observation.json",
+  "observation_sha256": "c1908e6f566b6f866391a8ada525ad0bbbc2e97ea81519280003cacc6135b7b7",
+  "self_stop": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/supervisor/8407c748-49bb-46cb-8a85-15a09a9bb5ac/read-guard/self-stop.json",
+  "self_stop_sha256": "463ddfe31f63591fdcc46a7362d2b3ee210847442a147ca946ee5a7acabfebee",
+  "self_stop_at": {
+    "utc": "2026-10-03T02:55:01.652847+00:00",
+    "monotonic": 249032.061393127,
+    "process": {
+      "pid": 3078428,
+      "start_ticks": "24902899",
+      "state": "R",
+      "rss_bytes": 19492864,
+      "affinity": [
+        0
+      ]
+    },
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+    "environment": {
+      "UV_NO_SYNC": "1",
+      "UV_OFFLINE": "1",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "rlimit_as": [
+      -1,
+      -1
+    ],
+    "ram_budget_is_RSS_not_AS": true
+  },
+  "notes_exit": 0,
+  "backup_exit": 0,
+  "commands": [
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/supervisor/8407c748-49bb-46cb-8a85-15a09a9bb5ac/read-guard/inspect-248972312240520-issues-attempt-1.json",
+      "sha256": "f436f3a4124b1dcf44e91e30394e41f7bf1da0d64c688a17cbe226daf98aa107",
+      "exit_code": 0,
+      "reaped": true,
+      "child": {
+        "pid": 3077784,
+        "start_ticks": "24897405",
+        "state": "R",
+        "rss_bytes": 0,
+        "affinity": [
+          0
+        ]
+      },
+      "child_current": {
+        "pid": 3077784,
+        "absent": true
+      },
+      "sampled_combined_RSS_peak_bytes": 299171840
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/supervisor/8407c748-49bb-46cb-8a85-15a09a9bb5ac/read-guard/248945530459953-children-quoridor-4lc.92-attempt-1.json",
+      "sha256": "4b4aad96e592f44c552668e7e9f4536e5b166150c66274cd15e9f8194204731f",
+      "exit_code": 0,
+      "reaped": true,
+      "child": {
+        "pid": 3077359,
+        "start_ticks": "24894827",
+        "state": "R",
+        "rss_bytes": 0,
+        "affinity": [
+          0
+        ]
+      },
+      "child_current": {
+        "pid": 3077359,
+        "absent": true
+      },
+      "sampled_combined_RSS_peak_bytes": 266555392
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/supervisor/8407c748-49bb-46cb-8a85-15a09a9bb5ac/read-guard/248945530459953-children-quoridor-4lc.156-attempt-1.json",
+      "sha256": "a4c8948855a26e4d3c377ca67bcee257ebb4e0d28ec4072955450ac4596b8936",
+      "exit_code": 0,
+      "reaped": true,
+      "child": {
+        "pid": 3077388,
+        "start_ticks": "24894919",
+        "state": "R",
+        "rss_bytes": 0,
+        "affinity": [
+          0
+        ]
+      },
+      "child_current": {
+        "pid": 3077388,
+        "absent": true
+      },
+      "sampled_combined_RSS_peak_bytes": 257277952
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/supervisor/8407c748-49bb-46cb-8a85-15a09a9bb5ac/read-guard/inspect-248972312240520-file-0-attempt-1.json",
+      "sha256": "16dfe27701d828513091fde486ce01e9bce018ddbdf98b4b29be3db6522be1cd",
+      "exit_code": 0,
+      "reaped": true,
+      "child": {
+        "pid": 3077808,
+        "start_ticks": "24897490",
+        "state": "R",
+        "rss_bytes": 0,
+        "affinity": [
+          0
+        ]
+      },
+      "child_current": {
+        "pid": 3077808,
+        "absent": true
+      },
+      "sampled_combined_RSS_peak_bytes": 101175296
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/supervisor/8407c748-49bb-46cb-8a85-15a09a9bb5ac/read-guard/248945530459953-sessions-attempt-1.json",
+      "sha256": "253777cf5975c0f98cf2023f620e639fd9c8961ba089be3c69e4a7d28503a618",
+      "exit_code": 0,
+      "reaped": true,
+      "child": {
+        "pid": 3077528,
+        "start_ticks": "24895739",
+        "state": "D",
+        "rss_bytes": 2691072,
+        "affinity": [
+          0
+        ]
+      },
+      "child_current": {
+        "pid": 3077528,
+        "absent": true
+      },
+      "sampled_combined_RSS_peak_bytes": 112418816
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/supervisor/8407c748-49bb-46cb-8a85-15a09a9bb5ac/read-guard/backup.json",
+      "sha256": "6e84c00f40286a25ef9a1209595f1f7fd31c6c9765baaea89d26a13bd9553f02",
+      "exit_code": 0,
+      "reaped": true,
+      "child": {
+        "pid": 3078471,
+        "start_ticks": "24903124",
+        "state": "R",
+        "rss_bytes": 0,
+        "affinity": [
+          0
+        ]
+      },
+      "child_current": {
+        "pid": 3078471,
+        "absent": true
+      },
+      "sampled_combined_RSS_peak_bytes": 283488256
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/supervisor/8407c748-49bb-46cb-8a85-15a09a9bb5ac/read-guard/248945530459953-selected-attempt-1.json",
+      "sha256": "5bb127c272663ed660e9141c2b311f9cf3c9aed01495a284ca6292b74813fdec",
+      "exit_code": 0,
+      "reaped": true,
+      "child": {
+        "pid": 3077477,
+        "start_ticks": "24895291",
+        "state": "R",
+        "rss_bytes": 0,
+        "affinity": [
+          0
+        ]
+      },
+      "child_current": {
+        "pid": 3077477,
+        "absent": true
+      },
+      "sampled_combined_RSS_peak_bytes": 292511744
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/supervisor/8407c748-49bb-46cb-8a85-15a09a9bb5ac/read-guard/248945530459953-children-quoridor-4lc.155-attempt-1.json",
+      "sha256": "20cf9c5371201b619746415e51dfa648460883ec88824e27a72b4d2623bb73cb",
+      "exit_code": 0,
+      "reaped": true,
+      "child": {
+        "pid": 3077435,
+        "start_ticks": "24895108",
+        "state": "R",
+        "rss_bytes": 200704,
+        "affinity": [
+          0
+        ]
+      },
+      "child_current": {
+        "pid": 3077435,
+        "absent": true
+      },
+      "sampled_combined_RSS_peak_bytes": 286035968
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/supervisor/8407c748-49bb-46cb-8a85-15a09a9bb5ac/read-guard/248945530459953-current-attempt-1.json",
+      "sha256": "885c1c141ab3656bf4670232ab4303c00a5d5117945ba62d8c7a79c393aa5f9b",
+      "exit_code": 0,
+      "reaped": true,
+      "child": {
+        "pid": 3077333,
+        "start_ticks": "24894734",
+        "state": "R",
+        "rss_bytes": 0,
+        "affinity": [
+          0
+        ]
+      },
+      "child_current": {
+        "pid": 3077333,
+        "absent": true
+      },
+      "sampled_combined_RSS_peak_bytes": 269705216
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/supervisor/8407c748-49bb-46cb-8a85-15a09a9bb5ac/read-guard/248945530459953-ready-attempt-1.json",
+      "sha256": "0482c8d3978faa9439ef719932206f6d83ef5c8a2ee5adc3c52494df02799e9c",
+      "exit_code": 0,
+      "reaped": true,
+      "child": {
+        "pid": 3077313,
+        "start_ticks": "24894684",
+        "state": "R",
+        "rss_bytes": 0,
+        "affinity": [
+          0
+        ]
+      },
+      "child_current": {
+        "pid": 3077313,
+        "absent": true
+      },
+      "sampled_combined_RSS_peak_bytes": 246329344
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/supervisor/8407c748-49bb-46cb-8a85-15a09a9bb5ac/read-guard/notes.json",
+      "sha256": "445a9861309e3eb9c74a698f9f6ce0f12962c03ff664e4814dc1fe9dc0116a74",
+      "exit_code": 0,
+      "reaped": true,
+      "child": {
+        "pid": 3078453,
+        "start_ticks": "24903047",
+        "state": "R",
+        "rss_bytes": 0,
+        "affinity": [
+          0
+        ]
+      },
+      "child_current": {
+        "pid": 3078453,
+        "absent": true
+      },
+      "sampled_combined_RSS_peak_bytes": 289689600
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/supervisor/8407c748-49bb-46cb-8a85-15a09a9bb5ac/read-guard/inspect-248972312240520-core-attempt-1.json",
+      "sha256": "deb7f924c1ba3fb8f4f999f1c5e37af574f3a6874be3398a2997ee36da7f8c4d",
+      "exit_code": 0,
+      "reaped": true,
+      "child": {
+        "pid": 3077749,
+        "start_ticks": "24897233",
+        "state": "R",
+        "rss_bytes": 0,
+        "affinity": [
+          0
+        ]
+      },
+      "child_current": {
+        "pid": 3077749,
+        "absent": true
+      },
+      "sampled_combined_RSS_peak_bytes": 305950720
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/supervisor/8407c748-49bb-46cb-8a85-15a09a9bb5ac/read-guard/finish-authorization-249029022889127.json",
+      "sha256": "6882e8f1f32d73f01da6970608ff109c1559df2b41bf3db020212700bf1f0021",
+      "exit_code": 0,
+      "reaped": true,
+      "child": {
+        "pid": 3078429,
+        "start_ticks": "24902905",
+        "state": "R",
+        "rss_bytes": 0,
+        "affinity": [
+          0
+        ]
+      },
+      "child_current": {
+        "pid": 3078429,
+        "absent": true
+      },
+      "sampled_combined_RSS_peak_bytes": 319561728
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/supervisor/8407c748-49bb-46cb-8a85-15a09a9bb5ac/read-guard/248945530459953-core-attempt-1.json",
+      "sha256": "338de8b1c1323223684d9efef53ff0aa5fc6741da79a837dcde14600f0a528f3",
+      "exit_code": 0,
+      "reaped": true,
+      "child": {
+        "pid": 3077291,
+        "start_ticks": "24894554",
+        "state": "R",
+        "rss_bytes": 0,
+        "affinity": [
+          0
+        ]
+      },
+      "child_current": {
+        "pid": 3077291,
+        "absent": true
+      },
+      "sampled_combined_RSS_peak_bytes": 269365248
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/supervisor/8407c748-49bb-46cb-8a85-15a09a9bb5ac/read-guard/inspect-248972312240520-file-1-attempt-1.json",
+      "sha256": "c0fd0a4f7b41580bd97361df070ab6ba2374dcc974528a8500c6c1f4635802f0",
+      "exit_code": 0,
+      "reaped": true,
+      "child": {
+        "pid": 3077809,
+        "start_ticks": "24897495",
+        "state": "R",
+        "rss_bytes": 0,
+        "affinity": [
+          0
+        ]
+      },
+      "child_current": {
+        "pid": 3077809,
+        "absent": true
+      },
+      "sampled_combined_RSS_peak_bytes": 101175296
+    }
+  ],
+  "scheduler_state": {
+    "binding": {
+      "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+      "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+      "target": "supervisor",
+      "dispatch_issue": "quoridor-4lc.40",
+      "contract_file": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+    },
+    "process": {
+      "pid": 3070572,
+      "start_ticks": "24839468",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "phase": "running",
+    "recovery_required": false,
+    "last_result": {
+      "at": "2026-10-03T02:56:20.615817+00:00",
+      "event": "owned_turn_finished",
+      "turn_id": "01a0ffae-45a5-7ca0-91a3-9dc033743804",
+      "status": "completed"
+    },
+    "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+    "config_sha256": "a7e32c2daac065b8b9083d8a87a8da785a565f520314e8ec6b7031cbf73cc567",
+    "contract_sha256": "28ddad064ac75907b99c0bcaaec39b576298befd92f2575e2e70278cb01ee6dc",
+    "next_at": 1790997201.7420745,
+    "owned": null
+  },
+  "long_lived_own_identities": [
+    {
+      "pid": 3070572,
+      "state": "S",
+      "start_ticks": "24839468",
+      "rss_bytes": 90869760
+    },
+    {
+      "pid": 3070586,
+      "state": "S",
+      "start_ticks": "24839490",
+      "rss_bytes": 20955136
+    }
+  ],
+  "whole_period_verified": false,
+  "old_failures_retained": 7,
+  "official": {
+    "at": "2026-10-03T02:56:34.797851+00:00",
+    "thread_status": {
+      "type": "idle"
+    },
+    "latest_turns": [
+      {
+        "id": "01a0ffae-45a5-7ca0-91a3-9dc033743804",
+        "status": "completed",
+        "error": null
+      }
+    ],
+    "top_files": [
+      "handoff.md",
+      "notification.json"
+    ]
+  },
+  "notification": {
+    "run_id": "8407c748-49bb-46cb-8a85-15a09a9bb5ac",
+    "command": [
+      "bash",
+      "/workspaces/quoridor/scripts/dev/research-team.sh",
+      "report",
+      "--to",
+      "coordinator",
+      "--issue",
+      "quoridor-4lc",
+      "--body-file",
+      "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/supervisor/8407c748-49bb-46cb-8a85-15a09a9bb5ac/handoff.md"
+    ],
+    "started_utc": "2026-10-03T02:56:00.593258+00:00",
+    "fixed_deadline_monotonic": 249116.664214014,
+    "affinity": [
+      0
+    ],
+    "environment": {
+      "UV_NO_SYNC": "1",
+      "UV_OFFLINE": "1",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "accepted_is_not_adoption_or_whole_turn": true,
+    "child_pid": 3079350,
+    "exit_code": 0,
+    "stdout": "{\n  \"method\": \"turn/steer\",\n  \"thread_id\": \"01a0f31b-3409-75f2-a30e-453a50484f94\",\n  \"turn_id\": \"01a0ff97-6def-74f2-97d1-88c3a7c34527\",\n  \"accepted\": true\n}\n",
+    "stderr": "",
+    "delivery": "response_recorded",
+    "child_reaped": true,
+    "finished_utc": "2026-10-03T02:56:02.691338+00:00",
+    "remaining_seconds": 23.537222270999337,
+    "blind_resend": 0,
+    "whole_turn_completion_pending_external_AppServer": true
+  },
+  "notification_sha256": "b6e47f11c4a2d425552f9ebc5e34f7efe59c7eb574215da525a15d4a9f2b6e47",
+  "effect": "natural observe/inspect/notes/backup/self-stop succeeded; exact official turn completed/errornull"
+}

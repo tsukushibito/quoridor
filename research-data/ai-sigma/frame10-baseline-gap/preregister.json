@@ -1,0 +1,1092 @@
+{
+  "issue": "quoridor-4lc.149",
+  "UTC": "2026-10-03T00:38:58.088530+00:00",
+  "contract_Git": "40243b25804f8e929a6af5680c02a2b70bef39d1",
+  "adopted_supplement_Git": "9bafd9ef12298d2b587599f12ea02b4ba5f21123",
+  "seed_table_path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame10-coordinator-start/adopted-seeds.json",
+  "seed_table_SHA256": "a82f2d01875180aa6a4a53be6e62d1ae11b9ab01ef2b3d37e5a1b40a7ede5c04",
+  "old119_document": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261002/DIVERSE-PREFIX/runs/prefix119-generation-r1/generated-prefixes.json",
+  "old119_SHA256": "c8104df06585717c54900e02afcf62a9133a91fdfc2a25732da38dcc7b286e27",
+  "old119_archive": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/119-diverse-prefix/setup-generation-stop.tar.gz",
+  "old119_member": "runs/prefix119-generation-r1/generated-prefixes.json",
+  "old119_archive_SHA256": "6d8b63cedef1c39714249f90afe5d01135decd3e0deb8839ff99f570afffca2d",
+  "planned_games": [
+    {
+      "id": "slot01-color1",
+      "pair": 1,
+      "fixture_id": "frame10-prefix-1",
+      "candidate_color": 1,
+      "layer_ply": 12
+    },
+    {
+      "id": "slot01-color2",
+      "pair": 1,
+      "fixture_id": "frame10-prefix-1",
+      "candidate_color": 2,
+      "layer_ply": 12
+    },
+    {
+      "id": "slot02-color1",
+      "pair": 2,
+      "fixture_id": "frame10-prefix-2",
+      "candidate_color": 1,
+      "layer_ply": 4
+    },
+    {
+      "id": "slot02-color2",
+      "pair": 2,
+      "fixture_id": "frame10-prefix-2",
+      "candidate_color": 2,
+      "layer_ply": 4
+    },
+    {
+      "id": "slot03-color1",
+      "pair": 3,
+      "fixture_id": "frame10-prefix-3",
+      "candidate_color": 1,
+      "layer_ply": 13
+    },
+    {
+      "id": "slot03-color2",
+      "pair": 3,
+      "fixture_id": "frame10-prefix-3",
+      "candidate_color": 2,
+      "layer_ply": 13
+    },
+    {
+      "id": "slot04-color1",
+      "pair": 4,
+      "fixture_id": "frame10-prefix-4",
+      "candidate_color": 1,
+      "layer_ply": 5
+    },
+    {
+      "id": "slot04-color2",
+      "pair": 4,
+      "fixture_id": "frame10-prefix-4",
+      "candidate_color": 2,
+      "layer_ply": 5
+    },
+    {
+      "id": "slot05-color2",
+      "pair": 5,
+      "fixture_id": "frame10-prefix-5",
+      "candidate_color": 2,
+      "layer_ply": 5
+    },
+    {
+      "id": "slot05-color1",
+      "pair": 5,
+      "fixture_id": "frame10-prefix-5",
+      "candidate_color": 1,
+      "layer_ply": 5
+    },
+    {
+      "id": "slot06-color2",
+      "pair": 6,
+      "fixture_id": "frame10-prefix-6",
+      "candidate_color": 2,
+      "layer_ply": 13
+    },
+    {
+      "id": "slot06-color1",
+      "pair": 6,
+      "fixture_id": "frame10-prefix-6",
+      "candidate_color": 1,
+      "layer_ply": 13
+    },
+    {
+      "id": "slot07-color2",
+      "pair": 7,
+      "fixture_id": "frame10-prefix-7",
+      "candidate_color": 2,
+      "layer_ply": 4
+    },
+    {
+      "id": "slot07-color1",
+      "pair": 7,
+      "fixture_id": "frame10-prefix-7",
+      "candidate_color": 1,
+      "layer_ply": 4
+    },
+    {
+      "id": "slot08-color2",
+      "pair": 8,
+      "fixture_id": "frame10-prefix-8",
+      "candidate_color": 2,
+      "layer_ply": 12
+    },
+    {
+      "id": "slot08-color1",
+      "pair": 8,
+      "fixture_id": "frame10-prefix-8",
+      "candidate_color": 1,
+      "layer_ply": 12
+    },
+    {
+      "id": "slot09-color1",
+      "pair": 9,
+      "fixture_id": "frame10-prefix-9",
+      "candidate_color": 1,
+      "layer_ply": 13
+    },
+    {
+      "id": "slot09-color2",
+      "pair": 9,
+      "fixture_id": "frame10-prefix-9",
+      "candidate_color": 2,
+      "layer_ply": 13
+    },
+    {
+      "id": "slot10-color1",
+      "pair": 10,
+      "fixture_id": "frame10-prefix-10",
+      "candidate_color": 1,
+      "layer_ply": 5
+    },
+    {
+      "id": "slot10-color2",
+      "pair": 10,
+      "fixture_id": "frame10-prefix-10",
+      "candidate_color": 2,
+      "layer_ply": 5
+    },
+    {
+      "id": "slot11-color1",
+      "pair": 11,
+      "fixture_id": "frame10-prefix-11",
+      "candidate_color": 1,
+      "layer_ply": 4
+    },
+    {
+      "id": "slot11-color2",
+      "pair": 11,
+      "fixture_id": "frame10-prefix-11",
+      "candidate_color": 2,
+      "layer_ply": 4
+    },
+    {
+      "id": "slot12-color1",
+      "pair": 12,
+      "fixture_id": "frame10-prefix-12",
+      "candidate_color": 1,
+      "layer_ply": 12
+    },
+    {
+      "id": "slot12-color2",
+      "pair": 12,
+      "fixture_id": "frame10-prefix-12",
+      "candidate_color": 2,
+      "layer_ply": 12
+    },
+    {
+      "id": "slot13-color2",
+      "pair": 13,
+      "fixture_id": "frame10-prefix-13",
+      "candidate_color": 2,
+      "layer_ply": 5
+    },
+    {
+      "id": "slot13-color1",
+      "pair": 13,
+      "fixture_id": "frame10-prefix-13",
+      "candidate_color": 1,
+      "layer_ply": 5
+    },
+    {
+      "id": "slot14-color2",
+      "pair": 14,
+      "fixture_id": "frame10-prefix-14",
+      "candidate_color": 2,
+      "layer_ply": 13
+    },
+    {
+      "id": "slot14-color1",
+      "pair": 14,
+      "fixture_id": "frame10-prefix-14",
+      "candidate_color": 1,
+      "layer_ply": 13
+    },
+    {
+      "id": "slot15-color2",
+      "pair": 15,
+      "fixture_id": "frame10-prefix-15",
+      "candidate_color": 2,
+      "layer_ply": 4
+    },
+    {
+      "id": "slot15-color1",
+      "pair": 15,
+      "fixture_id": "frame10-prefix-15",
+      "candidate_color": 1,
+      "layer_ply": 4
+    },
+    {
+      "id": "slot16-color2",
+      "pair": 16,
+      "fixture_id": "frame10-prefix-16",
+      "candidate_color": 2,
+      "layer_ply": 12
+    },
+    {
+      "id": "slot16-color1",
+      "pair": 16,
+      "fixture_id": "frame10-prefix-16",
+      "candidate_color": 1,
+      "layer_ply": 12
+    },
+    {
+      "id": "slot17-color1",
+      "pair": 17,
+      "fixture_id": "frame10-prefix-17",
+      "candidate_color": 1,
+      "layer_ply": 5
+    },
+    {
+      "id": "slot17-color2",
+      "pair": 17,
+      "fixture_id": "frame10-prefix-17",
+      "candidate_color": 2,
+      "layer_ply": 5
+    },
+    {
+      "id": "slot18-color1",
+      "pair": 18,
+      "fixture_id": "frame10-prefix-18",
+      "candidate_color": 1,
+      "layer_ply": 13
+    },
+    {
+      "id": "slot18-color2",
+      "pair": 18,
+      "fixture_id": "frame10-prefix-18",
+      "candidate_color": 2,
+      "layer_ply": 13
+    },
+    {
+      "id": "slot19-color1",
+      "pair": 19,
+      "fixture_id": "frame10-prefix-19",
+      "candidate_color": 1,
+      "layer_ply": 12
+    },
+    {
+      "id": "slot19-color2",
+      "pair": 19,
+      "fixture_id": "frame10-prefix-19",
+      "candidate_color": 2,
+      "layer_ply": 12
+    },
+    {
+      "id": "slot20-color1",
+      "pair": 20,
+      "fixture_id": "frame10-prefix-20",
+      "candidate_color": 1,
+      "layer_ply": 4
+    },
+    {
+      "id": "slot20-color2",
+      "pair": 20,
+      "fixture_id": "frame10-prefix-20",
+      "candidate_color": 2,
+      "layer_ply": 4
+    },
+    {
+      "id": "slot21-color2",
+      "pair": 21,
+      "fixture_id": "frame10-prefix-21",
+      "candidate_color": 2,
+      "layer_ply": 4
+    },
+    {
+      "id": "slot21-color1",
+      "pair": 21,
+      "fixture_id": "frame10-prefix-21",
+      "candidate_color": 1,
+      "layer_ply": 4
+    },
+    {
+      "id": "slot22-color2",
+      "pair": 22,
+      "fixture_id": "frame10-prefix-22",
+      "candidate_color": 2,
+      "layer_ply": 12
+    },
+    {
+      "id": "slot22-color1",
+      "pair": 22,
+      "fixture_id": "frame10-prefix-22",
+      "candidate_color": 1,
+      "layer_ply": 12
+    },
+    {
+      "id": "slot23-color2",
+      "pair": 23,
+      "fixture_id": "frame10-prefix-23",
+      "candidate_color": 2,
+      "layer_ply": 13
+    },
+    {
+      "id": "slot23-color1",
+      "pair": 23,
+      "fixture_id": "frame10-prefix-23",
+      "candidate_color": 1,
+      "layer_ply": 13
+    },
+    {
+      "id": "slot24-color2",
+      "pair": 24,
+      "fixture_id": "frame10-prefix-24",
+      "candidate_color": 2,
+      "layer_ply": 5
+    },
+    {
+      "id": "slot24-color1",
+      "pair": 24,
+      "fixture_id": "frame10-prefix-24",
+      "candidate_color": 1,
+      "layer_ply": 5
+    },
+    {
+      "id": "slot25-color1",
+      "pair": 25,
+      "fixture_id": "frame10-prefix-25",
+      "candidate_color": 1,
+      "layer_ply": 5
+    },
+    {
+      "id": "slot25-color2",
+      "pair": 25,
+      "fixture_id": "frame10-prefix-25",
+      "candidate_color": 2,
+      "layer_ply": 5
+    },
+    {
+      "id": "slot26-color1",
+      "pair": 26,
+      "fixture_id": "frame10-prefix-26",
+      "candidate_color": 1,
+      "layer_ply": 4
+    },
+    {
+      "id": "slot26-color2",
+      "pair": 26,
+      "fixture_id": "frame10-prefix-26",
+      "candidate_color": 2,
+      "layer_ply": 4
+    },
+    {
+      "id": "slot27-color1",
+      "pair": 27,
+      "fixture_id": "frame10-prefix-27",
+      "candidate_color": 1,
+      "layer_ply": 13
+    },
+    {
+      "id": "slot27-color2",
+      "pair": 27,
+      "fixture_id": "frame10-prefix-27",
+      "candidate_color": 2,
+      "layer_ply": 13
+    },
+    {
+      "id": "slot28-color1",
+      "pair": 28,
+      "fixture_id": "frame10-prefix-28",
+      "candidate_color": 1,
+      "layer_ply": 12
+    },
+    {
+      "id": "slot28-color2",
+      "pair": 28,
+      "fixture_id": "frame10-prefix-28",
+      "candidate_color": 2,
+      "layer_ply": 12
+    },
+    {
+      "id": "slot29-color2",
+      "pair": 29,
+      "fixture_id": "frame10-prefix-29",
+      "candidate_color": 2,
+      "layer_ply": 13
+    },
+    {
+      "id": "slot29-color1",
+      "pair": 29,
+      "fixture_id": "frame10-prefix-29",
+      "candidate_color": 1,
+      "layer_ply": 13
+    },
+    {
+      "id": "slot30-color2",
+      "pair": 30,
+      "fixture_id": "frame10-prefix-30",
+      "candidate_color": 2,
+      "layer_ply": 5
+    },
+    {
+      "id": "slot30-color1",
+      "pair": 30,
+      "fixture_id": "frame10-prefix-30",
+      "candidate_color": 1,
+      "layer_ply": 5
+    },
+    {
+      "id": "slot31-color2",
+      "pair": 31,
+      "fixture_id": "frame10-prefix-31",
+      "candidate_color": 2,
+      "layer_ply": 12
+    },
+    {
+      "id": "slot31-color1",
+      "pair": 31,
+      "fixture_id": "frame10-prefix-31",
+      "candidate_color": 1,
+      "layer_ply": 12
+    },
+    {
+      "id": "slot32-color2",
+      "pair": 32,
+      "fixture_id": "frame10-prefix-32",
+      "candidate_color": 2,
+      "layer_ply": 4
+    },
+    {
+      "id": "slot32-color1",
+      "pair": 32,
+      "fixture_id": "frame10-prefix-32",
+      "candidate_color": 1,
+      "layer_ply": 4
+    }
+  ],
+  "groups": [
+    {
+      "group": 1,
+      "games": [
+        {
+          "id": "slot01-color1",
+          "pair": 1,
+          "fixture_id": "frame10-prefix-1",
+          "candidate_color": 1,
+          "layer_ply": 12
+        },
+        {
+          "id": "slot01-color2",
+          "pair": 1,
+          "fixture_id": "frame10-prefix-1",
+          "candidate_color": 2,
+          "layer_ply": 12
+        },
+        {
+          "id": "slot02-color1",
+          "pair": 2,
+          "fixture_id": "frame10-prefix-2",
+          "candidate_color": 1,
+          "layer_ply": 4
+        },
+        {
+          "id": "slot02-color2",
+          "pair": 2,
+          "fixture_id": "frame10-prefix-2",
+          "candidate_color": 2,
+          "layer_ply": 4
+        }
+      ]
+    },
+    {
+      "group": 2,
+      "games": [
+        {
+          "id": "slot03-color1",
+          "pair": 3,
+          "fixture_id": "frame10-prefix-3",
+          "candidate_color": 1,
+          "layer_ply": 13
+        },
+        {
+          "id": "slot03-color2",
+          "pair": 3,
+          "fixture_id": "frame10-prefix-3",
+          "candidate_color": 2,
+          "layer_ply": 13
+        },
+        {
+          "id": "slot04-color1",
+          "pair": 4,
+          "fixture_id": "frame10-prefix-4",
+          "candidate_color": 1,
+          "layer_ply": 5
+        },
+        {
+          "id": "slot04-color2",
+          "pair": 4,
+          "fixture_id": "frame10-prefix-4",
+          "candidate_color": 2,
+          "layer_ply": 5
+        }
+      ]
+    },
+    {
+      "group": 3,
+      "games": [
+        {
+          "id": "slot05-color2",
+          "pair": 5,
+          "fixture_id": "frame10-prefix-5",
+          "candidate_color": 2,
+          "layer_ply": 5
+        },
+        {
+          "id": "slot05-color1",
+          "pair": 5,
+          "fixture_id": "frame10-prefix-5",
+          "candidate_color": 1,
+          "layer_ply": 5
+        },
+        {
+          "id": "slot06-color2",
+          "pair": 6,
+          "fixture_id": "frame10-prefix-6",
+          "candidate_color": 2,
+          "layer_ply": 13
+        },
+        {
+          "id": "slot06-color1",
+          "pair": 6,
+          "fixture_id": "frame10-prefix-6",
+          "candidate_color": 1,
+          "layer_ply": 13
+        }
+      ]
+    },
+    {
+      "group": 4,
+      "games": [
+        {
+          "id": "slot07-color2",
+          "pair": 7,
+          "fixture_id": "frame10-prefix-7",
+          "candidate_color": 2,
+          "layer_ply": 4
+        },
+        {
+          "id": "slot07-color1",
+          "pair": 7,
+          "fixture_id": "frame10-prefix-7",
+          "candidate_color": 1,
+          "layer_ply": 4
+        },
+        {
+          "id": "slot08-color2",
+          "pair": 8,
+          "fixture_id": "frame10-prefix-8",
+          "candidate_color": 2,
+          "layer_ply": 12
+        },
+        {
+          "id": "slot08-color1",
+          "pair": 8,
+          "fixture_id": "frame10-prefix-8",
+          "candidate_color": 1,
+          "layer_ply": 12
+        }
+      ]
+    },
+    {
+      "group": 5,
+      "games": [
+        {
+          "id": "slot09-color1",
+          "pair": 9,
+          "fixture_id": "frame10-prefix-9",
+          "candidate_color": 1,
+          "layer_ply": 13
+        },
+        {
+          "id": "slot09-color2",
+          "pair": 9,
+          "fixture_id": "frame10-prefix-9",
+          "candidate_color": 2,
+          "layer_ply": 13
+        },
+        {
+          "id": "slot10-color1",
+          "pair": 10,
+          "fixture_id": "frame10-prefix-10",
+          "candidate_color": 1,
+          "layer_ply": 5
+        },
+        {
+          "id": "slot10-color2",
+          "pair": 10,
+          "fixture_id": "frame10-prefix-10",
+          "candidate_color": 2,
+          "layer_ply": 5
+        }
+      ]
+    },
+    {
+      "group": 6,
+      "games": [
+        {
+          "id": "slot11-color1",
+          "pair": 11,
+          "fixture_id": "frame10-prefix-11",
+          "candidate_color": 1,
+          "layer_ply": 4
+        },
+        {
+          "id": "slot11-color2",
+          "pair": 11,
+          "fixture_id": "frame10-prefix-11",
+          "candidate_color": 2,
+          "layer_ply": 4
+        },
+        {
+          "id": "slot12-color1",
+          "pair": 12,
+          "fixture_id": "frame10-prefix-12",
+          "candidate_color": 1,
+          "layer_ply": 12
+        },
+        {
+          "id": "slot12-color2",
+          "pair": 12,
+          "fixture_id": "frame10-prefix-12",
+          "candidate_color": 2,
+          "layer_ply": 12
+        }
+      ]
+    },
+    {
+      "group": 7,
+      "games": [
+        {
+          "id": "slot13-color2",
+          "pair": 13,
+          "fixture_id": "frame10-prefix-13",
+          "candidate_color": 2,
+          "layer_ply": 5
+        },
+        {
+          "id": "slot13-color1",
+          "pair": 13,
+          "fixture_id": "frame10-prefix-13",
+          "candidate_color": 1,
+          "layer_ply": 5
+        },
+        {
+          "id": "slot14-color2",
+          "pair": 14,
+          "fixture_id": "frame10-prefix-14",
+          "candidate_color": 2,
+          "layer_ply": 13
+        },
+        {
+          "id": "slot14-color1",
+          "pair": 14,
+          "fixture_id": "frame10-prefix-14",
+          "candidate_color": 1,
+          "layer_ply": 13
+        }
+      ]
+    },
+    {
+      "group": 8,
+      "games": [
+        {
+          "id": "slot15-color2",
+          "pair": 15,
+          "fixture_id": "frame10-prefix-15",
+          "candidate_color": 2,
+          "layer_ply": 4
+        },
+        {
+          "id": "slot15-color1",
+          "pair": 15,
+          "fixture_id": "frame10-prefix-15",
+          "candidate_color": 1,
+          "layer_ply": 4
+        },
+        {
+          "id": "slot16-color2",
+          "pair": 16,
+          "fixture_id": "frame10-prefix-16",
+          "candidate_color": 2,
+          "layer_ply": 12
+        },
+        {
+          "id": "slot16-color1",
+          "pair": 16,
+          "fixture_id": "frame10-prefix-16",
+          "candidate_color": 1,
+          "layer_ply": 12
+        }
+      ]
+    },
+    {
+      "group": 9,
+      "games": [
+        {
+          "id": "slot17-color1",
+          "pair": 17,
+          "fixture_id": "frame10-prefix-17",
+          "candidate_color": 1,
+          "layer_ply": 5
+        },
+        {
+          "id": "slot17-color2",
+          "pair": 17,
+          "fixture_id": "frame10-prefix-17",
+          "candidate_color": 2,
+          "layer_ply": 5
+        },
+        {
+          "id": "slot18-color1",
+          "pair": 18,
+          "fixture_id": "frame10-prefix-18",
+          "candidate_color": 1,
+          "layer_ply": 13
+        },
+        {
+          "id": "slot18-color2",
+          "pair": 18,
+          "fixture_id": "frame10-prefix-18",
+          "candidate_color": 2,
+          "layer_ply": 13
+        }
+      ]
+    },
+    {
+      "group": 10,
+      "games": [
+        {
+          "id": "slot19-color1",
+          "pair": 19,
+          "fixture_id": "frame10-prefix-19",
+          "candidate_color": 1,
+          "layer_ply": 12
+        },
+        {
+          "id": "slot19-color2",
+          "pair": 19,
+          "fixture_id": "frame10-prefix-19",
+          "candidate_color": 2,
+          "layer_ply": 12
+        },
+        {
+          "id": "slot20-color1",
+          "pair": 20,
+          "fixture_id": "frame10-prefix-20",
+          "candidate_color": 1,
+          "layer_ply": 4
+        },
+        {
+          "id": "slot20-color2",
+          "pair": 20,
+          "fixture_id": "frame10-prefix-20",
+          "candidate_color": 2,
+          "layer_ply": 4
+        }
+      ]
+    },
+    {
+      "group": 11,
+      "games": [
+        {
+          "id": "slot21-color2",
+          "pair": 21,
+          "fixture_id": "frame10-prefix-21",
+          "candidate_color": 2,
+          "layer_ply": 4
+        },
+        {
+          "id": "slot21-color1",
+          "pair": 21,
+          "fixture_id": "frame10-prefix-21",
+          "candidate_color": 1,
+          "layer_ply": 4
+        },
+        {
+          "id": "slot22-color2",
+          "pair": 22,
+          "fixture_id": "frame10-prefix-22",
+          "candidate_color": 2,
+          "layer_ply": 12
+        },
+        {
+          "id": "slot22-color1",
+          "pair": 22,
+          "fixture_id": "frame10-prefix-22",
+          "candidate_color": 1,
+          "layer_ply": 12
+        }
+      ]
+    },
+    {
+      "group": 12,
+      "games": [
+        {
+          "id": "slot23-color2",
+          "pair": 23,
+          "fixture_id": "frame10-prefix-23",
+          "candidate_color": 2,
+          "layer_ply": 13
+        },
+        {
+          "id": "slot23-color1",
+          "pair": 23,
+          "fixture_id": "frame10-prefix-23",
+          "candidate_color": 1,
+          "layer_ply": 13
+        },
+        {
+          "id": "slot24-color2",
+          "pair": 24,
+          "fixture_id": "frame10-prefix-24",
+          "candidate_color": 2,
+          "layer_ply": 5
+        },
+        {
+          "id": "slot24-color1",
+          "pair": 24,
+          "fixture_id": "frame10-prefix-24",
+          "candidate_color": 1,
+          "layer_ply": 5
+        }
+      ]
+    },
+    {
+      "group": 13,
+      "games": [
+        {
+          "id": "slot25-color1",
+          "pair": 25,
+          "fixture_id": "frame10-prefix-25",
+          "candidate_color": 1,
+          "layer_ply": 5
+        },
+        {
+          "id": "slot25-color2",
+          "pair": 25,
+          "fixture_id": "frame10-prefix-25",
+          "candidate_color": 2,
+          "layer_ply": 5
+        },
+        {
+          "id": "slot26-color1",
+          "pair": 26,
+          "fixture_id": "frame10-prefix-26",
+          "candidate_color": 1,
+          "layer_ply": 4
+        },
+        {
+          "id": "slot26-color2",
+          "pair": 26,
+          "fixture_id": "frame10-prefix-26",
+          "candidate_color": 2,
+          "layer_ply": 4
+        }
+      ]
+    },
+    {
+      "group": 14,
+      "games": [
+        {
+          "id": "slot27-color1",
+          "pair": 27,
+          "fixture_id": "frame10-prefix-27",
+          "candidate_color": 1,
+          "layer_ply": 13
+        },
+        {
+          "id": "slot27-color2",
+          "pair": 27,
+          "fixture_id": "frame10-prefix-27",
+          "candidate_color": 2,
+          "layer_ply": 13
+        },
+        {
+          "id": "slot28-color1",
+          "pair": 28,
+          "fixture_id": "frame10-prefix-28",
+          "candidate_color": 1,
+          "layer_ply": 12
+        },
+        {
+          "id": "slot28-color2",
+          "pair": 28,
+          "fixture_id": "frame10-prefix-28",
+          "candidate_color": 2,
+          "layer_ply": 12
+        }
+      ]
+    },
+    {
+      "group": 15,
+      "games": [
+        {
+          "id": "slot29-color2",
+          "pair": 29,
+          "fixture_id": "frame10-prefix-29",
+          "candidate_color": 2,
+          "layer_ply": 13
+        },
+        {
+          "id": "slot29-color1",
+          "pair": 29,
+          "fixture_id": "frame10-prefix-29",
+          "candidate_color": 1,
+          "layer_ply": 13
+        },
+        {
+          "id": "slot30-color2",
+          "pair": 30,
+          "fixture_id": "frame10-prefix-30",
+          "candidate_color": 2,
+          "layer_ply": 5
+        },
+        {
+          "id": "slot30-color1",
+          "pair": 30,
+          "fixture_id": "frame10-prefix-30",
+          "candidate_color": 1,
+          "layer_ply": 5
+        }
+      ]
+    },
+    {
+      "group": 16,
+      "games": [
+        {
+          "id": "slot31-color2",
+          "pair": 31,
+          "fixture_id": "frame10-prefix-31",
+          "candidate_color": 2,
+          "layer_ply": 12
+        },
+        {
+          "id": "slot31-color1",
+          "pair": 31,
+          "fixture_id": "frame10-prefix-31",
+          "candidate_color": 1,
+          "layer_ply": 12
+        },
+        {
+          "id": "slot32-color2",
+          "pair": 32,
+          "fixture_id": "frame10-prefix-32",
+          "candidate_color": 2,
+          "layer_ply": 4
+        },
+        {
+          "id": "slot32-color1",
+          "pair": 32,
+          "fixture_id": "frame10-prefix-32",
+          "candidate_color": 1,
+          "layer_ply": 4
+        }
+      ]
+    }
+  ],
+  "total_slots": 32,
+  "total_game_denominator": 64,
+  "layers": {
+    "4": 8,
+    "5": 8,
+    "12": 8,
+    "13": 8
+  },
+  "policy": {
+    "candidate": "immutable Q0/C1.5/sqrt(N+1)/f32/original order/finish/caps512depth24",
+    "reference": "fixedSigma C1/FPU.2/first/temp0/original order/uncapped",
+    "seed": 1979,
+    "T_ms": 500,
+    "cutoff_ms": 402,
+    "adopt_ms": 411,
+    "SAB": "bounded2sample",
+    "CPU": [
+      2
+    ],
+    "ORT": "1.21.0 WASM CPU each1thread",
+    "model_SHA256": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+    "candidate_Wasm_SHA256": "1f54d0b8f0c6d3d7d51935886ed506e44376a2052506be62ca7a726c85a78a01"
+  },
+  "generation": {
+    "browser_main_RuleA": true,
+    "attempt_cap": 8,
+    "first": "legal nonterminal not old119 trueState key/history/side signature",
+    "new_duplicates": "retained with prefix/state flags",
+    "class": "half pawn/wall when both available, uniform index from original legal class order; same xorshift draw consumption as119",
+    "AI_NN_filter": false,
+    "no_replacements": true
+  },
+  "score": {
+    "operational_known": "terminal goal win1/draw.5/loss0; candidate responsibility_faultloss score0",
+    "unknown": "reference fault/sharedinfra/unfinished/unstarted/ungenerated score[0,1]",
+    "main": "[sum lower/64,sum upper/64]; pairXi each color interval mean; four layers equal8",
+    "quality_auxiliary": "both terminal normal games only, denominator and selection limit explicit",
+    "complete_only": "auxiliary, cannot replace main64",
+    "reference_interval": "clip(mean interval endpoints +/- sqrt(log(40)/(2*32))) independent bounded-pair assumption only, not coverage guarantee",
+    "pair_patterns": "both candidate wins/losses/draws vs one each vs same physical-side winner retained",
+    "terminal_quality_main": "all64 identification interval; both candidate/reference faults unknown[0,1], same normal goal/draw scores; complete-only auxiliary never main"
+  },
+  "stop": "all32pairs or resource/absolute deadlines/owned recovery failure; no interim WDL based stop,change,replacement",
+  "deadline": {
+    "issue": "quoridor-4lc.149",
+    "frame": 10,
+    "received": "2026-10-03T00:28:04.562204+00:00",
+    "contract_Git": "40243b25804f8e929a6af5680c02a2b70bef39d1",
+    "Git_before": "40243b25804f8e929a6af5680c02a2b70bef39d1",
+    "processing": "2026-10-03T03:28:04.562204+00:00",
+    "newheavy": "2026-10-03T03:18:04.562204+00:00",
+    "submission": "2026-10-03T03:43:04.562204+00:00"
+  },
+  "startup": "6 per group/2 retained sessions, separate from handNN",
+  "limits": {
+    "static_seconds": 300,
+    "Chrome_seconds": 7200,
+    "job_seconds": 600,
+    "games_per_job": 4,
+    "storage_guard": 234881024,
+    "forecast_per_job": 16777216
+  },
+  "claims": {
+    "NI": false,
+    "general_strength": false,
+    "IID": false,
+    "balanced": false,
+    "CPUcycle_fair": false,
+    "kernel_NN_time": false,
+    "newNNgolden": false
+  },
+  "old119_member_SHA256": "c8104df06585717c54900e02afcf62a9133a91fdfc2a25732da38dcc7b286e27",
+  "source_binding": {
+    "tools/ai-sigma-baseline-gap-frame10/input.js": "e19b31fb860131718635c8db843343a7ec967f1867b80eeb263abf9419c8b5a2",
+    "tools/ai-sigma-baseline-gap-frame10/diagnose.cjs": "bd2e9c57e582f0a89eefbb1cff38363b72cdf4128f2bfcf62017981c45ef7c5d",
+    "tools/ai-sigma-baseline-gap-frame10/main.js": "fe8462aefb2eb660d911ba58e0d11c9b7ac66c153c6085f0bb52f8d9fa2440db",
+    "tools/ai-sigma-baseline-gap-frame10/static.cjs": "dbce4ecab13f096b68bb64d3ffbfed5cea00138f06bc3e93e766af0fa7c7d3c2",
+    "tools/ai-sigma-baseline-gap-frame10/runner.py": "1235c507ca34cf3924a2159be9aee7d6b61d5db0bc97f808579825c498cb2e52",
+    "tools/ai-sigma-baseline-gap-frame10/admission.py": "d005e1cffa2ed10987d81a68260d2ef3a332d283d2a105701db8a5eacea2027c",
+    "tools/ai-sigma-baseline-gap-frame10/browser.cjs": "83d8fb41a286d2f65bb210aaf0c062724bd90bd4ff3ad1fb401b80d51f4515c6",
+    "tools/ai-sigma-baseline-gap-frame10/adapters.cjs": "3019aab002c7a5305c2af1b6013dd0624c79b94c3a07cd9ebc8027faf2bd7ca5"
+  },
+  "source_binding_before_generation": true,
+  "input_SHA256": "71505c5d56aa775938d00aec4e1fc10f10bac6bed5921411a8649936d95445b2",
+  "input_document": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame10-baseline-gap/inputs.json",
+  "generation_source_Git": "4173f40",
+  "NN_before_registration": 0,
+  "aggregation_clarification_Git": "2996f9b05328d70b8c3291cb58017373ee69b9cc",
+  "source_binding_before_AI": {
+    "tools/ai-sigma-baseline-gap-frame10/input.js": "e19b31fb860131718635c8db843343a7ec967f1867b80eeb263abf9419c8b5a2",
+    "tools/ai-sigma-baseline-gap-frame10/diagnose.cjs": "45c7450ce0a97727eba7c9e9993761bb02d5be452c07217fde3cc9f5407d6b84",
+    "tools/ai-sigma-baseline-gap-frame10/main.js": "fe8462aefb2eb660d911ba58e0d11c9b7ac66c153c6085f0bb52f8d9fa2440db",
+    "tools/ai-sigma-baseline-gap-frame10/static.cjs": "dbce4ecab13f096b68bb64d3ffbfed5cea00138f06bc3e93e766af0fa7c7d3c2",
+    "tools/ai-sigma-baseline-gap-frame10/runner.py": "1235c507ca34cf3924a2159be9aee7d6b61d5db0bc97f808579825c498cb2e52",
+    "tools/ai-sigma-baseline-gap-frame10/admission.py": "8f4dbed43627b23a5f48a7000646a7ab746761757ab2dd3399fcdc105cc14fff",
+    "tools/ai-sigma-baseline-gap-frame10/browser.cjs": "83d8fb41a286d2f65bb210aaf0c062724bd90bd4ff3ad1fb401b80d51f4515c6",
+    "tools/ai-sigma-baseline-gap-frame10/archive.py": "7d16e5d99ad0b377288e9b4da9558ded4240b57dc835af7d6939953ee962e52e",
+    "tools/ai-sigma-baseline-gap-frame10/adapters.cjs": "74128c0761f7f8f50141138a69258d75b085c813e56256ce742e3d07aa417755"
+  }
+}

@@ -1,0 +1,526 @@
+{
+  "issue": "quoridor-4lc.151",
+  "helper_only_modelNN0": true,
+  "records": [
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-pack-r1.process.json",
+      "SHA256": "b281911b9bdba7f098e8deefce36803afe0dc2d1d97fb87559d438cbc653622f",
+      "body": {
+        "phase": "protocol",
+        "name": "port151-pack-r1",
+        "cmd": [
+          "python3",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/pack.py"
+        ],
+        "start": "2026-10-03T02:09:30.711071+00:00",
+        "end": "2026-10-03T02:09:32.551105+00:00",
+        "subreaper_set_rc": 0,
+        "subreaper_get_rc": 0,
+        "subreaper_value": 1,
+        "kernel_boundary": {
+          "valid": true,
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+          "launcher": {
+            "pid": 3038854,
+            "ppid": 2009,
+            "pgid": 3038854,
+            "start_ticks": 24629944,
+            "state": "R",
+            "rss": 18137088,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          },
+          "root": {
+            "pid": 3038860,
+            "ppid": 3038854,
+            "pgid": 3038860,
+            "start_ticks": 24629956,
+            "state": "R",
+            "rss": 6787072,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "initial_children": [],
+          "spawn_count": 1,
+          "single_thread_initial": true,
+          "sole_explicit_root": true
+        },
+        "runner_pid": 3038854,
+        "runner_starttick": 24629944,
+        "child_pid": 3038860,
+        "child_starttick": 24629956,
+        "exit": 0,
+        "stop_reason": null,
+        "sample_interval_ms": 40,
+        "peak_group_plus_runner_RSS": 57647104,
+        "peak_allocated_bytes": 216129536,
+        "final_allocated_bytes": 216129536,
+        "tracked": [
+          {
+            "pid": 3038860,
+            "ppid": 3038854,
+            "pgid": 3038860,
+            "start_ticks": 24629956,
+            "state": "R",
+            "rss": 8609792,
+            "utime_ticks": 79,
+            "stime_ticks": 14,
+            "maxrss": 35651584,
+            "affinities": [
+              [
+                0
+              ]
+            ],
+            "TID_samples": 86,
+            "last_ppid": 3038854,
+            "last_state": "R"
+          }
+        ],
+        "remaining": [],
+        "kernel_identity_count": 1,
+        "kernel_adoptions": [],
+        "ledger_registered_count": 0,
+        "ledger_rejected": {},
+        "ledger_monitor_remaining_consistent": true,
+        "unknown_adopted": [],
+        "privateTMP_alias": "/proc/3038854/cwd/t",
+        "privateTMP_realpath": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/t",
+        "assigned_CPU": 0,
+        "process_deadline": "2026-10-03T03:17:36.232260+00:00",
+        "newjob_cutoff": "2026-10-03T03:07:36.232260+00:00",
+        "guardRSS": 939524096,
+        "contractRAM": 1073741824,
+        "guard_basis": "current_proc_rss_runner_plus_owned_children",
+        "runner_ru_maxrss_bytes": 615759872,
+        "all_observed_TIDs_at_assigned_CPU": true,
+        "affinity_violations": [],
+        "instant_peak_not_guaranteed": true,
+        "runner_sha256": "0232a84866a3840c3819b58c19580fb4a56d7ede85bf18e4d2f1b28654109ccc"
+      }
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-pack-r1.started.json",
+      "SHA256": "bd1b86239c4ffac98aa1ee2288b32a83c45798266ed25b46509d749206db579b",
+      "body": {
+        "subreaper_set_rc": 0,
+        "subreaper_get_rc": 0,
+        "subreaper_value": 1,
+        "kernel_boundary": {
+          "valid": true,
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+          "launcher": {
+            "pid": 3038854,
+            "ppid": 2009,
+            "pgid": 3038854,
+            "start_ticks": 24629944,
+            "state": "R",
+            "rss": 18137088,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          },
+          "root": {
+            "pid": 3038860,
+            "ppid": 3038854,
+            "pgid": 3038860,
+            "start_ticks": 24629956,
+            "state": "R",
+            "rss": 6787072,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "initial_children": [],
+          "spawn_count": 1,
+          "single_thread_initial": true,
+          "sole_explicit_root": true
+        },
+        "runner_pid": 3038854,
+        "runner_starttick": 24629944,
+        "child_pid": 3038860,
+        "child_starttick": 24629956,
+        "PGID": 3038860,
+        "startUTC": "2026-10-03T02:09:30.711071+00:00",
+        "git_commit": null,
+        "run_id": null,
+        "command": [
+          "python3",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/pack.py"
+        ],
+        "cwd": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port",
+        "deadline": 1790993430.7790499,
+        "affinity": [
+          0
+        ],
+        "guardRSS": 939524096,
+        "contractRAM": 1073741824,
+        "guard_basis": "current_proc_rss_runner_plus_owned_children",
+        "runner_initial_ru_maxrss": 615759872,
+        "guardStorage": 234881024,
+        "temp": "/proc/3038854/cwd/t",
+        "temp_realpath": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/t"
+      }
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-pack-r1.admission.json",
+      "SHA256": "28eef9adf9def09f67edd029922285f4343aa5f09e965e9fa5aedbbfe140b88f",
+      "body": {
+        "decision": "launch_allowed",
+        "before_child_spawn": true,
+        "UTC": "2026-10-03T02:09:30.765141+00:00",
+        "external_heavy": [],
+        "recognized_metadata": [],
+        "old149_current_same_identity": [],
+        "old149_stop_SHA256": "f41c4d9c6263c908e268950edde977b94a94a967ab8dca5e85fc669287e79b8e",
+        "physical_RAM_headroom": {
+          "MemFree": 17564647424,
+          "MemAvailable": 21158416384
+        },
+        "parent_research_current": [],
+        "operation_conservative_headroom": 134217728,
+        "current_allocated": 150532096,
+        "forecast": 67108864,
+        "guard": 234881024,
+        "used_seconds": 2.4992289999999997,
+        "previous_game_starts": 0,
+        "old149_current_retained": 24137728,
+        "existing_entry_conservative": 2147483648,
+        "old_unknown_not_reduced": true,
+        "additional_reservation": 0,
+        "whole_host_background_and_fullperiod_not_proved": true
+      }
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-pack-r1.inputs.json",
+      "SHA256": "3fbdb3b63acc0bdb1164ba23acd95557ccc44dbb219d1153a1360aa63756f665",
+      "body": {
+        "git_commit": null,
+        "source": {
+          "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/adapters.cjs": "c02f218acbc03978c0d55ebde213a08d2edadb13b16aa5324e46bce7331de69f",
+          "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/admission.py": "5bf436602222a01c81f0065f1e2ba72c983a7f87ba07e58511a41200a4dc7f0e",
+          "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/browser.cjs": "53a26f2d75558a6ad2ea13c52217da708c1a1d7d355719e7d451dd6ef8345d81",
+          "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/build.py": "03c88bea3523511a5c8fce4465645d57fba7ef4a1d90e046d1e4a7cbe74226ea",
+          "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/capture-stop.py": "aa06b592ab8b3454f0750f5a8087ec8959ca3e96674877c39161e413230c0133",
+          "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/check-stageA.py": "8ddb425624edbbbaad6836bfc97535f0609900dad9a4f1e47aec4a79086af23f",
+          "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/collect-games.py": "cb5557268b9d8bcf64d160d9211d91242bd928221bebc8cd48dcc9640438b6ab",
+          "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/diagnose.cjs": "74e34f9c6e027bb0c43aaeaec6bd76e71ecac765da9f6a7f9a5450c722b51140",
+          "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/monitor-mock.cjs": "dde7304d485b38d2b30ce5f725c2dfd73b8805a35dcc9e91858d2d21e74d6672",
+          "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/oracle.cjs": "7bdf4048a3e1322b0821ca794af98682da4037efed4868b67c4efb9a4b4667a2",
+          "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/pause-monitor.cjs": "37ec727ccf516165f703a24dc4b74563a22a1028c63546e394121cf499cef0cf",
+          "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/port-main.js": "542355b984a6cf35e22ab8799b9b7e5a928265e99f07e1caf83042e72b214ece",
+          "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/port-worker.js": "f82e3e1a10572576c0efa2088b00eaf62610cef18e6b71f7d7ebc9c506723d8a",
+          "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/runner.py": "0232a84866a3840c3819b58c19580fb4a56d7ede85bf18e4d2f1b28654109ccc",
+          "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/transport-mock.cjs": "f8809c35491213f19ede2acbad68589926c194a4202b8d123c5f12eecdcf17c2"
+        }
+      }
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-pack-r1.owned-ack.json",
+      "SHA256": "80812931b8920825526fb90e9de10c6d4de602a62b2cc2b872dc065895d585cb",
+      "body": {
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "accepted": {},
+        "rejected": {},
+        "unknown_adopted": [],
+        "registered_live": [],
+        "kernel_boundary": {
+          "valid": true,
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+          "launcher": {
+            "pid": 3038854,
+            "ppid": 2009,
+            "pgid": 3038854,
+            "start_ticks": 24629944,
+            "state": "R",
+            "rss": 18137088,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          },
+          "root": {
+            "pid": 3038860,
+            "ppid": 3038854,
+            "pgid": 3038860,
+            "start_ticks": 24629956,
+            "state": "R",
+            "rss": 6787072,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "initial_children": [],
+          "spawn_count": 1,
+          "single_thread_initial": true,
+          "sole_explicit_root": true
+        },
+        "kernel_owned": []
+      }
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-pack-r1.log",
+      "SHA256": "3da2a72ac7e8a8a79d525ee7399885b6c3d265e84991ec9d653c095d11b66cf1",
+      "text": "{\"archives\": 7, \"members\": 347, \"compressed_bytes\": 12946521, \"all_stream_and_min_restore_verified\": true}\n"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-pack-r1.owned-ledger.jsonl",
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "text": ""
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-static-terminal-posthoc.process.json",
+      "SHA256": "e6dd8e91d2b220bfc810146077f3ee0111ba573d119fb40e3b63b50af133f1ad",
+      "body": {
+        "phase": "protocol",
+        "name": "port151-static-terminal-posthoc",
+        "cmd": [
+          "node",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/terminal-posthoc.cjs"
+        ],
+        "start": "2026-10-03T02:14:59.370872+00:00",
+        "end": "2026-10-03T02:14:59.500445+00:00",
+        "subreaper_set_rc": 0,
+        "subreaper_get_rc": 0,
+        "subreaper_value": 1,
+        "kernel_boundary": {
+          "valid": true,
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+          "launcher": {
+            "pid": 3042983,
+            "ppid": 2009,
+            "pgid": 3042983,
+            "start_ticks": 24662829,
+            "state": "R",
+            "rss": 18157568,
+            "utime_ticks": 2,
+            "stime_ticks": 1
+          },
+          "root": {
+            "pid": 3042995,
+            "ppid": 3042983,
+            "pgid": 3042995,
+            "start_ticks": 24662838,
+            "state": "R",
+            "rss": 21200896,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "initial_children": [],
+          "spawn_count": 1,
+          "single_thread_initial": true,
+          "sole_explicit_root": true
+        },
+        "runner_pid": 3042983,
+        "runner_starttick": 24662829,
+        "child_pid": 3042995,
+        "child_starttick": 24662838,
+        "exit": 0,
+        "stop_reason": null,
+        "sample_interval_ms": 40,
+        "peak_group_plus_runner_RSS": 82989056,
+        "peak_allocated_bytes": 216174592,
+        "final_allocated_bytes": 216182784,
+        "tracked": [
+          {
+            "pid": 3042995,
+            "ppid": 3042983,
+            "pgid": 3042995,
+            "start_ticks": 24662838,
+            "state": "R",
+            "rss": 34926592,
+            "utime_ticks": 4,
+            "stime_ticks": 0,
+            "maxrss": 61030400,
+            "affinities": [
+              [
+                0
+              ]
+            ],
+            "TID_samples": 26,
+            "last_ppid": 3042983,
+            "last_state": "R"
+          }
+        ],
+        "remaining": [],
+        "kernel_identity_count": 1,
+        "kernel_adoptions": [],
+        "ledger_registered_count": 0,
+        "ledger_rejected": {},
+        "ledger_monitor_remaining_consistent": true,
+        "unknown_adopted": [],
+        "privateTMP_alias": "/proc/3042983/cwd/t",
+        "privateTMP_realpath": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/t",
+        "assigned_CPU": 0,
+        "process_deadline": "2026-10-03T03:17:36.232260+00:00",
+        "newjob_cutoff": "2026-10-03T03:07:36.232260+00:00",
+        "guardRSS": 939524096,
+        "contractRAM": 1073741824,
+        "guard_basis": "current_proc_rss_runner_plus_owned_children",
+        "runner_ru_maxrss_bytes": 615759872,
+        "all_observed_TIDs_at_assigned_CPU": true,
+        "affinity_violations": [],
+        "instant_peak_not_guaranteed": true,
+        "runner_sha256": "0232a84866a3840c3819b58c19580fb4a56d7ede85bf18e4d2f1b28654109ccc"
+      }
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-static-terminal-posthoc.started.json",
+      "SHA256": "100798eb1721de174e80604bdf6669928454f731d83beaf2b0cad82ac38acf95",
+      "body": {
+        "subreaper_set_rc": 0,
+        "subreaper_get_rc": 0,
+        "subreaper_value": 1,
+        "kernel_boundary": {
+          "valid": true,
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+          "launcher": {
+            "pid": 3042983,
+            "ppid": 2009,
+            "pgid": 3042983,
+            "start_ticks": 24662829,
+            "state": "R",
+            "rss": 18157568,
+            "utime_ticks": 2,
+            "stime_ticks": 1
+          },
+          "root": {
+            "pid": 3042995,
+            "ppid": 3042983,
+            "pgid": 3042995,
+            "start_ticks": 24662838,
+            "state": "R",
+            "rss": 21200896,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "initial_children": [],
+          "spawn_count": 1,
+          "single_thread_initial": true,
+          "sole_explicit_root": true
+        },
+        "runner_pid": 3042983,
+        "runner_starttick": 24662829,
+        "child_pid": 3042995,
+        "child_starttick": 24662838,
+        "PGID": 3042995,
+        "startUTC": "2026-10-03T02:14:59.370872+00:00",
+        "git_commit": null,
+        "run_id": null,
+        "command": [
+          "node",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/terminal-posthoc.cjs"
+        ],
+        "cwd": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port",
+        "deadline": 1790993759.414717,
+        "affinity": [
+          0
+        ],
+        "guardRSS": 939524096,
+        "contractRAM": 1073741824,
+        "guard_basis": "current_proc_rss_runner_plus_owned_children",
+        "runner_initial_ru_maxrss": 615759872,
+        "guardStorage": 234881024,
+        "temp": "/proc/3042983/cwd/t",
+        "temp_realpath": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/t"
+      }
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-static-terminal-posthoc.admission.json",
+      "SHA256": "f5789d45e7dab00bec2128934329ca6c63677b5311968938b1dcbc7bed27d42d",
+      "body": {
+        "decision": "launch_allowed",
+        "before_child_spawn": true,
+        "UTC": "2026-10-03T02:14:59.401029+00:00",
+        "external_heavy": [],
+        "recognized_metadata": [],
+        "old149_current_same_identity": [],
+        "old149_stop_SHA256": "f41c4d9c6263c908e268950edde977b94a94a967ab8dca5e85fc669287e79b8e",
+        "physical_RAM_headroom": {
+          "MemFree": 17244368896,
+          "MemAvailable": 20923355136
+        },
+        "parent_research_current": [],
+        "operation_conservative_headroom": 134217728,
+        "current_allocated": 216162304,
+        "forecast": 1048576,
+        "guard": 234881024,
+        "used_seconds": 4.339263,
+        "previous_game_starts": 0,
+        "old149_current_retained": 24137728,
+        "existing_entry_conservative": 2147483648,
+        "old_unknown_not_reduced": true,
+        "additional_reservation": 0,
+        "whole_host_background_and_fullperiod_not_proved": true
+      }
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-static-terminal-posthoc.inputs.json",
+      "SHA256": "3fbdb3b63acc0bdb1164ba23acd95557ccc44dbb219d1153a1360aa63756f665",
+      "body": {
+        "git_commit": null,
+        "source": {
+          "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/adapters.cjs": "c02f218acbc03978c0d55ebde213a08d2edadb13b16aa5324e46bce7331de69f",
+          "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/admission.py": "5bf436602222a01c81f0065f1e2ba72c983a7f87ba07e58511a41200a4dc7f0e",
+          "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/browser.cjs": "53a26f2d75558a6ad2ea13c52217da708c1a1d7d355719e7d451dd6ef8345d81",
+          "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/build.py": "03c88bea3523511a5c8fce4465645d57fba7ef4a1d90e046d1e4a7cbe74226ea",
+          "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/capture-stop.py": "aa06b592ab8b3454f0750f5a8087ec8959ca3e96674877c39161e413230c0133",
+          "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/check-stageA.py": "8ddb425624edbbbaad6836bfc97535f0609900dad9a4f1e47aec4a79086af23f",
+          "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/collect-games.py": "cb5557268b9d8bcf64d160d9211d91242bd928221bebc8cd48dcc9640438b6ab",
+          "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/diagnose.cjs": "74e34f9c6e027bb0c43aaeaec6bd76e71ecac765da9f6a7f9a5450c722b51140",
+          "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/monitor-mock.cjs": "dde7304d485b38d2b30ce5f725c2dfd73b8805a35dcc9e91858d2d21e74d6672",
+          "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/oracle.cjs": "7bdf4048a3e1322b0821ca794af98682da4037efed4868b67c4efb9a4b4667a2",
+          "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/pause-monitor.cjs": "37ec727ccf516165f703a24dc4b74563a22a1028c63546e394121cf499cef0cf",
+          "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/port-main.js": "542355b984a6cf35e22ab8799b9b7e5a928265e99f07e1caf83042e72b214ece",
+          "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/port-worker.js": "f82e3e1a10572576c0efa2088b00eaf62610cef18e6b71f7d7ebc9c506723d8a",
+          "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/runner.py": "0232a84866a3840c3819b58c19580fb4a56d7ede85bf18e4d2f1b28654109ccc",
+          "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/transport-mock.cjs": "f8809c35491213f19ede2acbad68589926c194a4202b8d123c5f12eecdcf17c2"
+        }
+      }
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-static-terminal-posthoc.owned-ack.json",
+      "SHA256": "f1ac1789a0b96a2037afc93f4b38932a4f45b5f9956653a1d522842953fc916f",
+      "body": {
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "accepted": {},
+        "rejected": {},
+        "unknown_adopted": [],
+        "registered_live": [],
+        "kernel_boundary": {
+          "valid": true,
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+          "launcher": {
+            "pid": 3042983,
+            "ppid": 2009,
+            "pgid": 3042983,
+            "start_ticks": 24662829,
+            "state": "R",
+            "rss": 18157568,
+            "utime_ticks": 2,
+            "stime_ticks": 1
+          },
+          "root": {
+            "pid": 3042995,
+            "ppid": 3042983,
+            "pgid": 3042995,
+            "start_ticks": 24662838,
+            "state": "R",
+            "rss": 21200896,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "initial_children": [],
+          "spawn_count": 1,
+          "single_thread_initial": true,
+          "sole_explicit_root": true
+        },
+        "kernel_owned": []
+      }
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-static-terminal-posthoc.log",
+      "SHA256": "4393e892dce8d350058056e4fc2f63bcd6fd18263674d60e09ba6b7a1e7e012c",
+      "text": "{\"issue\":\"quoridor-4lc.151\",\"NN_model\":0,\"Chrome\":0,\"artificial_NN\":0.25,\"actual_private_Wasm\":true,\"binary_SHA256\":\"500181795b373f69f6f2214ee1a77e12767e2f342e15a56ab5e27d0a0453f2c2\",\"fixture\":\"straight-jump-p2\",\"K\":16,\"completed_backups\":16,\"artificial_evaluator_calls\":7,\"terminal_noNN\":9,\"terminal_paths\":{\"[31,49,22,58,13,67,4]\":9},\"noNN_completed_K\":[8,9,10,11,12,13,14,15,16],\"actual_terminal_revisit_noNN_supported\":true,\"chronology\":\"post-science NN0 completion check; pre-AI oracle recorded one terminal arrival, not a demonstrated revisit; no retrospective preflight pass\",\"actual_game_or_deep_general_or_model_success\":false}\n"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-static-terminal-posthoc.owned-ledger.jsonl",
+      "SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "text": ""
+    }
+  ]
+}

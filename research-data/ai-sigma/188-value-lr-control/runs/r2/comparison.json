@@ -1,0 +1,505 @@
+{
+  "run": "r2",
+  "UTC": "2026-10-03T13:20:58.613003+00:00",
+  "cohorts_row_weighted": {
+    "old": {
+      "rows": 221,
+      "games": 4,
+      "parent176": {
+        "CE": 2.5144672036440663,
+        "MSE": 0.6840944289234024,
+        "sign_correct": 141,
+        "saturated_abs09": 0,
+        "wrong_saturated_abs09": 0,
+        "mean_STM_value": -0.0021548714218513694,
+        "mean_P1_value": 0.08722853365252048,
+        "total": 3.198561632567469
+      },
+      "LR01_saved181": {
+        "CE": 2.2873704099007863,
+        "MSE": 0.40259214444296665,
+        "sign_correct": 193,
+        "saturated_abs09": 0,
+        "wrong_saturated_abs09": 0,
+        "mean_STM_value": 0.05858177316219154,
+        "mean_P1_value": 0.20390199334255305,
+        "total": 2.689962554343753
+      },
+      "LR0025_r2": {
+        "CE": 2.4117662529060744,
+        "MSE": 0.526609748100432,
+        "sign_correct": 165,
+        "saturated_abs09": 0,
+        "wrong_saturated_abs09": 0,
+        "mean_STM_value": 0.016258709549870156,
+        "mean_P1_value": 0.15634944780868779,
+        "total": 2.9383760010065063
+      }
+    },
+    "new": {
+      "rows": 281,
+      "games": 4,
+      "parent176": {
+        "CE": 2.5719010424783644,
+        "MSE": 1.6632576554059133,
+        "sign_correct": 66,
+        "saturated_abs09": 0,
+        "wrong_saturated_abs09": 0,
+        "mean_STM_value": -0.045295433419693616,
+        "mean_P1_value": 0.3643167521705142,
+        "total": 4.235158697884278
+      },
+      "LR01_saved181": {
+        "CE": 2.391096297850388,
+        "MSE": 1.9510527310422308,
+        "sign_correct": 85,
+        "saturated_abs09": 45,
+        "wrong_saturated_abs09": 45,
+        "mean_STM_value": 0.012911846254309274,
+        "mean_P1_value": 0.37183975805387603,
+        "total": 4.342149028892619
+      },
+      "LR0025_r2": {
+        "CE": 2.4836830768296725,
+        "MSE": 1.7066455560328697,
+        "sign_correct": 60,
+        "saturated_abs09": 0,
+        "wrong_saturated_abs09": 0,
+        "mean_STM_value": -0.01651269933366253,
+        "mean_P1_value": 0.3702817816843256,
+        "total": 4.190328632862542
+      }
+    }
+  },
+  "all_row_weighted": {
+    "rows": 502,
+    "games": 8,
+    "parent176": {
+      "CE": 2.5466164241867713,
+      "MSE": 1.2321917728309435,
+      "sign_correct": 207,
+      "saturated_abs09": 0,
+      "wrong_saturated_abs09": 0,
+      "mean_STM_value": -0.026303273655703306,
+      "mean_P1_value": 0.24233169979506275,
+      "total": 3.7788081970177148
+    },
+    "LR01_saved181": {
+      "CE": 2.345432112119587,
+      "MSE": 1.2693599229975348,
+      "sign_correct": 278,
+      "saturated_abs09": 45,
+      "wrong_saturated_abs09": 45,
+      "mean_STM_value": 0.03301753120777936,
+      "mean_P1_value": 0.29790699709530555,
+      "total": 3.614792035117122
+    },
+    "LR0025_r2": {
+      "CE": 2.4520224830306385,
+      "MSE": 1.1871477202697847,
+      "sign_correct": 225,
+      "saturated_abs09": 0,
+      "wrong_saturated_abs09": 0,
+      "mean_STM_value": -0.0020854456219877825,
+      "mean_P1_value": 0.27610041557572806,
+      "total": 3.639170203300423
+    }
+  },
+  "game_equal_means": {
+    "old": {
+      "parent176": {
+        "CE": 2.556563823566545,
+        "MSE": 0.6995706091733853,
+        "total": 3.2561344327399304
+      },
+      "LR01_saved181": {
+        "CE": 2.3252738504676276,
+        "MSE": 0.4651293941027518,
+        "total": 2.7904032445703795
+      },
+      "LR0025_r2": {
+        "CE": 2.4514200852111347,
+        "MSE": 0.5701387043998525,
+        "total": 3.021558789610987
+      }
+    },
+    "new": {
+      "parent176": {
+        "CE": 2.5722301515212522,
+        "MSE": 1.6550435524070641,
+        "total": 4.227273703928317
+      },
+      "LR01_saved181": {
+        "CE": 2.3989736320831967,
+        "MSE": 1.8712824686415805,
+        "total": 4.270256100724777
+      },
+      "LR0025_r2": {
+        "CE": 2.486859969003703,
+        "MSE": 1.682989330100092,
+        "total": 4.169849299103795
+      }
+    },
+    "all": {
+      "parent176": {
+        "CE": 2.5643969875438986,
+        "MSE": 1.1773070807902248,
+        "total": 3.7417040683341236
+      },
+      "LR01_saved181": {
+        "CE": 2.362123741275412,
+        "MSE": 1.1682059313721662,
+        "total": 3.530329672647578
+      },
+      "LR0025_r2": {
+        "CE": 2.469140027107419,
+        "MSE": 1.1265640172499722,
+        "total": 3.595704044357391
+      }
+    }
+  },
+  "all8games": [
+    {
+      "rows": 53,
+      "games": 1,
+      "parent176": {
+        "CE": 2.8411366467205985,
+        "MSE": 0.3315492183813509,
+        "sign_correct": 52,
+        "saturated_abs09": 0,
+        "wrong_saturated_abs09": 0,
+        "mean_STM_value": -0.0018746088135917231,
+        "mean_P1_value": -0.44206464684234476,
+        "total": 3.1726858651019496
+      },
+      "LR01_saved181": {
+        "CE": 2.7719408172481463,
+        "MSE": 0.19090552487463322,
+        "sign_correct": 53,
+        "saturated_abs09": 0,
+        "wrong_saturated_abs09": 0,
+        "mean_STM_value": 0.03397185594405768,
+        "mean_P1_value": -0.5822039884778688,
+        "total": 2.9628463421227798
+      },
+      "LR0025_r2": {
+        "CE": 2.8004628532337694,
+        "MSE": 0.2781506572973053,
+        "sign_correct": 52,
+        "saturated_abs09": 0,
+        "wrong_saturated_abs09": 0,
+        "mean_STM_value": -0.003930156593615154,
+        "mean_P1_value": -0.4873363279368518,
+        "total": 3.0786135105310746
+      },
+      "lineage": "native176-train-2b46417ada56e4fadebda83b990ca9e99f32e594cc6cd1515df8ac933ee3f83d-game-13",
+      "game_id": "native176-teacher-013",
+      "cohort": "old",
+      "low_vs_parent_MSE": -0.05339856108404556,
+      "low_vs_control_MSE": 0.0872451324226721,
+      "low_vs_parent_CE": -0.04067379348682909,
+      "low_vs_control_CE": 0.028522035985623084
+    },
+    {
+      "rows": 59,
+      "games": 1,
+      "parent176": {
+        "CE": 2.901228513252937,
+        "MSE": 0.1843935193462392,
+        "sign_correct": 59,
+        "saturated_abs09": 0,
+        "wrong_saturated_abs09": 0,
+        "mean_STM_value": 0.012400267992989492,
+        "mean_P1_value": 0.6581429945210279,
+        "total": 3.0856220325991766
+      },
+      "LR01_saved181": {
+        "CE": 2.594156807762081,
+        "MSE": 0.0931697440160028,
+        "sign_correct": 59,
+        "saturated_abs09": 0,
+        "wrong_saturated_abs09": 0,
+        "mean_STM_value": 0.03806788486949468,
+        "mean_P1_value": 0.7293442937277131,
+        "total": 2.6873265517780838
+      },
+      "LR0025_r2": {
+        "CE": 2.7757108691385235,
+        "MSE": 0.13409910150566848,
+        "sign_correct": 59,
+        "saturated_abs09": 0,
+        "wrong_saturated_abs09": 0,
+        "mean_STM_value": 0.010298137947664423,
+        "mean_P1_value": 0.6961879982786664,
+        "total": 2.909809970644192
+      },
+      "lineage": "native176-train-2b46417ada56e4fadebda83b990ca9e99f32e594cc6cd1515df8ac933ee3f83d-game-2",
+      "game_id": "native176-teacher-002",
+      "cohort": "old",
+      "low_vs_parent_MSE": -0.05029441784057073,
+      "low_vs_control_MSE": 0.04092935748966568,
+      "low_vs_parent_CE": -0.12551764411441368,
+      "low_vs_control_CE": 0.18155406137644237
+    },
+    {
+      "rows": 39,
+      "games": 1,
+      "parent176": {
+        "CE": 2.5783155468794017,
+        "MSE": 1.1945237532640114,
+        "sign_correct": 1,
+        "saturated_abs09": 0,
+        "wrong_saturated_abs09": 0,
+        "mean_STM_value": -0.010763519001790347,
+        "mean_P1_value": 0.09117630060809927,
+        "total": 3.772839300143413
+      },
+      "LR01_saved181": {
+        "CE": 2.2551322182019553,
+        "MSE": 1.193325978059035,
+        "sign_correct": 12,
+        "saturated_abs09": 0,
+        "wrong_saturated_abs09": 0,
+        "mean_STM_value": 0.0886140703343046,
+        "mean_P1_value": 0.07929672288875549,
+        "total": 3.44845819626099
+      },
+      "LR0025_r2": {
+        "CE": 2.427632061334757,
+        "MSE": 1.1953042455208607,
+        "sign_correct": 2,
+        "saturated_abs09": 0,
+        "wrong_saturated_abs09": 0,
+        "mean_STM_value": 0.023620784354324523,
+        "mean_P1_value": 0.09128542218166284,
+        "total": 3.6229363068556175
+      },
+      "lineage": "native176-train-2b46417ada56e4fadebda83b990ca9e99f32e594cc6cd1515df8ac933ee3f83d-game-20",
+      "game_id": "native176-teacher-020",
+      "cohort": "old",
+      "low_vs_parent_MSE": 0.0007804922568492856,
+      "low_vs_control_MSE": 0.0019782674618256113,
+      "low_vs_parent_CE": -0.15068348554464484,
+      "low_vs_control_CE": 0.17249984313280153
+    },
+    {
+      "rows": 70,
+      "games": 1,
+      "parent176": {
+        "CE": 1.9055745874132428,
+        "MSE": 1.0878159457019396,
+        "sign_correct": 29,
+        "saturated_abs09": 0,
+        "wrong_saturated_abs09": 0,
+        "mean_STM_value": -0.009838726966076397,
+        "mean_P1_value": 0.004580283134211121,
+        "total": 2.9933905331151824
+      },
+      "LR01_saved181": {
+        "CE": 1.6798655586583273,
+        "MSE": 0.3831163294613361,
+        "sign_correct": 69,
+        "saturated_abs09": 0,
+        "wrong_saturated_abs09": 0,
+        "mean_STM_value": 0.07777299362101725,
+        "mean_P1_value": 0.4256466627919248,
+        "total": 2.0629818881196633
+      },
+      "LR0025_r2": {
+        "CE": 1.8018745571374892,
+        "MSE": 0.6730008132755756,
+        "sign_correct": 52,
+        "saturated_abs09": 0,
+        "wrong_saturated_abs09": 0,
+        "mean_STM_value": 0.03246674830360072,
+        "mean_P1_value": 0.22495471404067108,
+        "total": 2.4748753704130646
+      },
+      "lineage": "native176-train-2b46417ada56e4fadebda83b990ca9e99f32e594cc6cd1515df8ac933ee3f83d-game-5",
+      "game_id": "native176-teacher-005",
+      "cohort": "old",
+      "low_vs_parent_MSE": -0.41481513242636403,
+      "low_vs_control_MSE": 0.2898844838142395,
+      "low_vs_parent_CE": -0.10370003027575359,
+      "low_vs_control_CE": 0.12200899847916191
+    },
+    {
+      "rows": 70,
+      "games": 1,
+      "parent176": {
+        "CE": 2.786299687623978,
+        "MSE": 2.5497968520436967,
+        "sign_correct": 0,
+        "saturated_abs09": 0,
+        "wrong_saturated_abs09": 0,
+        "mean_STM_value": -0.06844379476138523,
+        "mean_P1_value": 0.5895055847508567,
+        "total": 5.3360965396676745
+      },
+      "LR01_saved181": {
+        "CE": 2.6528088212013246,
+        "MSE": 3.656517713410514,
+        "sign_correct": 0,
+        "saturated_abs09": 45,
+        "wrong_saturated_abs09": 45,
+        "mean_STM_value": 0.0056435585021972655,
+        "mean_P1_value": 0.9118266923086984,
+        "total": 6.309326534611838
+      },
+      "LR0025_r2": {
+        "CE": 2.72014570576804,
+        "MSE": 2.9391152075358797,
+        "sign_correct": 0,
+        "saturated_abs09": 0,
+        "wrong_saturated_abs09": 0,
+        "mean_STM_value": -0.02800298844064985,
+        "mean_P1_value": 0.7121412592274802,
+        "total": 5.659260913303919
+      },
+      "lineage": "native181-train-322049b49a6698080f1a3ba3a52b512497fc4ff592fa3f6fbdc3fe756d1eda47-game-15",
+      "game_id": "native181-teacher-015",
+      "cohort": "new",
+      "low_vs_parent_MSE": 0.3893183554921831,
+      "low_vs_control_MSE": -0.7174025058746341,
+      "low_vs_parent_CE": -0.0661539818559378,
+      "low_vs_control_CE": 0.0673368845667155
+    },
+    {
+      "rows": 65,
+      "games": 1,
+      "parent176": {
+        "CE": 2.807497939696679,
+        "MSE": 0.5809162923922906,
+        "sign_correct": 57,
+        "saturated_abs09": 0,
+        "wrong_saturated_abs09": 0,
+        "mean_STM_value": -0.12420645694320019,
+        "mean_P1_value": 0.27867842563069783,
+        "total": 3.3884142320889694
+      },
+      "LR01_saved181": {
+        "CE": 2.6145023584365843,
+        "MSE": 0.8566116365102622,
+        "sign_correct": 45,
+        "saturated_abs09": 0,
+        "wrong_saturated_abs09": 0,
+        "mean_STM_value": -0.03777897221824297,
+        "mean_P1_value": 0.10891320990541807,
+        "total": 3.4711139949468466
+      },
+      "LR0025_r2": {
+        "CE": 2.712275712306683,
+        "MSE": 0.6069440504679313,
+        "sign_correct": 53,
+        "saturated_abs09": 0,
+        "wrong_saturated_abs09": 0,
+        "mean_STM_value": -0.09047259730465997,
+        "mean_P1_value": 0.2561808536742599,
+        "total": 3.3192197627746145
+      },
+      "lineage": "native181-train-322049b49a6698080f1a3ba3a52b512497fc4ff592fa3f6fbdc3fe756d1eda47-game-4",
+      "game_id": "native181-teacher-004",
+      "cohort": "new",
+      "low_vs_parent_MSE": 0.026027758075640728,
+      "low_vs_control_MSE": -0.24966758604233086,
+      "low_vs_parent_CE": -0.09522222738999586,
+      "low_vs_control_CE": 0.09777335387009867
+    },
+    {
+      "rows": 52,
+      "games": 1,
+      "parent176": {
+        "CE": 2.2896597924140782,
+        "MSE": 1.8304589906564126,
+        "sign_correct": 3,
+        "saturated_abs09": 0,
+        "wrong_saturated_abs09": 0,
+        "mean_STM_value": -0.008689009817317128,
+        "mean_P1_value": 0.3363627734629867,
+        "total": 4.120118783070491
+      },
+      "LR01_saved181": {
+        "CE": 2.157810615805479,
+        "MSE": 1.018053052517084,
+        "sign_correct": 26,
+        "saturated_abs09": 0,
+        "wrong_saturated_abs09": 0,
+        "mean_STM_value": 0.027399354925504528,
+        "mean_P1_value": -0.002900805017606427,
+        "total": 3.175863668322563
+      },
+      "LR0025_r2": {
+        "CE": 2.219164551450656,
+        "MSE": 1.5499153435230255,
+        "sign_correct": 4,
+        "saturated_abs09": 0,
+        "wrong_saturated_abs09": 0,
+        "mean_STM_value": 0.008501058605571207,
+        "mean_P1_value": 0.23279438262733704,
+        "total": 3.7690798949736815
+      },
+      "lineage": "native181-train-322049b49a6698080f1a3ba3a52b512497fc4ff592fa3f6fbdc3fe756d1eda47-game-5",
+      "game_id": "native181-teacher-005",
+      "cohort": "new",
+      "low_vs_parent_MSE": -0.2805436471333871,
+      "low_vs_control_MSE": 0.5318622910059416,
+      "low_vs_parent_CE": -0.0704952409634223,
+      "low_vs_control_CE": 0.06135393564517688
+    },
+    {
+      "rows": 94,
+      "games": 1,
+      "parent176": {
+        "CE": 2.4054631863502745,
+        "MSE": 1.659002074535857,
+        "sign_correct": 6,
+        "saturated_abs09": 0,
+        "wrong_saturated_abs09": 0,
+        "mean_STM_value": 0.00625847929969747,
+        "mean_P1_value": 0.27130483554557283,
+        "total": 4.064465260886132
+      },
+      "LR01_saved181": {
+        "CE": 2.1707727328893984,
+        "MSE": 1.9539474721284622,
+        "sign_correct": 14,
+        "saturated_abs09": 0,
+        "wrong_saturated_abs09": 0,
+        "mean_STM_value": 0.045362196174113356,
+        "mean_P1_value": 0.3588360294531238,
+        "total": 4.12472020501786
+      },
+      "LR0025_r2": {
+        "CE": 2.295853906489433,
+        "MSE": 1.6359827188735312,
+        "sign_correct": 3,
+        "saturated_abs09": 0,
+        "wrong_saturated_abs09": 0,
+        "mean_STM_value": 0.02934898356807993,
+        "mean_P1_value": 0.27066201193535583,
+        "total": 3.931836625362964
+      },
+      "lineage": "native181-train-322049b49a6698080f1a3ba3a52b512497fc4ff592fa3f6fbdc3fe756d1eda47-game-8",
+      "game_id": "native181-teacher-008",
+      "cohort": "new",
+      "low_vs_parent_MSE": -0.023019355662325713,
+      "low_vs_control_MSE": -0.317964753254931,
+      "low_vs_parent_CE": -0.10960927986084146,
+      "low_vs_control_CE": 0.12508117360003457
+    }
+  ],
+  "control_reference": "research-data/ai-sigma/186-value-game-diagnostic/per-row.jsonl.gz",
+  "control_reference_SHA256": "e3ad152157dfe9d12c8b1b60c7f9500ffcd0a0faea792115e6b1fe02d1e928e0",
+  "three_snapshots": [
+    "parent176 before",
+    "saved181 LR.01 after",
+    "r2 LR.0025 after"
+  ],
+  "independent_rows": false,
+  "independent_game_holdout": false,
+  "cause_unique": false,
+  "strength_claim": false,
+  "new_games_low_MSE_worse_parent": 2,
+  "new_games_low_MSE_better_control": 3,
+  "P1_transform": "side1:+value;side2:-value"
+}

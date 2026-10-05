@@ -1,0 +1,10 @@
+{
+  "NN_executed": 0,
+  "first_difference": "list indices must be integers or slices, not str",
+  "supported": false,
+  "trace": "Traceback (most recent call last):\n  File \"/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/184-checkpoint-teacher-independent/binding-check.py\", line 15, in <module>\n    cp=r['cp'];assert cp['root_visits']==cp['simulations']==r['NN_actual']==r['returned']==800;assert sum(e['visits']for e in cp['root_edges'])==799\n                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/184-checkpoint-teacher-independent/binding-check.py\", line 15, in <genexpr>\n    cp=r['cp'];assert cp['root_visits']==cp['simulations']==r['NN_actual']==r['returned']==800;assert sum(e['visits']for e in cp['root_edges'])==799\n                                                                                                          ~^^^^^^^^^^\nTypeError: list indices must be integers or slices, not str\n",
+  "elapsed_seconds": 0.04873808100819588,
+  "maxRSS_bytes": 20361216,
+  "PID": 3493320,
+  "end": "2026-10-03T11:51:51.207479+00:00"
+}

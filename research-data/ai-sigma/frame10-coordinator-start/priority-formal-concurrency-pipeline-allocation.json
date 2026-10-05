@@ -1,0 +1,38 @@
+{
+  "UTC": "2026-10-03T03:00:53.377151+00:00",
+  "tasks": [
+    {
+      "issue": "quoridor-4lc.158",
+      "role": "critic",
+      "path": "docs/design/ai-sigma-contract-critic-formal-ni-plan.md"
+    },
+    {
+      "issue": "quoridor-4lc.159",
+      "role": "experiment",
+      "path": "docs/design/ai-sigma-contract-experiment-cpu-concurrency.md"
+    },
+    {
+      "issue": "quoridor-4lc.160",
+      "role": "hypothesis",
+      "path": "docs/design/ai-sigma-contract-hypothesis-pv-pipeline-bootstrap.md"
+    }
+  ],
+  "main_priority": "Sigma quantitative plan and samewall CPU concurrency conditions",
+  "NNUE_main_implementation_not_allocated": true,
+  "156_stopped_mixed_ending": true,
+  "margin": 0.05,
+  "one_sided_confidence": 0.95,
+  "Hoeffding_thresholds": {
+    "100": 0.5723873415340408,
+    "200": 0.5365409191301143,
+    "600": 0.4999644229556891
+  },
+  "formal_pair_count_first_plan": 600,
+  "root_only_measured_game_mean_seconds": 22.1175,
+  "thinking_only1200_single_seconds": 26541.0,
+  "ideal4parallel_seconds": 6635.25,
+  "formal_start_unresolved_clock_resource_distribution": true,
+  "old16_not_formal_or_pooled": true,
+  "pipeline_preparation_not_training_completed": true,
+  "parent_resources_deadline_settings_changed": false
+}

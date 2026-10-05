@@ -1,0 +1,55 @@
+{
+  "UTC": "2026-10-04T23:34:28.440478+00:00",
+  "issue": "quoridor-4lc.240",
+  "package": "depth0 leaf pawn legal existence + D knownnonterminal f32 helper",
+  "root_internal_full_legal_unchanged": true,
+  "lazyaccum": false,
+  "original_baseline": "tools/ai-sigma-frame19-native-arena/engine.cjs",
+  "candidate": "tools/ai-sigma-frame19-leaf-terminal/engine.cjs",
+  "profile": {
+    "roots": 4,
+    "engines": [
+      "NNUE",
+      "distance"
+    ],
+    "nodecap": 8192,
+    "requested_depth": 3,
+    "ordering": "rootbest-first",
+    "sequence": [
+      "baseline",
+      "candidate",
+      "candidate",
+      "baseline"
+    ],
+    "rounds": 2,
+    "recreated_root_copy_each_search": true,
+    "global_maps_cache_variation": "measured recorded/cacheJIT unknown"
+  },
+  "fixtures": {
+    "27_existing_input": 27,
+    "legal_prefix": 32,
+    "seed": 24019041,
+    "history_no_pawn_with_walls": "fallback fulllegal remains nonterminal",
+    "history_no_pawn_without_walls": "draw",
+    "goal_draw_first": true,
+    "tol_abs": 1e-05,
+    "tol_rtol": 0.0001,
+    "D_f32_bitexact": true,
+    "NNUE_input_output_unchanged": true
+  },
+  "optional_slots": 4,
+  "optional_rule": "basic finitePASS + wholewall fixedwork saving at least positive in both rounds for package, total >=5% point saving and clocks/resources/time fit; otherwise NOT_STARTED; never by WDL",
+  "optional_sequence": "2fresh legal families8/16ply and color swap frozen before results",
+  "NNcap": 1500000,
+  "science_wall_cap_s": 600,
+  "GPU": 0,
+  "CPU": [
+    2
+  ],
+  "RAMguard_B": 1879048192,
+  "newscience": "2026-10-05T00:25:00Z",
+  "stop": "2026-10-05T00:32:00Z",
+  "save": "2026-10-05T00:40:00Z",
+  "oldtest_read": false,
+  "independentPASS_claim": false
+}

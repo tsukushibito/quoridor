@@ -1,0 +1,77 @@
+{
+  "issue": "quoridor-4lc.165",
+  "before_input_generation": true,
+  "master": 91031,
+  "domain": "SIGMA_NATIVE_165_OPENING_v1",
+  "derive": "SHA256UTF8 domain|master|zero-based-slot|attempt,firstLEu32 zero->1 xorshift32",
+  "ply_order": [
+    12,
+    13,
+    24,
+    25,
+    12,
+    13,
+    24,
+    25
+  ],
+  "class": "bothclasses .5 pawn/.5wall thenuniform original legal class order; emptyclass proposal invalid no replacement",
+  "attempt_max_per_slot": 256,
+  "accept": "firstlegal nonterminal both wall-only BFS>=3 difference<=1 remainingboth>=2",
+  "duplicates": "keep flag old119149151/new; no resultdependentfilter",
+  "model": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+  "ORT": "native1.30CPUintra1inter1sequential",
+  "policy": "faithful151C1/FPU.2/f64/root-loopoutside/first/RuleA",
+  "searchseed": 1979,
+  "color_order": "layercycle8pairs;pairoddC1,C2;pairevenC2,C1",
+  "denominator": 16,
+  "clock": {
+    "mode": "native-event-driven-quiescent",
+    "controller_clock": "single Node process.hrtime.bigint origin chosenbycontroller; worker/Python elapsed auxiliary, no exact epoch assertion",
+    "input_t0": "both dedicated engines report prior search/NN/handles0; controller measures t0 before encoding+writing full legalprefix to engine",
+    "included": "prefix/state/features, candidateRustJSON pipe or JSstate, heldPythonORTpipe/infer, CP IPC, controller JSON decode/legal membership check through validation-end",
+    "cutoff_ms": 402,
+    "public_planned_ms": 411,
+    "deadline_ms": 500,
+    "adoption": "last completed CP stably received and controller legal validated<=t0+402; immutablecachechosenat411; ifactualpublic>500 typedCLOCK_LATE noCPrescue",
+    "NN_stop": "controller stop at402; final progress after402 ignored; pendingNNreturn discarded/no newbackupaftercancel; waitquiescent/result before nextinput; cleanupafterpublic attributedownengine separately",
+    "fixed1000cycle": false,
+    "both_same_rule": true,
+    "startup": "process/modelinit +oneinitialwarmNN perengineperpair separate; bothengine sessions retained across2games",
+    "tree": "fresh eachrequest",
+    "controller_alive": "dedicatedengineprocess + nativeRust/Pythonasyncpipe; removed2browser artificialtimer yields from JS reference; originalWebprogress40 not claimed sameoperationaladapter",
+    "kernelCPU": "unknown/formal_readyfalse",
+    "game_judge": "controller RuleA goal before200draw/nolegal; full legalprefix remains input"
+  },
+  "mode": {
+    "arenas": 1,
+    "compute_pool": [
+      2
+    ],
+    "allmanagement_and_models_on_cpu2": true,
+    "logical_count": 1,
+    "solo_not_mixed_parallel": true
+  },
+  "caps": {
+    "nodes": 200000,
+    "depth": 200,
+    "bytes": 134217728,
+    "K": 1000000,
+    "ply": 200
+  },
+  "budget": {
+    "build": 120,
+    "mechanism": 180,
+    "quality": 1800,
+    "aggregate_heavy": 2100,
+    "pairjob_max": 300,
+    "RAM": 6442450944,
+    "RSS_guard": 5905580032,
+    "save_forecast": 8388608,
+    "save_guard": 58720256
+  },
+  "fault": "candidatefault operational0 purequalityunknown;reference/infra/generation/late/unstarted/uncompleted unknown[0,1]; norescue;all16/8pairXi;completeonlyaux;sameboardsidewinner retained",
+  "formal_holdout": false,
+  "NI": false,
+  "successful_science_replacement": false,
+  "game_order_changes_from_result": false
+}

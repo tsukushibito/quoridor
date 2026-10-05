@@ -1,0 +1,96 @@
+{
+  "issue": "quoridor-4lc.148",
+  "count": 1,
+  "selected": "AI-blind class-balanced legalprefix, stratified lengths, fixed64 color-swapped baseline-vs-Sigma samewall games",
+  "status": "coordinator adopted distribution before AI results; execution delegated149, not executed by148",
+  "generation": {
+    "layers": [
+      4,
+      5,
+      12,
+      13
+    ],
+    "slots_per_layer": 8,
+    "table": "recommended-seeds.json",
+    "master": 61041,
+    "PRNG": "xorshift32 unsigned",
+    "class": "both nonempty: one uint32 <2^31 pawn else wall; one further uint32 floor(u/2^32*class.length) in RuleA order; empty class no class draw",
+    "initial": "RuleA initial trueState and actual legal history; no arbitrary turn/count/board modifications",
+    "attempt_cap": 8,
+    "reject": [
+      "illegal action or no legal",
+      "terminal at any prefix step or target",
+      "exact old119 canonical key/history_counts/side signature"
+    ],
+    "accept": "first legal nonterminal nonold signature; all attempts saved; no NN/value/prior/balance filter",
+    "duplicate": "new duplicates retained and flagged; no replacement",
+    "missing": "failed slot retained as two unknown games"
+  },
+  "comparison": {
+    "candidate": "current Q0/C1.5/finish/order/f32 immutable baseline",
+    "reference": "fixedSigma immutable",
+    "model": "same fixed model; exact source/binary/model binding by149",
+    "wall_ms": 500,
+    "cutoff_ms": 402,
+    "adopt_ms": 411,
+    "search_seed": 1979,
+    "ordered_slots": "fixed interleaved block table; alternating candidate color order",
+    "no_AI_results_used": true
+  },
+  "primary_measure": {
+    "unit": "32 prefix pairs; not64 independent games",
+    "Xi": "(candidate color1 score + candidate color2 score)/2; W1 D.5 L0",
+    "strata": "4 layers equally weighted, 8 pairs each",
+    "missing": "all64 scheduled games retained; unknown [0,1]; propagate pair and whole-mean intervals",
+    "operational": "candidate-responsibility faultloss0 typed separately",
+    "quality": "candidate fault and nonterminal/reference/shared/missing have unknown game quality; completed-only score auxiliary with denominator and selection limitation",
+    "same_board_side_winner": "retained; Xi=.5 does not prove parity or sensitivity",
+    "conditional_reference_CI": "clip([mean_lower-.24008069782998018, mean_upper+.24008069782998018],0,1); independent bounded pair assumption unproved; notformalNI"
+  },
+  "quantity_denominators": [
+    "matched initial trueState/features/NN if recorded",
+    "startup NN",
+    "API starts",
+    "completed NN",
+    "adopted CP NN",
+    "terminal-noNN",
+    "backup/completed",
+    "discard",
+    "selfwait/ACK wall",
+    "cleanup residual processing"
+  ],
+  "competing_explanations": [
+    "genuine policy gap on this synthetic distribution",
+    "starting-side advantage and insensitive pair outcomes",
+    "practical inference/completion differences under samewall",
+    "timing/retirement/drift and failures",
+    "finite fixedseed sampling variation"
+  ],
+  "decision": {
+    "deficit": "if identification+conditional reference interval below.5 across interpretable strata, prioritize improvement or new independent distribution diagnosis; no universal/119-cause claim",
+    "reverse": "if above.5, retain baseline and validate on a separately preregistered distribution before adoption/general claim",
+    "uncertain": "interval crosses.5 or strata mixed: gap unresolved, retain baseline; no sample increase or favorable subset filtering",
+    "saturated": "many sameboard-side wins or allXi.5: report inadequate sensitivity, no equality claim",
+    "fault": "missing/fault widens identification interval; treat infrastructure incompleteness separately from chess-strength loss",
+    "quantity": "if initial matched quantity information suggests a mechanism question, future samecompleted may compete under a new allocation; no automatic additions and no sameCPU claim"
+  },
+  "cost": {
+    "max_new_plies": 12256,
+    "nominal_thought_seconds": 6128,
+    "original_estimate_browser_cap_seconds": 7680,
+    "adopted_total_heavy_seconds": 7200,
+    "adopted_nominal_headroom_seconds": 1072,
+    "generation_included": true,
+    "completion_guarantee": false,
+    "future_writer": "experiment149; coordinator contract writer; critic independent necessary saved checks",
+    "parent_all_end_UTC": "2026-10-03T04:15:21Z"
+  },
+  "current148_execution": {
+    "NN": 0,
+    "Chrome": 0,
+    "model_load": 0,
+    "game": 0,
+    "build": 0,
+    "legal_states_generated": 0
+  }
+}

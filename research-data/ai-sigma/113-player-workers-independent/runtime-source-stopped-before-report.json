@@ -1,0 +1,471 @@
+{
+  "issue": "quoridor-4lc.113",
+  "UTC": "2026-10-02T09:51:25.779908+00:00",
+  "source_runtime_stopped": true,
+  "processes": [
+    {
+      "name": "p113-functional-r1",
+      "start": "2026-10-02T09:47:35.112152+00:00",
+      "end": "2026-10-02T09:47:35.211575+00:00",
+      "exit": 1,
+      "stop_reason": null,
+      "peak_group_plus_runner_RSS": 67403776,
+      "peak_allocated_bytes": 4481024,
+      "kernel_adoptions": [],
+      "all_observed_TIDs_at_assigned_CPU": true
+    },
+    {
+      "name": "p113-functional-r2",
+      "start": "2026-10-02T09:48:41.750320+00:00",
+      "end": "2026-10-02T09:49:02.901295+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "peak_group_plus_runner_RSS": 1717469184,
+      "peak_allocated_bytes": 6848512,
+      "kernel_adoptions": [
+        {
+          "kind": "kernel_adopted_direct_child",
+          "observed": {
+            "pid": 2369746,
+            "ppid": 2369630,
+            "pgid": 2369744,
+            "start_ticks": 18743851,
+            "state": "S",
+            "rss": 3391488,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "launcher_identity": {
+            "pid": 2369630,
+            "ppid": 2009,
+            "pgid": 2369630,
+            "start_ticks": 18743498,
+            "state": "R",
+            "rss": 17887232,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          },
+          "sole_jobroot_identity": {
+            "pid": 2369632,
+            "ppid": 2369630,
+            "pgid": 2369632,
+            "start_ticks": 18743503,
+            "state": "R",
+            "rss": 20508672,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+          "monotonic": 187438.531291833
+        },
+        {
+          "kind": "kernel_adopted_direct_child",
+          "observed": {
+            "pid": 2369748,
+            "ppid": 2369630,
+            "pgid": 2369747,
+            "start_ticks": 18743852,
+            "state": "S",
+            "rss": 3014656,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "launcher_identity": {
+            "pid": 2369630,
+            "ppid": 2009,
+            "pgid": 2369630,
+            "start_ticks": 18743498,
+            "state": "R",
+            "rss": 17887232,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          },
+          "sole_jobroot_identity": {
+            "pid": 2369632,
+            "ppid": 2369630,
+            "pgid": 2369632,
+            "start_ticks": 18743503,
+            "state": "R",
+            "rss": 20508672,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+          "monotonic": 187438.531371353
+        }
+      ],
+      "all_observed_TIDs_at_assigned_CPU": true
+    }
+  ],
+  "identity_count": 79,
+  "identity_union": [
+    {
+      "pid": 2368560,
+      "starttick": 18736839
+    },
+    {
+      "pid": 2368559,
+      "starttick": 18736835
+    },
+    {
+      "pid": 2369632,
+      "starttick": 18743503
+    },
+    {
+      "pid": 2369639,
+      "starttick": 18743510
+    },
+    {
+      "pid": 2369643,
+      "starttick": 18743510
+    },
+    {
+      "pid": 2369660,
+      "starttick": 18743536
+    },
+    {
+      "pid": 2369672,
+      "starttick": 18743540
+    },
+    {
+      "pid": 2369677,
+      "starttick": 18743596
+    },
+    {
+      "pid": 2369682,
+      "starttick": 18743607
+    },
+    {
+      "pid": 2369686,
+      "starttick": 18743608
+    },
+    {
+      "pid": 2369697,
+      "starttick": 18743678
+    },
+    {
+      "pid": 2369716,
+      "starttick": 18743681
+    },
+    {
+      "pid": 2369732,
+      "starttick": 18743736
+    },
+    {
+      "pid": 2369739,
+      "starttick": 18743801
+    },
+    {
+      "pid": 2369740,
+      "starttick": 18743850
+    },
+    {
+      "pid": 2369745,
+      "starttick": 18743851
+    },
+    {
+      "pid": 2369746,
+      "starttick": 18743851
+    },
+    {
+      "pid": 2369748,
+      "starttick": 18743852
+    },
+    {
+      "pid": 2369751,
+      "starttick": 18743854
+    },
+    {
+      "pid": 2369752,
+      "starttick": 18743855
+    },
+    {
+      "pid": 2369754,
+      "starttick": 18743858
+    },
+    {
+      "pid": 2369760,
+      "starttick": 18743865
+    },
+    {
+      "pid": 2369782,
+      "starttick": 18743892
+    },
+    {
+      "pid": 2369786,
+      "starttick": 18743895
+    },
+    {
+      "pid": 2369800,
+      "starttick": 18743906
+    },
+    {
+      "pid": 2369833,
+      "starttick": 18743950
+    },
+    {
+      "pid": 2369842,
+      "starttick": 18743962
+    },
+    {
+      "pid": 2369852,
+      "starttick": 18743966
+    },
+    {
+      "pid": 2369859,
+      "starttick": 18743976
+    },
+    {
+      "pid": 2369855,
+      "starttick": 18743975
+    },
+    {
+      "pid": 2369862,
+      "starttick": 18743983
+    },
+    {
+      "pid": 2369868,
+      "starttick": 18743998
+    },
+    {
+      "pid": 2369877,
+      "starttick": 18744003
+    },
+    {
+      "pid": 2369888,
+      "starttick": 18744133
+    },
+    {
+      "pid": 2369889,
+      "starttick": 18744133
+    },
+    {
+      "pid": 2369932,
+      "starttick": 18744253
+    },
+    {
+      "pid": 2369936,
+      "starttick": 18744255
+    },
+    {
+      "pid": 2369946,
+      "starttick": 18744307
+    },
+    {
+      "pid": 2369966,
+      "starttick": 18744317
+    },
+    {
+      "pid": 2369982,
+      "starttick": 18744422
+    },
+    {
+      "pid": 2369983,
+      "starttick": 18744423
+    },
+    {
+      "pid": 2369984,
+      "starttick": 18744428
+    },
+    {
+      "pid": 2369988,
+      "starttick": 18744430
+    },
+    {
+      "pid": 2369990,
+      "starttick": 18744433
+    },
+    {
+      "pid": 2369997,
+      "starttick": 18744445
+    },
+    {
+      "pid": 2370015,
+      "starttick": 18744594
+    },
+    {
+      "pid": 2370016,
+      "starttick": 18744655
+    },
+    {
+      "pid": 2370020,
+      "starttick": 18744658
+    },
+    {
+      "pid": 2370022,
+      "starttick": 18744665
+    },
+    {
+      "pid": 2370046,
+      "starttick": 18744810
+    },
+    {
+      "pid": 2370052,
+      "starttick": 18744822
+    },
+    {
+      "pid": 2370061,
+      "starttick": 18744826
+    },
+    {
+      "pid": 2370071,
+      "starttick": 18744878
+    },
+    {
+      "pid": 2370083,
+      "starttick": 18744889
+    },
+    {
+      "pid": 2370100,
+      "starttick": 18745003
+    },
+    {
+      "pid": 2370112,
+      "starttick": 18745065
+    },
+    {
+      "pid": 2370116,
+      "starttick": 18745066
+    },
+    {
+      "pid": 2370126,
+      "starttick": 18745069
+    },
+    {
+      "pid": 2370141,
+      "starttick": 18745079
+    },
+    {
+      "pid": 2370156,
+      "starttick": 18745192
+    },
+    {
+      "pid": 2370157,
+      "starttick": 18745196
+    },
+    {
+      "pid": 2370159,
+      "starttick": 18745197
+    },
+    {
+      "pid": 2370160,
+      "starttick": 18745197
+    },
+    {
+      "pid": 2370161,
+      "starttick": 18745198
+    },
+    {
+      "pid": 2370163,
+      "starttick": 18745201
+    },
+    {
+      "pid": 2370170,
+      "starttick": 18745212
+    },
+    {
+      "pid": 2370174,
+      "starttick": 18745322
+    },
+    {
+      "pid": 2370188,
+      "starttick": 18745384
+    },
+    {
+      "pid": 2370190,
+      "starttick": 18745384
+    },
+    {
+      "pid": 2370191,
+      "starttick": 18745384
+    },
+    {
+      "pid": 2370192,
+      "starttick": 18745385
+    },
+    {
+      "pid": 2370194,
+      "starttick": 18745392
+    },
+    {
+      "pid": 2370205,
+      "starttick": 18745488
+    },
+    {
+      "pid": 2370206,
+      "starttick": 18745493
+    },
+    {
+      "pid": 2370210,
+      "starttick": 18745493
+    },
+    {
+      "pid": 2370212,
+      "starttick": 18745499
+    },
+    {
+      "pid": 2370218,
+      "starttick": 18745505
+    },
+    {
+      "pid": 2370222,
+      "starttick": 18745569
+    },
+    {
+      "pid": 2369630,
+      "starttick": 18743498
+    }
+  ],
+  "current_same_identity_live": [],
+  "Modeldrop": {
+    "players": [
+      {
+        "kind": "dropped",
+        "handles": 0,
+        "activeNN": 0,
+        "at_ms": 1790934541272.99,
+        "producer_post_begin_ms": 1790934541272.9949,
+        "worker_engine": "candidate"
+      },
+      {
+        "kind": "dropped",
+        "handles": 0,
+        "activeNN": 0,
+        "at_ms": 1790934541273.82,
+        "producer_post_begin_ms": 1790934541273.82,
+        "worker_engine": "reference"
+      }
+    ],
+    "handles": 0,
+    "activeNN": 0
+  },
+  "main_timers": {
+    "main_timers": 0,
+    "pending_messages": []
+  },
+  "monitor_state": "READY",
+  "monitor_pending_children": [],
+  "outer_remaining": 0,
+  "inner_controlled": null,
+  "forced_not_natural": true,
+  "source_after": {
+    "tools/ai-sigma-player-workers/diagnose.cjs": "3458bb19c07c7ef0fb57bead8e8c5e23d2c1e9b6caa0515e9757725583f20482",
+    "tools/ai-sigma-player-workers/player-control.cjs": "3b87d63253cd93267ccc9419bfddd334a3cbe5cacba4d98da9328109a3f33e5c",
+    "tools/ai-sigma-player-workers/player-main.js": "610e899acd43215efc9fa3a08f3c337248639505a57196e1a730a91f7afde4a8",
+    "tools/ai-sigma-player-workers/runner.py": "1bcca8c88181109180125b81d6ff7b8288ab079f7a1069493928f60b21c66f7e",
+    "tools/ai-sigma-player-workers/mock.cjs": "61d954bbad80b62bf0f9678b78faa17448760d8185f4bbf2bd3de650fa4f4e45",
+    "tools/ai-sigma-player-workers/browser.cjs": "3ca8db3e55bd66624f4bdf8718d3246a6c6546b7ec9d175b4eebcdeb79b18f59",
+    "tools/ai-sigma-player-workers/player-worker.js": "fd5f5b72a836164133b22f718d58ef31d2d4b0f8a4887070e1ac9346112de5e8"
+  },
+  "self_source": {
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-player-workers-independent/diagnose.cjs": "9dbbc8f82105a37cff8293957dd8a43663ecf6a4b40673f9fef7b3c0eefbc909",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-player-workers-independent/runner.py": "b663181cb8fe34b2e0307395f642dca410c0ec7c5fed937337afe3f13d7e9bef",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-player-workers-independent/checker.js": "882aca0180c8dfae7ea57ea6c759f6804a6efe98df4ec74dcdbb4c464fda0255",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-player-workers-independent/browser.cjs": "e030bed7c3746e6c7935c15dfd0cea14bfb1856605fefce60c80204f255319f4",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-player-workers-independent/prepare.py": "e3e9b66c02336d8929680bd605aae1246a3e7e2f694e8957d3275628a6e01d73",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-player-workers-independent/finalize.py": "f852d2317398fb77ad0f645e78b639e4991fbd79b584ff4fcc9cd4c25eb060d3"
+  },
+  "new_NN_game_after_stop": 0,
+  "actual_go": false,
+  "current_absence_not_all_period": true
+}

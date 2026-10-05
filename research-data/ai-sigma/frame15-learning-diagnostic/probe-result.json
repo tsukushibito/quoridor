@@ -1,0 +1,880 @@
+{
+  "issue": "quoridor-4lc.209",
+  "samples": 144,
+  "forward_samples": 108,
+  "backward_equivalent": 36,
+  "extra_train": 0,
+  "actual_all_science_samples": 405578,
+  "raw_guard_forecast": 736208,
+  "delta_each_distance": 0.00625,
+  "s_direction": "self down/opponent up, s changes2delta",
+  "models": [
+    {
+      "checkpoint": {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/nnue/frame15-learning-diagnostic-lr1e-4-r1/initial.pt",
+        "SHA": "f4a327c33c12ba92218636016af382346bfc175a21095b01521ede9567606428",
+        "B": 51605
+      },
+      "tensor_SHA": "e5d218c9750d581eab7ca6a114acaa8f3cf5bd24474e3f639280705271fc7ddb",
+      "weights_unchanged": true,
+      "rows": [
+        {
+          "id": "native194-train01-08-GPU24-ply-81",
+          "distance": [
+            0.07500000298023224,
+            0.125
+          ],
+          "base": -0.0778873860836029,
+          "plus": -0.07767780870199203,
+          "minus": -0.07809696346521378,
+          "finite_difference_directional": 0.03353238105773926,
+          "input_gradient": [
+            -0.0290943942964077,
+            0.004438025876879692
+          ],
+          "analytic_directional": 0.03353241831064224,
+          "fd_minus_analytic": -3.725290298461914e-08,
+          "hidden_crossing_units": 0,
+          "hidden_base_zero_units": 16,
+          "pre_tanh": -0.07804546505212784,
+          "tanh_derivative": 0.9939335550890638,
+          "distance_fit_directional_reference": 16.552850214844426
+        },
+        {
+          "id": "native194-train01-24-GPU24-ply-42",
+          "distance": [
+            0.05000000074505806,
+            0.10000000149011612
+          ],
+          "base": -0.10613273084163666,
+          "plus": -0.10603857040405273,
+          "minus": -0.10622689127922058,
+          "finite_difference_directional": 0.015065670013427734,
+          "input_gradient": [
+            -0.006551610771566629,
+            0.00851513259112835
+          ],
+          "analytic_directional": 0.015066742897033691,
+          "fd_minus_analytic": -1.0728836059570312e-06,
+          "hidden_crossing_units": 0,
+          "hidden_base_zero_units": 14,
+          "pre_tanh": -0.106533944606781,
+          "tanh_derivative": 0.9887358434440967,
+          "distance_fit_directional_reference": 16.552850214844426
+        },
+        {
+          "id": "native194-train02-09-GPU24-ply-74",
+          "distance": [
+            0.05000000074505806,
+            0.08749999850988388
+          ],
+          "base": -0.08323825895786285,
+          "plus": -0.0830986499786377,
+          "minus": -0.08337786048650742,
+          "finite_difference_directional": 0.022336840629577637,
+          "input_gradient": [
+            -0.013578244484961033,
+            0.00875777006149292
+          ],
+          "analytic_directional": 0.022336013615131378,
+          "fd_minus_analytic": 8.270144462585449e-07,
+          "hidden_crossing_units": 0,
+          "hidden_base_zero_units": 13,
+          "pre_tanh": -0.08343130350112915,
+          "tanh_derivative": 0.9930713922456638,
+          "distance_fit_directional_reference": 16.552850214844426
+        },
+        {
+          "id": "native194-train02-12-GPU24-ply-49",
+          "distance": [
+            0.05000000074505806,
+            0.08749999850988388
+          ],
+          "base": -0.1435822993516922,
+          "plus": -0.14353349804878235,
+          "minus": -0.143593892455101,
+          "finite_difference_directional": 0.004831552505493164,
+          "input_gradient": [
+            0.0016348888166248798,
+            0.0034891506657004356
+          ],
+          "analytic_directional": 0.0018542618490755558,
+          "fd_minus_analytic": 0.0029772906564176083,
+          "hidden_crossing_units": 1,
+          "hidden_base_zero_units": 18,
+          "pre_tanh": -0.1445813775062561,
+          "tanh_derivative": 0.979384123312881,
+          "distance_fit_directional_reference": 16.552850214844426
+        },
+        {
+          "id": "native194-train02-13-GPU24-ply-9",
+          "distance": [
+            0.10000000149011612,
+            0.11249999701976776
+          ],
+          "base": -0.08174895495176315,
+          "plus": -0.08163871616125107,
+          "minus": -0.08185918629169464,
+          "finite_difference_directional": 0.01763761043548584,
+          "input_gradient": [
+            -0.008439979515969753,
+            0.00919762160629034
+          ],
+          "analytic_directional": 0.017637601122260094,
+          "fd_minus_analytic": 9.313225746154785e-09,
+          "hidden_crossing_units": 0,
+          "hidden_base_zero_units": 14,
+          "pre_tanh": -0.08193179219961166,
+          "tanh_derivative": 0.9933171083642947,
+          "distance_fit_directional_reference": 16.552850214844426
+        },
+        {
+          "id": "native194-train02-18-GPU24-ply-53",
+          "distance": [
+            0.07500000298023224,
+            0.13750000298023224
+          ],
+          "base": -0.09201834350824356,
+          "plus": -0.09198176115751266,
+          "minus": -0.09205491840839386,
+          "finite_difference_directional": 0.0058525800704956055,
+          "input_gradient": [
+            -0.005327929276973009,
+            0.0005249434616416693
+          ],
+          "analytic_directional": 0.005852872505784035,
+          "fd_minus_analytic": -2.9243528842926025e-07,
+          "hidden_crossing_units": 0,
+          "hidden_base_zero_units": 17,
+          "pre_tanh": -0.09227938950061798,
+          "tanh_derivative": 0.991532624457999,
+          "distance_fit_directional_reference": 16.552850214844426
+        },
+        {
+          "id": "native194-train02-19-GPU24-ply-30",
+          "distance": [
+            0.23749999701976776,
+            0.23749999701976776
+          ],
+          "base": -0.09694836288690567,
+          "plus": -0.09694730490446091,
+          "minus": -0.09694944322109222,
+          "finite_difference_directional": 0.0001710653305053711,
+          "input_gradient": [
+            -0.0003011208027601242,
+            -0.00012969179078936577
+          ],
+          "analytic_directional": 0.00017142901197075844,
+          "fd_minus_analytic": -3.6368146538734436e-07,
+          "hidden_crossing_units": 0,
+          "hidden_base_zero_units": 15,
+          "pre_tanh": -0.09725382924079895,
+          "tanh_derivative": 0.9906010149335489,
+          "distance_fit_directional_reference": 16.552850214844426
+        },
+        {
+          "id": "native194-train02-22-GPU24-ply-24",
+          "distance": [
+            0.07500000298023224,
+            0.0625
+          ],
+          "base": -0.10912109166383743,
+          "plus": -0.10917504131793976,
+          "minus": -0.10911325365304947,
+          "finite_difference_directional": -0.0049430131912231445,
+          "input_gradient": [
+            -0.003475252538919449,
+            -0.004729516338557005
+          ],
+          "analytic_directional": -0.001254263799637556,
+          "fd_minus_analytic": -0.0036887493915855885,
+          "hidden_crossing_units": 1,
+          "hidden_base_zero_units": 13,
+          "pre_tanh": -0.10955733060836792,
+          "tanh_derivative": 0.9880925873540924,
+          "distance_fit_directional_reference": 16.552850214844426
+        },
+        {
+          "id": "native194-train03-02-GPU24-ply-72",
+          "distance": [
+            0.03750000149011612,
+            0.03750000149011612
+          ],
+          "base": -0.06934907287359238,
+          "plus": -0.06936457008123398,
+          "minus": -0.06933359801769257,
+          "finite_difference_directional": -0.0024777650833129883,
+          "input_gradient": [
+            0.0047131190076470375,
+            0.002235652646049857
+          ],
+          "analytic_directional": -0.0024774663615971804,
+          "fd_minus_analytic": -2.9872171580791473e-07,
+          "hidden_crossing_units": 0,
+          "hidden_base_zero_units": 16,
+          "pre_tanh": -0.06946057081222534,
+          "tanh_derivative": 0.9951907060915732,
+          "distance_fit_directional_reference": 16.552850214844426
+        },
+        {
+          "id": "native194-train03-17-GPU24-ply-45",
+          "distance": [
+            0.11249999701976776,
+            0.02500000037252903
+          ],
+          "base": -0.09283161163330078,
+          "plus": -0.09268777072429657,
+          "minus": -0.09294707328081131,
+          "finite_difference_directional": 0.0207442045211792,
+          "input_gradient": [
+            -0.022897331044077873,
+            0.0001152565237134695
+          ],
+          "analytic_directional": 0.023012587800621986,
+          "fd_minus_analytic": -0.002268383279442787,
+          "hidden_crossing_units": 1,
+          "hidden_base_zero_units": 15,
+          "pre_tanh": -0.09309966117143631,
+          "tanh_derivative": 0.991382291881564,
+          "distance_fit_directional_reference": 16.552850214844426
+        },
+        {
+          "id": "native194-train04-15-GPU24-ply-38",
+          "distance": [
+            0.08749999850988388,
+            0.11249999701976776
+          ],
+          "base": -0.0756409540772438,
+          "plus": -0.07549352198839188,
+          "minus": -0.07578839361667633,
+          "finite_difference_directional": 0.023589730262756348,
+          "input_gradient": [
+            -0.022403279319405556,
+            0.0011862653773277998
+          ],
+          "analytic_directional": 0.023589543998241425,
+          "fd_minus_analytic": 1.862645149230957e-07,
+          "hidden_crossing_units": 0,
+          "hidden_base_zero_units": 16,
+          "pre_tanh": -0.07578571140766144,
+          "tanh_derivative": 0.9942784460662843,
+          "distance_fit_directional_reference": 16.552850214844426
+        },
+        {
+          "id": "native194-train04-15-GPU24-ply-60",
+          "distance": [
+            0.0625,
+            0.0625
+          ],
+          "base": -0.08069923520088196,
+          "plus": -0.0805906280875206,
+          "minus": -0.08080784231424332,
+          "finite_difference_directional": 0.017377138137817383,
+          "input_gradient": [
+            -0.010396941564977169,
+            0.006980307400226593
+          ],
+          "analytic_directional": 0.017377249896526337,
+          "fd_minus_analytic": -1.1175870895385742e-07,
+          "hidden_crossing_units": 0,
+          "hidden_base_zero_units": 13,
+          "pre_tanh": -0.08087510615587234,
+          "tanh_derivative": 0.9934876334379927,
+          "distance_fit_directional_reference": 16.552850214844426
+        }
+      ],
+      "summary": {
+        "fd_mean": 0.012809832580387592,
+        "fd_RMS": 0.017171623185276985,
+        "fd_min": -0.0049430131912231445,
+        "fd_max": 0.03353238105773926,
+        "positive_count": 10,
+        "zero_count": 0,
+        "analytic_RMS": 0.01730814203619957,
+        "maxabs_fd_minus_analytic": 0.0036887493915855885,
+        "rows_hidden_kink": 3
+      }
+    },
+    {
+      "checkpoint": {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/nnue/frame15-learning-diagnostic-lr1e-4-r1/best.pt",
+        "SHA": "cb298b4e39997b9346de5cf700320556c14e696e2881e4d93e0649d48a0d0d4d",
+        "B": 51569
+      },
+      "tensor_SHA": "a20f9e143ce94c03b2ff7e7f3cb9ce359c2dda2ad926f35b6261e1dd9bb8f1c8",
+      "weights_unchanged": true,
+      "rows": [
+        {
+          "id": "native194-train01-08-GPU24-ply-81",
+          "distance": [
+            0.07500000298023224,
+            0.125
+          ],
+          "base": 0.09918972849845886,
+          "plus": 0.10012821853160858,
+          "minus": 0.09825105965137482,
+          "finite_difference_directional": 0.15017271041870117,
+          "input_gradient": [
+            -0.07650868594646454,
+            0.07366560399532318
+          ],
+          "analytic_directional": 0.15017428994178772,
+          "fd_minus_analytic": -1.5795230865478516e-06,
+          "hidden_crossing_units": 0,
+          "hidden_base_zero_units": 10,
+          "pre_tanh": 0.09951695799827576,
+          "tanh_derivative": 0.990161397760402,
+          "distance_fit_directional_reference": 16.552850214844426
+        },
+        {
+          "id": "native194-train01-24-GPU24-ply-42",
+          "distance": [
+            0.05000000074505806,
+            0.10000000149011612
+          ],
+          "base": 0.1012418270111084,
+          "plus": 0.10221618413925171,
+          "minus": 0.10026726871728897,
+          "finite_difference_directional": 0.15591323375701904,
+          "input_gradient": [
+            -0.08468831330537796,
+            0.07122579216957092
+          ],
+          "analytic_directional": 0.1559140980243683,
+          "fd_minus_analytic": -8.642673492431641e-07,
+          "hidden_crossing_units": 0,
+          "hidden_base_zero_units": 8,
+          "pre_tanh": 0.1015898734331131,
+          "tanh_derivative": 0.9897500924634528,
+          "distance_fit_directional_reference": 16.552850214844426
+        },
+        {
+          "id": "native194-train02-09-GPU24-ply-74",
+          "distance": [
+            0.05000000074505806,
+            0.08749999850988388
+          ],
+          "base": 0.1142558753490448,
+          "plus": 0.11529727280139923,
+          "minus": 0.11318966001272202,
+          "finite_difference_directional": 0.16860902309417725,
+          "input_gradient": [
+            -0.09948502480983734,
+            0.07108995318412781
+          ],
+          "analytic_directional": 0.17057497799396515,
+          "fd_minus_analytic": -0.001965954899787903,
+          "hidden_crossing_units": 1,
+          "hidden_base_zero_units": 8,
+          "pre_tanh": 0.1147569864988327,
+          "tanh_derivative": 0.9869455949482235,
+          "distance_fit_directional_reference": 16.552850214844426
+        },
+        {
+          "id": "native194-train02-12-GPU24-ply-49",
+          "distance": [
+            0.05000000074505806,
+            0.08749999850988388
+          ],
+          "base": 0.0507986843585968,
+          "plus": 0.051546428352594376,
+          "minus": 0.05005088448524475,
+          "finite_difference_directional": 0.11964350938796997,
+          "input_gradient": [
+            -0.06495615094900131,
+            0.05468665808439255
+          ],
+          "analytic_directional": 0.11964280903339386,
+          "fd_minus_analytic": 7.003545761108398e-07,
+          "hidden_crossing_units": 0,
+          "hidden_base_zero_units": 12,
+          "pre_tanh": 0.05084244906902313,
+          "tanh_derivative": 0.9974194936674357,
+          "distance_fit_directional_reference": 16.552850214844426
+        },
+        {
+          "id": "native194-train02-13-GPU24-ply-9",
+          "distance": [
+            0.10000000149011612,
+            0.11249999701976776
+          ],
+          "base": 0.025084491819143295,
+          "plus": 0.025989742949604988,
+          "minus": 0.02416795678436756,
+          "finite_difference_directional": 0.14574289321899414,
+          "input_gradient": [
+            -0.08352923393249512,
+            0.06131329387426376
+          ],
+          "analytic_directional": 0.14484253525733948,
+          "fd_minus_analytic": 0.0009003579616546631,
+          "hidden_crossing_units": 1,
+          "hidden_base_zero_units": 8,
+          "pre_tanh": 0.025089755654335022,
+          "tanh_derivative": 0.9993707682701753,
+          "distance_fit_directional_reference": 16.552850214844426
+        },
+        {
+          "id": "native194-train02-18-GPU24-ply-53",
+          "distance": [
+            0.07500000298023224,
+            0.13750000298023224
+          ],
+          "base": 0.047030285000801086,
+          "plus": 0.04764920100569725,
+          "minus": 0.04641133174300194,
+          "finite_difference_directional": 0.099029541015625,
+          "input_gradient": [
+            -0.05710799992084503,
+            0.041921213269233704
+          ],
+          "analytic_directional": 0.09902921319007874,
+          "fd_minus_analytic": 3.2782554626464844e-07,
+          "hidden_crossing_units": 0,
+          "hidden_base_zero_units": 13,
+          "pre_tanh": 0.04706500470638275,
+          "tanh_derivative": 0.9977881522927434,
+          "distance_fit_directional_reference": 16.552850214844426
+        },
+        {
+          "id": "native194-train02-19-GPU24-ply-30",
+          "distance": [
+            0.23749999701976776,
+            0.23749999701976776
+          ],
+          "base": -0.006140691228210926,
+          "plus": -0.005103439558297396,
+          "minus": -0.007177929859608412,
+          "finite_difference_directional": 0.1659592241048813,
+          "input_gradient": [
+            -0.09138128161430359,
+            0.07457748055458069
+          ],
+          "analytic_directional": 0.16595876216888428,
+          "fd_minus_analytic": 4.6193599700927734e-07,
+          "hidden_crossing_units": 0,
+          "hidden_base_zero_units": 7,
+          "pre_tanh": -0.006140768527984619,
+          "tanh_derivative": 0.9999622919112398,
+          "distance_fit_directional_reference": 16.552850214844426
+        },
+        {
+          "id": "native194-train02-22-GPU24-ply-24",
+          "distance": [
+            0.07500000298023224,
+            0.0625
+          ],
+          "base": 0.02212778478860855,
+          "plus": 0.022746020928025246,
+          "minus": 0.021509533748030663,
+          "finite_difference_directional": 0.09891897439956665,
+          "input_gradient": [
+            -0.056695543229579926,
+            0.04222368448972702
+          ],
+          "analytic_directional": 0.09891922771930695,
+          "fd_minus_analytic": -2.5331974029541016e-07,
+          "hidden_crossing_units": 0,
+          "hidden_base_zero_units": 8,
+          "pre_tanh": 0.02213139832019806,
+          "tanh_derivative": 0.9995103611403491,
+          "distance_fit_directional_reference": 16.552850214844426
+        },
+        {
+          "id": "native194-train03-02-GPU24-ply-72",
+          "distance": [
+            0.03750000149011612,
+            0.03750000149011612
+          ],
+          "base": 0.1779261827468872,
+          "plus": 0.17886164784431458,
+          "minus": 0.17697127163410187,
+          "finite_difference_directional": 0.1512300968170166,
+          "input_gradient": [
+            -0.08506038784980774,
+            0.06770192086696625
+          ],
+          "analytic_directional": 0.152762308716774,
+          "fd_minus_analytic": -0.0015322118997573853,
+          "hidden_crossing_units": 1,
+          "hidden_base_zero_units": 11,
+          "pre_tanh": 0.17984025180339813,
+          "tanh_derivative": 0.9683422734931213,
+          "distance_fit_directional_reference": 16.552850214844426
+        },
+        {
+          "id": "native194-train03-17-GPU24-ply-45",
+          "distance": [
+            0.11249999701976776,
+            0.02500000037252903
+          ],
+          "base": -0.1915266215801239,
+          "plus": -0.19076670706272125,
+          "minus": -0.19228632748126984,
+          "finite_difference_directional": 0.12156963348388672,
+          "input_gradient": [
+            -0.08485230803489685,
+            0.036716584116220474
+          ],
+          "analytic_directional": 0.12156888842582703,
+          "fd_minus_analytic": 7.450580596923828e-07,
+          "hidden_crossing_units": 0,
+          "hidden_base_zero_units": 8,
+          "pre_tanh": -0.19392144680023193,
+          "tanh_derivative": 0.963317553226104,
+          "distance_fit_directional_reference": 16.552850214844426
+        },
+        {
+          "id": "native194-train04-15-GPU24-ply-38",
+          "distance": [
+            0.08749999850988388,
+            0.11249999701976776
+          ],
+          "base": 0.07708734273910522,
+          "plus": 0.07808443903923035,
+          "minus": 0.07609009742736816,
+          "finite_difference_directional": 0.1595473289489746,
+          "input_gradient": [
+            -0.09520789980888367,
+            0.06433756649494171
+          ],
+          "analytic_directional": 0.15954546630382538,
+          "fd_minus_analytic": 1.862645149230957e-06,
+          "hidden_crossing_units": 0,
+          "hidden_base_zero_units": 10,
+          "pre_tanh": 0.07724058628082275,
+          "tanh_derivative": 0.9940575415894237,
+          "distance_fit_directional_reference": 16.552850214844426
+        },
+        {
+          "id": "native194-train04-15-GPU24-ply-60",
+          "distance": [
+            0.0625,
+            0.0625
+          ],
+          "base": 0.121589794754982,
+          "plus": 0.12257992476224899,
+          "minus": 0.12059947848320007,
+          "finite_difference_directional": 0.15843570232391357,
+          "input_gradient": [
+            -0.08823786675930023,
+            0.07019500434398651
+          ],
+          "analytic_directional": 0.15843287110328674,
+          "fd_minus_analytic": 2.8312206268310547e-06,
+          "hidden_crossing_units": 0,
+          "hidden_base_zero_units": 9,
+          "pre_tanh": 0.12219436466693878,
+          "tanh_derivative": 0.9852159218114414,
+          "distance_fit_directional_reference": 16.552850214844426
+        }
+      ],
+      "summary": {
+        "fd_mean": 0.1412310004234314,
+        "fd_RMS": 0.14323249459266663,
+        "fd_min": 0.09891897439956665,
+        "fd_max": 0.16860902309417725,
+        "positive_count": 12,
+        "zero_count": 0,
+        "analytic_RMS": 0.14348526298999786,
+        "maxabs_fd_minus_analytic": 0.001965954899787903,
+        "rows_hidden_kink": 3
+      }
+    },
+    {
+      "checkpoint": {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/nnue/frame15-learning-diagnostic-lr1e-4-r1/last.pt",
+        "SHA": "b087409ac4c9efec2b6d30f60e277e8ed2f1de3f7f69be1684c8ed4982b79cdc",
+        "B": 51569
+      },
+      "tensor_SHA": "f40652fd2750d923e11fe9c6657e1ccc0789ab65b0cbb2effe997c95eb3eb56d",
+      "weights_unchanged": true,
+      "rows": [
+        {
+          "id": "native194-train01-08-GPU24-ply-81",
+          "distance": [
+            0.07500000298023224,
+            0.125
+          ],
+          "base": 0.16495183110237122,
+          "plus": 0.167182058095932,
+          "minus": 0.1627199649810791,
+          "finite_difference_directional": 0.3569674491882324,
+          "input_gradient": [
+            -0.20992273092269897,
+            0.14704373478889465
+          ],
+          "analytic_directional": 0.35696646571159363,
+          "fd_minus_analytic": 9.834766387939453e-07,
+          "hidden_crossing_units": 0,
+          "hidden_base_zero_units": 2,
+          "pre_tanh": 0.16647280752658844,
+          "tanh_derivative": 0.9727908934159748,
+          "distance_fit_directional_reference": 16.552850214844426
+        },
+        {
+          "id": "native194-train01-24-GPU24-ply-42",
+          "distance": [
+            0.05000000074505806,
+            0.10000000149011612
+          ],
+          "base": 0.5726786851882935,
+          "plus": 0.5741928219795227,
+          "minus": 0.571160614490509,
+          "finite_difference_directional": 0.24257659912109375,
+          "input_gradient": [
+            -0.14178405702114105,
+            0.10079414397478104
+          ],
+          "analytic_directional": 0.24257820844650269,
+          "fd_minus_analytic": -1.6093254089355469e-06,
+          "hidden_crossing_units": 0,
+          "hidden_base_zero_units": 7,
+          "pre_tanh": 0.6514996886253357,
+          "tanh_derivative": 0.6720391235310075,
+          "distance_fit_directional_reference": 16.552850214844426
+        },
+        {
+          "id": "native194-train02-09-GPU24-ply-74",
+          "distance": [
+            0.05000000074505806,
+            0.08749999850988388
+          ],
+          "base": 0.3551930785179138,
+          "plus": 0.35714730620384216,
+          "minus": 0.35323572158813477,
+          "finite_difference_directional": 0.3129267692565918,
+          "input_gradient": [
+            -0.18307086825370789,
+            0.12985612452030182
+          ],
+          "analytic_directional": 0.3129270076751709,
+          "fd_minus_analytic": -2.384185791015625e-07,
+          "hidden_crossing_units": 0,
+          "hidden_base_zero_units": 3,
+          "pre_tanh": 0.37137413024902344,
+          "tanh_derivative": 0.8738378769729671,
+          "distance_fit_directional_reference": 16.552850214844426
+        },
+        {
+          "id": "native194-train02-12-GPU24-ply-49",
+          "distance": [
+            0.05000000074505806,
+            0.08749999850988388
+          ],
+          "base": 0.3502924144268036,
+          "plus": 0.35226497054100037,
+          "minus": 0.3483167588710785,
+          "finite_difference_directional": 0.31585693359375,
+          "input_gradient": [
+            -0.18822884559631348,
+            0.12762492895126343
+          ],
+          "analytic_directional": 0.3158537745475769,
+          "fd_minus_analytic": 3.159046173095703e-06,
+          "hidden_crossing_units": 0,
+          "hidden_base_zero_units": 1,
+          "pre_tanh": 0.36577701568603516,
+          "tanh_derivative": 0.8772952243950405,
+          "distance_fit_directional_reference": 16.552850214844426
+        },
+        {
+          "id": "native194-train02-13-GPU24-ply-9",
+          "distance": [
+            0.10000000149011612,
+            0.11249999701976776
+          ],
+          "base": 0.08327287435531616,
+          "plus": 0.0855272188782692,
+          "minus": 0.08101767301559448,
+          "finite_difference_directional": 0.36076366901397705,
+          "input_gradient": [
+            -0.21156595647335052,
+            0.149197518825531
+          ],
+          "analytic_directional": 0.3607634902000427,
+          "fd_minus_analytic": 1.7881393432617188e-07,
+          "hidden_crossing_units": 0,
+          "hidden_base_zero_units": 3,
+          "pre_tanh": 0.08346615731716156,
+          "tanh_derivative": 0.9930656283966037,
+          "distance_fit_directional_reference": 16.552850214844426
+        },
+        {
+          "id": "native194-train02-18-GPU24-ply-53",
+          "distance": [
+            0.07500000298023224,
+            0.13750000298023224
+          ],
+          "base": 0.4930897653102875,
+          "plus": 0.49475833773612976,
+          "minus": 0.4914175570011139,
+          "finite_difference_directional": 0.26726245880126953,
+          "input_gradient": [
+            -0.14597223699092865,
+            0.12129110842943192
+          ],
+          "analytic_directional": 0.26726335287094116,
+          "fd_minus_analytic": -8.940696716308594e-07,
+          "hidden_crossing_units": 0,
+          "hidden_base_zero_units": 5,
+          "pre_tanh": 0.5401344895362854,
+          "tanh_derivative": 0.7568624833462456,
+          "distance_fit_directional_reference": 16.552850214844426
+        },
+        {
+          "id": "native194-train02-19-GPU24-ply-30",
+          "distance": [
+            0.23749999701976776,
+            0.23749999701976776
+          ],
+          "base": -0.07254104316234589,
+          "plus": -0.07028210163116455,
+          "minus": -0.07479923218488693,
+          "finite_difference_directional": 0.3613704442977905,
+          "input_gradient": [
+            -0.21192219853401184,
+            0.14944875240325928
+          ],
+          "analytic_directional": 0.3613709509372711,
+          "fd_minus_analytic": -5.066394805908203e-07,
+          "hidden_crossing_units": 0,
+          "hidden_base_zero_units": 3,
+          "pre_tanh": -0.07266868650913239,
+          "tanh_derivative": 0.9947377970569187,
+          "distance_fit_directional_reference": 16.552850214844426
+        },
+        {
+          "id": "native194-train02-22-GPU24-ply-24",
+          "distance": [
+            0.07500000298023224,
+            0.0625
+          ],
+          "base": 0.1039225235581398,
+          "plus": 0.10616795718669891,
+          "minus": 0.10167599469423294,
+          "finite_difference_directional": 0.35935699939727783,
+          "input_gradient": [
+            -0.21074244379997253,
+            0.14861677587032318
+          ],
+          "analytic_directional": 0.3593592047691345,
+          "fd_minus_analytic": -2.205371856689453e-06,
+          "hidden_crossing_units": 0,
+          "hidden_base_zero_units": 3,
+          "pre_tanh": 0.10429908335208893,
+          "tanh_derivative": 0.9892001090973079,
+          "distance_fit_directional_reference": 16.552850214844426
+        },
+        {
+          "id": "native194-train03-02-GPU24-ply-72",
+          "distance": [
+            0.03750000149011612,
+            0.03750000149011612
+          ],
+          "base": 0.6932929754257202,
+          "plus": 0.6943284273147583,
+          "minus": 0.6922546029090881,
+          "finite_difference_directional": 0.16590595245361328,
+          "input_gradient": [
+            -0.09897477179765701,
+            0.06692763417959213
+          ],
+          "analytic_directional": 0.16590240597724915,
+          "fd_minus_analytic": 3.546476364135742e-06,
+          "hidden_crossing_units": 0,
+          "hidden_base_zero_units": 6,
+          "pre_tanh": 0.8542686700820923,
+          "tanh_derivative": 0.5193448502253517,
+          "distance_fit_directional_reference": 16.552850214844426
+        },
+        {
+          "id": "native194-train03-17-GPU24-ply-45",
+          "distance": [
+            0.11249999701976776,
+            0.02500000037252903
+          ],
+          "base": -0.6744999289512634,
+          "plus": -0.6737274527549744,
+          "minus": -0.6752708554267883,
+          "finite_difference_directional": 0.12347221374511719,
+          "input_gradient": [
+            -0.0786866620182991,
+            0.04478386417031288
+          ],
+          "analytic_directional": 0.12347052991390228,
+          "fd_minus_analytic": 1.6838312149047852e-06,
+          "hidden_crossing_units": 0,
+          "hidden_base_zero_units": 9,
+          "pre_tanh": -0.8189535737037659,
+          "tanh_derivative": 0.5450498458447406,
+          "distance_fit_directional_reference": 16.552850214844426
+        },
+        {
+          "id": "native194-train04-15-GPU24-ply-38",
+          "distance": [
+            0.08749999850988388,
+            0.11249999701976776
+          ],
+          "base": 0.21952278912067413,
+          "plus": 0.22168280184268951,
+          "minus": 0.21736064553260803,
+          "finite_difference_directional": 0.34577250480651855,
+          "input_gradient": [
+            -0.20277667045593262,
+            0.14299927651882172
+          ],
+          "analytic_directional": 0.3457759618759155,
+          "fd_minus_analytic": -3.4570693969726562e-06,
+          "hidden_crossing_units": 0,
+          "hidden_base_zero_units": 3,
+          "pre_tanh": 0.223154678940773,
+          "tanh_derivative": 0.95180974505668,
+          "distance_fit_directional_reference": 16.552850214844426
+        },
+        {
+          "id": "native194-train04-15-GPU24-ply-60",
+          "distance": [
+            0.0625,
+            0.0625
+          ],
+          "base": 0.2760109305381775,
+          "plus": 0.2781071662902832,
+          "minus": 0.27391207218170166,
+          "finite_difference_directional": 0.33560752868652344,
+          "input_gradient": [
+            -0.1968131959438324,
+            0.13879381120204926
+          ],
+          "analytic_directional": 0.33560699224472046,
+          "fd_minus_analytic": 5.364418029785156e-07,
+          "hidden_crossing_units": 0,
+          "hidden_base_zero_units": 3,
+          "pre_tanh": 0.2833588719367981,
+          "tanh_derivative": 0.9238179662234494,
+          "distance_fit_directional_reference": 16.552850214844426
+        }
+      ],
+      "summary": {
+        "fd_mean": 0.2956533133983612,
+        "fd_RMS": 0.3055357038974762,
+        "fd_min": 0.12347221374511719,
+        "fd_max": 0.3613704442977905,
+        "positive_count": 12,
+        "zero_count": 0,
+        "analytic_RMS": 0.30553582310676575,
+        "maxabs_fd_minus_analytic": 3.546476364135742e-06,
+        "rows_hidden_kink": 0
+      }
+    }
+  ],
+  "PASS": true,
+  "synthetic_off_manifold": true,
+  "limits": [
+    "fixed12train witnesses only",
+    "not legal position reconstruction",
+    "ReLU kinks affect finite differences",
+    "local tanh saturation",
+    "sensitivity is not prediction quality or strength"
+  ]
+}

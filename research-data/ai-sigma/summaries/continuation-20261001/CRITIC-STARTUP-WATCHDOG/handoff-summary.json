@@ -1,0 +1,202 @@
+{
+  "UTC": "2026-10-01T22:08:27.309011+00:00",
+  "issue": "quoridor-4lc.76",
+  "receipt_conservative": "21:55:00UTC",
+  "process_deadline": "22:15UTC",
+  "newjob_cutoff": "22:10UTC",
+  "submission_deadline": "22:25UTC",
+  "processing_stop": "2026-10-01T22:06:05.333356+00:00",
+  "phaseA": {
+    "UTC": "2026-10-01T22:05:29.974Z",
+    "watchdog_cases": [
+      {
+        "delay": 400,
+        "publics": [
+          {
+            "elapsed": 411,
+            "error": null
+          },
+          {
+            "elapsed": 411,
+            "error": "NO_RESPONSE_TIMEOUT"
+          }
+        ],
+        "lateCleanup": []
+      },
+      {
+        "delay": 411,
+        "publics": [
+          {
+            "elapsed": 411,
+            "error": null
+          },
+          {
+            "elapsed": 411,
+            "error": "NO_COMPLETED_SNAPSHOT"
+          }
+        ],
+        "lateCleanup": [
+          {
+            "kind": "late_factory_cleanup",
+            "session": 2,
+            "value": {
+              "mock": true,
+              "activeNN": 0,
+              "handles": 0,
+              "live_searches": 0,
+              "controlledPID0": false,
+              "signalCode": "SIGTERM",
+              "idempotent": true
+            }
+          }
+        ]
+      },
+      {
+        "delay": 800,
+        "publics": [
+          {
+            "elapsed": 411,
+            "error": null
+          },
+          {
+            "elapsed": 411,
+            "error": "NO_COMPLETED_SNAPSHOT"
+          }
+        ],
+        "lateCleanup": [
+          {
+            "kind": "late_factory_cleanup",
+            "session": 2,
+            "value": {
+              "mock": true,
+              "activeNN": 0,
+              "handles": 0,
+              "live_searches": 0,
+              "controlledPID0": false,
+              "signalCode": "SIGTERM",
+              "idempotent": true
+            }
+          }
+        ]
+      }
+    ],
+    "diagnostic_actual64_complete": true,
+    "diagnostic_summary_flags": {
+      "dry": true,
+      "actual_go": false,
+      "actual_games": 0,
+      "holdout_sends": 0
+    },
+    "same_execute_actual_flags_unconditional": true,
+    "actual_driver_monitor_not_started": true,
+    "beforeDeadlineError": "UNREADY",
+    "currentError": "PROCESSING_DEADLINE",
+    "common_execute_actual_pause_callback_result": "PAUSED",
+    "backend_creates": 0,
+    "failed_helper_reason": "expected UNREADY after original22:00 deadline; original failure retained. Only remaining assertions executed, prior mocks/CLI not repeated",
+    "actual_real_positive_freeze_not_issued_or_executed": true,
+    "proof_subject75_fixed_review76_not_semantically_validated": true,
+    "NN": 0,
+    "Chromium": 0,
+    "phaseB_started": false,
+    "go": false,
+    "reason": "required actual purpose/audit and monitor initialization gate fail; no NN information gain can repair these static failures"
+  },
+  "phaseB": "not started because mandatory actual purpose/audit/monitor gates fail",
+  "independent_NN": 0,
+  "independent_Chromium": 0,
+  "planned_phaseB_max11_unexecuted": 11,
+  "no_repeated_mock_suite": true,
+  "saved_original75_source_binding": [
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-STARTUP-WATCHDOG/entry-manifest.json",
+      "sha256": "6c2813e2451b122942d39dc740b27eaa5cbddfc518cc592bc9c37310ddde7498"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-STARTUP-WATCHDOG/source-frozen-before-runtime.json",
+      "sha256": "33eadb7de980b67b1f518c94c84ccd2b7bd7fb4fcb25cc687fa82118a7bdef80"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-STARTUP-WATCHDOG/final-manifest.json",
+      "sha256": "451a541931560051411aed3dafe7aad80e2c2a00b53a257075d9935f15753371"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-STARTUP-WATCHDOG/runtime-source-stopped-before-report.json",
+      "sha256": "a5c9f72e1505b54734eb7a334cd5aaff0d2c6ea4b23f008f569029f7fe8d5579"
+    }
+  ],
+  "original_after_count": 639,
+  "original_hash_mismatch": 0,
+  "resource": {
+    "CPU": [
+      0
+    ],
+    "observed_max_RSS": 821637120,
+    "observed_peak_allocated": 1298432,
+    "same_identity_live": [],
+    "tracked_identity_count": 8,
+    "instant_short_command_CPU_RSS_peak_not_guaranteed": true,
+    "headroom_intake": {
+      "UTC": "2026-10-01T21:59:14.397273+00:00",
+      "current_detected_critic_artifacts_reports_allocated": 75677696,
+      "combined_guard": 117440512,
+      "remaining_current": 41762816,
+      "new_guard": 37748736,
+      "preparation_bytes": 20480,
+      "forecast_runtime_not_finalized_until75frozen": true,
+      "not_all_host_storage_audit": true,
+      "no_old_evidence_deleted": true,
+      "scope_dirs": [
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-STREAMING-SNAPSHOT",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-STREAMING-ENTRY-FINAL",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-STREAMING-READY32",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-ORT-ENTRY",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-DEADLINE-FIRST-TURN",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-FAIR-STREAMING",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-STREAMING-EARLY-SEAL",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-STARTUP-WATCHDOG",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-CONTINUATION-NOGO",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-SCHEDULER-LIVE",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-ORT-CLEANUP-REPAIR",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-ORT-CHECKPOINT",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-ORT-SEARCH",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-WEB",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-PUCT-FACTOR",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-NN-SEARCH",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-MATCH-RESULTS",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-FINAL-ENTRY",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-CONTEXT",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-PROFILE-PARITY",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-INFERENCE",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-MATCHES-GATE",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-ARENA"
+      ],
+      "correction": "initial continuation-only subtotal omitted historical verification folders; retained first diagnostic; no old deletion/charge reduction"
+    }
+  },
+  "mandatory_no_go": [
+    {
+      "source": "match-entry.cjs execute result",
+      "finding": "dry:true/actual_go:false/actual_games:0/holdout_sends:0 unconditional across purpose actual; same execute only distinguishes NN/browser by realDiagnostic. Genuine actual run would misreport audit status/counts."
+    },
+    {
+      "source": "actual-driver.cjs and pause-check.cjs",
+      "finding": "actual driver calls checkPause but never startMonitor; new process module state UNREADY. Before22:00 UNREADY -> guard PAUSED backend0; current expired22:00 -> PROCESSING_DEADLINE -> same PAUSED. Positive diagnostic CLI has no actual callback and cannot establish genuine actual entry."
+    }
+  ],
+  "proof_binding_limit": "fixed proof independent_issue75 is subject-like field; review76 semantic content not inspected, acceptance bytes only hashed. Existing positive artificial diagnostic is not real acceptance; correct real subject/review binding remains unverified.",
+  "unverified": [
+    "phaseB maximum11/allNN/numeric/clock/ownership independent runtime intentionally0",
+    "independent actual positive coordinator freeze and literal real actual CLI",
+    "all phaseA finite/tree/foreign/samehost classifier injections not executed after mandatory no-go; only3factory timing cases +CLI64 +sameexecute actual pause guard completed",
+    "reference faulty numeric/model categories not re-injected in76",
+    "full original75 runtime arithmetic/model ACK/kernel provenance not independently reexecuted; writer report/stop bundle preserved, rawhash checks only",
+    "tail/general fairness/native/NI/Sigma goal/true legal200/no-legal/deep/rawview/entropy/training overlap"
+  ],
+  "m32_latest_entry": "2026-10-01T22:06:38.500Z",
+  "comparison_go": false,
+  "T_m_CI_not_modified": true,
+  "mock64_not_actual_games": true,
+  "actual_go": false
+}

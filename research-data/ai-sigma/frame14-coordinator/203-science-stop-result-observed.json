@@ -1,0 +1,41 @@
+{
+  "observedUTC": "2026-10-04T01:54:55.230282+00:00",
+  "issue": "quoridor-4lc.203",
+  "science_start_owner_final": "2026-10-04T01:50:53.186618+00:00",
+  "science_stop_owner_final": "2026-10-04T01:51:44.755268+00:00",
+  "earlier_pool_identity_reportUTC": "2026-10-04T01:51:23.924538+00:00",
+  "clock_scope": "final guardian science_start is distinct from earlier pool identity/start notification UTC; keep both, no source rewrite",
+  "owner_counts": {
+    "W": 1,
+    "L": 3,
+    "D": 0,
+    "unknown": 0,
+    "planned_games": 4,
+    "requests": 201,
+    "all4_GOAL": true,
+    "schema_invalid": 0,
+    "candidate_NN": 0,
+    "reference_NN": 8840,
+    "startup_separate": 2,
+    "depths": {
+      "2": 37,
+      "3": 38,
+      "4": 25
+    },
+    "depth0_fallback": 0,
+    "public_ms": [
+      409.60465198755264,
+      413.4566400051117
+    ],
+    "allattempt_guardian_wall_s": 53.33967278100317,
+    "peak_family_RSS": 1457475584
+  },
+  "owner_stop": {
+    "all_waited": true,
+    "current_remaining_exact": [],
+    "new_science": 0
+  },
+  "judgment": "finite connection and four-game diagnostic only; 1W3L does not support strength equivalence or learned NNUE benefit; distance-alpha is train-fit distance baseline",
+  "pending_owner": "prefix finite replay, pack, Git byte restoration, backup/final handoff; not yet all preservation accepted",
+  "next": "use existing measured depth and wall branch stats for maximum one proposed discriminator; no automatic parameter change or extra game"
+}

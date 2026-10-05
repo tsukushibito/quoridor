@@ -1,0 +1,58 @@
+{
+  "issue": "quoridor-4lc.180",
+  "registered_UTC": "2026-10-03T10:38:57.895734+00:00",
+  "inputs": [
+    "initial-p1",
+    "asym-hv-p2",
+    "straight-jump-p2"
+  ],
+  "input_manifest_SHA256": "537b0c3bbe7e3136cecee904e4c33fbc41d6704f2bcbf354fbd5273f640d01ad",
+  "K": 800,
+  "definition": "root initial NN backup1 +799 reference loops; rootN800 edgeSum799",
+  "warm_order": [
+    "candidate",
+    "reference"
+  ],
+  "steady_order": [
+    "candidate",
+    "reference",
+    "reference",
+    "candidate",
+    "reference",
+    "candidate",
+    "candidate",
+    "reference"
+  ],
+  "slots": 30,
+  "per_fixture_two_fresh_held_sessions": "init/startup1 per engine then warm1/steady4 each; no persearch reload",
+  "startup_planned": 6,
+  "cache_outputs": false,
+  "fresh_tree_each_search": true,
+  "provider": "ORT1.30 CPUExecutionProvider SEQUENTIAL intra/inter1 same d790",
+  "CPU_pool": [
+    2
+  ],
+  "RAM": 3221225472,
+  "guard": 2684354560,
+  "elapsed": "controller Node hrtime before search input send through finalCP parse/legal/rootN/edge validation/structuredClone completion",
+  "external_CP": "one final only eachengine",
+  "Rust_internal": "raw/new/begin/resume/checkpoint per simulation retained; exact f32wire/f64tree; counters/request-response bytes/span included in elapsed, cleanup separately",
+  "reference_adapter": "fixed Sigma-Web751186 policy source with native setImmediate control drain replacing research browser timers; no C++ assertion",
+  "fault": "all30status; failed/unknown not replaced, unavailable median explicit",
+  "NN_limit": 30000,
+  "search_timeout_seconds": 60,
+  "measurement_job_seconds": 480,
+  "source": {
+    "tools/ai-sigma-native-k800-time/common.cjs": "7cdc3802eaa37f848992ec09ff8abc92d3796c016a9143439f14d27fa6b33594",
+    "tools/ai-sigma-native-k800-time/save-tree.py": "a1d31a6fb67d59fe722777d187c857f55f4aebb242dc31f861491f502e41f113",
+    "tools/ai-sigma-native-k800-time/runner.py": "59eea13a209ef117a64308c97e37bbf3883ca8fbceb227149fa53c066c8b2d25",
+    "tools/ai-sigma-native-k800-time/controller.cjs": "9127022a6df9f521f802332b9db70bbd543da96a783add1213c8059d5141cccf",
+    "tools/ai-sigma-native-k800-time/admission.py": "3b05c75f334428d6719383550ad33ed721e319f0b9b22d971336001440defab3",
+    "tools/ai-sigma-native-k800-time/pause-monitor.cjs": "265f7c8aa34f9a7f7f06f2ac2441546bd3ab7c36519196a70704351c61bddbea",
+    "tools/ai-sigma-native-k800-time/measure.cjs": "ec2eef5e4ccb648f19bd0a77b9da4a674d3e4d55b2e8e4c83d151025e1763a5e",
+    "tools/ai-sigma-native-k800-time/compact-beads.py": "63dd13b825818e5d1a2a34c466383cc81ad667fac8c0fe77f065cbebf91be8d3",
+    "tools/ai-sigma-native-k800-time/engine.cjs": "c61d0157df77443399c4c42b2f192d014be143c1a3b6a4cfdd85896bd4277b41"
+  },
+  "instrumentation": "perNN spans/bridgecount and JSON bytes adds overhead; no exclusive CPU attribution",
+  "mock": "native180-mock-r1 NN0 root4/edge3/finalCP1/zero/reap exit0; later init-perfixture lifecycle-only adjustment"
+}

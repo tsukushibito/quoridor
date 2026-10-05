@@ -1,0 +1,27 @@
+{
+  "UTC": "2026-10-03T23:48:45.506205+00:00",
+  "source_stopped": true,
+  "hashes": {
+    "frame14.py": "f08cc5177f1ab4f808f97ea260ec99ab7d5ce233c9d190b15118fc099dba71b7",
+    "frame14_data.py": "f45482fe6d1a4477ee3bf3b080d14d883b1f28c79517cff83e4318b7a90e37b8",
+    "export_generated.cjs": "5195a4abecaee507ea9155b4383843a4370783fa6ea20c33f9f442576f98a1c2",
+    "model.py": "12661cac69cff8b01800eb2d3df5be5f8674858d9ce995713b4385da44c74357",
+    "train.py": "665848e238d6a7976b83c53b0c13cdb87f9e65f4a75329560d6a98afbe9863d3",
+    "common.py": "876e0e9a610b594db63e62e81ae920684f10e52f71a7cc75e04f8fbadd9ffe04"
+  },
+  "mock": "pending physical quiet; no actual model",
+  "allowlist_beforefreeze": [
+    "194-owned label-free metadata all144",
+    "194-owned train/validation labels only",
+    "194-owned openings144 manifest",
+    "194 sealedtest labelpath/SHA only"
+  ],
+  "forbidden_beforefreeze": [
+    "test-teacher-rows",
+    "test raw/statejournal",
+    "glob old nn0-live-export-attempt1"
+  ],
+  "canon": "frame14.py canonicalize -> frame14_data.canonical_model_input, actualforward model.inputs uses same",
+  "mask_command": "python3 -B tools/nnue-training/frame14.py mask --metadata ALL144LABELFREE.gz --openings research-data/ai-sigma/frame14-teachers/openings.json --output MASK.json",
+  "max96_notready": true
+}

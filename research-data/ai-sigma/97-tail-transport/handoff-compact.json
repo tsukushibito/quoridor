@@ -1,0 +1,80 @@
+{
+  "issue": "quoridor-4lc.97",
+  "runtime_git": "83bb0ce4ea55b210f1657913ab2d6f2fa728eac5",
+  "evidence_git": "de98e737285ce71af22e834af6965570c3082e05",
+  "report": "docs/reports/ai-sigma-experiment-tail-transport.md",
+  "research_data": "research-data/ai-sigma/97-tail-transport/manifest.json",
+  "NN_stop_sha256": "2da21fe8b1c4a48a03614d19eadf9796d22d2f6e73b085fd0a4b52aeb452b785",
+  "writer_stop_sha256": "ea0955400084952fbef32577f79e703007821491b57a5d75be3e06ee6920c5d8",
+  "archive_sha256": "364155423960f15033e54bcaeb903d56d63636112b002872c4a0c2826e488dce",
+  "primary": {
+    "planned": 36,
+    "completed": 36,
+    "accepted": 36,
+    "late": 0,
+    "missing": 0,
+    "warm": 12,
+    "steady": 24,
+    "NN_hand": 331,
+    "NN_startup": 6,
+    "ACK_wall_over500": 1,
+    "Worker_stop_upper_le_D": 36,
+    "postpublic_API_baseline": 2,
+    "postpublic_API_cooperative": 0,
+    "after_cutoff_API_baseline": 8,
+    "after_cutoff_API_cooperative": 0
+  },
+  "steady_ACK_medians": [
+    {
+      "engine": "candidate",
+      "condition": "baseline",
+      "steady_ACK_wall_ms": {
+        "n": 6,
+        "min": 421.70181199908257,
+        "median": 463.0009205043316,
+        "max": 490.55460399389267
+      }
+    },
+    {
+      "engine": "candidate",
+      "condition": "cooperative",
+      "steady_ACK_wall_ms": {
+        "n": 6,
+        "min": 414.15356799960136,
+        "median": 446.4244074970484,
+        "max": 496.4191669821739
+      }
+    },
+    {
+      "engine": "reference",
+      "condition": "baseline",
+      "steady_ACK_wall_ms": {
+        "n": 6,
+        "min": 424.75536501407623,
+        "median": 440.3714934885502,
+        "max": 477.4088669717312
+      }
+    },
+    {
+      "engine": "reference",
+      "condition": "cooperative",
+      "steady_ACK_wall_ms": {
+        "n": 6,
+        "min": 416.2173510193825,
+        "median": 428.7747949808836,
+        "max": 450.71831899881363
+      }
+    }
+  ],
+  "support": "finite Worker cooperative clock suppression / legal snapshot and same final delivery clock / owned cleanup",
+  "unresolved": "nonNN/transport/Node costs remain; no general tail elimination or engine exact CPU attribution",
+  "final_owned_identity_union_current_absent": 118,
+  "95_old_input_readonly": true,
+  "old93_WDL_unchanged": true,
+  "same_runtime_files_hashes_match_git83": true,
+  "accepted": false,
+  "actual_go": false,
+  "formal_fairness": false,
+  "formal_NI": false,
+  "next": "coordinator chooses independent finite verification; owner idle, no additional NN planned"
+}

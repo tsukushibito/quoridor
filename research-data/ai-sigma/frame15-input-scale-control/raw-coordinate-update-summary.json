@@ -1,0 +1,251 @@
+{
+  "rule": "DeltaWd_raw=DeltaWdprime/sigma; dbraw=dbprime-sum(dwprime*mu/sigma)",
+  "updates": [
+    {
+      "step": 1,
+      "DeltaWd_standardized": {
+        "norm": 0.0007873881259001791,
+        "RMS": 9.84235157375224e-05,
+        "maxabs": 0.00010000006295740604
+      },
+      "DeltaBias_standardized": {
+        "norm": 0.0005567813059315085,
+        "RMS": 9.842596045928076e-05,
+        "maxabs": 0.00010000169277191162
+      },
+      "DeltaWd_raw": {
+        "norm": 0.014578592963516712,
+        "RMS": 0.0018223240040242672,
+        "maxabs": 0.0018629427067935467
+      },
+      "DeltaBias_raw": {
+        "norm": 0.0010873196879401803,
+        "RMS": 0.00019221277034375817,
+        "maxabs": 0.00047130874008871615
+      },
+      "raw_bias_rule": "db'-sum(dw'*(mu/sigma))",
+      "extra_forward_backward": 0,
+      "witness_step0_RMS_change": 0.0014434571606371834,
+      "old_witness_step0_RMS_change": 0.0014048540751692641
+    },
+    {
+      "step": 2,
+      "DeltaWd_standardized": {
+        "norm": 0.0007367169018834829,
+        "RMS": 9.208961273543537e-05,
+        "maxabs": 0.00010013440623879433
+      },
+      "DeltaBias_standardized": {
+        "norm": 0.0005221470491960645,
+        "RMS": 9.230343130184337e-05,
+        "maxabs": 0.00010006502270698547
+      },
+      "DeltaWd_raw": {
+        "norm": 0.013640518300235271,
+        "RMS": 0.001705064787529409,
+        "maxabs": 0.0018652458675205708
+      },
+      "DeltaBias_raw": {
+        "norm": 0.0007654268993064761,
+        "RMS": 0.00013530964497476816,
+        "maxabs": 0.0003615911991801113
+      },
+      "raw_bias_rule": "db'-sum(dw'*(mu/sigma))",
+      "extra_forward_backward": 0,
+      "witness_step0_RMS_change": 0.0029180083695916153,
+      "old_witness_step0_RMS_change": 0.0028469649854508377
+    },
+    {
+      "step": 5,
+      "DeltaWd_standardized": {
+        "norm": 0.0007157979998737574,
+        "RMS": 8.947475726017728e-05,
+        "maxabs": 0.0001000037882477045
+      },
+      "DeltaBias_standardized": {
+        "norm": 0.0004826840595342219,
+        "RMS": 8.53272940730676e-05,
+        "maxabs": 9.982101619243622e-05
+      },
+      "DeltaWd_raw": {
+        "norm": 0.013255910947918892,
+        "RMS": 0.0016569888684898615,
+        "maxabs": 0.0018523548496887088
+      },
+      "DeltaBias_raw": {
+        "norm": 0.0005932567873969674,
+        "RMS": 0.00010487397230463102,
+        "maxabs": 0.00022544473176822066
+      },
+      "raw_bias_rule": "db'-sum(dw'*(mu/sigma))",
+      "extra_forward_backward": 0,
+      "witness_step0_RMS_change": 0.007594401493018213,
+      "old_witness_step0_RMS_change": 0.007415236593133889
+    },
+    {
+      "step": 10,
+      "DeltaWd_standardized": {
+        "norm": 0.0007064513629302382,
+        "RMS": 8.830642036627978e-05,
+        "maxabs": 0.0001014387235045433
+      },
+      "DeltaBias_standardized": {
+        "norm": 0.0003582466742955148,
+        "RMS": 6.332966586342081e-05,
+        "maxabs": 9.31769609451294e-05
+      },
+      "DeltaWd_raw": {
+        "norm": 0.013074013404548168,
+        "RMS": 0.001634251675568521,
+        "maxabs": 0.001866485457867384
+      },
+      "DeltaBias_raw": {
+        "norm": 0.0004833210550714284,
+        "RMS": 8.543990406906232e-05,
+        "maxabs": 0.00018600448674988002
+      },
+      "raw_bias_rule": "db'-sum(dw'*(mu/sigma))",
+      "extra_forward_backward": 0,
+      "witness_step0_RMS_change": 0.013795603062266662,
+      "old_witness_step0_RMS_change": 0.013344536671462666
+    },
+    {
+      "step": 20,
+      "DeltaWd_standardized": {
+        "norm": 0.0007223830907605588,
+        "RMS": 9.029789362102747e-05,
+        "maxabs": 0.00010223826393485069
+      },
+      "DeltaBias_standardized": {
+        "norm": 0.00027134950505569577,
+        "RMS": 4.79682712466456e-05,
+        "maxabs": 7.517635822296143e-05
+      },
+      "DeltaWd_raw": {
+        "norm": 0.013376636430621147,
+        "RMS": 0.0016720795538276434,
+        "maxabs": 0.001904639066196978
+      },
+      "DeltaBias_raw": {
+        "norm": 0.00031387945637106895,
+        "RMS": 5.548657281906344e-05,
+        "maxabs": 0.00010546667908784002
+      },
+      "raw_bias_rule": "db'-sum(dw'*(mu/sigma))",
+      "extra_forward_backward": 0,
+      "witness_step0_RMS_change": 0.021677746445281348,
+      "old_witness_step0_RMS_change": 0.02054993801749639
+    },
+    {
+      "step": 50,
+      "DeltaWd_standardized": {
+        "norm": 0.0006941707688383758,
+        "RMS": 8.677134610479698e-05,
+        "maxabs": 0.00011913245543837547
+      },
+      "DeltaBias_standardized": {
+        "norm": 0.00040198088390752673,
+        "RMS": 7.106085104169324e-05,
+        "maxabs": 0.00010515749454498291
+      },
+      "DeltaWd_raw": {
+        "norm": 0.012846366502344608,
+        "RMS": 0.001605795812793076,
+        "maxabs": 0.002192052314057946
+      },
+      "DeltaBias_raw": {
+        "norm": 0.0005294221919029951,
+        "RMS": 9.35895077418536e-05,
+        "maxabs": 0.00017319415928795934
+      },
+      "raw_bias_rule": "db'-sum(dw'*(mu/sigma))",
+      "extra_forward_backward": 0,
+      "witness_step0_RMS_change": 0.055492576512114776,
+      "old_witness_step0_RMS_change": 0.05194880525845122
+    },
+    {
+      "step": 100,
+      "DeltaWd_standardized": {
+        "norm": 0.0008079347899183631,
+        "RMS": 0.00010099184873979539,
+        "maxabs": 0.00015752669423818588
+      },
+      "DeltaBias_standardized": {
+        "norm": 0.00042402648250572383,
+        "RMS": 7.495799945900217e-05,
+        "maxabs": 0.0001607835292816162
+      },
+      "DeltaWd_raw": {
+        "norm": 0.014946306124329567,
+        "RMS": 0.0018682882655411959,
+        "maxabs": 0.002898511243984103
+      },
+      "DeltaBias_raw": {
+        "norm": 0.00048215597053058445,
+        "RMS": 8.523394353687763e-05,
+        "maxabs": 0.0002127908810507506
+      },
+      "raw_bias_rule": "db'-sum(dw'*(mu/sigma))",
+      "extra_forward_backward": 0,
+      "witness_step0_RMS_change": 0.09831168949826437,
+      "old_witness_step0_RMS_change": 0.0888001039277378
+    },
+    {
+      "step": 200,
+      "DeltaWd_standardized": {
+        "norm": 0.0010383211774751544,
+        "RMS": 0.0001297901471843943,
+        "maxabs": 0.00023270398378372192
+      },
+      "DeltaBias_standardized": {
+        "norm": 0.0005032243207097054,
+        "RMS": 8.895833161659539e-05,
+        "maxabs": 0.00022421032190322876
+      },
+      "DeltaWd_raw": {
+        "norm": 0.01921781338751316,
+        "RMS": 0.002402226673439145,
+        "maxabs": 0.004281783010810614
+      },
+      "DeltaBias_raw": {
+        "norm": 0.0005974719533696771,
+        "RMS": 0.00010561911767581478,
+        "maxabs": 0.0002854962076526135
+      },
+      "raw_bias_rule": "db'-sum(dw'*(mu/sigma))",
+      "extra_forward_backward": 0,
+      "witness_step0_RMS_change": 0.21222043097201093,
+      "old_witness_step0_RMS_change": 0.1689430772548183
+    },
+    {
+      "step": 400,
+      "DeltaWd_standardized": {
+        "norm": 0.0005706532974727452,
+        "RMS": 7.133166946005076e-05,
+        "maxabs": 0.00013166479766368866
+      },
+      "DeltaBias_standardized": {
+        "norm": 0.00015145954967010766,
+        "RMS": 2.6774518119054846e-05,
+        "maxabs": 7.031857967376709e-05
+      },
+      "DeltaWd_raw": {
+        "norm": 0.010553251020610332,
+        "RMS": 0.0013191563775762916,
+        "maxabs": 0.002452838234603405
+      },
+      "DeltaBias_raw": {
+        "norm": 0.00020911431056447327,
+        "RMS": 3.696653584484011e-05,
+        "maxabs": 9.102319017983973e-05
+      },
+      "raw_bias_rule": "db'-sum(dw'*(mu/sigma))",
+      "extra_forward_backward": 0,
+      "witness_step0_RMS_change": 0.5081284116382748,
+      "old_witness_step0_RMS_change": 0.45696296346718657
+    }
+  ],
+  "same12train_witnessIDs": true,
+  "extra_forward_backward": 0,
+  "sigma_small_effect": "same Adam LR in standardized parameters implies different, larger raw distance-column updates plus centering/bias coupling; no information/capacity added"
+}

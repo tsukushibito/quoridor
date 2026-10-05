@@ -1,0 +1,79 @@
+{
+  "UTC": "2026-10-04T12:07:22.070203+00:00",
+  "supervisor_idle_point": "2026-10-04T12:03 snapshot",
+  "evidence_scope": "public management and safe aggregate; sealed labels inaccessible",
+  "no_wakeup_RPC": true,
+  "background-runtime-gen-r2/state.json": {
+    "schema_version": 1,
+    "job_id": "8255c4c9-300c-495f-9788-f4cd7b7fd35d",
+    "issue": "quoridor-4lc.228",
+    "thread_id": "01a0f31d-6d15-7620-bb63-4b4f878e4746",
+    "phase": "running",
+    "created_at": "2026-10-04T11:53:46.558732+00:00",
+    "config_sha256": "c18e56d7e2bc82241a33035de56b6b81c60faf429701e1206e74e1d50a67f084",
+    "supervisor": {
+      "pid": 123081,
+      "start_ticks": "36780917",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "updated_at": "2026-10-04T11:53:46.807554+00:00",
+    "child": {
+      "pid": 123133,
+      "start_ticks": "36781104",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "started_at": "2026-10-04T11:53:48.442525+00:00"
+  },
+  "background-runtime-gen-r2/result.json": {
+    "not_yet_present": true
+  },
+  "background-runtime-gen-r2/notification.json": {
+    "not_yet_present": true
+  },
+  "background-generation-progress.json": {
+    "UTC": "2026-10-04T12:07:10.194823+00:00",
+    "queue_pid": 123133,
+    "finished_chunks": [
+      {
+        "chunk": "test96-chunk1-r2",
+        "completed": 48,
+        "planned": 48,
+        "Rjoint": 2395,
+        "physicalNN": 137678,
+        "wall_s": 157.48018957400927,
+        "current_exact_absent": true,
+        "metadata": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/test-sealed/jobs/test96-chunk1-r2/metadata.jsonl.gz"
+      },
+      {
+        "chunk": "test96-chunk2",
+        "completed": 48,
+        "planned": 48,
+        "Rjoint": 2452,
+        "physicalNN": 140853,
+        "wall_s": 171.02700204303255,
+        "current_exact_absent": true,
+        "metadata": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/test-sealed/jobs/test96-chunk2-r1/metadata.jsonl.gz"
+      }
+    ],
+    "idle_wait_s": 460.0494870469556,
+    "management_measured_s": 12.740759937034454,
+    "reason": null,
+    "elapsed_s": 802.1047206459916,
+    "receipt_not_science_success": true
+  },
+  "physical_identity_pointUTC": "2026-10-04T12:08:15.157292+00:00",
+  "physical_identity": {
+    "supervisor": {
+      "pid": 123081,
+      "expected_tick": "36780917",
+      "actual_tick": "36780917",
+      "identity_matches": true
+    },
+    "child": {
+      "pid": 123133,
+      "expected_tick": "36781104",
+      "actual_tick": "36781104",
+      "identity_matches": true
+    }
+  }
+}

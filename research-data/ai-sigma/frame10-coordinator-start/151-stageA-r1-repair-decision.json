@@ -1,0 +1,40 @@
+{
+  "UTC": "2026-10-03T01:42:58.225937+00:00",
+  "issue": "quoridor-4lc.151",
+  "run": "port151-stageA-r1",
+  "source_Git": "c706326",
+  "stop_SHA256": "0445b8de46fe26e01af8be0f3ebcd6db7f1d73c73d4bb04d691b2ca7c6a87fce",
+  "raw_SHA256": "75a09f525d85d2ed3f9ffc09e9a97f7e7ff066964086e9b9858e2a67e5a93bb4",
+  "searches": 10,
+  "handNN": 320,
+  "startup_separate": 6,
+  "NN_transport_example": {
+    "original_f32_extended_f64": 0.21437489986419678,
+    "JSON_decoded_f64": 0.2143748998641968,
+    "f64_bit_delta": 1,
+    "restore_f32_extend_f64_matches": true
+  },
+  "analysis_first_numeric": {
+    "kind": "root_prior",
+    "fixture": "initial-p1",
+    "index": [
+      1,
+      78
+    ],
+    "left": 0.0010577700916885842,
+    "right": 0.0010577700916885844
+  },
+  "analysis_first_discrete_field": {
+    "kind": "root_ledger",
+    "fixture": "initial-p1",
+    "index": 1,
+    "left": 0.2143748998641968,
+    "right": 0.21437489986419678
+  },
+  "discrete_field_contains_numeric_rootledger_classification_needs_erratum": true,
+  "all_actual_paths_visits_Actions_independently_replayed_here": false,
+  "decision": "accept ABI f32 restoration as authorized same-contract debug, preserve failure/version/run, separate numerical and discrete findings; StageB remains0 pending conformance",
+  "budget_deadline_changed": false,
+  "stop_empty_and_model_main_zero_receipts": true,
+  "natural_fullperiod_allhost_proof": false
+}

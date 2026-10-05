@@ -1,0 +1,26 @@
+{
+  "run": "smoke-5",
+  "command": [
+    "taskset",
+    "-c",
+    "0",
+    "python3",
+    "tools/ai-sigma-pv-pipeline-bootstrap/bootstrap.py",
+    "smoke"
+  ],
+  "start_epoch": 1790997309.1818419,
+  "end_epoch": 1790997309.214555,
+  "elapsed_seconds": 0.03271365165710449,
+  "returncode": 0,
+  "stdout": "{\"rows\": 5, \"groups\": 5, \"train\": 4, \"validation\": 1, \"rejected_mocks\": [\"shape\", \"NaN-value\", \"illegal-mass\", \"bad-visits\", \"wrong-P2-map\", \"wrong-sign\", \"candidate-reference-group-leak\"], \"command\": \"smoke\", \"start_UTC\": 1790997309.1999142, \"end_UTC\": 1790997309.2120473, \"peak_RSS_KiB\": 17500, \"new_NN\": 0, \"new_training\": 0}\n",
+  "stderr": "",
+  "identity": {
+    "pid": 3094882,
+    "starttick": "25024018",
+    "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "own_wait_completed": true,
+  "new_NN": 0,
+  "source_sha256": "1746911332a51110ec516739c02fa74d08185e33ab1605d9a1c5802ef182d3ae",
+  "children_peak_RSS_KiB": 17696
+}

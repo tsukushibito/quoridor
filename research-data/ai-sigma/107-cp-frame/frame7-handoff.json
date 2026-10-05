@@ -1,0 +1,57 @@
+{
+  "issue": "quoridor-4lc.107",
+  "contract": 4,
+  "frame": 7,
+  "UTC": "2026-10-02T07:04:41.149306+00:00",
+  "runtime_source_Git": "ec4e92d68b4b4aabd7d45ae6cf8cb1234abae82b",
+  "evidence_and_report_Git": "a7185b6",
+  "runtime_source_after_SHA_unchanged": [
+    "tools/ai-sigma-cp-frame/browser-main.js",
+    "tools/ai-sigma-cp-frame/browser-sab.cjs",
+    "tools/ai-sigma-cp-frame/browser.cjs",
+    "tools/ai-sigma-cp-frame/diagnose.cjs",
+    "tools/ai-sigma-cp-frame/frame-codec.js",
+    "tools/ai-sigma-cp-frame/mock-protocol.cjs",
+    "tools/ai-sigma-cp-frame/numeric-browser.js",
+    "tools/ai-sigma-cp-frame/protocol-worker.js",
+    "tools/ai-sigma-cp-frame/real-backend.cjs",
+    "tools/ai-sigma-cp-frame/runner.py",
+    "tools/ai-sigma-cp-frame/sab-worker.js",
+    "tools/ai-sigma-cp-frame/shared-best-action.cjs",
+    "tools/ai-sigma-cp-frame/worker-adapter.js"
+  ],
+  "later_documentation_change": "README and report updated after stopping; no runtime code mutation",
+  "archive": "research-data/ai-sigma/107-cp-frame/frame7-run-evidence.tar.gz",
+  "archive_SHA": "a65f1194a61ef64907956110e86cf9eaf3d35aef3e11dd560680eaa7fdf6593a",
+  "stream_restore_entries": 133,
+  "stop_SHA": "f36887d66fedba9bc8b1016427670ad5c3995cda4e19501d4dbbb4a7ad2a5887",
+  "current_owned_NN_browser_remaining": 0,
+  "new_NN_or_games_after_stop": 0,
+  "claims": [
+    "actual browser secure isolation/SAB Atomics and fixed dependencies",
+    "main adopts before Worker ACK; Node has no per-turn clock/Judge/binding/replay gate",
+    "browser same game-loop legal initial/asym 4 goals with exploratory W2L2",
+    "303 private-root gates and zero search ACK; startup18 and handNN1340 separate",
+    "forced browser cleanup and monitor stop recorded separately from model/search zero"
+  ],
+  "independent_confirmation_needed": [
+    "bounded SAB generation/state/cancel/coherent read and same browser main game transition",
+    "saved game/action/root/clock and typed failure meaning",
+    "initial clock bounds/end drift limitation; Worker stop and ACKwall are separate",
+    "all planned/started games and failed/unfinished denominators"
+  ],
+  "not_claimed": [
+    "formal fairness/hard realtime/NI/Sigma equality",
+    "all deep NN numeric parity or general tree correctness",
+    "pure NN CPU time from API await/ACK",
+    "Node old-result parity or independent final acceptance"
+  ],
+  "read_only_inputs": [
+    ".artifacts/ai-sigma/reference-fixtures/SIGMA-PARITY-PLAN/fixtures.json",
+    ".artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/ort-a.outputs.json",
+    "tools/ai-sigma-tail-transport/early-worker.js",
+    "tools/ai-sigma-actual-boundary-repair/game.cjs",
+    "fixed shared ONNX/Wasm/ORT imports in browser-sab.cjs"
+  ],
+  "reproduce": "new current permission + fresh config/run namespace; run command and source hashes in archive started/inputs. Do not overwrite existing runs or use expired deadlines. Independent real NN requires coordinator allocation."
+}

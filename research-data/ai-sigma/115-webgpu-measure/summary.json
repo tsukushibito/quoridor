@@ -1,0 +1,675 @@
+{
+  "issue": "quoridor-4lc.115",
+  "received": "2026-10-02T10:24:17Z",
+  "source_git": "f575b6bf9172b5b49a60d739476612a6041a00d2",
+  "actual_gpu_model_execution": false,
+  "result": "physical WebGPU environment prerequisite unfulfilled; software compute supported",
+  "actual_go": false,
+  "stageA": [
+    {
+      "run": "wg115-adapter-vulkan-r3",
+      "secure": true,
+      "isolated": true,
+      "adapter": {
+        "vendor": "google",
+        "architecture": "swiftshader",
+        "device": "",
+        "description": "",
+        "isFallbackAdapter": true,
+        "features": [
+          "depth32float-stencil8",
+          "rg11b10ufloat-renderable",
+          "bgra8unorm-storage",
+          "texture-compression-bc",
+          "core-features-and-limits",
+          "chromium-experimental-sampling-resource-table",
+          "chromium-experimental-timestamp-query-inside-passes",
+          "float32-filterable",
+          "indirect-first-instance",
+          "texture-compression-astc-sliced-3d",
+          "float32-blendable",
+          "subgroup-size-control",
+          "texture-compression-unaligned",
+          "texture-compression-astc",
+          "texture-compression-etc2",
+          "depth-clip-control",
+          "texture-compression-bc-sliced-3d",
+          "timestamp-query",
+          "clip-distances",
+          "texture-component-swizzle",
+          "subgroups"
+        ]
+      },
+      "sentinel": {
+        "input": [
+          3,
+          5,
+          11,
+          17
+        ],
+        "output": [
+          7,
+          11,
+          23,
+          35
+        ],
+        "queue_and_readback_ms": 7.234999984502792,
+        "expected": [
+          7,
+          11,
+          23,
+          35
+        ],
+        "NN": 0,
+        "passed": true
+      },
+      "device_destroyed": true,
+      "physicalVRAM_samples": [
+        {
+          "UTC": "2026-10-02T10:33:32.789Z",
+          "PID": 2404066,
+          "code": 0,
+          "text": "0, NVIDIA GeForce RTX 3060, GPU-840e85d2-ffac-51f8-c2ed-663fc3ef4a1e, 12288, 1501, 0\n",
+          "error": ""
+        },
+        {
+          "UTC": "2026-10-02T10:33:34.806Z",
+          "PID": 2404268,
+          "code": 0,
+          "text": "0, NVIDIA GeForce RTX 3060, GPU-840e85d2-ffac-51f8-c2ed-663fc3ef4a1e, 12288, 1501, 0\n",
+          "error": ""
+        },
+        {
+          "UTC": "2026-10-02T10:33:35.748Z",
+          "PID": 2404318,
+          "code": 0,
+          "text": "0, NVIDIA GeForce RTX 3060, GPU-840e85d2-ffac-51f8-c2ed-663fc3ef4a1e, 12288, 1501, 0\n",
+          "error": ""
+        },
+        {
+          "UTC": "2026-10-02T10:33:35.775Z",
+          "PID": 2404320,
+          "code": 0,
+          "text": "0, NVIDIA GeForce RTX 3060, GPU-840e85d2-ffac-51f8-c2ed-663fc3ef4a1e, 12288, 1501, 0\n",
+          "error": ""
+        }
+      ],
+      "cleanup": {
+        "remaining_pids": 0,
+        "tracked": [
+          {
+            "pid": 2404008,
+            "starttick": 19012396
+          },
+          {
+            "pid": 2404012,
+            "starttick": 19012397
+          },
+          {
+            "pid": 2404017,
+            "starttick": 19012448
+          },
+          {
+            "pid": 2404037,
+            "starttick": 19012453
+          },
+          {
+            "pid": 2404047,
+            "starttick": 19012517
+          },
+          {
+            "pid": 2404048,
+            "starttick": 19012526
+          },
+          {
+            "pid": 2404049,
+            "starttick": 19012527
+          },
+          {
+            "pid": 2404052,
+            "starttick": 19012528
+          },
+          {
+            "pid": 2404054,
+            "starttick": 19012532
+          },
+          {
+            "pid": 2404061,
+            "starttick": 19012536
+          },
+          {
+            "pid": 2404065,
+            "starttick": 19012605
+          },
+          {
+            "pid": 2404066,
+            "starttick": 19012611
+          },
+          {
+            "pid": 2404072,
+            "starttick": 19012617
+          },
+          {
+            "pid": 2404074,
+            "starttick": 19012652
+          },
+          {
+            "pid": 2404075,
+            "starttick": 19012652
+          },
+          {
+            "pid": 2404080,
+            "starttick": 19012654
+          },
+          {
+            "pid": 2404081,
+            "starttick": 19012655
+          },
+          {
+            "pid": 2404077,
+            "starttick": 19012653
+          },
+          {
+            "pid": 2404100,
+            "starttick": 19012674
+          },
+          {
+            "pid": 2404105,
+            "starttick": 19012675
+          },
+          {
+            "pid": 2404118,
+            "starttick": 19012687
+          },
+          {
+            "pid": 2404136,
+            "starttick": 19012700
+          },
+          {
+            "pid": 2404143,
+            "starttick": 19012705
+          },
+          {
+            "pid": 2404150,
+            "starttick": 19012709
+          },
+          {
+            "pid": 2404157,
+            "starttick": 19012711
+          },
+          {
+            "pid": 2404163,
+            "starttick": 19012712
+          },
+          {
+            "pid": 2404168,
+            "starttick": 19012716
+          },
+          {
+            "pid": 2404177,
+            "starttick": 19012724
+          },
+          {
+            "pid": 2404179,
+            "starttick": 19012725
+          },
+          {
+            "pid": 2404189,
+            "starttick": 19012737
+          },
+          {
+            "pid": 2404198,
+            "starttick": 19012746
+          },
+          {
+            "pid": 2404206,
+            "starttick": 19012760
+          },
+          {
+            "pid": 2404215,
+            "starttick": 19012768
+          },
+          {
+            "pid": 2404230,
+            "starttick": 19012778
+          },
+          {
+            "pid": 2404234,
+            "starttick": 19012780
+          },
+          {
+            "pid": 2404268,
+            "starttick": 19012806
+          },
+          {
+            "pid": 2404272,
+            "starttick": 19012831
+          },
+          {
+            "pid": 2404282,
+            "starttick": 19012847
+          },
+          {
+            "pid": 2404295,
+            "starttick": 19012871
+          },
+          {
+            "pid": 2404302,
+            "starttick": 19012876
+          },
+          {
+            "pid": 2404311,
+            "starttick": 19012878
+          },
+          {
+            "pid": 2404318,
+            "starttick": 19012905
+          },
+          {
+            "pid": 2404320,
+            "starttick": 19012909
+          },
+          {
+            "pid": 2404331,
+            "starttick": 19012928
+          },
+          {
+            "pid": 2404337,
+            "starttick": 19012934
+          },
+          {
+            "pid": 2404348,
+            "starttick": 19013006
+          }
+        ],
+        "forced": true,
+        "graceful_error": null,
+        "waited": true,
+        "zombie_identities_absent": true,
+        "registration_ack": true,
+        "registered": 35
+      }
+    },
+    {
+      "run": "wg115-adapter-default-r4",
+      "secure": true,
+      "isolated": true,
+      "adapter": {
+        "vendor": "google",
+        "architecture": "swiftshader",
+        "device": "",
+        "description": "",
+        "isFallbackAdapter": true,
+        "features": [
+          "depth32float-stencil8",
+          "rg11b10ufloat-renderable",
+          "bgra8unorm-storage",
+          "texture-compression-bc",
+          "core-features-and-limits",
+          "chromium-experimental-sampling-resource-table",
+          "chromium-experimental-timestamp-query-inside-passes",
+          "float32-filterable",
+          "indirect-first-instance",
+          "texture-compression-astc-sliced-3d",
+          "float32-blendable",
+          "subgroup-size-control",
+          "texture-compression-unaligned",
+          "texture-compression-astc",
+          "texture-compression-etc2",
+          "depth-clip-control",
+          "texture-compression-bc-sliced-3d",
+          "timestamp-query",
+          "clip-distances",
+          "texture-component-swizzle",
+          "subgroups"
+        ]
+      },
+      "sentinel": {
+        "input": [
+          3,
+          5,
+          11,
+          17
+        ],
+        "output": [
+          7,
+          11,
+          23,
+          35
+        ],
+        "queue_and_readback_ms": 18.53999999165535,
+        "expected": [
+          7,
+          11,
+          23,
+          35
+        ],
+        "NN": 0,
+        "passed": true
+      },
+      "device_destroyed": true,
+      "physicalVRAM_samples": [
+        {
+          "UTC": "2026-10-02T10:34:34.330Z",
+          "PID": 2405432,
+          "code": 0,
+          "text": "0, NVIDIA GeForce RTX 3060, GPU-840e85d2-ffac-51f8-c2ed-663fc3ef4a1e, 12288, 1501, 0\n",
+          "error": ""
+        },
+        {
+          "UTC": "2026-10-02T10:34:36.218Z",
+          "PID": 2405574,
+          "code": 0,
+          "text": "0, NVIDIA GeForce RTX 3060, GPU-840e85d2-ffac-51f8-c2ed-663fc3ef4a1e, 12288, 1501, 0\n",
+          "error": ""
+        },
+        {
+          "UTC": "2026-10-02T10:34:37.026Z",
+          "PID": 2405605,
+          "code": 0,
+          "text": "0, NVIDIA GeForce RTX 3060, GPU-840e85d2-ffac-51f8-c2ed-663fc3ef4a1e, 12288, 1501, 0\n",
+          "error": ""
+        }
+      ],
+      "cleanup": {
+        "remaining_pids": 0,
+        "tracked": [
+          {
+            "pid": 2405374,
+            "starttick": 19018597
+          },
+          {
+            "pid": 2405378,
+            "starttick": 19018598
+          },
+          {
+            "pid": 2405382,
+            "starttick": 19018607
+          },
+          {
+            "pid": 2405402,
+            "starttick": 19018611
+          },
+          {
+            "pid": 2405407,
+            "starttick": 19018672
+          },
+          {
+            "pid": 2405408,
+            "starttick": 19018685
+          },
+          {
+            "pid": 2405412,
+            "starttick": 19018685
+          },
+          {
+            "pid": 2405414,
+            "starttick": 19018691
+          },
+          {
+            "pid": 2405420,
+            "starttick": 19018696
+          },
+          {
+            "pid": 2405431,
+            "starttick": 19018760
+          },
+          {
+            "pid": 2405432,
+            "starttick": 19018766
+          },
+          {
+            "pid": 2405438,
+            "starttick": 19018771
+          },
+          {
+            "pid": 2405439,
+            "starttick": 19018802
+          },
+          {
+            "pid": 2405440,
+            "starttick": 19018802
+          },
+          {
+            "pid": 2405445,
+            "starttick": 19018804
+          },
+          {
+            "pid": 2405446,
+            "starttick": 19018804
+          },
+          {
+            "pid": 2405442,
+            "starttick": 19018803
+          },
+          {
+            "pid": 2405464,
+            "starttick": 19018824
+          },
+          {
+            "pid": 2405468,
+            "starttick": 19018825
+          },
+          {
+            "pid": 2405500,
+            "starttick": 19018835
+          },
+          {
+            "pid": 2405520,
+            "starttick": 19018864
+          },
+          {
+            "pid": 2405527,
+            "starttick": 19018866
+          },
+          {
+            "pid": 2405531,
+            "starttick": 19018867
+          },
+          {
+            "pid": 2405533,
+            "starttick": 19018872
+          },
+          {
+            "pid": 2405537,
+            "starttick": 19018874
+          },
+          {
+            "pid": 2405550,
+            "starttick": 19018882
+          },
+          {
+            "pid": 2405562,
+            "starttick": 19018918
+          },
+          {
+            "pid": 2405574,
+            "starttick": 19018949
+          },
+          {
+            "pid": 2405577,
+            "starttick": 19018957
+          },
+          {
+            "pid": 2405587,
+            "starttick": 19018970
+          },
+          {
+            "pid": 2405598,
+            "starttick": 19019018
+          },
+          {
+            "pid": 2405599,
+            "starttick": 19019019
+          },
+          {
+            "pid": 2405600,
+            "starttick": 19019030
+          },
+          {
+            "pid": 2405604,
+            "starttick": 19019031
+          },
+          {
+            "pid": 2405605,
+            "starttick": 19019033
+          },
+          {
+            "pid": 2405607,
+            "starttick": 19019035
+          },
+          {
+            "pid": 2405614,
+            "starttick": 19019041
+          },
+          {
+            "pid": 2405615,
+            "starttick": 19019041
+          },
+          {
+            "pid": 2405618,
+            "starttick": 19019111
+          },
+          {
+            "pid": 2405619,
+            "starttick": 19019111
+          }
+        ],
+        "forced": true,
+        "graceful_error": null,
+        "waited": true,
+        "zombie_identities_absent": true,
+        "registration_ack": true,
+        "registered": 30
+      }
+    }
+  ],
+  "native_Vulkan": {
+    "vkCreateInstance": -9,
+    "VK_ERROR_INCOMPATIBLE_DRIVER": -9,
+    "physical_device_count": null
+  },
+  "ORT_exact_version_metadata": {
+    "url": "https://registry.npmjs.org/onnxruntime-web/1.21.0",
+    "version": "1.21.0",
+    "metadata_bytes": 3941,
+    "metadata_SHA256": "202ccbbbdf2db424fe06ea8772464e180ea5395a67970ef1c3935bc87ad863e5",
+    "dist": {
+      "shasum": "e2f7c5bab7be9d0d54482da5a70445db1db974b8",
+      "tarball": "https://registry.npmjs.org/onnxruntime-web/-/onnxruntime-web-1.21.0.tgz",
+      "fileCount": 495,
+      "integrity": "sha512-adzOe+7uI7lKz6pQNbAsLMQd2Fq5Jhmoxd8LZjJr8m3KvbFyiYyRxRiC57/XXD+jb18voppjeGAjoZmskXG+7A==",
+      "signatures": [
+        {
+          "sig": "MEQCIBNbIGO4+Z1jho4i6jON1gQsaw55LjqNN/GKYI4uZZKrAiB4sq/bQxWIU52T5wh0EhfBW/4N4V5us5/KZO+4ioKEEg==",
+          "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+        }
+      ],
+      "unpackedSize": 96395633
+    },
+    "requested_webgpu_bundle": "dist/ort.webgpu.min.js",
+    "additional_jsep_wasm_mjs_already_local": true,
+    "asset_downloaded": false,
+    "reason": "Physical WebGPU precondition currently absent; no model dispatch or measurement started."
+  },
+  "model_loads": 0,
+  "NN": 0,
+  "startup_NN": 0,
+  "planned_steady_measurement": {
+    "calls": 60,
+    "warm": 12,
+    "steady": 48,
+    "started": 0,
+    "unexecuted": 60
+  },
+  "planned_search": {
+    "requests": 12,
+    "started": 0,
+    "unexecuted": 12
+  },
+  "games": 0,
+  "holdout": 0,
+  "runs": [
+    {
+      "run": "wg115-adapter-default-r4",
+      "phase": "browser-preflight",
+      "exit": 0,
+      "stop_reason": null,
+      "wall_seconds": 5.975547,
+      "RSS_peak": 1350107136,
+      "remaining": [],
+      "unknown_adopted": [],
+      "version_note": "actual Git/source hashes in .started/.inputs; config is original immutable supplied bytes"
+    },
+    {
+      "run": "wg115-adapter-vulkan-r1",
+      "phase": "browser-preflight",
+      "exit": 1,
+      "stop_reason": null,
+      "wall_seconds": 0.094789,
+      "RSS_peak": 66990080,
+      "remaining": [],
+      "unknown_adopted": [],
+      "version_note": "actual Git/source hashes in .started/.inputs; config is original immutable supplied bytes"
+    },
+    {
+      "run": "wg115-adapter-vulkan-r3",
+      "phase": "browser-preflight",
+      "exit": 0,
+      "stop_reason": null,
+      "wall_seconds": 6.880791,
+      "RSS_peak": 1322102784,
+      "remaining": [],
+      "unknown_adopted": [],
+      "version_note": "actual Git/source hashes in .started/.inputs; config is original immutable supplied bytes"
+    },
+    {
+      "run": "wg115-native-driver-inspection-r5",
+      "phase": "protocol",
+      "exit": 0,
+      "stop_reason": null,
+      "wall_seconds": 0.430541,
+      "RSS_peak": 41086976,
+      "remaining": [],
+      "unknown_adopted": [],
+      "version_note": "actual Git/source hashes in .started/.inputs; config is original immutable supplied bytes"
+    },
+    {
+      "run": "wg115-adapter-vulkan-r2",
+      "phase": "browser-preflight",
+      "primary": "AFFINITY_GUARD cleanup exception",
+      "process_json_missing": true,
+      "charged_browser_cap_seconds": 600,
+      "currentabsence_only": true,
+      "measured_wall_not_fabricated": true
+    }
+  ],
+  "measured_browser_wall_excluding_r2_missing": 12.951127,
+  "conservative_browser_budget_charged_seconds": 612.951127,
+  "pure_managed_wall_seconds": 0.430541,
+  "RAM_peak_measured": 1350107136,
+  "identity_union": 122,
+  "current_live": [],
+  "stop_SHA256": "507ced1b7ec8c1dfbe8d8c1e29c10ab8561d3a5083744add82c8a162ca5d9b7d",
+  "minimum_additional_conditions": [
+    "Expose a physical-GPU-supported Vulkan graphics driver/ICD to Chromium (current native loader returns -9); requires separately assigned environment owner, no modification done here.",
+    "Recheck non-software adapter, real compute readback, physical VRAM guard and external GPU competition before model dispatch.",
+    "Then obtain only exact ORT1.21.0 WebGPU bundle from published official package, verify integrity/hash, reuse matching existing jsep assets locally.",
+    "Register CPU/Wasm-WebGPU same input/readback retained-session measurement before results; validate model/provider/fallback and numeric outputs."
+  ],
+  "limits": [
+    "r2 outer owned wait was not completed; currentabsence only",
+    "short initial commands resource history incomplete",
+    "sampled currentRSS/affinity is not continuous guarantee",
+    "host VRAM total is not process-owned allocation",
+    "software sentinel API readback is not kernel duration"
+  ],
+  "H1_numeric_or_speed_negative": false,
+  "formal_fairness_NI_Sigma_certified": false,
+  "old_CPU_WDL_integrated": false,
+  "dependency_fetch_not_blocked_by_old_prohibition": true,
+  "source_version_notes": [
+    "r3 config Git field inherited old baseline331b23c; actual launched source Git1479267 and inputSHA are authoritative, original config not changed.",
+    "r5 helper was an explicitly hashed untracked file at baseline1479267; final f575b6b preserves those same helper bytes."
+  ]
+}

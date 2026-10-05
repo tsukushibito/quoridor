@@ -1,0 +1,661 @@
+{
+  "issue": "quoridor-4lc.165",
+  "UTC": "2026-10-03T05:27:22.252435+00:00",
+  "scientific_source_write_stopped": true,
+  "source_hashes": {
+    "tools/ai-sigma-native-baseline/ort.py": "a1385fa48b07a2e5fb34d105e13d06556efed100b127a3667dfd0daa25111565",
+    "tools/ai-sigma-native-baseline/reference-core-native.js": "94ae4c315b671569e99d60091dca8fdcb69b1ad042e5e9e945e323a39a803ae7",
+    "tools/ai-sigma-native-baseline/common.cjs": "df81c11661f37d8da170c80e459349a62a4c5aa4242ea026b885b5ecd63dadbf",
+    "tools/ai-sigma-native-baseline/reference-core-browser-adapter.js": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05",
+    "tools/ai-sigma-native-baseline/game.js": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+    "tools/ai-sigma-native-baseline/diagnose.cjs": "63a0eda954135eb41b10af7762b7e1dc379e000eed8f19aca88b447687a82bf3",
+    "tools/ai-sigma-native-baseline/arena.cjs": "04e0d01315998bd6f7fd57bdb1c03c8fc6a9f79fc1b06d9c3b19a0e6426556e6",
+    "tools/ai-sigma-native-baseline/generate.cjs": "52d56170946e4a7e69b7a07f382a7b696dac4c017b39b9fecd9a168d9e074d6f",
+    "tools/ai-sigma-native-baseline/control-mock.cjs": "3c7c8af18ea74774420a0788a982556f15c2038c8dc9565dd5c28f2a1d60b6fe",
+    "tools/ai-sigma-native-baseline/runner.py": "a3eeb4162fb79c7376f42975d8be8a2625f21563f2a7d43be6b74aad371f962f",
+    "tools/ai-sigma-native-baseline/check-stageA.py": "c1a3d85db5bcdf3c980c3c7db9f5d2582d21d2e978c05a874042d58039ebc47d",
+    "tools/ai-sigma-native-baseline/controller.cjs": "0a8c8727b3144187127f20ccdc37ef95044c591c95e7d7a99ba1b92c56f56572",
+    "tools/ai-sigma-native-baseline/admission.py": "751f90e60a143c3fbe646fcd80f2b9fe8931e7de5a5b4fdf10c7f48dd0573374",
+    "tools/ai-sigma-native-baseline/reference.cjs": "5c2574b1539d7d84f0a5b3710f3da3399715657a91577d577ffed8da9cf29eef",
+    "tools/ai-sigma-native-baseline/trace-reference.js": "056c98b85d4003835dba54b6170249114e46b20146a1be0f691490e39aba92f0",
+    "tools/ai-sigma-native-baseline/pause-monitor.cjs": "3da03be6ecd7ac5dd9a374f81ea9292c1ea43abeb4a9ed10bfc93bc1279a4527",
+    "tools/ai-sigma-native-baseline/context.js": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+    "tools/ai-sigma-native-baseline/build.cjs": "3e339fdc81fec79dda2dc4cf5c326ae9ab8a3c0adfae31b57825d34156e79085",
+    "tools/ai-sigma-native-baseline/engine.cjs": "8f860172ee3a66229fc3fe1deba6f922d9c824f7f44f11943c6704641a60166c",
+    "tools/ai-sigma-native-baseline/clock.cjs": "555cdfc95c3f9a42e196a400351753a902b9d998d75469c8fb3b7ce77278fa2b",
+    "tools/ai-sigma-native-baseline/oracle.cjs": "52774d00488b92a281cae03ad3bf4ecddad0ab2732bb6b932b3b1fc2f208f0db",
+    "tools/ai-sigma-native-baseline/private/Cargo.toml": "4b2423a9a2e4c72d01739c999c7c2e70a970e23a5e2ad4ec1a8a7111fd523ed5",
+    "tools/ai-sigma-native-baseline/private/Cargo.lock": "d0568a38ed13c537c3ab96abe3a0585e82258da1a3a5e64ee4ab18df07211b24",
+    "tools/ai-sigma-native-baseline/private/deps/quoridor-ai/Cargo.toml": "ffc097c7efb403c7086c30113d11fa6fa8355ef8940884732bbcdbca152f8370",
+    "tools/ai-sigma-native-baseline/private/deps/quoridor-ai/src/research.rs": "c1a632be1177bd8c4fe6b81d36365577bf4f953f58c5c6abd8bc9e9ba6ed770e",
+    "tools/ai-sigma-native-baseline/private/deps/quoridor-ai/src/lib.rs": "5ab5eca5c23814dbaa0162b25e8fe710e58cdb7139c0fa4e3e2f794dc041555a",
+    "tools/ai-sigma-native-baseline/private/deps/quoridor-core/Cargo.toml": "9e952267d75fd8b1cd51f72916e8fb97869f38d5ba4893a0ecedc297ebb74a27",
+    "tools/ai-sigma-native-baseline/private/deps/quoridor-core/src/game.rs": "543995676fb46cc4e80d0fccb650875eb901a4b4d71187788ee09dfbaf01a420",
+    "tools/ai-sigma-native-baseline/private/deps/quoridor-core/src/position.rs": "b12e79a99cf3441cf4acebbea1b827dce24b02db6fb2269021964872535e3ab6",
+    "tools/ai-sigma-native-baseline/private/deps/quoridor-core/src/research.rs": "5785963dc1bce7828e1d0bb32f5b48623e238aa24c2966f61a9843b6f219f524",
+    "tools/ai-sigma-native-baseline/private/deps/quoridor-core/src/profiling.rs": "1e26d96b6d443b4d54261e7e3cb742290f223b7e84ba450e3c2cf261af38255f",
+    "tools/ai-sigma-native-baseline/private/deps/quoridor-core/src/lib.rs": "24dc7084072d14e4f8a8ebd6572df4ddd2722b10b43178c250358f0a9f0befb0",
+    "tools/ai-sigma-native-baseline/private/src/context.rs": "9ba343646347329e1c5a21bacba8032c04e762e80653bce20d55b2518e54114e",
+    "tools/ai-sigma-native-baseline/private/src/main.rs": "8e775ccc526c0169cfc260764a20dbf591d7c9da7f211bc094968d8d1a5122f2",
+    "tools/ai-sigma-native-baseline/private/src/lib.rs": "bcd41464e7aa76c3970384b36d41087feb2087b5af7f311bfc6a3b6bf11a2b2e"
+  },
+  "last_heavy_end": "2026-10-03T05:25:07.645325+00:00",
+  "identity_count": 1806,
+  "current_same_identity": [],
+  "jobs": [
+    {
+      "name": "native165-build-r1",
+      "phase": "build",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "start": "2026-10-03T04:48:08.063485+00:00",
+      "end": "2026-10-03T04:48:22.321360+00:00",
+      "peak_group_plus_runner_RSS": 587456512
+    },
+    {
+      "name": "native165-control-mock-r1",
+      "phase": "protocol",
+      "exit": 1,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "start": "2026-10-03T04:54:28.523329+00:00",
+      "end": "2026-10-03T04:54:31.596058+00:00",
+      "peak_group_plus_runner_RSS": 279977984
+    },
+    {
+      "name": "native165-control-mock-r2",
+      "phase": "protocol",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "start": "2026-10-03T04:55:45.156227+00:00",
+      "end": "2026-10-03T04:55:48.505086+00:00",
+      "peak_group_plus_runner_RSS": 280821760
+    },
+    {
+      "name": "native165-mechanism-r1",
+      "phase": "mechanism",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "start": "2026-10-03T04:56:56.343872+00:00",
+      "end": "2026-10-03T04:57:01.936784+00:00",
+      "peak_group_plus_runner_RSS": 652570624
+    },
+    {
+      "name": "native165-oracle-r1",
+      "phase": "protocol",
+      "exit": -15,
+      "stop_reason": "AFFINITY_GUARD",
+      "remaining": [],
+      "unknown_adopted": [],
+      "start": "2026-10-03T04:50:12.651194+00:00",
+      "end": "2026-10-03T04:50:12.797493+00:00",
+      "peak_group_plus_runner_RSS": 80998400
+    },
+    {
+      "name": "native165-oracle-r2",
+      "phase": "protocol",
+      "exit": 1,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "start": "2026-10-03T04:51:37.168858+00:00",
+      "end": "2026-10-03T04:51:38.647105+00:00",
+      "peak_group_plus_runner_RSS": 284647424
+    },
+    {
+      "name": "native165-oracle-r3",
+      "phase": "protocol",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "start": "2026-10-03T04:52:25.928195+00:00",
+      "end": "2026-10-03T04:52:28.146424+00:00",
+      "peak_group_plus_runner_RSS": 281300992
+    },
+    {
+      "name": "native165-pair01-r1",
+      "phase": "arena",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "start": "2026-10-03T05:03:37.536106+00:00",
+      "end": "2026-10-03T05:04:25.136973+00:00",
+      "peak_group_plus_runner_RSS": 760041472
+    },
+    {
+      "name": "native165-pair02-r1",
+      "phase": "arena",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "start": "2026-10-03T05:07:44.486266+00:00",
+      "end": "2026-10-03T05:08:49.162599+00:00",
+      "peak_group_plus_runner_RSS": 711700480
+    },
+    {
+      "name": "native165-pair03-r1",
+      "phase": "arena",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "start": "2026-10-03T05:10:06.040728+00:00",
+      "end": "2026-10-03T05:10:48.057597+00:00",
+      "peak_group_plus_runner_RSS": 734179328
+    },
+    {
+      "name": "native165-pair04-r1",
+      "phase": "arena",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "start": "2026-10-03T05:12:24.785618+00:00",
+      "end": "2026-10-03T05:13:12.908359+00:00",
+      "peak_group_plus_runner_RSS": 929980416
+    },
+    {
+      "name": "native165-pair05-r1",
+      "phase": "arena",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "start": "2026-10-03T05:14:56.260315+00:00",
+      "end": "2026-10-03T05:15:51.898836+00:00",
+      "peak_group_plus_runner_RSS": 729489408
+    },
+    {
+      "name": "native165-pair06-r1",
+      "phase": "arena",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "start": "2026-10-03T05:18:34.505451+00:00",
+      "end": "2026-10-03T05:19:31.164901+00:00",
+      "peak_group_plus_runner_RSS": 950575104
+    },
+    {
+      "name": "native165-pair07-r1",
+      "phase": "arena",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "start": "2026-10-03T05:21:09.367137+00:00",
+      "end": "2026-10-03T05:21:58.303733+00:00",
+      "peak_group_plus_runner_RSS": 772317184
+    },
+    {
+      "name": "native165-pair08-r1",
+      "phase": "arena",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "start": "2026-10-03T05:23:59.742825+00:00",
+      "end": "2026-10-03T05:25:07.645325+00:00",
+      "peak_group_plus_runner_RSS": 928731136
+    }
+  ],
+  "Model_engine_search_zero": [
+    {
+      "run": "native165-pair01-r1",
+      "closed": {
+        "candidate": {
+          "receipt": {
+            "exit": [
+              {
+                "code": 0,
+                "signal": null
+              },
+              {
+                "code": 0,
+                "signal": null
+              }
+            ],
+            "NN_total": 2261,
+            "startup_separate": 1
+          },
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "stderr": ""
+        },
+        "reference": {
+          "receipt": {
+            "exit": [
+              {
+                "code": 0,
+                "signal": null
+              }
+            ],
+            "NN_total": 2621,
+            "startup_separate": 1
+          },
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "stderr": ""
+        }
+      },
+      "hand_NN": 4882,
+      "startup_NN": 2
+    },
+    {
+      "run": "native165-pair02-r1",
+      "closed": {
+        "candidate": {
+          "receipt": {
+            "exit": [
+              {
+                "code": 0,
+                "signal": null
+              },
+              {
+                "code": 0,
+                "signal": null
+              }
+            ],
+            "NN_total": 3095,
+            "startup_separate": 1
+          },
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "stderr": ""
+        },
+        "reference": {
+          "receipt": {
+            "exit": [
+              {
+                "code": 0,
+                "signal": null
+              }
+            ],
+            "NN_total": 3737,
+            "startup_separate": 1
+          },
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "stderr": ""
+        }
+      },
+      "hand_NN": 6832,
+      "startup_NN": 2
+    },
+    {
+      "run": "native165-pair03-r1",
+      "closed": {
+        "candidate": {
+          "receipt": {
+            "exit": [
+              {
+                "code": 0,
+                "signal": null
+              },
+              {
+                "code": 0,
+                "signal": null
+              }
+            ],
+            "NN_total": 1907,
+            "startup_separate": 1
+          },
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "stderr": ""
+        },
+        "reference": {
+          "receipt": {
+            "exit": [
+              {
+                "code": 0,
+                "signal": null
+              }
+            ],
+            "NN_total": 2321,
+            "startup_separate": 1
+          },
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "stderr": ""
+        }
+      },
+      "hand_NN": 4228,
+      "startup_NN": 2
+    },
+    {
+      "run": "native165-pair04-r1",
+      "closed": {
+        "candidate": {
+          "receipt": {
+            "exit": [
+              {
+                "code": 0,
+                "signal": null
+              },
+              {
+                "code": 0,
+                "signal": null
+              }
+            ],
+            "NN_total": 1671,
+            "startup_separate": 1
+          },
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "stderr": ""
+        },
+        "reference": {
+          "receipt": {
+            "exit": [
+              {
+                "code": 0,
+                "signal": null
+              }
+            ],
+            "NN_total": 1912,
+            "startup_separate": 1
+          },
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "stderr": ""
+        }
+      },
+      "hand_NN": 3583,
+      "startup_NN": 2
+    },
+    {
+      "run": "native165-pair05-r1",
+      "closed": {
+        "candidate": {
+          "receipt": {
+            "exit": [
+              {
+                "code": 0,
+                "signal": null
+              },
+              {
+                "code": 0,
+                "signal": null
+              }
+            ],
+            "NN_total": 2628,
+            "startup_separate": 1
+          },
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "stderr": ""
+        },
+        "reference": {
+          "receipt": {
+            "exit": [
+              {
+                "code": 0,
+                "signal": null
+              }
+            ],
+            "NN_total": 3291,
+            "startup_separate": 1
+          },
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "stderr": ""
+        }
+      },
+      "hand_NN": 5919,
+      "startup_NN": 2
+    },
+    {
+      "run": "native165-pair06-r1",
+      "closed": {
+        "candidate": {
+          "receipt": {
+            "exit": [
+              {
+                "code": 0,
+                "signal": null
+              },
+              {
+                "code": 0,
+                "signal": null
+              }
+            ],
+            "NN_total": 2102,
+            "startup_separate": 1
+          },
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "stderr": ""
+        },
+        "reference": {
+          "receipt": {
+            "exit": [
+              {
+                "code": 0,
+                "signal": null
+              }
+            ],
+            "NN_total": 2316,
+            "startup_separate": 1
+          },
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "stderr": ""
+        }
+      },
+      "hand_NN": 4418,
+      "startup_NN": 2
+    },
+    {
+      "run": "native165-pair07-r1",
+      "closed": {
+        "candidate": {
+          "receipt": {
+            "exit": [
+              {
+                "code": 0,
+                "signal": null
+              },
+              {
+                "code": 0,
+                "signal": null
+              }
+            ],
+            "NN_total": 2396,
+            "startup_separate": 1
+          },
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "stderr": ""
+        },
+        "reference": {
+          "receipt": {
+            "exit": [
+              {
+                "code": 0,
+                "signal": null
+              }
+            ],
+            "NN_total": 2662,
+            "startup_separate": 1
+          },
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "stderr": ""
+        }
+      },
+      "hand_NN": 5058,
+      "startup_NN": 2
+    },
+    {
+      "run": "native165-pair08-r1",
+      "closed": {
+        "candidate": {
+          "receipt": {
+            "exit": [
+              {
+                "code": 0,
+                "signal": null
+              },
+              {
+                "code": 0,
+                "signal": null
+              }
+            ],
+            "NN_total": 2411,
+            "startup_separate": 1
+          },
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "stderr": ""
+        },
+        "reference": {
+          "receipt": {
+            "exit": [
+              {
+                "code": 0,
+                "signal": null
+              }
+            ],
+            "NN_total": 3047,
+            "startup_separate": 1
+          },
+          "exit": {
+            "code": 0,
+            "signal": null
+          },
+          "stderr": ""
+        }
+      },
+      "hand_NN": 5458,
+      "startup_NN": 2
+    }
+  ],
+  "main_monitor_callback_stop": [
+    {
+      "run": "native165-pair01-r1",
+      "monitor_state": "READY",
+      "pending_callbacks": [],
+      "timer": false,
+      "late_control": null
+    },
+    {
+      "run": "native165-pair02-r1",
+      "monitor_state": "READY",
+      "pending_callbacks": [],
+      "timer": false,
+      "late_control": null
+    },
+    {
+      "run": "native165-pair03-r1",
+      "monitor_state": "READY",
+      "pending_callbacks": [],
+      "timer": false,
+      "late_control": null
+    },
+    {
+      "run": "native165-pair04-r1",
+      "monitor_state": "READY",
+      "pending_callbacks": [],
+      "timer": false,
+      "late_control": null
+    },
+    {
+      "run": "native165-pair05-r1",
+      "monitor_state": "READY",
+      "pending_callbacks": [],
+      "timer": false,
+      "late_control": null
+    },
+    {
+      "run": "native165-pair06-r1",
+      "monitor_state": "READY",
+      "pending_callbacks": [],
+      "timer": false,
+      "late_control": null
+    },
+    {
+      "run": "native165-pair07-r1",
+      "monitor_state": "READY",
+      "pending_callbacks": [],
+      "timer": false,
+      "late_control": null
+    },
+    {
+      "run": "native165-pair08-r1",
+      "monitor_state": "READY",
+      "pending_callbacks": [],
+      "timer": false,
+      "late_control": null
+    }
+  ],
+  "innercontrolled_forced": "only NN0oracle-r1 affinityguard SIGTERM; subsequentscience normal ownedexit0",
+  "outerownedwait_empty": true,
+  "StageA": {
+    "searches": 10,
+    "hand_NN": 320,
+    "startup_NN": 2,
+    "first_discrete_difference": null
+  },
+  "StageB": {
+    "planned": 16,
+    "started": 16,
+    "terminal_games": 16,
+    "WDL": [
+      6,
+      0,
+      10
+    ],
+    "hand_NN": 40378,
+    "startup_NN": 16,
+    "public_requests": 898
+  },
+  "formal_ready": false,
+  "not_natural_allperiod_allhost_proof": true,
+  "remaining_helpers": [
+    "NN0collect/export",
+    "archive/finite restoration",
+    "Git/report/Beadsbackup"
+  ],
+  "science_success_replacement": 0
+}

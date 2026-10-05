@@ -1,0 +1,561 @@
+{
+  "UTC": "2026-10-04T14:10:55.442Z",
+  "samples": 4058,
+  "roots": [
+    {
+      "id": "initial-p1",
+      "NNUE": {
+        "name": "NNUE",
+        "completed_depth": 1,
+        "Action": 148,
+        "value": 0.47754064202308655,
+        "requested_depth": 2,
+        "node_cap": 2048,
+        "typed_stop": "NODE_CAP",
+        "partial_depth_discarded": 2,
+        "last_completed_only": true,
+        "action_legal": true,
+        "parent_copy_restored": true,
+        "stats": {
+          "visited": 2049,
+          "processed": 2048,
+          "rejected_entry": 1,
+          "NN": 2015,
+          "D_evals": 0,
+          "terminal": 0,
+          "full_accum": 1,
+          "delta_accum": 2047,
+          "legal_calls": 32,
+          "cutoffs": 23
+        },
+        "spans": {
+          "terminal_ms": 128.53382486104965,
+          "legal_and_order_ms": 1.7319459915161133,
+          "state_copy_next_ms": 28.8394136428833,
+          "accum_input_ms": 38.06832027435303,
+          "evaluator_ms": 34.37918585538864
+        },
+        "wholewall_ms": 237.13609898090363,
+        "map_delta": {
+          "hits": 509,
+          "misses": 1539,
+          "current": 3
+        },
+        "depths": [
+          {
+            "completed_depth": 1,
+            "Action": 148,
+            "value": 0.47754064202308655,
+            "wall_ms": 42.21469700336456,
+            "nodes_this_depth": 132,
+            "NN_this_depth": 131,
+            "root_all_actions": 131
+          },
+          {
+            "requested_depth": 2,
+            "status": "INCOMPLETE",
+            "adopted": false,
+            "wall_ms": 193.53138095140457,
+            "nodes_this_depth": 1916
+          }
+        ],
+        "root_key": "4,0|4,8|0||",
+        "root_history": "[\"4,0|4,8|0||\",1,[[\"4,0|4,8|0||\",1]]]",
+        "all_legal_actions_in_completed_root_depth": true,
+        "TT": 0,
+        "noise": 0,
+        "policy_exclusion": false,
+        "order": "ascending real-board Rust Action; tie first strict greater",
+        "samewall_strength_claim": false
+      },
+      "distance": {
+        "name": "distance",
+        "completed_depth": 2,
+        "Action": 13,
+        "value": 0.06038215383887291,
+        "requested_depth": 2,
+        "node_cap": 2048,
+        "typed_stop": null,
+        "partial_depth_discarded": null,
+        "last_completed_only": true,
+        "action_legal": true,
+        "parent_copy_restored": true,
+        "stats": {
+          "visited": 655,
+          "processed": 655,
+          "rejected_entry": 0,
+          "NN": 0,
+          "D_evals": 522,
+          "terminal": 0,
+          "full_accum": 0,
+          "delta_accum": 0,
+          "legal_calls": 132,
+          "cutoffs": 129
+        },
+        "spans": {
+          "terminal_ms": 29.89144104719162,
+          "legal_and_order_ms": 2.8639339804649353,
+          "state_copy_next_ms": 3.907924771308899,
+          "accum_input_ms": 0,
+          "evaluator_ms": 14.118556559085846
+        },
+        "wholewall_ms": 52.54761505126953,
+        "map_delta": {
+          "hits": 394,
+          "misses": 128,
+          "current": 131
+        },
+        "depths": [
+          {
+            "completed_depth": 1,
+            "Action": 13,
+            "value": 0.03868896886706352,
+            "wall_ms": 8.447362005710602,
+            "nodes_this_depth": 132,
+            "NN_this_depth": 0,
+            "root_all_actions": 131
+          },
+          {
+            "completed_depth": 2,
+            "Action": 13,
+            "value": 0.06038215383887291,
+            "wall_ms": 43.53517198562622,
+            "nodes_this_depth": 523,
+            "NN_this_depth": 0,
+            "root_all_actions": 131
+          }
+        ],
+        "root_key": "4,0|4,8|0||",
+        "root_history": "[\"4,0|4,8|0||\",1,[[\"4,0|4,8|0||\",1]]]",
+        "all_legal_actions_in_completed_root_depth": true,
+        "TT": 0,
+        "noise": 0,
+        "policy_exclusion": false,
+        "order": "ascending real-board Rust Action; tie first strict greater",
+        "samewall_strength_claim": false
+      },
+      "same_action": false
+    },
+    {
+      "id": "asym-hv-p2",
+      "NNUE": {
+        "name": "NNUE",
+        "completed_depth": 2,
+        "Action": 67,
+        "value": -0.10093547403812408,
+        "requested_depth": 2,
+        "node_cap": 2048,
+        "typed_stop": null,
+        "partial_depth_discarded": null,
+        "last_completed_only": true,
+        "action_legal": true,
+        "parent_copy_restored": true,
+        "stats": {
+          "visited": 501,
+          "processed": 501,
+          "rejected_entry": 0,
+          "NN": 376,
+          "D_evals": 0,
+          "terminal": 0,
+          "full_accum": 1,
+          "delta_accum": 499,
+          "legal_calls": 124,
+          "cutoffs": 122
+        },
+        "spans": {
+          "terminal_ms": 21.413489282131195,
+          "legal_and_order_ms": 3.3288447856903076,
+          "state_copy_next_ms": 3.1701824069023132,
+          "accum_input_ms": 3.70916885137558,
+          "evaluator_ms": 2.7943188548088074
+        },
+        "wholewall_ms": 35.34858900308609,
+        "map_delta": {
+          "hits": 379,
+          "misses": 121,
+          "current": 252
+        },
+        "depths": [
+          {
+            "completed_depth": 1,
+            "Action": 67,
+            "value": -0.08696156740188599,
+            "wall_ms": 8.404935002326965,
+            "nodes_this_depth": 124,
+            "NN_this_depth": 123,
+            "root_all_actions": 123
+          },
+          {
+            "completed_depth": 2,
+            "Action": 67,
+            "value": -0.10093547403812408,
+            "wall_ms": 26.670911014080048,
+            "nodes_this_depth": 377,
+            "NN_this_depth": 253,
+            "root_all_actions": 123
+          }
+        ],
+        "root_key": "4,1|4,8|1|1,2|5,3",
+        "root_history": "[\"4,1|4,8|1|1,2|5,3\",2,[[\"4,0|4,8|0|1,2|5,3\",1],[\"4,0|4,8|0||\",1],[\"4,0|4,8|1|1,2|\",1],[\"4,1|4,8|1|1,2|5,3\",1]]]",
+        "all_legal_actions_in_completed_root_depth": true,
+        "TT": 0,
+        "noise": 0,
+        "policy_exclusion": false,
+        "order": "ascending real-board Rust Action; tie first strict greater",
+        "samewall_strength_claim": false
+      },
+      "distance": {
+        "name": "distance",
+        "completed_depth": 2,
+        "Action": 67,
+        "value": -0.03868896886706352,
+        "requested_depth": 2,
+        "node_cap": 2048,
+        "typed_stop": null,
+        "partial_depth_discarded": null,
+        "last_completed_only": true,
+        "action_legal": true,
+        "parent_copy_restored": true,
+        "stats": {
+          "visited": 627,
+          "processed": 627,
+          "rejected_entry": 0,
+          "NN": 0,
+          "D_evals": 502,
+          "terminal": 0,
+          "full_accum": 0,
+          "delta_accum": 0,
+          "legal_calls": 124,
+          "cutoffs": 122
+        },
+        "spans": {
+          "terminal_ms": 30.455377101898193,
+          "legal_and_order_ms": 2.6011049151420593,
+          "state_copy_next_ms": 3.1085580587387085,
+          "accum_input_ms": 0,
+          "evaluator_ms": 2.663557469844818
+        },
+        "wholewall_ms": 39.44658601284027,
+        "map_delta": {
+          "hits": 502,
+          "misses": 0,
+          "current": 252
+        },
+        "depths": [
+          {
+            "completed_depth": 1,
+            "Action": 67,
+            "value": -0.06038215383887291,
+            "wall_ms": 8.35913199186325,
+            "nodes_this_depth": 124,
+            "NN_this_depth": 0,
+            "root_all_actions": 123
+          },
+          {
+            "completed_depth": 2,
+            "Action": 67,
+            "value": -0.03868896886706352,
+            "wall_ms": 31.015739023685455,
+            "nodes_this_depth": 503,
+            "NN_this_depth": 0,
+            "root_all_actions": 123
+          }
+        ],
+        "root_key": "4,1|4,8|1|1,2|5,3",
+        "root_history": "[\"4,1|4,8|1|1,2|5,3\",2,[[\"4,0|4,8|0|1,2|5,3\",1],[\"4,0|4,8|0||\",1],[\"4,0|4,8|1|1,2|\",1],[\"4,1|4,8|1|1,2|5,3\",1]]]",
+        "all_legal_actions_in_completed_root_depth": true,
+        "TT": 0,
+        "noise": 0,
+        "policy_exclusion": false,
+        "order": "ascending real-board Rust Action; tie first strict greater",
+        "samewall_strength_claim": false
+      },
+      "same_action": true
+    },
+    {
+      "id": "straight-jump-p2",
+      "NNUE": {
+        "name": "NNUE",
+        "completed_depth": 2,
+        "Action": 31,
+        "value": -0.14087000489234924,
+        "requested_depth": 2,
+        "node_cap": 2048,
+        "typed_stop": null,
+        "partial_depth_discarded": null,
+        "last_completed_only": true,
+        "action_legal": true,
+        "parent_copy_restored": true,
+        "stats": {
+          "visited": 1039,
+          "processed": 1039,
+          "rejected_entry": 0,
+          "NN": 905,
+          "D_evals": 0,
+          "terminal": 0,
+          "full_accum": 1,
+          "delta_accum": 1037,
+          "legal_calls": 133,
+          "cutoffs": 131
+        },
+        "spans": {
+          "terminal_ms": 37.99750679731369,
+          "legal_and_order_ms": 2.798735201358795,
+          "state_copy_next_ms": 8.386815071105957,
+          "accum_input_ms": 4.894270300865173,
+          "evaluator_ms": 6.924179673194885
+        },
+        "wholewall_ms": 62.76671600341797,
+        "map_delta": {
+          "hits": 806,
+          "misses": 232,
+          "current": 228
+        },
+        "depths": [
+          {
+            "completed_depth": 1,
+            "Action": 140,
+            "value": 0.33853334188461304,
+            "wall_ms": 12.290455996990204,
+            "nodes_this_depth": 133,
+            "NN_this_depth": 132,
+            "root_all_actions": 132
+          },
+          {
+            "completed_depth": 2,
+            "Action": 31,
+            "value": -0.14087000489234924,
+            "wall_ms": 50.15402698516846,
+            "nodes_this_depth": 906,
+            "NN_this_depth": 773,
+            "root_all_actions": 132
+          }
+        ],
+        "root_key": "4,4|4,5|1||",
+        "root_history": "[\"4,4|4,5|1||\",2,[[\"4,0|4,8|0||\",1],[\"4,1|4,7|0||\",1],[\"4,1|4,8|1||\",1],[\"4,2|4,6|0||\",1],[\"4,2|4,7|1||\",1],[\"4,3|4,5|0||\",1],[\"4,3|4,6|1||\",1],[\"4,4|4,5|1||\",1]]]",
+        "all_legal_actions_in_completed_root_depth": true,
+        "TT": 0,
+        "noise": 0,
+        "policy_exclusion": false,
+        "order": "ascending real-board Rust Action; tie first strict greater",
+        "samewall_strength_claim": false
+      },
+      "distance": {
+        "name": "distance",
+        "completed_depth": 2,
+        "Action": 31,
+        "value": 0.06038215383887291,
+        "requested_depth": 2,
+        "node_cap": 2048,
+        "typed_stop": null,
+        "partial_depth_discarded": null,
+        "last_completed_only": true,
+        "action_legal": true,
+        "parent_copy_restored": true,
+        "stats": {
+          "visited": 535,
+          "processed": 535,
+          "rejected_entry": 0,
+          "NN": 0,
+          "D_evals": 401,
+          "terminal": 0,
+          "full_accum": 0,
+          "delta_accum": 0,
+          "legal_calls": 133,
+          "cutoffs": 131
+        },
+        "spans": {
+          "terminal_ms": 23.082052290439606,
+          "legal_and_order_ms": 2.2355512380599976,
+          "state_copy_next_ms": 2.633296489715576,
+          "accum_input_ms": 0,
+          "evaluator_ms": 10.770131886005402
+        },
+        "wholewall_ms": 39.027182042598724,
+        "map_delta": {
+          "hits": 376,
+          "misses": 25,
+          "current": 253
+        },
+        "depths": [
+          {
+            "completed_depth": 1,
+            "Action": 31,
+            "value": 0.038688939064741135,
+            "wall_ms": 11.842361986637115,
+            "nodes_this_depth": 133,
+            "NN_this_depth": 0,
+            "root_all_actions": 132
+          },
+          {
+            "completed_depth": 2,
+            "Action": 31,
+            "value": 0.06038215383887291,
+            "wall_ms": 27.133563995361328,
+            "nodes_this_depth": 402,
+            "NN_this_depth": 0,
+            "root_all_actions": 132
+          }
+        ],
+        "root_key": "4,4|4,5|1||",
+        "root_history": "[\"4,4|4,5|1||\",2,[[\"4,0|4,8|0||\",1],[\"4,1|4,7|0||\",1],[\"4,1|4,8|1||\",1],[\"4,2|4,6|0||\",1],[\"4,2|4,7|1||\",1],[\"4,3|4,5|0||\",1],[\"4,3|4,6|1||\",1],[\"4,4|4,5|1||\",1]]]",
+        "all_legal_actions_in_completed_root_depth": true,
+        "TT": 0,
+        "noise": 0,
+        "policy_exclusion": false,
+        "order": "ascending real-board Rust Action; tie first strict greater",
+        "samewall_strength_claim": false
+      },
+      "same_action": true
+    },
+    {
+      "id": "fixed-legal-diagonal-p1",
+      "NNUE": {
+        "name": "NNUE",
+        "completed_depth": 2,
+        "Action": 48,
+        "value": 0.19044476747512817,
+        "requested_depth": 2,
+        "node_cap": 2048,
+        "typed_stop": null,
+        "partial_depth_discarded": null,
+        "last_completed_only": true,
+        "action_legal": true,
+        "parent_copy_restored": true,
+        "stats": {
+          "visited": 893,
+          "processed": 893,
+          "rejected_entry": 0,
+          "NN": 762,
+          "D_evals": 0,
+          "terminal": 0,
+          "full_accum": 1,
+          "delta_accum": 891,
+          "legal_calls": 130,
+          "cutoffs": 125
+        },
+        "spans": {
+          "terminal_ms": 32.92259520292282,
+          "legal_and_order_ms": 2.1719980239868164,
+          "state_copy_next_ms": 4.896980285644531,
+          "accum_input_ms": 7.689140796661377,
+          "evaluator_ms": 5.703410804271698
+        },
+        "wholewall_ms": 54.188863039016724,
+        "map_delta": {
+          "hits": 764,
+          "misses": 128,
+          "current": 125
+        },
+        "depths": [
+          {
+            "completed_depth": 1,
+            "Action": 85,
+            "value": 0.32093045115470886,
+            "wall_ms": 10.451771974563599,
+            "nodes_this_depth": 130,
+            "NN_this_depth": 129,
+            "root_all_actions": 129
+          },
+          {
+            "completed_depth": 2,
+            "Action": 48,
+            "value": 0.19044476747512817,
+            "wall_ms": 43.568609058856964,
+            "nodes_this_depth": 763,
+            "NN_this_depth": 633,
+            "root_all_actions": 129
+          }
+        ],
+        "root_key": "4,4|4,5|0|4,5|",
+        "root_history": "[\"4,4|4,5|0|4,5|\",1,[[\"4,0|4,8|0||\",1],[\"4,1|4,7|0||\",1],[\"4,1|4,8|1||\",1],[\"4,2|4,6|0||\",1],[\"4,2|4,7|1||\",1],[\"4,3|4,5|0||\",1],[\"4,3|4,6|1||\",1],[\"4,4|4,5|0|4,5|\",1],[\"4,4|4,5|1||\",1]]]",
+        "all_legal_actions_in_completed_root_depth": true,
+        "TT": 0,
+        "noise": 0,
+        "policy_exclusion": false,
+        "order": "ascending real-board Rust Action; tie first strict greater",
+        "samewall_strength_claim": false
+      },
+      "distance": {
+        "name": "distance",
+        "completed_depth": 2,
+        "Action": 48,
+        "value": 0.06038215383887291,
+        "requested_depth": 2,
+        "node_cap": 2048,
+        "typed_stop": null,
+        "partial_depth_discarded": null,
+        "last_completed_only": true,
+        "action_legal": true,
+        "parent_copy_restored": true,
+        "stats": {
+          "visited": 807,
+          "processed": 807,
+          "rejected_entry": 0,
+          "NN": 0,
+          "D_evals": 676,
+          "terminal": 0,
+          "full_accum": 0,
+          "delta_accum": 0,
+          "legal_calls": 130,
+          "cutoffs": 126
+        },
+        "spans": {
+          "terminal_ms": 31.372243881225586,
+          "legal_and_order_ms": 2.2854981422424316,
+          "state_copy_next_ms": 4.0978551506996155,
+          "accum_input_ms": 0,
+          "evaluator_ms": 2.1026429533958435
+        },
+        "wholewall_ms": 40.25678098201752,
+        "map_delta": {
+          "hits": 676,
+          "misses": 0,
+          "current": 125
+        },
+        "depths": [
+          {
+            "completed_depth": 1,
+            "Action": 48,
+            "value": 0.13776002824306488,
+            "wall_ms": 5.306454002857208,
+            "nodes_this_depth": 130,
+            "NN_this_depth": 0,
+            "root_all_actions": 129
+          },
+          {
+            "completed_depth": 2,
+            "Action": 48,
+            "value": 0.06038215383887291,
+            "wall_ms": 34.89425003528595,
+            "nodes_this_depth": 677,
+            "NN_this_depth": 0,
+            "root_all_actions": 129
+          }
+        ],
+        "root_key": "4,4|4,5|0|4,5|",
+        "root_history": "[\"4,4|4,5|0|4,5|\",1,[[\"4,0|4,8|0||\",1],[\"4,1|4,7|0||\",1],[\"4,1|4,8|1||\",1],[\"4,2|4,6|0||\",1],[\"4,2|4,7|1||\",1],[\"4,3|4,5|0||\",1],[\"4,3|4,6|1||\",1],[\"4,4|4,5|0|4,5|\",1],[\"4,4|4,5|1||\",1]]]",
+        "all_legal_actions_in_completed_root_depth": true,
+        "TT": 0,
+        "noise": 0,
+        "policy_exclusion": false,
+        "order": "ascending real-board Rust Action; tie first strict greater",
+        "samewall_strength_claim": false
+      },
+      "same_action": true
+    }
+  ],
+  "total_wholewall_ms": 574.9793130159378,
+  "profile_limit": "recorded spans overlap enclosing parent wall; terminal includes legal check; no sum advertised as wholewall",
+  "implementation": "Node native-hosted scaled QF1 vs train-fit distance; not Rust/Wasm",
+  "games4": {
+    "planned": 4,
+    "status": "NOT_RUN",
+    "reason": "remaining frame and clock validation cost"
+  },
+  "training": 0,
+  "GPU": 0,
+  "history_not_model_input": true,
+  "teacher_rootmean_not_minimax_leaf_truth": true,
+  "strength_claim": false
+}

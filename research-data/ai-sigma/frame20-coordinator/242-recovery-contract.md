@@ -1,0 +1,13 @@
+goal quoridor-4lc /ユーザー新frame20明示再開。開始2026-10-05 00:51:02UTC固定、終了02:51:02（11:51:02JST）、新heavy02:41:02/監督02:46:02/monitor02:49:02。旧frame19終了00:52:46・242入口00:22/stop00:28/save00:38、全元run/失敗/unknown/課金/原source・予約保持。旧期限を延長した再実行ではなく新frame20管理復旧版。same saved model-effort-cwd/LLM数gate0/turnnull/period1200、所有pause/通信不明/子exact回収維持。root新再開受領から新turn公開tool到達を確認、usageLimitExceeded再発なら該当turn/公開不足を保存し停止報告・盲目retry/model/AppServer変更0。
+
+242は既in_progress本人ownerを維持、ready/showgoal+self本人assigned/nopause→継続claim。親/運用solewriter92にroot直接配送済につき起動重複依頼/編集0。新モデル依存toolchain/製品push/cloud0、旧openedtest選定復帰0/173正式198非学習/229finalNOT_RUN維持。静的復旧は新loaded全文待ち0、CPUjobはnewframe20 currentbinding/owned/PIDtick/実CPU/RAM/GPU/storageをfreshadmit。
+
+旧242モデル科学は完了:科学stop bc674adf1e461c6df407d0096f14c2ddb87b5cb1aee9c7f7e39859d11d12ae71、全3job/preflight5500+family0145573+family1107830=258903NN/31.731983437s、全8terminal、baseline NNUE2W2L/candidate2W2L。frame19 scientific source9/payload7と原process/source/result/clockはreadonly保持、旧2m600s/最大3modeljob全3消費をresetせず新forward/arena追加0。旧source科学再開禁止。利用制限は後続report/集計保存の中断で、2W2L一致を効率利益なし/NNUE絶対棋力/一般性能へ変換0。
+
+solewrite既242scopeの frame20-recovery/ 子dirと旧docs/reports/ai-sigma-experiment-frame19-paired-leaf-arena.mdへ新frame20復旧段落（旧有効bytes必要なら元Git/hash保存から追記、結果を上書き0）。old16MiBreservation保持/新追加予約0、旧retained+uniqueGit/tempと新管理forecastを同14MiBguard内へ本人測りadmit。本文/全oldarchiveを重複保存0。必要current source/payload SHA/Gitbytes/子背景cleanupを有限確認、全歴史/deep教師truth再認証追加0。自他owner子を殺す所有不明kill0。
+
+最初read-onlyで旧3backgroundresult.cleanup/recordedPIDtick current identity/科学source止束を確認、動き続けた所有子があれば正確自己jobだけ回収して旧rawstatus保持。既成果を成功補充/再実行0。保存管理renderer途中物があれば失敗/未完成と元sourceを残し、新専用NN0集計器phase-v2で必要statsを完成する。新phase source60s/管理120s/必要保存算術最多1jobhard30s CPU2single/RAM512guard448/NN0/GPU0。実argv/task frame20-paired-recovery-242-v1/schema paired-recovery-v1/源SHA/予期outを入口前束縛しpost照合、正常exitで別旧outputを目的成功にしない。旧課題費と新費・LLMfailed費UNKNOWNを分離。
+
+必要結果:全8slot2family/色/packageラベルと開始prefixのsame対応を確認し、variant各W2L2/サービス全予定/全clock parse-generation-key-history合法Action <=100msを集計。各engine/variant完成depth/processed/NN/node32768到達率/時計余白/late/partialdiscard/actualwholewall/初期化・背景待ち/保存未知を併記。全ゲームで到達Stateが違うためaggregate depth/node比を同仕事原因にしない。同board+side+fullhistoryの一致input（根や初回など）だけmatchedprefix比較、共通completeddepthのvalue/Action/等値集合未記録と異completeddepthを分ける。package両engineに適用するため相対WDLからNNUE/D個別絶対改善を分解0。旧236/2408192・別prefixと本32768を直接棋力因果比にしない。
+
+新管理source止→専用stats/compact/sourceSHA/新phaseprocesswait→必要pack/Git-byte復元/Beads notes本人closebackupまで同実質turnで。目安source/stats01:08/必要save01:15、旧科学結果の最終算術にrootACK/独立承認全稿をgateにしない。次最大1案を費/判別力から提案し新arena/training/TT/policyを自動開始0。主最高goal未達、同modelの教師誤差利益と同wall棋力を区別する。

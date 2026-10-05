@@ -1,0 +1,102 @@
+{
+  "issue": "quoridor-4lc.169",
+  "received": "2026-10-03T05:30:51.297794+00:00",
+  "claim_static_start": "2026-10-03T05:30:56.337702+00:00",
+  "contract_Git": "8fa353a2d4e1d08d627ef939b7cea00b05920218",
+  "issues": [
+    {
+      "id": "quoridor-4lc",
+      "status": "in_progress",
+      "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ]
+    },
+    {
+      "id": "quoridor-4lc.168",
+      "status": "closed",
+      "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ]
+    },
+    {
+      "id": "quoridor-4lc.169",
+      "status": "open",
+      "assignee": "codex:01a0f31d-8227-7e03-a7e6-915b4918c11b",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ]
+    }
+  ],
+  "168_stopped": true,
+  "CPU": [
+    0
+  ],
+  "RAM_guard": 939524096,
+  "static_budget_seconds": 180,
+  "newcommand_deadline": "2026-10-03T05:55:51.297794+00:00",
+  "processing_deadline": "2026-10-03T06:00:51.297794+00:00",
+  "submission_deadline": "2026-10-03T06:10:51.297794+00:00",
+  "commands": [
+    {
+      "command": [
+        "ready",
+        "--json"
+      ],
+      "exit": 0,
+      "elapsed": 1.1897100649948698
+    },
+    {
+      "command": [
+        "show",
+        "quoridor-4lc",
+        "--json"
+      ],
+      "exit": 0,
+      "elapsed": 1.5022169800067786
+    },
+    {
+      "command": [
+        "show",
+        "quoridor-4lc.168",
+        "--json"
+      ],
+      "exit": 0,
+      "elapsed": 0.7394035010074731
+    },
+    {
+      "command": [
+        "show",
+        "quoridor-4lc.169",
+        "--json"
+      ],
+      "exit": 0,
+      "elapsed": 0.7660467519890517
+    },
+    {
+      "command": [
+        "update",
+        "quoridor-4lc.169",
+        "--claim"
+      ],
+      "exit": 0
+    }
+  ],
+  "storage": {
+    "old_conservative": 88190086,
+    "prior_current": {
+      "158": 397312,
+      "161": 475136,
+      "166": 868352,
+      "168": 1290240
+    },
+    "new_forecast": 2097152,
+    "total": 93318278,
+    "guard": 117440512,
+    "unknown_discount": 0
+  }
+}

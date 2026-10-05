@@ -1,0 +1,118 @@
+{
+  "UTC": "2026-10-02T03:45:15.250891+00:00",
+  "config": {
+    "issue": "quoridor-4lc.100",
+    "run_id": "critic100-primary-r1",
+    "git": "83bb0ce4ea55b210f1657913ab2d6f2fa728eac5",
+    "diagnostic": true,
+    "actual_go": false,
+    "holdout": false,
+    "seed": 1979,
+    "affinity": [
+      2
+    ],
+    "NNthreads": 1,
+    "model_sha256": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+    "clock": {
+      "T": 500,
+      "reserve": 89,
+      "commit": 9,
+      "cutoff": 402,
+      "seal": 411
+    },
+    "processing_deadline": "2026-10-02T04:01:00Z",
+    "schedule": [
+      {
+        "index": 1,
+        "fixture_id": "initial-p1",
+        "engine": "candidate",
+        "condition": "baseline",
+        "sample": "warm",
+        "rep": 0
+      },
+      {
+        "index": 2,
+        "fixture_id": "initial-p1",
+        "engine": "candidate",
+        "condition": "cooperative",
+        "sample": "warm",
+        "rep": 0
+      },
+      {
+        "index": 3,
+        "fixture_id": "initial-p1",
+        "engine": "candidate",
+        "condition": "cooperative",
+        "sample": "steady",
+        "rep": 1
+      },
+      {
+        "index": 4,
+        "fixture_id": "initial-p1",
+        "engine": "candidate",
+        "condition": "baseline",
+        "sample": "steady",
+        "rep": 1
+      },
+      {
+        "index": 5,
+        "fixture_id": "initial-p1",
+        "engine": "reference",
+        "condition": "baseline",
+        "sample": "warm",
+        "rep": 0
+      },
+      {
+        "index": 6,
+        "fixture_id": "initial-p1",
+        "engine": "reference",
+        "condition": "cooperative",
+        "sample": "warm",
+        "rep": 0
+      },
+      {
+        "index": 7,
+        "fixture_id": "initial-p1",
+        "engine": "reference",
+        "condition": "cooperative",
+        "sample": "steady",
+        "rep": 1
+      },
+      {
+        "index": 8,
+        "fixture_id": "initial-p1",
+        "engine": "reference",
+        "condition": "baseline",
+        "sample": "steady",
+        "rep": 1
+      }
+    ]
+  },
+  "configSHA": "88351fda6d8c63519471113707ad9c3019ebb4e992d7db0d384a5eb3a9ed1e02",
+  "source": {
+    "tools/ai-sigma-cooperative-clock-independent/early-worker.js": "9494e33e7204be208262914c04ea5eb0d7985872a6d7ebc6e4084d84729097d4",
+    "tools/ai-sigma-cooperative-clock-independent/real-backend.cjs": "51d383b91dd350494e11d76eb70a6c4f78b0a56aa9447735e2d59c68c7df4436",
+    "tools/ai-sigma-cooperative-clock-independent/checkpoint.js": "2b736d696a099350bf724b40dd858fc3afe11ce17a1c143f3029e5fcd2f28d8c",
+    "tools/ai-sigma-cooperative-clock-independent/runner.py": "dfc12608d8a0db67188e30a318a0bb0eea814384ddbafad500b98f0777d2e831",
+    "tools/ai-sigma-cooperative-clock-independent/mock.cjs": "768b0636993534fa350eb9aa2b66cac1c358243f3f9c4fc2cfb6c43a1e115876",
+    "tools/ai-sigma-cooperative-clock-independent/audit.py": "5d5e178ee5a1157945e42c67063d8faa8d2e28533b70783792b5d1638302ea4e",
+    "tools/ai-sigma-cooperative-clock-independent/early-page.js": "e451f714b9bd007f1a3ddbfee1bc56d1fc21f5c6ce04c518a28552ee5eaeabad",
+    "tools/ai-sigma-cooperative-clock-independent/measure.cjs": "139be4bd98ae5a45cb94104bb7b56ef3d73355692e020199ba5fcafe0f999457",
+    "tools/ai-sigma-cooperative-clock-independent/browser.cjs": "6b82703d032a92aa36275f142344dda4e5a0e4ee49597622a2140259b9455280"
+  },
+  "planned": 8,
+  "NN_startup": 6,
+  "primary_one_window": true,
+  "replaced_good_rows": false,
+  "NN0_mock_exit": 0,
+  "original97stop_hash": "2da21fe8b1c4a48a03614d19eadf9796d22d2f6e73b085fd0a4b52aeb452b785",
+  "external_heavy_snapshot": "preNN-ownership-headroom.json",
+  "scope_bytes_estimate_before_NN": 1761280,
+  "expected_more_bytes": 3500000,
+  "guards": {
+    "new": 6291456,
+    "combined": 117440512,
+    "RSS": 2684354560
+  },
+  "actual_go": false
+}

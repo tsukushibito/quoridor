@@ -1,0 +1,60 @@
+{
+  "UTC": "2026-10-04T00:36:45.485557+00:00",
+  "hyp197": {
+    "allocation": true,
+    "delivery": {
+      "method": "turn/steer",
+      "thread_id": "01a0f31c-2e4b-7170-82c5-69e1428c2418",
+      "turn_id": "01a1041a-bb02-7cc3-9414-d7b00f219e52",
+      "accepted": true,
+      "UTC": "2026-10-04T00:30:49.142320+00:00",
+      "states_before": {
+        "hypothesis": "active"
+      }
+    },
+    "claim_or_science_started": "claim/static only, NN0",
+    "weight_decay": 0.01,
+    "new_train_runs": 1,
+    "samplecap": 500000,
+    "heavycap_s": 300,
+    "generation_gate": "learned beststep>0 and validation MSE beats both WD0best and train-only constant by1e-4; numerical route filter not support",
+    "claim": "2026-10-04T00:32:43Z",
+    "static_start": "2026-10-04T00:34:03.083363+00:00",
+    "receipt_first_observed": "2026-10-04T00:31:42.382450+00:00",
+    "science_samples": 0,
+    "new_forecast_B": 12582912,
+    "new_scope_guard_B": 14680064,
+    "combined_current_forecast_reserved_B": 32774218,
+    "combined_guard_B": 58720256
+  },
+  "exp198": {
+    "allocation": true,
+    "delivery": {
+      "method": "turn/start",
+      "thread_id": "01a0f31d-6d15-7620-bb63-4b4f878e4746",
+      "turn_id": "01a10452-1a98-78a0-9c4e-ef7e929c4273",
+      "accepted": true,
+      "UTC": "2026-10-04T00:30:52.061316+00:00",
+      "states_before": {
+        "experiment": "idle"
+      }
+    },
+    "claim_or_science_started": "claim/NN0 manifest only",
+    "NN0manifest_prepare": true,
+    "newGPUonly_gate_met": true,
+    "unmet_all24_NOT_STARTED": true,
+    "new_games_cap": 24,
+    "handNNcap": 307200,
+    "heavycap_s": 360,
+    "receipt": "2026-10-04T00:31:05Z",
+    "old194_closed_owner_report": true,
+    "new24_legal_nonterminal": true,
+    "openingSHA": "5d38dac299ff2e7eeaab5cc3d38683ad1ff2023775f3476dd10ff56c1aeb7157",
+    "newNN": 0,
+    "game_status": "24NOT_STARTED GATE_PENDING",
+    "storage_new_reserve_B": 33554432
+  },
+  "resources": "sameparent CPU4/RAM8/storage12/VRAM6; no newparent reservation",
+  "critic196": "final finite verdict accepted; close ownedguard notyetoperated",
+  "rootapprovalneeded": false
+}

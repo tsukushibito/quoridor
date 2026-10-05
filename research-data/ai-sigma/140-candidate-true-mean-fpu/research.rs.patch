@@ -1,0 +1,18 @@
+--- tools/ai-sigma-deep-node-comparison/baseline/src/research.rs
++++ tools/ai-sigma-candidate-true-mean-fpu/private/src/research.rs
+@@ -8,6 +8,7 @@
+     pub edges: Vec<(u16, f32, u32, f32)>,
+     pub children: Vec<Option<usize>>,
+     pub visits: u32,
++    pub true_value_sum: f32,
+ }
+ impl<E: Evaluator> SearchSession<E> {
+     pub fn research_tree_snapshot(&self) -> Vec<NodeSnapshot> {
+@@ -42,6 +43,7 @@
+                     .collect(),
+                 children: n.edges.iter().map(|e| e.child).collect(),
+                 visits: n.visits,
++                true_value_sum:n.true_value_sum,
+             });
+         }
+         output.sort_by_key(|n| n.index);

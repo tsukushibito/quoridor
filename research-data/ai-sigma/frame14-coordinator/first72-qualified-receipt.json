@@ -1,0 +1,117 @@
+{
+  "UTC": "2026-10-03T23:47:58.288204+00:00",
+  "jobs": [
+    {
+      "job": "train01",
+      "status_counts": {
+        "GOAL": 24
+      },
+      "Rpolicy": 1217,
+      "Rz": 1217,
+      "Rjoint": 1217,
+      "allattempt_jobwall_s": 122.70870068098884,
+      "physical_provider_samples": 68292
+    },
+    {
+      "job": "validation",
+      "status_counts": {
+        "GOAL": 24
+      },
+      "Rpolicy": 1248,
+      "Rz": 1248,
+      "Rjoint": 1248,
+      "allattempt_jobwall_s": 121.71417902602116,
+      "physical_provider_samples": 72076
+    },
+    {
+      "job": "test",
+      "status_counts": {
+        "GOAL": 24
+      },
+      "Rpolicy": 1095,
+      "Rz": 1095,
+      "Rjoint": 1095,
+      "allattempt_jobwall_s": 102.08389053103747,
+      "physical_provider_samples": 61999
+    },
+    {
+      "job": "train02",
+      "status_counts": {
+        "NOT_STARTED": 24
+      },
+      "Rpolicy": 0,
+      "Rz": 0,
+      "Rjoint": 0,
+      "allattempt_jobwall_s": null,
+      "physical_provider_samples": null
+    },
+    {
+      "job": "train03",
+      "status_counts": {
+        "NOT_STARTED": 24
+      },
+      "Rpolicy": 0,
+      "Rz": 0,
+      "Rjoint": 0,
+      "allattempt_jobwall_s": null,
+      "physical_provider_samples": null
+    },
+    {
+      "job": "train04",
+      "status_counts": {
+        "NOT_STARTED": 24
+      },
+      "Rpolicy": 0,
+      "Rz": 0,
+      "Rjoint": 0,
+      "allattempt_jobwall_s": null,
+      "physical_provider_samples": null
+    }
+  ],
+  "Rpolicy": 3560,
+  "Rz": 3560,
+  "Rjoint": 3560,
+  "allattempt_jobwall_s": 346.50677023804747,
+  "outputs_paths_and_hashes": {
+    "train": {
+      "teacher": {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/train-teacher-rows.jsonl.gz",
+        "SHA256": "afb10256d52aa90febbd67557b1d25fa3617d677ab20d0cc63aaebf1acfc129e",
+        "rows": 1217
+      },
+      "state_journal": {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/train-state-journal.jsonl.gz",
+        "SHA256": "4f97a4ac3007423aad6b3ad8f7d71f2d51beb3f23d564da8456dabf81eb56691",
+        "rows": 1217
+      }
+    },
+    "validation": {
+      "teacher": {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/validation-teacher-rows.jsonl.gz",
+        "SHA256": "c0023edc68f1d24e5d5255508b8a64b1bd16b8d8d653c7ee53583f6e17bff599",
+        "rows": 1248
+      },
+      "state_journal": {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/validation-state-journal.jsonl.gz",
+        "SHA256": "18d79140ecdfa5f449364f16d4687974b18f35c6f375e4b0775950c4ec451646",
+        "rows": 1248
+      }
+    },
+    "test": {
+      "teacher": {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/test-sealed/test-teacher-rows.jsonl.gz",
+        "SHA256": "4fae45c0590b375fa9b0bde54977c1b215817efe3f3921a5d584e0c3926d6949",
+        "rows": 1095
+      },
+      "state_journal": {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/test-state-journal.jsonl.gz",
+        "SHA256": "889f9e13756fa7542788b141fa09778eb682d3f0f6bf1122b300c9eb44b3cd79",
+        "rows": 1095
+      }
+    }
+  },
+  "actual_test_targets_read_by_coordinator": false,
+  "mask_max96_pending": true,
+  "hyp_safe_paths_pending_label_free_export": true,
+  "actual_NI_or_teacher_truth": false
+}

@@ -1,0 +1,80 @@
+{
+  "issue": "quoridor-4lc.194",
+  "UTC": "2026-10-03T23:33:13.552093+00:00",
+  "mode": "GPU24active/maxB8",
+  "K": 64,
+  "rootN": 64,
+  "edgeSum": 63,
+  "tau": "1 first16newply, strictfirst argmax afterward",
+  "newply_cap": 200,
+  "opening_lengths": [
+    8,
+    12,
+    16,
+    20,
+    24,
+    28
+  ],
+  "opening_proposals": 256,
+  "opening_category": "single .5 pawn/wall draw per step, selected empty -> reject whole proposal; original legal order/within uniform",
+  "job_order": [
+    "train01",
+    "validation",
+    "test",
+    "train02",
+    "train03",
+    "train04"
+  ],
+  "jobs": 6,
+  "planned_games": 144,
+  "train_nested_slots": [
+    24,
+    48,
+    96
+  ],
+  "partition": "96train24validation24test; unique independent family; all derivatives must stay family partition",
+  "exposure_rule": {
+    "signatures": [
+      "position_key",
+      "full_state_history_side_ply",
+      "QF1_ids_distance_side"
+    ],
+    "train": "keep all",
+    "validation": "eligible iff none of signatures shared with maximum train96; same subset across stages",
+    "test": "eligible iff none of signatures shared with maximumtrain96 OR validation; all test rows secondary exposure diagnosis",
+    "mask_inputs": "label-free only, no z/target/loss/validation results; final masks fixed before validation selection",
+    "test_sealing": "fullteacher only test-sealed, only label-free QF/features/exposure metadata prefreeze; labels accessible to candidate-freeze evaluation only",
+    "partial": "firsttrain24+val/test can be announced; maximumtrain96 mask pending until allplanned train processed or missing explicit; do not claim unexposed before fixed mask",
+    "game_family_duplicates": "reject all; state overlap masks do not unite allgames into giant group",
+    "QF1_signature": "195-owned shared canonical actualforward: version + STM/opponent sorted ids + same-order float32 distance bits; no private parallel signature",
+    "history_signature": "sha256 JSON[current_position_key, byte-key-sort recorded history occurrence counts]; no target/z/value/loss. Fullstate side+ply+history also saved separately."
+  },
+  "fault": "typedunknown allaffected, zunknown/value maskfalse; no replacement of completed success",
+  "CPU": [
+    0,
+    2,
+    4,
+    6
+  ],
+  "RAM": 6442450944,
+  "RAM_guard": 5905580032,
+  "VRAM": 6442450944,
+  "job_max_seconds": 300,
+  "heavy_total_seconds": 2100,
+  "handNN_total_cap": 1843200,
+  "debug_cap": 1024,
+  "startup": "actual separate",
+  "model": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+  "provider": "readonly187 private177 foldedCUDA f32 TF32AMPoff dynamicB max8 cap307200 unchanged",
+  "history_validation": "canonical key/count readonly187",
+  "generation_target_UTC": "2026-10-04T01:15:00Z",
+  "newheavy_UTC": "2026-10-04T02:15:00Z",
+  "science_deadline": "2026-10-04T02:20:00Z",
+  "process_deadline": "2026-10-04T02:35:00Z",
+  "submit_deadline": "2026-10-04T02:45:00Z",
+  "formal173_read": 0,
+  "teacher_truth_or_NI": false,
+  "new_learner_autostart": false,
+  "all_attempt_production_wall": "coldinit/input/features/search/NN/pipe/record/cleanup included; pipeline prep/export/save separate",
+  "schema_binding": "readonly187 schema supports train/validation/evaluation; test game uses evaluation only at unchanged worker/checker wire, fixed game manifest maps evaluation -> test partition in private export. No test rows enter train."
+}

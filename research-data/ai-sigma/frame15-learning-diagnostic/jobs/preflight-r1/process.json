@@ -1,0 +1,35 @@
+{
+  "id": "preflight-r1",
+  "kind": "static",
+  "UTC": "2026-10-04T04:10:42.441543+00:00",
+  "identity": {
+    "pid": 3978139,
+    "ppid": 3977803,
+    "pgrp": 3978139,
+    "tick": "34000927",
+    "RSS": 0,
+    "cmd": "",
+    "affinity": [
+      2
+    ]
+  },
+  "command": [
+    "python3",
+    "-B",
+    "tools/ai-sigma-learning-diagnostic/run.py",
+    "--preflight"
+  ],
+  "wall_seconds": 0.053250544995535165,
+  "peak_family_RSS": 14610432,
+  "exit": 0,
+  "reason": "completed",
+  "child_waited": true,
+  "remaining": [],
+  "current_exact_identity_absent": true,
+  "samples_charged": 0,
+  "sample_cap": 0,
+  "CPU": [
+    2
+  ],
+  "GPU": 0
+}

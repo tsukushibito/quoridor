@@ -1,0 +1,91 @@
+{
+  "at": "2026-10-03T12:52:02.393090+00:00",
+  "method": "thread/resume",
+  "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+  "body_sha256": "2e346784544a168be4c90efba6920e5c91b49a394233a58390bead2307c44898",
+  "body_bytes": 33285,
+  "source_parent_sha256": "160ca38306c6ddaaf81b874771afd0a52f5127dd5b7924588b6fab688bf80f8e",
+  "settings_override": false,
+  "settings_match_registry": true,
+  "developer_readback_supported": false,
+  "response": {
+    "thread": {
+      "id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+      "environments": [
+        {
+          "environmentId": "local",
+          "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+          "runtimeWorkspaceRoots": [
+            "/workspaces/quoridor/.worktree/ai-sigma"
+          ]
+        }
+      ],
+      "extra": null,
+      "sessionId": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+      "forkedFromId": null,
+      "parentThreadId": null,
+      "preview": "監督saved sessionの初期化。ツール/ファイル/研究/委譲/issue操作0。BOOTSTRAP_READY supervisor とだけ返して終了してください。",
+      "ephemeral": false,
+      "section": null,
+      "sectionEnteredAt": null,
+      "projectId": null,
+      "historyMode": "paginated",
+      "modelProvider": "openai",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high",
+      "createdAt": 1790845497,
+      "updatedAt": 1791031258,
+      "recencyAt": 1791031118,
+      "status": {
+        "type": "idle"
+      },
+      "path": "/home/vscode/.codex/sessions/2026/10/01/rollout-2026-10-01T09-04-57-01a0f6b5-b1bd-7752-b0bb-74a336e459a4.jsonl",
+      "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+      "cliVersion": "0.159.2",
+      "originator": "Codex Desktop",
+      "source": "vscode",
+      "canAcceptDirectInput": true,
+      "threadSource": null,
+      "agentNickname": null,
+      "agentRole": null,
+      "gitInfo": {
+        "sha": "1482df8da6dd91c95db211aeaa914af775b2bc76",
+        "branch": "codex/ai-sigma",
+        "originUrl": "https://github.com/tsukushibito/quoridor.git"
+      },
+      "name": "AI研究 · supervisor",
+      "daybreakEnabled": null,
+      "turns": []
+    },
+    "model": "gpt-6.1-sol",
+    "modelProvider": "openai",
+    "serviceTier": "default",
+    "disabledPluginIds": [],
+    "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+    "runtimeWorkspaceRoots": [
+      "/workspaces/quoridor/.worktree/ai-sigma"
+    ],
+    "instructionSources": [
+      "/workspaces/quoridor/.worktree/ai-sigma/AGENTS.md"
+    ],
+    "approvalPolicy": "never",
+    "approvalsReviewer": "user",
+    "sandbox": {
+      "type": "dangerFullAccess"
+    },
+    "activePermissionProfile": null,
+    "reasoningEffort": "high",
+    "collaborationMode": {
+      "mode": "default",
+      "settings": {
+        "model": "gpt-6.1-sol",
+        "reasoning_effort": "high",
+        "developer_instructions": null
+      }
+    },
+    "multiAgentMode": "explicitRequestOnly",
+    "initialTurnsPage": null,
+    "turnsBackwardsCursor": "{\"requestedThreadId\":\"01a0f6b5-b1bd-7752-b0bb-74a336e459a4\",\"rolloutOrdinal\":4441,\"includeAnchor\":true,\"scope\":{\"kind\":\"turns\"}}",
+    "itemsBackwardsCursor": "{\"requestedThreadId\":\"01a0f6b5-b1bd-7752-b0bb-74a336e459a4\",\"rolloutOrdinal\":4493,\"includeAnchor\":true,\"scope\":{\"kind\":\"itemsByCreatedAtOrdinal\"}}"
+  }
+}

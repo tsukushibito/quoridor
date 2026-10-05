@@ -1,0 +1,145 @@
+{
+  "issue": "quoridor-4lc.97",
+  "UTC": "2026-10-02T03:27:38.090971+00:00",
+  "runtime_git": "83bb0ce4ea55b210f1657913ab2d6f2fa728eac5",
+  "analysis_report_git": "fe009c6b8fb5ea810b9d983193b2a3b066253f9a",
+  "evidence_git": "de98e737285ce71af22e834af6965570c3082e05",
+  "all_owned_runs_stopped": true,
+  "owned_unique_identity_union": 118,
+  "same_identity_live": [],
+  "early_NN_stop_sha256": "2da21fe8b1c4a48a03614d19eadf9796d22d2f6e73b085fd0a4b52aeb452b785",
+  "archive_sha256": "364155423960f15033e54bcaeb903d56d63636112b002872c4a0c2826e488dce",
+  "archive_restored_files": 178,
+  "current_live_output_allocated": 4481024,
+  "source_allocated": 102400,
+  "Git_data_working_allocated": 856064,
+  "own_files_loose_git_allocated": 663552,
+  "Git_object_coverage": "own code/report/data blobs observed; shared tree/commit/global Git not exclusively attributed",
+  "own_git_objects": [
+    {
+      "oid": "73ad02d6579ebcac6166d827e3a438b24bbb49a0",
+      "path": "docs/reports/ai-sigma-experiment-tail-transport.md",
+      "loose_allocated_bytes": 8192
+    },
+    {
+      "oid": "ba6103e08030bd8625ec587d724e04629cccb372",
+      "path": "research-data/ai-sigma/97-tail-transport/fixed-input-references.json",
+      "loose_allocated_bytes": 16384
+    },
+    {
+      "oid": "8bdeadf0808634638f307a16cf4e8e89ab50e069",
+      "path": "research-data/ai-sigma/97-tail-transport/manifest.json",
+      "loose_allocated_bytes": 12288
+    },
+    {
+      "oid": "942f8615051ca9fe0060beeaddbc858499b65a0d",
+      "path": "research-data/ai-sigma/97-tail-transport/preregister-factor.json",
+      "loose_allocated_bytes": 4096
+    },
+    {
+      "oid": "dc052c7e8da712378875d5e151a99a905ba8d0f9",
+      "path": "research-data/ai-sigma/97-tail-transport/primary-analysis.json",
+      "loose_allocated_bytes": 8192
+    },
+    {
+      "oid": "4c8ea38ad1e72a5060237f85c36db68683674d68",
+      "path": "research-data/ai-sigma/97-tail-transport/primary-config.json",
+      "loose_allocated_bytes": 4096
+    },
+    {
+      "oid": "0c4e2e0e75748a724c25e3a9d64ea098f448a677",
+      "path": "research-data/ai-sigma/97-tail-transport/runs-and-evidence.tar.gz",
+      "loose_allocated_bytes": 536576
+    },
+    {
+      "oid": "e59b716dde36f55ac877db8a9baf35d0fa09709a",
+      "path": "research-data/ai-sigma/97-tail-transport/runtime-source-stopped-before-report.json",
+      "loose_allocated_bytes": 8192
+    },
+    {
+      "oid": "2c4d07aa0c794ce35f554d112a48c7f97665a021",
+      "path": "research-data/ai-sigma/97-tail-transport/static-analysis-r1.process.json",
+      "loose_allocated_bytes": 4096
+    },
+    {
+      "oid": "606d8954d8c291f2b2b66bb2a6e2b56e692845c2",
+      "path": "research-data/ai-sigma/97-tail-transport/static-archive-r1.process.json",
+      "loose_allocated_bytes": 4096
+    },
+    {
+      "oid": "3c04df6663ecd899bc83416bd40aa0ed00d7b3ba",
+      "path": "tools/ai-sigma-tail-transport/analyze.cjs",
+      "loose_allocated_bytes": 4096
+    },
+    {
+      "oid": "780ef21a08c3db9080e05a7f783834b48cb4f23b",
+      "path": "tools/ai-sigma-tail-transport/archive.py",
+      "loose_allocated_bytes": 4096
+    },
+    {
+      "oid": "82e4751b145c684c98e13638cb83ce5816c8cb89",
+      "path": "tools/ai-sigma-tail-transport/browser.cjs",
+      "loose_allocated_bytes": 4096
+    },
+    {
+      "oid": "c284e00305c5576e4f82e73506af0bd7526409b7",
+      "path": "tools/ai-sigma-tail-transport/checkpoint.js",
+      "loose_allocated_bytes": 4096
+    },
+    {
+      "oid": "411f7ced3d17d62fe329c28b56b98c5b337fe485",
+      "path": "tools/ai-sigma-tail-transport/debug-gate.cjs",
+      "loose_allocated_bytes": 4096
+    },
+    {
+      "oid": "4c901e7b608bad476906beeed615e5e720804d01",
+      "path": "tools/ai-sigma-tail-transport/early-page.js",
+      "loose_allocated_bytes": 4096
+    },
+    {
+      "oid": "fb778371862cf54722c4943c80800768a4aafe1c",
+      "path": "tools/ai-sigma-tail-transport/early-worker.js",
+      "loose_allocated_bytes": 4096
+    },
+    {
+      "oid": "2f7f0cbd2635fe52d9f9c4c210b48966ecaafbf0",
+      "path": "tools/ai-sigma-tail-transport/headroom.py",
+      "loose_allocated_bytes": 4096
+    },
+    {
+      "oid": "f278291a9f567c2d98282cd6db07ec6211f8a977",
+      "path": "tools/ai-sigma-tail-transport/measure.cjs",
+      "loose_allocated_bytes": 4096
+    },
+    {
+      "oid": "59f4cb539bcca851092d26a1106acccf5ca1dfd2",
+      "path": "tools/ai-sigma-tail-transport/owned-gate.cjs",
+      "loose_allocated_bytes": 4096
+    },
+    {
+      "oid": "8205e7dac90bbd799d133c0ea2dd81e83a323b68",
+      "path": "tools/ai-sigma-tail-transport/preflight.cjs",
+      "loose_allocated_bytes": 4096
+    },
+    {
+      "oid": "1f52d144e17588e7bb451b15f4751474d6bd232f",
+      "path": "tools/ai-sigma-tail-transport/real-backend.cjs",
+      "loose_allocated_bytes": 4096
+    },
+    {
+      "oid": "bf3c90190f5c5763604c1c71d1ca9024af246865",
+      "path": "tools/ai-sigma-tail-transport/runner.py",
+      "loose_allocated_bytes": 8192
+    }
+  ],
+  "static_wall_seconds": 6.741929,
+  "NN_wall_seconds": 26.330287,
+  "peak_currentRSS": 1433198592,
+  "peak_guarded_source_live_storage": 5431296,
+  "formal_fairness": false,
+  "natural_exit_whole_period": false,
+  "missing_cpu_counter_not_filled": true,
+  "game_starts": 0,
+  "actual_go": false,
+  "handoff_for": "coordinator decision / independent finite claim check, no self-acceptance"
+}

@@ -1,0 +1,77 @@
+{
+  "UTC": "2026-10-04T05:32:19.308345+00:00",
+  "own": {
+    "id": "quoridor-4lc.213",
+    "status": "in_progress",
+    "assignee": "codex:01a0f31d-6d15-7620-bb63-4b4f878e4746",
+    "labels": [
+      "continuation-active",
+      "frame15",
+      "initial-window-ended"
+    ]
+  },
+  "goal": {
+    "id": "quoridor-4lc",
+    "status": "in_progress",
+    "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+    "labels": [
+      "continuation-active",
+      "frame15",
+      "initial-window-ended"
+    ]
+  },
+  "active": [],
+  "services": [
+    {
+      "pid": 3975993,
+      "ppid": 1,
+      "pgrp": 3975993,
+      "tick": "33989991",
+      "RSS": 213835776,
+      "cmd": "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python -B /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/scheduler.py run --config /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json --state-dir /workspaces/quoridor/.artifacts/research-team/scheduler-sigma-continuation-20261001 ",
+      "affinity": [
+        0
+      ]
+    },
+    {
+      "pid": 3976006,
+      "ppid": 1,
+      "pgrp": 3976006,
+      "tick": "33990012",
+      "RSS": 21889024,
+      "cmd": "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python -B /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/watch.py --run-dir /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame15-d9da6a78-9caf-4c92-8f7e-f540bfdabc79 --expectations /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame15-d9da6a78-9caf-4c92-8f7e-f540bfdabc79/expectations.json ",
+      "affinity": [
+        0
+      ]
+    }
+  ],
+  "scheduler_owned": null,
+  "next_observe": 1791092930.5578897,
+  "CPU": [
+    2
+  ],
+  "threads": 1,
+  "RAM_guard": 1879048192,
+  "parent_RSS_forecast": 3456950272,
+  "storage": {
+    "UTC": "2026-10-04T05:32:02.636069+00:00",
+    "current_owned_B": 1138688,
+    "old_uniqueGit_upper_B": 838321,
+    "new_output_model_archive_Git_metadata_forecast_B": 2097152,
+    "forecast_B": 4074161,
+    "guard_B": 6291456,
+    "reservation_B": 8388608,
+    "transfer_confirmed": true,
+    "new_reservation_B": 0,
+    "old_unknown_discount_B": 0,
+    "parent_added_B": 0
+  },
+  "command": [
+    "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "-B",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-distance-update-control/seed19080312/run.py"
+  ],
+  "sample_upper": 80705,
+  "newscience": "2026-10-04T05:38:00Z",
+  "stop": "2026-10-04T05:40:00Z"
+}

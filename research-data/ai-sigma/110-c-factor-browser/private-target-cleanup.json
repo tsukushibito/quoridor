@@ -1,0 +1,17 @@
+{
+  "owned_processes_stopped": true,
+  "preserved_binaries": "binaries/{baseline,c1}.wasm",
+  "deleted_only_owned_rebuild_targets": [
+    {
+      "path": ".artifacts/ai-sigma/resume-20261002/C-FACTOR-BROWSER/build/target",
+      "allocated_before": 20213760,
+      "absent_after": true
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261002/C-FACTOR-BROWSER/build/target-c1",
+      "allocated_before": 20213760,
+      "absent_after": true
+    }
+  ],
+  "no_shared_cache_deleted": true
+}

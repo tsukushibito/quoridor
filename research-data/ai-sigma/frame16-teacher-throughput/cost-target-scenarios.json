@@ -1,0 +1,200 @@
+{
+  "issue": "quoridor-4lc.221",
+  "UTC": "2026-10-04T08:09:29.773097+00:00",
+  "measured_allattempt_jobwall_s": 350.91796365205664,
+  "unmeasured_failed_admission_wall": {
+    "UTC": "2026-10-04T07:56:51.259345+00:00",
+    "attempt": "parity-r1 admission before child",
+    "original_receipt_retained": true,
+    "original_jobwall_seconds_field": 1.1,
+    "original_value_kind": "manual approximate management estimate; not observed monotonic measurement",
+    "actual_jobwall_s": null,
+    "typed_missing": "FAILED_PREFLIGHT_WALL_UNINSTRUMENTED",
+    "conservative_budget_charge_s": 5,
+    "NN": 0,
+    "science_child": 0,
+    "comparison_generation_wall_unaffected": true,
+    "allattempt_measured_wall_excludes_estimated1_1_and_reports_unknown_separately": true
+  },
+  "conservative_heavy_charge_s": 355.91796365205664,
+  "NN_total": 243888,
+  "NN_cap": 900000,
+  "heavy_cap": 1800,
+  "static_conservative_charge_s": 45,
+  "static_cap_s": 180,
+  "methods": {
+    "baseline": {
+      "observed_completed_games": 48,
+      "planned_games": 48,
+      "observed_rows_per_completed_game": 32.375,
+      "jobwall_seconds_per_completed_game": 2.3721960607084234,
+      "qualified_pipeline_s_per_game": 2.4323920853474807,
+      "qualification_s": 0.691659679,
+      "sharedpack_per48_s": 0.24196723167551681,
+      "sharedGit_per48_s": 1.9557822719992448,
+      "common_setup_not_amortized_here": true,
+      "scenarios": {
+        "100": {
+          "games": 100,
+          "projected_job_minutes": 3.9536601011807053,
+          "projected_qualification_pack_Git_included_minutes": 4.053986808912468,
+          "packed_evidence_B": 4769683.333333334,
+          "raw_runtime_B": 29768354.166666668,
+          "qualified_gzip_B": 1633122.9166666667,
+          "Git_unique_plus_pack_approx_B": 9539366.666666668,
+          "whole_linear_extrapolation_not_measured_production": true
+        },
+        "1000": {
+          "games": 1000,
+          "projected_job_minutes": 39.53660101180706,
+          "projected_qualification_pack_Git_included_minutes": 40.539868089124674,
+          "packed_evidence_B": 47696833.333333336,
+          "raw_runtime_B": 297683541.6666667,
+          "qualified_gzip_B": 16331229.166666666,
+          "Git_unique_plus_pack_approx_B": 95393666.66666667,
+          "whole_linear_extrapolation_not_measured_production": true
+        },
+        "10000": {
+          "games": 10000,
+          "projected_job_minutes": 395.3660101180705,
+          "projected_qualification_pack_Git_included_minutes": 405.3986808912468,
+          "packed_evidence_B": 476968333.3333334,
+          "raw_runtime_B": 2976835416.6666665,
+          "qualified_gzip_B": 163312291.66666666,
+          "Git_unique_plus_pack_approx_B": 953936666.6666667,
+          "whole_linear_extrapolation_not_measured_production": true
+        }
+      }
+    },
+    "candidate": {
+      "observed_completed_games": 48,
+      "planned_games": 48,
+      "observed_rows_per_completed_game": 32.375,
+      "jobwall_seconds_per_completed_game": 2.3356442836884526,
+      "qualified_pipeline_s_per_game": 2.3955865335358433,
+      "qualification_s": 0.679478489,
+      "sharedpack_per48_s": 0.24196723167551681,
+      "sharedGit_per48_s": 1.9557822719992448,
+      "common_setup_not_amortized_here": true,
+      "scenarios": {
+        "100": {
+          "games": 100,
+          "projected_job_minutes": 3.8927404728140877,
+          "projected_qualification_pack_Git_included_minutes": 3.992644222559739,
+          "packed_evidence_B": 4769683.333333334,
+          "raw_runtime_B": 29768358.333333332,
+          "qualified_gzip_B": 1633441.6666666667,
+          "Git_unique_plus_pack_approx_B": 9539366.666666668,
+          "whole_linear_extrapolation_not_measured_production": true
+        },
+        "1000": {
+          "games": 1000,
+          "projected_job_minutes": 38.92740472814088,
+          "projected_qualification_pack_Git_included_minutes": 39.92644222559739,
+          "packed_evidence_B": 47696833.333333336,
+          "raw_runtime_B": 297683583.3333333,
+          "qualified_gzip_B": 16334416.666666666,
+          "Git_unique_plus_pack_approx_B": 95393666.66666667,
+          "whole_linear_extrapolation_not_measured_production": true
+        },
+        "10000": {
+          "games": 10000,
+          "projected_job_minutes": 389.27404728140874,
+          "projected_qualification_pack_Git_included_minutes": 399.2644222559739,
+          "packed_evidence_B": 476968333.3333334,
+          "raw_runtime_B": 2976835833.3333335,
+          "qualified_gzip_B": 163344166.66666666,
+          "Git_unique_plus_pack_approx_B": 953936666.6666667,
+          "whole_linear_extrapolation_not_measured_production": true
+        }
+      }
+    },
+    "baseline-confirmation": {
+      "observed_completed_games": 48,
+      "planned_games": 48,
+      "observed_rows_per_completed_game": 32.375,
+      "jobwall_seconds_per_completed_game": 2.478053684521001,
+      "qualified_pipeline_s_per_game": 2.5378390504100583,
+      "qualification_s": 0.6719480590000001,
+      "sharedpack_per48_s": 0.24196723167551681,
+      "sharedGit_per48_s": 1.9557822719992448,
+      "common_setup_not_amortized_here": true,
+      "scenarios": {
+        "100": {
+          "games": 100,
+          "projected_job_minutes": 4.130089474201668,
+          "projected_qualification_pack_Git_included_minutes": 4.22973175068343,
+          "packed_evidence_B": 4769683.333333334,
+          "raw_runtime_B": 29768679.166666668,
+          "qualified_gzip_B": 1633310.4166666667,
+          "Git_unique_plus_pack_approx_B": 9539366.666666668,
+          "whole_linear_extrapolation_not_measured_production": true
+        },
+        "1000": {
+          "games": 1000,
+          "projected_job_minutes": 41.30089474201668,
+          "projected_qualification_pack_Git_included_minutes": 42.29731750683431,
+          "packed_evidence_B": 47696833.333333336,
+          "raw_runtime_B": 297686791.6666667,
+          "qualified_gzip_B": 16333104.166666666,
+          "Git_unique_plus_pack_approx_B": 95393666.66666667,
+          "whole_linear_extrapolation_not_measured_production": true
+        },
+        "10000": {
+          "games": 10000,
+          "projected_job_minutes": 413.0089474201668,
+          "projected_qualification_pack_Git_included_minutes": 422.97317506834304,
+          "packed_evidence_B": 476968333.3333334,
+          "raw_runtime_B": 2976867916.6666665,
+          "qualified_gzip_B": 163331041.66666666,
+          "Git_unique_plus_pack_approx_B": 953936666.6666667,
+          "whole_linear_extrapolation_not_measured_production": true
+        }
+      }
+    }
+  },
+  "targets": {
+    "games": 1000,
+    "initial_minutes": 60,
+    "next_minutes": 30,
+    "actual_1000_run": false,
+    "observed_candidate_density": 32.375,
+    "required_Rjoint_s_at60min": 8.993055555555555,
+    "required_Rjoint_s_at30min": 17.98611111111111,
+    "example49_density_thresholds": {
+      "hour": 13.61111111111111,
+      "half_hour": 27.22222222222222
+    },
+    "not_all_game_lengths_representative": true
+  },
+  "comparison_to_two_baselines": {
+    "mean_B8_job_s": 116.40599388550618,
+    "B24_job_s": 112.11092561704572,
+    "B24_rate_relative_to_mean_B8": 1.0383108804500623,
+    "B8_job_range_s": [
+      113.86541091400431,
+      118.94657685700804
+    ]
+  },
+  "break_even": {
+    "observed_paired_saving_s_per_game": 0.08948058892625947,
+    "known_validation_qualification_pack_save_cost_s": 14.63138500202285,
+    "known_cost_recovery_games": 163.51462565898515,
+    "receipt_to_now_elapsed_s": 1662.035844,
+    "elapsed_less_generation_wall_s": 1317.112930611942,
+    "elapsed_includes_reasoning_natural_window_wait_other_helpers": true,
+    "elapsed_recovery_scenario_games": 14719.538018434014,
+    "incremental_improvement_only_preparation_cost": "UNKNOWN; common benchmark preparation and B24 work not separately timed",
+    "gain_small_and_order_uncertain": true
+  },
+  "decision": "No established practical adoption benefit for largerB alone; maintain existing B8 production pending next bounded efficiency unit",
+  "next_max1": "Measure and test private CUDA graph replay of held folded forward at matched batches, with cold capture/sample/VRAM/finite parity costs; preserve model/math/K/tree/rules. This is a proposal, not authorized new221 generation.",
+  "limits": [
+    "three small sequential jobs, same48 sibling families",
+    "same resource allocation but hostwarm/cold/tail effects",
+    "linear scenarios do not establish1000 completion",
+    "short48 opening mix/length differs from old49-50 rows/game",
+    "K64 benchmark not Sigma publicK800 equalquality",
+    "no teachertruth/learning/playingstrength adoption"
+  ]
+}

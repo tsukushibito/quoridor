@@ -1,0 +1,1091 @@
+{
+  "issue": "quoridor-4lc.170",
+  "planned": 40,
+  "complete": 40,
+  "unknown": 0,
+  "startup_separate": 10,
+  "hand_NN": 2491,
+  "NN_quota_guard_hit": false,
+  "mode_results": {
+    "solo": {
+      "requests": 8,
+      "hand_NN": 398,
+      "startup_NN": 2,
+      "outer_wall_s": 5.723927,
+      "runtime_elapsed_s": 3.736829539000988,
+      "phase_work_s": 3.311918386012316,
+      "max_public_ms": 414.8927730023861,
+      "max_actual_admit_ms": 400.2897370159626,
+      "max_cleanup_ms": 2.5307160019874573,
+      "pending_cancel_coverage": 7,
+      "min_next_start_gap_ms": 0.759674996137619,
+      "peak_RSS": 619491328,
+      "all_observed_TIDs_at_pool": true,
+      "control_state": "READY",
+      "basic_runtime_supported": true,
+      "percore_engine": [
+        {
+          "core": 2,
+          "engine": "candidate",
+          "requests": 4,
+          "started_NN": 186,
+          "returned_NN": 186,
+          "discarded_NN": 4,
+          "adopted_NN": 182,
+          "completed_K": {
+            "n": 4,
+            "mean": 45.5,
+            "median": 42.5,
+            "min": 36,
+            "max": 61,
+            "sum": 182
+          },
+          "adopted_K": {
+            "n": 4,
+            "mean": 45.5,
+            "median": 42.5,
+            "min": 36,
+            "max": 61,
+            "sum": 182
+          },
+          "firstCP_ms": {
+            "n": 4,
+            "mean": 15.994463242590427,
+            "median": 17.776484489440918,
+            "min": 7.465438008308411,
+            "max": 20.959445983171463,
+            "sum": 63.97785297036171
+          },
+          "steady_API_mean_of_request_means_ms": {
+            "n": 2,
+            "mean": 5.8163704808713845,
+            "median": 5.8163704808713845,
+            "min": 5.7685332973739385,
+            "max": 5.86420766436883,
+            "sum": 11.632740961742769
+          },
+          "API_total_ms": {
+            "n": 4,
+            "mean": 227.82738694513682,
+            "median": 225.5072534608189,
+            "min": 215.53306991700083,
+            "max": 244.76197094190866,
+            "sum": 911.3095477805473
+          },
+          "pipe_total_ms": {
+            "n": 4,
+            "mean": 291.0287655517459,
+            "median": 290.5461140871048,
+            "min": 285.1348369717598,
+            "max": 297.8879970610142,
+            "sum": 1164.1150622069836
+          },
+          "cleanup_ms": {
+            "n": 4,
+            "mean": 0.6346910074353218,
+            "median": 0.0035089999437332153,
+            "min": 0.0010300278663635254,
+            "max": 2.5307160019874573,
+            "sum": 2.5387640297412872
+          },
+          "terminal_noNN": 0
+        },
+        {
+          "core": 2,
+          "engine": "reference",
+          "requests": 4,
+          "started_NN": 212,
+          "returned_NN": 212,
+          "discarded_NN": 3,
+          "adopted_NN": 207,
+          "completed_K": {
+            "n": 4,
+            "mean": 52.25,
+            "median": 51.5,
+            "min": 41,
+            "max": 65,
+            "sum": 209
+          },
+          "adopted_K": {
+            "n": 4,
+            "mean": 51.75,
+            "median": 51.0,
+            "min": 40,
+            "max": 65,
+            "sum": 207
+          },
+          "firstCP_ms": {
+            "n": 4,
+            "mean": 8.473390497267246,
+            "median": 8.056447491049767,
+            "min": 4.99193799495697,
+            "max": 12.788729012012482,
+            "sum": 33.893561989068985
+          },
+          "steady_API_mean_of_request_means_ms": {
+            "n": 2,
+            "mean": 6.088730898149411,
+            "median": 6.088730898149411,
+            "min": 5.880972150771413,
+            "max": 6.2964896455274095,
+            "sum": 12.177461796298822
+          },
+          "API_total_ms": {
+            "n": 4,
+            "mean": 273.26758430717746,
+            "median": 275.3150675998768,
+            "min": 239.1492040187586,
+            "max": 303.29099801019765,
+            "sum": 1093.0703372287098
+          },
+          "pipe_total_ms": {
+            "n": 4,
+            "mean": 360.5849397107959,
+            "median": 358.2469574958086,
+            "min": 346.86606392264366,
+            "max": 378.97977992892265,
+            "sum": 1442.3397588431835
+          },
+          "cleanup_ms": {
+            "n": 4,
+            "mean": 0.0021270066499710083,
+            "median": 0.002021506428718567,
+            "min": 0.0017150044441223145,
+            "max": 0.002750009298324585,
+            "sum": 0.008508026599884033
+          },
+          "terminal_noNN": 0
+        }
+      ],
+      "root_parity": [
+        {
+          "core": 2,
+          "fixture": "initial-p1",
+          "n": 4,
+          "root_features648_NN137bits_exact": true
+        },
+        {
+          "core": 2,
+          "fixture": "asym-hv-p2",
+          "n": 4,
+          "root_features648_NN137bits_exact": true
+        }
+      ],
+      "actual_admit_ms": {
+        "n": 8,
+        "mean": 394.41180112585425,
+        "median": 395.76570050418377,
+        "min": 382.3646729886532,
+        "max": 400.2897370159626,
+        "sum": 3155.294409006834
+      },
+      "public_ms": {
+        "n": 8,
+        "mean": 411.21534687280655,
+        "median": 410.6434295028448,
+        "min": 410.1437789797783,
+        "max": 414.8927730023861,
+        "sum": 3289.7227749824524
+      },
+      "phase_start_offsets_ms": {
+        "n": 8,
+        "mean": 2.214786369353533,
+        "median": 0.8930819928646088,
+        "min": 0.37188801169395447,
+        "max": 6.245973974466324,
+        "sum": 17.718290954828262
+      },
+      "root_preparation_outside_t0_ms": {
+        "n": 8,
+        "mean": 2.178322371095419,
+        "median": 0.8819240033626556,
+        "min": 0.3553380072116852,
+        "max": 6.235552996397018,
+        "sum": 17.42657896876335
+      },
+      "init_warm": [
+        {
+          "core": 2,
+          "engines": {
+            "candidate": {
+              "session_init_ms": 24.892021989217028,
+              "warm_pipe_ms": 4.736396998167038,
+              "warm_API_ms": 4.180688993074,
+              "affinity": [
+                2
+              ],
+              "provider": [
+                "CPUExecutionProvider"
+              ],
+              "intra": 1,
+              "inter": 1
+            },
+            "reference": {
+              "session_init_ms": 24.829617992509156,
+              "warm_pipe_ms": 10.317697018384933,
+              "warm_API_ms": 9.720766014652327,
+              "affinity": [
+                2
+              ],
+              "provider": [
+                "CPUExecutionProvider"
+              ],
+              "intra": 1,
+              "inter": 1
+            }
+          }
+        }
+      ]
+    },
+    "parallel": {
+      "requests": 32,
+      "hand_NN": 2093,
+      "startup_NN": 8,
+      "outer_wall_s": 6.547816,
+      "runtime_elapsed_s": 3.9221539010107516,
+      "phase_work_s": 3.378213348984718,
+      "max_public_ms": 415.1997919976711,
+      "max_actual_admit_ms": 401.4568060040474,
+      "max_cleanup_ms": 10.494430005550385,
+      "pending_cancel_coverage": 25,
+      "min_next_start_gap_ms": 1.899423986673355,
+      "peak_RSS": 1686081536,
+      "all_observed_TIDs_at_pool": true,
+      "control_state": "READY",
+      "basic_runtime_supported": true,
+      "percore_engine": [
+        {
+          "core": 2,
+          "engine": "candidate",
+          "requests": 4,
+          "started_NN": 141,
+          "returned_NN": 141,
+          "discarded_NN": 1,
+          "adopted_NN": 140,
+          "completed_K": {
+            "n": 4,
+            "mean": 35,
+            "median": 31.5,
+            "min": 27,
+            "max": 50,
+            "sum": 140
+          },
+          "adopted_K": {
+            "n": 4,
+            "mean": 35,
+            "median": 31.5,
+            "min": 27,
+            "max": 50,
+            "sum": 140
+          },
+          "firstCP_ms": {
+            "n": 4,
+            "mean": 21.465029753744602,
+            "median": 24.21967150270939,
+            "min": 9.894174993038177,
+            "max": 27.526601016521454,
+            "sum": 85.86011901497841
+          },
+          "steady_API_mean_of_request_means_ms": {
+            "n": 2,
+            "mean": 8.223710939973198,
+            "median": 8.223710939973198,
+            "min": 6.909851529053412,
+            "max": 9.537570350892985,
+            "sum": 16.447421879946397
+          },
+          "API_total_ms": {
+            "n": 4,
+            "mean": 239.40893975668587,
+            "median": 239.05246901267674,
+            "min": 219.2696108832024,
+            "max": 260.2612101181876,
+            "sum": 957.6357590267435
+          },
+          "pipe_total_ms": {
+            "n": 4,
+            "mean": 291.8941414654255,
+            "median": 293.1066809743643,
+            "min": 280.92773896455765,
+            "max": 300.43546494841576,
+            "sum": 1167.576565861702
+          },
+          "cleanup_ms": {
+            "n": 4,
+            "mean": 0.0013582482933998108,
+            "median": 0.001175016164779663,
+            "min": 0.0009729862213134766,
+            "max": 0.0021099746227264404,
+            "sum": 0.005432993173599243
+          },
+          "terminal_noNN": 0
+        },
+        {
+          "core": 2,
+          "engine": "reference",
+          "requests": 4,
+          "started_NN": 156,
+          "returned_NN": 156,
+          "discarded_NN": 3,
+          "adopted_NN": 152,
+          "completed_K": {
+            "n": 4,
+            "mean": 38.25,
+            "median": 36.0,
+            "min": 34,
+            "max": 47,
+            "sum": 153
+          },
+          "adopted_K": {
+            "n": 4,
+            "mean": 38,
+            "median": 36.0,
+            "min": 34,
+            "max": 46,
+            "sum": 152
+          },
+          "firstCP_ms": {
+            "n": 4,
+            "mean": 13.912072494626045,
+            "median": 12.105754494667053,
+            "min": 9.749449998140335,
+            "max": 21.68733099102974,
+            "sum": 55.64828997850418
+          },
+          "steady_API_mean_of_request_means_ms": {
+            "n": 2,
+            "mean": 7.9425831898128525,
+            "median": 7.9425831898128525,
+            "min": 7.694729380435436,
+            "max": 8.19043699919027,
+            "sum": 15.885166379625705
+          },
+          "API_total_ms": {
+            "n": 4,
+            "mean": 287.40091602958273,
+            "median": 287.3687550163595,
+            "min": 286.2295529921539,
+            "max": 288.636601093458,
+            "sum": 1149.603664118331
+          },
+          "pipe_total_ms": {
+            "n": 4,
+            "mean": 371.26267851889133,
+            "median": 369.35043758153915,
+            "min": 353.2251840233803,
+            "max": 393.12465488910675,
+            "sum": 1485.0507140755653
+          },
+          "cleanup_ms": {
+            "n": 4,
+            "mean": 2.6248079985380173,
+            "median": 0.002070993185043335,
+            "min": 0.0006600022315979004,
+            "max": 10.494430005550385,
+            "sum": 10.499231994152069
+          },
+          "terminal_noNN": 0
+        },
+        {
+          "core": 4,
+          "engine": "candidate",
+          "requests": 4,
+          "started_NN": 266,
+          "returned_NN": 266,
+          "discarded_NN": 2,
+          "adopted_NN": 263,
+          "completed_K": {
+            "n": 4,
+            "mean": 66,
+            "median": 66.5,
+            "min": 62,
+            "max": 69,
+            "sum": 264
+          },
+          "adopted_K": {
+            "n": 4,
+            "mean": 65.75,
+            "median": 66.5,
+            "min": 62,
+            "max": 68,
+            "sum": 263
+          },
+          "firstCP_ms": {
+            "n": 4,
+            "mean": 11.31207524985075,
+            "median": 12.158107504248619,
+            "min": 7.103080004453659,
+            "max": 13.829005986452103,
+            "sum": 45.248300999403
+          },
+          "steady_API_mean_of_request_means_ms": {
+            "n": 2,
+            "mean": 4.078352058476806,
+            "median": 4.078352058476806,
+            "min": 4.024280969822554,
+            "max": 4.132423147131058,
+            "sum": 8.156704116953613
+          },
+          "API_total_ms": {
+            "n": 4,
+            "mean": 265.3447917982703,
+            "median": 265.68564953049645,
+            "min": 260.4970491374843,
+            "max": 269.51081899460405,
+            "sum": 1061.3791671930812
+          },
+          "pipe_total_ms": {
+            "n": 4,
+            "mean": 287.50910568237305,
+            "median": 288.26003746688366,
+            "min": 283.9405689537525,
+            "max": 289.57577884197235,
+            "sum": 1150.0364227294922
+          },
+          "cleanup_ms": {
+            "n": 4,
+            "mean": 0.0013857558369636536,
+            "median": 0.0012010037899017334,
+            "min": 0.0007899999618530273,
+            "max": 0.00235101580619812,
+            "sum": 0.005543023347854614
+          },
+          "terminal_noNN": 0
+        },
+        {
+          "core": 4,
+          "engine": "reference",
+          "requests": 4,
+          "started_NN": 329,
+          "returned_NN": 329,
+          "discarded_NN": 4,
+          "adopted_NN": 325,
+          "completed_K": {
+            "n": 4,
+            "mean": 81.25,
+            "median": 81.0,
+            "min": 79,
+            "max": 84,
+            "sum": 325
+          },
+          "adopted_K": {
+            "n": 4,
+            "mean": 81.25,
+            "median": 81.0,
+            "min": 79,
+            "max": 84,
+            "sum": 325
+          },
+          "firstCP_ms": {
+            "n": 4,
+            "mean": 7.912893749773502,
+            "median": 7.629343509674072,
+            "min": 5.956146985292435,
+            "max": 10.43674099445343,
+            "sum": 31.65157499909401
+          },
+          "steady_API_mean_of_request_means_ms": {
+            "n": 2,
+            "mean": 3.9904370182121953,
+            "median": 3.9904370182121953,
+            "min": 3.953055470727706,
+            "max": 4.027818565696685,
+            "sum": 7.980874036424391
+          },
+          "API_total_ms": {
+            "n": 4,
+            "mean": 323.6383801995544,
+            "median": 324.1862009599572,
+            "min": 316.07751204865053,
+            "max": 330.10360682965256,
+            "sum": 1294.5535207982175
+          },
+          "pipe_total_ms": {
+            "n": 4,
+            "mean": 361.9219423830509,
+            "median": 364.67602357268333,
+            "min": 350.48844733834267,
+            "max": 367.84727504849434,
+            "sum": 1447.6877695322037
+          },
+          "cleanup_ms": {
+            "n": 4,
+            "mean": 0.0013472437858581543,
+            "median": 0.0013399869203567505,
+            "min": 0.0003820061683654785,
+            "max": 0.0023269951343536377,
+            "sum": 0.005388975143432617
+          },
+          "terminal_noNN": 0
+        },
+        {
+          "core": 6,
+          "engine": "candidate",
+          "requests": 4,
+          "started_NN": 274,
+          "returned_NN": 274,
+          "discarded_NN": 4,
+          "adopted_NN": 270,
+          "completed_K": {
+            "n": 4,
+            "mean": 67.5,
+            "median": 68.0,
+            "min": 64,
+            "max": 70,
+            "sum": 270
+          },
+          "adopted_K": {
+            "n": 4,
+            "mean": 67.5,
+            "median": 68.0,
+            "min": 64,
+            "max": 70,
+            "sum": 270
+          },
+          "firstCP_ms": {
+            "n": 4,
+            "mean": 11.076793998479843,
+            "median": 11.51095999777317,
+            "min": 7.552841007709503,
+            "max": 13.732414990663528,
+            "sum": 44.30717599391937
+          },
+          "steady_API_mean_of_request_means_ms": {
+            "n": 2,
+            "mean": 3.8997732698444976,
+            "median": 3.8997732698444976,
+            "min": 3.872744986227295,
+            "max": 3.9268015534617007,
+            "sum": 7.799546539688995
+          },
+          "API_total_ms": {
+            "n": 4,
+            "mean": 268.46990958438255,
+            "median": 269.72438412485644,
+            "min": 261.863448045915,
+            "max": 272.5674220419023,
+            "sum": 1073.8796383375302
+          },
+          "pipe_total_ms": {
+            "n": 4,
+            "mean": 291.154559224844,
+            "median": 291.8489054143429,
+            "min": 287.656327098608,
+            "max": 293.26409897208214,
+            "sum": 1164.618236899376
+          },
+          "cleanup_ms": {
+            "n": 4,
+            "mean": 0.000912003219127655,
+            "median": 0.0009590089321136475,
+            "min": 0.0003789961338043213,
+            "max": 0.001350998878479004,
+            "sum": 0.00364801287651062
+          },
+          "terminal_noNN": 0
+        },
+        {
+          "core": 6,
+          "engine": "reference",
+          "requests": 4,
+          "started_NN": 331,
+          "returned_NN": 331,
+          "discarded_NN": 4,
+          "adopted_NN": 327,
+          "completed_K": {
+            "n": 4,
+            "mean": 81.75,
+            "median": 81.5,
+            "min": 80,
+            "max": 84,
+            "sum": 327
+          },
+          "adopted_K": {
+            "n": 4,
+            "mean": 81.75,
+            "median": 81.5,
+            "min": 80,
+            "max": 84,
+            "sum": 327
+          },
+          "firstCP_ms": {
+            "n": 4,
+            "mean": 7.124721497297287,
+            "median": 7.119727998971939,
+            "min": 6.0586259961128235,
+            "max": 8.200803995132446,
+            "sum": 28.498885989189148
+          },
+          "steady_API_mean_of_request_means_ms": {
+            "n": 2,
+            "mean": 3.8881779268974372,
+            "median": 3.8881779268974372,
+            "min": 3.834516105208812,
+            "max": 3.9418397485860623,
+            "sum": 7.7763558537948745
+          },
+          "API_total_ms": {
+            "n": 4,
+            "mean": 322.9759958994691,
+            "median": 323.3265964372549,
+            "min": 319.2157888843212,
+            "max": 326.03500183904544,
+            "sum": 1291.9039835978765
+          },
+          "pipe_total_ms": {
+            "n": 4,
+            "mean": 364.20818128436804,
+            "median": 366.0758860260248,
+            "min": 354.8947628736496,
+            "max": 369.7861902117729,
+            "sum": 1456.8327251374722
+          },
+          "cleanup_ms": {
+            "n": 4,
+            "mean": 0.0011217594146728516,
+            "median": 0.000997006893157959,
+            "min": 0.0005600154399871826,
+            "max": 0.0019330084323883057,
+            "sum": 0.004487037658691406
+          },
+          "terminal_noNN": 0
+        },
+        {
+          "core": 8,
+          "engine": "candidate",
+          "requests": 4,
+          "started_NN": 272,
+          "returned_NN": 272,
+          "discarded_NN": 3,
+          "adopted_NN": 269,
+          "completed_K": {
+            "n": 4,
+            "mean": 67.25,
+            "median": 67.5,
+            "min": 64,
+            "max": 70,
+            "sum": 269
+          },
+          "adopted_K": {
+            "n": 4,
+            "mean": 67.25,
+            "median": 67.5,
+            "min": 64,
+            "max": 70,
+            "sum": 269
+          },
+          "firstCP_ms": {
+            "n": 4,
+            "mean": 10.503926008939743,
+            "median": 10.677429005503654,
+            "min": 7.010402023792267,
+            "max": 13.650444000959396,
+            "sum": 42.01570403575897
+          },
+          "steady_API_mean_of_request_means_ms": {
+            "n": 2,
+            "mean": 3.9166023263805494,
+            "median": 3.9166023263805494,
+            "min": 3.828016956343644,
+            "max": 4.005187696417455,
+            "sum": 7.833204652761099
+          },
+          "API_total_ms": {
+            "n": 4,
+            "mean": 267.02982799179154,
+            "median": 266.3654089992633,
+            "min": 262.78444394120015,
+            "max": 272.60405002743937,
+            "sum": 1068.1193119671661
+          },
+          "pipe_total_ms": {
+            "n": 4,
+            "mean": 289.76154766976833,
+            "median": 288.888646453619,
+            "min": 288.1702309846878,
+            "max": 293.0986667871475,
+            "sum": 1159.0461906790733
+          },
+          "cleanup_ms": {
+            "n": 4,
+            "mean": 0.0010524913668632507,
+            "median": 0.0010864883661270142,
+            "min": 0.00039398670196533203,
+            "max": 0.0016430020332336426,
+            "sum": 0.004209965467453003
+          },
+          "terminal_noNN": 0
+        },
+        {
+          "core": 8,
+          "engine": "reference",
+          "requests": 4,
+          "started_NN": 324,
+          "returned_NN": 324,
+          "discarded_NN": 4,
+          "adopted_NN": 320,
+          "completed_K": {
+            "n": 4,
+            "mean": 80,
+            "median": 80.5,
+            "min": 76,
+            "max": 83,
+            "sum": 320
+          },
+          "adopted_K": {
+            "n": 4,
+            "mean": 80,
+            "median": 80.5,
+            "min": 76,
+            "max": 83,
+            "sum": 320
+          },
+          "firstCP_ms": {
+            "n": 4,
+            "mean": 7.686363749206066,
+            "median": 8.248087510466576,
+            "min": 5.375105977058411,
+            "max": 8.874173998832703,
+            "sum": 30.745454996824265
+          },
+          "steady_API_mean_of_request_means_ms": {
+            "n": 2,
+            "mean": 4.0114104286540755,
+            "median": 4.0114104286540755,
+            "min": 3.9452931590991596,
+            "max": 4.077527698208991,
+            "sum": 8.022820857308151
+          },
+          "API_total_ms": {
+            "n": 4,
+            "mean": 323.8560495301499,
+            "median": 324.5795695838751,
+            "min": 318.8313809223473,
+            "max": 327.43367803050205,
+            "sum": 1295.4241981205996
+          },
+          "pipe_total_ms": {
+            "n": 4,
+            "mean": 360.75144604593515,
+            "median": 361.42678302526474,
+            "min": 353.29138401150703,
+            "max": 366.8608341217041,
+            "sum": 1443.0057841837406
+          },
+          "cleanup_ms": {
+            "n": 4,
+            "mean": 0.0009727627038955688,
+            "median": 0.0006935149431228638,
+            "min": 0.0004220008850097656,
+            "max": 0.0020820200443267822,
+            "sum": 0.0038910508155822754
+          },
+          "terminal_noNN": 0
+        }
+      ],
+      "root_parity": [
+        {
+          "core": 2,
+          "fixture": "initial-p1",
+          "n": 4,
+          "root_features648_NN137bits_exact": true
+        },
+        {
+          "core": 2,
+          "fixture": "asym-hv-p2",
+          "n": 4,
+          "root_features648_NN137bits_exact": true
+        },
+        {
+          "core": 4,
+          "fixture": "initial-p1",
+          "n": 4,
+          "root_features648_NN137bits_exact": true
+        },
+        {
+          "core": 4,
+          "fixture": "asym-hv-p2",
+          "n": 4,
+          "root_features648_NN137bits_exact": true
+        },
+        {
+          "core": 6,
+          "fixture": "initial-p1",
+          "n": 4,
+          "root_features648_NN137bits_exact": true
+        },
+        {
+          "core": 6,
+          "fixture": "asym-hv-p2",
+          "n": 4,
+          "root_features648_NN137bits_exact": true
+        },
+        {
+          "core": 8,
+          "fixture": "initial-p1",
+          "n": 4,
+          "root_features648_NN137bits_exact": true
+        },
+        {
+          "core": 8,
+          "fixture": "asym-hv-p2",
+          "n": 4,
+          "root_features648_NN137bits_exact": true
+        }
+      ],
+      "actual_admit_ms": {
+        "n": 32,
+        "mean": 398.1815433744341,
+        "median": 398.8588295131922,
+        "min": 388.46264600753784,
+        "max": 401.4568060040474,
+        "sum": 12741.809387981892
+      },
+      "public_ms": {
+        "n": 32,
+        "mean": 411.1792466882616,
+        "median": 410.91766150295734,
+        "min": 409.55894899368286,
+        "max": 415.1997919976711,
+        "sum": 13157.735894024372
+      },
+      "phase_start_offsets_ms": {
+        "n": 32,
+        "mean": 5.190242558717728,
+        "median": 5.804482489824295,
+        "min": 0.1992569863796234,
+        "max": 12.864080995321274,
+        "sum": 166.08776187896729
+      },
+      "root_preparation_outside_t0_ms": {
+        "n": 32,
+        "mean": 1.618090813048184,
+        "median": 0.5100165009498596,
+        "min": 0.11800700426101685,
+        "max": 7.700037002563477,
+        "sum": 51.778906017541885
+      },
+      "init_warm": [
+        {
+          "core": 2,
+          "engines": {
+            "candidate": {
+              "session_init_ms": 37.62777801603079,
+              "warm_pipe_ms": 7.227265000343323,
+              "warm_API_ms": 6.498030008515343,
+              "affinity": [
+                2
+              ],
+              "provider": [
+                "CPUExecutionProvider"
+              ],
+              "intra": 1,
+              "inter": 1
+            },
+            "reference": {
+              "session_init_ms": 31.54039100627415,
+              "warm_pipe_ms": 5.745034992694855,
+              "warm_API_ms": 5.208788003074005,
+              "affinity": [
+                2
+              ],
+              "provider": [
+                "CPUExecutionProvider"
+              ],
+              "intra": 1,
+              "inter": 1
+            }
+          }
+        },
+        {
+          "core": 4,
+          "engines": {
+            "candidate": {
+              "session_init_ms": 28.127447003498673,
+              "warm_pipe_ms": 6.067074000835419,
+              "warm_API_ms": 5.3738830029033124,
+              "affinity": [
+                4
+              ],
+              "provider": [
+                "CPUExecutionProvider"
+              ],
+              "intra": 1,
+              "inter": 1
+            },
+            "reference": {
+              "session_init_ms": 29.18849600246176,
+              "warm_pipe_ms": 6.133094012737274,
+              "warm_API_ms": 5.2182620274834335,
+              "affinity": [
+                4
+              ],
+              "provider": [
+                "CPUExecutionProvider"
+              ],
+              "intra": 1,
+              "inter": 1
+            }
+          }
+        },
+        {
+          "core": 6,
+          "engines": {
+            "candidate": {
+              "session_init_ms": 27.29324999381788,
+              "warm_pipe_ms": 4.821924984455109,
+              "warm_API_ms": 4.306823015213013,
+              "affinity": [
+                6
+              ],
+              "provider": [
+                "CPUExecutionProvider"
+              ],
+              "intra": 1,
+              "inter": 1
+            },
+            "reference": {
+              "session_init_ms": 35.72663199156523,
+              "warm_pipe_ms": 8.268795013427734,
+              "warm_API_ms": 4.849272983847186,
+              "affinity": [
+                6
+              ],
+              "provider": [
+                "CPUExecutionProvider"
+              ],
+              "intra": 1,
+              "inter": 1
+            }
+          }
+        },
+        {
+          "core": 8,
+          "engines": {
+            "candidate": {
+              "session_init_ms": 28.427623998140916,
+              "warm_pipe_ms": 4.980194002389908,
+              "warm_API_ms": 4.429267981322482,
+              "affinity": [
+                8
+              ],
+              "provider": [
+                "CPUExecutionProvider"
+              ],
+              "intra": 1,
+              "inter": 1
+            },
+            "reference": {
+              "session_init_ms": 32.18854599981569,
+              "warm_pipe_ms": 7.603480011224747,
+              "warm_API_ms": 6.833943974925205,
+              "affinity": [
+                8
+              ],
+              "provider": [
+                "CPUExecutionProvider"
+              ],
+              "intra": 1,
+              "inter": 1
+            }
+          }
+        }
+      ]
+    }
+  },
+  "core2_steady_comparisons": [
+    {
+      "anchor_core": 2,
+      "engine": "candidate",
+      "fixture": "initial-p1",
+      "solo_adopted_K": 37,
+      "parallel_adopted_K": 27,
+      "solo_adopted_NN": 37,
+      "parallel_adopted_NN": 27,
+      "solo_firstCP_ms": 20.959445983171463,
+      "parallel_firstCP_ms": 24.584260016679764,
+      "NN137_bits_exact": true
+    },
+    {
+      "anchor_core": 2,
+      "engine": "candidate",
+      "fixture": "asym-hv-p2",
+      "solo_adopted_K": 36,
+      "parallel_adopted_K": 30,
+      "solo_adopted_NN": 36,
+      "parallel_adopted_NN": 30,
+      "solo_firstCP_ms": 17.696535974740982,
+      "parallel_firstCP_ms": 23.855082988739014,
+      "NN137_bits_exact": true
+    },
+    {
+      "anchor_core": 2,
+      "engine": "reference",
+      "fixture": "initial-p1",
+      "solo_adopted_K": 40,
+      "parallel_adopted_K": 37,
+      "solo_adopted_NN": 40,
+      "parallel_adopted_NN": 37,
+      "solo_firstCP_ms": 4.99193799495697,
+      "parallel_firstCP_ms": 9.749449998140335,
+      "NN137_bits_exact": true
+    },
+    {
+      "anchor_core": 2,
+      "engine": "reference",
+      "fixture": "asym-hv-p2",
+      "solo_adopted_K": 41,
+      "parallel_adopted_K": 34,
+      "solo_adopted_NN": 41,
+      "parallel_adopted_NN": 34,
+      "solo_firstCP_ms": 8.337608993053436,
+      "parallel_firstCP_ms": 10.723122984170914,
+      "NN137_bits_exact": true
+    }
+  ],
+  "cross_mode_root_exact": [
+    {
+      "fixture": "initial-p1",
+      "requests": 20,
+      "all_modes_cores_root648_NN137bits_exact": true
+    },
+    {
+      "fixture": "asym-hv-p2",
+      "requests": 20,
+      "all_modes_cores_root648_NN137bits_exact": true
+    }
+  ],
+  "reference_parallel_batch_factor_phase": 3.92150292936078,
+  "reference_parallel_batch_factor_outer": 3.496693859448708,
+  "not_WDL_speed_or_causal_NN_ratio": true,
+  "measured_wall_seconds": {
+    "mock": 2.016844,
+    "solo": 5.723927,
+    "parallel": 6.547816
+  },
+  "heavy_total_s": 12.271743,
+  "pending_return_discard_coverage": {
+    "observed": 32,
+    "not_observed": 8,
+    "no_repetition_or_supplement": true
+  },
+  "realORT_terminal_only_cancel_coverage": "not established by these2roots;165NN0 artificial result separate",
+  "counter_definition": {
+    "started_NN": "actual infer count before ORT ask",
+    "returned_NN": "completed infer spans including discarded returns",
+    "discarded_NN": "return after observed stop before backup; not reused",
+    "completed_K": "final worker backup count, may exceed adopted cache; not cutoff-valid alone",
+    "adopted_K_NN": "immutable cache certified after actual validation/clone/tentative assign <=402",
+    "zero": "source held process result after awaited infer and cancel/free; observed main receipt/gate",
+    "kernel_CPU": "unknown"
+  },
+  "formal_ready": false,
+  "new_game_teacher_learning_GPU_build": 0,
+  "next_max1": "select single4arena native mode as candidate for separately budgeted minimal teacher generation and export with lineage; no automatic runtime experiment chain or formal1200games",
+  "unknown_costs": [
+    "all-team/unwrapped staticCPU aggregate",
+    "exactkernelCPU attribution",
+    "futureWDL multiplier",
+    "sampler/fullteacher pipeline expense"
+  ]
+}

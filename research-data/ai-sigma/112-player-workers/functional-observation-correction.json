@@ -1,0 +1,1 @@
+{"old_run":"p112-functional-r1","field":"ACK_known_at_next_input","cause":"captured after current public instead of at its t0; saved values kept","valid_saved_comparison":"identity.t0_ms versus previous stop.main_received_ms","fix":"capture opposite ACK known flag at actual input t0 before dispatch in new source","newrun_old_rows_replaced":false}

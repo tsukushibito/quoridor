@@ -1,0 +1,1628 @@
+{
+  "numeric": {
+    "pass": true,
+    "label": "runtime",
+    "scope": "numeric element/runtime raw check, reference raw terminal diagnostics separated from effective search",
+    "classification": {
+      "legal-replay": 20,
+      "synthetic-history-context": 3,
+      "synthetic-total-ply-context": 5
+    },
+    "elements": {
+      "features": 18144,
+      "NN": 3836,
+      "prior": 3187
+    },
+    "maxabs": {
+      "NN": 5.4836273193359375e-06,
+      "prior": 6.020069122314453e-06
+    },
+    "gate": "abs<=1e-4+1e-4*abs(ref), unchanged",
+    "cases": [
+      {
+        "id": "initial-p1",
+        "classification": "legal-replay",
+        "raw_legal": 131,
+        "effective_legal": 131,
+        "terminal": null,
+        "value": 0.21437489986419678
+      },
+      {
+        "id": "initial-p2",
+        "classification": "legal-replay",
+        "raw_legal": 131,
+        "effective_legal": 131,
+        "terminal": null,
+        "value": -0.19111451506614685
+      },
+      {
+        "id": "asym-h-p2",
+        "classification": "legal-replay",
+        "raw_legal": 127,
+        "effective_legal": 127,
+        "terminal": null,
+        "value": -0.20148341357707977
+      },
+      {
+        "id": "asym-hv-p1",
+        "classification": "legal-replay",
+        "raw_legal": 123,
+        "effective_legal": 123,
+        "terminal": null,
+        "value": -0.24061402678489685
+      },
+      {
+        "id": "asym-hv-p2",
+        "classification": "legal-replay",
+        "raw_legal": 123,
+        "effective_legal": 123,
+        "terminal": null,
+        "value": -0.4073752462863922
+      },
+      {
+        "id": "straight-jump-p2",
+        "classification": "legal-replay",
+        "raw_legal": 132,
+        "effective_legal": 132,
+        "terminal": null,
+        "value": 0.25653234124183655
+      },
+      {
+        "id": "behind-wall-diagonal-p2",
+        "classification": "legal-replay",
+        "raw_legal": 124,
+        "effective_legal": 124,
+        "terminal": null,
+        "value": -0.024799872189760208
+      },
+      {
+        "id": "adjacent-wall-blocked",
+        "classification": "legal-replay",
+        "raw_legal": 124,
+        "effective_legal": 124,
+        "terminal": null,
+        "value": 0.39657407999038696
+      },
+      {
+        "id": "board-edge-diagonal-p2",
+        "classification": "legal-replay",
+        "raw_legal": 107,
+        "effective_legal": 107,
+        "terminal": null,
+        "value": 0.9932131767272949
+      },
+      {
+        "id": "repeat-before-first-return",
+        "classification": "legal-replay",
+        "raw_legal": 132,
+        "effective_legal": 132,
+        "terminal": null,
+        "value": 0.20590542256832123
+      },
+      {
+        "id": "repeat-initial-count2",
+        "classification": "legal-replay",
+        "raw_legal": 131,
+        "effective_legal": 131,
+        "terminal": null,
+        "value": 0.21437489986419678
+      },
+      {
+        "id": "repeat-before-third-return",
+        "classification": "legal-replay",
+        "raw_legal": 131,
+        "effective_legal": 131,
+        "terminal": null,
+        "value": 0.20590542256832123
+      },
+      {
+        "id": "simulation-overlay-count2",
+        "classification": "synthetic-history-context",
+        "raw_legal": 131,
+        "effective_legal": 131,
+        "terminal": null,
+        "value": 0.20590542256832123
+      },
+      {
+        "id": "sibling-a-after-cycle",
+        "classification": "legal-replay",
+        "raw_legal": 131,
+        "effective_legal": 131,
+        "terminal": null,
+        "value": -0.19111451506614685
+      },
+      {
+        "id": "sibling-b-after-cycle",
+        "classification": "legal-replay",
+        "raw_legal": 131,
+        "effective_legal": 131,
+        "terminal": null,
+        "value": 0.2025011032819748
+      },
+      {
+        "id": "sibling-root-restored",
+        "classification": "legal-replay",
+        "raw_legal": 131,
+        "effective_legal": 131,
+        "terminal": null,
+        "value": 0.21437489986419678
+      },
+      {
+        "id": "synthetic-root-double-count",
+        "classification": "synthetic-history-context",
+        "raw_legal": 131,
+        "effective_legal": 131,
+        "terminal": null,
+        "value": 0.20590542256832123
+      },
+      {
+        "id": "reachability-closure-forbidden",
+        "classification": "legal-replay",
+        "raw_legal": 121,
+        "effective_legal": 121,
+        "terminal": null,
+        "value": -0.06490235775709152
+      },
+      {
+        "id": "all-walls-spent",
+        "classification": "legal-replay",
+        "raw_legal": 3,
+        "effective_legal": 3,
+        "terminal": null,
+        "value": 0.9845724105834961
+      },
+      {
+        "id": "one-wall-in-hand",
+        "classification": "legal-replay",
+        "raw_legal": 66,
+        "effective_legal": 66,
+        "terminal": null,
+        "value": 0.7565255165100098
+      },
+      {
+        "id": "synthetic-no-legal-move-draw",
+        "classification": "synthetic-history-context",
+        "raw_legal": 0,
+        "effective_legal": 0,
+        "terminal": 0,
+        "value": 0.9845724105834961
+      },
+      {
+        "id": "synthetic-total-ply-198",
+        "classification": "synthetic-total-ply-context",
+        "raw_legal": 131,
+        "effective_legal": 131,
+        "terminal": null,
+        "value": 0.21437489986419678
+      },
+      {
+        "id": "synthetic-total-ply-199",
+        "classification": "synthetic-total-ply-context",
+        "raw_legal": 131,
+        "effective_legal": 131,
+        "terminal": null,
+        "value": 0.21437489986419678
+      },
+      {
+        "id": "synthetic-total-ply-200",
+        "classification": "synthetic-total-ply-context",
+        "raw_legal": 131,
+        "effective_legal": 0,
+        "terminal": 0,
+        "value": 0.21437489986419678
+      },
+      {
+        "id": "goal-before-last-step",
+        "classification": "legal-replay",
+        "raw_legal": 110,
+        "effective_legal": 110,
+        "terminal": null,
+        "value": 0.9903662800788879
+      },
+      {
+        "id": "synthetic-ply198-before-goal",
+        "classification": "synthetic-total-ply-context",
+        "raw_legal": 110,
+        "effective_legal": 110,
+        "terminal": null,
+        "value": 0.9903662800788879
+      },
+      {
+        "id": "goal-win-legal-replay",
+        "classification": "legal-replay",
+        "raw_legal": 108,
+        "effective_legal": 0,
+        "terminal": -1,
+        "value": -0.9171006679534912
+      },
+      {
+        "id": "synthetic-goal-at200",
+        "classification": "synthetic-total-ply-context",
+        "raw_legal": 105,
+        "effective_legal": 0,
+        "terminal": -1,
+        "value": -0.9626014232635498
+      }
+    ],
+    "faults": {
+      "shape": {
+        "error": "LOGITS_SHAPE",
+        "checkpoint_published": false
+      },
+      "null": {
+        "error": "LOGITS_FINITE",
+        "checkpoint_published": false
+      },
+      "range": {
+        "error": "VALUE_RANGE",
+        "checkpoint_published": false
+      },
+      "duplicate": {
+        "error": "NO_PENDING_OR_DUPLICATE",
+        "checkpoint_published": false
+      },
+      "stale": {
+        "error": "STALE_GENERATION",
+        "checkpoint_published": false
+      },
+      "token": {
+        "error": "FOREIGN_TOKEN",
+        "checkpoint_published": false
+      },
+      "cancel": {
+        "error": "NO_PENDING_OR_DUPLICATE",
+        "checkpoint_published": false
+      },
+      "serialization_ms": 0,
+      "serialized_bytes": 466,
+      "worker_delivery_send_ms": 1790818843275.8
+    },
+    "input_hashes": {
+      "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-ORT-SEARCH/browser-numeric-independent.json": "19b631f23cf2cba0a5a30c6ca6861b335906d895d921d009aaaef80ca8052a6c",
+      "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/reference-fixtures/SIGMA-PARITY-PLAN/fixtures.json": "206f46e0763177f138317ba49dc82875fd49a4d2c4ac2844d7fc06911e30bffb",
+      "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/ort-a.outputs.json": "060ba1a3f7647adb7c0ac968eb2834d966665920f72eeee2b3798ce9864b382a",
+      "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-NN-SEARCH/native-diagnostic-final.json": "4b56aaa7cdb1412699887a483e9c074c6faa93721f3b1edce29f9182a97421cd"
+    }
+  },
+  "trees": {
+    "pass": true,
+    "runs": 144,
+    "paired_configurations": 72,
+    "nodes": 247,
+    "edges": 175,
+    "terminal": 36,
+    "NN_contexts": 492,
+    "cap_configurations": 8,
+    "first_leaf_negative_backup_checks": 4,
+    "float_unequal_elements": 4644,
+    "max_prior_abs": 5.960464477539062e-07,
+    "max_value_sum_abs": 8.065253496170044e-06,
+    "exact": [
+      "action",
+      "visits",
+      "structural stats",
+      "history/masks/node transitions/terminal priority"
+    ],
+    "float_bit_identity": false,
+    "scope": "observed fixed cases; artificial histories remain artificial; real OOM/200/no-legal reachability unverified",
+    "rows": [
+      {
+        "id": "initial-p1",
+        "sims": 1,
+        "max_nodes": 64,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": null,
+        "action": 13
+      },
+      {
+        "id": "initial-p1",
+        "sims": 1,
+        "max_nodes": 1,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": null,
+        "action": 13
+      },
+      {
+        "id": "initial-p1",
+        "sims": 1,
+        "max_nodes": 64,
+        "max_depth": 1,
+        "nodes": 1,
+        "terminal_value": null,
+        "action": 13
+      },
+      {
+        "id": "initial-p1",
+        "sims": 8,
+        "max_nodes": 64,
+        "max_depth": 8,
+        "nodes": 8,
+        "terminal_value": null,
+        "action": 13
+      },
+      {
+        "id": "initial-p1",
+        "sims": 8,
+        "max_nodes": 1,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": null,
+        "action": 13
+      },
+      {
+        "id": "initial-p1",
+        "sims": 8,
+        "max_nodes": 64,
+        "max_depth": 1,
+        "nodes": 2,
+        "terminal_value": null,
+        "action": 13
+      },
+      {
+        "id": "initial-p1",
+        "sims": 32,
+        "max_nodes": 64,
+        "max_depth": 8,
+        "nodes": 32,
+        "terminal_value": null,
+        "action": 13
+      },
+      {
+        "id": "initial-p1",
+        "sims": 32,
+        "max_nodes": 1,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": null,
+        "action": 13
+      },
+      {
+        "id": "initial-p1",
+        "sims": 32,
+        "max_nodes": 64,
+        "max_depth": 1,
+        "nodes": 4,
+        "terminal_value": null,
+        "action": 13
+      },
+      {
+        "id": "asym-hv-p2",
+        "sims": 1,
+        "max_nodes": 64,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": null,
+        "action": 67
+      },
+      {
+        "id": "asym-hv-p2",
+        "sims": 1,
+        "max_nodes": 1,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": null,
+        "action": 67
+      },
+      {
+        "id": "asym-hv-p2",
+        "sims": 1,
+        "max_nodes": 64,
+        "max_depth": 1,
+        "nodes": 1,
+        "terminal_value": null,
+        "action": 67
+      },
+      {
+        "id": "asym-hv-p2",
+        "sims": 8,
+        "max_nodes": 64,
+        "max_depth": 8,
+        "nodes": 8,
+        "terminal_value": null,
+        "action": 67
+      },
+      {
+        "id": "asym-hv-p2",
+        "sims": 8,
+        "max_nodes": 1,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": null,
+        "action": 67
+      },
+      {
+        "id": "asym-hv-p2",
+        "sims": 8,
+        "max_nodes": 64,
+        "max_depth": 1,
+        "nodes": 2,
+        "terminal_value": null,
+        "action": 67
+      },
+      {
+        "id": "asym-hv-p2",
+        "sims": 32,
+        "max_nodes": 64,
+        "max_depth": 8,
+        "nodes": 32,
+        "terminal_value": null,
+        "action": 67
+      },
+      {
+        "id": "asym-hv-p2",
+        "sims": 32,
+        "max_nodes": 1,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": null,
+        "action": 67
+      },
+      {
+        "id": "asym-hv-p2",
+        "sims": 32,
+        "max_nodes": 64,
+        "max_depth": 1,
+        "nodes": 2,
+        "terminal_value": null,
+        "action": 67
+      },
+      {
+        "id": "straight-jump-p2",
+        "sims": 1,
+        "max_nodes": 64,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": null,
+        "action": 31
+      },
+      {
+        "id": "straight-jump-p2",
+        "sims": 1,
+        "max_nodes": 1,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": null,
+        "action": 31
+      },
+      {
+        "id": "straight-jump-p2",
+        "sims": 1,
+        "max_nodes": 64,
+        "max_depth": 1,
+        "nodes": 1,
+        "terminal_value": null,
+        "action": 31
+      },
+      {
+        "id": "straight-jump-p2",
+        "sims": 8,
+        "max_nodes": 64,
+        "max_depth": 8,
+        "nodes": 8,
+        "terminal_value": null,
+        "action": 129
+      },
+      {
+        "id": "straight-jump-p2",
+        "sims": 8,
+        "max_nodes": 1,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": null,
+        "action": 129
+      },
+      {
+        "id": "straight-jump-p2",
+        "sims": 8,
+        "max_nodes": 64,
+        "max_depth": 1,
+        "nodes": 5,
+        "terminal_value": null,
+        "action": 129
+      },
+      {
+        "id": "straight-jump-p2",
+        "sims": 32,
+        "max_nodes": 64,
+        "max_depth": 8,
+        "nodes": 32,
+        "terminal_value": null,
+        "action": 31
+      },
+      {
+        "id": "straight-jump-p2",
+        "sims": 32,
+        "max_nodes": 1,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": null,
+        "action": 129
+      },
+      {
+        "id": "straight-jump-p2",
+        "sims": 32,
+        "max_nodes": 64,
+        "max_depth": 1,
+        "nodes": 8,
+        "terminal_value": null,
+        "action": 129
+      },
+      {
+        "id": "repeat-before-third-return",
+        "sims": 1,
+        "max_nodes": 64,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": null,
+        "action": 58
+      },
+      {
+        "id": "repeat-before-third-return",
+        "sims": 1,
+        "max_nodes": 1,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": null,
+        "action": 58
+      },
+      {
+        "id": "repeat-before-third-return",
+        "sims": 1,
+        "max_nodes": 64,
+        "max_depth": 1,
+        "nodes": 1,
+        "terminal_value": null,
+        "action": 58
+      },
+      {
+        "id": "repeat-before-third-return",
+        "sims": 8,
+        "max_nodes": 64,
+        "max_depth": 8,
+        "nodes": 8,
+        "terminal_value": null,
+        "action": 58
+      },
+      {
+        "id": "repeat-before-third-return",
+        "sims": 8,
+        "max_nodes": 1,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": null,
+        "action": 58
+      },
+      {
+        "id": "repeat-before-third-return",
+        "sims": 8,
+        "max_nodes": 64,
+        "max_depth": 1,
+        "nodes": 4,
+        "terminal_value": null,
+        "action": 58
+      },
+      {
+        "id": "repeat-before-third-return",
+        "sims": 32,
+        "max_nodes": 64,
+        "max_depth": 8,
+        "nodes": 32,
+        "terminal_value": null,
+        "action": 58
+      },
+      {
+        "id": "repeat-before-third-return",
+        "sims": 32,
+        "max_nodes": 1,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": null,
+        "action": 58
+      },
+      {
+        "id": "repeat-before-third-return",
+        "sims": 32,
+        "max_nodes": 64,
+        "max_depth": 1,
+        "nodes": 4,
+        "terminal_value": null,
+        "action": 58
+      },
+      {
+        "id": "goal-win-legal-replay",
+        "sims": 1,
+        "max_nodes": 64,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": -1,
+        "action": null
+      },
+      {
+        "id": "goal-win-legal-replay",
+        "sims": 1,
+        "max_nodes": 1,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": -1,
+        "action": null
+      },
+      {
+        "id": "goal-win-legal-replay",
+        "sims": 1,
+        "max_nodes": 64,
+        "max_depth": 1,
+        "nodes": 1,
+        "terminal_value": -1,
+        "action": null
+      },
+      {
+        "id": "goal-win-legal-replay",
+        "sims": 8,
+        "max_nodes": 64,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": -1,
+        "action": null
+      },
+      {
+        "id": "goal-win-legal-replay",
+        "sims": 8,
+        "max_nodes": 1,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": -1,
+        "action": null
+      },
+      {
+        "id": "goal-win-legal-replay",
+        "sims": 8,
+        "max_nodes": 64,
+        "max_depth": 1,
+        "nodes": 1,
+        "terminal_value": -1,
+        "action": null
+      },
+      {
+        "id": "goal-win-legal-replay",
+        "sims": 32,
+        "max_nodes": 64,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": -1,
+        "action": null
+      },
+      {
+        "id": "goal-win-legal-replay",
+        "sims": 32,
+        "max_nodes": 1,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": -1,
+        "action": null
+      },
+      {
+        "id": "goal-win-legal-replay",
+        "sims": 32,
+        "max_nodes": 64,
+        "max_depth": 1,
+        "nodes": 1,
+        "terminal_value": -1,
+        "action": null
+      },
+      {
+        "id": "synthetic-total-ply-200",
+        "sims": 1,
+        "max_nodes": 64,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": 0,
+        "action": null
+      },
+      {
+        "id": "synthetic-total-ply-200",
+        "sims": 1,
+        "max_nodes": 1,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": 0,
+        "action": null
+      },
+      {
+        "id": "synthetic-total-ply-200",
+        "sims": 1,
+        "max_nodes": 64,
+        "max_depth": 1,
+        "nodes": 1,
+        "terminal_value": 0,
+        "action": null
+      },
+      {
+        "id": "synthetic-total-ply-200",
+        "sims": 8,
+        "max_nodes": 64,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": 0,
+        "action": null
+      },
+      {
+        "id": "synthetic-total-ply-200",
+        "sims": 8,
+        "max_nodes": 1,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": 0,
+        "action": null
+      },
+      {
+        "id": "synthetic-total-ply-200",
+        "sims": 8,
+        "max_nodes": 64,
+        "max_depth": 1,
+        "nodes": 1,
+        "terminal_value": 0,
+        "action": null
+      },
+      {
+        "id": "synthetic-total-ply-200",
+        "sims": 32,
+        "max_nodes": 64,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": 0,
+        "action": null
+      },
+      {
+        "id": "synthetic-total-ply-200",
+        "sims": 32,
+        "max_nodes": 1,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": 0,
+        "action": null
+      },
+      {
+        "id": "synthetic-total-ply-200",
+        "sims": 32,
+        "max_nodes": 64,
+        "max_depth": 1,
+        "nodes": 1,
+        "terminal_value": 0,
+        "action": null
+      },
+      {
+        "id": "synthetic-no-legal-move-draw",
+        "sims": 1,
+        "max_nodes": 64,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": 0,
+        "action": null
+      },
+      {
+        "id": "synthetic-no-legal-move-draw",
+        "sims": 1,
+        "max_nodes": 1,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": 0,
+        "action": null
+      },
+      {
+        "id": "synthetic-no-legal-move-draw",
+        "sims": 1,
+        "max_nodes": 64,
+        "max_depth": 1,
+        "nodes": 1,
+        "terminal_value": 0,
+        "action": null
+      },
+      {
+        "id": "synthetic-no-legal-move-draw",
+        "sims": 8,
+        "max_nodes": 64,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": 0,
+        "action": null
+      },
+      {
+        "id": "synthetic-no-legal-move-draw",
+        "sims": 8,
+        "max_nodes": 1,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": 0,
+        "action": null
+      },
+      {
+        "id": "synthetic-no-legal-move-draw",
+        "sims": 8,
+        "max_nodes": 64,
+        "max_depth": 1,
+        "nodes": 1,
+        "terminal_value": 0,
+        "action": null
+      },
+      {
+        "id": "synthetic-no-legal-move-draw",
+        "sims": 32,
+        "max_nodes": 64,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": 0,
+        "action": null
+      },
+      {
+        "id": "synthetic-no-legal-move-draw",
+        "sims": 32,
+        "max_nodes": 1,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": 0,
+        "action": null
+      },
+      {
+        "id": "synthetic-no-legal-move-draw",
+        "sims": 32,
+        "max_nodes": 64,
+        "max_depth": 1,
+        "nodes": 1,
+        "terminal_value": 0,
+        "action": null
+      },
+      {
+        "id": "synthetic-goal-at200",
+        "sims": 1,
+        "max_nodes": 64,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": -1,
+        "action": null
+      },
+      {
+        "id": "synthetic-goal-at200",
+        "sims": 1,
+        "max_nodes": 1,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": -1,
+        "action": null
+      },
+      {
+        "id": "synthetic-goal-at200",
+        "sims": 1,
+        "max_nodes": 64,
+        "max_depth": 1,
+        "nodes": 1,
+        "terminal_value": -1,
+        "action": null
+      },
+      {
+        "id": "synthetic-goal-at200",
+        "sims": 8,
+        "max_nodes": 64,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": -1,
+        "action": null
+      },
+      {
+        "id": "synthetic-goal-at200",
+        "sims": 8,
+        "max_nodes": 1,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": -1,
+        "action": null
+      },
+      {
+        "id": "synthetic-goal-at200",
+        "sims": 8,
+        "max_nodes": 64,
+        "max_depth": 1,
+        "nodes": 1,
+        "terminal_value": -1,
+        "action": null
+      },
+      {
+        "id": "synthetic-goal-at200",
+        "sims": 32,
+        "max_nodes": 64,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": -1,
+        "action": null
+      },
+      {
+        "id": "synthetic-goal-at200",
+        "sims": 32,
+        "max_nodes": 1,
+        "max_depth": 8,
+        "nodes": 1,
+        "terminal_value": -1,
+        "action": null
+      },
+      {
+        "id": "synthetic-goal-at200",
+        "sims": 32,
+        "max_nodes": 64,
+        "max_depth": 1,
+        "nodes": 1,
+        "terminal_value": -1,
+        "action": null
+      }
+    ]
+  },
+  "latency": {
+    "pass": true,
+    "label": "final",
+    "warmup": 18,
+    "measured": 60,
+    "full_schedule_exact": true,
+    "summary": {
+      "A": {
+        "requests": 30,
+        "valid": 30,
+        "elapsed_ms": {
+          "n": 30,
+          "median": 437.2999267578125,
+          "p95": 470.89990234375,
+          "max": 472.800048828125
+        },
+        "NN_calls": {
+          "n": 30,
+          "median": 9.0,
+          "p95": 9,
+          "max": 9
+        },
+        "NN_per_call_ms": {
+          "n": 265,
+          "median": 44.300048828125,
+          "p95": 54.599853515625,
+          "max": 102.89990234375
+        },
+        "accepted_simulations_zero_for_refusal": {
+          "n": 30,
+          "median": 9.0,
+          "p95": 9,
+          "max": 9
+        },
+        "successful_simulations": {
+          "n": 30,
+          "median": 9.0,
+          "p95": 9,
+          "max": 9
+        },
+        "internal_completed_before_discard": {
+          "n": 30,
+          "median": 9.0,
+          "p95": 9,
+          "max": 9
+        }
+      },
+      "B": {
+        "requests": 30,
+        "valid": 27,
+        "elapsed_ms": {
+          "n": 30,
+          "median": 418.10009765625,
+          "p95": 428,
+          "max": 436.699951171875
+        },
+        "NN_calls": {
+          "n": 30,
+          "median": 20.0,
+          "p95": 22,
+          "max": 22
+        },
+        "NN_per_call_ms": {
+          "n": 598,
+          "median": 13.049999997019768,
+          "p95": 22.900000005960464,
+          "max": 54
+        },
+        "accepted_simulations_zero_for_refusal": {
+          "n": 30,
+          "median": 20.0,
+          "p95": 22,
+          "max": 22
+        },
+        "successful_simulations": {
+          "n": 27,
+          "median": 20,
+          "p95": 22,
+          "max": 22
+        },
+        "internal_completed_before_discard": {
+          "n": 30,
+          "median": 20.0,
+          "p95": 22,
+          "max": 22
+        }
+      }
+    },
+    "refusals": [
+      {
+        "id": "initial-p1",
+        "backend": "B",
+        "sample": 5,
+        "warmup": false,
+        "error": "GUARD",
+        "elapsed_ms": 409.699951171875,
+        "calls": 19,
+        "accepted_action": null
+      },
+      {
+        "id": "asym-hv-p2",
+        "backend": "B",
+        "sample": -2,
+        "warmup": true,
+        "error": "GUARD",
+        "elapsed_ms": 411.300048828125,
+        "calls": 18,
+        "accepted_action": null
+      },
+      {
+        "id": "asym-hv-p2",
+        "backend": "B",
+        "sample": 1,
+        "warmup": false,
+        "error": "GUARD",
+        "elapsed_ms": 412,
+        "calls": 20,
+        "accepted_action": null
+      },
+      {
+        "id": "asym-hv-p2",
+        "backend": "B",
+        "sample": 9,
+        "warmup": false,
+        "error": "GUARD",
+        "elapsed_ms": 409,
+        "calls": 17,
+        "accepted_action": null
+      }
+    ],
+    "source_preregister_hashes": {
+      "tools/ai-sigma-ort-search/verify-gates.py": "31de1db289b7b7780631fdd1d24810faf5fc339581848ae862be2549b29ecfb9",
+      "tools/ai-sigma-ort-search/compile-tests.py": "54a0aab26150921add66ce8979e063fe87637e07bb0e1ef33c5de6e7b7321f41",
+      "tools/ai-sigma-ort-search/run-tests.py": "a9f7a2c4e9fa11d1eb62ecd7cacc3f9a86b1e0496b6ae4d42e92ace65e03f30f",
+      "tools/ai-sigma-ort-search/native-gates.py": "41cec0bdba6b71d353f058116b68ba14f83f187ec71c155fc16b2b190592aae5",
+      "tools/ai-sigma-ort-search/Cargo.toml": "3f4ff4f01d688338c6cdc16d0d42e35438b3b0cd484d2df84906a85b9f9fa377",
+      "tools/ai-sigma-ort-search/runner.py": "7312a0f9e0bd41a1aabea4be7a4189d664af913e4b7507788e8ed2eeab5a73b4",
+      "tools/ai-sigma-ort-search/final-build.py": "3c9504a1620406449235af587515ce04cf818b3f786d23db6bdb7f5f56821406",
+      "tools/ai-sigma-ort-search/Cargo.lock": "d0568a38ed13c537c3ab96abe3a0585e82258da1a3a5e64ee4ab18df07211b24",
+      "tools/ai-sigma-ort-search/browser.cjs": "2b6e20b80a29c35485d71e1978102939687fe575b29efba05f5f90c986c8fb0d",
+      "tools/ai-sigma-ort-search/worker.js": "2d648d719da630610fafbd0740a70f655b6b70ae73d4206835271c195de5e746",
+      "tools/ai-sigma-ort-search/prepare.py": "12a53f254b79dd2e23f0306d0235df77dd3cd89693eaefe97bc1e8b3e083c2ae",
+      "tools/ai-sigma-ort-search/make-lib.py": "fcdd4f54732fa6b1d0499a63f2825d2d4a570f3ff05bfb7d5c3ffa7bf5f02d13",
+      "tools/ai-sigma-ort-search/run-pending-tests.py": "78310e7200bd9f5f3490033a52edc3ab0d084cbf1ef729d26e3fedd6f380d4fe",
+      "tools/ai-sigma-ort-search/host.js": "6272fd4ed64faea8d7b4b671ac3d9d01703b7676ecb7b3c5a45d3100addb098c",
+      "tools/ai-sigma-ort-search/src/kernel.rs": "7d6873a7cab441bfe1bcf291e752da5cacfbe54bf55e5568d3112c930366c2cb",
+      "tools/ai-sigma-ort-search/src/research.rs": "3b1340552a98e520068ac5c9e8f2fffaffc0831bf6eb0142f9cf9a059af5cf4a",
+      "tools/ai-sigma-ort-search/src/lib.rs": "9fad536fcaaafb858bb588621a421fa71a62fe7339c97cdf13fbdea06aad6c44",
+      "tools/ai-sigma-ort-search/src/bin/b0-control.rs": "739438a558f52a223c0e87e55821a2893d90aaa8332e7a04f99e69db3b112edb",
+      "tools/ai-sigma-ort-search/src/bin/numeric.rs": "ed217a1745c66b5fd946b70ce6798047c0df7004fdf149dbaf991cf334edc487"
+    },
+    "A_hash": "891cd5e402885afc234b6041eab682bf429506848c5be532028bbe32e3c2f328",
+    "B_hash": "1f54d0b8f0c6d3d7d51935886ed506e44376a2052506be62ca7a726c85a78a01",
+    "registered_at": "2026-10-01T01:04:32.398777+00:00",
+    "limits": {
+      "sims": 4096,
+      "nodes": 512,
+      "depth": 24,
+      "step": 1
+    },
+    "scope": "exploratory only; no new latency run; no tail or strength claim",
+    "per_case": {
+      "initial-p1": {
+        "A": {
+          "latency": {
+            "n": 10,
+            "median": 441.199951171875,
+            "p95": 461.099853515625,
+            "max": 461.099853515625
+          },
+          "NN_per_call": {
+            "n": 86,
+            "median": 45.4500732421875,
+            "p95": 57.2998046875,
+            "max": 102.89990234375
+          },
+          "useful_simulations": {
+            "n": 10,
+            "median": 9.0,
+            "p95": 9,
+            "max": 9
+          },
+          "invalid": 0
+        },
+        "B": {
+          "latency": {
+            "n": 10,
+            "median": 421.050048828125,
+            "p95": 427.89990234375,
+            "max": 427.89990234375
+          },
+          "NN_per_call": {
+            "n": 194,
+            "median": 13.0,
+            "p95": 22.799999997019768,
+            "max": 39.599999994039536
+          },
+          "useful_simulations": {
+            "n": 10,
+            "median": 20.0,
+            "p95": 21,
+            "max": 21
+          },
+          "invalid": 1
+        }
+      },
+      "asym-hv-p2": {
+        "A": {
+          "latency": {
+            "n": 10,
+            "median": 439.39990234375,
+            "p95": 472.800048828125,
+            "max": 472.800048828125
+          },
+          "NN_per_call": {
+            "n": 90,
+            "median": 44.10009765625,
+            "p95": 52.699951171875,
+            "max": 72.199951171875
+          },
+          "useful_simulations": {
+            "n": 10,
+            "median": 9.0,
+            "p95": 9,
+            "max": 9
+          },
+          "invalid": 0
+        },
+        "B": {
+          "latency": {
+            "n": 10,
+            "median": 421.3499755859375,
+            "p95": 436.699951171875,
+            "max": 436.699951171875
+          },
+          "NN_per_call": {
+            "n": 198,
+            "median": 13.200000002980232,
+            "p95": 22.80000001192093,
+            "max": 34.8999999910593
+          },
+          "useful_simulations": {
+            "n": 10,
+            "median": 20.0,
+            "p95": 21,
+            "max": 21
+          },
+          "invalid": 2
+        }
+      },
+      "straight-jump-p2": {
+        "A": {
+          "latency": {
+            "n": 10,
+            "median": 432.5,
+            "p95": 470.89990234375,
+            "max": 470.89990234375
+          },
+          "NN_per_call": {
+            "n": 89,
+            "median": 43.900146484375,
+            "p95": 54.7998046875,
+            "max": 80.300048828125
+          },
+          "useful_simulations": {
+            "n": 10,
+            "median": 9.0,
+            "p95": 9,
+            "max": 9
+          },
+          "invalid": 0
+        },
+        "B": {
+          "latency": {
+            "n": 10,
+            "median": 415.800048828125,
+            "p95": 428,
+            "max": 428
+          },
+          "NN_per_call": {
+            "n": 206,
+            "median": 13.0,
+            "p95": 23.700000002980232,
+            "max": 54
+          },
+          "useful_simulations": {
+            "n": 10,
+            "median": 20.5,
+            "p95": 22,
+            "max": 22
+          },
+          "invalid": 0
+        }
+      }
+    }
+  },
+  "audit": {
+    "pass": true,
+    "independent_boundary": {
+      "NNerror_discard": true,
+      "late_oneNN_discard": true,
+      "old_response_rejected": 1,
+      "fresh_simulations": 8,
+      "model_hash_length_failures": true,
+      "drop": true
+    },
+    "GUARD_refusals": [
+      {
+        "id": "initial-p1",
+        "sample": 5,
+        "warmup": false,
+        "completed_private_before_discard": 19,
+        "begin_end_after_t0": 409.39990234375,
+        "published_action": null
+      },
+      {
+        "id": "asym-hv-p2",
+        "sample": -2,
+        "warmup": true,
+        "completed_private_before_discard": 18,
+        "begin_end_after_t0": 411.2998046875,
+        "published_action": null
+      },
+      {
+        "id": "asym-hv-p2",
+        "sample": 1,
+        "warmup": false,
+        "completed_private_before_discard": 20,
+        "begin_end_after_t0": 411.900146484375,
+        "published_action": null
+      },
+      {
+        "id": "asym-hv-p2",
+        "sample": 9,
+        "warmup": false,
+        "completed_private_before_discard": 17,
+        "begin_end_after_t0": 409.0,
+        "published_action": null
+      }
+    ],
+    "A_max_NN_ms": 123.300048828125,
+    "g_ms": 91,
+    "A_NN_exceeds_guard": true,
+    "timing_classification": {
+      "source_write_stop": "2026-10-01T01:34:32.105040+00:00",
+      "manifest_UTC": "2026-10-01T01:35:04.592279+00:00",
+      "manifest_after_processing_stop_seconds": 4.592279,
+      "classification": "manifest is final submission/hash metadata after source-write-stop and heavy job termination; its 4.592279s does not demonstrate NN/build processing overrun; no blanket past-budget success",
+      "old_runtime_stop_alone_was_not_accepted": true
+    },
+    "B0_saved_raw": [
+      {
+        "case": "initial",
+        "exact_rules_and_action_stats_root_bits": true,
+        "new_runtime": false,
+        "current_hash": "d65276690d490dcc0ec114876bec7925c7cd181daf735875c177eb0b71e538d5",
+        "baseline_hash": "770a1f55bcce203566f81a5984dc8546500c5db3274b983ed9dcf032c73bff28"
+      },
+      {
+        "case": "opening",
+        "exact_rules_and_action_stats_root_bits": true,
+        "new_runtime": false,
+        "current_hash": "3a60442320acfd6ea58e4a7dac19712ac8f047801677c1e88e75c44c7e67397b",
+        "baseline_hash": "d4cc48e341c046e33f7500082d6a0a6a63bcf41bcc3412f1907dd81b3677fd8d"
+      },
+      {
+        "case": "walled-midgame",
+        "exact_rules_and_action_stats_root_bits": true,
+        "new_runtime": false,
+        "current_hash": "21fba5ebd8cea6ba0b8576211f38e4915290a528e06ce34fb54c501346eab124",
+        "baseline_hash": "c224cf915359d4fe9ac6d8467655817f5a123fabc4e21b22d7a1cb306624e2b2"
+      },
+      {
+        "case": "p2",
+        "exact_rules_and_action_stats_root_bits": true,
+        "new_runtime": false,
+        "current_hash": "31ba63ebfe692ff33fcd60a32228881ced6d9ef870566b6586bea233f8200cc4",
+        "baseline_hash": "4fc78a6aa38360127d6bd4b412d65443c2967e095f9c577ba50c1bab6b199524"
+      },
+      {
+        "case": "jump-p2",
+        "exact_rules_and_action_stats_root_bits": true,
+        "new_runtime": false,
+        "current_hash": "183a9228fa95d2633b394984b5e7c21f9612d4cf94a5d6450b243a63df134610",
+        "baseline_hash": "59ea0f9baca79a53a6638b29bf77025315a6797d6a30afe3d5a1d2af912c378c"
+      },
+      {
+        "case": "many-walls",
+        "exact_rules_and_action_stats_root_bits": true,
+        "new_runtime": false,
+        "current_hash": "5febdf3d8b569ccb3e876534634c14656f435ef37bdb0d9ef953f497730f89a5",
+        "baseline_hash": "4388ce84513dd17bbfa5e2e23e2963b7cc59a680ab9dc71e5b4a8601afca5f18"
+      }
+    ],
+    "normal_Wasm_hash_unchanged": true,
+    "normal_Wasm_runtime_reexecuted": false,
+    "input_hashes_unchanged": 138,
+    "test_binary_hash_unchanged": true,
+    "scope": "limited correctness plus exploratory arithmetic; current adapter NOT accepted for matches/full-success clock; finite observations and old deviations retained"
+  },
+  "stop": {
+    "stop_UTC": "2026-10-01T01:50:22.176141+00:00",
+    "last_monitored_job_end": "2026-10-01T01:49:47.999615+00:00",
+    "reason": "NN/browser/binary previously stopped; one CPU0 static audit retry then all processing stopped",
+    "all_tracked_PID0": true,
+    "remaining_count": 0,
+    "remaining": [],
+    "tracked_identities": [
+      {
+        "pid": 826587,
+        "start_ticks": 7187732
+      },
+      {
+        "pid": 826075,
+        "start_ticks": 7179746
+      },
+      {
+        "pid": 826090,
+        "start_ticks": 7179791
+      },
+      {
+        "pid": 826099,
+        "start_ticks": 7179867
+      },
+      {
+        "pid": 826100,
+        "start_ticks": 7179867
+      },
+      {
+        "pid": 826121,
+        "start_ticks": 7179935
+      },
+      {
+        "pid": 826128,
+        "start_ticks": 7179939
+      },
+      {
+        "pid": 826139,
+        "start_ticks": 7179944
+      },
+      {
+        "pid": 826166,
+        "start_ticks": 7179975
+      },
+      {
+        "pid": 826173,
+        "start_ticks": 7179980
+      },
+      {
+        "pid": 826174,
+        "start_ticks": 7179980
+      },
+      {
+        "pid": 825661,
+        "start_ticks": 7172714
+      },
+      {
+        "pid": 825673,
+        "start_ticks": 7172755
+      },
+      {
+        "pid": 825681,
+        "start_ticks": 7172778
+      },
+      {
+        "pid": 825682,
+        "start_ticks": 7172778
+      },
+      {
+        "pid": 825701,
+        "start_ticks": 7172796
+      },
+      {
+        "pid": 825706,
+        "start_ticks": 7172797
+      },
+      {
+        "pid": 825719,
+        "start_ticks": 7172807
+      },
+      {
+        "pid": 825740,
+        "start_ticks": 7172837
+      },
+      {
+        "pid": 825747,
+        "start_ticks": 7172843
+      },
+      {
+        "pid": 825749,
+        "start_ticks": 7172843
+      },
+      {
+        "pid": 825388,
+        "start_ticks": 7166777
+      },
+      {
+        "pid": 825389,
+        "start_ticks": 7166778
+      },
+      {
+        "pid": 823759,
+        "start_ticks": 7145169
+      },
+      {
+        "pid": 827382,
+        "start_ticks": 7201701
+      },
+      {
+        "pid": 823185,
+        "start_ticks": 7141097
+      },
+      {
+        "pid": 827380,
+        "start_ticks": 7201692
+      },
+      {
+        "pid": 826602,
+        "start_ticks": 7187847
+      },
+      {
+        "pid": 826614,
+        "start_ticks": 7187887
+      },
+      {
+        "pid": 826621,
+        "start_ticks": 7187907
+      },
+      {
+        "pid": 826622,
+        "start_ticks": 7187907
+      },
+      {
+        "pid": 826647,
+        "start_ticks": 7187961
+      },
+      {
+        "pid": 826656,
+        "start_ticks": 7187962
+      },
+      {
+        "pid": 826665,
+        "start_ticks": 7187970
+      },
+      {
+        "pid": 826692,
+        "start_ticks": 7187999
+      },
+      {
+        "pid": 826699,
+        "start_ticks": 7188004
+      },
+      {
+        "pid": 826700,
+        "start_ticks": 7188004
+      },
+      {
+        "pid": 823761,
+        "start_ticks": 7145182
+      }
+    ],
+    "observed_peak_RSS_bytes": 2214318080,
+    "current_owned_logical_bytes": 2567744,
+    "tracked_CPU_seconds": 73.81,
+    "runtime_affinity": [
+      2
+    ],
+    "static_affinity": [
+      0
+    ],
+    "CPU_guards_failed": [],
+    "RSS_guard": 2684354560,
+    "storage_guard": 117440512,
+    "processing_deadline_met": true,
+    "no_new_runtime_after": "2026-10-01T01:55:00Z",
+    "new_build_download_training_GPU_matches": 0,
+    "NN_after_stop": false,
+    "ports_created": 0,
+    "own_temp_residue": [],
+    "other_kills": 0,
+    "missing_peak_limit": "50ms finite observation cannot guarantee short-lived peaks; host/SMT background not proven absent",
+    "prior_runtime_stop": "runtime-stopped-initial.json",
+    "NN_after_initial_stop": false,
+    "own_failures": [
+      {
+        "job": "prelim-numeric",
+        "exit": 1,
+        "cause": "critic referenced nonexistent old terminal field; fixed to golden",
+        "retry": 1
+      },
+      {
+        "job": "final-audit",
+        "exit": 1,
+        "cause": "critic assumed exactly2 original B0 lines instead of 5; compare fixed first rules/search output",
+        "retry": 1
+      }
+    ]
+  },
+  "authorization": {
+    "UTC": "2026-10-01T01:39:08.902411+00:00",
+    "coordinator_runtime_steer_received": true,
+    "writer_final_PID0_verified": true,
+    "manifest_sha256": "cde86343753c09be704ff2d02f45e2e484689ab8f78df2a8de13444cbc03c4ae",
+    "source_write_stop": "2026-10-01T01:34:32.105040+00:00",
+    "tracked_identities": 223,
+    "remaining": [],
+    "old_stop_alone_not_used": true,
+    "final_hash_checks": 138
+  },
+  "static": {
+    "classification": "PRELIMINARY LIVE COPY only; NOT final accepted runtime input",
+    "source": "preliminary-hashes.json",
+    "supports": [
+      {
+        "finding": "owned path/context/legal/generation/token; unfinished evaluation not backed up",
+        "source": "src/kernel.rs:580-697",
+        "scope": "nodes/link allocation may occur before reply, completed simulations/visits/value wait for resume; terminal steps need no NN"
+      },
+      {
+        "finding": "resume takes pending once and validates shape/finite/range/legal weights; failures cancel search",
+        "source": "src/kernel.rs:701-764 and src/lib.rs:266-293"
+      },
+      {
+        "finding": "worker checks before NN and after async evaluation; queued cancel changes generation; stale response receiver rejects",
+        "source": "worker.js:1-24"
+      },
+      {
+        "finding": "host copies bytes and verifies SHA, ORT wasm numThreads1/proxyfalse configured before session",
+        "source": "host.js:1-22"
+      }
+    ],
+    "limitations": [
+      "Existing spy assert_eq on floats is not a general signed-zero bitwise proof. Actual tested constant spy values must be qualified.",
+      "Continuation/JSON ownership allocations not included in copied arena estimate; real OOM not tested.",
+      "Raw FFI handle as_u64 as_u32 truncation and model attestation bypass not malicious-caller safety proof.",
+      "zip-based producer gates may omit missing rows/elements; own checker validates counts/shape before tolerance.",
+      "GUARD after begin crosses T-g discards completed prior tree; this is refusal, not successful fallback.",
+      "01:08 old runtime-stopped cannot authorize final runtime."
+    ],
+    "independent_checker_failure": [
+      {
+        "job": "prelim-numeric",
+        "cause": "critic requested terminal key absent in .15 raw; corrected to fixed golden side_to_move_value",
+        "retry_count": 1,
+        "evidence": "stage/prelim-numeric.log and check-numeric-attempt1.py"
+      }
+    ]
+  },
+  "verdict": {
+    "correctness": "limited supports for frozen tested pending/ORT path",
+    "current_timer_adapter": "no-go for new matched games/full success clock gate; GUARD refusals preserved",
+    "strength_speed_adoption": "unproven; no new match"
+  },
+  "saved_tests": {
+    "passed": 9,
+    "log": "stage/saved-tests.log",
+    "process": "stage/saved-tests.process.json",
+    "hash_provenance": "test-binary-provenance.json",
+    "compiled_source_link": "compiled-source-link.json"
+  },
+  "reproduction": [
+    "UV_NO_SYNC=1 UV_OFFLINE=1 PYTHONDONTWRITEBYTECODE=1 ARENA_CPU=2 taskset -c 2 python3 -B stage/runner.py saved-tests python3 -B ABS/stage/run-saved-tests.py",
+    "same runner numeric-runtime/fixed-runtime/boundary-runtime node ABS/stage/browser.cjs numeric/fixed/boundary independent",
+    "same runner tree-check node ABS/stage/check-trees.cjs ABS/browser-fixed-independent.json",
+    "check-numeric.py ABS/browser-numeric-independent.json runtime; check-latency.py ABS/SIGMA-ORT-SEARCH final; final-audit.py"
+  ],
+  "source_patches": "runtime-copy-patches.json and stage/*.patch",
+  "input_hashes": "input-before-final.json / input-after-final.json",
+  "past_failures_and_deviations_retained": true
+}

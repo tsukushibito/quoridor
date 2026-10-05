@@ -1,0 +1,1100 @@
+{
+  "issue": "quoridor-4lc.221",
+  "mode": "graph-r1",
+  "planned_games": 48,
+  "status_counts": {
+    "GOAL": 48
+  },
+  "Rpolicy": 1554,
+  "Rz": 1554,
+  "Rjoint": 1554,
+  "unknown_z_rows": 0,
+  "allattempt_jobwall_s": 84.954612621048,
+  "rates": {
+    "Rpolicy": 18.29212036940049,
+    "Rz": 18.29212036940049,
+    "Rjoint": 18.29212036940049,
+    "games": 0.5650075789776213
+  },
+  "actual_NN": 81204,
+  "logical_worker_NN": 81096,
+  "startup": 0,
+  "terminal_noNN": 18360,
+  "discarded": 0,
+  "batch": {
+    "started": 81096,
+    "returned": 81096,
+    "resumed": 81096,
+    "discarded": 0,
+    "rejected_queued": 0,
+    "batches": [
+      {
+        "size": 2,
+        "sent_ms": 5530.909048,
+        "received_ms": 5533.94889,
+        "queue_ms": [
+          0.4256840000007287,
+          0.1542810000000827
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 5535.454241,
+        "received_ms": 5539.342565,
+        "queue_ms": [
+          1.841892000000371,
+          1.8134880000006888,
+          1.6760790000007546,
+          1.6628960000007282,
+          1.6533210000006875,
+          1.6445870000006835,
+          0.12463200000001962,
+          0.01363500000024942
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 5539.391723,
+        "received_ms": 5543.433919,
+        "queue_ms": [
+          3.761680999999953,
+          3.6629949999996825,
+          2.097817999999279,
+          2.086515999999392,
+          2.079131999999845,
+          2.067377999999735,
+          1.2926669999997102,
+          1.224617999999282
+        ]
+      },
+      {
+        "size": 5,
+        "sent_ms": 5543.689113,
+        "received_ms": 5546.577197,
+        "queue_ms": [
+          2.8889790000002904,
+          1.950861000000259,
+          1.8383220000005167,
+          1.0495479999999588,
+          0.9345970000003945
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 5546.965518,
+        "received_ms": 5551.185081,
+        "queue_ms": [
+          0.1891429999996035,
+          0.1714929999998276,
+          0.16408200000023498,
+          0.157734000000346,
+          0.030980999999883352,
+          0.023218999999699008,
+          0.018172000000049593,
+          0.012423999999555235
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 5551.203667,
+        "received_ms": 5554.707493,
+        "queue_ms": [
+          4.106606999999713,
+          4.098656999999548,
+          4.09331899999961,
+          4.087362999999641,
+          3.968479999999545,
+          3.962203999999474,
+          3.955855999999585,
+          3.9498929999999746
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 5554.719339,
+        "received_ms": 5558.477488,
+        "queue_ms": [
+          7.455415000000357,
+          7.449963000000025,
+          7.44399599999997,
+          6.425212000000101,
+          6.3911809999999605,
+          6.165737000000263,
+          5.442277000000104,
+          5.32086100000015
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 5558.49326,
+        "received_ms": 5562.376991,
+        "queue_ms": [
+          3.497602999999799,
+          3.48498600000039,
+          3.4766779999999926,
+          3.4713440000004994,
+          3.401850000000195,
+          3.3957510000000184,
+          3.390781000000061,
+          3.3860560000002806
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 5562.392184,
+        "received_ms": 5566.190245,
+        "queue_ms": [
+          6.471992000000682,
+          5.950507000000471,
+          5.873153999999886,
+          5.695222000000285,
+          5.669789999999921,
+          5.012422000000697,
+          4.979863000000478,
+          4.831697000000531
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 5566.207692,
+        "received_ms": 5569.772817,
+        "queue_ms": [
+          6.5976339999997435,
+          6.02612500000032,
+          5.890172000000348,
+          5.433108000000175,
+          4.148879000000306,
+          4.067164000000048,
+          4.058183999999528,
+          4.049089999999524
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 5569.788953,
+        "received_ms": 5573.414682,
+        "queue_ms": [
+          5.716293999999834,
+          5.680750999999873,
+          5.499615000000631,
+          5.469441000000188,
+          4.913800000000265,
+          4.811305000000175,
+          4.6938890000001265,
+          4.543062000000646
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 5573.427426,
+        "received_ms": 5577.040329,
+        "queue_ms": [
+          5.935019999999895,
+          5.385229000000436,
+          5.326472000000649,
+          5.269422000000304,
+          5.19948900000054,
+          5.181279000000359,
+          5.0687699999998586,
+          4.48585600000024
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 5577.054437,
+        "received_ms": 5581.224451,
+        "queue_ms": [
+          5.61015899999984,
+          5.49074599999949,
+          5.436461999999665,
+          5.229150999999547,
+          5.044949000000088,
+          4.849476999999752,
+          4.130493999999999,
+          4.044433999999455
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 5581.236602,
+        "received_ms": 5585.112706,
+        "queue_ms": [
+          3.0509140000003754,
+          2.970083000000159,
+          2.844959000000017,
+          2.556015999999545,
+          2.3011489999998958,
+          2.1536880000003293,
+          1.959404000000177,
+          1.5844909999996162
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 5585.126153,
+        "received_ms": 5591.914163,
+        "queue_ms": [
+          5.355950000000121,
+          5.327353000000585,
+          5.17974200000026,
+          5.009431999999833,
+          4.378953000000365,
+          4.2518019999997705,
+          0.46153700000013487,
+          0.45092399999975896
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 5591.931778,
+        "received_ms": 5595.586268,
+        "queue_ms": [
+          7.200340000000324,
+          7.19499900000028,
+          7.190279000000373,
+          7.185534000000189,
+          7.131123000000116,
+          7.126396999999997,
+          7.121799999999894,
+          7.1170890000003055
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "identity": {
+          "run_id": "throughput221-phase2-graph-r1",
+          "worker_id": "w2",
+          "game_id": "native221-game-001",
+          "generation": 1,
+          "handle": 1,
+          "token": 1,
+          "request_id": "w2:1"
+        },
+        "wire_id": "nn0.1",
+        "started_ms": 5530.909048,
+        "returned_ms": 5533.94889,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-phase2-graph-r1",
+          "worker_id": "w2",
+          "game_id": "native221-game-004",
+          "generation": 2,
+          "handle": 2,
+          "token": 1,
+          "request_id": "w2:2"
+        },
+        "wire_id": "nn0.2",
+        "started_ms": 5530.909048,
+        "returned_ms": 5533.94889,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-phase2-graph-r1",
+          "worker_id": "w2",
+          "game_id": "native221-game-007",
+          "generation": 3,
+          "handle": 3,
+          "token": 1,
+          "request_id": "w2:3"
+        },
+        "wire_id": "nn0.3",
+        "started_ms": 5535.454241,
+        "returned_ms": 5539.342565,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-phase2-graph-r1",
+          "worker_id": "w2",
+          "game_id": "native221-game-010",
+          "generation": 4,
+          "handle": 4,
+          "token": 1,
+          "request_id": "w2:4"
+        },
+        "wire_id": "nn0.4",
+        "started_ms": 5535.454241,
+        "returned_ms": 5539.342565,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-phase2-graph-r1",
+          "worker_id": "w2",
+          "game_id": "native221-game-013",
+          "generation": 5,
+          "handle": 5,
+          "token": 1,
+          "request_id": "w2:5"
+        },
+        "wire_id": "nn0.5",
+        "started_ms": 5535.454241,
+        "returned_ms": 5539.342565,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-phase2-graph-r1",
+          "worker_id": "w2",
+          "game_id": "native221-game-016",
+          "generation": 6,
+          "handle": 6,
+          "token": 1,
+          "request_id": "w2:6"
+        },
+        "wire_id": "nn0.6",
+        "started_ms": 5535.454241,
+        "returned_ms": 5539.342565,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-phase2-graph-r1",
+          "worker_id": "w2",
+          "game_id": "native221-game-019",
+          "generation": 7,
+          "handle": 7,
+          "token": 1,
+          "request_id": "w2:7"
+        },
+        "wire_id": "nn0.7",
+        "started_ms": 5535.454241,
+        "returned_ms": 5539.342565,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-phase2-graph-r1",
+          "worker_id": "w2",
+          "game_id": "native221-game-022",
+          "generation": 8,
+          "handle": 8,
+          "token": 1,
+          "request_id": "w2:8"
+        },
+        "wire_id": "nn0.8",
+        "started_ms": 5535.454241,
+        "returned_ms": 5539.342565,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-phase2-graph-r1",
+          "worker_id": "w4",
+          "game_id": "native221-game-002",
+          "generation": 1,
+          "handle": 1,
+          "token": 1,
+          "request_id": "w4:1"
+        },
+        "wire_id": "nn0.9",
+        "started_ms": 5535.454241,
+        "returned_ms": 5539.342565,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-phase2-graph-r1",
+          "worker_id": "w2",
+          "game_id": "native221-game-001",
+          "generation": 1,
+          "handle": 1,
+          "token": 2,
+          "request_id": "w2:9"
+        },
+        "wire_id": "nn0.10",
+        "started_ms": 5535.454241,
+        "returned_ms": 5539.342565,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-phase2-graph-r1",
+          "worker_id": "w2",
+          "game_id": "native221-game-004",
+          "generation": 2,
+          "handle": 2,
+          "token": 2,
+          "request_id": "w2:10"
+        },
+        "wire_id": "nn0.11",
+        "started_ms": 5539.391723,
+        "returned_ms": 5543.433919,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-phase2-graph-r1",
+          "worker_id": "w4",
+          "game_id": "native221-game-005",
+          "generation": 2,
+          "handle": 2,
+          "token": 1,
+          "request_id": "w4:2"
+        },
+        "wire_id": "nn0.12",
+        "started_ms": 5539.391723,
+        "returned_ms": 5543.433919,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-phase2-graph-r1",
+          "worker_id": "w4",
+          "game_id": "native221-game-008",
+          "generation": 3,
+          "handle": 3,
+          "token": 1,
+          "request_id": "w4:3"
+        },
+        "wire_id": "nn0.13",
+        "started_ms": 5539.391723,
+        "returned_ms": 5543.433919,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-phase2-graph-r1",
+          "worker_id": "w4",
+          "game_id": "native221-game-011",
+          "generation": 4,
+          "handle": 4,
+          "token": 1,
+          "request_id": "w4:4"
+        },
+        "wire_id": "nn0.14",
+        "started_ms": 5539.391723,
+        "returned_ms": 5543.433919,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-phase2-graph-r1",
+          "worker_id": "w4",
+          "game_id": "native221-game-014",
+          "generation": 5,
+          "handle": 5,
+          "token": 1,
+          "request_id": "w4:5"
+        },
+        "wire_id": "nn0.15",
+        "started_ms": 5539.391723,
+        "returned_ms": 5543.433919,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-phase2-graph-r1",
+          "worker_id": "w4",
+          "game_id": "native221-game-017",
+          "generation": 6,
+          "handle": 6,
+          "token": 1,
+          "request_id": "w4:6"
+        },
+        "wire_id": "nn0.16",
+        "started_ms": 5539.391723,
+        "returned_ms": 5543.433919,
+        "discarded": false
+      }
+    ],
+    "max_pending_games": 24,
+    "batch_histogram": [
+      0,
+      1909,
+      615,
+      657,
+      561,
+      388,
+      290,
+      242,
+      8546
+    ],
+    "queue_ms_sum": 520630.66909100063,
+    "queue_ms_max": 43.03347399999984,
+    "provider_pipe_ms": 67308.69885700045
+  },
+  "providerCost": {
+    "batches": 13208,
+    "server_before_JSON_ms": 47422.98323800014,
+    "JSON_encode_firstpass_ms": 2677.0599880000073,
+    "stages": {
+      "input_parse_ms": 5671.78292699997,
+      "H2D_sync_ms": 4778.352393000012,
+      "forward_sync_ms": 29369.231972000023,
+      "D2H_sync_ms": 3234.171205000003
+    }
+  },
+  "providerStop": {
+    "sample_cap": 250000,
+    "wire_totals_ms": {
+      "json_parse": 2463.0056419999937,
+      "json_encode_firstpass": 2677.0914490000073,
+      "stdout_write": 9293.961201000031
+    },
+    "private_issue": "quoridor-4lc.221",
+    "modelhash": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+    "provider": "torch-folded-CUDAgraph-B1to8-v1",
+    "graph_startup_samples": 108,
+    "graph_capture_warm_seconds": 0.3884081110591069,
+    "captured_B": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "original_ONNX_batch": 1,
+    "batch_min": 1,
+    "batch_max": 8,
+    "dtype": "float32",
+    "TF32": false,
+    "AMP": false,
+    "torch": "2.14.0+cu130",
+    "ORT": "1.30.0",
+    "device": "NVIDIA GeForce RTX 3060",
+    "threads": [
+      1,
+      1
+    ],
+    "CPU_affinity": [
+      0
+    ],
+    "coldinit_s": {
+      "import": 0.8170372990425676,
+      "CPUORT_session": 0.020818468008656055,
+      "graph_weights": 0.04823498195037246,
+      "CUDA_upload_context": 0.18040261400165036
+    },
+    "single_sample_equivalent": 81204,
+    "calls": {
+      "cuda": 13208,
+      "eager": 0,
+      "cpuort": 0
+    },
+    "rows": {
+      "cuda": 81096,
+      "eager": 0,
+      "cpuort": 0
+    },
+    "RAM_peak_KiB": 1188800,
+    "GPU_allocated_B": 88442368,
+    "GPU_reserved_B": 369098752,
+    "GPU_peak_allocated_B": 91408384,
+    "GPU_peak_reserved_B": 369098752,
+    "pipe": {
+      "calls": 13210,
+      "requestBytes": 307007981,
+      "responseBytes": 161533141,
+      "timings": {
+        "serialize_ms": 694.8428400003645,
+        "parse_ms": 610.434267000327,
+        "write_callback_ms": 4498.916762999607
+      }
+    },
+    "exit": {
+      "code": null,
+      "signal": "SIGTERM",
+      "pid": 4173067
+    }
+  },
+  "worker_spans": [
+    {
+      "usedNN": 28226,
+      "startup_NN": 0,
+      "raw_record_ms": 256.881424000009,
+      "search_ms": 402832.49472,
+      "IPC_send_ms": 417.4786229992868,
+      "API_ms": 0,
+      "pipe_ms": 0,
+      "exits": [
+        {
+          "code": 0,
+          "signal": null,
+          "pid": 4173120
+        }
+      ],
+      "bridge": {
+        "calls": 64810,
+        "request_bytes": 32806322,
+        "response_bytes": 187165470,
+        "timings": {
+          "serialize_ms": 217.6094860006839,
+          "parse_ms": 468.1075369990994,
+          "write_callback_ms": 1701.801891998948
+        }
+      },
+      "zero": {
+        "handles": 0,
+        "pending": 0,
+        "waits": 0
+      }
+    },
+    {
+      "usedNN": 27907,
+      "startup_NN": 0,
+      "raw_record_ms": 299.34457999996687,
+      "search_ms": 392028.81685200037,
+      "IPC_send_ms": 391.49552499975476,
+      "API_ms": 0,
+      "pipe_ms": 0,
+      "exits": [
+        {
+          "code": 0,
+          "signal": null,
+          "pid": 4173121
+        }
+      ],
+      "bridge": {
+        "calls": 64559,
+        "request_bytes": 32506073,
+        "response_bytes": 191660973,
+        "timings": {
+          "serialize_ms": 203.89868599963074,
+          "parse_ms": 451.6734199997985,
+          "write_callback_ms": 1707.3852209996296
+        }
+      },
+      "zero": {
+        "handles": 0,
+        "pending": 0,
+        "waits": 0
+      }
+    },
+    {
+      "usedNN": 24963,
+      "startup_NN": 0,
+      "raw_record_ms": 375.73994400001857,
+      "search_ms": 359860.97292600037,
+      "IPC_send_ms": 328.7435219997073,
+      "API_ms": 0,
+      "pipe_ms": 0,
+      "exits": [
+        {
+          "code": 0,
+          "signal": null,
+          "pid": 4173122
+        }
+      ],
+      "bridge": {
+        "calls": 57399,
+        "request_bytes": 28974006,
+        "response_bytes": 172394894,
+        "timings": {
+          "serialize_ms": 179.01816400083365,
+          "parse_ms": 400.87010999966583,
+          "write_callback_ms": 1644.3788240000904
+        }
+      },
+      "zero": {
+        "handles": 0,
+        "pending": 0,
+        "waits": 0
+      }
+    }
+  ],
+  "sampled_peak_RSS": 2294341632,
+  "all_slot_plies": [
+    {
+      "id": "native221-game-001",
+      "status": "GOAL",
+      "total_ply": 39,
+      "new_rows": 31,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-002",
+      "status": "GOAL",
+      "total_ply": 73,
+      "new_rows": 61,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-003",
+      "status": "GOAL",
+      "total_ply": 64,
+      "new_rows": 48,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-004",
+      "status": "GOAL",
+      "total_ply": 40,
+      "new_rows": 20,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-005",
+      "status": "GOAL",
+      "total_ply": 49,
+      "new_rows": 25,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-006",
+      "status": "GOAL",
+      "total_ply": 54,
+      "new_rows": 26,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-007",
+      "status": "GOAL",
+      "total_ply": 66,
+      "new_rows": 58,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-008",
+      "status": "GOAL",
+      "total_ply": 63,
+      "new_rows": 51,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-009",
+      "status": "GOAL",
+      "total_ply": 54,
+      "new_rows": 38,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-010",
+      "status": "GOAL",
+      "total_ply": 34,
+      "new_rows": 14,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-011",
+      "status": "GOAL",
+      "total_ply": 39,
+      "new_rows": 15,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-012",
+      "status": "GOAL",
+      "total_ply": 51,
+      "new_rows": 23,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-013",
+      "status": "GOAL",
+      "total_ply": 52,
+      "new_rows": 44,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-014",
+      "status": "GOAL",
+      "total_ply": 64,
+      "new_rows": 52,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-015",
+      "status": "GOAL",
+      "total_ply": 59,
+      "new_rows": 43,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-016",
+      "status": "GOAL",
+      "total_ply": 50,
+      "new_rows": 30,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-017",
+      "status": "GOAL",
+      "total_ply": 39,
+      "new_rows": 15,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-018",
+      "status": "GOAL",
+      "total_ply": 56,
+      "new_rows": 28,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-019",
+      "status": "GOAL",
+      "total_ply": 58,
+      "new_rows": 50,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-020",
+      "status": "GOAL",
+      "total_ply": 65,
+      "new_rows": 53,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-021",
+      "status": "GOAL",
+      "total_ply": 59,
+      "new_rows": 43,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-022",
+      "status": "GOAL",
+      "total_ply": 43,
+      "new_rows": 23,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-023",
+      "status": "GOAL",
+      "total_ply": 45,
+      "new_rows": 21,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-024",
+      "status": "GOAL",
+      "total_ply": 46,
+      "new_rows": 18,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-025",
+      "status": "GOAL",
+      "total_ply": 48,
+      "new_rows": 40,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-026",
+      "status": "GOAL",
+      "total_ply": 42,
+      "new_rows": 30,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-027",
+      "status": "GOAL",
+      "total_ply": 51,
+      "new_rows": 35,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-028",
+      "status": "GOAL",
+      "total_ply": 36,
+      "new_rows": 16,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-029",
+      "status": "GOAL",
+      "total_ply": 41,
+      "new_rows": 17,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-030",
+      "status": "GOAL",
+      "total_ply": 43,
+      "new_rows": 15,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-031",
+      "status": "GOAL",
+      "total_ply": 43,
+      "new_rows": 35,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-032",
+      "status": "GOAL",
+      "total_ply": 57,
+      "new_rows": 45,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-033",
+      "status": "GOAL",
+      "total_ply": 41,
+      "new_rows": 25,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-034",
+      "status": "GOAL",
+      "total_ply": 41,
+      "new_rows": 21,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-035",
+      "status": "GOAL",
+      "total_ply": 46,
+      "new_rows": 22,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-036",
+      "status": "GOAL",
+      "total_ply": 49,
+      "new_rows": 21,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-037",
+      "status": "GOAL",
+      "total_ply": 60,
+      "new_rows": 52,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-038",
+      "status": "GOAL",
+      "total_ply": 66,
+      "new_rows": 54,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-039",
+      "status": "GOAL",
+      "total_ply": 57,
+      "new_rows": 41,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-040",
+      "status": "GOAL",
+      "total_ply": 43,
+      "new_rows": 23,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-041",
+      "status": "GOAL",
+      "total_ply": 39,
+      "new_rows": 15,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-042",
+      "status": "GOAL",
+      "total_ply": 46,
+      "new_rows": 18,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-043",
+      "status": "GOAL",
+      "total_ply": 75,
+      "new_rows": 67,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-044",
+      "status": "GOAL",
+      "total_ply": 59,
+      "new_rows": 47,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-045",
+      "status": "GOAL",
+      "total_ply": 53,
+      "new_rows": 37,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-046",
+      "status": "GOAL",
+      "total_ply": 34,
+      "new_rows": 14,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-047",
+      "status": "GOAL",
+      "total_ply": 40,
+      "new_rows": 16,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-game-048",
+      "status": "GOAL",
+      "total_ply": 46,
+      "new_rows": 18,
+      "terminal": true,
+      "unknown_z": false
+    }
+  ],
+  "qualification_replay_rows": 1554,
+  "qualify_wall_s": 0.6984650219999999,
+  "mixed_into_learner": false,
+  "formal_holdout_read": false,
+  "teacher_truth_or_strength": false,
+  "process": {
+    "exit": 0,
+    "stop_reason": null,
+    "current_exact_absent": true
+  }
+}

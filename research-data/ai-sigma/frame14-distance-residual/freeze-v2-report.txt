@@ -1,0 +1,3 @@
+goal quoridor-4lc / 200 immutable candidate freeze v2 -> 201
+新freezeSHA abb6d820af93c44a36ddb6c2a13a12a6711b30e923fd046f454e85fdfcdd62ee。201 connect.py 公開schemaを静的確認し、new_metadata_SHA/reference_metadata_SHAおよびmanifestのmetadata/mask/test_labels*_sha256へ専用evaluator/bindを薄修正。旧未実行freeze v1+sourceはGit f0e81f571bf1b72feda8f32364b5182c37f09701へ保存。候補/係数/重み/科学/val/閾値の変更0、testlabel/新forward0。
+freeze.py bind --manifest (201 canonical-export-r1/dataset-manifest.json) はownerhashのみ、labels本体/hash再計算はtest-freeze後まで0。新testmaskはreference oldtrain96+allval+oldtest label-free OR方式、旧原mask/labelsへ編集0。CPU2 managerに201 runner/generate/export/connect現在identityがあれば計算延期するguardを追加、元resource/deadline増量0。

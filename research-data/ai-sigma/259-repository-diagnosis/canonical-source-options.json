@@ -1,0 +1,89 @@
+{
+  "at": "2026-10-05T03:38:53.731334+00:00",
+  "user_premise": "currently research only; NNUE strongest final goal, Sigma intermediate/reference",
+  "registry_definitions_root": "/workspaces/quoridor",
+  "registry_project_root": "/workspaces/quoridor",
+  "worktrees": [
+    {
+      "path": "/workspaces/quoridor",
+      "branch": "main",
+      "HEAD": "288c325c02e8600fc2f870736fbc48287d585da8",
+      "git_dir": "/workspaces/quoridor/.git",
+      "common_dir": "/workspaces/quoridor/.git"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma",
+      "branch": "codex/ai-sigma",
+      "HEAD": "ba9970a72a9fc89f05e6e9e5a40f0c2eeeffff07",
+      "git_dir": "/workspaces/quoridor/.git/worktrees/ai-sigma",
+      "common_dir": "/workspaces/quoridor/.git"
+    }
+  ],
+  "role_cwds": {
+    "coordinator": null,
+    "hypothesis": null,
+    "experiment": null,
+    "critic": null,
+    "steward": null,
+    "supervisor": null
+  },
+  "runtime_read": {
+    "phase": "stopped",
+    "process": null,
+    "owned": null,
+    "recovery_required": false
+  },
+  "physical_storage_policy": "main host checkout; managed worktrees+Beads shared DB volume, Git common_dir main; actual mount mapping not changed or comprehensively measured",
+  "new_root_observation_received": {
+    "main_modified": 20,
+    "main_untracked": 15,
+    "research_observation_HEAD": "a3d46fd2a1f2f031ccbc4d4ceb0d18b880c089e2",
+    "research_default_index_staged_D": 7621,
+    "note": "root supplied snapshot, not substituted into earlier measurements"
+  },
+  "merge_base": "1482df8da6dd91c95db211aeaa914af775b2bc76",
+  "tree_difference_main_to_research_counts": {
+    "M": 21,
+    "A": 7935,
+    "D": 13
+  },
+  "tree_difference_by_scope": {
+    ".agents": 10,
+    ".artifacts": 527,
+    ".devcontainer": 1,
+    "AGENTS.md": 1,
+    "README.md": 1,
+    "docs": 342,
+    "research-data": 6027,
+    "scripts": 6,
+    "tools": 1054
+  },
+  "existing_non_research_path_change_sample": [
+    {
+      "status": "D",
+      "path": "scripts/dev/research-job.py"
+    },
+    {
+      "status": "D",
+      "path": "scripts/dev/research-job.sh"
+    },
+    {
+      "status": "M",
+      "path": "scripts/dev/research-scheduler.py"
+    },
+    {
+      "status": "D",
+      "path": "scripts/dev/research-scheduler.sh"
+    },
+    {
+      "status": "M",
+      "path": "scripts/dev/research-team.py"
+    },
+    {
+      "status": "D",
+      "path": "scripts/dev/research-team.sh"
+    }
+  ],
+  "tree_compare_is_merge_rehearsal": false,
+  "note": "Current tree comparison only; neither index nor branch changed, no full history audit"
+}

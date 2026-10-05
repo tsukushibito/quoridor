@@ -1,0 +1,10 @@
+{
+  "typed": "CHECKER_WINNER_PREFIX_ASSUMPTION_UNSETTLED",
+  "originalscience_negative": false,
+  "first_difference": "saved final pawn-prefix winner comparison",
+  "failure_stderr": "compute.stderr",
+  "source": "audit-failed-r1.py",
+  "static_conservative_firstcharge_s": 60,
+  "cause": "critic prefix decoder omitted straight jump: unit action lands two steps when opponent occupies adjacent cell",
+  "correction": "independent decoder implements occupancy-based straight jump; source schema static only"
+}

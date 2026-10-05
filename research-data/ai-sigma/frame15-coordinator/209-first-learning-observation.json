@@ -1,0 +1,81 @@
+{
+  "UTC": "2026-10-04T04:16:24.423076+00:00",
+  "source": "hypothesis209 first actual stop report",
+  "condition": "lr1e-3",
+  "start": "2026-10-04T04:13:32.853392Z",
+  "stop": "2026-10-04T04:13:37.737327Z",
+  "pid": 3980843,
+  "tick": "34017983",
+  "exit": 0,
+  "waited": true,
+  "remaining": [],
+  "current_exact_identity_absent": true,
+  "CPU": [
+    2
+  ],
+  "GPU": 0,
+  "wall_s": 4.884356970025692,
+  "peak_RSS": 858189824,
+  "samples": 110210,
+  "steps": 400,
+  "same_old_initial_tensor_SHA_prefix": "e5d218c9",
+  "dense_curve": [
+    {
+      "step": 0,
+      "train_gameMSE": 0.737418315062487,
+      "val_gameMSE": 0.6901755738627967
+    },
+    {
+      "step": 1,
+      "train_gameMSE": 0.7330972904184551,
+      "val_gameMSE": 0.6873891023963424
+    },
+    {
+      "step": 2,
+      "train_gameMSE": 0.7290231819205407,
+      "val_gameMSE": 0.6850677160198712
+    },
+    {
+      "step": 5,
+      "train_gameMSE": 0.7195558745031517,
+      "val_gameMSE": 0.6803827926612639
+    },
+    {
+      "step": 10,
+      "train_gameMSE": 0.7093581723609418,
+      "val_gameMSE": 0.6793539374427167
+    },
+    {
+      "step": 20,
+      "train_gameMSE": 0.6774577580936455,
+      "val_gameMSE": 0.6765819429007335
+    },
+    {
+      "step": 50,
+      "train_gameMSE": 0.3639957130864983,
+      "val_gameMSE": 0.7115249746268552
+    },
+    {
+      "step": 100,
+      "train_gameMSE": 0.10135161315270268,
+      "val_gameMSE": 1.006805151442156
+    },
+    {
+      "step": 200,
+      "train_gameMSE": 0.030859068849989568,
+      "val_gameMSE": 1.04993632197856
+    },
+    {
+      "step": 400,
+      "train_gameMSE": 0.010014408584871815,
+      "val_gameMSE": 1.0374466698803413
+    }
+  ],
+  "judgment": "dense early evaluation reveals temporary validation gain missed by old100-step evaluations; not independenttest or final selection",
+  "remaining_conditions": [
+    0.0001,
+    1e-05
+  ],
+  "additional_conditions": 0,
+  "observer_extra_samples": 0
+}

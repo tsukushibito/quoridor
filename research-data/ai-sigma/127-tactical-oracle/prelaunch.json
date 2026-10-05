@@ -1,0 +1,95 @@
+{
+  "UTC": "2026-10-02T13:59:00.301364+00:00",
+  "old_stop_refs": {
+    "research-data/ai-sigma/125-completed-fpu-independent/runtime-source-stopped-before-report.json": "055a75d23f1580a415c180c2931eea26104e8912d643c452fd723273864b65eb",
+    "research-data/ai-sigma/126-same-input-budget/runtime-source-stopped-before-report.json": "e70033ada52257106b227450432dc5516663de278b71115ea2a5ab70e13bb5b8"
+  },
+  "recorded_identities_examined": 81,
+  "same_identity_live": [],
+  "external_heavy_or_chrome": [],
+  "readerrors": [],
+  "hostmemory": {
+    "MemTotal": 25199964160,
+    "MemAvailable": 20835942400
+  },
+  "contract_RAM_B": 6442450944,
+  "prior_holding_conservative_B": 6164480,
+  "unknown_old_not_deducted": true,
+  "launch_admitted": true,
+  "known_nonresearch_service_classification": [
+    {
+      "PID": 1,
+      "starttick": 103415,
+      "name": "docker-init",
+      "uid": 0,
+      "argv0": "/sbin/docker-init",
+      "basis": "container-init/shell/keepalive or SSH service status+argv read; no NN interpreter; children scanned separately"
+    },
+    {
+      "PID": 7,
+      "starttick": 103481,
+      "name": "sh",
+      "uid": 0,
+      "argv0": "/bin/sh",
+      "basis": "container-init/shell/keepalive or SSH service status+argv read; no NN interpreter; children scanned separately"
+    },
+    {
+      "PID": 22,
+      "starttick": 103536,
+      "name": "sh",
+      "uid": 0,
+      "argv0": "/bin/sh",
+      "basis": "container-init/shell/keepalive or SSH service status+argv read; no NN interpreter; children scanned separately"
+    },
+    {
+      "PID": 28,
+      "starttick": 103539,
+      "name": "sh",
+      "uid": 0,
+      "argv0": "/bin/sh",
+      "basis": "container-init/shell/keepalive or SSH service status+argv read; no NN interpreter; children scanned separately"
+    },
+    {
+      "PID": 106,
+      "starttick": 103567,
+      "name": "sh",
+      "uid": 0,
+      "argv0": "/bin/sh",
+      "basis": "container-init/shell/keepalive or SSH service status+argv read; no NN interpreter; children scanned separately"
+    },
+    {
+      "PID": 707,
+      "starttick": 103774,
+      "name": "sshd",
+      "uid": 0,
+      "argv0": "sshd: /usr/sbin/sshd [listener] 0 of 10-100 startups",
+      "basis": "container-init/shell/keepalive or SSH service status+argv read; no NN interpreter; children scanned separately"
+    },
+    {
+      "PID": 244792,
+      "starttick": 1555035,
+      "name": "sshd",
+      "uid": 0,
+      "argv0": "sshd: vscode [priv]",
+      "basis": "container-init/shell/keepalive or SSH service status+argv read; no NN interpreter; children scanned separately"
+    },
+    {
+      "PID": 244798,
+      "starttick": 1555041,
+      "name": "sshd",
+      "uid": 1000,
+      "argv0": "sshd: vscode@notty",
+      "basis": "container-init/shell/keepalive or SSH service status+argv read; no NN interpreter; children scanned separately"
+    },
+    {
+      "PID": 2574392,
+      "starttick": 20245398,
+      "name": "sleep",
+      "uid": 0,
+      "argv0": "sleep",
+      "basis": "container-init/shell/keepalive or SSH service status+argv read; no NN interpreter; children scanned separately"
+    }
+  ],
+  "old_permission_failures_retained": "prelaunch-r1-failed.json",
+  "guard_revision": "classifyexplicitnonresearchservices from readable status+argv before NN-executable read; all unknown/interpreter exe errors stillrefuse"
+}

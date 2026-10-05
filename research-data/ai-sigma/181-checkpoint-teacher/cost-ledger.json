@@ -1,0 +1,185 @@
+{
+  "issue": "quoridor-4lc.181",
+  "attempts": [
+    {
+      "run": "native181-learn-r1",
+      "phase": "learn",
+      "start": "2026-10-03T11:23:11.438165+00:00",
+      "end": "2026-10-03T11:23:15.583616+00:00",
+      "wall_seconds": 4.145451,
+      "exit": 0,
+      "stop_reason": null,
+      "peak_RSS": 818679808,
+      "final_allocated_bytes": 36925440,
+      "remaining": [],
+      "unknown": [],
+      "command": [
+        "node",
+        "--max-old-space-size=256",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-native-checkpoint-teacher/learn-control.cjs",
+        "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/181-checkpoint-teacher/native181-learn-r1-config.json"
+      ],
+      "receipt": ".artifacts/ai-sigma/resume-20261003/CHECKPOINT-TEACHER/runs/native181-learn-r1.process.json"
+    },
+    {
+      "run": "native181-measure-r1",
+      "phase": "arena",
+      "start": "2026-10-03T11:07:18.544401+00:00",
+      "end": "2026-10-03T11:10:28.723906+00:00",
+      "wall_seconds": 190.179505,
+      "exit": 0,
+      "stop_reason": null,
+      "peak_RSS": 954568704,
+      "final_allocated_bytes": 4067328,
+      "remaining": [],
+      "unknown": [],
+      "command": [
+        "node",
+        "--max-old-space-size=256",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-native-checkpoint-teacher/measure.cjs",
+        "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/181-checkpoint-teacher/native181-measure-r1-config.json"
+      ],
+      "receipt": ".artifacts/ai-sigma/resume-20261003/CHECKPOINT-TEACHER/runs/native181-measure-r1.process.json"
+    },
+    {
+      "run": "native181-mock-r1",
+      "phase": "mock",
+      "start": "2026-10-03T10:59:48.517338+00:00",
+      "end": "2026-10-03T10:59:48.735023+00:00",
+      "wall_seconds": 0.217685,
+      "exit": 0,
+      "stop_reason": null,
+      "peak_RSS": 129114112,
+      "final_allocated_bytes": 819200,
+      "remaining": [],
+      "unknown": [],
+      "command": [
+        "node",
+        "--max-old-space-size=256",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-native-checkpoint-teacher/mock.cjs",
+        "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/181-checkpoint-teacher/native181-mock-r1-config.json"
+      ],
+      "receipt": ".artifacts/ai-sigma/resume-20261003/CHECKPOINT-TEACHER/runs/native181-mock-r1.process.json"
+    },
+    {
+      "run": "native181-mock-r2",
+      "phase": "mock",
+      "start": "2026-10-03T11:01:12.620470+00:00",
+      "end": "2026-10-03T11:01:12.916552+00:00",
+      "wall_seconds": 0.296082,
+      "exit": 1,
+      "stop_reason": null,
+      "peak_RSS": 139460608,
+      "final_allocated_bytes": 860160,
+      "remaining": [],
+      "unknown": [],
+      "command": [
+        "node",
+        "--max-old-space-size=256",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-native-checkpoint-teacher/mock.cjs",
+        "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/181-checkpoint-teacher/native181-mock-r2-config.json"
+      ],
+      "receipt": ".artifacts/ai-sigma/resume-20261003/CHECKPOINT-TEACHER/runs/native181-mock-r2.process.json"
+    },
+    {
+      "run": "native181-mock-r3",
+      "phase": "mock",
+      "start": "2026-10-03T11:02:30.982085+00:00",
+      "end": "2026-10-03T11:02:31.287730+00:00",
+      "wall_seconds": 0.305645,
+      "exit": 1,
+      "stop_reason": null,
+      "peak_RSS": 129347584,
+      "final_allocated_bytes": 917504,
+      "remaining": [],
+      "unknown": [],
+      "command": [
+        "node",
+        "--max-old-space-size=256",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-native-checkpoint-teacher/mock.cjs",
+        "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/181-checkpoint-teacher/native181-mock-r3-config.json"
+      ],
+      "receipt": ".artifacts/ai-sigma/resume-20261003/CHECKPOINT-TEACHER/runs/native181-mock-r3.process.json"
+    },
+    {
+      "run": "native181-mock-r4",
+      "phase": "mock",
+      "start": "2026-10-03T11:03:59.915675+00:00",
+      "end": "2026-10-03T11:04:00.223830+00:00",
+      "wall_seconds": 0.308155,
+      "exit": 0,
+      "stop_reason": null,
+      "peak_RSS": 129396736,
+      "final_allocated_bytes": 1011712,
+      "remaining": [],
+      "unknown": [],
+      "command": [
+        "node",
+        "--max-old-space-size=256",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-native-checkpoint-teacher/mock.cjs",
+        "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/181-checkpoint-teacher/native181-mock-r4-config.json"
+      ],
+      "receipt": ".artifacts/ai-sigma/resume-20261003/CHECKPOINT-TEACHER/runs/native181-mock-r4.process.json"
+    },
+    {
+      "run": "native181-production-r1",
+      "phase": "generate",
+      "start": "2026-10-03T11:16:53.734180+00:00",
+      "end": "2026-10-03T11:20:09.026620+00:00",
+      "wall_seconds": 195.29244,
+      "exit": 0,
+      "stop_reason": null,
+      "peak_RSS": 1469046784,
+      "final_allocated_bytes": 34033664,
+      "remaining": [],
+      "unknown": [],
+      "command": [
+        "node",
+        "--max-old-space-size=256",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-native-checkpoint-teacher/generate.cjs",
+        "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/181-checkpoint-teacher/native181-production-r1-config.json"
+      ],
+      "receipt": ".artifacts/ai-sigma/resume-20261003/CHECKPOINT-TEACHER/runs/native181-production-r1.process.json"
+    }
+  ],
+  "recorded_all_guardian_jobwall_seconds": 390.744963,
+  "heavy_budget_seconds": 1800,
+  "search_hand_NN": 98987,
+  "hand_NN_budget": 240000,
+  "startup_NN_separate": 12,
+  "learner_ONNX_check_forward_rows_separate": 10,
+  "conditional_K64_benchmark_games": 6,
+  "conditional_benchmark_started": 0,
+  "conditional_benchmark_reason": "Prospective checkpoint adoption criterion unmet; all six NOT_STARTED",
+  "production_Rpolicy": 1353,
+  "production_Rz": 1353,
+  "production_Rjoint": 1353,
+  "production_all_jobwall_seconds": 195.292,
+  "production_export_seconds": 0.692880960047245,
+  "learner_whole_python_seconds": 1.9497693559969775,
+  "learner_whole_python_is_nested_in_guardian_jobwall": true,
+  "preparation_opening_generation_seconds": null,
+  "analysis_seconds": null,
+  "Git_pack_backup_seconds": {
+    "first_evidence_save": 72.33114138699602,
+    "pack_memory_restore": 0.25322503299685195,
+    "final_metadata_Git_and_backup": "pending tail receipt"
+  },
+  "other_prelaunch_management_seconds": null,
+  "unknown_costs_not_zero": true,
+  "API_pipe_spans_overlap_not_exclusive_CPU": true,
+  "all_pipeline_prep_record_learning_cost_is_distinct_from_production_rate": true,
+  "measured_nonoverlapping_component_wall_lower_bound_seconds": 464.0222103800401,
+  "NN0_helper_attempts": [
+    {
+      "command": "taskset -c2 python3 finish-evidence.py",
+      "status": "COMMAND_SYNTAX_FAILURE_BEFORE_CHILD",
+      "NN": 0
+    },
+    {
+      "command": "taskset -c 2 python3 finish-evidence.py",
+      "status": "COMPLETE",
+      "NN": 0
+    }
+  ]
+}

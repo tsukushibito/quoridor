@@ -1,0 +1,305 @@
+{
+  "UTC": "2026-10-04T23:18:47.611Z",
+  "saved_verification_PASS": true,
+  "terminal_prefixes": [
+    {
+      "slot": 2,
+      "legal_prefix": true,
+      "terminal": {
+        "winner": 1,
+        "value": -1
+      },
+      "ply": 113
+    },
+    {
+      "slot": 3,
+      "legal_prefix": true,
+      "terminal": {
+        "winner": 2,
+        "value": -1
+      },
+      "ply": 66
+    },
+    {
+      "slot": 4,
+      "legal_prefix": true,
+      "terminal": {
+        "winner": 1,
+        "value": -1
+      },
+      "ply": 15
+    },
+    {
+      "slot": 5,
+      "legal_prefix": true,
+      "terminal": {
+        "winner": 2,
+        "value": -1
+      },
+      "ply": 44
+    },
+    {
+      "slot": 6,
+      "legal_prefix": true,
+      "terminal": {
+        "winner": 2,
+        "value": -1
+      },
+      "ply": 50
+    },
+    {
+      "slot": 7,
+      "legal_prefix": true,
+      "terminal": {
+        "winner": 2,
+        "value": -1
+      },
+      "ply": 42
+    },
+    {
+      "slot": 8,
+      "legal_prefix": true,
+      "terminal": {
+        "winner": 2,
+        "value": -1
+      },
+      "ply": 42
+    }
+  ],
+  "clocks": {
+    "pilot-r2": {
+      "hands": 183,
+      "RECEIVED": 182,
+      "UNKNOWN": 1,
+      "min": 90.28530395030975,
+      "median": 90.56962299346924,
+      "max": 100.72257399559021,
+      "adopted_late": 0
+    },
+    "later4-r1": {
+      "hands": 114,
+      "RECEIVED": 114,
+      "UNKNOWN": 0,
+      "min": 90.32023799419403,
+      "median": 90.52439600229263,
+      "max": 95.99596101045609,
+      "adopted_late": 0
+    },
+    "pilot-r1": {
+      "hands": 45,
+      "RECEIVED": 45,
+      "UNKNOWN": 0,
+      "min": 90.31342399120331,
+      "median": 90.48746699094772,
+      "max": 93.9496060013771,
+      "adopted_late": 0
+    }
+  },
+  "received_profiles_including_censored_attempt": {
+    "NNUE": {
+      "hands": 171,
+      "completed_depth": {
+        "1": 7,
+        "2": 98,
+        "3": 11,
+        "4": 21,
+        "5": 10,
+        "7": 5,
+        "8": 3,
+        "9": 5,
+        "10": 5,
+        "11": 5,
+        "12": 1
+      },
+      "NN": 209276,
+      "D_evals": 0,
+      "processed": 291729,
+      "wholewall_ms": 15043.46752679348,
+      "spans": {
+        "control_ms": 355.6784676909447,
+        "terminal_inclusive_ms": 4241.04684650898,
+        "legal_order_inclusive_ms": 1414.3610070347786,
+        "clone_ms": 2307.625005543232,
+        "input_full_delta_inclusive_ms": 4345.912155628204,
+        "evaluator_inclusive_ms": 1775.6868152618408
+      }
+    },
+    "distance": {
+      "hands": 171,
+      "completed_depth": {
+        "1": 2,
+        "2": 77,
+        "3": 33,
+        "4": 13,
+        "5": 16,
+        "6": 3,
+        "7": 3,
+        "8": 4,
+        "9": 4,
+        "10": 5,
+        "11": 4,
+        "12": 5,
+        "13": 2
+      },
+      "NN": 0,
+      "D_evals": 287719,
+      "processed": 411487,
+      "wholewall_ms": 15001.57245773077,
+      "spans": {
+        "control_ms": 402.2695653438568,
+        "terminal_inclusive_ms": 5146.193238973618,
+        "legal_order_inclusive_ms": 2035.0330667495728,
+        "clone_ms": 3218.8502096533775,
+        "input_full_delta_inclusive_ms": 0,
+        "evaluator_inclusive_ms": 3492.8554958701134
+      }
+    }
+  },
+  "same_completed_depth_matched": [
+    {
+      "rep": 0,
+      "root": "initial-p1",
+      "engine": "distance",
+      "depth": 2,
+      "value_diff": 0,
+      "sameAction": true,
+      "ascending_ms": 283.02355802059174,
+      "rootbest_ms": 279.6505770087242
+    },
+    {
+      "rep": 0,
+      "root": "asym-hv-p2",
+      "engine": "NNUE",
+      "depth": 2,
+      "value_diff": 0,
+      "sameAction": true,
+      "ascending_ms": 328.4375820159912,
+      "rootbest_ms": 305.25011199712753
+    },
+    {
+      "rep": 0,
+      "root": "asym-hv-p2",
+      "engine": "distance",
+      "depth": 2,
+      "value_diff": 0,
+      "sameAction": true,
+      "ascending_ms": 286.933109998703,
+      "rootbest_ms": 249.42543298006058
+    },
+    {
+      "rep": 0,
+      "root": "straight-jump-p2",
+      "engine": "NNUE",
+      "depth": 2,
+      "value_diff": 0,
+      "sameAction": true,
+      "ascending_ms": 250.83680099248886,
+      "rootbest_ms": 217.62296998500824
+    },
+    {
+      "rep": 0,
+      "root": "straight-jump-p2",
+      "engine": "distance",
+      "depth": 2,
+      "value_diff": 0,
+      "sameAction": true,
+      "ascending_ms": 194.95809000730515,
+      "rootbest_ms": 185.15798300504684
+    },
+    {
+      "rep": 0,
+      "root": "fixed-legal-diagonal-p1",
+      "engine": "NNUE",
+      "depth": 2,
+      "value_diff": 0,
+      "sameAction": true,
+      "ascending_ms": 229.31922501325607,
+      "rootbest_ms": 238.06182897090912
+    },
+    {
+      "rep": 0,
+      "root": "fixed-legal-diagonal-p1",
+      "engine": "distance",
+      "depth": 2,
+      "value_diff": 0,
+      "sameAction": true,
+      "ascending_ms": 184.81944704055786,
+      "rootbest_ms": 186.56287801265717
+    },
+    {
+      "rep": 1,
+      "root": "initial-p1",
+      "engine": "distance",
+      "depth": 2,
+      "value_diff": 0,
+      "sameAction": true,
+      "ascending_ms": 251.89131498336792,
+      "rootbest_ms": 255.96458798646927
+    },
+    {
+      "rep": 1,
+      "root": "asym-hv-p2",
+      "engine": "NNUE",
+      "depth": 2,
+      "value_diff": 0,
+      "sameAction": true,
+      "ascending_ms": 291.76348197460175,
+      "rootbest_ms": 296.6587889790535
+    },
+    {
+      "rep": 1,
+      "root": "asym-hv-p2",
+      "engine": "distance",
+      "depth": 2,
+      "value_diff": 0,
+      "sameAction": true,
+      "ascending_ms": 247.48039996623993,
+      "rootbest_ms": 256.67061400413513
+    },
+    {
+      "rep": 1,
+      "root": "straight-jump-p2",
+      "engine": "NNUE",
+      "depth": 2,
+      "value_diff": 0,
+      "sameAction": true,
+      "ascending_ms": 218.32632398605347,
+      "rootbest_ms": 231.45772397518158
+    },
+    {
+      "rep": 1,
+      "root": "straight-jump-p2",
+      "engine": "distance",
+      "depth": 2,
+      "value_diff": 0,
+      "sameAction": true,
+      "ascending_ms": 201.5570319890976,
+      "rootbest_ms": 203.11932998895645
+    },
+    {
+      "rep": 1,
+      "root": "fixed-legal-diagonal-p1",
+      "engine": "NNUE",
+      "depth": 2,
+      "value_diff": 0,
+      "sameAction": true,
+      "ascending_ms": 230.9582999944687,
+      "rootbest_ms": 227.6507540345192
+    },
+    {
+      "rep": 1,
+      "root": "fixed-legal-diagonal-p1",
+      "engine": "distance",
+      "depth": 2,
+      "value_diff": 0,
+      "sameAction": true,
+      "ascending_ms": 197.65447598695755,
+      "rootbest_ms": 191.114089012146
+    }
+  ],
+  "span_limit": "inclusive overlap, different terminal branches/node/depth work, no exclusive sum/no general speedup",
+  "model_NN": 0,
+  "new_forward": 0,
+  "oldtest_read": false,
+  "wall_s": 0.05463166
+}

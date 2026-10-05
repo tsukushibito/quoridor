@@ -1,0 +1,6566 @@
+{
+  "issue": "quoridor-4lc.111",
+  "UTC": "2026-10-02T08:57:07.922565+00:00",
+  "decision": {
+    "C_only_source_binary_and_equal_completed_sensitivity": "finite_support",
+    "exploratory_4game_W0L4": "saved_browser_replay_support; not_universal_C_worsening",
+    "whole500ms_compute_budget": "not_established",
+    "coefficient_adoption_formal_NI_Sigma": "not_certified"
+  },
+  "actual_go": false,
+  "source_Git": "0f0597e73e5444c2a576121242a02e18417aad01",
+  "original_data_Git": "99436415e08f52f1232c6a92766c8a2dc78ee7b9",
+  "primary_checker_Git": "54c2d89003c4e21633c9d78986d35b5781abbcfa",
+  "clock_checker_Git": "8381563",
+  "primary_order_preserved": true,
+  "own_count_searches": 4,
+  "own_backups_NN": 128,
+  "own_startupNN": 18,
+  "new_public_game_holdout": 0,
+  "saved_audit": {
+    "publicAudit": {
+      "runs": [
+        {
+          "run": "c110-baseline-public-r1",
+          "counts": {
+            "public": 2,
+            "normal": 2,
+            "cancel": 0,
+            "late": 0,
+            "NN": 10,
+            "ACKover500": 1,
+            "Worker_stop": {
+              "upper_le_D": 1,
+              "lower_gt_D": 1,
+              "straddles_D": 0,
+              "missing": 0
+            },
+            "API_after402_definite": 1,
+            "API_after402_possible": 1,
+            "API_after_public_definite": 1,
+            "API_after_public_possible": 1
+          },
+          "games": [],
+          "late_markers": [],
+          "Worker_stop_exceeds_or_straddles": [
+            {
+              "request": "c110-baseline-public-r1-1",
+              "engine": "candidate",
+              "WorkerLower": 522.704833984375,
+              "WorkerUpper": 522.940185546875,
+              "ACKwall": 523.045166015625
+            }
+          ],
+          "clock_end_measured": false,
+          "source_shared_RuleA_logic_independence_limit": true
+        },
+        {
+          "run": "c110-initial-pair-r1",
+          "counts": {
+            "public": 138,
+            "normal": 137,
+            "cancel": 0,
+            "late": 0,
+            "NN": 589,
+            "ACKover500": 2,
+            "Worker_stop": {
+              "upper_le_D": 136,
+              "lower_gt_D": 2,
+              "straddles_D": 0,
+              "missing": 0
+            },
+            "API_after402_definite": 0,
+            "API_after402_possible": 0,
+            "API_after_public_definite": 0,
+            "API_after_public_possible": 0
+          },
+          "games": [
+            {
+              "game": "c1-initial-color1",
+              "color": 1,
+              "legal_publics": 66,
+              "winner": 2,
+              "status": "terminal",
+              "reason": "goal",
+              "score": 0,
+              "prefixSHA": "3148deedee5afa29ae2dcc2808fe02e4254e9b0e6a4e0dd8adb2f120901fd922"
+            },
+            {
+              "game": "c1-initial-color2",
+              "color": 2,
+              "legal_publics": 71,
+              "winner": 1,
+              "status": "responsibility_loss",
+              "reason": "initial_no_completed_cp",
+              "score": 0,
+              "prefixSHA": "fd6490ddf1ca979b945e1b1382063c0f9f7ad9c50aa87cb722767bf4de790fc3"
+            }
+          ],
+          "late_markers": [
+            {
+              "request": "c110-initial-pair-r1-33",
+              "timer_late_ms": 18.280029296875,
+              "adoption_elapsed": 429.340087890625,
+              "ACKwall": 429.22998046875,
+              "adopted_sequence": 3
+            },
+            {
+              "request": "c110-initial-pair-r1-40",
+              "timer_late_ms": 14.304931640625,
+              "adoption_elapsed": 425.369873046875,
+              "ACKwall": 425.260009765625,
+              "adopted_sequence": 4
+            },
+            {
+              "request": "c110-initial-pair-r1-56",
+              "timer_late_ms": 20.544921875,
+              "adoption_elapsed": 431.60498046875,
+              "ACKwall": 431.494873046875,
+              "adopted_sequence": 4
+            },
+            {
+              "request": "c110-initial-pair-r1-93",
+              "timer_late_ms": 18.58984375,
+              "adoption_elapsed": 429.65478515625,
+              "ACKwall": 429.534912109375,
+              "adopted_sequence": 4
+            },
+            {
+              "request": "c110-initial-pair-r1-104",
+              "timer_late_ms": 28.235107421875,
+              "adoption_elapsed": 439.315185546875,
+              "ACKwall": 439.175048828125,
+              "adopted_sequence": 2
+            },
+            {
+              "request": "c110-initial-pair-r1-119",
+              "timer_late_ms": 11.52001953125,
+              "adoption_elapsed": 422.579833984375,
+              "ACKwall": 422.48486328125,
+              "adopted_sequence": 3
+            },
+            {
+              "request": "c110-initial-pair-r1-135",
+              "timer_late_ms": 20.0048828125,
+              "adoption_elapsed": 431.06982421875,
+              "ACKwall": 430.9599609375,
+              "adopted_sequence": 4
+            }
+          ],
+          "Worker_stop_exceeds_or_straddles": [
+            {
+              "request": "c110-initial-pair-r1-76",
+              "engine": "candidate",
+              "WorkerLower": 504.10986328125,
+              "WorkerUpper": 504.320068359375,
+              "ACKwall": 504.35498046875
+            },
+            {
+              "request": "c110-initial-pair-r1-111",
+              "engine": "reference",
+              "WorkerLower": 557.375,
+              "WorkerUpper": 557.585205078125,
+              "ACKwall": 557.64501953125
+            }
+          ],
+          "clock_end_measured": false,
+          "source_shared_RuleA_logic_independence_limit": true
+        },
+        {
+          "run": "c110-asym-pair-r1",
+          "counts": {
+            "public": 153,
+            "normal": 153,
+            "cancel": 0,
+            "late": 0,
+            "NN": 630,
+            "ACKover500": 3,
+            "Worker_stop": {
+              "upper_le_D": 150,
+              "lower_gt_D": 3,
+              "straddles_D": 0,
+              "missing": 0
+            },
+            "API_after402_definite": 0,
+            "API_after402_possible": 0,
+            "API_after_public_definite": 0,
+            "API_after_public_possible": 0
+          },
+          "games": [
+            {
+              "game": "c1-asym-color1",
+              "color": 1,
+              "legal_publics": 73,
+              "winner": 2,
+              "status": "terminal",
+              "reason": "goal",
+              "score": 0,
+              "prefixSHA": "8f839a1f9d72633d3a654d9a0e451cf966ef545dc592f151f206edf62b9766b4"
+            },
+            {
+              "game": "c1-asym-color2",
+              "color": 2,
+              "legal_publics": 80,
+              "winner": 1,
+              "status": "terminal",
+              "reason": "goal",
+              "score": 0,
+              "prefixSHA": "72d71621137824adcd8adb5f499312d0b72ef2d3d33beba647f3ec644426f35e"
+            }
+          ],
+          "late_markers": [
+            {
+              "request": "c110-asym-pair-r1-4",
+              "timer_late_ms": 16.135009765625,
+              "adoption_elapsed": 427.2099609375,
+              "ACKwall": 427.074951171875,
+              "adopted_sequence": 3
+            },
+            {
+              "request": "c110-asym-pair-r1-15",
+              "timer_late_ms": 17.22998046875,
+              "adoption_elapsed": 428.30517578125,
+              "ACKwall": 428.18505859375,
+              "adopted_sequence": 4
+            },
+            {
+              "request": "c110-asym-pair-r1-20",
+              "timer_late_ms": 26.08984375,
+              "adoption_elapsed": 437.1650390625,
+              "ACKwall": 437.044921875,
+              "adopted_sequence": 3
+            },
+            {
+              "request": "c110-asym-pair-r1-21",
+              "timer_late_ms": 36.690185546875,
+              "adoption_elapsed": 447.760009765625,
+              "ACKwall": 447.64013671875,
+              "adopted_sequence": 4
+            },
+            {
+              "request": "c110-asym-pair-r1-34",
+              "timer_late_ms": 26.309814453125,
+              "adoption_elapsed": 437.375,
+              "ACKwall": 437.264892578125,
+              "adopted_sequence": 2
+            },
+            {
+              "request": "c110-asym-pair-r1-36",
+              "timer_late_ms": 18.614990234375,
+              "adoption_elapsed": 429.68017578125,
+              "ACKwall": 429.565185546875,
+              "adopted_sequence": 2
+            },
+            {
+              "request": "c110-asym-pair-r1-103",
+              "timer_late_ms": 11.68994140625,
+              "adoption_elapsed": 422.760009765625,
+              "ACKwall": 428.31005859375,
+              "adopted_sequence": 4
+            },
+            {
+              "request": "c110-asym-pair-r1-109",
+              "timer_late_ms": 12.130126953125,
+              "adoption_elapsed": 423.22509765625,
+              "ACKwall": 459.460205078125,
+              "adopted_sequence": 4
+            },
+            {
+              "request": "c110-asym-pair-r1-118",
+              "timer_late_ms": 26.97998046875,
+              "adoption_elapsed": 438.059814453125,
+              "ACKwall": 437.9248046875,
+              "adopted_sequence": 2
+            },
+            {
+              "request": "c110-asym-pair-r1-124",
+              "timer_late_ms": 11.55517578125,
+              "adoption_elapsed": 422.705078125,
+              "ACKwall": 441.2451171875,
+              "adopted_sequence": 2
+            },
+            {
+              "request": "c110-asym-pair-r1-150",
+              "timer_late_ms": 10.025146484375,
+              "adoption_elapsed": 421.110107421875,
+              "ACKwall": 414.66015625,
+              "adopted_sequence": 2
+            }
+          ],
+          "Worker_stop_exceeds_or_straddles": [
+            {
+              "request": "c110-asym-pair-r1-18",
+              "engine": "candidate",
+              "WorkerLower": 509.259765625,
+              "WorkerUpper": 509.474853515625,
+              "ACKwall": 509.419921875
+            },
+            {
+              "request": "c110-asym-pair-r1-87",
+              "engine": "reference",
+              "WorkerLower": 503.64990234375,
+              "WorkerUpper": 503.864990234375,
+              "ACKwall": 503.800048828125
+            },
+            {
+              "request": "c110-asym-pair-r1-142",
+              "engine": "candidate",
+              "WorkerLower": 512.425048828125,
+              "WorkerUpper": 512.64013671875,
+              "ACKwall": 516.235107421875
+            }
+          ],
+          "clock_end_measured": false,
+          "source_shared_RuleA_logic_independence_limit": true
+        }
+      ],
+      "games": 4,
+      "W": 0,
+      "D": 0,
+      "L": 4,
+      "numeric_samples": [
+        {
+          "request": "c110-baseline-public-r1-1",
+          "engine": "candidate",
+          "P2": false,
+          "cancelled": false,
+          "features": 648,
+          "NN": 137,
+          "priors": 131,
+          "maxNN": 2.384185791015625e-06,
+          "maxPrior": 1.620060892992825e-06,
+          "fixed_reference": true,
+          "valueMeaning": "rootNN"
+        },
+        {
+          "request": "c110-baseline-public-r1-2",
+          "engine": "reference",
+          "P2": false,
+          "cancelled": false,
+          "features": 648,
+          "NN": 137,
+          "priors": 131,
+          "maxNN": 2.384185791015625e-06,
+          "maxPrior": 0,
+          "fixed_reference": true,
+          "valueMeaning": "rootQ"
+        },
+        {
+          "request": "c110-initial-pair-r1-1",
+          "engine": "candidate",
+          "P2": false,
+          "cancelled": false,
+          "features": 648,
+          "NN": 137,
+          "priors": 131,
+          "maxNN": 2.384185791015625e-06,
+          "maxPrior": 1.620060892992825e-06,
+          "fixed_reference": true,
+          "valueMeaning": "rootNN"
+        },
+        {
+          "request": "c110-initial-pair-r1-2",
+          "engine": "reference",
+          "P2": true,
+          "cancelled": false,
+          "features": 648,
+          "NN": 137,
+          "priors": 131,
+          "maxNN": 2.1457672119140625e-06,
+          "maxPrior": 0,
+          "fixed_reference": true,
+          "valueMeaning": "rootQ"
+        },
+        {
+          "request": "c110-initial-pair-r1-67",
+          "engine": "reference",
+          "P2": false,
+          "cancelled": false,
+          "features": 648,
+          "NN": 137,
+          "priors": 131,
+          "maxNN": 2.384185791015625e-06,
+          "maxPrior": 0,
+          "fixed_reference": true,
+          "valueMeaning": "rootQ"
+        },
+        {
+          "request": "c110-initial-pair-r1-68",
+          "engine": "candidate",
+          "P2": true,
+          "cancelled": false,
+          "features": 648,
+          "NN": 137,
+          "priors": 131,
+          "maxNN": 2.1457672119140625e-06,
+          "maxPrior": 8.573847407600255e-07,
+          "fixed_reference": true,
+          "valueMeaning": "rootNN"
+        },
+        {
+          "request": "c110-initial-pair-r1-138",
+          "engine": "candidate",
+          "P2": true,
+          "cancelled": false,
+          "features": 648,
+          "NN": 137,
+          "priors": 0,
+          "maxNN": null,
+          "maxPrior": 0,
+          "fixed_reference": false,
+          "valueMeaning": "rootNN"
+        },
+        {
+          "request": "c110-asym-pair-r1-1",
+          "engine": "reference",
+          "P2": true,
+          "cancelled": false,
+          "features": 648,
+          "NN": 137,
+          "priors": 123,
+          "maxNN": 3.5762786865234375e-06,
+          "maxPrior": 0,
+          "fixed_reference": true,
+          "valueMeaning": "rootQ"
+        },
+        {
+          "request": "c110-asym-pair-r1-2",
+          "engine": "candidate",
+          "P2": false,
+          "cancelled": false,
+          "features": 648,
+          "NN": 137,
+          "priors": 124,
+          "maxNN": null,
+          "maxPrior": 9.443712710721641e-07,
+          "fixed_reference": false,
+          "valueMeaning": "rootNN"
+        },
+        {
+          "request": "c110-asym-pair-r1-74",
+          "engine": "candidate",
+          "P2": true,
+          "cancelled": false,
+          "features": 648,
+          "NN": 137,
+          "priors": 123,
+          "maxNN": 3.5762786865234375e-06,
+          "maxPrior": 4.471692105489922e-08,
+          "fixed_reference": true,
+          "valueMeaning": "rootNN"
+        },
+        {
+          "request": "c110-asym-pair-r1-75",
+          "engine": "reference",
+          "P2": false,
+          "cancelled": false,
+          "features": 648,
+          "NN": 137,
+          "priors": 124,
+          "maxNN": null,
+          "maxPrior": 0,
+          "fixed_reference": false,
+          "valueMeaning": "rootQ"
+        }
+      ],
+      "browser_executed": true,
+      "Node_adjudication": false,
+      "saved_original_only": true
+    },
+    "counts": {
+      "rows": [
+        {
+          "id": "c110-count-baseline-first-r1-1",
+          "run": "c110-count-baseline-first-r1",
+          "fixture": "initial-p1",
+          "variant": "baseline",
+          "K": 32,
+          "rootN": 32,
+          "edge_sum": 31,
+          "NNcalls": 32,
+          "noNN_backups": 0,
+          "cap": false,
+          "action": 13,
+          "depth": 8,
+          "entropy": 0.5503536168824767,
+          "root_edge_value_sum": 6.186480283737183,
+          "visits": [
+            [
+              3,
+              0
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              13,
+              26
+            ],
+            [
+              81,
+              0
+            ],
+            [
+              82,
+              0
+            ],
+            [
+              83,
+              0
+            ],
+            [
+              84,
+              0
+            ],
+            [
+              85,
+              0
+            ],
+            [
+              86,
+              0
+            ],
+            [
+              87,
+              0
+            ],
+            [
+              88,
+              0
+            ],
+            [
+              89,
+              2
+            ],
+            [
+              90,
+              0
+            ],
+            [
+              91,
+              0
+            ],
+            [
+              92,
+              0
+            ],
+            [
+              93,
+              0
+            ],
+            [
+              94,
+              0
+            ],
+            [
+              95,
+              0
+            ],
+            [
+              96,
+              3
+            ],
+            [
+              97,
+              0
+            ],
+            [
+              98,
+              0
+            ],
+            [
+              99,
+              0
+            ],
+            [
+              100,
+              0
+            ],
+            [
+              101,
+              0
+            ],
+            [
+              102,
+              0
+            ],
+            [
+              103,
+              0
+            ],
+            [
+              104,
+              0
+            ],
+            [
+              105,
+              0
+            ],
+            [
+              106,
+              0
+            ],
+            [
+              107,
+              0
+            ],
+            [
+              108,
+              0
+            ],
+            [
+              109,
+              0
+            ],
+            [
+              110,
+              0
+            ],
+            [
+              111,
+              0
+            ],
+            [
+              112,
+              0
+            ],
+            [
+              113,
+              0
+            ],
+            [
+              114,
+              0
+            ],
+            [
+              115,
+              0
+            ],
+            [
+              116,
+              0
+            ],
+            [
+              117,
+              0
+            ],
+            [
+              118,
+              0
+            ],
+            [
+              119,
+              0
+            ],
+            [
+              120,
+              0
+            ],
+            [
+              121,
+              0
+            ],
+            [
+              122,
+              0
+            ],
+            [
+              123,
+              0
+            ],
+            [
+              124,
+              0
+            ],
+            [
+              125,
+              0
+            ],
+            [
+              126,
+              0
+            ],
+            [
+              127,
+              0
+            ],
+            [
+              128,
+              0
+            ],
+            [
+              129,
+              0
+            ],
+            [
+              130,
+              0
+            ],
+            [
+              131,
+              0
+            ],
+            [
+              132,
+              0
+            ],
+            [
+              133,
+              0
+            ],
+            [
+              134,
+              0
+            ],
+            [
+              135,
+              0
+            ],
+            [
+              136,
+              0
+            ],
+            [
+              137,
+              0
+            ],
+            [
+              138,
+              0
+            ],
+            [
+              139,
+              0
+            ],
+            [
+              140,
+              0
+            ],
+            [
+              141,
+              0
+            ],
+            [
+              142,
+              0
+            ],
+            [
+              143,
+              0
+            ],
+            [
+              144,
+              0
+            ],
+            [
+              145,
+              0
+            ],
+            [
+              146,
+              0
+            ],
+            [
+              147,
+              0
+            ],
+            [
+              148,
+              0
+            ],
+            [
+              149,
+              0
+            ],
+            [
+              150,
+              0
+            ],
+            [
+              151,
+              0
+            ],
+            [
+              152,
+              0
+            ],
+            [
+              153,
+              0
+            ],
+            [
+              154,
+              0
+            ],
+            [
+              155,
+              0
+            ],
+            [
+              156,
+              0
+            ],
+            [
+              157,
+              0
+            ],
+            [
+              158,
+              0
+            ],
+            [
+              159,
+              0
+            ],
+            [
+              160,
+              0
+            ],
+            [
+              161,
+              0
+            ],
+            [
+              162,
+              0
+            ],
+            [
+              163,
+              0
+            ],
+            [
+              164,
+              0
+            ],
+            [
+              165,
+              0
+            ],
+            [
+              166,
+              0
+            ],
+            [
+              167,
+              0
+            ],
+            [
+              168,
+              0
+            ],
+            [
+              169,
+              0
+            ],
+            [
+              170,
+              0
+            ],
+            [
+              171,
+              0
+            ],
+            [
+              172,
+              0
+            ],
+            [
+              173,
+              0
+            ],
+            [
+              174,
+              0
+            ],
+            [
+              175,
+              0
+            ],
+            [
+              176,
+              0
+            ],
+            [
+              177,
+              0
+            ],
+            [
+              178,
+              0
+            ],
+            [
+              179,
+              0
+            ],
+            [
+              180,
+              0
+            ],
+            [
+              181,
+              0
+            ],
+            [
+              182,
+              0
+            ],
+            [
+              183,
+              0
+            ],
+            [
+              184,
+              0
+            ],
+            [
+              185,
+              0
+            ],
+            [
+              186,
+              0
+            ],
+            [
+              187,
+              0
+            ],
+            [
+              188,
+              0
+            ],
+            [
+              189,
+              0
+            ],
+            [
+              190,
+              0
+            ],
+            [
+              191,
+              0
+            ],
+            [
+              192,
+              0
+            ],
+            [
+              193,
+              0
+            ],
+            [
+              194,
+              0
+            ],
+            [
+              195,
+              0
+            ],
+            [
+              196,
+              0
+            ],
+            [
+              197,
+              0
+            ],
+            [
+              198,
+              0
+            ],
+            [
+              199,
+              0
+            ],
+            [
+              200,
+              0
+            ],
+            [
+              201,
+              0
+            ],
+            [
+              202,
+              0
+            ],
+            [
+              203,
+              0
+            ],
+            [
+              204,
+              0
+            ],
+            [
+              205,
+              0
+            ],
+            [
+              206,
+              0
+            ],
+            [
+              207,
+              0
+            ],
+            [
+              208,
+              0
+            ]
+          ],
+          "numeric": {
+            "request": "c110-count-baseline-first-r1-1",
+            "engine": "candidate",
+            "P2": false,
+            "cancelled": false,
+            "features": 648,
+            "NN": 137,
+            "priors": 131,
+            "maxNN": 2.384185791015625e-06,
+            "maxPrior": 1.620060892992825e-06,
+            "fixed_reference": true,
+            "valueMeaning": "rootNN"
+          },
+          "wrapper_ms": 3672.405029296875
+        },
+        {
+          "id": "c110-count-c1-first-r1-1",
+          "run": "c110-count-c1-first-r1",
+          "fixture": "initial-p1",
+          "variant": "c1",
+          "K": 32,
+          "rootN": 32,
+          "edge_sum": 31,
+          "NNcalls": 32,
+          "noNN_backups": 0,
+          "cap": false,
+          "action": 13,
+          "depth": 8,
+          "entropy": 0.5503536168824767,
+          "root_edge_value_sum": 6.201153457164764,
+          "visits": [
+            [
+              3,
+              0
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              13,
+              26
+            ],
+            [
+              81,
+              0
+            ],
+            [
+              82,
+              0
+            ],
+            [
+              83,
+              0
+            ],
+            [
+              84,
+              0
+            ],
+            [
+              85,
+              0
+            ],
+            [
+              86,
+              0
+            ],
+            [
+              87,
+              0
+            ],
+            [
+              88,
+              0
+            ],
+            [
+              89,
+              2
+            ],
+            [
+              90,
+              0
+            ],
+            [
+              91,
+              0
+            ],
+            [
+              92,
+              0
+            ],
+            [
+              93,
+              0
+            ],
+            [
+              94,
+              0
+            ],
+            [
+              95,
+              0
+            ],
+            [
+              96,
+              3
+            ],
+            [
+              97,
+              0
+            ],
+            [
+              98,
+              0
+            ],
+            [
+              99,
+              0
+            ],
+            [
+              100,
+              0
+            ],
+            [
+              101,
+              0
+            ],
+            [
+              102,
+              0
+            ],
+            [
+              103,
+              0
+            ],
+            [
+              104,
+              0
+            ],
+            [
+              105,
+              0
+            ],
+            [
+              106,
+              0
+            ],
+            [
+              107,
+              0
+            ],
+            [
+              108,
+              0
+            ],
+            [
+              109,
+              0
+            ],
+            [
+              110,
+              0
+            ],
+            [
+              111,
+              0
+            ],
+            [
+              112,
+              0
+            ],
+            [
+              113,
+              0
+            ],
+            [
+              114,
+              0
+            ],
+            [
+              115,
+              0
+            ],
+            [
+              116,
+              0
+            ],
+            [
+              117,
+              0
+            ],
+            [
+              118,
+              0
+            ],
+            [
+              119,
+              0
+            ],
+            [
+              120,
+              0
+            ],
+            [
+              121,
+              0
+            ],
+            [
+              122,
+              0
+            ],
+            [
+              123,
+              0
+            ],
+            [
+              124,
+              0
+            ],
+            [
+              125,
+              0
+            ],
+            [
+              126,
+              0
+            ],
+            [
+              127,
+              0
+            ],
+            [
+              128,
+              0
+            ],
+            [
+              129,
+              0
+            ],
+            [
+              130,
+              0
+            ],
+            [
+              131,
+              0
+            ],
+            [
+              132,
+              0
+            ],
+            [
+              133,
+              0
+            ],
+            [
+              134,
+              0
+            ],
+            [
+              135,
+              0
+            ],
+            [
+              136,
+              0
+            ],
+            [
+              137,
+              0
+            ],
+            [
+              138,
+              0
+            ],
+            [
+              139,
+              0
+            ],
+            [
+              140,
+              0
+            ],
+            [
+              141,
+              0
+            ],
+            [
+              142,
+              0
+            ],
+            [
+              143,
+              0
+            ],
+            [
+              144,
+              0
+            ],
+            [
+              145,
+              0
+            ],
+            [
+              146,
+              0
+            ],
+            [
+              147,
+              0
+            ],
+            [
+              148,
+              0
+            ],
+            [
+              149,
+              0
+            ],
+            [
+              150,
+              0
+            ],
+            [
+              151,
+              0
+            ],
+            [
+              152,
+              0
+            ],
+            [
+              153,
+              0
+            ],
+            [
+              154,
+              0
+            ],
+            [
+              155,
+              0
+            ],
+            [
+              156,
+              0
+            ],
+            [
+              157,
+              0
+            ],
+            [
+              158,
+              0
+            ],
+            [
+              159,
+              0
+            ],
+            [
+              160,
+              0
+            ],
+            [
+              161,
+              0
+            ],
+            [
+              162,
+              0
+            ],
+            [
+              163,
+              0
+            ],
+            [
+              164,
+              0
+            ],
+            [
+              165,
+              0
+            ],
+            [
+              166,
+              0
+            ],
+            [
+              167,
+              0
+            ],
+            [
+              168,
+              0
+            ],
+            [
+              169,
+              0
+            ],
+            [
+              170,
+              0
+            ],
+            [
+              171,
+              0
+            ],
+            [
+              172,
+              0
+            ],
+            [
+              173,
+              0
+            ],
+            [
+              174,
+              0
+            ],
+            [
+              175,
+              0
+            ],
+            [
+              176,
+              0
+            ],
+            [
+              177,
+              0
+            ],
+            [
+              178,
+              0
+            ],
+            [
+              179,
+              0
+            ],
+            [
+              180,
+              0
+            ],
+            [
+              181,
+              0
+            ],
+            [
+              182,
+              0
+            ],
+            [
+              183,
+              0
+            ],
+            [
+              184,
+              0
+            ],
+            [
+              185,
+              0
+            ],
+            [
+              186,
+              0
+            ],
+            [
+              187,
+              0
+            ],
+            [
+              188,
+              0
+            ],
+            [
+              189,
+              0
+            ],
+            [
+              190,
+              0
+            ],
+            [
+              191,
+              0
+            ],
+            [
+              192,
+              0
+            ],
+            [
+              193,
+              0
+            ],
+            [
+              194,
+              0
+            ],
+            [
+              195,
+              0
+            ],
+            [
+              196,
+              0
+            ],
+            [
+              197,
+              0
+            ],
+            [
+              198,
+              0
+            ],
+            [
+              199,
+              0
+            ],
+            [
+              200,
+              0
+            ],
+            [
+              201,
+              0
+            ],
+            [
+              202,
+              0
+            ],
+            [
+              203,
+              0
+            ],
+            [
+              204,
+              0
+            ],
+            [
+              205,
+              0
+            ],
+            [
+              206,
+              0
+            ],
+            [
+              207,
+              0
+            ],
+            [
+              208,
+              0
+            ]
+          ],
+          "numeric": {
+            "request": "c110-count-c1-first-r1-1",
+            "engine": "candidate",
+            "P2": false,
+            "cancelled": false,
+            "features": 648,
+            "NN": 137,
+            "priors": 131,
+            "maxNN": 2.384185791015625e-06,
+            "maxPrior": 1.620060892992825e-06,
+            "fixed_reference": true,
+            "valueMeaning": "rootNN"
+          },
+          "wrapper_ms": 3489.96484375
+        },
+        {
+          "id": "c110-count-c1-first-r1-2",
+          "run": "c110-count-c1-first-r1",
+          "fixture": "asym-hv-p2",
+          "variant": "c1",
+          "K": 32,
+          "rootN": 32,
+          "edge_sum": 31,
+          "NNcalls": 32,
+          "noNN_backups": 0,
+          "cap": false,
+          "action": 67,
+          "depth": 6,
+          "entropy": 0,
+          "root_edge_value_sum": 6.548651695251465,
+          "visits": [
+            [
+              67,
+              31
+            ],
+            [
+              75,
+              0
+            ],
+            [
+              77,
+              0
+            ],
+            [
+              81,
+              0
+            ],
+            [
+              82,
+              0
+            ],
+            [
+              83,
+              0
+            ],
+            [
+              84,
+              0
+            ],
+            [
+              85,
+              0
+            ],
+            [
+              86,
+              0
+            ],
+            [
+              87,
+              0
+            ],
+            [
+              88,
+              0
+            ],
+            [
+              89,
+              0
+            ],
+            [
+              90,
+              0
+            ],
+            [
+              91,
+              0
+            ],
+            [
+              92,
+              0
+            ],
+            [
+              93,
+              0
+            ],
+            [
+              94,
+              0
+            ],
+            [
+              95,
+              0
+            ],
+            [
+              96,
+              0
+            ],
+            [
+              100,
+              0
+            ],
+            [
+              101,
+              0
+            ],
+            [
+              102,
+              0
+            ],
+            [
+              103,
+              0
+            ],
+            [
+              104,
+              0
+            ],
+            [
+              105,
+              0
+            ],
+            [
+              106,
+              0
+            ],
+            [
+              107,
+              0
+            ],
+            [
+              108,
+              0
+            ],
+            [
+              109,
+              0
+            ],
+            [
+              111,
+              0
+            ],
+            [
+              112,
+              0
+            ],
+            [
+              113,
+              0
+            ],
+            [
+              114,
+              0
+            ],
+            [
+              115,
+              0
+            ],
+            [
+              116,
+              0
+            ],
+            [
+              117,
+              0
+            ],
+            [
+              118,
+              0
+            ],
+            [
+              119,
+              0
+            ],
+            [
+              120,
+              0
+            ],
+            [
+              121,
+              0
+            ],
+            [
+              122,
+              0
+            ],
+            [
+              123,
+              0
+            ],
+            [
+              124,
+              0
+            ],
+            [
+              125,
+              0
+            ],
+            [
+              126,
+              0
+            ],
+            [
+              127,
+              0
+            ],
+            [
+              128,
+              0
+            ],
+            [
+              129,
+              0
+            ],
+            [
+              130,
+              0
+            ],
+            [
+              131,
+              0
+            ],
+            [
+              132,
+              0
+            ],
+            [
+              133,
+              0
+            ],
+            [
+              134,
+              0
+            ],
+            [
+              135,
+              0
+            ],
+            [
+              136,
+              0
+            ],
+            [
+              137,
+              0
+            ],
+            [
+              138,
+              0
+            ],
+            [
+              139,
+              0
+            ],
+            [
+              140,
+              0
+            ],
+            [
+              141,
+              0
+            ],
+            [
+              142,
+              0
+            ],
+            [
+              143,
+              0
+            ],
+            [
+              144,
+              0
+            ],
+            [
+              145,
+              0
+            ],
+            [
+              146,
+              0
+            ],
+            [
+              147,
+              0
+            ],
+            [
+              148,
+              0
+            ],
+            [
+              149,
+              0
+            ],
+            [
+              150,
+              0
+            ],
+            [
+              151,
+              0
+            ],
+            [
+              152,
+              0
+            ],
+            [
+              153,
+              0
+            ],
+            [
+              154,
+              0
+            ],
+            [
+              155,
+              0
+            ],
+            [
+              156,
+              0
+            ],
+            [
+              157,
+              0
+            ],
+            [
+              158,
+              0
+            ],
+            [
+              159,
+              0
+            ],
+            [
+              160,
+              0
+            ],
+            [
+              161,
+              0
+            ],
+            [
+              163,
+              0
+            ],
+            [
+              164,
+              0
+            ],
+            [
+              165,
+              0
+            ],
+            [
+              167,
+              0
+            ],
+            [
+              168,
+              0
+            ],
+            [
+              169,
+              0
+            ],
+            [
+              170,
+              0
+            ],
+            [
+              171,
+              0
+            ],
+            [
+              172,
+              0
+            ],
+            [
+              173,
+              0
+            ],
+            [
+              175,
+              0
+            ],
+            [
+              176,
+              0
+            ],
+            [
+              177,
+              0
+            ],
+            [
+              178,
+              0
+            ],
+            [
+              179,
+              0
+            ],
+            [
+              180,
+              0
+            ],
+            [
+              181,
+              0
+            ],
+            [
+              183,
+              0
+            ],
+            [
+              184,
+              0
+            ],
+            [
+              185,
+              0
+            ],
+            [
+              186,
+              0
+            ],
+            [
+              187,
+              0
+            ],
+            [
+              188,
+              0
+            ],
+            [
+              189,
+              0
+            ],
+            [
+              190,
+              0
+            ],
+            [
+              191,
+              0
+            ],
+            [
+              192,
+              0
+            ],
+            [
+              193,
+              0
+            ],
+            [
+              194,
+              0
+            ],
+            [
+              195,
+              0
+            ],
+            [
+              196,
+              0
+            ],
+            [
+              197,
+              0
+            ],
+            [
+              198,
+              0
+            ],
+            [
+              199,
+              0
+            ],
+            [
+              200,
+              0
+            ],
+            [
+              201,
+              0
+            ],
+            [
+              202,
+              0
+            ],
+            [
+              203,
+              0
+            ],
+            [
+              204,
+              0
+            ],
+            [
+              205,
+              0
+            ],
+            [
+              206,
+              0
+            ],
+            [
+              207,
+              0
+            ],
+            [
+              208,
+              0
+            ]
+          ],
+          "numeric": {
+            "request": "c110-count-c1-first-r1-2",
+            "engine": "candidate",
+            "P2": true,
+            "cancelled": false,
+            "features": 648,
+            "NN": 137,
+            "priors": 123,
+            "maxNN": 3.5762786865234375e-06,
+            "maxPrior": 4.471692105489922e-08,
+            "fixed_reference": true,
+            "valueMeaning": "rootNN"
+          },
+          "wrapper_ms": 3348.7001953125
+        },
+        {
+          "id": "c110-count-baseline-last-r1-1",
+          "run": "c110-count-baseline-last-r1",
+          "fixture": "asym-hv-p2",
+          "variant": "baseline",
+          "K": 32,
+          "rootN": 32,
+          "edge_sum": 31,
+          "NNcalls": 32,
+          "noNN_backups": 0,
+          "cap": false,
+          "action": 67,
+          "depth": 7,
+          "entropy": 0.23921709381651282,
+          "root_edge_value_sum": 5.25840750336647,
+          "visits": [
+            [
+              67,
+              29
+            ],
+            [
+              75,
+              0
+            ],
+            [
+              77,
+              0
+            ],
+            [
+              81,
+              0
+            ],
+            [
+              82,
+              0
+            ],
+            [
+              83,
+              0
+            ],
+            [
+              84,
+              0
+            ],
+            [
+              85,
+              0
+            ],
+            [
+              86,
+              0
+            ],
+            [
+              87,
+              0
+            ],
+            [
+              88,
+              0
+            ],
+            [
+              89,
+              0
+            ],
+            [
+              90,
+              0
+            ],
+            [
+              91,
+              0
+            ],
+            [
+              92,
+              0
+            ],
+            [
+              93,
+              0
+            ],
+            [
+              94,
+              0
+            ],
+            [
+              95,
+              0
+            ],
+            [
+              96,
+              0
+            ],
+            [
+              100,
+              0
+            ],
+            [
+              101,
+              0
+            ],
+            [
+              102,
+              0
+            ],
+            [
+              103,
+              0
+            ],
+            [
+              104,
+              0
+            ],
+            [
+              105,
+              0
+            ],
+            [
+              106,
+              0
+            ],
+            [
+              107,
+              0
+            ],
+            [
+              108,
+              0
+            ],
+            [
+              109,
+              0
+            ],
+            [
+              111,
+              0
+            ],
+            [
+              112,
+              0
+            ],
+            [
+              113,
+              0
+            ],
+            [
+              114,
+              0
+            ],
+            [
+              115,
+              0
+            ],
+            [
+              116,
+              0
+            ],
+            [
+              117,
+              0
+            ],
+            [
+              118,
+              0
+            ],
+            [
+              119,
+              0
+            ],
+            [
+              120,
+              0
+            ],
+            [
+              121,
+              0
+            ],
+            [
+              122,
+              0
+            ],
+            [
+              123,
+              0
+            ],
+            [
+              124,
+              0
+            ],
+            [
+              125,
+              0
+            ],
+            [
+              126,
+              0
+            ],
+            [
+              127,
+              0
+            ],
+            [
+              128,
+              0
+            ],
+            [
+              129,
+              2
+            ],
+            [
+              130,
+              0
+            ],
+            [
+              131,
+              0
+            ],
+            [
+              132,
+              0
+            ],
+            [
+              133,
+              0
+            ],
+            [
+              134,
+              0
+            ],
+            [
+              135,
+              0
+            ],
+            [
+              136,
+              0
+            ],
+            [
+              137,
+              0
+            ],
+            [
+              138,
+              0
+            ],
+            [
+              139,
+              0
+            ],
+            [
+              140,
+              0
+            ],
+            [
+              141,
+              0
+            ],
+            [
+              142,
+              0
+            ],
+            [
+              143,
+              0
+            ],
+            [
+              144,
+              0
+            ],
+            [
+              145,
+              0
+            ],
+            [
+              146,
+              0
+            ],
+            [
+              147,
+              0
+            ],
+            [
+              148,
+              0
+            ],
+            [
+              149,
+              0
+            ],
+            [
+              150,
+              0
+            ],
+            [
+              151,
+              0
+            ],
+            [
+              152,
+              0
+            ],
+            [
+              153,
+              0
+            ],
+            [
+              154,
+              0
+            ],
+            [
+              155,
+              0
+            ],
+            [
+              156,
+              0
+            ],
+            [
+              157,
+              0
+            ],
+            [
+              158,
+              0
+            ],
+            [
+              159,
+              0
+            ],
+            [
+              160,
+              0
+            ],
+            [
+              161,
+              0
+            ],
+            [
+              163,
+              0
+            ],
+            [
+              164,
+              0
+            ],
+            [
+              165,
+              0
+            ],
+            [
+              167,
+              0
+            ],
+            [
+              168,
+              0
+            ],
+            [
+              169,
+              0
+            ],
+            [
+              170,
+              0
+            ],
+            [
+              171,
+              0
+            ],
+            [
+              172,
+              0
+            ],
+            [
+              173,
+              0
+            ],
+            [
+              175,
+              0
+            ],
+            [
+              176,
+              0
+            ],
+            [
+              177,
+              0
+            ],
+            [
+              178,
+              0
+            ],
+            [
+              179,
+              0
+            ],
+            [
+              180,
+              0
+            ],
+            [
+              181,
+              0
+            ],
+            [
+              183,
+              0
+            ],
+            [
+              184,
+              0
+            ],
+            [
+              185,
+              0
+            ],
+            [
+              186,
+              0
+            ],
+            [
+              187,
+              0
+            ],
+            [
+              188,
+              0
+            ],
+            [
+              189,
+              0
+            ],
+            [
+              190,
+              0
+            ],
+            [
+              191,
+              0
+            ],
+            [
+              192,
+              0
+            ],
+            [
+              193,
+              0
+            ],
+            [
+              194,
+              0
+            ],
+            [
+              195,
+              0
+            ],
+            [
+              196,
+              0
+            ],
+            [
+              197,
+              0
+            ],
+            [
+              198,
+              0
+            ],
+            [
+              199,
+              0
+            ],
+            [
+              200,
+              0
+            ],
+            [
+              201,
+              0
+            ],
+            [
+              202,
+              0
+            ],
+            [
+              203,
+              0
+            ],
+            [
+              204,
+              0
+            ],
+            [
+              205,
+              0
+            ],
+            [
+              206,
+              0
+            ],
+            [
+              207,
+              0
+            ],
+            [
+              208,
+              0
+            ]
+          ],
+          "numeric": {
+            "request": "c110-count-baseline-last-r1-1",
+            "engine": "candidate",
+            "P2": true,
+            "cancelled": false,
+            "features": 648,
+            "NN": 137,
+            "priors": 123,
+            "maxNN": 3.5762786865234375e-06,
+            "maxPrior": 4.471692105489922e-08,
+            "fixed_reference": true,
+            "valueMeaning": "rootNN"
+          },
+          "wrapper_ms": 3523.514892578125
+        },
+        {
+          "id": "c110-count-baseline-last-r1-2",
+          "run": "c110-count-baseline-last-r1",
+          "fixture": "straight-jump-p2",
+          "variant": "baseline",
+          "K": 32,
+          "rootN": 32,
+          "edge_sum": 31,
+          "NNcalls": 32,
+          "noNN_backups": 0,
+          "cap": false,
+          "action": 31,
+          "depth": 5,
+          "entropy": 1.707491572814908,
+          "root_edge_value_sum": -0.26451276242733,
+          "visits": [
+            [
+              31,
+              11
+            ],
+            [
+              48,
+              0
+            ],
+            [
+              50,
+              0
+            ],
+            [
+              58,
+              0
+            ],
+            [
+              81,
+              0
+            ],
+            [
+              82,
+              0
+            ],
+            [
+              83,
+              0
+            ],
+            [
+              84,
+              0
+            ],
+            [
+              85,
+              0
+            ],
+            [
+              86,
+              0
+            ],
+            [
+              87,
+              0
+            ],
+            [
+              88,
+              0
+            ],
+            [
+              89,
+              0
+            ],
+            [
+              90,
+              0
+            ],
+            [
+              91,
+              0
+            ],
+            [
+              92,
+              0
+            ],
+            [
+              93,
+              0
+            ],
+            [
+              94,
+              0
+            ],
+            [
+              95,
+              0
+            ],
+            [
+              96,
+              0
+            ],
+            [
+              97,
+              0
+            ],
+            [
+              98,
+              0
+            ],
+            [
+              99,
+              0
+            ],
+            [
+              100,
+              0
+            ],
+            [
+              101,
+              0
+            ],
+            [
+              102,
+              0
+            ],
+            [
+              103,
+              0
+            ],
+            [
+              104,
+              0
+            ],
+            [
+              105,
+              0
+            ],
+            [
+              106,
+              0
+            ],
+            [
+              107,
+              0
+            ],
+            [
+              108,
+              0
+            ],
+            [
+              109,
+              0
+            ],
+            [
+              110,
+              0
+            ],
+            [
+              111,
+              0
+            ],
+            [
+              112,
+              0
+            ],
+            [
+              113,
+              0
+            ],
+            [
+              114,
+              0
+            ],
+            [
+              115,
+              0
+            ],
+            [
+              116,
+              0
+            ],
+            [
+              117,
+              0
+            ],
+            [
+              118,
+              0
+            ],
+            [
+              119,
+              0
+            ],
+            [
+              120,
+              0
+            ],
+            [
+              121,
+              0
+            ],
+            [
+              122,
+              0
+            ],
+            [
+              123,
+              0
+            ],
+            [
+              124,
+              2
+            ],
+            [
+              125,
+              4
+            ],
+            [
+              126,
+              0
+            ],
+            [
+              127,
+              0
+            ],
+            [
+              128,
+              0
+            ],
+            [
+              129,
+              7
+            ],
+            [
+              130,
+              0
+            ],
+            [
+              131,
+              3
+            ],
+            [
+              132,
+              0
+            ],
+            [
+              133,
+              0
+            ],
+            [
+              134,
+              1
+            ],
+            [
+              135,
+              0
+            ],
+            [
+              136,
+              3
+            ],
+            [
+              137,
+              0
+            ],
+            [
+              138,
+              0
+            ],
+            [
+              139,
+              0
+            ],
+            [
+              140,
+              0
+            ],
+            [
+              141,
+              0
+            ],
+            [
+              142,
+              0
+            ],
+            [
+              143,
+              0
+            ],
+            [
+              144,
+              0
+            ],
+            [
+              145,
+              0
+            ],
+            [
+              146,
+              0
+            ],
+            [
+              147,
+              0
+            ],
+            [
+              148,
+              0
+            ],
+            [
+              149,
+              0
+            ],
+            [
+              150,
+              0
+            ],
+            [
+              151,
+              0
+            ],
+            [
+              152,
+              0
+            ],
+            [
+              153,
+              0
+            ],
+            [
+              154,
+              0
+            ],
+            [
+              155,
+              0
+            ],
+            [
+              156,
+              0
+            ],
+            [
+              157,
+              0
+            ],
+            [
+              158,
+              0
+            ],
+            [
+              159,
+              0
+            ],
+            [
+              160,
+              0
+            ],
+            [
+              161,
+              0
+            ],
+            [
+              162,
+              0
+            ],
+            [
+              163,
+              0
+            ],
+            [
+              164,
+              0
+            ],
+            [
+              165,
+              0
+            ],
+            [
+              166,
+              0
+            ],
+            [
+              167,
+              0
+            ],
+            [
+              168,
+              0
+            ],
+            [
+              169,
+              0
+            ],
+            [
+              170,
+              0
+            ],
+            [
+              171,
+              0
+            ],
+            [
+              172,
+              0
+            ],
+            [
+              173,
+              0
+            ],
+            [
+              174,
+              0
+            ],
+            [
+              175,
+              0
+            ],
+            [
+              176,
+              0
+            ],
+            [
+              177,
+              0
+            ],
+            [
+              178,
+              0
+            ],
+            [
+              179,
+              0
+            ],
+            [
+              180,
+              0
+            ],
+            [
+              181,
+              0
+            ],
+            [
+              182,
+              0
+            ],
+            [
+              183,
+              0
+            ],
+            [
+              184,
+              0
+            ],
+            [
+              185,
+              0
+            ],
+            [
+              186,
+              0
+            ],
+            [
+              187,
+              0
+            ],
+            [
+              188,
+              0
+            ],
+            [
+              189,
+              0
+            ],
+            [
+              190,
+              0
+            ],
+            [
+              191,
+              0
+            ],
+            [
+              192,
+              0
+            ],
+            [
+              193,
+              0
+            ],
+            [
+              194,
+              0
+            ],
+            [
+              195,
+              0
+            ],
+            [
+              196,
+              0
+            ],
+            [
+              197,
+              0
+            ],
+            [
+              198,
+              0
+            ],
+            [
+              199,
+              0
+            ],
+            [
+              200,
+              0
+            ],
+            [
+              201,
+              0
+            ],
+            [
+              202,
+              0
+            ],
+            [
+              203,
+              0
+            ],
+            [
+              204,
+              0
+            ],
+            [
+              205,
+              0
+            ],
+            [
+              206,
+              0
+            ],
+            [
+              207,
+              0
+            ],
+            [
+              208,
+              0
+            ]
+          ],
+          "numeric": {
+            "request": "c110-count-baseline-last-r1-2",
+            "engine": "candidate",
+            "P2": true,
+            "cancelled": false,
+            "features": 648,
+            "NN": 137,
+            "priors": 132,
+            "maxNN": 3.0994415283203125e-06,
+            "maxPrior": 3.4176327984303256e-07,
+            "fixed_reference": true,
+            "valueMeaning": "rootNN"
+          },
+          "wrapper_ms": 3187.39013671875
+        },
+        {
+          "id": "c110-count-c1-last-r1-1",
+          "run": "c110-count-c1-last-r1",
+          "fixture": "straight-jump-p2",
+          "variant": "c1",
+          "K": 32,
+          "rootN": 32,
+          "edge_sum": 31,
+          "NNcalls": 32,
+          "noNN_backups": 0,
+          "cap": false,
+          "action": 131,
+          "depth": 3,
+          "entropy": 1.7506633449513396,
+          "root_edge_value_sum": 0.9187776893377304,
+          "visits": [
+            [
+              31,
+              4
+            ],
+            [
+              48,
+              0
+            ],
+            [
+              50,
+              0
+            ],
+            [
+              58,
+              0
+            ],
+            [
+              81,
+              0
+            ],
+            [
+              82,
+              0
+            ],
+            [
+              83,
+              0
+            ],
+            [
+              84,
+              0
+            ],
+            [
+              85,
+              0
+            ],
+            [
+              86,
+              0
+            ],
+            [
+              87,
+              0
+            ],
+            [
+              88,
+              0
+            ],
+            [
+              89,
+              0
+            ],
+            [
+              90,
+              0
+            ],
+            [
+              91,
+              0
+            ],
+            [
+              92,
+              0
+            ],
+            [
+              93,
+              0
+            ],
+            [
+              94,
+              0
+            ],
+            [
+              95,
+              0
+            ],
+            [
+              96,
+              0
+            ],
+            [
+              97,
+              0
+            ],
+            [
+              98,
+              0
+            ],
+            [
+              99,
+              0
+            ],
+            [
+              100,
+              0
+            ],
+            [
+              101,
+              0
+            ],
+            [
+              102,
+              0
+            ],
+            [
+              103,
+              0
+            ],
+            [
+              104,
+              0
+            ],
+            [
+              105,
+              0
+            ],
+            [
+              106,
+              0
+            ],
+            [
+              107,
+              0
+            ],
+            [
+              108,
+              0
+            ],
+            [
+              109,
+              0
+            ],
+            [
+              110,
+              0
+            ],
+            [
+              111,
+              0
+            ],
+            [
+              112,
+              0
+            ],
+            [
+              113,
+              0
+            ],
+            [
+              114,
+              0
+            ],
+            [
+              115,
+              0
+            ],
+            [
+              116,
+              0
+            ],
+            [
+              117,
+              0
+            ],
+            [
+              118,
+              0
+            ],
+            [
+              119,
+              0
+            ],
+            [
+              120,
+              0
+            ],
+            [
+              121,
+              0
+            ],
+            [
+              122,
+              0
+            ],
+            [
+              123,
+              0
+            ],
+            [
+              124,
+              2
+            ],
+            [
+              125,
+              4
+            ],
+            [
+              126,
+              0
+            ],
+            [
+              127,
+              0
+            ],
+            [
+              128,
+              0
+            ],
+            [
+              129,
+              8
+            ],
+            [
+              130,
+              0
+            ],
+            [
+              131,
+              9
+            ],
+            [
+              132,
+              0
+            ],
+            [
+              133,
+              0
+            ],
+            [
+              134,
+              1
+            ],
+            [
+              135,
+              0
+            ],
+            [
+              136,
+              3
+            ],
+            [
+              137,
+              0
+            ],
+            [
+              138,
+              0
+            ],
+            [
+              139,
+              0
+            ],
+            [
+              140,
+              0
+            ],
+            [
+              141,
+              0
+            ],
+            [
+              142,
+              0
+            ],
+            [
+              143,
+              0
+            ],
+            [
+              144,
+              0
+            ],
+            [
+              145,
+              0
+            ],
+            [
+              146,
+              0
+            ],
+            [
+              147,
+              0
+            ],
+            [
+              148,
+              0
+            ],
+            [
+              149,
+              0
+            ],
+            [
+              150,
+              0
+            ],
+            [
+              151,
+              0
+            ],
+            [
+              152,
+              0
+            ],
+            [
+              153,
+              0
+            ],
+            [
+              154,
+              0
+            ],
+            [
+              155,
+              0
+            ],
+            [
+              156,
+              0
+            ],
+            [
+              157,
+              0
+            ],
+            [
+              158,
+              0
+            ],
+            [
+              159,
+              0
+            ],
+            [
+              160,
+              0
+            ],
+            [
+              161,
+              0
+            ],
+            [
+              162,
+              0
+            ],
+            [
+              163,
+              0
+            ],
+            [
+              164,
+              0
+            ],
+            [
+              165,
+              0
+            ],
+            [
+              166,
+              0
+            ],
+            [
+              167,
+              0
+            ],
+            [
+              168,
+              0
+            ],
+            [
+              169,
+              0
+            ],
+            [
+              170,
+              0
+            ],
+            [
+              171,
+              0
+            ],
+            [
+              172,
+              0
+            ],
+            [
+              173,
+              0
+            ],
+            [
+              174,
+              0
+            ],
+            [
+              175,
+              0
+            ],
+            [
+              176,
+              0
+            ],
+            [
+              177,
+              0
+            ],
+            [
+              178,
+              0
+            ],
+            [
+              179,
+              0
+            ],
+            [
+              180,
+              0
+            ],
+            [
+              181,
+              0
+            ],
+            [
+              182,
+              0
+            ],
+            [
+              183,
+              0
+            ],
+            [
+              184,
+              0
+            ],
+            [
+              185,
+              0
+            ],
+            [
+              186,
+              0
+            ],
+            [
+              187,
+              0
+            ],
+            [
+              188,
+              0
+            ],
+            [
+              189,
+              0
+            ],
+            [
+              190,
+              0
+            ],
+            [
+              191,
+              0
+            ],
+            [
+              192,
+              0
+            ],
+            [
+              193,
+              0
+            ],
+            [
+              194,
+              0
+            ],
+            [
+              195,
+              0
+            ],
+            [
+              196,
+              0
+            ],
+            [
+              197,
+              0
+            ],
+            [
+              198,
+              0
+            ],
+            [
+              199,
+              0
+            ],
+            [
+              200,
+              0
+            ],
+            [
+              201,
+              0
+            ],
+            [
+              202,
+              0
+            ],
+            [
+              203,
+              0
+            ],
+            [
+              204,
+              0
+            ],
+            [
+              205,
+              0
+            ],
+            [
+              206,
+              0
+            ],
+            [
+              207,
+              0
+            ],
+            [
+              208,
+              0
+            ]
+          ],
+          "numeric": {
+            "request": "c110-count-c1-last-r1-1",
+            "engine": "candidate",
+            "P2": true,
+            "cancelled": false,
+            "features": 648,
+            "NN": 137,
+            "priors": 132,
+            "maxNN": 3.0994415283203125e-06,
+            "maxPrior": 3.4176327984303256e-07,
+            "fixed_reference": true,
+            "valueMeaning": "rootNN"
+          },
+          "wrapper_ms": 3387.614990234375
+        }
+      ],
+      "comparison": [
+        {
+          "fixture": "initial-p1",
+          "baseline_action": 13,
+          "c1_action": 13,
+          "changed_edges": 0,
+          "changed": [],
+          "TV": 0,
+          "L1visit": 0,
+          "baseline_entropy": 0.5503536168824767,
+          "c1_entropy": 0.5503536168824767,
+          "baseline_depth": 8,
+          "c1_depth": 8,
+          "baseline_root_edge_value_sum": 6.186480283737183,
+          "c1_root_edge_value_sum": 6.201153457164764
+        },
+        {
+          "fixture": "asym-hv-p2",
+          "baseline_action": 67,
+          "c1_action": 67,
+          "changed_edges": 2,
+          "changed": [
+            {
+              "Action": 67,
+              "baseline": 29,
+              "c1": 31
+            },
+            {
+              "Action": 129,
+              "baseline": 2,
+              "c1": 0
+            }
+          ],
+          "TV": 0.06451612903225806,
+          "L1visit": 4,
+          "baseline_entropy": 0.23921709381651282,
+          "c1_entropy": 0,
+          "baseline_depth": 7,
+          "c1_depth": 6,
+          "baseline_root_edge_value_sum": 5.25840750336647,
+          "c1_root_edge_value_sum": 6.548651695251465
+        },
+        {
+          "fixture": "straight-jump-p2",
+          "baseline_action": 31,
+          "c1_action": 131,
+          "changed_edges": 3,
+          "changed": [
+            {
+              "Action": 31,
+              "baseline": 11,
+              "c1": 4
+            },
+            {
+              "Action": 129,
+              "baseline": 7,
+              "c1": 8
+            },
+            {
+              "Action": 131,
+              "baseline": 3,
+              "c1": 9
+            }
+          ],
+          "TV": 0.22580645161290322,
+          "L1visit": 14,
+          "baseline_entropy": 1.707491572814908,
+          "c1_entropy": 1.7506633449513396,
+          "baseline_depth": 5,
+          "c1_depth": 3,
+          "baseline_root_edge_value_sum": -0.26451276242733,
+          "c1_root_edge_value_sum": 0.9187776893377304
+        }
+      ],
+      "backups": 192,
+      "NN": 192,
+      "rootN_direct_observed": true,
+      "browser_executed": true,
+      "not_500ms_or_pure_NN_cost_comparison": true
+    },
+    "parity": [
+      {
+        "fixture": "initial-p1",
+        "CP_exact": true,
+        "features648_exact": true,
+        "NN137_mixed": true
+      },
+      {
+        "fixture": "asym-hv-p2",
+        "CP_exact": true,
+        "features648_exact": true,
+        "NN137_mixed": true
+      },
+      {
+        "fixture": "straight-jump-p2",
+        "CP_exact": true,
+        "features648_exact": true,
+        "NN137_mixed": true
+      }
+    ],
+    "nullCases": [
+      {
+        "request": "c110-initial-pair-r1-138",
+        "root_preparation_ms": 236.81005859375,
+        "APIawait_ms": 110.559814453125,
+        "first_received_interval_elapsed": [
+          434.415283203125,
+          434.62548828125
+        ],
+        "public_elapsed": 417.420166015625,
+        "classification": "initial_no_completed_cp",
+        "finite_root_numeric_only": true,
+        "eligible_cp": false,
+        "prior_missing_not_fabricated": true
+      }
+    ],
+    "goal_games": 3,
+    "responsibility_games": 1,
+    "original_end_clock": [
+      {
+        "run": "c110-baseline-public-r1",
+        "clock": {
+          "lo_ms": -0.1,
+          "hi_ms": 0.1048828125,
+          "mid_ms": 0.00244140625,
+          "error_ms": 0.20244140625,
+          "samples": [
+            {
+              "start_ms": 1790928930105.66,
+              "end_ms": 1790928930106.13,
+              "worker_ms": 1790928930106.075
+            },
+            {
+              "start_ms": 1790928930106.135,
+              "end_ms": 1790928930106.165,
+              "worker_ms": 1790928930106.155
+            },
+            {
+              "start_ms": 1790928930106.17,
+              "end_ms": 1790928930106.185,
+              "worker_ms": 1790928930106.18
+            },
+            {
+              "start_ms": 1790928930106.185,
+              "end_ms": 1790928930106.2,
+              "worker_ms": 1790928930106.195
+            },
+            {
+              "start_ms": 1790928930106.2,
+              "end_ms": 1790928930106.21,
+              "worker_ms": 1790928930106.21
+            },
+            {
+              "start_ms": 1790928930106.21,
+              "end_ms": 1790928930106.2249,
+              "worker_ms": 1790928930106.22
+            },
+            {
+              "start_ms": 1790928930106.2249,
+              "end_ms": 1790928930106.24,
+              "worker_ms": 1790928930106.24
+            },
+            {
+              "start_ms": 1790928930106.25,
+              "end_ms": 1790928930106.26,
+              "worker_ms": 1790928930106.255
+            }
+          ]
+        }
+      },
+      {
+        "run": "c110-initial-pair-r1",
+        "clock": {
+          "lo_ms": -0.105126953125,
+          "hi_ms": 0.099755859375,
+          "mid_ms": -0.002685546875,
+          "error_ms": 0.20244140625,
+          "samples": [
+            {
+              "start_ms": 1790929140144.095,
+              "end_ms": 1790929140144.7,
+              "worker_ms": 1790929140144.335
+            },
+            {
+              "start_ms": 1790929140144.71,
+              "end_ms": 1790929140144.7551,
+              "worker_ms": 1790929140144.7349
+            },
+            {
+              "start_ms": 1790929140144.7551,
+              "end_ms": 1790929140144.7651,
+              "worker_ms": 1790929140144.76
+            },
+            {
+              "start_ms": 1790929140144.7651,
+              "end_ms": 1790929140144.78,
+              "worker_ms": 1790929140144.77
+            },
+            {
+              "start_ms": 1790929140144.78,
+              "end_ms": 1790929140144.8,
+              "worker_ms": 1790929140144.785
+            },
+            {
+              "start_ms": 1790929140144.8,
+              "end_ms": 1790929140144.8152,
+              "worker_ms": 1790929140144.7998
+            },
+            {
+              "start_ms": 1790929140144.8152,
+              "end_ms": 1790929140144.825,
+              "worker_ms": 1790929140144.8198
+            },
+            {
+              "start_ms": 1790929140144.83,
+              "end_ms": 1790929140144.845,
+              "worker_ms": 1790929140144.835
+            }
+          ]
+        }
+      },
+      {
+        "run": "c110-asym-pair-r1",
+        "clock": {
+          "lo_ms": -0.11025390625,
+          "hi_ms": 0.094873046875,
+          "mid_ms": -0.0076904296875,
+          "error_ms": 0.2025634765625,
+          "samples": [
+            {
+              "start_ms": 1790929453417.5051,
+              "end_ms": 1790929453424.21,
+              "worker_ms": 1790929453417.89
+            },
+            {
+              "start_ms": 1790929453424.215,
+              "end_ms": 1790929453424.3,
+              "worker_ms": 1790929453424.275
+            },
+            {
+              "start_ms": 1790929453424.3,
+              "end_ms": 1790929453424.32,
+              "worker_ms": 1790929453424.305
+            },
+            {
+              "start_ms": 1790929453424.325,
+              "end_ms": 1790929453424.34,
+              "worker_ms": 1790929453424.325
+            },
+            {
+              "start_ms": 1790929453424.34,
+              "end_ms": 1790929453424.36,
+              "worker_ms": 1790929453424.345
+            },
+            {
+              "start_ms": 1790929453424.36,
+              "end_ms": 1790929453424.37,
+              "worker_ms": 1790929453424.3599
+            },
+            {
+              "start_ms": 1790929453424.37,
+              "end_ms": 1790929453424.3901,
+              "worker_ms": 1790929453424.375
+            },
+            {
+              "start_ms": 1790929453424.395,
+              "end_ms": 1790929453424.405,
+              "worker_ms": 1790929453424.39
+            }
+          ]
+        }
+      }
+    ],
+    "browser_executed": true,
+    "Node_referee": false
+  },
+  "independent_count_audit": {
+    "rows": [
+      {
+        "id": "c111-asym-baseline-r1-1",
+        "fixture": "asym-hv-p2",
+        "variant": "baseline",
+        "K": 32,
+        "rootN": 32,
+        "edge_sum": 31,
+        "NNcalls": 32,
+        "noNN_backups": 0,
+        "cap": false,
+        "action": 67,
+        "depth": 7,
+        "entropy": 0.23921709381651282,
+        "root_edge_value_sum": 5.25840750336647,
+        "visits": [
+          [
+            67,
+            29
+          ],
+          [
+            75,
+            0
+          ],
+          [
+            77,
+            0
+          ],
+          [
+            81,
+            0
+          ],
+          [
+            82,
+            0
+          ],
+          [
+            83,
+            0
+          ],
+          [
+            84,
+            0
+          ],
+          [
+            85,
+            0
+          ],
+          [
+            86,
+            0
+          ],
+          [
+            87,
+            0
+          ],
+          [
+            88,
+            0
+          ],
+          [
+            89,
+            0
+          ],
+          [
+            90,
+            0
+          ],
+          [
+            91,
+            0
+          ],
+          [
+            92,
+            0
+          ],
+          [
+            93,
+            0
+          ],
+          [
+            94,
+            0
+          ],
+          [
+            95,
+            0
+          ],
+          [
+            96,
+            0
+          ],
+          [
+            100,
+            0
+          ],
+          [
+            101,
+            0
+          ],
+          [
+            102,
+            0
+          ],
+          [
+            103,
+            0
+          ],
+          [
+            104,
+            0
+          ],
+          [
+            105,
+            0
+          ],
+          [
+            106,
+            0
+          ],
+          [
+            107,
+            0
+          ],
+          [
+            108,
+            0
+          ],
+          [
+            109,
+            0
+          ],
+          [
+            111,
+            0
+          ],
+          [
+            112,
+            0
+          ],
+          [
+            113,
+            0
+          ],
+          [
+            114,
+            0
+          ],
+          [
+            115,
+            0
+          ],
+          [
+            116,
+            0
+          ],
+          [
+            117,
+            0
+          ],
+          [
+            118,
+            0
+          ],
+          [
+            119,
+            0
+          ],
+          [
+            120,
+            0
+          ],
+          [
+            121,
+            0
+          ],
+          [
+            122,
+            0
+          ],
+          [
+            123,
+            0
+          ],
+          [
+            124,
+            0
+          ],
+          [
+            125,
+            0
+          ],
+          [
+            126,
+            0
+          ],
+          [
+            127,
+            0
+          ],
+          [
+            128,
+            0
+          ],
+          [
+            129,
+            2
+          ],
+          [
+            130,
+            0
+          ],
+          [
+            131,
+            0
+          ],
+          [
+            132,
+            0
+          ],
+          [
+            133,
+            0
+          ],
+          [
+            134,
+            0
+          ],
+          [
+            135,
+            0
+          ],
+          [
+            136,
+            0
+          ],
+          [
+            137,
+            0
+          ],
+          [
+            138,
+            0
+          ],
+          [
+            139,
+            0
+          ],
+          [
+            140,
+            0
+          ],
+          [
+            141,
+            0
+          ],
+          [
+            142,
+            0
+          ],
+          [
+            143,
+            0
+          ],
+          [
+            144,
+            0
+          ],
+          [
+            145,
+            0
+          ],
+          [
+            146,
+            0
+          ],
+          [
+            147,
+            0
+          ],
+          [
+            148,
+            0
+          ],
+          [
+            149,
+            0
+          ],
+          [
+            150,
+            0
+          ],
+          [
+            151,
+            0
+          ],
+          [
+            152,
+            0
+          ],
+          [
+            153,
+            0
+          ],
+          [
+            154,
+            0
+          ],
+          [
+            155,
+            0
+          ],
+          [
+            156,
+            0
+          ],
+          [
+            157,
+            0
+          ],
+          [
+            158,
+            0
+          ],
+          [
+            159,
+            0
+          ],
+          [
+            160,
+            0
+          ],
+          [
+            161,
+            0
+          ],
+          [
+            163,
+            0
+          ],
+          [
+            164,
+            0
+          ],
+          [
+            165,
+            0
+          ],
+          [
+            167,
+            0
+          ],
+          [
+            168,
+            0
+          ],
+          [
+            169,
+            0
+          ],
+          [
+            170,
+            0
+          ],
+          [
+            171,
+            0
+          ],
+          [
+            172,
+            0
+          ],
+          [
+            173,
+            0
+          ],
+          [
+            175,
+            0
+          ],
+          [
+            176,
+            0
+          ],
+          [
+            177,
+            0
+          ],
+          [
+            178,
+            0
+          ],
+          [
+            179,
+            0
+          ],
+          [
+            180,
+            0
+          ],
+          [
+            181,
+            0
+          ],
+          [
+            183,
+            0
+          ],
+          [
+            184,
+            0
+          ],
+          [
+            185,
+            0
+          ],
+          [
+            186,
+            0
+          ],
+          [
+            187,
+            0
+          ],
+          [
+            188,
+            0
+          ],
+          [
+            189,
+            0
+          ],
+          [
+            190,
+            0
+          ],
+          [
+            191,
+            0
+          ],
+          [
+            192,
+            0
+          ],
+          [
+            193,
+            0
+          ],
+          [
+            194,
+            0
+          ],
+          [
+            195,
+            0
+          ],
+          [
+            196,
+            0
+          ],
+          [
+            197,
+            0
+          ],
+          [
+            198,
+            0
+          ],
+          [
+            199,
+            0
+          ],
+          [
+            200,
+            0
+          ],
+          [
+            201,
+            0
+          ],
+          [
+            202,
+            0
+          ],
+          [
+            203,
+            0
+          ],
+          [
+            204,
+            0
+          ],
+          [
+            205,
+            0
+          ],
+          [
+            206,
+            0
+          ],
+          [
+            207,
+            0
+          ],
+          [
+            208,
+            0
+          ]
+        ],
+        "numeric": {
+          "request": "c111-asym-baseline-r1-1",
+          "engine": "candidate",
+          "P2": true,
+          "cancelled": false,
+          "features": 648,
+          "NN": 137,
+          "priors": 123,
+          "maxNN": 3.5762786865234375e-06,
+          "maxPrior": 4.471692105489922e-08,
+          "fixed_reference": true,
+          "valueMeaning": "rootNN"
+        },
+        "wrapper_ms": 1219.55517578125
+      },
+      {
+        "id": "c111-c1-r1-1",
+        "fixture": "asym-hv-p2",
+        "variant": "c1",
+        "K": 32,
+        "rootN": 32,
+        "edge_sum": 31,
+        "NNcalls": 32,
+        "noNN_backups": 0,
+        "cap": false,
+        "action": 67,
+        "depth": 6,
+        "entropy": 0,
+        "root_edge_value_sum": 6.548651695251465,
+        "visits": [
+          [
+            67,
+            31
+          ],
+          [
+            75,
+            0
+          ],
+          [
+            77,
+            0
+          ],
+          [
+            81,
+            0
+          ],
+          [
+            82,
+            0
+          ],
+          [
+            83,
+            0
+          ],
+          [
+            84,
+            0
+          ],
+          [
+            85,
+            0
+          ],
+          [
+            86,
+            0
+          ],
+          [
+            87,
+            0
+          ],
+          [
+            88,
+            0
+          ],
+          [
+            89,
+            0
+          ],
+          [
+            90,
+            0
+          ],
+          [
+            91,
+            0
+          ],
+          [
+            92,
+            0
+          ],
+          [
+            93,
+            0
+          ],
+          [
+            94,
+            0
+          ],
+          [
+            95,
+            0
+          ],
+          [
+            96,
+            0
+          ],
+          [
+            100,
+            0
+          ],
+          [
+            101,
+            0
+          ],
+          [
+            102,
+            0
+          ],
+          [
+            103,
+            0
+          ],
+          [
+            104,
+            0
+          ],
+          [
+            105,
+            0
+          ],
+          [
+            106,
+            0
+          ],
+          [
+            107,
+            0
+          ],
+          [
+            108,
+            0
+          ],
+          [
+            109,
+            0
+          ],
+          [
+            111,
+            0
+          ],
+          [
+            112,
+            0
+          ],
+          [
+            113,
+            0
+          ],
+          [
+            114,
+            0
+          ],
+          [
+            115,
+            0
+          ],
+          [
+            116,
+            0
+          ],
+          [
+            117,
+            0
+          ],
+          [
+            118,
+            0
+          ],
+          [
+            119,
+            0
+          ],
+          [
+            120,
+            0
+          ],
+          [
+            121,
+            0
+          ],
+          [
+            122,
+            0
+          ],
+          [
+            123,
+            0
+          ],
+          [
+            124,
+            0
+          ],
+          [
+            125,
+            0
+          ],
+          [
+            126,
+            0
+          ],
+          [
+            127,
+            0
+          ],
+          [
+            128,
+            0
+          ],
+          [
+            129,
+            0
+          ],
+          [
+            130,
+            0
+          ],
+          [
+            131,
+            0
+          ],
+          [
+            132,
+            0
+          ],
+          [
+            133,
+            0
+          ],
+          [
+            134,
+            0
+          ],
+          [
+            135,
+            0
+          ],
+          [
+            136,
+            0
+          ],
+          [
+            137,
+            0
+          ],
+          [
+            138,
+            0
+          ],
+          [
+            139,
+            0
+          ],
+          [
+            140,
+            0
+          ],
+          [
+            141,
+            0
+          ],
+          [
+            142,
+            0
+          ],
+          [
+            143,
+            0
+          ],
+          [
+            144,
+            0
+          ],
+          [
+            145,
+            0
+          ],
+          [
+            146,
+            0
+          ],
+          [
+            147,
+            0
+          ],
+          [
+            148,
+            0
+          ],
+          [
+            149,
+            0
+          ],
+          [
+            150,
+            0
+          ],
+          [
+            151,
+            0
+          ],
+          [
+            152,
+            0
+          ],
+          [
+            153,
+            0
+          ],
+          [
+            154,
+            0
+          ],
+          [
+            155,
+            0
+          ],
+          [
+            156,
+            0
+          ],
+          [
+            157,
+            0
+          ],
+          [
+            158,
+            0
+          ],
+          [
+            159,
+            0
+          ],
+          [
+            160,
+            0
+          ],
+          [
+            161,
+            0
+          ],
+          [
+            163,
+            0
+          ],
+          [
+            164,
+            0
+          ],
+          [
+            165,
+            0
+          ],
+          [
+            167,
+            0
+          ],
+          [
+            168,
+            0
+          ],
+          [
+            169,
+            0
+          ],
+          [
+            170,
+            0
+          ],
+          [
+            171,
+            0
+          ],
+          [
+            172,
+            0
+          ],
+          [
+            173,
+            0
+          ],
+          [
+            175,
+            0
+          ],
+          [
+            176,
+            0
+          ],
+          [
+            177,
+            0
+          ],
+          [
+            178,
+            0
+          ],
+          [
+            179,
+            0
+          ],
+          [
+            180,
+            0
+          ],
+          [
+            181,
+            0
+          ],
+          [
+            183,
+            0
+          ],
+          [
+            184,
+            0
+          ],
+          [
+            185,
+            0
+          ],
+          [
+            186,
+            0
+          ],
+          [
+            187,
+            0
+          ],
+          [
+            188,
+            0
+          ],
+          [
+            189,
+            0
+          ],
+          [
+            190,
+            0
+          ],
+          [
+            191,
+            0
+          ],
+          [
+            192,
+            0
+          ],
+          [
+            193,
+            0
+          ],
+          [
+            194,
+            0
+          ],
+          [
+            195,
+            0
+          ],
+          [
+            196,
+            0
+          ],
+          [
+            197,
+            0
+          ],
+          [
+            198,
+            0
+          ],
+          [
+            199,
+            0
+          ],
+          [
+            200,
+            0
+          ],
+          [
+            201,
+            0
+          ],
+          [
+            202,
+            0
+          ],
+          [
+            203,
+            0
+          ],
+          [
+            204,
+            0
+          ],
+          [
+            205,
+            0
+          ],
+          [
+            206,
+            0
+          ],
+          [
+            207,
+            0
+          ],
+          [
+            208,
+            0
+          ]
+        ],
+        "numeric": {
+          "request": "c111-c1-r1-1",
+          "engine": "candidate",
+          "P2": true,
+          "cancelled": false,
+          "features": 648,
+          "NN": 137,
+          "priors": 123,
+          "maxNN": 3.5762786865234375e-06,
+          "maxPrior": 4.471692105489922e-08,
+          "fixed_reference": true,
+          "valueMeaning": "rootNN"
+        },
+        "wrapper_ms": 1444.544921875
+      },
+      {
+        "id": "c111-c1-r1-2",
+        "fixture": "straight-jump-p2",
+        "variant": "c1",
+        "K": 32,
+        "rootN": 32,
+        "edge_sum": 31,
+        "NNcalls": 32,
+        "noNN_backups": 0,
+        "cap": false,
+        "action": 131,
+        "depth": 3,
+        "entropy": 1.7506633449513396,
+        "root_edge_value_sum": 0.9187776893377304,
+        "visits": [
+          [
+            31,
+            4
+          ],
+          [
+            48,
+            0
+          ],
+          [
+            50,
+            0
+          ],
+          [
+            58,
+            0
+          ],
+          [
+            81,
+            0
+          ],
+          [
+            82,
+            0
+          ],
+          [
+            83,
+            0
+          ],
+          [
+            84,
+            0
+          ],
+          [
+            85,
+            0
+          ],
+          [
+            86,
+            0
+          ],
+          [
+            87,
+            0
+          ],
+          [
+            88,
+            0
+          ],
+          [
+            89,
+            0
+          ],
+          [
+            90,
+            0
+          ],
+          [
+            91,
+            0
+          ],
+          [
+            92,
+            0
+          ],
+          [
+            93,
+            0
+          ],
+          [
+            94,
+            0
+          ],
+          [
+            95,
+            0
+          ],
+          [
+            96,
+            0
+          ],
+          [
+            97,
+            0
+          ],
+          [
+            98,
+            0
+          ],
+          [
+            99,
+            0
+          ],
+          [
+            100,
+            0
+          ],
+          [
+            101,
+            0
+          ],
+          [
+            102,
+            0
+          ],
+          [
+            103,
+            0
+          ],
+          [
+            104,
+            0
+          ],
+          [
+            105,
+            0
+          ],
+          [
+            106,
+            0
+          ],
+          [
+            107,
+            0
+          ],
+          [
+            108,
+            0
+          ],
+          [
+            109,
+            0
+          ],
+          [
+            110,
+            0
+          ],
+          [
+            111,
+            0
+          ],
+          [
+            112,
+            0
+          ],
+          [
+            113,
+            0
+          ],
+          [
+            114,
+            0
+          ],
+          [
+            115,
+            0
+          ],
+          [
+            116,
+            0
+          ],
+          [
+            117,
+            0
+          ],
+          [
+            118,
+            0
+          ],
+          [
+            119,
+            0
+          ],
+          [
+            120,
+            0
+          ],
+          [
+            121,
+            0
+          ],
+          [
+            122,
+            0
+          ],
+          [
+            123,
+            0
+          ],
+          [
+            124,
+            2
+          ],
+          [
+            125,
+            4
+          ],
+          [
+            126,
+            0
+          ],
+          [
+            127,
+            0
+          ],
+          [
+            128,
+            0
+          ],
+          [
+            129,
+            8
+          ],
+          [
+            130,
+            0
+          ],
+          [
+            131,
+            9
+          ],
+          [
+            132,
+            0
+          ],
+          [
+            133,
+            0
+          ],
+          [
+            134,
+            1
+          ],
+          [
+            135,
+            0
+          ],
+          [
+            136,
+            3
+          ],
+          [
+            137,
+            0
+          ],
+          [
+            138,
+            0
+          ],
+          [
+            139,
+            0
+          ],
+          [
+            140,
+            0
+          ],
+          [
+            141,
+            0
+          ],
+          [
+            142,
+            0
+          ],
+          [
+            143,
+            0
+          ],
+          [
+            144,
+            0
+          ],
+          [
+            145,
+            0
+          ],
+          [
+            146,
+            0
+          ],
+          [
+            147,
+            0
+          ],
+          [
+            148,
+            0
+          ],
+          [
+            149,
+            0
+          ],
+          [
+            150,
+            0
+          ],
+          [
+            151,
+            0
+          ],
+          [
+            152,
+            0
+          ],
+          [
+            153,
+            0
+          ],
+          [
+            154,
+            0
+          ],
+          [
+            155,
+            0
+          ],
+          [
+            156,
+            0
+          ],
+          [
+            157,
+            0
+          ],
+          [
+            158,
+            0
+          ],
+          [
+            159,
+            0
+          ],
+          [
+            160,
+            0
+          ],
+          [
+            161,
+            0
+          ],
+          [
+            162,
+            0
+          ],
+          [
+            163,
+            0
+          ],
+          [
+            164,
+            0
+          ],
+          [
+            165,
+            0
+          ],
+          [
+            166,
+            0
+          ],
+          [
+            167,
+            0
+          ],
+          [
+            168,
+            0
+          ],
+          [
+            169,
+            0
+          ],
+          [
+            170,
+            0
+          ],
+          [
+            171,
+            0
+          ],
+          [
+            172,
+            0
+          ],
+          [
+            173,
+            0
+          ],
+          [
+            174,
+            0
+          ],
+          [
+            175,
+            0
+          ],
+          [
+            176,
+            0
+          ],
+          [
+            177,
+            0
+          ],
+          [
+            178,
+            0
+          ],
+          [
+            179,
+            0
+          ],
+          [
+            180,
+            0
+          ],
+          [
+            181,
+            0
+          ],
+          [
+            182,
+            0
+          ],
+          [
+            183,
+            0
+          ],
+          [
+            184,
+            0
+          ],
+          [
+            185,
+            0
+          ],
+          [
+            186,
+            0
+          ],
+          [
+            187,
+            0
+          ],
+          [
+            188,
+            0
+          ],
+          [
+            189,
+            0
+          ],
+          [
+            190,
+            0
+          ],
+          [
+            191,
+            0
+          ],
+          [
+            192,
+            0
+          ],
+          [
+            193,
+            0
+          ],
+          [
+            194,
+            0
+          ],
+          [
+            195,
+            0
+          ],
+          [
+            196,
+            0
+          ],
+          [
+            197,
+            0
+          ],
+          [
+            198,
+            0
+          ],
+          [
+            199,
+            0
+          ],
+          [
+            200,
+            0
+          ],
+          [
+            201,
+            0
+          ],
+          [
+            202,
+            0
+          ],
+          [
+            203,
+            0
+          ],
+          [
+            204,
+            0
+          ],
+          [
+            205,
+            0
+          ],
+          [
+            206,
+            0
+          ],
+          [
+            207,
+            0
+          ],
+          [
+            208,
+            0
+          ]
+        ],
+        "numeric": {
+          "request": "c111-c1-r1-2",
+          "engine": "candidate",
+          "P2": true,
+          "cancelled": false,
+          "features": 648,
+          "NN": 137,
+          "priors": 132,
+          "maxNN": 3.0994415283203125e-06,
+          "maxPrior": 3.4176327984303256e-07,
+          "fixed_reference": true,
+          "valueMeaning": "rootNN"
+        },
+        "wrapper_ms": 1071.885009765625
+      },
+      {
+        "id": "c111-jump-baseline-r1-1",
+        "fixture": "straight-jump-p2",
+        "variant": "baseline",
+        "K": 32,
+        "rootN": 32,
+        "edge_sum": 31,
+        "NNcalls": 32,
+        "noNN_backups": 0,
+        "cap": false,
+        "action": 31,
+        "depth": 5,
+        "entropy": 1.707491572814908,
+        "root_edge_value_sum": -0.26451276242733,
+        "visits": [
+          [
+            31,
+            11
+          ],
+          [
+            48,
+            0
+          ],
+          [
+            50,
+            0
+          ],
+          [
+            58,
+            0
+          ],
+          [
+            81,
+            0
+          ],
+          [
+            82,
+            0
+          ],
+          [
+            83,
+            0
+          ],
+          [
+            84,
+            0
+          ],
+          [
+            85,
+            0
+          ],
+          [
+            86,
+            0
+          ],
+          [
+            87,
+            0
+          ],
+          [
+            88,
+            0
+          ],
+          [
+            89,
+            0
+          ],
+          [
+            90,
+            0
+          ],
+          [
+            91,
+            0
+          ],
+          [
+            92,
+            0
+          ],
+          [
+            93,
+            0
+          ],
+          [
+            94,
+            0
+          ],
+          [
+            95,
+            0
+          ],
+          [
+            96,
+            0
+          ],
+          [
+            97,
+            0
+          ],
+          [
+            98,
+            0
+          ],
+          [
+            99,
+            0
+          ],
+          [
+            100,
+            0
+          ],
+          [
+            101,
+            0
+          ],
+          [
+            102,
+            0
+          ],
+          [
+            103,
+            0
+          ],
+          [
+            104,
+            0
+          ],
+          [
+            105,
+            0
+          ],
+          [
+            106,
+            0
+          ],
+          [
+            107,
+            0
+          ],
+          [
+            108,
+            0
+          ],
+          [
+            109,
+            0
+          ],
+          [
+            110,
+            0
+          ],
+          [
+            111,
+            0
+          ],
+          [
+            112,
+            0
+          ],
+          [
+            113,
+            0
+          ],
+          [
+            114,
+            0
+          ],
+          [
+            115,
+            0
+          ],
+          [
+            116,
+            0
+          ],
+          [
+            117,
+            0
+          ],
+          [
+            118,
+            0
+          ],
+          [
+            119,
+            0
+          ],
+          [
+            120,
+            0
+          ],
+          [
+            121,
+            0
+          ],
+          [
+            122,
+            0
+          ],
+          [
+            123,
+            0
+          ],
+          [
+            124,
+            2
+          ],
+          [
+            125,
+            4
+          ],
+          [
+            126,
+            0
+          ],
+          [
+            127,
+            0
+          ],
+          [
+            128,
+            0
+          ],
+          [
+            129,
+            7
+          ],
+          [
+            130,
+            0
+          ],
+          [
+            131,
+            3
+          ],
+          [
+            132,
+            0
+          ],
+          [
+            133,
+            0
+          ],
+          [
+            134,
+            1
+          ],
+          [
+            135,
+            0
+          ],
+          [
+            136,
+            3
+          ],
+          [
+            137,
+            0
+          ],
+          [
+            138,
+            0
+          ],
+          [
+            139,
+            0
+          ],
+          [
+            140,
+            0
+          ],
+          [
+            141,
+            0
+          ],
+          [
+            142,
+            0
+          ],
+          [
+            143,
+            0
+          ],
+          [
+            144,
+            0
+          ],
+          [
+            145,
+            0
+          ],
+          [
+            146,
+            0
+          ],
+          [
+            147,
+            0
+          ],
+          [
+            148,
+            0
+          ],
+          [
+            149,
+            0
+          ],
+          [
+            150,
+            0
+          ],
+          [
+            151,
+            0
+          ],
+          [
+            152,
+            0
+          ],
+          [
+            153,
+            0
+          ],
+          [
+            154,
+            0
+          ],
+          [
+            155,
+            0
+          ],
+          [
+            156,
+            0
+          ],
+          [
+            157,
+            0
+          ],
+          [
+            158,
+            0
+          ],
+          [
+            159,
+            0
+          ],
+          [
+            160,
+            0
+          ],
+          [
+            161,
+            0
+          ],
+          [
+            162,
+            0
+          ],
+          [
+            163,
+            0
+          ],
+          [
+            164,
+            0
+          ],
+          [
+            165,
+            0
+          ],
+          [
+            166,
+            0
+          ],
+          [
+            167,
+            0
+          ],
+          [
+            168,
+            0
+          ],
+          [
+            169,
+            0
+          ],
+          [
+            170,
+            0
+          ],
+          [
+            171,
+            0
+          ],
+          [
+            172,
+            0
+          ],
+          [
+            173,
+            0
+          ],
+          [
+            174,
+            0
+          ],
+          [
+            175,
+            0
+          ],
+          [
+            176,
+            0
+          ],
+          [
+            177,
+            0
+          ],
+          [
+            178,
+            0
+          ],
+          [
+            179,
+            0
+          ],
+          [
+            180,
+            0
+          ],
+          [
+            181,
+            0
+          ],
+          [
+            182,
+            0
+          ],
+          [
+            183,
+            0
+          ],
+          [
+            184,
+            0
+          ],
+          [
+            185,
+            0
+          ],
+          [
+            186,
+            0
+          ],
+          [
+            187,
+            0
+          ],
+          [
+            188,
+            0
+          ],
+          [
+            189,
+            0
+          ],
+          [
+            190,
+            0
+          ],
+          [
+            191,
+            0
+          ],
+          [
+            192,
+            0
+          ],
+          [
+            193,
+            0
+          ],
+          [
+            194,
+            0
+          ],
+          [
+            195,
+            0
+          ],
+          [
+            196,
+            0
+          ],
+          [
+            197,
+            0
+          ],
+          [
+            198,
+            0
+          ],
+          [
+            199,
+            0
+          ],
+          [
+            200,
+            0
+          ],
+          [
+            201,
+            0
+          ],
+          [
+            202,
+            0
+          ],
+          [
+            203,
+            0
+          ],
+          [
+            204,
+            0
+          ],
+          [
+            205,
+            0
+          ],
+          [
+            206,
+            0
+          ],
+          [
+            207,
+            0
+          ],
+          [
+            208,
+            0
+          ]
+        ],
+        "numeric": {
+          "request": "c111-jump-baseline-r1-1",
+          "engine": "candidate",
+          "P2": true,
+          "cancelled": false,
+          "features": 648,
+          "NN": 137,
+          "priors": 132,
+          "maxNN": 3.0994415283203125e-06,
+          "maxPrior": 3.4176327984303256e-07,
+          "fixed_reference": true,
+          "valueMeaning": "rootNN"
+        },
+        "wrapper_ms": 1527.10498046875
+      }
+    ],
+    "comparison": [
+      {
+        "fixture": "asym-hv-p2",
+        "baseline_action": 67,
+        "c1_action": 67,
+        "changed_edges": 2,
+        "changed": [
+          {
+            "Action": 67,
+            "baseline": 29,
+            "c1": 31
+          },
+          {
+            "Action": 129,
+            "baseline": 2,
+            "c1": 0
+          }
+        ],
+        "TV": 0.06451612903225806,
+        "L1visit": 4,
+        "baseline_entropy": 0.23921709381651282,
+        "c1_entropy": 0,
+        "baseline_depth": 7,
+        "c1_depth": 6,
+        "baseline_root_edge_value_sum": 5.25840750336647,
+        "c1_root_edge_value_sum": 6.548651695251465
+      },
+      {
+        "fixture": "straight-jump-p2",
+        "baseline_action": 31,
+        "c1_action": 131,
+        "changed_edges": 3,
+        "changed": [
+          {
+            "Action": 31,
+            "baseline": 11,
+            "c1": 4
+          },
+          {
+            "Action": 129,
+            "baseline": 7,
+            "c1": 8
+          },
+          {
+            "Action": 131,
+            "baseline": 3,
+            "c1": 9
+          }
+        ],
+        "TV": 0.22580645161290322,
+        "L1visit": 14,
+        "baseline_entropy": 1.707491572814908,
+        "c1_entropy": 1.7506633449513396,
+        "baseline_depth": 5,
+        "c1_depth": 3,
+        "baseline_root_edge_value_sum": -0.26451276242733,
+        "c1_root_edge_value_sum": 0.9187776893377304
+      }
+    ],
+    "backups": 128,
+    "NN": 128,
+    "rootN_direct_observed": true,
+    "browser_executed": true,
+    "not_500ms_or_pure_NN_cost_comparison": true
+  },
+  "independent_clock_endpoints": [
+    {
+      "run": "c110-baseline-public-r1",
+      "public": 2,
+      "start": {
+        "lo": -0.11513671875,
+        "hi": 0.12001953125
+      },
+      "end": {
+        "lo": -0.1,
+        "hi": 0.1048828125
+      },
+      "start_end_intersection": [
+        -0.1,
+        0.1048828125
+      ],
+      "conservative_observed_endpoint_envelope": {
+        "lo": -0.11513671875,
+        "hi": 0.12001953125
+      },
+      "counts": {
+        "upper_le_D": 1,
+        "lower_gt_D": 1,
+        "straddles_D": 0,
+        "API_after402_definite": 1,
+        "API_after402_possible": 1,
+        "API_afterpublic_definite": 1,
+        "API_afterpublic_possible": 1
+      },
+      "maxPublic": 418.735107421875,
+      "maxACK": 523.045166015625,
+      "maxTimerDelay": 7.565185546875,
+      "endpoints_not_continuous_drift_guarantee": true,
+      "not_kernel_instruction_time": true
+    },
+    {
+      "run": "c110-initial-pair-r1",
+      "public": 138,
+      "start": {
+        "lo": -0.105126953125,
+        "hi": 0.1048828125
+      },
+      "end": {
+        "lo": -0.105126953125,
+        "hi": 0.099755859375
+      },
+      "start_end_intersection": [
+        -0.105126953125,
+        0.099755859375
+      ],
+      "conservative_observed_endpoint_envelope": {
+        "lo": -0.105126953125,
+        "hi": 0.1048828125
+      },
+      "counts": {
+        "upper_le_D": 136,
+        "lower_gt_D": 2,
+        "straddles_D": 0,
+        "API_after402_definite": 0,
+        "API_after402_possible": 0,
+        "API_afterpublic_definite": 0,
+        "API_afterpublic_possible": 0
+      },
+      "maxPublic": 439.315185546875,
+      "maxACK": 557.64501953125,
+      "maxTimerDelay": 28.235107421875,
+      "endpoints_not_continuous_drift_guarantee": true,
+      "not_kernel_instruction_time": true
+    },
+    {
+      "run": "c110-asym-pair-r1",
+      "public": 153,
+      "start": {
+        "lo": -0.110009765625,
+        "hi": 0.1048828125
+      },
+      "end": {
+        "lo": -0.11025390625,
+        "hi": 0.094873046875
+      },
+      "start_end_intersection": [
+        -0.110009765625,
+        0.094873046875
+      ],
+      "conservative_observed_endpoint_envelope": {
+        "lo": -0.11025390625,
+        "hi": 0.1048828125
+      },
+      "counts": {
+        "upper_le_D": 150,
+        "lower_gt_D": 3,
+        "straddles_D": 0,
+        "API_after402_definite": 0,
+        "API_after402_possible": 0,
+        "API_afterpublic_definite": 0,
+        "API_afterpublic_possible": 0
+      },
+      "maxPublic": 447.760009765625,
+      "maxACK": 516.235107421875,
+      "maxTimerDelay": 36.690185546875,
+      "endpoints_not_continuous_drift_guarantee": true,
+      "not_kernel_instruction_time": true
+    }
+  ],
+  "receipts": [
+    {
+      "run": "c111-asym-baseline-r1",
+      "config_Git": "54c2d89003c4e21633c9d78986d35b5781abbcfa",
+      "start": "2026-10-02T08:45:35.838827+00:00",
+      "end": "2026-10-02T08:45:53.523577+00:00",
+      "wall_seconds": 17.68475,
+      "count_planned": 1,
+      "count_completed": 1,
+      "public": 0,
+      "NN": 32,
+      "startupNN": 6,
+      "primary": null,
+      "secondary": [],
+      "drop": {
+        "kind": "dropped",
+        "handles": 0,
+        "activeNN": 0,
+        "at_ms": 1790930752228.3252,
+        "producer_post_begin_ms": 1790930752228.33
+      },
+      "timers": {
+        "main_timers": 0,
+        "pending_messages": []
+      },
+      "monitor_state": "READY",
+      "monitor_failure": null,
+      "monitor_pending_children": [],
+      "all_monitor_callbacks_waited": true,
+      "inner_forced": true,
+      "inner_controlled_remaining": 0,
+      "outer_remaining": [],
+      "outer_unknown": [],
+      "kernel_adoptions": 2,
+      "ledger_registered": 41,
+      "currentRSSpeak": 1580060672,
+      "storagepeak": 8069120,
+      "observed_all_TIDs_CPU2": true,
+      "exit": 0,
+      "raw_summary_generic_denominator_not_used": "count requirements are not public responses"
+    },
+    {
+      "run": "c111-c1-r1",
+      "config_Git": "54c2d89003c4e21633c9d78986d35b5781abbcfa",
+      "start": "2026-10-02T08:47:08.589479+00:00",
+      "end": "2026-10-02T08:47:23.631861+00:00",
+      "wall_seconds": 15.042382,
+      "count_planned": 2,
+      "count_completed": 2,
+      "public": 0,
+      "NN": 64,
+      "startupNN": 6,
+      "primary": null,
+      "secondary": [],
+      "drop": {
+        "kind": "dropped",
+        "handles": 0,
+        "activeNN": 0,
+        "at_ms": 1790930842717.575,
+        "producer_post_begin_ms": 1790930842717.58
+      },
+      "timers": {
+        "main_timers": 0,
+        "pending_messages": []
+      },
+      "monitor_state": "READY",
+      "monitor_failure": null,
+      "monitor_pending_children": [],
+      "all_monitor_callbacks_waited": true,
+      "inner_forced": true,
+      "inner_controlled_remaining": 0,
+      "outer_remaining": [],
+      "outer_unknown": [],
+      "kernel_adoptions": 2,
+      "ledger_registered": 35,
+      "currentRSSpeak": 1495011328,
+      "storagepeak": 9973760,
+      "observed_all_TIDs_CPU2": true,
+      "exit": 0,
+      "raw_summary_generic_denominator_not_used": "count requirements are not public responses"
+    },
+    {
+      "run": "c111-clock-only-r1",
+      "config_Git": "8381563",
+      "start": "2026-10-02T08:53:16.290220+00:00",
+      "end": "2026-10-02T08:53:22.619560+00:00",
+      "wall_seconds": 6.32934,
+      "count_planned": 0,
+      "count_completed": 0,
+      "public": 0,
+      "NN": 0,
+      "startupNN": 0,
+      "primary": null,
+      "secondary": [],
+      "drop": null,
+      "timers": {
+        "main_timers": 0,
+        "pending_messages": []
+      },
+      "monitor_state": "READY",
+      "monitor_failure": null,
+      "monitor_pending_children": [],
+      "all_monitor_callbacks_waited": true,
+      "inner_forced": true,
+      "inner_controlled_remaining": 0,
+      "outer_remaining": [],
+      "outer_unknown": [],
+      "kernel_adoptions": 2,
+      "ledger_registered": 22,
+      "currentRSSpeak": 1228578816,
+      "storagepeak": 11276288,
+      "observed_all_TIDs_CPU2": true,
+      "exit": 0,
+      "raw_summary_generic_denominator_not_used": "count requirements are not public responses"
+    },
+    {
+      "run": "c111-jump-baseline-r1",
+      "config_Git": "54c2d89003c4e21633c9d78986d35b5781abbcfa",
+      "start": "2026-10-02T08:48:27.640928+00:00",
+      "end": "2026-10-02T08:48:41.970028+00:00",
+      "wall_seconds": 14.3291,
+      "count_planned": 1,
+      "count_completed": 1,
+      "public": 0,
+      "NN": 32,
+      "startupNN": 6,
+      "primary": null,
+      "secondary": [],
+      "drop": {
+        "kind": "dropped",
+        "handles": 0,
+        "activeNN": 0,
+        "at_ms": 1790930921393.15,
+        "producer_post_begin_ms": 1790930921393.1548
+      },
+      "timers": {
+        "main_timers": 0,
+        "pending_messages": []
+      },
+      "monitor_state": "READY",
+      "monitor_failure": null,
+      "monitor_pending_children": [],
+      "all_monitor_callbacks_waited": true,
+      "inner_forced": true,
+      "inner_controlled_remaining": 0,
+      "outer_remaining": [],
+      "outer_unknown": [],
+      "kernel_adoptions": 2,
+      "ledger_registered": 36,
+      "currentRSSpeak": 1493286912,
+      "storagepeak": 11096064,
+      "observed_all_TIDs_CPU2": true,
+      "exit": 0,
+      "raw_summary_generic_denominator_not_used": "count requirements are not public responses"
+    }
+  ],
+  "total_heavy_wall_seconds": 53.385571999999996,
+  "max_currentRSS": 1580060672,
+  "max_storage_sampled": 11276288,
+  "prelaunch_failure": {
+    "UTC": "2026-10-02T08:45:35.813466+00:00",
+    "failure": "FileNotFoundError own runs/t parent",
+    "stage": "before child/browser/NN/count launch",
+    "NN": 0,
+    "searches_started": 0,
+    "newjob_identity_not_created": true,
+    "correction": "create own runs directory; producer unchanged"
+  },
+  "original_failures_separate": [
+    "build1 prerequisite failure",
+    "build2 same target C binary reuse; build3 distinct targets fixed",
+    "baseline-initial completedK32/modelzero with inner OWNED_REGISTRATION_REQUIRED_BEFORE_SIGNAL exit1; outer recovery not inner success"
+  ],
+  "design_assessment": [
+    "Equal-completed comparison isolates finite C sensitivity; four diagnostic games do not establish coefficient improvement/worsening.",
+    "Initial visits unchanged but sum(root edge values) differs; visits equality is not full tree/value equality.",
+    "First eligible CP depends on root preparation, API await, request conversion and receipt/validation cost; finite NN output is not a completed eligible CP.",
+    "Worker500ms stop failure and API after402/public baseline counterexamples are retained; ACKwall is not CPU time.",
+    "Start/end clock intervals are endpoint evidence, not continuous drift or hard realtime guarantee.",
+    "RuleA and browser execution infrastructure shared; checker arithmetic separate; arbitrary deep/tree/rawview/entropy/training and true legal200/no-legal remain unproved."
+  ],
+  "source_hashes": {
+    "tools/ai-sigma-c-factor-independent/closeout.py": "e5581d22f781a457888ccd9940c62238cbc803b9f699bfc679dc7c4f63c760f1",
+    "tools/ai-sigma-c-factor-independent/driver.cjs": "3558a98e512ed37d4e984b68891cdb42711e019d03206baf21f073e958555478",
+    "tools/ai-sigma-c-factor-independent/independent-browser.js": "14a5d8f4f89df4b24521b85ecf61a8088dfb4d486faeeeabf4b18e0dc0601e96",
+    "tools/ai-sigma-c-factor-independent/runner.py": "135d4528536b00d0527323674171a11718e49b95dfbfb5d613c007e86bdda71b",
+    "tools/ai-sigma-c-factor-independent/extend-checker.py": "e87544c18abbfb4af63ae661a039fd2bc8b1c2ed055bcd48c88454a1e1318d11",
+    "tools/ai-sigma-c-factor-independent/browser.cjs": "a67d2b5cf3f22eb6972dbed51bca6f79fb6827e69dc5e923c5ff27658c831626",
+    "tools/ai-sigma-c-factor-independent/prepare.py": "9421beb23ece911788417f1761b8b5921bd0b24191ae5e28f7326a2589e54a5d"
+  },
+  "resources": {
+    "CPU": 2,
+    "NNthreads": 1,
+    "RAM": 4294967296,
+    "RSSguard": 3758096384,
+    "new_scope_guard": 29360128,
+    "combined_guard": 117440512,
+    "instant_peak_background_CPU_not_guaranteed": true,
+    "initial_short_static_commands_resources_incomplete": true,
+    "default_Git_index_not_written": true
+  }
+}

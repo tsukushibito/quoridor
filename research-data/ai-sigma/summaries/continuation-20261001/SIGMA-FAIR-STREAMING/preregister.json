@@ -1,0 +1,354 @@
+{
+  "issue": "quoridor-4lc.65",
+  "UTC_before_any_new_NN": "2026-10-01T17:20:23Z receipt; actual file creation per freeze UTC",
+  "T_ms": 500,
+  "reserve_ms": 89,
+  "commit_margin_ms": 9,
+  "cutoff_after_t0_ms": 402,
+  "seal_after_t0_ms": 411,
+  "selection": "no reselection",
+  "clock_pings_each_start_end": 12,
+  "fixed_control": {
+    "fixtures": [
+      "initial-p1",
+      "asym-hv-p2",
+      "straight-jump-p2"
+    ],
+    "reference_simulations": 8,
+    "reference_searches": 6,
+    "candidate_new_numeric": 3,
+    "candidate_saved_cp_control": 24,
+    "control_deadline_ms": 5000
+  },
+  "calibration": {
+    "fixtures": [
+      "initial-p1",
+      "asym-hv-p2",
+      "straight-jump-p2",
+      "goal-win-legal-replay",
+      "synthetic-total-ply-200"
+    ],
+    "engines": [
+      "candidate",
+      "reference"
+    ],
+    "samples": [
+      -1,
+      0,
+      1
+    ],
+    "denominator": 30,
+    "gate": "all steady e2e <=89ms; failure no real NN",
+    "NN": 0
+  },
+  "normal_denominator": 24,
+  "boundary_denominator": 12,
+  "cases": [
+    {
+      "request_id": "FAIR65-B-CANCEL-candidate",
+      "generation": 5001,
+      "engine": "candidate",
+      "fixture": "initial-p1",
+      "kind": "cancel-next",
+      "cancel_after_cp": true
+    },
+    {
+      "request_id": "FAIR65-N-01",
+      "generation": 5003,
+      "engine": "candidate",
+      "fixture": "initial-p1",
+      "kind": "normal",
+      "sample": -1
+    },
+    {
+      "request_id": "FAIR65-B-CANCEL-reference",
+      "generation": 5002,
+      "engine": "reference",
+      "fixture": "initial-p1",
+      "kind": "cancel-next",
+      "cancel_after_cp": true
+    },
+    {
+      "request_id": "FAIR65-N-02",
+      "generation": 5004,
+      "engine": "reference",
+      "fixture": "initial-p1",
+      "kind": "normal",
+      "sample": -1
+    },
+    {
+      "request_id": "FAIR65-N-03",
+      "generation": 5005,
+      "engine": "reference",
+      "fixture": "initial-p1",
+      "kind": "normal",
+      "sample": 0
+    },
+    {
+      "request_id": "FAIR65-N-04",
+      "generation": 5006,
+      "engine": "candidate",
+      "fixture": "initial-p1",
+      "kind": "normal",
+      "sample": 0
+    },
+    {
+      "request_id": "FAIR65-N-05",
+      "generation": 5007,
+      "engine": "candidate",
+      "fixture": "initial-p1",
+      "kind": "normal",
+      "sample": 1
+    },
+    {
+      "request_id": "FAIR65-N-06",
+      "generation": 5008,
+      "engine": "reference",
+      "fixture": "initial-p1",
+      "kind": "normal",
+      "sample": 1
+    },
+    {
+      "request_id": "FAIR65-N-07",
+      "generation": 5009,
+      "engine": "reference",
+      "fixture": "initial-p1",
+      "kind": "normal",
+      "sample": 2
+    },
+    {
+      "request_id": "FAIR65-N-08",
+      "generation": 5010,
+      "engine": "candidate",
+      "fixture": "initial-p1",
+      "kind": "normal",
+      "sample": 2
+    },
+    {
+      "request_id": "FAIR65-N-09",
+      "generation": 5011,
+      "engine": "reference",
+      "fixture": "asym-hv-p2",
+      "kind": "normal",
+      "sample": -1
+    },
+    {
+      "request_id": "FAIR65-N-10",
+      "generation": 5012,
+      "engine": "candidate",
+      "fixture": "asym-hv-p2",
+      "kind": "normal",
+      "sample": -1
+    },
+    {
+      "request_id": "FAIR65-N-11",
+      "generation": 5013,
+      "engine": "candidate",
+      "fixture": "asym-hv-p2",
+      "kind": "normal",
+      "sample": 0
+    },
+    {
+      "request_id": "FAIR65-N-12",
+      "generation": 5014,
+      "engine": "reference",
+      "fixture": "asym-hv-p2",
+      "kind": "normal",
+      "sample": 0
+    },
+    {
+      "request_id": "FAIR65-N-13",
+      "generation": 5015,
+      "engine": "reference",
+      "fixture": "asym-hv-p2",
+      "kind": "normal",
+      "sample": 1
+    },
+    {
+      "request_id": "FAIR65-N-14",
+      "generation": 5016,
+      "engine": "candidate",
+      "fixture": "asym-hv-p2",
+      "kind": "normal",
+      "sample": 1
+    },
+    {
+      "request_id": "FAIR65-N-15",
+      "generation": 5017,
+      "engine": "candidate",
+      "fixture": "asym-hv-p2",
+      "kind": "normal",
+      "sample": 2
+    },
+    {
+      "request_id": "FAIR65-N-16",
+      "generation": 5018,
+      "engine": "reference",
+      "fixture": "asym-hv-p2",
+      "kind": "normal",
+      "sample": 2
+    },
+    {
+      "request_id": "FAIR65-N-17",
+      "generation": 5019,
+      "engine": "candidate",
+      "fixture": "straight-jump-p2",
+      "kind": "normal",
+      "sample": -1
+    },
+    {
+      "request_id": "FAIR65-N-18",
+      "generation": 5020,
+      "engine": "reference",
+      "fixture": "straight-jump-p2",
+      "kind": "normal",
+      "sample": -1
+    },
+    {
+      "request_id": "FAIR65-N-19",
+      "generation": 5021,
+      "engine": "reference",
+      "fixture": "straight-jump-p2",
+      "kind": "normal",
+      "sample": 0
+    },
+    {
+      "request_id": "FAIR65-N-20",
+      "generation": 5022,
+      "engine": "candidate",
+      "fixture": "straight-jump-p2",
+      "kind": "normal",
+      "sample": 0
+    },
+    {
+      "request_id": "FAIR65-N-21",
+      "generation": 5023,
+      "engine": "candidate",
+      "fixture": "straight-jump-p2",
+      "kind": "normal",
+      "sample": 1
+    },
+    {
+      "request_id": "FAIR65-N-22",
+      "generation": 5024,
+      "engine": "reference",
+      "fixture": "straight-jump-p2",
+      "kind": "normal",
+      "sample": 1
+    },
+    {
+      "request_id": "FAIR65-N-23",
+      "generation": 5025,
+      "engine": "reference",
+      "fixture": "straight-jump-p2",
+      "kind": "normal",
+      "sample": 2
+    },
+    {
+      "request_id": "FAIR65-N-24",
+      "generation": 5026,
+      "engine": "candidate",
+      "fixture": "straight-jump-p2",
+      "kind": "normal",
+      "sample": 2
+    },
+    {
+      "request_id": "FAIR65-B-candidate-terminal-goal-win-legal-replay",
+      "generation": 5027,
+      "engine": "candidate",
+      "fixture": "goal-win-legal-replay",
+      "kind": "terminal"
+    },
+    {
+      "request_id": "FAIR65-B-candidate-terminal-synthetic-total-ply-200",
+      "generation": 5028,
+      "engine": "candidate",
+      "fixture": "synthetic-total-ply-200",
+      "kind": "terminal"
+    },
+    {
+      "request_id": "FAIR65-B-candidate-before-first-initial-p1",
+      "generation": 5029,
+      "engine": "candidate",
+      "fixture": "initial-p1",
+      "kind": "before-first",
+      "before_first_nn_busy_ms": 600
+    },
+    {
+      "request_id": "FAIR65-B-candidate-validation-cross-initial-p1",
+      "generation": 5030,
+      "engine": "candidate",
+      "fixture": "initial-p1",
+      "kind": "validation-cross",
+      "validation_cross": true
+    },
+    {
+      "request_id": "FAIR65-B-candidate-caller-busy-initial-p1",
+      "generation": 5031,
+      "engine": "candidate",
+      "fixture": "initial-p1",
+      "kind": "caller-busy",
+      "caller_busy_at_seal": true
+    },
+    {
+      "request_id": "FAIR65-B-reference-terminal-goal-win-legal-replay",
+      "generation": 5032,
+      "engine": "reference",
+      "fixture": "goal-win-legal-replay",
+      "kind": "terminal"
+    },
+    {
+      "request_id": "FAIR65-B-reference-terminal-synthetic-total-ply-200",
+      "generation": 5033,
+      "engine": "reference",
+      "fixture": "synthetic-total-ply-200",
+      "kind": "terminal"
+    },
+    {
+      "request_id": "FAIR65-B-reference-before-first-initial-p1",
+      "generation": 5034,
+      "engine": "reference",
+      "fixture": "initial-p1",
+      "kind": "before-first",
+      "before_first_nn_busy_ms": 600
+    },
+    {
+      "request_id": "FAIR65-B-reference-validation-cross-initial-p1",
+      "generation": 5035,
+      "engine": "reference",
+      "fixture": "initial-p1",
+      "kind": "validation-cross",
+      "validation_cross": true
+    },
+    {
+      "request_id": "FAIR65-B-reference-caller-busy-initial-p1",
+      "generation": 5036,
+      "engine": "reference",
+      "fixture": "initial-p1",
+      "kind": "caller-busy",
+      "caller_busy_at_seal": true
+    }
+  ],
+  "gate": {
+    "abs": 0.0001,
+    "rtol": 0.0001,
+    "strict_value": [
+      -1,
+      1
+    ]
+  },
+  "resources": {
+    "CPU": [
+      2
+    ],
+    "NN_threads": 1,
+    "job_timeout_seconds": 180,
+    "RAM_guard": 3758096384,
+    "storage_guard": 117440512
+  },
+  "actual_go": false,
+  "games": 0,
+  "holdout_send": 0,
+  "policy": "preseal received faults discard; postseal immutable; API run await timing not kernel instruction timing",
+  "unexecuted_boundary_policies": "delay/old generation/fault classification tested in mock only"
+}

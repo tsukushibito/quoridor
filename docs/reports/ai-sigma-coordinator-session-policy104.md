@@ -1,0 +1,11 @@
+# 104 統括所有の配送・103有効契約への適用
+
+ユーザーの新指示により、resume-20261002/dispatch.pyからGLOBAL3判定と全saved session/rootの入場用状態取得を除いた。宛先だけを読み、同App Serverのdeliverでidleはstart、activeは正確turnへのsteerとする。dispatch lock、goal/issue pause確認、role/source digest確認、既receiptの二重配送拒否、active turn不明時の拒否を維持する。root96専用ACKのidle時新turn禁止も残す。
+
+現在有効な103契約と対応配送本文を契約2へ改定した。CPU4/RAM8GiB/保存12GiB、重jobの測定非競合、実験ごとの資源・期限・6game capは変えない。旧終了課題の契約、旧GLOBAL3保留記録、103受領時の条件、実runの設定・成績は書き換えない。現在未配送の通常研究本文は存在せず、以後の新本文にはactive数制限を付けない。92運用・common・registry・全roleへの適用は既単独owner104.1に任せ、同pathを編集しない。
+
+自己helperの模擬8ケースが通過した。他役3以上activeと未知roleがあっても宛先idleへのstartが成立し、入場のため他役を読まない。activeのexact-turn steer、pause、既receipt、active turn不明、dispatch lock、root idle ACK禁止、root active ACKを確認した。実App Serverや研究NNを模擬検査から起動していない。最初はsystem Pythonにwebsocketsが無くimportで失敗したため、既存研究環境Pythonで再確認した。依存導入は行わず、結果はresearch-data/ai-sigma/104-coordinator-session-policy/verification.jsonに保存した。
+
+103担当へは有効全文の差分を同active turnへ配送する。これは通信規約の適用であり、実験内容変更や測定成功の認定ではない。公式thread/turn経路の設定を維持し、適用完了を104と104.1のnotesに記録する。主標準通信/scheduler/liveの試験・受入れはroot/既steward担当と区別する。
+
+適用全文は103の同active turnへ04:25:17.452515 UTCにsteer accepted。担当steward104.1とroot104への完了metadataも04:26:45.446463 UTCに各既activeの正確turnへsteer accepted、追加turn開始なし。receiptは同研究Gitデータのsame-active-handoff.json。コード改定Git05b9d8fと受領配送記録を区別する。

@@ -1,0 +1,37 @@
+{
+  "issue": "quoridor-4lc.112",
+  "report_entry_issue": "quoridor-4lc",
+  "observed_UTC": "2026-10-02T09:41:07.560925+00:00",
+  "start": {
+    "method": "turn/steer",
+    "thread_id": "01a0f31b-3409-75f2-a30e-453a50484f94",
+    "turn_id": "01a0fbce-c877-7893-bc6b-fd63e22037c2",
+    "accepted": true
+  },
+  "functional": {
+    "method": "turn/start",
+    "thread_id": "01a0f31b-3409-75f2-a30e-453a50484f94",
+    "turn_id": "01a0fbe4-a0dc-7c02-b677-31c8bf3fa3da",
+    "accepted": true
+  },
+  "failed_reports": [
+    {
+      "phase": "initial-result",
+      "exit": 1,
+      "error": "Thread is not ready to receive work: systemError"
+    },
+    {
+      "phase": "stop-report",
+      "exit": 1,
+      "error": "Thread is not ready to receive work: systemError"
+    }
+  ],
+  "final": {
+    "method": "turn/steer",
+    "thread_id": "01a0f31b-3409-75f2-a30e-453a50484f94",
+    "turn_id": "01a0fbf8-21b2-7953-bb97-b35f665e7b45",
+    "accepted": true
+  },
+  "communication_accepted_is_not_research_acceptance": true,
+  "no_new_permission_or_pause_clearance": true
+}

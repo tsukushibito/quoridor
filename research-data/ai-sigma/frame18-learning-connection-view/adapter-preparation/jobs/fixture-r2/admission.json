@@ -1,0 +1,101 @@
+{
+  "UTC": "2026-10-04T11:08:07.058835+00:00",
+  "controls": [
+    {
+      "id": "quoridor-4lc",
+      "status": "in_progress",
+      "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+      "labels": [
+        "continuation-active",
+        "frame18"
+      ]
+    },
+    {
+      "id": "quoridor-4lc.227",
+      "status": "in_progress",
+      "assignee": "codex:01a0f31c-2e4b-7170-82c5-69e1428c2418",
+      "labels": [
+        "continuation-active",
+        "frame18"
+      ]
+    }
+  ],
+  "foreign": [],
+  "services": [
+    {
+      "pid": 61691,
+      "ppid": 1,
+      "pgrp": 61691,
+      "tick": "36359387",
+      "state": "S",
+      "RSS": 132108288,
+      "script": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/scheduler.py",
+      "argv": "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python -B /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/scheduler.py run --config /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json --state-dir /workspaces/quoridor/.artifacts/research-team/scheduler-sigma-continuation",
+      "affinity": [
+        0
+      ]
+    },
+    {
+      "pid": 61711,
+      "ppid": 1,
+      "pgrp": 61711,
+      "tick": "36359409",
+      "state": "S",
+      "RSS": 22089728,
+      "script": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/watch.py",
+      "argv": "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python -B /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/watch.py --run-dir /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame18-76faf64a-a12e-4d15-8591-947181c91d53 --expectations /workspaces/quoridor/.work",
+      "affinity": [
+        0
+      ]
+    }
+  ],
+  "scheduler_owned": null,
+  "quiet_seconds": 925.6624889373779,
+  "runtime_SHA": "cd81beb996eb6705aab9610d19f14fe862fef0d116f4425d9e8a85ad445fa458",
+  "runtime_current_identities": {
+    "scheduler": {
+      "pid": 61691,
+      "ppid": 1,
+      "pgrp": 61691,
+      "tick": "36359387",
+      "state": "S",
+      "RSS": 132108288,
+      "script": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/scheduler.py",
+      "argv": "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python -B /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/scheduler.py run --config /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json --state-dir /workspaces/quoridor/.artifacts/research-team/scheduler-sigma-continuation",
+      "affinity": [
+        0
+      ]
+    },
+    "monitor": {
+      "pid": 61711,
+      "ppid": 1,
+      "pgrp": 61711,
+      "tick": "36359409",
+      "state": "S",
+      "RSS": 22089728,
+      "script": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/watch.py",
+      "argv": "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python -B /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/watch.py --run-dir /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame18-76faf64a-a12e-4d15-8591-947181c91d53 --expectations /workspaces/quoridor/.work",
+      "affinity": [
+        0
+      ]
+    }
+  },
+  "parent_RSS_forecast_B": 691068928,
+  "storage": {
+    "UTC": "2026-10-04T11:06:33.229583+00:00",
+    "current_scope_B": 57932,
+    "unique_prior_Git_uncompressed_upper_B": 44296,
+    "future_fixture_and_Git_B": 400000,
+    "temporary_B": 131072,
+    "remaining_metadata_B": 262144,
+    "forecast_B": 895444,
+    "guard_B": 3145728,
+    "reservation_B": 4194304,
+    "additional_reservation_B": 0,
+    "old_unknown_discount_B": 0,
+    "phase1_static_read_seconds_upper": 180,
+    "phase2_static_seconds_upper": 180,
+    "fixture_hard_seconds": 5,
+    "real_label_read": 0
+  }
+}

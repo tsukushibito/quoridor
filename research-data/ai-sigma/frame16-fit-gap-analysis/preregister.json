@@ -1,0 +1,90 @@
+{
+  "issue": "quoridor-4lc.216",
+  "UTC": "2026-10-04T06:11:38.064467+00:00",
+  "stage": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-learning/stages/train96.stage.json",
+  "stage_SHA": "af95eabf3d059982e67cba41fcee0233aaea8a53eaf81a3b1fbae60752d83e75",
+  "dataset_counts": {
+    "train": 4653,
+    "validation": 1248
+  },
+  "train_groups": 96,
+  "val_groups": 24,
+  "artifacts": {
+    "plain200": {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame16-fit-gap-analysis/checkpoint-members/plain200.pt",
+      "SHA": "cb298b4e39997b9346de5cf700320556c14e696e2881e4d93e0649d48a0d0d4d",
+      "mode": "plain",
+      "step": 200,
+      "history": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame15-learning-diagnostic/runs/frame15-learning-diagnostic-lr1e-4-r1/history.jsonl.gz",
+      "archive": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame15-learning-diagnostic/weights.tar.xz",
+      "member": "frame15-learning-diagnostic-lr1e-4-r1/best.pt"
+    },
+    "plain400": {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame16-fit-gap-analysis/checkpoint-members/plain400.pt",
+      "SHA": "b087409ac4c9efec2b6d30f60e277e8ed2f1de3f7f69be1684c8ed4982b79cdc",
+      "mode": "plain",
+      "step": 400,
+      "history": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame15-learning-diagnostic/runs/frame15-learning-diagnostic-lr1e-4-r1/history.jsonl.gz",
+      "archive": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame15-learning-diagnostic/weights.tar.xz",
+      "member": "frame15-learning-diagnostic-lr1e-4-r1/last.pt"
+    },
+    "standard200": {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame16-fit-gap-analysis/checkpoint-members/standard200.pt",
+      "SHA": "593b3d92ce40cf540d9d2c59571626678f3e31b6b8e99d6e1cea96b25ec8a38a",
+      "mode": "standard",
+      "step": 200,
+      "history": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame15-input-scale-control/runs/frame15-input-scale-control-r1/history.jsonl.gz",
+      "archive": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame15-input-scale-control/weights.tar.gz",
+      "member": "models/experiments/nnue/frame15-input-scale-control-r1/best.pt"
+    },
+    "standard400": {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame16-fit-gap-analysis/checkpoint-members/standard400.pt",
+      "SHA": "8f95a44c235fb151693e89632f844aab3c3b901327dfafa0f8a085a5642f2c75",
+      "mode": "standard",
+      "step": 400,
+      "history": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame15-input-scale-control/runs/frame15-input-scale-control-r1/history.jsonl.gz",
+      "archive": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame15-input-scale-control/weights.tar.gz",
+      "member": "models/experiments/nnue/frame15-input-scale-control-r1/last.pt"
+    }
+  },
+  "coefficients": {
+    "a": 0.06294242415104226,
+    "b": 8.276425107422213
+  },
+  "constant": 0.01086389238577769,
+  "scale": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame15-input-scale-control/scale.json",
+  "scale_SHA": "68f8b43a0e4408a1546f8fa2652ffdf21f1f7bdcfbac9a25a86ac666b27aa4ee",
+  "forward_samples": 23604,
+  "NNcap": 30000,
+  "hard60": true,
+  "GPU": 0,
+  "warm": 0,
+  "training_updates": 0,
+  "test_read": false,
+  "parity_atol": 1e-06,
+  "source_bindings": {
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-learning/stages/train96.stage.json": "af95eabf3d059982e67cba41fcee0233aaea8a53eaf81a3b1fbae60752d83e75",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame15-learning-diagnostic/weights-manifest.json": "c557c35a0585903ab12d3ea2b1918f1e5a10da8e4ec6dc4af0e42564c979ba31",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame15-input-scale-control/weights-manifest.json": "a6cb952303bd687d9888da131ee07c22e3120b2f0c774346134ff582c6436f53",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame15-learning-diagnostic/weights.tar.xz": "1137ca4b1f5c8645b66231cf12887736742600bf2533a9b27d1a315aa907f3b5",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame15-learning-diagnostic/runs/frame15-learning-diagnostic-lr1e-4-r1/history.jsonl.gz": "001e1231e5b621b8667708291d9bd544a0761a87ce9955508f533c67945e8f1c",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame15-input-scale-control/weights.tar.gz": "19285580a3c8b8abe8e3137e408effd6e7e875571392060cea970aee6a04d257",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame15-input-scale-control/runs/frame15-input-scale-control-r1/history.jsonl.gz": "410ebd618b9327f308364464953980fe177b302950e238c15eefd136d7673fd7",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-representation-audit/result.json": "77ce9e79495038b25a4f4a9ffd95dc9f66700aff2c1f96cf08b65fff3c79733c",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/nnue-training/model.py": "12661cac69cff8b01800eb2d3df5be5f8674858d9ce995713b4385da44c74357",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/nnue-training/common.py": "876e0e9a610b594db63e62e81ae920684f10e52f71a7cc75e04f8fbadd9ffe04",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/nnue-training/frame14_data.py": "f45482fe6d1a4477ee3bf3b080d14d883b1f28c79517cff83e4318b7a90e37b8",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/nnue-training/train.py": "665848e238d6a7976b83c53b0c13cdb87f9e65f4a75329560d6a98afbe9863d3",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-qf1-distance-residual/residual_model.py": "7e456d2c86b0e2a8f1d1f0feff1e43446181ddaabc52920cf7fbcd7076149627",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-nnue-qf1-prototype/qf1.cjs": "ed54a84b90a0e8effe5737b959aaa6fd16ec4c3cdf054aee2cae58e6446012d3",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/nnue-training/export_generated.cjs": "5195a4abecaee507ea9155b4383843a4370783fa6ea20c33f9f442576f98a1c2"
+  },
+  "private_sources": {
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-fit-gap-analysis/save_git.py": "ac940473dc6df4a1203e16334368c610bc6239690b54094083b22e4594988b2b",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-fit-gap-analysis/analyze.py": "e1f3ae64546995804beb95ee5927e59c145742202cecbe8eebaa97865b3e6ccb",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-fit-gap-analysis/launch.py": "808e6f3790fca1e16ebc366306a15c197dcc829806348f71556b48c8ef251302",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-fit-gap-analysis/forward.py": "12aab97394019eef21d5e362fd56de3709095a42811b5e9ea376e81a09d8792f",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-fit-gap-analysis/prepare.py": "7ad41675c493cd2d2653c15582db1bcf00289a415c1f40960ddef94c371ad06d"
+  },
+  "217_global_weight_decomposition_fixed_before_forward": true
+}

@@ -1,0 +1,270 @@
+{
+  "issue": "quoridor-4lc.145",
+  "raw_root_selection": [],
+  "new_root_read": 0,
+  "selected_old_summary_only": [
+    {
+      "pair": 1,
+      "prefix_ply": 4,
+      "old_results": [
+        "L",
+        "L"
+      ],
+      "old_public": 97,
+      "old_terminal_total_ply": [
+        48,
+        57
+      ]
+    },
+    {
+      "pair": 7,
+      "prefix_ply": 16,
+      "old_results": [
+        "L",
+        "L"
+      ],
+      "old_public": 111,
+      "old_terminal_total_ply": [
+        70,
+        73
+      ]
+    },
+    {
+      "pair": 8,
+      "prefix_ply": 17,
+      "old_results": [
+        "L",
+        "W"
+      ],
+      "old_public": 52,
+      "old_terminal_total_ply": [
+        42,
+        44
+      ]
+    }
+  ],
+  "planned_order": [
+    {
+      "cell": 1,
+      "prefix": 1,
+      "candidate_color": 1,
+      "order": [
+        "A",
+        "B"
+      ],
+      "same_search_seed": 2098,
+      "games": [
+        {
+          "variant": "A",
+          "C": 1.5,
+          "prefix": 1,
+          "candidate_color": 1,
+          "seed": 2098
+        },
+        {
+          "variant": "B",
+          "C": 1.0,
+          "prefix": 1,
+          "candidate_color": 1,
+          "seed": 2098
+        }
+      ],
+      "session_cap_s": 250
+    },
+    {
+      "cell": 2,
+      "prefix": 1,
+      "candidate_color": 2,
+      "order": [
+        "B",
+        "A"
+      ],
+      "same_search_seed": 2098,
+      "games": [
+        {
+          "variant": "B",
+          "C": 1.0,
+          "prefix": 1,
+          "candidate_color": 2,
+          "seed": 2098
+        },
+        {
+          "variant": "A",
+          "C": 1.5,
+          "prefix": 1,
+          "candidate_color": 2,
+          "seed": 2098
+        }
+      ],
+      "session_cap_s": 250
+    },
+    {
+      "cell": 3,
+      "prefix": 7,
+      "candidate_color": 1,
+      "order": [
+        "B",
+        "A"
+      ],
+      "same_search_seed": 2098,
+      "games": [
+        {
+          "variant": "B",
+          "C": 1.0,
+          "prefix": 7,
+          "candidate_color": 1,
+          "seed": 2098
+        },
+        {
+          "variant": "A",
+          "C": 1.5,
+          "prefix": 7,
+          "candidate_color": 1,
+          "seed": 2098
+        }
+      ],
+      "session_cap_s": 250
+    },
+    {
+      "cell": 4,
+      "prefix": 7,
+      "candidate_color": 2,
+      "order": [
+        "A",
+        "B"
+      ],
+      "same_search_seed": 2098,
+      "games": [
+        {
+          "variant": "A",
+          "C": 1.5,
+          "prefix": 7,
+          "candidate_color": 2,
+          "seed": 2098
+        },
+        {
+          "variant": "B",
+          "C": 1.0,
+          "prefix": 7,
+          "candidate_color": 2,
+          "seed": 2098
+        }
+      ],
+      "session_cap_s": 250
+    },
+    {
+      "cell": 5,
+      "prefix": 8,
+      "candidate_color": 1,
+      "order": [
+        "A",
+        "B"
+      ],
+      "same_search_seed": 2098,
+      "games": [
+        {
+          "variant": "A",
+          "C": 1.5,
+          "prefix": 8,
+          "candidate_color": 1,
+          "seed": 2098
+        },
+        {
+          "variant": "B",
+          "C": 1.0,
+          "prefix": 8,
+          "candidate_color": 1,
+          "seed": 2098
+        }
+      ],
+      "session_cap_s": 250
+    },
+    {
+      "cell": 6,
+      "prefix": 8,
+      "candidate_color": 2,
+      "order": [
+        "B",
+        "A"
+      ],
+      "same_search_seed": 2098,
+      "games": [
+        {
+          "variant": "B",
+          "C": 1.0,
+          "prefix": 8,
+          "candidate_color": 2,
+          "seed": 2098
+        },
+        {
+          "variant": "A",
+          "C": 1.5,
+          "prefix": 8,
+          "candidate_color": 2,
+          "seed": 2098
+        }
+      ],
+      "session_cap_s": 250
+    }
+  ],
+  "arithmetic": {
+    "planned_games": 12,
+    "matched_same_input_color_cells": 6,
+    "prefix_units": 3,
+    "color_pair_per_variant": 3,
+    "global_RuleA_max_depth": 200,
+    "max_new_public_plies": 2252,
+    "nominal_500ms_think_seconds": 1126.0,
+    "six_job_cap_seconds": 1500,
+    "nonthink_and_wait_headroom_seconds": 374.0,
+    "startup_NN_per_fresh_twoWorker_game": 6,
+    "startup_NN_total_if_each_game_fresh": 72,
+    "model_sessions_total": 24,
+    "sessions_live_max": 2,
+    "build_required": false,
+    "build_fallback_ceiling_seconds": 120,
+    "startup_wait_headroom_not_completion_guarantee": true
+  },
+  "binary_reuse": {
+    "A_sha256": "1f54d0b8f0c6d3d7d51935886ed506e44376a2052506be62ca7a726c85a78a01",
+    "B_sha256": "8438310cf8f7d096bd84364a03b97f99f737ca0a9be6c2812a7ecdee3d92d9dd",
+    "baseline_current_equals_110_baseline": true,
+    "110_source": "0f0597e73e5444c2a576121242a02e18417aad01",
+    "sole_policy_factor": "PUCT_C1.5->1.0",
+    "new_source_build_not_executed": true
+  },
+  "seed_source_pitfall": "player-main limits/game records hardcode1979; new private adapter must deliver and record2098 for both engines, not only edit config/diagnose gate",
+  "artificial_decision_fixture_cases": {
+    "negative-end-C1-on-this-setting-not-universal": 2500,
+    "mixed-end-this-uniform-change-branch": 9000,
+    "one-prefix-only-insufficient-end-this-set": 1500,
+    "score-unchanged-end-this-set-no-effect-unproven": 125,
+    "positive-prioritize-new-input-validation-not-adopt": 2500
+  },
+  "decision_vectors_checked": 15625,
+  "newNN": 0,
+  "newChrome": 0,
+  "144_status": "final handoff available during static read; owner6win not independently rescored here; early and final separated",
+  "inputs": {
+    "research-data/ai-sigma/119-diverse-prefix/preregister.json": "5ae2af8776feff8994e540ba5db24ab242d695da8cc827e0cd31513c613a30fb",
+    "research-data/ai-sigma/119-diverse-prefix/prefix119-pair1-r1.summary.json": "ef6735c5620c7ab1c2dfb531c3330b76165d4890b136e6a248518446a155f9c5",
+    "research-data/ai-sigma/119-diverse-prefix/prefix119-pair7-r1.summary.json": "f20d3dc67e09fdd0397e12823ff0f1f686348fa852e3c34d46ee82eaf19755f2",
+    "research-data/ai-sigma/119-diverse-prefix/prefix119-pair8-r1.summary.json": "06c499baecd5ae3098accbafb3399940ddde5e4bd66785dd590db935e8dda2c3",
+    "research-data/ai-sigma/110-c-factor-browser/build-manifest.json": "0c2d407480f128fe27ad1139c581e8c0d70bd047448731d5a9a72bc40297e854",
+    ".artifacts/ai-sigma/runs/SIGMA-ORT-SEARCH/final.wasm": "1f54d0b8f0c6d3d7d51935886ed506e44376a2052506be62ca7a726c85a78a01",
+    "research-data/ai-sigma/110-c-factor-browser/binaries/c1.wasm": "8438310cf8f7d096bd84364a03b97f99f737ca0a9be6c2812a7ecdee3d92d9dd",
+    "crates/quoridor-ai/src/lib.rs": "5ab5eca5c23814dbaa0162b25e8fe710e58cdb7139c0fa4e3e2f794dc041555a",
+    "tools/ai-sigma-player-workers/player-main.js": "610e899acd43215efc9fa3a08f3c337248639505a57196e1a730a91f7afde4a8",
+    "research-data/ai-sigma/144-wallless-ai-sensitivity/handoff-summary.json": "cc67ec8badf2ae63d5dba8d6e13067bd88304d3493aac59b819aca7fefe51ad8",
+    ".artifacts/ai-sigma/resume-20261002/coordinator144-early-stop-check.json": "520f286bf5c6c2f7c6854e8becadb237bc8bb9bbf4d48a5419b96e7bbe05169b",
+    ".artifacts/ai-sigma/resume-20261002/coordinator143-heavy-stop-check.json": "393b67ce84de1e351e899799cde664329dc61e87c42a32cd9e7120afc702c027"
+  },
+  "start": "2026-10-02T20:07:54.122537+00:00",
+  "end": "2026-10-02T20:07:54.145621+00:00",
+  "self_pid": 2813812,
+  "self_starttick": 22459387,
+  "affinity": [
+    0
+  ],
+  "ru_maxrss_bytes": 16261120
+}

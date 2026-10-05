@@ -1,0 +1,2019 @@
+{
+  "issue": "quoridor-4lc.126",
+  "planned": 18,
+  "started": 18,
+  "completed_legal": 18,
+  "warm": 2,
+  "steady": 16,
+  "late": 0,
+  "firstnone": 0,
+  "fault": 0,
+  "unfinished": 0,
+  "unexecuted": 0,
+  "hand_NN": 203,
+  "startup_NN": 6,
+  "adopt_completed_backup": 191,
+  "rootN_not_same_work_CPU": true,
+  "startup_model_init_separate": {
+    "kind": "ready",
+    "threads": 1,
+    "proxy": false,
+    "handles": 0,
+    "activeNN": 0,
+    "players": [
+      {
+        "kind": "ready",
+        "digest": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+        "threads": 1,
+        "proxy": false,
+        "model_load_ms": 1852.3199999928474,
+        "compile_ms": 21.700000017881393,
+        "handles": 0,
+        "activeNN": 0,
+        "producer_post_begin_ms": 1790948469127.425,
+        "worker_engine": "candidate",
+        "engine": "candidate"
+      },
+      {
+        "kind": "ready",
+        "digest": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+        "threads": 1,
+        "proxy": false,
+        "model_load_ms": 1596.5850000083447,
+        "compile_ms": 104.30999997258186,
+        "handles": 0,
+        "activeNN": 0,
+        "producer_post_begin_ms": 1790948471720.705,
+        "worker_engine": "reference",
+        "engine": "reference"
+      }
+    ],
+    "wall_ms": 4843.973661005497,
+    "model_ready_outside_first_input_only": true
+  },
+  "comparisons": [
+    {
+      "fixture": "diverse-prefix-1",
+      "candidate_completed_backup": [
+        10,
+        11
+      ],
+      "reference_completed_backup": [
+        9,
+        8
+      ],
+      "difference_C_minus_R": [
+        1,
+        3
+      ],
+      "candidate_actions": [
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        }
+      ],
+      "reference_actions": [
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        }
+      ],
+      "candidate_first_CP_interval": [
+        {
+          "lower_ms": 41.19482421875,
+          "upper_ms": 41.4150390625
+        },
+        {
+          "lower_ms": 53.114990234375,
+          "upper_ms": 53.335205078125
+        }
+      ],
+      "reference_first_CP_interval": [
+        {
+          "lower_ms": 34.320068359375,
+          "upper_ms": 34.530029296875
+        },
+        {
+          "lower_ms": 50.215087890625,
+          "upper_ms": 50.425048828125
+        }
+      ],
+      "candidate_first_API_await_ms": [
+        23.31005859375,
+        33.48486328125
+      ],
+      "reference_first_API_await_ms": [
+        29.60986328125,
+        35.544921875
+      ]
+    },
+    {
+      "fixture": "diverse-prefix-2",
+      "candidate_completed_backup": [
+        9,
+        9
+      ],
+      "reference_completed_backup": [
+        15,
+        11
+      ],
+      "difference_C_minus_R": [
+        -6,
+        -2
+      ],
+      "candidate_actions": [
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        }
+      ],
+      "reference_actions": [
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        }
+      ],
+      "candidate_first_CP_interval": [
+        {
+          "lower_ms": 61.204833984375,
+          "upper_ms": 61.425048828125
+        },
+        {
+          "lower_ms": 58.639892578125,
+          "upper_ms": 58.860107421875
+        }
+      ],
+      "reference_first_CP_interval": [
+        {
+          "lower_ms": 24.43994140625,
+          "upper_ms": 24.64990234375
+        },
+        {
+          "lower_ms": 32.0849609375,
+          "upper_ms": 32.294921875
+        }
+      ],
+      "candidate_first_API_await_ms": [
+        37.820068359375,
+        36.800048828125
+      ],
+      "reference_first_API_await_ms": [
+        21.614990234375,
+        22.364990234375
+      ]
+    },
+    {
+      "fixture": "diverse-prefix-3",
+      "candidate_completed_backup": [
+        9,
+        9
+      ],
+      "reference_completed_backup": [
+        9,
+        11
+      ],
+      "difference_C_minus_R": [
+        0,
+        -2
+      ],
+      "candidate_actions": [
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        }
+      ],
+      "reference_actions": [
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        }
+      ],
+      "candidate_first_CP_interval": [
+        {
+          "lower_ms": 76.8349609375,
+          "upper_ms": 77.05517578125
+        },
+        {
+          "lower_ms": 63.330078125,
+          "upper_ms": 63.55029296875
+        }
+      ],
+      "reference_first_CP_interval": [
+        {
+          "lower_ms": 40.93505859375,
+          "upper_ms": 41.14501953125
+        },
+        {
+          "lower_ms": 49.804931640625,
+          "upper_ms": 50.014892578125
+        }
+      ],
+      "candidate_first_API_await_ms": [
+        50.090087890625,
+        36.775146484375
+      ],
+      "reference_first_API_await_ms": [
+        33.369873046875,
+        38.594970703125
+      ]
+    },
+    {
+      "fixture": "diverse-prefix-7",
+      "candidate_completed_backup": [
+        15,
+        11
+      ],
+      "reference_completed_backup": [
+        16,
+        8
+      ],
+      "difference_C_minus_R": [
+        -1,
+        3
+      ],
+      "candidate_actions": [
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        }
+      ],
+      "reference_actions": [
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        }
+      ],
+      "candidate_first_CP_interval": [
+        {
+          "lower_ms": 35.9951171875,
+          "upper_ms": 36.21533203125
+        },
+        {
+          "lower_ms": 42.97998046875,
+          "upper_ms": 43.2001953125
+        }
+      ],
+      "reference_first_CP_interval": [
+        {
+          "lower_ms": 29.43505859375,
+          "upper_ms": 29.64501953125
+        },
+        {
+          "lower_ms": 50.10009765625,
+          "upper_ms": 50.31005859375
+        }
+      ],
+      "candidate_first_API_await_ms": [
+        21.869873046875,
+        28.594970703125
+      ],
+      "reference_first_API_await_ms": [
+        15.465087890625,
+        39.885009765625
+      ]
+    }
+  ],
+  "metrics": [
+    {
+      "spec": {
+        "fixture_id": "diverse-prefix-1",
+        "engine": "candidate",
+        "phase": "warm",
+        "engine_repetition": 0,
+        "cancel": false
+      },
+      "request_id": "budget126-measure-r1-1",
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "generation": 1,
+      "adopted_stats": {
+        "completed_backup": 8,
+        "rootN": 8,
+        "simulations": 8,
+        "edge_sum": 7,
+        "cp_NN_calls": 8,
+        "adopted_SAB_visits": 8,
+        "sequence": 8,
+        "terminal_noNN_backup": 0,
+        "exact_atomic_store_time_missing": true,
+        "cp_sequence_bound_to_adoption": true
+      },
+      "rootN_origin": "source convention simulations, not direct tree node observation",
+      "first_CP_validation_interval": {
+        "lower_ms": 96.389892578125,
+        "upper_ms": 96.610107421875
+      },
+      "first_publication_begin_interval": {
+        "lower_ms": 95.320068359375,
+        "upper_ms": 95.540283203125
+      },
+      "root_prepare_to_first_API_start_interval": {
+        "lower_ms": 58.080078125,
+        "upper_ms": 58.30029296875
+      },
+      "first_infer_wrapper_start_interval": {
+        "lower_ms": 58.044921875,
+        "upper_ms": 58.26513671875
+      },
+      "first_API_await_ms": 34.875,
+      "adopt_planned_ms": 411.0,
+      "adopt_timer_ms": 412.094970703125,
+      "adopt_stamp_ms": 412.264892578125,
+      "adopt_sequence": 8,
+      "hand_NN": 8,
+      "NN_returns_definitely_before_adopt": 8,
+      "NN_returns_possibly_before_adopt": 8,
+      "old_return_discard": 0,
+      "post_public_new_NN_definite": 0,
+      "self_wait": {
+        "input_available_ms": 1790948474500.25,
+        "start_ms": 1790948474500.25,
+        "end_ms": 1790948474500.25,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790948474500.25
+      },
+      "worker_stop_class": "upper_le_D",
+      "ACK_wall_ms": 405.074951171875,
+      "stop_to_ACK_interval": {
+        "lower_ms": 0.0048828125,
+        "upper_ms": 0.22509765625
+      },
+      "selected_matched_root": false,
+      "dynamic_self_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 124,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "exact_Atomicstore_kernel_CPU_missing": true,
+      "per_wrapper_root_internal_preparation_span_missing": true
+    },
+    {
+      "spec": {
+        "fixture_id": "diverse-prefix-1",
+        "engine": "reference",
+        "phase": "warm",
+        "engine_repetition": 0,
+        "cancel": false
+      },
+      "request_id": "budget126-measure-r1-2",
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "generation": 2,
+      "adopted_stats": {
+        "completed_backup": 13,
+        "rootN": 13,
+        "simulations": 12,
+        "edge_sum": 12,
+        "cp_NN_calls": 13,
+        "adopted_SAB_visits": 12,
+        "sequence": 13,
+        "terminal_noNN_backup": 0,
+        "exact_atomic_store_time_missing": true,
+        "cp_sequence_bound_to_adoption": true
+      },
+      "rootN_origin": "raw cp.root_visits",
+      "first_CP_validation_interval": {
+        "lower_ms": 30.9248046875,
+        "upper_ms": 31.134765625
+      },
+      "first_publication_begin_interval": {
+        "lower_ms": 30.414794921875,
+        "upper_ms": 30.624755859375
+      },
+      "root_prepare_to_first_API_start_interval": {
+        "lower_ms": 9.39990234375,
+        "upper_ms": 9.60986328125
+      },
+      "first_infer_wrapper_start_interval": {
+        "lower_ms": 9.3798828125,
+        "upper_ms": 9.58984375
+      },
+      "first_API_await_ms": 20.35009765625,
+      "adopt_planned_ms": 411.0,
+      "adopt_timer_ms": 410.35986328125,
+      "adopt_stamp_ms": 410.46484375,
+      "adopt_sequence": 13,
+      "hand_NN": 14,
+      "NN_returns_definitely_before_adopt": 13,
+      "NN_returns_possibly_before_adopt": 13,
+      "old_return_discard": 1,
+      "post_public_new_NN_definite": 0,
+      "self_wait": {
+        "input_available_ms": 1790948474916.545,
+        "start_ms": 1790948474916.545,
+        "end_ms": 1790948474916.55,
+        "wait_ms": 0.005126953125,
+        "ready_t0_ms": 1790948474916.56
+      },
+      "worker_stop_class": "upper_le_D",
+      "ACK_wall_ms": 419.39501953125,
+      "stop_to_ACK_interval": {
+        "lower_ms": -0.06982421875,
+        "upper_ms": 0.14013671875
+      },
+      "selected_matched_root": false,
+      "dynamic_self_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 124,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "exact_Atomicstore_kernel_CPU_missing": true,
+      "per_wrapper_root_internal_preparation_span_missing": true
+    },
+    {
+      "spec": {
+        "fixture_id": "diverse-prefix-1",
+        "engine": "candidate",
+        "phase": "steady",
+        "engine_repetition": 1,
+        "cancel": false
+      },
+      "request_id": "budget126-measure-r1-3",
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "generation": 3,
+      "adopted_stats": {
+        "completed_backup": 10,
+        "rootN": 10,
+        "simulations": 10,
+        "edge_sum": 9,
+        "cp_NN_calls": 10,
+        "adopted_SAB_visits": 10,
+        "sequence": 10,
+        "terminal_noNN_backup": 0,
+        "exact_atomic_store_time_missing": true,
+        "cp_sequence_bound_to_adoption": true
+      },
+      "rootN_origin": "source convention simulations, not direct tree node observation",
+      "first_CP_validation_interval": {
+        "lower_ms": 41.19482421875,
+        "upper_ms": 41.4150390625
+      },
+      "first_publication_begin_interval": {
+        "lower_ms": 40.89501953125,
+        "upper_ms": 41.115234375
+      },
+      "root_prepare_to_first_API_start_interval": {
+        "lower_ms": 10.869873046875,
+        "upper_ms": 11.090087890625
+      },
+      "first_infer_wrapper_start_interval": {
+        "lower_ms": 10.85498046875,
+        "upper_ms": 11.0751953125
+      },
+      "first_API_await_ms": 23.31005859375,
+      "adopt_planned_ms": 411.0,
+      "adopt_timer_ms": 410.31005859375,
+      "adopt_stamp_ms": 410.39501953125,
+      "adopt_sequence": 10,
+      "hand_NN": 11,
+      "NN_returns_definitely_before_adopt": 10,
+      "NN_returns_possibly_before_adopt": 10,
+      "old_return_discard": 1,
+      "post_public_new_NN_definite": 0,
+      "self_wait": {
+        "input_available_ms": 1790948475339.015,
+        "start_ms": 1790948475339.015,
+        "end_ms": 1790948475339.015,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790948475339.02
+      },
+      "worker_stop_class": "upper_le_D",
+      "ACK_wall_ms": 430.5849609375,
+      "stop_to_ACK_interval": {
+        "lower_ms": 0.02490234375,
+        "upper_ms": 0.2451171875
+      },
+      "selected_matched_root": true,
+      "dynamic_self_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 124,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "exact_Atomicstore_kernel_CPU_missing": true,
+      "per_wrapper_root_internal_preparation_span_missing": true
+    },
+    {
+      "spec": {
+        "fixture_id": "diverse-prefix-1",
+        "engine": "reference",
+        "phase": "steady",
+        "engine_repetition": 1,
+        "cancel": false
+      },
+      "request_id": "budget126-measure-r1-4",
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "generation": 4,
+      "adopted_stats": {
+        "completed_backup": 9,
+        "rootN": 9,
+        "simulations": 8,
+        "edge_sum": 8,
+        "cp_NN_calls": 9,
+        "adopted_SAB_visits": 8,
+        "sequence": 9,
+        "terminal_noNN_backup": 0,
+        "exact_atomic_store_time_missing": true,
+        "cp_sequence_bound_to_adoption": true
+      },
+      "rootN_origin": "raw cp.root_visits",
+      "first_CP_validation_interval": {
+        "lower_ms": 34.320068359375,
+        "upper_ms": 34.530029296875
+      },
+      "first_publication_begin_interval": {
+        "lower_ms": 34.170166015625,
+        "upper_ms": 34.380126953125
+      },
+      "root_prepare_to_first_API_start_interval": {
+        "lower_ms": 2.525146484375,
+        "upper_ms": 2.735107421875
+      },
+      "first_infer_wrapper_start_interval": {
+        "lower_ms": 2.510009765625,
+        "upper_ms": 2.719970703125
+      },
+      "first_API_await_ms": 29.60986328125,
+      "adopt_planned_ms": 411.0,
+      "adopt_timer_ms": 410.300048828125,
+      "adopt_stamp_ms": 410.47509765625,
+      "adopt_sequence": 9,
+      "hand_NN": 10,
+      "NN_returns_definitely_before_adopt": 9,
+      "NN_returns_possibly_before_adopt": 9,
+      "old_return_discard": 1,
+      "post_public_new_NN_definite": 0,
+      "self_wait": {
+        "input_available_ms": 1790948475770.385,
+        "start_ms": 1790948475770.385,
+        "end_ms": 1790948475770.385,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790948475770.39
+      },
+      "worker_stop_class": "upper_le_D",
+      "ACK_wall_ms": 417.080078125,
+      "stop_to_ACK_interval": {
+        "lower_ms": 0.030029296875,
+        "upper_ms": 0.239990234375
+      },
+      "selected_matched_root": true,
+      "dynamic_self_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 124,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "exact_Atomicstore_kernel_CPU_missing": true,
+      "per_wrapper_root_internal_preparation_span_missing": true
+    },
+    {
+      "spec": {
+        "fixture_id": "diverse-prefix-1",
+        "engine": "reference",
+        "phase": "steady",
+        "engine_repetition": 2,
+        "cancel": false
+      },
+      "request_id": "budget126-measure-r1-5",
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "generation": 5,
+      "adopted_stats": {
+        "completed_backup": 8,
+        "rootN": 8,
+        "simulations": 7,
+        "edge_sum": 7,
+        "cp_NN_calls": 8,
+        "adopted_SAB_visits": 7,
+        "sequence": 8,
+        "terminal_noNN_backup": 0,
+        "exact_atomic_store_time_missing": true,
+        "cp_sequence_bound_to_adoption": true
+      },
+      "rootN_origin": "raw cp.root_visits",
+      "first_CP_validation_interval": {
+        "lower_ms": 50.215087890625,
+        "upper_ms": 50.425048828125
+      },
+      "first_publication_begin_interval": {
+        "lower_ms": 50.06494140625,
+        "upper_ms": 50.27490234375
+      },
+      "root_prepare_to_first_API_start_interval": {
+        "lower_ms": 3.22998046875,
+        "upper_ms": 3.43994140625
+      },
+      "first_infer_wrapper_start_interval": {
+        "lower_ms": 3.215087890625,
+        "upper_ms": 3.425048828125
+      },
+      "first_API_await_ms": 35.544921875,
+      "adopt_planned_ms": 411.0,
+      "adopt_timer_ms": 410.705078125,
+      "adopt_stamp_ms": 410.804931640625,
+      "adopt_sequence": 8,
+      "hand_NN": 9,
+      "NN_returns_definitely_before_adopt": 8,
+      "NN_returns_possibly_before_adopt": 8,
+      "old_return_discard": 1,
+      "post_public_new_NN_definite": 0,
+      "self_wait": {
+        "input_available_ms": 1790948476188.32,
+        "start_ms": 1790948476188.32,
+        "end_ms": 1790948476188.32,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790948476188.325
+      },
+      "worker_stop_class": "upper_le_D",
+      "ACK_wall_ms": 423.760009765625,
+      "stop_to_ACK_interval": {
+        "lower_ms": -0.06494140625,
+        "upper_ms": 0.14501953125
+      },
+      "selected_matched_root": false,
+      "dynamic_self_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 124,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "exact_Atomicstore_kernel_CPU_missing": true,
+      "per_wrapper_root_internal_preparation_span_missing": true
+    },
+    {
+      "spec": {
+        "fixture_id": "diverse-prefix-1",
+        "engine": "candidate",
+        "phase": "steady",
+        "engine_repetition": 2,
+        "cancel": false
+      },
+      "request_id": "budget126-measure-r1-6",
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "generation": 6,
+      "adopted_stats": {
+        "completed_backup": 11,
+        "rootN": 11,
+        "simulations": 11,
+        "edge_sum": 10,
+        "cp_NN_calls": 11,
+        "adopted_SAB_visits": 11,
+        "sequence": 11,
+        "terminal_noNN_backup": 0,
+        "exact_atomic_store_time_missing": true,
+        "cp_sequence_bound_to_adoption": true
+      },
+      "rootN_origin": "source convention simulations, not direct tree node observation",
+      "first_CP_validation_interval": {
+        "lower_ms": 53.114990234375,
+        "upper_ms": 53.335205078125
+      },
+      "first_publication_begin_interval": {
+        "lower_ms": 52.64990234375,
+        "upper_ms": 52.8701171875
+      },
+      "root_prepare_to_first_API_start_interval": {
+        "lower_ms": 18.2900390625,
+        "upper_ms": 18.51025390625
+      },
+      "first_infer_wrapper_start_interval": {
+        "lower_ms": 18.27001953125,
+        "upper_ms": 18.490234375
+      },
+      "first_API_await_ms": 33.48486328125,
+      "adopt_planned_ms": 411.0,
+      "adopt_timer_ms": 410.2548828125,
+      "adopt_stamp_ms": 410.35986328125,
+      "adopt_sequence": 11,
+      "hand_NN": 12,
+      "NN_returns_definitely_before_adopt": 11,
+      "NN_returns_possibly_before_adopt": 11,
+      "old_return_discard": 1,
+      "post_public_new_NN_definite": 0,
+      "self_wait": {
+        "input_available_ms": 1790948476612.97,
+        "start_ms": 1790948476612.97,
+        "end_ms": 1790948476612.97,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790948476612.98
+      },
+      "worker_stop_class": "upper_le_D",
+      "ACK_wall_ms": 415.89501953125,
+      "stop_to_ACK_interval": {
+        "lower_ms": -0.0751953125,
+        "upper_ms": 0.14501953125
+      },
+      "selected_matched_root": false,
+      "dynamic_self_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 124,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "exact_Atomicstore_kernel_CPU_missing": true,
+      "per_wrapper_root_internal_preparation_span_missing": true
+    },
+    {
+      "spec": {
+        "fixture_id": "diverse-prefix-2",
+        "engine": "reference",
+        "phase": "steady",
+        "engine_repetition": 1,
+        "cancel": false
+      },
+      "request_id": "budget126-measure-r1-7",
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          -1
+        ]
+      },
+      "generation": 7,
+      "adopted_stats": {
+        "completed_backup": 15,
+        "rootN": 15,
+        "simulations": 14,
+        "edge_sum": 14,
+        "cp_NN_calls": 15,
+        "adopted_SAB_visits": 14,
+        "sequence": 15,
+        "terminal_noNN_backup": 0,
+        "exact_atomic_store_time_missing": true,
+        "cp_sequence_bound_to_adoption": true
+      },
+      "rootN_origin": "raw cp.root_visits",
+      "first_CP_validation_interval": {
+        "lower_ms": 24.43994140625,
+        "upper_ms": 24.64990234375
+      },
+      "first_publication_begin_interval": {
+        "lower_ms": 24.31005859375,
+        "upper_ms": 24.52001953125
+      },
+      "root_prepare_to_first_API_start_interval": {
+        "lower_ms": 2.55517578125,
+        "upper_ms": 2.76513671875
+      },
+      "first_infer_wrapper_start_interval": {
+        "lower_ms": 2.5400390625,
+        "upper_ms": 2.75
+      },
+      "first_API_await_ms": 21.614990234375,
+      "adopt_planned_ms": 411.0,
+      "adopt_timer_ms": 410.2451171875,
+      "adopt_stamp_ms": 410.340087890625,
+      "adopt_sequence": 15,
+      "hand_NN": 16,
+      "NN_returns_definitely_before_adopt": 16,
+      "NN_returns_possibly_before_adopt": 16,
+      "old_return_discard": 0,
+      "post_public_new_NN_definite": 0,
+      "self_wait": {
+        "input_available_ms": 1790948477029.755,
+        "start_ms": 1790948477029.755,
+        "end_ms": 1790948477029.755,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790948477029.765
+      },
+      "worker_stop_class": "upper_le_D",
+      "ACK_wall_ms": 409.77001953125,
+      "stop_to_ACK_interval": {
+        "lower_ms": 0.22998046875,
+        "upper_ms": 0.43994140625
+      },
+      "selected_matched_root": true,
+      "dynamic_self_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 116,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": true,
+        "missing_public_cp": false
+      },
+      "exact_Atomicstore_kernel_CPU_missing": true,
+      "per_wrapper_root_internal_preparation_span_missing": true
+    },
+    {
+      "spec": {
+        "fixture_id": "diverse-prefix-2",
+        "engine": "candidate",
+        "phase": "steady",
+        "engine_repetition": 1,
+        "cancel": false
+      },
+      "request_id": "budget126-measure-r1-8",
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          -1
+        ]
+      },
+      "generation": 8,
+      "adopted_stats": {
+        "completed_backup": 9,
+        "rootN": 9,
+        "simulations": 9,
+        "edge_sum": 8,
+        "cp_NN_calls": 9,
+        "adopted_SAB_visits": 9,
+        "sequence": 9,
+        "terminal_noNN_backup": 0,
+        "exact_atomic_store_time_missing": true,
+        "cp_sequence_bound_to_adoption": true
+      },
+      "rootN_origin": "source convention simulations, not direct tree node observation",
+      "first_CP_validation_interval": {
+        "lower_ms": 61.204833984375,
+        "upper_ms": 61.425048828125
+      },
+      "first_publication_begin_interval": {
+        "lower_ms": 61.08984375,
+        "upper_ms": 61.31005859375
+      },
+      "root_prepare_to_first_API_start_interval": {
+        "lower_ms": 19.5048828125,
+        "upper_ms": 19.72509765625
+      },
+      "first_infer_wrapper_start_interval": {
+        "lower_ms": 19.48486328125,
+        "upper_ms": 19.705078125
+      },
+      "first_API_await_ms": 37.820068359375,
+      "adopt_planned_ms": 411.0,
+      "adopt_timer_ms": 413.1748046875,
+      "adopt_stamp_ms": 413.284912109375,
+      "adopt_sequence": 9,
+      "hand_NN": 10,
+      "NN_returns_definitely_before_adopt": 9,
+      "NN_returns_possibly_before_adopt": 9,
+      "old_return_discard": 1,
+      "post_public_new_NN_definite": 0,
+      "self_wait": {
+        "input_available_ms": 1790948477441.295,
+        "start_ms": 1790948477441.295,
+        "end_ms": 1790948477441.295,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790948477441.3
+      },
+      "worker_stop_class": "upper_le_D",
+      "ACK_wall_ms": 415.099853515625,
+      "stop_to_ACK_interval": {
+        "lower_ms": -0.0751953125,
+        "upper_ms": 0.14501953125
+      },
+      "selected_matched_root": true,
+      "dynamic_self_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 116,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": true,
+        "missing_public_cp": false
+      },
+      "exact_Atomicstore_kernel_CPU_missing": true,
+      "per_wrapper_root_internal_preparation_span_missing": true
+    },
+    {
+      "spec": {
+        "fixture_id": "diverse-prefix-2",
+        "engine": "candidate",
+        "phase": "steady",
+        "engine_repetition": 2,
+        "cancel": false
+      },
+      "request_id": "budget126-measure-r1-9",
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          -1
+        ]
+      },
+      "generation": 9,
+      "adopted_stats": {
+        "completed_backup": 9,
+        "rootN": 9,
+        "simulations": 9,
+        "edge_sum": 8,
+        "cp_NN_calls": 9,
+        "adopted_SAB_visits": 9,
+        "sequence": 9,
+        "terminal_noNN_backup": 0,
+        "exact_atomic_store_time_missing": true,
+        "cp_sequence_bound_to_adoption": true
+      },
+      "rootN_origin": "source convention simulations, not direct tree node observation",
+      "first_CP_validation_interval": {
+        "lower_ms": 58.639892578125,
+        "upper_ms": 58.860107421875
+      },
+      "first_publication_begin_interval": {
+        "lower_ms": 58.52490234375,
+        "upper_ms": 58.7451171875
+      },
+      "root_prepare_to_first_API_start_interval": {
+        "lower_ms": 17.829833984375,
+        "upper_ms": 18.050048828125
+      },
+      "first_infer_wrapper_start_interval": {
+        "lower_ms": 17.81494140625,
+        "upper_ms": 18.03515625
+      },
+      "first_API_await_ms": 36.800048828125,
+      "adopt_planned_ms": 411.0,
+      "adopt_timer_ms": 410.27490234375,
+      "adopt_stamp_ms": 410.369873046875,
+      "adopt_sequence": 9,
+      "hand_NN": 9,
+      "NN_returns_definitely_before_adopt": 9,
+      "NN_returns_possibly_before_adopt": 9,
+      "old_return_discard": 0,
+      "post_public_new_NN_definite": 0,
+      "self_wait": {
+        "input_available_ms": 1790948477857.445,
+        "start_ms": 1790948477857.445,
+        "end_ms": 1790948477857.445,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790948477857.455
+      },
+      "worker_stop_class": "upper_le_D",
+      "ACK_wall_ms": 407.579833984375,
+      "stop_to_ACK_interval": {
+        "lower_ms": -0.015380859375,
+        "upper_ms": 0.204833984375
+      },
+      "selected_matched_root": false,
+      "dynamic_self_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 116,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": true,
+        "missing_public_cp": false
+      },
+      "exact_Atomicstore_kernel_CPU_missing": true,
+      "per_wrapper_root_internal_preparation_span_missing": true
+    },
+    {
+      "spec": {
+        "fixture_id": "diverse-prefix-2",
+        "engine": "reference",
+        "phase": "steady",
+        "engine_repetition": 2,
+        "cancel": false
+      },
+      "request_id": "budget126-measure-r1-10",
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          -1
+        ]
+      },
+      "generation": 10,
+      "adopted_stats": {
+        "completed_backup": 11,
+        "rootN": 11,
+        "simulations": 10,
+        "edge_sum": 10,
+        "cp_NN_calls": 11,
+        "adopted_SAB_visits": 10,
+        "sequence": 11,
+        "terminal_noNN_backup": 0,
+        "exact_atomic_store_time_missing": true,
+        "cp_sequence_bound_to_adoption": true
+      },
+      "rootN_origin": "raw cp.root_visits",
+      "first_CP_validation_interval": {
+        "lower_ms": 32.0849609375,
+        "upper_ms": 32.294921875
+      },
+      "first_publication_begin_interval": {
+        "lower_ms": 31.9599609375,
+        "upper_ms": 32.169921875
+      },
+      "root_prepare_to_first_API_start_interval": {
+        "lower_ms": 9.375,
+        "upper_ms": 9.5849609375
+      },
+      "first_infer_wrapper_start_interval": {
+        "lower_ms": 9.364990234375,
+        "upper_ms": 9.574951171875
+      },
+      "first_API_await_ms": 22.364990234375,
+      "adopt_planned_ms": 411,
+      "adopt_timer_ms": 410.280029296875,
+      "adopt_stamp_ms": 410.405029296875,
+      "adopt_sequence": 11,
+      "hand_NN": 11,
+      "NN_returns_definitely_before_adopt": 11,
+      "NN_returns_possibly_before_adopt": 11,
+      "old_return_discard": 0,
+      "post_public_new_NN_definite": 0,
+      "self_wait": {
+        "input_available_ms": 1790948478268.99,
+        "start_ms": 1790948478268.99,
+        "end_ms": 1790948478268.99,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790948478269
+      },
+      "worker_stop_class": "upper_le_D",
+      "ACK_wall_ms": 403.89990234375,
+      "stop_to_ACK_interval": {
+        "lower_ms": -0.034912109375,
+        "upper_ms": 0.175048828125
+      },
+      "selected_matched_root": false,
+      "dynamic_self_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 116,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": true,
+        "missing_public_cp": false
+      },
+      "exact_Atomicstore_kernel_CPU_missing": true,
+      "per_wrapper_root_internal_preparation_span_missing": true
+    },
+    {
+      "spec": {
+        "fixture_id": "diverse-prefix-3",
+        "engine": "candidate",
+        "phase": "steady",
+        "engine_repetition": 1,
+        "cancel": false
+      },
+      "request_id": "budget126-measure-r1-11",
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          1,
+          0
+        ]
+      },
+      "generation": 11,
+      "adopted_stats": {
+        "completed_backup": 9,
+        "rootN": 9,
+        "simulations": 9,
+        "edge_sum": 8,
+        "cp_NN_calls": 9,
+        "adopted_SAB_visits": 9,
+        "sequence": 9,
+        "terminal_noNN_backup": 0,
+        "exact_atomic_store_time_missing": true,
+        "cp_sequence_bound_to_adoption": true
+      },
+      "rootN_origin": "source convention simulations, not direct tree node observation",
+      "first_CP_validation_interval": {
+        "lower_ms": 76.8349609375,
+        "upper_ms": 77.05517578125
+      },
+      "first_publication_begin_interval": {
+        "lower_ms": 72.905029296875,
+        "upper_ms": 73.125244140625
+      },
+      "root_prepare_to_first_API_start_interval": {
+        "lower_ms": 22.014892578125,
+        "upper_ms": 22.235107421875
+      },
+      "first_infer_wrapper_start_interval": {
+        "lower_ms": 22.0048828125,
+        "upper_ms": 22.22509765625
+      },
+      "first_API_await_ms": 50.090087890625,
+      "adopt_planned_ms": 411.0,
+      "adopt_timer_ms": 410.2900390625,
+      "adopt_stamp_ms": 410.35986328125,
+      "adopt_sequence": 9,
+      "hand_NN": 9,
+      "NN_returns_definitely_before_adopt": 9,
+      "NN_returns_possibly_before_adopt": 9,
+      "old_return_discard": 0,
+      "post_public_new_NN_definite": 0,
+      "self_wait": {
+        "input_available_ms": 1790948478680.75,
+        "start_ms": 1790948478680.75,
+        "end_ms": 1790948478680.75,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790948478680.76
+      },
+      "worker_stop_class": "upper_le_D",
+      "ACK_wall_ms": 403.39501953125,
+      "stop_to_ACK_interval": {
+        "lower_ms": -0.01025390625,
+        "upper_ms": 0.2099609375
+      },
+      "selected_matched_root": true,
+      "dynamic_self_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 119,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "exact_Atomicstore_kernel_CPU_missing": true,
+      "per_wrapper_root_internal_preparation_span_missing": true
+    },
+    {
+      "spec": {
+        "fixture_id": "diverse-prefix-3",
+        "engine": "reference",
+        "phase": "steady",
+        "engine_repetition": 1,
+        "cancel": false
+      },
+      "request_id": "budget126-measure-r1-12",
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          1,
+          0
+        ]
+      },
+      "generation": 12,
+      "adopted_stats": {
+        "completed_backup": 9,
+        "rootN": 9,
+        "simulations": 8,
+        "edge_sum": 8,
+        "cp_NN_calls": 9,
+        "adopted_SAB_visits": 8,
+        "sequence": 9,
+        "terminal_noNN_backup": 0,
+        "exact_atomic_store_time_missing": true,
+        "cp_sequence_bound_to_adoption": true
+      },
+      "rootN_origin": "raw cp.root_visits",
+      "first_CP_validation_interval": {
+        "lower_ms": 40.93505859375,
+        "upper_ms": 41.14501953125
+      },
+      "first_publication_begin_interval": {
+        "lower_ms": 40.780029296875,
+        "upper_ms": 40.989990234375
+      },
+      "root_prepare_to_first_API_start_interval": {
+        "lower_ms": 7.22998046875,
+        "upper_ms": 7.43994140625
+      },
+      "first_infer_wrapper_start_interval": {
+        "lower_ms": 7.21484375,
+        "upper_ms": 7.4248046875
+      },
+      "first_API_await_ms": 33.369873046875,
+      "adopt_planned_ms": 411.0,
+      "adopt_timer_ms": 411.070068359375,
+      "adopt_stamp_ms": 411.179931640625,
+      "adopt_sequence": 9,
+      "hand_NN": 10,
+      "NN_returns_definitely_before_adopt": 9,
+      "NN_returns_possibly_before_adopt": 9,
+      "old_return_discard": 1,
+      "post_public_new_NN_definite": 0,
+      "self_wait": {
+        "input_available_ms": 1790948479092.1199,
+        "start_ms": 1790948479092.1199,
+        "end_ms": 1790948479092.1199,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790948479092.125
+      },
+      "worker_stop_class": "upper_le_D",
+      "ACK_wall_ms": 442.60986328125,
+      "stop_to_ACK_interval": {
+        "lower_ms": -0.070068359375,
+        "upper_ms": 0.139892578125
+      },
+      "selected_matched_root": true,
+      "dynamic_self_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 119,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "exact_Atomicstore_kernel_CPU_missing": true,
+      "per_wrapper_root_internal_preparation_span_missing": true
+    },
+    {
+      "spec": {
+        "fixture_id": "diverse-prefix-3",
+        "engine": "reference",
+        "phase": "steady",
+        "engine_repetition": 2,
+        "cancel": false
+      },
+      "request_id": "budget126-measure-r1-13",
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          1,
+          0
+        ]
+      },
+      "generation": 13,
+      "adopted_stats": {
+        "completed_backup": 11,
+        "rootN": 11,
+        "simulations": 10,
+        "edge_sum": 10,
+        "cp_NN_calls": 11,
+        "adopted_SAB_visits": 10,
+        "sequence": 11,
+        "terminal_noNN_backup": 0,
+        "exact_atomic_store_time_missing": true,
+        "cp_sequence_bound_to_adoption": true
+      },
+      "rootN_origin": "raw cp.root_visits",
+      "first_CP_validation_interval": {
+        "lower_ms": 49.804931640625,
+        "upper_ms": 50.014892578125
+      },
+      "first_publication_begin_interval": {
+        "lower_ms": 49.675048828125,
+        "upper_ms": 49.885009765625
+      },
+      "root_prepare_to_first_API_start_interval": {
+        "lower_ms": 10.905029296875,
+        "upper_ms": 11.114990234375
+      },
+      "first_infer_wrapper_start_interval": {
+        "lower_ms": 10.89501953125,
+        "upper_ms": 11.10498046875
+      },
+      "first_API_await_ms": 38.594970703125,
+      "adopt_planned_ms": 411.0,
+      "adopt_timer_ms": 410.264892578125,
+      "adopt_stamp_ms": 410.33984375,
+      "adopt_sequence": 11,
+      "hand_NN": 11,
+      "NN_returns_definitely_before_adopt": 11,
+      "NN_returns_possibly_before_adopt": 11,
+      "old_return_discard": 0,
+      "post_public_new_NN_definite": 0,
+      "self_wait": {
+        "input_available_ms": 1790948479535.755,
+        "start_ms": 1790948479535.755,
+        "end_ms": 1790948479535.755,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790948479535.76
+      },
+      "worker_stop_class": "upper_le_D",
+      "ACK_wall_ms": 406.260009765625,
+      "stop_to_ACK_interval": {
+        "lower_ms": -0.019775390625,
+        "upper_ms": 0.190185546875
+      },
+      "selected_matched_root": false,
+      "dynamic_self_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 119,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "exact_Atomicstore_kernel_CPU_missing": true,
+      "per_wrapper_root_internal_preparation_span_missing": true
+    },
+    {
+      "spec": {
+        "fixture_id": "diverse-prefix-3",
+        "engine": "candidate",
+        "phase": "steady",
+        "engine_repetition": 2,
+        "cancel": false
+      },
+      "request_id": "budget126-measure-r1-14",
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          1,
+          0
+        ]
+      },
+      "generation": 14,
+      "adopted_stats": {
+        "completed_backup": 9,
+        "rootN": 9,
+        "simulations": 9,
+        "edge_sum": 8,
+        "cp_NN_calls": 9,
+        "adopted_SAB_visits": 9,
+        "sequence": 9,
+        "terminal_noNN_backup": 0,
+        "exact_atomic_store_time_missing": true,
+        "cp_sequence_bound_to_adoption": true
+      },
+      "rootN_origin": "source convention simulations, not direct tree node observation",
+      "first_CP_validation_interval": {
+        "lower_ms": 63.330078125,
+        "upper_ms": 63.55029296875
+      },
+      "first_publication_begin_interval": {
+        "lower_ms": 63.21484375,
+        "upper_ms": 63.43505859375
+      },
+      "root_prepare_to_first_API_start_interval": {
+        "lower_ms": 25.639892578125,
+        "upper_ms": 25.860107421875
+      },
+      "first_infer_wrapper_start_interval": {
+        "lower_ms": 25.619873046875,
+        "upper_ms": 25.840087890625
+      },
+      "first_API_await_ms": 36.775146484375,
+      "adopt_planned_ms": 411.0,
+      "adopt_timer_ms": 410.43994140625,
+      "adopt_stamp_ms": 410.52490234375,
+      "adopt_sequence": 9,
+      "hand_NN": 9,
+      "NN_returns_definitely_before_adopt": 9,
+      "NN_returns_possibly_before_adopt": 9,
+      "old_return_discard": 0,
+      "post_public_new_NN_definite": 0,
+      "self_wait": {
+        "input_available_ms": 1790948479947.22,
+        "start_ms": 1790948479947.22,
+        "end_ms": 1790948479947.22,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790948479947.25
+      },
+      "worker_stop_class": "upper_le_D",
+      "ACK_wall_ms": 404.31494140625,
+      "stop_to_ACK_interval": {
+        "lower_ms": 0.0048828125,
+        "upper_ms": 0.22509765625
+      },
+      "selected_matched_root": false,
+      "dynamic_self_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 119,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "exact_Atomicstore_kernel_CPU_missing": true,
+      "per_wrapper_root_internal_preparation_span_missing": true
+    },
+    {
+      "spec": {
+        "fixture_id": "diverse-prefix-7",
+        "engine": "reference",
+        "phase": "steady",
+        "engine_repetition": 1,
+        "cancel": false
+      },
+      "request_id": "budget126-measure-r1-15",
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "generation": 15,
+      "adopted_stats": {
+        "completed_backup": 16,
+        "rootN": 16,
+        "simulations": 15,
+        "edge_sum": 15,
+        "cp_NN_calls": 16,
+        "adopted_SAB_visits": 15,
+        "sequence": 16,
+        "terminal_noNN_backup": 0,
+        "exact_atomic_store_time_missing": true,
+        "cp_sequence_bound_to_adoption": true
+      },
+      "rootN_origin": "raw cp.root_visits",
+      "first_CP_validation_interval": {
+        "lower_ms": 29.43505859375,
+        "upper_ms": 29.64501953125
+      },
+      "first_publication_begin_interval": {
+        "lower_ms": 29.27001953125,
+        "upper_ms": 29.47998046875
+      },
+      "root_prepare_to_first_API_start_interval": {
+        "lower_ms": 13.635009765625,
+        "upper_ms": 13.844970703125
+      },
+      "first_infer_wrapper_start_interval": {
+        "lower_ms": 13.6201171875,
+        "upper_ms": 13.830078125
+      },
+      "first_API_await_ms": 15.465087890625,
+      "adopt_planned_ms": 411.0,
+      "adopt_timer_ms": 410.360107421875,
+      "adopt_stamp_ms": 410.43505859375,
+      "adopt_sequence": 16,
+      "hand_NN": 17,
+      "NN_returns_definitely_before_adopt": 16,
+      "NN_returns_possibly_before_adopt": 16,
+      "old_return_discard": 1,
+      "post_public_new_NN_definite": 0,
+      "self_wait": {
+        "input_available_ms": 1790948480361.635,
+        "start_ms": 1790948480361.635,
+        "end_ms": 1790948480361.635,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790948480361.64
+      },
+      "worker_stop_class": "upper_le_D",
+      "ACK_wall_ms": 417.295166015625,
+      "stop_to_ACK_interval": {
+        "lower_ms": -0.0498046875,
+        "upper_ms": 0.16015625
+      },
+      "selected_matched_root": true,
+      "dynamic_self_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 107,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "exact_Atomicstore_kernel_CPU_missing": true,
+      "per_wrapper_root_internal_preparation_span_missing": true
+    },
+    {
+      "spec": {
+        "fixture_id": "diverse-prefix-7",
+        "engine": "candidate",
+        "phase": "steady",
+        "engine_repetition": 1,
+        "cancel": false
+      },
+      "request_id": "budget126-measure-r1-16",
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "generation": 16,
+      "adopted_stats": {
+        "completed_backup": 15,
+        "rootN": 15,
+        "simulations": 15,
+        "edge_sum": 14,
+        "cp_NN_calls": 15,
+        "adopted_SAB_visits": 15,
+        "sequence": 15,
+        "terminal_noNN_backup": 0,
+        "exact_atomic_store_time_missing": true,
+        "cp_sequence_bound_to_adoption": true
+      },
+      "rootN_origin": "source convention simulations, not direct tree node observation",
+      "first_CP_validation_interval": {
+        "lower_ms": 35.9951171875,
+        "upper_ms": 36.21533203125
+      },
+      "first_publication_begin_interval": {
+        "lower_ms": 35.875,
+        "upper_ms": 36.09521484375
+      },
+      "root_prepare_to_first_API_start_interval": {
+        "lower_ms": 13.330078125,
+        "upper_ms": 13.55029296875
+      },
+      "first_infer_wrapper_start_interval": {
+        "lower_ms": 13.31494140625,
+        "upper_ms": 13.53515625
+      },
+      "first_API_await_ms": 21.869873046875,
+      "adopt_planned_ms": 411.0,
+      "adopt_timer_ms": 410.280029296875,
+      "adopt_stamp_ms": 410.35498046875,
+      "adopt_sequence": 15,
+      "hand_NN": 16,
+      "NN_returns_definitely_before_adopt": 15,
+      "NN_returns_possibly_before_adopt": 15,
+      "old_return_discard": 1,
+      "post_public_new_NN_definite": 0,
+      "self_wait": {
+        "input_available_ms": 1790948480780.29,
+        "start_ms": 1790948480780.29,
+        "end_ms": 1790948480780.29,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790948480780.295
+      },
+      "worker_stop_class": "upper_le_D",
+      "ACK_wall_ms": 422.97509765625,
+      "stop_to_ACK_interval": {
+        "lower_ms": -0.0302734375,
+        "upper_ms": 0.18994140625
+      },
+      "selected_matched_root": true,
+      "dynamic_self_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 107,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "exact_Atomicstore_kernel_CPU_missing": true,
+      "per_wrapper_root_internal_preparation_span_missing": true
+    },
+    {
+      "spec": {
+        "fixture_id": "diverse-prefix-7",
+        "engine": "candidate",
+        "phase": "steady",
+        "engine_repetition": 2,
+        "cancel": false
+      },
+      "request_id": "budget126-measure-r1-17",
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "generation": 17,
+      "adopted_stats": {
+        "completed_backup": 11,
+        "rootN": 11,
+        "simulations": 11,
+        "edge_sum": 10,
+        "cp_NN_calls": 11,
+        "adopted_SAB_visits": 11,
+        "sequence": 11,
+        "terminal_noNN_backup": 0,
+        "exact_atomic_store_time_missing": true,
+        "cp_sequence_bound_to_adoption": true
+      },
+      "rootN_origin": "source convention simulations, not direct tree node observation",
+      "first_CP_validation_interval": {
+        "lower_ms": 42.97998046875,
+        "upper_ms": 43.2001953125
+      },
+      "first_publication_begin_interval": {
+        "lower_ms": 42.85498046875,
+        "upper_ms": 43.0751953125
+      },
+      "root_prepare_to_first_API_start_interval": {
+        "lower_ms": 13.580078125,
+        "upper_ms": 13.80029296875
+      },
+      "first_infer_wrapper_start_interval": {
+        "lower_ms": 13.570068359375,
+        "upper_ms": 13.790283203125
+      },
+      "first_API_await_ms": 28.594970703125,
+      "adopt_planned_ms": 411.0,
+      "adopt_timer_ms": 410.304931640625,
+      "adopt_stamp_ms": 410.389892578125,
+      "adopt_sequence": 11,
+      "hand_NN": 12,
+      "NN_returns_definitely_before_adopt": 11,
+      "NN_returns_possibly_before_adopt": 11,
+      "old_return_discard": 1,
+      "post_public_new_NN_definite": 0,
+      "self_wait": {
+        "input_available_ms": 1790948481205.4749,
+        "start_ms": 1790948481205.4749,
+        "end_ms": 1790948481205.4749,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790948481205.48
+      },
+      "worker_stop_class": "upper_le_D",
+      "ACK_wall_ms": 412.139892578125,
+      "stop_to_ACK_interval": {
+        "lower_ms": -0.000244140625,
+        "upper_ms": 0.219970703125
+      },
+      "selected_matched_root": false,
+      "dynamic_self_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 107,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "exact_Atomicstore_kernel_CPU_missing": true,
+      "per_wrapper_root_internal_preparation_span_missing": true
+    },
+    {
+      "spec": {
+        "fixture_id": "diverse-prefix-7",
+        "engine": "reference",
+        "phase": "steady",
+        "engine_repetition": 2,
+        "cancel": false
+      },
+      "request_id": "budget126-measure-r1-18",
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "generation": 18,
+      "adopted_stats": {
+        "completed_backup": 8,
+        "rootN": 8,
+        "simulations": 7,
+        "edge_sum": 7,
+        "cp_NN_calls": 8,
+        "adopted_SAB_visits": 7,
+        "sequence": 8,
+        "terminal_noNN_backup": 0,
+        "exact_atomic_store_time_missing": true,
+        "cp_sequence_bound_to_adoption": true
+      },
+      "rootN_origin": "raw cp.root_visits",
+      "first_CP_validation_interval": {
+        "lower_ms": 50.10009765625,
+        "upper_ms": 50.31005859375
+      },
+      "first_publication_begin_interval": {
+        "lower_ms": 49.929931640625,
+        "upper_ms": 50.139892578125
+      },
+      "root_prepare_to_first_API_start_interval": {
+        "lower_ms": 9.864990234375,
+        "upper_ms": 10.074951171875
+      },
+      "first_infer_wrapper_start_interval": {
+        "lower_ms": 9.85009765625,
+        "upper_ms": 10.06005859375
+      },
+      "first_API_await_ms": 39.885009765625,
+      "adopt_planned_ms": 411.0,
+      "adopt_timer_ms": 410.280029296875,
+      "adopt_stamp_ms": 410.364990234375,
+      "adopt_sequence": 8,
+      "hand_NN": 9,
+      "NN_returns_definitely_before_adopt": 8,
+      "NN_returns_possibly_before_adopt": 8,
+      "old_return_discard": 1,
+      "post_public_new_NN_definite": 0,
+      "self_wait": {
+        "input_available_ms": 1790948481618.9,
+        "start_ms": 1790948481618.9,
+        "end_ms": 1790948481618.9,
+        "wait_ms": 0,
+        "ready_t0_ms": 1790948481618.91
+      },
+      "worker_stop_class": "upper_le_D",
+      "ACK_wall_ms": 412.78515625,
+      "stop_to_ACK_interval": {
+        "lower_ms": -0.074951171875,
+        "upper_ms": 0.135009765625
+      },
+      "selected_matched_root": false,
+      "dynamic_self_gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 107,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "exact_Atomicstore_kernel_CPU_missing": true,
+      "per_wrapper_root_internal_preparation_span_missing": true
+    }
+  ],
+  "matched_prefix_root_pairs": [
+    {
+      "fixture_id": "diverse-prefix-1",
+      "features648_exact": true,
+      "NN137_mixed": true,
+      "max_abs": 0,
+      "fixed_reference": false,
+      "engine_prior_gates": [
+        {
+          "features648_exact": true,
+          "NN137_finite_strict": true,
+          "fixed_reference": false,
+          "prior_checked": true,
+          "priors": 124,
+          "engine_specific_order": true,
+          "legal_set_exact": true,
+          "P2canonical": false,
+          "missing_public_cp": false
+        },
+        {
+          "features648_exact": true,
+          "NN137_finite_strict": true,
+          "fixed_reference": false,
+          "prior_checked": true,
+          "priors": 124,
+          "engine_specific_order": true,
+          "legal_set_exact": true,
+          "P2canonical": false,
+          "missing_public_cp": false
+        }
+      ]
+    },
+    {
+      "fixture_id": "diverse-prefix-2",
+      "features648_exact": true,
+      "NN137_mixed": true,
+      "max_abs": 0,
+      "fixed_reference": false,
+      "engine_prior_gates": [
+        {
+          "features648_exact": true,
+          "NN137_finite_strict": true,
+          "fixed_reference": false,
+          "prior_checked": true,
+          "priors": 116,
+          "engine_specific_order": true,
+          "legal_set_exact": true,
+          "P2canonical": true,
+          "missing_public_cp": false
+        },
+        {
+          "features648_exact": true,
+          "NN137_finite_strict": true,
+          "fixed_reference": false,
+          "prior_checked": true,
+          "priors": 116,
+          "engine_specific_order": true,
+          "legal_set_exact": true,
+          "P2canonical": true,
+          "missing_public_cp": false
+        }
+      ]
+    },
+    {
+      "fixture_id": "diverse-prefix-3",
+      "features648_exact": true,
+      "NN137_mixed": true,
+      "max_abs": 0,
+      "fixed_reference": false,
+      "engine_prior_gates": [
+        {
+          "features648_exact": true,
+          "NN137_finite_strict": true,
+          "fixed_reference": false,
+          "prior_checked": true,
+          "priors": 119,
+          "engine_specific_order": true,
+          "legal_set_exact": true,
+          "P2canonical": false,
+          "missing_public_cp": false
+        },
+        {
+          "features648_exact": true,
+          "NN137_finite_strict": true,
+          "fixed_reference": false,
+          "prior_checked": true,
+          "priors": 119,
+          "engine_specific_order": true,
+          "legal_set_exact": true,
+          "P2canonical": false,
+          "missing_public_cp": false
+        }
+      ]
+    },
+    {
+      "fixture_id": "diverse-prefix-7",
+      "features648_exact": true,
+      "NN137_mixed": true,
+      "max_abs": 0,
+      "fixed_reference": false,
+      "engine_prior_gates": [
+        {
+          "features648_exact": true,
+          "NN137_finite_strict": true,
+          "fixed_reference": false,
+          "prior_checked": true,
+          "priors": 107,
+          "engine_specific_order": true,
+          "legal_set_exact": true,
+          "P2canonical": false,
+          "missing_public_cp": false
+        },
+        {
+          "features648_exact": true,
+          "NN137_finite_strict": true,
+          "fixed_reference": false,
+          "prior_checked": true,
+          "priors": 107,
+          "engine_specific_order": true,
+          "legal_set_exact": true,
+          "P2canonical": false,
+          "missing_public_cp": false
+        }
+      ]
+    }
+  ],
+  "selected_matched_roots": 8,
+  "fixed_prefix_NN_reference": false,
+  "golden_startup_references": 6,
+  "APIawait_not_kernel_CPU": true,
+  "start_end_clock_saved": "startup.json and clock-end.json",
+  "intermediate_drift_missing": true,
+  "isolated_all_workers_zero_between_requests": true,
+  "real_game_opponent_t0_policy_unchanged": true,
+  "terminal_noNN_at_adopt_from_backup_minus_cpNN": 0,
+  "candidate_parentQ_missing": true,
+  "resources": {
+    "managed_heavy_seconds": 22.283234,
+    "managed_static_seconds": 0.14456,
+    "currentRSS_peak": 1633054720,
+    "observed_storage_peak": 3792896,
+    "observed_affinity_violations": 0,
+    "currentRSS_not_ru_maxrss": true,
+    "instant_peak_background_CPU_short_metadata_unobserved": true
+  },
+  "conclusion": "Candidate completed quantity is not consistently lower: prefix1 higher, prefix2 lower, prefix3 equal/lower, prefix7 reverses. Keep policy; do not single-out prep/throughput as all-loss cause. Propose smallest tactical/terminal or deep-rule contrast; no automatic C/FPU adjustment.",
+  "new_games": 0,
+  "formalNI_Sigma_actual_go": false,
+  "old_results_integrated": false
+}

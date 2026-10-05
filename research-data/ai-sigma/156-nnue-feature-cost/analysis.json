@@ -1,0 +1,126 @@
+{
+  "issue": "quoridor-4lc.156",
+  "raw_SHA256": "8d14fd681884c88d5259f7dc30311fad0388b990ee92a83fba47cbc403bcfab7",
+  "all_parity": true,
+  "science_rerun": 0,
+  "fixed_actions": 46,
+  "per_variant_repeated_child_count": 2944,
+  "correctness_child_count": 46,
+  "warm_child_count": 46,
+  "timer_erratum": {
+    "field": "components_ms.distance_lookup",
+    "saved": null,
+    "reason": "new timer component used += before zero initialization; internal NaN serializes null",
+    "individual_lookup_elapsed": "missing, not zero; no reconstruction",
+    "total_ms": "outer performance.now finite and unaffected",
+    "no_repeated_scientific_measurement": true
+  },
+  "input_rows": [
+    {
+      "id": "initial-p1",
+      "order": "AB",
+      "actions": 11,
+      "A_ms": 176.90000000596046,
+      "B_ms": 157.40000000596046,
+      "B_over_A": 0.8897682306424931,
+      "B_less_A": true,
+      "A_BFS": 2688,
+      "B_BFS": 1152,
+      "reachability_equal": true,
+      "reachability_calls_per_variant": 24256,
+      "max_delta_entries": 4,
+      "science_B_cache": {
+        "hits": 783,
+        "misses": 9,
+        "evictions": 0,
+        "max_pairs": 9,
+        "current_pairs": 9,
+        "payload_bytes": 5832,
+        "object_overhead_bytes": null
+      },
+      "all_root_child_parity": true
+    },
+    {
+      "id": "asym-hv-p2",
+      "order": "BA",
+      "actions": 11,
+      "A_ms": 133.59999999403954,
+      "B_ms": 181.2000000178814,
+      "B_over_A": 1.356287425344053,
+      "B_less_A": false,
+      "A_BFS": 2944,
+      "B_BFS": 1408,
+      "reachability_equal": true,
+      "reachability_calls_per_variant": 28864,
+      "max_delta_entries": 4,
+      "science_B_cache": {
+        "hits": 783,
+        "misses": 9,
+        "evictions": 0,
+        "max_pairs": 9,
+        "current_pairs": 9,
+        "payload_bytes": 5832,
+        "object_overhead_bytes": null
+      },
+      "all_root_child_parity": true
+    },
+    {
+      "id": "frame10-prefix-13",
+      "order": "AB",
+      "actions": 12,
+      "A_ms": 253.2000000178814,
+      "B_ms": 205.80000001192093,
+      "B_over_A": 0.8127962085204857,
+      "B_less_A": true,
+      "A_BFS": 3200,
+      "B_BFS": 1536,
+      "reachability_equal": true,
+      "reachability_calls_per_variant": 36224,
+      "max_delta_entries": 4,
+      "science_B_cache": {
+        "hits": 849,
+        "misses": 9,
+        "evictions": 0,
+        "max_pairs": 9,
+        "current_pairs": 9,
+        "payload_bytes": 5832,
+        "object_overhead_bytes": null
+      },
+      "all_root_child_parity": true
+    },
+    {
+      "id": "frame10-prefix-14",
+      "order": "BA",
+      "actions": 12,
+      "A_ms": 253.2000000178814,
+      "B_ms": 232.09999999403954,
+      "B_over_A": 0.9166666665783897,
+      "B_less_A": true,
+      "A_BFS": 3456,
+      "B_BFS": 1792,
+      "reachability_equal": true,
+      "reachability_calls_per_variant": 44288,
+      "max_delta_entries": 4,
+      "science_B_cache": {
+        "hits": 849,
+        "misses": 9,
+        "evictions": 0,
+        "max_pairs": 9,
+        "current_pairs": 9,
+        "payload_bytes": 5832,
+        "object_overhead_bytes": null
+      },
+      "all_root_child_parity": true
+    }
+  ],
+  "decision": "mixed: retain correct uncached/small immutable parent maps; stop general cache extension; target measured legal-generation/context replay cost",
+  "future_policy_ordering": {
+    "Git": "0872cbbadc718c1240f81868fcb912d7e1e6e251",
+    "recognized_only": true,
+    "value_only_TT_history_cheap_ordering": "baseline future",
+    "small_policy_head_or_light_scorer": "future comparison of ordering only, no hand exclusion/depth change",
+    "teacher": "saved MCTS root visit distribution, not leaf/rootvalue",
+    "implemented_this_run": false
+  },
+  "NNUE_speed_strength": null
+}

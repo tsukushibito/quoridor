@@ -200,3 +200,12 @@ impl AiSearch {
         serde_json::to_string(&dto).map_err(|_| JsValue::from_str("INTERNAL_SERIALIZATION"))
     }
 }
+
+// Explicit diagnostic artifact only; ordinary rules/AI exports are unchanged.
+#[cfg(feature = "research")]
+pub mod research;
+#[cfg(feature = "research")]
+#[wasm_bindgen]
+pub fn research_parity_json(input: &str) -> Result<String, JsValue> {
+    research::diagnose(input).map_err(|e| JsValue::from_str(&e))
+}

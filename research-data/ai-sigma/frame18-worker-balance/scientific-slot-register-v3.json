@@ -1,0 +1,33 @@
+{
+  "UTC": "2026-10-04T11:00:54.761144+00:00",
+  "model_scientific_slots": [
+    {
+      "slot": 1,
+      "run": "baseline-r2",
+      "status": "CENSORED_GUARD_FALSE_POSITIVE",
+      "NN_observed": null,
+      "NN_upper": 307200
+    },
+    {
+      "slot": 2,
+      "run": "balanced-r3",
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 3,
+      "run": "baseline-r3",
+      "status": "NOT_STARTED"
+    }
+  ],
+  "management_entries": [
+    "baseline-r1 beforeimport cap assertion4.494708s/NN0proof/originalnull",
+    "balanced-r1 quiet prechild NN0/unknownwall conservative5s",
+    "balanced-r2 quiet prechild NN0/unknownwall conservative5s"
+  ],
+  "fixed_planned_games_per_slot": 96,
+  "original_stage_records_preserved": true,
+  "NN_upper_all3": 921600,
+  "NN_task_cap": 1050000,
+  "science_slot_count": 3,
+  "samecondition_success_replacement": false
+}

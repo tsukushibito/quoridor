@@ -1,0 +1,619 @@
+{
+  "issue": "quoridor-4lc.31",
+  "trial": 1,
+  "contract": 1,
+  "goal_version": 2,
+  "global_stop": "2026-10-01T04:00:00Z",
+  "conservative_start": "2026-10-01T02:34:03Z",
+  "first_observed_start": "2026-10-01T02:37:55Z",
+  "stop": {
+    "UTC": "2026-10-01T02:59:19.397337+00:00",
+    "all_tracked_PID0": true,
+    "tracked_identities": 81,
+    "remaining": [],
+    "remaining_count": 0,
+    "last_NN_runtime_end": "2026-10-01T02:53:44.132358+00:00",
+    "stop_reason": "fixed30/32 independent diagnostics complete; fixed33 entry gates unexecuted, no separate runtime steer, no-go",
+    "processing_deadline": "03:05Z",
+    "new_runtime_cutoff": "03:00Z",
+    "submission_stop": "03:10Z",
+    "other_kills": 0,
+    "new_games_holdout_build_download_GPU": 0,
+    "instantaneous_short_peak_limit": true
+  },
+  "fixed30_manifest_sha256": "ce86f1232d7a2299c88918453538296d1dd48466e824ed46afe21e6bf8650089",
+  "fixed_original_inputs": 181,
+  "writer_PIDstartticks_absent": 116,
+  "numeric": {
+    "classification": {
+      "legal-replay": 20,
+      "synthetic-history-context": 3,
+      "synthetic-total-ply-context": 5
+    },
+    "cases": 28,
+    "feature_bits_exact": 18144,
+    "NN_elements": 3836,
+    "prior_elements": 3187,
+    "maxNN": 5.4836273193359375e-06,
+    "maxPrior": 6.020069122314453e-06,
+    "gate": "abs <= 1e-4+1e-4abs(ref)",
+    "shape_ID_finite_strict_value_first": true,
+    "not_general_Rust_parity_completion": true
+  },
+  "checkpoint": {
+    "rows": [
+      {
+        "id": "initial-p1",
+        "full_tree_history_visits_stats_values_exact": true,
+        "calls": 3,
+        "completed": 3,
+        "pending_begin_cancelled_no_next_NN": true,
+        "elapsed": 411.099853515625
+      },
+      {
+        "id": "asym-hv-p2",
+        "full_tree_history_visits_stats_values_exact": true,
+        "calls": 3,
+        "completed": 3,
+        "pending_begin_cancelled_no_next_NN": true,
+        "elapsed": 412.699951171875
+      },
+      {
+        "id": "straight-jump-p2",
+        "full_tree_history_visits_stats_values_exact": true,
+        "calls": 3,
+        "completed": 3,
+        "pending_begin_cancelled_no_next_NN": true,
+        "elapsed": 410.800048828125
+      },
+      {
+        "id": "no-checkpoint",
+        "error": "NO_CHECKPOINT",
+        "completed_NN": 0,
+        "cp": null
+      },
+      {
+        "id": "deadline-before_resume",
+        "error": "DEADLINE",
+        "completed_NN": 1,
+        "cp": null
+      },
+      {
+        "id": "deadline-before_checkpoint",
+        "error": "DEADLINE",
+        "completed_NN": 2,
+        "cp": null
+      },
+      {
+        "id": "deadline-before_return",
+        "error": "DEADLINE",
+        "completed_NN": 1,
+        "cp": null
+      },
+      {
+        "id": "goal-win-legal-replay",
+        "terminal": -1,
+        "NN": 0
+      },
+      {
+        "id": "synthetic-total-ply-200",
+        "terminal": 0,
+        "NN": 0
+      },
+      {
+        "id": "synthetic-no-legal-move-draw",
+        "terminal": 0,
+        "NN": 0
+      },
+      {
+        "id": "synthetic-goal-at200",
+        "terminal": -1,
+        "NN": 0
+      },
+      {
+        "id": "hardfault-after-cp",
+        "error": "INJECTED_HARDFAULT",
+        "completed_NN": 1,
+        "cp": null
+      },
+      {
+        "id": "serialization-late",
+        "error": "DEADLINE_SERIALIZATION",
+        "completed_NN": 1,
+        "cp": null
+      }
+    ],
+    "numeric_object_equality_includes_saved_f32_bits": true,
+    "general_signed_zero_JSON_identity_not_claimed": true
+  },
+  "tree_boundary": {
+    "nodes": 9,
+    "edges": 6,
+    "records": [
+      {
+        "id": "initial-p1",
+        "nodes": 3,
+        "rootvisits": 3,
+        "fixed_JS_all_observed_masks_history_P2_transitions": true
+      },
+      {
+        "id": "asym-hv-p2",
+        "nodes": 3,
+        "rootvisits": 3,
+        "fixed_JS_all_observed_masks_history_P2_transitions": true
+      },
+      {
+        "id": "straight-jump-p2",
+        "nodes": 3,
+        "rootvisits": 3,
+        "fixed_JS_all_observed_masks_history_P2_transitions": true
+      }
+    ],
+    "error_late_oldgeneration_discard": true,
+    "fresh8fallback0": true,
+    "modelhashlength_reject": true,
+    "drop": true,
+    "full_deep_NN_history_or_genuine200_not_claimed": true
+  },
+  "fixed31_claim_supported": [
+    "3golden completed3-simulation owned cp exact direct-control tree/stats/value/history",
+    "normal before/at/after guard stop; pending cancel no extra NN; no-cp rejects",
+    "hardfault error/NaN/range/token/stale/cancel/deadline/serialization discards complete oldcp",
+    "4terminal noNN actionnull; goal-at200 wins notdraw",
+    "final validation/formatting-end stamp; 510ms validation late rejects",
+    "6 normal sharedArena golden + 4 fresh requests; noresponse T10 twice actionnull; reuse rejects",
+    "separate browser-close awaited then own descendant scan PID0, freshload/warm/reclock; sessionpaths unique",
+    "28 strict shape/ID/finite/value[-1,1] numerical gate",
+    "64pool legal prefixes replayed/hash/unique/golden exclusion; new10 selected andordered independently",
+    "39 original latency rows independent arithmetic only; wholeclock limit persists"
+  ],
+  "fixed31_not_supported": [
+    ".30 reference identity prefix/engine/seed not checked; independent mock reproduces acceptance of foreign references",
+    "all timing safety or tail, formal speed2.2x, adoption/strength/full goal success",
+    "g91 safety despite oldAmaxNN102.9; originalGUARD4 remains rejected",
+    "ordinary constructor runtime retest (only prior hash/savedB0 evidence inherited)"
+  ],
+  "entry32": {
+    "UTC": "2026-10-01T02:48:39.861315+00:00",
+    "manifest_sha256": "f29ee9572981f63fd4ea7909c8a100a8f5c77930b77fac71bef22b5e17da0f09",
+    "writer_stop_sha256": "a17383dce133493726c94bce695904bb372226f29537c1125967033371e7ea6f",
+    "checks": [
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-ort-rematches/game.js",
+        "sha256": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-ort-rematches/candidate-worker.js",
+        "sha256": "24242d3fb424d084e703ff625408f5e6b187bb2b21bcc022e87218bb46da8dc5"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-ort-rematches/reference-worker.js",
+        "sha256": "060ad68a6c97ebdef2575c88eb9f79a30b1099fb58a00f8921ddd5ef55beae31"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-ort-rematches/checkpoint.js",
+        "sha256": "50d29bb855da3846953125b37dcc895f8e47ced80686cb34e4c515bdcba05e20"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-ort-rematches/arena.cjs",
+        "sha256": "f810f328cc6ef714355c9ed81c7315f9ccfe007da9ae72fb688cbe93cc831867"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-ort-rematches/arena-integration.cjs",
+        "sha256": "54de62f22e7f6faf92467166718f114db9b13561da22f748b8c630747f50d1a8"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-ort-rematches/match-entry.cjs",
+        "sha256": "437c3de978ba54c8dde43b9935ba5ac1c7121c6906e5824cc95e7da0ed050bf9"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-ort-rematches/game-loop.cjs",
+        "sha256": "342a4e8d0d74e46bb6d0939e9bc6cb7a502f8c5958f79c54a9789515989816c2"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-ort-rematches/arena-mock.cjs",
+        "sha256": "73ab04ab6b51e89839460ea23cb03cb92f76b0a105bed6bd04514b173a1a821a"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-ort-rematches/runner.py",
+        "sha256": "68a6423604d6ccf52c47fb836bac227af5318ca5e5822a017e762fa0118328ee"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-ort-rematches/transaction.cjs",
+        "sha256": "cf1087b63c5073b06e0594aa3fcf4aaf33f89eb54af19f2a362390011c3959b3"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-ort-rematches/preregister.cjs",
+        "sha256": "ec2084b32ee0087d09e0c091485bca379f8da1df15598791a5d5616a2528c398"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-ort-rematches/mock.cjs",
+        "sha256": "5edc9d72c3417acad7baf616cd2ec911e17a06df95a480d34405c4e62e66d0df"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-ort-rematches/arena-delivery.cjs",
+        "sha256": "ec6f1e0656cb340ed50879fbd58553a245899a58b12a9437bffbdd7ae90bc355"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-ort-rematches/arena-page.js",
+        "sha256": "9f3ae3497523c5802c44e1802801878ef02e8a0c4d6776ae69fff77ca74452cd"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-ort-rematches/verify.py",
+        "sha256": "052fdcf65312f7a69c4c4d1a6ae96426dba317a31614d2ded485053b878000b5"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-ort-rematches/judge.cjs",
+        "sha256": "a43bed42482ae21a3620449df37b08596bc9fabef31936b27d6c95254fdc7577"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-ort-rematches/context.js",
+        "sha256": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-ort-rematches/browser.cjs",
+        "sha256": "cbbaf766b1c64c2c609e079c92000589e6750946ee96e627b9217d21cd976070"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-ort-rematches/worker.js",
+        "sha256": "c245c9c0aaaea06e1b595fa0e670ef81e6f34a7e873106a3982ae8aba1e719c8"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-ort-rematches/README.md",
+        "sha256": "b97fb4b7ecbee23cfc779c379dfb5ed0487cc2e92c8b83cc5d15ec2bf4a45b33"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-ort-rematches/host.js",
+        "sha256": "6272fd4ed64faea8d7b4b671ac3d9d01703b7676ecb7b3c5a45d3100addb098c"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ORT-CHECKPOINT/manifest-final.json",
+        "sha256": "ce86f1232d7a2299c88918453538296d1dd48466e824ed46afe21e6bf8650089"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ORT-SEARCH/final.wasm",
+        "sha256": "1f54d0b8f0c6d3d7d51935886ed506e44376a2052506be62ca7a726c85a78a01"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/ai-sigma/reference/sigma-pcr250/best.onnx",
+        "sha256": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/reference-fixtures/SIGMA-PARITY-PLAN/fixtures.json",
+        "sha256": "206f46e0763177f138317ba49dc82875fd49a4d2c4ac2844d7fc06911e30bffb"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/plans/SIGMA-ORT-REMATCH/preregister.json",
+        "sha256": "0af43c1843caee994648ecfa62caeb65182bae3927f5bc66d7267db0caf87bad"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ARENA-PREFLIGHT/holdout-proposal.json",
+        "sha256": "ac11691ffa521a86ffce2cff40dfdbebee5d283a83f70abfe36f43028b72ad9d"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/ort-wasm-simd-threaded.jsep.mjs",
+        "sha256": "b69c8812bf2d8356dd248fef0abb35e22d1f05f9c593ca34d4b942f35ea93592"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/ort-wasm-simd-threaded.jsep.wasm",
+        "sha256": "0663b902fb3937883a34375926bdfe3e1c86cd4c99cbc04c06a7cdf46c78bdde"
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/ort.min.js",
+        "sha256": "95c6f6611837cb50449cb6a0c092145bf493ac64cd0d004033cefc977366e7cb"
+      }
+    ],
+    "PID_identities": 3,
+    "remaining": [],
+    "entry_mock_complete": false,
+    "NNruntime_authorized": false,
+    "phase": "read-only final/static; await separate coordinator steer"
+  },
+  "entry32_gate": "golden/identity/fresh only supported; positive token/main, cleanup hang/livepause/signal not complete",
+  "unverified": [
+    "genuine legal200/no-legal reachability",
+    "deep realNN history repeats/arena actualOOM/ORTheap excludedaccounting",
+    "general rawview lifetime/entropy/fullprovenance/license distribution/training overlap",
+    "sync interruption/tail/backgroundSMT/delivery drift allrun safety",
+    "native newfinal ordinaryWasm runtime"
+  ],
+  "resources": {
+    "CPU_static": [
+      0
+    ],
+    "CPU_runtime": [
+      2
+    ],
+    "all_observed_TID_affinities_match": true,
+    "RAM_peak_conservative_bytes": 2148990976,
+    "RAM_guard": 2684354560,
+    "new_saved_storage_bytes": 2701196,
+    "storage_guard": 117440512,
+    "tracked_CPU_seconds_lowerbound": 37.13,
+    "guard_stops": [],
+    "jobs": [
+      {
+        "name": "tree-boundary-check",
+        "start": "2026-10-01T02:47:16.999804+00:00",
+        "end": "2026-10-01T02:47:17.056950+00:00",
+        "exit": 0,
+        "stop_reason": null,
+        "affinity": [
+          0
+        ],
+        "peak_group_plus_runner_rss_bytes": 584654848,
+        "remaining_pids": [],
+        "cmd": [
+          "node",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-ORT-CHECKPOINT/stage/independent-tree.cjs"
+        ]
+      },
+      {
+        "name": "checkpoint-runtime",
+        "start": "2026-10-01T02:41:08.607765+00:00",
+        "end": "2026-10-01T02:41:17.029108+00:00",
+        "exit": 0,
+        "stop_reason": null,
+        "affinity": [
+          2
+        ],
+        "peak_group_plus_runner_rss_bytes": 2080481280,
+        "remaining_pids": [],
+        "cmd": [
+          "node",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-ORT-CHECKPOINT/stage/browser.cjs",
+          "checkpoint-gate",
+          "critic"
+        ]
+      },
+      {
+        "name": "entry32-static",
+        "start": "2026-10-01T02:54:35.886210+00:00",
+        "end": "2026-10-01T02:54:35.944418+00:00",
+        "exit": 0,
+        "stop_reason": null,
+        "affinity": [
+          0
+        ],
+        "peak_group_plus_runner_rss_bytes": 584609792,
+        "remaining_pids": [],
+        "cmd": [
+          "node",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-ORT-CHECKPOINT/entry32/critic-static.cjs"
+        ]
+      },
+      {
+        "name": "numeric-runtime",
+        "start": "2026-10-01T02:44:42.237285+00:00",
+        "end": "2026-10-01T02:44:47.796342+00:00",
+        "exit": 0,
+        "stop_reason": null,
+        "affinity": [
+          2
+        ],
+        "peak_group_plus_runner_rss_bytes": 2086985728,
+        "remaining_pids": [],
+        "cmd": [
+          "node",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-ORT-CHECKPOINT/stage/browser.cjs",
+          "numeric",
+          "critic"
+        ]
+      },
+      {
+        "name": "independent-mock-retry",
+        "start": "2026-10-01T02:44:19.455873+00:00",
+        "end": "2026-10-01T02:44:19.619909+00:00",
+        "exit": 0,
+        "stop_reason": null,
+        "affinity": [
+          0
+        ],
+        "peak_group_plus_runner_rss_bytes": 612278272,
+        "remaining_pids": [],
+        "cmd": [
+          "node",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-ORT-CHECKPOINT/stage/independent-mock.cjs"
+        ]
+      },
+      {
+        "name": "pool-clock-check",
+        "start": "2026-10-01T02:49:32.452328+00:00",
+        "end": "2026-10-01T02:49:32.564458+00:00",
+        "exit": 1,
+        "stop_reason": null,
+        "affinity": [
+          0
+        ],
+        "peak_group_plus_runner_rss_bytes": 631402496,
+        "remaining_pids": [],
+        "cmd": [
+          "node",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-ORT-CHECKPOINT/stage/pool-clock-check.cjs"
+        ]
+      },
+      {
+        "name": "mock",
+        "start": "2026-10-01T02:40:59.840642+00:00",
+        "end": "2026-10-01T02:40:59.896643+00:00",
+        "exit": 0,
+        "stop_reason": null,
+        "affinity": [
+          0
+        ],
+        "peak_group_plus_runner_rss_bytes": 583094272,
+        "remaining_pids": [],
+        "cmd": [
+          "node",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-ORT-CHECKPOINT/stage/mock.cjs"
+        ]
+      },
+      {
+        "name": "independent-mock",
+        "start": "2026-10-01T02:43:07.664582+00:00",
+        "end": "2026-10-01T02:43:07.828273+00:00",
+        "exit": 1,
+        "stop_reason": null,
+        "affinity": [
+          0
+        ],
+        "peak_group_plus_runner_rss_bytes": 612245504,
+        "remaining_pids": [],
+        "cmd": [
+          "node",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-ORT-CHECKPOINT/stage/independent-mock.cjs"
+        ]
+      },
+      {
+        "name": "independent-check",
+        "start": "2026-10-01T02:46:21.801641+00:00",
+        "end": "2026-10-01T02:46:21.921848+00:00",
+        "exit": 0,
+        "stop_reason": null,
+        "affinity": [
+          0
+        ],
+        "peak_group_plus_runner_rss_bytes": 592662528,
+        "remaining_pids": [],
+        "cmd": [
+          "python3",
+          "-B",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-ORT-CHECKPOINT/stage/independent-check.py"
+        ]
+      },
+      {
+        "name": "arena-runtime",
+        "start": "2026-10-01T02:42:05.215208+00:00",
+        "end": "2026-10-01T02:42:13.691975+00:00",
+        "exit": 1,
+        "stop_reason": null,
+        "affinity": [
+          2
+        ],
+        "peak_group_plus_runner_rss_bytes": 2052300800,
+        "remaining_pids": [],
+        "cmd": [
+          "node",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-ORT-CHECKPOINT/stage/independent-arena.cjs"
+        ]
+      },
+      {
+        "name": "entry32-golden-runtime",
+        "start": "2026-10-01T02:53:32.156232+00:00",
+        "end": "2026-10-01T02:53:44.132358+00:00",
+        "exit": 0,
+        "stop_reason": null,
+        "affinity": [
+          2
+        ],
+        "peak_group_plus_runner_rss_bytes": 2103762944,
+        "remaining_pids": [],
+        "cmd": [
+          "node",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-ORT-CHECKPOINT/entry32/critic-golden.cjs"
+        ]
+      },
+      {
+        "name": "pool-clock-check-retry",
+        "start": "2026-10-01T02:49:54.124408+00:00",
+        "end": "2026-10-01T02:49:54.343699+00:00",
+        "exit": 0,
+        "stop_reason": null,
+        "affinity": [
+          0
+        ],
+        "peak_group_plus_runner_rss_bytes": 638021632,
+        "remaining_pids": [],
+        "cmd": [
+          "node",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-ORT-CHECKPOINT/stage/pool-clock-check.cjs"
+        ]
+      },
+      {
+        "name": "fresh-recovery-runtime",
+        "start": "2026-10-01T02:44:18.292571+00:00",
+        "end": "2026-10-01T02:44:30.382991+00:00",
+        "exit": 0,
+        "stop_reason": null,
+        "affinity": [
+          2
+        ],
+        "peak_group_plus_runner_rss_bytes": 2059698176,
+        "remaining_pids": [],
+        "cmd": [
+          "node",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-ORT-CHECKPOINT/stage/fresh-recovery.cjs"
+        ]
+      },
+      {
+        "name": "boundary-runtime",
+        "start": "2026-10-01T02:45:06.791689+00:00",
+        "end": "2026-10-01T02:45:11.768870+00:00",
+        "exit": 0,
+        "stop_reason": null,
+        "affinity": [
+          2
+        ],
+        "peak_group_plus_runner_rss_bytes": 2148990976,
+        "remaining_pids": [],
+        "cmd": [
+          "node",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-ORT-CHECKPOINT/stage/browser.cjs",
+          "boundary",
+          "critic"
+        ]
+      }
+    ],
+    "tracked_identities": 81
+  },
+  "self_failures_preserved": [
+    "dispatch count/list TypeError; one preparation retry",
+    "require ESM .js global export assumption; one mock retry",
+    "strict timeout accepted=false assumption; actualundefined noaction refused; oldraw retained, separate fresh diagnosis",
+    "crossVM prototype deepStrictEqual; one JSONschema normalization retry",
+    "ad-hoc summary KeyError(engine missing on reuse) no mutation"
+  ],
+  "next": "newentry full independent positive main/token, existingrun, live pause/signal, bounded cleanup gates remain before coordinator can authorize game; reserve2760s+1.5s before03:55 unchanged; latest conservative start03:08:58.5Z",
+  "entry32_runtime": {
+    "coordinator_runtime_steer_received": true,
+    "sessions": 2,
+    "requests": 4,
+    "all_accepted_legal_fallback0": true,
+    "producer_binding_keys": [
+      "request_id",
+      "generation",
+      "engine",
+      "prefix",
+      "legal_prefix",
+      "seed",
+      "simulations",
+      "max_nodes",
+      "max_depth",
+      "T_ms",
+      "g_ms"
+    ],
+    "PID0_between_sessions": true,
+    "T10_watchdog_newentry_not_authorized_by_diagnostic_export": true,
+    "raw": "entry32-runtime.json",
+    "static": "entry32-static-independent.json",
+    "entry_mock_complete": false
+  },
+  "entry33": {
+    "manifest_sha256": "8518971d8418893033c77574ea902972eefce890266399a9088ec1da34703f79",
+    "checks": 26,
+    "entry_mock_complete": false,
+    "producer_jobs": 0,
+    "two_cutoff_refusals": true,
+    "uncompleted": [
+      "positive main mock token and existing-run runtime",
+      "bounded own dummy cleanup/stop/pause/fresh runtime",
+      "inherited20game and foreign transaction rerun"
+    ],
+    "runtime_steer": false,
+    "critic_runtime": false,
+    "actual_go": false
+  },
+  "final_conclusion": "limited checkpoint and few fixed .32 golden runtime support; new entry/no matches no-go",
+  "write_stop_sequence": "stopJSON before final report; then own notes/pause read/backup/report",
+  "input_after_immutable": true
+}

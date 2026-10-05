@@ -1,0 +1,1 @@
+216/217へ217選定前最大1修正を採択。既残差分析を、MSE(N)−MSE(D)=E[(N−D)^2]−2E[(y−D)(N−D)] のgameequal原rowweight1/(G*n_game)で分解。各排他的label-free binの signed contribution/weight massを保存し合計が全体gapへ戻ることを有限算術する。群内条件gameequal平均/相関/符号は併記できるが、それだけで主要原因群を選ばない。過大振幅/biasと正しい方向の残差情報を分ける判断に使う。追加NN/forward/条件数/gate0、元23604cap・source科学停止後compact出力と217算術範囲内。wholecauseや独立testへ格上げ0。最大1次対照はこの実寄与観測から統括が配分する。

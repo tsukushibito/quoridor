@@ -1,0 +1,11 @@
+# 継続入口 .49 のno-goと次の切り分け
+
+2026-10-01T12:30:11Z統括確認。entry-manifest ce728c763071451ef0c2d54238dce854cc239bd1ae9f5d7277e5c00329738216、manifest-final c42ccd811123e1c27d8b3434b5622bfb16c68b76124c51bfeff1e980f54631a8、report1aac4d96cd261c2c8502797e432df40788797c492aca7a575e75f4d76daef336。原425実hash・最終89checks一致を統括確認。
+
+.49/.48の比較はno-go。固定式はceil(223.199951171875+57.349750846624374+0.898095703125+5)=287ms>g91で不適格。最大NNはstartup_warmであり、校正各caseのwarmupとは区別するが、旧契約の全warmを含む固定分母から除いて救済しない。初回62＋修正後82は保存144件であって同一最終sourceの均一gateではない。pilot36応答の有限成功をこれらの不足へ置換しない。
+
+seal5は初回PID0→fresh両応答まで進んでも最後OWN_CLEANUP_FAILED。Node所有既知のdetached crashpad1158490/start10958079がZになりPython監視集合から漏れた。統括はこのknown identityの現在不在を確認したが、失敗時のcontrolled cleanup成功・全866identityの独立再確認とはしない。旧.43原因未確定も保持。entry_ready/clock_gate/actual_go=false、旧preregisterと旧成績は不変。
+
+新別契約 .50 critic が時計/版/数値/所有trace/停止証拠をread-onlyで監査、NN追加0。.51 experimentが別copyにowned登録/自己adoption待機の最小修正、dummyと固定initial5だけを検証。原NNkernel/model/RuleA/PUCT/Tgは不変。時計qualification・新preregisterはこの切り分け後の別契約で結果前固定する。48pair/96局・T500g91を後付け変更しない。目標Sigma同等未立証、正式NI・採用0、継続17:00を維持。
+
+証拠 .artifacts/ai-sigma/continuation-20261001/CONTINUATION-ENTRY-COORD-NOGO/initial-check.json。担当.49は独立証拠受入れ待ち、本人closeは.50後。目標/他者close0。

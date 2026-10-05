@@ -1,0 +1,459 @@
+{
+  "issue": "quoridor-4lc.217",
+  "phase2_PASS": true,
+  "arrays": "NPZ/NPY scalar f32 independent; no numpy/torch/model import",
+  "lambda": 0.01,
+  "train_only": true,
+  "counts": {
+    "train": 4653,
+    "validation": 1248
+  },
+  "normal_residual": 1.1102230246251565e-16,
+  "normal_coeff_maxdiff": 5.717648576819556e-14,
+  "zero_columns": [
+    3
+  ],
+  "scalar_normal_residual": 0.0,
+  "prediction_maxabs_hidden": 2.384185791015625e-07,
+  "prediction_maxabs_distance": 0,
+  "splits": {
+    "train": {
+      "distance": {
+        "rootmean_gameMSE": 0.40594373734309414,
+        "rootmean_rowMSE": 0.41391012236849245,
+        "z_gameMSE": 0.6839172559487005,
+        "z_rowMSE": 0.7204985326926413,
+        "sign_game": 0.7535219661766693,
+        "sign_row": 0.7393079733505266,
+        "saturation_game": 0.06987291341928441,
+        "saturation_row": 0.05867182462927144
+      },
+      "standard400": {
+        "rootmean_gameMSE": 0.2572832049696326,
+        "rootmean_rowMSE": 0.2684784042853156,
+        "z_gameMSE": 0.509677222114997,
+        "z_rowMSE": 0.535611966904721,
+        "sign_game": 0.8464198395537065,
+        "sign_row": 0.8373092628411777,
+        "saturation_game": 0.0,
+        "saturation_row": 0.0,
+        "gap_to_D": -0.14866053237346155,
+        "displacement": 0.12659776333972367,
+        "cross": 0.13762914785659264,
+        "gain_games": 69
+      },
+      "ridge": {
+        "rootmean_gameMSE": 0.20859366150966366,
+        "rootmean_rowMSE": 0.22129626824997756,
+        "z_gameMSE": 0.4616905237492611,
+        "z_rowMSE": 0.4973657266780097,
+        "sign_game": 0.8355784413438802,
+        "sign_row": 0.8209757145927359,
+        "saturation_game": 0.21238159448999583,
+        "saturation_row": 0.18869546529120998,
+        "gap_to_D": -0.19735007583343048,
+        "displacement": 0.13313286418752665,
+        "cross": 0.1652414700104786,
+        "gain_games": 84,
+        "unclipped_gameMSE": 0.2308200119673311
+      },
+      "distance_recalibration": {
+        "rootmean_gameMSE": 0.39629507875427167,
+        "rootmean_rowMSE": 0.40567981508136736,
+        "z_gameMSE": 0.6748036936228584,
+        "z_rowMSE": 0.713784544869629,
+        "sign_game": 0.7535219661766693,
+        "sign_row": 0.7393079733505266,
+        "saturation_game": 0.10115142350311819,
+        "saturation_row": 0.08811519449817322,
+        "gap_to_D": -0.009648658588822467,
+        "displacement": 0.0024846151757466845,
+        "cross": 0.0060666368822846,
+        "gain_games": 71,
+        "unclipped_gameMSE": 0.4008076952413767
+      }
+    },
+    "validation": {
+      "distance": {
+        "rootmean_gameMSE": 0.48514681311997876,
+        "rootmean_rowMSE": 0.4893138665385533,
+        "z_gameMSE": 0.8225350323496646,
+        "z_rowMSE": 0.8436015122109984,
+        "sign_game": 0.7203262314712727,
+        "sign_row": 0.7107371794871795,
+        "saturation_game": 0.00355489417989418,
+        "saturation_row": 0.004807692307692308
+      },
+      "standard400": {
+        "rootmean_gameMSE": 0.6487715052886825,
+        "rootmean_rowMSE": 0.6412566981854548,
+        "z_gameMSE": 1.0032958246603472,
+        "z_rowMSE": 1.0090316001314592,
+        "sign_game": 0.557119316878839,
+        "sign_row": 0.5488782051282052,
+        "saturation_game": 0.0,
+        "saturation_row": 0.0,
+        "gap_to_D": 0.1636246921687038,
+        "displacement": 0.19293429196889333,
+        "cross": 0.01465479990009475,
+        "gain_games": 9
+      },
+      "ridge": {
+        "rootmean_gameMSE": 0.6127986849565168,
+        "rootmean_rowMSE": 0.6101873693171016,
+        "z_gameMSE": 0.9783400131586485,
+        "z_rowMSE": 0.9895814327719433,
+        "sign_game": 0.62381905505575,
+        "sign_row": 0.625,
+        "saturation_game": 0.10150340167918263,
+        "saturation_row": 0.10416666666666667,
+        "gap_to_D": 0.12765187183653803,
+        "displacement": 0.1483835006212676,
+        "cross": 0.010365814392364805,
+        "gain_games": 11,
+        "unclipped_gameMSE": 0.6306019482540337
+      },
+      "distance_recalibration": {
+        "rootmean_gameMSE": 0.48453975797985477,
+        "rootmean_rowMSE": 0.4903769618192162,
+        "z_gameMSE": 0.8247985385784489,
+        "z_rowMSE": 0.8482416785516677,
+        "sign_game": 0.7203262314712727,
+        "sign_row": 0.7107371794871795,
+        "saturation_game": 0.03158752548907867,
+        "saturation_row": 0.03445512820512821,
+        "gap_to_D": -0.000607055140123991,
+        "displacement": 0.0026503448097642294,
+        "cross": 0.0016286999749441174,
+        "gain_games": 15,
+        "unclipped_gameMSE": 0.48558323954883587
+      }
+    }
+  },
+  "bins": {
+    "train": {
+      "phase": {
+        "early": {
+          "rows": 2112,
+          "games": 96,
+          "mass": 0.4707593395199144,
+          "signed_gap": {
+            "standard400": -0.08260738090604894,
+            "ridge": -0.09091639200564067,
+            "distance_recalibration": 0.00022904528839040705
+          }
+        },
+        "middle": {
+          "rows": 2538,
+          "games": 96,
+          "mass": 0.5288641544559892,
+          "signed_gap": {
+            "standard400": -0.06614151978519206,
+            "ridge": -0.10655739103165462,
+            "distance_recalibration": -0.009872520464232681
+          }
+        },
+        "late": {
+          "rows": 3,
+          "games": 1,
+          "mass": 0.0003765060240963855,
+          "signed_gap": {
+            "standard400": 8.836831777941326e-05,
+            "ridge": 0.00012370720386478847,
+            "distance_recalibration": -5.183412980240179e-06
+          }
+        }
+      },
+      "cohort": {
+        "opening-8": {
+          "rows": 918,
+          "games": 16,
+          "mass": 0.16666666666666666,
+          "signed_gap": {
+            "standard400": -0.029045777046892075,
+            "ridge": -0.03646381605347097,
+            "distance_recalibration": -0.0017968284601126566
+          }
+        },
+        "opening-12": {
+          "rows": 848,
+          "games": 16,
+          "mass": 0.16666666666666666,
+          "signed_gap": {
+            "standard400": -0.012030739273354183,
+            "ridge": -0.022249886180019416,
+            "distance_recalibration": -0.0013756395816591892
+          }
+        },
+        "opening-16": {
+          "rows": 806,
+          "games": 16,
+          "mass": 0.16666666666666666,
+          "signed_gap": {
+            "standard400": -0.008087771317505503,
+            "ridge": -0.01934498695187848,
+            "distance_recalibration": -0.0017732319373106405
+          }
+        },
+        "opening-20": {
+          "rows": 832,
+          "games": 16,
+          "mass": 0.16666666666666666,
+          "signed_gap": {
+            "standard400": -0.03383369114686291,
+            "ridge": -0.03803600874083853,
+            "distance_recalibration": -0.0001157607994124259
+          }
+        },
+        "opening-24": {
+          "rows": 638,
+          "games": 16,
+          "mass": 0.16666666666666666,
+          "signed_gap": {
+            "standard400": -0.0341300557394388,
+            "ridge": -0.04337883305963513,
+            "distance_recalibration": -0.002830645137523611
+          }
+        },
+        "opening-28": {
+          "rows": 611,
+          "games": 16,
+          "mass": 0.16666666666666666,
+          "signed_gap": {
+            "standard400": -0.03153249784940811,
+            "ridge": -0.03787654484758798,
+            "distance_recalibration": -0.0017565526728039918
+          }
+        }
+      },
+      "difference_bin": {
+        "0": {
+          "rows": 896,
+          "games": 86,
+          "mass": 0.19730880185062663,
+          "signed_gap": {
+            "standard400": -0.005675473615084568,
+            "ridge": -0.021144967718759206,
+            "distance_recalibration": -0.0022857922687159206
+          }
+        },
+        "1": {
+          "rows": 711,
+          "games": 90,
+          "mass": 0.14864015706191055,
+          "signed_gap": {
+            "standard400": -0.030726054874339305,
+            "ridge": -0.03798964286039856,
+            "distance_recalibration": -0.001900359261645154
+          }
+        },
+        "2": {
+          "rows": 1181,
+          "games": 91,
+          "mass": 0.25088725628966657,
+          "signed_gap": {
+            "standard400": -0.06583339986669436,
+            "ridge": -0.06633606589217841,
+            "distance_recalibration": -0.0006814508674454685
+          }
+        },
+        "3": {
+          "rows": 833,
+          "games": 91,
+          "mass": 0.1765649765547136,
+          "signed_gap": {
+            "standard400": -0.03973474437839689,
+            "ridge": -0.04516251964849107,
+            "distance_recalibration": -0.0022185150235058525
+          }
+        },
+        "4": {
+          "rows": 1032,
+          "games": 89,
+          "mass": 0.22659880824308262,
+          "signed_gap": {
+            "standard400": -0.006690859638946468,
+            "ridge": -0.026716879713603262,
+            "distance_recalibration": -0.0025625411675101193
+          }
+        }
+      }
+    },
+    "validation": {
+      "phase": {
+        "early": {
+          "rows": 528,
+          "games": 24,
+          "mass": 0.44100735116298617,
+          "signed_gap": {
+            "standard400": 0.09406265133487135,
+            "ridge": 0.09144363514249929,
+            "distance_recalibration": 0.0026504922200170167
+          }
+        },
+        "middle": {
+          "rows": 720,
+          "games": 24,
+          "mass": 0.5589926488370138,
+          "signed_gap": {
+            "standard400": 0.06956204083383247,
+            "ridge": 0.036208236694038706,
+            "distance_recalibration": -0.0032575473601410224
+          }
+        },
+        "late": {
+          "rows": 0,
+          "games": 0,
+          "mass": 0.0,
+          "signed_gap": {
+            "standard400": 0.0,
+            "ridge": 0.0,
+            "distance_recalibration": 0.0
+          }
+        }
+      },
+      "cohort": {
+        "opening-8": {
+          "rows": 252,
+          "games": 4,
+          "mass": 0.16666666666666666,
+          "signed_gap": {
+            "standard400": 0.04141051094018214,
+            "ridge": 0.033800185476268986,
+            "distance_recalibration": 0.0010430587114589537
+          }
+        },
+        "opening-12": {
+          "rows": 230,
+          "games": 4,
+          "mass": 0.16666666666666669,
+          "signed_gap": {
+            "standard400": 0.043714143209380364,
+            "ridge": 0.047650420613891194,
+            "distance_recalibration": -0.00034712672638553626
+          }
+        },
+        "opening-16": {
+          "rows": 201,
+          "games": 4,
+          "mass": 0.16666666666666666,
+          "signed_gap": {
+            "standard400": 0.0032753712961003426,
+            "ridge": 0.01325032256698818,
+            "distance_recalibration": 0.0022449792054438597
+          }
+        },
+        "opening-20": {
+          "rows": 202,
+          "games": 4,
+          "mass": 0.16666666666666666,
+          "signed_gap": {
+            "standard400": 0.11044425268217767,
+            "ridge": 0.07759338890969313,
+            "distance_recalibration": -0.0008292296571534917
+          }
+        },
+        "opening-24": {
+          "rows": 171,
+          "games": 4,
+          "mass": 0.16666666666666666,
+          "signed_gap": {
+            "standard400": 0.02539754233269807,
+            "ridge": -0.004836827377602611,
+            "distance_recalibration": -0.006018716102491722
+          }
+        },
+        "opening-28": {
+          "rows": 192,
+          "games": 4,
+          "mass": 0.16666666666666666,
+          "signed_gap": {
+            "standard400": -0.06061712829183476,
+            "ridge": -0.03980561835270087,
+            "distance_recalibration": 0.0032999794290039307
+          }
+        }
+      },
+      "difference_bin": {
+        "0": {
+          "rows": 202,
+          "games": 20,
+          "mass": 0.16668726467028705,
+          "signed_gap": {
+            "standard400": 0.026654883339455884,
+            "ridge": 0.020254183875442748,
+            "distance_recalibration": 0.0028425867443864277
+          }
+        },
+        "1": {
+          "rows": 216,
+          "games": 23,
+          "mass": 0.16922599816679207,
+          "signed_gap": {
+            "standard400": 0.043377493557220634,
+            "ridge": 0.030593480564782765,
+            "distance_recalibration": -0.001842326904730161
+          }
+        },
+        "2": {
+          "rows": 343,
+          "games": 24,
+          "mass": 0.26837714499536425,
+          "signed_gap": {
+            "standard400": 0.022194398185960976,
+            "ridge": 0.015096886869561114,
+            "distance_recalibration": -0.0014679793681896423
+          }
+        },
+        "3": {
+          "rows": 247,
+          "games": 24,
+          "mass": 0.19778582109729545,
+          "signed_gap": {
+            "standard400": 0.031657345621810266,
+            "ridge": 0.032386590448060026,
+            "distance_recalibration": -0.0025664603993031557
+          }
+        },
+        "4": {
+          "rows": 240,
+          "games": 21,
+          "mass": 0.19792377107026118,
+          "signed_gap": {
+            "standard400": 0.039740571464256066,
+            "ridge": 0.02932073007869134,
+            "distance_recalibration": 0.0024271247877125255
+          }
+        }
+      }
+    }
+  },
+  "inputSHA": {
+    "research-data/ai-sigma/frame16-fit-gap-analysis/residual-head-control/preregister.json": "1b58f3b2d90fd28ae8f1509b29fce77c6891c79f0c8e092adb1aa25ca5d41f80",
+    "research-data/ai-sigma/frame16-fit-gap-analysis/residual-head-control/preregister-amendment-v2.json": "59ae80b450ad2c903806475aa29bad77448b33dd8b7227ff4c72c16dcd2f712d",
+    "research-data/ai-sigma/frame16-fit-gap-analysis/residual-head-control/coefficients.json": "8039dbcc985dd39957dcdaf4ecdc562d8ca08445f5c0ae86dd9a159cae06cd80",
+    "research-data/ai-sigma/frame16-fit-gap-analysis/residual-head-control/distance-reference-coefficients.json": "913930d69e05c912022dedf14a87c6b13e0bd3fa8dca9cc3d131fc6f7ea5c81d",
+    "research-data/ai-sigma/frame16-fit-gap-analysis/residual-head-control/hidden_features.npz": "9da8a2b680d6acefe211cb8c7c119c3f796e06a955885358588cbcea0d7d39ca",
+    "research-data/ai-sigma/frame16-fit-gap-analysis/residual-head-control/comparison-per-row.jsonl.gz": "32a4664f007b1974e022a24a8e7d6a8566ef8c20dd07d4c1bf483449033cf020",
+    "research-data/ai-sigma/frame16-fit-gap-analysis/residual-head-control/result.json": "60a1b20b3dcb4b4480267eebd5b6e2dbf41c32ba7f79ef416dfff3777516082d",
+    "research-data/ai-sigma/frame16-fit-gap-analysis/residual-head-control/comparison-summary.json": "96d80cd8a7cfee141f85a7e9e00bdd39ba869306ad9852352e6d4da6fd3ac033",
+    "research-data/ai-sigma/frame16-fit-gap-analysis/residual-head-control/science-stop.json": "34e35505336eb9e29882b281681bd09dd026f1c49c1f29ae8f2d3833c0946aed",
+    "research-data/ai-sigma/frame16-fit-gap-analysis/residual-head-control/jobs/hidden-ridge-r1/process.json": "f374cc195ce4457eab8d70e0faefe03bc26a7d9ff049ca1e0748852d71de7e9c",
+    "tools/ai-sigma-fit-gap-analysis/residual-head-control/forward_fit.py": "95c57a0a3184c09aea3e7e7f85352e49a0937f679e6e438a61d2f9a09dcf597a",
+    "tools/ai-sigma-fit-gap-analysis/residual-head-control/distance_reference.py": "0030c12658e106d17dec09aa7ee02b1b95525e5bde7e55e86b3bfe248b5d3f9e"
+  },
+  "phase1_unchanged": true,
+  "NN_added": 0,
+  "newtest": 0,
+  "static_total_charge": 180,
+  "cap": 180,
+  "remaining": 0,
+  "wall_seconds": 0.4849234650027938,
+  "peakRSS_bytes": 70881280,
+  "ownPID": 4088531,
+  "own_starttick": "34884290",
+  "UTC": "2026-10-04T06:37:51.155735+00:00",
+  "samepass_parity_owner_receipt_only": true,
+  "reference_prereg_after_main_job": true,
+  "owner_nonreading_assertion_independently_proven": false
+}

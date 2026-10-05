@@ -1,0 +1,439 @@
+{
+  "run_id": "1b43dba5-440b-4df0-b753-9b80b0fc21a8",
+  "turn_id": "01a0fae4-5581-7072-bbc6-fd480a3cce4c",
+  "binding": {
+    "run_id": "1b43dba5-440b-4df0-b753-9b80b0fc21a8",
+    "turn_id": "01a0fae4-5581-7072-bbc6-fd480a3cce4c",
+    "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+    "started_at": "2026-10-02T04:34:23.223683+00:00",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+    "mapped_start_monotonic": 168574.333569838,
+    "calibrated_at_utc": "2026-10-02T04:34:35.198824+00:00",
+    "calibrated_at_monotonic": 168586.308710838,
+    "read_start_planning_at_utc": "2026-10-02T04:35:53.223683+00:00",
+    "read_finish_planning_at_utc": "2026-10-02T04:36:23.223683+00:00",
+    "turn_deadline_utc": "2026-10-02T04:37:23.223683+00:00",
+    "initial_mapping_limit": "Initial UTC-to-monotonic mapping assumes no prior wall-clock jump; future/backwards boot/start is rejected."
+  },
+  "started": {
+    "utc": "2026-10-02T04:34:35.199325+00:00",
+    "monotonic": 168586.30921507,
+    "process": {
+      "pid": 2064673,
+      "start_ticks": "16858627",
+      "state": "R",
+      "rss_bytes": 18825216,
+      "affinity": [
+        0
+      ]
+    },
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+    "environment": {
+      "UV_NO_SYNC": "1",
+      "UV_OFFLINE": "1",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "rlimit_as": [
+      -1,
+      -1
+    ],
+    "ram_budget_is_RSS_not_AS": true
+  },
+  "finished": {
+    "utc": "2026-10-02T04:34:45.790681+00:00",
+    "monotonic": 168596.900568881,
+    "process": {
+      "pid": 2064673,
+      "start_ticks": "16858627",
+      "state": "R",
+      "rss_bytes": 21782528,
+      "affinity": [
+        0
+      ]
+    },
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+    "environment": {
+      "UV_NO_SYNC": "1",
+      "UV_OFFLINE": "1",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "rlimit_as": [
+      -1,
+      -1
+    ],
+    "ram_budget_is_RSS_not_AS": true
+  },
+  "ready_ids": [
+    "quoridor-4lc.105"
+  ],
+  "issues": [
+    {
+      "id": "quoridor-4lc",
+      "status": "in_progress",
+      "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ],
+      "dependencies": [],
+      "dependency_count": 0,
+      "notes_tail": "監査は追加せず、既存の研究開始終了/修正再利用の参加機会に必要性判断を行う。92運用running/期待hash反映・停止責任維持。詳細 .agents/research-team/roles/steward.md / root101 notes。\n101役割恒久適用をroot受入れ。節目検討102を04:02:39既stewardへ実配送/04:03:06本人開始、rootユーザー整理指示を04:07:19同active全文契約2へsteer、main/研究6文書writer steward/optional scheduler doc1path、実コード依存0・root文書受入れ待ち。97/100有限受入れclose、研究Gitarchive100hash一致/相手CLOCK・数値・所有限界保持、docs/reports/ai-sigma-coordinator-clock97-100-acceptance.md。103固定6診断局を登録し実sendはGLOBAL3未配送、root/102steward終了idle後coordinatorが送る。Sigma同等/NI未達、親05:49:12/資源不変。\n102 root文書受入れ後6hash現物一致/本人close・Git8ccd605/停止確認、品質提案の局所可読性を次必要編集へ採用、runner共通化は需要待ちで見送り。103を04:12:55既experimentへ実配送、本人04:13:09受領開始。処理05:03:09/new04:58:09/提出05:13:09、固定3pair最大6診断局/旧93非統合/正式NI0。報告待ちowner103experiment→coordinator、92運用・05:49:12親期限維持。root再確認起動なし。\n104ユーザー指示を統括所有scopeに実適用: resume dispatch.py GLOBAL3拒否/入場用全role・root状態読取を撤廃し宛先のみ確認。pause/digest/dispatch lock/既receipt/正確active turn保護維持。103有効契約2と対応本文からLLMglobal3を除きCPU4RAM8保存12GiB/重job非競合/期限/6game cap不変。自己mock8pass・実NN0/新研究起動0、同103active turn01a0fad0へ全文steer04:25:17.452515 accepted。旧終了契約/旧deferred記録/旧結果は未編集。研究Gitは104coordinator報告/必要source・検証記録を参照、main共通/registry/92同path編集0。docs/reports/ai-sigma-coordinator-session-policy104.md。"
+    },
+    {
+      "id": "quoridor-4lc.40",
+      "status": "in_progress",
+      "assignee": "codex:01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+      "labels": [
+        "initial-window-ended"
+      ],
+      "dependencies": [
+        {
+          "id": "quoridor-4lc",
+          "dependency_type": "parent-child",
+          "status": "in_progress",
+          "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        }
+      ],
+      "dependency_count": 1,
+      "notes_tail": "己start標本02:57:47.784896UTC/CPU0、child有界回収/backup、他issue/config/NN/worker/委譲0。92end05:44:12/monitor05:47:12/全05:49:12維持、.40/goal close0。 evidence /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/supervisor/manual-review96-86c275a9-1c31-49f5-94fe-0fd010df8b6f\nroot96入力を02:57:13UTC同saved supervisorへmanualturn01a0fa8b-6077-7e33-b842-b44797c47ea4実配送。AppServer completed/現在notLoadedを03:03:42読取、startedAt→completedAt238秒>180秒（58超）保持、周期dispatchや全turn遵守と認定しない。外部正確ID/時刻をsupervisor96-completed-adoptions.jsonへ保存。提案①採用→95時計分類一致、②③採用→97実受領/次確認Worker停止・配送・公開後NN・全分母、④採用→manual実点検、次周期未確認。将来manualはexactturn180秒監視、skip時未点検時間/次機会を既存運用へ記録。重大未解消見解差なし。\n提案効果追跡更新:97/100独立保存36+実8にて新NNcutoff後抑止と完成CP保持を有限受入れ。原8/2→協調0/0、独立2/1→0/0。両条件Worker停止全<=500ゆえ期限違反率改善0、協調ACK逆差47.281msも保持。97重26.330s/100重14.070s、100静的4.004s等有限費用、全チーム累積比は未保証。103は固定6診断局への動的接続、通知payload因子は同時変更しない。新source/役割101は92ownerが秩序stop/rebinding済、未来周期実入場未確認。coorはdoc102と研究103のgateを分けglobal3空き待ちを明記。\n102局所可読性は次必要編集のowner予算内へ採用、runner共通化は具体需要まで見送り(共有故障面/独立算術保全)。103は04:12:55実配分・04:13:09本人開始、協調時計を動的6診断局へ接続、payload因子/整形gateを混在0。rootidle確認後3枠内配送、監督周期の実機会・未入場追跡と92未来停止は継続。採否根拠 docs/reports/ai-sigma-coordinator-layout102-acceptance.md。"
+    },
+    {
+      "id": "quoridor-4lc.92",
+      "status": "in_progress",
+      "assignee": "codex:01a0f31d-99ee-7d63-b162-bc1a59c457c6",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ],
+      "dependencies": [
+        {
+          "id": "quoridor-4lc",
+          "dependency_type": "parent-child",
+          "status": "in_progress",
+          "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        }
+      ],
+      "dependency_count": 1,
+      "notes_tail": "odic ownedへ偽bindingしない。180秒を58超過したため未来manual exactturn期限監視が必要。提案④入場確保採用:次の既存周期に短いidle/通常配分調整で機会を確保、skip時未点検時間と次機会をowner記録へ。root込みglobal3/周期1200/05:44:12監督・05:47:12回収・05:49:12保存維持。source/config未編集、新stewardturn0。\nOwned metadata monitor scheduler-end-report evidence /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-notice-98-2a52df67-e0a8-4e9c-82b0-9ca70101eb70/scheduler-end-report.md; history/owned scheduler scope only, semantic success and external NN stop not certified.\nOwned metadata monitor scheduler-end-report evidence /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-role101-13b970d0-f4e2-4ace-8bd3-cf80394ed0f0/scheduler-end-report.md; history/owned scheduler scope only, semantic success and external NN stop not certified.\nOwned metadata monitor scheduler-end-report evidence /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-session-count-104-0959704c-d49e-4d45-b562-7510c6d0e0b2/scheduler-end-report.md; history/owned scheduler scope only, semantic success and external NN stop not certified."
+    },
+    {
+      "id": "quoridor-4lc.104",
+      "status": "in_progress",
+      "assignee": "codex:01a0f2e9-357d-7ef3-a2fe-b16f80accda5",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ],
+      "dependencies": [
+        {
+          "id": "quoridor-4lc",
+          "dependency_type": "parent-child",
+          "status": "in_progress",
+          "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        }
+      ],
+      "dependency_count": 1,
+      "notes_tail": "n01a0fad8-dbb7-75f3-9fe0-1fbcdd3de948。coordinator現active01a0fac4に旧GLOBAL3の撤廃許可とcoordinator-owned resume dispatch.py/現在103契約の整合をsteer accepted。root source書込0。main .artifacts/research-team/session-policy-104/{steward-request,coordinator-delivery,steward-delivery}参照。報告配送にも数拒否があるため一緒に撤廃、宛先ライフサイクル/所有pause/期限/物理資源は維持。live適用前に既92ownerが期待hash監視の安全切替を担当。\n104ユーザー指示を統括所有scopeに実適用: resume dispatch.py GLOBAL3拒否/入場用全role・root状態読取を撤廃し宛先のみ確認。pause/digest/dispatch lock/既receipt/正確active turn保護維持。103有効契約2と対応本文からLLMglobal3を除きCPU4RAM8保存12GiB/重job非競合/期限/6game cap不変。自己mock8pass・実NN0/新研究起動0、同103active turn01a0fad0へ全文steer04:25:17.452515 accepted。旧終了契約/旧deferred記録/旧結果は未編集。研究Gitは104coordinator報告/必要source・検証記録を参照、main共通/registry/92同path編集0。docs/reports/ai-sigma-coordinator-session-policy104.md。\ncoordinator所有分報告受領・root source確認: Git05b9d8f / resume dispatch.pyは宛先のみ取得、GLOBAL3拒否と全役state読取が除去。dispatch lock/goalとissue pause/対象role digest/既receipt/正確active steer/root専用ACK保護を保持。保存mock8passを確認、現103契約2を同activeへ04:25:17steer accepted。主client/scheduler/liveは104.1作業継続中。旧source/結果/保留記録は書換なし。根拠docs/reports/ai-sigma-coordinator-session-policy104.md / research-data/ai-sigma/104-coordinator-session-policy/verification.json。"
+    },
+    {
+      "id": "quoridor-4lc.104.1",
+      "status": "in_progress",
+      "assignee": "codex:01a0f31d-99ee-7d63-b162-bc1a59c457c6",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ],
+      "dependencies": [
+        {
+          "id": "quoridor-4lc.104",
+          "dependency_type": "parent-child",
+          "status": "in_progress",
+          "assignee": "codex:01a0f2e9-357d-7ef3-a2fe-b16f80accda5",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        }
+      ],
+      "dependency_count": 1,
+      "notes_tail": "04:25:36UTC受領/本人claim・開始。処理04:45:36/提出04:50:36目安、親停止優先。104.1単独writer、coordinator-owned dispatch.py/103変更0。先に92 ownedなし/supervisor idle確認と秩序ある停止後、セッション数拒否のみ撤廃、物理資源/pause/期限/二重起動制御を維持。"
+    },
+    {
+      "id": "quoridor-4lc.103",
+      "status": "in_progress",
+      "assignee": "codex:01a0f31d-6d15-7620-bb63-4b4f878e4746",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ],
+      "dependencies": [
+        {
+          "id": "quoridor-4lc",
+          "dependency_type": "parent-child",
+          "status": "in_progress",
+          "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        }
+      ],
+      "dependency_count": 1,
+      "notes_tail": "全文 docs/design/ai-sigma-contract-experiment-cooperative-arena.md準備。97/100停止独立受入れ後の協調時計を同arenaへ実接続し、固定initial/asym/jump色交換最大6局を新課題として配分、旧93WDL非統合/正式NI0。初回実sendはroot+coor+stew=3でRPC前DEFERRED_GLOBAL3、現在未受領。102文書整理は実験gateでなくLLM上限の入場待ち、空き後coordinatorが既experimentへ送る。\n受領保守UTC04:13:09。全文/現行親common/experiment/実行記録、ready/show goal/selfとpause無し・本人割当確認。処理05:03:09/newrun04:58:09/提出05:13:09。NN0小glue確認後initial/asym/jump3pair最大6game、旧結果変更0。開始報告へ。\n実配送04:12:55.585413UTC turn01a0fad0-af9c-73a2-b2d7-c61e071d7c6f accepted、freshroot idle/coor+stewactiveで3上限内。本人受領04:13:09/claim開始ACK、処理05:03:09/newrun04:58:09/提出05:13:09。97協調時計→93同arena新glue、3golden色交換最大6game、旧WDL非統合/正式NI0。102文書整理完了は追加gateではない。\n104ユーザー指示を統括所有scopeに実適用: resume dispatch.py GLOBAL3拒否/入場用全role・root状態読取を撤廃し宛先のみ確認。pause/digest/dispatch lock/既receipt/正確active turn保護維持。103有効契約2と対応本文からLLMglobal3を除きCPU4RAM8保存12GiB/重job非競合/期限/6game cap不変。自己mock8pass・実NN0/新研究起動0、同103active turn01a0fad0へ全文steer04:25:17.452515 accepted。旧終了契約/旧deferred記録/旧結果は未編集。研究Gitは104coordinator報告/必要source・検証記録を参照、main共通/registry/92同path編集0。docs/reports/ai-sigma-coordinator-session-policy104.md。"
+    },
+    {
+      "id": "quoridor-4lc.38",
+      "status": "in_progress",
+      "assignee": "codex:01a0f31d-99ee-7d63-b162-bc1a59c457c6",
+      "labels": [
+        "initial-window-ended"
+      ],
+      "dependencies": [
+        {
+          "id": "quoridor-4lc",
+          "dependency_type": "parent-child",
+          "status": "in_progress",
+          "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        }
+      ],
+      "dependency_count": 1,
+      "notes_tail": "e/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-EXPERIMENT-POLICY-85/live-5eaed676-5e87-4338-82e9-aeaafa3a4aa9/first-live-turn-report.md; history/owned scheduler scope only, semantic success and external NN stop not certified.\nOwned metadata monitor scheduler-end-report evidence /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-EXPERIMENT-POLICY-85/live-5eaed676-5e87-4338-82e9-aeaafa3a4aa9/scheduler-end-report.md; history/owned scheduler scope only, semantic success and external NN stop not certified.\n.88.1短期契約改善後の同runtime所有運用: SIGMA-CONTRACT-IMPROVEMENT-88/live-applied.json、scheduler PID1826066/start15458705、monitor1826081/start15458748、00:55owned scheduler/正確turn停止・00:58monitor回収責任は同stewardが維持。00:30→00:41 gap669.296秒/reloaded/期待hash整合、skipと成功を区別。新guard動的観測/有界追加read・一時retry、全期間成功/外部job停止は未認定。.88.1短期closeはこの長期責任を終了しない。\nOwned metadata monitor scheduler-end-report evidence /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-CONTRACT-IMPROVEMENT-88/live-ca7c5c79-e37c-4e98-b77f-42abd9acd962/scheduler-end-report.md; history/owned scheduler scope only, semantic success and external NN stop not certified."
+    },
+    {
+      "id": "quoridor-4lc.81",
+      "status": "in_progress",
+      "assignee": "codex:01a0f31d-8227-7e03-a7e6-915b4918c11b",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ],
+      "dependencies": [
+        {
+          "id": "quoridor-4lc",
+          "dependency_type": "parent-child",
+          "status": "in_progress",
+          "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        }
+      ],
+      "dependency_count": 1,
+      "notes_tail": "ITIC-ROOT-NN/report only;80 final stop/report/hash coordinatorsteer pending, launch/stop intake only until handed off. actual_go=false.\nIndependent NN0 final docs/reports/ai-sigma-critic-root-nn-independent.md. 79 finish765/765 and all243850scorebits/3825choices reproduced by separate Pythonf32; factors46/19/114, extra76/bundle109 distinct. 80 null.find terminal schema reproducedNN0, rawNN47/saved46/unexecuted9/latency36 unstarted preserved. Own80checker failedB schema, one correction incomplete/no thirdattempt: full46 independent numeric gate HOLD, firstA finite gate only; source/log failures preserved. Runtime/source stop23:02:54UTC before prose,5jobs exits0/0/1/1/0 guard0,10selfidentitiescurrent0. Original279uniquehashafter unchanged, manifests79 45/80 110 exact; process79 15/80 93 current0 distinct historicalcontrolled/forced. Initial shortCPU0/RSS and localhash-before-firstread insufficiency retained. NoNN/Chrome/build/compile/games, actualgo false, pending coordinator acceptance; goal/othersclose0.\n統括 docs/reports/ai-sigma-coordinator-root-nn81-acceptance.md に限定受入れ。79全f32算術有限支持、80schema/未完了分母支持、46全面独立保留・二helper失敗/全期間不足保持。統括40manifest実hash一致・自己10現在不在は別観測。本人close可、goal他者close0。"
+    },
+    {
+      "id": "quoridor-4lc.79",
+      "status": "in_progress",
+      "assignee": "codex:01a0f31c-2e4b-7170-82c5-69e1428c2418",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ],
+      "dependencies": [
+        {
+          "id": "quoridor-4lc",
+          "dependency_type": "parent-child",
+          "status": "in_progress",
+          "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        }
+      ],
+      "dependency_count": 1,
+      "notes_tail": "oot-factor-correct-n.md、FACTOR-AND-INFERENCE-HANDOFFに全文保存、実依頼予定。新scope専有、旧scope再試行0・棋力/採用/対局holdout0。\nSIGMA-ROOT-FACTOR-CORRECT-N受領開始22:32:10.117788UTC、ready/show/pauseなし確認。処理22:52:10.117788/新job22:47:10.117788/提出23:02:10.117788。旧78write-stop確認後、765根の正N別checkerを一回std compileしてfinish gate先行、結果前固定のC/sqrt/tieと全765 JSf32精度照合を実行。NN/検索/対局/送信0。\nSIGMA-ROOT-FACTOR-CORRECT-N有限支持: 正N=sim=edge和+1をsource/stats条件から復元（直接raw node.visitsではない）。原finish765/765先gate、一因子C46/sqrt19/scoretie114根、first固定順76/束109別列。旧28v1 28/9/117とv2入力拒否不変、正N baseline自体19Action変化。Rust std-only一回compile、3825列/243850scorebits/Action JSf32厳密一致、JSNumber selectedscorebits1026差/Action0差。accepted764/late private game5ply34=1/無応答missing1、matched97pair194根を別分母。parentQ/FPU/toy補完0、全MCTS/NN/対局/送信0、棋力/採用/NI/goal外挿0。報告 docs/reports/ai-sigma-hypothesis-root-factor-correct-n.md、scope SIGMA-ROOT-FACTOR-CORRECT-N。7job exit0/guard0、自己15identity現在0、input21/78manifest26/旧28pins4不変。初期ledger前read/短linkerPIDRSS/全CPU瞬間欠測保持。78共有16MiBguard14内、追加予約0/cumreset0。source/runtime停止・独立受入れ待ちin_progress。\n統括81限定受入れ docs/reports/ai-sigma-coordinator-root-nn81-acceptance.md。Pythonf32独立765finish/3825選択/243850bits支持、条件付きN・仮想次argmax46/19/114・FPU欠測/全探索棋力0を維持し本人close可。"
+    },
+    {
+      "id": "quoridor-4lc.75",
+      "status": "in_progress",
+      "assignee": "codex:01a0f31d-6d15-7620-bb63-4b4f878e4746",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ],
+      "dependencies": [
+        {
+          "id": "quoridor-4lc",
+          "dependency_type": "parent-child",
+          "status": "in_progress",
+          "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        }
+      ],
+      "dependency_count": 1,
+      "notes_tail": "ner速報44との混同。固定NNprocess＋runner独立42/current0、後続静的helperを含む最新全process union独立50/current0、writer速報44は別分母。元停止hash/dropACK/controlled証拠とNN不在条件は不変、source変更/期限拡張0。READY32-INDEPENDENT-HANDOFF/stop-count-denominator-correction.json と NN-subset42/current-all50別JSONを保持。\n最終revision5 source/runtime停止。phaseA同main NN0・73辞書64採番/retry/partial・診断proof実CLI結線有限支持。条件付きsteer後golden75-once一窓21:50:33→21:50:48、public11/11/startup6別分母、通常6合法cp・取消1・goal2NN0・準備2null。永久Promise1未回収をfresh禁止/run停止として保持、ModeldropACK0/9searchACK0/innerforced controlledPID0/outeradoptionwait2、自己union104currentlive0は別根拠。RSS1513836544/storagepeak6971392B guard内。79入力/sourcehash不変。report docs/reports/ai-sigma-experiment-streaming-startup-watchdog.md と SIGMA-STREAMING-STARTUP-WATCHDOG/{final-manifest,handoff-summary,runtime-source-stopped-before-report}.json。actual_go/entry_ready=false、独立受入れ待ちin_progress、旧72/74/失敗・NI未立証保持。新対局/holdout0。\n76独立全文の有限受入れ理由を統括記録 docs/reports/ai-sigma-coordinator-actual-boundary76-next.md。原75公開11/通常6/goal2/prepnull2/cancel1はwriter有限支持、独立76NN11全未実施。actual monitor/監査/proof必須gate失敗、新m32比較no-go。未回収Promise/fresh禁止/runstop/forced/旧fail全部保持、全面成功・時計tail・棋力採用認定0。本人はこの限定理由を読んで全未確認をnotes保持し自75のみclose可。次77別copy/旧source期限修正0。"
+    }
+  ],
+  "sessions": {
+    "coordinator": {
+      "id": "01a0f31b-3409-75f2-a30e-453a50484f94",
+      "status": {
+        "type": "active",
+        "activeFlags": []
+      },
+      "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high"
+    },
+    "hypothesis": {
+      "id": "01a0f31c-2e4b-7170-82c5-69e1428c2418",
+      "status": {
+        "type": "idle"
+      },
+      "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high"
+    },
+    "experiment": {
+      "id": "01a0f31d-6d15-7620-bb63-4b4f878e4746",
+      "status": {
+        "type": "active",
+        "activeFlags": []
+      },
+      "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high"
+    },
+    "critic": {
+      "id": "01a0f31d-8227-7e03-a7e6-915b4918c11b",
+      "status": {
+        "type": "active",
+        "activeFlags": []
+      },
+      "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high"
+    },
+    "steward": {
+      "id": "01a0f31d-99ee-7d63-b162-bc1a59c457c6",
+      "status": {
+        "type": "active",
+        "activeFlags": []
+      },
+      "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high"
+    },
+    "supervisor": {
+      "id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+      "status": {
+        "type": "active",
+        "activeFlags": []
+      },
+      "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high"
+    }
+  },
+  "scheduler_snapshot": {
+    "binding": {
+      "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+      "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+      "target": "supervisor",
+      "dispatch_issue": "quoridor-4lc.40",
+      "contract_file": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+    },
+    "process": {
+      "pid": 2064203,
+      "start_ticks": "16857111",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "phase": "running",
+    "recovery_required": false,
+    "last_result": {
+      "at": "2026-10-02T04:34:28.315350+00:00",
+      "event": "reloaded"
+    },
+    "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+    "config_sha256": "c7fe98c6e9a668a3b6e456d302b97373a99cbcbc241c630b6143b61121117324",
+    "contract_sha256": "eb1f0098e9fdc6a04c111a81be3ab3986296ff741307114ba98c3d3467db208f",
+    "next_at": 1790916868.3579738,
+    "owned": {
+      "run_id": "1b43dba5-440b-4df0-b753-9b80b0fc21a8",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+      "turn_id": "01a0fae4-5581-7072-bbc6-fd480a3cce4c",
+      "started_at": "2026-10-02T04:34:23.223683+00:00",
+      "max_turn_seconds": 180
+    }
+  },
+  "background_identities_for_RSS": [
+    {
+      "pid": 2064203,
+      "start_ticks": "16857111",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    {
+      "pid": 1005388,
+      "start_ticks": "9934546",
+      "state": "R",
+      "rss_bytes": 16400384,
+      "cpu_ticks": 1,
+      "affinity": [
+        0
+      ],
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    }
+  ],
+  "pause_observed": false,
+  "current_issue_ids": [
+    "quoridor-4lc.92",
+    "quoridor-4lc.105",
+    "quoridor-4lc.104",
+    "quoridor-4lc.103",
+    "quoridor-4lc.40",
+    "quoridor-4lc.38",
+    "quoridor-4lc.81",
+    "quoridor-4lc.79",
+    "quoridor-4lc.75",
+    "quoridor-4lc.74",
+    "quoridor-4lc.73",
+    "quoridor-4lc.72",
+    "quoridor-4lc.71",
+    "quoridor-4lc.70",
+    "quoridor-4lc.68",
+    "quoridor-4lc.67",
+    "quoridor-4lc.60",
+    "quoridor-4lc.62",
+    "quoridor-4lc.61",
+    "quoridor-4lc.53",
+    "quoridor-4lc.44",
+    "quoridor-4lc.56",
+    "quoridor-4lc.57",
+    "quoridor-4lc.55",
+    "quoridor-4lc.104.1"
+  ],
+  "discovery_limits": {
+    "direct": 24,
+    "nested_parents": 3,
+    "per_nested": 8,
+    "detail": 8
+  },
+  "not_all_history_or_descendants_scanned": true,
+  "read_command_count": 8,
+  "scripted_path_only": true,
+  "whole_turn_compliance_verified": false,
+  "side_DB_cache_writes_not_quantified": true,
+  "old_deviations_32games_goal_not_attained_preserved": true
+}

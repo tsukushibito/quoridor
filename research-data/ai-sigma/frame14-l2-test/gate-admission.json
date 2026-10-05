@@ -1,0 +1,35 @@
+{
+  "issue": "quoridor-4lc.198",
+  "UTC": "2026-10-04T00:38:49.747693+00:00",
+  "gate_path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-l2-control/gate-result.json",
+  "gate_SHA256": "00145faf2598201e787b85d5c36c26825dcd9e23171ae1fb9d0ed94a1ff29bee",
+  "receipt_path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-l2-control/jobs/l2-train-r1/process.json",
+  "receipt_SHA256": "f075bba823ede60b4323630586ee2650dae6edc1aa19e06715106f8e71fe8954",
+  "physical_handoff_stopped": true,
+  "conditions": {
+    "beststep_positive": false,
+    "different_weights": false,
+    "below_WD0_best_by_margin": false,
+    "below_trainconstant_by_margin": false
+  },
+  "passed": false,
+  "input_binding": {
+    "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/nnue/frame14-l2-r1/initial.pt": {
+      "SHA256": "f4a327c33c12ba92218636016af382346bfc175a21095b01521ede9567606428",
+      "bytes": 51605
+    },
+    "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/nnue/frame14-l2-r1/best.pt": {
+      "SHA256": "8cc093ad093e01bd1128ee86c606664851612982f91c44ca1b6cd0c09e40a7e0",
+      "bytes": 51569
+    },
+    "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/nnue/frame14-l2-r1/last.pt": {
+      "SHA256": "967692ce192d7bdb481f2b832633d1b61c0a79f6ab7524942a0422780c0af750",
+      "bytes": 51569
+    },
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-l2-control/runs/frame14-l2-r1/config.json": {
+      "SHA256": "3a04154042963c22239897c82e2889ff1d5318e620d650ba55ce37838b202773"
+    }
+  },
+  "NN_GPU_tensor_load": 0,
+  "wall_s": 0.0007517729536630213
+}

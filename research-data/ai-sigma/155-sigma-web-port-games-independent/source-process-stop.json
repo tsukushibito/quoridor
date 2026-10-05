@@ -1,0 +1,80 @@
+{
+  "issue": "quoridor-4lc.155",
+  "UTC": "2026-10-03T02:30:31.270587+00:00",
+  "science_and_checker_source_stopped": true,
+  "checker_children_waited": true,
+  "checker_current_sameidentity": [],
+  "identity_count": 20,
+  "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+  "currentabsence_not_natural_fullperiod_allhost": true,
+  "source_SHA256": {
+    "tools/ai-sigma-sigma-web-port-games-independent/replay.cjs": "62d83b9c429778a69197814f9309aa65a0162a6ff1d240051224be797862bfd9",
+    "tools/ai-sigma-sigma-web-port-games-independent/managed.py": "cc4c6f67df319dd27a50d46d125032a5db7e26edd9e7b28515c95194a5400324",
+    "tools/ai-sigma-sigma-web-port-games-independent/clock-audit.py": "ebb35a521245404c0b2d032cc1685ca97cbfc5837a6b736b2e51c4afbd8767a8",
+    "tools/ai-sigma-sigma-web-port-games-independent/bindings.cjs": "034cbf63a3dea36bfaa7cec4c0320e6dd0593a795f8e7767fe66e49d58248d23",
+    "tools/ai-sigma-sigma-web-port-games-independent/audit.py": "855add72f645c32f6a70b37ba4a1de2b1e6618562e76bdd8e53f19327856812d",
+    "tools/ai-sigma-sigma-web-port-games-independent/finalize.py": "88974b6d284b3beff771712128a3eba00e6a0358074f34980f61c8ee111a42ee",
+    "docs/reports/ai-sigma-critic-sigma-web-port-games-independent.md": "344127793f384dde1f05411a3dbfc9ce8f94905e4f7b2d3c9cb252317ce24b42"
+  },
+  "checker_attempts": [
+    {
+      "run": "replay-r7",
+      "exit": 0,
+      "wall_s": 0.4632632360153366
+    },
+    {
+      "run": "audit-r1",
+      "exit": 0,
+      "wall_s": 0.40134066401515156
+    },
+    {
+      "run": "replay-r1",
+      "exit": 1,
+      "wall_s": 0.05136705801123753
+    },
+    {
+      "run": "binding-r1",
+      "exit": 0,
+      "wall_s": 0.16024950498831458
+    },
+    {
+      "run": "replay-r2",
+      "exit": 1,
+      "wall_s": 0.06552457201178186
+    },
+    {
+      "run": "replay-r5",
+      "exit": 1,
+      "wall_s": 0.11197146301856264
+    },
+    {
+      "run": "replay-r6",
+      "exit": 1,
+      "wall_s": 0.17298234900226817
+    },
+    {
+      "run": "replay-r3",
+      "exit": 1,
+      "wall_s": 0.06385186398983933
+    },
+    {
+      "run": "replay-r4",
+      "exit": 1,
+      "wall_s": 0.08683195200865157
+    },
+    {
+      "run": "clock-r1",
+      "exit": 0,
+      "wall_s": 0.643454555014614
+    }
+  ],
+  "checker_child_wall_sum": 2.220837218075758,
+  "observed_currentRSS_peak": 192532480,
+  "administration_and_team_full_cost_unknown": true,
+  "newscope_allocated_before_Git_index": 3145728,
+  "critic_prior_conservative": 84651142,
+  "forecast_remaining_own_Git_manifest_bytes": 262144,
+  "unknown_old_discount": 0,
+  "NN_Chrome_model_game_build": 0,
+  "Git_backup_helpers_pending": true
+}

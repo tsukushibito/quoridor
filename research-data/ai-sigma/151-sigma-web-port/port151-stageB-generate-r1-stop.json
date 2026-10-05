@@ -1,0 +1,196 @@
+{
+  "issue": "quoridor-4lc.151",
+  "run": "port151-stageB-generate-r1",
+  "UTC": "2026-10-03T01:45:16.502187+00:00",
+  "start": "2026-10-03T01:43:04.813417+00:00",
+  "end": "2026-10-03T01:43:11.376000+00:00",
+  "exit": 1,
+  "stop_reason": null,
+  "inner_controlled": {
+    "remaining_pids": 0,
+    "forced": true,
+    "graceful_error": null,
+    "waited": true,
+    "registration_ack": true,
+    "registered": 21
+  },
+  "inner_proof_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageB-generate-r1/outer-controlled-stop.json",
+  "outer_ownedwait_returned": true,
+  "outer_remaining": [],
+  "outer_unknown": [],
+  "current_sameidentity": [],
+  "identity_count": 34,
+  "peak_current_RSS": 1215909888,
+  "retained_current": 56578048,
+  "source_launch_hash": "0232a84866a3840c3819b58c19580fb4a56d7ede85bf18e4d2f1b28654109ccc",
+  "source_current_hash": "0232a84866a3840c3819b58c19580fb4a56d7ede85bf18e4d2f1b28654109ccc",
+  "files": {
+    "summary": {
+      "issue": "quoridor-4lc.151",
+      "kind": "stageB",
+      "run": "port151-stageB-generate-r1",
+      "startup_NN": 0,
+      "model_sessions": 0,
+      "hand_NN": 0,
+      "started": 0,
+      "planned": 0,
+      "primary": {
+        "name": "Error",
+        "message": "page.evaluate: ReferenceError: SnapshotCache is not defined\n    at portMock (http://localhost:5194/early-page.js:641:86)\n    at eval (eval at evaluate (:311:30), <anonymous>:1:5)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+        "stack": "page.evaluate: ReferenceError: SnapshotCache is not defined\n    at portMock (http://localhost:5194/early-page.js:641:86)\n    at eval (eval at evaluate (:311:30), <anonymous>:1:5)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at main (/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port/diagnose.cjs:11:205)"
+      },
+      "secondary": []
+    },
+    "finally-model-drop": {
+      "missing": true
+    },
+    "main-timers-stop": {
+      "main_timers": 0,
+      "pending_messages": []
+    },
+    "monitor-callback-stop": {
+      "timer": false,
+      "busy": false,
+      "waited": true
+    },
+    "pause-monitor-stop": {
+      "UTC": "2026-10-03T01:43:10.967Z",
+      "state": "READY",
+      "failure": null,
+      "deadlineUTC": "2026-10-03T03:17:36.232260+00:00",
+      "subjectIssue": "quoridor-4lc.151",
+      "rows": [
+        {
+          "pid": 3013633,
+          "starttick": 24471276,
+          "PPID": 3013626,
+          "ppid": 3013626,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3013626,
+            "starttick": 24471272,
+            "PPID": 3013614,
+            "ppid": 3013614,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:43:04.877Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc",
+          "PID": 3013633,
+          "startUTC": "2026-10-03T01:43:04.877Z",
+          "endUTC": "2026-10-03T01:43:05.672Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3013656,
+          "starttick": 24471356,
+          "PPID": 3013626,
+          "ppid": 3013626,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3013626,
+            "starttick": 24471272,
+            "PPID": 3013614,
+            "ppid": 3013614,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:43:05.675Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc.151",
+          "PID": 3013656,
+          "startUTC": "2026-10-03T01:43:05.675Z",
+          "endUTC": "2026-10-03T01:43:06.580Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3013716,
+          "starttick": 24471547,
+          "PPID": 3013626,
+          "ppid": 3013626,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3013626,
+            "starttick": 24471272,
+            "PPID": 3013614,
+            "ppid": 3013614,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:43:07.582Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc",
+          "PID": 3013716,
+          "startUTC": "2026-10-03T01:43:07.582Z",
+          "endUTC": "2026-10-03T01:43:09.369Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        },
+        {
+          "pid": 3013834,
+          "starttick": 24471725,
+          "PPID": 3013626,
+          "ppid": 3013626,
+          "state": "R",
+          "kind": "owned_observer_child",
+          "parent": {
+            "pid": 3013626,
+            "starttick": 24471272,
+            "PPID": 3013614,
+            "ppid": 3013614,
+            "state": "R"
+          },
+          "startUTC": "2026-10-03T01:43:09.369Z",
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        {
+          "id": "quoridor-4lc.151",
+          "PID": 3013834,
+          "startUTC": "2026-10-03T01:43:09.369Z",
+          "endUTC": "2026-10-03T01:43:10.966Z",
+          "exitCode": 0,
+          "signalCode": null,
+          "error": null,
+          "status": "in_progress",
+          "labels": [
+            "continuation-active",
+            "initial-window-ended"
+          ]
+        }
+      ],
+      "pending_children": [],
+      "clock_cost_not_subtracted": true,
+      "all_owned_read_callbacks_waited": true,
+      "signal_unknown": 0,
+      "active_monitor_timer": false
+    }
+  },
+  "natural_allperiod_allhost_not_asserted": true
+}

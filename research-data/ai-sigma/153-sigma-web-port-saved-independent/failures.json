@@ -1,0 +1,60 @@
+{
+  "failures": [
+    {
+      "run": "binding-r1",
+      "exit": 1,
+      "log": "research-data/ai-sigma/153-sigma-web-port-saved-independent/binding-r1.log",
+      "source_hashes": {
+        "tools/ai-sigma-sigma-web-port-saved-independent/replay.cjs": "778a2a8c9f509a8641b77ee6afc6ccd67c75bb8d61cc07a8783a662c21e7e050",
+        "tools/ai-sigma-sigma-web-port-saved-independent/managed.py": "1a5e92ea6b9eebd3d10150fb6a7d3fe5c1fb9e19fd2effded57b0f16a431802b",
+        "tools/ai-sigma-sigma-web-port-saved-independent/check.py": "b00d2c7db18226aec65b83b9e2ce793043be9efcf00ffe6b66ae6908f64f7506",
+        "tools/ai-sigma-sigma-web-port-saved-independent/binding.py": "1289f6d26931971a65aa7e6e079605b3d6dd5c1f79c60ec74c7bb93fbcc7dfc8"
+      },
+      "type": "checker_current151_vs_measured_served_source_assumption",
+      "scientific_negative": false
+    },
+    {
+      "run": "binding-r2",
+      "exit": 1,
+      "log": "research-data/ai-sigma/153-sigma-web-port-saved-independent/binding-r2.log",
+      "source_hashes": {
+        "tools/ai-sigma-sigma-web-port-saved-independent/replay.cjs": "778a2a8c9f509a8641b77ee6afc6ccd67c75bb8d61cc07a8783a662c21e7e050",
+        "tools/ai-sigma-sigma-web-port-saved-independent/binding-scripts.cjs": "5a8bfbb0f226a39b7f068d02059db9493610655f6fc68aa68cc845c408ac01b0",
+        "tools/ai-sigma-sigma-web-port-saved-independent/managed.py": "1a5e92ea6b9eebd3d10150fb6a7d3fe5c1fb9e19fd2effded57b0f16a431802b",
+        "tools/ai-sigma-sigma-web-port-saved-independent/check.py": "b00d2c7db18226aec65b83b9e2ce793043be9efcf00ffe6b66ae6908f64f7506",
+        "tools/ai-sigma-sigma-web-port-saved-independent/binding.py": "ee2e4457bec4182303e7c0d38dea4fbb3a3ce76e44eec2cb6e6158479e20fc68"
+      },
+      "type": "checker_unified_diff_newline_serialization",
+      "scientific_negative": false
+    },
+    {
+      "run": "replay-r1",
+      "exit": 1,
+      "log": "research-data/ai-sigma/153-sigma-web-port-saved-independent/replay-r1.log",
+      "source_hashes": {
+        "tools/ai-sigma-sigma-web-port-saved-independent/managed.py": "4de6dae8b5cedfeb0341159cbbd36fffca184591b5ad16278646ec8c7d84992b",
+        "tools/ai-sigma-sigma-web-port-saved-independent/check.py": "b00d2c7db18226aec65b83b9e2ce793043be9efcf00ffe6b66ae6908f64f7506"
+      },
+      "type": "checker_signed_zero_strict_comparator",
+      "scientific_negative": false
+    },
+    {
+      "run": "saved-r1",
+      "exit": 1,
+      "log": "research-data/ai-sigma/153-sigma-web-port-saved-independent/saved-r1.log",
+      "source_hashes": {
+        "tools/ai-sigma-sigma-web-port-saved-independent/managed.py": "4de6dae8b5cedfeb0341159cbbd36fffca184591b5ad16278646ec8c7d84992b",
+        "tools/ai-sigma-sigma-web-port-saved-independent/check.py": "7b418295c99ed3c7fd176d707bd1a8ca910337df97920af52ba22e08c576dc4a"
+      },
+      "type": "checker_schema_KeyError_minimal_prefix_board",
+      "scientific_negative": false
+    }
+  ],
+  "preserved_Gits": [
+    "6ef15c7",
+    "0f6ea01",
+    "e8ad53a",
+    "752f952"
+  ],
+  "original151r1_failure_not_replaced": true
+}

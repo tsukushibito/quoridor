@@ -1,0 +1,32 @@
+{
+  "issue": "quoridor-4lc.201",
+  "UTC": "2026-10-04T01:05:26.574854+00:00",
+  "openingsSHA": "026d79ae0c52b6fc737648aacbf1a454db4b81dd314bd6457a6b35e74edf39c3",
+  "fresh24": true,
+  "old194_198family_actionseed_reuse": 0,
+  "gate_peer": "quoridor-4lc.200",
+  "candidate_distance_initial_allowed": true,
+  "fixed_constant_gameMSE": 0.6787804677332444,
+  "fixed_oldQF1initial_gameMSE": 0.6901755738627967,
+  "gate_margin": 0.0001,
+  "additional_gate": "hyp input/coefficient/eval schema finitePASS and source/sciencechildren stopped; bind checkpoint/coefficient/settings/val/stop SHA",
+  "expected_gate": "research-data/ai-sigma/frame14-distance-residual/gate-result.json",
+  "policy": "K64/root64edge63/tau1 first16 newply then strictfirstargmax/200newply cap zunknown",
+  "engine": "readonly187 GPU24active/maxB8/independenttree each1pending/worker2,4,6 provider0/d790 f32 TF32AMPoff",
+  "NN_cap": 307200,
+  "startup_separate": true,
+  "debugNN": 0,
+  "job_seconds": 300,
+  "cleanup_margin_seconds": 30,
+  "science_budget_seconds": 360,
+  "NN0_static_budget_seconds": 120,
+  "exposure_reference": "old96train+allval+oldtest LABEL-FREE only state ORhistory ORsameQF1 input",
+  "test_access": "metadata/mask/pathhash only before200 evaluator/settings/checkpoint/coefficients freeze; no oldlabels",
+  "source_readonly": true,
+  "cutoffs": {
+    "newheavy": "2026-10-04T02:00:00Z",
+    "science": "2026-10-04T02:10:00Z",
+    "process": "2026-10-04T02:25:00Z",
+    "submit": "2026-10-04T02:35:00Z"
+  }
+}

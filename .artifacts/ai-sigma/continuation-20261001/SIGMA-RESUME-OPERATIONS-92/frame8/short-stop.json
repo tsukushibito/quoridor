@@ -1,0 +1,39 @@
+{
+  "at": "2026-10-02T10:34:51.087108+00:00",
+  "short_process": {
+    "pid": 2405776,
+    "start_ticks": "19020434",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+    "rss_bytes": 10772480,
+    "at": "2026-10-02T10:34:51.006966+00:00",
+    "own_children": "",
+    "exit_expected": 0
+  },
+  "short_identity_absent": true,
+  "observed_command_exit_code": 0,
+  "short_child_list_empty_before_exit": true,
+  "source_writes_stopped": true,
+  "intentional_long_running_processes": {
+    "scheduler": {
+      "pid": 2402552,
+      "start_ticks": "19006242",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "monitor": {
+      "pid": 2402571,
+      "start_ticks": "19006262",
+      "state": "R",
+      "rss_bytes": 20586496,
+      "cpu_ticks": 2,
+      "affinity": [
+        0
+      ],
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    }
+  },
+  "no_NN_Chrome_or_research_job_started": true,
+  "per_command_timeout_seconds_max": 55,
+  "exact_preparation_process_peak_and_cumulative_CPU_unmeasured": true,
+  "management_tool_wall_observations_under_60_seconds": true,
+  "pause_failure_recovery_evidence_preserved": true
+}

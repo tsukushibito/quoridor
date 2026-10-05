@@ -1,0 +1,343 @@
+{
+  "issue": "quoridor-4lc.143",
+  "scientific_source_Git": "885eb8e",
+  "rows": [
+    {
+      "input": {
+        "id": "P1-race",
+        "side": 1,
+        "prefix": 32,
+        "pawns": [
+          [
+            4,
+            6
+          ],
+          [
+            3,
+            3
+          ]
+        ],
+        "walls": [
+          0,
+          0
+        ],
+        "key": "4,6|3,3|0||0,0;0,2;0,4;0,6;1,0;1,2;1,4;1,6;2,0;2,2;2,4;2,6;6,0;6,2;6,4;6,6;7,0;7,2;7,4;7,6",
+        "features": 648,
+        "root_actions": [
+          {
+            "object": {
+              "type": "pawn",
+              "direction": [
+                0,
+                1
+              ]
+            },
+            "policy_index": 0,
+            "rust209_action": 67
+          },
+          {
+            "object": {
+              "type": "pawn",
+              "direction": [
+                0,
+                -1
+              ]
+            },
+            "policy_index": 1,
+            "rust209_action": 49
+          },
+          {
+            "object": {
+              "type": "pawn",
+              "direction": [
+                -1,
+                0
+              ]
+            },
+            "policy_index": 2,
+            "rust209_action": 57
+          },
+          {
+            "object": {
+              "type": "pawn",
+              "direction": [
+                1,
+                0
+              ]
+            },
+            "policy_index": 3,
+            "rust209_action": 59
+          }
+        ],
+        "fixed_golden": false
+      },
+      "saved_proof": {
+        "nodes": 2352,
+        "proof_rows": 2352,
+        "terminal": 90,
+        "depthUnknown": 1593,
+        "actions": [
+          {
+            "policy_index": 0,
+            "interval": [
+              1,
+              1
+            ]
+          },
+          {
+            "policy_index": 1,
+            "interval": [
+              -1,
+              -1
+            ]
+          },
+          {
+            "policy_index": 2,
+            "interval": [
+              1,
+              1
+            ]
+          },
+          {
+            "policy_index": 3,
+            "interval": [
+              1,
+              1
+            ]
+          }
+        ],
+        "interval": [
+          1,
+          1
+        ],
+        "all_parent_states_legal": true,
+        "algorithm": "forward state reconstruction, reverse interval aggregation"
+      },
+      "independent": {
+        "me": 1,
+        "interval": [
+          1,
+          1
+        ],
+        "actions": [
+          {
+            "policy_index": 0,
+            "interval": [
+              1,
+              1
+            ]
+          },
+          {
+            "policy_index": 1,
+            "interval": [
+              -1,
+              -1
+            ]
+          },
+          {
+            "policy_index": 2,
+            "interval": [
+              1,
+              1
+            ]
+          },
+          {
+            "policy_index": 3,
+            "interval": [
+              1,
+              1
+            ]
+          }
+        ],
+        "nodes": 2352,
+        "terminal": 90,
+        "depthUnknown": 1593,
+        "nodeUnknown": 0,
+        "timeUnknown": 0,
+        "maxDepth": 6,
+        "wall_ms": 74.19999998807907
+      },
+      "root_intervals_equal": true,
+      "immediate_goals": [],
+      "scientific_solver_attempts": 1
+    },
+    {
+      "input": {
+        "id": "P2-corridor",
+        "side": 2,
+        "prefix": 33,
+        "pawns": [
+          [
+            4,
+            5
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "walls": [
+          0,
+          0
+        ],
+        "key": "4,5|4,2|1||0,0;0,2;0,4;0,6;1,0;1,2;1,4;1,6;2,0;2,2;2,4;2,6;6,0;6,2;6,4;6,6;7,0;7,2;7,4;7,6",
+        "features": 648,
+        "root_actions": [
+          {
+            "object": {
+              "type": "pawn",
+              "direction": [
+                0,
+                1
+              ]
+            },
+            "policy_index": 0,
+            "rust209_action": 31
+          },
+          {
+            "object": {
+              "type": "pawn",
+              "direction": [
+                0,
+                -1
+              ]
+            },
+            "policy_index": 1,
+            "rust209_action": 13
+          },
+          {
+            "object": {
+              "type": "pawn",
+              "direction": [
+                -1,
+                0
+              ]
+            },
+            "policy_index": 2,
+            "rust209_action": 21
+          },
+          {
+            "object": {
+              "type": "pawn",
+              "direction": [
+                1,
+                0
+              ]
+            },
+            "policy_index": 3,
+            "rust209_action": 23
+          }
+        ],
+        "fixed_golden": false
+      },
+      "saved_proof": {
+        "nodes": 3632,
+        "proof_rows": 3632,
+        "terminal": 112,
+        "depthUnknown": 2527,
+        "actions": [
+          {
+            "policy_index": 0,
+            "interval": [
+              -1,
+              -1
+            ]
+          },
+          {
+            "policy_index": 1,
+            "interval": [
+              1,
+              1
+            ]
+          },
+          {
+            "policy_index": 2,
+            "interval": [
+              1,
+              1
+            ]
+          },
+          {
+            "policy_index": 3,
+            "interval": [
+              1,
+              1
+            ]
+          }
+        ],
+        "interval": [
+          1,
+          1
+        ],
+        "all_parent_states_legal": true,
+        "algorithm": "forward state reconstruction, reverse interval aggregation"
+      },
+      "independent": {
+        "me": 2,
+        "interval": [
+          1,
+          1
+        ],
+        "actions": [
+          {
+            "policy_index": 0,
+            "interval": [
+              -1,
+              -1
+            ]
+          },
+          {
+            "policy_index": 1,
+            "interval": [
+              1,
+              1
+            ]
+          },
+          {
+            "policy_index": 2,
+            "interval": [
+              1,
+              1
+            ]
+          },
+          {
+            "policy_index": 3,
+            "interval": [
+              1,
+              1
+            ]
+          }
+        ],
+        "nodes": 3632,
+        "terminal": 112,
+        "depthUnknown": 2527,
+        "nodeUnknown": 0,
+        "timeUnknown": 0,
+        "maxDepth": 6,
+        "wall_ms": 87.59999999403954
+      },
+      "root_intervals_equal": true,
+      "immediate_goals": [],
+      "scientific_solver_attempts": 1
+    }
+  ],
+  "mocks": {
+    "passes": [
+      "own_max",
+      "opponent_min",
+      "unknown_not_draw",
+      "goal_before_draw_both_perspectives",
+      "actual_draw_payoff",
+      "RuleA_goal_both_perspectives",
+      "actual_action_indices"
+    ],
+    "shared_RuleA": true,
+    "small_only": true
+  },
+  "true_state_and_history": true,
+  "shared_RuleA_independence_limit": true,
+  "NN_Model_AIWorker_game_build": 0,
+  "label_finite_support": true,
+  "small_modification_sensitivity_unproven": true,
+  "no_general_wall_midgame_or_NI_Sigma": true
+}

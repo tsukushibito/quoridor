@@ -1,0 +1,293 @@
+{
+  "UTC": "2026-10-01T21:50:31.004440+00:00",
+  "issue": "quoridor-4lc.74",
+  "phaseA": "limited supported static plan / not NI or freeze",
+  "phaseB": "partial finite numeric/normal/cancel/stop support; fresh/goal/4ply not executed; no-go",
+  "input_counts": {
+    "72_payload": 253,
+    "72_entry": 128,
+    "72_original": 91,
+    "73_payload": 37,
+    "73_original": 16,
+    "deduplicated_after": 394
+  },
+  "original_current_hash_mismatch": 0,
+  "original_recorded_current_identity_count": 98,
+  "original_current_only_no_history_claim": true,
+  "runtime_public": 3,
+  "planned_public": 11,
+  "unexecuted_public": 8,
+  "independent_hand_rows": [
+    {
+      "engine": "candidate",
+      "id": "CRITIC74-ONCE-1",
+      "elapsed_ms": 413.31217899918556,
+      "accepted": true,
+      "error": null,
+      "next_clock_exact": true,
+      "NN_API_calls": 7,
+      "old_ACK_to_first_API_start_early_slack_ms": null,
+      "stop_ACK0": true
+    },
+    {
+      "engine": "reference",
+      "id": "CRITIC74-ONCE-2",
+      "elapsed_ms": 422.1930849850178,
+      "accepted": true,
+      "error": null,
+      "next_clock_exact": true,
+      "NN_API_calls": 7,
+      "old_ACK_to_first_API_start_early_slack_ms": 7.557102352380753,
+      "stop_ACK0": true
+    },
+    {
+      "engine": "candidate",
+      "id": "CRITIC74-ONCE-3",
+      "elapsed_ms": 133.2492910027504,
+      "accepted": false,
+      "error": "CANCELLED",
+      "next_clock_exact": true,
+      "NN_API_calls": 2,
+      "old_ACK_to_first_API_start_early_slack_ms": 4.707631021738052,
+      "stop_ACK0": true
+    }
+  ],
+  "hand_numeric": {
+    "features": 1944,
+    "NN": 411,
+    "prior": 262
+  },
+  "startup_numeric": {
+    "features": 3888,
+    "NN": 822
+  },
+  "maxNNdiff": 3.5762786865234375e-06,
+  "startup_rootNN": 6,
+  "sessions": 1,
+  "ack0": 3,
+  "model_drop_zero": true,
+  "inner_controlledPID0": true,
+  "forced": true,
+  "outer_adoptions": 0,
+  "RSS_peak_observed": 2161995776,
+  "storage_peak_observed": 2777088,
+  "CPU_TIDs_all2": true,
+  "instant_peak_background_fullCPU_not_guaranteed": true,
+  "source_no_go": [
+    "choose fresh cleanup/start and lastStop await occur before hand bounded submit watchdog; next t0 kept, public timeout not independent of factory await",
+    "actual purpose excluded by mainInternal despite actualMain; schedule remains oldm48;73source/proof still placeholder",
+    "owned stop also signals concurrent owned Beads read child, causing monitor control.signal; public rest8 unexecuted"
+  ],
+  "old72_fresh_late": [
+    {
+      "id": "GOLDEN72-ONCE-4",
+      "fixture": "initial-p1",
+      "engine": "candidate",
+      "elapsed_ms": 6196.3432749807835,
+      "accepted": false,
+      "error": "LATE_RESPONSE",
+      "request_was_never_submitted": true
+    }
+  ],
+  "plan_width": 0.21635229782528567,
+  "plan_mean_half_L": 0.28364770217471436,
+  "plan_latest_entry": "2026-10-01T22:06:38.500000+00:00",
+  "helper_failures_preserved": [
+    "preNN old observer deadline refused; one deadline/ownissue correction, engine0 then NN window once",
+    "own root_value schema absent correction to public rootNN value",
+    "NN0 default browser forecast rejected; explicit2MiB mock estimate, noNN",
+    "clock reference spans schema corrected to common NN API rows",
+    "broad historical filename boundary comparison corrected to71vs72; old70 differs by design"
+  ],
+  "runtime_no_retry": true,
+  "new75_not_input": true,
+  "games": 0,
+  "holdout": 0,
+  "actual_go": false,
+  "NI_Sigma_goal_supported": false,
+  "old32_and_all_old_failures_not_replaced": true,
+  "unverified": [
+    "fresh independent runtime",
+    "legalgoal2/4ply independent runtime",
+    "actual positive proof/73 entry binding/actual game CLI",
+    "tail hard deadline/fairness/full ownership period",
+    "arbitrary deep tree/rawview/entropy/training overlap",
+    "true legal200/no-legal/native standard runtime",
+    "20/40ms transient peak/short static command PIDRSS/full cumulativeCPU"
+  ],
+  "fullpool64": {
+    "UTC": "2026-10-01T21:51:16.616Z",
+    "pool64_replay_context_Action_unique_nonterminal_goldens": true,
+    "pool64": 64,
+    "old48_overlap": [
+      57,
+      28,
+      24,
+      37,
+      7,
+      58,
+      10,
+      30,
+      45,
+      55,
+      50,
+      61,
+      41,
+      40,
+      33,
+      20,
+      17,
+      5,
+      63,
+      48,
+      2,
+      32,
+      27,
+      29,
+      49,
+      8,
+      38
+    ],
+    "old67_overlap": [
+      57,
+      28,
+      24,
+      37,
+      7,
+      58,
+      10,
+      30,
+      45,
+      55,
+      50,
+      61,
+      41,
+      40,
+      33,
+      20,
+      17,
+      5,
+      63,
+      48,
+      2,
+      32,
+      27,
+      29,
+      49,
+      8,
+      38
+    ],
+    "oldm10": "documented overlap6 retained; input not independently located",
+    "all_host_unused_training_not_audited": true,
+    "NN": 0
+  },
+  "NN0_order_negative": {
+    "UTC": "2026-10-01T21:51:32.661Z",
+    "positive": 24,
+    "negative": 78,
+    "rows": [
+      {
+        "fid": "initial-p1",
+        "engine": "candidate",
+        "gate": {
+          "features648_exact": true,
+          "NN137_finite_strict": true,
+          "fixed_reference": true,
+          "prior_checked": true,
+          "priors": 131,
+          "engine_specific_order": true,
+          "legal_set_exact": true,
+          "P2canonical": false,
+          "missing_public_cp": false
+        }
+      },
+      {
+        "fid": "initial-p1",
+        "engine": "reference",
+        "gate": {
+          "features648_exact": true,
+          "NN137_finite_strict": true,
+          "fixed_reference": true,
+          "prior_checked": true,
+          "priors": 131,
+          "engine_specific_order": true,
+          "legal_set_exact": true,
+          "P2canonical": false,
+          "missing_public_cp": false
+        }
+      },
+      {
+        "fid": "asym-hv-p2",
+        "engine": "candidate",
+        "gate": {
+          "features648_exact": true,
+          "NN137_finite_strict": true,
+          "fixed_reference": true,
+          "prior_checked": true,
+          "priors": 123,
+          "engine_specific_order": true,
+          "legal_set_exact": true,
+          "P2canonical": true,
+          "missing_public_cp": false
+        }
+      },
+      {
+        "fid": "asym-hv-p2",
+        "engine": "reference",
+        "gate": {
+          "features648_exact": true,
+          "NN137_finite_strict": true,
+          "fixed_reference": true,
+          "prior_checked": true,
+          "priors": 123,
+          "engine_specific_order": true,
+          "legal_set_exact": true,
+          "P2canonical": true,
+          "missing_public_cp": false
+        }
+      },
+      {
+        "fid": "straight-jump-p2",
+        "engine": "candidate",
+        "gate": {
+          "features648_exact": true,
+          "NN137_finite_strict": true,
+          "fixed_reference": true,
+          "prior_checked": true,
+          "priors": 132,
+          "engine_specific_order": true,
+          "legal_set_exact": true,
+          "P2canonical": true,
+          "missing_public_cp": false
+        }
+      },
+      {
+        "fid": "straight-jump-p2",
+        "engine": "reference",
+        "gate": {
+          "features648_exact": true,
+          "NN137_finite_strict": true,
+          "fixed_reference": true,
+          "prior_checked": true,
+          "priors": 132,
+          "engine_specific_order": true,
+          "legal_set_exact": true,
+          "P2canonical": true,
+          "missing_public_cp": false
+        }
+      }
+    ],
+    "NN": 0,
+    "all_passed": true,
+    "engine_order_source": "Position::legal_action_ids ascending pawn cells, horizontal anchors, vertical anchors; Sigma getLegalActions untouched",
+    "expected_sort_only": true
+  },
+  "independent_classifier_and_encoding": {
+    "UTC": "2026-10-01T21:46:49.052Z",
+    "encoding_deadline_cases": 3,
+    "actual_host_pending_classifier_cases": 12,
+    "NN": 0,
+    "all_passed": true,
+    "actual_go": false
+  }
+}

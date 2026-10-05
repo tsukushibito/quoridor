@@ -1,0 +1,5335 @@
+{
+  "issue": "quoridor-4lc.185",
+  "NN": 0,
+  "model_sessions": 0,
+  "GPU": 0,
+  "mock_reply_equivalents": 235,
+  "cap": 384,
+  "cases": [
+    {
+      "case": "one_worker_three_games",
+      "results": [
+        {
+          "game_id": "a",
+          "generation": 1,
+          "cp": {
+            "root_visits": 4,
+            "simulations": 4,
+            "root_mean": 0.25,
+            "action": 0,
+            "root_edges": [
+              {
+                "action": 0,
+                "visits": 3
+              }
+            ]
+          },
+          "typed": null,
+          "status": "MOCK_OR_TAPE_COMPLETE",
+          "counters": {
+            "started": 4,
+            "returned": 4,
+            "discarded": 0,
+            "completed": 4
+          },
+          "zero": {
+            "pending": 0,
+            "handle": 0
+          },
+          "mock_or_tape": true,
+          "model_forward": 0
+        },
+        {
+          "game_id": "b",
+          "generation": 1,
+          "cp": {
+            "root_visits": 4,
+            "simulations": 4,
+            "root_mean": 0.25,
+            "action": 0,
+            "root_edges": [
+              {
+                "action": 0,
+                "visits": 3
+              }
+            ]
+          },
+          "typed": null,
+          "status": "MOCK_OR_TAPE_COMPLETE",
+          "counters": {
+            "started": 4,
+            "returned": 4,
+            "discarded": 0,
+            "completed": 4
+          },
+          "zero": {
+            "pending": 0,
+            "handle": 0
+          },
+          "mock_or_tape": true,
+          "model_forward": 0
+        },
+        {
+          "game_id": "c",
+          "generation": 1,
+          "cp": {
+            "root_visits": 4,
+            "simulations": 4,
+            "root_mean": 0.25,
+            "action": 0,
+            "root_edges": [
+              {
+                "action": 0,
+                "visits": 3
+              }
+            ]
+          },
+          "typed": null,
+          "status": "MOCK_OR_TAPE_COMPLETE",
+          "counters": {
+            "started": 4,
+            "returned": 4,
+            "discarded": 0,
+            "completed": 4
+          },
+          "zero": {
+            "pending": 0,
+            "handle": 0
+          },
+          "mock_or_tape": true,
+          "model_forward": 0
+        }
+      ]
+    },
+    {
+      "case": "partial_B1_to_B8",
+      "actual_sizes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "real_GPU_shape_parity": "UNMEASURED_3_5_6_7"
+    },
+    {
+      "case": "three_workers_four_handles",
+      "workers": [
+        {
+          "kind": "result",
+          "worker": "w1",
+          "results": [
+            {
+              "game_id": "g1",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            },
+            {
+              "game_id": "g2",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            },
+            {
+              "game_id": "g3",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            },
+            {
+              "game_id": "g4",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            }
+          ],
+          "resumes": 16,
+          "zero": {
+            "handles": 0,
+            "pending": 0,
+            "waits": 0,
+            "active": 0
+          }
+        },
+        {
+          "kind": "result",
+          "worker": "w2",
+          "results": [
+            {
+              "game_id": "g1",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            },
+            {
+              "game_id": "g2",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            },
+            {
+              "game_id": "g3",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            },
+            {
+              "game_id": "g4",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            }
+          ],
+          "resumes": 16,
+          "zero": {
+            "handles": 0,
+            "pending": 0,
+            "waits": 0,
+            "active": 0
+          }
+        },
+        {
+          "kind": "result",
+          "worker": "w3",
+          "results": [
+            {
+              "game_id": "g1",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            },
+            {
+              "game_id": "g2",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            },
+            {
+              "game_id": "g3",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            },
+            {
+              "game_id": "g4",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            }
+          ],
+          "resumes": 16,
+          "zero": {
+            "handles": 0,
+            "pending": 0,
+            "waits": 0,
+            "active": 0
+          }
+        }
+      ]
+    },
+    {
+      "case": "three_workers_eight_handles",
+      "workers": [
+        {
+          "kind": "result",
+          "worker": "w3",
+          "results": [
+            {
+              "game_id": "g1",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            },
+            {
+              "game_id": "g2",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            },
+            {
+              "game_id": "g3",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            },
+            {
+              "game_id": "g4",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            },
+            {
+              "game_id": "g5",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            },
+            {
+              "game_id": "g6",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            },
+            {
+              "game_id": "g7",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            },
+            {
+              "game_id": "g8",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            }
+          ],
+          "resumes": 32,
+          "zero": {
+            "handles": 0,
+            "pending": 0,
+            "waits": 0,
+            "active": 0
+          }
+        },
+        {
+          "kind": "result",
+          "worker": "w1",
+          "results": [
+            {
+              "game_id": "g1",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            },
+            {
+              "game_id": "g2",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            },
+            {
+              "game_id": "g3",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            },
+            {
+              "game_id": "g4",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            },
+            {
+              "game_id": "g5",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            },
+            {
+              "game_id": "g6",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            },
+            {
+              "game_id": "g7",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            },
+            {
+              "game_id": "g8",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            }
+          ],
+          "resumes": 32,
+          "zero": {
+            "handles": 0,
+            "pending": 0,
+            "waits": 0,
+            "active": 0
+          }
+        },
+        {
+          "kind": "result",
+          "worker": "w2",
+          "results": [
+            {
+              "game_id": "g1",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            },
+            {
+              "game_id": "g2",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            },
+            {
+              "game_id": "g3",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            },
+            {
+              "game_id": "g4",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            },
+            {
+              "game_id": "g5",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            },
+            {
+              "game_id": "g6",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            },
+            {
+              "game_id": "g7",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            },
+            {
+              "game_id": "g8",
+              "generation": 1,
+              "cp": {
+                "root_visits": 4,
+                "simulations": 4,
+                "root_mean": 0.25,
+                "action": 0,
+                "root_edges": [
+                  {
+                    "action": 0,
+                    "visits": 3
+                  }
+                ]
+              },
+              "typed": null,
+              "status": "MOCK_OR_TAPE_COMPLETE",
+              "counters": {
+                "started": 4,
+                "returned": 4,
+                "discarded": 0,
+                "completed": 4
+              },
+              "zero": {
+                "pending": 0,
+                "handle": 0
+              },
+              "mock_or_tape": true,
+              "model_forward": 0
+            }
+          ],
+          "resumes": 32,
+          "zero": {
+            "handles": 0,
+            "pending": 0,
+            "waits": 0,
+            "active": 0
+          }
+        }
+      ]
+    },
+    {
+      "case": "pending_cancel_and_samegame_reuse_denied",
+      "ack": {
+        "pending": true,
+        "inflight": true
+      },
+      "result": {
+        "game_id": "cancel",
+        "generation": 1,
+        "cp": null,
+        "typed": "CANCEL_RETURN_DISCARDED",
+        "status": "CONTROL_OR_MOCK_UNKNOWN",
+        "counters": {
+          "started": 1,
+          "returned": 1,
+          "discarded": 1,
+          "completed": 0
+        },
+        "zero": {
+          "pending": 0,
+          "handle": 0
+        },
+        "mock_or_tape": true,
+        "model_forward": 0
+      }
+    },
+    {
+      "case": "queued_cancel",
+      "started": 0
+    },
+    {
+      "case": "simultaneous_stop_12_all_planned",
+      "statuses": [
+        "CANCEL_RETURN_DISCARDED",
+        "CANCEL_RETURN_DISCARDED",
+        "CANCEL_RETURN_DISCARDED",
+        "CANCEL_RETURN_DISCARDED",
+        "CANCEL_RETURN_DISCARDED",
+        "CANCEL_RETURN_DISCARDED",
+        "CANCEL_RETURN_DISCARDED",
+        "CANCEL_RETURN_DISCARDED",
+        "STOPPED_QUEUED",
+        "STOPPED_QUEUED",
+        "STOPPED_QUEUED",
+        "STOPPED_QUEUED"
+      ]
+    },
+    {
+      "case": "all_impact_swap",
+      "planned": 12,
+      "statuses": [
+        "PROVIDER_OR_CONTROL_UNKNOWN:BROKER_ID_ATTRIBUTION",
+        "PROVIDER_OR_CONTROL_UNKNOWN:BROKER_ID_ATTRIBUTION",
+        "PROVIDER_OR_CONTROL_UNKNOWN:BROKER_ID_ATTRIBUTION",
+        "PROVIDER_OR_CONTROL_UNKNOWN:BROKER_ID_ATTRIBUTION",
+        "PROVIDER_OR_CONTROL_UNKNOWN:BROKER_ID_ATTRIBUTION",
+        "PROVIDER_OR_CONTROL_UNKNOWN:BROKER_ID_ATTRIBUTION",
+        "PROVIDER_OR_CONTROL_UNKNOWN:BROKER_ID_ATTRIBUTION",
+        "PROVIDER_OR_CONTROL_UNKNOWN:BROKER_ID_ATTRIBUTION",
+        "PROVIDER_OR_CONTROL_UNKNOWN:BROKER_ID_ATTRIBUTION",
+        "PROVIDER_OR_CONTROL_UNKNOWN:BROKER_ID_ATTRIBUTION",
+        "PROVIDER_OR_CONTROL_UNKNOWN:BROKER_ID_ATTRIBUTION",
+        "PROVIDER_OR_CONTROL_UNKNOWN:BROKER_ID_ATTRIBUTION"
+      ],
+      "zero": {
+        "pending_games": 0,
+        "inflight_batches": 0,
+        "queued": 0,
+        "timer": false,
+        "started": 8,
+        "returned": 8
+      }
+    },
+    {
+      "case": "all_impact_unknown",
+      "planned": 12,
+      "statuses": [
+        "PROVIDER_OR_CONTROL_UNKNOWN:BROKER_ID_ATTRIBUTION",
+        "PROVIDER_OR_CONTROL_UNKNOWN:BROKER_ID_ATTRIBUTION",
+        "PROVIDER_OR_CONTROL_UNKNOWN:BROKER_ID_ATTRIBUTION",
+        "PROVIDER_OR_CONTROL_UNKNOWN:BROKER_ID_ATTRIBUTION",
+        "PROVIDER_OR_CONTROL_UNKNOWN:BROKER_ID_ATTRIBUTION",
+        "PROVIDER_OR_CONTROL_UNKNOWN:BROKER_ID_ATTRIBUTION",
+        "PROVIDER_OR_CONTROL_UNKNOWN:BROKER_ID_ATTRIBUTION",
+        "PROVIDER_OR_CONTROL_UNKNOWN:BROKER_ID_ATTRIBUTION",
+        "PROVIDER_OR_CONTROL_UNKNOWN:BROKER_ID_ATTRIBUTION",
+        "PROVIDER_OR_CONTROL_UNKNOWN:BROKER_ID_ATTRIBUTION",
+        "PROVIDER_OR_CONTROL_UNKNOWN:BROKER_ID_ATTRIBUTION",
+        "PROVIDER_OR_CONTROL_UNKNOWN:BROKER_ID_ATTRIBUTION"
+      ],
+      "zero": {
+        "pending_games": 0,
+        "inflight_batches": 0,
+        "queued": 0,
+        "timer": false,
+        "started": 8,
+        "returned": 8
+      }
+    },
+    {
+      "case": "all_impact_fault",
+      "planned": 12,
+      "statuses": [
+        "PROVIDER_OR_CONTROL_UNKNOWN:INJECTED_PROVIDER_FAILURE",
+        "PROVIDER_OR_CONTROL_UNKNOWN:INJECTED_PROVIDER_FAILURE",
+        "PROVIDER_OR_CONTROL_UNKNOWN:INJECTED_PROVIDER_FAILURE",
+        "PROVIDER_OR_CONTROL_UNKNOWN:INJECTED_PROVIDER_FAILURE",
+        "PROVIDER_OR_CONTROL_UNKNOWN:INJECTED_PROVIDER_FAILURE",
+        "PROVIDER_OR_CONTROL_UNKNOWN:INJECTED_PROVIDER_FAILURE",
+        "PROVIDER_OR_CONTROL_UNKNOWN:INJECTED_PROVIDER_FAILURE",
+        "PROVIDER_OR_CONTROL_UNKNOWN:INJECTED_PROVIDER_FAILURE",
+        "PROVIDER_OR_CONTROL_UNKNOWN:INJECTED_PROVIDER_FAILURE",
+        "PROVIDER_OR_CONTROL_UNKNOWN:INJECTED_PROVIDER_FAILURE",
+        "PROVIDER_OR_CONTROL_UNKNOWN:INJECTED_PROVIDER_FAILURE",
+        "PROVIDER_OR_CONTROL_UNKNOWN:INJECTED_PROVIDER_FAILURE"
+      ],
+      "zero": {
+        "pending_games": 0,
+        "inflight_batches": 0,
+        "queued": 0,
+        "timer": false,
+        "started": 8,
+        "returned": 0
+      }
+    },
+    {
+      "case": "all_impact_nan",
+      "planned": 12,
+      "statuses": [
+        "PROVIDER_OR_CONTROL_UNKNOWN:OUTPUT_SCHEMA",
+        "PROVIDER_OR_CONTROL_UNKNOWN:OUTPUT_SCHEMA",
+        "PROVIDER_OR_CONTROL_UNKNOWN:OUTPUT_SCHEMA",
+        "PROVIDER_OR_CONTROL_UNKNOWN:OUTPUT_SCHEMA",
+        "PROVIDER_OR_CONTROL_UNKNOWN:OUTPUT_SCHEMA",
+        "PROVIDER_OR_CONTROL_UNKNOWN:OUTPUT_SCHEMA",
+        "PROVIDER_OR_CONTROL_UNKNOWN:OUTPUT_SCHEMA",
+        "PROVIDER_OR_CONTROL_UNKNOWN:OUTPUT_SCHEMA",
+        "PROVIDER_OR_CONTROL_UNKNOWN:OUTPUT_SCHEMA",
+        "PROVIDER_OR_CONTROL_UNKNOWN:OUTPUT_SCHEMA",
+        "PROVIDER_OR_CONTROL_UNKNOWN:OUTPUT_SCHEMA",
+        "PROVIDER_OR_CONTROL_UNKNOWN:OUTPUT_SCHEMA"
+      ],
+      "zero": {
+        "pending_games": 0,
+        "inflight_batches": 0,
+        "queued": 0,
+        "timer": false,
+        "started": 8,
+        "returned": 8
+      }
+    },
+    {
+      "case": "stale_token_return",
+      "result": {
+        "game_id": "wrongtoken",
+        "generation": 1,
+        "cp": null,
+        "typed": "GENERATION_HANDLE_TOKEN_ATTRIBUTION",
+        "status": "CONTROL_OR_MOCK_UNKNOWN",
+        "counters": {
+          "started": 1,
+          "returned": 1,
+          "discarded": 0,
+          "completed": 0
+        },
+        "zero": {
+          "pending": 0,
+          "handle": 0
+        },
+        "mock_or_tape": true,
+        "model_forward": 0
+      }
+    },
+    {
+      "case": "K1_rootterminal_teacher_ineligible",
+      "K1": {
+        "game_id": "K1",
+        "generation": 1,
+        "cp": {
+          "root_visits": 1,
+          "simulations": 1,
+          "root_mean": 0.25,
+          "action": 0,
+          "root_edges": []
+        },
+        "typed": null,
+        "status": "MOCK_OR_TAPE_COMPLETE",
+        "counters": {
+          "started": 1,
+          "returned": 1,
+          "discarded": 0,
+          "completed": 1
+        },
+        "zero": {
+          "pending": 0,
+          "handle": 0
+        },
+        "mock_or_tape": true,
+        "model_forward": 0
+      },
+      "terminal": {
+        "game_id": "terminal",
+        "generation": 1,
+        "cp": {
+          "root_visits": 0,
+          "simulations": 0,
+          "root_mean": 0.25,
+          "action": null,
+          "root_edges": []
+        },
+        "typed": null,
+        "status": "TERMINAL_OR_INCOMPLETE",
+        "counters": {
+          "started": 0,
+          "returned": 0,
+          "discarded": 0,
+          "completed": 0
+        },
+        "zero": {
+          "pending": 0,
+          "handle": 0
+        },
+        "mock_or_tape": true,
+        "model_forward": 0
+      }
+    }
+  ],
+  "receipts": [
+    {
+      "stats": {
+        "started": 193,
+        "returned": 193,
+        "resumed": 193,
+        "discarded": 0,
+        "rejected_queued": 0,
+        "batches": [
+          {
+            "size": 3,
+            "sent_ms": 33.120039,
+            "received_ms": 45.419509,
+            "queue_ms": [
+              4.918748999999998,
+              0.21411700000000167,
+              0.1728340000000017
+            ]
+          },
+          {
+            "size": 3,
+            "sent_ms": 46.896866,
+            "received_ms": 47.28861,
+            "queue_ms": [
+              1.2938720000000004,
+              1.2621409999999997,
+              1.159238000000002
+            ]
+          },
+          {
+            "size": 3,
+            "sent_ms": 50.070553,
+            "received_ms": 50.54202,
+            "queue_ms": [
+              2.6998099999999994,
+              2.6686769999999953,
+              2.571391999999996
+            ]
+          },
+          {
+            "size": 3,
+            "sent_ms": 51.844001,
+            "received_ms": 52.184205,
+            "queue_ms": [
+              1.2035720000000012,
+              1.170152999999999,
+              1.152161999999997
+            ]
+          },
+          {
+            "size": 1,
+            "sent_ms": 52.991576,
+            "received_ms": 53.474576,
+            "queue_ms": [
+              0.5204930000000019
+            ]
+          },
+          {
+            "size": 2,
+            "sent_ms": 54.684404,
+            "received_ms": 55.021987,
+            "queue_ms": [
+              1.1225469999999973,
+              1.1028609999999972
+            ]
+          },
+          {
+            "size": 3,
+            "sent_ms": 56.713075,
+            "received_ms": 57.847408,
+            "queue_ms": [
+              1.6581660000000014,
+              1.638971000000005,
+              1.628858000000001
+            ]
+          },
+          {
+            "size": 4,
+            "sent_ms": 59.668679,
+            "received_ms": 60.027836,
+            "queue_ms": [
+              1.1368849999999995,
+              1.1073120000000003,
+              1.0956969999999941,
+              1.0844049999999967
+            ]
+          },
+          {
+            "size": 5,
+            "sent_ms": 61.166919,
+            "received_ms": 61.489175,
+            "queue_ms": [
+              1.1152569999999997,
+              1.1025169999999989,
+              1.0970399999999998,
+              1.0921110000000027,
+              1.0854339999999993
+            ]
+          },
+          {
+            "size": 6,
+            "sent_ms": 62.631327,
+            "received_ms": 63.043824,
+            "queue_ms": [
+              1.119765000000001,
+              1.1076300000000003,
+              1.1021179999999973,
+              1.0970799999999983,
+              1.0922449999999984,
+              1.087066
+            ]
+          },
+          {
+            "size": 7,
+            "sent_ms": 64.17999,
+            "received_ms": 64.52949,
+            "queue_ms": [
+              1.1113530000000011,
+              1.0986780000000067,
+              1.0931000000000068,
+              1.0878860000000046,
+              1.083005000000007,
+              1.0779100000000028,
+              1.0731370000000027
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 64.639962,
+            "received_ms": 65.514128,
+            "queue_ms": [
+              0.0869249999999937,
+              0.07356699999999705,
+              0.06813900000000217,
+              0.06329399999999907,
+              0.05867399999999634,
+              0.053696000000002186,
+              0.04901800000000378,
+              0.044276999999993905
+            ]
+          },
+          {
+            "size": 1,
+            "sent_ms": 66.996119,
+            "received_ms": 67.189939,
+            "queue_ms": [
+              1.355101999999988
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 126.627479,
+            "received_ms": 127.103238,
+            "queue_ms": [
+              4.129469999999998,
+              4.100668999999996,
+              4.093415999999991,
+              4.0875059999999905,
+              0.032809999999997785,
+              0.020726999999993723,
+              0.014618999999996163,
+              0.009386999999989598
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 129.574219,
+            "received_ms": 129.934492,
+            "queue_ms": [
+              1.4532890000000123,
+              0.3073100000000011,
+              0.2953469999999925,
+              0.13282100000000696,
+              0.024968999999998687,
+              0.01738599999998769,
+              0.011998000000005504,
+              0.006892999999990934
+            ]
+          },
+          {
+            "size": 7,
+            "sent_ms": 132.804379,
+            "received_ms": 133.894016,
+            "queue_ms": [
+              2.235211000000021,
+              1.658770000000004,
+              0.07825500000001284,
+              0.0690969999999993,
+              0.06285800000000563,
+              0.013079000000004726,
+              0.007373999999998659
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 134.537466,
+            "received_ms": 135.019229,
+            "queue_ms": [
+              0.8014059999999859,
+              0.7473520000000065,
+              0.740177999999986,
+              0.7351779999999906,
+              0.7303839999999866,
+              0.020649999999989177,
+              0.012292999999999665,
+              0.006533999999987827
+            ]
+          },
+          {
+            "size": 6,
+            "sent_ms": 135.841252,
+            "received_ms": 136.073796,
+            "queue_ms": [
+              1.2208259999999882,
+              1.2153549999999882,
+              1.2099770000000092,
+              1.2053060000000073,
+              0.4500590000000102,
+              0.00895700000000943
+            ]
+          },
+          {
+            "size": 4,
+            "sent_ms": 137.729649,
+            "received_ms": 137.93383,
+            "queue_ms": [
+              0.731899999999996,
+              0.7174809999999923,
+              0.7117020000000025,
+              0.5995399999999904
+            ]
+          },
+          {
+            "size": 4,
+            "sent_ms": 139.587499,
+            "received_ms": 139.803286,
+            "queue_ms": [
+              1.4768799999999942,
+              1.1333600000000104,
+              1.1256150000000105,
+              1.120193999999998
+            ]
+          },
+          {
+            "size": 3,
+            "sent_ms": 141.231846,
+            "received_ms": 141.426589,
+            "queue_ms": [
+              1.2652169999999785,
+              1.129019999999997,
+              1.086320999999998
+            ]
+          },
+          {
+            "size": 1,
+            "sent_ms": 205.650829,
+            "received_ms": 206.344016,
+            "queue_ms": [
+              1.1038700000000006
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 208.341111,
+            "received_ms": 209.150978,
+            "queue_ms": [
+              0.05117200000000821,
+              0.03405600000002096,
+              0.028075000000001182,
+              0.023054000000001906,
+              0.01841699999999946,
+              0.013331000000022186,
+              0.00867900000000077,
+              0.004069000000015421
+            ]
+          },
+          {
+            "size": 3,
+            "sent_ms": 209.618937,
+            "received_ms": 210.4759,
+            "queue_ms": [
+              0.76103599999999,
+              0.016711999999984073,
+              0.007198999999985745
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 210.984801,
+            "received_ms": 211.522429,
+            "queue_ms": [
+              0.4181000000000097,
+              0.4042840000000183,
+              0.3985309999999913,
+              0.3936400000000049,
+              0.3891100000000165,
+              0.38414800000001037,
+              0.33531200000001604,
+              0.0057559999999909905
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 213.146288,
+            "received_ms": 213.969546,
+            "queue_ms": [
+              1.7437290000000019,
+              1.7354530000000068,
+              1.730164000000002,
+              1.725321000000008,
+              1.720565999999991,
+              1.560038999999989,
+              0.01363399999999615,
+              0.004886999999996533
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 213.978324,
+            "received_ms": 214.294185,
+            "queue_ms": [
+              0.7322829999999954,
+              0.7260089999999764,
+              0.7213199999999915,
+              0.7166489999999897,
+              0.7121219999999937,
+              0.7064120000000003,
+              0.20745499999998174,
+              0.14326399999998785
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 214.303583,
+            "received_ms": 215.394117,
+            "queue_ms": [
+              0.46230299999999147,
+              0.45648800000000733,
+              0.45173900000000344,
+              0.44703400000000215,
+              0.44256999999998925,
+              0.4381659999999954,
+              0.43358700000001704,
+              0.4162900000000036
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 215.597043,
+            "received_ms": 217.55268,
+            "queue_ms": [
+              0.08647900000002551,
+              0.07274200000000519,
+              0.06613300000000777,
+              0.060024000000026945,
+              0.055349000000006754,
+              0.049004000000024917,
+              0.042903000000023894,
+              0.0031060000000024957
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 217.564353,
+            "received_ms": 218.005446,
+            "queue_ms": [
+              1.910999000000004,
+              1.9049290000000099,
+              1.900398000000024,
+              0.257850000000019,
+              0.24775800000000459,
+              0.24104600000001142,
+              0.23578400000002375,
+              0.1645600000000229
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 218.015445,
+            "received_ms": 219.461408,
+            "queue_ms": [
+              0.6107269999999971,
+              0.6040279999999996,
+              0.5984229999999968,
+              0.5939559999999915,
+              0.5883619999999894,
+              0.5829569999999933,
+              0.5774710000000027,
+              0.12167999999999779
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 219.613368,
+            "received_ms": 221.011565,
+            "queue_ms": [
+              0.08658099999999536,
+              0.03234000000000492,
+              0.026212000000015223,
+              0.021309000000002243,
+              0.016586000000017975,
+              0.011954000000002907,
+              0.007392000000010057,
+              0.0029350000000079035
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 221.020326,
+            "received_ms": 221.300846,
+            "queue_ms": [
+              1.3142840000000149,
+              1.308796000000001,
+              1.3039360000000215,
+              1.2994079999999997,
+              1.2948450000000093,
+              1.2904000000000053,
+              1.2860180000000128,
+              1.2816340000000253
+            ]
+          },
+          {
+            "size": 7,
+            "sent_ms": 221.74977,
+            "received_ms": 224.592036,
+            "queue_ms": [
+              0.8558020000000113,
+              0.8447710000000086,
+              0.8389910000000214,
+              0.8339220000000012,
+              0.8292450000000144,
+              0.8247960000000205,
+              0.8203610000000197
+            ]
+          },
+          {
+            "size": 5,
+            "sent_ms": 226.019292,
+            "received_ms": 226.39311,
+            "queue_ms": [
+              4.19571000000002,
+              1.5441040000000044,
+              1.5361790000000042,
+              1.5307360000000187,
+              1.5258379999999931
+            ]
+          }
+        ],
+        "receipts": [
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "a",
+              "generation": 1,
+              "handle": 1,
+              "token": 1,
+              "request_id": "w0:1"
+            },
+            "wire_id": "nn0.1",
+            "started_ms": 33.120039,
+            "returned_ms": 45.419509,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "b",
+              "generation": 1,
+              "handle": 2,
+              "token": 1,
+              "request_id": "w0:2"
+            },
+            "wire_id": "nn0.2",
+            "started_ms": 33.120039,
+            "returned_ms": 45.419509,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "c",
+              "generation": 1,
+              "handle": 3,
+              "token": 1,
+              "request_id": "w0:3"
+            },
+            "wire_id": "nn0.3",
+            "started_ms": 33.120039,
+            "returned_ms": 45.419509,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "a",
+              "generation": 1,
+              "handle": 1,
+              "token": 2,
+              "request_id": "w0:4"
+            },
+            "wire_id": "nn0.4",
+            "started_ms": 46.896866,
+            "returned_ms": 47.28861,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "b",
+              "generation": 1,
+              "handle": 2,
+              "token": 2,
+              "request_id": "w0:5"
+            },
+            "wire_id": "nn0.5",
+            "started_ms": 46.896866,
+            "returned_ms": 47.28861,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "c",
+              "generation": 1,
+              "handle": 3,
+              "token": 2,
+              "request_id": "w0:6"
+            },
+            "wire_id": "nn0.6",
+            "started_ms": 46.896866,
+            "returned_ms": 47.28861,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "a",
+              "generation": 1,
+              "handle": 1,
+              "token": 3,
+              "request_id": "w0:7"
+            },
+            "wire_id": "nn0.7",
+            "started_ms": 50.070553,
+            "returned_ms": 50.54202,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "b",
+              "generation": 1,
+              "handle": 2,
+              "token": 3,
+              "request_id": "w0:8"
+            },
+            "wire_id": "nn0.8",
+            "started_ms": 50.070553,
+            "returned_ms": 50.54202,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "c",
+              "generation": 1,
+              "handle": 3,
+              "token": 3,
+              "request_id": "w0:9"
+            },
+            "wire_id": "nn0.9",
+            "started_ms": 50.070553,
+            "returned_ms": 50.54202,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "a",
+              "generation": 1,
+              "handle": 1,
+              "token": 4,
+              "request_id": "w0:10"
+            },
+            "wire_id": "nn0.10",
+            "started_ms": 51.844001,
+            "returned_ms": 52.184205,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "b",
+              "generation": 1,
+              "handle": 2,
+              "token": 4,
+              "request_id": "w0:11"
+            },
+            "wire_id": "nn0.11",
+            "started_ms": 51.844001,
+            "returned_ms": 52.184205,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "c",
+              "generation": 1,
+              "handle": 3,
+              "token": 4,
+              "request_id": "w0:12"
+            },
+            "wire_id": "nn0.12",
+            "started_ms": 51.844001,
+            "returned_ms": 52.184205,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial1_0",
+              "generation": 1,
+              "handle": 108,
+              "token": 108,
+              "request_id": "r108"
+            },
+            "wire_id": "nn0.13",
+            "started_ms": 52.991576,
+            "returned_ms": 53.474576,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial2_0",
+              "generation": 1,
+              "handle": 116,
+              "token": 116,
+              "request_id": "r116"
+            },
+            "wire_id": "nn0.14",
+            "started_ms": 54.684404,
+            "returned_ms": 55.021987,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial2_1",
+              "generation": 1,
+              "handle": 117,
+              "token": 117,
+              "request_id": "r117"
+            },
+            "wire_id": "nn0.15",
+            "started_ms": 54.684404,
+            "returned_ms": 55.021987,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial3_0",
+              "generation": 1,
+              "handle": 124,
+              "token": 124,
+              "request_id": "r124"
+            },
+            "wire_id": "nn0.16",
+            "started_ms": 56.713075,
+            "returned_ms": 57.847408,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial3_1",
+              "generation": 1,
+              "handle": 125,
+              "token": 125,
+              "request_id": "r125"
+            },
+            "wire_id": "nn0.17",
+            "started_ms": 56.713075,
+            "returned_ms": 57.847408,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial3_2",
+              "generation": 1,
+              "handle": 126,
+              "token": 126,
+              "request_id": "r126"
+            },
+            "wire_id": "nn0.18",
+            "started_ms": 56.713075,
+            "returned_ms": 57.847408,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial4_0",
+              "generation": 1,
+              "handle": 132,
+              "token": 132,
+              "request_id": "r132"
+            },
+            "wire_id": "nn0.19",
+            "started_ms": 59.668679,
+            "returned_ms": 60.027836,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial4_1",
+              "generation": 1,
+              "handle": 133,
+              "token": 133,
+              "request_id": "r133"
+            },
+            "wire_id": "nn0.20",
+            "started_ms": 59.668679,
+            "returned_ms": 60.027836,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial4_2",
+              "generation": 1,
+              "handle": 134,
+              "token": 134,
+              "request_id": "r134"
+            },
+            "wire_id": "nn0.21",
+            "started_ms": 59.668679,
+            "returned_ms": 60.027836,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial4_3",
+              "generation": 1,
+              "handle": 135,
+              "token": 135,
+              "request_id": "r135"
+            },
+            "wire_id": "nn0.22",
+            "started_ms": 59.668679,
+            "returned_ms": 60.027836,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial5_0",
+              "generation": 1,
+              "handle": 140,
+              "token": 140,
+              "request_id": "r140"
+            },
+            "wire_id": "nn0.23",
+            "started_ms": 61.166919,
+            "returned_ms": 61.489175,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial5_1",
+              "generation": 1,
+              "handle": 141,
+              "token": 141,
+              "request_id": "r141"
+            },
+            "wire_id": "nn0.24",
+            "started_ms": 61.166919,
+            "returned_ms": 61.489175,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial5_2",
+              "generation": 1,
+              "handle": 142,
+              "token": 142,
+              "request_id": "r142"
+            },
+            "wire_id": "nn0.25",
+            "started_ms": 61.166919,
+            "returned_ms": 61.489175,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial5_3",
+              "generation": 1,
+              "handle": 143,
+              "token": 143,
+              "request_id": "r143"
+            },
+            "wire_id": "nn0.26",
+            "started_ms": 61.166919,
+            "returned_ms": 61.489175,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial5_4",
+              "generation": 1,
+              "handle": 144,
+              "token": 144,
+              "request_id": "r144"
+            },
+            "wire_id": "nn0.27",
+            "started_ms": 61.166919,
+            "returned_ms": 61.489175,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial6_0",
+              "generation": 1,
+              "handle": 148,
+              "token": 148,
+              "request_id": "r148"
+            },
+            "wire_id": "nn0.28",
+            "started_ms": 62.631327,
+            "returned_ms": 63.043824,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial6_1",
+              "generation": 1,
+              "handle": 149,
+              "token": 149,
+              "request_id": "r149"
+            },
+            "wire_id": "nn0.29",
+            "started_ms": 62.631327,
+            "returned_ms": 63.043824,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial6_2",
+              "generation": 1,
+              "handle": 150,
+              "token": 150,
+              "request_id": "r150"
+            },
+            "wire_id": "nn0.30",
+            "started_ms": 62.631327,
+            "returned_ms": 63.043824,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial6_3",
+              "generation": 1,
+              "handle": 151,
+              "token": 151,
+              "request_id": "r151"
+            },
+            "wire_id": "nn0.31",
+            "started_ms": 62.631327,
+            "returned_ms": 63.043824,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial6_4",
+              "generation": 1,
+              "handle": 152,
+              "token": 152,
+              "request_id": "r152"
+            },
+            "wire_id": "nn0.32",
+            "started_ms": 62.631327,
+            "returned_ms": 63.043824,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial6_5",
+              "generation": 1,
+              "handle": 153,
+              "token": 153,
+              "request_id": "r153"
+            },
+            "wire_id": "nn0.33",
+            "started_ms": 62.631327,
+            "returned_ms": 63.043824,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial7_0",
+              "generation": 1,
+              "handle": 156,
+              "token": 156,
+              "request_id": "r156"
+            },
+            "wire_id": "nn0.34",
+            "started_ms": 64.17999,
+            "returned_ms": 64.52949,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial7_1",
+              "generation": 1,
+              "handle": 157,
+              "token": 157,
+              "request_id": "r157"
+            },
+            "wire_id": "nn0.35",
+            "started_ms": 64.17999,
+            "returned_ms": 64.52949,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial7_2",
+              "generation": 1,
+              "handle": 158,
+              "token": 158,
+              "request_id": "r158"
+            },
+            "wire_id": "nn0.36",
+            "started_ms": 64.17999,
+            "returned_ms": 64.52949,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial7_3",
+              "generation": 1,
+              "handle": 159,
+              "token": 159,
+              "request_id": "r159"
+            },
+            "wire_id": "nn0.37",
+            "started_ms": 64.17999,
+            "returned_ms": 64.52949,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial7_4",
+              "generation": 1,
+              "handle": 160,
+              "token": 160,
+              "request_id": "r160"
+            },
+            "wire_id": "nn0.38",
+            "started_ms": 64.17999,
+            "returned_ms": 64.52949,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial7_5",
+              "generation": 1,
+              "handle": 161,
+              "token": 161,
+              "request_id": "r161"
+            },
+            "wire_id": "nn0.39",
+            "started_ms": 64.17999,
+            "returned_ms": 64.52949,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial7_6",
+              "generation": 1,
+              "handle": 162,
+              "token": 162,
+              "request_id": "r162"
+            },
+            "wire_id": "nn0.40",
+            "started_ms": 64.17999,
+            "returned_ms": 64.52949,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial8_0",
+              "generation": 1,
+              "handle": 164,
+              "token": 164,
+              "request_id": "r164"
+            },
+            "wire_id": "nn0.41",
+            "started_ms": 64.639962,
+            "returned_ms": 65.514128,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial8_1",
+              "generation": 1,
+              "handle": 165,
+              "token": 165,
+              "request_id": "r165"
+            },
+            "wire_id": "nn0.42",
+            "started_ms": 64.639962,
+            "returned_ms": 65.514128,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial8_2",
+              "generation": 1,
+              "handle": 166,
+              "token": 166,
+              "request_id": "r166"
+            },
+            "wire_id": "nn0.43",
+            "started_ms": 64.639962,
+            "returned_ms": 65.514128,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial8_3",
+              "generation": 1,
+              "handle": 167,
+              "token": 167,
+              "request_id": "r167"
+            },
+            "wire_id": "nn0.44",
+            "started_ms": 64.639962,
+            "returned_ms": 65.514128,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial8_4",
+              "generation": 1,
+              "handle": 168,
+              "token": 168,
+              "request_id": "r168"
+            },
+            "wire_id": "nn0.45",
+            "started_ms": 64.639962,
+            "returned_ms": 65.514128,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial8_5",
+              "generation": 1,
+              "handle": 169,
+              "token": 169,
+              "request_id": "r169"
+            },
+            "wire_id": "nn0.46",
+            "started_ms": 64.639962,
+            "returned_ms": 65.514128,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial8_6",
+              "generation": 1,
+              "handle": 170,
+              "token": 170,
+              "request_id": "r170"
+            },
+            "wire_id": "nn0.47",
+            "started_ms": 64.639962,
+            "returned_ms": 65.514128,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "partial8_7",
+              "generation": 1,
+              "handle": 171,
+              "token": 171,
+              "request_id": "r171"
+            },
+            "wire_id": "nn0.48",
+            "started_ms": 64.639962,
+            "returned_ms": 65.514128,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "dup",
+              "generation": 1,
+              "handle": 500,
+              "token": 500,
+              "request_id": "r500"
+            },
+            "wire_id": "nn0.49",
+            "started_ms": 66.996119,
+            "returned_ms": 67.189939,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w2",
+              "game_id": "g1",
+              "generation": 1,
+              "handle": 1,
+              "token": 1,
+              "request_id": "w2:1"
+            },
+            "wire_id": "nn0.50",
+            "started_ms": 126.627479,
+            "returned_ms": 127.103238,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w2",
+              "game_id": "g2",
+              "generation": 1,
+              "handle": 2,
+              "token": 1,
+              "request_id": "w2:2"
+            },
+            "wire_id": "nn0.51",
+            "started_ms": 126.627479,
+            "returned_ms": 127.103238,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w2",
+              "game_id": "g3",
+              "generation": 1,
+              "handle": 3,
+              "token": 1,
+              "request_id": "w2:3"
+            },
+            "wire_id": "nn0.52",
+            "started_ms": 126.627479,
+            "returned_ms": 127.103238,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w2",
+              "game_id": "g4",
+              "generation": 1,
+              "handle": 4,
+              "token": 1,
+              "request_id": "w2:4"
+            },
+            "wire_id": "nn0.53",
+            "started_ms": 126.627479,
+            "returned_ms": 127.103238,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w1",
+              "game_id": "g1",
+              "generation": 1,
+              "handle": 1,
+              "token": 1,
+              "request_id": "w1:1"
+            },
+            "wire_id": "nn0.54",
+            "started_ms": 126.627479,
+            "returned_ms": 127.103238,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w1",
+              "game_id": "g2",
+              "generation": 1,
+              "handle": 2,
+              "token": 1,
+              "request_id": "w1:2"
+            },
+            "wire_id": "nn0.55",
+            "started_ms": 126.627479,
+            "returned_ms": 127.103238,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w1",
+              "game_id": "g3",
+              "generation": 1,
+              "handle": 3,
+              "token": 1,
+              "request_id": "w1:3"
+            },
+            "wire_id": "nn0.56",
+            "started_ms": 126.627479,
+            "returned_ms": 127.103238,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w1",
+              "game_id": "g4",
+              "generation": 1,
+              "handle": 4,
+              "token": 1,
+              "request_id": "w1:4"
+            },
+            "wire_id": "nn0.57",
+            "started_ms": 126.627479,
+            "returned_ms": 127.103238,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w1",
+              "game_id": "g1",
+              "generation": 1,
+              "handle": 1,
+              "token": 2,
+              "request_id": "w1:5"
+            },
+            "wire_id": "nn0.58",
+            "started_ms": 129.574219,
+            "returned_ms": 129.934492,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w1",
+              "game_id": "g2",
+              "generation": 1,
+              "handle": 2,
+              "token": 2,
+              "request_id": "w1:6"
+            },
+            "wire_id": "nn0.59",
+            "started_ms": 129.574219,
+            "returned_ms": 129.934492,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w1",
+              "game_id": "g3",
+              "generation": 1,
+              "handle": 3,
+              "token": 2,
+              "request_id": "w1:7"
+            },
+            "wire_id": "nn0.60",
+            "started_ms": 129.574219,
+            "returned_ms": 129.934492,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w1",
+              "game_id": "g4",
+              "generation": 1,
+              "handle": 4,
+              "token": 2,
+              "request_id": "w1:8"
+            },
+            "wire_id": "nn0.61",
+            "started_ms": 129.574219,
+            "returned_ms": 129.934492,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w2",
+              "game_id": "g1",
+              "generation": 1,
+              "handle": 1,
+              "token": 2,
+              "request_id": "w2:5"
+            },
+            "wire_id": "nn0.62",
+            "started_ms": 129.574219,
+            "returned_ms": 129.934492,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w2",
+              "game_id": "g2",
+              "generation": 1,
+              "handle": 2,
+              "token": 2,
+              "request_id": "w2:6"
+            },
+            "wire_id": "nn0.63",
+            "started_ms": 129.574219,
+            "returned_ms": 129.934492,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w2",
+              "game_id": "g3",
+              "generation": 1,
+              "handle": 3,
+              "token": 2,
+              "request_id": "w2:7"
+            },
+            "wire_id": "nn0.64",
+            "started_ms": 129.574219,
+            "returned_ms": 129.934492,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w2",
+              "game_id": "g4",
+              "generation": 1,
+              "handle": 4,
+              "token": 2,
+              "request_id": "w2:8"
+            },
+            "wire_id": "nn0.65",
+            "started_ms": 129.574219,
+            "returned_ms": 129.934492,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w1",
+              "game_id": "g1",
+              "generation": 1,
+              "handle": 1,
+              "token": 3,
+              "request_id": "w1:9"
+            },
+            "wire_id": "nn0.66",
+            "started_ms": 132.804379,
+            "returned_ms": 133.894016,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w2",
+              "game_id": "g1",
+              "generation": 1,
+              "handle": 1,
+              "token": 3,
+              "request_id": "w2:9"
+            },
+            "wire_id": "nn0.67",
+            "started_ms": 132.804379,
+            "returned_ms": 133.894016,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w2",
+              "game_id": "g2",
+              "generation": 1,
+              "handle": 2,
+              "token": 3,
+              "request_id": "w2:10"
+            },
+            "wire_id": "nn0.68",
+            "started_ms": 132.804379,
+            "returned_ms": 133.894016,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w2",
+              "game_id": "g3",
+              "generation": 1,
+              "handle": 3,
+              "token": 3,
+              "request_id": "w2:11"
+            },
+            "wire_id": "nn0.69",
+            "started_ms": 132.804379,
+            "returned_ms": 133.894016,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w2",
+              "game_id": "g4",
+              "generation": 1,
+              "handle": 4,
+              "token": 3,
+              "request_id": "w2:12"
+            },
+            "wire_id": "nn0.70",
+            "started_ms": 132.804379,
+            "returned_ms": 133.894016,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w1",
+              "game_id": "g2",
+              "generation": 1,
+              "handle": 2,
+              "token": 3,
+              "request_id": "w1:10"
+            },
+            "wire_id": "nn0.71",
+            "started_ms": 132.804379,
+            "returned_ms": 133.894016,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w1",
+              "game_id": "g3",
+              "generation": 1,
+              "handle": 3,
+              "token": 3,
+              "request_id": "w1:11"
+            },
+            "wire_id": "nn0.72",
+            "started_ms": 132.804379,
+            "returned_ms": 133.894016,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w1",
+              "game_id": "g4",
+              "generation": 1,
+              "handle": 4,
+              "token": 3,
+              "request_id": "w1:12"
+            },
+            "wire_id": "nn0.73",
+            "started_ms": 134.537466,
+            "returned_ms": 135.019229,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w3",
+              "game_id": "g1",
+              "generation": 1,
+              "handle": 1,
+              "token": 1,
+              "request_id": "w3:1"
+            },
+            "wire_id": "nn0.74",
+            "started_ms": 134.537466,
+            "returned_ms": 135.019229,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w3",
+              "game_id": "g2",
+              "generation": 1,
+              "handle": 2,
+              "token": 1,
+              "request_id": "w3:2"
+            },
+            "wire_id": "nn0.75",
+            "started_ms": 134.537466,
+            "returned_ms": 135.019229,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w3",
+              "game_id": "g3",
+              "generation": 1,
+              "handle": 3,
+              "token": 1,
+              "request_id": "w3:3"
+            },
+            "wire_id": "nn0.76",
+            "started_ms": 134.537466,
+            "returned_ms": 135.019229,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w3",
+              "game_id": "g4",
+              "generation": 1,
+              "handle": 4,
+              "token": 1,
+              "request_id": "w3:4"
+            },
+            "wire_id": "nn0.77",
+            "started_ms": 134.537466,
+            "returned_ms": 135.019229,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w1",
+              "game_id": "g1",
+              "generation": 1,
+              "handle": 1,
+              "token": 4,
+              "request_id": "w1:13"
+            },
+            "wire_id": "nn0.78",
+            "started_ms": 134.537466,
+            "returned_ms": 135.019229,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w1",
+              "game_id": "g2",
+              "generation": 1,
+              "handle": 2,
+              "token": 4,
+              "request_id": "w1:14"
+            },
+            "wire_id": "nn0.79",
+            "started_ms": 134.537466,
+            "returned_ms": 135.019229,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w1",
+              "game_id": "g3",
+              "generation": 1,
+              "handle": 3,
+              "token": 4,
+              "request_id": "w1:15"
+            },
+            "wire_id": "nn0.80",
+            "started_ms": 134.537466,
+            "returned_ms": 135.019229,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w2",
+              "game_id": "g1",
+              "generation": 1,
+              "handle": 1,
+              "token": 4,
+              "request_id": "w2:13"
+            },
+            "wire_id": "nn0.81",
+            "started_ms": 135.841252,
+            "returned_ms": 136.073796,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w2",
+              "game_id": "g2",
+              "generation": 1,
+              "handle": 2,
+              "token": 4,
+              "request_id": "w2:14"
+            },
+            "wire_id": "nn0.82",
+            "started_ms": 135.841252,
+            "returned_ms": 136.073796,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w2",
+              "game_id": "g3",
+              "generation": 1,
+              "handle": 3,
+              "token": 4,
+              "request_id": "w2:15"
+            },
+            "wire_id": "nn0.83",
+            "started_ms": 135.841252,
+            "returned_ms": 136.073796,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w2",
+              "game_id": "g4",
+              "generation": 1,
+              "handle": 4,
+              "token": 4,
+              "request_id": "w2:16"
+            },
+            "wire_id": "nn0.84",
+            "started_ms": 135.841252,
+            "returned_ms": 136.073796,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w1",
+              "game_id": "g4",
+              "generation": 1,
+              "handle": 4,
+              "token": 4,
+              "request_id": "w1:16"
+            },
+            "wire_id": "nn0.85",
+            "started_ms": 135.841252,
+            "returned_ms": 136.073796,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w3",
+              "game_id": "g1",
+              "generation": 1,
+              "handle": 1,
+              "token": 2,
+              "request_id": "w3:5"
+            },
+            "wire_id": "nn0.86",
+            "started_ms": 135.841252,
+            "returned_ms": 136.073796,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w3",
+              "game_id": "g2",
+              "generation": 1,
+              "handle": 2,
+              "token": 2,
+              "request_id": "w3:6"
+            },
+            "wire_id": "nn0.87",
+            "started_ms": 137.729649,
+            "returned_ms": 137.93383,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w3",
+              "game_id": "g3",
+              "generation": 1,
+              "handle": 3,
+              "token": 2,
+              "request_id": "w3:7"
+            },
+            "wire_id": "nn0.88",
+            "started_ms": 137.729649,
+            "returned_ms": 137.93383,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w3",
+              "game_id": "g4",
+              "generation": 1,
+              "handle": 4,
+              "token": 2,
+              "request_id": "w3:8"
+            },
+            "wire_id": "nn0.89",
+            "started_ms": 137.729649,
+            "returned_ms": 137.93383,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w3",
+              "game_id": "g1",
+              "generation": 1,
+              "handle": 1,
+              "token": 3,
+              "request_id": "w3:9"
+            },
+            "wire_id": "nn0.90",
+            "started_ms": 137.729649,
+            "returned_ms": 137.93383,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w3",
+              "game_id": "g2",
+              "generation": 1,
+              "handle": 2,
+              "token": 3,
+              "request_id": "w3:10"
+            },
+            "wire_id": "nn0.91",
+            "started_ms": 139.587499,
+            "returned_ms": 139.803286,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w3",
+              "game_id": "g3",
+              "generation": 1,
+              "handle": 3,
+              "token": 3,
+              "request_id": "w3:11"
+            },
+            "wire_id": "nn0.92",
+            "started_ms": 139.587499,
+            "returned_ms": 139.803286,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w3",
+              "game_id": "g4",
+              "generation": 1,
+              "handle": 4,
+              "token": 3,
+              "request_id": "w3:12"
+            },
+            "wire_id": "nn0.93",
+            "started_ms": 139.587499,
+            "returned_ms": 139.803286,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w3",
+              "game_id": "g1",
+              "generation": 1,
+              "handle": 1,
+              "token": 4,
+              "request_id": "w3:13"
+            },
+            "wire_id": "nn0.94",
+            "started_ms": 139.587499,
+            "returned_ms": 139.803286,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w3",
+              "game_id": "g2",
+              "generation": 1,
+              "handle": 2,
+              "token": 4,
+              "request_id": "w3:14"
+            },
+            "wire_id": "nn0.95",
+            "started_ms": 141.231846,
+            "returned_ms": 141.426589,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w3",
+              "game_id": "g3",
+              "generation": 1,
+              "handle": 3,
+              "token": 4,
+              "request_id": "w3:15"
+            },
+            "wire_id": "nn0.96",
+            "started_ms": 141.231846,
+            "returned_ms": 141.426589,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial12",
+              "worker_id": "w3",
+              "game_id": "g4",
+              "generation": 1,
+              "handle": 4,
+              "token": 4,
+              "request_id": "w3:16"
+            },
+            "wire_id": "nn0.97",
+            "started_ms": 141.231846,
+            "returned_ms": 141.426589,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w3",
+              "game_id": "g1",
+              "generation": 1,
+              "handle": 1,
+              "token": 1,
+              "request_id": "w3:1"
+            },
+            "wire_id": "nn0.98",
+            "started_ms": 205.650829,
+            "returned_ms": 206.344016,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w1",
+              "game_id": "g1",
+              "generation": 1,
+              "handle": 1,
+              "token": 1,
+              "request_id": "w1:1"
+            },
+            "wire_id": "nn0.99",
+            "started_ms": 208.341111,
+            "returned_ms": 209.150978,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w1",
+              "game_id": "g2",
+              "generation": 1,
+              "handle": 2,
+              "token": 1,
+              "request_id": "w1:2"
+            },
+            "wire_id": "nn0.100",
+            "started_ms": 208.341111,
+            "returned_ms": 209.150978,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w1",
+              "game_id": "g3",
+              "generation": 1,
+              "handle": 3,
+              "token": 1,
+              "request_id": "w1:3"
+            },
+            "wire_id": "nn0.101",
+            "started_ms": 208.341111,
+            "returned_ms": 209.150978,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w1",
+              "game_id": "g4",
+              "generation": 1,
+              "handle": 4,
+              "token": 1,
+              "request_id": "w1:4"
+            },
+            "wire_id": "nn0.102",
+            "started_ms": 208.341111,
+            "returned_ms": 209.150978,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w1",
+              "game_id": "g5",
+              "generation": 1,
+              "handle": 5,
+              "token": 1,
+              "request_id": "w1:5"
+            },
+            "wire_id": "nn0.103",
+            "started_ms": 208.341111,
+            "returned_ms": 209.150978,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w1",
+              "game_id": "g6",
+              "generation": 1,
+              "handle": 6,
+              "token": 1,
+              "request_id": "w1:6"
+            },
+            "wire_id": "nn0.104",
+            "started_ms": 208.341111,
+            "returned_ms": 209.150978,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w1",
+              "game_id": "g7",
+              "generation": 1,
+              "handle": 7,
+              "token": 1,
+              "request_id": "w1:7"
+            },
+            "wire_id": "nn0.105",
+            "started_ms": 208.341111,
+            "returned_ms": 209.150978,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w1",
+              "game_id": "g8",
+              "generation": 1,
+              "handle": 8,
+              "token": 1,
+              "request_id": "w1:8"
+            },
+            "wire_id": "nn0.106",
+            "started_ms": 208.341111,
+            "returned_ms": 209.150978,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w2",
+              "game_id": "g1",
+              "generation": 1,
+              "handle": 1,
+              "token": 1,
+              "request_id": "w2:1"
+            },
+            "wire_id": "nn0.107",
+            "started_ms": 209.618937,
+            "returned_ms": 210.4759,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w3",
+              "game_id": "g2",
+              "generation": 1,
+              "handle": 2,
+              "token": 1,
+              "request_id": "w3:2"
+            },
+            "wire_id": "nn0.108",
+            "started_ms": 209.618937,
+            "returned_ms": 210.4759,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w3",
+              "game_id": "g3",
+              "generation": 1,
+              "handle": 3,
+              "token": 1,
+              "request_id": "w3:3"
+            },
+            "wire_id": "nn0.109",
+            "started_ms": 209.618937,
+            "returned_ms": 210.4759,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w3",
+              "game_id": "g4",
+              "generation": 1,
+              "handle": 4,
+              "token": 1,
+              "request_id": "w3:4"
+            },
+            "wire_id": "nn0.110",
+            "started_ms": 210.984801,
+            "returned_ms": 211.522429,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w3",
+              "game_id": "g5",
+              "generation": 1,
+              "handle": 5,
+              "token": 1,
+              "request_id": "w3:5"
+            },
+            "wire_id": "nn0.111",
+            "started_ms": 210.984801,
+            "returned_ms": 211.522429,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w3",
+              "game_id": "g6",
+              "generation": 1,
+              "handle": 6,
+              "token": 1,
+              "request_id": "w3:6"
+            },
+            "wire_id": "nn0.112",
+            "started_ms": 210.984801,
+            "returned_ms": 211.522429,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w3",
+              "game_id": "g7",
+              "generation": 1,
+              "handle": 7,
+              "token": 1,
+              "request_id": "w3:7"
+            },
+            "wire_id": "nn0.113",
+            "started_ms": 210.984801,
+            "returned_ms": 211.522429,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w3",
+              "game_id": "g8",
+              "generation": 1,
+              "handle": 8,
+              "token": 1,
+              "request_id": "w3:8"
+            },
+            "wire_id": "nn0.114",
+            "started_ms": 210.984801,
+            "returned_ms": 211.522429,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w3",
+              "game_id": "g1",
+              "generation": 1,
+              "handle": 1,
+              "token": 2,
+              "request_id": "w3:9"
+            },
+            "wire_id": "nn0.115",
+            "started_ms": 210.984801,
+            "returned_ms": 211.522429,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w2",
+              "game_id": "g2",
+              "generation": 1,
+              "handle": 2,
+              "token": 1,
+              "request_id": "w2:2"
+            },
+            "wire_id": "nn0.116",
+            "started_ms": 210.984801,
+            "returned_ms": 211.522429,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w2",
+              "game_id": "g3",
+              "generation": 1,
+              "handle": 3,
+              "token": 1,
+              "request_id": "w2:3"
+            },
+            "wire_id": "nn0.117",
+            "started_ms": 210.984801,
+            "returned_ms": 211.522429,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w2",
+              "game_id": "g4",
+              "generation": 1,
+              "handle": 4,
+              "token": 1,
+              "request_id": "w2:4"
+            },
+            "wire_id": "nn0.118",
+            "started_ms": 213.146288,
+            "returned_ms": 213.969546,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w2",
+              "game_id": "g5",
+              "generation": 1,
+              "handle": 5,
+              "token": 1,
+              "request_id": "w2:5"
+            },
+            "wire_id": "nn0.119",
+            "started_ms": 213.146288,
+            "returned_ms": 213.969546,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w2",
+              "game_id": "g6",
+              "generation": 1,
+              "handle": 6,
+              "token": 1,
+              "request_id": "w2:6"
+            },
+            "wire_id": "nn0.120",
+            "started_ms": 213.146288,
+            "returned_ms": 213.969546,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w2",
+              "game_id": "g7",
+              "generation": 1,
+              "handle": 7,
+              "token": 1,
+              "request_id": "w2:7"
+            },
+            "wire_id": "nn0.121",
+            "started_ms": 213.146288,
+            "returned_ms": 213.969546,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w2",
+              "game_id": "g8",
+              "generation": 1,
+              "handle": 8,
+              "token": 1,
+              "request_id": "w2:8"
+            },
+            "wire_id": "nn0.122",
+            "started_ms": 213.146288,
+            "returned_ms": 213.969546,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w2",
+              "game_id": "g1",
+              "generation": 1,
+              "handle": 1,
+              "token": 2,
+              "request_id": "w2:9"
+            },
+            "wire_id": "nn0.123",
+            "started_ms": 213.146288,
+            "returned_ms": 213.969546,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w2",
+              "game_id": "g2",
+              "generation": 1,
+              "handle": 2,
+              "token": 2,
+              "request_id": "w2:10"
+            },
+            "wire_id": "nn0.124",
+            "started_ms": 213.146288,
+            "returned_ms": 213.969546,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w2",
+              "game_id": "g3",
+              "generation": 1,
+              "handle": 3,
+              "token": 2,
+              "request_id": "w2:11"
+            },
+            "wire_id": "nn0.125",
+            "started_ms": 213.146288,
+            "returned_ms": 213.969546,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w3",
+              "game_id": "g2",
+              "generation": 1,
+              "handle": 2,
+              "token": 2,
+              "request_id": "w3:10"
+            },
+            "wire_id": "nn0.126",
+            "started_ms": 213.978324,
+            "returned_ms": 214.294185,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w3",
+              "game_id": "g3",
+              "generation": 1,
+              "handle": 3,
+              "token": 2,
+              "request_id": "w3:11"
+            },
+            "wire_id": "nn0.127",
+            "started_ms": 213.978324,
+            "returned_ms": 214.294185,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w3",
+              "game_id": "g4",
+              "generation": 1,
+              "handle": 4,
+              "token": 2,
+              "request_id": "w3:12"
+            },
+            "wire_id": "nn0.128",
+            "started_ms": 213.978324,
+            "returned_ms": 214.294185,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w3",
+              "game_id": "g5",
+              "generation": 1,
+              "handle": 5,
+              "token": 2,
+              "request_id": "w3:13"
+            },
+            "wire_id": "nn0.129",
+            "started_ms": 213.978324,
+            "returned_ms": 214.294185,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w3",
+              "game_id": "g6",
+              "generation": 1,
+              "handle": 6,
+              "token": 2,
+              "request_id": "w3:14"
+            },
+            "wire_id": "nn0.130",
+            "started_ms": 213.978324,
+            "returned_ms": 214.294185,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w3",
+              "game_id": "g7",
+              "generation": 1,
+              "handle": 7,
+              "token": 2,
+              "request_id": "w3:15"
+            },
+            "wire_id": "nn0.131",
+            "started_ms": 213.978324,
+            "returned_ms": 214.294185,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w3",
+              "game_id": "g8",
+              "generation": 1,
+              "handle": 8,
+              "token": 2,
+              "request_id": "w3:16"
+            },
+            "wire_id": "nn0.132",
+            "started_ms": 213.978324,
+            "returned_ms": 214.294185,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w1",
+              "game_id": "g1",
+              "generation": 1,
+              "handle": 1,
+              "token": 2,
+              "request_id": "w1:9"
+            },
+            "wire_id": "nn0.133",
+            "started_ms": 213.978324,
+            "returned_ms": 214.294185,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w1",
+              "game_id": "g2",
+              "generation": 1,
+              "handle": 2,
+              "token": 2,
+              "request_id": "w1:10"
+            },
+            "wire_id": "nn0.134",
+            "started_ms": 214.303583,
+            "returned_ms": 215.394117,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w1",
+              "game_id": "g3",
+              "generation": 1,
+              "handle": 3,
+              "token": 2,
+              "request_id": "w1:11"
+            },
+            "wire_id": "nn0.135",
+            "started_ms": 214.303583,
+            "returned_ms": 215.394117,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w1",
+              "game_id": "g4",
+              "generation": 1,
+              "handle": 4,
+              "token": 2,
+              "request_id": "w1:12"
+            },
+            "wire_id": "nn0.136",
+            "started_ms": 214.303583,
+            "returned_ms": 215.394117,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w1",
+              "game_id": "g5",
+              "generation": 1,
+              "handle": 5,
+              "token": 2,
+              "request_id": "w1:13"
+            },
+            "wire_id": "nn0.137",
+            "started_ms": 214.303583,
+            "returned_ms": 215.394117,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w1",
+              "game_id": "g6",
+              "generation": 1,
+              "handle": 6,
+              "token": 2,
+              "request_id": "w1:14"
+            },
+            "wire_id": "nn0.138",
+            "started_ms": 214.303583,
+            "returned_ms": 215.394117,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w1",
+              "game_id": "g7",
+              "generation": 1,
+              "handle": 7,
+              "token": 2,
+              "request_id": "w1:15"
+            },
+            "wire_id": "nn0.139",
+            "started_ms": 214.303583,
+            "returned_ms": 215.394117,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w1",
+              "game_id": "g8",
+              "generation": 1,
+              "handle": 8,
+              "token": 2,
+              "request_id": "w1:16"
+            },
+            "wire_id": "nn0.140",
+            "started_ms": 214.303583,
+            "returned_ms": 215.394117,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w3",
+              "game_id": "g1",
+              "generation": 1,
+              "handle": 1,
+              "token": 3,
+              "request_id": "w3:17"
+            },
+            "wire_id": "nn0.141",
+            "started_ms": 214.303583,
+            "returned_ms": 215.394117,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w3",
+              "game_id": "g2",
+              "generation": 1,
+              "handle": 2,
+              "token": 3,
+              "request_id": "w3:18"
+            },
+            "wire_id": "nn0.142",
+            "started_ms": 215.597043,
+            "returned_ms": 217.55268,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w3",
+              "game_id": "g3",
+              "generation": 1,
+              "handle": 3,
+              "token": 3,
+              "request_id": "w3:19"
+            },
+            "wire_id": "nn0.143",
+            "started_ms": 215.597043,
+            "returned_ms": 217.55268,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w3",
+              "game_id": "g4",
+              "generation": 1,
+              "handle": 4,
+              "token": 3,
+              "request_id": "w3:20"
+            },
+            "wire_id": "nn0.144",
+            "started_ms": 215.597043,
+            "returned_ms": 217.55268,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w3",
+              "game_id": "g5",
+              "generation": 1,
+              "handle": 5,
+              "token": 3,
+              "request_id": "w3:21"
+            },
+            "wire_id": "nn0.145",
+            "started_ms": 215.597043,
+            "returned_ms": 217.55268,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w3",
+              "game_id": "g6",
+              "generation": 1,
+              "handle": 6,
+              "token": 3,
+              "request_id": "w3:22"
+            },
+            "wire_id": "nn0.146",
+            "started_ms": 215.597043,
+            "returned_ms": 217.55268,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w3",
+              "game_id": "g7",
+              "generation": 1,
+              "handle": 7,
+              "token": 3,
+              "request_id": "w3:23"
+            },
+            "wire_id": "nn0.147",
+            "started_ms": 215.597043,
+            "returned_ms": 217.55268,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w3",
+              "game_id": "g8",
+              "generation": 1,
+              "handle": 8,
+              "token": 3,
+              "request_id": "w3:24"
+            },
+            "wire_id": "nn0.148",
+            "started_ms": 215.597043,
+            "returned_ms": 217.55268,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w2",
+              "game_id": "g4",
+              "generation": 1,
+              "handle": 4,
+              "token": 2,
+              "request_id": "w2:12"
+            },
+            "wire_id": "nn0.149",
+            "started_ms": 215.597043,
+            "returned_ms": 217.55268,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w2",
+              "game_id": "g5",
+              "generation": 1,
+              "handle": 5,
+              "token": 2,
+              "request_id": "w2:13"
+            },
+            "wire_id": "nn0.150",
+            "started_ms": 217.564353,
+            "returned_ms": 218.005446,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w2",
+              "game_id": "g6",
+              "generation": 1,
+              "handle": 6,
+              "token": 2,
+              "request_id": "w2:14"
+            },
+            "wire_id": "nn0.151",
+            "started_ms": 217.564353,
+            "returned_ms": 218.005446,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w2",
+              "game_id": "g7",
+              "generation": 1,
+              "handle": 7,
+              "token": 2,
+              "request_id": "w2:15"
+            },
+            "wire_id": "nn0.152",
+            "started_ms": 217.564353,
+            "returned_ms": 218.005446,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w2",
+              "game_id": "g8",
+              "generation": 1,
+              "handle": 8,
+              "token": 2,
+              "request_id": "w2:16"
+            },
+            "wire_id": "nn0.153",
+            "started_ms": 217.564353,
+            "returned_ms": 218.005446,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w2",
+              "game_id": "g1",
+              "generation": 1,
+              "handle": 1,
+              "token": 3,
+              "request_id": "w2:17"
+            },
+            "wire_id": "nn0.154",
+            "started_ms": 217.564353,
+            "returned_ms": 218.005446,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w2",
+              "game_id": "g2",
+              "generation": 1,
+              "handle": 2,
+              "token": 3,
+              "request_id": "w2:18"
+            },
+            "wire_id": "nn0.155",
+            "started_ms": 217.564353,
+            "returned_ms": 218.005446,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w2",
+              "game_id": "g3",
+              "generation": 1,
+              "handle": 3,
+              "token": 3,
+              "request_id": "w2:19"
+            },
+            "wire_id": "nn0.156",
+            "started_ms": 217.564353,
+            "returned_ms": 218.005446,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w1",
+              "game_id": "g1",
+              "generation": 1,
+              "handle": 1,
+              "token": 3,
+              "request_id": "w1:17"
+            },
+            "wire_id": "nn0.157",
+            "started_ms": 217.564353,
+            "returned_ms": 218.005446,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w1",
+              "game_id": "g2",
+              "generation": 1,
+              "handle": 2,
+              "token": 3,
+              "request_id": "w1:18"
+            },
+            "wire_id": "nn0.158",
+            "started_ms": 218.015445,
+            "returned_ms": 219.461408,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w1",
+              "game_id": "g3",
+              "generation": 1,
+              "handle": 3,
+              "token": 3,
+              "request_id": "w1:19"
+            },
+            "wire_id": "nn0.159",
+            "started_ms": 218.015445,
+            "returned_ms": 219.461408,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w1",
+              "game_id": "g4",
+              "generation": 1,
+              "handle": 4,
+              "token": 3,
+              "request_id": "w1:20"
+            },
+            "wire_id": "nn0.160",
+            "started_ms": 218.015445,
+            "returned_ms": 219.461408,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w1",
+              "game_id": "g5",
+              "generation": 1,
+              "handle": 5,
+              "token": 3,
+              "request_id": "w1:21"
+            },
+            "wire_id": "nn0.161",
+            "started_ms": 218.015445,
+            "returned_ms": 219.461408,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w1",
+              "game_id": "g6",
+              "generation": 1,
+              "handle": 6,
+              "token": 3,
+              "request_id": "w1:22"
+            },
+            "wire_id": "nn0.162",
+            "started_ms": 218.015445,
+            "returned_ms": 219.461408,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w1",
+              "game_id": "g7",
+              "generation": 1,
+              "handle": 7,
+              "token": 3,
+              "request_id": "w1:23"
+            },
+            "wire_id": "nn0.163",
+            "started_ms": 218.015445,
+            "returned_ms": 219.461408,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w1",
+              "game_id": "g8",
+              "generation": 1,
+              "handle": 8,
+              "token": 3,
+              "request_id": "w1:24"
+            },
+            "wire_id": "nn0.164",
+            "started_ms": 218.015445,
+            "returned_ms": 219.461408,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w3",
+              "game_id": "g1",
+              "generation": 1,
+              "handle": 1,
+              "token": 4,
+              "request_id": "w3:25"
+            },
+            "wire_id": "nn0.165",
+            "started_ms": 218.015445,
+            "returned_ms": 219.461408,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w1",
+              "game_id": "g1",
+              "generation": 1,
+              "handle": 1,
+              "token": 4,
+              "request_id": "w1:25"
+            },
+            "wire_id": "nn0.166",
+            "started_ms": 219.613368,
+            "returned_ms": 221.011565,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w3",
+              "game_id": "g2",
+              "generation": 1,
+              "handle": 2,
+              "token": 4,
+              "request_id": "w3:26"
+            },
+            "wire_id": "nn0.167",
+            "started_ms": 219.613368,
+            "returned_ms": 221.011565,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w3",
+              "game_id": "g3",
+              "generation": 1,
+              "handle": 3,
+              "token": 4,
+              "request_id": "w3:27"
+            },
+            "wire_id": "nn0.168",
+            "started_ms": 219.613368,
+            "returned_ms": 221.011565,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w3",
+              "game_id": "g4",
+              "generation": 1,
+              "handle": 4,
+              "token": 4,
+              "request_id": "w3:28"
+            },
+            "wire_id": "nn0.169",
+            "started_ms": 219.613368,
+            "returned_ms": 221.011565,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w3",
+              "game_id": "g5",
+              "generation": 1,
+              "handle": 5,
+              "token": 4,
+              "request_id": "w3:29"
+            },
+            "wire_id": "nn0.170",
+            "started_ms": 219.613368,
+            "returned_ms": 221.011565,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w3",
+              "game_id": "g6",
+              "generation": 1,
+              "handle": 6,
+              "token": 4,
+              "request_id": "w3:30"
+            },
+            "wire_id": "nn0.171",
+            "started_ms": 219.613368,
+            "returned_ms": 221.011565,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w3",
+              "game_id": "g7",
+              "generation": 1,
+              "handle": 7,
+              "token": 4,
+              "request_id": "w3:31"
+            },
+            "wire_id": "nn0.172",
+            "started_ms": 219.613368,
+            "returned_ms": 221.011565,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w3",
+              "game_id": "g8",
+              "generation": 1,
+              "handle": 8,
+              "token": 4,
+              "request_id": "w3:32"
+            },
+            "wire_id": "nn0.173",
+            "started_ms": 219.613368,
+            "returned_ms": 221.011565,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w2",
+              "game_id": "g4",
+              "generation": 1,
+              "handle": 4,
+              "token": 3,
+              "request_id": "w2:20"
+            },
+            "wire_id": "nn0.174",
+            "started_ms": 221.020326,
+            "returned_ms": 221.300846,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w2",
+              "game_id": "g5",
+              "generation": 1,
+              "handle": 5,
+              "token": 3,
+              "request_id": "w2:21"
+            },
+            "wire_id": "nn0.175",
+            "started_ms": 221.020326,
+            "returned_ms": 221.300846,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w2",
+              "game_id": "g6",
+              "generation": 1,
+              "handle": 6,
+              "token": 3,
+              "request_id": "w2:22"
+            },
+            "wire_id": "nn0.176",
+            "started_ms": 221.020326,
+            "returned_ms": 221.300846,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w2",
+              "game_id": "g7",
+              "generation": 1,
+              "handle": 7,
+              "token": 3,
+              "request_id": "w2:23"
+            },
+            "wire_id": "nn0.177",
+            "started_ms": 221.020326,
+            "returned_ms": 221.300846,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w2",
+              "game_id": "g8",
+              "generation": 1,
+              "handle": 8,
+              "token": 3,
+              "request_id": "w2:24"
+            },
+            "wire_id": "nn0.178",
+            "started_ms": 221.020326,
+            "returned_ms": 221.300846,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w2",
+              "game_id": "g1",
+              "generation": 1,
+              "handle": 1,
+              "token": 4,
+              "request_id": "w2:25"
+            },
+            "wire_id": "nn0.179",
+            "started_ms": 221.020326,
+            "returned_ms": 221.300846,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w2",
+              "game_id": "g2",
+              "generation": 1,
+              "handle": 2,
+              "token": 4,
+              "request_id": "w2:26"
+            },
+            "wire_id": "nn0.180",
+            "started_ms": 221.020326,
+            "returned_ms": 221.300846,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w2",
+              "game_id": "g3",
+              "generation": 1,
+              "handle": 3,
+              "token": 4,
+              "request_id": "w2:27"
+            },
+            "wire_id": "nn0.181",
+            "started_ms": 221.020326,
+            "returned_ms": 221.300846,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w1",
+              "game_id": "g2",
+              "generation": 1,
+              "handle": 2,
+              "token": 4,
+              "request_id": "w1:26"
+            },
+            "wire_id": "nn0.182",
+            "started_ms": 221.74977,
+            "returned_ms": 224.592036,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w1",
+              "game_id": "g3",
+              "generation": 1,
+              "handle": 3,
+              "token": 4,
+              "request_id": "w1:27"
+            },
+            "wire_id": "nn0.183",
+            "started_ms": 221.74977,
+            "returned_ms": 224.592036,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w1",
+              "game_id": "g4",
+              "generation": 1,
+              "handle": 4,
+              "token": 4,
+              "request_id": "w1:28"
+            },
+            "wire_id": "nn0.184",
+            "started_ms": 221.74977,
+            "returned_ms": 224.592036,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w1",
+              "game_id": "g5",
+              "generation": 1,
+              "handle": 5,
+              "token": 4,
+              "request_id": "w1:29"
+            },
+            "wire_id": "nn0.185",
+            "started_ms": 221.74977,
+            "returned_ms": 224.592036,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w1",
+              "game_id": "g6",
+              "generation": 1,
+              "handle": 6,
+              "token": 4,
+              "request_id": "w1:30"
+            },
+            "wire_id": "nn0.186",
+            "started_ms": 221.74977,
+            "returned_ms": 224.592036,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w1",
+              "game_id": "g7",
+              "generation": 1,
+              "handle": 7,
+              "token": 4,
+              "request_id": "w1:31"
+            },
+            "wire_id": "nn0.187",
+            "started_ms": 221.74977,
+            "returned_ms": 224.592036,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w1",
+              "game_id": "g8",
+              "generation": 1,
+              "handle": 8,
+              "token": 4,
+              "request_id": "w1:32"
+            },
+            "wire_id": "nn0.188",
+            "started_ms": 221.74977,
+            "returned_ms": 224.592036,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w2",
+              "game_id": "g4",
+              "generation": 1,
+              "handle": 4,
+              "token": 4,
+              "request_id": "w2:28"
+            },
+            "wire_id": "nn0.189",
+            "started_ms": 226.019292,
+            "returned_ms": 226.39311,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w2",
+              "game_id": "g5",
+              "generation": 1,
+              "handle": 5,
+              "token": 4,
+              "request_id": "w2:29"
+            },
+            "wire_id": "nn0.190",
+            "started_ms": 226.019292,
+            "returned_ms": 226.39311,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w2",
+              "game_id": "g6",
+              "generation": 1,
+              "handle": 6,
+              "token": 4,
+              "request_id": "w2:30"
+            },
+            "wire_id": "nn0.191",
+            "started_ms": 226.019292,
+            "returned_ms": 226.39311,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w2",
+              "game_id": "g7",
+              "generation": 1,
+              "handle": 7,
+              "token": 4,
+              "request_id": "w2:31"
+            },
+            "wire_id": "nn0.192",
+            "started_ms": 226.019292,
+            "returned_ms": 226.39311,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native185-artificial24",
+              "worker_id": "w2",
+              "game_id": "g8",
+              "generation": 1,
+              "handle": 8,
+              "token": 4,
+              "request_id": "w2:32"
+            },
+            "wire_id": "nn0.193",
+            "started_ms": 226.019292,
+            "returned_ms": 226.39311,
+            "discarded": false
+          }
+        ],
+        "max_pending_games": 24
+      },
+      "zero": {
+        "pending_games": 0,
+        "inflight_batches": 0,
+        "queued": 0,
+        "timer": false,
+        "started": 193,
+        "returned": 193
+      },
+      "provider": {
+        "samples": 193,
+        "cap": 384,
+        "mock": true,
+        "model_sessions": 0
+      },
+      "exit": {
+        "code": 0,
+        "signal": null,
+        "pid": 3495727
+      }
+    },
+    {
+      "stats": {
+        "started": 1,
+        "returned": 1,
+        "resumed": 0,
+        "discarded": 1,
+        "rejected_queued": 0,
+        "batches": [
+          {
+            "size": 1,
+            "sent_ms": 238.823642,
+            "received_ms": 276.058736,
+            "queue_ms": [
+              3.162333000000018
+            ]
+          }
+        ],
+        "receipts": [
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "cancel",
+              "generation": 1,
+              "handle": 1,
+              "token": 1,
+              "request_id": "w0:1"
+            },
+            "wire_id": "nn0.1",
+            "started_ms": 238.823642,
+            "returned_ms": 276.058736,
+            "discarded": true
+          }
+        ],
+        "max_pending_games": 1
+      },
+      "zero": {
+        "pending_games": 0,
+        "inflight_batches": 0,
+        "queued": 0,
+        "timer": false,
+        "started": 1,
+        "returned": 1
+      },
+      "provider": {
+        "samples": 1,
+        "cap": 384,
+        "mock": true,
+        "model_sessions": 0
+      },
+      "exit": {
+        "code": 0,
+        "signal": null,
+        "pid": 3495777
+      }
+    },
+    {
+      "stats": {
+        "started": 0,
+        "returned": 0,
+        "resumed": 0,
+        "discarded": 0,
+        "rejected_queued": 1,
+        "batches": [],
+        "receipts": [],
+        "max_pending_games": 1
+      },
+      "zero": {
+        "pending_games": 0,
+        "inflight_batches": 0,
+        "queued": 0,
+        "timer": false,
+        "started": 0,
+        "returned": 0
+      },
+      "provider": {
+        "samples": 0,
+        "cap": 384,
+        "mock": true,
+        "model_sessions": 0
+      },
+      "exit": {
+        "code": 0,
+        "signal": null,
+        "pid": 3495784
+      }
+    },
+    {
+      "stats": {
+        "started": 8,
+        "returned": 8,
+        "resumed": 0,
+        "discarded": 8,
+        "rejected_queued": 4,
+        "batches": [
+          {
+            "size": 8,
+            "sent_ms": 312.760624,
+            "received_ms": 343.079015,
+            "queue_ms": [
+              0.08383700000001681,
+              0.049406000000033146,
+              0.04153400000001284,
+              0.035082999999985987,
+              0.026351000000033764,
+              0.019390999999984615,
+              0.013353999999992539,
+              0.00690300000002253
+            ]
+          }
+        ],
+        "receipts": [
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "stop0",
+              "generation": 1,
+              "handle": 1,
+              "token": 1,
+              "request_id": "r1"
+            },
+            "wire_id": "nn0.1",
+            "started_ms": 312.760624,
+            "returned_ms": 343.079015,
+            "discarded": true
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "stop1",
+              "generation": 1,
+              "handle": 2,
+              "token": 2,
+              "request_id": "r2"
+            },
+            "wire_id": "nn0.2",
+            "started_ms": 312.760624,
+            "returned_ms": 343.079015,
+            "discarded": true
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "stop2",
+              "generation": 1,
+              "handle": 3,
+              "token": 3,
+              "request_id": "r3"
+            },
+            "wire_id": "nn0.3",
+            "started_ms": 312.760624,
+            "returned_ms": 343.079015,
+            "discarded": true
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "stop3",
+              "generation": 1,
+              "handle": 4,
+              "token": 4,
+              "request_id": "r4"
+            },
+            "wire_id": "nn0.4",
+            "started_ms": 312.760624,
+            "returned_ms": 343.079015,
+            "discarded": true
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "stop4",
+              "generation": 1,
+              "handle": 5,
+              "token": 5,
+              "request_id": "r5"
+            },
+            "wire_id": "nn0.5",
+            "started_ms": 312.760624,
+            "returned_ms": 343.079015,
+            "discarded": true
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "stop5",
+              "generation": 1,
+              "handle": 6,
+              "token": 6,
+              "request_id": "r6"
+            },
+            "wire_id": "nn0.6",
+            "started_ms": 312.760624,
+            "returned_ms": 343.079015,
+            "discarded": true
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "stop6",
+              "generation": 1,
+              "handle": 7,
+              "token": 7,
+              "request_id": "r7"
+            },
+            "wire_id": "nn0.7",
+            "started_ms": 312.760624,
+            "returned_ms": 343.079015,
+            "discarded": true
+          },
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "stop7",
+              "generation": 1,
+              "handle": 8,
+              "token": 8,
+              "request_id": "r8"
+            },
+            "wire_id": "nn0.8",
+            "started_ms": 312.760624,
+            "returned_ms": 343.079015,
+            "discarded": true
+          }
+        ],
+        "max_pending_games": 12
+      },
+      "zero": {
+        "pending_games": 0,
+        "inflight_batches": 0,
+        "queued": 0,
+        "timer": false,
+        "started": 8,
+        "returned": 8
+      },
+      "provider": {
+        "samples": 8,
+        "cap": 384,
+        "mock": true,
+        "model_sessions": 0
+      },
+      "exit": {
+        "code": 0,
+        "signal": null,
+        "pid": 3495791
+      }
+    },
+    {
+      "stats": {
+        "started": 8,
+        "returned": 8,
+        "resumed": 0,
+        "discarded": 0,
+        "rejected_queued": 0,
+        "batches": [],
+        "receipts": [],
+        "max_pending_games": 12
+      },
+      "zero": {
+        "pending_games": 0,
+        "inflight_batches": 0,
+        "queued": 0,
+        "timer": false,
+        "started": 8,
+        "returned": 8
+      },
+      "provider": {
+        "samples": 8,
+        "cap": 384,
+        "mock": true,
+        "model_sessions": 0
+      },
+      "exit": {
+        "code": 0,
+        "signal": null,
+        "pid": 3495798
+      }
+    },
+    {
+      "stats": {
+        "started": 8,
+        "returned": 8,
+        "resumed": 0,
+        "discarded": 0,
+        "rejected_queued": 0,
+        "batches": [],
+        "receipts": [],
+        "max_pending_games": 12
+      },
+      "zero": {
+        "pending_games": 0,
+        "inflight_batches": 0,
+        "queued": 0,
+        "timer": false,
+        "started": 8,
+        "returned": 8
+      },
+      "provider": {
+        "samples": 8,
+        "cap": 384,
+        "mock": true,
+        "model_sessions": 0
+      },
+      "exit": {
+        "code": 0,
+        "signal": null,
+        "pid": 3495805
+      }
+    },
+    {
+      "stats": {
+        "started": 8,
+        "returned": 0,
+        "resumed": 0,
+        "discarded": 0,
+        "rejected_queued": 0,
+        "batches": [],
+        "receipts": [],
+        "max_pending_games": 12
+      },
+      "zero": {
+        "pending_games": 0,
+        "inflight_batches": 0,
+        "queued": 0,
+        "timer": false,
+        "started": 8,
+        "returned": 0
+      },
+      "provider": {
+        "samples": 8,
+        "cap": 384,
+        "mock": true,
+        "model_sessions": 0
+      },
+      "exit": {
+        "code": 0,
+        "signal": null,
+        "pid": 3495812
+      }
+    },
+    {
+      "stats": {
+        "started": 8,
+        "returned": 8,
+        "resumed": 0,
+        "discarded": 0,
+        "rejected_queued": 0,
+        "batches": [],
+        "receipts": [],
+        "max_pending_games": 12
+      },
+      "zero": {
+        "pending_games": 0,
+        "inflight_batches": 0,
+        "queued": 0,
+        "timer": false,
+        "started": 8,
+        "returned": 8
+      },
+      "provider": {
+        "samples": 8,
+        "cap": 384,
+        "mock": true,
+        "model_sessions": 0
+      },
+      "exit": {
+        "code": 0,
+        "signal": null,
+        "pid": 3495819
+      }
+    },
+    {
+      "stats": {
+        "started": 1,
+        "returned": 1,
+        "resumed": 1,
+        "discarded": 0,
+        "rejected_queued": 0,
+        "batches": [
+          {
+            "size": 1,
+            "sent_ms": 453.761908,
+            "received_ms": 472.463394,
+            "queue_ms": [
+              1.1100260000000048
+            ]
+          }
+        ],
+        "receipts": [
+          {
+            "identity": {
+              "run_id": "native185-mock",
+              "worker_id": "w0",
+              "game_id": "K1",
+              "generation": 1,
+              "handle": 1,
+              "token": 1,
+              "request_id": "w0:1"
+            },
+            "wire_id": "nn0.1",
+            "started_ms": 453.761908,
+            "returned_ms": 472.463394,
+            "discarded": false
+          }
+        ],
+        "max_pending_games": 1
+      },
+      "zero": {
+        "pending_games": 0,
+        "inflight_batches": 0,
+        "queued": 0,
+        "timer": false,
+        "started": 1,
+        "returned": 1
+      },
+      "provider": {
+        "samples": 1,
+        "cap": 384,
+        "mock": true,
+        "model_sessions": 0
+      },
+      "exit": {
+        "code": 0,
+        "signal": null,
+        "pid": 3495826
+      }
+    }
+  ],
+  "owned_child_PIDs": [
+    3495727,
+    3495735,
+    3495736,
+    3495737,
+    3495756,
+    3495757,
+    3495758,
+    3495777,
+    3495784,
+    3495791,
+    3495798,
+    3495805,
+    3495812,
+    3495819,
+    3495826
+  ],
+  "wall_seconds": 0.454469247,
+  "teacher_rows_for_training": 0
+}

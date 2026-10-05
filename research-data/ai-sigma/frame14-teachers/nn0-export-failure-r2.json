@@ -1,0 +1,13 @@
+{
+  "UTC": "2026-10-04T00:04:46.324460+00:00",
+  "type": "NN0_EXPORT_NODE_HEAP_OOM",
+  "command": "timeout40 taskset-c2 node --max-old-space-size=192 tools/ai-sigma-frame14-teachers/export.cjs",
+  "exit": "Aborted/OOM before final summary written",
+  "source_scope": "science-source-stop.json source_hashes and373013bb/future helper byte version",
+  "child_PID": 3794116,
+  "NN": 0,
+  "model_forward": 0,
+  "scientific_jobs_success_unchanged": 6,
+  "connect_failure": "ALL_JOB_STATUS_NOT_RESOLVED from old partial summary; no canonical commands/forward ran; empty final-qf1-v1 directory retained",
+  "repair": "same immutable raw export with larger bounded helper heap after RSS/storage admission; runtimeworker192 cap unchanged, no science retry"
+}

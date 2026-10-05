@@ -1,0 +1,214 @@
+{
+  "issue": "quoridor-4lc.142",
+  "scientific_run": "p142-oracle-r2",
+  "tested_source": "3866532",
+  "preregister_SHA256": "01fd45fbbb220ae59ce1fd1fa72a342fba544c283ce3c762bdbafaffce92ce9a",
+  "results": [
+    {
+      "id": "P1-race",
+      "attempts": 1,
+      "all_attempt_errors": [
+        null
+      ],
+      "adopted_depth": 32,
+      "pawns": [
+        [
+          4,
+          6
+        ],
+        [
+          3,
+          3
+        ]
+      ],
+      "side": 1,
+      "key": "4,6|3,3|0||0,0;0,2;0,4;0,6;1,0;1,2;1,4;1,6;2,0;2,2;2,4;2,6;6,0;6,2;6,4;6,6;7,0;7,2;7,4;7,6",
+      "walls": [
+        0,
+        0
+      ],
+      "prefix_length": 32,
+      "features_count": 648,
+      "labels": {
+        "root_player": 1,
+        "interval": [
+          1,
+          1
+        ],
+        "actions": [
+          {
+            "action": 0,
+            "interval": [
+              1,
+              1
+            ],
+            "proof_node": 1
+          },
+          {
+            "action": 1,
+            "interval": [
+              -1,
+              -1
+            ],
+            "proof_node": 472
+          },
+          {
+            "action": 2,
+            "interval": [
+              1,
+              1
+            ],
+            "proof_node": 1196
+          },
+          {
+            "action": 3,
+            "interval": [
+              1,
+              1
+            ],
+            "proof_node": 1656
+          }
+        ],
+        "nodes": 2352,
+        "proof_rows": 2352,
+        "terminalCount": {
+          "win": 43,
+          "loss": 47,
+          "draw": 0
+        },
+        "maxPly": 6,
+        "stops": {
+          "depth": 1593
+        },
+        "wall_ms": 98.59999999403954,
+        "limits": {
+          "depth": 6,
+          "nodes": 20000,
+          "ms": 20000
+        },
+        "cache": false,
+        "pruning": false,
+        "immediate_goals": [],
+        "classification": "nontrivial-certified-distinct",
+        "all_root_actions_recorded": true
+      },
+      "certificate_check": {
+        "pass": true,
+        "applied": 2352,
+        "terminal": 90,
+        "depthUnknown": 1593,
+        "root_action_count": 4,
+        "rule_implementation_shared": true,
+        "independent_aggregation_algorithm": true
+      },
+      "generated_sha256": "55362d6c1165d55269faa778052f45e546587d26f3ec0c85331721711e7aeb76",
+      "full_label_sha256": "b1eb872ab6e4f78f15bf97cbffee0813d4c7af9bdee1a6005864096eff0c1b3c"
+    },
+    {
+      "id": "P2-corridor",
+      "attempts": 1,
+      "all_attempt_errors": [
+        null
+      ],
+      "adopted_depth": 33,
+      "pawns": [
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          2
+        ]
+      ],
+      "side": 2,
+      "key": "4,5|4,2|1||0,0;0,2;0,4;0,6;1,0;1,2;1,4;1,6;2,0;2,2;2,4;2,6;6,0;6,2;6,4;6,6;7,0;7,2;7,4;7,6",
+      "walls": [
+        0,
+        0
+      ],
+      "prefix_length": 33,
+      "features_count": 648,
+      "labels": {
+        "root_player": 2,
+        "interval": [
+          1,
+          1
+        ],
+        "actions": [
+          {
+            "action": 0,
+            "interval": [
+              -1,
+              -1
+            ],
+            "proof_node": 1
+          },
+          {
+            "action": 1,
+            "interval": [
+              1,
+              1
+            ],
+            "proof_node": 1122
+          },
+          {
+            "action": 2,
+            "interval": [
+              1,
+              1
+            ],
+            "proof_node": 1848
+          },
+          {
+            "action": 3,
+            "interval": [
+              1,
+              1
+            ],
+            "proof_node": 2555
+          }
+        ],
+        "nodes": 3632,
+        "proof_rows": 3632,
+        "terminalCount": {
+          "win": 64,
+          "loss": 48,
+          "draw": 0
+        },
+        "maxPly": 6,
+        "stops": {
+          "depth": 2527
+        },
+        "wall_ms": 61.19999998807907,
+        "limits": {
+          "depth": 6,
+          "nodes": 20000,
+          "ms": 20000
+        },
+        "cache": false,
+        "pruning": false,
+        "immediate_goals": [],
+        "classification": "nontrivial-certified-distinct",
+        "all_root_actions_recorded": true
+      },
+      "certificate_check": {
+        "pass": true,
+        "applied": 3632,
+        "terminal": 112,
+        "depthUnknown": 2527,
+        "root_action_count": 4,
+        "rule_implementation_shared": true,
+        "independent_aggregation_algorithm": true
+      },
+      "generated_sha256": "08fa06a453fe397e726124fbd938437be000015b16968f91d54dcde9afb55b28",
+      "full_label_sha256": "9b95200c3aa8c843596dce37167b3ed59b0b3948c6610cdf13ec2b22325ce169"
+    }
+  ],
+  "all_attempts": 2,
+  "unexecuted_attempt_slots": 6,
+  "NN": 0,
+  "AI_quality_evaluated": false,
+  "no_scientific_repetition": true,
+  "independent_rule_implementation": false
+}

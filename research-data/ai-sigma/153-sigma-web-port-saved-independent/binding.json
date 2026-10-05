@@ -1,0 +1,537 @@
+{
+  "issue": "quoridor-4lc.153",
+  "UTC": "2026-10-03T02:03:31.517837+00:00",
+  "r1_Git": "c706326",
+  "r1_raw_SHA256": "75a09f525d85d2ed3f9ffc09e9a97f7e7ff066964086e9b9858e2a67e5a93bb4",
+  "r2_Git": "b62cde0",
+  "r2_binary_SHA256": "500181795b373f69f6f2214ee1a77e12767e2f342e15a56ab5e27d0a0453f2c2",
+  "r2_build_start_end": [
+    "2026-10-03T01:39:30.952876+00:00",
+    "2026-10-03T01:39:32.502347+00:00"
+  ],
+  "latest_goal_design_Git_017681c_not_measurement_source": true,
+  "necessary_files": [
+    {
+      "path": "tools/ai-sigma-sigma-web-port/private/Cargo.toml",
+      "measured_Git": "b62cde0",
+      "SHA256": "57e3173114c234ff39b0dd976e913fa142358d8f0eb426ec87e61668344bcade",
+      "current_equal": true
+    },
+    {
+      "path": "tools/ai-sigma-sigma-web-port/private/Cargo.lock",
+      "measured_Git": "b62cde0",
+      "SHA256": "d0568a38ed13c537c3ab96abe3a0585e82258da1a3a5e64ee4ab18df07211b24",
+      "current_equal": true
+    },
+    {
+      "path": "tools/ai-sigma-sigma-web-port/private/src/context.rs",
+      "measured_Git": "b62cde0",
+      "SHA256": "9ba343646347329e1c5a21bacba8032c04e762e80653bce20d55b2518e54114e",
+      "current_equal": true
+    },
+    {
+      "path": "tools/ai-sigma-sigma-web-port/private/src/lib.rs",
+      "measured_Git": "b62cde0",
+      "SHA256": "b554bdfeda920ac40fa70fceb7404562bba3b6c0dd7df09ce21c5b97156af9fc",
+      "current_equal": true
+    },
+    {
+      "route": "/game.js",
+      "source_path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/game.js",
+      "SHA256": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+      "bytes": 27877,
+      "adapted_route_not_original_path_bytes": false,
+      "measured_regenerated_equal": true,
+      "current_adapted_equal": true,
+      "browser_independent_fetchdigest": null
+    },
+    {
+      "route": "/context.js",
+      "source_path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/context.js",
+      "SHA256": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+      "bytes": 2248,
+      "adapted_route_not_original_path_bytes": false,
+      "measured_regenerated_equal": true,
+      "current_adapted_equal": true,
+      "browser_independent_fetchdigest": null
+    },
+    {
+      "route": "/shared-best-action.js",
+      "source_path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-cp-frame/shared-best-action.cjs",
+      "SHA256": "37491ac0e9f2fb20b564fb2699ac58c3dfc35bff84ca888cd39b40036359132a",
+      "bytes": 5444,
+      "adapted_route_not_original_path_bytes": false,
+      "measured_regenerated_equal": true,
+      "current_adapted_equal": true,
+      "browser_independent_fetchdigest": null
+    },
+    {
+      "route": "/numeric-browser.js",
+      "source_path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-cp-frame/numeric-browser.js",
+      "SHA256": "027ff2fbaffc6e3b53925a7205fe2c989d1f49903a4601b6eab0aa49af6e851f",
+      "bytes": 2710,
+      "adapted_route_not_original_path_bytes": false,
+      "measured_regenerated_equal": true,
+      "current_adapted_equal": true,
+      "browser_independent_fetchdigest": null
+    },
+    {
+      "route": "/player-control.js",
+      "source_path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-player-workers/player-control.cjs",
+      "SHA256": "3b87d63253cd93267ccc9419bfddd334a3cbe5cacba4d98da9328109a3f33e5c",
+      "bytes": 1579,
+      "adapted_route_not_original_path_bytes": false,
+      "measured_regenerated_equal": true,
+      "current_adapted_equal": true,
+      "browser_independent_fetchdigest": null
+    },
+    {
+      "route": "/early-page.js",
+      "source_path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-player-workers/player-main.js",
+      "SHA256": "264a2bbb7e9482753000d4e34de78b8e5f8f913acb62976187323cf4c6c66af6",
+      "bytes": 41612,
+      "adapted_route_not_original_path_bytes": true,
+      "measured_regenerated_equal": true,
+      "current_adapted_equal": false,
+      "browser_independent_fetchdigest": null
+    },
+    {
+      "route": "/early-worker.js",
+      "source_path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-player-workers/player-worker.js",
+      "SHA256": "f82e3e1a10572576c0efa2088b00eaf62610cef18e6b71f7d7ebc9c506723d8a",
+      "bytes": 5384,
+      "adapted_route_not_original_path_bytes": true,
+      "measured_regenerated_equal": true,
+      "current_adapted_equal": true,
+      "browser_independent_fetchdigest": null
+    },
+    {
+      "route": "/protocol-worker.js",
+      "source_path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-cp-frame/protocol-worker.js",
+      "SHA256": "5f74daff7279fcf9e3697fe538e280480705e42ba63c88b2a6789efa6d26d77c",
+      "bytes": 627,
+      "adapted_route_not_original_path_bytes": false,
+      "measured_regenerated_equal": true,
+      "current_adapted_equal": true,
+      "browser_independent_fetchdigest": null
+    },
+    {
+      "route": "/player-base.js",
+      "source_path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-player-workers/player-worker.js",
+      "SHA256": "26bdf8f24715dd75ed22b43c15fa4ffc2f3c1c32231971e9f48b6cc21c763212",
+      "bytes": 6118,
+      "adapted_route_not_original_path_bytes": true,
+      "measured_regenerated_equal": true,
+      "current_adapted_equal": true,
+      "browser_independent_fetchdigest": null
+    },
+    {
+      "route": "/snapshot-cache.js",
+      "source_path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/early-cache.cjs",
+      "SHA256": "a547e67cc4cfa6cfce8b40234381b48c9126a7accbee8e121351d822d8cbf8ac",
+      "bytes": 6724,
+      "adapted_route_not_original_path_bytes": true,
+      "measured_regenerated_equal": true,
+      "current_adapted_equal": false,
+      "browser_independent_fetchdigest": null
+    },
+    {
+      "route": "/original-worker.js",
+      "source_path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-tail-transport/early-worker.js",
+      "SHA256": "e566da94469926f7abbdc0816efa7671d5a49f016d6eeb06dd060b7e44f8c577",
+      "bytes": 12266,
+      "adapted_route_not_original_path_bytes": true,
+      "measured_regenerated_equal": true,
+      "current_adapted_equal": true,
+      "browser_independent_fetchdigest": null
+    },
+    {
+      "route": "/ort/ort.min.js",
+      "source_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/ort.min.js",
+      "SHA256": "95c6f6611837cb50449cb6a0c092145bf493ac64cd0d004033cefc977366e7cb",
+      "bytes": 347787,
+      "adapted_route_not_original_path_bytes": false,
+      "measured_regenerated_equal": true,
+      "current_adapted_equal": true,
+      "browser_independent_fetchdigest": null
+    },
+    {
+      "route": "/candidate-host.js",
+      "source_path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/host.js",
+      "SHA256": "dc6cf3e24774e5e6b52c8cf346090f53f261e58b0c7fda1e6d674c7142983d02",
+      "bytes": 3586,
+      "adapted_route_not_original_path_bytes": false,
+      "measured_regenerated_equal": true,
+      "current_adapted_equal": true,
+      "browser_independent_fetchdigest": null
+    },
+    {
+      "route": "/checkpoint.js",
+      "source_path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-tail-transport/checkpoint.js",
+      "SHA256": "494581d5ce5fc38e7afb753d9ca92e0f49bb71ed516762b7ea48a0c6d89e1119",
+      "bytes": 6228,
+      "adapted_route_not_original_path_bytes": true,
+      "measured_regenerated_equal": true,
+      "current_adapted_equal": true,
+      "browser_independent_fetchdigest": null
+    },
+    {
+      "route": "/reference-core.js",
+      "source_path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/reference-core.js",
+      "SHA256": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05",
+      "bytes": 5206,
+      "adapted_route_not_original_path_bytes": true,
+      "measured_regenerated_equal": true,
+      "current_adapted_equal": true,
+      "browser_independent_fetchdigest": null
+    },
+    {
+      "route": "/reference-control-run.js",
+      "source_path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/reference-control-run.js",
+      "SHA256": "87dbd43b34f23793c36806ad41a09fda723b5f7b7b10745c0df8b055e3039a0c",
+      "bytes": 1056,
+      "adapted_route_not_original_path_bytes": false,
+      "measured_regenerated_equal": true,
+      "current_adapted_equal": true,
+      "browser_independent_fetchdigest": null
+    },
+    {
+      "route": "/b.wasm",
+      "source_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/build/faithful.wasm",
+      "SHA256": "500181795b373f69f6f2214ee1a77e12767e2f342e15a56ab5e27d0a0453f2c2",
+      "bytes": 282867,
+      "adapted_route_not_original_path_bytes": false,
+      "measured_regenerated_equal": true,
+      "current_adapted_equal": true,
+      "browser_independent_fetchdigest": null
+    },
+    {
+      "route": "/model.onnx",
+      "source_path": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/ai-sigma/reference/sigma-pcr250/best.onnx",
+      "SHA256": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+      "bytes": 11663428,
+      "adapted_route_not_original_path_bytes": false,
+      "measured_regenerated_equal": true,
+      "current_adapted_equal": true,
+      "browser_independent_fetchdigest": null
+    },
+    {
+      "route": "/ort/ort-wasm-simd-threaded.jsep.mjs",
+      "source_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/ort-wasm-simd-threaded.jsep.mjs",
+      "SHA256": "b69c8812bf2d8356dd248fef0abb35e22d1f05f9c593ca34d4b942f35ea93592",
+      "bytes": 53602,
+      "adapted_route_not_original_path_bytes": false,
+      "measured_regenerated_equal": true,
+      "current_adapted_equal": true,
+      "browser_independent_fetchdigest": null
+    },
+    {
+      "route": "/ort/ort-wasm-simd-threaded.jsep.wasm",
+      "source_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/ort-wasm-simd-threaded.jsep.wasm",
+      "SHA256": "0663b902fb3937883a34375926bdfe3e1c86cd4c99cbc04c06a7cdf46c78bdde",
+      "bytes": 23914392,
+      "adapted_route_not_original_path_bytes": false,
+      "measured_regenerated_equal": true,
+      "current_adapted_equal": true,
+      "browser_independent_fetchdigest": null
+    }
+  ],
+  "libraries9_patch7": [
+    {
+      "path": "crates/quoridor-core/Cargo.toml",
+      "SHA256": "9e952267d75fd8b1cd51f72916e8fb97869f38d5ba4893a0ecedc297ebb74a27",
+      "current_mtime_UTC": "2026-09-30T19:48:21.992678+00:00",
+      "saved_patch_exact": true,
+      "mtime_before_build": true
+    },
+    {
+      "path": "crates/quoridor-core/src/game.rs",
+      "SHA256": "543995676fb46cc4e80d0fccb650875eb901a4b4d71187788ee09dfbaf01a420",
+      "current_mtime_UTC": "2026-09-30T17:13:16.030390+00:00",
+      "saved_patch_exact": false,
+      "mtime_before_build": true
+    },
+    {
+      "path": "crates/quoridor-core/src/lib.rs",
+      "SHA256": "24dc7084072d14e4f8a8ebd6572df4ddd2722b10b43178c250358f0a9f0befb0",
+      "current_mtime_UTC": "2026-09-30T19:48:21.992771+00:00",
+      "saved_patch_exact": true,
+      "mtime_before_build": true
+    },
+    {
+      "path": "crates/quoridor-core/src/position.rs",
+      "SHA256": "b12e79a99cf3441cf4acebbea1b827dce24b02db6fb2269021964872535e3ab6",
+      "current_mtime_UTC": "2026-09-30T18:51:55.722063+00:00",
+      "saved_patch_exact": true,
+      "mtime_before_build": true
+    },
+    {
+      "path": "crates/quoridor-core/src/profiling.rs",
+      "SHA256": "1e26d96b6d443b4d54261e7e3cb742290f223b7e84ba450e3c2cf261af38255f",
+      "current_mtime_UTC": "2026-09-30T18:21:44.698726+00:00",
+      "saved_patch_exact": false,
+      "mtime_before_build": true
+    },
+    {
+      "path": "crates/quoridor-core/src/research.rs",
+      "SHA256": "5785963dc1bce7828e1d0bb32f5b48623e238aa24c2966f61a9843b6f219f524",
+      "current_mtime_UTC": "2026-09-30T19:52:09.282085+00:00",
+      "saved_patch_exact": true,
+      "mtime_before_build": true
+    },
+    {
+      "path": "crates/quoridor-ai/Cargo.toml",
+      "SHA256": "ffc097c7efb403c7086c30113d11fa6fa8355ef8940884732bbcdbca152f8370",
+      "current_mtime_UTC": "2026-09-30T19:48:21.992821+00:00",
+      "saved_patch_exact": true,
+      "mtime_before_build": true
+    },
+    {
+      "path": "crates/quoridor-ai/src/lib.rs",
+      "SHA256": "5ab5eca5c23814dbaa0162b25e8fe710e58cdb7139c0fa4e3e2f794dc041555a",
+      "current_mtime_UTC": "2026-09-30T20:16:51.040103+00:00",
+      "saved_patch_exact": true,
+      "mtime_before_build": true
+    },
+    {
+      "path": "crates/quoridor-ai/src/research.rs",
+      "SHA256": "c1a632be1177bd8c4fe6b81d36365577bf4f953f58c5c6abd8bc9e9ba6ed770e",
+      "current_mtime_UTC": "2026-09-30T20:04:11.560181+00:00",
+      "saved_patch_exact": true,
+      "mtime_before_build": true
+    }
+  ],
+  "patch7_exact": true,
+  "adapted_regeneration_refs": [
+    {
+      "path": "tools/ai-sigma-sigma-web-port/adapters.cjs",
+      "Git": "b62cde0",
+      "fallback_current": false,
+      "SHA256": "177adf0dd1154c621f8f6a453abf48110f65b40187426a89344ab715f366b22e"
+    },
+    {
+      "path": "tools/ai-sigma-baseline-gap-frame10/adapters.cjs",
+      "Git": "b62cde0",
+      "fallback_current": false,
+      "SHA256": "942cdfe2aec182c8579743393594e6629069d234ffc5494089dfe2ede4b2ad6f"
+    },
+    {
+      "path": "tools/ai-sigma-cpu-sigma-frame8/adapters.cjs",
+      "Git": "b62cde0",
+      "fallback_current": false,
+      "SHA256": "12b2617595336a7ae24ad1503566814add61f8f553dd1cf6560f9459112a1905"
+    },
+    {
+      "path": "tools/ai-sigma-player-workers/player-main.js",
+      "Git": "b62cde0",
+      "fallback_current": false,
+      "SHA256": "610e899acd43215efc9fa3a08f3c337248639505a57196e1a730a91f7afde4a8"
+    },
+    {
+      "path": "tools/ai-sigma-cpu-sigma-frame8/browser-glue.js",
+      "Git": "b62cde0",
+      "fallback_current": false,
+      "SHA256": "9dd39df5befe198c95b7df69516e71d94a44279f751d9ad5a4ab4aad8610fa27"
+    },
+    {
+      "path": "tools/ai-sigma-baseline-gap-frame10/input.js",
+      "Git": "b62cde0",
+      "fallback_current": false,
+      "SHA256": "e19b31fb860131718635c8db843343a7ec967f1867b80eeb263abf9419c8b5a2"
+    },
+    {
+      "path": "tools/ai-sigma-baseline-gap-frame10/main.js",
+      "Git": "b62cde0",
+      "fallback_current": false,
+      "SHA256": "b265b29617566d2a376327ed54343deb80b5bdcea6275b5a14dfc289cf6f6532"
+    },
+    {
+      "path": "tools/ai-sigma-sigma-web-port/port-main.js",
+      "Git": "b62cde0",
+      "fallback_current": false,
+      "SHA256": "757948b178e424aedb698196a67cbbfed01fff4ab6e000be9b17078097265a20"
+    },
+    {
+      "path": "tools/ai-sigma-sigma-web-port/port-worker.js",
+      "Git": "b62cde0",
+      "fallback_current": false,
+      "SHA256": "f82e3e1a10572576c0efa2088b00eaf62610cef18e6b71f7d7ebc9c506723d8a"
+    },
+    {
+      "path": "tools/ai-sigma-tail-transport/early-worker.js",
+      "Git": "b62cde0",
+      "fallback_current": false,
+      "SHA256": "9494e33e7204be208262914c04ea5eb0d7985872a6d7ebc6e4084d84729097d4"
+    },
+    {
+      "path": "tools/ai-sigma-tail-transport/checkpoint.js",
+      "Git": "b62cde0",
+      "fallback_current": false,
+      "SHA256": "2b736d696a099350bf724b40dd858fc3afe11ce17a1c143f3029e5fcd2f28d8c"
+    },
+    {
+      "path": "tools/ai-sigma-actual-boundary-repair/early-cache.cjs",
+      "Git": "b62cde0",
+      "fallback_current": false,
+      "SHA256": "748fe01dfebf5e524465ef69255acf0026154188b9002a5338ca790ca092e7f7"
+    },
+    {
+      "path": "tools/ai-sigma-actual-boundary-repair/reference-core.js",
+      "Git": "b62cde0",
+      "fallback_current": false,
+      "SHA256": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05"
+    },
+    {
+      "path": "tools/ai-sigma-player-workers/player-worker.js",
+      "Git": "b62cde0",
+      "fallback_current": false,
+      "SHA256": "fd5f5b72a836164133b22f718d58ef31d2d4b0f8a4887070e1ac9346112de5e8"
+    }
+  ],
+  "partial_source_identity_not_full_build_read_audit": true,
+  "served_records_are_server_not_browser_fetch": true,
+  "control": {
+    "measured_monitor": "tools/ai-sigma-actual-boundary-repair/pause-check.cjs",
+    "measured_monitor_SHA256": "ab5399f600fe3e9f6e36638c61dfd6f9d47a12379a73e3a4b657bfedac3c710a",
+    "measured_diagnose_SHA256": "57842da7d70e4be5f6275142e94c36cb5cbe05662683cbe9c657bcb4e7fa5ec7",
+    "current_diagnose_SHA256": "74e34f9c6e027bb0c43aaeaec6bd76e71ecac765da9f6a7f9a5450c722b51140",
+    "current_repair_private_reader": true,
+    "bounded_retry_only": true,
+    "late_failure_secondary_now_propagated": true,
+    "current_repair_not_retroactive_r2_success": true,
+    "monitor_fullperiod_success": false,
+    "next_job_requires_fresh_ready_admission": true
+  },
+  "stop_boundaries": {
+    "Model2drop": {
+      "players": [
+        {
+          "kind": "dropped",
+          "handles": 0,
+          "activeNN": 0,
+          "at_ms": 1790991688240.73,
+          "producer_post_begin_ms": 1790991688240.73,
+          "worker_engine": "candidate"
+        },
+        {
+          "kind": "dropped",
+          "handles": 0,
+          "activeNN": 0,
+          "at_ms": 1790991688241.545,
+          "producer_post_begin_ms": 1790991688241.545,
+          "worker_engine": "reference"
+        }
+      ],
+      "handles": 0,
+      "activeNN": 0
+    },
+    "main_timer_message": {
+      "main_timers": 0,
+      "pending_messages": []
+    },
+    "monitorcallback": {
+      "timer": false,
+      "busy": false,
+      "waited": true
+    },
+    "innercontrolled": {
+      "remaining_pids": 0,
+      "forced": true,
+      "graceful_error": null,
+      "waited": true,
+      "registration_ack": true,
+      "registered": 49
+    },
+    "outerwait": {
+      "returned": true,
+      "remaining": [],
+      "unknown": []
+    },
+    "currentidentity": {
+      "UTC": "2026-10-03T02:03:31.517826+00:00",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "checked": 82,
+      "remaining": [],
+      "readerrors": []
+    },
+    "source_launch_after_equal": true
+  },
+  "r2_handNN": 320,
+  "r2_startupNN": 6,
+  "owner_r1_r2_handNN_cumulative": 640,
+  "owner_StageA_NN_budget": 1024,
+  "owner_startup12_separate": true,
+  "ORT_provider": "saved worker bridge CPU wasm, numThreads1/proxyfalse; no new provider inference",
+  "r1_erratum_reference": {
+    "issue": "quoridor-4lc.151",
+    "corrects": "port151-stageA-r1-analysis.json",
+    "old_bytes_preserved": true,
+    "old_analysis_SHA256": "b73ef2a0da57c35aa831bfa990e0a414480d962e1b9a20bc3ec51a0d52975852",
+    "old_first_discrete_difference_field": "root_ledger was a numerical mismatch, not a discrete path result",
+    "first_ledger_numeric_difference": {
+      "source_f32_as_f64": 0.21437489986419678,
+      "decoded": 0.2143748998641968
+    },
+    "r1_actual_paths_visits_Actions_equal": true,
+    "r1_faithful_numeric_ledger_not_supported": true,
+    "r2_is_new_repaired_source_run_not_replacement": true,
+    "NN_loss_or_game_loss": false
+  },
+  "refs": [
+    {
+      "path": "research-data/ai-sigma/151-sigma-web-port/build-binding-r3.json",
+      "SHA256": "ea2e0caf8ef7a3ec98f76c531f3cf7ab1523878eac5f40c76eacefe3e0caf20f",
+      "bytes": 1395
+    },
+    {
+      "path": "research-data/ai-sigma/151-sigma-web-port/port151-stageA-r2-config.json",
+      "SHA256": "a6769cbda0633c3cbdddddcefa129ccd92760b0e425eedb187a5fd5aa6ffa939",
+      "bytes": 1882
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageA-r2/actual-served-source.json",
+      "SHA256": "e4507ac93932d589b3612f97081ada5958bdb8f61b7a624c17e1cbf684cb7c34",
+      "bytes": 4821
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageA-r2/source-bindings.json",
+      "SHA256": "57bb540f68e8dca517ce3a1e8156be88befd081ad518e58f19b886857bed7038",
+      "bytes": 2782
+    },
+    {
+      "path": "research-data/ai-sigma/151-sigma-web-port/dependency-binding.json",
+      "SHA256": "63c99e9c77a276cb45fb3cd8d39920cb7315895d2793570466e873baf6a6be78",
+      "bytes": 46826
+    },
+    {
+      "path": "research-data/ai-sigma/151-sigma-web-port/port151-stageA-r2-stop.json",
+      "SHA256": "f529d9a71dc25fd3b20dfe4e9a5dff0b8c5073fa8c8cbe2afdb840c367a3b414",
+      "bytes": 15423
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageA-r2.process.json",
+      "SHA256": "97c09c1cabed587bbaecdf0ec5ba10c739d566d6cba92f557dc8ce698067fc11",
+      "bytes": 33829
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageA-r1/summary.json",
+      "SHA256": "630df134d3ed5b45384ea24b6ceda49f6db25a2ba9b68ac61bfa962b1930fbec",
+      "bytes": 216
+    },
+    {
+      "path": "research-data/ai-sigma/151-sigma-web-port/port151-stageA-r1-erratum.json",
+      "SHA256": "86b7ea6dedff22f110d1223f6da6986c05d7851a48bafa1ac32e6d042eb5ba8e",
+      "bytes": 630
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageA-r2/startup.json",
+      "SHA256": "976ff21360c50a2ee4c0e393ec5b424f29eb82c433eebd64f8d1f966f436f387",
+      "bytes": 3437
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/SIGMA-WEB-PORT/runs/port151-stageA-r2/model-load.json",
+      "SHA256": "f5f8b8526fb898bbea9d8b76c4b1a131da11eb1cb31621346ef01ace465a81ff",
+      "bytes": 987
+    }
+  ]
+}

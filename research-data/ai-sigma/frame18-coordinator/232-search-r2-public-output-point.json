@@ -1,0 +1,90 @@
+{
+  "UTC": "2026-10-04T14:12:45.328563+00:00",
+  "resultSHA": "254b1a49c913f7b0f97c2e40ed882f7417297caf406c644a46737c2fd9362baf",
+  "scope": "public owner output extraction; no independent search/NN/math certification",
+  "process": {
+    "UTC": "2026-10-04T14:10:55.466112+00:00",
+    "startUTC": "2026-10-04T14:10:54.813585+00:00",
+    "endUTC": "2026-10-04T14:10:55.466123+00:00",
+    "exit": 0,
+    "reason": null,
+    "wall_s": 0.6525425459840335,
+    "peak_family_RSS": 129134592,
+    "samples_actual": 4058,
+    "samples_charge": 4058,
+    "original_unknown": false,
+    "tracked": {
+      "237557": 37604142,
+      "237558": 37604145
+    },
+    "remaining": [],
+    "all_child_waited": true,
+    "current_exact_absent": true,
+    "runner_pid": 237511,
+    "runner_tick": 37603995
+  },
+  "background_result": {
+    "job_id": "1f053e35-5b80-4dc5-a413-1921dc27df2f",
+    "outcome": "succeeded",
+    "error": null,
+    "exit_code": 0,
+    "finished_at": "2026-10-04T14:10:55.518357+00:00",
+    "wall_seconds": 397.74707296700217,
+    "remaining": [],
+    "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+    "cleanup_complete": true,
+    "log_bytes_seen": 473,
+    "log_bytes_retained": 473
+  },
+  "notification": {
+    "status": "delivered",
+    "updated_at": "2026-10-04T14:11:00.330945+00:00",
+    "marker": "[research-job:1f053e35-5b80-4dc5-a413-1921dc27df2f]",
+    "turn_id": "01a10740-f665-7130-aae1-bbb8cf0bfb2d"
+  },
+  "rows": [
+    {
+      "root": "initial-p1",
+      "NNUE_depth": 1,
+      "D_depth": 2,
+      "NNUE_action": 148,
+      "D_action": 13,
+      "NNUE_stop": "NODE_CAP",
+      "NNUE_legal": true,
+      "D_legal": true
+    },
+    {
+      "root": "asym-hv-p2",
+      "NNUE_depth": 2,
+      "D_depth": 2,
+      "NNUE_action": 67,
+      "D_action": 67,
+      "NNUE_stop": null,
+      "NNUE_legal": true,
+      "D_legal": true
+    },
+    {
+      "root": "straight-jump-p2",
+      "NNUE_depth": 2,
+      "D_depth": 2,
+      "NNUE_action": 31,
+      "D_action": 31,
+      "NNUE_stop": null,
+      "NNUE_legal": true,
+      "D_legal": true
+    },
+    {
+      "root": "fixed-legal-diagonal-p1",
+      "NNUE_depth": 2,
+      "D_depth": 2,
+      "NNUE_action": 48,
+      "D_action": 48,
+      "NNUE_stop": null,
+      "NNUE_legal": true,
+      "D_legal": true
+    }
+  ],
+  "immutable_source_stop": "pending owner final receipt",
+  "strength": "UNMEASURED",
+  "current_caps_unchanged": true
+}

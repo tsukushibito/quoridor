@@ -1,0 +1,9 @@
+{
+  "run": "native165-oracle-r1",
+  "NN": 0,
+  "guard": "AFFINITY_GUARD",
+  "old_line": "POOL=CONFIG.get('mode',{}).get('cores',[0]);CPU=0 if PHASE=='protocol' else POOL[0]",
+  "new_line": "POOL=[0] if PHASE=='protocol' else CONFIG.get('mode',{}).get('cores',[2]);CPU=POOL[0]",
+  "r2_test_error": "async oracle migration read handle property before await; savedoracle-r2.cjs; NN0",
+  "science_rerun": 0
+}

@@ -1,0 +1,158 @@
+goal quoridor-4lc / child204 -> experiment205 fixedgate/科学stop引渡し
+{
+  "issue": "quoridor-4lc.204",
+  "UTC": "2026-10-04T02:17:28.441102+00:00",
+  "conditions": {
+    "beststep_positive_and_weight_changed": true,
+    "below_distanceinitial_by_margin": true,
+    "finite_coeff_input_lowerlayer_schema": true,
+    "source_science_child_stop_currentexact_absent": true
+  },
+  "best_step": 600,
+  "best_validation_gameMSE": 0.48388663696642414,
+  "baseline_validation_gameMSE": 0.48514681311997876,
+  "margin": 0.0001,
+  "source_child_stop_pending": false,
+  "generation_authorized": true,
+  "samples": 379921,
+  "status": "GATE_MET",
+  "stop": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-head-control/training-stop.json",
+  "stop_SHA": "ced0c8ece61162acdcc85111ef1d49f044da176c28f5da493dd0f8cc9bd1b3d5",
+  "evaluator_settings": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-head-control/evaluator-settings.json",
+  "settings_SHA": "d14775aaf848898a81bb1e7b7cb50ee72684d46f097f8eb51bd584671d487a58",
+  "candidate": {
+    "path": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/nnue/frame14-head-control-r1/best.pt",
+    "checkpoint_SHA": "f9dff330239f56164af96aa97be5a171059aaa732dfa8054e9b6380b7dbcb54f",
+    "B": 52067,
+    "weight_SHA": "437b5fde4dc4a4356ec2281759971d3d4937a45e17224cc9303dbdc2dc8dbeea",
+    "step": 600,
+    "samples": 118107,
+    "condition": "QF1-distance-residual-head-only-f32-v1"
+  },
+  "initial": {
+    "path": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/nnue/frame14-head-control-r1/initial.pt",
+    "checkpoint_SHA": "36ea9132a7b8969c0404d84f42790fa3bc57bd201e249bb7362950f10de17da0",
+    "B": 52109,
+    "weight_SHA": "52bfc75272f7cfe8ae6ce57eb14b8a9e7848bfba99613c221f77498a8e897576",
+    "step": 0,
+    "samples": 0,
+    "condition": "QF1-distance-residual-head-only-f32-v1"
+  },
+  "coefficients": {
+    "a": 0.06294242415104226,
+    "b": 8.276425107422213
+  },
+  "coefficient_fit_SHA": "77ce9e79495038b25a4f4a9ffd95dc9f66700aff2c1f96cf08b65fff3c79733c",
+  "parent_settings_SHA": "115181bf1dfad94e078a8e43ae371336c0a4ba8501889724a9eae73dee8b30db",
+  "mask_SHA": "10b502cd9e1c5334e56a3f460ef3edff7f822c8f52f69c3af53529c67c45d5f5",
+  "validation_SHA": "d4b5b218fcfaaa548fb9a2ee3056f34b21e4ed63143e67f6e7aa94f7934cd7e3",
+  "finite_schema_SHA": "f3be863d043b26c6b8a209720bf81e8f617f519b661ea637b732a9b098ee204f",
+  "source_SHA": {
+    "tools/ai-sigma-qf1-head-control/run.py": "917d23d01db886dbaa2825e053f7b8c37d93c647ca006c31178e5be8333eb29c",
+    "tools/ai-sigma-qf1-head-control/head_model.py": "930f3d0fb2f332505d89e79253406c53887e1c9bf04eb7ac29cba607138a25dd"
+  },
+  "newtest_slots": [
+    {
+      "slot": 1,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 2,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 3,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 4,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 5,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 6,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 7,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 8,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 9,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 10,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 11,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 12,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 13,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 14,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 15,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 16,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 17,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 18,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 19,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 20,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 21,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 22,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 23,
+      "status": "NOT_STARTED"
+    },
+    {
+      "slot": 24,
+      "status": "NOT_STARTED"
+    }
+  ],
+  "test_evaluation_samples": 0,
+  "old_gates_changed": false,
+  "old_test_read": false,
+  "strength_claim": false
+}
+actualCPU2学習02:17:24–02:17:28/4.757569s/780976128B/PID3910548 tick33320766 全子wait/currentexact不在。379921sample/2000step/256000train/全21点。初期52bfc752同tensor、FT/h/距離coefの初期/BEST/LAST rawbyte不変PASS、optimizerhead33のみ。5901初期distanceparityPASS/追加forward0。旧test/203diagnostic再実行0。source/run/headmodel停止・hash固定、testlabel読取0。
+Gate未達なら205 fresh全24NOT_STARTED/test0として終了、閾値緩和・追加train0。Gate成立なら既205条件付き配分のfresh24だけ、旧train96+全val+旧test24+distance-test24 label-free OR露出、sealed labelsはcandidate/evaluator/config/coef/selectionfreeze後のみ。200/197gate変更0。

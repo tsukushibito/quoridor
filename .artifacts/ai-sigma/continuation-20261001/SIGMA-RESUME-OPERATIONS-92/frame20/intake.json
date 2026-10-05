@@ -1,0 +1,131 @@
+{
+  "at": "2026-10-05T00:55:27.190232+00:00",
+  "owner": "codex:01a0f31d-99ee-7d63-b162-bc1a59c457c6",
+  "no_pause": true,
+  "old_run": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame19-117f919b-f008-4702-89a0-1641ac0d2598",
+  "old_state": {
+    "binding": {
+      "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+      "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+      "target": "supervisor",
+      "dispatch_issue": "quoridor-4lc.40",
+      "contract_file": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+    },
+    "process": null,
+    "phase": "stopped",
+    "recovery_required": false,
+    "last_result": {
+      "at": "2026-10-05T00:21:13.578171+00:00",
+      "event": "process_stopped",
+      "owned_turn_pending": false
+    },
+    "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+    "config_sha256": "7662fc8cc99738aa067cef1604aba9e046e62b0538599037abcb4c3ab3f73491",
+    "contract_sha256": "39a513878ba6e1ba71b3e79b49a8d30ab9c1760db4ec91bf1289b42cb7a16178",
+    "next_at": null,
+    "owned": null,
+    "fatal_dispatch_error": {
+      "turn_id": "01a1096f-871c-78b0-9077-18a3ff0c392e",
+      "error": {
+        "message": "Error running remote compact task: You’ve hit your usage limit. Visit https://chatgpt.com/codex/settings/usage to purchase more credits or try again at Oct 9th, 2026 11:11 PM.",
+        "codexErrorInfo": "usageLimitExceeded",
+        "additionalDetails": null,
+        "misalignment": null
+      }
+    }
+  },
+  "old_exact_identities": [
+    {
+      "expected": {
+        "pid": 380692,
+        "start_ticks": "40787373",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "observed": null,
+      "same_identity_alive": false
+    },
+    {
+      "expected": {
+        "pid": 380701,
+        "start_ticks": "40787392",
+        "state": "R",
+        "rss_bytes": 20484096,
+        "cpu_ticks": 2,
+        "affinity": [
+          0
+        ],
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "observed": null,
+      "same_identity_alive": false
+    }
+  ],
+  "old_monitor_ended": {
+    "started_utc": "2026-10-04T23:01:06.818195+00:00",
+    "ended_utc": "2026-10-05T00:21:30.288861+00:00",
+    "process": {
+      "pid": 380701,
+      "start_ticks": "40787392",
+      "state": "R",
+      "rss_bytes": 20484096,
+      "cpu_ticks": 2,
+      "affinity": [
+        0
+      ],
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "reason": "scheduler stopped before deadline",
+    "error": null,
+    "exit_code_if_normal": 0,
+    "self_user_cpu_s": 5.447259,
+    "self_sys_cpu_s": 5.134011,
+    "self_maxrss_kib": 24304,
+    "child_user_cpu_s": 6.473649,
+    "child_sys_cpu_s": 1.954977,
+    "child_maxrss_kib": 230288,
+    "sampled_combined_rss_peak_bytes": 209440768,
+    "allocated_peak_bytes": 37384192,
+    "no_child_command_left_running": true,
+    "own_process_exits_after_this_record": true,
+    "all_research_stopped_claimed": false
+  },
+  "old_final": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame19-117f919b-f008-4702-89a0-1641ac0d2598/monitor-ended.json",
+  "resource": {
+    "steward_allocated_bytes": 38076416,
+    "supervisor_held_bytes": 146104320,
+    "supervisor_current_frame_bytes": 1130496,
+    "supervisor_historical_held_bytes": 144973824,
+    "forecast_bytes": 8388608,
+    "additional_reservation_bytes": 0,
+    "historical_parent_charge_released": false
+  },
+  "six_digest": {
+    "coordinator": "52a19638dff9af8fa422afadacf757bf3517223e410f3e1210f6964db6e032f0",
+    "hypothesis": "db6370b3f5d091f5b2155b3cba42b62d4743153b513445066714bdbf7f9e8a04",
+    "experiment": "09c3472d031e94f10263ba518abb57b1c9876e84712ef7d59fca6989b32d9720",
+    "critic": "b5a20ad0f99585ec5d308759dd74aa4db057c34521136abd1c9659f9a8d5c268",
+    "steward": "666d142158dcbf82d898fcacdfb3a1d7409fd1ff43ad34e15b27ca12ee05cb5e",
+    "supervisor": "190683a09f655188d2a92ff01affff45b17ee1d2eb2a00a623e7f995081e67fc"
+  },
+  "old_usage_failure_preserved": true,
+  "supervisor": {
+    "thread_status": {
+      "type": "idle"
+    },
+    "latest": [
+      {
+        "id": "01a1096f-871c-78b0-9077-18a3ff0c392e",
+        "status": "failed",
+        "error": {
+          "message": "Error running remote compact task: You’ve hit your usage limit. Visit https://chatgpt.com/codex/settings/usage to purchase more credits or try again at Oct 9th, 2026 11:11 PM.",
+          "codexErrorInfo": "usageLimitExceeded",
+          "additionalDetails": null,
+          "misalignment": null
+        },
+        "startedAt": 1791159666,
+        "completedAt": 1791159666
+      }
+    ]
+  }
+}

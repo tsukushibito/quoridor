@@ -1,0 +1,9 @@
+# 188 新future配分 r2 / 旧13:12停止は保持
+
+統括の現frame13委任内で、新futureのLR対照実行窓を188同issueへ配分する。旧r1は13:12:53 NOT_RUN_DEADLINE/management python不在exit127/science0としてsource・preregister・stop・版・実時刻を保存し変更しない。旧期限を遡及延長せず、現future r2を別run・新結果前preregister・sourcehash・actualadmissionで区別する。新issue/role/監督層0、旧成功科学行0なので置換再実行0。
+
+同188単独writer範囲で、旧188sourceを最小再利用。旧source必要Git固定後、runr1/r2 scope又は版と保存Dの分離で旧preregister/stopをreadonly保持。science sample26604/200step/同176親/2260train/seed18180311/minibatch128/LR.0025/全502val8game比較/CPU8single torch1/RAM1guard896/1job30s/science60sを維持。旧actualmodel/forward/train/sample0なので現futureの許可総sampleは26604で、科学NN予算の追加増量なし。staticsは旧188管理費込み180s（新60追加まで）に有界化。old188512KiB予約/448KiBguard内をcurrent+Git+一時forecastで確認、別親予約0。モデル/設定/依存/共有環境/GPU/教師/arena0。
+
+管理修復はbare pythonを使わず、現物確認済絶対 /home/vscode/.cache/inference/envs/quoridor-training/bin/python（Python3.14.7）をmodeljob用に、管理scriptはpython3又は既managedlauncher絶対interpreterで実行する。tools/ai-sigma-value-game-diagnostic/launch.py又は既管理sourceをreadonly薄reuse可能。まずexecutable/AST/launch argv/deadline出力をNN0で確認し、プロセスfamily currentRSS有界監視・timeout・子wait回収を含む最小launchにする。新dependency取得0、scriptpreflightにtorch/session/modelをロード0。硬期限をまたぐ新科学0。
+
+新future r2 newscience13:28/sciencestop13:30/process13:35/submit13:38UTC早側。receipt時計は元13:02:32を保持。実NNは187heavy非重複・CPU/RAM/owner currentadmission後1回。187静的準備はgate0で継続。187がNN/GPUheavyなら延期して新期限までに空きがなければscience0終了、他owner interrupt0。actual短CPUjob完了/同identity不在は直ちに統括へ報告し187へ配送、metadata全文待ち0。187 mainjobをこのLR解析/保存待ちにしない。全8gameπ/z/符号飽和/旧新とLR.01saved基準を残し、原因/棋力保証0。新科学成功後の置換再学習0。失敗/不成立でも必要source/子stop/Gitbyte復元/backup後有限引渡し。通常ユーザー/root再承認待ち0。

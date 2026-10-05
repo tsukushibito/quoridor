@@ -1,0 +1,67 @@
+{
+  "issue": "quoridor-4lc.144",
+  "searches": [
+    {
+      "fixture_id": "P1-race",
+      "engine": "candidate",
+      "K": 32,
+      "condition": "normal"
+    },
+    {
+      "fixture_id": "P1-race",
+      "engine": "candidate",
+      "K": 1,
+      "condition": "root1"
+    },
+    {
+      "fixture_id": "P1-race",
+      "engine": "reference",
+      "K": 32,
+      "condition": "normal"
+    },
+    {
+      "fixture_id": "P2-corridor",
+      "engine": "reference",
+      "K": 32,
+      "condition": "normal"
+    },
+    {
+      "fixture_id": "P2-corridor",
+      "engine": "candidate",
+      "K": 1,
+      "condition": "root1"
+    },
+    {
+      "fixture_id": "P2-corridor",
+      "engine": "candidate",
+      "K": 32,
+      "condition": "normal"
+    }
+  ],
+  "input_SHA256": "886d2ce93d474ea3778a1742878daaba952902dff2ed5ed9a763f6177736cf6b",
+  "original_generation_member_SHA256": [
+    "55362d6c1165d55269faa778052f45e546587d26f3ec0c85331721711e7aeb76",
+    "08fa06a453fe397e726124fbd938437be000015b16968f91d54dcde9afb55b28"
+  ],
+  "nominal_completed": 130,
+  "startup_NN": 6,
+  "sessions": 2,
+  "watchdog_ms": 10000,
+  "seed": 1979,
+  "root_features": "exact",
+  "NN_tolerance": {
+    "abs": 0.0001,
+    "rtol": 0.0001
+  },
+  "root_golden": false,
+  "all_attempts": true,
+  "successful_retry": false,
+  "replacement_input": false,
+  "score_missing": null,
+  "labels_file": "research-data/ai-sigma/142-wallless-oracle/finite-results.json",
+  "label_support_required": "143 same input/actions finite verdict; not full report",
+  "exit_allwin": "end this scale",
+  "policy": "maintain candidateQ0/C1.5 and fixedSigma",
+  "games": 0,
+  "sameK_not_sameNN_CPU_wall": true
+}

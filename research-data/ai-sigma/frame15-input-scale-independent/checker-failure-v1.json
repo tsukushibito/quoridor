@@ -1,0 +1,9 @@
+{
+  "type": "checker_admission_wrapper_false_positive",
+  "reason": "timeout wrapper argv containing own check.py classified as science; no science input arithmetic begun",
+  "SHA": "dd98e37219dd305176dc898b352dd49fb17cad815d5481ec30086ae263239706",
+  "exit": 1,
+  "fix": "inspect only python/node executable processes; own current PID excluded",
+  "original211_scientific_result_changed": false,
+  "within_original_new212_60s_compute_block": true
+}

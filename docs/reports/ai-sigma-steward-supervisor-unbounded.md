@@ -1,0 +1,17 @@
+# Supervisor turn上限撤廃 / 92
+
+ユーザー明示により `max_turn_seconds=null` をmain scheduler/現在の運用copy/config/contract/guard/state/promptへ適用。親版17の開始・終了は変更せず、turn制限本文のみ整合した。役・common・registry・モデル/effortは変更していない。
+
+標準40件、現運用copy28件、guard15件が成功。nullable受理、180越え/次周期二重開始なし、現在ownedへの上限撤廃で時計維持、pause/endで正確ownedのみ回収、子timeoutを確認した。チェックCPU0合計約13秒、NN/GPU/buildなし。
+
+旧monitor/schedulerは08:51:50までに秩序停止。09:04:33通常fresh start、新scheduler6049/start35765166、monitor6062/start35765187、同boot。24期待hash/current loaded config/contract/owned nullは `frame16-turn-unbounded/running-loaded.json`。root独立受入れ09:05:12、旧4interrupted/欠測・停止gap保持。恒久idle resumeは既同設定RPC受理、developer本文readbackは非対応。
+
+上限撤廃の実反映と自然点検/提案/notes/backupの効果は別に扱う。初回自然turnの公開成果は後続確認中。09:45:50重job通知、09:50:50正owned監督+scheduler、09:53:50monitor、09:55:50保存の92長期責任を維持する。
+
+main専用変更5sourceは研究Gitの `research-data/ai-sigma/92-supervisor-turn-unbounded/main-owned-source.tar.gz` とmanifestで保存・軽い読み戻し一致。研究checkoutへmain専用実装を全mirrorしていない。未知/他者indexを変更せず明示path/private indexで保存。過去raw/旧失敗は削除・救済していない。
+
+09:08:30公式観測:同owned開始から232.96秒、active/inProgress・cap null維持。公開履歴にcommandExecutionが初到達。提案通知/notesbackupは未確認で全面復旧とはしない。main/研究default indexは開始前SHAと一致。
+
+09:10公式履歴確認:自然observeは開始211.7秒後に実行、09:08:22 exit0。09:08:41 finishのnotes更新/backupがともにexit0・自己子reaped。主要問いの短記録まで有限成立。追加inspect誤pathのexit2は保持しnamespace拒否を迂回していない。判断・提案通知の完了とwhole-turnはまだ未確認。
+
+初回自然turn completed/errornullを公式履歴で確認。observe→判断/提案→notes/backup→統括の正確active turnへのreport acceptedまで実到達、通信子reaped。自然点検1回の有限復旧として受け入れ可能。後続品質・全期間・研究成果・未来停止は未認定。role namespace読取拒否1件は不足として保持。

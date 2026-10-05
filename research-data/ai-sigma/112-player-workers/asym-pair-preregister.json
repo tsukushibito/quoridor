@@ -1,0 +1,59 @@
+{
+  "config": {
+    "issue": "quoridor-4lc.112",
+    "frame": 7,
+    "Git": "3682ab7b520024735e79e42eea79c982897c3957",
+    "processing_deadline": "2026-10-02T09:45:00Z",
+    "newjob_deadline": "2026-10-02T09:40:00Z",
+    "diagnostic": true,
+    "actual_go": false,
+    "holdout": 0,
+    "adopt_ms": 411,
+    "sample_interval_ms": 8,
+    "T_ms": 500,
+    "nn_cutoff_ms": 402,
+    "worker_D_ms": 500,
+    "seed": 1979,
+    "candidate_C": 1.5,
+    "reference_C": 1,
+    "CPU": [
+      2
+    ],
+    "NN_threads_each": 1,
+    "model_sessions": 2,
+    "old_worker_ACK_before_opposite_input_required": false,
+    "own_previous_zero_before_own_input_required": true,
+    "numeric_after_progression": true,
+    "classification_policy": "cancel/automation/browser timer/Judge/ambiguous shared fault unfinished distinct from initial-noCP or known engine fault responsibility loss; all flags retained",
+    "run_id": "p112-asym-pair-r1",
+    "kind": "browser-pair",
+    "schedule": [],
+    "dynamic_plies": 0,
+    "games": [
+      {
+        "id": "player-asym-color1",
+        "fixture_id": "asym-hv-p2",
+        "candidate_color": 1
+      },
+      {
+        "id": "player-asym-color2",
+        "fixture_id": "asym-hv-p2",
+        "candidate_color": 2
+      }
+    ]
+  },
+  "entry": {
+    "UTC": "2026-10-02T09:18:38.063669+00:00",
+    "external_heavy": [],
+    "prior_remaining": [],
+    "current_own_allocated": 14163968,
+    "forecast_with_next_pair_archive_Git": 39163968,
+    "storage_guard": 58720256,
+    "remaining_processing_seconds": 1581.9363310337067,
+    "next_pair_worst_with_ready_cleanup_save_seconds": 260,
+    "games_started_before": 2,
+    "planned": 2,
+    "game_cap": 4,
+    "source_Git": "3682ab7b520024735e79e42eea79c982897c3957"
+  }
+}

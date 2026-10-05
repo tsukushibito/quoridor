@@ -1,0 +1,37 @@
+{
+  "UTC": "2026-10-03T01:19:18.947118+00:00",
+  "contract_Git": "d2db4c4d070a03bf4b51dee604a9939c9c3f686c",
+  "deliveries": {
+    "experiment": {
+      "method": "turn/start",
+      "thread_id": "01a0f31d-6d15-7620-bb63-4b4f878e4746",
+      "turn_id": "01a0ff56-12b3-7cd1-997d-abac2803003e",
+      "accepted": true,
+      "UTC": "2026-10-03T01:17:06.108288+00:00",
+      "states_before": {
+        "experiment": "idle"
+      }
+    },
+    "critic": {
+      "method": "turn/start",
+      "thread_id": "01a0f31d-8227-7e03-a7e6-915b4918c11b",
+      "turn_id": "01a0ff56-4059-7140-bf81-f5d71a1c80ec",
+      "accepted": true,
+      "UTC": "2026-10-03T01:17:17.800713+00:00",
+      "states_before": {
+        "critic": "idle"
+      }
+    }
+  },
+  "experiment_owner_start_report": {
+    "receipt": "2026-10-03T01:17:36.232260+00:00",
+    "claimed": true,
+    "actual_work": "private Rust/Wasm policy correspondence and StageA fixed inputs",
+    "processing": "03:17:36UTC",
+    "newheavy": "03:07:36UTC",
+    "submission": "03:32:36UTC"
+  },
+  "intake_SHA256": "c56f403694d545a8db5f1450bd3ca723196c073275f7b5f4c8f891a6065c2404",
+  "critic_delivery_vs_start_separate": true,
+  "formal_Sigma": false
+}

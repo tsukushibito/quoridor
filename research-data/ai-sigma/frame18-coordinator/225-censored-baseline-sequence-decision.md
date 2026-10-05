@@ -1,0 +1,9 @@
+# 225 model科学censor後の現在判断
+
+2026-10-04 11:04UTC。元preimport argfailure4.494708秒/sampleUNKNOWN+source0NN補足を管理入口に区別する226提案を採用済み。baseline-r2はモデルscience開始後219.339324秒、CURRENT_FOREIGN_COMPUTE_STARTEDで自己停止・wait/exact不在。offender73099/tick36425870の保存cmd/ancestryとowner分析は227のBeads/source sed shell本文末尾.pyをscriptと誤認したことを支持。科学slot1消費を維持、原NULL/実NN不明はUNKNOWNのまま、保守307200上界を維持。全96分母=71GOAL+21未完了UNKNOWN+4NOT_STARTED、3773policy/3315joint/458zunknownを完走比較や独立増量へ変換しない。
+
+現owner prospective-shell-repair版を採用し、candidate→残第三baseline-r3を元max3modelscience内で条件付き実施。残2science枠でモデル開始faultも消費し、第四science/成功置換/追加条件/期限延長なし。第一baseline censorを消さず全attempt費、partialとcompleted速度、順序/warm/短hard censorを区別。candidate hard330への結果前短縮は旧420上界内だが、未完了を除外せず全96statusを保存。provider307200上界/totalNN1050000/allheavy1500/個別newscience11:15:18・stop11:25:18・save11:35:18不変。
+
+privateguardは実cmd argv上のexisting single-path tokenとowner ancestryで科学子を識別し、shell -c source読取本文を科学script扱いしない。単に.py文末を除外するだけの広い無効化や運用source変更は行わない。実foreignのPIDtick/argv/祖先保存と自己回収を維持。LLM active人数gateなし、fresh正frame18 binding/current physicalでadmit。今回停止版と修復版の差分/狭いNN0検証を保存し、全teacher/model検証の新入口gateは追加しない。
+
+候補と第三baselineが同元仕事量で完走すれば有限wholejob/全費比較、censorなら不確かと残して11:35以後は効率最適化を反復せず独立段階増量/既trainer接続へ移す。改善費Cに全比較・失敗・資格・保存を含め、今枠予定672程度と将来回収N=C/deltaを別表示。

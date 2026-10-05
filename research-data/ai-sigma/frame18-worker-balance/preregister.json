@@ -1,0 +1,46 @@
+{
+  "issue": "quoridor-4lc.225",
+  "UTC": "2026-10-04T10:48:46.300710+00:00",
+  "readonly": {
+    "research-data/ai-sigma/frame16-teacher-throughput/fresh96-stage/openings.json": "8fff4511f2afeb0a995395fd86be188afed7ac463415eba7a1e637437cd193d0",
+    "tools/ai-sigma-teacher-throughput/worker.cjs": "1006a89d211d904e5d0bb1d52e689698a5ee3b2f2e6004b27a98e5ab6de7ac1b",
+    "tools/ai-sigma-teacher-throughput/pipe.cjs": "c143f96713e125bf1c4c4bf2451f30850fd9a10ef01b4bfbfec5e7a6cf2fb6b8",
+    "tools/ai-sigma-teacher-throughput/adapter.py": "bcaff195d60ec6f7d19dcbe6a6a8b97960bbeffc8e646589a3af71e5ebed1a83",
+    "tools/ai-sigma-teacher-throughput/codec-control/provider.py": "a422650a8cf01b61870c28e800b4595db7e4699166a5b02518ac23e0cdc8666e",
+    "tools/ai-sigma-teacher-throughput/codec-control/broker.cjs": "90bc923cca6603d5af634926f2cd7ad4f237f248dc551d61480ba7e9699d28a4",
+    "tools/ai-sigma-teacher-throughput/codec-control/wire.cjs": "4f8a934f3f998325a8574bed5a9a04d7ed8737046a766070ba628518fddcf709",
+    "tools/ai-sigma-manygame-generation/pause-monitor.cjs": "265f7c8aa34f9a7f7f06f2ac2441546bd3ab7c36519196a70704351c61bddbea",
+    "tools/ai-sigma-native-baseline/reference.cjs": "85cae30273fa481f96ec28fa77eeb5907bb203812c7234f9ffdfd75d337848cf"
+  },
+  "opening_SHA": "8fff4511f2afeb0a995395fd86be188afed7ac463415eba7a1e637437cd193d0",
+  "fixed": {
+    "games": 96,
+    "K": 64,
+    "root": 64,
+    "edge_sum": 63,
+    "active": 24,
+    "B": 8,
+    "cores": [
+      2,
+      4,
+      6
+    ],
+    "flush_ms": 0.25
+  },
+  "sequence": [
+    "baseline",
+    "balanced",
+    "optional-baseline"
+  ],
+  "third_decision": "After two valid jobs, third baseline only if absolute wholewall difference <=15% OR cold/tail differences account for >=half observed wall gap, and remaining NN/heavy/storage/11:15:18 start cutoff allow420s+reap before11:25:18. Otherwise NOT_STARTED with reason; no success replacement.",
+  "caps": {
+    "NN": 1050000,
+    "heavy": 1500,
+    "static": 180,
+    "management": 300
+  },
+  "index_SHA": "59880a1d93833b8a0ea250e9a2b1270c41ceb9f6666da9ab0edeb48991817072",
+  "seed_RNG": "worker.cjs rng(spec.sampling_seed), independent each game; global manifest order fixed; worker filtered subsequence order unchanged",
+  "quality": "benchmark siblings no training mix; all96 denominator; unchanged provider432parity reused",
+  "risk": "within-cohort unequal lengths and hostwarm/order remain"
+}

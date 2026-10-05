@@ -1,0 +1,33 @@
+{
+  "PASS": true,
+  "step": 1,
+  "nonzero_proposal_count": 62,
+  "proposal_zero_unknown_ratio_count": 2,
+  "nonzero_proposal_applied_zero_count": 0,
+  "zero_proposal_or_rounding_zero_is_fault": false,
+  "proposal_to_applied_ratio_by_column": [
+    {
+      "nonzero": 31,
+      "proposal_zero_unknown_ratio": 1,
+      "nonzero_proposal_applied_rounding_zero": 0,
+      "min": 0.05434688925743103,
+      "max": 0.05434843525290489,
+      "expected_sigma": 0.0543474480509758
+    },
+    {
+      "nonzero": 31,
+      "proposal_zero_unknown_ratio": 1,
+      "nonzero_proposal_applied_rounding_zero": 0,
+      "min": 0.05367674306035042,
+      "max": 0.053679320961236954,
+      "expected_sigma": 0.05367854982614517
+    }
+  ],
+  "maxabs_applied_minus_requested": 1.8053469830192626e-10,
+  "max_f32_roundoff_bound": 6.13383477343632e-09,
+  "roundoff_rule": "4*eps*(abs(before)+abs(before+requested)+abs(requested)); applied delta is difference of f32 params",
+  "proposal_moments_unchanged": true,
+  "bias_otherparams_unchanged_afterproposal": true,
+  "optimizer_group_split_or_reset": false,
+  "extra_forward_backward": 0
+}

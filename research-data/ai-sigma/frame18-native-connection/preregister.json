@@ -1,0 +1,35 @@
+{
+  "UTC": "2026-10-04T13:57:54.555397+00:00",
+  "issue": "quoridor-4lc.232",
+  "tol": {
+    "abs": 1e-05,
+    "rtol": 0.0001
+  },
+  "fixture27_SHA": "66d3ea8607ca9f6215517712e750a2196c062e3664e449ac533bd778df99d8cc",
+  "fixed_roots": [
+    "initial-p1",
+    "asym-hv-p2",
+    "straight-jump-p2",
+    "fixed-legal-diagonal-p1"
+  ],
+  "candidate_freeze_SHA": "2bac8f1f7ad87b83ac0549c01bb32eb0c8d0a2f39a05c717420e20cd668e6a60",
+  "phase1": "export weights-only +27Torch and all full/delta child; terminal NN0",
+  "phase2": "if ready before14:15, 4root x2eval same alpha-beta iterativedepth1,2 per2048node, actionascending fixedtie, noTT/noise/policyexclusion",
+  "games4": "NOT_RUN (residual time and clock validation cost)",
+  "samplecap": 50000,
+  "heavycap_s": 240,
+  "CPU": [
+    2
+  ],
+  "threads": 1,
+  "RAMguard_B": 1879048192,
+  "reservation_B": 16777216,
+  "storage_guard_B": 14680064,
+  "prior_pool_unused_B": 155295744,
+  "remaining_after_allocation_B": 138518528,
+  "Git_temp_forecast_B": 2097152,
+  "oldunknown_discount_B": 0,
+  "parent_added_B": 0,
+  "claim_static_UTC": "2026-10-04T13:55:00Z",
+  "actual_science": false
+}

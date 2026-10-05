@@ -1,0 +1,65 @@
+{
+  "issue": "quoridor-4lc.181",
+  "planned_games": 24,
+  "game_status_counts": {
+    "GOAL": 24
+  },
+  "Rpolicy": 1353,
+  "Rz": 1353,
+  "Rjoint": 1353,
+  "train_policy": 1072,
+  "train_joint": 1072,
+  "validation_policy": 281,
+  "validation_joint": 281,
+  "value_unknown_rows": 0,
+  "loss_value_unknown_mask": 0,
+  "all_generation_job_wall_seconds": 195.292,
+  "export_validate_compress_wall_seconds": 0.692880960047245,
+  "production_including_export_seconds": 195.98488096004724,
+  "rates_per_all_jobwall": {
+    "Rpolicy": 6.928087172029576,
+    "Rz": 6.928087172029576,
+    "Rjoint": 6.928087172029576
+  },
+  "rates_including_export": {
+    "Rpolicy": 6.90359375362132,
+    "Rz": 6.90359375362132,
+    "Rjoint": 6.90359375362132
+  },
+  "API_await_ms": 346745.7308882731,
+  "pipe_await_ms": 406173.8182954192,
+  "spans_overlap_not_kernelCPU": true,
+  "NN": 77387,
+  "terminal_noNN": 9205,
+  "CP_received": 1353,
+  "position_keys": {
+    "unique": 1333,
+    "crossgame_shared_keys": 8,
+    "crossgame_shared_row_occurrences": 28,
+    "train_validation_shared_keys": 0,
+    "train_validation_shared_row_occurrences": 0,
+    "independent_state_holdout": false
+  },
+  "features648_only": {
+    "unique": 1333,
+    "crossgame_shared_keys": 8,
+    "crossgame_shared_row_occurrences": 28,
+    "train_validation_shared_keys": 0,
+    "train_validation_shared_row_occurrences": 0,
+    "independent_state_holdout": false
+  },
+  "lineages": 24,
+  "teacher_holdout": false,
+  "old173_teacher_rows": 0,
+  "attempts": [
+    {
+      "run": "native181-production-r1",
+      "exit": 0,
+      "stop_reason": null,
+      "wall_seconds": 195.292,
+      "peak_RSS": 1469046784
+    }
+  ],
+  "dataset_SHA256": "a4983274b1be7e57d8a587255a06cb4f57aec80f28c96424c6fcbfe1f4b2e316",
+  "shared_RuleA_checker_limit": true
+}

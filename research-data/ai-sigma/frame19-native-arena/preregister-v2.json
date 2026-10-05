@@ -1,0 +1,57 @@
+{
+  "UTC": "2026-10-04T23:05:08.592062+00:00",
+  "issue": "quoridor-4lc.236",
+  "planned_slots": 8,
+  "pilot_slots": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "later_slots": [
+    5,
+    6,
+    7,
+    8
+  ],
+  "later_rule": "clock/resource/storage valid and remaining science budget; never by WDL",
+  "root_comparison": {
+    "roots": 4,
+    "engines": [
+      "NNUE",
+      "distance"
+    ],
+    "orders": [
+      "ascending",
+      "rootbest-first"
+    ],
+    "repeats": 2,
+    "condition_order": "NNUE ascending,NNUE rootbest-first,D ascending,D rootbest-first; repeat same fixed order",
+    "nodecap": 4096,
+    "requested_depth": 3
+  },
+  "game": {
+    "outer_ms": 100,
+    "internal_ms": 90,
+    "nodecap": 8192,
+    "requested_depth": 64,
+    "order": "rootbest-first",
+    "NO_COMPLETED_DEPTH": "typed unknown; no fallback",
+    "absolute_draw_ply": 200
+  },
+  "TT": 0,
+  "policy_exclusion": false,
+  "GPU": 0,
+  "NNcap": 4000000,
+  "allheavy_s": 1200,
+  "newscience": "2026-10-05T00:32:00Z",
+  "stop": "2026-10-05T00:38:00Z",
+  "save": "2026-10-05T00:45:00Z",
+  "oldtest_read": false,
+  "root_equal_argmax": "NOT_RECORDED unless exact allchild recorded",
+  "clone_parent_not_mutableundo": true,
+  "profile": "inclusive intervals overlap; wholewall separate",
+  "openings_SHA": "bfec1e7a4450f8766909944e6a46fedbbba1d197f9fc78dfa3e323ef39f9509c",
+  "clock_t1": "parent complete parse+generation+key/history+legal completed Action validation; t1-t0<=100",
+  "timeout_not_normal_loss": true
+}

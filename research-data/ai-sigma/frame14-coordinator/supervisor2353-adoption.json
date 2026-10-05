@@ -1,0 +1,21 @@
+{
+  "UTC": "2026-10-03T23:57:05.837860+00:00",
+  "source": "supervisor23:53 frame14 independent report",
+  "decision": "adopt with fixed pre-test contrast and original one-candidate selection unchanged",
+  "reason": "one-candidate baseline comparison alone does not answer teacher-quantity effect; paired fixed 24/96 LAST at same actual train samples adds little forward cost and avoids best-step confounding",
+  "test_comparators_frozen_before_labels": [
+    "selected candidate",
+    "same initial untrained model",
+    "train-derived constant",
+    "24stage last",
+    "96stage last"
+  ],
+  "unique_NN_models_max": 4,
+  "new_training_runs_added": 0,
+  "test_access_batches": 1,
+  "current_test_labels_read": false,
+  "claim": "fixed-compute data-quantity diagnostic, conditional unexposed subset and whole-new-game exposure secondary separate; not pure quantity causality or strength",
+  "cost_bound": "existing195 5m samples/900heavy/1200all/56MiB guard; incremental known train02-04 generation/export/train costs, unknown separate",
+  "next_effect_check": "freeze artifact and single test paired96minus24 error and cost receipt",
+  "automatic_increment_or_repeated_test": false
+}

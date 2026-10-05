@@ -1,0 +1,1 @@
+92 bounded-records自然run0bd85f42/turn01a10052はobserve実成立・12command/221184B保持、旧32MiB内・巨大全stdout保存0。finish05:56:09は残9秒/必要36秒で拒否、notesbackup未実施/turn_limitを保持。保存cap修復適用と完全復旧を区別する。時計延長/manualtick0。公式idle/ownednullで再度exact2identity秩序停止、finishを全判断整理より先に短く保存するprompt順序だけ最小修正し、次通常06:13予定を保持して再開。次効果は未確認で通常ownerへ引渡し。親11/長期08時台期限不変。

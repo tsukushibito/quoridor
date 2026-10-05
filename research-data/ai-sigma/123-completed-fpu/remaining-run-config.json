@@ -1,0 +1,89 @@
+{
+  "issue": "quoridor-4lc.123",
+  "received_UTC": "2026-10-02T12:39:08Z",
+  "processing_deadline": "2026-10-02T13:09:08Z",
+  "newjob_deadline": "2026-10-02T13:04:08Z",
+  "submit_deadline": "2026-10-02T13:19:08Z",
+  "actor": "codex:01a0f31d-6d15-7620-bb63-4b4f878e4746",
+  "NN_started": false,
+  "initial_Git": "c08261b852a5882a7558a10a14b26f783c1dba49",
+  "write_owner": "experiment",
+  "122_heavy_stop_required": true,
+  "run_id": "fpu123-count-r3",
+  "kind": "count",
+  "frame": 8,
+  "seed": 1979,
+  "pin_owned_TIDs": true,
+  "forecast_bytes": 20971520,
+  "minimum_remaining_heavy_seconds": 120,
+  "dependency_stop": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/122-diverse-prefix-independent/runtime-source-stopped-before-report.json",
+  "prefix_document": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/119-diverse-prefix/prefix-document.json",
+  "prefix_SHA256": "c8104df06585717c54900e02afcf62a9133a91fdfc2a25732da38dcc7b286e27",
+  "K": 32,
+  "count_timeout_ms": 20000,
+  "input_order": [
+    "diverse-prefix-1",
+    "diverse-prefix-2"
+  ],
+  "searches": [
+    {
+      "fixture_id": "diverse-prefix-1",
+      "condition": "C",
+      "K": 32
+    },
+    {
+      "fixture_id": "diverse-prefix-1",
+      "condition": "B",
+      "K": 32
+    },
+    {
+      "fixture_id": "diverse-prefix-1",
+      "condition": "A",
+      "K": 32
+    },
+    {
+      "fixture_id": "diverse-prefix-2",
+      "condition": "A",
+      "K": 32
+    },
+    {
+      "fixture_id": "diverse-prefix-2",
+      "condition": "B",
+      "K": 32
+    },
+    {
+      "fixture_id": "diverse-prefix-2",
+      "condition": "C",
+      "K": 32
+    }
+  ],
+  "CPU": [
+    2
+  ],
+  "NN_threads_each": 1,
+  "RAM": 6442450944,
+  "RSS_guard": 5905580032,
+  "model_sessions": 2,
+  "scope_saved_guard": 58720256,
+  "candidate_C": 1.5,
+  "reference_C": 1,
+  "reference_FPU": 0.2,
+  "C_factor": "strict unvisitedQ=0, not reduction=0",
+  "games": [],
+  "schedule": [],
+  "dynamic_plies": 0,
+  "diagnostic": true,
+  "actual_go": false,
+  "terminal_noNN_backups_separate": true,
+  "initial_root_backup_included": true,
+  "candidate_simulations": 32,
+  "reference_loop_iterations": 31,
+  "reference_root_N": 32,
+  "expected_edge_sum": 31,
+  "startup_root_NN": 6,
+  "500ms_timer_adopt_not_this_count_entrance": true,
+  "tree_history_cache_across_searches": false,
+  "B_C_same_instrumentation_model_session": true,
+  "Git": "33d2c134d17e93047f54a24419d4acf9c8128a43",
+  "resume_rule": "Keep original9completed exactly; prefix C schema failure before any tree/NN is retained, then only six not-executed actual searches. No successful-search repeat or favorable replacement."
+}

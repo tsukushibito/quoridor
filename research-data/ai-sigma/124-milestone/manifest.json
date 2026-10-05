@@ -1,0 +1,39 @@
+{
+  "issue": "quoridor-4lc.124.1",
+  "report": "docs/reports/ai-sigma-steward-milestone124.md",
+  "source_before_ref": "ce123acf7289320226652850f23b18bc514d3f6f",
+  "evidence": ".artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame8-milestone124",
+  "runtime": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame8-milestone124-7a4cc2d6-6d79-41c5-94ae-2accd7b2095c",
+  "scheduler": {
+    "pid": 2549133,
+    "start_ticks": "20046939",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "monitor": {
+    "pid": 2549146,
+    "start_ticks": "20046963",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+    "rss_bytes": 20635648,
+    "affinity": [
+      0
+    ]
+  },
+  "roles": [
+    {
+      "role": "supervisor",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+      "method": "thread/resume",
+      "permanent": true,
+      "definition_sha256": "612ccf6e79e06b2956eaa6f8d31e224a67ddbb93e51e6536ebb949c50e761423"
+    },
+    {
+      "role": "coordinator",
+      "thread_id": "01a0f31b-3409-75f2-a30e-453a50484f94",
+      "method": "thread/resume",
+      "permanent": true,
+      "definition_sha256": "a3263bb993566f1b0a3599bd2b95c9123ebc9fbc6086baa374e0b4b693953524"
+    }
+  ],
+  "scope": "milestone policy application only",
+  "future_quality": "unobserved"
+}

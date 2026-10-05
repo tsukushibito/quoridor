@@ -1,0 +1,17 @@
+goal quoridor-4lc/frame19 user明示2h22:52:46→10/5 00:52:46、heavy00:42:46/監督00:47:46/monitor00:50:46。same saved model-effort-cwd/LLM人数gate0、92親mainmirror/runtime solewriter編集0。旧243static60/科学0/予約1MiB、239/240/241/229費unknown・失敗・期限保持/旧openedtest選定復帰0/173正式198非学習。新model依存toolchain/productpush0。ready/showgoal+self assigned/nopause→claim、新私有scopeのみ。243source報告停止/本人closedを確認後、本243未来案を新244具体配分として実行する。242現在conditions/源/版/対局interrupt0、全役全文/rootACKgate0。
+
+問い:240固定4caseのD exact root値同値は非終端clipの順位消失か、終局値がminimaxで伝播したか。その二つを保存extremumの由来で区別し、D対照・NNUEleaf意味の次優先を変える。一介入D非終端clip→固定tanh、係数/入力/terminal/全legal/history/order同じ、f32丸め順を明示。再fit/NNUE新forward/新対局/教師target/testlabel読取0、tanhの棋力や公平基準完成は認定0。
+
+solewrite tools/ai-sigma-frame19-distance-provenance/、research-data/ai-sigma/frame19-distance-provenance/、docs/reports/ai-sigma-hypothesis-frame19-distance-provenance.md。新1MiB確認既unused30515200→29466624から一度計上、guard768KiB/forecast512KiB（source+results gzip+uniqueGit/temp/metadata込み）、親追加/oldunknown割引/旧返却0。modelweights/dataset/PTcopy0、manifest距離係数SHA/固定caseprefix/hashだけreuse。
+
+元240停止exact-cases/leaf/native/sharedRuleA source readonly、frozen4case239機械規則とhistory/fullprefix/hashを束縛。両Dで同case4×同depth1/2全legalrootchild=16conditionを結果前固定、depth不足/guard到達はtypedUNKNOWN/NOT_RUN、勝敗/newrawでcase/depth選び直し0。root full-windowで各legalchild採用value exact、内部必要max/minは同合法/RuleAterminal-first・STM各edge符号反転・parentbuffer/key/history復帰/strictgreater tieを保つ。旧failsoft nonbestをexactに付替え0。
+
+非terminal rawu=f32(a+b*(dopp−dself))の旧同f32順を保存。clipは元[-1,1]、tanhはf32(Math.tanh(u))等の明示固定source、input/q STMdistancef32/80を同じにする。終局は元±1/200draw/全legalなし0を先処理しD変更をかけない。P2/jump/wall/NO_LEGAL/historyfallback・caseclone/terminal-first/tanhf32 finite/端点丸めの有限fixtureを同一計算job冒頭で処理。新Torch/学習0、新NN/model inference0。
+
+各exactrootchildで値だけでなく、極値へ実際に寄与するleaf origin kinds(terminalWin/Loss/Draw、nonterminal saturated/unsaturated)を符号反転とmin/max・同値に対応して集合/件数又はtypedmissingで保存する。全訪問leaf中にterminalがあっただけでroot極値をterminal起源と推定0。principal witnessだけならそのwitnessの限定支持で他同値extremumへ一般化0。非terminal preclip/clip/tanhと同値集合/選択Action/sourcegapを保存、rootscore±1だけでcause確定0。tanhendpointが丸めで±1になる有限範囲を確認し未知をterminal区別PASSにしない。元clip exact列は同保存値対応/tol結果前登録で照合し、新case原sourceを編集0。
+
+新科学CPU4single/RAM512MiBguard448、新NN0/GPU0、最多1専用計算job/hard90s/合計90s、processed安全guard65536を16条件合計にresult前固定（旧63172は有限見積で上界保証0）。必要fixture/全部条件/中断を同1jobに含め、失敗後job追加/再実行/reset0。source-read45/static実装管理180秒、実装10–15分見積。guard/RSS/node/time/取消で未完なら列を採用せず原部分/費未知保持、成功補充0。出力task frame19-distance-provenance-244-v1/schema distance-provenance-v1/実argv/sourceSHA/予期出力を開始前束縛しpost照合、旧entrypoint汎用checker流用による正常exitを目的成功へ認定0。
+
+静的は242と並行、実CPUjobはmain242 actualscientific不在/全背景jobcleanup/PIDtickとfresh正frame19 loadedbinding/owned/current実CPU/RAM/GPU/storageを事前bindし、100ms対局測定に競合0。producer科学source停止と今後job状態を物理点で確認、LLM人数gate0/全main完全文読取0。自然Supervisor次点予定00:21に計算を重ねない窓でhard90+reap30を確保、currentnext/owned/実Computeから判断。現主要guard免除/他ownerinterrupt0。背景submit→jobIDnotes→Idle→一度completionを再用、current管理祖先identityをprivateguardへ必要接線。短jobならawait wait/reap exact回収後同turn、LLM polling0。
+
+source ready目安00:23、新science入口00:29停止/全stop00:32/save00:39、親00:42/52維持。物理/時間が成立しなければtypedNOT_STARTEDで次枠候補保持、実装見積超過の延長0。重要結果を次最大1採否へ、tanh順位が分かれても手の強さ支持0、終局が全てならclip仮説の順位を下げleaf-target/historyへ戻す（新学習自動起動0）。本人有限検証と必要Gitbyte/Beads closebackupを同実質turnで完了、最高goal未達。

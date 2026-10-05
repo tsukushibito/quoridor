@@ -1,0 +1,18 @@
+[
+  {
+    "run": "check-r1",
+    "exit": 1,
+    "exception": "KeyError legal_actions at fixed-root binding",
+    "cause": "three golden vs slot13/14 schema difference",
+    "scientific_failure": false,
+    "source_sha256": "cbfe704355585a7fbe2fcc6ceffe8b080518176430d45395d9fc89a0a11cf9ed",
+    "source_path": "tools/ai-sigma-native-stageA-independent/check-r1-failed.py",
+    "log_path": "research-data/ai-sigma/168-native-stageA-independent/check-r1.log",
+    "elapsed_seconds": null,
+    "RSS": null,
+    "budget_charge_seconds": 60,
+    "repair": "explicit legal_actions/raw_features_float32 or legal_ids/features_bits branch",
+    "repair_run": "check-r2",
+    "repair_exit": 0
+  }
+]

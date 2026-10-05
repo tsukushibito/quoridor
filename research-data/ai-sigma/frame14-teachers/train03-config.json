@@ -1,0 +1,24 @@
+{
+  "issue": "quoridor-4lc.194",
+  "run_id": "native194-train03-r1",
+  "kind": "generate",
+  "job": "train03",
+  "mode": "GPU24",
+  "active_per_worker": 8,
+  "management_core": 0,
+  "cores": [
+    0,
+    2,
+    4,
+    6
+  ],
+  "RAM": 6442450944,
+  "RAM_guard": 5905580032,
+  "job_seconds": 300,
+  "NN_cap": 307200,
+  "science_deadline": "2026-10-04T02:20:00Z",
+  "script": "generate.cjs",
+  "job_out": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/frame14-teachers/native194-train03-r1",
+  "openings_path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/openings.json",
+  "source_git": "373013bb9b659fb9ca7be7fedb0bf09356bb242f"
+}

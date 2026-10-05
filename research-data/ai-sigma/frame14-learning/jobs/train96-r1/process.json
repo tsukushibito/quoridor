@@ -1,0 +1,44 @@
+{
+  "id": "train96-r1",
+  "kind": "heavy",
+  "UTC": "2026-10-04T00:15:24.724368+00:00",
+  "identity": {
+    "pid": 3804916,
+    "ppid": 3804861,
+    "pgrp": 3804916,
+    "tick": "32587946",
+    "RSS": 0,
+    "cmd": "",
+    "affinity": [
+      2
+    ]
+  },
+  "command": [
+    "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "-B",
+    "tools/nnue-training/train.py",
+    "--data",
+    "research-data/ai-sigma/frame14-learning/stages/train96.stage.json",
+    "--config",
+    "research-data/ai-sigma/frame14-learning/qf1-frame14.json",
+    "--run-id",
+    "frame14-train96-r1",
+    "--output",
+    "research-data/ai-sigma/frame14-learning/runs",
+    "--checkpoints",
+    "models/experiments/nnue"
+  ],
+  "wall_seconds": 5.466612293035723,
+  "peak_family_RSS": 781283328,
+  "exit": 0,
+  "reason": "completed",
+  "child_waited": true,
+  "remaining": [],
+  "current_exact_identity_absent": true,
+  "samples_charged": 379921,
+  "sample_cap": 379921,
+  "CPU": [
+    2
+  ],
+  "GPU": 0
+}

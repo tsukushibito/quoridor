@@ -1,0 +1,22 @@
+{
+  "rows": 5901,
+  "max_abs": 9.404309009308776e-08,
+  "max_residual_abs": 0.0,
+  "pass": true,
+  "atol": 1e-06,
+  "rtol": 1e-06,
+  "scalar_clip_inputs": [
+    -2.0,
+    -0.5,
+    0.5,
+    2.0
+  ],
+  "scalar_clip_gradients": [
+    0.0,
+    1.0,
+    1.0,
+    0.0
+  ],
+  "extra_NN_forward_samples": 0,
+  "saturated_baseline_gradient": "zero outside clip, possible residual learning limitation"
+}

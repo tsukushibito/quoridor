@@ -1,0 +1,153 @@
+{
+  "issue": "quoridor-4lc.100",
+  "UTC": "2026-10-02T03:52:01.133355+00:00",
+  "NN_end": "2026-10-02T03:45:45.166902+00:00",
+  "identity_count": 77,
+  "same_identity_live": [],
+  "drop": {
+    "kind": "dropped",
+    "handles": 0,
+    "activeNN": 0,
+    "at_ms": 1790912744714.7,
+    "producer_post_begin_ms": 1790912744714.7,
+    "transport": {
+      "page_received_ms": 1790912744714.5999,
+      "page_binding_begin_ms": null,
+      "page_binding_end_ms": null
+    }
+  },
+  "controlled": {
+    "forced": true,
+    "controlledPID0": true,
+    "remaining_pids": 0,
+    "waited": true
+  },
+  "monitor": {
+    "state": "BEADS_READ_ERROR",
+    "failure": {
+      "code": "BEADS_READ_ERROR",
+      "cause": {
+        "name": "Error",
+        "message": "Command failed: bash /workspaces/quoridor/.worktree/ai-sigma/scripts/dev/beads.sh show quoridor-4lc --json\nError fetching quoridor-4lc: failed to search issues: context canceled\n",
+        "code": 1,
+        "signal": null,
+        "killed": false
+      }
+    },
+    "pending_children": [],
+    "all_owned_read_callbacks_waited": true,
+    "active_monitor_timer": false
+  },
+  "original_source_hashafter_match": true,
+  "all_jobs": [
+    {
+      "name": "static-mock-r2",
+      "start": "2026-10-02T03:44:53.752669+00:00",
+      "end": "2026-10-02T03:44:54.258653+00:00",
+      "exit": 0,
+      "reason": null,
+      "remaining": [],
+      "peakRSS": 147537920,
+      "peakStorage": 1748992,
+      "CPU": 0,
+      "observed_TIDs_match": true
+    },
+    {
+      "name": "nn-primary-r1",
+      "start": "2026-10-02T03:45:31.097055+00:00",
+      "end": "2026-10-02T03:45:45.166902+00:00",
+      "exit": 0,
+      "reason": null,
+      "remaining": [],
+      "peakRSS": 1418432512,
+      "peakStorage": 4136960,
+      "CPU": 2,
+      "observed_TIDs_match": true
+    },
+    {
+      "name": "static-arithmetic100-r1",
+      "start": "2026-10-02T03:46:25.529155+00:00",
+      "end": "2026-10-02T03:46:25.587158+00:00",
+      "exit": 0,
+      "reason": null,
+      "remaining": [],
+      "peakRSS": 26148864,
+      "peakStorage": 2904064,
+      "CPU": 0,
+      "observed_TIDs_match": true
+    },
+    {
+      "name": "static-numeric-r1",
+      "start": "2026-10-02T03:48:11.118111+00:00",
+      "end": "2026-10-02T03:48:11.414174+00:00",
+      "exit": 1,
+      "reason": null,
+      "remaining": [],
+      "peakRSS": 76767232,
+      "peakStorage": 2945024,
+      "CPU": 0,
+      "observed_TIDs_match": true
+    },
+    {
+      "name": "static-final-evidence-r1",
+      "start": "2026-10-02T03:51:17.363361+00:00",
+      "end": "2026-10-02T03:51:18.631708+00:00",
+      "exit": 1,
+      "reason": null,
+      "remaining": [],
+      "peakRSS": 40632320,
+      "peakStorage": 3026944,
+      "CPU": 0,
+      "observed_TIDs_match": true
+    },
+    {
+      "name": "static-numeric-r2",
+      "start": "2026-10-02T03:48:34.896562+00:00",
+      "end": "2026-10-02T03:48:35.088344+00:00",
+      "exit": 0,
+      "reason": null,
+      "remaining": [],
+      "peakRSS": 91893760,
+      "peakStorage": 2981888,
+      "CPU": 0,
+      "observed_TIDs_match": true
+    },
+    {
+      "name": "static-arithmetic-r1",
+      "start": "2026-10-02T03:43:50.866742+00:00",
+      "end": "2026-10-02T03:43:50.925539+00:00",
+      "exit": 0,
+      "reason": null,
+      "remaining": [],
+      "peakRSS": 27246592,
+      "peakStorage": 1646592,
+      "CPU": 0,
+      "observed_TIDs_match": true
+    },
+    {
+      "name": "static-mock-r1",
+      "start": "2026-10-02T03:44:21.459245+00:00",
+      "end": "2026-10-02T03:44:22.023603+00:00",
+      "exit": 1,
+      "reason": null,
+      "remaining": [],
+      "peakRSS": 146280448,
+      "peakStorage": 1708032,
+      "CPU": 0,
+      "observed_TIDs_match": true
+    }
+  ],
+  "runtime_source_stopped_before_report": true,
+  "instant_peak_background_allCPU_not_guaranteed": true,
+  "combined_scope_guarantee": "conservative observed holdings only; no whole host inventory",
+  "actual_go": false,
+  "source_runtime_git": "997e27496ec5cec1845dbd92ab164504d7492b06",
+  "config_Git_field": "83bb0ce4ea55b210f1657913ab2d6f2fa728eac5 is immutable upstream producer; adapter source identified separately, not same Git commit",
+  "UTC_all_helpers_stopped": "2026-10-02T03:53:58.493348+00:00",
+  "all_guarded_jobs": 9,
+  "all_process_identity_count": 88,
+  "all_process_current_live": [],
+  "last_guarded_helper_end": "2026-10-02T03:52:01.161052+00:00",
+  "static_job_wall_seconds": 4.004101,
+  "NN_job_wall_seconds": 14.069847
+}

@@ -1,0 +1,65 @@
+{
+  "issue": "quoridor-4lc.107",
+  "contract": 3,
+  "UTC": "2026-10-02T05:17:25.695478+00:00",
+  "source_stopped": true,
+  "Git": "8b9e99f0f4f57a4e06dcdf7ea8bbd7f6c65602a1",
+  "source_sha256": {
+    "tools/ai-sigma-cp-frame/README.md": "0516970ba5d3e22c360bfa424401711eb0f166366c6d82295cfb6427a945ac72",
+    "tools/ai-sigma-cp-frame/browser-main.js": "85961475028496ee88a325b18c6dcd076dac5e3b6fab75620ba120e8ccaa7b9e",
+    "tools/ai-sigma-cp-frame/browser-sab.cjs": "64b33ce09d47a49f7a72c7966c5a23a2f53c97d96aaef79672c13229e77bf998",
+    "tools/ai-sigma-cp-frame/browser.cjs": "8b0c6f4acb6fe3d99d718e625308d334e1f7516ff792f88479d79355e5ddeefc",
+    "tools/ai-sigma-cp-frame/diagnose.cjs": "34a66d91bd9dafb617d7d75ed2ad490d64c56c1a134f7673e4e2cf2fe27f83a8",
+    "tools/ai-sigma-cp-frame/frame-codec.js": "b5209a7bba33e019005068b470aa87ea68f88d860840f86922122b7637928f77",
+    "tools/ai-sigma-cp-frame/mock-protocol.cjs": "adf64f4d017ecde5d31ae1633239478c24206e77536c313e7aff2f6265f33c06",
+    "tools/ai-sigma-cp-frame/numeric-browser.js": "00d4d518a613e1a28fb4ee010076d3bca20a7247b0d0a96a46dd4ca86b74df01",
+    "tools/ai-sigma-cp-frame/real-backend.cjs": "1bb3a1aa5d806426379335c423642865d0eebe552b57511b1cefe26f1aeed17f",
+    "tools/ai-sigma-cp-frame/runner.py": "86d8fcfe569c3d2eaf83991e4fe28f745a6589e128bd403b12e83770ba5ad642",
+    "tools/ai-sigma-cp-frame/sab-worker.js": "5c67823ab5cbc3ffc4cf598594816c438e547d375ae751ad624eaf0661aa1b6b",
+    "tools/ai-sigma-cp-frame/shared-best-action.cjs": "8acf95ee8ee877365ba892047ff9c748fbbc7f51526cb1328a55e7bd04def718",
+    "tools/ai-sigma-cp-frame/worker-adapter.js": "1bc4324a34b21ec36cf68b806b4d0b73a9a0c26e47ac604a0161663345984953"
+  },
+  "runtime_runs": [
+    {
+      "run": "static-preflight-r1",
+      "exit": -9,
+      "reason": "RSS_GUARD",
+      "remaining": [],
+      "unknown_adopted": [],
+      "max_current_RSS": 1012486144,
+      "past_launcher_ru_maxrss": 607244288
+    },
+    {
+      "run": "static-protocol-r1",
+      "exit": 0,
+      "reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "max_current_RSS": 92749824,
+      "past_launcher_ru_maxrss": 607244288
+    }
+  ],
+  "owned_recorded_identity_count": 28,
+  "owned_identity_current_live": [],
+  "NN_calls": 0,
+  "model_loads": 0,
+  "Chromium_launch_attempts": 1,
+  "normal_requests_planned": 3,
+  "normal_requests_completed": 0,
+  "normal_requests_unexecuted": 3,
+  "startup_planned": 6,
+  "startup_executed": 0,
+  "superseded_frame_plan24_executed": 0,
+  "Modeldrop_ACK": "not_obtained; preflight never called model load",
+  "search_ACK": "not_obtained; no search dispatched",
+  "monitor_callback_stop": "preflight observer SIGTERM saved as BEADS_READ_ERROR; all recorded process identities now absent, graceful callback completion not proven",
+  "inner_browser_stop_ACK": "missing; outer guardian forced SIGTERM then SIGKILL",
+  "limits": [
+    "40ms RSS sampling may miss peak",
+    "initial short shell/read/write commands not fully resource monitored",
+    "currentabsence does not prove natural shutdown/full-period ownership",
+    "Node worker_threads mock does not prove browser SAB or AI functionality"
+  ],
+  "actual_go": false,
+  "entry_ready": false
+}

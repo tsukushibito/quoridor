@@ -1,0 +1,23 @@
+{
+  "issue": "quoridor-4lc.170",
+  "previous_runtime_source_git": "a78ea8336edc84c9716fee8972c86d94200941b6",
+  "previous_preservation_git": "51442e060668c5b2b758bc1277f37f2bb7896b52",
+  "engine_source_SHA256": "a7c7fd516785455b5412997fee59630b80cd99bd7fe01021e02b0fc3f5c0dde4",
+  "binary_SHA256": "166dd0c4f5eef9cd02a189e9e8bb4811bd307f6545db83a07e7180ea410e96f8",
+  "read_only_runtime": {
+    "tools/ai-sigma-native-baseline/common.cjs": "35a01a1db0dd124ba78c59aa1bff38232d73fd202c41188bb0f4960e71a4424f",
+    "tools/ai-sigma-native-baseline/reference.cjs": "85cae30273fa481f96ec28fa77eeb5907bb203812c7234f9ffdfd75d337848cf",
+    "tools/ai-sigma-native-baseline/reference-core-native.js": "9670b29d07489a568206b739cf4acdf5477a3c4f0a22f5e8fee2332166201705",
+    "tools/ai-sigma-native-baseline/game.js": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+    "tools/ai-sigma-native-baseline/context.js": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+    "tools/ai-sigma-native-baseline/clock.cjs": "b79bdfba1f3780a7e2394fb04c5703e2ef62daae5283880f7433c65c0c433f2a",
+    "tools/ai-sigma-native-baseline/ort.py": "a1385fa48b07a2e5fb34d105e13d06556efed100b127a3667dfd0daa25111565",
+    "tools/ai-sigma-native-baseline/pause-monitor.cjs": "3da03be6ecd7ac5dd9a374f81ea9292c1ea43abeb4a9ed10bfc93bc1279a4527",
+    "tools/ai-sigma-native-baseline/trace-reference.js": "056c98b85d4003835dba54b6170249114e46b20146a1be0f691490e39aba92f0"
+  },
+  "model_SHA256": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+  "NN_provider": "native Python ORT1.30 CPUExecutionProvider SEQUENTIAL intra/inter1",
+  "loader_patch": "resource guard before actual infer: count>=NN_limit => NN_BUDGET, original engine bytes readonly",
+  "policy_changes": 0,
+  "new_build_or_dependencies": 0
+}

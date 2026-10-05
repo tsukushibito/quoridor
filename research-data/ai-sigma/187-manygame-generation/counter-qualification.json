@@ -1,0 +1,14 @@
+{
+  "issue": "quoridor-4lc.187",
+  "UTC": "2026-10-03T14:06:31.976915+00:00",
+  "normal_four_modes_physical_handNN": 254880,
+  "failed_RustCPU_logical_requests": 190,
+  "failed_RustCPU_physical_handNN": "UNKNOWN; <=190",
+  "handNN_physical_total_upper_bound": 255070,
+  "parity_physical_samples": 72,
+  "startup_physical_samples": 3,
+  "total_physical_forward_upper_bound": 255145,
+  "reason": "Failed worker counters.started/usedNN count logical infer requests before broker physical flush. Physical localBroker count was not preserved separately. Cancellation can discard a queued request. Completed four modes started=returned and provider counts remain exact. Preserve failed raw counters without reclassifying UNKNOWN or rerunning.",
+  "original_evidenceGit": "c8f8e087bd4d40072070adbde0fb236d07676818",
+  "change": "Counter qualification/display only; all slot status, costs, rows, speed and source unchanged."
+}

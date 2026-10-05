@@ -1,0 +1,41 @@
+{
+  "NN_executed": 0,
+  "first_difference": "'native187-cpujs-r1/process.json'",
+  "supported": false,
+  "type": "KeyError",
+  "trace": "Traceback (most recent call last):\n  File \"/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/191-manygame-independent/bind.py\", line 15, in <module>\n    rel=name[len(str(B))+1:];need(manifest['members'][rel]['SHA256']==old['SHA256'],'archive member binding '+rel);members.append(rel)\n                                  ~~~~~~~~~~~~~~~~~~~^^^^^\nKeyError: 'native187-cpujs-r1/process.json'\n",
+  "snapshots": {
+    "research-data/ai-sigma/191-manygame-independent/arithmetic.json": {
+      "SHA256": "653e4f9959bf855de140c308d1ee2b6f0f18cb2dd01f9148de94db2f9e565cc7",
+      "bytes": 50347
+    },
+    "research-data/ai-sigma/187-manygame-generation/archive-manifest.json": {
+      "SHA256": "7b71417c1879cb1c7f378fd2ac59c7ddbef25bf700ad2c6a4a1a478c8e43a1a7",
+      "bytes": 33718
+    },
+    "research-data/ai-sigma/187-manygame-generation/all-attempt-evidence.tar.gz": {
+      "SHA256": "9f433858f6ba0b5847a9cf36cbfe78c62475ed18847907fadab0ed90807d61c7",
+      "bytes": 3608539
+    },
+    "research-data/ai-sigma/187-manygame-generation/openings.json": {
+      "SHA256": "4ec94a50da0c7c53604085fca3fff95e1713f02c9f6ea220d1c0f177985fdba5",
+      "bytes": 420705
+    },
+    "research-data/ai-sigma/187-manygame-generation/CPUJS-all-status.json": {
+      "SHA256": "6f76a5ca5f4a2123ac8269b21c4f1970d0119e6041227ba0ff6439bf91e72ca0",
+      "bytes": 147861
+    },
+    "research-data/ai-sigma/187-manygame-generation/CPUJS-summary.json": {
+      "SHA256": "89488a39ca899e5f0d30ffc492689822203eb458552da205420d0556b51fd921",
+      "bytes": 6017
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-cpujs-r1/process.json": {
+      "SHA256": "99a98390a692d892285a0f20dc0c34b59cd833a8c85549048dda91394f5e64a9",
+      "bytes": 37927
+    }
+  },
+  "elapsed_seconds": 0.007084027980454266,
+  "RSS_bytes": 22364160,
+  "PID": 3596584,
+  "end": "2026-10-03T14:06:13.429297+00:00"
+}

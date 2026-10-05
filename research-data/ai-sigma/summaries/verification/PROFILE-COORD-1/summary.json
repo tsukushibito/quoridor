@@ -1,0 +1,500 @@
+{
+  "started_at": "2026-09-30T18:45:15.657379+00:00",
+  "budget": {
+    "cpu": 1,
+    "affinity": [
+      2
+    ],
+    "ram_mib": 256,
+    "storage_mib": 32,
+    "wall_seconds": 120
+  },
+  "rounds": 2,
+  "results": {
+    "initial": {
+      "output_exact_equal": true,
+      "R_exp_min_max": [
+        0.9769036695978414,
+        0.991364798098103
+      ],
+      "R_all_min_max": [
+        0.9697981751154618,
+        0.9851576767759811
+      ],
+      "original_samples": 6,
+      "coarse_samples": 20,
+      "original_median_ms": 20.9605995,
+      "coarse_median_ms": 21.804138000000002,
+      "overhead_pct": 4.024400637968406
+    },
+    "opening": {
+      "output_exact_equal": true,
+      "R_exp_min_max": [
+        0.9867588346396735,
+        0.990804608059824
+      ],
+      "R_all_min_max": [
+        0.9791435743041965,
+        0.9841621134487312
+      ],
+      "original_samples": 6,
+      "coarse_samples": 20,
+      "original_median_ms": 19.6091115,
+      "coarse_median_ms": 20.2539255,
+      "overhead_pct": 3.288338688879411
+    },
+    "walled-midgame": {
+      "output_exact_equal": true,
+      "R_exp_min_max": [
+        0.9843706826306923,
+        0.991549500134461
+      ],
+      "R_all_min_max": [
+        0.9780934947770916,
+        0.9861101789447043
+      ],
+      "original_samples": 6,
+      "coarse_samples": 20,
+      "original_median_ms": 20.496675500000002,
+      "coarse_median_ms": 21.548408000000002,
+      "overhead_pct": 5.1312345750899935
+    },
+    "p2": {
+      "output_exact_equal": true,
+      "R_exp_min_max": [
+        0.9887694293997459,
+        0.9921749393749709
+      ],
+      "R_all_min_max": [
+        0.9816874049289557,
+        0.9872288969674358
+      ],
+      "original_samples": 6,
+      "coarse_samples": 20,
+      "original_median_ms": 21.077013,
+      "coarse_median_ms": 21.566674,
+      "overhead_pct": 2.323199212336191
+    },
+    "jump-p2": {
+      "output_exact_equal": true,
+      "R_exp_min_max": [
+        0.9757821456566278,
+        0.9815698683656625
+      ],
+      "R_all_min_max": [
+        0.9624635312413905,
+        0.9699626538918417
+      ],
+      "original_samples": 6,
+      "coarse_samples": 20,
+      "original_median_ms": 10.404436,
+      "coarse_median_ms": 10.703034500000001,
+      "overhead_pct": 2.8699152938227668
+    },
+    "many-walls": {
+      "output_exact_equal": true,
+      "R_exp_min_max": [
+        0.9862530069624521,
+        0.9887500381258633
+      ],
+      "R_all_min_max": [
+        0.9769312061538628,
+        0.9806449425283048
+      ],
+      "original_samples": 6,
+      "coarse_samples": 20,
+      "original_median_ms": 11.758478499999999,
+      "coarse_median_ms": 11.8066195,
+      "overhead_pct": 0.4094152147320784
+    }
+  },
+  "jobs": [
+    {
+      "pid": 639906,
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-B0-PROFILE/control-profile-native",
+        "initial"
+      ],
+      "binary_sha256": "057f50223340b623a181b9e902d1c5a5fab13c376bd5a43ba79a913440433dd4",
+      "started_at": "2026-09-30T18:45:15.657410+00:00",
+      "ended_at": "2026-09-30T18:45:15.749004+00:00",
+      "exit_code": 0,
+      "maxrss_children_kib": 16756
+    },
+    {
+      "pid": 639907,
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-B0-PROFILE/contract2-profile-native",
+        "initial",
+        "coarse",
+        "11"
+      ],
+      "binary_sha256": "4370c6e5c3d3a059c311abf5eb44e8ec12244490ec0b39693ba2bff38e0105c7",
+      "started_at": "2026-09-30T18:45:15.749293+00:00",
+      "ended_at": "2026-09-30T18:45:16.005990+00:00",
+      "exit_code": 0,
+      "maxrss_children_kib": 17236
+    },
+    {
+      "pid": 639909,
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-B0-PROFILE/contract2-profile-native",
+        "initial",
+        "coarse",
+        "11"
+      ],
+      "binary_sha256": "4370c6e5c3d3a059c311abf5eb44e8ec12244490ec0b39693ba2bff38e0105c7",
+      "started_at": "2026-09-30T18:45:16.007020+00:00",
+      "ended_at": "2026-09-30T18:45:16.285124+00:00",
+      "exit_code": 0,
+      "maxrss_children_kib": 17432
+    },
+    {
+      "pid": 639910,
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-B0-PROFILE/control-profile-native",
+        "initial"
+      ],
+      "binary_sha256": "057f50223340b623a181b9e902d1c5a5fab13c376bd5a43ba79a913440433dd4",
+      "started_at": "2026-09-30T18:45:16.286063+00:00",
+      "ended_at": "2026-09-30T18:45:16.379571+00:00",
+      "exit_code": 0,
+      "maxrss_children_kib": 18124
+    },
+    {
+      "pid": 639911,
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-B0-PROFILE/control-profile-native",
+        "opening"
+      ],
+      "binary_sha256": "057f50223340b623a181b9e902d1c5a5fab13c376bd5a43ba79a913440433dd4",
+      "started_at": "2026-09-30T18:45:16.379812+00:00",
+      "ended_at": "2026-09-30T18:45:16.466405+00:00",
+      "exit_code": 0,
+      "maxrss_children_kib": 18124
+    },
+    {
+      "pid": 639912,
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-B0-PROFILE/contract2-profile-native",
+        "opening",
+        "coarse",
+        "11"
+      ],
+      "binary_sha256": "4370c6e5c3d3a059c311abf5eb44e8ec12244490ec0b39693ba2bff38e0105c7",
+      "started_at": "2026-09-30T18:45:16.466585+00:00",
+      "ended_at": "2026-09-30T18:45:16.696649+00:00",
+      "exit_code": 0,
+      "maxrss_children_kib": 18124
+    },
+    {
+      "pid": 639914,
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-B0-PROFILE/contract2-profile-native",
+        "opening",
+        "coarse",
+        "11"
+      ],
+      "binary_sha256": "4370c6e5c3d3a059c311abf5eb44e8ec12244490ec0b39693ba2bff38e0105c7",
+      "started_at": "2026-09-30T18:45:16.697137+00:00",
+      "ended_at": "2026-09-30T18:45:16.939084+00:00",
+      "exit_code": 0,
+      "maxrss_children_kib": 18124
+    },
+    {
+      "pid": 639926,
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-B0-PROFILE/control-profile-native",
+        "opening"
+      ],
+      "binary_sha256": "057f50223340b623a181b9e902d1c5a5fab13c376bd5a43ba79a913440433dd4",
+      "started_at": "2026-09-30T18:45:16.939575+00:00",
+      "ended_at": "2026-09-30T18:45:17.026711+00:00",
+      "exit_code": 0,
+      "maxrss_children_kib": 18284
+    },
+    {
+      "pid": 639927,
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-B0-PROFILE/control-profile-native",
+        "walled-midgame"
+      ],
+      "binary_sha256": "057f50223340b623a181b9e902d1c5a5fab13c376bd5a43ba79a913440433dd4",
+      "started_at": "2026-09-30T18:45:17.026978+00:00",
+      "ended_at": "2026-09-30T18:45:17.118504+00:00",
+      "exit_code": 0,
+      "maxrss_children_kib": 18284
+    },
+    {
+      "pid": 639928,
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-B0-PROFILE/contract2-profile-native",
+        "walled-midgame",
+        "coarse",
+        "11"
+      ],
+      "binary_sha256": "4370c6e5c3d3a059c311abf5eb44e8ec12244490ec0b39693ba2bff38e0105c7",
+      "started_at": "2026-09-30T18:45:17.118732+00:00",
+      "ended_at": "2026-09-30T18:45:17.366951+00:00",
+      "exit_code": 0,
+      "maxrss_children_kib": 18284
+    },
+    {
+      "pid": 639929,
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-B0-PROFILE/contract2-profile-native",
+        "walled-midgame",
+        "coarse",
+        "11"
+      ],
+      "binary_sha256": "4370c6e5c3d3a059c311abf5eb44e8ec12244490ec0b39693ba2bff38e0105c7",
+      "started_at": "2026-09-30T18:45:17.367398+00:00",
+      "ended_at": "2026-09-30T18:45:17.619821+00:00",
+      "exit_code": 0,
+      "maxrss_children_kib": 18284
+    },
+    {
+      "pid": 639937,
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-B0-PROFILE/control-profile-native",
+        "walled-midgame"
+      ],
+      "binary_sha256": "057f50223340b623a181b9e902d1c5a5fab13c376bd5a43ba79a913440433dd4",
+      "started_at": "2026-09-30T18:45:17.620297+00:00",
+      "ended_at": "2026-09-30T18:45:17.724412+00:00",
+      "exit_code": 0,
+      "maxrss_children_kib": 18284
+    },
+    {
+      "pid": 639938,
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-B0-PROFILE/control-profile-native",
+        "p2"
+      ],
+      "binary_sha256": "057f50223340b623a181b9e902d1c5a5fab13c376bd5a43ba79a913440433dd4",
+      "started_at": "2026-09-30T18:45:17.724632+00:00",
+      "ended_at": "2026-09-30T18:45:17.822104+00:00",
+      "exit_code": 0,
+      "maxrss_children_kib": 18284
+    },
+    {
+      "pid": 639939,
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-B0-PROFILE/contract2-profile-native",
+        "p2",
+        "coarse",
+        "11"
+      ],
+      "binary_sha256": "4370c6e5c3d3a059c311abf5eb44e8ec12244490ec0b39693ba2bff38e0105c7",
+      "started_at": "2026-09-30T18:45:17.822296+00:00",
+      "ended_at": "2026-09-30T18:45:18.090468+00:00",
+      "exit_code": 0,
+      "maxrss_children_kib": 18284
+    },
+    {
+      "pid": 639940,
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-B0-PROFILE/contract2-profile-native",
+        "p2",
+        "coarse",
+        "11"
+      ],
+      "binary_sha256": "4370c6e5c3d3a059c311abf5eb44e8ec12244490ec0b39693ba2bff38e0105c7",
+      "started_at": "2026-09-30T18:45:18.091039+00:00",
+      "ended_at": "2026-09-30T18:45:18.334959+00:00",
+      "exit_code": 0,
+      "maxrss_children_kib": 18284
+    },
+    {
+      "pid": 639941,
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-B0-PROFILE/control-profile-native",
+        "p2"
+      ],
+      "binary_sha256": "057f50223340b623a181b9e902d1c5a5fab13c376bd5a43ba79a913440433dd4",
+      "started_at": "2026-09-30T18:45:18.335534+00:00",
+      "ended_at": "2026-09-30T18:45:18.429762+00:00",
+      "exit_code": 0,
+      "maxrss_children_kib": 18444
+    },
+    {
+      "pid": 639942,
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-B0-PROFILE/control-profile-native",
+        "jump-p2"
+      ],
+      "binary_sha256": "057f50223340b623a181b9e902d1c5a5fab13c376bd5a43ba79a913440433dd4",
+      "started_at": "2026-09-30T18:45:18.430021+00:00",
+      "ended_at": "2026-09-30T18:45:18.480234+00:00",
+      "exit_code": 0,
+      "maxrss_children_kib": 18444
+    },
+    {
+      "pid": 639944,
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-B0-PROFILE/contract2-profile-native",
+        "jump-p2",
+        "coarse",
+        "11"
+      ],
+      "binary_sha256": "4370c6e5c3d3a059c311abf5eb44e8ec12244490ec0b39693ba2bff38e0105c7",
+      "started_at": "2026-09-30T18:45:18.480407+00:00",
+      "ended_at": "2026-09-30T18:45:18.606609+00:00",
+      "exit_code": 0,
+      "maxrss_children_kib": 18444
+    },
+    {
+      "pid": 639945,
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-B0-PROFILE/contract2-profile-native",
+        "jump-p2",
+        "coarse",
+        "11"
+      ],
+      "binary_sha256": "4370c6e5c3d3a059c311abf5eb44e8ec12244490ec0b39693ba2bff38e0105c7",
+      "started_at": "2026-09-30T18:45:18.607140+00:00",
+      "ended_at": "2026-09-30T18:45:18.745150+00:00",
+      "exit_code": 0,
+      "maxrss_children_kib": 18444
+    },
+    {
+      "pid": 639946,
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-B0-PROFILE/control-profile-native",
+        "jump-p2"
+      ],
+      "binary_sha256": "057f50223340b623a181b9e902d1c5a5fab13c376bd5a43ba79a913440433dd4",
+      "started_at": "2026-09-30T18:45:18.745681+00:00",
+      "ended_at": "2026-09-30T18:45:18.799661+00:00",
+      "exit_code": 0,
+      "maxrss_children_kib": 18444
+    },
+    {
+      "pid": 639947,
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-B0-PROFILE/control-profile-native",
+        "many-walls"
+      ],
+      "binary_sha256": "057f50223340b623a181b9e902d1c5a5fab13c376bd5a43ba79a913440433dd4",
+      "started_at": "2026-09-30T18:45:18.799959+00:00",
+      "ended_at": "2026-09-30T18:45:18.856845+00:00",
+      "exit_code": 0,
+      "maxrss_children_kib": 18444
+    },
+    {
+      "pid": 639948,
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-B0-PROFILE/contract2-profile-native",
+        "many-walls",
+        "coarse",
+        "11"
+      ],
+      "binary_sha256": "4370c6e5c3d3a059c311abf5eb44e8ec12244490ec0b39693ba2bff38e0105c7",
+      "started_at": "2026-09-30T18:45:18.856994+00:00",
+      "ended_at": "2026-09-30T18:45:18.996460+00:00",
+      "exit_code": 0,
+      "maxrss_children_kib": 18444
+    },
+    {
+      "pid": 639949,
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-B0-PROFILE/contract2-profile-native",
+        "many-walls",
+        "coarse",
+        "11"
+      ],
+      "binary_sha256": "4370c6e5c3d3a059c311abf5eb44e8ec12244490ec0b39693ba2bff38e0105c7",
+      "started_at": "2026-09-30T18:45:18.996844+00:00",
+      "ended_at": "2026-09-30T18:45:19.158585+00:00",
+      "exit_code": 0,
+      "maxrss_children_kib": 18604
+    },
+    {
+      "pid": 639950,
+      "command": [
+        "taskset",
+        "-c",
+        "2",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-B0-PROFILE/control-profile-native",
+        "many-walls"
+      ],
+      "binary_sha256": "057f50223340b623a181b9e902d1c5a5fab13c376bd5a43ba79a913440433dd4",
+      "started_at": "2026-09-30T18:45:19.159370+00:00",
+      "ended_at": "2026-09-30T18:45:19.215131+00:00",
+      "exit_code": 0,
+      "maxrss_children_kib": 18604
+    }
+  ],
+  "ended_at": "2026-09-30T18:45:19.215381+00:00",
+  "remaining_owned_processes": [],
+  "interpretation": "short independent replay; no formal uncontended speed comparison, few original samples; overhead gate assessed separately"
+}

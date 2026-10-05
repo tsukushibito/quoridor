@@ -1,0 +1,85 @@
+{
+  "UTC": "2026-10-04T04:45:34.903813+00:00",
+  "source": "research-data/ai-sigma/frame15-learning-diagnostic/probe-result.json",
+  "SHA": "eb02ee42420f86ee643eeb8198dd0ee372a8d2b32df0c9255f5259e3ac612ef5",
+  "stop": {
+    "id": "input-sensitivity-r1",
+    "kind": "heavy",
+    "UTC": "2026-10-04T04:36:34.158395+00:00",
+    "identity": {
+      "pid": 3999415,
+      "ppid": 3999362,
+      "pgrp": 3999415,
+      "tick": "34155986",
+      "RSS": 0,
+      "cmd": "",
+      "affinity": [
+        2
+      ]
+    },
+    "command": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "tools/ai-sigma-learning-diagnostic/probe.py"
+    ],
+    "wall_seconds": 1.969778043043334,
+    "peak_family_RSS": 779509760,
+    "exit": 0,
+    "reason": "completed",
+    "child_waited": true,
+    "remaining": [],
+    "current_exact_identity_absent": true,
+    "samples_charged": 144,
+    "sample_cap": 144,
+    "CPU": [
+      2
+    ],
+    "GPU": 0
+  },
+  "summaries": [
+    {
+      "fd_mean": 0.012809832580387592,
+      "fd_RMS": 0.017171623185276985,
+      "fd_min": -0.0049430131912231445,
+      "fd_max": 0.03353238105773926,
+      "positive_count": 10,
+      "zero_count": 0,
+      "analytic_RMS": 0.01730814203619957,
+      "maxabs_fd_minus_analytic": 0.0036887493915855885,
+      "rows_hidden_kink": 3
+    },
+    {
+      "fd_mean": 0.1412310004234314,
+      "fd_RMS": 0.14323249459266663,
+      "fd_min": 0.09891897439956665,
+      "fd_max": 0.16860902309417725,
+      "positive_count": 12,
+      "zero_count": 0,
+      "analytic_RMS": 0.14348526298999786,
+      "maxabs_fd_minus_analytic": 0.001965954899787903,
+      "rows_hidden_kink": 3
+    },
+    {
+      "fd_mean": 0.2956533133983612,
+      "fd_RMS": 0.3055357038974762,
+      "fd_min": 0.12347221374511719,
+      "fd_max": 0.3613704442977905,
+      "positive_count": 12,
+      "zero_count": 0,
+      "analytic_RMS": 0.30553582310676575,
+      "maxabs_fd_minus_analytic": 3.546476364135742e-06,
+      "rows_hidden_kink": 0
+    }
+  ],
+  "sources_reviewed": [
+    "tools/ai-sigma-learning-diagnostic/probe.py"
+  ],
+  "direction": [
+    -1,
+    1
+  ],
+  "delta_each_distance": 0.00625,
+  "distance_linear_direction_reference": 16.552850214844426,
+  "claim": "nonzero local distance response on12witness; response differs from linear reference but synthetic fixedboard distance intervention not lawful truth",
+  "independent_probe_arithmetic": false
+}

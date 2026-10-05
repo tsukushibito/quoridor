@@ -1,0 +1,123 @@
+{
+  "issue": "quoridor-4lc.112",
+  "writer": "experiment:01a0f31d-6d15-7620-bb63-4b4f878e4746",
+  "UTC": "2026-10-02T09:33:22.779243+00:00",
+  "tested_game_source_Git": "3682ab7b520024735e79e42eea79c982897c3957",
+  "functional_source_Git": "11c994c5cd7276524463ba49e6299d928e729c94",
+  "observation_fix_Git": "905af50",
+  "source_after_hashes": {
+    "tools/ai-sigma-player-workers/diagnose.cjs": "3458bb19c07c7ef0fb57bead8e8c5e23d2c1e9b6caa0515e9757725583f20482",
+    "tools/ai-sigma-player-workers/player-control.cjs": "3b87d63253cd93267ccc9419bfddd334a3cbe5cacba4d98da9328109a3f33e5c",
+    "tools/ai-sigma-player-workers/player-main.js": "610e899acd43215efc9fa3a08f3c337248639505a57196e1a730a91f7afde4a8",
+    "tools/ai-sigma-player-workers/runner.py": "1bcca8c88181109180125b81d6ff7b8288ab079f7a1069493928f60b21c66f7e",
+    "tools/ai-sigma-player-workers/mock.cjs": "61d954bbad80b62bf0f9678b78faa17448760d8185f4bbf2bd3de650fa4f4e45",
+    "tools/ai-sigma-player-workers/browser.cjs": "3ca8db3e55bd66624f4bdf8718d3246a6c6546b7ec9d175b4eebcdeb79b18f59",
+    "tools/ai-sigma-player-workers/player-worker.js": "fd5f5b72a836164133b22f718d58ef31d2d4b0f8a4887070e1ac9346112de5e8"
+  },
+  "readonly_dependencies": {
+    "tools/ai-sigma-tail-transport/early-worker.js": "9494e33e7204be208262914c04ea5eb0d7985872a6d7ebc6e4084d84729097d4",
+    "tools/ai-sigma-tail-transport/checkpoint.js": "2b736d696a099350bf724b40dd858fc3afe11ce17a1c143f3029e5fcd2f28d8c",
+    "tools/ai-sigma-cp-frame/shared-best-action.cjs": "37491ac0e9f2fb20b564fb2699ac58c3dfc35bff84ca888cd39b40036359132a",
+    "tools/ai-sigma-cp-frame/numeric-browser.js": "00d4d518a613e1a28fb4ee010076d3bca20a7247b0d0a96a46dd4ca86b74df01",
+    "tools/ai-sigma-actual-boundary-repair/host.js": "dc6cf3e24774e5e6b52c8cf346090f53f261e58b0c7fda1e6d674c7142983d02",
+    "tools/ai-sigma-actual-boundary-repair/game.js": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+    "tools/ai-sigma-actual-boundary-repair/context.js": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+    "tools/ai-sigma-actual-boundary-repair/reference-core.js": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05",
+    ".artifacts/ai-sigma/runs/SIGMA-ORT-SEARCH/final.wasm": "1f54d0b8f0c6d3d7d51935886ed506e44376a2052506be62ca7a726c85a78a01",
+    "models/experiments/ai-sigma/reference/sigma-pcr250/best.onnx": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d"
+  },
+  "retained_raw_path": ".artifacts/ai-sigma/resume-20261002/PLAYER-WORKERS/runs",
+  "archive": "research-data/ai-sigma/112-player-workers/run-evidence.tar.gz",
+  "archive_SHA": "01f5ef08e29b9c056d5513feceff6377fa213083c6374a4aba432d74a75a4950",
+  "all_120_stream_restore_hashes_match": true,
+  "source_stop_SHA": "25911f3e41ea771798fe5f5d358bc0f52c4bedc0c3b93bd1b7689ca5531adb90",
+  "ordinary_functional": {
+    "planned": 7,
+    "public": 7,
+    "normal_legal": 6,
+    "cancel_null": 1,
+    "dynamic4ply": true
+  },
+  "games": [
+    {
+      "id": "player-initial-color1",
+      "fixture_id": "initial-p1",
+      "candidate_color": 1,
+      "status": "terminal",
+      "winner": 2,
+      "reason": "goal",
+      "total_ply": 66
+    },
+    {
+      "id": "player-initial-color2",
+      "fixture_id": "initial-p1",
+      "candidate_color": 2,
+      "status": "terminal",
+      "winner": 2,
+      "reason": "goal",
+      "total_ply": 76
+    },
+    {
+      "id": "player-asym-color1",
+      "fixture_id": "asym-hv-p2",
+      "candidate_color": 1,
+      "status": "terminal",
+      "winner": 2,
+      "reason": "goal",
+      "total_ply": 76
+    },
+    {
+      "id": "player-asym-color2",
+      "fixture_id": "asym-hv-p2",
+      "candidate_color": 2,
+      "status": "terminal",
+      "winner": 2,
+      "reason": "goal",
+      "total_ply": 86
+    }
+  ],
+  "exploratory_WDL": {
+    "W": 2,
+    "D": 0,
+    "L": 2
+  },
+  "all_game_legal_public": 298,
+  "all_public_including_functional": 305,
+  "startup_NN": 18,
+  "hand_NN": 1261,
+  "actual_NN": 1279,
+  "ordinary_limit": 100,
+  "game_cap": 4,
+  "current_same_identity_live": [],
+  "identity_union": 450,
+  "all_managed_remaining_unknown_zero": true,
+  "browser_wall_seconds": 193.972852,
+  "pure_mock_wall_seconds": 0.11191,
+  "no_additional_NN_game": true,
+  "independent_check_needed": "finite same-browser engine binding, generation retirement, opposite input before old ACK, own-player cleanup, legal saved games and owned stop; no full-game repetition or formal proof prerequisite",
+  "reproduction": "tools/ai-sigma-player-workers/README.md; fresh allocation/config/run, fixed C1.5 and Sigma",
+  "limits": [
+    "functional-r1 ACK_known flag was captured after public; immutable raw retained, actual t0 vs ACK comparison separately valid",
+    "new pair version captures ACK flag at input",
+    "same CPU2 workers may contend while earlier NN returns; crossing spans not kernel execution",
+    "start/end clock bounds sampled, intermediate drift/hard real-time unproven",
+    "full-depth NN/model generality unproven",
+    "initial short command CPU/RSS and unguarded mock metadata incomplete",
+    "in-flight publication/NN is not a hard real-time or synchronous-interrupt guarantee",
+    "coordinator intermediate/stop reports rejected systemError; notes/Git are readout references"
+  ],
+  "formal_go_NI_Sigma": false,
+  "old_WDL_merged": false,
+  "data_files": {
+    "runtime-source-stopped-before-report.json": "25911f3e41ea771798fe5f5d358bc0f52c4bedc0c3b93bd1b7689ca5531adb90",
+    "functional-observation-correction.json": "bfcc29eaa5ede40c7f19a843b7ccf37e6cbc2c41d25f53ea77581c600b3c7a8c",
+    "run-evidence.tar.gz": "01f5ef08e29b9c056d5513feceff6377fa213083c6374a4aba432d74a75a4950",
+    "headroom-before-first.json": "13ed2a97d4a52d90c130b7c715a6405f068bfb8306842dc4d737adf42cd99fb5",
+    "preregister-functional.json": "b57ef70ea94f0384b5116c549317ecc6bbec1d55872b20367f5d5d1f6ad47218",
+    "asym-pair-preregister.json": "41e0d27d98ca872d8d80bfc20397ba60a702a6b0f5bd2e707163690e1bb1fe2b",
+    "initial-pair-preregister.json": "f28cd7cb02fb7f1c3f45679a6da7b270502508c68c45899fa3307084494a7cc8",
+    "archive-manifest.json": "524d6e9863aa57b1675620c5cd029caeaeb1b2443ab46b742729318cdeb653f8",
+    "intake.json": "5a3daa7726917ff0995517850c818af62ebfbf1e1226705e5af0a59922ce9a94",
+    "results-compact.json": "33d4a7134b872c34a7f7e670b1a08624b5318ec7f61b09e2b00f430d7dc4816e"
+  }
+}

@@ -1,0 +1,1490 @@
+{
+  "issue": "quoridor-4lc.221",
+  "mode": "fresh96-firstscience",
+  "planned_games": 96,
+  "status_counts": {
+    "GOAL": 96
+  },
+  "Rpolicy": 4603,
+  "Rz": 4603,
+  "Rjoint": 4603,
+  "unknown_z_rows": 0,
+  "allattempt_jobwall_s": 293.2262997069629,
+  "rates": {
+    "Rpolicy": 15.697773373670882,
+    "Rz": 15.697773373670882,
+    "Rjoint": 15.697773373670882,
+    "games": 0.32739218854494995
+  },
+  "actual_NN": 262957,
+  "logical_worker_NN": 262849,
+  "startup": 0,
+  "terminal_noNN": 31743,
+  "discarded": 0,
+  "batch": {
+    "started": 262849,
+    "returned": 262849,
+    "resumed": 262849,
+    "discarded": 0,
+    "rejected_queued": 0,
+    "batches": [
+      {
+        "size": 2,
+        "sent_ms": 4255.313458,
+        "received_ms": 4263.526067,
+        "queue_ms": [
+          1.1847920000000158,
+          0.1434639999997671
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 4263.930039,
+        "received_ms": 4269.288196,
+        "queue_ms": [
+          5.788365999999769,
+          5.766509999999471,
+          5.750035000000025,
+          5.740048999999999,
+          5.7314449999994395,
+          5.722993999999744,
+          0.04032499999993888,
+          0.012246000000232016
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 4269.36957,
+        "received_ms": 4278.910621,
+        "queue_ms": [
+          5.254221999999572,
+          5.243324999999459,
+          5.235700000000179,
+          5.227329999999711,
+          5.219581000000289,
+          5.209890999999516,
+          1.6115380000001096,
+          1.5856459999995423
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 4278.952556,
+        "received_ms": 4284.73584,
+        "queue_ms": [
+          0.5342700000001059,
+          0.492008000000169,
+          0.37490600000000995,
+          0.367471999999907,
+          0.3610340000004726,
+          0.3549400000001697,
+          0.34908900000027643,
+          0.3441100000000006
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 4284.759246,
+        "received_ms": 4288.595861,
+        "queue_ms": [
+          5.230689999999413,
+          5.219373999999334,
+          5.204084999999395,
+          5.189133999999285,
+          5.180145999999695,
+          5.173936999999569,
+          5.160137999999279,
+          5.144984999999906
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 4288.622438,
+        "received_ms": 4292.756525,
+        "queue_ms": [
+          7.867027000000235,
+          7.3505480000003445,
+          7.186819999999898,
+          6.7324280000002545,
+          6.197296000000279,
+          5.393934000000627,
+          4.798733999999968,
+          4.3249060000007375
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 4292.783466,
+        "received_ms": 4298.257285,
+        "queue_ms": [
+          4.575166999999965,
+          4.564069000000018,
+          4.51854800000001,
+          4.511674999999741,
+          3.836420999999973,
+          0.7561530000002676,
+          0.7445069999994303,
+          0.737912999999935
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 4298.270459,
+        "received_ms": 4301.593341,
+        "queue_ms": [
+          6.14090699999997,
+          6.13220100000035,
+          5.01796800000011,
+          5.001753000000463,
+          3.733032000000094,
+          3.6735650000000533,
+          3.612724000000526,
+          3.5358830000004673
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 4301.777493,
+        "received_ms": 4308.944242,
+        "queue_ms": [
+          6.635197999999946,
+          6.4940749999996115,
+          6.082756999999219,
+          5.513479999999618,
+          4.580881999999292,
+          3.8920039999993605,
+          0.020067999999810127,
+          0.011193999999704829
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 4308.964909,
+        "received_ms": 4312.679888,
+        "queue_ms": [
+          4.104467000000113,
+          4.093550999999934,
+          3.9916450000000623,
+          3.981770000000324,
+          3.9467700000004697,
+          3.671190000000024,
+          3.645317000000432,
+          2.864277000000584
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 4312.697535,
+        "received_ms": 4328.533462,
+        "queue_ms": [
+          6.549969000000601,
+          6.151351000000432,
+          5.8363540000000285,
+          5.8118359999998574,
+          5.221191999999974,
+          5.131755000000339,
+          4.43927100000019,
+          3.3774460000004183
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 4328.574638,
+        "received_ms": 4332.464059,
+        "queue_ms": [
+          16.17182700000012,
+          16.136185000000296,
+          16.09199499999977,
+          16.085379000000103,
+          11.832416999999623,
+          11.821079000000282,
+          11.814355000000432,
+          11.80853500000012
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 4332.478574,
+        "received_ms": 4348.093251,
+        "queue_ms": [
+          15.672944999999345,
+          15.665570999999545,
+          15.601047999999537,
+          15.594511999999668,
+          15.588912999999593,
+          15.582077000000027,
+          15.528586999999789,
+          15.52365699999973
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 4348.130012,
+        "received_ms": 4353.563017,
+        "queue_ms": [
+          6.641051999999945,
+          6.618334999999206,
+          6.604288999999881,
+          6.594785999999658,
+          6.418730999999752,
+          6.402368999999453,
+          6.393460999999661,
+          6.386748999999327
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 4353.580153,
+        "received_ms": 4380.673202,
+        "queue_ms": [
+          11.830699999999524,
+          11.823790999999801,
+          11.70426099999986,
+          11.697790000000168,
+          11.692033999999694,
+          11.67906099999982,
+          11.671096000000034,
+          11.655745000000024
+        ]
+      },
+      {
+        "size": 8,
+        "sent_ms": 4380.696531,
+        "received_ms": 4385.331584,
+        "queue_ms": [
+          30.236852999999428,
+          30.194158999999672,
+          27.669776999999158,
+          27.579540999999153,
+          27.570653999999195,
+          27.522948999999244,
+          27.516488999999638,
+          26.763328
+        ]
+      }
+    ],
+    "receipts": [
+      {
+        "identity": {
+          "run_id": "throughput221-phase4-fresh96-firstscience",
+          "worker_id": "w2",
+          "game_id": "native221-fresh96-game-001",
+          "generation": 1,
+          "handle": 1,
+          "token": 1,
+          "request_id": "w2:1"
+        },
+        "wire_id": "nn0.1",
+        "started_ms": 4255.313458,
+        "returned_ms": 4263.526067,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-phase4-fresh96-firstscience",
+          "worker_id": "w2",
+          "game_id": "native221-fresh96-game-004",
+          "generation": 2,
+          "handle": 2,
+          "token": 1,
+          "request_id": "w2:2"
+        },
+        "wire_id": "nn0.2",
+        "started_ms": 4255.313458,
+        "returned_ms": 4263.526067,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-phase4-fresh96-firstscience",
+          "worker_id": "w2",
+          "game_id": "native221-fresh96-game-007",
+          "generation": 3,
+          "handle": 3,
+          "token": 1,
+          "request_id": "w2:3"
+        },
+        "wire_id": "nn0.3",
+        "started_ms": 4263.930039,
+        "returned_ms": 4269.288196,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-phase4-fresh96-firstscience",
+          "worker_id": "w2",
+          "game_id": "native221-fresh96-game-010",
+          "generation": 4,
+          "handle": 4,
+          "token": 1,
+          "request_id": "w2:4"
+        },
+        "wire_id": "nn0.4",
+        "started_ms": 4263.930039,
+        "returned_ms": 4269.288196,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-phase4-fresh96-firstscience",
+          "worker_id": "w2",
+          "game_id": "native221-fresh96-game-013",
+          "generation": 5,
+          "handle": 5,
+          "token": 1,
+          "request_id": "w2:5"
+        },
+        "wire_id": "nn0.5",
+        "started_ms": 4263.930039,
+        "returned_ms": 4269.288196,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-phase4-fresh96-firstscience",
+          "worker_id": "w2",
+          "game_id": "native221-fresh96-game-016",
+          "generation": 6,
+          "handle": 6,
+          "token": 1,
+          "request_id": "w2:6"
+        },
+        "wire_id": "nn0.6",
+        "started_ms": 4263.930039,
+        "returned_ms": 4269.288196,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-phase4-fresh96-firstscience",
+          "worker_id": "w2",
+          "game_id": "native221-fresh96-game-019",
+          "generation": 7,
+          "handle": 7,
+          "token": 1,
+          "request_id": "w2:7"
+        },
+        "wire_id": "nn0.7",
+        "started_ms": 4263.930039,
+        "returned_ms": 4269.288196,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-phase4-fresh96-firstscience",
+          "worker_id": "w2",
+          "game_id": "native221-fresh96-game-022",
+          "generation": 8,
+          "handle": 8,
+          "token": 1,
+          "request_id": "w2:8"
+        },
+        "wire_id": "nn0.8",
+        "started_ms": 4263.930039,
+        "returned_ms": 4269.288196,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-phase4-fresh96-firstscience",
+          "worker_id": "w4",
+          "game_id": "native221-fresh96-game-002",
+          "generation": 1,
+          "handle": 1,
+          "token": 1,
+          "request_id": "w4:1"
+        },
+        "wire_id": "nn0.9",
+        "started_ms": 4263.930039,
+        "returned_ms": 4269.288196,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-phase4-fresh96-firstscience",
+          "worker_id": "w4",
+          "game_id": "native221-fresh96-game-005",
+          "generation": 2,
+          "handle": 2,
+          "token": 1,
+          "request_id": "w4:2"
+        },
+        "wire_id": "nn0.10",
+        "started_ms": 4263.930039,
+        "returned_ms": 4269.288196,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-phase4-fresh96-firstscience",
+          "worker_id": "w4",
+          "game_id": "native221-fresh96-game-008",
+          "generation": 3,
+          "handle": 3,
+          "token": 1,
+          "request_id": "w4:3"
+        },
+        "wire_id": "nn0.11",
+        "started_ms": 4269.36957,
+        "returned_ms": 4278.910621,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-phase4-fresh96-firstscience",
+          "worker_id": "w4",
+          "game_id": "native221-fresh96-game-011",
+          "generation": 4,
+          "handle": 4,
+          "token": 1,
+          "request_id": "w4:4"
+        },
+        "wire_id": "nn0.12",
+        "started_ms": 4269.36957,
+        "returned_ms": 4278.910621,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-phase4-fresh96-firstscience",
+          "worker_id": "w4",
+          "game_id": "native221-fresh96-game-014",
+          "generation": 5,
+          "handle": 5,
+          "token": 1,
+          "request_id": "w4:5"
+        },
+        "wire_id": "nn0.13",
+        "started_ms": 4269.36957,
+        "returned_ms": 4278.910621,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-phase4-fresh96-firstscience",
+          "worker_id": "w4",
+          "game_id": "native221-fresh96-game-017",
+          "generation": 6,
+          "handle": 6,
+          "token": 1,
+          "request_id": "w4:6"
+        },
+        "wire_id": "nn0.14",
+        "started_ms": 4269.36957,
+        "returned_ms": 4278.910621,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-phase4-fresh96-firstscience",
+          "worker_id": "w4",
+          "game_id": "native221-fresh96-game-020",
+          "generation": 7,
+          "handle": 7,
+          "token": 1,
+          "request_id": "w4:7"
+        },
+        "wire_id": "nn0.15",
+        "started_ms": 4269.36957,
+        "returned_ms": 4278.910621,
+        "discarded": false
+      },
+      {
+        "identity": {
+          "run_id": "throughput221-phase4-fresh96-firstscience",
+          "worker_id": "w4",
+          "game_id": "native221-fresh96-game-023",
+          "generation": 8,
+          "handle": 8,
+          "token": 1,
+          "request_id": "w4:8"
+        },
+        "wire_id": "nn0.16",
+        "started_ms": 4269.36957,
+        "returned_ms": 4278.910621,
+        "discarded": false
+      }
+    ],
+    "max_pending_games": 24,
+    "batch_histogram": [
+      0,
+      1624,
+      1919,
+      1089,
+      611,
+      683,
+      433,
+      489,
+      30280
+    ],
+    "queue_ms_sum": 2533895.111322016,
+    "queue_ms_max": 55.38527199999953,
+    "provider_pipe_ms": 272009.1764469994
+  },
+  "providerCost": {
+    "codec": "singleencode-bits-only-v1",
+    "JSON_firstpass_NOT_APPLICABLE": true,
+    "batches": 37128,
+    "server_before_JSON_ms": 194413.65255199946,
+    "JSON_encode_firstpass_ms": 0,
+    "stages": {
+      "input_parse_ms": 18927.231348999907,
+      "H2D_sync_ms": 18727.13373300002,
+      "forward_sync_ms": 128064.50138499984,
+      "D2H_sync_ms": 13436.711732999987
+    }
+  },
+  "providerStop": {
+    "sample_cap": 300000,
+    "wire_totals_ms": {
+      "json_parse": 8161.927772999948,
+      "json_encode_once": 3180.3632600000033,
+      "actual_stdout_write": 34926.6477880001,
+      "definition": "prior responses only; stop own encode/write excluded"
+    },
+    "private_issue": "quoridor-4lc.221",
+    "modelhash": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+    "provider": "torch-folded-CUDAgraph-bitswire-singleencode-v1",
+    "graph_startup_samples": 108,
+    "graph_capture_warm_seconds": 0.9415164029342122,
+    "captured_B": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "original_ONNX_batch": 1,
+    "batch_min": 1,
+    "batch_max": 8,
+    "dtype": "float32",
+    "TF32": false,
+    "AMP": false,
+    "torch": "2.14.0+cu130",
+    "ORT": "1.30.0",
+    "device": "NVIDIA GeForce RTX 3060",
+    "threads": [
+      1,
+      1
+    ],
+    "CPU_affinity": [
+      0
+    ],
+    "coldinit_s": {
+      "import": 0.9410610389895737,
+      "CPUORT_session": 0.02538788999663666,
+      "graph_weights": 0.06314086203929037,
+      "CUDA_upload_context": 0.20499193400610238
+    },
+    "single_sample_equivalent": 262957,
+    "calls": {
+      "cuda": 37128,
+      "eager": 0,
+      "cpuort": 0
+    },
+    "rows": {
+      "cuda": 262849,
+      "eager": 0,
+      "cpuort": 0
+    },
+    "RAM_peak_KiB": 1188720,
+    "GPU_allocated_B": 88442368,
+    "GPU_reserved_B": 369098752,
+    "GPU_peak_allocated_B": 91408384,
+    "GPU_peak_reserved_B": 369098752,
+    "pipe": {
+      "calls": 37130,
+      "requestBytes": 1072464766,
+      "responseBytes": 191416243,
+      "timings": {
+        "serialize_ms": 2248.3146200003016,
+        "parse_ms": 980.4690970034617,
+        "write_callback_ms": 7735.623830000164
+      }
+    },
+    "exit": {
+      "code": null,
+      "signal": "SIGTERM",
+      "pid": 28262
+    }
+  },
+  "worker_spans": [
+    {
+      "usedNN": 100785,
+      "startup_NN": 0,
+      "raw_record_ms": 262.2711310000367,
+      "search_ms": 2028995.3546290006,
+      "IPC_send_ms": 1434.7017979981329,
+      "API_ms": 0,
+      "pipe_ms": 0,
+      "exits": [
+        {
+          "code": 0,
+          "signal": null,
+          "pid": 28313
+        }
+      ],
+      "bridge": {
+        "calls": 219445,
+        "request_bytes": 113458406,
+        "response_bytes": 730893562,
+        "timings": {
+          "serialize_ms": 749.2044319924241,
+          "parse_ms": 1830.050105999989,
+          "write_callback_ms": 4501.681677990202
+        }
+      },
+      "zero": {
+        "handles": 0,
+        "pending": 0,
+        "waits": 0
+      }
+    },
+    {
+      "usedNN": 81855,
+      "startup_NN": 0,
+      "raw_record_ms": 175.72203700017192,
+      "search_ms": 1687835.975651002,
+      "IPC_send_ms": 1125.2924660007172,
+      "API_ms": 0,
+      "pipe_ms": 0,
+      "exits": [
+        {
+          "code": 0,
+          "signal": null,
+          "pid": 28314
+        }
+      ],
+      "bridge": {
+        "calls": 180183,
+        "request_bytes": 92174879,
+        "response_bytes": 584248690,
+        "timings": {
+          "serialize_ms": 579.6565990004226,
+          "parse_ms": 1457.7701590002407,
+          "write_callback_ms": 3679.557071999584
+        }
+      },
+      "zero": {
+        "handles": 0,
+        "pending": 0,
+        "waits": 0
+      }
+    },
+    {
+      "usedNN": 80209,
+      "startup_NN": 0,
+      "raw_record_ms": 168.05663999972498,
+      "search_ms": 1651742.4333449982,
+      "IPC_send_ms": 1106.2286109989022,
+      "API_ms": 0,
+      "pipe_ms": 0,
+      "exits": [
+        {
+          "code": 0,
+          "signal": null,
+          "pid": 28315
+        }
+      ],
+      "bridge": {
+        "calls": 176225,
+        "request_bytes": 88587010,
+        "response_bytes": 583868769,
+        "timings": {
+          "serialize_ms": 565.2756360006177,
+          "parse_ms": 1447.6441500026021,
+          "write_callback_ms": 3702.831033999865
+        }
+      },
+      "zero": {
+        "handles": 0,
+        "pending": 0,
+        "waits": 0
+      }
+    }
+  ],
+  "sampled_peak_RSS": 2321612800,
+  "all_slot_plies": [
+    {
+      "id": "native221-fresh96-game-001",
+      "status": "GOAL",
+      "total_ply": 75,
+      "new_rows": 67,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-002",
+      "status": "GOAL",
+      "total_ply": 61,
+      "new_rows": 49,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-003",
+      "status": "GOAL",
+      "total_ply": 66,
+      "new_rows": 50,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-004",
+      "status": "GOAL",
+      "total_ply": 52,
+      "new_rows": 32,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-005",
+      "status": "GOAL",
+      "total_ply": 54,
+      "new_rows": 30,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-006",
+      "status": "GOAL",
+      "total_ply": 66,
+      "new_rows": 38,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-007",
+      "status": "GOAL",
+      "total_ply": 76,
+      "new_rows": 68,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-008",
+      "status": "GOAL",
+      "total_ply": 73,
+      "new_rows": 61,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-009",
+      "status": "GOAL",
+      "total_ply": 63,
+      "new_rows": 47,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-010",
+      "status": "GOAL",
+      "total_ply": 87,
+      "new_rows": 67,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-011",
+      "status": "GOAL",
+      "total_ply": 57,
+      "new_rows": 33,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-012",
+      "status": "GOAL",
+      "total_ply": 68,
+      "new_rows": 40,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-013",
+      "status": "GOAL",
+      "total_ply": 63,
+      "new_rows": 55,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-014",
+      "status": "GOAL",
+      "total_ply": 67,
+      "new_rows": 55,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-015",
+      "status": "GOAL",
+      "total_ply": 46,
+      "new_rows": 30,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-016",
+      "status": "GOAL",
+      "total_ply": 75,
+      "new_rows": 55,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-017",
+      "status": "GOAL",
+      "total_ply": 77,
+      "new_rows": 53,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-018",
+      "status": "GOAL",
+      "total_ply": 47,
+      "new_rows": 19,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-019",
+      "status": "GOAL",
+      "total_ply": 72,
+      "new_rows": 64,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-020",
+      "status": "GOAL",
+      "total_ply": 72,
+      "new_rows": 60,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-021",
+      "status": "GOAL",
+      "total_ply": 76,
+      "new_rows": 60,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-022",
+      "status": "GOAL",
+      "total_ply": 92,
+      "new_rows": 72,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-023",
+      "status": "GOAL",
+      "total_ply": 58,
+      "new_rows": 34,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-024",
+      "status": "GOAL",
+      "total_ply": 75,
+      "new_rows": 47,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-025",
+      "status": "GOAL",
+      "total_ply": 86,
+      "new_rows": 78,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-026",
+      "status": "GOAL",
+      "total_ply": 54,
+      "new_rows": 42,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-027",
+      "status": "GOAL",
+      "total_ply": 71,
+      "new_rows": 55,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-028",
+      "status": "GOAL",
+      "total_ply": 71,
+      "new_rows": 51,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-029",
+      "status": "GOAL",
+      "total_ply": 69,
+      "new_rows": 45,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-030",
+      "status": "GOAL",
+      "total_ply": 72,
+      "new_rows": 44,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-031",
+      "status": "GOAL",
+      "total_ply": 52,
+      "new_rows": 44,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-032",
+      "status": "GOAL",
+      "total_ply": 60,
+      "new_rows": 48,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-033",
+      "status": "GOAL",
+      "total_ply": 51,
+      "new_rows": 35,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-034",
+      "status": "GOAL",
+      "total_ply": 69,
+      "new_rows": 49,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-035",
+      "status": "GOAL",
+      "total_ply": 67,
+      "new_rows": 43,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-036",
+      "status": "GOAL",
+      "total_ply": 45,
+      "new_rows": 17,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-037",
+      "status": "GOAL",
+      "total_ply": 85,
+      "new_rows": 77,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-038",
+      "status": "GOAL",
+      "total_ply": 49,
+      "new_rows": 37,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-039",
+      "status": "GOAL",
+      "total_ply": 58,
+      "new_rows": 42,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-040",
+      "status": "GOAL",
+      "total_ply": 45,
+      "new_rows": 25,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-041",
+      "status": "GOAL",
+      "total_ply": 56,
+      "new_rows": 32,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-042",
+      "status": "GOAL",
+      "total_ply": 46,
+      "new_rows": 18,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-043",
+      "status": "GOAL",
+      "total_ply": 58,
+      "new_rows": 50,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-044",
+      "status": "GOAL",
+      "total_ply": 52,
+      "new_rows": 40,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-045",
+      "status": "GOAL",
+      "total_ply": 75,
+      "new_rows": 59,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-046",
+      "status": "GOAL",
+      "total_ply": 84,
+      "new_rows": 64,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-047",
+      "status": "GOAL",
+      "total_ply": 85,
+      "new_rows": 61,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-048",
+      "status": "GOAL",
+      "total_ply": 47,
+      "new_rows": 19,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-049",
+      "status": "GOAL",
+      "total_ply": 53,
+      "new_rows": 45,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-050",
+      "status": "GOAL",
+      "total_ply": 78,
+      "new_rows": 66,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-051",
+      "status": "GOAL",
+      "total_ply": 54,
+      "new_rows": 38,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-052",
+      "status": "GOAL",
+      "total_ply": 67,
+      "new_rows": 47,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-053",
+      "status": "GOAL",
+      "total_ply": 59,
+      "new_rows": 35,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-054",
+      "status": "GOAL",
+      "total_ply": 70,
+      "new_rows": 42,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-055",
+      "status": "GOAL",
+      "total_ply": 59,
+      "new_rows": 51,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-056",
+      "status": "GOAL",
+      "total_ply": 73,
+      "new_rows": 61,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-057",
+      "status": "GOAL",
+      "total_ply": 67,
+      "new_rows": 51,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-058",
+      "status": "GOAL",
+      "total_ply": 70,
+      "new_rows": 50,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-059",
+      "status": "GOAL",
+      "total_ply": 52,
+      "new_rows": 28,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-060",
+      "status": "GOAL",
+      "total_ply": 55,
+      "new_rows": 27,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-061",
+      "status": "GOAL",
+      "total_ply": 61,
+      "new_rows": 53,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-062",
+      "status": "GOAL",
+      "total_ply": 83,
+      "new_rows": 71,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-063",
+      "status": "GOAL",
+      "total_ply": 92,
+      "new_rows": 76,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-064",
+      "status": "GOAL",
+      "total_ply": 78,
+      "new_rows": 58,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-065",
+      "status": "GOAL",
+      "total_ply": 57,
+      "new_rows": 33,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-066",
+      "status": "GOAL",
+      "total_ply": 81,
+      "new_rows": 53,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-067",
+      "status": "GOAL",
+      "total_ply": 69,
+      "new_rows": 61,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-068",
+      "status": "GOAL",
+      "total_ply": 50,
+      "new_rows": 38,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-069",
+      "status": "GOAL",
+      "total_ply": 71,
+      "new_rows": 55,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-070",
+      "status": "GOAL",
+      "total_ply": 66,
+      "new_rows": 46,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-071",
+      "status": "GOAL",
+      "total_ply": 60,
+      "new_rows": 36,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-072",
+      "status": "GOAL",
+      "total_ply": 65,
+      "new_rows": 37,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-073",
+      "status": "GOAL",
+      "total_ply": 49,
+      "new_rows": 41,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-074",
+      "status": "GOAL",
+      "total_ply": 65,
+      "new_rows": 53,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-075",
+      "status": "GOAL",
+      "total_ply": 63,
+      "new_rows": 47,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-076",
+      "status": "GOAL",
+      "total_ply": 53,
+      "new_rows": 33,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-077",
+      "status": "GOAL",
+      "total_ply": 51,
+      "new_rows": 27,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-078",
+      "status": "GOAL",
+      "total_ply": 68,
+      "new_rows": 40,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-079",
+      "status": "GOAL",
+      "total_ply": 63,
+      "new_rows": 55,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-080",
+      "status": "GOAL",
+      "total_ply": 67,
+      "new_rows": 55,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-081",
+      "status": "GOAL",
+      "total_ply": 87,
+      "new_rows": 71,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-082",
+      "status": "GOAL",
+      "total_ply": 63,
+      "new_rows": 43,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-083",
+      "status": "GOAL",
+      "total_ply": 60,
+      "new_rows": 36,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-084",
+      "status": "GOAL",
+      "total_ply": 82,
+      "new_rows": 54,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-085",
+      "status": "GOAL",
+      "total_ply": 57,
+      "new_rows": 49,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-086",
+      "status": "GOAL",
+      "total_ply": 68,
+      "new_rows": 56,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-087",
+      "status": "GOAL",
+      "total_ply": 66,
+      "new_rows": 50,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-088",
+      "status": "GOAL",
+      "total_ply": 72,
+      "new_rows": 52,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-089",
+      "status": "GOAL",
+      "total_ply": 66,
+      "new_rows": 42,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-090",
+      "status": "GOAL",
+      "total_ply": 66,
+      "new_rows": 38,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-091",
+      "status": "GOAL",
+      "total_ply": 89,
+      "new_rows": 81,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-092",
+      "status": "GOAL",
+      "total_ply": 55,
+      "new_rows": 43,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-093",
+      "status": "GOAL",
+      "total_ply": 84,
+      "new_rows": 68,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-094",
+      "status": "GOAL",
+      "total_ply": 82,
+      "new_rows": 62,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-095",
+      "status": "GOAL",
+      "total_ply": 67,
+      "new_rows": 43,
+      "terminal": true,
+      "unknown_z": false
+    },
+    {
+      "id": "native221-fresh96-game-096",
+      "status": "GOAL",
+      "total_ply": 73,
+      "new_rows": 45,
+      "terminal": true,
+      "unknown_z": false
+    }
+  ],
+  "qualification_replay_rows": 4603,
+  "qualify_wall_s": 1.946765868,
+  "mixed_into_learner": false,
+  "formal_holdout_read": false,
+  "teacher_truth_or_strength": false,
+  "process": {
+    "exit": 0,
+    "stop_reason": null,
+    "current_exact_absent": true
+  }
+}

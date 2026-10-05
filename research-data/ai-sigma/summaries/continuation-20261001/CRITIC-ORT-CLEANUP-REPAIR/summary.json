@@ -1,0 +1,1435 @@
+{
+  "UTC": "2026-10-01T11:23:21.767468+00:00",
+  "issue": "quoridor-4lc.47",
+  "role_thread": "01a0f31d-8227-7e03-a7e6-915b4918c11b",
+  "coordinator": "01a0f31b-3409-75f2-a30e-453a50484f94",
+  "contract_version": 1,
+  "contract_sha256": "1430c172d688f1aa9ab8db1e88fda38b195e174273b90afd25073a8d8b6e122a",
+  "parent_sha256": "859bb777836cc0683e1ad7d1763a71fda60c75d2d6391290cef28771589a81a2",
+  "manifest_sha256": "f1ced3e1a58f9fb1235b3718aa407726914e7d9a894ff231672521a9e74e0f1b",
+  "producer_report_sha256": "57ef55f8412dac36edcbb324b1019cf39776331c46b4bab392947fded643277d",
+  "source_final_hashes_sha256": "5cd28260b57ef3c629fc7454e3ff439ab24264c6a2e73658f120ca834eb14e02",
+  "independent_decision": "limited finite cleanup and saved numeric supported; actual matches NO-GO",
+  "supported": {
+    "writer_174_identities_absent": true,
+    "immutable_current_hashes": 784,
+    "same_main_fixed_golden_requests": 5,
+    "normal_accepted": 4,
+    "intentional_T10_discarded": 1,
+    "PID0_then_fresh_warm_reclock": true,
+    "same_main_positive_diagnostic_token": true,
+    "missing_token_and_existing_run_rejected": true,
+    "independent_mock_cases_passed": 9,
+    "saved_numeric": {
+      "feature_bits": 3888,
+      "NN_elements": 822,
+      "prior_elements": 386,
+      "prior_values_checked": 772,
+      "max_NN_abs": 3.5762786865234375e-06,
+      "max_prior_abs": 1.6242131326560383e-06
+    },
+    "fixed_JS_three_golden_mapping": {
+      "UTC": "2026-10-01T11:16:27.649Z",
+      "PID": 1106105,
+      "game_sha256": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+      "context_sha256": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+      "cases": [
+        {
+          "id": "initial-p1",
+          "legal": 131,
+          "raw_sigma136_matches_fixedJS": true,
+          "canonical_indices_matches_P2_permutation": true,
+          "rust209_injective": true,
+          "features648_matches_fixedJS": true,
+          "prior_softmax_checked": 131,
+          "max_prior_abs": 8.237295427981906e-07,
+          "raw_canonical_equal": true
+        },
+        {
+          "id": "asym-hv-p2",
+          "legal": 123,
+          "raw_sigma136_matches_fixedJS": true,
+          "canonical_indices_matches_P2_permutation": true,
+          "rust209_injective": true,
+          "features648_matches_fixedJS": true,
+          "prior_softmax_checked": 123,
+          "max_prior_abs": 1.6242131326560383e-06,
+          "raw_canonical_equal": false
+        },
+        {
+          "id": "straight-jump-p2",
+          "legal": 132,
+          "raw_sigma136_matches_fixedJS": true,
+          "canonical_indices_matches_P2_permutation": true,
+          "rust209_injective": true,
+          "features648_matches_fixedJS": true,
+          "prior_softmax_checked": 132,
+          "max_prior_abs": 1.5864588809311186e-08,
+          "raw_canonical_equal": false
+        }
+      ],
+      "golden28_read_hash_only_no28NN_repeat": true,
+      "NN": 0,
+      "extra_games": 0
+    },
+    "checkpoint13_saved_same_kernel_only": {
+      "source": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ORT-CHECKPOINT/browser-checkpoint-gate-backup.json",
+      "sha256": "a36a2a79a3b1701d642c1be0cbb18f83b143a699be78eb492933437c05896b93",
+      "evidence": "old fixed same-kernel saved runtime, NOT new13-case rerun",
+      "checks": [
+        {
+          "id": "initial-p1",
+          "kind": "normal_budget_stop_preserves_complete_cp",
+          "published": true,
+          "new_NN_started": false
+        },
+        {
+          "id": "asym-hv-p2",
+          "kind": "normal_budget_stop_preserves_complete_cp",
+          "published": true,
+          "new_NN_started": false
+        },
+        {
+          "id": "straight-jump-p2",
+          "kind": "normal_budget_stop_preserves_complete_cp",
+          "published": true,
+          "new_NN_started": false
+        },
+        {
+          "id": "no-checkpoint",
+          "kind": "fault_or_late_all_discard",
+          "error": "NO_CHECKPOINT",
+          "published": false
+        },
+        {
+          "id": "deadline-before_resume",
+          "kind": "fault_or_late_all_discard",
+          "error": "DEADLINE",
+          "published": false
+        },
+        {
+          "id": "deadline-before_checkpoint",
+          "kind": "fault_or_late_all_discard",
+          "error": "DEADLINE",
+          "published": false
+        },
+        {
+          "id": "deadline-before_return",
+          "kind": "fault_or_late_all_discard",
+          "error": "DEADLINE",
+          "published": false
+        },
+        {
+          "id": "goal-win-legal-replay",
+          "kind": "terminal_NN0",
+          "value": -1,
+          "synthetic": false
+        },
+        {
+          "id": "synthetic-total-ply-200",
+          "kind": "terminal_NN0",
+          "value": 0,
+          "synthetic": true
+        },
+        {
+          "id": "synthetic-no-legal-move-draw",
+          "kind": "terminal_NN0",
+          "value": 0,
+          "synthetic": true
+        },
+        {
+          "id": "synthetic-goal-at200",
+          "kind": "terminal_NN0",
+          "value": -1,
+          "synthetic": true
+        },
+        {
+          "id": "hardfault-after-cp",
+          "kind": "fault_or_late_all_discard",
+          "error": "INJECTED_HARDFAULT",
+          "published": false
+        },
+        {
+          "id": "serialization-late",
+          "kind": "fault_or_late_all_discard",
+          "error": "DEADLINE_SERIALIZATION",
+          "published": false
+        }
+      ],
+      "true_legal200_and_no_legal_remain_unverified": true
+    }
+  },
+  "fixed_request_rows": [
+    {
+      "engine": "candidate",
+      "id": "initial-p1",
+      "accepted": true,
+      "action": 13,
+      "error": null,
+      "elapsed_ms": 431.58062098920345,
+      "T_ms": 500,
+      "g_ms": 91,
+      "fallback": 0,
+      "checkpoint": true,
+      "request_id": "1101351-1025-894fd8ac-30be-406c-b56c-7779e279e271",
+      "generation": 1025,
+      "received_after_validation_ms": 105972052.656878,
+      "final_validation_and_serialization_before_stamp": true
+    },
+    {
+      "engine": "reference",
+      "id": "initial-p1",
+      "accepted": true,
+      "action": 13,
+      "error": null,
+      "elapsed_ms": 413.35570500791073,
+      "T_ms": 500,
+      "g_ms": 91,
+      "fallback": 0,
+      "checkpoint": true,
+      "request_id": "1101351-1026-466d68cd-74d8-4195-b75b-555aad7e03b2",
+      "generation": 1026,
+      "received_after_validation_ms": 105974455.119597,
+      "final_validation_and_serialization_before_stamp": true
+    },
+    {
+      "engine": "candidate",
+      "id": "initial-p1",
+      "accepted": false,
+      "action": null,
+      "error": "NO_RESPONSE_TIMEOUT",
+      "elapsed_ms": 13.224560007452965,
+      "T_ms": 10,
+      "g_ms": 0,
+      "fallback": 0,
+      "checkpoint": false,
+      "request_id": "1101351-1027-6b097d1e-67fc-41d2-b3c1-cd9940fccae9",
+      "generation": 1027,
+      "received_after_validation_ms": 105974468.746121,
+      "final_validation_and_serialization_before_stamp": true
+    },
+    {
+      "engine": "candidate",
+      "id": "initial-p1",
+      "accepted": true,
+      "action": 13,
+      "error": null,
+      "elapsed_ms": 439.18251299858093,
+      "T_ms": 500,
+      "g_ms": 91,
+      "fallback": 0,
+      "checkpoint": true,
+      "request_id": "1101351-1053-e48bc62b-e64f-4b8f-8d72-3ce1f8b2d7ce",
+      "generation": 1053,
+      "received_after_validation_ms": 105983555.251102,
+      "final_validation_and_serialization_before_stamp": true
+    },
+    {
+      "engine": "reference",
+      "id": "initial-p1",
+      "accepted": true,
+      "action": 13,
+      "error": null,
+      "elapsed_ms": 433.6786510050297,
+      "T_ms": 500,
+      "g_ms": 91,
+      "fallback": 0,
+      "checkpoint": true,
+      "request_id": "1101351-1054-7da0c03f-c05c-43fd-981f-11243086c842",
+      "generation": 1054,
+      "received_after_validation_ms": 105985396.827002,
+      "final_validation_and_serialization_before_stamp": true
+    }
+  ],
+  "original_versions_separate": [
+    {
+      "version": "original32",
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ORT-ENTRY-CONTINUE/diagnostic/real-golden/all-responses.json",
+      "sha256": "6960e1d3c9863792f0ed458160bfb7a24a9173cfe23e6664b345fb1a43d6af77",
+      "requests": 32,
+      "accepted": 28,
+      "rejected": 4,
+      "errors": [
+        "INJECTED_NN_ERROR",
+        "NO_RESPONSE_TIMEOUT",
+        "cancelled",
+        "IDENTITY_MISMATCH"
+      ],
+      "rows": [
+        {
+          "engine": "candidate",
+          "id": "initial-p1",
+          "accepted": true,
+          "action": 13,
+          "nn_calls": 16,
+          "error": null,
+          "elapsed_ms": 464.7348999977112,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "candidate",
+          "id": "initial-p1",
+          "accepted": true,
+          "action": 13,
+          "nn_calls": 17,
+          "error": null,
+          "elapsed_ms": 426.998168990016,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "candidate",
+          "id": "initial-p1",
+          "accepted": true,
+          "action": 13,
+          "nn_calls": 19,
+          "error": null,
+          "elapsed_ms": 427.2403240054846,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "reference",
+          "id": "initial-p1",
+          "accepted": true,
+          "action": 13,
+          "nn_calls": 22,
+          "error": null,
+          "elapsed_ms": 430.1414809972048,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "reference",
+          "id": "initial-p1",
+          "accepted": true,
+          "action": 13,
+          "nn_calls": 21,
+          "error": null,
+          "elapsed_ms": 417.3227449953556,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "reference",
+          "id": "initial-p1",
+          "accepted": true,
+          "action": 13,
+          "nn_calls": 23,
+          "error": null,
+          "elapsed_ms": 426.7503480017185,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "candidate",
+          "id": "asym-hv-p2",
+          "accepted": true,
+          "action": 67,
+          "nn_calls": 16,
+          "error": null,
+          "elapsed_ms": 423.49760499596596,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "candidate",
+          "id": "asym-hv-p2",
+          "accepted": true,
+          "action": 67,
+          "nn_calls": 19,
+          "error": null,
+          "elapsed_ms": 427.1421609967947,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "candidate",
+          "id": "asym-hv-p2",
+          "accepted": true,
+          "action": 67,
+          "nn_calls": 20,
+          "error": null,
+          "elapsed_ms": 428.62971499562263,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "reference",
+          "id": "asym-hv-p2",
+          "accepted": true,
+          "action": 67,
+          "nn_calls": 23,
+          "error": null,
+          "elapsed_ms": 416.6436959952116,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "reference",
+          "id": "asym-hv-p2",
+          "accepted": true,
+          "action": 67,
+          "nn_calls": 23,
+          "error": null,
+          "elapsed_ms": 416.2054540067911,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "reference",
+          "id": "asym-hv-p2",
+          "accepted": true,
+          "action": 67,
+          "nn_calls": 21,
+          "error": null,
+          "elapsed_ms": 429.6356199979782,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "candidate",
+          "id": "straight-jump-p2",
+          "accepted": true,
+          "action": 129,
+          "nn_calls": 18,
+          "error": null,
+          "elapsed_ms": 423.28074400126934,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "candidate",
+          "id": "straight-jump-p2",
+          "accepted": true,
+          "action": 129,
+          "nn_calls": 21,
+          "error": null,
+          "elapsed_ms": 429.55554001033306,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "candidate",
+          "id": "straight-jump-p2",
+          "accepted": true,
+          "action": 129,
+          "nn_calls": 20,
+          "error": null,
+          "elapsed_ms": 427.26567700505257,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "reference",
+          "id": "straight-jump-p2",
+          "accepted": true,
+          "action": 31,
+          "nn_calls": 23,
+          "error": null,
+          "elapsed_ms": 416.9215870052576,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "reference",
+          "id": "straight-jump-p2",
+          "accepted": true,
+          "action": 31,
+          "nn_calls": 23,
+          "error": null,
+          "elapsed_ms": 438.1490039974451,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "reference",
+          "id": "straight-jump-p2",
+          "accepted": true,
+          "action": 31,
+          "nn_calls": 22,
+          "error": null,
+          "elapsed_ms": 423.7130959928036,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "candidate",
+          "id": "goal-win-legal-replay",
+          "accepted": true,
+          "action": null,
+          "nn_calls": 0,
+          "error": null,
+          "elapsed_ms": 16.525508999824524,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "reference",
+          "id": "goal-win-legal-replay",
+          "accepted": true,
+          "action": null,
+          "nn_calls": 0,
+          "error": null,
+          "elapsed_ms": 14.773311004042625,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "candidate",
+          "id": "initial-p1",
+          "accepted": false,
+          "action": null,
+          "nn_calls": null,
+          "error": "INJECTED_NN_ERROR",
+          "elapsed_ms": 3.9671089947223663,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "candidate",
+          "id": "initial-p1",
+          "accepted": false,
+          "action": null,
+          "nn_calls": null,
+          "error": "NO_RESPONSE_TIMEOUT",
+          "elapsed_ms": 10.959093987941742,
+          "T_ms": 10,
+          "g_ms": 0
+        },
+        {
+          "engine": "candidate",
+          "id": "initial-p1",
+          "accepted": true,
+          "action": 13,
+          "nn_calls": 14,
+          "error": null,
+          "elapsed_ms": 424.9050740003586,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "reference",
+          "id": "initial-p1",
+          "accepted": true,
+          "action": 13,
+          "nn_calls": 21,
+          "error": null,
+          "elapsed_ms": 427.26962999999523,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "candidate",
+          "id": "asym-hv-p2",
+          "accepted": true,
+          "action": 67,
+          "nn_calls": 18,
+          "error": null,
+          "elapsed_ms": 421.50625199079514,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "reference",
+          "id": "asym-hv-p2",
+          "accepted": true,
+          "action": 67,
+          "nn_calls": 22,
+          "error": null,
+          "elapsed_ms": 427.2481610029936,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "candidate",
+          "id": "straight-jump-p2",
+          "accepted": true,
+          "action": 129,
+          "nn_calls": 21,
+          "error": null,
+          "elapsed_ms": 423.7735740095377,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "reference",
+          "id": "straight-jump-p2",
+          "accepted": true,
+          "action": 31,
+          "nn_calls": 24,
+          "error": null,
+          "elapsed_ms": 417.5115479975939,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "candidate",
+          "id": "initial-p1",
+          "accepted": false,
+          "action": null,
+          "nn_calls": null,
+          "error": "cancelled",
+          "elapsed_ms": 2.536302998661995,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "candidate",
+          "id": "initial-p1",
+          "accepted": true,
+          "action": 13,
+          "nn_calls": 12,
+          "error": null,
+          "elapsed_ms": 419.2474440038204,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "reference",
+          "id": "initial-p1",
+          "accepted": true,
+          "action": 13,
+          "nn_calls": 20,
+          "error": null,
+          "elapsed_ms": 416.04990899562836,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "candidate",
+          "id": "initial-p1",
+          "accepted": false,
+          "action": null,
+          "nn_calls": null,
+          "error": "IDENTITY_MISMATCH",
+          "elapsed_ms": 425.57464899122715,
+          "T_ms": 500,
+          "g_ms": 91
+        }
+      ]
+    },
+    {
+      "version": "supplement5",
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ORT-ENTRY-CONTINUE/diagnostic/golden-execution-FIXED-GOLDEN-MAIN-01/requests.json",
+      "sha256": "b3f452a1d46bedccf69127fe21675490a57c14fc116dfd918dec29a6ed856417",
+      "requests": 5,
+      "accepted": 4,
+      "rejected": 1,
+      "errors": [
+        "NO_RESPONSE_TIMEOUT"
+      ],
+      "rows": [
+        {
+          "engine": "candidate",
+          "id": "initial-p1",
+          "accepted": true,
+          "action": 13,
+          "nn_calls": 16,
+          "error": null,
+          "elapsed_ms": 432.19850601255894,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "reference",
+          "id": "initial-p1",
+          "accepted": true,
+          "action": 13,
+          "nn_calls": 19,
+          "error": null,
+          "elapsed_ms": 432.8075689971447,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "candidate",
+          "id": "initial-p1",
+          "accepted": false,
+          "action": null,
+          "nn_calls": null,
+          "error": "NO_RESPONSE_TIMEOUT",
+          "elapsed_ms": 15.023580998182297,
+          "T_ms": 10,
+          "g_ms": 0
+        },
+        {
+          "engine": "candidate",
+          "id": "initial-p1",
+          "accepted": true,
+          "action": 13,
+          "nn_calls": 14,
+          "error": null,
+          "elapsed_ms": 428.4853569865227,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "reference",
+          "id": "initial-p1",
+          "accepted": true,
+          "action": 13,
+          "nn_calls": 21,
+          "error": null,
+          "elapsed_ms": 416.6882480084896,
+          "T_ms": 500,
+          "g_ms": 91
+        }
+      ]
+    },
+    {
+      "version": "final5",
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ORT-ENTRY-CONTINUE/diagnostic/golden-execution-FIXED-GOLDEN-MAIN-OWNED-WAIT-01/requests.json",
+      "sha256": "f5dd600909a97e19458b3f029a9fd6cf6d93c6311487afb422baead45119aa38",
+      "requests": 5,
+      "accepted": 4,
+      "rejected": 1,
+      "errors": [
+        "NO_RESPONSE_TIMEOUT"
+      ],
+      "rows": [
+        {
+          "engine": "candidate",
+          "id": "initial-p1",
+          "accepted": true,
+          "action": 13,
+          "nn_calls": 15,
+          "error": null,
+          "elapsed_ms": 433.47584499418736,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "reference",
+          "id": "initial-p1",
+          "accepted": true,
+          "action": 13,
+          "nn_calls": 20,
+          "error": null,
+          "elapsed_ms": 420.4307269901037,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "candidate",
+          "id": "initial-p1",
+          "accepted": false,
+          "action": null,
+          "nn_calls": null,
+          "error": "NO_RESPONSE_TIMEOUT",
+          "elapsed_ms": 16.359824001789093,
+          "T_ms": 10,
+          "g_ms": 0
+        },
+        {
+          "engine": "candidate",
+          "id": "initial-p1",
+          "accepted": true,
+          "action": 13,
+          "nn_calls": 15,
+          "error": null,
+          "elapsed_ms": 434.82397900521755,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "reference",
+          "id": "initial-p1",
+          "accepted": true,
+          "action": 13,
+          "nn_calls": 18,
+          "error": null,
+          "elapsed_ms": 428.3393130004406,
+          "T_ms": 500,
+          "g_ms": 91
+        }
+      ]
+    },
+    {
+      "version": "critic-incomplete3",
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-ORT-ENTRY/diagnostic/golden-execution-FIXED-GOLDEN-MAIN-OWNED-WAIT-01/requests.json",
+      "sha256": "3e1ec4e1cd41aafc23e3562054ff476358bd207f011c3209da0165293e81d2b9",
+      "requests": 3,
+      "accepted": 2,
+      "rejected": 1,
+      "errors": [
+        "NO_RESPONSE_TIMEOUT"
+      ],
+      "rows": [
+        {
+          "engine": "candidate",
+          "id": "initial-p1",
+          "accepted": true,
+          "action": 13,
+          "nn_calls": 13,
+          "error": null,
+          "elapsed_ms": 447.8232830017805,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "reference",
+          "id": "initial-p1",
+          "accepted": true,
+          "action": 13,
+          "nn_calls": 17,
+          "error": null,
+          "elapsed_ms": 433.70370000600815,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "candidate",
+          "id": "initial-p1",
+          "accepted": false,
+          "action": null,
+          "nn_calls": null,
+          "error": "NO_RESPONSE_TIMEOUT",
+          "elapsed_ms": 14.828240990638733,
+          "T_ms": 10,
+          "g_ms": 0
+        }
+      ]
+    },
+    {
+      "version": "producer-observation5",
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ORT-CLEANUP-REPAIR/diagnostic/golden-execution-OBSERVATION-01/requests.json",
+      "sha256": "613fc7acb56a184b73cff8b5baf1b1a671b4cc7e948c7af20c4c141d599ceb6d",
+      "requests": 5,
+      "accepted": 4,
+      "rejected": 1,
+      "errors": [
+        "NO_RESPONSE_TIMEOUT"
+      ],
+      "rows": [
+        {
+          "engine": "candidate",
+          "id": "initial-p1",
+          "accepted": true,
+          "action": 13,
+          "nn_calls": 13,
+          "error": null,
+          "elapsed_ms": 447.07630099356174,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "reference",
+          "id": "initial-p1",
+          "accepted": true,
+          "action": 13,
+          "nn_calls": 18,
+          "error": null,
+          "elapsed_ms": 429.7509890049696,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "candidate",
+          "id": "initial-p1",
+          "accepted": false,
+          "action": null,
+          "nn_calls": null,
+          "error": "NO_RESPONSE_TIMEOUT",
+          "elapsed_ms": 10.554057002067566,
+          "T_ms": 10,
+          "g_ms": 0
+        },
+        {
+          "engine": "candidate",
+          "id": "initial-p1",
+          "accepted": true,
+          "action": 13,
+          "nn_calls": 12,
+          "error": null,
+          "elapsed_ms": 428.1654739975929,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "reference",
+          "id": "initial-p1",
+          "accepted": true,
+          "action": 13,
+          "nn_calls": 18,
+          "error": null,
+          "elapsed_ms": 433.735037997365,
+          "T_ms": 500,
+          "g_ms": 91
+        }
+      ]
+    },
+    {
+      "version": "producer-repaired5",
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ORT-CLEANUP-REPAIR/diagnostic/golden-execution-REPAIR-01/requests.json",
+      "sha256": "7b3ace5c5b863e3130fe46860e9da7f4f5063b1db14258f1174dc955eaf4b7a6",
+      "requests": 5,
+      "accepted": 4,
+      "rejected": 1,
+      "errors": [
+        "NO_RESPONSE_TIMEOUT"
+      ],
+      "rows": [
+        {
+          "engine": "candidate",
+          "id": "initial-p1",
+          "accepted": true,
+          "action": 13,
+          "nn_calls": 13,
+          "error": null,
+          "elapsed_ms": 433.3703790009022,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "reference",
+          "id": "initial-p1",
+          "accepted": true,
+          "action": 13,
+          "nn_calls": 17,
+          "error": null,
+          "elapsed_ms": 428.20712400972843,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "candidate",
+          "id": "initial-p1",
+          "accepted": false,
+          "action": null,
+          "nn_calls": null,
+          "error": "NO_RESPONSE_TIMEOUT",
+          "elapsed_ms": 11.23937401175499,
+          "T_ms": 10,
+          "g_ms": 0
+        },
+        {
+          "engine": "candidate",
+          "id": "initial-p1",
+          "accepted": true,
+          "action": 13,
+          "nn_calls": 13,
+          "error": null,
+          "elapsed_ms": 435.20112900435925,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "reference",
+          "id": "initial-p1",
+          "accepted": true,
+          "action": 13,
+          "nn_calls": 18,
+          "error": null,
+          "elapsed_ms": 448.3121969997883,
+          "T_ms": 500,
+          "g_ms": 91
+        }
+      ]
+    },
+    {
+      "version": "critic-repaired5",
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-ORT-CLEANUP-REPAIR/diagnostic/golden-execution-CRITIC-47-INITIAL-01/requests.json",
+      "sha256": "34d36475939bfc51f2da1731cbf4810d7264f4963824f15839276d68451a25e7",
+      "requests": 5,
+      "accepted": 4,
+      "rejected": 1,
+      "errors": [
+        "NO_RESPONSE_TIMEOUT"
+      ],
+      "rows": [
+        {
+          "engine": "candidate",
+          "id": "initial-p1",
+          "accepted": true,
+          "action": 13,
+          "nn_calls": 13,
+          "error": null,
+          "elapsed_ms": 431.58062098920345,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "reference",
+          "id": "initial-p1",
+          "accepted": true,
+          "action": 13,
+          "nn_calls": 18,
+          "error": null,
+          "elapsed_ms": 413.35570500791073,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "candidate",
+          "id": "initial-p1",
+          "accepted": false,
+          "action": null,
+          "nn_calls": null,
+          "error": "NO_RESPONSE_TIMEOUT",
+          "elapsed_ms": 13.224560007452965,
+          "T_ms": 10,
+          "g_ms": 0
+        },
+        {
+          "engine": "candidate",
+          "id": "initial-p1",
+          "accepted": true,
+          "action": 13,
+          "nn_calls": 13,
+          "error": null,
+          "elapsed_ms": 439.18251299858093,
+          "T_ms": 500,
+          "g_ms": 91
+        },
+        {
+          "engine": "reference",
+          "id": "initial-p1",
+          "accepted": true,
+          "action": 13,
+          "nn_calls": 16,
+          "error": null,
+          "elapsed_ms": 433.6786510050297,
+          "T_ms": 500,
+          "g_ms": 91
+        }
+      ]
+    }
+  ],
+  "forced": {
+    "producer_sessions": 4,
+    "self_sessions": 2,
+    "all_forced_not_natural": true,
+    "cleanup_ms": [
+      231.42449300000044,
+      230.08839399999852
+    ],
+    "own_adopted_wait_events": 7
+  },
+  "failures_retained": {
+    "old43": "OWN_CLEANUP_FAILED/fresh not run; cause remains unconfirmed; old helper two failures unchanged",
+    "self_numeric_attempt1": "zero-based Rust turn misinterpreted; failed exact source saved; one correction only; no input/threshold/NN change",
+    "optional_read_audit": "assert signal pre-state nonZ failed on one same-owned-identity scan-to-signal transition; retained; no cleanup semantic change",
+    "inspection_only": "one transient KeyError for missing nn_calls on a rejected row; no output/input mutation"
+  },
+  "limitations": [
+    "actual_go=false and entry_mock_complete=false original flags remain",
+    "new actual preregistration/calibration/freeze incomplete: no matches",
+    "current five only initial; saved P2 three golden gate is not fresh P2 NN repeat",
+    "old43 failure not reproduced/cause unresolved; reaper dependence is observation only",
+    "forced bounded cleanup supported by finite runs; no general cleanup/clock-tail/OS absence guarantee",
+    "20ms loop includes /proc/fs scan overhead; transient short-lived PID/TID or instantaneous RSS peak can be missed",
+    "signal PID-starttick stat and kill are separate operations; not atomic pidfd proof",
+    "native normal runtime/allocator/entropy/full alias/FFI/cancel/true legal200/no-legal/deep overlay still unverified",
+    "saved checkpoint13 and terminal4 include synthetic200/no-legal; not real reachability proof",
+    "old32 matches/old42 demands/source versions remain separate; no new wins/speed/Sigma equivalence",
+    "steward metadata parallel means not idle performance window",
+    "old cache/tmp/resource/affinity/monitor/deadline deviations preserved"
+  ],
+  "resources": {
+    "peak_RSS_bytes": 2196815872,
+    "allocated_current": 2482176,
+    "old43_allocated_current": 1249280,
+    "combined_allocated": 3731456,
+    "guardRSS": 2684354560,
+    "guardNew": 58720256,
+    "guardCombined": 117440512,
+    "additional_reservation": 0,
+    "all_observed_TIDs_CPU2": true,
+    "20ms_sampling_instant_peak_not_guaranteed": true,
+    "HTTP_server_started": false,
+    "port5190_listener": [],
+    "temp_residue": []
+  },
+  "stop": {
+    "UTC": "2026-10-01T11:21:03.502815+00:00",
+    "issue": "quoridor-4lc.47",
+    "all_own_jobs_stopped": true,
+    "tracked_identity_count": 89,
+    "identities": [
+      {
+        "pid": 1103169,
+        "starttick": 10607575
+      },
+      {
+        "pid": 1103176,
+        "starttick": 10607580
+      },
+      {
+        "pid": 1103198,
+        "starttick": 10607613
+      },
+      {
+        "pid": 1103206,
+        "starttick": 10607615
+      },
+      {
+        "pid": 1103213,
+        "starttick": 10607619
+      },
+      {
+        "pid": 1103214,
+        "starttick": 10607619
+      },
+      {
+        "pid": 1103166,
+        "starttick": 10607571
+      },
+      {
+        "pid": 1104330,
+        "starttick": 10616329
+      },
+      {
+        "pid": 1104329,
+        "starttick": 10616325
+      },
+      {
+        "pid": 1101351,
+        "starttick": 10596278
+      },
+      {
+        "pid": 1101362,
+        "starttick": 10596282
+      },
+      {
+        "pid": 1101358,
+        "starttick": 10596282
+      },
+      {
+        "pid": 1101364,
+        "starttick": 10596284
+      },
+      {
+        "pid": 1101370,
+        "starttick": 10596289
+      },
+      {
+        "pid": 1101374,
+        "starttick": 10596345
+      },
+      {
+        "pid": 1101379,
+        "starttick": 10596349
+      },
+      {
+        "pid": 1101375,
+        "starttick": 10596349
+      },
+      {
+        "pid": 1101381,
+        "starttick": 10596351
+      },
+      {
+        "pid": 1101388,
+        "starttick": 10596355
+      },
+      {
+        "pid": 1101404,
+        "starttick": 10596405
+      },
+      {
+        "pid": 1101411,
+        "starttick": 10596466
+      },
+      {
+        "pid": 1101418,
+        "starttick": 10596495
+      },
+      {
+        "pid": 1101419,
+        "starttick": 10596495
+      },
+      {
+        "pid": 1101446,
+        "starttick": 10596522
+      },
+      {
+        "pid": 1101438,
+        "starttick": 10596521
+      },
+      {
+        "pid": 1101456,
+        "starttick": 10596531
+      },
+      {
+        "pid": 1101499,
+        "starttick": 10596565
+      },
+      {
+        "pid": 1101512,
+        "starttick": 10596573
+      },
+      {
+        "pid": 1101578,
+        "starttick": 10597020
+      },
+      {
+        "pid": 1101582,
+        "starttick": 10597022
+      },
+      {
+        "pid": 1101584,
+        "starttick": 10597024
+      },
+      {
+        "pid": 1101590,
+        "starttick": 10597029
+      },
+      {
+        "pid": 1101595,
+        "starttick": 10597088
+      },
+      {
+        "pid": 1101596,
+        "starttick": 10597097
+      },
+      {
+        "pid": 1101600,
+        "starttick": 10597097
+      },
+      {
+        "pid": 1101602,
+        "starttick": 10597101
+      },
+      {
+        "pid": 1101612,
+        "starttick": 10597158
+      },
+      {
+        "pid": 1101641,
+        "starttick": 10597205
+      },
+      {
+        "pid": 1101645,
+        "starttick": 10597205
+      },
+      {
+        "pid": 1101649,
+        "starttick": 10597225
+      },
+      {
+        "pid": 1101662,
+        "starttick": 10597228
+      },
+      {
+        "pid": 1101666,
+        "starttick": 10597285
+      },
+      {
+        "pid": 1101668,
+        "starttick": 10597288
+      },
+      {
+        "pid": 1101676,
+        "starttick": 10597288
+      },
+      {
+        "pid": 1101684,
+        "starttick": 10597342
+      },
+      {
+        "pid": 1101690,
+        "starttick": 10597345
+      },
+      {
+        "pid": 1101707,
+        "starttick": 10597397
+      },
+      {
+        "pid": 1101714,
+        "starttick": 10597470
+      },
+      {
+        "pid": 1101710,
+        "starttick": 10597470
+      },
+      {
+        "pid": 1101716,
+        "starttick": 10597473
+      },
+      {
+        "pid": 1101722,
+        "starttick": 10597477
+      },
+      {
+        "pid": 1101726,
+        "starttick": 10597539
+      },
+      {
+        "pid": 1101731,
+        "starttick": 10597544
+      },
+      {
+        "pid": 1101727,
+        "starttick": 10597544
+      },
+      {
+        "pid": 1101735,
+        "starttick": 10597551
+      },
+      {
+        "pid": 1101741,
+        "starttick": 10597555
+      },
+      {
+        "pid": 1101758,
+        "starttick": 10597613
+      },
+      {
+        "pid": 1101759,
+        "starttick": 10597626
+      },
+      {
+        "pid": 1101767,
+        "starttick": 10597667
+      },
+      {
+        "pid": 1101768,
+        "starttick": 10597667
+      },
+      {
+        "pid": 1101787,
+        "starttick": 10597688
+      },
+      {
+        "pid": 1101795,
+        "starttick": 10597690
+      },
+      {
+        "pid": 1101805,
+        "starttick": 10597696
+      },
+      {
+        "pid": 1101827,
+        "starttick": 10597724
+      },
+      {
+        "pid": 1101834,
+        "starttick": 10597731
+      },
+      {
+        "pid": 1101916,
+        "starttick": 10598163
+      },
+      {
+        "pid": 1101920,
+        "starttick": 10598164
+      },
+      {
+        "pid": 1101922,
+        "starttick": 10598168
+      },
+      {
+        "pid": 1101928,
+        "starttick": 10598173
+      },
+      {
+        "pid": 1101944,
+        "starttick": 10598234
+      },
+      {
+        "pid": 1101945,
+        "starttick": 10598239
+      },
+      {
+        "pid": 1101949,
+        "starttick": 10598240
+      },
+      {
+        "pid": 1101951,
+        "starttick": 10598242
+      },
+      {
+        "pid": 1101957,
+        "starttick": 10598247
+      },
+      {
+        "pid": 1101962,
+        "starttick": 10598300
+      },
+      {
+        "pid": 1101968,
+        "starttick": 10598355
+      },
+      {
+        "pid": 1101972,
+        "starttick": 10598356
+      },
+      {
+        "pid": 1101974,
+        "starttick": 10598359
+      },
+      {
+        "pid": 1101981,
+        "starttick": 10598363
+      },
+      {
+        "pid": 1101993,
+        "starttick": 10598412
+      },
+      {
+        "pid": 1102000,
+        "starttick": 10598416
+      },
+      {
+        "pid": 1102001,
+        "starttick": 10598416
+      },
+      {
+        "pid": 1102005,
+        "starttick": 10598419
+      },
+      {
+        "pid": 1102006,
+        "starttick": 10598419
+      },
+      {
+        "pid": 1102013,
+        "starttick": 10598424
+      },
+      {
+        "pid": 1102023,
+        "starttick": 10598484
+      },
+      {
+        "pid": 1101350,
+        "starttick": 10596274
+      },
+      {
+        "pid": 1106105,
+        "starttick": 10628938
+      },
+      {
+        "pid": 1106104,
+        "starttick": 10628935
+      }
+    ],
+    "remaining": [],
+    "remaining0": true,
+    "all_process_exit0": true,
+    "last_NN_end": "2026-10-01T11:11:23.997592+00:00",
+    "last_diagnostic_end": "2026-10-01T11:16:27.671606+00:00",
+    "stop_reason": "fixed five, nine mocks, saved numeric and source checks complete; no additional runtime authorized/needed",
+    "process_deadline": "2026-10-01T11:35:00Z",
+    "submit_deadline": "2026-10-01T11:45:00Z",
+    "newruntime_after_stop": 0,
+    "recorder_PID": 1110121,
+    "recorder_exits_after_save": true,
+    "source_current784hash_unchanged": true,
+    "saved_before_final_report": true,
+    "formal_games": 0,
+    "other_jobs_not_stopped": true
+  },
+  "reproduce": {
+    "env": "UV_NO_SYNC=1 UV_OFFLINE=1 PYTHONDONTWRITEBYTECODE=1 CLEANUP_DIAGNOSTIC_RUN_ID=CRITIC-47-INITIAL-01",
+    "fixed5": "taskset -c 2 python3 -B /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-ORT-CLEANUP-REPAIR/run-own.py independent-initial-five node /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-ORT-CLEANUP-REPAIR/stage/entry-real-main-gate.cjs",
+    "existing_directory": "same runID intentionally rejects; reproducing requires a separate authorized new copy/runID, not overwriting proof",
+    "mock": "taskset -c 2 python3 -B /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-ORT-CLEANUP-REPAIR/run-own.py independent-nine-mocks node /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-ORT-CLEANUP-REPAIR/stage/independent-nine-mocks.cjs",
+    "numeric": "taskset -c 2 python3 -B /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-ORT-CLEANUP-REPAIR/run-own.py numeric-corrected-once python3 -B /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-ORT-CLEANUP-REPAIR/independent-arithmetic.py",
+    "source_patch_sha256": "9a7e01d778ad077d6c207a548e52882c440b7620f16fc0312634c62f6fd4ab1d",
+    "numeric_patch_sha256": "fc189b766945f12ba981dd0a7b7927fb64a3db2c85fe8d8f3efa01aeae99f34f"
+  },
+  "owner_issue_status": "authoritative Beads only; this JSON is experimental evidence",
+  "next_judgment": "coordinator limited acceptance of .45/.47 if adequate; actual entry/preregister/calibration/freeze remain separate explicit contract"
+}

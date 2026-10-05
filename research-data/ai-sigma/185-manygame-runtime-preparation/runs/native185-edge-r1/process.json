@@ -1,0 +1,46 @@
+{
+  "issue": "quoridor-4lc.185",
+  "run": "native185-edge-r1",
+  "UTC": "2026-10-03T12:01:09.915821+00:00",
+  "jobwall_seconds": 1.6668351119733416,
+  "exit": 0,
+  "stop_reason": null,
+  "command": [
+    "node",
+    "--max-old-space-size=192",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-manygame-runtime-preparation/edge-mock.cjs",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/185-manygame-runtime-preparation/runs/native185-edge-r1"
+  ],
+  "runner_pid": 3501070,
+  "tracked": [
+    {
+      "pid": 3501124,
+      "ppid": 3501070,
+      "tick": 28181306,
+      "state": "S",
+      "RSS": 53100544
+    },
+    {
+      "pid": 3501133,
+      "ppid": 3501124,
+      "tick": 28181309,
+      "state": "R",
+      "RSS": 44765184
+    },
+    {
+      "pid": 3501141,
+      "ppid": 3501124,
+      "tick": 28181314,
+      "state": "R",
+      "RSS": 49528832
+    }
+  ],
+  "remaining": [],
+  "peak_aggregate_RSS": 121286656,
+  "scope_allocated": 339968,
+  "mock_reply_upper_bound": 10,
+  "NN": 0,
+  "model_sessions": 0,
+  "GPU": 0,
+  "sampled_resource_limits_not_full_host_guarantee": true
+}

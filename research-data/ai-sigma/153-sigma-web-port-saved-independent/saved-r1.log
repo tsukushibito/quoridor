@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port-saved-independent/check.py", line 130, in <module>
+    exact(len(raw['rows']),10,'rows');exact(raw['errors'],[],'errors');exact(raw['hand_NN'],320,'handNN');rows=[checkrow(r) for r in raw['rows']]
+                                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port-saved-independent/check.py", line 130, in <listcomp>
+    exact(len(raw['rows']),10,'rows');exact(raw['errors'],[],'errors');exact(raw['hand_NN'],320,'handNN');rows=[checkrow(r) for r in raw['rows']]
+                                                                                                                ^^^^^^^^^^^
+  File "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-sigma-web-port-saved-independent/check.py", line 84, in checkrow
+    p,t,w=unpackkey(f['history_count_key']);hist=dict(f['history_counts']);remain=f['board']['walls_remaining'][:]
+                                                                                  ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+KeyError: 'walls_remaining'

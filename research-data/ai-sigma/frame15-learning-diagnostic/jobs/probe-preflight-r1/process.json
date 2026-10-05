@@ -1,0 +1,35 @@
+{
+  "id": "probe-preflight-r1",
+  "kind": "static",
+  "UTC": "2026-10-04T04:35:53.842149+00:00",
+  "identity": {
+    "pid": 3998650,
+    "ppid": 3998588,
+    "pgrp": 3998650,
+    "tick": "34152145",
+    "RSS": 0,
+    "cmd": "",
+    "affinity": [
+      2
+    ]
+  },
+  "command": [
+    "python3",
+    "-B",
+    "tools/ai-sigma-learning-diagnostic/probe.py",
+    "--preflight"
+  ],
+  "wall_seconds": 0.056740510975942016,
+  "peak_family_RSS": 22614016,
+  "exit": 0,
+  "reason": "completed",
+  "child_waited": true,
+  "remaining": [],
+  "current_exact_identity_absent": true,
+  "samples_charged": 0,
+  "sample_cap": 0,
+  "CPU": [
+    2
+  ],
+  "GPU": 0
+}

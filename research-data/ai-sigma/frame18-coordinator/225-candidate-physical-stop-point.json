@@ -1,0 +1,37 @@
+{
+  "process": {
+    "startUTC": "2026-10-04T11:04:17.932324+00:00",
+    "endUTC": "2026-10-04T11:04:27.855399+00:00",
+    "jobwall_seconds": 12.18316583498381,
+    "exit": -15,
+    "stop_reason": "CURRENT_FOREIGN_COMPUTE_STARTED",
+    "sample_equivalent": null,
+    "all_child_waited": true,
+    "current_exact_absent": true
+  },
+  "foreign": {
+    "UTC": "2026-10-04T11:04:27.640637+00:00",
+    "pid": 80408,
+    "tick": 36484847,
+    "ppid": 80404,
+    "script": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-supervisor-read-guard/guard.py",
+    "argv": [
+      "python3",
+      "-B",
+      "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-supervisor-read-guard/guard.py",
+      "inspect",
+      "--run-id",
+      "45fa8af3-ba09-4b6f-b9b3-c8e95755f846"
+    ],
+    "ancestry_seen": [
+      1,
+      2002,
+      2009,
+      80404
+    ]
+  },
+  "model_init_exists": true,
+  "slots_consumed_now": 2,
+  "interpretation": "second stop identifies actual supervisor inspect CPU tool, unlike prior shell false-positive; no speed verdict",
+  "next_decision": "critic226 priority adopted: remaining science NOT_STARTED; stopped handoff then independent growth/learning; no further225model science"
+}

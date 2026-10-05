@@ -1,0 +1,31 @@
+{
+  "issue": "quoridor-4lc.195",
+  "UTC": "2026-10-03T23:42:42.563826+00:00",
+  "data_plan_SHA": "9588613de2e4c0b7fb1c57d836419be7b1e973240833bb41c84a7e8f1101bcac",
+  "partitions": {
+    "train": 96,
+    "validation": 24,
+    "test": 24
+  },
+  "stages": [
+    24,
+    48,
+    96
+  ],
+  "initial_weights": "same fresh seed19080311; tensorSHA checked acrossstages; no continuation",
+  "train_samples_each": 256000,
+  "evaluation": "before0 then100..2000; alltrain/fullval predictions; fixedmax96mask primary val gameequalMSE",
+  "canonical_input": "QF1-f32-STM-v1 / same function for model.inputs and SHA",
+  "mask": "state OR state-context-history OR actualf32 modelinput, val excludes max96train; test excludes max96train+allval",
+  "test_label_read": false,
+  "selection": "one lowest eligiblevalgameequalMSE candidate from3stage/beststeps; ties stageorder24/48/96 then earlieststep; allcohort/z regressions disclosed",
+  "LR_optional": "at most1 .00025 all96, beforetest; optional if curves justify and remainingcost fits",
+  "freeze": "config/checkpoint/initial/dataset/validation/mask/testsealedSHA/source/testrule",
+  "test": "one candidate+initial+train-only gameequalconstant, primary/secondary, all24denominator, gamepairbootstrap2000 seed19580311",
+  "science_sample_cap": 5000000,
+  "science_seconds_cap": 900,
+  "job_hard_seconds": 120,
+  "GPU_learning": false,
+  "warm": 0,
+  "strength_claim": false
+}

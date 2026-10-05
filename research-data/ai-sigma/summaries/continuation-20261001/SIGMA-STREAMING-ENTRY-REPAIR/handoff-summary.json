@@ -1,0 +1,90 @@
+{
+  "issue": "quoridor-4lc.68",
+  "actual_go": false,
+  "phaseA": {
+    "same_main_mock_scenarios": 14,
+    "checks": 13,
+    "schedule": {
+      "pairs": 48,
+      "games": 96,
+      "seed": 1979,
+      "pool_immutable": true,
+      "Python_Node_checked": true
+    },
+    "required_seven_codes_fixed": true,
+    "real_classifier_same_path": true,
+    "public_binding_fields_tested": 20,
+    "NN0_cache_cutoff_matrix": 9,
+    "before_backend_loaded_expired_context_test": true,
+    "finite_only": true
+  },
+  "phaseB": {
+    "preregistered_maximum": 11,
+    "job_attempts": 1,
+    "retry": 0,
+    "public_requests": 0,
+    "search_dispatches_observed": 0,
+    "backend_ready": false,
+    "NN_search_success": 0,
+    "numeric_gate_unexecuted": true,
+    "goal_and_four_ply_unexecuted": true,
+    "reason": "STORAGE_GUARD; entry OWN_CLEANUP_FAILED; original startup/load failure cause not retained before cleanup masked it",
+    "whole_gate": false
+  },
+  "resource": {
+    "peak_RSS_B": 1176731648,
+    "storage_start_observed_B": 25677824,
+    "peak_new_allocated_B": 38535168,
+    "guard_B": 29360128,
+    "ceiling_B": 33554432,
+    "guard_overshoot_B": 9175040,
+    "ceiling_overshoot_B": 4980736,
+    "final_after_job_B": 25845760,
+    "guard_sample_target_ms": 40,
+    "instantpeak_not_guaranteed": true,
+    "peak_path_breakdown_missing": true,
+    "reservation_reset": false
+  },
+  "cleanup": {
+    "outer_sole_root": true,
+    "outer_reaped_adopted": 2,
+    "outer_recorded_identities": 26,
+    "outer_remaining": [],
+    "inner": "OWN_CLEANUP_FAILED",
+    "model_drop_ACK_missing": true,
+    "fresh_unexecuted": true,
+    "forced": true
+  },
+  "stopped_before_report": true,
+  "source_manifest_sha256": "cf0983dee003a81f333d1802d83367cf4ab62e08462900bc902c8ca86e11be21",
+  "old_input_checks": 38,
+  "old_inputs_all_match": true,
+  "games": 0,
+  "holdout_send": 0,
+  "NI_proven": false,
+  "adoption": false,
+  "goal_achieved": false,
+  "limitations": [
+    "phaseA first timer helper invocation failed; one correction preserved",
+    "first stop scanner matched24 DevTools connector processes; one correction preserved",
+    "earlier new-scope manifest bytes overwritten before immutable-by-digest fix; job source/token digests retained but exact original manifest bytes not reconstructed",
+    "short unguarded static shell PID/RSS not fully recorded",
+    "original startup cause masked by boundedStop OWN_CLEANUP_FAILED; no causality assertion",
+    "runtime storage peak paths not captured; no reclaim or deletion to retry",
+    "old .67 guard/unfinished .66 negative seven classifications are preserved",
+    "old32/g287/62+82/340s/2.26s and prior capacity/deadline/scope/affinity/missing logs retained",
+    "unknown training overlap; arbitrary tree/deep/rawview/entropy/true200/no-legal not generally proven",
+    "guarded phaseA jobs CPU0; short unguarded editing/read commands had affinity/PID/RSS gaps; whole-task CPU0 compliance not proven",
+    "legacy runner key all_observed_TIDs_CPU2 compares phase-selected CPU; phaseA actual affinity0 is in started/tracked data",
+    "phaseA accepted API verifier/static actual-CLI mapping; standalone actual --run subprocess refusal was not separately executed",
+    "phaseA repeated-version preservation consumed about24MiB before browser start; startup temporary headroom insufficiently budgeted"
+  ],
+  "old66_current_identity_check": {
+    "tracked": 105,
+    "runner_pid": 1510798,
+    "runner_starttick": 13389911,
+    "runner_same_identity_live": false,
+    "total_with_runner": 106,
+    "current_absence_only": true
+  }
+}

@@ -1,0 +1,364 @@
+{
+  "issue": "quoridor-4lc.133",
+  "UTC": "2026-10-02T16:51:54.168997+00:00",
+  "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+  "jobs": [
+    {
+      "name": "p133-count-r1",
+      "start": "2026-10-02T16:47:57.544750+00:00",
+      "end": "2026-10-02T16:48:15.847268+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "peak_group_plus_runner_RSS": 1674821632,
+      "peak_allocated_bytes": 12947456,
+      "remaining": [],
+      "unknown_adopted": [],
+      "all_observed_TIDs_at_assigned_CPU": true
+    },
+    {
+      "name": "p133-source-audit-r1",
+      "start": "2026-10-02T16:50:49.060722+00:00",
+      "end": "2026-10-02T16:50:49.408509+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "peak_group_plus_runner_RSS": 76996608,
+      "peak_allocated_bytes": 11792384,
+      "remaining": [],
+      "unknown_adopted": [],
+      "all_observed_TIDs_at_assigned_CPU": true
+    }
+  ],
+  "identity_count": 71,
+  "current_same_identity": [],
+  "currentabsence_not_natural_allperiod": true,
+  "source_write_stopped": true,
+  "source": {
+    "tools/ai-sigma-deep-node-independent/diagnose.cjs": "659332271595e10ddedc389cfc6398ef9246dc95cb8eb7ec7c56ef11e11fe173",
+    "tools/ai-sigma-deep-node-independent/closure.py": "6c9b3fe1010bb5b4ce272a8335d3ec5c8fea01c921e6d704f71b9c5c1e958d06",
+    "tools/ai-sigma-deep-node-independent/runner.py": "780ba11181bfca211f0a7d1e29a0eaa37be5d059d2e15d2146cee70e03ea3ced",
+    "tools/ai-sigma-deep-node-independent/admission.py": "2f61dd68335726bfcd3cde04b3ffdaa607dba828ab9cbb36573db4bd7fe365c5",
+    "tools/ai-sigma-deep-node-independent/stop.py": "7aa24535a62b4fadd59a2f4de3dc59d8a2383d6d6f123eb81ea1671b48fec7e9",
+    "tools/ai-sigma-deep-node-independent/checker.js": "fae0aa69787e2299ae4e0e5e7fc5fe45c6068e4540d119310365177bb95940db",
+    "tools/ai-sigma-deep-node-independent/browser.cjs": "9cade125d7fca0e2b72752ee5ca8863efb630db28213c1f71c0f02e1c5516905",
+    "tools/ai-sigma-deep-node-independent/prepare.py": "67572d43356cb7385dad0042f9ac3ff4f9ad2f81477b0ee820ed6f1d8fd9a384",
+    "tools/ai-sigma-deep-node-independent/source-audit.cjs": "3c0b370f2e7e0fa4e8050b63c0a15d39a993c6314eac59e94f4859ee5181c486"
+  },
+  "Model2_drop": {
+    "players": [
+      {
+        "kind": "dropped",
+        "handles": 0,
+        "activeNN": 0,
+        "at_ms": 1790959695392.0251,
+        "producer_post_begin_ms": 1790959695392.03,
+        "worker_engine": "candidate"
+      },
+      {
+        "kind": "dropped",
+        "handles": 0,
+        "activeNN": 0,
+        "at_ms": 1790959695396.3499,
+        "producer_post_begin_ms": 1790959695396.3499,
+        "worker_engine": "reference"
+      }
+    ],
+    "handles": 0,
+    "activeNN": 0
+  },
+  "main_timers": {
+    "main_timers": 0,
+    "pending_messages": []
+  },
+  "monitor_callback": true,
+  "inner_controlled": {
+    "remaining_pids": 0,
+    "tracked": [
+      {
+        "pid": 2662964,
+        "starttick": 21259327
+      },
+      {
+        "pid": 2662968,
+        "starttick": 21259327
+      },
+      {
+        "pid": 2662970,
+        "starttick": 21259334
+      },
+      {
+        "pid": 2662981,
+        "starttick": 21259395
+      },
+      {
+        "pid": 2662982,
+        "starttick": 21259399
+      },
+      {
+        "pid": 2662986,
+        "starttick": 21259400
+      },
+      {
+        "pid": 2662988,
+        "starttick": 21259403
+      },
+      {
+        "pid": 2662994,
+        "starttick": 21259407
+      },
+      {
+        "pid": 2662998,
+        "starttick": 21259467
+      },
+      {
+        "pid": 2663011,
+        "starttick": 21259520
+      },
+      {
+        "pid": 2663012,
+        "starttick": 21259562
+      },
+      {
+        "pid": 2663013,
+        "starttick": 21259563
+      },
+      {
+        "pid": 2663015,
+        "starttick": 21259564
+      },
+      {
+        "pid": 2663018,
+        "starttick": 21259566
+      },
+      {
+        "pid": 2663019,
+        "starttick": 21259566
+      },
+      {
+        "pid": 2663029,
+        "starttick": 21259581
+      },
+      {
+        "pid": 2663035,
+        "starttick": 21259582
+      },
+      {
+        "pid": 2663038,
+        "starttick": 21259587
+      },
+      {
+        "pid": 2663052,
+        "starttick": 21259593
+      },
+      {
+        "pid": 2663055,
+        "starttick": 21259595
+      },
+      {
+        "pid": 2663057,
+        "starttick": 21259597
+      },
+      {
+        "pid": 2663072,
+        "starttick": 21259606
+      },
+      {
+        "pid": 2663099,
+        "starttick": 21259650
+      },
+      {
+        "pid": 2663106,
+        "starttick": 21259664
+      },
+      {
+        "pid": 2663128,
+        "starttick": 21259705
+      },
+      {
+        "pid": 2663138,
+        "starttick": 21259717
+      },
+      {
+        "pid": 2663147,
+        "starttick": 21259725
+      },
+      {
+        "pid": 2663151,
+        "starttick": 21259727
+      },
+      {
+        "pid": 2663181,
+        "starttick": 21259781
+      },
+      {
+        "pid": 2663193,
+        "starttick": 21259794
+      },
+      {
+        "pid": 2663197,
+        "starttick": 21259897
+      },
+      {
+        "pid": 2663198,
+        "starttick": 21259897
+      },
+      {
+        "pid": 2663217,
+        "starttick": 21259988
+      },
+      {
+        "pid": 2663221,
+        "starttick": 21259992
+      },
+      {
+        "pid": 2663223,
+        "starttick": 21259999
+      },
+      {
+        "pid": 2663229,
+        "starttick": 21260021
+      },
+      {
+        "pid": 2663240,
+        "starttick": 21260196
+      },
+      {
+        "pid": 2663241,
+        "starttick": 21260197
+      },
+      {
+        "pid": 2663242,
+        "starttick": 21260203
+      },
+      {
+        "pid": 2663246,
+        "starttick": 21260205
+      },
+      {
+        "pid": 2663248,
+        "starttick": 21260210
+      },
+      {
+        "pid": 2663255,
+        "starttick": 21260224
+      },
+      {
+        "pid": 2663256,
+        "starttick": 21260225
+      },
+      {
+        "pid": 2663266,
+        "starttick": 21260370
+      },
+      {
+        "pid": 2663267,
+        "starttick": 21260372
+      },
+      {
+        "pid": 2663269,
+        "starttick": 21260437
+      },
+      {
+        "pid": 2663273,
+        "starttick": 21260440
+      },
+      {
+        "pid": 2663275,
+        "starttick": 21260454
+      },
+      {
+        "pid": 2663288,
+        "starttick": 21260478
+      },
+      {
+        "pid": 2663298,
+        "starttick": 21260610
+      },
+      {
+        "pid": 2663299,
+        "starttick": 21260610
+      },
+      {
+        "pid": 2663305,
+        "starttick": 21260621
+      },
+      {
+        "pid": 2663309,
+        "starttick": 21260623
+      },
+      {
+        "pid": 2663318,
+        "starttick": 21260679
+      },
+      {
+        "pid": 2663330,
+        "starttick": 21260688
+      },
+      {
+        "pid": 2663341,
+        "starttick": 21260795
+      },
+      {
+        "pid": 2663350,
+        "starttick": 21260838
+      },
+      {
+        "pid": 2663354,
+        "starttick": 21260839
+      },
+      {
+        "pid": 2663359,
+        "starttick": 21260856
+      },
+      {
+        "pid": 2663365,
+        "starttick": 21260867
+      },
+      {
+        "pid": 2663379,
+        "starttick": 21260966
+      },
+      {
+        "pid": 2663380,
+        "starttick": 21260967
+      },
+      {
+        "pid": 2663382,
+        "starttick": 21260979
+      },
+      {
+        "pid": 2663384,
+        "starttick": 21260979
+      },
+      {
+        "pid": 2663386,
+        "starttick": 21260980
+      },
+      {
+        "pid": 2663388,
+        "starttick": 21260986
+      },
+      {
+        "pid": 2663394,
+        "starttick": 21261001
+      },
+      {
+        "pid": 2663399,
+        "starttick": 21261109
+      },
+      {
+        "pid": 2663400,
+        "starttick": 21261110
+      }
+    ],
+    "forced": true,
+    "graceful_error": null,
+    "waited": true,
+    "zombie_identities_absent": true,
+    "registration_ack": true,
+    "registered": 35
+  },
+  "outer_remaining_unknown0": true,
+  "managed_guard_observations_not_launch_admission": true,
+  "input_after_currentmatch": 10,
+  "same_identity_ownership_proof_scope": "managed jobs; short intake/read/closure command process evidence incomplete"
+}

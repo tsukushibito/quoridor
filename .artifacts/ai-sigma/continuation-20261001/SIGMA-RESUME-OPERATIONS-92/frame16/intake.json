@@ -1,0 +1,184 @@
+{
+  "at": "2026-10-04T06:07:36.218598+00:00",
+  "issues": [
+    {
+      "id": "quoridor-4lc",
+      "status": "in_progress",
+      "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+      "labels": [
+        "continuation-active",
+        "frame16",
+        "initial-window-ended"
+      ]
+    },
+    {
+      "id": "quoridor-4lc.92",
+      "status": "in_progress",
+      "assignee": "codex:01a0f31d-99ee-7d63-b162-bc1a59c457c6",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ]
+    }
+  ],
+  "parent_git": "c7607679934fdc1a64e8d6f2f4cec2483789351e",
+  "parent_sha256": "b468782c611a9e495e8dcceb92b77717dfd46e8e8f0209e702a8959ef13bf361",
+  "state": {
+    "binding": {
+      "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+      "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+      "target": "supervisor",
+      "dispatch_issue": "quoridor-4lc.40",
+      "contract_file": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+    },
+    "process": null,
+    "phase": "stopped",
+    "recovery_required": false,
+    "last_result": {
+      "at": "2026-10-04T05:46:38.015514+00:00",
+      "event": "process_stopped",
+      "owned_turn_pending": false
+    },
+    "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+    "config_sha256": "c11b0a4494b1786284a390b746072b3cd5ee80ad44a737d0eacb7a3a5c1ec7d9",
+    "contract_sha256": "76abe2c2e36bc0cb4bc5405a34367259bcca548d78c13d95efd0d6c558d43e74",
+    "next_at": null,
+    "owned": null
+  },
+  "old_pointer": {
+    "issue": "quoridor-4lc.92",
+    "frame": 15,
+    "updated_by": "92-frame15",
+    "record": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame15/running-loaded.json",
+    "run": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame15-d9da6a78-9caf-4c92-8f7e-f540bfdabc79",
+    "scheduler": {
+      "pid": 3975993,
+      "start_ticks": "33989991",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "monitor": {
+      "pid": 3976006,
+      "start_ticks": "33990012",
+      "state": "R",
+      "rss_bytes": 20598784,
+      "cpu_ticks": 2,
+      "affinity": [
+        0
+      ],
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    }
+  },
+  "old_processes": [
+    {
+      "pid": 3975993,
+      "absent": true,
+      "same_identity_running": false,
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    {
+      "pid": 3976006,
+      "absent": true,
+      "same_identity_running": false,
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    }
+  ],
+  "old_proofs": {
+    "monitor-ended.json": {
+      "sha256": "7c60aad11c4daae8caaf72178823456b5a1803a20dce153202cd75239db1bd85",
+      "record": {
+        "started_utc": "2026-10-04T04:08:53.322716+00:00",
+        "ended_utc": "2026-10-04T05:46:49.098307+00:00",
+        "process": {
+          "pid": 3976006,
+          "start_ticks": "33990012",
+          "state": "R",
+          "rss_bytes": 20598784,
+          "cpu_ticks": 2,
+          "affinity": [
+            0
+          ],
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        },
+        "reason": "2026-10-04 05:46:38 owned operation deadline",
+        "error": null,
+        "exit_code_if_normal": 0,
+        "self_user_cpu_s": 6.236224,
+        "self_sys_cpu_s": 6.476233,
+        "self_maxrss_kib": 24324,
+        "child_user_cpu_s": 8.426524,
+        "child_sys_cpu_s": 2.340186,
+        "child_maxrss_kib": 233036,
+        "sampled_combined_rss_peak_bytes": 235630592,
+        "allocated_peak_bytes": 28270592,
+        "no_child_command_left_running": true,
+        "own_process_exits_after_this_record": true,
+        "all_research_stopped_claimed": false
+      }
+    },
+    "scheduler-end-stop.json": {
+      "sha256": "9478522905ea42ccc269be52e8452b88c47dc1c36cf0bdff52b118da1b996e31",
+      "record": {
+        "at": "2026-10-04T05:46:43.347824+00:00",
+        "reason": "2026-10-04 05:46:38 owned operation deadline",
+        "command_result": {
+          "command_not_needed": true,
+          "reason": "stored scheduler not alive; retain unknown/pending ownership"
+        },
+        "state": {
+          "binding": {
+            "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+            "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+            "target": "supervisor",
+            "dispatch_issue": "quoridor-4lc.40",
+            "contract_file": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+            "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+          },
+          "process": null,
+          "phase": "stopped",
+          "recovery_required": false,
+          "last_result": {
+            "at": "2026-10-04T05:46:38.015514+00:00",
+            "event": "process_stopped",
+            "owned_turn_pending": false
+          },
+          "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+          "config_sha256": "c11b0a4494b1786284a390b746072b3cd5ee80ad44a737d0eacb7a3a5c1ec7d9",
+          "contract_sha256": "76abe2c2e36bc0cb4bc5405a34367259bcca548d78c13d95efd0d6c558d43e74",
+          "next_at": null,
+          "owned": null
+        },
+        "read_error": null,
+        "last_valid_state": null,
+        "scheduler_identity_alive": false,
+        "owned_turn_pending": false,
+        "external_NN_processes_stopped": false,
+        "scope": "stored owned scheduler/turn only",
+        "read_failure_not_hidden": true,
+        "no_automatic_restart_or_blind_send": true
+      }
+    }
+  },
+  "supervisor": {
+    "status": {
+      "type": "notLoaded"
+    },
+    "turns": [
+      {
+        "id": "01a10562-f9c4-7f80-83a3-b3134634a99f",
+        "status": "interrupted",
+        "error": null,
+        "startedAt": 1791091734,
+        "completedAt": 1791091915
+      }
+    ]
+  },
+  "definitions": {
+    "coordinator": "52a19638dff9af8fa422afadacf757bf3517223e410f3e1210f6964db6e032f0",
+    "hypothesis": "db6370b3f5d091f5b2155b3cba42b62d4743153b513445066714bdbf7f9e8a04",
+    "experiment": "09c3472d031e94f10263ba518abb57b1c9876e84712ef7d59fca6989b32d9720",
+    "critic": "b5a20ad0f99585ec5d308759dd74aa4db057c34521136abd1c9659f9a8d5c268",
+    "steward": "666d142158dcbf82d898fcacdfb3a1d7409fd1ff43ad34e15b27ca12ee05cb5e",
+    "supervisor": "190683a09f655188d2a92ff01affff45b17ee1d2eb2a00a623e7f995081e67fc"
+  }
+}

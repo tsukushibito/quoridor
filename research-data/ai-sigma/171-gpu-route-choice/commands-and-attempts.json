@@ -1,0 +1,31 @@
+{
+  "graph_inspection": [
+    "timeout",
+    "10s",
+    "taskset",
+    "-c",
+    "0",
+    "env",
+    "UV_NO_SYNC=1",
+    "UV_OFFLINE=1",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "CUDA_VISIBLE_DEVICES=",
+    "OMP_NUM_THREADS=1",
+    "OPENBLAS_NUM_THREADS=1",
+    "MKL_NUM_THREADS=1",
+    "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "research-data/ai-sigma/171-gpu-route-choice/inspect_graph.py"
+  ],
+  "static_values_check": "existing ONNX load_external_data=False; for every initializer numpy_helper.to_array dtype FLOAT and isfinite.all; Constant value tensors <=16 values saved; no NN/torch/CUDA/session",
+  "failures": [
+    {
+      "kind": "communication_dispatch_lock",
+      "file": "early-delivery.json",
+      "bounded_one_retry": "early-delivery-retry.json",
+      "science_failure": false
+    }
+  ],
+  "missing_checkpoint_paths": "source-graph-mapping.json",
+  "NN_game_forward_CUDA_session_build_training": 0,
+  "receipt_deadlines": "intake receipt+10/17/20/30minutes; parent08:15:21 unchanged"
+}

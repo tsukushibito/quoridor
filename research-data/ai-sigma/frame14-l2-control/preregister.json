@@ -1,0 +1,83 @@
+{
+  "UTC": "2026-10-04T00:34:03.083363+00:00",
+  "single_factor": "optimizer.weight_decay0 -> .01 (Adam L2, not AdamW)",
+  "config": {
+    "model": {
+      "feature_version": "QF1",
+      "transformer_width": 32,
+      "hidden_width": 32,
+      "dropout": 0
+    },
+    "optimizer": {
+      "name": "adam",
+      "lr": 0.001,
+      "weight_decay": 0.01
+    },
+    "training": {
+      "steps": 2000,
+      "batch_size": 128,
+      "seed": 19080311,
+      "target": "rootmean",
+      "sampling": "game",
+      "scheduler": "none",
+      "device": "cpu",
+      "threads": 1
+    },
+    "evaluation": {
+      "interval": 100,
+      "batch_size": 1024,
+      "monitor": "game",
+      "early_stopping_patience": 0,
+      "min_delta": 0
+    },
+    "limits": {
+      "seconds": 110,
+      "samples": 500000
+    },
+    "data": {
+      "overlap_policy": "report"
+    }
+  },
+  "reuse_baseline": "research-data/ai-sigma/frame14-learning/runs/frame14-train96-r1",
+  "stage": "research-data/ai-sigma/frame14-learning/stages/train96.stage.json",
+  "stage_SHA": "af95eabf3d059982e67cba41fcee0233aaea8a53eaf81a3b1fbae60752d83e75",
+  "expected_initial_tensor_SHA": "e5d218c9750d581eab7ca6a114acaa8f3cf5bd24474e3f639280705271fc7ddb",
+  "train_samples": 256000,
+  "samples_cap": 500000,
+  "train_upper": 379921,
+  "training_count": 1,
+  "gate": {
+    "beststep_greater_than": 0,
+    "weights_must_differ_from_initial": true,
+    "margin_vs_WD0_best_and_trainconstant": 0.0001,
+    "statistical_or_strength_claim": false
+  },
+  "newtest_slots": 24,
+  "newtest_before_gate": "NOT_STARTED",
+  "oldtest_no_read_reselect": true,
+  "readonly_sources": {
+    "tools/nnue-training/frame14_data.py": "f45482fe6d1a4477ee3bf3b080d14d883b1f28c79517cff83e4318b7a90e37b8",
+    "tools/nnue-training/run.sh": "a1b265602130757c2c2c3265f42a2f9ac3ebd61a72bc749c16e9c545c5527402",
+    "tools/nnue-training/frame14.py": "f08cc5177f1ab4f808f97ea260ec99ab7d5ce233c9d190b15118fc099dba71b7",
+    "tools/nnue-training/plot-requirements.txt": "afcc9a6c6143ccc107654170083bd42bc4af2c06585903f3b9a230d672d31601",
+    "tools/nnue-training/plot.py": "81081a71814a3a9955a759411f84bd1a2ac8a057161f4af9b813eccace41fb3b",
+    "tools/nnue-training/export_generated.cjs": "5195a4abecaee507ea9155b4383843a4370783fa6ea20c33f9f442576f98a1c2",
+    "tools/nnue-training/test_contrast.py": "76d1b2a079906aac53d77f15d7e99e006619436aa81a4f2bad5b9f3b23612749",
+    "tools/nnue-training/summarize_frame14.py": "5205b29684aa579b7125d31d3fb9726899435b45581da5d6ee0099021d7ddcf9",
+    "tools/nnue-training/test_frame14.py": "406d10d1604e4f7ecd837d974e82114f0d4b32070b192d2eac6118d8edf8b7e9",
+    "tools/nnue-training/common.py": "876e0e9a610b594db63e62e81ae920684f10e52f71a7cc75e04f8fbadd9ffe04",
+    "tools/nnue-training/preflight_frame14.py": "61284ee9862d30db18e4272388f388bbfaa0ceb4bd9bccd1c623387315f279b0",
+    "tools/nnue-training/export_qf1.cjs": "3434260776793c1b95c866c3810a8f6806a2ca74ee4b4306fa59f3e79c3db510",
+    "tools/nnue-training/prepare_frame14.py": "600827ac18fa7551df731c8173fd93ad5c318415bbf416fcf6758ae8fa2ecd7c",
+    "tools/nnue-training/test_workbench.py": "d192d07f9a0be11ed99a6e7343e33dd51f3287be7a7aa65b5d0e06280519e613",
+    "tools/nnue-training/plot.sh": "1395e484e2f1c3de56d4b3ebec3ea134b112ba6437d360a3ed3e38e64daf1998",
+    "tools/nnue-training/train.py": "665848e238d6a7976b83c53b0c13cdb87f9e65f4a75329560d6a98afbe9863d3",
+    "tools/nnue-training/manage_frame14.py": "cf13f3e0e1cf5d2784cad19b64d7cb1917d099785cb7f515b40a3abd927c2286",
+    "tools/nnue-training/compare.py": "92fe702e3abef15e0f74e0edb185fec1b55108a4c3e9bd030402062a640af2e9",
+    "tools/nnue-training/test_quantity.py": "2cc7e642c24c6d1c81d56e341e3ee887ca7b06def9a3c6781c18806e765f6898",
+    "tools/nnue-training/save_research.py": "d203b3379fa293afe76299ad3bba1347b5a774f733f72181d5fe8dca7b838089",
+    "tools/nnue-training/finalize_freeze.py": "29999004dc9afdc9f9e96853d0118652cb30775b7c24105c62c759afc7bed68d",
+    "tools/nnue-training/model.py": "12661cac69cff8b01800eb2d3df5be5f8674858d9ce995713b4385da44c74357",
+    "tools/nnue-training/configs/qf1-h32.json": "55141b83b7f42a331bcfc223d4ddb6e371d8371989cbbb0d3fae7edd5d2bde1b"
+  }
+}

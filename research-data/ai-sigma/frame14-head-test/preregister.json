@@ -1,0 +1,63 @@
+{
+  "issue": "quoridor-4lc.205",
+  "UTC": "2026-10-04T02:17:34.733751+00:00",
+  "openings_SHA": "2b1da48985d86b65e4fdca7054a694089531113b3fb321ade138cf7baa27fbb1",
+  "planned_games": 24,
+  "opening_ply_counts": {
+    "8": 4,
+    "12": 4,
+    "16": 4,
+    "20": 4,
+    "24": 4,
+    "28": 4
+  },
+  "generated_openings": 24,
+  "gate_peer": "quoridor-4lc.204",
+  "gate": {
+    "beststep_positive": true,
+    "weight_SHA_differs_distanceinitial": true,
+    "strict_validation_gameMSE_below": 0.48504681311997877,
+    "baseline": 0.48514681311997876,
+    "margin": 0.0001,
+    "finite_coeff_input_frozen_lower_schema": true,
+    "science_source_stopped_currentexact_absent": true,
+    "step0_allowed": false
+  },
+  "K": 64,
+  "rootN": 64,
+  "edgeSum": 63,
+  "tau": "1 first16newply then argmax",
+  "newply_cap": 200,
+  "model": "d790 folded CUDA f32 AMP/TF32 off",
+  "mode": "GPU24 maxB8 3worker",
+  "NN_cap": 307200,
+  "debug_NN": 0,
+  "startup_separate": true,
+  "job_hard_s": 300,
+  "heavy_cap_s": 420,
+  "static_cap_s": 120,
+  "management_cap_s": 600,
+  "reference_metadata": [
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/final-qf1-v2/all144-metadata.jsonl.gz",
+      "SHA": "1c257a5e440ac50096b56f033ff4e3e183594651d4162e0358326b3f08cf08b1"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-distance-test/canonical-export-r1/test-canonical.jsonl.gz",
+      "SHA": "8d70f9028f2972d1bd686c20799c9c82968500ba8df68b6769cbb92eabc0c2cf"
+    }
+  ],
+  "exposure": "state OR history OR actualQF1 input",
+  "prefreeze_allowlist": [
+    "label-free metadata",
+    "mask",
+    "safe slotledger",
+    "sealedlabel path/SHA"
+  ],
+  "newheavy": "2026-10-04T02:45:00Z",
+  "science_stop": "2026-10-04T02:55:00Z",
+  "process_stop": "2026-10-04T03:05:00Z",
+  "submit": "2026-10-04T03:10:00Z",
+  "no_success_replacement": true,
+  "NN_GPU_model_game_test_started": false
+}

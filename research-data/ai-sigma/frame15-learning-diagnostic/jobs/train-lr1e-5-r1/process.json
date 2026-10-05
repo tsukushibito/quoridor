@@ -1,0 +1,36 @@
+{
+  "id": "train-lr1e-5-r1",
+  "kind": "heavy",
+  "UTC": "2026-10-04T04:14:50.392739+00:00",
+  "identity": {
+    "pid": 3982112,
+    "ppid": 3982037,
+    "pgrp": 3982112,
+    "tick": "34025438",
+    "RSS": 0,
+    "cmd": "",
+    "affinity": [
+      2
+    ]
+  },
+  "command": [
+    "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "-B",
+    "tools/ai-sigma-learning-diagnostic/run.py",
+    "--condition",
+    "lr1e-5"
+  ],
+  "wall_seconds": 3.03221462800866,
+  "peak_family_RSS": 900583424,
+  "exit": 0,
+  "reason": "completed",
+  "child_waited": true,
+  "remaining": [],
+  "current_exact_identity_absent": true,
+  "samples_charged": 110210,
+  "sample_cap": 110210,
+  "CPU": [
+    2
+  ],
+  "GPU": 0
+}

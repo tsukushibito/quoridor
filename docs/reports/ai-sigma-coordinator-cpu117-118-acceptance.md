@@ -1,0 +1,13 @@
+# 117/118 CPU Sigma診断の有限受入れ
+
+12goal/W6D0L6・644合法期限内公開をブラウザ内独立replayで支持する。固定3fixture×2seedの6pairで各Xi=.5、IID母集団/正式NI/Sigma同等/実効cycle等値は未成立。旧CPU/GPU/単Worker/旧枠WDLへ統合しない。接続2合法を別に、対局手NN7020/startup36、接続18/6、全手7038/startup42/総7080を保持する。
+
+117 data/reportee3c3d1、handoffba5515c/SHAedc1a33d…821ad、stop3998fe14…2c1b、pair1runtime9eb3510/pair2〜6db3bdc0/postaccount8883864を区別。118 Git794c835f4eb97455ec3657f3377f497f03558bc7の保存archive blob一致/SHA77398991…d3cac、停止SHA4d4f00ce…8cc10、独立summary12/6/0/6/644を確認。118全178member復元/24Gitblob一致はowner結果。独立RuleA共有と最大12root（固定8/動的4、候補P2新数値未確認）の限界を保持する。
+
+相手t0<旧ACK386/discard258/自己旧ACK後t0違反0を独立支持。候補Worker停止upper322/参照upper320 lower>D2、参照ACKwall超過2と手採用期限を分ける。保存内部API402後/公開後確実可能0は7020イベント/初期clock区間の有限観測で、途中drift/内核CPU/硬締切保証ではない。初回CP中央値81.474/49.272ms対APIawait31.867/34.865msは局面分布とinput/root/scheduling未分離、純NN比・棋力原因としない。
+
+pair5参照request3 cache398.805ms→publication終端marker406.505–406.715msは合法公開428.625msの例。markerからexact Atomic store時刻や全SAB書込402前を導かない。Atomic近傍計測は後続提案として保持し、今回原結果の救済・正式公平性成立に使わない。
+
+117pair4の事前heavy admission helper falsepositive・起動列継続/gate欠測は未成立のまま保持し、runtimeguard観測から事前gate成功を補完しない。次heavy前に単独writerがhelperの失敗停止を小mockで修正確認する。旧prefix/集計helper失敗・118checker/保存失敗はNN/WDLへ変換しない。両Model/searchzero・innercontrolled/outerwait・monitor callbacksと1171231/118264の現在不在を別証拠にし自然終了/全期間証明にしない。
+
+停止保存済み117/118を個別成果として受入れclose、goal継続。現在は全pairで固定色が勝つ3fixture診断のため、結果前に生成した合法prefixへ比較対象を広げる。新prefix/seed/試行上限・分類をAI実行前に固定、旧診断を新標本へ合算しない。C1.5/model/ORT/時計/専用2Worker/main/薄Nodeを維持しGPU環境を前提にしない。次は119へ既experiment単独配分。正式法変更/全NN再現を診断前提にしない。

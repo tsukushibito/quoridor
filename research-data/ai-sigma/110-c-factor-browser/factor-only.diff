@@ -1,0 +1,11 @@
+--- baseline/kernel.rs
++++ c1/kernel.rs
+@@ -6,7 +6,7 @@
+ pub const MAX_NODES: u32 = 2048;
+ pub const MAX_DEPTH: u8 = 48;
+ pub const MAX_ARENA_BYTES: usize = 64 * 1024 * 1024;
+-const PUCT_C: f32 = 1.5;
++const PUCT_C: f32 = 1.0;
+ #[cfg(feature = "research")]
+ use quoridor_core::research::SigmaContext;
+ #[cfg(feature = "research")]

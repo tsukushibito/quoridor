@@ -1,0 +1,104 @@
+{
+  "134_final_data_Git": "7af16352efc00e56101fb9432ea5698473decec3",
+  "134_handoff_SHA": "4335e4d86c5e840da6c8b1a369555e4572e1be9dd1d6e541367e053562afe9da",
+  "134_final_results_Git_blob_equal": true,
+  "134_measured_Git_per_group": [
+    {
+      "run": "quality134-group1-r3",
+      "source_Git": "6b79eca8913b52725ccc2791fa902fbfb3d87fba"
+    },
+    {
+      "run": "quality134-group2-r1",
+      "source_Git": "64a656a7db105c2de54f671e031afd16e4094c49"
+    },
+    {
+      "run": "quality134-group3-r1",
+      "source_Git": "b7f4db360fb5dadb0194094652ef7c2829a94174"
+    },
+    {
+      "run": "quality134-group4-r1",
+      "source_Git": "857ce64d758a6abd22fa165fc51aecca3f7f759f"
+    }
+  ],
+  "all_group_adapted_source_hashes_same": true,
+  "forced_Action_P2_from_saved": [
+    {
+      "input": 3,
+      "branch": "A",
+      "Action209": 161,
+      "Action": {
+        "type": "wall",
+        "x": 0,
+        "y": 2,
+        "orientation": "v"
+      },
+      "P2canonical_policy_index": 112,
+      "side": 2,
+      "totalply_before": 13
+    },
+    {
+      "input": 3,
+      "branch": "B",
+      "Action209": 133,
+      "Action": {
+        "type": "wall",
+        "x": 4,
+        "y": 6,
+        "orientation": "h"
+      },
+      "P2canonical_policy_index": 20,
+      "side": 2,
+      "totalply_before": 13
+    },
+    {
+      "input": 4,
+      "branch": "B",
+      "Action209": 42,
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          1,
+          0
+        ]
+      },
+      "P2canonical_policy_index": 3,
+      "side": 2,
+      "totalply_before": 21
+    },
+    {
+      "input": 4,
+      "branch": "A",
+      "Action209": 32,
+      "Action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          -1
+        ]
+      },
+      "P2canonical_policy_index": 0,
+      "side": 2,
+      "totalply_before": 21
+    }
+  ],
+  "independent135": "initially unavailable; late saved report read as separately bound below, acceptance not assumed",
+  "claim_limit": "root/prior/score arithmetic only; no binary/provider/all rollout independent proof",
+  "coordinator_final_delivery_checks": {
+    "research-data/ai-sigma/134-local-move-quality/handoff-summary.json": "4335e4d86c5e840da6c8b1a369555e4572e1be9dd1d6e541367e053562afe9da",
+    "research-data/ai-sigma/134-local-move-quality/runtime-source-stopped-before-report.json": "656a9265724f57c07207c50261038e4d881e01db1e43ff2f7da17c368c76aa0c",
+    "research-data/ai-sigma/134-local-move-quality/final-results.json": "c4b7dae0bb041a813ded373c8010517528f8aa9918151f95765d401e265ae0c9"
+  },
+  "handoff_storage_Git": "bd339e21af2cf1a60d2715506d4aebe5fd1dd01b",
+  "preregister_original_SHA": "a3b368a42a3d0efdbac8eb085f4c12db7c10de5e55f31ec9891ddec8de666a38",
+  "preregister_measured_SHA": "355d9064f13caac54b5c20b23c523a834db58f49c9d0a4246afe40546fe1289d",
+  "preregister_difference": "coordinator recorded pre-NN omitted duplicate tree/readonly marker only; not independently all fields diff here; preserve oldSHA",
+  "135_late_read": {
+    "UTC": "2026-10-02T17:29:49.373047+00:00",
+    "accepted_by_coordinator_not_assumed": true,
+    "necessary_refs": {
+      "docs/reports/ai-sigma-critic-local-move-quality.md": "23ae121d82e6abcbaeeea0b9ed27a9cc54fc403db00f6db397bf61a782e246ac",
+      "research-data/ai-sigma/135-local-move-independent/all-independent.json": "71b413c5ec2157e95398c56335166eab02927aa15628d0ba2cda3debc2f84999"
+    },
+    "meaning": "saved independent replay supports local score and variance; our own commonK9 check distinct; no extra roots"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "at": "2026-10-02T23:16:04.591498+00:00",
+  "reason": "2026-10-02 23:15:59 owned operation deadline",
+  "command_result": {
+    "command_not_needed": true,
+    "reason": "stored scheduler not alive; retain unknown/pending ownership"
+  },
+  "state": {
+    "binding": {
+      "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+      "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+      "target": "supervisor",
+      "dispatch_issue": "quoridor-4lc.40",
+      "contract_file": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+    },
+    "process": null,
+    "phase": "stopped",
+    "recovery_required": false,
+    "last_result": {
+      "at": "2026-10-02T23:15:59.746791+00:00",
+      "event": "process_stopped",
+      "owned_turn_pending": false
+    },
+    "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+    "config_sha256": "0b02da94a0ca6a4ab2cb85b264a88b7e3ec32f0ed1b889a507c281288873dc67",
+    "contract_sha256": "154f7f0d4ff06e7305b6277c43d06b1d9608fe652bfcda0049ec0d4cb117ccc3",
+    "next_at": null,
+    "owned": null
+  },
+  "read_error": null,
+  "last_valid_state": null,
+  "scheduler_identity_alive": false,
+  "owned_turn_pending": false,
+  "external_NN_processes_stopped": false,
+  "scope": "stored owned scheduler/turn only",
+  "read_failure_not_hidden": true,
+  "no_automatic_restart_or_blind_send": true
+}

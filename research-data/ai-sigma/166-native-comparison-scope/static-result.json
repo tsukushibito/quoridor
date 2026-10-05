@@ -1,0 +1,82 @@
+{
+  "issue": "quoridor-4lc.166",
+  "UTC": "2026-10-03T04:49:44.605570+00:00",
+  "kind": "readonly source snapshot and arithmetic; no source execution or model import",
+  "sources": [
+    {
+      "path": ".artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/mcts_worker.original.js",
+      "sha256": "f2de9444e8960ca14d4d4acb5dd319e3f0a6a743c39b4032dce32068ebcfe8fa",
+      "bytes": 17775,
+      "setTimeout_tokens": 0,
+      "browser_timer_await_tokens": 0
+    },
+    {
+      "path": "tools/ai-sigma-actual-boundary-repair/reference-core.js",
+      "sha256": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05",
+      "bytes": 5206,
+      "setTimeout_tokens": 2,
+      "browser_timer_await_tokens": 2
+    },
+    {
+      "path": "tools/ai-sigma-native-baseline/reference-core-native.js",
+      "sha256": "94ae4c315b671569e99d60091dca8fdcb69b1ad042e5e9e945e323a39a803ae7",
+      "bytes": 5268,
+      "setTimeout_tokens": 0,
+      "browser_timer_await_tokens": 0
+    },
+    {
+      "path": "tools/ai-sigma-native-baseline/reference.cjs",
+      "sha256": "5c2574b1539d7d84f0a5b3710f3da3399715657a91577d577ffed8da9cf29eef",
+      "bytes": 1430,
+      "setTimeout_tokens": 1,
+      "browser_timer_await_tokens": 0
+    },
+    {
+      "path": "tools/ai-sigma-native-baseline/common.cjs",
+      "sha256": "df81c11661f37d8da170c80e459349a62a4c5aa4242ea026b885b5ecd63dadbf",
+      "bytes": 2471,
+      "setTimeout_tokens": 0,
+      "browser_timer_await_tokens": 0
+    },
+    {
+      "path": "tools/ai-sigma-native-baseline/ort.py",
+      "sha256": "a1385fa48b07a2e5fb34d105e13d06556efed100b127a3667dfd0daa25111565",
+      "bytes": 2000,
+      "setTimeout_tokens": 0,
+      "browser_timer_await_tokens": 0
+    },
+    {
+      "path": "research-data/ai-sigma/165-native-baseline/preregister-stageA.json",
+      "sha256": "eb22b0be3c6e4f3047168ef2593d32cd53688c16cecf47701e3d367ce75db1b1",
+      "bytes": 2017,
+      "setTimeout_tokens": 0,
+      "browser_timer_await_tokens": 0
+    }
+  ],
+  "native_loop_artificial_timer_absent": true,
+  "native_CPU_provider_settings_present_not_runtime_proven": true,
+  "science_executions": 0,
+  "NN": 0,
+  "cost_examples_seconds": {
+    "1200_if_public500_and_old_mean_ply": 32137.5,
+    "1200_if_public500_old_mean_ply_two_arenas": 16068.75,
+    "1200_worst200ply_public500": 120000.0,
+    "16_worst200ply_public500": 1600.0
+  },
+  "RAM_self_ru_maxrss_bytes": 14962688,
+  "affinity": [
+    0
+  ],
+  "limits": {
+    "RAM_guard": 469762048,
+    "new_save_forecast": 2097152
+  },
+  "nonclaims": [
+    "165 wrapper executed",
+    "NN parity",
+    "kernel CPU equality",
+    "quiescence measured",
+    "formal NI",
+    "browser NI"
+  ]
+}

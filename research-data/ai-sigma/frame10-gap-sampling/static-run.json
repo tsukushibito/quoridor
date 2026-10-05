@@ -1,0 +1,53 @@
+{
+  "issue": "quoridor-4lc.148",
+  "run": "static-r1",
+  "command": [
+    "/usr/bin/python3",
+    "-B",
+    "tools/ai-sigma-frame10-gap-sampling/verify.py"
+  ],
+  "start_UTC": "2026-10-03T00:37:09.520552+00:00",
+  "end_UTC": "2026-10-03T00:37:09.542455+00:00",
+  "wall_seconds": 0.02190208699903451,
+  "manager_identity": {
+    "pid": 2952070,
+    "starttick": "24075531",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "child_identity": {
+    "pid": 2952071,
+    "starttick": "24075533",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "child_exit_code": 0,
+  "owned_wait_complete": true,
+  "current_child_identity": null,
+  "remaining_unknown_owned_children": 0,
+  "stop": "natural child exit observed by owned wait",
+  "current_absence_is_not_all_host_or_all_period_guarantee": true,
+  "CPU_affinity": [
+    0
+  ],
+  "logical_CPUs": 1,
+  "RAM_guard_bytes": 469762048,
+  "sampled_child_peak_RSS_bytes": 14077952,
+  "wait_child_ru_maxrss_bytes": 15294464,
+  "child_CPU_seconds": 0.015856,
+  "input_source_sha256_before": {
+    "tools/ai-sigma-frame10-gap-sampling/verify.py": "bc012e8701ae875cd0fb98058bf137c2489d3ee409e5041a7af5661dbbe4ac95",
+    "tools/ai-sigma-frame10-gap-sampling/run-controlled.py": "e6ebd8f5834b17ec4a10b527f52df5c73c99541b14ebf1f4255f03e89c10da85",
+    "research-data/ai-sigma/frame10-gap-sampling/recommended-seeds.json": "a82f2d01875180aa6a4a53be6e62d1ae11b9ab01ef2b3d37e5a1b40a7ede5c04",
+    "research-data/ai-sigma/119-diverse-prefix/preregister.json": "5ae2af8776feff8994e540ba5db24ab242d695da8cc827e0cd31513c613a30fb"
+  },
+  "input_source_sha256_after": {
+    "tools/ai-sigma-frame10-gap-sampling/verify.py": "bc012e8701ae875cd0fb98058bf137c2489d3ee409e5041a7af5661dbbe4ac95",
+    "tools/ai-sigma-frame10-gap-sampling/run-controlled.py": "e6ebd8f5834b17ec4a10b527f52df5c73c99541b14ebf1f4255f03e89c10da85",
+    "research-data/ai-sigma/frame10-gap-sampling/recommended-seeds.json": "a82f2d01875180aa6a4a53be6e62d1ae11b9ab01ef2b3d37e5a1b40a7ede5c04",
+    "research-data/ai-sigma/119-diverse-prefix/preregister.json": "5ae2af8776feff8994e540ba5db24ab242d695da8cc827e0cd31513c613a30fb"
+  },
+  "stdout": "{\"checks\": \"pass\", \"new_legal_states\": 0, \"NN\": 0, \"result_sha256\": \"f157809177ba76f1116386d8cc876cc4356458110ba55011307aaf63db8ea6c5\"}\n",
+  "stderr": "",
+  "NN": 0,
+  "Chrome": 0,
+  "game": 0
+}

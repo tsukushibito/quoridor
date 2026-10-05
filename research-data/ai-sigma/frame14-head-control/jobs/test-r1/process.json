@@ -1,0 +1,40 @@
+{
+  "id": "test-r1",
+  "kind": "heavy",
+  "UTC": "2026-10-04T02:25:09.521286+00:00",
+  "identity": {
+    "pid": 3916744,
+    "ppid": 3916697,
+    "pgrp": 3916744,
+    "tick": "33367120",
+    "RSS": 0,
+    "cmd": "",
+    "affinity": [
+      2
+    ]
+  },
+  "command": [
+    "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "-B",
+    "tools/ai-sigma-qf1-head-control/evaluate.py",
+    "--freeze",
+    "research-data/ai-sigma/frame14-head-control/test-freeze.json",
+    "--freeze-sha",
+    "cd04dcc912bd5e5006a0fb843ec26b96697a62690565d0dcff7f1f6b1e48c584",
+    "--samples",
+    "2154"
+  ],
+  "wall_seconds": 2.016318476991728,
+  "peak_family_RSS": 797757440,
+  "exit": 0,
+  "reason": "completed",
+  "child_waited": true,
+  "remaining": [],
+  "current_exact_identity_absent": true,
+  "samples_charged": 2154,
+  "sample_cap": 2154,
+  "CPU": [
+    2
+  ],
+  "GPU": 0
+}

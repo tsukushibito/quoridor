@@ -1,0 +1,37 @@
+{
+  "position_key": {
+    "unique": 1384,
+    "crossgame_shared_keys": 16,
+    "crossgame_shared_row_occurrences": 37,
+    "train_validation_shared_keys": 0,
+    "train_validation_shared_row_occurrences": 0,
+    "independent_state_holdout": false
+  },
+  "full_state_history_side_ply": {
+    "unique": 1388,
+    "crossgame_shared_keys": 16,
+    "crossgame_shared_row_occurrences": 37,
+    "train_validation_shared_keys": 0,
+    "train_validation_shared_row_occurrences": 0,
+    "independent_state_holdout": false
+  },
+  "features648_only": {
+    "unique": 1384,
+    "crossgame_shared_keys": 16,
+    "crossgame_shared_row_occurrences": 37,
+    "train_validation_shared_keys": 0,
+    "train_validation_shared_row_occurrences": 0,
+    "independent_state_holdout": false
+  },
+  "features648_plus_legalmask136": {
+    "unique": 1385,
+    "crossgame_shared_keys": 16,
+    "crossgame_shared_row_occurrences": 37,
+    "train_validation_shared_keys": 0,
+    "train_validation_shared_row_occurrences": 0,
+    "independent_state_holdout": false
+  },
+  "full_state_definition": "position key + side + ply + canonical sorted history counts; includes saved rule state, not path identity",
+  "state_holdout_independence": false,
+  "checker_wall_seconds": 0.22335903899511322
+}

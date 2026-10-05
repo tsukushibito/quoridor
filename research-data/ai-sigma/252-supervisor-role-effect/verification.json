@@ -1,0 +1,101 @@
+{
+  "at": "2026-10-05T01:58:56.346744+00:00",
+  "issue": "quoridor-4lc.252.1",
+  "source_commit": "f3fdbabda34dfdf9c708c7c2460cef3080868612",
+  "role_sha256": "4802db9f0f08840e98b3a9fce7949bf278c95a55ec7cf8459530b50a1419ae8f",
+  "supervisor_digest": "cf9521cf3269d67bcb93bd41503dd1984937470b3e75437ad6c013b52cd9c108",
+  "saved_idle_refresh": {
+    "at": "2026-10-05T01:55:06.031956+00:00",
+    "method": "thread/resume",
+    "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+    "accepted": true,
+    "full_text_sha256": "0f3bf9912c2f86db297fcf770392f4f1f74a8f8c736da842767ea1ebc37c2241",
+    "definition_sha256": "cf9521cf3269d67bcb93bd41503dd1984937470b3e75437ad6c013b52cd9c108",
+    "model": "gpt-6.1-sol",
+    "reasoningEffort": "high",
+    "model_provider": "openai",
+    "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+    "thread_before": {
+      "id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+      "status": {
+        "type": "idle"
+      },
+      "model": "gpt-6.1-sol",
+      "reasoningEffort": "high",
+      "cwd": "/workspaces/quoridor/.worktree/ai-sigma"
+    },
+    "response_settings": {
+      "model": "gpt-6.1-sol",
+      "modelProvider": "openai",
+      "reasoningEffort": "high",
+      "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+      "approvalPolicy": "never",
+      "sandbox": {
+        "type": "dangerFullAccess"
+      }
+    },
+    "settings_overrides": false,
+    "developer_readback_supported": false,
+    "new_turn_started": false,
+    "self_steward_refresh_pending": false
+  },
+  "current_running": true,
+  "scheduler": {
+    "pid": 556338,
+    "start_ticks": "41842377",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "monitor": {
+    "pid": 556359,
+    "start_ticks": "41842391",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "loaded_config_sha256": "e443a6132c3b01f58424aadbbce9cc03c1a6e52f9fd1bbd0531d0c882719cbdd",
+  "loaded_contract_sha256": "c4028354d50fb0291cef7652325931a8eabdeb46564e3378fcc9cc9e79a28193",
+  "period1200": true,
+  "max_turn_seconds": null,
+  "input_count": 24,
+  "input_mismatch_count": 0,
+  "changed_expected_hash_paths": [
+    "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/prompt.md",
+    "/workspaces/quoridor/.worktree/ai-sigma/docs/design/ai-sigma-contract-supervisor-continuation.md",
+    "/workspaces/quoridor/.worktree/ai-sigma/.agents/research-team/roles/supervisor.md",
+    "/workspaces/quoridor/.agents/research-team/roles/supervisor.md"
+  ],
+  "natural_first_dispatch_owned": {
+    "run_id": "3d242cb7-c34c-4564-ab15-c1a568d2ec54",
+    "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+    "turn_id": "01a109c7-2f55-7c43-8420-11a6c052e8f8",
+    "started_at": "2026-10-05T01:56:51.145464+00:00",
+    "max_turn_seconds": null
+  },
+  "self_steward_unchanged": true,
+  "self_permanent_pending": false,
+  "default_indexes_unchanged": {
+    "main": true,
+    "research": true
+  },
+  "resource": {
+    "steward_allocated_bytes": 43634688,
+    "supervisor_held_bytes": 147308544,
+    "supervisor_current_frame_bytes": 1204224,
+    "supervisor_historical_held_bytes": 146104320,
+    "forecast_bytes": 2097152,
+    "additional_reservation_bytes": 0,
+    "historical_parent_charge_released": false
+  },
+  "new_science_role_scoring_or_redesign_started": false,
+  "deadlines": [
+    "02:41:02",
+    "02:46:02",
+    "02:49:02",
+    "02:51:02"
+  ],
+  "long_owner": "quoridor-4lc.92",
+  "source_fixed_before_start": true,
+  "source_short_jobs_stop": true,
+  "root_acceptance": "/workspaces/quoridor/.artifacts/research-team/supervisor-role-effect252/root-acceptance.json",
+  "sha256": "ddc9b321ea0fae00594c9feab6052eb56c6ce97c282d378bb62a0088e2eb65f0",
+  "received": true,
+  "natural_role_judgment_quality_not_certified": true
+}

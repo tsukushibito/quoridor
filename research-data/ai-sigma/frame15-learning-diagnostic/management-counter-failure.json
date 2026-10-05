@@ -1,0 +1,16 @@
+{
+  "UTC": "2026-10-04T04:21:15.517694+00:00",
+  "typed": "MANAGEMENT_AGGREGATE_COUNTER_SCOPE_ERROR",
+  "manager_exit": 1,
+  "child_exit": 0,
+  "child_actual_NN_samples": 0,
+  "wrong_job_samples_charged": 330630,
+  "cause": "The aggregate diagnostic-result.samples field was supplied as a single-job result for NN0 saved arithmetic. Shared manager read330630 cumulative train samples instead of this helper0.",
+  "scientific_training_samples": 330630,
+  "raw_guard_charge_retained": 661260,
+  "original_cap": 800000,
+  "training_or_results_replaced": false,
+  "retraining_or_forward": false,
+  "raw_process_and_stdout_preserved": true,
+  "planned_fix": "future helper output uses science_samples; current successful arithmetic/curve/result and raw process stay unchanged"
+}

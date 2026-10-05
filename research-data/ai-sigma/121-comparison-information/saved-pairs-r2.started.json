@@ -1,0 +1,32 @@
+{
+  "UTC": "2026-10-02T12:26:27.472589+00:00",
+  "monotonic": 196900.996964324,
+  "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+  "parent": {
+    "PID": 2501110,
+    "ppid": 2501109,
+    "PGID": 2501109,
+    "starttick": 19690095,
+    "rss": 16588800
+  },
+  "child": {
+    "PID": 2501111,
+    "ppid": 2501110,
+    "PGID": 2501111,
+    "starttick": 19690099,
+    "rss": 0
+  },
+  "command": [
+    "python3",
+    "-B",
+    "tools/ai-sigma-comparison-information/check.py"
+  ],
+  "command_sha256": "619a1f7dd69a724ab5fa09280d23d069c41666caca80dd74f3a7ea6a29685de7",
+  "source_hashes": {
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-comparison-information/supervise.py": "7b2619829d714315375a25fc153be7427f8d21eb575aeb5b0bcb33b869a170c6",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-comparison-information/check.py": "ac53f0ed6d0b3dfdb137344bb105d8ebbe5bdec7f00a2816059a85fc2ab84669"
+  },
+  "deadline_epoch": 1790944047.471738,
+  "memory": "Nodeheap192 + sampled parent/child RSS896MiB; no AS limit",
+  "TMP": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261002/COMPARISON-INFORMATION/temp"
+}

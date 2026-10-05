@@ -1,0 +1,46 @@
+{
+  "receipt": "2026-10-03T09:07:55.138378+00:00",
+  "manager": {
+    "pid": 3364491,
+    "ppid": 2009,
+    "pgid": 3364491,
+    "starttick": "27184988",
+    "RSS": 16879616,
+    "state": "R",
+    "affinity": [
+      0
+    ],
+    "cmd": "python3 -B tools/ai-sigma-gpu-batch-provider/launch.py "
+  },
+  "attempts": [
+    {
+      "UTC": "2026-10-03T09:15:09.292054+00:00",
+      "defer": "SUPERVISOR_WINDOW"
+    },
+    {
+      "UTC": "2026-10-03T09:18:49.312251+00:00",
+      "defer": "SUPERVISOR_OWNED"
+    }
+  ],
+  "science_jobs": 1,
+  "start_epoch": 1791019332.0951834,
+  "command": [
+    "taskset",
+    "-c",
+    "0",
+    "node",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-gpu-batch-provider/measure.cjs"
+  ],
+  "child": {
+    "pid": 3370800,
+    "ppid": 3364491,
+    "pgid": 3370800,
+    "starttick": "27227281",
+    "RSS": 21061632,
+    "state": "R",
+    "affinity": [
+      0
+    ],
+    "cmd": "node /workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-gpu-batch-provider/measure.cjs "
+  }
+}

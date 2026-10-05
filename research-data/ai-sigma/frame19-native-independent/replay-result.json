@@ -1,0 +1,94 @@
+{
+  "schema": "frame19-native-independent-v1",
+  "task": "frame19-rule-replay-238-v1",
+  "PASS": true,
+  "newNN": 0,
+  "openings": 4,
+  "slots": 8,
+  "results": [
+    {
+      "slot": 1,
+      "status": "UNKNOWN",
+      "winner": null,
+      "final_ply": 4,
+      "accepted_moves": 4,
+      "legal_prefix": true,
+      "history_bound": true
+    },
+    {
+      "slot": 2,
+      "status": "TERMINAL",
+      "winner": 1,
+      "final_ply": 113,
+      "accepted_moves": 113,
+      "legal_prefix": true,
+      "history_bound": true
+    },
+    {
+      "slot": 3,
+      "status": "TERMINAL",
+      "winner": 2,
+      "final_ply": 66,
+      "accepted_moves": 58,
+      "legal_prefix": true,
+      "history_bound": true
+    },
+    {
+      "slot": 4,
+      "status": "TERMINAL",
+      "winner": 1,
+      "final_ply": 15,
+      "accepted_moves": 7,
+      "legal_prefix": true,
+      "history_bound": true
+    },
+    {
+      "slot": 5,
+      "status": "TERMINAL",
+      "winner": 2,
+      "final_ply": 44,
+      "accepted_moves": 32,
+      "legal_prefix": true,
+      "history_bound": true
+    },
+    {
+      "slot": 6,
+      "status": "TERMINAL",
+      "winner": 2,
+      "final_ply": 50,
+      "accepted_moves": 38,
+      "legal_prefix": true,
+      "history_bound": true
+    },
+    {
+      "slot": 7,
+      "status": "TERMINAL",
+      "winner": 2,
+      "final_ply": 42,
+      "accepted_moves": 22,
+      "legal_prefix": true,
+      "history_bound": true
+    },
+    {
+      "slot": 8,
+      "status": "TERMINAL",
+      "winner": 2,
+      "final_ply": 42,
+      "accepted_moves": 22,
+      "legal_prefix": true,
+      "history_bound": true
+    }
+  ],
+  "accepted_main": 296,
+  "old_censored_accepted": 45,
+  "total_replayed": 341,
+  "P2_moves": 169,
+  "jumps": 2,
+  "walls": 72,
+  "old_censored_nonterminal": true,
+  "limits": [
+    "shared RuleA implementation, not independent rules oracle",
+    "saved adopted root actions only; no all deep/minimax truth",
+    "state copy/recorded history preservation, no universal mutable undo proof"
+  ]
+}

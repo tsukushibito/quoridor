@@ -1,0 +1,104 @@
+{
+  "UTC": "2026-10-05T01:24:57.915076+00:00",
+  "issue": "quoridor-4lc.246",
+  "finite_saved_arithmetic_accepted": true,
+  "checks": {
+    "entry_SHA_current": true,
+    "actual_task_schema": true,
+    "output_identity": true,
+    "exit_wait": true,
+    "NN0": true,
+    "child_wait": true,
+    "result_PASS": true
+  },
+  "actual_process": {
+    "startUTC": "2026-10-05T01:21:54.505076+00:00",
+    "endUTC": "2026-10-05T01:21:54.673132+00:00",
+    "PID": 503795,
+    "tick": "41632862",
+    "argv": [
+      "python3",
+      "-B",
+      "tools/ai-sigma-frame20-paired-independent/check-paired.py",
+      "--task",
+      "frame20-paired-independent-246-v1",
+      "--input-manifest",
+      "research-data/ai-sigma/frame20-paired-independent/stopped-inputs.json",
+      "--out",
+      "research-data/ai-sigma/frame20-paired-independent/result.json"
+    ],
+    "entry_SHA": "4de502edadb5da6a252cc4d451ee53603688bd489100db1d5f4de231c7b3c69f",
+    "exit": 0,
+    "wait": true,
+    "current_exact_absent": true,
+    "wall": 0.1680935260374099,
+    "reason": null,
+    "peakRSS_point": 105525248,
+    "newNN": 0,
+    "conservative_calc_charge45": true,
+    "output_identity_verified": true
+  },
+  "source_sha": "4de502edadb5da6a252cc4d451ee53603688bd489100db1d5f4de231c7b3c69f",
+  "result_SHA": "16c41d0827fdd4cfe133cc375985d10e28529572ff69e46739327d5afd97da59",
+  "replay_SHA": "075c2486343b70afadd162a0021ef4dfcb9d28002c731260243ffae2420c8aa6",
+  "results": {
+    "planned8": 8,
+    "terminal8": 8,
+    "UNKNOWN": 0,
+    "NOT_STARTED": 0,
+    "pervariantWDL": {
+      "baseline": {
+        "L": 2,
+        "W": 2
+      },
+      "candidate": {
+        "L": 2,
+        "W": 2
+      }
+    },
+    "adopted338": 338,
+    "sameinput": [
+      {
+        "engine": "NNUE",
+        "sameinput_pairs": 64,
+        "deeper": 4,
+        "equaldepth": 59,
+        "shallower": 1,
+        "processed_delta_sum": 23426,
+        "NN_delta_sum": 22227,
+        "elapsed_delta_mean_ms": -0.42139541637152433
+      },
+      {
+        "engine": "distance",
+        "sameinput_pairs": 64,
+        "deeper": 4,
+        "equaldepth": 58,
+        "shallower": 2,
+        "processed_delta_sum": 43129,
+        "NN_delta_sum": 0,
+        "elapsed_delta_mean_ms": -0.049271609634160995
+      }
+    ],
+    "commondepth_columns": 481,
+    "common_value_maxabs": 0.0,
+    "common_Action_differences": 0,
+    "knownNN": 258903,
+    "guardian_wall_s": 31.73198343697004,
+    "all_exact_argmax": "NOT_RECORDED",
+    "limits": [
+      "2 openings/families color swaps; small fixed order",
+      "package applied to both engines; no absolute strength effect identified",
+      "aggregate differing states not matchedwork",
+      "sharedRuleA and owner saved search numerical receipts; no forward/deep truth",
+      "old241 fixedwork speed and samewall WDL different questions",
+      "oldtest173 unread; old229 final NOT_RUN unchanged"
+    ]
+  },
+  "shared_RuleA_dependency": true,
+  "prestart_foreign_detected": "NOT_RUN/0job held; dedicated actual MAX1 only",
+  "new_charge": 90,
+  "old_caps_reset": false,
+  "owner_action": "necessary source/child-stop/Gitbyte/notesclosebackup in same substantive turn",
+  "deeptruth_or_strength_accepted": false,
+  "goal_complete": false
+}

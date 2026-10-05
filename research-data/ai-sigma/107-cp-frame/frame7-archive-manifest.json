@@ -1,0 +1,686 @@
+{
+  "issue": "quoridor-4lc.107",
+  "frame": 7,
+  "archive": "frame7-run-evidence.tar.gz",
+  "archive_SHA256": "a65f1194a61ef64907956110e86cf9eaf3d35aef3e11dd560680eaa7fdf6593a",
+  "bytes": 3680436,
+  "entries": [
+    {
+      "path": "frame7-NN-start.txt",
+      "bytes": 806,
+      "sha256": "1b82a1436d2b4b4d314e168af345495dccf79d27bf8affdd8955f9669304dac4"
+    },
+    {
+      "path": "frame7-asym-pair-r1/browser-preflight.json",
+      "bytes": 561,
+      "sha256": "1e276e984d7e7353d57c951a6267d38f9ae1b7739dc991395a77709466efae0e"
+    },
+    {
+      "path": "frame7-asym-pair-r1/browser-result.json",
+      "bytes": 12660669,
+      "sha256": "df20b3ceaa507484ab77f10aa3abbfdb64b7ea9eedede44fa6907d992f48ff53"
+    },
+    {
+      "path": "frame7-asym-pair-r1/browser-rules-mock.json",
+      "bytes": 1179,
+      "sha256": "e65600320d6c47d5f4ea7d6139da2f0c20d4a3f450250152bcbcd4039b52056b"
+    },
+    {
+      "path": "frame7-asym-pair-r1/browser-startup.json",
+      "bytes": 373,
+      "sha256": "cb932ae7a1068986438ebe66de70b8ed5966147868864ea15204fe8ac83cb02b"
+    },
+    {
+      "path": "frame7-asym-pair-r1/cleanup.jsonl",
+      "bytes": 18331,
+      "sha256": "69b011ad34fd2404f5a75aa44ff77f41f0a8ca238c088a9062f7bf7a96770e50"
+    },
+    {
+      "path": "frame7-asym-pair-r1/config.json",
+      "bytes": 1994,
+      "sha256": "6c04eb5b4ea5275df6aa3795122802e260cd7d19c6f33c77f05dcb1aef77302a"
+    },
+    {
+      "path": "frame7-asym-pair-r1/finally-model-drop.json",
+      "bytes": 133,
+      "sha256": "6b4a89b37d31478ec7387fe48924217303526a9480e30bfa1844b783bef6c2b2"
+    },
+    {
+      "path": "frame7-asym-pair-r1/main-timers-stop.json",
+      "bytes": 49,
+      "sha256": "7dcfee3d0f6d458c477d356171d6dc22abd316b5762d0543ac2166f996081ac1"
+    },
+    {
+      "path": "frame7-asym-pair-r1/model-load.json",
+      "bytes": 371,
+      "sha256": "7d6d1eaa392b28ff72e944de71323ccd94e5c3e75884f4cdc81bf955dce2d498"
+    },
+    {
+      "path": "frame7-asym-pair-r1/outer-controlled-stop.json",
+      "bytes": 14493,
+      "sha256": "518dc1d632d4d1fd547442aea8a758ec7ffcbbb03851a5f8d1d8fc0fbdde7cfb"
+    },
+    {
+      "path": "frame7-asym-pair-r1/pause-monitor-stop.json",
+      "bytes": 18689,
+      "sha256": "ec19338c2ad659ec244fbb2f3d567c2f31320c7f3e83eb121e8e62375543fbba"
+    },
+    {
+      "path": "frame7-asym-pair-r1/pause-monitor.json",
+      "bytes": 18602,
+      "sha256": "be935a82bb64511dad2de40f5f33b39cb3aec3522e0d9060ca35be6171440e84"
+    },
+    {
+      "path": "frame7-asym-pair-r1/rows.json",
+      "bytes": 11542013,
+      "sha256": "be10eac13093b09352facac8b48f521e2d0c27452de96bd665f75d5c2a3c825f"
+    },
+    {
+      "path": "frame7-asym-pair-r1/startup.json",
+      "bytes": 1958,
+      "sha256": "66578838a01f21bc99170b73795bccb1d3d1e0cc4784799308cae27289d13c8a"
+    },
+    {
+      "path": "frame7-asym-pair-r1/summary.json",
+      "bytes": 26077,
+      "sha256": "bcc54bbe6e8fbec2a38bec865c4628d00519802b601901303929ed4e12f6b6e9"
+    },
+    {
+      "path": "frame7-asym-pair-r1/terminated-worker.json",
+      "bytes": 50,
+      "sha256": "b22e34aa362add6544fcaec73dea8b7f0b52d66ecd6086ee5152c2827f8ad209"
+    },
+    {
+      "path": "frame7-asym-pair-r1-entry.json",
+      "bytes": 659,
+      "sha256": "9f165daf222debc27ddc95c8eae3ef47bc185a0bc27f608be3fc6bd6113e8ee9"
+    },
+    {
+      "path": "frame7-asym-pair-r1.config.json",
+      "bytes": 1994,
+      "sha256": "6c04eb5b4ea5275df6aa3795122802e260cd7d19c6f33c77f05dcb1aef77302a"
+    },
+    {
+      "path": "frame7-asym-pair-r1.inputs.json",
+      "bytes": 2098,
+      "sha256": "0709b1ea3bb501a2dcb1f99215002602f5460d4dd68cf51c43f1e4a93fe6873c"
+    },
+    {
+      "path": "frame7-asym-pair-r1.log",
+      "bytes": 11478,
+      "sha256": "f78edfdb3a0aecaab9bf5a550021d7eaa9ed86ee2f731944c4e0aba6094cc508"
+    },
+    {
+      "path": "frame7-asym-pair-r1.monitor.jsonl",
+      "bytes": 1062823,
+      "sha256": "73157d766d2cae6c8e17d206695cb0d4f61d884f0d77502868c7e236a02dc00b"
+    },
+    {
+      "path": "frame7-asym-pair-r1.owned-ack.json",
+      "bytes": 135725,
+      "sha256": "d35423ca79a0842dcd69bf25023a89b527b0e7765b1adbbc7b21a1bb0f826216"
+    },
+    {
+      "path": "frame7-asym-pair-r1.owned-ledger.jsonl",
+      "bytes": 67095,
+      "sha256": "1e6e0fcf6ca89d6feace5ff7f57543d32891cc5e22fe692581e87270b80180e5"
+    },
+    {
+      "path": "frame7-asym-pair-r1.process.json",
+      "bytes": 75764,
+      "sha256": "ea5e5bb8bc07520a64c4a40102090477bb8852a0025657d5dda84966fd844d53"
+    },
+    {
+      "path": "frame7-asym-pair-r1.started.json",
+      "bytes": 1765,
+      "sha256": "a92d332bddc4ea058e487c6c7267033d3fc5390f6c49d9276eabd0823ba52fb3"
+    },
+    {
+      "path": "frame7-asym-start.txt",
+      "bytes": 625,
+      "sha256": "58b7848c018e97b170581a5dea52a81d352795d18f26c38f2b1f084078f79e0a"
+    },
+    {
+      "path": "frame7-functional-r1/browser-preflight.json",
+      "bytes": 561,
+      "sha256": "1e276e984d7e7353d57c951a6267d38f9ae1b7739dc991395a77709466efae0e"
+    },
+    {
+      "path": "frame7-functional-r1/browser-result.json",
+      "bytes": 490051,
+      "sha256": "7488b3bbb54d5d00049543247ab74746fa63ac5c0ef5cec887f136e593579ed4"
+    },
+    {
+      "path": "frame7-functional-r1/browser-startup.json",
+      "bytes": 373,
+      "sha256": "cb932ae7a1068986438ebe66de70b8ed5966147868864ea15204fe8ac83cb02b"
+    },
+    {
+      "path": "frame7-functional-r1/cleanup.jsonl",
+      "bytes": 28365,
+      "sha256": "337799ff5c18ace16df69109118c86f558d35908046cafd51b531a0524c352b4"
+    },
+    {
+      "path": "frame7-functional-r1/config.json",
+      "bytes": 1399,
+      "sha256": "e4e4d16103b1ee61458dcd7ac7fb2b31ee7a27586c3f96385de4f1efeb750c81"
+    },
+    {
+      "path": "frame7-functional-r1/finally-model-drop.json",
+      "bytes": 134,
+      "sha256": "a97acda5f6aec7e181bf03c4b6d4aa4baf88f0e489d23a101e01338e0021293d"
+    },
+    {
+      "path": "frame7-functional-r1/main-timers-stop.json",
+      "bytes": 49,
+      "sha256": "7dcfee3d0f6d458c477d356171d6dc22abd316b5762d0543ac2166f996081ac1"
+    },
+    {
+      "path": "frame7-functional-r1/model-load.json",
+      "bytes": 368,
+      "sha256": "a24fc492d1d9e1d889b53ddd3f189678d7a08979824ca00b7098e4a29d164912"
+    },
+    {
+      "path": "frame7-functional-r1/outer-controlled-stop.json",
+      "bytes": 3908,
+      "sha256": "52bd0fbc2b846386f484c04be017956ac4ceabd36cf59b08a920415e00e92364"
+    },
+    {
+      "path": "frame7-functional-r1/pause-monitor-stop.json",
+      "bytes": 5475,
+      "sha256": "3ec552579393d27bd4394637f406be2b3ea7498cecc8e517029ff8e2da899f80"
+    },
+    {
+      "path": "frame7-functional-r1/pause-monitor.json",
+      "bytes": 5388,
+      "sha256": "a41837900bc09156a0ea070d5903652741b22d83b7195838a7e221730ba29b51"
+    },
+    {
+      "path": "frame7-functional-r1/rows.json",
+      "bytes": 447407,
+      "sha256": "71fd76991d6127d5959f66c2c8dbe9d5bd91552b2ed50f5e0b1f5715dd72dea3"
+    },
+    {
+      "path": "frame7-functional-r1/startup.json",
+      "bytes": 717,
+      "sha256": "99f8419467497bb40f847f0ea3983bca8d09580b0046f2886547adb4f364186e"
+    },
+    {
+      "path": "frame7-functional-r1/summary.json",
+      "bytes": 378,
+      "sha256": "15f2a5691df563d14089b7508ad97a5b228d2027b95b35b30ab14135105dd909"
+    },
+    {
+      "path": "frame7-functional-r1/terminated-worker.json",
+      "bytes": 50,
+      "sha256": "255c1812ce7fa1745065992fffbd76d3b5e6290e54cdd6ed0a2b4cb7d8ef1fb3"
+    },
+    {
+      "path": "frame7-functional-r1.config.json",
+      "bytes": 1399,
+      "sha256": "e4e4d16103b1ee61458dcd7ac7fb2b31ee7a27586c3f96385de4f1efeb750c81"
+    },
+    {
+      "path": "frame7-functional-r1.inputs.json",
+      "bytes": 2065,
+      "sha256": "791c14a6dce32f15b71f3c8ec33204b3ff13c70c0ab1f4e09792931a4ec0cddb"
+    },
+    {
+      "path": "frame7-functional-r1.log",
+      "bytes": 309,
+      "sha256": "0e9d8fc5b1a3e99a16047146266bd072cd73302e1a92caf05cd5e3e36b30f277"
+    },
+    {
+      "path": "frame7-functional-r1.monitor.jsonl",
+      "bytes": 258077,
+      "sha256": "f2035d6c9b550953c5e974fb4fc1ee0b5710076b40ee863f46cace8de8a7088f"
+    },
+    {
+      "path": "frame7-functional-r1.owned-ack.json",
+      "bytes": 35310,
+      "sha256": "246926cd41313224764a17f9d5b9811b1f42ce4d8ae8bf03a284f5df2a8338d0"
+    },
+    {
+      "path": "frame7-functional-r1.owned-ledger.jsonl",
+      "bytes": 14425,
+      "sha256": "783a3d3cd67ad79da8e36c4ef15c14895ba3ea004a30fe3d18d7df048fcc2f8a"
+    },
+    {
+      "path": "frame7-functional-r1.process.json",
+      "bytes": 24622,
+      "sha256": "8accebfd5c69065ab34aed04d47aa6c306e03fd391a9db3c80029ba6342fd005"
+    },
+    {
+      "path": "frame7-functional-r1.started.json",
+      "bytes": 1733,
+      "sha256": "63ca70e3584833d960e196162ceddc822f895222dadca3fed57f8305c2365e6f"
+    },
+    {
+      "path": "frame7-functional-report.txt",
+      "bytes": 852,
+      "sha256": "a89f865b6155923eaa647fb9e2f5dc914d03ba26162c0a847fd2cdee54d13916"
+    },
+    {
+      "path": "frame7-headroom-before.json",
+      "bytes": 571,
+      "sha256": "db3752858b297448d35b1f394d3a0e074840ac03e30151929e30cec933a9d1f3"
+    },
+    {
+      "path": "frame7-initial-pair-r1/browser-preflight.json",
+      "bytes": 561,
+      "sha256": "1e276e984d7e7353d57c951a6267d38f9ae1b7739dc991395a77709466efae0e"
+    },
+    {
+      "path": "frame7-initial-pair-r1/browser-result.json",
+      "bytes": 9643276,
+      "sha256": "61f86bdb272570d2055bd90b3c38efcbce53b54a75119918bee8f69a88b04fce"
+    },
+    {
+      "path": "frame7-initial-pair-r1/browser-rules-mock.json",
+      "bytes": 1179,
+      "sha256": "e65600320d6c47d5f4ea7d6139da2f0c20d4a3f450250152bcbcd4039b52056b"
+    },
+    {
+      "path": "frame7-initial-pair-r1/browser-startup.json",
+      "bytes": 373,
+      "sha256": "cb932ae7a1068986438ebe66de70b8ed5966147868864ea15204fe8ac83cb02b"
+    },
+    {
+      "path": "frame7-initial-pair-r1/cleanup.jsonl",
+      "bytes": 23589,
+      "sha256": "a990dd2fd64fb5c06d3ac57bed2d10ee9109c7a508dd081f82d38be602c079a4"
+    },
+    {
+      "path": "frame7-initial-pair-r1/config.json",
+      "bytes": 1979,
+      "sha256": "03021e7fd09eb06c6968d1f6f495e7ce5403ad7ea745544c5de7269bc339bf82"
+    },
+    {
+      "path": "frame7-initial-pair-r1/finally-model-drop.json",
+      "bytes": 130,
+      "sha256": "6887c3e833810d0c4467ffd6be096403336e67bfca9f19477ca1f828e5991cf5"
+    },
+    {
+      "path": "frame7-initial-pair-r1/main-timers-stop.json",
+      "bytes": 49,
+      "sha256": "7dcfee3d0f6d458c477d356171d6dc22abd316b5762d0543ac2166f996081ac1"
+    },
+    {
+      "path": "frame7-initial-pair-r1/model-load.json",
+      "bytes": 371,
+      "sha256": "186b24e88638dec0ce9a23d3103faadd78b221b77ee477bdeeb0fc9860f54ae8"
+    },
+    {
+      "path": "frame7-initial-pair-r1/outer-controlled-stop.json",
+      "bytes": 11595,
+      "sha256": "43d4452f66b9de678bfa505f1c68c2d012d409c8707225893bf7c183114ef8ac"
+    },
+    {
+      "path": "frame7-initial-pair-r1/pause-monitor-stop.json",
+      "bytes": 14741,
+      "sha256": "a0a35fef060ec0288f6b690cc477fab8d6df4deab06f7669c13e9a2f30943bfa"
+    },
+    {
+      "path": "frame7-initial-pair-r1/pause-monitor.json",
+      "bytes": 14654,
+      "sha256": "f6ea9c8affd47ba64b50253c4968183eea96625cfd5ef4542c163372083b9184"
+    },
+    {
+      "path": "frame7-initial-pair-r1/rows.json",
+      "bytes": 8770610,
+      "sha256": "b9fef6672ea1c30b87f49ba94540230e66675cd80dd182847dd9251f70db25e2"
+    },
+    {
+      "path": "frame7-initial-pair-r1/startup.json",
+      "bytes": 1957,
+      "sha256": "dad227fa275c363419f7ea4e8b8d115a023b411b42e53a1b98be85f3326b03b9"
+    },
+    {
+      "path": "frame7-initial-pair-r1/summary.json",
+      "bytes": 21634,
+      "sha256": "5ac66dadc48bed802e22961e69775d045cec8851984606dc98358e47c8674b1d"
+    },
+    {
+      "path": "frame7-initial-pair-r1/terminated-worker.json",
+      "bytes": 50,
+      "sha256": "af05cc1a679b2300c3bd386aa00abc1c3bde9640c6a2d5f787655e2b83b28e14"
+    },
+    {
+      "path": "frame7-initial-pair-r1.config.json",
+      "bytes": 1979,
+      "sha256": "03021e7fd09eb06c6968d1f6f495e7ce5403ad7ea745544c5de7269bc339bf82"
+    },
+    {
+      "path": "frame7-initial-pair-r1.inputs.json",
+      "bytes": 2065,
+      "sha256": "5fd857a098450abd062542679d8c6f2557aebc513e2ef99b9cc88ddeaee1de72"
+    },
+    {
+      "path": "frame7-initial-pair-r1.log",
+      "bytes": 9961,
+      "sha256": "e762ae6f36dd8f1da9e155952568d43bb48fd56716f650fdef26a1b25577ad9d"
+    },
+    {
+      "path": "frame7-initial-pair-r1.monitor.jsonl",
+      "bytes": 920588,
+      "sha256": "6c11b485a5293d0eaeda141089bcddddd83e93760df3f94a5be4b1af6c60415e"
+    },
+    {
+      "path": "frame7-initial-pair-r1.owned-ack.json",
+      "bytes": 110117,
+      "sha256": "d863eeb54713581ef1bfe9778c32d7751faf2c1b801f985410df12ad672936ed"
+    },
+    {
+      "path": "frame7-initial-pair-r1.owned-ledger.jsonl",
+      "bytes": 52850,
+      "sha256": "f25064d57a6df09dffe89b782351fd36f036b3b32ba41cdedadd054f1cc2baa9"
+    },
+    {
+      "path": "frame7-initial-pair-r1.process.json",
+      "bytes": 63438,
+      "sha256": "28595c6ecd1f88f7d54e7066d4acfccc55da416a143bf4bddeca56220ac92e93"
+    },
+    {
+      "path": "frame7-initial-pair-r1.started.json",
+      "bytes": 1734,
+      "sha256": "67f599ad6cdf25a2c93469ff73370dd86db99277c8624b2a6906092e943e1f6f"
+    },
+    {
+      "path": "frame7-initial-pair-report.txt",
+      "bytes": 974,
+      "sha256": "8fcb8f51980d489e56da8271706b91892ace6d83413d2a3359ae999571367d31"
+    },
+    {
+      "path": "frame7-pair-start.txt",
+      "bytes": 682,
+      "sha256": "ceff9342184f9d342c66bca21205f21c5ade00c56f7987c2f76902900ab9c320"
+    },
+    {
+      "path": "frame7-preflight-r1/HTTP-request-failure-1790922270202.json",
+      "bytes": 108,
+      "sha256": "4ce3374e15db4f8849ba01a56e3e5f00136b74acac9e0370f93a2e8096b856f0"
+    },
+    {
+      "path": "frame7-preflight-r1/browser-preflight.json",
+      "bytes": 278,
+      "sha256": "1b744075dde374edd69ec205912eab4fe9c8042790a36eb81fa228f802f29e02"
+    },
+    {
+      "path": "frame7-preflight-r1/browser-startup.json",
+      "bytes": 373,
+      "sha256": "cb932ae7a1068986438ebe66de70b8ed5966147868864ea15204fe8ac83cb02b"
+    },
+    {
+      "path": "frame7-preflight-r1/cleanup.jsonl",
+      "bytes": 31850,
+      "sha256": "461aaac60eb0ac9dd86b4bd1205855b1bb80c3f566639d636589737abd2bbff5"
+    },
+    {
+      "path": "frame7-preflight-r1/outer-controlled-stop.json",
+      "bytes": 2522,
+      "sha256": "b1c1ce9373752c14b0126336d7abca3ba0f554b1fc5623a1bd8b8ca10547cf4e"
+    },
+    {
+      "path": "frame7-preflight-r1/pause-monitor-stop.json",
+      "bytes": 4158,
+      "sha256": "2c58b07ae8ea1c09d20a14aa0654c4a436d4d3671417d71ff0e3afdd6f2959a5"
+    },
+    {
+      "path": "frame7-preflight-r1/pause-monitor.json",
+      "bytes": 4071,
+      "sha256": "a9c14992f60e2a2358d1476991106203d7a20fa60aec928a43714a3b6e117c54"
+    },
+    {
+      "path": "frame7-preflight-r1/summary.json",
+      "bytes": 383,
+      "sha256": "b0bd5b3ca5d6e4af8e7c97cac9eaa0fc68ef66d312f3d4c7f4ef8e06507ec325"
+    },
+    {
+      "path": "frame7-preflight-r1/terminated-worker.json",
+      "bytes": 50,
+      "sha256": "cc788a86894d81dfd2ade58cf98000af88b86954bcffc00758f2c60bb97f3a47"
+    },
+    {
+      "path": "frame7-preflight-r1.config.json",
+      "bytes": 552,
+      "sha256": "fd11a88684219f6bdd09709139b8094cff707fe0ed437db9d7b28781b249a376"
+    },
+    {
+      "path": "frame7-preflight-r1.inputs.json",
+      "bytes": 1902,
+      "sha256": "5324857a70396bfd1295efc98d5f4c3db6e68f0fc236776fde0857007028f9ab"
+    },
+    {
+      "path": "frame7-preflight-r1.log",
+      "bytes": 314,
+      "sha256": "9726f8417a1915b317e90229e2511575f9f3dbdecff08b78cbe8c21471e74b82"
+    },
+    {
+      "path": "frame7-preflight-r1.monitor.jsonl",
+      "bytes": 96355,
+      "sha256": "32254d376f1e5285961f6a2977154cc6164018594a956ad13935d8dd06c0a333"
+    },
+    {
+      "path": "frame7-preflight-r1.owned-ack.json",
+      "bytes": 25628,
+      "sha256": "47746440e1ad84863b282d6380b1d2808d0d2348c23857220216fbfdbd95eeaa"
+    },
+    {
+      "path": "frame7-preflight-r1.owned-ledger.jsonl",
+      "bytes": 10068,
+      "sha256": "3df501e8901f5b9bb7fdf73e62c6fbb8dd798fc460bbcbd4edd06f5657d4e7d4"
+    },
+    {
+      "path": "frame7-preflight-r1.process.json",
+      "bytes": 19078,
+      "sha256": "937f262b125b88455bc53babcaa6e4e8b8fe4b01ef07c8b1475327c89bc8d1d9"
+    },
+    {
+      "path": "frame7-preflight-r1.started.json",
+      "bytes": 1727,
+      "sha256": "9a80d3a4616883cb2e51d3a992697abf74fae92bc50bdc83e37139c2cae29fec"
+    },
+    {
+      "path": "frame7-preflight-r2/browser-preflight.json",
+      "bytes": 561,
+      "sha256": "1e276e984d7e7353d57c951a6267d38f9ae1b7739dc991395a77709466efae0e"
+    },
+    {
+      "path": "frame7-preflight-r2/browser-startup.json",
+      "bytes": 373,
+      "sha256": "cb932ae7a1068986438ebe66de70b8ed5966147868864ea15204fe8ac83cb02b"
+    },
+    {
+      "path": "frame7-preflight-r2/cleanup.jsonl",
+      "bytes": 31623,
+      "sha256": "b044eca1c9de4b1e054e95822ccd78c2ee1b6ce6fe02193cd07b99f72b524d40"
+    },
+    {
+      "path": "frame7-preflight-r2/outer-controlled-stop.json",
+      "bytes": 2144,
+      "sha256": "76bcdc19636001757cbfe566ae42cc79245b3c9b2f5913e3ce80912a02ff237a"
+    },
+    {
+      "path": "frame7-preflight-r2/pause-monitor-stop.json",
+      "bytes": 3560,
+      "sha256": "69b6cf6ecf3c3ba95bca6231bacb3cd2cbace3cefb2e30aaabb080ee25b81667"
+    },
+    {
+      "path": "frame7-preflight-r2/pause-monitor.json",
+      "bytes": 3473,
+      "sha256": "818505c675ff5bc17de49bf9d8e62dcd7088e6e2f3770ec98012691b06d58446"
+    },
+    {
+      "path": "frame7-preflight-r2/summary.json",
+      "bytes": 383,
+      "sha256": "f48c9a14b58b9c71d99304f8e3a54bb36ff2dc494e18dd81fe6e26112c731b1f"
+    },
+    {
+      "path": "frame7-preflight-r2/terminated-worker.json",
+      "bytes": 50,
+      "sha256": "9671078ac2c0de33748dbab33319373c54d8604f8dcfb8b6e1457873d269b80d"
+    },
+    {
+      "path": "frame7-preflight-r2.config.json",
+      "bytes": 552,
+      "sha256": "b6a9257213c4ac34f8c1be2c90d0ba9267a8123267c6920d4c6b8c793594298f"
+    },
+    {
+      "path": "frame7-preflight-r2.inputs.json",
+      "bytes": 2060,
+      "sha256": "e471a49afd66517c2ea750d721240053dffda4a9dbcc6d627ec16479297c34e8"
+    },
+    {
+      "path": "frame7-preflight-r2.log",
+      "bytes": 314,
+      "sha256": "8615af391ff2edc821c7e8543db7110b4ef70a7eadcc5f9c0d58cce1ce0d059d"
+    },
+    {
+      "path": "frame7-preflight-r2.monitor.jsonl",
+      "bytes": 82299,
+      "sha256": "f464c0487a6f006e4a682b92bc9f09ac09f18e483749f4cf6d8a4cec23ce2543"
+    },
+    {
+      "path": "frame7-preflight-r2.owned-ack.json",
+      "bytes": 19570,
+      "sha256": "c984c0e819392c2551eecd883b8b5bd1c5af75de02274e15f53bf67a578813f8"
+    },
+    {
+      "path": "frame7-preflight-r2.owned-ledger.jsonl",
+      "bytes": 8558,
+      "sha256": "abfa937950db8dde11cae8d25248db6c99378d06ea4241301b669530475089d2"
+    },
+    {
+      "path": "frame7-preflight-r2.process.json",
+      "bytes": 14721,
+      "sha256": "cd59a2de8bb87359aad1e14f5174eb4124aa9889b776dddb537dffa3623338b0"
+    },
+    {
+      "path": "frame7-preflight-r2.started.json",
+      "bytes": 1727,
+      "sha256": "f70c333fb019eb43b0acaf60b1334ca414ff8e7d25463af0e9f3d489be3292dc"
+    },
+    {
+      "path": "frame7-preflight-r3/browser-preflight.json",
+      "bytes": 561,
+      "sha256": "1e276e984d7e7353d57c951a6267d38f9ae1b7739dc991395a77709466efae0e"
+    },
+    {
+      "path": "frame7-preflight-r3/browser-rules-mock.json",
+      "bytes": 1179,
+      "sha256": "e65600320d6c47d5f4ea7d6139da2f0c20d4a3f450250152bcbcd4039b52056b"
+    },
+    {
+      "path": "frame7-preflight-r3/browser-startup.json",
+      "bytes": 373,
+      "sha256": "cb932ae7a1068986438ebe66de70b8ed5966147868864ea15204fe8ac83cb02b"
+    },
+    {
+      "path": "frame7-preflight-r3/cleanup.jsonl",
+      "bytes": 31302,
+      "sha256": "fa60ed0f2c3ec10abf7cb9ac67406e50405e57f9537110f4f14d9896876080e1"
+    },
+    {
+      "path": "frame7-preflight-r3/main-timers-stop.json",
+      "bytes": 49,
+      "sha256": "7dcfee3d0f6d458c477d356171d6dc22abd316b5762d0543ac2166f996081ac1"
+    },
+    {
+      "path": "frame7-preflight-r3/outer-controlled-stop.json",
+      "bytes": 1955,
+      "sha256": "81ce97f659dbc68a2a4905c5a40c756d7007721bd21d213978e9160308670153"
+    },
+    {
+      "path": "frame7-preflight-r3/pause-monitor-stop.json",
+      "bytes": 3137,
+      "sha256": "94f161ddb3bc96e9d72860379a724b88c00c977862376b2e3e6f5e4bf87d5968"
+    },
+    {
+      "path": "frame7-preflight-r3/pause-monitor.json",
+      "bytes": 3050,
+      "sha256": "c257dcb1bedbcdde35f630cb6cd4935ea0049adbdcc358efd53040fb5e04bc3c"
+    },
+    {
+      "path": "frame7-preflight-r3/summary.json",
+      "bytes": 406,
+      "sha256": "959c5671dc3683447ea008707d28dbbd6633e9319931d675d635effe70b4fd76"
+    },
+    {
+      "path": "frame7-preflight-r3/terminated-worker.json",
+      "bytes": 50,
+      "sha256": "c223cacb7794d513e51c9d4f489f252025b8d6ff9b137b77cdc2c6d96a19e7f2"
+    },
+    {
+      "path": "frame7-preflight-r3.config.json",
+      "bytes": 552,
+      "sha256": "d858814b9b244788b29455323943e3776601fdd07af7d01d27e02e3f2360fb0d"
+    },
+    {
+      "path": "frame7-preflight-r3.inputs.json",
+      "bytes": 2060,
+      "sha256": "ee566803789310db05e9e9aead754a4393b474b0a5a5b53d775447cf19a1d7af"
+    },
+    {
+      "path": "frame7-preflight-r3.log",
+      "bytes": 333,
+      "sha256": "0a4ff8fe8314d3f2fd6a219a4f48ec50fafbbc36449282b1a12d5a06e6ec2f04"
+    },
+    {
+      "path": "frame7-preflight-r3.monitor.jsonl",
+      "bytes": 83948,
+      "sha256": "02b3eccf0cbe44bcd55d21adcab743e015ba6580b300f10ff53cd430c2d3f6bc"
+    },
+    {
+      "path": "frame7-preflight-r3.owned-ack.json",
+      "bytes": 18484,
+      "sha256": "d6d2d9d24cc2fc00151e517997ebe8faeaa0fa29d301007cc0e11326b7313bf3"
+    },
+    {
+      "path": "frame7-preflight-r3.owned-ledger.jsonl",
+      "bytes": 7282,
+      "sha256": "fdd0f0bfdfb0ff724a2aca3ce6a6484cd8c676524bf94fbaf61c8d83069d83bb"
+    },
+    {
+      "path": "frame7-preflight-r3.process.json",
+      "bytes": 14714,
+      "sha256": "9f0cee74bffb34312655738baebc0bb81f7f2cd327026a6800abe671193e3449"
+    },
+    {
+      "path": "frame7-preflight-r3.started.json",
+      "bytes": 1727,
+      "sha256": "04ceb50a78a5f7e47818c080972ebc41a786c8e1f05f119d52e64e3f826b4ef2"
+    },
+    {
+      "path": "frame7-results-compact.json",
+      "bytes": 2862,
+      "sha256": "cd591c31e48563816ce58a684bb5a22fa47779d1302639c93cad1cd938aea387"
+    },
+    {
+      "path": "frame7-runtime-source-stopped-before-report.json",
+      "bytes": 3762,
+      "sha256": "f36887d66fedba9bc8b1016427670ad5c3995cda4e19501d4dbbb4a7ad2a5887"
+    },
+    {
+      "path": "frame7-start.txt",
+      "bytes": 828,
+      "sha256": "d3288312511d8e243253bb4bfad24abb522f08dd082a40ceb3fb098f36141da3"
+    },
+    {
+      "path": "frame7-stop\u901f\u5831.txt",
+      "bytes": 750,
+      "sha256": "087794e00ca56885b6ec86504247890dd64fc88ddcb59315288ee3f816162725"
+    }
+  ],
+  "stream_restore_checked": 133,
+  "source_Git": "ec4e92d68b4b4aabd7d45ae6cf8cb1234abae82b",
+  "start": "2026-10-02T07:00:19.216773+00:00",
+  "end": "2026-10-02T07:00:19.672602+00:00",
+  "seconds": 0.45582339901011437,
+  "CPU_affinity": [
+    0
+  ],
+  "PID": 2203657,
+  "starttick": 17733179,
+  "ru_maxrss_bytes": 29937664,
+  "note": "foreground archive after all measured Chrome jobs stopped; ru_maxrss is highwater, not current combined RSS"
+}

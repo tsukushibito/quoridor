@@ -1,0 +1,1979 @@
+{
+  "runs/tactical129-measure-r1/browser-startup.json": {
+    "version": "153.0.8010.12",
+    "network": [
+      "http://localhost:5194/",
+      "http://localhost:5194/game.js",
+      "http://localhost:5194/context.js",
+      "http://localhost:5194/shared-best-action.js",
+      "http://localhost:5194/numeric-browser.js",
+      "http://localhost:5194/player-control.js",
+      "http://localhost:5194/early-page.js"
+    ],
+    "CPU": [
+      2
+    ],
+    "NN_loaded": false,
+    "real_port_bound": false
+  },
+  "runs/tactical129-measure-r1/finally-model-drop.json": {
+    "players": [
+      {
+        "kind": "dropped",
+        "handles": 0,
+        "activeNN": 0,
+        "at_ms": 1790955375039.29,
+        "producer_post_begin_ms": 1790955375039.2952,
+        "worker_engine": "candidate"
+      },
+      {
+        "kind": "dropped",
+        "handles": 0,
+        "activeNN": 0,
+        "at_ms": 1790955375040.07,
+        "producer_post_begin_ms": 1790955375040.075,
+        "worker_engine": "reference"
+      }
+    ],
+    "handles": 0,
+    "activeNN": 0
+  },
+  "runs/tactical129-measure-r1/main-timers-stop.json": {
+    "main_timers": 0,
+    "pending_messages": []
+  },
+  "runs/tactical129-measure-r1/outer-controlled-stop.json": {
+    "remaining_pids": 0,
+    "tracked": [
+      {
+        "pid": 2611578,
+        "starttick": 20827206
+      },
+      {
+        "pid": 2611582,
+        "starttick": 20827207
+      },
+      {
+        "pid": 2611589,
+        "starttick": 20827257
+      },
+      {
+        "pid": 2611601,
+        "starttick": 20827262
+      },
+      {
+        "pid": 2611606,
+        "starttick": 20827328
+      },
+      {
+        "pid": 2611611,
+        "starttick": 20827331
+      },
+      {
+        "pid": 2611625,
+        "starttick": 20827405
+      },
+      {
+        "pid": 2611649,
+        "starttick": 20827410
+      },
+      {
+        "pid": 2611661,
+        "starttick": 20827465
+      },
+      {
+        "pid": 2611688,
+        "starttick": 20827522
+      },
+      {
+        "pid": 2611729,
+        "starttick": 20827547
+      },
+      {
+        "pid": 2611731,
+        "starttick": 20827548
+      },
+      {
+        "pid": 2611734,
+        "starttick": 20827549
+      },
+      {
+        "pid": 2611735,
+        "starttick": 20827549
+      },
+      {
+        "pid": 2611751,
+        "starttick": 20827569
+      },
+      {
+        "pid": 2611752,
+        "starttick": 20827569
+      },
+      {
+        "pid": 2611754,
+        "starttick": 20827569
+      },
+      {
+        "pid": 2611756,
+        "starttick": 20827570
+      },
+      {
+        "pid": 2611759,
+        "starttick": 20827573
+      },
+      {
+        "pid": 2611768,
+        "starttick": 20827576
+      },
+      {
+        "pid": 2611778,
+        "starttick": 20827585
+      },
+      {
+        "pid": 2611819,
+        "starttick": 20827616
+      },
+      {
+        "pid": 2611829,
+        "starttick": 20827624
+      },
+      {
+        "pid": 2611847,
+        "starttick": 20827658
+      },
+      {
+        "pid": 2611857,
+        "starttick": 20827667
+      },
+      {
+        "pid": 2611873,
+        "starttick": 20827685
+      },
+      {
+        "pid": 2611883,
+        "starttick": 20827814
+      },
+      {
+        "pid": 2611891,
+        "starttick": 20827818
+      },
+      {
+        "pid": 2611895,
+        "starttick": 20827819
+      },
+      {
+        "pid": 2611935,
+        "starttick": 20827923
+      },
+      {
+        "pid": 2611945,
+        "starttick": 20827934
+      },
+      {
+        "pid": 2611946,
+        "starttick": 20827934
+      },
+      {
+        "pid": 2611957,
+        "starttick": 20828092
+      },
+      {
+        "pid": 2611985,
+        "starttick": 20828172
+      },
+      {
+        "pid": 2611986,
+        "starttick": 20828172
+      },
+      {
+        "pid": 2611989,
+        "starttick": 20828174
+      },
+      {
+        "pid": 2612179,
+        "starttick": 20828300
+      },
+      {
+        "pid": 2612185,
+        "starttick": 20828311
+      },
+      {
+        "pid": 2612189,
+        "starttick": 20828419
+      },
+      {
+        "pid": 2612190,
+        "starttick": 20828419
+      },
+      {
+        "pid": 2612195,
+        "starttick": 20828426
+      },
+      {
+        "pid": 2612200,
+        "starttick": 20828428
+      },
+      {
+        "pid": 2612224,
+        "starttick": 20828533
+      },
+      {
+        "pid": 2612236,
+        "starttick": 20828544
+      },
+      {
+        "pid": 2612244,
+        "starttick": 20828638
+      },
+      {
+        "pid": 2612289,
+        "starttick": 20828719
+      },
+      {
+        "pid": 2612293,
+        "starttick": 20828720
+      },
+      {
+        "pid": 2612297,
+        "starttick": 20828752
+      },
+      {
+        "pid": 2612309,
+        "starttick": 20828762
+      },
+      {
+        "pid": 2612314,
+        "starttick": 20828833
+      },
+      {
+        "pid": 2612319,
+        "starttick": 20828840
+      },
+      {
+        "pid": 2612325,
+        "starttick": 20828841
+      },
+      {
+        "pid": 2612339,
+        "starttick": 20828894
+      },
+      {
+        "pid": 2612345,
+        "starttick": 20828899
+      },
+      {
+        "pid": 2612355,
+        "starttick": 20828992
+      }
+    ],
+    "forced": true,
+    "graceful_error": null,
+    "waited": true,
+    "zombie_identities_absent": true,
+    "registration_ack": true,
+    "registered": 32
+  },
+  "runs/tactical129-measure-r1/pause-monitor-stop.json": {
+    "UTC": "2026-10-02T15:36:15.088Z",
+    "state": "READY",
+    "failure": null,
+    "deadlineUTC": "2026-10-02T16:13:42+00:00",
+    "subjectIssue": "quoridor-4lc.129",
+    "rows": [
+      {
+        "pid": 2611578,
+        "starttick": 20827206,
+        "PPID": 2611568,
+        "ppid": 2611568,
+        "state": "R",
+        "kind": "owned_observer_child",
+        "parent": {
+          "pid": 2611568,
+          "starttick": 20827199,
+          "PPID": 2611554,
+          "ppid": 2611554,
+          "state": "R"
+        },
+        "startUTC": "2026-10-02T15:35:57.173Z",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      {
+        "id": "quoridor-4lc",
+        "PID": 2611578,
+        "startUTC": "2026-10-02T15:35:57.173Z",
+        "endUTC": "2026-10-02T15:35:58.424Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      },
+      {
+        "pid": 2611611,
+        "starttick": 20827331,
+        "PPID": 2611568,
+        "ppid": 2611568,
+        "state": "R",
+        "kind": "owned_observer_child",
+        "parent": {
+          "pid": 2611568,
+          "starttick": 20827199,
+          "PPID": 2611554,
+          "ppid": 2611554,
+          "state": "R"
+        },
+        "startUTC": "2026-10-02T15:35:58.424Z",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      {
+        "id": "quoridor-4lc.129",
+        "PID": 2611611,
+        "startUTC": "2026-10-02T15:35:58.424Z",
+        "endUTC": "2026-10-02T15:35:59.799Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      },
+      {
+        "pid": 2611751,
+        "starttick": 20827569,
+        "PPID": 2611568,
+        "ppid": 2611568,
+        "state": "R",
+        "kind": "owned_observer_child",
+        "parent": {
+          "pid": 2611568,
+          "starttick": 20827199,
+          "PPID": 2611554,
+          "ppid": 2611554,
+          "state": "R"
+        },
+        "startUTC": "2026-10-02T15:36:00.799Z",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      {
+        "id": "quoridor-4lc",
+        "PID": 2611751,
+        "startUTC": "2026-10-02T15:36:00.799Z",
+        "endUTC": "2026-10-02T15:36:03.293Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      },
+      {
+        "pid": 2611891,
+        "starttick": 20827818,
+        "PPID": 2611568,
+        "ppid": 2611568,
+        "state": "R",
+        "kind": "owned_observer_child",
+        "parent": {
+          "pid": 2611568,
+          "starttick": 20827199,
+          "PPID": 2611554,
+          "ppid": 2611554,
+          "state": "R"
+        },
+        "startUTC": "2026-10-02T15:36:03.293Z",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      {
+        "id": "quoridor-4lc.129",
+        "PID": 2611891,
+        "startUTC": "2026-10-02T15:36:03.293Z",
+        "endUTC": "2026-10-02T15:36:06.102Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      },
+      {
+        "pid": 2611985,
+        "starttick": 20828172,
+        "PPID": 2611568,
+        "ppid": 2611568,
+        "state": "R",
+        "kind": "owned_observer_child",
+        "parent": {
+          "pid": 2611568,
+          "starttick": 20827199,
+          "PPID": 2611554,
+          "ppid": 2611554,
+          "state": "R"
+        },
+        "startUTC": "2026-10-02T15:36:06.828Z",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      {
+        "id": "quoridor-4lc",
+        "PID": 2611985,
+        "startUTC": "2026-10-02T15:36:06.828Z",
+        "endUTC": "2026-10-02T15:36:09.370Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      },
+      {
+        "pid": 2612195,
+        "starttick": 20828426,
+        "PPID": 2611568,
+        "ppid": 2611568,
+        "state": "R",
+        "kind": "owned_observer_child",
+        "parent": {
+          "pid": 2611568,
+          "starttick": 20827199,
+          "PPID": 2611554,
+          "ppid": 2611554,
+          "state": "R"
+        },
+        "startUTC": "2026-10-02T15:36:09.370Z",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      {
+        "id": "quoridor-4lc.129",
+        "PID": 2612195,
+        "startUTC": "2026-10-02T15:36:09.370Z",
+        "endUTC": "2026-10-02T15:36:11.534Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      },
+      {
+        "pid": 2612289,
+        "starttick": 20828719,
+        "PPID": 2611568,
+        "ppid": 2611568,
+        "state": "R",
+        "kind": "owned_observer_child",
+        "parent": {
+          "pid": 2611568,
+          "starttick": 20827199,
+          "PPID": 2611554,
+          "ppid": 2611554,
+          "state": "R"
+        },
+        "startUTC": "2026-10-02T15:36:12.296Z",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      {
+        "id": "quoridor-4lc",
+        "PID": 2612289,
+        "startUTC": "2026-10-02T15:36:12.296Z",
+        "endUTC": "2026-10-02T15:36:13.509Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      },
+      {
+        "pid": 2612319,
+        "starttick": 20828840,
+        "PPID": 2611568,
+        "ppid": 2611568,
+        "state": "S",
+        "kind": "owned_observer_child",
+        "parent": {
+          "pid": 2611568,
+          "starttick": 20827199,
+          "PPID": 2611554,
+          "ppid": 2611554,
+          "state": "R"
+        },
+        "startUTC": "2026-10-02T15:36:13.509Z",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      {
+        "id": "quoridor-4lc.129",
+        "PID": 2612319,
+        "startUTC": "2026-10-02T15:36:13.509Z",
+        "endUTC": "2026-10-02T15:36:15.088Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      }
+    ],
+    "pending_children": [],
+    "clock_cost_not_subtracted": true,
+    "all_owned_read_callbacks_waited": true,
+    "signal_unknown": 0,
+    "active_monitor_timer": false
+  },
+  "runs/tactical129-measure-r1/source-bindings.json": {
+    "main": {
+      "path": "tools/ai-sigma-player-workers/player-main.js",
+      "original_SHA256": "610e899acd43215efc9fa3a08f3c337248639505a57196e1a730a91f7afde4a8",
+      "adapted_SHA256": "c4451981c0288ccbafaba5c123c42455d1b53e0167977cce7d321bbbea449b2d",
+      "adapter117_readonly": true
+    },
+    "worker": {
+      "path": "tools/ai-sigma-player-workers/player-worker.js",
+      "original_SHA256": "fd5f5b72a836164133b22f718d58ef31d2d4b0f8a4887070e1ac9346112de5e8",
+      "adapted_SHA256": "9e347faf1ad8862a640c6ef5aee67ff2dc540c3d439a8b860253660090767c4c",
+      "adapter117_readonly": true
+    },
+    "producer": {
+      "path": "tools/ai-sigma-tail-transport/early-worker.js",
+      "original_SHA256": "9494e33e7204be208262914c04ea5eb0d7985872a6d7ebc6e4084d84729097d4",
+      "adapted_SHA256": "31c2684547c9b6e16aa27163ead080cf20bbede284e4a1b77dc3436764422a09",
+      "adapter117_readonly": true
+    },
+    "checkpoint": {
+      "path": "tools/ai-sigma-tail-transport/checkpoint.js",
+      "original_SHA256": "2b736d696a099350bf724b40dd858fc3afe11ce17a1c143f3029e5fcd2f28d8c",
+      "adapted_SHA256": "494581d5ce5fc38e7afb753d9ca92e0f49bb71ed516762b7ea48a0c6d89e1119",
+      "adapter117_readonly": true
+    },
+    "cache": {
+      "path": "tools/ai-sigma-actual-boundary-repair/early-cache.cjs",
+      "original_SHA256": "748fe01dfebf5e524465ef69255acf0026154188b9002a5338ca790ca092e7f7",
+      "adapted_SHA256": "a547e67cc4cfa6cfce8b40234381b48c9126a7accbee8e121351d822d8cbf8ac",
+      "adapter117_readonly": true
+    },
+    "oracle": {
+      "path": "tools/ai-sigma-tactical-oracle/checker.js",
+      "original_SHA256": "1afc5c1268bff38d8067c607c6ec11ac947b0eb1371efab52a3646ae0e2ba7d5"
+    }
+  },
+  "runs/tactical129-measure-r1/startup.json": {
+    "ready": true,
+    "startup_NN": 6,
+    "rows": [
+      {
+        "engine": "candidate",
+        "id": "initial-p1",
+        "NN": 1,
+        "zero": true
+      },
+      {
+        "engine": "candidate",
+        "id": "asym-hv-p2",
+        "NN": 1,
+        "zero": true
+      },
+      {
+        "engine": "candidate",
+        "id": "straight-jump-p2",
+        "NN": 1,
+        "zero": true
+      },
+      {
+        "engine": "reference",
+        "id": "initial-p1",
+        "NN": 1,
+        "zero": true
+      },
+      {
+        "engine": "reference",
+        "id": "asym-hv-p2",
+        "NN": 1,
+        "zero": true
+      },
+      {
+        "engine": "reference",
+        "id": "straight-jump-p2",
+        "NN": 1,
+        "zero": true
+      }
+    ],
+    "worker_clocks": {
+      "candidate": {
+        "lo_ms": -0.154931640625,
+        "hi_ms": 0.11513671875,
+        "mid_ms": -0.0198974609375,
+        "error_ms": 0.2350341796875,
+        "measured": true,
+        "samples": [
+          {
+            "start_ms": 1790955368187.905,
+            "end_ms": 1790955368238.975,
+            "worker_ms": 1790955368195.955
+          },
+          {
+            "start_ms": 1790955368239.05,
+            "end_ms": 1790955368239.29,
+            "worker_ms": 1790955368239.235
+          },
+          {
+            "start_ms": 1790955368239.29,
+            "end_ms": 1790955368239.405,
+            "worker_ms": 1790955368239.33
+          },
+          {
+            "start_ms": 1790955368239.41,
+            "end_ms": 1790955368239.665,
+            "worker_ms": 1790955368239.58
+          },
+          {
+            "start_ms": 1790955368239.67,
+            "end_ms": 1790955368239.78,
+            "worker_ms": 1790955368239.685
+          },
+          {
+            "start_ms": 1790955368239.78,
+            "end_ms": 1790955368240,
+            "worker_ms": 1790955368239.885
+          },
+          {
+            "start_ms": 1790955368240.01,
+            "end_ms": 1790955368240.28,
+            "worker_ms": 1790955368240.135
+          },
+          {
+            "start_ms": 1790955368240.285,
+            "end_ms": 1790955368240.39,
+            "worker_ms": 1790955368240.335
+          }
+        ]
+      },
+      "reference": {
+        "lo_ms": -0.114892578125,
+        "hi_ms": 0.105126953125,
+        "mid_ms": -0.0048828125,
+        "error_ms": 0.210009765625,
+        "measured": true,
+        "samples": [
+          {
+            "start_ms": 1790955368240.785,
+            "end_ms": 1790955368240.925,
+            "worker_ms": 1790955368240.88
+          },
+          {
+            "start_ms": 1790955368240.93,
+            "end_ms": 1790955368241.2,
+            "worker_ms": 1790955368241.165
+          },
+          {
+            "start_ms": 1790955368241.2,
+            "end_ms": 1790955368241.235,
+            "worker_ms": 1790955368241.205
+          },
+          {
+            "start_ms": 1790955368241.235,
+            "end_ms": 1790955368241.31,
+            "worker_ms": 1790955368241.2449
+          },
+          {
+            "start_ms": 1790955368241.31,
+            "end_ms": 1790955368241.41,
+            "worker_ms": 1790955368241.385
+          },
+          {
+            "start_ms": 1790955368241.41,
+            "end_ms": 1790955368241.43,
+            "worker_ms": 1790955368241.415
+          },
+          {
+            "start_ms": 1790955368241.44,
+            "end_ms": 1790955368241.58,
+            "worker_ms": 1790955368241.4949
+          },
+          {
+            "start_ms": 1790955368241.58,
+            "end_ms": 1790955368241.695,
+            "worker_ms": 1790955368241.64
+          }
+        ]
+      }
+    },
+    "model_sessions": 2,
+    "tree_history_cache_reused": false
+  },
+  "runs/tactical129-measure-r1/summary.json": {
+    "issue": "quoridor-4lc.129",
+    "frame": 9,
+    "Git": "766605299347c46869a2154afe27412162917d2f",
+    "mode": "NN",
+    "run": "tactical129-measure-r1",
+    "diagnostic": true,
+    "actual_go": false,
+    "games_started": 0,
+    "games": [],
+    "holdout": 0,
+    "planned": 12,
+    "completed": 12,
+    "missing": 0,
+    "denominator": "functional public requirements",
+    "public_response_count": 12,
+    "game_unstarted": 0,
+    "startup_NN": 6,
+    "hand_NN": 71,
+    "public_classifications": {
+      "completed_legal": 12
+    },
+    "primary": null,
+    "secondary": [],
+    "requirement_errors": [],
+    "browser_judgement": true,
+    "per_CP_Node_binding_calls": 0,
+    "Node_per_hand_clock_calls": 0
+  },
+  "runs/tactical129-measure-r1.process.json": {
+    "phase": "tactical",
+    "name": "tactical129-measure-r1",
+    "cmd": [
+      "node",
+      "--max-old-space-size=192",
+      "--max-semi-space-size=4",
+      "--no-node-snapshot",
+      "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-tactical-evaluation/diagnose.cjs",
+      "--config",
+      "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/129-tactical-evaluation/run-config.json"
+    ],
+    "start": "2026-10-02T15:35:57.098814+00:00",
+    "end": "2026-10-02T15:36:15.473261+00:00",
+    "subreaper_set_rc": 0,
+    "subreaper_get_rc": 0,
+    "subreaper_value": 1,
+    "kernel_boundary": {
+      "valid": true,
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "launcher": {
+        "pid": 2611554,
+        "ppid": 2009,
+        "pgid": 2611554,
+        "start_ticks": 20827185,
+        "state": "R",
+        "rss": 17997824,
+        "utime_ticks": 2,
+        "stime_ticks": 0
+      },
+      "root": {
+        "pid": 2611568,
+        "ppid": 2611554,
+        "pgid": 2611568,
+        "start_ticks": 20827199,
+        "state": "R",
+        "rss": 19042304,
+        "utime_ticks": 0,
+        "stime_ticks": 0
+      },
+      "initial_children": [],
+      "spawn_count": 1,
+      "single_thread_initial": true,
+      "sole_explicit_root": true
+    },
+    "runner_pid": 2611554,
+    "runner_starttick": 20827185,
+    "child_pid": 2611568,
+    "child_starttick": 20827199,
+    "exit": 0,
+    "stop_reason": null,
+    "sample_interval_ms": 40,
+    "peak_group_plus_runner_RSS": 1525977088,
+    "peak_allocated_bytes": 3424256,
+    "final_allocated_bytes": 2179072,
+    "tracked": [
+      {
+        "pid": 2611568,
+        "ppid": 2611554,
+        "pgid": 2611568,
+        "start_ticks": 20827199,
+        "state": "R",
+        "rss": 34377728,
+        "utime_ticks": 216,
+        "stime_ticks": 66,
+        "maxrss": 297721856,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 8320,
+        "last_ppid": 2611554,
+        "last_state": "S"
+      },
+      {
+        "pid": 2611578,
+        "ppid": 2611568,
+        "pgid": 2611568,
+        "start_ticks": 20827206,
+        "state": "S",
+        "rss": 3055616,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3055616,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 62,
+        "last_ppid": 2611568,
+        "last_state": "S"
+      },
+      {
+        "pid": 2611582,
+        "ppid": 2611578,
+        "pgid": 2611568,
+        "start_ticks": 20827207,
+        "state": "R",
+        "rss": 4091904,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 4091904,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 4,
+        "last_ppid": 2611578,
+        "last_state": "D"
+      },
+      {
+        "pid": 2611589,
+        "ppid": 2611578,
+        "pgid": 2611568,
+        "start_ticks": 20827257,
+        "state": "R",
+        "rss": 80711680,
+        "utime_ticks": 27,
+        "stime_ticks": 6,
+        "maxrss": 195919872,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 246,
+        "last_ppid": 2611578,
+        "last_state": "S"
+      },
+      {
+        "pid": 2611601,
+        "ppid": 2611589,
+        "pgid": 2611568,
+        "start_ticks": 20827262,
+        "state": "R",
+        "rss": 3940352,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3940352,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2611589,
+        "last_state": "D"
+      },
+      {
+        "pid": 2611606,
+        "ppid": 2611589,
+        "pgid": 2611568,
+        "start_ticks": 20827328,
+        "state": "D",
+        "rss": 4251648,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 4251648,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 1,
+        "last_ppid": 2611589,
+        "last_state": "D"
+      },
+      {
+        "pid": 2611611,
+        "ppid": 2611568,
+        "pgid": 2611568,
+        "start_ticks": 20827331,
+        "state": "S",
+        "rss": 1744896,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 1744896,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 68,
+        "last_ppid": 2611568,
+        "last_state": "S"
+      },
+      {
+        "pid": 2611625,
+        "ppid": 2611611,
+        "pgid": 2611568,
+        "start_ticks": 20827405,
+        "state": "R",
+        "rss": 41418752,
+        "utime_ticks": 24,
+        "stime_ticks": 5,
+        "maxrss": 196198400,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 208,
+        "last_ppid": 2611611,
+        "last_state": "S"
+      },
+      {
+        "pid": 2611649,
+        "ppid": 2611625,
+        "pgid": 2611568,
+        "start_ticks": 20827410,
+        "state": "R",
+        "rss": 3846144,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3846144,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2611625,
+        "last_state": "R"
+      },
+      {
+        "pid": 2611661,
+        "ppid": 2611625,
+        "pgid": 2611568,
+        "start_ticks": 20827465,
+        "state": "D",
+        "rss": 4038656,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 4038656,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2611625,
+        "last_state": "D"
+      },
+      {
+        "pid": 2611688,
+        "ppid": 2611568,
+        "pgid": 2611688,
+        "start_ticks": 20827522,
+        "state": "R",
+        "rss": 4272128,
+        "utime_ticks": 60,
+        "stime_ticks": 43,
+        "maxrss": 352100352,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 20993,
+        "last_ppid": 2611568,
+        "last_state": "Z"
+      },
+      {
+        "pid": 2611729,
+        "ppid": 2611554,
+        "pgid": 2611728,
+        "start_ticks": 20827547,
+        "state": "S",
+        "rss": 3280896,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3280896,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 1266,
+        "last_ppid": 2611554,
+        "last_state": "Z"
+      },
+      {
+        "pid": 2611731,
+        "ppid": 2611554,
+        "pgid": 2611730,
+        "start_ticks": 20827548,
+        "state": "S",
+        "rss": 3145728,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3145728,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 634,
+        "last_ppid": 2611554,
+        "last_state": "Z"
+      },
+      {
+        "pid": 2611734,
+        "ppid": 2611688,
+        "pgid": 2611688,
+        "start_ticks": 20827549,
+        "state": "R",
+        "rss": 54448128,
+        "utime_ticks": 0,
+        "stime_ticks": 1,
+        "maxrss": 68997120,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 634,
+        "last_ppid": 2611554,
+        "last_state": "Z"
+      },
+      {
+        "pid": 2611735,
+        "ppid": 2611688,
+        "pgid": 2611688,
+        "start_ticks": 20827549,
+        "state": "R",
+        "rss": 54644736,
+        "utime_ticks": 1,
+        "stime_ticks": 1,
+        "maxrss": 69140480,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 634,
+        "last_ppid": 2611554,
+        "last_state": "Z"
+      },
+      {
+        "pid": 2611751,
+        "ppid": 2611568,
+        "pgid": 2611568,
+        "start_ticks": 20827569,
+        "state": "R",
+        "rss": 3084288,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3084288,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 104,
+        "last_ppid": 2611568,
+        "last_state": "S"
+      },
+      {
+        "pid": 2611752,
+        "ppid": 2611751,
+        "pgid": 2611568,
+        "start_ticks": 20827569,
+        "state": "Z",
+        "rss": 0,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 0,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 1,
+        "last_ppid": 2611751,
+        "last_state": "Z"
+      },
+      {
+        "pid": 2611756,
+        "ppid": 2611751,
+        "pgid": 2611568,
+        "start_ticks": 20827570,
+        "state": "R",
+        "rss": 3891200,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3891200,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 4,
+        "last_ppid": 2611751,
+        "last_state": "R"
+      },
+      {
+        "pid": 2611759,
+        "ppid": 2611734,
+        "pgid": 2611688,
+        "start_ticks": 20827573,
+        "state": "R",
+        "rss": 22487040,
+        "utime_ticks": 1,
+        "stime_ticks": 1,
+        "maxrss": 65933312,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 4904,
+        "last_ppid": 2611734,
+        "last_state": "S"
+      },
+      {
+        "pid": 2611768,
+        "ppid": 2611688,
+        "pgid": 2611688,
+        "start_ticks": 20827576,
+        "state": "R",
+        "rss": 7991296,
+        "utime_ticks": 3,
+        "stime_ticks": 5,
+        "maxrss": 114511872,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 5515,
+        "last_ppid": 2611688,
+        "last_state": "S"
+      },
+      {
+        "pid": 2611778,
+        "ppid": 2611735,
+        "pgid": 2611688,
+        "start_ticks": 20827585,
+        "state": "D",
+        "rss": 38957056,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 49963008,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 4890,
+        "last_ppid": 2611735,
+        "last_state": "S"
+      },
+      {
+        "pid": 2611819,
+        "ppid": 2611735,
+        "pgid": 2611688,
+        "start_ticks": 20827616,
+        "state": "R",
+        "rss": 44744704,
+        "utime_ticks": 10,
+        "stime_ticks": 9,
+        "maxrss": 136740864,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 7049,
+        "last_ppid": 2611735,
+        "last_state": "Z"
+      },
+      {
+        "pid": 2611829,
+        "ppid": 2611735,
+        "pgid": 2611688,
+        "start_ticks": 20827624,
+        "state": "R",
+        "rss": 55984128,
+        "utime_ticks": 2,
+        "stime_ticks": 0,
+        "maxrss": 96854016,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 158,
+        "last_ppid": 2611735,
+        "last_state": "R"
+      },
+      {
+        "pid": 2611847,
+        "ppid": 2611735,
+        "pgid": 2611688,
+        "start_ticks": 20827658,
+        "state": "R",
+        "rss": 58159104,
+        "utime_ticks": 347,
+        "stime_ticks": 56,
+        "maxrss": 412553216,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 9709,
+        "last_ppid": 2611735,
+        "last_state": "Z"
+      },
+      {
+        "pid": 2611857,
+        "ppid": 2611751,
+        "pgid": 2611568,
+        "start_ticks": 20827667,
+        "state": "R",
+        "rss": 25116672,
+        "utime_ticks": 21,
+        "stime_ticks": 6,
+        "maxrss": 179126272,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 375,
+        "last_ppid": 2611751,
+        "last_state": "S"
+      },
+      {
+        "pid": 2611873,
+        "ppid": 2611857,
+        "pgid": 2611568,
+        "start_ticks": 20827685,
+        "state": "D",
+        "rss": 3788800,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3985408,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 4,
+        "last_ppid": 2611857,
+        "last_state": "R"
+      },
+      {
+        "pid": 2611883,
+        "ppid": 2611857,
+        "pgid": 2611568,
+        "start_ticks": 20827814,
+        "state": "R",
+        "rss": 3776512,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3985408,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2611857,
+        "last_state": "D"
+      },
+      {
+        "pid": 2611891,
+        "ppid": 2611568,
+        "pgid": 2611568,
+        "start_ticks": 20827818,
+        "state": "S",
+        "rss": 3149824,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3149824,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 102,
+        "last_ppid": 2611568,
+        "last_state": "S"
+      },
+      {
+        "pid": 2611895,
+        "ppid": 2611891,
+        "pgid": 2611568,
+        "start_ticks": 20827819,
+        "state": "D",
+        "rss": 3678208,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3678208,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2611891,
+        "last_state": "D"
+      },
+      {
+        "pid": 2611935,
+        "ppid": 2611891,
+        "pgid": 2611568,
+        "start_ticks": 20827923,
+        "state": "R",
+        "rss": 15691776,
+        "utime_ticks": 20,
+        "stime_ticks": 6,
+        "maxrss": 181354496,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 338,
+        "last_ppid": 2611891,
+        "last_state": "S"
+      },
+      {
+        "pid": 2611957,
+        "ppid": 2611935,
+        "pgid": 2611568,
+        "start_ticks": 20828092,
+        "state": "D",
+        "rss": 3883008,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3883008,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2611935,
+        "last_state": "D"
+      },
+      {
+        "pid": 2611985,
+        "ppid": 2611568,
+        "pgid": 2611568,
+        "start_ticks": 20828172,
+        "state": "R",
+        "rss": 3067904,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3067904,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 105,
+        "last_ppid": 2611568,
+        "last_state": "S"
+      },
+      {
+        "pid": 2611986,
+        "ppid": 2611985,
+        "pgid": 2611568,
+        "start_ticks": 20828172,
+        "state": "Z",
+        "rss": 0,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 0,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 1,
+        "last_ppid": 2611985,
+        "last_state": "Z"
+      },
+      {
+        "pid": 2611989,
+        "ppid": 2611985,
+        "pgid": 2611568,
+        "start_ticks": 20828174,
+        "state": "R",
+        "rss": 3694592,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3694592,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2611985,
+        "last_state": "R"
+      },
+      {
+        "pid": 2612179,
+        "ppid": 2611985,
+        "pgid": 2611568,
+        "start_ticks": 20828300,
+        "state": "R",
+        "rss": 45162496,
+        "utime_ticks": 21,
+        "stime_ticks": 4,
+        "maxrss": 185012224,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 337,
+        "last_ppid": 2611985,
+        "last_state": "S"
+      },
+      {
+        "pid": 2612185,
+        "ppid": 2612179,
+        "pgid": 2611568,
+        "start_ticks": 20828311,
+        "state": "D",
+        "rss": 4112384,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 4112384,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 1,
+        "last_ppid": 2612179,
+        "last_state": "D"
+      },
+      {
+        "pid": 2612190,
+        "ppid": 2612179,
+        "pgid": 2611568,
+        "start_ticks": 20828419,
+        "state": "D",
+        "rss": 3637248,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 4030464,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2612179,
+        "last_state": "D"
+      },
+      {
+        "pid": 2612195,
+        "ppid": 2611568,
+        "pgid": 2611568,
+        "start_ticks": 20828426,
+        "state": "S",
+        "rss": 3055616,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3055616,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 102,
+        "last_ppid": 2611568,
+        "last_state": "S"
+      },
+      {
+        "pid": 2612200,
+        "ppid": 2612195,
+        "pgid": 2611568,
+        "start_ticks": 20828428,
+        "state": "D",
+        "rss": 3842048,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3842048,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2612195,
+        "last_state": "D"
+      },
+      {
+        "pid": 2612224,
+        "ppid": 2612195,
+        "pgid": 2611568,
+        "start_ticks": 20828533,
+        "state": "R",
+        "rss": 46022656,
+        "utime_ticks": 21,
+        "stime_ticks": 4,
+        "maxrss": 186486784,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 312,
+        "last_ppid": 2612195,
+        "last_state": "S"
+      },
+      {
+        "pid": 2612236,
+        "ppid": 2612224,
+        "pgid": 2611568,
+        "start_ticks": 20828544,
+        "state": "D",
+        "rss": 3739648,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3739648,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2612224,
+        "last_state": "D"
+      },
+      {
+        "pid": 2612244,
+        "ppid": 2612224,
+        "pgid": 2611568,
+        "start_ticks": 20828638,
+        "state": "D",
+        "rss": 4132864,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 4132864,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2612224,
+        "last_state": "R"
+      },
+      {
+        "pid": 2612289,
+        "ppid": 2611568,
+        "pgid": 2611568,
+        "start_ticks": 20828719,
+        "state": "R",
+        "rss": 3067904,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3067904,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 59,
+        "last_ppid": 2611568,
+        "last_state": "S"
+      },
+      {
+        "pid": 2612293,
+        "ppid": 2612289,
+        "pgid": 2611568,
+        "start_ticks": 20828720,
+        "state": "D",
+        "rss": 4026368,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 4026368,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2612289,
+        "last_state": "D"
+      },
+      {
+        "pid": 2612297,
+        "ppid": 2612289,
+        "pgid": 2611568,
+        "start_ticks": 20828752,
+        "state": "R",
+        "rss": 45785088,
+        "utime_ticks": 21,
+        "stime_ticks": 5,
+        "maxrss": 193376256,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 271,
+        "last_ppid": 2612289,
+        "last_state": "S"
+      },
+      {
+        "pid": 2612309,
+        "ppid": 2612297,
+        "pgid": 2611568,
+        "start_ticks": 20828762,
+        "state": "D",
+        "rss": 3911680,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3911680,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2612297,
+        "last_state": "D"
+      },
+      {
+        "pid": 2612314,
+        "ppid": 2612297,
+        "pgid": 2611568,
+        "start_ticks": 20828833,
+        "state": "R",
+        "rss": 3842048,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 4038656,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 4,
+        "last_ppid": 2612297,
+        "last_state": "R"
+      },
+      {
+        "pid": 2612319,
+        "ppid": 2611568,
+        "pgid": 2611568,
+        "start_ticks": 20828840,
+        "state": "S",
+        "rss": 3141632,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3141632,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 72,
+        "last_ppid": 2611568,
+        "last_state": "S"
+      },
+      {
+        "pid": 2612325,
+        "ppid": 2612319,
+        "pgid": 2611568,
+        "start_ticks": 20828841,
+        "state": "D",
+        "rss": 3821568,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3821568,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2612319,
+        "last_state": "D"
+      },
+      {
+        "pid": 2612339,
+        "ppid": 2612319,
+        "pgid": 2611568,
+        "start_ticks": 20828894,
+        "state": "R",
+        "rss": 40288256,
+        "utime_ticks": 20,
+        "stime_ticks": 6,
+        "maxrss": 180547584,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 311,
+        "last_ppid": 2612319,
+        "last_state": "S"
+      },
+      {
+        "pid": 2612345,
+        "ppid": 2612339,
+        "pgid": 2611568,
+        "start_ticks": 20828899,
+        "state": "R",
+        "rss": 3887104,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3887104,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2612339,
+        "last_state": "R"
+      },
+      {
+        "pid": 2612355,
+        "ppid": 2612339,
+        "pgid": 2611568,
+        "start_ticks": 20828992,
+        "state": "R",
+        "rss": 3670016,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3670016,
+        "affinities": [
+          [
+            2
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2612339,
+        "last_state": "R"
+      }
+    ],
+    "remaining": [],
+    "kernel_identity_count": 52,
+    "kernel_adoptions": [
+      {
+        "kind": "kernel_adopted_direct_child",
+        "observed": {
+          "pid": 2611729,
+          "ppid": 2611554,
+          "pgid": 2611728,
+          "start_ticks": 20827547,
+          "state": "S",
+          "rss": 3280896,
+          "utime_ticks": 0,
+          "stime_ticks": 0
+        },
+        "launcher_identity": {
+          "pid": 2611554,
+          "ppid": 2009,
+          "pgid": 2611554,
+          "start_ticks": 20827185,
+          "state": "R",
+          "rss": 17997824,
+          "utime_ticks": 2,
+          "stime_ticks": 0
+        },
+        "sole_jobroot_identity": {
+          "pid": 2611568,
+          "ppid": 2611554,
+          "pgid": 2611568,
+          "start_ticks": 20827199,
+          "state": "R",
+          "rss": 19042304,
+          "utime_ticks": 0,
+          "stime_ticks": 0
+        },
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "monotonic": 208275.490570272
+      },
+      {
+        "kind": "kernel_adopted_direct_child",
+        "observed": {
+          "pid": 2611731,
+          "ppid": 2611554,
+          "pgid": 2611730,
+          "start_ticks": 20827548,
+          "state": "S",
+          "rss": 3145728,
+          "utime_ticks": 0,
+          "stime_ticks": 0
+        },
+        "launcher_identity": {
+          "pid": 2611554,
+          "ppid": 2009,
+          "pgid": 2611554,
+          "start_ticks": 20827185,
+          "state": "R",
+          "rss": 17997824,
+          "utime_ticks": 2,
+          "stime_ticks": 0
+        },
+        "sole_jobroot_identity": {
+          "pid": 2611568,
+          "ppid": 2611554,
+          "pgid": 2611568,
+          "start_ticks": 20827199,
+          "state": "R",
+          "rss": 19042304,
+          "utime_ticks": 0,
+          "stime_ticks": 0
+        },
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "monotonic": 208275.490642211
+      }
+    ],
+    "ledger_registered_count": 40,
+    "ledger_rejected": {},
+    "ledger_monitor_remaining_consistent": true,
+    "unknown_adopted": [],
+    "privateTMP_alias": "/proc/2611554/cwd/t",
+    "privateTMP_realpath": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261002/TACTICAL-EVALUATION/runs/t",
+    "assigned_CPU": 2,
+    "process_deadline": "2026-10-02T16:13:42+00:00",
+    "newjob_cutoff": "2026-10-02T16:08:42+00:00",
+    "guardRSS": 5905580032,
+    "contractRAM": 6442450944,
+    "guard_basis": "current_proc_rss_runner_plus_owned_children",
+    "runner_ru_maxrss_bytes": 615759872,
+    "all_observed_TIDs_at_assigned_CPU": true,
+    "affinity_violations": [],
+    "instant_peak_not_guaranteed": true,
+    "runner_sha256": "1226550515f5edf383a14a130126706fca973e0ccf0df9b8b0be74955bc387fd"
+  },
+  "runs/tactical129-mock-r1.process.json": {
+    "phase": "protocol",
+    "name": "tactical129-mock-r1",
+    "cmd": [
+      "node",
+      "--max-old-space-size=192",
+      "--max-semi-space-size=4",
+      "--no-node-snapshot",
+      "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-tactical-evaluation/mock.cjs"
+    ],
+    "start": "2026-10-02T15:35:02.412806+00:00",
+    "end": "2026-10-02T15:35:03.057077+00:00",
+    "subreaper_set_rc": 0,
+    "subreaper_get_rc": 0,
+    "subreaper_value": 1,
+    "kernel_boundary": {
+      "valid": true,
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "launcher": {
+        "pid": 2610535,
+        "ppid": 2009,
+        "pgid": 2610535,
+        "start_ticks": 20821571,
+        "state": "R",
+        "rss": 17727488,
+        "utime_ticks": 1,
+        "stime_ticks": 1
+      },
+      "root": {
+        "pid": 2610618,
+        "ppid": 2610535,
+        "pgid": 2610618,
+        "start_ticks": 20821729,
+        "state": "R",
+        "rss": 21286912,
+        "utime_ticks": 0,
+        "stime_ticks": 0
+      },
+      "initial_children": [],
+      "spawn_count": 1,
+      "single_thread_initial": true,
+      "sole_explicit_root": true
+    },
+    "runner_pid": 2610535,
+    "runner_starttick": 20821571,
+    "child_pid": 2610618,
+    "child_starttick": 20821729,
+    "exit": 0,
+    "stop_reason": null,
+    "sample_interval_ms": 40,
+    "peak_group_plus_runner_RSS": 94404608,
+    "peak_allocated_bytes": 471040,
+    "final_allocated_bytes": 471040,
+    "tracked": [
+      {
+        "pid": 2610618,
+        "ppid": 2610535,
+        "pgid": 2610618,
+        "start_ticks": 20821729,
+        "state": "R",
+        "rss": 31838208,
+        "utime_ticks": 32,
+        "stime_ticks": 2,
+        "maxrss": 76185600,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 208,
+        "last_ppid": 2610535,
+        "last_state": "S"
+      }
+    ],
+    "remaining": [],
+    "kernel_identity_count": 1,
+    "kernel_adoptions": [],
+    "ledger_registered_count": 0,
+    "ledger_rejected": {},
+    "ledger_monitor_remaining_consistent": true,
+    "unknown_adopted": [],
+    "privateTMP_alias": "/proc/2610535/cwd/t",
+    "privateTMP_realpath": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261002/TACTICAL-EVALUATION/runs/t",
+    "assigned_CPU": 0,
+    "process_deadline": "2026-10-02T16:13:42+00:00",
+    "newjob_cutoff": "2026-10-02T16:08:42+00:00",
+    "guardRSS": 939524096,
+    "contractRAM": 1073741824,
+    "guard_basis": "current_proc_rss_runner_plus_owned_children",
+    "runner_ru_maxrss_bytes": 615759872,
+    "all_observed_TIDs_at_assigned_CPU": true,
+    "affinity_violations": [],
+    "instant_peak_not_guaranteed": true,
+    "runner_sha256": "1226550515f5edf383a14a130126706fca973e0ccf0df9b8b0be74955bc387fd"
+  }
+}

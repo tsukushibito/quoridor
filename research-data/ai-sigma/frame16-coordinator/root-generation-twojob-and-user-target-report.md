@@ -1,0 +1,6 @@
+goal quoridor-4lc / frame16延長17 221実測・ユーザー速度目標反映。
+1000game60分初期/30分次目安をcurrentplan/goal有効本文へ明記し221/222へ実steer、cap900000NN/登録各96上界/最大3job/資源/親09:55:50不増・実1000生成許可としない。
+221actualparity07:48:41–45/600sample B1..24 heterogeneousCPUORT/CUDA/ID/f32partial全PASS、最大abs9.2983e-6。旧monitor stale refusalはbeforechild NN0で保存、現extension17physicsで修復(数値failureでない)。主private実装/source3569c1c4、同fresh48/input01cb2af0/modeld790/K64/active24/workers3、B8 actual07:49:23→07:51:15 guardian113.865s、B24 actual07:51:46→07:53:36 guardian112.111s、各NN81096/48GOAL/1554joint/peak約2.29GB/exit0/allwait/exactabsent。同prefix/visit/Actionはowner比較、教師truth/棋力は認定0。
+有効joint/s13.6477→13.8613(1.565%近接)、Bmean6.177→7.904。大B単独の利益採用は未定。222の比較順提案を科学前に採用してthirdbaseline確認を旧caps内へ実配分済み、現quiet247<330で開始をせず自然ownedNone後freshadmitする。第三成功gate0/成功補充0。候補実効Bは最大24へ上げても平均8未満で、確認後は残queue/輸送/activepool等を費用で次判断する。
+今回密度は32.375適格row/gameなので49-50仮定の14/28行/sを固定せず、jobだけ1000局39.54/38.93分。初期60分の短benchmark外挿はあるが、資格export/pack/必要記録保存の費はpendingで全工程達成/実1000完了とは別。K64速度基準をK800同等品質にしない。単純幅/LR/新test診断追加0、実装/測定へ進んだ結果から計画更新を継続。新運用loaded実確認と意味点検unknownを区別。
+保存currentplan/goal/source参照/221実測compact/新採択target/222採否必要bytesとbackup完了。詳細 docs/reports/ai-sigma-coordinator-current-priorities.md / frame16-coordinator/221-twojob-observed-uncertain-gain.json。追加root確認は不要、次はthirdと独立必要統計、増量所要費の実用判断。

@@ -1,0 +1,45 @@
+{
+  "script_SHA256": {
+    "main": "8ecf0b1181ef848b2a85b4b1a0dd47ad1a84ebe139761d8d2148882b76c78b8b",
+    "worker": "a529af8a552baaaf4f643a96cbe7ad3ba256443cf2a8aea216220d70fcb84bab",
+    "producer": "31c2684547c9b6e16aa27163ead080cf20bbede284e4a1b77dc3436764422a09",
+    "checkpoint": "494581d5ce5fc38e7afb753d9ca92e0f49bb71ed516762b7ea48a0c6d89e1119",
+    "cache": "a547e67cc4cfa6cfce8b40234381b48c9126a7accbee8e121351d822d8cbf8ac",
+    "reference": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05"
+  },
+  "private_builds": {
+    "baseline": "1f54d0b8f0c6d3d7d51935886ed506e44376a2052506be62ca7a726c85a78a01",
+    "trace": "6f050a754c512b0a160f519ac8924f0c9d887d9860121386536a076d44fa0b3d"
+  },
+  "necessary_readonly": {
+    "research-data/ai-sigma/130-deep-discrimination/handoff-summary.json": "f263e13068571d4a30fb653276f622dad377ffeffcd04e3c0c240a80c2cfd772",
+    "research-data/ai-sigma/129-tactical-evaluation/runtime-source-stopped-before-report.json": "343f6ce4e3c05d319222edb78a32eb9b7edf63aebbe5480f662be2964a8f21ad",
+    "models/experiments/ai-sigma/reference/sigma-pcr250/best.onnx": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+    ".artifacts/ai-sigma/runs/SIGMA-ORT-SEARCH/final.wasm": "1f54d0b8f0c6d3d7d51935886ed506e44376a2052506be62ca7a726c85a78a01"
+  },
+  "own_source_after": {
+    "tools/ai-sigma-deep-node-comparison/instrument.py": "2fac9aa1ee541ba19f5b5ff107c1798a1b0f6945b43fb2cb4a7a54832c4bdb8d",
+    "tools/ai-sigma-deep-node-comparison/diagnose.cjs": "c29519db4c0f7d54dc595992a68d00da940dda08fd3a23afd1abe27558f55c99",
+    "tools/ai-sigma-deep-node-comparison/setup.py": "b8fcfc81b6aa2fb3eb248e8fccea57db3fc026ff5ba56be5af87209e7c1fcb5f",
+    "tools/ai-sigma-deep-node-comparison/runner.py": "ca56d04d7f0e3e06fef60b9a89e6d52a319682047850223a3fe3667b7f508a52",
+    "tools/ai-sigma-deep-node-comparison/mock.cjs": "404e510713034d3cea73ccdd5551c657fded92e8d512aa610f74e66c3a18069d",
+    "tools/ai-sigma-deep-node-comparison/admission.py": "950b64bdea973c737a90b138bb15a4d6d8d5af5d177ef41b214e180694525993",
+    "tools/ai-sigma-deep-node-comparison/deep-input.js": "c66a60f6545a8973a7ffac7d85fd2d125fde73872145a3a660fcae18078ad155",
+    "tools/ai-sigma-deep-node-comparison/browser.cjs": "884156a1fe680e4f1638297e902d2bfac54de205ee170ad45e7e7694bccbf51c",
+    "tools/ai-sigma-deep-node-comparison/commit-own.sh": "669ba9a5e6a415bec0ec4528845c324c8ccdb28914b6886963943d10eee71df8",
+    "tools/ai-sigma-deep-node-comparison/deep-main.js": "f761f3c9c7e81fa2a8413c1be37061a6f2f320362d26edcab658d409e5d08055",
+    "tools/ai-sigma-deep-node-comparison/adapters.cjs": "0ae4b09cc5a55f04609bdf6f4c612deb3e10cf94b74922e7715bd086f7ca8b19",
+    "tools/ai-sigma-deep-node-comparison/deep-worker.js": "a529af8a552baaaf4f643a96cbe7ad3ba256443cf2a8aea216220d70fcb84bab",
+    "tools/ai-sigma-deep-node-comparison/build.py": "919a86da8efccd45b9b6e0b4edd7274905c93891f84157b9b54fef044d2db0f7",
+    "tools/ai-sigma-deep-node-comparison/trace/Cargo.toml": "57e3173114c234ff39b0dd976e913fa142358d8f0eb426ec87e61668344bcade",
+    "tools/ai-sigma-deep-node-comparison/trace/Cargo.lock": "d0568a38ed13c537c3ab96abe3a0585e82258da1a3a5e64ee4ab18df07211b24",
+    "tools/ai-sigma-deep-node-comparison/trace/src/kernel.rs": "65a7a27738a226a8fee552bf2f4dc906ddb27787a46a8598f488e8191251aaae",
+    "tools/ai-sigma-deep-node-comparison/trace/src/research.rs": "3b1340552a98e520068ac5c9e8f2fffaffc0831bf6eb0142f9cf9a059af5cf4a",
+    "tools/ai-sigma-deep-node-comparison/trace/src/lib.rs": "9fd7857a04c93a08f5e3efcb027872ad24eac84cdc70dc016fabc5baf9cdc5df",
+    "tools/ai-sigma-deep-node-comparison/baseline/Cargo.toml": "57e3173114c234ff39b0dd976e913fa142358d8f0eb426ec87e61668344bcade",
+    "tools/ai-sigma-deep-node-comparison/baseline/Cargo.lock": "d0568a38ed13c537c3ab96abe3a0585e82258da1a3a5e64ee4ab18df07211b24",
+    "tools/ai-sigma-deep-node-comparison/baseline/src/kernel.rs": "7d6873a7cab441bfe1bcf291e752da5cacfbe54bf55e5568d3112c930366c2cb",
+    "tools/ai-sigma-deep-node-comparison/baseline/src/research.rs": "3b1340552a98e520068ac5c9e8f2fffaffc0831bf6eb0142f9cf9a059af5cf4a",
+    "tools/ai-sigma-deep-node-comparison/baseline/src/lib.rs": "9fad536fcaaafb858bb588621a421fa71a62fe7339c97cdf13fbdea06aad6c44"
+  }
+}

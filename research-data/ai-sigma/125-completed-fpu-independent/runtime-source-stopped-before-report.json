@@ -1,0 +1,104 @@
+{
+  "UTC": "2026-10-02T13:26:21.813639+00:00",
+  "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+  "actual_NN_ended_by": "2026-10-02T13:16:26.236121+00:00",
+  "own_identities": 112,
+  "own_identity_current": [],
+  "original_subset_identities": 163,
+  "original_subset_current": [],
+  "original_before_union139_current0": "input-before.json",
+  "jobs": [
+    {
+      "name": "p125-count-r1",
+      "phase": "count",
+      "start": "2026-10-02T13:16:05.939781+00:00",
+      "end": "2026-10-02T13:16:26.236121+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "peak_group_plus_runner_RSS": 1565765632,
+      "peak_allocated_bytes": 3428352
+    },
+    {
+      "name": "p125-closure",
+      "phase": "protocol",
+      "start": "2026-10-02T13:25:54.987701+00:00",
+      "end": "2026-10-02T13:25:55.174856+00:00",
+      "exit": 1,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "peak_group_plus_runner_RSS": 48517120,
+      "peak_allocated_bytes": 2875392
+    },
+    {
+      "name": "p125-source-audit",
+      "phase": "protocol",
+      "start": "2026-10-02T13:24:52.046517+00:00",
+      "end": "2026-10-02T13:24:52.509474+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "peak_group_plus_runner_RSS": 75677696,
+      "peak_allocated_bytes": 2547712
+    },
+    {
+      "name": "p125-match-nn0",
+      "phase": "count",
+      "start": "2026-10-02T13:20:05.909999+00:00",
+      "end": "2026-10-02T13:20:13.491379+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "peak_group_plus_runner_RSS": 1164353536,
+      "peak_allocated_bytes": 3751936
+    }
+  ],
+  "Modeldrop": {
+    "players": [
+      {
+        "kind": "dropped",
+        "handles": 0,
+        "activeNN": 0,
+        "at_ms": 1790946984698.0652,
+        "producer_post_begin_ms": 1790946984698.07,
+        "worker_engine": "candidate"
+      },
+      {
+        "kind": "dropped",
+        "handles": 0,
+        "activeNN": 0,
+        "at_ms": 1790946984699.3901,
+        "producer_post_begin_ms": 1790946984699.395,
+        "worker_engine": "reference"
+      }
+    ],
+    "handles": 0,
+    "activeNN": 0
+  },
+  "main_timers": {
+    "main_timers": 0,
+    "pending_messages": []
+  },
+  "inner_controlled": "runs/p125-count-r1/controlled-stop.json",
+  "outer_wait": "runs/p125-count-r1.process.json",
+  "monitor_callback": "runs/p125-count-r1/pause-monitor-stop.json",
+  "source_SHA256": {
+    "tools/ai-sigma-completed-fpu-independent/diagnose.cjs": "ff5fa3c78942395754c7e3a2faab97fa58b30853421160214b74c81f7cd98286",
+    "tools/ai-sigma-completed-fpu-independent/closure.py": "679fa69be29519e153b10de339fe37f04c1baed78d523c8c709438a8f97ea844",
+    "tools/ai-sigma-completed-fpu-independent/runner.py": "80ad6c51a45972592de719eb32a552d45e36cd5f6a3a4b107d6381a1e261662f",
+    "tools/ai-sigma-completed-fpu-independent/checker.js": "0d651b58055362c8d9699602ea4a57a3b2ab5aca7d5bf50c32d4a8a9bf80dd8f",
+    "tools/ai-sigma-completed-fpu-independent/browser.cjs": "d6cb3b08b8e9853dad955de6ac2f7829573fca0dea16b67accd50773849d9780",
+    "tools/ai-sigma-completed-fpu-independent/numeric.js": "5edc039dca6f58df36d225019227d991fb2661832dc994a5a9abda18420c91dc",
+    "tools/ai-sigma-completed-fpu-independent/adapters.cjs": "9b6e2298cb7abeab8470c8261fdc74bf9991b656ce57b4c533a3e8d7646cca3e",
+    "tools/ai-sigma-completed-fpu-independent/source-audit.cjs": "69af15c23be4244cacb0de1427e8ab433349508d194e4627955ccd1afff7858b",
+    "tools/ai-sigma-completed-fpu-independent/match.js": "5cc1f4c0b75212b9491904ccfce9e15018bc9a46692d29c40ce337a2ae129777"
+  },
+  "source_and_heavy_write_stopped": true,
+  "forced_not_natural_all_period_proof": true,
+  "new_game": 0,
+  "actual_go": false
+}

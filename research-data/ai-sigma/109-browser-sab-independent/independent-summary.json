@@ -1,0 +1,758 @@
+{
+  "issue": "quoridor-4lc.109",
+  "UTC": "2026-10-02T07:32:05.599460+00:00",
+  "decision": "finite_browser_SAB_support; formal_fairness_NI_actual_go_not_certified",
+  "actual_go": false,
+  "source_Git": "ec4e92d68b4b4aabd7d45ae6cf8cb1234abae82b",
+  "data_Git": "181ea3932d270a9f0e69145b57577b411ecbab62",
+  "own_initial_source_Git": "979afe3",
+  "upstream_needed_member_checks": 24,
+  "fixed": {
+    "frame7-handoff.json": {
+      "sha256": "8317f94ff8a9e10781dacad87395eaa2356b989c77fdecd321143e5c5f0af3f9",
+      "bytes": 2958
+    },
+    "frame7-runtime-source-stopped-before-report.json": {
+      "sha256": "f36887d66fedba9bc8b1016427670ad5c3995cda4e19501d4dbbb4a7ad2a5887",
+      "bytes": 3762
+    }
+  },
+  "saved_browser_adjudication": {
+    "runs": [
+      {
+        "run": "frame7-functional-r1",
+        "counts": {
+          "public": 7,
+          "normal": 6,
+          "cancel": 1,
+          "late": 0,
+          "NN": 77,
+          "ACKover500": 0,
+          "Worker_stop": {
+            "upper_le_D": 0,
+            "lower_gt_D": 0,
+            "straddles_D": 0,
+            "missing": 7
+          },
+          "API_after402_definite": 0,
+          "API_after402_possible": 0,
+          "API_after_public_definite": 0,
+          "API_after_public_possible": 0
+        },
+        "games": [],
+        "late_markers": [],
+        "Worker_stop_exceeds_or_straddles": [],
+        "clock_end_measured": false,
+        "source_shared_RuleA_logic_independence_limit": true
+      },
+      {
+        "run": "frame7-initial-pair-r1",
+        "counts": {
+          "public": 134,
+          "normal": 134,
+          "cancel": 0,
+          "late": 0,
+          "NN": 598,
+          "ACKover500": 4,
+          "Worker_stop": {
+            "upper_le_D": 130,
+            "lower_gt_D": 4,
+            "straddles_D": 0,
+            "missing": 0
+          },
+          "API_after402_definite": 0,
+          "API_after402_possible": 0,
+          "API_after_public_definite": 0,
+          "API_after_public_possible": 0
+        },
+        "games": [
+          {
+            "game": "initial-candidate-color1",
+            "color": 1,
+            "legal_publics": 66,
+            "winner": 2,
+            "score": 0,
+            "prefixSHA": "3148deedee5afa29ae2dcc2808fe02e4254e9b0e6a4e0dd8adb2f120901fd922"
+          },
+          {
+            "game": "initial-candidate-color2",
+            "color": 2,
+            "legal_publics": 68,
+            "winner": 2,
+            "score": 1,
+            "prefixSHA": "0be7a5ece570c788bf2046b0d2691f5aee81f0c5ed5c9a0971796cf6cfdd164f"
+          }
+        ],
+        "late_markers": [
+          {
+            "request": "frame7-initial-pair-r1-31",
+            "timer_late_ms": 27.014892578125,
+            "adoption_elapsed": 438.06494140625,
+            "ACKwall": 437.969970703125,
+            "adopted_sequence": 3
+          },
+          {
+            "request": "frame7-initial-pair-r1-54",
+            "timer_late_ms": 12.16015625,
+            "adoption_elapsed": 423.239990234375,
+            "ACKwall": 423.114990234375,
+            "adopted_sequence": 3
+          },
+          {
+            "request": "frame7-initial-pair-r1-60",
+            "timer_late_ms": 36.6650390625,
+            "adoption_elapsed": 447.739990234375,
+            "ACKwall": 447.614990234375,
+            "adopted_sequence": 4
+          },
+          {
+            "request": "frame7-initial-pair-r1-61",
+            "timer_late_ms": 42.51513671875,
+            "adoption_elapsed": 453.590087890625,
+            "ACKwall": 453.47509765625,
+            "adopted_sequence": 2
+          },
+          {
+            "request": "frame7-initial-pair-r1-77",
+            "timer_late_ms": 10.155029296875,
+            "adoption_elapsed": 421.22998046875,
+            "ACKwall": 421.10009765625,
+            "adopted_sequence": 4
+          },
+          {
+            "request": "frame7-initial-pair-r1-80",
+            "timer_late_ms": 22.240234375,
+            "adoption_elapsed": 433.2900390625,
+            "ACKwall": 433.190185546875,
+            "adopted_sequence": 3
+          },
+          {
+            "request": "frame7-initial-pair-r1-98",
+            "timer_late_ms": 10.875,
+            "adoption_elapsed": 421.97998046875,
+            "ACKwall": 454.590087890625,
+            "adopted_sequence": 3
+          },
+          {
+            "request": "frame7-initial-pair-r1-104",
+            "timer_late_ms": 16.639892578125,
+            "adoption_elapsed": 427.68994140625,
+            "ACKwall": 427.58984375,
+            "adopted_sequence": 2
+          },
+          {
+            "request": "frame7-initial-pair-r1-112",
+            "timer_late_ms": 10.925048828125,
+            "adoption_elapsed": 421.974853515625,
+            "ACKwall": 421.875,
+            "adopted_sequence": 2
+          },
+          {
+            "request": "frame7-initial-pair-r1-121",
+            "timer_late_ms": 16.10498046875,
+            "adoption_elapsed": 427.169921875,
+            "ACKwall": 427.050048828125,
+            "adopted_sequence": 4
+          },
+          {
+            "request": "frame7-initial-pair-r1-126",
+            "timer_late_ms": 25.130126953125,
+            "adoption_elapsed": 436.2099609375,
+            "ACKwall": 436.080078125,
+            "adopted_sequence": 2
+          }
+        ],
+        "Worker_stop_exceeds_or_straddles": [
+          {
+            "request": "frame7-initial-pair-r1-9",
+            "engine": "candidate",
+            "WorkerLower": 500.25,
+            "WorkerUpper": 500.47509765625,
+            "ACKwall": 500.47998046875
+          },
+          {
+            "request": "frame7-initial-pair-r1-11",
+            "engine": "candidate",
+            "WorkerLower": 512.150146484375,
+            "WorkerUpper": 512.375244140625,
+            "ACKwall": 512.480224609375
+          },
+          {
+            "request": "frame7-initial-pair-r1-29",
+            "engine": "candidate",
+            "WorkerLower": 507.829833984375,
+            "WorkerUpper": 508.054931640625,
+            "ACKwall": 508.074951171875
+          },
+          {
+            "request": "frame7-initial-pair-r1-114",
+            "engine": "candidate",
+            "WorkerLower": 516.635009765625,
+            "WorkerUpper": 516.860107421875,
+            "ACKwall": 516.880126953125
+          }
+        ],
+        "clock_end_measured": false,
+        "source_shared_RuleA_logic_independence_limit": true
+      },
+      {
+        "run": "frame7-asym-pair-r1",
+        "counts": {
+          "public": 162,
+          "normal": 162,
+          "cancel": 0,
+          "late": 0,
+          "NN": 665,
+          "ACKover500": 6,
+          "Worker_stop": {
+            "upper_le_D": 156,
+            "lower_gt_D": 5,
+            "straddles_D": 1,
+            "missing": 0
+          },
+          "API_after402_definite": 0,
+          "API_after402_possible": 0,
+          "API_after_public_definite": 0,
+          "API_after_public_possible": 0
+        },
+        "games": [
+          {
+            "game": "asym-candidate-color1",
+            "color": 1,
+            "legal_publics": 73,
+            "winner": 2,
+            "score": 0,
+            "prefixSHA": "8f839a1f9d72633d3a654d9a0e451cf966ef545dc592f151f206edf62b9766b4"
+          },
+          {
+            "game": "asym-candidate-color2",
+            "color": 2,
+            "legal_publics": 89,
+            "winner": 2,
+            "score": 1,
+            "prefixSHA": "489c13329b87551d68bdc58e5f1ac07f8e1905387acd18111ce5d16519fde18e"
+          }
+        ],
+        "late_markers": [
+          {
+            "request": "frame7-asym-pair-r1-1",
+            "timer_late_ms": 11.2900390625,
+            "adoption_elapsed": 422.419921875,
+            "ACKwall": 456.989990234375,
+            "adopted_sequence": 3
+          },
+          {
+            "request": "frame7-asym-pair-r1-75",
+            "timer_late_ms": 16.06494140625,
+            "adoption_elapsed": 427.119873046875,
+            "ACKwall": 427.02001953125,
+            "adopted_sequence": 4
+          },
+          {
+            "request": "frame7-asym-pair-r1-111",
+            "timer_late_ms": 27.199951171875,
+            "adoption_elapsed": 438.269775390625,
+            "ACKwall": 438.159912109375,
+            "adopted_sequence": 4
+          },
+          {
+            "request": "frame7-asym-pair-r1-121",
+            "timer_late_ms": 15.72998046875,
+            "adoption_elapsed": 426.794921875,
+            "ACKwall": 426.679931640625,
+            "adopted_sequence": 3
+          },
+          {
+            "request": "frame7-asym-pair-r1-137",
+            "timer_late_ms": 22.070068359375,
+            "adoption_elapsed": 433.135009765625,
+            "ACKwall": 433.025146484375,
+            "adopted_sequence": 4
+          }
+        ],
+        "Worker_stop_exceeds_or_straddles": [
+          {
+            "request": "frame7-asym-pair-r1-8",
+            "engine": "candidate",
+            "WorkerLower": 505.69970703125,
+            "WorkerUpper": 505.919921875,
+            "ACKwall": 505.949951171875
+          },
+          {
+            "request": "frame7-asym-pair-r1-18",
+            "engine": "candidate",
+            "WorkerLower": 499.81982421875,
+            "WorkerUpper": 500.0400390625,
+            "ACKwall": 500.059814453125
+          },
+          {
+            "request": "frame7-asym-pair-r1-22",
+            "engine": "candidate",
+            "WorkerLower": 503.789794921875,
+            "WorkerUpper": 504.010009765625,
+            "ACKwall": 504.02001953125
+          },
+          {
+            "request": "frame7-asym-pair-r1-102",
+            "engine": "candidate",
+            "WorkerLower": 517.77978515625,
+            "WorkerUpper": 518,
+            "ACKwall": 518.050048828125
+          },
+          {
+            "request": "frame7-asym-pair-r1-113",
+            "engine": "reference",
+            "WorkerLower": 504.744873046875,
+            "WorkerUpper": 504.965087890625,
+            "ACKwall": 504.989990234375
+          },
+          {
+            "request": "frame7-asym-pair-r1-156",
+            "engine": "candidate",
+            "WorkerLower": 503.289794921875,
+            "WorkerUpper": 503.510009765625,
+            "ACKwall": 503.69482421875
+          }
+        ],
+        "clock_end_measured": false,
+        "source_shared_RuleA_logic_independence_limit": true
+      }
+    ],
+    "games": 4,
+    "W": 2,
+    "D": 0,
+    "L": 2,
+    "numeric_samples": [
+      {
+        "request": "frame7-functional-r1-1",
+        "engine": "candidate",
+        "P2": false,
+        "cancelled": false,
+        "features": 648,
+        "NN": 137,
+        "priors": 131,
+        "maxNN": 2.384185791015625e-06,
+        "maxPrior": 1.620060892992825e-06,
+        "fixed_reference": true,
+        "valueMeaning": "rootNN"
+      },
+      {
+        "request": "frame7-functional-r1-2",
+        "engine": "reference",
+        "P2": false,
+        "cancelled": false,
+        "features": 648,
+        "NN": 137,
+        "priors": 131,
+        "maxNN": 2.384185791015625e-06,
+        "maxPrior": 0,
+        "fixed_reference": true,
+        "valueMeaning": "rootQ"
+      },
+      {
+        "request": "frame7-functional-r1-3",
+        "engine": "candidate",
+        "P2": false,
+        "cancelled": true,
+        "features": 648,
+        "NN": 137,
+        "priors": 131,
+        "maxNN": 2.384185791015625e-06,
+        "maxPrior": 1.620060892992825e-06,
+        "fixed_reference": true,
+        "valueMeaning": "rootNN"
+      },
+      {
+        "request": "frame7-functional-r1-4",
+        "engine": "candidate",
+        "P2": false,
+        "cancelled": false,
+        "features": 648,
+        "NN": 137,
+        "priors": 131,
+        "maxNN": 2.384185791015625e-06,
+        "maxPrior": 1.620060892992825e-06,
+        "fixed_reference": true,
+        "valueMeaning": "rootNN"
+      },
+      {
+        "request": "frame7-functional-r1-5",
+        "engine": "reference",
+        "P2": true,
+        "cancelled": false,
+        "features": 648,
+        "NN": 137,
+        "priors": 131,
+        "maxNN": 2.1457672119140625e-06,
+        "maxPrior": 0,
+        "fixed_reference": true,
+        "valueMeaning": "rootQ"
+      },
+      {
+        "request": "frame7-functional-r1-6",
+        "engine": "candidate",
+        "P2": false,
+        "cancelled": false,
+        "features": 648,
+        "NN": 137,
+        "priors": 132,
+        "maxNN": null,
+        "maxPrior": 1.3433341491397854e-06,
+        "fixed_reference": false,
+        "valueMeaning": "rootNN"
+      },
+      {
+        "request": "frame7-functional-r1-7",
+        "engine": "reference",
+        "P2": true,
+        "cancelled": false,
+        "features": 648,
+        "NN": 137,
+        "priors": 132,
+        "maxNN": null,
+        "maxPrior": 0,
+        "fixed_reference": false,
+        "valueMeaning": "rootQ"
+      },
+      {
+        "request": "frame7-initial-pair-r1-1",
+        "engine": "candidate",
+        "P2": false,
+        "cancelled": false,
+        "features": 648,
+        "NN": 137,
+        "priors": 131,
+        "maxNN": 2.384185791015625e-06,
+        "maxPrior": 1.620060892992825e-06,
+        "fixed_reference": true,
+        "valueMeaning": "rootNN"
+      },
+      {
+        "request": "frame7-initial-pair-r1-2",
+        "engine": "reference",
+        "P2": true,
+        "cancelled": false,
+        "features": 648,
+        "NN": 137,
+        "priors": 131,
+        "maxNN": 2.1457672119140625e-06,
+        "maxPrior": 0,
+        "fixed_reference": true,
+        "valueMeaning": "rootQ"
+      },
+      {
+        "request": "frame7-initial-pair-r1-67",
+        "engine": "reference",
+        "P2": false,
+        "cancelled": false,
+        "features": 648,
+        "NN": 137,
+        "priors": 131,
+        "maxNN": 2.384185791015625e-06,
+        "maxPrior": 0,
+        "fixed_reference": true,
+        "valueMeaning": "rootQ"
+      },
+      {
+        "request": "frame7-initial-pair-r1-68",
+        "engine": "candidate",
+        "P2": true,
+        "cancelled": false,
+        "features": 648,
+        "NN": 137,
+        "priors": 131,
+        "maxNN": 2.1457672119140625e-06,
+        "maxPrior": 8.573847407600255e-07,
+        "fixed_reference": true,
+        "valueMeaning": "rootNN"
+      },
+      {
+        "request": "frame7-asym-pair-r1-1",
+        "engine": "reference",
+        "P2": true,
+        "cancelled": false,
+        "features": 648,
+        "NN": 137,
+        "priors": 123,
+        "maxNN": 3.5762786865234375e-06,
+        "maxPrior": 0,
+        "fixed_reference": true,
+        "valueMeaning": "rootQ"
+      },
+      {
+        "request": "frame7-asym-pair-r1-2",
+        "engine": "candidate",
+        "P2": false,
+        "cancelled": false,
+        "features": 648,
+        "NN": 137,
+        "priors": 124,
+        "maxNN": null,
+        "maxPrior": 9.443712710721641e-07,
+        "fixed_reference": false,
+        "valueMeaning": "rootNN"
+      },
+      {
+        "request": "frame7-asym-pair-r1-74",
+        "engine": "candidate",
+        "P2": true,
+        "cancelled": false,
+        "features": 648,
+        "NN": 137,
+        "priors": 123,
+        "maxNN": 3.5762786865234375e-06,
+        "maxPrior": 4.471692105489922e-08,
+        "fixed_reference": true,
+        "valueMeaning": "rootNN"
+      },
+      {
+        "request": "frame7-asym-pair-r1-75",
+        "engine": "reference",
+        "P2": false,
+        "cancelled": false,
+        "features": 648,
+        "NN": 137,
+        "priors": 124,
+        "maxNN": null,
+        "maxPrior": 0,
+        "fixed_reference": false,
+        "valueMeaning": "rootQ"
+      }
+    ],
+    "browser_executed": true,
+    "Node_adjudication": false,
+    "saved_original_only": true
+  },
+  "independent_browser_adjudication": {
+    "runs": [
+      {
+        "run": "109-functional-r3",
+        "counts": {
+          "public": 7,
+          "normal": 6,
+          "cancel": 1,
+          "late": 0,
+          "NN": 70,
+          "ACKover500": 0,
+          "Worker_stop": {
+            "upper_le_D": 7,
+            "lower_gt_D": 0,
+            "straddles_D": 0,
+            "missing": 0
+          },
+          "API_after402_definite": 0,
+          "API_after402_possible": 0,
+          "API_after_public_definite": 0,
+          "API_after_public_possible": 0
+        },
+        "games": [],
+        "late_markers": [],
+        "Worker_stop_exceeds_or_straddles": [],
+        "clock_end_measured": false,
+        "source_shared_RuleA_logic_independence_limit": true
+      }
+    ],
+    "games": 0,
+    "W": 0,
+    "D": 0,
+    "L": 0,
+    "numeric_samples": [
+      {
+        "request": "109-functional-r3-1",
+        "engine": "candidate",
+        "P2": false,
+        "cancelled": false,
+        "features": 648,
+        "NN": 137,
+        "priors": 131,
+        "maxNN": 2.384185791015625e-06,
+        "maxPrior": 1.620060892992825e-06,
+        "fixed_reference": true,
+        "valueMeaning": "rootNN"
+      },
+      {
+        "request": "109-functional-r3-2",
+        "engine": "reference",
+        "P2": false,
+        "cancelled": false,
+        "features": 648,
+        "NN": 137,
+        "priors": 131,
+        "maxNN": 2.384185791015625e-06,
+        "maxPrior": 0,
+        "fixed_reference": true,
+        "valueMeaning": "rootQ"
+      },
+      {
+        "request": "109-functional-r3-3",
+        "engine": "candidate",
+        "P2": false,
+        "cancelled": true,
+        "features": 648,
+        "NN": 137,
+        "priors": 131,
+        "maxNN": 2.384185791015625e-06,
+        "maxPrior": 1.620060892992825e-06,
+        "fixed_reference": true,
+        "valueMeaning": "rootNN"
+      },
+      {
+        "request": "109-functional-r3-4",
+        "engine": "candidate",
+        "P2": false,
+        "cancelled": false,
+        "features": 648,
+        "NN": 137,
+        "priors": 131,
+        "maxNN": 2.384185791015625e-06,
+        "maxPrior": 1.620060892992825e-06,
+        "fixed_reference": true,
+        "valueMeaning": "rootNN"
+      },
+      {
+        "request": "109-functional-r3-5",
+        "engine": "reference",
+        "P2": true,
+        "cancelled": false,
+        "features": 648,
+        "NN": 137,
+        "priors": 131,
+        "maxNN": 2.1457672119140625e-06,
+        "maxPrior": 0,
+        "fixed_reference": true,
+        "valueMeaning": "rootQ"
+      },
+      {
+        "request": "109-functional-r3-6",
+        "engine": "candidate",
+        "P2": false,
+        "cancelled": false,
+        "features": 648,
+        "NN": 137,
+        "priors": 132,
+        "maxNN": null,
+        "maxPrior": 1.3433341491397854e-06,
+        "fixed_reference": false,
+        "valueMeaning": "rootNN"
+      },
+      {
+        "request": "109-functional-r3-7",
+        "engine": "reference",
+        "P2": true,
+        "cancelled": false,
+        "features": 648,
+        "NN": 137,
+        "priors": 132,
+        "maxNN": null,
+        "maxPrior": 0,
+        "fixed_reference": false,
+        "valueMeaning": "rootQ"
+      }
+    ],
+    "browser_executed": true,
+    "Node_adjudication": false,
+    "saved_original_only": true
+  },
+  "own_attempts": [
+    {
+      "name": "109-functional-r1",
+      "start": "2026-10-02T07:14:48.999622+00:00",
+      "end": "2026-10-02T07:14:59.164252+00:00",
+      "exit": -6,
+      "remaining": [],
+      "RSSpeak": 1161367552,
+      "storagepeak": 5722112,
+      "all_observed_TIDs_CPU2": true,
+      "public": 0,
+      "planned_but_unexecuted": 7,
+      "preNN_failure": "Node_heap_OOM"
+    },
+    {
+      "name": "109-functional-r2",
+      "start": "2026-10-02T07:16:22.930683+00:00",
+      "end": "2026-10-02T07:16:29.775353+00:00",
+      "exit": 1,
+      "remaining": [],
+      "RSSpeak": 1211166720,
+      "storagepeak": 7139328,
+      "all_observed_TIDs_CPU2": true,
+      "public": 0,
+      "planned_but_unexecuted": 7,
+      "preNN_failure": "checker_ACK_order_assumption"
+    },
+    {
+      "name": "109-functional-r3",
+      "start": "2026-10-02T07:17:40.166658+00:00",
+      "end": "2026-10-02T07:17:57.664017+00:00",
+      "exit": 0,
+      "remaining": [],
+      "RSSpeak": 1531985920,
+      "storagepeak": 8699904,
+      "all_observed_TIDs_CPU2": true,
+      "public": 7,
+      "planned_but_unexecuted": 0,
+      "preNN_failure": null
+    }
+  ],
+  "heavy_jobwall_seconds": 34.506659,
+  "model_startup_NN": 6,
+  "actual_new_public_requests": 7,
+  "new_game_starts": 0,
+  "holdout_sends": 0,
+  "runtime_public_max_ms": 413.844970703125,
+  "runtime_ACKwall_max_ms": 445.94482421875,
+  "own_start_end_clock_interval_intersection": [
+    -0.109765625,
+    0.1
+  ],
+  "own_end_clock_not_applied_to_original": true,
+  "Node_adjudication": false,
+  "RuleA_common_logic_independence_limit": true,
+  "design_limits": [
+    "Original Worker stop lower>D:9; straddles:1 despite 296 timely legal publications. Publication and cause CPU budget are separate.",
+    "Original clock only starts; end drift missing; API await is not kernel instruction timing; no hard realtime guarantee.",
+    "SAB is trusted per-request Worker with out-of-band key/legal/model identity; not arbitrary malicious shared-memory provenance proof.",
+    "SAB FAULT override may supersede browser_late classification if simultaneous; precedence not exercised by these runs.",
+    "Stamp follows Judge and necessary UTF8; freezing, cancel dispatch, private JSON serialization and continuation happen later; not a measured OS delivery guarantee.",
+    "No general deep/rawview/entropy/training overlap or true legal200/no-legal proof."
+  ],
+  "cleanup": {
+    "drop": {
+      "kind": "dropped",
+      "handles": 0,
+      "activeNN": 0,
+      "at_ms": 1790925477236.09,
+      "producer_post_begin_ms": 1790925477236.095
+    },
+    "timers": {
+      "main_timers": 0,
+      "pending_messages": []
+    },
+    "monitor_callback_stop": {
+      "UTC": "2026-10-02T07:17:57.542Z",
+      "state": "BEADS_READ_ERROR",
+      "failure": {
+        "code": "BEADS_READ_ERROR",
+        "cause": {
+          "name": "Error",
+          "message": "Command failed: bash /workspaces/quoridor/.worktree/ai-sigma/scripts/dev/beads.sh show quoridor-4lc --json\nwarning: workspace gate acquisition failed, continuing ungated: workspacegate: acquiring /workspaces/quoridor/.worktree/.beads-state.gate.lock: context canceled\nError: failed to open database: embeddeddolt: init schema: embeddeddolt: open db: context canceled\n",
+          "code": null,
+          "signal": "SIGTERM",
+          "killed": false
+        }
+      },
+      "deadlineUTC": "2026-10-02T07:49:00Z",
+      "subjectIssue": "quoridor-4lc.109",
+      "pending_children": [],
+      "clock_cost_not_subtracted": true,
+      "all_owned_read_callbacks_waited": true,
+      "signal_unknown": 0,
+      "active_monitor_timer": false
+    },
+    "controlled_forced": true,
+    "outer_remaining": [],
+    "current_identity_evidence_separate_from_historical_wait": true
+  },
+  "old_failures_preserved": true,
+  "resources_limit": "40ms sampling misses instant peaks; no global idle/full CPU/whole retention proof"
+}

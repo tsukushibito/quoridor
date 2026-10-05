@@ -1,0 +1,412 @@
+{
+  "contexts": [
+    {
+      "case": "own-near-goal",
+      "key": "4,7|1,8|0||",
+      "player": 1,
+      "legal": 132,
+      "acceptable": 1
+    },
+    {
+      "case": "opponent-threat",
+      "key": "1,0|4,1|0||",
+      "player": 1,
+      "legal": 131,
+      "acceptable": 2
+    },
+    {
+      "case": "both-near",
+      "key": "3,7|5,1|0||",
+      "player": 1,
+      "legal": 132,
+      "acceptable": 1
+    },
+    {
+      "case": "wall-protected-threat",
+      "key": "1,0|4,1|0|0,6;3,0|",
+      "player": 1,
+      "legal": 124,
+      "acceptable": 124
+    }
+  ],
+  "rows": [
+    {
+      "request": "tactical129-measure-r1-1",
+      "case": "own-near-goal",
+      "condition": "A",
+      "engine": "candidate",
+      "action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "Action209": 76,
+      "label_pass_independent": true,
+      "immediate_goal": true,
+      "backup": 48,
+      "CP_NN": 4,
+      "terminal_noNN": 44,
+      "hand_NN": 4,
+      "privateError": null,
+      "explicit_discard": 0,
+      "sequence": 48,
+      "public_ms": 411.284912109375,
+      "timer_vs_plan_ms": 0.159912109375,
+      "stamp_vs_plan_ms": 0.284912109375,
+      "stopUpper_ms": 407.070068359375,
+      "ACKwall_ms": 407.039794921875,
+      "post_public_newNN_definite": 0,
+      "rootN_origin": "candidate source convention; true node/parentQ unobserved"
+    },
+    {
+      "request": "tactical129-measure-r1-2",
+      "case": "own-near-goal",
+      "condition": "B",
+      "engine": "reference",
+      "action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "Action209": 76,
+      "label_pass_independent": true,
+      "immediate_goal": true,
+      "backup": 62,
+      "CP_NN": 4,
+      "terminal_noNN": 58,
+      "hand_NN": 5,
+      "privateError": "STALE_GENERATION",
+      "explicit_discard": 0,
+      "sequence": 62,
+      "public_ms": 413.64013671875,
+      "timer_vs_plan_ms": 2.550048828125,
+      "stamp_vs_plan_ms": 2.64013671875,
+      "stopUpper_ms": 428.76513671875,
+      "ACKwall_ms": 428.780029296875,
+      "post_public_newNN_definite": 0,
+      "rootN_origin": "raw reference"
+    },
+    {
+      "request": "tactical129-measure-r1-3",
+      "case": "opponent-threat",
+      "condition": "B",
+      "engine": "reference",
+      "action": {
+        "type": "wall",
+        "x": 3,
+        "y": 0,
+        "orientation": "h"
+      },
+      "Action209": 84,
+      "label_pass_independent": true,
+      "immediate_goal": false,
+      "backup": 10,
+      "CP_NN": 10,
+      "terminal_noNN": 0,
+      "hand_NN": 11,
+      "privateError": "STALE_GENERATION",
+      "explicit_discard": 1,
+      "sequence": 10,
+      "public_ms": 410.375,
+      "timer_vs_plan_ms": -0.7099609375,
+      "stamp_vs_plan_ms": -0.625,
+      "stopUpper_ms": 443.755126953125,
+      "ACKwall_ms": 443.690185546875,
+      "post_public_newNN_definite": 0,
+      "rootN_origin": "raw reference"
+    },
+    {
+      "request": "tactical129-measure-r1-4",
+      "case": "opponent-threat",
+      "condition": "A",
+      "engine": "candidate",
+      "action": {
+        "type": "wall",
+        "x": 3,
+        "y": 0,
+        "orientation": "h"
+      },
+      "Action209": 84,
+      "label_pass_independent": true,
+      "immediate_goal": false,
+      "backup": 10,
+      "CP_NN": 9,
+      "terminal_noNN": 1,
+      "hand_NN": 10,
+      "privateError": "STALE_GENERATION",
+      "explicit_discard": 1,
+      "sequence": 10,
+      "public_ms": 410.360107421875,
+      "timer_vs_plan_ms": -0.715087890625,
+      "stamp_vs_plan_ms": -0.639892578125,
+      "stopUpper_ms": 429.68017578125,
+      "ACKwall_ms": 429.56494140625,
+      "post_public_newNN_definite": 0,
+      "rootN_origin": "candidate source convention; true node/parentQ unobserved"
+    },
+    {
+      "request": "tactical129-measure-r1-5",
+      "case": "both-near",
+      "condition": "A",
+      "engine": "candidate",
+      "action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "Action209": 75,
+      "label_pass_independent": true,
+      "immediate_goal": true,
+      "backup": 59,
+      "CP_NN": 3,
+      "terminal_noNN": 56,
+      "hand_NN": 4,
+      "privateError": "STALE_GENERATION",
+      "explicit_discard": 1,
+      "sequence": 59,
+      "public_ms": 410.3349609375,
+      "timer_vs_plan_ms": -0.72998046875,
+      "stamp_vs_plan_ms": -0.6650390625,
+      "stopUpper_ms": 415.2099609375,
+      "ACKwall_ms": 415.10986328125,
+      "post_public_newNN_definite": 0,
+      "rootN_origin": "candidate source convention; true node/parentQ unobserved"
+    },
+    {
+      "request": "tactical129-measure-r1-6",
+      "case": "both-near",
+      "condition": "B",
+      "engine": "reference",
+      "action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "Action209": 75,
+      "label_pass_independent": true,
+      "immediate_goal": true,
+      "backup": 63,
+      "CP_NN": 7,
+      "terminal_noNN": 56,
+      "hand_NN": 7,
+      "privateError": null,
+      "explicit_discard": 0,
+      "sequence": 63,
+      "public_ms": 410.35986328125,
+      "timer_vs_plan_ms": -0.705078125,
+      "stamp_vs_plan_ms": -0.64013671875,
+      "stopUpper_ms": 406.9248046875,
+      "ACKwall_ms": 406.889892578125,
+      "post_public_newNN_definite": 0,
+      "rootN_origin": "raw reference"
+    },
+    {
+      "request": "tactical129-measure-r1-7",
+      "case": "wall-protected-threat",
+      "condition": "B",
+      "engine": "reference",
+      "action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "Action209": 10,
+      "label_pass_independent": true,
+      "immediate_goal": false,
+      "backup": 14,
+      "CP_NN": 14,
+      "terminal_noNN": 0,
+      "hand_NN": 15,
+      "privateError": "STALE_GENERATION",
+      "explicit_discard": 1,
+      "sequence": 14,
+      "public_ms": 410.35498046875,
+      "timer_vs_plan_ms": -0.719970703125,
+      "stamp_vs_plan_ms": -0.64501953125,
+      "stopUpper_ms": 419.43994140625,
+      "ACKwall_ms": 419.375,
+      "post_public_newNN_definite": 0,
+      "rootN_origin": "raw reference"
+    },
+    {
+      "request": "tactical129-measure-r1-8",
+      "case": "wall-protected-threat",
+      "condition": "A",
+      "engine": "candidate",
+      "action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "Action209": 10,
+      "label_pass_independent": true,
+      "immediate_goal": false,
+      "backup": 10,
+      "CP_NN": 10,
+      "terminal_noNN": 0,
+      "hand_NN": 11,
+      "privateError": "STALE_GENERATION",
+      "explicit_discard": 0,
+      "sequence": 10,
+      "public_ms": 410.405029296875,
+      "timer_vs_plan_ms": -0.655029296875,
+      "stamp_vs_plan_ms": -0.594970703125,
+      "stopUpper_ms": 413.51025390625,
+      "ACKwall_ms": 413.39501953125,
+      "post_public_newNN_definite": 0,
+      "rootN_origin": "candidate source convention; true node/parentQ unobserved"
+    },
+    {
+      "request": "tactical129-measure-r1-9",
+      "case": "own-near-goal",
+      "condition": "S",
+      "engine": "candidate",
+      "action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "Action209": 76,
+      "label_pass_independent": true,
+      "immediate_goal": true,
+      "backup": 1,
+      "CP_NN": 1,
+      "terminal_noNN": 0,
+      "hand_NN": 1,
+      "privateError": null,
+      "explicit_discard": 0,
+      "sequence": 1,
+      "public_ms": 410.625,
+      "timer_vs_plan_ms": -0.5,
+      "stamp_vs_plan_ms": -0.375,
+      "stopUpper_ms": 75.659912109375,
+      "ACKwall_ms": 75.579833984375,
+      "post_public_newNN_definite": 0,
+      "rootN_origin": "candidate source convention; true node/parentQ unobserved"
+    },
+    {
+      "request": "tactical129-measure-r1-10",
+      "case": "opponent-threat",
+      "condition": "S",
+      "engine": "candidate",
+      "action": {
+        "type": "wall",
+        "x": 3,
+        "y": 0,
+        "orientation": "h"
+      },
+      "Action209": 84,
+      "label_pass_independent": true,
+      "immediate_goal": false,
+      "backup": 1,
+      "CP_NN": 1,
+      "terminal_noNN": 0,
+      "hand_NN": 1,
+      "privateError": null,
+      "explicit_discard": 0,
+      "sequence": 1,
+      "public_ms": 410.469970703125,
+      "timer_vs_plan_ms": -0.625,
+      "stamp_vs_plan_ms": -0.530029296875,
+      "stopUpper_ms": 52.93994140625,
+      "ACKwall_ms": 55.639892578125,
+      "post_public_newNN_definite": 0,
+      "rootN_origin": "candidate source convention; true node/parentQ unobserved"
+    },
+    {
+      "request": "tactical129-measure-r1-11",
+      "case": "both-near",
+      "condition": "S",
+      "engine": "candidate",
+      "action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "Action209": 75,
+      "label_pass_independent": true,
+      "immediate_goal": true,
+      "backup": 1,
+      "CP_NN": 1,
+      "terminal_noNN": 0,
+      "hand_NN": 1,
+      "privateError": null,
+      "explicit_discard": 0,
+      "sequence": 1,
+      "public_ms": 410.405029296875,
+      "timer_vs_plan_ms": -0.6748046875,
+      "stamp_vs_plan_ms": -0.594970703125,
+      "stopUpper_ms": 37.43017578125,
+      "ACKwall_ms": 37.35009765625,
+      "post_public_newNN_definite": 0,
+      "rootN_origin": "candidate source convention; true node/parentQ unobserved"
+    },
+    {
+      "request": "tactical129-measure-r1-12",
+      "case": "wall-protected-threat",
+      "condition": "S",
+      "engine": "candidate",
+      "action": {
+        "type": "pawn",
+        "direction": [
+          0,
+          1
+        ]
+      },
+      "Action209": 10,
+      "label_pass_independent": true,
+      "immediate_goal": false,
+      "backup": 1,
+      "CP_NN": 1,
+      "terminal_noNN": 0,
+      "hand_NN": 1,
+      "privateError": null,
+      "explicit_discard": 0,
+      "sequence": 1,
+      "public_ms": 416.625,
+      "timer_vs_plan_ms": 5.51513671875,
+      "stamp_vs_plan_ms": 5.625,
+      "stopUpper_ms": 64.990234375,
+      "ACKwall_ms": 65.080078125,
+      "post_public_newNN_definite": 0,
+      "rootN_origin": "candidate source convention; true node/parentQ unobserved"
+    }
+  ],
+  "normal_pass": 8,
+  "root1_pass": 4,
+  "normalBackup": 276,
+  "normalCPNN": 61,
+  "normalTerminalNoNN": 215,
+  "handNN": 71,
+  "stressBackup": 4,
+  "stressNN": 4,
+  "startupNN": 6,
+  "privateRetired": 6,
+  "explicitDiscard": 4,
+  "handMinusAdoptCP": 6,
+  "postPublicNewNNDefinite": 0,
+  "normalBeforeACK": 6,
+  "allP1": true,
+  "fixed_prefix_NN_reference": false,
+  "sharedRuleA": true,
+  "Chrome": 0,
+  "newNN": 0,
+  "newGame": 0,
+  "depth2_reenumeration": 0
+}

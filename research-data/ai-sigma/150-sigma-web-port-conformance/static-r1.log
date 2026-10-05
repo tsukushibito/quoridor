@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-web-port-conformance/check.py", line 39, in <module>
+    assert len(inputs)==5 and all(len(x['raw_features_float32'])==648 for x in inputs)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-web-port-conformance/check.py", line 39, in <genexpr>
+    assert len(inputs)==5 and all(len(x['raw_features_float32'])==648 for x in inputs)
+                                      ~^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'raw_features_float32'

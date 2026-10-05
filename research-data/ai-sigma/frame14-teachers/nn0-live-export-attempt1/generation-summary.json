@@ -1,0 +1,1604 @@
+{
+  "issue": "quoridor-4lc.194",
+  "jobs": [
+    {
+      "job": "train01",
+      "planned_games": 24,
+      "status_counts": {
+        "GOAL": 24
+      },
+      "Rpolicy": 1217,
+      "Rz": 1217,
+      "Rjoint": 1217,
+      "allattempt_jobwall_s": 122.70870068098884,
+      "rates": {
+        "Rpolicy": 9.917797134564141,
+        "Rz": 9.917797134564141,
+        "Rjoint": 9.917797134564141
+      },
+      "logical_worker_requests": 68292,
+      "physical_provider_samples": 68292,
+      "providerStop": {
+        "sample_cap": 307200,
+        "private_issue": "quoridor-4lc.187",
+        "modelhash": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+        "provider": "torch-folded-dynamicB-v1",
+        "original_ONNX_batch": 1,
+        "batch_min": 1,
+        "batch_max": 8,
+        "dtype": "float32",
+        "TF32": false,
+        "AMP": false,
+        "torch": "2.14.0+cu130",
+        "ORT": "1.30.0",
+        "device": "NVIDIA GeForce RTX 3060",
+        "threads": [
+          1,
+          1
+        ],
+        "CPU_affinity": [
+          0
+        ],
+        "coldinit_s": {
+          "import": 2.3726487559615634,
+          "CPUORT_session": 0.037358679983299226,
+          "graph_weights": 0.1258922929991968,
+          "CUDA_upload_context": 0.289507293025963
+        },
+        "single_sample_equivalent": 68292,
+        "calls": {
+          "cuda": 10453,
+          "cpuort": 0
+        },
+        "rows": {
+          "cuda": 68292,
+          "cpuort": 0
+        },
+        "RAM_peak_KiB": 1160728,
+        "GPU_allocated_B": 20162048,
+        "GPU_reserved_B": 35651584,
+        "GPU_peak_allocated_B": 23154176,
+        "GPU_peak_reserved_B": 35651584,
+        "exit": {
+          "code": null,
+          "signal": "SIGTERM",
+          "pid": 3768872
+        }
+      },
+      "batch": {
+        "started": 68292,
+        "returned": 68292,
+        "resumed": 68292,
+        "discarded": 0,
+        "rejected_queued": 0,
+        "batches": [
+          {
+            "size": 5,
+            "sent_ms": 4474.855078,
+            "received_ms": 5218.6287,
+            "queue_ms": [
+              1.2628769999992073,
+              1.0250779999996666,
+              0.8283069999997679,
+              0.3687069999996311,
+              0.13998799999990297
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 5218.803745,
+            "received_ms": 5229.711579,
+            "queue_ms": [
+              742.5107660000003,
+              742.496811,
+              742.486449,
+              732.6586269999998,
+              732.5220060000001,
+              732.1046619999997,
+              731.705946,
+              731.3113300000005
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 5229.791766,
+            "received_ms": 5237.405068,
+            "queue_ms": [
+              741.9480389999999,
+              741.6082070000002,
+              740.3119460000007,
+              725.5751340000006,
+              725.3977800000002,
+              725.3872520000004,
+              724.9929520000005,
+              724.934596
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 5237.775629,
+            "received_ms": 5245.350444,
+            "queue_ms": [
+              732.773889,
+              732.4394539999994,
+              732.1464449999994,
+              10.625218000000132,
+              10.146982000000207,
+              9.519272999999885,
+              8.891626999999971,
+              8.35877900000014
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 5245.374737,
+            "received_ms": 5254.12606,
+            "queue_ms": [
+              14.155464999999822,
+              13.36864500000047,
+              13.143047999999908,
+              12.969524000000092,
+              12.537062999999762,
+              11.990663999999924,
+              11.399975000000268,
+              10.701235000000452
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 5254.148423,
+            "received_ms": 5264.336925,
+            "queue_ms": [
+              7.80793199999971,
+              7.066635999999562,
+              7.031987999999728,
+              6.567534999999225,
+              6.363821999999345,
+              6.1782219999995505,
+              5.73697699999957,
+              5.651387999999315
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 5264.353229,
+            "received_ms": 5272.795297,
+            "queue_ms": [
+              15.31135500000073,
+              14.817511000000195,
+              14.781925000000228,
+              14.479474000000664,
+              14.453223000000435,
+              13.797382000000653,
+              13.619441000000734,
+              13.286952000000383
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 5272.811404,
+            "received_ms": 5280.322607,
+            "queue_ms": [
+              17.07263299999977,
+              16.425647000000026,
+              16.157156999999643,
+              15.971303000000262,
+              15.29444599999988,
+              14.668840999999702,
+              14.039404000000104,
+              13.346690999999737
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 5280.336635,
+            "received_ms": 5286.98124,
+            "queue_ms": [
+              11.313686999999845,
+              11.300921000000017,
+              11.295022999999674,
+              11.241650999999365,
+              11.236368999999286,
+              11.231305999999677,
+              11.192717999999331,
+              11.186319999999796
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 5287.054164,
+            "received_ms": 5291.600492,
+            "queue_ms": [
+              11.983992000000399,
+              11.895344999999907,
+              11.29312200000004,
+              11.25886300000002,
+              10.195230000000265,
+              10.142025000000103,
+              10.095232000000578,
+              9.738486000000194
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 5291.617066,
+            "received_ms": 5296.341732,
+            "queue_ms": [
+              6.640754999999444,
+              6.630199999999604,
+              6.624275000000125,
+              6.564287000000149,
+              6.559197999999924,
+              6.5546159999994416,
+              6.550070999999662,
+              5.046722999999474
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 5296.353616,
+            "received_ms": 5304.338169,
+            "queue_ms": [
+              3.412470000000212,
+              2.7186099999998987,
+              2.5817610000003697,
+              2.3084160000007614,
+              1.9708630000004632,
+              1.9427009999999427,
+              1.8880830000007336,
+              1.1226870000000417
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 5304.355008,
+            "received_ms": 5311.374049,
+            "queue_ms": [
+              9.002517000000807,
+              8.522169000000758,
+              8.243610000000444,
+              7.688505000000077,
+              7.5612670000000435,
+              7.509244000000763,
+              6.872930000000451,
+              6.466384000000289
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 5311.386824,
+            "received_ms": 5319.786778,
+            "queue_ms": [
+              13.297477000000072,
+              12.657345999999961,
+              12.43412200000057,
+              11.945614000000205,
+              11.815099999999802,
+              10.95242000000053,
+              10.279762000000119,
+              9.472007999999732
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 5319.812136,
+            "received_ms": 5327.342669,
+            "queue_ms": [
+              10.889985999999226,
+              10.880192999999963,
+              10.874038999999357,
+              10.826686999999765,
+              10.8216369999991,
+              10.816953999999896,
+              10.785192999999708,
+              10.7803729999996
+            ]
+          },
+          {
+            "size": 8,
+            "sent_ms": 5327.358475,
+            "received_ms": 5332.502561,
+            "queue_ms": [
+              14.272007999999914,
+              13.686792999999852,
+              13.2880439999999,
+              12.957903000000442,
+              12.903108999999858,
+              12.260457999999744,
+              12.23301100000026,
+              11.66688299999987
+            ]
+          }
+        ],
+        "receipts": [
+          {
+            "identity": {
+              "run_id": "native194-train01-r1",
+              "worker_id": "w2",
+              "game_id": "native194-train01-01",
+              "generation": 1,
+              "handle": 1,
+              "token": 1,
+              "request_id": "w2:1"
+            },
+            "wire_id": "nn0.1",
+            "started_ms": 4474.855078,
+            "returned_ms": 5218.6287,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native194-train01-r1",
+              "worker_id": "w2",
+              "game_id": "native194-train01-04",
+              "generation": 2,
+              "handle": 2,
+              "token": 1,
+              "request_id": "w2:2"
+            },
+            "wire_id": "nn0.2",
+            "started_ms": 4474.855078,
+            "returned_ms": 5218.6287,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native194-train01-r1",
+              "worker_id": "w2",
+              "game_id": "native194-train01-07",
+              "generation": 3,
+              "handle": 3,
+              "token": 1,
+              "request_id": "w2:3"
+            },
+            "wire_id": "nn0.3",
+            "started_ms": 4474.855078,
+            "returned_ms": 5218.6287,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native194-train01-r1",
+              "worker_id": "w2",
+              "game_id": "native194-train01-10",
+              "generation": 4,
+              "handle": 4,
+              "token": 1,
+              "request_id": "w2:4"
+            },
+            "wire_id": "nn0.4",
+            "started_ms": 4474.855078,
+            "returned_ms": 5218.6287,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native194-train01-r1",
+              "worker_id": "w2",
+              "game_id": "native194-train01-13",
+              "generation": 5,
+              "handle": 5,
+              "token": 1,
+              "request_id": "w2:5"
+            },
+            "wire_id": "nn0.5",
+            "started_ms": 4474.855078,
+            "returned_ms": 5218.6287,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native194-train01-r1",
+              "worker_id": "w2",
+              "game_id": "native194-train01-16",
+              "generation": 6,
+              "handle": 6,
+              "token": 1,
+              "request_id": "w2:6"
+            },
+            "wire_id": "nn0.6",
+            "started_ms": 5218.803745,
+            "returned_ms": 5229.711579,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native194-train01-r1",
+              "worker_id": "w2",
+              "game_id": "native194-train01-19",
+              "generation": 7,
+              "handle": 7,
+              "token": 1,
+              "request_id": "w2:7"
+            },
+            "wire_id": "nn0.7",
+            "started_ms": 5218.803745,
+            "returned_ms": 5229.711579,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native194-train01-r1",
+              "worker_id": "w2",
+              "game_id": "native194-train01-22",
+              "generation": 8,
+              "handle": 8,
+              "token": 1,
+              "request_id": "w2:8"
+            },
+            "wire_id": "nn0.8",
+            "started_ms": 5218.803745,
+            "returned_ms": 5229.711579,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native194-train01-r1",
+              "worker_id": "w4",
+              "game_id": "native194-train01-02",
+              "generation": 1,
+              "handle": 1,
+              "token": 1,
+              "request_id": "w4:1"
+            },
+            "wire_id": "nn0.9",
+            "started_ms": 5218.803745,
+            "returned_ms": 5229.711579,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native194-train01-r1",
+              "worker_id": "w4",
+              "game_id": "native194-train01-05",
+              "generation": 2,
+              "handle": 2,
+              "token": 1,
+              "request_id": "w4:2"
+            },
+            "wire_id": "nn0.10",
+            "started_ms": 5218.803745,
+            "returned_ms": 5229.711579,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native194-train01-r1",
+              "worker_id": "w4",
+              "game_id": "native194-train01-08",
+              "generation": 3,
+              "handle": 3,
+              "token": 1,
+              "request_id": "w4:3"
+            },
+            "wire_id": "nn0.11",
+            "started_ms": 5218.803745,
+            "returned_ms": 5229.711579,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native194-train01-r1",
+              "worker_id": "w4",
+              "game_id": "native194-train01-11",
+              "generation": 4,
+              "handle": 4,
+              "token": 1,
+              "request_id": "w4:4"
+            },
+            "wire_id": "nn0.12",
+            "started_ms": 5218.803745,
+            "returned_ms": 5229.711579,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native194-train01-r1",
+              "worker_id": "w4",
+              "game_id": "native194-train01-14",
+              "generation": 5,
+              "handle": 5,
+              "token": 1,
+              "request_id": "w4:5"
+            },
+            "wire_id": "nn0.13",
+            "started_ms": 5218.803745,
+            "returned_ms": 5229.711579,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native194-train01-r1",
+              "worker_id": "w4",
+              "game_id": "native194-train01-17",
+              "generation": 6,
+              "handle": 6,
+              "token": 1,
+              "request_id": "w4:6"
+            },
+            "wire_id": "nn0.14",
+            "started_ms": 5229.791766,
+            "returned_ms": 5237.405068,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native194-train01-r1",
+              "worker_id": "w4",
+              "game_id": "native194-train01-20",
+              "generation": 7,
+              "handle": 7,
+              "token": 1,
+              "request_id": "w4:7"
+            },
+            "wire_id": "nn0.15",
+            "started_ms": 5229.791766,
+            "returned_ms": 5237.405068,
+            "discarded": false
+          },
+          {
+            "identity": {
+              "run_id": "native194-train01-r1",
+              "worker_id": "w4",
+              "game_id": "native194-train01-23",
+              "generation": 8,
+              "handle": 8,
+              "token": 1,
+              "request_id": "w4:8"
+            },
+            "wire_id": "nn0.16",
+            "started_ms": 5229.791766,
+            "returned_ms": 5237.405068,
+            "discarded": false
+          }
+        ],
+        "max_pending_games": 24,
+        "batch_histogram": [
+          0,
+          462,
+          805,
+          761,
+          341,
+          348,
+          351,
+          353,
+          7032
+        ],
+        "queue_ms_sum": 966916.1117980159,
+        "queue_ms_max": 742.5107660000003,
+        "provider_pipe_ms": 111064.9606740001
+      },
+      "providerCost": {
+        "batches": 10453,
+        "server_before_JSON_ms": 92861.42369700027,
+        "stages": {
+          "input_parse_ms": 4602.978464000001,
+          "H2D_sync_ms": 7660.303066000008,
+          "forward_sync_ms": 74081.00902299967,
+          "D2H_sync_ms": 3236.7152369999917
+        }
+      },
+      "sampled_peak_RSS": 2268192768,
+      "all24_status_and_plies": [
+        {
+          "game_id": "native194-train01-01",
+          "status": "GOAL",
+          "total_ply": 65,
+          "rows": 57
+        },
+        {
+          "game_id": "native194-train01-02",
+          "status": "GOAL",
+          "total_ply": 62,
+          "rows": 50
+        },
+        {
+          "game_id": "native194-train01-03",
+          "status": "GOAL",
+          "total_ply": 71,
+          "rows": 55
+        },
+        {
+          "game_id": "native194-train01-04",
+          "status": "GOAL",
+          "total_ply": 80,
+          "rows": 60
+        },
+        {
+          "game_id": "native194-train01-05",
+          "status": "GOAL",
+          "total_ply": 58,
+          "rows": 34
+        },
+        {
+          "game_id": "native194-train01-06",
+          "status": "GOAL",
+          "total_ply": 60,
+          "rows": 32
+        },
+        {
+          "game_id": "native194-train01-07",
+          "status": "GOAL",
+          "total_ply": 62,
+          "rows": 54
+        },
+        {
+          "game_id": "native194-train01-08",
+          "status": "GOAL",
+          "total_ply": 92,
+          "rows": 80
+        },
+        {
+          "game_id": "native194-train01-09",
+          "status": "GOAL",
+          "total_ply": 68,
+          "rows": 52
+        },
+        {
+          "game_id": "native194-train01-10",
+          "status": "GOAL",
+          "total_ply": 103,
+          "rows": 83
+        },
+        {
+          "game_id": "native194-train01-11",
+          "status": "GOAL",
+          "total_ply": 80,
+          "rows": 56
+        },
+        {
+          "game_id": "native194-train01-12",
+          "status": "GOAL",
+          "total_ply": 61,
+          "rows": 33
+        },
+        {
+          "game_id": "native194-train01-13",
+          "status": "GOAL",
+          "total_ply": 90,
+          "rows": 82
+        },
+        {
+          "game_id": "native194-train01-14",
+          "status": "GOAL",
+          "total_ply": 50,
+          "rows": 38
+        },
+        {
+          "game_id": "native194-train01-15",
+          "status": "GOAL",
+          "total_ply": 56,
+          "rows": 40
+        },
+        {
+          "game_id": "native194-train01-16",
+          "status": "GOAL",
+          "total_ply": 72,
+          "rows": 52
+        },
+        {
+          "game_id": "native194-train01-17",
+          "status": "GOAL",
+          "total_ply": 83,
+          "rows": 59
+        },
+        {
+          "game_id": "native194-train01-18",
+          "status": "GOAL",
+          "total_ply": 54,
+          "rows": 26
+        },
+        {
+          "game_id": "native194-train01-19",
+          "status": "GOAL",
+          "total_ply": 51,
+          "rows": 43
+        },
+        {
+          "game_id": "native194-train01-20",
+          "status": "GOAL",
+          "total_ply": 54,
+          "rows": 42
+        },
+        {
+          "game_id": "native194-train01-21",
+          "status": "GOAL",
+          "total_ply": 88,
+          "rows": 72
+        },
+        {
+          "game_id": "native194-train01-22",
+          "status": "GOAL",
+          "total_ply": 60,
+          "rows": 40
+        },
+        {
+          "game_id": "native194-train01-23",
+          "status": "GOAL",
+          "total_ply": 66,
+          "rows": 42
+        },
+        {
+          "game_id": "native194-train01-24",
+          "status": "GOAL",
+          "total_ply": 63,
+          "rows": 35
+        }
+      ],
+      "attempt": {
+        "exit": 0,
+        "stop_reason": null
+      }
+    },
+    {
+      "job": "validation",
+      "planned_games": 24,
+      "status_counts": {
+        "REGISTERED_UNFINISHED_UNKNOWN": 24
+      },
+      "Rpolicy": 312,
+      "Rz": 0,
+      "Rjoint": 0,
+      "allattempt_jobwall_s": null,
+      "rates": null,
+      "logical_worker_requests": null,
+      "physical_provider_samples": null,
+      "providerStop": null,
+      "batch": null,
+      "providerCost": null,
+      "sampled_peak_RSS": null,
+      "all24_status_and_plies": [
+        {
+          "game_id": "native194-validation-01",
+          "status": "REGISTERED_UNFINISHED_UNKNOWN",
+          "total_ply": null,
+          "rows": 13
+        },
+        {
+          "game_id": "native194-validation-02",
+          "status": "REGISTERED_UNFINISHED_UNKNOWN",
+          "total_ply": null,
+          "rows": 13
+        },
+        {
+          "game_id": "native194-validation-03",
+          "status": "REGISTERED_UNFINISHED_UNKNOWN",
+          "total_ply": null,
+          "rows": 13
+        },
+        {
+          "game_id": "native194-validation-04",
+          "status": "REGISTERED_UNFINISHED_UNKNOWN",
+          "total_ply": null,
+          "rows": 13
+        },
+        {
+          "game_id": "native194-validation-05",
+          "status": "REGISTERED_UNFINISHED_UNKNOWN",
+          "total_ply": null,
+          "rows": 13
+        },
+        {
+          "game_id": "native194-validation-06",
+          "status": "REGISTERED_UNFINISHED_UNKNOWN",
+          "total_ply": null,
+          "rows": 13
+        },
+        {
+          "game_id": "native194-validation-07",
+          "status": "REGISTERED_UNFINISHED_UNKNOWN",
+          "total_ply": null,
+          "rows": 13
+        },
+        {
+          "game_id": "native194-validation-08",
+          "status": "REGISTERED_UNFINISHED_UNKNOWN",
+          "total_ply": null,
+          "rows": 13
+        },
+        {
+          "game_id": "native194-validation-09",
+          "status": "REGISTERED_UNFINISHED_UNKNOWN",
+          "total_ply": null,
+          "rows": 13
+        },
+        {
+          "game_id": "native194-validation-10",
+          "status": "REGISTERED_UNFINISHED_UNKNOWN",
+          "total_ply": null,
+          "rows": 13
+        },
+        {
+          "game_id": "native194-validation-11",
+          "status": "REGISTERED_UNFINISHED_UNKNOWN",
+          "total_ply": null,
+          "rows": 13
+        },
+        {
+          "game_id": "native194-validation-12",
+          "status": "REGISTERED_UNFINISHED_UNKNOWN",
+          "total_ply": null,
+          "rows": 13
+        },
+        {
+          "game_id": "native194-validation-13",
+          "status": "REGISTERED_UNFINISHED_UNKNOWN",
+          "total_ply": null,
+          "rows": 13
+        },
+        {
+          "game_id": "native194-validation-14",
+          "status": "REGISTERED_UNFINISHED_UNKNOWN",
+          "total_ply": null,
+          "rows": 13
+        },
+        {
+          "game_id": "native194-validation-15",
+          "status": "REGISTERED_UNFINISHED_UNKNOWN",
+          "total_ply": null,
+          "rows": 13
+        },
+        {
+          "game_id": "native194-validation-16",
+          "status": "REGISTERED_UNFINISHED_UNKNOWN",
+          "total_ply": null,
+          "rows": 13
+        },
+        {
+          "game_id": "native194-validation-17",
+          "status": "REGISTERED_UNFINISHED_UNKNOWN",
+          "total_ply": null,
+          "rows": 13
+        },
+        {
+          "game_id": "native194-validation-18",
+          "status": "REGISTERED_UNFINISHED_UNKNOWN",
+          "total_ply": null,
+          "rows": 13
+        },
+        {
+          "game_id": "native194-validation-19",
+          "status": "REGISTERED_UNFINISHED_UNKNOWN",
+          "total_ply": null,
+          "rows": 13
+        },
+        {
+          "game_id": "native194-validation-20",
+          "status": "REGISTERED_UNFINISHED_UNKNOWN",
+          "total_ply": null,
+          "rows": 13
+        },
+        {
+          "game_id": "native194-validation-21",
+          "status": "REGISTERED_UNFINISHED_UNKNOWN",
+          "total_ply": null,
+          "rows": 13
+        },
+        {
+          "game_id": "native194-validation-22",
+          "status": "REGISTERED_UNFINISHED_UNKNOWN",
+          "total_ply": null,
+          "rows": 13
+        },
+        {
+          "game_id": "native194-validation-23",
+          "status": "REGISTERED_UNFINISHED_UNKNOWN",
+          "total_ply": null,
+          "rows": 13
+        },
+        {
+          "game_id": "native194-validation-24",
+          "status": "REGISTERED_UNFINISHED_UNKNOWN",
+          "total_ply": null,
+          "rows": 13
+        }
+      ],
+      "attempt": null
+    },
+    {
+      "job": "test",
+      "planned_games": 24,
+      "status_counts": {
+        "NOT_STARTED": 24
+      },
+      "Rpolicy": 0,
+      "Rz": 0,
+      "Rjoint": 0,
+      "allattempt_jobwall_s": null,
+      "rates": null,
+      "logical_worker_requests": null,
+      "physical_provider_samples": null,
+      "providerStop": null,
+      "batch": null,
+      "providerCost": null,
+      "sampled_peak_RSS": null,
+      "all24_status_and_plies": [
+        {
+          "game_id": "native194-test-01",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-test-02",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-test-03",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-test-04",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-test-05",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-test-06",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-test-07",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-test-08",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-test-09",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-test-10",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-test-11",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-test-12",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-test-13",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-test-14",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-test-15",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-test-16",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-test-17",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-test-18",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-test-19",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-test-20",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-test-21",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-test-22",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-test-23",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-test-24",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        }
+      ],
+      "attempt": null
+    },
+    {
+      "job": "train02",
+      "planned_games": 24,
+      "status_counts": {
+        "NOT_STARTED": 24
+      },
+      "Rpolicy": 0,
+      "Rz": 0,
+      "Rjoint": 0,
+      "allattempt_jobwall_s": null,
+      "rates": null,
+      "logical_worker_requests": null,
+      "physical_provider_samples": null,
+      "providerStop": null,
+      "batch": null,
+      "providerCost": null,
+      "sampled_peak_RSS": null,
+      "all24_status_and_plies": [
+        {
+          "game_id": "native194-train02-01",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train02-02",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train02-03",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train02-04",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train02-05",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train02-06",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train02-07",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train02-08",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train02-09",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train02-10",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train02-11",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train02-12",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train02-13",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train02-14",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train02-15",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train02-16",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train02-17",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train02-18",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train02-19",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train02-20",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train02-21",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train02-22",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train02-23",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train02-24",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        }
+      ],
+      "attempt": null
+    },
+    {
+      "job": "train03",
+      "planned_games": 24,
+      "status_counts": {
+        "NOT_STARTED": 24
+      },
+      "Rpolicy": 0,
+      "Rz": 0,
+      "Rjoint": 0,
+      "allattempt_jobwall_s": null,
+      "rates": null,
+      "logical_worker_requests": null,
+      "physical_provider_samples": null,
+      "providerStop": null,
+      "batch": null,
+      "providerCost": null,
+      "sampled_peak_RSS": null,
+      "all24_status_and_plies": [
+        {
+          "game_id": "native194-train03-01",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train03-02",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train03-03",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train03-04",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train03-05",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train03-06",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train03-07",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train03-08",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train03-09",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train03-10",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train03-11",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train03-12",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train03-13",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train03-14",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train03-15",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train03-16",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train03-17",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train03-18",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train03-19",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train03-20",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train03-21",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train03-22",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train03-23",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train03-24",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        }
+      ],
+      "attempt": null
+    },
+    {
+      "job": "train04",
+      "planned_games": 24,
+      "status_counts": {
+        "NOT_STARTED": 24
+      },
+      "Rpolicy": 0,
+      "Rz": 0,
+      "Rjoint": 0,
+      "allattempt_jobwall_s": null,
+      "rates": null,
+      "logical_worker_requests": null,
+      "physical_provider_samples": null,
+      "providerStop": null,
+      "batch": null,
+      "providerCost": null,
+      "sampled_peak_RSS": null,
+      "all24_status_and_plies": [
+        {
+          "game_id": "native194-train04-01",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train04-02",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train04-03",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train04-04",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train04-05",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train04-06",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train04-07",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train04-08",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train04-09",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train04-10",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train04-11",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train04-12",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train04-13",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train04-14",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train04-15",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train04-16",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train04-17",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train04-18",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train04-19",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train04-20",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train04-21",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train04-22",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train04-23",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        },
+        {
+          "game_id": "native194-train04-24",
+          "status": "NOT_STARTED",
+          "total_ply": null,
+          "rows": 0
+        }
+      ],
+      "attempt": null
+    }
+  ],
+  "Rpolicy": 1529,
+  "Rz": 1217,
+  "Rjoint": 1217,
+  "allattempt_jobwall_s": 122.70870068098884,
+  "planned144": 144,
+  "outputs": {
+    "train": {
+      "teacher": {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/train-teacher-rows.jsonl.gz",
+        "SHA256": "afb10256d52aa90febbd67557b1d25fa3617d677ab20d0cc63aaebf1acfc129e",
+        "rows": 1217
+      },
+      "state_journal": {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/train-state-journal.jsonl.gz",
+        "SHA256": "4f97a4ac3007423aad6b3ad8f7d71f2d51beb3f23d564da8456dabf81eb56691",
+        "rows": 1217
+      }
+    },
+    "validation": {
+      "teacher": {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/validation-teacher-rows.jsonl.gz",
+        "SHA256": "ef87bf388c4bf5e5f07007b92198fc188aae8943a9cfaabb0e92405ba99a2ed7",
+        "rows": 312
+      },
+      "state_journal": {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/validation-state-journal.jsonl.gz",
+        "SHA256": "ea21c0efe49c5bf3b5d896495d735d39222560e9e548a5697437993406e922c0",
+        "rows": 312
+      }
+    },
+    "test": {
+      "teacher": {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/test-sealed/test-teacher-rows.jsonl.gz",
+        "SHA256": "ab3393a9b04ef3652aed56d485d15011b2a9041225979ed98dcb1f144277f064",
+        "rows": 0
+      },
+      "state_journal": {
+        "path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/test-state-journal.jsonl.gz",
+        "SHA256": "ab3393a9b04ef3652aed56d485d15011b2a9041225979ed98dcb1f144277f064",
+        "rows": 0
+      }
+    }
+  },
+  "shared_QF1_exposure_adapter_pending": true,
+  "teacher_truth_or_NI": false
+}

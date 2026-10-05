@@ -1,0 +1,88 @@
+{
+  "old_Xi": 0.5,
+  "new_Xi": 0.25,
+  "old_same_side": 6,
+  "new_same_side": 4,
+  "totals": {
+    "candidate": {
+      "public": 380,
+      "hand_NN": 3584,
+      "calls_per_public": 9.43157894736842
+    },
+    "reference": {
+      "public": 384,
+      "hand_NN": 4180,
+      "calls_per_public": 10.885416666666666
+    }
+  },
+  "matched_roots": [
+    {
+      "pair": 1,
+      "matched_board_side_history_features": true,
+      "legal_actions": 124,
+      "max_logit_difference": 0.0,
+      "value_difference": 0.0,
+      "max_prior_difference": 6.181722239650966e-07,
+      "candidate_reference_CP_NN": [
+        7,
+        13
+      ],
+      "candidate_reference_first_CP_ms": [
+        95.7548828125,
+        45.019775390625
+      ],
+      "candidate_reference_first_API_ms": [
+        53.925048828125,
+        42.93994140625
+      ],
+      "candidate_reference_actions": [
+        13,
+        13
+      ]
+    },
+    {
+      "pair": 2,
+      "matched_board_side_history_features": true,
+      "legal_actions": 116,
+      "max_logit_difference": 0.0,
+      "value_difference": 0.0,
+      "max_prior_difference": 1.5871053070659613e-06,
+      "candidate_reference_CP_NN": [
+        12,
+        8
+      ],
+      "candidate_reference_first_CP_ms": [
+        55.10986328125,
+        95.2001953125
+      ],
+      "candidate_reference_first_API_ms": [
+        39.544921875,
+        73.97998046875
+      ],
+      "candidate_reference_actions": [
+        67,
+        67
+      ]
+    }
+  ],
+  "toy": [
+    {
+      "synthetic_side_logodds": 0,
+      "expected_Xi_delta0": 0.5,
+      "expected_Xi_delta0_5": 0.6224593312018546,
+      "local_sensitivity_at_equal": 0.25
+    },
+    {
+      "synthetic_side_logodds": 3,
+      "expected_Xi_delta0": 0.5,
+      "expected_Xi_delta0_5": 0.5232729746349436,
+      "local_sensitivity_at_equal": 0.045176659730912
+    },
+    {
+      "synthetic_side_logodds": 5,
+      "expected_Xi_delta0": 0.5,
+      "expected_Xi_delta0_5": 0.5034584024573485,
+      "local_sensitivity_at_equal": 0.006648056670790033
+    }
+  ]
+}

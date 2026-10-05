@@ -1,0 +1,20 @@
+goal quoridor-4lc / 200 -> 201 fresh-test evaluator interface
+候補/BEST/LAST/distance-initial/旧QF1random＋定数の source/model/config/係数/val規則をcandidate-freeze.jsonへfreeze。SHA 04dd362acb84601941d4782c45d69daecc1ce265e65967e7887847cb05871129、最大4unique NN/12000、現weightunique3（candidate/BEST/initial同h）。testlabels/旧labels未読。NN0 fake AST/reuse/once/eligible0分母 exit0/全子wait済。
+201引渡しallowlistはfresh metadata/maskのみとsealedlabel path/hash。専用freeze.py bind の薄schema:
+{
+  "metadata": {
+    "path": "absolute label-free metadata.jsonl.gz",
+    "SHA": "owner hash"
+  },
+  "mask": {
+    "path": "absolute label-free fixed-mask.json",
+    "SHA": "owner hash"
+  },
+  "labels": {
+    "path": "absolute sealed new-test labels.jsonl.gz",
+    "SHA": "owner advertised only"
+  },
+  "planned_games": 24,
+  "fresh_family": true
+}
+metadata split=test、mask metadata_sha256/rows[id].split/group/primary_eligible/games[group].split/eligible は既frame14形式。新resultは201本人immutablehandoff後にfreeze binding、sealed labelsのhash再計算もfreeze前に行わずownerhashのみ。後続専用CPUevaluator1回、oldtestlabel/results/preview読み直し0。mask/function新source改変0。実201heavy終了/currentidentity不在を本人確認後のみCPU計算（学習childは既01:12:11 stop）。

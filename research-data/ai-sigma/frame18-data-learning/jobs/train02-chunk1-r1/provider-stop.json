@@ -1,0 +1,66 @@
+{
+  "request_id": "stop",
+  "ok": true,
+  "result": {
+    "sample_cap": 307200,
+    "wire_totals_ms": {
+      "json_parse": 4020.856339999999,
+      "json_encode_once": 1680.0560760000049,
+      "actual_stdout_write": 18678.39429399993,
+      "definition": "prior responses only; stop own encode/write excluded"
+    },
+    "private_issue": "quoridor-4lc.221",
+    "modelhash": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+    "provider": "torch-folded-CUDAgraph-bitswire-singleencode-v1",
+    "graph_startup_samples": 108,
+    "graph_capture_warm_seconds": 0.6991333169280551,
+    "captured_B": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "original_ONNX_batch": 1,
+    "batch_min": 1,
+    "batch_max": 8,
+    "dtype": "float32",
+    "TF32": false,
+    "AMP": false,
+    "torch": "2.14.0+cu130",
+    "ORT": "1.30.0",
+    "device": "NVIDIA GeForce RTX 3060",
+    "threads": [
+      1,
+      1
+    ],
+    "CPU_affinity": [
+      0
+    ],
+    "coldinit_s": {
+      "import": 1.5596858439967036,
+      "CPUORT_session": 0.04575462202774361,
+      "graph_weights": 0.08542875002603978,
+      "CUDA_upload_context": 0.19047795300139114
+    },
+    "single_sample_equivalent": 132917,
+    "calls": {
+      "cuda": 19176,
+      "eager": 0,
+      "cpuort": 0
+    },
+    "rows": {
+      "cuda": 132809,
+      "eager": 0,
+      "cpuort": 0
+    },
+    "RAM_peak_KiB": 1188068,
+    "GPU_allocated_B": 88442368,
+    "GPU_reserved_B": 369098752,
+    "GPU_peak_allocated_B": 91408384,
+    "GPU_peak_reserved_B": 369098752
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "issue": "quoridor-4lc.205",
+  "UTC": "2026-10-04T02:19:57.032232+00:00",
+  "gate_path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-head-control/gate-result.json",
+  "gate_SHA256": "19e1ec83d63a703d2d2a2d36917875f97c651b9dd30ff805e806ffb460a3929b",
+  "physical_handoff_stopped": true,
+  "passed": true,
+  "conditions": {
+    "beststep_positive_and_weight_changed": true,
+    "below_distanceinitial_by_margin": true,
+    "finite_coeff_input_lowerlayer_schema": true,
+    "source_science_child_stop_currentexact_absent": true
+  },
+  "candidate_step": 600,
+  "input_bindings_SHA256": {
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-head-control/evaluator-settings.json": "d14775aaf848898a81bb1e7b7cb50ee72684d46f097f8eb51bd584671d487a58",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-head-control/training-stop.json": "ced0c8ece61162acdcc85111ef1d49f044da176c28f5da493dd0f8cc9bd1b3d5",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-head-control/finite-schema.json": "f3be863d043b26c6b8a209720bf81e8f617f519b661ea637b732a9b098ee204f",
+    "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/nnue/frame14-head-control-r1/initial.pt": "36ea9132a7b8969c0404d84f42790fa3bc57bd201e249bb7362950f10de17da0",
+    "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/nnue/frame14-head-control-r1/best.pt": "f9dff330239f56164af96aa97be5a171059aaa732dfa8054e9b6380b7dbcb54f",
+    "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/nnue/frame14-head-control-r1/last.pt": "c8019b631bd4d0e9d477a2275858b3c6d7fa783460ddf1b3f5bc7cedc0feba2b",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-qf1-head-control/run.py": "917d23d01db886dbaa2825e053f7b8c37d93c647ca006c31178e5be8333eb29c",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-qf1-head-control/head_model.py": "930f3d0fb2f332505d89e79253406c53887e1c9bf04eb7ac29cba607138a25dd",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-head-control/runs/frame14-head-control-r1/config.json": "c4a3dbde251fa6e07ac8492ba4a6716dc4a4957429b8a35e0bf33019657e2b40",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-qf1-distance-residual/residual_model.py": "7e456d2c86b0e2a8f1d1f0feff1e43446181ddaabc52920cf7fbcd7076149627"
+  },
+  "tensor_load_forward": 0,
+  "wall_s": 0.0024678269983269274
+}

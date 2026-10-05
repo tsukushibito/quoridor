@@ -1,0 +1,68 @@
+{
+  "UTC": "2026-10-03T04:38:38.869983+00:00",
+  "parent_SHA256": "0271156ecd26ea7e81d57af9453b47804cae1888f790995f7c457e83cea51db6",
+  "identities": [
+    {
+      "owner": "92",
+      "role": "scheduler",
+      "pid": 3134871,
+      "start_ticks": "25308050",
+      "expected": "25308050",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "matched": true
+    },
+    {
+      "owner": "92",
+      "role": "monitor",
+      "pid": 3134885,
+      "start_ticks": "25308065",
+      "expected": "25308065",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "matched": true
+    }
+  ],
+  "config_current_SHA256": "b4ee414d9576f871820688aa89037abcf1e7a0641fed15d00e3f2dca1c3aea9d",
+  "config_matches_loaded": true,
+  "contract_current_SHA256": "5232d0d338e11a110bd3a05d5483ceb7d9f1bc635227f0245ece21510bf2db89",
+  "contract_matches_loaded": true,
+  "current_state": {
+    "binding": {
+      "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+      "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+      "target": "supervisor",
+      "dispatch_issue": "quoridor-4lc.40",
+      "contract_file": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+    },
+    "process": {
+      "pid": 3134871,
+      "start_ticks": "25308050",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "phase": "running",
+    "recovery_required": false,
+    "last_result": {
+      "at": "2026-10-03T04:36:24.395595+00:00",
+      "event": "turn_limit"
+    },
+    "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+    "config_sha256": "b4ee414d9576f871820688aa89037abcf1e7a0641fed15d00e3f2dca1c3aea9d",
+    "contract_sha256": "5232d0d338e11a110bd3a05d5483ceb7d9f1bc635227f0245ece21510bf2db89",
+    "next_at": 1791003197.8015954,
+    "owned": null
+  },
+  "old_exact_identity_absence": [
+    {
+      "pid": 3070572,
+      "expected": "24839468",
+      "currentstart": null,
+      "exact_absent": true
+    },
+    {
+      "pid": 3070586,
+      "expected": "24839490",
+      "currentstart": null,
+      "exact_absent": true
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "archive_SHA256": "6d8b63cedef1c39714249f90afe5d01135decd3e0deb8839ff99f570afffca2d",
+  "necessary_member_checks": [
+    {
+      "path": "runs/prefix119-admission-mock-r1.log",
+      "SHA256": "56165540618438476cfb96c2c5ded97e7a4eb2026581b16219a75251c3b32d5c",
+      "bytes": 123,
+      "error_excerpt": "actual argv heavy / metadata / parent shell / read error / timeout / ownership / stop-unconfirmed: launch0 cases pass, NN0\n"
+    },
+    {
+      "path": "runs/prefix119-admission-mock-r1.process.json",
+      "SHA256": "d215a463092649b048bbb314ebe0721276e2dbb69c8a01ac8c05a5097bf70d46",
+      "bytes": 2522,
+      "exit": 0,
+      "stop_reason": null
+    },
+    {
+      "path": "runs/prefix119-admission-mock-r2.log",
+      "SHA256": "f81447e1376d4b9d5f31a8052316db62e0f5c59bdcf2ca1d3d47aa0407559390",
+      "bytes": 223,
+      "error_excerpt": "actual argv heavy / metadata / parent shell / read error / timeout / ownership / stop-unconfirmed: launch0 cases pass, NN0\nactual proc scan: live unknown/malformed reject, metadata nonheavy, renderer heavy; no child launch\n"
+    },
+    {
+      "path": "runs/prefix119-admission-mock-r2.process.json",
+      "SHA256": "7200f8890dcc1a9356d1ea1aba5b2fd35e8a239b723d83cd4663399bce21e9c5",
+      "bytes": 2524,
+      "exit": 0,
+      "stop_reason": null
+    },
+    {
+      "path": "runs/prefix119-admission-mock-r3.log",
+      "SHA256": "f81447e1376d4b9d5f31a8052316db62e0f5c59bdcf2ca1d3d47aa0407559390",
+      "bytes": 223,
+      "error_excerpt": "actual argv heavy / metadata / parent shell / read error / timeout / ownership / stop-unconfirmed: launch0 cases pass, NN0\nactual proc scan: live unknown/malformed reject, metadata nonheavy, renderer heavy; no child launch\n"
+    },
+    {
+      "path": "runs/prefix119-admission-mock-r3.process.json",
+      "SHA256": "8ddc3efdb7bb8d326ef26d852008d717241e3c01199bdd135da9c67cd68ed003",
+      "bytes": 2524,
+      "exit": 0,
+      "stop_reason": null
+    },
+    {
+      "path": "runtime-source-stopped-before-report.json",
+      "SHA256": "624c0728471aea3a389f68c0fe7d4b8a48b6afb0fdc3da804888447e69ad3b3f",
+      "bytes": 553107
+    }
+  ],
+  "original_failures_retained_not_reclassified": true,
+  "no_admission_mock_reexecution": true
+}

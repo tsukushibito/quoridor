@@ -1,0 +1,91 @@
+{
+  "UTC": "2026-10-02T09:04:34.099143+00:00",
+  "original_sourceGit": "0f0597e73e5444c2a576121242a02e18417aad01",
+  "same_compiler_and_flags_record": {
+    "cargo_version": "cargo 1.98.1 (797e8a9bc 2026-08-05)",
+    "rustc_version": "rustc 1.98.1 (48a229cea 2026-09-01)",
+    "flags": [
+      "build",
+      "--release",
+      "--offline",
+      "--locked",
+      "--target",
+      "wasm32-unknown-unknown",
+      "--lib"
+    ],
+    "build_jobs": 1
+  },
+  "no_independent_build": true,
+  "files": {
+    "Cargo.toml": "57e3173114c234ff39b0dd976e913fa142358d8f0eb426ec87e61668344bcade",
+    "Cargo.lock": "d0568a38ed13c537c3ab96abe3a0585e82258da1a3a5e64ee4ab18df07211b24",
+    "src/lib.rs": "9fad536fcaaafb858bb588621a421fa71a62fe7339c97cdf13fbdea06aad6c44",
+    "src/research.rs": "3b1340552a98e520068ac5c9e8f2fffaffc0831bf6eb0142f9cf9a059af5cf4a",
+    "crates/quoridor-core/src/game.rs": "543995676fb46cc4e80d0fccb650875eb901a4b4d71187788ee09dfbaf01a420",
+    "crates/quoridor-core/src/position.rs": "b12e79a99cf3441cf4acebbea1b827dce24b02db6fb2269021964872535e3ab6",
+    "crates/quoridor-core/src/research.rs": "5785963dc1bce7828e1d0bb32f5b48623e238aa24c2966f61a9843b6f219f524"
+  },
+  "baseline_binary_identical_to_immutable": true,
+  "build-r1-cause.json": {
+    "sha256": "9fe0c572eb992a15380d1f4f70db3f2df1390a4ee554424cf8cad716471ee9d0",
+    "contents": {
+      "run": "c110-build-r1",
+      "error": "missing required research.rs module in minimal private source selection",
+      "interpretation": "build/source selection failure, no C or NN negative",
+      "remaining": [],
+      "next": "same module bytes copied to both variants; commands/flags/factor unchanged"
+    }
+  },
+  "build-r2-cause.json": {
+    "sha256": "4ee8fc8028881c2401fd9321f0dda9cd011b3d9542c5833e8f77524315dbc0db",
+    "contents": {
+      "baseline_original_byte_hash_match": true,
+      "c1_invalid_same_hash": true,
+      "cause": "same Cargo package name shared target reused baseline artifact without compiling c1; no C1 NN run started",
+      "fix": "separate private target dirs per variant; source/constants/build flags remain identical except intended C"
+    }
+  },
+  "build-results.json": {
+    "sha256": "0f9e376a54526aa0f7740876481271e59879ea25870221cc2018d27a36b875cc",
+    "contents": [
+      {
+        "variant": "baseline",
+        "command": [
+          "cargo",
+          "build",
+          "--release",
+          "--offline",
+          "--locked",
+          "--target",
+          "wasm32-unknown-unknown",
+          "--lib",
+          "--manifest-path",
+          "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-c-factor-browser/baseline/Cargo.toml"
+        ],
+        "start": "2026-10-02T07:58:17.502852+00:00",
+        "end": "2026-10-02T07:58:17.540380+00:00",
+        "bytes": 292139,
+        "sha256": "1f54d0b8f0c6d3d7d51935886ed506e44376a2052506be62ca7a726c85a78a01"
+      },
+      {
+        "variant": "c1",
+        "command": [
+          "cargo",
+          "build",
+          "--release",
+          "--offline",
+          "--locked",
+          "--target",
+          "wasm32-unknown-unknown",
+          "--lib",
+          "--manifest-path",
+          "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-c-factor-browser/c1/Cargo.toml"
+        ],
+        "start": "2026-10-02T07:58:17.540719+00:00",
+        "end": "2026-10-02T07:58:24.493356+00:00",
+        "bytes": 292135,
+        "sha256": "8438310cf8f7d096bd84364a03b97f99f737ca0a9be6c2812a7ecdee3d92d9dd"
+      }
+    ]
+  }
+}

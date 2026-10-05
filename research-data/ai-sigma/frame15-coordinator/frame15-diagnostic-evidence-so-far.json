@@ -1,0 +1,39 @@
+{
+  "UTC": "2026-10-04T05:25:12.933907+00:00",
+  "question": "learning diagnostics before capacity/layer changes",
+  "observations": [
+    {
+      "task": 209,
+      "claim": "early 20step benefit previously missed; LR1e-4 early200 improvement direction two jointseeds; later worse",
+      "samples": 405578,
+      "science_wall_s": 15.600525,
+      "independence": "four curves independently checked; synthetic probe not independently recalculated"
+    },
+    {
+      "task": 211,
+      "claim": "same-initial-function train-only input standardization helps reusedvalidation atfixed200step",
+      "samples": 116111,
+      "science_wall_s": 3.098458861,
+      "independence": "212 saved math verified"
+    },
+    {
+      "task": 213,
+      "claim": "postAdam distancecolumn attenuation removes most standardized-input benefit atfixed200; effectiveupdate involvement consistent",
+      "samples": 116111,
+      "science_wall_s": 3.0749410259886645,
+      "independence": "214 currently checking"
+    }
+  ],
+  "measured_model_science_samples": 637800,
+  "measured_model_science_wall_s": 21.773924886988667,
+  "all_team_or_pipeline_total": "unknown; exclude no costs silently; owner management separate",
+  "still_unknown": [
+    "new independent distribution benefit",
+    "centering-bias/Adam path separate cause",
+    "teacher/history/distribution",
+    "highest NNUE strength"
+  ],
+  "no_new_science_selected": true,
+  "next_decision_after214": "choose per-coordinate effective update and earlystop as next learning direction; scale secondseed and independenttest remain conditional alternatives, not automatically started",
+  "stop_responsibility": "92 05:41:38 heavy /05:46:38 scheduler-owned /05:49:38 monitor /05:51:38 final; source externalstop distinct"
+}

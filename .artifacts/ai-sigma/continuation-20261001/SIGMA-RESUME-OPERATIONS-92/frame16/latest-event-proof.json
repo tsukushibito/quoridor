@@ -1,0 +1,47 @@
+{
+  "at": "2026-10-04T07:08:27.744118+00:00",
+  "target_turn": "01a105b0-675c-7051-bcd5-95a52b34887a",
+  "source": "/workspaces/quoridor/.artifacts/research-team/scheduler-sigma-continuation-20261001/events.jsonl",
+  "source_size": 98293,
+  "read_range": [
+    32757,
+    98293
+  ],
+  "tail_sha256": "020941919adfc6a8f30c627427791b2b247d7206a0cc8badcf7e7d51b970ee6e",
+  "cap_bytes": 65536,
+  "matching_events": [
+    {
+      "at": "2026-10-04T06:53:29.310780+00:00",
+      "event": "dispatched",
+      "run_id": "d6b5087e-1786-4afe-86a1-0d7ec7218d17",
+      "turn_id": "01a105b0-675c-7051-bcd5-95a52b34887a"
+    },
+    {
+      "at": "2026-10-04T06:56:36.727436+00:00",
+      "event": "owned_turn_finished",
+      "turn_id": "01a105b0-675c-7051-bcd5-95a52b34887a",
+      "status": "interrupted"
+    }
+  ],
+  "matching_guard_paths": [
+    {
+      "run_id": "d6b5087e-1786-4afe-86a1-0d7ec7218d17",
+      "base_present": false,
+      "read_guard_present": false,
+      "read_guard_filenames": []
+    }
+  ],
+  "exact_current_processes": [
+    {
+      "pid": 4069898,
+      "same_pid_tick_boot": true,
+      "rss_bytes": 139300864
+    },
+    {
+      "pid": 4069912,
+      "same_pid_tick_boot": true,
+      "rss_bytes": 21979136
+    }
+  ],
+  "all_history_read": false
+}

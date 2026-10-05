@@ -1,0 +1,50 @@
+{
+  "UTC": "2026-10-04T02:26:07.884484+00:00",
+  "receipt": "2026-10-04T02:25:11Z",
+  "actor": "codex:01a0f31d-8227-7e03-a7e6-915b4918c11b",
+  "ready_show_goal_self_no_pause_owner": true,
+  "202_close_backup_then_206claim": [
+    {
+      "command": [
+        "close",
+        "quoridor-4lc.202"
+      ],
+      "exit": 0,
+      "out": "\u2713 Closed quoridor-4lc.202 \u2014 frame14: \u8ddd\u96e2\u57fa\u6e96\u3068NNUE\u6b8b\u5dee\u306e\u65b0test\u72ec\u7acb\u88c1\u5b9a: Coordinator finite acceptance202-finite-acceptance.json; science/source stopped180/180; Git a3c3e6a/6d2bebfb verified47, backup; next substantive206\n",
+      "err": ""
+    },
+    {
+      "command": [
+        "backup",
+        "sync"
+      ],
+      "exit": 0,
+      "out": "\nBackup synced in 717ms\n",
+      "err": ""
+    },
+    {
+      "command": [
+        "update",
+        "quoridor-4lc.206"
+      ],
+      "exit": 0,
+      "out": "\u2713 Updated issue: quoridor-4lc.206 \u2014 frame14 head-only and fresh-test independent judgment\n",
+      "err": ""
+    }
+  ],
+  "actual_start": "source read only; science arithmetic needs fresh physical admission",
+  "static_cap": 120,
+  "old202_charge": 180,
+  "storage_old_retained": 106541540,
+  "newscope_forecast": 2097152,
+  "total_forecast": 108638692,
+  "critic_guard": 117440512,
+  "old_discount": 0,
+  "parent_add": 0,
+  "deadlines": {
+    "newcommand": "03:00",
+    "compute_stop": "03:05",
+    "process": "03:10",
+    "submit": "03:15"
+  }
+}

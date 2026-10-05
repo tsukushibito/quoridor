@@ -1,0 +1,29 @@
+"""Batched authorized subtree save, no disk/default index; verify saved blob bytes."""
+import subprocess,sys
+from pathlib import Path
+def run(args,body=None):return subprocess.check_output(['git',*args],input=body).strip()
+files=sys.argv[1:]
+for f in files:assert f.startswith(('tools/ai-sigma-frame20-distance-arena/','research-data/ai-sigma/frame20-distance-arena/','docs/reports/ai-sigma-experiment-frame20-distance-arena.md'))
+base=run(['rev-parse','HEAD']).decode();root=run(['rev-parse',base+'^{tree}']).decode();blobs=run(['hash-object','-w','--stdin-paths'],(''.join(f+'\n'for f in files)).encode()).splitlines();assert len(files)==len(blobs)
+updates={}
+for f,h in zip(files,blobs):
+ d=updates
+ for p in f.split('/')[:-1]:d=d.setdefault(p,{})
+ d[f.split('/')[-1]]=h
+empty=run(['mktree'],b'')
+def update(tree,changes):
+ items={}
+ for x in run(['ls-tree','-z',tree]).split(b'\0'):
+  if not x:continue
+  meta,name=x.split(b'\t',1);mode,typ,h=meta.split(b' ');items[name]=(mode,typ,h)
+ for name,change in changes.items():
+  n=name.encode()
+  if isinstance(change,dict):
+   mode,typ,child=items.get(n,(b'040000',b'tree',empty));assert typ==b'tree';items[n]=(b'040000',b'tree',update(child.decode(),change))
+  else:items[n]=(b'100644',b'blob',change)
+ data=b''.join(m+b' '+t+b' '+h+b'\t'+n+b'\0'for n,(m,t,h)in items.items());return run(['mktree','-z'],data)
+tree=update(root,updates).decode();commit=run(['commit-tree',tree,'-p',base],b'research(249): save paired leaf arena source and all-attempt evidence\n').decode();subprocess.run(['git','update-ref','HEAD',commit,base],check=True)
+data=subprocess.check_output(['git','cat-file','--batch'],input=b''.join(h+b'\n'for h in blobs));pos=0
+for f,h in zip(files,blobs):
+ e=data.index(b'\n',pos);header=data[pos:e].split();assert header[0]==h and header[1]==b'blob';size=int(header[2]);b=data[e+1:e+1+size];assert b==Path(f).read_bytes();pos=e+1+size+1
+print(commit)

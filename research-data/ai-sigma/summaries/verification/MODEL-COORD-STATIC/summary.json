@@ -1,0 +1,47 @@
+{
+  "utc": "2026-09-30T19:50:14.117233+00:00",
+  "pid": 663514,
+  "affinity": [
+    0
+  ],
+  "model_sha256": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+  "shapes": {
+    "input": [
+      1,
+      8,
+      9,
+      9
+    ],
+    "policy_logits": [
+      1,
+      136
+    ],
+    "value": [
+      1,
+      1
+    ]
+  },
+  "op_counts": {
+    "ai.onnx::Conv": 24,
+    "ai.onnx::Relu": 29,
+    "ai.onnx::Add": 13,
+    "ai.onnx::Constant": 58,
+    "ai.onnx::Slice": 12,
+    "ai.onnx::BatchNormalization": 6,
+    "ai.onnx::ReduceMean": 5,
+    "ai.onnx::ReduceMax": 4,
+    "ai.onnx::Concat": 6,
+    "ai.onnx::Gemm": 7,
+    "ai.onnx::Unsqueeze": 6,
+    "ai.onnx::Mul": 2,
+    "ai.onnx::ReduceSum": 2,
+    "ai.onnx::Gather": 2,
+    "ai.onnx::Reshape": 2,
+    "ai.onnx::Tanh": 1
+  },
+  "checker": "pass",
+  "neural_inferences": 0,
+  "external_initializers": 0,
+  "maxrss_kib": 97904,
+  "independent_read_only_graph_verification": true
+}

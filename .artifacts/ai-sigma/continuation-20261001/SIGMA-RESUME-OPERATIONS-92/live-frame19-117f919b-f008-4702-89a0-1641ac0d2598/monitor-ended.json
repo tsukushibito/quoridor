@@ -1,0 +1,29 @@
+{
+  "started_utc": "2026-10-04T23:01:06.818195+00:00",
+  "ended_utc": "2026-10-05T00:21:30.288861+00:00",
+  "process": {
+    "pid": 380701,
+    "start_ticks": "40787392",
+    "state": "R",
+    "rss_bytes": 20484096,
+    "cpu_ticks": 2,
+    "affinity": [
+      0
+    ],
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "reason": "scheduler stopped before deadline",
+  "error": null,
+  "exit_code_if_normal": 0,
+  "self_user_cpu_s": 5.447259,
+  "self_sys_cpu_s": 5.134011,
+  "self_maxrss_kib": 24304,
+  "child_user_cpu_s": 6.473649,
+  "child_sys_cpu_s": 1.954977,
+  "child_maxrss_kib": 230288,
+  "sampled_combined_rss_peak_bytes": 209440768,
+  "allocated_peak_bytes": 37384192,
+  "no_child_command_left_running": true,
+  "own_process_exits_after_this_record": true,
+  "all_research_stopped_claimed": false
+}

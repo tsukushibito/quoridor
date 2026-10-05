@@ -1,0 +1,56 @@
+{
+  "UTC": "2026-10-01T22:38:09.902481+00:00",
+  "issue": "quoridor-4lc.79",
+  "trial": 1,
+  "contract": 1,
+  "before_any_factor_result": true,
+  "contrasts": [
+    {
+      "factor": "C",
+      "base": 1.5,
+      "variant": 1.0,
+      "others": "N=sim sqrt(N+1) Q0 seedtie candidateorder"
+    },
+    {
+      "factor": "sqrt",
+      "base": "sqrt(N+1)",
+      "variant": "sqrt(N)",
+      "others": "N=sim C1.5 Q0 seedtie candidateorder"
+    },
+    {
+      "factor": "scoretie",
+      "base": "seed1979",
+      "variant": "candidateorder first",
+      "others": "N=sim sqrt(N+1) C1.5 Q0"
+    }
+  ],
+  "separate_order_contrast": "first fixed candidateorder->referencelegalorder; seed->first plus order is labelled bundle",
+  "finish_extra_ablation": false,
+  "input_sha256": "05c9c28327fa73ba7265a979c22697c4ae0f61efc40b82e82f9ffbb37f000c81",
+  "sources": {
+    "tools/ai-sigma-root-factor-correct-n/checker.rs": "632d1926528c27de323cef06656d445169b37de27d10f50bcac3567793447bbf",
+    "tools/ai-sigma-root-factor-correct-n/supervise.py": "e7e44fc033cb34e7acd2aeef9f1b91eebecf64dba5b35d5295ddb8f8e5e5c4aa",
+    "tools/ai-sigma-root-factor-correct-n/verify.cjs": "534c50bacccb7214c319aee69791198e03dbc62a7562ccb5324dc277a112d770"
+  },
+  "denominators": {
+    "all": 765,
+    "native": 371,
+    "wasm": 394,
+    "accepted": 764,
+    "late_private": 1,
+    "noresponse_missing": 1,
+    "matched_pairs": 97,
+    "matched_roots": 194,
+    "artificial": 0
+  },
+  "precision": "all765 roots x5 modes all edge scores bits and selected Action/score/margin/ties/visits exact Rust f32 vs JS Math.fround, tolerance0bits; JSNumber unrounded separate",
+  "failure_policy": "finish765 gate or precision failure => no factor acceptance; preserve failure and stop, helper one cause one correction max",
+  "node_visits": "source/stats restoration sim=edge_sum+1, not direct raw observation",
+  "parentQ": "missing no FPU or imputation",
+  "actual_go": false,
+  "NN": 0,
+  "search": 0,
+  "games": 0,
+  "boundary_driver_before_factor_sha256": "408474cc43d29b46e3b322162747ad3d51c08c82b6a9a83cf51c5211c56a3127",
+  "compiled_binary_before_factor_sha256": "6fccab05677c4e3c9600965db531b931f7cb8148bac1053c4f968147547a3ff6"
+}

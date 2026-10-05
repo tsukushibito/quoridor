@@ -1,0 +1,9 @@
+goal quoridor-4lc /229 first label-free arithmetic handoff
+
+MathPASS: all768uniquegame/family (old96explicittrainalias+fresh672),37123rows=4603old+32520new;576train/96val/96test, OR state/history/actualSTMsortedIDs/f32distance/featureversion exclusions0, zeroeligiblegame0. Independent source-free implementation (no shared maskoracle). Small192/9025row/cohort32 and large576/27463row/cohort96 nested/same maxmask; rowweight1/(G*n_game)/pergame1/G verified. Secondary400/1200 precurve matchesminimum step/G distance0, candidate/tie rules unchanged. FixedoldscaleSHA68f8b43a/same configseed; actualinitialtensor/function pending savedreceipt only, no modelimport/forward.
+
+Allattemptphysical1849212/2.2m; guardian2175.606740/5400 verified. Pack14/member/Git andRuleA/P2/pi/z quality ownerfinite references; opaquehistory/wholeteachertruth not independentlyreplayed. Do not add queuewait800.0733/source-management80.2929/chunkexternal2712.884 to overlappingguardian. No sealedlabel/oldtest173 reads.
+
+Firstjob actual12:48:47.315→48.965/CPU0/exit0waitexactabsence/NN0/math1.107575s/peak328392704B. Fresh current frame18 ownedNone/foreign0/GPUempty admitted BUT didnotprebind backgroundlearn-r1 bothcommandcleanup receipt. Typedadmissiongap preserved; posthoc savedstage ends12:46:57/12:47:22+cleanup12:47:22.389 precede thismath, not retrospective preadmission or future/allhost guarantee. No rerun/reset. Firstjobcounts1; source90+data90=180of270, remaining90/onefinaljob only after actual228learning/test source-childstop and backgroundcleanup binding/freshphysics.
+
+Own data-source/child stopped;229 remainsin_progress for curve/selectionfreeze/oncedtest. Generation success not learninggain/purequantity/strength. FullG removesquantitymissingbranch; next meaningful allocation judgment awaits actualfixedcurves/rootmean/D/constant/test; no newconditions/gate.

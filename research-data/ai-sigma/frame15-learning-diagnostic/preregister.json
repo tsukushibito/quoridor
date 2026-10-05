@@ -1,0 +1,84 @@
+{
+  "issue": "quoridor-4lc.209",
+  "UTC": "2026-10-04T04:10:38.853709+00:00",
+  "conditions": [
+    "lr1e-3",
+    "lr1e-4",
+    "lr1e-5"
+  ],
+  "max_conditions": 4,
+  "planned_conditions": 3,
+  "extra_condition": "not planned; any needed diagnostic must be result-reasoned and newly fixed within original cap",
+  "points": [
+    0,
+    1,
+    2,
+    5,
+    10,
+    20,
+    50,
+    100,
+    200,
+    400
+  ],
+  "condition_sample_cap": 110210,
+  "planned_total_samples": 330630,
+  "science_sample_cap": 800000,
+  "heavy_seconds_cap": 600,
+  "observer_extra_forward_backward": 0,
+  "stage_path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-learning/stages/train96.stage.json",
+  "stage_SHA": "af95eabf3d059982e67cba41fcee0233aaea8a53eaf81a3b1fbae60752d83e75",
+  "mask_SHA": "10b502cd9e1c5334e56a3f460ef3edff7f822c8f52f69c3af53529c67c45d5f5",
+  "initial_tensor_SHA": "e5d218c9750d581eab7ca6a114acaa8f3cf5bd24474e3f639280705271fc7ddb",
+  "feature": "QF1-f32-STM-v1",
+  "same_minibatch_order": "shared seed+1 generator; SHA each observed prefix and last400",
+  "configs": {
+    "research-data/ai-sigma/frame15-learning-diagnostic/configs/lr1e-5.json": "b8b7e12aff3cf8994b3a2343f82753be94feda992e2c6d9850b76e3d2e412452",
+    "research-data/ai-sigma/frame15-learning-diagnostic/configs/lr1e-3.json": "87cdc3b3822d2b0708a7e3091dbaa133ab3d9de4c14db5252409abfba458a37e",
+    "research-data/ai-sigma/frame15-learning-diagnostic/configs/lr1e-4.json": "e1099a2f1177a66a6d14568aa1cb2548fed0555babdc915d8b63ca6b10b452d5"
+  },
+  "sources": {
+    "tools/ai-sigma-learning-diagnostic/save.py": "0ec3d535c8c9852a33c8857397a7a51e255e7f8ef72fd8e282c70933d87487aa",
+    "tools/ai-sigma-learning-diagnostic/launch.py": "9ef0db3990559b3fb3f2926201f84294169c221f2c0adadc4399283a74995ae7",
+    "tools/ai-sigma-learning-diagnostic/observer.py": "12aad0227412f4e6f3a52c495c5fdea5b6f0e7ce7e41a3aada3f42347341dbfb",
+    "tools/ai-sigma-learning-diagnostic/run.py": "af0b6397d7250d8551105a4a490d3fe2effbdd83c62c53adde76aa5f54a1d511",
+    "tools/nnue-training/train.py": "665848e238d6a7976b83c53b0c13cdb87f9e65f4a75329560d6a98afbe9863d3",
+    "tools/nnue-training/model.py": "12661cac69cff8b01800eb2d3df5be5f8674858d9ce995713b4385da44c74357",
+    "tools/nnue-training/common.py": "876e0e9a610b594db63e62e81ae920684f10e52f71a7cc75e04f8fbadd9ffe04",
+    "tools/nnue-training/frame14_data.py": "f45482fe6d1a4477ee3bf3b080d14d883b1f28c79517cff83e4318b7a90e37b8",
+    "tools/nnue-training/manage_frame14.py": "cf13f3e0e1cf5d2784cad19b64d7cb1917d099785cb7f515b40a3abd927c2286"
+  },
+  "target": "rootmean",
+  "validation": "reused exploratory; not independenttest",
+  "test_allowed": false,
+  "witness": "12 train rowIDs ranked SHA209-witness-v1 before model/target/loss; sampled from already charged evaluation forward",
+  "layer_observers": "same trained minibatches at step1,2,5,10,20,50,100,200,400; grad/norm/zero/update-weight/ftactive columns separate",
+  "critic210": "adopted sparse-column dilution correction and step0 witness-output change; no new gate",
+  "A": "early update/LR sensitivity",
+  "B": "activation/gradient/tanh/input-scale constraints",
+  "C": "teacher/history/distribution, not decided by this LR range",
+  "decision": "early val gain at low LR favors smaller initial-update/early stopping investigation; no gain with delayed train-fit leaves slow trajectory versus generalization unresolved; zero-grad/activation loss directs bounded software or scale diagnosis",
+  "fixed_distance_validation_gameMSE": 0.48514681311997876,
+  "fixed_train_constant_validation_gameMSE": 0.6787804677332444,
+  "references": [
+    {
+      "title": "Adam original adaptive moments method",
+      "URL": "https://arxiv.org/abs/1412.6980"
+    },
+    {
+      "title": "PyTorch Adam lr and WD definition",
+      "URL": "https://docs.pytorch.org/docs/stable/generated/torch.optim.Adam.html"
+    },
+    {
+      "title": "ReLU max(0,x)",
+      "URL": "https://docs.pytorch.org/docs/stable/generated/torch.nn.ReLU.html"
+    }
+  ],
+  "newscience": "2026-10-04T04:45:00Z",
+  "science_stop": "2026-10-04T04:55:00Z",
+  "warm": 0,
+  "GPU": 0,
+  "old_test_labels_results_allowed": false,
+  "shared_stage_loader_access": "original manifest-bound all144 label-free metadata container is read by readonly load_stage; test rows excluded before label join/model/witness. No standalone test metadata or test labels/results read.",
+  "version": 2
+}

@@ -1,0 +1,44 @@
+{
+  "engines": {
+    "candidate": {
+      "n": 322,
+      "firstCP_median_ms": 81.4737548828125,
+      "firstAPIawait_median_ms": 31.867431640625,
+      "max_timer_lateness_ms": 11.670166015625,
+      "max_timer_to_stamp_ms": 15.52001953125,
+      "max_ACKwall_ms": 471.934814453125,
+      "meanings": "firstCP includes preparation/root/scheduling; APIawait is not kernelCPU; ACKwall is not CPUtime"
+    },
+    "reference": {
+      "n": 322,
+      "firstCP_median_ms": 49.2723388671875,
+      "firstAPIawait_median_ms": 34.8651123046875,
+      "max_timer_lateness_ms": 17.48486328125,
+      "max_timer_to_stamp_ms": 0.5048828125,
+      "max_ACKwall_ms": 517.8701171875,
+      "meanings": "firstCP includes preparation/root/scheduling; APIawait is not kernelCPU; ACKwall is not CPUtime"
+    }
+  },
+  "seedPairs": [
+    {
+      "fixture": "initial-p1",
+      "same_color1_traces": true,
+      "same_color2_traces": true,
+      "different_seed_does_not_require_different_Action": true
+    },
+    {
+      "fixture": "asym-hv-p2",
+      "same_color1_traces": false,
+      "same_color2_traces": false,
+      "different_seed_does_not_require_different_Action": true
+    },
+    {
+      "fixture": "straight-jump-p2",
+      "same_color1_traces": false,
+      "same_color2_traces": true,
+      "different_seed_does_not_require_different_Action": true
+    }
+  ],
+  "NN": 0,
+  "browser_computed": true
+}

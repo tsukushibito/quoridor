@@ -1,0 +1,35 @@
+{
+  "UTC": "2026-10-02T02:36:54.152388+00:00",
+  "order": [
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261002/DIAGNOSTIC-ARENA-INDEPENDENT/critic95-golden-r1.config.json",
+      "sha256": "f1277460c54bfe8963e248cd94bcd85ca85d251c7e53a897dc41c0993197594c",
+      "public_max": 2,
+      "startup_per_session": 6
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261002/DIAGNOSTIC-ARENA-INDEPENDENT/critic95-four-ply-r1.config.json",
+      "sha256": "e1acfad76176332689f62fd8fbe4ed1768c73a7b883b9631af19378d9a7863cc",
+      "public_max": 4,
+      "startup_per_session": 6
+    }
+  ],
+  "public_max": 6,
+  "startup_total": 12,
+  "startup_reason": "unchanged arena CLI uses one stage per session",
+  "same_suite_retry": false,
+  "source": {
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-diagnostic-arena-independent/arena.cjs": "23d462441c355d3038df23f59c2885403be6402c1c096089b3dd0d5382cf4dfa",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-diagnostic-arena-independent/runner.py": "d79d4f37ea1c47bdd88c9647575995dbaa6870a0216439c23687b885436d50d0"
+  },
+  "clock": {
+    "T": 500,
+    "reserve": 89,
+    "commit": 9,
+    "cutoff": 402,
+    "seal": 411
+  },
+  "actual_go": false,
+  "fullgame": 0,
+  "holdout": 0
+}

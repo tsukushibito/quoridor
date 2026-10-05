@@ -1,0 +1,46 @@
+{
+  "variants": [
+    {
+      "variant": "baseline",
+      "command": [
+        "cargo",
+        "build",
+        "--release",
+        "--offline",
+        "--locked",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--lib",
+        "--manifest-path",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-deep-node-comparison/baseline/Cargo.toml"
+      ],
+      "start": "2026-10-02T16:22:13.868771+00:00",
+      "end": "2026-10-02T16:22:20.465685+00:00",
+      "bytes": 292139,
+      "SHA256": "1f54d0b8f0c6d3d7d51935886ed506e44376a2052506be62ca7a726c85a78a01"
+    },
+    {
+      "variant": "trace",
+      "command": [
+        "cargo",
+        "build",
+        "--release",
+        "--offline",
+        "--locked",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--lib",
+        "--manifest-path",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-deep-node-comparison/trace/Cargo.toml"
+      ],
+      "start": "2026-10-02T16:22:20.466055+00:00",
+      "end": "2026-10-02T16:22:27.566929+00:00",
+      "bytes": 309339,
+      "SHA256": "6f050a754c512b0a160f519ac8924f0c9d887d9860121386536a076d44fa0b3d"
+    }
+  ],
+  "immutable_SHA256": "1f54d0b8f0c6d3d7d51935886ed506e44376a2052506be62ca7a726c85a78a01",
+  "baseline_byte_equal": true,
+  "RUSTFLAGS": null,
+  "toolchain": "rustc 1.98.1 (48a229cea 2026-09-01)"
+}

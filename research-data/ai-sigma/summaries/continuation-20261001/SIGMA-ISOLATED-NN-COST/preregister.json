@@ -1,0 +1,1164 @@
+{
+  "issue": "quoridor-4lc.80",
+  "trial": 1,
+  "contract": 1,
+  "UTC_before_runtime": "2026-10-01T22:42:19.982281+00:00",
+  "source": [
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-isolated-nn-cost/b-host.js",
+      "sha256": "203c93c1ba4430191c063cdf2e72e2098d2620e8977b8512078c485d85452658"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-isolated-nn-cost/driver.cjs",
+      "sha256": "7ff0464ac423fe2e33a245c70cec7b14e53b7c8c777c1490999268f853709eaf"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-isolated-nn-cost/cleanup.cjs",
+      "sha256": "5447032ffa50109b5b0c24411eb3ed5e14bb9536c84c7cc6cfdc73fac5ffe32d"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-isolated-nn-cost/numeric.cjs",
+      "sha256": "77ba948538f868fa726637d19da61a567967b6850ffb3d969a0b74ecb7cc2721"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-isolated-nn-cost/game.js",
+      "sha256": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-isolated-nn-cost/pause-check.cjs",
+      "sha256": "20d8a5107fab057489e6f399086407b17dce42e11f1309c66008e24941f58a73"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-isolated-nn-cost/owned_ledger.py",
+      "sha256": "8a6b52c664e0602dfee6f0a969be26d990df114c3c5ccc43c2d4d6e5560a6036"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-isolated-nn-cost/runner.py",
+      "sha256": "3ea8889920e9a3a90347df58d8b015ac38cbc566bb7cd4e745b54d8259b47f87"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-isolated-nn-cost/kernel_boundary.py",
+      "sha256": "afa63b0b113bdb8f5f112a871e8f183d33b9d493e5e08cce098faa4ecfd5dd21"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-isolated-nn-cost/phase0.cjs",
+      "sha256": "ec31a12a0f8e853a8aaf72b4d8cbb4b42e0531c43a58bea8a75557afde8a3785"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-isolated-nn-cost/a-host.js",
+      "sha256": "b40e7611b9f351783f7f838c05aa3c9b72aa9c7152d35ad7cececb5f7a3115d1"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-isolated-nn-cost/context.js",
+      "sha256": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-isolated-nn-cost/worker.js",
+      "sha256": "05557b0cfa1528f66f7c3403c2faf4c2d9095a0f0dd0a848f92da219e7ef8d40"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-isolated-nn-cost/owned-ledger.cjs",
+      "sha256": "b375c3389139fd918a26c87f6d967978284a23c5cdae6cac7171e09ceabe0035"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/early-cache.cjs",
+      "sha256": "748fe01dfebf5e524465ef69255acf0026154188b9002a5338ca790ca092e7f7",
+      "expected": "748fe01dfebf5e524465ef69255acf0026154188b9002a5338ca790ca092e7f7"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/array-elements.cjs",
+      "sha256": "7f2cf646831d5ccdbeafa908ffb86738abb859a7e024d7d53515228073aa8912",
+      "expected": "7f2cf646831d5ccdbeafa908ffb86738abb859a7e024d7d53515228073aa8912"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/mock-factory.cjs",
+      "sha256": "47df27a6b9cf3575c870acec96880e814ff7602fe6617026e62a80f0d3b0eb3b",
+      "expected": "47df27a6b9cf3575c870acec96880e814ff7602fe6617026e62a80f0d3b0eb3b"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/cleanup.cjs",
+      "sha256": "5447032ffa50109b5b0c24411eb3ed5e14bb9536c84c7cc6cfdc73fac5ffe32d",
+      "expected": "5447032ffa50109b5b0c24411eb3ed5e14bb9536c84c7cc6cfdc73fac5ffe32d"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/external-stop-check.py",
+      "sha256": "8be52ba005489c3d35becce285fe2e4698111bfafc4759fd5ece2ccc8270e49a",
+      "expected": "8be52ba005489c3d35becce285fe2e4698111bfafc4759fd5ece2ccc8270e49a"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/driver-gates.cjs",
+      "sha256": "b99ceabd26f4ad1b18b88d02cb247dd38fb10151148245555343a2342d0899ee",
+      "expected": "b99ceabd26f4ad1b18b88d02cb247dd38fb10151148245555343a2342d0899ee"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/game.js",
+      "sha256": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+      "expected": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/actual-driver.cjs",
+      "sha256": "2c6657e7fe8cfeee8edae2a3bf7086a9861424a00681428cb51904e0bc5e58b5",
+      "expected": "2c6657e7fe8cfeee8edae2a3bf7086a9861424a00681428cb51904e0bc5e58b5"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/cli-refusals.cjs",
+      "sha256": "dbe130934192449ba91421a6e42a8c40ab24866faaf385bf304c09ec96c217c5",
+      "expected": "dbe130934192449ba91421a6e42a8c40ab24866faaf385bf304c09ec96c217c5"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/early-worker.js",
+      "sha256": "9d0d8dbf87ac083ebac4d6f80ebcc24e794aa7af33f9d65eecbe39a3a84caf05",
+      "expected": "9d0d8dbf87ac083ebac4d6f80ebcc24e794aa7af33f9d65eecbe39a3a84caf05"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/real-backend.cjs",
+      "sha256": "97d17b152eb98cbf017f714219910755d72ffb27098160961902361d84776ee0",
+      "expected": "97d17b152eb98cbf017f714219910755d72ffb27098160961902361d84776ee0"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/pause-check.cjs",
+      "sha256": "20d8a5107fab057489e6f399086407b17dce42e11f1309c66008e24941f58a73",
+      "expected": "20d8a5107fab057489e6f399086407b17dce42e11f1309c66008e24941f58a73"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/checkpoint.js",
+      "sha256": "e8f858b2d41605b8ae8e699aaa4a5ae43d2d7c2f4eb6c7c061f194bf355a9361",
+      "expected": "e8f858b2d41605b8ae8e699aaa4a5ae43d2d7c2f4eb6c7c061f194bf355a9361"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/startup.cjs",
+      "sha256": "356a62d703fadf759ab19354abde558023d98bc2ba9db8beb6f00578bed1a190",
+      "expected": "356a62d703fadf759ab19354abde558023d98bc2ba9db8beb6f00578bed1a190"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/small-gates.cjs",
+      "sha256": "06982047c4396259a20c1e01a7e6d8d1e63f1e9cacc8ed66df5023ebfca55b29",
+      "expected": "06982047c4396259a20c1e01a7e6d8d1e63f1e9cacc8ed66df5023ebfca55b29"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/compact-plan-gates.cjs",
+      "sha256": "ed141bc77052ae755fe554dc13228c9b86584b0efa2c09b9d3fba17cc552f43a",
+      "expected": "ed141bc77052ae755fe554dc13228c9b86584b0efa2c09b9d3fba17cc552f43a"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/error-boundary.cjs",
+      "sha256": "0e1d0a8c9986ceffd22cf2599b43fe47d68c91b9aecfb41c0929f9ed1aeadff4",
+      "expected": "0e1d0a8c9986ceffd22cf2599b43fe47d68c91b9aecfb41c0929f9ed1aeadff4"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/match-entry.cjs",
+      "sha256": "238c2b1cfe6df09c4fa9e1c7b0d5c70d028aae44db2e176c0a863e2b8de0cc35",
+      "expected": "238c2b1cfe6df09c4fa9e1c7b0d5c70d028aae44db2e176c0a863e2b8de0cc35"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/game-loop.cjs",
+      "sha256": "8e74288657ecd53eecb1971df13650bcc8f49a83292de38b678a1e11c9036fc9",
+      "expected": "8e74288657ecd53eecb1971df13650bcc8f49a83292de38b678a1e11c9036fc9"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/owned_ledger.py",
+      "sha256": "8a6b52c664e0602dfee6f0a969be26d990df114c3c5ccc43c2d4d6e5560a6036",
+      "expected": "8a6b52c664e0602dfee6f0a969be26d990df114c3c5ccc43c2d4d6e5560a6036"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/final-envelope.cjs",
+      "sha256": "8d187b74f6ce2c4a2c56aac0a7ceae914632524dd70aaf9ff61abf75b54be809",
+      "expected": "8d187b74f6ce2c4a2c56aac0a7ceae914632524dd70aaf9ff61abf75b54be809"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/caller.cjs",
+      "sha256": "62ad4cab830353063c4b2bbe5afff8105ca5b6820c40fb654f3701555681371e",
+      "expected": "62ad4cab830353063c4b2bbe5afff8105ca5b6820c40fb654f3701555681371e"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/numeric-order.cjs",
+      "sha256": "af4bc2104d5a7a8a578f6de3a128cb4fe701d3d6489c07e6c402d710277f2688",
+      "expected": "af4bc2104d5a7a8a578f6de3a128cb4fe701d3d6489c07e6c402d710277f2688"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/runner.py",
+      "sha256": "1667efa5593cf48230c0ef54a8d0c43b829ce1588b786ccb1403323ab33700d6",
+      "expected": "1667efa5593cf48230c0ef54a8d0c43b829ce1588b786ccb1403323ab33700d6"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/budget.cjs",
+      "sha256": "2c7c1118fa862bd6299a238ebe7e4c836f596cb481da2f7f082af15b83ba0f11",
+      "expected": "2c7c1118fa862bd6299a238ebe7e4c836f596cb481da2f7f082af15b83ba0f11"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/kernel_boundary.py",
+      "sha256": "afa63b0b113bdb8f5f112a871e8f183d33b9d493e5e08cce098faa4ecfd5dd21",
+      "expected": "afa63b0b113bdb8f5f112a871e8f183d33b9d493e5e08cce098faa4ecfd5dd21"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/watchdog-gates.cjs",
+      "sha256": "6d8e20370ab1de1e7e28294438beb82e3dd3e851aecf7d85c4de19622c9a4183",
+      "expected": "6d8e20370ab1de1e7e28294438beb82e3dd3e851aecf7d85c4de19622c9a4183"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/proof-bundle.cjs",
+      "sha256": "ff8dbdc0c60f5818969fd372089246e59eb511dcd58d3e2acb4625c20fac4a7a",
+      "expected": "ff8dbdc0c60f5818969fd372089246e59eb511dcd58d3e2acb4625c20fac4a7a"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/diagnostic-verifier.cjs",
+      "sha256": "74afa9c1b8d24a253ca80bdc2d5a44673d166a53f41331b1f2c5c8edf782c32f",
+      "expected": "74afa9c1b8d24a253ca80bdc2d5a44673d166a53f41331b1f2c5c8edf782c32f"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/numeric-gates.cjs",
+      "sha256": "a5d94af98682c847f9ced2f74fa5bfbc28cba6e25d432396a3fd80fe4cb2175d",
+      "expected": "a5d94af98682c847f9ced2f74fa5bfbc28cba6e25d432396a3fd80fe4cb2175d"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/reference-core.js",
+      "sha256": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05",
+      "expected": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/judge.cjs",
+      "sha256": "a43bed42482ae21a3620449df37b08596bc9fabef31936b27d6c95254fdc7577",
+      "expected": "a43bed42482ae21a3620449df37b08596bc9fabef31936b27d6c95254fdc7577"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/early-page.js",
+      "sha256": "dd36d04685420f7e85536db468e6bad82c298f8dc194e41c5aef166a5c4cb838",
+      "expected": "dd36d04685420f7e85536db468e6bad82c298f8dc194e41c5aef166a5c4cb838"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/context.js",
+      "sha256": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+      "expected": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/browser.cjs",
+      "sha256": "2e01de02f98f61fe7f44566713f5ba021ad849f7b17aac42ea175ada3532458f",
+      "expected": "2e01de02f98f61fe7f44566713f5ba021ad849f7b17aac42ea175ada3532458f"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/reference-control-run.js",
+      "sha256": "87dbd43b34f23793c36806ad41a09fda723b5f7b7b10745c0df8b055e3039a0c",
+      "expected": "87dbd43b34f23793c36806ad41a09fda723b5f7b7b10745c0df8b055e3039a0c"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/backend-envelope.cjs",
+      "sha256": "c31e6839a755d370af5f471f8406d251724526c28c3a8a6e44831dc68d5d1ac8",
+      "expected": "c31e6839a755d370af5f471f8406d251724526c28c3a8a6e44831dc68d5d1ac8"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/saved-control-gates.cjs",
+      "sha256": "42ec3c2618b1e9b289b6c01a35984f848203689ef9b3aa641b5311654ac43170",
+      "expected": "42ec3c2618b1e9b289b6c01a35984f848203689ef9b3aa641b5311654ac43170"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/make-diagnostic.cjs",
+      "sha256": "599fd8223a7282d584e154e22d999db73bcbcccd77e348ccc88b4448efadfb26",
+      "expected": "599fd8223a7282d584e154e22d999db73bcbcccd77e348ccc88b4448efadfb26"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/golden-driver.cjs",
+      "sha256": "74afa9c1b8d24a253ca80bdc2d5a44673d166a53f41331b1f2c5c8edf782c32f",
+      "expected": "74afa9c1b8d24a253ca80bdc2d5a44673d166a53f41331b1f2c5c8edf782c32f"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/failures.cjs",
+      "sha256": "050e5b93ae0a2c82b2501667bd8bf5c46abd002983f51244913f8082286a1802",
+      "expected": "050e5b93ae0a2c82b2501667bd8bf5c46abd002983f51244913f8082286a1802"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/host.js",
+      "sha256": "dc6cf3e24774e5e6b52c8cf346090f53f261e58b0c7fda1e6d674c7142983d02",
+      "expected": "dc6cf3e24774e5e6b52c8cf346090f53f261e58b0c7fda1e6d674c7142983d02"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-actual-boundary-repair/owned-ledger.cjs",
+      "sha256": "b375c3389139fd918a26c87f6d967978284a23c5cdae6cac7171e09ceabe0035",
+      "expected": "b375c3389139fd918a26c87f6d967978284a23c5cdae6cac7171e09ceabe0035"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ORT-SEARCH/final.wasm",
+      "sha256": "1f54d0b8f0c6d3d7d51935886ed506e44376a2052506be62ca7a726c85a78a01",
+      "expected": "1f54d0b8f0c6d3d7d51935886ed506e44376a2052506be62ca7a726c85a78a01"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/ai-sigma/reference/sigma-pcr250/best.onnx",
+      "sha256": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+      "expected": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/ort.min.js",
+      "sha256": "95c6f6611837cb50449cb6a0c092145bf493ac64cd0d004033cefc977366e7cb",
+      "expected": "95c6f6611837cb50449cb6a0c092145bf493ac64cd0d004033cefc977366e7cb"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/ort-wasm-simd-threaded.jsep.wasm",
+      "sha256": "0663b902fb3937883a34375926bdfe3e1c86cd4c99cbc04c06a7cdf46c78bdde",
+      "expected": "0663b902fb3937883a34375926bdfe3e1c86cd4c99cbc04c06a7cdf46c78bdde"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/ort-wasm-simd-threaded.jsep.mjs",
+      "sha256": "b69c8812bf2d8356dd248fef0abb35e22d1f05f9c593ca34d4b942f35ea93592",
+      "expected": "b69c8812bf2d8356dd248fef0abb35e22d1f05f9c593ca34d4b942f35ea93592"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/early-cache.cjs",
+      "sha256": "748fe01dfebf5e524465ef69255acf0026154188b9002a5338ca790ca092e7f7",
+      "expected": "748fe01dfebf5e524465ef69255acf0026154188b9002a5338ca790ca092e7f7"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/array-elements.cjs",
+      "sha256": "7f2cf646831d5ccdbeafa908ffb86738abb859a7e024d7d53515228073aa8912",
+      "expected": "7f2cf646831d5ccdbeafa908ffb86738abb859a7e024d7d53515228073aa8912"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/mock-factory.cjs",
+      "sha256": "47df27a6b9cf3575c870acec96880e814ff7602fe6617026e62a80f0d3b0eb3b",
+      "expected": "47df27a6b9cf3575c870acec96880e814ff7602fe6617026e62a80f0d3b0eb3b"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/cleanup.cjs",
+      "sha256": "5447032ffa50109b5b0c24411eb3ed5e14bb9536c84c7cc6cfdc73fac5ffe32d",
+      "expected": "5447032ffa50109b5b0c24411eb3ed5e14bb9536c84c7cc6cfdc73fac5ffe32d"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/external-stop-check.py",
+      "sha256": "69a90f833378c2d892314418895c59204660c4f11c98fb60ba5c4d9aa8cfff94",
+      "expected": "69a90f833378c2d892314418895c59204660c4f11c98fb60ba5c4d9aa8cfff94"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/game.js",
+      "sha256": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+      "expected": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/actual-driver.cjs",
+      "sha256": "bda6044531e5d701ae3ddc7e373fa2fc9fdd6c78d6e0ccdbfd0603a14901172b",
+      "expected": "bda6044531e5d701ae3ddc7e373fa2fc9fdd6c78d6e0ccdbfd0603a14901172b"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/cli-refusals.cjs",
+      "sha256": "9c13452ef9c9847d816e3c81c51daf1a3b8bef672dbc9c4f84fc7c9deb55a35d",
+      "expected": "9c13452ef9c9847d816e3c81c51daf1a3b8bef672dbc9c4f84fc7c9deb55a35d"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/early-worker.js",
+      "sha256": "9d0d8dbf87ac083ebac4d6f80ebcc24e794aa7af33f9d65eecbe39a3a84caf05",
+      "expected": "9d0d8dbf87ac083ebac4d6f80ebcc24e794aa7af33f9d65eecbe39a3a84caf05"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/real-backend.cjs",
+      "sha256": "054e106d65c61d37e1cbd5910dea74b31a53145311e8183abbc6da1a3fc9f049",
+      "expected": "054e106d65c61d37e1cbd5910dea74b31a53145311e8183abbc6da1a3fc9f049"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/pause-check.cjs",
+      "sha256": "addcf7437bc1cc1083f3175063390822d4d43c8b4f342876f208b58585e1e6fd",
+      "expected": "addcf7437bc1cc1083f3175063390822d4d43c8b4f342876f208b58585e1e6fd"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/checkpoint.js",
+      "sha256": "e8f858b2d41605b8ae8e699aaa4a5ae43d2d7c2f4eb6c7c061f194bf355a9361",
+      "expected": "e8f858b2d41605b8ae8e699aaa4a5ae43d2d7c2f4eb6c7c061f194bf355a9361"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/startup.cjs",
+      "sha256": "356a62d703fadf759ab19354abde558023d98bc2ba9db8beb6f00578bed1a190",
+      "expected": "356a62d703fadf759ab19354abde558023d98bc2ba9db8beb6f00578bed1a190"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/small-gates.cjs",
+      "sha256": "99ae19daa47aed4c339786542d2c7f4e511bb0c998b799206cdfef0bb7ec9f5a",
+      "expected": "99ae19daa47aed4c339786542d2c7f4e511bb0c998b799206cdfef0bb7ec9f5a"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/compact-plan-gates.cjs",
+      "sha256": "1a511b44038ee4ddc9fddedce91068be3e5cff4a1cdad3a7c5c2a24b60a22292",
+      "expected": "1a511b44038ee4ddc9fddedce91068be3e5cff4a1cdad3a7c5c2a24b60a22292"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/error-boundary.cjs",
+      "sha256": "0e1d0a8c9986ceffd22cf2599b43fe47d68c91b9aecfb41c0929f9ed1aeadff4",
+      "expected": "0e1d0a8c9986ceffd22cf2599b43fe47d68c91b9aecfb41c0929f9ed1aeadff4"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/match-entry.cjs",
+      "sha256": "19c537bb59bf01fb3df2dbf27e46e60a694a587fb6796f8edfa1453a5e325ebe",
+      "expected": "19c537bb59bf01fb3df2dbf27e46e60a694a587fb6796f8edfa1453a5e325ebe"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/game-loop.cjs",
+      "sha256": "8e74288657ecd53eecb1971df13650bcc8f49a83292de38b678a1e11c9036fc9",
+      "expected": "8e74288657ecd53eecb1971df13650bcc8f49a83292de38b678a1e11c9036fc9"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/owned_ledger.py",
+      "sha256": "8a6b52c664e0602dfee6f0a969be26d990df114c3c5ccc43c2d4d6e5560a6036",
+      "expected": "8a6b52c664e0602dfee6f0a969be26d990df114c3c5ccc43c2d4d6e5560a6036"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/final-envelope.cjs",
+      "sha256": "8d187b74f6ce2c4a2c56aac0a7ceae914632524dd70aaf9ff61abf75b54be809",
+      "expected": "8d187b74f6ce2c4a2c56aac0a7ceae914632524dd70aaf9ff61abf75b54be809"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/caller.cjs",
+      "sha256": "62ad4cab830353063c4b2bbe5afff8105ca5b6820c40fb654f3701555681371e",
+      "expected": "62ad4cab830353063c4b2bbe5afff8105ca5b6820c40fb654f3701555681371e"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/numeric-order.cjs",
+      "sha256": "af4bc2104d5a7a8a578f6de3a128cb4fe701d3d6489c07e6c402d710277f2688",
+      "expected": "af4bc2104d5a7a8a578f6de3a128cb4fe701d3d6489c07e6c402d710277f2688"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/runner.py",
+      "sha256": "7d875cc81c6fba287c18d0a691f83cf346569ed81f4944a5b7a57494860458cb",
+      "expected": "7d875cc81c6fba287c18d0a691f83cf346569ed81f4944a5b7a57494860458cb"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/budget.cjs",
+      "sha256": "4b45f1dc166b39285522d8d20d368c8f8e7c9b129e7bc7ec6abc688de380aacd",
+      "expected": "4b45f1dc166b39285522d8d20d368c8f8e7c9b129e7bc7ec6abc688de380aacd"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/kernel_boundary.py",
+      "sha256": "afa63b0b113bdb8f5f112a871e8f183d33b9d493e5e08cce098faa4ecfd5dd21",
+      "expected": "afa63b0b113bdb8f5f112a871e8f183d33b9d493e5e08cce098faa4ecfd5dd21"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/watchdog-gates.cjs",
+      "sha256": "5ef4fcdcf5b4fbfa79f5329c4a5b981b34b07ffe4334200d0d6b8934f1fb921b",
+      "expected": "5ef4fcdcf5b4fbfa79f5329c4a5b981b34b07ffe4334200d0d6b8934f1fb921b"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/diagnostic-verifier.cjs",
+      "sha256": "f30b76a481d16304443029e04ae5f78b5b647b2d64f6aed9ab25d0224303525c",
+      "expected": "f30b76a481d16304443029e04ae5f78b5b647b2d64f6aed9ab25d0224303525c"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/numeric-gates.cjs",
+      "sha256": "856d2a1957f834c0d114514c11c28643a0f1f405cd801f92c85a86af56676955",
+      "expected": "856d2a1957f834c0d114514c11c28643a0f1f405cd801f92c85a86af56676955"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/reference-core.js",
+      "sha256": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05",
+      "expected": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/judge.cjs",
+      "sha256": "a43bed42482ae21a3620449df37b08596bc9fabef31936b27d6c95254fdc7577",
+      "expected": "a43bed42482ae21a3620449df37b08596bc9fabef31936b27d6c95254fdc7577"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/early-page.js",
+      "sha256": "dd36d04685420f7e85536db468e6bad82c298f8dc194e41c5aef166a5c4cb838",
+      "expected": "dd36d04685420f7e85536db468e6bad82c298f8dc194e41c5aef166a5c4cb838"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/context.js",
+      "sha256": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+      "expected": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/browser.cjs",
+      "sha256": "9c85ad831a21ed5177b796a622a35f56f78b3cb1b3e177fb8672696656862b2a",
+      "expected": "9c85ad831a21ed5177b796a622a35f56f78b3cb1b3e177fb8672696656862b2a"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/reference-control-run.js",
+      "sha256": "87dbd43b34f23793c36806ad41a09fda723b5f7b7b10745c0df8b055e3039a0c",
+      "expected": "87dbd43b34f23793c36806ad41a09fda723b5f7b7b10745c0df8b055e3039a0c"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/backend-envelope.cjs",
+      "sha256": "c31e6839a755d370af5f471f8406d251724526c28c3a8a6e44831dc68d5d1ac8",
+      "expected": "c31e6839a755d370af5f471f8406d251724526c28c3a8a6e44831dc68d5d1ac8"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/saved-control-gates.cjs",
+      "sha256": "cb68282a8dd73e39af899d19edccc1e5704c9ff7b69c95ff73ae410a3744f9d7",
+      "expected": "cb68282a8dd73e39af899d19edccc1e5704c9ff7b69c95ff73ae410a3744f9d7"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/golden-driver.cjs",
+      "sha256": "9274b825d971c99306727762fa7b95f44b6344623276004193f5613ce35ae6cc",
+      "expected": "9274b825d971c99306727762fa7b95f44b6344623276004193f5613ce35ae6cc"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/failures.cjs",
+      "sha256": "050e5b93ae0a2c82b2501667bd8bf5c46abd002983f51244913f8082286a1802",
+      "expected": "050e5b93ae0a2c82b2501667bd8bf5c46abd002983f51244913f8082286a1802"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/host.js",
+      "sha256": "dc6cf3e24774e5e6b52c8cf346090f53f261e58b0c7fda1e6d674c7142983d02",
+      "expected": "dc6cf3e24774e5e6b52c8cf346090f53f261e58b0c7fda1e6d674c7142983d02"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-startup-watchdog/owned-ledger.cjs",
+      "sha256": "b375c3389139fd918a26c87f6d967978284a23c5cdae6cac7171e09ceabe0035",
+      "expected": "b375c3389139fd918a26c87f6d967978284a23c5cdae6cac7171e09ceabe0035"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-COMPARISON32-PLAN/preregister.json",
+      "sha256": "126f5a6dade5e44f69f007dc57580772193c809cba8ff08e2a99f162d204db1d",
+      "expected": "126f5a6dade5e44f69f007dc57580772193c809cba8ff08e2a99f162d204db1d"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-COMPARISON32-PLAN/prefix-dictionary.json",
+      "sha256": "86397a79530ad722ab58831d130fde7e40d95ff747b3e88ec290c21f23c577ef",
+      "expected": "86397a79530ad722ab58831d130fde7e40d95ff747b3e88ec290c21f23c577ef"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/CRITIC-STARTUP-WATCHDOG/runtime-source-stopped-before-report.json",
+      "sha256": "73edafe64ea304f6845b863e8c4d0160ba468323e50bfa038d475789b4114822",
+      "expected": "73edafe64ea304f6845b863e8c4d0160ba468323e50bfa038d475789b4114822"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/docs/design/ai-sigma-contract-experiment-isolated-nn-cost.md",
+      "sha256": "58d8a01891bad2c0624ee6bab682bbe647a8f709cc6134f2a792c6de6b1fb4b2"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/docs/design/ai-sigma-continuation-20261001.md",
+      "sha256": "6766deb7b6588c702ba1516558952fb1e6c6d09def7dd155c174f44eb5d3987f"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-NN-SEARCH/final.wasm",
+      "sha256": "891cd5e402885afc234b6041eab682bf429506848c5be532028bbe32e3c2f328"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-ORT-SEARCH/final.wasm",
+      "sha256": "1f54d0b8f0c6d3d7d51935886ed506e44376a2052506be62ca7a726c85a78a01"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/ai-sigma/reference/sigma-pcr250/best.onnx",
+      "sha256": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/reference-fixtures/SIGMA-PARITY-PLAN/fixtures.json",
+      "sha256": "206f46e0763177f138317ba49dc82875fd49a4d2c4ac2844d7fc06911e30bffb"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE/ort-a.outputs.json",
+      "sha256": "060ba1a3f7647adb7c0ac968eb2834d966665920f72eeee2b3798ce9864b382a"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/ort.min.js",
+      "sha256": "95c6f6611837cb50449cb6a0c092145bf493ac64cd0d004033cefc977366e7cb"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/ort-wasm-simd-threaded.jsep.mjs",
+      "sha256": "b69c8812bf2d8356dd248fef0abb35e22d1f05f9c593ca34d4b942f35ea93592"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/ort-wasm-simd-threaded.jsep.wasm",
+      "sha256": "0663b902fb3937883a34375926bdfe3e1c86cd4c99cbc04c06a7cdf46c78bdde"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/ort-package.json",
+      "sha256": "679a922763a66fb8bc43cdd45f9e00c765aeba315b8338ac9268983739c47fae"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-nn-search/host.js",
+      "sha256": "b40e7611b9f351783f7f838c05aa3c9b72aa9c7152d35ad7cececb5f7a3115d1"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-nn-search/src/lib.rs",
+      "sha256": "fbe3587b9f0c979e30a1e71f5abf1bcb926b634d43332e050d81b3a63db05094"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-nn-search/Cargo.lock",
+      "sha256": "dabfaae8b76addad6a1714c89be3a0d003a54ed1aa8995e09fc2d2660e21843a"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-ort-search/host.js",
+      "sha256": "6272fd4ed64faea8d7b4b671ac3d9d01703b7676ecb7b3c5a45d3100addb098c"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-ort-search/src/lib.rs",
+      "sha256": "9fad536fcaaafb858bb588621a421fa71a62fe7339c97cdf13fbdea06aad6c44"
+    }
+  ],
+  "gate_order": [
+    {
+      "id": "initial-p1",
+      "backend": "A",
+      "ordinal": 1
+    },
+    {
+      "id": "initial-p1",
+      "backend": "B",
+      "ordinal": 2
+    },
+    {
+      "id": "initial-p2",
+      "backend": "A",
+      "ordinal": 3
+    },
+    {
+      "id": "initial-p2",
+      "backend": "B",
+      "ordinal": 4
+    },
+    {
+      "id": "asym-h-p2",
+      "backend": "A",
+      "ordinal": 5
+    },
+    {
+      "id": "asym-h-p2",
+      "backend": "B",
+      "ordinal": 6
+    },
+    {
+      "id": "asym-hv-p1",
+      "backend": "A",
+      "ordinal": 7
+    },
+    {
+      "id": "asym-hv-p1",
+      "backend": "B",
+      "ordinal": 8
+    },
+    {
+      "id": "asym-hv-p2",
+      "backend": "A",
+      "ordinal": 9
+    },
+    {
+      "id": "asym-hv-p2",
+      "backend": "B",
+      "ordinal": 10
+    },
+    {
+      "id": "straight-jump-p2",
+      "backend": "A",
+      "ordinal": 11
+    },
+    {
+      "id": "straight-jump-p2",
+      "backend": "B",
+      "ordinal": 12
+    },
+    {
+      "id": "behind-wall-diagonal-p2",
+      "backend": "A",
+      "ordinal": 13
+    },
+    {
+      "id": "behind-wall-diagonal-p2",
+      "backend": "B",
+      "ordinal": 14
+    },
+    {
+      "id": "adjacent-wall-blocked",
+      "backend": "A",
+      "ordinal": 15
+    },
+    {
+      "id": "adjacent-wall-blocked",
+      "backend": "B",
+      "ordinal": 16
+    },
+    {
+      "id": "board-edge-diagonal-p2",
+      "backend": "A",
+      "ordinal": 17
+    },
+    {
+      "id": "board-edge-diagonal-p2",
+      "backend": "B",
+      "ordinal": 18
+    },
+    {
+      "id": "repeat-before-first-return",
+      "backend": "A",
+      "ordinal": 19
+    },
+    {
+      "id": "repeat-before-first-return",
+      "backend": "B",
+      "ordinal": 20
+    },
+    {
+      "id": "repeat-initial-count2",
+      "backend": "A",
+      "ordinal": 21
+    },
+    {
+      "id": "repeat-initial-count2",
+      "backend": "B",
+      "ordinal": 22
+    },
+    {
+      "id": "repeat-before-third-return",
+      "backend": "A",
+      "ordinal": 23
+    },
+    {
+      "id": "repeat-before-third-return",
+      "backend": "B",
+      "ordinal": 24
+    },
+    {
+      "id": "simulation-overlay-count2",
+      "backend": "A",
+      "ordinal": 25
+    },
+    {
+      "id": "simulation-overlay-count2",
+      "backend": "B",
+      "ordinal": 26
+    },
+    {
+      "id": "sibling-a-after-cycle",
+      "backend": "A",
+      "ordinal": 27
+    },
+    {
+      "id": "sibling-a-after-cycle",
+      "backend": "B",
+      "ordinal": 28
+    },
+    {
+      "id": "sibling-b-after-cycle",
+      "backend": "A",
+      "ordinal": 29
+    },
+    {
+      "id": "sibling-b-after-cycle",
+      "backend": "B",
+      "ordinal": 30
+    },
+    {
+      "id": "sibling-root-restored",
+      "backend": "A",
+      "ordinal": 31
+    },
+    {
+      "id": "sibling-root-restored",
+      "backend": "B",
+      "ordinal": 32
+    },
+    {
+      "id": "synthetic-root-double-count",
+      "backend": "A",
+      "ordinal": 33
+    },
+    {
+      "id": "synthetic-root-double-count",
+      "backend": "B",
+      "ordinal": 34
+    },
+    {
+      "id": "reachability-closure-forbidden",
+      "backend": "A",
+      "ordinal": 35
+    },
+    {
+      "id": "reachability-closure-forbidden",
+      "backend": "B",
+      "ordinal": 36
+    },
+    {
+      "id": "all-walls-spent",
+      "backend": "A",
+      "ordinal": 37
+    },
+    {
+      "id": "all-walls-spent",
+      "backend": "B",
+      "ordinal": 38
+    },
+    {
+      "id": "one-wall-in-hand",
+      "backend": "A",
+      "ordinal": 39
+    },
+    {
+      "id": "one-wall-in-hand",
+      "backend": "B",
+      "ordinal": 40
+    },
+    {
+      "id": "synthetic-no-legal-move-draw",
+      "backend": "A",
+      "ordinal": 41
+    },
+    {
+      "id": "synthetic-no-legal-move-draw",
+      "backend": "B",
+      "ordinal": 42
+    },
+    {
+      "id": "synthetic-total-ply-198",
+      "backend": "A",
+      "ordinal": 43
+    },
+    {
+      "id": "synthetic-total-ply-198",
+      "backend": "B",
+      "ordinal": 44
+    },
+    {
+      "id": "synthetic-total-ply-199",
+      "backend": "A",
+      "ordinal": 45
+    },
+    {
+      "id": "synthetic-total-ply-199",
+      "backend": "B",
+      "ordinal": 46
+    },
+    {
+      "id": "synthetic-total-ply-200",
+      "backend": "A",
+      "ordinal": 47
+    },
+    {
+      "id": "synthetic-total-ply-200",
+      "backend": "B",
+      "ordinal": 48
+    },
+    {
+      "id": "goal-before-last-step",
+      "backend": "A",
+      "ordinal": 49
+    },
+    {
+      "id": "goal-before-last-step",
+      "backend": "B",
+      "ordinal": 50
+    },
+    {
+      "id": "synthetic-ply198-before-goal",
+      "backend": "A",
+      "ordinal": 51
+    },
+    {
+      "id": "synthetic-ply198-before-goal",
+      "backend": "B",
+      "ordinal": 52
+    },
+    {
+      "id": "goal-win-legal-replay",
+      "backend": "A",
+      "ordinal": 53
+    },
+    {
+      "id": "goal-win-legal-replay",
+      "backend": "B",
+      "ordinal": 54
+    },
+    {
+      "id": "synthetic-goal-at200",
+      "backend": "A",
+      "ordinal": 55
+    },
+    {
+      "id": "synthetic-goal-at200",
+      "backend": "B",
+      "ordinal": 56
+    }
+  ],
+  "latency_order": [
+    {
+      "id": "initial-p1",
+      "backend": "A",
+      "sample": -1,
+      "warm": true,
+      "ordinal": 1
+    },
+    {
+      "id": "initial-p1",
+      "backend": "B",
+      "sample": -1,
+      "warm": true,
+      "ordinal": 2
+    },
+    {
+      "id": "initial-p1",
+      "backend": "B",
+      "sample": 0,
+      "warm": false,
+      "ordinal": 3
+    },
+    {
+      "id": "initial-p1",
+      "backend": "A",
+      "sample": 0,
+      "warm": false,
+      "ordinal": 4
+    },
+    {
+      "id": "initial-p1",
+      "backend": "A",
+      "sample": 1,
+      "warm": false,
+      "ordinal": 5
+    },
+    {
+      "id": "initial-p1",
+      "backend": "B",
+      "sample": 1,
+      "warm": false,
+      "ordinal": 6
+    },
+    {
+      "id": "initial-p1",
+      "backend": "B",
+      "sample": 2,
+      "warm": false,
+      "ordinal": 7
+    },
+    {
+      "id": "initial-p1",
+      "backend": "A",
+      "sample": 2,
+      "warm": false,
+      "ordinal": 8
+    },
+    {
+      "id": "initial-p1",
+      "backend": "A",
+      "sample": 3,
+      "warm": false,
+      "ordinal": 9
+    },
+    {
+      "id": "initial-p1",
+      "backend": "B",
+      "sample": 3,
+      "warm": false,
+      "ordinal": 10
+    },
+    {
+      "id": "initial-p1",
+      "backend": "B",
+      "sample": 4,
+      "warm": false,
+      "ordinal": 11
+    },
+    {
+      "id": "initial-p1",
+      "backend": "A",
+      "sample": 4,
+      "warm": false,
+      "ordinal": 12
+    },
+    {
+      "id": "asym-hv-p2",
+      "backend": "B",
+      "sample": -1,
+      "warm": true,
+      "ordinal": 13
+    },
+    {
+      "id": "asym-hv-p2",
+      "backend": "A",
+      "sample": -1,
+      "warm": true,
+      "ordinal": 14
+    },
+    {
+      "id": "asym-hv-p2",
+      "backend": "A",
+      "sample": 0,
+      "warm": false,
+      "ordinal": 15
+    },
+    {
+      "id": "asym-hv-p2",
+      "backend": "B",
+      "sample": 0,
+      "warm": false,
+      "ordinal": 16
+    },
+    {
+      "id": "asym-hv-p2",
+      "backend": "B",
+      "sample": 1,
+      "warm": false,
+      "ordinal": 17
+    },
+    {
+      "id": "asym-hv-p2",
+      "backend": "A",
+      "sample": 1,
+      "warm": false,
+      "ordinal": 18
+    },
+    {
+      "id": "asym-hv-p2",
+      "backend": "A",
+      "sample": 2,
+      "warm": false,
+      "ordinal": 19
+    },
+    {
+      "id": "asym-hv-p2",
+      "backend": "B",
+      "sample": 2,
+      "warm": false,
+      "ordinal": 20
+    },
+    {
+      "id": "asym-hv-p2",
+      "backend": "B",
+      "sample": 3,
+      "warm": false,
+      "ordinal": 21
+    },
+    {
+      "id": "asym-hv-p2",
+      "backend": "A",
+      "sample": 3,
+      "warm": false,
+      "ordinal": 22
+    },
+    {
+      "id": "asym-hv-p2",
+      "backend": "A",
+      "sample": 4,
+      "warm": false,
+      "ordinal": 23
+    },
+    {
+      "id": "asym-hv-p2",
+      "backend": "B",
+      "sample": 4,
+      "warm": false,
+      "ordinal": 24
+    },
+    {
+      "id": "straight-jump-p2",
+      "backend": "A",
+      "sample": -1,
+      "warm": true,
+      "ordinal": 25
+    },
+    {
+      "id": "straight-jump-p2",
+      "backend": "B",
+      "sample": -1,
+      "warm": true,
+      "ordinal": 26
+    },
+    {
+      "id": "straight-jump-p2",
+      "backend": "B",
+      "sample": 0,
+      "warm": false,
+      "ordinal": 27
+    },
+    {
+      "id": "straight-jump-p2",
+      "backend": "A",
+      "sample": 0,
+      "warm": false,
+      "ordinal": 28
+    },
+    {
+      "id": "straight-jump-p2",
+      "backend": "A",
+      "sample": 1,
+      "warm": false,
+      "ordinal": 29
+    },
+    {
+      "id": "straight-jump-p2",
+      "backend": "B",
+      "sample": 1,
+      "warm": false,
+      "ordinal": 30
+    },
+    {
+      "id": "straight-jump-p2",
+      "backend": "B",
+      "sample": 2,
+      "warm": false,
+      "ordinal": 31
+    },
+    {
+      "id": "straight-jump-p2",
+      "backend": "A",
+      "sample": 2,
+      "warm": false,
+      "ordinal": 32
+    },
+    {
+      "id": "straight-jump-p2",
+      "backend": "A",
+      "sample": 3,
+      "warm": false,
+      "ordinal": 33
+    },
+    {
+      "id": "straight-jump-p2",
+      "backend": "B",
+      "sample": 3,
+      "warm": false,
+      "ordinal": 34
+    },
+    {
+      "id": "straight-jump-p2",
+      "backend": "B",
+      "sample": 4,
+      "warm": false,
+      "ordinal": 35
+    },
+    {
+      "id": "straight-jump-p2",
+      "backend": "A",
+      "sample": 4,
+      "warm": false,
+      "ordinal": 36
+    }
+  ],
+  "numeric_gate_planned": 56,
+  "latency_calls_planned": 36,
+  "each_backend_latency_calls": 18,
+  "warm_per_backend": 3,
+  "sample_per_backend": 15,
+  "load_session": 1,
+  "startup_NN": 0,
+  "extra_A_in_B": 0,
+  "B_features_precomputed_before_window": true,
+  "MCTS": 0,
+  "fallback": 0,
+  "preregister_changes_after_result": 0,
+  "abs": 0.0001,
+  "rtol": 0.0001,
+  "strict_value": [
+    -1,
+    1
+  ],
+  "RAM": 3221225472,
+  "RSS_guard": 2684354560,
+  "storage_guard": 58720256,
+  "runtime_CPU": 2,
+  "NNthreads": 1,
+  "job_wall_cap_seconds": 180,
+  "runtime_cumulative_cap_seconds": 600,
+  "timerresolution": "start/end clock12 page/worker and performance.now resolution sample",
+  "A_span": "opaque diagnose ABI includes feature conversion, NN, priors, JSON extraction; no internal kernel timestamp",
+  "B_span": "features copy/tensor, session.run API await, output check/extraction, raw_policy; no extra A raw inference",
+  "boundary_warning": "opaque A and B API await are not pure kernel comparable; compare wrapper total with limits",
+  "monitor_cost": "owned Beads reader background on same CPU, no time subtraction",
+  "headroom": {
+    "actual_allocated": 495616,
+    "source_preparation_upper": 8388608,
+    "TMP_profile_upper": 33554432,
+    "raw_clock_logs_upper": 8388608,
+    "ending_monitor_upper": 6291456,
+    "worst_total": 56623104,
+    "guard": 58720256
+  },
+  "other_heavy_now": [],
+  "actual_go": false,
+  "games": 0,
+  "holdout": 0
+}

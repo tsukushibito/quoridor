@@ -1,0 +1,46 @@
+{
+  "fixed_before_payload_read": true,
+  "max_boundaries": 4,
+  "boundaries": [
+    {
+      "boundary": 1,
+      "purpose": "state/history/goal and wall-only path graph",
+      "paths": [
+        "crates/quoridor-core/src/position.rs",
+        "crates/quoridor-core/src/game.rs",
+        "crates/quoridor-core/src/research.rs"
+      ]
+    },
+    {
+      "boundary": 2,
+      "purpose": "present sparse/distance encoding and evaluator",
+      "paths": [
+        "crates/quoridor-ai/src/lib.rs"
+      ]
+    },
+    {
+      "boundary": 3,
+      "purpose": "151 actual search value/backup/root mean and serialization",
+      "paths": [
+        "tools/ai-sigma-sigma-web-port/private/src/context.rs",
+        "tools/ai-sigma-sigma-web-port/private/src/lib.rs",
+        "tools/ai-sigma-sigma-web-port/port-worker.js",
+        "tools/ai-sigma-sigma-web-port/port-main.js"
+      ]
+    },
+    {
+      "boundary": 4,
+      "purpose": "saved teacher schema availability only; no root/game replay",
+      "paths": [
+        "research-data/ai-sigma/132-deep-node-comparison/fixed-inputs.json",
+        "research-data/ai-sigma/132-deep-node-comparison/final-results.json",
+        "research-data/ai-sigma/132-deep-node-comparison/archive-manifest.json",
+        "research-data/ai-sigma/151-sigma-web-port/port151-stageA-r2-analysis.json",
+        "research-data/ai-sigma/151-sigma-web-port/stageA-inputs.json",
+        "research-data/ai-sigma/151-sigma-web-port/port151-stageA-r2-config.json"
+      ]
+    }
+  ],
+  "raw_roots_opened": 0,
+  "whole_game_replay": 0
+}

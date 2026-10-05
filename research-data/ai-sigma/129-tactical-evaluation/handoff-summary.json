@@ -1,0 +1,31 @@
+{
+  "issue": "quoridor-4lc.129",
+  "UTC": "2026-10-02T15:46:00.350442+00:00",
+  "measured_source_Git": "766605299347c46869a2154afe27412162917d2f",
+  "owner_source_commit": "d230ba6",
+  "preserve_source_Git": "207badd",
+  "data_report_Git": "9c6b41cc6e68fb9bc70e025f154a4c4500cab4a4",
+  "run": "tactical129-measure-r1",
+  "stop_path": "research-data/ai-sigma/129-tactical-evaluation/runtime-source-stopped-before-report.json",
+  "stop_SHA256": "343f6ce4e3c05d319222edb78a32eb9b7edf63aebbe5480f662be2964a8f21ad",
+  "archive_path": "research-data/ai-sigma/129-tactical-evaluation/runs-all-attempts.tar.gz",
+  "archive_SHA256": "fc0b8cb2a85221bc61e5b4b30fd258d772cd88327dfff57337084c3a00be0a45",
+  "Git_archive_stream_restore_all_members": 41,
+  "report_path": "docs/reports/ai-sigma-experiment-tactical-evaluation.md",
+  "report_SHA256": "0bdc4c6762ef9a47732507627d7930ec0719b337732b2ebf1cb7eab2a62dc40b",
+  "necessary_reader_paths": [
+    "tools/ai-sigma-tactical-evaluation/",
+    "research-data/ai-sigma/129-tactical-evaluation/",
+    "research-data/ai-sigma/127-tactical-oracle/labels-and-inputs.json"
+  ],
+  "source_and_runtime_stopped": true,
+  "no_extra_NN_or_games": true,
+  "normal_pass": 8,
+  "root1_stress_pass": 4,
+  "certified_blunder": 0,
+  "claim_scope": "finite sharedRuleA labels, all P1 tactical contexts, not general strategy/119-loss explanation/NI",
+  "next_decision": "stop narrow label repetition; keep policy; propose distinct deeper/strategic comparison",
+  "acceptance_owner": "coordinator",
+  "independent_final_acceptance": false,
+  "actual_go": false
+}

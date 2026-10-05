@@ -1,0 +1,799 @@
+{
+  "UTC": "2026-10-04T23:50:08.630018+00:00",
+  "source": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame19-arena-diagnosis/saved-replay-r1/result.json",
+  "sourceSHA": "0279b2cb0e60ef0689c938e0498fa08ec50bbd3b1190b289c7a11532ec9f9d7f",
+  "cases": [
+    {
+      "status": "AVAILABLE",
+      "priority": 0,
+      "reason": "first-board-side-repeat",
+      "slot": 2,
+      "opening": "opening0",
+      "ply": 27,
+      "engine": "NNUE",
+      "side": 2,
+      "Action": 11,
+      "action": {
+        "type": "pawn",
+        "direction": [
+          1,
+          0
+        ]
+      },
+      "completed_depth": 2,
+      "value": -0.16967138648033142,
+      "partial_discarded": 3,
+      "processed": 1366,
+      "NN": 1160,
+      "D_evals": 0,
+      "elapsed_ms": 90.48006296157837,
+      "search_wholewall_ms": 88.86622202396393,
+      "dist_before": [
+        3,
+        14
+      ],
+      "dist_after": [
+        3,
+        15
+      ],
+      "self_goal_distance_change": 1,
+      "wall": false,
+      "board_side_repeat": true,
+      "board_side_prior_ply": 24,
+      "full_history_context_repeat": false,
+      "full_history_SHA_before": "19bea4fb5287478d83ec95f99c0677ccebeb76536d3be878266b5a4854c49cb0",
+      "full_history_SHA_after": "ecaf6d97fdac79ab0ee7b0e175a4fa54b3a9d5432c37bdd4eecff23ad96e2e60",
+      "before_position_key": "4,6|1,1|1|0,7;1,0;3,0;3,6;5,0;7,0|0,1;0,3;0,5;4,7",
+      "after_position_key": "4,6|2,1|0|0,7;1,0;3,0;3,6;5,0;7,0|0,1;0,3;0,5;4,7",
+      "history_entries_after": 28,
+      "source_hand_id": "pilot-r2:2:33",
+      "before_prefix": [
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 6,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "status": "AVAILABLE",
+      "priority": 1,
+      "reason": "first-NNUE-wall",
+      "slot": 3,
+      "opening": "opening1",
+      "ply": 10,
+      "engine": "NNUE",
+      "side": 1,
+      "Action": 85,
+      "action": {
+        "type": "wall",
+        "x": 4,
+        "y": 0,
+        "orientation": "h"
+      },
+      "completed_depth": 2,
+      "value": 0.4858770966529846,
+      "partial_discarded": 3,
+      "processed": 1524,
+      "NN": 1266,
+      "D_evals": 0,
+      "elapsed_ms": 90.37820500135422,
+      "search_wholewall_ms": 89.27318501472473,
+      "dist_before": [
+        5,
+        5
+      ],
+      "dist_after": [
+        5,
+        6
+      ],
+      "self_goal_distance_change": 0,
+      "wall": true,
+      "board_side_repeat": false,
+      "board_side_prior_ply": null,
+      "full_history_context_repeat": false,
+      "full_history_SHA_before": "acee856da2119fe990e16c8ccf380e29de1df10b0bbc2c40e1189d36457ef55c",
+      "full_history_SHA_after": "b20e30ebb10d01607d334a270757dddadb668a672c0495168a9f08f5085b9e25",
+      "before_position_key": "3,5|4,5|0|2,5;4,5|",
+      "after_position_key": "3,5|4,5|1|2,5;4,0;4,5|",
+      "history_entries_after": 12,
+      "source_hand_id": "pilot-r2:3:121",
+      "before_prefix": [
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            1
+          ]
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 5,
+          "orientation": "h"
+        }
+      ]
+    },
+    {
+      "status": "AVAILABLE",
+      "priority": 1,
+      "reason": "first-NNUE-wall",
+      "slot": 5,
+      "opening": "opening2",
+      "ply": 14,
+      "engine": "NNUE",
+      "side": 1,
+      "Action": 83,
+      "action": {
+        "type": "wall",
+        "x": 2,
+        "y": 0,
+        "orientation": "h"
+      },
+      "completed_depth": 2,
+      "value": -0.21396608650684357,
+      "partial_discarded": 3,
+      "processed": 693,
+      "NN": 522,
+      "D_evals": 0,
+      "elapsed_ms": 93.31879699230194,
+      "search_wholewall_ms": 87.93572103977203,
+      "dist_before": [
+        9,
+        9
+      ],
+      "dist_after": [
+        9,
+        10
+      ],
+      "self_goal_distance_change": 0,
+      "wall": true,
+      "board_side_repeat": false,
+      "board_side_prior_ply": null,
+      "full_history_context_repeat": false,
+      "full_history_SHA_before": "1822c7e7bc058ad5abfb04c6e410cdf8903ef87be0dfa89af5ebc4500552a5ca",
+      "full_history_SHA_after": "e36ad0fcddbef8685ea6f6c8bf69f9f4c524290468bd46a6fdad06a023161a17",
+      "before_position_key": "4,1|3,8|0|3,5;5,4;6,1;6,5;6,7|0,7;4,0;4,5;5,2;6,2;7,2;7,4",
+      "after_position_key": "4,1|3,8|1|2,0;3,5;5,4;6,1;6,5;6,7|0,7;4,0;4,5;5,2;6,2;7,2;7,4",
+      "history_entries_after": 16,
+      "source_hand_id": "later4-r1:5:3",
+      "before_prefix": [
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 5,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 0,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 7,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "status": "AVAILABLE",
+      "priority": 2,
+      "reason": "last-NNUE-before-terminal",
+      "slot": 7,
+      "opening": "opening3",
+      "ply": 40,
+      "engine": "NNUE",
+      "side": 1,
+      "Action": 19,
+      "action": {
+        "type": "pawn",
+        "direction": [
+          -1,
+          0
+        ]
+      },
+      "completed_depth": 12,
+      "value": -1,
+      "partial_discarded": 13,
+      "processed": 2487,
+      "NN": 936,
+      "D_evals": 0,
+      "elapsed_ms": 90.4424859881401,
+      "search_wholewall_ms": 88.58724194765091,
+      "dist_before": [
+        7,
+        1
+      ],
+      "dist_after": [
+        6,
+        1
+      ],
+      "self_goal_distance_change": -1,
+      "wall": false,
+      "board_side_repeat": false,
+      "board_side_prior_ply": null,
+      "full_history_context_repeat": false,
+      "full_history_SHA_before": "bbcd7730b908d11228fc8e32d6e155914d096a11009e2f2e311e8649be769fd3",
+      "full_history_SHA_after": "acc28e9ee28a19c6503ddb118eb6bb6b4f77fc98e9be29bb66f7e4196a6e43c5",
+      "before_position_key": "2,2|1,1|0|2,2;3,0;4,1;4,5;6,1;6,2;6,4|0,1;0,3;1,7;2,3;3,2;3,7;4,2;4,4;5,2;5,6;6,7;7,0;7,4",
+      "after_position_key": "1,2|1,1|1|2,2;3,0;4,1;4,5;6,1;6,2;6,4|0,1;0,3;1,7;2,3;3,2;3,7;4,2;4,4;5,2;5,6;6,7;7,0;7,4",
+      "history_entries_after": 42,
+      "source_hand_id": "later4-r1:7:91",
+      "before_prefix": [
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 7,
+          "y": 0,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 5,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 4,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 2,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 1,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 1,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 1,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 0,
+          "y": 3,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 4,
+          "y": 4,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 3,
+          "y": 0,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 5,
+          "y": 6,
+          "orientation": "v"
+        },
+        {
+          "type": "wall",
+          "x": 2,
+          "y": 2,
+          "orientation": "h"
+        },
+        {
+          "type": "wall",
+          "x": 6,
+          "y": 7,
+          "orientation": "v"
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            -1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            1,
+            0
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "pawn",
+          "direction": [
+            0,
+            -1
+          ]
+        }
+      ]
+    }
+  ],
+  "priority": "stored order 0,1,1,2; every case NNUE then D,depth1 then2",
+  "conditions": 16,
+  "fullwindow_each_root_child": true,
+  "tol": {
+    "abs": 1e-05,
+    "rtol": 0.0001
+  },
+  "node_policy": "all legal ascending,TT0/noise0/policy exclusion0,unchanged delta before terminal",
+  "NNcap": 200000,
+  "processed_cap": 400000,
+  "hard_s": 120,
+  "result_selection": "no game or candidate selection; no more condition",
+  "old236_diff_depth_bounds_not_equal": true
+}

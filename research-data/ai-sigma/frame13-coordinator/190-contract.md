@@ -1,0 +1,21 @@
+# quoridor-4lc.190 / QF1小NNUE value・差分更新・最小探索接続
+
+coordinator→hypothesis新現在配分。親frame13ユーザー2時間許可12:45:15–14:45:15、CPU4/RAM8/保持+有効未使用12GiB/GPUinference6GiB/旧条件維持。188は科学/source/子停止・必要41Gitblobを統括有限受入れ/引継close済み。旧188storage486838>guard458752・28086不足/未Git最終manifest/旧r1NOT_RUNを保持し新成功に置換0。今回はPVのLR追加選別をせずNNUEへ最小接続する。ready/show goal+self・pauseなし本人担当→190だけclaim/実開始。新writer tools/ai-sigma-nnue-qf1-prototype/、research-data/ai-sigma/190-nnue-qf1-prototype/、docs/reports/ai-sigma-hypothesis-nnue-qf1-prototype.mdのみ、既176/181/186/188/189設計はreadonly。root設計2path/mainmirror/親13/92/common/roles/registry/他者source/defaultindexへの編集0。
+
+採択はroot189 QF1二固定視点312疎特徴+後段距離2値。docs/design/ai-nnue-feature-design.mdを参照、QF-T1(828/256幅/policy/PVS)到達形の全実装・全比較をgateにしない。今回は接続費を抑える別condition QF1-H32:共有312→32accumulator両P1/P2、手番側/相手側順concat64+distance2→小32ReLU→tanh value、value手番視点。設計初期H128より小さいため容量優劣/最強/CPU速度を認定0、旧313・Sigma648・PV重みを読み替え0。初期randomweights新学習、float32版。量子化/政策/TT/将来T1拡張0。
+
+既2762学習行(1761409+1811353/48game、mixedtrain2260、validation502/8game)をreadonly再利用し、合法rawstate/opening+保存棋譜/既sharedRuleAを必要だけ再生してpawns/H-V/wallsremaining/side/ply/historyを復元、rowID/key/features原648を必要対照に照合する。原state/history欠測を推測で埋め0、復元できない行は対象maskfalse/全分母報告。2762全copyや旧raw全展開0、必要memberstream/小metadataのみ。正式173198holdout転用/新教師/game/NNsession/GPU/依存取得/build/製品0。分割は元game/familyを継承、再利用validationは探索選定で独立holdoutではない。parent教師rootmeanはroot side-to-move・K64 MCTS蒸留で厳密minimax/教師真値ではない。主loss rootmeanMSEのみ、rootNN/zとの無言混合0。rootmean不適格mask、zは別の診断MSE/符号/飽和として残す。
+
+QF1座標: P1goalrow8、P2を180回転/所属交換して固定P2ego goalrow8。pawn80-s/anchor63-a/HV不変、自/敵pawn81+81/H64/V64/rem自11/敵11=312、最大active置き壁20+4=24。二accumulatorは共有weights、手番変更はconcat順だけ。合法pawn手1視点旧/新2vector、wall手1feature+remonehot旧/新3vector両視点、make/unmake親buffer破壊0。wall-only両goalからBFSmap81を壁+goal+graph版でimmutable参照しdistance2はgoal距離/80、pawn移動map共有・wall変更再計算。不可達を0距離/勝敗へ混ぜない。合法壁/NNcache/履歴TTをwallmapと同じkeyで無条件共用0。履歴・terminalは既ルール優先、NN基礎312に履歴が無い限界を保存。
+
+NN0でindex/P2/active/入力mask/距離/合法pawn-jump-diagonal-HV/親復帰を必要fixtureだけ確認。float learnedweightsでfull recompute vs sparse/delta/undoの特徴集合exactとvalue abs1e-5+rtol1e-4を固定し、小選択fixtureは結果前に固定する。feature/parityを全NNUE射程へ拡大0。
+
+小CPU学習は200step/minibatch128/seed19080311/AdamLR.001を固定、rootmeanMSE/value-only新target。validation rootmeanのtrainmean定数baseline(算術のみ)、rootmeanfit/真zerror・game別/phaseと符号は別報告、低lossだけで棋力認定0。f32weights_only checkpoint/専用native weights layout読込→native全再計算/差分パスへ最小接続、追加ONNXexport不要。source/重みversion/feature/activation/STM出力を保存する。sample cap65536（学習25600+beforeafter全2762最大5524+nativeparity/最小探索/費用probe残）/warm0、CPU8単1 torchintra-inter1。3独立runを学習/採用比較と混ぜず、デバッグ同issue有界で失敗版保持、成功scienceを後から置換0。
+
+既sharedRuleAの合法/終局/履歴が薄再用でき、残費があれば固定initial-p1/asym-p2等2rootへ小negamaxαβ(最大depth2/各node1024/全葉sample計上/typed打切り)を接続する。全合法手を対象としpolicyによる手除外0。leafSTMvalue符号反転/終局勝敗draw優先/undo回復を確認し、完成depth・node・Action・失敗/未完了を保存する。nodecapで中断した未完成depthを完成PVへしない。value teacher minmax真値保証0、WDL・SigmaNI・正式棋力0。薄αβが費用に見合わなければevaluator/full-deltaと学習接続までを保存し次の必要最小1単位を明記、全機能完備待ちで開始を止めない。
+
+CPU/RAM: CPU8単logical/RAM1GiB guard896MiB、計算science合計60s/個別modeljob30s、NN0 static120s/各子30s。absolute既trainingpythonを現物/AST/argv/deadlineNN0確認、bare python使用0、managerfamilyRSS/timeout/全子wait/identitystopを保持。187 heavyGPU/CPU生成と非重複、source静的準備は進めるがmock/学習/native探索/計算scriptはphysical窓が成立してから。187をinterrupt/全稿待ちにしない。自然監督CPU0 exactowned/予定と計算CPU数を直前admit、CPU5/unknown迂回0。source実装目安25–35分、newscience14:28/science14:32/process14:36/submit14:41早側（親重開始14:35より早い）。187が14:20まで占有しても静的準備から小CPUjob終了/保存を狙う、余裕不足は科学未実施のままtyped停止、deadline reset0。
+
+新scope384KiB予約/guard320KiB(393216/327680B)、既hyp20MiB/combinedguard19MiBからcurrent確認で配分する。旧保守18873691B+188actual486838B+新393216B=19753745B<19922944B（最終188stop manifest等の後着実増分も先計上、旧量減額0/親追加0）。新forecastはweights/checkpoint専用layoutの両保存+uniqueGit+全残metadata/stop/restore/backupを先に含める。raw/per-row大コピー0/privateindex0、初期図表や全forward出力を無制限保存0。guard近傍なら早く通常writeを停止し必要最小manifestで返却、forecast不明をpass0。188違反を新guardへ移管又は後付け増額で救済0。必要科学入力/重み/source/失敗/版/Gitstreambytes復元/backupを最小で保存。
+
+本人claim/実静的開始/予備状態を統括へ15分内、actualCPUjob開始/終了/currentexactidentity不在を即通知。source/科学子停止後helpersは別管理、全期間/全host保証0。未達/不支持/未実装終了でも保存・stop後統括有限受入れclose、goal他者close0。187主生成利益の採否とNNUEvalue接続の効果を別に報告する。

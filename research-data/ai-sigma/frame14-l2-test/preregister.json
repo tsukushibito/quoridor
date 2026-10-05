@@ -1,0 +1,39 @@
+{
+  "issue": "quoridor-4lc.198",
+  "UTC": "2026-10-04T00:33:16.264895+00:00",
+  "planned_games": 24,
+  "openingsSHA": "5d38dac299ff2e7eeaab5cc3d38683ad1ff2023775f3476dd10ff56c1aeb7157",
+  "source_rule": "same194GPU24 maxB8 K64 root64edge63 tau1 first16 then argmax newply200cap",
+  "no_input_replacement": true,
+  "gate_result": "research-data/ai-sigma/frame14-l2-control/gate-result.json",
+  "gate_threshold": 0.0001,
+  "gate_predicate": [
+    "beststep>0",
+    "weights differ initial",
+    "val gameMSE < WD0 best initial -1e-4",
+    "val gameMSE < train-only constant -1e-4"
+  ],
+  "gate_unknown": "NN/GPU0 until stopped/hash physical handoff; missing not false success",
+  "gate_unmet": "all24NOT_STARTED GATE_NOT_MET",
+  "test_exposure": "old96train+allval+oldtest label-free canonicalmetadata; state ORhistory ORQF1 model input; no target/loss",
+  "testlabels": "protected refs only; freeze before evaluation",
+  "static_CPU": [
+    2
+  ],
+  "static_thread": 1,
+  "static_total_seconds": 180,
+  "science_total_seconds": 360,
+  "science_job_seconds": 300,
+  "cleanup_margin_seconds": 30,
+  "handNNcap": 307200,
+  "debugNN": 0,
+  "RAM_GPU_guard": 5905580032,
+  "VRAM_guard": 6442450944,
+  "cutoffs": {
+    "newheavy": "2026-10-04T01:10:00Z",
+    "science": "2026-10-04T01:15:00Z",
+    "process": "2026-10-04T01:25:00Z",
+    "submit": "2026-10-04T01:35:00Z"
+  },
+  "scientific_started": false
+}

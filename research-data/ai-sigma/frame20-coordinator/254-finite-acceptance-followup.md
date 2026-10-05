@@ -1,0 +1,3 @@
+goal quoridor-4lc /254統括有限受入れ。current全21source5payload SHA、task one-root-leaf-254-v1/schema one-root-leaf-v1/全6COMPLETED・目的postbind・全wait/backgroundcleanup・122NN/357processed/guardian.235053145sを停止版から照合。実root全legal2手21,29、depth1/2 Dclip同値全nonterminalpreabsu>=1、Dtanh/NNUEとも29。元Dclip21は有限argmax所属でありbadmove/真値/深3..6の由来を認定0。254必要pack/Gitbytes/本人notesclosebackupを同実質turnで完了してよい、独立新calc/全稿gate0。
+
+次historyだけNN0案は保留:この結果はNNUE学習の探索利益を直接識別せず、共有RuleAの合法/終局再生に具体不一致がない現在、L凍結NNUE対228忠実step0初期Iの同構造/scale/検索100ms新4slotを次別配分として選ぶ。元初期recipeが特定できない場合代替modelを便宜生成せずNOT_STARTED、同既prefix探索的診断・一般棋力認定0。新issueを別配送するので254を再開/arena追加しない。残枠/physics不足は有限未開始で保存し親期限変更0。返信専用turn不要。

@@ -1,0 +1,20 @@
+{
+  "UTC": "2026-10-03T13:14:36.449667+00:00",
+  "status": "STATIC_ONLY",
+  "AST_files": [
+    "tools/ai-sigma-value-lr-control/save_git.py",
+    "tools/ai-sigma-value-lr-control/launch.py",
+    "tools/ai-sigma-value-lr-control/learn.py"
+  ],
+  "imports_executed": false,
+  "NN": 0,
+  "deadline_guard_preserved": true,
+  "launch_command": "taskset -c 8 python3 -B tools/ai-sigma-value-lr-control/launch.py",
+  "launch_executed": false,
+  "static_checks_limits": "AST parsing and source/schema reads only; no runtime/train/parity certification",
+  "source_SHA256": {
+    "tools/ai-sigma-value-lr-control/save_git.py": "71a3dade7d09ddd319dda6be4d0bec37f1a7317491036667209d2fe9f2a5c0a3",
+    "tools/ai-sigma-value-lr-control/launch.py": "047a6a05b78b6a10e6f6ee4051f2557a904707a5c7c5e3d6dafae210b5bb6f84",
+    "tools/ai-sigma-value-lr-control/learn.py": "46739d296b646cb9983fd4c821f0285dc654a5bd04b3171446eb886661924494"
+  }
+}

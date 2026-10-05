@@ -1,0 +1,369 @@
+{
+  "UTC": "2026-10-03T03:45:53.047029+00:00",
+  "exit": 0,
+  "phase": "stop Git restoration notes backup",
+  "wall_s": 9.655082972021773,
+  "commands": [
+    {
+      "command": [
+        "bash",
+        "scripts/dev/beads.sh",
+        "ready",
+        "--json"
+      ],
+      "wall_s": 1.0544194679823704,
+      "exit": 0,
+      "sampled_family_RSS_peak": 192847872,
+      "instantaneous_peak_guarantee": false,
+      "child_waited": true
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/dev/beads.sh",
+        "show",
+        "quoridor-4lc",
+        "--json"
+      ],
+      "wall_s": 1.4373287049820647,
+      "exit": 0,
+      "sampled_family_RSS_peak": 215560192,
+      "instantaneous_peak_guarantee": false,
+      "child_waited": true
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/dev/beads.sh",
+        "show",
+        "quoridor-4lc.161",
+        "--json"
+      ],
+      "wall_s": 1.4364349560055416,
+      "exit": 0,
+      "sampled_family_RSS_peak": 210780160,
+      "instantaneous_peak_guarantee": false,
+      "child_waited": true
+    },
+    {
+      "command": [
+        "git",
+        "read-tree",
+        "HEAD"
+      ],
+      "wall_s": 0.1031792419962585,
+      "exit": 0,
+      "sampled_family_RSS_peak": 27713536,
+      "instantaneous_peak_guarantee": false,
+      "child_waited": true
+    },
+    {
+      "command": [
+        "git",
+        "add",
+        "--",
+        "docs/reports/ai-sigma-critic-formal-clock.md",
+        "research-data/ai-sigma/161-formal-clock/finalize-r1-error.json",
+        "research-data/ai-sigma/161-formal-clock/instrument-schema.json",
+        "research-data/ai-sigma/161-formal-clock/intake.json",
+        "research-data/ai-sigma/161-formal-clock/minimal-binding.json",
+        "research-data/ai-sigma/161-formal-clock/mock-r1-run.json",
+        "research-data/ai-sigma/161-formal-clock/mock-r1.json",
+        "research-data/ai-sigma/161-formal-clock/mock-r1.log",
+        "research-data/ai-sigma/161-formal-clock/read-query-attempts.json",
+        "research-data/ai-sigma/161-formal-clock/readonly-query-exit2.json",
+        "research-data/ai-sigma/161-formal-clock/science-source-stop.json",
+        "research-data/ai-sigma/161-formal-clock/source-evidence.json",
+        "research-data/ai-sigma/161-formal-clock/start-report-transport.json",
+        "research-data/ai-sigma/161-formal-clock/start-report.txt",
+        "tools/ai-sigma-formal-clock/finalize.py",
+        "tools/ai-sigma-formal-clock/mock.cjs",
+        "tools/ai-sigma-formal-clock/selector.cjs"
+      ],
+      "wall_s": 0.13920124300057068,
+      "exit": 0,
+      "sampled_family_RSS_peak": 23027712,
+      "instantaneous_peak_guarantee": false,
+      "child_waited": true
+    },
+    {
+      "command": [
+        "git",
+        "commit",
+        "-m",
+        "research(161): preserve clock attribution prototype and typed management failures"
+      ],
+      "wall_s": 1.3508968069800176,
+      "exit": 0,
+      "sampled_family_RSS_peak": 42520576,
+      "instantaneous_peak_guarantee": false,
+      "child_waited": true
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "wall_s": 0.04066113699809648,
+      "exit": 0,
+      "sampled_family_RSS_peak": 20934656,
+      "instantaneous_peak_guarantee": false,
+      "child_waited": true
+    },
+    {
+      "command": [
+        "git",
+        "ls-tree",
+        "-r",
+        "--name-only",
+        "b6ba98b0cb21b55bc1fad92b8c8ff61ba962ad74",
+        "--",
+        "tools/ai-sigma-formal-clock",
+        "research-data/ai-sigma/161-formal-clock",
+        "docs/reports/ai-sigma-critic-formal-clock.md"
+      ],
+      "wall_s": 0.04211421398213133,
+      "exit": 0,
+      "sampled_family_RSS_peak": 17063936,
+      "instantaneous_peak_guarantee": false,
+      "child_waited": true
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "b6ba98b0cb21b55bc1fad92b8c8ff61ba962ad74:docs/reports/ai-sigma-critic-formal-clock.md"
+      ],
+      "wall_s": 0.18189181698835455,
+      "exit": 0,
+      "sampled_family_RSS_peak": 22192128,
+      "instantaneous_peak_guarantee": false,
+      "child_waited": true
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "b6ba98b0cb21b55bc1fad92b8c8ff61ba962ad74:research-data/ai-sigma/161-formal-clock/finalize-r1-error.json"
+      ],
+      "wall_s": 0.2094094800122548,
+      "exit": 0,
+      "sampled_family_RSS_peak": 22048768,
+      "instantaneous_peak_guarantee": false,
+      "child_waited": true
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "b6ba98b0cb21b55bc1fad92b8c8ff61ba962ad74:research-data/ai-sigma/161-formal-clock/instrument-schema.json"
+      ],
+      "wall_s": 0.28567704602028243,
+      "exit": 0,
+      "sampled_family_RSS_peak": 21917696,
+      "instantaneous_peak_guarantee": false,
+      "child_waited": true
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "b6ba98b0cb21b55bc1fad92b8c8ff61ba962ad74:research-data/ai-sigma/161-formal-clock/intake.json"
+      ],
+      "wall_s": 0.06885109498398378,
+      "exit": 0,
+      "sampled_family_RSS_peak": 22106112,
+      "instantaneous_peak_guarantee": false,
+      "child_waited": true
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "b6ba98b0cb21b55bc1fad92b8c8ff61ba962ad74:research-data/ai-sigma/161-formal-clock/minimal-binding.json"
+      ],
+      "wall_s": 0.04762916901381686,
+      "exit": 0,
+      "sampled_family_RSS_peak": 17063936,
+      "instantaneous_peak_guarantee": false,
+      "child_waited": true
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "b6ba98b0cb21b55bc1fad92b8c8ff61ba962ad74:research-data/ai-sigma/161-formal-clock/mock-r1-run.json"
+      ],
+      "wall_s": 0.04134831897681579,
+      "exit": 0,
+      "sampled_family_RSS_peak": 17063936,
+      "instantaneous_peak_guarantee": false,
+      "child_waited": true
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "b6ba98b0cb21b55bc1fad92b8c8ff61ba962ad74:research-data/ai-sigma/161-formal-clock/mock-r1.json"
+      ],
+      "wall_s": 0.0395263209939003,
+      "exit": 0,
+      "sampled_family_RSS_peak": 17063936,
+      "instantaneous_peak_guarantee": false,
+      "child_waited": true
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "b6ba98b0cb21b55bc1fad92b8c8ff61ba962ad74:research-data/ai-sigma/161-formal-clock/mock-r1.log"
+      ],
+      "wall_s": 0.04243620700435713,
+      "exit": 0,
+      "sampled_family_RSS_peak": 17063936,
+      "instantaneous_peak_guarantee": false,
+      "child_waited": true
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "b6ba98b0cb21b55bc1fad92b8c8ff61ba962ad74:research-data/ai-sigma/161-formal-clock/read-query-attempts.json"
+      ],
+      "wall_s": 0.038057090976508334,
+      "exit": 0,
+      "sampled_family_RSS_peak": 17063936,
+      "instantaneous_peak_guarantee": false,
+      "child_waited": true
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "b6ba98b0cb21b55bc1fad92b8c8ff61ba962ad74:research-data/ai-sigma/161-formal-clock/readonly-query-exit2.json"
+      ],
+      "wall_s": 0.15561710702604614,
+      "exit": 0,
+      "sampled_family_RSS_peak": 21979136,
+      "instantaneous_peak_guarantee": false,
+      "child_waited": true
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "b6ba98b0cb21b55bc1fad92b8c8ff61ba962ad74:research-data/ai-sigma/161-formal-clock/science-source-stop.json"
+      ],
+      "wall_s": 0.07386722299270332,
+      "exit": 0,
+      "sampled_family_RSS_peak": 21553152,
+      "instantaneous_peak_guarantee": false,
+      "child_waited": true
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "b6ba98b0cb21b55bc1fad92b8c8ff61ba962ad74:research-data/ai-sigma/161-formal-clock/source-evidence.json"
+      ],
+      "wall_s": 0.2692107089969795,
+      "exit": 0,
+      "sampled_family_RSS_peak": 22396928,
+      "instantaneous_peak_guarantee": false,
+      "child_waited": true
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "b6ba98b0cb21b55bc1fad92b8c8ff61ba962ad74:research-data/ai-sigma/161-formal-clock/start-report-transport.json"
+      ],
+      "wall_s": 0.23014140297891572,
+      "exit": 0,
+      "sampled_family_RSS_peak": 22097920,
+      "instantaneous_peak_guarantee": false,
+      "child_waited": true
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "b6ba98b0cb21b55bc1fad92b8c8ff61ba962ad74:research-data/ai-sigma/161-formal-clock/start-report.txt"
+      ],
+      "wall_s": 0.14043327499530278,
+      "exit": 0,
+      "sampled_family_RSS_peak": 22065152,
+      "instantaneous_peak_guarantee": false,
+      "child_waited": true
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "b6ba98b0cb21b55bc1fad92b8c8ff61ba962ad74:tools/ai-sigma-formal-clock/finalize.py"
+      ],
+      "wall_s": 0.0608519859961234,
+      "exit": 0,
+      "sampled_family_RSS_peak": 22114304,
+      "instantaneous_peak_guarantee": false,
+      "child_waited": true
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "b6ba98b0cb21b55bc1fad92b8c8ff61ba962ad74:tools/ai-sigma-formal-clock/mock.cjs"
+      ],
+      "wall_s": 0.050443031010217965,
+      "exit": 0,
+      "sampled_family_RSS_peak": 17080320,
+      "instantaneous_peak_guarantee": false,
+      "child_waited": true
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "b6ba98b0cb21b55bc1fad92b8c8ff61ba962ad74:tools/ai-sigma-formal-clock/selector.cjs"
+      ],
+      "wall_s": 0.07546891598030925,
+      "exit": 0,
+      "sampled_family_RSS_peak": 21716992,
+      "instantaneous_peak_guarantee": false,
+      "child_waited": true
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/dev/beads.sh",
+        "update",
+        "quoridor-4lc.161",
+        "--append-notes",
+        "161: NN0 fixed1000ms cycle/402 main validated CP/411 planned public/500 bound proposal. 14 mock pass, 5 source-route binding checks. Real ORT tail/kernelCPU/mode unproven, formal_ready=false/Chrome0. report docs/reports/ai-sigma-critic-formal-clock.md; data Git b6ba98b0cb21b55bc1fad92b8c8ff61ba962ad74. Source/scientific child stopped; query missing paths and management RLIMIT_AS Go reserve failure preserved. Coordinator acceptance/close pending."
+      ],
+      "wall_s": 0.6152049390075263,
+      "exit": 0,
+      "sampled_family_RSS_peak": 221470720,
+      "instantaneous_peak_guarantee": false,
+      "child_waited": true
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/dev/beads.sh",
+        "backup",
+        "sync"
+      ],
+      "wall_s": 1.420369800995104,
+      "exit": 0,
+      "sampled_family_RSS_peak": 200908800,
+      "instantaneous_peak_guarantee": false,
+      "child_waited": true
+    }
+  ],
+  "source_stop_sha256": "a1327b1456cc2ac75ff13701896aa4517b9d9fd92ee69b7050ee892986c7103f",
+  "data_Git": "b6ba98b0cb21b55bc1fad92b8c8ff61ba962ad74",
+  "all_helpers_waited": true,
+  "static_total_before_cleanup": "cheap source/read/admission and 1 mock; see intake/mock run; no exact whole-team CPU claim"
+}

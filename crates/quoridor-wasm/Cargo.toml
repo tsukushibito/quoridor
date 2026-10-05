@@ -8,6 +8,7 @@ crate-type = ["cdylib", "rlib"]
 default = []
 rules = ["dep:serde", "dep:serde_json", "dep:ts-rs"]
 ai = ["dep:quoridor-ai", "dep:serde", "dep:serde_json", "dep:ts-rs"]
+research = ["ai", "quoridor-core/research-diagnostics", "quoridor-ai/research-diagnostics"]
 [dependencies]
 wasm-bindgen = "0.2"
 serde = { version = "1", features = ["derive"], optional = true }
@@ -30,3 +31,8 @@ required-features = ["rules"]
 name = "export-ai-fixtures"
 path = "src/bin/export_ai_fixtures.rs"
 required-features = ["ai"]
+
+[[bin]]
+name = "research-parity"
+path = "src/bin/research_parity.rs"
+required-features = ["research"]

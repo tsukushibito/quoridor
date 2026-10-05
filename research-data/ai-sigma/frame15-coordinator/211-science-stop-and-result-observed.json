@@ -1,0 +1,291 @@
+{
+  "UTC": "2026-10-04T04:56:53.110479+00:00",
+  "issue": "quoridor-4lc.211",
+  "snapshots": {
+    "research-data/ai-sigma/frame15-input-scale-control/science-stop.json": {
+      "SHA": "2c3362749249b8c385a1bbc7130dbea705f3602d72f1d77a0da724ff87d28dde",
+      "data": {
+        "UTC": "2026-10-04T04:55:25.444340+00:00",
+        "issue": "quoridor-4lc.211",
+        "science_source_stopped": true,
+        "source_SHA": {
+          "tools/ai-sigma-input-scale-control/save_git.py": "275da7790187a1b325fa5d22bd75ff2c60ec4802b85a58d6813b4d19d2ca7ff8",
+          "tools/ai-sigma-input-scale-control/launch.py": "986c143556aaaa9c9db2d73350cb8b49c23fa681904ae60ab05b1e7ed86b04e4",
+          "tools/ai-sigma-input-scale-control/run.py": "dff281ca338563f201840a70947bc927faa279002defb454ae7e757a084b74bb",
+          "tools/ai-sigma-input-scale-control/prepare.py": "194df72eef6c2e30e972181dd46269037450be693fff72afc9295bbe3ae76dbf"
+        },
+        "owned_science": {
+          "id": "train-scale-r1",
+          "kind": "heavy",
+          "UTC": "2026-10-04T04:53:58.461697+00:00",
+          "identity": {
+            "pid": 4015517,
+            "ppid": 4015456,
+            "pgrp": 4015517,
+            "tick": "34260361",
+            "RSS": 0,
+            "cmd": "",
+            "affinity": [
+              2
+            ]
+          },
+          "command": [
+            "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+            "-B",
+            "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-input-scale-control/run.py"
+          ],
+          "wall_seconds": 3.098458861000836,
+          "peak_family_RSS": 787820544,
+          "exit": 0,
+          "reason": "completed",
+          "child_waited": true,
+          "remaining": [],
+          "current_exact_identity_absent": true,
+          "samples_charged": 116111,
+          "sample_cap": 116111,
+          "CPU": [
+            2
+          ],
+          "GPU": 0
+        },
+        "new_science": false,
+        "GPU": 0,
+        "teacher_test_game_created": 0
+      }
+    },
+    "research-data/ai-sigma/frame15-input-scale-control/result.json": {
+      "SHA": "23b41273fc1ed0547cf76b87f2da0cfe2ea1f671aa663c5e26670f10b3ad8903",
+      "data": {
+        "issue": "quoridor-4lc.211",
+        "primary200": {
+          "step": 200,
+          "old_validation_gameMSE": 0.659847319505419,
+          "standardized_validation_gameMSE": 0.6139164435565568,
+          "delta": -0.04593087594886214,
+          "train_gameMSE": 0.5485668558505573,
+          "all_samples": 78709,
+          "train_seen": 25600,
+          "epochs": 5.501826778422523,
+          "elapsed_s": 1.589888182003051,
+          "val_z_gameMSE": 0.9456283894770868,
+          "val_z_sign_accuracy": 0.6193910256410257,
+          "val_saturation": 0.0
+        },
+        "primary_baseline_fixed": 0.659847319505419,
+        "primary_delta": -0.04593087594886214,
+        "best_secondary_step": 200,
+        "best_secondary_validation_gameMSE": 0.6139164435565568,
+        "distance_baseline": 0.48514681311997876,
+        "distance_gap": 0.12876963043657808,
+        "constant_baseline": 0.6787804677332444,
+        "initial_function_parity": {
+          "PASS": true,
+          "raw_additional_forward_samples": 5901,
+          "scaled_initial_forward_already_charged": 5901,
+          "maxabs": 2.2351741790771484e-08,
+          "atol": 1e-06,
+          "train_rows": 4653,
+          "validation_rows": 1248,
+          "test_rows": 0,
+          "no_step_before_parity": true,
+          "raw_tensor_SHA": "e5d218c9750d581eab7ca6a114acaa8f3cf5bd24474e3f639280705271fc7ddb",
+          "scaled_initial_tensor_SHA": "51b9a8c03b2f8b85952e31602db827b069ae35c4c2c7f0a01b432f82fc64b09e"
+        },
+        "curves": [
+          {
+            "step": 0,
+            "old_validation_gameMSE": 0.6901755738627967,
+            "standardized_validation_gameMSE": 0.6901755739206464,
+            "delta": 5.7849725010328257e-11,
+            "train_gameMSE": 0.7374183148786417,
+            "all_samples": 5901,
+            "train_seen": 0,
+            "epochs": 0.0,
+            "elapsed_s": 0.9027668060152791,
+            "val_z_gameMSE": 1.0141449881209026,
+            "val_z_sign_accuracy": 0.4951923076923077,
+            "val_saturation": 0.0
+          },
+          {
+            "step": 1,
+            "old_validation_gameMSE": 0.6898847854683682,
+            "standardized_validation_gameMSE": 0.6897735534349847,
+            "delta": -0.00011123203338347931,
+            "train_gameMSE": 0.7367884603765192,
+            "all_samples": 11930,
+            "train_seen": 128,
+            "epochs": 0.027509133892112615,
+            "elapsed_s": 0.9908611939754337,
+            "val_z_gameMSE": 1.0137234703571119,
+            "val_z_sign_accuracy": 0.4951923076923077,
+            "val_saturation": 0.0
+          },
+          {
+            "step": 2,
+            "old_validation_gameMSE": 0.6895874136901233,
+            "standardized_validation_gameMSE": 0.689364872110387,
+            "delta": -0.00022254157973633504,
+            "train_gameMSE": 0.7361412761111003,
+            "all_samples": 17959,
+            "train_seen": 256,
+            "epochs": 0.05501826778422523,
+            "elapsed_s": 1.0339278699830174,
+            "val_z_gameMSE": 1.0133055074010653,
+            "val_z_sign_accuracy": 0.4951923076923077,
+            "val_saturation": 0.0
+          },
+          {
+            "step": 5,
+            "old_validation_gameMSE": 0.6886433129396706,
+            "standardized_validation_gameMSE": 0.6880781907922495,
+            "delta": -0.0005651221474211043,
+            "train_gameMSE": 0.7342110198876989,
+            "all_samples": 24244,
+            "train_seen": 640,
+            "epochs": 0.13754566946056307,
+            "elapsed_s": 1.0777300719637424,
+            "val_z_gameMSE": 1.0119866297745304,
+            "val_z_sign_accuracy": 0.4951923076923077,
+            "val_saturation": 0.0
+          },
+          {
+            "step": 10,
+            "old_validation_gameMSE": 0.687475573276023,
+            "standardized_validation_gameMSE": 0.6863339105274169,
+            "delta": -0.0011416627486061648,
+            "train_gameMSE": 0.7313838687108806,
+            "all_samples": 30785,
+            "train_seen": 1280,
+            "epochs": 0.27509133892112614,
+            "elapsed_s": 1.221619763004128,
+            "val_z_gameMSE": 1.0102333076307286,
+            "val_z_sign_accuracy": 0.4951923076923077,
+            "val_saturation": 0.0
+          },
+          {
+            "step": 20,
+            "old_validation_gameMSE": 0.6860022374275525,
+            "standardized_validation_gameMSE": 0.6837030149918136,
+            "delta": -0.002299222435738879,
+            "train_gameMSE": 0.7265201467645971,
+            "all_samples": 37966,
+            "train_seen": 2560,
+            "epochs": 0.5501826778422523,
+            "elapsed_s": 1.2740599800017662,
+            "val_z_gameMSE": 1.0076470079169546,
+            "val_z_sign_accuracy": 0.4951923076923077,
+            "val_saturation": 0.0
+          },
+          {
+            "step": 50,
+            "old_validation_gameMSE": 0.6813486484639736,
+            "standardized_validation_gameMSE": 0.675383026280608,
+            "delta": -0.005965622183365604,
+            "train_gameMSE": 0.7109607060404918,
+            "all_samples": 47707,
+            "train_seen": 6400,
+            "epochs": 1.3754566946056308,
+            "elapsed_s": 1.346102727984544,
+            "val_z_gameMSE": 0.9992670648808611,
+            "val_z_sign_accuracy": 0.4863782051282051,
+            "val_saturation": 0.0
+          },
+          {
+            "step": 100,
+            "old_validation_gameMSE": 0.6770578240003715,
+            "standardized_validation_gameMSE": 0.662975805429976,
+            "delta": -0.014082018570395483,
+            "train_gameMSE": 0.6811025922157777,
+            "all_samples": 60008,
+            "train_seen": 12800,
+            "epochs": 2.7509133892112616,
+            "elapsed_s": 1.4394143359968439,
+            "val_z_gameMSE": 0.9877087001709587,
+            "val_z_sign_accuracy": 0.5873397435897436,
+            "val_saturation": 0.0
+          },
+          {
+            "step": 200,
+            "old_validation_gameMSE": 0.659847319505419,
+            "standardized_validation_gameMSE": 0.6139164435565568,
+            "delta": -0.04593087594886214,
+            "train_gameMSE": 0.5485668558505573,
+            "all_samples": 78709,
+            "train_seen": 25600,
+            "epochs": 5.501826778422523,
+            "elapsed_s": 1.589888182003051,
+            "val_z_gameMSE": 0.9456283894770868,
+            "val_z_sign_accuracy": 0.6193910256410257,
+            "val_saturation": 0.0
+          },
+          {
+            "step": 400,
+            "old_validation_gameMSE": 0.7196768814218523,
+            "standardized_validation_gameMSE": 0.6487715053247433,
+            "delta": -0.07090537609710901,
+            "train_gameMSE": 0.2572832049822598,
+            "all_samples": 110210,
+            "train_seen": 51200,
+            "epochs": 11.003653556845046,
+            "elapsed_s": 1.8461481499834917,
+            "val_z_gameMSE": 1.003295824816012,
+            "val_z_sign_accuracy": 0.5488782051282052,
+            "val_saturation": 0.0
+          }
+        ],
+        "samples": 116111,
+        "train_samples": 51200,
+        "evaluation_samples": 59010,
+        "raw_parity_samples": 5901,
+        "same_batch_order": true,
+        "validation24_primary_game_count": 24,
+        "validation_reused_single_seed": true,
+        "old_test_read": false,
+        "strength_claim": false,
+        "capacity_or_information_added": false,
+        "coordinate_vs_function": "same initial function; Adam coordinate/raw update and centering bias coupling changed",
+        "interpretation": "finite200step benefit supports investigating conditioning; does not identify sole cause or generalize beyond reusedval/one seed",
+        "next_max_one": "small future control of distance-column effective raw updates, centering/bias coupling distinguished; no automatic newrun"
+      }
+    },
+    "research-data/ai-sigma/frame15-input-scale-control/jobs/train-scale-r1/process.json": {
+      "SHA": "362654265693345552ef9ff9a59844fc8968244da0ec35eeec9347c891d56169",
+      "data": {
+        "id": "train-scale-r1",
+        "kind": "heavy",
+        "UTC": "2026-10-04T04:53:58.461697+00:00",
+        "identity": {
+          "pid": 4015517,
+          "ppid": 4015456,
+          "pgrp": 4015517,
+          "tick": "34260361",
+          "RSS": 0,
+          "cmd": "",
+          "affinity": [
+            2
+          ]
+        },
+        "command": [
+          "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+          "-B",
+          "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-input-scale-control/run.py"
+        ],
+        "wall_seconds": 3.098458861000836,
+        "peak_family_RSS": 787820544,
+        "exit": 0,
+        "reason": "completed",
+        "child_waited": true,
+        "remaining": [],
+        "current_exact_identity_absent": true,
+        "samples_charged": 116111,
+        "sample_cap": 116111,
+        "CPU": [
+          2
+        ],
+        "GPU": 0
+      }
+    }
+  },
+  "acceptance": "actual1scientificrun exited0/waitexactabsent; initialfunctionparity andprimaryrawcomparison observed; independent212 finiteclaim pending",
+  "limits": "single seed reused validation, same capacity and information, optimizer coordinates and biascoupling changed; distance not exceeded, NI0"
+}

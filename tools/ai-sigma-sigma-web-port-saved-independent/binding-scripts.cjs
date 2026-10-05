@@ -1,0 +1,8 @@
+'use strict';
+const fs=require('fs'),path=require('path'),cp=require('child_process'),vm=require('vm'),crypto=require('crypto');
+const R=path.resolve(__dirname,'../..'),refs=[],cache=new Map();
+function measuredBytes(filename){const p=path.resolve(filename);if(!p.startsWith(R+'/'))return fs.readFileSync(p);const relative=path.relative(R,p),r=cp.spawnSync('git',['show','b62cde0:'+relative],{cwd:R,encoding:null,maxBuffer:4*1024*1024});const b=r.status===0?r.stdout:fs.readFileSync(p);refs.push({path:relative,Git:r.status===0?'b62cde0':null,fallback_current:r.status!==0,SHA256:crypto.createHash('sha256').update(b).digest('hex')});return b;}
+function read(p,encoding){const b=measuredBytes(p);return encoding?b.toString(typeof encoding==='string'?encoding:'utf8'):b;}
+function load(p){p=path.resolve(p);if(!path.extname(p))p+='.cjs';if(cache.has(p))return cache.get(p).exports;const m={exports:{}};cache.set(p,m);function req(n){if(n==='fs')return {...fs,readFileSync:read};if(n.startsWith('.'))return load(path.resolve(path.dirname(p),n));return require(n);}const fn=vm.runInThisContext('(function(require,module,exports,__dirname,__filename){'+read(p,'utf8')+'\n})',{filename:p});fn(req,m,m.exports,path.dirname(p),p);return m.exports;}
+const a=load(R+'/tools/ai-sigma-sigma-web-port/adapters.cjs'),current=require(R+'/tools/ai-sigma-sigma-web-port/adapters.cjs');const table=a=>Object.fromEntries(['main','worker','producer','checkpoint','cache','reference','base-worker'].map(n=>{const s=a.script(n);return[n,{bytes:s.length,SHA256:crypto.createHash('sha256').update(s).digest('hex')}]}));
+console.log(JSON.stringify({measured:table(a),current:table(current),refs}));

@@ -1,0 +1,67 @@
+{
+  "at": "2026-10-02T11:57:51.724792+00:00",
+  "pointer": {
+    "issue": "quoridor-4lc.92",
+    "frame": 8,
+    "updated_by": "quoridor-4lc.92-contract4",
+    "record": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame8/live-applied.json",
+    "run": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame8-b03a3825-b373-4f4c-8e19-2390bdd141ea",
+    "scheduler": {
+      "pid": 2402552,
+      "start_ticks": "19006242",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "monitor": {
+      "pid": 2402571,
+      "start_ticks": "19006262",
+      "state": "R",
+      "rss_bytes": 20586496,
+      "cpu_ticks": 2,
+      "affinity": [
+        0
+      ],
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    }
+  },
+  "state": {
+    "binding": {
+      "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+      "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+      "target": "supervisor",
+      "dispatch_issue": "quoridor-4lc.40",
+      "contract_file": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+    },
+    "process": {
+      "pid": 2402552,
+      "start_ticks": "19006242",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "phase": "running",
+    "recovery_required": false,
+    "last_result": {
+      "at": "2026-10-02T11:54:28.824031+00:00",
+      "event": "owned_turn_finished",
+      "turn_id": "01a0fc75-79c9-76d1-815f-7e6b7a566730",
+      "status": "completed"
+    },
+    "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+    "config_sha256": "337dd95bc65165949183184ce95b57e6ebe918e8bc5db187fa7a64ab2d42bc24",
+    "contract_sha256": "a8f554579b70bdf1431b70b9a73e280c421efc3880a5f083a6fbfca9c345be42",
+    "next_at": 1790943149.0452216,
+    "owned": null
+  },
+  "supervisor_status": {
+    "type": "idle"
+  },
+  "turns": [
+    {
+      "id": "01a0fc75-79c9-76d1-815f-7e6b7a566730",
+      "status": "completed"
+    },
+    {
+      "id": "01a0fc63-2bab-7820-b7f8-dcdf7729ad4e",
+      "status": "interrupted"
+    }
+  ]
+}

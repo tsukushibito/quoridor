@@ -1,0 +1,299 @@
+{
+  "UTC": "2026-10-04T11:13:48.856039+00:00",
+  "assignment": {
+    "baseline": {
+      "workers": {
+        "2": 32,
+        "4": 32,
+        "6": 32
+      },
+      "cohorts": {
+        "2": {
+          "8": 16,
+          "20": 16
+        },
+        "4": {
+          "12": 16,
+          "24": 16
+        },
+        "6": {
+          "16": 16,
+          "28": 16
+        }
+      }
+    },
+    "balanced": {
+      "workers": {
+        "2": 32,
+        "4": 32,
+        "6": 32
+      },
+      "cohorts": {
+        "2": {
+          "8": 6,
+          "20": 6,
+          "16": 5,
+          "28": 5,
+          "12": 5,
+          "24": 5
+        },
+        "4": {
+          "12": 6,
+          "24": 6,
+          "8": 5,
+          "20": 5,
+          "16": 5,
+          "28": 5
+        },
+        "6": {
+          "16": 6,
+          "28": 6,
+          "12": 5,
+          "24": 5,
+          "8": 5,
+          "20": 5
+        }
+      }
+    }
+  },
+  "bindings": {
+    "research-data/ai-sigma/frame16-teacher-throughput/fresh96-stage/openings.json": {
+      "expected": "8fff4511f2afeb0a995395fd86be188afed7ac463415eba7a1e637437cd193d0",
+      "actual": "8fff4511f2afeb0a995395fd86be188afed7ac463415eba7a1e637437cd193d0"
+    },
+    "tools/ai-sigma-teacher-throughput/worker.cjs": {
+      "expected": "1006a89d211d904e5d0bb1d52e689698a5ee3b2f2e6004b27a98e5ab6de7ac1b",
+      "actual": "1006a89d211d904e5d0bb1d52e689698a5ee3b2f2e6004b27a98e5ab6de7ac1b"
+    },
+    "tools/ai-sigma-teacher-throughput/pipe.cjs": {
+      "expected": "c143f96713e125bf1c4c4bf2451f30850fd9a10ef01b4bfbfec5e7a6cf2fb6b8",
+      "actual": "c143f96713e125bf1c4c4bf2451f30850fd9a10ef01b4bfbfec5e7a6cf2fb6b8"
+    },
+    "tools/ai-sigma-teacher-throughput/adapter.py": {
+      "expected": "bcaff195d60ec6f7d19dcbe6a6a8b97960bbeffc8e646589a3af71e5ebed1a83",
+      "actual": "bcaff195d60ec6f7d19dcbe6a6a8b97960bbeffc8e646589a3af71e5ebed1a83"
+    },
+    "tools/ai-sigma-teacher-throughput/codec-control/provider.py": {
+      "expected": "a422650a8cf01b61870c28e800b4595db7e4699166a5b02518ac23e0cdc8666e",
+      "actual": "a422650a8cf01b61870c28e800b4595db7e4699166a5b02518ac23e0cdc8666e"
+    },
+    "tools/ai-sigma-teacher-throughput/codec-control/broker.cjs": {
+      "expected": "90bc923cca6603d5af634926f2cd7ad4f237f248dc551d61480ba7e9699d28a4",
+      "actual": "90bc923cca6603d5af634926f2cd7ad4f237f248dc551d61480ba7e9699d28a4"
+    },
+    "tools/ai-sigma-teacher-throughput/codec-control/wire.cjs": {
+      "expected": "4f8a934f3f998325a8574bed5a9a04d7ed8737046a766070ba628518fddcf709",
+      "actual": "4f8a934f3f998325a8574bed5a9a04d7ed8737046a766070ba628518fddcf709"
+    },
+    "tools/ai-sigma-manygame-generation/pause-monitor.cjs": {
+      "expected": "265f7c8aa34f9a7f7f06f2ac2441546bd3ab7c36519196a70704351c61bddbea",
+      "actual": "265f7c8aa34f9a7f7f06f2ac2441546bd3ab7c36519196a70704351c61bddbea"
+    },
+    "tools/ai-sigma-native-baseline/reference.cjs": {
+      "expected": "85cae30273fa481f96ec28fa77eeb5907bb203812c7234f9ffdfd75d337848cf",
+      "actual": "85cae30273fa481f96ec28fa77eeb5907bb203812c7234f9ffdfd75d337848cf"
+    }
+  },
+  "summaries": {
+    "balanced-r3-summary": {
+      "status": {
+        "REGISTERED_UNFINISHED_UNKNOWN": 24,
+        "NOT_STARTED": 72
+      },
+      "policy": 96,
+      "z": 0,
+      "joint": 0,
+      "unknown_z_rows": 96,
+      "joint_per_job_s": 0.0,
+      "jobwall": 12.18316583498381,
+      "exit": -15,
+      "stop_reason": "CURRENT_FOREIGN_COMPUTE_STARTED",
+      "actualNN": null,
+      "workerNN": null,
+      "startup": null,
+      "batch": null,
+      "worker_spans": [
+        null,
+        null,
+        null
+      ],
+      "owner_quality_reference_only": 96
+    },
+    "balanced-r4-summary": {
+      "status": {
+        "REGISTERED_UNFINISHED_UNKNOWN": 24,
+        "GOAL": 1,
+        "NOT_STARTED": 71
+      },
+      "policy": 388,
+      "z": 19,
+      "joint": 19,
+      "unknown_z_rows": 369,
+      "joint_per_job_s": 0.6987286814786325,
+      "jobwall": 27.19224285997916,
+      "exit": -15,
+      "stop_reason": "PAUSED",
+      "actualNN": null,
+      "workerNN": null,
+      "startup": null,
+      "batch": null,
+      "worker_spans": [
+        null,
+        null,
+        null
+      ],
+      "owner_quality_reference_only": 388
+    },
+    "baseline-r1-summary": {
+      "status": {
+        "NOT_STARTED": 96
+      },
+      "policy": 0,
+      "z": 0,
+      "joint": 0,
+      "unknown_z_rows": 0,
+      "joint_per_job_s": 0.0,
+      "jobwall": 4.494707922975067,
+      "exit": 1,
+      "stop_reason": null,
+      "actualNN": null,
+      "workerNN": 0,
+      "startup": 0,
+      "batch": null,
+      "worker_spans": [
+        null,
+        null,
+        null
+      ],
+      "owner_quality_reference_only": 0
+    },
+    "baseline-r2-summary": {
+      "status": {
+        "GOAL": 71,
+        "REGISTERED_UNFINISHED_UNKNOWN": 21,
+        "NOT_STARTED": 4
+      },
+      "policy": 3773,
+      "z": 3315,
+      "joint": 3315,
+      "unknown_z_rows": 458,
+      "joint_per_job_s": 15.113568982455305,
+      "jobwall": 219.33932374598226,
+      "exit": -15,
+      "stop_reason": "CURRENT_FOREIGN_COMPUTE_STARTED",
+      "actualNN": null,
+      "workerNN": null,
+      "startup": null,
+      "batch": null,
+      "worker_spans": [
+        null,
+        null,
+        null
+      ],
+      "owner_quality_reference_only": 3773
+    }
+  },
+  "attempts": [
+    {
+      "run": "balanced-r3",
+      "model_slot": true,
+      "actualNN": null,
+      "budgetNN": 307200,
+      "wall": 12.18316583498381,
+      "exit": -15
+    },
+    {
+      "run": "balanced-r4",
+      "model_slot": true,
+      "actualNN": null,
+      "budgetNN": 307200,
+      "wall": 27.19224285997916,
+      "exit": -15
+    },
+    {
+      "run": "baseline-r1",
+      "model_slot": false,
+      "actualNN": null,
+      "budgetNN": 0,
+      "wall": 4.494707922975067,
+      "exit": 1
+    },
+    {
+      "run": "baseline-r2",
+      "model_slot": true,
+      "actualNN": null,
+      "budgetNN": 307200,
+      "wall": 219.33932374598226,
+      "exit": -15
+    }
+  ],
+  "management": [
+    {
+      "run": "balanced-r1",
+      "receipt": {
+        "UTC": "2026-10-04T10:57:57.643018+00:00",
+        "actual_science_started": false,
+        "model_NN": 0,
+        "typed": "SUPERVISOR_QUIET_SHORT",
+        "guard_before_child": true,
+        "original_hard_s": 420,
+        "jobwall_unknown": true,
+        "conservative_management_charge_s": 5,
+        "actual_child_identity": []
+      }
+    },
+    {
+      "run": "balanced-r2",
+      "receipt": {
+        "actual_science_started": false,
+        "model_NN": 0,
+        "typed": "SUPERVISOR_QUIET_SHORT",
+        "guard_before_child": true,
+        "original_hard_s": 330,
+        "jobwall_unknown": true,
+        "conservative_management_charge_s": 5,
+        "actual_child_identity": []
+      }
+    }
+  ],
+  "model_slots": 3,
+  "owner_cost_reference": {
+    "additional_admission_management_wall_unknown": true,
+    "admission_failure_conservative_s": 10,
+    "management_conservative_total_bound_s": 150,
+    "heavy_known_s": 263.2094403639203,
+    "heavy_upper_with_management_admissions_s": 273.2094403639203,
+    "finalize_math_wall_s": 0.7026226769667119
+  },
+  "measured_allattempt_wall": 263.2094403639203,
+  "budget_NN_conservative": 921600,
+  "completed_comparisons": [],
+  "inputSHA": {
+    "research-data/ai-sigma/frame18-worker-balance/preregister.json": "cfe341e8976d6df8d4eb92e155e34ede82dda6bc11af0c17541ca1770c3e1dab",
+    "research-data/ai-sigma/frame18-worker-balance/science-stop.json": "c07a73d139f320bc2917ebf4b9f34e764614f2b128934348247a93c9d97ae62b",
+    "research-data/ai-sigma/frame18-worker-balance/baseline-assignment.json": "295d25300714d1a6c40b520e4b3f4ff9f1739982054c3d702949a3199cd8612e",
+    "research-data/ai-sigma/frame18-worker-balance/balanced-assignment.json": "e0b01667dcffc20bc6526b02fc9c75ad9f9ec66c4dad51c468ef48d97ed5b0a8",
+    "research-data/ai-sigma/frame18-worker-balance/balanced-r2-config.json": "4fcd364e1418fbd27f9be522eb68a977901584a727b6a8c48ea7b763b14d64f0",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame16-teacher-throughput/fresh96-stage/openings.json": "8fff4511f2afeb0a995395fd86be188afed7ac463415eba7a1e637437cd193d0",
+    "research-data/ai-sigma/frame18-worker-balance/balanced-r3-summary.json": "a484ed98db1a028ccdb23a4cf77dd60cadc86d3efa0051f6d633d6be55399df8",
+    "research-data/ai-sigma/frame18-worker-balance/jobs/balanced-r3/process.json": "5956afa48b68468d26e17a36ddd7ecdb66a4454f7f4ae8ceca1f9f246ca71551",
+    "research-data/ai-sigma/frame18-worker-balance/balanced-r4-summary.json": "2d26f3d1a936e092e50032f0308cd0a3da84e346537d60e27d9e47233e3f488a",
+    "research-data/ai-sigma/frame18-worker-balance/jobs/balanced-r4/process.json": "ce38ba9a02fe046e3d1e0b346a2ee661e992039eda56fb89a6eb21ba51515c9a",
+    "research-data/ai-sigma/frame18-worker-balance/baseline-r1-summary.json": "4f533c40a72c1583fbaef7bf1300c1e614139f7930585da82919b5b1f222ef74",
+    "research-data/ai-sigma/frame18-worker-balance/jobs/baseline-r1/process.json": "5bedc07b25d3a427ab6c4a58aa578367b22ea9cf5eb09605f9bd66e29dc65898",
+    "research-data/ai-sigma/frame18-worker-balance/baseline-r2-summary.json": "8c7ebf348c29613507037e1a33b4f19d7d605252bd3f2849aaf6dcdda87b7d78",
+    "research-data/ai-sigma/frame18-worker-balance/jobs/baseline-r2/process.json": "455cf05516bbf39ab63214f2373dfea57397f9fd0d01530944a48d70cd3d155b",
+    "research-data/ai-sigma/frame18-worker-balance/jobs/baseline-r1/before-model-proof.json": "39c58b8d65c0076c0c13ef4fd5ad94020fa6357938c5eee6592f969facf0a9b4",
+    "research-data/ai-sigma/frame18-worker-balance/jobs/balanced-r1/management-stop.json": "3022227d969db5718bdf6789528928c483192f8cdb47774d278d7dbf601f6ded",
+    "research-data/ai-sigma/frame18-worker-balance/jobs/balanced-r2/management-stop.json": "fbeae3a7964535013df3ec11fad994e1d9bcb284b30b320e60c1768360c65bec",
+    "research-data/ai-sigma/frame18-worker-balance/compact-result.json": "84be2aaa6cb650b4a4f203c893600905e27785892e47f1e92efaec8ef0f6964e"
+  },
+  "independence_limits": [
+    "compact math independent; owner RuleA replay/teacher truth/deep leaves not reauthenticated",
+    "same96 repetitions benchmark siblings; no independent training increment",
+    "fixed order/warm/censor and overlapping spans not exclusive CPU costs"
+  ],
+  "wall": 0.012220861040987074,
+  "peakRSS": 22126592,
+  "newNN": 0
+}

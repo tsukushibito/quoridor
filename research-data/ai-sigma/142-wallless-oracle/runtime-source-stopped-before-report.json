@@ -1,0 +1,764 @@
+{
+  "issue": "quoridor-4lc.142",
+  "UTC": "2026-10-02T19:25:23.050835+00:00",
+  "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+  "jobs": [
+    {
+      "name": "p142-oracle-r1",
+      "start": "2026-10-02T19:23:14.201171+00:00",
+      "end": "2026-10-02T19:23:20.082345+00:00",
+      "exit": 1,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "peak_group_plus_runner_RSS": 1189220352,
+      "peak_allocated_bytes": 1687552,
+      "kernel_boundary": {
+        "valid": true,
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "launcher": {
+          "pid": 2779245,
+          "ppid": 2779243,
+          "pgid": 2779243,
+          "start_ticks": 22191308,
+          "state": "R",
+          "rss": 17268736,
+          "utime_ticks": 1,
+          "stime_ticks": 0
+        },
+        "root": {
+          "pid": 2779246,
+          "ppid": 2779245,
+          "pgid": 2779246,
+          "start_ticks": 22191312,
+          "state": "R",
+          "rss": 20316160,
+          "utime_ticks": 0,
+          "stime_ticks": 0
+        },
+        "initial_children": [],
+        "spawn_count": 1,
+        "single_thread_initial": true,
+        "sole_explicit_root": true
+      }
+    },
+    {
+      "name": "p142-oracle-r2",
+      "start": "2026-10-02T19:23:59.989699+00:00",
+      "end": "2026-10-02T19:24:06.654671+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "peak_group_plus_runner_RSS": 1280319488,
+      "peak_allocated_bytes": 2121728,
+      "kernel_boundary": {
+        "valid": true,
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "launcher": {
+          "pid": 2779921,
+          "ppid": 2779920,
+          "pgid": 2779920,
+          "start_ticks": 22195890,
+          "state": "R",
+          "rss": 17301504,
+          "utime_ticks": 2,
+          "stime_ticks": 0
+        },
+        "root": {
+          "pid": 2779922,
+          "ppid": 2779921,
+          "pgid": 2779922,
+          "start_ticks": 22195893,
+          "state": "R",
+          "rss": 21184512,
+          "utime_ticks": 0,
+          "stime_ticks": 0
+        },
+        "initial_children": [],
+        "spawn_count": 1,
+        "single_thread_initial": true,
+        "sole_explicit_root": true
+      }
+    },
+    {
+      "name": "p142-protocol-r1",
+      "start": "2026-10-02T19:21:33.297569+00:00",
+      "end": "2026-10-02T19:21:33.363675+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "peak_group_plus_runner_RSS": 27181056,
+      "peak_allocated_bytes": 77824,
+      "kernel_boundary": {
+        "valid": true,
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "launcher": {
+          "pid": 2778121,
+          "ppid": 2778120,
+          "pgid": 2778120,
+          "start_ticks": 22181215,
+          "state": "R",
+          "rss": 17453056,
+          "utime_ticks": 1,
+          "stime_ticks": 0
+        },
+        "root": {
+          "pid": 2778122,
+          "ppid": 2778121,
+          "pgid": 2778122,
+          "start_ticks": 22181218,
+          "state": "R",
+          "rss": 5451776,
+          "utime_ticks": 0,
+          "stime_ticks": 0
+        },
+        "initial_children": [],
+        "spawn_count": 1,
+        "single_thread_initial": true,
+        "sole_explicit_root": true
+      }
+    },
+    {
+      "name": "p142-static-r1",
+      "start": "2026-10-02T19:22:38.026150+00:00",
+      "end": "2026-10-02T19:22:38.098008+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "peak_group_plus_runner_RSS": 51232768,
+      "peak_allocated_bytes": 122880,
+      "kernel_boundary": {
+        "valid": true,
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "launcher": {
+          "pid": 2778835,
+          "ppid": 2778830,
+          "pgid": 2778830,
+          "start_ticks": 22187690,
+          "state": "R",
+          "rss": 17465344,
+          "utime_ticks": 1,
+          "stime_ticks": 0
+        },
+        "root": {
+          "pid": 2778836,
+          "ppid": 2778835,
+          "pgid": 2778836,
+          "start_ticks": 22187693,
+          "state": "R",
+          "rss": 20328448,
+          "utime_ticks": 0,
+          "stime_ticks": 0
+        },
+        "initial_children": [],
+        "spawn_count": 1,
+        "single_thread_initial": true,
+        "sole_explicit_root": true
+      }
+    }
+  ],
+  "identities": [
+    {
+      "pid": 2779245,
+      "start_ticks": 22191308
+    },
+    {
+      "pid": 2779246,
+      "start_ticks": 22191312
+    },
+    {
+      "pid": 2779253,
+      "start_ticks": 22191315
+    },
+    {
+      "pid": 2779257,
+      "start_ticks": 22191316
+    },
+    {
+      "pid": 2779263,
+      "start_ticks": 22191368
+    },
+    {
+      "pid": 2779269,
+      "start_ticks": 22191372
+    },
+    {
+      "pid": 2779273,
+      "start_ticks": 22191440
+    },
+    {
+      "pid": 2779274,
+      "start_ticks": 22191444
+    },
+    {
+      "pid": 2779278,
+      "start_ticks": 22191444
+    },
+    {
+      "pid": 2779280,
+      "start_ticks": 22191447
+    },
+    {
+      "pid": 2779287,
+      "start_ticks": 22191451
+    },
+    {
+      "pid": 2779297,
+      "start_ticks": 22191524
+    },
+    {
+      "pid": 2779298,
+      "start_ticks": 22191525
+    },
+    {
+      "pid": 2779305,
+      "start_ticks": 22191580
+    },
+    {
+      "pid": 2779307,
+      "start_ticks": 22191602
+    },
+    {
+      "pid": 2779309,
+      "start_ticks": 22191604
+    },
+    {
+      "pid": 2779312,
+      "start_ticks": 22191605
+    },
+    {
+      "pid": 2779313,
+      "start_ticks": 22191606
+    },
+    {
+      "pid": 2779333,
+      "start_ticks": 22191632
+    },
+    {
+      "pid": 2779337,
+      "start_ticks": 22191633
+    },
+    {
+      "pid": 2779348,
+      "start_ticks": 22191638
+    },
+    {
+      "pid": 2779355,
+      "start_ticks": 22191640
+    },
+    {
+      "pid": 2779356,
+      "start_ticks": 22191641
+    },
+    {
+      "pid": 2779371,
+      "start_ticks": 22191646
+    },
+    {
+      "pid": 2779380,
+      "start_ticks": 22191654
+    },
+    {
+      "pid": 2779391,
+      "start_ticks": 22191684
+    },
+    {
+      "pid": 2779398,
+      "start_ticks": 22191695
+    },
+    {
+      "pid": 2779417,
+      "start_ticks": 22191772
+    },
+    {
+      "pid": 2779418,
+      "start_ticks": 22191777
+    },
+    {
+      "pid": 2779422,
+      "start_ticks": 22191778
+    },
+    {
+      "pid": 2779424,
+      "start_ticks": 22191780
+    },
+    {
+      "pid": 2779430,
+      "start_ticks": 22191785
+    },
+    {
+      "pid": 2779445,
+      "start_ticks": 22191857
+    },
+    {
+      "pid": 2779921,
+      "start_ticks": 22195890
+    },
+    {
+      "pid": 2779922,
+      "start_ticks": 22195893
+    },
+    {
+      "pid": 2779929,
+      "start_ticks": 22195897
+    },
+    {
+      "pid": 2779933,
+      "start_ticks": 22195897
+    },
+    {
+      "pid": 2779937,
+      "start_ticks": 22195917
+    },
+    {
+      "pid": 2779949,
+      "start_ticks": 22195921
+    },
+    {
+      "pid": 2779953,
+      "start_ticks": 22195983
+    },
+    {
+      "pid": 2779957,
+      "start_ticks": 22195987
+    },
+    {
+      "pid": 2779959,
+      "start_ticks": 22195988
+    },
+    {
+      "pid": 2779977,
+      "start_ticks": 22196054
+    },
+    {
+      "pid": 2779983,
+      "start_ticks": 22196059
+    },
+    {
+      "pid": 2779988,
+      "start_ticks": 22196128
+    },
+    {
+      "pid": 2779994,
+      "start_ticks": 22196164
+    },
+    {
+      "pid": 2779997,
+      "start_ticks": 22196187
+    },
+    {
+      "pid": 2779999,
+      "start_ticks": 22196187
+    },
+    {
+      "pid": 2780002,
+      "start_ticks": 22196189
+    },
+    {
+      "pid": 2780003,
+      "start_ticks": 22196189
+    },
+    {
+      "pid": 2780032,
+      "start_ticks": 22196223
+    },
+    {
+      "pid": 2780029,
+      "start_ticks": 22196221
+    },
+    {
+      "pid": 2780046,
+      "start_ticks": 22196232
+    },
+    {
+      "pid": 2780048,
+      "start_ticks": 22196232
+    },
+    {
+      "pid": 2780049,
+      "start_ticks": 22196232
+    },
+    {
+      "pid": 2780050,
+      "start_ticks": 22196233
+    },
+    {
+      "pid": 2780053,
+      "start_ticks": 22196233
+    },
+    {
+      "pid": 2780068,
+      "start_ticks": 22196239
+    },
+    {
+      "pid": 2780077,
+      "start_ticks": 22196247
+    },
+    {
+      "pid": 2780082,
+      "start_ticks": 22196275
+    },
+    {
+      "pid": 2780091,
+      "start_ticks": 22196285
+    },
+    {
+      "pid": 2780116,
+      "start_ticks": 22196389
+    },
+    {
+      "pid": 2780117,
+      "start_ticks": 22196394
+    },
+    {
+      "pid": 2780121,
+      "start_ticks": 22196396
+    },
+    {
+      "pid": 2780123,
+      "start_ticks": 22196398
+    },
+    {
+      "pid": 2780129,
+      "start_ticks": 22196414
+    },
+    {
+      "pid": 2780140,
+      "start_ticks": 22196514
+    },
+    {
+      "pid": 2778121,
+      "start_ticks": 22181215
+    },
+    {
+      "pid": 2778122,
+      "start_ticks": 22181218
+    },
+    {
+      "pid": 2778835,
+      "start_ticks": 22187690
+    },
+    {
+      "pid": 2778836,
+      "start_ticks": 22187693
+    }
+  ],
+  "current_same_identity": [],
+  "identity_read_errors": [],
+  "source_write_stopped": true,
+  "scientific_generation_certification_stopped": true,
+  "node_browser_stopped": true,
+  "inner_controlled": {
+    "p142-oracle-r1": {
+      "remaining_pids": 0,
+      "tracked": [
+        {
+          "pid": 2779253,
+          "starttick": 22191315
+        },
+        {
+          "pid": 2779257,
+          "starttick": 22191316
+        },
+        {
+          "pid": 2779263,
+          "starttick": 22191368
+        },
+        {
+          "pid": 2779269,
+          "starttick": 22191372
+        },
+        {
+          "pid": 2779273,
+          "starttick": 22191440
+        },
+        {
+          "pid": 2779274,
+          "starttick": 22191444
+        },
+        {
+          "pid": 2779278,
+          "starttick": 22191444
+        },
+        {
+          "pid": 2779280,
+          "starttick": 22191447
+        },
+        {
+          "pid": 2779287,
+          "starttick": 22191451
+        },
+        {
+          "pid": 2779297,
+          "starttick": 22191524
+        },
+        {
+          "pid": 2779298,
+          "starttick": 22191525
+        },
+        {
+          "pid": 2779305,
+          "starttick": 22191580
+        },
+        {
+          "pid": 2779307,
+          "starttick": 22191602
+        },
+        {
+          "pid": 2779309,
+          "starttick": 22191604
+        },
+        {
+          "pid": 2779312,
+          "starttick": 22191605
+        },
+        {
+          "pid": 2779313,
+          "starttick": 22191606
+        },
+        {
+          "pid": 2779333,
+          "starttick": 22191632
+        },
+        {
+          "pid": 2779337,
+          "starttick": 22191633
+        },
+        {
+          "pid": 2779348,
+          "starttick": 22191638
+        },
+        {
+          "pid": 2779355,
+          "starttick": 22191640
+        },
+        {
+          "pid": 2779356,
+          "starttick": 22191641
+        },
+        {
+          "pid": 2779371,
+          "starttick": 22191646
+        },
+        {
+          "pid": 2779380,
+          "starttick": 22191654
+        },
+        {
+          "pid": 2779391,
+          "starttick": 22191684
+        },
+        {
+          "pid": 2779398,
+          "starttick": 22191695
+        },
+        {
+          "pid": 2779417,
+          "starttick": 22191772
+        },
+        {
+          "pid": 2779418,
+          "starttick": 22191777
+        },
+        {
+          "pid": 2779422,
+          "starttick": 22191778
+        },
+        {
+          "pid": 2779424,
+          "starttick": 22191780
+        },
+        {
+          "pid": 2779430,
+          "starttick": 22191785
+        },
+        {
+          "pid": 2779445,
+          "starttick": 22191857
+        }
+      ],
+      "forced": true,
+      "graceful_error": null,
+      "waited": true,
+      "zombie_identities_absent": true,
+      "registration_ack": true,
+      "registered": 18
+    },
+    "p142-oracle-r2": {
+      "remaining_pids": 0,
+      "tracked": [
+        {
+          "pid": 2779929,
+          "starttick": 22195897
+        },
+        {
+          "pid": 2779933,
+          "starttick": 22195897
+        },
+        {
+          "pid": 2779937,
+          "starttick": 22195917
+        },
+        {
+          "pid": 2779949,
+          "starttick": 22195921
+        },
+        {
+          "pid": 2779953,
+          "starttick": 22195983
+        },
+        {
+          "pid": 2779957,
+          "starttick": 22195987
+        },
+        {
+          "pid": 2779959,
+          "starttick": 22195988
+        },
+        {
+          "pid": 2779960,
+          "starttick": 22195988
+        },
+        {
+          "pid": 2779962,
+          "starttick": 22195988
+        },
+        {
+          "pid": 2779977,
+          "starttick": 22196054
+        },
+        {
+          "pid": 2779983,
+          "starttick": 22196059
+        },
+        {
+          "pid": 2779988,
+          "starttick": 22196128
+        },
+        {
+          "pid": 2779994,
+          "starttick": 22196164
+        },
+        {
+          "pid": 2779996,
+          "starttick": 22196186
+        },
+        {
+          "pid": 2779997,
+          "starttick": 22196187
+        },
+        {
+          "pid": 2779999,
+          "starttick": 22196187
+        },
+        {
+          "pid": 2780002,
+          "starttick": 22196189
+        },
+        {
+          "pid": 2780003,
+          "starttick": 22196189
+        },
+        {
+          "pid": 2780029,
+          "starttick": 22196221
+        },
+        {
+          "pid": 2780032,
+          "starttick": 22196223
+        },
+        {
+          "pid": 2780050,
+          "starttick": 22196233
+        },
+        {
+          "pid": 2780046,
+          "starttick": 22196232
+        },
+        {
+          "pid": 2780048,
+          "starttick": 22196232
+        },
+        {
+          "pid": 2780049,
+          "starttick": 22196232
+        },
+        {
+          "pid": 2780053,
+          "starttick": 22196233
+        },
+        {
+          "pid": 2780068,
+          "starttick": 22196239
+        },
+        {
+          "pid": 2780077,
+          "starttick": 22196247
+        },
+        {
+          "pid": 2780082,
+          "starttick": 22196275
+        },
+        {
+          "pid": 2780091,
+          "starttick": 22196285
+        },
+        {
+          "pid": 2780116,
+          "starttick": 22196389
+        },
+        {
+          "pid": 2780117,
+          "starttick": 22196394
+        },
+        {
+          "pid": 2780121,
+          "starttick": 22196396
+        },
+        {
+          "pid": 2780123,
+          "starttick": 22196398
+        },
+        {
+          "pid": 2780129,
+          "starttick": 22196414
+        },
+        {
+          "pid": 2780139,
+          "starttick": 22196513
+        },
+        {
+          "pid": 2780140,
+          "starttick": 22196514
+        }
+      ],
+      "forced": true,
+      "graceful_error": null,
+      "waited": true,
+      "zombie_identities_absent": true,
+      "registration_ack": true,
+      "registered": 22
+    }
+  },
+  "monitor_callbacks_stopped": true,
+  "oracle_active": false,
+  "oracle_timers_callbacks": 0,
+  "AIWorker": 0,
+  "model_load": 0,
+  "NN": 0,
+  "outerownedwait_remainingunknown0": true,
+  "source_sha_after": {
+    "tools/ai-sigma-wallless-oracle/entry.cjs": "e5fff60a13e88ee67af60a5bafea627eb4c81f03b9c14945f9f88a273cfb28c4",
+    "tools/ai-sigma-wallless-oracle/protocol.py": "344285db0a8c9a20900dad76381fffb28bedfde13db77d4b591accda07e9af1e",
+    "tools/ai-sigma-wallless-oracle/static.cjs": "9224dfb246144433664e16970fa8e5d70756c1d6073d066f35f105f1c9ef4883",
+    "tools/ai-sigma-wallless-oracle/runner.py": "8b0de10b5657aba32400814abcdc59d3c680648e12d5a5ec3198d1f5a7c8c93d",
+    "tools/ai-sigma-wallless-oracle/admission.py": "c0c820d51d10d2bfa92ba84dd2a35a91766d4b078344f36ac0c41b7d80130d45",
+    "tools/ai-sigma-wallless-oracle/checker.js": "7773be475da139d04b24ddc4144ab83e36459c22c8e161b8995d1b431d6d3fb6"
+  },
+  "current_absent_not_natural_or_full_period": true,
+  "short_lived_instant_peak_unobserved": true,
+  "all_host_resource_guarantee": false
+}

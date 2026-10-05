@@ -1,0 +1,110 @@
+{
+  "UTC": "2026-10-03T03:39:29.354243+00:00",
+  "goal": {
+    "id": "quoridor-4lc",
+    "status": "in_progress",
+    "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+    "labels": [
+      "continuation-active",
+      "initial-window-ended"
+    ]
+  },
+  "own": {
+    "id": "quoridor-4lc.162",
+    "status": "in_progress",
+    "assignee": "codex:01a0f31c-2e4b-7170-82c5-69e1428c2418",
+    "labels": [
+      "continuation-active",
+      "initial-window-ended"
+    ]
+  },
+  "159_science_stop_sha256": "f1ed53ca0137932fca331d082b845c552671136387d954fb532c2bf0b3c4a034",
+  "159_exact_identities_currently_absent": 558,
+  "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+  "current_research_processes": [
+    {
+      "pid": 3070572,
+      "ppid": 1,
+      "starttick": "24839468",
+      "rss_bytes": 113041408,
+      "state": "S",
+      "cmd": "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python -B /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/scheduler.py run --config /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json --state-dir /workspaces/quoridor/.artifacts/research-team/scheduler-sigma-continuation-20261001 ",
+      "affinity": [
+        0
+      ]
+    },
+    {
+      "pid": 3070586,
+      "ppid": 1,
+      "starttick": "24839490",
+      "rss_bytes": 21753856,
+      "state": "S",
+      "cmd": "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python -B /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/watch.py --run-dir /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame10-guard-repair-145cdce1-2648-4097-b5e9-f95871e121dc --expectations /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame10-guard-repair-145cdce1-2648-4097-b5e9-f95871e121dc/expectations.json ",
+      "affinity": [
+        0
+      ]
+    },
+    {
+      "pid": 3115020,
+      "ppid": 2009,
+      "starttick": "25170119",
+      "rss_bytes": 1552384,
+      "state": "S",
+      "cmd": "timeout 90s taskset -c 0 env PYTHONDONTWRITEBYTECODE=1 python3 tools/ai-sigma-pv-cpu-smoke/launch.py train ",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    },
+    {
+      "pid": 3115066,
+      "ppid": 3070572,
+      "starttick": "25170273",
+      "rss_bytes": 1687552,
+      "state": "S",
+      "cmd": "flock --timeout 60 /workspaces/quoridor/.worktree/.beads-access.lock /home/vscode/.local/bin/bd --sandbox show quoridor-4lc --json ",
+      "affinity": [
+        0
+      ]
+    }
+  ],
+  "foreign_RSS_current_bytes": 138035200,
+  "parent_forecast_bytes": 3359260672,
+  "161_optional_reserved_bytes": 2147483648,
+  "CPU": {
+    "own_logical": [
+      0
+    ],
+    "count": 1,
+    "161_optional": [
+      2
+    ],
+    "parent_limit_count": 4
+  },
+  "host_MemAvailable_bytes": 21045821440,
+  "self_current_bytes": 31701,
+  "self_forecast_bytes": 326613,
+  "combined_forecast_bytes": 14498727,
+  "reservation_addition": 0,
+  "old_unknown_discount": 0,
+  "prior_toy_seconds": 0,
+  "current_absent_not_natural_or_all_period_guarantee": true
+}

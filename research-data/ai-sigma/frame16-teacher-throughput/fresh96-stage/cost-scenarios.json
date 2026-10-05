@@ -1,0 +1,67 @@
+{
+  "UTC": "2026-10-04T09:42:33.408006+00:00",
+  "new96_independent_registered_lineage": true,
+  "density_joint_per_game": 47.947916666666664,
+  "actual96_complete": true,
+  "actual1000_NOT_RUN": true,
+  "need_joint_per_second_1000_60min": 13.31886574074074,
+  "need_joint_per_second_1000_30min": 26.63773148148148,
+  "job_joint_per_second": 15.697773373670882,
+  "scenarios": [
+    {
+      "games_scenario_only": 100,
+      "job_minutes": 5.09073436991255,
+      "known_production_qualification_pack_payloadGit_minutes": 5.219276420797053,
+      "joint_rows": 4794.791666666666,
+      "archive_B": 7558351.041666667,
+      "archive_plus_uniqueGit_upper_B": 15116702.083333334,
+      "retained_raw_B": 51070205.20833333,
+      "actual_scale_executed": false
+    },
+    {
+      "games_scenario_only": 1000,
+      "job_minutes": 50.9073436991255,
+      "known_production_qualification_pack_payloadGit_minutes": 52.19276420797053,
+      "joint_rows": 47947.916666666664,
+      "archive_B": 75583510.41666667,
+      "archive_plus_uniqueGit_upper_B": 151167020.83333334,
+      "retained_raw_B": 510702052.0833333,
+      "actual_scale_executed": false
+    },
+    {
+      "games_scenario_only": 10000,
+      "job_minutes": 509.073436991255,
+      "known_production_qualification_pack_payloadGit_minutes": 521.9276420797053,
+      "joint_rows": 479479.1666666666,
+      "archive_B": 755835104.1666667,
+      "archive_plus_uniqueGit_upper_B": 1511670208.3333335,
+      "retained_raw_B": 5107020520.833333,
+      "actual_scale_executed": false
+    }
+  ],
+  "known_costs": {
+    "main_guardian_s": 293.2262997069629,
+    "control_entry_failed_beforeNN_s": 1.8603300139657222,
+    "qualification_s": 1.946765868,
+    "pack_member_restore_s": 0.7110549259814434,
+    "payloadGit_byte_restore_s": 4.746201336965896,
+    "canonical_export_CPUwall": "not separately timed: NN0 shared export+canonical success, connect recorded .263439s only",
+    "connect_recorded_s": 0.26343886798713356,
+    "preparation_reasoning_wait_dispatch_backup_finalsave": "UNKNOWN separately; currentcap charges conservative not actualwall"
+  },
+  "unknown_zero_assumed": false,
+  "initial60": "within known short extrapolation, remaining fees/scale uncertain",
+  "next30": "NOT_MET_NEW_LINEAGE_WORKLOAD; known >50min",
+  "whole_stage_elapsed_from_preregister_s": 1060.736767,
+  "fixed48_pure_speed_comparison": false,
+  "prefix_sampling_source_difference": "fresh: class draw once per ply; oldbenchmark: RNG in legal filter; old results retained",
+  "next_max1": {
+    "proposal": "Prospective shared pending-game queue or deterministic cohort-balanced worker assignment with trees kept on owner until game finish; same24 handles/B8/K/model.",
+    "why": "core2 NN100785 vs core4/6 81855/80209; last24 82.86s/last8 50.16s. Current roundrobin32/core binds opening8/20 tocore2,12/24 tocore4,16/28 tocore6, so static shard/cohort confounding retained.",
+    "development_verification_estimate_min": "10\u201320, estimate not measured",
+    "expected_delta_unknown": true,
+    "conditional_payback": "If save30s/new96: .3125s/game; estimated10\u201320min development alone recovers1920\u20133840game. Tail spans are not fully removable savings; no promised speed.",
+    "limits": "Tail-only optimization does not establish1000/30min; GPU/host/transfer overlap remains. No automatic implementation/science.",
+    "broader_array_Rust_Cpp": "retained candidates with protocol/build/rule correspondence costs; not concurrently implemented"
+  }
+}

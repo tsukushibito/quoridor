@@ -1,0 +1,147 @@
+{
+  "checks": [
+    {
+      "B": 1,
+      "IDs": true,
+      "decoded": true,
+      "zero": {
+        "pending_games": 0,
+        "inflight_batches": 0,
+        "queued": 0,
+        "timer": false,
+        "started": 1,
+        "returned": 1
+      }
+    },
+    {
+      "B": 2,
+      "IDs": true,
+      "decoded": true,
+      "zero": {
+        "pending_games": 0,
+        "inflight_batches": 0,
+        "queued": 0,
+        "timer": false,
+        "started": 2,
+        "returned": 2
+      }
+    },
+    {
+      "B": 3,
+      "IDs": true,
+      "decoded": true,
+      "zero": {
+        "pending_games": 0,
+        "inflight_batches": 0,
+        "queued": 0,
+        "timer": false,
+        "started": 3,
+        "returned": 3
+      }
+    },
+    {
+      "B": 4,
+      "IDs": true,
+      "decoded": true,
+      "zero": {
+        "pending_games": 0,
+        "inflight_batches": 0,
+        "queued": 0,
+        "timer": false,
+        "started": 4,
+        "returned": 4
+      }
+    },
+    {
+      "B": 5,
+      "IDs": true,
+      "decoded": true,
+      "zero": {
+        "pending_games": 0,
+        "inflight_batches": 0,
+        "queued": 0,
+        "timer": false,
+        "started": 5,
+        "returned": 5
+      }
+    },
+    {
+      "B": 6,
+      "IDs": true,
+      "decoded": true,
+      "zero": {
+        "pending_games": 0,
+        "inflight_batches": 0,
+        "queued": 0,
+        "timer": false,
+        "started": 6,
+        "returned": 6
+      }
+    },
+    {
+      "B": 7,
+      "IDs": true,
+      "decoded": true,
+      "zero": {
+        "pending_games": 0,
+        "inflight_batches": 0,
+        "queued": 0,
+        "timer": false,
+        "started": 7,
+        "returned": 7
+      }
+    },
+    {
+      "B": 8,
+      "IDs": true,
+      "decoded": true,
+      "zero": {
+        "pending_games": 0,
+        "inflight_batches": 0,
+        "queued": 0,
+        "timer": false,
+        "started": 8,
+        "returned": 8
+      }
+    },
+    {
+      "fault": "reorder",
+      "affected": 2,
+      "typed": "BROKER_ID_ATTRIBUTION"
+    },
+    {
+      "fault": "missing",
+      "affected": 2,
+      "typed": "BROKER_ID_ATTRIBUTION"
+    },
+    {
+      "fault": "duplicateID",
+      "affected": 2,
+      "typed": "BROKER_ID_ATTRIBUTION"
+    },
+    {
+      "fault": "nonfinite",
+      "affected": 2,
+      "typed": "F32_NONFINITE"
+    },
+    {
+      "fault": "EOF",
+      "affected": 2,
+      "typed": "PIPE_EOF"
+    },
+    {
+      "fault": "length",
+      "affected": 2,
+      "typed": "UINT32_SHAPE"
+    }
+  ],
+  "invalid_schemas": 10,
+  "bitexact_negativezero_subnormal": true,
+  "cancel_queued": true,
+  "stale_cancel": true,
+  "inflight_cancel_stop_physical_discard": true,
+  "guard": true,
+  "NN": 0,
+  "mock_replies": 49,
+  "model_parity": false
+}

@@ -1,0 +1,107 @@
+{
+  "issue": "quoridor-4lc.168",
+  "received": "2026-10-03T05:04:20+00:00",
+  "claim_and_static_start": "2026-10-03T05:05:12.767920+00:00",
+  "contract_Git": "b7d13cccf2b5dae4c820cd71d848425c61cffd0d",
+  "newcommand_deadline": "2026-10-03T05:29:20+00:00",
+  "processing_deadline": "2026-10-03T05:34:20+00:00",
+  "submission_deadline": "2026-10-03T05:44:20+00:00",
+  "observed_issues": [
+    {
+      "id": "quoridor-4lc",
+      "status": "in_progress",
+      "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ],
+      "started_at": "2026-09-30T17:18:52Z",
+      "updated_at": "2026-10-03T05:03:28Z"
+    },
+    {
+      "id": "quoridor-4lc.166",
+      "status": "closed",
+      "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ],
+      "started_at": "2026-10-03T04:38:55Z",
+      "updated_at": "2026-10-03T04:57:04Z"
+    },
+    {
+      "id": "quoridor-4lc.168",
+      "status": "open",
+      "assignee": "codex:01a0f31d-8227-7e03-a7e6-915b4918c11b",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ],
+      "started_at": null,
+      "updated_at": "2026-10-03T05:03:25Z"
+    }
+  ],
+  "166_source_stopped": true,
+  "storage": {
+    "old_conservative": 88190086,
+    "prior_measured_allocated": {
+      "158": 397312,
+      "161": 475136,
+      "166": 868352
+    },
+    "new_forecast": 8388608,
+    "guard": 117440512,
+    "total": 98319494,
+    "unknown_discount": 0
+  },
+  "commands": [
+    {
+      "command": [
+        "ready",
+        "--json"
+      ],
+      "exit": 0,
+      "elapsed": 1.2739181460055988
+    },
+    {
+      "command": [
+        "show",
+        "quoridor-4lc",
+        "--json"
+      ],
+      "exit": 0,
+      "elapsed": 0.6228629009856377
+    },
+    {
+      "command": [
+        "show",
+        "quoridor-4lc.166",
+        "--json"
+      ],
+      "exit": 0,
+      "elapsed": 0.8807098290126305
+    },
+    {
+      "command": [
+        "show",
+        "quoridor-4lc.168",
+        "--json"
+      ],
+      "exit": 0,
+      "elapsed": 1.0301478719920851
+    },
+    {
+      "command": [
+        "update",
+        "quoridor-4lc.168",
+        "--claim"
+      ],
+      "exit": 0
+    }
+  ],
+  "CPU": [
+    0
+  ],
+  "RAM_guard": 939524096,
+  "NN": 0
+}

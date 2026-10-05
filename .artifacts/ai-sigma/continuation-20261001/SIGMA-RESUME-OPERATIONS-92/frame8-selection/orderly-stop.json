@@ -1,0 +1,62 @@
+{
+  "signal_at": "2026-10-02T11:58:38.092146+00:00",
+  "ended_at": "2026-10-02T11:58:51.651603+00:00",
+  "signal": "SIGTERM via pidfd exact owned monitor",
+  "dispatch_lock_held": true,
+  "unknown_or_other_process_signaled": false,
+  "before_state": {
+    "binding": {
+      "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+      "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+      "target": "supervisor",
+      "dispatch_issue": "quoridor-4lc.40",
+      "contract_file": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+    },
+    "process": {
+      "pid": 2402552,
+      "start_ticks": "19006242",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "phase": "running",
+    "recovery_required": false,
+    "last_result": {
+      "at": "2026-10-02T11:54:28.824031+00:00",
+      "event": "owned_turn_finished",
+      "turn_id": "01a0fc75-79c9-76d1-815f-7e6b7a566730",
+      "status": "completed"
+    },
+    "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+    "config_sha256": "337dd95bc65165949183184ce95b57e6ebe918e8bc5db187fa7a64ab2d42bc24",
+    "contract_sha256": "a8f554579b70bdf1431b70b9a73e280c421efc3880a5f083a6fbfca9c345be42",
+    "next_at": 1790943149.0462177,
+    "owned": null
+  },
+  "after_state": {
+    "binding": {
+      "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+      "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+      "target": "supervisor",
+      "dispatch_issue": "quoridor-4lc.40",
+      "contract_file": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+    },
+    "process": null,
+    "phase": "stopped",
+    "recovery_required": false,
+    "last_result": {
+      "at": "2026-10-02T11:58:47.005032+00:00",
+      "event": "process_stopped",
+      "owned_turn_pending": false
+    },
+    "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+    "config_sha256": "337dd95bc65165949183184ce95b57e6ebe918e8bc5db187fa7a64ab2d42bc24",
+    "contract_sha256": "a8f554579b70bdf1431b70b9a73e280c421efc3880a5f083a6fbfca9c345be42",
+    "next_at": null,
+    "owned": null
+  },
+  "old_scheduler_absent": true,
+  "old_monitor_absent": true,
+  "saved_next_at": 1790943149.0462177,
+  "monitor_report_during_maintenance_may_be_lock_rejected": true
+}

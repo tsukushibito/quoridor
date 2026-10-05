@@ -1,0 +1,88 @@
+{
+  "UTC": "2026-10-04T08:37:01.082482+00:00",
+  "density_joint_rows_per_game": 32.375,
+  "conditions_samework": true,
+  "mean": {
+    "B8_baseline_meanwall": 116.40599388550618,
+    "graph_meanwall": 85.7270649910206,
+    "wallratio": 0.736448890040314,
+    "jointrateratio": 1.3578674820804726,
+    "savedseconds_per_game": 0.6391443519684495
+  },
+  "known_pipeline_extra_per48_s": 3.661632669492421,
+  "measured_pipeline": {
+    "qualification_s": 1.365991767,
+    "pack_member_restore_s": 0.43132891500135884,
+    "payload_Git_byte_restore_s": 5.525944656983484,
+    "final_report_receipt_save_pending": true,
+    "source_freeze_Git_cost": "UNKNOWN separately",
+    "dispatch_backup_other_management": "UNKNOWN partial cost"
+  },
+  "targets": {
+    "need_joint_per_s_60min": 8.993055555555555,
+    "need_joint_per_s_30min": 17.98611111111111,
+    "job_only_1000min": 29.76634201077104,
+    "known_pipeline_1000min": 31.037742243233687,
+    "initial60min": "SUPPORTED_SHORT_EXTRAPOLATION_WITH_UNKNOWN_FEES",
+    "next30min": "NOT_ESTABLISHED_WITH_KNOWN_PIPELINE_COST",
+    "actual1000_completed": false
+  },
+  "scenarios": [
+    {
+      "games": 100,
+      "known_pipeline_min": 3.1037742243233684,
+      "pack_B": 4771444.791666666,
+      "raw_B": 30017425.0,
+      "pack_plus_uniqueGit_B": 9542889.583333332,
+      "not_authorized_production": true
+    },
+    {
+      "games": 1000,
+      "known_pipeline_min": 31.037742243233687,
+      "pack_B": 47714447.916666664,
+      "raw_B": 300174250.0,
+      "pack_plus_uniqueGit_B": 95428895.83333333,
+      "not_authorized_production": true
+    },
+    {
+      "games": 10000,
+      "known_pipeline_min": 310.37742243233686,
+      "pack_B": 477144479.1666666,
+      "raw_B": 3001742500.0,
+      "pack_plus_uniqueGit_B": 954288958.3333333,
+      "not_authorized_production": true
+    }
+  ],
+  "recovery": {
+    "observed_job_saved_s_per_game": 0.6391443519684495,
+    "known_incremental_parity_confirmation_qualification_pack_Git_s": 99.85737591297837,
+    "known_component_recovery_games": 156.23602963154667,
+    "elapsed_from_preregister_s": 729.899402,
+    "elapsed_nongeneration_s": 558.4452720179588,
+    "elapsed_nongeneration_recovery_scenario_games": 873.7388827704539,
+    "pre_registration_design_source_read_reasoning": "UNKNOWN; elapsed scenario is incomplete lower boundary, not complete break-even",
+    "planning_cost_scenarios": [
+      {
+        "extra_development_seconds": 600,
+        "recovery_games": 938.7550686352903
+      },
+      {
+        "extra_development_seconds": 1800,
+        "recovery_games": 2816.265205905871
+      },
+      {
+        "extra_development_seconds": 2700,
+        "recovery_games": 4224.3978088588065
+      }
+    ],
+    "includes_capture_startup_in_generation_not_doublecharged": true
+  },
+  "limits": [
+    "fixed-sequence historicalbaseline and two matched graph jobs; no randomization/newB8 bracketing",
+    "identical discrete games/rootvisits in this48; not deepteachertruth or futureallgames numericguarantee",
+    "48chunk linear extrapolation; future opening length/tail/terminal mix/coldinit/heldprovider/save scaling unknown",
+    "sharedRuleA checker owner finite; phase2 speed/quality not independently certified by222 oldcap",
+    "no new1000production/modeltraining/testlabel/173 access"
+  ],
+  "next_max1": "Use graph replay as current generation candidate, stop graph tweaks. Next bounded cost question is compact array provider transfer plus Rust multi-handle pump with unchanged teacher definitions; development/build/cancel-drain parity and payback need explicit allocation. Actual larger production is separate future allowance."
+}

@@ -1,0 +1,60 @@
+{
+  "issue": "quoridor-4lc.116",
+  "UTC": "2026-10-02T10:48:33.678018+00:00",
+  "monotonic": 191027.065228509,
+  "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+  "input_after": {
+    "docs/design/ai-sigma-continuation-20261001.md": "0f0be04113893b62d3f79ef45bd9d17bd38817622091152d2eb25017acec43fe",
+    ".agents/research-team/common.md": "f689b6f37b4e41b97e33837d146fba756463fc4ba01f852e9043c083d34e0ac1",
+    ".agents/research-team/roles/critic.md": "b04c44c844c3cbc5842d381f5bee1258f1e71d1f0a13513ae87f6ba2a32df85c",
+    "docs/development/ai-research-experiments.md": "540d9041ead5a38074a83e9859a5456afbad58f886a166ba14031e5e53357c05",
+    "docs/design/ai-sigma-research-goal.md": "192855ab68a77e46219d1324fb3c02de9a0483d49bd948a0ba410385a371aede",
+    "docs/design/ai-sigma-comparison-protocol.md": "8244b2230092d9e2824e500a0f95e630c4f6f10800af2d4f07d7d5e44ac5c9a8",
+    "docs/reports/ai-sigma-coordinator-player112-113-acceptance.md": "f52a9450792c6f13cffaa0340270d9c913acfa028eb61a378d9d600887eecee6",
+    "docs/design/ai-sigma-contract-experiment-webgpu-measure.md": "d5401e9602540f65dbb2995c2bf93fd96ba0997a4b3855a38a3e8c561d7a07a4",
+    "research-data/ai-sigma/112-player-workers/results-compact.json": "33d4a7134b872c34a7f7e670b1a08624b5318ec7f61b09e2b00f430d7dc4816e"
+  },
+  "mismatches": [],
+  "managed_identities": [
+    {
+      "process": "arithmetic-r2.process.json",
+      "pid": 2409139,
+      "starttick": 19042417,
+      "same_identity_live": false,
+      "waited": true,
+      "exit": 0
+    },
+    {
+      "process": "arithmetic-r3.process.json",
+      "pid": 2409586,
+      "starttick": 19047005,
+      "same_identity_live": false,
+      "waited": true,
+      "exit": 0
+    }
+  ],
+  "self_heavy_NN_GPU_Chrome_game_build_download": 0,
+  "managed_wall_total_s": 0.075213,
+  "observed_managed_RSSpeak_B": 31727616,
+  "CPU_affinity": [
+    0
+  ],
+  "new_allocated_before_document_B": 57344,
+  "guard_B": 3145728,
+  "short_command_resources_and_instant_peak_incomplete": true,
+  "115_snapshot_provisional_not_final": true,
+  "source_arithmetic_SHA": "d3931a5c98d17e3a160f8730ef721092d074af8b74318d2856aae2599ab652ec",
+  "checker_history": {
+    "NN_GPU_game": 0,
+    "first_unmanaged_arithmetic": true,
+    "r2_sourceSHA": "a5237cc544d7bb43ee31223f694c91a49a5ce9c7204eafcf60e41413dab2c01a",
+    "r3_sourceSHA": "d3931a5c98d17e3a160f8730ef721092d074af8b74318d2856aae2599ab652ec",
+    "r3_actual_initial_run_field": "arithmetic-r2 (label corrected, source/time/PID unchanged)",
+    "cause": "initial supervisor used fixed output name, joint-power addition overwrote r2 log/metadata",
+    "preserved": "original exact metadata from tool output + exact hash recovered source; initial log unavailable",
+    "correction": "future run name required, refuse existing outputs",
+    "all_base_numbers_unchanged": true
+  },
+  "actual_go": false,
+  "plan_acceptance_pending": true
+}

@@ -1,0 +1,204 @@
+{
+  "issue": "quoridor-4lc.20",
+  "contract": "SIGMA-ARENA-CRITIC trial1 version1",
+  "verdict": "NO-GO for games; preparatory arithmetic only conditionally supported; final frozen acceptance remains unverified",
+  "jobs": [
+    {
+      "name": "no-response-check",
+      "start": "2026-09-30T22:32:48.446042+00:00",
+      "end": "2026-09-30T22:32:48.565916+00:00",
+      "exit": 0,
+      "remaining_pids": [],
+      "peak_group_plus_runner_rss_bytes": 80019456,
+      "peak_storage_bytes": 1212991,
+      "cmd": [
+        "node",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-ARENA/stage/no-response-check.cjs"
+      ],
+      "tracked_processes": [
+        {
+          "pid": 741881,
+          "start_ticks": 6045375,
+          "pgid": 741881,
+          "maxrss_bytes": 51896320,
+          "max_cpu_ticks": 2,
+          "max_threads": 7,
+          "affinities": [
+            [
+              0
+            ]
+          ]
+        }
+      ],
+      "temporary_alias_resolved": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-ARENA/cache/t",
+      "tracked_cpu_seconds": 0.02
+    },
+    {
+      "name": "static-prepare",
+      "start": "2026-09-30T22:26:37.794877+00:00",
+      "end": "2026-09-30T22:26:38.113018+00:00",
+      "exit": 0,
+      "remaining_pids": [],
+      "peak_group_plus_runner_rss_bytes": 111702016,
+      "peak_storage_bytes": 715452,
+      "cmd": [
+        "node",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-ARENA/stage/prepare.cjs"
+      ],
+      "tracked_processes": [
+        {
+          "pid": 740222,
+          "start_ticks": 6008294,
+          "pgid": 740222,
+          "maxrss_bytes": 83714048,
+          "max_cpu_ticks": 24,
+          "max_threads": 7,
+          "affinities": [
+            [
+              0
+            ]
+          ]
+        }
+      ],
+      "temporary_alias_resolved": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-ARENA/cache/t",
+      "tracked_cpu_seconds": 0.24
+    },
+    {
+      "name": "envelope-check",
+      "start": "2026-09-30T22:28:12.797754+00:00",
+      "end": "2026-09-30T22:28:12.854760+00:00",
+      "exit": 0,
+      "remaining_pids": [],
+      "peak_group_plus_runner_rss_bytes": 49033216,
+      "peak_storage_bytes": 944878,
+      "cmd": [
+        "node",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-ARENA/stage/envelope-check.cjs"
+      ],
+      "tracked_processes": [
+        {
+          "pid": 740650,
+          "start_ticks": 6017799,
+          "pgid": 740650,
+          "maxrss_bytes": 21123072,
+          "max_cpu_ticks": 0,
+          "max_threads": 2,
+          "affinities": [
+            [
+              0
+            ]
+          ]
+        }
+      ],
+      "temporary_alias_resolved": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-ARENA/cache/t",
+      "tracked_cpu_seconds": 0.0
+    },
+    {
+      "name": "arithmetic",
+      "start": "2026-09-30T22:30:11.453783+00:00",
+      "end": "2026-09-30T22:30:11.576257+00:00",
+      "exit": 0,
+      "remaining_pids": [],
+      "peak_group_plus_runner_rss_bytes": 59899904,
+      "peak_storage_bytes": 1155466,
+      "cmd": [
+        "python3",
+        "-B",
+        "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-ARENA/arithmetic.py"
+      ],
+      "tracked_processes": [
+        {
+          "pid": 741175,
+          "start_ticks": 6029669,
+          "pgid": 741175,
+          "maxrss_bytes": 31649792,
+          "max_cpu_ticks": 5,
+          "max_threads": 1,
+          "affinities": [
+            [
+              0
+            ]
+          ]
+        }
+      ],
+      "temporary_alias_resolved": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-ARENA/cache/t",
+      "tracked_cpu_seconds": 0.05
+    }
+  ],
+  "NN_runtime": {
+    "requests": 0,
+    "Chrome": 0,
+    "native": 0,
+    "reason": "final freeze not completed within processing deadline"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "claim": "caller response identity not bound",
+      "evidence": "stage/envelope-injections.json",
+      "source_sha256": "2ba142385c84886f1ceef176127493bedac08bebed30f4dbfecb269a5b3fa0d2",
+      "native_wrong_generation_accepted": true,
+      "wrong_id_accepted_all_engines": true,
+      "limits": "Mocked exact submit, no actual naturally occurring corrupted response. Browser outer generation is routed by page; wrong-generation isolated mock bypasses this routing and does not prove full browser stale delivery."
+    },
+    {
+      "id": "F2",
+      "claim": "no per-request no-response deadline settlement",
+      "evidence": "stage/no-response.json",
+      "T_ms": 10,
+      "still_pending_at_ms": 78.24149299412966,
+      "limits": "No NN runtime; outer runner eventually kills whole job, not an individual-request timeout verdict."
+    },
+    {
+      "id": "F3",
+      "claim": "calibration harness is not a verified game loop",
+      "limits": "Game-loop implementation/independent acceptance not demonstrated."
+    }
+  ],
+  "arithmetic_evidence": "arithmetic.json",
+  "input_status": "Static copies and raw arithmetic were taken before final manifest. Advertised final manifest source hashes for arena/game/workers match saved values by inspection only; no complete final manifest/file or original before-after verification. Do not promote to frozen acceptance.",
+  "final_report_advertised_sha256": "6e8ba5bf8665dc456bb686cdbe5f3dc404d990b0cb8187b296c35dbee605a21d",
+  "resources": {
+    "CPU_observed": [
+      0
+    ],
+    "RAM_observed_peak_bytes": 111702016,
+    "RAM_guard_bytes": 2684354560,
+    "storage_guard_bytes": 117440512,
+    "matches": 0,
+    "GPU": 0,
+    "other_kills": 0,
+    "build": 0,
+    "download": 0,
+    "limitations": "sampling cannot prove instantaneous peaks/absence of external load; no Chrome in this task"
+  },
+  "deadline": {
+    "experiment": "SIGMA-ARENA-CRITIC",
+    "issue": "quoridor-4lc.20",
+    "stop_observation_utc": "2026-09-30T22:38:57.513745+00:00",
+    "processing_deadline_utc": "2026-09-30T22:37:43Z",
+    "NN_runtime_started": false,
+    "new_runtime_after_deadline": false,
+    "tracked_remaining_from_job_logs": [],
+    "remaining": 0,
+    "reason": "processing deadline exceeded during context compaction; no NN runtime launched; stop and submit incomplete verification",
+    "deadline_compliance": "NOT established: final manifest/report read at 22:38:29.580233Z, 46.580233 seconds after processing deadline; stop evidence recorded late",
+    "last_completed_self_job_utc": "see process logs; no-response-check completed circa 22:32:48Z",
+    "notes": "No other-role process terminated. No new verification arithmetic or runtime permitted during submission.",
+    "last_self_child_end_utc": "2026-09-30T22:32:48.565916+00:00",
+    "tracked_starttick_identity_remaining": [],
+    "all_tracked_PID0": true,
+    "safety_observation_utc": "2026-09-30T22:40:46.119975+00:00"
+  },
+  "unverified": [
+    "full final immutable hash audit",
+    "independent frozen native/Wasm/NN pilot",
+    "expired/epoch/terminal/invalid-prefix full caller runtime",
+    "strict value actual ORT injections independently rerun",
+    "game loop",
+    "true legal200/no-legal reachability",
+    "deep overlay actual NN/arena cap",
+    "rawview/entropy/emergency reload",
+    "training overlap"
+  ]
+}

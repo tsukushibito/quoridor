@@ -1,0 +1,79 @@
+{
+  "UTC": "2026-10-03T04:36:13.435046+00:00",
+  "minimal_current_Git_checks": [
+    {
+      "path": "research-data/ai-sigma/161-formal-clock/handoff.json",
+      "Git": "33abdd2257f488267a3e347fa70d21f645356992",
+      "SHA256": "2c1870b2bf95b2dc15ead72a7ea3fb8875be854dea10f4982cc1c672627631f8"
+    },
+    {
+      "path": "research-data/ai-sigma/161-formal-clock/science-source-stop.json",
+      "Git": "b6ba98b0cb21b55bc1fad92b8c8ff61ba962ad74",
+      "SHA256": "a1327b1456cc2ac75ff13701896aa4517b9d9fd92ee69b7050ee892986c7103f"
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-formal-clock.md",
+      "Git": "49e1776af41b19899ea9bb3928875ffb8ea0aca7",
+      "SHA256": "096143b69ad0b740cab3b45e663b7455a682a47daef1e3995e3dfdaa8efb0594"
+    },
+    {
+      "path": "research-data/ai-sigma/162-pv-cpu-smoke/final-handoff.json",
+      "Git": "449ba69a2fecdfbe5c56d86642a9fd638cbcb4df",
+      "SHA256": "0df55b24cc2036575f414aa630fd4fe1908891af2be350344e6591ea902931eb"
+    },
+    {
+      "path": "research-data/ai-sigma/162-pv-cpu-smoke/science-stop.json",
+      "Git": "4f0e14a748eda2030ba5f85838e691128ffdaa15",
+      "SHA256": "21f3e571c78603c520384dbc87fe889c7d6d3fe48c5748b136ad8ad33c9bd849"
+    },
+    {
+      "path": "research-data/ai-sigma/162-pv-cpu-smoke/results.json",
+      "Git": "4f0e14a748eda2030ba5f85838e691128ffdaa15",
+      "SHA256": "2c1484b6efcdfab744f52899a52ac4e41caed16c821a82635e8b40fdb5742b61"
+    },
+    {
+      "path": "research-data/ai-sigma/163-fixed-cycle/handoff.json",
+      "Git": "309edf4eae70f789a50fe734d145cb922e6e6aa3",
+      "SHA256": "17604875cb21bbc3cb95cf096110a56e3987c30b021bb55f06a1f432075b5263"
+    },
+    {
+      "path": "research-data/ai-sigma/163-fixed-cycle/science-stop.json",
+      "Git": "3bfb5932c602a7d88131dcbdf9598b28c39bbd0a",
+      "SHA256": "036698a2989768c96e75bae15eb4d18551e3a8b19e19541950e92d891c59cb49"
+    },
+    {
+      "path": "research-data/ai-sigma/163-fixed-cycle/results.json",
+      "Git": "3bfb5932c602a7d88131dcbdf9598b28c39bbd0a",
+      "SHA256": "a9140b62d0084f8a2701b9ce248d6c218457bb1dea5fefa7078af2cd21219a86"
+    },
+    {
+      "path": "research-data/ai-sigma/163-fixed-cycle/preregister.json",
+      "Git": "3bfb5932c602a7d88131dcbdf9598b28c39bbd0a",
+      "SHA256": "9a6f908fbf1924e5500cb9d091efff2ed081ba3a7b3f1339d41b94000d5e0c26"
+    }
+  ],
+  "parent11_SHA256": "0271156ecd26ea7e81d57af9453b47804cae1888f790995f7c457e83cea51db6",
+  "accept161": "finite staticclock/mock14, actualD500 differs prototype1000; not formal ready",
+  "accept162": "actual small CPU trainer/checkpoint/export smoke; not full learning pipeline/holdout/strength",
+  "accept163": "finite registered1000cycle plus D500 zero receipt/read-admit support 12, actualCPU/drift missing",
+  "native_priority": "reuse151; native main quality/selfplay, Wasm necessary finiteport only; throughput wholecost",
+  "next_allocations": [
+    {
+      "role": "hypothesis",
+      "issue": "quoridor-4lc.164",
+      "path": "docs/design/ai-sigma-contract-hypothesis-native-route.md"
+    },
+    {
+      "role": "experiment",
+      "issue": "quoridor-4lc.165",
+      "path": "docs/design/ai-sigma-contract-experiment-native-baseline.md"
+    },
+    {
+      "role": "critic",
+      "issue": "quoridor-4lc.166",
+      "path": "docs/design/ai-sigma-contract-critic-native-comparison.md"
+    }
+  ],
+  "root_docs_writer": "root3designs no coor edit; parent11 steward exclusive",
+  "old_results_thresholds_unchanged": true
+}

@@ -1,0 +1,101 @@
+{
+  "old_conservative_held": 8908800,
+  "own_current_allocated": 1519616,
+  "new_git_content_upper_estimate": 218429,
+  "remaining_report_handoff_forecast": 131072,
+  "combined_forecast": 10777917,
+  "combined_guard": 14680064,
+  "reservation": 16777216,
+  "additional_reservation": 0,
+  "new_scope_target": 2097152,
+  "source_input_binding": [
+    {
+      "path": "tools/ai-sigma-actual-boundary-repair/game.js",
+      "sha256": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+      "bytes": 27877,
+      "current_sha256": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+      "browser_echo_SHA256": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+      "unchanged": true
+    },
+    {
+      "path": "tools/ai-sigma-actual-boundary-repair/context.js",
+      "sha256": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+      "bytes": 2248,
+      "current_sha256": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+      "browser_echo_SHA256": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+      "unchanged": true
+    },
+    {
+      "path": "tools/ai-sigma-wallless-oracle/checker.js",
+      "sha256": "7773be475da139d04b24ddc4144ab83e36459c22c8e161b8995d1b431d6d3fb6",
+      "bytes": 8644,
+      "current_sha256": "7773be475da139d04b24ddc4144ab83e36459c22c8e161b8995d1b431d6d3fb6",
+      "browser_echo_SHA256": "7773be475da139d04b24ddc4144ab83e36459c22c8e161b8995d1b431d6d3fb6",
+      "unchanged": true
+    }
+  ],
+  "self_source_before_after_equal": true,
+  "jobs": [
+    {
+      "name": "p142-oracle-r1",
+      "start": "2026-10-02T19:23:14.201171+00:00",
+      "end": "2026-10-02T19:23:20.082345+00:00",
+      "exit": 1,
+      "stop_reason": null,
+      "assigned_CPU": 2,
+      "peak_group_plus_runner_RSS": 1189220352,
+      "peak_allocated_bytes": 1687552,
+      "remaining": [],
+      "unknown_adopted": [],
+      "instant_peak_not_guaranteed": true,
+      "all_observed_TIDs_at_assigned_CPU": true
+    },
+    {
+      "name": "p142-oracle-r2",
+      "start": "2026-10-02T19:23:59.989699+00:00",
+      "end": "2026-10-02T19:24:06.654671+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "assigned_CPU": 2,
+      "peak_group_plus_runner_RSS": 1280319488,
+      "peak_allocated_bytes": 2121728,
+      "remaining": [],
+      "unknown_adopted": [],
+      "instant_peak_not_guaranteed": true,
+      "all_observed_TIDs_at_assigned_CPU": true
+    },
+    {
+      "name": "p142-static-r1",
+      "start": "2026-10-02T19:22:38.026150+00:00",
+      "end": "2026-10-02T19:22:38.098008+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "assigned_CPU": 0,
+      "peak_group_plus_runner_RSS": 51232768,
+      "peak_allocated_bytes": 122880,
+      "remaining": [],
+      "unknown_adopted": [],
+      "instant_peak_not_guaranteed": true,
+      "all_observed_TIDs_at_assigned_CPU": true
+    },
+    {
+      "name": "p142-protocol-r1",
+      "start": "2026-10-02T19:21:33.297569+00:00",
+      "end": "2026-10-02T19:21:33.363675+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "assigned_CPU": 0,
+      "peak_group_plus_runner_RSS": 27181056,
+      "peak_allocated_bytes": 77824,
+      "remaining": [],
+      "unknown_adopted": [],
+      "instant_peak_not_guaranteed": true,
+      "all_observed_TIDs_at_assigned_CPU": true
+    }
+  ],
+  "browser_wall_total": 12.546146,
+  "static_supervised_wall_total": 0.137964,
+  "unmonitored_short_management_commands": "initial reads/claim/writes/Git/report commands not full-period RSS/CPU proof; exact aggregate command wall unavailable",
+  "old_unknown_not_decreased": true,
+  "global_storage_reaudit": false
+}

@@ -1,0 +1,239 @@
+{
+  "UTC": "2026-10-04T23:08:59.091Z",
+  "samples": 0,
+  "checks": 6,
+  "PASS": true,
+  "results": [
+    {
+      "mode": "valid",
+      "adopted": true,
+      "clock": {
+        "t0_ms": 408346266.606044,
+        "received_ms": 408346268.03504,
+        "elapsed_ms": 1.4289960265159607,
+        "budget_ms": 100,
+        "margin_ms": 10,
+        "timer_fired_ms": null,
+        "timer_callback_delay_ms": null,
+        "overshoot_ms": 0,
+        "t1_definition": "complete parse+generation/key/history+legal completed Action validation",
+        "obsolete": [],
+        "response": {
+          "type": "RESULT",
+          "id": "valid",
+          "generation": 1,
+          "key": "fixed",
+          "history": "fixed",
+          "allNN": 0,
+          "search": {
+            "status": "COMPLETED_ACTION",
+            "completed_depth": 1,
+            "Action": 7
+          },
+          "validation": {
+            "valid": true
+          }
+        },
+        "status": "RECEIVED"
+      },
+      "cleanup": {
+        "exit": {
+          "code": 0,
+          "signal": null
+        },
+        "wall_ms": 1.7708600163459778,
+        "stderr": "",
+        "waited": true
+      }
+    },
+    {
+      "mode": "stale",
+      "adopted": true,
+      "clock": {
+        "t0_ms": 408346287.431387,
+        "received_ms": 408346288.253394,
+        "elapsed_ms": 0.8220070004463196,
+        "budget_ms": 100,
+        "margin_ms": 10,
+        "timer_fired_ms": null,
+        "timer_callback_delay_ms": null,
+        "overshoot_ms": 0,
+        "t1_definition": "complete parse+generation/key/history+legal completed Action validation",
+        "obsolete": [
+          {
+            "type": "RESULT",
+            "id": "stale",
+            "reason": "STALE_IDENTITY_DISCARD"
+          }
+        ],
+        "response": {
+          "type": "RESULT",
+          "id": "stale",
+          "generation": 1,
+          "key": "fixed",
+          "history": "fixed",
+          "allNN": 0,
+          "search": {
+            "status": "COMPLETED_ACTION",
+            "completed_depth": 1,
+            "Action": 7
+          },
+          "validation": {
+            "valid": true
+          }
+        },
+        "status": "RECEIVED"
+      },
+      "cleanup": {
+        "exit": {
+          "code": 0,
+          "signal": null
+        },
+        "wall_ms": 0.9325799942016602,
+        "stderr": "",
+        "waited": true
+      }
+    },
+    {
+      "mode": "late",
+      "adopted": false,
+      "clock": {
+        "t0_ms": 408346306.829354,
+        "received_ms": 408346405.365546,
+        "elapsed_ms": 98.53619199991226,
+        "budget_ms": 100,
+        "margin_ms": 10,
+        "timer_fired_ms": 408346405.331218,
+        "timer_callback_delay_ms": 0,
+        "overshoot_ms": 0,
+        "t1_definition": "complete parse+generation/key/history+legal completed Action validation",
+        "obsolete": [],
+        "response": null,
+        "status": "OUTER_DEADLINE"
+      },
+      "cleanup": {
+        "exit": {
+          "code": 0,
+          "signal": null
+        },
+        "wall_ms": 2.991441011428833,
+        "stderr": "",
+        "waited": true
+      }
+    },
+    {
+      "mode": "incomplete",
+      "adopted": false,
+      "clock": {
+        "t0_ms": 408346431.872604,
+        "received_ms": 408346432.789087,
+        "elapsed_ms": 0.9164829850196838,
+        "budget_ms": 100,
+        "margin_ms": 10,
+        "timer_fired_ms": null,
+        "timer_callback_delay_ms": null,
+        "overshoot_ms": 0,
+        "t1_definition": "complete parse+generation/key/history+legal completed Action validation",
+        "obsolete": [],
+        "response": {
+          "type": "RESULT",
+          "id": "incomplete",
+          "generation": 1,
+          "key": "fixed",
+          "history": "fixed",
+          "allNN": 0,
+          "search": {
+            "status": "NO_COMPLETED_DEPTH",
+            "completed_depth": 0
+          },
+          "validation": {
+            "valid": false
+          }
+        },
+        "status": "RECEIVED"
+      },
+      "cleanup": {
+        "exit": {
+          "code": 0,
+          "signal": null
+        },
+        "wall_ms": 1.1449419856071472,
+        "stderr": "",
+        "waited": true
+      }
+    },
+    {
+      "mode": "eof",
+      "adopted": false,
+      "clock": {
+        "t0_ms": 408346452.412092,
+        "received_ms": 408346454.358822,
+        "elapsed_ms": 1.9467300176620483,
+        "budget_ms": 100,
+        "margin_ms": 10,
+        "timer_fired_ms": null,
+        "timer_callback_delay_ms": null,
+        "overshoot_ms": 0,
+        "t1_definition": "complete parse+generation/key/history+legal completed Action validation",
+        "obsolete": [],
+        "response": {
+          "type": "EOF",
+          "code": 0,
+          "signal": null
+        },
+        "status": "EOF"
+      },
+      "cleanup": {
+        "exit": {
+          "code": 0,
+          "signal": null
+        },
+        "wall_ms": 0.0013049840927124023,
+        "stderr": "",
+        "waited": true
+      }
+    },
+    {
+      "mode": "parse-validation-overshoot",
+      "adopted": false,
+      "clock": {
+        "t0_ms": 408346470.86742,
+        "received_ms": 408346587.618821,
+        "elapsed_ms": 116.75140100717545,
+        "budget_ms": 100,
+        "margin_ms": 10,
+        "timer_fired_ms": null,
+        "timer_callback_delay_ms": null,
+        "overshoot_ms": 16.751401007175446,
+        "t1_definition": "complete parse+generation/key/history+legal completed Action validation",
+        "obsolete": [],
+        "response": {
+          "type": "RESULT",
+          "id": "parse-validation-overshoot",
+          "generation": 1,
+          "key": "fixed",
+          "history": "fixed",
+          "allNN": 0,
+          "search": {
+            "status": "COMPLETED_ACTION",
+            "completed_depth": 1,
+            "Action": 7
+          },
+          "validation": {
+            "valid": true
+          }
+        },
+        "status": "OUTER_DEADLINE"
+      },
+      "cleanup": {
+        "exit": {
+          "code": 0,
+          "signal": null
+        },
+        "wall_ms": 1.5659319758415222,
+        "stderr": "",
+        "waited": true
+      }
+    }
+  ]
+}

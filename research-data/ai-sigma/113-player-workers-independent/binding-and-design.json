@@ -1,0 +1,201 @@
+{
+  "issue": "quoridor-4lc.113",
+  "producer_Git": "3682ab7b520024735e79e42eea79c982897c3957",
+  "functional_Git": "11c994c5cd7276524463ba49e6299d928e729c94",
+  "model": {
+    "path": "models/experiments/ai-sigma/reference/sigma-pcr250/best.onnx",
+    "sha256": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+    "bytes": 11663428,
+    "shared_reference": true
+  },
+  "Wasm": {
+    "sha256": "1f54d0b8f0c6d3d7d51935886ed506e44376a2052506be62ca7a726c85a78a01",
+    "bytes": 292139,
+    "C": 1.5
+  },
+  "source_version_diff": "diff --git a/tools/ai-sigma-player-workers/diagnose.cjs b/tools/ai-sigma-player-workers/diagnose.cjs\nindex bddb64d..558ba99 100644\n--- a/tools/ai-sigma-player-workers/diagnose.cjs\n+++ b/tools/ai-sigma-player-workers/diagnose.cjs\n@@ -42,7 +42,7 @@ async function main() {\n       // One evaluate drives all requests in browser; Node never supplies per-hand clocks or judges.\n       const result=await browser.page.evaluate(({config,references,fixtures})=>config.kind==='browser-pair'?runBrowserGames(config,fixtures,references):runFunctional(config,references),{config,references,fixtures});\n       gameResult=result;\n-      rows=result.rows??[];save('browser-result',result);save('rows',rows);\n+      rows=result.rows??[];save('browser-result',result);save('rows-index',rows.map(row=>({request_id:row.identity.request_id,engine:row.spec.engine,classification:row.response.classification,public_elapsed_ms:row.response.public_elapsed_ms,hand_NN:row.hand_NN,stop_class:row.worker_stop_class}))); // Full rows preserved once in browser-result, no duplicate diagnostics.\n \n       save('clock-end',await browser.page.evaluate(()=>calibratePlayerClocks()));\n \ndiff --git a/tools/ai-sigma-player-workers/player-main.js b/tools/ai-sigma-player-workers/player-main.js\nindex edccd43..1ebf0c5 100644\n--- a/tools/ai-sigma-player-workers/player-main.js\n+++ b/tools/ai-sigma-player-workers/player-main.js\n@@ -232,7 +232,11 @@ async function chooseBrowser(spec, inputState, prefix, reference, config) {\n   const workerClock=slot.clock;\n   const explorationWorker=slot.worker;\n   if(Date.now()>=Date.parse(config.processing_deadline))throw Error('PROCESSING_DEADLINE');\n+  const previousOpposite=collectedRows.slice().reverse().find(row=>row.spec.engine!==spec.engine);\n   const t0=epochMain();\n+  const oppositeAtInput=previousOpposite?{request_id:previousOpposite.identity.request_id,\n+    public_ms:previousOpposite.response.stamp_ms,ACK_known_at_next_input:!!previousOpposite.stop,\n+    ACK_ms:previousOpposite.stop?.main_received_ms??null,observed_at_ms:t0}:null;\n   const state=inputState ?? fromPrefix(prefix);\n   const generation=++generationCounter;\n   const requestId=config.run_id+'-'+generation;\n@@ -304,7 +308,7 @@ async function chooseBrowser(spec, inputState, prefix, reference, config) {\n   collectedRows.push(row); // Keep public even if the later ACK or helper fails.\n   row.player_engine=spec.engine;\n   row.own_previous_wait={start_ms:ownWaitStart,end_ms:ownWaitEnd,wait_ms:ownWaitEnd-ownWaitStart};\n-  row.opposite_previous=lastTurnForOther(spec.engine);\n+  row.opposite_previous=oppositeAtInput;\n   deferredChecks.set(requestId,{state,reference,slot});\n   const cleanup=(async()=>{\n     const stop=await stopPromise;\n",
+  "route_owner": {
+    "browser_main": "tools/ai-sigma-player-workers/player-main.js",
+    "worker": "tools/ai-sigma-player-workers/player-worker.js",
+    "SAB": "tools/ai-sigma-cp-frame/shared-best-action.cjs"
+  },
+  "run_checker_uncommitted_patch": "numeric samples for actual7 enabled before p113-functional-r2; exact sources in .inputs.json",
+  "retained_current": {
+    "UTC": "2026-10-02T09:52:50.795803+00:00",
+    "known_self_named_current": 55451648,
+    "combined_guard": 117440512,
+    "entries": [
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/CRITIC-STREAMING-SNAPSHOT",
+        "allocated": 49152
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/SIGMA-CRITICAL-ROLES-V2",
+        "allocated": 503808
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/CRITIC-STREAMING-ENTRY-FINAL",
+        "allocated": 2879488
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/ROOT-AND-NN-INDEPENDENT-HANDOFF",
+        "allocated": 143360
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/CRITIC-STREAMING-READY32",
+        "allocated": 753664
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/EARLY-SEAL-INDEPENDENT-HANDOFF",
+        "allocated": 217088
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/ACTUAL-DRIVER-INDEPENDENT-HANDOFF",
+        "allocated": 348160
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/SIGMA-SAVED-NN46-INDEPENDENT",
+        "allocated": 0
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/READY32-INDEPENDENT-HANDOFF",
+        "allocated": 368640
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/CRITIC-ACTUAL-DRIVER-MINIMAL",
+        "allocated": 282624
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/CRITIC-ORT-ENTRY",
+        "allocated": 278528
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/CRITIC-DEADLINE-FIRST-TURN",
+        "allocated": 241664
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/CRITIC-FAIR-STREAMING",
+        "allocated": 1142784
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/CRITIC-STREAMING-EARLY-SEAL",
+        "allocated": 798720
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/FAIR-STREAMING-INDEPENDENT-HANDOFF",
+        "allocated": 323584
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/CRITICAL-ROLES-V2-HANDOFF",
+        "allocated": 155648
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/STREAMING-INDEPENDENT",
+        "allocated": 7135232
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/CRITIC-STARTUP-WATCHDOG",
+        "allocated": 528384
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/CRITIC-ROOT-NN",
+        "allocated": 73728
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/CRITIC-KERNEL-OWNERSHIP",
+        "allocated": 2240512
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/CRITIC-CONTINUATION-NOGO",
+        "allocated": 299008
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/CRITIC-SCHEDULER-LIVE",
+        "allocated": 307200
+      },
+      {
+        "path": ".artifacts/ai-sigma/continuation-20261001/CRITIC-ORT-CLEANUP-REPAIR",
+        "allocated": 1261568
+      },
+      {
+        "path": ".artifacts/ai-sigma/resume-20261002/BROWSER-SAB-INDEPENDENT",
+        "allocated": 7598080
+      },
+      {
+        "path": ".artifacts/ai-sigma/resume-20261002/PLAYER-WORKERS-INDEPENDENT",
+        "allocated": 5632000
+      },
+      {
+        "path": ".artifacts/ai-sigma/resume-20261002/COOPERATIVE-ARENA-INDEPENDENT",
+        "allocated": 2035712
+      },
+      {
+        "path": ".artifacts/ai-sigma/resume-20261002/DIAGNOSTIC-ARENA-INDEPENDENT",
+        "allocated": 2654208
+      },
+      {
+        "path": ".artifacts/ai-sigma/resume-20261002/COOPERATIVE-CLOCK-INDEPENDENT",
+        "allocated": 3022848
+      },
+      {
+        "path": ".artifacts/ai-sigma/resume-20261002/C-FACTOR-INDEPENDENT",
+        "allocated": 10866688
+      },
+      {
+        "path": "research-data/ai-sigma/105-cooperative-arena-independent",
+        "allocated": 679936
+      },
+      {
+        "path": "research-data/ai-sigma/113-player-workers-independent",
+        "allocated": 364544
+      },
+      {
+        "path": "research-data/ai-sigma/109-browser-sab-independent",
+        "allocated": 413696
+      },
+      {
+        "path": "research-data/ai-sigma/100-cooperative-clock-independent",
+        "allocated": 286720
+      },
+      {
+        "path": "research-data/ai-sigma/111-c-factor-independent",
+        "allocated": 1105920
+      },
+      {
+        "path": "tools/ai-sigma-actual-driver-independent",
+        "allocated": 16384
+      },
+      {
+        "path": "tools/ai-sigma-diagnostic-arena-independent",
+        "allocated": 61440
+      },
+      {
+        "path": "tools/ai-sigma-saved-nn46-independent",
+        "allocated": 28672
+      },
+      {
+        "path": "tools/ai-sigma-cooperative-arena-independent",
+        "allocated": 77824
+      },
+      {
+        "path": "tools/ai-sigma-cooperative-clock-independent",
+        "allocated": 90112
+      },
+      {
+        "path": "tools/ai-sigma-player-workers-independent",
+        "allocated": 57344
+      },
+      {
+        "path": "tools/ai-sigma-browser-sab-independent",
+        "allocated": 45056
+      },
+      {
+        "path": "tools/ai-sigma-c-factor-independent",
+        "allocated": 81920
+      }
+    ],
+    "Git_objects_other_scopes_not_exact_current_host_audit": true,
+    "past_peak_not_double_added": true
+  },
+  "source_safety_scope": "trusted owned model/session per bound engine, unknown owner never signalled"
+}

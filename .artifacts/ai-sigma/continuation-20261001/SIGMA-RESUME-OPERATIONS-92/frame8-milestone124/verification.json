@@ -1,0 +1,61 @@
+{
+  "at": "2026-10-02T13:26:34.712466+00:00",
+  "running": true,
+  "state": {
+    "binding": {
+      "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+      "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+      "target": "supervisor",
+      "dispatch_issue": "quoridor-4lc.40",
+      "contract_file": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+    },
+    "process": {
+      "pid": 2549133,
+      "start_ticks": "20046939",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "phase": "running",
+    "recovery_required": false,
+    "last_result": {
+      "at": "2026-10-02T13:25:55.734272+00:00",
+      "event": "started"
+    },
+    "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+    "config_sha256": "c5ab5c65907a16c44562e26d3baa36d2ca3c725f616443e1824b8c13d5145def",
+    "contract_sha256": "a8f554579b70bdf1431b70b9a73e280c421efc3880a5f083a6fbfca9c345be42",
+    "next_at": 1790948027.206955,
+    "owned": null
+  },
+  "processes": [
+    {
+      "pid": 2549133,
+      "start_ticks": "20046939",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "rss_bytes": 31281152,
+      "affinity": [
+        0
+      ]
+    },
+    {
+      "pid": 2549146,
+      "start_ticks": "20046963",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "rss_bytes": 20762624,
+      "affinity": [
+        0
+      ]
+    }
+  ],
+  "rss_current_combined": 52043776,
+  "definitions": {
+    "supervisor": "612ccf6e79e06b2956eaa6f8d31e224a67ddbb93e51e6536ebb949c50e761423",
+    "coordinator": "a3263bb993566f1b0a3599bd2b95c9123ebc9fbc6086baa374e0b4b693953524"
+  },
+  "input_hash_mismatches": 0,
+  "mirrors_equal": true,
+  "diff_check_exit": 0,
+  "new_scope_bytes": 63677,
+  "past_peak": "not certified",
+  "future_wholeturn_quality": "not observed"
+}

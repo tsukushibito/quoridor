@@ -1,0 +1,100 @@
+{
+  "receiptUTC": "2026-10-04T04:03:49Z",
+  "static_source_startUTC": "2026-10-04T04:06:00Z",
+  "recordUTC": "2026-10-04T04:05:38.841608+00:00",
+  "issue": "quoridor-4lc.210",
+  "previous206": {
+    "closed": true,
+    "backup_exit": 0,
+    "static_charge": 90,
+    "static_cap": 120,
+    "budget_reset": false
+  },
+  "ready_show": {
+    "ready": [
+      {
+        "id": "quoridor-4lc.209",
+        "status": "open",
+        "assignee": "codex:01a0f31c-2e4b-7170-82c5-69e1428c2418",
+        "labels": [
+          "continuation-active",
+          "frame15",
+          "initial-window-ended"
+        ],
+        "title": "frame15: 低学習率と初期曲線・層別観測による学習診断"
+      },
+      {
+        "id": "quoridor-4lc.210",
+        "status": "open",
+        "assignee": "codex:01a0f31d-8227-7e03-a7e6-915b4918c11b",
+        "labels": [
+          "continuation-active",
+          "frame15",
+          "initial-window-ended"
+        ],
+        "title": "frame15: 学習診断の選定前見解と実観測の独立裁定"
+      }
+    ],
+    "self": [
+      {
+        "id": "quoridor-4lc.210",
+        "status": "open",
+        "assignee": "codex:01a0f31d-8227-7e03-a7e6-915b4918c11b",
+        "labels": [
+          "continuation-active",
+          "frame15",
+          "initial-window-ended"
+        ],
+        "title": "frame15: 学習診断の選定前見解と実観測の独立裁定"
+      }
+    ],
+    "goal": [
+      {
+        "id": "quoridor-4lc",
+        "status": "in_progress",
+        "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+        "labels": [
+          "continuation-active",
+          "frame15",
+          "initial-window-ended"
+        ],
+        "title": "自律AI研究: NNUE型Quoridor AIの最高棋力へ到達"
+      }
+    ]
+  },
+  "claim_exit": 0,
+  "new_budget": {
+    "static_cap": 180,
+    "read_charge_to_now": 30,
+    "CPU": 0,
+    "logical": 1,
+    "RAMguard": 469762048
+  },
+  "source_bindings": {
+    ".agents/research-team/common.md": "fc904fd4873d277066e29b9ae6c1272148c2eccce196c66daebb9cd3e3919cb7",
+    ".agents/research-team/roles/critic.md": "5f1b2516d97247b23327c553fac638dd153a808409c7aa846e536db1911de978",
+    "research-data/ai-sigma/frame15-coordinator/initial-selection.json": "47e698932c4055cf0ba67cf934e7aa4222cbf47c31858bc08069ddc0170c9eac",
+    "research-data/ai-sigma/frame15-coordinator/learning-diagnostic-contract.md": "52c2208ef62370d410488da8e6fb2ce2b4a32d5c019394ecf02242e6fc4b3517",
+    "tools/nnue-training/model.py": "12661cac69cff8b01800eb2d3df5be5f8674858d9ce995713b4385da44c74357",
+    "tools/nnue-training/train.py": "665848e238d6a7976b83c53b0c13cdb87f9e65f4a75329560d6a98afbe9863d3"
+  },
+  "storage": {
+    "old_retained_forecast": 108638692,
+    "new_scope_forecast": 4194304,
+    "new_scope_initial_current": 0,
+    "new_forecast_breakdown": {
+      "source_compact_results": 1048576,
+      "uniqueGit": 1048576,
+      "tmp": 524288,
+      "remaining_metadata": 1572864
+    },
+    "total": 112832996,
+    "critic_guard": 117440512,
+    "old_unknown_discount": 0,
+    "parent_addition": 0
+  },
+  "compute_job": "not started; source/read only; no model import/forward",
+  "newcommand": "2026-10-04T05:15:00Z",
+  "science_stop": "2026-10-04T05:20:00Z",
+  "submit": "2026-10-04T05:35:00Z"
+}

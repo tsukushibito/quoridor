@@ -1,0 +1,1055 @@
+{
+  "NN_executed": 0,
+  "first_difference": null,
+  "supported": true,
+  "unchanged_read_sources": [
+    "research-data/ai-sigma/187-manygame-generation/openings.json",
+    "research-data/ai-sigma/187-manygame-generation/CPUJS-all-status.json",
+    "research-data/ai-sigma/187-manygame-generation/CPUJS-summary.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-cpujs-r1/process.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-cpujs-r1/result.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-cpujs-r1/core2/raw-rows.jsonl",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-cpujs-r1/core4/raw-rows.jsonl",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-cpujs-r1/core6/raw-rows.jsonl",
+    "research-data/ai-sigma/187-manygame-generation/RustCPU-all-status.json",
+    "research-data/ai-sigma/187-manygame-generation/RustCPU-summary.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-rustcpu-r1/process.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-rustcpu-r1/result.json",
+    "research-data/ai-sigma/187-manygame-generation/GPU3-all-status.json",
+    "research-data/ai-sigma/187-manygame-generation/GPU3-summary.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu3-r1/process.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu3-r1/result.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu3-r1/core2/raw-rows.jsonl",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu3-r1/core4/raw-rows.jsonl",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu3-r1/core6/raw-rows.jsonl",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu3-r1/broker.json",
+    "research-data/ai-sigma/187-manygame-generation/GPU12-all-status.json",
+    "research-data/ai-sigma/187-manygame-generation/GPU12-summary.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu12-r1/process.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu12-r1/result.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu12-r1/core2/raw-rows.jsonl",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu12-r1/core4/raw-rows.jsonl",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu12-r1/core6/raw-rows.jsonl",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu12-r1/broker.json",
+    "research-data/ai-sigma/187-manygame-generation/GPU24-all-status.json",
+    "research-data/ai-sigma/187-manygame-generation/GPU24-summary.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu24-r1/process.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu24-r1/result.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu24-r1/core2/raw-rows.jsonl",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu24-r1/core4/raw-rows.jsonl",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu24-r1/core6/raw-rows.jsonl",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu24-r1/broker.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-history-normalize-r1/process.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-mock-r1/process.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-mock-r2/process.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-parity-r1/process.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-prepare-r1/process.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-probe-r1/process.json"
+  ],
+  "archive_SHA256": "9f433858f6ba0b5847a9cf36cbfe78c62475ed18847907fadab0ed90807d61c7",
+  "archive_member_bindings": [
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-cpujs-r1/process.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-cpujs-r1/result.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-cpujs-r1/core2/raw-rows.jsonl",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-cpujs-r1/core4/raw-rows.jsonl",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-cpujs-r1/core6/raw-rows.jsonl",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-rustcpu-r1/process.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-rustcpu-r1/result.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu3-r1/process.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu3-r1/result.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu3-r1/core2/raw-rows.jsonl",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu3-r1/core4/raw-rows.jsonl",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu3-r1/core6/raw-rows.jsonl",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu3-r1/broker.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu12-r1/process.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu12-r1/result.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu12-r1/core2/raw-rows.jsonl",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu12-r1/core4/raw-rows.jsonl",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu12-r1/core6/raw-rows.jsonl",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu12-r1/broker.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu24-r1/process.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu24-r1/result.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu24-r1/core2/raw-rows.jsonl",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu24-r1/core4/raw-rows.jsonl",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu24-r1/core6/raw-rows.jsonl",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu24-r1/broker.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-history-normalize-r1/process.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-mock-r1/process.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-mock-r2/process.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-parity-r1/process.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-prepare-r1/process.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-probe-r1/process.json"
+  ],
+  "stream_restored_members": [
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-cpujs-r1/process.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu12-r1/process.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu24-r1/process.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu3-r1/process.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-history-normalize-r1/process.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-mock-r1/process.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-mock-r2/process.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-parity-r1/process.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-parity-r1/result.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-prepare-r1/process.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-probe-r1/process.json",
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-rustcpu-r1/process.json"
+  ],
+  "source_Git_checks": [
+    {
+      "role": "original",
+      "Git": "2fef995b9e59c4dd8109c18c067f148d91f83083",
+      "path": "tools/ai-sigma-manygame-generation/worker.cjs",
+      "SHA256": "1fc59abfbd322fcffe8c3d111d569626b9121762c6fa28f13d6e59ecda4cd874"
+    },
+    {
+      "role": "original",
+      "Git": "2fef995b9e59c4dd8109c18c067f148d91f83083",
+      "path": "tools/ai-sigma-manygame-generation/gamepool.cjs",
+      "SHA256": "7fc6ee6c63e71048ea6edd2b649417965d70cd39df70f6ba2771160a5ad0bab4"
+    },
+    {
+      "role": "original",
+      "Git": "2fef995b9e59c4dd8109c18c067f148d91f83083",
+      "path": "tools/ai-sigma-manygame-generation/provider.py",
+      "SHA256": "c836ad54ff02ea916c3b9e3da52b90164faf1b31540160cdd6c83bae26110766"
+    },
+    {
+      "role": "original",
+      "Git": "2fef995b9e59c4dd8109c18c067f148d91f83083",
+      "path": "tools/ai-sigma-manygame-generation/adapter.py",
+      "SHA256": "1d3a232faebb0bdb05ec3d10bf30857c9f59374d4fbd5217f18b7f345f2f0478"
+    },
+    {
+      "role": "original",
+      "Git": "2fef995b9e59c4dd8109c18c067f148d91f83083",
+      "path": "tools/ai-sigma-manygame-generation/broker.cjs",
+      "SHA256": "da68203e1b8fd916b764a2eacd2731405d4f7cd98c2e8bb495a16eff57440f3c"
+    },
+    {
+      "role": "original",
+      "Git": "2fef995b9e59c4dd8109c18c067f148d91f83083",
+      "path": "tools/ai-sigma-manygame-generation/teacher-interface.cjs",
+      "SHA256": "961403ab7cf386fb56d0931fa6d872ca0424a74bbdbd93ff1aa34e3414495805"
+    },
+    {
+      "role": "original",
+      "Git": "2fef995b9e59c4dd8109c18c067f148d91f83083",
+      "path": "tools/ai-sigma-manygame-generation/schema.cjs",
+      "SHA256": "d3f26b75b59bad2ac5813225a24f4ef96085ce5edec55ec241ddda0dec544a50"
+    },
+    {
+      "role": "GPUfuture",
+      "Git": "31a807382621e6b73d8656502e7ea6991bb8ba25",
+      "path": "tools/ai-sigma-manygame-generation/worker.cjs",
+      "SHA256": "f438d04211baf9e12b81208f8f64c8757b326fd605974ede77db21efb04a3755"
+    },
+    {
+      "role": "GPUfuture",
+      "Git": "31a807382621e6b73d8656502e7ea6991bb8ba25",
+      "path": "tools/ai-sigma-manygame-generation/gamepool.cjs",
+      "SHA256": "7fc6ee6c63e71048ea6edd2b649417965d70cd39df70f6ba2771160a5ad0bab4"
+    },
+    {
+      "role": "GPUfuture",
+      "Git": "31a807382621e6b73d8656502e7ea6991bb8ba25",
+      "path": "tools/ai-sigma-manygame-generation/provider.py",
+      "SHA256": "c836ad54ff02ea916c3b9e3da52b90164faf1b31540160cdd6c83bae26110766"
+    },
+    {
+      "role": "GPUfuture",
+      "Git": "31a807382621e6b73d8656502e7ea6991bb8ba25",
+      "path": "tools/ai-sigma-manygame-generation/adapter.py",
+      "SHA256": "1d3a232faebb0bdb05ec3d10bf30857c9f59374d4fbd5217f18b7f345f2f0478"
+    },
+    {
+      "role": "GPUfuture",
+      "Git": "31a807382621e6b73d8656502e7ea6991bb8ba25",
+      "path": "tools/ai-sigma-manygame-generation/broker.cjs",
+      "SHA256": "da68203e1b8fd916b764a2eacd2731405d4f7cd98c2e8bb495a16eff57440f3c"
+    },
+    {
+      "role": "GPUfuture",
+      "Git": "31a807382621e6b73d8656502e7ea6991bb8ba25",
+      "path": "tools/ai-sigma-manygame-generation/teacher-interface.cjs",
+      "SHA256": "961403ab7cf386fb56d0931fa6d872ca0424a74bbdbd93ff1aa34e3414495805"
+    },
+    {
+      "role": "GPUfuture",
+      "Git": "31a807382621e6b73d8656502e7ea6991bb8ba25",
+      "path": "tools/ai-sigma-manygame-generation/schema.cjs",
+      "SHA256": "d3f26b75b59bad2ac5813225a24f4ef96085ce5edec55ec241ddda0dec544a50"
+    }
+  ],
+  "history_changed_lines": 1,
+  "parity": [
+    {
+      "B": 1,
+      "samples_CPU_plus_GPU": 2,
+      "maxabs": 3.814697265625e-06,
+      "max_ratio": 0.02055337214038364
+    },
+    {
+      "B": 2,
+      "samples_CPU_plus_GPU": 4,
+      "maxabs": 4.291534423828125e-06,
+      "max_ratio": 0.02813499231836557
+    },
+    {
+      "B": 3,
+      "samples_CPU_plus_GPU": 6,
+      "maxabs": 4.291534423828125e-06,
+      "max_ratio": 0.02813499231836557
+    },
+    {
+      "B": 4,
+      "samples_CPU_plus_GPU": 8,
+      "maxabs": 4.5299530029296875e-06,
+      "max_ratio": 0.02969804744716366
+    },
+    {
+      "B": 5,
+      "samples_CPU_plus_GPU": 10,
+      "maxabs": 4.5299530029296875e-06,
+      "max_ratio": 0.02969804744716366
+    },
+    {
+      "B": 6,
+      "samples_CPU_plus_GPU": 12,
+      "maxabs": 5.245208740234375e-06,
+      "max_ratio": 0.04463034108535309
+    },
+    {
+      "B": 7,
+      "samples_CPU_plus_GPU": 14,
+      "maxabs": 5.245208740234375e-06,
+      "max_ratio": 0.04463034108535309
+    },
+    {
+      "B": 8,
+      "samples_CPU_plus_GPU": 16,
+      "maxabs": 5.576759576797485e-06,
+      "max_ratio": 0.05407121814414229
+    }
+  ],
+  "parity_full_deep": false,
+  "stop": {
+    "UTC": "2026-10-03T13:48:08.950304+00:00",
+    "issue": "quoridor-4lc.187",
+    "science_stopped": true,
+    "all_owned_science_children_waited": true,
+    "current_same_identity": [],
+    "attempt_receipts": [
+      {
+        "run": "native187-rustcpu-r1",
+        "exit": 1,
+        "kind": "generate",
+        "wall": 6.334307405981235
+      },
+      {
+        "run": "native187-parity-r1",
+        "exit": 0,
+        "kind": "parity",
+        "wall": 3.6645938450237736
+      },
+      {
+        "run": "native187-mock-r1",
+        "exit": -15,
+        "kind": "mock",
+        "wall": 31.86220907297684
+      },
+      {
+        "run": "native187-gpu12-r1",
+        "exit": 0,
+        "kind": "generate",
+        "wall": 107.80132248700829
+      },
+      {
+        "run": "native187-mock-r2",
+        "exit": 0,
+        "kind": "mock",
+        "wall": 2.0722249620012008
+      },
+      {
+        "run": "native187-cpujs-r1",
+        "exit": 0,
+        "kind": "generate",
+        "wall": 137.83640136098256
+      },
+      {
+        "run": "native187-history-normalize-r1",
+        "exit": 0,
+        "kind": "mock",
+        "wall": 2.417806187993847
+      },
+      {
+        "run": "native187-gpu3-r1",
+        "exit": 0,
+        "kind": "generate",
+        "wall": 247.13934529200196
+      },
+      {
+        "run": "native187-gpu24-r1",
+        "exit": 0,
+        "kind": "generate",
+        "wall": 88.33445621305145
+      },
+      {
+        "run": "native187-prepare-r1",
+        "exit": 0,
+        "kind": "mock",
+        "wall": 1.4818282109918073
+      },
+      {
+        "run": "native187-probe-r1",
+        "exit": 0,
+        "kind": "mock",
+        "wall": 1.6431774880038574
+      }
+    ],
+    "remaining_work": "NN0 export/finite-root comparison/pack/Git restoration/Beadsbackup/handoff only; no newNN/run/science",
+    "physical_current_is_point_evidence_not_fullhost": true
+  },
+  "cost_ledger_snapshot": {
+    "receivedUTC": "2026-10-03T13:02:09Z",
+    "static_startUTC": "2026-10-03T13:06:42Z",
+    "first_modelUTC": "2026-10-03T13:20:47.954103Z",
+    "first_generationUTC": "2026-10-03T13:22:24.638760Z",
+    "source_preparation_wall_until_first_model_s": 1118.9541029999964,
+    "definition": "Preparation elapsed wall includes LLM/static reads/control/Git/report/NN0; separate from allattempt program jobwall. No kernelCPU attribution or double summation of API/pipe awaits.",
+    "measured_export_helper_wall_s": 0.8084846990000001,
+    "mode_jobwall_includes": "admission+session init+startup+game input+features/legal/MCTS+NN+pipe/IPC+CP receive+row record+stop/drain/cleanup",
+    "allattempt_jobs_available": [
+      {
+        "run": "native187-cpujs-r1",
+        "kind": "generate",
+        "jobwall": 137.83640136098256,
+        "exit": 0,
+        "reason": null
+      },
+      {
+        "run": "native187-mock-r1",
+        "kind": "mock",
+        "jobwall": 31.86220907297684,
+        "exit": -15,
+        "reason": "JOB_OR_SCIENCE_OR_TOTAL_DEADLINE"
+      },
+      {
+        "run": "native187-mock-r2",
+        "kind": "mock",
+        "jobwall": 2.0722249620012008,
+        "exit": 0,
+        "reason": null
+      },
+      {
+        "run": "native187-parity-r1",
+        "kind": "parity",
+        "jobwall": 3.6645938450237736,
+        "exit": 0,
+        "reason": null
+      },
+      {
+        "run": "native187-prepare-r1",
+        "kind": "mock",
+        "jobwall": 1.4818282109918073,
+        "exit": 0,
+        "reason": null
+      },
+      {
+        "run": "native187-probe-r1",
+        "kind": "mock",
+        "jobwall": 1.6431774880038574,
+        "exit": 0,
+        "reason": null
+      },
+      {
+        "run": "native187-rustcpu-r1",
+        "kind": "generate",
+        "jobwall": 6.334307405981235,
+        "exit": 1,
+        "reason": null
+      }
+    ],
+    "config_preflight_failure": "Python syntax before config/child no model; saved separately",
+    "partial_missing_mode_cost": "unstarted0 observed cost; full intended capacity retained",
+    "report_Git_backup_helpers": "Recorded final capture separately; excluded from production denominator but included as pipeline operations",
+    "early_export_summary_path": "CPUJS-summary.json",
+    "export_replay_scope": "shared RuleA, exact features/order/history/Action/terminal on all stored rows; no fulltree/inference trace replay",
+    "CPU_resource_limit": "CPUJS management+workers use logical2/4/6; GPU workers2/4/6 plus provider/broker0 use4; same parent allowed4, no equal kernelCPU claim",
+    "cost_await_overlap": "CPU API sums and pipe spans overlap; GPU batches/queue overlap acrossgames; no summed kernelCPU or exclusive decomposition claim",
+    "allattempt_jobwall_seconds": 630.5876725260168,
+    "final_export_helper_wall_s": 1.985892922,
+    "parity_debug_actual": 72,
+    "startup_actual_separate": 3,
+    "all_mode_intended_games": 120,
+    "mode_qualified_terminal_games": 96,
+    "fault_games": 3,
+    "not_started_slots_in_failed_mode": 21,
+    "additional_science": false,
+    "pack_helper_wall_s": 0.5068798889988102,
+    "allocated_scope_with_raw_and_archive_current": 57298944,
+    "Git_forecast_B": 33554432,
+    "own_guard_B": 234881024,
+    "original_hand_NN_reported_counter": 255070,
+    "original_all_NN_reported_counter": 255145,
+    "normal_modes_hand_NN_physical_exact": 254880,
+    "failed_RustCPU_logical_requests": 190,
+    "failed_RustCPU_physical_count": "UNKNOWN <=190",
+    "hand_NN_physical_total_upper_bound": 255070,
+    "all_NN_forward_physical_upper_bound": 255145,
+    "counter_qualification": "counter-qualification.json"
+  },
+  "optional188": {
+    "supported_saved_arithmetic": true,
+    "cohorts": {
+      "old": {
+        "rows": 221,
+        "games": 4,
+        "parent176": {
+          "MSE": 0.6840944289234024,
+          "CE": 2.5144672036440663,
+          "sign_correct": 141,
+          "wrong_saturation_abs09": 0,
+          "mean_P1": 0.08722853365252048
+        },
+        "LR01": {
+          "MSE": 0.40259214444296665,
+          "CE": 2.2873704099007863,
+          "sign_correct": 193,
+          "wrong_saturation_abs09": 0,
+          "mean_P1": 0.20390199334255305
+        },
+        "LR0025": {
+          "MSE": 0.526609748100432,
+          "CE": 2.4117662529060744,
+          "sign_correct": 165,
+          "wrong_saturation_abs09": 0,
+          "mean_P1": 0.15634944780868779
+        }
+      },
+      "new": {
+        "rows": 281,
+        "games": 4,
+        "parent176": {
+          "MSE": 1.6632576554059133,
+          "CE": 2.5719010424783644,
+          "sign_correct": 66,
+          "wrong_saturation_abs09": 0,
+          "mean_P1": 0.3643167521705142
+        },
+        "LR01": {
+          "MSE": 1.9510527310422308,
+          "CE": 2.391096297850388,
+          "sign_correct": 85,
+          "wrong_saturation_abs09": 45,
+          "mean_P1": 0.37183975805387603
+        },
+        "LR0025": {
+          "MSE": 1.7066455560328697,
+          "CE": 2.4836830768296725,
+          "sign_correct": 60,
+          "wrong_saturation_abs09": 0,
+          "mean_P1": 0.3702817816843256
+        }
+      }
+    },
+    "games": {
+      "native176-teacher-002": {
+        "rows": 59,
+        "games": 1,
+        "parent176": {
+          "MSE": 0.1843935193462392,
+          "CE": 2.901228513252937,
+          "sign_correct": 59,
+          "wrong_saturation_abs09": 0,
+          "mean_P1": 0.6581429945210279
+        },
+        "LR01": {
+          "MSE": 0.0931697440160028,
+          "CE": 2.594156807762081,
+          "sign_correct": 59,
+          "wrong_saturation_abs09": 0,
+          "mean_P1": 0.7293442937277131
+        },
+        "LR0025": {
+          "MSE": 0.13409910150566848,
+          "CE": 2.7757108691385235,
+          "sign_correct": 59,
+          "wrong_saturation_abs09": 0,
+          "mean_P1": 0.6961879982786664
+        }
+      },
+      "native176-teacher-005": {
+        "rows": 70,
+        "games": 1,
+        "parent176": {
+          "MSE": 1.0878159457019396,
+          "CE": 1.9055745874132428,
+          "sign_correct": 29,
+          "wrong_saturation_abs09": 0,
+          "mean_P1": 0.004580283134211121
+        },
+        "LR01": {
+          "MSE": 0.3831163294613361,
+          "CE": 1.6798655586583273,
+          "sign_correct": 69,
+          "wrong_saturation_abs09": 0,
+          "mean_P1": 0.4256466627919248
+        },
+        "LR0025": {
+          "MSE": 0.6730008132755756,
+          "CE": 1.8018745571374892,
+          "sign_correct": 52,
+          "wrong_saturation_abs09": 0,
+          "mean_P1": 0.22495471404067108
+        }
+      },
+      "native176-teacher-013": {
+        "rows": 53,
+        "games": 1,
+        "parent176": {
+          "MSE": 0.3315492183813509,
+          "CE": 2.8411366467205985,
+          "sign_correct": 52,
+          "wrong_saturation_abs09": 0,
+          "mean_P1": -0.44206464684234476
+        },
+        "LR01": {
+          "MSE": 0.19090552487463322,
+          "CE": 2.7719408172481463,
+          "sign_correct": 53,
+          "wrong_saturation_abs09": 0,
+          "mean_P1": -0.5822039884778688
+        },
+        "LR0025": {
+          "MSE": 0.2781506572973053,
+          "CE": 2.8004628532337694,
+          "sign_correct": 52,
+          "wrong_saturation_abs09": 0,
+          "mean_P1": -0.4873363279368518
+        }
+      },
+      "native176-teacher-020": {
+        "rows": 39,
+        "games": 1,
+        "parent176": {
+          "MSE": 1.1945237532640114,
+          "CE": 2.5783155468794017,
+          "sign_correct": 1,
+          "wrong_saturation_abs09": 0,
+          "mean_P1": 0.09117630060809927
+        },
+        "LR01": {
+          "MSE": 1.193325978059035,
+          "CE": 2.2551322182019553,
+          "sign_correct": 12,
+          "wrong_saturation_abs09": 0,
+          "mean_P1": 0.07929672288875549
+        },
+        "LR0025": {
+          "MSE": 1.1953042455208607,
+          "CE": 2.427632061334757,
+          "sign_correct": 2,
+          "wrong_saturation_abs09": 0,
+          "mean_P1": 0.09128542218166284
+        }
+      },
+      "native181-teacher-004": {
+        "rows": 65,
+        "games": 1,
+        "parent176": {
+          "MSE": 0.5809162923922906,
+          "CE": 2.807497939696679,
+          "sign_correct": 57,
+          "wrong_saturation_abs09": 0,
+          "mean_P1": 0.27867842563069783
+        },
+        "LR01": {
+          "MSE": 0.8566116365102622,
+          "CE": 2.6145023584365843,
+          "sign_correct": 45,
+          "wrong_saturation_abs09": 0,
+          "mean_P1": 0.10891320990541807
+        },
+        "LR0025": {
+          "MSE": 0.6069440504679313,
+          "CE": 2.712275712306683,
+          "sign_correct": 53,
+          "wrong_saturation_abs09": 0,
+          "mean_P1": 0.2561808536742599
+        }
+      },
+      "native181-teacher-005": {
+        "rows": 52,
+        "games": 1,
+        "parent176": {
+          "MSE": 1.8304589906564126,
+          "CE": 2.2896597924140782,
+          "sign_correct": 3,
+          "wrong_saturation_abs09": 0,
+          "mean_P1": 0.3363627734629867
+        },
+        "LR01": {
+          "MSE": 1.018053052517084,
+          "CE": 2.157810615805479,
+          "sign_correct": 26,
+          "wrong_saturation_abs09": 0,
+          "mean_P1": -0.002900805017606427
+        },
+        "LR0025": {
+          "MSE": 1.5499153435230255,
+          "CE": 2.219164551450656,
+          "sign_correct": 4,
+          "wrong_saturation_abs09": 0,
+          "mean_P1": 0.23279438262733704
+        }
+      },
+      "native181-teacher-008": {
+        "rows": 94,
+        "games": 1,
+        "parent176": {
+          "MSE": 1.659002074535857,
+          "CE": 2.4054631863502745,
+          "sign_correct": 6,
+          "wrong_saturation_abs09": 0,
+          "mean_P1": 0.27130483554557283
+        },
+        "LR01": {
+          "MSE": 1.9539474721284622,
+          "CE": 2.1707727328893984,
+          "sign_correct": 14,
+          "wrong_saturation_abs09": 0,
+          "mean_P1": 0.3588360294531238
+        },
+        "LR0025": {
+          "MSE": 1.6359827188735312,
+          "CE": 2.295853906489433,
+          "sign_correct": 3,
+          "wrong_saturation_abs09": 0,
+          "mean_P1": 0.27066201193535583
+        }
+      },
+      "native181-teacher-015": {
+        "rows": 70,
+        "games": 1,
+        "parent176": {
+          "MSE": 2.5497968520436967,
+          "CE": 2.786299687623978,
+          "sign_correct": 0,
+          "wrong_saturation_abs09": 0,
+          "mean_P1": 0.5895055847508567
+        },
+        "LR01": {
+          "MSE": 3.656517713410514,
+          "CE": 2.6528088212013246,
+          "sign_correct": 0,
+          "wrong_saturation_abs09": 45,
+          "mean_P1": 0.9118266923086984
+        },
+        "LR0025": {
+          "MSE": 2.9391152075358797,
+          "CE": 2.72014570576804,
+          "sign_correct": 0,
+          "wrong_saturation_abs09": 0,
+          "mean_P1": 0.7121412592274802
+        }
+      }
+    },
+    "all": {
+      "rows": 502,
+      "games": 8,
+      "parent176": {
+        "MSE": 1.2321917728309435,
+        "CE": 2.5466164241867713,
+        "sign_correct": 207,
+        "wrong_saturation_abs09": 0,
+        "mean_P1": 0.24233169979506275
+      },
+      "LR01": {
+        "MSE": 1.2693599229975348,
+        "CE": 2.345432112119587,
+        "sign_correct": 278,
+        "wrong_saturation_abs09": 45,
+        "mean_P1": 0.29790699709530555
+      },
+      "LR0025": {
+        "MSE": 1.1871477202697847,
+        "CE": 2.4520224830306385,
+        "sign_correct": 225,
+        "wrong_saturation_abs09": 0,
+        "mean_P1": 0.27610041557572806
+      }
+    },
+    "MSE_maxfloat32_difference": 3.4675196403100017e-07,
+    "CE_independent_forward": false,
+    "CE_saved_scalar_aggregation_only": true,
+    "training_receipt": {
+      "LR": 0.0025,
+      "seed": 18180311,
+      "steps": 200,
+      "minibatch": 128,
+      "ledger": [
+        {
+          "step": 1,
+          "total": 3.1025733947753906,
+          "CE": 2.411255121231079,
+          "MSE": 0.6913183331489563
+        },
+        {
+          "step": 20,
+          "total": 3.2321362495422363,
+          "CE": 2.501901149749756,
+          "MSE": 0.7302351593971252
+        },
+        {
+          "step": 50,
+          "total": 3.0911242961883545,
+          "CE": 2.455507516860962,
+          "MSE": 0.6356167793273926
+        },
+        {
+          "step": 100,
+          "total": 3.2253611087799072,
+          "CE": 2.632094621658325,
+          "MSE": 0.593266487121582
+        },
+        {
+          "step": 200,
+          "total": 3.0986783504486084,
+          "CE": 2.6140565872192383,
+          "MSE": 0.4846217930316925
+        }
+      ],
+      "minibatch_sequence_SHA256": "a2995b0a9b0e3a864e5b5a74b28081e6bfa32bf52f92e2ce7059f2641fdbfbea",
+      "checkpoint_SHA256": "c9bf3d807f1843c67fe134f5c401411531d438a5c2c7723d36ce160fc564f9be",
+      "checkpoint_bytes": 104281,
+      "weights_only_reload_bit_equal": true,
+      "reload_forward": 0,
+      "sample_counter": {
+        "forward_calls": 202,
+        "samples": 26604,
+        "warm": 0,
+        "train_steps": 200,
+        "GPU": 0
+      }
+    },
+    "stop_receipt": {
+      "identity": {
+        "pid": 3556764,
+        "tick": "28649280",
+        "RSS": 0,
+        "ppid": 3556686,
+        "pgrp": 3556764
+      },
+      "tracked": [
+        {
+          "pid": 3556764,
+          "tick": "28649280",
+          "RSS": 715149312,
+          "ppid": 3556686,
+          "pgrp": 3556764
+        }
+      ],
+      "command": [
+        "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+        "-B",
+        "tools/ai-sigma-value-lr-control/learn.py"
+      ],
+      "exit": 0,
+      "reason": null,
+      "wall_seconds": 3.2399722179980017,
+      "peak_family_RSS_bytes": 715149312,
+      "waited": true,
+      "current_identity_absent": true,
+      "remaining": [],
+      "CPU_affinity": [
+        8
+      ],
+      "started_UTC": "2026-10-03T13:19:07.788647+00:00",
+      "stopped_UTC": "2026-10-03T13:19:11.028623+00:00",
+      "GPU_calls": 0
+    },
+    "management_guard_overrun_B": 28086,
+    "guard_account": 486838,
+    "guard_B": 458752,
+    "unGit_final_stop_metadata": true,
+    "not_new_model_recertification": true
+  },
+  "snapshots": {
+    "research-data/ai-sigma/191-manygame-independent/arithmetic.json": {
+      "SHA256": "653e4f9959bf855de140c308d1ee2b6f0f18cb2dd01f9148de94db2f9e565cc7",
+      "bytes": 50347
+    },
+    "research-data/ai-sigma/187-manygame-generation/archive-manifest.json": {
+      "SHA256": "7b71417c1879cb1c7f378fd2ac59c7ddbef25bf700ad2c6a4a1a478c8e43a1a7",
+      "bytes": 33718
+    },
+    "research-data/ai-sigma/187-manygame-generation/all-attempt-evidence.tar.gz": {
+      "SHA256": "9f433858f6ba0b5847a9cf36cbfe78c62475ed18847907fadab0ed90807d61c7",
+      "bytes": 3608539
+    },
+    "research-data/ai-sigma/187-manygame-generation/openings.json": {
+      "SHA256": "4ec94a50da0c7c53604085fca3fff95e1713f02c9f6ea220d1c0f177985fdba5",
+      "bytes": 420705
+    },
+    "research-data/ai-sigma/187-manygame-generation/CPUJS-all-status.json": {
+      "SHA256": "6f76a5ca5f4a2123ac8269b21c4f1970d0119e6041227ba0ff6439bf91e72ca0",
+      "bytes": 147861
+    },
+    "research-data/ai-sigma/187-manygame-generation/CPUJS-summary.json": {
+      "SHA256": "89488a39ca899e5f0d30ffc492689822203eb458552da205420d0556b51fd921",
+      "bytes": 6017
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-cpujs-r1/process.json": {
+      "SHA256": "99a98390a692d892285a0f20dc0c34b59cd833a8c85549048dda91394f5e64a9",
+      "bytes": 37927
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-cpujs-r1/result.json": {
+      "SHA256": "e32914b7e1ba89c17e1a0d1689bd73f02eb6531648ef66ee975dd4c3e2b76922",
+      "bytes": 207731
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-cpujs-r1/core2/raw-rows.jsonl": {
+      "SHA256": "0fc864decbd53838d1d4594d6f0c1db9a6fc1dbb1ee898fd7893afe9ebc16878",
+      "bytes": 3931265
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-cpujs-r1/core4/raw-rows.jsonl": {
+      "SHA256": "af44092c325811b053906c72825f53203e82d9d74560c16ef13bf7f08ada5012",
+      "bytes": 3895962
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-cpujs-r1/core6/raw-rows.jsonl": {
+      "SHA256": "e0dd1ffde7c74e88bc08496af5481cac098a657f9d09d0567579390f1aa871c3",
+      "bytes": 3014381
+    },
+    "research-data/ai-sigma/187-manygame-generation/RustCPU-all-status.json": {
+      "SHA256": "8c25b0dc7f215f31158bd2fae22f6082a68a426a416eb10c0020169dd73010d3",
+      "bytes": 10553
+    },
+    "research-data/ai-sigma/187-manygame-generation/RustCPU-summary.json": {
+      "SHA256": "e8941f4ecc3ec183a0db9d60ee60b60b04608ef152944479a7f79e184f39e48e",
+      "bytes": 6217
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-rustcpu-r1/process.json": {
+      "SHA256": "47893006071abf772c91eb03a0faa979720a6f0dc9ef366ebdf82e2f76878e67",
+      "bytes": 3345
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-rustcpu-r1/result.json": {
+      "SHA256": "af98aa807b51e35cacc86a29b8923da5e6b5ca64610b6a1a29ef5d11446390b7",
+      "bytes": 8375
+    },
+    "research-data/ai-sigma/187-manygame-generation/GPU3-all-status.json": {
+      "SHA256": "865eea569d6aa10abb99ccd34f6e2ce24d5e8b5d4e22ec6b382db6120610194a",
+      "bytes": 147777
+    },
+    "research-data/ai-sigma/187-manygame-generation/GPU3-summary.json": {
+      "SHA256": "6b2016ded1f59fb58c0965938858d6a61377a43d153209eb0603b9f7fc173fba",
+      "bytes": 16109
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu3-r1/process.json": {
+      "SHA256": "ac016730f78ef8a2c7f00d6dc09ca3d968ad87ef51684ad0379b4ec52db683d5",
+      "bytes": 70070
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu3-r1/result.json": {
+      "SHA256": "52357893b133e656492b83b86e5a8fb75feae4e1e051796bbd93d2267b209f23",
+      "bytes": 208181
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu3-r1/core2/raw-rows.jsonl": {
+      "SHA256": "a619157153120d426a3d06b40ca0934405bb9c14c34673f91a9657e110ad2d23",
+      "bytes": 3918727
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu3-r1/core4/raw-rows.jsonl": {
+      "SHA256": "eb25f83316a93a0c18cc1636df0258ffc2cf8fbd99b551c2ec610e9f821025ee",
+      "bytes": 3883791
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu3-r1/core6/raw-rows.jsonl": {
+      "SHA256": "d9ae0f5b7d13ad716a350ab4848373e2cd84fb32a6db6da7a0044a4d7ecd1bef",
+      "bytes": 3004876
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu3-r1/broker.json": {
+      "SHA256": "670e6a880f123f364db1aaa6ddd1093c2947ad2a6872a11a5716dd10d9cde95d",
+      "bytes": 10299
+    },
+    "research-data/ai-sigma/187-manygame-generation/GPU12-all-status.json": {
+      "SHA256": "9d3e518c3ff7db5bd8187ae5d4b7425d1e9334d87a479e20a686207371ea5979",
+      "bytes": 147782
+    },
+    "research-data/ai-sigma/187-manygame-generation/GPU12-summary.json": {
+      "SHA256": "71d26e2ba77bfdacef199b98bae70deea9160fc5fd1ab6e40a73cba75cde29d0",
+      "bytes": 17790
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu12-r1/process.json": {
+      "SHA256": "1a90e0c754c979c4b683e93fc3dcf36fc25db45653c1c2dcd1eb30d787edf079",
+      "bytes": 26390
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu12-r1/result.json": {
+      "SHA256": "9214f4143aae961ccff61c9d7e866d497cb5eed822c8e09aeb8a36a503715fec",
+      "bytes": 208190
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu12-r1/core2/raw-rows.jsonl": {
+      "SHA256": "82d84d83336d92c7f94ac544c07f3f6c4d7f8964bcf4bbb27c7978826a62491d",
+      "bytes": 3919569
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu12-r1/core4/raw-rows.jsonl": {
+      "SHA256": "838a08298bf3b444fe31ab45508e864d6f030ad823f8a879792c2ffac4c49547",
+      "bytes": 3884516
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu12-r1/core6/raw-rows.jsonl": {
+      "SHA256": "c0b2f3b55489b16ce5301a11dc99f1b6e6797db2ccb75b3d4fb2de7441b719bb",
+      "bytes": 3005488
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu12-r1/broker.json": {
+      "SHA256": "3f7b00011d4591dbbb01ef16c7a0c1fdd2521b7fafd739004d4b0aea9f0e03fa",
+      "bytes": 11975
+    },
+    "research-data/ai-sigma/187-manygame-generation/GPU24-all-status.json": {
+      "SHA256": "6aeac9445c310475887d7212b47ef0e8eb6d775428e7ad96114dc2f7fcb2cb4d",
+      "bytes": 147747
+    },
+    "research-data/ai-sigma/187-manygame-generation/GPU24-summary.json": {
+      "SHA256": "90aa84800b2ab12bd6ea51ac062653881078ff42d7f443c582c7a84ed2278ba6",
+      "bytes": 18790
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu24-r1/process.json": {
+      "SHA256": "2fa6e62a5e87b0d8343f79baed2fde1c19c8ed5ba441af8f968a320ad5fccaf9",
+      "bytes": 23649
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu24-r1/result.json": {
+      "SHA256": "111f99eafb74e041cfba81e79ee12e3f19f919c7c80baea7240a1658a2ae4f98",
+      "bytes": 208148
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu24-r1/core2/raw-rows.jsonl": {
+      "SHA256": "7600a6d437d7328b7bf07bd9d688fa61433ef7a41a407c7c8d5ec50fa0c84c02",
+      "bytes": 3919527
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu24-r1/core4/raw-rows.jsonl": {
+      "SHA256": "53495f84c5dbcaab38a9eb5f0f915b9ae5c436ea49109b7211e61abb16d61b5f",
+      "bytes": 3884646
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu24-r1/core6/raw-rows.jsonl": {
+      "SHA256": "0d7a193318c68d38ff806e936d18388809b2211a67aa2c0e794b16d17fb1577c",
+      "bytes": 3005490
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-gpu24-r1/broker.json": {
+      "SHA256": "71a24be6ca01ef92229a128daf6660cead7a1b233d00fcb31a60bb396a8325c7",
+      "bytes": 12976
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-history-normalize-r1/process.json": {
+      "SHA256": "ebea870777679b6b475339ea1c78453cb59af89baafd79d358a075ecb5217757",
+      "bytes": 995
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-mock-r1/process.json": {
+      "SHA256": "ea0ec8ba896ff07d0a1649aaaac9082f02f994f6fae61549b07476f6c14736b6",
+      "bytes": 1970
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-mock-r2/process.json": {
+      "SHA256": "f001aeec0fc8c89c03046e2de61c10a93fe2d5c5f374d71687f8823e86552db2",
+      "bytes": 2071
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-parity-r1/process.json": {
+      "SHA256": "3d3f22a2141ac4f22eb485c4f5ff72b81c418f048d6e1e3a739d2b8af4a516bd",
+      "bytes": 1124
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-prepare-r1/process.json": {
+      "SHA256": "affb539ec2e5761125e0cab269dee56d1e1e04cd006bf222ab25d376b8faaa26",
+      "bytes": 962
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-probe-r1/process.json": {
+      "SHA256": "a9ac285604b3656fa9ae171e38aa9d85953e1bd96011c3bfbb6a4b13e0e2d7bf",
+      "bytes": 960
+    },
+    "research-data/ai-sigma/187-manygame-generation/binding.json": {
+      "SHA256": "5289b7cd30bdf840f6b695d900d9895a01c025fa3e0f3398ea3c7d27ad60877d",
+      "bytes": 4029
+    },
+    "research-data/ai-sigma/187-manygame-generation/binding-gpu-future.json": {
+      "SHA256": "d91602b4ddb02bb92f87051b1b3882e7bd800cb2cd558e9c8ee5b4824ba01625",
+      "bytes": 4717
+    },
+    "tools/ai-sigma-native-checkpoint-teacher/controller.cjs": {
+      "SHA256": "9127022a6df9f521f802332b9db70bbd543da96a783add1213c8059d5141cccf",
+      "bytes": 1651
+    },
+    "tools/ai-sigma-native-checkpoint-teacher/engine.cjs": {
+      "SHA256": "f6c2fd2a7a0aeea2225f16899b1056fc6392678cc3bc5e9dbb74495a39676eb3",
+      "bytes": 8232
+    },
+    "tools/ai-sigma-native-checkpoint-teacher/common.cjs": {
+      "SHA256": "8f7ca770402175f73837528734a8b56f585a11b48bd08001f0719c771130b313",
+      "bytes": 1700
+    },
+    "tools/ai-sigma-native-baseline/reference.cjs": {
+      "SHA256": "85cae30273fa481f96ec28fa77eeb5907bb203812c7234f9ffdfd75d337848cf",
+      "bytes": 1475
+    },
+    "tools/ai-sigma-native-baseline/ort.py": {
+      "SHA256": "a1385fa48b07a2e5fb34d105e13d06556efed100b127a3667dfd0daa25111565",
+      "bytes": 2000
+    },
+    ".artifacts/ai-sigma/resume-20261003/NATIVE-BASELINE/build/target/release/faithful-native": {
+      "SHA256": "166dd0c4f5eef9cd02a189e9e8bb4811bd307f6545db83a07e7180ea410e96f8",
+      "bytes": 805664
+    },
+    "models/experiments/ai-sigma/reference/sigma-pcr250/best.onnx": {
+      "SHA256": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+      "bytes": 11663428
+    },
+    "research-data/ai-sigma/187-manygame-generation/preregister.json": {
+      "SHA256": "7a893a4c43295e7ea9e051c0b55b4db98dec16518acb08db24059b5ed90d7c64",
+      "bytes": 2364
+    },
+    "research-data/ai-sigma/187-manygame-generation/preregister-future-GPU-supplement.json": {
+      "SHA256": "416646ca208b7bf8090839fe1da81008ec80482aa45401e0f4fcdf513769fd19",
+      "bytes": 415
+    },
+    "tools/ai-sigma-manygame-generation/worker-pre-history-repair.cjs": {
+      "SHA256": "1fc59abfbd322fcffe8c3d111d569626b9121762c6fa28f13d6e59ecda4cd874",
+      "bytes": 9974
+    },
+    "tools/ai-sigma-manygame-generation/worker.cjs": {
+      "SHA256": "f438d04211baf9e12b81208f8f64c8757b326fd605974ede77db21efb04a3755",
+      "bytes": 10175
+    },
+    ".artifacts/ai-sigma/resume-20261003/MANYGAME-GENERATION/native187-parity-r1/result.json": {
+      "SHA256": "1fef6b306243e5eade7c58ec801e19f6f3a9cf25e5e6d1d2deda8b7b3f59bdfe",
+      "bytes": 448587
+    },
+    "research-data/ai-sigma/187-manygame-generation/science-stop.json": {
+      "SHA256": "c3ec5b53cdbe4be2a7101b3c7fb738e2a7a7e38d7e5d854c9fe0b392cd77cec2",
+      "bytes": 1748
+    },
+    "research-data/ai-sigma/187-manygame-generation/pipeline-cost-ledger.json": {
+      "SHA256": "76794f7e91f1dc6ccd4a996d9f8f462cad2e21a99f8fc93b6684b9341bba4dd5",
+      "bytes": 3477
+    },
+    "research-data/ai-sigma/186-value-game-diagnostic/per-row.jsonl.gz": {
+      "SHA256": "e3ad152157dfe9d12c8b1b60c7f9500ffcd0a0faea792115e6b1fe02d1e928e0",
+      "bytes": 47387
+    },
+    "research-data/ai-sigma/188-value-lr-control/runs/r2/per-row.jsonl.gz": {
+      "SHA256": "5fd7fdac57e4c15f144a39fd86a40fc90bcb1c8b33fc5e1ba7d860e5f75e13a7",
+      "bytes": 47505
+    },
+    "research-data/ai-sigma/188-value-lr-control/runs/r2/comparison.json": {
+      "SHA256": "6ae85d39e46b65bfce6dbe1b6fec4eb6eeaab4d5909ef57b07b2f7565ddc4220",
+      "bytes": 16054
+    },
+    "research-data/ai-sigma/188-value-lr-control/runs/r2/training.json": {
+      "SHA256": "f4c8e02187586897b544ceebfa4db1fd04665b0fa7712b55f8a292f0e86d55a4",
+      "bytes": 1150
+    },
+    "research-data/ai-sigma/188-value-lr-control/runs/r2/student-checkpoint.pt": {
+      "SHA256": "c9bf3d807f1843c67fe134f5c401411531d438a5c2c7723d36ce160fc564f9be",
+      "bytes": 104281
+    },
+    "tools/ai-sigma-value-lr-control/learn.py": {
+      "SHA256": "b24a3c74cdd913770fec7f55b299ae670f670d8205a178b388ee694c3797a441",
+      "bytes": 11962
+    },
+    "research-data/ai-sigma/188-value-lr-control/runs/r2/process-stop.json": {
+      "SHA256": "ded45e6df82eb1cb3a8d06cb5d0165b1bb8eba2c108ae267ead1b87bde92807f",
+      "bytes": 754
+    }
+  },
+  "elapsed_seconds": 0.8835117410053499,
+  "RSS_bytes": 34545664,
+  "PID": 3596789,
+  "end": "2026-10-03T14:06:33.479499+00:00"
+}

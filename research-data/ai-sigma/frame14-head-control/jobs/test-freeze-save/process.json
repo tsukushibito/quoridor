@@ -1,0 +1,35 @@
+{
+  "id": "test-freeze-save",
+  "kind": "static",
+  "UTC": "2026-10-04T02:25:02.204142+00:00",
+  "identity": {
+    "pid": 3916483,
+    "ppid": 3916386,
+    "pgrp": 3916483,
+    "tick": "33366145",
+    "RSS": 0,
+    "cmd": "",
+    "affinity": [
+      2
+    ]
+  },
+  "command": [
+    "python3",
+    "-B",
+    "tools/ai-sigma-qf1-head-control/save.py",
+    "test-freeze"
+  ],
+  "wall_seconds": 4.447864037007093,
+  "peak_family_RSS": 37838848,
+  "exit": 0,
+  "reason": "completed",
+  "child_waited": true,
+  "remaining": [],
+  "current_exact_identity_absent": true,
+  "samples_charged": 0,
+  "sample_cap": 0,
+  "CPU": [
+    2
+  ],
+  "GPU": 0
+}

@@ -1,0 +1,31 @@
+{
+  "UTC": "2026-10-04T04:47:01.826797+00:00",
+  "issues": {
+    "experiment": "quoridor-4lc.211",
+    "critic": "quoridor-4lc.212"
+  },
+  "reason": "LR earlywindow reproduced2jointseeds, fullQF1 far above train-fit distance; distance local response exists; train-only standardization with preserved initial function is one lowcost optimizer-coordinate conditioning contrast",
+  "primary": "step200 validation-game-MSE minus raw209 LR1e-4 seed19080311 step200 .659847319505419",
+  "capacity_semantics": "sameQF1/input information, full layers; mu/sigma changecoordinates; initial output parity to1e-6 on5901",
+  "alternatives_held": {
+    "fresh24 independenttest hyp209": "plainmodel does not surpass distance and reusedval gain vsconstant small uncertain; reconsider stable practically useful candidate andfreeze/residualcost",
+    "moreLRseed": "two directions supportearlywindow; additional repetitions have lower current marginalinformation",
+    "width_headclip_teacher_arena": "current input-conditioning explanation untested; no automaticrepeat"
+  },
+  "budget": {
+    "experiment_sample_cap": 200000,
+    "experiment_planned_samples": 116111,
+    "CPU": "2 single torch1",
+    "RAM_guard_B": 1879048192,
+    "GPU": 0,
+    "new_storage_from_exp_unused_B": 8388608,
+    "critic_static_new_seconds": 120,
+    "critic_old210_charge_retained": 180,
+    "critic_new_scope_B": 1048576,
+    "critic_total_conservative_B": 113881572,
+    "critic_guard_B": 117440512
+  },
+  "science_start_pending_personal_admission": true,
+  "parent_end": "2026-10-04T05:51:38Z",
+  "no_new_user_permission": true
+}

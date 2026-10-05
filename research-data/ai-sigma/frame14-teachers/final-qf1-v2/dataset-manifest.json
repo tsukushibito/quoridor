@@ -1,0 +1,1495 @@
+{
+  "issue": "quoridor-4lc.194",
+  "UTC": "2026-10-04T00:06:13.316128+00:00",
+  "metadata": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/final-qf1-v2/all144-metadata.jsonl.gz",
+  "metadata_sha256": "1c257a5e440ac50096b56f033ff4e3e183594651d4162e0358326b3f08cf08b1",
+  "mask": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/final-qf1-v2/fixed-exposure-mask.json",
+  "mask_sha256": "10b502cd9e1c5334e56a3f460ef3edff7f822c8f52f69c3af53529c67c45d5f5",
+  "training_labels": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/final-qf1-v2/training-labels.jsonl.gz",
+  "training_labels_sha256": "fdda7fbaa1a2c97cec271b35406a7481bfa5edbb2e8dd7f48ae2d77299be67fa",
+  "test_labels": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/test-sealed/final-qf1-v2-test-labels.jsonl.gz",
+  "test_labels_sha256": "f962d47cba027d610966af41b5c719d7888200d614f54a18125ab7a71d8a481e",
+  "outputs": {
+    "train": {
+      "metadata": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/final-qf1-v2/train-canonical.jsonl.gz",
+      "metadata_sha256": "57497833a4057c6e0dfe0785c0f2d779e8406e850902c1f990771743686895b3",
+      "labels": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/final-qf1-v2/final-qf1-v2-train-labels.jsonl.gz",
+      "labels_sha256": "f81cd07c215da46b047002bb5d3954ebeb28bb70e6898afe73353ebad8f754f7"
+    },
+    "validation": {
+      "metadata": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/final-qf1-v2/validation-canonical.jsonl.gz",
+      "metadata_sha256": "096d7fb591e93d510138beaf7594d778b4cfd4925a029c9d56f8cbea5b192079",
+      "labels": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/final-qf1-v2/final-qf1-v2-validation-labels.jsonl.gz",
+      "labels_sha256": "8ce29ba4ffb6d893d9882ec781f9547d9c1be1bfb763a92069a3c598d2ea210a"
+    },
+    "test": {
+      "metadata": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/final-qf1-v2/test-canonical.jsonl.gz",
+      "metadata_sha256": "04f5f734871526e7c05a1352dbd9e01c14de02bcafb6b198fc812ca40ff24247",
+      "labels": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame14-teachers/test-sealed/final-qf1-v2-test-labels.jsonl.gz",
+      "labels_sha256": "f962d47cba027d610966af41b5c719d7888200d614f54a18125ab7a71d8a481e"
+    }
+  },
+  "all144_games": [
+    {
+      "game_id": "native194-train01-01",
+      "group": "frame14-194-198eae4410d836a8aba66595b479d2f01704a0d4d3fd7d00274570446cd9f96a",
+      "split": "train",
+      "train_slot": 1,
+      "status": "GOAL",
+      "all_rows": 57,
+      "eligible_rows": 57,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train01-02",
+      "group": "frame14-194-5460a8d5f915efe1a353a627dd2d7a9bf0af79277721e4c6eb884e0ed1ed026c",
+      "split": "train",
+      "train_slot": 2,
+      "status": "GOAL",
+      "all_rows": 50,
+      "eligible_rows": 50,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train01-03",
+      "group": "frame14-194-d7226721ef791c56ce0450fee87131b41fd678c9b52de4ce2e80067ce9c1014b",
+      "split": "train",
+      "train_slot": 3,
+      "status": "GOAL",
+      "all_rows": 55,
+      "eligible_rows": 55,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train01-04",
+      "group": "frame14-194-2c52586b1919ffa2d68bb16fdeb13a3577c2ce7450b8f742dad89b60180f96ab",
+      "split": "train",
+      "train_slot": 4,
+      "status": "GOAL",
+      "all_rows": 60,
+      "eligible_rows": 60,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train01-05",
+      "group": "frame14-194-b7c2095971578dc11093c97df3aaf03b0bd59edf63467a2f77b8e180ca809994",
+      "split": "train",
+      "train_slot": 5,
+      "status": "GOAL",
+      "all_rows": 34,
+      "eligible_rows": 34,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train01-06",
+      "group": "frame14-194-462dd341d7c0504ff92b5e4d99472b8a3eed2107077485270e20acd752c850ed",
+      "split": "train",
+      "train_slot": 6,
+      "status": "GOAL",
+      "all_rows": 32,
+      "eligible_rows": 32,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train01-07",
+      "group": "frame14-194-2063f1e18f3c23e53bc6ab12018127fd2ad4b750b67f44f745540d917edc1da0",
+      "split": "train",
+      "train_slot": 7,
+      "status": "GOAL",
+      "all_rows": 54,
+      "eligible_rows": 54,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train01-08",
+      "group": "frame14-194-b62851d8711940516208e0a576cfc11b61d574fc939abff2373889704779de4f",
+      "split": "train",
+      "train_slot": 8,
+      "status": "GOAL",
+      "all_rows": 80,
+      "eligible_rows": 80,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train01-09",
+      "group": "frame14-194-6f8cf5c74dd3bf5e8a51164f4c59aaa7d7ee3d131e5a2918353f2fac043cb36d",
+      "split": "train",
+      "train_slot": 9,
+      "status": "GOAL",
+      "all_rows": 52,
+      "eligible_rows": 52,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train01-10",
+      "group": "frame14-194-541dccfd277fae3c8636077403cd6cf9d9af0f6f7ce4223f00ac0d13942e9a0c",
+      "split": "train",
+      "train_slot": 10,
+      "status": "GOAL",
+      "all_rows": 83,
+      "eligible_rows": 83,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train01-11",
+      "group": "frame14-194-d1e61b2748b780721a2004856e481f4835e38d4ff41796c7ea5d96c72d83ef5d",
+      "split": "train",
+      "train_slot": 11,
+      "status": "GOAL",
+      "all_rows": 56,
+      "eligible_rows": 56,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train01-12",
+      "group": "frame14-194-85dd571262200ae89f87e2f43d0722ce32827751f22c81cd07fea748c400ffe0",
+      "split": "train",
+      "train_slot": 12,
+      "status": "GOAL",
+      "all_rows": 33,
+      "eligible_rows": 33,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train01-13",
+      "group": "frame14-194-6142514f0b1d5d17bbee72d1b696307c3440dd0a029ae99226b8bc69d527304e",
+      "split": "train",
+      "train_slot": 13,
+      "status": "GOAL",
+      "all_rows": 82,
+      "eligible_rows": 82,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train01-14",
+      "group": "frame14-194-6a91f6b8820e1a87d96a8285da82f36b9e8f28066a951a6bc28eb8c83b19bf48",
+      "split": "train",
+      "train_slot": 14,
+      "status": "GOAL",
+      "all_rows": 38,
+      "eligible_rows": 38,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train01-15",
+      "group": "frame14-194-29345a45275fdba4ab1dcc7bbaca41edfa96f6b2a687646043d6577e5ff294ea",
+      "split": "train",
+      "train_slot": 15,
+      "status": "GOAL",
+      "all_rows": 40,
+      "eligible_rows": 40,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train01-16",
+      "group": "frame14-194-57ff27d3d87cd497de79475e0ecbd8793989a1fcddbc4cd81e13f32e3eb657e0",
+      "split": "train",
+      "train_slot": 16,
+      "status": "GOAL",
+      "all_rows": 52,
+      "eligible_rows": 52,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train01-17",
+      "group": "frame14-194-dede32edbdd6b0f0e51a995f0b53ef53b7703b07b977b69ffdbb6dc996b6ece9",
+      "split": "train",
+      "train_slot": 17,
+      "status": "GOAL",
+      "all_rows": 59,
+      "eligible_rows": 59,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train01-18",
+      "group": "frame14-194-a1925fff4d09b3f128b1e532e88e9c575227b1204da9ab62d80d2bc85d3eeed7",
+      "split": "train",
+      "train_slot": 18,
+      "status": "GOAL",
+      "all_rows": 26,
+      "eligible_rows": 26,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train01-19",
+      "group": "frame14-194-0ef23064aaec24d883bd8d2adb79a0bd3c6199f748dd79b66331e74980fe7971",
+      "split": "train",
+      "train_slot": 19,
+      "status": "GOAL",
+      "all_rows": 43,
+      "eligible_rows": 43,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train01-20",
+      "group": "frame14-194-a9a8098763ccf1c59fcf0639ca83eaae8fa7de8ad6fe36f271f2ea467d120600",
+      "split": "train",
+      "train_slot": 20,
+      "status": "GOAL",
+      "all_rows": 42,
+      "eligible_rows": 42,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train01-21",
+      "group": "frame14-194-a36064b5228847bf4fbde20048c2a35a63c59bcf5ce1c226879d5d56288895ff",
+      "split": "train",
+      "train_slot": 21,
+      "status": "GOAL",
+      "all_rows": 72,
+      "eligible_rows": 72,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train01-22",
+      "group": "frame14-194-f7507c384828afe9a319e60a02e391d2cdd6d8f4638dd9f476725723dc329230",
+      "split": "train",
+      "train_slot": 22,
+      "status": "GOAL",
+      "all_rows": 40,
+      "eligible_rows": 40,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train01-23",
+      "group": "frame14-194-2dd6b527b7e566b79257194aec792854e9e3da197264fe56676f1db0c44e93cd",
+      "split": "train",
+      "train_slot": 23,
+      "status": "GOAL",
+      "all_rows": 42,
+      "eligible_rows": 42,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train01-24",
+      "group": "frame14-194-cf7f434dc49267377d1cd6c838562df7e213f575e86fa0cb5b193737f9d30d59",
+      "split": "train",
+      "train_slot": 24,
+      "status": "GOAL",
+      "all_rows": 35,
+      "eligible_rows": 35,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-validation-01",
+      "group": "frame14-194-22163a3bcfa300d36cae0f793b05feb681fe85387beaa41e52dcc580365787dc",
+      "split": "validation",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 49,
+      "eligible_rows": 49,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-validation-02",
+      "group": "frame14-194-5d101fbd606664267432328113536339dd1da744b1740d78f0bf9e80695ec15e",
+      "split": "validation",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 80,
+      "eligible_rows": 80,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-validation-03",
+      "group": "frame14-194-5af48ec6018c87d459599476e194da10d83422c80e1b456bf8b827b8b7985f5c",
+      "split": "validation",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 36,
+      "eligible_rows": 36,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-validation-04",
+      "group": "frame14-194-852bad3e61e8b6c92a4b60a11a2c9d6346626a4bfd0f576534957122f381f71f",
+      "split": "validation",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 29,
+      "eligible_rows": 29,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-validation-05",
+      "group": "frame14-194-1b03b6cab0b15904d8c145cb8167797be483a299b02c9e29b731243a02ff5bb8",
+      "split": "validation",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 47,
+      "eligible_rows": 47,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-validation-06",
+      "group": "frame14-194-c392f2e96abe6988359ca03cb8c282ff88ec0cee8e6b07b04537c8039155d561",
+      "split": "validation",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 46,
+      "eligible_rows": 46,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-validation-07",
+      "group": "frame14-194-d3b66fd8ed240ffe02656228e13a22a7ff6b92182b0f6568a472ac63cf4301df",
+      "split": "validation",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 65,
+      "eligible_rows": 65,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-validation-08",
+      "group": "frame14-194-819afd8b6da580f6e80fd2a7d04a0eb9fcfa1c39037dab6a91cebb0f7ce99c03",
+      "split": "validation",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 33,
+      "eligible_rows": 33,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-validation-09",
+      "group": "frame14-194-f4f8161893e55173ba82a69b94fccb03cdf2b6cdb6945d468fae2acb83910557",
+      "split": "validation",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 52,
+      "eligible_rows": 52,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-validation-10",
+      "group": "frame14-194-7db87526b6afb52be5ad17acf86b828767079accbdb20395637c4b66d2223978",
+      "split": "validation",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 73,
+      "eligible_rows": 73,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-validation-11",
+      "group": "frame14-194-6330b1b80fb88bc233d15cca56b116239fc27dbac5faf9e4825061647f33c064",
+      "split": "validation",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 42,
+      "eligible_rows": 42,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-validation-12",
+      "group": "frame14-194-c4ff2ede01dc584be561afb9b8edaa7cd14c93a00683ad5b9f710b0c5e24f1a5",
+      "split": "validation",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 64,
+      "eligible_rows": 64,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-validation-13",
+      "group": "frame14-194-07914abb55b03cdc0e27b36020dd153d37fd2b8058823e4244f389c387081494",
+      "split": "validation",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 72,
+      "eligible_rows": 72,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-validation-14",
+      "group": "frame14-194-9adac16125deed4e104fdf1f2e105d20033e723025f39470536d0aba207a046c",
+      "split": "validation",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 47,
+      "eligible_rows": 47,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-validation-15",
+      "group": "frame14-194-e35d9e88289e09362678d086e9e3c5a0750a00ca0fed3f64c66f1dbb6aada6ed",
+      "split": "validation",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 46,
+      "eligible_rows": 46,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-validation-16",
+      "group": "frame14-194-871072d47589dd1953750a5ae4973193e6a3b905e6f5e6b2075618a92bf7dd43",
+      "split": "validation",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 47,
+      "eligible_rows": 47,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-validation-17",
+      "group": "frame14-194-13775a908af0f04cf1313ae14652e2c81669149c5ded56e23a34a6c354647d7b",
+      "split": "validation",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 39,
+      "eligible_rows": 39,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-validation-18",
+      "group": "frame14-194-8496a07bf7ac03428d7f36dbc27234a22d6f9071e28c0969cd3712c69e74784c",
+      "split": "validation",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 44,
+      "eligible_rows": 44,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-validation-19",
+      "group": "frame14-194-844e7c9d8b749434def33892e8de8508fff961db1925bb3001eec7dbd702c62f",
+      "split": "validation",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 66,
+      "eligible_rows": 66,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-validation-20",
+      "group": "frame14-194-055f5e724aa0aeac151a13432c061b6c31d131348ac84cb0c4b049daf4f4dc9f",
+      "split": "validation",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 70,
+      "eligible_rows": 70,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-validation-21",
+      "group": "frame14-194-0bc03bc3369648d611058f9ac79cadb5165b83224e9ffa2b9940e8b33724b39b",
+      "split": "validation",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 67,
+      "eligible_rows": 67,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-validation-22",
+      "group": "frame14-194-1edcf6a11299e6fc014c0fcc013f7b6e8b260a072de7d8751f7d4b0e480a18ee",
+      "split": "validation",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 53,
+      "eligible_rows": 53,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-validation-23",
+      "group": "frame14-194-ef9e4acbb9408651e8e9688385378723f6a8e2b80837f5b731de1ab27e786bfc",
+      "split": "validation",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 43,
+      "eligible_rows": 43,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-validation-24",
+      "group": "frame14-194-ece4a978fc95aba80ef6d882eecf97be222dedc19c3c0404931fb1d004c82a84",
+      "split": "validation",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 38,
+      "eligible_rows": 38,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-test-01",
+      "group": "frame14-194-ef0ef085544c95e14ec61f26c696f30ba812e02ec852f09367fc416e02ce76c2",
+      "split": "test",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 50,
+      "eligible_rows": 50,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-test-02",
+      "group": "frame14-194-d55ff4544f29400d8c040e202ad6150a02f20b433bcdd66838e79f07d8b25467",
+      "split": "test",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 37,
+      "eligible_rows": 37,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-test-03",
+      "group": "frame14-194-185cf864bfcd82bf93db05cb35b772eaf5b4b70a46325db0beee043868f4f6b9",
+      "split": "test",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 15,
+      "eligible_rows": 15,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-test-04",
+      "group": "frame14-194-b02cef5103d41907ed6f551828f8b51eb2bd7448131119bf5b2a4958d2f4e112",
+      "split": "test",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 61,
+      "eligible_rows": 61,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-test-05",
+      "group": "frame14-194-b51a172687181a3968f7ca54d3d6272b207dbe2721af14c8f40f24caad01578f",
+      "split": "test",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 35,
+      "eligible_rows": 35,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-test-06",
+      "group": "frame14-194-d391acc177cb90b7d4cb3edd7b3c593b5f7cc03810fef7b83e6a67eb6518394b",
+      "split": "test",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 32,
+      "eligible_rows": 32,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-test-07",
+      "group": "frame14-194-360ae6eaae8eb9e8f914516022fa881a1fe8463735021a1f4a6e37e513b694ab",
+      "split": "test",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 55,
+      "eligible_rows": 55,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-test-08",
+      "group": "frame14-194-9f96718e78de8e889dcbec2c0c79e15f09f38e1dd1bd628274415d9cad865e98",
+      "split": "test",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 49,
+      "eligible_rows": 49,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-test-09",
+      "group": "frame14-194-c45b07862cd706310af380d940fb8ac84ff764a7ad92f6c01629506f3c508c04",
+      "split": "test",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 63,
+      "eligible_rows": 63,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-test-10",
+      "group": "frame14-194-30bd855fca9edc211ea99a738ad8d64dd61936c238fd7952381285b735c3dad7",
+      "split": "test",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 19,
+      "eligible_rows": 19,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-test-11",
+      "group": "frame14-194-d05fdfa6a32fe9e09f8581cd6074bd35a1819d63670e3d23a86e38cd0fda6f5c",
+      "split": "test",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 51,
+      "eligible_rows": 51,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-test-12",
+      "group": "frame14-194-a7d18c6e6c1de13936e3b34b9910efa4472ea980b896bed623b30e2c58d37675",
+      "split": "test",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 36,
+      "eligible_rows": 36,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-test-13",
+      "group": "frame14-194-77a782e9a17c84a7ee6e79cf090be9a9eaf830f0ac37e5754a9a9efbea5b14aa",
+      "split": "test",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 59,
+      "eligible_rows": 59,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-test-14",
+      "group": "frame14-194-9f965cde7496ab503664c219fdf5fe56986ebaa6e9068412ed5236039b3cf84b",
+      "split": "test",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 45,
+      "eligible_rows": 45,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-test-15",
+      "group": "frame14-194-eb158e7c19a8d135162b7ff4b1cecd1b66edde9ec42e2c2be818130cc6fbf4ea",
+      "split": "test",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 57,
+      "eligible_rows": 57,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-test-16",
+      "group": "frame14-194-45573b8c136e89691a81b72e27deba2f2c747ef3d2097e0c5277e6fbd4096306",
+      "split": "test",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 48,
+      "eligible_rows": 48,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-test-17",
+      "group": "frame14-194-f7d2785520ef6b03f5ed85424d87164a2cab18206f2fac9b577b5acf86279400",
+      "split": "test",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 63,
+      "eligible_rows": 63,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-test-18",
+      "group": "frame14-194-8de414cf9fc39f0f70c7ce9c819cbcb9e48bc7d96ca2244d038323190dcba13a",
+      "split": "test",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 23,
+      "eligible_rows": 23,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-test-19",
+      "group": "frame14-194-1f8b4e7818f03b56b4e324badbcc1484c425f79e7b1329cccc8ee1c0d919acab",
+      "split": "test",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 60,
+      "eligible_rows": 60,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-test-20",
+      "group": "frame14-194-352509e74844724c11ee33fb51d7064ca0568f7c756582d2ea525e0a99555640",
+      "split": "test",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 51,
+      "eligible_rows": 51,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-test-21",
+      "group": "frame14-194-c4eb62fa04f5da79067b72bd8063ae8b5a7ee347adc55b66216847752ec84736",
+      "split": "test",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 52,
+      "eligible_rows": 52,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-test-22",
+      "group": "frame14-194-f724cefd3868357c3bf57ed24ace09fb8b45da980eff558fbe31513676abb051",
+      "split": "test",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 54,
+      "eligible_rows": 54,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-test-23",
+      "group": "frame14-194-b605ae1d1d34f550e998db36db71a7aaf7258e736675f5fb4e4d44db3bd5fd2f",
+      "split": "test",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 47,
+      "eligible_rows": 47,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-test-24",
+      "group": "frame14-194-db87635dfcd8ca18589b3481a931f78300e2ef19317403623d50c071d9e301f2",
+      "split": "test",
+      "train_slot": null,
+      "status": "GOAL",
+      "all_rows": 33,
+      "eligible_rows": 33,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train02-01",
+      "group": "frame14-194-e40c8caa25a964d3764fffcbfb008c19c58b376bc46207245be63417ebd4f276",
+      "split": "train",
+      "train_slot": 25,
+      "status": "GOAL",
+      "all_rows": 60,
+      "eligible_rows": 60,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train02-02",
+      "group": "frame14-194-f766ab8b89f843cf53c8eb78cafd0112d6c5a757dc87dd5281e3f101e2bb6237",
+      "split": "train",
+      "train_slot": 26,
+      "status": "GOAL",
+      "all_rows": 43,
+      "eligible_rows": 43,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train02-03",
+      "group": "frame14-194-374e9c9267b33d51188b920eae2582ef44cfb93e745b260ab1d19e63fff61a66",
+      "split": "train",
+      "train_slot": 27,
+      "status": "GOAL",
+      "all_rows": 45,
+      "eligible_rows": 45,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train02-04",
+      "group": "frame14-194-3c885dfee9722d1e879c2dffb3192bab2642bbf25f2e1e4eba9a5e3fe088844b",
+      "split": "train",
+      "train_slot": 28,
+      "status": "GOAL",
+      "all_rows": 41,
+      "eligible_rows": 41,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train02-05",
+      "group": "frame14-194-c1d238980294fb082f110cc5925cf21ff1d98072705afcc4dfc109b90b2df056",
+      "split": "train",
+      "train_slot": 29,
+      "status": "GOAL",
+      "all_rows": 26,
+      "eligible_rows": 26,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train02-06",
+      "group": "frame14-194-c1aaf37ab59001c3a75decbbc46b6396e61ea44e446e2c160e6103dec1fa9df4",
+      "split": "train",
+      "train_slot": 30,
+      "status": "GOAL",
+      "all_rows": 21,
+      "eligible_rows": 21,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train02-07",
+      "group": "frame14-194-3dc7fb3847e83adc6fd02462bab66fb94880e136a20052e6c5a3d0a87ac329cf",
+      "split": "train",
+      "train_slot": 31,
+      "status": "GOAL",
+      "all_rows": 44,
+      "eligible_rows": 44,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train02-08",
+      "group": "frame14-194-6bf66cdba6843bae54cd6a33534ee93e0d23c88a2c8277fb0abbe1e29c0c41f1",
+      "split": "train",
+      "train_slot": 32,
+      "status": "GOAL",
+      "all_rows": 54,
+      "eligible_rows": 54,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train02-09",
+      "group": "frame14-194-de523358c42688fc182434cabe59b1e3061561530a1b503d298d3bf46f0e8c4e",
+      "split": "train",
+      "train_slot": 33,
+      "status": "GOAL",
+      "all_rows": 65,
+      "eligible_rows": 65,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train02-10",
+      "group": "frame14-194-c94cbd3897de2ffbea59196a92289ef875572e207ee77430ba97f0c77b7e6638",
+      "split": "train",
+      "train_slot": 34,
+      "status": "GOAL",
+      "all_rows": 61,
+      "eligible_rows": 61,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train02-11",
+      "group": "frame14-194-b27f36fe2306bd2f5074774011ca275ae1ab28e73d5a27a2dfb7bdb0c66158c0",
+      "split": "train",
+      "train_slot": 35,
+      "status": "GOAL",
+      "all_rows": 36,
+      "eligible_rows": 36,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train02-12",
+      "group": "frame14-194-d0839285e9e187aaaab704593fdd1091638b9c6dfd5735db0213cae0a05a6dd0",
+      "split": "train",
+      "train_slot": 36,
+      "status": "GOAL",
+      "all_rows": 52,
+      "eligible_rows": 52,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train02-13",
+      "group": "frame14-194-24cb15bffb0ca780a54c22bb2229fa4c697ecb04c1c6fdc011f3d75237150ae5",
+      "split": "train",
+      "train_slot": 37,
+      "status": "GOAL",
+      "all_rows": 42,
+      "eligible_rows": 42,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train02-14",
+      "group": "frame14-194-6cef749e3e234acc67605c843a5ef5d6830dfd20094f2aabee2718865f48894a",
+      "split": "train",
+      "train_slot": 38,
+      "status": "GOAL",
+      "all_rows": 61,
+      "eligible_rows": 61,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train02-15",
+      "group": "frame14-194-438ccaed30a920cd4e1fe2740d2fde530abacb55798471b53e0202013c7a412e",
+      "split": "train",
+      "train_slot": 39,
+      "status": "GOAL",
+      "all_rows": 31,
+      "eligible_rows": 31,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train02-16",
+      "group": "frame14-194-6c9cce3faa5850c33bd6ab63b875b3f2b7bafc4a751bd79d70c1cbd7eaca1158",
+      "split": "train",
+      "train_slot": 40,
+      "status": "GOAL",
+      "all_rows": 25,
+      "eligible_rows": 25,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train02-17",
+      "group": "frame14-194-e7296063010924673f3e2174eba4cd97b0077141200852818750d2f0b15c1b9f",
+      "split": "train",
+      "train_slot": 41,
+      "status": "GOAL",
+      "all_rows": 37,
+      "eligible_rows": 37,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train02-18",
+      "group": "frame14-194-f21f83fea024d523fff0ba0d941ec7b570eafe4a3ecfc7edf60d6866d0f53bd4",
+      "split": "train",
+      "train_slot": 42,
+      "status": "GOAL",
+      "all_rows": 34,
+      "eligible_rows": 34,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train02-19",
+      "group": "frame14-194-22bf2d2c0133ae4d758124820a5a5046c7d04dc3c3076c321cd4d56c7e38065d",
+      "split": "train",
+      "train_slot": 43,
+      "status": "GOAL",
+      "all_rows": 87,
+      "eligible_rows": 87,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train02-20",
+      "group": "frame14-194-0fe0138f8cc2e5232b991ed708c3b310876166151dc8ab628703f33fbb28ee96",
+      "split": "train",
+      "train_slot": 44,
+      "status": "GOAL",
+      "all_rows": 56,
+      "eligible_rows": 56,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train02-21",
+      "group": "frame14-194-6fc12c05042ec55b7185dca0b7c191ea1276781a1140058680638f065886dd87",
+      "split": "train",
+      "train_slot": 45,
+      "status": "GOAL",
+      "all_rows": 46,
+      "eligible_rows": 46,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train02-22",
+      "group": "frame14-194-e84b3c0d249e2706591f3fb81f01d9214165ef18178525c5aa857f726a32fab0",
+      "split": "train",
+      "train_slot": 46,
+      "status": "GOAL",
+      "all_rows": 59,
+      "eligible_rows": 59,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train02-23",
+      "group": "frame14-194-4a5cb1d39a0502295927d2b535ca36f6fca1df2b7531160a24ece52daf7fc0cb",
+      "split": "train",
+      "train_slot": 47,
+      "status": "GOAL",
+      "all_rows": 46,
+      "eligible_rows": 46,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train02-24",
+      "group": "frame14-194-19dc7d3589fb8e0f27e9602bb59c805e47798329d67fe26c2726fedaadac0897",
+      "split": "train",
+      "train_slot": 48,
+      "status": "GOAL",
+      "all_rows": 56,
+      "eligible_rows": 56,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train03-01",
+      "group": "frame14-194-738129934946ec3585f675a60d57e49f1bd57768aa54a0df4a71c80ad5b92936",
+      "split": "train",
+      "train_slot": 49,
+      "status": "GOAL",
+      "all_rows": 49,
+      "eligible_rows": 49,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train03-02",
+      "group": "frame14-194-09b8f2a405348e29f1c9eb675c31f9b22ee6984cdfc99d4d3802a947a0dda93e",
+      "split": "train",
+      "train_slot": 50,
+      "status": "GOAL",
+      "all_rows": 65,
+      "eligible_rows": 65,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train03-03",
+      "group": "frame14-194-3a7455b8411d8f4d46d4c88fad59cb462135f9f07c5bc38d4d7985aa48d5add1",
+      "split": "train",
+      "train_slot": 51,
+      "status": "GOAL",
+      "all_rows": 33,
+      "eligible_rows": 33,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train03-04",
+      "group": "frame14-194-68e1d16386d4a412a1e6829ef3574b7f065e47bc6987b0d4c4224bf28ec82f9c",
+      "split": "train",
+      "train_slot": 52,
+      "status": "GOAL",
+      "all_rows": 60,
+      "eligible_rows": 60,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train03-05",
+      "group": "frame14-194-cecc917b1239b1e1e64bad8654854df6094870d5907ce5d044cd64cfc181614a",
+      "split": "train",
+      "train_slot": 53,
+      "status": "GOAL",
+      "all_rows": 37,
+      "eligible_rows": 37,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train03-06",
+      "group": "frame14-194-4562579575af63c1af9142a3bd3bdeea86a496b33ea1de31338aaeaa846f45a0",
+      "split": "train",
+      "train_slot": 54,
+      "status": "GOAL",
+      "all_rows": 54,
+      "eligible_rows": 54,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train03-07",
+      "group": "frame14-194-6aaa70e3a5a0582ae0fc348d6dd4498a4a6b559df45c830d1360c78a966388c5",
+      "split": "train",
+      "train_slot": 55,
+      "status": "GOAL",
+      "all_rows": 49,
+      "eligible_rows": 49,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train03-08",
+      "group": "frame14-194-2d0d90de7a94efe3b29ac23897785fff8d9e62f10e78d938be73674f2e509dce",
+      "split": "train",
+      "train_slot": 56,
+      "status": "GOAL",
+      "all_rows": 67,
+      "eligible_rows": 67,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train03-09",
+      "group": "frame14-194-bd45bf7b76c5ec609cbf1784bed8c8bf9fb0fa5768034f1bca073485939d4243",
+      "split": "train",
+      "train_slot": 57,
+      "status": "GOAL",
+      "all_rows": 72,
+      "eligible_rows": 72,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train03-10",
+      "group": "frame14-194-5c5e878ea8bd67edfe4f8242dfcffaaacbe7148d0a41d63b9114aeb2d9ce2eb2",
+      "split": "train",
+      "train_slot": 58,
+      "status": "GOAL",
+      "all_rows": 50,
+      "eligible_rows": 50,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train03-11",
+      "group": "frame14-194-915bb2c9351e2603fe9b61ffabede853407b3b0436b23ec69b7175aecbde6a12",
+      "split": "train",
+      "train_slot": 59,
+      "status": "GOAL",
+      "all_rows": 39,
+      "eligible_rows": 39,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train03-12",
+      "group": "frame14-194-d2077d76306777bdb6a24154db5045662359630690ad2d89e64ec7eb6944ded7",
+      "split": "train",
+      "train_slot": 60,
+      "status": "GOAL",
+      "all_rows": 58,
+      "eligible_rows": 58,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train03-13",
+      "group": "frame14-194-c98b04b0d3a6139a7fc4a47dda3048a8a38fc3a65ab64af2f96db2ba2ef797c8",
+      "split": "train",
+      "train_slot": 61,
+      "status": "GOAL",
+      "all_rows": 60,
+      "eligible_rows": 60,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train03-14",
+      "group": "frame14-194-765674cb5c02abf8bbfa6acee13d7cb8790406fd488054cb8359913f26f09224",
+      "split": "train",
+      "train_slot": 62,
+      "status": "GOAL",
+      "all_rows": 41,
+      "eligible_rows": 41,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train03-15",
+      "group": "frame14-194-181fca6e8987af49ca0788d5404c633258f64034b5d668b9b5135dcc55fde507",
+      "split": "train",
+      "train_slot": 63,
+      "status": "GOAL",
+      "all_rows": 59,
+      "eligible_rows": 59,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train03-16",
+      "group": "frame14-194-b66cb11d5234d212b3d69d213761d055d61bd6d3951313f6b1f795cd871daec9",
+      "split": "train",
+      "train_slot": 64,
+      "status": "GOAL",
+      "all_rows": 36,
+      "eligible_rows": 36,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train03-17",
+      "group": "frame14-194-d9dec3e93daaf4bfe68cb5f453ad592f51a6c650de2cad27c0957cdef121d511",
+      "split": "train",
+      "train_slot": 65,
+      "status": "GOAL",
+      "all_rows": 43,
+      "eligible_rows": 43,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train03-18",
+      "group": "frame14-194-d0558692133fabedcf55ffec4a3b9d928bfc23691a943d082a004bafa4be663f",
+      "split": "train",
+      "train_slot": 66,
+      "status": "GOAL",
+      "all_rows": 41,
+      "eligible_rows": 41,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train03-19",
+      "group": "frame14-194-a999ebcec08bc67728a02aea6626a0662a0820fd48af61de2054f24ed433176d",
+      "split": "train",
+      "train_slot": 67,
+      "status": "GOAL",
+      "all_rows": 57,
+      "eligible_rows": 57,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train03-20",
+      "group": "frame14-194-c6bcac67f356db752e6aaee29b9f176a21275d82406c165068861c3f580806e2",
+      "split": "train",
+      "train_slot": 68,
+      "status": "GOAL",
+      "all_rows": 53,
+      "eligible_rows": 53,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train03-21",
+      "group": "frame14-194-618ef685955262ff379cd681b7dfd379b152311ce78de0c5aea5e7ee41c9bf88",
+      "split": "train",
+      "train_slot": 69,
+      "status": "GOAL",
+      "all_rows": 50,
+      "eligible_rows": 50,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train03-22",
+      "group": "frame14-194-906bd7f9e69e6f829dafd4afceb9730e082f7c6bf72dd55e1a485b3994edc328",
+      "split": "train",
+      "train_slot": 70,
+      "status": "GOAL",
+      "all_rows": 50,
+      "eligible_rows": 50,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train03-23",
+      "group": "frame14-194-e55218a3f9b432f0b72cbd19bab75b7495f8e0ae784239fe6b65137695a37508",
+      "split": "train",
+      "train_slot": 71,
+      "status": "GOAL",
+      "all_rows": 31,
+      "eligible_rows": 31,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train03-24",
+      "group": "frame14-194-78386f448b234bf92a8a929eb40da0284d96edb1612fc9f23045c476f1942536",
+      "split": "train",
+      "train_slot": 72,
+      "status": "GOAL",
+      "all_rows": 36,
+      "eligible_rows": 36,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train04-01",
+      "group": "frame14-194-f71cc2ec37f1742b31255e023dc70264fa3e2577b6f5aa5d379e0c9ceee9f5de",
+      "split": "train",
+      "train_slot": 73,
+      "status": "GOAL",
+      "all_rows": 64,
+      "eligible_rows": 64,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train04-02",
+      "group": "frame14-194-471850b03149e7410666be4f7762e4800078d6ffbf3bc903a29b7dce00fdbe2e",
+      "split": "train",
+      "train_slot": 74,
+      "status": "GOAL",
+      "all_rows": 55,
+      "eligible_rows": 55,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train04-03",
+      "group": "frame14-194-92eb4885165ca3296b3771b3089853164fc5e71c0bb8b1235f5747b88eeb903a",
+      "split": "train",
+      "train_slot": 75,
+      "status": "GOAL",
+      "all_rows": 57,
+      "eligible_rows": 57,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train04-04",
+      "group": "frame14-194-ac1bdaf11ac9c1401830036cd45082c872da2c2ecdbe754e55a9b09e87719707",
+      "split": "train",
+      "train_slot": 76,
+      "status": "GOAL",
+      "all_rows": 50,
+      "eligible_rows": 50,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train04-05",
+      "group": "frame14-194-c3fbd0c3ccd4cb020732059869ef0261068b4748a22f94ca6540a47a797c72bf",
+      "split": "train",
+      "train_slot": 77,
+      "status": "GOAL",
+      "all_rows": 32,
+      "eligible_rows": 32,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train04-06",
+      "group": "frame14-194-7b53eae3503a6de0e0918f520b5b1fe7ee2e3e26381929b47deeca9bfae7a2a6",
+      "split": "train",
+      "train_slot": 78,
+      "status": "GOAL",
+      "all_rows": 43,
+      "eligible_rows": 43,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train04-07",
+      "group": "frame14-194-30e16b8d38abd80ef4e0aa4f7ca024a91e2ee3e89612ef692d5d413a00619089",
+      "split": "train",
+      "train_slot": 79,
+      "status": "GOAL",
+      "all_rows": 68,
+      "eligible_rows": 68,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train04-08",
+      "group": "frame14-194-5cfab3490bc8f1d37be8e71e19a5f710c89e728533bd60ddb0df9708d9809f94",
+      "split": "train",
+      "train_slot": 80,
+      "status": "GOAL",
+      "all_rows": 55,
+      "eligible_rows": 55,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train04-09",
+      "group": "frame14-194-26e2c35aa64f42b43457c23d7e247660fc0d826b536586a6e3383f84fae0b4d3",
+      "split": "train",
+      "train_slot": 81,
+      "status": "GOAL",
+      "all_rows": 28,
+      "eligible_rows": 28,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train04-10",
+      "group": "frame14-194-f9b63e83d0b11bf0070320164b345131fdd2aea0bb019e68bcc6484eee57a3a7",
+      "split": "train",
+      "train_slot": 82,
+      "status": "GOAL",
+      "all_rows": 42,
+      "eligible_rows": 42,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train04-11",
+      "group": "frame14-194-187c07c3da9e6ed5a1a3f773d40b313c24b2a75425e8acde68408e8d86a79344",
+      "split": "train",
+      "train_slot": 83,
+      "status": "GOAL",
+      "all_rows": 45,
+      "eligible_rows": 45,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train04-12",
+      "group": "frame14-194-80e66dfc7af51e12d989c3664e1d612d0f167fc5cf1cfc42ee1336794d9d7bcf",
+      "split": "train",
+      "train_slot": 84,
+      "status": "GOAL",
+      "all_rows": 30,
+      "eligible_rows": 30,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train04-13",
+      "group": "frame14-194-1c26ace81cac5c715a497960739a4114cdb50e68ca995dc5babcd977d95b802a",
+      "split": "train",
+      "train_slot": 85,
+      "status": "GOAL",
+      "all_rows": 45,
+      "eligible_rows": 45,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train04-14",
+      "group": "frame14-194-8cf6a054d645dc39388e0f2ed7f8a477bf22d872721203f8d513bed76413481b",
+      "split": "train",
+      "train_slot": 86,
+      "status": "GOAL",
+      "all_rows": 49,
+      "eligible_rows": 49,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train04-15",
+      "group": "frame14-194-36b53711319282c1b13b3cf826c8b73d1f1f2ff68c1409c38b3fffe088608ea3",
+      "split": "train",
+      "train_slot": 87,
+      "status": "GOAL",
+      "all_rows": 53,
+      "eligible_rows": 53,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train04-16",
+      "group": "frame14-194-7791f54d9faba397a9b2a76d0cef8ec85a587dd58e7e4091006b38e19ef70921",
+      "split": "train",
+      "train_slot": 88,
+      "status": "GOAL",
+      "all_rows": 47,
+      "eligible_rows": 47,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train04-17",
+      "group": "frame14-194-ced6f9b7043c1d78bd4d3c2fc4f702c26156923ceed57199fe5bc82bade1a819",
+      "split": "train",
+      "train_slot": 89,
+      "status": "GOAL",
+      "all_rows": 30,
+      "eligible_rows": 30,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train04-18",
+      "group": "frame14-194-22c0833aab246ec2282a3c2c1417214a1601cb7242a0455ae3bd5843d27840bd",
+      "split": "train",
+      "train_slot": 90,
+      "status": "GOAL",
+      "all_rows": 26,
+      "eligible_rows": 26,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train04-19",
+      "group": "frame14-194-5233200640c733da5d10b3876198161a1e474a79064605ef6ae7cdaf3f7def0f",
+      "split": "train",
+      "train_slot": 91,
+      "status": "GOAL",
+      "all_rows": 57,
+      "eligible_rows": 57,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train04-20",
+      "group": "frame14-194-7e89d1f941663d10dabb0883025f60ea9db629acae992580cf369976f440bd14",
+      "split": "train",
+      "train_slot": 92,
+      "status": "GOAL",
+      "all_rows": 39,
+      "eligible_rows": 39,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train04-21",
+      "group": "frame14-194-6840c3acb45c0fa680b6e7664686948f5fd36f0055d169063670b9f2222ef8e7",
+      "split": "train",
+      "train_slot": 93,
+      "status": "GOAL",
+      "all_rows": 48,
+      "eligible_rows": 48,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train04-22",
+      "group": "frame14-194-70d5577999559fbc5e8e9a512d290f82d17571dea509c977ad4ca1940b84523c",
+      "split": "train",
+      "train_slot": 94,
+      "status": "GOAL",
+      "all_rows": 76,
+      "eligible_rows": 76,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train04-23",
+      "group": "frame14-194-ac0c7f7facb3351fe7b892219aa77b3de0061c3fb1fe6983864b384ab933b1c0",
+      "split": "train",
+      "train_slot": 95,
+      "status": "GOAL",
+      "all_rows": 45,
+      "eligible_rows": 45,
+      "eligible_zero": false
+    },
+    {
+      "game_id": "native194-train04-24",
+      "group": "frame14-194-3f98f38f9878b9ee2c9a04a18ceb02b34b9cf5bf41f7d98bede73d68a0642e1a",
+      "split": "train",
+      "train_slot": 96,
+      "status": "GOAL",
+      "all_rows": 34,
+      "eligible_rows": 34,
+      "eligible_zero": false
+    }
+  ],
+  "mask_reference": "maximumtrain96 for validation; train96+allvalidation for test; fixed shared state OR history OR actual QF1 input before selection",
+  "shared_interface": {
+    "UTC": "2026-10-03T23:51:16.076827+00:00",
+    "writer_stopped": true,
+    "source": {
+      "tools/nnue-training/frame14.py": "f08cc5177f1ab4f808f97ea260ec99ab7d5ce233c9d190b15118fc099dba71b7",
+      "tools/nnue-training/frame14_data.py": "f45482fe6d1a4477ee3bf3b080d14d883b1f28c79517cff83e4318b7a90e37b8",
+      "tools/nnue-training/export_generated.cjs": "5195a4abecaee507ea9155b4383843a4370783fa6ea20c33f9f442576f98a1c2",
+      "tools/nnue-training/model.py": "12661cac69cff8b01800eb2d3df5be5f8674858d9ce995713b4385da44c74357",
+      "tools/nnue-training/train.py": "665848e238d6a7976b83c53b0c13cdb87f9e65f4a75329560d6a98afbe9863d3",
+      "tools/nnue-training/common.py": "876e0e9a610b594db63e62e81ae920684f10e52f71a7cc75e04f8fbadd9ffe04"
+    },
+    "receipt": "research-data/ai-sigma/frame14-learning/interface-v2.json",
+    "small_mock": "research-data/ai-sigma/frame14-learning/mock-stop-report.md",
+    "fixedcanon": "QF1-f32-STM-v1",
+    "old192_provenance_not_changed": true
+  },
+  "test_label_contents_opened_for_analysis": false,
+  "new_model_forward": 0,
+  "NN": 0,
+  "wall_s": 2.8966013729805127
+}

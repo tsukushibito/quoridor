@@ -1,0 +1,63 @@
+{
+  "cases": [
+    {
+      "case": "idle recipient, >=3 others active and unknown irrelevant",
+      "passed": true,
+      "requests": 1,
+      "target_only_reads": 2,
+      "expected_rejection": null
+    },
+    {
+      "case": "active recipient steers exact turn",
+      "passed": true,
+      "requests": 1,
+      "target_only_reads": 2,
+      "expected_rejection": null
+    },
+    {
+      "case": "pause rejects before App Server",
+      "passed": true,
+      "requests": 0,
+      "target_only_reads": 0,
+      "expected_rejection": "issue paused"
+    },
+    {
+      "case": "existing receipt prevents duplicate send",
+      "passed": true,
+      "requests": 0,
+      "target_only_reads": 1,
+      "expected_rejection": "existing receipt: inspect before resending"
+    },
+    {
+      "case": "unknown active turn prevents a second start",
+      "passed": true,
+      "requests": 0,
+      "target_only_reads": 2,
+      "expected_rejection": "Active thread has no identifiable active turn; retry after reading status"
+    },
+    {
+      "case": "dispatch lock prevents concurrent writer",
+      "passed": true,
+      "requests": 0,
+      "target_only_reads": 0,
+      "expected_rejection": "dispatch lock held"
+    },
+    {
+      "case": "root idle acknowledgement does not restart root",
+      "passed": true,
+      "requests": 0,
+      "target_only_reads": 1,
+      "expected_rejection": null
+    },
+    {
+      "case": "root active acknowledgement steers",
+      "passed": true,
+      "requests": 1,
+      "target_only_reads": 2,
+      "expected_rejection": null
+    }
+  ],
+  "all_pass": true,
+  "NN": 0,
+  "real_RPC": 0
+}

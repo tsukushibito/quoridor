@@ -1,0 +1,50 @@
+{
+  "UTC": "2026-10-04T05:17:42.906676+00:00",
+  "reported_intake_static": "213 05:13; source/config/scale/preregister fixed",
+  "reported_science": 0,
+  "intervention": "same Adam proposal; distance columns only corrected to before+proposal*sigma; states/bias/otherparams unchanged",
+  "critic214_adopted": "actual f32delta separate from ideal; zeros/rounding not strict ratio gate",
+  "primary200_reference": 0.6139164435565568,
+  "planned_samples": 116111,
+  "cutoffs": {
+    "newscience": "05:30Z",
+    "science_stop": "05:35Z",
+    "submit": "05:46Z"
+  },
+  "current_beads": [
+    {
+      "id": "quoridor-4lc",
+      "status": "in_progress",
+      "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+      "started_at": "2026-09-30T17:18:52Z",
+      "labels": [
+        "continuation-active",
+        "frame15",
+        "initial-window-ended"
+      ]
+    },
+    {
+      "id": "quoridor-4lc.213",
+      "status": "in_progress",
+      "assignee": "codex:01a0f31d-6d15-7620-bb63-4b4f878e4746",
+      "started_at": "2026-10-04T05:13:40Z",
+      "labels": [
+        "continuation-active",
+        "frame15",
+        "initial-window-ended"
+      ]
+    },
+    {
+      "id": "quoridor-4lc.214",
+      "status": "in_progress",
+      "assignee": "codex:01a0f31d-8227-7e03-a7e6-915b4918c11b",
+      "started_at": "2026-10-04T05:13:37Z",
+      "labels": [
+        "continuation-active",
+        "frame15",
+        "initial-window-ended"
+      ]
+    }
+  ],
+  "next_owned_observation": "213 actual parity/proposal/science-stop, 214 finite saved arithmetic"
+}

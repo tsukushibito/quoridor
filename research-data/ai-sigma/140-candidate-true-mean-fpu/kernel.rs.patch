@@ -1,0 +1,220 @@
+--- tools/ai-sigma-deep-node-comparison/baseline/src/kernel.rs
++++ tools/ai-sigma-candidate-true-mean-fpu/private/src/kernel.rs
+@@ -202,6 +202,7 @@
+     edges: Vec<Edge>,
+     expanded: bool,
+     visits: u32,
++    true_value_sum: f32,
+ }
+ impl Node {
+     fn new(position: Position) -> Self {
+@@ -210,6 +211,7 @@
+             edges: Vec::new(),
+             expanded: false,
+             visits: 0,
++            true_value_sum: 0.0,
+         }
+     }
+ }
+@@ -220,6 +222,9 @@
+     limits: SearchLimits,
+     seed: u64,
+     stats: SearchStats,
++    pub(crate) select_trace: Vec<serde_json::Value>,
++    pub(crate) visit_trace: Vec<serde_json::Value>,
++    pub(crate) deep_trace: Vec<serde_json::Value>,
+     #[cfg(feature = "research")]
+     research_context: Option<SigmaContext>,
+ }
+@@ -253,6 +258,9 @@
+             evaluator,
+             limits,
+             seed,
++            select_trace: Vec::new(),
++            visit_trace: Vec::new(),
++            deep_trace: Vec::new(),
+             #[cfg(feature = "research")]
+             research_context: None,
+             stats: SearchStats {
+@@ -490,14 +498,14 @@
+         }
+         self.stats.max_depth_reached = self.stats.max_depth_reached.max(path.len() as u8);
+         if leaf_is_node {
+-            self.nodes[index].visits += 1;
++            self.visit_node(index, value);
+         }
+         for (parent, edge_index) in path.into_iter().rev() {
+             value = parent_value(value);
+             let edge = &mut self.nodes[parent].edges[edge_index];
+             edge.visits += 1;
+             edge.value_sum += value;
+-            self.nodes[parent].visits += 1;
++            self.visit_node(parent, value);
+         }
+     }
+     fn safe_value(&mut self, position: Position, cursor: &RuleCursor) -> f32 {
+@@ -524,16 +532,22 @@
+             0.0
+         }
+     }
+-    fn select(&self, index: usize) -> usize {
++    fn select(&mut self, index: usize) -> usize {
+         #[cfg(feature = "profiling")]
+         let _span = quoridor_core::profiling::span(quoridor_core::profiling::Kind::Select);
+         let node = &self.nodes[index];
+         let root = (node.visits as f32 + 1.0).sqrt();
++        let true_mean = if node.visits == 0 {None} else {Some(node.true_value_sum / node.visits as f32)};
++        let visited_prior: f32 = node.edges.iter().filter(|e| e.visits > 0).map(|e| e.prior).sum();
++        // Zero visits has no mean. Normal expanded selection follows one completed backup;
++        // artificial N0 uses Q0 without a division, and explicitly records mean absent.
++        let fpu = true_mean.map(|q| q - 0.2_f32 * visited_prior.sqrt());
++        let unvisited_q = if cfg!(feature="true-mean-fpu") {fpu.unwrap_or(0.0)} else {0.0};
+         let mut best = 0usize;
+         let mut best_score = f32::NEG_INFINITY;
+         for (i, edge) in node.edges.iter().enumerate() {
+             let q = if edge.visits == 0 {
+-                0.0
++                unvisited_q
+             } else {
+                 edge.value_sum / edge.visits as f32
+             };
+@@ -546,7 +560,24 @@
+                 best_score = score;
+             }
+         }
++        let chosen = &node.edges[best];
++        assert!(self.select_trace.len() < 4096 * 24, "select trace hard cap");
++        self.select_trace.push(serde_json::json!({"sim_completed_before":self.stats.simulations,
++            "node_index":index,"nodeN":node.visits,"node_value_sum":node.true_value_sum,
++            "true_mean":true_mean,"visited_original_prior_sum":visited_prior,"fpu":fpu,
++            "FPU_enabled":cfg!(feature="true-mean-fpu"),"Action":chosen.action,"visited":chosen.visits>0,
++            "edge_visits":chosen.visits,"edge_value_sum":chosen.value_sum,"prior":chosen.prior,
++            "actual_q":if chosen.visits==0 {unvisited_q} else {chosen.value_sum/chosen.visits as f32},
++            "actual_score":best_score,"N0_mean_missing":true_mean.is_none()}));
+         best
++    }
++    fn visit_node(&mut self, index:usize, value:f32) {
++        let n=&mut self.nodes[index];let preN=n.visits;let preSum=n.true_value_sum;
++        n.visits+=1;n.true_value_sum+=value;
++        assert!(self.visit_trace.len()<4096*25, "visit trace hard cap");
++        self.visit_trace.push(serde_json::json!({"sim_completed_before":self.stats.simulations,
++            "node_index":index,"turn":n.position.turn,"value_own_side":value,
++            "preN":preN,"postN":n.visits,"preSum":preSum,"postSum":n.true_value_sum}));
+     }
+ }
+ 
+@@ -637,7 +668,7 @@
+         let (position, expand) = loop {
+             let p = s.nodes[index].position;
+             if let Some(value) = cursor_terminal(p, &cursor) {
+-                Self::backup(s, index, path, leaf_is_node, value);
++                Self::backup(s, index, path, leaf_is_node, value, &cursor);
+                 s.stats.simulations += 1;
+                 return Ok(None);
+             }
+@@ -665,7 +696,7 @@
+                 s.stats.budget_exhausted = true;
+                 leaf_is_node = false;
+                 if let Some(value) = cursor_terminal(next, &cursor) {
+-                    Self::backup(s, index, path, leaf_is_node, value);
++                    Self::backup(s, index, path, leaf_is_node, value, &cursor);
+                     s.stats.simulations += 1;
+                     return Ok(None);
+                 }
+@@ -724,7 +755,7 @@
+         } else {
+             output.value
+         };
+-        Self::backup(&mut self.search, c.index, c.path, c.leaf_is_node, value);
++        Self::backup(&mut self.search, c.index, c.path, c.leaf_is_node, value, &c.request.context);
+         self.search.stats.simulations += 1;
+         self.calls += 1;
+         Ok(())
+@@ -735,17 +766,30 @@
+         path: Vec<(usize, usize)>,
+         leaf_is_node: bool,
+         mut value: f32,
++        cursor: &RuleCursor,
+     ) {
++        let selected=leaf_is_node && s.deep_trace.len()<8 && !s.deep_trace.iter().any(|v|v["node_index"].as_u64()==Some(index as u64));
++        let pre=if selected {Some(serde_json::json!({"leaf_visits":s.nodes[index].visits,"leaf_true_sum":s.nodes[index].true_value_sum,
++            "path":path.iter().map(|&(p,e)|{let edge=&s.nodes[p].edges[e];serde_json::json!({"parent_index":p,"Action":edge.action,"parent_visits":s.nodes[p].visits,"parent_true_sum":s.nodes[p].true_value_sum,"edge_visits":edge.visits,"edge_value_sum":edge.value_sum})}).collect::<Vec<_>>()}))}else{None};
++        let trace_path=if selected {path.clone()} else {Vec::new()};let leaf_value=value;
+         s.stats.max_depth_reached = s.stats.max_depth_reached.max(path.len() as u8);
+         if leaf_is_node {
+-            s.nodes[index].visits += 1
++            s.visit_node(index, value);
+         }
+         for (parent, ei) in path.into_iter().rev() {
+             value = parent_value(value);
+             let e = &mut s.nodes[parent].edges[ei];
+             e.visits += 1;
+             e.value_sum += value;
+-            s.nodes[parent].visits += 1;
++            s.visit_node(parent, value);
++        }
++        if let Some(pre)=pre {
++            let ctx=cursor.as_ref().expect("actual research context");let p=ctx.position();
++            s.deep_trace.push(serde_json::json!({"node_index":index,"key":quoridor_core::research::HistoryKey::from(p).sigma_string(),"turn":p.turn,
++                "ply":ctx.total_ply(),"history":ctx.history_counts().iter().map(|(k,n)|(k.sigma_string(),*n)).collect::<Vec<_>>(),
++                "features_bits":quoridor_core::research::features(p).map(f32::to_bits).to_vec(),"terminal":ctx.terminal_value(),"winner":p.winner,
++                "leaf_side_value":leaf_value,"pre":pre,"post_leaf_visits":s.nodes[index].visits,"post_leaf_true_sum":s.nodes[index].true_value_sum,
++                "post_path":trace_path.iter().map(|&(p,e)|{let edge=&s.nodes[p].edges[e];serde_json::json!({"parent_index":p,"Action":edge.action,"parent_visits":s.nodes[p].visits,"parent_true_sum":s.nodes[p].true_value_sum,"edge_visits":edge.visits,"edge_value_sum":edge.value_sum})}).collect::<Vec<_>>()}));
+         }
+     }
+     pub fn checkpoint(&mut self, g: u32) -> Result<SearchResult, String> {
+@@ -851,3 +895,54 @@
+         assert!(s.begin(1).is_err());
+     }
+ }
++
++/// NN0 artificial fixtures through the actual private backup/select/async paths.
++/// This does not imply that these terminal/cap branches occurred in the real inputs.
++pub fn mean_probe() -> serde_json::Value {
++    let mut cases=Vec::new();
++    for depth in 1..=4 {
++        let root=SigmaContext::from_prefix(&[]).unwrap();
++        let mut s=SearchSession::new_sigma(root.clone(),SearchLimits{simulations:32,max_nodes:32,max_depth:24},1979,B0Evaluator).unwrap();
++        let actions=[13,67,22,58];let mut ctx=root;let mut path=Vec::new();
++        for i in 0..depth {
++            let a=actions[i];let next=ctx.play(a).unwrap();
++            s.nodes[i].edges.push(Edge{action:a,prior:1.,child:Some(i+1),visits:0,value_sum:0.});
++            s.nodes.push(Node::new(next.position()));path.push((i,0));ctx=next;
++        }
++        PendingSearch::backup(&mut s,depth,path,true,0.375,&Some(ctx));
++        for i in 0..=depth {let expected=if (depth-i)%2==0 {0.375}else{-0.375};assert_eq!(s.nodes[i].visits,1);assert_eq!(s.nodes[i].true_value_sum,expected);}
++        cases.push(serde_json::json!({"case":"ancestor_depth","depth":depth,"visits":s.visit_trace}));
++    }
++    let lim=SearchLimits{simulations:8,max_nodes:1,max_depth:24};
++    let mut a=PendingSearch::new(SigmaContext::from_prefix(&[]).unwrap(),lim,1979,1).unwrap();
++    let q=a.begin(1).unwrap().unwrap();assert_eq!(a.search.nodes[0].visits,0);
++    a.resume(1,q.token,Evaluation{weights:vec![1.;q.legal.len()],value:0.25}).unwrap();
++    assert_eq!(a.search.nodes[0].true_value_sum,0.25);assert_eq!(a.search.nodes[0].visits,1);
++    let q=a.begin(1).unwrap().unwrap();a.resume(1,q.token,Evaluation{weights:vec![1.;q.legal.len()],value:0.25}).unwrap();
++    assert_eq!(a.search.nodes.len(),1);assert_eq!(a.search.nodes[0].visits,2);assert_eq!(a.search.nodes[0].true_value_sum,0.);
++    cases.push(serde_json::json!({"case":"async_root_and_cap_pseudo_leaf","visits":a.search.visit_trace,"actual_nodes":a.search.nodes.len()}));
++    let before=a.search.nodes[0].true_value_sum;assert!(a.resume(1,q.token,Evaluation{weights:vec![1.;q.legal.len()],value:0.25}).is_err());assert_eq!(a.search.nodes[0].true_value_sum,before);
++    cases.push(serde_json::json!({"case":"duplicate_async_discard","double_backup":false}));
++    let p=Position{pawns:[4,13],turn:1,..Position::default()};
++    for max_nodes in [1,8] {
++        let context=SigmaContext::synthetic_diagnostic(p,199,vec![(p.into(),1)]).unwrap();
++        let mut a=PendingSearch::new(context,SearchLimits{simulations:2,max_nodes,max_depth:24},1979,1).unwrap();
++        let q=a.begin(1).unwrap().unwrap();let weights=q.legal.iter().map(|&id|if id==3 {1.}else{0.}).collect();
++        a.resume(1,q.token,Evaluation{weights,value:0.25}).unwrap();assert!(a.begin(1).unwrap().is_none());
++        assert_eq!(a.calls,1);assert_eq!(a.search.nodes[0].visits,2);assert_eq!(a.search.nodes[0].true_value_sum,1.25);
++        if max_nodes>1 {assert_eq!(a.search.nodes[1].true_value_sum,-1.);assert_eq!(a.search.nodes[1].visits,1);}
++        cases.push(serde_json::json!({"case":"terminal_noNN_actual_or_pseudo","max_nodes":max_nodes,"calls":a.calls,"visits":a.search.visit_trace}));
++    }
++    let mut a=PendingSearch::new(SigmaContext::from_prefix(&[]).unwrap(),SearchLimits{simulations:4,max_nodes:32,max_depth:1},1979,1).unwrap();
++    for _ in 0..4 {if let Some(q)=a.begin(1).unwrap(){a.resume(1,q.token,Evaluation{weights:vec![1.;q.legal.len()],value:0.25}).unwrap();}}
++    assert!(a.search.visit_trace.iter().all(|v|v["postN"].as_u64()==v["preN"].as_u64().map(|n|n+1)));
++    cases.push(serde_json::json!({"case":"depth_cap_async","visits":a.search.visit_trace}));
++    let mut s=SearchSession::b0(Position::default(),SearchLimits{simulations:4,max_nodes:8,max_depth:4},1979).unwrap();
++    s.nodes[0].edges.push(Edge{action:13,prior:1.,child:None,visits:0,value_sum:0.});s.nodes[0].expanded=true;s.select(0);
++    assert!(s.select_trace[0]["true_mean"].is_null());assert!(s.select_trace[0]["fpu"].is_null());assert_eq!(s.select_trace[0]["actual_q"],0.);
++    cases.push(serde_json::json!({"case":"artificial_expanded_N0","selection":s.select_trace}));
++    let mut s=SearchSession::b0(Position::default(),SearchLimits{simulations:4,max_nodes:8,max_depth:4},1979).unwrap();s.step(4);
++    assert_eq!(s.nodes[0].visits,4);assert_eq!(s.visit_trace.iter().filter(|v|v["node_index"]==0).count(),4);
++    cases.push(serde_json::json!({"case":"sync_same_visit_helper","rootN":s.nodes[0].visits}));
++    serde_json::json!({"ok":true,"artificial_NN0":true,"real_browser_terminal_observed":false,"cases":cases,"FPU_enabled":cfg!(feature="true-mean-fpu")})
++}

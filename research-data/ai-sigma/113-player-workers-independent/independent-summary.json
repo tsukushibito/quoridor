@@ -1,0 +1,533 @@
+{
+  "issue": "quoridor-4lc.113",
+  "producer_Git": "3682ab7b520024735e79e42eea79c982897c3957",
+  "saved": [
+    {
+      "run": "p112-functional-r1",
+      "counts": {
+        "public": 7,
+        "legal": 6,
+        "cancel": 1,
+        "late": 0,
+        "NN": 29,
+        "discard": 2,
+        "opposite_before_ACK": 4,
+        "previous_API_spans_next_t0": 2,
+        "post_public_API_definite": 0,
+        "post_cutoff_API_definite": 0,
+        "post_cutoff_API_possible": 0,
+        "ACKover500": 1,
+        "worker_upper_le_D": 6,
+        "worker_lower_gt_D": 1,
+        "worker_straddles_D": 0,
+        "max_own_wait_ms": 13.159912109375,
+        "max_public_ms": 432.204833984375
+      }
+    },
+    {
+      "run": "p112-initial-pair-r1",
+      "counts": {
+        "public": 142,
+        "legal": 142,
+        "cancel": 0,
+        "late": 0,
+        "NN": 605,
+        "discard": 103,
+        "opposite_before_ACK": 112,
+        "previous_API_spans_next_t0": 103,
+        "post_public_API_definite": 0,
+        "post_cutoff_API_definite": 0,
+        "post_cutoff_API_possible": 0,
+        "ACKover500": 5,
+        "worker_upper_le_D": 137,
+        "worker_lower_gt_D": 5,
+        "worker_straddles_D": 0,
+        "max_own_wait_ms": 0.005126953125,
+        "max_public_ms": 431.449951171875
+      }
+    },
+    {
+      "run": "p112-asym-pair-r1",
+      "counts": {
+        "public": 156,
+        "legal": 156,
+        "cancel": 0,
+        "late": 0,
+        "NN": 627,
+        "discard": 108,
+        "opposite_before_ACK": 120,
+        "previous_API_spans_next_t0": 107,
+        "post_public_API_definite": 0,
+        "post_cutoff_API_definite": 0,
+        "post_cutoff_API_possible": 0,
+        "ACKover500": 13,
+        "worker_upper_le_D": 143,
+        "worker_lower_gt_D": 13,
+        "worker_straddles_D": 0,
+        "max_own_wait_ms": 0.02001953125,
+        "max_public_ms": 446.730224609375
+      }
+    }
+  ],
+  "saved_games": [
+    {
+      "id": "player-initial-color1",
+      "color": 1,
+      "winner": 2,
+      "plies": 66,
+      "score": 0
+    },
+    {
+      "id": "player-initial-color2",
+      "color": 2,
+      "winner": 2,
+      "plies": 76,
+      "score": 1
+    },
+    {
+      "id": "player-asym-color1",
+      "color": 1,
+      "winner": 2,
+      "plies": 73,
+      "score": 0
+    },
+    {
+      "id": "player-asym-color2",
+      "color": 2,
+      "winner": 2,
+      "plies": 83,
+      "score": 1
+    }
+  ],
+  "saved_WDL": {
+    "W": 2,
+    "D": 0,
+    "L": 2
+  },
+  "saved_numeric_samples": [
+    {
+      "request": "p112-functional-r1-1",
+      "engine": "candidate",
+      "P2": false,
+      "cancelled": false,
+      "features": 648,
+      "NN": 137,
+      "priors": 131,
+      "maxNN": 2.384185791015625e-06,
+      "maxPrior": 1.620060892992825e-06,
+      "fixed_reference": true,
+      "valueMeaning": "rootNN"
+    },
+    {
+      "request": "p112-functional-r1-2",
+      "engine": "reference",
+      "P2": false,
+      "cancelled": false,
+      "features": 648,
+      "NN": 137,
+      "priors": 131,
+      "maxNN": 2.384185791015625e-06,
+      "maxPrior": 0,
+      "fixed_reference": true,
+      "valueMeaning": "rootQ"
+    },
+    {
+      "request": "p112-functional-r1-3",
+      "engine": "candidate",
+      "P2": false,
+      "cancelled": true,
+      "features": 648,
+      "NN": 137,
+      "priors": 131,
+      "maxNN": 2.384185791015625e-06,
+      "maxPrior": 1.620060892992825e-06,
+      "fixed_reference": true,
+      "valueMeaning": "rootNN"
+    },
+    {
+      "request": "p112-functional-r1-5",
+      "engine": "reference",
+      "P2": true,
+      "cancelled": false,
+      "features": 648,
+      "NN": 137,
+      "priors": 131,
+      "maxNN": 2.1457672119140625e-06,
+      "maxPrior": 0,
+      "fixed_reference": true,
+      "valueMeaning": "rootQ"
+    },
+    {
+      "request": "p112-initial-pair-r1-1",
+      "engine": "candidate",
+      "P2": false,
+      "cancelled": false,
+      "features": 648,
+      "NN": 137,
+      "priors": 131,
+      "maxNN": 2.384185791015625e-06,
+      "maxPrior": 1.620060892992825e-06,
+      "fixed_reference": true,
+      "valueMeaning": "rootNN"
+    },
+    {
+      "request": "p112-initial-pair-r1-2",
+      "engine": "reference",
+      "P2": true,
+      "cancelled": false,
+      "features": 648,
+      "NN": 137,
+      "priors": 131,
+      "maxNN": 2.1457672119140625e-06,
+      "maxPrior": 0,
+      "fixed_reference": true,
+      "valueMeaning": "rootQ"
+    },
+    {
+      "request": "p112-initial-pair-r1-67",
+      "engine": "reference",
+      "P2": false,
+      "cancelled": false,
+      "features": 648,
+      "NN": 137,
+      "priors": 131,
+      "maxNN": 2.384185791015625e-06,
+      "maxPrior": 0,
+      "fixed_reference": true,
+      "valueMeaning": "rootQ"
+    },
+    {
+      "request": "p112-initial-pair-r1-68",
+      "engine": "candidate",
+      "P2": true,
+      "cancelled": false,
+      "features": 648,
+      "NN": 137,
+      "priors": 131,
+      "maxNN": 2.1457672119140625e-06,
+      "maxPrior": 8.573847407600255e-07,
+      "fixed_reference": true,
+      "valueMeaning": "rootNN"
+    },
+    {
+      "request": "p112-asym-pair-r1-1",
+      "engine": "reference",
+      "P2": true,
+      "cancelled": false,
+      "features": 648,
+      "NN": 137,
+      "priors": 123,
+      "maxNN": 3.5762786865234375e-06,
+      "maxPrior": 0,
+      "fixed_reference": true,
+      "valueMeaning": "rootQ"
+    },
+    {
+      "request": "p112-asym-pair-r1-2",
+      "engine": "candidate",
+      "P2": false,
+      "cancelled": false,
+      "features": 648,
+      "NN": 137,
+      "priors": 124,
+      "maxNN": null,
+      "maxPrior": 9.443712710721641e-07,
+      "fixed_reference": false,
+      "valueMeaning": "rootNN"
+    },
+    {
+      "request": "p112-asym-pair-r1-74",
+      "engine": "candidate",
+      "P2": true,
+      "cancelled": false,
+      "features": 648,
+      "NN": 137,
+      "priors": 123,
+      "maxNN": 3.5762786865234375e-06,
+      "maxPrior": 4.471692105489922e-08,
+      "fixed_reference": true,
+      "valueMeaning": "rootNN"
+    },
+    {
+      "request": "p112-asym-pair-r1-75",
+      "engine": "reference",
+      "P2": false,
+      "cancelled": false,
+      "features": 648,
+      "NN": 137,
+      "priors": 124,
+      "maxNN": null,
+      "maxPrior": 0,
+      "fixed_reference": false,
+      "valueMeaning": "rootQ"
+    }
+  ],
+  "runtime": {
+    "runs": [
+      {
+        "run": "p113-runtime",
+        "counts": {
+          "public": 7,
+          "legal": 6,
+          "cancel": 1,
+          "late": 0,
+          "NN": 68,
+          "discard": 4,
+          "opposite_before_ACK": 4,
+          "previous_API_spans_next_t0": 3,
+          "post_public_API_definite": 0,
+          "post_cutoff_API_definite": 0,
+          "post_cutoff_API_possible": 0,
+          "ACKover500": 0,
+          "worker_upper_le_D": 7,
+          "worker_lower_gt_D": 0,
+          "worker_straddles_D": 0,
+          "max_own_wait_ms": 11.514892578125,
+          "max_public_ms": 418.054931640625
+        },
+        "clock_end": {}
+      }
+    ],
+    "games": [],
+    "W": 0,
+    "L": 0,
+    "numeric_samples": [
+      {
+        "request": "p113-functional-r2-1",
+        "engine": "candidate",
+        "P2": false,
+        "cancelled": false,
+        "features": 648,
+        "NN": 137,
+        "priors": 131,
+        "maxNN": 2.384185791015625e-06,
+        "maxPrior": 1.620060892992825e-06,
+        "fixed_reference": true,
+        "valueMeaning": "rootNN"
+      },
+      {
+        "request": "p113-functional-r2-2",
+        "engine": "reference",
+        "P2": false,
+        "cancelled": false,
+        "features": 648,
+        "NN": 137,
+        "priors": 131,
+        "maxNN": 2.384185791015625e-06,
+        "maxPrior": 0,
+        "fixed_reference": true,
+        "valueMeaning": "rootQ"
+      },
+      {
+        "request": "p113-functional-r2-3",
+        "engine": "candidate",
+        "P2": false,
+        "cancelled": true,
+        "features": 648,
+        "NN": 137,
+        "priors": 131,
+        "maxNN": 2.384185791015625e-06,
+        "maxPrior": 1.620060892992825e-06,
+        "fixed_reference": true,
+        "valueMeaning": "rootNN"
+      },
+      {
+        "request": "p113-functional-r2-4",
+        "engine": "candidate",
+        "P2": false,
+        "cancelled": false,
+        "features": 648,
+        "NN": 137,
+        "priors": 131,
+        "maxNN": 2.384185791015625e-06,
+        "maxPrior": 1.620060892992825e-06,
+        "fixed_reference": true,
+        "valueMeaning": "rootNN"
+      },
+      {
+        "request": "p113-functional-r2-5",
+        "engine": "reference",
+        "P2": true,
+        "cancelled": false,
+        "features": 648,
+        "NN": 137,
+        "priors": 131,
+        "maxNN": 2.1457672119140625e-06,
+        "maxPrior": 0,
+        "fixed_reference": true,
+        "valueMeaning": "rootQ"
+      },
+      {
+        "request": "p113-functional-r2-6",
+        "engine": "candidate",
+        "P2": false,
+        "cancelled": false,
+        "features": 648,
+        "NN": 137,
+        "priors": 132,
+        "maxNN": null,
+        "maxPrior": 1.3433341491397854e-06,
+        "fixed_reference": false,
+        "valueMeaning": "rootNN"
+      },
+      {
+        "request": "p113-functional-r2-7",
+        "engine": "reference",
+        "P2": true,
+        "cancelled": false,
+        "features": 648,
+        "NN": 137,
+        "priors": 132,
+        "maxNN": null,
+        "maxPrior": 0,
+        "fixed_reference": false,
+        "valueMeaning": "rootQ"
+      }
+    ],
+    "browser_adjudicated": true,
+    "shared_RuleA_independence_limit": true,
+    "API_await_not_kernel_CPU": true,
+    "formal_go": false
+  },
+  "runtime_summary": {
+    "issue": "quoridor-4lc.113",
+    "frame": 7,
+    "Git": "uncommitted adapter of 3682ab7",
+    "mode": "NN",
+    "run": "p113-functional-r2",
+    "diagnostic": true,
+    "actual_go": false,
+    "games_started": 0,
+    "games": [],
+    "holdout": 0,
+    "planned": 7,
+    "completed": 7,
+    "missing": 0,
+    "denominator": "functional public requirements",
+    "public_response_count": 7,
+    "game_unstarted": 0,
+    "startup_NN": 6,
+    "hand_NN": 68,
+    "public_classifications": {
+      "completed_legal": 6,
+      "cancel_null": 1
+    },
+    "primary": null,
+    "secondary": [],
+    "browser_judgement": true,
+    "per_CP_Node_binding_calls": 0,
+    "Node_per_hand_clock_calls": 0
+  },
+  "startup_NN": 6,
+  "primary_failed_NN0_configuration": {
+    "run": "p113-functional-r1",
+    "error": "MONITOR_CONTROL_DEADLINE_INVALID",
+    "cause": "inherited window10:02:31 earlier than assigned processing10:02:48",
+    "NN_browser_model_started": 0,
+    "exit": 1,
+    "owned_remaining": [],
+    "correction": "parent frame end10:12:31, unchanged processing/newjob deadlines"
+  },
+  "processes": [
+    {
+      "name": "p113-functional-r1",
+      "start": "2026-10-02T09:47:35.112152+00:00",
+      "end": "2026-10-02T09:47:35.211575+00:00",
+      "exit": 1,
+      "stop_reason": null,
+      "peak_group_plus_runner_RSS": 67403776,
+      "peak_allocated_bytes": 4481024,
+      "kernel_adoptions": [],
+      "all_observed_TIDs_at_assigned_CPU": true
+    },
+    {
+      "name": "p113-functional-r2",
+      "start": "2026-10-02T09:48:41.750320+00:00",
+      "end": "2026-10-02T09:49:02.901295+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "peak_group_plus_runner_RSS": 1717469184,
+      "peak_allocated_bytes": 6848512,
+      "kernel_adoptions": [
+        {
+          "kind": "kernel_adopted_direct_child",
+          "observed": {
+            "pid": 2369746,
+            "ppid": 2369630,
+            "pgid": 2369744,
+            "start_ticks": 18743851,
+            "state": "S",
+            "rss": 3391488,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "launcher_identity": {
+            "pid": 2369630,
+            "ppid": 2009,
+            "pgid": 2369630,
+            "start_ticks": 18743498,
+            "state": "R",
+            "rss": 17887232,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          },
+          "sole_jobroot_identity": {
+            "pid": 2369632,
+            "ppid": 2369630,
+            "pgid": 2369632,
+            "start_ticks": 18743503,
+            "state": "R",
+            "rss": 20508672,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+          "monotonic": 187438.531291833
+        },
+        {
+          "kind": "kernel_adopted_direct_child",
+          "observed": {
+            "pid": 2369748,
+            "ppid": 2369630,
+            "pgid": 2369747,
+            "start_ticks": 18743852,
+            "state": "S",
+            "rss": 3014656,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "launcher_identity": {
+            "pid": 2369630,
+            "ppid": 2009,
+            "pgid": 2369630,
+            "start_ticks": 18743498,
+            "state": "R",
+            "rss": 17887232,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          },
+          "sole_jobroot_identity": {
+            "pid": 2369632,
+            "ppid": 2369630,
+            "pgid": 2369632,
+            "start_ticks": 18743503,
+            "state": "R",
+            "rss": 20508672,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+          "monotonic": 187438.531371353
+        }
+      ],
+      "all_observed_TIDs_at_assigned_CPU": true
+    }
+  ],
+  "identity_count": 79,
+  "snapshot_public_immutable": true,
+  "API_await_not_kernel_CPU": true,
+  "single_logical_shared_residual_contention_not_measured": true,
+  "same_RuleA_independence_limit": true,
+  "no_game_holdout_build": true,
+  "stop_SHA": "1dab2d2192ecac24c40a6b1b50e938ae3b12831832424e0de50d8cf72e33b880"
+}

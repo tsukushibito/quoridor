@@ -1,0 +1,87 @@
+{
+  "issue": "quoridor-4lc.129",
+  "frame": 9,
+  "case_order": [
+    "own-near-goal",
+    "opponent-threat",
+    "both-near",
+    "wall-protected-threat"
+  ],
+  "requirements": [
+    {
+      "case": "own-near-goal",
+      "condition": "A",
+      "engine": "candidate"
+    },
+    {
+      "case": "own-near-goal",
+      "condition": "B",
+      "engine": "reference"
+    },
+    {
+      "case": "opponent-threat",
+      "condition": "B",
+      "engine": "reference"
+    },
+    {
+      "case": "opponent-threat",
+      "condition": "A",
+      "engine": "candidate"
+    },
+    {
+      "case": "both-near",
+      "condition": "A",
+      "engine": "candidate"
+    },
+    {
+      "case": "both-near",
+      "condition": "B",
+      "engine": "reference"
+    },
+    {
+      "case": "wall-protected-threat",
+      "condition": "B",
+      "engine": "reference"
+    },
+    {
+      "case": "wall-protected-threat",
+      "condition": "A",
+      "engine": "candidate"
+    },
+    {
+      "case": "own-near-goal",
+      "condition": "S",
+      "engine": "candidate"
+    },
+    {
+      "case": "opponent-threat",
+      "condition": "S",
+      "engine": "candidate"
+    },
+    {
+      "case": "both-near",
+      "condition": "S",
+      "engine": "candidate"
+    },
+    {
+      "case": "wall-protected-threat",
+      "condition": "S",
+      "engine": "candidate"
+    }
+  ],
+  "normal": 8,
+  "stress": "immutable candidate max simulations1 includes root; keep first CP with original finish; no new inference; normal budget versus hardfault distinct",
+  "startup": 6,
+  "additional_warm": 0,
+  "T500_cutoff402_adopt411": true,
+  "stress_admission": "only after all eight normal legal/numeric requests and zero completed; otherwise all remaining stress marked unexecuted",
+  "labels_SHA256": "0c63b9eb1450d824c45786c3c73aec62f0908f87d4d14f14eacaefed7b8adc26",
+  "127_Git": "3061661704dcf4ac8b965b780a066cb1e0800e70",
+  "normal_numeric_roots": 8,
+  "fixed_NN_reference": false,
+  "classification": "completed_legal Action certified pass/blunder; late/firstnone/fault/infra separate no legal-blunder label",
+  "source_factor": "S request simulations1 only; model/kernel/finish/receiver choose unchanged",
+  "next_branch": "candidate-only certified blunder => specific search/terminal cause; both => sharedmodel/search; allnormalpass => stop narrow label repetition, choose distinct deeper/strategic question",
+  "public_not_waiting_NN_or_ACK": true,
+  "isolated_requests_both_zero_between": true
+}

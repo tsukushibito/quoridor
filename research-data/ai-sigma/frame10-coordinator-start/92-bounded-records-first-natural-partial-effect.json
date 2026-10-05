@@ -1,0 +1,30 @@
+{
+  "UTC": "2026-10-03T05:59:02.107376+00:00",
+  "run": "0bd85f42-78ad-4a84-925a-1cbcd5c03aa0",
+  "turn": "01a10052-f415-7db1-80c2-8ad3952d7ad1",
+  "minimum_source_hashes": {
+    ".artifacts/ai-sigma/continuation-20261001/supervisor/0bd85f42-78ad-4a84-925a-1cbcd5c03aa0/read-guard/observation.json": "c8bfcb6782726a1ace4fed5c3cc7419b94857adc005e1e03c85d8304f004f53c",
+    ".artifacts/ai-sigma/continuation-20261001/supervisor/0bd85f42-78ad-4a84-925a-1cbcd5c03aa0/read-guard/terminal-refusal.json": "1fac2f5f50dcd7216678aa2616d16b3a88ce688b5fd98a2d3d9f8c06522c958c",
+    ".artifacts/ai-sigma/continuation-20261001/supervisor/0bd85f42-78ad-4a84-925a-1cbcd5c03aa0/read-guard/storage-policy.json": "dc8d8527dba774105293c2e41c723bc3f0ede109bc632f2093f37fef34d560bd",
+    ".artifacts/ai-sigma/continuation-20261001/supervisor/0bd85f42-78ad-4a84-925a-1cbcd5c03aa0/read-guard/command-count.json": "9cfad483a6e79e8e76e23e6baf8da6813f13c6c5371517448b66a447303cc239"
+  },
+  "storage_guard_observe_restored": true,
+  "observe_started": "05:53:29.400756",
+  "observe_finished": "05:53:40.478453",
+  "single_inspect_finished": "05:53:53.552110",
+  "read_command_count": 12,
+  "newrun_filebytes_at_read": 150144,
+  "finish_succeeded": false,
+  "refusal": {
+    "utc": "2026-10-03T05:56:09.444244+00:00",
+    "operation": "finish",
+    "error": "finish insufficient remaining time (9.316606s; need 36s)",
+    "no_foreign_process_or_turn_stopped": true,
+    "blind_retry": false
+  },
+  "notes_backup_not_supported": true,
+  "decision": "partial effect accepted forboundedstorage only; existingsteward92 minimal runtimeprompt timing/shortnotes adaptation,nextnaturalfinish effect pending",
+  "new_issue_layer_or_forced_supervisor_tick": false,
+  "concurrent_main": "170experiment remainsinprogress,no newgate",
+  "deadline_08_unchanged": true
+}

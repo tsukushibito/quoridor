@@ -1,0 +1,27 @@
+{
+  "issue": "quoridor-4lc.165",
+  "before_repair_science_versions": [
+    "19275b3",
+    "e6b42a3",
+    "f63e8b3"
+  ],
+  "before_science_stop_sha256": "9becd64e4bfac3e3d145765a7586b0e3376ac49aaae87d5b6ebdb7d49aac671c",
+  "base_git": "4d54f1c19445f279f3eb65f305e88e696323538c",
+  "new_NN": 0,
+  "policy_changes": 0,
+  "repair": "common per-CP setImmediate IPC event drain; synchronous tentative CP cache assign then completion-clock certify/rollback",
+  "original_admit_completion_missing": true,
+  "new_real_ORT_cancel_or_samewall_validation": false,
+  "source_hashes": {
+    "tools/ai-sigma-native-baseline/common.cjs": "35a01a1db0dd124ba78c59aa1bff38232d73fd202c41188bb0f4960e71a4424f",
+    "tools/ai-sigma-native-baseline/reference.cjs": "85cae30273fa481f96ec28fa77eeb5907bb203812c7234f9ffdfd75d337848cf",
+    "tools/ai-sigma-native-baseline/reference-core-native.js": "9670b29d07489a568206b739cf4acdf5477a3c4f0a22f5e8fee2332166201705",
+    "tools/ai-sigma-native-baseline/engine.cjs": "a7c7fd516785455b5412997fee59630b80cd99bd7fe01021e02b0fc3f5c0dde4",
+    "tools/ai-sigma-native-baseline/clock.cjs": "b79bdfba1f3780a7e2394fb04c5703e2ef62daae5283880f7433c65c0c433f2a",
+    "tools/ai-sigma-native-baseline/arena.cjs": "5bb9cbd2a30ff138b36e0160c7443e8f55121626d67289f779fc6ce6cbe10379",
+    "tools/ai-sigma-native-baseline/runner.py": "a41408fd4df51839f9de0ee7d17cb1467daa11bbff141433011c7276f2165b40",
+    "tools/ai-sigma-native-baseline/admission.py": "8dff704031138901be8d3924e2267f23ea5daf50dd23835dc33a3e120eda3766",
+    "tools/ai-sigma-native-baseline/oracle.cjs": "45b816741f2502817b03d76acaf1e05810e10a3ddbbbaa9f1817c14f2dadea87",
+    "tools/ai-sigma-native-baseline/control-repair.cjs": "9a5457398f3fd3b4238bb13ec31a092c54c08a6478f3cfd17d96cd98e2cc0460"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "UTC": "2026-10-04T11:13:27.762463+00:00",
+  "goal": "quoridor-4lc",
+  "from_issue": "quoridor-4lc.227",
+  "to_issue": "quoridor-4lc.228",
+  "writer_stopped": true,
+  "source_files_SHA256": {
+    "tools/ai-sigma-frame18-learning/manifest_adapter.py": "4e47f86687586d243f9cb3c03fb5e736efe9c73f999948ebb765a419a05f18eb",
+    "tools/ai-sigma-frame18-learning/fixture.py": "db0cddc138354d65fe8ced19bb04994fd919e81f5cb6b2dfa021404220e7871a",
+    "tools/ai-sigma-frame18-learning/launch_fixture.py": "49e2288ecd8ac888aece4706135072542978ddf7346749fd3acf0a39c7006e48",
+    "tools/ai-sigma-frame18-learning/loader.py": "32fd742a6216a988ab1349f33c6d39bbdcd2adc4b06a5a7b633d8e5be6d46946",
+    "tools/ai-sigma-frame18-learning/config_helper.py": "12e684920ca1af46eca3097d855fdf0fb3c4c12308ffe3894f2228c2a5943918"
+  },
+  "source_Git": "303a9c327020096c11f4d4661375184eb4038381",
+  "fixture": "jobs/fixture-r2/synthetic/result.json",
+  "checks": 32,
+  "NN": 0,
+  "API": {
+    "prepare": "manifest_adapter.prepare(plan, rows) -> canonical, fixed maximum OR mask, sampling stage descriptors",
+    "CLI": "/usr/bin/python3 -B tools/ai-sigma-frame18-learning/manifest_adapter.py --plan PLAN --metadata LABEL_FREE [--metadata ...] --out NEW_IMMUTABLE_DIR",
+    "loader": "tools/ai-sigma-frame18-learning/loader.py: load_training_stage(path) -> rows, manifest; future authorized traininglabels only, test forbidden",
+    "config": "config_helper.configuration(actual_train_rows, actual_val_rows, scale_path, scale_SHA) -> shared-supported config, separate private settings"
+  },
+  "shared_readonly": {
+    "tools/nnue-training/frame14_data.py": "f45482fe6d1a4477ee3bf3b080d14d883b1f28c79517cff83e4318b7a90e37b8",
+    "tools/nnue-training/common.py": "876e0e9a610b594db63e62e81ae920684f10e52f71a7cc75e04f8fbadd9ffe04"
+  },
+  "remaining_connection": [
+    "owner qualification/reassignment of metadata and separate train/val labels preserving old96 evaluation-only original",
+    "private scale + dense evaluation point runner/evaluator binding",
+    "future candidate freeze -> once test; no test labels beforefreeze"
+  ],
+  "planned_quantities_not227science": "228 owns actual672 authorization; old96 alias+train192576/fixedvaltest96",
+  "metadata_plan_schema": {
+    "kind": "QF1-dynamic-plan",
+    "games": [
+      "game_id",
+      "family",
+      "split",
+      "cohort",
+      "expected_rows",
+      "train_slot for train",
+      "optional source_split explicit new alias"
+    ],
+    "stages": [
+      192,
+      576
+    ]
+  },
+  "physical_owned_fixture_stopped": {
+    "pid": 83457,
+    "tick": "36506838",
+    "wait": true,
+    "current_exact": 0
+  },
+  "scope_reservation_B": 4194304,
+  "phase1_static_upper_seconds": 180,
+  "phase2_static_upper_seconds": 180
+}

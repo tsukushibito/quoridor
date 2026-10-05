@@ -1,0 +1,53 @@
+{
+  "UTC": "2026-10-05T01:34:06.143149+00:00",
+  "issue": "quoridor-4lc.248",
+  "finite_owner_result_accepted": true,
+  "checks": {
+    "source_hash_current": true,
+    "stop": true,
+    "purpose": true,
+    "exit_wait": true,
+    "singlecap": true,
+    "fixtures16": true,
+    "old_clip_numeric_receipts": true
+  },
+  "stopSHA": "18b661e84434870d90a62e5e293c09d839bf4414535b44d288997f3d79f1bd26",
+  "compactSHA": "4809833a6b510efd1dfbfa99e4e6bf160edea5b18666ff64f4b80c19b83bf0fc",
+  "source_hashes": {
+    "tools/ai-sigma-frame20-distance-provenance-repair/launch.py": "18fb034d29c5106edd3b5e38da313f1d277f286d15ac45ddd4499a2589bb9fcb",
+    "tools/ai-sigma-frame20-distance-provenance-repair/provenance.cjs": "27608d1391ef95fbb07a4c941a58291220b0610dab86ad890a8d8e8bd17fd8c5"
+  },
+  "preregisterSHA": "63295937ddfa8788582156bcf797a8bfe93daf3e1e45174dbe8aa0c74636e53a",
+  "purpose_pre_registration": "frame20-distance-provenance-repair-248-v1 / distance-provenance-repair-v1",
+  "process": {
+    "UTC": "2026-10-05T01:28:12.271930+00:00",
+    "exit": 0,
+    "reason": null,
+    "purpose_identity_PASS": true,
+    "wall_s": 2.206670280022081,
+    "science_charge_s": 2.206670280022081,
+    "peak_family_RSS_B": 293470208,
+    "tracked_PIDticks": {
+      "514970": 41670451
+    },
+    "remaining": [],
+    "all_child_waited": true,
+    "current_exact_absent": true,
+    "runner_PID": 514868,
+    "runner_tick": 41670172,
+    "NN_GPU": 0,
+    "CPU": [
+      4
+    ]
+  },
+  "interpretation": "case0 nonterminal clip saturation; case3 depth2 terminalLoss; depth2 tanh tinyf32 gap retained; next249 samewall baseline-sensitive contrast, not source of242 unique branch",
+  "limits": [
+    "owner implementation of finite all-extrema; no independent new replay/forward",
+    "fixed exploratory fourcases, depth1/2; not unseen strength",
+    "tanh heuristic not fair/strong baseline certified",
+    "old244failure/MAX1/caps/229NOT_RUN retained"
+  ],
+  "owner_action": "necessary final Gitbyte/notesclosebackup in same substantive turn",
+  "extra_science_in248": false,
+  "goal_complete": false
+}

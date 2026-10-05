@@ -1,0 +1,75 @@
+{
+  "UTC": "2026-10-04T09:13:54.794719+00:00",
+  "density_joint_per_game": 32.375,
+  "codec_meanwall_s": 79.30533435399411,
+  "graph_meanwall_s": 85.7270649910206,
+  "job_joint_rate": 19.595150977655955,
+  "known_qualification_s_per_game": 0.01363346378125,
+  "known_pack_s_per_game": 0.004746411645707364,
+  "scenarios": [
+    {
+      "games_scenario_only": 100,
+      "job_minutes": 2.7536574428470177,
+      "known_generation_qualification_pack_minutes": 2.7842905685586135,
+      "unknown_additional": "dispatch/backup/sourcefreeze/dev/production-tail/distribution/larger-save costs",
+      "joint_rows": 3237.5,
+      "archive_B_estimate": 4762319.791666666,
+      "retained_raw_B_estimate": 32665689.583333332,
+      "actual_scale_executed": false,
+      "known_pipeline_including_payloadGit_minutes": 2.865227849322078,
+      "archive_plus_uniqueGit_B_estimate": 9524639.583333332
+    },
+    {
+      "games_scenario_only": 1000,
+      "job_minutes": 27.53657442847018,
+      "known_generation_qualification_pack_minutes": 27.842905685586132,
+      "unknown_additional": "dispatch/backup/sourcefreeze/dev/production-tail/distribution/larger-save costs",
+      "joint_rows": 32375.0,
+      "archive_B_estimate": 47623197.916666664,
+      "retained_raw_B_estimate": 326656895.8333333,
+      "actual_scale_executed": false,
+      "known_pipeline_including_payloadGit_minutes": 28.652278493220777,
+      "archive_plus_uniqueGit_B_estimate": 95246395.83333333
+    },
+    {
+      "games_scenario_only": 10000,
+      "job_minutes": 275.36574428470175,
+      "known_generation_qualification_pack_minutes": 278.42905685586135,
+      "unknown_additional": "dispatch/backup/sourcefreeze/dev/production-tail/distribution/larger-save costs",
+      "joint_rows": 323750.0,
+      "archive_B_estimate": 476231979.1666666,
+      "retained_raw_B_estimate": 3266568958.333333,
+      "actual_scale_executed": false,
+      "known_pipeline_including_payloadGit_minutes": 286.5227849322078,
+      "archive_plus_uniqueGit_B_estimate": 952463958.3333333
+    }
+  ],
+  "targets": {
+    "initial_60minutes": "short matchedwork extrapolation inside60 with unknown costs retained",
+    "next_30minutes": "assess known pipeline estimate; no actual1000completed",
+    "required_joint_per_s_60": 8.993055555555555,
+    "required_joint_per_s_30": 17.98611111111111
+  },
+  "break_even": {
+    "saved_job_seconds_per_game": 0.13378605493805176,
+    "known_incremental_parity_admission_qualification_pack_s": 13.417317660031898,
+    "known_component_recovery_games": 100.28935875450283,
+    "development_estimate_s": 900,
+    "development_plus_known_recovery_games": 6827.447883734821,
+    "development_actual_seconds_unknown": true,
+    "delta_uncertain": "only matched ordered pair; hostwarm/batch/tail/nonconcurrent baseline",
+    "known_incremental_parity_admission_qualification_pack_payloadGit_s": 18.079305032007454,
+    "known_component_recovery_games_including_payloadGit": 135.13594552420943,
+    "900s_development_plus_known_recovery_games": 6862.294470504527,
+    "confirmation_cost_s": 76.48033757699886,
+    "known_with_confirmation_recovery_games": 706.7974509958543,
+    "900s_development_plus_known_confirmation_recovery_games": 7433.955975976172,
+    "beforechild_wall_unknown_conservative5_not_measured": true
+  },
+  "cost_spans_overlap": true,
+  "individual_codec_components_cause": false,
+  "K64_not_K800_quality_equivalence": true,
+  "measured_payload_Git_byte_restore_s": 4.661987371975556,
+  "known_save_extra_s_per_game": 0.04856236845807871,
+  "final_report_Git_backup_other_management": "pending/unknown"
+}

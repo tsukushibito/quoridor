@@ -1,0 +1,166 @@
+{
+  "UTC": "2026-10-04T08:58:21.958755+00:00",
+  "issue": "quoridor-4lc.221",
+  "phase": 3,
+  "selected_package": "Single actual response encoding + bits-only provider wire; broker reconstructs validated f32 logits/value",
+  "critic_correction": "reject invalid uint32 before typed-array cast; roundtrip alone is not independent numerical parity",
+  "source_observed": {
+    "tools/ai-sigma-teacher-throughput/codec-control/wire.cjs": "4f8a934f3f998325a8574bed5a9a04d7ed8737046a766070ba628518fddcf709"
+  },
+  "source_scope": "read only; immutable scientific effect not certified",
+  "mock_result": {
+    "checks": [
+      {
+        "B": 1,
+        "IDs": true,
+        "decoded": true,
+        "zero": {
+          "pending_games": 0,
+          "inflight_batches": 0,
+          "queued": 0,
+          "timer": false,
+          "started": 1,
+          "returned": 1
+        }
+      },
+      {
+        "B": 2,
+        "IDs": true,
+        "decoded": true,
+        "zero": {
+          "pending_games": 0,
+          "inflight_batches": 0,
+          "queued": 0,
+          "timer": false,
+          "started": 2,
+          "returned": 2
+        }
+      },
+      {
+        "B": 3,
+        "IDs": true,
+        "decoded": true,
+        "zero": {
+          "pending_games": 0,
+          "inflight_batches": 0,
+          "queued": 0,
+          "timer": false,
+          "started": 3,
+          "returned": 3
+        }
+      },
+      {
+        "B": 4,
+        "IDs": true,
+        "decoded": true,
+        "zero": {
+          "pending_games": 0,
+          "inflight_batches": 0,
+          "queued": 0,
+          "timer": false,
+          "started": 4,
+          "returned": 4
+        }
+      },
+      {
+        "B": 5,
+        "IDs": true,
+        "decoded": true,
+        "zero": {
+          "pending_games": 0,
+          "inflight_batches": 0,
+          "queued": 0,
+          "timer": false,
+          "started": 5,
+          "returned": 5
+        }
+      },
+      {
+        "B": 6,
+        "IDs": true,
+        "decoded": true,
+        "zero": {
+          "pending_games": 0,
+          "inflight_batches": 0,
+          "queued": 0,
+          "timer": false,
+          "started": 6,
+          "returned": 6
+        }
+      },
+      {
+        "B": 7,
+        "IDs": true,
+        "decoded": true,
+        "zero": {
+          "pending_games": 0,
+          "inflight_batches": 0,
+          "queued": 0,
+          "timer": false,
+          "started": 7,
+          "returned": 7
+        }
+      },
+      {
+        "B": 8,
+        "IDs": true,
+        "decoded": true,
+        "zero": {
+          "pending_games": 0,
+          "inflight_batches": 0,
+          "queued": 0,
+          "timer": false,
+          "started": 8,
+          "returned": 8
+        }
+      },
+      {
+        "fault": "reorder",
+        "affected": 2,
+        "typed": "BROKER_ID_ATTRIBUTION"
+      },
+      {
+        "fault": "missing",
+        "affected": 2,
+        "typed": "BROKER_ID_ATTRIBUTION"
+      },
+      {
+        "fault": "duplicateID",
+        "affected": 2,
+        "typed": "BROKER_ID_ATTRIBUTION"
+      },
+      {
+        "fault": "nonfinite",
+        "affected": 2,
+        "typed": "F32_NONFINITE"
+      },
+      {
+        "fault": "EOF",
+        "affected": 2,
+        "typed": "PIPE_EOF"
+      },
+      {
+        "fault": "length",
+        "affected": 2,
+        "typed": "UINT32_SHAPE"
+      }
+    ],
+    "invalid_schemas": 10,
+    "bitexact_negativezero_subnormal": true,
+    "cancel_queued": true,
+    "stale_cancel": true,
+    "inflight_cancel_stop_physical_discard": true,
+    "guard": true,
+    "NN": 0,
+    "mock_replies": 49,
+    "model_parity": false
+  },
+  "actual_model_parity": false,
+  "actual_generation": false,
+  "owner_report_source_Git": "571d939b54fcfea0189d6093af2d7be397aafd05",
+  "operational_old_scheduler_stop": "2026-10-04T08:51:43.062673+00:00; monitor operator stop; external NN stop false",
+  "ops_config_nullable_observed": true,
+  "ops_new_running_loaded": false,
+  "root_confirmation_required": false,
+  "resource_caps_reset": false
+}

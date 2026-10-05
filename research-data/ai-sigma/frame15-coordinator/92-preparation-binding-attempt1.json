@@ -1,0 +1,8 @@
+{
+  "UTC": "2026-10-04T04:13:59.607825+00:00",
+  "attempt": "require report and final-status both at owner Git",
+  "result": "coordinator assertion failed before acceptance write",
+  "cause": "report exists exactly in Git; final-status absent from commit, not a science failure",
+  "repair": "accept report bytes plus current status snapshot separately with SHA and persist necessary snapshot in coordinator Git",
+  "old_science_or_ops_modified": false
+}

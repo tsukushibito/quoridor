@@ -1,0 +1,35 @@
+{
+  "UTC": "2026-10-02T17:20:33.568672+00:00",
+  "monotonic": 214549.832825387,
+  "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+  "parent": {
+    "PID": 2691798,
+    "ppid": 2691797,
+    "PGID": 2691797,
+    "starttick": 21454980,
+    "rss": 16678912
+  },
+  "child": {
+    "PID": 2691799,
+    "ppid": 2691798,
+    "PGID": 2691799,
+    "starttick": 21454983,
+    "rss": 0
+  },
+  "command": [
+    "node",
+    "--max-old-space-size=192",
+    "--max-semi-space-size=4",
+    "--no-node-snapshot",
+    "tools/ai-sigma-policy-factor-choice/probe.cjs"
+  ],
+  "command_sha256": "e0b84606e3f1400c5d31cfa22d7891b0ca20fd92a072c0e27269c10a3cb1eb17",
+  "source_hashes": {
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-policy-factor-choice/supervise.py": "5c9573cfbbb3fdab29d4570d4648a95498d696d3a8f2602109646666a24dd626",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-policy-factor-choice/probe.cjs": "608bd41cb6e34c20ffe365a218ebb6f74de4c8dea36409a10a267713d7905edb",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-policy-factor-choice/check.py": "4321676ef69571ec0bebefd802048b6012f228e014f0587ea245b500f0071dc6"
+  },
+  "deadline_epoch": 1790961693.5682445,
+  "memory": "Nodeheap192 + sampled parent/child RSS896MiB; no AS limit",
+  "TMP": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261002/POLICY-FACTOR-CHOICE/temp"
+}

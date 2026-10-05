@@ -1,0 +1,43 @@
+{
+  "run": "replay-r2",
+  "command": [
+    "node",
+    "--max-old-space-size=256",
+    "tools/ai-sigma-sigma-web-port-saved-independent/replay.cjs"
+  ],
+  "UTC_start": "2026-10-03T01:59:42.314100+00:00",
+  "UTC_end": "2026-10-03T01:59:42.873964+00:00",
+  "wall_s": 0.5797231640026439,
+  "exit": 0,
+  "reason": null,
+  "peak_observed_current_RSS": 130252800,
+  "CPU": [
+    0
+  ],
+  "RAMguard_bytes": 939524096,
+  "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+  "owned": [
+    {
+      "pid": 3031218,
+      "starttick": 24571074
+    },
+    {
+      "pid": 3031223,
+      "starttick": 24571077
+    }
+  ],
+  "remaining": [],
+  "source_before": {
+    "tools/ai-sigma-sigma-web-port-saved-independent/replay.cjs": "778a2a8c9f509a8641b77ee6afc6ccd67c75bb8d61cc07a8783a662c21e7e050",
+    "tools/ai-sigma-sigma-web-port-saved-independent/managed.py": "1a5e92ea6b9eebd3d10150fb6a7d3fe5c1fb9e19fd2effded57b0f16a431802b",
+    "tools/ai-sigma-sigma-web-port-saved-independent/check.py": "b00d2c7db18226aec65b83b9e2ce793043be9efcf00ffe6b66ae6908f64f7506"
+  },
+  "source_after": {
+    "tools/ai-sigma-sigma-web-port-saved-independent/replay.cjs": "778a2a8c9f509a8641b77ee6afc6ccd67c75bb8d61cc07a8783a662c21e7e050",
+    "tools/ai-sigma-sigma-web-port-saved-independent/managed.py": "1a5e92ea6b9eebd3d10150fb6a7d3fe5c1fb9e19fd2effded57b0f16a431802b",
+    "tools/ai-sigma-sigma-web-port-saved-independent/check.py": "b00d2c7db18226aec65b83b9e2ce793043be9efcf00ffe6b66ae6908f64f7506"
+  },
+  "child_waited": true,
+  "instant_peak_and_short_children_unknown": true,
+  "NN_Chrome_game": 0
+}

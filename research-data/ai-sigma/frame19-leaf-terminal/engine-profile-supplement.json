@@ -1,0 +1,203 @@
+{
+  "UTC": "2026-10-04T23:53:57.102475+00:00",
+  "source_SHA": "48bd31b02f7ed1db620595c7e770b2410761f68bd3f81717328d0a820aab4e05",
+  "package": {
+    "baseline": {
+      "searches": 32,
+      "wholewall_ms": 16061.168549120426,
+      "NN": 125128,
+      "processed": 262144,
+      "leaf_pawn_fast_nonterminal": 0,
+      "leaf_full_fallback": 0
+    },
+    "candidate": {
+      "searches": 32,
+      "wholewall_ms": 6553.425019919872,
+      "NN": 125128,
+      "processed": 262144,
+      "leaf_pawn_fast_nonterminal": 250436,
+      "leaf_full_fallback": 0
+    }
+  },
+  "engines": {
+    "NNUE": {
+      "baseline_ms": 8876.046490132809,
+      "candidate_ms": 4048.919200003147,
+      "reduction": 0.5438375402264748,
+      "rounds": [
+        {
+          "baseline": {
+            "searches": 8,
+            "wholewall_ms": 4557.589401125908,
+            "processed": 65536,
+            "NN": 62564,
+            "D_evals": 0,
+            "final_completed_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2
+            ]
+          },
+          "candidate": {
+            "searches": 8,
+            "wholewall_ms": 2121.017096042633,
+            "processed": 65536,
+            "NN": 62564,
+            "D_evals": 0,
+            "final_completed_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2
+            ]
+          },
+          "reduction": 0.5346186526766417,
+          "round": 0
+        },
+        {
+          "baseline": {
+            "searches": 8,
+            "wholewall_ms": 4318.457089006901,
+            "processed": 65536,
+            "NN": 62564,
+            "D_evals": 0,
+            "final_completed_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2
+            ]
+          },
+          "candidate": {
+            "searches": 8,
+            "wholewall_ms": 1927.902103960514,
+            "processed": 65536,
+            "NN": 62564,
+            "D_evals": 0,
+            "final_completed_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2
+            ]
+          },
+          "reduction": 0.5535669188729009,
+          "round": 1
+        }
+      ],
+      "common_completed_depth": [
+        1,
+        2
+      ],
+      "requested3_INCOMPLETE_not_adopted": true,
+      "same_values_actions_matched": true
+    },
+    "distance": {
+      "baseline_ms": 7185.1220589876175,
+      "candidate_ms": 2504.505819916725,
+      "reduction": 0.6514316946385168,
+      "rounds": [
+        {
+          "baseline": {
+            "searches": 8,
+            "wholewall_ms": 3601.579695045948,
+            "processed": 65536,
+            "NN": 0,
+            "D_evals": 62654,
+            "final_completed_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2
+            ]
+          },
+          "candidate": {
+            "searches": 8,
+            "wholewall_ms": 1264.8264599442482,
+            "processed": 65536,
+            "NN": 0,
+            "D_evals": 62654,
+            "final_completed_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2
+            ]
+          },
+          "reduction": 0.648813418821734,
+          "round": 0
+        },
+        {
+          "baseline": {
+            "searches": 8,
+            "wholewall_ms": 3583.5423639416695,
+            "processed": 65536,
+            "NN": 0,
+            "D_evals": 62654,
+            "final_completed_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2
+            ]
+          },
+          "candidate": {
+            "searches": 8,
+            "wholewall_ms": 1239.679359972477,
+            "processed": 65536,
+            "NN": 0,
+            "D_evals": 62654,
+            "final_completed_depths": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2
+            ]
+          },
+          "reduction": 0.6540631492328981,
+          "round": 1
+        }
+      ],
+      "common_completed_depth": [
+        1,
+        2
+      ],
+      "requested3_INCOMPLETE_not_adopted": true,
+      "same_values_actions_matched": true
+    }
+  },
+  "limits": "D duplicate terminal removal in package;NNUE also benefits on these4roots,not horizon or strength proof;ABBA/JIT/cache/smallfixedroots;inclusive spans overlap"
+}

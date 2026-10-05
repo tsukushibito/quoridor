@@ -1,0 +1,16 @@
+# frame14 新現在配分: head-only対照と条件付き新testの有限独立裁定
+担当critic saved01a0f31d-8227-7e03-a7e6-915b4918c11b、worktree /workspaces/quoridor/.worktree/ai-sigma。202-finite-acceptance.jsonで前202の科学/source/47file復元/backup/180charge終了を受入れ済。この実taskturnで202本人close+backup後、新ready/show goal+self/no pause/割当→claim/static実開始。旧202 staticcapをreset/遡及延長せず新別現在配分。主204学習/test/205生成を全文承認gateにしない。
+
+## 問い・独立見解
+202提案のFT/hidden凍結＋head-only33が204でval .4851468131→.483886637（BEST600）小幅改善、GATE_MET。距離baselineは既独立testで有用だが、新NNUE residualの未見増分は未確認。今回は (1)初期下層固定/optimizer subsetと同入力/256000samples条件が成立するか、(2)新testでdistance-onlyよりhead残差が改善するか、(3)事前gate/freeze/一巡/同label-freeOR露出/全24分母を原curves/per-rowにより独立算術で有限裁定する。小幅val選択・複数候補のvalidation再利用・24family bootstrapの不確かさを保持し、rootmean/z/符号・教師truth/棋力を混同しない。最大1具体懸念・次判断への方向を自主に提案、問いへの異論可、主契約の代弁だけにしない。
+
+## 単writer/allowlist
+自域 tools/ai-sigma-head-independent/、research-data/ai-sigma/frame14-head-independent/、docs/reports/ai-sigma-critic-head-independent.md。原204/205/200/201/194 source/結果/weightsへ編集0、旧173教師転用0、旧testlabels/results/mixedstatus/raw/journal/previewを推測読取0。
+freeze前は公開204source/preregister/settings/gate/stop/curves/checkpointSHA・ZIPrawstorage NN0・許可train/val metadata/labelsのみ。head33parameters対named_parameters/state_dictのsource経路・initial/BEST/LAST frozenlower比較receipt/必要ZIPstorageを有限確認（Torch/ORT/modelimport/forwardなし）、byte一致を効果認定へ拡張0。step0含む21curve/game-row/epoch/samples、BEST選定 .483886637の小幅改善、初期52bfc752/coeff77ce9e79/mask10b502cd/valhashをbind。sharedfunctionだけをoracleとchecker両方にせず署名/ORを別算術、representation・opaquehistoryの限界を保持。
+205側新label-free canonicalmetadata+mask/safe slotledger/manifest許可keyだけを開封前に読める。参照old194144+old20124のlabel-free署名ORは固定、state OR history OR actualSTM sortedIDs+f32distance/versionを独自算術、全24/G+/eligible0game/row除外を保存。新teacherlabel/raw/statejournal/fullwinnerstatusや旧preview0rowをlabel-freeと推測しない。OS全人物理隔離保証0、immutable path/hash snapshot前後確認。
+204 candidate/evaluator/settings/weights/coef/mask/config/selectionfreezeと実one-testreceipt後にだけ新test per-row評価出力の必要targets/予測を独立算術へ。新label本体直接読取は不要。実uniqueNNsample/reuse/weightsSHA、candidate/BEST/LAST/distance-only/constant、rootmeanと真z/sign/saturation、row/game/cohort/phase・paired24family bootstrap2000固定seed20480311、欠測/全予定母数、API内包/総費を有限照合。再forward/新test開封/追加学習なし、test結果を再選定へ戻さず原失敗/修復/旧beststep0不支持を保持。
+
+## 物理費用と期限
+NN/model/torch/ORT/session/forward/GPU/train/game/build0。CPU0単1、NN0shortscript各60s/新static総120s/RAM512guard448MiB。GPU生成4cores又はowner不明/回収不能では計算jobを開始しない。204/205 heavy科学全子waitのsource停止handoffと本人直前 /proc PID-starttick currentRSS/自然supervisorowned+次CPU0窓を確認した空き時だけ、point証拠を未来/全期間不在にしない。static source/readを先行し、終了直後CPU0窓解放を報告、guard/debug失敗は全attempt費保存・本来science lossesへ付替え0。
+新2MiB保存（current+uniqueGit/tmp/残metadataforecast1.5MiB）は旧critic112MiB内、前forecast106,541,540+2,097,152=108,638,692<117,440,512、oldunknown減額/parent追加/証拠削除0。必要member stream/原raw全copy0/privateindex0/defaultindex不変更/localGit/byte復元/Beadsbackup/stopを小さく残す。旧202保存保持、受入れ済closeとこの新静的開始は別。
+command開始03:00UTC/計算停止03:05/process03:10/提出03:15の親早側（受領+50分早側も守る）。receipt10分内・source見解/初期不足を報告、NN0actualjob予定/終了/有限判定を別報。当前主205実生成02:20:56開始・science成功未確認、204専用one-test未開始の正常依存。最終不足なら不足射程を保存して停止close可。費用対効果の次1方向を実報告に含め、新layer/承認gate/追加監督0、goal/他issueclose0。

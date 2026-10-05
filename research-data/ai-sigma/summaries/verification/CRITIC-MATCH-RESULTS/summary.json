@@ -1,0 +1,1103 @@
+{
+  "replay": {
+    "pass": true,
+    "scope": "independent fixed JS raw replay; no inference or additional games",
+    "count": 1534,
+    "judgeCount": 1534,
+    "firstUtc": "2026-09-30T23:45:37.676Z",
+    "lastUtc": "2026-09-30T23:59:18.637Z",
+    "platforms": {
+      "native-local": {
+        "W": 9,
+        "D": 0,
+        "L": 7,
+        "m": 8,
+        "Xi": [
+          1,
+          0,
+          1,
+          0,
+          0,
+          1,
+          1,
+          0.5
+        ],
+        "score": 0.5625,
+        "lower": 0.12979540434942866
+      },
+      "browser": {
+        "W": 3,
+        "D": 0,
+        "L": 13,
+        "m": 8,
+        "Xi": [
+          0.5,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "score": 0.1875,
+        "lower": 0
+      }
+    },
+    "stats": {
+      "reference": {
+        "requests": 768,
+        "accepted": 768,
+        "latency": {
+          "n": 768,
+          "median": 424.2711434997618,
+          "p95": 441.58075699955225,
+          "max": 487.26256500184536
+        },
+        "nnCalls": {
+          "n": 768,
+          "median": 22,
+          "p95": 24,
+          "max": 25
+        },
+        "nnDurations": {
+          "n": 15924,
+          "median": 13,
+          "p95": 25.300048828125,
+          "max": 93.699951171875
+        },
+        "simulations": {
+          "n": 768,
+          "median": 22,
+          "p95": 53,
+          "max": 95
+        },
+        "nodes": {
+          "n": 0,
+          "median": null,
+          "p95": null,
+          "max": null
+        },
+        "depth": {
+          "n": 0,
+          "median": null,
+          "p95": null,
+          "max": null
+        },
+        "arena": {
+          "n": 0,
+          "median": null,
+          "p95": null,
+          "max": null
+        },
+        "cap": 0,
+        "missingNN": 0
+      },
+      "candidate": {
+        "requests": 395,
+        "accepted": 393,
+        "latency": {
+          "n": 395,
+          "median": 450.53694500029087,
+          "p95": 474.01948799937963,
+          "max": 527.0968670025468
+        },
+        "nnCalls": {
+          "n": 394,
+          "median": 9,
+          "p95": 9,
+          "max": 9
+        },
+        "nnDurations": {
+          "n": 3337,
+          "median": 47.5,
+          "p95": 55.800048828125,
+          "max": 93.900146484375
+        },
+        "simulations": {
+          "n": 394,
+          "median": 9,
+          "p95": 9,
+          "max": 84
+        },
+        "nodes": {
+          "n": 394,
+          "median": 9,
+          "p95": 9,
+          "max": 9
+        },
+        "depth": {
+          "n": 394,
+          "median": 2,
+          "p95": 5,
+          "max": 7
+        },
+        "arena": {
+          "n": 394,
+          "median": 43318,
+          "p95": 50462,
+          "max": 53862
+        },
+        "cap": 0,
+        "missingNN": 1
+      },
+      "native": {
+        "requests": 371,
+        "accepted": 371,
+        "latency": {
+          "n": 371,
+          "median": 416.0714010000229,
+          "p95": 422.7393589988351,
+          "max": 440.31104200333357
+        },
+        "nnCalls": {
+          "n": 371,
+          "median": 65,
+          "p95": 78,
+          "max": 81
+        },
+        "nnDurations": {
+          "n": 23816,
+          "median": 4.238700497895479,
+          "p95": 9.216241002082825,
+          "max": 27.935824997723103
+        },
+        "simulations": {
+          "n": 371,
+          "median": 66,
+          "p95": 860,
+          "max": 4096
+        },
+        "nodes": {
+          "n": 371,
+          "median": 66,
+          "p95": 82,
+          "max": 151
+        },
+        "depth": {
+          "n": 371,
+          "median": 5,
+          "p95": 16,
+          "max": 22
+        },
+        "arena": {
+          "n": 371,
+          "median": 184566,
+          "p95": 235638,
+          "max": 262678
+        },
+        "cap": 0,
+        "missingNN": 0
+      }
+    },
+    "failures": [
+      {
+        "game": 3,
+        "engine": "candidate",
+        "error": "NO_RESPONSE_TIMEOUT",
+        "elapsed_ms": 527.0968670025468,
+        "overshoot_ms": 27.096867002546787,
+        "action": null,
+        "stale": true,
+        "late": true,
+        "checkpoint": false,
+        "raw_transaction_error": "NO_RESPONSE_TIMEOUT"
+      },
+      {
+        "game": 5,
+        "engine": "candidate",
+        "error": null,
+        "elapsed_ms": 502.3098110035062,
+        "overshoot_ms": 2.3098110035061836,
+        "action": 32,
+        "stale": false,
+        "late": true,
+        "checkpoint": true
+      }
+    ],
+    "rows": [
+      {
+        "game": 1,
+        "block": 1,
+        "platform": "browser",
+        "pool_index": 51,
+        "candidate_color": 2,
+        "requests": 53,
+        "final_ply": 69,
+        "terminal": {
+          "winner": 1,
+          "value": -1
+        },
+        "score": 0,
+        "kind": "goal_or_draw",
+        "prefix_hash": "7bb38e7f3d04f9a7cc2db0bea7f90d94cb0615010c6d6ccd9ef3c99af37367aa"
+      },
+      {
+        "game": 2,
+        "block": 1,
+        "platform": "browser",
+        "pool_index": 51,
+        "candidate_color": 1,
+        "requests": 57,
+        "final_ply": 73,
+        "terminal": {
+          "winner": 1,
+          "value": -1
+        },
+        "score": 1,
+        "kind": "goal_or_draw",
+        "prefix_hash": "8834c8f8421693e1ae08cc3bd77901a3c69fbd0af18ac69d7e7edfd14bc96647"
+      },
+      {
+        "game": 3,
+        "block": 2,
+        "platform": "browser",
+        "pool_index": 56,
+        "candidate_color": 1,
+        "requests": 31,
+        "final_ply": 46,
+        "terminal": null,
+        "score": 0,
+        "kind": "deadline_engine_loss",
+        "prefix_hash": "50be0a22066395088ca9b279c6c57b0bf2e3591b11b30d2c6b91886a07b0df92"
+      },
+      {
+        "game": 4,
+        "block": 2,
+        "platform": "browser",
+        "pool_index": 56,
+        "candidate_color": 2,
+        "requests": 55,
+        "final_ply": 71,
+        "terminal": {
+          "winner": 1,
+          "value": -1
+        },
+        "score": 0,
+        "kind": "goal_or_draw",
+        "prefix_hash": "965ac6cc9d41455fd3ffc8bc1039b6a6bed2651da71dcd40b809990976ef5772"
+      },
+      {
+        "game": 5,
+        "block": 3,
+        "platform": "browser",
+        "pool_index": 47,
+        "candidate_color": 1,
+        "requests": 23,
+        "final_ply": 34,
+        "terminal": null,
+        "score": 0,
+        "kind": "deadline_engine_loss",
+        "prefix_hash": "4b2834c135b3881a8b3f325d951089926fdeb352e02f6e3eec6c609354d81617"
+      },
+      {
+        "game": 6,
+        "block": 3,
+        "platform": "browser",
+        "pool_index": 47,
+        "candidate_color": 2,
+        "requests": 71,
+        "final_ply": 83,
+        "terminal": {
+          "winner": 1,
+          "value": -1
+        },
+        "score": 0,
+        "kind": "goal_or_draw",
+        "prefix_hash": "277cd11f99b59f1c347b35db78ed34b2e12fc5558544dc89c02c5bdf705eedc3"
+      },
+      {
+        "game": 7,
+        "block": 4,
+        "platform": "browser",
+        "pool_index": 25,
+        "candidate_color": 2,
+        "requests": 41,
+        "final_ply": 49,
+        "terminal": {
+          "winner": 1,
+          "value": -1
+        },
+        "score": 0,
+        "kind": "goal_or_draw",
+        "prefix_hash": "5ace3cf2ff576bb1f76b85d7415c461dfc58fd9c558259d84fe8a849efd36573"
+      },
+      {
+        "game": 8,
+        "block": 4,
+        "platform": "browser",
+        "pool_index": 25,
+        "candidate_color": 1,
+        "requests": 56,
+        "final_ply": 64,
+        "terminal": {
+          "winner": 2,
+          "value": -1
+        },
+        "score": 0,
+        "kind": "goal_or_draw",
+        "prefix_hash": "59ca4cfcb62e67e30df9f63511f96f1d59c86a6594091913ef4402bcec055dd3"
+      },
+      {
+        "game": 9,
+        "block": 5,
+        "platform": "native-local",
+        "pool_index": 31,
+        "candidate_color": 1,
+        "requests": 49,
+        "final_ply": 57,
+        "terminal": {
+          "winner": 1,
+          "value": -1
+        },
+        "score": 1,
+        "kind": "goal_or_draw",
+        "prefix_hash": "ebc576fce1f0e75d07d9e84dca679cd74287be17c553e89da06495581d9398b4"
+      },
+      {
+        "game": 10,
+        "block": 5,
+        "platform": "native-local",
+        "pool_index": 31,
+        "candidate_color": 2,
+        "requests": 64,
+        "final_ply": 72,
+        "terminal": {
+          "winner": 2,
+          "value": -1
+        },
+        "score": 1,
+        "kind": "goal_or_draw",
+        "prefix_hash": "727116eefbd84ecc70f845f24f5b8f99590f9bc53c03c4262fc20b65cb3bd00e"
+      },
+      {
+        "game": 11,
+        "block": 6,
+        "platform": "browser",
+        "pool_index": 4,
+        "candidate_color": 2,
+        "requests": 65,
+        "final_ply": 69,
+        "terminal": {
+          "winner": 1,
+          "value": -1
+        },
+        "score": 0,
+        "kind": "goal_or_draw",
+        "prefix_hash": "e03ddfe1b4681630369e13faf6f89c5b576d4755dcbccb739f9460ef3d20f9b7"
+      },
+      {
+        "game": 12,
+        "block": 6,
+        "platform": "browser",
+        "pool_index": 4,
+        "candidate_color": 1,
+        "requests": 58,
+        "final_ply": 62,
+        "terminal": {
+          "winner": 2,
+          "value": -1
+        },
+        "score": 0,
+        "kind": "goal_or_draw",
+        "prefix_hash": "fc063b49ad7a38bc80b11d3732b0714d90d2ee8b9120866011e32e3739ca6a8c"
+      },
+      {
+        "game": 13,
+        "block": 7,
+        "platform": "native-local",
+        "pool_index": 0,
+        "candidate_color": 1,
+        "requests": 50,
+        "final_ply": 54,
+        "terminal": {
+          "winner": 2,
+          "value": -1
+        },
+        "score": 0,
+        "kind": "goal_or_draw",
+        "prefix_hash": "d2d15897f3c8d1eb098d4f8c2b122f5ae9f3cf2e10396397327086f368493193"
+      },
+      {
+        "game": 14,
+        "block": 7,
+        "platform": "native-local",
+        "pool_index": 0,
+        "candidate_color": 2,
+        "requests": 47,
+        "final_ply": 51,
+        "terminal": {
+          "winner": 1,
+          "value": -1
+        },
+        "score": 0,
+        "kind": "goal_or_draw",
+        "prefix_hash": "4299f9a07d166e42df593097bfca7cf8332d3953e0ad50fee34f36bc5022e863"
+      },
+      {
+        "game": 15,
+        "block": 8,
+        "platform": "browser",
+        "pool_index": 0,
+        "candidate_color": 2,
+        "requests": 53,
+        "final_ply": 57,
+        "terminal": {
+          "winner": 1,
+          "value": -1
+        },
+        "score": 0,
+        "kind": "goal_or_draw",
+        "prefix_hash": "c599b1f2894e8dfd7e362e5292513f7e6d64b5ddfea1fffc6d33adcb5d908478"
+      },
+      {
+        "game": 16,
+        "block": 8,
+        "platform": "browser",
+        "pool_index": 0,
+        "candidate_color": 1,
+        "requests": 44,
+        "final_ply": 48,
+        "terminal": {
+          "winner": 2,
+          "value": -1
+        },
+        "score": 0,
+        "kind": "goal_or_draw",
+        "prefix_hash": "0bdf7575402b16f637591b95bbdb0c21bdb950e50890db0657e5c7a8cdfb789b"
+      },
+      {
+        "game": 17,
+        "block": 9,
+        "platform": "native-local",
+        "pool_index": 47,
+        "candidate_color": 1,
+        "requests": 55,
+        "final_ply": 67,
+        "terminal": {
+          "winner": 1,
+          "value": -1
+        },
+        "score": 1,
+        "kind": "goal_or_draw",
+        "prefix_hash": "93c78a06dc18401715424c4191fe8da1fc3b39882f410d0f161741a2d7e39f72"
+      },
+      {
+        "game": 18,
+        "block": 9,
+        "platform": "native-local",
+        "pool_index": 47,
+        "candidate_color": 2,
+        "requests": 32,
+        "final_ply": 44,
+        "terminal": {
+          "winner": 2,
+          "value": -1
+        },
+        "score": 1,
+        "kind": "goal_or_draw",
+        "prefix_hash": "ad14f38cf2ca3e58b5842cb988bf4ad84af7ccef3f60c586f6d66cd78e0e622d"
+      },
+      {
+        "game": 19,
+        "block": 10,
+        "platform": "browser",
+        "pool_index": 31,
+        "candidate_color": 1,
+        "requests": 37,
+        "final_ply": 45,
+        "terminal": {
+          "winner": 1,
+          "value": -1
+        },
+        "score": 1,
+        "kind": "goal_or_draw",
+        "prefix_hash": "d38fc12d57e5196e29d6778ed326d065200342cb08ad525ddbbf4e03237d8f8e"
+      },
+      {
+        "game": 20,
+        "block": 10,
+        "platform": "browser",
+        "pool_index": 31,
+        "candidate_color": 2,
+        "requests": 52,
+        "final_ply": 60,
+        "terminal": {
+          "winner": 2,
+          "value": -1
+        },
+        "score": 1,
+        "kind": "goal_or_draw",
+        "prefix_hash": "ec95326f4bb1fdf6b99a1d13a5b2a5517fa1c4af88c860e24c90e30bc85cef60"
+      },
+      {
+        "game": 21,
+        "block": 11,
+        "platform": "browser",
+        "pool_index": 44,
+        "candidate_color": 2,
+        "requests": 49,
+        "final_ply": 61,
+        "terminal": {
+          "winner": 1,
+          "value": -1
+        },
+        "score": 0,
+        "kind": "goal_or_draw",
+        "prefix_hash": "95e760875ce15a938818cbb09a3ea30a225ddd93de581d2c83451df524827320"
+      },
+      {
+        "game": 22,
+        "block": 11,
+        "platform": "browser",
+        "pool_index": 44,
+        "candidate_color": 1,
+        "requests": 48,
+        "final_ply": 60,
+        "terminal": {
+          "winner": 2,
+          "value": -1
+        },
+        "score": 0,
+        "kind": "goal_or_draw",
+        "prefix_hash": "d79b9f36d3d42d595fee9d2dcc8323b362082e009d5196b611880ade5846ac8d"
+      },
+      {
+        "game": 23,
+        "block": 12,
+        "platform": "native-local",
+        "pool_index": 44,
+        "candidate_color": 1,
+        "requests": 34,
+        "final_ply": 46,
+        "terminal": {
+          "winner": 2,
+          "value": -1
+        },
+        "score": 0,
+        "kind": "goal_or_draw",
+        "prefix_hash": "3a1c8838db3802f4421214f5f401af5b377796a8f8e8a878f96a72a1be2469c8"
+      },
+      {
+        "game": 24,
+        "block": 12,
+        "platform": "native-local",
+        "pool_index": 44,
+        "candidate_color": 2,
+        "requests": 49,
+        "final_ply": 61,
+        "terminal": {
+          "winner": 1,
+          "value": -1
+        },
+        "score": 0,
+        "kind": "goal_or_draw",
+        "prefix_hash": "2d1415d49e69d662f28308f0c443537849b5e9a76827c914a1abfbde875863c5"
+      },
+      {
+        "game": 25,
+        "block": 13,
+        "platform": "native-local",
+        "pool_index": 25,
+        "candidate_color": 1,
+        "requests": 50,
+        "final_ply": 58,
+        "terminal": {
+          "winner": 2,
+          "value": -1
+        },
+        "score": 0,
+        "kind": "goal_or_draw",
+        "prefix_hash": "ef8f18d1303a0a8d0e8ab153261a18e53a633d44a995dee555343fabf22f2766"
+      },
+      {
+        "game": 26,
+        "block": 13,
+        "platform": "native-local",
+        "pool_index": 25,
+        "candidate_color": 2,
+        "requests": 31,
+        "final_ply": 39,
+        "terminal": {
+          "winner": 1,
+          "value": -1
+        },
+        "score": 0,
+        "kind": "goal_or_draw",
+        "prefix_hash": "7a064a8fc11b6daeed8c1a67d0b9958fbdec6019443fb96f5cdb23f00ee5772c"
+      },
+      {
+        "game": 27,
+        "block": 14,
+        "platform": "native-local",
+        "pool_index": 4,
+        "candidate_color": 1,
+        "requests": 49,
+        "final_ply": 53,
+        "terminal": {
+          "winner": 1,
+          "value": -1
+        },
+        "score": 1,
+        "kind": "goal_or_draw",
+        "prefix_hash": "6e1742d01fc0493db262a8beafa8e3b1db328f1f82daf52696f6d4539ad26eba"
+      },
+      {
+        "game": 28,
+        "block": 14,
+        "platform": "native-local",
+        "pool_index": 4,
+        "candidate_color": 2,
+        "requests": 52,
+        "final_ply": 56,
+        "terminal": {
+          "winner": 2,
+          "value": -1
+        },
+        "score": 1,
+        "kind": "goal_or_draw",
+        "prefix_hash": "0437fc03945d8f940f94c277ae1f9f879aea154a26e79452604b5f532a6e077c"
+      },
+      {
+        "game": 29,
+        "block": 15,
+        "platform": "native-local",
+        "pool_index": 51,
+        "candidate_color": 2,
+        "requests": 32,
+        "final_ply": 48,
+        "terminal": {
+          "winner": 2,
+          "value": -1
+        },
+        "score": 1,
+        "kind": "goal_or_draw",
+        "prefix_hash": "1312e0beffebb28434910e5a27c53432ae45ba29f3fc000b4a203af5dbfdd180"
+      },
+      {
+        "game": 30,
+        "block": 15,
+        "platform": "native-local",
+        "pool_index": 51,
+        "candidate_color": 1,
+        "requests": 57,
+        "final_ply": 73,
+        "terminal": {
+          "winner": 1,
+          "value": -1
+        },
+        "score": 1,
+        "kind": "goal_or_draw",
+        "prefix_hash": "9914cae14608af8933f3dae76fae5165c6a615963f89d70994b023123532543c"
+      },
+      {
+        "game": 31,
+        "block": 16,
+        "platform": "native-local",
+        "pool_index": 56,
+        "candidate_color": 1,
+        "requests": 59,
+        "final_ply": 75,
+        "terminal": {
+          "winner": 1,
+          "value": -1
+        },
+        "score": 1,
+        "kind": "goal_or_draw",
+        "prefix_hash": "86fee3953eb45e6fc54d06d64d346ffbc8d7c7af8c59a610ad81a54fa4ba43b1"
+      },
+      {
+        "game": 32,
+        "block": 16,
+        "platform": "native-local",
+        "pool_index": 56,
+        "candidate_color": 2,
+        "requests": 31,
+        "final_ply": 47,
+        "terminal": {
+          "winner": 1,
+          "value": -1
+        },
+        "score": 0,
+        "kind": "goal_or_draw",
+        "prefix_hash": "7a5255d445bbd8b92b941e85666c416354cdb940535b1a091e446c82271ad711"
+      }
+    ],
+    "summary_restarts": 2,
+    "unverified": [
+      "clock physical error tails",
+      "NN causality",
+      "true legal 200ply/no-legal reachability",
+      "formal noninferiority",
+      "complete provenance beyond hashed inputs"
+    ]
+  },
+  "arithmetic": {
+    "pass": true,
+    "freeze_before_first_send_and_results": true,
+    "token_logged": false,
+    "table_checkpoint_summary_results_pairs_consistent": true,
+    "schedule_games": 32,
+    "invalid_pairs": 0,
+    "global_retry": 0,
+    "sessions": 2,
+    "restarts_after_initial": 1,
+    "requests_per_session": {
+      "1": 141,
+      "2": 1393
+    },
+    "clock_intervals": [
+      {
+        "session": 1,
+        "engine": "linux",
+        "samples": 12,
+        "error_ms": 0.010547995086431504
+      },
+      {
+        "session": 1,
+        "engine": "page",
+        "samples": 12,
+        "error_ms": 0.35537109375
+      },
+      {
+        "session": 1,
+        "engine": "reference",
+        "samples": 12,
+        "error_ms": 0.43984375
+      },
+      {
+        "session": 1,
+        "engine": "candidate",
+        "samples": 12,
+        "error_ms": 0.3789306640625
+      },
+      {
+        "session": 2,
+        "engine": "linux",
+        "samples": 12,
+        "error_ms": 0.00763199802827835
+      },
+      {
+        "session": 2,
+        "engine": "page",
+        "samples": 12,
+        "error_ms": 0.3357177734375
+      },
+      {
+        "session": 2,
+        "engine": "reference",
+        "samples": 12,
+        "error_ms": 0.428857421875
+      },
+      {
+        "session": 2,
+        "engine": "candidate",
+        "samples": 12,
+        "error_ms": 0.406884765625
+      }
+    ],
+    "all_request_early_clock_mapping": true,
+    "stale_rejected": 1,
+    "simulation_4096_hits": {
+      "native": 9
+    },
+    "input_hashes_checked": 76,
+    "input_mutations": [],
+    "pool_sha256": "ac11691ffa521a86ffce2cff40dfdbebee5d283a83f70abfe36f43028b72ad9d",
+    "resource_evidence": {
+      "start": "2026-09-30T23:45:27.494822+00:00",
+      "end": "2026-09-30T23:59:18.869521+00:00",
+      "wall_s": 831.374699,
+      "peak_RSS_guard_observed": 1693671424,
+      "peak_logical_storage": 754407238,
+      "current_logical_storage": 752894614,
+      "current_allocated_storage": 758341632,
+      "current_owned_conservative": 3676045312,
+      "prior_experiment_storage": 2917703680,
+      "run_logical_increment_peak": 82853632,
+      "tracked_cpu_s": 564.71,
+      "direct_reaped_child_user_sys": {
+        "user_s": 194.518722,
+        "system_s": 17.616773,
+        "maxrss_kib": 345208
+      },
+      "all_observed_CPU2": true,
+      "sample_interval_s": 0.05,
+      "all_tracked_PID0": true,
+      "sessions": [
+        {
+          "session": "session-1",
+          "clock_sha256": "774cb28747cddc0eb216747c80fba39b3800e46514fb58fd0344fe781257dba1",
+          "startup_sha256": "721b8f5f4cf49775dac82b10bec1a48e4be4097412e356ca2ad77ad5eb89b7da",
+          "startup": {
+            "native": {
+              "load_ms": 76.41492399573326,
+              "ready": true
+            },
+            "browser": {
+              "reference": {
+                "type": "model_loaded",
+                "version": {
+                  "common": "1.21.0",
+                  "web": "1.21.0"
+                },
+                "threads": 1,
+                "proxy": false,
+                "canonical": true,
+                "inputs": [
+                  "input"
+                ],
+                "outputs": [
+                  "policy_logits",
+                  "value"
+                ]
+              },
+              "candidate": {
+                "kind": "ready",
+                "load_ms": 577.3000000044703,
+                "compile_ms": 796.2999999970198,
+                "memory": 48103424
+              }
+            },
+            "ping": {
+              "ready": true,
+              "implementation": "clock_gettime(CLOCK_MONOTONIC)",
+              "resolution": 1e-09
+            },
+            "modelSha": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+            "browserVersion": "153.0.8010.12",
+            "startupClock": "not charged to request T",
+            "singleCPU": 2
+          }
+        },
+        {
+          "session": "session-2",
+          "clock_sha256": "5006d38a51a6eddb545527eb38fc6bf1f3041ed89ded01dd267cae44589efde9",
+          "startup_sha256": "66ee276383af5addc88e864f360485fe284dbf9bf84f9cb3f5f17a5241ef774b",
+          "startup": {
+            "native": {
+              "load_ms": 71.23703300207853,
+              "ready": true
+            },
+            "browser": {
+              "reference": {
+                "type": "model_loaded",
+                "version": {
+                  "common": "1.21.0",
+                  "web": "1.21.0"
+                },
+                "threads": 1,
+                "proxy": false,
+                "canonical": true,
+                "inputs": [
+                  "input"
+                ],
+                "outputs": [
+                  "policy_logits",
+                  "value"
+                ]
+              },
+              "candidate": {
+                "kind": "ready",
+                "load_ms": 686.7999999970198,
+                "compile_ms": 765.5,
+                "memory": 48103424
+              }
+            },
+            "ping": {
+              "ready": true,
+              "implementation": "clock_gettime(CLOCK_MONOTONIC)",
+              "resolution": 1e-09
+            },
+            "modelSha": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+            "browserVersion": "153.0.8010.12",
+            "startupClock": "not charged to request T",
+            "singleCPU": 2
+          }
+        }
+      ],
+      "GPU_training_build_download": 0,
+      "parent_goal_stop_v2": "2026-10-01T04:00:00Z",
+      "run_processing_stop_unchanged": "2026-10-01T00:45:00Z"
+    },
+    "original_stopped": {
+      "UTC": "2026-10-01T00:00:03.815720+00:00",
+      "run_id": "SIGMA-P32-V2-R3-01",
+      "last_job_end": "2026-09-30T23:59:18.869521+00:00",
+      "exit": 0,
+      "self_PID_starttick_remaining": [],
+      "self_PID0": true,
+      "reason": "all_scheduled_complete",
+      "completed": 32,
+      "scheduled": 32,
+      "globalRetry": 0,
+      "NN_after_stop": false,
+      "preview_port_created": false,
+      "other_kills": 0,
+      "parent_goal_deadline_v2": "2026-10-01T04:00:00Z",
+      "current_run_processing_deadline_unchanged": "2026-10-01T00:45:00Z"
+    },
+    "limitations": [
+      "offset intervals conditional on clock and scheduling assumptions; finite samples do not guarantee tails",
+      "no reexecution of NN/build/matches",
+      "source provenance checks limited to dispatched immutable inputs",
+      "unknown training overlap and independent random seed performance not established"
+    ]
+  },
+  "provenance": {
+    "pass": true,
+    "original_tracked_identities": 932,
+    "original_identities_remaining": [],
+    "all_original_observed_TID_affinity": [
+      2
+    ],
+    "original_observed_peak_RSS": 1693671424,
+    "original_observed_sample_interval_s": 0.05,
+    "old_noresponse_late_discard_and_cleanup": true,
+    "all_30_normal_outcomes_goal": true,
+    "freeze_schedule_and_selection_match": true,
+    "runner_copy_original_sha256": "4bd21b21f9ae456ec5d360e8bb03b0423b141e62e70370272a7da566dff164fc",
+    "runner_copy_sha256": "1d2dd51d2203321091b14ef887f3626d821b92d2fc95f69c9aad209b0079d921",
+    "own_diagnostic_failures": [
+      {
+        "attempt": 1,
+        "cause": "critic assumed rejected watchdog stale=false; original stale=true valid rejection",
+        "input_changed": false
+      },
+      {
+        "attempt": 2,
+        "cause": "critic assumed native outer generation; native data generation/transaction/checkpoint used",
+        "input_changed": false
+      }
+    ],
+    "no_producer_failure_reclassified": true
+  },
+  "stopped": {
+    "stop_UTC": "2026-10-01T00:27:42.448633+00:00",
+    "reason": "all fixed raw replay and arithmetic complete; no further runtime",
+    "last_job_end": "2026-10-01T00:27:17.339222+00:00",
+    "all_tracked_PID0": true,
+    "remaining": [],
+    "remaining_count": 0,
+    "tracked_identities": [
+      {
+        "pid": 795094,
+        "start_ticks": 6723426
+      },
+      {
+        "pid": 796122,
+        "start_ticks": 6732539
+      },
+      {
+        "pid": 795521,
+        "start_ticks": 6727179
+      },
+      {
+        "pid": 793810,
+        "start_ticks": 6707301
+      },
+      {
+        "pid": 794188,
+        "start_ticks": 6712028
+      },
+      {
+        "pid": 794298,
+        "start_ticks": 6713763
+      }
+    ],
+    "own_CPU_affinity": [
+      0
+    ],
+    "observed_peak_RSS_bytes": 658632704,
+    "tracked_CPU_seconds": 1.32,
+    "current_new_bytes": 210870,
+    "science_jobs": 6,
+    "NN_build_download_additional_games_GPU": 0,
+    "ports_created": 0,
+    "other_kills": 0,
+    "processing_deadline_UTC": "2026-10-01T00:35:00Z",
+    "no_new_job_after_UTC": "2026-10-01T00:32:00Z",
+    "processing_deadline_met": true,
+    "instantaneous_peak_guarantee": false,
+    "temporary_residue": []
+  },
+  "verdict": "limited acceptance of frozen exploratory match results; goal not achieved",
+  "preregister": {
+    "pass": true,
+    "selected": [
+      25,
+      4,
+      51,
+      0,
+      47,
+      44,
+      56,
+      31
+    ],
+    "order_generator": [
+      {
+        "arrangement": "interleave",
+        "colors": "after",
+        "bitrule": 0
+      }
+    ],
+    "v2_is_fixed_v1_filter": true,
+    "blocks": 16,
+    "games": 32,
+    "seed": 1979,
+    "holdout_engine_sends": 0
+  },
+  "input_hashes": {
+    "before": "input-before.json",
+    "after": "input-after.json"
+  },
+  "reproduction": [
+    "UV_NO_SYNC=1 UV_OFFLINE=1 PYTHONDONTWRITEBYTECODE=1 ARENA_CPU=0 taskset -c 0 python3 -B stage/runner.py replay3 node --max-old-space-size=512 ABS/stage/replay.cjs",
+    "same runner: audit/evidence python3 -B ABS/stage/audit.py or evidence.py",
+    "same runner: prereg python3 -B ABS/stage/preregister-independent.py"
+  ],
+  "after_stop_no_new_science_runtime": true,
+  "artifact_hashes": {
+    "runner.patch": "2420f059166d1b8225428b419fb3e86bc5eda4e727e51b76a5805177756784fb",
+    "replay-failure.json": "6bb701170fda8356aeb1eeb5fc111983aa5d6332b88fda39f511f00523e5d87d",
+    "freeze-audit.json": "a751406048060d1244c396ade447f0c529b23c38a66b2c91511ed641e0325d3a",
+    "input-before.json": "ddf1f77a0c539978fe8e2f9821e7dc50488e7c04abc47768440c8e5feaec5bd2",
+    "copy-patches.json": "b3ce2a86ef1c1b5fab1c1a33156b441ff07046d7f7550621c748ee67d579986f",
+    "replay-attempt1-failure.json": "abbee3887eae32fec5801674edc663fb9a8a31223b7ee1f48da060eccf1bb500",
+    "start.json": "105388dd901126fd40df07d6fd3e21c90fd324db43fd374bceb9f63d33915e91",
+    "audit-summary.json": "6d85fc52ee59852f3a67e63184723da398bf507712e3a4ad298ecde36bc7618f",
+    "replay-attempt2-source.cjs": "ebef419bb9f090e5ec196165a5d7cebf74569cf3bbcbca41041f892a2209b1f9",
+    "replay-attempt2-failure.json": "6bb701170fda8356aeb1eeb5fc111983aa5d6332b88fda39f511f00523e5d87d",
+    "evidence-summary.json": "b85f669d406e110e56d35b38c57375531f20a6dfed6efede3d8ae64b6b0c91c6",
+    "replay-summary.json": "9c092761a2644a169c6bfb691f3c3a12e85bd477d3b6b6caec887426ad379db4",
+    "runtime-stopped.json": "6def01c3c44b2d80c367ff0fa18cfb4328623888dd55fd7c4fd6677ace150486",
+    "replay-attempt1-source.cjs": "b0bd373a83f257df56cd866f49f417dea9c86a272816fd26e977efe6e0f9337d",
+    "input-after.json": "72ab9a0d4a1e94d810fe9cb36022dc185858a0797d86f4db7a35edf6bd18adae",
+    "stage/replay2.log": "8cefcda3ce277fd1992ecba3e5344f5fab5c402469c08515d10f215eeac3f17f",
+    "stage/replay.cjs": "05e3b469e922bbcaa729cf66b6dde5ab9d2331a2dfcdf401c4891804e9f7b654",
+    "stage/preregister-independent.copy.json": "6bb263631371f5ffc9243bae140471939c89bf241dddd11fd526ef5093311f90",
+    "stage/evidence.log": "4e0d3ff64080078532a9addc0e1e7064751e3fd8804f1709367418239102e18e",
+    "stage/evidence.py": "71cfaf5cdfc4ce3febfcdaf7ac733ac637d735c09a0bc8972c5ace4a32540eb9",
+    "stage/evidence.process.json": "7ff8e96e49fb5092c4ee99c77836061fd103cd4a65b24c088af7db989999a8b2",
+    "stage/game.js": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5",
+    "stage/replay2.process.json": "a186ad8a519573a97ccbd9cd735cd905196fe152393a11b02a6c5d2f48184a16",
+    "stage/preregister-independent.py": "a70843f9af0693466096ea171ac76d414d2cd8a0531576797a1aacf5fc8466bb",
+    "stage/prereg.process.json": "acb4527f0b12eb70b9fac09622985cbc2a01e7ccd23d2a3d687d0792d679975b",
+    "stage/preregister-independent.patch": "93ff4086d7f51336ae908a57d2f1aeacd14fd70ad3918bb205b27bad9a7f73e6",
+    "stage/replay-attempt1.process.json": "976c5a77c55252e47456b403c85ffb2d76de6ba83fd4b6ba877009388e078c64",
+    "stage/runner.py": "1d2dd51d2203321091b14ef887f3626d821b92d2fc95f69c9aad209b0079d921",
+    "stage/replay3.log": "96ecbf95771b1fce46e68270731c70d12073e1bf3f06a495f8d8ad51d456da51",
+    "stage/prereg.log": "340a82cc090609be8ba435e33eeda7abff348035c588da3c0931cc6be287b631",
+    "stage/judge.cjs": "a43bed42482ae21a3620449df37b08596bc9fabef31936b27d6c95254fdc7577",
+    "stage/audit.py": "ffc566fce2f63623550e4d9ad85bba73e4ccc7849466d99764d36084a38472b3",
+    "stage/replay.log": "d47a940cc2fbfbc4b6f76f6f1c42de61f40dd5d4baee710b6e757cef27883b3a",
+    "stage/context.js": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c",
+    "stage/replay-attempt1.log": "d47a940cc2fbfbc4b6f76f6f1c42de61f40dd5d4baee710b6e757cef27883b3a",
+    "stage/replay3.process.json": "32f016959a683228279123c7e308e50b99700e039cc09e55da969ad9e577278d",
+    "stage/audit.log": "54e7254d63135453051da2c4471f33022b72d2add5b2b49c64abd083caaede3c",
+    "stage/replay.process.json": "976c5a77c55252e47456b403c85ffb2d76de6ba83fd4b6ba877009388e078c64",
+    "stage/audit.process.json": "6747f9ea310470fb2e0f0511e8d257e0645be89e2719064de80f904379b64c39",
+    "stage/preregister-independent.json": "833b61b2cfa83e8862bb30e1bdbe77ad5a8491ff66136f116ec3b62ae784c7f5"
+  },
+  "report_generated_UTC": "2026-10-01T00:28:51.545669+00:00"
+}

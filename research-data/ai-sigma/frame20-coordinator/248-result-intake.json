@@ -1,0 +1,292 @@
+{
+  "UTC": "2026-10-05T01:31:46.995969+00:00",
+  "basis": "owner report+published compact currentSHA",
+  "compact_SHA": "4809833a6b510efd1dfbfa99e4e6bf160edea5b18666ff64f4b80c19b83bf0fc",
+  "status": "COMPLETED",
+  "processed": 63178,
+  "fixtures6_PASS": true,
+  "conditions": [
+    {
+      "caseIndex": 0,
+      "mode": "clip",
+      "depth": 1,
+      "legal_count": 94,
+      "max_value": -1,
+      "strict_first_Action": 11,
+      "source_Action": 11,
+      "source_gap": 0,
+      "processed": 94,
+      "argmax_count": 94,
+      "origin_counts": {
+        "nonterminalSaturated": 94
+      },
+      "old_clip_PASS": true,
+      "old_clip_max_abs": 0
+    },
+    {
+      "caseIndex": 0,
+      "mode": "clip",
+      "depth": 2,
+      "legal_count": 94,
+      "max_value": -1,
+      "strict_first_Action": 11,
+      "source_Action": 11,
+      "source_gap": 0,
+      "processed": 8674,
+      "argmax_count": 94,
+      "origin_counts": {
+        "nonterminalSaturated": 7902
+      },
+      "old_clip_PASS": true,
+      "old_clip_max_abs": 0
+    },
+    {
+      "caseIndex": 0,
+      "mode": "tanh",
+      "depth": 1,
+      "legal_count": 94,
+      "max_value": -0.7822309732437134,
+      "strict_first_Action": 19,
+      "source_Action": 11,
+      "source_gap": 0.06583809852600098,
+      "processed": 94,
+      "argmax_count": 4,
+      "origin_counts": {
+        "nonterminalSaturated": 4
+      },
+      "old_clip_PASS": null,
+      "old_clip_max_abs": null
+    },
+    {
+      "caseIndex": 0,
+      "mode": "tanh",
+      "depth": 2,
+      "legal_count": 94,
+      "max_value": -0.8684191107749939,
+      "strict_first_Action": 134,
+      "source_Action": 11,
+      "source_gap": 5.960464477539063e-08,
+      "processed": 8674,
+      "argmax_count": 3,
+      "origin_counts": {
+        "nonterminalSaturated": 15
+      },
+      "old_clip_PASS": null,
+      "old_clip_max_abs": null
+    },
+    {
+      "caseIndex": 1,
+      "mode": "clip",
+      "depth": 1,
+      "legal_count": 124,
+      "max_value": 0.03868896886706352,
+      "strict_first_Action": 84,
+      "source_Action": 85,
+      "source_gap": 0,
+      "processed": 124,
+      "argmax_count": 10,
+      "origin_counts": {
+        "nonterminalUnsaturated": 10
+      },
+      "old_clip_PASS": true,
+      "old_clip_max_abs": 0
+    },
+    {
+      "caseIndex": 1,
+      "mode": "clip",
+      "depth": 2,
+      "legal_count": 124,
+      "max_value": 0.06038215383887291,
+      "strict_first_Action": 84,
+      "source_Action": 85,
+      "source_gap": 0,
+      "processed": 15052,
+      "argmax_count": 10,
+      "origin_counts": {
+        "nonterminalUnsaturated": 103
+      },
+      "old_clip_PASS": true,
+      "old_clip_max_abs": 0
+    },
+    {
+      "caseIndex": 1,
+      "mode": "tanh",
+      "depth": 1,
+      "legal_count": 124,
+      "max_value": 0.03866967558860779,
+      "strict_first_Action": 84,
+      "source_Action": 85,
+      "source_gap": 0,
+      "processed": 124,
+      "argmax_count": 10,
+      "origin_counts": {
+        "nonterminalUnsaturated": 10
+      },
+      "old_clip_PASS": null,
+      "old_clip_max_abs": null
+    },
+    {
+      "caseIndex": 1,
+      "mode": "tanh",
+      "depth": 2,
+      "legal_count": 124,
+      "max_value": 0.060308877378702164,
+      "strict_first_Action": 84,
+      "source_Action": 85,
+      "source_gap": 0,
+      "processed": 15052,
+      "argmax_count": 10,
+      "origin_counts": {
+        "nonterminalUnsaturated": 103
+      },
+      "old_clip_PASS": null,
+      "old_clip_max_abs": null
+    },
+    {
+      "caseIndex": 2,
+      "mode": "clip",
+      "depth": 1,
+      "legal_count": 88,
+      "max_value": 0.03868896886706352,
+      "strict_first_Action": 82,
+      "source_Action": 83,
+      "source_gap": 0,
+      "processed": 88,
+      "argmax_count": 10,
+      "origin_counts": {
+        "nonterminalUnsaturated": 10
+      },
+      "old_clip_PASS": true,
+      "old_clip_max_abs": 0
+    },
+    {
+      "caseIndex": 2,
+      "mode": "clip",
+      "depth": 2,
+      "legal_count": 88,
+      "max_value": 0.06038215383887291,
+      "strict_first_Action": 12,
+      "source_Action": 83,
+      "source_gap": 0,
+      "processed": 7539,
+      "argmax_count": 12,
+      "origin_counts": {
+        "nonterminalUnsaturated": 100
+      },
+      "old_clip_PASS": true,
+      "old_clip_max_abs": 0
+    },
+    {
+      "caseIndex": 2,
+      "mode": "tanh",
+      "depth": 1,
+      "legal_count": 88,
+      "max_value": 0.03866967558860779,
+      "strict_first_Action": 82,
+      "source_Action": 83,
+      "source_gap": 0,
+      "processed": 88,
+      "argmax_count": 10,
+      "origin_counts": {
+        "nonterminalUnsaturated": 10
+      },
+      "old_clip_PASS": null,
+      "old_clip_max_abs": null
+    },
+    {
+      "caseIndex": 2,
+      "mode": "tanh",
+      "depth": 2,
+      "legal_count": 88,
+      "max_value": 0.060308877378702164,
+      "strict_first_Action": 12,
+      "source_Action": 83,
+      "source_gap": 0,
+      "processed": 7539,
+      "argmax_count": 12,
+      "origin_counts": {
+        "nonterminalUnsaturated": 100
+      },
+      "old_clip_PASS": null,
+      "old_clip_max_abs": null
+    },
+    {
+      "caseIndex": 3,
+      "mode": "clip",
+      "depth": 1,
+      "legal_count": 3,
+      "max_value": -0.5557376146316528,
+      "strict_first_Action": 19,
+      "source_Action": 19,
+      "source_gap": 0,
+      "processed": 3,
+      "argmax_count": 1,
+      "origin_counts": {
+        "nonterminalUnsaturated": 1
+      },
+      "old_clip_PASS": true,
+      "old_clip_max_abs": 0
+    },
+    {
+      "caseIndex": 3,
+      "mode": "clip",
+      "depth": 2,
+      "legal_count": 3,
+      "max_value": -1,
+      "strict_first_Action": 11,
+      "source_Action": 19,
+      "source_gap": 0,
+      "processed": 12,
+      "argmax_count": 3,
+      "origin_counts": {
+        "terminalLoss": 3
+      },
+      "old_clip_PASS": true,
+      "old_clip_max_abs": 0
+    },
+    {
+      "caseIndex": 3,
+      "mode": "tanh",
+      "depth": 1,
+      "legal_count": 3,
+      "max_value": -0.5048080682754517,
+      "strict_first_Action": 19,
+      "source_Action": 19,
+      "source_gap": 0,
+      "processed": 3,
+      "argmax_count": 1,
+      "origin_counts": {
+        "nonterminalUnsaturated": 1
+      },
+      "old_clip_PASS": null,
+      "old_clip_max_abs": null
+    },
+    {
+      "caseIndex": 3,
+      "mode": "tanh",
+      "depth": 2,
+      "legal_count": 3,
+      "max_value": -1,
+      "strict_first_Action": 11,
+      "source_Action": 19,
+      "source_gap": 0,
+      "processed": 12,
+      "argmax_count": 3,
+      "origin_counts": {
+        "terminalLoss": 3
+      },
+      "old_clip_PASS": null,
+      "old_clip_max_abs": null
+    }
+  ],
+  "MAX1": 1,
+  "NN": 0,
+  "wall_s": 2.206670280022081,
+  "all_old_clip_columns_equal": true,
+  "case0_depth2_tanh_source_gap": 5.960464477539063e-08,
+  "case3_depth2_origin": "terminalLoss; tanh same",
+  "interpretation": "case0 fixed-depth clip discards nonterminal ranking; depth2 chosen-action advantage tiny f32; not a strategic move-truth or strength proof",
+  "next_choice": "small same opening/time frozenNNUE vs Dclip/Dtanh only, keep both new full controls and allslots, no new training",
+  "source_stop_and_final_Git": "pending owner final receipt",
+  "goal_complete": false
+}

@@ -1,0 +1,41 @@
+{
+  "id": "quantity-fake-r1",
+  "kind": "static",
+  "UTC": "2026-10-04T00:04:27.735939+00:00",
+  "identity": {
+    "pid": 3794950,
+    "ppid": 3794907,
+    "pgrp": 3794950,
+    "tick": "32522758",
+    "RSS": 0,
+    "cmd": "",
+    "affinity": [
+      2
+    ]
+  },
+  "command": [
+    "python3",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tools/nnue-training",
+    "-p",
+    "test_quantity.py",
+    "-v"
+  ],
+  "wall_seconds": 0.052348388999234885,
+  "peak_family_RSS": 14200832,
+  "exit": 0,
+  "reason": "completed",
+  "child_waited": true,
+  "remaining": [],
+  "current_exact_identity_absent": true,
+  "samples_charged": 0,
+  "sample_cap": 0,
+  "CPU": [
+    2
+  ],
+  "GPU": 0
+}

@@ -1,0 +1,18 @@
+{
+  "attempts": [
+    {
+      "scope": "optional early-main/worker paths",
+      "exit": 2,
+      "typed": "READ_QUERY_PATH_MISSING",
+      "scientific_failure": false
+    },
+    {
+      "scope": "candidate-host paths under cleanup/rematches",
+      "rg_exit": 2,
+      "shell_exit": 0,
+      "typed": "READ_QUERY_PATH_MISSING",
+      "scientific_failure": false
+    }
+  ],
+  "repair": "actual browser served route and current source digests"
+}

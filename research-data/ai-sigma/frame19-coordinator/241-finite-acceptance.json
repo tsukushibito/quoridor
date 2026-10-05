@@ -1,0 +1,76 @@
+{
+  "at": "2026-10-05T00:02:18.768749+00:00",
+  "issue": "quoridor-4lc.241",
+  "accepted": true,
+  "scope": "dedicated saved arithmetic+sharedRuleA finite support; no newforward/deeptruth/strength",
+  "checks": [
+    {
+      "path": "research-data/ai-sigma/frame19-leaf-terminal-independent/check-leaf.py",
+      "PASS": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame19-leaf-terminal-independent/replay-leaf.cjs",
+      "PASS": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame19-leaf-terminal-independent/run-leaf.py",
+      "PASS": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame19-leaf-terminal-independent/result.json",
+      "PASS": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame19-leaf-terminal-independent/replay-result.json",
+      "PASS": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame19-leaf-terminal-independent/process.json",
+      "PASS": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame19-leaf-terminal-independent/admission.json",
+      "PASS": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame19-leaf-terminal-independent/stopped-inputs.json",
+      "PASS": true
+    }
+  ],
+  "task": "frame19-leaf-terminal-241-v1",
+  "schema": "leaf-terminal-independent-v1",
+  "old229_final_NOT_RUN_unchanged": true,
+  "worker_quantity": 0,
+  "profile_engine_reductions": {
+    "NNUE": 0.5438375402264748,
+    "distance": 0.6514316946385168
+  },
+  "allattempt": {
+    "knownNN": 391088,
+    "conservativeNN": 949280,
+    "guardian_wall_s": 38.635902317939326,
+    "unknown_attempts": [
+      {
+        "startUTC": "2026-10-04T23:35:36.254112+00:00",
+        "actual": null,
+        "conservative": 550000,
+        "inflight": true
+      },
+      {
+        "startUTC": "2026-10-04T23:41:16.148965+00:00",
+        "actual": 15597,
+        "conservative": 23789,
+        "inflight": true
+      }
+    ],
+    "attempts": 5,
+    "no_overlap_addition": true
+  },
+  "optional_whole4": {
+    "UNKNOWN": 1,
+    "W": 3
+  },
+  "owner_close_same_substantive_turn": true,
+  "backup_required": true,
+  "new_job_reset": false
+}

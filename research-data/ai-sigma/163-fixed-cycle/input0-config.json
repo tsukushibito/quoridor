@@ -1,0 +1,64 @@
+{
+  "issue": "quoridor-4lc.163",
+  "frame": 10,
+  "received_UTC": "2026-10-03T03:44:26Z",
+  "processing_deadline": "2026-10-03T04:03:00Z",
+  "newjob_deadline": "2026-10-03T03:58:00Z",
+  "submission_deadline": "2026-10-03T04:10:00Z",
+  "seed": 1979,
+  "T_ms": 500,
+  "cutoff_ms": 402,
+  "adopt_ms": 411,
+  "sample_interval_ms": 1,
+  "cycle_ms": 1000,
+  "requests": [
+    "candidate",
+    "reference",
+    "reference",
+    "candidate",
+    "candidate",
+    "reference"
+  ],
+  "warm_ordinals": [
+    0,
+    1
+  ],
+  "steady_ordinals": [
+    2,
+    3,
+    4,
+    5
+  ],
+  "planned": 12,
+  "startup": 12,
+  "hand_NN_limit": 512,
+  "NN_guard": "128 API starts per engine per job; no scientific success replacement",
+  "kind": "browser",
+  "mode": {
+    "cores": [
+      2
+    ]
+  },
+  "forecast_bytes": 8388608,
+  "pin_owned_TIDs": true,
+  "fixed_input_path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/163-fixed-cycle/inputs.json",
+  "input_SHA256": "58dee6a9f1e0da94fe90fc1bfcd3e69f3f84c1cef316efdf5b1778f34b5808c5",
+  "clock_rule": "main read stable+legal validation+immutable cache completion<=t0+402 only; public411; byD500 zero ACK received or CLOCK_UNSETTLED/next NN0; fixed1000ms next actualt0 no earlier target",
+  "difference_original": "original CP worker-cutoff/adopt reader cache replaced by main admitted cutoff cache; fixed cycle different from ordinary game opponent t0; no exactAtomicstore/CPU attribution claim",
+  "budget": {
+    "CPU": [
+      2
+    ],
+    "RAM": 4294967296,
+    "RAM_guard": 3758096384,
+    "job_seconds": 90,
+    "total_heavy_seconds": 180,
+    "management_seconds": 120,
+    "storage": 33554432,
+    "storage_guard": 29360128
+  },
+  "formal_ready": false,
+  "input_index": 0,
+  "run_id": "cycle163-input0-r1",
+  "job_out": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261003/FIXED-CYCLE/runs/cycle163-input0-r1"
+}

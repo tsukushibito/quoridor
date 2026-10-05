@@ -1,0 +1,94 @@
+{
+  "adapter_version": "frame18-dynamic-stage-v1",
+  "feature_version": "QF1-f32-STM-v1",
+  "games": {
+    "s1": {
+      "eligible": 0,
+      "rows": 1,
+      "split": "test"
+    },
+    "t1": {
+      "eligible": 2,
+      "rows": 2,
+      "split": "train"
+    },
+    "t2": {
+      "eligible": 1,
+      "rows": 1,
+      "split": "train"
+    },
+    "t3": {
+      "eligible": 0,
+      "rows": 0,
+      "split": "train"
+    },
+    "v0": {
+      "eligible": 0,
+      "rows": 0,
+      "split": "validation"
+    },
+    "v1": {
+      "eligible": 0,
+      "rows": 1,
+      "split": "validation"
+    }
+  },
+  "labels_used": false,
+  "largest_train_families": 3,
+  "plan_sha256": "802220e0765f80746b72d7b6ab4b0c9678e62c8cf0915f3936540eb943d5c2a1",
+  "planned_families": 6,
+  "planned_games": 6,
+  "planned_partition_families": {
+    "test": 1,
+    "train": 3,
+    "validation": 2
+  },
+  "planned_partition_games": {
+    "test": 1,
+    "train": 3,
+    "validation": 2
+  },
+  "rows": {
+    "s1:0": {
+      "exposure": [
+        "QF1"
+      ],
+      "group": "s1",
+      "primary_eligible": false,
+      "split": "test"
+    },
+    "t1:0": {
+      "exposure": [],
+      "group": "t1",
+      "primary_eligible": true,
+      "split": "train"
+    },
+    "t1:1": {
+      "exposure": [],
+      "group": "t1",
+      "primary_eligible": true,
+      "split": "train"
+    },
+    "t2:0": {
+      "exposure": [],
+      "group": "t2",
+      "primary_eligible": true,
+      "split": "train"
+    },
+    "v1:0": {
+      "exposure": [
+        "QF1"
+      ],
+      "group": "v1",
+      "primary_eligible": false,
+      "split": "validation"
+    }
+  },
+  "rule": "state OR history OR actual STM-f32 QF1 input; fixed maximum train",
+  "zero_eligible_games": [
+    "s1",
+    "t3",
+    "v0",
+    "v1"
+  ]
+}

@@ -1,0 +1,7 @@
+goal quoridor-4lc /197 次最大1静的判別（未実行）
+
+WD.01はtrain fitを弱めval LAST誤差/飽和を下げたが、初期/定数以下へは移らずbeststep0。これは正則化に数値が反応する観測で、正則化不足が唯一原因又は表現が正しいと証明しない。閾値を変える次学習やsweepを続けず、Bのうちsource/view/encodingの系統誤差を1つ小さく否定できるNN0 auditを次に提案する。
+
+対象は許可train/validationだけの12witness。opening-ply6群×STM P1/P2をlabel/lossを見ずrowID順に固定（不足枠は欠測、worstgame抽出0）。生成ownerのreadonly raw opening/statejournal/teacherと固定sourceから、別算術でpawns/H-V/rem/STMとQF1 P2 180度/所属交換/STM concat/distance f32bitsを導出し、保存648→QF1/実canonical network入力への対応を照合する。rootmeanについてはNN再評価せず、native/workerのroot最終統計とteacher保存の視点/sign/field bindingのsource経路を追い、terminal winner→STM zを独立算術で照合する。数値teacher/rootNNの真値・探索品質をNN0で認定しない。既shared関数だけをcheckerとoracleの両方に使って自己照合にしない。
+
+誤対応が見つかれば旧成績を保存したまま該当conversion/source差分の最小修正を新配分へ。PASSならこの12witness/source範囲の系統誤差を制約するだけで、history欠落/容量/教師noise/分布差は残る。追加test/teacher/model/NN/forward/train/GPU/game/build0、旧195testlabels読取0。CPU2単1/static60s/RAM512MiBguard448・保存128KiB以内の案。既生成側raw/archiveは必要memberだけstreamし全rawコピー0。現在197では起動せず、科学/source停止と有限引渡し後の次現在配分とする。

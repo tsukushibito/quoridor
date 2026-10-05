@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/workspaces/quoridor/.worktree/ai-sigma/tools/nnue-training/plot.py", line 83, in <module>
+    legacy(a.legacy, a.output) if a.legacy else plot_runs(a.runs, a.output, a.axis, a.metric)
+                                                ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/quoridor/.worktree/ai-sigma/tools/nnue-training/plot.py", line 10, in plot_runs
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'

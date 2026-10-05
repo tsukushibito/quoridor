@@ -1,0 +1,1839 @@
+{
+  "issue": "quoridor-4lc.163",
+  "planned": 12,
+  "saved_started": 12,
+  "classes": {
+    "completed_legal": 12
+  },
+  "hand_NN": 143,
+  "startup_NN": 12,
+  "heavy_cumulative_s": 88.70351600000001,
+  "jobs": [
+    {
+      "name": "cycle163-input0-r1",
+      "start": "2026-10-03T03:49:06.464487+00:00",
+      "end": "2026-10-03T03:49:57.202872+00:00",
+      "exit": 1,
+      "stop_reason": "signal15",
+      "peak_group_plus_runner_RSS": 1233498112,
+      "remaining": [],
+      "unknown_adopted": [],
+      "affinity_violations": [],
+      "wall_s": 50.738385
+    },
+    {
+      "name": "cycle163-input0-r2",
+      "start": "2026-10-03T03:50:41.852131+00:00",
+      "end": "2026-10-03T03:50:59.159837+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "peak_group_plus_runner_RSS": 1789329408,
+      "remaining": [],
+      "unknown_adopted": [],
+      "affinity_violations": [],
+      "wall_s": 17.307706
+    },
+    {
+      "name": "cycle163-input1-r1",
+      "start": "2026-10-03T03:51:15.308085+00:00",
+      "end": "2026-10-03T03:51:35.965510+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "peak_group_plus_runner_RSS": 1825394688,
+      "remaining": [],
+      "unknown_adopted": [],
+      "affinity_violations": [],
+      "wall_s": 20.657425
+    }
+  ],
+  "rows": [
+    {
+      "input": "initial-p1",
+      "ordinal": 0,
+      "engine": "candidate",
+      "phase": "warm",
+      "class": "completed_legal",
+      "known": true,
+      "root_context_exact": true,
+      "features648_NN137_f32bits_exact": true,
+      "main_admit": {
+        "generation": 1,
+        "sequence": 9,
+        "action": 13,
+        "read_start_ms": 1790999453338.205,
+        "stable_read_end_ms": 1790999453338.21,
+        "legal_validation_end_ms": 1790999453338.21,
+        "immutable_admit_end_ms": 1790999453338.2249,
+        "accepted": true,
+        "exactAtomicstore": null
+      },
+      "admit_offset_ms": 354.77490234375,
+      "admit_not_after402": true,
+      "chosen_action209": 13,
+      "main_adopt_sequence_equals_public": true,
+      "public_ms": 414.679931640625,
+      "public_lt500": true,
+      "zero_ACK_by_D": true,
+      "ACK_wall_ms": 418.554931640625,
+      "zero_receipt": {
+        "live_searches": 0,
+        "handles": 0,
+        "activeNN": 0,
+        "active": false,
+        "NN_attempts": 10,
+        "completed_NN": 10,
+        "at_ms": 1790999453401.895,
+        "error": "STALE_GENERATION"
+      },
+      "D_observe_offset_ms": 0.005126953125,
+      "target_lateness_ms": 0.330078125,
+      "next_t0_not_before_previous_D": true,
+      "hand_API_starts": 10,
+      "API_returns_logged": 10,
+      "API_start_return_equal_saved": true,
+      "kernelCPU": null,
+      "exactAtomicstore": null,
+      "worker_clock_interval": {
+        "lo_ms": -0.110009765625,
+        "hi_ms": 0.114892578125,
+        "mid_ms": 0.00244140625,
+        "error_ms": 0.212451171875,
+        "measured": true,
+        "samples": [
+          {
+            "start_ms": 1790999452646.94,
+            "end_ms": 1790999452662.99,
+            "worker_ms": 1790999452651.075
+          },
+          {
+            "start_ms": 1790999452662.9949,
+            "end_ms": 1790999452663.1199,
+            "worker_ms": 1790999452663.085
+          },
+          {
+            "start_ms": 1790999452663.1199,
+            "end_ms": 1790999452663.2249,
+            "worker_ms": 1790999452663.15
+          },
+          {
+            "start_ms": 1790999452663.2249,
+            "end_ms": 1790999452663.255,
+            "worker_ms": 1790999452663.2449
+          },
+          {
+            "start_ms": 1790999452663.255,
+            "end_ms": 1790999452663.28,
+            "worker_ms": 1790999452663.27
+          },
+          {
+            "start_ms": 1790999452663.28,
+            "end_ms": 1790999452663.385,
+            "worker_ms": 1790999452663.295
+          },
+          {
+            "start_ms": 1790999452663.385,
+            "end_ms": 1790999452663.44,
+            "worker_ms": 1790999452663.4
+          },
+          {
+            "start_ms": 1790999452663.44,
+            "end_ms": 1790999452663.4949,
+            "worker_ms": 1790999452663.48
+          }
+        ]
+      },
+      "fixed_cycle": {
+        "target_ms": 1790999452983.1199,
+        "input_ready_ms": 1790999452983.175,
+        "actual_t0_ms": 1790999452983.45,
+        "previous_D_ms": null,
+        "previous_zero_at_D": null,
+        "notification_possible_ms": 1790999453398.13,
+        "notification_does_not_start_search": true,
+        "next_target_ms": 1790999453983.1199,
+        "D_observation_ms": 1790999453483.455,
+        "zero_ACK_received_by_D": true,
+        "zero_receipt": {
+          "live_searches": 0,
+          "handles": 0,
+          "activeNN": 0,
+          "active": false,
+          "NN_attempts": 10,
+          "completed_NN": 10,
+          "at_ms": 1790999453401.895,
+          "error": "STALE_GENERATION"
+        },
+        "ACK_main_received_ms": 1790999453402.005,
+        "class": "completed_legal"
+      },
+      "postpublic_discard_count": 0,
+      "postpublic_NN_definite": 0,
+      "completed_backup": {
+        "root_visits": 9,
+        "raw_simulations": 9,
+        "edge_visits": 8,
+        "completed_backup": 9,
+        "NN_not_backup": true
+      },
+      "terminal_noNN": {
+        "count": 0,
+        "terminal_noNN_direct_count": 0,
+        "reference_terminal_noNN_derived": null,
+        "basis": "completed root-inclusive backups minus completed NN on last validated CP; private refusal never pseudo-leaf; reference derived terminal revisits, not independent direct counter",
+        "adopted_sequence_counts": {
+          "sequence": 9,
+          "action": 13,
+          "begin_ms": 1790999453338.025,
+          "validation_end_ms": 1790999453338.14,
+          "raw_simulations": 9,
+          "root_visits": 9,
+          "completed_backup": 9,
+          "completed_NN": 9,
+          "depth": 6,
+          "cap": false,
+          "actual_owned_seed": 1979
+        }
+      }
+    },
+    {
+      "input": "initial-p1",
+      "ordinal": 1,
+      "engine": "reference",
+      "phase": "warm",
+      "class": "completed_legal",
+      "known": true,
+      "root_context_exact": true,
+      "features648_NN137_f32bits_exact": true,
+      "main_admit": {
+        "generation": 2,
+        "sequence": 11,
+        "action": 13,
+        "read_start_ms": 1790999454387.605,
+        "stable_read_end_ms": 1790999454387.605,
+        "legal_validation_end_ms": 1790999454387.605,
+        "immutable_admit_end_ms": 1790999454387.63,
+        "accepted": true,
+        "exactAtomicstore": null
+      },
+      "admit_offset_ms": 400.48486328125,
+      "admit_not_after402": true,
+      "chosen_action209": 13,
+      "main_adopt_sequence_equals_public": true,
+      "public_ms": 412.544921875,
+      "public_lt500": true,
+      "zero_ACK_by_D": true,
+      "ACK_wall_ms": 402.85986328125,
+      "zero_receipt": {
+        "live_searches": 0,
+        "handles": 0,
+        "activeNN": 0,
+        "active": false,
+        "NN_attempts": 11,
+        "completed_NN": 11,
+        "at_ms": 1790999454389.945,
+        "error": null
+      },
+      "D_observe_offset_ms": 3.929931640625,
+      "target_lateness_ms": 4.025146484375,
+      "next_t0_not_before_previous_D": true,
+      "hand_API_starts": 11,
+      "API_returns_logged": 11,
+      "API_start_return_equal_saved": true,
+      "kernelCPU": null,
+      "exactAtomicstore": null,
+      "worker_clock_interval": {
+        "lo_ms": -0.1,
+        "hi_ms": 0.110009765625,
+        "mid_ms": 0.0050048828125,
+        "error_ms": 0.2050048828125,
+        "measured": true,
+        "samples": [
+          {
+            "start_ms": 1790999452663.53,
+            "end_ms": 1790999452663.655,
+            "worker_ms": 1790999452663.63
+          },
+          {
+            "start_ms": 1790999452663.655,
+            "end_ms": 1790999452663.68,
+            "worker_ms": 1790999452663.675
+          },
+          {
+            "start_ms": 1790999452663.68,
+            "end_ms": 1790999452663.7,
+            "worker_ms": 1790999452663.695
+          },
+          {
+            "start_ms": 1790999452663.7,
+            "end_ms": 1790999452663.76,
+            "worker_ms": 1790999452663.75
+          },
+          {
+            "start_ms": 1790999452663.76,
+            "end_ms": 1790999452663.785,
+            "worker_ms": 1790999452663.775
+          },
+          {
+            "start_ms": 1790999452663.785,
+            "end_ms": 1790999452663.795,
+            "worker_ms": 1790999452663.795
+          },
+          {
+            "start_ms": 1790999452663.795,
+            "end_ms": 1790999452663.8599,
+            "worker_ms": 1790999452663.855
+          },
+          {
+            "start_ms": 1790999452663.8599,
+            "end_ms": 1790999452663.905,
+            "worker_ms": 1790999452663.875
+          }
+        ]
+      },
+      "fixed_cycle": {
+        "target_ms": 1790999453983.1199,
+        "input_ready_ms": 1790999453987.0999,
+        "actual_t0_ms": 1790999453987.145,
+        "previous_D_ms": 1790999453483.45,
+        "previous_zero_at_D": true,
+        "notification_possible_ms": 1790999454399.69,
+        "notification_does_not_start_search": true,
+        "next_target_ms": 1790999454983.1199,
+        "D_observation_ms": 1790999454491.075,
+        "zero_ACK_received_by_D": true,
+        "zero_receipt": {
+          "live_searches": 0,
+          "handles": 0,
+          "activeNN": 0,
+          "active": false,
+          "NN_attempts": 11,
+          "completed_NN": 11,
+          "at_ms": 1790999454389.945,
+          "error": null
+        },
+        "ACK_main_received_ms": 1790999454390.005,
+        "class": "completed_legal"
+      },
+      "postpublic_discard_count": 0,
+      "postpublic_NN_definite": 0,
+      "completed_backup": {
+        "root_visits": 11,
+        "raw_simulations": 10,
+        "edge_visits": 10,
+        "completed_backup": 11,
+        "NN_not_backup": true
+      },
+      "terminal_noNN": {
+        "count": 0,
+        "terminal_noNN_direct_count": null,
+        "reference_terminal_noNN_derived": 0,
+        "basis": "completed root-inclusive backups minus completed NN on last validated CP; private refusal never pseudo-leaf; reference derived terminal revisits, not independent direct counter",
+        "adopted_sequence_counts": {
+          "sequence": 11,
+          "action": 13,
+          "begin_ms": 1790999454385.445,
+          "validation_end_ms": 1790999454385.58,
+          "raw_simulations": 10,
+          "root_visits": 11,
+          "completed_backup": 11,
+          "completed_NN": 11,
+          "depth": null,
+          "cap": null,
+          "actual_owned_seed": 1979
+        }
+      }
+    },
+    {
+      "input": "initial-p1",
+      "ordinal": 2,
+      "engine": "reference",
+      "phase": "steady",
+      "class": "completed_legal",
+      "known": true,
+      "root_context_exact": true,
+      "features648_NN137_f32bits_exact": true,
+      "main_admit": {
+        "generation": 3,
+        "sequence": 10,
+        "action": 13,
+        "read_start_ms": 1790999455373.09,
+        "stable_read_end_ms": 1790999455373.095,
+        "legal_validation_end_ms": 1790999455373.095,
+        "immutable_admit_end_ms": 1790999455373.1099,
+        "accepted": true,
+        "exactAtomicstore": null
+      },
+      "admit_offset_ms": 389.83984375,
+      "admit_not_after402": true,
+      "chosen_action209": 13,
+      "main_adopt_sequence_equals_public": true,
+      "public_ms": 413.925048828125,
+      "public_lt500": true,
+      "zero_ACK_by_D": true,
+      "ACK_wall_ms": 426.5048828125,
+      "zero_receipt": {
+        "live_searches": 0,
+        "handles": 0,
+        "activeNN": 0,
+        "active": false,
+        "NN_attempts": 11,
+        "completed_NN": 11,
+        "at_ms": 1790999455409.73,
+        "error": "STALE_GENERATION"
+      },
+      "D_observe_offset_ms": 0.119873046875,
+      "target_lateness_ms": 0.150146484375,
+      "next_t0_not_before_previous_D": true,
+      "hand_API_starts": 11,
+      "API_returns_logged": 11,
+      "API_start_return_equal_saved": true,
+      "kernelCPU": null,
+      "exactAtomicstore": null,
+      "worker_clock_interval": {
+        "lo_ms": -0.1,
+        "hi_ms": 0.110009765625,
+        "mid_ms": 0.0050048828125,
+        "error_ms": 0.2050048828125,
+        "measured": true,
+        "samples": [
+          {
+            "start_ms": 1790999452663.53,
+            "end_ms": 1790999452663.655,
+            "worker_ms": 1790999452663.63
+          },
+          {
+            "start_ms": 1790999452663.655,
+            "end_ms": 1790999452663.68,
+            "worker_ms": 1790999452663.675
+          },
+          {
+            "start_ms": 1790999452663.68,
+            "end_ms": 1790999452663.7,
+            "worker_ms": 1790999452663.695
+          },
+          {
+            "start_ms": 1790999452663.7,
+            "end_ms": 1790999452663.76,
+            "worker_ms": 1790999452663.75
+          },
+          {
+            "start_ms": 1790999452663.76,
+            "end_ms": 1790999452663.785,
+            "worker_ms": 1790999452663.775
+          },
+          {
+            "start_ms": 1790999452663.785,
+            "end_ms": 1790999452663.795,
+            "worker_ms": 1790999452663.795
+          },
+          {
+            "start_ms": 1790999452663.795,
+            "end_ms": 1790999452663.8599,
+            "worker_ms": 1790999452663.855
+          },
+          {
+            "start_ms": 1790999452663.8599,
+            "end_ms": 1790999452663.905,
+            "worker_ms": 1790999452663.875
+          }
+        ]
+      },
+      "fixed_cycle": {
+        "target_ms": 1790999454983.1199,
+        "input_ready_ms": 1790999454983.25,
+        "actual_t0_ms": 1790999454983.27,
+        "previous_D_ms": 1790999454487.145,
+        "previous_zero_at_D": true,
+        "notification_possible_ms": 1790999455397.195,
+        "notification_does_not_start_search": true,
+        "next_target_ms": 1790999455983.1199,
+        "D_observation_ms": 1790999455483.39,
+        "zero_ACK_received_by_D": true,
+        "zero_receipt": {
+          "live_searches": 0,
+          "handles": 0,
+          "activeNN": 0,
+          "active": false,
+          "NN_attempts": 11,
+          "completed_NN": 11,
+          "at_ms": 1790999455409.73,
+          "error": "STALE_GENERATION"
+        },
+        "ACK_main_received_ms": 1790999455409.775,
+        "class": "completed_legal"
+      },
+      "postpublic_discard_count": 1,
+      "postpublic_NN_definite": 0,
+      "completed_backup": {
+        "root_visits": 10,
+        "raw_simulations": 9,
+        "edge_visits": 9,
+        "completed_backup": 10,
+        "NN_not_backup": true
+      },
+      "terminal_noNN": {
+        "count": 0,
+        "terminal_noNN_direct_count": null,
+        "reference_terminal_noNN_derived": 0,
+        "basis": "completed root-inclusive backups minus completed NN on last validated CP; private refusal never pseudo-leaf; reference derived terminal revisits, not independent direct counter",
+        "adopted_sequence_counts": {
+          "sequence": 10,
+          "action": 13,
+          "begin_ms": 1790999455371.165,
+          "validation_end_ms": 1790999455371.355,
+          "raw_simulations": 9,
+          "root_visits": 10,
+          "completed_backup": 10,
+          "completed_NN": 10,
+          "depth": null,
+          "cap": null,
+          "actual_owned_seed": 1979
+        }
+      }
+    },
+    {
+      "input": "initial-p1",
+      "ordinal": 3,
+      "engine": "candidate",
+      "phase": "steady",
+      "class": "completed_legal",
+      "known": true,
+      "root_context_exact": true,
+      "features648_NN137_f32bits_exact": true,
+      "main_admit": {
+        "generation": 4,
+        "sequence": 13,
+        "action": 13,
+        "read_start_ms": 1790999456370.875,
+        "stable_read_end_ms": 1790999456370.88,
+        "legal_validation_end_ms": 1790999456370.88,
+        "immutable_admit_end_ms": 1790999456370.9,
+        "accepted": true,
+        "exactAtomicstore": null
+      },
+      "admit_offset_ms": 383.284912109375,
+      "admit_not_after402": true,
+      "chosen_action209": 13,
+      "main_adopt_sequence_equals_public": true,
+      "public_ms": 412.594970703125,
+      "public_lt500": true,
+      "zero_ACK_by_D": true,
+      "ACK_wall_ms": 441.114990234375,
+      "zero_receipt": {
+        "live_searches": 0,
+        "handles": 0,
+        "activeNN": 0,
+        "active": false,
+        "NN_attempts": 14,
+        "completed_NN": 13,
+        "at_ms": 1790999456428.615,
+        "error": "STALE_GENERATION"
+      },
+      "D_observe_offset_ms": 3.8798828125,
+      "target_lateness_ms": 4.4951171875,
+      "next_t0_not_before_previous_D": true,
+      "hand_API_starts": 14,
+      "API_returns_logged": 14,
+      "API_start_return_equal_saved": true,
+      "kernelCPU": null,
+      "exactAtomicstore": null,
+      "worker_clock_interval": {
+        "lo_ms": -0.110009765625,
+        "hi_ms": 0.114892578125,
+        "mid_ms": 0.00244140625,
+        "error_ms": 0.212451171875,
+        "measured": true,
+        "samples": [
+          {
+            "start_ms": 1790999452646.94,
+            "end_ms": 1790999452662.99,
+            "worker_ms": 1790999452651.075
+          },
+          {
+            "start_ms": 1790999452662.9949,
+            "end_ms": 1790999452663.1199,
+            "worker_ms": 1790999452663.085
+          },
+          {
+            "start_ms": 1790999452663.1199,
+            "end_ms": 1790999452663.2249,
+            "worker_ms": 1790999452663.15
+          },
+          {
+            "start_ms": 1790999452663.2249,
+            "end_ms": 1790999452663.255,
+            "worker_ms": 1790999452663.2449
+          },
+          {
+            "start_ms": 1790999452663.255,
+            "end_ms": 1790999452663.28,
+            "worker_ms": 1790999452663.27
+          },
+          {
+            "start_ms": 1790999452663.28,
+            "end_ms": 1790999452663.385,
+            "worker_ms": 1790999452663.295
+          },
+          {
+            "start_ms": 1790999452663.385,
+            "end_ms": 1790999452663.44,
+            "worker_ms": 1790999452663.4
+          },
+          {
+            "start_ms": 1790999452663.44,
+            "end_ms": 1790999452663.4949,
+            "worker_ms": 1790999452663.48
+          }
+        ]
+      },
+      "fixed_cycle": {
+        "target_ms": 1790999455983.1199,
+        "input_ready_ms": 1790999455987.5999,
+        "actual_t0_ms": 1790999455987.615,
+        "previous_D_ms": 1790999455483.27,
+        "previous_zero_at_D": true,
+        "notification_possible_ms": 1790999456400.21,
+        "notification_does_not_start_search": true,
+        "next_target_ms": 1790999456983.1199,
+        "D_observation_ms": 1790999456491.4949,
+        "zero_ACK_received_by_D": true,
+        "zero_receipt": {
+          "live_searches": 0,
+          "handles": 0,
+          "activeNN": 0,
+          "active": false,
+          "NN_attempts": 14,
+          "completed_NN": 13,
+          "at_ms": 1790999456428.615,
+          "error": "STALE_GENERATION"
+        },
+        "ACK_main_received_ms": 1790999456428.73,
+        "class": "completed_legal"
+      },
+      "postpublic_discard_count": 1,
+      "postpublic_NN_definite": 0,
+      "completed_backup": {
+        "root_visits": 13,
+        "raw_simulations": 13,
+        "edge_visits": 12,
+        "completed_backup": 13,
+        "NN_not_backup": true
+      },
+      "terminal_noNN": {
+        "count": 0,
+        "terminal_noNN_direct_count": 0,
+        "reference_terminal_noNN_derived": null,
+        "basis": "completed root-inclusive backups minus completed NN on last validated CP; private refusal never pseudo-leaf; reference derived terminal revisits, not independent direct counter",
+        "adopted_sequence_counts": {
+          "sequence": 13,
+          "action": 13,
+          "begin_ms": 1790999456367.74,
+          "validation_end_ms": 1790999456367.855,
+          "raw_simulations": 13,
+          "root_visits": 13,
+          "completed_backup": 13,
+          "completed_NN": 13,
+          "depth": 7,
+          "cap": false,
+          "actual_owned_seed": 1979
+        }
+      }
+    },
+    {
+      "input": "initial-p1",
+      "ordinal": 4,
+      "engine": "candidate",
+      "phase": "steady",
+      "class": "completed_legal",
+      "known": true,
+      "root_context_exact": true,
+      "features648_NN137_f32bits_exact": true,
+      "main_admit": {
+        "generation": 5,
+        "sequence": 10,
+        "action": 13,
+        "read_start_ms": 1790999457375.915,
+        "stable_read_end_ms": 1790999457375.92,
+        "legal_validation_end_ms": 1790999457375.92,
+        "immutable_admit_end_ms": 1790999457375.945,
+        "accepted": true,
+        "exactAtomicstore": null
+      },
+      "admit_offset_ms": 390.380126953125,
+      "admit_not_after402": true,
+      "chosen_action209": 13,
+      "main_adopt_sequence_equals_public": true,
+      "public_ms": 410.534912109375,
+      "public_lt500": true,
+      "zero_ACK_by_D": true,
+      "ACK_wall_ms": 418.989990234375,
+      "zero_receipt": {
+        "live_searches": 0,
+        "handles": 0,
+        "activeNN": 0,
+        "active": false,
+        "NN_attempts": 11,
+        "completed_NN": 10,
+        "at_ms": 1790999457404.535,
+        "error": "STALE_GENERATION"
+      },
+      "D_observe_offset_ms": 3.8349609375,
+      "target_lateness_ms": 2.445068359375,
+      "next_t0_not_before_previous_D": true,
+      "hand_API_starts": 11,
+      "API_returns_logged": 11,
+      "API_start_return_equal_saved": true,
+      "kernelCPU": null,
+      "exactAtomicstore": null,
+      "worker_clock_interval": {
+        "lo_ms": -0.110009765625,
+        "hi_ms": 0.114892578125,
+        "mid_ms": 0.00244140625,
+        "error_ms": 0.212451171875,
+        "measured": true,
+        "samples": [
+          {
+            "start_ms": 1790999452646.94,
+            "end_ms": 1790999452662.99,
+            "worker_ms": 1790999452651.075
+          },
+          {
+            "start_ms": 1790999452662.9949,
+            "end_ms": 1790999452663.1199,
+            "worker_ms": 1790999452663.085
+          },
+          {
+            "start_ms": 1790999452663.1199,
+            "end_ms": 1790999452663.2249,
+            "worker_ms": 1790999452663.15
+          },
+          {
+            "start_ms": 1790999452663.2249,
+            "end_ms": 1790999452663.255,
+            "worker_ms": 1790999452663.2449
+          },
+          {
+            "start_ms": 1790999452663.255,
+            "end_ms": 1790999452663.28,
+            "worker_ms": 1790999452663.27
+          },
+          {
+            "start_ms": 1790999452663.28,
+            "end_ms": 1790999452663.385,
+            "worker_ms": 1790999452663.295
+          },
+          {
+            "start_ms": 1790999452663.385,
+            "end_ms": 1790999452663.44,
+            "worker_ms": 1790999452663.4
+          },
+          {
+            "start_ms": 1790999452663.44,
+            "end_ms": 1790999452663.4949,
+            "worker_ms": 1790999452663.48
+          }
+        ]
+      },
+      "fixed_cycle": {
+        "target_ms": 1790999456983.1199,
+        "input_ready_ms": 1790999456985.55,
+        "actual_t0_ms": 1790999456985.565,
+        "previous_D_ms": 1790999456487.615,
+        "previous_zero_at_D": true,
+        "notification_possible_ms": 1790999457396.0999,
+        "notification_does_not_start_search": true,
+        "next_target_ms": 1790999457983.1199,
+        "D_observation_ms": 1790999457489.4,
+        "zero_ACK_received_by_D": true,
+        "zero_receipt": {
+          "live_searches": 0,
+          "handles": 0,
+          "activeNN": 0,
+          "active": false,
+          "NN_attempts": 11,
+          "completed_NN": 10,
+          "at_ms": 1790999457404.535,
+          "error": "STALE_GENERATION"
+        },
+        "ACK_main_received_ms": 1790999457404.555,
+        "class": "completed_legal"
+      },
+      "postpublic_discard_count": 1,
+      "postpublic_NN_definite": 0,
+      "completed_backup": {
+        "root_visits": 10,
+        "raw_simulations": 10,
+        "edge_visits": 9,
+        "completed_backup": 10,
+        "NN_not_backup": true
+      },
+      "terminal_noNN": {
+        "count": 0,
+        "terminal_noNN_direct_count": 0,
+        "reference_terminal_noNN_derived": null,
+        "basis": "completed root-inclusive backups minus completed NN on last validated CP; private refusal never pseudo-leaf; reference derived terminal revisits, not independent direct counter",
+        "adopted_sequence_counts": {
+          "sequence": 10,
+          "action": 13,
+          "begin_ms": 1790999457372.3098,
+          "validation_end_ms": 1790999457372.47,
+          "raw_simulations": 10,
+          "root_visits": 10,
+          "completed_backup": 10,
+          "completed_NN": 10,
+          "depth": 6,
+          "cap": false,
+          "actual_owned_seed": 1979
+        }
+      }
+    },
+    {
+      "input": "initial-p1",
+      "ordinal": 5,
+      "engine": "reference",
+      "phase": "steady",
+      "class": "completed_legal",
+      "known": true,
+      "root_context_exact": true,
+      "features648_NN137_f32bits_exact": true,
+      "main_admit": {
+        "generation": 6,
+        "sequence": 14,
+        "action": 13,
+        "read_start_ms": 1790999458369.2349,
+        "stable_read_end_ms": 1790999458369.2449,
+        "legal_validation_end_ms": 1790999458369.2449,
+        "immutable_admit_end_ms": 1790999458369.26,
+        "accepted": true,
+        "exactAtomicstore": null
+      },
+      "admit_offset_ms": 385.324951171875,
+      "admit_not_after402": true,
+      "chosen_action209": 13,
+      "main_adopt_sequence_equals_public": true,
+      "public_ms": 413.46484375,
+      "public_lt500": true,
+      "zero_ACK_by_D": true,
+      "ACK_wall_ms": 411.73486328125,
+      "zero_receipt": {
+        "live_searches": 0,
+        "handles": 0,
+        "activeNN": 0,
+        "active": false,
+        "NN_attempts": 15,
+        "completed_NN": 15,
+        "at_ms": 1790999458395.615,
+        "error": null
+      },
+      "D_observe_offset_ms": 4.0048828125,
+      "target_lateness_ms": 0.815185546875,
+      "next_t0_not_before_previous_D": true,
+      "hand_API_starts": 15,
+      "API_returns_logged": 15,
+      "API_start_return_equal_saved": true,
+      "kernelCPU": null,
+      "exactAtomicstore": null,
+      "worker_clock_interval": {
+        "lo_ms": -0.1,
+        "hi_ms": 0.110009765625,
+        "mid_ms": 0.0050048828125,
+        "error_ms": 0.2050048828125,
+        "measured": true,
+        "samples": [
+          {
+            "start_ms": 1790999452663.53,
+            "end_ms": 1790999452663.655,
+            "worker_ms": 1790999452663.63
+          },
+          {
+            "start_ms": 1790999452663.655,
+            "end_ms": 1790999452663.68,
+            "worker_ms": 1790999452663.675
+          },
+          {
+            "start_ms": 1790999452663.68,
+            "end_ms": 1790999452663.7,
+            "worker_ms": 1790999452663.695
+          },
+          {
+            "start_ms": 1790999452663.7,
+            "end_ms": 1790999452663.76,
+            "worker_ms": 1790999452663.75
+          },
+          {
+            "start_ms": 1790999452663.76,
+            "end_ms": 1790999452663.785,
+            "worker_ms": 1790999452663.775
+          },
+          {
+            "start_ms": 1790999452663.785,
+            "end_ms": 1790999452663.795,
+            "worker_ms": 1790999452663.795
+          },
+          {
+            "start_ms": 1790999452663.795,
+            "end_ms": 1790999452663.8599,
+            "worker_ms": 1790999452663.855
+          },
+          {
+            "start_ms": 1790999452663.8599,
+            "end_ms": 1790999452663.905,
+            "worker_ms": 1790999452663.875
+          }
+        ]
+      },
+      "fixed_cycle": {
+        "target_ms": 1790999457983.1199,
+        "input_ready_ms": 1790999457983.925,
+        "actual_t0_ms": 1790999457983.935,
+        "previous_D_ms": 1790999457485.565,
+        "previous_zero_at_D": true,
+        "notification_possible_ms": 1790999458397.4,
+        "notification_does_not_start_search": true,
+        "next_target_ms": 1790999458983.1199,
+        "D_observation_ms": 1790999458487.94,
+        "zero_ACK_received_by_D": true,
+        "zero_receipt": {
+          "live_searches": 0,
+          "handles": 0,
+          "activeNN": 0,
+          "active": false,
+          "NN_attempts": 15,
+          "completed_NN": 15,
+          "at_ms": 1790999458395.615,
+          "error": null
+        },
+        "ACK_main_received_ms": 1790999458395.67,
+        "class": "completed_legal"
+      },
+      "postpublic_discard_count": 0,
+      "postpublic_NN_definite": 0,
+      "completed_backup": {
+        "root_visits": 14,
+        "raw_simulations": 13,
+        "edge_visits": 13,
+        "completed_backup": 14,
+        "NN_not_backup": true
+      },
+      "terminal_noNN": {
+        "count": 0,
+        "terminal_noNN_direct_count": null,
+        "reference_terminal_noNN_derived": 0,
+        "basis": "completed root-inclusive backups minus completed NN on last validated CP; private refusal never pseudo-leaf; reference derived terminal revisits, not independent direct counter",
+        "adopted_sequence_counts": {
+          "sequence": 14,
+          "action": 13,
+          "begin_ms": 1790999458365.275,
+          "validation_end_ms": 1790999458365.395,
+          "raw_simulations": 13,
+          "root_visits": 14,
+          "completed_backup": 14,
+          "completed_NN": 14,
+          "depth": null,
+          "cap": null,
+          "actual_owned_seed": 1979
+        }
+      }
+    },
+    {
+      "input": "asym-hv-p2",
+      "ordinal": 0,
+      "engine": "candidate",
+      "phase": "warm",
+      "class": "completed_legal",
+      "known": true,
+      "root_context_exact": true,
+      "features648_NN137_f32bits_exact": true,
+      "main_admit": {
+        "generation": 1,
+        "sequence": 7,
+        "action": 67,
+        "read_start_ms": 1790999488577.71,
+        "stable_read_end_ms": 1790999488577.725,
+        "legal_validation_end_ms": 1790999488577.725,
+        "immutable_admit_end_ms": 1790999488577.7651,
+        "accepted": true,
+        "exactAtomicstore": null
+      },
+      "admit_offset_ms": 354.969970703125,
+      "admit_not_after402": true,
+      "chosen_action209": 67,
+      "main_adopt_sequence_equals_public": true,
+      "public_ms": 415.169921875,
+      "public_lt500": true,
+      "zero_ACK_by_D": true,
+      "ACK_wall_ms": 411.324951171875,
+      "zero_receipt": {
+        "live_searches": 0,
+        "handles": 0,
+        "activeNN": 0,
+        "active": false,
+        "NN_attempts": 8,
+        "completed_NN": 8,
+        "at_ms": 1790999488634.0298,
+        "error": null
+      },
+      "D_observe_offset_ms": 3.769775390625,
+      "target_lateness_ms": 6.75,
+      "next_t0_not_before_previous_D": true,
+      "hand_API_starts": 8,
+      "API_returns_logged": 8,
+      "API_start_return_equal_saved": true,
+      "kernelCPU": null,
+      "exactAtomicstore": null,
+      "worker_clock_interval": {
+        "lo_ms": -0.11513671875,
+        "hi_ms": 0.1048828125,
+        "mid_ms": -0.005126953125,
+        "error_ms": 0.210009765625,
+        "measured": true,
+        "samples": [
+          {
+            "start_ms": 1790999487677.22,
+            "end_ms": 1790999487726.955,
+            "worker_ms": 1790999487677.505
+          },
+          {
+            "start_ms": 1790999487726.965,
+            "end_ms": 1790999487727.96,
+            "worker_ms": 1790999487727.9148
+          },
+          {
+            "start_ms": 1790999487727.96,
+            "end_ms": 1790999487728.855,
+            "worker_ms": 1790999487728
+          },
+          {
+            "start_ms": 1790999487728.855,
+            "end_ms": 1790999487728.9202,
+            "worker_ms": 1790999487728.8948
+          },
+          {
+            "start_ms": 1790999487728.9202,
+            "end_ms": 1790999487728.95,
+            "worker_ms": 1790999487728.93
+          },
+          {
+            "start_ms": 1790999487728.95,
+            "end_ms": 1790999487728.975,
+            "worker_ms": 1790999487728.96
+          },
+          {
+            "start_ms": 1790999487728.975,
+            "end_ms": 1790999487729.0151,
+            "worker_ms": 1790999487728.99
+          },
+          {
+            "start_ms": 1790999487729.02,
+            "end_ms": 1790999487729.0452,
+            "worker_ms": 1790999487729.025
+          }
+        ]
+      },
+      "fixed_cycle": {
+        "target_ms": 1790999488216.0452,
+        "input_ready_ms": 1790999488222.4202,
+        "actual_t0_ms": 1790999488222.7952,
+        "previous_D_ms": null,
+        "previous_zero_at_D": null,
+        "notification_possible_ms": 1790999488637.965,
+        "notification_does_not_start_search": true,
+        "next_target_ms": 1790999489216.0452,
+        "D_observation_ms": 1790999488726.565,
+        "zero_ACK_received_by_D": true,
+        "zero_receipt": {
+          "live_searches": 0,
+          "handles": 0,
+          "activeNN": 0,
+          "active": false,
+          "NN_attempts": 8,
+          "completed_NN": 8,
+          "at_ms": 1790999488634.0298,
+          "error": null
+        },
+        "ACK_main_received_ms": 1790999488634.12,
+        "class": "completed_legal"
+      },
+      "postpublic_discard_count": 0,
+      "postpublic_NN_definite": 0,
+      "completed_backup": {
+        "root_visits": 7,
+        "raw_simulations": 7,
+        "edge_visits": 6,
+        "completed_backup": 7,
+        "NN_not_backup": true
+      },
+      "terminal_noNN": {
+        "count": 0,
+        "terminal_noNN_direct_count": 0,
+        "reference_terminal_noNN_derived": null,
+        "basis": "completed root-inclusive backups minus completed NN on last validated CP; private refusal never pseudo-leaf; reference derived terminal revisits, not independent direct counter",
+        "adopted_sequence_counts": {
+          "sequence": 7,
+          "action": 67,
+          "begin_ms": 1790999488570.575,
+          "validation_end_ms": 1790999488577.575,
+          "raw_simulations": 7,
+          "root_visits": 7,
+          "completed_backup": 7,
+          "completed_NN": 7,
+          "depth": 6,
+          "cap": false,
+          "actual_owned_seed": 1979
+        }
+      }
+    },
+    {
+      "input": "asym-hv-p2",
+      "ordinal": 1,
+      "engine": "reference",
+      "phase": "warm",
+      "class": "completed_legal",
+      "known": true,
+      "root_context_exact": true,
+      "features648_NN137_f32bits_exact": true,
+      "main_admit": {
+        "generation": 2,
+        "sequence": 11,
+        "action": 67,
+        "read_start_ms": 1790999489602.05,
+        "stable_read_end_ms": 1790999489602.06,
+        "legal_validation_end_ms": 1790999489602.06,
+        "immutable_admit_end_ms": 1790999489602.08,
+        "accepted": true,
+        "exactAtomicstore": null
+      },
+      "admit_offset_ms": 380.35498046875,
+      "admit_not_after402": true,
+      "chosen_action209": 67,
+      "main_adopt_sequence_equals_public": true,
+      "public_ms": 414.77001953125,
+      "public_lt500": true,
+      "zero_ACK_by_D": true,
+      "ACK_wall_ms": 423.494873046875,
+      "zero_receipt": {
+        "live_searches": 0,
+        "handles": 0,
+        "activeNN": 0,
+        "active": false,
+        "NN_attempts": 12,
+        "completed_NN": 12,
+        "at_ms": 1790999489645.105,
+        "error": "STALE_GENERATION"
+      },
+      "D_observe_offset_ms": 4.10986328125,
+      "target_lateness_ms": 5.679931640625,
+      "next_t0_not_before_previous_D": true,
+      "hand_API_starts": 12,
+      "API_returns_logged": 12,
+      "API_start_return_equal_saved": true,
+      "kernelCPU": null,
+      "exactAtomicstore": null,
+      "worker_clock_interval": {
+        "lo_ms": -0.110009765625,
+        "hi_ms": 0.1048828125,
+        "mid_ms": -0.0025634765625,
+        "error_ms": 0.2074462890625,
+        "measured": true,
+        "samples": [
+          {
+            "start_ms": 1790999487729.105,
+            "end_ms": 1790999487729.465,
+            "worker_ms": 1790999487729.415
+          },
+          {
+            "start_ms": 1790999487729.475,
+            "end_ms": 1790999487729.51,
+            "worker_ms": 1790999487729.49
+          },
+          {
+            "start_ms": 1790999487729.51,
+            "end_ms": 1790999487729.5251,
+            "worker_ms": 1790999487729.5151
+          },
+          {
+            "start_ms": 1790999487729.5251,
+            "end_ms": 1790999487729.555,
+            "worker_ms": 1790999487729.53
+          },
+          {
+            "start_ms": 1790999487729.555,
+            "end_ms": 1790999487729.6,
+            "worker_ms": 1790999487729.5852
+          },
+          {
+            "start_ms": 1790999487729.6,
+            "end_ms": 1790999487729.62,
+            "worker_ms": 1790999487729.605
+          },
+          {
+            "start_ms": 1790999487729.62,
+            "end_ms": 1790999487729.6401,
+            "worker_ms": 1790999487729.625
+          },
+          {
+            "start_ms": 1790999487729.6401,
+            "end_ms": 1790999487729.705,
+            "worker_ms": 1790999487729.6902
+          }
+        ]
+      },
+      "fixed_cycle": {
+        "target_ms": 1790999489216.0452,
+        "input_ready_ms": 1790999489221.685,
+        "actual_t0_ms": 1790999489221.725,
+        "previous_D_ms": 1790999488722.7952,
+        "previous_zero_at_D": true,
+        "notification_possible_ms": 1790999489636.495,
+        "notification_does_not_start_search": true,
+        "next_target_ms": 1790999490216.0452,
+        "D_observation_ms": 1790999489725.835,
+        "zero_ACK_received_by_D": true,
+        "zero_receipt": {
+          "live_searches": 0,
+          "handles": 0,
+          "activeNN": 0,
+          "active": false,
+          "NN_attempts": 12,
+          "completed_NN": 12,
+          "at_ms": 1790999489645.105,
+          "error": "STALE_GENERATION"
+        },
+        "ACK_main_received_ms": 1790999489645.22,
+        "class": "completed_legal"
+      },
+      "postpublic_discard_count": 1,
+      "postpublic_NN_definite": 0,
+      "completed_backup": {
+        "root_visits": 11,
+        "raw_simulations": 10,
+        "edge_visits": 10,
+        "completed_backup": 11,
+        "NN_not_backup": true
+      },
+      "terminal_noNN": {
+        "count": 0,
+        "terminal_noNN_direct_count": null,
+        "reference_terminal_noNN_derived": 0,
+        "basis": "completed root-inclusive backups minus completed NN on last validated CP; private refusal never pseudo-leaf; reference derived terminal revisits, not independent direct counter",
+        "adopted_sequence_counts": {
+          "sequence": 11,
+          "action": 67,
+          "begin_ms": 1790999489598.52,
+          "validation_end_ms": 1790999489598.6501,
+          "raw_simulations": 10,
+          "root_visits": 11,
+          "completed_backup": 11,
+          "completed_NN": 11,
+          "depth": null,
+          "cap": null,
+          "actual_owned_seed": 1979
+        }
+      }
+    },
+    {
+      "input": "asym-hv-p2",
+      "ordinal": 2,
+      "engine": "reference",
+      "phase": "steady",
+      "class": "completed_legal",
+      "known": true,
+      "root_context_exact": true,
+      "features648_NN137_f32bits_exact": true,
+      "main_admit": {
+        "generation": 3,
+        "sequence": 14,
+        "action": 67,
+        "read_start_ms": 1790999490620.175,
+        "stable_read_end_ms": 1790999490620.18,
+        "legal_validation_end_ms": 1790999490620.18,
+        "immutable_admit_end_ms": 1790999490620.195,
+        "accepted": true,
+        "exactAtomicstore": null
+      },
+      "admit_offset_ms": 396.324951171875,
+      "admit_not_after402": true,
+      "chosen_action209": 67,
+      "main_adopt_sequence_equals_public": true,
+      "public_ms": 411.08984375,
+      "public_lt500": true,
+      "zero_ACK_by_D": true,
+      "ACK_wall_ms": 431.27001953125,
+      "zero_receipt": {
+        "live_searches": 0,
+        "handles": 0,
+        "activeNN": 0,
+        "active": false,
+        "NN_attempts": 15,
+        "completed_NN": 15,
+        "at_ms": 1790999490655.105,
+        "error": "STALE_GENERATION"
+      },
+      "D_observe_offset_ms": 3.43994140625,
+      "target_lateness_ms": 7.824951171875,
+      "next_t0_not_before_previous_D": true,
+      "hand_API_starts": 15,
+      "API_returns_logged": 15,
+      "API_start_return_equal_saved": true,
+      "kernelCPU": null,
+      "exactAtomicstore": null,
+      "worker_clock_interval": {
+        "lo_ms": -0.110009765625,
+        "hi_ms": 0.1048828125,
+        "mid_ms": -0.0025634765625,
+        "error_ms": 0.2074462890625,
+        "measured": true,
+        "samples": [
+          {
+            "start_ms": 1790999487729.105,
+            "end_ms": 1790999487729.465,
+            "worker_ms": 1790999487729.415
+          },
+          {
+            "start_ms": 1790999487729.475,
+            "end_ms": 1790999487729.51,
+            "worker_ms": 1790999487729.49
+          },
+          {
+            "start_ms": 1790999487729.51,
+            "end_ms": 1790999487729.5251,
+            "worker_ms": 1790999487729.5151
+          },
+          {
+            "start_ms": 1790999487729.5251,
+            "end_ms": 1790999487729.555,
+            "worker_ms": 1790999487729.53
+          },
+          {
+            "start_ms": 1790999487729.555,
+            "end_ms": 1790999487729.6,
+            "worker_ms": 1790999487729.5852
+          },
+          {
+            "start_ms": 1790999487729.6,
+            "end_ms": 1790999487729.62,
+            "worker_ms": 1790999487729.605
+          },
+          {
+            "start_ms": 1790999487729.62,
+            "end_ms": 1790999487729.6401,
+            "worker_ms": 1790999487729.625
+          },
+          {
+            "start_ms": 1790999487729.6401,
+            "end_ms": 1790999487729.705,
+            "worker_ms": 1790999487729.6902
+          }
+        ]
+      },
+      "fixed_cycle": {
+        "target_ms": 1790999490216.0452,
+        "input_ready_ms": 1790999490223.85,
+        "actual_t0_ms": 1790999490223.87,
+        "previous_D_ms": 1790999489721.725,
+        "previous_zero_at_D": true,
+        "notification_possible_ms": 1790999490634.96,
+        "notification_does_not_start_search": true,
+        "next_target_ms": 1790999491216.0452,
+        "D_observation_ms": 1790999490727.31,
+        "zero_ACK_received_by_D": true,
+        "zero_receipt": {
+          "live_searches": 0,
+          "handles": 0,
+          "activeNN": 0,
+          "active": false,
+          "NN_attempts": 15,
+          "completed_NN": 15,
+          "at_ms": 1790999490655.105,
+          "error": "STALE_GENERATION"
+        },
+        "ACK_main_received_ms": 1790999490655.1401,
+        "class": "completed_legal"
+      },
+      "postpublic_discard_count": 1,
+      "postpublic_NN_definite": 0,
+      "completed_backup": {
+        "root_visits": 14,
+        "raw_simulations": 13,
+        "edge_visits": 13,
+        "completed_backup": 14,
+        "NN_not_backup": true
+      },
+      "terminal_noNN": {
+        "count": 0,
+        "terminal_noNN_direct_count": null,
+        "reference_terminal_noNN_derived": 0,
+        "basis": "completed root-inclusive backups minus completed NN on last validated CP; private refusal never pseudo-leaf; reference derived terminal revisits, not independent direct counter",
+        "adopted_sequence_counts": {
+          "sequence": 14,
+          "action": 67,
+          "begin_ms": 1790999490616.435,
+          "validation_end_ms": 1790999490619.9502,
+          "raw_simulations": 13,
+          "root_visits": 14,
+          "completed_backup": 14,
+          "completed_NN": 14,
+          "depth": null,
+          "cap": null,
+          "actual_owned_seed": 1979
+        }
+      }
+    },
+    {
+      "input": "asym-hv-p2",
+      "ordinal": 3,
+      "engine": "candidate",
+      "phase": "steady",
+      "class": "completed_legal",
+      "known": true,
+      "root_context_exact": true,
+      "features648_NN137_f32bits_exact": true,
+      "main_admit": {
+        "generation": 4,
+        "sequence": 9,
+        "action": 67,
+        "read_start_ms": 1790999491578.32,
+        "stable_read_end_ms": 1790999491578.325,
+        "legal_validation_end_ms": 1790999491578.33,
+        "immutable_admit_end_ms": 1790999491578.345,
+        "accepted": true,
+        "exactAtomicstore": null
+      },
+      "admit_offset_ms": 355.659912109375,
+      "admit_not_after402": true,
+      "chosen_action209": 67,
+      "main_adopt_sequence_equals_public": true,
+      "public_ms": 413.455078125,
+      "public_lt500": true,
+      "zero_ACK_by_D": true,
+      "ACK_wall_ms": 426.010009765625,
+      "zero_receipt": {
+        "live_searches": 0,
+        "handles": 0,
+        "activeNN": 0,
+        "active": false,
+        "NN_attempts": 10,
+        "completed_NN": 9,
+        "at_ms": 1790999491648.575,
+        "error": "STALE_GENERATION"
+      },
+      "D_observe_offset_ms": 3.77001953125,
+      "target_lateness_ms": 6.639892578125,
+      "next_t0_not_before_previous_D": true,
+      "hand_API_starts": 10,
+      "API_returns_logged": 10,
+      "API_start_return_equal_saved": true,
+      "kernelCPU": null,
+      "exactAtomicstore": null,
+      "worker_clock_interval": {
+        "lo_ms": -0.11513671875,
+        "hi_ms": 0.1048828125,
+        "mid_ms": -0.005126953125,
+        "error_ms": 0.210009765625,
+        "measured": true,
+        "samples": [
+          {
+            "start_ms": 1790999487677.22,
+            "end_ms": 1790999487726.955,
+            "worker_ms": 1790999487677.505
+          },
+          {
+            "start_ms": 1790999487726.965,
+            "end_ms": 1790999487727.96,
+            "worker_ms": 1790999487727.9148
+          },
+          {
+            "start_ms": 1790999487727.96,
+            "end_ms": 1790999487728.855,
+            "worker_ms": 1790999487728
+          },
+          {
+            "start_ms": 1790999487728.855,
+            "end_ms": 1790999487728.9202,
+            "worker_ms": 1790999487728.8948
+          },
+          {
+            "start_ms": 1790999487728.9202,
+            "end_ms": 1790999487728.95,
+            "worker_ms": 1790999487728.93
+          },
+          {
+            "start_ms": 1790999487728.95,
+            "end_ms": 1790999487728.975,
+            "worker_ms": 1790999487728.96
+          },
+          {
+            "start_ms": 1790999487728.975,
+            "end_ms": 1790999487729.0151,
+            "worker_ms": 1790999487728.99
+          },
+          {
+            "start_ms": 1790999487729.02,
+            "end_ms": 1790999487729.0452,
+            "worker_ms": 1790999487729.025
+          }
+        ]
+      },
+      "fixed_cycle": {
+        "target_ms": 1790999491216.0452,
+        "input_ready_ms": 1790999491222.665,
+        "actual_t0_ms": 1790999491222.685,
+        "previous_D_ms": 1790999490723.87,
+        "previous_zero_at_D": true,
+        "notification_possible_ms": 1790999491636.1401,
+        "notification_does_not_start_search": true,
+        "next_target_ms": 1790999492216.0452,
+        "D_observation_ms": 1790999491726.455,
+        "zero_ACK_received_by_D": true,
+        "zero_receipt": {
+          "live_searches": 0,
+          "handles": 0,
+          "activeNN": 0,
+          "active": false,
+          "NN_attempts": 10,
+          "completed_NN": 9,
+          "at_ms": 1790999491648.575,
+          "error": "STALE_GENERATION"
+        },
+        "ACK_main_received_ms": 1790999491648.695,
+        "class": "completed_legal"
+      },
+      "postpublic_discard_count": 1,
+      "postpublic_NN_definite": 0,
+      "completed_backup": {
+        "root_visits": 9,
+        "raw_simulations": 9,
+        "edge_visits": 8,
+        "completed_backup": 9,
+        "NN_not_backup": true
+      },
+      "terminal_noNN": {
+        "count": 0,
+        "terminal_noNN_direct_count": 0,
+        "reference_terminal_noNN_derived": null,
+        "basis": "completed root-inclusive backups minus completed NN on last validated CP; private refusal never pseudo-leaf; reference derived terminal revisits, not independent direct counter",
+        "adopted_sequence_counts": {
+          "sequence": 9,
+          "action": 67,
+          "begin_ms": 1790999491578.1448,
+          "validation_end_ms": 1790999491578.2598,
+          "raw_simulations": 9,
+          "root_visits": 9,
+          "completed_backup": 9,
+          "completed_NN": 9,
+          "depth": 7,
+          "cap": false,
+          "actual_owned_seed": 1979
+        }
+      }
+    },
+    {
+      "input": "asym-hv-p2",
+      "ordinal": 4,
+      "engine": "candidate",
+      "phase": "steady",
+      "class": "completed_legal",
+      "known": true,
+      "root_context_exact": true,
+      "features648_NN137_f32bits_exact": true,
+      "main_admit": {
+        "generation": 5,
+        "sequence": 9,
+        "action": 67,
+        "read_start_ms": 1790999492601.7852,
+        "stable_read_end_ms": 1790999492601.7952,
+        "legal_validation_end_ms": 1790999492601.7952,
+        "immutable_admit_end_ms": 1790999492601.82,
+        "accepted": true,
+        "exactAtomicstore": null
+      },
+      "admit_offset_ms": 383.3349609375,
+      "admit_not_after402": true,
+      "chosen_action209": 67,
+      "main_adopt_sequence_equals_public": true,
+      "public_ms": 411.39990234375,
+      "public_lt500": true,
+      "zero_ACK_by_D": true,
+      "ACK_wall_ms": 418.96484375,
+      "zero_receipt": {
+        "live_searches": 0,
+        "handles": 0,
+        "activeNN": 0,
+        "active": false,
+        "NN_attempts": 10,
+        "completed_NN": 9,
+        "at_ms": 1790999492637.4148,
+        "error": "STALE_GENERATION"
+      },
+      "D_observe_offset_ms": 3.71484375,
+      "target_lateness_ms": 2.43994140625,
+      "next_t0_not_before_previous_D": true,
+      "hand_API_starts": 10,
+      "API_returns_logged": 10,
+      "API_start_return_equal_saved": true,
+      "kernelCPU": null,
+      "exactAtomicstore": null,
+      "worker_clock_interval": {
+        "lo_ms": -0.11513671875,
+        "hi_ms": 0.1048828125,
+        "mid_ms": -0.005126953125,
+        "error_ms": 0.210009765625,
+        "measured": true,
+        "samples": [
+          {
+            "start_ms": 1790999487677.22,
+            "end_ms": 1790999487726.955,
+            "worker_ms": 1790999487677.505
+          },
+          {
+            "start_ms": 1790999487726.965,
+            "end_ms": 1790999487727.96,
+            "worker_ms": 1790999487727.9148
+          },
+          {
+            "start_ms": 1790999487727.96,
+            "end_ms": 1790999487728.855,
+            "worker_ms": 1790999487728
+          },
+          {
+            "start_ms": 1790999487728.855,
+            "end_ms": 1790999487728.9202,
+            "worker_ms": 1790999487728.8948
+          },
+          {
+            "start_ms": 1790999487728.9202,
+            "end_ms": 1790999487728.95,
+            "worker_ms": 1790999487728.93
+          },
+          {
+            "start_ms": 1790999487728.95,
+            "end_ms": 1790999487728.975,
+            "worker_ms": 1790999487728.96
+          },
+          {
+            "start_ms": 1790999487728.975,
+            "end_ms": 1790999487729.0151,
+            "worker_ms": 1790999487728.99
+          },
+          {
+            "start_ms": 1790999487729.02,
+            "end_ms": 1790999487729.0452,
+            "worker_ms": 1790999487729.025
+          }
+        ]
+      },
+      "fixed_cycle": {
+        "target_ms": 1790999492216.0452,
+        "input_ready_ms": 1790999492218.47,
+        "actual_t0_ms": 1790999492218.485,
+        "previous_D_ms": 1790999491722.685,
+        "previous_zero_at_D": true,
+        "notification_possible_ms": 1790999492629.885,
+        "notification_does_not_start_search": true,
+        "next_target_ms": 1790999493216.0452,
+        "D_observation_ms": 1790999492722.2,
+        "zero_ACK_received_by_D": true,
+        "zero_receipt": {
+          "live_searches": 0,
+          "handles": 0,
+          "activeNN": 0,
+          "active": false,
+          "NN_attempts": 10,
+          "completed_NN": 9,
+          "at_ms": 1790999492637.4148,
+          "error": "STALE_GENERATION"
+        },
+        "ACK_main_received_ms": 1790999492637.45,
+        "class": "completed_legal"
+      },
+      "postpublic_discard_count": 1,
+      "postpublic_NN_definite": 0,
+      "completed_backup": {
+        "root_visits": 9,
+        "raw_simulations": 9,
+        "edge_visits": 8,
+        "completed_backup": 9,
+        "NN_not_backup": true
+      },
+      "terminal_noNN": {
+        "count": 0,
+        "terminal_noNN_direct_count": 0,
+        "reference_terminal_noNN_derived": null,
+        "basis": "completed root-inclusive backups minus completed NN on last validated CP; private refusal never pseudo-leaf; reference derived terminal revisits, not independent direct counter",
+        "adopted_sequence_counts": {
+          "sequence": 9,
+          "action": 67,
+          "begin_ms": 1790999492599.1648,
+          "validation_end_ms": 1790999492599.2798,
+          "raw_simulations": 9,
+          "root_visits": 9,
+          "completed_backup": 9,
+          "completed_NN": 9,
+          "depth": 7,
+          "cap": false,
+          "actual_owned_seed": 1979
+        }
+      }
+    },
+    {
+      "input": "asym-hv-p2",
+      "ordinal": 5,
+      "engine": "reference",
+      "phase": "steady",
+      "class": "completed_legal",
+      "known": true,
+      "root_context_exact": true,
+      "features648_NN137_f32bits_exact": true,
+      "main_admit": {
+        "generation": 6,
+        "sequence": 15,
+        "action": 67,
+        "read_start_ms": 1790999493612.325,
+        "stable_read_end_ms": 1790999493612.33,
+        "legal_validation_end_ms": 1790999493612.33,
+        "immutable_admit_end_ms": 1790999493612.345,
+        "accepted": true,
+        "exactAtomicstore": null
+      },
+      "admit_offset_ms": 394.6298828125,
+      "admit_not_after402": true,
+      "chosen_action209": 67,
+      "main_adopt_sequence_equals_public": true,
+      "public_ms": 410.744873046875,
+      "public_lt500": true,
+      "zero_ACK_by_D": true,
+      "ACK_wall_ms": 448.449951171875,
+      "zero_receipt": {
+        "live_searches": 0,
+        "handles": 0,
+        "activeNN": 0,
+        "active": false,
+        "NN_attempts": 16,
+        "completed_NN": 16,
+        "at_ms": 1790999493662.81,
+        "error": "STALE_GENERATION"
+      },
+      "D_observe_offset_ms": 7.675048828125,
+      "target_lateness_ms": 1.669921875,
+      "next_t0_not_before_previous_D": true,
+      "hand_API_starts": 16,
+      "API_returns_logged": 16,
+      "API_start_return_equal_saved": true,
+      "kernelCPU": null,
+      "exactAtomicstore": null,
+      "worker_clock_interval": {
+        "lo_ms": -0.110009765625,
+        "hi_ms": 0.1048828125,
+        "mid_ms": -0.0025634765625,
+        "error_ms": 0.2074462890625,
+        "measured": true,
+        "samples": [
+          {
+            "start_ms": 1790999487729.105,
+            "end_ms": 1790999487729.465,
+            "worker_ms": 1790999487729.415
+          },
+          {
+            "start_ms": 1790999487729.475,
+            "end_ms": 1790999487729.51,
+            "worker_ms": 1790999487729.49
+          },
+          {
+            "start_ms": 1790999487729.51,
+            "end_ms": 1790999487729.5251,
+            "worker_ms": 1790999487729.5151
+          },
+          {
+            "start_ms": 1790999487729.5251,
+            "end_ms": 1790999487729.555,
+            "worker_ms": 1790999487729.53
+          },
+          {
+            "start_ms": 1790999487729.555,
+            "end_ms": 1790999487729.6,
+            "worker_ms": 1790999487729.5852
+          },
+          {
+            "start_ms": 1790999487729.6,
+            "end_ms": 1790999487729.62,
+            "worker_ms": 1790999487729.605
+          },
+          {
+            "start_ms": 1790999487729.62,
+            "end_ms": 1790999487729.6401,
+            "worker_ms": 1790999487729.625
+          },
+          {
+            "start_ms": 1790999487729.6401,
+            "end_ms": 1790999487729.705,
+            "worker_ms": 1790999487729.6902
+          }
+        ]
+      },
+      "fixed_cycle": {
+        "target_ms": 1790999493216.0452,
+        "input_ready_ms": 1790999493217.7,
+        "actual_t0_ms": 1790999493217.715,
+        "previous_D_ms": 1790999492718.485,
+        "previous_zero_at_D": true,
+        "notification_possible_ms": 1790999493628.46,
+        "notification_does_not_start_search": true,
+        "next_target_ms": 1790999494216.0452,
+        "D_observation_ms": 1790999493725.3901,
+        "zero_ACK_received_by_D": true,
+        "zero_receipt": {
+          "live_searches": 0,
+          "handles": 0,
+          "activeNN": 0,
+          "active": false,
+          "NN_attempts": 16,
+          "completed_NN": 16,
+          "at_ms": 1790999493662.81,
+          "error": "STALE_GENERATION"
+        },
+        "ACK_main_received_ms": 1790999493666.165,
+        "class": "completed_legal"
+      },
+      "postpublic_discard_count": 1,
+      "postpublic_NN_definite": 0,
+      "completed_backup": {
+        "root_visits": 15,
+        "raw_simulations": 14,
+        "edge_visits": 14,
+        "completed_backup": 15,
+        "NN_not_backup": true
+      },
+      "terminal_noNN": {
+        "count": 0,
+        "terminal_noNN_direct_count": null,
+        "reference_terminal_noNN_derived": 0,
+        "basis": "completed root-inclusive backups minus completed NN on last validated CP; private refusal never pseudo-leaf; reference derived terminal revisits, not independent direct counter",
+        "adopted_sequence_counts": {
+          "sequence": 15,
+          "action": 67,
+          "begin_ms": 1790999493610.82,
+          "validation_end_ms": 1790999493610.955,
+          "raw_simulations": 14,
+          "root_visits": 15,
+          "completed_backup": 15,
+          "completed_NN": 15,
+          "depth": null,
+          "cap": null,
+          "actual_owned_seed": 1979
+        }
+      }
+    }
+  ],
+  "all_fixed12_functional": true,
+  "formal_ready": false,
+  "limitations": [
+    "fixed1000ms measurement adapter differs from normal opponent t0, idle second half is real wall cost",
+    "kernelCPU and ORT Worker TID attribution missing; source threads1/proxyfalse and main zero ACK only",
+    "main performance clock resolution/uncertainty not independently bounded against402; stable seqlock revision is verified in original reader but numeric revision not separately saved",
+    "notification_possible is main state availability, no early position-notice IPC receipt measured",
+    "NN/start-return totals saved, pending_publish and pending_eval not separately typed in stop receipt",
+    "private source repairs before NN; failedNN0 init attempt6 unstarted preserved outside12 scientific planned slots"
+  ],
+  "same_writer_saved_arithmetic_not_independent": true,
+  "NN0_failed_attempt_retained": "cycle163-input0-r1, 6 scientific unstarted, startup0/NN0, routing and UNKNOWN_PARENT cleanup; no scientific successful retry"
+}

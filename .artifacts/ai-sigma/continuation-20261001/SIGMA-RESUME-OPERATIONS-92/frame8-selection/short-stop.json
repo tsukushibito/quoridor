@@ -1,0 +1,37 @@
+{
+  "at": "2026-10-02T12:03:52.655255+00:00",
+  "short_process": {
+    "pid": 2480399,
+    "start_ticks": "19554605",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+    "rss_bytes": 17453056,
+    "children": "",
+    "exit_expected": 0
+  },
+  "short_identity_absent": true,
+  "observed_exit_code": 0,
+  "short_children_absent": true,
+  "source_writes_stopped": true,
+  "intentional_long_processes": {
+    "scheduler": {
+      "pid": 2477008,
+      "start_ticks": "19538464",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "monitor": {
+      "pid": 2478518,
+      "start_ticks": "19545447",
+      "state": "R",
+      "rss_bytes": 20377600,
+      "cpu_ticks": 3,
+      "affinity": [
+        0
+      ],
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    }
+  },
+  "no_NN_or_research_job_started": true,
+  "per_command_timeout_seconds_max": 55,
+  "management_tool_observed_wall_upper_bound_seconds": 120,
+  "strict_process_peak_not_measured": true
+}

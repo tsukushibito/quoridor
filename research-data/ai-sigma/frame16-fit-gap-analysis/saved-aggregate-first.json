@@ -1,0 +1,128 @@
+{
+  "NN_forward": 0,
+  "same_train96_val24": true,
+  "table": [
+    {
+      "model": "distance",
+      "step": null,
+      "split": "train",
+      "gameMSE": 0.40594374220554547,
+      "rowMSE": 0.41391012655097786,
+      "rows": 4653,
+      "games": 96,
+      "arithmetic": "199 stored coefficients-double on f32 inputs, new f32 reference pending"
+    },
+    {
+      "model": "constant",
+      "step": null,
+      "split": "train",
+      "gameMSE": 0.7243203910588959,
+      "rowMSE": 0.7067226409913643,
+      "rows": 4653,
+      "games": 96,
+      "arithmetic": "199 stored coefficients-double on f32 inputs, new f32 reference pending"
+    },
+    {
+      "model": "distance",
+      "step": null,
+      "split": "validation",
+      "gameMSE": 0.4851468145499493,
+      "rowMSE": 0.4893138676453408,
+      "rows": 1248,
+      "games": 24,
+      "arithmetic": "199 stored coefficients-double on f32 inputs, new f32 reference pending"
+    },
+    {
+      "model": "constant",
+      "step": null,
+      "split": "validation",
+      "gameMSE": 0.6787804677332444,
+      "rowMSE": 0.6660051545754645,
+      "rows": 1248,
+      "games": 24,
+      "arithmetic": "199 stored coefficients-double on f32 inputs, new f32 reference pending"
+    },
+    {
+      "model": "plain",
+      "step": 200,
+      "split": "train",
+      "gameMSE": 0.6205573459396171,
+      "rowMSE": 0.6104744941296808,
+      "rows": 4653,
+      "games": 96,
+      "arithmetic": "saved native Torch f32 forward"
+    },
+    {
+      "model": "plain",
+      "step": 200,
+      "split": "validation",
+      "gameMSE": 0.659847319505419,
+      "rowMSE": 0.6477449212623484,
+      "rows": 1248,
+      "games": 24,
+      "arithmetic": "saved native Torch f32 forward"
+    },
+    {
+      "model": "plain",
+      "step": 400,
+      "split": "train",
+      "gameMSE": 0.31832485586489806,
+      "rowMSE": 0.33110149161724206,
+      "rows": 4653,
+      "games": 96,
+      "arithmetic": "saved native Torch f32 forward"
+    },
+    {
+      "model": "plain",
+      "step": 400,
+      "split": "validation",
+      "gameMSE": 0.7196768814218523,
+      "rowMSE": 0.7104626169529757,
+      "rows": 1248,
+      "games": 24,
+      "arithmetic": "saved native Torch f32 forward"
+    },
+    {
+      "model": "standard",
+      "step": 200,
+      "split": "train",
+      "gameMSE": 0.5485668558505573,
+      "rowMSE": 0.5433633285819087,
+      "rows": 4653,
+      "games": 96,
+      "arithmetic": "saved native Torch f32 forward"
+    },
+    {
+      "model": "standard",
+      "step": 200,
+      "split": "validation",
+      "gameMSE": 0.6139164435565568,
+      "rowMSE": 0.6044741006276413,
+      "rows": 1248,
+      "games": 24,
+      "arithmetic": "saved native Torch f32 forward"
+    },
+    {
+      "model": "standard",
+      "step": 400,
+      "split": "train",
+      "gameMSE": 0.2572832049822598,
+      "rowMSE": 0.2684784043051153,
+      "rows": 4653,
+      "games": 96,
+      "arithmetic": "saved native Torch f32 forward"
+    },
+    {
+      "model": "standard",
+      "step": 400,
+      "split": "validation",
+      "gameMSE": 0.6487715053247433,
+      "rowMSE": 0.6412566983261428,
+      "rows": 1248,
+      "games": 24,
+      "arithmetic": "saved native Torch f32 forward"
+    }
+  ],
+  "initial_interpretation": "200step train also worse than distance: fit insufficiency;400step train better than distance whileval remainsworse and worsens vs200: generalization gap; stages distinguished",
+  "perrow_pending": true
+}

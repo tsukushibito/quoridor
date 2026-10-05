@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/175-native-epoch2-independent/preserve.py", line 29, in <module>
+    cid,files=commit('research: critic 175 independent epoch2 uncertain verdict')
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/175-native-epoch2-independent/preserve.py", line 24, in commit
+    root=tree(head+'^{tree}',changes);cid=run(['git','commit-tree',root,'-p',head,'-m',message]).decode().strip();p=subprocess.run(['git','update-ref','HEAD',cid,head],capture_output=True)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/175-native-epoch2-independent/preserve.py", line 12, in tree
+    for line in run(['git','ls-tree','-z',base]).split(b'\0'):
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/175-native-epoch2-independent/preserve.py", line 4, in run
+    p=subprocess.run(args,input=data,capture_output=True,timeout=30);commands.append({'command':args[:6],'exit':p.returncode,'stderr':p.stderr.decode()[:800]});assert p.returncode==0,(args[:6],p.stderr.decode()[:800]);return p.stdout
+                                                                                                                                                                       ^^^^^^^^^^^^^^^
+AssertionError: (['git', 'ls-tree', '-z', '2b8659496452ae92673322f5807213ac4a87d1c9^{tree}'], 'fatal: empty filename in tree entry\n')

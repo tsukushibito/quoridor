@@ -1,0 +1,241 @@
+{
+  "UTC": "2026-10-04T13:12:53.322692+00:00",
+  "PASS": true,
+  "new_games": 672,
+  "all_planned_with_alias": 768,
+  "partition": {
+    "train": 576,
+    "validation": 96,
+    "test": 96
+  },
+  "rows": 37123,
+  "new_rows": 32520,
+  "alias_rows": 4603,
+  "row_partition": {
+    "test": 4847,
+    "train": 27463,
+    "validation": 4813
+  },
+  "exposed_rows": {
+    "test": 0,
+    "train": 0,
+    "validation": 0
+  },
+  "eligible_rows": {
+    "test": 4847,
+    "train": 27463,
+    "validation": 4813
+  },
+  "zeroeligible_games": 0,
+  "stages": {
+    "192": {
+      "positive_games": 192,
+      "rows": 9025,
+      "cohorts": {
+        "opening-8": 32,
+        "opening-12": 32,
+        "opening-16": 32,
+        "opening-20": 32,
+        "opening-24": 32,
+        "opening-28": 32
+      },
+      "training_samples": 256000,
+      "expected_samples_per_game": 1333.3333333333333,
+      "samples_over_rows": 28.365650969529085,
+      "oldscale_SHA": "68f8b43a0e4408a1546f8fa2652ffdf21f1f7bdcfbac9a25a86ac666b27aa4ee",
+      "seed": 19080311,
+      "actual_initial_tensor_or_function_receipt": "pending; config equality alone is not reauthentication"
+    },
+    "576": {
+      "positive_games": 576,
+      "rows": 27463,
+      "cohorts": {
+        "opening-8": 96,
+        "opening-12": 96,
+        "opening-16": 96,
+        "opening-20": 96,
+        "opening-24": 96,
+        "opening-28": 96
+      },
+      "training_samples": 256000,
+      "expected_samples_per_game": 444.44444444444446,
+      "samples_over_rows": 9.321632742235007,
+      "oldscale_SHA": "68f8b43a0e4408a1546f8fa2652ffdf21f1f7bdcfbac9a25a86ac666b27aa4ee",
+      "seed": 19080311,
+      "actual_initial_tensor_or_function_receipt": "pending; config equality alone is not reauthentication"
+    }
+  },
+  "secondary": {
+    "small_step": 400,
+    "large_step": 1200,
+    "G_small": 192,
+    "G_large": 576,
+    "distance": 0.0,
+    "rule": "minimum saved abs(step/Glarge-400/Gsmall); tie early; before curves"
+  },
+  "attempts": [
+    {
+      "run": "growth228-train01-chunk1-r1",
+      "NN": 126435,
+      "wall": 143.46847211103886,
+      "exit": 0,
+      "reason": null
+    },
+    {
+      "run": "growth228-train01-chunk2-r1",
+      "NN": 123626,
+      "wall": 136.40343936695717,
+      "exit": 0,
+      "reason": null
+    },
+    {
+      "run": "growth228-train02-chunk1-r1",
+      "NN": 132917,
+      "wall": 156.2737846399541,
+      "exit": 0,
+      "reason": null
+    },
+    {
+      "run": "growth228-train02-chunk2-r1",
+      "NN": 136901,
+      "wall": 160.40224525198573,
+      "exit": 0,
+      "reason": null
+    },
+    {
+      "run": "growth228-train03-chunk1-r1",
+      "NN": 127635,
+      "wall": 156.75601058400935,
+      "exit": 0,
+      "reason": null
+    },
+    {
+      "run": "growth228-train03-chunk2-r1",
+      "NN": 126406,
+      "wall": 149.20169760397403,
+      "exit": 0,
+      "reason": null
+    },
+    {
+      "run": "growth228-train04-chunk1-r1",
+      "NN": 123622,
+      "wall": 137.7504083099775,
+      "exit": 0,
+      "reason": null
+    },
+    {
+      "run": "growth228-train04-chunk2-r1",
+      "NN": 133441,
+      "wall": 162.42263216496212,
+      "exit": 0,
+      "reason": null
+    },
+    {
+      "run": "growth228-train05-chunk1-r1",
+      "NN": 140292,
+      "wall": 155.4584893399733,
+      "exit": 0,
+      "reason": null
+    },
+    {
+      "run": "growth228-train05-chunk2-r1",
+      "NN": 124925,
+      "wall": 143.48610706697218,
+      "exit": 0,
+      "reason": null
+    },
+    {
+      "run": "growth228-val96-chunk1-r1",
+      "NN": 132989,
+      "wall": 159.6495373310172,
+      "exit": 0,
+      "reason": null
+    },
+    {
+      "run": "growth228-val96-chunk2-r1",
+      "NN": 139869,
+      "wall": 174.88135393499397,
+      "exit": 0,
+      "reason": null
+    },
+    {
+      "run": "growth228-test96-chunk1-r1",
+      "NN": 1623,
+      "wall": 10.945370599045418,
+      "exit": 1,
+      "reason": null
+    },
+    {
+      "run": "growth228-test96-chunk1-r2",
+      "NN": 137678,
+      "wall": 157.48018957400927,
+      "exit": 0,
+      "reason": null
+    },
+    {
+      "run": "growth228-test96-chunk2-r1",
+      "NN": 140853,
+      "wall": 171.02700204303255,
+      "exit": 0,
+      "reason": null
+    }
+  ],
+  "physicalNN_allattempt": 1849212,
+  "guardian_allattempt": 2175.6067399219028,
+  "inputSHA": {
+    "research-data/ai-sigma/frame18-data-learning/generation-final-stop-compact.json": "10c610b3218dbed3c8a07088faf524a2b5ec2c5c17e4e5cc2457589b2995606a",
+    "research-data/ai-sigma/frame18-data-learning/dataset-v1/plan.json": "4a92b8f182001a18f9ebcd614e36f0ab25b2907173d48231cd61d24a0af729c7",
+    "research-data/ai-sigma/frame18-data-learning/dataset-v1/quantity-freeze.json": "d69f945f4e04b5081cc458982f9a526e003234a1f2e7b8e00008ac5262b90254",
+    "research-data/ai-sigma/frame18-data-learning/dataset-v1/adapter/preparation-receipt.json": "6bc610c9e46381ee69072d48f339782cfe8a654a02b31335088e630238cd58e2",
+    "research-data/ai-sigma/frame18-data-learning/dataset-v1/adapter/fixed-maximum-mask.json": "f7ad482322f8690cab73ced92a943032007daf603dc3dd8067cff2e278f0bead",
+    "research-data/ai-sigma/frame18-data-learning/learning-plan-v1/before-curves-selection-rule.json": "84caa95114b1e3dc24b88364af4ff5427cbed151d5de0a5cf5b550fa1e2fc3d7",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame16-teacher-throughput/fresh96-stage/canonical-metadata.jsonl.gz": "070c5556abe09be88e92d7fa134b4fc07eb97b906afc22c4f4105809dc170231",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/jobs/train01-chunk1-r1/metadata.jsonl.gz": "131186351ab8e8b0643d5d833cd7e2d1e65765f460cb2945c9c1614a2c381b68",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/jobs/train01-chunk2-r1/metadata.jsonl.gz": "0a6a812c176036757e887989b41a4a5af790961149f642b9007e2c73e02a799d",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/jobs/train02-chunk1-r1/metadata.jsonl.gz": "b3a0bf353c260bbbb35a75abc2c4018c4da871706d3a2dc935cbf76bf43c5ea6",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/jobs/train02-chunk2-r1/metadata.jsonl.gz": "a4852d939de326f58129c29e2bc6b912678a35f6e0a92d8a8cb5a23ea2639f2e",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/jobs/train03-chunk1-r1/metadata.jsonl.gz": "2a958b7e06464e6d9591f616c294fdcfc86fb1e2430abfdc6e26367cdd8e9edb",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/jobs/train03-chunk2-r1/metadata.jsonl.gz": "59f8e081474bf9ee2e6b7e06399d4022a4187676500bcdd1220577c4311a4f04",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/jobs/train04-chunk1-r1/metadata.jsonl.gz": "d8626000f4fac47d595a54b7fe2a056a6f4eff112bdcbda7d50d002d2a65c1a0",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/jobs/train04-chunk2-r1/metadata.jsonl.gz": "fb8908681cdd10156c6a743973185aaa9021f6cd1423ecec87a38a35165ff88f",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/jobs/train05-chunk1-r1/metadata.jsonl.gz": "08a42a291d4b308d8c900790fe57db9bfcb9855b90c22025c5a37f0d5fa52846",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/jobs/train05-chunk2-r1/metadata.jsonl.gz": "9c6c227ab0bcea8fbcc41acc913986c2477ccc9910e8125c87a36cf024c8b519",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/jobs/val96-chunk1-r1/metadata.jsonl.gz": "be5fce100709121aff32d80c09167db88cff0f41efb04b65608f31114a10a9dd",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/jobs/val96-chunk2-r1/metadata.jsonl.gz": "fc20472028ae55ae7a554ad1068887caa24d8300714644e66ed2b2d33fbfcfb7",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/test-sealed/jobs/test96-chunk1-r2/metadata.jsonl.gz": "c340982021b546433c9afbfe4870982ba5cbf6ba6ca7280a95151c4857ca0ab4",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/test-sealed/jobs/test96-chunk2-r1/metadata.jsonl.gz": "4f3e960762b62ead237a1c754ce7b67a53fe3101fb7de4999f0aec58056685d0",
+    "research-data/ai-sigma/frame18-data-learning/dataset-v1/adapter/canonical.jsonl.gz": "978b65415ab85f12b1c3bdb5548546647bba8837a6b688fd1fe3fb1407ba11b9",
+    "research-data/ai-sigma/frame18-data-learning/dataset-v1/adapter/192.stage.json": "2373afc34398c8f8f2e474868bd617e8b3e996c8823ce0f303b21d2c36541ae1",
+    "research-data/ai-sigma/frame18-data-learning/dataset-v1/adapter/192-sampling.json": "6c3ca1311c9637ab7a1faaf9b96f40d0a5bafcb0fcdbac54391fedf9a16cd020",
+    "research-data/ai-sigma/frame18-data-learning/learning-plan-v1/config-192.json": "1010308b4084f575c9733d9bba7d50153b3ab50aab8fc531b72279e91bd72763",
+    "research-data/ai-sigma/frame18-data-learning/learning-plan-v1/settings-192.json": "0e767eadaf7aef03092abc1334902ea68cd128ebdb616525deb9b84bc004e987",
+    "research-data/ai-sigma/frame18-data-learning/dataset-v1/adapter/576.stage.json": "bb2d99c4894f5793054cd96ab205512d9106cc408e2dd787e7c8eec83aaa7c53",
+    "research-data/ai-sigma/frame18-data-learning/dataset-v1/adapter/576-sampling.json": "046c6da09060ea986b5c628360819ae8a7a9d3df1ad8698cc7959f5aebfff225",
+    "research-data/ai-sigma/frame18-data-learning/learning-plan-v1/config-576.json": "928ba5517a8fd1de0b315a95d868765f004b401f4269090dec69bf778fdc5021",
+    "research-data/ai-sigma/frame18-data-learning/learning-plan-v1/settings-576.json": "74d93990f9fca40a5a5b381302079050b4b4615ba495d39d62c2d474e50c46ea",
+    "research-data/ai-sigma/frame18-data-learning/jobs/train01-chunk1-r1/process.json": "d86e76cb4f940a19bec586438414bff4446057e24af5daeb0811446038b58f99",
+    "research-data/ai-sigma/frame18-data-learning/jobs/train01-chunk2-r1/process.json": "f5d180a60360c3e4f5b1ad2148885f3ae7c6754fed13222a8cd61b3e5c994ea3",
+    "research-data/ai-sigma/frame18-data-learning/jobs/train02-chunk1-r1/process.json": "81a60be5615517c5916cf5366932d4e1a7ee0da2414e8bdd6ea545ae00721627",
+    "research-data/ai-sigma/frame18-data-learning/jobs/train02-chunk2-r1/process.json": "975808276c533cd6a5f700ebb5146dffd5906af8e64df1820e5e84ca762db194",
+    "research-data/ai-sigma/frame18-data-learning/jobs/train03-chunk1-r1/process.json": "0128fb9bdb2ccebb1e08706cb0ddf9e43a3a5c81a405d9b8b28694422f8dc631",
+    "research-data/ai-sigma/frame18-data-learning/jobs/train03-chunk2-r1/process.json": "412542b38973d1a994a98c658cc648a132b808905eefd0c3a459e1657663e49d",
+    "research-data/ai-sigma/frame18-data-learning/jobs/train04-chunk1-r1/process.json": "dbc1253692ecf4639ea19c868482eaf2bf00b379336156e55f9a1124b0829c3a",
+    "research-data/ai-sigma/frame18-data-learning/jobs/train04-chunk2-r1/process.json": "0d6e78c5221c1b7281d8d672c52051c3954d8b90defba0b14b4325d68fbfd591",
+    "research-data/ai-sigma/frame18-data-learning/jobs/train05-chunk1-r1/process.json": "ce46d839caf37e3c59bfcb45188916079e773d477ab498582116a9d9f29089ea",
+    "research-data/ai-sigma/frame18-data-learning/jobs/train05-chunk2-r1/process.json": "fafb1ae086d20bff0eee369d31540703aae5bcda7c5fc57387cbe5672c07fe81",
+    "research-data/ai-sigma/frame18-data-learning/jobs/val96-chunk1-r1/process.json": "954afb00d59905809bef1fb8b4693718ba2820339beced68803a8619939381a5",
+    "research-data/ai-sigma/frame18-data-learning/jobs/val96-chunk2-r1/process.json": "d6092090e43da995bad1cd970c0bdf599194caa4c56f94193f8941d039ffff31",
+    "research-data/ai-sigma/frame18-data-learning/test-sealed/jobs/test96-chunk1-r1/process.json": "00b0ee9c8d3900689e43c0618112f45d6301c9bb084f2f8086680104c065e60c",
+    "research-data/ai-sigma/frame18-data-learning/test-sealed/jobs/test96-chunk1-r2/process.json": "d857fa1fc8a1aaabbd7c3e0053f52ee84f565b20364ca27a7f0830ae33a323f7",
+    "research-data/ai-sigma/frame18-data-learning/test-sealed/jobs/test96-chunk2-r1/process.json": "6a29718c24fa18789ca823990182bc94172903d7500c22692590fa816817cd7a"
+  },
+  "wall": 0.9890301969717257,
+  "peakRSS": 328216576,
+  "limits": [
+    "metadata independent signatures; opaque history/state and sharedRuleA teacher qualification are producer references",
+    "no sealed labels/oldtest/formal173 read",
+    "samecompute differs expected exposures, old96 alias/distribution/oldscale not purequantity",
+    "initialfunction same seed is provisional pending savedparity; no model import"
+  ],
+  "newNN": 0
+}

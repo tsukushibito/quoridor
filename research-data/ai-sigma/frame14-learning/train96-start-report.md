@@ -1,0 +1,1 @@
+goal quoridor-4lc /195 実train96-r1開始、CPU2単1/currentadmission済。{"UTC": "2026-10-04T00:15:19.269898+00:00", "identity": {"pid": 3804916, "ppid": 3804861, "pgrp": 3804916, "tick": "32587946", "RSS": 0, "cmd": "", "affinity": [2]}, "kind": "heavy"}。same初期/same256000train samples、testlabel未読、既24/48success再実行0。

@@ -1,0 +1,49 @@
+[
+  {
+    "args": [
+      "show",
+      "quoridor-4lc.148",
+      "--json"
+    ],
+    "start_UTC": "2026-10-03T00:41:43.736355+00:00",
+    "end_UTC": "2026-10-03T00:41:45.436012+00:00",
+    "exit_code": 0,
+    "stdout_sha256": "47642521e373c4aa2fe6927651e68edef840bd01fb738e588970a131759c59f2",
+    "stderr": "",
+    "state": {
+      "id": "quoridor-4lc.148",
+      "status": "in_progress",
+      "assignee": "codex:01a0f31c-2e4b-7170-82c5-69e1428c2418",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ]
+    }
+  },
+  {
+    "args": [
+      "update",
+      "quoridor-4lc.148",
+      "--append-notes",
+      "148: sampling proposal/source/data/report Git538f11a8; coordinator adopted result-before supplement9bafd9ef and distributed149. 32prefix/64game layers4/5/12/13, hashseed61041, max8attempt/all119 canonical signatures excluded, duplicates retained, missing identification intervals, conditional Hoeffding. samecompleted/C145 deferred. Static-r1 passed NN/Chrome/game/build0; source/child stopped, Git stream restored. Acceptance coordinator; report docs/reports/ai-sigma-hypothesis-frame10-gap-sampling.md. Full signature construction/AI gap not executed148; aggregate management timing missing separately. Goal/other close0."
+    ],
+    "start_UTC": "2026-10-03T00:41:45.437203+00:00",
+    "end_UTC": "2026-10-03T00:41:47.120912+00:00",
+    "exit_code": 0,
+    "stdout_sha256": "ef126b1c00719a3bd2fc630e95bd83ff4c8250845055ea88b8bb186a89d7e481",
+    "stderr": "",
+    "stdout": "\u2713 Updated issue: quoridor-4lc.148 \u2014 SIGMA-GAP-SAMPLING-CHOICE\n"
+  },
+  {
+    "args": [
+      "backup",
+      "sync"
+    ],
+    "start_UTC": "2026-10-03T00:41:47.121002+00:00",
+    "end_UTC": "2026-10-03T00:41:47.920914+00:00",
+    "exit_code": 0,
+    "stdout_sha256": "72c926b99a3deee3bacb09260669055bffcd815c3f6dabccb22656c1e47f5341",
+    "stderr": "",
+    "stdout": "\nBackup synced in 382ms\n"
+  }
+]

@@ -1,0 +1,1388 @@
+{
+  "issue": "quoridor-4lc.140",
+  "UTC": "2026-10-02T18:57:41.320749+00:00",
+  "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+  "last_heavy_end": "2026-10-02T18:49:16.348056+00:00",
+  "jobs": [
+    {
+      "name": "fpu140-build-fpu",
+      "phase": "build",
+      "start": "2026-10-02T18:45:15.128506+00:00",
+      "end": "2026-10-02T18:45:23.310701+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "peak_group_plus_runner_RSS": 325292032
+    },
+    {
+      "name": "fpu140-build-q0",
+      "phase": "build",
+      "start": "2026-10-02T18:42:16.313951+00:00",
+      "end": "2026-10-02T18:42:23.376738+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "peak_group_plus_runner_RSS": 320282624
+    },
+    {
+      "name": "fpu140-mechanism-r1",
+      "phase": "mechanism",
+      "start": "2026-10-02T18:48:53.552607+00:00",
+      "end": "2026-10-02T18:49:16.348056+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "peak_group_plus_runner_RSS": 1635737600
+    },
+    {
+      "name": "fpu140-mock-r1",
+      "phase": "protocol",
+      "start": "2026-10-02T18:46:27.853573+00:00",
+      "end": "2026-10-02T18:46:28.034039+00:00",
+      "exit": 1,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "peak_group_plus_runner_RSS": 98930688
+    },
+    {
+      "name": "fpu140-mock-r2",
+      "phase": "protocol",
+      "start": "2026-10-02T18:47:05.817711+00:00",
+      "end": "2026-10-02T18:47:06.004745+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "remaining": [],
+      "unknown_adopted": [],
+      "peak_group_plus_runner_RSS": 99459072
+    }
+  ],
+  "Model2_drop": {
+    "players": [
+      {
+        "kind": "dropped",
+        "handles": 0,
+        "activeNN": 0,
+        "at_ms": 1790966954863.53,
+        "producer_post_begin_ms": 1790966954863.5352,
+        "worker_engine": "candidate"
+      },
+      {
+        "kind": "dropped",
+        "handles": 0,
+        "activeNN": 0,
+        "at_ms": 1790966954864.4502,
+        "producer_post_begin_ms": 1790966954864.455,
+        "worker_engine": "reference"
+      }
+    ],
+    "handles": 0,
+    "activeNN": 0
+  },
+  "search_zero_receipts": 6,
+  "private_ABI_handles_zero_each": true,
+  "main_timers": {
+    "main_timers": 0,
+    "pending_messages": []
+  },
+  "monitor_callback_stop": true,
+  "monitor_state": {
+    "UTC": "2026-10-02T18:49:15.930Z",
+    "state": "READY",
+    "failure": null,
+    "deadlineUTC": "2026-10-02T20:01:20.808145+00:00",
+    "subjectIssue": "quoridor-4lc.140",
+    "rows": [
+      {
+        "pid": 2754868,
+        "starttick": 21985186,
+        "PPID": 2754861,
+        "ppid": 2754861,
+        "state": "R",
+        "kind": "owned_observer_child",
+        "parent": {
+          "pid": 2754861,
+          "starttick": 21985179,
+          "PPID": 2754859,
+          "ppid": 2754859,
+          "state": "R"
+        },
+        "startUTC": "2026-10-02T18:48:53.641Z",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      {
+        "id": "quoridor-4lc",
+        "PID": 2754868,
+        "startUTC": "2026-10-02T18:48:53.641Z",
+        "endUTC": "2026-10-02T18:48:54.486Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      },
+      {
+        "pid": 2754886,
+        "starttick": 21985271,
+        "PPID": 2754861,
+        "ppid": 2754861,
+        "state": "S",
+        "kind": "owned_observer_child",
+        "parent": {
+          "pid": 2754861,
+          "starttick": 21985179,
+          "PPID": 2754859,
+          "ppid": 2754859,
+          "state": "R"
+        },
+        "startUTC": "2026-10-02T18:48:54.486Z",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      {
+        "id": "quoridor-4lc.140",
+        "PID": 2754886,
+        "startUTC": "2026-10-02T18:48:54.486Z",
+        "endUTC": "2026-10-02T18:48:55.277Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      },
+      {
+        "pid": 2754986,
+        "starttick": 21985450,
+        "PPID": 2754861,
+        "ppid": 2754861,
+        "state": "S",
+        "kind": "owned_observer_child",
+        "parent": {
+          "pid": 2754861,
+          "starttick": 21985179,
+          "PPID": 2754859,
+          "ppid": 2754859,
+          "state": "R"
+        },
+        "startUTC": "2026-10-02T18:48:56.279Z",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      {
+        "id": "quoridor-4lc",
+        "PID": 2754986,
+        "startUTC": "2026-10-02T18:48:56.279Z",
+        "endUTC": "2026-10-02T18:48:58.289Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      },
+      {
+        "pid": 2755078,
+        "starttick": 21985651,
+        "PPID": 2754861,
+        "ppid": 2754861,
+        "state": "R",
+        "kind": "owned_observer_child",
+        "parent": {
+          "pid": 2754861,
+          "starttick": 21985179,
+          "PPID": 2754859,
+          "ppid": 2754859,
+          "state": "R"
+        },
+        "startUTC": "2026-10-02T18:48:58.289Z",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      {
+        "id": "quoridor-4lc.140",
+        "PID": 2755078,
+        "startUTC": "2026-10-02T18:48:58.289Z",
+        "endUTC": "2026-10-02T18:48:59.738Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      },
+      {
+        "pid": 2755103,
+        "starttick": 21985854,
+        "PPID": 2754861,
+        "ppid": 2754861,
+        "state": "R",
+        "kind": "owned_observer_child",
+        "parent": {
+          "pid": 2754861,
+          "starttick": 21985179,
+          "PPID": 2754859,
+          "ppid": 2754859,
+          "state": "R"
+        },
+        "startUTC": "2026-10-02T18:49:00.297Z",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      {
+        "id": "quoridor-4lc",
+        "PID": 2755103,
+        "startUTC": "2026-10-02T18:49:00.297Z",
+        "endUTC": "2026-10-02T18:49:02.511Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      },
+      {
+        "pid": 2755139,
+        "starttick": 21986073,
+        "PPID": 2754861,
+        "ppid": 2754861,
+        "state": "R",
+        "kind": "owned_observer_child",
+        "parent": {
+          "pid": 2754861,
+          "starttick": 21985179,
+          "PPID": 2754859,
+          "ppid": 2754859,
+          "state": "R"
+        },
+        "startUTC": "2026-10-02T18:49:02.511Z",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      {
+        "id": "quoridor-4lc.140",
+        "PID": 2755139,
+        "startUTC": "2026-10-02T18:49:02.511Z",
+        "endUTC": "2026-10-02T18:49:04.511Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      },
+      {
+        "pid": 2755183,
+        "starttick": 21986288,
+        "PPID": 2754861,
+        "ppid": 2754861,
+        "state": "R",
+        "kind": "owned_observer_child",
+        "parent": {
+          "pid": 2754861,
+          "starttick": 21985179,
+          "PPID": 2754859,
+          "ppid": 2754859,
+          "state": "R"
+        },
+        "startUTC": "2026-10-02T18:49:04.662Z",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      {
+        "id": "quoridor-4lc",
+        "PID": 2755183,
+        "startUTC": "2026-10-02T18:49:04.662Z",
+        "endUTC": "2026-10-02T18:49:06.470Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      },
+      {
+        "pid": 2755211,
+        "starttick": 21986469,
+        "PPID": 2754861,
+        "ppid": 2754861,
+        "state": "R",
+        "kind": "owned_observer_child",
+        "parent": {
+          "pid": 2754861,
+          "starttick": 21985179,
+          "PPID": 2754859,
+          "ppid": 2754859,
+          "state": "R"
+        },
+        "startUTC": "2026-10-02T18:49:06.471Z",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      {
+        "id": "quoridor-4lc.140",
+        "PID": 2755211,
+        "startUTC": "2026-10-02T18:49:06.471Z",
+        "endUTC": "2026-10-02T18:49:07.954Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      },
+      {
+        "pid": 2755236,
+        "starttick": 21986689,
+        "PPID": 2754861,
+        "ppid": 2754861,
+        "state": "R",
+        "kind": "owned_observer_child",
+        "parent": {
+          "pid": 2754861,
+          "starttick": 21985179,
+          "PPID": 2754859,
+          "ppid": 2754859,
+          "state": "R"
+        },
+        "startUTC": "2026-10-02T18:49:08.669Z",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      {
+        "id": "quoridor-4lc",
+        "PID": 2755236,
+        "startUTC": "2026-10-02T18:49:08.669Z",
+        "endUTC": "2026-10-02T18:49:10.201Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      },
+      {
+        "pid": 2755271,
+        "starttick": 21986842,
+        "PPID": 2754861,
+        "ppid": 2754861,
+        "state": "S",
+        "kind": "owned_observer_child",
+        "parent": {
+          "pid": 2754861,
+          "starttick": 21985179,
+          "PPID": 2754859,
+          "ppid": 2754859,
+          "state": "R"
+        },
+        "startUTC": "2026-10-02T18:49:10.201Z",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      {
+        "id": "quoridor-4lc.140",
+        "PID": 2755271,
+        "startUTC": "2026-10-02T18:49:10.201Z",
+        "endUTC": "2026-10-02T18:49:12.194Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      },
+      {
+        "pid": 2755318,
+        "starttick": 21987090,
+        "PPID": 2754861,
+        "ppid": 2754861,
+        "state": "R",
+        "kind": "owned_observer_child",
+        "parent": {
+          "pid": 2754861,
+          "starttick": 21985179,
+          "PPID": 2754859,
+          "ppid": 2754859,
+          "state": "R"
+        },
+        "startUTC": "2026-10-02T18:49:12.675Z",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      {
+        "id": "quoridor-4lc",
+        "PID": 2755318,
+        "startUTC": "2026-10-02T18:49:12.675Z",
+        "endUTC": "2026-10-02T18:49:14.847Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      },
+      {
+        "pid": 2755347,
+        "starttick": 21987307,
+        "PPID": 2754861,
+        "ppid": 2754861,
+        "state": "R",
+        "kind": "owned_observer_child",
+        "parent": {
+          "pid": 2754861,
+          "starttick": 21985179,
+          "PPID": 2754859,
+          "ppid": 2754859,
+          "state": "R"
+        },
+        "startUTC": "2026-10-02T18:49:14.847Z",
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      {
+        "id": "quoridor-4lc.140",
+        "PID": 2755347,
+        "startUTC": "2026-10-02T18:49:14.847Z",
+        "endUTC": "2026-10-02T18:49:15.929Z",
+        "exitCode": 0,
+        "signalCode": null,
+        "error": null,
+        "status": "in_progress",
+        "labels": [
+          "continuation-active",
+          "initial-window-ended"
+        ]
+      }
+    ],
+    "pending_children": [],
+    "clock_cost_not_subtracted": true,
+    "all_owned_read_callbacks_waited": true,
+    "signal_unknown": 0,
+    "active_monitor_timer": false
+  },
+  "inner_controlled": {
+    "remaining_pids": 0,
+    "tracked": [
+      {
+        "pid": 2754868,
+        "starttick": 21985186
+      },
+      {
+        "pid": 2754872,
+        "starttick": 21985187
+      },
+      {
+        "pid": 2754874,
+        "starttick": 21985194
+      },
+      {
+        "pid": 2754885,
+        "starttick": 21985263
+      },
+      {
+        "pid": 2754886,
+        "starttick": 21985271
+      },
+      {
+        "pid": 2754892,
+        "starttick": 21985274
+      },
+      {
+        "pid": 2754898,
+        "starttick": 21985278
+      },
+      {
+        "pid": 2754911,
+        "starttick": 21985340
+      },
+      {
+        "pid": 2754930,
+        "starttick": 21985390
+      },
+      {
+        "pid": 2754941,
+        "starttick": 21985413
+      },
+      {
+        "pid": 2754945,
+        "starttick": 21985413
+      },
+      {
+        "pid": 2754950,
+        "starttick": 21985415
+      },
+      {
+        "pid": 2754951,
+        "starttick": 21985415
+      },
+      {
+        "pid": 2754947,
+        "starttick": 21985414
+      },
+      {
+        "pid": 2754976,
+        "starttick": 21985444
+      },
+      {
+        "pid": 2754980,
+        "starttick": 21985447
+      },
+      {
+        "pid": 2754986,
+        "starttick": 21985450
+      },
+      {
+        "pid": 2754990,
+        "starttick": 21985451
+      },
+      {
+        "pid": 2755000,
+        "starttick": 21985455
+      },
+      {
+        "pid": 2755022,
+        "starttick": 21985480
+      },
+      {
+        "pid": 2755026,
+        "starttick": 21985483
+      },
+      {
+        "pid": 2755041,
+        "starttick": 21985489
+      },
+      {
+        "pid": 2755044,
+        "starttick": 21985496
+      },
+      {
+        "pid": 2755059,
+        "starttick": 21985535
+      },
+      {
+        "pid": 2755076,
+        "starttick": 21985643
+      },
+      {
+        "pid": 2755077,
+        "starttick": 21985644
+      },
+      {
+        "pid": 2755078,
+        "starttick": 21985651
+      },
+      {
+        "pid": 2755082,
+        "starttick": 21985653
+      },
+      {
+        "pid": 2755084,
+        "starttick": 21985656
+      },
+      {
+        "pid": 2755090,
+        "starttick": 21985666
+      },
+      {
+        "pid": 2755100,
+        "starttick": 21985786
+      },
+      {
+        "pid": 2755101,
+        "starttick": 21985786
+      },
+      {
+        "pid": 2755103,
+        "starttick": 21985854
+      },
+      {
+        "pid": 2755105,
+        "starttick": 21985859
+      },
+      {
+        "pid": 2755106,
+        "starttick": 21985859
+      },
+      {
+        "pid": 2755107,
+        "starttick": 21985861
+      },
+      {
+        "pid": 2755109,
+        "starttick": 21985873
+      },
+      {
+        "pid": 2755122,
+        "starttick": 21985897
+      },
+      {
+        "pid": 2755132,
+        "starttick": 21986063
+      },
+      {
+        "pid": 2755133,
+        "starttick": 21986064
+      },
+      {
+        "pid": 2755139,
+        "starttick": 21986073
+      },
+      {
+        "pid": 2755143,
+        "starttick": 21986076
+      },
+      {
+        "pid": 2755157,
+        "starttick": 21986131
+      },
+      {
+        "pid": 2755169,
+        "starttick": 21986140
+      },
+      {
+        "pid": 2755173,
+        "starttick": 21986262
+      },
+      {
+        "pid": 2755174,
+        "starttick": 21986263
+      },
+      {
+        "pid": 2755183,
+        "starttick": 21986288
+      },
+      {
+        "pid": 2755187,
+        "starttick": 21986290
+      },
+      {
+        "pid": 2755199,
+        "starttick": 21986335
+      },
+      {
+        "pid": 2755205,
+        "starttick": 21986348
+      },
+      {
+        "pid": 2755210,
+        "starttick": 21986460
+      },
+      {
+        "pid": 2755211,
+        "starttick": 21986469
+      },
+      {
+        "pid": 2755212,
+        "starttick": 21986470
+      },
+      {
+        "pid": 2755215,
+        "starttick": 21986471
+      },
+      {
+        "pid": 2755217,
+        "starttick": 21986479
+      },
+      {
+        "pid": 2755224,
+        "starttick": 21986489
+      },
+      {
+        "pid": 2755235,
+        "starttick": 21986610
+      },
+      {
+        "pid": 2755236,
+        "starttick": 21986689
+      },
+      {
+        "pid": 2755240,
+        "starttick": 21986690
+      },
+      {
+        "pid": 2755243,
+        "starttick": 21986699
+      },
+      {
+        "pid": 2755250,
+        "starttick": 21986710
+      },
+      {
+        "pid": 2755260,
+        "starttick": 21986832
+      },
+      {
+        "pid": 2755271,
+        "starttick": 21986842
+      },
+      {
+        "pid": 2755272,
+        "starttick": 21986843
+      },
+      {
+        "pid": 2755275,
+        "starttick": 21986844
+      },
+      {
+        "pid": 2755285,
+        "starttick": 21986902
+      },
+      {
+        "pid": 2755297,
+        "starttick": 21986912
+      },
+      {
+        "pid": 2755307,
+        "starttick": 21987037
+      },
+      {
+        "pid": 2755308,
+        "starttick": 21987037
+      },
+      {
+        "pid": 2755318,
+        "starttick": 21987090
+      },
+      {
+        "pid": 2755320,
+        "starttick": 21987090
+      },
+      {
+        "pid": 2755322,
+        "starttick": 21987091
+      },
+      {
+        "pid": 2755327,
+        "starttick": 21987099
+      },
+      {
+        "pid": 2755334,
+        "starttick": 21987113
+      },
+      {
+        "pid": 2755345,
+        "starttick": 21987241
+      },
+      {
+        "pid": 2755347,
+        "starttick": 21987307
+      },
+      {
+        "pid": 2755351,
+        "starttick": 21987309
+      },
+      {
+        "pid": 2755353,
+        "starttick": 21987314
+      },
+      {
+        "pid": 2755359,
+        "starttick": 21987322
+      },
+      {
+        "pid": 2755370,
+        "starttick": 21987404
+      }
+    ],
+    "forced": true,
+    "graceful_error": null,
+    "waited": true,
+    "zombie_identities_absent": true,
+    "registration_ack": true,
+    "registered": 38
+  },
+  "outer_ownedwait_remainingunknown0": true,
+  "identities": [
+    {
+      "pid": 2752433,
+      "start_ticks": 21963326
+    },
+    {
+      "pid": 2752434,
+      "start_ticks": 21963328
+    },
+    {
+      "pid": 2752438,
+      "start_ticks": 21963331
+    },
+    {
+      "pid": 2752452,
+      "start_ticks": 21963334
+    },
+    {
+      "pid": 2752465,
+      "start_ticks": 21963340
+    },
+    {
+      "pid": 2752474,
+      "start_ticks": 21963343
+    },
+    {
+      "pid": 2752488,
+      "start_ticks": 21963347
+    },
+    {
+      "pid": 2752571,
+      "start_ticks": 21963540
+    },
+    {
+      "pid": 2752616,
+      "start_ticks": 21963694
+    },
+    {
+      "pid": 2752643,
+      "start_ticks": 21963759
+    },
+    {
+      "pid": 2752664,
+      "start_ticks": 21963778
+    },
+    {
+      "pid": 2752706,
+      "start_ticks": 21963915
+    },
+    {
+      "pid": 2752734,
+      "start_ticks": 21963930
+    },
+    {
+      "pid": 2752786,
+      "start_ticks": 21964135
+    },
+    {
+      "pid": 2752431,
+      "start_ticks": 21963320
+    },
+    {
+      "pid": 2750496,
+      "start_ticks": 21945438
+    },
+    {
+      "pid": 2750497,
+      "start_ticks": 21945440
+    },
+    {
+      "pid": 2750499,
+      "start_ticks": 21945443
+    },
+    {
+      "pid": 2750514,
+      "start_ticks": 21945449
+    },
+    {
+      "pid": 2750521,
+      "start_ticks": 21945455
+    },
+    {
+      "pid": 2750522,
+      "start_ticks": 21945455
+    },
+    {
+      "pid": 2750523,
+      "start_ticks": 21945455
+    },
+    {
+      "pid": 2750530,
+      "start_ticks": 21945458
+    },
+    {
+      "pid": 2750544,
+      "start_ticks": 21945462
+    },
+    {
+      "pid": 2750587,
+      "start_ticks": 21945574
+    },
+    {
+      "pid": 2750608,
+      "start_ticks": 21945603
+    },
+    {
+      "pid": 2750618,
+      "start_ticks": 21945611
+    },
+    {
+      "pid": 2750659,
+      "start_ticks": 21945707
+    },
+    {
+      "pid": 2750679,
+      "start_ticks": 21945719
+    },
+    {
+      "pid": 2750726,
+      "start_ticks": 21945845
+    },
+    {
+      "pid": 2750754,
+      "start_ticks": 21945859
+    },
+    {
+      "pid": 2750837,
+      "start_ticks": 21946134
+    },
+    {
+      "pid": 2750840,
+      "start_ticks": 21946138
+    },
+    {
+      "pid": 2750493,
+      "start_ticks": 21945431
+    },
+    {
+      "pid": 2754861,
+      "start_ticks": 21985179
+    },
+    {
+      "pid": 2754868,
+      "start_ticks": 21985186
+    },
+    {
+      "pid": 2754872,
+      "start_ticks": 21985187
+    },
+    {
+      "pid": 2754874,
+      "start_ticks": 21985194
+    },
+    {
+      "pid": 2754885,
+      "start_ticks": 21985263
+    },
+    {
+      "pid": 2754886,
+      "start_ticks": 21985271
+    },
+    {
+      "pid": 2754892,
+      "start_ticks": 21985274
+    },
+    {
+      "pid": 2754898,
+      "start_ticks": 21985278
+    },
+    {
+      "pid": 2754911,
+      "start_ticks": 21985340
+    },
+    {
+      "pid": 2754930,
+      "start_ticks": 21985390
+    },
+    {
+      "pid": 2754945,
+      "start_ticks": 21985413
+    },
+    {
+      "pid": 2754947,
+      "start_ticks": 21985414
+    },
+    {
+      "pid": 2754950,
+      "start_ticks": 21985415
+    },
+    {
+      "pid": 2754951,
+      "start_ticks": 21985415
+    },
+    {
+      "pid": 2754976,
+      "start_ticks": 21985444
+    },
+    {
+      "pid": 2754980,
+      "start_ticks": 21985447
+    },
+    {
+      "pid": 2754986,
+      "start_ticks": 21985450
+    },
+    {
+      "pid": 2754990,
+      "start_ticks": 21985451
+    },
+    {
+      "pid": 2755000,
+      "start_ticks": 21985455
+    },
+    {
+      "pid": 2755022,
+      "start_ticks": 21985480
+    },
+    {
+      "pid": 2755026,
+      "start_ticks": 21985483
+    },
+    {
+      "pid": 2755041,
+      "start_ticks": 21985489
+    },
+    {
+      "pid": 2755044,
+      "start_ticks": 21985496
+    },
+    {
+      "pid": 2755059,
+      "start_ticks": 21985535
+    },
+    {
+      "pid": 2755077,
+      "start_ticks": 21985644
+    },
+    {
+      "pid": 2755078,
+      "start_ticks": 21985651
+    },
+    {
+      "pid": 2755082,
+      "start_ticks": 21985653
+    },
+    {
+      "pid": 2755084,
+      "start_ticks": 21985656
+    },
+    {
+      "pid": 2755090,
+      "start_ticks": 21985666
+    },
+    {
+      "pid": 2755101,
+      "start_ticks": 21985786
+    },
+    {
+      "pid": 2755103,
+      "start_ticks": 21985854
+    },
+    {
+      "pid": 2755105,
+      "start_ticks": 21985859
+    },
+    {
+      "pid": 2755106,
+      "start_ticks": 21985859
+    },
+    {
+      "pid": 2755107,
+      "start_ticks": 21985861
+    },
+    {
+      "pid": 2755109,
+      "start_ticks": 21985873
+    },
+    {
+      "pid": 2755122,
+      "start_ticks": 21985897
+    },
+    {
+      "pid": 2755132,
+      "start_ticks": 21986063
+    },
+    {
+      "pid": 2755133,
+      "start_ticks": 21986064
+    },
+    {
+      "pid": 2755139,
+      "start_ticks": 21986073
+    },
+    {
+      "pid": 2755143,
+      "start_ticks": 21986076
+    },
+    {
+      "pid": 2755157,
+      "start_ticks": 21986131
+    },
+    {
+      "pid": 2755169,
+      "start_ticks": 21986140
+    },
+    {
+      "pid": 2755173,
+      "start_ticks": 21986262
+    },
+    {
+      "pid": 2755174,
+      "start_ticks": 21986263
+    },
+    {
+      "pid": 2755183,
+      "start_ticks": 21986288
+    },
+    {
+      "pid": 2755187,
+      "start_ticks": 21986290
+    },
+    {
+      "pid": 2755199,
+      "start_ticks": 21986335
+    },
+    {
+      "pid": 2755210,
+      "start_ticks": 21986460
+    },
+    {
+      "pid": 2755211,
+      "start_ticks": 21986469
+    },
+    {
+      "pid": 2755212,
+      "start_ticks": 21986470
+    },
+    {
+      "pid": 2755215,
+      "start_ticks": 21986471
+    },
+    {
+      "pid": 2755217,
+      "start_ticks": 21986479
+    },
+    {
+      "pid": 2755224,
+      "start_ticks": 21986489
+    },
+    {
+      "pid": 2755235,
+      "start_ticks": 21986610
+    },
+    {
+      "pid": 2755236,
+      "start_ticks": 21986689
+    },
+    {
+      "pid": 2755240,
+      "start_ticks": 21986690
+    },
+    {
+      "pid": 2755243,
+      "start_ticks": 21986699
+    },
+    {
+      "pid": 2755250,
+      "start_ticks": 21986710
+    },
+    {
+      "pid": 2755260,
+      "start_ticks": 21986832
+    },
+    {
+      "pid": 2755271,
+      "start_ticks": 21986842
+    },
+    {
+      "pid": 2755272,
+      "start_ticks": 21986843
+    },
+    {
+      "pid": 2755275,
+      "start_ticks": 21986844
+    },
+    {
+      "pid": 2755285,
+      "start_ticks": 21986902
+    },
+    {
+      "pid": 2755297,
+      "start_ticks": 21986912
+    },
+    {
+      "pid": 2755307,
+      "start_ticks": 21987037
+    },
+    {
+      "pid": 2755318,
+      "start_ticks": 21987090
+    },
+    {
+      "pid": 2755320,
+      "start_ticks": 21987090
+    },
+    {
+      "pid": 2755322,
+      "start_ticks": 21987091
+    },
+    {
+      "pid": 2755327,
+      "start_ticks": 21987099
+    },
+    {
+      "pid": 2755334,
+      "start_ticks": 21987113
+    },
+    {
+      "pid": 2755345,
+      "start_ticks": 21987241
+    },
+    {
+      "pid": 2755347,
+      "start_ticks": 21987307
+    },
+    {
+      "pid": 2755351,
+      "start_ticks": 21987309
+    },
+    {
+      "pid": 2755353,
+      "start_ticks": 21987314
+    },
+    {
+      "pid": 2755359,
+      "start_ticks": 21987322
+    },
+    {
+      "pid": 2755370,
+      "start_ticks": 21987404
+    },
+    {
+      "pid": 2754859,
+      "start_ticks": 21985153
+    },
+    {
+      "pid": 2753419,
+      "start_ticks": 21970602
+    },
+    {
+      "pid": 2753420,
+      "start_ticks": 21970605
+    },
+    {
+      "pid": 2753417,
+      "start_ticks": 21970598
+    },
+    {
+      "pid": 2753806,
+      "start_ticks": 21974400
+    },
+    {
+      "pid": 2753808,
+      "start_ticks": 21974402
+    },
+    {
+      "pid": 2753804,
+      "start_ticks": 21974395
+    }
+  ],
+  "identity_count": 117,
+  "current_same_identity": [],
+  "measured_source_before_after_exact": true,
+  "readonly_before_after_exact": true,
+  "source_hashafter": {
+    "tools/ai-sigma-candidate-true-mean-fpu/register.py": "e7201218ab3c3a4f90da59bdc9d56a0ac73643a41dfbcc44780f45589b83ebe9",
+    "tools/ai-sigma-candidate-true-mean-fpu/diagnose.cjs": "c93164aab147d980af576e31ca69efc09cf33b5665dadbb3ae5f7504112c5ca2",
+    "tools/ai-sigma-candidate-true-mean-fpu/mock.py": "ea4a2ef89df55deb3607ff996414046779d36922aa24ad1a194ff750a33c66c1",
+    "tools/ai-sigma-candidate-true-mean-fpu/mean-main.js": "d1c3d2539e6191d42fe8f8ad7664d38fbf60e0825d080edc8d085c16ff170b7a",
+    "tools/ai-sigma-candidate-true-mean-fpu/mean-worker.js": "5c764450ad068a5e8b943097452e91c3d4116e19167702012a7e5eeb2a622dec",
+    "tools/ai-sigma-candidate-true-mean-fpu/admission-mock.py": "df8bdb16ad7d099cd28e3023d3af1a044617c3f8959e2baff1fca6dc4889d0dd",
+    "tools/ai-sigma-candidate-true-mean-fpu/runner.py": "4e6b1b7e32c3efd1227654d0deed4828a7ecdbe2c6e856172244005e4c928f2b",
+    "tools/ai-sigma-candidate-true-mean-fpu/mock.cjs": "b2bbf3b423428e1f18de9ad0e8c578042ded330d612ca53eed37f0ce847c4dd9",
+    "tools/ai-sigma-candidate-true-mean-fpu/admission.py": "28fad68c052d21202edb1e61757c636931ef805a5536f69d61a39616c277d09f",
+    "tools/ai-sigma-candidate-true-mean-fpu/browser.cjs": "70660a95511af8602a456c52bfe000c6ee3fdd1d7756c32edce6fa8ea3f1bcd4",
+    "tools/ai-sigma-candidate-true-mean-fpu/prepare.py": "041a1aeeec5fb07ff6e09513ab604f63c1cdf5b0302741587b9d180b9e876f95",
+    "tools/ai-sigma-candidate-true-mean-fpu/commit-own.sh": "d80ccda19b1bd48ce264ec0e1b9289318b6fe006f80ef6c070c2e40079ec467d",
+    "tools/ai-sigma-candidate-true-mean-fpu/adapters.cjs": "a1b3d9266d3f524aa9f71d2d3e6acf787b593b7565812f9389a7899f1799c49c",
+    "tools/ai-sigma-candidate-true-mean-fpu/build.py": "ad1442884a1d59594443f8da376601caeb0ccb0965f12fbae4d1dc77744c157e",
+    "tools/ai-sigma-candidate-true-mean-fpu/private/Cargo.toml": "9c20ccfd83b33c9d5760e3bb9ce435a9c0a189171c5896577ce50e2cdb1f0898",
+    "tools/ai-sigma-candidate-true-mean-fpu/private/Cargo.lock": "d0568a38ed13c537c3ab96abe3a0585e82258da1a3a5e64ee4ab18df07211b24",
+    "tools/ai-sigma-candidate-true-mean-fpu/private/src/kernel.rs": "b231e06f4c35e3228ce344a8f8f78557b6b3962d6a9742e086530c5c7ecaec7c",
+    "tools/ai-sigma-candidate-true-mean-fpu/private/src/research.rs": "41f35611f95436c9a76fe544ff5cd274b5116ab611b0156003ca373777116b31",
+    "tools/ai-sigma-candidate-true-mean-fpu/private/src/lib.rs": "9f016fb65c0db97b96fd47ad3e1f29284228469514e07e5593170cae97eb3b59"
+  },
+  "source_write_stopped_measured_code": true,
+  "report_preparation_source_still_active": false,
+  "scientific_run_stopped": true,
+  "quality_started": 0,
+  "quality_branch": "known_adverse_input3_end",
+  "current_absence_not_natural_or_allhost_or_fullperiod": true,
+  "source_write_stopped": true,
+  "source_hashafter_all_own": {
+    "tools/ai-sigma-candidate-true-mean-fpu/stop-early.py": "65bff083a4b04917dd9b8f9bbdcdca3401becfc37058abc9b6436bddcb6baf74",
+    "tools/ai-sigma-candidate-true-mean-fpu/register.py": "e7201218ab3c3a4f90da59bdc9d56a0ac73643a41dfbcc44780f45589b83ebe9",
+    "tools/ai-sigma-candidate-true-mean-fpu/analyze.py": "68b6b5eb6f79401ce4ab74077bb480abb2bfff39154672a8bff46d6e799ba737",
+    "tools/ai-sigma-candidate-true-mean-fpu/diagnose.cjs": "c93164aab147d980af576e31ca69efc09cf33b5665dadbb3ae5f7504112c5ca2",
+    "tools/ai-sigma-candidate-true-mean-fpu/mock.py": "ea4a2ef89df55deb3607ff996414046779d36922aa24ad1a194ff750a33c66c1",
+    "tools/ai-sigma-candidate-true-mean-fpu/mean-main.js": "d1c3d2539e6191d42fe8f8ad7664d38fbf60e0825d080edc8d085c16ff170b7a",
+    "tools/ai-sigma-candidate-true-mean-fpu/mean-worker.js": "5c764450ad068a5e8b943097452e91c3d4116e19167702012a7e5eeb2a622dec",
+    "tools/ai-sigma-candidate-true-mean-fpu/admission-mock.py": "df8bdb16ad7d099cd28e3023d3af1a044617c3f8959e2baff1fca6dc4889d0dd",
+    "tools/ai-sigma-candidate-true-mean-fpu/runner.py": "4e6b1b7e32c3efd1227654d0deed4828a7ecdbe2c6e856172244005e4c928f2b",
+    "tools/ai-sigma-candidate-true-mean-fpu/mock.cjs": "b2bbf3b423428e1f18de9ad0e8c578042ded330d612ca53eed37f0ce847c4dd9",
+    "tools/ai-sigma-candidate-true-mean-fpu/admission.py": "28fad68c052d21202edb1e61757c636931ef805a5536f69d61a39616c277d09f",
+    "tools/ai-sigma-candidate-true-mean-fpu/browser.cjs": "70660a95511af8602a456c52bfe000c6ee3fdd1d7756c32edce6fa8ea3f1bcd4",
+    "tools/ai-sigma-candidate-true-mean-fpu/prepare.py": "041a1aeeec5fb07ff6e09513ab604f63c1cdf5b0302741587b9d180b9e876f95",
+    "tools/ai-sigma-candidate-true-mean-fpu/commit-own.sh": "d80ccda19b1bd48ce264ec0e1b9289318b6fe006f80ef6c070c2e40079ec467d",
+    "tools/ai-sigma-candidate-true-mean-fpu/adapters.cjs": "a1b3d9266d3f524aa9f71d2d3e6acf787b593b7565812f9389a7899f1799c49c",
+    "tools/ai-sigma-candidate-true-mean-fpu/build.py": "ad1442884a1d59594443f8da376601caeb0ccb0965f12fbae4d1dc77744c157e",
+    "tools/ai-sigma-candidate-true-mean-fpu/README.md": "5bc069987bf769cb6b224dae33296f66f42bfbef018534457a58880e6ecc5390",
+    "tools/ai-sigma-candidate-true-mean-fpu/preserve.py": "a022091b111bd46015dc96aa0fab17a056ba24af2eeb10b2dd6e1241b87f49b4",
+    "tools/ai-sigma-candidate-true-mean-fpu/private/Cargo.toml": "9c20ccfd83b33c9d5760e3bb9ce435a9c0a189171c5896577ce50e2cdb1f0898",
+    "tools/ai-sigma-candidate-true-mean-fpu/private/Cargo.lock": "d0568a38ed13c537c3ab96abe3a0585e82258da1a3a5e64ee4ab18df07211b24",
+    "tools/ai-sigma-candidate-true-mean-fpu/private/src/kernel.rs": "b231e06f4c35e3228ce344a8f8f78557b6b3962d6a9742e086530c5c7ecaec7c",
+    "tools/ai-sigma-candidate-true-mean-fpu/private/src/research.rs": "41f35611f95436c9a76fe544ff5cd274b5116ab611b0156003ca373777116b31",
+    "tools/ai-sigma-candidate-true-mean-fpu/private/src/lib.rs": "9f016fb65c0db97b96fd47ad3e1f29284228469514e07e5593170cae97eb3b59"
+  },
+  "necessary_readonly_current_hashes": {
+    "tools/ai-sigma-deep-node-comparison/deep-input.js": "c66a60f6545a8973a7ffac7d85fd2d125fde73872145a3a660fcae18078ad155",
+    "tools/ai-sigma-actual-boundary-repair/reference-core.js": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05",
+    "models/experiments/ai-sigma/reference/sigma-pcr250/best.onnx": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+    ".artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/ort.min.js": "95c6f6611837cb50449cb6a0c092145bf493ac64cd0d004033cefc977366e7cb",
+    ".artifacts/ai-sigma/reference/SIGMA-WEB-REFERENCE/ort-wasm-simd-threaded.jsep.wasm": "0663b902fb3937883a34375926bdfe3e1c86cd4c99cbc04c06a7cdf46c78bdde",
+    ".artifacts/ai-sigma/runs/SIGMA-ORT-SEARCH/final.wasm": "1f54d0b8f0c6d3d7d51935886ed506e44376a2052506be62ca7a726c85a78a01"
+  },
+  "served_private_binary_hashafter": {
+    "q0": "80f5dff7316f2594f5e5cd711407a7ea892b6e721c10ea359f14240c19445df3",
+    "fpu": "16163810b649fb976c9a9cc7ab1c5922df53f83e1db1695e273b4fbb3790b0af"
+  },
+  "served_original_bindings": {
+    "main": {
+      "path": "tools/ai-sigma-player-workers/player-main.js",
+      "original_SHA256": "610e899acd43215efc9fa3a08f3c337248639505a57196e1a730a91f7afde4a8",
+      "adapted_SHA256": "deeb2a7b9fa00e7869860bd590919e10040f9e8d535be279e9ae95b43616b5c1",
+      "adapter117_readonly": true
+    },
+    "worker": {
+      "path": "tools/ai-sigma-player-workers/player-worker.js",
+      "original_SHA256": "fd5f5b72a836164133b22f718d58ef31d2d4b0f8a4887070e1ac9346112de5e8",
+      "adapted_SHA256": "9e347faf1ad8862a640c6ef5aee67ff2dc540c3d439a8b860253660090767c4c",
+      "adapter117_readonly": true
+    },
+    "producer": {
+      "path": "tools/ai-sigma-tail-transport/early-worker.js",
+      "original_SHA256": "9494e33e7204be208262914c04ea5eb0d7985872a6d7ebc6e4084d84729097d4",
+      "adapted_SHA256": "31c2684547c9b6e16aa27163ead080cf20bbede284e4a1b77dc3436764422a09",
+      "adapter117_readonly": true
+    },
+    "checkpoint": {
+      "path": "tools/ai-sigma-tail-transport/checkpoint.js",
+      "original_SHA256": "2b736d696a099350bf724b40dd858fc3afe11ce17a1c143f3029e5fcd2f28d8c",
+      "adapted_SHA256": "494581d5ce5fc38e7afb753d9ca92e0f49bb71ed516762b7ea48a0c6d89e1119",
+      "adapter117_readonly": true
+    },
+    "cache": {
+      "path": "tools/ai-sigma-actual-boundary-repair/early-cache.cjs",
+      "original_SHA256": "748fe01dfebf5e524465ef69255acf0026154188b9002a5338ca790ca092e7f7",
+      "adapted_SHA256": "a547e67cc4cfa6cfce8b40234381b48c9126a7accbee8e121351d822d8cbf8ac",
+      "adapter117_readonly": true
+    }
+  },
+  "closure_pack_short_process": {
+    "pid": 2761448,
+    "start_ticks": 22037962,
+    "excluded_from_managed_identity_union": true,
+    "ends_before_report_delivery": true
+  },
+  "unmanaged_management_fullperiod_PID_RSS_affinity_missing": true
+}

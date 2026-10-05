@@ -1,0 +1,1 @@
+goal quoridor-4lc /198 固定197gate未達を物理SHA/停止receipt確認。beststep0/初期同tensor/val.6901755739=WD0initial/定数.6787804677、四条件false。fresh24openingは結果前固定済み、全24NOT_STARTED(GATE_NOT_MET)、NN/GPU/game/model/test0/scienceattempt0。源/runtime/科学子0停止、195/sharedcanonical/原194/187readonly。不存在教師/mask/π/z捏造0、棋力lossへの付替え0。今は必要Git bytes復元/backup/handoffのみ、旧194本人close+backup済。条件付き新test費を使わず有限終了、追加NN科学再開0。

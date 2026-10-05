@@ -1,0 +1,91 @@
+{
+  "at": "2026-10-02T10:32:29.460090+00:00",
+  "run": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame8-b03a3825-b373-4f4c-8e19-2390bdd141ea",
+  "validation": {
+    "valid": true,
+    "config_sha256": "337dd95bc65165949183184ce95b57e6ebe918e8bc5db187fa7a64ab2d42bc24",
+    "end_at": "2026-10-02T14:10:49+00:00",
+    "expired": false
+  },
+  "start": {
+    "started": true,
+    "process": {
+      "pid": 2402552,
+      "start_ticks": "19006242",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "state_dir": "/workspaces/quoridor/.artifacts/research-team/scheduler-sigma-continuation-20261001"
+  },
+  "actual_state": {
+    "binding": {
+      "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+      "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+      "target": "supervisor",
+      "dispatch_issue": "quoridor-4lc.40",
+      "contract_file": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+    },
+    "process": {
+      "pid": 2402552,
+      "start_ticks": "19006242",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "phase": "running",
+    "recovery_required": false,
+    "last_result": {
+      "at": "2026-10-02T10:32:29.156361+00:00",
+      "event": "started"
+    },
+    "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+    "config_sha256": "337dd95bc65165949183184ce95b57e6ebe918e8bc5db187fa7a64ab2d42bc24",
+    "contract_sha256": "a8f554579b70bdf1431b70b9a73e280c421efc3880a5f083a6fbfca9c345be42",
+    "next_at": null,
+    "owned": null
+  },
+  "monitor": {
+    "pid": 2402571,
+    "start_ticks": "19006262",
+    "state": "R",
+    "rss_bytes": 20586496,
+    "cpu_ticks": 2,
+    "affinity": [
+      0
+    ],
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "expected_hashes": {
+    "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json": "337dd95bc65165949183184ce95b57e6ebe918e8bc5db187fa7a64ab2d42bc24",
+    "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json": "a8f554579b70bdf1431b70b9a73e280c421efc3880a5f083a6fbfca9c345be42",
+    "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/prompt.md": "85bec9def0706835060680ae58557bc7cfa3dd2d8a95d54ad38451bd62d183c0",
+    "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/scheduler.py": "a5ade72a5024d2de569b18ec9f470a984a4d0fe1331c1ac0d24534bb4cef4652",
+    "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/watch.py": "ed06b86ff1d7f2f8c9890ebc1bce1d54dcbd2025fc72f14b008c9d2d759c9290",
+    "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/safe_state.py": "25f9a0c8b50088ce67b8414a67932d372f02e276dc878103bfe340d09953837b",
+    "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/report.py": "13b2c32f68fdc4dca68c0f251b68ebfdb838d201ff4ad35b489dec12b75ec7b5",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-supervisor-read-guard/guard.py": "714860f11e98ddb2419996928f5c8d7a4b591133eb90e84764dd394c404a06b4",
+    "/workspaces/quoridor/.worktree/ai-sigma/docs/design/ai-sigma-contract-supervisor-continuation.md": "8c6cf5d6de0ed95da7fe14c0da3f89c2aaf8d0f15b78a01e3dbb1011d244c60d",
+    "/workspaces/quoridor/.worktree/ai-sigma/docs/design/ai-sigma-continuation-20261001.md": "0f0be04113893b62d3f79ef45bd9d17bd38817622091152d2eb25017acec43fe",
+    "/workspaces/quoridor/.worktree/ai-sigma/.agents/research-team/common.md": "f689b6f37b4e41b97e33837d146fba756463fc4ba01f852e9043c083d34e0ac1",
+    "/workspaces/quoridor/.agents/research-team/common.md": "f689b6f37b4e41b97e33837d146fba756463fc4ba01f852e9043c083d34e0ac1",
+    "/workspaces/quoridor/.worktree/ai-sigma/.agents/research-team/roles/coordinator.md": "e74292dd59903236f10d77b861f730e32f0357efe436ebca1718836283c978e6",
+    "/workspaces/quoridor/.worktree/ai-sigma/.agents/research-team/roles/hypothesis.md": "adbeb733274fc817e36127eee3b916f92c64680b5987e2716116188158d98692",
+    "/workspaces/quoridor/.worktree/ai-sigma/.agents/research-team/roles/experiment.md": "199ff9ea5659e197613adc834b7c1bf56c7ed321b91c3e394accee42f9cd5f9b",
+    "/workspaces/quoridor/.worktree/ai-sigma/.agents/research-team/roles/critic.md": "b04c44c844c3cbc5842d381f5bee1258f1e71d1f0a13513ae87f6ba2a32df85c",
+    "/workspaces/quoridor/.worktree/ai-sigma/.agents/research-team/roles/steward.md": "6a66e85bc097c0311e9a9910fef0c416df6012fbd16922840ef7d036c54d6fda",
+    "/workspaces/quoridor/.worktree/ai-sigma/.agents/research-team/roles/supervisor.md": "ace98c1080024575d4d6ba20e20a7aeb65cbf32b4c2ca9de6f418f424ec1cf76",
+    "/workspaces/quoridor/.agents/research-team/roles/coordinator.md": "e74292dd59903236f10d77b861f730e32f0357efe436ebca1718836283c978e6",
+    "/workspaces/quoridor/.agents/research-team/roles/hypothesis.md": "adbeb733274fc817e36127eee3b916f92c64680b5987e2716116188158d98692",
+    "/workspaces/quoridor/.agents/research-team/roles/experiment.md": "199ff9ea5659e197613adc834b7c1bf56c7ed321b91c3e394accee42f9cd5f9b",
+    "/workspaces/quoridor/.agents/research-team/roles/critic.md": "b04c44c844c3cbc5842d381f5bee1258f1e71d1f0a13513ae87f6ba2a32df85c",
+    "/workspaces/quoridor/.agents/research-team/roles/steward.md": "6a66e85bc097c0311e9a9910fef0c416df6012fbd16922840ef7d036c54d6fda",
+    "/workspaces/quoridor/.agents/research-team/roles/supervisor.md": "ace98c1080024575d4d6ba20e20a7aeb65cbf32b4c2ca9de6f418f424ec1cf76"
+  },
+  "frame": 8,
+  "source_edits_after_monitor_start": false,
+  "fresh_start_event": {
+    "at": "2026-10-02T10:32:29.156361+00:00",
+    "event": "started"
+  },
+  "reloaded_event_claimed": false,
+  "old_final_monitor_report_unaccepted_unverified": true,
+  "future_whole_turn_and_final_stop_not_observed": true
+}

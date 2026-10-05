@@ -1,0 +1,41 @@
+{
+  "classification_policy": "external/cancel/browser late/Judge preserved; known engine fault separate; shared FAULT with no received fault is ambiguous unfinished. All causes retained. Old107 outcomes not reclassified.",
+  "parity": "original vs rebuilt baseline exact raw ABI/root gates and K8 CP fields for each fixed context; binary identical is supporting evidence, not only gate",
+  "equal_completed_plan": [
+    {
+      "fixture_id": "initial-p1",
+      "order": [
+        "baseline",
+        "c1"
+      ],
+      "K": 32
+    },
+    {
+      "fixture_id": "asym-hv-p2",
+      "order": [
+        "c1",
+        "baseline"
+      ],
+      "K": 32
+    },
+    {
+      "fixture_id": "straight-jump-p2",
+      "order": [
+        "baseline",
+        "c1"
+      ],
+      "K": 32
+    }
+  ],
+  "K_definition": "root expansion included; observed rootN=sim=32 and rootedge visits sum31; not Sigma loop count",
+  "count_timeout_ms": 30000,
+  "count_measurement": "browser Worker ABI begin/infer/resume/checkpoint; final tree once, Node save after; each condition same checkpoint overhead",
+  "fallbacks": 0,
+  "tree_history_cache_carried": false,
+  "seed": 1979,
+  "max_nodes": 512,
+  "max_depth": 24,
+  "numeric_threshold": "abs1e-4+rtol1e-4",
+  "capture": "final root distribution/Action/depth/cap/entropy/NNcalls/noNN and completion/stop; no favourable row replacement",
+  "start_stop_clock_calibration": "browser main->Worker 8 ping each; initial and end recorded; old drift not retrofilled"
+}

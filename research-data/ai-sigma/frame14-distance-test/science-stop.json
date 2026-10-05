@@ -1,0 +1,81 @@
+{
+  "issue": "quoridor-4lc.201",
+  "UTC": "2026-10-04T01:20:36.422558+00:00",
+  "science_start": "2026-10-04T01:17:23.218781+00:00",
+  "science_stop": "2026-10-04T01:18:45.121967+00:00",
+  "jobwall_s": 83.72390816896223,
+  "exit": 0,
+  "all_children_waited": true,
+  "remaining_exact_identity": [],
+  "broker_zero": {
+    "pending_games": 0,
+    "inflight_batches": 0,
+    "queued": 0,
+    "timer": false,
+    "started": 63329,
+    "returned": 63329
+  },
+  "result_pending": false,
+  "logical_workerNN": 63329,
+  "physical_provider": {
+    "request_id": "stop",
+    "ok": true,
+    "result": {
+      "sample_cap": 307200,
+      "private_issue": "quoridor-4lc.187",
+      "modelhash": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+      "provider": "torch-folded-dynamicB-v1",
+      "original_ONNX_batch": 1,
+      "batch_min": 1,
+      "batch_max": 8,
+      "dtype": "float32",
+      "TF32": false,
+      "AMP": false,
+      "torch": "2.14.0+cu130",
+      "ORT": "1.30.0",
+      "device": "NVIDIA GeForce RTX 3060",
+      "threads": [
+        1,
+        1
+      ],
+      "CPU_affinity": [
+        0
+      ],
+      "coldinit_s": {
+        "import": 0.7323268839973025,
+        "CPUORT_session": 0.039137840969488025,
+        "graph_weights": 0.054844708007294685,
+        "CUDA_upload_context": 0.3498760450165719
+      },
+      "single_sample_equivalent": 63329,
+      "calls": {
+        "cuda": 9299,
+        "cpuort": 0
+      },
+      "rows": {
+        "cuda": 63329,
+        "cpuort": 0
+      },
+      "RAM_peak_KiB": 1164884,
+      "GPU_allocated_B": 20162048,
+      "GPU_reserved_B": 35651584,
+      "GPU_peak_allocated_B": 23154176,
+      "GPU_peak_reserved_B": 35651584
+    }
+  },
+  "sampled_peak_familyRSS": 2263277568,
+  "science_source_hashes": {
+    "tools/ai-sigma-frame14-distance-test/save_git.py": "70f7a98865f1f575cd20da69fc4a339cc4290372ac999ce6a1c8d48a60644212",
+    "tools/ai-sigma-frame14-distance-test/pack.py": "4acef4f08b517d8c840a9d350f6594feae300ed0ecd331ad25e46368676de910",
+    "tools/ai-sigma-frame14-distance-test/generate.cjs": "fac6fbde67506b28df182fb7c817ae34bcda496b5f8f8a1ffdd92e23ca251b0c",
+    "tools/ai-sigma-frame14-distance-test/runner.py": "ab113f5f48449fd1ad2c47bc6c49ac2031a9efce6754fd84802fcc64c3422bd8",
+    "tools/ai-sigma-frame14-distance-test/audit_openings.cjs": "b86fca20a2c83eec91dbed0df1f67ea0d6d255d7503d57249c01acfd828c8dcd",
+    "tools/ai-sigma-frame14-distance-test/export.cjs": "c58d1c3dfc2a885db296593d059b639398bd788ebe3892ad7182201ed125e1bf",
+    "tools/ai-sigma-frame14-distance-test/connect.py": "3376edaa1f7310ab5cc586768bd9228b37e85afd2bc826075936253a3ce0e78b",
+    "tools/ai-sigma-frame14-distance-test/prepare.cjs": "11b6b0a97f5a35a3be1dbdead4d59001858a1830b113ef61306e6743e91db98b",
+    "tools/ai-sigma-frame14-distance-test/README.md": "f8987769a9601bc2df4f6c4a882753fc2e6d01ec5e01db3f73fb850e630cb31e",
+    "tools/ai-sigma-frame14-distance-test/check_gate.py": "a87b8ae5c878842253565d5faffee7a72d1093ceaaa5f39b33e7af1269a5e777"
+  },
+  "scientific_runtime_source_stopped": true,
+  "quality_export_pending": true
+}

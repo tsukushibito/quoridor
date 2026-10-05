@@ -1,0 +1,4 @@
+  File "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-fit-gap-analysis/raw-linear-control/run.py", line 22
+    (D/'coefficients.json.gz').write_bytes(gzip.compress(json.dumps(dict(lambda_fixed=.01,intercept_penalty=0,features=626,trainonly=True,mu_f64=mu.tolist(),population_var_f64=var.tolist(),mu_f32=mu32.tolist(),sigma_f32=sigma32.tolist(),zero_columns=np.where(zero)[0].tolist(),solve_coefficients_f64=coef.tolist(),applied_coefficients_f32=cf.tolist(),normal_residual_maxabs=err,condition_number=float(np.linalg.cond(A)),unobserved_train_validation_active_columns=np.where(unseen)[0].tolist(),val_rows_with_unseen_active=int(hasunseen.sum()),val_original_gameweight_unseen_rowmass=float(vw@hasunseen.astype(float)),val_original_gameweight_unseen_active_mass=float(vw@(X[val,:624][:,unseen].sum(1))),forward=0,optimizer=0).encode(),compresslevel=6))
+                                          ^
+SyntaxError: '(' was never closed

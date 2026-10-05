@@ -1,0 +1,22 @@
+{
+  "UTC": "2026-10-03T11:23:39.298466+00:00",
+  "scheduler_owned": null,
+  "next_at": 1791027516.3962464,
+  "current_research_processes": [
+    {
+      "pid": 3352074,
+      "start_ticks": "27085893",
+      "CPU_last": "0",
+      "rss_pages": "41692",
+      "cmd": "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python -B /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/scheduler.py run --config /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json --state-dir /workspaces/quoridor/.artifacts/research-team/scheduler-sigma-continuation-20261001 "
+    },
+    {
+      "pid": 3472541,
+      "start_ticks": "27956198",
+      "CPU_last": "10",
+      "rss_pages": "736",
+      "cmd": "/bin/bash -c taskset -c 0 env PYTHONDONTWRITEBYTECODE=1 python3 - <<'PY'\nfrom pathlib import Path\nimport subprocess,os,time,json,datetime,resource,hashlib\nD=Path('research-data/ai-sigma/183-manygame-gpu-plan')\ns=json.load(open('/workspaces/quoridor/.artifacts/research-team/scheduler-sigma-continuation-20261001/state.json'));assert s.get('owned') is None\n# Small live process observation; no process is stopped or changed.\nrows=[]\nfor p in Path('/pr"
+    }
+  ],
+  "scope": "CPU0 short NN0; no GPU/model/job spawn"
+}

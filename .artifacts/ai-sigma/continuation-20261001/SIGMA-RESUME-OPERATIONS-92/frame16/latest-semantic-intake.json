@@ -1,0 +1,73 @@
+{
+  "at": "2026-10-04T07:06:43.183576+00:00",
+  "issues": [
+    {
+      "id": "quoridor-4lc",
+      "status": "in_progress",
+      "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+      "labels": [
+        "continuation-active",
+        "frame16",
+        "initial-window-ended"
+      ]
+    },
+    {
+      "id": "quoridor-4lc.92",
+      "status": "in_progress",
+      "assignee": "codex:01a0f31d-99ee-7d63-b162-bc1a59c457c6",
+      "labels": [
+        "continuation-active",
+        "initial-window-ended"
+      ]
+    }
+  ],
+  "storage": {
+    "steward_allocated_bytes": 29663232,
+    "supervisor_held_bytes": 140951552,
+    "supervisor_current_frame_bytes": 0,
+    "supervisor_historical_held_bytes": 140951552,
+    "forecast_bytes": 65536,
+    "additional_reservation_bytes": 0,
+    "historical_parent_charge_released": false
+  },
+  "scope_forecast_bytes": 65536,
+  "processes": [
+    {
+      "pid": 4069898,
+      "start_ticks": "34737868",
+      "same_identity_alive": true,
+      "current_rss_bytes": 139300864
+    },
+    {
+      "pid": 4069912,
+      "start_ticks": "34737890",
+      "same_identity_alive": true,
+      "current_rss_bytes": 21975040
+    }
+  ],
+  "state": {
+    "phase": "running",
+    "owned": null,
+    "last_result": {
+      "at": "2026-10-04T06:56:36.783978+00:00",
+      "event": "turn_limit"
+    },
+    "next_at": 1791098005.383654
+  },
+  "thread_status": {
+    "type": "notLoaded"
+  },
+  "latest_turn": {
+    "id": "01a105b0-675c-7051-bcd5-95a52b34887a",
+    "items": [],
+    "itemsView": "summary",
+    "status": "interrupted",
+    "error": null,
+    "startedAt": 1791096809,
+    "completedAt": 1791096996,
+    "durationMs": 187442
+  },
+  "latest_turn_raw_bytes": 197,
+  "latest_turn_raw_sha256": "63d42de86353e53ccf6b034cc7f11192756a7724f0f288d983af431acf89714e",
+  "raw_is_metadata_only": true
+}

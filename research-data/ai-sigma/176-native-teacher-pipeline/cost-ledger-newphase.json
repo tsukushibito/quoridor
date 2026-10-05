@@ -1,0 +1,80 @@
+{
+  "UTC": "2026-10-03T10:18:36.414150+00:00",
+  "old_frozen_ledger_SHA256": "7bfc5a1420473355a592ff75f4b2552395cb69c26011d3323779536c858c58b5",
+  "new_future_phase_jobs": [
+    {
+      "run": "native176-eff-cpuort-r1",
+      "wall_seconds": 21.251523,
+      "phase": "generate",
+      "exit": 0,
+      "stop_reason": null,
+      "peakaggregateRSS": 1206407168,
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "node",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-native-teacher-pipeline/eff-generate.cjs",
+        "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/176-native-teacher-pipeline/native176-eff-cpuort-r1.json"
+      ]
+    },
+    {
+      "run": "native176-eff-cuda-r1",
+      "wall_seconds": 54.711141,
+      "phase": "generate",
+      "exit": 0,
+      "stop_reason": null,
+      "peakaggregateRSS": 2177814528,
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "node",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-native-teacher-pipeline/eff-generate.cjs",
+        "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/176-native-teacher-pipeline/native176-eff-cuda-r1.json"
+      ]
+    }
+  ],
+  "new_benchmark_jobwall_seconds": 75.96266399999999,
+  "GPU_branch_root_plus_benchmark_seconds": 88.612326,
+  "branch_360s_remaining": 271.387674,
+  "all_owned_jobwall_seconds": 311.68868999999995,
+  "hand_NN_total": 106876,
+  "hand_NN_gpu_branch": 21700,
+  "hand_NN_budget": 300000,
+  "branch_hand_NN_budget": 60000,
+  "startup_extra_warm_rows": 6,
+  "startup_warm_rows_total": 23,
+  "held_sessions_actual_CPU9genplus1parityplus2arenaplus2rootCPUplus3benchCPU": 17,
+  "CUDA_provider_session_actual": 2,
+  "CUDA_warm_rows": 6,
+  "student_ONNX_validation_rows": 10,
+  "old_CPU_pipeline_inputs_results_checkpoint_unchanged": true,
+  "production24_rate": "unchanged7.0983584313/s, independent benchmark excluded",
+  "benchmark6_Rpolicy": 376,
+  "benchmark6_Rz": 376,
+  "benchmark6_Rjoint": 376,
+  "new_export_seconds": 0.20498425900936126,
+  "unwrapped_NN0join_and_metadata_seconds": "unknown individually, not silently zero",
+  "steady_vs_whole": "whole job rates primary; per-row searchwall/batchAPI/queue measured but concurrent nested sums not additive",
+  "GPU_benchmark_queue_and_batch": {
+    "batches_B1": 1125,
+    "batches_B2": 4736,
+    "queue_ms_total": 37466.74891883135,
+    "server_batch_wall_ms": 45073.4075037837,
+    "batch_fill_samples_B2": 9472,
+    "queue_ms_median": 1.0774309635162354,
+    "queue_ms_mean": 3.535599596001826,
+    "unique_batch_API_server_seconds": 37.78844393700005,
+    "unique_batch_pipe_server_seconds": 45.073407503783706,
+    "cold_initialization_seconds": {
+      "import": 0.8884278470068239,
+      "CPUORT_session": 0.02066684199962765,
+      "graph_weights": 0.06062276702141389,
+      "CUDA_upload_context": 0.15763070597313344
+    },
+    "VRAM_peak_reserved": 35651584,
+    "VRAM_peak_allocated": 22140416
+  },
+  "no_kernelCPU_absolute_claim": true
+}

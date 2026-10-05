@@ -1,0 +1,568 @@
+{
+  "UTC": "2026-10-01T20:42:05.538963+00:00",
+  "issue": "quoridor-4lc.70",
+  "actual_go": false,
+  "entry_ready": false,
+  "writer_source_stopped": true,
+  "runtime_stopped": true,
+  "allocated_before_manifest": 1400832,
+  "logical_before_manifest": 1074999,
+  "observed_runtime_peak_bytes": 2424832,
+  "peak_charge_not_discounted": 2424832,
+  "guard_bytes": 117440512,
+  "old_budget_no_reduction": true,
+  "checks": [
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-runtime-final/early-cache.cjs",
+      "sha256": "748fe01dfebf5e524465ef69255acf0026154188b9002a5338ca790ca092e7f7"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-runtime-final/mock-factory.cjs",
+      "sha256": "47df27a6b9cf3575c870acec96880e814ff7602fe6617026e62a80f0d3b0eb3b"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-runtime-final/cleanup.cjs",
+      "sha256": "5447032ffa50109b5b0c24411eb3ed5e14bb9536c84c7cc6cfdc73fac5ffe32d"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-runtime-final/external-stop-check.py",
+      "sha256": "f36f80f16d15c62836728b95c3aadcc15fadffedc41ff8ff8fd5be70e8284a2d"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-runtime-final/game.js",
+      "sha256": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-runtime-final/early-worker.js",
+      "sha256": "0339fb0969a46357cca37384d7986d57088ecbefd030c45c338256db9cf1a928"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-runtime-final/real-backend.cjs",
+      "sha256": "4d26fdc4a5ad9f2136628d949cab03a5c0d3cf7a9b0ac6efe8d49a1385833b1e"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-runtime-final/pause-check.cjs",
+      "sha256": "a37aca9fda2491504a4e6d34749700268d3c751562da0f76abd09a5b93068b46"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-runtime-final/checkpoint.js",
+      "sha256": "e8f858b2d41605b8ae8e699aaa4a5ae43d2d7c2f4eb6c7c061f194bf355a9361"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-runtime-final/small-gates.cjs",
+      "sha256": "984c5e51533217e1187925846cba99b039035e1713f835c3077ef5d1b765eca7"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-runtime-final/error-boundary.cjs",
+      "sha256": "0e1d0a8c9986ceffd22cf2599b43fe47d68c91b9aecfb41c0929f9ed1aeadff4"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-runtime-final/match-entry.cjs",
+      "sha256": "1b3dffc1d2a3750563aea73fb4969271aa3fafc0ca9b49d92f3c0901a529f325"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-runtime-final/game-loop.cjs",
+      "sha256": "89344dbbab968ea0074c7b29172a07b62ec57ff56350e27c69066b5731057bc0"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-runtime-final/owned_ledger.py",
+      "sha256": "8a6b52c664e0602dfee6f0a969be26d990df114c3c5ccc43c2d4d6e5560a6036"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-runtime-final/final-envelope.cjs",
+      "sha256": "bad07575fd667c99218a44d2634eb1fa419a3b38e335ffc10401e0b5abb07a77"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-runtime-final/caller.cjs",
+      "sha256": "62ad4cab830353063c4b2bbe5afff8105ca5b6820c40fb654f3701555681371e"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-runtime-final/runner.py",
+      "sha256": "ec861b4900adbda43a93393c0b50d2b6acc768ef1c149ca9796b919ef685b8e8"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-runtime-final/budget.cjs",
+      "sha256": "7c1299c85e7514f72099509dfc38fe900e8668f7be13d73acaf5a8f9074713f0"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-runtime-final/kernel_boundary.py",
+      "sha256": "afa63b0b113bdb8f5f112a871e8f183d33b9d493e5e08cce098faa4ecfd5dd21"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-runtime-final/reference-core.js",
+      "sha256": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-runtime-final/judge.cjs",
+      "sha256": "a43bed42482ae21a3620449df37b08596bc9fabef31936b27d6c95254fdc7577"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-runtime-final/early-page.js",
+      "sha256": "aac8a9a419f098b623523371beb702b4648c6bfa2bed8580471ce61770baf82f"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-runtime-final/context.js",
+      "sha256": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-runtime-final/browser.cjs",
+      "sha256": "f1c9b548a2819157ec434d200b4935baafc4bac224a724acfcb3509975ddfccb"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-runtime-final/reference-control-run.js",
+      "sha256": "87dbd43b34f23793c36806ad41a09fda723b5f7b7b10745c0df8b055e3039a0c"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-runtime-final/backend-envelope.cjs",
+      "sha256": "c31e6839a755d370af5f471f8406d251724526c28c3a8a6e44831dc68d5d1ac8"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-runtime-final/golden-driver.cjs",
+      "sha256": "28aae4db9d093f9260d7df6654276d22823e009623e7b07fef22ba6bdbf874be"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-runtime-final/failures.cjs",
+      "sha256": "050e5b93ae0a2c82b2501667bd8bf5c46abd002983f51244913f8082286a1802"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-runtime-final/host.js",
+      "sha256": "dc6cf3e24774e5e6b52c8cf346090f53f261e58b0c7fda1e6d674c7142983d02"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-runtime-final/owned-ledger.cjs",
+      "sha256": "b375c3389139fd918a26c87f6d967978284a23c5cdae6cac7171e09ceabe0035"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-streaming-runtime-final/__pycache__/runner.cpython-311.pyc",
+      "sha256": "45cba7872ce3433f36a2375d854d404bc7cf462766b3b7aa403d50bce5c08480"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/phaseA-gates.json",
+      "sha256": "42c3de2a6e6befdcfea9f8f99397405220436a0acb013ad2a1701195b14a27e2"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/golden-preregister.json",
+      "sha256": "b9c1b4897760bc4364bfb5de96e193fe3bc5988e5a5a0421bf3eef439a508680"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/offline-saved-numeric.cjs",
+      "sha256": "b56641bdd7969ffe9372c8652b83f30ce565716ecba43e5460ffcdfc8cb7a2ae"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/runtime-source-stopped-before-report.json",
+      "sha256": "b70752aaf7a6d1bc4988cd1dc00b7caf340cdfcfa30c0e0a241e4dc12ff05f2e"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/golden70-once.monitor.jsonl",
+      "sha256": "cf99f81505bdcb9cd3146c151c1550c8be79eb9c2a55108544cea056ec3f4140"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/budget-before-runtime.json",
+      "sha256": "27540a918acbb6a6392151a001b463741f7114b0e7daac01093ae17f3eedd044"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/primary-exception-dummy-load.json",
+      "sha256": "e7354ac62377fe7c8f05aaf3d71e5f7223048d4c3ad6cadf32cf8fab91517095"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/external-stop70.inputs.json",
+      "sha256": "d675812d3da4df9db1f527d83233701c6a61e0ab084fbe83d108175733c63596"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/external-stop70.log",
+      "sha256": "464dd234ec5cd48116f01e9c41a9c5b654eb6c012297d6fcd55dc4ff5163d4ca"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/small-gates70.process.json",
+      "sha256": "c28b8cacbec6dab2f2fb1907574a7de7f39081f596fac451836b1f9e5e12df7c"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/small-gates70-pathfix.log",
+      "sha256": "f4d8d5755bf6afad0b9e1fe5eb0fa03d451dd3cbde3afcd9766e75bbdb48e7ec"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/actual-refusal-token.json",
+      "sha256": "1cc469e5c436d74992cbb69f8e06fc207c7e0c00aaa8a5068c09037fe557e076"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/external-stop70.monitor.jsonl",
+      "sha256": "f268ac48ad757463eb1a58c8ee97ba036052af1cb0b15ecb5b73a68256f1fc7e"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/pause-monitor-stop.json",
+      "sha256": "e49369a0ea7a9cdaab140c24935cb81410eeb652cf9a862105469975a52161d5"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/golden70-once.started.json",
+      "sha256": "90f8cc8b6b9dce6140279ec72674c1c9bee8d8eb636cb9d397272a56e7b50744"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/input-before.json",
+      "sha256": "7fc7faaab0c8282229ffc654709a4bd9ecbcde9b784d2d54a2231a21c648c3d7"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/external-stop70.process.json",
+      "sha256": "4f8558a605e5aa1b36a74511c026f744250e47f102de5c0f699b863a5ec4f75a"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/external-stop70.owned-ack.json",
+      "sha256": "dca57754baf1b9c1f25e0a6f19eb04ca7a19a9c165db03731f4a1fbcab7544bf"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/copy-patches.json",
+      "sha256": "b83da5317c5dc719e3eec11e7bc1c88e4a3fbe310ec522b9d1f8d27e45b7fb82"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/small-gates70.log",
+      "sha256": "e336d7841716c5484e477dc33ac54ceef413cb5a02d859302e55ff72712d7466"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/external-stop70.started.json",
+      "sha256": "208b69b721b5216c3dfa7211ceda458ed2a2ecee90bfc4ade576bbe3c326e65b"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/helper-shell-quoting-first-failure-error-boundary.cjs.txt",
+      "sha256": "3a076eeab2559c3522261dc25a3f4f31f2637325f373afffe5f782a8abd85497"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/offline-saved-numeric-summary.json",
+      "sha256": "d0f68b2173f7ef26a86fd2435836345ea9c121c818cb7387830152c06fdb0589"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/small-gates70.owned-ack.json",
+      "sha256": "f8c0b78ca70bd167bee96e9d3fc72379682ca6cf36de453356891fb253a5e42e"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/entry-manifest.json",
+      "sha256": "8885a9b3daedf296e810e6282b65f76d23b3c02d8a6f684184cc244ff2dac2a3"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/golden-entry-summary.json",
+      "sha256": "9aae6e7834e6405ab33ca03888db9327a60ade56e3d33916f40ca68fc45b3d1c"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/external-stop-check.json",
+      "sha256": "b57b2521eb43de3a6844c0cce83665369f45e2982cc15a5af3b2e91b5bf8ad3a"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/receipt-start.json",
+      "sha256": "ab6de2947f41b7d75483f2ba3364abf6ae2f32a2989bdb9f3d8552f7970454a9"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/small-gates70-pathfix.started.json",
+      "sha256": "879aca9cb76d683414a94da8f251292f6dce70b5cfc07c705dd79e656e2e4a25"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/external-stop70.owned-ledger.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/handoff-summary.json",
+      "sha256": "6583041531b86a08312bb8ed170c93b023cb0ce869df04e7aaebbb9b71d914f2"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/actual-cli-refusal.json",
+      "sha256": "e82614813676caf8700f5adf67c6d14f9d6269a469a8b27c57343a083afc9395"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/small-gates70-pathfix.owned-ledger.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/small-gates70-pathfix.inputs.json",
+      "sha256": "d675812d3da4df9db1f527d83233701c6a61e0ab084fbe83d108175733c63596"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/secondary-cleanup-dummy-load.json",
+      "sha256": "171e33634061f545947d3cd7035ffbd8698aa8d3ce2af8347d213cfa1485fc9d"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/small-gates70-pathfix.process.json",
+      "sha256": "492752fc427035aa786813c54be2913bb8e797f88d4a11f75e8dd8167ecdaa88"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/golden70-once.inputs.json",
+      "sha256": "d675812d3da4df9db1f527d83233701c6a61e0ab084fbe83d108175733c63596"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/small-gates70.owned-ledger.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/small-gates70.inputs.json",
+      "sha256": "d675812d3da4df9db1f527d83233701c6a61e0ab084fbe83d108175733c63596"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/small-gates70.started.json",
+      "sha256": "46f46b8040d78ae9f576547ec055f457c05e4d8eb5b0a508369a22f6b24c7f73"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/preregister.json",
+      "sha256": "9e05356a42dd79cc8c5ec3427c1e0937c81bf6c82773bffd9c257d238c69dc27"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/source-frozen-before-runtime.json",
+      "sha256": "02139e9cf3b2cf91661298e7afcd7d00675e9f92e8058e5c051419466e99160b"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/golden70-once.process.json",
+      "sha256": "741630db1629814aa52a19674305697a7895adcf52b4dd5995c4234041a8ff21"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/pause-monitor.json",
+      "sha256": "095cce2eae3d522a61ebcc3a3ab7d7d91ee070bc60825946b557b08e42336e0f"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/source-input-after.json",
+      "sha256": "9cfcebf596ff36e64092067b95798e220aa5b9e8e4d8f512095955bfd05bdcb9"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/golden70-once.owned-ledger.jsonl",
+      "sha256": "46ccc7524dfcbac625050cddb1834c05272af37b5e45bf94a201c7203822c43a"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/small-gates70-pathfix.owned-ack.json",
+      "sha256": "97228d9a6758b662660e75441de614be22c7024317fec643c30477c3e4194338"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/mock-token.json",
+      "sha256": "3aa3afb705bd9dc2f2d1340bc42914ce7e3a27dda7de9810455ee840b94ef81a"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/golden70-once.owned-ack.json",
+      "sha256": "cee24fc209c496a6d12fdb7ffb2cbdf3b6a6b6014bf7e4321024d61c0b8fdcde"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/golden-token.json",
+      "sha256": "11a48d8716823d14889aa1fff9223dd1b49c75e2e02aecec7d8d0d79bce59fbc"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/steer69-finalclock-received.json",
+      "sha256": "a3eb96431a49c26965c7172b14976cf44450a57bd5117f46f72cdaba2d3647f0"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/small-gates70-pathfix.monitor.jsonl",
+      "sha256": "b0056acf4f0e53267bf3ef87c4063adfcb75f232a3d9fa299ca2250e7e882e96"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/small-gates70.monitor.jsonl",
+      "sha256": "36c6bbcfcbd41648499c6b707a48eac6096a096601bff7405d232f5b7ca7b1b9"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/golden70-once.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/canonical-source/1f7e1dbea96441d6d414b499792df5ac36c96badf42bcbf3df4add0f3fb588ef/early-cache.cjs",
+      "sha256": "748fe01dfebf5e524465ef69255acf0026154188b9002a5338ca790ca092e7f7"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/canonical-source/1f7e1dbea96441d6d414b499792df5ac36c96badf42bcbf3df4add0f3fb588ef/mock-factory.cjs",
+      "sha256": "47df27a6b9cf3575c870acec96880e814ff7602fe6617026e62a80f0d3b0eb3b"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/canonical-source/1f7e1dbea96441d6d414b499792df5ac36c96badf42bcbf3df4add0f3fb588ef/cleanup.cjs",
+      "sha256": "5447032ffa50109b5b0c24411eb3ed5e14bb9536c84c7cc6cfdc73fac5ffe32d"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/canonical-source/1f7e1dbea96441d6d414b499792df5ac36c96badf42bcbf3df4add0f3fb588ef/external-stop-check.py",
+      "sha256": "f36f80f16d15c62836728b95c3aadcc15fadffedc41ff8ff8fd5be70e8284a2d"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/canonical-source/1f7e1dbea96441d6d414b499792df5ac36c96badf42bcbf3df4add0f3fb588ef/game.js",
+      "sha256": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/canonical-source/1f7e1dbea96441d6d414b499792df5ac36c96badf42bcbf3df4add0f3fb588ef/early-worker.js",
+      "sha256": "0339fb0969a46357cca37384d7986d57088ecbefd030c45c338256db9cf1a928"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/canonical-source/1f7e1dbea96441d6d414b499792df5ac36c96badf42bcbf3df4add0f3fb588ef/real-backend.cjs",
+      "sha256": "4d26fdc4a5ad9f2136628d949cab03a5c0d3cf7a9b0ac6efe8d49a1385833b1e"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/canonical-source/1f7e1dbea96441d6d414b499792df5ac36c96badf42bcbf3df4add0f3fb588ef/pause-check.cjs",
+      "sha256": "a37aca9fda2491504a4e6d34749700268d3c751562da0f76abd09a5b93068b46"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/canonical-source/1f7e1dbea96441d6d414b499792df5ac36c96badf42bcbf3df4add0f3fb588ef/checkpoint.js",
+      "sha256": "e8f858b2d41605b8ae8e699aaa4a5ae43d2d7c2f4eb6c7c061f194bf355a9361"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/canonical-source/1f7e1dbea96441d6d414b499792df5ac36c96badf42bcbf3df4add0f3fb588ef/small-gates.cjs",
+      "sha256": "984c5e51533217e1187925846cba99b039035e1713f835c3077ef5d1b765eca7"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/canonical-source/1f7e1dbea96441d6d414b499792df5ac36c96badf42bcbf3df4add0f3fb588ef/error-boundary.cjs",
+      "sha256": "0e1d0a8c9986ceffd22cf2599b43fe47d68c91b9aecfb41c0929f9ed1aeadff4"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/canonical-source/1f7e1dbea96441d6d414b499792df5ac36c96badf42bcbf3df4add0f3fb588ef/match-entry.cjs",
+      "sha256": "1b3dffc1d2a3750563aea73fb4969271aa3fafc0ca9b49d92f3c0901a529f325"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/canonical-source/1f7e1dbea96441d6d414b499792df5ac36c96badf42bcbf3df4add0f3fb588ef/game-loop.cjs",
+      "sha256": "89344dbbab968ea0074c7b29172a07b62ec57ff56350e27c69066b5731057bc0"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/canonical-source/1f7e1dbea96441d6d414b499792df5ac36c96badf42bcbf3df4add0f3fb588ef/owned_ledger.py",
+      "sha256": "8a6b52c664e0602dfee6f0a969be26d990df114c3c5ccc43c2d4d6e5560a6036"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/canonical-source/1f7e1dbea96441d6d414b499792df5ac36c96badf42bcbf3df4add0f3fb588ef/final-envelope.cjs",
+      "sha256": "bad07575fd667c99218a44d2634eb1fa419a3b38e335ffc10401e0b5abb07a77"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/canonical-source/1f7e1dbea96441d6d414b499792df5ac36c96badf42bcbf3df4add0f3fb588ef/caller.cjs",
+      "sha256": "62ad4cab830353063c4b2bbe5afff8105ca5b6820c40fb654f3701555681371e"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/canonical-source/1f7e1dbea96441d6d414b499792df5ac36c96badf42bcbf3df4add0f3fb588ef/runner.py",
+      "sha256": "ec861b4900adbda43a93393c0b50d2b6acc768ef1c149ca9796b919ef685b8e8"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/canonical-source/1f7e1dbea96441d6d414b499792df5ac36c96badf42bcbf3df4add0f3fb588ef/budget.cjs",
+      "sha256": "7c1299c85e7514f72099509dfc38fe900e8668f7be13d73acaf5a8f9074713f0"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/canonical-source/1f7e1dbea96441d6d414b499792df5ac36c96badf42bcbf3df4add0f3fb588ef/kernel_boundary.py",
+      "sha256": "afa63b0b113bdb8f5f112a871e8f183d33b9d493e5e08cce098faa4ecfd5dd21"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/canonical-source/1f7e1dbea96441d6d414b499792df5ac36c96badf42bcbf3df4add0f3fb588ef/reference-core.js",
+      "sha256": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/canonical-source/1f7e1dbea96441d6d414b499792df5ac36c96badf42bcbf3df4add0f3fb588ef/judge.cjs",
+      "sha256": "a43bed42482ae21a3620449df37b08596bc9fabef31936b27d6c95254fdc7577"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/canonical-source/1f7e1dbea96441d6d414b499792df5ac36c96badf42bcbf3df4add0f3fb588ef/early-page.js",
+      "sha256": "aac8a9a419f098b623523371beb702b4648c6bfa2bed8580471ce61770baf82f"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/canonical-source/1f7e1dbea96441d6d414b499792df5ac36c96badf42bcbf3df4add0f3fb588ef/context.js",
+      "sha256": "66be1d634dadbdb8bf3cc1e8cb4bc06ebbc549c3813c46176bb3097b98a52b3c"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/canonical-source/1f7e1dbea96441d6d414b499792df5ac36c96badf42bcbf3df4add0f3fb588ef/browser.cjs",
+      "sha256": "f1c9b548a2819157ec434d200b4935baafc4bac224a724acfcb3509975ddfccb"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/canonical-source/1f7e1dbea96441d6d414b499792df5ac36c96badf42bcbf3df4add0f3fb588ef/reference-control-run.js",
+      "sha256": "87dbd43b34f23793c36806ad41a09fda723b5f7b7b10745c0df8b055e3039a0c"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/canonical-source/1f7e1dbea96441d6d414b499792df5ac36c96badf42bcbf3df4add0f3fb588ef/backend-envelope.cjs",
+      "sha256": "c31e6839a755d370af5f471f8406d251724526c28c3a8a6e44831dc68d5d1ac8"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/canonical-source/1f7e1dbea96441d6d414b499792df5ac36c96badf42bcbf3df4add0f3fb588ef/golden-driver.cjs",
+      "sha256": "28aae4db9d093f9260d7df6654276d22823e009623e7b07fef22ba6bdbf874be"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/canonical-source/1f7e1dbea96441d6d414b499792df5ac36c96badf42bcbf3df4add0f3fb588ef/failures.cjs",
+      "sha256": "050e5b93ae0a2c82b2501667bd8bf5c46abd002983f51244913f8082286a1802"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/canonical-source/1f7e1dbea96441d6d414b499792df5ac36c96badf42bcbf3df4add0f3fb588ef/host.js",
+      "sha256": "dc6cf3e24774e5e6b52c8cf346090f53f261e58b0c7fda1e6d674c7142983d02"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/canonical-source/1f7e1dbea96441d6d414b499792df5ac36c96badf42bcbf3df4add0f3fb588ef/owned-ledger.cjs",
+      "sha256": "b375c3389139fd918a26c87f6d967978284a23c5cdae6cac7171e09ceabe0035"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/diag-SMALL-GATES70/summary.json",
+      "sha256": "e43d240aa151b1b5c98ea8d43fe7b8953789bd5b5144241a43d519640ef20be4"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/diag-SMALL-GATES70/checkpoint.json",
+      "sha256": "b8e535d3abfa9de0bda822c1b01d41c632540104f7afde372c0c6ab6bce8234c"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/diag-GOLDEN70-ONCE/summary.json",
+      "sha256": "9aae6e7834e6405ab33ca03888db9327a60ade56e3d33916f40ca68fc45b3d1c"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/diag-GOLDEN70-ONCE/checkpoint.json",
+      "sha256": "b8e535d3abfa9de0bda822c1b01d41c632540104f7afde372c0c6ab6bce8234c"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/real-GOLDEN70-ONCE-session1/ready-state.json",
+      "sha256": "37b4175048e420625173fa661a7b550764023991de3d4be96556a8f992f8ca22"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/real-GOLDEN70-ONCE-session1/cleanup-after-stop.json",
+      "sha256": "a968b792754a76bb4c5419575826557edefbc5bc3266db7e066c46b580f12bcb"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/real-GOLDEN70-ONCE-session1/stopACK-GOLDEN70-ONCE-3.json",
+      "sha256": "6dd8fd499e89d87bdc5dc09dc43105b8742f00633283b8d0b9bf8223b44d5ad9"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/real-GOLDEN70-ONCE-session1/stopACK-GOLDEN70-ONCE-2.json",
+      "sha256": "0c335aba145b1eb5e94fad94be3598618f8837ae6fb690f81913f192e73b6463"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/real-GOLDEN70-ONCE-session1/primary-exception-stop.json",
+      "sha256": "8f369b9d4c3ca26a6f9b74658b5e349662bafbd6741176af9c4e31711b1c2430"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/real-GOLDEN70-ONCE-session1/private-after-public.json",
+      "sha256": "378f798beef64c50afed7dd9e5195da62eee19f9cf5b8a3391e245f9854f0a5d"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/real-GOLDEN70-ONCE-session1/public-GOLDEN70-ONCE-2.json",
+      "sha256": "d6634038d9d615501f506d2f80fdf13b3017ccc681cae93755b4abc716a26e07"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/real-GOLDEN70-ONCE-session1/public-GOLDEN70-ONCE-3.json",
+      "sha256": "4f99976255ec258321936eca3418f704c95fb3a28dc65b4ca9a29ef63b1ea6e3"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/real-GOLDEN70-ONCE-session1/public-GOLDEN70-ONCE-1.json",
+      "sha256": "1a84d8aa93e9dd4ed259178d1900d1154b2098b0d8ad46815cbff3aa39b6d5e3"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/real-GOLDEN70-ONCE-session1/stopACK-GOLDEN70-ONCE-1.json",
+      "sha256": "76236133bf4a96cfddffa91fef7663013828a79541b92a5ab8fa8e488ea52ecf"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/real-GOLDEN70-ONCE-session1/ready.json",
+      "sha256": "51325fed61b2fd321b2375a2177b30212daf31993885f4f78724da55f7fe2e7c"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/real-GOLDEN70-ONCE-session1/browser/clock-start.json",
+      "sha256": "940f199e6508ca5ac368ee0a8c78ac82cdbd1dea76bb15a2e60ec6bca9971456"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/real-GOLDEN70-ONCE-session1/browser/cleanup.jsonl",
+      "sha256": "73d0b551e1a4d1bb818c2900a1715e9f82837add9a936ed1920aa52b166bbf8d"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/real-GOLDEN70-ONCE-session1/browser/browser-startup.json",
+      "sha256": "ac41df4dcdc62bbf109f0731a180873ed079aedfa06b4dafd5b28ed427b47b1f"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/real-GOLDEN70-ONCE-session1/browser/terminated-worker.json",
+      "sha256": "255bd896f15dee656ad8aba674074855189502081149c8c8ed697518d379f940"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/real-GOLDEN70-ONCE-session1/browser/model-load.json",
+      "sha256": "628ba370fa21a8c306a8f92f92e1e1041879faf316ba896d2d9c20d168c3aed0"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/xdg-config/google-chrome-for-testing/Crash Reports/settings.dat",
+      "sha256": "16ca34516161fc7b184ecb1294c496c8ca4e689b513c82667395b63187b325fc"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-STREAMING-RUNTIME-FINAL/xdg-cache/dconf/user",
+      "sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/docs/reports/ai-sigma-experiment-streaming-runtime-final.md",
+      "sha256": "fe8530afea9f02f50027aa86fd5f0736a1ee9525546443b9ea1385c7f993491e"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "issue": "quoridor-4lc",
+  "frame": 20,
+  "evidence_kind": "owner_reports_received_not_independent_reexecution",
+  "runtime": {
+    "owner": "92 / 250.1",
+    "start": "2026-10-05T01:40:11Z",
+    "scheduler": {"pid": 530611, "tick": 41742601},
+    "monitor": {"pid": 530624, "tick": 41742628},
+    "current_24_hash_mismatches_reported": 0,
+    "source_git": "f953ee522f0f3a4fa1a6c666cdbeb50a243d9d2b",
+    "evidence_git": "514d697a4737a3b53642dad45a43196405b6e122",
+    "owner_reported_root_acceptance": "14/14",
+    "role_permanent_idle_refresh": "root250 pending",
+    "future_operation_or_external_nn_stop_certified": false
+  },
+  "preflight": {
+    "owner_issue": "quoridor-4lc.249",
+    "start": "2026-10-05T01:45:29.945283Z",
+    "end": "2026-10-05T01:45:30.961840Z",
+    "wall_seconds": 1.016560590,
+    "nn": 5500,
+    "peak_bytes": 241938432,
+    "exit": 0,
+    "owner_reported_wait_exact_and_cleanup": true,
+    "task": "frame20-distance-arena-249-v1",
+    "schema": "distance-arena-v1",
+    "owner_reported_checks": ["clip original same completed depth/action/value tolerance", "248 clip/tanh same input 194 children", "actual new protocol six clock fixtures"],
+    "independent_payload_verification": "NOT_RUN_BY_COORDINATOR",
+    "remaining_nn_reported": 994500,
+    "next": "family0 once after owner fresh admission; existing contract unchanged"
+  },
+  "interpretation": {
+    "same_242_two_family_lineage": "exploratory reused prefixes, not new holdout or eight independent openings",
+    "tanh": "all nonterminal transform, evaluation cost and terminal calibration change; pretransform abs(u)>=1 is not output endpoint saturation",
+    "witness_case_mapping_to_arena": "NOT_CONFIRMED",
+    "strength_or_goal_achieved": false,
+    "new_authorization_or_budget": false
+  },
+  "deadlines_utc": {"249_entry_stop": "2026-10-05T02:02:00Z", "249_science_stop": "2026-10-05T02:08:00Z", "heavy_stop": "2026-10-05T02:41:02Z", "scheduler_stop": "2026-10-05T02:46:02Z", "monitor_stop": "2026-10-05T02:49:02Z", "save_end": "2026-10-05T02:51:02Z"}
+}

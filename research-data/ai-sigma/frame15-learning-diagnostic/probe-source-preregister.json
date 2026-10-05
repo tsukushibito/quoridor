@@ -1,0 +1,43 @@
+{
+  "issue": "quoridor-4lc.209",
+  "allocation": "coordinator explicit oneprobe afterfourth",
+  "interpreter": "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+  "stage": "research-data/ai-sigma/frame14-learning/stages/train96.stage.json",
+  "sources": {
+    "tools/ai-sigma-learning-diagnostic/probe.py": "923d294506089fb2a02a2081494a901bc2beda785c3fea4718f7e626c605c7f3",
+    "tools/nnue-training/model.py": "12661cac69cff8b01800eb2d3df5be5f8674858d9ce995713b4385da44c74357",
+    "tools/nnue-training/common.py": "876e0e9a610b594db63e62e81ae920684f10e52f71a7cc75e04f8fbadd9ffe04",
+    "tools/nnue-training/frame14_data.py": "f45482fe6d1a4477ee3bf3b080d14d883b1f28c79517cff83e4318b7a90e37b8"
+  },
+  "checkpoints": [
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/nnue/frame15-learning-diagnostic-lr1e-4-r1/initial.pt",
+      "SHA": "f4a327c33c12ba92218636016af382346bfc175a21095b01521ede9567606428",
+      "B": 51605
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/nnue/frame15-learning-diagnostic-lr1e-4-r1/best.pt",
+      "SHA": "cb298b4e39997b9346de5cf700320556c14e696e2881e4d93e0649d48a0d0d4d",
+      "B": 51569
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/nnue/frame15-learning-diagnostic-lr1e-4-r1/last.pt",
+      "SHA": "b087409ac4c9efec2b6d30f60e277e8ed2f1de3f7f69be1684c8ed4982b79cdc",
+      "B": 51569
+    }
+  ],
+  "original_plan": "probe-preregister.json unchanged",
+  "forward108_backward36": 144,
+  "distance_direction": [
+    -1,
+    1
+  ],
+  "delta": 0.00625,
+  "current_plus_uniqueGit_B": 4659451,
+  "remaining_probe_Git_report_metadata_forecast_B": 700000,
+  "forecast_B": 5359451,
+  "guard_B": 6291456,
+  "actual_sample_forecast": 405578,
+  "rawguard_forecast": 736208,
+  "newscience_deadline": "04:45Z"
+}

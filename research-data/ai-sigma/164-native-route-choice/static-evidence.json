@@ -1,0 +1,135 @@
+{
+  "source": {
+    "tools/ai-sigma-sigma-web-port/private/src/lib.rs": {
+      "bytes": 10903,
+      "sha256": "b554bdfeda920ac40fa70fceb7404562bba3b6c0dd7df09ce21c5b97156af9fc"
+    },
+    "tools/ai-sigma-sigma-web-port/private/Cargo.toml": {
+      "bytes": 584,
+      "sha256": "57e3173114c234ff39b0dd976e913fa142358d8f0eb426ec87e61668344bcade"
+    },
+    "tools/ai-sigma-actual-boundary-repair/reference-core.js": {
+      "bytes": 5206,
+      "sha256": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05"
+    },
+    "tools/ai-sigma-actual-boundary-repair/game.js": {
+      "bytes": 27877,
+      "sha256": "dfa438a500d6808e21bf8fef72a299cd762ac5e8be25251dd38607abb2d046c5"
+    },
+    "tools/ai-sigma-actual-boundary-repair/host.js": {
+      "bytes": 3586,
+      "sha256": "dc6cf3e24774e5e6b52c8cf346090f53f261e58b0c7fda1e6d674c7142983d02"
+    },
+    "research-data/ai-sigma/162-pv-cpu-smoke/results.json": {
+      "bytes": 6559,
+      "sha256": "2c1484b6efcdfab744f52899a52ac4e41caed16c821a82635e8b40fdb5742b61"
+    },
+    "docs/reports/ai-sigma-steward-model.md": {
+      "bytes": 2583,
+      "sha256": "4229433203b5b4bff9921de287f3ecf8f57d0eb313033a75504d3d9cd12a6a46",
+      "model_shape_lines": [
+        "\u9759\u7684\u7d50\u679c: \u65e2\u5b58Python3.14.7/onnx1.23.0\u3001external load\u7121\u52b9\u3001checker\u901a\u904e\u3002IR8/opset17\u3001FLOAT input[1,8,9,9]\u3001policy_logits[1,136]\u3001value[1,1]\u3067\u5168\u5ba3\u8a00\u4e00\u81f4\u3002179nodes/16\u6f14\u7b97\u7a2e\u985e\u3001FLOAT initializer83\u4ef6\u30fbraw11,633,196 bytes\u3001\u5916\u90e8\u91cd\u307f0\u3002\u4eee\u8aac\u306fsize/blob/\u9759\u7684\u5ba3\u8a00\u306e\u7bc4\u56f2\u3067\u652f\u6301\u3002NN\u51fa\u529b\u30fb\u901f\u5ea6\u30fb\u68cb\u529b\u30fbbackend\u4e92\u63db\u6027\u306f\u672a\u78ba\u8a8d\u3067\u63a1\u7528\u3057\u306a\u3044\u3002\u8a73\u7d30\u306fJSON\u3078\u3002"
+      ]
+    },
+    "docs/reports/ai-sigma-coordinator-model-review.md": {
+      "bytes": 1753,
+      "sha256": "9ded1cea0cd895702ef146e0b29abe392592860afaa4525d0fd3ab029b8f77e8",
+      "model_shape_lines": [
+        "\u56fa\u5b9aONNX\u7814\u7a76\u53d6\u5f97\u306e\u6210\u679c\u3092\u53d7\u5165\u308c\u308b\u3002\u5b9f11663428bytes/SHA256 d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d/Git blob f23802a83dc9054b5227da74b3771698854535f0\u3092\u7d71\u62ec\u304c\u72ec\u7acb\u518d\u8a08\u7b97\u3057\u4e00\u81f4\u3002read-only\u65e2\u5b58onnx\u3067\u72ec\u7acbload_external_data=False/checker\u3092\u5b9f\u884c\u3057179nodes/16opcounts/IR-opset\u5ba3\u8a00/\u5165\u529b[1,8,9,9]\u3068\u51fa\u529b[1,136]/[1,1]\u3001\u5916\u90e8\u91cd\u307f0\u3001MIT\u672c\u6587hash\u3092\u7167\u5408\u3002CPU0/1GiB\u4e0a\u9650\u306e\u77ed\u3044\u540c\u671fchild\u306fexit0\u3001NN\u5b9f\u884c0\u3002\u6839\u62e0 verification/MODEL-COORD-STATIC/summary.json\u3002\u53d6\u5f97\u539fscript\u3092\u518d\u5b9f\u884c\u305b\u305a\u30e2\u30c7\u30eb/manifest\u3092\u5909\u66f4\u3057\u306a\u3044\u3002"
+      ]
+    }
+  },
+  "cache": {
+    "Rust_ORT_TCH_packages_at_/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f": [],
+    "onnxruntime": [
+      {
+        "path": "/home/vscode/.cache/inference/envs/quoridor-training/lib/python3.14/site-packages/onnxruntime-1.30.0.dist-info/METADATA",
+        "sha256": "d765dd8bb488de145bedf618dd8d81e04fd7e35343778c9f58a652d5c28ad0ec",
+        "fields": [
+          "Name: onnxruntime",
+          "Version: 1.30.0"
+        ]
+      }
+    ],
+    "onnxruntime_gpu": [],
+    "torch": [
+      {
+        "path": "/home/vscode/.cache/inference/envs/quoridor-training/lib/python3.14/site-packages/torch-2.14.0+cu130.dist-info/METADATA",
+        "sha256": "4c3a9ca0bbabfa134a65c45c4c09a890a99da6e0e98c8fcab8026fa236b968ba",
+        "fields": [
+          "Name: torch",
+          "Version: 2.14.0+cu130"
+        ]
+      }
+    ],
+    "onnx": [
+      {
+        "path": "/home/vscode/.cache/inference/envs/quoridor-training/lib/python3.14/site-packages/onnx-1.23.0.dist-info/METADATA",
+        "sha256": "a7d53c78a53e8bf2d938c5232dffb435f68121a7523d3a270589f9d7496cb5ea",
+        "fields": [
+          "Name: onnx",
+          "Version: 1.23.0"
+        ]
+      }
+    ],
+    "numpy": [
+      {
+        "path": "/home/vscode/.cache/inference/envs/quoridor-training/lib/python3.14/site-packages/numpy-2.5.3.dist-info/METADATA",
+        "sha256": "451a9b8028000588e66b0b415587b6aef0bbc51a96d8e8a0cba0dc23acf64f99",
+        "fields": [
+          "Name: numpy",
+          "Version: 2.5.3"
+        ]
+      }
+    ],
+    "ORT_native_libraries": [
+      {
+        "name": "libonnxruntime_providers_shared.so",
+        "bytes": 14632
+      },
+      {
+        "name": "onnxruntime_pybind11_state.cpython-314-x86_64-linux-gnu.so",
+        "bytes": 30595744
+      },
+      {
+        "name": "libonnxruntime.so.1.30.0",
+        "bytes": 28985152
+      }
+    ],
+    "build_and_package_info.py": {
+      "path": "/home/vscode/.cache/inference/envs/quoridor-training/lib/python3.14/site-packages/onnxruntime/capi/build_and_package_info.py",
+      "text": "package_name = 'onnxruntime'\n__version__ = '1.30.0'\n"
+    },
+    "onnxruntime_validation.py": {
+      "path": "/home/vscode/.cache/inference/envs/quoridor-training/lib/python3.14/site-packages/onnxruntime/capi/onnxruntime_validation.py",
+      "text": "# -------------------------------------------------------------------------\n# Copyright (c) Microsoft Corporation. All rights reserved.\n# Licensed under the MIT License.\n# --------------------------------------------------------------------------\n\"\"\"\nCheck OS requirements for ONNX Runtime Python Bindings.\n\"\"\"\n\nimport linecache\nimport platform\nimport warnings\n\n\ndef check_distro_info():\n    __my_distro__ = \"\"\n    __my_distro_ver__ = \"\"\n    __my_system__ = platform.system().lower()\n\n    __OS_RELEASE_FILE__ = \"/etc/os-release\"  # noqa: N806\n    __LSB_RELEASE_FILE__ = \"/etc/lsb-release\"  # noqa: N806\n\n    if __my_system__ == \"windows\":\n        __my_distro__ = __my_system__\n        __my_distro_ver__ = platform.release().lower()\n\n        if __my_distro_ver__ not in [\"10\", \"11\", \"2016server\", \"2019server\", \"2022server\", \"2025server\"]:\n            warnings.warn(\n                f\"Unsupported Windows version ({__my_distro_ver__}). ONNX Runtime supports Windows 10 and above, or Windows Server 2016 and above.\"\n            )\n    elif __my_system__ == \"linux\":\n        \"\"\"Although the 'platform' python module for getting Distro information works well on standard OS images\n        running on real hardware, it is not accurate when running on Azure VMs, Git Bash, Cygwin, etc.\n        The returned values for release and version are unpredictable for virtualized or emulated environments.\n        /etc/os-release and /etc/lsb_release files, on the other hand, are guaranteed to exist and have standard values\n        in all OSes supported by onnxruntime. The former is the current standard file to check OS info and the latter\n        is its predecessor.\n        \"\"\"\n        # Newer systems have /etc/os-release with relevant distro info\n        __my_distro__ = linecache.getline(__OS_RELEASE_FILE__, 3)[3:-1]\n        __my_distro_ver__ = linecache.getline(__OS_RELEASE_FILE__, 6)[12:-2]\n\n        # Older systems may have /etc/os-release instead\n        if not __my_distro__:\n            __my_distro"
+    },
+    "/proc/driver/nvidia/version": {
+      "exists": false,
+      "text": null
+    },
+    "/dev/nvidia0": {
+      "exists": false,
+      "text": null
+    },
+    "/dev/nvidiactl": {
+      "exists": false,
+      "text": null
+    },
+    "models/experiments/ai-sigma/reference/sigma-pcr250/NOTICE.json": {
+      "root_license": "MIT",
+      "copyright": "2026 Bartosz Pokora",
+      "notice_source": ".artifacts/ai-sigma/reference-fixtures/SIGMA-PARITY-PLAN/sources/LICENSE",
+      "notice_source_sha256": "b5e277822da3c9eb54eb04e9ee3c4f93bfeb769c829d5d0f70c99835a2f6733d",
+      "preserved_notice": "models/experiments/ai-sigma/reference/sigma-pcr250/LICENSE.upstream",
+      "research_acquisition": "Authorized by goal and child contract",
+      "model_specific_applicability": "Unresolved; root repository notice is not blanket model redistribution clearance",
+      "third_party_pretrained_weight_absence": "Not established by this static acquisition",
+      "product_redistribution": "Outside this contract"
+    }
+  },
+  "missing_paths": [
+    "crates/quoridor-ai/src/bin/ai_research.rs",
+    "research-data/ai-sigma/151-sigma-web-port/source-before-run.json"
+  ]
+}

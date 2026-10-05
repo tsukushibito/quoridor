@@ -1,0 +1,82 @@
+{
+  "UTC": "2026-10-03T11:38:56.693172+00:00",
+  "issue": "quoridor-4lc.183",
+  "source_result_Git": "1b737d36ba8be460dc18b1515fc0d2d7148cd75d",
+  "amended_Git": "87086645b24165ce41ecefb49d0a3e06ba83fb1c",
+  "necessary_Git_checks": [
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-manygame-gpu-plan.md",
+      "Git": "87086645b24165ce41ecefb49d0a3e06ba83fb1c",
+      "bytes": 12199,
+      "sha256": "6481c8f99b2beef4908af2ab9f3bcedd3af99f05f0daca3cd1f56d51da6a49e0",
+      "current_exact": true
+    },
+    {
+      "path": "research-data/ai-sigma/183-manygame-gpu-plan/proposal.json",
+      "Git": "87086645b24165ce41ecefb49d0a3e06ba83fb1c",
+      "bytes": 3617,
+      "sha256": "5cd7e76830c0e2ad430653bc6d01abe9f9540238426a986722e06061f4016ff8",
+      "current_exact": true
+    },
+    {
+      "path": "research-data/ai-sigma/183-manygame-gpu-plan/stop.json",
+      "Git": "87086645b24165ce41ecefb49d0a3e06ba83fb1c",
+      "bytes": 640,
+      "sha256": "a6e093181e7895ee78382d4f9188d79a86a43050aa23af7d4d8a2e69ec4427df",
+      "current_exact": true
+    },
+    {
+      "path": "research-data/ai-sigma/183-manygame-gpu-plan/mock-result.json",
+      "Git": "87086645b24165ce41ecefb49d0a3e06ba83fb1c",
+      "bytes": 2522,
+      "sha256": "fae2ee33627da702d9498a6e608ad1933ec4b675a536cbb9500fc4c3d5e9e638",
+      "current_exact": true
+    },
+    {
+      "path": "research-data/ai-sigma/183-manygame-gpu-plan/source-evidence.json",
+      "Git": "87086645b24165ce41ecefb49d0a3e06ba83fb1c",
+      "bytes": 3633,
+      "sha256": "40a06aef92749130f11f73c9c71e3b6f5fb307586f79287a5bc70b2e298f7b10",
+      "current_exact": true
+    },
+    {
+      "path": "research-data/ai-sigma/183-manygame-gpu-plan/handoff.json",
+      "Git": "87086645b24165ce41ecefb49d0a3e06ba83fb1c",
+      "bytes": 663,
+      "sha256": "e138c953d599c931f87542f9fc5d38a3385f615eaafbb487939351f9c89eab0c",
+      "current_exact": true
+    },
+    {
+      "path": "tools/ai-sigma-manygame-plan/mock.py",
+      "Git": "87086645b24165ce41ecefb49d0a3e06ba83fb1c",
+      "bytes": 4309,
+      "sha256": "2ee3849c71b5414e7d94a2416643d779b2be91f001c4717effe52e2f79fe223c",
+      "current_exact": true
+    }
+  ],
+  "stop": {
+    "UTC": "2026-10-03T11:24:51.476561+00:00",
+    "scientific_source_stopped": true,
+    "mock_waited": true,
+    "owned_child_current_absent": true,
+    "NN": 0,
+    "GPU": 0,
+    "game": 0,
+    "no_other_owner_stop": true,
+    "remaining_work": "local Git/byte restore/accounting/Beads backup/coordinator handoff only",
+    "static_process_cost_limit_seconds": 60,
+    "known_managed_calls_wall_seconds_upper": 25,
+    "cost_limit_note": "bounded short static commands; tool metadata rounds fast commands to tiny values; instantaneous whole session RSS/CPU not sampled",
+    "source_sha256": "2ee3849c71b5414e7d94a2416643d779b2be91f001c4717effe52e2f79fe223c"
+  },
+  "finite_acceptance": "NN0 design/artificial protocol only; no actual GPU/manygame/throughput proof",
+  "decision": "Accept design. Actual manygame GPU generation next-frame proposal; prioritize running181 CPU teacher/learner. Implementation45-75min plus up to25min benchmarks and saving exceeds safe current remaining allocation. No GPU autostart.",
+  "future_controls": [
+    "sameRust serial vs GPU3/12/24active structure",
+    "samefresh24 CPUJS adoption baseline",
+    "partialbatch B3/5/6/7 unmeasured",
+    "307200 samples per mode/new private budget binding",
+    "three separate300s GPUjobs/physical admission/330s+init quiet window"
+  ],
+  "goal_achieved": false
+}

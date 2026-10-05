@@ -1,0 +1,69 @@
+{
+  "run": "batch-provider-r1",
+  "modelhash": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+  "provider": "torch-folded-dynamicB-v1",
+  "B": [
+    1,
+    2,
+    4,
+    8
+  ],
+  "heterogeneous_indices": {
+    "1": [
+      0
+    ],
+    "2": [
+      0,
+      1
+    ],
+    "4": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "8": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      2,
+      0,
+      4
+    ]
+  },
+  "B8_unique_feature_states": 5,
+  "B8_explicit_repeat_rows": 3,
+  "new_scientific_samples_plan": 305,
+  "sample_budget": 512,
+  "abs_tol": 0.0001,
+  "rel_tol": 0.0001,
+  "parity_new_batch1": 5,
+  "GPUbatch_parity_samples": 30,
+  "timing_serial_CPUORT_samples": 135,
+  "timing_GPU_samples": 135,
+  "warm_each": 1,
+  "steady_each": 8,
+  "batch1_ONNX_unchanged": true,
+  "intra_inter": [
+    1,
+    1
+  ],
+  "CPU": [
+    0
+  ],
+  "RAM_guard_B": 1879048192,
+  "GPU_guard_B": 6442450944,
+  "hard_job_s": 180,
+  "heavy_total_s": 180,
+  "pause_abort": true,
+  "newheavy_epoch": 1791020575.138378,
+  "processing_epoch": 1791020875.138378,
+  "submission_epoch": 1791021775.138378,
+  "batch_first_five_vs_saved174": true,
+  "training": 0,
+  "game": 0,
+  "NN_compile_API": 0,
+  "natural_kernel_first_use_cost_separate": true
+}

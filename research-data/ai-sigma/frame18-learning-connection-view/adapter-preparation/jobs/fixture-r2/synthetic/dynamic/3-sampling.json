@@ -1,0 +1,25 @@
+{
+  "cohort_families": {
+    "12": 1,
+    "16": 1,
+    "8": 1
+  },
+  "positive_train_families": 2,
+  "row_sampling_weights": {
+    "t1:0": 0.25,
+    "t1:1": 0.25,
+    "t2:0": 0.5
+  },
+  "sampling": "uniform positive family then uniform row; target eligibility not inspected",
+  "train_families": 3,
+  "train_games": 3,
+  "train_groups": [
+    "t1",
+    "t2",
+    "t3"
+  ],
+  "train_rows": 3,
+  "zero_row_train_families": [
+    "t3"
+  ]
+}

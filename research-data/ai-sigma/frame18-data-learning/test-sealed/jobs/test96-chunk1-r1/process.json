@@ -1,0 +1,155 @@
+{
+  "issue": "quoridor-4lc.228",
+  "run": "growth228-test96-chunk1-r1",
+  "kind": "generation",
+  "max_batch": 8,
+  "startUTC": "2026-10-04T11:48:52.167296+00:00",
+  "endUTC": "2026-10-04T11:48:58.510330+00:00",
+  "jobwall_seconds": 10.945370599045418,
+  "exit": 1,
+  "stop_reason": null,
+  "runner_pid": 118458,
+  "runner_tick": 36750999,
+  "tracked": [
+    {
+      "pid": 118564,
+      "ppid": 118458,
+      "tick": 36751463,
+      "state": "S",
+      "RSS": 75489280
+    },
+    {
+      "pid": 118571,
+      "ppid": 118564,
+      "tick": 36751468,
+      "state": "S",
+      "RSS": 3026944
+    },
+    {
+      "pid": 118572,
+      "ppid": 118571,
+      "tick": 36751469,
+      "state": "S",
+      "RSS": 1691648
+    },
+    {
+      "pid": 118573,
+      "ppid": 118571,
+      "tick": 36751469,
+      "state": "S",
+      "RSS": 13021184
+    },
+    {
+      "pid": 118579,
+      "ppid": 118572,
+      "tick": 36751472,
+      "state": "S",
+      "RSS": 204640256
+    },
+    {
+      "pid": 118596,
+      "ppid": 118579,
+      "tick": 36751560,
+      "state": "D",
+      "RSS": 3801088
+    },
+    {
+      "pid": 118597,
+      "ppid": 118564,
+      "tick": 36751569,
+      "state": "S",
+      "RSS": 3321856
+    },
+    {
+      "pid": 118598,
+      "ppid": 118597,
+      "tick": 36751570,
+      "state": "S",
+      "RSS": 1675264
+    },
+    {
+      "pid": 118599,
+      "ppid": 118597,
+      "tick": 36751570,
+      "state": "S",
+      "RSS": 12701696
+    },
+    {
+      "pid": 118605,
+      "ppid": 118598,
+      "tick": 36751574,
+      "state": "S",
+      "RSS": 215785472
+    },
+    {
+      "pid": 118611,
+      "ppid": 118605,
+      "tick": 36751577,
+      "state": "R",
+      "RSS": 3887104
+    },
+    {
+      "pid": 118624,
+      "ppid": 118564,
+      "tick": 36751677,
+      "state": "R",
+      "RSS": 1214074880
+    },
+    {
+      "pid": 118694,
+      "ppid": 118674,
+      "tick": 36751968,
+      "state": "R",
+      "RSS": 10076160
+    },
+    {
+      "pid": 118695,
+      "ppid": 118673,
+      "tick": 36751968,
+      "state": "R",
+      "RSS": 10584064
+    },
+    {
+      "pid": 118696,
+      "ppid": 118680,
+      "tick": 36751968,
+      "state": "R",
+      "RSS": 9715712
+    },
+    {
+      "pid": 118673,
+      "ppid": 118564,
+      "tick": 36751965,
+      "state": "S",
+      "RSS": 73797632
+    },
+    {
+      "pid": 118674,
+      "ppid": 118564,
+      "tick": 36751966,
+      "state": "S",
+      "RSS": 74244096
+    },
+    {
+      "pid": 118680,
+      "ppid": 118564,
+      "tick": 36751966,
+      "state": "S",
+      "RSS": 75620352
+    }
+  ],
+  "remaining": [],
+  "peak_aggregate_RSS": 1563619328,
+  "command": [
+    "/home/vscode/.local/bin/node",
+    "--max-old-space-size=192",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame18-data-learning/generate.cjs",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/test96-chunk1-config.json"
+  ],
+  "source_git": "d246c397208eb8653a93584d424424560f8ab2ab",
+  "sample_equivalent": 1623,
+  "NN_cap": 307200,
+  "current_exact_absent": true,
+  "all_child_waited": true,
+  "instant_peak_not_guaranteed": true
+}

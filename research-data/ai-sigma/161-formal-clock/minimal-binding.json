@@ -1,0 +1,48 @@
+{
+  "issue": "quoridor-4lc.161",
+  "UTC": "2026-10-03T03:40:52.920507+00:00",
+  "155_saved_binding_path": "research-data/ai-sigma/155-sigma-web-port-games-independent/served-binding-result.json",
+  "checks": [
+    {
+      "route": "/early-page.js",
+      "saved_count": 4,
+      "SHA256": "dd5c6c00a7dc949630b58d86aa964d7d5e5af594e30d2dd3851a92600f3a71d2",
+      "matches": true
+    },
+    {
+      "route": "/player-base.js",
+      "saved_count": 4,
+      "SHA256": "26bdf8f24715dd75ed22b43c15fa4ffc2f3c1c32231971e9f48b6cc21c763212",
+      "matches": true
+    },
+    {
+      "route": "/snapshot-cache.js",
+      "saved_count": 4,
+      "SHA256": "8e695aa385386202976310a18cdb9bd9f36c09ea0e115abe86f463666561d0b0",
+      "matches": true
+    },
+    {
+      "route": "/original-worker.js",
+      "saved_count": 4,
+      "SHA256": "e566da94469926f7abbdc0816efa7671d5a49f016d6eeb06dd060b7e44f8c577",
+      "matches": true
+    },
+    {
+      "route": "/candidate-host.js",
+      "saved_count": 4,
+      "SHA256": "dc6cf3e24774e5e6b52c8cf346090f53f261e58b0c7fda1e6d674c7142983d02",
+      "matches": true
+    }
+  ],
+  "host_path": "tools/ai-sigma-actual-boundary-repair/host.js",
+  "host_threads": 1,
+  "host_proxy": false,
+  "provider": "wasm",
+  "backend_thread_binding_measured": false,
+  "SC_CLK_TCK": 100,
+  "primary_sources": [
+    "https://onnxruntime.ai/docs/tutorials/web/env-flags-and-session-options.html",
+    "https://man7.org/linux/man-pages/man5/proc_pid_stat.5.html"
+  ],
+  "scope": "current source metadata versus prior saved digest; no fetch or NN"
+}

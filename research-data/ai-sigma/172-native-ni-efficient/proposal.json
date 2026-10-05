@@ -1,0 +1,50 @@
+{
+  "issue": "quoridor-4lc.172",
+  "status": "conditional_recommendation_not_science_adopted",
+  "formal_ready": false,
+  "primary": "native_quality_NI_5pp_one_sided_95_fixed_lambda_eprocess",
+  "theta": "9/20",
+  "lambda_plus": [
+    "1/4",
+    "1/2",
+    "1",
+    "3/2",
+    "2"
+  ],
+  "weights": "1/5",
+  "threshold": 20,
+  "core_pool": [
+    2,
+    4,
+    6
+  ],
+  "reserved_management_core": 0,
+  "pairs_per_block": 3,
+  "games_per_block": 6,
+  "maximum_blocks": 200,
+  "maximum_pairs": 600,
+  "maximum_games": 1200,
+  "secondary_inferiority_enabled": false,
+  "order": "one admitted block at a time; fixed prefix order; entire block terminal or typed unknown before one update",
+  "unknown_quality": [
+    0,
+    1
+  ],
+  "candidate_fault_operational": 0,
+  "unknown_future_after_valid_stop": "capacity status only, never wealth zero padding",
+  "capacity_identification": "[sum(prefixYlow)/200, (sum(prefixYhigh)+200-prefixn)/200]",
+  "NI_rule": "exact quality lower wealth >=20, subject to frozen scientific conditions",
+  "numeric_authority": "rational factors (240+a*(5*k-27))/240, a=1,2,4,6,8; sum_products>=100*240^n",
+  "hard_parent_end": "2026-10-03T08:15:21+00:00",
+  "new_heavy_cutoff": "2026-10-03T08:05:21+00:00",
+  "required_before_WDL": [
+    "coordinator science adoption",
+    "native source/binary/model/provider/clock/quota manifest",
+    "AI-free start distribution and conditional-mean assumptions",
+    "3arena current resource admission"
+  ],
+  "old158_plan_changed": false,
+  "old165_WDL_used_to_select_lambda_or_distribution": false,
+  "new_formal_data": 0,
+  "new_NN": 0
+}

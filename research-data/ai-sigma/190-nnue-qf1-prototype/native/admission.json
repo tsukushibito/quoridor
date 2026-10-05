@@ -1,0 +1,107 @@
+{
+  "UTC": "2026-10-03T14:02:12.225558+00:00",
+  "active": [],
+  "services": [
+    {
+      "pid": 3534745,
+      "tick": "28492381",
+      "RSS": 227196928,
+      "ppid": 1,
+      "pgrp": 3534745,
+      "cmd": "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python -B /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/scheduler.py run --config /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json --state-dir /workspaces/quoridor/.artifacts/research-team/scheduler-sigma-continuation-20261001 "
+    },
+    {
+      "pid": 3534758,
+      "tick": "28492397",
+      "RSS": 21745664,
+      "ppid": 1,
+      "pgrp": 3534758,
+      "cmd": "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python -B /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/watch.py --run-dir /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame13-ec60da74-6928-46e5-af8a-22b8e39937ea --expectations /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame13-ec60"
+    }
+  ],
+  "stage187": {
+    "UTC": "2026-10-03T13:48:08.950304+00:00",
+    "issue": "quoridor-4lc.187",
+    "science_stopped": true,
+    "all_owned_science_children_waited": true,
+    "current_same_identity": [],
+    "attempt_receipts": [
+      {
+        "run": "native187-rustcpu-r1",
+        "exit": 1,
+        "kind": "generate",
+        "wall": 6.334307405981235
+      },
+      {
+        "run": "native187-parity-r1",
+        "exit": 0,
+        "kind": "parity",
+        "wall": 3.6645938450237736
+      },
+      {
+        "run": "native187-mock-r1",
+        "exit": -15,
+        "kind": "mock",
+        "wall": 31.86220907297684
+      },
+      {
+        "run": "native187-gpu12-r1",
+        "exit": 0,
+        "kind": "generate",
+        "wall": 107.80132248700829
+      },
+      {
+        "run": "native187-mock-r2",
+        "exit": 0,
+        "kind": "mock",
+        "wall": 2.0722249620012008
+      },
+      {
+        "run": "native187-cpujs-r1",
+        "exit": 0,
+        "kind": "generate",
+        "wall": 137.83640136098256
+      },
+      {
+        "run": "native187-history-normalize-r1",
+        "exit": 0,
+        "kind": "mock",
+        "wall": 2.417806187993847
+      },
+      {
+        "run": "native187-gpu3-r1",
+        "exit": 0,
+        "kind": "generate",
+        "wall": 247.13934529200196
+      },
+      {
+        "run": "native187-gpu24-r1",
+        "exit": 0,
+        "kind": "generate",
+        "wall": 88.33445621305145
+      },
+      {
+        "run": "native187-prepare-r1",
+        "exit": 0,
+        "kind": "mock",
+        "wall": 1.4818282109918073
+      },
+      {
+        "run": "native187-probe-r1",
+        "exit": 0,
+        "kind": "mock",
+        "wall": 1.6431774880038574
+      }
+    ],
+    "remaining_work": "NN0 export/finite-root comparison/pack/Git restoration/Beadsbackup/handoff only; no newNN/run/science",
+    "physical_current_is_point_evidence_not_fullhost": true
+  },
+  "scheduler_owned": null,
+  "next_observe": 1791036778.0576122,
+  "RSS_forecast": 2933297152,
+  "CPU": [
+    8
+  ],
+  "child_CPU_count": 1,
+  "unknown_active_rejected": true
+}

@@ -1,0 +1,1230 @@
+{
+  "issue": "quoridor-4lc.17",
+  "experiment": "SIGMA-WEB-CRITIC",
+  "trial": 1,
+  "contract_version": 1,
+  "numeric": {
+    "cases": 28,
+    "NN_elements": 3836,
+    "features": 18144,
+    "prior_elements": 3187,
+    "max_absolute_error": 5.4836273193359375e-06,
+    "strict_value_range": [
+      -1,
+      1
+    ],
+    "failures": [],
+    "pass": true,
+    "classification": {
+      "legal-replay": 20,
+      "synthetic-history-context": 3,
+      "synthetic-total-ply-context": 5
+    }
+  },
+  "original_timing": {
+    "requests": 54,
+    "samples": 45,
+    "warmups": 9,
+    "accepted_samples": 44,
+    "late_samples": [
+      {
+        "id": "initial-p1",
+        "T_ms": 500,
+        "elapsed_ms": 502.599853515625,
+        "accepted": false
+      }
+    ],
+    "errors": [
+      {
+        "id": "initial-p1",
+        "T_ms": 500,
+        "error": "deadline"
+      }
+    ],
+    "arithmetic_disagreements": [],
+    "NN_calls": 1665,
+    "simulations": 1611,
+    "root_visits": 1665,
+    "root_visits_minus_sims": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "boundary500": {
+      "elapsed_ms": 547.5,
+      "error": "deadline",
+      "accepted": false,
+      "queue_ms": 179.7001953125,
+      "old_rejected": true,
+      "during_NN": true
+    },
+    "cancel": {
+      "old_rejected": true,
+      "during_NN": true,
+      "queue_ms": 6.39990234375,
+      "remaining_NN_ms": [
+        6.0
+      ],
+      "new_error": null,
+      "new_delivery_stamp_available": true
+    },
+    "zero": {
+      "type": "response",
+      "generation": 1,
+      "id": "initial-p1",
+      "error": "guard",
+      "fallback": 0,
+      "stats": {
+        "nnCalls": 0,
+        "nn": [],
+        "simulations": 0,
+        "rootVisits": 0,
+        "steps": []
+      },
+      "time": {
+        "t0": 1790804079096.2,
+        "workerStart": 1790804079100.1,
+        "finish": 1790804079100.2002
+      },
+      "receive": 1790804079100.3,
+      "delivery": 1790804079100.3,
+      "expected": "timeout/no checkpoint/no NN",
+      "pass": true
+    },
+    "expired": {
+      "type": "response",
+      "generation": 2,
+      "id": "initial-p1",
+      "error": "guard",
+      "fallback": 0,
+      "stats": {
+        "nnCalls": 0,
+        "nn": [],
+        "simulations": 0,
+        "rootVisits": 0,
+        "steps": []
+      },
+      "time": {
+        "t0": 1790804078102.2,
+        "workerStart": 1790804079102.3,
+        "finish": 1790804079102.3
+      },
+      "receive": 1790804079102.4001,
+      "expected": "expired input rejected before NN",
+      "pass": true
+    }
+  },
+  "own_timing": {
+    "requests": 27,
+    "samples": 18,
+    "warmups": 9,
+    "accepted_samples": 18,
+    "late_samples": [],
+    "errors": [],
+    "arithmetic_disagreements": [],
+    "NN_calls": 794,
+    "simulations": 767,
+    "root_visits": 794,
+    "root_visits_minus_sims": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "boundary500": {
+      "elapsed_ms": 522.800048828125,
+      "error": "deadline",
+      "accepted": false,
+      "queue_ms": 193.300048828125,
+      "old_rejected": true,
+      "during_NN": true
+    },
+    "cancel": {
+      "old_rejected": true,
+      "during_NN": true,
+      "queue_ms": 7.499755859375,
+      "remaining_NN_ms": [
+        6.999755859375
+      ],
+      "new_error": null,
+      "new_delivery_stamp_available": true
+    },
+    "zero": {
+      "type": "response",
+      "generation": 1,
+      "id": "initial-p1",
+      "error": "guard",
+      "fallback": 0,
+      "stats": {
+        "nnCalls": 0,
+        "nn": [],
+        "simulations": 0,
+        "rootVisits": 0,
+        "steps": []
+      },
+      "time": {
+        "t0": 1790805085938.2,
+        "workerStart": 1790805085938.9,
+        "finish": 1790805085939.0999
+      },
+      "receive": 1790805085950.7998,
+      "delivery": 1790805085950.7998,
+      "expected": "timeout/no checkpoint/no NN",
+      "pass": true
+    },
+    "expired": {
+      "type": "response",
+      "generation": 2,
+      "id": "initial-p1",
+      "error": "guard",
+      "fallback": 0,
+      "stats": {
+        "nnCalls": 0,
+        "nn": [],
+        "simulations": 0,
+        "rootVisits": 0,
+        "steps": []
+      },
+      "time": {
+        "t0": 1790805084952.9,
+        "workerStart": 1790805085953.2,
+        "finish": 1790805085953.2
+      },
+      "receive": 1790805085953.2,
+      "expected": "expired input rejected before NN",
+      "pass": true
+    }
+  },
+  "terminal": [
+    {
+      "type": "response",
+      "generation": 57,
+      "id": "synthetic-no-legal-move-draw",
+      "terminal": {
+        "winner": 0,
+        "value": 0
+      },
+      "action": null,
+      "actionRust209": null,
+      "time": {
+        "t0": 1790805069295,
+        "workerStart": 1790805069295.3,
+        "finish": 1790805069295.5
+      },
+      "stats": {
+        "nnCalls": 0,
+        "nn": [],
+        "simulations": 0,
+        "rootVisits": 0,
+        "steps": []
+      },
+      "modelhash": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+      "fallback": 0,
+      "error": null,
+      "receive": 1790805069296.1,
+      "T_ms": 500,
+      "g_ms": 25,
+      "delivery": 1790805069296.1,
+      "elapsed_ms": 1.10009765625,
+      "transport_ms": 0.60009765625,
+      "overshoot_ms": 0,
+      "valid": false,
+      "validationError": null,
+      "stale": false,
+      "late": false,
+      "accepted": {
+        "winner": 0,
+        "value": 0
+      },
+      "timeout": false
+    },
+    {
+      "type": "response",
+      "generation": 58,
+      "id": "synthetic-total-ply-200",
+      "terminal": {
+        "winner": 0,
+        "value": 0
+      },
+      "action": null,
+      "actionRust209": null,
+      "time": {
+        "t0": 1790805069296.1,
+        "workerStart": 1790805069296.5,
+        "finish": 1790805069296.8
+      },
+      "stats": {
+        "nnCalls": 0,
+        "nn": [],
+        "simulations": 0,
+        "rootVisits": 0,
+        "steps": []
+      },
+      "modelhash": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+      "fallback": 0,
+      "error": null,
+      "receive": 1790805069296.9001,
+      "T_ms": 500,
+      "g_ms": 25,
+      "delivery": 1790805069296.9001,
+      "elapsed_ms": 0.800048828125,
+      "transport_ms": 0.10009765625,
+      "overshoot_ms": 0,
+      "valid": false,
+      "validationError": null,
+      "stale": false,
+      "late": false,
+      "accepted": {
+        "winner": 0,
+        "value": 0
+      },
+      "timeout": false
+    },
+    {
+      "type": "response",
+      "generation": 59,
+      "id": "goal-win-legal-replay",
+      "terminal": {
+        "winner": 1,
+        "value": -1
+      },
+      "action": null,
+      "actionRust209": null,
+      "time": {
+        "t0": 1790805069296.9001,
+        "workerStart": 1790805069296.9,
+        "finish": 1790805069298.3
+      },
+      "stats": {
+        "nnCalls": 0,
+        "nn": [],
+        "simulations": 0,
+        "rootVisits": 0,
+        "steps": []
+      },
+      "modelhash": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+      "fallback": 0,
+      "error": null,
+      "receive": 1790805069298.6,
+      "T_ms": 500,
+      "g_ms": 25,
+      "delivery": 1790805069298.6,
+      "elapsed_ms": 1.699951171875,
+      "transport_ms": 0.300048828125,
+      "overshoot_ms": 0,
+      "valid": false,
+      "validationError": null,
+      "stale": false,
+      "late": false,
+      "accepted": {
+        "winner": 1,
+        "value": -1
+      },
+      "timeout": false
+    },
+    {
+      "type": "response",
+      "generation": 60,
+      "id": "synthetic-goal-at200",
+      "terminal": {
+        "winner": 2,
+        "value": -1
+      },
+      "action": null,
+      "actionRust209": null,
+      "time": {
+        "t0": 1790805069298.6,
+        "workerStart": 1790805069301.7,
+        "finish": 1790805069301.9
+      },
+      "stats": {
+        "nnCalls": 0,
+        "nn": [],
+        "simulations": 0,
+        "rootVisits": 0,
+        "steps": []
+      },
+      "modelhash": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+      "fallback": 0,
+      "error": null,
+      "receive": 1790805069301.9001,
+      "T_ms": 500,
+      "g_ms": 25,
+      "delivery": 1790805069301.9001,
+      "elapsed_ms": 3.300048828125,
+      "transport_ms": 0.000244140625,
+      "overshoot_ms": 0,
+      "valid": false,
+      "validationError": null,
+      "stale": false,
+      "late": false,
+      "accepted": {
+        "winner": 2,
+        "value": -1
+      },
+      "timeout": false
+    }
+  ],
+  "fallback": {
+    "type": "response",
+    "generation": 29,
+    "error": "model_not_ready",
+    "fallback": 0,
+    "receive": 1790805054939
+  },
+  "runtime": {
+    "type": "model_loaded",
+    "version": {
+      "common": "1.21.0",
+      "web": "1.21.0"
+    },
+    "threads": 1,
+    "proxy": false,
+    "canonical": true,
+    "inputs": [
+      "input"
+    ],
+    "outputs": [
+      "policy_logits",
+      "value"
+    ],
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+    "clock": "performance.timeOrigin+performance.now"
+  },
+  "terminal_NN_zero": true,
+  "fallback_rejected": true,
+  "ORT_download_manifest_checks": [
+    {
+      "name": "upstream-ort.min.js",
+      "hash_equal": true,
+      "bytes_equal": true
+    },
+    {
+      "name": "ort.min.js",
+      "hash_equal": true,
+      "bytes_equal": true
+    },
+    {
+      "name": "ort-wasm-simd-threaded.jsep.mjs",
+      "hash_equal": true,
+      "bytes_equal": true
+    },
+    {
+      "name": "ort-wasm-simd-threaded.jsep.wasm",
+      "hash_equal": true,
+      "bytes_equal": true
+    },
+    {
+      "name": "ort-LICENSE",
+      "hash_equal": true,
+      "bytes_equal": true
+    },
+    {
+      "name": "ort-ThirdPartyNotices.txt",
+      "hash_equal": true,
+      "bytes_equal": true
+    },
+    {
+      "name": "ort-package.json",
+      "hash_equal": true,
+      "bytes_equal": true
+    }
+  ],
+  "ort_version": "1.21.0",
+  "worker_patch_exact": true,
+  "release": {
+    "numeric_cases": 28,
+    "NN_elements": 3836,
+    "max_absolute_error": 1.049041748046875e-05,
+    "failures": [],
+    "pass": true,
+    "metadata": {
+      "load_ms": 280.30000000447035,
+      "compile_ms": 39.399999998509884,
+      "timing": [
+        {
+          "id": "initial-p1",
+          "cold_ms": 118,
+          "feature_ms": 0.10000000149011612,
+          "samples_ms": []
+        },
+        {
+          "id": "asym-hv-p2",
+          "cold_ms": 54.600000001490116,
+          "feature_ms": 0,
+          "samples_ms": []
+        },
+        {
+          "id": "straight-jump-p2",
+          "cold_ms": 47.100000001490116,
+          "feature_ms": 0,
+          "samples_ms": []
+        }
+      ],
+      "errors": {
+        "short": 5,
+        "nan": 6,
+        "hash": 1,
+        "schema": 2,
+        "broken": 3,
+        "stale": 10
+      },
+      "mem": [],
+      "reload": [],
+      "live_after_drop": 0,
+      "entropyCalls": 0,
+      "hash_verified_by_browser_crypto": true,
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+      "worker": {
+        "executed": false,
+        "reason": "priority3 owned boundary only; no 20NN worker loop"
+      }
+    },
+    "provenance": [
+      {
+        "path": "/home/vscode/.cache/inference/research/ai-sigma/inference-release/target/release/ai-sigma-inference-release",
+        "sha256": "3dc20848f68c36a9f61e0bcee9cf9820e01960d8b4652e8e9176b5519958e4d7",
+        "matches_original": true,
+        "bytes": 22827184
+      },
+      {
+        "path": "/home/vscode/.cache/inference/research/ai-sigma/inference-release/target/wasm32-unknown-unknown/release/ai_sigma_inference_release.wasm",
+        "sha256": "6e5a877fe2aa1d624248d49b6f2aee262ff0f77691fbeb0d16443adaeb1e04cc",
+        "matches_original": true,
+        "bytes": 13920560
+      }
+    ]
+  },
+  "history": {
+    "roots": 28,
+    "nonterminal_links": 2843,
+    "second_level_links": 142,
+    "terminals": [
+      {
+        "id": "synthetic-no-legal-move-draw",
+        "winner": 0,
+        "value": 0
+      },
+      {
+        "id": "synthetic-total-ply-200",
+        "winner": 0,
+        "value": 0
+      },
+      {
+        "id": "goal-win-legal-replay",
+        "winner": 1,
+        "value": -1
+      },
+      {
+        "id": "synthetic-goal-at200",
+        "winner": 2,
+        "value": -1
+      }
+    ],
+    "history_no_double_root_or_sibling_leak": true,
+    "scope": "fixed game.js State.next branches; not an all-node NN-MCTS trace"
+  },
+  "history_initial_failure": {
+    "kind": "independent harness VM Array prototype assertion false failure",
+    "initial_exit": 1,
+    "retry_exit": 0,
+    "retry_count": 1,
+    "proof": "history.log/history.failed.cjs/history-retry.patch"
+  },
+  "immutable": {
+    "checked": 106,
+    "differences": [],
+    "native_binary_pre_hash_timing": "native hash appended after web/release jobs; native not executed; original provenance matches",
+    "wasm_pre_hash_timing": "release Wasm hash recorded before release job"
+  },
+  "resources": {
+    "jobs": [
+      {
+        "name": "history",
+        "runner_pid": 727385,
+        "pid": 727389,
+        "pgid": 727389,
+        "start": "2026-09-30T21:54:19.000548+00:00",
+        "cmd": [
+          "node",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-WEB/history.cjs"
+        ],
+        "affinity": [
+          0
+        ],
+        "baseline_bytes": 720285,
+        "deadline": 1790805597.0,
+        "temporary_alias": "/proc/727385/cwd/t",
+        "temporary_alias_resolved": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-WEB/cache/t",
+        "job_end": 1790805378.9998424,
+        "end": "2026-09-30T21:54:19.057331+00:00",
+        "exit": 1,
+        "stop_reason": null,
+        "peak_group_plus_runner_rss_bytes": 47861760,
+        "peak_storage_bytes": 720828,
+        "final_storage_bytes": 722723,
+        "remaining_pids": [],
+        "log_sha256": "590ca1a920c853bf24dd9b22d034467c1c9f56bfdfb6a4ec1ff3b1d9705268f9",
+        "children_usage": {
+          "user_s": 0.020267999999999998,
+          "system_s": 0.004053,
+          "maxrss_kib": 53404
+        },
+        "tracked_processes": [
+          {
+            "pid": 727389,
+            "start_ticks": 5814338,
+            "pgid": 727389,
+            "maxrss_bytes": 19976192,
+            "max_cpu_ticks": 0,
+            "max_threads": 1,
+            "affinities": [
+              [
+                0
+              ]
+            ]
+          }
+        ],
+        "tracked_cpu_seconds": 0.0,
+        "temporary_roots": [
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-WEB/cache/t",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-WEB/cache/browser-cache",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-WEB/cache/browser-config"
+        ]
+      },
+      {
+        "name": "history-retry",
+        "runner_pid": 727581,
+        "pid": 727582,
+        "pgid": 727582,
+        "start": "2026-09-30T21:54:52.644556+00:00",
+        "cmd": [
+          "node",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-WEB/history.cjs"
+        ],
+        "affinity": [
+          0
+        ],
+        "baseline_bytes": 727248,
+        "deadline": 1790805597.0,
+        "temporary_alias": "/proc/727581/cwd/t",
+        "temporary_alias_resolved": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-WEB/cache/t",
+        "job_end": 1790805412.6439269,
+        "end": "2026-09-30T21:54:52.858549+00:00",
+        "exit": 0,
+        "stop_reason": null,
+        "peak_group_plus_runner_rss_bytes": 101879808,
+        "peak_storage_bytes": 727797,
+        "final_storage_bytes": 728793,
+        "remaining_pids": [],
+        "log_sha256": "f6f455babb11bd662ac11c1aef14b5304240d92a9b128f8ede0c764d2d068e50",
+        "children_usage": {
+          "user_s": 0.15556,
+          "system_s": 0.015954,
+          "maxrss_kib": 74720
+        },
+        "tracked_processes": [
+          {
+            "pid": 727582,
+            "start_ticks": 5817703,
+            "pgid": 727582,
+            "maxrss_bytes": 74055680,
+            "max_cpu_ticks": 14,
+            "max_threads": 7,
+            "affinities": [
+              [
+                0
+              ]
+            ]
+          }
+        ],
+        "tracked_cpu_seconds": 0.14,
+        "temporary_roots": [
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-WEB/cache/t",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-WEB/cache/browser-cache",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-WEB/cache/browser-config"
+        ]
+      },
+      {
+        "name": "web",
+        "runner_pid": 725426,
+        "pid": 725427,
+        "pgid": 725427,
+        "start": "2026-09-30T21:50:48.974599+00:00",
+        "cmd": [
+          "node",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-WEB/browser.cjs"
+        ],
+        "affinity": [
+          0
+        ],
+        "baseline_bytes": 59245,
+        "deadline": 1790805597.0,
+        "temporary_alias": "/proc/725426/cwd/t",
+        "temporary_alias_resolved": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-WEB/cache/t",
+        "job_end": 1790805168.9742403,
+        "end": "2026-09-30T21:51:10.510155+00:00",
+        "exit": 0,
+        "stop_reason": null,
+        "peak_group_plus_runner_rss_bytes": 1438887936,
+        "peak_storage_bytes": 1682717,
+        "final_storage_bytes": 637871,
+        "remaining_pids": [],
+        "log_sha256": "96a3e2de024b9003dfa2d294c7023161056e5cd2654638ba8ac1eaf23b6b3412",
+        "children_usage": {
+          "user_s": 2.118983,
+          "system_s": 0.645582,
+          "maxrss_kib": 402152
+        },
+        "tracked_processes": [
+          {
+            "pid": 725427,
+            "start_ticks": 5793327,
+            "pgid": 725427,
+            "maxrss_bytes": 411803648,
+            "max_cpu_ticks": 184,
+            "max_threads": 11,
+            "affinities": [
+              [
+                0
+              ]
+            ]
+          },
+          {
+            "pid": 725439,
+            "start_ticks": 5793367,
+            "pgid": 725439,
+            "maxrss_bytes": 339034112,
+            "max_cpu_ticks": 79,
+            "max_threads": 34,
+            "affinities": [
+              [
+                0
+              ]
+            ]
+          },
+          {
+            "pid": 725446,
+            "start_ticks": 5793387,
+            "pgid": 725439,
+            "maxrss_bytes": 69181440,
+            "max_cpu_ticks": 1,
+            "max_threads": 1,
+            "affinities": [
+              [
+                0
+              ]
+            ]
+          },
+          {
+            "pid": 725447,
+            "start_ticks": 5793387,
+            "pgid": 725439,
+            "maxrss_bytes": 68595712,
+            "max_cpu_ticks": 3,
+            "max_threads": 1,
+            "affinities": [
+              [
+                0
+              ]
+            ]
+          },
+          {
+            "pid": 725477,
+            "start_ticks": 5793414,
+            "pgid": 725439,
+            "maxrss_bytes": 115712000,
+            "max_cpu_ticks": 8,
+            "max_threads": 9,
+            "affinities": [
+              [
+                0
+              ]
+            ]
+          },
+          {
+            "pid": 725470,
+            "start_ticks": 5793412,
+            "pgid": 725439,
+            "maxrss_bytes": 74895360,
+            "max_cpu_ticks": 4,
+            "max_threads": 26,
+            "affinities": [
+              [
+                0
+              ]
+            ]
+          },
+          {
+            "pid": 725504,
+            "start_ticks": 5793425,
+            "pgid": 725439,
+            "maxrss_bytes": 49598464,
+            "max_cpu_ticks": 0,
+            "max_threads": 8,
+            "affinities": [
+              [
+                0
+              ]
+            ]
+          },
+          {
+            "pid": 725532,
+            "start_ticks": 5793451,
+            "pgid": 725439,
+            "maxrss_bytes": 136790016,
+            "max_cpu_ticks": 22,
+            "max_threads": 12,
+            "affinities": [
+              [
+                0
+              ]
+            ]
+          },
+          {
+            "pid": 725539,
+            "start_ticks": 5793457,
+            "pgid": 725439,
+            "maxrss_bytes": 366514176,
+            "max_cpu_ticks": 1381,
+            "max_threads": 12,
+            "affinities": [
+              [
+                0
+              ]
+            ]
+          }
+        ],
+        "tracked_cpu_seconds": 16.82,
+        "temporary_roots": [
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-WEB/cache/t",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-WEB/cache/browser-cache",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-WEB/cache/browser-config"
+        ]
+      },
+      {
+        "name": "release",
+        "runner_pid": 726484,
+        "pid": 726485,
+        "pgid": 726485,
+        "start": "2026-09-30T21:53:15.645715+00:00",
+        "cmd": [
+          "node",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-WEB/release-browser.cjs"
+        ],
+        "affinity": [
+          0
+        ],
+        "baseline_bytes": 687604,
+        "deadline": 1790805597.0,
+        "temporary_alias": "/proc/726484/cwd/t",
+        "temporary_alias_resolved": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-WEB/cache/t",
+        "job_end": 1790805315.6450348,
+        "end": "2026-09-30T21:53:20.102019+00:00",
+        "exit": 0,
+        "stop_reason": null,
+        "peak_group_plus_runner_rss_bytes": 1336283136,
+        "peak_storage_bytes": 1690122,
+        "final_storage_bytes": 715311,
+        "remaining_pids": [],
+        "log_sha256": "55316e9062b3f3781122fa49fd70df09efecac6e972ebebd8bfc5ad4519f3c2e",
+        "children_usage": {
+          "user_s": 0.7427579999999999,
+          "system_s": 0.514448,
+          "maxrss_kib": 312696
+        },
+        "tracked_processes": [
+          {
+            "pid": 726485,
+            "start_ticks": 5808000,
+            "pgid": 726485,
+            "maxrss_bytes": 312705024,
+            "max_cpu_ticks": 47,
+            "max_threads": 11,
+            "affinities": [
+              [
+                0
+              ]
+            ]
+          },
+          {
+            "pid": 726503,
+            "start_ticks": 5808033,
+            "pgid": 726503,
+            "maxrss_bytes": 262705152,
+            "max_cpu_ticks": 68,
+            "max_threads": 35,
+            "affinities": [
+              [
+                0
+              ]
+            ]
+          },
+          {
+            "pid": 726520,
+            "start_ticks": 5808053,
+            "pgid": 726503,
+            "maxrss_bytes": 68349952,
+            "max_cpu_ticks": 1,
+            "max_threads": 1,
+            "affinities": [
+              [
+                0
+              ]
+            ]
+          },
+          {
+            "pid": 726521,
+            "start_ticks": 5808053,
+            "pgid": 726503,
+            "maxrss_bytes": 69017600,
+            "max_cpu_ticks": 3,
+            "max_threads": 1,
+            "affinities": [
+              [
+                0
+              ]
+            ]
+          },
+          {
+            "pid": 726546,
+            "start_ticks": 5808073,
+            "pgid": 726503,
+            "maxrss_bytes": 74321920,
+            "max_cpu_ticks": 3,
+            "max_threads": 26,
+            "affinities": [
+              [
+                0
+              ]
+            ]
+          },
+          {
+            "pid": 726551,
+            "start_ticks": 5808074,
+            "pgid": 726503,
+            "maxrss_bytes": 115757056,
+            "max_cpu_ticks": 6,
+            "max_threads": 9,
+            "affinities": [
+              [
+                0
+              ]
+            ]
+          },
+          {
+            "pid": 726583,
+            "start_ticks": 5808083,
+            "pgid": 726503,
+            "maxrss_bytes": 49700864,
+            "max_cpu_ticks": 0,
+            "max_threads": 8,
+            "affinities": [
+              [
+                0
+              ]
+            ]
+          },
+          {
+            "pid": 726604,
+            "start_ticks": 5808106,
+            "pgid": 726503,
+            "maxrss_bytes": 136126464,
+            "max_cpu_ticks": 20,
+            "max_threads": 12,
+            "affinities": [
+              [
+                0
+              ]
+            ]
+          },
+          {
+            "pid": 726611,
+            "start_ticks": 5808112,
+            "pgid": 726503,
+            "maxrss_bytes": 263573504,
+            "max_cpu_ticks": 195,
+            "max_threads": 10,
+            "affinities": [
+              [
+                0
+              ]
+            ]
+          }
+        ],
+        "tracked_cpu_seconds": 3.43,
+        "temporary_roots": [
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-WEB/cache/t",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-WEB/cache/browser-cache",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-WEB/cache/browser-config"
+        ]
+      },
+      {
+        "name": "boundary",
+        "runner_pid": 725733,
+        "pid": 725734,
+        "pgid": 725734,
+        "start": "2026-09-30T21:51:22.937187+00:00",
+        "cmd": [
+          "node",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-WEB/browser.cjs",
+          "--boundary"
+        ],
+        "affinity": [
+          0
+        ],
+        "baseline_bytes": 640776,
+        "deadline": 1790805597.0,
+        "temporary_alias": "/proc/725733/cwd/t",
+        "temporary_alias_resolved": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-WEB/cache/t",
+        "job_end": 1790805202.9368267,
+        "end": "2026-09-30T21:51:26.725044+00:00",
+        "exit": 0,
+        "stop_reason": null,
+        "peak_group_plus_runner_rss_bytes": 1397088256,
+        "peak_storage_bytes": 1560834,
+        "final_storage_bytes": 644944,
+        "remaining_pids": [],
+        "log_sha256": "96a3e2de024b9003dfa2d294c7023161056e5cd2654638ba8ac1eaf23b6b3412",
+        "children_usage": {
+          "user_s": 0.7658119999999999,
+          "system_s": 0.531113,
+          "maxrss_kib": 346372
+        },
+        "tracked_processes": [
+          {
+            "pid": 725734,
+            "start_ticks": 5796724,
+            "pgid": 725734,
+            "maxrss_bytes": 296464384,
+            "max_cpu_ticks": 49,
+            "max_threads": 11,
+            "affinities": [
+              [
+                0
+              ]
+            ]
+          },
+          {
+            "pid": 725746,
+            "start_ticks": 5796762,
+            "pgid": 725746,
+            "maxrss_bytes": 338907136,
+            "max_cpu_ticks": 68,
+            "max_threads": 35,
+            "affinities": [
+              [
+                0
+              ]
+            ]
+          },
+          {
+            "pid": 725753,
+            "start_ticks": 5796781,
+            "pgid": 725746,
+            "maxrss_bytes": 69042176,
+            "max_cpu_ticks": 2,
+            "max_threads": 1,
+            "affinities": [
+              [
+                0
+              ]
+            ]
+          },
+          {
+            "pid": 725754,
+            "start_ticks": 5796781,
+            "pgid": 725746,
+            "maxrss_bytes": 68653056,
+            "max_cpu_ticks": 2,
+            "max_threads": 1,
+            "affinities": [
+              [
+                0
+              ]
+            ]
+          },
+          {
+            "pid": 725775,
+            "start_ticks": 5796805,
+            "pgid": 725746,
+            "maxrss_bytes": 74600448,
+            "max_cpu_ticks": 3,
+            "max_threads": 26,
+            "affinities": [
+              [
+                0
+              ]
+            ]
+          },
+          {
+            "pid": 725779,
+            "start_ticks": 5796807,
+            "pgid": 725746,
+            "maxrss_bytes": 114749440,
+            "max_cpu_ticks": 6,
+            "max_threads": 9,
+            "affinities": [
+              [
+                0
+              ]
+            ]
+          },
+          {
+            "pid": 725806,
+            "start_ticks": 5796819,
+            "pgid": 725746,
+            "maxrss_bytes": 49811456,
+            "max_cpu_ticks": 0,
+            "max_threads": 8,
+            "affinities": [
+              [
+                0
+              ]
+            ]
+          },
+          {
+            "pid": 725850,
+            "start_ticks": 5796844,
+            "pgid": 725746,
+            "maxrss_bytes": 136916992,
+            "max_cpu_ticks": 17,
+            "max_threads": 12,
+            "affinities": [
+              [
+                0
+              ]
+            ]
+          },
+          {
+            "pid": 725857,
+            "start_ticks": 5796849,
+            "pgid": 725746,
+            "maxrss_bytes": 352174080,
+            "max_cpu_ticks": 126,
+            "max_threads": 14,
+            "affinities": [
+              [
+                0
+              ]
+            ]
+          }
+        ],
+        "tracked_cpu_seconds": 2.73,
+        "temporary_roots": [
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-WEB/cache/t",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-WEB/cache/browser-cache",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-WEB/cache/browser-config"
+        ]
+      }
+    ],
+    "max_sampled_rss_bytes": 1438887936,
+    "max_sampled_storage_bytes": 1690122,
+    "cpu_seconds_observed_lower_bound": 23.12,
+    "all_sampled_TID_affinity0": true,
+    "remaining_starttick_matched_pids": [],
+    "port_server_started": false,
+    "temp_files_retained": [
+      "cache/browser-config/google-chrome-for-testing/Crash Reports/settings.dat",
+      "cache/browser-cache/dconf/user"
+    ],
+    "storage_final_before_summary": 753733,
+    "limitation": "50ms sampling misses instantaneous RSS/TID/short descendants; code/script/token runtime not RSS attributed; formal uncontended window absent"
+  },
+  "known_contract_difference": {
+    "worker_rawNN": "abs(value)>1.0001 rejected; 1<abs(value)<=1.0001 accepted by general guard",
+    "original_compare": "same 1.0001 allowance",
+    "observed_28": "strict [-1,1] passes",
+    "boundary_injection": "not executed; no actual out-of-range model observation",
+    "upstream_relation": "upstream model tanh and raw evaluator had no explicit range rejection; scoped guard adds check but does not meet strict contract"
+  },
+  "processing_stop_utc": "2026-09-30T21:55:55.143585+00:00",
+  "processing_deadline": "2026-09-30T21:59:57Z",
+  "submission_deadline": "2026-09-30T22:09:57Z",
+  "formal_match": "no-go; native IPC common clock/preflight/T/g/holdout not frozen",
+  "prior_evidence_retained": [
+    "g25 original timing late502.6ms",
+    "boundary500 delivered547.5ms rejected",
+    "original launch clock/code hash missing",
+    "original /tmp placement",
+    "old inference .11 RSS missing and temp deviation",
+    "context .14 CPU affinity deviation and initial RSS gap",
+    "entropy path unexercised",
+    "raw view caller lifetime",
+    "license/model provenance not distribution approval"
+  ]
+}

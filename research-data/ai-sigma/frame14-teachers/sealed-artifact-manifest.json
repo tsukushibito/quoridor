@@ -1,0 +1,51 @@
+{
+  "UTC": "2026-10-03T23:49:26.781401+00:00",
+  "issue": "quoridor-4lc.194",
+  "old_test_named_references": [
+    {
+      "path": "research-data/ai-sigma/frame14-teachers/nn0-live-export-attempt1/test-state-journal.jsonl.gz",
+      "SHA256": "7fa5a93246b84491c51c9c8b4493d30518932a2bb45d67df757bc8a332b1f2d1",
+      "bytes": 21,
+      "rows": 0,
+      "label_field_rows": 0,
+      "custodian_classification": "test-named old NN0 preview, protected even if currently empty",
+      "allow_to_hyp_critic_pre_freeze": false,
+      "old_attempt_preserved": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame14-teachers/nn0-live-export-attempt1/test-teacher-rows.jsonl.gz",
+      "SHA256": "7fa5a93246b84491c51c9c8b4493d30518932a2bb45d67df757bc8a332b1f2d1",
+      "bytes": 21,
+      "rows": 0,
+      "label_field_rows": 0,
+      "custodian_classification": "test-named old NN0 preview, protected even if currently empty",
+      "allow_to_hyp_critic_pre_freeze": false,
+      "old_attempt_preserved": true
+    }
+  ],
+  "protected_globs": [
+    "research-data/ai-sigma/frame14-teachers/test-sealed/**",
+    ".artifacts/ai-sigma/frame14-teachers/test-sealed/**",
+    "research-data/ai-sigma/frame14-teachers/nn0-live-export-attempt1/**",
+    "research-data/ai-sigma/frame14-teachers/test-state-journal.jsonl.gz",
+    "research-data/ai-sigma/frame14-teachers/test-sealed/test-partial-labels.jsonl.gz",
+    "research-data/ai-sigma/frame14-teachers/all144-status.json"
+  ],
+  "actual_pre_freeze_allowlist": "explicit canonical label-free metadata; train and validation labels only; label-free dataset/mask/path+hash manifests. No raw/statejournal/oldpreview/testteacher/testlabels. No claim of OS access isolation in shared worktree.",
+  "nonsealed_old_test_named_labels": 0,
+  "old_source_result_reclassified": false,
+  "new_science": false,
+  "unsealed_allowed_partial_metadata": [
+    "research-data/ai-sigma/frame14-teachers/partial-qf1-v1/train-canonical.jsonl.gz",
+    "research-data/ai-sigma/frame14-teachers/partial-qf1-v1/validation-canonical.jsonl.gz",
+    "research-data/ai-sigma/frame14-teachers/partial-qf1-v1/test-canonical.jsonl.gz"
+  ],
+  "protected_mixed_status_reference": {
+    "path": "research-data/ai-sigma/frame14-teachers/all144-status.json",
+    "SHA256": "5238c5902bc1df46f78bec5fb9cb384b86519452a923924b21efee190abd3afc",
+    "test_outcome_rows": 0,
+    "contains_test_winner_and_terminal_prefix": true,
+    "role_prefreeze_access": false,
+    "preservation": "original mixed fullstatus retained, protect by actual allowlist; do not call it label-free"
+  }
+}

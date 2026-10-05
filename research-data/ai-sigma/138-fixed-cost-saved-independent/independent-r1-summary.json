@@ -1,0 +1,301 @@
+{
+  "checks": 643,
+  "failed": [],
+  "samples": [
+    {
+      "sample": "warm",
+      "eligible_K": 8,
+      "Action": 154,
+      "rootN": 8,
+      "edge_sum": 7,
+      "API_calls": 9,
+      "discard": 1,
+      "kernel_finish_markers": 8,
+      "rejected": [],
+      "rejected_CP_transport_full_body_missing": false,
+      "public_ms": 414.3701171875,
+      "timer_late_ms": 3.219970703125,
+      "APIawait_median": 36.6298828125,
+      "first_APIawait": 42.219970703125,
+      "ACKwall_ms": 422.400146484375,
+      "Workerstop_main_lower_ms": 422.2451171875,
+      "Workerstop_main_upper_ms": 422.46533203125,
+      "post_public_API_definite": 0,
+      "post_public_API_possible": 0,
+      "API_overlap_midpoint_ms": 6.364990234375,
+      "public_to_both_zero_ms": 7.934814453125,
+      "rootFinished_missing": false
+    },
+    {
+      "sample": "sample1",
+      "eligible_K": 8,
+      "Action": 154,
+      "rootN": 8,
+      "edge_sum": 7,
+      "API_calls": 9,
+      "discard": 1,
+      "kernel_finish_markers": 8,
+      "rejected": [],
+      "rejected_CP_transport_full_body_missing": false,
+      "public_ms": 411.2099609375,
+      "timer_late_ms": 0.094970703125,
+      "APIawait_median": 38.025146484375,
+      "first_APIawait": 45.4248046875,
+      "ACKwall_ms": 426.364990234375,
+      "Workerstop_main_lower_ms": 426.205078125,
+      "Workerstop_main_upper_ms": 426.42529296875,
+      "post_public_API_definite": 0,
+      "post_public_API_possible": 0,
+      "API_overlap_midpoint_ms": 8.315185546875,
+      "public_to_both_zero_ms": 15.159912109375,
+      "rootFinished_missing": false
+    },
+    {
+      "sample": "sample2",
+      "eligible_K": 9,
+      "Action": 154,
+      "rootN": 9,
+      "edge_sum": 8,
+      "API_calls": 10,
+      "discard": 0,
+      "kernel_finish_markers": 10,
+      "rejected": [
+        {
+          "kind": "snapshot",
+          "sequence": 10,
+          "received_ms": 1790963635830.9954,
+          "accepted": false,
+          "error": "AFTER_CUTOFF"
+        }
+      ],
+      "rejected_CP_transport_full_body_missing": true,
+      "public_ms": 410.489990234375,
+      "timer_late_ms": -0.5849609375,
+      "APIawait_median": 36.7275390625,
+      "first_APIawait": 48.380126953125,
+      "ACKwall_ms": 409.14990234375,
+      "Workerstop_main_lower_ms": 408.955078125,
+      "Workerstop_main_upper_ms": 409.17529296875,
+      "post_public_API_definite": 0,
+      "post_public_API_possible": 0,
+      "API_overlap_midpoint_ms": 0,
+      "public_to_both_zero_ms": 0.0048828125,
+      "rootFinished_missing": true
+    },
+    {
+      "sample": "sample3",
+      "eligible_K": 15,
+      "Action": 162,
+      "rootN": 15,
+      "edge_sum": 14,
+      "API_calls": 16,
+      "discard": 0,
+      "kernel_finish_markers": 16,
+      "rejected": [
+        {
+          "kind": "snapshot",
+          "sequence": 16,
+          "received_ms": 1790963636246.7002,
+          "accepted": false,
+          "error": "AFTER_CUTOFF"
+        }
+      ],
+      "rejected_CP_transport_full_body_missing": true,
+      "public_ms": 410.56494140625,
+      "timer_late_ms": -0.525146484375,
+      "APIawait_median": 20.880126953125,
+      "first_APIawait": 27.60009765625,
+      "ACKwall_ms": 411.704833984375,
+      "Workerstop_main_lower_ms": 411.530029296875,
+      "Workerstop_main_upper_ms": 411.750244140625,
+      "post_public_API_definite": 0,
+      "post_public_API_possible": 0,
+      "API_overlap_midpoint_ms": 0,
+      "public_to_both_zero_ms": 1.10498046875,
+      "rootFinished_missing": false
+    }
+  ],
+  "CPU": [
+    {
+      "sample": "warm",
+      "dispatch_public": {
+        "supported": true,
+        "inner_samples": 3,
+        "first_sample": 121,
+        "last_sample": 123,
+        "leading_missing_ms": 74.864501953125,
+        "trailing_missing_ms": 89.490966796875,
+        "read_width_ms": [
+          9.377289,
+          16.127273
+        ],
+        "disappeared_endpoint_TIDs": 0,
+        "new_endpoint_TIDs": 0,
+        "common_TIDs": 107,
+        "sums_raw": {
+          "chrome": {
+            "utime_ticks": 9,
+            "stime_ticks": 0,
+            "runtime_ns": 96570206,
+            "runqueue_ns": 260885811,
+            "timeslices": 234
+          },
+          "other": {
+            "utime_ticks": 5,
+            "stime_ticks": 1,
+            "runtime_ns": 73730963,
+            "runqueue_ns": 278477182,
+            "timeslices": 341
+          }
+        },
+        "chrome_runtime_ms": 96.570206,
+        "chrome_runqueue_TIDsum_ms": 260.885811,
+        "chrome_tick_CPU_ms": 90.0,
+        "other_runtime_ms": 73.730963,
+        "other_runqueue_TIDsum_ms": 278.477182,
+        "other_tick_CPU_ms": 60.0
+      },
+      "public_ACK": {
+        "supported": false,
+        "inner_samples": 0,
+        "missing": "fewer than two inner endpoint samples"
+      }
+    },
+    {
+      "sample": "sample1",
+      "dispatch_public": {
+        "supported": true,
+        "inner_samples": 4,
+        "first_sample": 124,
+        "last_sample": 127,
+        "leading_missing_ms": 31.348388671875,
+        "trailing_missing_ms": 0.146240234375,
+        "read_width_ms": [
+          20.384466,
+          16.793302
+        ],
+        "disappeared_endpoint_TIDs": 0,
+        "new_endpoint_TIDs": 1,
+        "common_TIDs": 107,
+        "sums_raw": {
+          "chrome": {
+            "utime_ticks": 14,
+            "stime_ticks": 2,
+            "runtime_ns": 143205083,
+            "runqueue_ns": 313442460,
+            "timeslices": 287
+          },
+          "other": {
+            "utime_ticks": 9,
+            "stime_ticks": 2,
+            "runtime_ns": 113329536,
+            "runqueue_ns": 389456139,
+            "timeslices": 608
+          }
+        },
+        "chrome_runtime_ms": 143.205083,
+        "chrome_runqueue_TIDsum_ms": 313.44246,
+        "chrome_tick_CPU_ms": 160.0,
+        "other_runtime_ms": 113.329536,
+        "other_runqueue_TIDsum_ms": 389.456139,
+        "other_tick_CPU_ms": 110.0
+      },
+      "public_ACK": {
+        "supported": false,
+        "inner_samples": 0,
+        "missing": "fewer than two inner endpoint samples"
+      }
+    },
+    {
+      "sample": "sample2",
+      "dispatch_public": {
+        "supported": true,
+        "inner_samples": 3,
+        "first_sample": 128,
+        "last_sample": 130,
+        "leading_missing_ms": 86.001220703125,
+        "trailing_missing_ms": 57.705810546875,
+        "read_width_ms": [
+          14.231455,
+          9.49628
+        ],
+        "disappeared_endpoint_TIDs": 0,
+        "new_endpoint_TIDs": 0,
+        "common_TIDs": 108,
+        "sums_raw": {
+          "chrome": {
+            "utime_ticks": 8,
+            "stime_ticks": 0,
+            "runtime_ns": 89504474,
+            "runqueue_ns": 192083371,
+            "timeslices": 180
+          },
+          "other": {
+            "utime_ticks": 5,
+            "stime_ticks": 2,
+            "runtime_ns": 77709695,
+            "runqueue_ns": 246030539,
+            "timeslices": 348
+          }
+        },
+        "chrome_runtime_ms": 89.504474,
+        "chrome_runqueue_TIDsum_ms": 192.083371,
+        "chrome_tick_CPU_ms": 80.0,
+        "other_runtime_ms": 77.709695,
+        "other_runqueue_TIDsum_ms": 246.030539,
+        "other_tick_CPU_ms": 70.0
+      },
+      "public_ACK": {
+        "supported": false,
+        "inner_samples": 0,
+        "missing": "fewer than two inner endpoint samples"
+      }
+    },
+    {
+      "sample": "sample3",
+      "dispatch_public": {
+        "supported": true,
+        "inner_samples": 3,
+        "first_sample": 131,
+        "last_sample": 133,
+        "leading_missing_ms": 59.5078125,
+        "trailing_missing_ms": 93.253173828125,
+        "read_width_ms": [
+          7.376376,
+          7.036954
+        ],
+        "disappeared_endpoint_TIDs": 9,
+        "new_endpoint_TIDs": 0,
+        "common_TIDs": 100,
+        "sums_raw": {
+          "chrome": {
+            "utime_ticks": 14,
+            "stime_ticks": 0,
+            "runtime_ns": 141058856,
+            "runqueue_ns": 146325746,
+            "timeslices": 245
+          },
+          "other": {
+            "utime_ticks": 1,
+            "stime_ticks": 0,
+            "runtime_ns": 17515441,
+            "runqueue_ns": 40091767,
+            "timeslices": 54
+          }
+        },
+        "chrome_runtime_ms": 141.058856,
+        "chrome_runqueue_TIDsum_ms": 146.325746,
+        "chrome_tick_CPU_ms": 140.0,
+        "other_runtime_ms": 17.515441,
+        "other_runqueue_TIDsum_ms": 40.091767,
+        "other_tick_CPU_ms": 10.0
+      },
+      "public_ACK": {
+        "supported": false,
+        "inner_samples": 0,
+        "missing": "fewer than two inner endpoint samples"
+      }
+    }
+  ],
+  "startup_rows": 6
+}

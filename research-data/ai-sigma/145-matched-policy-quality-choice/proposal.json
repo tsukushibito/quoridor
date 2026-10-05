@@ -1,0 +1,107 @@
+{
+  "issue": "quoridor-4lc.145",
+  "selected_next_experiment_count": 1,
+  "status": "proposal only, no NN/game/build permission issued",
+  "question": "Does candidate C1.0 change local whole-game quality against fixed Sigma relative to a newly measured C1.5 baseline on matched inputs/colors, enough to prioritize or end this uniform change branch?",
+  "only_policy_factor": "PUCT_C f32 1.5 -> 1.0; Q0, sqrt(node.visits+1), seed-tie, order, finish, f32, caps, features, model, reference unchanged",
+  "implementation": {
+    "reuse_preference": "immutable .110 A/B Wasm; no new build if baseline-current hash equality and archived one-line source factor proof bind",
+    "A_path": ".artifacts/ai-sigma/runs/SIGMA-ORT-SEARCH/final.wasm",
+    "A_sha256": "1f54d0b8f0c6d3d7d51935886ed506e44376a2052506be62ca7a726c85a78a01",
+    "B_path": "research-data/ai-sigma/110-c-factor-browser/binaries/c1.wasm",
+    "B_sha256": "8438310cf8f7d096bd84364a03b97f99f737ca0a9be6c2812a7ecdee3d92d9dd",
+    "factor_source_git": "0f0597e73e5444c2a576121242a02e18417aad01",
+    "arena_recipe_git": "532c87349fa0baf233fa905f5f3d8c88a5560a9f; new isolated adapter retains dedicated twoWorker/SAB/browser-main game and timer behavior",
+    "reference_core_sha256": "362e35b3ef25e80f2c2a7024fc36b2d69e3025fd1ba9e8ee358e6240609dfe05",
+    "reference_control_sha256": "87dbd43b34f23793c36806ad41a09fda723b5f7b7b10745c0df8b055e3039a0c",
+    "model_path": "models/experiments/ai-sigma/reference/sigma-pcr250/best.onnx",
+    "model_sha256_recorded": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+    "source_writer_candidate": "experiment, one new tools/ai-sigma-c-matched-quality scope plus own data/report, assigned by coordinator",
+    "configuration_edits_both_variants": "route pinned candidate Wasm by A/B, six-cell schedule, seed2098 delivered to both engine contexts and game receipts, own issue/frame/deadline/admission paths; operational edits shared by A/B, original source readonly",
+    "seed_pitfall": "existing player-main limits and game seed hardcode1979, plus diagnose gate; config-only2098 is insufficient",
+    "fresh_game": "each game fresh twoWorker/model sessions after owned previous model/Worker stop; no simultaneous third session; identical registered three golden startup calls per engine each game",
+    "build_fallback": "if immutable reuse binding fails, do not infer parity; coordinator may separately authorize own C-only build<=120s and baseline parity, without changing scientific inputs/seed/clock"
+  },
+  "inputs": {
+    "source": "research-data/ai-sigma/119-diverse-prefix/prefix-document.json",
+    "sha256": "c8104df06585717c54900e02afcf62a9133a91fdfc2a25732da38dcc7b286e27",
+    "prefixes": [1,7,8],
+    "prefix_plies": [4,16,17],
+    "reason": "122 prespecified two both-color losses at shallow/deeper prefixes plus one same-side-winner; diagnostic post-result selection, not IID/representative/holdout",
+    "new_generation_or_replacement": false,
+    "new_search_seed": 2098,
+    "shared_seed_not_identical_PRNG_path": true
+  },
+  "clock": {
+    "nominal_ms": 500,
+    "new_NN_cutoff_ms": 402,
+    "adopt_seal_ms": 411,
+    "candidate_limits": {"simulations":4096,"max_nodes":512,"max_depth":24},
+    "reference_simulation_limit":100000,
+    "RuleA_global_depth_draw":200,
+    "samewall_not_samecompleted_NN_CPU":true,
+    "old_NN": "no new evaluation after commit, retire/discard pending return, own previous work collected before sameWorker reuse; previous retirement not charged silently to opposite t0",
+    "missing_CPU": "actual old residual CPU/interference and identical effective CPU remain unproved; save same runtime timing/NN/ACK/selfwait fields and state diagnostic scope, no formal fairness/NI claim"
+  },
+  "schedule": [
+    {"cell":1,"prefix":1,"candidate_color":1,"order":["A","B"]},
+    {"cell":2,"prefix":1,"candidate_color":2,"order":["B","A"]},
+    {"cell":3,"prefix":7,"candidate_color":1,"order":["B","A"]},
+    {"cell":4,"prefix":7,"candidate_color":2,"order":["A","B"]},
+    {"cell":5,"prefix":8,"candidate_color":1,"order":["A","B"]},
+    {"cell":6,"prefix":8,"candidate_color":2,"order":["B","A"]}
+  ],
+  "denominators": {
+    "planned_games":12,
+    "matched_cells":6,
+    "prefix_quality_units":3,
+    "score":"candidate win1/true RuleA draw0.5/terminal loss0; Xi mean of two candidate colors per variant; delta_i=Xi_B-Xi_A; per-cell paired differences also retain",
+    "all_attempts":"all12 slots and starts, terminal outcomes, typed faults, incomplete/unstarted kept; each game fresh startup6, totalplanned72 separate from hand API starts/completed backup/terminal-noNN/adopted/discard",
+    "no_statistical_claim":"not12 independent Xi, not significance/NI/power guarantee; one seed/selected3prefix finite directional diagnostic",
+    "secondary":"first Action, accepted completed/NN counts, first divergence and stop reasons recorded; ply/action trajectory changes are not proof of improved quality"
+  },
+  "mock_and_minimum_verification": [
+    "NN0 routing/hash/variant field binds exact immutable A/B; correct seed2098 at serialized request and receipt for both engines, original1979 input metadata retained; false/unknown/readerror/owner/pause/deadline spawn0",
+    "NN0 all planned order/color/prefix and typed-fault accounting, response canceled/late/no eligibleCP; no hidden extra games or warm calls",
+    "same first-root feature bits/legal Action mapping/prior/value within existing abs1e-4+rtol1e-4 on paired sameinput games, finite/strict, using recorded actual game roots; no extra scientific NN window or whole-history gate",
+    "independent saved all12 games legal/result/color/seed/variant and allattempt replay/aggregation; necessary source onefactor/model/binary served binding; shared RuleA limit and timer/residualCPU uncertainty retained"
+  ],
+  "failures_and_stop": {
+    "retry_scientific":0,
+    "replacement_games":0,
+    "candidate_fault":"owned candidate model/NN/firstCP fault yields operational loss0 in allattempt account; separate pure terminal quality is null; any such fault blocks coefficient quality adoption/priority until cause is separated",
+    "reference_fault":"reference model/NN/firstCP fault invalidates matched-cell delta; retain counterpart/raw result, never credit candidate performance",
+    "shared_or_unknown":"identity/encoding/Judge/browser timer/automation/unknown ownership becomes unfinished or unscored; no numeric loss imputation; resource/pause/stopunknown/deadline stops remaining planned games with explicit unstarted slots",
+    "cleanup":"modeldrop/worker retirement/main timers/monitor callback/innercontrolled/outerownedwait/currentidentity required per job, no other owner signal",
+    "end":"six fixed cells or 1500s totalbrowser or parent/individual guard; first science success not rerun; no outcome-selected extension"
+  },
+  "decision": {
+    "fault_or_incomplete":"no policy change, preserve bounded evidence; repair the specific mechanism only by later scope if useful",
+    "positive":"all delta_i>=0 and at least two prefixes strictly>0, with fault-free complete cells: prioritize one later untouched-input validation of C1, not adopt as general improvement",
+    "negative":"all delta_i<=0 and at least two prefixes strictly<0: end C1 on this setting, maintain C1.5; not universal C worsening",
+    "mixed":"both positive and negative prefix deltas: end uniform C1 adoption branch on this set; no best-prefix selection or automatic larger sample",
+    "all_score_equal":"end this set; if accepted Actions diverge quality sensitivity or net effect unresolved; if same Actions intervention may not reach decision here; neither becomes proof of no effect",
+    "only_one_prefix_changes":"insufficient spread; stop this fixed set, retain C1.5 and return narrow effect without expansion"
+  },
+  "cost": {
+    "writer_minutes":35,
+    "build_preferred_seconds":0,
+    "build_fallback_ceiling_seconds":120,
+    "browser_jobs":6,
+    "browser_each_ceiling_seconds":250,
+    "browser_total_ceiling_seconds":1500,
+    "max_remaining_game_plies":2252,
+    "nominal_think_seconds":1126,
+    "startup_selfwait_encoding_cleanup_headroom_seconds":374,
+    "completion_guarantee":false,
+    "fresh_startup_calls":72,
+    "simultaneous_model_sessions":2,
+    "total_model_sessions_created":24,
+    "independent_saved_review_minutes":15,
+    "elapsed_estimate_minutes":"75-77 including conservative fallback build, within remaining parent frame if allocated promptly; actual launch deadline/headroom belongs to coordinator",
+    "CPU":"one assigned heavy logical[2], inference1thread, otherheavy stopped; samewall descriptive without full effective CPU certification",
+    "RAM":"browser/2Workers6GiB guard5.5 within parent8; new storage budget must be assigned/reused by coordinator, no new reservation here"
+  },
+  "rejected_alternatives":"another wallless/depth-label expansion failed strongroot1 sensitivity; fixedK distribution-only comparison does not answer quality; fixedSigma one-move continuation is cheaper but already directionmixed and continuation-policy dependent; trueMeanFPU existing adverse local exit does not justify another same-input retry",
+  "current_policy":"retain Q0/C1.5/fixedSigma, no adoption/NN/game/actualgo/formalNI/Sigma goal success"
+}

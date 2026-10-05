@@ -1,0 +1,51 @@
+{
+  "issue": "quoridor-4lc.137",
+  "input_file": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/137-fixed-policy-cost/fixed-input.json",
+  "input_SHA256": "ed866ff6ee923ce1f41cb69639c5d2f8ef0c3fb7d5d27e71966c5f9646b5bad5",
+  "physical_side": 1,
+  "engine": "candidate",
+  "actual_policy_both_slots": "fixedSigma C1/FPU.2/first/temp0/originalorder",
+  "requests": [
+    {
+      "id": "warm",
+      "warm": true
+    },
+    {
+      "id": "sample1",
+      "warm": false
+    },
+    {
+      "id": "sample2",
+      "warm": false
+    },
+    {
+      "id": "sample3",
+      "warm": false
+    }
+  ],
+  "startup_NN": 6,
+  "session_count": 2,
+  "seed": 1979,
+  "T_ms": 500,
+  "cutoff_ms": 402,
+  "adopt_ms": 411,
+  "sample_interval_ms": 5,
+  "SAB_bounded_samples": 2,
+  "numeric_tolerance": {
+    "abs": 0.0001,
+    "rtol": 0.0001
+  },
+  "CPU_TID_observation_interval_ms": 100,
+  "root_CP_capture": "after original SAB publication, readonly copy; overhead not calibrated",
+  "root_count": "root initialization outside loop; completed_backup=root_visits=1+loop simulations, edge visits sum=loop simulations; terminal backup noNN separate",
+  "previous_Git_refs": {
+    "134_source": "6b79eca",
+    "134_data": "7af1635",
+    "134_handoff": "bd339e2",
+    "136_data": "d13bd5b5",
+    "136_handoff": "05d20e4",
+    "contract": "1c94c2036f8242c54cc36a597957a74d4fc0edaa"
+  },
+  "no_successful_retry": true,
+  "fixed_before_new_NN": "2026-10-02T17:46:33.066848+00:00"
+}

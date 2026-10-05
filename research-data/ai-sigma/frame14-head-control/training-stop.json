@@ -1,0 +1,45 @@
+{
+  "UTC": "2026-10-04T02:18:36.484282+00:00",
+  "issue": "quoridor-4lc.204",
+  "scientific_source_stopped": true,
+  "scientific_child_stop": {
+    "id": "train-r1",
+    "kind": "heavy",
+    "UTC": "2026-10-04T02:17:28.905353+00:00",
+    "identity": {
+      "pid": 3910548,
+      "ppid": 3910493,
+      "pgrp": 3910548,
+      "tick": "33320766",
+      "RSS": 0,
+      "cmd": "",
+      "affinity": [
+        2
+      ]
+    },
+    "command": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "tools/ai-sigma-qf1-head-control/run.py"
+    ],
+    "wall_seconds": 4.757568952045403,
+    "peak_family_RSS": 780976128,
+    "exit": 0,
+    "reason": "completed",
+    "child_waited": true,
+    "remaining": [],
+    "current_exact_identity_absent": true,
+    "samples_charged": 379921,
+    "sample_cap": 379921,
+    "CPU": [
+      2
+    ],
+    "GPU": 0
+  },
+  "scientific_source_SHA": {
+    "tools/ai-sigma-qf1-head-control/run.py": "917d23d01db886dbaa2825e053f7b8c37d93c647ca006c31178e5be8333eb29c",
+    "tools/ai-sigma-qf1-head-control/head_model.py": "930f3d0fb2f332505d89e79253406c53887e1c9bf04eb7ac29cba607138a25dd"
+  },
+  "model_forward_after_training": 0,
+  "old_test_read": false
+}

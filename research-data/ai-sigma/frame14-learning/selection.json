@@ -1,0 +1,27 @@
+{
+  "UTC": "2026-10-04T00:17:06.577148+00:00",
+  "rule": "lowest fixed primary validation gameequal MSE; ties stage24/48/96 then earlieststep",
+  "candidate_stage": 48,
+  "best_step": 0,
+  "validation_score": 0.6901755738516154,
+  "all_candidates": [
+    {
+      "stage": 24,
+      "step": 0,
+      "score": 0.690175573860047
+    },
+    {
+      "stage": 48,
+      "step": 0,
+      "score": 0.6901755738516154
+    },
+    {
+      "stage": 96,
+      "step": 0,
+      "score": 0.6901755738627967
+    }
+  ],
+  "note": "All beststep0 share exact initial tensorSHA. Approximately 1e-11 initial score differences arise with batch context; selected48 is not evidence of superior learned weights.",
+  "test_labels_read": false,
+  "additional_training": false
+}

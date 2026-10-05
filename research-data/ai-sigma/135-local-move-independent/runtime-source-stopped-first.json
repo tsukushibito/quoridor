@@ -1,0 +1,292 @@
+{
+  "issue": "quoridor-4lc.135",
+  "UTC": "2026-10-02T17:22:22.257092+00:00",
+  "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+  "jobs": [
+    {
+      "name": "p135-saved-r2",
+      "start": "2026-10-02T17:17:00.946897+00:00",
+      "end": "2026-10-02T17:17:08.175869+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "peak_group_plus_runner_RSS": 1282445312,
+      "peak_allocated_bytes": 9150464,
+      "remaining": [],
+      "unknown_adopted": [],
+      "all_observed_TIDs_at_assigned_CPU": true,
+      "kernel_adoptions": [
+        {
+          "kind": "kernel_adopted_direct_child",
+          "observed": {
+            "pid": 2689184,
+            "ppid": 2689080,
+            "pgid": 2689183,
+            "start_ticks": 21434032,
+            "state": "S",
+            "rss": 3256320,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "launcher_identity": {
+            "pid": 2689080,
+            "ppid": 2009,
+            "pgid": 2689080,
+            "start_ticks": 21433708,
+            "state": "R",
+            "rss": 17956864,
+            "utime_ticks": 3,
+            "stime_ticks": 1
+          },
+          "sole_jobroot_identity": {
+            "pid": 2689081,
+            "ppid": 2689080,
+            "pgid": 2689081,
+            "start_ticks": 21433716,
+            "state": "R",
+            "rss": 18628608,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+          "monotonic": 214340.336434352
+        },
+        {
+          "kind": "kernel_adopted_direct_child",
+          "observed": {
+            "pid": 2689186,
+            "ppid": 2689080,
+            "pgid": 2689185,
+            "start_ticks": 21434033,
+            "state": "S",
+            "rss": 3276800,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "launcher_identity": {
+            "pid": 2689080,
+            "ppid": 2009,
+            "pgid": 2689080,
+            "start_ticks": 21433708,
+            "state": "R",
+            "rss": 17956864,
+            "utime_ticks": 3,
+            "stime_ticks": 1
+          },
+          "sole_jobroot_identity": {
+            "pid": 2689081,
+            "ppid": 2689080,
+            "pgid": 2689081,
+            "start_ticks": 21433716,
+            "state": "R",
+            "rss": 18628608,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+          "monotonic": 214340.33651039
+        }
+      ]
+    },
+    {
+      "name": "p135-source-r1",
+      "start": "2026-10-02T17:18:33.388254+00:00",
+      "end": "2026-10-02T17:18:33.765168+00:00",
+      "exit": 0,
+      "stop_reason": null,
+      "peak_group_plus_runner_RSS": 80039936,
+      "peak_allocated_bytes": 8093696,
+      "remaining": [],
+      "unknown_adopted": [],
+      "all_observed_TIDs_at_assigned_CPU": true,
+      "kernel_adoptions": []
+    },
+    {
+      "name": "p135-saved-r1",
+      "start": "2026-10-02T17:16:28.113746+00:00",
+      "end": "2026-10-02T17:16:28.222697+00:00",
+      "exit": 1,
+      "stop_reason": null,
+      "peak_group_plus_runner_RSS": 47792128,
+      "peak_allocated_bytes": 7753728,
+      "remaining": [],
+      "unknown_adopted": [],
+      "all_observed_TIDs_at_assigned_CPU": true,
+      "kernel_adoptions": []
+    }
+  ],
+  "identity_count": 44,
+  "current_same_identity": [],
+  "currentabsence_not_natural_allperiod": true,
+  "source_write_stopped": true,
+  "source_hashes": {
+    "tools/ai-sigma-local-move-independent/closure.py": "ac87c8640f3b1b62abf7fbe42b3755ea519b36b09f4805caaf7a3cde5bf64b74",
+    "tools/ai-sigma-local-move-independent/runner.py": "865efd4dd0a41c42cbba723e3c2356785175665f4ab4f58d308b5d34d4a44227",
+    "tools/ai-sigma-local-move-independent/final-bind.py": "5fc43bedf2c53c5c58d13fc09221d8eca73c6186195ab1a103d18b615fcae1f0",
+    "tools/ai-sigma-local-move-independent/admission.py": "4d107474ad9e0ee873305c587b19a20e05023fa72d8a08f619aaefcc0c082b16",
+    "tools/ai-sigma-local-move-independent/checker.js": "5d39a439d21ff3e86d75e9de24a241b5b692c6f9f1523689059b1cf0b57f1b84",
+    "tools/ai-sigma-local-move-independent/browser.cjs": "d8e6c25f7d6a3a1fe3c59874654588c6435e980071ea6725fd9ca6c3b2ab896f",
+    "tools/ai-sigma-local-move-independent/prepare.py": "3815a9fbae7a7b42abd54113bef3fee5b3ca8ed53fdd845862d0d7100aaae348",
+    "tools/ai-sigma-local-move-independent/numeric.js": "5edc039dca6f58df36d225019227d991fb2661832dc994a5a9abda18420c91dc",
+    "tools/ai-sigma-local-move-independent/source-audit.cjs": "ad8e256bba9afb9abdddb1c18753baaf7bb0bbf59b7fb840b8e34ae00a3ecbf2"
+  },
+  "browser_stop": {
+    "remaining_pids": 0,
+    "tracked": [
+      {
+        "pid": 2689089,
+        "starttick": 21433759
+      },
+      {
+        "pid": 2689093,
+        "starttick": 21433760
+      },
+      {
+        "pid": 2689094,
+        "starttick": 21433766
+      },
+      {
+        "pid": 2689095,
+        "starttick": 21433766
+      },
+      {
+        "pid": 2689102,
+        "starttick": 21433774
+      },
+      {
+        "pid": 2689120,
+        "starttick": 21433838
+      },
+      {
+        "pid": 2689124,
+        "starttick": 21433849
+      },
+      {
+        "pid": 2689131,
+        "starttick": 21433850
+      },
+      {
+        "pid": 2689143,
+        "starttick": 21433921
+      },
+      {
+        "pid": 2689155,
+        "starttick": 21433925
+      },
+      {
+        "pid": 2689168,
+        "starttick": 21434003
+      },
+      {
+        "pid": 2689177,
+        "starttick": 21434009
+      },
+      {
+        "pid": 2689184,
+        "starttick": 21434032
+      },
+      {
+        "pid": 2689186,
+        "starttick": 21434033
+      },
+      {
+        "pid": 2689189,
+        "starttick": 21434034
+      },
+      {
+        "pid": 2689190,
+        "starttick": 21434034
+      },
+      {
+        "pid": 2689210,
+        "starttick": 21434059
+      },
+      {
+        "pid": 2689219,
+        "starttick": 21434062
+      },
+      {
+        "pid": 2689230,
+        "starttick": 21434069
+      },
+      {
+        "pid": 2689251,
+        "starttick": 21434098
+      },
+      {
+        "pid": 2689258,
+        "starttick": 21434105
+      },
+      {
+        "pid": 2689265,
+        "starttick": 21434108
+      },
+      {
+        "pid": 2689269,
+        "starttick": 21434109
+      },
+      {
+        "pid": 2689276,
+        "starttick": 21434115
+      },
+      {
+        "pid": 2689284,
+        "starttick": 21434132
+      },
+      {
+        "pid": 2689287,
+        "starttick": 21434139
+      },
+      {
+        "pid": 2689314,
+        "starttick": 21434263
+      },
+      {
+        "pid": 2689315,
+        "starttick": 21434267
+      },
+      {
+        "pid": 2689319,
+        "starttick": 21434268
+      },
+      {
+        "pid": 2689322,
+        "starttick": 21434274
+      },
+      {
+        "pid": 2689328,
+        "starttick": 21434284
+      },
+      {
+        "pid": 2689335,
+        "starttick": 21434390
+      },
+      {
+        "pid": 2689337,
+        "starttick": 21434391
+      },
+      {
+        "pid": 2689343,
+        "starttick": 21434409
+      },
+      {
+        "pid": 2689347,
+        "starttick": 21434409
+      }
+    ],
+    "forced": true,
+    "graceful_error": null,
+    "waited": true,
+    "zombie_identities_absent": true,
+    "registration_ack": true,
+    "registered": 22
+  },
+  "monitor_callback_stop": true,
+  "NN": 0,
+  "new_Model_sessions": 0,
+  "new_AI_Workers": 0,
+  "new_search_game_holdout": 0,
+  "input_hashafter": 10,
+  "outer_remaining_unknown0": true,
+  "unmanaged_short_intake_prepare_closure_PID_RSS_missing": true,
+  "original134_Model2_search_main_monitor_receipts": "input-before.source_and_stop plus final-source stop refs; four jobs forced grace is separate from outerwait/current0"
+}

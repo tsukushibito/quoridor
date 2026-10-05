@@ -1,0 +1,53 @@
+{
+  "issue": "quoridor-4lc.186",
+  "receipt_UTC": "2026-10-03T12:21:00.587885069Z",
+  "prepared_UTC": "2026-10-03T12:23:10.146081+00:00",
+  "dataset": "research-data/ai-sigma/181-checkpoint-teacher/training-connection-rows.jsonl.gz",
+  "dataset_SHA256": "233c0e1fc479ab42da328feaed2129d5ec11b9ef8a949f5bbd5c13426579d951",
+  "models": {
+    "old": [
+      "research-data/ai-sigma/176-native-teacher-pipeline/student-checkpoint.pt",
+      "c1abf195c272eb9a143ad0f88d209b7741c8c9bca0c2318de37af759ea9c2351"
+    ],
+    "new": [
+      "research-data/ai-sigma/181-checkpoint-teacher/student-checkpoint.pt",
+      "97595bf993af12d4a4575a5b6c6f964a494848eb27eb80a6e4aa6ad9481a15ec"
+    ]
+  },
+  "rows": 502,
+  "old_rows": 221,
+  "new_rows": 281,
+  "order": "lineage/game_id/row_id lexical",
+  "ID_order_SHA256": "9a8135d32480725478f493d017fbccc36c45c9c7102b7944a9a5eb40157c8141",
+  "forward_calls": 2,
+  "samples": 1004,
+  "absolute_sample_cap": 1200,
+  "warm": 0,
+  "GPU": 0,
+  "train": 0,
+  "newNN_before_UTC": "2026-10-03T12:29:00Z",
+  "science_before_UTC": "2026-10-03T12:31:00Z",
+  "architecture": "648->32 ReLU -> policy136,value1 tanh",
+  "loss": "legal masked piCE + z_stm MSE, eligible mask, rootmean auxiliary0",
+  "aggregate_tolerance": {
+    "abs": 1e-06,
+    "rtol": 1e-06
+  },
+  "receipt": "research-data/ai-sigma/181-checkpoint-teacher/learner-training.json",
+  "storage": {
+    "old_conservative_B": 18504843,
+    "new_reservation_forecast_B": 524288,
+    "new_operational_forecast_B": 458752,
+    "combined_forecast_B": 19029131,
+    "combined_guard_B": 19922944,
+    "reservation_B": 20971520,
+    "old_discount_B": 0,
+    "parent_increase_B": 0
+  },
+  "CPU_affinity": [
+    8
+  ],
+  "RAM_guard_B": 939524096,
+  "eval_source_SHA256": "8e6b4bc35536a062274a786a1a110d99c83ed9a7c485b63e37c1ea3bbc954130",
+  "source_fixed_UTC": "2026-10-03T12:25:46.360462+00:00"
+}

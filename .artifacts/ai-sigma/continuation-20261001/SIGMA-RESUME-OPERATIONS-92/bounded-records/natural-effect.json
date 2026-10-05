@@ -1,0 +1,47 @@
+{
+  "at": "2026-10-03T05:56:27.127307+00:00",
+  "run_id": "0bd85f42-78ad-4a84-925a-1cbcd5c03aa0",
+  "turn_id": "01a10052-f415-7db1-80c2-8ad3952d7ad1",
+  "allocated": 221184,
+  "held_current": [
+    133967872,
+    29929472
+  ],
+  "observe": true,
+  "finish": false,
+  "failure": {
+    "utc": "2026-10-03T05:56:09.444244+00:00",
+    "operation": "finish",
+    "error": "finish insufficient remaining time (9.316606s; need 36s)",
+    "no_foreign_process_or_turn_stopped": true,
+    "blind_retry": false
+  },
+  "state": {
+    "binding": {
+      "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+      "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+      "target": "supervisor",
+      "dispatch_issue": "quoridor-4lc.40",
+      "contract_file": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+    },
+    "process": {
+      "pid": 3220367,
+      "start_ticks": "25964677",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "phase": "running",
+    "recovery_required": false,
+    "last_result": {
+      "at": "2026-10-03T05:56:21.942372+00:00",
+      "event": "turn_limit"
+    },
+    "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+    "config_sha256": "49b9bbc4af4f6309def2c41bd9b02e035aa13cc3b0a2eb16c4261a5c0df14833",
+    "contract_sha256": "5232d0d338e11a110bd3a05d5483ceb7d9f1bc635227f0245ece21510bf2db89",
+    "next_at": 1791007995.6773798,
+    "owned": null
+  },
+  "commands": 12,
+  "top_files": []
+}

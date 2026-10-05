@@ -1,0 +1,43 @@
+{
+  "id": "plot-z-r1",
+  "kind": "static",
+  "UTC": "2026-10-04T00:40:01.541853+00:00",
+  "identity": {
+    "pid": 3829907,
+    "ppid": 3829863,
+    "pgrp": 3829907,
+    "tick": "32736069",
+    "RSS": 0,
+    "cmd": "",
+    "affinity": [
+      2
+    ]
+  },
+  "command": [
+    "/home/vscode/.cache/inference/envs/quoridor-learning-plots/bin/python",
+    "-B",
+    "tools/nnue-training/plot.py",
+    "--runs",
+    "research-data/ai-sigma/frame14-learning/runs/frame14-train96-r1",
+    "research-data/ai-sigma/frame14-l2-control/runs/frame14-l2-r1",
+    "--axis",
+    "train_samples_seen",
+    "--metric",
+    "z",
+    "--output",
+    "research-data/ai-sigma/frame14-l2-control/curves/z"
+  ],
+  "wall_seconds": 1.6808678769739345,
+  "peak_family_RSS": 108920832,
+  "exit": 0,
+  "reason": "completed",
+  "child_waited": true,
+  "remaining": [],
+  "current_exact_identity_absent": true,
+  "samples_charged": 0,
+  "sample_cap": 0,
+  "CPU": [
+    2
+  ],
+  "GPU": 0
+}

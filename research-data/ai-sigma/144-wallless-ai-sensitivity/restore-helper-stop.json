@@ -1,0 +1,1603 @@
+{
+  "process": {
+    "phase": "protocol",
+    "name": "wallless144-restore-r1",
+    "cmd": [
+      "python3",
+      "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-wallless-ai-sensitivity/verify-save.py"
+    ],
+    "start": "2026-10-02T20:02:17.548565+00:00",
+    "end": "2026-10-02T20:02:20.172456+00:00",
+    "subreaper_set_rc": 0,
+    "subreaper_get_rc": 0,
+    "subreaper_value": 1,
+    "kernel_boundary": {
+      "valid": true,
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "launcher": {
+        "pid": 2809397,
+        "ppid": 2009,
+        "pgid": 2809397,
+        "start_ticks": 22425559,
+        "state": "R",
+        "rss": 17539072,
+        "utime_ticks": 3,
+        "stime_ticks": 1
+      },
+      "root": {
+        "pid": 2809440,
+        "ppid": 2809397,
+        "pgid": 2809440,
+        "start_ticks": 22425722,
+        "state": "R",
+        "rss": 6238208,
+        "utime_ticks": 0,
+        "stime_ticks": 0
+      },
+      "initial_children": [],
+      "spawn_count": 1,
+      "single_thread_initial": true,
+      "sole_explicit_root": true
+    },
+    "runner_pid": 2809397,
+    "runner_starttick": 22425559,
+    "child_pid": 2809440,
+    "child_starttick": 22425722,
+    "exit": 0,
+    "stop_reason": null,
+    "sample_interval_ms": 40,
+    "peak_group_plus_runner_RSS": 40902656,
+    "peak_allocated_bytes": 1544192,
+    "final_allocated_bytes": 1556480,
+    "tracked": [
+      {
+        "pid": 2809440,
+        "ppid": 2809397,
+        "pgid": 2809440,
+        "start_ticks": 22425722,
+        "state": "R",
+        "rss": 9465856,
+        "utime_ticks": 2,
+        "stime_ticks": 0,
+        "maxrss": 16797696,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 130,
+        "last_ppid": 2809397,
+        "last_state": "S"
+      },
+      {
+        "pid": 2809441,
+        "ppid": 2809440,
+        "pgid": 2809440,
+        "start_ticks": 22425725,
+        "state": "R",
+        "rss": 4284416,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 4284416,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2809440,
+        "last_state": "R"
+      },
+      {
+        "pid": 2809442,
+        "ppid": 2809440,
+        "pgid": 2809440,
+        "start_ticks": 22425728,
+        "state": "D",
+        "rss": 3784704,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 4374528,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 4,
+        "last_ppid": 2809440,
+        "last_state": "D"
+      },
+      {
+        "pid": 2809443,
+        "ppid": 2809440,
+        "pgid": 2809440,
+        "start_ticks": 22425738,
+        "state": "R",
+        "rss": 3911680,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3911680,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2809440,
+        "last_state": "R"
+      },
+      {
+        "pid": 2809444,
+        "ppid": 2809440,
+        "pgid": 2809440,
+        "start_ticks": 22425742,
+        "state": "D",
+        "rss": 3850240,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3850240,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2809440,
+        "last_state": "R"
+      },
+      {
+        "pid": 2809445,
+        "ppid": 2809440,
+        "pgid": 2809440,
+        "start_ticks": 22425746,
+        "state": "R",
+        "rss": 3821568,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3821568,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2809440,
+        "last_state": "D"
+      },
+      {
+        "pid": 2809446,
+        "ppid": 2809440,
+        "pgid": 2809440,
+        "start_ticks": 22425750,
+        "state": "R",
+        "rss": 3833856,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 5173248,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 4,
+        "last_ppid": 2809440,
+        "last_state": "R"
+      },
+      {
+        "pid": 2809447,
+        "ppid": 2809440,
+        "pgid": 2809440,
+        "start_ticks": 22425756,
+        "state": "R",
+        "rss": 4460544,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 4460544,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2809440,
+        "last_state": "R"
+      },
+      {
+        "pid": 2809448,
+        "ppid": 2809440,
+        "pgid": 2809440,
+        "start_ticks": 22425761,
+        "state": "R",
+        "rss": 4698112,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 4698112,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2809440,
+        "last_state": "D"
+      },
+      {
+        "pid": 2809459,
+        "ppid": 2809440,
+        "pgid": 2809440,
+        "start_ticks": 22425767,
+        "state": "R",
+        "rss": 3874816,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 4849664,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 6,
+        "last_ppid": 2809440,
+        "last_state": "D"
+      },
+      {
+        "pid": 2809466,
+        "ppid": 2809440,
+        "pgid": 2809440,
+        "start_ticks": 22425779,
+        "state": "D",
+        "rss": 3686400,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 4472832,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 4,
+        "last_ppid": 2809440,
+        "last_state": "R"
+      },
+      {
+        "pid": 2809467,
+        "ppid": 2809440,
+        "pgid": 2809440,
+        "start_ticks": 22425786,
+        "state": "D",
+        "rss": 3702784,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3702784,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2809440,
+        "last_state": "D"
+      },
+      {
+        "pid": 2809468,
+        "ppid": 2809440,
+        "pgid": 2809440,
+        "start_ticks": 22425791,
+        "state": "R",
+        "rss": 2244608,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 2244608,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2809440,
+        "last_state": "R"
+      },
+      {
+        "pid": 2809469,
+        "ppid": 2809440,
+        "pgid": 2809440,
+        "start_ticks": 22425796,
+        "state": "D",
+        "rss": 3796992,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 4771840,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 3,
+        "last_ppid": 2809440,
+        "last_state": "R"
+      },
+      {
+        "pid": 2809470,
+        "ppid": 2809440,
+        "pgid": 2809440,
+        "start_ticks": 22425801,
+        "state": "D",
+        "rss": 4636672,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 4800512,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2809440,
+        "last_state": "D"
+      },
+      {
+        "pid": 2809471,
+        "ppid": 2809440,
+        "pgid": 2809440,
+        "start_ticks": 22425805,
+        "state": "D",
+        "rss": 3883008,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 4472832,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 6,
+        "last_ppid": 2809440,
+        "last_state": "D"
+      },
+      {
+        "pid": 2809472,
+        "ppid": 2809440,
+        "pgid": 2809440,
+        "start_ticks": 22425819,
+        "state": "D",
+        "rss": 3825664,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 4612096,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 6,
+        "last_ppid": 2809440,
+        "last_state": "D"
+      },
+      {
+        "pid": 2809473,
+        "ppid": 2809440,
+        "pgid": 2809440,
+        "start_ticks": 22425831,
+        "state": "D",
+        "rss": 3690496,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 5005312,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 6,
+        "last_ppid": 2809440,
+        "last_state": "D"
+      },
+      {
+        "pid": 2809477,
+        "ppid": 2809440,
+        "pgid": 2809440,
+        "start_ticks": 22425841,
+        "state": "D",
+        "rss": 4501504,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 4689920,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2809440,
+        "last_state": "D"
+      },
+      {
+        "pid": 2809488,
+        "ppid": 2809440,
+        "pgid": 2809440,
+        "start_ticks": 22425846,
+        "state": "R",
+        "rss": 3936256,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3936256,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2809440,
+        "last_state": "R"
+      },
+      {
+        "pid": 2809493,
+        "ppid": 2809440,
+        "pgid": 2809440,
+        "start_ticks": 22425852,
+        "state": "R",
+        "rss": 3690496,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 5218304,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 6,
+        "last_ppid": 2809440,
+        "last_state": "R"
+      },
+      {
+        "pid": 2809500,
+        "ppid": 2809440,
+        "pgid": 2809440,
+        "start_ticks": 22425864,
+        "state": "R",
+        "rss": 3690496,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3690496,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 3,
+        "last_ppid": 2809440,
+        "last_state": "D"
+      },
+      {
+        "pid": 2809501,
+        "ppid": 2809440,
+        "pgid": 2809440,
+        "start_ticks": 22425869,
+        "state": "D",
+        "rss": 3850240,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 4440064,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 6,
+        "last_ppid": 2809440,
+        "last_state": "D"
+      },
+      {
+        "pid": 2809506,
+        "ppid": 2809440,
+        "pgid": 2809440,
+        "start_ticks": 22425883,
+        "state": "R",
+        "rss": 4075520,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 5550080,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 3,
+        "last_ppid": 2809440,
+        "last_state": "D"
+      },
+      {
+        "pid": 2809510,
+        "ppid": 2809440,
+        "pgid": 2809440,
+        "start_ticks": 22425889,
+        "state": "R",
+        "rss": 4444160,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 4444160,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2809440,
+        "last_state": "D"
+      },
+      {
+        "pid": 2809511,
+        "ppid": 2809440,
+        "pgid": 2809440,
+        "start_ticks": 22425895,
+        "state": "D",
+        "rss": 3670016,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 3670016,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 4,
+        "last_ppid": 2809440,
+        "last_state": "R"
+      },
+      {
+        "pid": 2809512,
+        "ppid": 2809440,
+        "pgid": 2809440,
+        "start_ticks": 22425901,
+        "state": "R",
+        "rss": 4481024,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 4481024,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2809440,
+        "last_state": "R"
+      },
+      {
+        "pid": 2809513,
+        "ppid": 2809440,
+        "pgid": 2809440,
+        "start_ticks": 22425907,
+        "state": "D",
+        "rss": 3616768,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 4927488,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 4,
+        "last_ppid": 2809440,
+        "last_state": "D"
+      },
+      {
+        "pid": 2809514,
+        "ppid": 2809440,
+        "pgid": 2809440,
+        "start_ticks": 22425913,
+        "state": "R",
+        "rss": 4472832,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 4857856,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 2,
+        "last_ppid": 2809440,
+        "last_state": "D"
+      },
+      {
+        "pid": 2809517,
+        "ppid": 2809440,
+        "pgid": 2809440,
+        "start_ticks": 22425918,
+        "state": "R",
+        "rss": 3891200,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 4976640,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 8,
+        "last_ppid": 2809440,
+        "last_state": "R"
+      },
+      {
+        "pid": 2809518,
+        "ppid": 2809440,
+        "pgid": 2809440,
+        "start_ticks": 22425934,
+        "state": "R",
+        "rss": 3866624,
+        "utime_ticks": 0,
+        "stime_ticks": 1,
+        "maxrss": 5001216,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 12,
+        "last_ppid": 2809440,
+        "last_state": "D"
+      },
+      {
+        "pid": 2809519,
+        "ppid": 2809440,
+        "pgid": 2809440,
+        "start_ticks": 22425960,
+        "state": "D",
+        "rss": 3694592,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 4272128,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 8,
+        "last_ppid": 2809440,
+        "last_state": "D"
+      },
+      {
+        "pid": 2809521,
+        "ppid": 2809440,
+        "pgid": 2809440,
+        "start_ticks": 22425977,
+        "state": "R",
+        "rss": 3788800,
+        "utime_ticks": 0,
+        "stime_ticks": 0,
+        "maxrss": 4378624,
+        "affinities": [
+          [
+            0
+          ]
+        ],
+        "TID_samples": 3,
+        "last_ppid": 2809440,
+        "last_state": "R"
+      }
+    ],
+    "remaining": [],
+    "kernel_identity_count": 33,
+    "kernel_adoptions": [],
+    "ledger_registered_count": 0,
+    "ledger_rejected": {},
+    "ledger_monitor_remaining_consistent": true,
+    "unknown_adopted": [],
+    "privateTMP_alias": "/proc/2809397/cwd/t",
+    "privateTMP_realpath": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261002/WALLLESS-AI-SENSITIVITY/runs/t",
+    "assigned_CPU": 0,
+    "process_deadline": "2026-10-02T20:30:00+00:00",
+    "newjob_cutoff": "2026-10-02T20:25:00+00:00",
+    "guardRSS": 939524096,
+    "contractRAM": 1073741824,
+    "guard_basis": "current_proc_rss_runner_plus_owned_children",
+    "runner_ru_maxrss_bytes": 615759872,
+    "all_observed_TIDs_at_assigned_CPU": true,
+    "affinity_violations": [],
+    "instant_peak_not_guaranteed": true,
+    "runner_sha256": "4774497213c377d07e55f804d057d598d4c20859e8a601130de773aa97196e8b"
+  },
+  "ack": {
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+    "accepted": {},
+    "rejected": {},
+    "unknown_adopted": [],
+    "registered_live": [],
+    "kernel_boundary": {
+      "valid": true,
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "launcher": {
+        "pid": 2809397,
+        "ppid": 2009,
+        "pgid": 2809397,
+        "start_ticks": 22425559,
+        "state": "R",
+        "rss": 17539072,
+        "utime_ticks": 3,
+        "stime_ticks": 1
+      },
+      "root": {
+        "pid": 2809440,
+        "ppid": 2809397,
+        "pgid": 2809440,
+        "start_ticks": 22425722,
+        "state": "R",
+        "rss": 6238208,
+        "utime_ticks": 0,
+        "stime_ticks": 0
+      },
+      "initial_children": [],
+      "spawn_count": 1,
+      "single_thread_initial": true,
+      "sole_explicit_root": true
+    },
+    "kernel_owned": [
+      {
+        "pid": 2809441,
+        "starttick": 22425725,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2809441,
+            "ppid": 2809440,
+            "pgid": 2809440,
+            "start_ticks": 22425725,
+            "state": "R",
+            "rss": 4284416,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2809440,
+            "ppid": 2809397,
+            "pgid": 2809440,
+            "start_ticks": 22425722,
+            "state": "S",
+            "rss": 16633856,
+            "utime_ticks": 1,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2809442,
+        "starttick": 22425728,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2809442,
+            "ppid": 2809440,
+            "pgid": 2809440,
+            "start_ticks": 22425728,
+            "state": "D",
+            "rss": 3784704,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2809440,
+            "ppid": 2809397,
+            "pgid": 2809440,
+            "start_ticks": 22425722,
+            "state": "S",
+            "rss": 16633856,
+            "utime_ticks": 1,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2809443,
+        "starttick": 22425738,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2809443,
+            "ppid": 2809440,
+            "pgid": 2809440,
+            "start_ticks": 22425738,
+            "state": "R",
+            "rss": 3911680,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2809440,
+            "ppid": 2809397,
+            "pgid": 2809440,
+            "start_ticks": 22425722,
+            "state": "S",
+            "rss": 16633856,
+            "utime_ticks": 1,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2809444,
+        "starttick": 22425742,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2809444,
+            "ppid": 2809440,
+            "pgid": 2809440,
+            "start_ticks": 22425742,
+            "state": "D",
+            "rss": 3850240,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2809440,
+            "ppid": 2809397,
+            "pgid": 2809440,
+            "start_ticks": 22425722,
+            "state": "S",
+            "rss": 16633856,
+            "utime_ticks": 1,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2809445,
+        "starttick": 22425746,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2809445,
+            "ppid": 2809440,
+            "pgid": 2809440,
+            "start_ticks": 22425746,
+            "state": "R",
+            "rss": 3821568,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2809440,
+            "ppid": 2809397,
+            "pgid": 2809440,
+            "start_ticks": 22425722,
+            "state": "S",
+            "rss": 16633856,
+            "utime_ticks": 1,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2809446,
+        "starttick": 22425750,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2809446,
+            "ppid": 2809440,
+            "pgid": 2809440,
+            "start_ticks": 22425750,
+            "state": "R",
+            "rss": 3833856,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2809440,
+            "ppid": 2809397,
+            "pgid": 2809440,
+            "start_ticks": 22425722,
+            "state": "S",
+            "rss": 16633856,
+            "utime_ticks": 1,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2809447,
+        "starttick": 22425756,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2809447,
+            "ppid": 2809440,
+            "pgid": 2809440,
+            "start_ticks": 22425756,
+            "state": "R",
+            "rss": 4460544,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2809440,
+            "ppid": 2809397,
+            "pgid": 2809440,
+            "start_ticks": 22425722,
+            "state": "S",
+            "rss": 16633856,
+            "utime_ticks": 1,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2809448,
+        "starttick": 22425761,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2809448,
+            "ppid": 2809440,
+            "pgid": 2809440,
+            "start_ticks": 22425761,
+            "state": "R",
+            "rss": 4698112,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2809440,
+            "ppid": 2809397,
+            "pgid": 2809440,
+            "start_ticks": 22425722,
+            "state": "S",
+            "rss": 16633856,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2809459,
+        "starttick": 22425767,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2809459,
+            "ppid": 2809440,
+            "pgid": 2809440,
+            "start_ticks": 22425767,
+            "state": "R",
+            "rss": 3874816,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2809440,
+            "ppid": 2809397,
+            "pgid": 2809440,
+            "start_ticks": 22425722,
+            "state": "S",
+            "rss": 16633856,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2809466,
+        "starttick": 22425779,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2809466,
+            "ppid": 2809440,
+            "pgid": 2809440,
+            "start_ticks": 22425779,
+            "state": "D",
+            "rss": 3686400,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2809440,
+            "ppid": 2809397,
+            "pgid": 2809440,
+            "start_ticks": 22425722,
+            "state": "S",
+            "rss": 16633856,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2809467,
+        "starttick": 22425786,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2809467,
+            "ppid": 2809440,
+            "pgid": 2809440,
+            "start_ticks": 22425786,
+            "state": "D",
+            "rss": 3702784,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2809440,
+            "ppid": 2809397,
+            "pgid": 2809440,
+            "start_ticks": 22425722,
+            "state": "S",
+            "rss": 16633856,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2809468,
+        "starttick": 22425791,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2809468,
+            "ppid": 2809440,
+            "pgid": 2809440,
+            "start_ticks": 22425791,
+            "state": "R",
+            "rss": 2244608,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2809440,
+            "ppid": 2809397,
+            "pgid": 2809440,
+            "start_ticks": 22425722,
+            "state": "S",
+            "rss": 16797696,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2809469,
+        "starttick": 22425796,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2809469,
+            "ppid": 2809440,
+            "pgid": 2809440,
+            "start_ticks": 22425796,
+            "state": "D",
+            "rss": 3796992,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2809440,
+            "ppid": 2809397,
+            "pgid": 2809440,
+            "start_ticks": 22425722,
+            "state": "S",
+            "rss": 16797696,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2809470,
+        "starttick": 22425801,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2809470,
+            "ppid": 2809440,
+            "pgid": 2809440,
+            "start_ticks": 22425801,
+            "state": "D",
+            "rss": 4636672,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2809440,
+            "ppid": 2809397,
+            "pgid": 2809440,
+            "start_ticks": 22425722,
+            "state": "S",
+            "rss": 16797696,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2809471,
+        "starttick": 22425805,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2809471,
+            "ppid": 2809440,
+            "pgid": 2809440,
+            "start_ticks": 22425805,
+            "state": "D",
+            "rss": 3883008,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2809440,
+            "ppid": 2809397,
+            "pgid": 2809440,
+            "start_ticks": 22425722,
+            "state": "S",
+            "rss": 16797696,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2809472,
+        "starttick": 22425819,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2809472,
+            "ppid": 2809440,
+            "pgid": 2809440,
+            "start_ticks": 22425819,
+            "state": "D",
+            "rss": 3825664,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2809440,
+            "ppid": 2809397,
+            "pgid": 2809440,
+            "start_ticks": 22425722,
+            "state": "S",
+            "rss": 16797696,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2809473,
+        "starttick": 22425831,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2809473,
+            "ppid": 2809440,
+            "pgid": 2809440,
+            "start_ticks": 22425831,
+            "state": "D",
+            "rss": 3690496,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2809440,
+            "ppid": 2809397,
+            "pgid": 2809440,
+            "start_ticks": 22425722,
+            "state": "S",
+            "rss": 16797696,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2809477,
+        "starttick": 22425841,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2809477,
+            "ppid": 2809440,
+            "pgid": 2809440,
+            "start_ticks": 22425841,
+            "state": "D",
+            "rss": 4501504,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2809440,
+            "ppid": 2809397,
+            "pgid": 2809440,
+            "start_ticks": 22425722,
+            "state": "S",
+            "rss": 16797696,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2809488,
+        "starttick": 22425846,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2809488,
+            "ppid": 2809440,
+            "pgid": 2809440,
+            "start_ticks": 22425846,
+            "state": "R",
+            "rss": 3936256,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2809440,
+            "ppid": 2809397,
+            "pgid": 2809440,
+            "start_ticks": 22425722,
+            "state": "S",
+            "rss": 16797696,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2809493,
+        "starttick": 22425852,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2809493,
+            "ppid": 2809440,
+            "pgid": 2809440,
+            "start_ticks": 22425852,
+            "state": "R",
+            "rss": 3690496,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2809440,
+            "ppid": 2809397,
+            "pgid": 2809440,
+            "start_ticks": 22425722,
+            "state": "S",
+            "rss": 16797696,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2809500,
+        "starttick": 22425864,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2809500,
+            "ppid": 2809440,
+            "pgid": 2809440,
+            "start_ticks": 22425864,
+            "state": "R",
+            "rss": 3690496,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2809440,
+            "ppid": 2809397,
+            "pgid": 2809440,
+            "start_ticks": 22425722,
+            "state": "S",
+            "rss": 16797696,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2809501,
+        "starttick": 22425869,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2809501,
+            "ppid": 2809440,
+            "pgid": 2809440,
+            "start_ticks": 22425869,
+            "state": "D",
+            "rss": 3850240,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2809440,
+            "ppid": 2809397,
+            "pgid": 2809440,
+            "start_ticks": 22425722,
+            "state": "S",
+            "rss": 16797696,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2809506,
+        "starttick": 22425883,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2809506,
+            "ppid": 2809440,
+            "pgid": 2809440,
+            "start_ticks": 22425883,
+            "state": "R",
+            "rss": 4075520,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2809440,
+            "ppid": 2809397,
+            "pgid": 2809440,
+            "start_ticks": 22425722,
+            "state": "S",
+            "rss": 16797696,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2809510,
+        "starttick": 22425889,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2809510,
+            "ppid": 2809440,
+            "pgid": 2809440,
+            "start_ticks": 22425889,
+            "state": "R",
+            "rss": 4444160,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2809440,
+            "ppid": 2809397,
+            "pgid": 2809440,
+            "start_ticks": 22425722,
+            "state": "S",
+            "rss": 16797696,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2809511,
+        "starttick": 22425895,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2809511,
+            "ppid": 2809440,
+            "pgid": 2809440,
+            "start_ticks": 22425895,
+            "state": "D",
+            "rss": 3670016,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2809440,
+            "ppid": 2809397,
+            "pgid": 2809440,
+            "start_ticks": 22425722,
+            "state": "S",
+            "rss": 16797696,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2809512,
+        "starttick": 22425901,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2809512,
+            "ppid": 2809440,
+            "pgid": 2809440,
+            "start_ticks": 22425901,
+            "state": "R",
+            "rss": 4481024,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2809440,
+            "ppid": 2809397,
+            "pgid": 2809440,
+            "start_ticks": 22425722,
+            "state": "S",
+            "rss": 16797696,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2809513,
+        "starttick": 22425907,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2809513,
+            "ppid": 2809440,
+            "pgid": 2809440,
+            "start_ticks": 22425907,
+            "state": "D",
+            "rss": 3616768,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2809440,
+            "ppid": 2809397,
+            "pgid": 2809440,
+            "start_ticks": 22425722,
+            "state": "S",
+            "rss": 16797696,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2809514,
+        "starttick": 22425913,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2809514,
+            "ppid": 2809440,
+            "pgid": 2809440,
+            "start_ticks": 22425913,
+            "state": "R",
+            "rss": 4472832,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2809440,
+            "ppid": 2809397,
+            "pgid": 2809440,
+            "start_ticks": 22425722,
+            "state": "S",
+            "rss": 16797696,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2809517,
+        "starttick": 22425918,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2809517,
+            "ppid": 2809440,
+            "pgid": 2809440,
+            "start_ticks": 22425918,
+            "state": "R",
+            "rss": 3891200,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2809440,
+            "ppid": 2809397,
+            "pgid": 2809440,
+            "start_ticks": 22425722,
+            "state": "S",
+            "rss": 16797696,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2809518,
+        "starttick": 22425934,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2809518,
+            "ppid": 2809440,
+            "pgid": 2809440,
+            "start_ticks": 22425934,
+            "state": "R",
+            "rss": 3866624,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2809440,
+            "ppid": 2809397,
+            "pgid": 2809440,
+            "start_ticks": 22425722,
+            "state": "S",
+            "rss": 16797696,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2809519,
+        "starttick": 22425960,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2809519,
+            "ppid": 2809440,
+            "pgid": 2809440,
+            "start_ticks": 22425960,
+            "state": "D",
+            "rss": 3694592,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2809440,
+            "ppid": 2809397,
+            "pgid": 2809440,
+            "start_ticks": 22425722,
+            "state": "S",
+            "rss": 16797696,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          }
+        }
+      },
+      {
+        "pid": 2809521,
+        "starttick": 22425977,
+        "origin": {
+          "kind": "observed_owned_parent_edge",
+          "observed": {
+            "pid": 2809521,
+            "ppid": 2809440,
+            "pgid": 2809440,
+            "start_ticks": 22425977,
+            "state": "R",
+            "rss": 3788800,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "parent": {
+            "pid": 2809440,
+            "ppid": 2809397,
+            "pgid": 2809440,
+            "start_ticks": 22425722,
+            "state": "S",
+            "rss": 16797696,
+            "utime_ticks": 2,
+            "stime_ticks": 0
+          }
+        }
+      }
+    ]
+  }
+}

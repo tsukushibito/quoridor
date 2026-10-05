@@ -1,0 +1,95 @@
+{
+  "at": "2026-10-05T01:01:42.413823+00:00",
+  "state": {
+    "binding": {
+      "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+      "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+      "target": "supervisor",
+      "dispatch_issue": "quoridor-4lc.40",
+      "contract_file": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+    },
+    "process": null,
+    "phase": "stopped",
+    "recovery_required": false,
+    "last_result": {
+      "at": "2026-10-05T00:59:17.570126+00:00",
+      "event": "process_stopped",
+      "owned_turn_pending": false
+    },
+    "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+    "config_sha256": "e443a6132c3b01f58424aadbbce9cc03c1a6e52f9fd1bbd0531d0c882719cbdd",
+    "contract_sha256": "c4028354d50fb0291cef7652325931a8eabdeb46564e3378fcc9cc9e79a28193",
+    "next_at": null,
+    "owned": null,
+    "fatal_dispatch_error": {
+      "turn_id": "01a1096f-871c-78b0-9077-18a3ff0c392e",
+      "error": {
+        "message": "Error running remote compact task: You’ve hit your usage limit. Visit https://chatgpt.com/codex/settings/usage to purchase more credits or try again at Oct 9th, 2026 11:11 PM.",
+        "codexErrorInfo": "usageLimitExceeded",
+        "additionalDetails": null,
+        "misalignment": null
+      }
+    }
+  },
+  "events": [
+    {
+      "at": "2026-10-05T00:59:15.582097+00:00",
+      "event": "started"
+    },
+    {
+      "at": "2026-10-05T00:59:17.550190+00:00",
+      "event": "stopped",
+      "reason": "usageLimitExceeded",
+      "error": {
+        "turn_id": "01a1096f-871c-78b0-9077-18a3ff0c392e",
+        "error": {
+          "message": "Error running remote compact task: You’ve hit your usage limit. Visit https://chatgpt.com/codex/settings/usage to purchase more credits or try again at Oct 9th, 2026 11:11 PM.",
+          "codexErrorInfo": "usageLimitExceeded",
+          "additionalDetails": null,
+          "misalignment": null
+        }
+      }
+    },
+    {
+      "at": "2026-10-05T00:59:17.570126+00:00",
+      "event": "process_stopped",
+      "owned_turn_pending": false
+    }
+  ],
+  "monitor_ended": {
+    "started_utc": "2026-10-05T00:59:15.711369+00:00",
+    "ended_utc": "2026-10-05T00:59:33.140305+00:00",
+    "process": {
+      "pid": 476354,
+      "start_ticks": "41496853",
+      "state": "R",
+      "rss_bytes": 20414464,
+      "cpu_ticks": 2,
+      "affinity": [
+        0
+      ],
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "reason": "scheduler stopped before deadline",
+    "error": null,
+    "exit_code_if_normal": 0,
+    "self_user_cpu_s": 0.053065,
+    "self_sys_cpu_s": 0.026532,
+    "self_maxrss_kib": 28144,
+    "child_user_cpu_s": 3.270139,
+    "child_sys_cpu_s": 0.8400369999999999,
+    "child_maxrss_kib": 232328,
+    "sampled_combined_rss_peak_bytes": 50659328,
+    "allocated_peak_bytes": 38174720,
+    "no_child_command_left_running": true,
+    "own_process_exits_after_this_record": true,
+    "all_research_stopped_claimed": false
+  },
+  "run": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame20-cb298207-2b28-4934-95ae-8ccf58934ed3",
+  "no_new_dispatch_sent": true,
+  "fatal_is_previous_frame_turn": true,
+  "old_error_unchanged": true,
+  "source_cause": "Engine keeps fatal_dispatch_error on fresh start; tick stops before turn/start when field exists",
+  "repair": "owner state recovery only; source unchanged"
+}

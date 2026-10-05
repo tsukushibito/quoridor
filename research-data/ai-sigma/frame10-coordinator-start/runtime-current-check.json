@@ -1,0 +1,34 @@
+{
+  "UTC": "2026-10-03T00:36:39.520895+00:00",
+  "frame": 10,
+  "parent_sha": "25f7eabd32bf67b07c511c8f3cae57ee18047b78a4be485266331854a5751238",
+  "main_mirror_match": true,
+  "identity_checks": [
+    {
+      "role": "scheduler",
+      "pid": 2947990,
+      "expected_start_ticks": "24053182",
+      "current_start_ticks": "24053182",
+      "same_identity": true
+    },
+    {
+      "role": "monitor",
+      "pid": 2948006,
+      "expected_start_ticks": "24053214",
+      "current_start_ticks": "24053214",
+      "same_identity": true
+    }
+  ],
+  "phase": "running",
+  "recovery_required": false,
+  "loaded_hash_matches": {
+    "config_sha256": true,
+    "contract_sha256": true
+  },
+  "owner_expected_input_count": 24,
+  "owner_hash_mismatches": [],
+  "root_independent_acceptance": "/workspaces/quoridor/.artifacts/research-team/resume-20261003-001521/root-acceptance.json",
+  "live_owner_record": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame10/live-applied.json",
+  "future_full_period_success": false,
+  "science_game_success_observed": false
+}

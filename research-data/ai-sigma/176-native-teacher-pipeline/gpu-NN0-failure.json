@@ -1,0 +1,10 @@
+{
+  "attempt": 1,
+  "NN": 0,
+  "error": "ENOENT at unlink after net server.close auto-removed UNIX socket",
+  "source_SHA": "db155d1fc4bf7d904cbf9e2931c8fea06818b9a543dca3c3e47f1bb68119474c",
+  "diff_fix": "replace fs.unlinkSync(this.path) with if(fs.existsSync(this.path))fs.unlinkSync(this.path)",
+  "owned_provider_started": false,
+  "mock_server_closed": true,
+  "remote_sockets_closed": true
+}

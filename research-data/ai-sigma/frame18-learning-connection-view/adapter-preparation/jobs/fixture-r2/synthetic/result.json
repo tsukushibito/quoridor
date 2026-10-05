@@ -1,0 +1,160 @@
+{
+  "kind": "synthetic-NN0-software-fixture",
+  "cases": [
+    {
+      "case": "all private Python sources AST valid",
+      "result": "PASS"
+    },
+    {
+      "case": "dynamic nested stages 1/3",
+      "result": "PASS"
+    },
+    {
+      "case": "planned zero-row/zeroeligible retained",
+      "result": "PASS"
+    },
+    {
+      "case": "gameequal not rowequal",
+      "result": "PASS"
+    },
+    {
+      "case": "actual QF1 OR exposure",
+      "result": "PASS"
+    },
+    {
+      "case": "P2 swap same forward input distances already STM",
+      "result": "PASS"
+    },
+    {
+      "case": "f32 signature ignores JSON f64 difference",
+      "result": "PASS"
+    },
+    {
+      "case": "state_key independently excludes",
+      "result": "PASS"
+    },
+    {
+      "case": "history_key independently excludes",
+      "result": "PASS"
+    },
+    {
+      "case": "sibling family cannot cross partition",
+      "result": "EXPECTED_REJECTION",
+      "error": "sibling family assignment/cohort inconsistency"
+    },
+    {
+      "case": "slot assignment inconsistency",
+      "result": "EXPECTED_REJECTION",
+      "error": "train family slots must be unique and contiguous"
+    },
+    {
+      "case": "duplicate planned game",
+      "result": "EXPECTED_REJECTION",
+      "error": "duplicate planned game ID"
+    },
+    {
+      "case": "duplicate row",
+      "result": "EXPECTED_REJECTION",
+      "error": "duplicate row ID"
+    },
+    {
+      "case": "missing owner-advertised row",
+      "result": "EXPECTED_REJECTION",
+      "error": "missing/excess rows: t1"
+    },
+    {
+      "case": "row schema side",
+      "result": "EXPECTED_REJECTION",
+      "error": "invalid STM view"
+    },
+    {
+      "case": "row schema distance",
+      "result": "EXPECTED_REJECTION",
+      "error": "invalid STM float32 distances"
+    },
+    {
+      "case": "row schema ids",
+      "result": "EXPECTED_REJECTION",
+      "error": "invalid sparse feature IDs"
+    },
+    {
+      "case": "row schema rootmean",
+      "result": "EXPECTED_REJECTION",
+      "error": "labels prohibited in preparation"
+    },
+    {
+      "case": "explicit new-manifest train alias preserves source",
+      "result": "PASS"
+    },
+    {
+      "case": "implicit old partition reassignment",
+      "result": "EXPECTED_REJECTION",
+      "error": "source split mismatch; reassignment must be explicit"
+    },
+    {
+      "case": "largest train frozen once not partial",
+      "result": "EXPECTED_REJECTION",
+      "error": "nested stages must end at the frozen maximum train"
+    },
+    {
+      "case": "prepare advertisements only, no label read",
+      "result": "PASS"
+    },
+    {
+      "case": "future shared loader synthetic-only stage join",
+      "result": "PASS"
+    },
+    {
+      "case": "same fixed validation mask for both stages",
+      "result": "PASS"
+    },
+    {
+      "case": "all zero eligible validation denominators retained",
+      "result": "PASS"
+    },
+    {
+      "case": "loader missing label denial",
+      "result": "EXPECTED_REJECTION",
+      "error": "missing maximum-train/validation label"
+    },
+    {
+      "case": "loader test label denial",
+      "result": "EXPECTED_REJECTION",
+      "error": "test/unknown/misassigned training label"
+    },
+    {
+      "case": "immutable prepared success output",
+      "result": "EXPECTED_REJECTION",
+      "error": "immutable output already exists"
+    },
+    {
+      "case": "legacy max96/stages24/48/96 semantics",
+      "result": "PASS"
+    },
+    {
+      "case": "shared config accepts private proposal",
+      "result": "PASS"
+    },
+    {
+      "case": "no val/test statistics fit; scale only advertised",
+      "result": "PASS"
+    },
+    {
+      "case": "no model/Torch/Numpy imported",
+      "result": "PASS"
+    }
+  ],
+  "case_count": 32,
+  "wall_seconds": 0.02658786397660151,
+  "real_rows": 0,
+  "real_labels_opened": 0,
+  "NN": 0,
+  "model_imports": 0,
+  "train": 0,
+  "test_evaluation": 0,
+  "limitations": [
+    "not a real dataset qualification",
+    "no model forward or training",
+    "scale/dense evaluation remain future thin integration"
+  ]
+}

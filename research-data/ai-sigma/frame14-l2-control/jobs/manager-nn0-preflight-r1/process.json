@@ -1,0 +1,35 @@
+{
+  "id": "manager-nn0-preflight-r1",
+  "kind": "static",
+  "UTC": "2026-10-04T00:36:24.589642+00:00",
+  "identity": {
+    "pid": 3826843,
+    "ppid": 3826796,
+    "pgrp": 3826843,
+    "tick": "32714528",
+    "RSS": 0,
+    "cmd": "",
+    "affinity": [
+      2
+    ]
+  },
+  "command": [
+    "python3",
+    "-B",
+    "-c",
+    "import ast,pathlib,json; D=pathlib.Path('research-data/ai-sigma/frame14-l2-control'); [ast.parse(p.read_text(),str(p)) for p in D.glob('*.py')]; print(json.dumps({'AST_PASS':True,'argv_admitted':True,'model':0,'NN':0,'CPU':[2],'new':'01:15','stop':'01:20'}))"
+  ],
+  "wall_seconds": 0.052935817977413535,
+  "peak_family_RSS": 14401536,
+  "exit": 0,
+  "reason": "completed",
+  "child_waited": true,
+  "remaining": [],
+  "current_exact_identity_absent": true,
+  "samples_charged": 0,
+  "sample_cap": 0,
+  "CPU": [
+    2
+  ],
+  "GPU": 0
+}

@@ -1,6 +1,7 @@
 import { startDefaultMatch } from './start-match';
 import { expect, test } from '@playwright/test';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { dirname } from 'node:path';
 
 const fixtures = JSON.parse(readFileSync('tests/fixtures/ai/native-search.json', 'utf8')) as Array<{
   name: string; payload: { meta: { gameEpoch: number; revision: number; positionKey: string };
@@ -17,7 +18,7 @@ test('Wasm Worker slice and cancellation baseline across varied positions', asyn
     const ai = new window.__QUORIDOR_RULES_TEST_API__!.AiClient();
     await ai.startWorker();
     await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
-    const results: Array<{ name: string; actionId: number | null; highWaterBytes: number }> = [];
+    const results: Array<{ name: string; actionId: number | null; highWaterBytes: number; wallMs: number; warmup: boolean }> = [];
     let rafMax = 0, timerMax = 0, lastFrame = performance.now(), lastTimer = performance.now(), running = true;
     const frame = (): void => { const now = performance.now(); rafMax = Math.max(rafMax, now - lastFrame); lastFrame = now; if (running) requestAnimationFrame(frame); };
     requestAnimationFrame(frame);
@@ -26,10 +27,11 @@ test('Wasm Worker slice and cancellation baseline across varied positions', asyn
       await new Promise(resolve => setTimeout(resolve, 1200));
       const idle = { rafMax, timerMax };
       rafMax = 0; timerMax = 0; lastFrame = performance.now(); lastTimer = performance.now();
-      for (const item of items) for (let repeat = 0; repeat < 3; repeat++) {
+      for (const item of items) for (let repeat = 0; repeat < 4; repeat++) {
+        const start = performance.now();
         const result = await ai.search({ ...item.payload.meta, snapshot: new Uint8Array(item.payload.snapshot),
           limits: { ...item.payload.limits, simulations: 192 }, seed: item.payload.seed });
-        results.push({ name: item.name, actionId: result.actionId, highWaterBytes: result.stats.highWaterBytes });
+        results.push({ name: item.name, actionId: result.actionId, highWaterBytes: result.stats.highWaterBytes, wallMs: performance.now() - start, warmup: repeat === 0 });
       }
       const item = items[2]!;
       let progress!: () => void;
@@ -45,7 +47,7 @@ test('Wasm Worker slice and cancellation baseline across varied positions', asyn
     } finally { running = false; clearInterval(timer); ai.dispose(); }
   }, fixtures);
   const samples = observed.diagnostics.slices.toSorted((a, b) => a - b);
-  expect(observed.results).toHaveLength(9);
+  expect(observed.results).toHaveLength(12);
   expect(samples.length).toBeGreaterThan(20);
   expect(observed.results.every(result => result.actionId !== null && result.highWaterBytes <= 64 * 1024 * 1024)).toBe(true);
   expect(observed.cancelOutcome).toBe('cancelled');
@@ -55,7 +57,9 @@ test('Wasm Worker slice and cancellation baseline across varied positions', asyn
     cancellationMs: observed.diagnostics.cancellationMs, idleRafMaxMs: observed.idle.rafMax,
     idleTimerMaxMs: observed.idle.timerMax, rafMaxMs: observed.rafMax, timerMaxMs: observed.timerMax,
     highWaterBytes: observed.diagnostics.highWaterBytes, wasmMemoryBytes: observed.diagnostics.wasmMemoryBytes,
-    positions: observed.results.map(result => result.name) };
-  mkdirSync('artifacts', { recursive: true });
-  writeFileSync(`artifacts/phase3-${report.mode}-measurements.json`, JSON.stringify(report, null, 2));
+    positions: observed.results.map(result => result.name),
+    searchWallSamples: observed.results, warmupPerCase: 1, measuredPerCase: 3 };
+  const outputPath = process.env.E2E_PHASE3_REPORT_PATH || `artifacts/phase3-${report.mode}-measurements.json`;
+  mkdirSync(dirname(outputPath), { recursive: true });
+  writeFileSync(outputPath, JSON.stringify(report, null, 2));
 });

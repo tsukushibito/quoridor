@@ -1,0 +1,1364 @@
+{
+  "issue": "quoridor-4lc.132",
+  "run": "deep132-measure-r1",
+  "measured_source_Git": "edbf29ac29208616a8d20b859db497acb30f0f42",
+  "started_parity": 4,
+  "completed_parity": 4,
+  "parity_backup": 32,
+  "parity_NN": 32,
+  "started_primary": 8,
+  "completed_primary": 8,
+  "primary_backup": 256,
+  "primary_NN": 256,
+  "startup_NN": 6,
+  "terminal_noNN_primary": 0,
+  "unexecuted_primary": 0,
+  "numerical_failures": 0,
+  "input_failures": 0,
+  "trace_failures": 0,
+  "raw_summary_started_search_requests0_invalid_mapping": true,
+  "actual_counts_from_explicit_phase_fields": true,
+  "rows": [
+    {
+      "spec": {
+        "phase": "parity",
+        "fixture_id": "diverse-prefix-mid-pair1-color1-new8",
+        "engine": "candidate",
+        "instrumented": false,
+        "K": 8
+      },
+      "id": "deep132-measure-r1-1",
+      "Action": 30,
+      "completed_backup": 8,
+      "rootN": 8,
+      "edge_sum": 7,
+      "NN_calls": 8,
+      "terminal_noNN": 0,
+      "wrapper_ms": 323.849853515625,
+      "first_CP_ms_from_wrapper": 37.7099609375,
+      "first_API_await_ms": 21.335205078125,
+      "root_prepare_internal_missing": true,
+      "max_depth_candidate": 1,
+      "reference_depth_missing": true,
+      "cap_candidate": false,
+      "reference_uncapped": false,
+      "zero": {
+        "handles": 0,
+        "activeNN": 0,
+        "active": false
+      },
+      "gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 113,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "selected_trace_nodes": 0,
+      "NN_discard": 0,
+      "NN_discard_basis": "each infer result immediately resumed/backup; all calls completed, zero residual; not game retirement",
+      "candidate_parentQ_valueSum_missing": true
+    },
+    {
+      "spec": {
+        "phase": "parity",
+        "fixture_id": "diverse-prefix-mid-pair1-color1-new8",
+        "engine": "candidate",
+        "instrumented": true,
+        "K": 8
+      },
+      "id": "deep132-measure-r1-2",
+      "Action": 30,
+      "completed_backup": 8,
+      "rootN": 8,
+      "edge_sum": 7,
+      "NN_calls": 8,
+      "terminal_noNN": 0,
+      "wrapper_ms": 444.820068359375,
+      "first_CP_ms_from_wrapper": 75.18505859375,
+      "first_API_await_ms": 38.824951171875,
+      "root_prepare_internal_missing": true,
+      "max_depth_candidate": 1,
+      "reference_depth_missing": true,
+      "cap_candidate": false,
+      "reference_uncapped": false,
+      "zero": {
+        "handles": 0,
+        "activeNN": 0,
+        "active": false
+      },
+      "gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 113,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "selected_trace_nodes": 8,
+      "NN_discard": 0,
+      "NN_discard_basis": "each infer result immediately resumed/backup; all calls completed, zero residual; not game retirement",
+      "candidate_parentQ_valueSum_missing": true
+    },
+    {
+      "spec": {
+        "phase": "parity",
+        "fixture_id": "diverse-prefix-mid-pair1-color1-new8",
+        "engine": "reference",
+        "instrumented": false,
+        "K": 8
+      },
+      "id": "deep132-measure-r1-3",
+      "Action": 30,
+      "completed_backup": 8,
+      "rootN": 8,
+      "edge_sum": 7,
+      "NN_calls": 8,
+      "terminal_noNN": 0,
+      "wrapper_ms": 343.93017578125,
+      "first_CP_ms_from_wrapper": 51.755126953125,
+      "first_API_await_ms": 49.764892578125,
+      "root_prepare_internal_missing": true,
+      "max_depth_candidate": null,
+      "reference_depth_missing": true,
+      "cap_candidate": null,
+      "reference_uncapped": true,
+      "zero": {
+        "handles": 0,
+        "activeNN": 0,
+        "active": false
+      },
+      "gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 113,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "selected_trace_nodes": 0,
+      "NN_discard": 0,
+      "NN_discard_basis": "each infer result immediately resumed/backup; all calls completed, zero residual; not game retirement",
+      "candidate_parentQ_valueSum_missing": false
+    },
+    {
+      "spec": {
+        "phase": "parity",
+        "fixture_id": "diverse-prefix-mid-pair1-color1-new8",
+        "engine": "reference",
+        "instrumented": true,
+        "K": 8
+      },
+      "id": "deep132-measure-r1-4",
+      "Action": 30,
+      "completed_backup": 8,
+      "rootN": 8,
+      "edge_sum": 7,
+      "NN_calls": 8,
+      "terminal_noNN": 0,
+      "wrapper_ms": 278.72998046875,
+      "first_CP_ms_from_wrapper": 26.679931640625,
+      "first_API_await_ms": 26.3701171875,
+      "root_prepare_internal_missing": true,
+      "max_depth_candidate": null,
+      "reference_depth_missing": true,
+      "cap_candidate": null,
+      "reference_uncapped": true,
+      "zero": {
+        "handles": 0,
+        "activeNN": 0,
+        "active": false
+      },
+      "gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 113,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "selected_trace_nodes": 8,
+      "NN_discard": 0,
+      "NN_discard_basis": "each infer result immediately resumed/backup; all calls completed, zero residual; not game retirement",
+      "candidate_parentQ_valueSum_missing": false
+    },
+    {
+      "spec": {
+        "phase": "primary",
+        "fixture_id": "diverse-prefix-mid-pair1-color1-new8",
+        "engine": "candidate",
+        "instrumented": true,
+        "K": 32
+      },
+      "id": "deep132-measure-r1-5",
+      "Action": 30,
+      "completed_backup": 32,
+      "rootN": 32,
+      "edge_sum": 31,
+      "NN_calls": 32,
+      "terminal_noNN": 0,
+      "wrapper_ms": 1423.98486328125,
+      "first_CP_ms_from_wrapper": 35.954833984375,
+      "first_API_await_ms": 25.885009765625,
+      "root_prepare_internal_missing": true,
+      "max_depth_candidate": 3,
+      "reference_depth_missing": true,
+      "cap_candidate": false,
+      "reference_uncapped": false,
+      "zero": {
+        "handles": 0,
+        "activeNN": 0,
+        "active": false
+      },
+      "gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 113,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "selected_trace_nodes": 8,
+      "NN_discard": 0,
+      "NN_discard_basis": "each infer result immediately resumed/backup; all calls completed, zero residual; not game retirement",
+      "candidate_parentQ_valueSum_missing": true
+    },
+    {
+      "spec": {
+        "phase": "primary",
+        "fixture_id": "diverse-prefix-mid-pair1-color1-new8",
+        "engine": "reference",
+        "instrumented": true,
+        "K": 32
+      },
+      "id": "deep132-measure-r1-6",
+      "Action": 30,
+      "completed_backup": 32,
+      "rootN": 32,
+      "edge_sum": 31,
+      "NN_calls": 32,
+      "terminal_noNN": 0,
+      "wrapper_ms": 865.684814453125,
+      "first_CP_ms_from_wrapper": 17.71484375,
+      "first_API_await_ms": 17.375,
+      "root_prepare_internal_missing": true,
+      "max_depth_candidate": null,
+      "reference_depth_missing": true,
+      "cap_candidate": null,
+      "reference_uncapped": true,
+      "zero": {
+        "handles": 0,
+        "activeNN": 0,
+        "active": false
+      },
+      "gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 113,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "selected_trace_nodes": 8,
+      "NN_discard": 0,
+      "NN_discard_basis": "each infer result immediately resumed/backup; all calls completed, zero residual; not game retirement",
+      "candidate_parentQ_valueSum_missing": false
+    },
+    {
+      "spec": {
+        "phase": "primary",
+        "fixture_id": "diverse-prefix-mid-pair1-color1-new16",
+        "engine": "reference",
+        "instrumented": true,
+        "K": 32
+      },
+      "id": "deep132-measure-r1-7",
+      "Action": 21,
+      "completed_backup": 32,
+      "rootN": 32,
+      "edge_sum": 31,
+      "NN_calls": 32,
+      "terminal_noNN": 0,
+      "wrapper_ms": 1153.869873046875,
+      "first_CP_ms_from_wrapper": 23.094970703125,
+      "first_API_await_ms": 22.849853515625,
+      "root_prepare_internal_missing": true,
+      "max_depth_candidate": null,
+      "reference_depth_missing": true,
+      "cap_candidate": null,
+      "reference_uncapped": true,
+      "zero": {
+        "handles": 0,
+        "activeNN": 0,
+        "active": false
+      },
+      "gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 104,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "selected_trace_nodes": 8,
+      "NN_discard": 0,
+      "NN_discard_basis": "each infer result immediately resumed/backup; all calls completed, zero residual; not game retirement",
+      "candidate_parentQ_valueSum_missing": false
+    },
+    {
+      "spec": {
+        "phase": "primary",
+        "fixture_id": "diverse-prefix-mid-pair1-color1-new16",
+        "engine": "candidate",
+        "instrumented": true,
+        "K": 32
+      },
+      "id": "deep132-measure-r1-8",
+      "Action": 21,
+      "completed_backup": 32,
+      "rootN": 32,
+      "edge_sum": 31,
+      "NN_calls": 32,
+      "terminal_noNN": 0,
+      "wrapper_ms": 1402.969970703125,
+      "first_CP_ms_from_wrapper": 76.659912109375,
+      "first_API_await_ms": 50.75,
+      "root_prepare_internal_missing": true,
+      "max_depth_candidate": 2,
+      "reference_depth_missing": true,
+      "cap_candidate": false,
+      "reference_uncapped": false,
+      "zero": {
+        "handles": 0,
+        "activeNN": 0,
+        "active": false
+      },
+      "gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 104,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": false,
+        "missing_public_cp": false
+      },
+      "selected_trace_nodes": 8,
+      "NN_discard": 0,
+      "NN_discard_basis": "each infer result immediately resumed/backup; all calls completed, zero residual; not game retirement",
+      "candidate_parentQ_valueSum_missing": true
+    },
+    {
+      "spec": {
+        "phase": "primary",
+        "fixture_id": "diverse-prefix-mid-pair2-color2-new8",
+        "engine": "candidate",
+        "instrumented": true,
+        "K": 32
+      },
+      "id": "deep132-measure-r1-9",
+      "Action": 161,
+      "completed_backup": 32,
+      "rootN": 32,
+      "edge_sum": 31,
+      "NN_calls": 32,
+      "terminal_noNN": 0,
+      "wrapper_ms": 1064.844970703125,
+      "first_CP_ms_from_wrapper": 25.77978515625,
+      "first_API_await_ms": 21.10498046875,
+      "root_prepare_internal_missing": true,
+      "max_depth_candidate": 3,
+      "reference_depth_missing": true,
+      "cap_candidate": false,
+      "reference_uncapped": false,
+      "zero": {
+        "handles": 0,
+        "activeNN": 0,
+        "active": false
+      },
+      "gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 107,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": true,
+        "missing_public_cp": false
+      },
+      "selected_trace_nodes": 8,
+      "NN_discard": 0,
+      "NN_discard_basis": "each infer result immediately resumed/backup; all calls completed, zero residual; not game retirement",
+      "candidate_parentQ_valueSum_missing": true
+    },
+    {
+      "spec": {
+        "phase": "primary",
+        "fixture_id": "diverse-prefix-mid-pair2-color2-new8",
+        "engine": "reference",
+        "instrumented": true,
+        "K": 32
+      },
+      "id": "deep132-measure-r1-10",
+      "Action": 133,
+      "completed_backup": 32,
+      "rootN": 32,
+      "edge_sum": 31,
+      "NN_calls": 32,
+      "terminal_noNN": 0,
+      "wrapper_ms": 1060.655029296875,
+      "first_CP_ms_from_wrapper": 36.78515625,
+      "first_API_await_ms": 36.605224609375,
+      "root_prepare_internal_missing": true,
+      "max_depth_candidate": null,
+      "reference_depth_missing": true,
+      "cap_candidate": null,
+      "reference_uncapped": true,
+      "zero": {
+        "handles": 0,
+        "activeNN": 0,
+        "active": false
+      },
+      "gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 107,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": true,
+        "missing_public_cp": false
+      },
+      "selected_trace_nodes": 8,
+      "NN_discard": 0,
+      "NN_discard_basis": "each infer result immediately resumed/backup; all calls completed, zero residual; not game retirement",
+      "candidate_parentQ_valueSum_missing": false
+    },
+    {
+      "spec": {
+        "phase": "primary",
+        "fixture_id": "diverse-prefix-mid-pair2-color2-new16",
+        "engine": "reference",
+        "instrumented": true,
+        "K": 32
+      },
+      "id": "deep132-measure-r1-11",
+      "Action": 42,
+      "completed_backup": 32,
+      "rootN": 32,
+      "edge_sum": 31,
+      "NN_calls": 32,
+      "terminal_noNN": 0,
+      "wrapper_ms": 1174.9599609375,
+      "first_CP_ms_from_wrapper": 22.91015625,
+      "first_API_await_ms": 22.72509765625,
+      "root_prepare_internal_missing": true,
+      "max_depth_candidate": null,
+      "reference_depth_missing": true,
+      "cap_candidate": null,
+      "reference_uncapped": true,
+      "zero": {
+        "handles": 0,
+        "activeNN": 0,
+        "active": false
+      },
+      "gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 94,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": true,
+        "missing_public_cp": false
+      },
+      "selected_trace_nodes": 8,
+      "NN_discard": 0,
+      "NN_discard_basis": "each infer result immediately resumed/backup; all calls completed, zero residual; not game retirement",
+      "candidate_parentQ_valueSum_missing": false
+    },
+    {
+      "spec": {
+        "phase": "primary",
+        "fixture_id": "diverse-prefix-mid-pair2-color2-new16",
+        "engine": "candidate",
+        "instrumented": true,
+        "K": 32
+      },
+      "id": "deep132-measure-r1-12",
+      "Action": 32,
+      "completed_backup": 32,
+      "rootN": 32,
+      "edge_sum": 31,
+      "NN_calls": 32,
+      "terminal_noNN": 0,
+      "wrapper_ms": 1373.71484375,
+      "first_CP_ms_from_wrapper": 41.655029296875,
+      "first_API_await_ms": 19.8798828125,
+      "root_prepare_internal_missing": true,
+      "max_depth_candidate": 3,
+      "reference_depth_missing": true,
+      "cap_candidate": false,
+      "reference_uncapped": false,
+      "zero": {
+        "handles": 0,
+        "activeNN": 0,
+        "active": false
+      },
+      "gate": {
+        "features648_exact": true,
+        "NN137_finite_strict": true,
+        "fixed_reference": false,
+        "prior_checked": true,
+        "priors": 94,
+        "engine_specific_order": true,
+        "legal_set_exact": true,
+        "P2canonical": true,
+        "missing_public_cp": false
+      },
+      "selected_trace_nodes": 8,
+      "NN_discard": 0,
+      "NN_discard_basis": "each infer result immediately resumed/backup; all calls completed, zero residual; not game retirement",
+      "candidate_parentQ_valueSum_missing": true
+    }
+  ],
+  "parity": [
+    {
+      "engine": "candidate",
+      "K": 8,
+      "CP_Action_visits_NN_depth_caps_exact": true,
+      "original_wrapper_ms": 323.849853515625,
+      "instrumented_wrapper_ms": 444.820068359375,
+      "root_NN": {
+        "exact": true,
+        "mixed": true,
+        "max_abs": 0
+      }
+    },
+    {
+      "engine": "reference",
+      "K": 8,
+      "CP_Action_visits_NN_depth_caps_exact": true,
+      "original_wrapper_ms": 343.93017578125,
+      "instrumented_wrapper_ms": 278.72998046875,
+      "root_NN": {
+        "exact": true,
+        "mixed": true,
+        "max_abs": 0
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "fixture_id": "diverse-prefix-mid-pair1-color1-new8",
+      "root_features_exact": true,
+      "root_NN": {
+        "exact": true,
+        "mixed": true,
+        "max_abs": 0
+      },
+      "Action_A": 30,
+      "Action_B": 30,
+      "TV": 0.7741935483870964,
+      "NN_A": 32,
+      "NN_B": 32,
+      "terminal_noNN_A": 0,
+      "terminal_noNN_B": 0,
+      "deep": {
+        "selected_candidate": 8,
+        "selected_reference": 8,
+        "shared": [
+          {
+            "key": "4,3|5,6|0|0,6;2,6;3,5;5,5;5,7;7,7|",
+            "ply": 12,
+            "history_exact": true,
+            "features_exact": true,
+            "path_Action_equal": true,
+            "leaf_turn_equal": true,
+            "root": true,
+            "numeric": {
+              "exact": true,
+              "mixed": true,
+              "max_abs": 0
+            },
+            "terminal_equal": true,
+            "leaf_value": {
+              "exact": true,
+              "mixed": true,
+              "max_abs": 0
+            },
+            "candidate_backup": [],
+            "reference_child_to_parent_edge_backup": [],
+            "backup_sign_candidate": true,
+            "backup_sign_reference": true,
+            "candidate_parentQ_missing": true
+          },
+          {
+            "key": "3,3|5,6|1|0,6;2,6;3,5;5,5;5,7;7,7|",
+            "ply": 13,
+            "history_exact": true,
+            "features_exact": true,
+            "path_Action_equal": true,
+            "leaf_turn_equal": true,
+            "root": false,
+            "numeric": {
+              "exact": true,
+              "mixed": true,
+              "max_abs": 0
+            },
+            "terminal_equal": true,
+            "leaf_value": {
+              "exact": true,
+              "mixed": true,
+              "max_abs": 0
+            },
+            "candidate_backup": [
+              {
+                "visits_delta": 1,
+                "value_delta": -0.6532340049743652,
+                "expected_parent_side_value": -0.6532340049743652
+              }
+            ],
+            "reference_child_to_parent_edge_backup": [
+              {
+                "visits_delta": 1,
+                "parent_edge_value_delta": -0.6532340049743652,
+                "expected_parent_side_value": -0.6532340049743652
+              }
+            ],
+            "backup_sign_candidate": true,
+            "backup_sign_reference": true,
+            "candidate_parentQ_missing": true
+          }
+        ],
+        "unshared_candidate": 6,
+        "unshared_reference": 6
+      }
+    },
+    {
+      "fixture_id": "diverse-prefix-mid-pair1-color1-new16",
+      "root_features_exact": true,
+      "root_NN": {
+        "exact": true,
+        "mixed": true,
+        "max_abs": 0
+      },
+      "Action_A": 21,
+      "Action_B": 21,
+      "TV": 0.8064516129032255,
+      "NN_A": 32,
+      "NN_B": 32,
+      "terminal_noNN_A": 0,
+      "terminal_noNN_B": 0,
+      "deep": {
+        "selected_candidate": 8,
+        "selected_reference": 8,
+        "shared": [
+          {
+            "key": "3,3|4,6|0|0,6;2,6;3,5;5,5;5,7;7,7|2,5;5,4",
+            "ply": 20,
+            "history_exact": true,
+            "features_exact": true,
+            "path_Action_equal": true,
+            "leaf_turn_equal": true,
+            "root": true,
+            "numeric": {
+              "exact": true,
+              "mixed": true,
+              "max_abs": 0
+            },
+            "terminal_equal": true,
+            "leaf_value": {
+              "exact": true,
+              "mixed": true,
+              "max_abs": 0
+            },
+            "candidate_backup": [],
+            "reference_child_to_parent_edge_backup": [],
+            "backup_sign_candidate": true,
+            "backup_sign_reference": true,
+            "candidate_parentQ_missing": true
+          },
+          {
+            "key": "3,2|4,6|1|0,6;2,6;3,5;5,5;5,7;7,7|2,5;5,4",
+            "ply": 21,
+            "history_exact": true,
+            "features_exact": true,
+            "path_Action_equal": true,
+            "leaf_turn_equal": true,
+            "root": false,
+            "numeric": {
+              "exact": true,
+              "mixed": true,
+              "max_abs": 0
+            },
+            "terminal_equal": true,
+            "leaf_value": {
+              "exact": true,
+              "mixed": true,
+              "max_abs": 0
+            },
+            "candidate_backup": [
+              {
+                "visits_delta": 1,
+                "value_delta": -0.8372214436531067,
+                "expected_parent_side_value": -0.8372214436531067
+              }
+            ],
+            "reference_child_to_parent_edge_backup": [
+              {
+                "visits_delta": 1,
+                "parent_edge_value_delta": -0.8372214436531067,
+                "expected_parent_side_value": -0.8372214436531067
+              }
+            ],
+            "backup_sign_candidate": true,
+            "backup_sign_reference": true,
+            "candidate_parentQ_missing": true
+          },
+          {
+            "key": "3,3|4,6|1|0,6;2,6;3,5;5,5;5,7;7,0;7,7|2,5;5,4",
+            "ply": 21,
+            "history_exact": true,
+            "features_exact": true,
+            "path_Action_equal": true,
+            "leaf_turn_equal": true,
+            "root": false,
+            "numeric": {
+              "exact": true,
+              "mixed": true,
+              "max_abs": 0
+            },
+            "terminal_equal": true,
+            "leaf_value": {
+              "exact": true,
+              "mixed": true,
+              "max_abs": 0
+            },
+            "candidate_backup": [
+              {
+                "visits_delta": 1,
+                "value_delta": -0.7981254458427429,
+                "expected_parent_side_value": -0.7981254458427429
+              }
+            ],
+            "reference_child_to_parent_edge_backup": [
+              {
+                "visits_delta": 1,
+                "parent_edge_value_delta": -0.7981254458427429,
+                "expected_parent_side_value": -0.7981254458427429
+              }
+            ],
+            "backup_sign_candidate": true,
+            "backup_sign_reference": true,
+            "candidate_parentQ_missing": true
+          }
+        ],
+        "unshared_candidate": 5,
+        "unshared_reference": 5
+      }
+    },
+    {
+      "fixture_id": "diverse-prefix-mid-pair2-color2-new8",
+      "root_features_exact": true,
+      "root_NN": {
+        "exact": true,
+        "mixed": true,
+        "max_abs": 0
+      },
+      "Action_A": 161,
+      "Action_B": 133,
+      "TV": 0.6451612903225804,
+      "NN_A": 32,
+      "NN_B": 32,
+      "terminal_noNN_A": 0,
+      "terminal_noNN_B": 0,
+      "deep": {
+        "selected_candidate": 8,
+        "selected_reference": 8,
+        "shared": [
+          {
+            "key": "4,3|4,5|1|0,5;2,2;4,2|4,7;5,5;6,4;7,1",
+            "ply": 13,
+            "history_exact": true,
+            "features_exact": true,
+            "path_Action_equal": true,
+            "leaf_turn_equal": true,
+            "root": true,
+            "numeric": {
+              "exact": true,
+              "mixed": true,
+              "max_abs": 0
+            },
+            "terminal_equal": true,
+            "leaf_value": {
+              "exact": true,
+              "mixed": true,
+              "max_abs": 0
+            },
+            "candidate_backup": [],
+            "reference_child_to_parent_edge_backup": [],
+            "backup_sign_candidate": true,
+            "backup_sign_reference": true,
+            "candidate_parentQ_missing": true
+          },
+          {
+            "key": "4,3|4,5|0|0,5;2,2;4,2|0,2;4,7;5,5;6,4;7,1",
+            "ply": 14,
+            "history_exact": true,
+            "features_exact": true,
+            "path_Action_equal": true,
+            "leaf_turn_equal": true,
+            "root": false,
+            "numeric": {
+              "exact": true,
+              "mixed": true,
+              "max_abs": 0
+            },
+            "terminal_equal": true,
+            "leaf_value": {
+              "exact": true,
+              "mixed": true,
+              "max_abs": 0
+            },
+            "candidate_backup": [
+              {
+                "visits_delta": 1,
+                "value_delta": -0.5328811407089233,
+                "expected_parent_side_value": -0.5328811407089233
+              }
+            ],
+            "reference_child_to_parent_edge_backup": [
+              {
+                "visits_delta": 1,
+                "parent_edge_value_delta": -0.5328811407089233,
+                "expected_parent_side_value": -0.5328811407089233
+              }
+            ],
+            "backup_sign_candidate": true,
+            "backup_sign_reference": true,
+            "candidate_parentQ_missing": true
+          },
+          {
+            "key": "4,3|4,5|0|0,5;2,2;4,2;4,6|4,7;5,5;6,4;7,1",
+            "ply": 14,
+            "history_exact": true,
+            "features_exact": true,
+            "path_Action_equal": true,
+            "leaf_turn_equal": true,
+            "root": false,
+            "numeric": {
+              "exact": true,
+              "mixed": true,
+              "max_abs": 0
+            },
+            "terminal_equal": true,
+            "leaf_value": {
+              "exact": true,
+              "mixed": true,
+              "max_abs": 0
+            },
+            "candidate_backup": [
+              {
+                "visits_delta": 1,
+                "value_delta": 0.17892125248908997,
+                "expected_parent_side_value": 0.17892125248908997
+              }
+            ],
+            "reference_child_to_parent_edge_backup": [
+              {
+                "visits_delta": 1,
+                "parent_edge_value_delta": 0.17892125248908997,
+                "expected_parent_side_value": 0.17892125248908997
+              }
+            ],
+            "backup_sign_candidate": true,
+            "backup_sign_reference": true,
+            "candidate_parentQ_missing": true
+          },
+          {
+            "key": "4,3|4,5|1|0,2;0,5;2,2;4,2;4,6|4,7;5,5;6,4;7,1",
+            "ply": 15,
+            "history_exact": true,
+            "features_exact": true,
+            "path_Action_equal": true,
+            "leaf_turn_equal": true,
+            "root": false,
+            "numeric": {
+              "exact": true,
+              "mixed": true,
+              "max_abs": 0
+            },
+            "terminal_equal": true,
+            "leaf_value": {
+              "exact": true,
+              "mixed": true,
+              "max_abs": 0
+            },
+            "candidate_backup": [
+              {
+                "visits_delta": 1,
+                "value_delta": -0.7422304451465607,
+                "expected_parent_side_value": -0.7422304749488831
+              },
+              {
+                "visits_delta": 1,
+                "value_delta": 0.7422304749488831,
+                "expected_parent_side_value": 0.7422304749488831
+              }
+            ],
+            "reference_child_to_parent_edge_backup": [
+              {
+                "visits_delta": 1,
+                "parent_edge_value_delta": -0.7422304749488831,
+                "expected_parent_side_value": -0.7422304749488831
+              },
+              {
+                "visits_delta": 1,
+                "parent_edge_value_delta": 0.7422304749488831,
+                "expected_parent_side_value": 0.7422304749488831
+              }
+            ],
+            "backup_sign_candidate": true,
+            "backup_sign_reference": true,
+            "candidate_parentQ_missing": true
+          },
+          {
+            "key": "4,4|4,5|1|0,5;2,2;4,2|0,2;4,7;5,5;6,4;7,1",
+            "ply": 15,
+            "history_exact": true,
+            "features_exact": true,
+            "path_Action_equal": true,
+            "leaf_turn_equal": true,
+            "root": false,
+            "numeric": {
+              "exact": true,
+              "mixed": true,
+              "max_abs": 0
+            },
+            "terminal_equal": true,
+            "leaf_value": {
+              "exact": true,
+              "mixed": true,
+              "max_abs": 0
+            },
+            "candidate_backup": [
+              {
+                "visits_delta": 1,
+                "value_delta": -0.8607017993927002,
+                "expected_parent_side_value": -0.8607017993927002
+              },
+              {
+                "visits_delta": 1,
+                "value_delta": 0.8607017993927002,
+                "expected_parent_side_value": 0.8607017993927002
+              }
+            ],
+            "reference_child_to_parent_edge_backup": [
+              {
+                "visits_delta": 1,
+                "parent_edge_value_delta": -0.8607017993927002,
+                "expected_parent_side_value": -0.8607017993927002
+              },
+              {
+                "visits_delta": 1,
+                "parent_edge_value_delta": 0.8607017993927002,
+                "expected_parent_side_value": 0.8607017993927002
+              }
+            ],
+            "backup_sign_candidate": true,
+            "backup_sign_reference": true,
+            "candidate_parentQ_missing": true
+          }
+        ],
+        "unshared_candidate": 3,
+        "unshared_reference": 3
+      }
+    },
+    {
+      "fixture_id": "diverse-prefix-mid-pair2-color2-new16",
+      "root_features_exact": true,
+      "root_NN": {
+        "exact": true,
+        "mixed": true,
+        "max_abs": 0
+      },
+      "Action_A": 32,
+      "Action_B": 42,
+      "TV": 0.8387096774193545,
+      "NN_A": 32,
+      "NN_B": 32,
+      "terminal_noNN_A": 0,
+      "terminal_noNN_B": 0,
+      "deep": {
+        "selected_candidate": 8,
+        "selected_reference": 8,
+        "shared": [
+          {
+            "key": "3,4|5,4|1|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+            "ply": 21,
+            "history_exact": true,
+            "features_exact": true,
+            "path_Action_equal": true,
+            "leaf_turn_equal": true,
+            "root": true,
+            "numeric": {
+              "exact": true,
+              "mixed": true,
+              "max_abs": 0
+            },
+            "terminal_equal": true,
+            "leaf_value": {
+              "exact": true,
+              "mixed": true,
+              "max_abs": 0
+            },
+            "candidate_backup": [],
+            "reference_child_to_parent_edge_backup": [],
+            "backup_sign_candidate": true,
+            "backup_sign_reference": true,
+            "candidate_parentQ_missing": true
+          },
+          {
+            "key": "3,4|5,3|0|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+            "ply": 22,
+            "history_exact": true,
+            "features_exact": true,
+            "path_Action_equal": true,
+            "leaf_turn_equal": true,
+            "root": false,
+            "numeric": {
+              "exact": true,
+              "mixed": true,
+              "max_abs": 0
+            },
+            "terminal_equal": true,
+            "leaf_value": {
+              "exact": true,
+              "mixed": true,
+              "max_abs": 0
+            },
+            "candidate_backup": [
+              {
+                "visits_delta": 1,
+                "value_delta": -0.8438360691070557,
+                "expected_parent_side_value": -0.8438360691070557
+              }
+            ],
+            "reference_child_to_parent_edge_backup": [
+              {
+                "visits_delta": 1,
+                "parent_edge_value_delta": -0.8438360691070557,
+                "expected_parent_side_value": -0.8438360691070557
+              }
+            ],
+            "backup_sign_candidate": true,
+            "backup_sign_reference": true,
+            "candidate_parentQ_missing": true
+          },
+          {
+            "key": "3,4|6,4|0|0,1;0,5;2,2;4,2;4,6|0,2;1,1;4,7;5,5;6,4;7,1",
+            "ply": 22,
+            "history_exact": true,
+            "features_exact": true,
+            "path_Action_equal": true,
+            "leaf_turn_equal": true,
+            "root": false,
+            "numeric": {
+              "exact": true,
+              "mixed": true,
+              "max_abs": 0
+            },
+            "terminal_equal": true,
+            "leaf_value": {
+              "exact": true,
+              "mixed": true,
+              "max_abs": 0
+            },
+            "candidate_backup": [
+              {
+                "visits_delta": 1,
+                "value_delta": -0.6812962889671326,
+                "expected_parent_side_value": -0.6812962889671326
+              }
+            ],
+            "reference_child_to_parent_edge_backup": [
+              {
+                "visits_delta": 1,
+                "parent_edge_value_delta": -0.6812962889671326,
+                "expected_parent_side_value": -0.6812962889671326
+              }
+            ],
+            "backup_sign_candidate": true,
+            "backup_sign_reference": true,
+            "candidate_parentQ_missing": true
+          }
+        ],
+        "unshared_candidate": 5,
+        "unshared_reference": 5
+      }
+    }
+  ],
+  "shared_roots": 4,
+  "shared_nonroot": 9,
+  "selected_primary_nodes_per_engine": 32,
+  "unshared_primary_nodes_per_engine": 19,
+  "root_NN_exact": true,
+  "shared_deep_NN_exact": true,
+  "terminal_actual_all_nonterminal": true,
+  "terminal_noNN_branch_not_exercised_primary": true,
+  "finite_backup_sign_supported": true,
+  "full_deep_general_equivalence": false,
+  "mid_input_fixedgolden_NN_reference": false,
+  "start_clock": {
+    "candidate": {
+      "lo_ms": -0.110009765625,
+      "hi_ms": 0.109765625,
+      "mid_ms": -0.0001220703125,
+      "error_ms": 0.2098876953125,
+      "measured": true,
+      "samples": [
+        {
+          "start_ms": 1790958557484.27,
+          "end_ms": 1790958557536.12,
+          "worker_ms": 1790958557484.44
+        },
+        {
+          "start_ms": 1790958557536.135,
+          "end_ms": 1790958557536.79,
+          "worker_ms": 1790958557536.73
+        },
+        {
+          "start_ms": 1790958557536.79,
+          "end_ms": 1790958557536.895,
+          "worker_ms": 1790958557536.82
+        },
+        {
+          "start_ms": 1790958557536.895,
+          "end_ms": 1790958557536.925,
+          "worker_ms": 1790958557536.915
+        },
+        {
+          "start_ms": 1790958557536.925,
+          "end_ms": 1790958557536.95,
+          "worker_ms": 1790958557536.935
+        },
+        {
+          "start_ms": 1790958557536.95,
+          "end_ms": 1790958557537.0251,
+          "worker_ms": 1790958557536.965
+        },
+        {
+          "start_ms": 1790958557537.0251,
+          "end_ms": 1790958557537.11,
+          "worker_ms": 1790958557537.035
+        },
+        {
+          "start_ms": 1790958557537.115,
+          "end_ms": 1790958557537.1501,
+          "worker_ms": 1790958557537.1301
+        }
+      ]
+    },
+    "reference": {
+      "lo_ms": -0.110009765625,
+      "hi_ms": 0.099755859375,
+      "mid_ms": -0.005126953125,
+      "error_ms": 0.2048828125,
+      "measured": true,
+      "samples": [
+        {
+          "start_ms": 1790958557537.2,
+          "end_ms": 1790958557537.2651,
+          "worker_ms": 1790958557537.24
+        },
+        {
+          "start_ms": 1790958557537.27,
+          "end_ms": 1790958557537.3,
+          "worker_ms": 1790958557537.29
+        },
+        {
+          "start_ms": 1790958557537.3,
+          "end_ms": 1790958557537.34,
+          "worker_ms": 1790958557537.32
+        },
+        {
+          "start_ms": 1790958557537.34,
+          "end_ms": 1790958557537.415,
+          "worker_ms": 1790958557537.345
+        },
+        {
+          "start_ms": 1790958557537.415,
+          "end_ms": 1790958557537.44,
+          "worker_ms": 1790958557537.425
+        },
+        {
+          "start_ms": 1790958557537.44,
+          "end_ms": 1790958557537.455,
+          "worker_ms": 1790958557537.44
+        },
+        {
+          "start_ms": 1790958557537.455,
+          "end_ms": 1790958557537.5151,
+          "worker_ms": 1790958557537.46
+        },
+        {
+          "start_ms": 1790958557537.5151,
+          "end_ms": 1790958557537.705,
+          "worker_ms": 1790958557537.515
+        }
+      ]
+    }
+  },
+  "end_clock": {
+    "candidate": {
+      "lo_ms": -0.1048828125,
+      "hi_ms": 0.1048828125,
+      "mid_ms": 0,
+      "error_ms": 0.2048828125,
+      "measured": true,
+      "samples": [
+        {
+          "start_ms": 1790958571182.425,
+          "end_ms": 1790958571182.8,
+          "worker_ms": 1790958571182.75
+        },
+        {
+          "start_ms": 1790958571182.805,
+          "end_ms": 1790958571182.83,
+          "worker_ms": 1790958571182.82
+        },
+        {
+          "start_ms": 1790958571182.83,
+          "end_ms": 1790958571182.845,
+          "worker_ms": 1790958571182.84
+        },
+        {
+          "start_ms": 1790958571182.845,
+          "end_ms": 1790958571182.86,
+          "worker_ms": 1790958571182.855
+        },
+        {
+          "start_ms": 1790958571182.865,
+          "end_ms": 1790958571182.8801,
+          "worker_ms": 1790958571182.87
+        },
+        {
+          "start_ms": 1790958571182.8801,
+          "end_ms": 1790958571182.8901,
+          "worker_ms": 1790958571182.885
+        },
+        {
+          "start_ms": 1790958571182.8901,
+          "end_ms": 1790958571182.905,
+          "worker_ms": 1790958571182.895
+        },
+        {
+          "start_ms": 1790958571182.905,
+          "end_ms": 1790958571182.915,
+          "worker_ms": 1790958571182.91
+        }
+      ]
+    },
+    "reference": {
+      "lo_ms": -0.110009765625,
+      "hi_ms": 0.099755859375,
+      "mid_ms": -0.005126953125,
+      "error_ms": 0.2048828125,
+      "measured": true,
+      "samples": [
+        {
+          "start_ms": 1790958571182.925,
+          "end_ms": 1790958571183.125,
+          "worker_ms": 1790958571183.085
+        },
+        {
+          "start_ms": 1790958571183.125,
+          "end_ms": 1790958571183.1501,
+          "worker_ms": 1790958571183.135
+        },
+        {
+          "start_ms": 1790958571183.1501,
+          "end_ms": 1790958571183.165,
+          "worker_ms": 1790958571183.15
+        },
+        {
+          "start_ms": 1790958571183.165,
+          "end_ms": 1790958571183.18,
+          "worker_ms": 1790958571183.165
+        },
+        {
+          "start_ms": 1790958571183.18,
+          "end_ms": 1790958571183.195,
+          "worker_ms": 1790958571183.18
+        },
+        {
+          "start_ms": 1790958571183.195,
+          "end_ms": 1790958571183.21,
+          "worker_ms": 1790958571183.2
+        },
+        {
+          "start_ms": 1790958571183.21,
+          "end_ms": 1790958571183.245,
+          "worker_ms": 1790958571183.21
+        },
+        {
+          "start_ms": 1790958571183.245,
+          "end_ms": 1790958571183.26,
+          "worker_ms": 1790958571183.2449
+        }
+      ]
+    }
+  },
+  "intermediate_drift_exactAtomicstore_kernelCPU_missing": true,
+  "measurement_overhead_uncalibrated_single_K8_only": true,
+  "resources": {
+    "build": 20.977456,
+    "count": 25.258924,
+    "protocol": 0.152618,
+    "observed_currentRSS_peak": 1601388544,
+    "instant_peak_background_CPU_metadata_missing": true,
+    "currentRSS_not_ru_maxrss": true,
+    "observed_runtime_storage_peak_excludes_private_build_in_nonbuild_phase": true,
+    "full_current_allocated_bytes": 70590464
+  },
+  "decision": "Same evaluated shared states, different Action on inputs3/4; rule bundle attribution unresolved. Keep policy, no C/FPU adoption. One next proposal: conditional 130P2 local hand-quality comparison on these two fixed positions, separately allocated; no rollout here.",
+  "next_proposal_max1": "130P2: force A or B selected first Action on input3/4 then fixedSigma continuation, preregister all branches; policy-dependent diagnostic, not true-quality oracle.",
+  "remaining_limits": [
+    "unshared 19 selected states per engine; no all-tree claim",
+    "all primary traces nonterminal; actual terminal backup coverage absent",
+    "candidate node valueSum/parentQ absent",
+    "reference final root Q vs candidate root NN are different conventions",
+    "single finite K8 parity timing cannot estimate pure trace overhead",
+    "A/B are multiple search-rule bundles; C/FPU single-cause unproven"
+  ],
+  "games": 0,
+  "P2_rollout_started": 0,
+  "formalNI_Sigma_actual_go": false
+}

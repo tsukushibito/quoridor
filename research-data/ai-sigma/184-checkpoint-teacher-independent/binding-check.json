@@ -1,0 +1,114 @@
+{
+  "NN_executed": 0,
+  "first_difference": null,
+  "supported": true,
+  "K800_ratios": [
+    {
+      "fixture": "initial-p1",
+      "median_ms": {
+        "old": 7271.161333978176,
+        "new": 6989.155477494001,
+        "reference": 5379.112002015114
+      },
+      "range_ms": {
+        "old": [
+          6996.362113952637,
+          7545.9605540037155
+        ],
+        "new": [
+          6540.77949899435,
+          7437.531455993652
+        ],
+        "reference": [
+          5348.742222011089,
+          5409.481782019138
+        ]
+      },
+      "new_old": 0.9612158438616456,
+      "new_JS": 1.299313989906835
+    },
+    {
+      "fixture": "asym-hv-p2",
+      "median_ms": {
+        "old": 7848.850891500711,
+        "new": 6899.762715011835,
+        "reference": 6070.471265017986
+      },
+      "range_ms": {
+        "old": [
+          7485.139759004116,
+          8212.562023997307
+        ],
+        "new": [
+          6851.219246029854,
+          6948.306183993816
+        ],
+        "reference": [
+          5834.313049018383,
+          6306.62948101759
+        ]
+      },
+      "new_old": 0.8790793468230342,
+      "new_JS": 1.1366107199572406
+    },
+    {
+      "fixture": "straight-jump-p2",
+      "median_ms": {
+        "old": 7771.362329006195,
+        "new": 7450.207829982042,
+        "reference": 6391.542903989553
+      },
+      "range_ms": {
+        "old": [
+          7597.2760489583015,
+          7945.448609054089
+        ],
+        "new": [
+          7346.563175976276,
+          7553.852483987808
+        ],
+        "reference": [
+          5963.871307969093,
+          6819.214500010014
+        ]
+      },
+      "new_old": 0.9586746203010686,
+      "new_JS": 1.1656352686503408
+    }
+  ],
+  "checkpoint_adoption": false,
+  "newRust_selected": false,
+  "benchmark_status": "all6 NOT_STARTED",
+  "source_receipts": {
+    ".artifacts/ai-sigma/resume-20261003/CHECKPOINT-TEACHER/learner-source-git.txt": "8ef92ab8c9e5d3e86a28b601604297f85e5653f6",
+    ".artifacts/ai-sigma/resume-20261003/CHECKPOINT-TEACHER/measurement-source-git.txt": "f1ae50a767e5dfd595303e26e7339bffe6b2a6c3",
+    ".artifacts/ai-sigma/resume-20261003/CHECKPOINT-TEACHER/production-source-git.txt": "e3c34a5c1df56c5b225f6016d6c3885801b658e2"
+  },
+  "source_current_matches_stop": true,
+  "snapshot_hashes": {
+    "teacher-rows.jsonl.gz": "a4983274b1be7e57d8a587255a06cb4f57aec80f28c96424c6fcbfe1f4b2e316",
+    "training-connection-rows.jsonl.gz": "233c0e1fc479ab42da328feaed2129d5ec11b9ef8a949f5bbd5c13426579d951",
+    "openings.json": "6a432f7c8f701da78b7f57059357b64941d8780e0ae41a54b9def923d7b26a18",
+    "production-preregister.json": "c278415c9419315183283705b20637fc3dbce66d4874ad2c7ba925845d981763",
+    "learner-preregister.json": "8df37fa20331d23928133ad200727efe732bb1b0172447f798b50cd6c15f5e51",
+    "learner-training.json": "eda7e316d7bb02586ae25d6da43929bb8a9b4985be540ee29f832d91583de9fc",
+    "learner-export.json": "9c2b05359b101a019b0626d1fa0996d84b70baf884e291e8b381e479112ffe66",
+    "learner-reload.json": "88b84667226088ee7e6f144baf7c700527acf0a78cc055ec7319623fee1b8451",
+    "science-stop.json": "22e8d1ecd89d4c6014e13ffb42150a506a101c88caa1d8210c9c1b4d9e7ce157",
+    "handoff-stop.json": "f407fe1ee391fe5e69628fdfb1ff86d1f3d196f58beb708876d0b6013c6f8721"
+  },
+  "archive_members_verified": {
+    ".artifacts/ai-sigma/resume-20261003/CHECKPOINT-TEACHER/runs/native181-measure-r1/rows.jsonl": "a758d2a2fffcd48df9eb3b685bcc4e583484f491f12c057e31d6908a957fa64f",
+    ".artifacts/ai-sigma/resume-20261003/CHECKPOINT-TEACHER/runs/native181-production-r1/result.json": "b380aa57ded745818efad61d14f9173393765bb0d085f1e0eeb240b4f2e769b2",
+    ".artifacts/ai-sigma/resume-20261003/CHECKPOINT-TEACHER/learner-source-git.txt": "c3f93614e69810260be2fcc9154ee7b48aa2802e46d61f5737bf5a394f28023f",
+    ".artifacts/ai-sigma/resume-20261003/CHECKPOINT-TEACHER/measurement-source-git.txt": "2cf8f4459c92e524fba125042e3aff66e4556ffad4f79d51f69bbead6aa55a75",
+    ".artifacts/ai-sigma/resume-20261003/CHECKPOINT-TEACHER/production-source-git.txt": "88c5db97aea43f1f064727d4e088855eb9a1d1e8135e179639bd41b56d0155bc"
+  },
+  "current_matching_181_science": [],
+  "all_host_period_guarantee": false,
+  "old173_read_by_this_check": 0,
+  "elapsed_seconds": 1.1574944489984773,
+  "maxRSS_bytes": 25546752,
+  "PID": 3493701,
+  "end": "2026-10-03T11:52:09.715590+00:00"
+}

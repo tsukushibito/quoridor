@@ -1,0 +1,33 @@
+{
+  "issue": "quoridor-4lc.93",
+  "source_handoff_Git": "dca3588570c293cb1883456901f4fa3f25a9ad4b",
+  "runtime_versions": [
+    "9496cae",
+    "132ec12",
+    "812a9e4"
+  ],
+  "stop_sha256": "0433517e152335b62faa645c98d685ced9745eac52a4d17ae7739a4501ffdf14",
+  "current_owned_NN": 0,
+  "current_recorded_identities_live": 0,
+  "game_starts": 8,
+  "game_cap": 8,
+  "public_requests": 490,
+  "late_null": 3,
+  "cause_budget_breaches": 63,
+  "NN_hand": 4206,
+  "startup_NN": 36,
+  "NN_runtime_wall_s": 311.565037,
+  "RAMguard": 3758096384,
+  "RSSpeak": 1500082176,
+  "storageguard": 117440512,
+  "storagepeak": 63000576,
+  "new_current_allocated": 61743104,
+  "formal_fairness": false,
+  "formal_NI": false,
+  "actual_go": false,
+  "counter_limitation": "old live-process sum differences invalid; final132 retains same PID/starttick observed lower bound, exited finalCPU unknown",
+  "required95_scope": "same diagnostic run/create/public/Judge/stop/clock; minimum needed independent sample; no old83 claim or independent runtime substitution",
+  "protocol": "after actual old ownedNN0/ACK then next t0; cause t0/public/ACK kept separate",
+  "raw": ".artifacts/ai-sigma/resume-20261002/DIAGNOSTIC-ARENA",
+  "new_phaseA_full_gate_not_required_before_95": true
+}

@@ -1,0 +1,127 @@
+{
+  "UTC": "2026-10-03T01:32:11.109814+00:00",
+  "issue": "quoridor-4lc.150",
+  "contract": 2,
+  "handoff_Git": "487a654c8cd0c879535fa333890f3308845e956b",
+  "handoffSHA256": "7f8c46770819494ddf15806358bd4e89f0d2e6d30f327db9febbd2fa3cdf1e36",
+  "manifestSHA256": "4bedebce30bdf5854f6cd75d7eac767e44dd464ee6d02caed1e1882f0377ae22",
+  "canonical15Git_current": [
+    {
+      "path": "tools/ai-sigma-web-port-conformance/managed.py",
+      "SHA256": "936fb5fbd756ba3f4fff04fd99654f3e439eee42116a81ff251fc2c74ef618e6",
+      "bytes": 2457
+    },
+    {
+      "path": "tools/ai-sigma-web-port-conformance/check.py",
+      "SHA256": "65473cf2d32e2077c8cd3d48c73c0975481fc30fc82026b268562cddfb1c44d0",
+      "bytes": 6814
+    },
+    {
+      "path": "research-data/ai-sigma/150-sigma-web-port-conformance/runtime-source-stopped-before-report.json",
+      "SHA256": "2e276fe79ee6dfc33e66af73bdd0ee00bc413020779619aeed7c1d5090e79c4c",
+      "bytes": 4558
+    },
+    {
+      "path": "research-data/ai-sigma/150-sigma-web-port-conformance/proposal.json",
+      "SHA256": "f119ae99dad0dd98f346e74c6a671870bab69055bf0fc944ef97840256ce7852",
+      "bytes": 2371
+    },
+    {
+      "path": "research-data/ai-sigma/150-sigma-web-port-conformance/analysis.json",
+      "SHA256": "e15c3e1f72708f6c3a257df4a147f01180090222e91b8b6d9ff330803ee6eb3e",
+      "bytes": 7046
+    },
+    {
+      "path": "research-data/ai-sigma/150-sigma-web-port-conformance/static-r1.process.json",
+      "SHA256": "ec8629fbc3152fa354b5a6942e43ec5edb87e8caf1fc151a0cb559ddcfcf6e5e",
+      "bytes": 2849
+    },
+    {
+      "path": "research-data/ai-sigma/150-sigma-web-port-conformance/static-r2.log",
+      "SHA256": "e90b019649332c87a534260cefd7115c3a22f0a553423d5bef02fc3b9935e234",
+      "bytes": 1007
+    },
+    {
+      "path": "research-data/ai-sigma/150-sigma-web-port-conformance/start-report.txt",
+      "SHA256": "a745a0f040d77a5ffa25dc2946f05ee82b5ab42064803805624ee0d0142b8be2",
+      "bytes": 512
+    },
+    {
+      "path": "research-data/ai-sigma/150-sigma-web-port-conformance/fixed-five-inputs.json",
+      "SHA256": "9b154ca21c085fef2244620f1a78aaa64a4ba5a1f8044d75f2a08f3d4007c2dc",
+      "bytes": 177119
+    },
+    {
+      "path": "research-data/ai-sigma/150-sigma-web-port-conformance/failures.json",
+      "SHA256": "0b7265f4729273636b10e94223b23fcac908f960c08d7b1b5f5923740298bb51",
+      "bytes": 291
+    },
+    {
+      "path": "research-data/ai-sigma/150-sigma-web-port-conformance/early-report.txt",
+      "SHA256": "5821da070dbf22bc121cd601cd763fd163786369cb3ddbb02b450664cfb1fd4c",
+      "bytes": 2725
+    },
+    {
+      "path": "research-data/ai-sigma/150-sigma-web-port-conformance/static-r2.process.json",
+      "SHA256": "1c16feb4e0ef98708859b054a2ee31fb697728b8e4737d35d168a54d33e5ba9d",
+      "bytes": 2848
+    },
+    {
+      "path": "research-data/ai-sigma/150-sigma-web-port-conformance/static-r1.log",
+      "SHA256": "e72d435cc79e028875b848919131a8e3a3c709c7223dec2ac55f5842a7acb273",
+      "bytes": 626
+    },
+    {
+      "path": "research-data/ai-sigma/150-sigma-web-port-conformance/intake.json",
+      "SHA256": "292b6eff753fbea9306e005393da0a52440f233d48c7e631a5c45fb9243d527a",
+      "bytes": 694
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-sigma-web-port-conformance.md",
+      "SHA256": "00cdc38f66179bf2713ffba882665f243b70c370f30707193a69776c1be8835e",
+      "bytes": 13511
+    }
+  ],
+  "four_actual_function_bodies": {
+    "class MCTSNode": {
+      "bytes_equal": true,
+      "SHA256": "dc8dea8bfc4cecc7994dc1fab43898c992f8e9ed7523b1c2c6b78bb6fc88d0a2"
+    },
+    "function backup": {
+      "bytes_equal": true,
+      "SHA256": "ee3f2306bcb77ee9f45f307e32f17673f5b9281bab2408a82c1cfeb327ea5617"
+    },
+    "function selectLeaf": {
+      "bytes_equal": true,
+      "SHA256": "ff53693e1276a27ab929069c3ffa62b532df7ab473d52e3e9a34aeff497058ed"
+    },
+    "function pickFromVisits": {
+      "bytes_equal": true,
+      "SHA256": "372a830d8435d376c6647a19c78f67b40e8366b558a476ac2e038898ab3fc1ef"
+    }
+  },
+  "five_fixed_input_ids": [
+    "initial-p1",
+    "asym-hv-p2",
+    "straight-jump-p2",
+    "frame10-prefix-13",
+    "frame10-prefix-14"
+  ],
+  "science_static_attempts": [
+    {
+      "run": "static-r1",
+      "exit": 1,
+      "wall_s": 3.8107187880086713
+    },
+    {
+      "run": "static-r2",
+      "exit": 0,
+      "wall_s": 4.766017777001252
+    }
+  ],
+  "source_stop_verified": true,
+  "NN_Chrome_build_game": 0,
+  "actual_JS_Wasm_parity_not_tested": true,
+  "fullperiod_natural_or_host_guarantee": false,
+  "adoption": "support faithful bundle port; preserve adapter scope and discrete trajectory check; samewall final remains exploratory"
+}

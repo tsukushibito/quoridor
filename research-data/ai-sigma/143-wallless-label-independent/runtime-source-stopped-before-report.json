@@ -1,0 +1,1106 @@
+{
+  "issue": "quoridor-4lc.143",
+  "UTC": "2026-10-02T19:57:53.889475+00:00",
+  "scientific_runtime_stopped": true,
+  "source_write_stopped": true,
+  "scientific_source_Git": "885eb8e",
+  "own_source_hashafter": {
+    "tools/ai-sigma-wallless-label-independent/entry.cjs": "c99c15a3060865005d23b246b24517fccd4e2a9b3acffdad82fbf12c7c15849c",
+    "tools/ai-sigma-wallless-label-independent/managed.py": "cf1ede1f88734279b6082d0dc139fa657e0d24879dd91ff296c02d22144cc05b",
+    "tools/ai-sigma-wallless-label-independent/runner.py": "d42ce2baac91d8dcaf41448e7ccbce03db1a82fc036ffd8a975f011fb2b74a74",
+    "tools/ai-sigma-wallless-label-independent/admission.py": "71557c56c2b1822ba6617508de5b91a55ea20222143b7dc29202111d4317590a",
+    "tools/ai-sigma-wallless-label-independent/checker.js": "e688741a3a81e4c2bf5eb7134c2ab56e32bcf1b9afd550091a58adc57d15f41c",
+    "tools/ai-sigma-wallless-label-independent/prepare.py": "fcbbf3926576d7dac093c4d27590263ce5ad6d67c0744222106a96a77540c226",
+    "tools/ai-sigma-wallless-label-independent/finalize.py": "5e592c21b37278ffebce125dbee07803c89b0d89bb3996155292977af1271fa0"
+  },
+  "scientific_source_before_after_exact": true,
+  "jobs": [
+    {
+      "phase": "label",
+      "name": "p143-label-r1",
+      "cmd": [
+        "node",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-wallless-label-independent/entry.cjs",
+        "p143-label-r1"
+      ],
+      "start": "2026-10-02T19:52:14.199836+00:00",
+      "end": "2026-10-02T19:52:14.253876+00:00",
+      "subreaper_set_rc": 0,
+      "subreaper_get_rc": 0,
+      "subreaper_value": 1,
+      "kernel_boundary": {
+        "valid": true,
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "launcher": {
+          "pid": 2800766,
+          "ppid": 2009,
+          "pgid": 2800766,
+          "start_ticks": 22365367,
+          "state": "R",
+          "rss": 17453056,
+          "utime_ticks": 2,
+          "stime_ticks": 0
+        },
+        "root": {
+          "pid": 2800774,
+          "ppid": 2800766,
+          "pgid": 2800774,
+          "start_ticks": 22365370,
+          "state": "R",
+          "rss": 15364096,
+          "utime_ticks": 0,
+          "stime_ticks": 0
+        },
+        "initial_children": [],
+        "spawn_count": 1,
+        "single_thread_initial": true,
+        "sole_explicit_root": true
+      },
+      "runner_pid": 2800766,
+      "runner_starttick": 22365367,
+      "child_pid": 2800774,
+      "child_starttick": 22365370,
+      "exit": 1,
+      "stop_reason": null,
+      "sample_interval_ms": 40,
+      "peak_group_plus_runner_RSS": 47341568,
+      "peak_allocated_bytes": 393216,
+      "final_allocated_bytes": 397312,
+      "tracked": [
+        {
+          "pid": 2800774,
+          "ppid": 2800766,
+          "pgid": 2800774,
+          "start_ticks": 22365370,
+          "state": "R",
+          "rss": 29888512,
+          "utime_ticks": 0,
+          "stime_ticks": 0,
+          "maxrss": 29888512,
+          "affinities": [
+            [
+              2
+            ]
+          ],
+          "TID_samples": 12,
+          "last_ppid": 2800766,
+          "last_state": "R"
+        }
+      ],
+      "remaining": [],
+      "kernel_identity_count": 1,
+      "kernel_adoptions": [],
+      "ledger_registered_count": 0,
+      "ledger_rejected": {},
+      "ledger_monitor_remaining_consistent": true,
+      "unknown_adopted": [],
+      "privateTMP_alias": "/proc/2800766/cwd/t",
+      "privateTMP_realpath": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261002/WALLLESS-LABEL-INDEPENDENT/runs/t",
+      "assigned_CPU": 2,
+      "process_deadline": "2026-10-02T20:15:00+00:00",
+      "newjob_cutoff": "2026-10-02T20:10:00+00:00",
+      "guardRSS": 5905580032,
+      "contractRAM": 6442450944,
+      "guard_basis": "current_proc_rss_runner_plus_owned_children",
+      "runner_ru_maxrss_bytes": 615759872,
+      "all_observed_TIDs_at_assigned_CPU": true,
+      "instant_peak_not_guaranteed": true,
+      "runner_sha256": "118054c9f9b2929a592c7989d3e66104f047fd86a4ad389664887f811b0dc334"
+    },
+    {
+      "phase": "label",
+      "name": "p143-label-r2",
+      "cmd": [
+        "node",
+        "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-wallless-label-independent/entry.cjs",
+        "p143-label-r2"
+      ],
+      "start": "2026-10-02T19:53:05.775816+00:00",
+      "end": "2026-10-02T19:53:14.281272+00:00",
+      "subreaper_set_rc": 0,
+      "subreaper_get_rc": 0,
+      "subreaper_value": 1,
+      "kernel_boundary": {
+        "valid": true,
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+        "launcher": {
+          "pid": 2801778,
+          "ppid": 2009,
+          "pgid": 2801778,
+          "start_ticks": 22370527,
+          "state": "R",
+          "rss": 17268736,
+          "utime_ticks": 1,
+          "stime_ticks": 0
+        },
+        "root": {
+          "pid": 2801779,
+          "ppid": 2801778,
+          "pgid": 2801779,
+          "start_ticks": 22370530,
+          "state": "R",
+          "rss": 21139456,
+          "utime_ticks": 0,
+          "stime_ticks": 0
+        },
+        "initial_children": [],
+        "spawn_count": 1,
+        "single_thread_initial": true,
+        "sole_explicit_root": true
+      },
+      "runner_pid": 2801778,
+      "runner_starttick": 22370527,
+      "child_pid": 2801779,
+      "child_starttick": 22370530,
+      "exit": 0,
+      "stop_reason": null,
+      "sample_interval_ms": 40,
+      "peak_group_plus_runner_RSS": 1344892928,
+      "peak_allocated_bytes": 2183168,
+      "final_allocated_bytes": 1069056,
+      "tracked": [
+        {
+          "pid": 2801779,
+          "ppid": 2801778,
+          "pgid": 2801779,
+          "start_ticks": 22370530,
+          "state": "R",
+          "rss": 29491200,
+          "utime_ticks": 92,
+          "stime_ticks": 38,
+          "maxrss": 265031680,
+          "affinities": [
+            [
+              2
+            ]
+          ],
+          "TID_samples": 3882,
+          "last_ppid": 2801778,
+          "last_state": "S"
+        },
+        {
+          "pid": 2801786,
+          "ppid": 2801779,
+          "pgid": 2801779,
+          "start_ticks": 22370534,
+          "state": "S",
+          "rss": 3076096,
+          "utime_ticks": 0,
+          "stime_ticks": 0,
+          "maxrss": 3076096,
+          "affinities": [
+            [
+              2
+            ]
+          ],
+          "TID_samples": 66,
+          "last_ppid": 2801779,
+          "last_state": "S"
+        },
+        {
+          "pid": 2801790,
+          "ppid": 2801786,
+          "pgid": 2801779,
+          "start_ticks": 22370534,
+          "state": "D",
+          "rss": 3784704,
+          "utime_ticks": 0,
+          "stime_ticks": 0,
+          "maxrss": 3784704,
+          "affinities": [
+            [
+              2
+            ]
+          ],
+          "TID_samples": 2,
+          "last_ppid": 2801786,
+          "last_state": "D"
+        },
+        {
+          "pid": 2801802,
+          "ppid": 2801786,
+          "pgid": 2801779,
+          "start_ticks": 22370594,
+          "state": "R",
+          "rss": 72867840,
+          "utime_ticks": 23,
+          "stime_ticks": 7,
+          "maxrss": 189964288,
+          "affinities": [
+            [
+              2
+            ]
+          ],
+          "TID_samples": 246,
+          "last_ppid": 2801786,
+          "last_state": "S"
+        },
+        {
+          "pid": 2801810,
+          "ppid": 2801802,
+          "pgid": 2801779,
+          "start_ticks": 22370597,
+          "state": "R",
+          "rss": 3919872,
+          "utime_ticks": 0,
+          "stime_ticks": 0,
+          "maxrss": 3919872,
+          "affinities": [
+            [
+              2
+            ]
+          ],
+          "TID_samples": 2,
+          "last_ppid": 2801802,
+          "last_state": "R"
+        },
+        {
+          "pid": 2801820,
+          "ppid": 2801802,
+          "pgid": 2801779,
+          "start_ticks": 22370661,
+          "state": "R",
+          "rss": 3883008,
+          "utime_ticks": 0,
+          "stime_ticks": 0,
+          "maxrss": 3883008,
+          "affinities": [
+            [
+              2
+            ]
+          ],
+          "TID_samples": 4,
+          "last_ppid": 2801802,
+          "last_state": "D"
+        },
+        {
+          "pid": 2801825,
+          "ppid": 2801779,
+          "pgid": 2801779,
+          "start_ticks": 22370669,
+          "state": "S",
+          "rss": 3129344,
+          "utime_ticks": 0,
+          "stime_ticks": 0,
+          "maxrss": 3129344,
+          "affinities": [
+            [
+              2
+            ]
+          ],
+          "TID_samples": 60,
+          "last_ppid": 2801779,
+          "last_state": "S"
+        },
+        {
+          "pid": 2801829,
+          "ppid": 2801825,
+          "pgid": 2801779,
+          "start_ticks": 22370669,
+          "state": "R",
+          "rss": 3837952,
+          "utime_ticks": 0,
+          "stime_ticks": 0,
+          "maxrss": 3837952,
+          "affinities": [
+            [
+              2
+            ]
+          ],
+          "TID_samples": 2,
+          "last_ppid": 2801825,
+          "last_state": "R"
+        },
+        {
+          "pid": 2801845,
+          "ppid": 2801825,
+          "pgid": 2801779,
+          "start_ticks": 22370711,
+          "state": "R",
+          "rss": 67604480,
+          "utime_ticks": 30,
+          "stime_ticks": 5,
+          "maxrss": 193986560,
+          "affinities": [
+            [
+              2
+            ]
+          ],
+          "TID_samples": 260,
+          "last_ppid": 2801825,
+          "last_state": "S"
+        },
+        {
+          "pid": 2801857,
+          "ppid": 2801845,
+          "pgid": 2801779,
+          "start_ticks": 22370715,
+          "state": "R",
+          "rss": 4075520,
+          "utime_ticks": 0,
+          "stime_ticks": 0,
+          "maxrss": 4075520,
+          "affinities": [
+            [
+              2
+            ]
+          ],
+          "TID_samples": 2,
+          "last_ppid": 2801845,
+          "last_state": "R"
+        },
+        {
+          "pid": 2801862,
+          "ppid": 2801845,
+          "pgid": 2801779,
+          "start_ticks": 22370784,
+          "state": "R",
+          "rss": 4038656,
+          "utime_ticks": 0,
+          "stime_ticks": 0,
+          "maxrss": 4038656,
+          "affinities": [
+            [
+              2
+            ]
+          ],
+          "TID_samples": 2,
+          "last_ppid": 2801845,
+          "last_state": "R"
+        },
+        {
+          "pid": 2801878,
+          "ppid": 2801779,
+          "pgid": 2801878,
+          "start_ticks": 22370817,
+          "state": "R",
+          "rss": 6213632,
+          "utime_ticks": 19,
+          "stime_ticks": 16,
+          "maxrss": 179113984,
+          "affinities": [
+            [
+              2
+            ]
+          ],
+          "TID_samples": 7847,
+          "last_ppid": 2801779,
+          "last_state": "Z"
+        },
+        {
+          "pid": 2801889,
+          "ppid": 2801778,
+          "pgid": 2801888,
+          "start_ticks": 22370839,
+          "state": "S",
+          "rss": 3039232,
+          "utime_ticks": 0,
+          "stime_ticks": 0,
+          "maxrss": 3039232,
+          "affinities": [
+            [
+              2
+            ]
+          ],
+          "TID_samples": 242,
+          "last_ppid": 2801778,
+          "last_state": "R"
+        },
+        {
+          "pid": 2801892,
+          "ppid": 2801878,
+          "pgid": 2801878,
+          "start_ticks": 22370840,
+          "state": "R",
+          "rss": 5795840,
+          "utime_ticks": 1,
+          "stime_ticks": 0,
+          "maxrss": 68751360,
+          "affinities": [
+            [
+              2
+            ]
+          ],
+          "TID_samples": 248,
+          "last_ppid": 2801778,
+          "last_state": "Z"
+        },
+        {
+          "pid": 2801893,
+          "ppid": 2801878,
+          "pgid": 2801878,
+          "start_ticks": 22370840,
+          "state": "R",
+          "rss": 5439488,
+          "utime_ticks": 1,
+          "stime_ticks": 1,
+          "maxrss": 68542464,
+          "affinities": [
+            [
+              2
+            ]
+          ],
+          "TID_samples": 248,
+          "last_ppid": 2801778,
+          "last_state": "Z"
+        },
+        {
+          "pid": 2801887,
+          "ppid": 2801778,
+          "pgid": 2801886,
+          "start_ticks": 22370838,
+          "state": "S",
+          "rss": 3461120,
+          "utime_ticks": 0,
+          "stime_ticks": 0,
+          "maxrss": 3461120,
+          "affinities": [
+            [
+              2
+            ]
+          ],
+          "TID_samples": 484,
+          "last_ppid": 2801778,
+          "last_state": "R"
+        },
+        {
+          "pid": 2801931,
+          "ppid": 2801892,
+          "pgid": 2801878,
+          "start_ticks": 22370866,
+          "state": "R",
+          "rss": 44171264,
+          "utime_ticks": 1,
+          "stime_ticks": 0,
+          "maxrss": 65806336,
+          "affinities": [
+            [
+              2
+            ]
+          ],
+          "TID_samples": 1798,
+          "last_ppid": 2801892,
+          "last_state": "S"
+        },
+        {
+          "pid": 2801938,
+          "ppid": 2801878,
+          "pgid": 2801878,
+          "start_ticks": 22370868,
+          "state": "R",
+          "rss": 25649152,
+          "utime_ticks": 4,
+          "stime_ticks": 1,
+          "maxrss": 115347456,
+          "affinities": [
+            [
+              2
+            ]
+          ],
+          "TID_samples": 2016,
+          "last_ppid": 2801878,
+          "last_state": "Z"
+        },
+        {
+          "pid": 2801948,
+          "ppid": 2801893,
+          "pgid": 2801878,
+          "start_ticks": 22370876,
+          "state": "S",
+          "rss": 40673280,
+          "utime_ticks": 0,
+          "stime_ticks": 0,
+          "maxrss": 47845376,
+          "affinities": [
+            [
+              2
+            ]
+          ],
+          "TID_samples": 1788,
+          "last_ppid": 2801893,
+          "last_state": "S"
+        },
+        {
+          "pid": 2801972,
+          "ppid": 2801779,
+          "pgid": 2801779,
+          "start_ticks": 22370888,
+          "state": "S",
+          "rss": 3149824,
+          "utime_ticks": 0,
+          "stime_ticks": 0,
+          "maxrss": 3149824,
+          "affinities": [
+            [
+              2
+            ]
+          ],
+          "TID_samples": 102,
+          "last_ppid": 2801779,
+          "last_state": "S"
+        },
+        {
+          "pid": 2801976,
+          "ppid": 2801972,
+          "pgid": 2801779,
+          "start_ticks": 22370889,
+          "state": "R",
+          "rss": 3850240,
+          "utime_ticks": 0,
+          "stime_ticks": 0,
+          "maxrss": 3850240,
+          "affinities": [
+            [
+              2
+            ]
+          ],
+          "TID_samples": 2,
+          "last_ppid": 2801972,
+          "last_state": "D"
+        },
+        {
+          "pid": 2801981,
+          "ppid": 2801893,
+          "pgid": 2801878,
+          "start_ticks": 22370904,
+          "state": "R",
+          "rss": 46817280,
+          "utime_ticks": 15,
+          "stime_ticks": 3,
+          "maxrss": 136257536,
+          "affinities": [
+            [
+              2
+            ]
+          ],
+          "TID_samples": 2406,
+          "last_ppid": 2801893,
+          "last_state": "Z"
+        },
+        {
+          "pid": 2801988,
+          "ppid": 2801893,
+          "pgid": 2801878,
+          "start_ticks": 22370913,
+          "state": "R",
+          "rss": 55250944,
+          "utime_ticks": 27,
+          "stime_ticks": 13,
+          "maxrss": 182730752,
+          "affinities": [
+            [
+              2
+            ]
+          ],
+          "TID_samples": 2324,
+          "last_ppid": 2801893,
+          "last_state": "Z"
+        },
+        {
+          "pid": 2802027,
+          "ppid": 2801972,
+          "pgid": 2801779,
+          "start_ticks": 22370995,
+          "state": "R",
+          "rss": 15818752,
+          "utime_ticks": 25,
+          "stime_ticks": 7,
+          "maxrss": 216178688,
+          "affinities": [
+            [
+              2
+            ]
+          ],
+          "TID_samples": 363,
+          "last_ppid": 2801972,
+          "last_state": "S"
+        },
+        {
+          "pid": 2802039,
+          "ppid": 2802027,
+          "pgid": 2801779,
+          "start_ticks": 22371008,
+          "state": "R",
+          "rss": 4083712,
+          "utime_ticks": 0,
+          "stime_ticks": 0,
+          "maxrss": 4083712,
+          "affinities": [
+            [
+              2
+            ]
+          ],
+          "TID_samples": 2,
+          "last_ppid": 2802027,
+          "last_state": "D"
+        },
+        {
+          "pid": 2802050,
+          "ppid": 2802027,
+          "pgid": 2801779,
+          "start_ticks": 22371110,
+          "state": "R",
+          "rss": 3969024,
+          "utime_ticks": 0,
+          "stime_ticks": 0,
+          "maxrss": 4165632,
+          "affinities": [
+            [
+              2
+            ]
+          ],
+          "TID_samples": 6,
+          "last_ppid": 2802027,
+          "last_state": "D"
+        },
+        {
+          "pid": 2802056,
+          "ppid": 2801779,
+          "pgid": 2801779,
+          "start_ticks": 22371124,
+          "state": "S",
+          "rss": 3125248,
+          "utime_ticks": 0,
+          "stime_ticks": 0,
+          "maxrss": 3125248,
+          "affinities": [
+            [
+              2
+            ]
+          ],
+          "TID_samples": 108,
+          "last_ppid": 2801779,
+          "last_state": "S"
+        },
+        {
+          "pid": 2802057,
+          "ppid": 2802056,
+          "pgid": 2801779,
+          "start_ticks": 22371124,
+          "state": "R",
+          "rss": 163840,
+          "utime_ticks": 0,
+          "stime_ticks": 0,
+          "maxrss": 163840,
+          "affinities": [
+            [
+              2
+            ]
+          ],
+          "TID_samples": 1,
+          "last_ppid": 2802056,
+          "last_state": "R"
+        },
+        {
+          "pid": 2802096,
+          "ppid": 2802056,
+          "pgid": 2801779,
+          "start_ticks": 22371262,
+          "state": "R",
+          "rss": 72900608,
+          "utime_ticks": 22,
+          "stime_ticks": 8,
+          "maxrss": 186703872,
+          "affinities": [
+            [
+              2
+            ]
+          ],
+          "TID_samples": 262,
+          "last_ppid": 2802056,
+          "last_state": "S"
+        },
+        {
+          "pid": 2802107,
+          "ppid": 2802096,
+          "pgid": 2801779,
+          "start_ticks": 22371267,
+          "state": "R",
+          "rss": 3866624,
+          "utime_ticks": 0,
+          "stime_ticks": 0,
+          "maxrss": 3866624,
+          "affinities": [
+            [
+              2
+            ]
+          ],
+          "TID_samples": 2,
+          "last_ppid": 2802096,
+          "last_state": "D"
+        },
+        {
+          "pid": 2802118,
+          "ppid": 2802096,
+          "pgid": 2801779,
+          "start_ticks": 22371336,
+          "state": "R",
+          "rss": 3895296,
+          "utime_ticks": 0,
+          "stime_ticks": 0,
+          "maxrss": 3895296,
+          "affinities": [
+            [
+              2
+            ]
+          ],
+          "TID_samples": 2,
+          "last_ppid": 2802096,
+          "last_state": "D"
+        }
+      ],
+      "remaining": [],
+      "kernel_identity_count": 31,
+      "kernel_adoptions": [
+        {
+          "kind": "kernel_adopted_direct_child",
+          "observed": {
+            "pid": 2801887,
+            "ppid": 2801778,
+            "pgid": 2801886,
+            "start_ticks": 22370838,
+            "state": "S",
+            "rss": 3461120,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "launcher_identity": {
+            "pid": 2801778,
+            "ppid": 2009,
+            "pgid": 2801778,
+            "start_ticks": 22370527,
+            "state": "R",
+            "rss": 17268736,
+            "utime_ticks": 1,
+            "stime_ticks": 0
+          },
+          "sole_jobroot_identity": {
+            "pid": 2801779,
+            "ppid": 2801778,
+            "pgid": 2801779,
+            "start_ticks": 22370530,
+            "state": "R",
+            "rss": 21139456,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+          "monotonic": 223708.412454191
+        },
+        {
+          "kind": "kernel_adopted_direct_child",
+          "observed": {
+            "pid": 2801889,
+            "ppid": 2801778,
+            "pgid": 2801888,
+            "start_ticks": 22370839,
+            "state": "S",
+            "rss": 3039232,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "launcher_identity": {
+            "pid": 2801778,
+            "ppid": 2009,
+            "pgid": 2801778,
+            "start_ticks": 22370527,
+            "state": "R",
+            "rss": 17268736,
+            "utime_ticks": 1,
+            "stime_ticks": 0
+          },
+          "sole_jobroot_identity": {
+            "pid": 2801779,
+            "ppid": 2801778,
+            "pgid": 2801779,
+            "start_ticks": 22370530,
+            "state": "R",
+            "rss": 21139456,
+            "utime_ticks": 0,
+            "stime_ticks": 0
+          },
+          "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+          "monotonic": 223708.412516779
+        }
+      ],
+      "ledger_registered_count": 25,
+      "ledger_rejected": {},
+      "ledger_monitor_remaining_consistent": true,
+      "unknown_adopted": [],
+      "privateTMP_alias": "/proc/2801778/cwd/t",
+      "privateTMP_realpath": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/resume-20261002/WALLLESS-LABEL-INDEPENDENT/runs/t",
+      "assigned_CPU": 2,
+      "process_deadline": "2026-10-02T20:15:00+00:00",
+      "newjob_cutoff": "2026-10-02T20:10:00+00:00",
+      "guardRSS": 5905580032,
+      "contractRAM": 6442450944,
+      "guard_basis": "current_proc_rss_runner_plus_owned_children",
+      "runner_ru_maxrss_bytes": 615759872,
+      "all_observed_TIDs_at_assigned_CPU": true,
+      "instant_peak_not_guaranteed": true,
+      "runner_sha256": "d42ce2baac91d8dcaf41448e7ccbce03db1a82fc036ffd8a975f011fb2b74a74"
+    }
+  ],
+  "static_jobs": [
+    {
+      "run": "prepare-r1",
+      "command": [
+        "python3",
+        "tools/ai-sigma-wallless-label-independent/prepare.py"
+      ],
+      "UTC_start": "2026-10-02T19:51:17.354245+00:00",
+      "UTC_end": "2026-10-02T19:51:18.159423+00:00",
+      "wall_s": 0.8051967910141684,
+      "exit": 0,
+      "reason": null,
+      "peak_observed_RSS": 37953536,
+      "CPU": [
+        0
+      ],
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "owned": [
+        {
+          "pid": 2800153,
+          "start_ticks": 22359670,
+          "pgrp": 2800153
+        },
+        {
+          "pid": 2800155,
+          "start_ticks": 22359683,
+          "pgrp": 2800155
+        },
+        {
+          "pid": 2800156,
+          "start_ticks": 22359688,
+          "pgrp": 2800155
+        },
+        {
+          "pid": 2800157,
+          "start_ticks": 22359700,
+          "pgrp": 2800155
+        },
+        {
+          "pid": 2800165,
+          "start_ticks": 22359718,
+          "pgrp": 2800155
+        },
+        {
+          "pid": 2800166,
+          "start_ticks": 22359731,
+          "pgrp": 2800155
+        },
+        {
+          "pid": 2800167,
+          "start_ticks": 22359750,
+          "pgrp": 2800155
+        }
+      ],
+      "remaining": [],
+      "unknown_not_signalled": true,
+      "short_child_between_samples_missing": true
+    },
+    {
+      "run": "syntax-r1",
+      "command": [
+        "node",
+        "--check",
+        "tools/ai-sigma-wallless-label-independent/checker.js"
+      ],
+      "UTC_start": "2026-10-02T19:51:57.487148+00:00",
+      "UTC_end": "2026-10-02T19:51:57.518172+00:00",
+      "wall_s": 0.03104767799959518,
+      "exit": 0,
+      "reason": null,
+      "peak_observed_RSS": 48668672,
+      "CPU": [
+        0
+      ],
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "owned": [
+        {
+          "pid": 2800553,
+          "start_ticks": 22363680,
+          "pgrp": 2800553
+        },
+        {
+          "pid": 2800555,
+          "start_ticks": 22363699,
+          "pgrp": 2800555
+        }
+      ],
+      "remaining": [],
+      "unknown_not_signalled": true,
+      "short_child_between_samples_missing": true
+    }
+  ],
+  "observed_identity_count": 46,
+  "current_same_identity": [],
+  "read_errors": [],
+  "Model_NN_AIWorker": 0,
+  "browser_status": {
+    "Worker_attempts": 0,
+    "Model": 0,
+    "NN": 0,
+    "solver_started": 2,
+    "solver_completed": 2,
+    "main_active": false,
+    "timer_message": 0
+  },
+  "inner_controlled": {
+    "remaining_pids": 0,
+    "tracked": [
+      {
+        "pid": 2801786,
+        "starttick": 22370534
+      },
+      {
+        "pid": 2801790,
+        "starttick": 22370534
+      },
+      {
+        "pid": 2801802,
+        "starttick": 22370594
+      },
+      {
+        "pid": 2801810,
+        "starttick": 22370597
+      },
+      {
+        "pid": 2801820,
+        "starttick": 22370661
+      },
+      {
+        "pid": 2801825,
+        "starttick": 22370669
+      },
+      {
+        "pid": 2801829,
+        "starttick": 22370669
+      },
+      {
+        "pid": 2801845,
+        "starttick": 22370711
+      },
+      {
+        "pid": 2801857,
+        "starttick": 22370715
+      },
+      {
+        "pid": 2801862,
+        "starttick": 22370784
+      },
+      {
+        "pid": 2801878,
+        "starttick": 22370817
+      },
+      {
+        "pid": 2801892,
+        "starttick": 22370840
+      },
+      {
+        "pid": 2801887,
+        "starttick": 22370838
+      },
+      {
+        "pid": 2801889,
+        "starttick": 22370839
+      },
+      {
+        "pid": 2801893,
+        "starttick": 22370840
+      },
+      {
+        "pid": 2801931,
+        "starttick": 22370866
+      },
+      {
+        "pid": 2801938,
+        "starttick": 22370868
+      },
+      {
+        "pid": 2801948,
+        "starttick": 22370876
+      },
+      {
+        "pid": 2801972,
+        "starttick": 22370888
+      },
+      {
+        "pid": 2801976,
+        "starttick": 22370889
+      },
+      {
+        "pid": 2801981,
+        "starttick": 22370904
+      },
+      {
+        "pid": 2801988,
+        "starttick": 22370913
+      },
+      {
+        "pid": 2802027,
+        "starttick": 22370995
+      },
+      {
+        "pid": 2802039,
+        "starttick": 22371008
+      },
+      {
+        "pid": 2802050,
+        "starttick": 22371110
+      },
+      {
+        "pid": 2802056,
+        "starttick": 22371124
+      },
+      {
+        "pid": 2802057,
+        "starttick": 22371124
+      },
+      {
+        "pid": 2802058,
+        "starttick": 22371125
+      },
+      {
+        "pid": 2802059,
+        "starttick": 22371125
+      },
+      {
+        "pid": 2802060,
+        "starttick": 22371125
+      },
+      {
+        "pid": 2802096,
+        "starttick": 22371262
+      },
+      {
+        "pid": 2802107,
+        "starttick": 22371267
+      },
+      {
+        "pid": 2802118,
+        "starttick": 22371336
+      }
+    ],
+    "forced": true,
+    "graceful_error": null,
+    "waited": true,
+    "zombie_identities_absent": true,
+    "registration_ack": true,
+    "registered": 21
+  },
+  "monitor_callbacks_waited": true,
+  "main_timer_message": 0,
+  "outersole_rootwait_remainingunknown0": true,
+  "browser_wall_s": 8.559496000000001,
+  "managed_static_wall_s": 0.8362444690137636,
+  "peak_browser_current_RSS": 1344892928,
+  "current_absence_not_natural_fullperiod_allhost": true,
+  "short_unmanaged_management_commands_fullperiod_PID_RSS_missing": true,
+  "closure_helper_at_snapshot": {
+    "pid": 2806272,
+    "start_ticks": 22399346,
+    "running_at_snapshot": true,
+    "final_handoff_must_recheck_absence": true
+  }
+}

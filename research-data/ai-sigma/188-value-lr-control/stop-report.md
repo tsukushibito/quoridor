@@ -1,0 +1,1 @@
+goal quoridor-4lc /本人188。claim/静的実開始13:03:52済、科学開始0。13:11台の管理commandがpython不在exit127でscript前に失敗。13:12新科学開始期限超過を確認したため新NN/model/trainを起動せず停止。forward0/sample0/train0/modelread0/GPU0、子spawn0/ownedidentity空、wait該当なし。187短科学非重複の窓を消費していない。受付を科学開始へ変換0、188 deadline reset/追加許可要求0。NN0 source/preregisterをGit保存し、準備のみとして引渡す。

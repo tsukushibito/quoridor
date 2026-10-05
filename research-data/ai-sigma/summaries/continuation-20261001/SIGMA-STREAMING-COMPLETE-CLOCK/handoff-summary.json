@@ -1,0 +1,129 @@
+{
+  "issue": "quoridor-4lc.71",
+  "result": "partial/no-go",
+  "runtime_stopped": true,
+  "source_stopped": true,
+  "entry_ready": false,
+  "actual_go": false,
+  "NN_windows": 1,
+  "NN_retry": 0,
+  "startup": {
+    "startup_root_NN": 6,
+    "rows": [
+      {
+        "engine": "candidate",
+        "id": "initial-p1",
+        "NN": 1,
+        "elapsed_ms": 507.6078220009804,
+        "numeric_gate": true,
+        "handles": 0,
+        "activeNN": 0,
+        "live_searches": 0
+      },
+      {
+        "engine": "candidate",
+        "id": "asym-hv-p2",
+        "NN": 1,
+        "elapsed_ms": 401.6098590195179,
+        "numeric_gate": true,
+        "handles": 0,
+        "activeNN": 0,
+        "live_searches": 0
+      },
+      {
+        "engine": "candidate",
+        "id": "straight-jump-p2",
+        "NN": 1,
+        "elapsed_ms": 326.0206249952316,
+        "numeric_gate": true,
+        "handles": 0,
+        "activeNN": 0,
+        "live_searches": 0
+      },
+      {
+        "engine": "reference",
+        "id": "initial-p1",
+        "NN": 1,
+        "elapsed_ms": 175.27156600356102,
+        "numeric_gate": true,
+        "handles": 0,
+        "activeNN": 0,
+        "live_searches": 0
+      },
+      {
+        "engine": "reference",
+        "id": "asym-hv-p2",
+        "NN": 1,
+        "elapsed_ms": 186.7835529744625,
+        "numeric_gate": true,
+        "handles": 0,
+        "activeNN": 0,
+        "live_searches": 0
+      },
+      {
+        "engine": "reference",
+        "id": "straight-jump-p2",
+        "NN": 1,
+        "elapsed_ms": 159.8862290084362,
+        "numeric_gate": true,
+        "handles": 0,
+        "activeNN": 0,
+        "live_searches": 0
+      }
+    ],
+    "search_trees_created": 0,
+    "history_cache_reused": 0,
+    "ready": true,
+    "not_hand_samples": true
+  },
+  "public_planned_max": 11,
+  "public_actual": 3,
+  "public": [
+    {
+      "engine": "candidate",
+      "action": 13,
+      "error": null,
+      "checkpoint": true,
+      "stamp_ms": 141189918.602322,
+      "t0_ms": 141189500.903952,
+      "elapsed_ms": 417.6983700096607,
+      "referee_verified": true
+    },
+    {
+      "engine": "reference",
+      "action": 13,
+      "error": null,
+      "checkpoint": true,
+      "stamp_ms": 141190332.079251,
+      "t0_ms": 141189918.602322,
+      "elapsed_ms": 413.4769289791584,
+      "referee_verified": true
+    },
+    {
+      "engine": "candidate",
+      "action": null,
+      "error": "CANCELLED",
+      "checkpoint": false,
+      "stamp_ms": 141190425.805698,
+      "t0_ms": 141190332.079251,
+      "elapsed_ms": 93.72644701600075,
+      "referee_verified": true
+    }
+  ],
+  "fresh_goal_fourply_unexecuted": true,
+  "numeric_failure": "candidate native root order incorrectly compared with reference Sigma root order",
+  "Model_drop": {
+    "kind": "dropped",
+    "handles": 0,
+    "activeNN": 0,
+    "at_ms": 1790888285609.5
+  },
+  "stopACK0": 3,
+  "forced_inner_controlled_PID0": true,
+  "tracked_current_absence": 62,
+  "observed_RAM_peak": 1527848960,
+  "observed_storage_peak": 3305472,
+  "all_observed_TIDs_CPU2": true,
+  "entry_manifest_sha256": "39f0bb98e7889754d67043c3fd613326dbd0c88e1e2aa7b414c46d6463a17d9f",
+  "source_frozen_sha256": "5b509ce5c881e77a2c415aa54bc33deff1cd729b4f222865d5adf7b2f97f4ae0"
+}

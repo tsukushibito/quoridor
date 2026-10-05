@@ -1,0 +1,94 @@
+{
+  "issue": "quoridor-4lc.139",
+  "UTC": "2026-10-02T18:23:20.101249+00:00",
+  "monotonic": 218317.842765054,
+  "source_write_stopped": true,
+  "jobs": 3,
+  "command_hash_and_PIDs": "all *.started.json, *.process.json",
+  "identities": [
+    {
+      "PID": 2735354,
+      "ppid": 2735351,
+      "PGID": 2735351,
+      "starttick": 21819620,
+      "rss": 16666624
+    },
+    {
+      "PID": 2735355,
+      "ppid": 2735354,
+      "PGID": 2735355,
+      "starttick": 21819622,
+      "rss": 0
+    },
+    {
+      "PID": 2734740,
+      "ppid": 2734739,
+      "PGID": 2734739,
+      "starttick": 21813408,
+      "rss": 16388096
+    },
+    {
+      "PID": 2734741,
+      "ppid": 2734740,
+      "PGID": 2734741,
+      "starttick": 21813409,
+      "rss": 0
+    },
+    {
+      "PID": 2732365,
+      "ppid": 2732358,
+      "PGID": 2732358,
+      "starttick": 21789251,
+      "rss": 16437248
+    },
+    {
+      "PID": 2732366,
+      "ppid": 2732365,
+      "PGID": 2732366,
+      "starttick": 21789254,
+      "rss": 946176
+    }
+  ],
+  "same_identity_live": [],
+  "PID0": true,
+  "outer_wait_completed": true,
+  "exit": [
+    0,
+    0,
+    0
+  ],
+  "guard_errors": [
+    null,
+    null,
+    null
+  ],
+  "current_RSS_max_sampled": 33632256,
+  "RSS_guard": 469762048,
+  "TID_affinity_observed": [
+    0
+  ],
+  "wall_managed_seconds": 0.1085023230407387,
+  "managed_CPU_sample_scope_seconds": 0.142396,
+  "own_allocated": 131072,
+  "old_conservative": 8531968,
+  "combined_conservative": 8663040,
+  "reserved": 16777216,
+  "combined_guard": 14680064,
+  "unused_reservation_separate": 8114176,
+  "new_reservation": 0,
+  "source_hashes": {
+    "tools/ai-sigma-next-information-choice/supervise.py": "f33cff3bbe79e85b08d9effb9aa2df826f343469259519e63f3cceba5b2902d7",
+    "tools/ai-sigma-next-information-choice/check.py": "e9d5776347b22a225fe04a6f20ed453c958b59235cc1c17d3aab988c3b39a29b"
+  },
+  "code_baseline_Git": "e91228431d09fd15c451e6fb011e90b7ca38bf2c",
+  "short_unmanaged_management_commands": "initial ready/show/claim/read/generation/Git/Beads exact PID/RSS CPU not sampled, tool timings only",
+  "limits": [
+    "instant peak/total command CPU not guaranteed",
+    "currentabsence not natural/allperiod",
+    "old conservative holding not all-owner current audit"
+  ],
+  "NN": 0,
+  "Chrome": 0,
+  "games": 0,
+  "actual_go": false
+}

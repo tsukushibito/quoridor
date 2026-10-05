@@ -1,0 +1,1255 @@
+{
+  "issue": "quoridor-4lc.165",
+  "StageA": {
+    "issue": "quoridor-4lc.165",
+    "run": "native165-mechanism-r1",
+    "raw_SHA256": "dee3d3b52839b3c8ba50c082abba835be6f0784c61617a37ccfa550811113286",
+    "StageA_finite_supported": true,
+    "StageB_allowed": true,
+    "first_discrete_difference": null,
+    "first_numeric_difference": {
+      "kind": "edge_prior",
+      "fixture": "initial-p1",
+      "index": [
+        1,
+        76
+      ],
+      "left": 0.0011302381770128896,
+      "right": 0.0011302381770128894
+    },
+    "first_ledger_difference": null,
+    "pairs": [
+      {
+        "fixture": "initial-p1",
+        "finite_supported": true,
+        "CPs": 32,
+        "NN": 32,
+        "max_prior_difference": 2.168404344971009e-19,
+        "max_score_difference": 1.1102230246251565e-16,
+        "max_ledger_difference": 0
+      },
+      {
+        "fixture": "asym-hv-p2",
+        "finite_supported": true,
+        "CPs": 32,
+        "NN": 32,
+        "max_prior_difference": 1.734723475976807e-18,
+        "max_score_difference": 0,
+        "max_ledger_difference": 0
+      },
+      {
+        "fixture": "straight-jump-p2",
+        "finite_supported": true,
+        "CPs": 32,
+        "NN": 32,
+        "max_prior_difference": 1.3877787807814457e-17,
+        "max_score_difference": 1.1102230246251565e-16,
+        "max_ledger_difference": 0
+      },
+      {
+        "fixture": "frame10-prefix-13",
+        "finite_supported": true,
+        "CPs": 32,
+        "NN": 32,
+        "max_prior_difference": 6.938893903907228e-18,
+        "max_score_difference": 1.1102230246251565e-16,
+        "max_ledger_difference": 0
+      },
+      {
+        "fixture": "frame10-prefix-14",
+        "finite_supported": true,
+        "CPs": 32,
+        "NN": 32,
+        "max_prior_difference": 3.469446951953614e-18,
+        "max_score_difference": 0,
+        "max_ledger_difference": 0
+      }
+    ],
+    "native_vs_old_Wasm_root_only": [
+      {
+        "fixture": "initial-p1",
+        "input_bits_exact": true,
+        "different_f32_count": 22,
+        "first_difference": {
+          "index": 1,
+          "native": 1.0479377508163452,
+          "old_Wasm": 1.0479378700256348,
+          "delta": -1.1920928955078125e-07
+        },
+        "max_abs_difference": 2.384185791015625e-06,
+        "compatibility_abs1e4_rel1e4": true,
+        "providers_differ": true,
+        "no_crossbackend_discrete_claim": true
+      },
+      {
+        "fixture": "asym-hv-p2",
+        "input_bits_exact": true,
+        "different_f32_count": 43,
+        "first_difference": {
+          "index": 0,
+          "native": 5.935825824737549,
+          "old_Wasm": 5.935824871063232,
+          "delta": 9.5367431640625e-07
+        },
+        "max_abs_difference": 3.5762786865234375e-06,
+        "compatibility_abs1e4_rel1e4": true,
+        "providers_differ": true,
+        "no_crossbackend_discrete_claim": true
+      },
+      {
+        "fixture": "straight-jump-p2",
+        "input_bits_exact": true,
+        "different_f32_count": 34,
+        "first_difference": {
+          "index": 1,
+          "native": 0.5530123710632324,
+          "old_Wasm": 0.5530126094818115,
+          "delta": -2.384185791015625e-07
+        },
+        "max_abs_difference": 3.0994415283203125e-06,
+        "compatibility_abs1e4_rel1e4": true,
+        "providers_differ": true,
+        "no_crossbackend_discrete_claim": true
+      },
+      {
+        "fixture": "frame10-prefix-13",
+        "input_bits_exact": true,
+        "different_f32_count": 64,
+        "first_difference": {
+          "index": 0,
+          "native": 2.760375499725342,
+          "old_Wasm": 2.7603769302368164,
+          "delta": -1.430511474609375e-06
+        },
+        "max_abs_difference": 3.5762786865234375e-06,
+        "compatibility_abs1e4_rel1e4": true,
+        "providers_differ": true,
+        "no_crossbackend_discrete_claim": true
+      },
+      {
+        "fixture": "frame10-prefix-14",
+        "input_bits_exact": true,
+        "different_f32_count": 48,
+        "first_difference": {
+          "index": 0,
+          "native": 5.053226947784424,
+          "old_Wasm": 5.053227424621582,
+          "delta": -4.76837158203125e-07
+        },
+        "max_abs_difference": 3.0994415283203125e-06,
+        "compatibility_abs1e4_rel1e4": true,
+        "providers_differ": true,
+        "no_crossbackend_discrete_claim": true
+      }
+    ],
+    "hand_NN": 320,
+    "startup_NN": 2,
+    "sameK_not_sameCPU_or_strength": true,
+    "ledger_floating_not_mislabeled_discrete": true
+  },
+  "StageB": {
+    "planned_games": 16,
+    "planned_pairs": 8,
+    "started": 16,
+    "typed_status_counts": {
+      "GOAL": 16
+    },
+    "operational": {
+      "denominator": 16,
+      "known": 16,
+      "unknown": 0,
+      "mean_if_all_known": 0.375,
+      "identified_lower": 0.375,
+      "identified_upper": 0.375,
+      "complete_only_aux": 0.375
+    },
+    "pure_terminal_quality": {
+      "denominator": 16,
+      "known": 16,
+      "unknown": 0,
+      "mean_if_all_known": 0.375,
+      "identified_lower": 0.375,
+      "identified_upper": 0.375,
+      "complete_only_aux": 0.375
+    },
+    "WDL_terminal": {
+      "W": 6,
+      "D": 0,
+      "L": 10
+    },
+    "pairs": [
+      {
+        "pair": 1,
+        "game_ids": [
+          "native165-game-01",
+          "native165-game-02"
+        ],
+        "operational_Xi": 0.0,
+        "operational_range": [
+          0.0,
+          0.0
+        ],
+        "pure_quality_Xi": 0.0,
+        "pure_quality_range": [
+          0.0,
+          0.0
+        ],
+        "both_same_board_side_winner": false,
+        "sameopening_backend_NN137bits_exact": true,
+        "first_roots": [
+          {
+            "engine": "candidate",
+            "side": 1,
+            "NN_calls": 60,
+            "completed": 59,
+            "firstCP_ms": 16.991528004407883
+          },
+          {
+            "engine": "reference",
+            "side": 1,
+            "NN_calls": 45,
+            "completed": 44,
+            "firstCP_ms": 29.130825996398926
+          }
+        ]
+      },
+      {
+        "pair": 2,
+        "game_ids": [
+          "native165-game-03",
+          "native165-game-04"
+        ],
+        "operational_Xi": 0.5,
+        "operational_range": [
+          0.5,
+          0.5
+        ],
+        "pure_quality_Xi": 0.5,
+        "pure_quality_range": [
+          0.5,
+          0.5
+        ],
+        "both_same_board_side_winner": true,
+        "sameopening_backend_NN137bits_exact": true,
+        "first_roots": [
+          {
+            "engine": "candidate",
+            "side": 2,
+            "NN_calls": 56,
+            "completed": 56,
+            "firstCP_ms": 23.04586300253868
+          },
+          {
+            "engine": "reference",
+            "side": 2,
+            "NN_calls": 64,
+            "completed": 63,
+            "firstCP_ms": 8.643219977617264
+          }
+        ]
+      },
+      {
+        "pair": 3,
+        "game_ids": [
+          "native165-game-05",
+          "native165-game-06"
+        ],
+        "operational_Xi": 0.5,
+        "operational_range": [
+          0.5,
+          0.5
+        ],
+        "pure_quality_Xi": 0.5,
+        "pure_quality_range": [
+          0.5,
+          0.5
+        ],
+        "both_same_board_side_winner": true,
+        "sameopening_backend_NN137bits_exact": true,
+        "first_roots": [
+          {
+            "engine": "candidate",
+            "side": 1,
+            "NN_calls": 53,
+            "completed": 52,
+            "firstCP_ms": 33.429899007081985
+          },
+          {
+            "engine": "reference",
+            "side": 1,
+            "NN_calls": 74,
+            "completed": 73,
+            "firstCP_ms": 11.16449299454689
+          }
+        ]
+      },
+      {
+        "pair": 4,
+        "game_ids": [
+          "native165-game-07",
+          "native165-game-08"
+        ],
+        "operational_Xi": 0.0,
+        "operational_range": [
+          0.0,
+          0.0
+        ],
+        "pure_quality_Xi": 0.0,
+        "pure_quality_range": [
+          0.0,
+          0.0
+        ],
+        "both_same_board_side_winner": false,
+        "sameopening_backend_NN137bits_exact": true,
+        "first_roots": [
+          {
+            "engine": "candidate",
+            "side": 2,
+            "NN_calls": 55,
+            "completed": 54,
+            "firstCP_ms": 46.71818000078201
+          },
+          {
+            "engine": "reference",
+            "side": 2,
+            "NN_calls": 35,
+            "completed": 34,
+            "firstCP_ms": 49.51351100206375
+          }
+        ]
+      },
+      {
+        "pair": 5,
+        "game_ids": [
+          "native165-game-09",
+          "native165-game-10"
+        ],
+        "operational_Xi": 0.5,
+        "operational_range": [
+          0.5,
+          0.5
+        ],
+        "pure_quality_Xi": 0.5,
+        "pure_quality_range": [
+          0.5,
+          0.5
+        ],
+        "both_same_board_side_winner": true,
+        "sameopening_backend_NN137bits_exact": true,
+        "first_roots": [
+          {
+            "engine": "candidate",
+            "side": 1,
+            "NN_calls": 54,
+            "completed": 53,
+            "firstCP_ms": 17.286387979984283
+          },
+          {
+            "engine": "reference",
+            "side": 1,
+            "NN_calls": 72,
+            "completed": 71,
+            "firstCP_ms": 6.181650012731552
+          }
+        ]
+      },
+      {
+        "pair": 6,
+        "game_ids": [
+          "native165-game-11",
+          "native165-game-12"
+        ],
+        "operational_Xi": 0.5,
+        "operational_range": [
+          0.5,
+          0.5
+        ],
+        "pure_quality_Xi": 0.5,
+        "pure_quality_range": [
+          0.5,
+          0.5
+        ],
+        "both_same_board_side_winner": true,
+        "sameopening_backend_NN137bits_exact": true,
+        "first_roots": [
+          {
+            "engine": "candidate",
+            "side": 2,
+            "NN_calls": 57,
+            "completed": 56,
+            "firstCP_ms": 28.63961699604988
+          },
+          {
+            "engine": "reference",
+            "side": 2,
+            "NN_calls": 57,
+            "completed": 56,
+            "firstCP_ms": 15.000224024057388
+          }
+        ]
+      },
+      {
+        "pair": 7,
+        "game_ids": [
+          "native165-game-13",
+          "native165-game-14"
+        ],
+        "operational_Xi": 1.0,
+        "operational_range": [
+          1.0,
+          1.0
+        ],
+        "pure_quality_Xi": 1.0,
+        "pure_quality_range": [
+          1.0,
+          1.0
+        ],
+        "both_same_board_side_winner": false,
+        "sameopening_backend_NN137bits_exact": true,
+        "first_roots": [
+          {
+            "engine": "candidate",
+            "side": 1,
+            "NN_calls": 54,
+            "completed": 53,
+            "firstCP_ms": 35.716828018426895
+          },
+          {
+            "engine": "reference",
+            "side": 1,
+            "NN_calls": 46,
+            "completed": 45,
+            "firstCP_ms": 9.674722999334335
+          }
+        ]
+      },
+      {
+        "pair": 8,
+        "game_ids": [
+          "native165-game-15",
+          "native165-game-16"
+        ],
+        "operational_Xi": 0.0,
+        "operational_range": [
+          0.0,
+          0.0
+        ],
+        "pure_quality_Xi": 0.0,
+        "pure_quality_range": [
+          0.0,
+          0.0
+        ],
+        "both_same_board_side_winner": false,
+        "sameopening_backend_NN137bits_exact": true,
+        "first_roots": [
+          {
+            "engine": "candidate",
+            "side": 2,
+            "NN_calls": 57,
+            "completed": 57,
+            "firstCP_ms": 36.24482700228691
+          },
+          {
+            "engine": "reference",
+            "side": 2,
+            "NN_calls": 35,
+            "completed": 34,
+            "firstCP_ms": 65.7170860171318
+          }
+        ]
+      }
+    ],
+    "games": [
+      {
+        "game_id": "native165-game-01",
+        "pair": 1,
+        "fixture_id": "native165-prefix-1",
+        "candidate_player": 1,
+        "color_order": 0,
+        "status": "GOAL",
+        "winner": 2,
+        "score": 0,
+        "pure_terminal_quality": true,
+        "final_ply": 78,
+        "plies_played": 66,
+        "elapsed_ms": 27183.418735980988,
+        "final_key": "0,5|6,0|0|0,0;1,5;2,0;2,1;2,4;2,7;4,4;4,5;7,4|0,3;0,5;1,3;2,2;2,5;3,1;3,3;3,6;5,4;6,3"
+      },
+      {
+        "game_id": "native165-game-02",
+        "pair": 1,
+        "fixture_id": "native165-prefix-1",
+        "candidate_player": 2,
+        "color_order": 1,
+        "status": "GOAL",
+        "winner": 1,
+        "score": 0,
+        "pure_terminal_quality": true,
+        "final_ply": 51,
+        "plies_played": 39,
+        "elapsed_ms": 16052.600125998259,
+        "final_key": "8,8|8,3|1|0,0;2,0;2,4;3,6;4,4;4,5;4,7;6,5;6,7;7,6|0,5;2,5;3,1;3,3;4,6;5,4;5,7;6,3"
+      },
+      {
+        "game_id": "native165-game-03",
+        "pair": 2,
+        "fixture_id": "native165-prefix-2",
+        "candidate_player": 2,
+        "color_order": 0,
+        "status": "GOAL",
+        "winner": 1,
+        "score": 0,
+        "pure_terminal_quality": true,
+        "final_ply": 87,
+        "plies_played": 74,
+        "elapsed_ms": 30458.110745996237,
+        "final_key": "4,8|2,3|1|1,1;2,2;2,6;3,0;3,5;5,3;5,6;6,2;7,0;7,6|0,2;0,4;2,0;2,4;3,1;4,0;4,2;4,6;6,3;7,1"
+      },
+      {
+        "game_id": "native165-game-04",
+        "pair": 2,
+        "fixture_id": "native165-prefix-2",
+        "candidate_player": 1,
+        "color_order": 1,
+        "status": "GOAL",
+        "winner": 1,
+        "score": 1,
+        "pure_terminal_quality": true,
+        "final_ply": 87,
+        "plies_played": 74,
+        "elapsed_ms": 30532.680168002844,
+        "final_key": "4,8|2,3|1|1,1;2,2;2,6;3,0;3,5;5,3;5,6;6,2;7,0;7,6|0,2;0,4;2,0;2,4;3,1;4,0;4,2;4,6;6,3;7,1"
+      },
+      {
+        "game_id": "native165-game-05",
+        "pair": 3,
+        "fixture_id": "native165-prefix-3",
+        "candidate_player": 1,
+        "color_order": 0,
+        "status": "GOAL",
+        "winner": 2,
+        "score": 0,
+        "pure_terminal_quality": true,
+        "final_ply": 68,
+        "plies_played": 44,
+        "elapsed_ms": 18111.26547500491,
+        "final_key": "5,3|4,0|0|0,1;0,4;2,2;2,5;3,1;4,5;5,0;5,2;5,3;7,0;7,2;7,4;7,7|0,5;1,2;1,5;2,1;4,6;5,4;7,6"
+      },
+      {
+        "game_id": "native165-game-06",
+        "pair": 3,
+        "fixture_id": "native165-prefix-3",
+        "candidate_player": 2,
+        "color_order": 1,
+        "status": "GOAL",
+        "winner": 2,
+        "score": 1,
+        "pure_terminal_quality": true,
+        "final_ply": 76,
+        "plies_played": 52,
+        "elapsed_ms": 21406.887063980103,
+        "final_key": "6,6|6,0|0|0,1;0,4;2,2;2,5;3,1;3,4;4,5;5,1;5,2;5,4;7,0;7,2;7,4;7,7|0,5;1,2;1,5;2,1;4,6;7,6"
+      },
+      {
+        "game_id": "native165-game-07",
+        "pair": 4,
+        "fixture_id": "native165-prefix-4",
+        "candidate_player": 2,
+        "color_order": 0,
+        "status": "GOAL",
+        "winner": 1,
+        "score": 0,
+        "pure_terminal_quality": true,
+        "final_ply": 63,
+        "plies_played": 38,
+        "elapsed_ms": 26156.870931982994,
+        "final_key": "1,8|6,2|1|0,3;0,6;2,3;2,6;3,1;3,2;3,7;4,3;5,4;5,5;6,3;7,0;7,5|0,7;1,7;3,3;4,1;4,6;5,3"
+      },
+      {
+        "game_id": "native165-game-08",
+        "pair": 4,
+        "fixture_id": "native165-prefix-4",
+        "candidate_player": 1,
+        "color_order": 1,
+        "status": "GOAL",
+        "winner": 2,
+        "score": 0,
+        "pure_terminal_quality": true,
+        "final_ply": 70,
+        "plies_played": 45,
+        "elapsed_ms": 19475.16935700178,
+        "final_key": "3,7|5,0|0|0,3;0,6;2,3;2,6;3,1;3,2;3,7;4,3;5,4;5,5;6,1;6,3;7,0;7,5|0,7;1,7;3,3;4,1;4,6;5,3"
+      },
+      {
+        "game_id": "native165-game-09",
+        "pair": 5,
+        "fixture_id": "native165-prefix-5",
+        "candidate_player": 1,
+        "color_order": 0,
+        "status": "GOAL",
+        "winner": 2,
+        "score": 0,
+        "pure_terminal_quality": true,
+        "final_ply": 66,
+        "plies_played": 54,
+        "elapsed_ms": 22254.393409997225,
+        "final_key": "8,6|2,0|0|0,3;0,6;2,3;2,6;3,0;3,1;3,4;4,3;4,6;4,7;5,0;5,2;5,4;6,5;7,2;7,6|1,5;5,6;6,3"
+      },
+      {
+        "game_id": "native165-game-10",
+        "pair": 5,
+        "fixture_id": "native165-prefix-5",
+        "candidate_player": 2,
+        "color_order": 1,
+        "status": "GOAL",
+        "winner": 2,
+        "score": 1,
+        "pure_terminal_quality": true,
+        "final_ply": 86,
+        "plies_played": 74,
+        "elapsed_ms": 30497.608699977398,
+        "final_key": "4,5|0,0|0|0,5;1,1;1,2;2,4;2,5;3,1;4,4;4,6;4,7;5,1;6,4;7,1;7,6|0,4;1,3;1,6;3,2;3,7;5,3;6,5"
+      },
+      {
+        "game_id": "native165-game-11",
+        "pair": 6,
+        "fixture_id": "native165-prefix-6",
+        "candidate_player": 2,
+        "color_order": 0,
+        "status": "GOAL",
+        "winner": 1,
+        "score": 0,
+        "pure_terminal_quality": true,
+        "final_ply": 69,
+        "plies_played": 56,
+        "elapsed_ms": 33494.42063102126,
+        "final_key": "2,8|7,1|1|0,0;0,7;1,2;1,6;3,0;3,2;3,7;4,3;5,0;5,5;5,7;7,2;7,7|1,1;1,7;2,1;3,6;4,2;5,4;6,3"
+      },
+      {
+        "game_id": "native165-game-12",
+        "pair": 6,
+        "fixture_id": "native165-prefix-6",
+        "candidate_player": 1,
+        "color_order": 1,
+        "status": "GOAL",
+        "winner": 1,
+        "score": 1,
+        "pure_terminal_quality": true,
+        "final_ply": 57,
+        "plies_played": 44,
+        "elapsed_ms": 18153.408415973186,
+        "final_key": "3,8|4,5|1|0,0;0,7;1,2;1,6;3,2;4,3;4,7;5,5;6,7;7,2;7,5|1,1;2,7;4,2;5,2;5,6"
+      },
+      {
+        "game_id": "native165-game-13",
+        "pair": 7,
+        "fixture_id": "native165-prefix-7",
+        "candidate_player": 1,
+        "color_order": 0,
+        "status": "GOAL",
+        "winner": 1,
+        "score": 1,
+        "pure_terminal_quality": true,
+        "final_ply": 73,
+        "plies_played": 49,
+        "elapsed_ms": 20224.551449984312,
+        "final_key": "5,8|2,3|1|0,3;1,0;1,1;1,6;1,7;3,3;3,7;5,2;5,5;6,0;6,3;7,2|1,2;4,0;4,2;4,4;5,7;7,5"
+      },
+      {
+        "game_id": "native165-game-14",
+        "pair": 7,
+        "fixture_id": "native165-prefix-7",
+        "candidate_player": 2,
+        "color_order": 1,
+        "status": "GOAL",
+        "winner": 2,
+        "score": 1,
+        "pure_terminal_quality": true,
+        "final_ply": 88,
+        "plies_played": 64,
+        "elapsed_ms": 26383.71857199073,
+        "final_key": "8,6|0,0|0|1,0;1,1;1,6;1,7;3,0;3,3;4,7;5,1;6,0;6,3;6,6;7,1|4,0;4,2;4,4;4,6;5,7;7,3;7,5"
+      },
+      {
+        "game_id": "native165-game-15",
+        "pair": 8,
+        "fixture_id": "native165-prefix-8",
+        "candidate_player": 2,
+        "color_order": 0,
+        "status": "GOAL",
+        "winner": 1,
+        "score": 0,
+        "pure_terminal_quality": true,
+        "final_ply": 85,
+        "plies_played": 60,
+        "elapsed_ms": 35263.195873975754,
+        "final_key": "0,8|7,1|1|0,2;1,0;1,5;2,2;3,1;3,3;5,1;5,4;5,5;5,7|0,4;2,1;2,4;2,6;3,0;4,4;5,2;5,6;6,3;6,7"
+      },
+      {
+        "game_id": "native165-game-16",
+        "pair": 8,
+        "fixture_id": "native165-prefix-8",
+        "candidate_player": 1,
+        "color_order": 1,
+        "status": "GOAL",
+        "winner": 2,
+        "score": 0,
+        "pure_terminal_quality": true,
+        "final_ply": 90,
+        "plies_played": 65,
+        "elapsed_ms": 30005.284713983536,
+        "final_key": "7,4|3,0|0|0,2;0,6;1,0;1,4;2,2;3,3;4,0;5,4;5,5;5,7|0,5;2,1;2,4;2,6;3,0;4,4;5,6;6,1;6,3;6,7"
+      }
+    ],
+    "engine_metrics": {
+      "candidate": {
+        "requests": 448,
+        "started_NN": 18471,
+        "adopted_NN": 18048,
+        "NN_discarded": 369,
+        "completed_K": {
+          "n": 448,
+          "mean": 111.46651785714286,
+          "min": 19,
+          "p50": 40.0,
+          "p95": 281,
+          "max": 3513,
+          "sum": 49937
+        },
+        "adopted_K": {
+          "n": 448,
+          "mean": 111.28794642857143,
+          "min": 19,
+          "p50": 40.0,
+          "p95": 281,
+          "max": 3512,
+          "sum": 49857
+        },
+        "firstCP_ms": {
+          "n": 448,
+          "mean": 44.62749449163675,
+          "min": 14.232296019792557,
+          "p50": 42.15111701190472,
+          "p95": 72.73972699046135,
+          "max": 93.86356100440025,
+          "sum": 19993.117532253265
+        },
+        "API_first_ms": {
+          "n": 448,
+          "mean": 5.94714923025614,
+          "min": 3.8376720040105283,
+          "p50": 4.353561016614549,
+          "p95": 11.874525982420892,
+          "max": 23.78363601746969,
+          "sum": 2664.322855154751
+        },
+        "API_steady_mean_ms": {
+          "n": 448,
+          "mean": 5.919604703778785,
+          "min": 3.946388202968006,
+          "p50": 6.1226065712242885,
+          "p95": 7.441747033347686,
+          "max": 11.066290473344884,
+          "sum": 2651.982907292899
+        },
+        "API_total_ms": {
+          "n": 448,
+          "mean": 234.00145770015766,
+          "min": 47.89818200515583,
+          "p50": 236.9695954985218,
+          "p95": 276.7558532068506,
+          "max": 300.04957391065545,
+          "sum": 104832.65304967063
+        },
+        "NN_pipe_total_ms": {
+          "n": 448,
+          "mean": 306.37915931755145,
+          "min": 59.290636986494064,
+          "p50": 308.41111002862453,
+          "p95": 339.55642703175545,
+          "max": 369.56303495168686,
+          "sum": 137257.86337426305
+        },
+        "NN_process_CPU_ms_aux_not_all_kernel": {
+          "n": 448,
+          "mean": 162.9962021540178,
+          "min": 28.237723000001935,
+          "p50": 147.4289595000012,
+          "p95": 232.7627709999996,
+          "max": 260.6803490000021,
+          "sum": 73022.29856499993
+        },
+        "public_ms": {
+          "n": 448,
+          "mean": 411.0061544577059,
+          "min": 409.41565200686455,
+          "p50": 410.7951274961233,
+          "p95": 413.14069801568985,
+          "max": 416.3877600133419,
+          "sum": 184130.75719705224
+        },
+        "cleanup_after_public_ms": {
+          "n": 448,
+          "mean": 0.4319988501790379,
+          "min": 0.0006079971790313721,
+          "p50": 0.0018440037965774536,
+          "p95": 2.692018985748291,
+          "max": 24.912661015987396,
+          "sum": 193.53548488020897
+        },
+        "CP_late_discarded": 80,
+        "terminal_noNN": 31835
+      },
+      "reference": {
+        "requests": 450,
+        "started_NN": 21907,
+        "adopted_NN": 21415,
+        "NN_discarded": 447,
+        "completed_K": {
+          "n": 450,
+          "mean": 2069.4666666666667,
+          "min": 34,
+          "p50": 48.0,
+          "p95": 467,
+          "max": 323150,
+          "sum": 931260
+        },
+        "adopted_K": {
+          "n": 450,
+          "mean": 143.39333333333335,
+          "min": 33,
+          "p50": 48.0,
+          "p95": 412,
+          "max": 6587,
+          "sum": 64527
+        },
+        "firstCP_ms": {
+          "n": 450,
+          "mean": 17.1014260216554,
+          "min": 6.181650012731552,
+          "p50": 15.691949501633644,
+          "p95": 30.740171998739243,
+          "max": 88.49386098980904,
+          "sum": 7695.64170974493
+        },
+        "API_first_ms": {
+          "n": 450,
+          "mean": 6.380628944672127,
+          "min": 3.8258440035860986,
+          "p50": 4.537140514003113,
+          "p95": 13.033026014454663,
+          "max": 20.961560017894953,
+          "sum": 2871.283025102457
+        },
+        "API_steady_mean_ms": {
+          "n": 449,
+          "mean": 5.987220817325773,
+          "min": 4.034752638189174,
+          "p50": 6.1914612410224175,
+          "p95": 7.49295233415776,
+          "max": 10.160619808760073,
+          "sum": 2688.2621469792716
+        },
+        "API_total_ms": {
+          "n": 450,
+          "mean": 280.08719500930357,
+          "min": 4.400239005917683,
+          "p50": 284.2265580256935,
+          "p95": 314.98018000274897,
+          "max": 335.8109740365762,
+          "sum": 126039.23775418662
+        },
+        "NN_pipe_total_ms": {
+          "n": 450,
+          "mean": 369.58446669313645,
+          "min": 5.867529988288879,
+          "p50": 376.61270643770695,
+          "p95": 391.90115198493004,
+          "max": 412.42135402560234,
+          "sum": 166313.0100119114
+        },
+        "NN_process_CPU_ms_aux_not_all_kernel": {
+          "n": 450,
+          "mean": 192.49095388,
+          "min": 4.408798999999686,
+          "p50": 176.32365800000113,
+          "p95": 270.7950149999958,
+          "max": 283.09930799999523,
+          "sum": 86620.92924600001
+        },
+        "public_ms": {
+          "n": 450,
+          "mean": 410.9844592642122,
+          "min": 409.2986769974232,
+          "p50": 410.7419159859419,
+          "p95": 413.41358399391174,
+          "max": 418.6991640031338,
+          "sum": 184943.00666889548
+        },
+        "cleanup_after_public_ms": {
+          "n": 450,
+          "mean": 79.83915701084666,
+          "min": 0.0008949935436248779,
+          "p50": 0.0020265132188796997,
+          "p95": 7.190999984741211,
+          "max": 10495.237555027008,
+          "sum": 35927.620654881
+        },
+        "CP_late_discarded": 866733,
+        "terminal_noNN": 909800
+      }
+    },
+    "public_requests": 898,
+    "startup_NN": 16,
+    "hand_NN": 40378,
+    "source_clock_rule": "quiescent event-driven cut402/public411/deadline500",
+    "all_saved_prevalidation_admit_stamps_le402": true,
+    "all_public_le500": true,
+    "nextt0_after_observed_zero": true,
+    "next_start_gap_ms": {
+      "n": 890,
+      "mean": 0.4220620620786474,
+      "min": 0.1467059850692749,
+      "p50": 0.28033551573753357,
+      "p95": 0.8916819989681244,
+      "max": 11.460041999816895,
+      "sum": 375.6352352499962
+    },
+    "pair1_actual_result_receive_missing": true,
+    "old_field_pair1_gate_observe_erratum_preserved": true,
+    "job_control_success": true
+  },
+  "cost_seconds": {
+    "build": 14.257875,
+    "protocol": 13.238108,
+    "mechanism": 5.592912,
+    "arena": 431.553877
+  },
+  "heavy_total_s": 451.404664,
+  "game_total_s": 405.6535843708515,
+  "game_per_s_game_section": 0.039442520950024894,
+  "game_per_s_quality_job": 0.03707532443278223,
+  "opening_teachers": {
+    "planned_opening_rows": 16,
+    "valid_rows": 16,
+    "missing": [],
+    "groups": 8,
+    "train": 14,
+    "validation": 2,
+    "shared160schema_not_overwritten": true,
+    "variable_completed_amount_and_game_outcome_extension": true,
+    "NN": 0,
+    "new_learning": 0,
+    "diagnostic_holdout_not_formal": true,
+    "full_permove_dataset_not_exported": true
+  },
+  "valid_opening_teacher_rows_per_quality_s": 0.03707532443278223,
+  "peak_own_group_plus_guardian_RSS": 950575104,
+  "peak_own_allocated_bytes_observed": 41357312,
+  "currentidentity_fullperiod_allhost_not_claimed": true,
+  "formal_ready": false,
+  "NI_or_Sigma_strength_proof": false,
+  "next_max1": "separately preregister finite realORT cancellation and samewall validation of repaired native adapter before larger native evaluation/teacher generation; no scientific replacement or NNUE expansion",
+  "jobs": [
+    {
+      "run": "native165-pair01-r1",
+      "result_SHA256": "d2362c69c52ef75cc1080c58b603a23d9f68466b80a320c9f20f79ed615f872a",
+      "startup_NN": 2,
+      "elapsed_ms": 43613.82287299633,
+      "source_git": "19275b38335e967cfa4f6b99fd758834098158ca",
+      "outer_exit": 0,
+      "stop_reason": null,
+      "outer_remaining": [],
+      "unknown_adopted": [],
+      "monitor_state": "READY",
+      "primary": null,
+      "control_failure": null,
+      "init": {
+        "candidate": {
+          "ORT_init_ms": 31.333756021922454,
+          "startup_wall_ms": 4.979285001754761,
+          "startup_API_ms": 4.321066982811317,
+          "provider": [
+            "CPUExecutionProvider"
+          ],
+          "ORT_version": "1.30.0"
+        },
+        "reference": {
+          "ORT_init_ms": 25.426095991861075,
+          "startup_wall_ms": 4.794252991676331,
+          "startup_API_ms": 4.185404017334804,
+          "provider": [
+            "CPUExecutionProvider"
+          ],
+          "ORT_version": "1.30.0"
+        }
+      }
+    },
+    {
+      "run": "native165-pair02-r1",
+      "result_SHA256": "23acbc0667a18dbf01db4346d1f31142132d1034e7ba9c8fb03c01147e3d8829",
+      "startup_NN": 2,
+      "elapsed_ms": 61360.90661799908,
+      "source_git": "e6b42a36c0591eb143c947f1de725aa85510b64a",
+      "outer_exit": 0,
+      "stop_reason": null,
+      "outer_remaining": [],
+      "unknown_adopted": [],
+      "monitor_state": "READY",
+      "primary": null,
+      "control_failure": null,
+      "init": {
+        "candidate": {
+          "ORT_init_ms": 21.764202014310285,
+          "startup_wall_ms": 8.637060016393661,
+          "startup_API_ms": 7.118607987649739,
+          "provider": [
+            "CPUExecutionProvider"
+          ],
+          "ORT_version": "1.30.0"
+        },
+        "reference": {
+          "ORT_init_ms": 38.427944004070014,
+          "startup_wall_ms": 5.233522981405258,
+          "startup_API_ms": 4.623346001608297,
+          "provider": [
+            "CPUExecutionProvider"
+          ],
+          "ORT_version": "1.30.0"
+        }
+      }
+    },
+    {
+      "run": "native165-pair03-r1",
+      "result_SHA256": "3a7aa1a9f43db2a440d15b12e90991973037c4240a31e26e372fdabb98227b86",
+      "startup_NN": 2,
+      "elapsed_ms": 39963.09188401699,
+      "source_git": "f63e8b3f828203c47a8d89895abbfaed7b19e5d2",
+      "outer_exit": 0,
+      "stop_reason": null,
+      "outer_remaining": [],
+      "unknown_adopted": [],
+      "monitor_state": "READY",
+      "primary": null,
+      "control_failure": null,
+      "init": {
+        "candidate": {
+          "ORT_init_ms": 33.815300004789606,
+          "startup_wall_ms": 4.770395994186401,
+          "startup_API_ms": 4.189547005807981,
+          "provider": [
+            "CPUExecutionProvider"
+          ],
+          "ORT_version": "1.30.0"
+        },
+        "reference": {
+          "ORT_init_ms": 30.11108102509752,
+          "startup_wall_ms": 7.414896011352539,
+          "startup_API_ms": 6.842800998128951,
+          "provider": [
+            "CPUExecutionProvider"
+          ],
+          "ORT_version": "1.30.0"
+        }
+      }
+    },
+    {
+      "run": "native165-pair04-r1",
+      "result_SHA256": "68fa745a8a9dc1e8a1775fe695a0efa6a573a4a139bcafcc668fea416c46f7b4",
+      "startup_NN": 2,
+      "elapsed_ms": 46086.06980100274,
+      "source_git": "f63e8b3",
+      "outer_exit": 0,
+      "stop_reason": null,
+      "outer_remaining": [],
+      "unknown_adopted": [],
+      "monitor_state": "READY",
+      "primary": null,
+      "control_failure": null,
+      "init": {
+        "candidate": {
+          "ORT_init_ms": 23.93287100130692,
+          "startup_wall_ms": 10.718342989683151,
+          "startup_API_ms": 7.769705989630893,
+          "provider": [
+            "CPUExecutionProvider"
+          ],
+          "ORT_version": "1.30.0"
+        },
+        "reference": {
+          "ORT_init_ms": 32.193355000345036,
+          "startup_wall_ms": 4.73540198802948,
+          "startup_API_ms": 4.247144999681041,
+          "provider": [
+            "CPUExecutionProvider"
+          ],
+          "ORT_version": "1.30.0"
+        }
+      }
+    },
+    {
+      "run": "native165-pair05-r1",
+      "result_SHA256": "25acb4777a64f816b67a452a6ab923b4a2bf75539fe3db4e7a0be50fdff7005d",
+      "startup_NN": 2,
+      "elapsed_ms": 53174.550951987505,
+      "source_git": "f63e8b3",
+      "outer_exit": 0,
+      "stop_reason": null,
+      "outer_remaining": [],
+      "unknown_adopted": [],
+      "monitor_state": "READY",
+      "primary": null,
+      "control_failure": null,
+      "init": {
+        "candidate": {
+          "ORT_init_ms": 31.383157009258866,
+          "startup_wall_ms": 4.796330004930496,
+          "startup_API_ms": 4.186273989034817,
+          "provider": [
+            "CPUExecutionProvider"
+          ],
+          "ORT_version": "1.30.0"
+        },
+        "reference": {
+          "ORT_init_ms": 22.830814006738365,
+          "startup_wall_ms": 8.19625398516655,
+          "startup_API_ms": 7.431831007124856,
+          "provider": [
+            "CPUExecutionProvider"
+          ],
+          "ORT_version": "1.30.0"
+        }
+      }
+    },
+    {
+      "run": "native165-pair06-r1",
+      "result_SHA256": "267bc209435f697431f316cb3c44c942718cc8160978d90488950750b1c56e49",
+      "startup_NN": 2,
+      "elapsed_ms": 52064.2420540154,
+      "source_git": "f63e8b3",
+      "outer_exit": 0,
+      "stop_reason": null,
+      "outer_remaining": [],
+      "unknown_adopted": [],
+      "monitor_state": "READY",
+      "primary": null,
+      "control_failure": null,
+      "init": {
+        "candidate": {
+          "ORT_init_ms": 30.407220008783042,
+          "startup_wall_ms": 4.708838999271393,
+          "startup_API_ms": 4.133833019295707,
+          "provider": [
+            "CPUExecutionProvider"
+          ],
+          "ORT_version": "1.30.0"
+        },
+        "reference": {
+          "ORT_init_ms": 24.84195400029421,
+          "startup_wall_ms": 8.654925018548965,
+          "startup_API_ms": 8.00182597595267,
+          "provider": [
+            "CPUExecutionProvider"
+          ],
+          "ORT_version": "1.30.0"
+        }
+      }
+    },
+    {
+      "run": "native165-pair07-r1",
+      "result_SHA256": "9153b1a25fe94b2acb0c7bb1ee2d33041ad7ba514aa1687702ff80d1adf4e55b",
+      "startup_NN": 2,
+      "elapsed_ms": 47000.224833995104,
+      "source_git": "f63e8b3",
+      "outer_exit": 0,
+      "stop_reason": null,
+      "outer_remaining": [],
+      "unknown_adopted": [],
+      "monitor_state": "READY",
+      "primary": null,
+      "control_failure": null,
+      "init": {
+        "candidate": {
+          "ORT_init_ms": 24.889690015697852,
+          "startup_wall_ms": 8.353736996650696,
+          "startup_API_ms": 4.178228002274409,
+          "provider": [
+            "CPUExecutionProvider"
+          ],
+          "ORT_version": "1.30.0"
+        },
+        "reference": {
+          "ORT_init_ms": 34.091094974428415,
+          "startup_wall_ms": 6.158580005168915,
+          "startup_API_ms": 5.310238018864766,
+          "provider": [
+            "CPUExecutionProvider"
+          ],
+          "ORT_version": "1.30.0"
+        }
+      }
+    },
+    {
+      "run": "native165-pair08-r1",
+      "result_SHA256": "d58bd91b3583610ad407fff76470278d69c5db4b155dbd53739ec40a26777211",
+      "startup_NN": 2,
+      "elapsed_ms": 65738.70408800244,
+      "source_git": "f63e8b3",
+      "outer_exit": 0,
+      "stop_reason": null,
+      "outer_remaining": [],
+      "unknown_adopted": [],
+      "monitor_state": "READY",
+      "primary": null,
+      "control_failure": null,
+      "init": {
+        "candidate": {
+          "ORT_init_ms": 25.0258999876678,
+          "startup_wall_ms": 9.209465980529785,
+          "startup_API_ms": 7.627431012224406,
+          "provider": [
+            "CPUExecutionProvider"
+          ],
+          "ORT_version": "1.30.0"
+        },
+        "reference": {
+          "ORT_init_ms": 30.474594997940585,
+          "startup_wall_ms": 4.694622993469238,
+          "startup_API_ms": 4.169521998846903,
+          "provider": [
+            "CPUExecutionProvider"
+          ],
+          "ORT_version": "1.30.0"
+        }
+      }
+    }
+  ],
+  "clock_erratum": {
+    "old_admit_stamp_before_legal_clone_cache": true,
+    "actual_adopt_completion_old16": "unknown",
+    "old_max_saved_stamp_ms": 401.99939700961113,
+    "samewall_clock_established": false,
+    "terminal_win_score_unchanged": true,
+    "reference_late_CP_not_adopted": 866733,
+    "all_late_CP_not_adopted": 866813,
+    "terminal_cancel_defect_reference_cleanup_s": 35.927620654881004,
+    "all_saved_stamps_le402_not_actual_completion_proof": true
+  },
+  "repair_NN0": {
+    "source_git": "a78ea8336edc84c9716fee8972c86d94200941b6",
+    "run": "native165-control-repair-r1",
+    "new_ORT_NN": 0,
+    "tape_evaluations": 320,
+    "CP_path_visits_ledger_to_original_exact": true,
+    "real_ORT_cancel_revalidated": false,
+    "new_adapter_samewall_measured": false,
+    "stop": "control-repair-stop.json"
+  },
+  "unmeasured_components": [
+    "isolated feature generation",
+    "legal generation and history replay",
+    "all-engine kernel CPU",
+    "exact CP Atomic/store time (native JSON IPC)",
+    "init transport vs ORT isolated decomposition"
+  ]
+}

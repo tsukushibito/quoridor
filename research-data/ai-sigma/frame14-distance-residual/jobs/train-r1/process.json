@@ -1,0 +1,34 @@
+{
+  "id": "train-r1",
+  "kind": "heavy",
+  "UTC": "2026-10-04T01:12:11.400576+00:00",
+  "identity": {
+    "pid": 3858086,
+    "ppid": 3858041,
+    "pgrp": 3858086,
+    "tick": "32928774",
+    "RSS": 0,
+    "cmd": "",
+    "affinity": [
+      2
+    ]
+  },
+  "command": [
+    "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "-B",
+    "tools/ai-sigma-qf1-distance-residual/run.py"
+  ],
+  "wall_seconds": 5.394997304014396,
+  "peak_family_RSS": 810754048,
+  "exit": 0,
+  "reason": "completed",
+  "child_waited": true,
+  "remaining": [],
+  "current_exact_identity_absent": true,
+  "samples_charged": 379921,
+  "sample_cap": 379921,
+  "CPU": [
+    2
+  ],
+  "GPU": 0
+}

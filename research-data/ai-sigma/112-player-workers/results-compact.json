@@ -1,0 +1,524 @@
+{
+  "issue": "quoridor-4lc.112",
+  "source_Git": "3682ab7b520024735e79e42eea79c982897c3957",
+  "ordinary_functional_requests": 7,
+  "games_started": 4,
+  "exploratory_WDL": {
+    "W": 2,
+    "D": 0,
+    "L": 2
+  },
+  "game_reasons": {
+    "goal": 4
+  },
+  "games": [
+    {
+      "id": "player-initial-color1",
+      "fixture_id": "initial-p1",
+      "candidate_color": 1,
+      "status": "terminal",
+      "winner": 2,
+      "reason": "goal",
+      "total_ply": 66
+    },
+    {
+      "id": "player-initial-color2",
+      "fixture_id": "initial-p1",
+      "candidate_color": 2,
+      "status": "terminal",
+      "winner": 2,
+      "reason": "goal",
+      "total_ply": 76
+    },
+    {
+      "id": "player-asym-color1",
+      "fixture_id": "asym-hv-p2",
+      "candidate_color": 1,
+      "status": "terminal",
+      "winner": 2,
+      "reason": "goal",
+      "total_ply": 76
+    },
+    {
+      "id": "player-asym-color2",
+      "fixture_id": "asym-hv-p2",
+      "candidate_color": 2,
+      "status": "terminal",
+      "winner": 2,
+      "reason": "goal",
+      "total_ply": 86
+    }
+  ],
+  "runs": [
+    {
+      "run": "p112-functional-r1",
+      "source_Git": "11c994c5cd7276524463ba49e6299d928e729c94",
+      "publics": 7,
+      "classes": {
+        "completed_legal": 6,
+        "cancel_null": 1
+      },
+      "public_max_ms": 432.204833984375,
+      "startup_NN": 6,
+      "hand_NN": 29,
+      "fixed_reference_roots": 4,
+      "dynamic_self_roots": 3,
+      "root_prior_gate_complete": 7,
+      "input_before_previous_opposite_ACK": 4,
+      "previous_APIawait_crosses_next_input_definite": 2,
+      "previous_APIawait_crosses_next_input_possible": 2,
+      "API_crossing_is_not_inner_kernel_or_CPU": true,
+      "retired_NN_results_discarded": 2,
+      "NN_started_after_public_definite": 0,
+      "NN_started_after_402_definite": 0,
+      "NN_started_after_402_possible": 0,
+      "Worker_stop": {
+        "upper_le_D": 6,
+        "lower_gt_D": 1
+      },
+      "ACKwall_gt500": 1,
+      "ACKwall_max_ms": 504.40478515625,
+      "own_wait_max_ms": 13.159912109375,
+      "immutable_all": true,
+      "primary": null,
+      "secondary": [],
+      "end_clocks": {
+        "candidate": {
+          "lo_ms": -0.099755859375,
+          "hi_ms": 0.11025390625,
+          "mid_ms": 0.0052490234375,
+          "error_ms": 0.2050048828125,
+          "measured": true,
+          "samples": [
+            {
+              "start_ms": 1790932347166.085,
+              "end_ms": 1790932347166.3398,
+              "worker_ms": 1790932347166.3
+            },
+            {
+              "start_ms": 1790932347166.3398,
+              "end_ms": 1790932347166.3699,
+              "worker_ms": 1790932347166.3652
+            },
+            {
+              "start_ms": 1790932347166.3699,
+              "end_ms": 1790932347166.39,
+              "worker_ms": 1790932347166.385
+            },
+            {
+              "start_ms": 1790932347166.39,
+              "end_ms": 1790932347166.4,
+              "worker_ms": 1790932347166.4001
+            },
+            {
+              "start_ms": 1790932347166.4,
+              "end_ms": 1790932347166.42,
+              "worker_ms": 1790932347166.4202
+            },
+            {
+              "start_ms": 1790932347166.42,
+              "end_ms": 1790932347166.4348,
+              "worker_ms": 1790932347166.4302
+            },
+            {
+              "start_ms": 1790932347166.4348,
+              "end_ms": 1790932347166.45,
+              "worker_ms": 1790932347166.445
+            },
+            {
+              "start_ms": 1790932347166.45,
+              "end_ms": 1790932347166.4648,
+              "worker_ms": 1790932347166.4602
+            }
+          ]
+        },
+        "reference": {
+          "lo_ms": -0.110009765625,
+          "hi_ms": 0.1,
+          "mid_ms": -0.0050048828125,
+          "error_ms": 0.2050048828125,
+          "measured": true,
+          "samples": [
+            {
+              "start_ms": 1790932347166.47,
+              "end_ms": 1790932347166.525,
+              "worker_ms": 1790932347166.5
+            },
+            {
+              "start_ms": 1790932347166.525,
+              "end_ms": 1790932347166.535,
+              "worker_ms": 1790932347166.525
+            },
+            {
+              "start_ms": 1790932347166.535,
+              "end_ms": 1790932347166.5698,
+              "worker_ms": 1790932347166.555
+            },
+            {
+              "start_ms": 1790932347166.5698,
+              "end_ms": 1790932347166.585,
+              "worker_ms": 1790932347166.575
+            },
+            {
+              "start_ms": 1790932347166.585,
+              "end_ms": 1790932347166.5999,
+              "worker_ms": 1790932347166.585
+            },
+            {
+              "start_ms": 1790932347166.5999,
+              "end_ms": 1790932347166.6199,
+              "worker_ms": 1790932347166.605
+            },
+            {
+              "start_ms": 1790932347166.6199,
+              "end_ms": 1790932347166.63,
+              "worker_ms": 1790932347166.6199
+            },
+            {
+              "start_ms": 1790932347166.63,
+              "end_ms": 1790932347166.645,
+              "worker_ms": 1790932347166.63
+            }
+          ]
+        }
+      },
+      "player_end_zero": null
+    },
+    {
+      "run": "p112-initial-pair-r1",
+      "source_Git": "3682ab7b520024735e79e42eea79c982897c3957",
+      "publics": 142,
+      "classes": {
+        "completed_legal": 142
+      },
+      "public_max_ms": 431.449951171875,
+      "startup_NN": 6,
+      "hand_NN": 605,
+      "fixed_reference_roots": 2,
+      "dynamic_self_roots": 140,
+      "root_prior_gate_complete": 142,
+      "input_before_previous_opposite_ACK": 112,
+      "previous_APIawait_crosses_next_input_definite": 103,
+      "previous_APIawait_crosses_next_input_possible": 103,
+      "API_crossing_is_not_inner_kernel_or_CPU": true,
+      "retired_NN_results_discarded": 103,
+      "NN_started_after_public_definite": 0,
+      "NN_started_after_402_definite": 0,
+      "NN_started_after_402_possible": 0,
+      "Worker_stop": {
+        "upper_le_D": 137,
+        "lower_gt_D": 5
+      },
+      "ACKwall_gt500": 5,
+      "ACKwall_max_ms": 524.9501953125,
+      "own_wait_max_ms": 0.005126953125,
+      "immutable_all": true,
+      "primary": null,
+      "secondary": [],
+      "end_clocks": {
+        "candidate": {
+          "lo_ms": -0.114892578125,
+          "hi_ms": 0.099755859375,
+          "mid_ms": -0.007568359375,
+          "error_ms": 0.20732421875,
+          "measured": true,
+          "samples": [
+            {
+              "start_ms": 1790932628631.4849,
+              "end_ms": 1790932628631.885,
+              "worker_ms": 1790932628631.8098
+            },
+            {
+              "start_ms": 1790932628631.885,
+              "end_ms": 1790932628631.915,
+              "worker_ms": 1790932628631.9
+            },
+            {
+              "start_ms": 1790932628631.915,
+              "end_ms": 1790932628631.93,
+              "worker_ms": 1790932628631.9148
+            },
+            {
+              "start_ms": 1790932628631.93,
+              "end_ms": 1790932628631.95,
+              "worker_ms": 1790932628631.9348
+            },
+            {
+              "start_ms": 1790932628631.95,
+              "end_ms": 1790932628631.9648,
+              "worker_ms": 1790932628631.95
+            },
+            {
+              "start_ms": 1790932628631.9648,
+              "end_ms": 1790932628631.98,
+              "worker_ms": 1790932628631.9648
+            },
+            {
+              "start_ms": 1790932628631.98,
+              "end_ms": 1790932628631.9949,
+              "worker_ms": 1790932628631.98
+            },
+            {
+              "start_ms": 1790932628631.9949,
+              "end_ms": 1790932628632.265,
+              "worker_ms": 1790932628631.9949
+            }
+          ]
+        },
+        "reference": {
+          "lo_ms": -0.1048828125,
+          "hi_ms": 0.1048828125,
+          "mid_ms": 0,
+          "error_ms": 0.2048828125,
+          "measured": true,
+          "samples": [
+            {
+              "start_ms": 1790932628632.275,
+              "end_ms": 1790932628632.4,
+              "worker_ms": 1790932628632.3699
+            },
+            {
+              "start_ms": 1790932628632.4,
+              "end_ms": 1790932628632.42,
+              "worker_ms": 1790932628632.4148
+            },
+            {
+              "start_ms": 1790932628632.42,
+              "end_ms": 1790932628632.435,
+              "worker_ms": 1790932628632.43
+            },
+            {
+              "start_ms": 1790932628632.435,
+              "end_ms": 1790932628632.45,
+              "worker_ms": 1790932628632.44
+            },
+            {
+              "start_ms": 1790932628632.45,
+              "end_ms": 1790932628632.4648,
+              "worker_ms": 1790932628632.46
+            },
+            {
+              "start_ms": 1790932628632.4648,
+              "end_ms": 1790932628632.48,
+              "worker_ms": 1790932628632.47
+            },
+            {
+              "start_ms": 1790932628632.48,
+              "end_ms": 1790932628632.49,
+              "worker_ms": 1790932628632.4849
+            },
+            {
+              "start_ms": 1790932628632.49,
+              "end_ms": 1790932628632.505,
+              "worker_ms": 1790932628632.4949
+            }
+          ]
+        }
+      },
+      "player_end_zero": [
+        {
+          "engine": "candidate",
+          "busy": false,
+          "last_ACK": {
+            "live_searches": 0,
+            "handles": 0,
+            "activeNN": 0,
+            "active": false,
+            "NN_attempts": 1,
+            "completed_NN": 1,
+            "at_ms": 1790932622811.9648,
+            "error": null
+          }
+        },
+        {
+          "engine": "reference",
+          "busy": false,
+          "last_ACK": {
+            "live_searches": 0,
+            "handles": 0,
+            "activeNN": 0,
+            "active": false,
+            "NN_attempts": 3,
+            "completed_NN": 3,
+            "at_ms": 1790932622399.2898,
+            "error": null
+          }
+        }
+      ]
+    },
+    {
+      "run": "p112-asym-pair-r1",
+      "source_Git": "3682ab7b520024735e79e42eea79c982897c3957",
+      "publics": 156,
+      "classes": {
+        "completed_legal": 156
+      },
+      "public_max_ms": 446.730224609375,
+      "startup_NN": 6,
+      "hand_NN": 627,
+      "fixed_reference_roots": 2,
+      "dynamic_self_roots": 154,
+      "root_prior_gate_complete": 156,
+      "input_before_previous_opposite_ACK": 120,
+      "previous_APIawait_crosses_next_input_definite": 107,
+      "previous_APIawait_crosses_next_input_possible": 107,
+      "API_crossing_is_not_inner_kernel_or_CPU": true,
+      "retired_NN_results_discarded": 108,
+      "NN_started_after_public_definite": 0,
+      "NN_started_after_402_definite": 0,
+      "NN_started_after_402_possible": 0,
+      "Worker_stop": {
+        "upper_le_D": 143,
+        "lower_gt_D": 13
+      },
+      "ACKwall_gt500": 13,
+      "ACKwall_max_ms": 533.565185546875,
+      "own_wait_max_ms": 0.02001953125,
+      "immutable_all": true,
+      "primary": null,
+      "secondary": [],
+      "end_clocks": {
+        "candidate": {
+          "lo_ms": -0.105126953125,
+          "hi_ms": 0.099755859375,
+          "mid_ms": -0.002685546875,
+          "error_ms": 0.20244140625,
+          "measured": true,
+          "samples": [
+            {
+              "start_ms": 1790932804779.435,
+              "end_ms": 1790932804779.975,
+              "worker_ms": 1790932804779.595
+            },
+            {
+              "start_ms": 1790932804779.975,
+              "end_ms": 1790932804780.01,
+              "worker_ms": 1790932804780
+            },
+            {
+              "start_ms": 1790932804780.01,
+              "end_ms": 1790932804780.0251,
+              "worker_ms": 1790932804780.02
+            },
+            {
+              "start_ms": 1790932804780.0251,
+              "end_ms": 1790932804780.04,
+              "worker_ms": 1790932804780.035
+            },
+            {
+              "start_ms": 1790932804780.0452,
+              "end_ms": 1790932804780.0552,
+              "worker_ms": 1790932804780.045
+            },
+            {
+              "start_ms": 1790932804780.0552,
+              "end_ms": 1790932804780.07,
+              "worker_ms": 1790932804780.06
+            },
+            {
+              "start_ms": 1790932804780.07,
+              "end_ms": 1790932804780.08,
+              "worker_ms": 1790932804780.075
+            },
+            {
+              "start_ms": 1790932804780.08,
+              "end_ms": 1790932804781.5652,
+              "worker_ms": 1790932804780.0898
+            }
+          ]
+        },
+        "reference": {
+          "lo_ms": -0.100244140625,
+          "hi_ms": 0.109765625,
+          "mid_ms": 0.0047607421875,
+          "error_ms": 0.2050048828125,
+          "measured": true,
+          "samples": [
+            {
+              "start_ms": 1790932804781.58,
+              "end_ms": 1790932804781.685,
+              "worker_ms": 1790932804781.6448
+            },
+            {
+              "start_ms": 1790932804781.685,
+              "end_ms": 1790932804781.705,
+              "worker_ms": 1790932804781.7
+            },
+            {
+              "start_ms": 1790932804781.705,
+              "end_ms": 1790932804781.72,
+              "worker_ms": 1790932804781.7148
+            },
+            {
+              "start_ms": 1790932804781.72,
+              "end_ms": 1790932804781.745,
+              "worker_ms": 1790932804781.7449
+            },
+            {
+              "start_ms": 1790932804781.745,
+              "end_ms": 1790932804781.7751,
+              "worker_ms": 1790932804781.7698
+            },
+            {
+              "start_ms": 1790932804781.7751,
+              "end_ms": 1790932804781.7852,
+              "worker_ms": 1790932804781.785
+            },
+            {
+              "start_ms": 1790932804781.7852,
+              "end_ms": 1790932804781.8,
+              "worker_ms": 1790932804781.7998
+            },
+            {
+              "start_ms": 1790932804781.8,
+              "end_ms": 1790932804781.8152,
+              "worker_ms": 1790932804781.815
+            }
+          ]
+        }
+      },
+      "player_end_zero": [
+        {
+          "engine": "candidate",
+          "busy": false,
+          "last_ACK": {
+            "live_searches": 0,
+            "handles": 0,
+            "activeNN": 0,
+            "active": false,
+            "NN_attempts": 1,
+            "completed_NN": 1,
+            "at_ms": 1790932796887.2048,
+            "error": null
+          }
+        },
+        {
+          "engine": "reference",
+          "busy": false,
+          "last_ACK": {
+            "live_searches": 0,
+            "handles": 0,
+            "activeNN": 0,
+            "active": false,
+            "NN_attempts": 2,
+            "completed_NN": 2,
+            "at_ms": 1790932796467.335,
+            "error": null
+          }
+        }
+      ]
+    }
+  ],
+  "startup_NN": 18,
+  "hand_NN": 1261,
+  "actual_NN_total": 1279,
+  "formal_NI_Sigma_actualgo": false,
+  "old_single_worker_WDL_merged": false,
+  "limits": [
+    "functional-r1 ACK_known flag was captured after public; immutable raw retained, actual t0 vs ACK comparison separately valid",
+    "new pair version captures ACK flag at input",
+    "same CPU2 workers may contend while earlier NN returns; crossing spans not kernel execution",
+    "start/end clock bounds sampled, intermediate drift/hard real-time unproven",
+    "full-depth NN/model generality unproven"
+  ]
+}

@@ -1,0 +1,1766 @@
+{
+  "issue": "quoridor-4lc.35",
+  "trial": 1,
+  "contract": 1,
+  "contract_SHA": "714e1d14ed4bd547097ea7cf6906ea6120d3900a38132fe715848c026f51de36",
+  "goal_version": 2,
+  "global_deadline": "04:00UTC",
+  "conservative_start": "2026-10-01T03:22:29Z",
+  "first_observed": "03:25:18Z",
+  "fixed34_manifest_SHA": "b060a4b2c03fd0c97b4b1e3c066ff5fc477e555e98b82ec915a96921866bec3c",
+  "controlWasm_SHA": "1f54d0b8f0c6d3d7d51935886ed506e44376a2052506be62ca7a726c85a78a01",
+  "candidateWasm_SHA": "8438310cf8f7d096bd84364a03b97f99f737ca0a9be6c2812a7ecdee3d92d9dd",
+  "fixed_ONNX_SHA": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+  "reference_commit": "751186344fc52ad0c29bc65922e62c6fa915f006",
+  "inputs_before_after_unchanged": 128,
+  "writer_IDs_absent": 39,
+  "arithmetic": {
+    "source_C_only": true,
+    "lib_research_lock_exact": true,
+    "rows": 80,
+    "pairs": 40,
+    "selection_f32_observed_agreement": 4382,
+    "backup_f32_observed_bits": 4382,
+    "NN_calls": 1444,
+    "terminal_searches_NN0": 4,
+    "features_bits": 25920,
+    "NN_elements": 5480,
+    "priors": 4634,
+    "NNmaxabs": 5.4836273193359375e-06,
+    "priormaxabs": 6.020069122314453e-06,
+    "numeric_gate": "abs1e-4+rtol1e-4",
+    "flips": [
+      {
+        "id": "straight-jump-p2",
+        "sims": 32,
+        "actions": [
+          31,
+          131
+        ],
+        "changed": true,
+        "L1": 14,
+        "nodes": [
+          32,
+          32
+        ],
+        "depth": [
+          5,
+          3
+        ],
+        "calls": [
+          32,
+          32
+        ],
+        "shared_NN_inputs": 24,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          32,
+          32
+        ],
+        "edge_totals": [
+          31,
+          31
+        ]
+      },
+      {
+        "id": "behind-wall-diagonal-p2",
+        "sims": 8,
+        "actions": [
+          123,
+          181
+        ],
+        "changed": true,
+        "L1": 4,
+        "nodes": [
+          8,
+          8
+        ],
+        "depth": [
+          2,
+          2
+        ],
+        "calls": [
+          8,
+          8
+        ],
+        "shared_NN_inputs": 6,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          8,
+          8
+        ],
+        "edge_totals": [
+          7,
+          7
+        ]
+      },
+      {
+        "id": "one-wall-in-hand",
+        "sims": 32,
+        "actions": [
+          5,
+          13
+        ],
+        "changed": true,
+        "L1": 16,
+        "nodes": [
+          32,
+          32
+        ],
+        "depth": [
+          7,
+          3
+        ],
+        "calls": [
+          32,
+          32
+        ],
+        "shared_NN_inputs": 24,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          32,
+          32
+        ],
+        "edge_totals": [
+          31,
+          31
+        ]
+      }
+    ],
+    "action_flips": 3,
+    "visit_changes": 20,
+    "by_sims": [
+      {
+        "sims": 8,
+        "flips": 1,
+        "visit_changes": 7
+      },
+      {
+        "sims": 32,
+        "flips": 2,
+        "visit_changes": 13
+      }
+    ],
+    "pair_results": [
+      {
+        "id": "initial-p1",
+        "sims": 8,
+        "actions": [
+          13,
+          13
+        ],
+        "changed": false,
+        "L1": 0,
+        "nodes": [
+          8,
+          8
+        ],
+        "depth": [
+          5,
+          6
+        ],
+        "calls": [
+          8,
+          8
+        ],
+        "shared_NN_inputs": 7,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          8,
+          8
+        ],
+        "edge_totals": [
+          7,
+          7
+        ]
+      },
+      {
+        "id": "initial-p1",
+        "sims": 32,
+        "actions": [
+          13,
+          13
+        ],
+        "changed": false,
+        "L1": 0,
+        "nodes": [
+          32,
+          32
+        ],
+        "depth": [
+          8,
+          8
+        ],
+        "calls": [
+          32,
+          32
+        ],
+        "shared_NN_inputs": 25,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          32,
+          32
+        ],
+        "edge_totals": [
+          31,
+          31
+        ]
+      },
+      {
+        "id": "initial-p2",
+        "sims": 8,
+        "actions": [
+          67,
+          67
+        ],
+        "changed": false,
+        "L1": 0,
+        "nodes": [
+          8,
+          8
+        ],
+        "depth": [
+          5,
+          5
+        ],
+        "calls": [
+          8,
+          8
+        ],
+        "shared_NN_inputs": 8,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          8,
+          8
+        ],
+        "edge_totals": [
+          7,
+          7
+        ]
+      },
+      {
+        "id": "initial-p2",
+        "sims": 32,
+        "actions": [
+          67,
+          67
+        ],
+        "changed": false,
+        "L1": 14,
+        "nodes": [
+          32,
+          32
+        ],
+        "depth": [
+          7,
+          7
+        ],
+        "calls": [
+          32,
+          32
+        ],
+        "shared_NN_inputs": 25,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          32,
+          32
+        ],
+        "edge_totals": [
+          31,
+          31
+        ]
+      },
+      {
+        "id": "asym-h-p2",
+        "sims": 8,
+        "actions": [
+          67,
+          67
+        ],
+        "changed": false,
+        "L1": 2,
+        "nodes": [
+          8,
+          8
+        ],
+        "depth": [
+          6,
+          7
+        ],
+        "calls": [
+          8,
+          8
+        ],
+        "shared_NN_inputs": 7,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          8,
+          8
+        ],
+        "edge_totals": [
+          7,
+          7
+        ]
+      },
+      {
+        "id": "asym-h-p2",
+        "sims": 32,
+        "actions": [
+          67,
+          67
+        ],
+        "changed": false,
+        "L1": 4,
+        "nodes": [
+          32,
+          32
+        ],
+        "depth": [
+          8,
+          8
+        ],
+        "calls": [
+          32,
+          32
+        ],
+        "shared_NN_inputs": 24,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          32,
+          32
+        ],
+        "edge_totals": [
+          31,
+          31
+        ]
+      },
+      {
+        "id": "asym-hv-p1",
+        "sims": 8,
+        "actions": [
+          13,
+          13
+        ],
+        "changed": false,
+        "L1": 0,
+        "nodes": [
+          8,
+          8
+        ],
+        "depth": [
+          7,
+          7
+        ],
+        "calls": [
+          8,
+          8
+        ],
+        "shared_NN_inputs": 8,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          8,
+          8
+        ],
+        "edge_totals": [
+          7,
+          7
+        ]
+      },
+      {
+        "id": "asym-hv-p1",
+        "sims": 32,
+        "actions": [
+          13,
+          13
+        ],
+        "changed": false,
+        "L1": 14,
+        "nodes": [
+          32,
+          32
+        ],
+        "depth": [
+          8,
+          7
+        ],
+        "calls": [
+          32,
+          32
+        ],
+        "shared_NN_inputs": 25,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          32,
+          32
+        ],
+        "edge_totals": [
+          31,
+          31
+        ]
+      },
+      {
+        "id": "asym-hv-p2",
+        "sims": 8,
+        "actions": [
+          67,
+          67
+        ],
+        "changed": false,
+        "L1": 0,
+        "nodes": [
+          8,
+          8
+        ],
+        "depth": [
+          6,
+          6
+        ],
+        "calls": [
+          8,
+          8
+        ],
+        "shared_NN_inputs": 8,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          8,
+          8
+        ],
+        "edge_totals": [
+          7,
+          7
+        ]
+      },
+      {
+        "id": "asym-hv-p2",
+        "sims": 32,
+        "actions": [
+          67,
+          67
+        ],
+        "changed": false,
+        "L1": 4,
+        "nodes": [
+          32,
+          32
+        ],
+        "depth": [
+          7,
+          6
+        ],
+        "calls": [
+          32,
+          32
+        ],
+        "shared_NN_inputs": 27,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          32,
+          32
+        ],
+        "edge_totals": [
+          31,
+          31
+        ]
+      },
+      {
+        "id": "straight-jump-p2",
+        "sims": 8,
+        "actions": [
+          129,
+          129
+        ],
+        "changed": false,
+        "L1": 2,
+        "nodes": [
+          8,
+          8
+        ],
+        "depth": [
+          2,
+          2
+        ],
+        "calls": [
+          8,
+          8
+        ],
+        "shared_NN_inputs": 7,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          8,
+          8
+        ],
+        "edge_totals": [
+          7,
+          7
+        ]
+      },
+      {
+        "id": "straight-jump-p2",
+        "sims": 32,
+        "actions": [
+          31,
+          131
+        ],
+        "changed": true,
+        "L1": 14,
+        "nodes": [
+          32,
+          32
+        ],
+        "depth": [
+          5,
+          3
+        ],
+        "calls": [
+          32,
+          32
+        ],
+        "shared_NN_inputs": 24,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          32,
+          32
+        ],
+        "edge_totals": [
+          31,
+          31
+        ]
+      },
+      {
+        "id": "behind-wall-diagonal-p2",
+        "sims": 8,
+        "actions": [
+          123,
+          181
+        ],
+        "changed": true,
+        "L1": 4,
+        "nodes": [
+          8,
+          8
+        ],
+        "depth": [
+          2,
+          2
+        ],
+        "calls": [
+          8,
+          8
+        ],
+        "shared_NN_inputs": 6,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          8,
+          8
+        ],
+        "edge_totals": [
+          7,
+          7
+        ]
+      },
+      {
+        "id": "behind-wall-diagonal-p2",
+        "sims": 32,
+        "actions": [
+          127,
+          127
+        ],
+        "changed": false,
+        "L1": 2,
+        "nodes": [
+          32,
+          32
+        ],
+        "depth": [
+          5,
+          5
+        ],
+        "calls": [
+          32,
+          32
+        ],
+        "shared_NN_inputs": 30,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          32,
+          32
+        ],
+        "edge_totals": [
+          31,
+          31
+        ]
+      },
+      {
+        "id": "adjacent-wall-blocked",
+        "sims": 8,
+        "actions": [
+          131,
+          131
+        ],
+        "changed": false,
+        "L1": 0,
+        "nodes": [
+          8,
+          8
+        ],
+        "depth": [
+          2,
+          2
+        ],
+        "calls": [
+          8,
+          8
+        ],
+        "shared_NN_inputs": 8,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          8,
+          8
+        ],
+        "edge_totals": [
+          7,
+          7
+        ]
+      },
+      {
+        "id": "adjacent-wall-blocked",
+        "sims": 32,
+        "actions": [
+          131,
+          131
+        ],
+        "changed": false,
+        "L1": 8,
+        "nodes": [
+          32,
+          32
+        ],
+        "depth": [
+          4,
+          4
+        ],
+        "calls": [
+          32,
+          32
+        ],
+        "shared_NN_inputs": 28,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          32,
+          32
+        ],
+        "edge_totals": [
+          31,
+          31
+        ]
+      },
+      {
+        "id": "board-edge-diagonal-p2",
+        "sims": 8,
+        "actions": [
+          5,
+          5
+        ],
+        "changed": false,
+        "L1": 0,
+        "nodes": [
+          2,
+          2
+        ],
+        "depth": [
+          1,
+          1
+        ],
+        "calls": [
+          1,
+          1
+        ],
+        "shared_NN_inputs": 1,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          8,
+          8
+        ],
+        "edge_totals": [
+          7,
+          7
+        ]
+      },
+      {
+        "id": "board-edge-diagonal-p2",
+        "sims": 32,
+        "actions": [
+          5,
+          5
+        ],
+        "changed": false,
+        "L1": 0,
+        "nodes": [
+          2,
+          2
+        ],
+        "depth": [
+          1,
+          1
+        ],
+        "calls": [
+          1,
+          1
+        ],
+        "shared_NN_inputs": 1,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          32,
+          32
+        ],
+        "edge_totals": [
+          31,
+          31
+        ]
+      },
+      {
+        "id": "repeat-before-first-return",
+        "sims": 8,
+        "actions": [
+          58,
+          58
+        ],
+        "changed": false,
+        "L1": 2,
+        "nodes": [
+          8,
+          8
+        ],
+        "depth": [
+          5,
+          5
+        ],
+        "calls": [
+          8,
+          8
+        ],
+        "shared_NN_inputs": 7,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          8,
+          8
+        ],
+        "edge_totals": [
+          7,
+          7
+        ]
+      },
+      {
+        "id": "repeat-before-first-return",
+        "sims": 32,
+        "actions": [
+          58,
+          58
+        ],
+        "changed": false,
+        "L1": 4,
+        "nodes": [
+          32,
+          32
+        ],
+        "depth": [
+          7,
+          7
+        ],
+        "calls": [
+          32,
+          32
+        ],
+        "shared_NN_inputs": 22,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          32,
+          32
+        ],
+        "edge_totals": [
+          31,
+          31
+        ]
+      },
+      {
+        "id": "repeat-initial-count2",
+        "sims": 8,
+        "actions": [
+          13,
+          13
+        ],
+        "changed": false,
+        "L1": 0,
+        "nodes": [
+          8,
+          8
+        ],
+        "depth": [
+          5,
+          6
+        ],
+        "calls": [
+          8,
+          8
+        ],
+        "shared_NN_inputs": 7,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          8,
+          8
+        ],
+        "edge_totals": [
+          7,
+          7
+        ]
+      },
+      {
+        "id": "repeat-initial-count2",
+        "sims": 32,
+        "actions": [
+          13,
+          13
+        ],
+        "changed": false,
+        "L1": 0,
+        "nodes": [
+          32,
+          32
+        ],
+        "depth": [
+          8,
+          8
+        ],
+        "calls": [
+          32,
+          32
+        ],
+        "shared_NN_inputs": 25,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          32,
+          32
+        ],
+        "edge_totals": [
+          31,
+          31
+        ]
+      },
+      {
+        "id": "repeat-before-third-return",
+        "sims": 8,
+        "actions": [
+          58,
+          58
+        ],
+        "changed": false,
+        "L1": 2,
+        "nodes": [
+          8,
+          8
+        ],
+        "depth": [
+          5,
+          5
+        ],
+        "calls": [
+          8,
+          8
+        ],
+        "shared_NN_inputs": 7,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          8,
+          8
+        ],
+        "edge_totals": [
+          7,
+          7
+        ]
+      },
+      {
+        "id": "repeat-before-third-return",
+        "sims": 32,
+        "actions": [
+          58,
+          58
+        ],
+        "changed": false,
+        "L1": 4,
+        "nodes": [
+          32,
+          32
+        ],
+        "depth": [
+          7,
+          7
+        ],
+        "calls": [
+          32,
+          32
+        ],
+        "shared_NN_inputs": 22,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          32,
+          32
+        ],
+        "edge_totals": [
+          31,
+          31
+        ]
+      },
+      {
+        "id": "sibling-a-after-cycle",
+        "sims": 8,
+        "actions": [
+          67,
+          67
+        ],
+        "changed": false,
+        "L1": 0,
+        "nodes": [
+          8,
+          8
+        ],
+        "depth": [
+          5,
+          5
+        ],
+        "calls": [
+          8,
+          8
+        ],
+        "shared_NN_inputs": 8,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          8,
+          8
+        ],
+        "edge_totals": [
+          7,
+          7
+        ]
+      },
+      {
+        "id": "sibling-a-after-cycle",
+        "sims": 32,
+        "actions": [
+          67,
+          67
+        ],
+        "changed": false,
+        "L1": 14,
+        "nodes": [
+          32,
+          32
+        ],
+        "depth": [
+          7,
+          7
+        ],
+        "calls": [
+          32,
+          32
+        ],
+        "shared_NN_inputs": 25,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          32,
+          32
+        ],
+        "edge_totals": [
+          31,
+          31
+        ]
+      },
+      {
+        "id": "sibling-b-after-cycle",
+        "sims": 8,
+        "actions": [
+          67,
+          67
+        ],
+        "changed": false,
+        "L1": 0,
+        "nodes": [
+          8,
+          8
+        ],
+        "depth": [
+          5,
+          5
+        ],
+        "calls": [
+          8,
+          8
+        ],
+        "shared_NN_inputs": 7,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          8,
+          8
+        ],
+        "edge_totals": [
+          7,
+          7
+        ]
+      },
+      {
+        "id": "sibling-b-after-cycle",
+        "sims": 32,
+        "actions": [
+          67,
+          67
+        ],
+        "changed": false,
+        "L1": 2,
+        "nodes": [
+          32,
+          32
+        ],
+        "depth": [
+          7,
+          7
+        ],
+        "calls": [
+          32,
+          32
+        ],
+        "shared_NN_inputs": 25,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          32,
+          32
+        ],
+        "edge_totals": [
+          31,
+          31
+        ]
+      },
+      {
+        "id": "sibling-root-restored",
+        "sims": 8,
+        "actions": [
+          13,
+          13
+        ],
+        "changed": false,
+        "L1": 0,
+        "nodes": [
+          8,
+          8
+        ],
+        "depth": [
+          5,
+          6
+        ],
+        "calls": [
+          8,
+          8
+        ],
+        "shared_NN_inputs": 7,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          8,
+          8
+        ],
+        "edge_totals": [
+          7,
+          7
+        ]
+      },
+      {
+        "id": "sibling-root-restored",
+        "sims": 32,
+        "actions": [
+          13,
+          13
+        ],
+        "changed": false,
+        "L1": 0,
+        "nodes": [
+          32,
+          32
+        ],
+        "depth": [
+          8,
+          8
+        ],
+        "calls": [
+          32,
+          32
+        ],
+        "shared_NN_inputs": 25,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          32,
+          32
+        ],
+        "edge_totals": [
+          31,
+          31
+        ]
+      },
+      {
+        "id": "reachability-closure-forbidden",
+        "sims": 8,
+        "actions": [
+          13,
+          13
+        ],
+        "changed": false,
+        "L1": 0,
+        "nodes": [
+          8,
+          8
+        ],
+        "depth": [
+          7,
+          7
+        ],
+        "calls": [
+          8,
+          8
+        ],
+        "shared_NN_inputs": 8,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          8,
+          8
+        ],
+        "edge_totals": [
+          7,
+          7
+        ]
+      },
+      {
+        "id": "reachability-closure-forbidden",
+        "sims": 32,
+        "actions": [
+          13,
+          13
+        ],
+        "changed": false,
+        "L1": 0,
+        "nodes": [
+          32,
+          32
+        ],
+        "depth": [
+          9,
+          9
+        ],
+        "calls": [
+          32,
+          32
+        ],
+        "shared_NN_inputs": 27,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          32,
+          32
+        ],
+        "edge_totals": [
+          31,
+          31
+        ]
+      },
+      {
+        "id": "all-walls-spent",
+        "sims": 8,
+        "actions": [
+          13,
+          13
+        ],
+        "changed": false,
+        "L1": 4,
+        "nodes": [
+          8,
+          8
+        ],
+        "depth": [
+          3,
+          4
+        ],
+        "calls": [
+          8,
+          8
+        ],
+        "shared_NN_inputs": 6,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          8,
+          8
+        ],
+        "edge_totals": [
+          7,
+          7
+        ]
+      },
+      {
+        "id": "all-walls-spent",
+        "sims": 32,
+        "actions": [
+          13,
+          13
+        ],
+        "changed": false,
+        "L1": 2,
+        "nodes": [
+          32,
+          32
+        ],
+        "depth": [
+          7,
+          7
+        ],
+        "calls": [
+          32,
+          32
+        ],
+        "shared_NN_inputs": 31,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          32,
+          32
+        ],
+        "edge_totals": [
+          31,
+          31
+        ]
+      },
+      {
+        "id": "one-wall-in-hand",
+        "sims": 8,
+        "actions": [
+          13,
+          13
+        ],
+        "changed": false,
+        "L1": 8,
+        "nodes": [
+          8,
+          8
+        ],
+        "depth": [
+          3,
+          1
+        ],
+        "calls": [
+          8,
+          8
+        ],
+        "shared_NN_inputs": 4,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          8,
+          8
+        ],
+        "edge_totals": [
+          7,
+          7
+        ]
+      },
+      {
+        "id": "one-wall-in-hand",
+        "sims": 32,
+        "actions": [
+          5,
+          13
+        ],
+        "changed": true,
+        "L1": 16,
+        "nodes": [
+          32,
+          32
+        ],
+        "depth": [
+          7,
+          3
+        ],
+        "calls": [
+          32,
+          32
+        ],
+        "shared_NN_inputs": 24,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          32,
+          32
+        ],
+        "edge_totals": [
+          31,
+          31
+        ]
+      },
+      {
+        "id": "goal-before-last-step",
+        "sims": 8,
+        "actions": [
+          125,
+          125
+        ],
+        "changed": false,
+        "L1": 0,
+        "nodes": [
+          8,
+          8
+        ],
+        "depth": [
+          2,
+          2
+        ],
+        "calls": [
+          8,
+          8
+        ],
+        "shared_NN_inputs": 8,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          8,
+          8
+        ],
+        "edge_totals": [
+          7,
+          7
+        ]
+      },
+      {
+        "id": "goal-before-last-step",
+        "sims": 32,
+        "actions": [
+          125,
+          125
+        ],
+        "changed": false,
+        "L1": 0,
+        "nodes": [
+          32,
+          32
+        ],
+        "depth": [
+          3,
+          2
+        ],
+        "calls": [
+          32,
+          32
+        ],
+        "shared_NN_inputs": 31,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          32,
+          32
+        ],
+        "edge_totals": [
+          31,
+          31
+        ]
+      },
+      {
+        "id": "goal-win-legal-replay",
+        "sims": 8,
+        "actions": [
+          null,
+          null
+        ],
+        "changed": false,
+        "L1": 0,
+        "nodes": [
+          1,
+          1
+        ],
+        "depth": [
+          0,
+          0
+        ],
+        "calls": [
+          0,
+          0
+        ],
+        "shared_NN_inputs": 0,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          0,
+          0
+        ],
+        "edge_totals": [
+          0,
+          0
+        ]
+      },
+      {
+        "id": "goal-win-legal-replay",
+        "sims": 32,
+        "actions": [
+          null,
+          null
+        ],
+        "changed": false,
+        "L1": 0,
+        "nodes": [
+          1,
+          1
+        ],
+        "depth": [
+          0,
+          0
+        ],
+        "calls": [
+          0,
+          0
+        ],
+        "shared_NN_inputs": 0,
+        "shared_NN_max_abs": 0,
+        "root_visits": [
+          0,
+          0
+        ],
+        "edge_totals": [
+          0,
+          0
+        ]
+      }
+    ],
+    "f32_scope": "explicit IEEE float32 rounding, observed agreement only; host sqrt double→float32 not universal native f32 proof",
+    "strength_direction": "undetermined"
+  },
+  "State_runtime": {
+    "nodes": 1452,
+    "transitions": 1372,
+    "terminal_nodes": 8,
+    "NNfeatures": 1444,
+    "first_root_requests": 76,
+    "normalizations": [
+      "generation",
+      "token",
+      "nn_ms"
+    ],
+    "runtime": [
+      {
+        "id": "straight-jump-p2",
+        "C": 1.5,
+        "sims": 32,
+        "action": 31,
+        "trace_length": 32,
+        "exact_cp_visits_tree_trace_excluding_generation_token_timing": true
+      },
+      {
+        "id": "straight-jump-p2",
+        "C": 1,
+        "sims": 32,
+        "action": 131,
+        "trace_length": 32,
+        "exact_cp_visits_tree_trace_excluding_generation_token_timing": true
+      },
+      {
+        "id": "behind-wall-diagonal-p2",
+        "C": 1.5,
+        "sims": 8,
+        "action": 123,
+        "trace_length": 8,
+        "exact_cp_visits_tree_trace_excluding_generation_token_timing": true
+      },
+      {
+        "id": "behind-wall-diagonal-p2",
+        "C": 1,
+        "sims": 8,
+        "action": 181,
+        "trace_length": 8,
+        "exact_cp_visits_tree_trace_excluding_generation_token_timing": true
+      }
+    ],
+    "all_node_history_legal_feature_P2_and_child_roundtrip_observed": true,
+    "full_genuine200_no_legal_deep_fulfillment": false
+  },
+  "runtime_models_threads": [
+    {
+      "digest": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+      "threads": 1,
+      "proxy": false,
+      "version": {
+        "common": "1.21.0",
+        "web": "1.21.0"
+      }
+    },
+    {
+      "digest": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+      "threads": 1,
+      "proxy": false,
+      "version": {
+        "common": "1.21.0",
+        "web": "1.21.0"
+      }
+    }
+  ],
+  "stop": {
+    "UTC": "2026-10-01T03:31:12.277109+00:00",
+    "last_NN_runtime_end": "2026-10-01T03:27:13.904858+00:00",
+    "tracked_identities": 12,
+    "remaining": [],
+    "remaining_count": 0,
+    "all_tracked_PID0": true,
+    "reason": "fixed4 runtime and all80 independent checks finished; no next runtime",
+    "runtime_cutoff": "03:35Z",
+    "processing_stop": "03:40Z",
+    "report_stop": "03:45Z",
+    "new_build_download_matches": 0,
+    "other_kills": 0
+  },
+  "resources": {
+    "peak_sampled_RSS_plus_runner": 2265300992,
+    "guard_RSS": 2684354560,
+    "new_artifacts_bytes": 1050093,
+    "guard_storage": 58720256,
+    "CPU_static": [
+      0
+    ],
+    "CPU_runtime": [
+      2
+    ],
+    "all_observed_TIDs_match": true,
+    "tracked_CPU_seconds_lowerbound": 9.17,
+    "jobs": [
+      {
+        "name": "fixed4-runtime",
+        "cmd": [
+          "node",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-PUCT-FACTOR/stage/factor-browser.cjs"
+        ],
+        "start": "2026-10-01T03:27:04.825989+00:00",
+        "end": "2026-10-01T03:27:13.904858+00:00",
+        "exit": 0,
+        "stop_reason": null,
+        "affinity": [
+          2
+        ],
+        "peak_group_plus_runner_rss_bytes": 2265300992,
+        "tracked_processes": [
+          {
+            "pid": 866075,
+            "start_ticks": 7811764,
+            "pgid": 866075,
+            "maxrss_bytes": 504975360,
+            "max_cpu_ticks": 170,
+            "max_threads": 11,
+            "affinities": [
+              [
+                2
+              ]
+            ]
+          },
+          {
+            "pid": 866088,
+            "start_ticks": 7811819,
+            "pgid": 866088,
+            "maxrss_bytes": 307695616,
+            "max_cpu_ticks": 86,
+            "max_threads": 34,
+            "affinities": [
+              [
+                2
+              ]
+            ]
+          },
+          {
+            "pid": 866096,
+            "start_ticks": 7811870,
+            "pgid": 866088,
+            "maxrss_bytes": 68583424,
+            "max_cpu_ticks": 1,
+            "max_threads": 1,
+            "affinities": [
+              [
+                2
+              ]
+            ]
+          },
+          {
+            "pid": 866095,
+            "start_ticks": 7811870,
+            "pgid": 866088,
+            "maxrss_bytes": 68546560,
+            "max_cpu_ticks": 1,
+            "max_threads": 1,
+            "affinities": [
+              [
+                2
+              ]
+            ]
+          },
+          {
+            "pid": 866119,
+            "start_ticks": 7811891,
+            "pgid": 866088,
+            "maxrss_bytes": 65806336,
+            "max_cpu_ticks": 1,
+            "max_threads": 8,
+            "affinities": [
+              [
+                2
+              ]
+            ]
+          },
+          {
+            "pid": 866129,
+            "start_ticks": 7811892,
+            "pgid": 866088,
+            "maxrss_bytes": 116355072,
+            "max_cpu_ticks": 7,
+            "max_threads": 9,
+            "affinities": [
+              [
+                2
+              ]
+            ]
+          },
+          {
+            "pid": 866139,
+            "start_ticks": 7811899,
+            "pgid": 866088,
+            "maxrss_bytes": 49197056,
+            "max_cpu_ticks": 0,
+            "max_threads": 8,
+            "affinities": [
+              [
+                2
+              ]
+            ]
+          },
+          {
+            "pid": 866161,
+            "start_ticks": 7811928,
+            "pgid": 866088,
+            "maxrss_bytes": 136384512,
+            "max_cpu_ticks": 17,
+            "max_threads": 12,
+            "affinities": [
+              [
+                2
+              ]
+            ]
+          },
+          {
+            "pid": 866168,
+            "start_ticks": 7811934,
+            "pgid": 866088,
+            "maxrss_bytes": 68567040,
+            "max_cpu_ticks": 0,
+            "max_threads": 9,
+            "affinities": [
+              [
+                2
+              ]
+            ]
+          },
+          {
+            "pid": 866170,
+            "start_ticks": 7811934,
+            "pgid": 866088,
+            "maxrss_bytes": 442216448,
+            "max_cpu_ticks": 437,
+            "max_threads": 13,
+            "affinities": [
+              [
+                2
+              ]
+            ]
+          }
+        ],
+        "remaining_pids": []
+      },
+      {
+        "name": "independent-state",
+        "cmd": [
+          "node",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-PUCT-FACTOR/stage/independent-state.cjs"
+        ],
+        "start": "2026-10-01T03:29:58.919227+00:00",
+        "end": "2026-10-01T03:29:59.719080+00:00",
+        "exit": 0,
+        "stop_reason": null,
+        "affinity": [
+          0
+        ],
+        "peak_group_plus_runner_rss_bytes": 737488896,
+        "tracked_processes": [
+          {
+            "pid": 866956,
+            "start_ticks": 7829180,
+            "pgid": 866956,
+            "maxrss_bytes": 174071808,
+            "max_cpu_ticks": 72,
+            "max_threads": 7,
+            "affinities": [
+              [
+                0
+              ]
+            ]
+          }
+        ],
+        "remaining_pids": []
+      },
+      {
+        "name": "independent-arithmetic",
+        "cmd": [
+          "python3",
+          "-B",
+          "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/verification/CRITIC-PUCT-FACTOR/stage/independent-arithmetic.py"
+        ],
+        "start": "2026-10-01T03:28:54.879534+00:00",
+        "end": "2026-10-01T03:28:56.247396+00:00",
+        "exit": 0,
+        "stop_reason": null,
+        "affinity": [
+          0
+        ],
+        "peak_group_plus_runner_rss_bytes": 655822848,
+        "tracked_processes": [
+          {
+            "pid": 866665,
+            "start_ticks": 7822774,
+            "pgid": 866665,
+            "maxrss_bytes": 92405760,
+            "max_cpu_ticks": 125,
+            "max_threads": 1,
+            "affinities": [
+              [
+                0
+              ]
+            ]
+          }
+        ],
+        "remaining_pids": []
+      }
+    ]
+  },
+  "independent_checker_retries": 0,
+  "self_failures": [
+    "initial attempted nonexistent source-final/browser.cjs read; discovered canonical tools/jobsource; read-only no execution or mutation"
+  ],
+  "scope_support": [
+    "source C1.5->1.0 only, lib/research/lock samebytes",
+    "fixed20 legal/80 search/40pair numeric/State/selection-backup-finish observed behavior",
+    "four representative immutable Chromium/ORT runtime exact observed traces after identity-time normalization"
+  ],
+  "not_supported": [
+    "C direction improvement, H2 all alternatives, strength/NI, formal speed/adoption",
+    "general cross-target f32 sqrt proof; explicit rounding agrees in observed cases",
+    "deep allhistory/true legal200/no-legal/arena OOM/tail/entropy/generalrawview/fullprovenance/distribution/training overlap",
+    "ordinary constructor runtime/control native retests not run here"
+  ],
+  "old_negatives": [
+    "cache.global-cache57344B update with beforehash missing is readonly deviation, not erased",
+    "first Content-Type NN-before failure + repaired runtime kept",
+    "producer checker history scope failure + repair kept",
+    "old31 limited acceptance/old39 stamp/oldGUARD4/A102.9>g91 and32rawNI unproven",
+    "ORTentry32/33 incomplete/no-go, new20games0; m/conditions/budget unchanged"
+  ],
+  "next": "coordinator may accept finite H2 behavior; no game or source modification by critic; further effect test requires separate contract",
+  "report_characters": 1535,
+  "report_draft_length_guard_rejections": 2,
+  "report_draft_length_guard_effect": "no file writes or runtime; final report1535chars",
+  "write_stop_UTC": "2026-10-01T03:36:04.274871+00:00",
+  "report_deadline_met": true
+}

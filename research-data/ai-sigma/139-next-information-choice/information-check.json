@@ -1,0 +1,265 @@
+{
+  "issue": "quoridor-4lc.139",
+  "run": "information139-r3",
+  "UTC": "2026-10-02T18:21:18.557506+00:00",
+  "samples": [
+    {
+      "id": "warm",
+      "warm": true,
+      "adoptedK": 8,
+      "Action": 154,
+      "API_median": 36.62988,
+      "action_change_points": [
+        {
+          "K": 2,
+          "before": 40,
+          "after": 162
+        },
+        {
+          "K": 8,
+          "before": 162,
+          "after": 154
+        }
+      ],
+      "clock_wait_not_CPU": true
+    },
+    {
+      "id": "sample1",
+      "warm": false,
+      "adoptedK": 8,
+      "Action": 154,
+      "API_median": 38.02515,
+      "action_change_points": [
+        {
+          "K": 2,
+          "before": 40,
+          "after": 162
+        },
+        {
+          "K": 8,
+          "before": 162,
+          "after": 154
+        }
+      ],
+      "clock_wait_not_CPU": true
+    },
+    {
+      "id": "sample2",
+      "warm": false,
+      "adoptedK": 9,
+      "Action": 154,
+      "API_median": 36.72754,
+      "action_change_points": [
+        {
+          "K": 2,
+          "before": 40,
+          "after": 162
+        },
+        {
+          "K": 8,
+          "before": 162,
+          "after": 154
+        }
+      ],
+      "clock_wait_not_CPU": true
+    },
+    {
+      "id": "sample3",
+      "warm": false,
+      "adoptedK": 15,
+      "Action": 162,
+      "API_median": 20.88013,
+      "action_change_points": [
+        {
+          "K": 2,
+          "before": 40,
+          "after": 162
+        },
+        {
+          "K": 8,
+          "before": 162,
+          "after": 154
+        },
+        {
+          "K": 14,
+          "before": 154,
+          "after": 162
+        }
+      ],
+      "clock_wait_not_CPU": true
+    }
+  ],
+  "pairwise_commonK": [
+    {
+      "samples": [
+        "warm",
+        "sample1"
+      ],
+      "commonK": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "Action_same": true
+    },
+    {
+      "samples": [
+        "warm",
+        "sample2"
+      ],
+      "commonK": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "Action_same": true
+    },
+    {
+      "samples": [
+        "warm",
+        "sample3"
+      ],
+      "commonK": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "Action_same": true
+    },
+    {
+      "samples": [
+        "sample1",
+        "sample2"
+      ],
+      "commonK": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "Action_same": true
+    },
+    {
+      "samples": [
+        "sample1",
+        "sample3"
+      ],
+      "commonK": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "Action_same": true
+    },
+    {
+      "samples": [
+        "sample2",
+        "sample3"
+      ],
+      "commonK": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "Action_same": true
+    }
+  ],
+  "CP_series_entries": 40,
+  "pairwise_K_comparisons": 49,
+  "Action_reverses": "sample3 162->154->162; moreK not monotonic quality evidence",
+  "scores134_vs135": [
+    {
+      "id": "input3-rep1-A",
+      "score": 1,
+      "policy": "both fixedSigma, forced first from K32 root"
+    },
+    {
+      "id": "input3-rep1-B",
+      "score": 0,
+      "policy": "both fixedSigma, forced first from K32 root"
+    },
+    {
+      "id": "input3-rep2-B",
+      "score": 0,
+      "policy": "both fixedSigma, forced first from K32 root"
+    },
+    {
+      "id": "input3-rep2-A",
+      "score": 1,
+      "policy": "both fixedSigma, forced first from K32 root"
+    },
+    {
+      "id": "input4-rep1-B",
+      "score": 0,
+      "policy": "both fixedSigma, forced first from K32 root"
+    },
+    {
+      "id": "input4-rep1-A",
+      "score": 0,
+      "policy": "both fixedSigma, forced first from K32 root"
+    },
+    {
+      "id": "input4-rep2-A",
+      "score": 0,
+      "policy": "both fixedSigma, forced first from K32 root"
+    },
+    {
+      "id": "input4-rep2-B",
+      "score": 0,
+      "policy": "both fixedSigma, forced first from K32 root"
+    }
+  ],
+  "FPU_missing_parentQ": true,
+  "finish_first_counterexample": "161->133 on old input3 chooses lower fixedSigma continuation score",
+  "input_hashes": {
+    "research-data/ai-sigma/139-next-information-choice/next-experiment-v1.json": "f3cd5d768318252d9b17f80375a9416d452c83ff8f4bf07356f56b7749bf3bbf",
+    "research-data/ai-sigma/137-fixed-policy-cost/analysis.json": "e028bf6023511fd7badda9cac2da1a4c7b20bdc3ee0e22e26aca589f16848822",
+    "research-data/ai-sigma/137-fixed-policy-cost/handoff-summary.json": "1a82c4ec3f1c4bf6e80ac917c76a36d7e2bbd8af196a4456f1f4eb3c789f4c7a",
+    "research-data/ai-sigma/136-policy-factor-choice/analysis.json": "d0d8b8a663128cb99323cd054ab2bc84611fe3ee053f6938aae2bef156a58aa1",
+    "research-data/ai-sigma/134-local-move-quality/final-results.json": "c4b7dae0bb041a813ded373c8010517528f8aa9918151f95765d401e265ae0c9",
+    "research-data/ai-sigma/135-local-move-independent/all-independent.json": "71b413c5ec2157e95398c56335166eab02927aa15628d0ba2cda3debc2f84999"
+  },
+  "new_raw_roots": 0,
+  "plan_arithmetic": {
+    "max_searches": 6,
+    "stageA_NN_bound": 192,
+    "conditional_rollouts_max": 8,
+    "stageB_think_bound_s": 800,
+    "runtime_job_caps_total_s": 1560,
+    "implementation_build_runtime_review_worst_minutes": 88,
+    "plan_not_permission": true
+  },
+  "claim_limits": "own arithmetic on saved summaries; no independent raw CP-edge bits/NN/replay/CPU validation",
+  "NN": 0,
+  "actual_go": false
+}

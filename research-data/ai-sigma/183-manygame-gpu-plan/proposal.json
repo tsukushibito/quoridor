@@ -1,0 +1,138 @@
+{
+  "issue": "quoridor-4lc.183",
+  "status": "PROPOSED_NOT_AUTHORIZED",
+  "route": "three Rust Registry gamepool workers -> one held folded dynamicB GPU provider",
+  "engine_reference": "fixed Web faithful Rust rules; NOT Sigma C++ selfplay",
+  "provider": "private next version from 177; original fixed ONNX remains batch1",
+  "mode_comparison": [
+    {
+      "name": "CPU_3serial",
+      "active": 3,
+      "worker_games": 1,
+      "maxB": 1
+    },
+    {
+      "name": "GPU_3",
+      "active": 3,
+      "worker_games": 1,
+      "maxB": 8
+    },
+    {
+      "name": "GPU_12",
+      "active": 12,
+      "worker_games": 4,
+      "maxB": 8
+    },
+    {
+      "name": "GPU_24",
+      "active": 24,
+      "worker_games": 8,
+      "maxB": 8
+    }
+  ],
+  "fresh_game_manifest_size": 24,
+  "K_rootN": 64,
+  "usual_rootedge_visits": 63,
+  "tau": "newply0..15:1; >=16:0",
+  "queue": {
+    "max_pending_games": 24,
+    "inflight_batches": 1,
+    "one_pending_per_game": true,
+    "identity": [
+      "run_id",
+      "worker_id",
+      "game_id",
+      "generation",
+      "handle",
+      "token",
+      "request_id"
+    ],
+    "partial_target_ms": 0.25,
+    "actual_timer_resolution": "UNKNOWN"
+  },
+  "teacher": [
+    "pi136",
+    "rootNN",
+    "rootmean",
+    "leafNN_separate",
+    "z_if_terminal_only",
+    "history",
+    "side",
+    "ply",
+    "lineage",
+    "split",
+    "NN_count",
+    "terminal_noNN",
+    "faults"
+  ],
+  "group_rule": "same fresh game across modes one group; formal173 holdout excluded",
+  "future_only_budget": {
+    "logical_CPU": 4,
+    "CPU_worker_cores": [
+      2,
+      4,
+      6
+    ],
+    "host_core": 0,
+    "RAM_B": 6442450944,
+    "RAM_guard_B": 5905580032,
+    "VRAM_B": 6442450944,
+    "mode_wall_seconds": 300,
+    "all_generated_modes_wall_seconds": 1200,
+    "GPU_modes_wall_seconds": 900,
+    "job_limit_seconds": 1800,
+    "new_storage_B": 134217728,
+    "implementation_minutes_estimate": [
+      45,
+      75
+    ],
+    "NN0_seconds_estimate": 60,
+    "startup_wrapper_parity_separate_seconds_estimate": 60
+  },
+  "sample_upper_bound_per_mode": 307200,
+  "root_row_upper_bound_per_mode": 4800,
+  "startup_warm_separate": true,
+  "cap_change_required": "Original177512 inadequate; 176transport cap<=40000 also not suitable for full upper bound. New private provider cap must bind adopted run budget; no counters reset or silent increase.",
+  "science_claims": {
+    "NN": false,
+    "GPU": false,
+    "real_game": false,
+    "throughput_improved": false,
+    "teacher_quality_equal": false,
+    "NI": false
+  },
+  "unmeasured_partial_batch_shapes": [
+    3,
+    5,
+    6,
+    7
+  ],
+  "future_wrapper_parity": "within proposed separate60s, test actual B1..8 using saved diagnostic input samples and batch1 references before new teacher use; samples charged to adopted run cap",
+  "adoption_control": {
+    "engine": "CPUJS held3worker",
+    "same_fresh_game_manifest": 24,
+    "K": 64,
+    "optional_future_wall_seconds": 300,
+    "additional_sample_upper_bound": 307200,
+    "all_five_modes_wall_seconds": 1500,
+    "measured_now": false,
+    "gate": false,
+    "old_different_game_rate_reused": false
+  },
+  "GPU_job_schedule": {
+    "separate_jobs": [
+      "GPU_3",
+      "GPU_12",
+      "GPU_24"
+    ],
+    "each_science_wall_seconds": 300,
+    "minimum_guard_quiet_window_seconds": 330,
+    "init_extra_window_required_if_separate": true,
+    "scheduler_owned_required": null,
+    "current_resource_admission_required": true,
+    "provider_reused_within_job_only": true,
+    "all_children_reaped_between_jobs": true,
+    "GUI": false,
+    "automatically_start": false
+  }
+}

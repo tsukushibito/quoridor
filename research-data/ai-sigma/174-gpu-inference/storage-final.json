@@ -1,0 +1,66 @@
+{
+  "UTC": "2026-10-03T07:15:22.267238+00:00",
+  "handoff_archive": "handoff-records.tar.gz",
+  "archive_sha256": "2b45ccac4cf5a95968f9c8538d1187de8afdc373ada878a6fb86da25890e7eb4",
+  "all_member_restore_verified": true,
+  "members": {
+    "Git-source.json": {
+      "bytes": 1599,
+      "sha256": "d32b91bad0bc0dd04f42da5912878712e0651e0980d180c175cdc6d94d15d348"
+    },
+    "Git-final.json": {
+      "bytes": 1934,
+      "sha256": "917c1ebfa436df0360056748125fe09c8363ebba4b1e0dc82f9eb162a1738d62"
+    },
+    "Git-metadata.json": {
+      "bytes": 2081,
+      "sha256": "0367fade7728ba7e16a1e2cd96c23d1fb590c41a9869f3d7eedd0aa8f4ef90e7"
+    },
+    "final-report.md": {
+      "bytes": 1228,
+      "sha256": "5c4fe5246a61271dd0a202937151ff3645ad6688b6ca289bb9f48a80fe4ae3f0"
+    },
+    "handoff.json": {
+      "bytes": 1229,
+      "sha256": "532fdd9272891216677cc92de3030c5f7f62af469691c8d058e86ac27678cd5c"
+    },
+    "storage-final.json": {
+      "bytes": 762,
+      "sha256": "72ea09e3284fa786a9cbd151501dd304f00b9a7d6b0ed6db792557daed22de48"
+    },
+    "final-delivery.json": {
+      "bytes": 157,
+      "sha256": "b30320af9122321b642103fe4979ae0aea01072582343dbe428362c3f19d6f70"
+    },
+    "storage-forecast-erratum.json": {
+      "bytes": 398,
+      "sha256": "add091c90341aae656382808d110ab220758058ca4087032fac138a59009a737"
+    }
+  },
+  "actual_scope_allocated_B": 159744,
+  "all4commits_delta_Git_retained_B": 82313,
+  "forecast_remaining_metadata_file_and_Git_B": 16384,
+  "scope_current_plus_forecast_B": 258441,
+  "guard_B": 262144,
+  "combined_current_plus_forecast_B": 15068468,
+  "combined_guard_B": 15728640,
+  "old_discount_B": 0,
+  "parent_extra_B": 0,
+  "first_forecast_underestimate_record": "handoff-records.tar.gz/storage-forecast-erratum.json",
+  "final_actual_check": {
+    "last_Git": "56ef3f192452d7a28c6a90ca0425aae58c4528a0",
+    "scope_allocated_B": 167936,
+    "all5commit_actual_Git_delta_B": 91848,
+    "actual_total_B": 259784,
+    "combined_actual_B": 15069811,
+    "remaining_scope_B": 2360,
+    "both_archives_Git_byte_restored": true,
+    "checker_failure": "NN0 nonempty assertion falsely rejected empty run.stderr; fixed to exact len/hash, all archivedmembers including0 pass",
+    "forecast_failure": "exact262537B exceeded256KiB forecast393B; postcompression actual259784 within262144; lastnew4KiBforecast263880 rejected, no newfile allocated",
+    "future_new_files": 0,
+    "all_science_source_child_stopped": true,
+    "Beads_backup": "success",
+    "coordinator_report": "previousfinal accepted 01a10097-3fbf-78b3-91f2-059ac259e5d4"
+  },
+  "last_audit_delivery": "{\n  \"method\": \"turn/steer\",\n  \"thread_id\": \"01a0f31b-3409-75f2-a30e-453a50484f94\",\n  \"turn_id\": \"01a10097-3fbf-78b3-91f2-059ac259e5d4\",\n  \"accepted\": true\n}\n"
+}

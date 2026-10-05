@@ -1,0 +1,48 @@
+{
+  "issue": "quoridor-4lc.140",
+  "frame": 9,
+  "seed": 1979,
+  "processing_deadline": "2026-10-02T20:01:20.808145+00:00",
+  "newjob_deadline": "2026-10-02T19:56:20.808145+00:00",
+  "pin_owned_TIDs": true,
+  "dependency_stop": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/137-fixed-policy-cost/runtime-source-stopped-before-report.json",
+  "dependency_stop_SHA256": "79ea43cea782575b004b37561f04267448f375a34b030fbc094362162def240d",
+  "kind": "protocol",
+  "run_id": "fpu140-mock-r1",
+  "forecast_bytes": 0,
+  "minimum_remaining_heavy_seconds": 0,
+  "count_timeout_ms": 10000,
+  "searches": [
+    {
+      "fixture_id": "diverse-prefix-mid-pair2-color2-new8",
+      "variant": "original",
+      "K": 32
+    },
+    {
+      "fixture_id": "diverse-prefix-mid-pair2-color2-new8",
+      "variant": "q0",
+      "K": 32
+    },
+    {
+      "fixture_id": "diverse-prefix-mid-pair2-color2-new8",
+      "variant": "fpu",
+      "K": 32
+    },
+    {
+      "fixture_id": "diverse-prefix-mid-pair2-color2-new16",
+      "variant": "fpu",
+      "K": 32
+    },
+    {
+      "fixture_id": "diverse-prefix-mid-pair2-color2-new16",
+      "variant": "q0",
+      "K": 32
+    },
+    {
+      "fixture_id": "diverse-prefix-mid-pair2-color2-new16",
+      "variant": "original",
+      "K": 32
+    }
+  ],
+  "fixed_input_path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/140-candidate-true-mean-fpu/fixed-inputs.json"
+}

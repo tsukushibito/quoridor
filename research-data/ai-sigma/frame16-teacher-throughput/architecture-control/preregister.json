@@ -1,0 +1,94 @@
+{
+  "issue": "quoridor-4lc.221",
+  "phase": 2,
+  "UTC": "2026-10-04T08:24:51.183080+00:00",
+  "selected": "CUDA graph replay of existing folded forward for B1..8; eager B8 GPU24 baseline reused",
+  "same_model_rules_quality": true,
+  "active": 24,
+  "maxB": 8,
+  "games": 48,
+  "openings_SHA": "01cb2af0cd2d9bbbcf3b397d89a608cac7bd776a5eab7e5310a79806595452fb",
+  "same_actionseed": true,
+  "K": 64,
+  "rootN": 64,
+  "edgeSum": 63,
+  "temperature": "tau1 first16newply then argmax",
+  "newply_cap": 200,
+  "CPU": [
+    0,
+    2,
+    4,
+    6
+  ],
+  "initial_baseline_s": [
+    113.865410914,
+    118.946576857
+  ],
+  "comparison": "same fresh48/GPU24/B8; phase1 B24 independent condition retained",
+  "intervention": "cache static tensor/graph/output per physical batch size; copy current inputs then replay. JSON/FIFO/IDs/tree/controller/teacher unchanged. Graph consumes exact same folded forward operators; no tensor maths edits.",
+  "mechanism_uncertain": "forward_sync includes host launch/GPU execution/waits, not exclusive hostlaunch or GPU compute. Replay tests one intervention; no dominant-cause claim.",
+  "competitors": {
+    "C++": "Existing public primary-source records show FPU/TT/noise/PCR/solver/136-mapping/history/teacher differences. hyp223 did not find current cached code; no equal-teacher assumption or blind port. Build/interface/rule alignment exceeds this thin bounded probe.",
+    "Rust_integrated_array": "Necessary new Rust NN pump codec and build plus cancel/drain/teacher equivalence; strongest next option if transport remains dominant. Existing native binary lacks array protocol. No immutable binary patch.",
+    "active48_B24": "SmallB mean7.90 at active24; fill may improve but combines scheduling/load/tail changes and doubles resident trees. Deferred to keep one bounded intervention.",
+    "CUDA_graph": "Lowest new integration surface and matched existing K/math/resources; captures B1..8 to avoid onlyfullB optimization and preserve partialbatch IDs."
+  },
+  "hyp223": {
+    "path": "research-data/ai-sigma/frame16-generation-architecture-view/final-report.txt",
+    "SHA": "ed8a01c80046c412a3364819ad3412394062cd2e91f402affd084f8702b38e17",
+    "adopt": "graph intervention priority; allB1..8 capture instead of fullB8-only is explicit small implementation difference"
+  },
+  "numeric": {
+    "B": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "fixtures_per_B": 2,
+    "CPUORT": 72,
+    "eagerCUDA": 72,
+    "replayCUDA": 72,
+    "warm_and_capture": 108,
+    "total_NN": 324,
+    "atol": 0.0001,
+    "rtol": 0.0001,
+    "changed_inputs_ID_check": true,
+    "graph_startup_per_generation": 108,
+    "partialfull_mock": "unchanged FIFO/identity/cancel-drain 303mock phase1; new graph buffer overwritten only after physical replay sync and CPU copy"
+  },
+  "generation": {
+    "max_jobs": 2,
+    "NN_cap_per_job": 250000,
+    "seconds": 300,
+    "confirmation": "only if residual timing ambiguity/material gain and remaining NN/heavy/storage/quiet permit; no successful attempt replacement"
+  },
+  "limits": {
+    "phase2_NN": 505000,
+    "phase2_heavy_s": 650,
+    "phase2_static_s": 60,
+    "original_NN": 900000,
+    "original_heavy_s": 1800,
+    "old_NN": 243888,
+    "old_heavy_conservative_s": 355.917963652,
+    "old_static_conservative_s": 45,
+    "source_math_all_s": 180,
+    "managed_save_all_s": 600,
+    "old_management_conservative_s": 90
+  },
+  "deadlines": {
+    "newheavy": "2026-10-04T09:15:50Z",
+    "science": "2026-10-04T09:25:50Z",
+    "save": "2026-10-04T09:40:50Z",
+    "submit": "2026-10-04T09:45:50Z"
+  },
+  "quality": "all planned/attempts statuses, RuleA replay/pi/z/P2/root finite numerical correspondence; no teacher truth/deep numerical/strength guarantee",
+  "no_train_mix": true,
+  "scope_guard_B": 117440512,
+  "reservation_B": 134217728,
+  "storage_forecast_additional_B": 39845888
+}

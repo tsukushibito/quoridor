@@ -1,0 +1,76 @@
+{
+  "UTC": "2026-10-04T06:30:50.037272+00:00",
+  "own": {
+    "id": "quoridor-4lc.216",
+    "status": "in_progress",
+    "assignee": "codex:01a0f31d-6d15-7620-bb63-4b4f878e4746",
+    "labels": [
+      "continuation-active",
+      "frame16",
+      "initial-window-ended"
+    ]
+  },
+  "goal": {
+    "id": "quoridor-4lc",
+    "status": "in_progress",
+    "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+    "labels": [
+      "continuation-active",
+      "frame16",
+      "initial-window-ended"
+    ]
+  },
+  "active": [],
+  "services": [
+    {
+      "pid": 4069898,
+      "ppid": 1,
+      "pgrp": 4069898,
+      "tick": "34737868",
+      "RSS": 124702720,
+      "cmd": "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python -B /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/scheduler.py run --config /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json --state-dir /workspaces/quoridor/.artifacts/research-team/scheduler-sigma-continuation-20261001 ",
+      "affinity": [
+        0
+      ]
+    },
+    {
+      "pid": 4069912,
+      "ppid": 1,
+      "pgrp": 4069912,
+      "tick": "34737890",
+      "RSS": 21954560,
+      "cmd": "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python -B /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/watch.py --run-dir /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame16-89597b76-3de7-4fb8-86bc-1fcf5dc505d4 --expectations /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame16-89597b76-3de7-4fb8-86bc-1fcf5dc505d4/expectations.json ",
+      "affinity": [
+        0
+      ]
+    }
+  ],
+  "scheduler_owned": null,
+  "next_observe": 1791095606.8590715,
+  "CPU": [
+    2
+  ],
+  "threads": 1,
+  "RAM_guard": 1879048192,
+  "parent_RSS_forecast": 3367882752,
+  "storage": {
+    "current_owned_B": 4402236,
+    "conservative_Git_B": 4402236,
+    "remaining_features_compressed_source_report_Git_forecast_B": 3000000,
+    "forecast_B": 11804472,
+    "guard_B": 14680064,
+    "reservation_B": 16777216,
+    "transfer_confirmed": true,
+    "new_reservation_B": 0,
+    "old_unknown_discount_B": 0,
+    "parent_added_B": 0
+  },
+  "command": [
+    "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "-B",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-fit-gap-analysis/residual-head-control/forward_fit.py"
+  ],
+  "sample_upper": 5901,
+  "newscience": "2026-10-04T06:40:00Z",
+  "stop": "2026-10-04T06:45:00Z"
+}

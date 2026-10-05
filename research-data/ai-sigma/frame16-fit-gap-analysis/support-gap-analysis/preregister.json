@@ -1,0 +1,38 @@
+{
+  "issue": "quoridor-4lc.216",
+  "phase": 5,
+  "bindings": {
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame16-fit-gap-analysis/per-row.jsonl.gz": "17d1df91fc2b3a5d1dd3911bc702edf4d5f1bd23ca852dae129ab0abd6379a5d",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame16-fit-gap-analysis/raw-cv-control/OOF-predictions.jsonl.xz": "795d447543388f363a2c9bbf45ab24ba8bba64dfc4d727ce0a1aa7b7e3275793",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame16-fit-gap-analysis/raw-cv-control/full-predictions.jsonl.xz": "f9c153adab4ea3d14a546d6283d6cf7955dc49b440305dbe87e4ea01545b33db",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame16-fit-gap-analysis/raw-cv-control/result.json.xz": "00a15b165033f61ec8afef61a642a2c8ae9fedca2b0483020ec7ac2208644382",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame16-fit-gap-analysis/raw-cv-control/science-source-stop-receipt.json": "e55d5856c495eb243d0d656c5eac00e77d155d5742f2f2b3ab1e750dee8894fb",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-fit-gap-analysis/support-gap-analysis/run.py": "897d69b78322febc826d8054e139b08b51a658f819f81be24d6314e5ae028513",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-fit-gap-analysis/support-gap-analysis/launch.py": "cbffd185bf65878c1de21de4253e7c00123cb5cc0593d255ba14b69585040dda"
+  },
+  "conditions": "saved predictions only;18 opening8/12/16/20/24/28 x early/middle/late, weight1/(G*n_originalgame)",
+  "comparison": "OOF lambda1/foldtrainD vs fullfitlambda1/globalD val; baseline+model training differences explicit",
+  "composition": "common sum (massval-massOOF)*gapOOF",
+  "within": "common sum massval*(gapval-gapOOF)",
+  "unmatched": "knownside signed contribution only, missingmoments None; no extrapolation",
+  "conditional": "normalize originalrowweights bycellmass, not subgroupgameequal",
+  "bootstrap": {
+    "seed": 2161605,
+    "replicates": 2000,
+    "sampling": "sortedgameUID OOF96 thenvalidation24 sequential same numpydefault_rng; paired P-ownD game scores; fixedfits/selection and no refit",
+    "limits": "folddependence andlambda selection variability notfully captured"
+  },
+  "NN_added": 0,
+  "total_NN_unchanged": 29505,
+  "fit": 0,
+  "priorstaticcharge_s": 139.412996,
+  "preflight_upper_s": 5,
+  "allmathattempt_upper_s": 15,
+  "hard_s": 15,
+  "guard_B": 15728640,
+  "reservation_B": 16777216,
+  "guard_change": "coordinator newphase5 allocation; oldphase4 14MiB guard unchanged",
+  "firstmath": "07:25",
+  "stop": "07:30",
+  "save": "07:40"
+}

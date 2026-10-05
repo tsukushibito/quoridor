@@ -1,0 +1,75 @@
+{
+  "utc": "2026-09-30T19:32:26.458238+00:00",
+  "kind": "coordinator arithmetic/static verification, no performance rerun",
+  "native": {
+    "initial": {
+      "gain_percent": 1.4749871983717355,
+      "round_gain_percent": [
+        5.9662255943656595,
+        4.497305544938001,
+        -1.2265319908201455
+      ]
+    },
+    "opening": {
+      "gain_percent": 3.4212805274481117,
+      "round_gain_percent": [
+        -10.489543918047882,
+        5.7468442166216605,
+        5.665150778269446
+      ]
+    },
+    "walled-midgame": {
+      "gain_percent": 2.2272089054022115,
+      "round_gain_percent": [
+        3.046027775268212,
+        1.200525588118262,
+        3.424676007912286
+      ]
+    },
+    "p2": {
+      "gain_percent": -1.8303844983754258,
+      "round_gain_percent": [
+        1.7656592826235329,
+        -5.200638394252133,
+        -4.331048565181539
+      ]
+    },
+    "jump-p2": {
+      "gain_percent": -3.457144609049445,
+      "round_gain_percent": [
+        -1.172719713949566,
+        -33.43659217144239,
+        -0.026385452067212434
+      ]
+    },
+    "many-walls": {
+      "gain_percent": 12.186442920009732,
+      "round_gain_percent": [
+        15.515890435134194,
+        12.179752994532656,
+        0.4405220488890249
+      ]
+    }
+  },
+  "browser": {
+    "initial": {
+      "gain_percent": 0.054318306077838496,
+      "n": 6
+    },
+    "opening": {
+      "gain_percent": 1.894150412925033,
+      "n": 6
+    },
+    "walled-midgame": {
+      "gain_percent": 5.926321410157598,
+      "n": 6
+    }
+  },
+  "hashes": {
+    "baseline-native": "7ab2253c8f9556b2ff7f8feb187457277b01e3f4521d594c6a6e0486fa7d0166",
+    "candidate-native": "8508d47476380b3f6704000397b8a522e28f7f361c944937eee7c087e23100d6",
+    "fixtures-fixed.txt": "c4f02dd0669901b6d260c089a3e27e94d9b3ebd5b56bd5e667076e9ebd12277d",
+    "baseline-fixture-dump.log": "528a7f6cd95ae2ec0c3e7f279a4cf1023c08090eecb1aa291ad93aa0b53a3f77",
+    "candidate-fixture-dump.log": "528a7f6cd95ae2ec0c3e7f279a4cf1023c08090eecb1aa291ad93aa0b53a3f77"
+  }
+}

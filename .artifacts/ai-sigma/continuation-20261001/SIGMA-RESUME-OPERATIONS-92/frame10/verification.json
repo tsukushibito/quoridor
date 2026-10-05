@@ -1,0 +1,75 @@
+{
+  "at": "2026-10-03T00:34:39.775785+00:00",
+  "state": {
+    "binding": {
+      "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+      "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+      "target": "supervisor",
+      "dispatch_issue": "quoridor-4lc.40",
+      "contract_file": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+    },
+    "process": {
+      "pid": 2947990,
+      "start_ticks": "24053182",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "phase": "running",
+    "recovery_required": false,
+    "last_result": {
+      "at": "2026-10-03T00:34:17.170100+00:00",
+      "event": "owned_turn_finished",
+      "turn_id": "01a0ff2e-261a-7781-bf83-1b0a230470df",
+      "status": "completed"
+    },
+    "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+    "config_sha256": "88deec8c1646303c2219b05e33f747b05bce1e99bc16b2c7a0cd9bfe30c2b522",
+    "contract_sha256": "28ddad064ac75907b99c0bcaaec39b576298befd92f2575e2e70278cb01ee6dc",
+    "next_at": 1790988806.3080664,
+    "owned": null
+  },
+  "long_processes": [
+    {
+      "pid": 2947990,
+      "start_ticks": "24053182",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "identity_alive": true,
+      "rss_bytes": 79298560,
+      "affinity": [
+        0
+      ]
+    },
+    {
+      "pid": 2948006,
+      "start_ticks": "24053214",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "rss_bytes": 20987904,
+      "affinity": [
+        0
+      ],
+      "identity_alive": true
+    }
+  ],
+  "current_rss_sum_bytes": 100286464,
+  "owned_allocated_bytes": 16211968,
+  "reservation_bytes": 134217728,
+  "guard_bytes": 117440512,
+  "unused_guard_bytes": 101228544,
+  "new_scope_bytes": 455449,
+  "additional_reservation": 0,
+  "input_hash_mismatches": 0,
+  "supervisor_status": {
+    "type": "idle"
+  },
+  "latest_turn": {
+    "id": "01a0ff2e-261a-7781-bf83-1b0a230470df",
+    "itemsView": "full",
+    "status": "completed",
+    "error": null,
+    "startedAt": 1790987609,
+    "completedAt": 1790987650,
+    "durationMs": 41056
+  },
+  "old_peak_not_added_to_current": true,
+  "instantaneous_peak_not_certified": true
+}

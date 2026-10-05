@@ -1,0 +1,66 @@
+{
+  "UTC": "2026-10-04T01:33:04.074087+00:00",
+  "issue": "quoridor-4lc.200",
+  "status": "DISTANCE_BASELINE_SUPPORTED_RESIDUAL_LEARNING_NOT_SUPPORTED",
+  "candidate_step": 0,
+  "candidate_is_train_fitted_distance_baseline": true,
+  "trained_residual_adopted": false,
+  "test_result_SHA": "ded6701298b3d4d93312bbb473f74b582860d98e1d8797754d56a01ed232ddd5",
+  "test_freeze_SHA": "82b10ae92caa38c36fcee0ff80f1b17185ac0e256c144f169e2d3a87678fd370",
+  "gameequal_z_sign": {
+    "candidate": 0.8121660395352014,
+    "best": 0.8121660395352014,
+    "last": 0.6717732666954532,
+    "distance_initial": 0.8121660395352014,
+    "random_QF1": 0.4937442560311056,
+    "distance_only": 0.8121660395352014,
+    "constant": 0.5062557439688943
+  },
+  "cost": {
+    "science_samples": 383287,
+    "heavy_s": 7.5022615129710175,
+    "managed_static_s": 14.205571786151268,
+    "standalone_pretest_Git_conservative_s": 30,
+    "other_short_metadata_and_reports_conservative_s": 60,
+    "manual_source_edit_and_AST_conservative_CPU_s": 120,
+    "management_cap_s": 600,
+    "heavy_cap_s": 300,
+    "science_sample_cap": 500000,
+    "CPU_number": 2,
+    "logical_count": 1,
+    "GPU": 0,
+    "warm": 0,
+    "peak_family_RSS_B": 810754048,
+    "201_teacher_jobwall_s": 83.72390816896223,
+    "teacher_fee_owned_by": "quoridor-4lc.201",
+    "native_strength_timing_measured": false
+  },
+  "weights_archive": {
+    "path": "research-data/ai-sigma/frame14-distance-residual/weights.tar.xz",
+    "B": 89820,
+    "SHA": "6ff50a5beda3297cf3e4f07726ed949c5f93051d1af202674c391c97831c77a6",
+    "members": {
+      "initial.pt": {
+        "B": 52109,
+        "SHA": "36ea9132a7b8969c0404d84f42790fa3bc57bd201e249bb7362950f10de17da0",
+        "original": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/nnue/frame14-distance-residual-r1/initial.pt"
+      },
+      "best.pt": {
+        "B": 52067,
+        "SHA": "6f9c15867b3363b5b5ccbc6f70a5faad59ab225f361b550d8f3b5d94cf197dbf",
+        "original": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/nnue/frame14-distance-residual-r1/best.pt"
+      },
+      "last.pt": {
+        "B": 52067,
+        "SHA": "5fed180f7fa460b581d62629da7480da90fd35f90d81192df975347f1dfc9e3d",
+        "original": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/nnue/frame14-distance-residual-r1/last.pt"
+      }
+    },
+    "restored_in_memory": true
+  },
+  "full_training_curves_saved": true,
+  "newtest_openings": 1,
+  "old_test_labels_read": false,
+  "new_condition_selected_after_test": false,
+  "teacher_truth_or_strength_claim": false
+}

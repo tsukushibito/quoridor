@@ -1,0 +1,36 @@
+{
+  "ONNX_SHA256": "27b912cb94606bb3d22675a740c5ee26d86f9e93b49e49057bcaad41b26ddcef",
+  "ORT": "1.30.0",
+  "provider": [
+    "CPUExecutionProvider"
+  ],
+  "threads": [
+    1,
+    1
+  ],
+  "parity": [
+    {
+      "output": "policy",
+      "max_abs": 1.430511474609375e-06,
+      "max_diff_over_tol": 0.04025071859359741,
+      "accepted": true
+    },
+    {
+      "output": "value",
+      "max_abs": 4.805624485015869e-07,
+      "max_diff_over_tol": 0.032264046370983124,
+      "accepted": true
+    }
+  ],
+  "row_ids": [
+    "native176-teacher-001-ply-0",
+    "native176-teacher-001-ply-1",
+    "native181-teacher-001-ply-0",
+    "native181-teacher-001-ply-1",
+    "native181-teacher-001-ply-2"
+  ],
+  "batch1_5rows_pass": true,
+  "export_parity_seconds": 0.06969802599633113,
+  "whole_python_seconds": 1.9497693559969775,
+  "formal_ready": false
+}

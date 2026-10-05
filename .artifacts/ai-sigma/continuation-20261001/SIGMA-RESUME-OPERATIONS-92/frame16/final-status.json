@@ -1,0 +1,50 @@
+{
+  "at": "2026-10-04T06:16:21.965193+00:00",
+  "state_phase": "running",
+  "owned": {
+    "run_id": "f3cd2859-2097-41c2-9fc9-16ae8209aaa5",
+    "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+    "turn_id": "01a1058b-cf9e-72f3-b934-f7212e61c9d3",
+    "started_at": "2026-10-04T06:13:31.141131+00:00",
+    "max_turn_seconds": 180
+  },
+  "processes": [
+    {
+      "pid": 4069898,
+      "start_ticks": "34737868",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "current_rss_bytes": 124702720,
+      "affinity": [
+        0
+      ]
+    },
+    {
+      "pid": 4069912,
+      "start_ticks": "34737890",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+      "current_rss_bytes": 21270528,
+      "affinity": [
+        0
+      ]
+    }
+  ],
+  "rss_current_sum": 145973248,
+  "expected_hash_mismatches": [],
+  "loaded_config_sha256": "bbb37316a9fa82885ce3c7f4b61033007440d87b159bbe1d2de9400f75c03c70",
+  "loaded_contract_sha256": "8c14a0792486f564df92621c51c004003cea2bcbe6d45e89e81006c1f8d5ebe4",
+  "storage": {
+    "steward_allocated_bytes": 28999680,
+    "supervisor_held_bytes": 140951552,
+    "supervisor_current_frame_bytes": 0,
+    "supervisor_historical_held_bytes": 140951552,
+    "forecast_bytes": 524288,
+    "additional_reservation_bytes": 0,
+    "historical_parent_charge_released": false
+  },
+  "own_scope_file_bytes": 26229,
+  "source_write_stopped": true,
+  "intentional_long_term_process_count": 2,
+  "short_term_science_child_count": 0,
+  "external_job_termination_claimed": false,
+  "commit": "d5632c27b69415cf6ca026493ec068fbc254e540"
+}

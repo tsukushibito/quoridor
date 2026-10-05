@@ -1,0 +1,453 @@
+
+FILE crates/quoridor-core/src/position.rs
+1: use std::collections::VecDeque;
+2: use std::fmt;
+3: 
+4: pub const RULESET_ID: &str = "standard-2p-v1";
+5: 
+6: #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+7: pub enum RulesError {
+8:     OutOfRange,
+9:     IllegalAction,
+10:     GameOver,
+11:     InvalidPosition,
+12:     InvalidUndo,
+13:     InvalidReplay,
+14:     InvalidSnapshot,
+15:     InputTooLarge,
+16: }
+17: impl RulesError {
+18:     pub const fn code(self) -> &'static str {
+19:         match self {
+20:             Self::OutOfRange => "OUT_OF_RANGE",
+21:             Self::IllegalAction => "ILLEGAL_ACTION",
+22:             Self::GameOver => "GAME_OVER",
+23:             Self::InvalidPosition => "INVALID_POSITION",
+24:             Self::InvalidUndo => "INVALID_UNDO",
+25:             Self::InvalidReplay => "INVALID_REPLAY",
+26:             Self::InvalidSnapshot => "INVALID_SNAPSHOT",
+27:             Self::InputTooLarge => "INPUT_TOO_LARGE",
+28:         }
+29:     }
+30: }
+31: impl fmt::Display for RulesError {
+32:     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+33:         f.write_str(self.code())
+34:     }
+35: }
+150:         } else if ac == bc && ar.abs_diff(br) == 1 {
+151:             let row = ar.min(br);
+152:             !((ac < 8 && self.has_h(row * 8 + ac)) || (ac > 0 && self.has_h(row * 8 + ac - 1)))
+153:         } else {
+154:             false
+155:         }
+156:     }
+157:     pub fn reachable(self, player: usize) -> bool {
+158:         self.wall_distance(player).is_some()
+159:     }
+160:     /// Shortest wall-only route to the player's goal. Pawns do not obstruct this graph.
+161:     pub fn wall_distance(self, player: usize) -> Option<u8> {
+162:         #[cfg(feature = "profiling")]
+163:         let _span = crate::profiling::span(crate::profiling::Kind::Distance);
+164:         if player > 1 || self.pawns[player] >= 81 {
+165:             return None;
+166:         }
+167:         let mut seen = [false; 81];
+168:         let mut queue = VecDeque::with_capacity(81);
+169:         let start = self.pawns[player];
+170:         seen[start as usize] = true;
+171:         queue.push_back((start, 0u8));
+172:         while let Some((cell, distance)) = queue.pop_front() {
+173:             if cell / 9 == if player == 0 { 8 } else { 0 } {
+174:                 return Some(distance);
+175:             }
+176:             for next in neighbors(cell).into_iter().flatten() {
+177:                 if !seen[next as usize] && self.is_edge_open(cell, next) {
+178:                     seen[next as usize] = true;
+179:                     queue.push_back((next, distance + 1));
+180:                 }
+181:             }
+182:         }
+183:         None
+184:     }
+185:     pub fn legal_pawn_mask(self) -> [u8; 81] {
+186:         let mut mask = [0; 81];
+187:         if self.winner.is_some() {
+188:             return mask;
+189:         }
+190:         let own = self.pawns[self.turn as usize];
+191:         let other = self.pawns[(self.turn ^ 1) as usize];
+192:         for (direction, adjacent) in neighbors(own).into_iter().enumerate() {
+193:             let Some(adjacent) = adjacent else {
+194:                 continue;
+
+FILE crates/quoridor-core/src/game.rs
+1: use crate::{Position, RULESET_ID, RulesError};
+2: 
+3: /// Storage/transport bound; ordinary play has no automatic ply-limit draw.
+4: pub const MAX_REPLAY_ACTIONS: usize = 4096;
+5: 
+6: #[derive(Debug, Clone, PartialEq, Eq)]
+7: pub struct GameView {
+8:     pub ruleset_id: &'static str,
+9:     pub pawns: [u8; 2],
+10:     pub walls_remaining: [u8; 2],
+11:     pub horizontal_walls: Vec<u8>,
+12:     pub vertical_walls: Vec<u8>,
+13:     pub turn: u8,
+14:     pub winner: Option<u8>,
+15:     pub ply: u32,
+16:     pub legal_mask: Vec<u8>,
+17:     pub position_key: String,
+18: }
+19: 
+20: #[derive(Debug, Clone)]
+21: pub struct Game {
+22:     origin: Position,
+23:     position: Position,
+24:     history: Vec<u16>,
+25:     cached_view: Option<GameView>,
+26: }
+27: impl Default for Game {
+28:     fn default() -> Self {
+29:         Self::new()
+30:     }
+31: }
+32: impl Game {
+33:     pub fn new() -> Self {
+34:         let origin = Position::default();
+35:         Self {
+36:             origin,
+37:             position: origin,
+38:             history: Vec::new(),
+39:             cached_view: None,
+40:         }
+41:     }
+42:     /// Native fixture/search root. History and ply are relative to this position;
+43:     /// standard replay/snapshot exports require the standard opening origin.
+44:     pub fn from_position(position: Position) -> Result<Self, RulesError> {
+45:         let origin = position.checked()?;
+46:         Ok(Self {
+47:             origin,
+48:             position: origin,
+49:             history: Vec::new(),
+50:             cached_view: None,
+51:         })
+52:     }
+53:     pub const fn position(&self) -> Position {
+54:         self.position
+55:     }
+56:     /// Standard wire saves include actions from the standard opening only.
+57:     pub fn has_standard_origin(&self) -> bool {
+58:         self.origin == Position::default()
+59:     }
+60:     pub fn history(&self) -> &[u16] {
+61:         &self.history
+62:     }
+63:     pub fn view(&mut self) -> GameView {
+64:         if let Some(view) = &self.cached_view {
+65:             return view.clone();
+66:         }
+67:         let position = self.position;
+68:         let mut legal_mask = vec![0; 209];
+69:         for id in position.legal_action_ids() {
+70:             legal_mask[id as usize] = 1;
+71:         }
+72:         let view = GameView {
+73:             ruleset_id: RULESET_ID,
+74:             pawns: position.pawns,
+75:             walls_remaining: position.walls_remaining,
+76:             horizontal_walls: (0..64).filter(|&a| position.has_h(a)).collect(),
+77:             vertical_walls: (0..64).filter(|&a| position.has_v(a)).collect(),
+78:             turn: position.turn,
+79:             winner: position.winner,
+80:             ply: self.history.len() as u32,
+81:             legal_mask,
+82:             position_key: position.position_key(),
+83:         };
+84:         self.cached_view = Some(view.clone());
+85:         view
+86:     }
+87:     pub fn apply_action(&mut self, id: u16) -> Result<GameView, RulesError> {
+88:         self.position = self.position.play(id)?;
+89:         self.history.push(id);
+90:         self.cached_view = None;
+91:         Ok(self.view())
+92:     }
+93:     pub fn undo_to_ply(&mut self, ply: usize) -> Result<GameView, RulesError> {
+94:         if ply > self.history.len() {
+95:             return Err(RulesError::InvalidUndo);
+96:         }
+97:         if ply == self.history.len() {
+98:             return Ok(self.view());
+99:         }
+100:         let actions = self.history[..ply].to_vec();
+101:         let mut replacement = Self::from_origin_actions(self.origin, &actions)?;
+102:         let view = replacement.view();
+103:         *self = replacement;
+104:         Ok(view)
+105:     }
+106:     pub fn from_actions(actions: &[u16]) -> Result<Self, RulesError> {
+107:         Self::from_origin_actions(Position::default(), actions)
+108:     }
+109:     fn from_origin_actions(origin: Position, actions: &[u16]) -> Result<Self, RulesError> {
+110:         let mut game = Self::from_position(origin)?;
+111:         for &action in actions {
+112:             game.apply_action(action)?;
+113:         }
+114:         Ok(game)
+115:     }
+
+FILE crates/quoridor-core/src/research.rs
+1: //! Explicit Sigma rule/encoding context. Standard Position/Game rules remain unchanged.
+2: use crate::{Position, RulesError};
+3: use std::collections::{BTreeMap, VecDeque};
+4: use std::sync::Arc;
+5: 
+6: #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
+7: pub struct HistoryKey {
+8:     pub pawns: [u8; 2],
+9:     pub turn: u8,
+10:     pub horizontal: u64,
+11:     pub vertical: u64,
+12: }
+13: impl From<Position> for HistoryKey {
+14:     fn from(p: Position) -> Self {
+15:         Self {
+16:             pawns: p.pawns,
+17:             turn: p.turn,
+18:             horizontal: p.horizontal,
+19:             vertical: p.vertical,
+20:         }
+21:     }
+22: }
+23: impl HistoryKey {
+24:     pub fn sigma_string(self) -> String {
+25:         fn anchors(bits: u64) -> String {
+26:             let mut a: Vec<_> = (0..64)
+27:                 .filter(|n| bits & (1u64 << n) != 0)
+28:                 .map(|n| format!("{},{}", n % 8, n / 8))
+29:                 .collect();
+30:             a.sort();
+31:             a.join(";")
+32:         }
+33:         format!(
+34:             "{},{}|{},{}|{}|{}|{}",
+35:             self.pawns[0] % 9,
+
+FILE tools/ai-sigma-sigma-web-port/private/src/lib.rs
+1: mod context;
+2: use quoridor_core::research::{SigmaContext,HistoryKey,features,rust_to_sigma,p2_permutation};
+3: use serde_json::{Value,json};
+4: use std::{cell::RefCell,collections::BTreeMap};
+5: // Private dynamic tree. Limits are refusal guards, never pseudo-leaf substitution.
+6: const NODE_GUARD:usize=200_000;
+7: const DEPTH_GUARD:usize=200;
+8: const BYTE_GUARD:usize=128*1024*1024;
+9: #[derive(Clone)]
+10: struct Node {state:Option<SigmaContext>,parent:Option<usize>,action:Option<u16>,prior:f64,children:Vec<usize>,visits:u32,sum:f64,expanded:bool}
+11: impl Node {fn q(&self)->f64 {if self.visits==0 {0.0} else {self.sum/self.visits as f64}}}
+12: fn ordered_legal(c:&SigmaContext)->Vec<u16>{
+13:  let mut legal=c.legal_ids();
+14:  // Sigma order: pawn direction enum, then each wall(y,x) H followed by V.
+15:  legal.sort_by_key(|&a|if a<81 {rust_to_sigma(c.position(),a).unwrap()} else if a<145 {8+2*(a-81)} else {9+2*(a-145)});legal
+16: }
+23: struct Search {nodes:Vec<Node>,generation:u32,limit:u32,calls:u32,pending:Option<(usize,u64)>,token:u64,cancelled:bool,terminal_no_nn:u32,max_depth:usize,trace_on:bool,selects:Vec<Value>,backups:Vec<Value>,path:Vec<u16>,guard:Option<String>}
+24: impl Search {
+25:  fn new(c:SigmaContext,g:u32,k:u32,trace_on:bool)->Self{Self{nodes:vec![Node{state:Some(c),parent:None,action:None,prior:1.0,children:vec![],visits:0,sum:0.0,expanded:false}],generation:g,limit:k,calls:0,pending:None,token:0,cancelled:false,terminal_no_nn:0,max_depth:0,trace_on,selects:vec![],backups:vec![],path:vec![],guard:None}}
+26:  fn check(&self,g:u32)->Result<(),String>{if self.cancelled||g!=self.generation {Err("STALE_GENERATION".into())}else if let Some(ref s)=self.guard {Err(s.clone())}else{Ok(())}}
+27:  fn ensure(&mut self,i:usize)->Result<(),String>{if self.nodes[i].state.is_none(){let p=self.nodes[i].parent.unwrap();let a=self.nodes[i].action.unwrap();let next=self.nodes[p].state.as_ref().unwrap().play(a).map_err(|e|e.to_string())?;self.nodes[i].state=Some(next);}Ok(())}
+28:  fn select(&mut self,i:usize)->Result<usize,String>{
+29:   let n=&self.nodes[i];let pq=n.q();let sq=(n.visits as f64).sqrt();let visited:f64=n.children.iter().filter(|&&x|self.nodes[x].visits>0).map(|&x|self.nodes[x].prior).sum();let mut best=None;let mut best_score=f64::NEG_INFINITY;
+30:   for &child in &n.children {let c=&self.nodes[child];let u=c.prior*sq/(1.0+c.visits as f64);let q=if c.visits==0 {pq-0.2*visited.sqrt()}else{-c.q()};let score=q+u;if score>best_score {best_score=score;best=Some(child)}}
+31:   let child=best.ok_or("EXPANDED_NO_CHILD")?;
+32:   if self.trace_on {let c=&self.nodes[child];self.selects.push(json!({"K_before":self.nodes[0].visits,"path_before":self.path,"node_index":i,"nodeN":n.visits,"nodeSum":n.sum,"parentQ":pq,"visited_base_prior_sum":visited,"Action":c.action,"prior":c.prior,"childN":c.visits,"childSum":c.sum,"childQ":c.q(),"score":best_score}));}
+33:   Ok(child)
+34:  }
+35:  fn backup(&mut self,leaf:usize,mut value:f64){
+36:   let initial=value;let mut i=Some(leaf);let mut updates=vec![];
+37:   while let Some(x)=i {let n=&mut self.nodes[x];if self.trace_on {updates.push(json!({"index":x,"preN":n.visits,"preSum":n.sum,"value":value}));}n.visits+=1;n.sum+=value;value=-value;i=n.parent;}
+38:   if self.trace_on {self.backups.push(json!({"K":self.nodes[0].visits,"leaf_index":leaf,"path":self.path,"value_leaf_side":initial,"terminal":self.nodes[leaf].state.as_ref().unwrap().terminal_value(),"updates":updates}));}
+39:  }
+40:  fn begin(&mut self,g:u32)->Result<Value,String>{
+
+FILE tools/ai-sigma-sigma-web-port/private/src/context.rs
+1: use quoridor_core::{research::{SigmaContext,HistoryKey,DIRECTIONS,sigma_to_rust},Position};
+2: use serde_json::Value;
+3: fn n(v: &Value) -> Result<u16, String> {
+4:     v.as_u64()
+5:         .and_then(|x| u16::try_from(x).ok())
+6:         .ok_or("INPUT_INTEGER".into())
+7: }
+8: fn array(v: &Value) -> Result<&Vec<Value>, String> {
+9:     v.as_array().ok_or("INPUT_ARRAY".into())
+10: }
+11: fn prefix_action(p: Position, a: &Value) -> Result<u16, String> {
+12:     if a["type"] == "pawn" {
+13:         let dx = a["direction"][0].as_i64().ok_or("DIRECTION")?;
+14:         let dy = a["direction"][1].as_i64().ok_or("DIRECTION")?;
+15:         let s = DIRECTIONS
+16:             .iter()
+17:             .position(|&(x, y)| i64::from(x) == dx && i64::from(y) == dy)
+18:             .ok_or("DIRECTION")?;
+19:         sigma_to_rust(p, s as u16).ok_or("DIRECTION".into())
+20:     } else {
+21:         let base = match a["orientation"].as_str() {
+22:             Some("h") => 81,
+23:             Some("v") => 145,
+24:             _ => return Err("WALL_ORIENTATION".into()),
+25:         };
+26:         let x = n(&a["x"])?;
+27:         let y = n(&a["y"])?;
+28:         if x >= 8 || y >= 8 {
+29:             return Err("WALL_ANCHOR".into());
+30:         }
+31:         Ok(base + 8 * y + x)
+32:     }
+33: }
+34: pub fn context(f: &Value, diagnostic: bool) -> Result<SigmaContext, String> {
+35:     if let Some(prefix) = f.get("prefix") {
+36:         let ids = array(prefix)?
+37:             .iter()
+38:             .map(n)
+39:             .collect::<Result<Vec<_>, _>>()?;
+40:         return SigmaContext::from_prefix(&ids).map_err(|e| e.to_string());
+41:     }
+42:     let mut c = SigmaContext::from_prefix(&[]).map_err(|e| e.to_string())?;
+43:     let mut ids = Vec::new();
+44:     for a in array(&f["legal_prefix"])? {
+45:         let id = prefix_action(c.position(), a)?;
+46:         ids.push(id);
+47:         c = c.play(id).map_err(|e| e.to_string())?
+48:     }
+49:     c = SigmaContext::from_prefix(&ids).map_err(|e| e.to_string())?;
+50:     if f["classification"] == "legal-replay" {
+51:         return Ok(c);
+52:     }
+53:     if !diagnostic {
+54:         return Err("SYNTHETIC_DIAGNOSTIC_ONLY".into());
+55:     }
+56:     let b = &f["board"];
+57:     let mut p = Position {
+58:         pawns: [
+59:             u8::try_from(n(&b["rust_pawns"][0])?).map_err(|_| "CELL")?,
+60:             u8::try_from(n(&b["rust_pawns"][1])?).map_err(|_| "CELL")?,
+61:         ],
+62:         walls_remaining: [
+63:             u8::try_from(n(&b["walls_remaining"][0])?).map_err(|_| "WALLS")?,
+64:             u8::try_from(n(&b["walls_remaining"][1])?).map_err(|_| "WALLS")?,
+65:         ],
+66:         turn: u8::try_from(n(&b["turn"])?).map_err(|_| "TURN")?,
+67:         horizontal: 0,
+68:         vertical: 0,
+69:         winner: None,
+70:     };
+71:     for (key, bits) in [
+72:         ("rust_h_anchors", &mut p.horizontal),
+73:         ("rust_v_anchors", &mut p.vertical),
+74:     ] {
+75:         for a in array(&b[key])? {
+76:             let a = n(a)?;
+77:             if a >= 64 {
+78:                 return Err("ANCHOR".into());
+79:             }
+80:             *bits |= 1u64 << a
+81:         }
+82:     }
+83:     p.winner = if p.pawns[0] / 9 == 8 {
+84:         Some(0)
+85:     } else if p.pawns[1] / 9 == 0 {
+86:         Some(1)
+87:     } else {
+88:         None
+89:     };
+90:     let mut h = Vec::new();
+91:     for a in array(&f["history_counts"])? {
+92:         h.push((
+93:             HistoryKey::parse(a[0].as_str().ok_or("HISTORY_KEY")?).map_err(|e| e.to_string())?,
+94:             n(&a[1])?,
+95:         ))
+96:     }
+97:     SigmaContext::synthetic_diagnostic(p, n(&b["total_ply"])?, h).map_err(|e| e.to_string())
+98: }
+
+CONFIG {
+  "issue": "quoridor-4lc.151",
+  "frame": 10,
+  "seed": 1979,
+  "processing_deadline": "2026-10-03T03:17:36.232260+00:00",
+  "newjob_deadline": "2026-10-03T03:07:36.232260+00:00",
+  "pin_owned_TIDs": true,
+  "minimum_remaining_heavy_seconds": 15,
+  "kind": "stageA",
+  "run_id": "port151-stageA-r2",
+  "forecast_bytes": 16777216,
+  "searches": [
+    {
+      "fixture_id": "initial-p1",
+      "engine": "candidate",
+      "K": 32,
+      "ordinal": 1
+    },
+    {
+      "fixture_id": "initial-p1",
+      "engine": "reference",
+      "K": 32,
+      "ordinal": 2
+    },
+    {
+      "fixture_id": "asym-hv-p2",
+      "engine": "reference",
+      "K": 32,
+      "ordinal": 3
+    },
+    {
+      "fixture_id": "asym-hv-p2",
+      "engine": "candidate",
+      "K": 32,
+      "ordinal": 4
+    },
+    {
+      "fixture_id": "straight-jump-p2",
+      "engine": "candidate",
+      "K": 32,
+      "ordinal": 5
+    },
+    {
+      "fixture_id": "straight-jump-p2",
+      "engine": "reference",
+      "K": 32,
+      "ordinal": 6
+    },
+    {
+      "fixture_id": "frame10-prefix-13",
+      "engine": "reference",
+      "K": 32,
+      "ordinal": 7
+    },
+    {
+      "fixture_id": "frame10-prefix-13",
+      "engine": "candidate",
+      "K": 32,
+      "ordinal": 8
+    },
+    {
+      "fixture_id": "frame10-prefix-14",
+      "engine": "candidate",
+      "K": 32,
+      "ordinal": 9
+    },
+    {
+      "fixture_id": "frame10-prefix-14",
+      "engine": "reference",
+      "K": 32,
+      "ordinal": 10
+    }
+  ],
+  "fixed_input_path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/151-sigma-web-port/stageA-inputs.json",
+  "fixed_input_SHA256": "dc205f8d7e00ee52aca51845ddbca5e3085d0aebdb22c3f4ceb6fa139cd10954",
+  "binary_SHA256": "500181795b373f69f6f2214ee1a77e12767e2f342e15a56ab5e27d0a0453f2c2",
+  "repair_of": "port151-stageA-r1",
+  "scientific_old_success_not_replaced": true
+}
+

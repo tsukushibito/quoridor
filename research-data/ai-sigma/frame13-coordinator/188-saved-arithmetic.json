@@ -1,0 +1,83 @@
+{
+  "UTC": "2026-10-03T13:29:42.521276+00:00",
+  "rows": 502,
+  "pure_saved_arithmetic": true,
+  "new_forward": 0,
+  "checks": "all502MSE/rows/groupmeans/186sameID pass",
+  "comparisons": [
+    {
+      "cohort": "old",
+      "metric": "ce",
+      "parent": 2.5144672036440663,
+      "LR_.0025": 2.4117662529060744,
+      "LR_.01_saved": 2.2873704099007863
+    },
+    {
+      "cohort": "old",
+      "metric": "mse",
+      "parent": 0.6840944289234024,
+      "LR_.0025": 0.526609748100432,
+      "LR_.01_saved": 0.40259214444296665
+    },
+    {
+      "cohort": "new",
+      "metric": "ce",
+      "parent": 2.5719010424783644,
+      "LR_.0025": 2.4836830768296725,
+      "LR_.01_saved": 2.391096297850388
+    },
+    {
+      "cohort": "new",
+      "metric": "mse",
+      "parent": 1.6632576554059133,
+      "LR_.0025": 1.7066455560328697,
+      "LR_.01_saved": 1.9510527310422308
+    }
+  ],
+  "new_groups": [
+    {
+      "game": "native181-teacher-004",
+      "n": 65,
+      "parent_MSE": 0.5809162923922906,
+      "LR_.0025_MSE": 0.6069440504679313,
+      "LR_.0025_sign_correct": 53,
+      "wrong_saturation": 0
+    },
+    {
+      "game": "native181-teacher-005",
+      "n": 52,
+      "parent_MSE": 1.8304589906564126,
+      "LR_.0025_MSE": 1.5499153435230255,
+      "LR_.0025_sign_correct": 4,
+      "wrong_saturation": 0
+    },
+    {
+      "game": "native181-teacher-008",
+      "n": 94,
+      "parent_MSE": 1.659002074535857,
+      "LR_.0025_MSE": 1.6359827188735312,
+      "LR_.0025_sign_correct": 3,
+      "wrong_saturation": 0
+    },
+    {
+      "game": "native181-teacher-015",
+      "n": 70,
+      "parent_MSE": 2.5497968520436967,
+      "LR_.0025_MSE": 2.9391152075358797,
+      "LR_.0025_sign_correct": 0,
+      "wrong_saturation": 0
+    }
+  ],
+  "source_files_SHA": {
+    "research-data/ai-sigma/188-value-lr-control/runs/r2/results.json": "3912af867cfa3c757c7638b889dc1da26ee0f12b6b894b9e3f0568c41e8b10a3",
+    "research-data/ai-sigma/188-value-lr-control/runs/r2/per-row.jsonl.gz": "5fd7fdac57e4c15f144a39fd86a40fc90bcb1c8b33fc5e1ba7d860e5f75e13a7",
+    "research-data/ai-sigma/188-value-lr-control/runs/r2/training.json": "f4c8e02187586897b544ceebfa4db1fd04665b0fa7712b55f8a292f0e86d55a4",
+    "research-data/ai-sigma/188-value-lr-control/runs/r2/process-stop.json": "ded45e6df82eb1cb3a8d06cb5d0165b1bb8eba2c108ae267ead1b87bde92807f",
+    "research-data/ai-sigma/186-value-game-diagnostic/per-row.jsonl.gz": "e3ad152157dfe9d12c8b1b60c7f9500ffcd0a0faea792115e6b1fe02d1e928e0"
+  },
+  "scientific_source_acceptance": "pending owner final version/stop/Git",
+  "interpretation": "lowLR moderates .01 new-value deterioration but remains worse than176parent;2/4newgame MSE deterioration; CE progress smaller; no defaultpromotion/strength/cause claim",
+  "arithmetic_seconds": 0.007144517032429576,
+  "new_game_MSE_worse_than_parent": 2,
+  "checker_correction": "Initial private interpretation carried3/4from186 LR.01; own recomputedr2 groups show2/4. Corrected beforeexternal numeric report."
+}

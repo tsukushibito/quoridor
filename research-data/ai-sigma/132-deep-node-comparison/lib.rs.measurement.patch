@@ -1,0 +1,12 @@
+diff --git a/tools/ai-sigma-deep-node-comparison/baseline/src/lib.rs b/tools/ai-sigma-deep-node-comparison/trace/src/lib.rs
+index 53f4662..2a794db 100644
+--- a/tools/ai-sigma-deep-node-comparison/baseline/src/lib.rs
++++ b/tools/ai-sigma-deep-node-comparison/trace/src/lib.rs
+@@ -243,6 +243,7 @@ fn dispatch(r: &mut Registry, v: Value) -> Result<Value, String> {
+     let h = v["handle"].as_u64().ok_or("SESSION_HANDLE")? as u32;
+     let s = r.sessions.get_mut(&h).ok_or("INVALID_SESSION")?;
+     match v["op"].as_str().unwrap_or("") {
++        "trace" => Ok(serde_json::json!({"nodes":s.search.deep_trace})),
+         "begin" => match s.begin(g)? {
+             Some(q) => {
+                 let ft = features(q.position);

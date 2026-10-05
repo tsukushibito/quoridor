@@ -1,0 +1,42 @@
+{
+  "UTC": "2026-10-04T00:17:31.264485+00:00",
+  "scope": "saved train/validation summary only; no forward/testlabels",
+  "stages": [
+    {
+      "stage": 24,
+      "beststep": 0,
+      "bestval": 0.690175573860047,
+      "initial_SHA": "e5d218c9750d581eab7ca6a114acaa8f3cf5bd24474e3f639280705271fc7ddb",
+      "samples": 307765,
+      "train_last_game_MSE": 0.0006523988697355142,
+      "validation_last_game_MSE": 1.0613261173232325,
+      "validation_z_last_game_MSE": 1.4880291042196168
+    },
+    {
+      "stage": 48,
+      "beststep": 0,
+      "bestval": 0.6901755738516154,
+      "initial_SHA": "e5d218c9750d581eab7ca6a114acaa8f3cf5bd24474e3f639280705271fc7ddb",
+      "samples": 331453,
+      "train_last_game_MSE": 0.0007272363882810598,
+      "validation_last_game_MSE": 1.0621040205938377,
+      "validation_z_last_game_MSE": 1.4817101155141315
+    },
+    {
+      "stage": 96,
+      "beststep": 0,
+      "bestval": 0.6901755738627967,
+      "initial_SHA": "e5d218c9750d581eab7ca6a114acaa8f3cf5bd24474e3f639280705271fc7ddb",
+      "samples": 379921,
+      "train_last_game_MSE": 0.0017817044923208183,
+      "validation_last_game_MSE": 1.0095803963563228,
+      "validation_z_last_game_MSE": 1.4087492730167763
+    }
+  ],
+  "all_best_untrained_step0": true,
+  "sameinitial": true,
+  "all_samples": 1019139,
+  "learning_wall_s": 15.533998494036496,
+  "adoption": "no learned weights promoted; original validation selection and once frozen test continue",
+  "causes": "unknown; low training error and validation degradation support gap, not unique overfitting/data/feature/noise cause"
+}

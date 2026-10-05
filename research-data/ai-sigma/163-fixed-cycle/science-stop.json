@@ -1,0 +1,77 @@
+{
+  "issue": "quoridor-4lc.163",
+  "time": "2026-10-03T03:53:31.522757+00:00",
+  "scientific_source_write_stopped": true,
+  "source_hashes": {
+    "tools/ai-sigma-fixed-cycle/diagnose.cjs": "445ea2c326bc2ed1472903443669a8a964e48d6deaf81ad96811ab0f9675cf28",
+    "tools/ai-sigma-fixed-cycle/collect.py": "42a12260b54e0ffb40be2abdd410a605b36ddabc3a492705a3485b475a11482e",
+    "tools/ai-sigma-fixed-cycle/main.js": "358be4dd89d627f6b092224564d3ddad6900b2805ca398723742ca46ecfa7e4a",
+    "tools/ai-sigma-fixed-cycle/control-mock.cjs": "64d5c5df5f06180eb5ee094263a94505f10d77b02cce7d358020ce72d1ba5a1f",
+    "tools/ai-sigma-fixed-cycle/runner.py": "cb42c414e458feaef58e8de3ad44d6251a970024959ed1248152f95d17d1a275",
+    "tools/ai-sigma-fixed-cycle/mock.cjs": "f02b20e2d6b018553570af7221aa76c22f86a6df3bde07cdad50f921d76bda26",
+    "tools/ai-sigma-fixed-cycle/admission.py": "859a9944771704456fb7ea108594d472da39bfece05591166a240c8a08097350",
+    "tools/ai-sigma-fixed-cycle/pause-monitor.cjs": "3da03be6ecd7ac5dd9a374f81ea9292c1ea43abeb4a9ed10bfc93bc1279a4527",
+    "tools/ai-sigma-fixed-cycle/browser.cjs": "d4ec6b20b9d8572aae563e34a414d6f9118d293bdf5489293bde633107c3f910",
+    "tools/ai-sigma-fixed-cycle/worker.js": "1a414e5fa2976c027ca75a77d217c11fdb05e09b91f2adfb2b21c090117e31b6",
+    "tools/ai-sigma-fixed-cycle/adapters.cjs": "867b444525b5979df25aa502703f588276082bdaabebfec0f8d751c7d8a6ffcb"
+  },
+  "science_source": "d0e39b4; collect.py saved arithmetic only",
+  "results_sha256": "a9140b62d0084f8a2701b9ce248d6c218457bb1dea5fefa7078af2cd21219a86",
+  "jobs": [
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/FIXED-CYCLE/runs/cycle163-input0-r1.process.json",
+      "sha256": "88ae12eb7d40176d1089ad3802bbe83330fc1c221515122caf4a3b1c23deae3e",
+      "exit": 1,
+      "current_same_identity": [],
+      "remaining": [],
+      "unknown": [],
+      "start": "2026-10-03T03:49:06.464487+00:00",
+      "end": "2026-10-03T03:49:57.202872+00:00",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/FIXED-CYCLE/runs/cycle163-input0-r2.process.json",
+      "sha256": "ce6818fc9fccba2372a014cf7ea1da7c0760c6d690fc29b3c71e476027320239",
+      "exit": 0,
+      "current_same_identity": [],
+      "remaining": [],
+      "unknown": [],
+      "start": "2026-10-03T03:50:41.852131+00:00",
+      "end": "2026-10-03T03:50:59.159837+00:00",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    {
+      "path": ".artifacts/ai-sigma/resume-20261003/FIXED-CYCLE/runs/cycle163-input1-r1.process.json",
+      "sha256": "48250f9dbcb1fd5cca1e29ea6813ab6a9d0cce1c4620046b4b8a13a196020db7",
+      "exit": 0,
+      "current_same_identity": [],
+      "remaining": [],
+      "unknown": [],
+      "start": "2026-10-03T03:51:15.308085+00:00",
+      "end": "2026-10-03T03:51:35.965510+00:00",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    }
+  ],
+  "identity_count": 197,
+  "current_same_identity": [],
+  "last_heavy_end": "2026-10-03T03:51:35.965510+00:00",
+  "rows": 12,
+  "hand_NN": 143,
+  "startup_NN": 12,
+  "heavy_cumulative_s": 88.70351600000001,
+  "all_fixed12_functional": true,
+  "formal_ready": false,
+  "failed_debug_beforeNN_preserved": true,
+  "all_period_natural_allhost_proof": false,
+  "pack_helpers_remaining": true,
+  "stop_receipts": {
+    ".artifacts/ai-sigma/resume-20261003/FIXED-CYCLE/runs/cycle163-input0-r2/pause-monitor-stop.json": "b0b857cc7c9f36684dc765d19c7644cc99426a321560e8fd113b8745ff3bc61b",
+    ".artifacts/ai-sigma/resume-20261003/FIXED-CYCLE/runs/cycle163-input0-r2/main-timer-stop.json": "7dcfee3d0f6d458c477d356171d6dc22abd316b5762d0543ac2166f996081ac1",
+    ".artifacts/ai-sigma/resume-20261003/FIXED-CYCLE/runs/cycle163-input0-r2/controlled-stop.json": "5550730bc749e54968eefe6d8195243f4109d8373e6302049cd39494e57d5cbc",
+    ".artifacts/ai-sigma/resume-20261003/FIXED-CYCLE/runs/cycle163-input1-r1/pause-monitor-stop.json": "345aa0d4a7ea5e78437218dd59be58af9b84a4be70afafefde4bd6a2626264f8",
+    ".artifacts/ai-sigma/resume-20261003/FIXED-CYCLE/runs/cycle163-input1-r1/main-timer-stop.json": "7dcfee3d0f6d458c477d356171d6dc22abd316b5762d0543ac2166f996081ac1",
+    ".artifacts/ai-sigma/resume-20261003/FIXED-CYCLE/runs/cycle163-input1-r1/controlled-stop.json": "436259780e74ab868ff21a82dcf85f0c513ed5e05a55db4626be58500083d23d",
+    ".artifacts/ai-sigma/resume-20261003/FIXED-CYCLE/runs/cycle163-input0-r1/pause-monitor-stop.json": "5a1b4a6e38c15975ae37cb09e1919710953e6042d38bf17a1db8227f0328d9a7",
+    ".artifacts/ai-sigma/resume-20261003/FIXED-CYCLE/runs/cycle163-input0-r1/main-timer-stop.json": "7dcfee3d0f6d458c477d356171d6dc22abd316b5762d0543ac2166f996081ac1"
+  }
+}

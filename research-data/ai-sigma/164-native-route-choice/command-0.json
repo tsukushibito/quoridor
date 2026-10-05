@@ -1,0 +1,55 @@
+{
+  "start_epoch": 1791002314.8003266,
+  "end_epoch": 1791002318.5770297,
+  "elapsed_s": 3.776703357696533,
+  "commands": [
+    {
+      "command": [
+        "bash",
+        "scripts/dev/beads.sh",
+        "ready",
+        "--json"
+      ],
+      "start_epoch": 1791002314.8003557,
+      "end_epoch": 1791002315.4265342,
+      "exit": 0
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/dev/beads.sh",
+        "show",
+        "quoridor-4lc",
+        "--json"
+      ],
+      "start_epoch": 1791002315.4265952,
+      "end_epoch": 1791002316.3586373,
+      "exit": 0
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/dev/beads.sh",
+        "show",
+        "quoridor-4lc.164",
+        "--json"
+      ],
+      "start_epoch": 1791002316.3588872,
+      "end_epoch": 1791002317.1604297,
+      "exit": 0
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/dev/beads.sh",
+        "update",
+        "quoridor-4lc.164",
+        "--claim",
+        "--json"
+      ],
+      "start_epoch": 1791002317.1608555,
+      "end_epoch": 1791002318.5767362,
+      "exit": 0
+    }
+  ]
+}

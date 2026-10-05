@@ -1,0 +1,43 @@
+{
+  "id": "plot-rootmean-r1",
+  "kind": "static",
+  "UTC": "2026-10-04T00:39:11.660690+00:00",
+  "identity": {
+    "pid": 3829356,
+    "ppid": 3829296,
+    "pgrp": 3829356,
+    "tick": "32731050",
+    "RSS": 9887744,
+    "cmd": "/home/vscode/.cache/inference/envs/quoridor-learning-plots/bin/python -B tools/nnue-training/plot.py --runs research-data/ai-sigma/frame14-learning/runs/frame14-train96-r1 research-data/ai-sigma/frame14-l2-control/runs/frame14-l2-r1 --axis train_samples_seen --metric target --output research-data/ai-sigma/frame14-l2-control/curves/rootmean ",
+    "affinity": [
+      2
+    ]
+  },
+  "command": [
+    "/home/vscode/.cache/inference/envs/quoridor-learning-plots/bin/python",
+    "-B",
+    "tools/nnue-training/plot.py",
+    "--runs",
+    "research-data/ai-sigma/frame14-learning/runs/frame14-train96-r1",
+    "research-data/ai-sigma/frame14-l2-control/runs/frame14-l2-r1",
+    "--axis",
+    "train_samples_seen",
+    "--metric",
+    "target",
+    "--output",
+    "research-data/ai-sigma/frame14-l2-control/curves/rootmean"
+  ],
+  "wall_seconds": 1.960882212035358,
+  "peak_family_RSS": 108617728,
+  "exit": 0,
+  "reason": "completed",
+  "child_waited": true,
+  "remaining": [],
+  "current_exact_identity_absent": true,
+  "samples_charged": 0,
+  "sample_cap": 0,
+  "CPU": [
+    2
+  ],
+  "GPU": 0
+}

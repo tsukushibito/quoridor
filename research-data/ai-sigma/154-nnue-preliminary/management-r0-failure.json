@@ -1,0 +1,13 @@
+{
+  "UTC": "2026-10-03T01:55:55.419754+00:00",
+  "failure": "management-r0 concurrent start-report and rg wrote same temporary output files; lost/mixed independent command ledger",
+  "affected": [
+    "AppServer start-report successful accepted steer01a0ff6e-be21-7f73-9887-f35b259b023a stdout contains appended rg output",
+    "rg missing path tools/ai-sigma-frame10-fidelity exit2; file-list only not source read"
+  ],
+  "original_mixed_output": "command.stdout.tmp and command.stderr.tmp retained",
+  "fix": "per-manager output paths and fcntl ledger lock; all future calls sequential",
+  "NN_science_effect": 0,
+  "lost_exact_per_command_timing": "rg timing not retained; no fabricated reconstruction",
+  "saved_versions": "r0 failure represented by this note and upcoming Git diff, no old successful scientific result replaced"
+}

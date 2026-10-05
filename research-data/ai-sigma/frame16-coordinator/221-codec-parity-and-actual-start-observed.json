@@ -1,0 +1,53 @@
+{
+  "UTC": "2026-10-04T09:12:51.694480+00:00",
+  "phase": 3,
+  "source_Git": "48c51dbdeef4b7e114e015ecddc6c429d03c24dd",
+  "parity_checks": 16,
+  "B": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "physical_NN": 432,
+  "CPU_fixedtol_maxabs": 7.152557373046875e-06,
+  "oldgraph_codec_bitexact_all": true,
+  "parity_process": {
+    "startUTC": "2026-10-04T09:09:40.584007+00:00",
+    "endUTC": "2026-10-04T09:09:45.567089+00:00",
+    "jobwall_seconds": 6.652849619043991,
+    "exit": 0,
+    "stop_reason": null,
+    "samples": null,
+    "remaining": [],
+    "allchildwait": null,
+    "exact_current_remaining": null
+  },
+  "filesSHA": {
+    "research-data/ai-sigma/frame16-teacher-throughput/codec-control/jobs/parity-r2/result.json": "7c091014e441c973c83744e8536d50dd0751749e94368fb191074a1b09412a41",
+    "research-data/ai-sigma/frame16-teacher-throughput/codec-control/jobs/parity-r2/process.json": "6ba83a92104314d405be9fe7aa6cc739575ec44b8d3a9978180456db1c3e0ff1",
+    "research-data/ai-sigma/frame16-teacher-throughput/codec-control/jobs/codec-r1/actual-start.json": "2283c45a77e866ff6ed563b62d6ac649ebfc80e4e2de2324e1e4ef29657246a5"
+  },
+  "main_actualstart": {
+    "UTC": "2026-10-04T09:09:58.270020+00:00",
+    "command": [
+      "/home/vscode/.local/bin/node",
+      "--max-old-space-size=192",
+      "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-teacher-throughput/codec-control/generate.cjs",
+      "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame16-teacher-throughput/codec-control/codec-r1-config.json"
+    ],
+    "source_git": "48c51dbdeef4b7e114e015ecddc6c429d03c24dd",
+    "runner_pid": 11822,
+    "runner_tick": 35797442
+  },
+  "science_acceptance": "parity and start bound only; whole quality and speed acceptance pending",
+  "whole_leaf_truth": false,
+  "admission_failure_beforechild_NN": 0,
+  "admission_failure_charge_s": 5,
+  "reason": "prior coordinator save process observed by owner; exact owned stop before next admission",
+  "new_cap_or_approval": false
+}

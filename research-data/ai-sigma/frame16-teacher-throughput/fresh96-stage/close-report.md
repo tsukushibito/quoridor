@@ -1,0 +1,3 @@
+goal quoridor-4lc /221本人close+backup完了
+統括finite acceptanceに従い同turn本人221closed、backup sync exit0/240ms。必要保存finalGitf1173e82a9104d562a1854be14724859927af1e8/member/Gitbytes復元PASS/indexunchanged。正本 /workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame16-teacher-throughput/fresh96-stage/close-and-backup-receipt.json。
+全96GOAL/4603joint/832417NN、全source/science停止。1000job50.9073min/既知資格pack/reportGit52.4706min+export/dispatch/backup等unknown。60短見込み・30未達/実1000NOT_RUN。原UNKNOWN/sampleproof/foreignoriginunknown/clockactive26非handle/共有参照範囲/内7/IID未証明を保持。新96evaluation-only datasetcandidateで学習mix0/新test0/教師truth/棋力/最高goalclose0。新生成/調整0、次枠自動開始0。

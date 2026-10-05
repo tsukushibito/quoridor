@@ -1,0 +1,168 @@
+{
+  "UTC": "2026-10-04T12:30:56.035824+00:00",
+  "controls": [
+    {
+      "id": "quoridor-4lc",
+      "status": "in_progress",
+      "assignee": "codex:01a0f31b-3409-75f2-a30e-453a50484f94",
+      "labels": [
+        "continuation-active",
+        "frame18"
+      ]
+    },
+    {
+      "id": "quoridor-4lc.228",
+      "status": "in_progress",
+      "assignee": "codex:01a0f31d-6d15-7620-bb63-4b4f878e4746",
+      "labels": [
+        "continuation-active",
+        "frame18",
+        "research"
+      ]
+    }
+  ],
+  "current": [
+    {
+      "pid": 61691,
+      "ppid": 1,
+      "tick": 36359387,
+      "state": "S",
+      "RSS": 146935808,
+      "affinity": [
+        0
+      ],
+      "script": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/scheduler.py",
+      "argv": "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python -B /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/scheduler.py run --config /workspaces/quoridor/.worktree/ai-sigma/.ar"
+    },
+    {
+      "pid": 61711,
+      "ppid": 1,
+      "tick": 36359409,
+      "state": "S",
+      "RSS": 22106112,
+      "affinity": [
+        0
+      ],
+      "script": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/watch.py",
+      "argv": "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python -B /workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/watch.py --run-dir /workspaces/quoridor/.worktree/ai-sigma/.artifacts"
+    }
+  ],
+  "foreign": [],
+  "quiet_seconds": 754.4277248382568,
+  "scheduler": {
+    "binding": {
+      "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+      "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+      "target": "supervisor",
+      "dispatch_issue": "quoridor-4lc.40",
+      "contract_file": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+    },
+    "process": {
+      "pid": 61691,
+      "start_ticks": "36359387",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "phase": "running",
+    "recovery_required": false,
+    "last_result": {
+      "at": "2026-10-04T12:25:52.731821+00:00",
+      "event": "owned_turn_finished",
+      "turn_id": "01a106de-9ac2-7880-937e-093ed4315793",
+      "status": "completed"
+    },
+    "config_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json",
+    "config_sha256": "5eb54da3757058a11a538e0fcec1fd8121810a5b4fa2333164320ee5a52497fc",
+    "contract_sha256": "854990dcf3aff1f5e8765e464f580fb1d8c8df39f57311ae1214a5a7ee9ae843",
+    "next_at": 1791117810.4213066,
+    "owned": null
+  },
+  "monitor_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame18-76faf64a-a12e-4d15-8591-947181c91d53/monitor-observation.json",
+  "monitor_observation": {
+    "at": "2026-10-04T12:30:47.624330+00:00",
+    "process": {
+      "pid": 61711,
+      "start_ticks": "36359409",
+      "state": "R",
+      "rss_bytes": 20574208,
+      "cpu_ticks": 2,
+      "affinity": [
+        0
+      ],
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "scheduler_process": {
+      "pid": 61691,
+      "start_ticks": "36359387",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "scheduler_identity_alive": true,
+    "owned": null,
+    "last_result": {
+      "at": "2026-10-04T12:25:52.731821+00:00",
+      "event": "owned_turn_finished",
+      "turn_id": "01a106de-9ac2-7880-937e-093ed4315793",
+      "status": "completed"
+    },
+    "first_dispatched": {
+      "at": "2026-10-04T10:43:37.265891+00:00",
+      "event": "dispatched",
+      "run_id": "6fcf4c84-dbd8-4a54-85e9-62bd16a2fe28",
+      "turn_id": "01a10683-18a6-7673-a6e4-2c9d7f52955d"
+    },
+    "first_owned_turn_finished": {
+      "at": "2026-10-04T10:47:00.614972+00:00",
+      "event": "owned_turn_finished",
+      "turn_id": "01a10683-18a6-7673-a6e4-2c9d7f52955d",
+      "status": "completed"
+    },
+    "sampled_owned_process_rss_peak_bytes": 182530048,
+    "own_scope_allocated_peak_bytes": 35164160,
+    "sample_count": 639,
+    "all_team_pid_zero_claimed": false,
+    "bounded_supervisor_run_allocated_bytes": null,
+    "inspection_semantic_success_independently_verified": false
+  },
+  "parent_current_RSS": 217186304,
+  "job_RAM": 6442450944,
+  "RAM_guard": 5905580032,
+  "GPU_current": [],
+  "CPU_cores": [
+    0,
+    2,
+    4,
+    6
+  ],
+  "logical_CPU_max": 4,
+  "owned_control_ancestor_PIDticks": {
+    "123133": 36781104,
+    "123081": 36780917,
+    "1": 103415
+  },
+  "prior_jobwall_s": 1714.2395113499952,
+  "prior_samples": 1450554,
+  "storage_current_B": 88710580,
+  "old_scope_actual_B": 266084002,
+  "new_runtime_loaded_path": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame18/running-loaded.json",
+  "uniqueGit_remaining_forecast_B": 134217728,
+  "all_inclusive_forecast_B": 298425780,
+  "storage_ledger": {
+    "UTC": "2026-10-04T11:30:35.407143+00:00",
+    "pool_MiB": 1980,
+    "prior_confirmed_unused_B": 702652416,
+    "reservation_B": 536870912,
+    "unused_after_reservation_B": 165781504,
+    "guard_B": 469762048,
+    "authorizedGit_forecast_B": 134217728,
+    "temp_and_residual_forecast_B": 33554432,
+    "scope_forecast_B": 402653184,
+    "old_scopes_current_B": 266084002,
+    "parent_added_B": 0,
+    "old_unknown_discount_B": 0,
+    "later_other_allocation_not_assumed_free": true,
+    "reference": "research-data/ai-sigma/frame18-worker-balance/storage-admission.json",
+    "new229_reservation_B": 8388608,
+    "pool_unused_after_all_current_allocations_B": 157392896
+  },
+  "physical_current_point_not_allhost_guarantee": true
+}

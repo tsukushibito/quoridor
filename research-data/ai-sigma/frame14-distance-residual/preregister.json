@@ -1,0 +1,73 @@
+{
+  "issue": "quoridor-4lc.200",
+  "run_id": "frame14-distance-residual-r1",
+  "stage": "research-data/ai-sigma/frame14-learning/stages/train96.stage.json",
+  "stage_SHA": "af95eabf3d059982e67cba41fcee0233aaea8a53eaf81a3b1fbae60752d83e75",
+  "fit_source": "research-data/ai-sigma/frame14-representation-audit/result.json",
+  "fit_SHA": "77ce9e79495038b25a4f4a9ffd95dc9f66700aff2c1f96cf08b65fff3c79733c",
+  "coefficients": {
+    "a": 0.06294242415104226,
+    "b": 8.276425107422213
+  },
+  "condition": "QF1-distance-residual-f32-v1",
+  "prediction": "clip(clip(f32(a)+f32(b)*(f32(d_opp)-f32(d_self)),-1,1)+tanh(QF1_head),-1,1)",
+  "initialization": "seed19080311; existing ft/h fresh initialization; out weight and bias zero",
+  "comparison_atol": 1e-06,
+  "comparison_rtol": 1e-06,
+  "initial_rows": 5901,
+  "samples_upper": 379921,
+  "warm": 0,
+  "test_samples_cap": 12000,
+  "total_samples_cap": 500000,
+  "gate": {
+    "constant_gameMSE": 0.6787804677332444,
+    "random_QF1_gameMSE": 0.6901755738627967,
+    "margin": 0.0001,
+    "step0_allowed": true,
+    "finite_schema_required": true,
+    "source_child_stop_required": true
+  },
+  "test_rule": {
+    "fresh24": true,
+    "old_labels_read": false,
+    "exposure": "state OR history OR actual QF1; old train96+allval+oldtest label-free only",
+    "models": [
+      "candidate",
+      "best",
+      "last",
+      "distance_initial",
+      "old_QF1_initial"
+    ],
+    "unique_NN_max": 4,
+    "constant": 0.01086389238577769,
+    "bootstrap_repetitions": 2000,
+    "bootstrap_seed": 20080311,
+    "test_once": true
+  },
+  "readonly_sources": {
+    "tools/nnue-training/frame14_data.py": "f45482fe6d1a4477ee3bf3b080d14d883b1f28c79517cff83e4318b7a90e37b8",
+    "tools/nnue-training/frame14.py": "f08cc5177f1ab4f808f97ea260ec99ab7d5ce233c9d190b15118fc099dba71b7",
+    "tools/nnue-training/plot.py": "81081a71814a3a9955a759411f84bd1a2ac8a057161f4af9b813eccace41fb3b",
+    "tools/nnue-training/test_contrast.py": "76d1b2a079906aac53d77f15d7e99e006619436aa81a4f2bad5b9f3b23612749",
+    "tools/nnue-training/summarize_frame14.py": "5205b29684aa579b7125d31d3fb9726899435b45581da5d6ee0099021d7ddcf9",
+    "tools/nnue-training/test_frame14.py": "406d10d1604e4f7ecd837d974e82114f0d4b32070b192d2eac6118d8edf8b7e9",
+    "tools/nnue-training/common.py": "876e0e9a610b594db63e62e81ae920684f10e52f71a7cc75e04f8fbadd9ffe04",
+    "tools/nnue-training/preflight_frame14.py": "61284ee9862d30db18e4272388f388bbfaa0ceb4bd9bccd1c623387315f279b0",
+    "tools/nnue-training/prepare_frame14.py": "600827ac18fa7551df731c8173fd93ad5c318415bbf416fcf6758ae8fa2ecd7c",
+    "tools/nnue-training/test_workbench.py": "d192d07f9a0be11ed99a6e7343e33dd51f3287be7a7aa65b5d0e06280519e613",
+    "tools/nnue-training/train.py": "665848e238d6a7976b83c53b0c13cdb87f9e65f4a75329560d6a98afbe9863d3",
+    "tools/nnue-training/manage_frame14.py": "cf13f3e0e1cf5d2784cad19b64d7cb1917d099785cb7f515b40a3abd927c2286",
+    "tools/nnue-training/compare.py": "92fe702e3abef15e0f74e0edb185fec1b55108a4c3e9bd030402062a640af2e9",
+    "tools/nnue-training/test_quantity.py": "2cc7e642c24c6d1c81d56e341e3ee887ca7b06def9a3c6781c18806e765f6898",
+    "tools/nnue-training/save_research.py": "d203b3379fa293afe76299ad3bba1347b5a774f733f72181d5fe8dca7b838089",
+    "tools/nnue-training/finalize_freeze.py": "29999004dc9afdc9f9e96853d0118652cb30775b7c24105c62c759afc7bed68d",
+    "tools/nnue-training/model.py": "12661cac69cff8b01800eb2d3df5be5f8674858d9ce995713b4385da44c74357"
+  },
+  "private_sources": {
+    "tools/ai-sigma-qf1-distance-residual/residual_model.py": "7e456d2c86b0e2a8f1d1f0feff1e43446181ddaabc52920cf7fbcd7076149627",
+    "tools/ai-sigma-qf1-distance-residual/save.py": "c02fe5cceba5205d53a054ce0af1fa690c73014ff0bc5add56f25f0b235e50ef",
+    "tools/ai-sigma-qf1-distance-residual/launch.py": "2103a9dc64c034ef0f6d21a00c5dcebf7518b4463c2ed3ea7d734f522fe30bf9",
+    "tools/ai-sigma-qf1-distance-residual/preflight.py": "b242ca7a85a5c5360b5fa270ebeab1a997e80539cb2c0bc517a7e919be2cc2ef",
+    "tools/ai-sigma-qf1-distance-residual/run.py": "0d6222cf0f5e44bed2a7b9a517206052d8c18fb871cf5317d40985cd14f002b9"
+  }
+}

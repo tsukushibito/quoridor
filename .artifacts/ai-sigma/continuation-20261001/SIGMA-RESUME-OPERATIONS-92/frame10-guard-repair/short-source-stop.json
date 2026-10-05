@@ -1,0 +1,39 @@
+{
+  "at": "2026-10-03T02:57:16.494475+00:00",
+  "short_recorder": {
+    "pid": 3080517,
+    "start_ticks": "24916689",
+    "state": "R",
+    "rss_bytes": 19267584
+  },
+  "short_children": [],
+  "source_frozen_since_restart": true,
+  "expected_hash_count": 24,
+  "mismatches": [],
+  "storage": {
+    "steward_allocated_bytes": 17264640,
+    "supervisor_held_bytes": 108105728,
+    "supervisor_current_frame_bytes": 4067328,
+    "supervisor_historical_held_bytes": 104038400,
+    "forecast_bytes": 4194304,
+    "additional_reservation_bytes": 0,
+    "historical_parent_charge_released": false
+  },
+  "intentional_long_runtime": [
+    {
+      "pid": 3070572,
+      "start_ticks": "24839468",
+      "state": "S",
+      "rss_bytes": 101249024
+    },
+    {
+      "pid": 3070586,
+      "start_ticks": "24839490",
+      "state": "S",
+      "rss_bytes": 21737472
+    }
+  ],
+  "instant_global_peak_verified": false,
+  "old_holdings_released": false,
+  "short_recorder_absent_after_return": true
+}

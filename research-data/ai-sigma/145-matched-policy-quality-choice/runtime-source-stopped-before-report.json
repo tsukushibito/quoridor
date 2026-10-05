@@ -1,0 +1,169 @@
+{
+  "issue": "quoridor-4lc.145",
+  "UTC_start": "2026-10-02T20:13:25.745697+00:00",
+  "UTC_end": "2026-10-02T20:13:26.430423+00:00",
+  "self_save_helper_pid": 2817908,
+  "self_save_helper_starttick": 22492556,
+  "data_source_report_Git": "5bef895",
+  "restored_current_Git_stream_matches": [
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-matched-policy-quality.md",
+      "sha256": "dfc358b42f817f1187d7887320178489716f6754bc222be0ab5e9186305c7a1c",
+      "bytes": 9379
+    },
+    {
+      "path": "tools/ai-sigma-matched-policy-quality-choice/check.py",
+      "sha256": "2bc32dd00836cbd283b0c3691e8f48475abfafb3a1dfb4add59501fa05cf5e88",
+      "bytes": 5579
+    },
+    {
+      "path": "tools/ai-sigma-matched-policy-quality-choice/run.py",
+      "sha256": "95ad6d3447abaa6567f279a0f3800f52e0036209dd8f33a5f2c7b637da22697b",
+      "bytes": 2269
+    },
+    {
+      "path": "research-data/ai-sigma/145-matched-policy-quality-choice/proposal.json",
+      "sha256": "bccfc0b7453432671a5b6bd47cda93f2cfd3040e47021b57ceeda64cdc61825c",
+      "bytes": 9298
+    },
+    {
+      "path": "research-data/ai-sigma/145-matched-policy-quality-choice/run-record.json",
+      "sha256": "cf9711faba5942fac3e5f40e3598fc0c1a93ed7de633ba6add2c73ec511ed74c",
+      "bytes": 1228
+    },
+    {
+      "path": "research-data/ai-sigma/145-matched-policy-quality-choice/storage-intake.json",
+      "sha256": "1ebb378467ac9437ef310b1d358919c79256f12dd39c1c9688e9e08ed5b35395",
+      "bytes": 303
+    },
+    {
+      "path": "research-data/ai-sigma/145-matched-policy-quality-choice/static-results.json",
+      "sha256": "c2459f01962233cc78b45e1b22c4e6efc6d2aa4a60d6e1240d9211519806c4dc",
+      "bytes": 7354
+    },
+    {
+      "path": "research-data/ai-sigma/145-matched-policy-quality-choice/intake.json",
+      "sha256": "284f7a725f6e39cc32131d2bf88ea670846b7d94c108020d68f77e513f203ade",
+      "bytes": 330
+    }
+  ],
+  "restore_commands": [
+    {
+      "command": [
+        "git",
+        "show",
+        "5bef895:docs/reports/ai-sigma-hypothesis-matched-policy-quality.md"
+      ],
+      "pid": 2817909,
+      "starttick": 22492558,
+      "exit": 0
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "5bef895:tools/ai-sigma-matched-policy-quality-choice/check.py"
+      ],
+      "pid": 2817910,
+      "starttick": 22492566,
+      "exit": 0
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "5bef895:tools/ai-sigma-matched-policy-quality-choice/run.py"
+      ],
+      "pid": 2817911,
+      "starttick": 22492572,
+      "exit": 0
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "5bef895:research-data/ai-sigma/145-matched-policy-quality-choice/proposal.json"
+      ],
+      "pid": 2817912,
+      "starttick": 22492577,
+      "exit": 0
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "5bef895:research-data/ai-sigma/145-matched-policy-quality-choice/run-record.json"
+      ],
+      "pid": 2817913,
+      "starttick": 22492582,
+      "exit": 0
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "5bef895:research-data/ai-sigma/145-matched-policy-quality-choice/storage-intake.json"
+      ],
+      "pid": 2817914,
+      "starttick": 22492595,
+      "exit": 0
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "5bef895:research-data/ai-sigma/145-matched-policy-quality-choice/static-results.json"
+      ],
+      "pid": 2817917,
+      "starttick": 22492609,
+      "exit": 0
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "5bef895:research-data/ai-sigma/145-matched-policy-quality-choice/intake.json"
+      ],
+      "pid": 2817924,
+      "starttick": 22492619,
+      "exit": 0
+    }
+  ],
+  "source_hash_final": {
+    "tools/ai-sigma-matched-policy-quality-choice/run.py": "95ad6d3447abaa6567f279a0f3800f52e0036209dd8f33a5f2c7b637da22697b",
+    "tools/ai-sigma-matched-policy-quality-choice/check.py": "2bc32dd00836cbd283b0c3691e8f48475abfafb3a1dfb4add59501fa05cf5e88"
+  },
+  "necessary_input_after": {
+    "research-data/ai-sigma/119-diverse-prefix/preregister.json": "5ae2af8776feff8994e540ba5db24ab242d695da8cc827e0cd31513c613a30fb",
+    "research-data/ai-sigma/119-diverse-prefix/prefix119-pair1-r1.summary.json": "ef6735c5620c7ab1c2dfb531c3330b76165d4890b136e6a248518446a155f9c5",
+    "research-data/ai-sigma/119-diverse-prefix/prefix119-pair7-r1.summary.json": "f20d3dc67e09fdd0397e12823ff0f1f686348fa852e3c34d46ee82eaf19755f2",
+    "research-data/ai-sigma/119-diverse-prefix/prefix119-pair8-r1.summary.json": "06c499baecd5ae3098accbafb3399940ddde5e4bd66785dd590db935e8dda2c3",
+    "research-data/ai-sigma/110-c-factor-browser/build-manifest.json": "0c2d407480f128fe27ad1139c581e8c0d70bd047448731d5a9a72bc40297e854",
+    ".artifacts/ai-sigma/runs/SIGMA-ORT-SEARCH/final.wasm": "1f54d0b8f0c6d3d7d51935886ed506e44376a2052506be62ca7a726c85a78a01",
+    "research-data/ai-sigma/110-c-factor-browser/binaries/c1.wasm": "8438310cf8f7d096bd84364a03b97f99f737ca0a9be6c2812a7ecdee3d92d9dd",
+    "crates/quoridor-ai/src/lib.rs": "5ab5eca5c23814dbaa0162b25e8fe710e58cdb7139c0fa4e3e2f794dc041555a",
+    "tools/ai-sigma-player-workers/player-main.js": "610e899acd43215efc9fa3a08f3c337248639505a57196e1a730a91f7afde4a8",
+    "research-data/ai-sigma/144-wallless-ai-sensitivity/handoff-summary.json": "cc67ec8badf2ae63d5dba8d6e13067bd88304d3493aac59b819aca7fefe51ad8",
+    ".artifacts/ai-sigma/resume-20261002/coordinator144-early-stop-check.json": "520f286bf5c6c2f7c6854e8becadb237bc8bb9bbf4d48a5419b96e7bbe05169b",
+    ".artifacts/ai-sigma/resume-20261002/coordinator143-heavy-stop-check.json": "393b67ce84de1e351e899799cde664329dc61e87c42a32cd9e7120afc702c027"
+  },
+  "input_changed": {},
+  "scientific_checker_stopped": true,
+  "checker_child_waited": true,
+  "owned_current_same_identity": [],
+  "remaining_unknown": 0,
+  "restore_Git_children_waited": true,
+  "current_absent_not_natural_fullperiod": true,
+  "restore_helper_peakRSS_not_current": 16683008,
+  "old_conservative_not_decreased": true,
+  "self_current_allocated": 327680,
+  "conservative_combined_forecast": 11560048,
+  "combined_guard": 14680064,
+  "old145_intake_holding_double_counted_conservatively": true,
+  "new_reservation": 0,
+  "limitation": "initial short management commands and runner-manager PID/starttick not fully recorded; no exact all-command CPU/RSS/wall/fullhost or instant peak guarantee",
+  "newNN": 0,
+  "newChrome": 0,
+  "newgame": 0,
+  "proposal_executed": false
+}

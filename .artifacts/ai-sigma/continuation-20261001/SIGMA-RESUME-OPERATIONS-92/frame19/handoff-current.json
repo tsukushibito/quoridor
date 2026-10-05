@@ -1,0 +1,70 @@
+{
+  "at": "2026-10-04T23:07:49.606665+00:00",
+  "phase": "running",
+  "scheduler": {
+    "pid": 380692,
+    "start_ticks": "40787373",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+    "same_identity": true,
+    "state": "S"
+  },
+  "monitor": {
+    "pid": 380701,
+    "start_ticks": "40787392",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+    "same_identity": true,
+    "state": "S"
+  },
+  "input_count": 24,
+  "input_mismatches": [],
+  "loaded_config_sha256": "7662fc8cc99738aa067cef1604aba9e046e62b0538599037abcb4c3ab3f73491",
+  "loaded_contract_sha256": "39a513878ba6e1ba71b3e79b49a8d30ab9c1760db4ec91bf1289b42cb7a16178",
+  "owned": null,
+  "last_result": {
+    "at": "2026-10-04T23:04:30.407058+00:00",
+    "event": "owned_turn_finished",
+    "turn_id": "01a10926-6218-7c32-865c-b9039267a4e6",
+    "status": "completed"
+  },
+  "next_at": 1791156066.4087508,
+  "resource": {
+    "steward_allocated_bytes": 37355520,
+    "supervisor_held_bytes": 145252352,
+    "supervisor_current_frame_bytes": 278528,
+    "supervisor_historical_held_bytes": 144973824,
+    "forecast_bytes": 8388608,
+    "additional_reservation_bytes": 0,
+    "historical_parent_charge_released": false
+  },
+  "root_acceptance_reference": "/workspaces/quoridor/.artifacts/research-team/frame19-resume/runtime-root-acceptance.json",
+  "source_write_stopped": true,
+  "short_children_remaining": 0,
+  "intentional_long_children": 2,
+  "evidence_commit": "53dcb13d795b68f791e00bf939b1b5ba8dd2f066",
+  "supervisor_public_latest": {
+    "thread_status": {
+      "type": "idle"
+    },
+    "turn_id": "01a10926-6218-7c32-865c-b9039267a4e6",
+    "status": "completed",
+    "error": null,
+    "items_count": 13,
+    "item_types": [
+      "userMessage",
+      "agentMessage",
+      "commandExecution",
+      "reasoning",
+      "commandExecution",
+      "reasoning",
+      "commandExecution",
+      "reasoning",
+      "commandExecution",
+      "reasoning",
+      "agentMessage",
+      "commandExecution",
+      "agentMessage"
+    ],
+    "owned_id_matches": false,
+    "interpretation": "finite public history only; no inference of scientific quality or future compliance"
+  }
+}

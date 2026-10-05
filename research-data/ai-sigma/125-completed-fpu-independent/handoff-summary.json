@@ -1,0 +1,120 @@
+{
+  "issue": "quoridor-4lc.125",
+  "verdict": "finite FPU sensitivity and four K32 reproduction supported; candidate FPU adoption evidence insufficient",
+  "actual_go": false,
+  "games": 0,
+  "saved_completed": 15,
+  "saved_backups_NN": 480,
+  "saved_transport": 16,
+  "saved_admission_launch0": 1,
+  "saved_presearch_NN0_failure": 1,
+  "independent_searches": 4,
+  "independent_backups_handNN": 128,
+  "startupNN": 6,
+  "totalNN": 134,
+  "saved_comparisons": [
+    {
+      "fixture": "initial-p1",
+      "TV_AB": 0,
+      "TV_AC": 0,
+      "TV_BC": 0,
+      "actions": [
+        13,
+        13,
+        13
+      ],
+      "distance_direction": "equal",
+      "root_NN_exact": true
+    },
+    {
+      "fixture": "asym-hv-p2",
+      "TV_AB": 0.03225806451612903,
+      "TV_AC": 0.06451612903225806,
+      "TV_BC": 0.03225806451612903,
+      "actions": [
+        67,
+        67,
+        67
+      ],
+      "distance_direction": "farther",
+      "root_NN_exact": true
+    },
+    {
+      "fixture": "straight-jump-p2",
+      "TV_AB": 0.16129032258064516,
+      "TV_AC": 0.25806451612903225,
+      "TV_BC": 0.41935483870967744,
+      "actions": [
+        31,
+        31,
+        131
+      ],
+      "distance_direction": "farther",
+      "root_NN_exact": true
+    },
+    {
+      "fixture": "diverse-prefix-1",
+      "TV_AB": 0.6451612903225806,
+      "TV_AC": 0.12903225806451613,
+      "TV_BC": 0.7741935483870968,
+      "actions": [
+        13,
+        13,
+        13
+      ],
+      "distance_direction": "closer",
+      "root_NN_exact": true
+    },
+    {
+      "fixture": "diverse-prefix-2",
+      "TV_AB": 0,
+      "TV_AC": 0,
+      "TV_BC": 0,
+      "actions": [
+        67,
+        67,
+        67
+      ],
+      "distance_direction": "equal",
+      "root_NN_exact": true
+    }
+  ],
+  "independent_comparisons": [
+    {
+      "fixture": "diverse-prefix-1",
+      "TV_BC": 0.7741935483870968,
+      "actions_BC": [
+        13,
+        13
+      ]
+    },
+    {
+      "fixture": "straight-jump-p2",
+      "TV_BC": 0.41935483870967744,
+      "actions_BC": [
+        31,
+        131
+      ]
+    }
+  ],
+  "matching_all_four_Action_visits_features_exact": true,
+  "archiveSHA256": "2f495489d02bb784d9376f956fe8ff4bf41ce408cfe14daedbb4a8b3684cd30c",
+  "archive_members": 66,
+  "stopSHA256": "055a75d23f1580a415c180c2931eea26104e8912d643c452fd723273864b65eb",
+  "browserwall": 27.87772,
+  "staticwall": 0.829038,
+  "own_helper_failure_count": 1,
+  "source_freezeUTC": "2026-10-02T13:26:21.813639+00:00",
+  "currentabsence_is_not_natural_stop": true,
+  "acceptance_owner": "coordinator",
+  "future_minimal_proposal": "saved failing public root work/firsteligibleCP/selfwait comparison; preserve candidate policy",
+  "limits": [
+    "5 inputs; one search each",
+    "postselection reverse-direction diagnostic",
+    "A/B multiple rules and precision/order bundle",
+    "candidate true parentQ unavailable",
+    "perselection full child state absent",
+    "whole wrapper cost not kernel or 500ms available work",
+    "midrun drift and effective CPU equality not proved"
+  ]
+}
