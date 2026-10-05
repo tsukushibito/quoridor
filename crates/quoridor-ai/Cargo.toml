@@ -4,3 +4,8 @@ version = "0.1.0"
 edition = "2024"
 [dependencies]
 quoridor-core = { path = "../quoridor-core" }
+
+[features]
+profiling = ["quoridor-core/profiling"]
+research = ["quoridor-core/research"]
+research-diagnostics = ["research", "quoridor-core/research-diagnostics"]

@@ -120,3 +120,23 @@ phase3実測heavy165.263518秒、入口拒否actualwall UNKNOWNに対する保�
 次最大1案は、この固定codec+graphで新fresh96の段階生成を、総費・実density・多様性・尾部・保存まで含めて測ること。広いarray/Rustpump/C++移行の回収費を増やす前に30分目安の余裕が実分布でも残るかを判別できる。これは次配分案であり実生成許可ではない。固定順/hostwarm/小標本の交絡によりcodec各要素の唯一原因を断定しない。
 
 新source30＋算術30=60/60停止、旧60＋90=150は保持（総210）。成功算術0.004965秒/peak16,064,512B、NN/model/forward0。失敗修復もこの枠内。source再現は`codec-control/check.py.gz`をstdlib gzipで解凍してexec、timeout30/CPU0/RAM224MiB。未知保持/親予約増0、必要小Git/byte復元/index不変更/backup後に統括へ有限引渡しする。
+
+
+## phase4 選定前見解
+
+新fresh96は、方式調整を増やす前に密度・継続供給・尾部・保存費の移行を判別する低費用の主配分として支持する。新lineageだけではIIDや共有stateなしを保証せず、旧48との率差を純codec利益としない。最大1留保は、1000局外挿を実densityと全工程既知/unknownで提示すること。広いarray/Rustpump/C++移行は、今回でも輸送やworker境界が支配し回収見込みを変える場合の有力保留案。旧210秒を保持、新source20+算術30=50、source/result停止とfresh物理窓を実算術条件にする。
+
+
+## phase4 fresh96 有限裁定
+
+停止正本SHA `002d9917438e3efa349d604d30c526f20410e62c455fb8b90d9e3b63275dbb9b` とcurrent sourceに束縛。新nullable正monitor6049/6062のPIDtick/owned回収/quiet、science wait/exact不在を直前確認し、CPU0 NN0算術PASS（0.113395秒/peak34,942,976B）。旧210秒を保持、新50/50停止。
+
+全96登録/96GOAL、Rpolicy=Rz=Rjoint=4603、0eligiblegame0、unknownz/discard0。6opening-ply cohort各16、game/family各96を独立再算。logical262849＋graphcapture108=physical262957、旧569460と総832417<900000。terminal-noNN31743/startup旧counter0は別分母。全batch加重和/started-returned-resumed、平均B7.079536を照合。独立署名算術はstate OR opaquehistory OR STM sortedIDs+f32distanceの一致を比較し、旧label-free参照0行、新96既出署名7行を支持する。原canonical/RuleA/opaquehistoryの変換真値と全leaf教師truthは再認証せず、IIDや棋力に拡張しない。教師labels/旧test結果/173は未読。
+
+job293.226300秒、全attempt295.086630秒（初回入口失敗1.860330秒保持）。初回sample null UNKNOWNは上書きせず、モデル開始前source-order0NN補足を別根拠とした。検出相手PID未保存なのでowned孫raceを唯一原因としない。修復版の初回modelscienceを成功置換と混同しない。
+
+実density47.947917/game、15.697773 Rjoint/s。job-only1000外挿50.907344分、必要行率は60分13.318866/30分26.637731。旧48の約29分を流用せず、新分布/仕事量の差として扱う。cold4.201秒/最後8局tail50.162秒/24局82.860秒。broker pending上限24とUTC＋elapsed由来の見掛けactive26は別であり、26を実handle数と認定しない。
+
+資格1.946766秒とjobを別に保存。独立算術snapshot時点でpack/Git/管理終端費はpending/unknown、wholepipeline60分達成や1000actual完了は未認定。後着保存費はowner参照として保持し、既job内spanへ二重加算しない。次最大1は同fresh96仕事量でworker–Rust配列転送/Rustpumpの薄介入を、実装・回収費と合わせて選ぶこと。輸送単独原因を断定せず、今枠の追加port/NN条件を自動開始しない。
+
+保存はphase3 Git報告をbaseにしたphase4追記gzipと必要record/check sourceを新Gitへ格納し、現報告全bytesの復元を確認する。旧本文コピーとdefault/private index変更を増やさず、64KiB予約/50KiB forecast内を守る。

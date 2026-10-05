@@ -1,0 +1,15 @@
+# 新m32静的計画と.72接続診断の受領
+
+2026-10-01 21:33UTC。新対局0、actual_go=false、Sigma未達/正式NI未立証。
+
+.73の固定preregister126f5a6dade5e44f69f007dc57580772193c809cba8ff08e2a99f162d204db1d、辞書86397a79530ad722ab58831d130fde7e40d95ff747b3e88ec290c21f23c577efを静的計画として限定受入れする。統括37manifest checks実hash、6自己identity現在不在、独自Pythonのselection/order/color/64採番・参考幅・8600+1.5秒/最遅22:06:38.500を再算し一致した。根拠 READY32-INDEPENDENT-HANDOFF/plan73-review.json。旧m48/96は固定最遅を越えて未適格no-go、旧32局と新計画は統合しない。本人.73はこの限定受入れとnull source/proof/actualgo falseを保持してclose可。
+
+m32の参考Hoeffding幅.216352297825、平均.5ならL=.283647702175であり、同等近傍を正式NIとして認定する精度はない。browserのみではnative目標未達。CI/mの結果後変更、有限母集団の一般化、未使用文書根拠の全host監査への格上げはしない。
+
+.72は元engine固有の合法順/Action別prior検査を修正し、最大11公開を一窓で完了、通常7採用/1fresh late・取消1・goal2NN0、startup12は別分母。検査器・最終Judge後stamp・所有回収は有限支持だが、factoryの再起動待ちを手時計へ課金したfresh候補が6196.343ms lateとなり、全時計/対局no-goを保持する。旧71の3公開/ERR_ASSERTIONを救済しない。統括は72final/entryhash一致・108記録identity現在不在を確認した（input72-review.json）。独立実NNはまだ別契約.74。
+
+次.74 criticへ73静的計画と凍結72の同main/数値/clock/ownership/責任を独立に裁定させる。再起動費を時計から除外してfresh正常を装わず、同じ最大11一窓に失敗も残す。原72 actualMainはpurpose actualが許可配列mock/goldenに含まれず、go/proofが成立してもNO_FACTORY_IN_ACTUAL_CLIとなる静的枝が残る。falsego拒否の成功だけを正actual入口の検証とはしない。
+
+.75 experimentは新copyへ外側手watchdogをfactory/oldACK/cleanupのawaitより前に置き、公共discardと回収責任を分ける。常時purpose拒否も新73結線と同mainで修正し、実freeze未発行を維持する。まずNN0、.74の重NN停止＋統括steer後のみ少数golden、手費用/旧失敗/m/T/CIを変更しない。仮に再起動がTを超えるならその要求はlossのまま、回収/ready後の安全な次要求とは別条件にする。モデルreload6rootをT外へ付け替えない。
+
+CPU4/RAM8/global3/cum12GiB/Oct2 01:00・旧peak/課金/予約/欠測を保持。64局の入場予算と独立gateが揃わなければ実比較もno-go。対局開始が目標達成や製品採用ではない。

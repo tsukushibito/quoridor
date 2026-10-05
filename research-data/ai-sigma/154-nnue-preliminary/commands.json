@@ -686,5 +686,46 @@
       0
     ],
     "formal_performance_measurement": false
+  },
+  {
+    "command": [
+      "bash",
+      "/workspaces/quoridor/scripts/dev/research-team.sh",
+      "report",
+      "--to",
+      "coordinator",
+      "--issue",
+      "quoridor-4lc",
+      "--body-file",
+      "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/154-nnue-preliminary/final-report.md"
+    ],
+    "start_UTC": "2026-10-03T02:10:46.484317+00:00",
+    "end_UTC": "2026-10-03T02:10:48.211653+00:00",
+    "wall_seconds": 1.7273457449919078,
+    "exit_code": 0,
+    "manager": {
+      "pid": 3039807,
+      "starttick": "24637530",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child": {
+      "pid": 3039808,
+      "starttick": "24637532",
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "child_current_identity": null,
+    "owned_wait_complete": true,
+    "stop": "owned wait natural exit",
+    "sampled_immediate_child_RSS_bytes": 24297472,
+    "wait_ru_maxrss_bytes": 197312512,
+    "RSS_scope_limit": "sample covers immediate child; not all descendant/current RSS assurance",
+    "stdout_sha256": "9e5d03e78633135aa51ca6f6773af52b7809d3975776d328b9b7de2682aa8f5e",
+    "stderr": "",
+    "stdout_file": "research-data/ai-sigma/154-nnue-preliminary/command-3039807.stdout.tmp",
+    "stderr_file": "research-data/ai-sigma/154-nnue-preliminary/command-3039807.stderr.tmp",
+    "CPU_affinity": [
+      0
+    ],
+    "formal_performance_measurement": false
   }
 ]

@@ -1,24 +1,73 @@
 {
   "issue": "quoridor-4lc.92",
-  "frame": 16,
-  "parent_version": 17,
-  "extension": "frame16-extension17",
-  "updated_by": "92-frame16-extension17",
-  "record": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame16-extension17/running-loaded.json",
-  "run": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame16-extension17-49170cb6-b27b-4fed-8be1-36f441f2df63",
+  "frame": 20,
+  "parent_version": 20,
+  "updated_by": "92/252.1",
+  "record": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/ROLE-RESPONSIBILITIES-252/running-loaded.json",
+  "run": "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/live-frame20-role252-8ffcd224-0c1b-4148-a7b5-59afa6d17ff8",
   "scheduler": {
-    "pid": 4133634,
-    "start_ticks": "35249387",
+    "pid": 556338,
+    "start_ticks": "41842377",
     "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
   },
   "monitor": {
-    "pid": 4133648,
-    "start_ticks": "35249412",
-    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
-    "state": "D",
-    "rss_bytes": 20746240,
-    "affinity": [
-      0
-    ]
+    "started_utc": "2026-10-05T01:56:47.794831+00:00",
+    "process": {
+      "pid": 556359,
+      "start_ticks": "41842391",
+      "state": "R",
+      "rss_bytes": 20602880,
+      "cpu_ticks": 2,
+      "affinity": [
+        0
+      ],
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "command": [
+      "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python",
+      "-B",
+      "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/watch.py"
+    ],
+    "script_sha256": "45ca8d9048aca07430e3daf4f5b7eba48902d3cb174027304d0ae0cd4fec2d1e",
+    "operation_epoch_utc": "2026-10-05T01:56:47.485223+00:00",
+    "recovery_issue": "quoridor-4lc.92",
+    "owned_scheduler_expected": {
+      "pid": 556338,
+      "start_ticks": "41842377",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "expected_input_hashes": {
+      "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/scheduler.json": "e443a6132c3b01f58424aadbbce9cc03c1a6e52f9fd1bbd0531d0c882719cbdd",
+      "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/contract.json": "c4028354d50fb0291cef7652325931a8eabdeb46564e3378fcc9cc9e79a28193",
+      "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/scheduler/prompt.md": "1b0428f642a90778538b15c7ef82c2af854ea7899f1a49f580c9f626341da68f",
+      "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/scheduler.py": "51781d39e23cbeaff0c83b5cf581caf173fc19b91b6ae2b3d189ab6a805dbcb1",
+      "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/watch.py": "45ca8d9048aca07430e3daf4f5b7eba48902d3cb174027304d0ae0cd4fec2d1e",
+      "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/safe_state.py": "bde9bc1ba3cbe831fef89159a8adab9a86ba7d22815776fcfe12fb0ea541c378",
+      "/workspaces/quoridor/.worktree/ai-sigma/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/report.py": "13b2c32f68fdc4dca68c0f251b68ebfdb838d201ff4ad35b489dec12b75ec7b5",
+      "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-supervisor-read-guard/guard.py": "21ddd517338c7da28b56d47a2ca1a2a44c300cdcb72af5d5f0ed0f7eba569d08",
+      "/workspaces/quoridor/.worktree/ai-sigma/docs/design/ai-sigma-contract-supervisor-continuation.md": "0b6c4680cb4b53d5d04d936a2ce5c4897e9caa89d851cee7ad6a724b2fe7c338",
+      "/workspaces/quoridor/.worktree/ai-sigma/docs/design/ai-sigma-continuation-20261001.md": "35c583376c2afc6ab79c9b2e4ae230c187175ca30224fa3e9914072f8a65f7fb",
+      "/workspaces/quoridor/.worktree/ai-sigma/.agents/research-team/common.md": "a4fb1d2d22849964398f62f4e67c34d5e2edd0bd045a2c7e7ab63128c0fcb456",
+      "/workspaces/quoridor/.agents/research-team/common.md": "a4fb1d2d22849964398f62f4e67c34d5e2edd0bd045a2c7e7ab63128c0fcb456",
+      "/workspaces/quoridor/.worktree/ai-sigma/.agents/research-team/roles/coordinator.md": "46cc18ccc63eded9112ae9d41da61c4eba1ec7e94309f09a23a63ba19b81060c",
+      "/workspaces/quoridor/.worktree/ai-sigma/.agents/research-team/roles/hypothesis.md": "e860cc9f2f899f3dd54ade42684f46b9a72f5d5317103b28bee3333ce7c6edac",
+      "/workspaces/quoridor/.worktree/ai-sigma/.agents/research-team/roles/experiment.md": "0e5ba654732cca28b5dc1ea6cfa4f7c0666bf19003b4ce96388052ea7582e164",
+      "/workspaces/quoridor/.worktree/ai-sigma/.agents/research-team/roles/critic.md": "f6866411f3e9a34e65055262abbc06e8617e8dcffcf8ba896c2a896d4ac6577f",
+      "/workspaces/quoridor/.worktree/ai-sigma/.agents/research-team/roles/steward.md": "2b683ce6ad7a5f8f8234551cfea7c06a1d0045f744106c12c38c6d3e04e77700",
+      "/workspaces/quoridor/.worktree/ai-sigma/.agents/research-team/roles/supervisor.md": "4802db9f0f08840e98b3a9fce7949bf278c95a55ec7cf8459530b50a1419ae8f",
+      "/workspaces/quoridor/.agents/research-team/roles/coordinator.md": "46cc18ccc63eded9112ae9d41da61c4eba1ec7e94309f09a23a63ba19b81060c",
+      "/workspaces/quoridor/.agents/research-team/roles/hypothesis.md": "e860cc9f2f899f3dd54ade42684f46b9a72f5d5317103b28bee3333ce7c6edac",
+      "/workspaces/quoridor/.agents/research-team/roles/experiment.md": "0e5ba654732cca28b5dc1ea6cfa4f7c0666bf19003b4ce96388052ea7582e164",
+      "/workspaces/quoridor/.agents/research-team/roles/critic.md": "f6866411f3e9a34e65055262abbc06e8617e8dcffcf8ba896c2a896d4ac6577f",
+      "/workspaces/quoridor/.agents/research-team/roles/steward.md": "2b683ce6ad7a5f8f8234551cfea7c06a1d0045f744106c12c38c6d3e04e77700",
+      "/workspaces/quoridor/.agents/research-team/roles/supervisor.md": "4802db9f0f08840e98b3a9fce7949bf278c95a55ec7cf8459530b50a1419ae8f"
+    },
+    "deadline_utc": "2026-10-05T02:46:02+00:00",
+    "cleanup_deadline_utc": "2026-10-05T02:49:02+00:00",
+    "scope": "bounded state/events; first new epoch ownedturn report; exact owned scheduler deadline/guard stop",
+    "ram_guard_bytes": 1073741824,
+    "allocated_guard_bytes": 117440512,
+    "sampled_not_kernel_enforced": true,
+    "no_NN_build_download_delete_delegation": true
   }
 }

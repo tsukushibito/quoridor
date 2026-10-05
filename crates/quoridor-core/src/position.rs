@@ -82,6 +82,8 @@ impl Default for Position {
 }
 impl Position {
     pub fn checked(self) -> Result<Self, RulesError> {
+        #[cfg(feature = "profiling")]
+        let _span = crate::profiling::span(crate::profiling::Kind::Validation);
         if self.pawns.iter().any(|&p| p >= 81)
             || self.pawns[0] == self.pawns[1]
             || self.turn > 1
@@ -157,6 +159,8 @@ impl Position {
     }
     /// Shortest wall-only route to the player's goal. Pawns do not obstruct this graph.
     pub fn wall_distance(self, player: usize) -> Option<u8> {
+        #[cfg(feature = "profiling")]
+        let _span = crate::profiling::span(crate::profiling::Kind::Distance);
         if player > 1 || self.pawns[player] >= 81 {
             return None;
         }
@@ -238,6 +242,8 @@ impl Position {
     }
     /// Ascending common Action ID order; the same generator serves Game and AI.
     pub fn legal_action_ids(self) -> Vec<u16> {
+        #[cfg(feature = "profiling")]
+        let _span = crate::profiling::span(crate::profiling::Kind::Legal);
         if self.winner.is_some() {
             return Vec::new();
         }
@@ -260,6 +266,8 @@ impl Position {
         ids
     }
     pub fn play(self, id: u16) -> Result<Self, RulesError> {
+        #[cfg(feature = "profiling")]
+        let _span = crate::profiling::span(crate::profiling::Kind::Transition);
         let action = Action::decode(id)?;
         if self.winner.is_some() {
             return Err(RulesError::GameOver);

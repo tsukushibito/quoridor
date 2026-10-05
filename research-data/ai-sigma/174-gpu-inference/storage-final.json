@@ -46,5 +46,21 @@
   "combined_guard_B": 15728640,
   "old_discount_B": 0,
   "parent_extra_B": 0,
-  "first_forecast_underestimate_record": "handoff-records.tar.gz/storage-forecast-erratum.json"
+  "first_forecast_underestimate_record": "handoff-records.tar.gz/storage-forecast-erratum.json",
+  "final_actual_check": {
+    "last_Git": "56ef3f192452d7a28c6a90ca0425aae58c4528a0",
+    "scope_allocated_B": 167936,
+    "all5commit_actual_Git_delta_B": 91848,
+    "actual_total_B": 259784,
+    "combined_actual_B": 15069811,
+    "remaining_scope_B": 2360,
+    "both_archives_Git_byte_restored": true,
+    "checker_failure": "NN0 nonempty assertion falsely rejected empty run.stderr; fixed to exact len/hash, all archivedmembers including0 pass",
+    "forecast_failure": "exact262537B exceeded256KiB forecast393B; postcompression actual259784 within262144; lastnew4KiBforecast263880 rejected, no newfile allocated",
+    "future_new_files": 0,
+    "all_science_source_child_stopped": true,
+    "Beads_backup": "success",
+    "coordinator_report": "previousfinal accepted 01a10097-3fbf-78b3-91f2-059ac259e5d4"
+  },
+  "last_audit_delivery": "{\n  \"method\": \"turn/steer\",\n  \"thread_id\": \"01a0f31b-3409-75f2-a30e-453a50484f94\",\n  \"turn_id\": \"01a10097-3fbf-78b3-91f2-059ac259e5d4\",\n  \"accepted\": true\n}\n"
 }

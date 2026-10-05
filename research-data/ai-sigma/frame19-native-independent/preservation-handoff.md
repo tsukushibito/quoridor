@@ -1,0 +1,6 @@
+goal quoridor-4lc / critic238 最終保存引渡し
+有限saved arithmetic/sharedRuleA PASS、元8slot W2/L5/UNKNOWN1、主297記録/296採用と旧censor45を保持。slot1は合法completeddepth2 RESULTが100.722574msで配送され非採用、無応答/NO_COMPLETED_DEPTH/通常敗北0。depth/search詳細は後着239 receipt参照、独立job追加0。旧fixture/currentprotocol版差と全deep/共通RuleA/4family/費重複の限界を保存。
+第1checker TERMINAL/result_NNUE誤読を失敗版/最初差/log保持し、第2最終jobで修復・算術+再生PASS。元source90+calc45+45=180/180、MAX2/newNN0、source/子waitexact停止。旧229finalNOT_RUN/270、234PASS/90等のreset0。
+必要Git575e271177357c60198621696f9260c1faf058d0/26files byte復元PASS、defaultindex59880a1d不変更/privateindex0。science-stop SHA63ad6f606b61b4790efdc90efae779a8aa9e506906e96744380eebad77e90879。自scope保存forecast<2MiB/guard3MiB/旧unknown割引parent追加0。
+238本人有限close済み、Beads backup sync exit0/472ms。科学支持と最終Gitproofを分離済、最高goal未達。他issue/rootgoal close0。管理Gitreceipt/本通信小metadataは同scope内保存。
+次最大1は239後、同開始局面/同完成horizonでrootmean→leaf意味とhistory競合を判別する最小対照方向。今枠の新科学/追加算術は要求しない。

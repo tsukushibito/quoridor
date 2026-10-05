@@ -1,0 +1,11 @@
+# 継続browser比較計画の静的受入れ
+
+quoridor-4lc.48、継続契約版1。統括確認2026-10-01T11:35:20Z。preregister SHA05cf461e23998e7e230c05b280a16f4105723cd1b5d4604f28f5374272961002、final-manifest bf73e526567d6f483a387164958b700d845637891db006eda704ba008a10f0ef、report88aff9d74874627c916e6c694d826ab5a39166bd54522ac1b3fd08ee761b5af9を固定した。
+
+統括は60重要入力と39artifact payloadの実hash・前後一致を確認し、別Python実装で旧実行8indices除外、新selection/order/colorのxorshift32/rejection/FisherYates、48ユニークprefix、96連番・同prefix先後・seed1979と8人工mockのpair得点/ retry/参考下限算術を再計算して一致した。writer3PID/starttickは現在不在。pool64の合法再生・golden除外は担当保存結果を読んだが、統括は今回参照runtimeを追加再実行していない。
+
+m48/browser96局・T500g91は新しい探索的計画、旧32局と別。参考幅0.17665091145020284、仮想mean.5時のL.32334908854979716は実成績ではない。全48有効pair完成時だけ固定参考Lを出し、未完了・全attempt/invalidは別。正式NI/全Quoridor一般化/native到達・Sigma同等を認定しない。旧.32未実行10中8が選択されたが、未使用の根拠は文書で全host送信監査ではない。反証が出れば計画全体不成立、補充0。training overlap未確認。
+
+実行はno-goのまま。.47有限cleanup/P2数値受入れを別証拠で与え、.49が停止済み本preregisterをread-onlyでbindし、新入口・時計/Tg/RSS/全採番を検証する。その後の独立gate・統括actual freezeが必要。固定preregister内部の作成時pending状態を更新せず、別gate証拠を結び付ける。11800s＋1.5s reserve、停止16:30から逆算した最遅開始13:13:18.500UTC。不足や時計不適格ならm/T/gを結果や旧短平均で変更せずno-go。
+
+.48は静的計画の範囲で本人close可。証拠 .artifacts/ai-sigma/continuation-20261001/CONTINUATION-MATCH-PLAN-COORD-REVIEW/review.json。旧終了・失敗・欠測・goal未達を保持し、目標や他者issueはcloseしない。

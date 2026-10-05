@@ -1,0 +1,6 @@
+import json,pathlib,sys,math,hashlib
+r=pathlib.Path('.artifacts/ai-sigma/runs/SIGMA-INFERENCE-PROBE');a=json.loads((r/'ort-a.outputs.json').read_text());b=json.loads((r/(sys.argv[1]+'.outputs.json')).read_text());assert len(a)==len(b)==28
+results=[]
+for x,y in zip(a,b):
+ assert x['id']==y['id'];u=x['policy_logits']+[x['value']];v=y['policy_logits']+[y['value']];shape=len(y['policy_logits'])==136;finite=all(math.isfinite(z) for z in v);vr=-1<=y['value']<=1;errors=[abs(i-j) for i,j in zip(u,v)];failed=sum(e>1e-4+1e-4*abs(i) for i,e in zip(u,errors));results.append({'id':x['id'],'classification':x['classification'],'shape':shape,'finite':finite,'value_range':vr,'max_abs':max(errors),'max_relative':max(e/max(abs(i),1e-30) for i,e in zip(u,errors)),'failed_elements':failed,'pass':shape and finite and vr and not failed})
+summary={'candidate':sys.argv[1],'gate':{'atol':1e-4,'rtol':1e-4},'cases':results,'pass':all(x['pass'] for x in results),'max_abs':max(x['max_abs'] for x in results),'failed_elements':sum(x['failed_elements'] for x in results),'reference_sha256':hashlib.sha256((r/'ort-a.outputs.json').read_bytes()).hexdigest(),'candidate_sha256':hashlib.sha256((r/(sys.argv[1]+'.outputs.json')).read_bytes()).hexdigest()};(r/(sys.argv[1]+'.gate.json')).write_text(json.dumps(summary,indent=2)+'\n');print({k:v for k,v in summary.items() if k!='cases'})

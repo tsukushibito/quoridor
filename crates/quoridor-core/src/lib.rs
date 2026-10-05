@@ -18,3 +18,9 @@ pub fn distance_to_goal(player: usize, row: u8) -> Option<u8> {
         _ => None,
     }
 }
+
+#[cfg(feature = "profiling")]
+pub mod profiling;
+
+#[cfg(feature = "research")]
+pub mod research;

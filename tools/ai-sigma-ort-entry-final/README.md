@@ -1,0 +1,2 @@
+SIGMA-ORT-ENTRY-FINAL / .33
+Newcopy only. Original .32 preregister bytes/model/kernel/order unchanged. Proposed same-main mock factory, .33/.31/new manifest binding and bounded owned PID-starttick cleanup are UNEXECUTED: 02:56 new-job deadline refused both launches. entry_mock_complete=false, actual no-go. No engine/dummy/model/browser/build/game was started. Static source alone does not establish cleanup/positive-token correctness. Frozen source must be reviewed/tested under a new independent authorized allocation; do not reuse old .32 acceptance/token.
