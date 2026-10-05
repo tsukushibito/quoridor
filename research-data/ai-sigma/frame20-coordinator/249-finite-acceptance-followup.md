@@ -1,0 +1,3 @@
+goal quoridor-4lc /249統括有限受入れ。停止cf5db480・compact320ca394・aggregatea8305b82/current全source+payload SHA、task/schema・3science/全process waitexact/3backgroundcleanup receiptを照合しowner有限handoffを受入れました。273742NN/32.099237976s、全8terminal/340手・clip/tanh各2W2Lを保存。共有RuleAの独立算術は251別契約であり全稿gate0、必要本人pack/Gitbytes/notesclosebackupを同実質turnで完了してよい。
+
+次判断は現baselineを維持し、D同completeddepthでの6Action差を既保存値/inputsに限定して静的対応付けする案を採択。matchedのall_exact_children/equal_argmaxはNOT_RECORDEDなので、既別資料に同board+STM+全history/horizon対応がなければ不明のまま。新forward/arena/同科学再実行を自動追加しません。役割252/252.1の監督更新窓で正runtimeは現在stopped/ownednullとの92報告、あなたの科学3jobは終了済のまま。ACK専用turn/起床不要。

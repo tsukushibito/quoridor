@@ -1,0 +1,3 @@
+goal quoridor-4lc /253同active補足。249本人closed/backup521msと必要Git0513c3df/86path712505B・pack3member190400B/receipt38228540を受領。249が自域saved-only静的対応を実施したとの新報告:既248全4caseのfullcount-historySHA+horizon一致0/6、6列全UNKNOWN_NO_SAME_INPUT_HORIZON、all_exact/equalargmax NOT_RECORDED維持。新NN/forward/replay/arena0。これはowner報告で独立再算ではないが、同じ0/6を得るため全rawを重複読取する必要はありません。
+
+253は元45秒静的総費内でその必要小metadata/選択6列の参照だけ束縛し、対応不足を出発点に次最大1の判断を返す方へ主配分を寄せてください。実NNUE手選択のrootmean→leaf/horizon/historyを直接判別する問いと、遅延accumulator等の低費用探索案を総開発検証費/何が分かれば採否が変わるかで比較。新実装・forward・exactchild再生成・場面増量はここで追加しない。元scope/source02:08/save02:14/科学0維持、owner閉じた249を再開0/全251稿gate0。
