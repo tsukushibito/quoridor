@@ -112,3 +112,20 @@ process.lockを保有している間は同じ状態ディレクトリの二重�
 ```
 
 模擬RPCと隔離一時ディレクトリで検証する。実App Serverのturn起動、監督セッションの登録、研究再開は試験に含めない。
+
+## 現役mainの所有monitorと有界点検
+
+`research-watch.py`は同schedulerの正確PID/starttick/boot・loaded binding・期待input hashを確認し、終了準備通知と正確owned回収を担当する。run設定の`expectations.json`へstate/config・絶対heavy/supervisor/monitor/final期限・保持path/forecast/RSS/保存guardを明記する。旧worktreeや過去frameのsourceを運用コピーとして使わない。mainの現役管理コードを同saved・同設定で利用する。
+
+```bash
+# source固定・config validate・通常start後、保存した正identityをexpectationsへbind
+python scripts/dev/research-watch.py monitor --expectations <絶対path> --run-dir <運用記録path>
+# 実owned runだけ: Beads wrapperの元command/exit/bytes/SHAと必要field選択を保存
+python scripts/dev/research-watch.py observe --expectations <絶対path> --output <supervisor-output>/<owned-run-id>/observe.json
+python scripts/dev/research-watch.py inspect --expectations <絶対path> --issue <ID> --field description --offset 3072 --output <同run>/additional.json
+python scripts/dev/research-watch.py finish --expectations <絶対path> --notes-file <同run>/notes.txt --output <同run>/finish.json
+```
+
+notesはUTF8最大1024bytes。読取のoverflow・欠測を完全取得扱いせず、必要追加readだけを有界に選ぶ。元全notes/全stdoutの再保存をせず、同runの既selectionを参照する。pipe4MiB/record64KiB/run512KiB・累積24wrapper/現在保持＋forecastを別々に守る。commandに36秒以上の終了余裕を要求するが、Supervisor turn自体はnull上限を維持する。物理競合は現在のCPU/RSS/toolで判断し、active人数やowned非nullをCPU占有とみなさない。
+
+config/target/contract pathの変更には、旧ownedなし・正identity不在を確認して旧stateを保持し、同scheduler実装の新state directoryへ通常freshstartする。registryの`current_operation`が現在frame/state/config/expectationsを指す。旧state・live pointerだけを現在稼働の証拠にしない。新exactowned turnのusageLimitExceededだけで停止し、過去latest failedを新dispatch failureへ付け替えない。現役cwdはregistryの`code_cwd`をturn/startへ明示する。

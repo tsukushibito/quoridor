@@ -1,0 +1,65 @@
+{
+  "at": 1791193283.3859167,
+  "rows": [
+    {
+      "path": "/home/vscode/.cache/inference/research/ai-sigma/inference-probe/target",
+      "allocated_bytes": 1109868544,
+      "file_count": 1932,
+      "top_entries": [
+        ".rustc_info.json",
+        "debug",
+        "wasm32-unknown-unknown"
+      ],
+      "classification": "compiled Cargo target; old retired probe/release/nn-search/arena code recoverable from Git; raw/data/models outside target retained"
+    },
+    {
+      "path": "/home/vscode/.cache/inference/research/ai-sigma/inference-release/target",
+      "allocated_bytes": 917512192,
+      "file_count": 2116,
+      "top_entries": [
+        "CACHEDIR.TAG",
+        ".rustc_info.json",
+        "release",
+        "wasm32-unknown-unknown"
+      ],
+      "classification": "compiled Cargo target; old retired probe/release/nn-search/arena code recoverable from Git; raw/data/models outside target retained"
+    },
+    {
+      "path": "/home/vscode/.cache/inference/research/ai-sigma/nn-search/target",
+      "allocated_bytes": 1048285184,
+      "file_count": 2783,
+      "top_entries": [
+        "CACHEDIR.TAG",
+        ".rustc_info.json",
+        "release",
+        "wasm32-unknown-unknown"
+      ],
+      "classification": "compiled Cargo target; old retired probe/release/nn-search/arena code recoverable from Git; raw/data/models outside target retained"
+    },
+    {
+      "path": "/home/vscode/.cache/inference/research/ai-sigma/arena-matches/target",
+      "allocated_bytes": 663277568,
+      "file_count": 1411,
+      "top_entries": [
+        "CACHEDIR.TAG",
+        ".rustc_info.json",
+        "release"
+      ],
+      "classification": "compiled Cargo target; old retired probe/release/nn-search/arena code recoverable from Git; raw/data/models outside target retained"
+    }
+  ],
+  "current_exe_maps_compiler_refs": [],
+  "current_main_calls": [],
+  "protected": [
+    "current main release",
+    "all models and scientific raw/input",
+    "all source and Git",
+    "cargo-home dependencies",
+    "training env",
+    "TensorRT backend"
+  ],
+  "future_old_rebuild": "restore retired Git version + recompile; not current compatibility requirement",
+  "deleted_bytes": 3738943488,
+  "completed_at": 1791193283.51255,
+  "all_absent": true
+}

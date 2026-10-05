@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Bounded periodic dispatch to an existing App Server thread. No research auto-resume."""
+
 from __future__ import annotations
 
 import argparse
@@ -19,7 +20,9 @@ import sys
 import time
 import uuid
 
-_spec = importlib.util.spec_from_file_location("research_team", Path(__file__).with_name("research-team.py"))
+_spec = importlib.util.spec_from_file_location(
+    "research_team", Path(__file__).with_name("research-team.py")
+)
 team = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(team)
 
@@ -77,21 +80,39 @@ def load_config(path, root):
     path = Path(path).resolve()
     raw = path.read_bytes()
     c = json.loads(raw)
-    required = {"enabled", "interval_seconds", "end_at", "run_on_start", "registry", "target",
-                "dispatch_issue", "contract_file", "prompt_file", "max_active_sessions",
-                "request_timeout_seconds", "max_turn_seconds", "log_max_bytes", "log_backups"}
-    if not isinstance(c, dict) or required - c.keys() or c.keys() - required - {"start_at", "observed_issue"}:
+    required = {
+        "enabled",
+        "interval_seconds",
+        "end_at",
+        "run_on_start",
+        "registry",
+        "target",
+        "dispatch_issue",
+        "contract_file",
+        "prompt_file",
+        "max_active_sessions",
+        "request_timeout_seconds",
+        "max_turn_seconds",
+        "log_max_bytes",
+        "log_backups",
+    }
+    if (
+        not isinstance(c, dict)
+        or required - c.keys()
+        or c.keys() - required - {"start_at", "observed_issue"}
+    ):
         raise SchedulerError("Missing or unknown configuration fields")
     for key in ("enabled", "run_on_start"):
         if type(c[key]) is not bool:
             raise SchedulerError(f"{key} must be boolean")
-    for key in ("interval_seconds", "request_timeout_seconds",
-                "log_max_bytes", "log_backups"):
+    for key in ("interval_seconds", "request_timeout_seconds", "log_max_bytes", "log_backups"):
         positive(c[key], key)
     for key in ("target", "dispatch_issue"):
         if not isinstance(c[key], str) or not c[key].strip():
             raise SchedulerError(f"{key} must be a nonempty string")
-    if c.get("observed_issue") is not None and (not isinstance(c["observed_issue"], str) or not c["observed_issue"].strip()):
+    if c.get("observed_issue") is not None and (
+        not isinstance(c["observed_issue"], str) or not c["observed_issue"].strip()
+    ):
         raise SchedulerError("observed_issue must be a nonempty string")
     for key in ("registry", "contract_file", "prompt_file"):
         if not isinstance(c[key], str):
@@ -99,7 +120,14 @@ def load_config(path, root):
         c[key] = str((path.parent / c[key]).resolve())
     contract_raw = Path(c["contract_file"]).read_bytes()
     contract = json.loads(contract_raw)
-    fields = {"target", "dispatch_issue", "end_at", "max_active_sessions", "max_turn_seconds", "observation_only"}
+    fields = {
+        "target",
+        "dispatch_issue",
+        "end_at",
+        "max_active_sessions",
+        "max_turn_seconds",
+        "observation_only",
+    }
     if not isinstance(contract, dict) or set(contract) != fields:
         raise SchedulerError("Invalid contract fields")
     if contract["target"] != c["target"] or contract["dispatch_issue"] != c["dispatch_issue"]:
@@ -117,7 +145,9 @@ def load_config(path, root):
         if value is not None:
             positive(value, "max_turn_seconds")
     authorized_limit = contract["max_turn_seconds"]
-    if authorized_limit is not None and (c["max_turn_seconds"] is None or c["max_turn_seconds"] > authorized_limit):
+    if authorized_limit is not None and (
+        c["max_turn_seconds"] is None or c["max_turn_seconds"] > authorized_limit
+    ):
         raise SchedulerError("max_turn_seconds exceeds contract")
     end = timestamp(c["end_at"])
     if end > timestamp(contract["end_at"]):
@@ -130,9 +160,16 @@ def load_config(path, root):
     prompt = Path(c["prompt_file"]).read_text()
     if not prompt.strip():
         raise SchedulerError("Empty prompt")
-    c.update(config_path=str(path), config_sha256=hashlib.sha256(raw).hexdigest(),
-             contract_sha256=hashlib.sha256(contract_raw).hexdigest(), end=end, start=start,
-             thread_id=entry["thread_id"], observation_only=contract["observation_only"], prompt=prompt)
+    c.update(
+        config_path=str(path),
+        config_sha256=hashlib.sha256(raw).hexdigest(),
+        contract_sha256=hashlib.sha256(contract_raw).hexdigest(),
+        end=end,
+        start=start,
+        thread_id=entry["thread_id"],
+        observation_only=contract["observation_only"],
+        prompt=prompt,
+    )
     return c
 
 
@@ -162,14 +199,18 @@ class AppBackend:
         self.root = root
 
     def issue(self, issue):
-        result = team.command_json(["bash", str(self.root / "scripts/dev/beads.sh"), "show", issue, "--json"])
+        result = team.command_json(
+            ["bash", str(self.root / "scripts/dev/beads.sh"), "show", issue, "--json"]
+        )
         item = result[0] if isinstance(result, list) and len(result) == 1 else result
         if not isinstance(item, dict) or item.get("id") != issue:
             raise SchedulerError(f"Cannot identify issue {issue}")
         return item
 
     async def connect(self, timeout):
-        host = await asyncio.to_thread(team.command_json, ["codex", "app-server", "daemon", "version"])
+        host = await asyncio.to_thread(
+            team.command_json, ["codex", "app-server", "daemon", "version"]
+        )
         if host.get("status") != "running" or not host.get("socketPath"):
             raise SchedulerError("App Server is unavailable; no server will be started")
         return team.AppServer(host, timeout=timeout)
@@ -190,15 +231,21 @@ class Engine:
         self.configure_log()
         owned = self.state.get("owned")
         self.owned_mono = time.monotonic() if owned else None
-        self.owned_elapsed = max(0, (self.now() - timestamp(owned["started_at"])).total_seconds()) if owned else 0
+        self.owned_elapsed = (
+            max(0, (self.now() - timestamp(owned["started_at"])).total_seconds()) if owned else 0
+        )
 
     def configure_log(self):
         for handler in self.logger.handlers[:]:
             self.logger.removeHandler(handler)
             handler.close()
         c = self.config
-        handler = RotatingFileHandler(self.directory / "events.jsonl", maxBytes=c["log_max_bytes"],
-                                      backupCount=c["log_backups"], encoding="utf-8")
+        handler = RotatingFileHandler(
+            self.directory / "events.jsonl",
+            maxBytes=c["log_max_bytes"],
+            backupCount=c["log_backups"],
+            encoding="utf-8",
+        )
         handler.setFormatter(logging.Formatter("%(message)s"))
         self.logger.addHandler(handler)
 
@@ -209,14 +256,19 @@ class Engine:
         self.save()
 
     def save(self):
-        self.state.update(config_path=self.config["config_path"], config_sha256=self.config["config_sha256"],
-                          contract_sha256=self.config["contract_sha256"])
+        self.state.update(
+            config_path=self.config["config_path"],
+            config_sha256=self.config["config_sha256"],
+            contract_sha256=self.config["contract_sha256"],
+        )
         atomic_json(self.state_path, self.state)
 
     async def issue_stop(self):
         c = self.config
         item = await asyncio.to_thread(self.backend.issue, c["dispatch_issue"])
-        if item.get("status") not in ("open", "in_progress") or "paused-by-user" in (item.get("labels") or []):
+        if item.get("status") not in ("open", "in_progress") or "paused-by-user" in (
+            item.get("labels") or []
+        ):
             return "dispatch_issue_not_authorized"
         if c.get("observed_issue"):
             observed = await asyncio.to_thread(self.backend.issue, c["observed_issue"])
@@ -234,7 +286,12 @@ class Engine:
         cursor = None
         found = None
         for _ in range(10):
-            params = {"threadId": thread_id, "limit": 100, "itemsView": "full", "sortDirection": "desc"}
+            params = {
+                "threadId": thread_id,
+                "limit": 100,
+                "itemsView": "full",
+                "sortDirection": "desc",
+            }
             if cursor:
                 params["cursor"] = cursor
             page = await server.request("thread/turns/list", params)
@@ -243,9 +300,15 @@ class Engine:
                     match = turn["id"] == owned["turn_id"]
                 else:
                     marker = f"SCHEDULER_RUN_ID={owned['run_id']}"
-                    match = any(item.get("type") == "userMessage" and any(
-                        content.get("type") == "text" and content.get("text", "").startswith(marker + "\n")
-                        for content in item.get("content", [])) for item in turn.get("items", []))
+                    match = any(
+                        item.get("type") == "userMessage"
+                        and any(
+                            content.get("type") == "text"
+                            and content.get("text", "").startswith(marker + "\n")
+                            for content in item.get("content", [])
+                        )
+                        for item in turn.get("items", [])
+                    )
                 if match:
                     found = turn
                     break
@@ -265,6 +328,12 @@ class Engine:
             return False
         self.state["owned"] = None
         self.record("owned_turn_finished", turn_id=found["id"], status=found["status"])
+        # Only the journaled, exact newly dispatched turn can trigger a fatal stop.
+        # A latest historical failure is not evidence of a new dispatch failure.
+        error = found.get("error") or {}
+        if found["status"] == "failed" and "usageLimitExceeded" in json.dumps(error):
+            self.state["fatal_dispatch_error"] = {"turn_id": found["id"], "error": error}
+            self.record("fatal_dispatch_error", turn_id=found["id"], error=error)
         return True
 
     async def interrupt_owned(self, server):
@@ -275,8 +344,12 @@ class Engine:
             return not owned
         thread = await server.read_thread(owned["thread_id"])
         if thread["status"]["type"] == "notLoaded":
-            await server.request("thread/resume", {"threadId": owned["thread_id"], "excludeTurns": True})
-        await server.request("turn/interrupt", {"threadId": owned["thread_id"], "turnId": owned["turn_id"]})
+            await server.request(
+                "thread/resume", {"threadId": owned["thread_id"], "excludeTurns": True}
+            )
+        await server.request(
+            "turn/interrupt", {"threadId": owned["thread_id"], "turnId": owned["turn_id"]}
+        )
         # Bounded confirmation. No assumption that interrupt ack means stopped.
         deadline = time.monotonic() + self.config["request_timeout_seconds"]
         while time.monotonic() < deadline:
@@ -289,19 +362,37 @@ class Engine:
 
     async def tick(self, due=True, interrupt=False):
         c = self.config
+        if self.state.get("fatal_dispatch_error"):
+            self.record(
+                "stopped", reason="fatal_dispatch_error", failure=self.state["fatal_dispatch_error"]
+            )
+            return False
         reason = "deadline" if self.now() >= c["end"] else await self.issue_stop()
         expired = False
         owned = self.state.get("owned")
         if owned:
-            if "max_turn_seconds" not in owned or (owned["max_turn_seconds"] is not None and (type(owned["max_turn_seconds"]) is not int or owned["max_turn_seconds"] <= 0)):
+            if "max_turn_seconds" not in owned or (
+                owned["max_turn_seconds"] is not None
+                and (type(owned["max_turn_seconds"]) is not int or owned["max_turn_seconds"] <= 0)
+            ):
                 raise SchedulerError("Unknown owned turn limit")
             if c["max_turn_seconds"] is None and owned["max_turn_seconds"] is not None:
                 previous_limit = owned["max_turn_seconds"]
                 owned["max_turn_seconds"] = None
-                self.record("owned_turn_limit_removed", previous_limit=previous_limit, turn_id=owned.get("turn_id"))
+                self.record(
+                    "owned_turn_limit_removed",
+                    previous_limit=previous_limit,
+                    turn_id=owned.get("turn_id"),
+                )
             wall_elapsed = (self.now() - timestamp(owned["started_at"])).total_seconds()
-            mono_elapsed = self.owned_elapsed + time.monotonic() - (self.owned_mono or time.monotonic())
-            limits = [value for value in (owned["max_turn_seconds"], c["max_turn_seconds"]) if value is not None]
+            mono_elapsed = (
+                self.owned_elapsed + time.monotonic() - (self.owned_mono or time.monotonic())
+            )
+            limits = [
+                value
+                for value in (owned["max_turn_seconds"], c["max_turn_seconds"])
+                if value is not None
+            ]
             expired = bool(limits) and max(wall_elapsed, mono_elapsed) >= min(limits)
         if reason and not owned:
             self.record("stopped", reason=reason)
@@ -316,6 +407,13 @@ class Engine:
         async with connection as server:
             with team.dispatch_lock(self.root):
                 ready = await self.reconcile(server)
+                if self.state.get("fatal_dispatch_error"):
+                    self.record(
+                        "stopped",
+                        reason="fatal_dispatch_error",
+                        failure=self.state["fatal_dispatch_error"],
+                    )
+                    return False
                 if reason or interrupt or expired:
                     if self.state.get("owned"):
                         await self.interrupt_owned(server)
@@ -340,7 +438,9 @@ class Engine:
                     self.record("skipped", reason="target_active")
                     return True
                 if target["status"]["type"] == "notLoaded":
-                    await server.request("thread/resume", {"threadId": c["thread_id"], "excludeTurns": True})
+                    await server.request(
+                        "thread/resume", {"threadId": c["thread_id"], "excludeTurns": True}
+                    )
                     target = await server.read_thread(c["thread_id"])
                 if target["status"]["type"] != "idle":
                     self.record("skipped", reason="target_not_idle")
@@ -350,19 +450,35 @@ class Engine:
                     self.record("stopped", reason=reason)
                     return False
                 run_id = str(uuid.uuid4())
-                text = (f"SCHEDULER_RUN_ID={run_id}\n定期点検。Beads {c['dispatch_issue']}。"
-                        f"運用契約: {c['contract_file']}。\n"
-                        + ("観測専用。研究・委譲・環境変更・研究再開は禁止。\n" if c["observation_only"] else "")
-                        + c["prompt"])
-                self.state["owned"] = {"run_id": run_id, "thread_id": c["thread_id"], "turn_id": None,
-                                       "started_at": self.now().isoformat(), "max_turn_seconds": c["max_turn_seconds"]}
+                text = (
+                    f"SCHEDULER_RUN_ID={run_id}\n定期点検。Beads {c['dispatch_issue']}。"
+                    f"運用契約: {c['contract_file']}。\n"
+                    + (
+                        "観測専用。研究・委譲・環境変更・研究再開は禁止。\n"
+                        if c["observation_only"]
+                        else ""
+                    )
+                    + c["prompt"]
+                )
+                self.state["owned"] = {
+                    "run_id": run_id,
+                    "thread_id": c["thread_id"],
+                    "turn_id": None,
+                    "started_at": self.now().isoformat(),
+                    "max_turn_seconds": c["max_turn_seconds"],
+                }
                 self.owned_mono = time.monotonic()
                 self.owned_elapsed = 0
                 self.state["recovery_required"] = True
                 self.record("dispatch_pending", run_id=run_id)
                 # Journal precedes network write. Unknown results are never blindly retried.
-                response = await server.request("turn/start", {"threadId": c["thread_id"], "input": [
-                    {"type": "text", "text": text, "text_elements": []}]})
+                params = {
+                    "threadId": c["thread_id"],
+                    "input": [{"type": "text", "text": text, "text_elements": []}],
+                }
+                if entry.get("code_cwd"):
+                    params["cwd"] = team.resolve_task_cwd(entry["code_cwd"], self.root)
+                response = await server.request("turn/start", params)
                 turn_id = response.get("turn", {}).get("id")
                 if not turn_id:
                     raise SchedulerError("turn/start response has no turn ID")
@@ -377,7 +493,9 @@ class Engine:
             # One supervisor per process. Repointing while a turn is unresolved would lose ownership.
             for key in ("registry", "target", "dispatch_issue", "contract_file", "thread_id"):
                 if new[key] != self.config[key]:
-                    raise SchedulerError(f"Changing {key} requires stop and a separate runtime directory")
+                    raise SchedulerError(
+                        f"Changing {key} requires stop and a separate runtime directory"
+                    )
             self.config = new
             self.configure_log()
             self.record("reloaded")
@@ -397,13 +515,29 @@ async def run_foreground(args, root):
             raise SchedulerError("Scheduler is already running") from error
         config = load_config(args.config, root)
         engine = Engine(config, directory, root)
-        binding = {key: config[key] for key in ("config_path", "registry", "target", "dispatch_issue", "contract_file", "thread_id")}
+        binding = {
+            key: config[key]
+            for key in (
+                "config_path",
+                "registry",
+                "target",
+                "dispatch_issue",
+                "contract_file",
+                "thread_id",
+            )
+        }
         if engine.state.get("binding") and engine.state["binding"] != binding:
-            raise SchedulerError("Runtime belongs to a different configuration/target; use a separate directory")
+            raise SchedulerError(
+                "Runtime belongs to a different configuration/target; use a separate directory"
+            )
         if engine.state.get("owned") and engine.state["owned"]["thread_id"] != config["thread_id"]:
             raise SchedulerError("Unresolved turn belongs to a different target")
         engine.state["binding"] = binding
-        engine.state.update(process=process_identity(os.getpid()), phase="running", recovery_required=bool(engine.state.get("owned")))
+        engine.state.update(
+            process=process_identity(os.getpid()),
+            phase="running",
+            recovery_required=bool(engine.state.get("owned")),
+        )
         engine.record("started")
         loop = asyncio.get_running_loop()
         stopping = asyncio.Event()
@@ -414,7 +548,9 @@ async def run_foreground(args, root):
         loop.add_signal_handler(signal.SIGHUP, reloading.set)
         loop.add_signal_handler(signal.SIGUSR1, lambda: (interrupting.set(), stopping.set()))
         begin = max(0, (config["start"] - engine.now()).total_seconds()) if config["start"] else 0
-        due_at = time.monotonic() + begin + (0 if config["run_on_start"] else config["interval_seconds"])
+        due_at = (
+            time.monotonic() + begin + (0 if config["run_on_start"] else config["interval_seconds"])
+        )
         try:
             while not stopping.is_set():
                 if reloading.is_set():
@@ -422,30 +558,58 @@ async def run_foreground(args, root):
                     if engine.reload():
                         due_at = time.monotonic() + engine.config["interval_seconds"]
                         if engine.config["start"]:
-                            due_at = max(due_at, time.monotonic() + (engine.config["start"] - engine.now()).total_seconds())
+                            due_at = max(
+                                due_at,
+                                time.monotonic()
+                                + (engine.config["start"] - engine.now()).total_seconds(),
+                            )
                 now_mono = time.monotonic()
                 due = now_mono >= due_at
                 try:
-                    if not await asyncio.wait_for(engine.tick(due=due), timeout=engine.config["request_timeout_seconds"]):
+                    if not await asyncio.wait_for(
+                        engine.tick(due=due), timeout=engine.config["request_timeout_seconds"]
+                    ):
                         break
-                except (OSError, ValueError, team.TeamError, TimeoutError, subprocess.SubprocessError) as error:
+                except (
+                    OSError,
+                    ValueError,
+                    team.TeamError,
+                    TimeoutError,
+                    subprocess.SubprocessError,
+                ) as error:
                     engine.record("error", error=str(error))
                     # A local deadline still terminates even if remote interruption is unconfirmed.
                     if engine.now() >= engine.config["end"]:
                         break
                 if due:
                     due_at = next_due(due_at, engine.config["interval_seconds"], time.monotonic())
-                engine.state["next_at"] = (engine.now().timestamp() + max(0, due_at - time.monotonic()))
+                engine.state["next_at"] = engine.now().timestamp() + max(
+                    0, due_at - time.monotonic()
+                )
                 engine.save()
                 remaining = (engine.config["end"] - engine.now()).total_seconds()
                 try:
-                    await asyncio.wait_for(stopping.wait(), timeout=max(0.01, min(5, max(0, due_at-time.monotonic()), max(0, remaining))))
+                    await asyncio.wait_for(
+                        stopping.wait(),
+                        timeout=max(
+                            0.01, min(5, max(0, due_at - time.monotonic()), max(0, remaining))
+                        ),
+                    )
                 except TimeoutError:
                     pass
             if interrupting.is_set():
                 try:
-                    await asyncio.wait_for(engine.tick(due=False, interrupt=True), timeout=engine.config["request_timeout_seconds"])
-                except (OSError, ValueError, team.TeamError, TimeoutError, subprocess.SubprocessError) as error:
+                    await asyncio.wait_for(
+                        engine.tick(due=False, interrupt=True),
+                        timeout=engine.config["request_timeout_seconds"],
+                    )
+                except (
+                    OSError,
+                    ValueError,
+                    team.TeamError,
+                    TimeoutError,
+                    subprocess.SubprocessError,
+                ) as error:
                     engine.record("interrupt_error", error=str(error))
         finally:
             engine.state.update(phase="stopped", process=None, next_at=None)
@@ -483,17 +647,35 @@ def main():
     args = parser.parse_args()
     try:
         root = team.project_root()
-        args.state_dir = str(Path(args.state_dir).resolve()) if args.state_dir else str(root / ".artifacts/research-team/scheduler")
+        args.state_dir = (
+            str(Path(args.state_dir).resolve())
+            if args.state_dir
+            else str(root / ".artifacts/research-team/scheduler")
+        )
         directory = Path(args.state_dir)
         if args.command == "validate":
             config = load_config(args.config, root)
-            print(json.dumps({"valid": True, "config_sha256": config["config_sha256"],
-                              "end_at": config["end"].isoformat(), "expired": utc_now() >= config["end"]}))
+            print(
+                json.dumps(
+                    {
+                        "valid": True,
+                        "config_sha256": config["config_sha256"],
+                        "end_at": config["end"].isoformat(),
+                        "expired": utc_now() >= config["end"],
+                    }
+                )
+            )
         elif args.command == "run":
             asyncio.run(run_foreground(args, root))
         elif args.command == "status":
-            state = read_json(directory / "state.json") if (directory / "state.json").exists() else {}
-            print(json.dumps({**state, "running": alive(state.get("process"))}, ensure_ascii=False, indent=2))
+            state = (
+                read_json(directory / "state.json") if (directory / "state.json").exists() else {}
+            )
+            print(
+                json.dumps(
+                    {**state, "running": alive(state.get("process"))}, ensure_ascii=False, indent=2
+                )
+            )
         elif args.command == "start":
             config = load_config(args.config, root)
             if utc_now() >= config["end"]:
@@ -502,30 +684,67 @@ def main():
             # Keep ownership of the pidfd until startup proof is saved.
             with (directory / "launcher.lock").open("a") as lock:
                 fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-                old = read_json(directory / "state.json") if (directory / "state.json").exists() else {}
+                old = (
+                    read_json(directory / "state.json")
+                    if (directory / "state.json").exists()
+                    else {}
+                )
                 if alive(old.get("process")):
                     raise SchedulerError("Scheduler is already running")
                 with (directory / "console.log").open("w") as output:
-                    child = subprocess.Popen([sys.executable, "-B", str(Path(__file__).resolve()), "run", "--config",
-                                              config["config_path"], "--state-dir", str(directory)],
-                                             stdin=subprocess.DEVNULL, stdout=output, stderr=output,
-                                             start_new_session=True)
+                    child = subprocess.Popen(
+                        [
+                            sys.executable,
+                            "-B",
+                            str(Path(__file__).resolve()),
+                            "run",
+                            "--config",
+                            config["config_path"],
+                            "--state-dir",
+                            str(directory),
+                        ],
+                        stdin=subprocess.DEVNULL,
+                        stdout=output,
+                        stderr=output,
+                        start_new_session=True,
+                    )
                 started = process_identity(child.pid)
                 until = time.monotonic() + 10
                 while time.monotonic() < until:
-                    state = read_json(directory / "state.json") if (directory / "state.json").exists() else {}
-                    if started and state.get("process") == started and state.get("phase") == "running":
-                        print(json.dumps({"started": True, "process": started, "state_dir": str(directory)}))
+                    state = (
+                        read_json(directory / "state.json")
+                        if (directory / "state.json").exists()
+                        else {}
+                    )
+                    if (
+                        started
+                        and state.get("process") == started
+                        and state.get("phase") == "running"
+                    ):
+                        print(
+                            json.dumps(
+                                {"started": True, "process": started, "state_dir": str(directory)}
+                            )
+                        )
                         return
                     if child.poll() is not None:
-                        raise SchedulerError(f"Startup exited {child.returncode}; inspect console.log")
+                        raise SchedulerError(
+                            f"Startup exited {child.returncode}; inspect console.log"
+                        )
                     time.sleep(0.05)
                 child.terminate()
                 child.wait(timeout=30)
                 raise SchedulerError("Startup confirmation timed out")
         elif args.command == "reload":
             signal_process(directory, signal.SIGHUP)
-            print(json.dumps({"reload_requested": True, "confirmation": "check status.last_result and events.jsonl"}))
+            print(
+                json.dumps(
+                    {
+                        "reload_requested": True,
+                        "confirmation": "check status.last_result and events.jsonl",
+                    }
+                )
+            )
         elif args.command == "stop":
             sig = signal.SIGUSR1 if args.interrupt_owned_turn else signal.SIGTERM
             identity = signal_process(directory, sig)

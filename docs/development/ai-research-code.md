@@ -2,6 +2,8 @@
 
 Linuxネイティブを主経路とし、評価・探索・対局・推論queue・教師生成はRust、学習・解析・モデル変換はPythonを使う。具体的なビルドとrun設定は[運用手順](rust-ai.md)、学習は[学習手順](nnue-training.md)を参照する。コード正本はmain。旧worktreeのモデルや入力は`research-paths.json`に示す永続資産であり、現役コードの別正本ではない。
 
+主要ディレクトリの責務と検索の切替点は[crates](../../crates/README.md)、[tools](../../tools/README.md)、[scripts](../../scripts/README.md)、[docs](../README.md)、[保存データ](../../research-data/README.md)から選ぶ。主要構成・公開入口を移す変更では、担当ownerが対応READMEとこの案内も更新する。全階層への案内配置や新しい全資料必読・定期全体監査を義務にしない。
+
 ## 配置と依存
 
 | 配置 | 責任 |

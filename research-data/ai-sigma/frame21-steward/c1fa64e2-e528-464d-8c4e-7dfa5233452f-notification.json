@@ -1,0 +1,25 @@
+{
+  "at": "2026-10-05T09:28:49.639052+00:00",
+  "command": [
+    "bash",
+    "/workspaces/quoridor/scripts/dev/research-team.sh",
+    "report",
+    "--to",
+    "coordinator",
+    "--issue",
+    "quoridor-4lc.40",
+    "--body-file",
+    "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/supervisor/frame21/c1fa64e2-e528-464d-8c4e-7dfa5233452f/handoff.md"
+  ],
+  "exit_code": 0,
+  "timeout": false,
+  "reaped": true,
+  "stdout": "{\n  \"method\": \"turn/steer\",\n  \"thread_id\": \"01a0f31b-3409-75f2-a30e-453a50484f94\",\n  \"turn_id\": \"01a10b3a-fa42-7280-bc0e-ec496fcacb84\",\n  \"accepted\": true\n}\n",
+  "stderr": "",
+  "delivery_unknown": false,
+  "blind_resend": false,
+  "acceptance_is_delivery_only": true,
+  "observe_wrapper_count": 3,
+  "extra_backup_wrapper_count": 1,
+  "report_internal_wrapper_count": "UNQUANTIFIED"
+}

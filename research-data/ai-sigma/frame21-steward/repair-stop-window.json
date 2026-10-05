@@ -1,0 +1,43 @@
+{
+  "before_state": {
+    "binding": {
+      "config_path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame21/scheduler.json",
+      "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+      "target": "supervisor",
+      "dispatch_issue": "quoridor-4lc.40",
+      "contract_file": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame21/contract.json",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+    },
+    "process": {
+      "pid": 965424,
+      "start_ticks": "44416046",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "phase": "running",
+    "recovery_required": false,
+    "last_result": {
+      "at": "2026-10-05T09:28:59.010930+00:00",
+      "event": "owned_turn_finished",
+      "turn_id": "01a10b61-f158-7c82-8353-73216b2eb3af",
+      "status": "completed"
+    },
+    "config_path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame21/scheduler.json",
+    "config_sha256": "9662bcfd854963682a5ee95dceb183776639ba8d74210a17d599c4d733484c58",
+    "contract_sha256": "3c6cd55a257511fe17ef39da7f294d0360fe97a9b694280b857b2c4f70bc6d6a",
+    "owned": null,
+    "next_at": 1791193526.0953162
+  },
+  "monitor": {
+    "pid": 967691,
+    "start_ticks": "44427856",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "official_latest": [
+    {
+      "id": "01a10b61-f158-7c82-8353-73216b2eb3af",
+      "status": "completed",
+      "error": null
+    }
+  ],
+  "reason": "nested dependency raw notes exceeds record cap; preserve next normal phase"
+}
