@@ -35,8 +35,8 @@ class ReadFailed(Rejected):
 GOAL = 'quoridor-4lc'
 SELF = 'quoridor-4lc.40'
 REPORT_RESERVE = 30
-OPERATION_BEGIN = dt.datetime(2026, 10, 4, 22, 52, 46, tzinfo=UTC)
-OPERATION_END = dt.datetime(2026, 10, 5, 0, 47, 46, tzinfo=UTC)
+OPERATION_BEGIN = dt.datetime(2026, 10, 5, 0, 51, 2, tzinfo=UTC)
+OPERATION_END = dt.datetime(2026, 10, 5, 2, 46, 2, tzinfo=UTC)
 # New runs only: pipes are transient memory, not retained wrapper transcripts.
 RAW_PIPE_CAP = 4 * 1024**2
 SELECTED_CAP = 64 * 1024

@@ -1,16 +1,16 @@
 # NNUE研究・現行実行枠
 
-契約版19。ユーザー明示「研究を継続して。2時間枠で。」を新frame19へ適用する。開始2026-10-04 22:52:46 UTC / 10月5日07:52:46 JST、終了2026-10-05 00:52:46 UTC / 09:52:46 JST。準備完了から起点を取り直さない。旧frame18・各runの結果、欠測、失敗、累積課金・個別期限と運用停止証拠はGit/既runで保持し遡及変更しない。最終目標は[研究目標](ai-sigma-research-goal.md)のNNUE型Quoridor AIの最高棋力であり、未達のまま継続する。現在の重要な問いは、新モデルの予測利益と探索効率を、同資源・同時間の探索と棋力へ接続できるか。具体案・数量・順序・担当・総予算・採否は統括とチームへ委任し、通常root再承認を開始gateにしない。
+契約版20。ユーザー明示「利用枠制限で中断した。再開して。」を受け、前回明示の2時間を継承した新frame20を開始する。開始2026-10-05 00:51:02 UTC / 09:51:02 JST、終了02:51:02 UTC / 11:51:02 JST。準備完了から起点を取り直さない。旧frame19の終了00:52:46、各科学runの期限・結果・欠測・usageLimitExceeded失敗・累積課金と運用停止証拠はGit/既runで保持し遡及変更しない。最終目標は[研究目標](ai-sigma-research-goal.md)のNNUE型Quoridor AIの最高棋力であり、未達のまま継続する。中断箇所の安全復旧と、NNUE教師精度の利益を同時間棋力へ接続する評価器経路、探索費を削減する探索経路を主問いとする。具体案・数量・順序・担当・総予算・採否は統括とチームへ委任し、通常root再承認を開始gateにしない。
 
 ## 期限と資源
 
 | 項目 | 現在の上限・運用 |
 | --- | --- |
-| 開始 | 2026-10-05 07:52:46 JST / 2026-10-04 22:52:46 UTC |
-| 終了 | **2026-10-05 09:52:46 JST / 00:52:46 UTC**（新枠2時間） |
-| 新しい重いjob | 2026-10-05 09:42:46 JST / 00:42:46 UTCまで。保存・回収が枠内に収まる時だけ開始 |
-| 監督停止 | 2026-10-05 09:47:46 JST / 00:47:46 UTC |
-| monitor回収 | 2026-10-05 09:50:46 JST / 00:50:46 UTC |
+| 開始 | 2026-10-05 09:51:02 JST / 2026-10-05 00:51:02 UTC |
+| 終了 | **2026-10-05 11:51:02 JST / 02:51:02 UTC**（新枠2時間） |
+| 新しい重いjob | 2026-10-05 11:41:02 JST / 02:41:02 UTCまで。保存・回収が枠内に収まる時だけ開始 |
+| 監督停止 | 2026-10-05 11:46:02 JST / 02:46:02 UTC |
+| monitor回収 | 2026-10-05 11:49:02 JST / 02:49:02 UTC |
 | CPU | 計算job合計最大4論理CPU。CPU番号と使用数を分ける |
 | RAM | 研究プロセス合計8GiB。current RSSと過去peakを分ける |
 | LLM | 既saved6role＋rootの必要な依頼・報告・監督をactive数で拒否しない。同役二重起動を防ぐ |
@@ -22,7 +22,7 @@
 
 ## 現在の問いと自律配分
 
-228の凍結候補、232/234で有限支持されたNode-hosted full/delta/scale/STM対応・固定4root探索、233の完成depth rootbest先頭stable ordering案、234のsame-node terminal/legal再用案と残る未知を再利用する。小対局未実施・229学習test最終算術未実施を認定済みに格上げせず、必要な主張以上の全履歴再検算を通常入口へ追加しない。
+240の同仕事量NNUE約54.38%/距離評価約65.14%短縮と、WDL/UNKNOWN・競合・単一component因果の限界を保持する。現在242 paired同wall診断、244の距離clip/tanh由来候補、保存済243静的案と中断箇所・exact child/backgroundjob/書込停止・既保存を確認し、通常復旧又は現配分の新runへつなぐ。完了部分を消さず、旧失敗・未知・未実施を成功補充しない。229旧final NOT_RUNや小対局未認定を維持する。
 
 二経路で判断を進める。評価器側は同探索でNNUEと距離評価を比較する。探索側は同評価器で基本的な順序付け・置換表・合法生成/距離/clone/eval/control等の支配費を測定し、必要な私有薄改修と比較を行う。方策の利用はorderingのみ・全合法手を維持・計算費込みの候補であり、基本的な順序付けより先行させる固定義務ではない。全候補の実装完了を対局開始の前提にしない。
 
@@ -44,8 +44,8 @@ native/localを主評価とし、ブラウザの必要動作は別結果にす�
 
 ## 再開と監督運用
 
-92は旧frame18 scheduler/monitorの正確identity不在・owned停止・monitor-endedを必要範囲で確認し、新frame19の絶対期限・現common/6role・registrydigest/24期待inputSHAへ束縛する。旧科学・欠測・失敗・運用gapを新successへ変更しない。旧運用全史やACK待ちを研究静的開始gateにしない。heavyは各ownerが現物資源・正currentbinding/owned/pauseとquiet・測定競合を確認して開始する。
+92は旧frame19 scheduler/monitorの正確identity不在・owned停止・monitor-endedを必要範囲で確認し、新frame20の絶対期限・現common/6role・registrydigest/24期待inputSHAへ束縛する。旧科学・欠測・失敗・運用gapを新successへ変更しない。旧00:21:13 fatal_dispatch_error usageLimitExceededと最新監督failedを保持する。新turnに再発したら実エラーを保存停止し、盲目retry・強制tick・モデル変更・AppServer再起動で迂回しない。旧運用全史やACK待ちを研究静的開始gateにしない。heavyは各ownerが現物資源・正currentbinding/owned/pauseとquiet・測定競合を確認して開始する。
 
 period1200/max_turn_seconds=null、CPU0単1/RAM1GiB・既112MiB guard/保存予約内のcurrent+forecastを維持する。同役二重開始/dispatch lock/所有/pause/通信応答不明保護/自己子process回収/運用endで正確ownedだけ回収を維持し、他active数で拒否せず、強制tick・他owner interrupt・AppServer再起動・設定変更をしない。promptの研究判断は現supervisor定義を参照し役全文・旧診断手順を複写しない。正常毎周期通知を義務にせず、重要な改善・節目・障害・異論と必要行動だけ通知する。
 
-停止窓でsource/bindingを固定→validate→正常既helperの通常freshstart→実running/configcontractloaded値SHA/正PIDtickboot/24期待hash/6digestを確認する。必要な最小静的修復は同scope/総費内で行え、新helper/全面改定を義務にしない。起動受理・実loaded・自然点検成果・未来全期間成功を区別する。92は2026-10-05 00:42:46新heavy停止通知、00:47:46監督scheduler+正owned停止、00:50:46monitor回収、00:52:46最終保存を長期所有する。外部NN停止は各研究ownerが別に確認し、自己停止から認定しない。必要証拠・Git・Beads append-notes/backupを保存する。
+停止窓でsource/bindingを固定→validate→正常既helperの通常freshstart→実running/configcontractloaded値SHA/正PIDtickboot/24期待hash/6digestを確認する。必要な最小静的修復は同scope/総費内で行え、新helper/全面改定を義務にしない。起動受理・実loaded・自然点検成果・未来全期間成功を区別する。92は2026-10-05 02:41:02新heavy停止通知、02:46:02監督scheduler+正owned停止、02:49:02monitor回収、02:51:02最終保存を長期所有する。外部NN停止は各研究ownerが別に確認し、自己停止から認定しない。必要証拠・Git・Beads append-notes/backupを保存する。
