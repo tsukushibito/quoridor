@@ -1,0 +1,205 @@
+{
+  "at": "2026-10-05T16:44:17.254033+00:00",
+  "goal": "quoridor-4lc",
+  "operation_owner": "quoridor-4lc.92",
+  "recipient_issue": "quoridor-4lc.288",
+  "donor_issues": ["quoridor-4lc.285", "quoridor-4lc.287"],
+  "references": {
+    "manifest": {
+      "path": "research-data/ai-sigma/frame23-steward/storage-288-prospective-manifest.json",
+      "bytes": 21904,
+      "sha256": "d2b9ca3d75c43021a7677e6d487ca3a0b43ed9fc782bb7aa249e5d3ea073a64d"
+    },
+    "measurement": {
+      "path": "research-data/ai-sigma/frame23-steward/storage-288-prospective-current.json",
+      "bytes": 21140,
+      "sha256": "5fa9d43ea6db37dc33f4987def41cf25256fcbcebb2c171331edaf0b1e64aa0c"
+    },
+    "contract": {
+      "path": "research-data/ai-sigma/frame22-coordinator/wall-legality-processing-contract.md",
+      "bytes": 6861,
+      "sha256": "d72f68c585c04d6cbb6c05aa833a770d40a4ab3d888219caf1d91f1056c20782"
+    },
+    "owner287forecast": {
+      "path": "research-data/ai-sigma/frame23-independent-evaluation/resource-transfer-to-288-proposal-v1.json",
+      "bytes": 1514,
+      "sha256": "6abd08aa4ff804fef7bcc9f1ebb145b046fef5c2c749a1be09570e35229ba4c1"
+    },
+    "previousStage2v4receipt": {
+      "path": "research-data/ai-sigma/frame23-steward/storage-285-stage2-v4-admission.json",
+      "bytes": 7084,
+      "sha256": "26b598c483275b240cb7fd9300d0602d8ca74ed445ba199fb5bd811917fc6ee0"
+    }
+  },
+  "measurement_at": "2026-10-05T16:41:01.814704+00:00",
+  "fresh_retained_allocated_inode_bytes": 10264256512,
+  "prospective_reservation_unused_or_conservative_upper_bytes": 1961017344,
+  "unknown_retained_bytes": 134217728,
+  "conservative_current_plus_prospective_unused_unknown_bytes": 12359491584,
+  "cap_bytes": 12884901888,
+  "conservative_margin_bytes": 525410304,
+  "prospective_storage_admission": "within",
+  "errors": [],
+  "additional_aggregate_allocation_bytes": 0,
+  "before_and_after_reservation_sum_bytes": 2057412608,
+  "frame23_combined_caps_bytes": 1182793728,
+  "current_scope_reservations": [
+    {
+      "category": "frame23-285-additional-data-cache-Git-temp-source-upper",
+      "reserved_bytes": 1040187392,
+      "owner": "285",
+      "basis": "prospective992MiB from prior1GiB; only32MiB transferred to288sharedbuild, no deletion/current-byte discount; owner future forecast/counters separate",
+      "current_allocated_bytes": 82677760,
+      "unused_bytes": 957509632
+    },
+    {
+      "category": "frame23-285-shared-release-additional-growth-upper",
+      "reserved_bytes": 33554432,
+      "owner": "285",
+      "basis": "new incremental build forecast; shared current already observed once, old build reservations retained",
+      "current_allocated_bytes": 0,
+      "unused_bytes": 33554432
+    },
+    {
+      "category": "frame23-future-learning-checkpoint-output-upper",
+      "reserved_bytes": 67108864,
+      "owner": "286",
+      "basis": "same previously reserved64MiB mapped to assigned286 data/checkpoint roots; not an additional64MiB; release0; storage itself does not authorize learning",
+      "scope_paths": [
+        "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-independent-teacher-learning",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teacher-learning"
+      ],
+      "current_allocated_bytes": 13561856,
+      "unused_bytes": 53547008
+    },
+    {
+      "category": "frame23-287-independent-evaluation-growth-upper",
+      "reserved_bytes": 6291456,
+      "owner": "287",
+      "basis": "prospective6MiB from prior8MiB; only2MiB to288data; actual unused verified but future3453x3model output adequacy pending287owner confirmation",
+      "scope_paths": ["/workspaces/quoridor/research-data/ai-sigma/frame23-independent-evaluation"],
+      "current_allocated_bytes": 151552,
+      "unused_bytes": 6139904
+    },
+    {
+      "category": "frame23-288-wall-legality-data-growth-upper",
+      "reserved_bytes": 2097152,
+      "owner": "288",
+      "basis": "prospective from2872MiB, not new parent capacity; future6MiB donor adequacy must be confirmed before use",
+      "scope_paths": [
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-wall-legality-processing"
+      ],
+      "current_allocated_bytes": 4096,
+      "unused_bytes": 2093056
+    },
+    {
+      "category": "frame23-288-sharedbuild-growth-upper",
+      "reserved_bytes": 33554432,
+      "owner": "288",
+      "basis": "prospective from285data32MiB, old285build32MiB preserved; extra sharedtarget growth, no old target/Git free inference",
+      "scope_paths": ["/workspaces/quoridor/.artifacts/rust-migration/target"],
+      "current_allocated_bytes": 0,
+      "unused_bytes": 33554432
+    }
+  ],
+  "storage_transfer_status": {
+    "287_data2MiB_to288": "OWNER_FUTURE_FORECAST_CONFIRMED_COORDINATOR_ADOPTED_CURRENT_WITHIN",
+    "285_data32MiB_to288sharedbuild": "PHYSICAL_CURRENT_UNUSED_CONFIRMED_PROSPECTIVE_WITHIN_OWNER_REMAINING_FORECAST_PENDING"
+  },
+  "donor287_data_current_plus_future_forecast_bytes": 3297280,
+  "donor287_reduced_cap_bytes": 6291456,
+  "donor287_future_forecast_bytes": 3145728,
+  "donor285_original_data_unused_current_bytes": 991064064,
+  "donor285_remaining_after_prospective_transfer_bytes": 957509632,
+  "effective_pending285_case": {
+    "285_data_cap_bytes": 1073741824,
+    "new288_build_allowed_bytes": 0,
+    "287_cap_bytes": 6291456,
+    "288_data_cap_bytes": 2097152,
+    "current_plus_effective_unused_unknown_bytes": 12359491584,
+    "within": true,
+    "equal_upper_to_prospective_case": true,
+    "explanation": "Until285 ownerremaining forecast confirmation keep original1GiB donor and no new288build use. Difference+32MiB donor unused cancels unactivated32MiB recipient forecast, no parent allocation/free reset."
+  },
+  "288_new_WT_bytes": 0,
+  "WT_reuse_coverage": [
+    {
+      "name": "current sparse search worktree",
+      "path": "/workspaces/quoridor/.worktree/frame21-search",
+      "category": "active-source-data",
+      "logical_file_bytes": 1853736,
+      "allocated_inode_bytes": 2641920,
+      "overlap_allocated_bytes": 0,
+      "files": 233,
+      "symlinks": 0,
+      "missing": false
+    }
+  ],
+  "shared_target_coverage": [
+    {
+      "name": "current native release/build workspace",
+      "category": "live-build",
+      "path": "/workspaces/quoridor/.artifacts/rust-migration",
+      "scope_note": "whole existing sharedtarget/live included once; new288build32MiB remains prospective additional upper bound because growth ownership not exactly partitioned",
+      "logical_file_bytes": 529711467,
+      "allocated_inode_bytes": 532643840,
+      "overlap_allocated_bytes": 0,
+      "files": 2374,
+      "symlinks": 0,
+      "missing": false
+    }
+  ],
+  "new_scope_coverage": [
+    {
+      "name": "current288wall-legality source/data",
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-wall-legality-processing",
+      "category": "frame23-288-wall-legality-data-growth-upper",
+      "logical_file_bytes": 1982,
+      "allocated_inode_bytes": 4096,
+      "overlap_allocated_bytes": 0,
+      "files": 1,
+      "symlinks": 0,
+      "missing": false
+    }
+  ],
+  "old_keeper112_Supervisor32_coordinator8_old512_unknown_padding_preserved": true,
+  "old_receipts_or_costs_changed": false,
+  "cleanup_or_capacity_added": false,
+  "data_or_Git_or_target_unknown_declared_free": false,
+  "current_runtime": {
+    "at": "2026-10-05T16:44:17.242350+00:00",
+    "phase": "running",
+    "scheduler": {
+      "pid": 1430721,
+      "start_ticks": "46503900",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "scheduler_exact_alive": true,
+    "monitor": {
+      "pid": 1430738,
+      "start_ticks": "46503929",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "monitor_exact_alive": true,
+    "owned": null,
+    "input_count": 24,
+    "input24_match": true,
+    "loaded_config_match": true,
+    "loaded_contract_match": true,
+    "deadlines": {
+      "heavy": "2026-10-05T23:26:03Z",
+      "supervisor": "2026-10-05T23:31:03Z",
+      "monitor": "2026-10-05T23:34:03Z",
+      "final": "2026-10-05T23:36:03Z"
+    }
+  },
+  "keeper_allocated_bytes": 12488704,
+  "keeper_current_plus_forecast_bytes": 17731584,
+  "keeper_guard_bytes": 117440512,
+  "current_local_management_rss_bytes": 273440768,
+  "storage_only": true,
+  "288_compile_science_admitted": false,
+  "pending_outside_storage": "285 source/read60/compile120 actualallattempt+neededremaining confirmation; any CPU/NN/science/manage transfer effectiveness controlled by donor owners and Coordinator. Own physical admission still required before compile/science.",
+  "future_evaluation_labels_or_models_read": false,
+  "read_scope": "directed live inode observation; no wholeGit history/target-free inference or science interruption; measurement row pending287 annotation represents pre-adoption input, owner confirmation stored separately here"
+}

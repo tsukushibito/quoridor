@@ -44,13 +44,13 @@ RootのClaustrophobia取込み依頼をBeads288へ実配分する。担当critic
 
 managed frame21-searchにcore/必要correctness tests/専用診断だけ別writer、旧comparative scaffoldは停止保存後current mainへ必要pathだけ整合。合法Action全集合/P2/jump/terminal/壁密度/中点閉路/maze/全81/NNUE full-delta/親履歴復帰のoracleを先行。同model/depth/node/action/value/countersで局所費と全探索時間/RAM/init/undoを分け、teacher/GPU/samewall強度倍率へ外挿しない。perf未検出で区間timers/countersを用い取得0。
 
-確認済unusedからの移譲案は285 source60/compile120/data32MiB→288 source60/compile120/build32MiB、287 NN50k/science240/manage30/data2MiB→288同各枠。成立後285source240/compile60/data992MiB、287NN50k/science360/manage150/data6MiB、MAX2/評価3モデル/封印条件は維持。288CPU3single/RAMguard1.75/NN50k/processed250k/MAX3/science240秒/data2MiB。実currentunused/必要残費をownerと92が確認し、未成立項目は使用しない。親追加0/UNKNOWN保持、静的編集は並行し主生成/fitと計測窓を重ねない。詳細は[壁合法性処理契約](../../research-data/ai-sigma/frame22-coordinator/wall-legality-processing-contract.md)。
+確認済unusedからの移譲案は285 source60/compile120/data32MiB→288 source60/compile120/build32MiB、287 NN50k/science240/manage30/data2MiB→288同各枠。成立後285source240/compile60/data992MiB、287NN50k/science360/manage150/data6MiB、MAX2/評価3モデル/封印条件は維持。288CPU3single/RAMguard1.75/NN50k/processed250k/MAX3/science240秒/data2MiB。285のstage2-transfer-acceptance-v8と287本人残量を統括採択し、92 fresh16:41:01 total12359491584<12GiB/margin525410304のconserved coverageへ結合して移譲を有効化。原pending観測/旧費/UNKNOWNを追変更せず、親追加0。各build/科学は本人current/source/物理/非競合検査から実行し、静的編集を並行する。詳細は[壁合法性処理契約](../../research-data/ai-sigma/frame22-coordinator/wall-legality-processing-contract.md)。
 
 ## 実行・所有・終了
 
 mainが正本、撤去旧checkoutを呼ばない。各契約のsource ownerは一人、統括だけ通常Git/indexを操作する。科学時源・原失敗・必要データは停止path/SHAと復元証拠を保存し、過去版はGit履歴を基本にする。製品採用・push公開、新モデル/依存取得、共有環境更新、未知資産削除、新GPU学習は追加許可無し。173正式198非学習・旧開封test非選定を保持する。
 
-CPU合計4logical/currentRAM8GiB/保持cachetemp＋有効unused12GiB。運用CPU0/1GiB、285worker2/infer4（2/3はphysical siblings）、286CPU1、287CPU3。新固定時間比較・GPU生成・CPU fitを本人fresh physicsで非競合とし、人数/全役ACKをbusyの代わりにしない。GPU推論VRAM6GiB/一job30分、学習はCPUのみ。過去caps/失敗/UNKNOWN/既予約をresetしない。285初段NN5m/科学3600秒、第二段はactual採択後の累積18.2m/12000秒以内、286学習3m/MAX5、287評価は本人remainingforecast採択後50k/科学360秒/MAX2（移譲前100k/600秒の旧費を保持）を使う。288は移譲成立項目内で50k/科学240秒/MAX3、285側source/compile/保管確認前にheavyを使わない。未使用予約の返却はcurrent実量/未使用を確認してからで、historicalcapをfreeと呼ばない。
+CPU合計4logical/currentRAM8GiB/保持cachetemp＋有効unused12GiB。運用CPU0/1GiB、285worker2/infer4（2/3はphysical siblings）、286CPU1、287CPU3。新固定時間比較・GPU生成・CPU fitを本人fresh physicsで非競合とし、人数/全役ACKをbusyの代わりにしない。GPU推論VRAM6GiB/一job30分、学習はCPUのみ。過去caps/失敗/UNKNOWN/既予約をresetしない。285初段NN5m/科学3600秒、第二段はactual採択後の累積18.2m/12000秒以内、286学習3m/MAX5、287評価は本人remainingforecast採択後50k/科学360秒/MAX2（移譲前100k/600秒の旧費を保持）を使う。288は移譲成立項目内で50k/科学240秒/MAX3、移譲は本人残費と92保管確認を結合して成立、各heavyのcurrent物理検査は別に行う。未使用予約の返却はcurrent実量/未使用を確認してからで、historicalcapをfreeと呼ばない。
 
 22:45–23:00頃、直近Supervisor報告を再用して目標貢献・機会損失・役実働・累積費/不足の振返りを確保し、92へ停止保存に加え限定整理/長期保守判断を実配送する。既全体cache wipe/再編は見送り、科学比較源/WTは必要保存・読者停止・具体次用途で整理判断する。92は正owned/scheduler23:31:03・monitor23:34:03、各scientistは自己child wait/現在identity不在/source停止、統括は必要保存23:36:03を確認する。通知だけを判断完了にせず、不足は理由・担当・次機会を記録する。自動延長0、最高棋力未達なら親をcloseしない。Coordinator恒久idle refreshは92の自然安全窓pending責任で、現active適用と科学入口を区別する。
 

@@ -1,0 +1,54 @@
+{
+  "at": "2026-10-05T16:47:47.118542+00:00",
+  "goal": "quoridor-4lc",
+  "task": "quoridor-4lc.288",
+  "owner": "coordinator",
+  "status": "CONSERVED_TRANSFER_ACTIVATED",
+  "evidence": [
+    {
+      "path": "research-data/ai-sigma/frame23-steward/storage-288-prospective-source-handoff.json",
+      "bytes": 1467,
+      "sha256": "36382eee3f7db76b52451abe63af7abfa87b4a778b690b8c7154a83d1fff0a6f"
+    },
+    {
+      "path": "research-data/ai-sigma/frame23-independent-teachers/stage2-transfer-acceptance-v8.json",
+      "bytes": 2204,
+      "sha256": "dde166b479c030fd51fa33e9932ba7c4fcbe1e3c254f272e3f244ca10ac6a7d8"
+    },
+    {
+      "path": "research-data/ai-sigma/frame23-independent-evaluation/resource-transfer-to-288-proposal-v1.json",
+      "bytes": 1514,
+      "sha256": "6abd08aa4ff804fef7bcc9f1ebb145b046fef5c2c749a1be09570e35229ba4c1"
+    }
+  ],
+  "original_pending_storage_proof_unchanged": true,
+  "pending_condition_satisfied_by_later_owner_acceptance": true,
+  "parent_capacity_added": 0,
+  "UNKNOWN_discount": 0,
+  "conserved_forecast_B": 12359491584,
+  "parent_cap_B": 12884901888,
+  "remaining_conservative_margin_B": 525410304,
+  "after_transfer": {
+    "285_data_B": 1040187392,
+    "285_source_s": 240,
+    "285_compile_test_s": 60,
+    "287_data_B": 6291456,
+    "287_NN": 50000,
+    "287_science_s": 360,
+    "287_manage_s": 150,
+    "287_MAX": 2,
+    "288_data_B": 2097152,
+    "288_sharedbuild_B": 33554432,
+    "288_source_s": 60,
+    "288_compile_test_s": 120,
+    "288_manage_s": 30,
+    "288_NN": 50000,
+    "288_processed": 250000,
+    "288_science_s": 240,
+    "288_MAX": 3
+  },
+  "scientific_entry": "existing288 contract permitted only after own freshcurrent/source/input/CPU/RAM and measurement-nonoverlap checks; no child started by coordinator",
+  "future_labels_opened": false,
+  "science_success_or_futurefree_certified": false,
+  "old_cost_failure_caps_preserved": true
+}
