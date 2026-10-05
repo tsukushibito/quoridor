@@ -1,0 +1,7 @@
+# frame22 自律研究：NNUE最高棋力へ原因と改善を実測
+ユーザー明示4時間 2026-10-05T11:36:03Z–15:36:03Z固定、heavy15:26:03/監督正owned15:31:03/monitor15:34:03/保存15:36:03。旧科学/失敗/累積/UNKNOWN/期限は不変更。課題集合の唯一参照 docs/design/ai-nnue-optimization-agenda.md、現在選定 docs/reports/ai-sigma-coordinator-current-priorities.md。全案実施・特定一案固定・全role承認・通常root確認gateなし。
+目標距離を上回る有用なNNUE最高棋力、問いは期待学習利益不足の原因と必要設計/教師/学習/探索改善。QF1二視点312疎入力+distance2（全map入力でない）、Sigma/Claustrophobiaのドメイン情報を低費後段/疎特徴/差分へ。小smoke/方式名/小再用valの負支持を一般断念へ使わない。
+初期担当:273 experiment=resident真GPUbatch教師生成・有効データ/全job費、274 hypothesis=教師情報/分布/転移の解析と小CPU学習、275 critic=TT/ordering/葉費から源実測で選び実装・品質対照、92=solewriter親本文版22/runtimebinding/fresh保管/運用と終了長期保守判断。静的はloaded待ち0、科学本人current物理admit。独立編集と実CPU/RAM/測定競合を調整し節目で配分更新。
+main Rust/Python正本、撤去旧WTを呼ばない。assets .worktree/assets とresearch-paths.json v2/research-assets.pyで実path/hash。既比較WTは目的・撤去条件を持つ保存sourcepointだけ、恒常mirror0。singleGit/index統括、並行writer停止path/hashと復元確認を引渡し。全変更コード整形必須。新取得/環境更新/製品採用push公開/未知削除0。
+CPUaggregate4logical/currentRAM8GiB/保持cachetemp+有効unused12GiB（運用1logical/RAM1GiB/92既112MiB内含む）。GPU推論6GiB/job30min、GPU学習旧2h確認残のみ/unknown新0。既予約unknown累積reset0、fresh retainedと全forecast/unusedを92と各ownerがadmit。前枠保管値は参考で現admissionへ代用0。
+最高棋力/未見NNUE利益/SigmaNI未達、173正式198非学習、開封test非選定、229final独立NOT_RUN保持。開始受付/実tool/loaded/実科学/有用結果/将来全期間を別認定。背景job→Idle→completion一度、応答不明履歴確認/盲目retry0。同saved settings維持/人数gate0/同役二重0。15:00頃までに92整理長期保守とSupervisor目標貢献/機会損失/役実働の終了振返りを実配送又は十分な自然報告参照、不足は理由担当次機会保存、延長0。各owner子回収/notesbackup/必要Gitを期限内、親未達close0。
