@@ -1,0 +1,102 @@
+{
+  "at": "2026-10-05T14:49:00.922965+00:00",
+  "applications": [
+    {
+      "role": "hypothesis",
+      "thread_id": "01a0f31c-2e4b-7170-82c5-69e1428c2418",
+      "definition_sha256": "1576914f06dbc089a3ac11a2454f1a87e3153bd2bfe173662f44bff492657b6c",
+      "delivered_fulltext_sha256": "368c11e4cca05bdc5892f9a316c0d0e847670cb60914b423bef53d404cd20df6",
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "cwd": "/workspaces/quoridor",
+      "new_science_turn": false,
+      "before_status": {
+        "type": "notLoaded"
+      },
+      "formal_idle_accepted": true,
+      "permanent_idle_pending": false,
+      "result": {
+        "role": "hypothesis",
+        "refreshed": true,
+        "definition_sha256": "1576914f06dbc089a3ac11a2454f1a87e3153bd2bfe173662f44bff492657b6c",
+        "configured_cwd": "/workspaces/quoridor",
+        "cwd_readback": "thread metadata may retain historical cwd; idle task dispatch binds configured cwd"
+      },
+      "after_metadata": {
+        "id": "01a0f31c-2e4b-7170-82c5-69e1428c2418",
+        "status": {
+          "type": "idle"
+        },
+        "cwd": "/workspaces/quoridor",
+        "model": "gpt-6.1-sol",
+        "reasoningEffort": "high"
+      }
+    },
+    {
+      "role": "coordinator",
+      "thread_id": "01a0f31b-3409-75f2-a30e-453a50484f94",
+      "definition_sha256": "0191b13195716d4f6877eb2dcbca8f50ece9702bda0cdf4c0336c8e887bba2b8",
+      "delivered_fulltext_sha256": "e1c6d5bd604e6c4415012090345f8814465e83a875756e70f564ff502066175e",
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "cwd": "/workspaces/quoridor",
+      "new_science_turn": false,
+      "before_status": {
+        "type": "active",
+        "activeFlags": []
+      },
+      "exact_turn_id": "01a10c82-7e4d-7832-b590-f09023f2f93d",
+      "rpc_sent": true,
+      "active_fulltext_accepted": true,
+      "permanent_idle_pending": true,
+      "pending_owner": "quoridor-4lc.92",
+      "next_opportunity": "natural idle safe window",
+      "result": {
+        "turnId": "01a10c82-7e4d-7832-b590-f09023f2f93d"
+      },
+      "after_metadata": {
+        "id": "01a0f31b-3409-75f2-a30e-453a50484f94",
+        "status": {
+          "type": "active",
+          "activeFlags": []
+        },
+        "cwd": "/workspaces/quoridor",
+        "model": "gpt-6.1-sol",
+        "reasoningEffort": "high"
+      },
+      "payload_includes_active_application_prefix": true
+    },
+    {
+      "role": "supervisor",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+      "definition_sha256": "4f58a22cb9c77ca4c64962383de900dfb3d88968b82bf51a65bd7cb47699d900",
+      "delivered_fulltext_sha256": "1e0a3affd32a2cbe7caea96fe638b0a32dd01ab6935deb972a1a94d9bef5ea7a",
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "cwd": "/workspaces/quoridor",
+      "new_science_turn": false,
+      "before_status": {
+        "type": "notLoaded"
+      },
+      "formal_idle_accepted": true,
+      "permanent_idle_pending": false,
+      "result": {
+        "role": "supervisor",
+        "refreshed": true,
+        "definition_sha256": "4f58a22cb9c77ca4c64962383de900dfb3d88968b82bf51a65bd7cb47699d900",
+        "configured_cwd": "/workspaces/quoridor",
+        "cwd_readback": "thread metadata may retain historical cwd; idle task dispatch binds configured cwd"
+      },
+      "after_metadata": {
+        "id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+        "status": {
+          "type": "idle"
+        },
+        "cwd": "/workspaces/quoridor",
+        "model": "gpt-6.1-sol",
+        "reasoningEffort": "high"
+      }
+    }
+  ],
+  "developer_fulltext_getter_supported": false
+}
