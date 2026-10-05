@@ -1,0 +1,122 @@
+{
+  "UTC": "2026-10-05T02:08:03.775494+00:00",
+  "issue": "quoridor-4lc.251",
+  "decision": "FINITE_INDEPENDENT_SAVED_ARITHMETIC_SHARED_RULEA_ACCEPTED",
+  "result_SHA": "3e40766e81ae24a91ec985205bf0dec86ea0289e5d240fc70aec9f3b9f9358bf",
+  "process_SHA": "e69c43a097d70c7075cd90a3dc274a77a390513a6265a659490b5e77945293f0",
+  "admission_SHA": "b87bd8f47366d1c3dadb6e91622972e9f6b5450babd8e5987218bbbaab3850c6",
+  "stop_SHA": "5eedfef189abdca4f7d681dfd1110077af04464bc2598f87116062c066492daa",
+  "current_hash_checks": [
+    {
+      "path": "tools/ai-sigma-frame20-distance-arena-independent/run-distance.py",
+      "SHA": "f8f686bb2b994caf3627cb75fcba28d0579ef333d2b25da976e8fceca8b7da10",
+      "current_equal": true
+    },
+    {
+      "path": "tools/ai-sigma-frame20-distance-arena-independent/replay-distance.cjs",
+      "SHA": "49f75a86721cd795bd2be575155887d1f7717f00eb2024543edc47b6ef370005",
+      "current_equal": true
+    },
+    {
+      "path": "tools/ai-sigma-frame20-distance-arena-independent/check-distance.py",
+      "SHA": "370ca5a876a347afbc388958e731bb7c1b50e72b2e90b946632bdde23bf1c6cd",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame20-distance-arena-independent/result.json",
+      "SHA": "3e40766e81ae24a91ec985205bf0dec86ea0289e5d240fc70aec9f3b9f9358bf",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame20-distance-arena-independent/process.json",
+      "SHA": "e69c43a097d70c7075cd90a3dc274a77a390513a6265a659490b5e77945293f0",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame20-distance-arena-independent/replay.json",
+      "SHA": "a4dbb1ce3874d7034932518ed9469f5894445a90d87bf1800bbdc4cb8ef0e4cd",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame20-distance-arena-independent/admission.json",
+      "SHA": "b87bd8f47366d1c3dadb6e91622972e9f6b5450babd8e5987218bbbaab3850c6",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame20-distance-arena-independent/stopped-inputs.json",
+      "SHA": "94cf5581ec4b0e6cd44d213b1c613c68bec1195de425c55da69f8efdb8d8bc35",
+      "current_equal": true
+    }
+  ],
+  "task_schema_entry_output_purpose": "PASS",
+  "science_wall_s": 0.3843102790415287,
+  "NN": 0,
+  "MAX1": 1,
+  "conservative_source_calc_charge": 90,
+  "planned8": 8,
+  "service340": 340,
+  "permodeWDL": {
+    "clip": {
+      "L": 2,
+      "W": 2
+    },
+    "tanh": {
+      "L": 2,
+      "W": 2
+    }
+  },
+  "sameinput": [
+    {
+      "engine": "NNUE",
+      "sameinput_pairs": 57,
+      "tanh_deeper": 0,
+      "same_depth": 55,
+      "shallower": 2,
+      "final_Action_changed": 1,
+      "processed_delta_sum": 1187,
+      "NN_delta_sum": 864,
+      "elapsed_delta_mean_ms": 0.09128758258986891,
+      "commondepth_columns": 150,
+      "common_value_maxabs": 0.0,
+      "common_Action_changes": 0,
+      "D_value_Action_change_allowed": false
+    },
+    {
+      "engine": "distance",
+      "sameinput_pairs": 58,
+      "tanh_deeper": 0,
+      "same_depth": 57,
+      "shallower": 1,
+      "final_Action_changed": 1,
+      "processed_delta_sum": 8338,
+      "NN_delta_sum": 0,
+      "elapsed_delta_mean_ms": 0.1848820725391651,
+      "commondepth_columns": 275,
+      "common_value_maxabs": 0.21132487058639526,
+      "common_Action_changes": 6,
+      "D_value_Action_change_allowed": true
+    }
+  ],
+  "known_and_charged_scientific_NN": 273742,
+  "producer_guardian_s": 32.09923797601368,
+  "admission_owned_record": {
+    "run_id": "3d242cb7-c34c-4564-ab15-c1a568d2ec54",
+    "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+    "turn_id": "01a109c7-2f55-7c43-8420-11a6c052e8f8",
+    "started_at": "2026-10-05T01:56:51.145464+00:00",
+    "max_turn_seconds": null
+  },
+  "admission_foreign_record": [],
+  "owned_record_must_not_be_rewritten_as_None": true,
+  "physical_point_not_future_tool_absence_guarantee": true,
+  "limits": [
+    "shared RuleA and saved counters/numeric receipts; no new forward or deep truth",
+    "all exact argmax NOT_RECORDED",
+    "reused two-family small diagnostic; no general equivalence/strength",
+    "old229 final NOT_RUN unchanged"
+  ],
+  "owner_final_git": "7c3a8c3b3783f58a18cb2ca8091f342051b1a45a",
+  "owner_closed_backup_exit": 0,
+  "next": "new254 already concretely selected and delivered; no251 job reset/replay",
+  "goal": "UNMET"
+}
