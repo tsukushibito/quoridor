@@ -1,0 +1,44 @@
+{
+  "started": "2026-10-05T09:53:36.129663+00:00",
+  "ended": "2026-10-05T09:53:40.735407+00:00",
+  "wall_seconds": 4.60576080402825,
+  "exit_code": 0,
+  "cause": null,
+  "peak_rss": 64958464,
+  "leader": {
+    "pid": 1032001,
+    "ppid": 1031988,
+    "pgid": 1032001,
+    "tick": 44705153,
+    "cpu": 0,
+    "rss": 241664,
+    "argv": [
+      "/usr/bin/taskset",
+      "-c",
+      "2",
+      "/workspaces/quoridor/.artifacts/rust-migration/target/release/examples/search_work-baseline-267",
+      "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/config.json"
+    ],
+    "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "children": [
+    {
+      "pid": 1032001,
+      "ppid": 1031988,
+      "pgid": 1032001,
+      "tick": 44705153,
+      "cpu": 447,
+      "rss": 64958464,
+      "argv": [
+        "/workspaces/quoridor/.artifacts/rust-migration/target/release/examples/search_work-baseline-267",
+        "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/config.json"
+      ],
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    }
+  ],
+  "remaining": [],
+  "waited": true,
+  "current_exact_absent": true,
+  "task": "frame21-search-work-267-v2",
+  "kind": "science"
+}

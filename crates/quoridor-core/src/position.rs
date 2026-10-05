@@ -1,4 +1,3 @@
-use std::collections::VecDeque;
 use std::fmt;
 
 pub const RULESET_ID: &str = "standard-2p-v1";
@@ -164,23 +163,52 @@ impl Position {
         if player > 1 || self.pawns[player] >= 81 {
             return None;
         }
-        let mut seen = [false; 81];
-        let mut queue = VecDeque::with_capacity(81);
-        let start = self.pawns[player];
-        seen[start as usize] = true;
-        queue.push_back((start, 0u8));
-        while let Some((cell, distance)) = queue.pop_front() {
-            if cell / 9 == if player == 0 { 8 } else { 0 } {
+        const BOARD: u128 = (1u128 << 81) - 1;
+        const COL8: u128 = (1u128 << 8)
+            | (1u128 << 17)
+            | (1u128 << 26)
+            | (1u128 << 35)
+            | (1u128 << 44)
+            | (1u128 << 53)
+            | (1u128 << 62)
+            | (1u128 << 71)
+            | (1u128 << 80);
+        // Source cells of blocked south/east edges. Construction is part of
+        // every scalar distance call; this is not a cached full distance map.
+        let (mut hblock, mut vblock) = (0u128, 0u128);
+        let mut walls = self.horizontal;
+        while walls != 0 {
+            let anchor = walls.trailing_zeros();
+            let cell = (anchor / 8) * 9 + anchor % 8;
+            hblock |= 3u128 << cell;
+            walls &= walls - 1;
+        }
+        walls = self.vertical;
+        while walls != 0 {
+            let anchor = walls.trailing_zeros();
+            let cell = (anchor / 8) * 9 + anchor % 8;
+            vblock |= ((1u128 << 9) | 1) << cell;
+            walls &= walls - 1;
+        }
+        let goal = if player == 0 { 0x1ffu128 << 72 } else { 0x1ff };
+        let mut frontier = 1u128 << self.pawns[player];
+        let mut reached = frontier;
+        let mut distance = 0u8;
+        loop {
+            if frontier & goal != 0 {
                 return Some(distance);
             }
-            for next in neighbors(cell).into_iter().flatten() {
-                if !seen[next as usize] && self.is_edge_open(cell, next) {
-                    seen[next as usize] = true;
-                    queue.push_back((next, distance + 1));
-                }
+            let south = ((frontier & !hblock) << 9) & BOARD;
+            let north = (frontier >> 9) & !hblock;
+            let east = ((frontier & !vblock & !COL8) << 1) & BOARD;
+            let west = (frontier >> 1) & !vblock & !COL8;
+            frontier = (south | north | east | west) & !reached;
+            if frontier == 0 {
+                return None;
             }
+            reached |= frontier;
+            distance += 1;
         }
-        None
     }
     pub fn legal_pawn_mask(self) -> [u8; 81] {
         let mut mask = [0; 81];

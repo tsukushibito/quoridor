@@ -1,0 +1,25 @@
+{
+  "source": {
+    "crates/quoridor-core/src/position.rs": {
+      "SHA": "a12641610b25fd7bb36b7a3408ed377fdb9c4767e6e5f2edbd792090686c7736",
+      "bytes": 11938
+    },
+    "crates/quoridor-core/tests/distance_layers.rs": {
+      "SHA": "35d6597341f2304296fa9b2906b16881b57f8ce438620946dcc0a959640b35ff",
+      "bytes": 2807
+    },
+    "crates/quoridor-runner/examples/search_work.rs": {
+      "SHA": "ee1c8b6c612bb657111cc8248714b4651848e57ba85390e5b39a6a26d7c98e71",
+      "bytes": 9268
+    }
+  },
+  "worktree": "/workspaces/quoridor/.worktree/frame21-search",
+  "candidate": "u128 scalar wall_distance, one core path",
+  "controls": "original VecDeque compiled baseline cache; test-only fixed81 oracle",
+  "tests": "6 PASS: 1006 legal replays/21078successors/20736 singlewall-start/3888 disconnected raw cases/2 contextundo",
+  "scope": "core alpha-beta benefit supported; Sigma root timing benefit not established; fullgame throughput UNKNOWN",
+  "main_merge_decision": "coordinator; no main edit by critic",
+  "newdeps": false,
+  "NNUE_WallMaps_source_changed": false,
+  "Sigma648_map_source_changed": false
+}

@@ -1,0 +1,65 @@
+{
+  "task": "frame21-search-work-267-v2",
+  "schema": "search-work-config-v2",
+  "nnue_manifest": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-native-connection/weight-manifest.json",
+  "onnx": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/ai-sigma/reference/sigma-pcr250/best.onnx",
+  "onnx_sha": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+  "ort_library": "/home/vscode/.cache/inference/envs/quoridor-training/lib/python3.14/site-packages/onnxruntime/capi/libonnxruntime.so.1.30.0",
+  "a": 0.06038215201109912,
+  "b": 7.925687690687516,
+  "fixtures": [
+    {
+      "name": "initial",
+      "prefix": []
+    },
+    {
+      "name": "opening",
+      "prefix": [
+        13,
+        67,
+        81,
+        66,
+        14,
+        65
+      ]
+    },
+    {
+      "name": "walled-midgame",
+      "prefix": [
+        13,
+        67,
+        81,
+        66,
+        14,
+        65,
+        143,
+        126,
+        150,
+        64,
+        141,
+        151
+      ]
+    },
+    {
+      "name": "jump-p2",
+      "prefix": [
+        13,
+        67,
+        22,
+        58,
+        31,
+        49,
+        40
+      ]
+    }
+  ],
+  "max_depth": 2,
+  "max_nodes": 2000,
+  "K": 64,
+  "samples": 4,
+  "warmup": 1,
+  "steady": 3,
+  "sigma_rng": "deterministic Search API: no stochastic policy/noise/RNG draw; generation1979; no game action sampling",
+  "scope": "fixed roots only; fullgame Rjoint UNKNOWN",
+  "at": "2026-10-05T09:49:18.052181+00:00"
+}

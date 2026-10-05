@@ -1,0 +1,88 @@
+{
+  "schema": "search-efficiency-prospective-v1",
+  "UTC": "2026-10-05T09:09:12.796782+00:00",
+  "issue": "quoridor-4lc.267",
+  "source_candidate": "Position::wall_distance fixed81 FIFO replacing per-call VecDeque; select only after legal/distance profile",
+  "core_callers": [
+    "Position::checked",
+    "Position::legal_wall",
+    "SigmaContext::raw_legal_ids",
+    "alphabeta::DistanceEvaluator",
+    "SigmaMCTS expand/ensure legality"
+  ],
+  "profile": [
+    "coarse Legal/BFS union",
+    "full exclusive Distance by parent/calls",
+    "profiling compiled-out control; no inclusive double addition"
+  ],
+  "fixtures_result_before_candidate": [
+    "initial",
+    "opening",
+    "walled-midgame",
+    "p2",
+    "jump-p2",
+    "many-walls"
+  ],
+  "compare": [
+    "root full legal set and all successor distances",
+    "history/terminal/P2/parent unmake parity",
+    "AB same completeddepth/node/value/Action no timecutoff",
+    "SigmaMCTS K64 same features/edgevisits/rootmean/action/token counts"
+  ],
+  "prospective_max4_jobs": [
+    "baseline core profile",
+    "baseline actual fixed NN work",
+    "candidate fixed NN work",
+    "bounded confirmation or failure diagnosis within remaining cap"
+  ],
+  "allattempt_caps": {
+    "science_s": 900,
+    "jobs": 4,
+    "each_s": 180,
+    "compiletest_s": 300,
+    "NN": 250000,
+    "processed": 500000
+  },
+  "no_new_game_train_model": true,
+  "whole_selfplay_Rjoint_speedup_not_from_fixedroot": true,
+  "typed_prerequisites_pending": [
+    "aggregate storage capacity/WT/cacheforecast",
+    "current frame21 runningloaded"
+  ],
+  "newscience_started": false,
+  "different_BFS_paths_unchanged": [
+    "NNUE WallMaps already uses fixed81 queue and reuses maps across pawn moves",
+    "Sigma features648 distance-map VecDeque remains separate"
+  ],
+  "correction_before_any_measurement": "Source inspection distinguishes scalar wall_distance from reverse full maps; no inference that cached NNUE feature BFS is changed",
+  "fixedwork_AB_nodecap": 2000,
+  "fixedwork_requesteddepth": 2,
+  "work_prefixes": 4,
+  "warm_and_steady_per_engine": 4,
+  "work_engines": [
+    "D",
+    "L",
+    "SigmaMCTS-K64"
+  ],
+  "bound_definition": "processed=AB nodes + SigmaMCTS allocated nodes; B0 profile nodes; not BFS cell visits",
+  "per_full_work_processed_bound": 199184,
+  "two_full_work_processed_bound": 398368,
+  "thin_profile_processed_bound": 12288,
+  "optional_oneprefix_confirmation_bound": 49796,
+  "all4_jobs_processed_bound": 460452,
+  "NN_bound_fullwork_and_optionalconfirm": 74304,
+  "numeric_validation_additionalNN_upper": 5000,
+  "totalNN_bound": 79304,
+  "NN_validation_compile_core_only": 0,
+  "MAX4_no_full_third_work": true,
+  "capped_partial_depth_is_recorded_not_completed": true,
+  "version": "bitparallel-v2-before-science",
+  "intervention": "Position::wall_distance u128 frontier/reached layer expansion",
+  "baseline": "original VecDeque",
+  "control": "fixed81queue independent test/diagnostic oracle, not a second core runtime",
+  "source_reference": "https://raw.githubusercontent.com/Plaaasma/Claustrophobia/ae093653/src/bitboard.rs",
+  "science_started": false,
+  "build_started": false,
+  "edge_mask_cost": "derive h/v blocked edges once per scalar wall_distance; included in elapsed; no cached/full distance map claim",
+  "status": "NOT_STARTED_STORAGE_ADMISSION_AND_MANAGED_WT_PENDING"
+}

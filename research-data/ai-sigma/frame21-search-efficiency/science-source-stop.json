@@ -1,0 +1,107 @@
+{
+  "schema": "frame21-search-source-stop-v1",
+  "at": "2026-10-05T10:00:21.237857+00:00",
+  "science_source_writer_stopped": true,
+  "base_git": "ca7522195dfb8a9b60fabee3022825045074620b",
+  "writer": "critic267",
+  "integration_owner": "coordinator",
+  "source": {
+    "crates/quoridor-core/src/position.rs": {
+      "SHA": "a12641610b25fd7bb36b7a3408ed377fdb9c4767e6e5f2edbd792090686c7736",
+      "bytes": 11938
+    },
+    "crates/quoridor-core/tests/distance_layers.rs": {
+      "SHA": "35d6597341f2304296fa9b2906b16881b57f8ce438620946dcc0a959640b35ff",
+      "bytes": 2807
+    },
+    "crates/quoridor-runner/examples/search_work.rs": {
+      "SHA": "ee1c8b6c612bb657111cc8248714b4651848e57ba85390e5b39a6a26d7c98e71",
+      "bytes": 9268
+    }
+  },
+  "science": {
+    "baseline-r1": {
+      "started": "2026-10-05T09:53:36.129663+00:00",
+      "ended": "2026-10-05T09:53:40.735407+00:00",
+      "wall_seconds": 4.60576080402825,
+      "exit_code": 0,
+      "cause": null,
+      "peak_rss": 64958464,
+      "leader": {
+        "pid": 1032001,
+        "ppid": 1031988,
+        "pgid": 1032001,
+        "tick": 44705153,
+        "cpu": 0,
+        "rss": 241664,
+        "argv": [
+          "/usr/bin/taskset",
+          "-c",
+          "2",
+          "/workspaces/quoridor/.artifacts/rust-migration/target/release/examples/search_work-baseline-267",
+          "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/config.json"
+        ],
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "children": [
+        {
+          "pid": 1032001,
+          "tick": 44705153,
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        }
+      ],
+      "remaining": [],
+      "waited": true,
+      "current_exact_absent": true,
+      "task": "frame21-search-work-267-v2",
+      "kind": "science"
+    },
+    "candidate-r1": {
+      "started": "2026-10-05T09:57:28.678481+00:00",
+      "ended": "2026-10-05T09:57:32.753513+00:00",
+      "wall_seconds": 4.075070905033499,
+      "exit_code": 0,
+      "cause": null,
+      "peak_rss": 65126400,
+      "leader": {
+        "pid": 1038059,
+        "ppid": 1038039,
+        "pgid": 1038059,
+        "tick": 44728424,
+        "cpu": 0,
+        "rss": 249856,
+        "argv": [
+          "/usr/bin/taskset",
+          "-c",
+          "2",
+          "/workspaces/quoridor/.artifacts/rust-migration/target/release/examples/search_work-candidate-267",
+          "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-search-efficiency/config.json"
+        ],
+        "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "children": [
+        {
+          "pid": 1038059,
+          "tick": 44728424,
+          "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+        }
+      ],
+      "remaining": [],
+      "waited": true,
+      "current_exact_absent": true,
+      "task": "frame21-search-work-267-v2",
+      "kind": "science"
+    }
+  },
+  "compile_test_s": 68.60005510598421,
+  "actualNN": 22748,
+  "processed": 285872,
+  "MAX4_science_jobs_used": 2,
+  "MAX4_unused": 2,
+  "forward_reexecution": false,
+  "same_fixedwork_semantic_differences": 0,
+  "wholegameRjoint": "UNKNOWN",
+  "current_identity_absence_is_point_only": true,
+  "direct_git_index_commit_operations": false,
+  "git_read_sparse_index_expand_warning": "git diff --stat emitted expansion warning; index byte unchanged NOT_CERTIFIED"
+}

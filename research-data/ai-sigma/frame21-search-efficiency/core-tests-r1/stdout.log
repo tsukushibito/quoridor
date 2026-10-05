@@ -1,0 +1,24 @@
+
+running 2 tests
+test make_unmake_preserves_whole_context_for_every_legal_child ... ok
+test out_of_order_undo_is_rejected_without_mutation ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 2 tests
+test disconnected_overlapping_graphs_and_board_edges_match_fixed_queue ... raw disconnected/overlapping comparisons 3888
+ok
+test every_single_wall_and_start_matches_fixed_queue ... single-wall start/goal comparisons 20736
+ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+
+running 2 tests
+test fixed_queue_matches_original_on_fixed_legal_replays_and_every_successor ... fixed legal replay cases 1006 zero-walls 811 terminal 3 P2 509 full-successors 21078
+ok
+test invalid_player_and_unreachable_graph_preserve_distance_result ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.09s
+

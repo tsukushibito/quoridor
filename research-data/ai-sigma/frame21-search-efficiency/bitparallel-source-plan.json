@@ -1,0 +1,18 @@
+{
+  "at": "2026-10-05T09:24:41.012753+00:00",
+  "issue": "quoridor-4lc.267",
+  "science_jobs": 0,
+  "compile_test_seconds": 0,
+  "candidate_core_path": "Position::wall_distance",
+  "reference_url": "https://raw.githubusercontent.com/Plaaasma/Claustrophobia/ae093653/src/bitboard.rs",
+  "original_plan": "prospective-fixedqueue-v1.json",
+  "source_change_before_actual_run": true,
+  "geometry": "h wall anchor(r,c) blocks SOUTH sources(r,c),(r,c+1); v wall blocks EAST sources(r,c),(r+1,c)",
+  "mask_cost": "construct blocked h/v from current u64 walls each scalar distance call, timed inclusive",
+  "bfs": "frontier start; test goal before expansion; expand four directions excluding reached and outside low81; empty frontier => None; first goal layer shortest",
+  "immutability": "Position copy; no mutation; no new cache/fullmap/WallMaps/Sigma648 change",
+  "tests": "existing VecDeque walldistance/legalwalls replay oracle + test-only fixed81 queue control; existing context make/unmake tests; finite full/delta NNUE parity and Sigma root exact fields",
+  "fixed_work": "four preregistered prefixes, requesteddepth2/nodecap2000 D/L, K64 root warm1 steady3; optional job4 one prefix only",
+  "stage_status": "NOT_STARTED_STORAGE_ADMISSION_AND_MANAGED_WT_PENDING",
+  "public_source_claim": "concept reference, no source license/codecopy or speed assumption"
+}

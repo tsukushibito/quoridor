@@ -1,0 +1,40 @@
+{
+  "at": "2026-10-05T10:06:27.600043+00:00",
+  "owner": "critic267",
+  "current_science_stopped": true,
+  "current_data_pack_helpers_active": false,
+  "last_science_end": "2026-10-05T09:57:32.753513+00:00",
+  "source_stop_SHA": "1c440d495c4461ff5a6e02e402536a05bae2f4af584939021ca2dd8a54f6bf22",
+  "read_paths": [
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-native-connection/weight-manifest.json",
+      "SHA": "9bc786e82c3b73a462da4a30e1d884678ef9f7bdb757560dd6bb437fa4b25d40",
+      "use": "Model::load NNUE saved L manifest"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-native-connection/candidate.f32",
+      "SHA": "b81792d5ba00c6d79b58cada2fc81d84ea822db48c04420b4e269fb9b71841b3",
+      "use": "Model weights full/delta/alpha-beta fixedwork"
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/ai-sigma/reference/sigma-pcr250/best.onnx",
+      "SHA": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+      "use": "fixed Sigma K64 root CPUORT backend"
+    },
+    {
+      "path": "/home/vscode/.cache/inference/envs/quoridor-training/lib/python3.14/site-packages/onnxruntime/capi/libonnxruntime.so.1.30.0",
+      "use": "existing ORT1.30 held CPU shared runtime; path bound, no library import/forward after science stop"
+    }
+  ],
+  "checkpoint_pt_read": false,
+  "old5901_dataset_read": false,
+  "oldopenedtest_or_173_read": false,
+  "assets_move_or_delete_by_critic": false,
+  "remaining_own_reader": "none pending; future benchmark reproduction references these old paths until migration owner provides new binding",
+  "PID_stop": [
+    "baseline-r1/process.json",
+    "candidate-r1/process.json",
+    "core-tests-r1/process.json"
+  ],
+  "future_allowner_idle_guarantee": false
+}

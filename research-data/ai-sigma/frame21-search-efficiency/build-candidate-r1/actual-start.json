@@ -1,0 +1,44 @@
+{
+  "at": "2026-10-05T09:54:37.223399+00:00",
+  "identity": {
+    "pid": 1033544,
+    "ppid": 1033531,
+    "pgid": 1033544,
+    "tick": 44711267,
+    "cpu": 0,
+    "rss": 73728,
+    "argv": [
+      "/usr/bin/taskset",
+      "-c",
+      "2",
+      "/usr/local/cargo/bin/cargo",
+      "build",
+      "--release",
+      "--locked",
+      "--offline",
+      "-p",
+      "quoridor-runner",
+      "--example",
+      "search_work",
+      "-j",
+      "1"
+    ],
+    "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "argv": [
+    "/usr/bin/taskset",
+    "-c",
+    "2",
+    "/usr/local/cargo/bin/cargo",
+    "build",
+    "--release",
+    "--locked",
+    "--offline",
+    "-p",
+    "quoridor-runner",
+    "--example",
+    "search_work",
+    "-j",
+    "1"
+  ]
+}
