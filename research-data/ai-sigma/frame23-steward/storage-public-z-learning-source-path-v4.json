@@ -1,0 +1,148 @@
+{
+  "at": "2026-10-05T18:42:21.011058+00:00",
+  "issue": "quoridor-4lc.92",
+  "kind": "local source-path attribution correction; no new fullscan/admission gate",
+  "actual_source_path": "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning",
+  "actual_checkpoint_path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning",
+  "scope_paths": [
+    "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-independent-teacher-learning",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teacher-learning",
+    "/workspaces/quoridor/.worktree/assets/checkpoints/sigma-public-fix-z",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-learning",
+    "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning"
+  ],
+  "same_shared_learning_cap_bytes": 67108864,
+  "local_current_allocated_bytes": 38273024,
+  "future_science_peak_bytes": 16777216,
+  "future_uniqueGit_temp_bytes": 6291456,
+  "future_metadata_bytes": 2097152,
+  "local_current_plus_conservative_future_bytes": 63438848,
+  "local_scope_margin_bytes": 3670016,
+  "local_directed_observation": {
+    "schema": "quoridor-current-storage-v1",
+    "at": "2026-10-05T18:42:21.007847+00:00",
+    "metric": "unique dev/inode st_blocks; reflink shared physical extents unknown",
+    "roots": [
+      {
+        "name": "research-data/ai-sigma/frame23-independent-teacher-learning",
+        "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teacher-learning",
+        "category": "frame23-future-learning-checkpoint-output-upper",
+        "logical_file_bytes": 6377378,
+        "allocated_inode_bytes": 6619136,
+        "overlap_allocated_bytes": 0,
+        "files": 135,
+        "symlinks": 0,
+        "missing": false
+      },
+      {
+        "name": ".worktree/assets/checkpoints/frame23-independent-teacher-learning",
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-independent-teacher-learning",
+        "category": "frame23-future-learning-checkpoint-output-upper",
+        "logical_file_bytes": 30730875,
+        "allocated_inode_bytes": 31490048,
+        "overlap_allocated_bytes": 0,
+        "files": 210,
+        "symlinks": 0,
+        "missing": false
+      },
+      {
+        "name": "research-data/ai-sigma/frame23-public-sigma-z-learning",
+        "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning",
+        "category": "frame23-future-learning-checkpoint-output-upper",
+        "logical_file_bytes": 108623,
+        "allocated_inode_bytes": 163840,
+        "overlap_allocated_bytes": 0,
+        "files": 45,
+        "symlinks": 0,
+        "missing": false
+      }
+    ],
+    "category_current_allocated_bytes": {
+      "frame23-future-learning-checkpoint-output-upper": 38273024
+    },
+    "retained_allocated_inode_bytes": 38273024,
+    "reservations": [
+      {
+        "category": "frame23-future-learning-checkpoint-output-upper",
+        "reserved_bytes": 67108864,
+        "current_allocated_bytes": 38273024,
+        "unused_bytes": 28835840
+      }
+    ],
+    "unknown_retained_bytes": 0,
+    "current_plus_unused_known_bytes": 67108864,
+    "cap_bytes": 67108864,
+    "admission": "within",
+    "errors": [],
+    "past_peak_bytes": "not added to current; refer to original run receipts",
+    "unknown_is_free": false,
+    "deleted": false
+  },
+  "declared_uncreated_paths": [
+    "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning"
+  ],
+  "global_coverage": {
+    "measured_ancestor_path": "/workspaces/quoridor/research-data/ai-sigma",
+    "ancestor_exclusions": [
+      "frame23-independent-teachers",
+      "frame23-independent-teacher-learning",
+      "frame23-independent-evaluation",
+      "frame23-wall-legality-processing",
+      "sigma-public-fix-z",
+      "frame23-sigma-public-z-import",
+      "frame23-sigma-public-z-learning",
+      "frame23-sigma-public-z-review"
+    ],
+    "actual_source_excluded": false,
+    "scope_classification_at_original_v3": "actualsource included in main research data category, not omitted retained bytes",
+    "original_v3_measurement_at": "2026-10-05T18:36:57.795949+00:00",
+    "original_v3_total_bytes": 12411772928,
+    "original_v3_cap_bytes": 12884901888,
+    "new_full_aggregate_measurement_performed": false,
+    "original_v3_total_reduced_by_local_bytes": false,
+    "future_regular_manifest_overlay": {
+      "add_to_ancestor_exclude": ["frame23-public-sigma-z-learning"],
+      "add_separate_root": {
+        "name": "290 actual public z learning source/data",
+        "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning",
+        "category": "frame23-future-learning-checkpoint-output-upper"
+      }
+    },
+    "basis": "reclassify already covered asset into same64; do not add new reservation or retained bytes for same source"
+  },
+  "owner_local_prepare_roots_agree": true,
+  "owner_actual_rows_checkpoint_output_forecast_required": true,
+  "root_argument_source": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/prepare_public.py",
+    "sha256": "26ff16f307b8ca35f2d25e45328737553606f2dc663ba48cfa3e9eb83ff15261"
+  },
+  "quality_reference": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/quality-before-data-v3.json",
+    "sha256": "1d9a235b5ff1bdc82fa2c995744152029dfa346af8fb221e393e7f018c85f4b3"
+  },
+  "original_v3_references": [
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-steward/storage-public-z-learning-v3-manifest.json",
+      "sha256": "b5d5879943fe4de6dd962d87df052b5f843dbd112ebc6e1e17931c4e63d75be0"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-steward/storage-public-z-learning-v3-current.json",
+      "sha256": "fe1c41ee64da69ff3b7c8c27d4933e4e86f71596e78880a20d3c701f4ddd1965"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-steward/storage-public-z-learning-v3-admission.json",
+      "sha256": "d6a00a81c7eb07a97732cc860f5b515d8186db760421500a64e58c51348ae63c"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-steward/storage-public-z-learning-v3-source-handoff.json",
+      "sha256": "2211c2df920ae4a0adf984a8480011a986f5e05b795c03778db837c5abbbb56e"
+    }
+  ],
+  "old_planned_source_path_retained_as_original_observation": "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-learning",
+  "additional_reservation_bytes": 0,
+  "runtime_or_science_source_changes": false,
+  "payload_forward_or_checkpoint_reader": false,
+  "UNKNOWN128MiB_and_old_caps_retained": true,
+  "local_measurement_vs_owner_prepare": "same four roots; directed metric also counts directory st_blocks conservatively, owner prepare counts files only; do not equate the two numerical metrics"
+}
