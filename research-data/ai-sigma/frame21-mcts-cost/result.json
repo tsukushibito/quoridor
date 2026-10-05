@@ -1,0 +1,72 @@
+{
+  "task": "frame21-mcts-cost-271-v1",
+  "schema": "mcts-cost-analysis-v1",
+  "status": "FINITE_PASS",
+  "comparison": [
+    {
+      "name": "initial",
+      "old_sample": 0,
+      "mismatch": {},
+      "status": "PASS"
+    },
+    {
+      "name": "opening",
+      "old_sample": 0,
+      "mismatch": {},
+      "status": "PASS"
+    },
+    {
+      "name": "walled-midgame",
+      "old_sample": 0,
+      "mismatch": {},
+      "status": "PASS"
+    },
+    {
+      "name": "jump-p2",
+      "old_sample": 0,
+      "mismatch": {},
+      "status": "PASS"
+    }
+  ],
+  "sum_ns": {
+    "setup_ns": 314420,
+    "advance_ns": 2626605,
+    "infer_ns": 967406801,
+    "supply_ns": 5905861,
+    "unattributed_ns": 78402,
+    "whole_root_ns": 976332089
+  },
+  "share_of_root": {
+    "setup_ns": 0.00032204206288256084,
+    "advance_ns": 0.002690278266578617,
+    "infer_ns": 0.9908583481987756,
+    "supply_ns": 0.0060490288770996235,
+    "unattributed_ns": 8.030259466356636e-05
+  },
+  "per_root_infer_share": [
+    0.9879389928790604,
+    0.9917648136679956,
+    0.991881817555117,
+    0.9918311257540074
+  ],
+  "startup_ns": 39761164,
+  "whole_job_ns": 1017541797,
+  "guardian_seconds": 1.046819337992929,
+  "compile_seconds": 7.099800637981389,
+  "native_nn": 256,
+  "allocated_tree_nodes": 30856,
+  "advanced_count": 0,
+  "complete_count": 4,
+  "inference_count": 256,
+  "scope": "four fixed K64 roots, one pass, CPUORT thread1; no wholegame Rjoint measured",
+  "next_one": "Preserve independent trees/K/seed and test one existing-model batched inference pump intervention against batch1, with request ID and root parity then eligible teacher/full-job cost. CPU infer span dominance alone does not establish GPU queue benefit or batch-supported model.",
+  "inner_advance": "NOT_PROFILED",
+  "source_scope": "core and backend unchanged; setup includes prefix reconstruction/tree allocation; supply includes tree expansion; infer is inclusive API span, not exclusive operator/kernel breakdown",
+  "all_attempts": {
+    "compile": 1,
+    "science": 1,
+    "compile_cap_seconds": 120,
+    "science_cap_seconds": 45,
+    "max_science_jobs": 1
+  }
+}

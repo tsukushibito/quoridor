@@ -1,0 +1,96 @@
+{
+  "schema": "model-cause-scientific-stop-v1",
+  "UTC": "2026-10-05T10:14:22.383607+00:00",
+  "science_A_entries": 1,
+  "science_B_entries": 2,
+  "build_entries": 2,
+  "no_further_science": true,
+  "source_hashes": {
+    "/workspaces/quoridor/crates/quoridor-runner/src/bin/nnue-diagnose.rs": "aa8105abb1b900a9c5cef670b087906ba44f5a4e4fb58a2f2b98223cfafdf336",
+    "/workspaces/quoridor/research-data/ai-sigma/frame21-model-cause/stage_a.py": "07515688fad533c829ccb1e96c840c566382c32ef80e0366b39b2856ed348bd5",
+    "/workspaces/quoridor/research-data/ai-sigma/frame21-model-cause/control.py": "c15371cadc846b0bfea475c51dac871d241703700175b0163cc067c6f98eee65",
+    "/workspaces/quoridor/research-data/ai-sigma/frame21-model-cause/preregister-v3.json": "cbb58890ef96654d1451d73790f9f9286701a40c2468b66817bc98daab9f18d8",
+    "/workspaces/quoridor/research-data/ai-sigma/frame21-model-cause/stage-a-config-v3.json": "9488bfd80df6366a6c34bb39e7df0f34816d7499c016f1b3d2dee8006ce9204b",
+    "/workspaces/quoridor/crates/quoridor-core/src/game.rs": "543995676fb46cc4e80d0fccb650875eb901a4b4d71187788ee09dfbaf01a420",
+    "/workspaces/quoridor/crates/quoridor-core/src/lib.rs": "24dc7084072d14e4f8a8ebd6572df4ddd2722b10b43178c250358f0a9f0befb0",
+    "/workspaces/quoridor/crates/quoridor-core/src/position.rs": "b12e79a99cf3441cf4acebbea1b827dce24b02db6fb2269021964872535e3ab6",
+    "/workspaces/quoridor/crates/quoridor-core/src/profiling.rs": "1e26d96b6d443b4d54261e7e3cb742290f223b7e84ba450e3c2cf261af38255f",
+    "/workspaces/quoridor/crates/quoridor-core/src/research.rs": "c4aaf1ed318be17e6755d54ed9940e02eb9bbeca5e3a8dcdab8a7ad0274ec3b5",
+    "/workspaces/quoridor/crates/quoridor-nnue/src/features.rs": "8711e1b1a6f2e3f32103f70c4a1b8b4cf204c783c0a67e78b7772a880662a2f8",
+    "/workspaces/quoridor/crates/quoridor-nnue/src/lib.rs": "41c5717aa2489dd31b591bae3b5fc319ccf14779aa04e571d9d0cf017b10c2ae",
+    "/workspaces/quoridor/crates/quoridor-nnue/src/quantized.rs": "986362d0fa3040ca893c2f9d50ea65bff5a7e8e4eda1fd821c3c65e6aa56520d",
+    "/workspaces/quoridor/crates/quoridor-nnue/src/simd.rs": "8aa839804b8ca942431eca2de4fc01354b618d4f8897452eb5cd89944e1587bc",
+    "/workspaces/quoridor/crates/quoridor-ai/src/alphabeta.rs": "e3dfd6207caa2a6d38874effd3a260913e95f8b660adf347c7f32593ebc41cf3",
+    "/workspaces/quoridor/crates/quoridor-runner/src/resources.rs": "1b3c71287c1d834833a3979606d22d35f76c4607b625753503296eb1f9cefa62",
+    "/workspaces/quoridor/python/quoridor_training/model.py": "2baeb2323d98c2422d49045b02dacf1838a0ff1a1e6add631620adb53246b86a",
+    "/workspaces/quoridor/python/quoridor_training/scaled_model.py": "e8fb84f2463f6ccc5727042d4461b64938fd3617fe338de616a360cf62ea73d2",
+    "/workspaces/quoridor/python/quoridor_training/train.py": "de6e9f3c7b2995108a78cc9fc33581db9749590d67260736640a842523149157",
+    "/workspaces/quoridor/Cargo.lock": "3624f85656fc1fe50c60c8d704cc7ca33b70245a946b21b5f27f51ca3e951f8c"
+  },
+  "payloads": {
+    "research-data/ai-sigma/frame21-model-cause/stage-a-r1/result.json": "c23491fa53c98a77e2e090360d9ed30ca7e93975fb37c57fde2329e1e0a150e5",
+    "research-data/ai-sigma/frame21-model-cause/stage-a-r1/native.json.gz": "97adaf50bf29c31aa5cdc4060a33b66702f228f90ec51643f839849b8e68ddb1",
+    "research-data/ai-sigma/frame21-model-cause/stage-a-r1/arena-openings-freeze.json": "7c7cdd6dff305d66fe1f96909770ca2e6e9861605f78d67dbd62c7007cf74bc1",
+    "research-data/ai-sigma/frame21-model-cause/stage-a-compact-v2.json": "a8afe6f232f8b825ee49d2c5f9e92641266010193bfe640f8605697952d6ef6f",
+    "research-data/ai-sigma/frame21-model-cause/group-L-r1.json.gz": "2ebe2e941ecd885d7d7bdfa06840bce62b89278cc818506ebb641512651ebbf9",
+    "research-data/ai-sigma/frame21-model-cause/group-I-r1.json.gz": "0f458da20f024370db0cb8321603f1ed16cd2e9967c5a31b2857aec0afc345b6",
+    "research-data/ai-sigma/frame21-model-cause/group-L-receipt-v1.json": "a587b1c039cd3a26b2e3700952f2bbd73fed29dc11779f65c5f0559562cdeeb5",
+    "research-data/ai-sigma/frame21-model-cause/group-I-receipt-v1.json": "6e25699a1b1b473b73a3d51db93f5cc20ee7f55f7e8df5b373ac238c69e9c2c0",
+    "research-data/ai-sigma/frame21-model-cause/cost-ledger-v6.json": "d4223b9a7c80e08789acfa7ddf9e639a59e973b053946ac60efe8bd9dc257e66"
+  },
+  "background_cleanup": {
+    "research-data/ai-sigma/frame21-model-cause/background-build-r1/result.json": {
+      "SHA": "012c54304da4e95dc47efd135d7db8ad29b460e579b91556bd47451232af3d7d",
+      "cleanup_complete": true,
+      "outcome": "failed"
+    },
+    "research-data/ai-sigma/frame21-model-cause/background-build-r2/result.json": {
+      "SHA": "4c68097312c375109cab51c3c87b024503bc3d7e7e108c60760328244026f749",
+      "cleanup_complete": true,
+      "outcome": "succeeded"
+    },
+    "research-data/ai-sigma/frame21-model-cause/background-stage-a-r1/result.json": {
+      "SHA": "004af3469633014c121dc69ddf56307abf01b8afff16b3c2dc4d325c2052e187",
+      "cleanup_complete": true,
+      "outcome": "succeeded"
+    },
+    "research-data/ai-sigma/frame21-model-cause/background-group-L-r1/result.json": {
+      "SHA": "41c15f492d754ba91d7decbec6b03f3e321a348a55c283ef31b133e456eaa448",
+      "cleanup_complete": true,
+      "outcome": "succeeded"
+    },
+    "research-data/ai-sigma/frame21-model-cause/background-group-I-r1/result.json": {
+      "SHA": "ee68e5845fab7e2db021c8fe4251a7d3b18f12e3b5fe6b075456969566e2c240",
+      "cleanup_complete": true,
+      "outcome": "succeeded"
+    }
+  },
+  "processes": {
+    "research-data/ai-sigma/frame21-model-cause/build-r1/process.json": {
+      "SHA": "f1cae724ca88cd709cdf24a8aca24800b46d4d506c143ef9200dd08301a9ca74",
+      "exit": 101,
+      "current_exact_remaining": []
+    },
+    "research-data/ai-sigma/frame21-model-cause/build-r2/process.json": {
+      "SHA": "7b0ab99e0defe53062b0905ffadddd36414987be73621b48e851c0ac7552d9b9",
+      "exit": 0,
+      "current_exact_remaining": []
+    },
+    "research-data/ai-sigma/frame21-model-cause/stage-a-control-r1/process.json": {
+      "SHA": "bcf6f9f689b30b439dd22e254d5b5763cafc3a2df4d22cd54cd1f14112758599",
+      "exit": 0,
+      "current_exact_remaining": []
+    },
+    "research-data/ai-sigma/frame21-model-cause/group-L-control-r1/process.json": {
+      "SHA": "831aca38ed26bed614a617b31087291cfb20d6ce7592054e0d3708d2fdda7d60",
+      "exit": 0,
+      "current_exact_remaining": []
+    },
+    "research-data/ai-sigma/frame21-model-cause/group-I-control-r1/process.json": {
+      "SHA": "f487314329215aa25a07e2d85cf8849f3a49ed4474088f4ab79b1b43ce800416",
+      "exit": 0,
+      "current_exact_remaining": []
+    }
+  },
+  "LLM_elapsed_not_CPU": true
+}

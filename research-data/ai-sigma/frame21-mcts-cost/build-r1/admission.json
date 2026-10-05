@@ -1,0 +1,182 @@
+{
+  "at": "2026-10-05T10:19:31.192479+00:00",
+  "kind": "compile",
+  "argv": [
+    "/usr/bin/taskset",
+    "-c",
+    "2",
+    "/usr/local/cargo/bin/cargo",
+    "build",
+    "--release",
+    "--locked",
+    "--offline",
+    "-p",
+    "quoridor-runner",
+    "--example",
+    "mcts_cost",
+    "-j1"
+  ],
+  "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216",
+  "own_ancestors": [
+    0,
+    1,
+    2002,
+    2009,
+    1095649
+  ],
+  "foreign_cpu": [],
+  "frame21_running_receipt": {
+    "source_write_stopped": true,
+    "checks24": {
+      "/workspaces/quoridor/scripts/dev/research-scheduler.py": true,
+      "/workspaces/quoridor/scripts/dev/research-watch.py": true,
+      "/workspaces/quoridor/scripts/dev/research-team.py": true,
+      "/workspaces/quoridor/scripts/dev/research-scheduler.sh": true,
+      "/workspaces/quoridor/scripts/dev/research-team.sh": true,
+      "/workspaces/quoridor/scripts/dev/beads.sh": true,
+      "/workspaces/quoridor/scripts/dev/project-env.sh": true,
+      "/workspaces/quoridor/research-paths.json": true,
+      "/workspaces/quoridor/scripts/dev/research-job.py": true,
+      "/workspaces/quoridor/scripts/dev/research-job.sh": true,
+      "/workspaces/quoridor/scripts/dev/research-storage.py": true,
+      "/workspaces/quoridor/docs/design/ai-sigma-continuation-20261001.md": true,
+      "/workspaces/quoridor/docs/design/ai-sigma-contract-supervisor-continuation.md": true,
+      "/workspaces/quoridor/docs/design/ai-sigma-contract-steward-frame21.md": true,
+      "/workspaces/quoridor/.agents/research-team/common.md": true,
+      "/workspaces/quoridor/.agents/research-team/roles/coordinator.md": true,
+      "/workspaces/quoridor/.agents/research-team/roles/hypothesis.md": true,
+      "/workspaces/quoridor/.agents/research-team/roles/experiment.md": true,
+      "/workspaces/quoridor/.agents/research-team/roles/critic.md": true,
+      "/workspaces/quoridor/.agents/research-team/roles/steward.md": true,
+      "/workspaces/quoridor/.artifacts/research-team/registry.json": true,
+      "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame21/scheduler.json": true,
+      "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame21/contract.json": true,
+      "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame21/prompt.md": true
+    },
+    "process": {
+      "pid": 1005983,
+      "start_ticks": "44624026",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "monitor": {
+      "pid": 1009999,
+      "start_ticks": "44636773",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "loaded": null,
+    "config_sha": "9578b3d948f1ff7c29aae1a67916960b13265271f6482267277aa078427361a7",
+    "contract_sha": "3c6cd55a257511fe17ef39da7f294d0360fe97a9b694280b857b2c4f70bc6d6a",
+    "deadlines": {
+      "heavy": "2026-10-05T10:27:54Z",
+      "supervisor": "2026-10-05T10:32:54Z",
+      "monitor": "2026-10-05T10:35:54Z",
+      "final": "2026-10-05T10:37:54Z"
+    },
+    "period": 1200,
+    "max_turn_seconds": null,
+    "next_natural_phase": "2026-10-05T09:45:30.534375Z",
+    "first_and_second_failure_unchanged": true,
+    "effect": "pending next natural observe/finish"
+  },
+  "frame21_current_state": {
+    "binding": {
+      "config_path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame21/scheduler.json",
+      "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+      "target": "supervisor",
+      "dispatch_issue": "quoridor-4lc.40",
+      "contract_file": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame21/contract.json",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+    },
+    "process": {
+      "pid": 1005983,
+      "start_ticks": "44624026",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "phase": "running",
+    "recovery_required": false,
+    "last_result": {
+      "at": "2026-10-05T10:13:34.871572+00:00",
+      "event": "owned_turn_finished",
+      "turn_id": "01a10b86-99bb-7be3-ab3e-21e721fd818c",
+      "status": "completed"
+    },
+    "config_path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame21/scheduler.json",
+    "config_sha256": "9578b3d948f1ff7c29aae1a67916960b13265271f6482267277aa078427361a7",
+    "contract_sha256": "3c6cd55a257511fe17ef39da7f294d0360fe97a9b694280b857b2c4f70bc6d6a",
+    "owned": null,
+    "next_at": 1791195929.02591
+  },
+  "storage_at": "2026-10-05T09:46:13.402627+00:00",
+  "storage_admission": "within",
+  "mem_available": 18268712960,
+  "ORT_DISABLE_TELEMETRY": "1",
+  "entry_sha": "42e38b38d3926bb1ad156ed0ec0c485d33c8819cf1c3088cd6ec79ae13b8fbc6",
+  "physics_point_only": true,
+  "current24": {
+    "/workspaces/quoridor/scripts/dev/research-scheduler.py": true,
+    "/workspaces/quoridor/scripts/dev/research-watch.py": true,
+    "/workspaces/quoridor/scripts/dev/research-team.py": true,
+    "/workspaces/quoridor/scripts/dev/research-scheduler.sh": true,
+    "/workspaces/quoridor/scripts/dev/research-team.sh": true,
+    "/workspaces/quoridor/scripts/dev/beads.sh": true,
+    "/workspaces/quoridor/scripts/dev/project-env.sh": true,
+    "/workspaces/quoridor/research-paths.json": true,
+    "/workspaces/quoridor/scripts/dev/research-job.py": true,
+    "/workspaces/quoridor/scripts/dev/research-job.sh": true,
+    "/workspaces/quoridor/scripts/dev/research-storage.py": true,
+    "/workspaces/quoridor/docs/design/ai-sigma-continuation-20261001.md": true,
+    "/workspaces/quoridor/docs/design/ai-sigma-contract-supervisor-continuation.md": true,
+    "/workspaces/quoridor/docs/design/ai-sigma-contract-steward-frame21.md": true,
+    "/workspaces/quoridor/.agents/research-team/common.md": true,
+    "/workspaces/quoridor/.agents/research-team/roles/coordinator.md": true,
+    "/workspaces/quoridor/.agents/research-team/roles/hypothesis.md": true,
+    "/workspaces/quoridor/.agents/research-team/roles/experiment.md": true,
+    "/workspaces/quoridor/.agents/research-team/roles/critic.md": true,
+    "/workspaces/quoridor/.agents/research-team/roles/steward.md": true,
+    "/workspaces/quoridor/.artifacts/research-team/registry.json": true,
+    "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame21/scheduler.json": true,
+    "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame21/contract.json": true,
+    "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame21/prompt.md": true
+  },
+  "payload_sha": "dda7234360b7f578ca8b0ddcb80145646fa61a67c1720a5abc7051b35c9fcb71",
+  "core_source_sha": "a12641610b25fd7bb36b7a3408ed377fdb9c4767e6e5f2edbd792090686c7736",
+  "process_current": {
+    "pid": 1005983,
+    "ppid": 1,
+    "pgid": 1005983,
+    "tick": 44624026,
+    "cpu": 465,
+    "rss": 151621632,
+    "argv": [
+      "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python",
+      "-B",
+      "/workspaces/quoridor/scripts/dev/research-scheduler.py",
+      "run",
+      "--config",
+      "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame21/scheduler.json",
+      "--state-dir",
+      "/workspaces/quoridor/.artifacts/research-team/frame21/scheduler"
+    ],
+    "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "monitor_current": {
+    "pid": 1009999,
+    "ppid": 1,
+    "pgid": 1009999,
+    "tick": 44636773,
+    "cpu": 3915,
+    "rss": 29896704,
+    "argv": [
+      "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python",
+      "-B",
+      "scripts/dev/research-watch.py",
+      "monitor",
+      "--expectations",
+      "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame21/expectations.json",
+      "--run-dir",
+      "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame21"
+    ],
+    "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "current_loaded_hashes_match": true
+}

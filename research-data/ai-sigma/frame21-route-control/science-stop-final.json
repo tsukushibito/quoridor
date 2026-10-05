@@ -1,0 +1,85 @@
+{
+  "at": "2026-10-05T10:15:16.022989+00:00",
+  "task": "frame21-route-control-268-v1",
+  "rows": [
+    {
+      "mode": "cache",
+      "identity": {
+        "pid": 1035470,
+        "start_ticks": "44719568",
+        "argv": [
+          "/workspaces/quoridor/.artifacts/rust-migration/target/release/route-feature-diagnose",
+          "cache",
+          "/workspaces/quoridor/.worktree/frame21-features/research-data/ai-sigma/frame21-route-control/route-cache"
+        ]
+      },
+      "current_exact_present": false,
+      "original_exit": 0,
+      "wall_seconds": 0.11192222195677459,
+      "peak_family_RSS": 33411072,
+      "waited": true,
+      "process_receipt_mtime_utc": "2026-10-05T09:56:00.292428+00:00"
+    },
+    {
+      "mode": "A",
+      "identity": {
+        "pid": 1060012,
+        "start_ticks": "44782775",
+        "argv": [
+          "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+          "-m",
+          "quoridor_training.route_training",
+          "--cache",
+          "/workspaces/quoridor/.worktree/frame21-features/research-data/ai-sigma/frame21-route-control/route-cache",
+          "--output",
+          "/workspaces/quoridor/.worktree/frame21-features/models/experiments/nnue/frame21-route-A-r1",
+          "--config",
+          "/workspaces/quoridor/.worktree/frame21-features/research-data/ai-sigma/frame21-route-control/config.json",
+          "--routes",
+          "zero4",
+          "--native-binary",
+          "/workspaces/quoridor/.artifacts/rust-migration/target/release/route-feature-diagnose"
+        ]
+      },
+      "current_exact_present": false,
+      "original_exit": 1,
+      "wall_seconds": 3.1437193320016377,
+      "peak_family_RSS": 931627008,
+      "waited": true,
+      "process_receipt_mtime_utc": "2026-10-05T10:06:34.999466+00:00"
+    },
+    {
+      "mode": "B",
+      "identity": {
+        "pid": 1066974,
+        "start_ticks": "44798208",
+        "argv": [
+          "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+          "-m",
+          "quoridor_training.route_training",
+          "--cache",
+          "/workspaces/quoridor/.worktree/frame21-features/research-data/ai-sigma/frame21-route-control/route-cache",
+          "--output",
+          "/workspaces/quoridor/.worktree/frame21-features/models/experiments/nnue/frame21-route-B-r1",
+          "--config",
+          "/workspaces/quoridor/.worktree/frame21-features/research-data/ai-sigma/frame21-route-control/config.json",
+          "--routes",
+          "enabled",
+          "--native-binary",
+          "/workspaces/quoridor/.artifacts/rust-migration/target/release/route-feature-diagnose",
+          "--repair-existing-A",
+          "/workspaces/quoridor/.worktree/frame21-features/models/experiments/nnue/frame21-route-A-r1"
+        ]
+      },
+      "current_exact_present": false,
+      "original_exit": 0,
+      "wall_seconds": 3.188282696006354,
+      "peak_family_RSS": 1713274880,
+      "waited": true,
+      "process_receipt_mtime_utc": "2026-10-05T10:09:09.277552+00:00"
+    }
+  ],
+  "no_new_science": true,
+  "all_attempts_preserved": true,
+  "scope": "exact registered process identities only"
+}

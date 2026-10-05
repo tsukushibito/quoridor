@@ -705,5 +705,9 @@
   "all_unique_restored": true,
   "local_preservation_before_remove": true,
   "main_Git_owner": "coordinator/root, pending normal Git integration",
-  "forecast": "14MiB including archive/manifest/shared Git growth; from existing92 verified unused, no parent cap added"
+  "forecast": {
+    "new_data_unique_Git_metadata_upper_bytes": 33554432,
+    "reservation": "existing Steward 112MiB confirmed unused; parent cap unchanged",
+    "corrects_prior_preliminary_bytes": 14680064
+  }
 }

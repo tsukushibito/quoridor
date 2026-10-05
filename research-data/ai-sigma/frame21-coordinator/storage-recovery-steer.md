@@ -1,0 +1,4 @@
+# frame21 source/ビルド保持量の必要な整理判断（既92終了保守scope補足）
+267のfresh共有target6,944,215,040B、旧directed known14.82GB>12GiBを保持し新WT/buildを無断admitしない。静的は継続。全保持UNKNOWNを割引せず、旧storage-currentにはdeps/uv/cache等のinodes重複とcurrent研究予算カテゴリを区別する必要がある。
+既storage-policyは『Reproducible unused binaries/Wasm builds/build caches and duplicate source copies disposable』を許可する。既92保守として .artifacts/rust-migration/target/debug/incremental・使っていないdebug生成物など、現在実process/予定必要入口/モデル入力/未コミットsourceを確認して明らかな再生成可能未使用cacheだけを必要範囲で整理してよい。実必要release/quoridor-runnerと266が参照するモデル/全Git/research-data/旧WT/input/sharedenvは保護。学習モデルやArrow/原科学ログをcacheと誤分類しない。現在cargo/rustcが走るpathを削除0。未使用と証明できないrootはUNKNOWNで保持し勝手に消さない。
+267へfresh directedstorage/現target/cleanup計画のscope・所有・実資源を通常報告し、確認unusedだけ移転。target整理の実作用は267/266の必要buildとの競合を避け、実runningloadedとは別判断。大規模全履歴監査/unknown削除/既deps取得更新0。必要allocationがまだ不可なら具体retained/unused境界を統括へ返し科学を停止範囲内で静的に限定、上限変更を報告から推定0。README issueには削除を混ぜず、この依頼は92の既保守scope。

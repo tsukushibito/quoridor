@@ -1,0 +1,471 @@
+{
+  "task": "model-cause-266-final-v1",
+  "schema": "model-cause-compact-v1",
+  "status": "INCONCLUSIVE_STRENGTH",
+  "A": "stage-a-r1/result.json +stage-a-compact-v2.json",
+  "B": {
+    "L": {
+      "planned": 12,
+      "status": {
+        "UNKNOWN": 1,
+        "NOT_STARTED": 11
+      },
+      "WDL": {
+        "W": 0,
+        "D": 0,
+        "L": 0
+      },
+      "NN": 500000,
+      "processed": 1542394,
+      "processed_unknown_upper": 1000000,
+      "actual_wholewall_s": 4.058729526004754,
+      "models": {
+        "L": {
+          "attempt_hands": 22,
+          "adopted": 21,
+          "not_adopted": 1,
+          "clock_ms_mean": 90.21779257142857,
+          "clock_ms_max": 90.30184700000001,
+          "clock_margin_ms_min": 9.69815299999999,
+          "depths": {
+            "3": 16,
+            "4": 5
+          },
+          "processed_known": 564417,
+          "node_cap_reached": 0,
+          "NN": 500000,
+          "TT_hits": 7864,
+          "terminal_nodes": 0
+        },
+        "D": {
+          "attempt_hands": 21,
+          "adopted": 21,
+          "not_adopted": 0,
+          "clock_ms_mean": 90.45059661904762,
+          "clock_ms_max": 90.92993100000001,
+          "clock_margin_ms_min": 9.07006899999999,
+          "depths": {
+            "3": 9,
+            "4": 6,
+            "5": 2,
+            "6": 4
+          },
+          "processed_known": 977977,
+          "node_cap_reached": 0,
+          "NN": 0,
+          "TT_hits": 21230,
+          "terminal_nodes": 42
+        }
+      }
+    },
+    "I": {
+      "planned": 12,
+      "status": {
+        "TERMINAL": 1,
+        "UNKNOWN": 1,
+        "NOT_STARTED": 10
+      },
+      "WDL": {
+        "W": 0,
+        "D": 0,
+        "L": 1
+      },
+      "NN": 500000,
+      "processed": 1764041,
+      "processed_unknown_upper": 1000000,
+      "actual_wholewall_s": 3.642391111992765,
+      "models": {
+        "I": {
+          "attempt_hands": 18,
+          "adopted": 17,
+          "not_adopted": 1,
+          "clock_ms_mean": 90.19614911764705,
+          "clock_ms_max": 90.310494,
+          "clock_margin_ms_min": 9.689505999999994,
+          "depths": {
+            "3": 9,
+            "4": 3,
+            "5": 5
+          },
+          "processed_known": 547566,
+          "node_cap_reached": 0,
+          "NN": 500000,
+          "TT_hits": 13835,
+          "terminal_nodes": 3621
+        },
+        "D": {
+          "attempt_hands": 18,
+          "adopted": 18,
+          "not_adopted": 0,
+          "clock_ms_mean": 90.44008527777778,
+          "clock_ms_max": 90.962894,
+          "clock_margin_ms_min": 9.037105999999994,
+          "depths": {
+            "3": 10,
+            "4": 5,
+            "5": 3
+          },
+          "processed_known": 1216475,
+          "node_cap_reached": 0,
+          "NN": 0,
+          "TT_hits": 19021,
+          "terminal_nodes": 5300
+        }
+      }
+    }
+  },
+  "planned_slots": [
+    {
+      "group": "L",
+      "slot": 0,
+      "family": 0,
+      "candidate_side": 0,
+      "status": "UNKNOWN",
+      "outcome": null,
+      "reason": "SEARCH_ERROR:SEARCH_EVALUATION: NN_CAP",
+      "hands": 42
+    },
+    {
+      "group": "L",
+      "slot": 1,
+      "family": 0,
+      "candidate_side": 1,
+      "status": "NOT_STARTED",
+      "outcome": null,
+      "reason": "TOTAL_GUARD",
+      "hands": 0
+    },
+    {
+      "group": "L",
+      "slot": 2,
+      "family": 1,
+      "candidate_side": 0,
+      "status": "NOT_STARTED",
+      "outcome": null,
+      "reason": "TOTAL_GUARD",
+      "hands": 0
+    },
+    {
+      "group": "L",
+      "slot": 3,
+      "family": 1,
+      "candidate_side": 1,
+      "status": "NOT_STARTED",
+      "outcome": null,
+      "reason": "TOTAL_GUARD",
+      "hands": 0
+    },
+    {
+      "group": "L",
+      "slot": 4,
+      "family": 2,
+      "candidate_side": 0,
+      "status": "NOT_STARTED",
+      "outcome": null,
+      "reason": "TOTAL_GUARD",
+      "hands": 0
+    },
+    {
+      "group": "L",
+      "slot": 5,
+      "family": 2,
+      "candidate_side": 1,
+      "status": "NOT_STARTED",
+      "outcome": null,
+      "reason": "TOTAL_GUARD",
+      "hands": 0
+    },
+    {
+      "group": "L",
+      "slot": 6,
+      "family": 3,
+      "candidate_side": 0,
+      "status": "NOT_STARTED",
+      "outcome": null,
+      "reason": "TOTAL_GUARD",
+      "hands": 0
+    },
+    {
+      "group": "L",
+      "slot": 7,
+      "family": 3,
+      "candidate_side": 1,
+      "status": "NOT_STARTED",
+      "outcome": null,
+      "reason": "TOTAL_GUARD",
+      "hands": 0
+    },
+    {
+      "group": "L",
+      "slot": 8,
+      "family": 4,
+      "candidate_side": 0,
+      "status": "NOT_STARTED",
+      "outcome": null,
+      "reason": "TOTAL_GUARD",
+      "hands": 0
+    },
+    {
+      "group": "L",
+      "slot": 9,
+      "family": 4,
+      "candidate_side": 1,
+      "status": "NOT_STARTED",
+      "outcome": null,
+      "reason": "TOTAL_GUARD",
+      "hands": 0
+    },
+    {
+      "group": "L",
+      "slot": 10,
+      "family": 5,
+      "candidate_side": 0,
+      "status": "NOT_STARTED",
+      "outcome": null,
+      "reason": "TOTAL_GUARD",
+      "hands": 0
+    },
+    {
+      "group": "L",
+      "slot": 11,
+      "family": 5,
+      "candidate_side": 1,
+      "status": "NOT_STARTED",
+      "outcome": null,
+      "reason": "TOTAL_GUARD",
+      "hands": 0
+    },
+    {
+      "group": "I",
+      "slot": 0,
+      "family": 0,
+      "candidate_side": 0,
+      "status": "TERMINAL",
+      "outcome": "L",
+      "reason": null,
+      "hands": 32
+    },
+    {
+      "group": "I",
+      "slot": 1,
+      "family": 0,
+      "candidate_side": 1,
+      "status": "UNKNOWN",
+      "outcome": null,
+      "reason": "SEARCH_ERROR:SEARCH_EVALUATION: NN_CAP",
+      "hands": 3
+    },
+    {
+      "group": "I",
+      "slot": 2,
+      "family": 1,
+      "candidate_side": 0,
+      "status": "NOT_STARTED",
+      "outcome": null,
+      "reason": "TOTAL_GUARD",
+      "hands": 0
+    },
+    {
+      "group": "I",
+      "slot": 3,
+      "family": 1,
+      "candidate_side": 1,
+      "status": "NOT_STARTED",
+      "outcome": null,
+      "reason": "TOTAL_GUARD",
+      "hands": 0
+    },
+    {
+      "group": "I",
+      "slot": 4,
+      "family": 2,
+      "candidate_side": 0,
+      "status": "NOT_STARTED",
+      "outcome": null,
+      "reason": "TOTAL_GUARD",
+      "hands": 0
+    },
+    {
+      "group": "I",
+      "slot": 5,
+      "family": 2,
+      "candidate_side": 1,
+      "status": "NOT_STARTED",
+      "outcome": null,
+      "reason": "TOTAL_GUARD",
+      "hands": 0
+    },
+    {
+      "group": "I",
+      "slot": 6,
+      "family": 3,
+      "candidate_side": 0,
+      "status": "NOT_STARTED",
+      "outcome": null,
+      "reason": "TOTAL_GUARD",
+      "hands": 0
+    },
+    {
+      "group": "I",
+      "slot": 7,
+      "family": 3,
+      "candidate_side": 1,
+      "status": "NOT_STARTED",
+      "outcome": null,
+      "reason": "TOTAL_GUARD",
+      "hands": 0
+    },
+    {
+      "group": "I",
+      "slot": 8,
+      "family": 4,
+      "candidate_side": 0,
+      "status": "NOT_STARTED",
+      "outcome": null,
+      "reason": "TOTAL_GUARD",
+      "hands": 0
+    },
+    {
+      "group": "I",
+      "slot": 9,
+      "family": 4,
+      "candidate_side": 1,
+      "status": "NOT_STARTED",
+      "outcome": null,
+      "reason": "TOTAL_GUARD",
+      "hands": 0
+    },
+    {
+      "group": "I",
+      "slot": 10,
+      "family": 5,
+      "candidate_side": 0,
+      "status": "NOT_STARTED",
+      "outcome": null,
+      "reason": "TOTAL_GUARD",
+      "hands": 0
+    },
+    {
+      "group": "I",
+      "slot": 11,
+      "family": 5,
+      "candidate_side": 1,
+      "status": "NOT_STARTED",
+      "outcome": null,
+      "reason": "TOTAL_GUARD",
+      "hands": 0
+    }
+  ],
+  "same_input_candidate_common_depth": [
+    {
+      "input": {
+        "key": "4,2|5,7|0||3,4;6,3",
+        "side": 0,
+        "history_SHA": "dce4b4aac43a5d2fa154d2daec43bec063294e8e189201210eda89ddf559722a"
+      },
+      "depth": 1,
+      "L": {
+        "Action": 94,
+        "NN": 133,
+        "depth": 1,
+        "elapsed_ms": 0.579994,
+        "nodes": 134,
+        "value": 0.6469042897224426
+      },
+      "I": {
+        "Action": 177,
+        "NN": 126,
+        "depth": 1,
+        "elapsed_ms": 0.663414,
+        "nodes": 127,
+        "value": 0.10149457305669785
+      },
+      "value_delta": 0.5454097166657448,
+      "same_Action": false,
+      "all_exact_argmax": "NOT_RECORDED",
+      "final_depths": [
+        3,
+        3
+      ]
+    },
+    {
+      "input": {
+        "key": "4,2|5,7|0||3,4;6,3",
+        "side": 0,
+        "history_SHA": "dce4b4aac43a5d2fa154d2daec43bec063294e8e189201210eda89ddf559722a"
+      },
+      "depth": 2,
+      "L": {
+        "Action": 88,
+        "NN": 500,
+        "depth": 2,
+        "elapsed_ms": 2.306389,
+        "nodes": 627,
+        "value": 0.5454588532447815
+      },
+      "I": {
+        "Action": 100,
+        "NN": 804,
+        "depth": 2,
+        "elapsed_ms": 4.308155999999999,
+        "nodes": 933,
+        "value": -0.09507890790700912
+      },
+      "value_delta": 0.6405377611517906,
+      "same_Action": false,
+      "all_exact_argmax": "NOT_RECORDED",
+      "final_depths": [
+        3,
+        3
+      ]
+    },
+    {
+      "input": {
+        "key": "4,2|5,7|0||3,4;6,3",
+        "side": 0,
+        "history_SHA": "dce4b4aac43a5d2fa154d2daec43bec063294e8e189201210eda89ddf559722a"
+      },
+      "depth": 3,
+      "L": {
+        "Action": 31,
+        "NN": 15980,
+        "depth": 3,
+        "elapsed_ms": 37.240517000000004,
+        "nodes": 16726,
+        "value": 0.6755548715591431
+      },
+      "I": {
+        "Action": 89,
+        "NN": 17173,
+        "depth": 3,
+        "elapsed_ms": 48.698448,
+        "nodes": 18639,
+        "value": 0.11389186233282089
+      },
+      "value_delta": 0.5616630092263222,
+      "same_Action": false,
+      "all_exact_argmax": "NOT_RECORDED",
+      "final_depths": [
+        3,
+        3
+      ]
+    }
+  ],
+  "B_total_NN": 1000000,
+  "all_total_Torch_native_NN": 1017016,
+  "all_groups_finished_without_rerun": true,
+  "new_fit": false,
+  "testlabel_read": false,
+  "samewall_relative_strength": "NOT_ESTABLISHED",
+  "maximum_next_one": "On an authorized small train-only saved game subset, diagnose teacher rootmean vs true-z/terminal-proximity/history strata with original game weights and family grouping; use already saved prediction/canonical inputs when possible. No new arena or fitting here. Determines whether next improvement should target teacher objective/history-conditioned supervision rather than feature width/readout sweep. Budget proposal <=5000 existing-train forward-equivalents if needed, one bounded CPU2 job <=60s, not current authorization; old openedtest excluded.",
+  "limits": [
+    "B group NNcap exhausted before planned24 complete; not performance negative.",
+    "Equal 512node limit A gave unequal completed depths; learned output changes alter pruning.",
+    "Same-root completeddepth values/actions are finite diagnostic, not exact allchildren nor minimax truth.",
+    "Different reachedstates make aggregate depth/node ratios unequal work.",
+    "Current Rust inline clock excludes external Node/IPC transport and logging cost; wholewall separately includes record.",
+    "One terminal I loss and censored L cannot identify learning benefit.",
+    "Old229 final independent NOT_RUN remains; no independent new checker.",
+    "Oldteacher fit a=.060382/b7.925688 differs current D0/8tanh."
+  ]
+}

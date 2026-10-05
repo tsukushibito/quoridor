@@ -1,0 +1,325 @@
+{
+  "schema": "model-cause-A-compact-v1",
+  "status": "PASS",
+  "summary": {
+    "L": {
+      "searches": 34,
+      "requested2_complete": 14,
+      "requested2_censored": 2,
+      "NN": 6933,
+      "nodes": 8485,
+      "wall_s": 0.044707778,
+      "mean_static_abs": 0.516626597436912,
+      "static_count": 17,
+      "nonterminal_prefixes": 16,
+      "terminal_extra": 1
+    },
+    "I": {
+      "searches": 34,
+      "requested2_complete": 0,
+      "requested2_censored": 16,
+      "NN": 9509,
+      "nodes": 9879,
+      "wall_s": 0.041071152,
+      "mean_static_abs": 0.21287479383103988,
+      "static_count": 17,
+      "nonterminal_prefixes": 16,
+      "terminal_extra": 1
+    },
+    "D": {
+      "searches": 34,
+      "requested2_complete": 13,
+      "requested2_censored": 3,
+      "NN": 0,
+      "nodes": 8784,
+      "wall_s": 0.029152944000000007,
+      "mean_static_abs": 0.2720625404925907,
+      "static_count": 17,
+      "nonterminal_prefixes": 16,
+      "terminal_extra": 1
+    }
+  },
+  "matched_same_input_final_depth": [
+    {
+      "root": 0,
+      "requested_depth": 1,
+      "common_completed_depth": 1,
+      "values": {
+        "L": 0.6469042897224426,
+        "I": 0.10149457305669785,
+        "D": 0.1973753124475479
+      },
+      "actions": {
+        "L": 94,
+        "I": 177,
+        "D": 31
+      },
+      "exact_argmax": "NOT_RECORDED"
+    },
+    {
+      "root": 1,
+      "requested_depth": 1,
+      "common_completed_depth": 1,
+      "values": {
+        "L": 0.4224793314933777,
+        "I": 0.11786828190088272,
+        "D": 0.1973753124475479
+      },
+      "actions": {
+        "L": 13,
+        "I": 177,
+        "D": 13
+      },
+      "exact_argmax": "NOT_RECORDED"
+    },
+    {
+      "root": 2,
+      "requested_depth": 1,
+      "common_completed_depth": 1,
+      "values": {
+        "L": 0.6254293918609619,
+        "I": 0.11882635951042175,
+        "D": 0.37994900345802307
+      },
+      "actions": {
+        "L": 31,
+        "I": 177,
+        "D": 196
+      },
+      "exact_argmax": "NOT_RECORDED"
+    },
+    {
+      "root": 3,
+      "requested_depth": 1,
+      "common_completed_depth": 1,
+      "values": {
+        "L": -0.3232862949371338,
+        "I": 0.13323281705379486,
+        "D": -0.291312575340271
+      },
+      "actions": {
+        "L": 13,
+        "I": 177,
+        "D": 3
+      },
+      "exact_argmax": "NOT_RECORDED"
+    },
+    {
+      "root": 4,
+      "requested_depth": 1,
+      "common_completed_depth": 1,
+      "values": {
+        "L": 0.8088183403015137,
+        "I": 0.10851866006851196,
+        "D": 0.46211713552474976
+      },
+      "actions": {
+        "L": 38,
+        "I": 138,
+        "D": 38
+      },
+      "exact_argmax": "NOT_RECORDED"
+    },
+    {
+      "root": 5,
+      "requested_depth": 1,
+      "common_completed_depth": 1,
+      "values": {
+        "L": 0.048181064426898956,
+        "I": 0.1412028670310974,
+        "D": 0.09966801851987839
+      },
+      "actions": {
+        "L": 4,
+        "I": 168,
+        "D": 4
+      },
+      "exact_argmax": "NOT_RECORDED"
+    },
+    {
+      "root": 6,
+      "requested_depth": 1,
+      "common_completed_depth": 1,
+      "values": {
+        "L": -0.2852087616920471,
+        "I": 0.1322268396615982,
+        "D": 0.29131263494491577
+      },
+      "actions": {
+        "L": 67,
+        "I": 131,
+        "D": 67
+      },
+      "exact_argmax": "NOT_RECORDED"
+    },
+    {
+      "root": 7,
+      "requested_depth": 1,
+      "common_completed_depth": 1,
+      "values": {
+        "L": -0.08077293634414673,
+        "I": 0.10781774669885635,
+        "D": 0.09966801851987839
+      },
+      "actions": {
+        "L": 48,
+        "I": 149,
+        "D": 48
+      },
+      "exact_argmax": "NOT_RECORDED"
+    },
+    {
+      "root": 8,
+      "requested_depth": 1,
+      "common_completed_depth": 1,
+      "values": {
+        "L": 0.2365759313106537,
+        "I": 0.12041088938713074,
+        "D": 0.5370495915412903
+      },
+      "actions": {
+        "L": 50,
+        "I": 40,
+        "D": 155
+      },
+      "exact_argmax": "NOT_RECORDED"
+    },
+    {
+      "root": 9,
+      "requested_depth": 1,
+      "common_completed_depth": 1,
+      "values": {
+        "L": -0.2929871678352356,
+        "I": 0.1365605592727661,
+        "D": 0.09966801851987839
+      },
+      "actions": {
+        "L": 68,
+        "I": 176,
+        "D": 109
+      },
+      "exact_argmax": "NOT_RECORDED"
+    },
+    {
+      "root": 10,
+      "requested_depth": 1,
+      "common_completed_depth": 1,
+      "values": {
+        "L": 0.9278022050857544,
+        "I": 0.10711921006441116,
+        "D": 0.1973753124475479
+      },
+      "actions": {
+        "L": 45,
+        "I": 37,
+        "D": 45
+      },
+      "exact_argmax": "NOT_RECORDED"
+    },
+    {
+      "root": 11,
+      "requested_depth": 1,
+      "common_completed_depth": 1,
+      "values": {
+        "L": 0.7779653072357178,
+        "I": 0.11642401665449142,
+        "D": 0.29131263494491577
+      },
+      "actions": {
+        "L": 121,
+        "I": 136,
+        "D": 91
+      },
+      "exact_argmax": "NOT_RECORDED"
+    },
+    {
+      "root": 12,
+      "requested_depth": 1,
+      "common_completed_depth": 1,
+      "values": {
+        "L": 0.703735888004303,
+        "I": 0.1189359724521637,
+        "D": 0.46211716532707214
+      },
+      "actions": {
+        "L": 88,
+        "I": 28,
+        "D": 88
+      },
+      "exact_argmax": "NOT_RECORDED"
+    },
+    {
+      "root": 13,
+      "requested_depth": 1,
+      "common_completed_depth": 1,
+      "values": {
+        "L": 0.11358475685119629,
+        "I": 0.1463015228509903,
+        "D": 0.1973753720521927
+      },
+      "actions": {
+        "L": 14,
+        "I": 177,
+        "D": 108
+      },
+      "exact_argmax": "NOT_RECORDED"
+    },
+    {
+      "root": 14,
+      "requested_depth": 1,
+      "common_completed_depth": 1,
+      "values": {
+        "L": 0.8832789063453674,
+        "I": 0.10785861313343048,
+        "D": 0.37994900345802307
+      },
+      "actions": {
+        "L": 170,
+        "I": 176,
+        "D": 89
+      },
+      "exact_argmax": "NOT_RECORDED"
+    },
+    {
+      "root": 15,
+      "requested_depth": 1,
+      "common_completed_depth": 1,
+      "values": {
+        "L": 0.5502892136573792,
+        "I": 0.13464872539043427,
+        "D": 0.1973753124475479
+      },
+      "actions": {
+        "L": 108,
+        "I": 176,
+        "D": 108
+      },
+      "exact_argmax": "NOT_RECORDED"
+    },
+    {
+      "root": 15,
+      "requested_depth": 2,
+      "common_completed_depth": 1,
+      "values": {
+        "L": 0.5502892136573792,
+        "I": 0.13464872539043427,
+        "D": 0.1973753124475479
+      },
+      "actions": {
+        "L": 108,
+        "I": 176,
+        "D": 108
+      },
+      "exact_argmax": "NOT_RECORDED"
+    }
+  ],
+  "parent_history_preserved": true,
+  "fixed_node_work_not_same_completed_work": true,
+  "currentD": {
+    "a": 0,
+    "b": 8,
+    "tanh": true
+  },
+  "B_opening_before_models": "stage-a-r1/arena-openings-freeze.json",
+  "performance_or_unique_cause_claim": false
+}

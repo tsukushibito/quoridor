@@ -1,0 +1,6 @@
+goal quoridor-4lc /frame21 統括の具体方針決定・実配分（新承認要求なし）
+主問い『利益不足の原因』とユーザー追補を採用。265本人08:50claim/266本人claim成立、92現役guardが廃止経路を呼ぶ箇所の必要修復を実開始、runningloadedはまだ未確認。main/Rust/Python、08:37:54–10:37:54固定。
+具体設計第一候補は v=tanh(a+b*(dopp-dself)+R) でD logitを直接保持しhead0初期Dを再現するA、A+各側の最短経路件数log正規化/到達goal数のSTM4値B。Sigma固定751186のgoal距離場、Claustrophobia固定ae093653のpath/壁効果から『明示経路情報』を圧縮する仮説。QF1はdistance2のみで全mapではない一方2ReLUでDを表現可能なので、単なる距離情報欠落だけを原因としない。全map162/壁pair516は非局所生成/更新/葉費が重いため保留、jump/contextは失敗局面根拠で再検討。
+265の静的主案を受入れ、hypothesisへ同teacher/split/A-B低費用実装・学習とcache更新費の実配分を準備。まず初期D/parity/P2/親復帰/DPを固定局面で測り、CPU同batch400step程度でtrain/validationの残差転移と経路増分を問う。教師MSEだけで棋力昇格0。意味ある228576BEST2000・忠実I・距離D同Rust原因診断266は別編集で実開始、旧10stepsmokeを本性能にしない。新設計の最初実観測でBへ進む/teacher分布へ戻る優先を更新する。
+探索高速化は267 critic担当へ実配送中、managedWTのcore/aiでαβとMCTS生成pump/searchの支配費を分け、最大1介入の実装/同K教師行/全job秒・同仕事αβ比較を実施する。役名で実作業をexperimentだけに固定0。speedはfeature分析待ち0、実CPU2+2上限/測定干渉を調整。
+統括は全writer停止点の単一Git統合を担当する方針で配分。rootに同時Git操作がある場合は必要scope補足のみ、研究開始のACKgate0。92親枠文書/運用sourceはsolewriter、統括重複編集0。既旧test/173/229NOT_RUN/累積維持。root全稿承認なし、具体結果・改善判断を通常報告する。

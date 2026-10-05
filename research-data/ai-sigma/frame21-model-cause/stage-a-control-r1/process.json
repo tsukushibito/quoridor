@@ -1,0 +1,64 @@
+{
+  "task": "model-cause-266-stage-a-v1",
+  "argv": [
+    "/usr/bin/taskset",
+    "-c",
+    "0-19",
+    "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "-B",
+    "/workspaces/quoridor/research-data/ai-sigma/frame21-model-cause/stage_a.py",
+    "--config",
+    "/workspaces/quoridor/research-data/ai-sigma/frame21-model-cause/stage-a-config-v4.json"
+  ],
+  "exit": 0,
+  "reason": null,
+  "waited": true,
+  "identity": {
+    "pid": 1050135,
+    "start_ticks": "44761806",
+    "ppid": 1050008,
+    "pgrp": 1050135,
+    "cpu_ticks": 0,
+    "state": "R",
+    "rss": 20480,
+    "argv": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "/workspaces/quoridor/research-data/ai-sigma/frame21-model-cause/stage_a.py",
+      "--config",
+      "/workspaces/quoridor/research-data/ai-sigma/frame21-model-cause/stage-a-config-v4.json"
+    ]
+  },
+  "recorded_children": [
+    {
+      "pid": 1050135,
+      "start_ticks": "44761806",
+      "ppid": 1050008,
+      "pgrp": 1050135,
+      "cpu_ticks": 170,
+      "state": "R",
+      "rss": 0,
+      "argv": []
+    },
+    {
+      "pid": 1050207,
+      "start_ticks": "44761959",
+      "ppid": 1050135,
+      "pgrp": 1050135,
+      "cpu_ticks": 11,
+      "state": "D",
+      "rss": 6979584,
+      "argv": [
+        "/workspaces/quoridor/.artifacts/rust-migration/target/release/nnue-diagnose",
+        "--config",
+        "/workspaces/quoridor/research-data/ai-sigma/frame21-model-cause/stage-a-r1/diagnose-config.json"
+      ]
+    }
+  ],
+  "current_exact_remaining": [],
+  "peak_RSS": 716554240,
+  "command_wall_s": 3.6524277689750306,
+  "management_inclusive_wall_s": 7.153559874976054,
+  "NN": "read native/Torch counters; unknown on pre-output failure",
+  "build_or_science": "science"
+}

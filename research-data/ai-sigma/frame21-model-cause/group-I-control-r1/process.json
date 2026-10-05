@@ -1,0 +1,53 @@
+{
+  "task": "model-cause-266-group-I-v1",
+  "argv": [
+    "/usr/bin/taskset",
+    "-c",
+    "0-19",
+    "/workspaces/quoridor/.artifacts/rust-migration/target/release/nnue-diagnose",
+    "--config",
+    "/workspaces/quoridor/research-data/ai-sigma/frame21-model-cause/group-I-native-config-v1.json"
+  ],
+  "exit": 0,
+  "reason": null,
+  "waited": true,
+  "identity": {
+    "pid": 1074585,
+    "start_ticks": "44814518",
+    "ppid": 1074446,
+    "pgrp": 1074585,
+    "cpu_ticks": 0,
+    "state": "D",
+    "rss": 1740800,
+    "argv": [
+      "/usr/bin/taskset",
+      "-c",
+      "0-19",
+      "/workspaces/quoridor/.artifacts/rust-migration/target/release/nnue-diagnose",
+      "--config",
+      "/workspaces/quoridor/research-data/ai-sigma/frame21-model-cause/group-I-native-config-v1.json"
+    ]
+  },
+  "recorded_children": [
+    {
+      "pid": 1074585,
+      "start_ticks": "44814518",
+      "ppid": 1074446,
+      "pgrp": 1074585,
+      "cpu_ticks": 312,
+      "state": "R",
+      "rss": 11100160,
+      "argv": [
+        "/workspaces/quoridor/.artifacts/rust-migration/target/release/nnue-diagnose",
+        "--config",
+        "/workspaces/quoridor/research-data/ai-sigma/frame21-model-cause/group-I-native-config-v1.json"
+      ]
+    }
+  ],
+  "current_exact_remaining": [],
+  "peak_RSS": 11771904,
+  "command_wall_s": 3.642391111992765,
+  "management_inclusive_wall_s": 6.877203700016253,
+  "NN": "read native/Torch counters; unknown on pre-output failure",
+  "build_or_science": "science"
+}

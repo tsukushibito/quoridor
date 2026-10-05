@@ -1,0 +1,34 @@
+{
+  "UTC": "2026-10-05T10:11:49.093997+00:00",
+  "task": "model-cause-266-group-I-v1",
+  "argv": [
+    "/usr/bin/taskset",
+    "-c",
+    "0-19",
+    "/workspaces/quoridor/.artifacts/rust-migration/target/release/nnue-diagnose",
+    "--config",
+    "/workspaces/quoridor/research-data/ai-sigma/frame21-model-cause/group-I-native-config-v1.json"
+  ],
+  "identity": {
+    "pid": 1074585,
+    "start_ticks": "44814518",
+    "ppid": 1074446,
+    "pgrp": 1074585,
+    "cpu_ticks": 0,
+    "state": "D",
+    "rss": 1740800,
+    "argv": [
+      "/usr/bin/taskset",
+      "-c",
+      "0-19",
+      "/workspaces/quoridor/.artifacts/rust-migration/target/release/nnue-diagnose",
+      "--config",
+      "/workspaces/quoridor/research-data/ai-sigma/frame21-model-cause/group-I-native-config-v1.json"
+    ]
+  },
+  "supervisor_ancestry": [
+    1,
+    1074316,
+    1074446
+  ]
+}

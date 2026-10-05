@@ -1,0 +1,63 @@
+{
+  "schema": "model-cause-management-stop-v1",
+  "UTC": "2026-10-05T10:23:24.989685+00:00",
+  "current_source_hashes": {
+    "/workspaces/quoridor/research-data/ai-sigma/frame21-model-cause/control.py": "c284b889a1ca6244120660420cf1c4096b63be3bf51179fa9643aba63c1efdef",
+    "/workspaces/quoridor/research-data/ai-sigma/frame21-model-cause/stage_a.py": "409319fb36f15fe369ab35fc565386cba7c06147a7a21a940ee10db89af110e9",
+    "/workspaces/quoridor/crates/quoridor-runner/src/bin/nnue-diagnose.rs": "aa8105abb1b900a9c5cef670b087906ba44f5a4e4fb58a2f2b98223cfafdf336"
+  },
+  "models": {
+    "/workspaces/quoridor/.artifacts/ai-sigma/frame21-model-cause/stage-a-r1-models/I/manifest.json": "c21e4e450e8507e3e104ee3fdf86e8d7fb2cbde849e08e9c96185f10d282adad",
+    "/workspaces/quoridor/.artifacts/ai-sigma/frame21-model-cause/stage-a-r1-models/I/weights.f32": "51b9a8c03b2f8b85952e31602db827b069ae35c4c2c7f0a01b432f82fc64b09e",
+    "/workspaces/quoridor/.artifacts/ai-sigma/frame21-model-cause/stage-a-r1-models/L/manifest.json": "40af05b8f92bdaf36d30e459aadaad5027d6b91e07c5e8de4dc301276ca9836a",
+    "/workspaces/quoridor/.artifacts/ai-sigma/frame21-model-cause/stage-a-r1-models/L/weights.f32": "b81792d5ba00c6d79b58cada2fc81d84ea822db48c04420b4e269fb9b71841b3"
+  },
+  "scientific_stop": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame21-model-cause/scientific-stop-v1.json",
+    "SHA": "3903a9ee7fe574ee941ccf6530ef686be4d1dc4bcef5e015133e06fe0ccbed4d"
+  },
+  "executed_python_source_archive": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame21-model-cause/scientific-source-archives-v1.json",
+    "SHA": "0c5c0e40739a3127aae4c07a8b7d851caae3d26c75265e01e73fb475a07c8f7f"
+  },
+  "retrieval_map": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame21-model-cause/archived-output-map-v1.json",
+    "SHA": "273644bd3ae3afe38e1919c4df7ddf1a2bbd535ace1d2a08563b057b97525ece"
+  },
+  "all_current_exact_scientific_children": [],
+  "all5_background_cleanup": true,
+  "no_future_oldasset_reader": true,
+  "oldreader_last_command": "StageA PID1050135 tick44761806, stopped and background cleanup by10:03:06.404795; precise individual file-read times not measured",
+  "future_B_input": "own currentmain .artifacts/ai-sigma/frame21-model-cause/stage-a-r1-models exports; B already stopped",
+  "write_stopped_paths": [
+    "crates/quoridor-runner/src/bin/nnue-diagnose.rs",
+    "research-data/ai-sigma/frame21-model-cause/control.py",
+    "research-data/ai-sigma/frame21-model-cause/stage_a.py"
+  ],
+  "new_science": false,
+  "old_core_version": "ca75221 +source-freeze-v4 bindings; core267 later main adoption not transferred",
+  "costs": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame21-model-cause/cost-ledger-final-v1.json",
+    "SHA": "d641e7c316426cb4d8f177347c4542b035bc8e4cc13fb68d39c5790c0b76fb36"
+  },
+  "storage": {
+    "UTC": "2026-10-05T10:23:24.987309+00:00",
+    "data_current_allocated_B": 634880,
+    "model_live_current_allocated_B": 106496,
+    "new_generic_and_report_allocated_B": 32768,
+    "uniqueGit_upper_forecast_B": 262144,
+    "tmp_upper_B": 65536,
+    "residual_metadata_B": 131072,
+    "whole_forecast_B": 1232896,
+    "guard_B": 1835008,
+    "reservation_B": 2097152,
+    "fresh_unused_reservation_claim": false,
+    "old256temporary_and_unknown_discount": 0,
+    "parent_reservation_addition": 0,
+    "new_build_cache_growth_B": 1765376,
+    "cache_growth_not_charged_to_data_reserve": true,
+    "cache_growth_authorized_separately_B": 67108864,
+    "parent_scope_current_total": "92/coordinator separately; no current measurement falsely attributed to entire host",
+    "privateindex_or_commit": false
+  }
+}

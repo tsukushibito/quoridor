@@ -1,0 +1,102 @@
+{
+  "task": "model-cause-266-v1",
+  "A": {
+    "entries_max": 2,
+    "NN_cap": 100000,
+    "Torch_numeric_tol": {
+      "abs": 1e-05,
+      "rtol": 0.0001
+    },
+    "parent_full_delta_tol": {
+      "abs": 1e-05,
+      "rtol": 0.0001
+    },
+    "strict_saved_L_I": true,
+    "new_fit": false,
+    "prefix_selection": {
+      "seed": 266210311,
+      "opening_plies": [
+        8,
+        12,
+        16,
+        20,
+        24,
+        28,
+        9,
+        13,
+        17,
+        21,
+        25,
+        29,
+        32,
+        36,
+        33,
+        37
+      ],
+      "max_attempts": 24,
+      "min_distance": 4,
+      "max_distance_difference": 4,
+      "pawn_fraction": 0.62
+    },
+    "representative_prefixes": 16,
+    "extra_goal_prefix": "legal greedy nearest-own-goal without model evaluation; terminal_SCORE2/NN0",
+    "B_prefix_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "arena_fixed_before_L_I_predictions": true,
+    "same_node1024_depths": [
+      1,
+      2
+    ],
+    "all_exact_children": "NOT_RECORDED"
+  },
+  "B": {
+    "groups": [
+      "L_vs_D",
+      "I_vs_D"
+    ],
+    "planned_per_group": 12,
+    "max_all_slots": 24,
+    "D": {
+      "mode": "tanh",
+      "a": 0.0,
+      "b": 8.0,
+      "distance": "f32 graphdistance/80 STM",
+      "remaining_wall_direct_feature": false
+    },
+    "same_Rust_AB_PVS_TT": true,
+    "terminal_SCORE": 2,
+    "outer_clock_ms": 100,
+    "search_clock_ms": 90,
+    "node_cap": 1000000,
+    "requested_depth": 64,
+    "NN_cap_each_group": 500000,
+    "processed_cap_each_group": 12000000,
+    "group_hard_seconds": 180,
+    "whole_science_max_seconds": 800,
+    "conditions": [
+      "currentphysics and remaining costs/clock",
+      "A parity PASS",
+      "legal nonterminal openings have no terminal child within depth2"
+    ],
+    "WDL_dependent_continuation": false,
+    "opening_selection_vs_training_distribution": "separate",
+    "same_input_history_matching": "Rust fullhistory digest, boardkey and STM",
+    "not_IID_or_formal_NI": true
+  },
+  "old229_final": "NOT_RUN",
+  "openedtest_read": false,
+  "source_frozen_before_science": false,
+  "outputs": {
+    "A": "stage-a-r1/result.json +native.json.gz",
+    "B": "group results +compact hands"
+  },
+  "unknown_cost_not_zero": true,
+  "supersedes_before_science": "preregister-v1.json; prior fittedD proposal retained unrun",
+  "D_coordinator_directive": "266 Beads notes09:12:55: current tanhD a0/b8 aligns268; old fit separately teacher baseline"
+}

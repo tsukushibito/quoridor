@@ -1,0 +1,86 @@
+{
+  "at": "2026-10-05T10:28:12.293014+00:00",
+  "issue": "quoridor-4lc.268",
+  "WT": "/workspaces/quoridor/.worktree/frame21-features",
+  "kind": "future-current-format-only",
+  "old_handoff_preserved": "handoff.json",
+  "old_verification_format_failure_preserved": "verification-final.json",
+  "current_source_stop": "source-report-stop-v2.json",
+  "verification": "verification-format-v2.json",
+  "current_source_paths_sha": {
+    "crates/quoridor-nnue/src/features.rs": {
+      "bytes": 3655,
+      "sha256": "0e143dd903f8e9686ceed4213007783027e628bf6d8a2e83438aab07002f27dc"
+    },
+    "crates/quoridor-nnue/src/lib.rs": {
+      "bytes": 16851,
+      "sha256": "64121e4d34923d1ea2aee8dadc384efaa3d6ed7c9c86f161c16ba7b30065cd68"
+    },
+    "crates/quoridor-nnue/src/route.rs": {
+      "bytes": 5814,
+      "sha256": "9d0fef9ad2fbf81f3f69c6a26606a5999b72bf5545e86ae24e3053253a61d2b7"
+    },
+    "crates/quoridor-nnue/src/residual.rs": {
+      "bytes": 7345,
+      "sha256": "fc771303c919c62be35b73e63544e1b78ea2f30d4fea5904c2d47fdd062ae791"
+    },
+    "crates/quoridor-runner/src/bin/route-feature-diagnose.rs": {
+      "bytes": 10263,
+      "sha256": "b86842788b255bd775519cb06a4751b081ef2950cdfbf2f0f6d97a34698ed718"
+    },
+    "python/quoridor_training/train.py": {
+      "bytes": 19001,
+      "sha256": "73d6b2d34879a40e2f61d4e255ae968a95e13da689e725f4f05f3299df0ec291"
+    },
+    "python/quoridor_training/residual_model.py": {
+      "bytes": 3362,
+      "sha256": "6c9aedc1cb0893d6bb6e0cc90eec3fd8ffb069dbe2350af0536aa66d172e746e"
+    },
+    "python/quoridor_training/route_training.py": {
+      "bytes": 11918,
+      "sha256": "ce6401269ba032ff0e63554729030b2f1ed71e94dc74d2976c2ea3f3b6f308d4"
+    },
+    "research-data/ai-sigma/frame21-route-control/managed_science.py": {
+      "bytes": 9962,
+      "sha256": "1e4df87f90fc3fda6a414c335ff66744529ca7a15bb19bea3bbb3ff2c965166c"
+    },
+    "research-data/ai-sigma/frame21-route-control/admit.py": {
+      "bytes": 3674,
+      "sha256": "f240f6d81b65a3d19bc27932ee74da4127081d37f1ea11b7c7b2b26f6b66af16"
+    },
+    "research-data/ai-sigma/frame21-route-control/build.py": {
+      "bytes": 1770,
+      "sha256": "8b1cd69a4bc5681956bcec1fbcf8854f8f7e879f2ebcfde25bf72fce5e639f7f"
+    },
+    "docs/reports/ai-sigma-hypothesis-frame21-route-control.md": {
+      "bytes": 7882,
+      "sha256": "229a7f7df335b6d93a03e9864b85ffe1636225b98ab8373fc695496b39c6e509"
+    }
+  },
+  "unchanged_old_metadata_except_formatted_manager": true,
+  "changed_old_metadata": [
+    "research-data/ai-sigma/frame21-route-control/managed_science.py"
+  ],
+  "original_science_stop": "science-stop-final.json",
+  "all_science_children_waited": true,
+  "new_NN_science_compile": 0,
+  "storage": {
+    "at": "2026-10-05T10:28:12.292872+00:00",
+    "current_scope_models_allocated_including_directories": 2646016,
+    "uniqueGit_upper_preserved_old": 676618,
+    "additional_Git_upper_fullbytes": 70099,
+    "uniqueGit_upper": 746717,
+    "remaining_meta": 49152,
+    "tmp": 32768,
+    "combined_forecast": 3474653,
+    "guard": 3670016,
+    "reservation": 4194304,
+    "within": true,
+    "parent_added": 0,
+    "old_unknown_discount": 0,
+    "WT_build_separate": true
+  },
+  "Git_index_owner": "coordinator",
+  "retained_preformat_archive": "source-before-required-format.tar.xz",
+  "note": "First postformat management assertion read original failed-format log, exited1 before writing; corrected to separate current v2 logs, no scientific impact."
+}

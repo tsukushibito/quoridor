@@ -1,0 +1,25 @@
+{
+  "onnx": "/workspaces/quoridor/.worktree/ai-sigma/models/experiments/ai-sigma/reference/sigma-pcr250/best.onnx",
+  "onnx_sha": "d790dac68389f7602ff8a887a2385417d3c925fe22da7164c86e9226f943908d",
+  "ort_library": "/home/vscode/.cache/inference/envs/quoridor-training/lib/python3.14/site-packages/onnxruntime/capi/libonnxruntime.so.1.30.0",
+  "fixtures": [
+    {
+      "name": "initial",
+      "prefix": []
+    },
+    {
+      "name": "opening",
+      "prefix": [13, 67, 81, 66, 14, 65]
+    },
+    {
+      "name": "walled-midgame",
+      "prefix": [13, 67, 81, 66, 14, 65, 143, 126, 150, 64, 141, 151]
+    },
+    {
+      "name": "jump-p2",
+      "prefix": [13, 67, 22, 58, 31, 49, 40]
+    }
+  ],
+  "task": "frame21-mcts-cost-271-v1",
+  "schema": "mcts-cost-v1"
+}

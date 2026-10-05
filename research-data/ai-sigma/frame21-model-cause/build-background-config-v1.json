@@ -1,0 +1,22 @@
+{
+  "issue": "quoridor-4lc.266",
+  "goal_issue": "quoridor-4lc",
+  "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+  "role": "experiment",
+  "cwd": "/workspaces/quoridor",
+  "argv": [
+    "/usr/bin/python3",
+    "-B",
+    "/workspaces/quoridor/research-data/ai-sigma/frame21-model-cause/control.py",
+    "--config",
+    "/workspaces/quoridor/research-data/ai-sigma/frame21-model-cause/build-guardian-config-v1.json"
+  ],
+  "end_at": "2026-10-05T10:27:54Z",
+  "notify_until": "2026-10-05T10:37:54Z",
+  "max_runtime_seconds": 260,
+  "control_interval_seconds": 30,
+  "notify_interval_seconds": 10,
+  "request_timeout_seconds": 25,
+  "log_max_bytes": 16384,
+  "resource_contract": "/workspaces/quoridor/research-data/ai-sigma/frame21-coordinator/model-cause-contract.md"
+}

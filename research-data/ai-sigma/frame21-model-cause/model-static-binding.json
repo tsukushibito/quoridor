@@ -1,0 +1,131 @@
+{
+  "UTC": "2026-10-05T08:59:34.062663+00:00",
+  "issue": "quoridor-4lc.266",
+  "resolved_research_paths": {
+    "schema": "quoridor-research-layout-v1",
+    "code_root": ".",
+    "data_root": "research-data/ai-sigma",
+    "live_root": ".artifacts/ai-sigma",
+    "models": ".worktree/ai-sigma/models/experiments",
+    "legacy_reference_root": ".worktree/ai-sigma",
+    "environments": {
+      "training": "/home/vscode/.cache/inference/envs/quoridor-training",
+      "team": "/home/vscode/.cache/inference/envs/quoridor-research-team"
+    },
+    "cache": "/home/vscode/.cache/inference/uv",
+    "notes": "Code/data are canonical in main. Legacy model and expanded input paths are retained assets, not another code source. New runs bind explicit absolute resolved paths and hashes."
+  },
+  "L": {
+    "feature": "QF1-f32-STM-scaled-v1",
+    "weights": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-native-connection/candidate.f32",
+    "weights_SHA": "b81792d5ba00c6d79b58cada2fc81d84ea822db48c04420b4e269fb9b71841b3",
+    "weights_B": 48772,
+    "checkpoint_SHA": "81c1effc6a3228c337b52a38efec07a0952d6e8b898fa8387cffed0e13c5436b",
+    "freeze_SHA": "2bac8f1f7ad87b83ac0549c01bb32eb0c8d0a2f39a05c717420e20cd668e6a60",
+    "names": [
+      "ft.weight",
+      "ft.bias",
+      "h.weight",
+      "h.bias",
+      "out.weight",
+      "out.bias"
+    ],
+    "shapes": [
+      [
+        32,
+        312
+      ],
+      [
+        32
+      ],
+      [
+        32,
+        66
+      ],
+      [
+        32
+      ],
+      [
+        1,
+        32
+      ],
+      [
+        1
+      ]
+    ],
+    "little_endian_f32": 12193,
+    "mu_f32": [
+      0.10343921929597855,
+      0.09714682400226593
+    ],
+    "sigma_f32": [
+      0.0543474480509758,
+      0.05367854982614517
+    ],
+    "scale_SHA": "68f8b43a0e4408a1546f8fa2652ffdf21f1f7bdcfbac9a25a86ac666b27aa4ee",
+    "h_export_recompensation": false,
+    "runtime": "f32((d_f32-mu_f32)/sigma_f32), actualSTM concat; no double distance swap",
+    "distance_fit": {
+      "a": 0.06038215201109912,
+      "b": 7.925687690687516
+    }
+  },
+  "I_checkpoint": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/learning-checkpoints/frame18-growth228-plan576-positive576-r1/initial.pt",
+  "L_checkpoint": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/learning-checkpoints/frame18-growth228-plan576-positive576-r1/best.pt",
+  "original_config": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/learning-runs/frame18-growth228-plan576-positive576-r1/config.json",
+  "model_refs": {
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-native-connection/weight-manifest.json": {
+      "B": 1189,
+      "SHA": "9bc786e82c3b73a462da4a30e1d884678ef9f7bdb757560dd6bb437fa4b25d40"
+    },
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-native-connection/candidate.f32": {
+      "B": 48772,
+      "SHA": "b81792d5ba00c6d79b58cada2fc81d84ea822db48c04420b4e269fb9b71841b3"
+    },
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/learning-runs/frame18-growth228-plan576-positive576-r1/config.json": {
+      "B": 679,
+      "SHA": "928ba5517a8fd1de0b315a95d868765f004b401f4269090dec69bf778fdc5021"
+    },
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/learning-checkpoints/frame18-growth228-plan576-positive576-r1/initial.pt": {
+      "B": 51605,
+      "SHA": "5e6da7ede197f7bc0e554b61e607eac01717f740260c614b01841d830dbcc407"
+    },
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/learning-checkpoints/frame18-growth228-plan576-positive576-r1/best.pt": {
+      "B": 51569,
+      "SHA": "81c1effc6a3228c337b52a38efec07a0952d6e8b898fa8387cffed0e13c5436b"
+    },
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame15-input-scale-control/scale.json": {
+      "B": 1034,
+      "SHA": "68f8b43a0e4408a1546f8fa2652ffdf21f1f7bdcfbac9a25a86ac666b27aa4ee"
+    }
+  },
+  "saved_validation": {
+    "192": {
+      "source": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/learning-runs/frame18-growth228-plan192-positive192-r1/summary.json",
+      "SHA": "0cf44ffb2624a0cd1f9f910cc04f946bc3e1ef6688f0d1e333b2cee9298c580f",
+      "best_step": 2000,
+      "validation_gameMSE": 0.3624677022810368,
+      "train_samples_seen": 256000,
+      "train_rows": 9025,
+      "val_rows": 4813,
+      "val_games": 96
+    },
+    "576": {
+      "source": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame18-data-learning/learning-runs/frame18-growth228-plan576-positive576-r1/summary.json",
+      "SHA": "d4a73e5f4d76da29918125ad557a71e0bb4530bf71fb6099905d8e660f3ec938",
+      "best_step": 2000,
+      "validation_gameMSE": 0.30523895728053846,
+      "train_samples_seen": 256000,
+      "train_rows": 27463,
+      "val_rows": 4813,
+      "val_games": 96
+    }
+  },
+  "target": "K64 teacher rootmean STM, not terminal z or minimax leaf truth",
+  "seed": 19080311,
+  "old229_final_independent": "NOT_RUN",
+  "old_test_or_formal173_label_read": false,
+  "new_fit": false,
+  "active_python": "python/quoridor_training/model.py + scaled_model.build_model + train.export",
+  "old_source_import_restoration": false
+}

@@ -1,0 +1,59 @@
+{
+  "schema": "frame21-design-decision-v1",
+  "primary_question": "why expected NNUE learning benefit is missing and how to make it stronger than distance",
+  "reference_sources": [
+    {
+      "name": "SigmaQuoridor",
+      "commit": "751186344fc52ad0c29bc65922e62c6fa915f006",
+      "file": "game.py",
+      "observed": "8-plane side-to-move input including per-cell goal-distance fields"
+    },
+    {
+      "name": "Claustrophobia",
+      "commit": "ae093653e62ad700e201706fa5ed767093d0d68e",
+      "file": "src/encode.rs",
+      "observed": "distance fields/shortest-path masks/legal-wall/threat information; reference effectiveness not measured here"
+    }
+  ],
+  "selected": "distance-preserving logit residual A vs A+compressed shortest-path count and goal reachability DAG4 B",
+  "not_claimed": [
+    "DAG4 is not an exact copy of a reference feature",
+    "NNUE architecture does not guarantee learned superiority",
+    "teacher MSE is not strength"
+  ],
+  "reason": "separate loss/baseline preservation from explicit nonlocal route-information increment at bounded pawn/wall update cost",
+  "alternatives": [
+    {
+      "candidate": "full distance-map input",
+      "deferred_reason": "larger dense feature generation/evaluation and model cost",
+      "revisit": "DAG4 fails to convey useful path distinction within native cost"
+    },
+    {
+      "candidate": "516 connected wall-pair features",
+      "deferred_reason": "more sparse updates/parameters before baseline residual transfer is known",
+      "revisit": "local wall-combination failure evidence"
+    },
+    {
+      "candidate": "larger teacher generation",
+      "deferred_reason": "first diagnose residual transfer/representation and shared search costs",
+      "revisit": "same features learn train but not val or teacher/horizon mismatch evidence"
+    }
+  ],
+  "owners": {
+    "features_and_training": "quoridor-4lc.268 hypothesis",
+    "meaningful_frozen_model_cause": "quoridor-4lc.266 experiment",
+    "search_and_teacher_generation_efficiency": "quoridor-4lc.267 critic",
+    "operation_storage_navigation": "quoridor-4lc.92 and .269 steward"
+  },
+  "first_measures": [
+    "zero-head reproduces D/P2/native-Python and path-DP parent/wall behavior",
+    "A-B same teacher/split/batch/400step train-val and frozen native overhead",
+    "common core distance/legality change same depth/node and same-K MCTS cost"
+  ],
+  "status": "chosen and dispatched, science not started yet",
+  "constraints": [
+    "current storage admission recovery pending92",
+    "old openedtest non-selection",
+    "deadline 10:37:54 UTC fixed"
+  ]
+}

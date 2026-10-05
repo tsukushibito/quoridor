@@ -1,0 +1,56 @@
+{
+  "schema": "frame21-coordinator-handoff-v1",
+  "frame_start": "2026-10-05T08:37:54Z",
+  "frame_end": "2026-10-05T10:37:54Z",
+  "primary_question": "why expected learning benefits have not appeared and how to design NNUE stronger than distance",
+  "decision": "distance-logit-preserving learned residual A vs A plus compressed route DAG4 B",
+  "actual_dispatch": {
+    "92": {
+      "method": "turn/start",
+      "thread_id": "01a0f31d-99ee-7d63-b162-bc1a59c457c6",
+      "turn_id": "01a10b3d-bf1e-7de1-a0bd-49c5d179c1bb",
+      "accepted": true
+    },
+    "265": {
+      "method": "turn/start",
+      "thread_id": "01a0f31c-2e4b-7170-82c5-69e1428c2418",
+      "turn_id": "01a10b40-eb9a-7ad2-91ed-3fcfa4fd760e",
+      "accepted": true
+    },
+    "266": {
+      "method": "turn/start",
+      "thread_id": "01a0f31d-6d15-7620-bb63-4b4f878e4746",
+      "turn_id": "01a10b46-9841-77c3-92c2-0b60159b628a",
+      "accepted": true
+    },
+    "267": {
+      "method": "turn/start",
+      "thread_id": "01a0f31d-8227-7e03-a7e6-915b4918c11b",
+      "turn_id": "01a10b49-6da8-73a2-be4c-62dd8cd136a3",
+      "accepted": true
+    },
+    "268": {
+      "method": "turn/steer",
+      "thread_id": "01a0f31c-2e4b-7170-82c5-69e1428c2418",
+      "turn_id": "01a10b40-eb9a-7ad2-91ed-3fcfa4fd760e",
+      "accepted": true
+    },
+    "269": {
+      "method": "turn/steer",
+      "thread_id": "01a0f31d-99ee-7d63-b162-bc1a59c457c6",
+      "turn_id": "01a10b3d-bf1e-7de1-a0bd-49c5d179c1bb",
+      "accepted": true
+    }
+  },
+  "science_results": "NONE YET; receipt/claim/static != science",
+  "open_constraints": [
+    "current frame21 runtime loaded pending92",
+    "known storage over-limit concern pending directed dedup/knownunusedcache maintenance, not unknown discount"
+  ],
+  "historical": [
+    "229 independent final NOT_RUN",
+    "173/198 non-learning",
+    "old failure/censor/cost/deadline unchanged"
+  ],
+  "integration_owner": "coordinator; no other role index/commit"
+}

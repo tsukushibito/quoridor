@@ -1,0 +1,7 @@
+# frame21 主要ディレクトリ案内を検索と現役入口へ整備
+ユーザー明示を継承、Owner既steward/main。92運用更新・長期停止責任を継続し同activeへ追補、別role/newworker0。ready/show本人assigned/no pause→claim。sourceの正確writerを既main状態で確認し以下docsのみsolewrite。Git/index/commitはcoordinator統合、root同時Gitがあればそのpathは保護、通常handoff/停止点で調整。枠08:37:54–10:37:54/10:27:54heavy/10:32:54supervisor/10:35:54monitor/10:37:54save不変更。
+
+既rootREADME/AGENTS、docs/development/ai-research-code.md、nnue/inference/runner crateREADME、python/quoridor_training/README、tools/model-export/READMEを再用。必要な責務・検索範囲の切替点だけ crates/README.md、core/ai/data/wasm各README、tools/README.md、scripts/README.md、docs/README.md、research-data/README.mdを配置/更新。全階層へ機械配置/全fileリスト/実装詳細/契約/状態リスト複製0。内容は扱う範囲・最初に読む公開入口/主要module/test・正本文書・検証入口。学習/生成/対局/取得commandと軽量checkを分け、現役Rust/Python、製品/管理Node、main正本/旧WT凍結入力境界を明示。主要構成が移動したらREADMEも更新する責務を既開発案内へ短く記し、全role/registry更新や新必読/定期全体監査0。
+
+科学NN/Torch/ORT/GPU/game/train/build取得/整理削除/リファクタリング0。このissueは文書実作業だけ。CPU1短管理/全wall180s、RAM512MiB、source/log forecast512KiB/guard768KiB/必要最多1MiBを92既112MiBから確認unused移転、parent追加0/UNKNOWNfree化0。source既92運用編集とpath分離、validationは相対link存在と現役入口責務の小必要範囲のみ、全モデル試験を実行しない。
+09:10本人開始・候補対象、09:40source stop/09:45必要保存目安、入り切らない分は対象/owner/次機会明示し自動延長0。92opsloadedは別に即報告し本文整備完了待ちにしない。rootへの意味ある整備入口/不足報告を統括が行い、全稿ACKを研究gate0。本人必要検証後notes/close/backupを同実質turnで完結。

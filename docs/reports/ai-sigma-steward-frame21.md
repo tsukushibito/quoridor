@@ -43,3 +43,13 @@ cleanup receiptsのpath別事前st_blocks合計は「対象pathの量」であ�
 必要証拠はresearch-data/ai-sigma/frame21-steward/manifest.jsonと参照receipt。コード・文書のindex/commitはcoordinatorが明示pathだけ通常indexで統合する。StewardはGit操作を行わず、source停止・変更path・試験結果を引き渡す。
 
 本報告時点では将来終了処理は未確認。92が10:27:54通知、10:32:54正owned/scheduler停止、10:35:54monitor回収、10:37:54必要保存の責任を保持する。枠内の終了点検で停止/保存と整理・長期保守の判断を返し、時間/根拠不足は担当と次機会を明記する。プログラム停止記録を判断報告の代用にしない。外部NN終了は各科学ownerの証拠が別に必要。
+
+## 枠終了点検: 10:27時点の判断
+
+終了点検は統括から同activeへ実配分済み。主な保守問題は、統合済みmainと旧checkoutに入力・凍結展開・旧管理sourceが残り、容量と参照の対応確認を重ねる費用が発生していること。解決には再生成cacheの選択的整理だけでなく、コード正本main・永続資産volume・保存正本Gitを分離する必要がある。独立保守1d2.1で旧research-team/scheduler/webapp-presentationと未登録frame18を保全・復元確認後に撤去した。39既存Git blobは重複保存せず、unique7 source/tests.logと製品証拠27件だけ一度保存、統括79fc729に統合済み。枝・main index・共有DB・研究中2WTを保持した。
+
+使用中の旧ai-sigma資産は今回の点検では移動していない。266/267の読者停止証拠と268/271の最後の読者を区別し、1d2.1担当Stewardが自然停止後に同volume移行・旧→新対応・保存復元確認・管理helper撤去を進める。これは独立したユーザー保守許可であり、研究frame21の自動延長ではない。新構成ではmodels/checkpoints/inputsをassetsに分類し、旧code一式や互換symlinkを残さない。現在の科学条件・run原参照・教師ラベル・splitは変えない。
+
+広いcache削除や追加の全repo監査は見送り。現物対応と既保存データの確認を実移行の必要範囲で行う方が保守費と情報損失の危険を下げる。次の再検討契機は読者の停止proof、資産resolverへの実caller更新、新しい保持rootや再構成費の増加。担当は1d2.1 Steward、Git保存は統括、最終受入れはRoot。枠内に移行全体の完了を求めず未完了を次の独立保守機会へ引き渡す。
+
+10:25:31のscheduler結果はdispatch lock競合（Another client is dispatching）で、ownedはnone。09:45のobserve/finish到達や10:13の公式completedを、今回競合の成功や全面監督品質へ付替えない。正確運用終了の確認は以下の最終receiptへ追記する。外部科学job停止は各owner証拠が別に必要。

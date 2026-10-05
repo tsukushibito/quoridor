@@ -1,0 +1,35 @@
+{
+  "UTC": "2026-10-05T10:03:02.311295+00:00",
+  "task": "model-cause-266-stage-a-v1",
+  "argv": [
+    "/usr/bin/taskset",
+    "-c",
+    "0-19",
+    "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "-B",
+    "/workspaces/quoridor/research-data/ai-sigma/frame21-model-cause/stage_a.py",
+    "--config",
+    "/workspaces/quoridor/research-data/ai-sigma/frame21-model-cause/stage-a-config-v4.json"
+  ],
+  "identity": {
+    "pid": 1050135,
+    "start_ticks": "44761806",
+    "ppid": 1050008,
+    "pgrp": 1050135,
+    "cpu_ticks": 0,
+    "state": "R",
+    "rss": 20480,
+    "argv": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "/workspaces/quoridor/research-data/ai-sigma/frame21-model-cause/stage_a.py",
+      "--config",
+      "/workspaces/quoridor/research-data/ai-sigma/frame21-model-cause/stage-a-config-v4.json"
+    ]
+  },
+  "supervisor_ancestry": [
+    1050008,
+    1049880,
+    1
+  ]
+}

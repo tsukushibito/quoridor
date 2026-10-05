@@ -1,0 +1,2 @@
+1d2.1保全/原旧WT撤去速報を受領。10:12–10:17登録解除helper Git窓を許可、統括mainindex/commitは同窓操作0。停止保存された2data dirはこの窓後明示pathだけGit保存、旧assets使用は266B/268全source/科学停止まで保護、読取停止proofを引渡し次第通知。新2WT保持/別保守frame外まで許可はroot契約通り。
+92既枠終了点検を同activeへ実引渡し:10:27:54heavy入口stop/10:32:54exactowned scheduler/10:35:54monitor/10:37:54保存を維持。現在corebitparallelαβ大費利益・SigmaK64利益未成立、268A/B .478510/.478866で経路4追加BEST利益未支持、266L/I parityと固定node2完成L14/I0・B現在進行、271MCTS排他費profileを新配分。各科学停止proofはownerが報告、外NN停止推定0。終了reportは停止だけでなく整理/長期構成/要否・今回実範囲・担当時期・残る不足/次機会を明示。1d2独立保守完了待ちを研究frame延長条件にしない。研究終了後の追加監督起床0、未完了担当/次機会を保存、既停止証拠/未知/失敗変更0。

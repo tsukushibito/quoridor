@@ -1,0 +1,58 @@
+{
+  "at": "2026-10-05T10:27:22.567847+00:00",
+  "task": "quoridor-4lc.268",
+  "kind": "future-current-format-only",
+  "prior_verification_preserved": "verification-final.json",
+  "ruff": "/workspaces/quoridor/tools/research-quality/.venv/bin/ruff",
+  "config": "/workspaces/quoridor/tools/research-quality/ruff.toml",
+  "format_exit": 0,
+  "format_check_exit": 0,
+  "lint_exit": 0,
+  "lint_rules": [
+    "F",
+    "E9"
+  ],
+  "logs": [
+    "python-format-v2.log",
+    "python-lint-v2.log"
+  ],
+  "members": [
+    {
+      "path": "python/quoridor_training/train.py",
+      "bytes": 19001,
+      "sha256": "73d6b2d34879a40e2f61d4e255ae968a95e13da689e725f4f05f3299df0ec291",
+      "AST_SHA": "b846f9174682a71412742412d7cf23b403afc25c5b0054b6c15d2f10062c8e3c",
+      "AST_unchanged": true,
+      "before_archive_bytes_SHA_verified": true
+    },
+    {
+      "path": "python/quoridor_training/residual_model.py",
+      "bytes": 3362,
+      "sha256": "6c9aedc1cb0893d6bb6e0cc90eec3fd8ffb069dbe2350af0536aa66d172e746e",
+      "AST_SHA": "e249f140b1733f5b3943657dd3aadbf6bbe27473aec8468a2987384f3f67f783",
+      "AST_unchanged": true,
+      "before_archive_bytes_SHA_verified": true
+    },
+    {
+      "path": "python/quoridor_training/route_training.py",
+      "bytes": 11918,
+      "sha256": "ce6401269ba032ff0e63554729030b2f1ed71e94dc74d2976c2ea3f3b6f308d4",
+      "AST_SHA": "eae53bf0c507a79a5862f517e4d193f30449276f18d7a9eeac9aa98f122d29e4",
+      "AST_unchanged": true,
+      "before_archive_bytes_SHA_verified": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame21-route-control/managed_science.py",
+      "bytes": 9962,
+      "sha256": "1e4df87f90fc3fda6a414c335ff66744529ca7a15bb19bea3bbb3ff2c965166c",
+      "AST_SHA": "253166af70fa719f51f898ce765d67492b2cff42b687e969c616ed11d925940a",
+      "AST_unchanged": true,
+      "before_archive_bytes_SHA_verified": true
+    }
+  ],
+  "AST_semantic_equivalence": "PASS",
+  "new_NN": 0,
+  "new_science_jobs": 0,
+  "new_compile": 0,
+  "old_scientific_source_and_outputs_preserved": true
+}

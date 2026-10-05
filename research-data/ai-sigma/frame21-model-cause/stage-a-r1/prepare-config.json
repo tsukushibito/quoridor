@@ -1,0 +1,48 @@
+{
+  "mode": "prepare",
+  "output": "/workspaces/quoridor/research-data/ai-sigma/frame21-model-cause/stage-a-r1/openings.json",
+  "counter": "/workspaces/quoridor/research-data/ai-sigma/frame21-model-cause/stage-a-r1/native-counter.json",
+  "prefixes": [],
+  "engines": [],
+  "generate": {
+    "seed": 266210311,
+    "opening_plies": [
+      8,
+      12,
+      16,
+      20,
+      24,
+      28,
+      9,
+      13,
+      17,
+      21,
+      25,
+      29,
+      32,
+      36,
+      33,
+      37
+    ],
+    "max_attempts": 24,
+    "min_distance": 4,
+    "max_distance_difference": 4,
+    "pawn_fraction": 0.62,
+    "primary_shallow_slots": 6,
+    "preparation_node_cap": 130000
+  },
+  "depths": [
+    1,
+    2
+  ],
+  "max_nodes": 512,
+  "nn_cap": 99000,
+  "processed_cap": 200000,
+  "wall_seconds": 100,
+  "time_ms": null,
+  "search_ms": null,
+  "max_plies": 200,
+  "cpu_core": 2,
+  "ram_limit": 2147483648,
+  "host_ram_reserve": 4294967296
+}

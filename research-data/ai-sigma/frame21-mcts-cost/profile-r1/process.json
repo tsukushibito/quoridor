@@ -1,0 +1,44 @@
+{
+  "started": "2026-10-05T10:20:01.205937+00:00",
+  "ended": "2026-10-05T10:20:02.252741+00:00",
+  "wall_seconds": 1.046819337992929,
+  "exit_code": 0,
+  "cause": null,
+  "peak_rss": 55648256,
+  "leader": {
+    "pid": 1096966,
+    "ppid": 1096945,
+    "pgid": 1096966,
+    "tick": 44863765,
+    "cpu": 0,
+    "rss": 208896,
+    "argv": [
+      "/usr/bin/taskset",
+      "-c",
+      "2",
+      "/workspaces/quoridor/.artifacts/rust-migration/target/release/examples/mcts_cost",
+      "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-mcts-cost/config.json"
+    ],
+    "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "children": [
+    {
+      "pid": 1096966,
+      "ppid": 1096945,
+      "pgid": 1096966,
+      "tick": 44863765,
+      "cpu": 93,
+      "rss": 55648256,
+      "argv": [
+        "/workspaces/quoridor/.artifacts/rust-migration/target/release/examples/mcts_cost",
+        "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame21-mcts-cost/config.json"
+      ],
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    }
+  ],
+  "remaining": [],
+  "waited": true,
+  "current_exact_absent": true,
+  "task": "frame21-mcts-cost-271-v1",
+  "kind": "science"
+}

@@ -1,0 +1,1 @@
+268全MAX3科学子停止/currentexact[]を受領。A/B学習400step成功・parity失敗/修復と管理FileNotFoundは各原attempt保持、metadata全稿を266B入口gateにしない。266は本人freshcurrentphysics/源/残費/時間をadmitして登録済B L群→I群をWDL非依存で進める。268はcurrentD initial/best/lastの同weighting validationと曲線を必要保存に明示、追加fit0。現在L/I同一root/depth値Actionの違いとL14/I0のdepth2完成は情報であり棋力/同完成仕事認定ではない。maincoreは266全科学停止まで旧版を保持、267候補混入0。
