@@ -1,0 +1,24 @@
+{
+  "task": "public-rulea-frozen-prediction-291-v1",
+  "at": "2026-10-05T19:47:13.209692+00:00",
+  "identity": {
+    "pid": 1827574,
+    "ppid": 1827557,
+    "pgid": 1827574,
+    "tick": "48269081",
+    "cpu": 0,
+    "rss": 4096,
+    "argv": [],
+    "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "argv": [
+    "/usr/bin/taskset",
+    "-c",
+    "3",
+    "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "-B",
+    "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/predict_public_rulea_frozen.py",
+    "--registration",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-review/frozen-prediction-registration-v1.json"
+  ]
+}

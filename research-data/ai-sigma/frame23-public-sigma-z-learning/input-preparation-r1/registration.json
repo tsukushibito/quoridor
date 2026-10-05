@@ -1,0 +1,43 @@
+{
+  "UTC": "2026-10-05T18:57:30.655519+00:00",
+  "task": "public-z-input-preparation-290-v1",
+  "argv": [
+    "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "-B",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/prepare_public.py",
+    "--handoff",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-import/public-z-immutable-handoff-v3.json",
+    "--producer-stop",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-import/canonical-import-r2-finite-stop.json",
+    "--loaded",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/runtime-binding-after-watch-v2.json",
+    "--storage",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-steward/storage-public-z-learning-v3-admission.json"
+  ],
+  "source_SHA": "ddb53c1ca6ad84b321f0329365b9b7875dcfc735174faee29aee5fc97a109f8f",
+  "binding": {
+    "receipt_SHA": "d52ac06fe2773bc613746cefda2cd9d9e1f92984836d4ee21ad0472938aa3236",
+    "scheduler": {
+      "pid": 1713022,
+      "start_ticks": "47793131",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "monitor": {
+      "pid": 1713041,
+      "start_ticks": "47793161",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "owned": null,
+    "next_at": 1791227276.0871534
+  },
+  "foreign": [],
+  "GPU": [],
+  "CPU": [
+    1
+  ],
+  "hard_s": 120,
+  "RAM_guard": 1879048192,
+  "modelNN": 0,
+  "science_MAX_used": 0,
+  "source_preparation_charge_separate": true
+}

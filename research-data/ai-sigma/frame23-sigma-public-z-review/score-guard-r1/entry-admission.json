@@ -1,0 +1,20 @@
+{
+  "task": "public-rulea-frozen-score-291-v1",
+  "at": "2026-10-05T19:55:45.674544+00:00",
+  "argv": [
+    "/usr/bin/taskset",
+    "-c",
+    "3",
+    "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "-B",
+    "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/score_public_rulea_frozen.py",
+    "--registration",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-review/frozen-score-registration-v1.json"
+  ],
+  "entry_SHA": "5d2c99d0842a501a7c180ac7942bfab97abb4bc9c4dadcbc1c8e6fd9ab30d55f",
+  "guard_SHA": "47b4e2f11c48207776d0c7d4014be404a1aab9049315594f477b008fd601636e",
+  "registration_SHA": "4aec1f03b53a04861feab84c10d1e5732556aca46ee809adbe6ade88110df425",
+  "expected_output": "score-r1/result-v1.json",
+  "expected_schema": "frozen-public-rulea-score-291-v1",
+  "foreign_compute": []
+}

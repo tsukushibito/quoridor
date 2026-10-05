@@ -1,0 +1,35 @@
+{
+  "task": "public-rulea-frozen-score-291-v1",
+  "started": "2026-10-05T19:55:46.041183+00:00",
+  "ended": "2026-10-05T19:55:47.129881+00:00",
+  "wall_seconds": 1.0887126910383813,
+  "exit_code": 1,
+  "cause": null,
+  "recorded_identities": [
+    {
+      "pid": 1841173,
+      "ppid": 1841167,
+      "pgid": 1841173,
+      "tick": "48320402",
+      "cpu": 90,
+      "rss": 65552384,
+      "argv": [
+        "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+        "-B",
+        "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/score_public_rulea_frozen.py",
+        "--registration",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-review/frozen-score-registration-v1.json"
+      ],
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    }
+  ],
+  "waited": true,
+  "current_exact_remaining": [],
+  "peak_RSS": 114561024,
+  "output_identity_PASS": false,
+  "NN": "UNKNOWN",
+  "conservative_NN_charge": 0,
+  "MAX_consumed": 1,
+  "labels_read": true,
+  "foreign_on_stop": []
+}

@@ -1,0 +1,111 @@
+{
+  "public_caches": [
+    {
+      "cycle": 41,
+      "split": "train",
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0041/cache",
+      "manifest_SHA": "dcd31e019ad94adfb7b222de27504740254058ae02c3e7380af511487af6d335"
+    },
+    {
+      "cycle": 42,
+      "split": "validation",
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0042/cache",
+      "manifest_SHA": "1b57d69fe38d050eff0d9f8484ca1455516e7c8b415547f76d9d5813188d0ea8"
+    }
+  ],
+  "source_provenance": {
+    "source": "bartolomeo3000/SigmaQuoridor",
+    "revision": "751186344fc52ad0c29bc65922e62c6fa915f006",
+    "handoff": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-import/public-z-immutable-handoff-v3.json",
+      "SHA": "412d9f1e4c55e5c211bb50ed437f15f89966a0124873d1c2adb13b922b008527"
+    },
+    "producer_stop": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-import/canonical-import-r2-finite-stop.json",
+      "SHA": "85cca9e2dd7d87ac2e3579a2ae46a468b36435aadd059ddd3f99ef313aff8949"
+    },
+    "primary": "decisive recorded outcomes conditional on available +/-1; zero reason unavailable",
+    "source_denominators": [
+      {
+        "cycle": 41,
+        "original_rows": 148967,
+        "actual_qualified_rows": 79769,
+        "qualified_input_groups": 5055,
+        "input_qualification": {
+          "candidate_rows": 79998,
+          "candidate_groups": 5168,
+          "excluded_groups": 113,
+          "excluded_rows": 229,
+          "rejected_row_reasons": {
+            "Sigma remaining-wall plane": 229
+          },
+          "qualification_path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0041/private-input-qualification.jsonl",
+          "qualification_SHA": "68d3231b29f9c4adcbb33a7cbdecbbf5698f21623c2d0eecc0e17d9af98af775",
+          "group_rule": "any invalid member excludes whole original-input group; no refill"
+        },
+        "qualified_z_positive": 38469,
+        "qualified_z_negative": 38386,
+        "qualified_z_zero": 2914,
+        "input_selection": {
+          "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0041/input-selection-frozen.json",
+          "SHA": "4eb90de10b535773e0de126a09488fdfa5d63e7843d5458ea587a4a316b9db83"
+        },
+        "cache_raw_denominator": "all geometry-qualified original input rows including recorded z0",
+        "skipped_invalid_groups_not_refilled": true
+      },
+      {
+        "cycle": 42,
+        "original_rows": 140967,
+        "actual_qualified_rows": 19965,
+        "qualified_input_groups": 20,
+        "input_qualification": {
+          "candidate_rows": 19965,
+          "candidate_groups": 20,
+          "excluded_groups": 0,
+          "excluded_rows": 0,
+          "rejected_row_reasons": {},
+          "qualification_path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0042/private-input-qualification.jsonl",
+          "qualification_SHA": "f2e84c4e6d7907e4e5eccf7d5181ea3311fbecb5792273c8141c619038723462",
+          "group_rule": "any invalid member excludes whole original-input group; no refill"
+        },
+        "qualified_z_positive": 9837,
+        "qualified_z_negative": 10009,
+        "qualified_z_zero": 119,
+        "input_selection": {
+          "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0042/input-selection-frozen.json",
+          "SHA": "121d3695b37b8aa41355213bfd5211aab0bdb5f763955bff6371af5feef72ecb"
+        },
+        "cache_raw_denominator": "all geometry-qualified original input rows including recorded z0",
+        "skipped_invalid_groups_not_refilled": true
+      }
+    ]
+  },
+  "masks": {
+    "counts": {
+      "train": {
+        "raw": 79769,
+        "decisive": 76855,
+        "zero": 2914,
+        "producer_ineligible": 2914,
+        "input_exposure": 9051,
+        "eligible": 67937
+      },
+      "validation": {
+        "raw": 19965,
+        "decisive": 19846,
+        "zero": 119,
+        "producer_ineligible": 119,
+        "input_exposure": 0,
+        "eligible": 19846
+      }
+    },
+    "predicate": "actual STM QF1 IDs plus rawdistance f32 bits; unavailable state/history not reconstructed",
+    "history_coverage": "UNAVAILABLE",
+    "independent_game_count": "UNAVAILABLE",
+    "raw_validation_input_reference_used": true
+  },
+  "input_frame": "canonical STM; original absolute side/game/history/ply unavailable",
+  "future_labels_opened": false,
+  "metadata_tensor_order_parity": "all authorized cache rows, exact activeIDs/f32 distance bits",
+  "dataset_sha": "619f501c61b07ff1595bc64688d76a13b0bf795ce04bc0a8cedc5074b9d2e55c"
+}

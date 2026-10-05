@@ -1,0 +1,311 @@
+{
+  "task": "rulea-public-z-once-release-292-v1",
+  "schema": "rulea-public-z-sealed-label-release-v1",
+  "UTC": "2026-10-05T19:40:35.084079+00:00",
+  "recipient_issue": "quoridor-4lc.291",
+  "candidate_freeze": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/final-saved-freeze-v1/candidate-freeze-v1.json",
+    "SHA": "49dbc1ec576bd7ccd97d4dc17d744a5153ff1de18b43716a6330542302c39706"
+  },
+  "independent_eval_mask_freeze": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-review/final-input-freeze/evaluation-freeze-v1.json",
+    "SHA": "8e842b0b43508ea40954e49a63e2f94fcc5bfd65c0b97c33354a0d724da09adb"
+  },
+  "candidate_weights_SHA": "213309171e60c23c708a55b7009e14f3b5f9a6cc4e8fdc5f173c9a195a0a4a47",
+  "candidate_settings_config_currentbyte": "PASS necessary model/settings/config/refs/masks",
+  "selection_writer_stop": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/public-z-final-saved-freeze-management/stop.json",
+    "SHA": "07efffb9d492d498c22d05fcae09b70360b2ea139a448df133c0b70e32db569f",
+    "exact_absence_checked": true
+  },
+  "rulea": {
+    "planned_game_count": 48,
+    "row_count": 1668,
+    "native_family_alias_rowid_scalar_join": "exact validated all1668; use unchanged registered-family-map-v1.json",
+    "targetfree_handoff": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/target-free-handoff-v1.json",
+      "SHA": "588c29ac0f8957716e90f00d723598d401eb8f745ae17ad09a561fb61a0c906b"
+    },
+    "family_map": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/registered-family-map-v1.json",
+      "SHA": "50a347d175af1b93b87bdbe56accc4c745c860885b7f8a9db3c755739ee95834"
+    },
+    "scalars": {
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/frame23-rulea-z-transfer/sealed-z-rootmean-scalars-v1.jsonl.gz",
+      "SHA": "3f13a1e71f7d0633702df9392aec820b8a55d3246a86e7d506b08d29188b3ed5",
+      "uncompressed_SHA": "b758454e08f796c893efa89875d8f1a111a4cf79bf9d8f55055e04eaa262ce02"
+    },
+    "game_provenance": {
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/frame23-rulea-z-transfer/sealed-game-provenance-v1.json",
+      "SHA": "89435e4d5de797d9e8b7c8148c92a507f944af9c9b5a3b70c5471703c78024a2"
+    },
+    "raw_manifest": {
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/frame23-rulea-z-transfer/native-r1/dataset/manifest.json",
+      "SHA": "5e14c062f3252de352fb6e89d1196fb8eabd343e570e09944cb6e089990705ca"
+    },
+    "actual_draw_games": 0,
+    "eligible_metric": "RuleA terminal-z familyequal; all48 planned, not samewall strength"
+  },
+  "public0043": {
+    "raw_rows": 19359,
+    "original_input_groups": 10,
+    "input_mask_remaining_rows": 3589,
+    "remaining_input_groups": 2,
+    "dataset_manifest": {
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/manifest.json",
+      "SHA": "d0e6132f863726fe40b5ddd0895050d114d3783c0fe371a69b5c55e0dd2ab339"
+    },
+    "cache_manifest": {
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/cache/cache.json",
+      "SHA": "8ab0d6c83035d015d76db81c39d0cbbe528af50c82a55ff4ea6b7dc1a64a67ef"
+    },
+    "input_only_mask": {
+      "planned_groups": 10,
+      "raw_rows": 19359,
+      "input_eligible_rows": 3589,
+      "input_eligible_groups": 2,
+      "zeroeligible_groups": 8,
+      "per_group_remaining": {
+        "sigma-canonical-input:211cd88fdcea01cb961ce477ae763cd067978f189510d2201dfc4aded008c283": 1812,
+        "sigma-canonical-input:333bc2cdd09d2cb9c0feba37e23ca09b0b6699e78224f5e492b7f748ec729052": 1777
+      },
+      "mask_path": "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-review/final-input-freeze/public0043-input-mask-v1.jsonl.gz",
+      "mask_SHA": "19978f0476d9620e918a4c1ecd9dd6d033b94807c296a6ba19237d4cb790a3f0",
+      "target_filter": "public recorded +/-1 only; RuleA verified terminal +/-1 and provenance-proved rule draw0; fault/cap/unknown excluded without refill"
+    },
+    "target_rule": "recorded +/-1 only; termination-reason-unavailable0 excluded, no RuleA draw equivalence; independent game CI undefined",
+    "raw_dataset_members": [
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000000.arrow",
+        "SHA": "b1dd996275e274f032faf7bb3368f564dff18efc0cd949c642564f0438390d7c",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000001.arrow",
+        "SHA": "06174541a0e406e511dc7afb7d638ccf3f4a00d9baf24f9aaad146520c9e09a1",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000002.arrow",
+        "SHA": "17ef3a7686b4fade8e09d4eed39a0bc6c7f9294013a029c9e7d0c38ac6887075",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000003.arrow",
+        "SHA": "878fdad2cd0ee9e7731c2d4e45ab638d155eb99e13e75a84752a562aa4c3f0ce",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000004.arrow",
+        "SHA": "deadebee1afdf2d0fe24c7726370774580873ede33ad1e06748225d06dbdecee",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000005.arrow",
+        "SHA": "d864a1e3e4cdf63d78b8264ab446cdb654f30efebc45fda83198acdd7977fb1b",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000006.arrow",
+        "SHA": "5fa32d89e9fbad17245dc9ffa63e9646ec5be487616093d477177e82fe730770",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000007.arrow",
+        "SHA": "fd7ad545b55b32ab4fe1e2bd6ce4a9f62b2126886eab8c9af18cbe3641845ea6",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000008.arrow",
+        "SHA": "9c6f1bb4a61bda035bcda5462a85200429aadc7ac94ec474433db55c20b1988d",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000009.arrow",
+        "SHA": "d7a22f5b0b7c1c89c48e8f4f5183823bf0603215ca49d8c53260ec69693d3693",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000010.arrow",
+        "SHA": "298ac3734521e2e085e051b4b8fd00be4e1db7f6ec8340db9c1d4234f46f1a96",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000011.arrow",
+        "SHA": "2c3aae1eb97f1f54f484bbc9a83a1479d59361448e50b7fc1c31fd535f60586b",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000012.arrow",
+        "SHA": "2852e3c7e6fc3b4cbdb2b3bd89d26fabaede00e8b31f899bc0f27ca2f9bd7c69",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000013.arrow",
+        "SHA": "258057d6ea282ba7e976755b89de556ab1d251e69c7d9f6d49f395019e1b36c2",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000014.arrow",
+        "SHA": "d07971725982ebcec318add24e2a84882535b9342404ac30aa4ec9c9f7eebe64",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000015.arrow",
+        "SHA": "958c0830f7af0ef98b20ac62b5086c3c6c125ea23812a6882f306478b8c3cc3b",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000016.arrow",
+        "SHA": "f449f9e01445b6b0d278f18369dff5eaf0d26183fa8e579eac657147a35c5eee",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000017.arrow",
+        "SHA": "1461f5e2d63f8f3e7f3872e1f740a4c74328347d05128f3dfa8dd0c8467c5374",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000018.arrow",
+        "SHA": "79cce9e02357a63c17f034476638976d7024f81df36329df51b5ea8f9a55f9b2",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000019.arrow",
+        "SHA": "499f63ba0d96062f3df4c659e5ccccbd5644b37b218091b6281812244a7bffad",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000020.arrow",
+        "SHA": "41d8fefb02cb3e794a86ac323b501c9d033a6cc61f2d9900e1399b4ea127c7ee",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000021.arrow",
+        "SHA": "1f9d357258d9859bc21106df4676f634f5d6f6a126ae634f0d94b58783243768",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000022.arrow",
+        "SHA": "815dc8d6e5a750103bd89243ca7aa6871868800d65a797ecd419922501d4a12a",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000023.arrow",
+        "SHA": "bfa55ac8fcd3d3f3e41d1f126f1fe8a304233705fe9ea01f32b0b916659a1633",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000024.arrow",
+        "SHA": "7f4ad5ebc14b935a614313c38097f069aaae37f6ef126c9a11ddfad629a54166",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000025.arrow",
+        "SHA": "d819f01de8f6d66a554ec87076043e4c7f7a36928eef6040006c5de8b09e422b",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000026.arrow",
+        "SHA": "0545568f950b6ea7278fa4840bf30d726ab3e927fc17d523e221ada14172cad1",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000027.arrow",
+        "SHA": "4be8f5e783e9802691056725b37d36fff163c79326c6d16a3884d56de837b802",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000028.arrow",
+        "SHA": "345a99dd28fd1a6676ace64fcf7e50ec5e7f6326c76ee16579d8dfbdf136a87e",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000029.arrow",
+        "SHA": "cebe401e8d39a3cc8f2c49578c512e836654cd6f7e901d901669b7f088b88743",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000030.arrow",
+        "SHA": "0cd41c459e64c74f2b8cf0686c702a394264f546eff3fbfa2de62e730b0514df",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000031.arrow",
+        "SHA": "99a323b4bbdc56970bafb92f4c1b6ee374427a18f6d6874b857eb9963521b186",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000032.arrow",
+        "SHA": "402505bc3ff97214a9067e958f2cb884d1b4434fe3a255d264b5a2e27ff120fa",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000033.arrow",
+        "SHA": "0110dfb42b8d0e476bd1d2f5e28b7add2d0e39b310338ef4d68ca733ad9cb330",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000034.arrow",
+        "SHA": "5b2ef4fdeb3bbb86d6d29744d17348382a8645bed0dc1fc47c6047b22b9eace9",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000035.arrow",
+        "SHA": "519b2847226c9bb90ac8d65bbafa0e421950955d85f484aa2d01c23ee51ed69b",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000036.arrow",
+        "SHA": "3fb52954f47cc9bf8e37449161b33aa753338543e6075a1081b18bfda693fbf4",
+        "rows": 512
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/test-000037.arrow",
+        "SHA": "a2d5ba97f97fee8c335db8cdbeb6774696b30875c2fc3fbc47ab8f5b33dc1976",
+        "rows": 415
+      }
+    ],
+    "cache_files": [
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/cache/distance.f32",
+        "SHA": "0412276d3f153a2cd74fb287c8b0e10e5b8a9b7d9484c69a1ef3f328510cb655",
+        "bytes": 154872
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/cache/labels.f32",
+        "SHA": "1c127c5f6e53704ac19680bc7242550fe70447d433d75eb947dec1d90990c34d",
+        "bytes": 154872
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/cache/rows.jsonl",
+        "SHA": "6d269d10529c49ab54a1e9d9afdf220f34b80960c7a6885c2afa4b79f51a53b6",
+        "bytes": 20489423
+      },
+      {
+        "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/cache/x.f32",
+        "SHA": "920ee5cd7d9e48d74614e800490543625b2cc3659012725d5777aeba3ddbd097",
+        "bytes": 48320064
+      }
+    ],
+    "native_cache_interface": {
+      "x": "624f32 rowmajor STM then opponent",
+      "distance": "2f32 raw STM then opponent",
+      "labels": "2f32 columns[unavailable rootmean NaN,z], use index1 only",
+      "rows": "rows.jsonl native id/group/split/side/P1P2 ids/native distances/provenance/primary_eligible, exact mask row-ID join",
+      "allow_test": "true only frozen291oneevaluation; no learner refit/new groups"
+    },
+    "zero_targets": "numeric0 remains termination-reason-unavailable; shared frozen decisive predicate excludes, no producer actual count recomputation required"
+  },
+  "release_once_for_frozen_evaluation_only": true,
+  "new_fit_forward_or_generation_by_producer": 0,
+  "no_candidate_or_mask_reselection": true,
+  "producer_does_not_claim_independent_result": true,
+  "public_rulea_metrics_separate": true,
+  "coordinator_necessary_Gitbyte_receipt": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/frame22/292-git-byte-point.json",
+    "SHA": "2b4432f5177cf2ba7abc17f0da12315ac01f9471f2e5f1e6ecf830ef6e53deb4",
+    "commit": "1a9d961958e466efe0ea5c4d6d753b434a8fea2f"
+  },
+  "original_containers_currentmember_SHA_match": true
+}

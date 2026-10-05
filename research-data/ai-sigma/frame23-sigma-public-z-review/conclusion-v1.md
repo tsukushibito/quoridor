@@ -1,0 +1,15 @@
+# 291 公開Sigma zとRuleA48：有限不完全終了
+
+凍結候補public-z-1m/step7813に対する予測と有限native照合を完了した。5257行を独立NumPy算術で評価し、RuleAからラベル非使用で固定した24witnessをnative scalar/SIMD/deltaで照合した。全5329NN、最大差1.1920928955e-7、登録許容差以内。独立の終局教師truthや棋力を認定する検査ではない。
+
+最終ターゲット集計jobはstatusのschema誤読で失敗した。保存provenanceはstatus=goal、terminal_reason=GOALであるがcheckerがstatus=GOALをassertした。科学MAX2を消費し、再実行しない。公開・RuleAのMSE、符号、calibration、家系paired区間は未完了であり、NNUE利益の独立支持はしない。失敗をモデル性能の負例へ変換しない。
+
+公開0043は原10inputgroups/19359行から、全実train67937行とALLrawV19965行（z0を含む）へのOR露出除外後、3589行/2distinct input、8zeroeligibleである。この2入力は独立gameではなくgame CIは未定義。公開z0の終局理由/game/history/絶対P2は欠測。元±1を条件付きで学ぶだけで、native入力資格やstock不適格群除外から元game全軌跡の合法終局を保証しない。z除外後の最終評価分母は本jobの出力未保存により未確定である。
+
+新RuleAは別の全48予定family/1668行、入力OR除外0、0zeroeligible。真正RuleAのGOAL/終局zはproducer共有RuleAと停止receiptに依存し、本集計がその全truthを独立再認証したわけではない。全入力prefixが存在することを普遍IID/未露出history保証へ変換しない。
+
+候補/config/全Tseen union/ALLrawV/masks/evalruleは開封前にfreezeした。公開0043とRuleAは別分母、開封後の再選定・補充・追加fitなし。3frozen sourceのformatter差分は元byte archiveとAST一致で調停し、原freezeと現停止pointを別々に保持した。
+
+次の最大1方向は、同保存予測に対するstatusとterminal_reasonの明示schema対応による有界NN0集計である。現scopeのMAX/capを延長せず別の明示配分で判断する。追加forward/学習/対局を先行しない。
+
+原旧287の失敗/MAX2/NOT_RUN、旧293の別rootmean集計、275/277/279等の費・期限は変更しない。最高棋力の親goalは未達。

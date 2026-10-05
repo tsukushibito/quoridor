@@ -1,0 +1,60 @@
+{
+  "UTC": 1791222962.1404245,
+  "argv": [
+    "/usr/bin/taskset",
+    "-c",
+    "1",
+    "/usr/bin/python3",
+    "-B",
+    "-m",
+    "unittest",
+    "quoridor_training.test_selected_target"
+  ],
+  "identity": {
+    "pid": 1671374,
+    "start_ticks": "47601520",
+    "ppid": 1671362,
+    "pgrp": 1671374,
+    "cpu_ticks": 0,
+    "state": "R",
+    "rss": 4096,
+    "cpus": [
+      1
+    ],
+    "argv": []
+  },
+  "binding": {
+    "receipt_SHA": "2d7e3f81e27b47007329b0948415b7802c2068009ad251f43b3dcce73da83460",
+    "scheduler": {
+      "pid": 1430721,
+      "start_ticks": "46503900",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "monitor": {
+      "pid": 1430738,
+      "start_ticks": "46503929",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "owned": {
+      "run_id": "55d26b6a-6b1f-4360-80b6-b89e1c0c06a7",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+      "turn_id": "01a10d32-b6cc-7cb3-b04c-582fb7d9bcb8",
+      "started_at": "2026-10-05T17:53:09.803726+00:00",
+      "max_turn_seconds": null
+    },
+    "next_at": 1791223986.0892673
+  },
+  "current_foreign": [],
+  "exit": 0,
+  "wall_s": 0.048713449970819056,
+  "NN": 0,
+  "Torch_import": false,
+  "waited": true,
+  "currentexact_remaining": [],
+  "checks": 8,
+  "source": {
+    ".worktree/frame21-features/python/quoridor_training/test_selected_target.py": "440c2c435908f02e42bbf95b885a43e6a7cf0cfdf20f1afdedfed100128bdc0e",
+    ".worktree/frame21-features/python/quoridor_training/common.py": "8bca062a8d1b7598e363313562407c171cc687278a77381e4218180b9c2ddcbd",
+    ".worktree/frame21-features/python/quoridor_training/train.py": "cc63478979f87c20598ae6770bb68f9d7685f207b904962ddf3786cbc16516c9"
+  }
+}

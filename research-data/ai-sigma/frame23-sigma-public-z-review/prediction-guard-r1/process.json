@@ -1,0 +1,45 @@
+{
+  "task": "public-rulea-frozen-prediction-291-v1",
+  "started": "2026-10-05T19:47:13.209692+00:00",
+  "ended": "2026-10-05T19:47:13.842674+00:00",
+  "wall_seconds": 0.6329960080329329,
+  "exit_code": 0,
+  "cause": null,
+  "recorded_identities": [
+    {
+      "pid": 1827574,
+      "ppid": 1827557,
+      "pgid": 1827574,
+      "tick": "48269081",
+      "cpu": 38,
+      "rss": 147615744,
+      "argv": [
+        "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+        "-B",
+        "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/predict_public_rulea_frozen.py",
+        "--registration",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-review/frozen-prediction-registration-v1.json"
+      ],
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    {
+      "pid": 1827587,
+      "ppid": 1827574,
+      "pgid": 1827574,
+      "tick": "48269128",
+      "cpu": 0,
+      "rss": 0,
+      "argv": [],
+      "boot": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    }
+  ],
+  "waited": true,
+  "current_exact_remaining": [],
+  "peak_RSS": 147615744,
+  "output_identity_PASS": true,
+  "NN": 5329,
+  "conservative_NN_charge": 5329,
+  "MAX_consumed": 1,
+  "labels_read": false,
+  "foreign_on_stop": []
+}

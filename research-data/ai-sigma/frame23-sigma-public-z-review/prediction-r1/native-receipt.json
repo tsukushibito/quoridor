@@ -1,0 +1,164 @@
+{
+  "argv": [
+    "/usr/bin/taskset",
+    "-c",
+    "3",
+    "/workspaces/quoridor/.artifacts/rust-migration/target/release/route-feature-diagnose-public-z-290-v1",
+    "model",
+    "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-native-framing-v2/step7813-model/manifest.json"
+  ],
+  "pid": 1827587,
+  "tick": "48269128",
+  "exit_code": 0,
+  "waited": true,
+  "current_exact_absent": true,
+  "samples": 72,
+  "calls_per_sample": "scalar/SIMD/delta",
+  "max_abs_numpy_native": 1.1920928955078125e-07,
+  "output": [
+    {
+      "delta_value": -0.6680748462677002,
+      "id": "frame23-292-family-000000:game-0-ply-10",
+      "simd_value": -0.6680748462677002,
+      "value": -0.6680748462677002
+    },
+    {
+      "delta_value": 0.7910100221633911,
+      "id": "frame23-292-family-000000:game-0-ply-11",
+      "simd_value": 0.7910100817680359,
+      "value": 0.7910100817680359
+    },
+    {
+      "delta_value": 0.5378324389457703,
+      "id": "frame23-292-family-000001:game-1-ply-10",
+      "simd_value": 0.5378324389457703,
+      "value": 0.5378324389457703
+    },
+    {
+      "delta_value": -0.757173478603363,
+      "id": "frame23-292-family-000001:game-1-ply-11",
+      "simd_value": -0.7571734189987183,
+      "value": -0.7571734189987183
+    },
+    {
+      "delta_value": -0.36645224690437317,
+      "id": "frame23-292-family-000002:game-2-ply-12",
+      "simd_value": -0.36645233631134033,
+      "value": -0.36645233631134033
+    },
+    {
+      "delta_value": 0.9940080642700195,
+      "id": "frame23-292-family-000002:game-2-ply-13",
+      "simd_value": 0.9940080642700195,
+      "value": 0.9940080642700195
+    },
+    {
+      "delta_value": 0.9262641668319702,
+      "id": "frame23-292-family-000003:game-3-ply-13",
+      "simd_value": 0.9262641668319702,
+      "value": 0.9262641668319702
+    },
+    {
+      "delta_value": -0.9778636693954468,
+      "id": "frame23-292-family-000003:game-3-ply-14",
+      "simd_value": -0.9778636693954468,
+      "value": -0.9778636693954468
+    },
+    {
+      "delta_value": 0.14878658950328827,
+      "id": "frame23-292-family-000004:game-4-ply-16",
+      "simd_value": 0.1487867385149002,
+      "value": 0.1487867385149002
+    },
+    {
+      "delta_value": -0.23405811190605164,
+      "id": "frame23-292-family-000004:game-4-ply-17",
+      "simd_value": -0.23405802249908447,
+      "value": -0.23405802249908447
+    },
+    {
+      "delta_value": -0.9693737626075745,
+      "id": "frame23-292-family-000005:game-5-ply-17",
+      "simd_value": -0.9693737626075745,
+      "value": -0.9693737626075745
+    },
+    {
+      "delta_value": 0.6944094300270081,
+      "id": "frame23-292-family-000005:game-5-ply-18",
+      "simd_value": 0.6944094896316528,
+      "value": 0.6944094896316528
+    },
+    {
+      "delta_value": 0.9998803734779358,
+      "id": "frame23-292-family-000006:game-6-ply-20",
+      "simd_value": 0.9998803734779358,
+      "value": 0.9998803734779358
+    },
+    {
+      "delta_value": -0.9900742769241333,
+      "id": "frame23-292-family-000006:game-6-ply-21",
+      "simd_value": -0.9900742769241333,
+      "value": -0.9900742769241333
+    },
+    {
+      "delta_value": -0.8728992938995361,
+      "id": "frame23-292-family-000007:game-7-ply-21",
+      "simd_value": -0.8728993535041809,
+      "value": -0.8728993535041809
+    },
+    {
+      "delta_value": -0.9870861172676086,
+      "id": "frame23-292-family-000007:game-7-ply-22",
+      "simd_value": -0.9870861172676086,
+      "value": -0.9870861172676086
+    },
+    {
+      "delta_value": -0.5942407250404358,
+      "id": "frame23-292-family-000008:game-8-ply-24",
+      "simd_value": -0.5942413210868835,
+      "value": -0.5942413210868835
+    },
+    {
+      "delta_value": 0.6983145475387573,
+      "id": "frame23-292-family-000008:game-8-ply-25",
+      "simd_value": 0.6983146667480469,
+      "value": 0.6983146667480469
+    },
+    {
+      "delta_value": -0.22718706727027893,
+      "id": "frame23-292-family-000009:game-9-ply-25",
+      "simd_value": -0.22718751430511475,
+      "value": -0.22718751430511475
+    },
+    {
+      "delta_value": -0.834773600101471,
+      "id": "frame23-292-family-000009:game-9-ply-26",
+      "simd_value": -0.8347734808921814,
+      "value": -0.8347734808921814
+    },
+    {
+      "delta_value": 0.5914329290390015,
+      "id": "frame23-292-family-000010:game-10-ply-28",
+      "simd_value": 0.5914331674575806,
+      "value": 0.5914331674575806
+    },
+    {
+      "delta_value": -0.8943309187889099,
+      "id": "frame23-292-family-000010:game-10-ply-29",
+      "simd_value": -0.8943309187889099,
+      "value": -0.8943309187889099
+    },
+    {
+      "delta_value": -0.9917579293251038,
+      "id": "frame23-292-family-000011:game-11-ply-29",
+      "simd_value": -0.9917579293251038,
+      "value": -0.9917579293251038
+    },
+    {
+      "delta_value": 0.7448256015777588,
+      "id": "frame23-292-family-000011:game-11-ply-30",
+      "simd_value": 0.7448254823684692,
+      "value": 0.7448254823684692
+    }
+  ]
+}

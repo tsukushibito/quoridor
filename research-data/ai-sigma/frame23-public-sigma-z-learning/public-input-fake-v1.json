@@ -1,0 +1,54 @@
+{
+  "binding": {
+    "receipt_SHA": "2d7e3f81e27b47007329b0948415b7802c2068009ad251f43b3dcce73da83460",
+    "scheduler": {
+      "pid": 1430721,
+      "start_ticks": "46503900",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "monitor": {
+      "pid": 1430738,
+      "start_ticks": "46503929",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "owned": null,
+    "next_at": 1791223985.4809725
+  },
+  "foreign": [],
+  "argv": [
+    "/usr/bin/taskset",
+    "-c",
+    "1",
+    "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "-B",
+    "-m",
+    "unittest",
+    "test_public_inputs"
+  ],
+  "identity": {
+    "pid": 1693907,
+    "start_ticks": "47698190",
+    "ppid": 1693905,
+    "pgrp": 1693907,
+    "cpu_ticks": 0,
+    "state": "R",
+    "rss": 8904704,
+    "cpus": [
+      1
+    ],
+    "argv": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "-m",
+      "unittest",
+      "test_public_inputs"
+    ]
+  },
+  "exit": 0,
+  "wall_s": 0.10533738700905815,
+  "NN": 0,
+  "Torch_import": false,
+  "waited": true,
+  "currentexact_remaining": [],
+  "checks": 4
+}

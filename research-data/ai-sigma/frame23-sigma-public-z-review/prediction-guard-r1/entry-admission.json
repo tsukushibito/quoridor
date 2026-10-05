@@ -1,0 +1,20 @@
+{
+  "task": "public-rulea-frozen-prediction-291-v1",
+  "at": "2026-10-05T19:47:12.863140+00:00",
+  "argv": [
+    "/usr/bin/taskset",
+    "-c",
+    "3",
+    "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "-B",
+    "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/predict_public_rulea_frozen.py",
+    "--registration",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-review/frozen-prediction-registration-v1.json"
+  ],
+  "entry_SHA": "5c947762f9d5dc7f25052ec7560fb5f67ee9cceb619463b06bacff29571840fe",
+  "guard_SHA": "e8187b53350d3f97803af8fe782f710e0b9b41d063ee46c1c3c361a51d7ab000",
+  "registration_SHA": "fe7e49dce58031639f2d6d168be495ac93a598f1b066f6d8ed4dbaaea79ace60",
+  "expected_output": "prediction-r1/result-v1.json",
+  "expected_schema": "frozen-public-rulea-predictions-291-v1",
+  "foreign_compute": []
+}

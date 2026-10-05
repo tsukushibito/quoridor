@@ -1,0 +1,14 @@
+{
+  "UTC": "2026-10-05T18:52:46.863505+00:00",
+  "actual_modelNN": 0,
+  "source": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/run_public_fit.py",
+    "SHA": "29ee5a189246c7e80f7117217f41e8015f3bb75ce9a4912f12f0002c87cf720b"
+  },
+  "change": "prospective input-return numerical comparison uses same fixed abs1e-6+rtol1e-6 as scalar/SIMD/full-delta; initialD and tensor SHA bitchecks retained",
+  "reason": "delta A-B-A float accumulation order does not promise bit equality; reference is parent value agreement within registered tolerance",
+  "results_seen": false,
+  "original_scientific_source_or_weights_change": false,
+  "parity_NN_perfit": 306,
+  "format_check_lint_AST": "PASS"
+}

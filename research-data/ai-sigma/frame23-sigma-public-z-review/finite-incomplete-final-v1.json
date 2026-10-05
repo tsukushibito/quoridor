@@ -1,0 +1,63 @@
+{
+  "task": "public-rulea-independent-final-291-v1",
+  "UTC": "2026-10-05T19:56:54.409612+00:00",
+  "status": "FINITE_INCOMPLETE_SCORE_SCHEMA_ASSERT",
+  "MAX_consumed": 2,
+  "MAX_cap": 2,
+  "knownNN": 5329,
+  "score_original_receipt_NN": "UNKNOWN",
+  "score_conservative_NN_charge": 0,
+  "score_source_NN0_supplement": {
+    "entry_SHA": "5d2c99d0842a501a7c180ac7942bfab97abb4bc9c4dadcbc1c8e6fd9ab30d55f",
+    "no_model_import_forward_native_call": true,
+    "original_process_unchanged": true
+  },
+  "science_seconds": 1.7217086990713142,
+  "science_cap_seconds": 600,
+  "source_conservative_seconds": 260,
+  "source_cap": 285,
+  "management_conservative_seconds": 65,
+  "management_cap": 90,
+  "test_known_seconds": 1,
+  "test_cap": 20,
+  "all_science_waited": true,
+  "all_recorded_exact_remaining": [],
+  "prediction_rows": 5257,
+  "native_witnesses": 24,
+  "native_evaluations": 72,
+  "native_max_abs": 1.1920928955078125e-07,
+  "public_input_mask": {
+    "planned_groups": 10,
+    "raw_rows": 19359,
+    "eligible_input_rows": 3589,
+    "distinct_inputs": 2,
+    "zeroeligible_groups": 8,
+    "metric_after_decisive_target_filter": "NOT_COMPLETED"
+  },
+  "RuleA_input_mask": {
+    "planned_families": 48,
+    "rows": 1668,
+    "eligible_input_rows": 1668,
+    "zeroeligible_families": 0,
+    "final_MSE_sign_calibration_paired_CI": "NOT_RUN"
+  },
+  "failure": {
+    "line": 220,
+    "assert": "game[status] == GOAL",
+    "actual_schema_status_literal": "goal",
+    "actual_terminal_reason_literal": "GOAL",
+    "classification": "REVIEWER_SCHEMA_MISMATCH_NOT_MODEL_FAILURE",
+    "no_retry_no_new_forward": true
+  },
+  "source_format_reconciliation": "Original3freeze source archived exact; current AST identical formatter only; both stop/current hashes bound beforeprediction",
+  "futurelabels_opened_after_freeze": true,
+  "no_reselection_no_refill": true,
+  "old287_closed_MAX2_failure_NOT_RUN_unchanged": true,
+  "public_z0_terminationreason_game_history_absoluteP2_unknown": true,
+  "next_max1": "After an explicit bounded saved-arithmetic allocation, normalize documented status=goal vs terminal_reason=GOAL and join existing5329 predictions without forward; currentscope stops",
+  "original_budget_v7_sha": "576c0f2b17faa6a49877c29ce073a651f2309450a934cb3ef655b171cc216970",
+  "scope_current_allocated": 1167360,
+  "future_uniqueGit_temp_metadata": 524288,
+  "scope_cap": 2097152,
+  "unmeasured_read_LLM_control": "UNKNOWN"
+}

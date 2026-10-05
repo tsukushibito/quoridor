@@ -1,0 +1,239 @@
+{
+  "task": "public-rulea-evaluation-freeze-291-v1",
+  "schema": "independent-public-rulea-evaluation-freeze-291-v1",
+  "UTC": "2026-10-05T19:37:38.032591+00:00",
+  "candidate_freeze": "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/final-saved-freeze-v1/candidate-freeze-v1.json",
+  "candidate_freeze_SHA": "49dbc1ec576bd7ccd97d4dc17d744a5153ff1de18b43716a6330542302c39706",
+  "candidate": {
+    "condition": "public-z-1m",
+    "step": 7813,
+    "training_seen": 1000064,
+    "selection_mse": 0.9756914654312713,
+    "checkpoint": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-r1/step7813.pt",
+      "SHA": "f93447588e6a6924edf4f605c90bf92db8f70ebf53b86b3ef58ff0adb2a9ce24",
+      "B": 52513
+    },
+    "native_manifest": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-native-framing-v2/step7813-model/manifest.json",
+      "SHA": "02d6f34afd165bde8cff351721b9a7af38d73763f8c8d60417cb5625a5a52710",
+      "B": 847
+    },
+    "native_weights": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-native-framing-v2/step7813-model/weights.f32",
+      "SHA": "213309171e60c23c708a55b7009e14f3b5f9a6cc4e8fdc5f173c9a195a0a4a47",
+      "B": 49284
+    },
+    "target_metadata": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-native-framing-v2/step7813-model/training-target.json",
+      "SHA": "153ad5500efba1969a82e33fcef8fa15d138dc95f7c8c524d1d03ed41ddd372c",
+      "B": 71
+    },
+    "weights_tensor_SHA": "213309171e60c23c708a55b7009e14f3b5f9a6cc4e8fdc5f173c9a195a0a4a47",
+    "config": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/public-z-1m-config-v1.json",
+      "SHA": "ae34122a9c76afb2957ce355cee9d8a44f78c1f573546a457f50c5f4038e910c",
+      "B": 667
+    }
+  },
+  "model_settings": {
+    "feature": "QF1-route4-f32-STM-scaled-residual-v3",
+    "schema": "quoridor-nnue-distance-residual-v3",
+    "value_perspective": "canonical STM; absolute source side unavailable",
+    "route4": "off",
+    "scale": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame22-teacher-transfer-B-r1/scale.json",
+      "SHA": "175f07713409994d0d4c99768267695b0a91ec100baabf202fb4518b56cbdfed",
+      "B": 142
+    },
+    "native_binary": {
+      "path": "/workspaces/quoridor/.artifacts/rust-migration/target/release/route-feature-diagnose-public-z-290-v1",
+      "SHA": "9f72e7404a36b2154cd36fc2530200a819ea77146d7fc9252e6b4d6f77ebd221",
+      "B": 894720
+    },
+    "native_source": {
+      "path": "/workspaces/quoridor/.worktree/frame21-features/crates/quoridor-runner/src/bin/route-feature-diagnose.rs",
+      "SHA": "0d35de495c2389add1e95b3e579b4bf5cde0785eb6d341c32daf536e75710bae",
+      "B": 10553
+    },
+    "unique_NN_candidate": 1,
+    "D_initial_prediction_reuse": true
+  },
+  "baselines": {
+    "initial_equals_D": true,
+    "initial_weights_SHA": "ec4167ccb5042cfe937b23850a1b52d1cd9cf6c3fb1d348627bfe6cc7d023cc5",
+    "D": {
+      "a_f32": 0.0,
+      "b_f32": 8.0,
+      "formula": "tanh(f32(8*f32(raw_d_opponent-raw_d_self))); native tanh f64 result cast f32",
+      "selection_mse": 1.0140109577883625
+    },
+    "constant": {
+      "value": 0.005460941754861121,
+      "fitted_on_train_only": true,
+      "selection_mse": 1.0001244789423767
+    }
+  },
+  "Tactual_rows": 67937,
+  "Tactual_union_both_stages_equal": true,
+  "ALLrawV_rows": 19965,
+  "ALLrawV_includes_z0": true,
+  "reference_bindings": {
+    "Tseen": {
+      "canonical": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-r1/Tseen-references.jsonl.gz",
+        "SHA": "9be6290ee2edf9bf7d7cf365b459b3727538e0c400f9db759928f3f2755e7179",
+        "B": 3257213,
+        "uncompressed_SHA": "e3714f08ed2e6b683635afa78fe0cf85773f673f8b480f535f9ef06a7776460b",
+        "rows": 67937,
+        "unique_ids": 67937,
+        "unique_inputs": 4996,
+        "source_input_groups": 4996
+      },
+      "same_stream_second_condition": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-2m-r1/Tseen-references.jsonl.gz",
+        "SHA": "4931a3b9b298e2265ed363b1b662c88b54d5f8b0927cb305a3dd3d1b74d1b639",
+        "B": 3257213,
+        "uncompressed_SHA": "e3714f08ed2e6b683635afa78fe0cf85773f673f8b480f535f9ef06a7776460b",
+        "rows": 67937,
+        "unique_ids": 67937,
+        "unique_inputs": 4996,
+        "source_input_groups": 4996
+      },
+      "union_is_canonical": true
+    },
+    "Vraw": {
+      "canonical": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-r1/Vraw-references.jsonl.gz",
+        "SHA": "f3cc870b3344500a13d40f3a93810ee4b6846b867c2bd4ad69a740e2beb3e991",
+        "B": 113144,
+        "uncompressed_SHA": "d777374e037b7c826eb1ed15fc3b56ef1f239d718e0df3ed54584165822ad162",
+        "rows": 19965,
+        "unique_ids": 19965,
+        "unique_inputs": 20,
+        "source_input_groups": 20
+      },
+      "same_stream_second_condition": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-2m-r1/Vraw-references.jsonl.gz",
+        "SHA": "c95d3fd075981a0b97701f885e4389bcbaa2702de60c47acb3b77222eb39caa7",
+        "B": 113144,
+        "uncompressed_SHA": "d777374e037b7c826eb1ed15fc3b56ef1f239d718e0df3ed54584165822ad162",
+        "rows": 19965,
+        "unique_ids": 19965,
+        "unique_inputs": 20,
+        "source_input_groups": 20
+      },
+      "union_is_canonical": true
+    }
+  },
+  "signature_versions_independently_reconciled_via_rowID_actualSTMids_f32": true,
+  "OR_predicate": "state literal OR compatible history literal OR actual STM IDs/rawf32 input; public history absent so null never matches and history independence remains UNVERIFIED",
+  "masks": {
+    "public0043": {
+      "planned_groups": 10,
+      "raw_rows": 19359,
+      "input_eligible_rows": 3589,
+      "input_eligible_groups": 2,
+      "zeroeligible_groups": 8,
+      "per_group_remaining": {
+        "sigma-canonical-input:211cd88fdcea01cb961ce477ae763cd067978f189510d2201dfc4aded008c283": 1812,
+        "sigma-canonical-input:333bc2cdd09d2cb9c0feba37e23ca09b0b6699e78224f5e492b7f748ec729052": 1777
+      },
+      "mask_path": "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-review/final-input-freeze/public0043-input-mask-v1.jsonl.gz",
+      "mask_SHA": "19978f0476d9620e918a4c1ecd9dd6d033b94807c296a6ba19237d4cb790a3f0",
+      "target_filter": "public recorded +/-1 only; RuleA verified terminal +/-1 and provenance-proved rule draw0; fault/cap/unknown excluded without refill"
+    },
+    "RuleA48": {
+      "planned_groups": 48,
+      "raw_rows": 1668,
+      "input_eligible_rows": 1668,
+      "input_eligible_groups": 48,
+      "zeroeligible_groups": 0,
+      "per_group_remaining": {
+        "frame23-292-family-000034": 13,
+        "frame23-292-family-000010": 13,
+        "frame23-292-family-000045": 22,
+        "frame23-292-family-000044": 19,
+        "frame23-292-family-000042": 17,
+        "frame23-292-family-000018": 17,
+        "frame23-292-family-000023": 16,
+        "frame23-292-family-000006": 24,
+        "frame23-292-family-000007": 19,
+        "frame23-292-family-000020": 19,
+        "frame23-292-family-000047": 20,
+        "frame23-292-family-000046": 21,
+        "frame23-292-family-000011": 23,
+        "frame23-292-family-000008": 23,
+        "frame23-292-family-000031": 22,
+        "frame23-292-family-000004": 31,
+        "frame23-292-family-000015": 22,
+        "frame23-292-family-000033": 25,
+        "frame23-292-family-000019": 26,
+        "frame23-292-family-000022": 25,
+        "frame23-292-family-000035": 26,
+        "frame23-292-family-000032": 28,
+        "frame23-292-family-000028": 28,
+        "frame23-292-family-000043": 31,
+        "frame23-292-family-000041": 29,
+        "frame23-292-family-000021": 32,
+        "frame23-292-family-000038": 35,
+        "frame23-292-family-000030": 32,
+        "frame23-292-family-000013": 34,
+        "frame23-292-family-000026": 36,
+        "frame23-292-family-000009": 39,
+        "frame23-292-family-000029": 37,
+        "frame23-292-family-000027": 44,
+        "frame23-292-family-000025": 41,
+        "frame23-292-family-000005": 50,
+        "frame23-292-family-000016": 46,
+        "frame23-292-family-000012": 51,
+        "frame23-292-family-000003": 55,
+        "frame23-292-family-000039": 49,
+        "frame23-292-family-000001": 57,
+        "frame23-292-family-000000": 61,
+        "frame23-292-family-000017": 49,
+        "frame23-292-family-000024": 51,
+        "frame23-292-family-000014": 52,
+        "frame23-292-family-000002": 61,
+        "frame23-292-family-000040": 64,
+        "frame23-292-family-000036": 63,
+        "frame23-292-family-000037": 70
+      },
+      "mask_path": "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-review/final-input-freeze/RuleA48-input-mask-v1.jsonl.gz",
+      "mask_SHA": "6bae507ec7b3e037374be8f53ab833fd5d768f282de634eba7c0f7ee32e8fcd0",
+      "target_filter": "public recorded +/-1 only; RuleA verified terminal +/-1 and provenance-proved rule draw0; fault/cap/unknown excluded without refill"
+    }
+  },
+  "public_primary": "inputgroup-equal MSE of decisive recorded +/-1; original first10 only; all planned/eligible/zero/exposed counts retained",
+  "public_secondary": "rowweighted MSE/sign/bias/saturation/calibration per cycle/inputgroup; absolute P2/ply phase/gameUID unavailable",
+  "public_independent_game_CI": "UNDEFINED; input groups are not independently identified games",
+  "RuleA_primary": "equal-family terminal-z MSE with all48 planned denominator and per-game counts; true RuleA draw0 only with termination-reason provenance",
+  "RuleA_secondary": "rowweighted MSE/sign/bias/saturation/calibration/plyphase/cohort/side",
+  "RuleA_paired_bootstrap": {
+    "seed": 29180311,
+    "repetitions": 2000,
+    "percentiles": [
+      0.025,
+      0.975
+    ],
+    "fixed_fits": true,
+    "unit": "family",
+    "cohort_lineage_correlation_limit": true
+  },
+  "prediction": "one frozen NNUE unique weights; D and train-only frozen constant analytic NN0; max24 label-blind native full/delta witnesses including P2 from RuleA first family/side/cohort grid",
+  "native_parity_tolerance": {
+    "abs": 1e-05,
+    "rtol": 0.0001
+  },
+  "physicalNN_upper": 22027,
+  "science_MAX_total": 2,
+  "science_command_total_seconds": 600,
+  "no_reselection_no_refill_no_added_model": true,
+  "future_labels_opened": false,
+  "NN": 0,
+  "body_seconds": 2.923795112001244,
+  "entry_SHA": "d8213c5b8fad39b1623d5280635c515e651c82b2ef2270c4e1ebf0598abbe925",
+  "registration_SHA": "45d54d84fab59e4d82eb7a474fb7a26e0628f1489fc6c66fdf040448924ccc38",
+  "teachertruth_or_samewall_strength": false,
+  "original_old287_protocol_unchanged": true
+}

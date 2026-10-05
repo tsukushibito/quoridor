@@ -1,0 +1,88 @@
+{
+  "task": "rulea-public-z-once-release-292-v1",
+  "schema": "rulea-public-z-sealed-label-release-v1",
+  "UTC": "2026-10-05T19:40:35.084079+00:00",
+  "recipient_issue": "quoridor-4lc.291",
+  "candidate_freeze": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/final-saved-freeze-v1/candidate-freeze-v1.json",
+    "SHA": "49dbc1ec576bd7ccd97d4dc17d744a5153ff1de18b43716a6330542302c39706"
+  },
+  "independent_eval_mask_freeze": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-review/final-input-freeze/evaluation-freeze-v1.json",
+    "SHA": "8e842b0b43508ea40954e49a63e2f94fcc5bfd65c0b97c33354a0d724da09adb"
+  },
+  "candidate_weights_SHA": "213309171e60c23c708a55b7009e14f3b5f9a6cc4e8fdc5f173c9a195a0a4a47",
+  "candidate_settings_config_currentbyte": "PASS necessary model/settings/config/refs/masks",
+  "selection_writer_stop": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/public-z-final-saved-freeze-management/stop.json",
+    "SHA": "07efffb9d492d498c22d05fcae09b70360b2ea139a448df133c0b70e32db569f",
+    "exact_absence_checked": true
+  },
+  "rulea": {
+    "planned_game_count": 48,
+    "row_count": 1668,
+    "native_family_alias_rowid_scalar_join": "exact validated all1668; use unchanged registered-family-map-v1.json",
+    "targetfree_handoff": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/target-free-handoff-v1.json",
+      "SHA": "588c29ac0f8957716e90f00d723598d401eb8f745ae17ad09a561fb61a0c906b"
+    },
+    "family_map": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/registered-family-map-v1.json",
+      "SHA": "50a347d175af1b93b87bdbe56accc4c745c860885b7f8a9db3c755739ee95834"
+    },
+    "scalars": {
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/frame23-rulea-z-transfer/sealed-z-rootmean-scalars-v1.jsonl.gz",
+      "SHA": "3f13a1e71f7d0633702df9392aec820b8a55d3246a86e7d506b08d29188b3ed5",
+      "uncompressed_SHA": "b758454e08f796c893efa89875d8f1a111a4cf79bf9d8f55055e04eaa262ce02"
+    },
+    "game_provenance": {
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/frame23-rulea-z-transfer/sealed-game-provenance-v1.json",
+      "SHA": "89435e4d5de797d9e8b7c8148c92a507f944af9c9b5a3b70c5471703c78024a2"
+    },
+    "raw_manifest": {
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/frame23-rulea-z-transfer/native-r1/dataset/manifest.json",
+      "SHA": "5e14c062f3252de352fb6e89d1196fb8eabd343e570e09944cb6e089990705ca"
+    },
+    "actual_draw_games": 0,
+    "eligible_metric": "RuleA terminal-z familyequal; all48 planned, not samewall strength"
+  },
+  "public0043": {
+    "raw_rows": 19359,
+    "original_input_groups": 10,
+    "input_mask_remaining_rows": 3589,
+    "remaining_input_groups": 2,
+    "dataset_manifest": {
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/dataset/manifest.json",
+      "SHA": "d0e6132f863726fe40b5ddd0895050d114d3783c0fe371a69b5c55e0dd2ab339"
+    },
+    "cache_manifest": {
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/cache/cache.json",
+      "SHA": "8ab0d6c83035d015d76db81c39d0cbbe528af50c82a55ff4ea6b7dc1a64a67ef"
+    },
+    "input_only_mask": {
+      "planned_groups": 10,
+      "raw_rows": 19359,
+      "input_eligible_rows": 3589,
+      "input_eligible_groups": 2,
+      "zeroeligible_groups": 8,
+      "per_group_remaining": {
+        "sigma-canonical-input:211cd88fdcea01cb961ce477ae763cd067978f189510d2201dfc4aded008c283": 1812,
+        "sigma-canonical-input:333bc2cdd09d2cb9c0feba37e23ca09b0b6699e78224f5e492b7f748ec729052": 1777
+      },
+      "mask_path": "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-review/final-input-freeze/public0043-input-mask-v1.jsonl.gz",
+      "mask_SHA": "19978f0476d9620e918a4c1ecd9dd6d033b94807c296a6ba19237d4cb790a3f0",
+      "target_filter": "public recorded +/-1 only; RuleA verified terminal +/-1 and provenance-proved rule draw0; fault/cap/unknown excluded without refill"
+    },
+    "target_rule": "recorded +/-1 only; termination-reason-unavailable0 excluded, no RuleA draw equivalence; independent game CI undefined"
+  },
+  "release_once_for_frozen_evaluation_only": true,
+  "new_fit_forward_or_generation_by_producer": 0,
+  "no_candidate_or_mask_reselection": true,
+  "producer_does_not_claim_independent_result": true,
+  "public_rulea_metrics_separate": true,
+  "coordinator_necessary_Gitbyte_receipt": {
+    "path": "/workspaces/quoridor/.artifacts/research-team/frame22/292-git-byte-point.json",
+    "SHA": "2b4432f5177cf2ba7abc17f0da12315ac01f9471f2e5f1e6ecf830ef6e53deb4",
+    "commit": "1a9d961958e466efe0ea5c4d6d753b434a8fea2f"
+  }
+}

@@ -1,0 +1,469 @@
+{
+  "task": "public-rulea-independent-source-stop-291-v1",
+  "UTC": "2026-10-05T19:57:53.879820+00:00",
+  "scientific_source_writer_stopped": true,
+  "own_reader_stopped": true,
+  "scientific_children_waited": true,
+  "current_exact_remaining": [],
+  "MAX_consumed": 2,
+  "knownNN": 5329,
+  "failed_score_originalNN": "UNKNOWN",
+  "source_NN0_supplement": true,
+  "new_science_or_retry": false,
+  "archive": "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-review/scientific-source-and-receipts-v1.tar.xz",
+  "archive_SHA": "4a14915d6cb54795f41e0936a1d43f0dc1917105e449d72533f422cbcbde9d95",
+  "archive_bytes": 25912,
+  "members": 31,
+  "stream_restore_PASS": true,
+  "source_members": {
+    ".worktree/frame21-search/tools/research-review/public_metadata_exposure_guard.py": {
+      "SHA": "4e1cdae9ee631487b56b0397d67e7cf3892048389b7603075c2d1f5ba0243dbb",
+      "bytes": 13515
+    },
+    ".worktree/frame21-search/tools/research-review/predict_public_rulea_frozen.py": {
+      "SHA": "5c947762f9d5dc7f25052ec7560fb5f67ee9cceb619463b06bacff29571840fe",
+      "bytes": 9717
+    },
+    ".worktree/frame21-search/tools/research-review/freeze_public_evaluation.py": {
+      "SHA": "d8213c5b8fad39b1623d5280635c515e651c82b2ef2270c4e1ebf0598abbe925",
+      "bytes": 9257
+    },
+    ".worktree/frame21-search/tools/research-review/guard_frozen_public_prediction.py": {
+      "SHA": "e8187b53350d3f97803af8fe782f710e0b9b41d063ee46c1c3c361a51d7ab000",
+      "bytes": 8393
+    },
+    ".worktree/frame21-search/tools/research-review/guard_frozen_public_score.py": {
+      "SHA": "47b4e2f11c48207776d0c7d4014be404a1aab9049315594f477b008fd601636e",
+      "bytes": 8367
+    },
+    ".worktree/frame21-search/tools/research-review/rulea_targetfree_mask_review.py": {
+      "SHA": "61ac74e58e3b4c4b9ce5c3bd02ce3c889c72c56e2f8a14bffa445890a2ff0a63",
+      "bytes": 7017
+    },
+    ".worktree/frame21-search/tools/research-review/sigma_input_review.py": {
+      "SHA": "f516ca5b6cbc6c1048cef9d89057815f6f69aeb5af32ff0ea83d7d3db8a89561",
+      "bytes": 10793
+    },
+    ".worktree/frame21-search/tools/research-review/score_public_rulea_frozen.py": {
+      "SHA": "5d2c99d0842a501a7c180ac7942bfab97abb4bc9c4dadcbc1c8e6fd9ab30d55f",
+      "bytes": 14052
+    },
+    "research-data/ai-sigma/frame23-sigma-public-z-review/frozen-prediction-registration-v1.json": {
+      "SHA": "fe7e49dce58031639f2d6d168be495ac93a598f1b066f6d8ed4dbaaea79ace60",
+      "bytes": 11442
+    },
+    "research-data/ai-sigma/frame23-sigma-public-z-review/frozen-score-registration-v1.json": {
+      "SHA": "4aec1f03b53a04861feab84c10d1e5732556aca46ee809adbe6ade88110df425",
+      "bytes": 14650
+    },
+    "research-data/ai-sigma/frame23-sigma-public-z-review/source-format-reconciliation-v1.json": {
+      "SHA": "fd756e35f35cd348b2b723e60983ca380fad3482bd071f2ce8d4fb2955c605e1",
+      "bytes": 1804
+    },
+    "research-data/ai-sigma/frame23-sigma-public-z-review/prediction-preparation-failure-v1.json": {
+      "SHA": "c9e7451d6db6bd20f58b81bb603d278e7e85a02b26e0dba0651f84f53e10d558",
+      "bytes": 1181
+    },
+    "research-data/ai-sigma/frame23-sigma-public-z-review/score-preparation-attempts-v1.json": {
+      "SHA": "0154e9041d30e142fc7a647b96714657a50a3ad103d33a3fd181cf6a0d13c0b6",
+      "bytes": 606
+    },
+    "research-data/ai-sigma/frame23-sigma-public-z-review/finite-incomplete-final-v1.json": {
+      "SHA": "46f6fc14a21eee7867c754dbeb05ffb89be37d4282e893cfa21df136cbbe14b1",
+      "bytes": 2438
+    },
+    "research-data/ai-sigma/frame23-sigma-public-z-review/conclusion-v1.md": {
+      "SHA": "8db8c6b224089068e0362119feb9de975264e00a038dbe3bba3850529d1c2305",
+      "bytes": 2375
+    },
+    "research-data/ai-sigma/frame23-sigma-public-z-review/prediction-guard-r1/actual-start.json": {
+      "SHA": "3787f70a56022a0d4457fd9f41241cca08783576780c56a4b317d6669435c6f7",
+      "bytes": 691
+    },
+    "research-data/ai-sigma/frame23-sigma-public-z-review/prediction-guard-r1/entry-admission.json": {
+      "SHA": "1337315caed503f101c998be541efc53319079e5c2abe2417ce3ed7b3b3af5fa",
+      "bytes": 883
+    },
+    "research-data/ai-sigma/frame23-sigma-public-z-review/prediction-guard-r1/fixture-admission-v1.json": {
+      "SHA": "0573c76770523e85888d99908b17e1a31db1cc46a46a1bda574027add7dfe104",
+      "bytes": 4557
+    },
+    "research-data/ai-sigma/frame23-sigma-public-z-review/prediction-guard-r1/GPU-point.json": {
+      "SHA": "e3319586b2f7daf4decb4b2c301c00be2f35523bc4dc035cf138896e739eca3c",
+      "bytes": 134
+    },
+    "research-data/ai-sigma/frame23-sigma-public-z-review/prediction-guard-r1/process.json": {
+      "SHA": "ff8627c0f153752979e04ec61ef0ca6029cbd0ab0ac8ac914af315193904ba1c",
+      "bytes": 1264
+    },
+    "research-data/ai-sigma/frame23-sigma-public-z-review/prediction-guard-r1/stderr.log": {
+      "SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "research-data/ai-sigma/frame23-sigma-public-z-review/prediction-guard-r1/stdout.log": {
+      "SHA": "279506dcb4c900ccfd52e1661db9f85110fdfe6131ec1fd435aa16a207e2232d",
+      "bytes": 573
+    },
+    "research-data/ai-sigma/frame23-sigma-public-z-review/score-guard-r1/actual-start.json": {
+      "SHA": "66e6205ddd21c78f12bb9995db019f6132b5f42123f8d63e81c344bf5eb19976",
+      "bytes": 1066
+    },
+    "research-data/ai-sigma/frame23-sigma-public-z-review/score-guard-r1/entry-admission.json": {
+      "SHA": "029af1e9abf803c8a80e74da7e8f082f6d68a7f0c1354e235cd5e5bc0166037c",
+      "bytes": 860
+    },
+    "research-data/ai-sigma/frame23-sigma-public-z-review/score-guard-r1/fixture-admission-v1.json": {
+      "SHA": "b4fefbe8b607579f31bc9f113e3c2b2b7076ce2eac6a4a0fe60ea915e923cf27",
+      "bytes": 4490
+    },
+    "research-data/ai-sigma/frame23-sigma-public-z-review/score-guard-r1/GPU-point.json": {
+      "SHA": "0acd795a9c7f2fb6ad413a96a17f4e1f2e9b4e5c57e6d6185dd92fe6de067a0f",
+      "bytes": 134
+    },
+    "research-data/ai-sigma/frame23-sigma-public-z-review/score-guard-r1/process.json": {
+      "SHA": "004c505df6121ee3e2ee684e3258d1e70321c3b122ab57f28a718f634591f052",
+      "bytes": 1043
+    },
+    "research-data/ai-sigma/frame23-sigma-public-z-review/score-guard-r1/stderr.log": {
+      "SHA": "3ad1bb6816817e044fdb8422ea62ae2df28df482d99d382b2bd1e348a1a70b17",
+      "bytes": 398
+    },
+    "research-data/ai-sigma/frame23-sigma-public-z-review/score-guard-r1/stdout.log": {
+      "SHA": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "research-data/ai-sigma/frame23-sigma-public-z-review/prediction-r1/result-v1.json": {
+      "SHA": "ac86b719aa468f0783a8ae4f12246e93420f7da58721688c2fa401ba38f384b6",
+      "bytes": 605
+    },
+    "research-data/ai-sigma/frame23-sigma-public-z-review/prediction-r1/native-receipt.json": {
+      "SHA": "c6ae5eb37b91f1423174ff5cc7c4eec23fc884004d6ab0a2ced80f0e01130cbe",
+      "bytes": 5013
+    }
+  },
+  "post_inputs": {
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-review/final-input-freeze/evaluation-freeze-v1.json": {
+      "registered_SHA": "8e842b0b43508ea40954e49a63e2f94fcc5bfd65c0b97c33354a0d724da09adb",
+      "current_SHA": "8e842b0b43508ea40954e49a63e2f94fcc5bfd65c0b97c33354a0d724da09adb",
+      "equal": true
+    },
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/final-saved-freeze-v1/candidate-freeze-v1.json": {
+      "registered_SHA": "49dbc1ec576bd7ccd97d4dc17d744a5153ff1de18b43716a6330542302c39706",
+      "current_SHA": "49dbc1ec576bd7ccd97d4dc17d744a5153ff1de18b43716a6330542302c39706",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/predict_public_rulea_frozen.py": {
+      "registered_SHA": "5c947762f9d5dc7f25052ec7560fb5f67ee9cceb619463b06bacff29571840fe",
+      "current_SHA": "5c947762f9d5dc7f25052ec7560fb5f67ee9cceb619463b06bacff29571840fe",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/guard_frozen_public_prediction.py": {
+      "registered_SHA": "e8187b53350d3f97803af8fe782f710e0b9b41d063ee46c1c3c361a51d7ab000",
+      "current_SHA": "e8187b53350d3f97803af8fe782f710e0b9b41d063ee46c1c3c361a51d7ab000",
+      "equal": true
+    },
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-import/public-z-immutable-handoff-v3.json": {
+      "registered_SHA": "412d9f1e4c55e5c211bb50ed437f15f89966a0124873d1c2adb13b922b008527",
+      "current_SHA": "412d9f1e4c55e5c211bb50ed437f15f89966a0124873d1c2adb13b922b008527",
+      "equal": true
+    },
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/target-free-handoff-v1.json": {
+      "registered_SHA": "588c29ac0f8957716e90f00d723598d401eb8f745ae17ad09a561fb61a0c906b",
+      "current_SHA": "588c29ac0f8957716e90f00d723598d401eb8f745ae17ad09a561fb61a0c906b",
+      "equal": true
+    },
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/selector-modelreader-stop-v1.json": {
+      "registered_SHA": "9b98d2be8154b29510ac65f2c504cde689576beffbad91912dc8c7bd6c737b26",
+      "current_SHA": "9b98d2be8154b29510ac65f2c504cde689576beffbad91912dc8c7bd6c737b26",
+      "equal": true
+    },
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/maintained-source-handoff-v1.json": {
+      "registered_SHA": "d57d1aec09a019b1dbb961b3a855326c5a356a71cbb6e91db6f356424f088c13",
+      "current_SHA": "d57d1aec09a019b1dbb961b3a855326c5a356a71cbb6e91db6f356424f088c13",
+      "equal": true
+    },
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/background-final-saved-freeze-v1/result.json": {
+      "registered_SHA": "e08e4d566ab4b6c48f76d9a78fcaa7f191cf0d9f71c6f04a23c65a09652121c0",
+      "current_SHA": "e08e4d566ab4b6c48f76d9a78fcaa7f191cf0d9f71c6f04a23c65a09652121c0",
+      "equal": true
+    },
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/scientific-stop-v1.json": {
+      "registered_SHA": "3f0eb27023c42ed35ff15dd6935eefbbcb2a2dc6bfd97d2901b237fd01909659",
+      "current_SHA": "3f0eb27023c42ed35ff15dd6935eefbbcb2a2dc6bfd97d2901b237fd01909659",
+      "equal": true
+    },
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-steward/storage-rulea-292-conserved-admission.json": {
+      "registered_SHA": "6a52c440e468ca5b7338e3140835ef683f5ce9745ebd17fb81b67677ec83952d",
+      "current_SHA": "6a52c440e468ca5b7338e3140835ef683f5ce9745ebd17fb81b67677ec83952d",
+      "equal": true
+    },
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/preparation-r1/process.json": {
+      "registered_SHA": "87d7069a05d2031b7dc5619c91d9242605e8a3dbd2d01fbde70d806ed22368df",
+      "current_SHA": "87d7069a05d2031b7dc5619c91d9242605e8a3dbd2d01fbde70d806ed22368df",
+      "equal": true
+    },
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/generation-r1/process.json": {
+      "registered_SHA": "5be27615ef0ec4575e122c425098ca5202782036eb36c998daf98f1e31f23a17",
+      "current_SHA": "5be27615ef0ec4575e122c425098ca5202782036eb36c998daf98f1e31f23a17",
+      "equal": true
+    },
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/export-r1/process.json": {
+      "registered_SHA": "79ec648a66bad1651be5dbbca59f250e163f1ff586ba03646bf9627a0f6e8f00",
+      "current_SHA": "79ec648a66bad1651be5dbbca59f250e163f1ff586ba03646bf9627a0f6e8f00",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-r1/step7813.pt": {
+      "registered_SHA": "f93447588e6a6924edf4f605c90bf92db8f70ebf53b86b3ef58ff0adb2a9ce24",
+      "current_SHA": "f93447588e6a6924edf4f605c90bf92db8f70ebf53b86b3ef58ff0adb2a9ce24",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-native-framing-v2/step7813-model/manifest.json": {
+      "registered_SHA": "02d6f34afd165bde8cff351721b9a7af38d73763f8c8d60417cb5625a5a52710",
+      "current_SHA": "02d6f34afd165bde8cff351721b9a7af38d73763f8c8d60417cb5625a5a52710",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-native-framing-v2/step7813-model/weights.f32": {
+      "registered_SHA": "213309171e60c23c708a55b7009e14f3b5f9a6cc4e8fdc5f173c9a195a0a4a47",
+      "current_SHA": "213309171e60c23c708a55b7009e14f3b5f9a6cc4e8fdc5f173c9a195a0a4a47",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-native-framing-v2/step7813-model/training-target.json": {
+      "registered_SHA": "153ad5500efba1969a82e33fcef8fa15d138dc95f7c8c524d1d03ed41ddd372c",
+      "current_SHA": "153ad5500efba1969a82e33fcef8fa15d138dc95f7c8c524d1d03ed41ddd372c",
+      "equal": true
+    },
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/public-z-1m-config-v1.json": {
+      "registered_SHA": "ae34122a9c76afb2957ce355cee9d8a44f78c1f573546a457f50c5f4038e910c",
+      "current_SHA": "ae34122a9c76afb2957ce355cee9d8a44f78c1f573546a457f50c5f4038e910c",
+      "equal": true
+    },
+    "/workspaces/quoridor/.artifacts/rust-migration/target/release/route-feature-diagnose-public-z-290-v1": {
+      "registered_SHA": "9f72e7404a36b2154cd36fc2530200a819ea77146d7fc9252e6b4d6f77ebd221",
+      "current_SHA": "9f72e7404a36b2154cd36fc2530200a819ea77146d7fc9252e6b4d6f77ebd221",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/frame21-features/crates/quoridor-runner/src/bin/route-feature-diagnose.rs": {
+      "registered_SHA": "0d35de495c2389add1e95b3e579b4bf5cde0785eb6d341c32daf536e75710bae",
+      "current_SHA": "0d35de495c2389add1e95b3e579b4bf5cde0785eb6d341c32daf536e75710bae",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/assets/checkpoints/frame22-teacher-transfer-B-r1/scale.json": {
+      "registered_SHA": "175f07713409994d0d4c99768267695b0a91ec100baabf202fb4518b56cbdfed",
+      "current_SHA": "175f07713409994d0d4c99768267695b0a91ec100baabf202fb4518b56cbdfed",
+      "equal": true
+    },
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-review/final-input-freeze/public0043-input-mask-v1.jsonl.gz": {
+      "registered_SHA": "19978f0476d9620e918a4c1ecd9dd6d033b94807c296a6ba19237d4cb790a3f0",
+      "current_SHA": "19978f0476d9620e918a4c1ecd9dd6d033b94807c296a6ba19237d4cb790a3f0",
+      "equal": true
+    },
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-review/final-input-freeze/RuleA48-input-mask-v1.jsonl.gz": {
+      "registered_SHA": "6bae507ec7b3e037374be8f53ab833fd5d768f282de634eba7c0f7ee32e8fcd0",
+      "current_SHA": "6bae507ec7b3e037374be8f53ab833fd5d768f282de634eba7c0f7ee32e8fcd0",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/residual_model.py": {
+      "registered_SHA": "6c9aedc1cb0893d6bb6e0cc90eec3fd8ffb069dbe2350af0536aa66d172e746e",
+      "current_SHA": "6c9aedc1cb0893d6bb6e0cc90eec3fd8ffb069dbe2350af0536aa66d172e746e",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/test_selected_target.py": {
+      "registered_SHA": "440c2c435908f02e42bbf95b885a43e6a7cf0cfdf20f1afdedfed100128bdc0e",
+      "current_SHA": "440c2c435908f02e42bbf95b885a43e6a7cf0cfdf20f1afdedfed100128bdc0e",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/residual_penalty.py": {
+      "registered_SHA": "7266fa339d9e3d9c640ca0de5e98c48434ff57c5118175714a976add8e5556e4",
+      "current_SHA": "7266fa339d9e3d9c640ca0de5e98c48434ff57c5118175714a976add8e5556e4",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/__init__.py": {
+      "registered_SHA": "05011521a4993db992001289548d4c90516495129bc60b9882d6b7211c60aee5",
+      "current_SHA": "05011521a4993db992001289548d4c90516495129bc60b9882d6b7211c60aee5",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/common.py": {
+      "registered_SHA": "8bca062a8d1b7598e363313562407c171cc687278a77381e4218180b9c2ddcbd",
+      "current_SHA": "8bca062a8d1b7598e363313562407c171cc687278a77381e4218180b9c2ddcbd",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/route_training.py": {
+      "registered_SHA": "cb6a4992bead6c8961b67cc46dd42651155e9bf0c041fddda80c0af41abeffa3",
+      "current_SHA": "cb6a4992bead6c8961b67cc46dd42651155e9bf0c041fddda80c0af41abeffa3",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/cache.py": {
+      "registered_SHA": "a79951451f0d67f5e7f9809acb8a04ef9eef0d9fc2cac652bca4fce73cbbf42f",
+      "current_SHA": "a79951451f0d67f5e7f9809acb8a04ef9eef0d9fc2cac652bca4fce73cbbf42f",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/test_contracts.py": {
+      "registered_SHA": "4bf20848d44355cb04e80a38c595cf71d3a03d5149d89eb4264acc5f71740440",
+      "current_SHA": "4bf20848d44355cb04e80a38c595cf71d3a03d5149d89eb4264acc5f71740440",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/train.py": {
+      "registered_SHA": "77ce43640fec21d0392365baa92e71b9809bf74532e5000114d6370edffbd59a",
+      "current_SHA": "77ce43640fec21d0392365baa92e71b9809bf74532e5000114d6370edffbd59a",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/cycle.py": {
+      "registered_SHA": "afeb1811816ed7c33dd785ee22232dba26003e5c45d068cdc521339aaf0e6154",
+      "current_SHA": "afeb1811816ed7c33dd785ee22232dba26003e5c45d068cdc521339aaf0e6154",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/binding.py": {
+      "registered_SHA": "af656c455349d37ee3397d4c25574c3343c1f82a4d3a3df1448037cb83c37758",
+      "current_SHA": "af656c455349d37ee3397d4c25574c3343c1f82a4d3a3df1448037cb83c37758",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/model.py": {
+      "registered_SHA": "2baeb2323d98c2422d49045b02dacf1838a0ff1a1e6add631620adb53246b86a",
+      "current_SHA": "2baeb2323d98c2422d49045b02dacf1838a0ff1a1e6add631620adb53246b86a",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/scaled_model.py": {
+      "registered_SHA": "e8fb84f2463f6ccc5727042d4461b64938fd3617fe338de616a360cf62ea73d2",
+      "current_SHA": "e8fb84f2463f6ccc5727042d4461b64938fd3617fe338de616a360cf62ea73d2",
+      "equal": true
+    },
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/run_public_fit.py": {
+      "registered_SHA": "c2d2dd252b8799d45c3bf185d8d455de7168d5fccfd668ab3346c75cb8a0b626",
+      "current_SHA": "c2d2dd252b8799d45c3bf185d8d455de7168d5fccfd668ab3346c75cb8a0b626",
+      "equal": true
+    },
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/public_inputs.py": {
+      "registered_SHA": "6462b29395cc54d1515467e540d3e2579c5272ad5566da7c89acdd4f4935c92a",
+      "current_SHA": "6462b29395cc54d1515467e540d3e2579c5272ad5566da7c89acdd4f4935c92a",
+      "equal": true
+    },
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/manage_public.py": {
+      "registered_SHA": "1c6a4305aae7f4bd2977a963a3fb8e1ec63d7e756636ffcd41f249629d033f4d",
+      "current_SHA": "1c6a4305aae7f4bd2977a963a3fb8e1ec63d7e756636ffcd41f249629d033f4d",
+      "equal": true
+    },
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/prepare_public.py": {
+      "registered_SHA": "ddb53c1ca6ad84b321f0329365b9b7875dcfc735174faee29aee5fc97a109f8f",
+      "current_SHA": "ddb53c1ca6ad84b321f0329365b9b7875dcfc735174faee29aee5fc97a109f8f",
+      "equal": true
+    },
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/finalize_public_saved.py": {
+      "registered_SHA": "004b805fd87d6d5896ad0818092c6d677c26576075ee3bc566b0af0558f293cd",
+      "current_SHA": "004b805fd87d6d5896ad0818092c6d677c26576075ee3bc566b0af0558f293cd",
+      "equal": true
+    },
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/source-before-project-format-v1.tar.xz": {
+      "registered_SHA": "ef60d8b0080f58789cab1bd30028190c95ab1adcf41cd41da73e3f16ee7855ca",
+      "current_SHA": "ef60d8b0080f58789cab1bd30028190c95ab1adcf41cd41da73e3f16ee7855ca",
+      "equal": true
+    },
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-review/source-format-reconciliation-v1.json": {
+      "registered_SHA": "fd756e35f35cd348b2b723e60983ca380fad3482bd071f2ce8d4fb2955c605e1",
+      "current_SHA": "fd756e35f35cd348b2b723e60983ca380fad3482bd071f2ce8d4fb2955c605e1",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0041/input-references.jsonl.gz": {
+      "registered_SHA": "8cdac8586d3499cc171a91f53cb04b9e2242417db3685183b52f4a91427a4bff",
+      "current_SHA": "8cdac8586d3499cc171a91f53cb04b9e2242417db3685183b52f4a91427a4bff",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0042/input-references.jsonl.gz": {
+      "registered_SHA": "674109c3f17ba389635fc93cca04a47052f6c01e13030325e204fcab63aec3ea",
+      "current_SHA": "674109c3f17ba389635fc93cca04a47052f6c01e13030325e204fcab63aec3ea",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/input-references.jsonl.gz": {
+      "registered_SHA": "9fdc1049a37f5dff6f396868143f4b8a9d30c7447c33d4c5c5dba6df491a75af",
+      "current_SHA": "9fdc1049a37f5dff6f396868143f4b8a9d30c7447c33d4c5c5dba6df491a75af",
+      "equal": true
+    },
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/target-free-input-references-v1.jsonl.gz": {
+      "registered_SHA": "d3fced80103df5ab014687470b88c4637244cf2b4f5b5c36f3dcdf2443a82931",
+      "current_SHA": "d3fced80103df5ab014687470b88c4637244cf2b4f5b5c36f3dcdf2443a82931",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/score_public_rulea_frozen.py": {
+      "registered_SHA": "5d2c99d0842a501a7c180ac7942bfab97abb4bc9c4dadcbc1c8e6fd9ab30d55f",
+      "current_SHA": "5d2c99d0842a501a7c180ac7942bfab97abb4bc9c4dadcbc1c8e6fd9ab30d55f",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/frame21-search/tools/research-review/guard_frozen_public_score.py": {
+      "registered_SHA": "47b4e2f11c48207776d0c7d4014be404a1aab9049315594f477b008fd601636e",
+      "current_SHA": "47b4e2f11c48207776d0c7d4014be404a1aab9049315594f477b008fd601636e",
+      "equal": true
+    },
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-review/prediction-r1/predictions-v1.jsonl.gz": {
+      "registered_SHA": "61e1c33f3e02f1a40e40cd6a93a9a65dc7a3b8f536437163123bec6a9565a3e4",
+      "current_SHA": "61e1c33f3e02f1a40e40cd6a93a9a65dc7a3b8f536437163123bec6a9565a3e4",
+      "equal": true
+    },
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/sealed-label-release-v2.json": {
+      "registered_SHA": "9a091201aef4c5a2581b00dd0f84fd9ec14f5687e73978e3aa523afc6309a65e",
+      "current_SHA": "9a091201aef4c5a2581b00dd0f84fd9ec14f5687e73978e3aa523afc6309a65e",
+      "equal": true
+    },
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-review/prediction-guard-r1/process.json": {
+      "registered_SHA": "ff8627c0f153752979e04ec61ef0ca6029cbd0ab0ac8ac914af315193904ba1c",
+      "current_SHA": "ff8627c0f153752979e04ec61ef0ca6029cbd0ab0ac8ac914af315193904ba1c",
+      "equal": true
+    },
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-review/prediction-r1/result-v1.json": {
+      "registered_SHA": "ac86b719aa468f0783a8ae4f12246e93420f7da58721688c2fa401ba38f384b6",
+      "current_SHA": "ac86b719aa468f0783a8ae4f12246e93420f7da58721688c2fa401ba38f384b6",
+      "equal": true
+    },
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/release-modelreader-stop-addendum-v1.json": {
+      "registered_SHA": "e25e6a2ef77aa01255b157adeb6005521faa92006c0f6c50f55766f3c243aa85",
+      "current_SHA": "e25e6a2ef77aa01255b157adeb6005521faa92006c0f6c50f55766f3c243aa85",
+      "equal": true
+    },
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-rulea-z-transfer/registered-family-map-v1.json": {
+      "registered_SHA": "50a347d175af1b93b87bdbe56accc4c745c860885b7f8a9db3c755739ee95834",
+      "current_SHA": "50a347d175af1b93b87bdbe56accc4c745c860885b7f8a9db3c755739ee95834",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/assets/inputs/frame23-rulea-z-transfer/sealed-z-rootmean-scalars-v1.jsonl.gz": {
+      "registered_SHA": "3f13a1e71f7d0633702df9392aec820b8a55d3246a86e7d506b08d29188b3ed5",
+      "current_SHA": "3f13a1e71f7d0633702df9392aec820b8a55d3246a86e7d506b08d29188b3ed5",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/assets/inputs/frame23-rulea-z-transfer/sealed-game-provenance-v1.json": {
+      "registered_SHA": "89435e4d5de797d9e8b7c8148c92a507f944af9c9b5a3b70c5471703c78024a2",
+      "current_SHA": "89435e4d5de797d9e8b7c8148c92a507f944af9c9b5a3b70c5471703c78024a2",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/cache/cache.json": {
+      "registered_SHA": "8ab0d6c83035d015d76db81c39d0cbbe528af50c82a55ff4ea6b7dc1a64a67ef",
+      "current_SHA": "8ab0d6c83035d015d76db81c39d0cbbe528af50c82a55ff4ea6b7dc1a64a67ef",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/cache/labels.f32": {
+      "registered_SHA": "1c127c5f6e53704ac19680bc7242550fe70447d433d75eb947dec1d90990c34d",
+      "current_SHA": "1c127c5f6e53704ac19680bc7242550fe70447d433d75eb947dec1d90990c34d",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0043/cache/rows.jsonl": {
+      "registered_SHA": "6d269d10529c49ab54a1e9d9afdf220f34b80960c7a6885c2afa4b79f51a53b6",
+      "current_SHA": "6d269d10529c49ab54a1e9d9afdf220f34b80960c7a6885c2afa4b79f51a53b6",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0041/cache/cache.json": {
+      "registered_SHA": "dcd31e019ad94adfb7b222de27504740254058ae02c3e7380af511487af6d335",
+      "current_SHA": "dcd31e019ad94adfb7b222de27504740254058ae02c3e7380af511487af6d335",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0041/cache/labels.f32": {
+      "registered_SHA": "4727ef4e93827def3d7a02836b2f9a2a6acab17695dfd4897540021ae26d92a3",
+      "current_SHA": "4727ef4e93827def3d7a02836b2f9a2a6acab17695dfd4897540021ae26d92a3",
+      "equal": true
+    },
+    "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0041/cache/rows.jsonl": {
+      "registered_SHA": "e780bd7d68fa60c44a7e944143545ce0765ec0689fbcdb141cb0848846096703",
+      "current_SHA": "e780bd7d68fa60c44a7e944143545ce0765ec0689fbcdb141cb0848846096703",
+      "equal": true
+    }
+  },
+  "all_post_inputs_current_SHA_equal": true,
+  "model_weights_inputs_direct_readonly_no_copy": true,
+  "parent_goal_complete": false
+}

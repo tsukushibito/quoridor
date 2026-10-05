@@ -1,0 +1,225 @@
+[
+  {
+    "task": "public-z-1m",
+    "spawned": true,
+    "charged_NN": 1878200,
+    "charged_processed": 1977934,
+    "wall_s": 19.838739127968438,
+    "identity": {
+      "pid": 1752508,
+      "start_ticks": "48004484",
+      "ppid": 1752377,
+      "pgrp": 1752508,
+      "cpu_ticks": 0,
+      "state": "R",
+      "rss": 4096,
+      "cpus": [
+        1
+      ],
+      "argv": []
+    },
+    "actualstart": "2026-10-05T19:03:09.217763+00:00",
+    "argv": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/run_public_fit.py",
+      "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/public-z-1m-registration-v1.json"
+    ],
+    "state": "STOPPED",
+    "exit": 1,
+    "reason": null,
+    "waited": true,
+    "currentexact_remaining": [],
+    "peak_RSS": 1675964416,
+    "recorded_children": [
+      {
+        "pid": 1752508,
+        "start_ticks": "48004484",
+        "ppid": 1752377,
+        "pgrp": 1752508,
+        "cpu_ticks": 1848,
+        "state": "Z",
+        "rss": 0,
+        "cpus": [
+          1
+        ],
+        "argv": []
+      }
+    ],
+    "stopped_at": "2026-10-05T19:03:29.079595+00:00"
+  },
+  {
+    "task": "public-z-1m-parity",
+    "spawned": true,
+    "charged_NN": 306,
+    "charged_processed": 100040,
+    "wall_s": 5.813095098012127,
+    "identity": {
+      "pid": 1764523,
+      "start_ticks": "48056918",
+      "ppid": 1764330,
+      "pgrp": 1764523,
+      "cpu_ticks": 0,
+      "state": "R",
+      "rss": 4096,
+      "cpus": [
+        1
+      ],
+      "argv": []
+    },
+    "actualstart": "2026-10-05T19:11:53.258964+00:00",
+    "argv": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/parity_public_saved.py",
+      "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/public-z-1m-parity-registration-v2.json"
+    ],
+    "state": "STOPPED",
+    "exit": 0,
+    "reason": null,
+    "waited": true,
+    "currentexact_remaining": [],
+    "peak_RSS": 1355132928,
+    "recorded_children": [
+      {
+        "pid": 1764523,
+        "start_ticks": "48056918",
+        "ppid": 1764330,
+        "pgrp": 1764523,
+        "cpu_ticks": 522,
+        "state": "R",
+        "rss": 1092124672,
+        "cpus": [
+          1
+        ],
+        "argv": [
+          "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+          "-B",
+          "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/parity_public_saved.py",
+          "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/public-z-1m-parity-registration-v2.json"
+        ]
+      }
+    ],
+    "stopped_at": "2026-10-05T19:11:59.108658+00:00"
+  },
+  {
+    "task": "public-z-2m",
+    "spawned": true,
+    "charged_NN": 3141485,
+    "charged_processed": 3241219,
+    "wall_s": 34.72780802898342,
+    "identity": {
+      "pid": 1772112,
+      "start_ticks": "48082157",
+      "ppid": 1771898,
+      "pgrp": 1772112,
+      "cpu_ticks": 0,
+      "state": "R",
+      "rss": 4096,
+      "cpus": [
+        1
+      ],
+      "argv": []
+    },
+    "actualstart": "2026-10-05T19:16:05.468887+00:00",
+    "argv": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/run_public_fit.py",
+      "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/public-z-2m-registration-v3.json"
+    ],
+    "state": "STOPPED",
+    "exit": 0,
+    "reason": null,
+    "waited": true,
+    "currentexact_remaining": [],
+    "peak_RSS": 1684946944,
+    "recorded_children": [
+      {
+        "pid": 1772112,
+        "start_ticks": "48082157",
+        "ppid": 1771898,
+        "pgrp": 1772112,
+        "cpu_ticks": 2635,
+        "state": "Z",
+        "rss": 0,
+        "cpus": [
+          1
+        ],
+        "argv": []
+      },
+      {
+        "pid": 1773110,
+        "start_ticks": "48085551",
+        "ppid": 1772112,
+        "pgrp": 1772112,
+        "cpu_ticks": 0,
+        "state": "D",
+        "rss": 1802240,
+        "cpus": [
+          1
+        ],
+        "argv": [
+          "/workspaces/quoridor/.artifacts/rust-migration/target/release/route-feature-diagnose-public-z-290-v1",
+          "model",
+          "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-2m-r1/step0-model/manifest.json"
+        ]
+      }
+    ],
+    "stopped_at": "2026-10-05T19:16:40.199235+00:00"
+  },
+  {
+    "task": "public-z-final-saved-freeze",
+    "spawned": true,
+    "charged_NN": 0,
+    "charged_processed": 1108685,
+    "wall_s": 1.5893120110267773,
+    "identity": {
+      "pid": 1803998,
+      "start_ticks": "48192947",
+      "ppid": 1803707,
+      "pgrp": 1803998,
+      "cpu_ticks": 0,
+      "state": "R",
+      "rss": 9871360,
+      "cpus": [
+        1
+      ],
+      "argv": [
+        "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+        "-B",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/finalize_public_saved.py",
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/final-saved-freeze-registration-v1.json"
+      ]
+    },
+    "actualstart": "2026-10-05T19:34:32.553880+00:00",
+    "argv": [
+      "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+      "-B",
+      "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/finalize_public_saved.py",
+      "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/final-saved-freeze-registration-v1.json"
+    ],
+    "state": "STOPPED",
+    "exit": 0,
+    "reason": null,
+    "waited": true,
+    "currentexact_remaining": [],
+    "peak_RSS": 164634624,
+    "recorded_children": [
+      {
+        "pid": 1803998,
+        "start_ticks": "48192947",
+        "ppid": 1803707,
+        "pgrp": 1803998,
+        "cpu_ticks": 88,
+        "state": "Z",
+        "rss": 0,
+        "cpus": [
+          1
+        ],
+        "argv": []
+      }
+    ],
+    "stopped_at": "2026-10-05T19:34:34.182147+00:00"
+  }
+]

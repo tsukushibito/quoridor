@@ -1,0 +1,199 @@
+{
+  "schema": "public-sigma-z-candidate-freeze-v1",
+  "UTC": "2026-10-05T19:34:33.999429+00:00",
+  "selection_rule": "minimum registered cycle/row-weighted decisive-z selection MSE; equal weights/value favors fewer full-run seen samples; then earliest step",
+  "candidate": {
+    "condition": "public-z-1m",
+    "step": 7813,
+    "training_seen": 1000064,
+    "selection_mse": 0.9756914654312713,
+    "checkpoint": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-r1/step7813.pt",
+      "SHA": "f93447588e6a6924edf4f605c90bf92db8f70ebf53b86b3ef58ff0adb2a9ce24",
+      "B": 52513
+    },
+    "native_manifest": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-native-framing-v2/step7813-model/manifest.json",
+      "SHA": "02d6f34afd165bde8cff351721b9a7af38d73763f8c8d60417cb5625a5a52710",
+      "B": 847
+    },
+    "native_weights": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-native-framing-v2/step7813-model/weights.f32",
+      "SHA": "213309171e60c23c708a55b7009e14f3b5f9a6cc4e8fdc5f173c9a195a0a4a47",
+      "B": 49284
+    },
+    "target_metadata": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-native-framing-v2/step7813-model/training-target.json",
+      "SHA": "153ad5500efba1969a82e33fcef8fa15d138dc95f7c8c524d1d03ed41ddd372c",
+      "B": 71
+    },
+    "weights_tensor_SHA": "213309171e60c23c708a55b7009e14f3b5f9a6cc4e8fdc5f173c9a195a0a4a47",
+    "config": {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/public-z-1m-config-v1.json",
+      "SHA": "ae34122a9c76afb2957ce355cee9d8a44f78c1f573546a457f50c5f4038e910c",
+      "B": 667
+    }
+  },
+  "baselines": {
+    "initial_equals_D": true,
+    "initial_weights_SHA": "ec4167ccb5042cfe937b23850a1b52d1cd9cf6c3fb1d348627bfe6cc7d023cc5",
+    "D": {
+      "a_f32": 0.0,
+      "b_f32": 8.0,
+      "formula": "tanh(f32(8*f32(raw_d_opponent-raw_d_self))); native tanh f64 result cast f32",
+      "selection_mse": 1.0140109577883625
+    },
+    "constant": {
+      "value": 0.005460941754861121,
+      "fitted_on_train_only": true,
+      "selection_mse": 1.0001244789423767
+    }
+  },
+  "model_settings": {
+    "feature": "QF1-route4-f32-STM-scaled-residual-v3",
+    "schema": "quoridor-nnue-distance-residual-v3",
+    "value_perspective": "canonical STM; absolute source side unavailable",
+    "route4": "off",
+    "scale": {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame22-teacher-transfer-B-r1/scale.json",
+      "SHA": "175f07713409994d0d4c99768267695b0a91ec100baabf202fb4518b56cbdfed",
+      "B": 142
+    },
+    "native_binary": {
+      "path": "/workspaces/quoridor/.artifacts/rust-migration/target/release/route-feature-diagnose-public-z-290-v1",
+      "SHA": "9f72e7404a36b2154cd36fc2530200a819ea77146d7fc9252e6b4d6f77ebd221",
+      "B": 894720
+    },
+    "native_source": {
+      "path": "/workspaces/quoridor/.worktree/frame21-features/crates/quoridor-runner/src/bin/route-feature-diagnose.rs",
+      "SHA": "0d35de495c2389add1e95b3e579b4bf5cde0785eb6d341c32daf536e75710bae",
+      "B": 10553
+    },
+    "unique_NN_candidate": 1,
+    "D_initial_prediction_reuse": true
+  },
+  "references": {
+    "Tseen": {
+      "canonical": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-r1/Tseen-references.jsonl.gz",
+        "SHA": "9be6290ee2edf9bf7d7cf365b459b3727538e0c400f9db759928f3f2755e7179",
+        "B": 3257213,
+        "uncompressed_SHA": "e3714f08ed2e6b683635afa78fe0cf85773f673f8b480f535f9ef06a7776460b",
+        "rows": 67937,
+        "unique_ids": 67937,
+        "unique_inputs": 4996,
+        "source_input_groups": 4996
+      },
+      "same_stream_second_condition": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-2m-r1/Tseen-references.jsonl.gz",
+        "SHA": "4931a3b9b298e2265ed363b1b662c88b54d5f8b0927cb305a3dd3d1b74d1b639",
+        "B": 3257213,
+        "uncompressed_SHA": "e3714f08ed2e6b683635afa78fe0cf85773f673f8b480f535f9ef06a7776460b",
+        "rows": 67937,
+        "unique_ids": 67937,
+        "unique_inputs": 4996,
+        "source_input_groups": 4996
+      },
+      "union_is_canonical": true
+    },
+    "Vraw": {
+      "canonical": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-r1/Vraw-references.jsonl.gz",
+        "SHA": "f3cc870b3344500a13d40f3a93810ee4b6846b867c2bd4ad69a740e2beb3e991",
+        "B": 113144,
+        "uncompressed_SHA": "d777374e037b7c826eb1ed15fc3b56ef1f239d718e0df3ed54584165822ad162",
+        "rows": 19965,
+        "unique_ids": 19965,
+        "unique_inputs": 20,
+        "source_input_groups": 20
+      },
+      "same_stream_second_condition": {
+        "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-2m-r1/Vraw-references.jsonl.gz",
+        "SHA": "c95d3fd075981a0b97701f885e4389bcbaa2702de60c47acb3b77222eb39caa7",
+        "B": 113144,
+        "uncompressed_SHA": "d777374e037b7c826eb1ed15fc3b56ef1f239d718e0df3ed54584165822ad162",
+        "rows": 19965,
+        "unique_ids": 19965,
+        "unique_inputs": 20,
+        "source_input_groups": 20
+      },
+      "union_is_canonical": true
+    }
+  },
+  "source_public_references": {
+    "41": {
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0041/input-references.jsonl.gz",
+      "SHA": "8cdac8586d3499cc171a91f53cb04b9e2242417db3685183b52f4a91427a4bff",
+      "uncompressed_SHA": "9e80f6facec80fc60529346bf906dc40df33770b3d27af9641a3b778efca37ab",
+      "format": "gzip JSONL target-free; all input-qualified rows including public z0"
+    },
+    "42": {
+      "path": "/workspaces/quoridor/.worktree/assets/inputs/sigma-public-fix-z/canonical-v3/cycle_0042/input-references.jsonl.gz",
+      "SHA": "674109c3f17ba389635fc93cca04a47052f6c01e13030325e204fcab63aec3ea",
+      "uncompressed_SHA": "4afadb6993ee21a10c648107170b0eed1562a6c372d8a49318fdb07e84ae9fca",
+      "format": "gzip JSONL target-free; all input-qualified rows including public z0"
+    }
+  },
+  "future_exposure": "actual QF1 STM IDs+rawdistance f32 input against Tactual union ALLrawV (including source z0); history/fullgame/absolute-side unavailable, not a guarantee of history nonexposure",
+  "signature_source": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/public_inputs.py",
+    "SHA": "6462b29395cc54d1515467e540d3e2579c5272ad5566da7c89acdd4f4935c92a",
+    "B": 6813
+  },
+  "reference_serialization": "input_key: QF1-f32-STM-v1\\0 + <HH byte lengths of the two sorted <u2 ID streams> + ID streams + <ff raw STM distances>; SHA256",
+  "future_protocol": "original sealed0043 subset and producer input qualification unchanged; separate critic one opening after this freeze plus final input-only mask; decisive recorded +/-1 primary; zero reason unavailable excluded and counts retained; no candidate reselection",
+  "future_labels_opened": false,
+  "selection_input_groups": 20,
+  "independent_games": "UNAVAILABLE",
+  "selection_stage": "reused selection; not independent test or samewall strength",
+  "science_stops": [
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/public-z-1m-management/stop.json",
+      "SHA": "4dcaf281bb003cd928e0d4fad4777ed6c5750786fe90265bb9ed0b521758c487",
+      "B": 1153
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/public-z-1m-parity-management/stop.json",
+      "SHA": "6171e16e594c16d79c17170ae7ed135719a0b24445a177c2d4af5208fb1fbcfb",
+      "B": 1506
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/public-z-2m-management/stop.json",
+      "SHA": "3616b476f4e6b9accf80688868a4bc7476edb8cb3137c4a8bde0c4afd5f509e0",
+      "B": 1651
+    }
+  ],
+  "parity": [
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-1m-parity-v2/parity.json",
+      "SHA": "84554e9f29fb1087cb058379b3e40558be9ae8abff52258ae969a2b553780bfb",
+      "B": 23057
+    },
+    {
+      "path": "/workspaces/quoridor/.worktree/assets/checkpoints/frame23-public-sigma-z-learning/public-z-2m-r1/parity.json",
+      "SHA": "ef9c712879b2155242d68695008cc0983ea77dd30eef6da1d0ff31a828986677",
+      "B": 23042
+    }
+  ],
+  "first_entry": "original failure retained; saved weights parity separately passed; no repeated fit",
+  "source_SHA": {
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/residual_model.py": "6c9aedc1cb0893d6bb6e0cc90eec3fd8ffb069dbe2350af0536aa66d172e746e",
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/test_selected_target.py": "440c2c435908f02e42bbf95b885a43e6a7cf0cfdf20f1afdedfed100128bdc0e",
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/residual_penalty.py": "7266fa339d9e3d9c640ca0de5e98c48434ff57c5118175714a976add8e5556e4",
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/__init__.py": "05011521a4993db992001289548d4c90516495129bc60b9882d6b7211c60aee5",
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/common.py": "8bca062a8d1b7598e363313562407c171cc687278a77381e4218180b9c2ddcbd",
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/route_training.py": "2c656293052ee5c4d727dccdcabf6d510ecbf3aaa29ec34b0b50cdd692237406",
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/cache.py": "a79951451f0d67f5e7f9809acb8a04ef9eef0d9fc2cac652bca4fce73cbbf42f",
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/test_contracts.py": "4bf20848d44355cb04e80a38c595cf71d3a03d5149d89eb4264acc5f71740440",
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/train.py": "77ce43640fec21d0392365baa92e71b9809bf74532e5000114d6370edffbd59a",
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/cycle.py": "afeb1811816ed7c33dd785ee22232dba26003e5c45d068cdc521339aaf0e6154",
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/binding.py": "af656c455349d37ee3397d4c25574c3343c1f82a4d3a3df1448037cb83c37758",
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/model.py": "2baeb2323d98c2422d49045b02dacf1838a0ff1a1e6add631620adb53246b86a",
+    "/workspaces/quoridor/.worktree/frame21-features/python/quoridor_training/scaled_model.py": "e8fb84f2463f6ccc5727042d4461b64938fd3617fe338de616a360cf62ea73d2",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/run_public_fit.py": "d1079abfe5889e7454a6f057091c418421587ac4e34a0598ebfcc5fa56b4bc31",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/public_inputs.py": "6462b29395cc54d1515467e540d3e2579c5272ad5566da7c89acdd4f4935c92a",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/manage_public.py": "1c6a4305aae7f4bd2977a963a3fb8e1ec63d7e756636ffcd41f249629d033f4d",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/prepare_public.py": "ddb53c1ca6ad84b321f0329365b9b7875dcfc735174faee29aee5fc97a109f8f",
+    "/workspaces/quoridor/research-data/ai-sigma/frame23-public-sigma-z-learning/finalize_public_saved.py": "48ada281d3210d20f041ac8bb3fe03e46de0c863a994b9fcca7ab3e92cbd097d"
+  }
+}
