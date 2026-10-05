@@ -1,0 +1,21 @@
+{
+  "issue": "quoridor-4lc.249",
+  "goal_issue": "quoridor-4lc",
+  "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+  "role": "experiment",
+  "cwd": "/workspaces/quoridor/.worktree/ai-sigma",
+  "argv": [
+    "/usr/bin/python3",
+    "-B",
+    "/workspaces/quoridor/.worktree/ai-sigma/tools/ai-sigma-frame20-distance-arena/wait_and_run.py",
+    "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame20-distance-arena/family0-r1-settings.json"
+  ],
+  "end_at": "2026-10-05T02:08:30Z",
+  "notify_until": "2026-10-05T02:15:00Z",
+  "max_runtime_seconds": 1800,
+  "control_interval_seconds": 30,
+  "notify_interval_seconds": 10,
+  "request_timeout_seconds": 25,
+  "log_max_bytes": 65536,
+  "resource_contract": "/workspaces/quoridor/.worktree/ai-sigma/research-data/ai-sigma/frame20-distance-arena/contract.md"
+}
