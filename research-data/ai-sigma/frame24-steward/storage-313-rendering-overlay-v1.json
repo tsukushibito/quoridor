@@ -1,0 +1,38 @@
+{
+  "at": "2026-10-06T01:05:57.634674+00:00",
+  "issue": "quoridor-4lc.313",
+  "recipient_root": "/workspaces/quoridor/research-data/ai-sigma/frame24-curve-rendering",
+  "recipient_actual_B": 8192,
+  "owner_forecast": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame24-curve-rendering/owner-local-forecast-v1.json",
+    "bytes": 855,
+    "sha256": "4df66bc2978f2352ee482e2cb96ae3e54330166cb7685c60813c01ad9f672842"
+  },
+  "recipient_inclusive_forecast_B": 122880,
+  "recipient_cap_B": 131072,
+  "coordinator_existing_cap_B": 7864320,
+  "coordinator_own_after_suballocation_cap_B": 7733248,
+  "fresh_coordinator_directed_roots": [
+    "/workspaces/quoridor/research-data/ai-sigma/frame22-coordinator",
+    "/workspaces/quoridor/research-data/ai-sigma/frame24-coordinator"
+  ],
+  "fresh_coordinator_allocated_B": 2502656,
+  "prior_fullcategory_conservative_hold_B": 4427776,
+  "necessary_coordinator_Git_temp_B": 524288,
+  "conservative_existing_plus_fresh_and_recipient_B": 7585792,
+  "margin_B": 278528,
+  "prior_fullcategory_hold_not_discounted": true,
+  "no_current_recipient_double_add_to_inclusive": true,
+  "base_global_receipt": "research-data/ai-sigma/frame24-steward/storage-admission-v1.json",
+  "base_total_B": 12429307904,
+  "base_cap_B": 12884901888,
+  "UNKNOWN_B": 134217728,
+  "coverage_parent": "/workspaces/quoridor/research-data/ai-sigma",
+  "new_parent_growth_B": 0,
+  "within_existing_reservation": true,
+  "main_source_write_condition": "Only after actual310 all4 model/guard/candidate/source readers STOP; no such STOP proof received by92 at this point",
+  "private_single_synthetic_NN0_fixture": "ownfresh physics/CPU2/RAM128MiB/test5s; no model or Torch imports",
+  "science_or_main_adoption_from_storage": false,
+  "runtime_source_or_old_proof_modified": false,
+  "keeper_metadata_current_forecast_bound": "existing112MiB; initial keeper current+2MiB 22491136B retained as prior point, small overlay within that forecast"
+}

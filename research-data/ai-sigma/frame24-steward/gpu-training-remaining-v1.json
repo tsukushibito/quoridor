@@ -1,0 +1,43 @@
+{
+  "at": "2026-10-06T00:21:36.819640+00:00",
+  "approved_cumulative_GPU_training_seconds": 7200,
+  "authorization_source": {
+    "path": "docs/design/ai-sigma-contract-steward-initial.md",
+    "bytes": 5407,
+    "sha256": "9260174d88e777f79c08499f505c51f2818a84e219348cc6c0f829005d3d2777"
+  },
+  "necessary_range": "first approved research GPU training through frame23 completion; newframe24 training not started by92",
+  "ledger_checked": {
+    "path": "research-data/ai-sigma/resource-ledger.json",
+    "bytes": 2016,
+    "sha256": "e16aba078a6d11c6c3ad17784294e75c9a56cf1d715f9c13a8615518d6d8e8bf"
+  },
+  "ledger_contains_GPU_training_attempt_or_liability_account": false,
+  "prior_unresolved": {
+    "path": "docs/design/ai-sigma-frame12-hypothesis-contract.md",
+    "bytes": 4171,
+    "sha256": "a82f990208d876a3f2712dfb646f190ae15e40def8c6b3f619943d82a5b3fd25"
+  },
+  "latest_scope_policy": {
+    "path": "research-data/ai-sigma/frame22-coordinator/goal-contract.md",
+    "bytes": 2648,
+    "sha256": "f7762581c69bf13171407aea5fc6dd59e4bcdd35bd6bba8c1ba8d84b4bb06e7a"
+  },
+  "confirmed_actual_GPU_training_seconds": null,
+  "failed_or_capped_unknown_liability_upper_seconds": 7200,
+  "upper_is_unresolved_authorization_envelope_not_claimed_actual_spend": true,
+  "confirmed_unused_GPU_training_seconds": 0,
+  "new_GPU_training_permission_seconds": 0,
+  "reason": "GPU_TRAIN_CUMULATIVE_ATTEMPT_COVERAGE_UNAVAILABLE: storage resource-ledger has no GPU training attempt namespace/elapsed/cap/failure liabilities; prior frame12 expressly carried unknown remaining. Filename/field bounded ledger search finds no training usage ledger. Recent CPU-only tasks or no knownCUDA receipt do not prove prior zero.",
+  "required_missing_proof": [
+    "owner-linked complete GPU-training attempt set in the approval interval",
+    "actual elapsed including init/transfer/validation/synchronization/recovery",
+    "failed/timeout/unmeasured attempts conservatively capped; no unbounded-liability discount",
+    "prospective allocation and remaining-7200 equation, distinct from GPU inference"
+  ],
+  "owner": "92 account reconciliation with historical experiment/hypothesis owner evidence viaCoordinator",
+  "next_opportunity": "existingframe24 early reconciliation if exact complete owner evidence arrives; otherwise keepGPUtrain0 and report blocked GPU comparator only",
+  "no_all_history_audit": true,
+  "inference_or_CPU_caps_unmodified": true,
+  "old_UNKNOWN_or_receipt_rewritten": false
+}

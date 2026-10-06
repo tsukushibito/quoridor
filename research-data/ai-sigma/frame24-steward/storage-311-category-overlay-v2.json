@@ -1,0 +1,108 @@
+{
+  "at": "2026-10-06T00:31:23.660168+00:00",
+  "replaces_current_classification_only_not_original_global": true,
+  "prior311_overlay_SHA": "856872230348f47548e4efbf46a111dfa4b452f1fb2c45b556cc1e9556e68797",
+  "directed_entries": [
+    {
+      "name": "existingWT retained source excluding TT-owned records/callers",
+      "path": "/workspaces/quoridor/.worktree/frame21-search",
+      "category": "existing-WT-retained",
+      "exclude": ["frame24-persistent-tt", "alphabeta.rs", "runtime.rs"]
+    },
+    {
+      "name": "TT311 evidence/sourcepack/results",
+      "path": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt",
+      "category": "311-current-owned"
+    },
+    {
+      "name": "TT311 owned caller alphabeta.rs",
+      "path": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-ai/src/alphabeta.rs",
+      "category": "311-current-owned"
+    },
+    {
+      "name": "TT311 owned caller runtime.rs",
+      "path": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-runner/src/runtime.rs",
+      "category": "311-current-owned"
+    }
+  ],
+  "local_current": {
+    "schema": "quoridor-current-storage-v1",
+    "at": "2026-10-06T00:31:23.660137+00:00",
+    "metric": "unique dev/inode st_blocks; reflink shared physical extents unknown",
+    "roots": [
+      {
+        "name": "existingWT retained source excluding TT-owned records/callers",
+        "path": "/workspaces/quoridor/.worktree/frame21-search",
+        "category": "existing-WT-retained",
+        "exclude": ["frame24-persistent-tt", "alphabeta.rs", "runtime.rs"],
+        "logical_file_bytes": 1982167,
+        "allocated_inode_bytes": 2899968,
+        "overlap_allocated_bytes": 0,
+        "files": 260,
+        "symlinks": 0,
+        "missing": false
+      },
+      {
+        "name": "TT311 evidence/sourcepack/results",
+        "path": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt",
+        "category": "311-current-owned",
+        "logical_file_bytes": 174809,
+        "allocated_inode_bytes": 192512,
+        "overlap_allocated_bytes": 0,
+        "files": 6,
+        "symlinks": 0,
+        "missing": false
+      },
+      {
+        "name": "TT311 owned caller alphabeta.rs",
+        "path": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-ai/src/alphabeta.rs",
+        "category": "311-current-owned",
+        "logical_file_bytes": 34284,
+        "allocated_inode_bytes": 36864,
+        "overlap_allocated_bytes": 0,
+        "files": 1,
+        "symlinks": 0,
+        "missing": false
+      },
+      {
+        "name": "TT311 owned caller runtime.rs",
+        "path": "/workspaces/quoridor/.worktree/frame21-search/crates/quoridor-runner/src/runtime.rs",
+        "category": "311-current-owned",
+        "logical_file_bytes": 64450,
+        "allocated_inode_bytes": 65536,
+        "overlap_allocated_bytes": 0,
+        "files": 1,
+        "symlinks": 0,
+        "missing": false
+      }
+    ],
+    "category_current_allocated_bytes": {
+      "existing-WT-retained": 2899968,
+      "311-current-owned": 294912
+    },
+    "retained_allocated_inode_bytes": 3194880,
+    "reservations": [],
+    "unknown_retained_bytes": null,
+    "current_plus_unused_known_bytes": 3194880,
+    "cap_bytes": null,
+    "admission": "unknown",
+    "errors": [],
+    "past_peak_bytes": "not added to current; refer to original run receipts",
+    "unknown_is_free": false,
+    "deleted": false
+  },
+  "oldWT_parent_excludes_new311_records_and_two_owned_callers": true,
+  "TT_owned_actual_B": 294912,
+  "TT_new_reserved_B": 2097152,
+  "TT_forecast_inclusive_B": 2000000,
+  "alignment_handling": "existing caller bytes reclassified to same physical files; newly allocated source increment and unique evidence fit TT2MiB. No newWT/source checkout copy; oldWT8 remains original guard not duplicated current bytes. Namespace root/fullcaller class only, not subtracting unknown from oldglobal.",
+  "each_current_inode_charged_once_within_local_partition": true,
+  "global_original_total_B": 12429307904,
+  "global_original_cap_B": 12884901888,
+  "old3049_75_conserved_with_newTT2": true,
+  "oldglobal_snapshot_or_receipt_changed": false,
+  "global_delta_not_inferred_from_wholeWT_local_bytes": true,
+  "sharedtarget_growth16MiB_inside_existing294growth32MiB": "same v1 bound, do not add another16MiB parent reservation",
+  "source_runtime_watch_editstopstart": false,
+  "ownerentry_fresh_required": true
+}

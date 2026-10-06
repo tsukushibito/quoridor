@@ -1,0 +1,54 @@
+{
+  "at": "2026-10-06T00:26:14.526960+00:00",
+  "run_id": "8628c0a4-9b82-44b2-8fb5-118bad285f69",
+  "first_owned_exact_turn": "01a10e93-299e-7bb2-b78b-73b0f5800e73",
+  "observation_effect_limited": true,
+  "whole_finish_success_certified": false,
+  "natural_judgement_quality_not_certified": true,
+  "refs": [
+    {
+      "path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/supervisor/frame24/8628c0a4-9b82-44b2-8fb5-118bad285f69/observe.json",
+      "bytes": 21697,
+      "SHA256": "37c5b6548289f8c390c9c6521be39d4424ed7d9ea51f1b345e1d2d4559b1f72b",
+      "at": "2026-10-06T00:18:18.875746+00:00",
+      "reason": null,
+      "exit_code": null,
+      "child_reaped": null,
+      "finish": null
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/supervisor/frame24/8628c0a4-9b82-44b2-8fb5-118bad285f69/finish.json",
+      "bytes": 15822,
+      "SHA256": "37901d1be085fa0ee2bb8624f4efdd10f80ec2b64c7a3a8212342708b5398d8a",
+      "at": "2026-10-06T00:19:12.631550+00:00",
+      "reason": "finish cumulative remaining insufficient at admit.storage; spawn refused",
+      "exit_code": null,
+      "child_reaped": null,
+      "finish": {
+        "append": "completed",
+        "backup": "not_reached",
+        "blind_retry": false
+      }
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/supervisor/frame24/8628c0a4-9b82-44b2-8fb5-118bad285f69/finish-backup.json",
+      "bytes": 157,
+      "SHA256": "af4e2f7e0b8da674497a78c81161c5258efe679e6a510837c67d3e7661211465",
+      "at": "2026-10-06T00:19:27.931181+00:00",
+      "reason": null,
+      "exit_code": null,
+      "child_reaped": null,
+      "finish": null
+    },
+    {
+      "path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/supervisor/frame24/8628c0a4-9b82-44b2-8fb5-118bad285f69/separate-backup.json",
+      "bytes": 787,
+      "SHA256": "f77c6cb65406045cd5aea56d20cb41f2c1b0a07c9cbbce405f9bfdec0c53c8f6",
+      "at": "2026-10-06T00:20:06.844138+00:00",
+      "reason": null,
+      "exit_code": 0,
+      "child_reaped": true,
+      "finish": null
+    }
+  ]
+}

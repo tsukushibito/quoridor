@@ -1,0 +1,44 @@
+{
+  "at": "2026-10-06T00:47:39.142859+00:00",
+  "phase": "running",
+  "owned": null,
+  "scheduler": {
+    "pid": 2116552,
+    "start_ticks": "49894932",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "monitor": {
+    "pid": 2116570,
+    "start_ticks": "49894974",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "local_candidate_current_science_readers": [
+    {
+      "identity": {
+        "pid": 2161546,
+        "start_ticks": "50072542",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "argv": "/bin/bash -c UV_NO_SYNC=1 UV_OFFLINE=1 PYTHONDONTWRITEBYTECODE=1 CODEX_THREAD_ID=01a0f31d-99ee-7d63-b162-bc1a59c457c6 taskset -c 0 /home/vscode/.cache/inference/envs/quoridor-research-team/bin/python -B - <<'PY'\nimport pathlib,json,importlib.util,datetime,hashlib,asyncio,os\ns=importlib.util.spec_from_file_location('w','scripts/dev/research-watch.py');w=importlib.util.module_from_spec(s);s.loader.exec_module(w);t=w.scheduler.team;r=pathlib.Path('/workspaces/quoridor');out=r/'research-data/ai-sigma/frame24-steward';run=r/'.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame24';e=json.loads((run/'expectations.json').read_text());st=w.state_read(e)\ncandidate=[];unreadable=0\nfor d in pathlib.Path('/proc').iterdir():\n if not d.name.isdigit():continue\n try:\n  if d.stat().st_"
+    }
+  ],
+  "proc_transient_unreadable_count": 0,
+  "fullhost_or_futureabsence_certified": false,
+  "owner_stop_refs": [
+    {
+      "path": "/workspaces/quoridor/.worktree/frame21-search/research-data/ai-sigma/frame24-persistent-tt/source-science-stop-v1.json",
+      "sha256": "4df48145b8ac8bfb896d8827c99c63c8ac77e22128eacd60e42a2934fd282bd3"
+    },
+    {
+      "path": "/workspaces/quoridor/research-data/ai-sigma/frame24-trainer-observation/source-stop-handoff-v1.json",
+      "sha256": "39cfa857c6808d4228bfef9219cfd9cf7882967702533c0f2bc3b3c2c827aa18"
+    }
+  ],
+  "official": {
+    "Sup": {
+      "type": "idle"
+    },
+    "Supturn": "01a10ea5-76bd-7612-9805-1d1ab1665b0d",
+    "source_window_notice": "accepted_to_current_coor"
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "at": "2026-10-06T00:57:11.179852+00:00",
+  "issue": "quoridor-4lc.310",
+  "source_asset_roots": [
+    "/workspaces/quoridor/research-data/ai-sigma/frame24-learning-diagnosis",
+    "/workspaces/quoridor/.worktree/assets/checkpoints/frame24-learning-diagnosis"
+  ],
+  "declared_future_absent_roots_fully_reserved": [],
+  "fresh_scope_actual_B": 114688,
+  "owner_inclusive_B": 7985672,
+  "cap_B": 9437184,
+  "margin_vs_inclusive_B": 1451512,
+  "donor_fresh": {
+    "285": {
+      "roots": [
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-independent-teachers",
+        "/workspaces/quoridor/.worktree/assets/inputs/frame23-independent-teachers"
+      ],
+      "fresh_allocated_B": 210825216,
+      "necessary_Git_tmp_final_B": 75497472,
+      "inclusive_needed_B": 286322688,
+      "retainedcap_B": 287309824,
+      "margin_B": 987136
+    },
+    "299": {
+      "roots": [
+        "/workspaces/quoridor/research-data/ai-sigma/frame23-native-z-fresh-evaluation",
+        "/workspaces/quoridor/.worktree/assets/inputs/frame23-native-z-fresh-evaluation"
+      ],
+      "fresh_allocated_B": 4636672,
+      "necessary_Git_tmp_final_B": 8388608,
+      "inclusive_needed_B": 13025280,
+      "retainedcap_B": 13631488,
+      "margin_B": 606208
+    }
+  },
+  "owner_forecast": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame24-learning-diagnosis/owner-local-forecast-v1.json",
+    "bytes": 2013,
+    "sha256": "556e4e3ad0f6cd42ae2ee9dcdfbea916a183147de391542e841f4889581ae4a6"
+  },
+  "donor_v2": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-import/closed285299-dense310-storage-donor-v2.json",
+    "bytes": 2446,
+    "sha256": "85a9809b68a35feba2b7159c799ac7fe8fdac60641eba3273bfd2388c12b20ee"
+  },
+  "accepted_chain_v3": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame23-sigma-public-z-import/dense310-storage-accepted-chain-addendum-v3.json",
+    "bytes": 1885,
+    "sha256": "5ba58dfe17f5c1c9898fbb4ca8843eb7edd5a3761f681c7fcae545a6c8ebb364"
+  },
+  "initial7MiB_accepted_receipt_retained": {
+    "receipt": "closed285-dense310-storage-donor-v1.json",
+    "SHA": "58bfca4fe8b90b25684af92160cf89869460ec6134402c0854e63cd454b593ac",
+    "old285_before_MiB": 276,
+    "old285_after_MiB": 275,
+    "310_before_MiB": 6,
+    "310_after_MiB": 7,
+    "state": "Accepted actual conserved allocation; retained, not undone or relabelled"
+  },
+  "current_conservation_MiB": "276+14+6=275+14+7=274+13+9=296; chronological accepted chain, no reversal",
+  "base_full_global": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame24-steward/storage-current-v1.json",
+    "bytes": 38930,
+    "sha256": "9ed33d051c9e76dafd91055263e343b071533bbf5f299eb3530a9015dbaf7207"
+  },
+  "base_total_B": 12429307904,
+  "base_cap_B": 12884901888,
+  "UNKNOWN_B": 134217728,
+  "coverage": {
+    "source": "/workspaces/quoridor/research-data/ai-sigma",
+    "assets": "/workspaces/quoridor/.worktree/assets",
+    "both_already_directed_parent_roots": true
+  },
+  "additional_parent_allocation_B": 0,
+  "original6and7insufficiency_receipts_unchanged": true,
+  "dense_storage_item_admitted": true,
+  "syntheticforecast_not_universal_size_guarantee": true,
+  "everyentry_owner_actual_and_remaining_guard_required": true,
+  "old_model_raw_private_data_archives_or_closedfee_reset": false,
+  "new_GPU3600_binding_loaded": {
+    "path": "/workspaces/quoridor/research-data/ai-sigma/frame24-steward/GPU3600-running-loaded-v1.json",
+    "bytes": 5733,
+    "sha256": "a50e044fb8f0812df9211067511358e989561c7584cdedecd1531c67a60c4711"
+  },
+  "current_phase": "running",
+  "current_scheduler": {
+    "pid": 2169413,
+    "start_ticks": "50105376",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "new3600_namespace": "frame24-new-GPU-training-3600",
+  "old7200_UNKNOWN_unchanged": true,
+  "no_new_science_permission_from_storage": true,
+  "no_whole_rescan_or_copy_or_delete": true
+}

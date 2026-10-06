@@ -1,0 +1,40 @@
+{
+  "scope": "read existing stopped scalar metrics only, no model/forward/heldout",
+  "cases": {
+    "A": {
+      "compressed_sha256": "d8523b8d742ba438e3cb724931b723e59e13b9d3e38855801a3c7352bcc8be73",
+      "recorded_points": 200,
+      "best_recorded": {
+        "step": 926,
+        "training_seen": 118528,
+        "row_epoch": 8.007025602918327
+      },
+      "best_family_selection_mse": 0.5828600392375197,
+      "first_family_selection_mse": 0.6608672738504593,
+      "last_family_selection_mse": 0.7478949277500688,
+      "full_train_initial_family_mse": 0.6153874875862496,
+      "full_train_final_family_mse": 0.005187532033559194,
+      "last_validation_saturation": 0.4722163532643144,
+      "selected_validation_saturation": 0.1648003380519755
+    },
+    "B": {
+      "compressed_sha256": "a45d323edcb69741910bf4bf20ee9ae64b0de75ba0bd7a95312c49ef48e8b575",
+      "recorded_points": 200,
+      "best_recorded": {
+        "step": 3817,
+        "training_seen": 488576,
+        "row_epoch": 33.00520164831453
+      },
+      "best_family_selection_mse": 0.5742168025927724,
+      "first_family_selection_mse": 0.6608672738504593,
+      "last_family_selection_mse": 0.5749242003511239,
+      "full_train_initial_family_mse": 0.6153874875862496,
+      "full_train_final_family_mse": 0.24990214590623658,
+      "last_validation_saturation": 0.20219733784069302,
+      "selected_validation_saturation": 0.18994295372913586
+    }
+  },
+  "plot": "research-data/ai-sigma/frame24-learning-diagnosis/dense-learning-A-B-v1.png",
+  "visual_inspection": "actual axes/points/scopes/rowpasses not epochs/best/Dconstant/cost present",
+  "inference": "A late training fit versus validation regression supports overfit/exposure/learning-window diagnosis in small chosen corpus; B lower LR shifts window later and improves sampled family minimum, convergence remains unresolved. Not pure data/teacher/architecture cause or playing strength."
+}

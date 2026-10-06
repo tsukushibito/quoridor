@@ -1,3 +1,11 @@
+# Frame24 continuous extension25 — current authority
+
+User extension received 2026-10-06T01:24:53Z. Original start00:08:46Z stays; parent end04:08:46Z, heavy03:58:46Z, Supervisor scheduler04:03:46Z, monitor04:06:46Z, save04:08:46Z. Sole92 runtime update requested through existing session; running-loaded proof pending. GPU3600 not reset: foundation consumed13.493288946, remaining3586.506711054; old7200 UNKNOWN separate. Existing individual deadlines/caps/failed fees unchanged. Contract research-data/ai-sigma/frame24-coordinator/extension25-runtime-and-resource-contract.md.
+
+310 foundation both512steps complete, each146932NN, total293864/MAX2 used. Small batch128 cold comparison CPU background11.677261 versus CUDA13.493289, numerics close; no GPU time-saving claim or general GPU rejection. Dense A4000steps/200points completed1893734NN, recorded family minimum926=.582860039 at118528seen, not continuous optimum or heldout strength. Dense B initial admission rejected inclusive output forecast before model Popen; NN0/MAX0, preserved failure and same-unstarted-case controller/forecast correction requested. Dense original science01:40/source01:45/save01:50 retained.
+
+313 finite private renderer XML5PASS/NN0, main adoption NOT_STARTED because all4 reader STOP absent by original01:30. Preserve stopped candidate and archive; next explicit transfer phase after all4 STOP, no trainer edits during current scientific readers. User extension is not retrospective deadline pass. Main TT311 adopted finite correctness remains unmeasured on representative NNUE whole-caller workload. Million-distinct GPU-primary future proposal and public-prefix subset diversity limits retained; no new method/data/batch intervention from extension.
+
 # frame24 現在の配分と判断
 
 2026-10-06 00:08:46起点の明示2時間枠。新heavy開始停止01:58:46、Sup/scheduler回収02:03:46、monitor02:06:46、保存終了02:08:46。旧frame23の個別失敗・期限・累積費/UNKNOWNを救済しない。主課題は学習状況を判別できる観測と分析で、重要sampling/teacher/architecture/feature/data-scale変更は事実・不足・競合案・全費をRoot経由でユーザーへ提示する。通常の修復・同条件観測と正しさ検証を先に実施する。
@@ -10,6 +18,10 @@
 GPU学習は00:32:01Zのユーザー新明示3600秒を別namespace/ledgerで受入れ。旧7200秒のUNKNOWN/失敗/原receiptを保全し、その残量復元を今回の開始gateにしない。310の同batch128・同初期/model/FP32/optimizer/旧sampler512step CPU/CUDA比較へ確認済unused300kNN/MAX2を配分。初回CPU90秒/CUDA300秒以内、GPU init/転送/validation/同期/記録/回収・失敗を3600累積へ課金、親終了との早い方まで。新batch/モデル/教師/データ変更は追加しない。現在の最大不足は308出力容量で、fullgroup payloadを400点重複するとVだけ29.95MBとなる。観測密度と数式を保ちcanonical記録を軽量化し、独立NN0確認と92新loaded/freshphysics/ownerforecast後に実測する。
 
 初配分のMAX18→11案は旧actual15を下回るため未採択/未実行。訂正版oldlive18→15+tiny3081+conditionalfoundation2、closed304unused2→dense3102、closed305unused1→TT3111。旧NN4.725m=522k+3.9m+300k+1000+2000のowner-confirmed transfer、data9.75=.25old+1.25repair+6dense+2TT+.25analysis、閉304の180秒/2slotは310へ前向き受入れ。範囲の実claim・科学開始・結果・影響を分け、静的準備を全役ACK待ちにしない。308軽量記録は停止fab496/独立NN0確認PASS（元live3PASS1ERROR/120NN/MAXを保持）、新GPU3600は92新2169413/2169432 loaded14PASS。圧縮模擬6583133Bは旧6MiB不足として保全し、closed285276→274/old29914→13により新3109MiBへconserve、ownerinclusive7985672Bをsmalloverlayへ。最大未成立は本人first actualCPU/CUDA結果・密な曲線と物理/保存入場である。
+
+公開source全体と採用subsetを分ける。Root実読のimport-public.py complete_groupsはfull8plane STM f32bytesごとの全出現countを保ち、first-original-index順でgroupを追加して行cap超過時breakするprefix採択で、全43/全範囲の均等・層別sampleではない。公開総保存18,914,078行の全体distinct/phase統計は未測。今回T67937/4996入力・V19846/20入力は選択sampleの制約であり、特にV20種類は広い汎化を支持しない。まず露出・重複・有効入力数・選択代表性を疑い、公開全体/domain/teacherやNNUE一般を主要原因としない。全43 input-only coverage/漏洩保護・代表的validation・whole費は次重要提案としてRoot/ユーザーへ出し、新取得/split/学習方法をこの補足から自動実施しない。
+
+実CPU foundation512は再入力guard修復後purpose_complete:true/146932NN/65536seen/12実測点、guardwhole11.4519217s/model4.5500867s/selected512MSE.6116779602。固定2048T診断とfull4733Vで、random4.4272相当passesは完成epochではない。初回R1はnewloaded.frame欠測KeyError/Popen前NN0/scienceMAX0として保全、元admission/管理費を成功へ置換していない。CUDA実開始・対比結果は未受領。
 
 具体契約・初実受付は [frame24-coordinator](../../research-data/ai-sigma/frame24-coordinator/) とcurrent Beads308/310/311。01:40頃までに92終了判断・Sup自然振返り十分性を枠内で依頼し、02:08:46の自動延長0。
 

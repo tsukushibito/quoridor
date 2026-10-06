@@ -1,0 +1,91 @@
+{
+  "at": "2026-10-06T00:15:25.347903+00:00",
+  "old_phase": "stopped",
+  "old_process": null,
+  "old_owned": null,
+  "old_recovery": false,
+  "old_fatal": null,
+  "scheduler_old_exact_alive": false,
+  "monitor_old_exact_alive": false,
+  "old_refs": {
+    "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22-extension23/expectations.json": {
+      "bytes": 7368,
+      "sha256": "dd345ec14d63e7b26ee48ff6125c6cf779dc62765c2175d09657c1cb8c8aa04e"
+    },
+    "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22-extension23/monitor-ended.json": {
+      "bytes": 294,
+      "sha256": "45d5d3f605610f15874a0c8919713c9910dac2db42421203bde52009834a9a3f"
+    },
+    "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame22-extension23/scheduler-end-stop.json": {
+      "bytes": 1585,
+      "sha256": "924b7c588ebdd7258dfabc7dcab119ea8dcd952143dbb57a6314beba77ab3b49"
+    },
+    "/workspaces/quoridor/.artifacts/research-team/frame22-extension23/scheduler/state.json": {
+      "bytes": 1084,
+      "sha256": "f0ad33aab14563fcf57bf9a1604c075f5e602b0db470f067438f671348a5e35e"
+    }
+  },
+  "six_digests": {
+    "coordinator": {
+      "actual": "0191b13195716d4f6877eb2dcbca8f50ece9702bda0cdf4c0336c8e887bba2b8",
+      "registered": "0191b13195716d4f6877eb2dcbca8f50ece9702bda0cdf4c0336c8e887bba2b8"
+    },
+    "hypothesis": {
+      "actual": "1576914f06dbc089a3ac11a2454f1a87e3153bd2bfe173662f44bff492657b6c",
+      "registered": "1576914f06dbc089a3ac11a2454f1a87e3153bd2bfe173662f44bff492657b6c"
+    },
+    "experiment": {
+      "actual": "09c3472d031e94f10263ba518abb57b1c9876e84712ef7d59fca6989b32d9720",
+      "registered": "09c3472d031e94f10263ba518abb57b1c9876e84712ef7d59fca6989b32d9720"
+    },
+    "critic": {
+      "actual": "b5a20ad0f99585ec5d308759dd74aa4db057c34521136abd1c9659f9a8d5c268",
+      "registered": "b5a20ad0f99585ec5d308759dd74aa4db057c34521136abd1c9659f9a8d5c268"
+    },
+    "steward": {
+      "actual": "4825793a827508fba70c7a5ea0984e5a6dd7dcf03a430ef6613e263a5b07fc2e",
+      "registered": "4825793a827508fba70c7a5ea0984e5a6dd7dcf03a430ef6613e263a5b07fc2e"
+    },
+    "supervisor": {
+      "actual": "4f58a22cb9c77ca4c64962383de900dfb3d88968b82bf51a65bd7cb47699d900",
+      "registered": "4f58a22cb9c77ca4c64962383de900dfb3d88968b82bf51a65bd7cb47699d900"
+    }
+  },
+  "official": {
+    "supervisor": {
+      "thread": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+      "status": {
+        "type": "idle"
+      },
+      "latest": [
+        {
+          "id": "01a10e62-9443-7bf0-b34a-9753b94aca6a",
+          "status": "completed",
+          "error": null
+        }
+      ],
+      "cwd": "/workspaces/quoridor"
+    },
+    "coordinator": {
+      "thread": "01a0f31b-3409-75f2-a30e-453a50484f94",
+      "status": {
+        "type": "active",
+        "activeFlags": []
+      },
+      "latest": [
+        {
+          "id": "01a10e8c-3b80-74e2-b8ba-7c3d90c252cf",
+          "status": "inProgress",
+          "error": null
+        }
+      ],
+      "cwd": "/workspaces/quoridor"
+    },
+    "intake_delivery": {
+      "turnId": "01a10e8c-3b80-74e2-b8ba-7c3d90c252cf"
+    }
+  },
+  "keeper_current_B": 20303872,
+  "keeper_new_forecast_B": 2097152,
+  "keeper_guard_B": 117440512
+}

@@ -1,0 +1,30 @@
+{
+  "at": "2026-10-06T00:48:30.635745+00:00",
+  "own_probe_false_positive_original_ref": "GPU3600-safe-window-v1.json",
+  "correction": "original candidate was completed own read-only bash probe containing search words in heredoc. Check actual argv tokens as executable/script paths, not whole shell-source substring. Original receipt kept. No signal/source edits occurred before this correction.",
+  "actual_current_science_or_guard_candidates": [],
+  "phase": "running",
+  "owned": null,
+  "Sup": {
+    "status": {
+      "type": "idle"
+    },
+    "lastturn": "01a10ea5-76bd-7612-9805-1d1ab1665b0d",
+    "laststatus": "completed"
+  },
+  "old_scheduler": {
+    "pid": 2116552,
+    "start_ticks": "49894932",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "old_monitor": {
+    "pid": 2116570,
+    "start_ticks": "49894974",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "owner_stop_refs": [
+    "frame24-persistent-tt/source-science-stop-v1.json",
+    "frame24-trainer-observation/source-stop-handoff-v1.json"
+  ],
+  "fullhost_future_or_descendant_absence_certified": false
+}

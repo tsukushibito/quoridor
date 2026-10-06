@@ -1,0 +1,481 @@
+{
+  "commit": "8fdeb5052925759b881d59a6589217dd4b1cb88f",
+  "paths": [
+    {
+      "path": "crates/quoridor-ai/src/alphabeta.rs",
+      "commit_bytes": 51547,
+      "commit_sha256": "7422a14ff83926c673300597a3a24874a0a7141d467b3d6021e26b4e8554d538",
+      "current_sha256": "7422a14ff83926c673300597a3a24874a0a7141d467b3d6021e26b4e8554d538",
+      "current_equal": true
+    },
+    {
+      "path": "crates/quoridor-runner/src/runtime.rs",
+      "commit_bytes": 64575,
+      "commit_sha256": "d3fa8b06f0b3bc56d6fe49094e23a28dc4c5d5351e67d6bcab94c56d3a385b4a",
+      "current_sha256": "d3fa8b06f0b3bc56d6fe49094e23a28dc4c5d5351e67d6bcab94c56d3a385b4a",
+      "current_equal": true
+    },
+    {
+      "path": "docs/development/rust-ai.md",
+      "commit_bytes": 13696,
+      "commit_sha256": "c43943c467fe18c15b9925d0190c6d538917e56ad3a9caa949bbd0e8ce74e6ab",
+      "current_sha256": "c43943c467fe18c15b9925d0190c6d538917e56ad3a9caa949bbd0e8ce74e6ab",
+      "current_equal": true
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-current-priorities.md",
+      "commit_bytes": 52309,
+      "commit_sha256": "7e51354c2bef960acae9bbda8bc0c2652f33c9c0233397c8c64c5eecd0e96c4b",
+      "current_sha256": "4aa9a2256372ee211128538f7e08c4c5fbafa9be700674e7c07922bf4b73a09b",
+      "current_equal": false
+    },
+    {
+      "path": "python/quoridor_training/common.py",
+      "commit_bytes": 10577,
+      "commit_sha256": "5c83814985e62f2550e95423fd90e22d1a205e585715ee6e58d37726b921afbb",
+      "current_sha256": "5c83814985e62f2550e95423fd90e22d1a205e585715ee6e58d37726b921afbb",
+      "current_equal": true
+    },
+    {
+      "path": "python/quoridor_training/sampling.py",
+      "commit_bytes": 3812,
+      "commit_sha256": "a25fc22b4b1fe10485f833055cdb52090e0424324920057e20fa9c2e2ac60c58",
+      "current_sha256": "a25fc22b4b1fe10485f833055cdb52090e0424324920057e20fa9c2e2ac60c58",
+      "current_equal": true
+    },
+    {
+      "path": "python/quoridor_training/test_observation.py",
+      "commit_bytes": 10790,
+      "commit_sha256": "ef42782835a2c6d513ac9b8b77a0ab68d76dc9ee1a8dc76c0a071fd4ba92c8fd",
+      "current_sha256": "ef42782835a2c6d513ac9b8b77a0ab68d76dc9ee1a8dc76c0a071fd4ba92c8fd",
+      "current_equal": true
+    },
+    {
+      "path": "python/quoridor_training/train.py",
+      "commit_bytes": 40703,
+      "commit_sha256": "ba317c1ed2580bca259a10f7bc5dac6ad689a9252677ecd6c2711e86a573a75c",
+      "current_sha256": "ba317c1ed2580bca259a10f7bc5dac6ad689a9252677ecd6c2711e86a573a75c",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-coordinator/curve-rendering-contract.md",
+      "commit_bytes": 2582,
+      "commit_sha256": "b2c06f0087d9a4b3c79b2e6cda964fc4158f2bb9b03945e298a3d03e94e4406e",
+      "current_sha256": "b2c06f0087d9a4b3c79b2e6cda964fc4158f2bb9b03945e298a3d03e94e4406e",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-coordinator/frame24-runtime-and-resource-contract-before-gpu3600-v1.md",
+      "commit_bytes": 3333,
+      "commit_sha256": "d97131cc197aa5f71048978a7512c883fedda7d7d7c1aa087f9c9f3bbebd5eac",
+      "current_sha256": "d97131cc197aa5f71048978a7512c883fedda7d7d7c1aa087f9c9f3bbebd5eac",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-coordinator/frame24-runtime-and-resource-contract.md",
+      "commit_bytes": 4274,
+      "commit_sha256": "2aba4cb7c0decb841004fb9c43f73e1bb742f449eccd1d059e7846a5d39ec816",
+      "current_sha256": "2aba4cb7c0decb841004fb9c43f73e1bb742f449eccd1d059e7846a5d39ec816",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-coordinator/initial-actual-allocation-v1.json",
+      "commit_bytes": 1659,
+      "commit_sha256": "c62483c57fd58c22e9fd29f6e80d8adcb85c031b960a7c473c05b7bc5daa0c64",
+      "current_sha256": "c62483c57fd58c22e9fd29f6e80d8adcb85c031b960a7c473c05b7bc5daa0c64",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-coordinator/observer-metadata-independent-result-v1.json",
+      "commit_bytes": 683,
+      "commit_sha256": "8534c5f0c0e8ffe8ea1c3e8d341489346e391420cc183ac308c691bc00ea7bd6",
+      "current_sha256": "8534c5f0c0e8ffe8ea1c3e8d341489346e391420cc183ac308c691bc00ea7bd6",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-coordinator/output-pair-size-estimate-correction-v1.json",
+      "commit_bytes": 725,
+      "commit_sha256": "9ee512547353f413f587cc7d45ea5785386946c4f9aaa745e8edc8827b34989c",
+      "current_sha256": "9ee512547353f413f587cc7d45ea5785386946c4f9aaa745e8edc8827b34989c",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-coordinator/persistent-tt-functional-frame24-contract.md",
+      "commit_bytes": 3912,
+      "commit_sha256": "386d9d8df6879c666cbf4d8fb5960061bedec01359dd085df1efa19b1a2d1280",
+      "current_sha256": "386d9d8df6879c666cbf4d8fb5960061bedec01359dd085df1efa19b1a2d1280",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-coordinator/persistent-tt-independent-adoption-v1.json",
+      "commit_bytes": 2768,
+      "commit_sha256": "6cf359c4d0fcf381efa20520dccabd7aced8230fba61e12d1a61b31eb8edadec",
+      "current_sha256": "6cf359c4d0fcf381efa20520dccabd7aced8230fba61e12d1a61b31eb8edadec",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-coordinator/saved-analysis-current-reference-v1.json",
+      "commit_bytes": 561,
+      "commit_sha256": "2935f80d7354e8d8503b020ffff167b500168a0f6c2a245214f83f9732e705b8",
+      "current_sha256": "2935f80d7354e8d8503b020ffff167b500168a0f6c2a245214f83f9732e705b8",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-coordinator/saved-learning-analysis-and-dense-observation-contract-before-gpu3600-v1.md",
+      "commit_bytes": 4200,
+      "commit_sha256": "812f41cfb74f29290c15adac2a6729783c185965af542ea9f6866ccd5c72eaab",
+      "current_sha256": "812f41cfb74f29290c15adac2a6729783c185965af542ea9f6866ccd5c72eaab",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-coordinator/saved-learning-analysis-and-dense-observation-contract.md",
+      "commit_bytes": 5308,
+      "commit_sha256": "04745eb604ff03bcb7259dba993e809e597afab942dab98798bf8b5be1964c3d",
+      "current_sha256": "04745eb604ff03bcb7259dba993e809e597afab942dab98798bf8b5be1964c3d",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-coordinator/trainer-independent-acceptance-v1.json",
+      "commit_bytes": 1596,
+      "commit_sha256": "31eac06d4902ad34cc46e84577a43381ea74fbae5af3b1a429c93ff8d9433f36",
+      "current_sha256": "31eac06d4902ad34cc46e84577a43381ea74fbae5af3b1a429c93ff8d9433f36",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-coordinator/trainer-observation-repair-308-contract.md",
+      "commit_bytes": 4333,
+      "commit_sha256": "949a7d7d5e1ee267a770b7e95b2e7a88b58e7213685c963fd8b7567d19ccda40",
+      "current_sha256": "949a7d7d5e1ee267a770b7e95b2e7a88b58e7213685c963fd8b7567d19ccda40",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-coordinator/tt311-current-source-v1.tar.gz",
+      "commit_bytes": 97920,
+      "commit_sha256": "c49713bc6211488ea6bdc7da8656d371e75878d8310e6fd8f215f8126af94887",
+      "current_sha256": "c49713bc6211488ea6bdc7da8656d371e75878d8310e6fd8f215f8126af94887",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-coordinator/tt311-necessary-evidence-v1.tar.gz",
+      "commit_bytes": 82739,
+      "commit_sha256": "72c0ad2772fed16d5abd756761816952dd5592c0f36eccea7e1fe53d43ee0130",
+      "current_sha256": "72c0ad2772fed16d5abd756761816952dd5592c0f36eccea7e1fe53d43ee0130",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-coordinator/tt311-old-WT-sourcepoint-v1.tar.gz",
+      "commit_bytes": 148551,
+      "commit_sha256": "581939172c297d0a0ec2a295a11162c88396625d0d5a1c14adbc92f6f27fa6e3",
+      "current_sha256": "581939172c297d0a0ec2a295a11162c88396625d0d5a1c14adbc92f6f27fa6e3",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-coordinator/tt311-preservation-import-v1.json",
+      "commit_bytes": 1646,
+      "commit_sha256": "89b20f057a92de9469f5902dbceed40e57083fa414e9c5b0876a7a43a9d1a6b5",
+      "current_sha256": "89b20f057a92de9469f5902dbceed40e57083fa414e9c5b0876a7a43a9d1a6b5",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-coordinator/verify_observer_metadata.py",
+      "commit_bytes": 3486,
+      "commit_sha256": "8fe2dc9d5bf60f116bb08ac453b163f3db229dad832e30b4f76b8aa3638e69f3",
+      "current_sha256": "8fe2dc9d5bf60f116bb08ac453b163f3db229dad832e30b4f76b8aa3638e69f3",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/admission-difference-report.txt",
+      "commit_bytes": 807,
+      "commit_sha256": "062b87af06b924d51121b323664f83c4cef8b457c341ac9a21cd6cd61ae03125",
+      "current_sha256": "062b87af06b924d51121b323664f83c4cef8b457c341ac9a21cd6cd61ae03125",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/closed304-frame24-donor-v1.json",
+      "commit_bytes": 4353,
+      "commit_sha256": "a573152c63c2728bbc0cd78a61070fc8b8fde7933bab637940ea4a85ad673749",
+      "current_sha256": "a573152c63c2728bbc0cd78a61070fc8b8fde7933bab637940ea4a85ad673749",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/compact-current-source-v2.tar.gz",
+      "commit_bytes": 25907,
+      "commit_sha256": "f3029cd2d4929e8cf103647b81c3cfd0876cc30b13ef5aca71c9dddfbf45869d",
+      "current_sha256": "f3029cd2d4929e8cf103647b81c3cfd0876cc30b13ef5aca71c9dddfbf45869d",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/compact-observer-critical-report.txt",
+      "commit_bytes": 1332,
+      "commit_sha256": "bc4066cbc69a98008aeaf4e78118f15f6f1ce8c4de9fb1fc6f9a85a01547dc66",
+      "current_sha256": "bc4066cbc69a98008aeaf4e78118f15f6f1ce8c4de9fb1fc6f9a85a01547dc66",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/compact-ready-report.txt",
+      "commit_bytes": 1101,
+      "commit_sha256": "5292a1ff31a612da3b28561bd3d81c97b85726422c0f434d50f33346869b2509",
+      "current_sha256": "5292a1ff31a612da3b28561bd3d81c97b85726422c0f434d50f33346869b2509",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/compact-source-stop-v2.json",
+      "commit_bytes": 2163,
+      "commit_sha256": "fab496d61ee1785e669f71c8616e31b24ca59ec7f36c7566be68a9cd309f889e",
+      "current_sha256": "fab496d61ee1785e669f71c8616e31b24ca59ec7f36c7566be68a9cd309f889e",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/current-source-handoff-v1.tar.gz",
+      "commit_bytes": 22879,
+      "commit_sha256": "3327dc8783142a08a4a98d3f532ee74545d22d9c6ea9bf2f0a9e693f92b4912e",
+      "current_sha256": "3327dc8783142a08a4a98d3f532ee74545d22d9c6ea9bf2f0a9e693f92b4912e",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/deadline-correction-report.txt",
+      "commit_bytes": 670,
+      "commit_sha256": "5f9b77fd2351fde80f88c34e8c877175086426a99bc9c66c467c7902c53a5768",
+      "current_sha256": "5f9b77fd2351fde80f88c34e8c877175086426a99bc9c66c467c7902c53a5768",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/donor-report.txt",
+      "commit_bytes": 684,
+      "commit_sha256": "ab717ebae275f2405f526b79b0c70d1346d9d2ef43fb26010f0e89af7619a9e6",
+      "current_sha256": "ab717ebae275f2405f526b79b0c70d1346d9d2ef43fb26010f0e89af7619a9e6",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/early-report.txt",
+      "commit_bytes": 1071,
+      "commit_sha256": "e9be69024577331d56290193b6860144c5e8ab88ba9754c12add7cecece76a91",
+      "current_sha256": "e9be69024577331d56290193b6860144c5e8ab88ba9754c12add7cecece76a91",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/explicit-git-retention-manifest-v1.json",
+      "commit_bytes": 10385,
+      "commit_sha256": "ed52adfd8e1f2a57bcedcb4335d04d7b7df9491eeb139d097caa1da85753909c",
+      "current_sha256": "ed52adfd8e1f2a57bcedcb4335d04d7b7df9491eeb139d097caa1da85753909c",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/failed-verification-source-v1.tar.gz",
+      "commit_bytes": 16095,
+      "commit_sha256": "c378de7b53112b1d5a7bf89687031e066f83675159299439c821659425459d3f",
+      "current_sha256": "c378de7b53112b1d5a7bf89687031e066f83675159299439c821659425459d3f",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/final-finite-report.txt",
+      "commit_bytes": 931,
+      "commit_sha256": "fc55719036a50f1d7f611a6a6375868807e99030e6f91d42b21c93f296bb3e5f",
+      "current_sha256": "fc55719036a50f1d7f611a6a6375868807e99030e6f91d42b21c93f296bb3e5f",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/final-finite-retention-v1.tar.gz",
+      "commit_bytes": 126313,
+      "commit_sha256": "310b3cf940352e9f6c32c2e0eff3a18208afb22ad0429754c731555d51a29ce7",
+      "current_sha256": "310b3cf940352e9f6c32c2e0eff3a18208afb22ad0429754c731555d51a29ce7",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/finite-verification-and-budget-bound-v1.json",
+      "commit_bytes": 1585,
+      "commit_sha256": "cab8822332ac41d43ddd54ff82e61a76a228b9cf918c6c54d6ad254cf83af287",
+      "current_sha256": "cab8822332ac41d43ddd54ff82e61a76a228b9cf918c6c54d6ad254cf83af287",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/independent-metadata-donor-v1.json",
+      "commit_bytes": 1464,
+      "commit_sha256": "e4dff688b2ba12cd9e9543ac891cebd24b25c9cf75f4d033f44b5f4558226c78",
+      "current_sha256": "e4dff688b2ba12cd9e9543ac891cebd24b25c9cf75f4d033f44b5f4558226c78",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/independent_metadata_fixture_308.py",
+      "commit_bytes": 5547,
+      "commit_sha256": "fcd803c36292ff0cefffaa3589768e927feae955ba0155585268294150f22076",
+      "current_sha256": "fcd803c36292ff0cefffaa3589768e927feae955ba0155585268294150f22076",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/nn-ledger.jsonl",
+      "commit_bytes": 570,
+      "commit_sha256": "f360039882da537e87fae8447ca46e4391535ddf3032f4cbfd31aa201ebeb765",
+      "current_sha256": "f360039882da537e87fae8447ca46e4391535ddf3032f4cbfd31aa201ebeb765",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/owned-source-diff-v1.patch",
+      "commit_bytes": 44255,
+      "commit_sha256": "1399ef9181926225f8bfae3f2bf552f479fa301feef7f6bdfef60a0e0bd72b21",
+      "current_sha256": "1399ef9181926225f8bfae3f2bf552f479fa301feef7f6bdfef60a0e0bd72b21",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/owned-source-diff-v2.patch",
+      "commit_bytes": 50074,
+      "commit_sha256": "da31129f3d82d4cdbbbf3881be6a48e3acbd275205c19ecc66c6f11b151730f7",
+      "current_sha256": "da31129f3d82d4cdbbbf3881be6a48e3acbd275205c19ecc66c6f11b151730f7",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/owner-local-forecast-v1.json",
+      "commit_bytes": 1272,
+      "commit_sha256": "ad8c592b0acb5b02823dc5dbf47bf5615d613c858bd006cf0a52fca63f5d6d57",
+      "current_sha256": "ad8c592b0acb5b02823dc5dbf47bf5615d613c858bd006cf0a52fca63f5d6d57",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/pre-admission-ram-guard-v1.py.gz",
+      "commit_bytes": 2423,
+      "commit_sha256": "d6a84754273b1fb08de4de33fc2aa726783974ded4247df053b1c04ec63d296d",
+      "current_sha256": "d6a84754273b1fb08de4de33fc2aa726783974ded4247df053b1c04ec63d296d",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/pre-admission-rejection-v1.json",
+      "commit_bytes": 760,
+      "commit_sha256": "133159fbf98e854e4fc32074201aef332d0957c28ba8c33de8a2e6560bcdef11",
+      "current_sha256": "133159fbf98e854e4fc32074201aef332d0957c28ba8c33de8a2e6560bcdef11",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/pre-repair-source-v1.tar.gz",
+      "commit_bytes": 9803,
+      "commit_sha256": "b8a07e0c28bee56602518bed061e3f8b72a0bfddbc48b0e4707dcf32d5d5109d",
+      "current_sha256": "b8a07e0c28bee56602518bed061e3f8b72a0bfddbc48b0e4707dcf32d5d5109d",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/source-deadline-actual-correction-v1.json",
+      "commit_bytes": 1496,
+      "commit_sha256": "745e3a9ff82335c12080e95629b750896b0a593b51a5eec3c4087a81f0bd9a92",
+      "current_sha256": "745e3a9ff82335c12080e95629b750896b0a593b51a5eec3c4087a81f0bd9a92",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/source-stop-handoff-v1.json",
+      "commit_bytes": 3715,
+      "commit_sha256": "39cfa857c6808d4228bfef9219cfd9cf7882967702533c0f2bc3b3c2c827aa18",
+      "current_sha256": "39cfa857c6808d4228bfef9219cfd9cf7882967702533c0f2bc3b3c2c827aa18",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/source-stop-report.txt",
+      "commit_bytes": 1201,
+      "commit_sha256": "7a574eb81a362e27e7b531bdb9fe1b2b4a5edc27f1310c196ab5c057b5c2fd49",
+      "current_sha256": "7a574eb81a362e27e7b531bdb9fe1b2b4a5edc27f1310c196ab5c057b5c2fd49",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/verification-failure-report.txt",
+      "commit_bytes": 1156,
+      "commit_sha256": "2b4911678fe264197c7af4159a0d0b620d49ab44c4fa05d8d3c7d3727d34b2c6",
+      "current_sha256": "2b4911678fe264197c7af4159a0d0b620d49ab44c4fa05d8d3c7d3727d34b2c6",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/verification-live-r2-registration.json",
+      "commit_bytes": 2852,
+      "commit_sha256": "3f060eb11ee7a007709f2a3f1c7d3e7c7494569459f27ad32c3a60515289891d",
+      "current_sha256": "3f060eb11ee7a007709f2a3f1c7d3e7c7494569459f27ad32c3a60515289891d",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/verification-live-r2/admission.json",
+      "commit_bytes": 1697,
+      "commit_sha256": "8a1f9948ed29325a60a4ae38c9553e8862c78eace8ef9243db3568fd5176f278",
+      "current_sha256": "8a1f9948ed29325a60a4ae38c9553e8862c78eace8ef9243db3568fd5176f278",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/verification-live-r2/output.log",
+      "commit_bytes": 1889,
+      "commit_sha256": "5f58cebe1f32b96450a7710b0c27555a81a34447f49affd9e302cad13a4e535a",
+      "current_sha256": "5f58cebe1f32b96450a7710b0c27555a81a34447f49affd9e302cad13a4e535a",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/verification-live-r2/process.json",
+      "commit_bytes": 458,
+      "commit_sha256": "dee532611ab70a4be89368f3e48c8a8fe43fb2fd7303f31bdddfeaf0279dc7b9",
+      "current_sha256": "dee532611ab70a4be89368f3e48c8a8fe43fb2fd7303f31bdddfeaf0279dc7b9",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/verification-live-r2/result.json",
+      "commit_bytes": 1141,
+      "commit_sha256": "a552abbc1c776ad67ef433ef5a8e701324d80bd7521be05a2acb2d7bb63bf933",
+      "current_sha256": "a552abbc1c776ad67ef433ef5a8e701324d80bd7521be05a2acb2d7bb63bf933",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/verification-live-v1-registration.json",
+      "commit_bytes": 2729,
+      "commit_sha256": "19a0a5071512a667272b774ac2a4ff52b7e2f2eb855c5eddc6d911d06f40c920",
+      "current_sha256": "19a0a5071512a667272b774ac2a4ff52b7e2f2eb855c5eddc6d911d06f40c920",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/verification-nn0-r2-registration.json",
+      "commit_bytes": 2902,
+      "commit_sha256": "efe84b89f86ee7b1c6bf24a66ebad661386c1efbbfdd7619069bddba9737b3a6",
+      "current_sha256": "efe84b89f86ee7b1c6bf24a66ebad661386c1efbbfdd7619069bddba9737b3a6",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/verification-nn0-r2/admission.json",
+      "commit_bytes": 1909,
+      "commit_sha256": "a1b32042facb828378ece4672f2c8e57196d337d72613339e362e558acab0920",
+      "current_sha256": "a1b32042facb828378ece4672f2c8e57196d337d72613339e362e558acab0920",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/verification-nn0-r2/output.log",
+      "commit_bytes": 4510,
+      "commit_sha256": "8b56295302580f41d25e8f04335906b641dd16f88123cc905df18a364a9f1857",
+      "current_sha256": "8b56295302580f41d25e8f04335906b641dd16f88123cc905df18a364a9f1857",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/verification-nn0-r2/process.json",
+      "commit_bytes": 671,
+      "commit_sha256": "c45e39952fa49a08c62db2d7dd9985458abe50b48f9d0320f34093434c7aa39c",
+      "current_sha256": "c45e39952fa49a08c62db2d7dd9985458abe50b48f9d0320f34093434c7aa39c",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/verification-nn0-r2/result.json",
+      "commit_bytes": 1145,
+      "commit_sha256": "50ea7edc3e0f04a0c86a3905f127f66b9a729cd33c890e8cdd3f59c53265f3fc",
+      "current_sha256": "50ea7edc3e0f04a0c86a3905f127f66b9a729cd33c890e8cdd3f59c53265f3fc",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/verification-nn0-v1-registration.json",
+      "commit_bytes": 2779,
+      "commit_sha256": "c03e04120f683fd9ed098dc4d813062bc1b60b5fbf54c997caced76ebfd0a3d6",
+      "current_sha256": "c03e04120f683fd9ed098dc4d813062bc1b60b5fbf54c997caced76ebfd0a3d6",
+      "current_equal": true
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/verify_308.py",
+      "commit_bytes": 7068,
+      "commit_sha256": "0dddf7f9117a147630dc841f324c0b40af2402e427cd29a595ad32ed511d962c",
+      "current_sha256": "0dddf7f9117a147630dc841f324c0b40af2402e427cd29a595ad32ed511d962c",
+      "current_equal": true
+    }
+  ],
+  "commit_blobs_read": 67,
+  "current_equal": 66,
+  "intentional_post_commit_revision": [
+    "docs/reports/ai-sigma-coordinator-current-priorities.md"
+  ],
+  "prior_verification_error": "Compared intentionally updated current priorities against old committed snapshot; corrected scope, no evidence mutation.",
+  "archive_limit": "Git blob equality verified for retained archive files; owner streamrestore receipts remain separate evidence."
+}
