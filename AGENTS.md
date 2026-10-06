@@ -21,7 +21,7 @@
 
 ## AI research
 
-- Follow [the task-based research design](docs/design/ai-research-team.md). Root combines the human interface, task coordination, and integration. Use on-demand task executors and independent review when the decision warrants it; do not recreate permanent role sessions, role prompts, or periodic LLM supervision.
+- Follow [the task-based research design](docs/design/ai-research-team.md) for session selection, reuse, and the conditions requiring independent review. Root combines the human interface, task coordination, and integration. Reuse task sessions for continuations and fixes; give independent reviewers only the question, facts, target version, and evidence they need. Do not recreate permanent role sessions, role prompts, or periodic LLM supervision, or require review for every run.
 - Humans choose important research direction and changes to data selection/scale, batch or training method, features, and model design. Present the observed facts, competing options, expected decision effect, and whole-work cost before those decisions. Carry out already accepted work and routine repairs autonomously within its scope.
 - Each delegated task needs its Beads issue, purpose, scope, write owner/worktree, actual resource budget, stop conditions, and verification. A ready issue, agent report, or available budget does not authorize a new experiment, recursive delegation, or lifting an explicit pause.
 - Use the single [research findings and next decisions](docs/research-findings.md) for confirmed observations, unresolved assumptions, competing next actions, and the next human decision. Keep task status in Beads and link evidence; do not create another state framework or duplicate task list.
