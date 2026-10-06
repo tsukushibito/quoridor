@@ -1,6 +1,6 @@
 # NNUE研究の知見と次の判断
 
-2026-10-06更新。[研究目標](design/ai-sigma-research-goal.md)はNNUE型Quoridor AIの最高棋力。Sigma同等は段階目標・比較基準であり、最高棋力と正式な同等水準は未立証。[現在の許可](design/ai-sigma-continuation-20261001.md)では新しい研究実行は未配分。本書を観測・限界・競合説明・次の人間判断の正本とし、担当・状態・依存はBeads、仕様は[設計](README.md)、数値と科学記録は原成果物へ置く。
+2026-10-06更新。[研究目標](design/ai-sigma-research-goal.md)はNNUE型Quoridor AIの最高棋力。Sigma同等は段階目標・比較基準であり、最高棋力と正式な同等水準は未立証。[現在の許可](design/ai-sigma-continuation-20261001.md)ではユーザー指定の探索高速化タスクだけを新しく配分した。本書を観測・限界・競合説明・次の人間判断の正本とし、担当・状態・依存はBeads、仕様は[設計](README.md)、数値と科学記録は原成果物へ置く。
 
 ## 学習の適合と汎化
 
@@ -41,6 +41,8 @@ Aは末期にtrainへ強く適合しvalidation誤差と飽和が増え、Bは遅
 
 永続TTと実callerの初期化/error/cancel/reset/全caller費計測は311/317の有限ソフト検証を経てmainへ採用した。実NNUEのwarm/cold性能・有効hit・同時間棋力は未測定。Whole callerはmove application/providerを含まず、構成時計は重複する。共有model bytes、error時の内部counterと孤立したhash/PV/provider費はUNKNOWN。MPCはOFF計画・schema検証のみで、校正pairとON実装は未成立。[最終研究引渡し](../research-data/ai-sigma/frame24-coordinator/final-stopped-coordinator-handoff.md)、[MPCの計画・限界](../research-data/ai-sigma/frame23-mpc-calibration-design/report-v1.md)。ソフト修正の成立を速度・棋力改善へ格上げしない。元の失敗・超過・UNKNOWNを成功で上書きしない。
 
+次の探索課題は、代表局面のwhole-search profileとTT実効性を測り、実測支配費から同意味処理最適化を選ぶこと。現状は全合法手のsortとTT/PV・killer・任意policy・history順で、学習済み方策は既定で使わない。探索方式・ordering方式・選択的枝刈りなどの重要設計は、観測・競合・全費をRoot経由で人間へ提示する。[初回担当契約](../research-data/ai-sigma/search-optimization/task.md)を参照し、担当・進捗はBeadsで管理する。
+
 ## 次に人間が選ぶ事項
 
 百万種類規模はユーザーの暫定設計目標で、理論的な必要最小量ではない。316の提案は、まず公開全43ファイル全域をtarget-freeに調べ、distinct適格モデル入力の量、反射/crosscycle露出、分布の代表性を測ること。小候補がDを超えることを本調査の開始条件にしない。取得・調査・新学習は未開始である。[316提案の正本](../research-data/ai-sigma/frame24-learning-analysis/next-main-learning-proposal-v1.md)。
@@ -53,4 +55,4 @@ Aは末期にtrainへ強く適合しvalidation誤差と飽和が増え、Bは遅
 
 全公開入力のraw f32は約49.0GB、現dense cacheは約47.5GBで旧12GiB枠へ収まらない。Bitset等のcompact表現は提案で、資格decoder・bounded batch API・性能は未検証。Whole costには取得、decode、native資格、hash/group化、alias確認、export、保存Git/archive、失敗と回収を含む。確認済み未使用予約とfresh保存量を束縛し、UNKNOWNや保護資産を空きへ換算しない。古い小subsetのthroughputを全域の保証にしない。
 
-多様性調査を受け、人間が未見分割、条件付きラベル、epoch/sampler、GPU batch、曲線/選定間隔を選ぶ。GPUを本学習の主経路候補として、host展開・転送・更新・選定・保存・回収まで計測する。同batch再現と大batch/prefetch変更は別介入。CUDA4,000step追加比較、TT実NNUE性能、MPC校正は保留候補で、残予算や実装容易性だけでは開始しない。[タスク型研究](design/ai-research-team.md)に従って明示配分する。
+多様性調査を受け、人間が未見分割、条件付きラベル、epoch/sampler、GPU batch、曲線/選定間隔を選ぶ。GPUを本学習の主経路候補として、host展開・転送・更新・選定・保存・回収まで計測する。同batch再現と大batch/prefetch変更は別介入。CUDA4,000step追加比較とMPC校正は保留候補で、残予算や実装容易性だけでは開始しない。探索高速化の初回配分は上記契約へ限定し、データ・学習方針は変更しない。[タスク型研究](design/ai-research-team.md)に従って明示配分する。
