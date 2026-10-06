@@ -6,26 +6,26 @@
 
 現在の主作業は、**NNUE型で最強のQuoridor AI**を目指す研究です。NNUE評価とαβ探索を主候補とし、SigmaQuoridor同等は段階目標・比較基準です。既存PV/MCTSは教師生成・基準実装・対照として再利用します。現在の目標と評価境界は[研究目標](docs/design/ai-sigma-research-goal.md)、仮説は[NNUE研究方針](docs/design/ai-nnue-research.md)を参照してください。製品のRust B0 AIと描画の実装状況は上記のままです。
 
-AI研究は競合仮説と実験を並行し、結果から修正・再確認・別案へ進めます。性能・探索・推論・生成などを固定の逐次工程にせず、許可範囲と総予算で統括が配分します。小規模診断と正式棋力評価は区別し、現在のSigma同等水準は未立証です。[研究チーム](docs/design/ai-research-team.md)と[実行・記録規約](docs/development/ai-research-experiments.md)を参照してください。
+AI研究はRootが人間との窓口・作業調整・統合を兼ね、必要時にタスク単位の実行担当と独立レビューを依頼します。固定ロールや定期LLM監督は使いません。重要な研究方向・データ・学習・モデルの変更は、事実・競合案・全工程費を示して人間が選び、受入れ済み作業は許可範囲で進めます。競合仮説と実験は結果から見直し、小規模診断と正式棋力評価を区別します。現在のSigma同等水準は未立証です。[タスク型研究の設計](docs/design/ai-research-team.md)と[実行・記録規約](docs/development/ai-research-experiments.md)を参照してください。
 
 ## 主要ディレクトリ
 
-| 現在の配置 | 役割 |
-| --- | --- |
-| `apps/web/` | 製品Web UI・Three.js描画・Worker側の連携 |
-| `packages/engine-bridge/` | TypeScriptとRust/Wasmを結ぶプロトコル・bridge |
-| `crates/quoridor-core/`, `quoridor-nnue/`, `quoridor-ai/`, `quoridor-wasm/` | Rustのルール・差分評価・αβ/PVS/TT・MCTS・CPU/Wasm公開境界 |
-| `crates/quoridor-inference/`, `quoridor-data/`, `quoridor-runner/` | 常駐CPU/GPU推論・Arrowデータ・並列生成/arena/学習cycle入口 |
-| `python/quoridor_training/`, `tools/model-export/` | bulk入力のPyTorch学習・曲線/freeze/test・nativeモデル変換 |
-| その他`tools/` | 補助ツール・独立checker・版付きの過去recipe |
-| `scripts/`, `scripts/dev/` | ビルド・生成・検証入口と開発環境/Beads/研究通信の操作 |
-| `tests/` | 製品のrender/audio/e2e検証・fixture |
-| `docs/design/`, `development/`, `reports/` | 設計・運用規約・実施結果と限界 |
-| `research-data/ai-sigma/` | mainのGit保存データ・設定・要約・圧縮観測 |
-| `.artifacts/`, `artifacts/` | ローカル運用/出力・データ展開・一時物、Playwrightブラウザ等。研究の出力は`.artifacts/ai-sigma/` |
-| `research-paths.json`で参照する実験モデル・外部cache | 研究モデルと共有依存。保存先/配布条件は[保存方針](.devcontainer/storage-policy.md)参照 |
+| 現在の配置                                                                  | 役割                                                                                            |
+| --------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `apps/web/`                                                                 | 製品Web UI・Three.js描画・Worker側の連携                                                        |
+| `packages/engine-bridge/`                                                   | TypeScriptとRust/Wasmを結ぶプロトコル・bridge                                                   |
+| `crates/quoridor-core/`, `quoridor-nnue/`, `quoridor-ai/`, `quoridor-wasm/` | Rustのルール・差分評価・αβ/PVS/TT・MCTS・CPU/Wasm公開境界                                       |
+| `crates/quoridor-inference/`, `quoridor-data/`, `quoridor-runner/`          | 常駐CPU/GPU推論・Arrowデータ・並列生成/arena/学習cycle入口                                      |
+| `python/quoridor_training/`, `tools/model-export/`                          | bulk入力のPyTorch学習・曲線/freeze/test・nativeモデル変換                                       |
+| その他`tools/`                                                              | 補助ツール・独立checker・版付きの過去recipe                                                     |
+| `scripts/`, `scripts/dev/`                                                  | ビルド・生成・検証入口と開発環境/Beads/研究通信の操作                                           |
+| `tests/`                                                                    | 製品のrender/audio/e2e検証・fixture                                                             |
+| `docs/design/`, `development/`, `reports/`                                  | 設計・運用規約・実施結果と限界                                                                  |
+| `research-data/ai-sigma/`                                                   | mainのGit保存データ・設定・要約・圧縮観測                                                       |
+| `.artifacts/`, `artifacts/`                                                 | ローカル運用/出力・データ展開・一時物、Playwrightブラウザ等。研究の出力は`.artifacts/ai-sigma/` |
+| `research-paths.json`で参照する実験モデル・外部cache                        | 研究モデルと共有依存。保存先/配布条件は[保存方針](.devcontainer/storage-policy.md)参照          |
 
-main `/workspaces/quoridor` が持続的研究の統合正本です。並行変更・比較にはmanaged worktreeを使い、roles・docs・現役sourceを恒常mirrorしません。必要なモデル・checkpoint・入力は同じ永続volumeの`.worktree/assets/`で保持し、コードcheckoutと分離します。共有DB・lockと作業中worktreeを保持し、旧checkoutの撤去は情報保全・復元確認と読者停止後に行います。旧runの絶対pathは移動対応manifestで追跡し、互換symlinkや旧source一式を残しません。コードと永続入力の参照は[`research-paths.json`](research-paths.json)、機能境界・実入口・凍結recipe・保存/検査手順は[研究コードの保守案内](docs/development/ai-research-code.md)にまとめています。文書を探す入口は[AGENTS.mdのインデックス](AGENTS.md#文書インデックス)。
+main `/workspaces/quoridor` が持続的研究の統合正本です。並行変更・比較にはmanaged worktreeを使い、指示・docs・現役sourceを恒常mirrorしません。必要なモデル・checkpoint・入力は同じ永続volumeの`.worktree/assets/`で保持し、コードcheckoutと分離します。共有DB・lockと作業中worktreeを保持し、旧checkoutの撤去は情報保全・復元確認と読者停止後に行います。旧runの絶対pathは移動対応manifestで追跡し、互換symlinkや旧source一式を残しません。コードと永続入力の参照は[`research-paths.json`](research-paths.json)、機能境界・実入口・凍結recipe・保存/検査手順は[研究コードの保守案内](docs/development/ai-research-code.md)にまとめています。文書を探す入口は[AGENTS.mdのインデックス](AGENTS.md#文書インデックス)。
 
 研究sourceの軽量検査は`python3 scripts/dev/check-research.py`、対象の整形は同コマンドの`--format`を使います。製品build・学習・モデルforward・対局を起動しません。研究専用の整形依存は`tools/research-quality/`で固定し、製品npmと共有学習環境へ混ぜません。
 

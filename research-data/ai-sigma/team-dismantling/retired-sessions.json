@@ -1,0 +1,157 @@
+{
+  "schema": "retired-research-sessions-v1",
+  "project_root": "/workspaces/quoridor",
+  "sessions": [
+    {
+      "former_role": "coordinator",
+      "thread_id": "01a0f31b-3409-75f2-a30e-453a50484f94",
+      "definition_sha256": "0191b13195716d4f6877eb2dcbca8f50ece9702bda0cdf4c0336c8e887bba2b8"
+    },
+    {
+      "former_role": "hypothesis",
+      "thread_id": "01a0f31c-2e4b-7170-82c5-69e1428c2418",
+      "definition_sha256": "1576914f06dbc089a3ac11a2454f1a87e3153bd2bfe173662f44bff492657b6c"
+    },
+    {
+      "former_role": "experiment",
+      "thread_id": "01a0f31d-6d15-7620-bb63-4b4f878e4746",
+      "definition_sha256": "09c3472d031e94f10263ba518abb57b1c9876e84712ef7d59fca6989b32d9720"
+    },
+    {
+      "former_role": "critic",
+      "thread_id": "01a0f31d-8227-7e03-a7e6-915b4918c11b",
+      "definition_sha256": "b5a20ad0f99585ec5d308759dd74aa4db057c34521136abd1c9659f9a8d5c268"
+    },
+    {
+      "former_role": "steward",
+      "thread_id": "01a0f31d-99ee-7d63-b162-bc1a59c457c6",
+      "definition_sha256": "4825793a827508fba70c7a5ea0984e5a6dd7dcf03a430ef6613e263a5b07fc2e"
+    },
+    {
+      "former_role": "supervisor",
+      "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+      "definition_sha256": "4f58a22cb9c77ca4c64962383de900dfb3d88968b82bf51a65bd7cb47699d900"
+    }
+  ],
+  "source_commit": "6e8d4ab5ac1a3305eff66e4c5b72dd36bfb06b28",
+  "operational": false,
+  "history_preserved": true,
+  "prior_registry": {
+    "schema_version": 1,
+    "project_root": "/workspaces/quoridor",
+    "definitions_root": "/workspaces/quoridor",
+    "setup_issue": "quoridor-mso",
+    "created_by_thread": "01a0f2e9-357d-7ef3-a2fe-b16f80accda5",
+    "roles": {
+      "coordinator": {
+        "thread_id": "01a0f31b-3409-75f2-a30e-453a50484f94",
+        "definition_sha256": "0191b13195716d4f6877eb2dcbca8f50ece9702bda0cdf4c0336c8e887bba2b8",
+        "initial_model": "gpt-6.1-sol",
+        "initial_effort": "high",
+        "code_cwd": "/workspaces/quoridor"
+      },
+      "hypothesis": {
+        "thread_id": "01a0f31c-2e4b-7170-82c5-69e1428c2418",
+        "definition_sha256": "1576914f06dbc089a3ac11a2454f1a87e3153bd2bfe173662f44bff492657b6c",
+        "initial_model": "gpt-6.1-sol",
+        "initial_effort": "high",
+        "code_cwd": "/workspaces/quoridor"
+      },
+      "experiment": {
+        "thread_id": "01a0f31d-6d15-7620-bb63-4b4f878e4746",
+        "definition_sha256": "09c3472d031e94f10263ba518abb57b1c9876e84712ef7d59fca6989b32d9720",
+        "initial_model": "gpt-6.1-sol",
+        "initial_effort": "high",
+        "code_cwd": "/workspaces/quoridor"
+      },
+      "critic": {
+        "thread_id": "01a0f31d-8227-7e03-a7e6-915b4918c11b",
+        "definition_sha256": "b5a20ad0f99585ec5d308759dd74aa4db057c34521136abd1c9659f9a8d5c268",
+        "initial_model": "gpt-6.1-sol",
+        "initial_effort": "high",
+        "code_cwd": "/workspaces/quoridor"
+      },
+      "steward": {
+        "thread_id": "01a0f31d-99ee-7d63-b162-bc1a59c457c6",
+        "definition_sha256": "4825793a827508fba70c7a5ea0984e5a6dd7dcf03a430ef6613e263a5b07fc2e",
+        "initial_model": "gpt-6.1-sol",
+        "initial_effort": "high",
+        "code_cwd": "/workspaces/quoridor"
+      },
+      "supervisor": {
+        "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4",
+        "definition_sha256": "4f58a22cb9c77ca4c64962383de900dfb3d88968b82bf51a65bd7cb47699d900",
+        "initial_model": "gpt-6.1-sol",
+        "initial_effort": "high",
+        "bootstrap_turn_id": "01a0f6b5-b4a3-71b0-8241-aa3161ac3daf",
+        "code_cwd": "/workspaces/quoridor"
+      }
+    },
+    "uninitialized_threads": [
+      {
+        "role": "coordinator",
+        "thread_id": "01a0f317-0461-7332-91d8-dafc560d9efe",
+        "reason": "Server confirmed no rollout exists; no research turn was saved"
+      },
+      {
+        "role": "hypothesis",
+        "thread_id": "01a0f317-06d2-77b1-b3f6-4073308b020c",
+        "reason": "Server confirmed no rollout exists; no research turn was saved"
+      },
+      {
+        "role": "experiment",
+        "thread_id": "01a0f317-093f-74f0-8c1e-a1db2457886d",
+        "reason": "Server confirmed no rollout exists; no research turn was saved"
+      },
+      {
+        "role": "critic",
+        "thread_id": "01a0f317-0ba9-7390-85bd-99d033a2e8a4",
+        "reason": "Server confirmed no rollout exists; no research turn was saved"
+      },
+      {
+        "role": "steward",
+        "thread_id": "01a0f317-0e22-7df3-8810-cf75fe30dc80",
+        "reason": "Server confirmed no rollout exists; no research turn was saved"
+      }
+    ],
+    "code_root": "/workspaces/quoridor",
+    "layout_manifest": "/workspaces/quoridor/research-paths.json",
+    "current_operation": {
+      "frame": 25,
+      "owner_issue": "quoridor-4lc.92",
+      "state_dir": "/workspaces/quoridor/.artifacts/research-team/frame24-extension25/scheduler",
+      "config_path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame24-extension25/scheduler.json",
+      "expectations_path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame24-extension25/expectations.json",
+      "supervisor_end_at": "2026-10-06T04:03:46Z",
+      "max_turn_seconds": null,
+      "source_root": "/workspaces/quoridor",
+      "gpu_training_new_authorization": {
+        "namespace": "frame24-new-GPU-training-3600",
+        "limit_seconds": 3600,
+        "authorized_at": "2026-10-06T00:32:01Z",
+        "authority_path": "/workspaces/quoridor/.artifacts/research-team/frame24-root/gpu-one-hour-authorized.md",
+        "authority_sha256": "1358fa019591d739cf03518d57fa6f2f9d1770cb5370268c7e43427b9708fa45",
+        "owner_issue": "quoridor-4lc.310",
+        "old7200_remaining_lower_bound_seconds": 0,
+        "old_UNKNOWN_unchanged": true,
+        "all_attempt_components_charged": true,
+        "parent_final_end_at": "2026-10-06T04:08:46Z"
+      },
+      "continuation_base_frame": 24,
+      "continuous_extension25": {
+        "authorized_at": "2026-10-06T01:24:53Z",
+        "authority_path": "/workspaces/quoridor/.artifacts/research-team/frame24-root/extension25-authorized.md",
+        "authority_sha256": "d1bf14dc642e326b4adb63ad80f93923b618229e585db44f5f98973fe5872f43",
+        "original_start_at": "2026-10-06T00:08:46Z",
+        "deadlines": {
+          "heavy": "2026-10-06T03:58:46Z",
+          "supervisor": "2026-10-06T04:03:46Z",
+          "monitor": "2026-10-06T04:06:46Z",
+          "final": "2026-10-06T04:08:46Z"
+        },
+        "old_individual_deadlines_and_caps_unchanged": true
+      }
+    }
+  },
+  "prior_registry_sha256": "4237ff465e7668e6af00cec62e9b17702c4b02d0d8865c3742a92b713692d509"
+}

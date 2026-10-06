@@ -22,8 +22,11 @@ PY_FILES = (
     "scripts/dev/research-assets.py",
     "scripts/dev/test_research_assets.py",
     "scripts/dev/check-research.py",
-    "scripts/dev/research-team.py",
-    "tools/research-team/test_client.py",
+    "scripts/dev/research-session.py",
+    "scripts/dev/research-runtime.py",
+    "scripts/dev/research-job.py",
+    "tools/research-session/test_client.py",
+    "tools/research-session/test_job.py",
     "tools/research-quality/test_maintenance.py",
 )
 CALLERS = ("crates/quoridor-wasm/tests/nnue-runtime.cjs",)
@@ -124,22 +127,24 @@ def main():
     )
     run("node", "--test", "tools/research-quality/test_export.mjs")
     layout = json.loads((ROOT / "research-paths.json").read_text())
-    team_env = Path(os.environ.get("QUORIDOR_RESEARCH_TEAM_ENV", layout["environments"]["team"]))
-    team_python = team_env / "bin/python"
-    if not team_python.exists():
+    session_env = Path(
+        os.environ.get("QUORIDOR_RESEARCH_SESSION_ENV", layout["environments"]["sessions"])
+    )
+    session_python = session_env / "bin/python"
+    if not session_python.exists():
         parser.error(
-            "Existing research-team environment required for client tests; no automatic install"
+            "Existing session environment required for client/job tests; no automatic install"
         )
     run(
-        team_python,
+        session_python,
         "-B",
         "-m",
         "unittest",
         "discover",
         "-s",
-        "tools/research-team",
+        "tools/research-session",
         "-p",
-        "test_client.py",
+        "test_*.py",
     )
     print(
         json.dumps(

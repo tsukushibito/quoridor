@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Detach a contracted command and deliver one completion to its saved idle role."""
+"""Detach a contracted command and deliver one completion to its explicit idle session."""
+
 from __future__ import annotations
 
 import argparse
@@ -19,10 +20,12 @@ import threading
 import time
 import uuid
 
-_spec = importlib.util.spec_from_file_location("job_scheduler", Path(__file__).with_name("research-scheduler.py"))
+_spec = importlib.util.spec_from_file_location(
+    "job_runtime", Path(__file__).with_name("research-runtime.py")
+)
 runtime = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(runtime)
-team = runtime.team
+client = runtime.client
 
 
 class JobError(ValueError):
@@ -59,28 +62,49 @@ def read(directory, name):
 
 
 def validate(config, base):
-    required = {"issue", "goal_issue", "registry", "role", "cwd", "argv", "end_at", "notify_until",
-                "max_runtime_seconds", "control_interval_seconds", "notify_interval_seconds",
-                "request_timeout_seconds", "log_max_bytes", "resource_contract"}
+    required = {
+        "issue",
+        "goal_issue",
+        "thread_id",
+        "cwd",
+        "argv",
+        "end_at",
+        "notify_until",
+        "max_runtime_seconds",
+        "control_interval_seconds",
+        "notify_interval_seconds",
+        "request_timeout_seconds",
+        "log_max_bytes",
+        "resource_contract",
+    }
     if not isinstance(config, dict) or set(config) != required:
         raise JobError("Missing or unknown config fields")
     config = dict(config)
-    for field in ("issue", "goal_issue", "role", "resource_contract"):
+    for field in ("issue", "goal_issue", "thread_id", "resource_contract"):
         if not isinstance(config[field], str) or not config[field].strip():
             raise JobError(f"{field} must be nonempty")
-    for field in ("registry", "cwd", "resource_contract"):
+    for field in ("cwd", "resource_contract"):
         if not isinstance(config[field], str):
             raise JobError(f"{field} must be a path")
         config[field] = str((base / config[field]).resolve())
     if not Path(config["cwd"]).is_dir() or not Path(config["resource_contract"]).is_file():
         raise JobError("cwd and existing resource_contract are required")
     argv = config["argv"]
-    if not isinstance(argv, list) or not argv or any(not isinstance(x, str) or not x or "\0" in x for x in argv):
+    if (
+        not isinstance(argv, list)
+        or not argv
+        or any(not isinstance(x, str) or not x or "\0" in x for x in argv)
+    ):
         raise JobError("argv must be a nonempty array of arguments; no shell interpolation")
     if not Path(argv[0]).is_absolute() or not os.access(argv[0], os.X_OK):
         raise JobError("argv[0] must name an existing absolute executable")
-    for field in ("max_runtime_seconds", "control_interval_seconds", "notify_interval_seconds",
-                  "request_timeout_seconds", "log_max_bytes"):
+    for field in (
+        "max_runtime_seconds",
+        "control_interval_seconds",
+        "notify_interval_seconds",
+        "request_timeout_seconds",
+        "log_max_bytes",
+    ):
         runtime.positive(config[field], field)
     if runtime.timestamp(config["end_at"]) > runtime.timestamp(config["notify_until"]):
         raise JobError("notify_until must be at or after end_at within the authorized frame")
@@ -89,11 +113,12 @@ def validate(config, base):
 
 def authority(config, root, backend):
     """The issue remains owned by the sleeping agent; no claim/close/resume here."""
-    registry = team.load_registry(Path(config["registry"]), root)
-    entry = team.role_entry(registry, config["role"])
+    entry = {"thread_id": config["thread_id"]}
     for issue_id in dict.fromkeys((config["goal_issue"], config["issue"])):
         item = backend.issue(issue_id)
-        if item.get("status") not in ("open", "in_progress") or "paused-by-user" in (item.get("labels") or []):
+        if item.get("status") not in ("open", "in_progress") or "paused-by-user" in (
+            item.get("labels") or []
+        ):
             raise JobError(f"Issue {issue_id} is stopped or paused")
         if issue_id == config["issue"] and item.get("assignee") != "codex:" + entry["thread_id"]:
             raise JobError("Job issue owner differs from the saved recipient")
@@ -162,6 +187,7 @@ def signal_members(members, sig):
 
 class TailLog:
     """Drain continuously, but retain only a bounded tail; never block a producer."""
+
     def __init__(self, stream, limit):
         self.stream, self.limit = stream, limit
         self.data = bytearray()
@@ -174,7 +200,7 @@ class TailLog:
                 self.bytes_seen += len(block)
                 self.data.extend(block)
                 if len(self.data) > self.limit:
-                    del self.data[:-self.limit]
+                    del self.data[: -self.limit]
         finally:
             self.stream.close()
 
@@ -183,7 +209,9 @@ def execute(directory, config, root, backend):
     state = read(directory, "state.json")
     if state["phase"] != "queued":
         raise JobError("A submitted command is never automatically rerun")
-    state.update(phase="starting", supervisor=runtime.process_identity(os.getpid()), updated_at=stamp())
+    state.update(
+        phase="starting", supervisor=runtime.process_identity(os.getpid()), updated_at=stamp()
+    )
     write(directory, "state.json", state)
     try:
         entry = authority(config, root, backend)
@@ -192,8 +220,14 @@ def execute(directory, config, root, backend):
         if (directory / "cancel.json").exists() or now() >= runtime.timestamp(config["end_at"]):
             raise JobError("Cancelled or expired before spawn")
     except Exception as error:
-        result = {"job_id": state["job_id"], "outcome": "not_started", "error": str(error),
-                  "exit_code": None, "finished_at": stamp(), "cleanup_complete": True}
+        result = {
+            "job_id": state["job_id"],
+            "outcome": "not_started",
+            "error": str(error),
+            "exit_code": None,
+            "finished_at": stamp(),
+            "cleanup_complete": True,
+        }
     else:
         started = time.monotonic()
         command = None
@@ -201,9 +235,14 @@ def execute(directory, config, root, backend):
         outcome, error, remaining = "failed", None, []
         known = []
         try:
-            command = subprocess.Popen(config["argv"], cwd=config["cwd"], stdin=subprocess.DEVNULL,
-                                       stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
-                                       start_new_session=True)
+            command = subprocess.Popen(
+                config["argv"],
+                cwd=config["cwd"],
+                stdin=subprocess.DEVNULL,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
+                start_new_session=True,
+            )
             child = runtime.process_identity(command.pid)
             state.update(phase="running", child=child, started_at=stamp())
             write(directory, "state.json", state)
@@ -217,7 +256,10 @@ def execute(directory, config, root, backend):
                 if (directory / "cancel.json").exists():
                     outcome = "cancelled"
                     break
-                if now() >= runtime.timestamp(config["end_at"]) or time.monotonic() - started >= config["max_runtime_seconds"]:
+                if (
+                    now() >= runtime.timestamp(config["end_at"])
+                    or time.monotonic() - started >= config["max_runtime_seconds"]
+                ):
                     outcome = "timed_out"
                     break
                 if time.monotonic() >= next_control:
@@ -252,20 +294,26 @@ def execute(directory, config, root, backend):
                     error = "Child could not be reaped"
                 until = time.monotonic() + 1
                 while time.monotonic() < until and any(runtime.alive(x) for x in members):
-                    time.sleep(.05)
+                    time.sleep(0.05)
                 remaining = [x for x in members if runtime.alive(x)]
             if tail:
                 tail.thread.join(timeout=1)
                 if tail.thread.is_alive():
                     error = "Log pipe still open: possible detached descendant"
                 (directory / "output.log").write_bytes(tail.data)
-            result = {"job_id": state["job_id"], "outcome": outcome, "error": error,
-                      "exit_code": command.returncode if command else None, "finished_at": stamp(),
-                      "wall_seconds": time.monotonic() - started, "remaining": remaining,
-                      "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
-                      "cleanup_complete": not remaining and not (tail and tail.thread.is_alive()),
-                      "log_bytes_seen": tail.bytes_seen if tail else 0,
-                      "log_bytes_retained": len(tail.data) if tail else 0}
+            result = {
+                "job_id": state["job_id"],
+                "outcome": outcome,
+                "error": error,
+                "exit_code": command.returncode if command else None,
+                "finished_at": stamp(),
+                "wall_seconds": time.monotonic() - started,
+                "remaining": remaining,
+                "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+                "cleanup_complete": not remaining and not (tail and tail.thread.is_alive()),
+                "log_bytes_seen": tail.bytes_seen if tail else 0,
+                "log_bytes_retained": len(tail.data) if tail else 0,
+            }
     write(directory, "result.json", result)
     state.update(phase="finished", updated_at=stamp(), outcome=result["outcome"])
     write(directory, "state.json", state)
@@ -275,14 +323,16 @@ def execute(directory, config, root, backend):
 
 def completion_text(directory):
     state, result = read(directory, "state.json"), read(directory, "result.json")
-    return (f"[research-job:{state['job_id']}]\n"
-            f"Background job finished: {state['issue']}, outcome={result['outcome']}, "
-            f"exit_code={result['exit_code']}, cleanup_complete={result['cleanup_complete']}.\n"
-            f"Read {directory / 'result.json'} and {directory / 'output.log'}; "
-            f"config and resource contract are in {directory / 'config.json'}.\n"
-            "This is a completion event, not new authorization or a pause override. "
-            "Continue result collection/verification within the current task and frame. "
-            "Do not infer scientific success from exit0 or rerun the command automatically.")
+    return (
+        f"[research-job:{state['job_id']}]\n"
+        f"Background job finished: {state['issue']}, outcome={result['outcome']}, "
+        f"exit_code={result['exit_code']}, cleanup_complete={result['cleanup_complete']}.\n"
+        f"Read {directory / 'result.json'} and {directory / 'output.log'}; "
+        f"config and resource contract are in {directory / 'config.json'}.\n"
+        "This is a completion event, not new authorization or a pause override. "
+        "Continue result collection/verification within the current task and frame. "
+        "Do not infer scientific success from exit0 or rerun the command automatically."
+    )
 
 
 async def reconcile(server, directory, notification, thread_id):
@@ -297,14 +347,21 @@ async def reconcile(server, directory, notification, thread_id):
             for item in turn.get("items", []):
                 if item.get("type") == "userMessage" and any(
                     part.get("type") == "text" and part.get("text", "").startswith(marker + "\n")
-                    for part in item.get("content", [])):
-                    notification.update(status="delivered", turn_id=turn["id"], reconciled=True, updated_at=stamp())
+                    for part in item.get("content", [])
+                ):
+                    notification.update(
+                        status="delivered", turn_id=turn["id"], reconciled=True, updated_at=stamp()
+                    )
                     write(directory, "notification.json", notification)
                     return notification
         cursor = page.get("nextCursor")
         if not cursor:
             break
-    notification.update(status="uncertain", error="No receipt found in bounded history; no automatic resend", updated_at=stamp())
+    notification.update(
+        status="uncertain",
+        error="No receipt found in bounded history; no automatic resend",
+        updated_at=stamp(),
+    )
     write(directory, "notification.json", notification)
     return notification
 
@@ -330,28 +387,52 @@ async def notify_once(directory, config, root, backend):
                 raise JobError("Recipient identity changed")
             connection = await backend.connect(config["request_timeout_seconds"])
             async with connection as server:
-                with team.dispatch_lock(root):
+                with client.dispatch_lock(root):
                     if notification["status"] in ("dispatching", "uncertain"):
                         return await reconcile(server, directory, notification, state["thread_id"])
                     thread = await server.read_thread(state["thread_id"])
                     if thread["status"]["type"] == "notLoaded":
-                        await server.request("thread/resume", {"threadId": state["thread_id"], "excludeTurns": True})
+                        await server.request(
+                            "thread/resume", {"threadId": state["thread_id"], "excludeTurns": True}
+                        )
                         thread = await server.read_thread(state["thread_id"])
                     if thread["status"]["type"] != "idle":
-                        notification.update(status="pending", reason="recipient_not_idle", updated_at=stamp())
+                        notification.update(
+                            status="pending", reason="recipient_not_idle", updated_at=stamp()
+                        )
                         write(directory, "notification.json", notification)
                         return notification
                     # Recheck after network waits; do not introduce a fresh deadline or budget.
                     final_entry = await asyncio.to_thread(authority, config, root, backend)
                     if final_entry["thread_id"] != state["thread_id"]:
                         raise JobError("Recipient identity changed before delivery")
-                    if now() >= runtime.timestamp(config["notify_until"]) or (directory / "cancel.json").exists():
+                    if (
+                        now() >= runtime.timestamp(config["notify_until"])
+                        or (directory / "cancel.json").exists()
+                    ):
                         return notification
-                    notification.update(status="dispatching", marker=f"[research-job:{state['job_id']}]", updated_at=stamp())
+                    notification.update(
+                        status="dispatching",
+                        marker=f"[research-job:{state['job_id']}]",
+                        updated_at=stamp(),
+                    )
                     write(directory, "notification.json", notification)
-                    response = await server.request("turn/start", {"threadId": state["thread_id"],
-                        "input": [{"type": "text", "text": completion_text(directory), "text_elements": []}]})
-                    notification.update(status="delivered", turn_id=response["turn"]["id"], updated_at=stamp())
+                    response = await server.request(
+                        "turn/start",
+                        {
+                            "threadId": state["thread_id"],
+                            "input": [
+                                {
+                                    "type": "text",
+                                    "text": completion_text(directory),
+                                    "text_elements": [],
+                                }
+                            ],
+                        },
+                    )
+                    notification.update(
+                        status="delivered", turn_id=response["turn"]["id"], updated_at=stamp()
+                    )
                     write(directory, "notification.json", notification)
         except Exception as error:
             if notification["status"] == "dispatching":
@@ -366,16 +447,25 @@ def watch_notification(directory, config, root, backend):
         notification = asyncio.run(notify_once(directory, config, root, backend))
         if notification["status"] in ("delivered", "expired", "cancelled", "uncertain"):
             return notification
-        time.sleep(min(config["notify_interval_seconds"], max(0, (runtime.timestamp(config["notify_until"]) - now()).total_seconds())))
+        time.sleep(
+            min(
+                config["notify_interval_seconds"],
+                max(0, (runtime.timestamp(config["notify_until"]) - now()).total_seconds()),
+            )
+        )
 
 
 def run(directory, root, backend):
     with lock(directory, "process.lock"):
+
         def stop_requested(signum, frame):
             write(directory, "cancel.json", {"requested_at": stamp(), "signal": signum})
-        previous = {sig: signal.signal(sig, stop_requested) for sig in (signal.SIGTERM, signal.SIGINT)}
-        config = validate(read(directory, "config.json"), directory)
+
+        previous = {
+            sig: signal.signal(sig, stop_requested) for sig in (signal.SIGTERM, signal.SIGINT)
+        }
         try:
+            config = validate(read(directory, "config.json"), directory)
             execute(directory, config, root, backend)
             return watch_notification(directory, config, root, backend)
         finally:
@@ -390,13 +480,38 @@ def submit(path, directory, root, backend):
         raise JobError("Cannot submit an expired job")
     directory.mkdir(parents=True, exist_ok=False)
     write(directory, "config.json", config)
-    write(directory, "state.json", {"schema_version": 1, "job_id": str(uuid.uuid4()),
-          "issue": config["issue"], "thread_id": entry["thread_id"], "phase": "queued",
-          "created_at": stamp(), "config_sha256": hashlib.sha256(json.dumps(config, sort_keys=True).encode()).hexdigest()})
+    write(
+        directory,
+        "state.json",
+        {
+            "schema_version": 1,
+            "job_id": str(uuid.uuid4()),
+            "issue": config["issue"],
+            "thread_id": entry["thread_id"],
+            "phase": "queued",
+            "created_at": stamp(),
+            "config_sha256": hashlib.sha256(
+                json.dumps(config, sort_keys=True).encode()
+            ).hexdigest(),
+        },
+    )
     with (directory / "supervisor.log").open("ab") as log:
-        supervisor = subprocess.Popen([sys.executable, "-B", str(Path(__file__).resolve()), "run",
-            "--state-dir", str(directory)], cwd=root, stdin=subprocess.DEVNULL, stdout=log, stderr=log,
-            start_new_session=True, close_fds=True)
+        supervisor = subprocess.Popen(
+            [
+                sys.executable,
+                "-B",
+                str(Path(__file__).resolve()),
+                "run",
+                "--state-dir",
+                str(directory),
+            ],
+            cwd=root,
+            stdin=subprocess.DEVNULL,
+            stdout=log,
+            stderr=log,
+            start_new_session=True,
+            close_fds=True,
+        )
     # A quick handshake returns without waiting for generation or a Codex turn.
     until = time.monotonic() + 5
     while time.monotonic() < until:
@@ -412,11 +527,13 @@ def submit(path, directory, root, backend):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("command", choices=["submit", "run", "status", "cancel", "notify"])
-    parser.add_argument("--state-dir", required=True, type=Path, help="New directory for each submitted run")
+    parser.add_argument(
+        "--state-dir", required=True, type=Path, help="New directory for each submitted run"
+    )
     parser.add_argument("--config", type=Path)
     args = parser.parse_args()
     directory = args.state_dir.resolve()
-    root = team.project_root()
+    root = client.project_root()
     backend = runtime.AppBackend(root)
     if args.command == "submit":
         if not args.config:
@@ -427,8 +544,9 @@ def main():
     elif args.command == "status":
         result = {"state": read(directory, "state.json")}
         result["supervisor_alive"] = runtime.alive(result["state"].get("supervisor"))
-        result["recovery_required"] = (not result["supervisor_alive"] and
-                                       result["state"]["phase"] != "finished")
+        result["recovery_required"] = (
+            not result["supervisor_alive"] and result["state"]["phase"] != "finished"
+        )
         for name in ("result", "notification"):
             if (directory / f"{name}.json").exists():
                 result[name] = read(directory, f"{name}.json")
@@ -446,6 +564,12 @@ def main():
 if __name__ == "__main__":
     try:
         main()
-    except (JobError, runtime.SchedulerError, team.TeamError, OSError, subprocess.SubprocessError) as error:
+    except (
+        JobError,
+        runtime.RuntimeError,
+        client.SessionError,
+        OSError,
+        subprocess.SubprocessError,
+    ) as error:
         print(f"research-job: {error}", file=sys.stderr)
         sys.exit(1)

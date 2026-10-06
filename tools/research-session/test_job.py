@@ -1,9 +1,8 @@
 """Background-job tests use temporary commands and fake RPC, never research/model jobs."""
-import asyncio
+
 from datetime import timedelta
 import importlib.util
 import json
-import os
 from pathlib import Path
 import subprocess
 import sys
@@ -42,7 +41,10 @@ class Server:
             assert params["itemsView"] == "full"
             return {"data": self.turns, "nextCursor": None}
         if method == "turn/start":
-            turn = {"id": "completion-turn", "items": [{"type": "userMessage", "content": params["input"]}]}
+            turn = {
+                "id": "completion-turn",
+                "items": [{"type": "userMessage", "content": params["input"]}],
+            }
             self.turns.append(turn)
             self.state = "active"
             if self.lost_response:
@@ -54,8 +56,15 @@ class Server:
 class Backend:
     def __init__(self):
         self.server = Server()
-        self.items = {"goal": {"id": "goal", "status": "in_progress", "labels": []},
-                      "work": {"id": "work", "status": "in_progress", "labels": [], "assignee": "codex:target"}}
+        self.items = {
+            "goal": {"id": "goal", "status": "in_progress", "labels": []},
+            "work": {
+                "id": "work",
+                "status": "in_progress",
+                "labels": [],
+                "assignee": "codex:target",
+            },
+        }
 
     def issue(self, issue):
         return self.items[issue]
@@ -69,30 +78,43 @@ class Fixture:
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
-        roles = self.root / ".agents/research-team/roles"
-        roles.mkdir(parents=True)
-        (roles.parent / "common.md").write_text("common")
-        (roles / "experiment.md").write_text("experiment")
-        _, digest = j.team.role_definition("experiment", self.root)
-        registry = {"schema_version": 1, "project_root": str(self.root), "definitions_root": str(self.root),
-                    "roles": {"experiment": {"thread_id": "target", "definition_sha256": digest}}}
-        (self.root / "registry.json").write_text(json.dumps(registry))
         (self.root / "contract.md").write_text("Artificial test command only, no model")
-        self.config = {"issue": "work", "goal_issue": "goal", "registry": str(self.root / "registry.json"),
-            "role": "experiment", "cwd": str(self.root), "argv": [sys.executable, "-c", "print('finished')"],
+        self.config = {
+            "issue": "work",
+            "goal_issue": "goal",
+            "thread_id": "target",
+            "cwd": str(self.root),
+            "argv": [sys.executable, "-c", "print('finished')"],
             "end_at": (j.now() + timedelta(seconds=60)).isoformat(),
-            "notify_until": (j.now() + timedelta(seconds=120)).isoformat(), "max_runtime_seconds": 10,
-            "control_interval_seconds": 1, "notify_interval_seconds": 1, "request_timeout_seconds": 1,
-            "log_max_bytes": 128, "resource_contract": str(self.root / "contract.md")}
+            "notify_until": (j.now() + timedelta(seconds=120)).isoformat(),
+            "max_runtime_seconds": 10,
+            "control_interval_seconds": 1,
+            "notify_interval_seconds": 1,
+            "request_timeout_seconds": 1,
+            "log_max_bytes": 128,
+            "resource_contract": str(self.root / "contract.md"),
+        }
         self.directory = self.root / "job"
         self.directory.mkdir()
         j.write(self.directory, "config.json", self.config)
-        j.write(self.directory, "state.json", {"phase": "queued", "job_id": "unique-job", "issue": "work", "thread_id": "target"})
+        j.write(
+            self.directory,
+            "state.json",
+            {"phase": "queued", "job_id": "unique-job", "issue": "work", "thread_id": "target"},
+        )
         self.backend = Backend()
 
     def complete(self):
-        j.write(self.directory, "state.json", {"phase": "finished", "job_id": "unique-job", "issue": "work", "thread_id": "target"})
-        j.write(self.directory, "result.json", {"outcome": "succeeded", "exit_code": 0, "cleanup_complete": True})
+        j.write(
+            self.directory,
+            "state.json",
+            {"phase": "finished", "job_id": "unique-job", "issue": "work", "thread_id": "target"},
+        )
+        j.write(
+            self.directory,
+            "result.json",
+            {"outcome": "succeeded", "exit_code": 0, "cleanup_complete": True},
+        )
         j.write(self.directory, "notification.json", {"status": "pending"})
 
 
@@ -119,8 +141,11 @@ class CommandTests(Fixture, unittest.TestCase):
 
     def test_timeout_stops_group_and_reaps_child(self):
         self.config["max_runtime_seconds"] = 1
-        self.config["argv"] = [sys.executable, "-c",
-            "import subprocess,sys,time; subprocess.Popen([sys.executable,'-c','import time; time.sleep(30)']); time.sleep(30)"]
+        self.config["argv"] = [
+            sys.executable,
+            "-c",
+            "import subprocess,sys,time; subprocess.Popen([sys.executable,'-c','import time; time.sleep(30)']); time.sleep(30)",
+        ]
         result = self.execute()
         self.assertEqual(result["outcome"], "timed_out")
         self.assertTrue(result["cleanup_complete"])
@@ -128,8 +153,11 @@ class CommandTests(Fixture, unittest.TestCase):
 
     def test_timeout_stops_recorded_separate_session_child(self):
         self.config["max_runtime_seconds"] = 2
-        self.config["argv"] = [sys.executable, "-c",
-            "import subprocess,sys,time; subprocess.Popen([sys.executable,'-c','import time;time.sleep(30)'],start_new_session=True);time.sleep(30)"]
+        self.config["argv"] = [
+            sys.executable,
+            "-c",
+            "import subprocess,sys,time; subprocess.Popen([sys.executable,'-c','import time;time.sleep(30)'],start_new_session=True);time.sleep(30)",
+        ]
         result = self.execute()
         self.assertEqual(result["outcome"], "timed_out")
         self.assertTrue(result["cleanup_complete"])
@@ -147,12 +175,14 @@ class CommandTests(Fixture, unittest.TestCase):
     def test_owner_change_during_command_stops_it(self):
         original = self.backend.issue
         calls = 0
+
         def issue(issue_id):
             nonlocal calls
             calls += 1
             if calls > 2:
                 self.backend.items["work"]["assignee"] = "other"
             return original(issue_id)
+
         self.backend.issue = issue
         self.config["argv"] = [sys.executable, "-c", "import time; time.sleep(30)"]
         result = self.execute()
@@ -165,14 +195,24 @@ class CommandTests(Fixture, unittest.TestCase):
             self.execute()
 
     def test_invalid_configuration(self):
-        for field, value in [("argv", "shell command"), ("max_runtime_seconds", True),
-                             ("end_at", "2026-01-01"), ("argv", ["python", "-c", "pass"])]:
-            with self.subTest(field=field, value=value), self.assertRaises((j.JobError, j.runtime.SchedulerError)):
+        for field, value in [
+            ("argv", "shell command"),
+            ("max_runtime_seconds", True),
+            ("end_at", "2026-01-01"),
+            ("argv", ["python", "-c", "pass"]),
+        ]:
+            with (
+                self.subTest(field=field, value=value),
+                self.assertRaises((j.JobError, j.runtime.RuntimeError)),
+            ):
                 j.validate({**self.config, field: value}, self.root)
 
     def test_orphan_process_is_not_reported_clean(self):
-        self.config["argv"] = [sys.executable, "-c",
-            "import subprocess,sys; subprocess.Popen([sys.executable,'-c','import time;time.sleep(30)'])"]
+        self.config["argv"] = [
+            sys.executable,
+            "-c",
+            "import subprocess,sys; subprocess.Popen([sys.executable,'-c','import time;time.sleep(30)'])",
+        ]
         result = self.execute()
         self.assertEqual(result["outcome"], "cleanup_required")
         self.assertTrue(result["cleanup_complete"])
@@ -181,22 +221,23 @@ class CommandTests(Fixture, unittest.TestCase):
         # The actual supervisor runs in another process. Its fake backend only logs
         # one synthetic turn; no live Beads/AppServer or LLM is contacted.
         harness = self.root / "harness.py"
-        harness.write_text(f'''import importlib.util,json,sys
+        harness.write_text(f"""import importlib.util,json,sys
 from pathlib import Path
 s=importlib.util.spec_from_file_location("jobtest",{str(Path(__file__).resolve())!r})
 m=importlib.util.module_from_spec(s);s.loader.exec_module(m)
 b=m.Backend();d=Path(sys.argv[1]);m.j.run(d,d.parent,b)
 (d/"fake-rpc.json").write_text(json.dumps(b.server.calls))
-''')
+""")
         launcher = self.root / "launcher.py"
-        launcher.write_text(f'''import subprocess,sys
+        launcher.write_text(f"""import subprocess,sys
 subprocess.Popen([sys.executable,{str(harness)!r},{str(self.directory)!r}],stdin=subprocess.DEVNULL,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,start_new_session=True)
-''')
+""")
         subprocess.run([sys.executable, str(launcher)], check=True, timeout=3)
         import time
+
         until = time.monotonic() + 5
         while not (self.directory / "fake-rpc.json").exists() and time.monotonic() < until:
-            time.sleep(.05)
+            time.sleep(0.05)
         calls = json.loads((self.directory / "fake-rpc.json").read_text())
         self.assertEqual([x[0] for x in calls], ["turn/start"])
         self.assertEqual(j.read(self.directory, "result.json")["outcome"], "succeeded")
@@ -248,11 +289,8 @@ class NotificationTests(Fixture, unittest.IsolatedAsyncioTestCase):
         self.assertTrue((self.directory / "result.json").exists())
         self.assertEqual(self.backend.server.calls, [])
 
-    async def test_changed_owner_or_definition_never_wakes(self):
+    async def test_changed_owner_never_wakes(self):
         self.backend.items["work"]["assignee"] = "another"
-        await self.notify()
-        self.backend.items["work"]["assignee"] = "codex:target"
-        (self.root / ".agents/research-team/roles/experiment.md").write_text("changed")
         await self.notify()
         self.assertEqual(self.backend.server.calls, [])
 

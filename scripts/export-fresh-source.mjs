@@ -17,7 +17,7 @@ const scopes = {
     'crates/',
     'python/',
     'tools/model-export/',
-    'tools/research-team/',
+    'tools/research-session/',
     'tools/training/',
     'Cargo.toml',
     'Cargo.lock',

@@ -7,4 +7,4 @@ if [[ "$(realpath -m -- "$UV_PROJECT_ENVIRONMENT")" == "$(realpath -m -- "$QUORI
   echo "Task session tools require an environment separate from training" >&2
   exit 2
 fi
-exec uv run --locked --offline --no-sync --project "$research_script_dir/../../tools/research-session" python -B "$research_script_dir/research-job.py" "$@"
+exec uv run --locked --offline --no-sync --project "$research_script_dir/../../tools/research-session" python -B "$research_script_dir/research-session.py" "$@"
