@@ -1,5 +1,0 @@
-# 147 評価設計の有限受入れ
-147の静的設計と149へ採択済み補足の照合を受入れる。32pair/64game、ply4/5/12/13各8、hash混合seed・層巡回/色交互・既119全8一律除外・最大8attempt・新重複保持・全未知分母の設計を維持する。合法ランダム/色交換は均衡/代表性/独立性を保証せず、参考両側Hoeffding幅0.2400806978は独立bounded pair追加仮定の下だけの精度である。実対局/NI/Sigma同等/小改修感度を今回認定しない。
-候補faultlossと参照fault未知を含む運用scoreは分類が非対称なので、双方faultを未知にするterminal手品質の全予定識別区間を併記する指摘を採用。分類方針は事前補足の運用/純手品質分離を具体化し、入力・順・標本・失敗の責任区分・停止・ゲーム条件を変更しない。complete-onlyを主平均にしない。149同active turnへ明示配送する。
-41e0fccのmanifest15fileをGitstream bytes/SHA/current一致、e59b37aのmanifest/handoff別canonical bind、stopSHA7a9e03d8…f7e1一致を確認した。2staticjob exit0/childwait/remaining0、計2.513500秒、18記録PID/starttick現在不在を別確認。16fileという旧速報の訂正を保持、自然/全期間/短metadata瞬間資源保証へ格上げしない。新NN/Chrome/game/build0、旧量減額/親追加予約0。
-単独source書込/子停止・backup/report済みの所有引渡しに基づき統括が147をcloseする。検証役のcloseだけの新turnは起動しない。149は本人開始済みで固定64game結果/停止をcoordinatorへ報告する。148最終/監督の後着重要見解は通常配分へ使い、新承認gateにしない。根拠 research-data/ai-sigma/frame10-coordinator-start/147-acceptance-check.json、docs/reports/ai-sigma-critic-frame10-gap-design.md。

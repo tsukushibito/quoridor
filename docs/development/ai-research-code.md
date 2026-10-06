@@ -21,7 +21,7 @@ Linuxネイティブを主経路とし、評価・探索・対局・推論queue�
 | `tools/research-session`・`scripts/dev` | 明示thread宛のタスク通信、非同期jobの回収・完了通知、Git保存と容量 |
 | `tools/research-quality`                | 専用lock付きPrettier/Ruffと保守テスト                              |
 
-NodeはWeb/Vite/TypeScript、Wasm製品ビルド・検証、品質とソース書き出しに必要。研究の対局・探索・推論・生成をNodeへ委譲しない。旧Node実装、互換shim、実験別コピー、旧Python学習recipe、旧実装との比較テストは削除済み。[削除範囲と復元版](../reports/ai-retired-code-cleanup.md)を参照する。[AGENTS.md](../../AGENTS.md)の方針に従い、保守コストを優先し、互換性維持を目的とした旧経路は保持しない。実施中・具体的に予定した直接比較に必要な旧版だけは比較専用に保持し、対象・用途・撤去条件を明示する。比較時にGitから復元する手順は挟まず、終了後に不要分を削除する。
+NodeはWeb/Vite/TypeScript、Wasm製品ビルド・検証、品質とソース書き出しに必要。研究の対局・探索・推論・生成をNodeへ委譲しない。旧Node実装、互換shim、実験別コピー、旧Python学習recipe、旧実装との比較テストは削除済み。移行前コードはGit `54a294a`、[撤去manifest](../../research-data/ai-sigma/retired-code-cleanup/removed-source.json.gz)と[検証](../../research-data/ai-sigma/retired-code-cleanup/verification.json)で追跡する。[AGENTS.md](../../AGENTS.md)の方針に従い、保守コストを優先し、互換性維持を目的とした旧経路は保持しない。実施中・具体的に予定した直接比較に必要な旧版だけは比較専用に保持し、対象・用途・撤去条件を明示する。比較時にGitから復元する手順は挟まず、終了後に不要分を削除する。
 
 Rustの共通crateから過去frameのコードや管理scriptを呼ばない。PythonはRustが生成・検証したtensorを読み、学習loop内で盤面を再構成しない。モデル定義・設定・尺度は同packageに置き、`sys.path`で旧ツールを取り込まない。学習済み重みと凍結データはコード移行で書き換えない。
 
@@ -59,4 +59,4 @@ ONNX Runtime 1.30.0はtelemetry初期化時に`:memory:.ses`を生成する。`p
 
 旧weight-manifestは元の絶対pathのままmain Gitへ保持する。現在のNNUE descriptorは`--kind models --name legacy/frame18-native-connection/manifest.json`で解決し、相対weights参照だけを移行先へ更新した。重み・特徴・scale・教師ラベル・split・旧runの条件は変更していない。新runは現在の解決済path/SHAを自身の設定へbindし、旧run原記録を上書きしない。既入力の移動は自然停止・子回収とbyte確認後に同volume renameで行う。資産移動・チェックは学習/推論/対局を起動しない。
 
-軽量検証は`python3 -B scripts/dev/test_research_assets.py`。資産解決、欠落、path traversal、symlink範囲外、旧payloadのSHA/size変化を合成fixtureで確認する。旧checkoutの撤去では未保存情報のGit/圧縮保存と復元を確認し、registered checkoutは`manage_worktree.sh remove`、Git操作窓は単一統合ownerと合わせる。保全・移動対応は`research-data/ai-sigma/1d2-worktree-consolidation/`、製品固有証拠は`research-data/worktree-consolidation/1d2/`へ分けて保存する。[今回の移行・復元・撤去結果](../reports/ai-sigma-worktree-consolidation.md)を参照する。
+軽量検証は`python3 -B scripts/dev/test_research_assets.py`。資産解決、欠落、path traversal、symlink範囲外、旧payloadのSHA/size変化を合成fixtureで確認する。旧checkoutの撤去では未保存情報のGit/圧縮保存と復元を確認し、registered checkoutは`manage_worktree.sh remove`、Git操作窓は単一統合ownerと合わせる。保全・移動対応は`research-data/ai-sigma/1d2-worktree-consolidation/`、製品固有証拠は`research-data/worktree-consolidation/1d2/`へ分けて保存する。原pathとSHA・復元参照はこの保存先のmanifestで追跡し、終了済み報告は[文書索引](../README.md#過去文書と証拠を探す)からGit版を特定する。

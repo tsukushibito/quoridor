@@ -6,7 +6,7 @@ Linux native is the primary execution, performance and learning-cycle target. Wa
 
 ## Ownership and execution
 
-Main is canonical. Root owns shared core/MCTS, workspace manifests, integration and normal Git index. Three parallel writers own NNUE/alpha-beta, data/runner/Python cycle, and inference/export respectively. Historical science and the unrelated `:memory:.ses` are retained. The research scheduler remains stopped; software migration and bounded verification do not silently restart a research frame.
+Main is canonical. Root coordinates task ownership and integration; a task names one writer per file/worktree and one owner for normal Git index/commit operations. Historical science is retained. Important direction, data, training, features and model changes are chosen by the human using observed evidence, alternatives and whole-work costs. Accepted work and routine repairs proceed within the task scope; software verification does not authorize new research. See [task-based research](ai-research-team.md).
 
 Use actual available resources instead of expired CPU4/RAM8/VRAM6 allocations. Reserve two physical cores, 4 GiB host RAM and 2 GiB VRAM; honor affinity/cgroup limits and other owners. One GPU verification job at a time until overlap demonstrably improves whole-cycle time. Resource/initialization/export/cache/cleanup cost is measured, not assumed free. Cache dependencies and generated models under the storage-policy roots; keep temporary builds ignored. Shared old assets are references, not new source copies.
 
@@ -26,7 +26,7 @@ Python/PyTorch owns training, analysis and model conversion. There is no Python,
 
 ## Learning and storage
 
-Cold datasets use compressed Arrow IPC shards with hash-bound manifests; hot bulk tensors use mmap-capable uncompressed caches. Features are derived from canonical Rust rules, not repeated in Python per row. Import old JSON/JSONL without rewriting historical evidence. Train/validation/test game-family partitions and input exposure masks are fixed before fitting; freeze candidate before final test. Test/arena data are not fed back into selection or training.
+Cold datasets use compressed Arrow IPC shards with hash-bound manifests; hot bulk tensors use mmap-capable uncompressed caches. Features are derived from canonical Rust rules, not repeated in Python per row. New teacher data use Arrow; the retired JSON/JSONL import path is not retained. Historical evidence is preserved unchanged. Train/validation/test game-family partitions and input exposure masks are fixed before fitting; freeze candidate before final test. Test/arena data are not fed back into selection or training.
 
 The cycle supports MCTS teacher generation and CPU NNUE selfplay/relabeling, train curves/checkpoints, native export, independent arena and explicit model adoption. A successful software cycle is not proof of the highest Quoridor strength. NNUE feature/topology changes, quantization and selective pruning are versioned interventions, not disguised migration parity.
 

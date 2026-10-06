@@ -1,6 +1,0 @@
-# 149 group1の管理OOMと継続判断
-登録slot1/2の色交換4gameを実開始数/結果不明として全64予定分母に保持する。group1管理Node heap192MiBのOOM（logのJavaScript heap out of memory/exit -6）を確認し、AI敗北や双方正常terminalへ変換しない。startup6の本人保存報告と、失ったNN手数/Modeldrop/logicalzero/main timer-message receiptは分ける。運用/純terminalいずれも4slot未知[0,1]で、主識別平均の未知幅への寄与は4/64=.0625。再実行/置換/残集合のWDL選別0。
-managed wall119.327804秒（開始00:44:50.615761→終了00:46:49.943565UTC）を重累計へ含める。観測RSSpeak1885872128Bはbrowser配分6GiB/guard5.5内だが、個別V8heap制限に到達した管理失敗である。guardian/sole-root ownedwaitでremainingとunknown_adopted空、tracked＋launcher313同identity現在不在を確認した。物理回収の有限確認をModel/NN論理正常停止や自然/全期間保証へ格上げしない。
-本人提案のheapと対局後保存の修復を通常149self debugとして採用し、次の未開始group2以降へ進める。RAM配分・guardは据置、Node/Chrome/2Worker/session全体でaccountし起動直前headroom/外heavy/保存forecast/所有回収を確認。大きいpayloadの保存を安いmockで先確認し、可能な局終了時のcompact保存を重視する。Nodeを毎手時計/審判/CP配送経路へ入れず、時計/政策/入力/seed/順序/64slot/停止を変更しない。source版/保存形式差を記録し比較必要な結果/clock/初根/量/停止を欠落成功へ置換しない。
-生成込みheavy7200秒・job600秒・本人03:18:04.562204新heavy/03:28:04.562204処理/03:43:04.562204提出早側・親04:15:21終了は維持。修復の追加mock/管理費も同総予算内、科学成功行再試行なし。完走保証0。次報告は149の次group結果/保存/停止→coordinatorとし、実対局成果を得る情報価値を優先、回復確認だけの新LLM turnや全史gateを増やさない。繰り返し同じ保存欠測が出る場合は未開始側の実行方法を見直す根拠を返す。
-現在の問いは現候補とSigmaのgapであり、故障を候補弱さ/119敗因へ変換しない。正式NI/Sigma/棋力改善未認定。原成果/失敗run/旧期限を保持、149は担当のin_progress継続。証拠 research-data/ai-sigma/frame10-coordinator-start/149-group01-oom-decision.json。

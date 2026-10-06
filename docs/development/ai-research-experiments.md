@@ -73,13 +73,13 @@ Rootは新しい原因の発見だけで次の実験を選ばず、結果によ�
 
 mainが持続的研究の統合正本で、managed worktreeは並行変更・比較に用いる。現役のコード・指示・文書を旧研究worktreeへ恒常mirrorしない。必要モデル・checkpoint・入力は同volumeの`.worktree/assets/`へ分類し、[`research-paths.json`](../../research-paths.json)でコードと永続資産の参照を分ける。旧checkoutの未保存情報はGit/圧縮記録へ保存して復元を確認し、資産readerの自然停止と移動対応manifestのSHA照合後に撤去する。原runの旧絶対path・SHAは遡及更新しない。現役入口と依存図は[研究コードの保守案内](ai-research-code.md)を参照する。
 
-| 境界                                   | 現在の配置と保守ルール                                                                                                                                                          |
-| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ルール・特徴・NNUE・探索・native arena | `crates/quoridor-core`・`quoridor-nnue`・`quoridor-ai`・`quoridor-runner`。Linux主経路、Wasmは製品経路                                                                          |
-| 教師生成・推論queue・回収              | `quoridor-runner`・`quoridor-inference`。モデル/版/予算/所有をrun設定へ結び付ける                                                                                               |
-| 学習入力・学習入口                     | `quoridor-data`のArrow/mmapと`python/quoridor_training/`。モデル/設定/尺度も同packageが所有                                                                                     |
-| 独立検証・旧recipe                     | 旧Node実装・比較コードは削除済み。旧recipeは記録Git版から復元する。移行前一式は`54a294a`、[削除報告](../reports/ai-retired-code-cleanup.md)を参照                               |
-| 保存データと作業領域                   | Git正本は`research-data/ai-sigma/`、live/展開/tmpは`.artifacts/ai-sigma/`。モデル・env/cacheは永続入力として明示参照し、保存/復元・使用中pathを確認してから所有一時物を整理する |
+| 境界                                   | 現在の配置と保守ルール                                                                                                                                                                   |
+| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ルール・特徴・NNUE・探索・native arena | `crates/quoridor-core`・`quoridor-nnue`・`quoridor-ai`・`quoridor-runner`。Linux主経路、Wasmは製品経路                                                                                   |
+| 教師生成・推論queue・回収              | `quoridor-runner`・`quoridor-inference`。モデル/版/予算/所有をrun設定へ結び付ける                                                                                                        |
+| 学習入力・学習入口                     | `quoridor-data`のArrow/mmapと`python/quoridor_training/`。モデル/設定/尺度も同packageが所有                                                                                              |
+| 独立検証・旧recipe                     | 旧Node実装・比較コードは削除済み。旧recipeは記録Git版から復元する。移行前一式は`54a294a`、[撤去manifest](../../research-data/ai-sigma/retired-code-cleanup/removed-source.json.gz)を参照 |
+| 保存データと作業領域                   | Git正本は`research-data/ai-sigma/`、live/展開/tmpは`.artifacts/ai-sigma/`。モデル・env/cacheは永続入力として明示参照し、保存/復元・使用中pathを確認してから所有一時物を整理する          |
 
 並行writerはファイル単位で担当を分け、Git index/commitは統合担当一人が操作する。全writerの停止と明示pathを引き渡し、`scripts/dev/research-save.py check`で通常index・既stage・一時物・保存forecastを確認し、Git担当が`save`を実行する。private indexでHEADだけ更新する旧保存helperは将来の標準に使わない。既stage/未保存変更をresetして整合させず、保存失敗時のstageも確認用に保持する。
 

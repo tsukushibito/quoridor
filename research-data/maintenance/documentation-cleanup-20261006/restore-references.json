@@ -1,0 +1,4215 @@
+{
+  "issue": "quoridor-d3g",
+  "saved_commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+  "verification": "Every current file exactly matched git show commit:path before removal. Git objects retained; no prose archive created.",
+  "restore": "git show <commit>:<path> > .artifacts/<chosen-file>",
+  "documents": [
+    {
+      "path": "docs/design/ai-sigma-contract-arena-calibration-window.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "012814f55a2780009b9f351ab18d3beac67e8de7",
+      "sha256": "4cfe0f8926903d2ec2744e4f556a34d64f346866191e0331fd24d357380a2adb",
+      "bytes": 1786
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-actual-driver-minimal.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "e9d3923af6962ab671a526babe79cc970e9b056d",
+      "sha256": "2bd6f3436ad8228a47b50b7ef4106af4544ed5517cbddfbd770e72212114bb82",
+      "bytes": 5393
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-arena.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "dcf4f502da5a00451c4929ba45618665e0e341d8",
+      "sha256": "c08e6d3649157ba6c9923e38f29ca128a4a3f1227b8f567518e5eee42c3a226a",
+      "bytes": 5609
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-browser-sab-independent.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "340a1bd8bfc389acbc180e27fe0a1d4e78417a62",
+      "sha256": "83115cfc70f1829051f7f2c34e1985a9ddcab32c23dd9818463566abb191966b",
+      "bytes": 6765
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-c-factor-independent.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "ab2a77fb119fdd4646ca0e8c75edf2efe1a958e1",
+      "sha256": "c48a2960bc01c97175bdc8919465f909854358d0f20f6e8c1c5d22f0dd5b9f82",
+      "bytes": 7623
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-comparison.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "abafb425fcbfba5b340c44c05ec467a5b0205480",
+      "sha256": "8401597aa7c47b62f839fd1de82fe150aacac848fb465eeadd3ac79e3a2f32d5",
+      "bytes": 7033
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-completed-fpu.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "89c12255c4cfe63a3b228bdc3d988ace0e00cb8e",
+      "sha256": "de733f95ced3608e2bbb7af312477d5f384dfcde61d16eb2b456180273baf4fb",
+      "bytes": 5937
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-context.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "890cef7cde5228c977521a359a495b75ac65549a",
+      "sha256": "1414eeb7fe6b0d4aa430f5792d7b8e006cd6714d068917baa47ca3d8c4572d5d",
+      "bytes": 5090
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-continuation-nogo-audit.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "951aa98fa18b8b421a6e145afd01facd239ad5a9",
+      "sha256": "944156ba567baa11232fbe571582176bb47e5d5767347b47dfa2ac83bbcde6ab",
+      "bytes": 4254
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-cooperative-arena.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "5af5a0f5df3fef1472df2eb92aeea8d07c3fdf0e",
+      "sha256": "84f1c5ede9f5bf3af942be01e998060afcc10b3b598ef7135ef3b9a4316be7dc",
+      "bytes": 5675
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-cooperative-clock-independent.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "6ced562db827deef915f23b77fdeeda3518ccac8",
+      "sha256": "250461520b32ec9fb8e3c7e01f7d0de72683f609fc418597a1813554a7f8b315",
+      "bytes": 4633
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-cpu-sigma-frame8.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "629c2fca6c57f23a4813b2cf985e4d2b8dcad23b",
+      "sha256": "feb7b5ba38a6454552c41b473f7a5f2e99eabd09ea64799b46742a5e81ee43a7",
+      "bytes": 6485
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-deadline-first-turn.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "5ae3f3c817edef02ee10a990b71661b93958e498",
+      "sha256": "d85ff3d4f8e76bfeaeab6b790a63e8bf86eea413f182705f535270ba61db20f4",
+      "bytes": 3921
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-deep-node-comparison.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "5c7186e94222f0735653c21212416a2777c6553d",
+      "sha256": "b6f1b5ea7595c9d7e4f6c57abb878469621da53b984ff777224a2b652a840736",
+      "bytes": 5269
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-diagnostic-arena.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "aedc342a4e8c9f0b7dd07cad2c6a6b93f378a366",
+      "sha256": "d04e1fc28cec622dd441fc5f50679761c4ed1145fc2e01537e9af0972d8bc84a",
+      "bytes": 6245
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-diverse-prefix.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "997a456ce29903b8dc1f917ca9ddff8a030ee51a",
+      "sha256": "309d238d0db765bdc55492d65a3153092d61f6fdd7dd41e2ebf917bc12871041",
+      "bytes": 5982
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-entry-continuation.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "21e249ce7f0b2bc48d5e4bf1d0c4ebc78aed4217",
+      "sha256": "fc2a75d6974a7f56a81631c5eafa0882ab26721dbac2ad31a52818ac2803c9df",
+      "bytes": 5467
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-fair-streaming.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "92ef1519a5f9d65b73f4e27aa0fc8c86c2d86378",
+      "sha256": "9949d84da44988ef3d1227ad4d6a372e54be133c5cdb72221a7d3fd4808de720",
+      "bytes": 7464
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-final-entry.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "d1a01bcca6b20f5a673cb839244707312cbe3ac9",
+      "sha256": "cdf94eea06c26da60d6b54de1a78206656a8ffa16f20a0db0be289cbc5ec696f",
+      "bytes": 5000
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-fixed-cost-saved.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "8c0f2123f429ca27dbe0ce36f26be6f95f1e1704",
+      "sha256": "c935fa49b59bd122b627944af20b72f0ff7d24402395eaf42c1880e1ab05f306",
+      "bytes": 4553
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-formal-clock.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "d78972fcf16c379e4681747d18002fa3202374ed",
+      "sha256": "42ab10e497e461e907c190b9ba3d32ffc092b05b61c3d7cb080c72ab3a6462df",
+      "bytes": 3798
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-formal-ni-plan.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "a4fbe0d673720effa977f8031de647ab7a3623a8",
+      "sha256": "16285a36784bee54b72c476f57eb58487a2ac951b4d38895e95d5f8f9364fb38",
+      "bytes": 5057
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-frame10-gap-design.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "1d97c23c9939a95bc2804e87a1ec6f967c4ca64a",
+      "sha256": "6567efe346d20196d604c1fe2eb719375148578b377bfd05e5861998652bc6ca",
+      "bytes": 2622
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-frame10-gap-interim.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "8089ff540b922c9f79ada6792b2eb04340e03263",
+      "sha256": "557eb2c68bb7eac6306b9139a3723097be1f6ea4f9904f51921f9dcbbd897473",
+      "bytes": 4434
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-frame10-sigma-web-port.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "fb74135a569eb95cad063e513e140eabd99f290d",
+      "sha256": "705c92e5ec60c76c141c2b31927bb3cd9d95c57af7e5dd016da215e02b9bd611",
+      "bytes": 3527
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-frame8-evaluation-plan.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "e2e93b5964011ef6e1d9ec29c2deeeb59cecc36f",
+      "sha256": "745b3f3d249dec99ee72605011ea7beb065a9b19681c0df441c48a4956649b49",
+      "bytes": 4100
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-inference.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "0e1305c02dce92b9d2ed6233a9ced0de3429c3b1",
+      "sha256": "245a57b6e48c42793a9c3be886250369f9875503efc10f5c9eae764c232ef57a",
+      "bytes": 6357
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-kernel-ownership.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "d4aa64658bec4413bfe29c9d7cad30fd2bec109d",
+      "sha256": "669845a5c1adc5f20564225750e35934845b65220e4c3cb1fc775e5ed0c81bd9",
+      "bytes": 4883
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-local-move-quality.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "5bd86f4188c3fda5b8fa686988d8b784999a1bb0",
+      "sha256": "ff4a67828cb831ab9c61a003fbe6bdc1ceff9fe7f0a7d40df2ac1641a2f52eaf",
+      "bytes": 5295
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-match-results.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "b96c9a4487dd048f1c31791a5004d5fcd605a786",
+      "sha256": "e44bc28fa219257caf59d357253672d34506a3d7b603a0fa02eb20b4ff22f26e",
+      "bytes": 4541
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-matches-gate.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "8b92b0934b16e4eac15139bc861935146eef682a",
+      "sha256": "8b99d10db4576fe342c93a9c235aed6b5d099e728265224cd91370d66ec53873",
+      "bytes": 5598
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-native-comparison.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "41b99aec7b445a47fa83c3faef12acc57319fa76",
+      "sha256": "4d6958d19b329e4c3009c2d018ba76e05545501e242297caa7d6304d98cf12cb",
+      "bytes": 2655
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-native-epoch2-independent.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "26f50410d94f93d129f66cbb2581a6b6684fa107",
+      "sha256": "ce804af68dd87704fc39dff7d801d0152abddb33547f6c178ba6309286bff54f",
+      "bytes": 3364
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-native-games-saved.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "6baeaa02044fa056cb509c3b212ab842fa96e146",
+      "sha256": "c1114dd9e5f182e9e52000e80d1a068703b16e4b7d6fbb1a791a969e65c5130b",
+      "bytes": 4304
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-native-ni-efficient.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "a6dd6ead2b9d855a07d69ce5dc347391821b8ed1",
+      "sha256": "2215e8c6076ed25fb9fe1531e7ee335810839d4b548bc5a4386be7ba82337df3",
+      "bytes": 4660
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-native-stageA-saved.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "b04ec94ee220664dd5b2db924d81bd4930ab9867",
+      "sha256": "100b793b4085705e974cdbfbb6db9f7cb5182bfed475abd75d5778334fbe1c53",
+      "bytes": 3974
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-nn-search.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "14f8ca19d3bf04e6c933fa6c4da481b8fc1c6ef5",
+      "sha256": "7247921415ca463f1b901c73bcc14a3f9119d8525371b19c2610d5a30f48f206",
+      "bytes": 4800
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-ort-checkpoint.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "61d5948aebfd25613099def15e0481d020ce8a9a",
+      "sha256": "7a31c33275e270b2358f665497d715460de4f98fd9e57ba9d0294b2e0d72a281",
+      "bytes": 5734
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-ort-cleanup-repair.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "7d63fd173ac898406b51a83d4559f53de3dad88d",
+      "sha256": "1430c172d688f1aa9ab8db1e88fda38b195e174273b90afd25073a8d8b6e122a",
+      "bytes": 5249
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-ort-search.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "f82396b3e77d0e2454d69b5c565cd541ada0746f",
+      "sha256": "452642186e26387b6b8bab74282c35b2589bc2287e82a5b35bbf889d5e501362",
+      "bytes": 6083
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-player-workers.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "a8db69fd45277edea38f0b4b8006fea1fcad5d46",
+      "sha256": "8a8e15f449e82ea923c4edec496049b6884721f787a82c15cde58b8ce539c164",
+      "bytes": 5044
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-profile-parity.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "f568c911056c243473a6799159386cab47970bee",
+      "sha256": "de51c9a378edd4df25176155ddb56f003f12317c4186774f36c1022881744e52",
+      "bytes": 6774
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-puct-factor.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "642c54888ba7a6c8b9983628632684bd26a09a95",
+      "sha256": "714e1d14ed4bd547097ea7cf6906ea6120d3900a38132fe715848c026f51de36",
+      "bytes": 4518
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-root-nn-independent.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "01d1ece98292ce009703c4662825affdf0b57303",
+      "sha256": "1edf7573113d09d1cdced9bbb1138cec861bd0dbc3d449a6e0437bbd379df2fd",
+      "bytes": 5022
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-scheduler-live.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "e0a3a828f0dbfa7a8fed97e2fbe7749ef68d3e40",
+      "sha256": "0ef0bdd748020c7e55cb14912fe03c0bb0167fe1cc83564b4bdc78b5668306f3",
+      "bytes": 2682
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-sigma-web-port-games.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "5738af3ccac4f478efcc97c94fae5b8e6cb9508f",
+      "sha256": "22e0b0d97b621d5ff8d5dc4527521c68e7e77a04d6b97284dd9c0d1bf0509386",
+      "bytes": 4743
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-sigma-web-port-saved.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "1401a6543325382ea0e76f163218758f8d4cc32c",
+      "sha256": "a0e8f013c31058b0036ea8b2a33e0c1a231c80d8ea436f9fb721ec8300c1792c",
+      "bytes": 4395
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-streaming-early-seal.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "1feb97a59c82e104bfaeb67bb6e9d7822e345c31",
+      "sha256": "bc74e6f69f88e595af16c3328a955a041fbd31b9d5efe47a8ba6f42803ccaec5",
+      "bytes": 7254
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-streaming-entry-final.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "83c9ec9e9e7cf1c32e0e07db3aa958bffd9f6c69",
+      "sha256": "6ee4efb29c4de932d607090c58de6d721195b1da1b17a6d2c86ebd71a4088728",
+      "bytes": 7569
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-streaming-ready32.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "54d470fa8dacfc3dff93891f2626c4729bc9d4e0",
+      "sha256": "a8820f6ba50a1522d358d8cdde871f9aa042c3d27a2b713c120bb89dd37fe5e0",
+      "bytes": 7243
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-streaming-snapshot.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "deea590176fa6c5a45c65ccb685d406fd5998a65",
+      "sha256": "4ed8cef668e50217e571ab396364b4f8438d78154b6054b8c90db3b4914c83c9",
+      "bytes": 3453
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-streaming-startup-watchdog.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "b6a3ba8987aebf87a072a16436743ad113308a24",
+      "sha256": "e7527f097f792a1cb2b3378a78d321a38dc3cc2deec80ff88c6dd3863afd3734",
+      "bytes": 7531
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-tactical-evaluation.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "e2e00c4b9bdd53be93d3237d8f4e3ed83c78e3de",
+      "sha256": "db670c5b9d61eac95f4660767dd8c529f4fbf2014d7192dd51c65962eac31480",
+      "bytes": 4085
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-true-mean-fpu-saved.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "22c981f6cd77d69f9f9f83b040a59adaf61edb99",
+      "sha256": "57c8b90e39704c55b732b213248904120786342938948136505435c99b8cb12a",
+      "bytes": 4133
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-wallless-label.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "cfab0a0627c6afaccb96d5590af41ae3bb4645ea",
+      "sha256": "61d9735e11dcfc34017c49b976dd0bfa0e40778e13175e1aca29d5bdaab63c44",
+      "bytes": 4759
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-critic-web.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "207869530b8d6ca6055c2dceeab08bbf87a867eb",
+      "sha256": "264ce41723468232fcae8bd7f86e6255f773b6c72f09207dd001e95370464f9f",
+      "bytes": 5281
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-actual-boundary-repair.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "809c40a1e1ff03be1f64ba2b46830bd62952a0e5",
+      "sha256": "27b82acce6914aa8dedf9edcdb06f6d4ba846f6944b51b096d86e81d79a5e56d",
+      "bytes": 6266
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-c-factor-browser.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "c14ecb0b9babf5bd922719390851b798f50b97f0",
+      "sha256": "692a80026eaab33a0ffb1cb00f5da6e601865c72248d7704ca0d12cdea41d922",
+      "bytes": 8137
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-completed-fpu.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "4540fb2fd400ea3c8901f4decece3e781b0a865a",
+      "sha256": "fd6c921570f82538de35434b4cefc0a35b1cc80a7faa0bce9b3ea618eee4c42b",
+      "bytes": 6847
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-context.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "d387e5bb3c453c7682a9bd70bf54c08f222bf71f",
+      "sha256": "608f8c0a69a550a9f46f2caadf398b443d4a74ef50275baae2d3bc137ee6c218",
+      "bytes": 8405
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-continuation-entry.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "43f02e589f1ab24921649a613b16699ef3b4bbb4",
+      "sha256": "dfdc4c7b1632f9218f0df3ccbbd00984d40e5b2f1d47e5b66f865c6b8f961d2c",
+      "bytes": 8375
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-cooperative-arena.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "77d4e7a02f8821899eca85489eed5cc497322712",
+      "sha256": "3eb0dc8c016294c91a25c3ebae5987a3f20c5be58ade07b8a2f071d2fe838f38",
+      "bytes": 6360
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-cp-frame.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "b6c1c95ee072b289f43271beba60b6c8de60648a",
+      "sha256": "bc982542c40e0f9b5aadeec4c375de0972c201065d5f4d8a0578f225b6f78f91",
+      "bytes": 7573
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-cpu-concurrency.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "fd7a31e920c066a3db1bee76fc8d97868aa0f9ac",
+      "sha256": "135ad7d0d47f0c9e20b074c99161c4d914d5fa43a244ed2a4dbf6918cd6ba3b3",
+      "bytes": 5592
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-cpu-sigma-frame8.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "95c313e6aedb5d94e68b05b6e4ebe65e8f334857",
+      "sha256": "c25c5184c7d4b4e212c000eccabbe8627272f056880934b84b0325ea6d6406eb",
+      "bytes": 7052
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-deep-node-comparison.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "17c27e134adf4ed842d1d7b0978566eedef69081",
+      "sha256": "ec5c9f90df34b501630c4087bcfc665e19a73989bbae6f7b2cf74e56daae1a1a",
+      "bytes": 8635
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-detached-ownership.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "f6ace92f2ac2ef631b6898e789668d5ea1b1ca23",
+      "sha256": "de28c3c3c7f78a3e9321bbaee55a858cc53af2a46a029a6f2afcd40d095292fa",
+      "bytes": 5997
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-diagnostic-arena.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "ecffe7142d6c703d7a45fb0ade8287f2e54850b2",
+      "sha256": "9a04364f0e9b758582729304522f5f6c837c21f380c017ff16adb4cec56bed81",
+      "bytes": 6514
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-diverse-prefix.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "6a4c51d651a9cad2c7158f71f01cd29c2eae4cdb",
+      "sha256": "671be1cd7b418eff5f50f5b5b40ddf536639d7885b9693143c5b8da0e28043bc",
+      "bytes": 8161
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-entry-continuation.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "4a5ae79ba10ec670165348b520f84733268be7d3",
+      "sha256": "e98b0dc3f12ac022104cbbf5ce04151924104a399eebd24ce641149f64edee30",
+      "bytes": 3055
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-fair-streaming.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "c6d0f14e4eb8d0a0c0d096e3a36a098830a35706",
+      "sha256": "cadc47b2bcfc34a3566035ad8775fdfd3d245fc4726753379acdf89e2ecd3def",
+      "bytes": 7958
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-fixed-cycle.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "698b598b13dd6786264890a5d29bfa5356b5f898",
+      "sha256": "3338dfe73136ce1cac83510e0d107665a144a73ab6ac752963f115c0d7ee29f3",
+      "bytes": 4596
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-fixed-policy-cost.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "d7ee8d63b94100fab43c3e657ec49596021a7e53",
+      "sha256": "9f053257cc5d37f4990b85666fbd40f6b47d597c4a517f07dbb8d906343643d1",
+      "bytes": 6988
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-fixed-queue.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "0afe48d4fe0b24bf0839a616e89e34d641940376",
+      "sha256": "5cb53b7be4591a9e84cb38948ac0d7793038344eb3cb9205bcf6a97b62aaff55",
+      "bytes": 8145
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-frame10-baseline-gap.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "41ff25fad73c116bd1cd853eed1f6eafd35e0158",
+      "sha256": "6dd67390b29150a21bd579605505f7b779cf587d900caec41d11628700577659",
+      "bytes": 4242
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-isolated-nn-cost.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "a4c05fcc82d60e1de25187ce2a14e2132a6f05ab",
+      "sha256": "58d8a01891bad2c0624ee6bab682bbe647a8f709cc6134f2a792c6de6b1fb4b2",
+      "bytes": 5532
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-kernel-ownership.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "e4b0e3cd7804bf4806441fecdebace84ef2ad7bf",
+      "sha256": "54caa50fe939cc4ce6da980b947a000e24354601a6117dfccb3b8b06ef07d729",
+      "bytes": 6035
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-local-move-quality.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "e115276440137771ca46fa5d4d9473731f388941",
+      "sha256": "7d7167755dc0b9596dfe7f5d9bab0d2b28556fa10ff94e731cdeb690aa8cdb42",
+      "bytes": 8127
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-matches.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "0009f4bc2478ef49b45c5639572e22bfd9afce06",
+      "sha256": "b256cc032905ece9c5ca047c0cc4e81092c9eafbed82b5f71573a56e5602d4ac",
+      "bytes": 12915
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-native-baseline.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "f1207fc53f0b7471c1b9b9b6e76b1575d6bf72a3",
+      "sha256": "1ce2e0fcf600237323f74626bd9a8f75a33056eae7f12f75eec93ea084bb0b22",
+      "bytes": 6778
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-native-ni-main.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "cb7eadd6a61aedaf79d91a9d52704ea659dfa7a6",
+      "sha256": "314964f2921a77fc644769506a24b4a4d7a365a54e0c6ed2ca79866ee60d0cb7",
+      "bytes": 10655
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-native-runtime-ready.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "aed298807043b9227dbeb34c3e0b41157e70cc90",
+      "sha256": "ba2bb5b03914bd4bcc4b3ea41d3c02ce0ae421c9098735ddfef60daf45a63ce9",
+      "bytes": 6571
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-nn-schema-cost.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "f97957315c75b5b429435755325b4b6ea84d266b",
+      "sha256": "073d398befbf6a8dd0330e17e764ad076268bc96c626eaa55f9199d0437994db",
+      "bytes": 6744
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-nn-search.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "54a7a78c329e0e1d4a6ea18ae0397516dc4259e3",
+      "sha256": "23c9e3ba1a7cd74eb8d25feae2faf45ad646cd88aed3808ba210634decfeab01",
+      "bytes": 7837
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-nnue-feature-cost.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "b18dad330e88120815137dcca7ea5b0b98a0209f",
+      "sha256": "92ac664021ad9142bbd71f3b71b08709790cdf8c67790c506e9f6806896a48e3",
+      "bytes": 6674
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-ort-checkpoint.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "fdc292faeac7c26fb896e46c10488d78cabe20f5",
+      "sha256": "b7f1a314da2b5600799b0cca0f2bc0de19313bd575bc0b76cea52bdd59dafcfd",
+      "bytes": 8019
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-ort-cleanup-repair.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "3f3876450c37696d829bcbdd2d454b7b30fb2992",
+      "sha256": "e3d442a77e861b001d3a63be69f99a4b49b0cb70de1c2a690f736a31d29bd6e0",
+      "bytes": 5236
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-ort-entry-final.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "95104dbbc4cc9665993cf055bf414443f6ecb269",
+      "sha256": "16bc8425da1c4e21363bd13272b9a84ea9fce007ac0a1541c5781cb81f5b375c",
+      "bytes": 4235
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-ort-search.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "bc55929c85bd8bac7eaa81cb0af4d417528bc9c8",
+      "sha256": "349b7041993f5e699f4025d26757092fe223185decf9e6d89a9c5f9d939ddfcc",
+      "bytes": 7620
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-player-workers.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "262b93dfba5bc2eb93a7e594bd0f201cf846fb71",
+      "sha256": "c52c807c8333c8a7a556b5539cb04853a0802bd8f400e5ea9aec9df874537039",
+      "bytes": 5265
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-profile-steer.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "745c5c4efa150d768fa0465b881c825ad03524cd",
+      "sha256": "ea8ed57518267a744c59e358be37abc26212e8e0b3efd50d558dd64b7c85c8c3",
+      "bytes": 2970
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-profile.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "7b6d2a25ba66bfae19e4cf62a01fbb6c9c6df815",
+      "sha256": "d8c0722e9564f3e9ec468813b7c998dfe0ce594d93cade24c600af10f2619b92",
+      "bytes": 8750
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-puct-factor.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "b00c0ff1fe5c2401829dfafd754676c6f250ba4e",
+      "sha256": "cb17706d6204f8b32ecf3cd2b210993f8e7d82e6c8cb55cf32e93d5f06ada23e",
+      "bytes": 5948
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-same-input-budget.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "b4c4e4d18c9b188d18822f674bb96764c2c3ff95",
+      "sha256": "aaf1f38d20b06fd5d1b8aaaba6bed205095900894b7252c4b01de43390e32642",
+      "bytes": 7088
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-sigma-web-port.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "5e7d78a86ca5313d80101b6c10058b0769e66da0",
+      "sha256": "0bc06137372517ade7cf69e8f97fcdd48c5e6e83b298d3c51a25155c73742008",
+      "bytes": 7614
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-streaming-complete-clock.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "68551df4b81eeb2dfc934f76548ff243aeae7d57",
+      "sha256": "e4cefed7f69afbd7a4fd5e233f2b6edf1cb5bb6ad88bc4926a2ec60be72497c8",
+      "bytes": 8468
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-streaming-early-seal.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "2d028e5e2c4a445db4633b143b2384bd8e9e1875",
+      "sha256": "8d15d9b0fbadfcffae53385ebd9354c3ac63ef22d323164c560412c05afd1e2c",
+      "bytes": 8154
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-streaming-entry-repair.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "221a7463757038eb0af807838de634472993ee04",
+      "sha256": "c5ff6e5126c360e7b2527572ac755b9ee55f3f0952ae0a05c92880f85f9a646f",
+      "bytes": 9512
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-streaming-numeric-order.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "763bbccc994ce9057cb787af7b11e5f0843b9b8c",
+      "sha256": "1fd01e0b01a797d2072f57a1d048c8cc3efb898db017510f8f5309c282d77ece",
+      "bytes": 6734
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-streaming-runtime-final.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "4bea21a99a63d144977439172642389205341d9d",
+      "sha256": "1137a810164dd6c5541e993e0240d63d42a2f91613ca2f0b3f998e54303655d1",
+      "bytes": 7294
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-streaming-snapshot.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "90a02839edcac55b02c0b0badf1949de37be4c82",
+      "sha256": "08049823f7140cba768a7f224c7e519083226b6540216a1f004f2c05be6bedde",
+      "bytes": 5340
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-streaming-startup-watchdog.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "4802883a764e1253660bdc50bf81fb5e0192465b",
+      "sha256": "dcd79a8756684250719dd3bc07213929cb3e41b6123269658759c039d570fe3a",
+      "bytes": 7921
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-tactical-evaluation.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "0690cf5382fe20d8c3fe1ce6ad99f8006af81e0c",
+      "sha256": "16635041f93ef80f680b491da4a4ef8f1c1ac28f2ed29d706fcdd6ff84c54ffb",
+      "bytes": 6849
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-tail-transport.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "a17df67b8e8298d58b0b282c8de0d2c56f937233",
+      "sha256": "b61513e18d4b8dde62ece8fda7e6808256ddb0e88f1f539c7819395a3b6c8922",
+      "bytes": 8667
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-true-mean-fpu.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "69d05eade81de06f65feced515379d89acc311bb",
+      "sha256": "9bfb3b80245be9d6be42daf779da5edc7b5fe18b2999024ac6ea8017ff4d6619",
+      "bytes": 9652
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-wallless-ai-sensitivity.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "78f0e597d62cc934787d56b54dd1e5a37d09bc7c",
+      "sha256": "6d0490833ec5e47e3fcfd8bcc54a479e34575ba6126ab7fee629204e35a51f88",
+      "bytes": 6572
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-experiment-webgpu-measure.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "a0318c9f868390603343e4e32d7114a770bd02da",
+      "sha256": "d5401e9602540f65dbb2995c2bf93fd96ba0997a4b3855a38a3e8c561d7a07a4",
+      "bytes": 8194
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-arena.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "3b298286e27dc791ed3c29759d01e6a6f6786328",
+      "sha256": "c8cc73fe096c4e821545bd1b644500d6f6b9aad4974dfc1c0602e103aacf7ab4",
+      "bytes": 8005
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-continuation-match-plan.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "12a632764f90cca5d8c764d314a2c76218fdc8f2",
+      "sha256": "51962eebbe86e45f2b607c5889922a3389d429f7112275bd23a37d8f4e70a222",
+      "bytes": 5958
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-deep-discrimination.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "6294c0b30627756933cf252ea16c1eac2d3d73ed",
+      "sha256": "82e46185dd01c34cee682bba4e366d793d89b649c4e251c1f68807ae5aa941b0",
+      "bytes": 4757
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-diverse-search.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "64868f175a1629f4f2d1093e9caf51b484d780dc",
+      "sha256": "7655b17548092fc314234e708cba57e7703a363bab8d5bb1b8cca119a4521a0e",
+      "bytes": 4587
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-frame10-gap-sampling.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "cb84436b01abf06149b60d23aaf2afbebc0baebd",
+      "sha256": "ce9d0e57362d0b3f300639a4e142ee5b90240bef8b079d779442af3ca6d6d8c7",
+      "bytes": 2559
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-gpu-route.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "d5300635572246fa1825773b26eb2d11dc026d1a",
+      "sha256": "ac71d490147b201476ef4e8595a503e56655be7e5e224049100885997bca67ed",
+      "bytes": 3153
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-inference.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "47a8d98ad2ac37581a101f4d4534e412901cb174",
+      "sha256": "fb898f566e910eefab2482ed11b45b4a7f96f7d4cd14d95d1a93803cca429deb",
+      "bytes": 7891
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-initial.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "65c032fccf31430443884cc079e0b878cc98dedf",
+      "sha256": "ad42b770c7ac478e1995f35a78cfeb2abcf4dc3fda1eefd1861cb70b67dbde1a",
+      "bytes": 5444
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-match-analysis.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "69d95af57ec31fdadfb77d1c89ffdc132bcc1b7d",
+      "sha256": "76c0c2d279c48f02ab3ca046ec03b9f0bfead8852a8bf6f4641fea81528d34c3",
+      "bytes": 4942
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-matched-policy-quality.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "b1f2b8ed021685d7c1a1996b416f102f6f7459bf",
+      "sha256": "ba6a630b2fdab79c8852e87b5c8828324010b358a508c9fc5a874726017ed540",
+      "bytes": 5079
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-native-route.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "cea1b7fccc101a3b3c650a764457423fc294992d",
+      "sha256": "cf6da358b249ab3de479452171b53e46269a141b6cb9dabcec6a6366e9d4d713",
+      "bytes": 3136
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-next-information.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "6bed1d2f321f2c1ce46d2a0ef69ddca0cefc3e9f",
+      "sha256": "1b8ba7bc16d809cad2632209ebcab2a43c0f58b3879d53ff4c02be685d0ec045",
+      "bytes": 4642
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-nnue-preliminary.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "11bb637747dbaac83da74828095f308eedf792d5",
+      "sha256": "c20b1197bb12f4e3116aa5d0b5244c34b63b88da522964c8901a9a607995ae7f",
+      "bytes": 3766
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-ort-rematch.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "dcc9c7545fdc066b4783302ae061046d7624d3f8",
+      "sha256": "f13d0b2d60d402dcc2ed6330788641456c92d09d53ec37aba8740650d601fc5c",
+      "bytes": 7736
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-parity.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "53b879ca3bbc45f963aa07b3b065050d396736a4",
+      "sha256": "b0f97e57a8277a26461e16e5d35de4a5aff5f9370ebb7e47183f312afea85c3d",
+      "bytes": 6638
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-policy-factor-choice.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "e77165790c081d63030287ad788a3e6f9b1c7e59",
+      "sha256": "8df38921f0d27a193ebab678c8c2de9c95daa8711edd4680a98f8dd9ff048afc",
+      "bytes": 5247
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-pv-cpu-smoke.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "14c09f94c25f77003bcced213f33efb93703d1e0",
+      "sha256": "a728609c877268b653743673296ab685579ca7cf232a647199ac1cca3ba87591",
+      "bytes": 3945
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-pv-pipeline-bootstrap.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "7d79506447c5af286c31b122402ba1236e74aacb",
+      "sha256": "b91268e261df0d6ec76e0425bfa2b415a6facbd6758b9dc5be9557d880cc5368",
+      "bytes": 3906
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-readiness-clock.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "163702cfd9bb97f08369b65e24fd365bc175418c",
+      "sha256": "7b6140acbedc360a9637d11a1e89426862c115c376a988431aecf647a84a42e2",
+      "bytes": 5997
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-release.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "a7ab60f61e9234bafd6e5389ef2f0da639b1088c",
+      "sha256": "db921b0333e5e4a56938d635ed067d8ca40b179b3ce9d34627941954eead3c0e",
+      "bytes": 7643
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-remaining-evidence-plan.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "c3ae0063d010b1b3f102b0c6eb60ebb2e7098b77",
+      "sha256": "e94d1d0764bbaa8ede76084916263afd95168ac3a5898c030d46431c576dec33",
+      "bytes": 3963
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-root-ablation-v2.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "f54ab34dbfad49663f0f232ec204c54f58c975aa",
+      "sha256": "80357c3a921f5bb5df4058d131ad0f528d6064839409a0c180f0b5563885de71",
+      "bytes": 2623
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-root-ablation.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "0d3991932d05dfcfc78472966cb87bddeffb1e55",
+      "sha256": "09f17f843cee7b38974b1d7ab6a17f091c4414310a00e081402ba9e17095b6a2",
+      "bytes": 5599
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-root-factor-correct-n.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "fb1d97c4127a1ebbd9854ebc023987aa2ab8bd95",
+      "sha256": "24b3b06387f81614a7cc1fb3b5891c359b41b29e1cf3b12a1ff1cd2057e7d56e",
+      "bytes": 3895
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-saved-nn46-independent.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "fcb369d286f714b50d15f2dcb27d5115bf58f936",
+      "sha256": "534cc77b8752a7058df5ff6ee6f189bddc7e5083bd69b5927146b4227309a75d",
+      "bytes": 4592
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-search-policy-differential.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "8d163e38d37ced40b00062fd89b06894fb850ec8",
+      "sha256": "83fd9a571efe960039078031c5646056b008bc5e2684edb727e55dc6de3cfeab",
+      "bytes": 3571
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-sigma-gpu-inference.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "862b4bba50527ec2d678bc0adf1043fd22c5398b",
+      "sha256": "efd25bab3d3e2b2dec2ce31fcc286ab0467504aff144147fe868722b7fa40ee2",
+      "bytes": 6013
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-streaming-comparison32.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "3d7460f7a3c6bbbaafbf6ff07c9e760a44c12173",
+      "sha256": "ed0fcd804fb06193ea0cecc5b870951155bc59a8f9981af7e020c3218efba330",
+      "bytes": 5771
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-streaming-independent.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "6c9122dc7d95855cf491124b0834e05447dfc408",
+      "sha256": "3c5896d8d78dc272cbb4aca5c989fb4d432ac5d0903d5e7ee27676408704b937",
+      "bytes": 5483
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-streaming-match-entry.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "3eede935fc3592fcfeeb55b7aa3f47aaface07bc",
+      "sha256": "80729b9f6b9e1b2b5b157250a520366379fbed088d7ee076204e63ff34c8298e",
+      "bytes": 6935
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-tactical-oracle.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "56e1e4b5cf290a3cbebd3805cca6b7e3ac23b1bf",
+      "sha256": "6be528d91623d8afa137cd58ef6983d806b79e54b4cdf07adb89d00af2f5335c",
+      "bytes": 5208
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-wallless-oracle.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "ed6c83aba28509a6b734e42583c6e70fa09cc224",
+      "sha256": "002c5b118ef996a0eded64621b824e468bf5c5ca477d8b404344ce37be377f97",
+      "bytes": 6617
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-hypothesis-web-reference.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "4bee09d6d56da10d831ad9b8525128970b96d89f",
+      "sha256": "898d50e14ad4b487c792ea9051e3b5c795e2063e4166ff52d35b6cdfeb873949",
+      "bytes": 6762
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-steward-closeout.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "d865d709dd9b100c02734af5545cf1ef564e8288",
+      "sha256": "e2a2008120dfeffb513507062a5e314fe05c9dc558c8b8475132dc64f22efbc1",
+      "bytes": 5285
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-steward-critical-roles-v2.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "bd6761d0366b0de128f63e174f09cafbac2ebd90",
+      "sha256": "07b9377c75d3c00b4b6aaccba9e219dd90d6e27dd5b2a7d60b19c3ecb78692b1",
+      "bytes": 4796
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-steward-deadline-20261002.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "82147e56b14dd117f4fd276a4e81337ae48350ae",
+      "sha256": "af7d913fe1f964c145df2f6340130a949134230d0cb6bfaf7324165d2ca3e062",
+      "bytes": 3798
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-steward-frame10-guard-repair.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "846985c3c1520f4bb64947d7056639b46fde3ade",
+      "sha256": "9d85f0e634e505aa6cbd2d6cc11a7f55f35540e5905341b803ac0e896fac0b15",
+      "bytes": 4319
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-steward-frame10.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "62506cc775099292687fc4df0be007a58a493527",
+      "sha256": "99d0ca8aaf30e76597bbaefffb8e8f9a955757437d954dff3c470b011c26908e",
+      "bytes": 3553
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-steward-frame12.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "adaf56fd91576b202597932fc1dcd2c27b2fd7ff",
+      "sha256": "ec849eac908aa226b1d12cc7f13f2bd4143edc1c0e937e976ca4ab2e182f467b",
+      "bytes": 1705
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-steward-frame13.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "35b142dbd118d6f5ba337b5c547a4193dd650e9d",
+      "sha256": "3072fa5572b939862979372fe8c1bd63aadb05d991c66bd3ae87ed4b2c3dc0ae",
+      "bytes": 1731
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-steward-frame14.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "3bf1f1ada00bf5fe6933baebeaf04673afa816ba",
+      "sha256": "86f9066870e1201dfd08dadc9cab6ddfbcfda489dab09b1002a4cce5a11d279b",
+      "bytes": 2087
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-steward-frame15.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "6b550f3f7785aa95427c924d8f1f8a25f8234ff3",
+      "sha256": "ac31e3cc48a220886c645660f1aa3bc8eac3518d7c7aac4960850a6832287a84",
+      "bytes": 1862
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-steward-frame16.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "ea741e1171f98fb0c417727aa4d0797f5a616ce0",
+      "sha256": "749b0e6ca99a6b860a327866070f740077323f831d06a94f4fc6cc915ac1b8d6",
+      "bytes": 1845
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-steward-frame18.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "8cf9edc92d0398bdddde16588ac5c029eb2b40e8",
+      "sha256": "049d76987c03613f3f5e616210e658c3b663d79d6824a0a8dc47123c4d1f6a3a",
+      "bytes": 1973
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-steward-frame19.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "2b776c3be3e35bae8e6341889cbb07714fac4008",
+      "sha256": "676e7fca5ae14a41ab629c10fc29c3722042ca8d202bbb26266b19a72bfa913e",
+      "bytes": 2053
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-steward-frame20.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "0be31fdd5079af6624de8a68188d487d7694e09f",
+      "sha256": "f63ffb43a613a1419bee9d07f6d543932b3f19a977c6b6cf623464a4a739eed5",
+      "bytes": 1918
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-steward-frame21.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "fd7fdedd72a08ec50d8d1894943982f844d9af91",
+      "sha256": "91afc121bbe2c320d91dc4a3d3530205a9a2809f8c7878ec2fa6b62eeb64a966",
+      "bytes": 1833
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-steward-frame22.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "196ca3f2008034e49b585fc8b7f0f325268c64f6",
+      "sha256": "53c0fe26288dfa373923638adb95f9101d3eba54122225ac5bbfe6c9ae884ab5",
+      "bytes": 2659
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-steward-initial.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "4de755b7f5bf37a3329075a02833c45790111344",
+      "sha256": "9260174d88e777f79c08499f505c51f2818a84e219348cc6c0f829005d3d2777",
+      "bytes": 5407
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-steward-model.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "2d50eae0965a890f742907c0f65ff87a6cfcd5ed",
+      "sha256": "7d75de06e0b2bd9a7b2e95a237291b852bce708ac24feed8640a5a8bbde37572",
+      "bytes": 5768
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-steward-resume4h.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "66136e507c39843686b9a7427219e4c8ca81007a",
+      "sha256": "0783254e100da49eaf9669e1ab1f459ccf346d1cd8c631f9a7c18401a6e5d892",
+      "bytes": 4185
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-steward-scheduler-live.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "f0017c99379bbf9251e173221307b78f918ea53c",
+      "sha256": "0924572226fce3aee617984fee9adbe9093053ed47e96b016db6685ad6fb1621",
+      "bytes": 2198
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-steward-scheduler-recovery.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "feb5ff83c27af9240718da7fbf9a5d4042aca08a",
+      "sha256": "030fdeb011849c0e06c80f3ba5a5299a82cde2fc8087925522e149849105b237",
+      "bytes": 4626
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-steward-summary.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "aed5482fd79ecf8416be4289d60e1bae2dbb6329",
+      "sha256": "328c4eb8df09387382153a4d9f887a1f679d6bd940f2c6fd36140c3a313ca30b",
+      "bytes": 4173
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-steward-supervisor-bounded-records.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "5cb79d0674ffadab5ef594182aab27feaf0ea637",
+      "sha256": "3db550d3373bbbe8f159ba05c89a96f5577a8d7105f4ac75520ab6c53757b56d",
+      "bytes": 3867
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-steward-supervisor-read-guard.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "0cccfd308dbc56d8782943e5aa4fddabc55dc2cf",
+      "sha256": "162435d20895f597e26220b0fcd2e9219265d41dd023f30b1ad6fe13dfbbc7a2",
+      "bytes": 4935
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-steward-supervisor-role-review.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "4fe359810be81cf4c0a16879ed54965e69f64555",
+      "sha256": "3fbf04cb85de15549f0949048faf8dbae782c78a0d04ca58ed629a79a21b1256",
+      "bytes": 4458
+    },
+    {
+      "path": "docs/design/ai-sigma-contract-steward-tooling-boundary.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "4a29c47320e4846088679abc8f0d0ccfc53fb338",
+      "sha256": "c119713edb2f58122f3bfd1730a1300d7dde73b70c047ec093e86bc72edf3baa",
+      "bytes": 4146
+    },
+    {
+      "path": "docs/design/ai-sigma-frame10-baseline-gap-selection.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "93e8953cc97f678d70355e687f82d8787d3d2add",
+      "sha256": "97f81d3b752ba3bd1ad5ffe36b294420a606d9a22e81169e07a087d83d577004",
+      "bytes": 1232
+    },
+    {
+      "path": "docs/design/ai-sigma-frame10-gap-preregister-supplement.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "65ea175214b0c42f0fe03250a4a69c2436b0cefb",
+      "sha256": "d41ec735d4d80874d1beb31ddaf9a15edebcab743aadb671eae76a5cb23f82b1",
+      "bytes": 4959
+    },
+    {
+      "path": "docs/design/ai-sigma-frame10-sigma-web-port-selection.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "75e53ca646a01dcc0f05330308c8bb3c99955a83",
+      "sha256": "3c913991d3a444ca6818432ef0b78e4b3370a1a63598473ae03f7c51a3e65aa8",
+      "bytes": 1766
+    },
+    {
+      "path": "docs/design/ai-sigma-frame12-checkpoint-teacher-contract.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "54773532103f6626b4d0b11c96162f8e06b43438",
+      "sha256": "846415d800939f41c042cd54028b4f0c34808fb5c53a6b0f2a6eb0d4cfd5bbcd",
+      "bytes": 7134
+    },
+    {
+      "path": "docs/design/ai-sigma-frame12-checkpoint-teacher-independent-contract.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "dde799a7ebf245b03aa48c95596fc1bea9915d87",
+      "sha256": "542e7d27728b41170315c4cb93818603ab219f52ee119064ec84a5b35752fe44",
+      "bytes": 2720
+    },
+    {
+      "path": "docs/design/ai-sigma-frame12-critic-contract.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "2c75ed77a6bda828189ec9d2d8849969ed7f82a6",
+      "sha256": "7a10322d8050599df530c186ccf3dab3c517a42906db4dd81118b50285ec4cf3",
+      "bytes": 3019
+    },
+    {
+      "path": "docs/design/ai-sigma-frame12-experiment-contract.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "4f00a5972a42d831884d4acd9d3b269e7c32ee99",
+      "sha256": "37c0481ec6a3dad6f7c1e6b846be848608bbe49a61b552fea679c185660ea784",
+      "bytes": 6523
+    },
+    {
+      "path": "docs/design/ai-sigma-frame12-hypothesis-contract.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "c2d21da36c92ee5ceba0d4e0ddae2a792777c937",
+      "sha256": "a82f990208d876a3f2712dfb646f190ae15e40def8c6b3f619943d82a5b3fd25",
+      "bytes": 4171
+    },
+    {
+      "path": "docs/design/ai-sigma-frame12-k800-independent-contract.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "f18eaafa9bff5bbb8b8600d33abb922cac747aa4",
+      "sha256": "375a1e1a604077432b0a07ac4d30dec96a99092a48150cd6e136d7a174880e6a",
+      "bytes": 2303
+    },
+    {
+      "path": "docs/design/ai-sigma-frame12-k800-time-contract.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "86bdbd3a273fdaf906653e4220e4e49378ff603c",
+      "sha256": "bbd467cf399a8cef4937d0602bb9b4a62c05e966053e20be8b0cce44a5cf7262",
+      "bytes": 6439
+    },
+    {
+      "path": "docs/design/ai-sigma-frame12-manygame-gpu-plan-contract.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "02b2214260c17d14d9acce1e500e6a736abfb72e",
+      "sha256": "c47d9f8494cad9e7acf8e31a9c3be66af045df2fa3d88e013f7adcbf3a5939e2",
+      "bytes": 3905
+    },
+    {
+      "path": "docs/design/ai-sigma-frame12-manygame-runtime-preparation-contract.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "2357326a655427b19ddbc15e36a2f59c20c08de7",
+      "sha256": "300513530dbd33ea6a89c910379b7f33e3604c9040a25bfd284034c396152a79",
+      "bytes": 3881
+    },
+    {
+      "path": "docs/design/ai-sigma-frame12-teacher-independent-contract.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "8405f25bb2b9665aa99a3f40a4aececf2fde9405",
+      "sha256": "ae747463968d6928e01bb267e12a30270805d00f82ddf9b8fa421f52871aad1b",
+      "bytes": 4089
+    },
+    {
+      "path": "docs/design/ai-sigma-frame12-value-validation-game-diagnostic-contract.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "408a2f4c427c5018ada8297e855314f64540a004",
+      "sha256": "ced52c79e45bd9ffad310d91059fa552b5920fa36985f56e936c7e8944fb5ab3",
+      "bytes": 3490
+    },
+    {
+      "path": "docs/design/ai-sigma-frame8-evaluation-plan.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "5a6cea37e22a4cea9c260397e3b615a1db1bb43f",
+      "sha256": "ef2f6d1b2f0dac6d7a0c6a1912e70e51805d57f0b3b4f8566ac7e77f20b5c3b6",
+      "bytes": 15046
+    },
+    {
+      "path": "docs/design/ai-sigma-player-workers.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "42714b13cd74fe3704638d7c211353d99ad61d1f",
+      "sha256": "f31c0797111526c4aac59a5b18f242b4cb871a6e7a31b15603c1816a91e94100",
+      "bytes": 4561
+    },
+    {
+      "path": "docs/reports/ai-native-node-performance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "38832dd8b1a4e69b1ad23112696b69302b0a8a84",
+      "sha256": "ffdf044cfd94bba7501bd440ae5c8dc15a4e1fc7e7ef1e028a2df9183d05e029",
+      "bytes": 5482
+    },
+    {
+      "path": "docs/reports/ai-research-git-history-repair263.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "a8243d52391d6f287261b5539e15437c89cc5860",
+      "sha256": "4fca42294695ace2d634df9e43d1b797d6d3bf6b16e16c34ee95f8f774c526c1",
+      "bytes": 3231
+    },
+    {
+      "path": "docs/reports/ai-research-main-integration261.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "d7d924cce5ee9298c679ece6f8190f1f9604306c",
+      "sha256": "5ee7e8c464e001cb6f40ef03bd9f21a0aeaeeb619fd170ab92f28baf1d036c62",
+      "bytes": 3181
+    },
+    {
+      "path": "docs/reports/ai-research-priority215.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "1597d76a25bbd693287c99e69a96b4bd9236dbcf",
+      "sha256": "1653a2a42f7d6f8afb8f20da96d014289336b8f94cadee9f93025e1393e2216c",
+      "bytes": 1439
+    },
+    {
+      "path": "docs/reports/ai-research-refactoring262.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "c043a3d6d1252196a44efef59b852cc76c96b7e8",
+      "sha256": "0ba7cb080f184d680b397a75dced9fdf6bb6bf0f34429ced6f142b6e745c31fe",
+      "bytes": 12908
+    },
+    {
+      "path": "docs/reports/ai-research-team-general-roles207.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "939da21ff2195ea477704a08bed77e3b458fe829",
+      "sha256": "c91ff9c929475ad5b5fc7b1113b1d126216aedceb36b13ea4da245c2ca29a93d",
+      "bytes": 3007
+    },
+    {
+      "path": "docs/reports/ai-research-team-setup.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "2f374fd3b412357275e01285e38a2d8759894706",
+      "sha256": "7808f77929676247bdb15b5c57938227ee5d0e87527232e82c1cf9de69ebd013",
+      "bytes": 8854
+    },
+    {
+      "path": "docs/reports/ai-retired-code-cleanup.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "65ff4c1301f7a5b64078413841ef7df0582a86c4",
+      "sha256": "3aafc8e5ca3996ebe28b72a9b0adc1034db1662d21220aa2a3745462decd1082",
+      "bytes": 4515
+    },
+    {
+      "path": "docs/reports/ai-rust-migration.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "80140f5b1711b5107e819bb8eb878e4feb3701d6",
+      "sha256": "73d037cca833c6b59e42f1843063ea1a1248fc24e6f55b4784d7013a78212dc4",
+      "bytes": 8924
+    },
+    {
+      "path": "docs/reports/ai-sigma-continuation-start.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "b6af8ef14878f87753e61639f9ad3e9c17074d39",
+      "sha256": "df8dd5f59ba090f5404af129a508996d51f2f168a3c6ac64f8d98f39f6b228dc",
+      "bytes": 1338
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-actual-boundary76-next.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "5e02ebc1f52736db9636a2afce90e658d90839fc",
+      "sha256": "1388528eb71b875707029882c14210f97c6b2a9fa8ed9eb72f64cdf2dd548a5c",
+      "bytes": 3446
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-actual-driver-final.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "858073b5a97e22fe0d397c9ce8ab1f8a1421460c",
+      "sha256": "123f95281a58d98154c3f91cad5464359a5997c9f84b33e63ffe785390eecadd",
+      "bytes": 2884
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-actual-driver87-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "426d36ef6e1036d862b5058f347348e81dabb6c7",
+      "sha256": "636c0e76dac165a0152ff4c44e13af84987828029043146b40e7a56db212175b",
+      "bytes": 1424
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-arena-preflight-review.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "02eb9ba5f702b3eadd5afdb9eefce0920088a519",
+      "sha256": "d64cb7796a99bd56db0dd16f51ccef686124f409c0327979696abd79123cf83e",
+      "bytes": 2879
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-arena93-95-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "18fc01920f160b0817d41079369ada76d8eca0dc",
+      "sha256": "7e1f41efff4ee38bd7fe22b6a100111ca0f4b5f0bfa3a07d024f0c0c4b1ffcfd",
+      "bytes": 4445
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-browser107-109-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "74fe30ad0daba09af8a82ed38baf5c5d3543d3e7",
+      "sha256": "8399a5197b7c9ca44f5919df66c83bede2d1b79811abfc791f5d2cf5d7b0cc5e",
+      "bytes": 3369
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-browser107-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "369197f4276ba092eb82df0caf79855bc1407760",
+      "sha256": "a13e869948e2c93836d8595135c6294e74b95c09cd6c2ad986604a2b20680628",
+      "bytes": 3591
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-browser107-functional-decision.json",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "670a6a6f26410999919a70d9d3ebe8b13b7bde9d",
+      "sha256": "a8110743825c8c45ea1fa61afb9200ab42e38a68eeb565710619475cd05867b8",
+      "bytes": 4192
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-browser107-handoff.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "dba9345b802c885b01b016a947c1e76e205c6e2d",
+      "sha256": "3da97a76d2523949e829934c717e200d039c4b783d50a995593a78fa3b6d56b8",
+      "bytes": 5427
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-budget126-decision.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "b66debf7445e040b8ae7396bae08bfb75cb1d9ab",
+      "sha256": "5d13880b3bcaaa79332175a4cf6594947791d6840f529e30466157c5d652a5b7",
+      "bytes": 3176
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-c110-111-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "2928b8ee2fa10e1b353d97ed1647620fb6100f39",
+      "sha256": "3b8caf259535a7434dd9f46a475768c1ff6e3dbf71016272ee63b3a363882d96",
+      "bytes": 2091
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-capacity-recovery.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "e427ae0e02ca9869b4e8c9ec31bf341398deb04b",
+      "sha256": "b8e3091cd81d3573378ee4d616bd1937ada60be111cefdda6324f3e19ee8d672",
+      "bytes": 2490
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-cleanup-repair-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "4549a6d53e16004a14e7d1bdd1a7f34fe6b5c313",
+      "sha256": "1667655d3feb7c6fd080882e69296e51fdaa2c1f7498ac54a78acde3b9ea3228",
+      "bytes": 1925
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-cleanup-repair-review.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "a3533e4e22231c0acf36e5a22f7280b0675c37f4",
+      "sha256": "9f4e1933ccd52369982aae28f3ee6cbc514f2c4e936623a9602b336ce974d333",
+      "bytes": 2277
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-clock97-100-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "adda384bbeacd5eef9a1e73988d9ee1417fef4ec",
+      "sha256": "33c80d339f11c1bc54b5a596df6a868a7ed5f4dd66bd4faba27b62b1f04ee6d6",
+      "bytes": 3628
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-comparison32-static-review.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "3a1d07b4761242e46f22defbf133eebb6dbf34e8",
+      "sha256": "057aea4cbfe9eec6e1941193b298a2a83954fe7cb5f51d31cfe2f79d9cd17e0a",
+      "bytes": 2844
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-context-review.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "ca96782a27c03b774162d14ed19d8314fb714b99",
+      "sha256": "bd460fe5aacecc4cc24200776a10537fed0321f94412ccc19d7fe5ed4fe3c3ec",
+      "bytes": 1490
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-continuation-entry-nogo.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "2be2bd6abc9aa70072ee135ae3516e9b82ea99f9",
+      "sha256": "9af3f2d73994c71853b89f9449e3a3e13b6e9d0f48fa0dfc95d8c837ea9ab289",
+      "bytes": 1954
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-continuation-plan-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "6476fad05bb324ad7dace9e3fc793dc7d27f0a5f",
+      "sha256": "bb1212f87d2bfaa85fcdda2d168c91e7bca84242053eda8a1c50e83b8b28b585",
+      "bytes": 2178
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-cooperative103-105-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "112dd753d5234899c8c7bd524ee96286b1d39023",
+      "sha256": "dd76e0c6d63f1bc10b65de6d22e6413746bd7427e76245685cc2e55493ffc248",
+      "bytes": 2711
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-cost137-139-fpu-decision.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "a24436d6d2f94a660ab08d76b9eb3e6bf9a4790a",
+      "sha256": "d2728e67a4392a8ba56c7a8e81242791191757e9a52ea3fb230cc7952c034a33",
+      "bytes": 3499
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-cost137-next-selection.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "7d9d3933e46371f07f609dd8d02c2bbcaf8dabec",
+      "sha256": "2f6dc682812c65ddf33f1c06ed338f437a5ce910b71fe67e295e55a867730241",
+      "bytes": 2201
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-cpu117-118-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "263ddfecbb5e9ca12a97d40057194fa0b0088889",
+      "sha256": "706722e5ad42aab6cbada3eddea15aa381a83d01d6a435906b959bc190b6478f",
+      "bytes": 2684
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-critic-review.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "af5daea7905fc451b38ae7fdc45793de0238b92f",
+      "sha256": "a7214b6e22e54263ffa83f23045c1e4f1cb8763187505d8c5a531f856f3097ce",
+      "bytes": 4481
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-critical-roles-v2-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "6034d1256ddac7f815eaba8dee3af6b80b27de7b",
+      "sha256": "24ccdba14a8285188f2cda6f0fa64ac93bcb30c58940f961458ea70655b78c3b",
+      "bytes": 3009
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-critical-roles-v2-start.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "591cf983fa289c4992a057f49e7d08d00359b1af",
+      "sha256": "cf88734a46051cca49b7d10fc1285c422334f125f49a33f52ba87bb41891ad52",
+      "bytes": 2005
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-current-priorities.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "0c9923045b237da094d4eceff84049976545adb9",
+      "sha256": "f070a9f39360349da56fc8b62f107ec6f06172bb98a470c5e1471a52d7d5e3d9",
+      "bytes": 4072
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-deadline-20261002.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "6fbe0dd765703dfed6cbad675c7ba2dd7136c08c",
+      "sha256": "077552bdea8a7e235dde5aa1c43429075192e2359a7d105c6fc3d97b06165ab9",
+      "bytes": 2664
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-deadline-v2-received.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "094f0d3373e635702e0babe81cd20074f10b0585",
+      "sha256": "05f27a3f63e3ab439b6245e8bb4cb0d4ea19f10fc6798b9e652d6b77fb437708",
+      "bytes": 1644
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-deep130-decision.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "9a11f80d88128ed503131f65585a510db80b77da",
+      "sha256": "45b7dedf239d05e57945f78303b5c25fd187094137b704a4f7466d2fac5a0892",
+      "bytes": 4387
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-deep132-133-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "0aca265d80d96dc6c41d6773f6db1913bc17a94e",
+      "sha256": "3b6fde1b122e647c7aec2fe8aa045eb9889896ae0c101436efd39aac5933a8c8",
+      "bytes": 3854
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-deep132-next-decision.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "7d4a88d41edcc2b89a5efe7ffc1a07dcd92b8198",
+      "sha256": "892f6119f82b1efb3c2edb737464183099d0089b491dab59df72e78e41eb7272",
+      "bytes": 5808
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-diverse119-122-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "83fd28af2cfae6f69657defa27598ddfc331680a",
+      "sha256": "c3b0fb506dafaec3c704fac36971ea3eed018a455255e5e8ea0d38ee3d515e38",
+      "bytes": 3585
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-diverse119-progress.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "7af459431a3c0f3bf6daf2b6bb94cee26639455a",
+      "sha256": "2a9e859f1e17654faecc644b9a20595b87332894e2b2f944ac3e7f0483003bcf",
+      "bytes": 2956
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-early-seal-independent-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "7cbc4e8d80fffeada1ff3e5ec88cf47d3e10ad0c",
+      "sha256": "5a7ff06df9f2886ea1691669bc5b3f072d74a9b3abb4140d6134bad4d58a2795",
+      "bytes": 2474
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-entry-continuation-review.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "b937dda71b784ddd0ca325ca214d27533fa7a007",
+      "sha256": "8dc84f995c58e2bdbd33c97b789e647780fa6892db0c79ea88596a86ca363933",
+      "bytes": 2129
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-entry-no-go.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "08452a3755faa4217ac93b53984c19a44b5714f2",
+      "sha256": "ad8d9128be536ad55285f019a6537290b5ce9c7805255adeec39958f37450b98",
+      "bytes": 2165
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-entry68-nogo.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "4a9439e94a8f62757ed63f6155770544006e68d5",
+      "sha256": "05b5ae8827a451e08f00b0f185eefe156a9ed113fbe7451653e7c036cbf5b4ef",
+      "bytes": 2700
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-entry69-clock71-review.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "2001014bc89f7c2546696d16894b96d5559892a1",
+      "sha256": "37c25b0e2ffd91de552582a3c7673a8158aaa943bdc53c21f5b0ce0dc0062677",
+      "bytes": 2432
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-entry69-phaseA-review.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "50464727851a212d386d156632cea2e4cac8d74b",
+      "sha256": "43df34dda578a02697c8f93e7b06fc3c44aad37e3b511fd0e697b2a32265ea33",
+      "bytes": 2245
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-evidence78-factor-inference-next.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "88340ab3adedb1b024e5ceac118449d535387aec",
+      "sha256": "6bc6ae21b11368dfdbe9326dd7449d72dc285d15fb06f9c4b104487785b0aff8",
+      "bytes": 4388
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-fair-streaming-intake.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "b444bf8f9910b7231685e8618e6c3e0e8560fbff",
+      "sha256": "fb81c8c5f8f822b19860dde89638eab1f4f38627d3cf8e7ac0a3bfc9bae2bfe1",
+      "bytes": 1613
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-final-entry-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "9464831465caebb76c99d6574dcfe083042f4bfb",
+      "sha256": "7ca794fe3a6db93fef2237f7ef06a3d3fd4b538214e9d32092bfe454cadf72f8",
+      "bytes": 2407
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-fixed-queue-review.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "fa71a9adae8d63b5eb7b5b9a4a12fa9b79ff2012",
+      "sha256": "71db4ea049d0be8e15235cf2d7854e9dacb1955d06786c40a57d8d1a65e2a2a1",
+      "bytes": 1868
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-fpu123-125-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "fbe2bf22ef2b979e6d459a38263df1f04620fa10",
+      "sha256": "2f96def5a361ae0a370d0b7221a2278811d339a8f64062527d47479f3772cf31",
+      "bytes": 3657
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-fpu123-progress.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "370ce9d2442ed2a595ad79fb124859226df25627",
+      "sha256": "dd8186e5d0a019874c144bab4a17c0b1b14b595d39a83913991d67c42c214b9a",
+      "bytes": 4415
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-fpu140-141-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "67f25c4e54aabc2e03763e6230c00dcdd3a14406",
+      "sha256": "407cdd07201f4d63f0ba8b5c7561716744ce043087e3b0d18adfe15b3fea3f1a",
+      "bytes": 3395
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-fpu140-next-decision.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "3267d74c817bd1c56629b9777aae81c3430a4e49",
+      "sha256": "53b73a656b8d8289fe70a7807d6bfb1a1385377e755b7751b042d9e2ed236e6b",
+      "bytes": 2777
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-frame10-baseline-gap-ending.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "bdfa1266e9d9a1540e1d38e43901dbf07e340e76",
+      "sha256": "fab1095265ae7cb7fae2278db19d04902e337cf3e11b2747310aa519b75666be",
+      "bytes": 1580
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-frame10-design147-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "a334598b63555c755d8fd42aa10e566b4285c94e",
+      "sha256": "e761af060f44860be921ffd08d3c6f328ccc34820d1a9d312f4b06540cb938c7",
+      "bytes": 1881
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-frame10-group01-recovery.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "27c53ee93997e87503b40735a9c114af2f09b986",
+      "sha256": "f0229c5c99251e14e42d6b6885a72d205d90919bc30c1cd9dfc8dbbddffbe51c",
+      "bytes": 2492
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-frame10-reference-pivot.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "7aa7384901f161cc1951298d1fa7b4581a9e456a",
+      "sha256": "1f65bb251b5ee865db49827fe104c9c498e9d5d5d5bdf80b7853a3571b1d3005",
+      "bytes": 2902
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-frame10-sampling148-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "2cfaa67152be3d6c3a2c9f84865706ae07bfcef5",
+      "sha256": "23a773bc99b91cf89a7519acf2a6074ccc3672d1caace267e12843b1284fab91",
+      "bytes": 2262
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-frame10-start.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "e6124ce4e208ac4c97dc38a0c67b826647f33f93",
+      "sha256": "c32ff04102179b46659882e9f9d913a1927b42f2ad129692ac3054f585df1c96",
+      "bytes": 2998
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-frame21.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "975d207ee0fb73703585a40f9bdbe8bffdd5dd66",
+      "sha256": "4ef5deb189376dcc9e3db7b88f260eef96feda7d87a41954d3b3395cc0a1e677",
+      "bytes": 7252
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-frame23-maintained-residual-integration.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "8cc3f0bb59a03abded5fca7c7e76a16964d74527",
+      "sha256": "bc8e5aea74c2a883c52824f12531e30289399b53b9c4b4622d0e784254b9b627",
+      "bytes": 2585
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-frame7-end.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "af596291f06ea10f357ff7e25d58fca061ad17fa",
+      "sha256": "0f53bbd797d37149a07ba217913712cdba26ad3a322f8bbf79e1102883ea8fe4",
+      "bytes": 1477
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-frame7-readiness.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "2fda09df71fc92feb789bf8215869a1168d57308",
+      "sha256": "eeb888ca0d7f7d9b0b6eab2651c3390b2a751ff2171a1192871cd7ec23e7e0d4",
+      "bytes": 2362
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-frame8-cpu117-progress.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "47517d67085678788d450bf74afb1bcf537f3e6e",
+      "sha256": "3c1a87473cc3b86ba37dbe6258bf816e33df13b39edfd4f4e591b8db270307d0",
+      "bytes": 2771
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-frame8-evaluation-decision.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "525ffb16857d83cceee8ba0605f3f43199c97974",
+      "sha256": "e880e466af6f91d868650fce831c6654918ae2bebff05172a756393587b13855",
+      "bytes": 2423
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-frame8-readiness.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "bfee0dce01650a2eb7a31368a847122f2c2541b4",
+      "sha256": "75682f35a1082688bae779b7539019b3a66525761196effb53ce93ce8a6ce1e8",
+      "bytes": 5768
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-frame9-ending.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "5095afe2699b77365cd893c8154cc5e42b42414f",
+      "sha256": "e72703e73d6c5d74f2121a4f7011566891e70839861f337a00edd0eb023ceb27",
+      "bytes": 4528
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-gpu115-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "45f7a4b9184a71f96d1d516198588411484a3ff4",
+      "sha256": "ac01664cdabe96fe99d183e612cd044ff15664c682d480d640f94ce5d7fbd526",
+      "bytes": 2084
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-inference-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "897367c17892f5686f2763bea6f7c3cf4969474c",
+      "sha256": "c02e215a142789aea48dcc81b8500530fd145a8039ba45c21d4917e07e6cd8d8",
+      "bytes": 2011
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-inference-review.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "cda71f2444468d808b1d63cf8fde2f50269c9596",
+      "sha256": "5106bc49d94c90053b59abfcfe69eabf38ef1ac395d56ce476370f6fa2ad37e3",
+      "bytes": 1945
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-information121-decision.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "b62529f98e452de32a3a96a7492a9ba7eb5be1a6",
+      "sha256": "46e75c76e33a9bbfebd08844ae8097c41d7ec2363495441e259c0c50f69940a0",
+      "bytes": 3160
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-initial-review.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "2688218a70e4f03d96b689297d9a33009d0b7c9a",
+      "sha256": "d31bc4bd7eb0acd33a6aff4d12437940ecae8f33407423ace2e3be6431fc7f6c",
+      "bytes": 4739
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-kernel-handoff.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "d72159d5d6f44275f7e42d1b5d1e4c10a523197c",
+      "sha256": "68106ac42f57286af0dc84856fce27021d84b2c247aaf9c174d61450c2fbbc24",
+      "bytes": 1982
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-layout102-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "406c348c89ab74a14af95c5e34f8c375f2394932",
+      "sha256": "6df28211cc4e1f2e7843c4a71334c07ca85d69e613ebc65bbffc7c6b1315cf51",
+      "bytes": 2687
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-local134-135-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "5d239dd62fb083d532f40aed8a1e69ac4be51255",
+      "sha256": "25a3923045e8062def5bb716442093157d639040fab7ef47992004b4fbbf760b",
+      "bytes": 4515
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-local134-stop-next-decision.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "f703a80fe5a63c70cbcbbd7668ab52a6f6e9e24a",
+      "sha256": "705b97621d7bc60f54ab402dd4a965027871648f75f9cb5689c8bb3ce1de1316",
+      "bytes": 6140
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-match-hypotheses-review.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "58a2e68816f8e3b8893c581c12ed852cd497e621",
+      "sha256": "c68b4451565d73794f0c8d23e790261f1904beda065867a83773070a55abf4cd",
+      "bytes": 2592
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-match-results-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "ba5dfe8784fae06fd4104e9f4e7b4367d6d0cf3f",
+      "sha256": "716a61de254f8160984b879af7be659949a5b1d65282d1540f89da79ff8dfd22",
+      "bytes": 2795
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-matches-gate-review.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "0349bcf3443ad14fee6d5b9a891c3cf7d5cefa0b",
+      "sha256": "e8e4c56562ebfdd8fc6f7295d75bd9aeb9753972a2feec4918d4fb636848fafe",
+      "bytes": 3042
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-matches-preparation-review.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "a266910ee491fbd966f59c09de27c89be7ff86ad",
+      "sha256": "d38342ba2e88ce14011c56fe1e352295a5e981af0f3978d08b56e98c8c7aa595",
+      "bytes": 3023
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-matches-result-review.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "6a0ee8f6e6df37dbe8ccbd23c11a33f556d8094a",
+      "sha256": "7758c691d771108002785244b9f270e29ebee55c4ff0b0fd381b84a448282f5d",
+      "bytes": 2430
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-model-review.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "314f038c42f43f19063d6b70cd6688f9cc029be1",
+      "sha256": "9ded1cea0cd895702ef146e0b29abe392592860afaa4525d0fd3ab029b8f77e8",
+      "bytes": 1753
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-nn-search-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "af16e9f64e7e0c763f2c2173793b7363a9d2b1e6",
+      "sha256": "c349e07d7873849136aea40c9497f2993595d8c281155e77e84547571c38cabd",
+      "bytes": 1332
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-nn-search-review.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "99e2a4e32462e046793695566c47eeeff767581b",
+      "sha256": "d365a42c7879a36fa5ddccc00e8e82869ac41027ea5ff81da3518c6f112a1160",
+      "bytes": 1281
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-nn83-84-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "41d973fd5a60e9c8f33c90a4d34ce7127877f145",
+      "sha256": "31ffb0d89f979fbc5fc6465d3cc2c931cd4c4068a0d4b7a8f92a843d9e83dc8c",
+      "bytes": 1746
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-nn83-cost-review.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "e8abd99b7732f0ddcbdf27176147c01a39c71774",
+      "sha256": "9995dcd982370efe4608bb2da819321e70b2a3055a72f190737b500b0a8d8853",
+      "bytes": 1454
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-nnue-feature-cost-selection.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "d277339babf2f3ab23e9d08ca375c230b09a73a2",
+      "sha256": "5bc0931bb586c5c25e15c1a5539ea60b546506499885c6012c68093191dae0f6",
+      "bytes": 2170
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-nnue-goal-handoff.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "bcccc26eb1300f01d9c8567ff2a0b25a46ad45b6",
+      "sha256": "55d06bad3fb390fef4742ba48fa2b67136231f241ecd3b05596f05988a6f40e6",
+      "bytes": 3554
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-ort-checkpoint-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "59ea8f259357014988f6e805520c7ac2050f70ec",
+      "sha256": "499f6eeeb919a51b76b0ade68e9c7944805947def9f0f89204e526a29a57586a",
+      "bytes": 1388
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-ort-checkpoint-handoff.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "ce53c9fbc81f48d6359dde025d81c3b49f465c60",
+      "sha256": "8ce64281db8cc89a15955f4e44cbaab410f0a91bd55f81070c2b7b41cb8d8800",
+      "bytes": 769
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-ort-entry-no-go.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "1f85784871f2c2be057ceb0ccf06d4c58e6cb161",
+      "sha256": "a7b4def2044a7446532a5a7ab96ae402e6ebb94c082f05f7cb1007f447db1249",
+      "bytes": 637
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-ort-rematch-preparation.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "f8334787a94c74ac85065e297a6889f436401bf0",
+      "sha256": "06c4037c17e77731c208d7cae3b8ad57f7f1c20e152aec75058d730b1171c6bb",
+      "bytes": 588
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-ort-search-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "15542379e85d22be1e567ce5f4b625c057d6d5cd",
+      "sha256": "1f49ad380b4778809663b1c40c9be3f32187552d53cc0e3aa4c07cf17f4172dc",
+      "bytes": 1498
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-ort-search-handoff.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "56a7da4c3252c81f2e1425e839ca63d2e0b42691",
+      "sha256": "0eae94e0e9c3dc4e506d9d23e0de5a5ff79016c288c03e8b1474c6f6da89ef71",
+      "bytes": 1598
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-player112-113-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "6810b387adad3baaa2210c7944fbb156000bebad",
+      "sha256": "f52a9450792c6f13cffaa0340270d9c913acfa028eb61a378d9d600887eecee6",
+      "bytes": 4219
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-policy136-cost-decision.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "7e115c395b2636fffa3d1bd1db1b151a84366b8c",
+      "sha256": "82e26725afab56ece43545ca8a29ae58fbb5503c375d7fd1fc51ab33df9936e4",
+      "bytes": 5697
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-policy94-review.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "2faaccc8550b989053d206e6cb49b6c5acfde582",
+      "sha256": "220b28794f1e93eead49641909d712f43ff3d095173affe0fcadd895c89905be",
+      "bytes": 1647
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-profile-parity-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "5b61fca7461259dcdcaf9aa8afaa121e222ec24a",
+      "sha256": "3200bf6278219c561f652a52e06c8beba01cbb55eecf65505011904f09bf68b3",
+      "bytes": 2341
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-profile-parity-review.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "47664a51c9da7044dd4de9823520193ab6421b0f",
+      "sha256": "470f7ffd7d8c29543da7aab05453899cde5a49915656495257ee343f7739d59e",
+      "bytes": 5691
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-puct-closeout-handoff.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "63f11372f76222b087f3060814afd7e5c9dbb166",
+      "sha256": "b5928d50824d16ed798692332563e7328a8f3fc82f83c967c809e36cd5d1d406",
+      "bytes": 601
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-puct-factor-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "f051085c3f615feef8e6445557d707aae50d050a",
+      "sha256": "13705aeb2aa3d94984c8357a3229525b35d9bfa7b42767236e2dea39d61fd161",
+      "bytes": 1166
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-read-guard-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "7f896bee61de6e731fc13160009e11fe64c8c956",
+      "sha256": "2f618fa3e205f722fe6177f250d347f0dda2a95ebc709feda0ad3eefae0d1e5e",
+      "bytes": 2601
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-recovered-supervisor-review.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "7e1c32dd92d905426745bb3867496455a6168518",
+      "sha256": "6fffb84a28368c86651d86f20cdd1623607b425d06b359efb62c423d95b82418",
+      "bytes": 1889
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-release-context-review.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "c10cdc3011ebd91e063e492f45ad51b94e4c5ecc",
+      "sha256": "596b6725db2d8045ee1ee90a9ebc77ceb3c01ba1e0522f6f5345d7cf4b313fa5",
+      "bytes": 1554
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-resource-closeout-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "e6c9a0c1fe58556913b2616ddc5bec137432e96a",
+      "sha256": "18475a2b8bb5206402881d06e8043605956975a64db6715997e0ad332669cd63",
+      "bytes": 805
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-resume-frame9.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "9d4159e731d237c2e41edc436117816b29dd0351",
+      "sha256": "e7f11f9f2c8f3ae012bd3964d2a4a2325b35b77aa5fcb210961e12525fdeea16",
+      "bytes": 4853
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-resume4h-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "634c0cc4f676d1459c475fc16211fda32fde7e95",
+      "sha256": "3c73a6a65f69ed2e22a19ba63fa7fd7762a0c2b75ca1983c68838c28322501fa",
+      "bytes": 1634
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-role120-information.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "25ff1efcbd96c2783da82883101950988c90ae65",
+      "sha256": "25be98459e358d2e6ec75cb91fb54d4cc740d0a7e9b271306dbc7b45120e7de9",
+      "bytes": 2929
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-role276.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "454bc932a3cd0f90fbad250e0779d9c34cc4b1ea",
+      "sha256": "dd3c2613b0885f468510161221f569514b24ab6424eb2f148538e29033190aec",
+      "bytes": 3701
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-root-ablation-review.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "6f3d3ec1ebe2aca4758c750bca051e759c971d80",
+      "sha256": "6094c685f6dd4a0fffa8f7232767452416ab947708fb7ef5380bf9796b6b35b7",
+      "bytes": 1921
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-root-ablation-v2-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "18336618a17586994016bb6b6a0ae1cbbce1d517",
+      "sha256": "6f7b81734df9dc4ddd77e73ea62bc80b3f5864a3a18d3eb58e9953ea19d7021e",
+      "bytes": 1497
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-root-nn81-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "3db9da54460509d982ab6510cb61578f06946ca8",
+      "sha256": "f6c177537acd5dca49ffeb2550053f99e63edd5b014b3fd2f467d86bcc60ad62",
+      "bytes": 1800
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-root79-nn80-independent-handoff.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "e6dd6c57e258f3994a528a5077cefcf38591023c",
+      "sha256": "c8efcfcd421aaf0de165a5cbe4f2bb4d777d32826654fbf617d42cef803ee4e0",
+      "bytes": 3749
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-runtime70-partial.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "3e344edb7c4b6ea8ba01ccb1316c558120aa8a7f",
+      "sha256": "41519ba5a934e397ddeecce499116baf5e6a8bc161b8cad0805b2ff0e93c3df1",
+      "bytes": 1722
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-scheduler-critic-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "9bcf580c899b15d3843b73e8be0a9226f2b85787",
+      "sha256": "fd39c3388e20d7155ba2f4b34e8ed68a103f5773ffece9ecfc987016fc0f35b3",
+      "bytes": 2228
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-scheduler-early-stop.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "4414ca60ac6578b66c9703484db5f9aa7f809e95",
+      "sha256": "ec254db31d5c3acba7189ed20065121594e6960c43ab3b1d74dcda18e0356739",
+      "bytes": 2056
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-scheduler-live-review.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "cec5952a96e86fa42b3b3f7dc2a3184b082e05df",
+      "sha256": "bf85fdf40c24b4b5ce4d42c7b9c9cf322fd41f3e6eb551c4b32f9f2117ef1f10",
+      "bytes": 3215
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-session-policy104.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "5432f3e71f983201e75a1e58acce0e4a9dc4c98f",
+      "sha256": "72ea4ca3ced736573242b518b3fd44229453f4c1459dd087390d011782985f39",
+      "bytes": 2384
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-sigma-web-port-conformance-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "b707a559e7c0a195faaff29eda2555be3688f30e",
+      "sha256": "9dceffa9883861651214e0eef3bd0984971285eaba93e722221f4144940fedba",
+      "bytes": 2146
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-sigma-web-port-independent-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "09aeb9cc3927ebe957c67734fba61b6a79b4872c",
+      "sha256": "a5ee3b2482349a98c843c401b8c2bae7992fc261b9233b41c3fd6b9256a41fc9",
+      "bytes": 1217
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-sigma-web-port-stageA-r1.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "5d752ab3895ec24bb95cb490296c5b7eddcaa998",
+      "sha256": "b2b33d0868a536eed3ccebb1b78cb9c1e11c638c1031170c45c9c8e7b6a8644e",
+      "bytes": 1777
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-start.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "0206a88a747fdd6e68bc94277717e0d9b4113a75",
+      "sha256": "f4b232df944d0d80b699f01ee0fbb22048aacca70cdfc9b27e3fd4b58a459965",
+      "bytes": 3051
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-startup-watchdog75-review.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "81575d9033f5b85e266a0a092eab73b2a837735d",
+      "sha256": "c443a92140a870dd9851aeee5798b0e6605ac87e92d9e97d5989213b1d6001ea",
+      "bytes": 4253
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-storage-ledger.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "dba635edc857776d0b509d8e203ebd1413d4dd5c",
+      "sha256": "0568453bea1a00e62d8e3eb79437b4fd0a3e226e5cacf896111d0c59434e9be2",
+      "bytes": 1758
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-streaming-early-seal-review.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "db0264afe0764d34f0a3923f5abd480ce7f0a79a",
+      "sha256": "f1bf9ea02b6a7620e4e40e1bd19a052ebfe14aef2318b916cc191674095fc1bb",
+      "bytes": 3048
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-streaming-entry-review.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "79358fa33f75c01d899390ee4535e5d39478f90c",
+      "sha256": "772ff1982583d08678e162e9dbcf3bb561c37d56c534719e500bfd55bb3b6ca7",
+      "bytes": 2659
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-streaming-independent-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "cd2a2af3d48c081c2734f72f5650479f7da43328",
+      "sha256": "75ecd9fd2a5f14cf089603a96c61372afc6f5dd8e16cf005794b37e4c7a735b0",
+      "bytes": 4672
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-streaming-snapshot-review.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "92c7d95ad8266d6b3e6f28eca927279739137bbe",
+      "sha256": "58e566710a22a2de6212f69603a4edcdbabb196c59b8f9b594bc1164d3fe86ea",
+      "bytes": 4711
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-streaming-snapshot-start.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "8a5b7bb95c66b2acb68b02025bb1d23b060a3482",
+      "sha256": "38fd3a4281f31c3034bd8f55582efa8edfc39360c984fd53bcb4b18dfd48874c",
+      "bytes": 4115
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-summary106-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "a0b5ea5f58be7f9f26394280bebde51e522300f9",
+      "sha256": "a294596ab37f3203b562d295c91bdad43d2b36f170de40e072e79686b48f59ed",
+      "bytes": 1639
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-supervisor-role-review.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "95dd2033860e84005141e620e0743910f5c67801",
+      "sha256": "6a21d0004f1d8a229485649e22ce1ce2c82039445e2791f526ad17cc9c61f802",
+      "bytes": 4375
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-tactical127-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "a245bcf442af123f17cd0be6498e0ce54bbe7468",
+      "sha256": "329fb26178d1e3d2666d02cbafcec1a6fca20b4c1efbe3904990420432c631a1",
+      "bytes": 4652
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-tactical129-131-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "eb12a46a7ebb2911759e03b6af25dd652ab972b3",
+      "sha256": "fee68af1c76ac585d251113e3cdb2717630b00410378223efe2ad53025fa00eb",
+      "bytes": 4443
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-tactical129-stop-decision.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "a6076c2480d3e6e1d1e571190db346041acfd403",
+      "sha256": "37c0b341164db996a9b9742624e4f62a398e05cc47f263a93fcbe63af7649545",
+      "bytes": 3760
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-wallless142-143-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "e425ab75683b8e1f32184c79b8954e1142c8c403",
+      "sha256": "e36f4a56e221a6171897432a5e394024c6c9aad435be5e2788a4acf2f3616ff1",
+      "bytes": 3555
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-wallless142-calibration-decision.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "874fce652ce6fc803e7f8532fc46817c0c6fb721",
+      "sha256": "b1d831ea444efa26b91f1c1e593f7e6dfd7b14a0a5b63a2efb5386cae25f4163",
+      "bytes": 3261
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-wallless144-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "781535156b8710dfe8b8335baeadd11f719b164f",
+      "sha256": "8888b0c58568518282407199adf119d0f8ada21c3e1210a6fdb8df5d2504c4bf",
+      "bytes": 3150
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-wallless144-stop-next-decision.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "7334dee21ca083c6b123d979a5b3ebba1bdc629b",
+      "sha256": "ece1fbfadf8343144e0c41412313b6e3276cde9290902fcab35ac705986566b0",
+      "bytes": 1969
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-web-acceptance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "708bbd3fa632b63956a4471c34c5e526d84d290a",
+      "sha256": "e7e02a4f347bc8e57dd5aada415aee0f643ac9ea623cabafbbe701da7ad92024",
+      "bytes": 1438
+    },
+    {
+      "path": "docs/reports/ai-sigma-coordinator-web-review.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "4f9e11803b45b23784fc81780972a2d9a8908c73",
+      "sha256": "d30a2dd2df13f70540d60ea6154233a6be1650099deebbfb29a7b9e5ad4a34c2",
+      "bytes": 1563
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-actual-driver-minimal.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "a7d35581b9dfbfd0340f2b664d27667a1536b6b7",
+      "sha256": "18463b2207f251f0f403a5f9b5b19ce712fa5276f2d047439ed73ba30db4978e",
+      "bytes": 4828
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-arena.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "8724e43bd70ffcdffdc0932f2c38e667033f0f1a",
+      "sha256": "b9ce4106a0d41101805a43c59bca95f8d7a9af22edc5ac715c5528a604c92e1a",
+      "bytes": 4496
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-browser-sab-independent.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "874ee29f151e030918d4fc8194c24bc005143796",
+      "sha256": "f4d65351c2fe8584260c4169c8c1975cd28e345ce2e4528955d9a35b4a9ef3a7",
+      "bytes": 6250
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-c-factor-independent.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "e52c4bf21b0c10389c1ea574a7c63efe19d21828",
+      "sha256": "e8966a22f0f352425bc5c9e7a889e920a2e611dd090273f32d7bae7bb84f827d",
+      "bytes": 6839
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-candidate-true-mean-fpu.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "35eb4e3cad707f4e50d7806709df1a7309b6c426",
+      "sha256": "2a4028c6dc88592bfb3076fba555108755007b87d01e0685a3432e2dc7520909",
+      "bytes": 9328
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-checkpoint-teacher-independent.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "0babb5e03e05da38b3550899544696d8a7aaadbc",
+      "sha256": "7121fd897c472cedbac8ea67e0aed01a361275a1f9fcd1a2df5a388a23689f6a",
+      "bytes": 8557
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-comparison.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "2f6ab40994355a5817c8861473574ed9d4759a75",
+      "sha256": "607618c36454a18bb4f9ba2ec954b074a58e82214648e7991f5030b8400c74cf",
+      "bytes": 41080
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-completed-fpu.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "64cf6829b179655745e93ba7d9904a97d0fd98ba",
+      "sha256": "b552cf2019c8b8b82ec32bac6798bdceb4902cdbee6a9f086dbca5403e439364",
+      "bytes": 6440
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-context.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "d2a0859d04ac6590d39707188dce10b47774fa1a",
+      "sha256": "38494e98bf21fd4830404e003121d1408d771ffba8868193c3376b456e8d4fea",
+      "bytes": 3830
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-continuation-nogo.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "6d82aa83a226cfde39be32c194a06dd860896388",
+      "sha256": "a825eb904dffb7aa0802e0572ae84e20e1843682e8cf948e92ccff91e8be9c9c",
+      "bytes": 2528
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-cooperative-arena.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "772514b014bdb2171d2492c0c3f9f6bb7911004d",
+      "sha256": "12680b370360f5b80a14b358366dbdf2643a351f46fb2d699bc9a9624b40153d",
+      "bytes": 5037
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-cooperative-clock-independent.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "1c6b165511ad112cf2be9d16cb9981f060af6cf3",
+      "sha256": "5fae2a3181eaf17bfc491f7cf87bf5a70aeb2bf610fff6539a99a153d6bbc3f2",
+      "bytes": 5414
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-cpu-sigma-frame8.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "50fc7e89b97d8cd59954f0d4089bacd9a759724c",
+      "sha256": "1aeea6afa6053003d9ba90b16ddfe720deece1e9acb46065bdb759e97bdc4e94",
+      "bytes": 5548
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-deadline-first-turn.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "b8634bedbdf40bb09252c3d78955dab005661486",
+      "sha256": "e5f75b2c692d6a084ccef759525acaf7224d802ae213ad3ca3ba533cc2424749",
+      "bytes": 3292
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-deep-node-comparison.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "755708e31269323434acc0a62c4477522d5ca55c",
+      "sha256": "d153cc4a23da5b86cff3cdc10c1b737bff764c8b6ec1a02bc71b424685c14ce5",
+      "bytes": 7011
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-diagnostic-arena-independent.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "e72bc26b2a55d04b72425e30bbae8f68723eff06",
+      "sha256": "c7c767a90f059371de97ee5e9f1e66c8b6cc6f6407e2d50086fcb93f6c5a5d83",
+      "bytes": 5440
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-distance-independent.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "654de9adf893fcd47d52f01438c8e657b8c33d9e",
+      "sha256": "c543a56e1d6b8015f8301d48d11b3d0a75f5c3a2718a2c3395d1629374f73d3f",
+      "bytes": 7444
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-distance-update-control.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "bd713c9144bc162d4a09dc11f6565807664e389b",
+      "sha256": "94e044baee6a31505afb2a7d51e02f5e91c67ec3cef12fadb70ba477fc7219f1",
+      "bytes": 6998
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-diverse-prefix.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "281e4dbafa8e2ee8a0961a557593a747a7089198",
+      "sha256": "8c295064656e435eb011ac4c13f4acf261beb767ced5e8a7bdfd81e5f15d8558",
+      "bytes": 8365
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-entry-continuation.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "3b2e9ccc7234376a2915c7cfff237e0dc7029ac3",
+      "sha256": "490ad3ea2e4cfa902e4177677b06dc8e97cb74cb86f5d9a4df88240ca4bb0020",
+      "bytes": 3756
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-extension25-tt-telemetry.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "a072392d648961adb4ea380ec1aeca01d4f3ce5a",
+      "sha256": "76e224281f218c674a9095375d658be27cc260a98f9649b10554681eed53f2b2",
+      "bytes": 4100
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-fair-streaming.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "ceab09cf6fc86b52371a19fb3c897a3066965e19",
+      "sha256": "504a1482b19d386cf641caeaaae5fcc54663ef28dd83b943022b9b460180b390",
+      "bytes": 5409
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-final-entry.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "ccd593f1e462dee370ef1e6af064f313cb1c4cfa",
+      "sha256": "f387f8ce230ea253276b45a8c5756856d4720693f44cbcd7d90ed64a91564345",
+      "bytes": 2314
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-fit-gap-analysis.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "659ef8d715d2bdffee4a0e82208e96e28f970415",
+      "sha256": "508c045582d0eb323c0d76e4ed1da18f9c5c272ec2892f1c9b77614dff2b5d79",
+      "bytes": 10645
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-fixed-policy-cost.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "123898cea16713592a25a5faabaec9547b0c8bda",
+      "sha256": "d78519c57e2fd3d0f851700b481337c9ac4eae812abaf4b49b0be4d8b80282b6",
+      "bytes": 8432
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-formal-clock.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "a32485f5f0bf2f008223e31aaef670346dacac73",
+      "sha256": "096143b69ad0b740cab3b45e663b7455a682a47daef1e3995e3dfdaa8efb0594",
+      "bytes": 16076
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-formal-ni-plan.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "c16dada9dacf6a32aff32ac44f093e83589715d6",
+      "sha256": "69c1948ac6626bf0d75cfe72d7e79e65341cb8d844fafc20a6fc3d8067b67c07",
+      "bytes": 12662
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-frame10-gap-design.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "22b32d04fe853a9d3ece2620e52b7cbd7cef3bc4",
+      "sha256": "268f39a4b7ba59138a734c37a1b9c800ab7ac9f82fcf6b5d06073bab5b297ad3",
+      "bytes": 12521
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-frame14-independent.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "d5a2a151040ad4ed9f4f506d001a65b0aaa9f344",
+      "sha256": "c63cdc34e910f5a5e9d102fbf7bf31494d6de3fbba24344196744de6df900f14",
+      "bytes": 15541
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-frame19-leaf-terminal.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "1ae82267a3db3e44ddb9885d3f2b544abbd39e03",
+      "sha256": "31aae4b9394c1c20b370d5fc02647f90fa9863b316e07daa3545c288522ff8db",
+      "bytes": 6477
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-frame19-native-arena.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "f7468df700bfef27060fe7b17d5146a23293fc05",
+      "sha256": "ae8167c730759a7fa09364043ce715254e861eafdb7ac820678ba31c0cad090e",
+      "bytes": 5924
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-frame20-distance-arena.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "cda00c47ee202b8e06f12a20739c223dff6354a0",
+      "sha256": "7a89b0f505c3ebc541ef8d75d71a6250b1e071a38c15e7f4c2b4429794345ea5",
+      "bytes": 8186
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-frame20-paired-arena.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "4fea86d6d009448d97fac4d88c5c1d262cb7e4c2",
+      "sha256": "d02234330dbab49c3b7d7da209b7d8a32ad5ac7e02c00b351554bef2894a5e09",
+      "bytes": 5184
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-frame21-mcts-cost.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "ace9a4e3952a3234115eb279d50bc96de46b2dd5",
+      "sha256": "f3745347aa7ee095a423d65a94898c06f5f26a25aada6f3c500a00de47578c68",
+      "bytes": 5349
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-frame21-search-efficiency.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "b550ebf90d4eaea6290925bdc3e15b53318897be",
+      "sha256": "cced0a30b443bdf8264cb2b10889496269e4afed1efc5f3f097dc963f2e80401",
+      "bytes": 6449
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-frame22-advance-tt-diagnostic.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "168c2af64e647065f0fd6a1dcd1f935e8f8dcfab",
+      "sha256": "65ce1a82b4a789349b00534c27a91eedf3cc1df99346f216ff184e566af18955",
+      "bytes": 11431
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-frame22-map-efficiency.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "51c37c8f92bff774360fbb033ca5cff05985f0e1",
+      "sha256": "4c63d6d543befb3153b3541c3a58e14b053dd49edf5b490d03d4de715c1fd7f7",
+      "bytes": 8711
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-frame22-search-efficiency.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "b3ce0b693e5484cae4023e479349fac60c3c2ad6",
+      "sha256": "f846edbe7b4320b08ea9c7d726bc0ff0808d22622e2eb021bbef50896727c3bb",
+      "bytes": 9376
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-frame23-wall-legality-processing.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "86b6fc36d85b93744abf93f510d6e295ca3d0471",
+      "sha256": "fa392011e00786ba98fef4be9ef1fa7af9d6bab243e3aa652b28fb5b5c71852e",
+      "bytes": 4217
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-frame8-evaluation-plan.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "d71162f18458ebc23e1949791ddd4c0ac6ab90ac",
+      "sha256": "1d11c1abe80045f32465d825245876e691eb5217b2bcfe0a72e364fdc1735ddc",
+      "bytes": 3129
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-growth-learning.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "ebfc7b3c3bd9cb4169418ccfffcce760cddf4063",
+      "sha256": "ff06525f8a5d09650226268ccec4ef4d8f9608acf97f7c37eb86ad79cbef1729",
+      "bytes": 7212
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-head-independent.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "e313f55adee12c505e21e260839794c90c643511",
+      "sha256": "c7ead7c677142c6f3849034759ddbca767c296ace6a45cd9af66e3c697e3e3e5",
+      "bytes": 8159
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-inference.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "25c0096711769ec347e89729c000088201c3e267",
+      "sha256": "7039c1e6355094a6fcdb6cf78870b5401c4208c97186c28186f35a7b43c4bc76",
+      "bytes": 3852
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-input-scale-control.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "afac2c0300aa12c651bf14aa35b5fa57b21ef475",
+      "sha256": "9212668a2603735efe28253ec9576e16487092422e1e95ed5b260674a79e6b5a",
+      "bytes": 6455
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-k800-cost-independent.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "64e6abe322eefaad1b4be876f2fc9372a2fc48dd",
+      "sha256": "a67fd8dccbbc62b9c3531f54454096ee48d2897233e2cbe8ba3d96e26281a08d",
+      "bytes": 8478
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-kernel-ownership.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "39396a3c28dc0d0a90931e175e5520bdcad405b4",
+      "sha256": "0b740e58c31121d9cdde75131bd148c82ffd7a0029ff54e327a1086e8a0fe875",
+      "bytes": 185
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-learning-diagnostic.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "af8eb50f7b6286aa8616cff39094ca6d8b632f7d",
+      "sha256": "647142d5c46d428de632f253a887def0c23b1dbc8e232c652b7b41a9a9fe68e2",
+      "bytes": 11707
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-local-move-quality.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "5e191f082739152de6e8278071c88bb4e8e48126",
+      "sha256": "23ae121d82e6abcbaeeea0b9ed27a9cc54fc403db00f6db397bf61a782e246ac",
+      "bytes": 8483
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-manygame-independent.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "c43980cefd1d7a589f474be9c5e7639a916da592",
+      "sha256": "faf3d7d933591e87aed7acfb76a0aeb863d4d385e4b0b84e6bbb4f7bf7d0e36c",
+      "bytes": 10014
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-match-results.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "e4d995e637677e97f75c9869d54b42bb06e294b2",
+      "sha256": "5f96456f97ae0bec8e2d46b77290ef336822e15622ef201748594856cfcf1bbc",
+      "bytes": 3128
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-matches-gate.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "d7b22ab5087adaf95d06bfe4967218d6ac24ee0d",
+      "sha256": "617bc9d59a2ec3c807362a5b680f15fd8016abaa3569bcf1b9e86f3d0e183b26",
+      "bytes": 3147
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-native-comparison-scope.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "cabe58e951c99914de0700301e182da3f768e9d9",
+      "sha256": "5fa7ed6ecb8926253cae9c05c10a41b38a04146db3643e6ccb04dde3c5da9583",
+      "bytes": 9979
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-native-connection.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "409908a3c400c08336d007cb37310ad3b6ba8a53",
+      "sha256": "df9b5e3a57ecf776c79c0d7d5539dcd5be01b054f8f02be16242f5acc3b7ebad",
+      "bytes": 5097
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-native-epoch2-independent.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "b231e796accef1f87246cc14356737316ba33756",
+      "sha256": "faa3f4d8f192fa2b6993d86b9cc2a3a26cce333312a21e90c0efff0bbbc456b2",
+      "bytes": 9096
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-native-games-independent.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "8d6ba3ef42b75338d20cf0dad41edc314ecae850",
+      "sha256": "3c0cf97712dc5cba6350701a8c709c7276d127dc959407162832a348d90e0033",
+      "bytes": 12873
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-native-ni-efficient.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "1d2c653bf30c1dbb1a49227f6c2aee2c24fed897",
+      "sha256": "d2d982886c4230490dc2871adc5274a6897d6e9ac9f224df72510b57a39ded17",
+      "bytes": 14191
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-native-stageA-independent.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "d3a35e77ab67bd6b5948ee4f16ce0a89ab861114",
+      "sha256": "3cdd6c769ec3721638fea5a18336c2863d42d39d510ea75ca5cdaff4e9a297b5",
+      "bytes": 8113
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-native-teacher-design.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "a4c7a467656eeb71bdfb479c50b669db76683ee7",
+      "sha256": "b421ff6e5a0263e272c2945acbb6b81fc4d91d20e647d3d8d91ee3aa40355123",
+      "bytes": 11132
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-native-teacher-independent.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "ea90b8ccc270f48cca5392b81499f1d5f59a7cda",
+      "sha256": "6a289b91b320d8bc787ba340d1326e4fd405e6229f612fee2ec355351680320e",
+      "bytes": 7709
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-nn-search.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "44b7feedd6560b550de4bbe3e54b4e7654657673",
+      "sha256": "fd63e40a102bfa31f12ce87436aa123f12accb4f4316463e61c17406fc88f452",
+      "bytes": 5221
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-ort-checkpoint.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "e7f3f41a18a3f6028389d531efbb5420135d20be",
+      "sha256": "fa66035631835ed20c22e5f1be81099f7aa5ebe6ac75f073665779f9aaa22595",
+      "bytes": 2665
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-ort-cleanup-repair.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "d44d2bced1f8ec7b662e904e8896ff4cb5a7f2b1",
+      "sha256": "22494f71cba4aa4f8eb3417933e0c75fdf475477fbdaa7921c146cc1a7873764",
+      "bytes": 3366
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-ort-search.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "7d14652a18205dab1a394e19c7c8fea9bc8e760a",
+      "sha256": "5cf85ff6974d2c433bb6897d7dd8a3e09f70cef0c0eed5b0a811c2cece6cddb5",
+      "bytes": 3220
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-player-workers-independent.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "e59855c16e4a37aa6fda4171e85aea85c0027bcf",
+      "sha256": "a363496361ab3b5e92b1698d55079aab69da13000aeb4dfa8a66d07655e1a512",
+      "bytes": 5992
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-profile-parity.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "47d3fb203eb4a0baea43e373f3982d29caece3ed",
+      "sha256": "0a3fe219707369414f09cf1d2ef4be6b0937a97d2866d2959591316b80c48837",
+      "bytes": 13466
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-puct-factor.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "5e83b2146b2979e21745b0eba37b52e73bc47af6",
+      "sha256": "e3f8a10b2b0f5043be8f318c357cc2b9aa278636f4b5f1b563f908c963166500",
+      "bytes": 2448
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-qf1-representation-audit.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "ad7eaa8e3db6e7108b8b3811c4fa73a9fb29498a",
+      "sha256": "7043848c5ec1369df8f4b0d346521d794d88114db2281a0c09574a9f14eb1d1f",
+      "bytes": 10258
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-raw-cv.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "2647a37154bb83b15b4bd62919f67e2b37fa6248",
+      "sha256": "669feec751d918f3d4699472f24662ab3adfe6c19aa7001efbb68e8ffaec30ac",
+      "bytes": 8194
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-root-nn-independent.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "a349e1870cb7d3a922aa62df4be5aff5f824fa8d",
+      "sha256": "efa7036682dac85b43d71ab276dd7bf31623403715b32afd5cbf78c097227e62",
+      "bytes": 5346
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-scheduler-live.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "0cc59d0919eb416723e4ac413fbb84cb4efc075e",
+      "sha256": "4f7df41f53f161dc041cf31c80464aa54411ba5f9089f1fceb5be9cf6136ea16",
+      "bytes": 3623
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-sigma-web-port-conformance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "3c526bda48c7e3d70f049959248ce07b78bef02f",
+      "sha256": "00cdc38f66179bf2713ffba882665f243b70c370f30707193a69776c1be8835e",
+      "bytes": 13511
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-sigma-web-port-games-independent.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "734c7d9b7be150b45b9a00b91957661c58bb7001",
+      "sha256": "344127793f384dde1f05411a3dbfc9ce8f94905e4f7b2d3c9cb252317ce24b42",
+      "bytes": 10171
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-sigma-web-port-saved-independent.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "8d166daf5b4c6dc492a7a6bfe249f09ec828e5a7",
+      "sha256": "0f5c5154f8df61c418a6ce776d4e6d19007dc35698d81c7a9c9c94395981c36b",
+      "bytes": 10013
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-streaming-early-seal.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "de99e14407d7a05f6474d30df29b6bf1bad24a09",
+      "sha256": "3d52108f2ef0a9b5e51cf8898012e639589b1a6253d1edfc779707b0a1f78f25",
+      "bytes": 3972
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-streaming-entry-final.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "e0ed750cc81fa45c1749be288977f718a75b7312",
+      "sha256": "d03ae27c9ef862acb6dba8454b7d965bc71eb01146e5ffc595f5ccb844871502",
+      "bytes": 6019
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-streaming-ready32.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "7e0a6e99dff4d0e1035f75740aa0f033245a6664",
+      "sha256": "70379b3a8f2f5faff5b5db56771f04e7b4c04d1cca138568c2c3e549fc5b940f",
+      "bytes": 4614
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-streaming-snapshot.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "b91712a5abbb674cba7f72506eab029422b79187",
+      "sha256": "25d4956fbccc5e3c93665920bed48df138ecd79b992bbe677bb4c9efee89d982",
+      "bytes": 4500
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-streaming-startup-watchdog.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "6dda1e9a278d9567b433742b3ddd34a8e0ee4d1f",
+      "sha256": "3f7abfa361ecec3aee26cef3c2cc602d63959934c93d635f9d8207bdd4248e44",
+      "bytes": 4824
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-tactical-evaluation.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "b5c2fc5b3af9561cebb5cde7c6e4b2617484a64b",
+      "sha256": "845ac709af7b4c2a4c107c3768e99a0ddc4a3405542d8e9e795d73bd47ed0008",
+      "bytes": 7595
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-teacher-throughput.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "49ac7c09fbc2fe66bed9a2a846d4f2f0d0f91af1",
+      "sha256": "97b8567473fad4ee5a51bf051cb5f23fe7916bec7c648403b2cb1c43a4f630cb",
+      "bytes": 27513
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-time-correction.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "13628e5f76c5b55d8fdcf97bfc39734bde1f481e",
+      "sha256": "b75c9f9792dc93b4a1ee15c624f83039bd53a870070da1f3ded2c1e66189d74c",
+      "bytes": 1214
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-wallless-label.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "af883823e2aff3053b424fc3149b81405d5f0060",
+      "sha256": "7aeea892a2260d5775fc9dd6059d015683714728b312ffb4341c9272bb6ea51f",
+      "bytes": 9044
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-web.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "b30b0c0cef948bb634b455db39772f5532057614",
+      "sha256": "2523671dcfc4907556e16c7e179d5c53ef077e79e010e4a6cd9142844ba55b94",
+      "bytes": 5001
+    },
+    {
+      "path": "docs/reports/ai-sigma-critic-worker-balance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "8b193344a2a96e3bcdd7c41225d4008244096132",
+      "sha256": "fce20c0946d6a202a231b7088500e7353d22e79e51cd34c049a6e542f3f1d762",
+      "bytes": 6443
+    },
+    {
+      "path": "docs/reports/ai-sigma-design-review-role-alignment.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "b93b67555b2f4691836783cd9f9502edfdbff828",
+      "sha256": "47b39df1162e0828d3daa8421566d97397524b9d1b98742bb5f5557873abee5c",
+      "bytes": 2221
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-actual-boundary-repair.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "5af96fb9abbbe12e4abf91c78be8910c18a83a1d",
+      "sha256": "887bebaf67f80dfabdad004c65f2b3d2a57071ff0662c839673c354ba0f93d5d",
+      "bytes": 8258
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-baseline-gap-frame10.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "09e49f71e7b78d7ad6f32af52e2c32abba42a4ff",
+      "sha256": "b27eaf9beeac26ca385120b4ab17818bc22910890a465f2a8ce73660b78af9f5",
+      "bytes": 5559
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-c-factor-browser.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "bc412444ce1b6a90e20d45dc9d373bf83fa72753",
+      "sha256": "2635dec663ddebfcc5d2e89e809934d190c8b3d5480878a052c4d789b9c21433",
+      "bytes": 6553
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-candidate-true-mean-fpu.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "6519f4c1d1f0e8d77aa17ba4739cf886d7cd72a0",
+      "sha256": "82d80e0b60f1ad94c13ffc9046c9d83e9046384d5a21ff8237e8329e4c2d48e6",
+      "bytes": 6187
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-checkpoint-teacher.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "24a2258a99d2337fe0b272fde66194e4a50dbcae",
+      "sha256": "b5bdcf419af1eef3939f1e05eb2e2aff3b9013278b2172757e2f7777db077054",
+      "bytes": 11539
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-completed-fpu.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "2b790a46f9fff8431a922983367d7f5f9f221443",
+      "sha256": "7b93383c99d7e315bfd348ac56a8592e9f1968663d651ad2fe7943cc2896bd9e",
+      "bytes": 4528
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-context.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "65e85e1537b954120a43e0c78cfe50d469cb372c",
+      "sha256": "faf2585083b6b52fc3c7467d042f10140493fd712447524f7ad45c7b1e7ce5fe",
+      "bytes": 4855
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-continuation-entry.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "0e42c702355065b469e8343607fe636a9a641f82",
+      "sha256": "1aac4d96cd261c2c8502797e432df40788797c492aca7a575e75f4d76daef336",
+      "bytes": 2125
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-cooperative-arena.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "f6a25ee8e1e981bfc454a6da733814a1b75caeea",
+      "sha256": "4f10686881d59d373715bd83f04f8f15ed0c9bef9e724825c1e2d98ed590acab",
+      "bytes": 5542
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-cp-frame.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "a8701e57eb142023e4cc6ed1b46273e105c6a2fa",
+      "sha256": "76ea46fe826bbe261172492a9f26ec095df22011d30ea3af47319d4d08656a7f",
+      "bytes": 5007
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-cpu-concurrency.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "0c5e3e2c1a67efa270d1110a4251ec22812b068a",
+      "sha256": "3c8f534620cd725f906c5e115a29bc7d5f7017ad5f13bdf71b89b45f64655558",
+      "bytes": 5542
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-cpu-sigma-frame8.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "d8915cb6d23088e419c76298cbc61cabf3b78c4e",
+      "sha256": "7332d649012b40d54b1182266384d8fe2cfd1e4170c69ce38671ab994a21f980",
+      "bytes": 6409
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-data-learning.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "52a1a0726e6abeacc3ecf83843d320260662c819",
+      "sha256": "c5f72980b505088621fddc5f5afb3719b02ab3cda0a5220341cb37f089c0037c",
+      "bytes": 6599
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-deep-node-comparison.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "1b9b2db1c684efd847e435cbf70be8e531fc4457",
+      "sha256": "097f25ac28053de21d6ff75035aba1ee65e71cfdd8d34bbb8eb3491171ce7f60",
+      "bytes": 7764
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-detached-ownership.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "ed75134ce7515654f037ce408c7d921a824e6a48",
+      "sha256": "642d923d76a1f497c1e017310a47cca9a49d1af9671ebb6bff66447bb79050f0",
+      "bytes": 2401
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-diagnostic-arena.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "f00f7525450c785247a6724293a9dd6daa261332",
+      "sha256": "ea41e6839f44c0085f6a208d9d94478890f56893824d6657390ac387e1bd4108",
+      "bytes": 7008
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-distance-alpha-arena.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "d08be5fa1eedefab49cd561c255858883389fc0a",
+      "sha256": "69cab08c2d52cdd3e6ce491e33ceedb3171cfb505ff59877cd3e815932ea3843",
+      "bytes": 6409
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-distance-test.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "fba3bd47e43ba0578127c7ab09a18e40f154efb1",
+      "sha256": "e48e6639b409cf25a90596e02d97a04518573340c87f707bf9552eca286d9de6",
+      "bytes": 6289
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-distance-update-control.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "ee9c2ec7f06274eb0af4c2e37b01a82b74822714",
+      "sha256": "e22fa6e87600e87e409badff45c4f7aa962bdf423576b75bcc787870d4530e60",
+      "bytes": 3956
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-diverse-prefix.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "a019dad731a37ea8f97bbd65b09dfae2fe84df95",
+      "sha256": "f00b247cd13d270efa4ed251b4da337bd20ef44ab7ef8e69547c5ad4d01dca53",
+      "bytes": 5803
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-entry-continuation.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "33e600ebf490ea577393859508f6c393cc331305",
+      "sha256": "e3d3fb51d242444ebde79cbb4aa99746fcaec23f25ae7083a5ebf798a58ecf7a",
+      "bytes": 3312
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-fair-streaming.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "2814ea3c63b0beacf8d7293e3ec4aecf21ad3f8b",
+      "sha256": "2fda64fe0652fd0f0b5037f0405856b46d3819ed7a2dc6504bb5410f91a33e4a",
+      "bytes": 7978
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-fit-gap-analysis.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "84c334de9842bfa570715b19cee8f64d47a4858b",
+      "sha256": "2db86015b8afcf28f261fdcb4e017d8d9bab3e509812f45cb41c4ccd523b3193",
+      "bytes": 14622
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-fixed-cycle.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "8fbbae1b2eebcfbb66a2cdad55b4b41642adbc53",
+      "sha256": "1a8211e5dfb15907cca488bb81f8f52a374d03247045d05579e9634114ed6cda",
+      "bytes": 5174
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-fixed-policy-cost.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "66a6d949c320d8aa942ad423fc9acfed150ce95d",
+      "sha256": "cd24d6e8e1c296318590f04b66f9fe3d1b918acf8e96d77561f671b2705dc583",
+      "bytes": 7967
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-fixed-queue.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "5e4bd07a5917b13d909bf46e60fcde0c2d073d2b",
+      "sha256": "d0b39d9798995f5d38107ad6d00162c63ad588186f6e44d48b336a3fc1d77f00",
+      "bytes": 16846
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-frame14-l2-test.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "003c2dc44fef0f6082f2ebac360b1e0ce2e8490b",
+      "sha256": "50b0f115d6a39ff24b659d978c514a66a0bb7c0abc91e3e8f7611497266409d7",
+      "bytes": 2931
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-frame14-teachers.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "dc9e108dcef4a4b2e86ffbaa9bd73fa14838ff1a",
+      "sha256": "f235a74980e004ba63e98a5592d2359e76ab1b2a52c0c2c4916e291270c31f7b",
+      "bytes": 7308
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-frame19-leaf-terminal.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "4874f4f3ddc07d6d4747e4c8d5e6e29a018b1cd5",
+      "sha256": "ac874e8d9359a1d73e9d3cf3283c2fc760162bb3229a8e055ae65385f920b3ab",
+      "bytes": 7775
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-frame19-native-arena.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "4650cec40778dae9cf61807870360e2d21659ad0",
+      "sha256": "ec36a0b0fb4001f1e2e16c49d355c1c260ba196a3f36cf488b9b822a96e097a7",
+      "bytes": 6767
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-frame19-paired-leaf-arena.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "4f72e23a8e29bd8e9d266424577bda10d086b7ed",
+      "sha256": "f702a4ab6cb31a801bb45e4da8db435bf1a40f0afc3957cf0aa70faa95c68a86",
+      "bytes": 7519
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-frame20-distance-arena.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "bc865386be05df3e88d600ea8e33d509955920e1",
+      "sha256": "e975bc5f12c3d2f29614e4e1e42e4e25bfa5a4b5d57902be0417ad82db07f191",
+      "bytes": 6845
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-frame20-learning-effect.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "50e4390eafc06976d72b63c2d91d2d1e0b747a67",
+      "sha256": "575dd809c62ccbf705810a76de5388a5bee0555f75a6ba21e5a3a3f4af024fbf",
+      "bytes": 5280
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-frame20-one-root-leaf.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "0e5bf614b04e97779ff93e69f9f9693783a77511",
+      "sha256": "2d5ff525ad26d0dd15c45f89d79f99a41ae7db6b0f87864086a102c7c17f67b8",
+      "bytes": 6323
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-frame21-model-cause.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "2aba1a382782f9aaa05a550e291facf174629ce1",
+      "sha256": "c7adedcaeebac2bbbef0ac5900fba6914858babf501e29d8950893d26c9e8291",
+      "bytes": 5895
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-frame22-teacher-budget.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "8f5baa80c1e619416412d75b0bbf59e15277b52c",
+      "sha256": "4ce7b6dc27157fca2d524ce02dce0646507348afffd8a8824cc36328944671dc",
+      "bytes": 9760
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-frame22-transfer-selection.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "66616d997d08b6526eed84ba3a7bf1ce8be8b43c",
+      "sha256": "687e9f37acc7d5410103262e4eb74950406e442768a2dfe869fcc536e3c9de57",
+      "bytes": 14065
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-frame23-independent-teachers.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "4f67b78f9f5d06d2db77192a64132c34db945bfe",
+      "sha256": "2c3d273381a16bb6e0140e96f445fac0216ce61ab21536f7aa50cacc88440cfc",
+      "bytes": 7550
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-frame23-sigma-public-z-import.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "10bcb5907301dcf0a817404d1bb169fbcebc9bb4",
+      "sha256": "df6a415ae0288e75033a852c4c741776378828d8d5ed7f4a0f668c0bd754d87b",
+      "bytes": 6305
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-head-test.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "7f81e657f65701453f9489ee21524d33b00c5beb",
+      "sha256": "9e5961ff5fd1408d05e3bbfd26c5942fc124f7681b5484b258dd621d457e39a9",
+      "bytes": 2124
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-input-scale-control.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "1e9a3faf72edcb000406d41740a76afe7a46f864",
+      "sha256": "6d6e88c40967eac6224a44b1e5fad02f4a07feeda402fff32cf49346d3621e1b",
+      "bytes": 4029
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-isolated-nn-cost.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "0105f44d4e25ca65c79c888044f002cfc6132285",
+      "sha256": "00a26b03f4fa8e75843ce52b053844f1a9778d2fce20d14a7fd452558436e629",
+      "bytes": 5686
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-kernel-ownership.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "695cd9e473a66d84458c056cb1e24d7d9545b20b",
+      "sha256": "0e77fd34e6078e8ad70bee4305bbfe90bfbb2b1c13b2e88b2150b788f3736dc8",
+      "bytes": 2638
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-local-move-quality.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "ae8357ccc7cf308fdbbea8dbee303fe0583b5574",
+      "sha256": "df2edf85a612fa3df14974902d5b8c258c46bab50d8a2dacfaf4b069d4fd724e",
+      "bytes": 6778
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-manygame-generation.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "669b4434b4d488288b2b349e912152908cdfdf5f",
+      "sha256": "49c73ff7559be29ae977269580b587fb35ee8472e030cae85e3c38055401c73f",
+      "bytes": 5883
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-manygame-runtime-preparation.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "4489220b80a60fe8da570e3b8e06be7ce3e5dc2a",
+      "sha256": "a68937b3a5b3e70c95cae6f5a2fe084c814c07661c92e468f9eea8c2d3fc981e",
+      "bytes": 8388
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-matches.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "089a2809c3fdcb4df7bdb58b3f37f44b07864208",
+      "sha256": "5fb3486daa2e7596b9373851f30d25b5b863bf485fcc84121f9c3ae422a0c592",
+      "bytes": 4147
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-native-baseline.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "3b5ae41414fca0632b5726a580a6df2f631f365c",
+      "sha256": "bd60e5d63fb361348dbf9a1f6805263dcceb8590f63d3583815ec477d9579716",
+      "bytes": 7910
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-native-connection.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "533ce108c0a94fdfffce9fcf972ecb97f6730eef",
+      "sha256": "c20c9f0bbb667bdb9a03033d8db5bf8b3e5b57021129da5765f24f7114e33145",
+      "bytes": 7143
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-native-k800-time.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "d7ccd8974b039f1020a9928d8c127fdc795060a0",
+      "sha256": "cdaa8d9140e56d6279398dfeb854028823717d4bae7a0ae8a1e097f27b6c1387",
+      "bytes": 4572
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-native-ni-arena.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "73ddfbd3ff709190d9ab5b98a663098efac67a9b",
+      "sha256": "fd92c94ad1c6ae09d922e051a86b8004f9a6ba6d19ebd0fcd03146d2126da59b",
+      "bytes": 7815
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-native-runtime-ready.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "58583fce440a005fc79a11f16cb1612f8aab0a0a",
+      "sha256": "92e50054f66dc6440b5804881f73606d41f7b114a2bd7899ef7a015971615a8a",
+      "bytes": 6340
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-native-teacher-pipeline.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "de1cb03705ef2e624b533119eb2894515fa40ef7",
+      "sha256": "1bafad2fed79e251e66656fe9204afc8727705df04ad7b6cffe3cc9b8d0ebcc6",
+      "bytes": 10975
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-nn-schema-cost.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "d8f6c577ebcdbc7cbfb2172bcd23a2f0fe9535be",
+      "sha256": "c9aa4b30309ebad6e98877954cb5f9afbc4825b6d1264973baf0aee6bdf2302d",
+      "bytes": 6971
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-nn-search.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "b14e001ba2fb4c5037f0a877afa714d1c4365dfe",
+      "sha256": "dac2611b5588055b1b1ea36921b18ee6fb4b60af9d3d372cdf6b5f9dc598a34e",
+      "bytes": 4004
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-nnue-feature-cost.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "69b6e559555bd65486f5780b6b84bdad1f340802",
+      "sha256": "8b62c76bc4db994432a199a51ba1144d51f528d5673a01515191ec9ae155ffb4",
+      "bytes": 10205
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-ort-checkpoint.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "038744e5ee51b1496dcb5f583d4d158284eedbfe",
+      "sha256": "e3a8b701897e9058dd49479b8fa63af6b977c5d3d69a7fd51facd2dd66d65ef2",
+      "bytes": 2991
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-ort-cleanup-repair.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "d6baf4bfd03f95a59e89918253925860c8abe064",
+      "sha256": "57ef55f8412dac36edcbb324b1019cf39776331c46b4bab392947fded643277d",
+      "bytes": 4074
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-ort-entry-final.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "353132b5fc5af85da74fe357271209c19553db29",
+      "sha256": "aae0ed6072f09c86fc59577bad5ac77bcb2a8f3d29a0e076409b47db3d71b09c",
+      "bytes": 1620
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-ort-search.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "dc67096dc194aefaec2db18f49cc893ffc179254",
+      "sha256": "a91baed901c6382c97383d041cacd25c5f50aba53679cee20b32561748aeba25",
+      "bytes": 3681
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-player-workers.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "eeed4f7f563013fe4918657e1a60a7920e7782b7",
+      "sha256": "95feaafbe0c56f4b55ad250423206284adf4ee72481cdb81be9327cca0b6e69b",
+      "bytes": 7332
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-profile.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "481a88f6c3c213b1c0983b7d7c30616bad29a559",
+      "sha256": "be856e7727e129931d46bf0a8bef9dff836608583bde9a8d016994261329b044",
+      "bytes": 20624
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-puct-factor.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "1f7fa257647699bd7dc20eaceeba4e7c7eab05be",
+      "sha256": "332522e4690078f5de87f1a1fd6d7377fa255e4649997fe258113c9d0d86ec47",
+      "bytes": 2826
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-same-input-budget.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "d7d12c318056cb5ed1496c229dfaaf896c9dfdec",
+      "sha256": "a6f5862f415788df490d5cdf3dd91a80599c66427ce198de8c835d2b7c41f8ae",
+      "bytes": 6117
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-sigma-web-port.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "b8f5f54676ec38d66b2185a7fbf5df46c2e667bb",
+      "sha256": "f05b8b4d75c6378e5c1a6ce9bcf52c50ad80bd795a07514edb3142f8b899a9d3",
+      "bytes": 10196
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-streaming-complete-clock.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "bd75a64e9718da67c8f33b23c52f16fe3991e745",
+      "sha256": "6d3995eb8a453ced609dcd982a88744a8d7b788a93b777f94dc93e51d950b901",
+      "bytes": 4267
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-streaming-early-seal.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "c17afe887adb63075c68c507050b9b6e7e66493a",
+      "sha256": "58996b0567e1688fd1336bdae39a55f7503581ba386fb0f07cbe471fe9f769a3",
+      "bytes": 5920
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-streaming-entry-repair.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "7d0d2dc80347182dc59db0479857c9e122e5a559",
+      "sha256": "641ef6c38a5ec4113cd36f5662e75c3db7bbd2a5bacb61dbd59e2930ca8e0aab",
+      "bytes": 4273
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-streaming-numeric-order.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "d1fa9fb867e6ef0324c42eac8836f78d512c4c29",
+      "sha256": "d9a471c9c01e718c4acb942b7fb78568f4bfa915d6775c00dda5fe1a5930ab5a",
+      "bytes": 4897
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-streaming-runtime-final.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "1fa0e9d17a897a8d39c158d455367ffbe5089b17",
+      "sha256": "fe8530afea9f02f50027aa86fd5f0736a1ee9525546443b9ea1385c7f993491e",
+      "bytes": 4191
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-streaming-snapshot.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "f1599ae75bb7dbfe2973e5075b62128389a46599",
+      "sha256": "234505cc3e34de73b6c3fc358df645ecbaa443802d12fb780a81435b6af42c99",
+      "bytes": 4816
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-streaming-startup-watchdog.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "7356a192593f82e322ca1f27ad559331d1e061bf",
+      "sha256": "6a5612841f0b3ba3d39cba5d6fb8ab71eb84c405f9dcf25128ba104b33c17326",
+      "bytes": 3843
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-tactical-evaluation.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "86380abcd81987e8dd1cb0c2ea527485ca1413f4",
+      "sha256": "0bdc4c6762ef9a47732507627d7930ec0719b337732b2ebf1cb7eab2a62dc40b",
+      "bytes": 5235
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-tail-transport.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "73ad02d6579ebcac6166d827e3a438b24bbb49a0",
+      "sha256": "bb5f8d5f24098c287dc32ea565f95b64011917b211468c897f9ed886b13a895f",
+      "bytes": 6998
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-teacher-throughput.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "38c4999275835ef06fa21bfb804920179fca61ce",
+      "sha256": "2336c4b3ae6c0aee8e1936330eab14b0000e1de0e8b1ce972bd21f41ded81c67",
+      "bytes": 31636
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-wallless-ai-sensitivity.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "255220c5d0e66030a066cc1087457b2b29207248",
+      "sha256": "8a8599ec5f67dca442237f17a877b71e6bbbaaf173e041526f71e461f1549ca0",
+      "bytes": 6219
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-webgpu-measure.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "93005921a52d59d1ab844f202d5437ac161c1c61",
+      "sha256": "71d7d0a6b09665f75d5419c024502cd57f8d0ae62776233538cbb19b24031ced",
+      "bytes": 3950
+    },
+    {
+      "path": "docs/reports/ai-sigma-experiment-worker-balance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "7b7f4527cbcd109a94450cbb9869f0a49532979a",
+      "sha256": "f2282918bb29e94b19ba114f02405f94cd2251a7afffb41ab3066d1349766e0b",
+      "bytes": 3573
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-arena.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "53a6372c4291544c5b1dc9fd9347590953cbad80",
+      "sha256": "6e8ba5bf8665dc456bb686cdbe5f3dc404d990b0cb8187b296c35dbee605a21d",
+      "bytes": 3164
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-comparison-information.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "755dc7ad59c7ff323e060376490098cd012cabf8",
+      "sha256": "2f1bc4e7c6aac33fac56c8767c4305b3b367e2b7801bd5330e2568b60c3f6bf2",
+      "bytes": 8012
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-continuation-match-plan.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "2cb62c46b65cef3e5cc0ba7ce1826c42fe752835",
+      "sha256": "88aff9d74874627c916e6c694d826ab5a39166bd54522ac1b3fd08ee761b5af9",
+      "bytes": 4001
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-deep-discrimination.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "039d2224e817efaa3ce5b1eae368e49342a056ba",
+      "sha256": "2c40339d475827abf197376cd48cd6304a72ea613990577090482417c4a34e48",
+      "bytes": 9210
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-distance-residual.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "30f063b38e49c0aff0646f720685bde79aed76bf",
+      "sha256": "a201b1b7a43c5811ff01311bd1da9263fa975e311965f811b62e1c9363b12c4a",
+      "bytes": 8889
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-frame10-gap-sampling.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "93d4d642c632ddae0fe90493c30c2534785e104f",
+      "sha256": "5f31ac224f3922d56988d2a3d06cec8b6a58f111d4c762485d1ed173a8ed57c2",
+      "bytes": 8199
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-frame14-l2-control.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "7f4b8eea884c7073e15ec24f837f7a382fecdb93",
+      "sha256": "bc30ce8a196f76657e7ece6f877571c3e6b3eed8fe58f32c7b83738bdf418025",
+      "bytes": 6739
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-frame14-learning.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "1e4914f7b2d84a58c28899460598d16a354de825",
+      "sha256": "b0a323c6a47641698b0a69505c83f74a0baac20083a0fa298b975b05f4d9dd06",
+      "bytes": 10118
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-frame19-arena-diagnosis.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "2e8f48583d8dd42ff85d6474713586b7257cb3d8",
+      "sha256": "d3ab11bd5d553c0788c106b65fbbcd1a2cd554959d0fea9db280c6c78568b9b5",
+      "bytes": 9700
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-frame19-distance-provenance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "a1cab33b78d16c578f34f4df04bd99d636eebbda",
+      "sha256": "38c3f8a0796a185308afbffe9e9d48ed71ffa3897e56093ffedd7a1404de9123",
+      "bytes": 8153
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-frame19-leaf-meaning.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "213065d72f0570e3e4685576ae857ad61a5e5255",
+      "sha256": "9e111f794fbd0c4dcbc06a891bb7bd57da986788ec9ad538fd6ce8b862fa75e7",
+      "bytes": 11439
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-frame19-search-cost.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "8aa5ff25557a06a7ff562b7af0109fffcd793461",
+      "sha256": "a759132e05c181b2b79a4ee30c93863a362ce589864d01f594c6faff71d0f601",
+      "bytes": 6493
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-frame20-distance-provenance.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "81b4d489a03d1f1c9b869bd07d16a2786a75a254",
+      "sha256": "40f852810b22638a3d039000b2da69a98e676750e0254e58709a701fc90443a3",
+      "bytes": 5042
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-frame20-saved-distance-selection.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "1caeb1ef43168c67ef94a0e445dfa221466a4382",
+      "sha256": "b5e9984b638a0ec7582d821b3d2443fb7f199cf966f18256d05dc59c63a1b80d",
+      "bytes": 5731
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-frame21-feature-cause.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "884e42c36301ae5d6f046eeefe730b79a924f5c9",
+      "sha256": "b60c00cc43d16fcf0fcd979054917c4c5af69353820587e5c9b4bd406308bc96",
+      "bytes": 12214
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-frame21-route-control.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "03fc3a9e850ab748e2e8c4690828b17f097267f0",
+      "sha256": "229a7f7df335b6d93a03e9864b85ffe1636225b98ab8373fc695496b39c6e509",
+      "bytes": 7882
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-frame22-data-scale-selection.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "84742e92f4d4f9d1edad833e425a9aa93a3443c3",
+      "sha256": "6a20c1a3731d93c5c5ffb7a66e24805010522bd4868b6534443be522a5ba15b3",
+      "bytes": 23744
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-frame22-residual-penalty.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "63f3dab7cb3bd3d059be4785fb5b89fdb67bdaa7",
+      "sha256": "cd7987e4da9f7eebedf6692b38e528e3a3439b13538f5a60ec06e3c2ac1bf32c",
+      "bytes": 10430
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-frame22-teacher-transfer.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "42fa481afa92c8071dbf2a78b97f7f15b27c84b0",
+      "sha256": "f5121a7853cbe03165201aa2a0a6739b3b2209f2b4348a23cdd384fec7f91d1e",
+      "bytes": 12917
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-frame23-data-scale-learning.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "54962094dba056f962013455a6c8c3beb61746ed",
+      "sha256": "5944cb0bf4e42ab75f1db9bb67a7ce71ea09439b9ef243a73a9a11b58cdf9ef8",
+      "bytes": 10512
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-frame23-native-outcome-z-learning.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "2b25bdb407a30a80506df1572743614b0c11d642",
+      "sha256": "269f3f5490c10524eb664e3cde8770e60d9248674cc6d5ad7dfb347228e0a9dd",
+      "bytes": 6439
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-frame23-public-z-learning.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "7317f607adb3220101576e698ac09a7fcb1fa1cf",
+      "sha256": "de25489c714f9ac92c22b455044a8021c5af9cb452d9da7c2b09416f89250616",
+      "bytes": 18833
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-generalization-selection.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "df3b52de5aa64751e9f8fce82a63886653649682",
+      "sha256": "b2868e372601b149cf9c7981939f88ca7068b6b5d3513421471c37b7640925e4",
+      "bytes": 7653
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-generation-architecture.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "4ba407633967b51903f08ddc8f27e7a6d4ffe726",
+      "sha256": "20d6317e4fe48cc4ed89fd0d137a593dde0fe6953940300f631d6f034eddc99f",
+      "bytes": 9759
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-gpu-batch-provider.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "476828c4dc1aeb353ffd74bab4a531865580f389",
+      "sha256": "c83ef845264e76160186f31cab2fe30218aecaba60a83c0bfd19062c10c161ad",
+      "bytes": 9545
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-gpu-inference.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "a93d308d11e4d6e29a21179d30a01c3d73e67216",
+      "sha256": "9adeed37ae088c20638645ebb9618ca8d5a6477bd54282f176dd61d5c4b1dbd4",
+      "bytes": 7720
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-gpu-route-choice.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "df8bab3e26c20adabe82fb3b56c08d1028419d7e",
+      "sha256": "5a4ba5928917b9f46fceef85e3b27177e049bc7a98e138a55775786815ca7a93",
+      "bytes": 9210
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-head-control.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "490debdfd148cfef67c8093d2bce276f9480424a",
+      "sha256": "c501285a93a70139ef196e2382311e7184cf09d7806ca744b2fb5c026d03fb38",
+      "bytes": 4773
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-inference.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "b153e35fac742638b03b42226614e947c036516e",
+      "sha256": "f77f3a92225c7419f10794037a2a85f571498e09f57f91bd34c9f9cda64f4462",
+      "bytes": 4358
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-initial.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "ce93ef1e66fa9ddd2b80869b1f272daa3960bc8b",
+      "sha256": "8b4938e6bd1774a5313f808f8c5c0de3a67618c00cc63a4cd6efd404fde9a032",
+      "bytes": 29413
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-learning-connection.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "28b778e63c17e63183b47f785c4a5b2ab6670810",
+      "sha256": "24c15b75023b02013b1b0c30a6b92ee294812a045d6d416555ac9b092aa8e608",
+      "bytes": 21757
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-learning-diagnostic.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "afc0184b2c7373ee6d76c05cf70dd04bf368b81e",
+      "sha256": "e9e7f7ed5a1caed42f3f729d2e0800875cb037724aee41b8a96098b2886c4f7d",
+      "bytes": 6590
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-manygame-gpu-plan.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "a17bf8c1e31d6a7241164a40bbfb45ba470585ff",
+      "sha256": "6481c8f99b2beef4908af2ab9f3bcedd3af99f05f0daca3cd1f56d51da6a49e0",
+      "bytes": 12199
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-match-analysis.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "864e0ea2cafe2b41187c1fe945d98af1509c9dca",
+      "sha256": "2f50be3549581c51999a61d51376c1a4ddd2e296b86f2fa613be5fd138698610",
+      "bytes": 3375
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-matched-policy-quality.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "08df965642cf75b6ba711901d1084fc6d708945b",
+      "sha256": "dfc358b42f817f1187d7887320178489716f6754bc222be0ab5e9186305c7a1c",
+      "bytes": 9379
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-native-connection.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "7bbaa09eb6952e35a4ef82e25f90a3eb082f1642",
+      "sha256": "e05ab13aebcda4ef0612208fcdb56d6825fe50cda237904787d730404fc57595",
+      "bytes": 12405
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-native-route-choice.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "bb6b7c7b443aaeaf08f6d8bc2b74eabe8ad3ace3",
+      "sha256": "1ffd95d466d523a97962359788a39a319dbeb6b9adc1b79f83df9c9f4aebac85",
+      "bytes": 7652
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-next-information.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "3e09ae9e744beaeb41c055baa0cd82ab0c7c8b84",
+      "sha256": "1561625957327f537a96c75f0dc393e970a9d4013c53d88bfb1afad41905c62b",
+      "bytes": 8147
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-nnue-preliminary.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "da65d20f23e81b752460d56c382fb7eff6380a03",
+      "sha256": "919f4d1a7ebc7cae908121b5c4f156f8066ba919bcaf9f513f0fa703c5573f9b",
+      "bytes": 11065
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-nnue-qf1-prototype.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "263841a2d808d878082d3085f99df300793f6504",
+      "sha256": "cf0296be8dee458baec7fd6be35031b2d12fe43940ff4195a9cb5c9467d6488c",
+      "bytes": 6225
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-ort-rematch.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "3a24a3039a70b49698354d637afa449f8102781e",
+      "sha256": "004ca89b224fa011a9620ff45ede13eef8fd787eef9f66070bf7e58565f2c6ac",
+      "bytes": 1991
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-parity.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "6071e74b5638ffdd20e0152608f594659596661c",
+      "sha256": "3f2a7ccce82552bca670b3e518fda84953f15421623504ceef9d34a9d6143460",
+      "bytes": 18853
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-policy-factor-choice.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "9285d7ada12cea9cb464125586c3466dc9efbf82",
+      "sha256": "f5df7bb364b9dd2ae3e79a98a33c8bf0775c11f4b04111ad961acc32fe67c639",
+      "bytes": 7853
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-pv-cpu-smoke.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "29aee18d116fc06b3a4155796ffaf183065850fd",
+      "sha256": "a53bbd34811271cbc16d67af9b00d97b33f86e5d4047f9c3144e7b98f4e7880d",
+      "bytes": 7340
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-pv-pipeline-bootstrap.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "9f14846ee0d3b141ed404202f6dcd5058ff5f7b0",
+      "sha256": "011042b735fa01ca84a6a6e8585985c93e50ae8cb0eac46db8d2988f6b30697a",
+      "bytes": 4673
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-readiness-clock-plan.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "efdcd39abfeee7bb7cf5f6832d185304afacca11",
+      "sha256": "c7e96be698e2ba19ac4abbc038a0c6232f62b3551c0419f664a6e266ed5bf86a",
+      "bytes": 4973
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-release.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "3cf9a9d0ec23ac4f679798203a58ff8e39514df1",
+      "sha256": "1ea5a77b8e8f52f9ad2d07bf18e337bd3d3630b083776c3d7899593cd8155705",
+      "bytes": 4280
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-remaining-evidence-plan.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "7238af61dc8d0ebe153f177d8bcc5710ce80c55c",
+      "sha256": "f2c527305d3f511397f721db7ea256d3cfb0fa292ec9ad8e2f9452913c90f409",
+      "bytes": 10741
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-residual-readout-view.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "203b963f29b4fb60dc46eb99d9a5ea48863a7b94",
+      "sha256": "2dd3527b4c557098e65e0578d480ba492a6e9540755e0aea78b824985064c1ea",
+      "bytes": 5895
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-root-ablation-v2.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "a10665d2645927ef71556644271a22d7e634bf7c",
+      "sha256": "4c69cfbdf4b3369db8d4e2460bcd6a997b82bfcffa389876d3387e78f4a113a8",
+      "bytes": 3446
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-root-ablation.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "a3613ac717a27dfdecd59c7889c792a2ca03e856",
+      "sha256": "57477408999a02fb87baa6b710265791bb2b33e030198b9431a90bd9103290a2",
+      "bytes": 3285
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-root-factor-correct-n.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "4b968799e31618671f5d017fc11fdc118bbe2e59",
+      "sha256": "1642940987279004173732c941c67800dc37374e6c8e6559a18fb7f8044feb5d",
+      "bytes": 8616
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-saved-nn46-independent.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "bfa654de6a122286cb0f10d6336d7f2e54476038",
+      "sha256": "cf88b02a62add4956c5e2df96881387c01f9768054e218f6282384956fed45b7",
+      "bytes": 7167
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-search-efficiency.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "81bd014fe19f8fb6a304e07fc3a913cf9019530b",
+      "sha256": "92087a5be229d8486922b55dc78301abd295961b9ebb33fdd904d7c695e37a08",
+      "bytes": 8643
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-search-policy-differential.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "129e72d25da1ba53ce572b211608236d43a491f9",
+      "sha256": "f1d71ff5bfa4e405299acd7c334107eb75b25495049621bb60747958070bc26b",
+      "bytes": 9550
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-streaming-comparison32-plan.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "64f0dec352ef012c9bdf9393e84ec63884eee4a8",
+      "sha256": "ccfd356e71441ef82a8590ab8836f0e4e3ed57937c65ff4c36324196c1024e74",
+      "bytes": 6900
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-streaming-independent.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "c34ab8c2d7e49ae6d1165623b33661ced74d1afc",
+      "sha256": "9ecd39aa4704735aa014351db7e5572df1368bddb6259bbf0a20faa3850cdc35",
+      "bytes": 5801
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-streaming-match-entry.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "54536fef0ae7e8721ae02943f6ab50147b07a649",
+      "sha256": "c14b8e1ce9994c239c0a6a660661e459fdee31f9a880ecadc8b761eda83ca9bb",
+      "bytes": 6242
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-tactical-oracle.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "eb143f5f1ad6c358c777c01626dd2399e212498c",
+      "sha256": "a3792426c5920f108ae7c8eca923cdf6707d3c5f033a43787773f87fc9218766",
+      "bytes": 5761
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-value-game-diagnostic.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "ab7651ae1413570c9626195ca1b1e951a705b090",
+      "sha256": "eb9e0c0bc443feed31799b352c5436074d8879bb0f1a0bd8584b3dd2afc8fe44",
+      "bytes": 6176
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-value-lr-control.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "5ab7ac8dc6d49ac88e947eef5afe4371ee7fa2ad",
+      "sha256": "c0bba156c5c51e29def4fe7ce047b8ce15c91f4af7f4b97c47e46ceb65c2cd40",
+      "bytes": 5454
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-wallless-oracle.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "9aa45d7f561c64d7c53d65b8ecc662722b8afe0d",
+      "sha256": "e705cf24b5000033c60d88e585707f48ed927b0734e411e7d0480c5f7122419e",
+      "bytes": 7165
+    },
+    {
+      "path": "docs/reports/ai-sigma-hypothesis-web-reference.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "218a19d734b7b3080da6d6babf89e722761b3649",
+      "sha256": "0f80f59b7208feb0cbeb86e8ee9706bf57f0893e49e9f2d146c3666bfd7864c8",
+      "bytes": 3311
+    },
+    {
+      "path": "docs/reports/ai-sigma-initial-results.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "1c02bf037c5ef3ec6a1963414651d7a1c7574ff2",
+      "sha256": "29509b83942df2fa472bc563e5f3fbd24fdc70363ddd37dcdc4ac8b8e737311b",
+      "bytes": 9371
+    },
+    {
+      "path": "docs/reports/ai-sigma-role-priority281.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "77cf0823fee00fe48362272f1154e5d693710871",
+      "sha256": "f216df30f3578da76638e4b0d9e7bbaea5940312c4bd207c040c962b052b48df",
+      "bytes": 5853
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-bounded-records.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "025262602a73e73072e6950e2a5a88b49e58bcb5",
+      "sha256": "16d9bd20774c6ed4bf84e8e3b5be79496f02ef4139b36a196302342fb28bdcd4",
+      "bytes": 3209
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-closeout.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "48f8302ae714b097f89d4d47148b53535e6059f6",
+      "sha256": "b184e0db2f78450ba9193fbf0fa608bf3ba2bde20cb3012d3ecfc2bf4602115c",
+      "bytes": 2657
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-contract-improvement.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "a8d32ea3b08ff4042b0502c13d99aa7ee66c5cba",
+      "sha256": "7239cc88323580a877db66508d99327aa7477d8427b90c27aaf6042bed7cc9c1",
+      "bytes": 3455
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-critical-roles-v2.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "a431b73cc12559c0d58932ff5cfbaef6aefb578e",
+      "sha256": "e5485d397562b6b532ad376d2d302fa241f6d74dedb78df9a3a37736cc7e86cc",
+      "bytes": 5404
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-deadline-20261002.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "88fa8815cc1f5acc8044eef6328b61714816ed1b",
+      "sha256": "e9b6fbf9270081c177aeb1142ce6e7cc961a17afa46426e5eb2ec435b42ed9af",
+      "bytes": 4549
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-experiment-policy.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "1842f8d6ea1383d2071ef63f974ebf3805fbfeed",
+      "sha256": "0618ee0450c30e828e0339f23e5a3a2a0bc81a19513d23bcfd18afd6cc8394e1",
+      "bytes": 6698
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-extension23.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "71aa31037578d95b9d54849fd5566493a12191f6",
+      "sha256": "62246dc7fdbb6940d2bfc5a26d4a444565b506b9d2849e627fe9b63a6cade37f",
+      "bytes": 5213
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-extension25.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "30a57ad4000fb0ac0a6c838b4bec87fb9c076a62",
+      "sha256": "22f206eb7c90615ffdd85bb26799990b02aaca7bbf716358d14adbbe5bf7bfff",
+      "bytes": 5055
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-frame-end-flow258.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "6e1b8aa45a4a3f17d13ded4c8376db8d68ec0201",
+      "sha256": "811de45e14ed47568700efbc8f4044a3e3c3bde7e7c0d5583380126c4f243d9f",
+      "bytes": 2797
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-frame11-extension.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "4af9b5dadc4e6afee525543949c5ae798dfd6b78",
+      "sha256": "f40f20b09cb86d2a085b040c8748c8a3aecc6b260711919dfa99039e45f92d9e",
+      "bytes": 1966
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-frame12.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "85b726916691a31f8a2a422e9915bb7052bd844d",
+      "sha256": "00363c13bd11eed0b71736e4af88395cf30b01dc8ffdd32993f61a8bb3e9988a",
+      "bytes": 2602
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-frame13.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "09a8e1d7a73ab33f2f4f1becb416f53348ff9a69",
+      "sha256": "b96b96592dfff6cb1a3574a1b5cea13487019bf2d756a5d1bf13ca12abeabfd9",
+      "bytes": 3357
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-frame14.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "39c29d72705ccd1c6670fddb57f64cc98bc10c89",
+      "sha256": "c73852aede87219839dd6153af8b83e47ec2289eb9a75e5ef0a5c01832d2c4d5",
+      "bytes": 3371
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-frame15.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "d95d8cb5ab6c79919cee6d6da3bd2d82eb2df503",
+      "sha256": "91e7e2f4f80a9cea903968f670bab8e7dfac40b71ee1b8755ca82927304e3326",
+      "bytes": 4192
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-frame16.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "bf70b1545770d838e770d571e4f69e5e9e9e0869",
+      "sha256": "691be8d99ee267f8450d428d748c58adb7381a4cdaae637be7e3667ce65d24f7",
+      "bytes": 9274
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-frame18.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "6d777d042edfd348137333b7a94969298c7cb120",
+      "sha256": "5072d643fc0aa0ebfa32c5ddaa98897f7c250f7da0a200761fdb23cbc66f3721",
+      "bytes": 3342
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-frame19.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "70d853f63e17d7a77f6ba85c97dcaefb2e15f6d0",
+      "sha256": "9ed544e6d1f845d2dfb27af9d67ffbe92269367413790e72a5dc79040363b53c",
+      "bytes": 3617
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-frame20.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "3ce5c8e5de6f7c1eb1995706113f796a1b330bcb",
+      "sha256": "46fe92e4eeed8d8e9364530e6fbc775fd3dcff18ade9e3d080458768cc970d1c",
+      "bytes": 10689
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-frame21.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "c8f9fbebe11ac0e80eb892f86732dba890d369ac",
+      "sha256": "5800a102033e827698009332a663e06dc711b8a27387ce359101f6123681af93",
+      "bytes": 12604
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-frame22.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "89e035002b5f09d5e48647b0a7684f5aba34bbe3",
+      "sha256": "b9b55a27ae054598618dc37cd8cb0e425b2e4d2b5fda296e122c151aa0af024e",
+      "bytes": 17268
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-frame24-GPU3600.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "23dcf09e0df876ffc4d31b9241183a6cbba7472c",
+      "sha256": "4828c2e95097be42a738fa9a78738f563ded77c7a6008cf9d85102ae888bbc03",
+      "bytes": 4549
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-frame24.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "803bc4e931d836156f44d93726f006af4057fafc",
+      "sha256": "50eb85649b6aeb8f9766bf8cd20f52d62ad07342ac1a5ed83563fabaa5c8a078",
+      "bytes": 7849
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-initial.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "2ca567256a19805ad7e1f2c03b17d1a505c716c4",
+      "sha256": "52b8d53b07cf725f1b53510048abfd0c4d4d13b03461f0c814e16695cb4ff5a5",
+      "bytes": 53663
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-milestone124.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "01a08375cbe704b2725a3e94e33dbad3d2dd2593",
+      "sha256": "ca8664ce9fbb2eb660902a83b373a43a7edb8944421082c2102a46acbf202151",
+      "bytes": 2222
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-model.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "61ecacd20191c22e36092b88ae19536731b85e1d",
+      "sha256": "4229433203b5b4bff9921de287f3ecf8f57d0eb313033a75504d3d9cd12a6a46",
+      "bytes": 2583
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-read-guard-repair-frame10.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "246c54c43e54887f28cc22fc95eb5e2ce9a5f95f",
+      "sha256": "ab970e819f213b67510aa855f55d4dc37d9ef7fac99dfc47bbe4b3e8a98f26b2",
+      "bytes": 2840
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-repository-diagnosis.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "9bb1cde8348f8ee3d42b0077e8d1b2bf1e9709ac",
+      "sha256": "f801ae4dd9a9cf4b4223e1d38dda233065fe90fe05e26bae4141a084a47ef415",
+      "bytes": 33490
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-resume-frame10.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "d910c6a81819fef600568098fcb39b4a3bd8a83d",
+      "sha256": "98fa1ccfca67fe16d7f01623d3ab886e62483cc0bf0ae55ec8e8853a74f06215",
+      "bytes": 2973
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-resume-frame7.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "1059c7ece69835bf66fd9833322fca2d95eb16a0",
+      "sha256": "d0123e6e4af53fa1f2d74a6cdf46e6ac747064357bd85d2632bc51846460701e",
+      "bytes": 2531
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-resume-frame8.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "e7c44dfcbb13d838eb4cc2ab2fff22dd7325bfc8",
+      "sha256": "5539356a1ef57cf06c0a821014f738aef1af8a8463c6c12dab4fc795cd26555a",
+      "bytes": 2157
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-resume-frame9.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "8719eadd6753ed6c77b489715e45aa8503f5cced",
+      "sha256": "71f7361814349cdf62f88281377ed7cee2a2ff1cb9c51c3b929d5c96bb3483a0",
+      "bytes": 2417
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-resume-operations.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "b8835e12d13dd33b9c311ea00a2b0d557eaa9f08",
+      "sha256": "930ba4759209cacc91f95e83ed50ac269b0266e7996e998b01ab8d81d0e9e4b7",
+      "bytes": 3662
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-role-value120.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "ee1c0e69a3e675e6f1c8513dc2691494b2cc45a8",
+      "sha256": "5318ebcbe0efe49137ea4e67c26c7d7ae1ce1a26a5ef4bb13b2481ead768b8c2",
+      "bytes": 3405
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-runtime-retirement-1gj.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "a57ebeec9c4fee3059ad2a47ec7d8c778133797d",
+      "sha256": "9c0e66d43503a595355f36373bc3ad0d9a765f5b04695cf1349834aa9b8a72b4",
+      "bytes": 3634
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-scheduler-live.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "2de673b8c1c13c46fcb46b587a930ee9b354bf3b",
+      "sha256": "9193abb86dc41b04f44fb3171b8fd0f13b87f4bfe65c950085dd1e0946105232",
+      "bytes": 3389
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-scheduler-recovery.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "28e12ad2eb8948133198ddccf9b0c29856b59de3",
+      "sha256": "69a0582c2e5a10838362b2a86ef9d8a2ed95bb5a9f59ab2aa5421f28eb7197bb",
+      "bytes": 3909
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-selection-frame8.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "47a329a54a86c754c148b09fff28d462dc454ba5",
+      "sha256": "8ceb1a96f32126ac464b2766339b11ad65d2528af6e7ec569bc926df6a09eed2",
+      "bytes": 2904
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-session-policy104.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "9e33484af8fd11641c6dba0a3d60478b805d7414",
+      "sha256": "ac527debddcfd0a2fed2b1d786ab2cdfe9ee6ed6c76913c0195e7097982a7a22",
+      "bytes": 2352
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-supervisor-read-guard.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "bbcc843f40ee08f62a70c6f2eb21253da7230a54",
+      "sha256": "eba70b637721cb074f2f52b303b7ca56650c25378296aa4cab8945dd7eb26243",
+      "bytes": 3953
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-supervisor-role-review.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "d57f3c9147415c6dcde657dd50e229b9e125fc89",
+      "sha256": "b7bd6de18bf47db52db0d8c88812fa0ff52f11207ba34b9db6ee6b924358b3ca",
+      "bytes": 5965
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-supervisor-summary.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "469fb2d75964968b11bf8e54a8c236dea2865a3b",
+      "sha256": "cb1a9828e1868bbff25d303cb48fc303b4494c1421359420ad0ac42c603ee02b",
+      "bytes": 2297
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-supervisor-unbounded.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "e13ad46f345e70a9bae36ba334df335256d4b7b4",
+      "sha256": "695c3a5293232aeed7a61d43aa683eeb64f22f94bfd4d923a1dbbd81f08dc54b",
+      "bytes": 2631
+    },
+    {
+      "path": "docs/reports/ai-sigma-steward-tooling-boundary.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "3605224f0caee5ab6ace154f7ecac924648c5002",
+      "sha256": "d4640dd8696a52f1a8f7ecf1b99a3c6964022116ba82ea5fb9fc8a948f537f2e",
+      "bytes": 4134
+    },
+    {
+      "path": "docs/reports/ai-sigma-worktree-consolidation.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "cb36b3857d8bc354374cbd868c90d7ae7353ac56",
+      "sha256": "5d502f0316e4f17d7a22dc09c7c77d02b50b982a0f638af6f446e8103dac60ef",
+      "bytes": 6565
+    },
+    {
+      "path": "docs/reports/research-scheduler-implementation.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "3fe126dad4f1cf1b535649d85e6fab84c770b894",
+      "sha256": "150db27758f2cb0f098c81ed918c94fb3bd0c6cafd1402f002470e829ab09c40",
+      "bytes": 3618
+    },
+    {
+      "path": "docs/reports/research-team-dismantling.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "e6bd3d7ce75e8100f94e9e45dbba8fe0aba3f25b",
+      "sha256": "a2f42229446279c0f7ad34652b69c54093c4362d626ac2ef40fa08f3e06cb7c9",
+      "bytes": 5734
+    },
+    {
+      "path": "docs/reports/research-untracked-cleanup.md",
+      "commit": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+      "git_blob": "65c45be7ab592cc0243dd72ac8e3c2207bfddab1",
+      "sha256": "4e21de64b1b49eace1bcced36e511d8591afa32e22d260e2fd3ce05cebb5c4a5",
+      "bytes": 5120
+    }
+  ]
+}

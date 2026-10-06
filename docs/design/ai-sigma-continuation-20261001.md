@@ -14,7 +14,7 @@ frame24/extension25の元の開始は2026-10-06 00:08:46 UTC、連続延長の�
 
 旧範囲はCPU合計4logical/RAM8GiB/保存12GiB/GPU VRAM6GiBだった。新GPU学習3600秒の消費13.493288946秒・残3586.506711054秒という最終点、旧GPU7200秒残量UNKNOWNと保管UNKNOWN128MiBを保持する。[資源引渡し](../../research-data/ai-sigma/frame24-steward/1gj-final-resource-handoff-v1.json)。残量は追加実験の許可や使う義務を意味しない。保存・過去費をreset/refundしない。
 
-316の公開43ファイル全体の多様性調査、百万種類規模の学習、CUDA4000step追加比較、TT実NNUE性能、MPC校正は未配分。現状と比較案は[現在計画](../reports/ai-sigma-coordinator-current-priorities.md)へ一本化する。
+316の公開43ファイル全体の多様性調査、百万種類規模の学習、CUDA4000step追加比較、TT実NNUE性能、MPC校正は未配分。現状と比較案は[現在計画](../research-findings.md)へ一本化する。
 
 ## 次の実行
 

@@ -1,6 +1,6 @@
 # Rust AIと学習cycleの運用
 
-Linuxネイティブを主経路として、評価・探索・対局進行・推論queueはRust、学習・解析・モデル変換はPython/PyTorchが担当する。Wasmは同じCPU評価・探索を使う製品向け経路の一つ。[crate設計](../design/ai-rust-migration.md)と[実装検証](../reports/ai-rust-migration.md)に、互換性と測定の範囲を示す。製品の既定B0 AIはこの移行だけで学習済みNNUEへ置換しない。
+Linuxネイティブを主経路として、評価・探索・対局進行・推論queueはRust、学習・解析・モデル変換はPython/PyTorchが担当する。Wasmは同じCPU評価・探索を使う製品向け経路の一つ。[crate設計](../design/ai-rust-migration.md)と[実装検証の知見](../research-findings.md#実行費と探索の検証)に、互換性と測定の範囲を示す。製品の既定B0 AIはこの移行だけで学習済みNNUEへ置換しない。
 
 ## ビルドと入口
 

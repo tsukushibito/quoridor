@@ -36,4 +36,4 @@ PYTHONPATH="$PWD/python" "$QUORIDOR_TRAINING_ENV/bin/python" \
 python3 scripts/dev/check-research.py
 ```
 
-旧frameの曲線・棋譜・loss・分割・モデル署名は`research-data/ai-sigma`に保持する。旧recipeの再現はそのrunのGit版へ戻して行い、現役環境に互換wrapperを残さない。[削除報告](../reports/ai-retired-code-cleanup.md)に移行前版を示す。
+旧frameの曲線・棋譜・loss・分割・モデル署名は`research-data/ai-sigma`に保持する。旧recipeの再現はそのrunのGit版へ戻して行い、現役環境に互換wrapperを残さない。移行前コードはGit `54a294a`、[撤去manifest](../../research-data/ai-sigma/retired-code-cleanup/removed-source.json.gz)で追跡する。

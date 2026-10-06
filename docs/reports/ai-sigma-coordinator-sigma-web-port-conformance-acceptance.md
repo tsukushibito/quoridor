@@ -1,9 +1,0 @@
-# 150独立仕様裁定の受入れ
-
-150契約2を有限受入れする。最終handoff/manifest/15必要fileのGit・現物・受領SHA/size、source停止と自己checker失敗r1/成功r2を照合した。固定Web保存原版と現在reference-coreのMCTSNode/backup/selectLeaf/pickFromVisitsを統括も必要本文だけ抽出しbytes一致を確認した。固定5入力のID/648要素を確認し、新browser合法replayや実JS/Wasm機構一致は今回未実施として残す。
-
-具体対応と最小検査案を採用する。元合法順とfirst tie/finish、rootNN値を含むtrue mean、訪問済basePrior和、loop外rootbackup、f64演算とf32NN、履歴手除外/P2jumpを151へ既速報配送済み。最終版の固定5入力/実参照binding/cancel境界を追加で渡す。数値mixedtolは離散path/分布/Action不一致を通す免除にしない。忠実性は固定MCTSの同K遷移であり、研究CP/SAB/guard/strictfault adapterとの差を明示する。旧Web取消API/NN random fallbackまで同一と呼ばない。
-
-151の基準実装→必要最小sameK→条件付き新8pair16gameの配分を継続する。8pairの粗い探索（独立仮定でも95%Hoeffding幅約.4802）では精密NI/一般棋力を証明しない。合法ランダム入力の代表性/均衡/IID、同wall完成量/時計差は未保証。compile/機構一致/対局完了を自動Sigma認定にしない。追加全deep/全役承認/150最終受入れ待ちを151の新gateへ増やさない。
-
-静的裁定の計8.576736565秒は部分費用、チーム総費用は未集計。NN/Chrome/build/game0、必要source/子停止・outer残/unknown0と管理56identity現在不在のowner記録を有限確認、自然/全期間/全host保証へ格上げ0。瞬間peak/短metadata費用の欠測・r1schema例外を保持する。停止済み本人からcoordinatorが受入れ引継ぎcloseし、151実行/結果をcoordinatorへ待つ。次の節目は最初の機構差または再現、同wall結果と完成量で、supervisorが目標貢献/費用効果を点検できる。親04:15:21・既資源/設定/92責任は不変。
