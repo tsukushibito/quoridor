@@ -55,6 +55,10 @@ data処理341.580264秒、controller全job341.814518秒、network1,664,424,671B�
 
 ユーザーは、original-onlyでフローと基準結果を確立した後、正しい左右反転をtrain batchで50%適用するオンラインaugmentationを比較する方向を承認した。新反転はnative再計算/二回復帰/合法遷移等のoracleで確認し、同元データ・初期・尺度・LR/batch・同更新回数/seenで比較する。独立した対局観測の増量と区別し、境界修正は同reviewerへ戻す。具体の追加fitは基準成立後の実残予算/保存と計時枠をRootが配分する。旧公開反転データの再使用、開封済みtestでの新候補再選定、追加arenaはこの方針承認だけでは開始しない。
 
+original-only v2の復旧job `2c121563-6813-4226-a9e5-716c860cc9ba` は08:55:38 UTCにexit0/cleanup true/remaining空・子回収で終了した。cache manifestはT100万/V5万/sealed E5万、モデル入力distinct366,638/32,263/32,143。これは保存観測行と入力identityの集計であり、独立game数や100万種類ではない。Payload全資格・v2 train-only尺度と定数のbindingは担当が続けて確認する。GPUfit/testはこの読取時点で未開始。
+
+先行v2 jobのチェック未完了後submitは取消・原費保持とした。さらに完了通知がnotLoadedから制限付き権限で復帰する管理不具合で結果確認を妨げたが、Rootは正式fullaccess再開し、mainの作成/再開/完了通知で承認済み権限を明示する通常修復を行った。38限定tests/プロジェクトRuff/AST一致は有限ソフト資格であり、次の実通知の成功は未認定。[修復証拠](../research-data/ai-sigma/task-session-permissions/repair.json)。旧data費/失敗・UNKNOWN・方法・モデルは不変更。次は既GPU3600秒の範囲で最大30秒の供給・数値資格を非競合slotに配分し、基準本fitはその停止後のまとまったslotへ接続する。
+
 ## 選択済みの棋力評価環境
 
 ユーザーは既存Linux release Rust arenaを拡張する専用セッションを選んだ。評価器比較は同探索、探索比較は同凍結評価器、全体比較は固定Sigma設定とし、同時間棋力と同仕事の処理速度を分ける。開始prefix/historyを保存し担当側交換のpairで集計する。Sigma参照のabs(Q)<=0.2は暫定主book目安で、均衡や校正確率の保証ではない。初期盤面と傾いた・戦術診断を別群にする。
