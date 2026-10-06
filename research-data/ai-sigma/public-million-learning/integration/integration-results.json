@@ -1,0 +1,735 @@
+{
+  "at": "2026-10-06T13:23:54.079919+00:00",
+  "status": "verified learning/evaluation and source STOP handed to Root for integration; main Git actions not performed",
+  "data": {
+    "source_revision": "751186344fc52ad0c29bc65922e62c6fa915f006",
+    "shards": 43,
+    "original_only": true,
+    "saved_rows": {
+      "train": 1000000,
+      "validation": 50000,
+      "test": 50000
+    },
+    "model_input_distinct": {
+      "train": 366638,
+      "validation": 32263,
+      "test": 32143
+    },
+    "qualified_candidate_per_split": [
+      2524945,
+      125144,
+      126394
+    ],
+    "qualification_denominator": "sampled original candidate rows only; unsampled eligibility and independent games UNKNOWN",
+    "source_game_history_prior_exposure": "UNKNOWN; possible old observation manifest matches retained separately",
+    "z0": "unknown termination excluded; not declared invalid; original value/exclusion denominator preserved",
+    "same_input_opposing_observations": "retained; train/validation input overlap did not remove training rows",
+    "source_npz_bytes": 1664424671,
+    "source_distribution_capture": "/workspaces/quoridor/.worktree/learning-million/.artifacts/learning-million/source-LICENSE.txt",
+    "license_capture_SHA": "b5e277822da3c9eb54eb04e9ee3c4f93bfeb769c829d5d0f70c99835a2f6733d"
+  },
+  "model": {
+    "features": "QF1/route4off",
+    "residual": "fixed D logit a0 b8 + FT32/H32 residual",
+    "method": "FP32 Adam wd0 LR3e-5/batch128 epoch shuffle row loss/row monitor",
+    "training_seen": 20000000,
+    "updates": 156260,
+    "completed_epochs": 20,
+    "visits_per_train_row": 20,
+    "last_batch_rows": 64,
+    "best": "LAST equal BEST, epoch20 endpoint selected by validation primary rowMSE; frozen before final labels",
+    "early_stop": "patience3epoch/min_delta1e-4 not triggered before max20",
+    "fixed_binding": {
+      "freeze_sha": "161b9c313ec563e7a6a6f78282204f7541e092f7c077a7073cb7b8d9e0924bda",
+      "weights_sha": "c0ec9bf3f8f221c2a2d2db6bf70857fa55647e7c7fd15b38786ef941baa079cd",
+      "cache_sha": "1ce0e339808ebe13e6718e6460d851b65e0fa37a917e7ca5c8fa1ed78d489316",
+      "candidate": "frozen BEST only; distance and train-only constant; no initial or reselection",
+      "test_rows": 50000,
+      "target": "recorded decisive z; public heldout observations, game/history/exposure UNKNOWN"
+    },
+    "train_only_scale_SHA": "37c38ed423aa7c639f0e5e5479d0977cb61766cd59c8b88faaacb7f2b675ae77",
+    "config_SHA": "e0f1ca7da924227599e9f001152a76bdf6ecfe8bc03c66c87054fe2bbdc85215"
+  },
+  "learning": {
+    "curve_points": 229,
+    "full_train_points": 20,
+    "initial_train_scope": "diag2048, not fulltrain",
+    "train_rowMSE": 0.5171225935808809,
+    "validation_rowMSE": 0.5264437706063396,
+    "initial_validation_rowMSE": 0.8566055831415444,
+    "validation_distance_rowMSE": 0.8566055822978251,
+    "final_train_validation_gap": 0.00932117702545876,
+    "validation_monotonic_epoch_boundary": true,
+    "images": "recorded data PNG/SVG with BEST/D/constant, separate diag/fulltrain; previously inspected, unchanged PNG SHA verified",
+    "PNG_SHA": "5caff15f35dbbf093f949629f9a8cb0faea6d6a164768c66ac33fa611775bf93"
+  },
+  "final_evaluation": {
+    "rows": 50000,
+    "input_groups": 32143,
+    "candidate": "BEST only +D+train-onlyconstant",
+    "row_metrics": {
+      "best": {
+        "rows": 50000,
+        "games": 32143,
+        "rootmean_mse": null,
+        "rootmean_game_equal_mse": null,
+        "rootmean_rows": 0,
+        "z_mse": 0.5297938891696311,
+        "z_game_equal_mse": 0.4980997210112897,
+        "z_rows": 50000,
+        "constant_mse": 1.000029817795958,
+        "constant_game_equal_mse": 0.9999266509290563,
+        "target_mse": 0.5297938891696311,
+        "target_game_equal_mse": 0.4980997210112897,
+        "z_sign_rows": 50000,
+        "z_sign_accuracy": 0.80374,
+        "saturation_fraction": 0.2821
+      },
+      "distance": {
+        "rows": 50000,
+        "games": 32143,
+        "rootmean_mse": null,
+        "rootmean_game_equal_mse": null,
+        "rootmean_rows": 0,
+        "z_mse": 0.8601921794476189,
+        "z_game_equal_mse": 0.8096527589705886,
+        "z_rows": 50000,
+        "constant_mse": 1.000029817795958,
+        "constant_game_equal_mse": 0.9999266509290563,
+        "target_mse": 0.8601921794476189,
+        "target_game_equal_mse": 0.8096527589705886,
+        "z_sign_rows": 50000,
+        "z_sign_accuracy": 0.56818,
+        "saturation_fraction": 0.00724
+      },
+      "constant": {
+        "rows": 50000,
+        "games": 32143,
+        "rootmean_mse": null,
+        "rootmean_game_equal_mse": null,
+        "rootmean_rows": 0,
+        "z_mse": 1.000029817795958,
+        "z_game_equal_mse": 0.9999266509290563,
+        "z_rows": 50000,
+        "constant_mse": 1.000029817795958,
+        "constant_game_equal_mse": 0.9999266509290563,
+        "target_mse": 1.000029817795958,
+        "target_game_equal_mse": 0.9999266509290563,
+        "z_sign_rows": 50000,
+        "z_sign_accuracy": 0.50126,
+        "saturation_fraction": 0.0
+      }
+    },
+    "secondary": {
+      "source": "same saved prediction arrays, no model construction/forward/reselection",
+      "primary_recomputed": {
+        "rows": 50000,
+        "MSE": {
+          "best": 0.5297938891696103,
+          "distance": 0.8601921794476846,
+          "constant": 1.000029817796
+        }
+      },
+      "train_known_model_input": {
+        "rows": 35887,
+        "MSE": {
+          "best": 0.5148657318461166,
+          "distance": 0.9059676586859298,
+          "constant": 1.000073304759979
+        }
+      },
+      "train_unknown_model_input": {
+        "rows": 14113,
+        "MSE": {
+          "best": 0.5677536979890122,
+          "distance": 0.7437927871552659,
+          "constant": 0.9999192377154843
+        }
+      },
+      "phase_proxy": {
+        "0": {
+          "rows": 8705,
+          "MSE": {
+            "best": 0.904124456466543,
+            "distance": 0.9809999662197728,
+            "constant": 1.0000277327746099
+          }
+        },
+        "1": {
+          "rows": 16038,
+          "MSE": {
+            "best": 0.6308921213761036,
+            "distance": 0.9474605944902867,
+            "constant": 1.0003708114480565
+          }
+        },
+        "2": {
+          "rows": 25257,
+          "MSE": {
+            "best": 0.3365816693316432,
+            "distance": 0.7631401691414613,
+            "constant": 0.9998140080766952
+          }
+        }
+      },
+      "source_shard": {
+        "0": {
+          "rows": 1325,
+          "MSE": {
+            "best": 0.3936006383592489,
+            "distance": 0.6180659865325464,
+            "constant": 1.0003433408541131
+          }
+        },
+        "1": {
+          "rows": 1667,
+          "MSE": {
+            "best": 0.5425885970494331,
+            "distance": 0.8300457504816857,
+            "constant": 1.0000011578902532
+          }
+        },
+        "2": {
+          "rows": 1654,
+          "MSE": {
+            "best": 0.3221195855463914,
+            "distance": 0.8724396873778673,
+            "constant": 1.000568152009688
+          }
+        },
+        "3": {
+          "rows": 1742,
+          "MSE": {
+            "best": 0.5274421064770666,
+            "distance": 0.9566588413296673,
+            "constant": 1.0004843423592147
+          }
+        },
+        "4": {
+          "rows": 1609,
+          "MSE": {
+            "best": 0.6431978415055141,
+            "distance": 0.8925208064451624,
+            "constant": 0.99995614301554
+          }
+        },
+        "5": {
+          "rows": 1706,
+          "MSE": {
+            "best": 0.748271356723007,
+            "distance": 0.8932635866575592,
+            "constant": 0.9996926509613927
+          }
+        },
+        "6": {
+          "rows": 1682,
+          "MSE": {
+            "best": 0.5782236834028633,
+            "distance": 0.824310371667702,
+            "constant": 1.000235188252314
+          }
+        },
+        "7": {
+          "rows": 1873,
+          "MSE": {
+            "best": 0.5384593250768467,
+            "distance": 0.9073120532543192,
+            "constant": 0.99991791404655
+          }
+        },
+        "8": {
+          "rows": 1735,
+          "MSE": {
+            "best": 0.5767228008289083,
+            "distance": 0.9252983605088904,
+            "constant": 1.0002794158995159
+          }
+        },
+        "9": {
+          "rows": 1648,
+          "MSE": {
+            "best": 0.538975593219562,
+            "distance": 0.8282315427362273,
+            "constant": 0.9998035524569708
+          }
+        },
+        "10": {
+          "rows": 1701,
+          "MSE": {
+            "best": 0.5653561648378839,
+            "distance": 0.9077870166016464,
+            "constant": 0.9999825222776931
+          }
+        },
+        "11": {
+          "rows": 1633,
+          "MSE": {
+            "best": 0.4601497020045923,
+            "distance": 0.8339098150921493,
+            "constant": 1.0002087042325463
+          }
+        },
+        "12": {
+          "rows": 1944,
+          "MSE": {
+            "best": 0.41701432553090884,
+            "distance": 1.0421876993372192,
+            "constant": 1.0004591419132018
+          }
+        },
+        "13": {
+          "rows": 1779,
+          "MSE": {
+            "best": 0.5839159142939173,
+            "distance": 0.7958686818097457,
+            "constant": 1.0002359297743249
+          }
+        },
+        "14": {
+          "rows": 1665,
+          "MSE": {
+            "best": 0.5156467549639545,
+            "distance": 0.8904141048873768,
+            "constant": 0.9989349624893334
+          }
+        },
+        "15": {
+          "rows": 1738,
+          "MSE": {
+            "best": 0.4217806026780609,
+            "distance": 0.8155982691362954,
+            "constant": 0.9996210869235489
+          }
+        },
+        "16": {
+          "rows": 1625,
+          "MSE": {
+            "best": 0.2951100780403913,
+            "distance": 0.8484173101733624,
+            "constant": 1.0002723934636923
+          }
+        },
+        "17": {
+          "rows": 1811,
+          "MSE": {
+            "best": 0.6000393947916329,
+            "distance": 0.8371956716525252,
+            "constant": 0.9997241179467233
+          }
+        },
+        "18": {
+          "rows": 1532,
+          "MSE": {
+            "best": 0.5142165874300982,
+            "distance": 0.8804420503032699,
+            "constant": 0.9998945732813262
+          }
+        },
+        "19": {
+          "rows": 1853,
+          "MSE": {
+            "best": 0.42611416890400433,
+            "distance": 0.8828959716184305,
+            "constant": 0.9998793979633396
+          }
+        },
+        "20": {
+          "rows": 702,
+          "MSE": {
+            "best": 0.6684161265765092,
+            "distance": 0.8294380120863696,
+            "constant": 0.9992948006659715
+          }
+        },
+        "21": {
+          "rows": 809,
+          "MSE": {
+            "best": 0.5000944692785889,
+            "distance": 0.9373519238438008,
+            "constant": 0.9996297784761483
+          }
+        },
+        "22": {
+          "rows": 672,
+          "MSE": {
+            "best": 0.495107939876314,
+            "distance": 0.811990768534085,
+            "constant": 1.000072829156
+          }
+        },
+        "23": {
+          "rows": 531,
+          "MSE": {
+            "best": 0.5952886435721216,
+            "distance": 0.7724735757689121,
+            "constant": 1.0003621172915933
+          }
+        },
+        "24": {
+          "rows": 686,
+          "MSE": {
+            "best": 0.4990225559205162,
+            "distance": 0.7838506561422491,
+            "constant": 0.9999733072901107
+          }
+        },
+        "25": {
+          "rows": 595,
+          "MSE": {
+            "best": 0.6360595348747026,
+            "distance": 0.9759275289553745,
+            "constant": 0.9984951148702855
+          }
+        },
+        "26": {
+          "rows": 672,
+          "MSE": {
+            "best": 0.4457635006357612,
+            "distance": 0.8611339723438398,
+            "constant": 0.9999204362988572
+          }
+        },
+        "27": {
+          "rows": 723,
+          "MSE": {
+            "best": 0.3738356608473019,
+            "distance": 0.7125496171572246,
+            "constant": 1.0002380795017816
+          }
+        },
+        "28": {
+          "rows": 599,
+          "MSE": {
+            "best": 0.4755572634459217,
+            "distance": 0.7058427437486242,
+            "constant": 1.0004432531960668
+          }
+        },
+        "29": {
+          "rows": 690,
+          "MSE": {
+            "best": 0.7518625529981345,
+            "distance": 0.8854390913352723,
+            "constant": 0.9997759943733914
+          }
+        },
+        "30": {
+          "rows": 751,
+          "MSE": {
+            "best": 0.654951080826021,
+            "distance": 0.8925229893340757,
+            "constant": 1.000595550860394
+          }
+        },
+        "31": {
+          "rows": 696,
+          "MSE": {
+            "best": 0.4191867780763577,
+            "distance": 0.7453793634794829,
+            "constant": 1.000367105018069
+          }
+        },
+        "32": {
+          "rows": 639,
+          "MSE": {
+            "best": 0.5775614587241454,
+            "distance": 0.8243024626028852,
+            "constant": 0.9991913831466104
+          }
+        },
+        "33": {
+          "rows": 761,
+          "MSE": {
+            "best": 0.7470593642179293,
+            "distance": 0.8508252892116044,
+            "constant": 1.0000952575397057
+          }
+        },
+        "34": {
+          "rows": 846,
+          "MSE": {
+            "best": 0.2623060758343481,
+            "distance": 0.86643568458331,
+            "constant": 1.0009201766737306
+          }
+        },
+        "35": {
+          "rows": 683,
+          "MSE": {
+            "best": 0.7784459045333159,
+            "distance": 0.8492820678691162,
+            "constant": 0.998798351849997
+          }
+        },
+        "36": {
+          "rows": 728,
+          "MSE": {
+            "best": 0.6854282162784361,
+            "distance": 0.7950036655846612,
+            "constant": 1.0003541698153406
+          }
+        },
+        "37": {
+          "rows": 737,
+          "MSE": {
+            "best": 0.455531013248448,
+            "distance": 0.7816001412014953,
+            "constant": 1.0005128454382253
+          }
+        },
+        "38": {
+          "rows": 684,
+          "MSE": {
+            "best": 0.6997737066760364,
+            "distance": 0.8882193641129554,
+            "constant": 1.0002225484542457
+          }
+        },
+        "39": {
+          "rows": 677,
+          "MSE": {
+            "best": 0.3649711745575462,
+            "distance": 0.8704948394583923,
+            "constant": 0.9997955056700325
+          }
+        },
+        "40": {
+          "rows": 773,
+          "MSE": {
+            "best": 0.7547224622123232,
+            "distance": 0.843681663488263,
+            "constant": 1.000933957228445
+          }
+        },
+        "41": {
+          "rows": 801,
+          "MSE": {
+            "best": 0.670664077379923,
+            "distance": 1.0126492345612985,
+            "constant": 1.0003072211659874
+          }
+        },
+        "42": {
+          "rows": 623,
+          "MSE": {
+            "best": 0.5781762288472794,
+            "distance": 0.8347328434664564,
+            "constant": 1.0001550185620993
+          }
+        }
+      },
+      "exposure": "UNKNOWN; known model input is not prior exposed observation or game independence",
+      "constant_train_only": 0.008534,
+      "new_forwards": 0,
+      "CPU_analysis_seconds": 0.6304235350107774
+    },
+    "legacy_games_field": "model input groups, not source independent games",
+    "unique_model_forwards": 1,
+    "new_forward_rows": 50000,
+    "cache_frozen_before_test_open": true,
+    "test_now_opened": true,
+    "reselection_refit": false,
+    "exposure": "UNKNOWN; public heldout observation error, not unseen-game strength"
+  },
+  "trained_native": {
+    "numerical": "PASS limited sameBEST19states/16children/16make-unmake Scalar/Simd FT full-delta/P1P2/history/ply",
+    "CPUmaxerror": 3.129243850708008e-07,
+    "new_forwards": 121,
+    "SIMD_scope": "FT/accumulator, residualhead Scalar; no speed proof",
+    "private_ELF": {
+      "built_source": "/workspaces/quoridor/.artifacts/rust-migration/target/release/nnue-diagnose",
+      "private_binary": "/workspaces/quoridor/.worktree/learning-million/.artifacts/learning-million/native-completion-v2/output/immutable-native/1e5a07d9b6be39d00199c310d169ffb24cb9af8614e33f7148fc846ed20de7ed/nnue-diagnose",
+      "sha256": "1e5a07d9b6be39d00199c310d169ffb24cb9af8614e33f7148fc846ed20de7ed",
+      "bytes": 1149216,
+      "source_binding_sha": "45ba6c01133cf92f3fe9492590fe74a937033970d38edd4695adc22eccefcfce",
+      "old_qualified_native_preserved": true
+    },
+    "operational_failure": "ONE phase deadline exit1/24.324680752 retained; numericstage parent directwait NOT_RECORDED; exact science PID absent and outerguardian cleanup[]; Root accepted limited result",
+    "native_source": "/workspaces/quoridor/.worktree/learning-million/crates/quoridor-runner/src/bin/nnue-diagnose.rs"
+  },
+  "whole_cost": {
+    "data_known_lower_bound_seconds": 620.9998653201619,
+    "data_failed_attempts_unknown_preserved": true,
+    "network_combined_known_actual_bytes": 4044580251,
+    "network_combined_cap_bytes": 4327504144,
+    "old_compile600_CPU300_UNKNOWN": "separate retained reservations; not used as available final allocation",
+    "baseline_qualification_fit_actual_seconds": 753.3235160509715,
+    "baseline_controller_seconds": 742.8218211740023,
+    "new_native_namespace_expense_preserved_upper": 118.36078621,
+    "final_eval_controller_seconds": 3.2781983450986445,
+    "final_eval_guardian_nested_seconds": 3.0822706701001152,
+    "final_prep_collection_upper_seconds": 60,
+    "final_eval_all_attempt_upper_seconds": 63.278198345098644,
+    "learner3600_known_job_lower_after_eval": 756.6017143960702,
+    "learner3600_remaining_after_final_with_management_upper": 2783.3982856039297,
+    "legacy_GPU7200_UNKNOWN_legacy3586_remaining": "preserved separately; no reset/refund",
+    "samples_remaining": 8061480,
+    "baseline_sampled_family_peak_bytes": 2038513664,
+    "baseline_sampled_device_peak_bytes": 1998888960,
+    "final_family_limit_includes_controller": 4294967296,
+    "final_GPU_usage": 0,
+    "final_actual_peak": "NOT_RECORDED; guard enforced4GiB budget with controller reserve64MiB; no invented peak",
+    "shared_growth": "NOT_RECORDED/null; optional growthcode removed",
+    "root_fullstorage_result": "1e8a9464e33d3814124c50a49062529d10861df1ebccca2672b25379bd746829 WITHIN reused; no repeats",
+    "forecast_peak_bytes": 754305575,
+    "storage_cap_bytes": 805306368
+  },
+  "handoff": {
+    "source_paths": {
+      "scope": "owned crates/data, runner, python/training only; HEAD tree read without index refresh, current file Gitblob identity compared",
+      "changed": [
+        {
+          "path": "crates/quoridor-data/src/lib.rs",
+          "absolute_path": "/workspaces/quoridor/.worktree/learning-million/crates/quoridor-data/src/lib.rs",
+          "status": "modified",
+          "SHA256": "5cc55727b40fb1350f83518a5d6fe9ea5a532ad044ab6308253f8b99e6326ed1",
+          "bytes": 40136,
+          "HEAD_blob_SHA1": "c0c7f89c1a471f0b308e9d703d6a70538cf48974",
+          "current_blob_SHA1": "24475d75160bc1fbe0a5dde4732ef4911293c6c3"
+        },
+        {
+          "path": "crates/quoridor-data/tests/external_outcomes.rs",
+          "absolute_path": "/workspaces/quoridor/.worktree/learning-million/crates/quoridor-data/tests/external_outcomes.rs",
+          "status": "modified",
+          "SHA256": "46edf3cb88a8480147c6171b8d2756a5cc58ed7a3364854387f7da0c0354a820",
+          "bytes": 6406,
+          "HEAD_blob_SHA1": "ad461b35f4dfa88c7fe9481511804f2874c88364",
+          "current_blob_SHA1": "e80dcdc24f693ad988119dcbe0d5dd0d15869dcf"
+        },
+        {
+          "path": "crates/quoridor-runner/src/bin/nnue-diagnose.rs",
+          "absolute_path": "/workspaces/quoridor/.worktree/learning-million/crates/quoridor-runner/src/bin/nnue-diagnose.rs",
+          "status": "modified",
+          "SHA256": "2dd3619ee7d94f72bcf3cb484ea93fd16b6be818fd5d0cf476020fa3359aba12",
+          "bytes": 31297,
+          "HEAD_blob_SHA1": "2f7baba1d0328c986a3c6d7d5ca0c5e4e5497d90",
+          "current_blob_SHA1": "d47a37c8f16855e8642f503a0c26e501fcee7a05"
+        },
+        {
+          "path": "python/quoridor_training/README.md",
+          "absolute_path": "/workspaces/quoridor/.worktree/learning-million/python/quoridor_training/README.md",
+          "status": "modified",
+          "SHA256": "1e1d187409bf620a4ed7199cd97abdd6f8ca806eb999ca26b54616c37c47387f",
+          "bytes": 2602,
+          "HEAD_blob_SHA1": "80361eebeb702478bd31ece7fbfbe6e39242186b",
+          "current_blob_SHA1": "4e66c529d641a89af7d804e6f9dbeaa671b53ccf"
+        },
+        {
+          "path": "python/quoridor_training/cache.py",
+          "absolute_path": "/workspaces/quoridor/.worktree/learning-million/python/quoridor_training/cache.py",
+          "status": "modified",
+          "SHA256": "556141d0d7b796a10292290412b404df6b4a9343322c029e5f59b270f03d08f6",
+          "bytes": 20042,
+          "HEAD_blob_SHA1": "7addf4e0ea18681fbc4ce16e3fc2b1a9610aa5a0",
+          "current_blob_SHA1": "7401932e865625745b16f2374843dd5dd2b55c23"
+        },
+        {
+          "path": "python/quoridor_training/common.py",
+          "absolute_path": "/workspaces/quoridor/.worktree/learning-million/python/quoridor_training/common.py",
+          "status": "modified",
+          "SHA256": "276fc6df239a83d64ea526bc0990b45f4264617979d9c0b7355b2a9e36fa33f7",
+          "bytes": 12741,
+          "HEAD_blob_SHA1": "3e6fd13d0787b5b314c55ec91924fe692a7bf188",
+          "current_blob_SHA1": "5c8663690d657be158e3781e6222750b255a14f0"
+        },
+        {
+          "path": "python/quoridor_training/compact_cache.py",
+          "absolute_path": "/workspaces/quoridor/.worktree/learning-million/python/quoridor_training/compact_cache.py",
+          "status": "new",
+          "SHA256": "787aeea9c4998da3b58c7503696f90db1b48f68f91ab487c68f7a4fd18e26789",
+          "bytes": 7009,
+          "HEAD_blob_SHA1": null,
+          "current_blob_SHA1": "e6cb5ba9ba374d33f34b6d25673f34786eb2e5e3"
+        },
+        {
+          "path": "python/quoridor_training/cycle_process.py",
+          "absolute_path": "/workspaces/quoridor/.worktree/learning-million/python/quoridor_training/cycle_process.py",
+          "status": "modified",
+          "SHA256": "b7fb558aca0bc80ec26949f533a004497b7cb20f36d7bd9f346ac38f6a11e06c",
+          "bytes": 15079,
+          "HEAD_blob_SHA1": "5bbe6df266fbe129fa004a34b5c2490334d5c673",
+          "current_blob_SHA1": "917d66ee68339643ceb99613109e08154aaf18e2"
+        },
+        {
+          "path": "python/quoridor_training/plotting.py",
+          "absolute_path": "/workspaces/quoridor/.worktree/learning-million/python/quoridor_training/plotting.py",
+          "status": "modified",
+          "SHA256": "278dfc2854a8e6ad4c8dc41731933a2cacec4e61fb4ecb075d99d72010a613c9",
+          "bytes": 15935,
+          "HEAD_blob_SHA1": "e026dd4dadc9a566df9b2eeee04f15284922bcf8",
+          "current_blob_SHA1": "1cf904ea3c941d848541087695bdd602dcfea1a8"
+        },
+        {
+          "path": "python/quoridor_training/public_sigma.py",
+          "absolute_path": "/workspaces/quoridor/.worktree/learning-million/python/quoridor_training/public_sigma.py",
+          "status": "new",
+          "SHA256": "3b0b6fd19974e11012b63d6d5cc1bf390fd45c511ce69334897ea531f90482f1",
+          "bytes": 20381,
+          "HEAD_blob_SHA1": null,
+          "current_blob_SHA1": "4583fd98b6a7b206d3fb5a262c0e435388d9e2a6"
+        },
+        {
+          "path": "python/quoridor_training/qualification.py",
+          "absolute_path": "/workspaces/quoridor/.worktree/learning-million/python/quoridor_training/qualification.py",
+          "status": "new",
+          "SHA256": "ca2a8c8b875a2cb1edb85149702de0c1375437a0440c8f0a985d1e044ebfb7d7",
+          "bytes": 16347,
+          "HEAD_blob_SHA1": null,
+          "current_blob_SHA1": "f5d2236cf95f111c74f6039e28c605940f3743d8"
+        },
+        {
+          "path": "python/quoridor_training/test_cycle.py",
+          "absolute_path": "/workspaces/quoridor/.worktree/learning-million/python/quoridor_training/test_cycle.py",
+          "status": "modified",
+          "SHA256": "750b0555ffc63f37ac09f8959ae66386ef3a0ee4d5051326957ecd010d39f69a",
+          "bytes": 14465,
+          "HEAD_blob_SHA1": "4707c1992fbfcbab40d78a1ae51b799b7f56074b",
+          "current_blob_SHA1": "d391fc09b9ac0fc455ea05c5743cfd95c31e5a72"
+        },
+        {
+          "path": "python/quoridor_training/test_observation.py",
+          "absolute_path": "/workspaces/quoridor/.worktree/learning-million/python/quoridor_training/test_observation.py",
+          "status": "modified",
+          "SHA256": "1313d2480b8273a658affc0dd705c31ef4c8c7f4d6fc2573628b6403e3ee3189",
+          "bytes": 11645,
+          "HEAD_blob_SHA1": "0f1ce8cb8c6a9eec00211acd3e987c227a628c30",
+          "current_blob_SHA1": "ab12c198605903c8f217d387778a2ef07acae479"
+        },
+        {
+          "path": "python/quoridor_training/test_public_sigma.py",
+          "absolute_path": "/workspaces/quoridor/.worktree/learning-million/python/quoridor_training/test_public_sigma.py",
+          "status": "new",
+          "SHA256": "45dba53fc47d95dee6c4b0c671d742c144c7011cbf97069e9ade938003501cda",
+          "bytes": 7857,
+          "HEAD_blob_SHA1": null,
+          "current_blob_SHA1": "869eabd849764b6558f89604d875aef06c6eadf3"
+        },
+        {
+          "path": "python/quoridor_training/train.py",
+          "absolute_path": "/workspaces/quoridor/.worktree/learning-million/python/quoridor_training/train.py",
+          "status": "modified",
+          "SHA256": "a1c7934c17069131200d78cb53a83a209ce249ceb6988c762ec7952d354d9ee2",
+          "bytes": 60407,
+          "HEAD_blob_SHA1": "0524148d5f6731242be4cbeabe12c8ef3ae96d2a",
+          "current_blob_SHA1": "c024e8c23550d07f5abcac2b279e101eb1dc27c1"
+        }
+      ],
+      "old_diff_and_untracked_reads": "both3s capped sparseindex expansion warning/no completed list; preserved as metadata refusal, no retry of diff/status, no intentional index/ref/stage/commit operation",
+      "extra_source_changes": []
+    },
+    "source_STOP": true,
+    "science_process_STOP": true,
+    "remaining": [],
+    "no_next_numeric_job": true,
+    "main_source_index_ref_commit_writer": "Root only",
+    "rejected_optional_source": "growth-root inventory/poll guard/test removed; completed one-off native compile/numeric orchestration removed; old execution bytes retained only as provenance",
+    "retained_live_source": "compact producer/decoder/caller, bounded GPU guard, GPU supply qualification, plots, exact native qualification/NN0 transition test",
+    "no_extra_review_run": "independent v2 review reused; F1-F5 resolved; native/final actual proofs separate"
+  },
+  "limits": [
+    "Saved1m rows are not1m distinct inputs or independent games.",
+    "No unseen-game/strength/Elo/convergence/optimalLR or causal effect of new data quantity claim.",
+    "Finallabels opened once for frozen candidate evaluation; no reselection/refit/arena.",
+    "No new augmentation fit; next augmentation computation requires concrete allocation."
+  ]
+}

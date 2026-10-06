@@ -27,6 +27,20 @@ fn execute() -> Result<()> {
     let args: Vec<_> = std::env::args().skip(1).collect();
     let command = args.first().map(String::as_str).unwrap_or("help");
     match command {
+        "arena" if args.iter().any(|a| a == "--recover") => {
+            let output = PathBuf::from(argument(&args, "--recover")?);
+            println!(
+                "{}",
+                serde_json::to_string(&quoridor_runner::recover_arena(&output)?)?
+            );
+        }
+        "arena" if args.iter().any(|a| a == "--audit") => {
+            let output = PathBuf::from(argument(&args, "--audit")?);
+            println!(
+                "{}",
+                serde_json::to_string(&quoridor_runner::audit_arena(&output)?)?
+            );
+        }
         "selfplay" | "arena" => {
             let config: Config =
                 serde_json::from_reader(File::open(argument(&args, "--config")?)?)?;
@@ -169,7 +183,7 @@ fn execute() -> Result<()> {
     Ok(())
 }
 
-const HELP: &str = "quoridor-runner <selfplay|arena|benchmark|cycle> --config CONFIG\nquoridor-runner dataset <cache|inspect> --input PATH [--output PATH] [--allow-test]\nquoridor-runner dataset evaluate --input PATH --model MODEL --output PATH [--simd] [--allow-test]\nquoridor-runner model-check --model MODEL\nquoridor-runner qf1-bulk --input PREFIXES.json --output FEATURES.json\nSigma dataset import: use the separate sigma-import binary";
+const HELP: &str = "quoridor-runner <selfplay|arena|benchmark|cycle> --config CONFIG\nquoridor-runner arena --audit OUTPUT_DIRECTORY\nquoridor-runner arena --recover OUTPUT_DIRECTORY\nquoridor-runner dataset <cache|inspect> --input PATH [--output PATH] [--allow-test]\nquoridor-runner dataset evaluate --input PATH --model MODEL --output PATH [--simd] [--allow-test]\nquoridor-runner model-check --model MODEL\nquoridor-runner qf1-bulk --input PREFIXES.json --output FEATURES.json\nSigma dataset import: use the separate sigma-import binary";
 
 #[cfg(test)]
 mod tests {

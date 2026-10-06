@@ -1,0 +1,46 @@
+{
+  "run_id": "arena-functional-one-move",
+  "output": ".artifacts/arena/functional-one-move",
+  "games": 2,
+  "workers": 1,
+  "active_games": 1,
+  "opening_plies": 0,
+  "max_plies": 16,
+  "cpu_cores": [0],
+  "wall_seconds": 5,
+  "max_memory_bytes": 1073741824,
+  "max_output_bytes": 8388608,
+  "engines": [
+    { "kind": "distance", "depth": 1, "max_nodes": 1000, "time_ms": 100 },
+    { "kind": "distance", "depth": 1, "max_nodes": 1000, "time_ms": 100 }
+  ],
+  "arena": {
+    "comparison": "functional",
+    "clock_policy": "strict_unknown",
+    "return_reserve_ms": 5,
+    "tt_entries": 1024,
+    "bootstrap_seed": 320,
+    "bootstrap_resamples": 2000,
+    "evaluator_sha256": [],
+    "search_source_sha256": [],
+    "book": {
+      "id": "one-move-rulea-functional-v1",
+      "usage": "functional",
+      "frozen_before_candidate_results": true,
+      "independence": "One constructed terminal-near prefix; no statistical precision or chess-strength claim.",
+      "openings": [
+        {
+          "id": "p1-one-move-win",
+          "cohort": "tactical_diagnostic",
+          "lineage": "handwritten-rulea-goal-prefix",
+          "siblings": [],
+          "original_seed": null,
+          "reference": null,
+          "selection_reason": "Functional acceptance/color-swap fixture: P1 has exact one-move goal; selected without candidate results.",
+          "candidate_pool_size": 1,
+          "prefix": [13, 67, 22, 58, 31, 49, 40, 48, 49, 39, 58, 30, 67, 21]
+        }
+      ]
+    }
+  }
+}

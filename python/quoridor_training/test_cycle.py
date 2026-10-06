@@ -9,7 +9,7 @@ import sys
 import tempfile
 import time
 import unittest
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 from . import cycle_process as processes
 from .cycle import cycle
@@ -47,6 +47,54 @@ class CycleProcessTests(unittest.TestCase):
         self.assertTrue(record["cleanup_complete"])
         self.assertEqual(record["remaining"], [])
         self.assertFalse(processes.alive(record["child"]))
+
+    def test_gpu_guard_counts_existing_device_users_and_controller(self):
+        with (
+            patch.object(processes, "DeviceMemory") as device,
+            patch.object(processes, "available_memory", return_value=8192),
+            patch.object(processes, "process_info", return_value={"rss": 100}),
+        ):
+            device.return_value.used.return_value = 200
+            resources = processes.GPUResources(
+                {
+                    "host_ram_reserve": 0,
+                    "max_memory_bytes": 4096,
+                    "max_vram_bytes": 256,
+                    "controller_reserve_bytes": 64,
+                },
+                self.root,
+                time.monotonic() + 3,
+            )
+            resources.check([{"pid": 1}])
+            self.assertEqual(resources.observed["peak_family_RSS_bytes"], 264)
+            self.assertEqual(resources.observed["peak_whole_device_used_bytes"], 200)
+            resources.memory_limit = 263
+            with self.assertRaisesRegex(processes.CycleStopped, "controller reserve"):
+                resources.check([{"pid": 1}])
+            resources.memory_limit = 4096
+            device.return_value.used.return_value = 257
+            with self.assertRaisesRegex(processes.CycleStopped, "VRAM cap"):
+                resources.check()
+
+    def test_owned_size_ignores_vanished_temporaries_but_refuses_other_errors(self):
+        child = self.root / "nested"
+        child.mkdir()
+        (child / "data").write_bytes(b"data")
+        (self.root / "link").symlink_to(child, target_is_directory=True)
+        self.assertEqual(processes.directory_bytes(self.root), 4)
+        missing = MagicMock()
+        missing.stat.side_effect = FileNotFoundError("temporary removed")
+        scan = MagicMock()
+        scan.__enter__.return_value = iter([missing])
+        with patch.object(processes.os, "scandir", return_value=scan):
+            self.assertEqual(processes.directory_bytes(self.root), 0)
+        missing.stat.assert_called_once_with(follow_symlinks=False)
+        denied = MagicMock()
+        denied.stat.side_effect = PermissionError("unreadable")
+        scan.__enter__.return_value = iter([denied])
+        with patch.object(processes.os, "scandir", return_value=scan):
+            with self.assertRaises(PermissionError):
+                processes.directory_bytes(self.root)
 
     def test_normal_bounded_tail_and_failure(self):
         record = self.run_child("import sys; sys.stdout.write('x'*3000000+'last')")

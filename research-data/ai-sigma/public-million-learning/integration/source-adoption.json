@@ -1,0 +1,14 @@
+{
+  "worker_source_paths_verified": 15,
+  "Root_expected_deviations": [
+    "python/quoridor_training/cycle_process.py",
+    "python/quoridor_training/qualification.py",
+    "python/quoridor_training/test_cycle.py"
+  ],
+  "deviation_reason": "canonical GPU guard checks controller reserve in family RAM with NN0 mock test; same DeviceMemory implementation shared by supply qualification instead of duplicate. No training/inference mathematical changes.",
+  "frozen_executed_source_preserved": true,
+  "archive_members_restored_SHA": 26,
+  "archive_sha": "c4c7811ce6ad0e5ab3b5172e6a8bfe9fbbfa577f571660bf5ef4d27394a6f963",
+  "native_data_model_assets": "ignored existing SHA-bound assets retained outside Git",
+  "Root_no_new_forward": true
+}

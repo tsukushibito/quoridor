@@ -1,0 +1,23 @@
+{
+  "changes": {
+    "python/quoridor_training/cycle_process.py": {
+      "oldSHA": "519d52bbf261af3176a42036a55f06c74071f4ffe29e279bafea30b592e0db39",
+      "currentSHA": "b7fb558aca0bc80ec26949f533a004497b7cb20f36d7bd9f346ac38f6a11e06c",
+      "reason": "exclude optional sharedtarget growth guard; retain qualified GPU/CPU exact-child guardian",
+      "finalSHA": "b7fb558aca0bc80ec26949f533a004497b7cb20f36d7bd9f346ac38f6a11e06c"
+    },
+    "python/quoridor_training/qualification.py": {
+      "oldSHA": "2af86fa18e3b49192d477577a764d644edaf43860408bdbc710e85f360454a6f",
+      "currentSHA": "ca2a8c8b875a2cb1edb85149702de0c1375437a0440c8f0a985d1e044ebfb7d7",
+      "reason": "remove completed one-off native software completion entry",
+      "finalSHA": "ca2a8c8b875a2cb1edb85149702de0c1375437a0440c8f0a985d1e044ebfb7d7"
+    },
+    "python/quoridor_training/test_cycle.py": {
+      "reason": "remove only rejected optional-growth NN0 test",
+      "finalSHA": "750b0555ffc63f37ac09f8959ae66386ef3a0ee4d5051326957ecd010d39f69a"
+    }
+  },
+  "no_model_native_train_math_changes": true,
+  "retained_original_execution_bytes_for_uncommitted_scientific_provenance": true,
+  "growth_guard_import_to_main": false
+}

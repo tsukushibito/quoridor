@@ -3,7 +3,14 @@ name = "quoridor-training"
 version = "0.1.0"
 description = "Quoridor model training and export environment"
 requires-python = ">=3.11"
-dependencies = ["torch", "numpy", "onnx", "onnxruntime", "onnxscript"]
+dependencies = [
+  "torch",
+  "numpy",
+  "onnx",
+  "onnxruntime",
+  "onnxscript",
+  "matplotlib==3.11.2",
+]
 
 [tool.uv]
 package = false

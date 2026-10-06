@@ -182,6 +182,12 @@ pub struct Outcome {
     pub terminal_no_nn: u64,
     #[serde(default)]
     pub allocated_nodes_peak: usize,
+    #[serde(default)]
+    pub started: bool,
+    #[serde(default)]
+    pub failure: Option<crate::arena_clock::Failure>,
+    #[serde(default)]
+    pub observations: Vec<crate::arena_clock::MoveObservation>,
 }
 #[derive(Debug, Serialize, Deserialize)]
 pub struct RunReport {
@@ -204,10 +210,13 @@ pub struct RunReport {
     pub all_workers_joined: bool,
     #[serde(default)]
     pub pump: PumpProfile,
+    #[serde(default)]
+    pub arena_summary: Option<crate::arena_statistics::Summary>,
 }
 /// Inclusive spans; queue/CPU/backend phases overlap and are not summed as exclusive wall.
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct PumpProfile {
+    pub evaluator_initialization_seconds: f64,
     pub backend_initialization_seconds: f64,
     pub backend_cleanup_seconds: f64,
     pub queue_wait_seconds_sum: f64,
@@ -272,6 +281,12 @@ struct Game {
     advance_calls: u64,
     terminal_no_nn: u64,
     allocated_nodes_peak: usize,
+    origin: Instant,
+    observations: Vec<crate::arena_clock::MoveObservation>,
+    failure: Option<crate::arena_clock::Failure>,
+    forfeit_winner: Option<u8>,
+    record_teacher: bool,
+    move_started: Option<Instant>,
 }
 #[derive(Clone)]
 pub struct Rng(u64);
@@ -457,7 +472,9 @@ fn planned(config: &Config) -> Result<Vec<Planned>> {
         } else {
             id
         };
-        let prefix = if !config.openings.is_empty() {
+        let prefix = if let Some(arena) = &config.arena {
+            arena.book.openings[family_id].prefix.clone()
+        } else if !config.openings.is_empty() {
             config.openings[family_id % config.openings.len()].clone()
         } else {
             let mut c = SigmaContext::from_prefix(&[]).map_err(|e| format!("{e:?}"))?;
@@ -526,6 +543,7 @@ fn guard(config: &Config, start: Instant, limit: u64) -> Option<String> {
     }
 }
 fn unknown(p: &Planned, reason: String) -> Outcome {
+    let failure = crate::arena_clock::failure_from_reason(&reason);
     Outcome {
         game: p.id,
         family: p.family.clone(),
@@ -533,13 +551,16 @@ fn unknown(p: &Planned, reason: String) -> Outcome {
         status: "unknown".into(),
         winner: None,
         plies: 0,
-        reason: Some(reason),
+        reason: Some(reason.chars().take(1024).collect()),
         nn_calls: 0,
         moves: p.opening.clone(),
         persistent_tt: Vec::new(),
         advance_calls: 0,
         terminal_no_nn: 0,
         allocated_nodes_peak: 0,
+        started: false,
+        failure: Some(failure),
+        observations: Vec::new(),
     }
 }
 fn finish(mut game: Game, status: &str, reason: Option<String>) -> (Outcome, Vec<TeacherRow>) {
@@ -550,14 +571,25 @@ fn finish(mut game: Game, status: &str, reason: Option<String>) -> (Outcome, Vec
     }
     let value = game.context.terminal_value();
     let turn = game.context.position().turn;
-    let winner = value.and_then(|v| {
-        if v == 0.0 {
-            None
-        } else if v > 0.0 {
-            Some(turn)
-        } else {
-            Some(1 - turn)
-        }
+    let winner = game.forfeit_winner.or_else(|| {
+        value.and_then(|v| {
+            if v == 0.0 {
+                None
+            } else if v > 0.0 {
+                Some(turn)
+            } else {
+                Some(1 - turn)
+            }
+        })
+    });
+    let failure = game.failure.or_else(|| {
+        (status == "unknown")
+            .then(|| {
+                reason
+                    .as_deref()
+                    .map(crate::arena_clock::failure_from_reason)
+            })
+            .flatten()
     });
     let mut rows = game.rows;
     if status != "unknown" {
@@ -587,13 +619,16 @@ fn finish(mut game: Game, status: &str, reason: Option<String>) -> (Outcome, Vec
             status: status.into(),
             winner,
             plies: game.context.total_ply(),
-            reason,
+            reason: reason.map(|s| s.chars().take(1024).collect()),
             nn_calls: game.nn,
             moves: game.prefix,
             persistent_tt: game.tt_profiles,
             advance_calls: game.advance_calls,
             terminal_no_nn: game.terminal_no_nn,
             allocated_nodes_peak: game.allocated_nodes_peak,
+            started: true,
+            failure,
+            observations: game.observations,
         },
         rows,
     )
@@ -623,21 +658,74 @@ fn choose(
     }
     fallback
 }
-fn play_completed(game: &mut Game, action: u16, teacher: Teacher, model_sha: &str) -> Result<()> {
-    let row = TeacherRow::from_context(
-        format!("game-{}-ply-{}", game.planned.id, game.context.total_ply()),
-        format!("game-{}", game.planned.id),
-        game.planned.family.clone(),
-        game.planned.split.clone(),
-        game.prefix.clone(),
-        &game.context,
-        Some(action),
-        teacher,
-        model_sha.into(),
-    )?;
-    game.context = game.context.play(action).map_err(|e| format!("{e:?}"))?;
+fn play_completed(
+    game: &mut Game,
+    action: u16,
+    teacher: Teacher,
+    model_sha: &str,
+    config: &Config,
+    cancel: &AtomicBool,
+    run_start: Instant,
+) -> Result<()> {
+    let row = if game.record_teacher {
+        Some(TeacherRow::from_context(
+            format!("game-{}-ply-{}", game.planned.id, game.context.total_ply()),
+            format!("game-{}", game.planned.id),
+            game.planned.family.clone(),
+            game.planned.split.clone(),
+            game.prefix.clone(),
+            &game.context,
+            Some(action),
+            teacher,
+            model_sha.into(),
+        )?)
+    } else {
+        None
+    };
+    let next = game.context.play(action).map_err(|e| format!("{e:?}"))?;
+    if let Some(o) = game.observations.last_mut() {
+        let policy = config
+            .arena
+            .as_ref()
+            .map_or(crate::arena::ClockPolicy::Observe, |a| a.clock_policy);
+        let stopped = guard(config, run_start, u64::MAX);
+        let now = Instant::now();
+        let ns = now
+            .duration_since(game.origin)
+            .as_nanos()
+            .min(u64::MAX as u128) as u64;
+        let decision = if let Some(reason) = stopped {
+            Err(crate::arena_clock::failure_from_reason(&reason))
+        } else {
+            crate::arena_clock::acceptance(
+                policy,
+                o.deadline_ns,
+                ns,
+                cancel.load(Ordering::Relaxed),
+                true,
+                true,
+            )
+        };
+        o.admission_checked_ns = ns;
+        o.caller_seconds = ns.saturating_sub(o.caller_started_ns) as f64 / 1e9;
+        o.accepted = decision.is_ok();
+        o.accepted_ns = decision.is_ok().then_some(ns);
+        if let Err(f) = decision {
+            o.failure = Some(f);
+            game.failure = Some(f);
+            if policy == crate::arena::ClockPolicy::StrictForfeit
+                && crate::arena_clock::forfeitable(f)
+            {
+                game.forfeit_winner = Some(1 - game.context.position().turn);
+            }
+            return Err(format!("move_rejected:{f:?}").into());
+        }
+    }
+    game.context = next;
     game.prefix.push(action);
-    game.rows.push(row);
+    if let Some(row) = row {
+        game.rows.push(row);
+    }
     if let Some(search) = &game.search {
         game.terminal_no_nn += u64::from(search.snapshot().terminal_no_nn);
     }
@@ -645,6 +733,7 @@ fn play_completed(game: &mut Game, action: u16, teacher: Teacher, model_sha: &st
     game.search = None;
     game.pending = None;
     game.root_nn = None;
+    game.move_started = None;
     Ok(())
 }
 fn worker(
@@ -653,6 +742,8 @@ fn worker(
     events: SyncSender<Event>,
     cancel: Arc<AtomicBool>,
     evaluators: Vec<InitializedEvaluator>,
+    record_teacher: bool,
+    run_start: Instant,
 ) {
     let (reply_tx, reply_rx) = mpsc::channel::<Response>();
     let mut waiting = VecDeque::from(plans);
@@ -687,6 +778,12 @@ fn worker(
                         advance_calls: 0,
                         terminal_no_nn: 0,
                         allocated_nodes_peak: 0,
+                        origin: Instant::now(),
+                        observations: Vec::new(),
+                        failure: None,
+                        forfeit_winner: None,
+                        record_teacher,
+                        move_started: None,
                     })
                 }
                 Err(e) => {
@@ -749,7 +846,14 @@ fn worker(
                 } else {
                     "goal"
                 };
-                let (o, r) = finish(g, status, None);
+                let reason = if g.context.position().winner.is_some() {
+                    "goal"
+                } else if g.context.total_ply() >= 200 {
+                    "rule_ply_200_draw"
+                } else {
+                    "rule_no_legal_move_draw"
+                };
+                let (o, r) = finish(g, status, Some(reason.into()));
                 let _ = events.send(Event::Finished(o, r));
                 progressed = true;
                 continue;
@@ -769,12 +873,13 @@ fn worker(
             let engine_index = if config.engines.len() == 1 {
                 0
             } else {
-                if turn == g.planned.id % 2 { 0 } else { 1 }
+                crate::arena::engine_index(turn as u8, (g.planned.id % 2) as u8)
             };
             let e = &config.engines[engine_index];
             let mut failure = None;
             if e.kind == "mcts" {
                 if g.search.is_none() {
+                    g.move_started = Some(Instant::now());
                     match Search::with_limits(
                         g.context.clone(),
                         g.generation,
@@ -819,6 +924,23 @@ fn worker(
                             if let Some(action) =
                                 choose(&s.edges, s.action, config.temperature, &mut g.rng)
                             {
+                                if !g.record_teacher {
+                                    let started = g.move_started.unwrap();
+                                    let ns = |t: Instant| {
+                                        t.duration_since(g.origin).as_nanos().min(u64::MAX as u128)
+                                            as u64
+                                    };
+                                    let returned = Instant::now();
+                                    g.observations.push(crate::arena_clock::MoveObservation {
+                                        ply:g.context.total_ply(),side:turn as u8,engine_index,action:Some(action),
+                                        accepted:false,failure:None,caller_started_ns:ns(started),deadline_ns:None,
+                                        returned_ns:ns(returned),admission_checked_ns:ns(returned),accepted_ns:None,
+                                        caller_seconds:started.elapsed().as_secs_f64(),thinking_seconds:None,
+                                        last_completed_iteration_ns:None,stop:Some("fixed_k".into()),completed_depth:None,value_stm:None,pv:Vec::new(),
+                                        counters:serde_json::json!({"nn_calls_logical":s.nn_calls,"allocated_nodes":s.nodes,"root_visits":s.root_visits,
+                                            "root_mean_stm":s.root_mean,"root_nn_stm":g.root_nn,"selected_child_q":null}),
+                                    });
+                                }
                                 let teacher = Teacher::Mcts {
                                     root_mean: s.root_mean as f32,
                                     root_nn: g.root_nn,
@@ -839,6 +961,9 @@ fn worker(
                                     action,
                                     teacher,
                                     &evaluators[engine_index].identity.row_identity,
+                                    &config,
+                                    &cancel,
+                                    run_start,
                                 ) {
                                     failure = Some(error.to_string())
                                 }
@@ -855,8 +980,12 @@ fn worker(
                 let limits = SearchLimits {
                     max_depth: e.depth,
                     max_nodes: e.max_nodes,
-                    time_limit: e.time_ms.map(Duration::from_millis),
-                    tt_entries: 65536,
+                    time_limit: e.time_ms.map(|ms| {
+                        Duration::from_millis(ms.saturating_sub(
+                            config.arena.as_ref().map_or(0, |a| a.return_reserve_ms),
+                        ))
+                    }),
+                    tt_entries: config.arena.as_ref().map_or(65536, |a| a.tt_entries),
                     use_pvs: true,
                     use_tt: true,
                 };
@@ -868,7 +997,7 @@ fn worker(
                     rules: "Sigma-RuleA-full-history-terminal-ply-v1".into(),
                     selectivity: "fullwidth-PVS-MPC-OFF-v1".into(),
                 };
-                match invoke_alpha(
+                let search_result = invoke_alpha(
                     &mut g.alpha_sessions[engine_index],
                     &mut g.tt_profiles[engine_index],
                     evaluators[engine_index].evaluator.as_ref().unwrap().clone(),
@@ -878,9 +1007,85 @@ fn worker(
                     &cancel,
                     caller_start,
                     alphabeta::SearchSession::new,
-                ) {
+                );
+                if !g.record_teacher {
+                    let returned = Instant::now();
+                    let origin = g.origin;
+                    let ns = |t: Instant| {
+                        t.duration_since(origin).as_nanos().min(u64::MAX as u128) as u64
+                    };
+                    let action = search_result.as_ref().ok().and_then(|r| r.action);
+                    // Validate against full history before the acceptance timestamp.
+                    let legal = action.is_some_and(|a| g.context.play(a).is_ok());
+                    let checked = Instant::now();
+                    let deadline = e
+                        .time_ms
+                        .and_then(|ms| ns(caller_start).checked_add(ms.saturating_mul(1_000_000)));
+                    let policy = config
+                        .arena
+                        .as_ref()
+                        .map_or(crate::arena::ClockPolicy::Observe, |a| a.clock_policy);
+                    let completed = search_result
+                        .as_ref()
+                        .is_ok_and(|r| r.completed_depth > 0 && r.value.is_some());
+                    let cancelled = cancel.load(Ordering::Relaxed)
+                        || config.pause_file.as_ref().is_some_and(|p| p.exists());
+                    let mut decision = crate::arena_clock::acceptance(
+                        policy,
+                        deadline,
+                        ns(checked),
+                        cancelled,
+                        legal,
+                        completed,
+                    );
+                    if !cancelled
+                        && search_result.is_err()
+                        && decision != Err(crate::arena_clock::Failure::TimeOverrun)
+                    {
+                        decision = Err(crate::arena_clock::Failure::EngineError);
+                    }
+                    // The run deadline is independent of each move clock.
+                    if config.deadline_unix_ms > 0 && unix_ms() >= config.deadline_unix_ms {
+                        decision = Err(crate::arena_clock::Failure::Deadline);
+                    }
+                    let r = search_result.as_ref().ok();
+                    g.observations.push(crate::arena_clock::MoveObservation {
+                        ply: g.context.total_ply(),
+                        side: turn as u8,
+                        engine_index,
+                        action,
+                        accepted: false,
+                        failure: decision.err(),
+                        caller_started_ns: ns(caller_start),
+                        deadline_ns: deadline,
+                        returned_ns: ns(returned),
+                        admission_checked_ns: ns(checked),
+                        accepted_ns: None,
+                        caller_seconds: checked.duration_since(caller_start).as_secs_f64(),
+                        thinking_seconds: r.map(|r| r.elapsed.as_secs_f64()),
+                        last_completed_iteration_ns: None,
+                        stop: r.map(|r| crate::arena_clock::stop_name(r.stop).into()),
+                        completed_depth: r.map(|r| r.completed_depth),
+                        value_stm: r.and_then(|r| r.value),
+                        pv: r.map_or_else(Vec::new, |r| r.pv.clone()),
+                        counters: r
+                            .map_or(serde_json::Value::Null, crate::arena_clock::alpha_counters),
+                    });
+                    if let Err(f) = decision {
+                        g.failure = Some(f);
+                        if policy == crate::arena::ClockPolicy::StrictForfeit
+                            && crate::arena_clock::forfeitable(f)
+                        {
+                            g.forfeit_winner = Some(1 - turn as u8);
+                        }
+                        failure = Some(format!("move_rejected:{f:?}"));
+                    }
+                }
+                match search_result {
                     Ok(result) => {
-                        if let (Some(action), Some(value)) = (result.action, result.value) {
+                        if failure.is_some() {
+                            // Preserve the rejected result as evidence without applying it.
+                        } else if let (Some(action), Some(value)) = (result.action, result.value) {
                             if let Err(error) = play_completed(
                                 g,
                                 action,
@@ -892,6 +1097,9 @@ fn worker(
                                     pv: result.pv.clone(),
                                 },
                                 &evaluators[engine_index].identity.row_identity,
+                                &config,
+                                &cancel,
+                                run_start,
                             ) {
                                 failure = Some(error.to_string())
                             }
@@ -906,8 +1114,16 @@ fn worker(
                 progressed = true;
             }
             if let Some(reason) = failure {
+                if g.failure.is_none() {
+                    g.failure = Some(crate::arena_clock::Failure::EngineError);
+                }
                 let g = games.swap_remove(index);
-                let (o, r) = finish(g, "unknown", Some(reason));
+                let status = if g.forfeit_winner.is_some() {
+                    "forfeit"
+                } else {
+                    "unknown"
+                };
+                let (o, r) = finish(g, status, Some(reason));
                 let _ = events.send(Event::Finished(o, r));
             } else {
                 index += 1;
@@ -935,6 +1151,23 @@ fn run_inner(
     if mode == "arena" && (config.engines.len() != 2 || !config.games.is_multiple_of(2)) {
         return Err("arena requires two engines and paired even games".into());
     }
+    if config.arena.is_some() && mode != "arena" {
+        return Err("arena contract belongs to the arena command".into());
+    }
+    let plans = planned(config)?;
+    let arena_slots = if mode == "arena" {
+        let slots = crate::arena_manifest::slots(
+            config,
+            &plans
+                .iter()
+                .map(|p| (p.id, p.family.clone(), p.opening.clone()))
+                .collect::<Vec<_>>(),
+        )?;
+        crate::arena_manifest::preflight(config, &slots)?;
+        Some(slots)
+    } else {
+        None
+    };
     let _affinity = crate::resources::AffinityGuard::capture()?;
     let start = Instant::now();
     let admission = if let Some(core) = config.inference_cpu_core {
@@ -970,12 +1203,20 @@ fn run_inner(
             .open(config.output.join("config.json"))?,
         config,
     )?;
-    let plans = planned(config)?;
-    serde_json::to_writer_pretty(OpenOptions::new().create_new(true).write(true).open(config.output.join("planned.json"))?,&plans.iter().map(|p|serde_json::json!({"game":p.id,"family":p.family,"split":p.split,"opening":p.opening})).collect::<Vec<_>>())?;
-    let mut dataset_writer = Some(quoridor_data::DatasetWriter::new(
-        &config.output.join("dataset"),
-        true,
-    )?);
+    if let Some(slots) = &arena_slots {
+        crate::arena_manifest::write(config, "planned.json", slots)?;
+        crate::arena_manifest::begin(config, slots, &admission)?;
+    } else {
+        serde_json::to_writer_pretty(OpenOptions::new().create_new(true).write(true).open(config.output.join("planned.json"))?,&plans.iter().map(|p|serde_json::json!({"game":p.id,"family":p.family,"split":p.split,"opening":p.opening})).collect::<Vec<_>>())?;
+    }
+    let mut dataset_writer = if mode == "arena" {
+        None
+    } else {
+        Some(quoridor_data::DatasetWriter::new(
+            &config.output.join("dataset"),
+            true,
+        )?)
+    };
     serde_json::to_writer_pretty(
         OpenOptions::new()
             .create_new(true)
@@ -983,6 +1224,7 @@ fn run_inner(
             .open(config.output.join("admission.json"))?,
         &admission,
     )?;
+    let evaluator_start = Instant::now();
     let evaluators: Vec<_> = config
         .engines
         .iter()
@@ -995,7 +1237,20 @@ fn run_inner(
             .open(config.output.join("evaluator-identities.json"))?,
         &evaluators.iter().map(|e| &e.identity).collect::<Vec<_>>(),
     )?;
-    let mut pump = PumpProfile::default();
+    let mut pump = PumpProfile {
+        evaluator_initialization_seconds: evaluator_start.elapsed().as_secs_f64(),
+        ..PumpProfile::default()
+    };
+    if let Some(a) = &config.arena {
+        crate::arena::validate_loaded_bindings(
+            a,
+            &evaluators
+                .iter()
+                .map(|e| e.identity.content_sha256.clone())
+                .collect::<Vec<_>>(),
+            &crate::arena_manifest::search_source_sha256(),
+        )?;
+    }
     let backend_start = Instant::now();
     let mut backend = if let Some(backend) = provided {
         if config
@@ -1025,6 +1280,7 @@ fn run_inner(
             .max(8),
     );
     let mut handles = Vec::new();
+    let mode_is_selfplay = mode == "selfplay";
     for w in 0..workers {
         let p = plans
             .iter()
@@ -1040,7 +1296,7 @@ fn run_inner(
             if crate::resources::pin(core).is_err() {
                 c.store(true, Ordering::Relaxed);
             }
-            worker(a, p, tx, c, e)
+            worker(a, p, tx, c, e, mode_is_selfplay, start)
         }));
     }
     drop(tx);
@@ -1072,6 +1328,12 @@ fn run_inner(
             }
             Ok(Event::Finished(o, r)) => {
                 let record_start = Instant::now();
+                if mode == "arena"
+                    && let Err(e) = crate::arena_manifest::journal(config, &o)
+                {
+                    stopped = Some(format!("output_journal:{e}"));
+                    cancel.store(true, Ordering::Relaxed);
+                }
                 record_completion(&mut pump, &o, r.len(), start);
                 if !r.is_empty() {
                     if o.status != "unknown" {
@@ -1119,6 +1381,12 @@ fn run_inner(
                 }
                 Event::Finished(o, r) => {
                     let record_start = Instant::now();
+                    if mode == "arena"
+                        && let Err(e) = crate::arena_manifest::journal(config, &o)
+                    {
+                        stopped = Some(format!("output_journal:{e}"));
+                        cancel.store(true, Ordering::Relaxed);
+                    }
                     record_completion(&mut pump, &o, r.len(), start);
                     if !r.is_empty() {
                         if o.status != "unknown" {
@@ -1244,6 +1512,20 @@ fn run_inner(
         }
     }
     outcomes.sort_by_key(|o| o.game);
+    if let Some(reason) = &stopped {
+        let cause = crate::arena_clock::failure_from_reason(reason);
+        for o in &mut outcomes {
+            if matches!(
+                o.failure,
+                Some(
+                    crate::arena_clock::Failure::Cancelled
+                        | crate::arena_clock::Failure::NotStarted
+                )
+            ) {
+                o.failure = Some(cause);
+            }
+        }
+    }
     if let Some(b) = backend.as_ref() {
         pump.backend_warmup_nn = b.counters().warm_rows;
         pump.backend_work = Some(inference_work(b.counters()));
@@ -1264,33 +1546,26 @@ fn run_inner(
         }
     }
     pump.finalization_seconds = finalize_start.elapsed().as_secs_f64();
-    let score = if mode == "arena" {
-        let valid: Vec<_> = outcomes.iter().filter(|o| o.status != "unknown").collect();
-        if valid.is_empty() {
-            None
-        } else {
-            Some(
-                valid
-                    .iter()
-                    .map(|o| match o.winner {
-                        None => 0.5,
-                        Some(w) => {
-                            if w == o.candidate_color {
-                                1.0
-                            } else {
-                                0.0
-                            }
-                        }
-                    })
-                    .sum::<f64>()
-                    / valid.len() as f64,
+    let arena_summary = arena_slots
+        .as_ref()
+        .map(|slots| {
+            let a = config.arena.as_ref();
+            crate::arena_statistics::summarize(
+                slots,
+                &outcomes,
+                a.map_or(config.seed, |a| a.bootstrap_seed),
+                a.map_or(2000, |a| a.bootstrap_resamples),
             )
-        }
-    } else {
-        None
-    };
+        })
+        .transpose()?;
+    let score = arena_summary.as_ref().and_then(|s| s.complete_pair_mean);
     let report = RunReport {
-        schema: "quoridor-run-v1".into(),
+        schema: if mode == "arena" {
+            crate::arena::SCHEMA
+        } else {
+            "quoridor-run-v1"
+        }
+        .into(),
         run_id: config.run_id.clone(),
         planned: config.games,
         outcomes,
@@ -1308,14 +1583,22 @@ fn run_inner(
         process_id: std::process::id(),
         all_workers_joined: joined,
         pump,
+        arena_summary,
     };
-    serde_json::to_writer_pretty(
-        OpenOptions::new()
-            .create_new(true)
-            .write(true)
-            .open(config.output.join("result.json"))?,
-        &report,
-    )?;
+    if arena_slots.is_some() {
+        crate::arena_manifest::write(config, "result.json", &report)?;
+    } else {
+        serde_json::to_writer_pretty(
+            OpenOptions::new()
+                .create_new(true)
+                .write(true)
+                .open(config.output.join("result.json"))?,
+            &report,
+        )?;
+    }
+    if arena_slots.is_some() {
+        crate::arena_manifest::finish(config, &report)?;
+    }
     let bytes = dir_bytes(&config.output)?;
     if bytes > config.max_output_bytes {
         return Err(format!(
@@ -1389,25 +1672,40 @@ fn run_owned(
         && config.output.is_dir()
         && !config.output.join("result.json").exists()
     {
-        let outcomes = (0..config.games)
-            .map(|id| Outcome {
-                game: id,
-                family: format!("{}-unstarted-{id}", config.run_id),
-                candidate_color: (id % 2) as u8,
-                status: "unknown".into(),
-                winner: None,
-                plies: 0,
-                reason: Some(format!("initialization:{error}")),
-                nn_calls: 0,
-                moves: Vec::new(),
-                persistent_tt: Vec::new(),
-                advance_calls: 0,
-                terminal_no_nn: 0,
-                allocated_nodes_peak: 0,
-            })
+        let plans = planned(config).unwrap_or_default();
+        let outcomes = plans
+            .iter()
+            .map(|p| unknown(p, format!("initialization:{error}")))
             .collect::<Vec<_>>();
+        let arena_summary = if mode == "arena" {
+            fs::read(config.output.join("planned.json"))
+                .ok()
+                .and_then(|b| serde_json::from_slice::<Vec<crate::arena_statistics::Slot>>(&b).ok())
+                .and_then(|slots| {
+                    crate::arena_statistics::summarize(
+                        &slots,
+                        &outcomes,
+                        config
+                            .arena
+                            .as_ref()
+                            .map_or(config.seed, |a| a.bootstrap_seed),
+                        config
+                            .arena
+                            .as_ref()
+                            .map_or(2000, |a| a.bootstrap_resamples),
+                    )
+                    .ok()
+                })
+        } else {
+            None
+        };
         let report = RunReport {
-            schema: "quoridor-run-v1".into(),
+            schema: if mode == "arena" {
+                crate::arena::SCHEMA
+            } else {
+                "quoridor-run-v1"
+            }
+            .into(),
             run_id: config.run_id.clone(),
             planned: config.games,
             outcomes,
@@ -1425,6 +1723,7 @@ fn run_owned(
             process_id: std::process::id(),
             all_workers_joined: true,
             pump: PumpProfile::default(),
+            arena_summary,
         };
         if let Ok(file) = OpenOptions::new()
             .create_new(true)
@@ -1432,6 +1731,9 @@ fn run_owned(
             .open(config.output.join("result.json"))
         {
             let _ = serde_json::to_writer_pretty(file, &report);
+        }
+        if mode == "arena" && config.output.join("manifest-start.json").exists() {
+            let _ = crate::arena_manifest::finish(config, &report);
         }
     }
     result
@@ -1879,7 +2181,9 @@ mod tests {
         let cancel = Arc::new(AtomicBool::new(false));
         let c = cancel.clone();
         let loaded = evaluator(&cfg.engines[0], &cfg).unwrap();
-        let thread = thread::spawn(move || worker(cfg, vec![plan()], tx, c, vec![loaded]));
+        let thread = thread::spawn(move || {
+            worker(cfg, vec![plan()], tx, c, vec![loaded], true, Instant::now())
+        });
         let r = match rx.recv_timeout(Duration::from_secs(2)).unwrap() {
             Event::Request(r) => r,
             _ => panic!("request expected"),
@@ -1919,7 +2223,17 @@ mod tests {
         let (tx, rx) = mpsc::sync_channel(4);
         let cancel = Arc::new(AtomicBool::new(false));
         let loaded = evaluator(&cfg.engines[0], &cfg).unwrap();
-        let thread = thread::spawn(move || worker(cfg, vec![plan()], tx, cancel, vec![loaded]));
+        let thread = thread::spawn(move || {
+            worker(
+                cfg,
+                vec![plan()],
+                tx,
+                cancel,
+                vec![loaded],
+                true,
+                Instant::now(),
+            )
+        });
         let mut calls = 0;
         let mut ended = false;
         loop {
@@ -1962,7 +2276,9 @@ mod tests {
         let cancel = Arc::new(AtomicBool::new(false));
         let c = cancel.clone();
         let loaded = evaluator(&cfg.engines[0], &cfg).unwrap();
-        let thread = thread::spawn(move || worker(cfg, vec![plan()], tx, c, vec![loaded]));
+        let thread = thread::spawn(move || {
+            worker(cfg, vec![plan()], tx, c, vec![loaded], true, Instant::now())
+        });
         let pending = match rx.recv_timeout(Duration::from_secs(2)).unwrap() {
             Event::Request(r) => r,
             _ => panic!("request"),

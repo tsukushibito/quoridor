@@ -113,6 +113,8 @@ pub struct Config {
     pub mcts_max_bytes: usize,
     #[serde(default)]
     pub cycle: Option<Cycle>,
+    #[serde(default)]
+    pub arena: Option<crate::arena::ArenaConfig>,
 }
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -236,6 +238,9 @@ impl Config {
             return Err("MCTS needs an explicit inference backend".into());
         }
         self.split_counts()?;
+        if let Some(arena) = &self.arena {
+            arena.validate(self)?;
+        }
         if self.deadline_unix_ms > 0 && unix_ms() >= self.deadline_unix_ms {
             return Err("execution deadline expired".into());
         }

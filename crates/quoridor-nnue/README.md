@@ -54,3 +54,12 @@ or replace `synthetic` with a frozen float manifest. It reports warm scalar, SIM
 and quantized evaluation and pawn-delta-plus-evaluation costs. This excludes root
 feature preparation, build, initialization, game orchestration and training, so
 it must not be reported as a teacher-generation speedup.
+
+The user-approved memory principle is to avoid fresh temporary heap allocations in
+repeated evaluation/search. Small bounded buffers can use the stack; variable or
+large scratch belongs to model/session/worker setup and is reused with explicit
+ownership. Weights, large TT and other long-lived stores can remain heap allocated.
+Keep scalar operation order, validated topology support and exact parent/history
+restoration. Do not use unsafe uninitialized reads or oversized buffers in every
+recursive frame. This principle does not establish a speed, fragmentation or
+latency benefit; those require measurement.

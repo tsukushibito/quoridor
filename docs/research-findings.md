@@ -65,6 +65,8 @@ original-only v2の復旧job `2c121563-6813-4226-a9e5-716c860cc9ba` は08:55:38 
 
 original-only基準GPU fitは10:30:37 UTCに自然STOP/exit0/cleanup/remaining空・子回収。T100万保存行（366,638モデル入力distinct）を20epoch/156,260更新/2,000万seenまで学習し、fit/eval計51,878,032forward、whole742.821821秒だった。Rootは保存229点と実PNGを確認し、validation5万行のrowMSEは初期.856605583→末期.526443771、末期のfull-train MSE .517122594。記録最良は末期20epochで、今回の範囲では以前の小subsetの明確な末期退行を観測しない。収束・純粋な量の因果・独立game汎化・同時間棋力は未認定。許可されたcompile併走費を速度比較に使わず、trained native資格とfreeze/release後の一巡評価は別の受入れ条件として残す。[保存結果のRoot読取点](../research-data/ai-sigma/public-million-learning/baseline-fit-observed.json)。
 
+凍結後の公開original-only保留5万行をBEST一候補/D/訓練由来定数だけで一巡し、row MSEは.529793889/.860192179/1.000029818、BEST符号正解率.80374だった。model入力distinct32,143、既知train入力35,887行MSE.514865732、未知入力14,113行.567753698。追加forwardなしの保存値集計であり、公開入力群を独立gameへ昇格せず、過去露出/historyはUNKNOWNとする。test開封後の再選定・再fitなし。この保留観測上の予測誤差改善を支持し、対局・同時間棋力は未測定。[最終評価・停止証拠と統合報告](../research-data/ai-sigma/public-million-learning/integration/report.md)。
+
 同じ凍結BESTの追加native資格は19局面・16子局面/取り消しでScalar/Simd FT・差分更新・親accumulator/history/ply復帰がPASS、CPUとの最大差3.13e-7。残差headはScalarのまま。工程全体は期限終了で失敗し、数値段の親directwaitは未記録だが、native子のdirectwait成功、guardian回収・remaining空と記録した科学PID不在を確認した。Rootは停止版53sourceとprivate ELFをSHA照合し、この限定数値証拠と停止を既評価高速化の引渡し条件として受け入れた。工程全体の成功・速度・棋力を認定せず、再資格やsealed評価を探索着手の追加条件にしない。容量は完成済みRoot結果と既予約を共有し、短い検証の起動前/実行中に共有Cargo cache全体を反復走査する任意ガードを外した。[限定受入れと実配送](../research-data/ai-sigma/search-optimization/learning-native-handoff-accepted.json)。
 
 続く同算術のinline入力バッファ候補は、固定BESTの独立oracleと8plain runで数値/探索結果が一致した。4組AB/BA合計のwhole-process時間比1.009769、target時間比1.026430で探索全体の利益は未支持。推論micro比.961114を全体の利益へ外挿せず、Rootは不採用を受け入れ、main評価器を変更しない。実行bitの初回起動拒否を保存し、2job完了後の追加測定は開始しない。Rootは保存値から時間比を再計算し、80member archiveの復元SHAを照合した。[結果と受入れ](../research-data/ai-sigma/search-optimization/evaluation-result/report.md)。
@@ -102,3 +104,7 @@ original-only基準GPU fitは10:30:37 UTCに自然STOP/exit0/cleanup/remaining�
 正しい左右反転は既承認の次段候補として維持するが、対称入力の補完であり独立対局の増加とはしない。batch/供給最適化はデータ規模に対して供給/転送/更新/evalの支配費が現れた場合に優先する。特徴/モデル幅/教師変更は現状の適合と検証改善から最初の介入にせず、有力競合として保持する。探索の同算術評価処理高速化は学習のnative引渡し後に別writerで並行する。
 
 この順位はRootの提案で、新データ規模・新fit・追加取得・GPU/forward予算・最終test再利用の実配分ではない。次の人間判断は増量の具体規模と全工程費を確認した条件選択。現在のforward残は約811万で、同じ20epochの追加学習を自動許可する量ではない。未選定評価と過去露出の扱いを保ち、opened testから候補を選び直さない。
+
+ユーザーは反復NNUE評価・探索の通常hotpathで一時heap確保を避ける原則を承認した。小さなbounded bufferはstack、可変/大scratchはmodel/session/workerのsetup所有として再用し、長期weights/TTのheapは許容する。unsafe未初期化・巨大per-depthstackやFP計算順変更を代用にしない。前inline候補の速度不採用結果は維持し、原則だけで速度・断片化・latency改善を認定しない。[設計原則](design/ai-rust-migration.md#repeated-evaluation-memory)、[同担当への継続配分](../research-data/ai-sigma/search-optimization/heap-avoidance-continuation.json)。
+
+棋力評価環境は単一Rust runnerのbook全履歴・受理時計・色交換pair・全予定分母・manifest/audit/journal復元をmainへ統合した。機能確認4予定slotはD/D人工一手ゴール2件と事前取消2件。対局は双方P1勝ち・完了pair .5、取消は未開始/unknown2で引分けへ変換しない。初回guardが完全履歴15手を追加手1手と誤認した失敗を保持し、対局は再実行せず第二jobで保存値のaudit/recoverを完了した。一pairのCIは出さず、strict_unknownは暫定受理時計、硬い返却・公平な棋力/Elo・二版search adapter・同時間Sigmaは未認定。[統合と運用証拠](../research-data/ai-sigma/arena-evaluation/integration/report.md)。

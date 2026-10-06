@@ -13,7 +13,7 @@ export PYTHONPATH="$PWD/python"
   --cache NEW_CACHE --output NEW_RUN --config CONFIG.json
 ```
 
-`CARGO_TARGET_DIR`とrunnerの構築は[Rust運用手順](rust-ai.md)で明示する。configは`common.py`の設定schemaで、幅、optimizer/LR、target、row/game sampling、step、評価間隔、device、実費上限を指定する。初期・低stepを含むtrain/validation曲線、勾配、initial/best/last checkpoint、native f32モデル、ONNX、freezeを新runへ保存する。グラフは`learning-curves.svg`、数値は`curves.json`を使う。記録にない評価点を補間した実測値として扱わない。
+`CARGO_TARGET_DIR`とrunnerの構築は[Rust運用手順](rust-ai.md)で明示する。configは`common.py`の設定schemaで、幅、optimizer/LR、target、row/game sampling、step、評価間隔、device、実費上限を指定する。初期・低stepを含むtrain/validation曲線、勾配、initial/best/last checkpoint、native f32モデル、ONNX、freezeを新runへ保存する。グラフは`learning-curves.svg`と`curves.png`、数値は`curves.json`を使う。記録にない評価点を補間した実測値として扱わない。
 
 family分割とstate/history/input露出maskを生成時に固定する。距離統計と定数・距離基準はtrainだけから求める。validationでcheckpointを選定し、testは別cacheと凍結候補で一巡する。
 
@@ -29,6 +29,18 @@ family分割とstate/history/input露出maskを生成時に固定する。距離
 test結果を設定選定へ戻さない。rootmean蒸留、真z、局等重み、未露出群と全行を分け、定数・距離基準と比較する。学習lossの改善を棋力の改善へ読み替えない。棋力は凍結モデルをnative arenaへ接続して評価する。
 
 生成→cache→学習→freeze→test→新arenaを一括で行う場合は`quoridor-runner cycle --config JSON`を使う。runに明示した期限・予算で子を回収し、新出力へ記録する。運用手順やソフト整備の完了は新しい科学実行の許可ではない。
+
+## 公開Sigmaと省容量GPU学習
+
+公開データの入口は `python -m quoridor_training.public_sigma --config JSON`。固定sourceのNPZを一shardずつ処理し、Rust C ABIでSTM盤面・距離・QF1入力を資格検査して、bitsetと元観測参照を保存する。現在の初回protocolは各NPZ前半original観測だけを使い、後半のnaive左右反転とコピー教師を採らない。sample/split/seedと行数は結果前に固定し、有効な同入力・別勝敗観測を保持する。z0は終局理由不明として別に計数する。
+
+compact loaderは通常T/Vのみを開き、batch分だけfloat特徴へ展開する。行数、モデル入力distinct、独立対局数を区別し、公開入力groupをgameと呼ばない。compact学習は `training.sampling: "epoch"`、row loss、row monitor、decisive zを明示し、距離尺度と定数はTだけから固定する。`evaluation.early_stopping_unit: "epoch"` は完了epoch単位でpatienceを数える。詳細曲線のselector点とfull-train点は版付きconfigで固定し、validation/testとの盤面一致を理由に有効T行を削除しない。
+
+PNG描画は `tools/training` のlockに宣言したMatplotlibを使う。既存の別描画環境を使う場合は `QUORIDOR_PLOTS_PYTHON` を明示でき、同じpackageの記録点だけを描画する。今回の統合では実施済みrunの環境・曲線を変更せず、依存宣言とlockを整える。
+
+GPU本fitは `python -m quoridor_training.train train --cache CACHE --output NEW_RUN --guard-config JSON` から期限・family RAM・whole-device VRAM・専有出力を監視して現役trainerを一度起動できる。型付きconfigとsource/data bindingを確認し、guardianはCUDA contextを作らずNVMLを使う。共有Cargo cache全体の定期走査を学習loopへ入れない。`qualification` は同固定入力の供給/CPU-CUDA/native対応を確認する限定入口で、本fitの重み選定は行わない。
+
+compactの最終評価は既存 `train test` を使う。同じall-partition manifestのSHAをlabel開封前にfreezeと照合し、BEST一候補・D・T由来定数のみを一巡する。結果は公開分布のheld-out観測であり、game/history欠測や過去露出UNKNOWNを未見対局へ読み替えない。既に開いたtestから次候補を選び直さない。実施済み100万行runの結果は[研究知見](../research-findings.md)を参照する。
 
 ## 検証
 

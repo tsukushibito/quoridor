@@ -33,6 +33,91 @@ Arena color swaps use paired openings. A user max-plies censor is unknown, not a
 A real rule terminal draw qualifies. Reports `nn_calls` count logical MCTS leaf requests;
 provider graph captures/startup kernels are not included in that logical count.
 
+Arena evaluation uses the same `arena` entrypoint and workers. Supply the typed `arena`
+contract in [`configs/arena`](../../configs/arena), with one frozen book entry per color
+pair and explicit cohort, lineage, siblings, seed, source/model/config reference,
+selection reason and candidate-pool denominator. Prefixes use Rust Action IDs and replay
+every move from the initial position. `planned.json` saves pawn/wall/side/terminal state,
+full repetition counts, prefix/history hashes and exact immediate winning actions.
+Swapping candidate P1/P2 retains the same prefix and history; it does not reflect the board.
+Duplicate prefixes are rejected in explicit books. Different prefixes sharing a lineage
+remain potentially dependent. Legacy configs without a book record unknown provenance.
+
+`smoke.json` plans two D-vs-D one-move terminal fixture games; `cancel.json` plans two
+initial-position slots for cancellation with a pre-existing pause flag. These four slots
+are functional checks, not strength evidence. `distance-control-100ms.json` and
+`distance-control-500ms.json` are the primary/auxiliary clock presets, initially D-vs-D
+controls on a tuning book. Their presence grants no execution or scientific allocation.
+Use the current research-job procedure and the allocated CPU/storage/clock slot to run
+them; keep outputs in the directed reservation. The default worker core is explicit CPU0.
+
+`evaluator_wall_time` fixes the search revision, PVS/ordering/MPC-off, TT capacity,
+depth/node caps and equal caller time. Replace one evaluator only after freezing the
+model and binding both loaded evaluator hashes. `search_fixed_work` and
+`search_wall_time` require identical frozen evaluators; fixed work has equal depth/nodes
+and no time cap. This binary owns one compiled search revision and rejects distinct
+revision bindings: simultaneous old/new search adapters remain unimplemented. Existing
+`benchmark` warm/steady depth/node measurements have their own denominator and do not
+feed the arena score. Research runs keep one cohort per primary denominator; run
+initial, main, auxiliary and tactical cohorts separately. Keep tuning/main/final books
+separate and freeze research books before looking at candidate results.
+
+The configured move time starts before session/limit setup. `return_reserve_ms` is
+subtracted from the internal search allowance; startup/model loading is outside move
+time and inside the run budget. Each move records caller start, internal elapsed,
+returned result, caller deadline, final legal acceptance timestamp, stop reason,
+completed depth/PV and invocation counters. `strict_unknown` rejects late results as
+unknown; `strict_forfeit` loses on late/illegal/error/no-completed-move results;
+`observe` records late returns and cannot qualify an equal-time comparison. Cancellation,
+job budget, absolute deadline, resource stops and ply censor remain unknown under every
+policy. The final admission check occurs after full-history legal validation, immediately
+before publishing the move. No hard realtime return guarantee is claimed. Persistent TT
+does not expose completed-iteration timestamps/callbacks, so a pre-deadline completed
+move returned late is still rejected. Depth/node caps remain recorded caps, even in a
+wall-time preset. Internal elapsed, invocation and whole caller spans overlap; do not sum
+them. Stats include discarded partial work; unavailable leaf/physical NN counters and
+last-completed-iteration timestamps are explicit nulls. NNUE has no extra warmup here;
+backend counters separately record any provider warmup.
+
+`whole_wall_time` is a future comparison boundary. Current Sigma uses fixed K and
+cannot qualify wall time; attempts to configure timed MCTS are rejected. For later
+Sigma-vs-Sigma confirmation, use `sigma_fixed_k_diagnostic`, two `mcts` engines and the
+same explicit frozen `inference` backend/model, seed and K; it is a diagnostic with a
+different denominator. Root mean, root NN and selected-child mean are distinct typed
+book Q definitions, with explicit perspective and aggregation. Saved Q is signed to
+side-to-move; abs(Q)<=0.2 is tagged provisional main, 0.2–0.4 auxiliary, otherwise tilted
+diagnostic. Tags neither select a book automatically nor guarantee calibrated balance.
+No Sigma book generation, GPU matches or model acquisition is performed by these presets.
+
+Arena `score` is now the complete-pair mean under schema `quoridor-arena-v2`. The summary
+also records planned/started/completed games, complete/incomplete pairs, typed unknown
+reasons and cohort census, a secondary valid-game score, and the planned-denominator
+score range obtained by assigning all unknown games 0 or 1. Percentile bootstrap samples
+whole complete pairs with saved seed/resample count. Fewer than two complete pairs have
+no interval; common lineage and missingness can invalidate precision. Repeated inspection
+is not a stopping rule; no Elo promotion, SPRT or independent-repeat claim is made.
+
+Arena writes no teacher dataset. `manifest-start.json` binds compiled source payloads,
+executable SHA, config/book/schema, replayed planned slots, admission and frozen clock
+policy before evaluator initialization. `manifest.json` binds all outcomes/actions,
+loaded evaluator identities, cancellation/join results and hashed bounded JSON/CSV plus
+`moves.jsonl.gz` (existing system gzip, owned child always reaped). Output is forecast
+before execution and bounded on final writes. An interrupted job retains its planned
+slots, partial `completed.jsonl` journal and start manifest; a missing final manifest is
+incomplete evidence. Audit a finished run without any model/search execution:
+
+```sh
+quoridor-runner arena --audit /absolute/path/to/output
+quoridor-runner arena --recover /absolute/path/to/interrupted-output
+```
+
+Audit verifies bound artifacts, replays history and terminal adjudication, restores unique
+slots and recomputes the summary. Use the same compiled rule/schema revision. Sealed
+training test data and opened research evaluation books are not imported by this path.
+Recovery reports missing slots as unknown, rejects duplicate records and retains an
+incomplete journal tail as an explicit interruption. It does not resume a game or change
+the saved artifacts; its started count covers durable observed records only.
+
 Dataset commands import explicit legacy teachers, build SHA-bound hot tensor caches,
 inspect and evaluate exported native weights. Tensor-cache `rows.jsonl` binds the
 source state/history keys, ply and side. Metadata IDs use P1/P2 order; the stored dense

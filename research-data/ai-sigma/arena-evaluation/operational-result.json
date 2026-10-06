@@ -1,0 +1,264 @@
+{
+  "schema": "quoridor-arena-operational-handoff-v1",
+  "at": "2026-10-06T13:27:05.587853+00:00",
+  "scope": "NN0 D/D near-goal2 plus pre-cancel2; operational acceptance only",
+  "stages": {
+    "smoke": {
+      "controller": {
+        "job_id": "3a249179-b2d1-45f0-a74d-290b5273e08b",
+        "outcome": "failed",
+        "error": null,
+        "exit_code": 1,
+        "finished_at": "2026-10-06T13:20:45.392868+00:00",
+        "wall_seconds": 4.208271386916749,
+        "remaining": [],
+        "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+        "cleanup_complete": true,
+        "log_bytes_seen": 484,
+        "log_bytes_retained": 484
+      },
+      "guardian_path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/arena-operational/smoke-control/result.json",
+      "native_summary": {
+        "schema": "quoridor-arena-v2",
+        "census": {
+          "planned_games": 2,
+          "started_games": 2,
+          "completed_games": 2,
+          "unknown_games": 0,
+          "complete_pairs": 1,
+          "incomplete_pairs": 0,
+          "unknown_reasons": {}
+        },
+        "by_cohort": {
+          "TacticalDiagnostic": {
+            "planned_games": 2,
+            "started_games": 2,
+            "completed_games": 2,
+            "unknown_games": 0,
+            "complete_pairs": 1,
+            "incomplete_pairs": 0,
+            "unknown_reasons": {}
+          }
+        },
+        "pairs": [
+          {
+            "family": "arena-functional-one-move-family-000000",
+            "cohort": "TacticalDiagnostic",
+            "lineage": "handwritten-rulea-goal-prefix",
+            "score": 0.5
+          }
+        ],
+        "complete_pair_mean": 0.5,
+        "valid_game_score_secondary": 0.5,
+        "planned_score_range": [
+          0.5,
+          0.5
+        ],
+        "bootstrap": {
+          "seed": 320,
+          "resamples": 2000,
+          "unit": "complete family pair",
+          "percentile_95": null,
+          "limitations": [
+            "Fixed sample, complete pairs only; missingness may bias the primary score.",
+            "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+            "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+            "Repeated inspection of this interval is not a sequential stopping rule.",
+            "Fewer than two complete pairs: no uncertainty interval is reported."
+          ]
+        }
+      },
+      "manifest_path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/arena-operational/smoke/manifest.json",
+      "manifest_sha256": "c23acdc122a7fb75b6ed138db70392e0ee9ae12871ae71e31f8163e7ab2b4da3",
+      "manifest_start_sha256": "7b3119bce265ecda90be58bae1244bfb01b94dab9fd471744a9f29a1db49ab01",
+      "config_sha256": "668477f70640def590355c0d420cf36a02c9661302748eacf969873507bbf44e"
+    },
+    "cancel": {
+      "controller": {
+        "job_id": "c8e60a72-cd20-48bf-842b-8c4741de49a7",
+        "outcome": "succeeded",
+        "error": null,
+        "exit_code": 0,
+        "finished_at": "2026-10-06T13:23:58.234948+00:00",
+        "wall_seconds": 3.2387883230112493,
+        "remaining": [],
+        "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+        "cleanup_complete": true,
+        "log_bytes_seen": 0,
+        "log_bytes_retained": 0
+      },
+      "guardian_path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/arena-operational/cancel-control/result.json",
+      "native_summary": {
+        "schema": "quoridor-arena-v2",
+        "census": {
+          "planned_games": 2,
+          "started_games": 0,
+          "completed_games": 0,
+          "unknown_games": 2,
+          "complete_pairs": 0,
+          "incomplete_pairs": 1,
+          "unknown_reasons": {
+            "cancelled": 2
+          }
+        },
+        "by_cohort": {
+          "Initial": {
+            "planned_games": 2,
+            "started_games": 0,
+            "completed_games": 0,
+            "unknown_games": 2,
+            "complete_pairs": 0,
+            "incomplete_pairs": 1,
+            "unknown_reasons": {
+              "cancelled": 2
+            }
+          }
+        },
+        "pairs": [],
+        "complete_pair_mean": null,
+        "valid_game_score_secondary": null,
+        "planned_score_range": [
+          0.0,
+          1.0
+        ],
+        "bootstrap": {
+          "seed": 320,
+          "resamples": 2000,
+          "unit": "complete family pair",
+          "percentile_95": null,
+          "limitations": [
+            "Fixed sample, complete pairs only; missingness may bias the primary score.",
+            "Pair bootstrap assumes exchangeable families; lineage dependence is not corrected.",
+            "Conditional on this frozen book/config, no book-wide generalization or Elo calibration.",
+            "Repeated inspection of this interval is not a sequential stopping rule.",
+            "Fewer than two complete pairs: no uncertainty interval is reported."
+          ]
+        }
+      },
+      "manifest_path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/arena-operational/cancel/manifest.json",
+      "manifest_sha256": "399f6180c9308c47f11583cbee8e3de626c50f4aa519efa659eb5c1bc6c46813",
+      "manifest_start_sha256": "4618291080288ae5dd980b41500c43ac4a188b87ecb2c1babd602c33b3e0da0e",
+      "config_sha256": "e39a5a97afec430bc8e4a85644d4fd75151f2fa4850b4015e919dcecb0056f57"
+    }
+  },
+  "overall_exactSTOP": true,
+  "all_direct_children_reaped": true,
+  "all_recorded_exact_identities_absent": true,
+  "identities_verified": [
+    {
+      "pid": 2969927,
+      "start_ticks": "54592959",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    {
+      "pid": 2969952,
+      "start_ticks": "54592971",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    {
+      "pid": 2981510,
+      "start_ticks": "54612352",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    {
+      "pid": 2981538,
+      "start_ticks": "54612375",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    {
+      "pid": 2981539,
+      "start_ticks": "54612389",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    {
+      "pid": 2981535,
+      "start_ticks": "54612361",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    {
+      "pid": 2981577,
+      "start_ticks": "54612418",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    {
+      "pid": 2981542,
+      "start_ticks": "54612404",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    }
+  ],
+  "remaining": [],
+  "source_writer_stopped": true,
+  "source_manifest_sha256": "a230db1c9709acf0265c6493f058f1551d6bf5ad0a7afebdafb3fd6b786cf277",
+  "source_manifest_path": "/workspaces/quoridor/research-data/ai-sigma/arena-evaluation/source-stopped-clippy-repair-r3.json",
+  "private_native": {
+    "source": "/workspaces/quoridor/.artifacts/rust-migration/target/release/quoridor-runner",
+    "private_path": "/workspaces/quoridor/.worktree/arena-evaluation/.artifacts/arena-operational/immutable-native/ef132714513763bd5d8f53d83b32d0ccf29153d24a8c11153793702158b31a74/quoridor-runner",
+    "sha256": "ef132714513763bd5d8f53d83b32d0ccf29153d24a8c11153793702158b31a74",
+    "bytes": 6061672,
+    "source_mode": "0o755",
+    "private_mode": "0o755",
+    "copy_method": "shutil.copy2; mode and content verified; no shared-target write",
+    "source_manifest_sha256": "a230db1c9709acf0265c6493f058f1551d6bf5ad0a7afebdafb3fd6b786cf277"
+  },
+  "current_canonical_cycle_process_sha256": "3850e66008946d4092060f935d20ef018c3e19ae1461f32b2a84c8db5ef27316",
+  "planned_games": 4,
+  "started_games": 2,
+  "completed_games": 2,
+  "complete_pairs": 1,
+  "incomplete_pairs": 1,
+  "unknown_games": 2,
+  "unknown_reasons": {
+    "cancelled": 2
+  },
+  "primary_complete_pair_mean": 0.5,
+  "planned_score_range": [
+    0.25,
+    0.75
+  ],
+  "bootstrap": {
+    "seed": 320,
+    "resamples": 2000,
+    "percentile_95": null,
+    "scope": "one constructed complete tactical family; initial cancellation family excluded; no independence/strength inference"
+  },
+  "NN": 0,
+  "GPU": 0,
+  "native_jobs_used": 2,
+  "native_jobs_cap": 2,
+  "native_all_attempts_seconds": 7.4470597099279985,
+  "native_seconds_cap": 180,
+  "native_seconds_remaining": 172.552940290072,
+  "software_original_used_seconds": 394.9557212679647,
+  "software_preparation_upper_seconds": 15,
+  "software_cumulative_upper_seconds": 409.9557212679647,
+  "software_remaining_lower_seconds": 190.0442787320353,
+  "peak_family_RSS_plus_controller_reserve": 90152960,
+  "storage": {
+    "local_allocated": {
+      "WT": 10952704,
+      "artifacts": 9150464,
+      "evidence": 241664,
+      "launch": 299008,
+      "smoke": 69632,
+      "cancel": 57344
+    },
+    "private_copy_build_allocated": 6062080,
+    "original_build_peak_plus_private_copy": 38535168,
+    "evidence_bytes": 3629056,
+    "conservative_inclusive_bytes_with_original_build_peak": 43966464,
+    "Root_fullcapacity_reused_SHA": "1e8a9464e33d3814124c50a49062529d10861df1ebccca2672b25379bd746829",
+    "new_target_global_inventory": 0
+  },
+  "audit_and_journal_recovery": "PASS for both runs in second allocatedjob; no game rerun",
+  "cancel_recovery_distinction": "durable journal has not_started2; final cancellation adjudication records cancelled2; read-only recovery does not rewrite final result",
+  "first_job_failure_preserved": "wrapper expected1 move ratherthan full14prefix+1; nativeexit0 and2goals; immutable raw usedguard preserved",
+  "shared_target_writes": 0,
+  "additional_jobs_allowed": 0,
+  "limits": [
+    "strict_unknown provisional; depth1 cap, not full100ms time consumption",
+    "hard realtime/fairclock/forfeit adoption not achieved",
+    "dual-version search adapter/timed Sigma unimplemented",
+    "no strength/Elo/model promotion/model games",
+    "Root accepts and integrates main/index/commit"
+  ]
+}

@@ -1,0 +1,274 @@
+{
+  "scope": "user-authorized main integration of completed learning and arena tasks",
+  "Root_decision": "ADOPT maintained code/environment with existing model artifacts referenced; no default product model promotion",
+  "Rust": {
+    "scope": "Root user-authorized main integration qualification; CPU0,1/RAM2GiB/GPU0, offline/shared target sole writer after arena exact STOP",
+    "commands": [
+      {
+        "name": "data",
+        "argv": [
+          "cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--release",
+          "-p",
+          "quoridor-data",
+          "--test",
+          "external_outcomes",
+          "--",
+          "--test-threads=1"
+        ],
+        "exit": 0,
+        "direct_child_waited": true,
+        "remaining": [],
+        "wall_seconds": 2.974319932051003
+      },
+      {
+        "name": "manifest",
+        "argv": [
+          "cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--release",
+          "-p",
+          "quoridor-runner",
+          "--lib",
+          "arena_manifest::tests",
+          "--",
+          "--test-threads=1"
+        ],
+        "exit": 0,
+        "direct_child_waited": true,
+        "remaining": [],
+        "wall_seconds": 31.02662387501914
+      },
+      {
+        "name": "arena-config",
+        "argv": [
+          "cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--release",
+          "-p",
+          "quoridor-runner",
+          "--test",
+          "arena",
+          "--test",
+          "config",
+          "--",
+          "--test-threads=1"
+        ],
+        "exit": 0,
+        "direct_child_waited": true,
+        "remaining": [],
+        "wall_seconds": 57.513667798019014
+      },
+      {
+        "name": "native-undo",
+        "argv": [
+          "cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--release",
+          "-p",
+          "quoridor-runner",
+          "--bin",
+          "nnue-diagnose",
+          "qualification_actions_and_inplace_undo_match_immutable_oracle_nn0",
+          "--",
+          "--test-threads=1"
+        ],
+        "exit": 0,
+        "direct_child_waited": true,
+        "remaining": [],
+        "wall_seconds": 8.563354397076182
+      },
+      {
+        "name": "build",
+        "argv": [
+          "cargo",
+          "build",
+          "--offline",
+          "--locked",
+          "--release",
+          "-p",
+          "quoridor-runner",
+          "--bin",
+          "quoridor-runner",
+          "--bin",
+          "nnue-diagnose"
+        ],
+        "exit": 0,
+        "direct_child_waited": true,
+        "remaining": [],
+        "wall_seconds": 2.8719940530136228
+      },
+      {
+        "name": "clippy",
+        "argv": [
+          "cargo",
+          "clippy",
+          "--offline",
+          "--locked",
+          "--release",
+          "-p",
+          "quoridor-runner",
+          "--lib",
+          "--bin",
+          "quoridor-runner",
+          "--bin",
+          "nnue-diagnose",
+          "--test",
+          "arena",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "exit": 0,
+        "direct_child_waited": true,
+        "remaining": [],
+        "wall_seconds": 5.445301934960298
+      }
+    ],
+    "new_model_forward": 0,
+    "error": null,
+    "whole_seconds": 108.3955923320027,
+    "status": "PASS"
+  },
+  "Python_initial": "30 tests,26PASS/4optionalTorch skips; exact log preserved",
+  "Python_guard_repair": "14Cycle NN0 tests PASS after vanished-temp race fix; no broad repeat",
+  "plotting": "maintained PNG renderer executes on saved curves using existing Matplotlib3.11.2 plot env, no new forward",
+  "dependency": "Matplotlib3.11.2 declared and uv lock updated; offline check PASS, no environment installs; existing torch/numpy versions unchanged; initial offline resolution lacked metadata, registry resolution succeeded",
+  "Root_extra_code": "canonical DeviceMemory reused, controller reserve included in family RAM cap, owned-output one-stat vanished-temp handling; no global/target inventory polling or training/inference mathematical change",
+  "original_integration_failure": {
+    "scope": "Root user-authorized main integration qualification; CPU0,1/RAM2GiB/GPU0, offline/shared target sole writer after arena exact STOP",
+    "commands": [],
+    "new_model_forward": 0,
+    "error": "FileNotFoundError(2, 'No such file or directory')",
+    "whole_seconds": 22.021875512902625,
+    "status": "FAIL"
+  },
+  "archive": {
+    "sha256": "d5d9ac4e7e5173cf17722326747643d1db2514defa01595f9a43b097c4660545",
+    "bytes": 7689,
+    "members": {
+      "arena-operational-stop-before-build.json": {
+        "bytes": 2400,
+        "sha256": "dbee2b9913a10d7c227ba58c081a40ddf67fc02033978871726d2baa80e809ca"
+      },
+      "data.log": {
+        "bytes": 661,
+        "sha256": "c7a45c0c610dff84fcfaf1ed543f905ac0978bf5b2a2a757dd4885b940ca8134"
+      },
+      "data.process.json": {
+        "bytes": 884,
+        "sha256": "730c662ba6c38ba4421aecf95995a61eada9cf063164918d538be2866b3c5231"
+      },
+      "plot-main.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "python-tests.json": {
+        "bytes": 479,
+        "sha256": "0773b8271beb62ef746a0747c6e472dc5bed37ccb64ef5aceadd09156075e397"
+      },
+      "python-tests.log": {
+        "bytes": 141,
+        "sha256": "18c7a9a1e2ef8de242009100a017dd0d553ccd1f5a5a3ca12438dd006825549d"
+      },
+      "rust-validation-r2.py": {
+        "bytes": 2474,
+        "sha256": "9f08ace7686f523a87417f92d5d6eee486dec5baa963c64a5a471ded01bfa816"
+      },
+      "rust-validation.json": {
+        "bytes": 315,
+        "sha256": "c06ade7b03e13c05801beeca46607c164502369a46cdc42eb751ca4e4548f2cf"
+      },
+      "rust-validation.py": {
+        "bytes": 2445,
+        "sha256": "edad4a70035420a84917658033dbdbdc4bf647b826719268b3c065716f6bd1de"
+      },
+      "source-copy-proof.json": {
+        "bytes": 9238,
+        "sha256": "617aea5ce749845230f1d938d009114eeb17603f69039d17c2a15651efe0e0a7"
+      },
+      "training-lock-check.log": {
+        "bytes": 100,
+        "sha256": "bde2f02a9789c3e030dbf397a5525e23191c2b70452662edeae300b5aaaf31f9"
+      },
+      "training-lock-online.log": {
+        "bytes": 324,
+        "sha256": "653f757b46ec12f81eba810692c98589302cd09f80fac441bda98c28a106b96b"
+      },
+      "training-lock.log": {
+        "bytes": 556,
+        "sha256": "fcd7ee56d902fe4e684b78b7945dafcecb9a16bb9c14e1e5b52685fc3724b063"
+      },
+      "r2/arena-config.log": {
+        "bytes": 1462,
+        "sha256": "2c7b84379e1fa981f26cb2a1d904e758e6d6510685bf334b24e3523f4a748969"
+      },
+      "r2/arena-config.process.json": {
+        "bytes": 680,
+        "sha256": "f87f8285d8f77d1181739db32a6b63f6560c1ac45c85660bb2c03ab5d72328e5"
+      },
+      "r2/build.log": {
+        "bytes": 62,
+        "sha256": "dcf93bdf4edd041eaad9ac3ca998ab646c6545e33550b3e094f78bf12241c30a"
+      },
+      "r2/build.process.json": {
+        "bytes": 659,
+        "sha256": "683f89ac4fe6cf579fbd894fce8d369d02b8db76d4317e700faa9b332a9f899e"
+      },
+      "r2/clippy.log": {
+        "bytes": 222,
+        "sha256": "6c3e6d27b4ab2f63f429c420a3ae05cd02f71412fa48ea2875dc7a1393331216"
+      },
+      "r2/clippy.process.json": {
+        "bytes": 737,
+        "sha256": "9a5bcb9ae02219c734b933984cc379569eadf86783656c98595e78624c8d3e33"
+      },
+      "r2/data.log": {
+        "bytes": 504,
+        "sha256": "c4c704b1fc3fcf0225a54289aaed88611d07ef1af02d881cac7f2f629f624b15"
+      },
+      "r2/data.process.json": {
+        "bytes": 661,
+        "sha256": "f0db6cda986b3a8c24a1702045446694c284e3fd1442dcf9b3eadaab1d6c7b8c"
+      },
+      "r2/manifest.log": {
+        "bytes": 664,
+        "sha256": "f3a08667f8df9f34e02238ba607ed36dd1c2d03b45b663b2ef51f33a566dfcb6"
+      },
+      "r2/manifest.process.json": {
+        "bytes": 665,
+        "sha256": "87880d9822478fbabc20bd33553e88ec6741737a545b6fc43d4305f14a19251f"
+      },
+      "r2/native-undo.log": {
+        "bytes": 482,
+        "sha256": "e71971c479cb52815822f756783cfad34ce646bdcaca8e700d4be2d61fe8ee4b"
+      },
+      "r2/native-undo.process.json": {
+        "bytes": 730,
+        "sha256": "d6ce55dce0364eed4bdb916b2e5818eecec1fd78db55ea9cb28a566c04553b02"
+      },
+      "r2/rust-validation.json": {
+        "bytes": 2881,
+        "sha256": "2d5d9544d42a60ec5ba8f41c67389f112acd4fad234eea49077832db1a5821fe"
+      }
+    },
+    "restoration": "ALL SHA match"
+  },
+  "operational_validation": "arena smoke2/cancel2 all slots/caller/history/audit/recover; initial history-length guard failure retained, no game rerun",
+  "scientific_result": "final frozen50k BEST MSE.5297938891696311 vsD.8601921794476189; no strength/Elo assertion",
+  "old_budgets_failures_assets": "preserved, no resets/refunds/deletions",
+  "main_source_GPU_training_runtime": "Linux native eval/search, Python/PyTorch CUDA learning with bounded compact supply; browser/Wasm untouched",
+  "main_Git_owner": "Root only",
+  "plotting_image_view": "Root visually inspected recreated recorded-point PNG: diagnostics/full-train/validation separated; endpoint BEST; no synthetic measured points",
+  "guard_repair": "owned logical one-stat sampling ignores FileNotFound for vanished temporaries, symlinks not followed; PermissionError/other failures still refuse. No shared target/global scan.",
+  "all_main_integration_model_forward": 0
+}

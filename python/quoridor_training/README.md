@@ -22,3 +22,15 @@ one test and fresh native arena. The explicit virtualenv interpreter path is ret
 without resolving it to the system Python. Each child is in its own process group with
 bounded deadline and termination/wait cleanup; each stage has a log and failures persist.
 The small cycle validates implementation connections, not highest AI strength.
+
+Pinned public Sigma preparation uses `python -m quoridor_training.public_sigma --config JSON`.
+It wraps the existing child guardian, processes one compressed shard at a time, and writes
+lossless QF1 bitsets plus STM distances and binary source observation references. The plan
+fixes sampling/split seeds before outcomes. The current protocol uses original first-half
+observations, keeps independent same-input observations, and excludes unknown-termination z0. Eligibility
+counts describe sampled candidates; unsampled eligibility is unknown.
+
+The same `cache.load` and trainer consume bounded expanded batches. The compact loader
+opens train/validation only; test labels stay in a separate partition until explicit test
+release. Model-input groups are secondary metrics, not reconstructed games. Compact runs
+save aggregate curves and compressed visit arrays, and can use epoch-based early stopping.

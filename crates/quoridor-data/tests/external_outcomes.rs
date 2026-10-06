@@ -23,6 +23,44 @@ fn asymmetric() -> Position {
     }
 }
 #[test]
+fn compact_bulk_preserves_native_views_and_independent_rejections() {
+    let input = features(asymmetric());
+    let mut malformed = input;
+    malformed[0] = f32::NAN;
+    let batch: Vec<_> = [input, malformed, input].into_iter().flatten().collect();
+    let mut bits = [0u8; 3 * 78];
+    let mut distance = [0f32; 6];
+    let mut status = [255u8; 3];
+    let rc = unsafe {
+        quoridor_data::quoridor_sigma_compact(
+            batch.as_ptr(),
+            3,
+            bits.as_mut_ptr(),
+            distance.as_mut_ptr(),
+            status.as_mut_ptr(),
+        )
+    };
+    assert_eq!(rc, 0);
+    assert_eq!(status, [0, 1, 0]);
+    let native = quoridor_nnue::encode_qf1(sigma_plane_position(&input).unwrap()).unwrap();
+    for row in [0, 2] {
+        for view in 0..2 {
+            let decoded: Vec<u16> = (0..312)
+                .filter(|id| {
+                    let at = view * 312 + id;
+                    bits[row * 78 + at / 8] & (1 << (at % 8)) != 0
+                })
+                .map(|id| id as u16)
+                .collect();
+            let mut expected = native.ids[view].clone();
+            expected.sort_unstable();
+            assert_eq!(decoded, expected);
+        }
+        assert_eq!(&distance[row * 2..row * 2 + 2], native.distance.as_slice());
+    }
+    assert!(bits[78..156].iter().all(|v| *v == 0));
+}
+#[test]
 fn original_and_p2_canonical_maps_and_lr_padding() {
     for turn in [0, 1] {
         let p = Position {

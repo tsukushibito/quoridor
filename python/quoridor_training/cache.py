@@ -459,6 +459,14 @@ def _load(path, allow_test, identities):
 
 
 def load(path, allow_test=False):
+    manifest = Path(path) / "cache.json"
+    if (
+        manifest.is_file()
+        and json.loads(manifest.read_text()).get("schema") == "quoridor-public-compact-v1"
+    ):
+        from .compact_cache import CompactCorpus
+
+        return CompactCorpus(path, allow_test)
     # Exact uniqueness uses a bounded-cache temporary index rather than a corpus-size ID set.
     with tempfile.TemporaryDirectory(prefix="quoridor-corpus-index-") as temporary:
         connection = sqlite3.connect(str(Path(temporary) / "identities.sqlite"))

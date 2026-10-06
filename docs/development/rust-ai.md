@@ -48,6 +48,8 @@ CUDAは`cuda-aoti`、TensorRTは`tensorrt`のCargo featureを明示する。`QUO
 
 `nnue` engineはmanifestから対応するfloat/距離残差loaderを選択し、既存の評価器へ接続する。`model-check --model MANIFEST`は対応形式・署名・サイズを推論前に検査する。2 engineのarenaは色交換ペア単位で分割し、明示した奇数の分割境界は開始前に拒否する。
 
+arenaのbook・時計・pair集計・保存検査は[runnerのarena手順](../../crates/quoridor-runner/README.md)と[preset案内](../../configs/arena/README.md)を使う。色交換pairは同じ全履歴prefixから開始し、全予定slotと未知/取消を記録する。主集計は完了pair、補助に全予定分母の範囲を残す。`arena --audit OUTPUT` は来歴・保存SHA・集計を照合し、`--recover OUTPUT` は未完了journalの記録済みslotを読み取る。現在は単一探索版で、二版search adapterと同時間Sigmaは未実装。native時計は返却・合法性検査後の受理を測り、内部完了反復のtimestampや硬い返却保証は持たない。
+
 benchmarkは時間制限を含む場合`fixed_work=false`とし、depth/node/timeの指定と実完了量を保存する。停止・pause・RAM条件は探索中にも確認し、失敗でも完了済みrecordを残す。nativeの同期呼出中の即時停止は別の限界であり、外側jobのexact回収と区別する。
 
 速度は同じmodel/K/局面/資源で測る。初期化・capture・queue・転送・forward・尾部・資格・保存・回収を含む適格行/秒と対局/秒を使い、forward倍率をそのまま教師生成倍率にしない。backendのlogical/executed/warm/failed行数を共通計数として保存し、captureの物理仕事が未計測ならUNKNOWNのままにする。未知の物理費を0や完全な合計へ置換しない。
@@ -97,6 +99,6 @@ node crates/quoridor-wasm/tests/nnue-runtime.cjs \
 
 残差exportは `quoridor-nnue-distance-residual-v3` / `QF1-route4-f32-STM-scaled-residual-v3` の明示形式。教師情報は `training-target.json` に保存し、strict native manifestへ未知フィールドを混ぜない。現在のnative消費側は `route_mode: "zero4"` のみを受け入れ、Enabled DAGは明示拒否する。既存scaled/quantizedモデルへ残差重みを読み替えない。
 
-`nnue-diagnose` の既存engine設定で `kind: "distance_residual"` とmanifestを指定すると、`ResidualEvaluator` を介して履歴付きAlphaBetaへ接続する。full/SIMD/deltaのFTと壁距離map再利用、親accumulatorの保持を用いる。モデルをロードできたこと、有限parity、深度到達を同時間棋力の証明へ置き換えない。今回の公開z checkpointはRuleA48への転移利益が支持されておらず、既定製品モデルへ採用していない。
+`nnue-diagnose` の既存engine設定で `kind: "distance_residual"` とmanifestを指定すると、`ResidualEvaluator` を介して履歴付きAlphaBetaへ接続する。full/SIMD/deltaのFTと壁距離map再利用、親accumulatorの保持を用いる。モデルをロードできたこと、有限parity、深度到達を同時間棋力の証明へ置き換えない。歴史的小subsetの公開z checkpointはRuleA48転移利益が未支持だった。後続original-only100万行のGPU学習と保留観測評価は[研究知見](../research-findings.md)で別に扱い、同時間棋力の確認前に製品既定へ自動採用しない。
 
 観測streamはgzip JSONLをrecordごとflushする。group ID/行数と距離・定数基準はmeasurement-sets/reference-metricsへ一度保存し、groupのtarget MSE/sign/saturation/biasは明示little-endian f32 base64 vector（NaNは欠測）で保存する。全体metricは元の数値精度を保つ。curves JSON/CSV/SVGとgradients.jsonには同じbulkを複製せずstream参照を置く。cache binding全体はcache-binding.json.gzへlossless保存する。evaluation.full_train_checkpointsはselector点の一部を明示してその点だけ全trainを測る。実outputと残forecastをrun入場前に確認する。

@@ -1,0 +1,62 @@
+{
+  "run_id": "arena-distance-control-500ms",
+  "output": ".artifacts/arena/distance-control-500ms",
+  "games": 2,
+  "workers": 1,
+  "active_games": 1,
+  "opening_plies": 0,
+  "max_plies": 200,
+  "cpu_cores": [0],
+  "wall_seconds": 90,
+  "max_memory_bytes": 1073741824,
+  "max_output_bytes": 8388608,
+  "engines": [
+    {
+      "kind": "distance",
+      "depth": 64,
+      "max_nodes": 1000000,
+      "time_ms": 500
+    },
+    {
+      "kind": "distance",
+      "depth": 64,
+      "max_nodes": 1000000,
+      "time_ms": 500
+    }
+  ],
+  "arena": {
+    "comparison": "evaluator_wall_time",
+    "clock_policy": "strict_unknown",
+    "return_reserve_ms": 5,
+    "tt_entries": 65536,
+    "bootstrap_seed": 320,
+    "bootstrap_resamples": 2000,
+    "evaluator_sha256": [
+      "c83db10ba1403b7fc3417e73e14cc5f1a1040c65ac4ac23a5f5703abbb5aa887",
+      "c83db10ba1403b7fc3417e73e14cc5f1a1040c65ac4ac23a5f5703abbb5aa887"
+    ],
+    "search_source_sha256": [
+      "5faf36cf9cbf99d97f35a6e1dd5aa0db183a50e9c22f12b66bb2fba6be2408f6",
+      "5faf36cf9cbf99d97f35a6e1dd5aa0db183a50e9c22f12b66bb2fba6be2408f6"
+    ],
+    "book": {
+      "id": "initial-distance-control-tuning-v1",
+      "usage": "tuning",
+      "frozen_before_candidate_results": true,
+      "independence": "One initial-position family; no book-wide generalization or uncertainty precision.",
+      "openings": [
+        {
+          "id": "initial",
+          "cohort": "initial",
+          "lineage": "initial-position",
+          "siblings": [],
+          "original_seed": null,
+          "reference": null,
+          "selection_reason": "Initial board control fixture, frozen before candidate results; not a main or final balanced Sigma book.",
+          "candidate_pool_size": 1,
+          "prefix": []
+        }
+      ]
+    }
+  }
+}

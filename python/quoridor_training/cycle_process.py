@@ -1,11 +1,13 @@
 """Bounded Linux child ownership for every native learning-cycle stage."""
 
 from contextlib import contextmanager
+import ctypes
 import json
 import os
 from pathlib import Path
 import selectors
 import signal
+import stat
 import subprocess
 import time
 
@@ -110,6 +112,35 @@ def available_memory():
     return value
 
 
+class DeviceMemory:
+    """NVML telemetry without creating a CUDA context in the guardian."""
+
+    class Info(ctypes.Structure):
+        _fields_ = [(name, ctypes.c_ulonglong) for name in ("total", "free", "used")]
+
+    def __init__(self):
+        self.library = ctypes.CDLL("libnvidia-ml.so.1")
+        self.library.nvmlDeviceGetHandleByIndex_v2.argtypes = [
+            ctypes.c_uint,
+            ctypes.POINTER(ctypes.c_void_p),
+        ]
+        self.library.nvmlDeviceGetMemoryInfo.argtypes = [
+            ctypes.c_void_p,
+            ctypes.POINTER(self.Info),
+        ]
+        self.handle = ctypes.c_void_p()
+        if self.library.nvmlInit_v2() or self.library.nvmlDeviceGetHandleByIndex_v2(
+            0, ctypes.byref(self.handle)
+        ):
+            raise RuntimeError("NVML qualification admission")
+
+    def used(self):
+        info = self.Info()
+        if self.library.nvmlDeviceGetMemoryInfo(self.handle, ctypes.byref(info)):
+            raise RuntimeError("NVML qualification observation")
+        return info.used
+
+
 class CycleResources:
     def __init__(self, config, output, deadline):
         self.output = Path(output)
@@ -134,13 +165,54 @@ class CycleResources:
         rss = sum(info["rss"] for info in infos if info)
         if rss > self.memory_limit:
             raise CycleStopped("cycle memory_limit")
-        output_bytes = sum(
-            file.stat().st_size
-            for file in self.output.rglob("*")
-            if file.is_file() and not file.is_symlink()
-        )
+        output_bytes = directory_bytes(self.output)
         if output_bytes > self.output_limit:
             raise CycleStopped("cycle output_limit")
+
+
+def directory_bytes(root):
+    """Sample owned regular-file bytes with one stat; vanished temporaries are absent."""
+    pending, total = [root], 0
+    while pending:
+        try:
+            with os.scandir(pending.pop()) as entries:
+                for entry in entries:
+                    try:
+                        info = entry.stat(follow_symlinks=False)
+                    except FileNotFoundError:
+                        continue
+                    if stat.S_ISDIR(info.st_mode):
+                        pending.append(entry.path)
+                    elif stat.S_ISREG(info.st_mode):
+                        total += info.st_size
+        except FileNotFoundError:
+            continue
+    return total
+
+
+class GPUResources(CycleResources):
+    """Conservative whole-device VRAM and family RSS including controller reserve."""
+
+    def __init__(self, config, output, deadline):
+        super().__init__(config, output, deadline)
+        self.device = DeviceMemory()
+        self.controller_reserve = config.get("controller_reserve_bytes", 64 * 1024**2)
+        self.vram_limit = config["max_vram_bytes"]
+        self.observed = {"peak_family_RSS_bytes": 0, "peak_whole_device_used_bytes": 0}
+
+    def check(self, owned=()):
+        super().check(owned)
+        infos = [process_info(os.getpid()), *(process_info(x["pid"]) for x in owned)]
+        rss = sum(x["rss"] for x in infos if x) + self.controller_reserve
+        used = self.device.used()
+        self.observed["peak_family_RSS_bytes"] = max(self.observed["peak_family_RSS_bytes"], rss)
+        self.observed["peak_whole_device_used_bytes"] = max(
+            self.observed["peak_whole_device_used_bytes"], used
+        )
+        if rss > self.memory_limit:
+            raise CycleStopped("GPU family memory_limit including controller reserve")
+        if used > self.vram_limit:
+            raise CycleStopped("GPU VRAM cap including existing device usage")
 
 
 def save_record(path, record):

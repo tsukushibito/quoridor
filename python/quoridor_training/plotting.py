@@ -2,8 +2,13 @@
 
 from collections import defaultdict
 from html import escape
+import argparse
+import json
 import math
+import os
 from pathlib import Path
+import subprocess
+import sys
 
 
 def _number(value):
@@ -244,3 +249,95 @@ def render_learning_curves(
         "selected_markers": selected_count,
         "records": len(records),
     }
+
+
+def render_learning_png(curves, path, *, selected_step=None):
+    """Publication artifact from recorded points, with train scopes separated."""
+    interpreter = os.environ.get("QUORIDOR_PLOTS_PYTHON")
+    if interpreter and os.path.abspath(interpreter) != os.path.abspath(sys.executable):
+        command = [
+            interpreter,
+            "-B",
+            "-m",
+            "quoridor_training.plotting",
+            "--curves",
+            str(Path(path).with_suffix(".json")),
+            "--output",
+            str(path),
+        ]
+        if selected_step is not None:
+            command.extend(["--selected-step", str(selected_step)])
+        environment = dict(os.environ)
+        environment.pop("QUORIDOR_PLOTS_PYTHON", None)
+        subprocess.run(command, env=environment, check=True, timeout=20)
+        return
+    import matplotlib
+
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    figure, axes = plt.subplots(2, 1, figsize=(11, 8), constrained_layout=True)
+    colors = {"fixed_diagnostic_subset": "#1768c5", "full_train": "#0079a8"}
+    for axis, field, title in zip(
+        axes,
+        ["target_mse", "target_game_equal_mse"],
+        ["Primary row MSE", "Secondary model-input-group equal MSE"],
+    ):
+        for scope in sorted({p.get("train_scope", "unspecified") for p in curves}):
+            points = [p for p in curves if p.get("train_scope", "unspecified") == scope]
+            axis.plot(
+                [p["step"] for p in points],
+                [p["train"][field] for p in points],
+                marker=".",
+                linewidth=0.8,
+                color=colors.get(scope, "#67778b"),
+                label="Train: " + scope,
+            )
+        axis.plot(
+            [p["step"] for p in curves],
+            [p["validation"][field] for p in curves],
+            marker=".",
+            linewidth=0.8,
+            color="#ce3945",
+            label="All validation rows",
+        )
+        distance_field = "distance_mse" if field == "target_mse" else "distance_group_equal_mse"
+        constant_field = "constant_mse" if field == "target_mse" else "constant_game_equal_mse"
+        for key, label, color in [
+            (distance_field, "D (fixed before fit)", "#888888"),
+            (constant_field, "Train-only constant", "#b79b3e"),
+        ]:
+            points = [p for p in curves if p["validation"].get(key) is not None]
+            axis.plot(
+                [p["step"] for p in points],
+                [p["validation"][key] for p in points],
+                linestyle="--",
+                linewidth=0.7,
+                color=color,
+                label=label,
+            )
+        if selected_step is not None:
+            axis.axvline(
+                selected_step, color="#444444", linestyle=":", linewidth=0.8, label="BEST step"
+            )
+        axis.set(title=title, xlabel="Completed optimizer updates", ylabel="MSE")
+        axis.grid(alpha=0.2)
+        axis.legend(fontsize=8)
+    figure.suptitle("Recorded observations; lines guide between measured points")
+    figure.savefig(path, dpi=140)
+    plt.close(figure)
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Render saved observations without inference")
+    parser.add_argument("--curves", required=True)
+    parser.add_argument("--output", required=True)
+    parser.add_argument("--selected-step", type=int)
+    args = parser.parse_args()
+    render_learning_png(
+        json.loads(Path(args.curves).read_text()), args.output, selected_step=args.selected_step
+    )
+
+
+if __name__ == "__main__":
+    main()

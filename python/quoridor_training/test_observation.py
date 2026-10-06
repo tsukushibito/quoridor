@@ -205,8 +205,7 @@ class LiveTrainerObservation(unittest.TestCase):
         cfg["evaluation"]["diagnostic_rows"] = 0
         cfg["limits"]["samples"] = 11  # initial8 + successful batch3; tail cannot enter.
         p.write_text(json.dumps(cfg))
-        with self.assertRaisesRegex(RuntimeError, "budget"):
-            self.run_train("budget", p)
+        self.run_train("budget", p)
         out = self.root / "budget"
         sampling = json.loads((out / "sampling.json").read_text())
         self.assertEqual(sampling["seen"], 3)
@@ -214,7 +213,9 @@ class LiveTrainerObservation(unittest.TestCase):
         self.assertEqual(sampling["completed_epochs"], 0)
         self.assertEqual(sampling["optimizer_steps"], 1)
         self.assertEqual(self.nn, 11)
-        self.assertEqual(json.loads((out / "run-status.json").read_text())["status"], "INTERRUPTED")
+        self.assertEqual(
+            json.loads((out / "run-status.json").read_text())["status"], "BUDGET_STOPPED"
+        )
 
     def test_live_optimizer_fault_preserves_completed_counts(self):
         p, cfg = self.config("fault")

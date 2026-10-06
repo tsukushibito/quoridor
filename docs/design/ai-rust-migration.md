@@ -37,3 +37,16 @@ Compare legal moves, pawn jumps, wall reachability, P2, repetition/ply terminal,
 Test stale responses, cancellation, partial batches, model-init failure, duplicate output, memory limits, cleanup and restart. Benchmark same input/model/K/resources with interleaved old/new runs and complete output validation. Measure total valid rows/sec, completed depth/nodes, queue/transfer/forward/recording/tail/initialization, RAM/VRAM and export/build cost. AOTInductor and TensorRT are selected using whole-cycle time, not isolated forward latency; model/device/version identifies compiled caches.
 
 Execute a bounded generation -> train -> export -> native model read -> arena -> adoption receipt cycle. Existing goals of 1000-game total60min then30min are environment/workload-specific; extrapolation is not an actual1000-game run, and K64 does not become K800 quality.
+
+## Repeated evaluation memory
+
+User approved 2026-10-06: the normal NNUE/search hot path avoids fresh temporary
+heap allocation. Use small bounded stack buffers or explicitly owned scratch
+allocated once at model/session/worker setup. Keep weights, large TT and other
+long-lived storage on the heap where appropriate. Preserve accepted topologies,
+scalar arithmetic/reduction order, value bits and parent/history restoration;
+avoid unsafe initialization tricks and oversized per-depth stack frames. Heap
+avoidance is a memory design principle, not a claim of measured speed or allocator
+fragmentation benefit. The previous inline70 candidate remains historically
+NOT_ADOPT on speed evidence; subsequent adoption needs its own stopped version
+and correctness/whole-work evidence.

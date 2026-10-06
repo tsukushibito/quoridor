@@ -40,6 +40,7 @@ DEFAULTS = {
         "batch_size": 1024,
         "monitor": "game",
         "early_stopping_patience": 5,
+        "early_stopping_unit": "observation",
         "min_delta": 0.0,
         "diagnostic_rows": 256,
         "diagnostic_interval": 25,
@@ -123,6 +124,7 @@ def resolve_config(path=None, overrides=()):
         ("training", "scheduler"): ["none", "cosine"],
         ("training", "device"): ["cpu", "cuda"],
         ("evaluation", "monitor"): ["row", "game"],
+        ("evaluation", "early_stopping_unit"): ["observation", "epoch"],
         ("data", "overlap_policy"): ["error", "report"],
         ("artifacts", "mode"): ["native", "native_onnx"],
     }

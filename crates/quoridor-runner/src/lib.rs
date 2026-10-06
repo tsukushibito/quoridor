@@ -1,6 +1,12 @@
 //! All hot game/search/inference ownership stays inside one native process.
+pub mod arena;
+pub mod arena_clock;
+mod arena_manifest;
+pub mod arena_statistics;
 pub mod config;
 pub mod resources;
 pub mod runtime;
+pub use arena_manifest::audit as audit_arena;
+pub use arena_manifest::recover as recover_arena;
 pub use config::{Config, Engine};
 pub use runtime::{RunReport, run};

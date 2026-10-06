@@ -4,10 +4,11 @@ use quoridor_ai::alphabeta::{
     SearchLimits, StaticEvaluator,
 };
 use quoridor_core::research::SigmaContext;
-use quoridor_nnue::{Model, encode_qf1, residual::ResidualModel};
+use quoridor_nnue::{Accumulator, EvaluationMode, Model, encode_qf1, residual::ResidualModel};
 use serde::Deserialize;
 use serde_json::{Value, json};
 use std::{
+    cell::Cell,
     fs,
     path::PathBuf,
     sync::{
@@ -268,7 +269,164 @@ fn prepare(c: &Config, start: Instant) -> Result<Value> {
         json!({"schema":"native-prefix-selection-v1","rows":rows,"rejections":rejects,"seed":g.seed,"preparation_nodes":preparation_nodes,"goal_probe_prefix":goal_prefix,"goal_probe":feature(&probe)?,"NN":0,"wall_s":start.elapsed().as_secs_f64()}),
     )
 }
+fn qualification_actions(s: &SigmaContext) -> Vec<u16> {
+    let legal = s.legal_ids();
+    let mut selected: Vec<_> = legal.iter().copied().filter(|a| *a < 81).collect();
+    for range in [81..145, 145..209] {
+        if let Some(a) = legal.iter().find(|a| range.contains(*a)) {
+            selected.push(*a);
+        }
+    }
+    selected
+}
+
+fn accumulator_error(a: &Accumulator, b: &Accumulator) -> Result<f32> {
+    if a.features.ids != b.features.ids
+        || a.features.side != b.features.side
+        || a.features.distance != b.features.distance
+        || a.values
+            .iter()
+            .zip(&b.values)
+            .any(|(x, y)| x.len() != y.len())
+    {
+        return Err("QUALIFY_FEATURE_ACCUMULATOR_SHAPE".into());
+    }
+    let mut maximum = 0_f32;
+    for (x, y) in a.values.iter().flatten().zip(b.values.iter().flatten()) {
+        let error = (x - y).abs();
+        if !x.is_finite() || !y.is_finite() || error > 1e-5 + 1e-4 * x.abs() {
+            return Err("QUALIFY_ACCUMULATOR_PARITY".into());
+        }
+        maximum = maximum.max(error);
+    }
+    Ok(maximum)
+}
+
+fn same_float_bits(a: &[Vec<f32>; 2], b: &[Vec<f32>; 2]) -> bool {
+    a.iter().zip(b).all(|(x, y)| {
+        x.len() == y.len() && x.iter().zip(y).all(|(u, v)| u.to_bits() == v.to_bits())
+    })
+}
+
+fn qualify_residual(c: &Config, start: Instant) -> Result<Value> {
+    if c.engines.len() != 1
+        || c.engines[0].kind != "distance_residual"
+        || !c.depths.is_empty()
+        || c.max_plies != 0
+        || c.generate.is_some()
+    {
+        return Err("QUALIFY_ONE_RESIDUAL_NO_SEARCH_GENERATION".into());
+    }
+    let model = ResidualModel::load(c.engines[0].manifest.as_ref().ok_or("manifest")?)?;
+    #[cfg(target_arch = "x86_64")]
+    let avx2_available = std::is_x86_feature_detected!("avx2");
+    #[cfg(not(target_arch = "x86_64"))]
+    let avx2_available = false;
+    let nn = Cell::new(0_u64);
+    let evaluate = |a: &Accumulator| -> Result<f32> {
+        guard(c, start, nn.get(), 0)?;
+        nn.set(nn.get() + 1);
+        save(&c.counter, &json!({"NN": nn.get(), "processed": 0}))?;
+        Ok(model.evaluate(a)?)
+    };
+    let mut rows = Vec::new();
+    let mut undo_checks = 0;
+    let mut max_accumulator_error = 0_f32;
+    let mut max_value_error = 0_f32;
+    for (root, prefix) in c.prefixes.iter().enumerate() {
+        let mut s = SigmaContext::from_prefix(prefix)?;
+        if s.terminal_value().is_some() {
+            return Err("QUALIFY_NONTERMINAL_PREFIX_REQUIRED".into());
+        }
+        let before_position = s.position();
+        let before_history = s.history_counts();
+        let before_ply = s.total_ply();
+        let before_features = feature(&s)?;
+        let parent_scalar = model.full_context(&s, EvaluationMode::Scalar)?;
+        let parent_simd = model.full_context(&s, EvaluationMode::Simd)?;
+        let scalar_values = parent_scalar.values.clone();
+        let simd_values = parent_simd.values.clone();
+        max_accumulator_error =
+            max_accumulator_error.max(accumulator_error(&parent_scalar, &parent_simd)?);
+        let scalar = evaluate(&parent_scalar)?;
+        let simd = evaluate(&parent_simd)?;
+        if (scalar - simd).abs() > 1e-5 + 1e-4 * scalar.abs() {
+            return Err("QUALIFY_SCALAR_SIMD_ROOT_VALUE".into());
+        }
+        max_value_error = max_value_error.max((scalar - simd).abs());
+        rows.push(
+            json!({"root":root,"feature":before_features,"scalar_full":scalar,"simd_full":simd}),
+        );
+        for action in qualification_actions(&s) {
+            let immutable = s.play(action)?;
+            let expected_child = feature(&immutable)?;
+            let undo = s.make_move(action)?;
+            if feature(&s)? != expected_child {
+                return Err("QUALIFY_MAKE_IMMUTABLE_ORACLE".into());
+            }
+            let full_scalar = model.full_context(&s, EvaluationMode::Scalar)?;
+            let full_simd = model.full_context(&s, EvaluationMode::Simd)?;
+            let delta_scalar = model.delta_context(&parent_scalar, &s)?;
+            let delta_simd = model.delta_context(&parent_simd, &s)?;
+            for (a, b) in [
+                (&full_scalar, &full_simd),
+                (&full_scalar, &delta_scalar),
+                (&full_simd, &delta_simd),
+            ] {
+                max_accumulator_error = max_accumulator_error.max(accumulator_error(a, b)?);
+            }
+            let values = [
+                evaluate(&full_scalar)?,
+                evaluate(&full_simd)?,
+                evaluate(&delta_scalar)?,
+                evaluate(&delta_simd)?,
+            ];
+            for value in values {
+                let error = (values[0] - value).abs();
+                if error > 1e-5 + 1e-4 * values[0].abs() {
+                    return Err("QUALIFY_SCALAR_SIMD_FULL_DELTA_VALUE".into());
+                }
+                max_value_error = max_value_error.max(error);
+            }
+            s.unmake_move(undo)?;
+            if s.position() != before_position
+                || s.history_counts() != before_history
+                || s.total_ply() != before_ply
+                || feature(&s)? != before_features
+                || !same_float_bits(&parent_scalar.values, &scalar_values)
+                || !same_float_bits(&parent_simd.values, &simd_values)
+            {
+                return Err("QUALIFY_UNDO_PARENT_HISTORY_PLY_RESTORE".into());
+            }
+            let restored_scalar = model.full_context(&s, EvaluationMode::Scalar)?;
+            let restored_simd = model.full_context(&s, EvaluationMode::Simd)?;
+            if !same_float_bits(&restored_scalar.values, &scalar_values)
+                || !same_float_bits(&restored_simd.values, &simd_values)
+                || evaluate(&restored_scalar)?.to_bits() != scalar.to_bits()
+                || evaluate(&restored_simd)?.to_bits() != simd.to_bits()
+            {
+                return Err("QUALIFY_UNDO_EXACT_RECOMPUTE".into());
+            }
+            undo_checks += 1;
+            rows.push(json!({"root":root,"child_action":action,"feature":expected_child,
+                "scalar_full":values[0],"simd_full":values[1],"scalar_delta":values[2],"simd_delta":values[3],
+                "parent_history_ply_exact_restore":true}));
+        }
+    }
+    Ok(
+        json!({"schema":"native-residual-qualification-v1","status":"PASS","predictions":rows,
+        "NN":nn.get(),"processed":0,"undo_checks":undo_checks,"max_accumulator_error":max_accumulator_error,
+        "max_value_error":max_value_error,"abs_tol":1e-5,"rel_tol":1e-4,
+        "evaluation_modes":["Scalar","Simd"],"SIMD_scope":"FT/accumulator; residual head remains scalar",
+        "avx2_available":avx2_available,
+        "performance_claim":false,"parent_history_ply_exact_restore":true,"wall_s":start.elapsed().as_secs_f64()}),
+    )
+}
+
 fn run(c: &Config, start: Instant) -> Result<Value> {
+    if c.mode == "qualify" {
+        return qualify_residual(c, start);
+    }
     let nn = Arc::new(AtomicU64::new(0));
     let mut evaluators = Vec::new();
     let mut load_rows = Vec::new();
@@ -325,14 +483,7 @@ fn run(c: &Config, start: Instant) -> Result<Value> {
                         Some(EvalAccumulator::Float(a)) => a.values.clone(),
                         _ => return Err("FLOAT_PARITY_ACCUMULATOR".into()),
                     };
-                    let legal = s.legal_ids();
-                    let mut selected: Vec<_> = legal.iter().copied().filter(|a| *a < 81).collect();
-                    for range in [81..145, 145..209] {
-                        if let Some(a) = legal.iter().find(|a| range.contains(*a)) {
-                            selected.push(*a)
-                        }
-                    }
-                    for a in selected {
+                    for a in qualification_actions(&s) {
                         guard(c, start, nn.load(Ordering::Relaxed), processed)?;
                         let child = s.play(a)?;
                         let full = e.prepare_context(&child)?;
@@ -520,6 +671,33 @@ fn run(c: &Config, start: Instant) -> Result<Value> {
     Ok(
         json!({"schema":"native-nnue-arena-diagnosis-v1","loads":load_rows,"planned_games":c.prefixes.len()*2,"ledger":ledger,"hands":hands,"NN":nn.load(Ordering::Relaxed),"processed":processed,"processed_unknown_upper":processed_unknown_upper,"wall_s":start.elapsed().as_secs_f64(),"strength_claim":false}),
     )
+}
+
+#[cfg(test)]
+mod qualification_tests {
+    use super::*;
+
+    #[test]
+    fn qualification_actions_and_inplace_undo_match_immutable_oracle_nn0() {
+        let mut children = 0;
+        for prefix in [
+            vec![],
+            vec![13, 67, 81, 66, 14, 65],
+            vec![13, 67, 81, 66, 14, 65, 143, 126, 150, 64, 141, 151],
+        ] {
+            let mut s = SigmaContext::from_prefix(&prefix).unwrap();
+            let original = feature(&s).unwrap();
+            for action in qualification_actions(&s) {
+                let expected = feature(&s.play(action).unwrap()).unwrap();
+                let undo = s.make_move(action).unwrap();
+                assert_eq!(feature(&s).unwrap(), expected);
+                s.unmake_move(undo).unwrap();
+                assert_eq!(feature(&s).unwrap(), original);
+                children += 1;
+            }
+        }
+        assert_eq!(children, 16);
+    }
 }
 fn main() -> Result<()> {
     let args: Vec<_> = std::env::args().collect();

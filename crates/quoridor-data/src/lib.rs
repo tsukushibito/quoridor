@@ -903,6 +903,74 @@ pub fn sigma_plane_position(planes: &[f32; 648]) -> Result<quoridor_core::Positi
     Ok(p)
 }
 
+/// Original public Sigma planes to lossless STM QF1 bitsets, one independent
+/// qualification per observation. Invalid siblings never invalidate a valid row.
+/// Status 0 is valid; 1 nonfinite; 2 pawn; 3 stock; 4 wall representation;
+/// 5 checked geometry/reachability; 6 complete native plane mismatch.
+///
+/// # Safety
+/// Input has rows*648 floats, bits rows*78 bytes, distance rows*2 floats and
+/// status rows bytes. All allocations are live and nonoverlapping.
+#[unsafe(no_mangle)]
+pub unsafe extern "C" fn quoridor_sigma_compact(
+    input: *const f32,
+    rows: usize,
+    bits: *mut u8,
+    distance: *mut f32,
+    status: *mut u8,
+) -> i32 {
+    if input.is_null()
+        || bits.is_null()
+        || distance.is_null()
+        || status.is_null()
+        || rows == 0
+        || rows > 8192
+    {
+        return 1;
+    }
+    let input = unsafe { std::slice::from_raw_parts(input, rows * 648) };
+    let bits = unsafe { std::slice::from_raw_parts_mut(bits, rows * 78) };
+    let distance = unsafe { std::slice::from_raw_parts_mut(distance, rows * 2) };
+    let status = unsafe { std::slice::from_raw_parts_mut(status, rows) };
+    bits.fill(0);
+    distance.fill(0.);
+    for i in 0..rows {
+        let planes: &[f32; 648] = input[i * 648..(i + 1) * 648].try_into().unwrap();
+        match sigma_plane_position(planes) {
+            Ok(p) => match quoridor_nnue::encode_qf1(p) {
+                Ok(f) => {
+                    for view in 0..2 {
+                        for id in &f.ids[view] {
+                            let at = view * 312 + *id as usize;
+                            bits[i * 78 + at / 8] |= 1 << (at % 8);
+                        }
+                    }
+                    distance[i * 2..i * 2 + 2].copy_from_slice(&f.distance);
+                    status[i] = 0;
+                }
+                Err(_) => status[i] = 5,
+            },
+            Err(e) => {
+                let reason = e.to_string();
+                status[i] = if reason.contains("nonfinite") {
+                    1
+                } else if reason.contains("pawn plane") {
+                    2
+                } else if reason.contains("remaining-wall") {
+                    3
+                } else if reason.contains("segment") || reason.contains("padding") {
+                    4
+                } else if reason.contains("all-plane") {
+                    6
+                } else {
+                    5
+                };
+            }
+        }
+    }
+    0
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct OutcomeImportConfig {
     pub source: String,

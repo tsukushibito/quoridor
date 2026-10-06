@@ -12,10 +12,11 @@ import base64
 import json
 import time
 import tempfile
+import os
 from pathlib import Path
 import numpy as np
 from .cache import load, sha
-from .plotting import render_learning_curves
+from .plotting import render_learning_curves, render_learning_png
 
 from .common import (
     resolve_config,
@@ -131,8 +132,9 @@ def export(model, config, statistics, distance_fit, path):
     return path / "manifest.json"
 
 
-def train(cache, output, config_path=None, steps=None, *, scale_path=None):
+def train(cache, output, config_path=None, steps=None, *, scale_path=None, input_binding=None):
     start = time.monotonic()
+    os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
     import torch
 
     cfg = resolve_config(config_path, (() if steps is None else (f"training.steps={steps}",)))
@@ -145,41 +147,79 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
     torch.use_deterministic_algorithms(True)
     device = cfg["training"]["device"]
     if device == "cuda":
+        torch.backends.cuda.matmul.allow_tf32 = False
+        torch.backends.cudnn.allow_tf32 = False
+        _, device_total = torch.cuda.mem_get_info()
+        torch.cuda.set_per_process_memory_fraction(min(5 * 1024**3 / device_total, 1.0))
         torch.cuda.manual_seed_all(cfg["training"]["seed"])
     corpus = load(cache)
     binding, rows, labels = corpus.binding, corpus.rows, corpus.labels
     target = cfg["training"]["target"]
     column = {"rootmean": 0, "z": 1}[target]
-    teacher_types = selected_teacher_types(rows, target)
-    validate_target_tensor(rows, labels[:, column], target)
+    compact = getattr(corpus, "compact", False)
+    if compact and (
+        target != "z"
+        or cfg["training"]["sampling"] != "epoch"
+        or cfg["training"]["loss_weighting"] != "row"
+        or cfg["evaluation"]["monitor"] != "row"
+    ):
+        raise ValueError(
+            "public compact corpus requires decisive z / row epoch objective and row monitor"
+        )
+    if compact and (
+        corpus.manifest.get("original_only") is not True
+        or corpus.manifest.get("dataset_revision") != "original-only-v2"
+    ):
+        raise ValueError("public fit requires adopted original-only-v2 observations")
+    teacher_types = {"external_outcome"} if compact else selected_teacher_types(rows, target)
+    if not compact:
+        validate_target_tensor(rows, labels[:, column], target)
     valid = corpus.eligible & np.isfinite(labels[:, column])
     ix_train = np.flatnonzero((corpus.splits == 0) & valid)
     ix_validation = np.flatnonzero((corpus.splits == 1) & valid)
     ix_validation_raw = np.flatnonzero(corpus.splits == 1)
     if not len(ix_train) or not len(ix_validation):
         raise ValueError("nonempty eligible train and unexposed validation required")
-    codes = corpus.groups[ix_train]
-    family_codes, seen_codes = [], set()
-    for code in codes:
-        if int(code) not in seen_codes:
-            family_codes.append(int(code))
-            seen_codes.add(int(code))
-    order = np.argsort(codes, kind="stable")
-    sorted_codes = codes[order]
-    starts = np.searchsorted(sorted_codes, family_codes, side="left")
-    ends = np.searchsorted(sorted_codes, family_codes, side="right")
-    group_flat_sorted = ix_train[order]
-    group_indices = [group_flat_sorted[first:last] for first, last in zip(starts, ends)]
-    families = [corpus.families[code] for code in family_codes]
-    sums = np.zeros(len(corpus.families), dtype=np.float64)
-    counts = np.zeros(len(corpus.families), dtype=np.int64)
-    for first in range(0, len(ix_train), 4096):
-        sub = ix_train[first : first + 4096]
-        np.add.at(sums, corpus.groups[sub], labels[sub, column].astype(np.float64))
-        np.add.at(counts, corpus.groups[sub], 1)
-    constant = float(np.mean(sums[family_codes] / counts[family_codes]))
-    del codes, order, sorted_codes
+    if compact:
+        family_codes = np.unique(corpus.groups[ix_train])
+        group_indices, families = [], []
+        constant = float(np.mean(labels[ix_train, column], dtype=np.float64))
+    else:
+        codes = corpus.groups[ix_train]
+        family_codes, seen_codes = [], set()
+        for code in codes:
+            if int(code) not in seen_codes:
+                family_codes.append(int(code))
+                seen_codes.add(int(code))
+        order = np.argsort(codes, kind="stable")
+        sorted_codes = codes[order]
+        starts = np.searchsorted(sorted_codes, family_codes, side="left")
+        ends = np.searchsorted(sorted_codes, family_codes, side="right")
+        group_flat_sorted = ix_train[order]
+        group_indices = [group_flat_sorted[first:last] for first, last in zip(starts, ends)]
+        families = [corpus.families[code] for code in family_codes]
+        sums = np.zeros(len(corpus.families), dtype=np.float64)
+        counts = np.zeros(len(corpus.families), dtype=np.int64)
+        for first in range(0, len(ix_train), 4096):
+            sub = ix_train[first : first + 4096]
+            np.add.at(sums, corpus.groups[sub], labels[sub, column].astype(np.float64))
+            np.add.at(counts, corpus.groups[sub], 1)
+        constant = float(np.mean(sums[family_codes] / counts[family_codes]))
+        del codes, order, sorted_codes
     statistics, fitted = training_statistics(corpus, ix_train, column)
+    if input_binding is not None:
+        expected = json.loads(Path(input_binding).read_text())
+        expected_scale = json.loads(Path(expected["scale_artifact"]).read_text())
+        constant_path = Path(expected["scale_artifact"]).with_name("train-only-constant-v2.json")
+        expected_constant = json.loads(constant_path.read_text())
+        if (
+            binding["dataset_sha"] != expected["cache_manifest_sha"]
+            or statistics["mu_f32"] != expected_scale["mu_f32"]
+            or statistics["sigma_f32"] != expected_scale["sigma_f32"]
+            or constant != expected_constant["row_mean_constant"]
+            or scale_path is not None
+        ):
+            raise ValueError("fit train-only statistics/constant/input binding mismatch")
     if scale_path is not None:
         from .scaled_model import validate_statistics
 
@@ -236,7 +276,7 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
     curve, diagnostics, diagnostic_curve = [], [], []
     group_lengths = np.array([len(group) for group in group_indices], dtype=np.int64)
     group_offsets = np.concatenate([[0], np.cumsum(group_lengths)[:-1]])
-    group_flat = np.concatenate(group_indices)
+    group_flat = np.concatenate(group_indices) if group_indices else np.empty(0, dtype=np.int64)
     from .sampling import (
         EpochSampler,
         EarlyStopping,
@@ -272,18 +312,34 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
     scheduled = cfg["artifacts"]["save_scheduled"]
     evaluation_validation = ix_validation_raw if scheduled else ix_validation
     primary_in_raw = np.searchsorted(ix_validation_raw, ix_validation)
-    diag_train = diagnostic_indices(
-        rows,
-        ix_train,
-        cfg["evaluation"]["diagnostic_rows"],
-        cfg["training"]["seed"],
-    )
-    diag_val = diagnostic_indices(
-        rows,
-        ix_validation,
-        cfg["evaluation"]["diagnostic_rows"],
-        cfg["training"]["seed"],
-    )
+    if compact:
+        # Target-blind fixed subset, independent of the epoch sampler generator.
+        rng = np.random.default_rng(cfg["training"]["seed"] + 2)
+        diag_train = np.sort(
+            rng.choice(
+                ix_train, min(len(ix_train), cfg["evaluation"]["diagnostic_rows"]), replace=False
+            )
+        )
+        diag_val = np.sort(
+            rng.choice(
+                ix_validation,
+                min(len(ix_validation), cfg["evaluation"]["diagnostic_rows"]),
+                replace=False,
+            )
+        )
+    else:
+        diag_train = diagnostic_indices(
+            rows,
+            ix_train,
+            cfg["evaluation"]["diagnostic_rows"],
+            cfg["training"]["seed"],
+        )
+        diag_val = diagnostic_indices(
+            rows,
+            ix_validation,
+            cfg["evaluation"]["diagnostic_rows"],
+            cfg["training"]["seed"],
+        )
     train_eval = ix_train if cfg["evaluation"]["full_train"] else diag_train
     if not len(train_eval):
         raise ValueError("full_train=false requires nonempty diagnostic subset")
@@ -380,6 +436,8 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
         return values
 
     def summarize(indices, values):
+        if compact:
+            return compact_measurements(corpus, indices, values, constant, distance_fit, ix_train)
         scope = hashlib.sha256(np.asarray(indices, dtype="<i8")).hexdigest()
         measured = MeasurementAccumulator(target, constant)
         reference = MeasurementAccumulator(target, constant)
@@ -533,7 +591,13 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
                     if cfg["evaluation"]["monitor"] == "row"
                     else "target_game_equal_mse"
                 ]
-                improved, stop = stopper.observe(loss)
+                if cfg["evaluation"]["early_stopping_unit"] == "epoch":
+                    boundary = training_seen > 0 and training_seen % len(ix_train) == 0
+                    if boundary:
+                        _, stop = stopper.observe(loss)
+                    improved = loss < best_loss
+                else:
+                    improved, stop = stopper.observe(loss)
                 if improved:
                     best_step, best_loss = step, loss
                     best_state = {
@@ -601,7 +665,7 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
                 "file": "batch.jsonl.gz",
                 "record_status": "COMPLETED",
                 "field": "gradient_norm",
-                "completed_records": len(diagnostics),
+                "completed_records": completed_step,
             },
         )
         for name, records in [("curves", curve), ("diagnostic-curves", diagnostic_curve)]:
@@ -618,6 +682,15 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
                     else "Fixed diagnostics (never checkpoint selection)"
                 ),
             )
+        if compact:
+            np.savez_compressed(
+                output / "sampling-counts.npz",
+                training_indices=ix_train,
+                row_counts=sampled_rows,
+                attempted_row_counts=attempted_rows,
+            )
+        if compact:
+            render_learning_png(curve, output / "curves.png", selected_step=best_step)
         write(
             output / "sampling.json",
             {
@@ -627,12 +700,13 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
                 "row_count_order": "immutable loaded cache order",
                 "attempted_step": attempted_step,
                 "optimizer_steps": completed_step,
-                "training_indices": ix_train,
+                "training_indices": None if compact else ix_train,
                 "training_rows": len(ix_train),
-                "row_counts": sampled_rows,
-                "attempted_row_counts": attempted_rows,
+                "row_counts": None if compact else sampled_rows,
+                "attempted_row_counts": None if compact else attempted_rows,
                 "training_row_min_visits": int(sampled_rows[ix_train].min()),
                 "training_row_max_visits": int(sampled_rows[ix_train].max()),
+                "compact_counts_file": "sampling-counts.npz" if compact else None,
                 "family_counts": {
                     family: int(sampled_rows[group].sum())
                     for family, group in zip(families, group_indices)
@@ -764,7 +838,8 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
                         "samples": samples,
                         "wall_seconds": time.monotonic() - start,
                     }
-                    diagnostics.append(record)
+                    if not compact:
+                        diagnostics.append(record)
                     append_record(batch_log, record)
                     if step in evaluation_steps or step in diagnostic_steps:
                         if evaluate(step, step in evaluation_steps, step in diagnostic_steps):
@@ -774,6 +849,15 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
                         save_checkpoint(step)
                 else:
                     status = "COMPLETED"
+        except RuntimeError as error:
+            if str(error) != "training budget exhausted":
+                status, fault = "INTERRUPTED", {"type": type(error).__name__, "message": str(error)}
+                raise
+            status, fault = "BUDGET_STOPPED", {"type": type(error).__name__, "message": str(error)}
+            append_record(
+                batch_log,
+                {"status": status, "fault": fault, **position(), "attempted_step": attempted_step},
+            )
         except BaseException as error:
             status, fault = "INTERRUPTED", {"type": type(error).__name__, "message": str(error)}
             append_record(
@@ -855,6 +939,7 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
         "weights_sha": sha(output / "best-model" / "weights.f32"),
         "initial_weights_sha": sha(output / "initial-model" / "weights.f32"),
         "dataset_sha": binding["dataset_sha"],
+        "cache_schema": binding.get("schema"),
         "test_opened": False,
         "wall_seconds": time.monotonic() - start,
     }
@@ -862,6 +947,80 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
     write(output / "freeze.json", freeze)
     persist()
     return freeze
+
+
+def compact_measurements(corpus, indices, values, constant, distance_fit, train_indices):
+    """Aggregate row and model-input-group metrics without per-row/group JSON."""
+    if not hasattr(corpus, "train_known_groups"):
+        corpus.train_known_groups = np.zeros(len(corpus.families), dtype=bool)
+        corpus.train_known_groups[corpus.groups[train_indices]] = True
+    group_counts = np.zeros(len(corpus.families), dtype=np.int64)
+    group_error = np.zeros(len(corpus.families), dtype=np.float64)
+    group_distance = np.zeros(len(corpus.families), dtype=np.float64)
+    group_constant = np.zeros(len(corpus.families), dtype=np.float64)
+    strata = {}
+    error_sum = distance_sum = constant_sum = bias = 0.0
+    sign_correct = saturated = 0
+    for first in range(0, len(indices), 4096):
+        sub = indices[first : first + 4096]
+        prediction = np.asarray(values[first : first + len(sub)], dtype=np.float32)
+        if not np.isfinite(prediction).all():
+            raise ValueError("nonfinite compact prediction")
+        # Metadata is gathered by bounded batches. No dense full-corpus tensor.
+        _, distance, labels = corpus.batch(sub)
+        target = labels[:, 1]
+        baseline = np.tanh(
+            np.float32(distance_fit["a"])
+            + np.float32(distance_fit["b"]) * (distance[:, 1] - distance[:, 0])
+        )
+        errors = (prediction.astype(np.float64) - target) ** 2
+        de = (baseline.astype(np.float64) - target) ** 2
+        ce = (np.float32(constant).astype(np.float64) - target) ** 2
+        groups = corpus.groups[sub]
+        np.add.at(group_counts, groups, 1)
+        np.add.at(group_error, groups, errors)
+        np.add.at(group_distance, groups, de)
+        np.add.at(group_constant, groups, ce)
+        error_sum += errors.sum()
+        distance_sum += de.sum()
+        constant_sum += ce.sum()
+        bias += (prediction.astype(np.float64) - target).sum()
+        sign_correct += int(np.count_nonzero(prediction * target > 0))
+        saturated += int(np.count_nonzero(np.abs(prediction) >= 0.9))
+        source = np.fromiter((int(corpus.record(int(i))["shard"]) for i in sub), dtype=np.int16)
+        phase = np.fromiter((int(corpus.record(int(i))["phase"]) for i in sub), dtype=np.int8)
+        for dimension, codes in [
+            ("source", source),
+            ("phase", phase),
+            ("train_input_known", corpus.train_known_groups[groups].astype(np.int8)),
+        ]:
+            for code in np.unique(codes):
+                mask = codes == code
+                pair = strata.setdefault(f"{dimension}:{int(code)}", [0, 0.0])
+                pair[0] += int(mask.sum())
+                pair[1] += float(errors[mask].sum())
+    mask = group_counts > 0
+    n = len(indices)
+    if not n:
+        raise ValueError("empty measurement scope")
+    group_mse = float(np.mean(group_error[mask] / group_counts[mask]))
+    return {
+        "rows": n,
+        "input_groups": int(mask.sum()),
+        "group_kind": "QF1+distance model input; game/history UNKNOWN",
+        "target_mse": float(error_sum / n),
+        "z_mse": float(error_sum / n),
+        "target_game_equal_mse": group_mse,
+        "z_game_equal_mse": group_mse,
+        "distance_mse": float(distance_sum / n),
+        "constant_mse": float(constant_sum / n),
+        "distance_group_equal_mse": float(np.mean(group_distance[mask] / group_counts[mask])),
+        "constant_game_equal_mse": float(np.mean(group_constant[mask] / group_counts[mask])),
+        "z_sign_accuracy": sign_correct / n,
+        "saturation_fraction": saturated / n,
+        "bias": float(bias / n),
+        "strata": {k: {"rows": v[0], "target_mse": v[1] / v[0]} for k, v in strata.items()},
+    }
 
 
 def _curve_csv(curves, path):
@@ -877,6 +1036,17 @@ def _curve_csv(curves, path):
                 "wall_seconds",
                 "train_group_mse",
                 "validation_group_mse",
+                "train_scope",
+                "train_row_mse",
+                "validation_row_mse",
+                "train_distance_mse",
+                "validation_distance_mse",
+                "train_constant_mse",
+                "validation_constant_mse",
+                "train_sign_accuracy",
+                "validation_sign_accuracy",
+                "train_saturation_fraction",
+                "validation_saturation_fraction",
             ]
         )
         for point in curves:
@@ -895,6 +1065,17 @@ def _curve_csv(curves, path):
                 + [
                     point["train"]["target_game_equal_mse"],
                     point["validation"]["target_game_equal_mse"],
+                    point.get("train_scope"),
+                    point["train"]["target_mse"],
+                    point["validation"]["target_mse"],
+                    point["train"].get("distance_mse"),
+                    point["validation"].get("distance_mse"),
+                    point["train"].get("constant_mse"),
+                    point["validation"].get("constant_mse"),
+                    point["train"].get("z_sign_accuracy"),
+                    point["validation"].get("z_sign_accuracy"),
+                    point["train"].get("saturation_fraction"),
+                    point["validation"].get("saturation_fraction"),
                 ]
             )
 
@@ -940,7 +1121,25 @@ def verify_freeze(training):
         or data["binding"]["dataset_sha"] != binding["dataset_sha"]
     ):
         raise ValueError("freeze training input identity differs")
+    if freeze.get("cache_schema") != binding.get("schema"):
+        raise ValueError("frozen cache schema differs from bound training corpus")
     return freeze
+
+
+def verify_test_cache_before_open(cache, freeze):
+    """Compact train/test share one all-partition manifest; check before labels."""
+    manifest = Path(cache) / "cache.json"
+    descriptor = json.loads(manifest.read_text()) if manifest.is_file() else {}
+    if (
+        freeze.get("cache_schema") == "quoridor-public-compact-v1"
+        or descriptor.get("schema") == "quoridor-public-compact-v1"
+    ):
+        if (
+            not manifest.is_file()
+            or descriptor.get("schema") != "quoridor-public-compact-v1"
+            or sha(manifest) != freeze["dataset_sha"]
+        ):
+            raise ValueError("frozen compact test corpus differs before label opening")
 
 
 def mapped_values(count, dtype="<f4"):
@@ -1012,6 +1211,7 @@ def test(cache, training, output):
     freeze_sha = sha(freeze_path)
     # No model construction or forward may precede complete attribution checks.
     freeze = verify_freeze(training)
+    verify_test_cache_before_open(cache, freeze)
     corpus = load(cache, allow_test=True)
     cfg = json.loads((training / "config.json").read_text())
     data = json.loads((training / "data.json").read_text())
@@ -1035,7 +1235,8 @@ def test(cache, training, output):
     # Verify checkpoint/native parameter correspondence before sharing model forwards.
     checkpoint_predictions = {}
     size = cfg["evaluation"]["batch_size"]
-    for name in ("initial", "best"):
+    checkpoint_names = ("best",) if getattr(corpus, "compact", False) else ("initial", "best")
+    for name in checkpoint_names:
         digest = freeze["artifacts_sha256"][name + "-model/weights.f32"]
         cp = torch.load(training / (name + ".pt"), map_location="cpu", weights_only=True)
         if (
@@ -1087,7 +1288,11 @@ def test(cache, training, output):
     for name, (all_rows, unexposed) in accumulators.items():
         reports[name] = {
             "all": all_rows.result(),
-            "unexposed": unexposed.result() if primary_count else None,
+            (
+                "eligible_heldout_observations"
+                if getattr(corpus, "compact", False)
+                else "unexposed"
+            ): unexposed.result() if primary_count else None,
         }
     # numpy's zip writer streams array storage rather than constructing a combined tensor.
     np.savez(output / "predictions.npz", **predictions)
@@ -1095,7 +1300,7 @@ def test(cache, training, output):
         "freeze_sha": freeze_sha,
         "candidate_sha": freeze["weights_sha"],
         "checkpoint_sha256": {
-            name: freeze["artifacts_sha256"][name + ".pt"] for name in ("initial", "best")
+            name: freeze["artifacts_sha256"][name + ".pt"] for name in checkpoint_names
         },
         "evaluation_cache_binding": corpus.binding,
         "rows": len(test_index),
@@ -1103,12 +1308,64 @@ def test(cache, training, output):
         "metrics": reports,
         "unique_model_forwards": len(checkpoint_predictions),
         "test_reused_for_selection": False,
+        "exposure_status": "UNKNOWN; held-out source observations, no unseen-game guarantee"
+        if getattr(corpus, "compact", False)
+        else "native family exposure protocol",
     }
     if sha(freeze_path) != freeze_sha or verify_freeze(training) != freeze:
         raise ValueError("frozen evaluation inputs mutated during test")
     corpus.verify_binding()
     write(output / "result.json", result)
     return result
+
+
+def guarded_train(config_path):
+    """Launch the maintained trainer once, with exact child ownership and resource caps."""
+    import sys
+    from .cycle_process import GPUResources, cancellation_signals, execute
+
+    cfg = json.loads(Path(config_path).read_text())
+    for path, digest in cfg["expected_files_sha256"].items():
+        if sha(path) != digest:
+            raise ValueError("fixed fit input/source/control changed: " + path)
+    admission = json.loads(Path(cfg["storage_admission"]).read_text())
+    if admission.get("admission") != "within" or admission.get("errors"):
+        raise ValueError("fit storage admission before child/GPU")
+    os.sched_setaffinity(0, {2, 3})
+    root = Path(cfg["output"]).parent
+    deadline = time.monotonic() + cfg["seconds"]
+    resources = GPUResources(cfg["resources"], root, deadline)
+    command = [
+        sys.executable,
+        "-B",
+        "-m",
+        "quoridor_training.train",
+        "train",
+        "--cache",
+        cfg["cache"],
+        "--output",
+        cfg["output"],
+        "--config",
+        cfg["fit_config"],
+        "--input-binding",
+        cfg["input_binding"],
+    ]
+    try:
+        with cancellation_signals():
+            execute(command, root / "fit.log", deadline, resources=resources)
+    finally:
+        write(
+            root / "observed-resources.json",
+            {
+                **resources.observed,
+                "wall_seconds": cfg["seconds"] - max(0, deadline - time.monotonic()),
+                "sampling": "guardian checks, not continuous absolute peak",
+                "controller_reserve_bytes": resources.controller_reserve,
+                "whole_device_VRAM_cap_bytes": resources.vram_limit,
+                "co_running_pure_compile_NN0_allowed": True,
+                "comparative_speed_claim": False,
+            },
+        )
 
 
 def main():
@@ -1122,11 +1379,23 @@ def main():
         "--scale", help="explicit distance moments JSON; otherwise train-only moments"
     )
     parser.add_argument("--training")
+    parser.add_argument("--input-binding")
+    parser.add_argument("--guard-config")
     args = parser.parse_args()
     if args.command == "train":
+        if args.guard_config:
+            guarded_train(args.guard_config)
+            return
         print(
             json.dumps(
-                train(args.cache, args.output, args.config, args.steps, scale_path=args.scale)
+                train(
+                    args.cache,
+                    args.output,
+                    args.config,
+                    args.steps,
+                    scale_path=args.scale,
+                    input_binding=args.input_binding,
+                )
             )
         )
     else:
