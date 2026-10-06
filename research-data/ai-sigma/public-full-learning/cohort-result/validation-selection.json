@@ -1,0 +1,57 @@
+{
+  "scope": "validation-only locked-cohort selection; final release pending",
+  "source_receipt": "/workspaces/quoridor/.worktree/learning-million/.artifacts/public-full-learning/fit-lr3e-4-stop-receipt-r3.json",
+  "source_receipt_SHA256": "38b435bb375169c43a10aad14e34205f56fc7c765982fca3c5af20bfcccd2adf",
+  "rule": "minimum full original V rowMSE; exact tie lower LR then earlier step",
+  "candidates": [
+    {
+      "id": "lr3e-5",
+      "LR": 3e-5,
+      "V": 0.45935937804402843,
+      "best_epoch": 145,
+      "best_step": 595805,
+      "completion": "Root artifact-only scientificstop149 attributed; rawfailedpipeline remains"
+    },
+    {
+      "id": "lr1e-4",
+      "LR": 0.0001,
+      "V": 0.45253175974553156,
+      "best_epoch": 102,
+      "best_step": 419118,
+      "completion": "scientificstop104/jobexit0"
+    },
+    {
+      "id": "lr3e-4",
+      "LR": 0.0003,
+      "V": 0.4486358587958654,
+      "best_epoch": 75,
+      "best_step": 308175,
+      "completion": "scientificstop75/jobexit0"
+    }
+  ],
+  "selected": {
+    "id": "lr3e-4",
+    "LR": 0.0003,
+    "V": 0.4486358587958654,
+    "best_epoch": 75,
+    "best_step": 308175,
+    "completion": "scientificstop75/jobexit0"
+  },
+  "selected_weights_SHA256": "1c84ab3937202fbbaea0818ca55c08838939b418a4993cf7ffde03572f1af455",
+  "Root_checks": [
+    "exact STOP/exit0/direct trainer wait/cleanup/remaining",
+    "fresh recorded guardian/trainer identity absent",
+    "independent fixed rule minimum",
+    "selected native weights bytes SHA"
+  ],
+  "pending": [
+    "third fit checkpoint/visits/images collection",
+    "selected trained native numerical qualification",
+    "global freeze and related Sigma/newE boundary qualification",
+    "sealed newE evaluation"
+  ],
+  "first_fit_raw_failure_preserved": true,
+  "new_fit_or_default_weights_adoption": false,
+  "newE_opened": false,
+  "Sigma_evaluation_completed": false
+}
