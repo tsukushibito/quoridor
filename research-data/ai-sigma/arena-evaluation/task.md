@@ -55,3 +55,5 @@
 旧guard source/SHAを保存し、single-statとbounded inventory retryで修復する。retry枯渇はUNKNOWN・admission拒否を維持し、消失fileを無条件freeへ換算しない。限定NN0 race/枯渇fixture後、fresh within・実物理・共有target唯一writerを確認して未完了の限定integration/build/Clippyだけを継続する。製品source14path・既PASS fixtureを再用し、fullsuite/NN/arena時計を追加しない。CPU0,1/RAM2/GPU0/build40MiB/inclusive64MiB、319固定fitとの並行・318への直接target開始/終了通知は不変更。このphase失敗時の更なる反復は未配分。
 
 2026-10-06のr2ではarena9/config3とrelease buildはPASS、Clippy2件でexit1。旧費込み249.241232294/600秒・残350.758767706秒を保持する。通常のlet-chain/初期化構文修正後、新しいONE最終software phase最大120秒（support10＋outer110/worker95）を残内から配分する。318比較のexact STOP後にfresh admission/physicsで開始し、変更箇所に関係する限定fixture/build/Clippyを検証する。元版PASSと新版資格を区別し、further retry/fullsuite/NN/arena時計は追加しない。
+
+同じ新版a230の最終phaseではmanifest2/arena9/config3はPASS、cycle期限により専用release binary buildとClippyは未開始だった。旧費累計363.513183779/600秒・残236.486816221秒を保持し、未完了の2commandだけにONE phase最大150秒（support5＋outer145/worker120）を追加配分する。同sourceのPASS fixtureは再実行せず、新source変更・fullsuite・NN・arena時計を追加しない。fresh admission/physicsと唯一target writer成立後に開始し、学習担当の新native qualifierはこのphaseのexactSTOP後へ順序づける。更なる失敗の自動反復は未配分。
