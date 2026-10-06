@@ -39,7 +39,7 @@
 - CPU最大2 logical、重い作業はRootが割当てるslotで0,1を候補とし、319の2,3と区別する。family RAM最大2GiB、GPU0/新取得0/新依存0。全親CPU4/RAM8/VRAM6/保存12GiB/UNKNOWN128MiB維持。
 - 新保存64MiB inclusive（code/WT8、build40、必要evidence8、Git/temp8MiBの目安）。完了maintenanceのforward reservation160→96MiBとarena64を保存し、current資産・old fees/caps・UNKNOWNを減額/削除しない。shared targetの現在分と新増分、WT/ignored/tmp/Gitも束縛しfresh directed coverageを維持する。見積り不成立なら具体不足をRootへ戻す。
 - compile/tests/lint/NN0 fixturesは累計600秒、初回native動作確認は最大2job/全attempt180秒/各job90秒。初回はD対Dまたは人工小終局prefixによる時計・色交換・取消・pair/unknownの機能確認で最大4game slot、NN/GPU0。モデル本対局・Sigma book生成・十分な対局数の比較は今回未配分。
-- 静的source実装は直ちに開始可。新Cargo build/重test/arena/計時は319 v2data自然STOPと318次比較/GPU資格の枠をRootと調整後だけ開始する。現共有target build/重native/clockとの競合0、他owner interrupt/kill0、ACK待ちを恒久gateにせず実停止・current physicsで判断する。
+- 静的source実装は直ちに開始可。2026-10-06の連携調整で、319のprivate immutable native参照成立と318ビルドのexact STOP通知後は、通常のビルド・限定NN0ソフト検証をCPU0,1/RAM2GiB/GPU0で319固定本fitと並行可。共有target writerは一人、親CPU/RAM内、同時費は競合ありと記録する。初回は最大300秒を既600秒内で使い、実arena smoke/時計は319自然STOPまで開始しない。速度比較・arena実時計と競合する仕事は非重複を維持し、他owner interrupt/kill0、Rootの受領ACKだけを次工程gateにしない。
 - 長jobは既research-jobのbounded log/cancel/exact child cleanup/一度の完了通知を使い、完了イベントまでIdle。新server/cron/周期LLM監視・固定role・追加executor/reviewerの再帰委譲は今回配分0。必要独立レビューの対象と予算は実装停止後にRootが決める。
 
 ## 検証と引渡し

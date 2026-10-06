@@ -28,6 +28,12 @@ Rootが人間との窓口、研究状態の整理、作業調整、成果統合�
 
 mainは持続的研究の統合正本。並行変更・具体的な比較にはmanaged worktreeを使う。必要なモデル・checkpoint・入力は同じ永続volumeの`.worktree/assets/`で保持し、指示・文書・現役sourceを恒常mirrorしない。使用中資産と共有DB・lock・worktreeを保護する。[研究コードの保守案内](../development/ai-research-code.md)と[実行・記録規約](../development/ai-research-experiments.md)を参照する。
 
+### 計算枠と直接引渡し
+
+Rootは依存成果物、書込許可、計算許可を分けて配分する。実際の速度比較・profile・対局時計は競合する計算と非重複にする。一方、通常のビルド・NN0ソフト検証は、合計CPU/RAM等が親予算内で、実行中jobが読むbinary/libraryがSHA付きimmutable参照なら並行できる。共有Cargo targetのwriterは常に一人にする。同時実行中のelapsedは全費として残すが、公平な速度比較には使わない。
+
+条件付きの次工程も依頼時に配分し、担当は成果物のbindingと実STOP・childwait・cleanupを次の担当とRootへ直接通知する。既に配分された工程はその条件成立で進め、Rootの受領返答だけを追加gateにしない。開始できない場合は、欠けている具体的な成果物・資源・所有を報告する。終了イベントは既存job通知を使い、確認だけの定期LLM起床や常設調整役を増やさない。
+
 ## セッションの選択と再利用
 
 セッションは仕事の継続性と必要なコンテキストで選ぶ。担当を増やすこと自体を目的にせず、Rootは人間との窓口と統合を継続する。
@@ -53,7 +59,7 @@ mainは持続的研究の統合正本。並行変更・具体的な比較にはm
 
 保存App Server threadは `thread/start` 又は自然idle時の `thread/resume` で `sandbox: "danger-full-access"`、`approvalPolicy: "never"` を明示する。UIを使う場合もFull accessへ揃える。開始元は適用応答のsandbox・approval policyとcwdを確認し、最初の通常コマンドが成功することを確認する。サブエージェントも開始元のフルアクセス設定が引き継がれていることを確認する。モデル・effort・cwdはこの権限整合のために変更しない。
 
-現在の `research-session.sh create/send` は権限設定を明示する引数を持たないため、その返却成功だけでフルアクセス適用済みとは判断しない。開始元が既存のUI/APIで設定・応答を確認する。既存セッションがActiveなら通常は自然idleで整合する。起動失敗・承認待ちで実処理が始まっていない場合は、Rootが正確な自分の依頼turnだけを終了し、同じthreadの権限を整合して同じタスクを再開できる。実行中の科学processを権限整合のために無断で中断しない。
+`research-session.sh create/send` とjob完了通知は、承認済みのフルアクセス設定を作成・再開・新turnへ明示する。限定testsの成功と実際の適用応答・通常コマンド成功は区別して確認する。既存セッションがActiveなら通常は自然idleで整合する。起動失敗・承認待ちで実処理が始まっていない場合は、Rootが正確な自分の依頼turnだけを終了し、同じthreadの権限を整合して同じタスクを再開できる。実行中の科学processを権限整合のために無断で中断しない。
 
 フルアクセスはユーザーが指定した実行環境の設定であり、新しい実験・資源上限・書込範囲・削除・公開・重要設計の決定権限を広げない。各タスクの許可、所有、停止条件とRoot経由の人間判断は引き続き守る。この共通設定を毎タスクで再承認する手順は追加しない。
 

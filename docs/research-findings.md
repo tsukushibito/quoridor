@@ -57,7 +57,9 @@ data処理341.580264秒、controller全job341.814518秒、network1,664,424,671B�
 
 original-only v2の復旧job `2c121563-6813-4226-a9e5-716c860cc9ba` は08:55:38 UTCにexit0/cleanup true/remaining空・子回収で終了した。cache manifestはT100万/V5万/sealed E5万、モデル入力distinct366,638/32,263/32,143。これは保存観測行と入力identityの集計であり、独立game数や100万種類ではない。Payload全資格・v2 train-only尺度と定数のbindingは担当が続けて確認する。GPUfit/testはこの読取時点で未開始。
 
-先行v2 jobのチェック未完了後submitは取消・原費保持とした。さらに完了通知がnotLoadedから制限付き権限で復帰する管理不具合で結果確認を妨げたが、Rootは正式fullaccess再開し、mainの作成/再開/完了通知で承認済み権限を明示する通常修復を行った。38限定tests/プロジェクトRuff/AST一致は有限ソフト資格であり、次の実通知の成功は未認定。[修復証拠](../research-data/ai-sigma/task-session-permissions/repair.json)。旧data費/失敗・UNKNOWN・方法・モデルは不変更。次は既GPU3600秒の範囲で最大30秒の供給・数値資格を非競合slotに配分し、基準本fitはその停止後のまとまったslotへ接続する。
+先行v2 jobのチェック未完了後submitは取消・原費保持とした。さらに完了通知がnotLoadedから制限付き権限で復帰する管理不具合で結果確認を妨げたが、Rootは正式fullaccess再開し、mainの作成/再開/完了通知で承認済み権限を明示する通常修復を行った。38限定tests/プロジェクトRuff/AST一致は有限ソフト資格であり、次の実通知の成功は未認定。[修復証拠](../research-data/ai-sigma/task-session-permissions/repair.json)。旧data費/失敗・UNKNOWN・方法・モデルは不変更。その後のGPU供給・初期native資格は修復job `cd145ca4` でPASS/exit0/cleanup/remaining空となった。CPU/CUDA/native計10,313forward、native-CUDA差7.45e-9、同2048行の破棄Adam更新差7.28e-12。初回CPU3のSMT guard拒否とouter config拒否を含む全attempt10.501695秒を保存し、GPU3600秒の残3589.498305秒で固定original-only一fitを配分した。資格PASSは本fit・学習済みnative・最終test成功ではない。固定順の128/512/2048資格時計は最初のbackward等cold費が偏るためbatch変更の根拠にしない。
+
+実行の連携では、学習のnative binary/libraryをSHA付きprivate immutable参照へ束縛してから、既CPU2,3/RAM4/GPU6の固定fitと、CPU0,1/RAM2/GPU0の通常ビルド・限定ソフト検証を並行可とした。共有targetは318→320の一人ずつ、ビルドのexact STOPを担当間で直接渡す。profile・速度比較・arena実時計は学習停止後の非競合枠に残す。合計親資源・個別残費は増やさず、同時実行時間は公平な速度比較に使わない。実開始は担当receiptで確認し、配分受理を実学習へ読み替えない。
 
 ## 選択済みの棋力評価環境
 
