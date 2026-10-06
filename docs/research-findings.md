@@ -67,6 +67,8 @@ original-only基準GPU fitは10:30:37 UTCに自然STOP/exit0/cleanup/remaining�
 
 同じ凍結BESTの追加native資格は19局面・16子局面/取り消しでScalar/Simd FT・差分更新・親accumulator/history/ply復帰がPASS、CPUとの最大差3.13e-7。残差headはScalarのまま。工程全体は期限終了で失敗し、数値段の親directwaitは未記録だが、native子のdirectwait成功、guardian回収・remaining空と記録した科学PID不在を確認した。Rootは停止版53sourceとprivate ELFをSHA照合し、この限定数値証拠と停止を既評価高速化の引渡し条件として受け入れた。工程全体の成功・速度・棋力を認定せず、再資格やsealed評価を探索着手の追加条件にしない。容量は完成済みRoot結果と既予約を共有し、短い検証の起動前/実行中に共有Cargo cache全体を反復走査する任意ガードを外した。[限定受入れと実配送](../research-data/ai-sigma/search-optimization/learning-native-handoff-accepted.json)。
 
+続く同算術のinline入力バッファ候補は、固定BESTの独立oracleと8plain runで数値/探索結果が一致した。4組AB/BA合計のwhole-process時間比1.009769、target時間比1.026430で探索全体の利益は未支持。推論micro比.961114を全体の利益へ外挿せず、Rootは不採用を受け入れ、main評価器を変更しない。実行bitの初回起動拒否を保存し、2job完了後の追加測定は開始しない。Rootは保存値から時間比を再計算し、80member archiveの復元SHAを照合した。[結果と受入れ](../research-data/ai-sigma/search-optimization/evaluation-result/report.md)。
+
 ## 選択済みの棋力評価環境
 
 ユーザーは既存Linux release Rust arenaを拡張する専用セッションを選んだ。評価器比較は同探索、探索比較は同凍結評価器、全体比較は固定Sigma設定とし、同時間棋力と同仕事の処理速度を分ける。開始prefix/historyを保存し担当側交換のpairで集計する。Sigma参照のabs(Q)<=0.2は暫定主book目安で、均衡や校正確率の保証ではない。初期盤面と傾いた・戦術診断を別群にする。
