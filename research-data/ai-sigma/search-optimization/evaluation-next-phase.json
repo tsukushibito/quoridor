@@ -72,5 +72,28 @@
       "receipt_sha256": "8f114adeb29d43457dde746dbc87374a1476d2fe684ecef4cdbcc79b24a2b9c5",
       "meaning": "conditional task accepted; compute not started"
     }
+  },
+  "software_failure_continuation": {
+    "authority": "Root routine continuation of existing accepted candidate after private-copy execution mode repair",
+    "failed_job_preserved": "b7750399-7185-4a39-8a29-9ac61214d31f",
+    "failed_job_receipt": "/workspaces/quoridor/.worktree/search-optimization/.artifacts/search-optimization/evaluation-v1/software-stop.json",
+    "failed_job_receipt_sha256": "81b9ace4ae51c52034c6c7eac7b86fcdefe04b6f580ed5c318f97b852959ecdb",
+    "failed_job_whole_seconds": 46.98462444206234,
+    "Root_checked": "stopped source SHA and private baseline/candidate content SHA + executable access match; no oracle rerun by Root",
+    "remaining_software_seconds": 43.01537555793766,
+    "existing_comparison_seconds": 60,
+    "second_and_final_job": {
+      "all_attempt_outer_upper_seconds": 100,
+      "worker_upper_seconds": 90,
+      "jobs_used_after_launch": 2,
+      "max_jobs_unchanged": 2,
+      "fixedBEST_oracle_required_before_comparison": true,
+      "rebuild_retest": false
+    },
+    "no_reset_or_refund": true,
+    "scope": "same frozen candidate/BEST. Execute only previously unstarted fixedBEST correctness oracle, then original alternating plain comparison and secondary microbenchmark if parity succeeds. No new candidate, new model/data, test labels or scientific design.",
+    "failure_stop": "remaining time, parity, source/model binding, pause/owner/physics failure; no automatic third job",
+    "capacity": "reuse completed Root capacity and current reserved forecast; no repeated global/target inventory",
+    "performance_status": "NOT_STARTED"
   }
 }
