@@ -12,6 +12,8 @@ CPU2 logical/RAM2GiB/GPU0、compile・tests・profile累計600秒/各job120秒�
 
 初回CPU2logical/RAM4GiB/VRAM6GiB、新保存768MiB inclusive、取得・変換7200秒、compile/tests600秒、GPU全job費3600秒、最終CPU評価300秒。旧保持12GiB/UNKNOWN128MiBを維持し、終了済みタスクの未使用future保存予約をRootが前向き移譲してfresh coverageを束縛する。旧費・失敗・GPU残量は変更しない。探索318との共有buildと性能計時を調整し、重要なbatch/モデル等の変更は人間判断へ戻す。
 
+独立review後、ユーザーはoriginal-onlyでT100万/V5万/E5万を新規抽出するv2を明示選択した。元のmixed corpus・規則・SHA・費を保持し、新43blob取得系列に最大2,163,752,072Bを追加配分する。二系列合算最大4,327,504,144B、時間・768MiB保存・GPU枠はreset/増額しない。新peak forecastと計測slot成立後に既担当が再処理する。naiveLRの合法性を元盤面・コピーzの妥当性へ読み替えず、導入修正を同reviewerへ戻す。
+
 ## 終了した枠と証拠
 
 frame24/extension25の元の開始は2026-10-06 00:08:46 UTC、連続延長の予定終了は04:08:46 UTC。ユーザーの解体指示により予定時刻を待たず終了した。学習310・描画315・提案316・TT計測317は有限引渡し済み。

@@ -2,6 +2,15 @@
 
 Beads `quoridor-4lc.319`。ユーザーは2026-10-06、Rootの100万行GPU学習案を承認し、待機中の学習セッションへの実配分を指示した。旧待機限定契約をこの仕事に置き換える。固定チーム、過去frame、旧GPU残予算は再開しない。
 
+同日の独立レビュー後、ユーザーは**元観測だけで100万行を再抽出**する案を明示選択した。以下は前向きのv2差分で、元のmixed corpus・抽出規則・費・失敗・SHAを保存したまま適用する。
+
+- 全43の前半original観測だけを候補にし、新T1,000,000/V50,000/sealed E50,000を作る。naiveLR後半は今回の教師へ入れず、鏡側だけ保持されたaliasを元盤面の観測へ読み替えない。有効originalの同入力・別勝敗は保持する。元のseedとalias単位splitは可能な限り維持し、original-only対象と新version/output/configを結果前に固定する。
+- 最初のmixed corpusのoriginal alias distinct942,288/47,187/47,191は行数ではない。実保持original行は824,069/41,230/41,322で、単にfilterするだけでは指定件数に届かない。v2で不足を繰返し・LR変換・別盤面ラベルのコピーで補わない。
+- XOR priorityの複数stream独立性や厳密な包含確率を主張しない。v2はoriginal-onlyの全域固定擬似乱数順位で新規抽出し、sampling-planに実規則・tie扱い・候補分母・実保持率を記録する。抽出の数学を別方式へ変える必要があればRootへ戻す。v1のplan/source SHAへ訂正を書き込まず別補足へ残す。
+- 再取得は別attempt系列に最大2,163,752,072B（fixed43合計＋30%）を新しく配分する。最初の系列のcap/実取得1,664,424,671Bは保持し、系列合算最大4,327,504,144B。前回の未使用をrefundしない。decode/資格/compile等の時間は既7200秒/600秒の残内、GPU3600秒は未消費ならそのまま。再取得・再処理は約6分の旧実績であり保証ではない。
+- 原mixed corpus191,400,000B・元証拠を保持し、新original-only出力/scratch/証拠/Gitまで768MiB内のpeak forecastへ含める。新assets rootをdirected manifestへ加え、fresh within・既slot非競合成立後に再処理する。成立しない場合は具体不足をRootへ戻し、旧保護資産を削除しない。
+- F1 frozen manifestとtestcacheのlabel開封前照合、F2教師適格と露出UNKNOWNの分離、F3一candidate/D/定数のみの最終評価、F4row monitor・実fit config/曲線予定の固定は通常修正する。F5は上の説明と実規則を一致させる。同reviewerへv2の差分とC++ z/STM signの一次sourceを渡し、導入採用前に確認する。本fitはv2の入力/ラベル/主指標と資格成立後のみ。sealed最終評価はfreezeと修正review後の一巡に保つ。
+
 ## 目的と選択済み方針
 
 公開Sigma全43 NPZの全域から訓練1,000,000行、validation 50,000行、最終評価50,000行を構成し、現QF1＋距離logit残差H32のGPU学習を実施する。これは保存する適格観測行数であり、distinct盤面数・独立game数・学習seen数ではない。学習効果、過学習の推移、GPU供給から保存までの全工程を確認する。小候補の距離超えや全43 distinct数の確定は開始条件にしない。

@@ -51,6 +51,8 @@ Aは末期にtrainへ強く適合しvalidation誤差と飽和が増え、Bは遅
 
 data処理341.580264秒、controller全job341.814518秒、network1,664,424,671B、compact corpus191,400,000Bを保存した。時計は包摂するので合算しない。Job exit0/direct child回収/cleanup true/remaining空をRootが確認したが、入力変換・split・教師解釈の導入採用は独立レビュー319.1の確認待ちであり、GPU fitと最終評価はこの読取点で未開始。データ件数の成立を学習利益や棋力へ変換しない。
 
+独立reviewはfreeze/test cache未照合、UNKNOWN露出のunexposed表示、sealed評価へのinitial追加、primary row monitorの未束縛を指摘した。通常修正を同reviewerへ戻す。さらにnative合法性だけではnaiveLRと元盤面の幾何対応・コピーzの妥当性を証明できないため、ユーザーはoriginal-onlyでT100万/V5万/E5万を新規抽出するv2を選択した。旧corpusと費を保存し、全43再取得系列を別に配分する。原観測alias distinct942,288/47,187/47,191を保持行数とした説明は訂正する。実保持original行は824,069/41,230/41,322で、LRのみ保持されたaliasを元観測へ読み替えない。
+
 ## 次に人間が選ぶ事項
 
 百万種類規模はユーザーの暫定設計目標で、理論的な必要最小量ではない。316の提案は、まず公開全43ファイル全域をtarget-freeに調べ、distinct適格モデル入力の量、反射/crosscycle露出、分布の代表性を測ること。小候補がDを超えることを本調査の開始条件にしない。取得・調査・新学習は未開始である。[316提案の正本](../research-data/ai-sigma/frame24-learning-analysis/next-main-learning-proposal-v1.md)。
