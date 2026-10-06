@@ -1,0 +1,46 @@
+{
+  "issue": "quoridor-4lc.320",
+  "delivery": {
+    "issue": "quoridor-4lc.320",
+    "thread_id": "01a11062-b120-73a1-8aa3-fe2cb922c7c0",
+    "turn_id": "01a11062-bb0c-7572-958e-43cb4bb78cb7",
+    "accepted": true,
+    "cwd": "/workspaces/quoridor/.worktree/arena-evaluation",
+    "sandbox": {
+      "type": "dangerFullAccess"
+    },
+    "approvalPolicy": "never",
+    "model": "gpt-6.1-sol",
+    "reasoningEffort": "high",
+    "initial_scope": "static implementation; heavy slot deferred"
+  },
+  "purpose": "Rust native arena environment construction; initial static work, heavy slot separate",
+  "storage": {
+    "fresh_pre_worktree_at": "2026-10-06T08:42:26.608151+00:00",
+    "admission": "within",
+    "current_plus_unused_known_bytes": 12854530048,
+    "cap_bytes": 12884901888,
+    "unknown_retained_bytes": 134217728,
+    "errors": [],
+    "post_worktree_observation": ".artifacts/arena-evaluation-launch/storage-current.json",
+    "new_inclusive_bytes": 67108864,
+    "forward_conservation": {
+      "maintenance_previous": 167772160,
+      "maintenance_remaining": 100663296,
+      "arena": 67108864
+    },
+    "manifest": ".artifacts/arena-evaluation-launch/storage-manifest.json",
+    "manifest_sha256": "e4e2c5272f9ad7568b3168569a83b225b4af63e54755ed607a9950b7a62ebd3b",
+    "post_worktree": {
+      "at": "2026-10-06T08:45:20.687761+00:00",
+      "admission": "within",
+      "current_plus_unused_known_bytes": 12854550528,
+      "cap_bytes": 12884901888,
+      "errors": []
+    }
+  },
+  "heavy_started_from_root": false,
+  "parent_limits_preserved": true,
+  "actual_claim_report_received": true,
+  "worker_report_initial_compute": 0
+}

@@ -11,6 +11,12 @@ Beads `quoridor-4lc.319`。ユーザーは2026-10-06、Rootの100万行GPU学習
 - 原mixed corpus191,400,000B・元証拠を保持し、新original-only出力/scratch/証拠/Gitまで768MiB内のpeak forecastへ含める。新assets rootをdirected manifestへ加え、fresh within・既slot非競合成立後に再処理する。成立しない場合は具体不足をRootへ戻し、旧保護資産を削除しない。
 - F1 frozen manifestとtestcacheのlabel開封前照合、F2教師適格と露出UNKNOWNの分離、F3一candidate/D/定数のみの最終評価、F4row monitor・実fit config/曲線予定の固定は通常修正する。F5は上の説明と実規則を一致させる。同reviewerへv2の差分とC++ z/STM signの一次sourceを渡し、導入採用前に確認する。本fitはv2の入力/ラベル/主指標と資格成立後のみ。sealed最終評価はfreezeと修正review後の一巡に保つ。
 
+### v2入口失敗後の同scope取得枠
+
+2026-10-06のjob1ea785c5はチェック未完了後のshell後続submitにより入口違反で開始し、取消・子回収された。旧費85.864364695秒、系列2取得845,837,744B、元output/source/progress/未保存reservoirの喪失を保持し、後着withinをbefore-start成功へ読み替えない。Rootは確認済み系列1の未使用枠から256MiBを系列2へ前向き移譲した。原cap各2,163,752,072Bは履歴として保持し、現在有効ceilingは系列1=1,895,316,616B、系列2=2,432,187,528B、合算4,327,504,144B不変。系列1実費1,664,424,671Bと失敗系列2実費を減額しない。
+
+検証済み4blobのimmutable直接再用で必要再取得1,534,317,836B、系列2実残1,586,349,784Bの範囲で復旧できる。元seed/split/順位/original-onlyの数学を変更せず再runでreservoirを再計算する。既7200秒/768MiB内の全attempt・scratch・失敗証拠を保持し、fresh observer完了成功→値/admission確認→source/config/正確停止/残予算確認→submitを依存する別callで順序付ける。source制御修復差分を明示し、失敗しても後続launchが走る経路を残さない。Root通常復旧allocationとreceiptを参照する。
+
 ## 基準学習後の正しい左右反転
 
 ユーザーはoriginal-onlyで学習フローを確立した後、正しい左右反転を追加して比較する方向を承認した。まず上のv2をaugmentation OFFで進め、入力/教師/供給/詳細曲線/checkpoint/native対応・保存/評価callerの機能と基準結果を得る。距離超えや棋力改善を次段の恒久gateにしない。

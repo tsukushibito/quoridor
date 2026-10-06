@@ -1,6 +1,6 @@
 # NNUE研究・現在の実行許可
 
-2026-10-06更新。**固定チームの研究枠は終了し、現在はユーザーが指定した探索高速化と公開100万行GPU学習をタスクとして配分する。** ユーザーが316・317の引渡し後に解体する方針を選び、`quoridor-1gj`で実施した。残予算や過去の契約から次の実験を自動開始しない。
+2026-10-06更新。**固定チームの研究枠は終了し、現在はユーザーが指定した探索高速化、公開100万行GPU学習、棋力評価環境の構築をタスクとして配分する。** ユーザーが316・317の引渡し後に解体する方針を選び、`quoridor-1gj`で実施した。残予算や過去の契約から次の実験を自動開始しない。
 
 ## 現在のタスク許可
 
@@ -13,6 +13,10 @@ CPU2 logical/RAM2GiB/GPU0、compile・tests・profile累計600秒/各job120秒�
 初回CPU2logical/RAM4GiB/VRAM6GiB、新保存768MiB inclusive、取得・変換7200秒、compile/tests600秒、GPU全job費3600秒、最終CPU評価300秒。旧保持12GiB/UNKNOWN128MiBを維持し、終了済みタスクの未使用future保存予約をRootが前向き移譲してfresh coverageを束縛する。旧費・失敗・GPU残量は変更しない。探索318との共有buildと性能計時を調整し、重要なbatch/モデル等の変更は人間判断へ戻す。
 
 独立review後、ユーザーはoriginal-onlyでT100万/V5万/E5万を新規抽出するv2を明示選択した。元のmixed corpus・規則・SHA・費を保持し、新43blob取得系列に最大2,163,752,072Bを追加配分する。二系列合算最大4,327,504,144B、時間・768MiB保存・GPU枠はreset/増額しない。新peak forecastと計測slot成立後に既担当が再処理する。naiveLRの合法性を元盤面・コピーzの妥当性へ読み替えず、導入修正を同reviewerへ戻す。
+
+v2の入口チェック未完了後にsubmitが走った制御失敗は取消・回収と実費を保持する。同scope復旧として、確認済み系列1の未使用取得枠から256MiBを系列2へ前向き移譲し、現在のceilingは系列1が1,895,316,616B、系列2が2,432,187,528B、合算上限不変。原cap/費/SHAを上書きせず、検証済み既blobの直接再用、fresh admission成功からsubmitまでの順序修復、累積時間と非競合枠を入口にする。
+
+ユーザーは `quoridor-4lc.320` の独立savedセッションへ既存Rust native arenaの棋力評価環境構築を配分した。[担当契約](../../research-data/ai-sigma/arena-evaluation/task.md)に従い、開始prefix/history、色交換pair、時計とtyped未完了理由、完全pair単位の集計・再現manifestを整える。初回は静的実装、調整済みslotでの累計600秒compile/testsと最大2job/180秒/4slotのD-only小動作確認。CPU最大2/RAM2GiB/GPU0、64MiB inclusiveを完了maintenanceのfuture reservation160→96MiBから移譲し、親保存12GiB/UNKNOWN128MiB・旧current資産を保持する。Root同fullaccess/never、同model/effort。大book生成、Sigma GPU対局、凍結学習候補の本対局、棋力昇格はこの初回構築に含めない。
 
 ## 終了した枠と証拠
 

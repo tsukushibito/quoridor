@@ -55,6 +55,12 @@ data処理341.580264秒、controller全job341.814518秒、network1,664,424,671B�
 
 ユーザーは、original-onlyでフローと基準結果を確立した後、正しい左右反転をtrain batchで50%適用するオンラインaugmentationを比較する方向を承認した。新反転はnative再計算/二回復帰/合法遷移等のoracleで確認し、同元データ・初期・尺度・LR/batch・同更新回数/seenで比較する。独立した対局観測の増量と区別し、境界修正は同reviewerへ戻す。具体の追加fitは基準成立後の実残予算/保存と計時枠をRootが配分する。旧公開反転データの再使用、開封済みtestでの新候補再選定、追加arenaはこの方針承認だけでは開始しない。
 
+## 選択済みの棋力評価環境
+
+ユーザーは既存Linux release Rust arenaを拡張する専用セッションを選んだ。評価器比較は同探索、探索比較は同凍結評価器、全体比較は固定Sigma設定とし、同時間棋力と同仕事の処理速度を分ける。開始prefix/historyを保存し担当側交換のpairで集計する。Sigma参照のabs(Q)<=0.2は暫定主book目安で、均衡や校正確率の保証ではない。初期盤面と傾いた・戦術診断を別群にする。
+
+現arenaの単純scoreはunknownを除外するため、全予定slot/完了率/完全pair/部分pair/失敗理由と不確実性を併記する入口へ整える。100ms/手主条件・500ms補助条件を設定可能にし、時計・depth/node cap・最終完成反復・モデル初期化・TTと全caller費を区別する。[320契約](../research-data/ai-sigma/arena-evaluation/task.md)の初回は実装・fixture・小動作確認のみ。実用大book生成、凍結学習モデル本対局、十分量の棋力評価は別の具体配分で、環境の受付やソフト資格から強さを認定しない。重要な時計・集計・開局設計の変更はRoot経由で人間へ戻す。
+
 ## 次に人間が選ぶ事項
 
 百万種類規模はユーザーの暫定設計目標で、理論的な必要最小量ではない。316の提案は、まず公開全43ファイル全域をtarget-freeに調べ、distinct適格モデル入力の量、反射/crosscycle露出、分布の代表性を測ること。小候補がDを超えることを本調査の開始条件にしない。取得・調査・新学習は未開始である。[316提案の正本](../research-data/ai-sigma/frame24-learning-analysis/next-main-learning-proposal-v1.md)。
