@@ -47,3 +47,9 @@
 最低限、prefix再生/history/兄弟pairと色対応、early終局、invalid prefix、side mapping、時計/cancel/期限/ノードcapの理由、未知/部分pairを含む集計、empty/allunknown/true draw、一意slot復元・モデル設定bindingを意味のあるfixtureで確認する。変更した全手書きsource/configは既formatterで整形し、対象tests/lintをbudget内で実施する。検証を全suite反復へ膨らませない。
 
 初報はclaim/cwd/fullaccess/保存forecast/編集境界/実computeの有無を簡潔に返す。重大判断・意味ある結果・slot必要性・障害・source停止をRoot thread `01a0f2e9-357d-7ef3-a2fe-b16f80accda5`、issue `quoridor-4lc`へ通常報告。静的実装を受付成功・環境完成・棋力結果と呼ばない。Beads本人更新/backup sync、停止source/子回収、明示path/SHA、validation、残費、未完了と次の実用対局費を返す。Rootが受入れ・main統合する。
+
+## 通常ソフト修復の追加配分（2026-10-06）
+
+初回software job `ea112b67` は一時linker objectのinventory raceでexit1となり、controller176.195790845秒・全直接子回収・cleanup/remaining空を保持する。manifest2fixturesはPASS、integration/build-final/lintは未成立。既600秒の残423.804209155秒から、新たにONE recovery phase最大240秒を前向き配分する（support command最大10秒＋outer job最大230秒、worker最大210秒で回収余裕）。旧初回300秒・失敗費をresetしない。
+
+旧guard source/SHAを保存し、single-statとbounded inventory retryで修復する。retry枯渇はUNKNOWN・admission拒否を維持し、消失fileを無条件freeへ換算しない。限定NN0 race/枯渇fixture後、fresh within・実物理・共有target唯一writerを確認して未完了の限定integration/build/Clippyだけを継続する。製品source14path・既PASS fixtureを再用し、fullsuite/NN/arena時計を追加しない。CPU0,1/RAM2/GPU0/build40MiB/inclusive64MiB、319固定fitとの並行・318への直接target開始/終了通知は不変更。このphase失敗時の更なる反復は未配分。
