@@ -1,0 +1,76 @@
+{
+  "at": "2026-10-06T11:44:50.014306+00:00",
+  "issue": "quoridor-4lc.318",
+  "authority": "2026-10-06 user: after learning qualification, search task optimizes evaluation",
+  "status": "CONDITIONAL_ALLOCATION; no evaluation source edits or compute before learning handoff",
+  "session_reuse": "01a11004-79f3-7c20-872c-432a2c347664",
+  "donor_preserved": {
+    "receipt": ".worktree/search-optimization/.artifacts/search-optimization/donor-receipt-120-r1.json",
+    "sha256": "36c70298e81b1d32d0864e718b84da9d1334028852f0c364ead7c28f33182bba",
+    "original_seconds": 600,
+    "recipient319_transferred_seconds": 120,
+    "search_retained_seconds": 480
+  },
+  "compute": {
+    "namespace": "search318-evaluation-continuation-v1",
+    "new_phase_all_attempt_seconds": 180,
+    "source_format_control_seconds_upper": 30,
+    "build_tests_oracle_seconds_upper": 90,
+    "plain_comparison_seconds_upper": 60,
+    "max_jobs": 2,
+    "max_job_seconds": 120,
+    "new_model_forward_upper": 8000000,
+    "old_guarded_actual_seconds": 161.23336054896936,
+    "old_nonjob_support_unknown_reserved_upper": 90,
+    "old_saved_closure_reserved_upper": 30,
+    "retained_total_upper_with_new_phase": 461.23336054896936,
+    "remaining_reserved_headroom": 18.766639451030642,
+    "unknown_llm_read_control": "retained separately, not zeroed"
+  },
+  "resources": {
+    "cpu_affinity": [0, 1],
+    "ram_family_bytes": 2147483648,
+    "gpu": 0,
+    "storage_category": "search318",
+    "inclusive_existing_bytes": 100663296,
+    "new_parent_reservation": 0
+  },
+  "dependency": {
+    "producer_issue": "quoridor-4lc.319",
+    "required": "same trained BEST explicit Scalar/Simd FT/full-delta/make-unmake qualification result, stopped source paths/SHA, weights/config/cache/scale and immutable ELF binding, exact child wait/cleanup/remaining[]",
+    "release": "PASS + actual source/process STOP and direct handoff; if unresolved numeric issue, return to Root rather than optimize against unqualified model",
+    "scope": "this trained-native handoff; final sealed test and all learning followups are not prerequisites",
+    "root_ack_required": false
+  },
+  "changes": "same arithmetic ResidualModel inference allocation/copy/scratch optimization, at most one coherent candidate. No adoption of rejected sort; baseline is handed-off canonical evaluator",
+  "fixed": "same weights/features/normalization/tanh/FP and accumulation order; exact value bits, Actions/PV/depth/nodes/counters, full/delta/parent rollback must match",
+  "excluded": [
+    "FMA/reassociation/reduced-precision/quantization",
+    "hidden width/model/features/teacher/data/training changes",
+    "new ordering/MPC/TT/Zobrist policies",
+    "new dependencies/models/acquisition/sessions",
+    "sealed test labels/fit/game benchmarks"
+  ],
+  "performance": "plain whole-search alternating baseline/candidate with fixed inputs/limits; model-forward microbenchmark secondary; instrumentation overhead excluded from speed comparison; all outcomes preserved",
+  "ownership": "search task WT only; Root main/index/integration; learning native writer must stop before evaluator edits; shared Cargo target sole writer and no competing numerical clock",
+  "stop": "budget, pause, unresolved parity/source/ownership/storage, important design decision; no automatic retry or extra candidate; completion event and direct exact STOP notices",
+  "adoption": "Root acceptance and applicable independent review/oracle required before main adoption; negative result remains valid completion",
+  "actual_dispatch": {
+    "evaluation-after-learning-delivery": {
+      "method": "turn/start",
+      "thread_id": "01a11004-79f3-7c20-872c-432a2c347664",
+      "turn_id": "01a11108-09d5-75d2-b716-ebacb6cd8a24",
+      "accepted": true,
+      "receipt_sha256": "3d6a4f32e770811e4005f716b882de42fa4fd872c0ac7d5afbb8cb3aa14aed26",
+      "meaning": "conditional task accepted; compute not started"
+    },
+    "learning-native-handoff-to-search-delivery": {
+      "method": "turn/steer",
+      "thread_id": "01a1100f-6d45-78e0-8a87-84503ff0fbf6",
+      "turn_id": "01a110ff-3f09-7462-a349-70ea3cb81964",
+      "accepted": true,
+      "receipt_sha256": "8f114adeb29d43457dde746dbc87374a1476d2fe684ecef4cdbcc79b24a2b9c5",
+      "meaning": "conditional task accepted; compute not started"
+    }
+  }
+}

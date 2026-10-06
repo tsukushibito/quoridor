@@ -39,3 +39,13 @@ MPC/LMR等の選択的枝刈り、探索方針・深さの変更、学習した�
 - 初報でclaim/actual cwd/選んだモデル・代表群・実測開始か準備中かを区別する。その後は支配費、実改善、重要判断、障害の節目で報告し、定型進捗turnを作らない。
 - 完了時はsource/process停止、子回収、方法・結果・不確実性・費、変更path/SHA、再現command、残課題・次の判断をissueに残してbackupする。必要証拠はmainの本タスク専用保存先へRootが統合する。
 - Rootの保存threadは `01a0f2e9-357d-7ef3-a2fe-b16f80accda5`、報告宛先のRoot所有issueは `quoridor-4lc`。`research-session.sh send`で必要な節目だけ直接報告できる。自分のissueを宛先として送らない。RPC不明時は再送を反復せずissueへ残す。
+
+## 評価処理最適化の継続（2026-10-06ユーザー依頼）
+
+初回scopeは完了し、sort変更は不採用。過去のclose・測定・失敗・UNKNOWN・sourceを保持し、同じissue/sessionをこの継続だけ再開する。現在有効な条件・配分は[evaluation-next-phase.json](evaluation-next-phase.json)。原600秒から学習へ120秒を移譲した後の探索保持480秒内で、既161.233360549秒＋旧source support上界90＋初回保存closure上界30＋新phase全attempt180＝461.233360549秒を保守予約する。旧費の減額・cap reset・親資源増加はない。source整形/制御30、build/tests/oracle90、plain比較60の上界、最大2job/各120、8m新forward上界。既CPU0,1/RAM2GiB/GPU0/保存96MiBを維持し、初回source・binary・evidenceと新増分までinclusive forecastする。
+
+学習担当の同BESTに対する明示Scalar/Simd FT・full/delta・make/unmake資格の成功、対象source/weights/config/cache/scale/ELFのSHA付き引渡しと実writer/child停止が開始条件。最終sealed testや別の学習追試の終了は待たない。これらの引渡し前は保存profileの分析と計画まで、評価source変更・build/forward/計時は開始しない。学習の必要sourceをWTへ整合する際は初回8source/patch/evidenceを先に保全し、同じsource版・同じ凍結重みのbaseline/candidateを比較する。拒否したsortを次candidateへ混ぜず、別namespaceで記録する。Root ACKだけを追加gateにしない。
+
+第一候補はResidualModel::evaluateの各推論Vec確保・コピーの除去又はscratch再用。実callerの支配費から一つの同算術candidateを選び、計算順序・丸め・距離尺度・活性化とモデル形式を保つ。SIMD命令導入が計算順序やFMAを変える場合、量子化/精度/特徴/モデル変更が必要な場合は設計判断をRootへ戻す。FTの既SIMD資格と残差head高速化は区別する。検索全仕事と推論単体の両方を記録し、同depth/node・値bits/Action/PV・親履歴復帰を確認する。交替plain比較を主とし、profile時計の倍率を速度利益にしない。
+
+共有targetの唯一writer・fresh directed保存/実物理・モデル等bindingを担当が入口で確認し、numeric/arena時計とは非重複。START/STOPとimmutable準備完了を学習・arena・Rootへ直接引渡す。超過見込や資格不一致で止め、失敗や不支持を保持する。main採用はRootの受入れと必要な独立確認後のみ。新研究条件・再帰委譲・追加fit/game/公開取得・旧資産削除は配分しない。
