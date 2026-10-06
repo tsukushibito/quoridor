@@ -25,15 +25,16 @@
     "MAX_jobs": 12,
     "MAX_coherent_interventions": 6,
     "model_forwards_total": 20000000,
-    "source_control_wall_seconds": 14400,
-    "cleanup_margin_seconds": 600
+    "cleanup_margin_seconds": 600,
+    "task_wall_seconds": 14400
   },
-  "cost_scope": "Build/tests/profiling/native comparisons and repairs include failed/capped attempts, initialization and cleanup; nested spans not summed. Source/read/control costs remain distinct and report actual/unknown, no old debt audit. Whole task wall bound ends at end_at.",
+  "cost_scope": "Use existing controller/guardian whole-job elapsed for the additional 1800s budget, including failed/capped compute, build/test/profile, initialization and cleanup. Nested spans are not summed. No added per-command timing of reads, formatting, communication or LLM work; no historical UNKNOWN audit. The overall task uses the fixed end_at deadline.",
   "allowed": "Same arithmetic/order/precision/features/weights/search windows/action ordering/TT exact history and namespace; processing allocation/copy/recomputation/cache/fingerprint reuse and correctness/whole caller measurement. Required software fixtures may use synthetic accepted-topology oracles, not new trained models.",
   "human_boundary": "No new pruning, ordering algorithm/policy, evaluation mathematics/precision/FMA, learned model/features/data/training, TT history or replacement semantics, parallel search, clock-forfeit policy, new dependencies/acquisition/asset deletion. Record scoped proposal and continue independent eligible work. Prior Zobrist low-priority hold persists.",
   "sequencing": "One writer/one compute job at a time; before each useful intervention freeze source/model/input, state discrimination and stop/adoption rule. Finish or abandon an unsupported candidate with preserved evidence then select another. Do not make heap/micro success a prerequisite for TT or map work.",
   "measurement": "Allocation count/bytes and initialization scope distinct from speed; representative wall/jump/P1P2/near-goal/long-history legal prefixes; matching full/delta/undo references; AB/BA plain whole-search and real per-player two-ply TT series, with cold/warm cost distinctions. Skip redundant tests on unchanged bytes.",
   "storage": "Reuse completed root capacity receipt if roots/reservations and assumptions unchanged; inspect own necessary footprint/forecast only. No repeated whole repo/shared-target inventory, scan-as-gate, new allocation from global free margin, asset deletion or silent overflow. If own footprint cannot fit, stop affected step with precise deficit and continue feasible saved/source work.",
   "handoff": "Root only main/index/ref/commit writer; stopped version/small evidence/hashes and bounded results to Root. Numerical independent reference oracle plus separate Root source/adoption review; no routine new reviewer or all-ACK gate. Pending main review need not halt other independent WT work.",
-  "stop": "explicit user pause, coherence/parity/ownership/resource failure stops affected job; exact cleanup, no blind retry. At compute_end_at no new compute; at end_at preserve results/source/receipts, Beads backup, idle. No periodic LLM polling or automatic extension."
+  "stop": "explicit user pause, coherence/parity/ownership/resource failure stops affected job; exact cleanup, no blind retry. At compute_end_at no new compute; at end_at preserve results/source/receipts, Beads backup, idle. No periodic LLM polling or automatic extension.",
+  "work_time_recording": "No detailed additional management-time measurement. Hotspot/performance timings are only those needed for the research decision, with overhead and whole-search baseline. Existing old NEW90 accounting/reserves/failures/UNKNOWN unchanged."
 }
