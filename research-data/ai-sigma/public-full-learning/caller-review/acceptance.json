@@ -1,0 +1,94 @@
+{
+  "at": "2026-10-06T18:20:11.010880+00:00",
+  "scope": "Fixed r1 actual caller static/NN0 boundary based on independent reviewer; not live GPU, final config qualification, Sigma/test release or main source adoption",
+  "major_findings": [],
+  "ordinary_findings": [
+    "C1 reflection supply counters increment before forward but forward name used",
+    "C2 diagnostic CSV train_scope empty/no validation_scope or sample rows"
+  ],
+  "required_next": "Routine C1/C2 fixes already proceeding with same reviewer; numerical supply/config/input binding before actual fit",
+  "reviewer_fixture_PASS": 11,
+  "performer_fixture_PASS_reported_separately": 18,
+  "binding_sha256": "bdc323f1ff783895e1dd0c8339321e938cb225ae7bbbe878983888a8e0614f9b",
+  "source_preservation": "r1 hashes retained; live source already changed for routine fixes, not captured as r1. Request exact used source snapshots in eventual integration handoff.",
+  "root_source_capture_attempt": "r1/current mismatch detected before source capture; no new source interpreted as old reviewed version",
+  "archive_sha256": "467d9ce1a5adb35d5f52c459ec526ad7b246bf03ac63235d687ba061f6895daf",
+  "members": {
+    "provided/convergence-plan-v1.json": {
+      "sha256": "2a1da253289f86ee94276733ab079f81134a517d4e82a99df4c123693f0c192d",
+      "bytes": 2898
+    },
+    "provided/caller-NN0-r2.log": {
+      "sha256": "5d1ed9e94c3f96d427ec5fb693728a6757e5111caeb9fcc734c5e686929698e1",
+      "bytes": 3309
+    },
+    "provided/data-recovery-r1-stop-receipt.json": {
+      "sha256": "64a1c5cfe9dac05ddc74451b2082c56ab50c614d7376e0e81a916a088c4e8008",
+      "bytes": 7504
+    },
+    "review/caller-review-r1.json": {
+      "sha256": "08e76d378fe549d6e21540208c5caf99eabb661c5270b225e8972a4c98ec3cfe",
+      "bytes": 13869
+    },
+    "review/caller-review-r1.md": {
+      "sha256": "47151926f4247e922d02f00ef95ec245425b875dbf3d8b5d9c286e8e06d7733b",
+      "bytes": 10363
+    },
+    "review/caller-review-r1-fixture.json": {
+      "sha256": "76ad9226773385e777dc8e2d1144d719087d69cb52a4debbf000a3259fc361d0",
+      "bytes": 3557
+    },
+    "review/caller-review-r1-probes.json": {
+      "sha256": "07b01538b4c0951980829c8db168c7686985433ce11110200b5d78d567039150",
+      "bytes": 704
+    },
+    "review/caller-review-r1-control.json": {
+      "sha256": "61066235f49c2225b3b39555f8b7f8ed579e70640ee24bbf3840278c24ca27f1",
+      "bytes": 4465
+    },
+    "binding/caller-review-binding-r1.json": {
+      "sha256": "bdc323f1ff783895e1dd0c8339321e938cb225ae7bbbe878983888a8e0614f9b",
+      "bytes": 3032
+    },
+    "statistics/stop-receipt.json": {
+      "sha256": "9276866a9572becdb14f66538b589dfa82bfe0971964d9693dbd8b921dc5e83c",
+      "bytes": 3762
+    }
+  },
+  "statistics": {
+    "cache_manifest_sha": "07d81abc2230b2fe6b7c5fb7a425e7e3109bf9af2c467f5c72f8d3bdb975279b",
+    "partition": "train",
+    "rows": 8413949,
+    "target": "decisive STM z",
+    "weighting": "row",
+    "augmentation": "original only; scale fixed before online reflection",
+    "test_opened": false,
+    "scale_sha": "0a322186e48d1ef45a02927848a45939df7a36cbfe299fae442270cc42b4a61b",
+    "constant_sha": "d1ee90ac7faeaaca86fdd46770d097e7ef2bef09b777b55f1a7f7d6eb3fc08b7",
+    "least_squares_distance_diagnostic": {
+      "a": 0.05689593032002449,
+      "b": 7.883058547973633
+    },
+    "model_distance": {
+      "a": 0,
+      "b": 8
+    },
+    "wall_seconds": 5.227614845032804,
+    "model_forward_rows": 0
+  },
+  "statistics_scale": {
+    "mu_f32": [0.10472780466079712, 0.09871304780244827],
+    "sigma_f32": [0.05110647529363632, 0.050166402012109756],
+    "binding": {
+      "cache_manifest_sha": "07d81abc2230b2fe6b7c5fb7a425e7e3109bf9af2c467f5c72f8d3bdb975279b",
+      "partition": "train",
+      "rows": 8413949,
+      "target": "decisive STM z",
+      "weighting": "row",
+      "augmentation": "original only; scale fixed before online reflection",
+      "test_opened": false
+    }
+  },
+  "original_statistics_receipt_sha256": "9276866a9572becdb14f66538b589dfa82bfe0971964d9693dbd8b921dc5e83c",
+  "no_new_model_forward_build_or_large_scan": true
+}
