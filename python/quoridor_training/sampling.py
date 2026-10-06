@@ -1,6 +1,8 @@
 """Fixed-row epochs and explicit row/group loss objectives."""
 
 from collections import Counter
+import hashlib
+import math
 
 import numpy as np
 
@@ -54,3 +56,53 @@ def loss_weights(groups, mode):
     return np.asarray(
         [len(groups) / (len(counts) * counts[group]) for group in groups], dtype=np.float32
     )
+
+
+def diagnostic_indices(rows, indices, count, seed):
+    """Stable input-ID-only subset; never consumes the optimizer sampler RNG."""
+    if count == 0:
+        return np.asarray([], dtype=np.int64)
+    ranked = sorted(
+        indices,
+        key=lambda i: (hashlib.sha256(f"{seed}:{rows[i]['id']}".encode()).digest(), int(i)),
+    )
+    return np.asarray(sorted(ranked[:count]), dtype=np.int64)
+
+
+def observation_steps(steps, interval, rows, batch, mode, explicit=None):
+    if explicit is not None:
+        return set(explicit)
+    stride = min(interval, max(1, math.ceil(rows / batch / 4)))
+    points = {0, 1, 2, 5, 10, 20, steps}
+    points.update(range(stride, steps + 1, stride))
+    if mode == "epoch":
+        points.update(range(math.ceil(rows / batch), steps + 1, math.ceil(rows / batch)))
+    return {point for point in points if point <= steps}
+
+
+def exposure(seen, rows, mode):
+    """Exposure of successfully completed updates, not advanced sampler state."""
+    return {
+        "training_seen": seen,
+        "row_epoch": seen / rows,
+        "completed_epochs": seen // rows if mode == "epoch" else None,
+        "partial_epoch_fraction": (seen % rows) / rows if mode == "epoch" else None,
+    }
+
+
+class EarlyStopping:
+    """Patience counts completed full-selector measurements; zero disables it."""
+
+    def __init__(self, patience, min_delta):
+        self.patience, self.min_delta = patience, min_delta
+        self.best, self.stale = math.inf, 0
+
+    def observe(self, value):
+        if not math.isfinite(value):
+            raise ValueError("nonfinite selector metric")
+        improved = value < self.best - self.min_delta
+        if improved:
+            self.best, self.stale = value, 0
+        else:
+            self.stale += 1
+        return improved, bool(self.patience and self.stale >= self.patience)

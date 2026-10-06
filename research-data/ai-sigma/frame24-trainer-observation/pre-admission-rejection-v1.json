@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-06T00:28:55.793004+00:00",
+  "status": "NOT_STARTED_ADMISSION_REJECTED",
+  "verification_child_spawned": false,
+  "NN": 0,
+  "verification_MAX_consumed": 0,
+  "reason": "Initial private guard incorrectly compared sumRSS of all host processes including tooling/shared pages to research8GiB allocation.",
+  "host_all_process_sum_RSS_B": 9462067200,
+  "host_MemAvailable_B": 17618063360,
+  "original_guard_sha": "aa1195e239f48f876ad931efc5f93c8dedde98cf31380178bbf9353413ee1062",
+  "original_error": "host current RSS headroom",
+  "future_guard": "Research8GiB includes operations1GiB and actual scientific readers/compute plus own1.75guard; separately enforce actual host MemAvailable. Preserve hostsum as context, not research allocation."
+}

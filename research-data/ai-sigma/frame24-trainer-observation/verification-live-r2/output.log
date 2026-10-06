@@ -1,0 +1,23 @@
+test_live_budget_does_not_consume_next_tail (quoridor_training.test_observation.LiveTrainerObservation.test_live_budget_does_not_consume_next_tail) ... ok
+test_live_complete_tail_selected_and_whole_exposure (quoridor_training.test_observation.LiveTrainerObservation.test_live_complete_tail_selected_and_whole_exposure) ... ERROR
+test_live_diagnostics_preserve_sampling_initial_and_final_parameters (quoridor_training.test_observation.LiveTrainerObservation.test_live_diagnostics_preserve_sampling_initial_and_final_parameters) ... ok
+test_live_optimizer_fault_preserves_completed_counts (quoridor_training.test_observation.LiveTrainerObservation.test_live_optimizer_fault_preserves_completed_counts) ... ok
+
+======================================================================
+ERROR: test_live_complete_tail_selected_and_whole_exposure (quoridor_training.test_observation.LiveTrainerObservation.test_live_complete_tail_selected_and_whole_exposure)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspaces/quoridor/python/quoridor_training/test_observation.py", line 169, in test_live_complete_tail_selected_and_whole_exposure
+    records = [json.loads(line) for line in (out / "batch.jsonl").read_text().splitlines()]
+               ~~~~~~~~~~^^^^^^
+  File "/home/vscode/.cache/inference/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/json/__init__.py", line 352, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/home/vscode/.cache/inference/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/json/decoder.py", line 348, in decode
+    raise JSONDecodeError("Extra data", s, end)
+json.decoder.JSONDecodeError: Extra data: line 1 column 202 (char 201)
+
+----------------------------------------------------------------------
+Ran 4 tests in 2.433s
+
+FAILED (errors=1)

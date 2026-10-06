@@ -25,6 +25,50 @@ pub struct RequestId {
     pub generation: u64,
     pub token: u64,
 }
+/// Inclusive per-player search costs, distinct from overlapping provider spans.
+#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+pub struct TtProfile {
+    pub searches: u64,
+    pub errors: u64,
+    pub probes: u64,
+    pub key_hits: u64,
+    pub exact_hits: u64,
+    pub usable_depth: u64,
+    pub bound_cutoffs: u64,
+    pub order_only: u64,
+    pub collisions: u64,
+    pub replacements: u64,
+    pub capacity_skips: u64,
+    pub illegal_moves: u64,
+    pub key_builds: u64,
+    pub history_items: u64,
+    pub key_history_capacity_bytes_sum: u64,
+    pub hashes: u64,
+    pub retained_bytes_peak: usize,
+    pub whole_search_seconds: f64,
+}
+impl TtProfile {
+    fn record(&mut self, result: &alphabeta::SearchResult) {
+        let s = &result.stats;
+        self.searches += 1;
+        self.probes += s.tt_probes;
+        self.key_hits += s.tt_hits;
+        self.exact_hits += s.tt_exact_hits;
+        self.usable_depth += s.tt_usable_depth;
+        self.bound_cutoffs += s.tt_cutoffs;
+        self.order_only += s.tt_order_only;
+        self.collisions += s.tt_collisions;
+        self.replacements += s.tt_replacements;
+        self.capacity_skips += s.tt_capacity_skips;
+        self.illegal_moves += s.tt_illegal_moves;
+        self.key_builds += s.tt_key_builds;
+        self.history_items += s.tt_history_items;
+        self.key_history_capacity_bytes_sum += s.tt_key_history_capacity_bytes;
+        self.hashes += s.tt_hashes;
+        self.retained_bytes_peak = self.retained_bytes_peak.max(s.tt_retained_bytes);
+        self.whole_search_seconds += result.elapsed.as_secs_f64();
+    }
+}
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Outcome {
     pub game: usize,
@@ -36,6 +80,8 @@ pub struct Outcome {
     pub reason: Option<String>,
     pub nn_calls: u64,
     pub moves: Vec<u16>,
+    #[serde(default)]
+    pub persistent_tt: Vec<TtProfile>,
     #[serde(default)]
     pub advance_calls: u64,
     #[serde(default)]
@@ -120,6 +166,8 @@ struct Game {
     prefix: Vec<u16>,
     rows: Vec<TeacherRow>,
     search: Option<Search>,
+    alpha_sessions: Vec<Option<alphabeta::SearchSession>>,
+    tt_profiles: Vec<TtProfile>,
     pending: Option<RequestId>,
     generation: u64,
     root_nn: Option<f32>,
@@ -377,6 +425,7 @@ fn unknown(p: &Planned, reason: String) -> Outcome {
         reason: Some(reason),
         nn_calls: 0,
         moves: p.opening.clone(),
+        persistent_tt: Vec::new(),
         advance_calls: 0,
         terminal_no_nn: 0,
         allocated_nodes_peak: 0,
@@ -430,6 +479,7 @@ fn finish(mut game: Game, status: &str, reason: Option<String>) -> (Outcome, Vec
             reason,
             nn_calls: game.nn,
             moves: game.prefix,
+            persistent_tt: game.tt_profiles,
             advance_calls: game.advance_calls,
             terminal_no_nn: game.terminal_no_nn,
             allocated_nodes_peak: game.allocated_nodes_peak,
@@ -514,6 +564,10 @@ fn worker(
                         prefix,
                         rows: Vec::new(),
                         search: None,
+                        alpha_sessions: (0..config.engines.len()).map(|_| None).collect(),
+                        tt_profiles: (0..config.engines.len())
+                            .map(|_| TtProfile::default())
+                            .collect(),
                         pending: None,
                         generation: 1,
                         root_nn: None,
@@ -694,17 +748,39 @@ fn worker(
                     use_pvs: true,
                     use_tt: true,
                 };
-                match alphabeta::search(
-                    &g.context,
-                    evaluators[engine_index]
-                        .evaluator
-                        .as_ref()
-                        .unwrap()
-                        .as_ref(),
-                    &limits,
-                    &cancel,
-                ) {
+                let namespace = alphabeta::SearchNamespace {
+                    evaluator: format!(
+                        "{}:simd={}",
+                        evaluators[engine_index].identity.row_identity, e.simd
+                    ),
+                    rules: "Sigma-RuleA-full-history-terminal-ply-v1".into(),
+                    selectivity: "fullwidth-PVS-MPC-OFF-v1".into(),
+                };
+                if g.alpha_sessions[engine_index].is_none() {
+                    match alphabeta::SearchSession::new(
+                        evaluators[engine_index].evaluator.as_ref().unwrap().clone(),
+                        namespace.clone(),
+                        limits.tt_entries,
+                    ) {
+                        Ok(session) => g.alpha_sessions[engine_index] = Some(session),
+                        Err(error) => {
+                            let game = games.swap_remove(index);
+                            let (outcome, rows) = finish(game, "unknown", Some(error.to_string()));
+                            let _ = events.send(Event::Finished(outcome, rows));
+                            continue;
+                        }
+                    }
+                }
+                let session = g.alpha_sessions[engine_index].as_mut().unwrap();
+                if session.namespace() != &namespace {
+                    session.reset(
+                        evaluators[engine_index].evaluator.as_ref().unwrap().clone(),
+                        namespace,
+                    );
+                }
+                match session.search(&g.context, &limits, &cancel) {
                     Ok(result) => {
+                        g.tt_profiles[engine_index].record(&result);
                         if let (Some(action), Some(value)) = (result.action, result.value) {
                             if let Err(error) = play_completed(
                                 g,
@@ -724,7 +800,10 @@ fn worker(
                             failure = Some("no_completed_alpha_beta_iteration".into())
                         }
                     }
-                    Err(error) => failure = Some(error.to_string()),
+                    Err(error) => {
+                        g.tt_profiles[engine_index].errors += 1;
+                        failure = Some(error.to_string());
+                    }
                 }
                 progressed = true;
             }
@@ -1221,6 +1300,7 @@ fn run_owned(
                 reason: Some(format!("initialization:{error}")),
                 nn_calls: 0,
                 moves: Vec::new(),
+                persistent_tt: Vec::new(),
                 advance_calls: 0,
                 terminal_no_nn: 0,
                 allocated_nodes_peak: 0,

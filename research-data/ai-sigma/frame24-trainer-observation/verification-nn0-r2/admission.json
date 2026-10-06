@@ -1,0 +1,64 @@
+{
+  "at": "2026-10-06T00:29:14.825993+00:00",
+  "scheduler": {
+    "pid": 2116552,
+    "start_ticks": "49894932",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "monitor": {
+    "pid": 2116570,
+    "start_ticks": "49894974",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "current24": "PASS",
+  "six_digest_receipt": {
+    "coordinator": true,
+    "hypothesis": true,
+    "experiment": true,
+    "critic": true,
+    "steward": true,
+    "supervisor": true
+  },
+  "owned": null,
+  "self": {
+    "pid": 2131813,
+    "start_ticks": "49962001",
+    "ppid": 2009,
+    "pgrp": 2131813,
+    "cpu_ticks": 5,
+    "state": "R",
+    "rss": 19193856,
+    "cpus": [
+      1
+    ],
+    "argv": [
+      "python3",
+      "research-data/ai-sigma/frame24-trainer-observation/verify_308.py",
+      "--registration",
+      "research-data/ai-sigma/frame24-trainer-observation/verification-nn0-r2-registration.json"
+    ]
+  },
+  "foreign_science": [],
+  "host_current_process_rss_sum": 10295943168,
+  "research_current_rss_including_operations_reserve": 1073741824,
+  "memavailable": 17019457536,
+  "gpu_compute_apps": [],
+  "local_current_allocated_bytes": 69632,
+  "remaining_forecast_bytes": 524288,
+  "argv": [
+    "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "-B",
+    "-m",
+    "unittest",
+    "-v",
+    "quoridor_training.test_sampling",
+    "quoridor_training.test_sharded_cache",
+    "quoridor_training.test_selected_target",
+    "quoridor_training.test_contracts",
+    "quoridor_training.test_residual_config",
+    "quoridor_training.test_observation.ObservationContracts"
+  ],
+  "registration_sha": "efe84b89f86ee7b1c6bf24a66ebad661386c1efbbfdd7619069bddba9737b3a6",
+  "purpose": "Canonical observation/interruption/config/sampling software verification on synthetic inputs only; no learningmethod or strength claim.",
+  "raw_model_cache_or_opened_targets": false
+}

@@ -1,0 +1,22 @@
+{
+  "task": "frame24-trainer-observation-308-v1",
+  "schema": "trainer-software-verification-v1",
+  "phase": "verification-live-r2",
+  "exit_code": 1,
+  "purpose": "Canonical observation/interruption/config/sampling software verification on synthetic inputs only; no learningmethod or strength claim.",
+  "wall_seconds": 3.1008045130292885,
+  "peak_rss": 955813888,
+  "stop_reason": null,
+  "waited": true,
+  "recorded_current_exact_absent": true,
+  "NN_all_tests": 120,
+  "NN_cap": 1000,
+  "source_hashes": {
+    "python/quoridor_training/train.py": "e861f9f43d500a9acfa6959d2e1bc39de24c4c327e39b02f13e5cff09cbdde5d",
+    "python/quoridor_training/common.py": "4782d1ad400da17d6da604dcb8177473d529f8fa640a4641711b8b1a37734b69",
+    "python/quoridor_training/sampling.py": "a25fc22b4b1fe10485f833055cdb52090e0424324920057e20fa9c2e2ac60c58",
+    "python/quoridor_training/test_observation.py": "b48d147f173645e131b2c82c95cb2b6c5924ed7d5aec08078f631f6ca58b05c5",
+    "research-data/ai-sigma/frame24-trainer-observation/verify_308.py": "0dddf7f9117a147630dc841f324c0b40af2402e427cd29a595ad32ed511d962c"
+  },
+  "status": "FAILED_VERIFICATION"
+}

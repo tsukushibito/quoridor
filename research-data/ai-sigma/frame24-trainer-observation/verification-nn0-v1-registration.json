@@ -1,0 +1,64 @@
+{
+  "task": "frame24-trainer-observation-308-v1",
+  "schema": "trainer-software-verification-v1",
+  "root": "/workspaces/quoridor/research-data/ai-sigma/frame24-trainer-observation",
+  "purpose": "Canonical observation/interruption/config/sampling software verification on synthetic inputs only; no learningmethod or strength claim.",
+  "actor": "codex:01a0f31c-2e4b-7170-82c5-69e1428c2418",
+  "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+  "loaded": "research-data/ai-sigma/frame24-steward/running-loaded-v1.json",
+  "own_beads_snapshot": "/tmp/hyp308-before-verify.json",
+  "readonly_helper": "research-data/ai-sigma/frame23-independent-teachers/control-v1.py",
+  "helper_sha": "28fcc80cd4131133f42013a1b55687ae4b6814a2dab1433f4e92b7bad57b37e6",
+  "source_hashes": {
+    "python/quoridor_training/train.py": "e861f9f43d500a9acfa6959d2e1bc39de24c4c327e39b02f13e5cff09cbdde5d",
+    "python/quoridor_training/common.py": "4782d1ad400da17d6da604dcb8177473d529f8fa640a4641711b8b1a37734b69",
+    "python/quoridor_training/sampling.py": "a25fc22b4b1fe10485f833055cdb52090e0424324920057e20fa9c2e2ac60c58",
+    "python/quoridor_training/test_observation.py": "b48d147f173645e131b2c82c95cb2b6c5924ed7d5aec08078f631f6ca58b05c5",
+    "research-data/ai-sigma/frame24-trainer-observation/verify_308.py": "aa1195e239f48f876ad931efc5f93c8dedde98cf31380178bbf9353413ee1062"
+  },
+  "budget_storage_refs": [
+    {
+      "path": "research-data/ai-sigma/frame24-steward/storage-308-donor-overlay-v1.json",
+      "sha256": "1ac8394549a9fd5c10001a150e1b9e71345e48201777e9980ae5c0a52d3b1d61"
+    },
+    {
+      "path": "research-data/ai-sigma/frame23-sigma-public-z-import/closed285-frame24-corrected-donor-v1.json",
+      "sha256": "75baf34d5e70af46f07839932d46045b0f7185de2b618c3ff90b0751ddab33f3"
+    }
+  ],
+  "hard_seconds": 30,
+  "rss_guard": 1879048192,
+  "data_cap": 1310720,
+  "remaining_bytes": 524288,
+  "expected_outputs": [
+    "output.log",
+    "process.json",
+    "admission.json",
+    "result.json"
+  ],
+  "environment": {
+    "PYTHONPATH": "/workspaces/quoridor/python",
+    "ORT_DISABLE_TELEMETRY": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+  },
+  "phase": "verification-nn0-v1",
+  "nn_cap": 0,
+  "argv": [
+    "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "-B",
+    "-m",
+    "unittest",
+    "-v",
+    "quoridor_training.test_sampling",
+    "quoridor_training.test_sharded_cache",
+    "quoridor_training.test_selected_target",
+    "quoridor_training.test_contracts",
+    "quoridor_training.test_residual_config",
+    "quoridor_training.test_observation.ObservationContracts"
+  ],
+  "pre_result_expected_NN": 0,
+  "MAX_verification_entry": 1,
+  "conserved_scientific_slot": 0
+}

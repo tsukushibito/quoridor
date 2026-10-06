@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-06T00:29:14.833487+00:00",
+  "identity": {
+    "pid": 2131895,
+    "start_ticks": "49962082",
+    "ppid": 2131813,
+    "pgrp": 2131895,
+    "cpu_ticks": 0,
+    "state": "R",
+    "rss": 4096,
+    "cpus": [
+      1
+    ],
+    "argv": []
+  },
+  "argv": [
+    "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "-B",
+    "-m",
+    "unittest",
+    "-v",
+    "quoridor_training.test_sampling",
+    "quoridor_training.test_sharded_cache",
+    "quoridor_training.test_selected_target",
+    "quoridor_training.test_contracts",
+    "quoridor_training.test_residual_config",
+    "quoridor_training.test_observation.ObservationContracts"
+  ]
+}

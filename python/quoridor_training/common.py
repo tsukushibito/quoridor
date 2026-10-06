@@ -40,10 +40,15 @@ DEFAULTS = {
         "monitor": "game",
         "early_stopping_patience": 5,
         "min_delta": 0.0,
+        "diagnostic_rows": 256,
+        "diagnostic_interval": 25,
+        "diagnostic_checkpoints": None,
+        "full_train": True,
+        "full_train_checkpoints": [],
     },
     "limits": {"seconds": 60.0, "samples": 500000},
     "data": {"overlap_policy": "error"},
-    "artifacts": {"mode": "native_onnx", "save_scheduled": False},
+    "artifacts": {"mode": "native_onnx", "save_scheduled": False, "checkpoint_steps": []},
 }
 
 
@@ -72,12 +77,17 @@ def resolve_config(path=None, overrides=()):
         ("training", "threads"),
         ("evaluation", "interval"),
         ("evaluation", "batch_size"),
+        ("evaluation", "diagnostic_interval"),
         ("limits", "samples"),
     ]:
         value = result[section][key]
         if type(value) is not int or value <= 0:
             raise ValueError(f"positive integer required: {section}.{key}")
-    for section, key in [("evaluation", "early_stopping_patience"), ("training", "seed")]:
+    for section, key in [
+        ("evaluation", "early_stopping_patience"),
+        ("evaluation", "diagnostic_rows"),
+        ("training", "seed"),
+    ]:
         value = result[section][key]
         if type(value) is not int or value < 0:
             raise ValueError(f"nonnegative integer required: {section}.{key}")
@@ -134,6 +144,26 @@ def resolve_config(path=None, overrides=()):
         )
     if type(result["artifacts"]["save_scheduled"]) is not bool:
         raise ValueError("artifacts.save_scheduled must be boolean")
+    if type(result["evaluation"]["full_train"]) is not bool:
+        raise ValueError("evaluation.full_train must be boolean")
+    if result["artifacts"]["save_scheduled"] and not result["evaluation"]["full_train"]:
+        raise ValueError("scheduled full-row scalars require evaluation.full_train=true")
+    for section, key in [
+        ("evaluation", "diagnostic_checkpoints"),
+        ("artifacts", "checkpoint_steps"),
+        ("evaluation", "full_train_checkpoints"),
+    ]:
+        points = result[section][key]
+        if points is not None and (
+            not isinstance(points, list)
+            or points != sorted(set(points))
+            or any(type(v) is not int or not 0 <= v <= result["training"]["steps"] for v in points)
+        ):
+            raise ValueError("invalid observation/artifact checkpoints: " + section + "." + key)
+    if result["evaluation"]["checkpoints"] is not None and not set(
+        result["evaluation"]["full_train_checkpoints"]
+    ) <= set(result["evaluation"]["checkpoints"]):
+        raise ValueError("full_train_checkpoints must belong to explicit selector checkpoints")
     return result
 
 

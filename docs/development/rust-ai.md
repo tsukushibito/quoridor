@@ -58,9 +58,13 @@ CUDAは`cuda-aoti`、TensorRTは`tensorrt`のCargo featureを明示する。`QUO
 
 学習の `--cache` は単一cacheディレクトリ、または `quoridor-sharded-training-cache-v1` のJSON manifestを受ける。後者は元train cacheをSHA付きで参照し、namespaceとfamily単位のtrain/validation割当、全行の資格maskを明示する。元tensorや終局ラベルを複製・書換せず、testや未来ラベルを取り込まない。`cache.load` の戻り値は `(binding, rows, x, distance, labels)`、`rows` は辞書のリストで、全tensorの先頭次元と行数が一致する。
 
-`evaluation.checkpoints` に初期0から最終stepまでの昇順・重複なし配列を指定すると、その固定stepで選定する。省略時は既定intervalを使う。`artifacts.mode: "native"` はONNXを作らずnative重みを保存する。`artifacts.save_scheduled: true` は既存評価forwardのtrain/全raw validation scalarと行順、checkpoint、native重み、実sampling回数を保存する。資格外validation行の保存値を選定metricへ混ぜず、保存・forward分もrun予算へ含める。
+`evaluation.checkpoints` に初期0から最終stepまでの昇順・重複なし配列を指定すると、その固定stepで選定する。省略時は既定intervalを使う。`artifacts.mode: "native"` はONNXを作らずnative重みを保存する。`artifacts.save_scheduled: true` は既存評価forwardのtrain/全raw validation scalarと行順を保存する（full_train必須）。中間のPT/native重みは独立した `artifacts.checkpoint_steps` の明示点だけで保存し、初期/BEST/LASTは正常終了時に保存する。資格外validation行の保存値を選定metricへ混ぜず、保存・forward分もrun予算へ含める。
 
-307のsamplerと正常完了経路は20NN0検証・独立ソースレビューを通過した。未実行epoch学習の再開前には、中断時のpartial使用量保存とselected checkpointの露出量を追跡する。現行 `early_stopping_patience` は実際のloop停止に使われず、BEST checkpoint選定とactive early stoppingを区別する。明示checkpointを使うrunでは解決後のconfig stepsを固定し、CLI `--steps` で後から上書きしない。末尾batchもmean lossの一更新であり、全epoch一括勾配や旧sampler軌跡と同じとは扱わない。
+307の元検証・303の失敗は保存する。308の観測修復では `batch.jsonl.gz` に試行batchと完了更新を逐次flushし、budget/例外による終了でも finally で JSON/CSV/SVG、rowcounts、最後の完了観測を保存する。optimizer.stepが失敗した場合はそのbatchを完了seenへ加えず、model状態をUNKNOWNと記録する。hard killや保存I/O障害は finally 到達を保証しない。freezeの `selected_exposure` と全runのseenを分ける。`early_stopping_patience` は全selector評価の非改善回数で停止し、0は無効、min_deltaと厳密改善/同値時先行を使う。CLI `--steps` を含む最終設定に対してcheckpoint範囲を再検証する。末尾batchもmean lossの一更新であり、全epoch一括勾配や旧sampler軌跡と同じとは扱わない。
+
+`evaluation.diagnostic_rows` / `diagnostic_interval` / `diagnostic_checkpoints` は入力row IDとseedのSHA順位で固定した診断subsetを独立頻度で測る。subset選定は教師値を読まず、sampler RNGを使わない。0行で診断を無効化できる。省略点は0/1/2/5/10/20、以降interval（最大.25行epoch相当）と実epoch末を含む。`evaluation.checkpoints` は全eligible validationのselector点であり、診断subsetはBEST選択に使わない。`evaluation.full_train: false` はselector時のtrain側測定を固定診断subsetに限定する。全selectorで得た同じ重み・入力の値は同stepの診断に再用する。`observations.jsonl.gz` と `observation-plan.json` は分母・点・subset SHAを区別する。距離/定数、row/group MSE、飽和、sign、biasとgroup結果は固定測定集合の値であり、batch objective lossと混同しない。
+
+forward前に実行行数を課金し、update完了後だけseen/rowcountsを増やす。run-statusには保守forward課金と完了call、init/transfer/sync/inference/update/selector/diagnostic/log/export時間を分ける。時間には入れ子のinclusive spanがあるため合算して全wallを捏造しない。ONNXを使う場合はexporterが実際に行うモデルcallもhookで課金する。新GPU基盤比較は同batch/model/FP/sampler/optimizer/尺度でinit-transfer-sync-fullvalidation-record全cycleを比べる別配分とし、大batchは別介入。GPU未使用予算が不明なときは起動しない。
 
 固定cacheの既定 `training.sampling: "epoch"` はseed付きで毎epoch全eligible train行を再shuffleし、そのepoch内で各行を一度ずつ使う。末尾が小さいbatchも使い、validation/testは含めない。学習予算の `training.steps` は実行する更新上限で、例えば14803行・batch128なら1epochは116更新、32epochは3712更新・473696seen（末尾83行）になる。Curve/freeze/sampling.jsonは実seen、完了epochと途中fraction、optimizer stepsと各行の使用量を記録する。途中epochを完了epochへ数えない。Epoch曲線の横軸は実epochで、任意の100万seenを標準にしない。
 
@@ -90,3 +94,5 @@ node crates/quoridor-wasm/tests/nnue-runtime.cjs \
 残差exportは `quoridor-nnue-distance-residual-v3` / `QF1-route4-f32-STM-scaled-residual-v3` の明示形式。教師情報は `training-target.json` に保存し、strict native manifestへ未知フィールドを混ぜない。現在のnative消費側は `route_mode: "zero4"` のみを受け入れ、Enabled DAGは明示拒否する。既存scaled/quantizedモデルへ残差重みを読み替えない。
 
 `nnue-diagnose` の既存engine設定で `kind: "distance_residual"` とmanifestを指定すると、`ResidualEvaluator` を介して履歴付きAlphaBetaへ接続する。full/SIMD/deltaのFTと壁距離map再利用、親accumulatorの保持を用いる。モデルをロードできたこと、有限parity、深度到達を同時間棋力の証明へ置き換えない。今回の公開z checkpointはRuleA48への転移利益が支持されておらず、既定製品モデルへ採用していない。
+
+観測streamはgzip JSONLをrecordごとflushする。group ID/行数と距離・定数基準はmeasurement-sets/reference-metricsへ一度保存し、groupのtarget MSE/sign/saturation/biasは明示little-endian f32 base64 vector（NaNは欠測）で保存する。全体metricは元の数値精度を保つ。curves JSON/CSV/SVGとgradients.jsonには同じbulkを複製せずstream参照を置く。cache binding全体はcache-binding.json.gzへlossless保存する。evaluation.full_train_checkpointsはselector点の一部を明示してその点だけ全trainを測る。実outputと残forecastをrun入場前に確認する。

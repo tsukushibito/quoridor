@@ -1,3 +1,20 @@
+# frame24 現在の配分と判断
+
+2026-10-06 00:08:46起点の明示2時間枠。新heavy開始停止01:58:46、Sup/scheduler回収02:03:46、monitor02:06:46、保存終了02:08:46。旧frame23の個別失敗・期限・累積費/UNKNOWNを救済しない。主課題は学習状況を判別できる観測と分析で、重要sampling/teacher/architecture/feature/data-scale変更は事実・不足・競合案・全費をRoot経由でユーザーへ提示する。通常の修復・同条件観測と正しさ検証を先に実施する。
+
+- 308 hypothesis：main canonical trainerの逐次高頻度観測・中断partial/実optimizerstep・selected/whole露出・patienceとCLIcheckpointの修復。00:17本人claim/source開始、初期test/modelimports0。旧epochhelper20tests維持、旧game診断とepoch変更を混ぜない。
+- 310 experiment：保存298/302の同初期/corpus/sampler/LR/seen/batch/選定/代表性を独立分析し、修復308STOP後に旧302条件で高密度同trajectory二run。200観測点以下・同full4733selector/targetblind2048Tdiagnosticsとfulltrainを区別、保存済み同weights/source/input予測を再用。00:22本人correctissue claim。Rootintake309の同時登録で予測IDがずれた初deliveryは未実行として保持、actualBeads310/311読取後に訂正配送しRoot309を変更していない。
+- 311 critic：managed frame21-search scopeで保存305永続TT試作のhistory/model namespace・newgame/collision/cancellation/P2/terminal/合法cachedmove・同depthOFFcoldoracle、caller有効hit/cutoff/保持bytesとwholecostを検証。STOP後の独立reviewでexacthistory/namespace/合法手/rollback/4096slot・1MiB capを採択し、停止したWTの2sourceだけmainへ統合。NN0/D-only低分岐2plyの有限機能PASSとコンパイルを根拠とし、実runner対局/代表的NNUEの全費・棋力は未測定。MPC306はpolicyOFF/source準備・校正対未使用validationの必要量を別保持し、ON係数捏造0。
+- 92 steward：frame24通常freshstartと現在24hash/6digest・fresh保存/累積GPU残確認をsole運用writerとして担当。00:18 loadedconfig65eeab56/正2116552t49894932・2116570t49894974/同saved/period1200/null成立。00:20 freshtotal12429307904<12884901888/errors0/UNKNOWN134217728、旧3049.75内の新root/data donor/forecasts overlayが各heavy前条件。
+
+GPU学習は00:32:01Zのユーザー新明示3600秒を別namespace/ledgerで受入れ。旧7200秒のUNKNOWN/失敗/原receiptを保全し、その残量復元を今回の開始gateにしない。310の同batch128・同初期/model/FP32/optimizer/旧sampler512step CPU/CUDA比較へ確認済unused300kNN/MAX2を配分。初回CPU90秒/CUDA300秒以内、GPU init/転送/validation/同期/記録/回収・失敗を3600累積へ課金、親終了との早い方まで。新batch/モデル/教師/データ変更は追加しない。現在の最大不足は308出力容量で、fullgroup payloadを400点重複するとVだけ29.95MBとなる。観測密度と数式を保ちcanonical記録を軽量化し、独立NN0確認と92新loaded/freshphysics/ownerforecast後に実測する。
+
+初配分のMAX18→11案は旧actual15を下回るため未採択/未実行。訂正版oldlive18→15+tiny3081+conditionalfoundation2、closed304unused2→dense3102、closed305unused1→TT3111。旧NN4.725m=522k+3.9m+300k+1000+2000のowner-confirmed transfer、data9.75=.25old+1.25repair+6dense+2TT+.25analysis、閉304の180秒/2slotは310へ前向き受入れ。範囲の実claim・科学開始・結果・影響を分け、静的準備を全役ACK待ちにしない。308軽量記録は停止fab496/独立NN0確認PASS（元live3PASS1ERROR/120NN/MAXを保持）、新GPU3600は92新2169413/2169432 loaded14PASS。圧縮模擬6583133Bは旧6MiB不足として保全し、closed285276→274/old29914→13により新3109MiBへconserve、ownerinclusive7985672Bをsmalloverlayへ。最大未成立は本人first actualCPU/CUDA結果・密な曲線と物理/保存入場である。
+
+具体契約・初実受付は [frame24-coordinator](../../research-data/ai-sigma/frame24-coordinator/) とcurrent Beads308/310/311。01:40頃までに92終了判断・Sup自然振返り十分性を枠内で依頼し、02:08:46の自動延長0。
+
+---
+
 # 現在の研究選定 — frame22
 
 2026-10-05 11:36:03–23:36:03 UTC。Root283によるユーザー明示の連続8時間追加。新heavy入口23:26:03、監督正owned23:31:03、monitor23:34:03、必要保存23:36:03。旧個別runの期限・caps・結果・費を遡及変更しない。課題候補は[改善課題集合](../design/ai-nnue-optimization-agenda.md)に集約し、担当・着手・依存はBeadsを正本とする。

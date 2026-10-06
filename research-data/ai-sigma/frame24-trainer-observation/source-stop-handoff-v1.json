@@ -1,0 +1,78 @@
+{
+  "schema": "trainer-observation-source-stop-308-v1",
+  "at": "2026-10-06T00:33:21.318433+00:00",
+  "status": "SOURCE_STOPPED_REPAIRED_NN0_CONFIRMATION_PENDING",
+  "current_bindings": [
+    {
+      "path": "python/quoridor_training/train.py",
+      "bytes": 37528,
+      "sha256": "84d3ea330e1ba0f845d128d305afb4dceb2bc2f8e5212680b2aa154c450432b0"
+    },
+    {
+      "path": "python/quoridor_training/common.py",
+      "bytes": 10219,
+      "sha256": "4782d1ad400da17d6da604dcb8177473d529f8fa640a4641711b8b1a37734b69"
+    },
+    {
+      "path": "python/quoridor_training/sampling.py",
+      "bytes": 3812,
+      "sha256": "a25fc22b4b1fe10485f833055cdb52090e0424324920057e20fa9c2e2ac60c58"
+    },
+    {
+      "path": "python/quoridor_training/test_observation.py",
+      "bytes": 10743,
+      "sha256": "b48d147f173645e131b2c82c95cb2b6c5924ed7d5aec08078f631f6ca58b05c5"
+    },
+    {
+      "path": "docs/development/rust-ai.md",
+      "bytes": 13055,
+      "sha256": "6214a45c1814b8d6128cb2843ae91ceb5afb6cf52f218e6cc80505a131255116"
+    }
+  ],
+  "original_scientific_sources": "pre-repair-source-v1.tar.gz and failed-verification-source-v1.tar.gz preserved unchanged, streamrestorePASS",
+  "current_source_archive": {
+    "path": "research-data/ai-sigma/frame24-trainer-observation/current-source-handoff-v1.tar.gz",
+    "bytes": 22879,
+    "sha256": "3327dc8783142a08a4a98d3f532ee74545d22d9c6ea9bf2f0a9e693f92b4912e"
+  },
+  "code_writer_STOP": true,
+  "modelreader_STOP": true,
+  "selector_STOP": true,
+  "own_tests": "NN0 29PASS, live3PASS1ERROR before separator repair; not current fullqualification",
+  "actual_NN": 120,
+  "verification_MAX_consumed": 2,
+  "scientific_MAX_consumed": 1,
+  "actual_test_command_wall_seconds": 3.5117876930744387,
+  "controller_pre_admission_failure": "No child/model/slot; previous RAM guard context mix preserved",
+  "owned_child_stop_refs": [
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/verification-nn0-r2/result.json",
+      "bytes": 1145,
+      "sha256": "50ea7edc3e0f04a0c86a3905f127f66b9a729cd33c890e8cdd3f59c53265f3fc"
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/verification-live-r2/result.json",
+      "bytes": 1141,
+      "sha256": "a552abbc1c776ad67ef433ef5a8e701324d80bd7521be05a2acb2d7bb63bf933"
+    }
+  ],
+  "latest_format_check_lint": "Ruff allfour PASS; Prettier currentdoc PASS",
+  "current_repairs_after_original_tests": [
+    "Real newline in JSONL and empty SVG",
+    "artifact.checkpoint_steps independent of scalar/evaluation frequency",
+    "linear group-vector aggregation, same formulas"
+  ],
+  "missing_before_observation_use": "Minimal independent NN0 serializer/empty-artifact/checkpoint wiring confirmation or explicit new bounded verification allocation; no automatic retry",
+  "NN0_fixture_design": "AST extract append_record only with io.StringIO/json/time/phase_seconds; write2 records and parse2 lines+flush; noTorch/modelimport. Inspect/remove auto scheduled checkpoint condition; parsedemptySVG.",
+  "coordinator_source_review": "Separate owner, no ownPASS substitution",
+  "runstatus_modelstate_failure": "Optimizer failure marks UPDATE_IN_PROGRESS_OR_FAILED_UNKNOWN and failedbatch excluded from completed counts.",
+  "GPU_training": 0,
+  "historic_GPU_full_coverage": "UNAVAILABLE; known290/298/302 wereGPU0, originalfull7200historyUNKNOWN unchanged",
+  "budget": "Newframe24 source120/manage30/test80, NN1000 reserved/120actual, slot1 consumed; oldfees preserved",
+  "unmetered_LLM_read_control": "UNKNOWN",
+  "data_inclusive_forecast_B": 1179648,
+  "cap_B": 1310720,
+  "no_model_raw_cache_copies": true,
+  "Git_index_owner": "coordinator",
+  "parentgoal": "ACTIVE_UNMET"
+}

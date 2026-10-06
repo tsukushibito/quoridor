@@ -1,0 +1,59 @@
+{
+  "at": "2026-10-06T00:29:27.654011+00:00",
+  "scheduler": {
+    "pid": 2116552,
+    "start_ticks": "49894932",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "monitor": {
+    "pid": 2116570,
+    "start_ticks": "49894974",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "current24": "PASS",
+  "six_digest_receipt": {
+    "coordinator": true,
+    "hypothesis": true,
+    "experiment": true,
+    "critic": true,
+    "steward": true,
+    "supervisor": true
+  },
+  "owned": null,
+  "self": {
+    "pid": 2132673,
+    "start_ticks": "49963330",
+    "ppid": 2009,
+    "pgrp": 2132673,
+    "cpu_ticks": 4,
+    "state": "R",
+    "rss": 18939904,
+    "cpus": [
+      1
+    ],
+    "argv": [
+      "python3",
+      "research-data/ai-sigma/frame24-trainer-observation/verify_308.py",
+      "--registration",
+      "research-data/ai-sigma/frame24-trainer-observation/verification-live-r2-registration.json"
+    ]
+  },
+  "foreign_science": [],
+  "host_current_process_rss_sum": 10245017600,
+  "research_current_rss_including_operations_reserve": 1073741824,
+  "memavailable": 17059164160,
+  "gpu_compute_apps": [],
+  "local_current_allocated_bytes": 90112,
+  "remaining_forecast_bytes": 524288,
+  "argv": [
+    "/home/vscode/.cache/inference/envs/quoridor-training/bin/python",
+    "-B",
+    "-m",
+    "unittest",
+    "-v",
+    "quoridor_training.test_observation.LiveTrainerObservation"
+  ],
+  "registration_sha": "3f060eb11ee7a007709f2a3f1c7d3e7c7494569459f27ad32c3a60515289891d",
+  "purpose": "Canonical observation/interruption/config/sampling software verification on synthetic inputs only; no learningmethod or strength claim.",
+  "raw_model_cache_or_opened_targets": false
+}

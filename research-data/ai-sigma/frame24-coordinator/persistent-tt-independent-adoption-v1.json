@@ -1,0 +1,36 @@
+{
+  "schema": "persistent-tt-independent-source-adoption-v1",
+  "issue": "quoridor-4lc.311",
+  "owner_stop_sha256": "4df48145b8ac8bfb896d8827c99c63c8ac77e22128eacd60e42a2934fd282bd3",
+  "source_paths": [
+    {
+      "path": "crates/quoridor-ai/src/alphabeta.rs",
+      "before_sha256": "1caa46e6d3b17b6211e21ccc7ccf625e972f7e884b6b273227c1dbe5dc8d2f8e",
+      "after_sha256": "7422a14ff83926c673300597a3a24874a0a7141d467b3d6021e26b4e8554d538",
+      "bytes": 51547
+    },
+    {
+      "path": "crates/quoridor-runner/src/runtime.rs",
+      "before_sha256": "66d06e2332255a01ead0d0033ecaddba0b4b812bbfc8220c4dbb5bc2726e1a29",
+      "after_sha256": "d3fa8b06f0b3bc56d6fe49094e23a28dc4c5d5351e67d6bcab94c56d3a385b4a",
+      "bytes": 64575
+    }
+  ],
+  "adoption": "Canonical source adopted for exact bounded persistent TT and per-engine/game caller ownership/counters. No NNUE weight/product strength adoption.",
+  "independent_review": [
+    "full Key retains actualhistorycounts/totalply/terminal/turn/board/synthetic; namespace retains evaluator content fingerprint/mode/rules/MPCOFF",
+    "immutable evaluator owned by session; reset/newgame clears; entry legalbest+equaldepth bound reuse; other depth ordering only",
+    "generation rollback discards unfinishediteration; restores rootcontext or clears table on error; collisions use full equality; capacity4096/1MiB incl heap histories",
+    "runtime pergame vector owned until finish; content namespace includes simd; profile sums searches/error count/cutoffs/retainedbytes",
+    "36 aligned current build source/manifests byteequal main; two diagnostic277 files absent frommain and unreferenced, not merge candidates",
+    "only two WT stopped paths merged, prior prototypes/failures/oldlatepoint protected inarchives"
+  ],
+  "validation_reused": "Owner 34.886548s allattempt compile, scopedClippy+selectedcorrectnessfixture PASS1133processed/NN0/MAX1. Coordinator did not rerun scientistfixture or spend extra NN/MAX. Main source is exact compiled WT bytes; no new build claimed.",
+  "limits": [
+    "D-only one lowbranch2-ply fixed sequence; actualrunner pergame execution and NNUE model comparison NOT_RUN",
+    "4096 capacity cap changes former65536 retention, representative distribution/gain unmeasured",
+    "profile whole_search_seconds covers search invocation only; session initialization/error elapsed notincluded; provider spans can overlap. Whole caller cost still required for performance claims",
+    "TT counters omit PV reconstruction key allocations; no general production speed/strength claim"
+  ],
+  "next": "Independent bounded realcaller/profile software plus representative frozenNNUE warm/cold actualsequences under separatelyconfirmed budget; no MPC ON/calibration or newlearningmethod"
+}

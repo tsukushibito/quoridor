@@ -1,0 +1,48 @@
+{
+  "schema": "308-compact-source-stop-v2",
+  "at": "2026-10-06T00:45:45.864104+00:00",
+  "code_writer_STOP": true,
+  "modelreader_STOP": true,
+  "selector_STOP": true,
+  "bindings": [
+    {
+      "path": "python/quoridor_training/train.py",
+      "sha256": "ba317c1ed2580bca259a10f7bc5dac6ad689a9252677ecd6c2711e86a573a75c",
+      "bytes": 40703
+    },
+    {
+      "path": "python/quoridor_training/common.py",
+      "sha256": "5c83814985e62f2550e95423fd90e22d1a205e585715ee6e58d37726b921afbb",
+      "bytes": 10577
+    },
+    {
+      "path": "python/quoridor_training/sampling.py",
+      "sha256": "a25fc22b4b1fe10485f833055cdb52090e0424324920057e20fa9c2e2ac60c58",
+      "bytes": 3812
+    },
+    {
+      "path": "python/quoridor_training/test_observation.py",
+      "sha256": "ef42782835a2c6d513ac9b8b77a0ab68d76dc9ee1a8dc76c0a071fd4ba92c8fd",
+      "bytes": 10790
+    },
+    {
+      "path": "docs/development/rust-ai.md",
+      "sha256": "c43943c467fe18c15b9925d0190c6d538917e56ad3a9caa949bbd0e8ce74e6ab",
+      "bytes": 13696
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-trainer-observation/independent_metadata_fixture_308.py",
+      "sha256": "fcd803c36292ff0cefffaa3589768e927feae955ba0155585268294150f22076",
+      "bytes": 5547
+    }
+  ],
+  "original_tests": "29NN0PASS+3livePASS1JSONLERROR;120NN/MAX2 consumed, no thirdselftest",
+  "scope": "compact continuation explicitlyauthorized; metrics/loss/RNG/initial/optimizer unchanged; f32groupvectors/NaNmissing, staticbaseline/groupIDs once, gzipJSONLflush, no bulkduplicate; fullT explicitlycharged andactualscope",
+  "fixture": "One coor ASTstdlibonly NN0 <=5sec; owner didNOT run; contains400point output witness with group<=200rows assumption, not universal compressed bound.",
+  "format_lint": "RuffPASS/PrettierPASS",
+  "archive_streamrestore": "PASS",
+  "originalfailedsourcesandfees": "UNCHANGED",
+  "interface": "full_train=false,diagnostic_rows2048,diagnostic_checkpoints=[],full_train_checkpoints[0,4000] inselectorpoints,artifact.checkpoint_steps=[],save_scheduled=false,native",
+  "fees": "source120=retain115+coor5; data1.25MiB;UNKNOWNretained",
+  "Git_owner": "coordinator"
+}
