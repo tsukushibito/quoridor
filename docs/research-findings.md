@@ -196,3 +196,5 @@ TT cached手だけの合法性確認候補は、全legalset/history/terminal/ply
 高LR探索についてユーザーは最初に極端な上側値を試して二分探索のように絞る方針へ変更した。先の1e-3→3e-3案を置換し、まず初期LR0.1、悪化/非finiteなら既良好3e-4との倍率中点約.005477から絞る。validation MSEの単調性や普遍的安定上限は未証明で、同scheduleでの初期振動・減衰後の回復・最終観測を区別する。全他条件と未開封評価の保留、資源/旧出力保全は不変更。新候補・判定基準・inclusive保存予測を結果前に固定する。
 
 ユーザーはヒープ回避の目的を「評価ごとの一時確保を避ける。事前確保ヒープは利用可」と明確化した。大きなmapのby-value案は確保削減とコピー/ABI変更が混在しており、純粋な一時確保回避の遅延原因と断定しない。探索担当へcanonical算術のままsetup-owned入力bufferを参照して使い、ReLUを一度処理・連続slice内積・不要なmap payload移動を避ける最小比較を優先する指示を渡した。既compact版の所有管理費/コピー因果は未分離、main adoption/速度利益は未認定。旧patch/負結果を保持し、容量/学習quiet slot成立後に独立referenceと実callerの比較を行う。
+
+事前確保入力scratch案の必要予測174,936,064Bに対し、Rootは完了済み保守fweの将来用予約94→89MiBから探索163→168MiBへ5MiBを移譲した。既completed observerは保守source/records/verify実成果を含み、actual roots・全old build UNKNOWN・未知128MiBは保持する。親予測12,884,303,872B/12GiB不変、探索余1,224,704B。実資産の削除や再全scan・過去cap/費resetはなく、保守の新build/wholeverifyは配分しない。学習midpoint499b7cbeの実STOP/quiet後に実数値比較、許された別CPU purecompileは直接調整する。[保存配分](../research-data/ai-sigma/search-optimization/storage-allocation-evaluation-input-scratch.json)。

@@ -1,0 +1,57 @@
+{
+  "authority": "Root own prospective allocation; closed quoridor-fwe verified 2026-10-06T06:18:59Z",
+  "donor_category": "maintenance-repair-new-growth",
+  "donor_before_bytes": 98566144,
+  "donor_after_bytes": 93323264,
+  "transfer_bytes": 5242880,
+  "search_before_bytes": 170917888,
+  "search_after_bytes": 176160768,
+  "search_forecast_bytes": 174936064,
+  "search_margin_bytes": 1224704,
+  "parent_before_bytes": 12884303872,
+  "parent_after_bytes": 12884303872,
+  "parent_cap_bytes": 12884901888,
+  "UNKNOWN_retained_bytes": 134217728,
+  "capacity_base_SHA256": "887d2d14f1657a0baf3f455f99843f4de5c87abbd7f45c11d832215344c122d9",
+  "unchanged_actual_maintenance_coverage": [
+    {
+      "name": "current repair source and evidence",
+      "category": "maintenance-repair-live",
+      "path": "/workspaces/quoridor/.artifacts/maintenance-repair",
+      "logical_file_bytes": 2198565,
+      "allocated_inode_bytes": 2371584,
+      "overlap_allocated_bytes": 0,
+      "files": 90,
+      "symlinks": 0,
+      "missing": false
+    },
+    {
+      "name": "maintenance records",
+      "category": "maintenance-records",
+      "path": "/workspaces/quoridor/research-data/maintenance",
+      "logical_file_bytes": 16725337,
+      "allocated_inode_bytes": 16760832,
+      "overlap_allocated_bytes": 0,
+      "files": 14,
+      "symlinks": 0,
+      "missing": false
+    },
+    {
+      "name": "owned production verification outputs",
+      "path": "/workspaces/quoridor/.artifacts/verify-production",
+      "category": "maintenance-repair-new-growth",
+      "logical_file_bytes": 67945479,
+      "allocated_inode_bytes": 68067328,
+      "overlap_allocated_bytes": 0,
+      "files": 60,
+      "symlinks": 0,
+      "missing": false
+    }
+  ],
+  "root_manifest_before_SHA256": "a92bb3565e3bb70b5e1289636ab604013e0ff7d691ca6a060e3e45ec0c634346",
+  "root_manifest_after_SHA256": "1c033243e01ee7abc0be9554020cd4ba4810001d04afd57b7fef19f8285328c9",
+  "coverage_changed": false,
+  "no_delete_rescan_unknown_release_budget_refund": true,
+  "old_root_reserve_caps_history": "before manifest saved; forward-only transfer, actual costs/failures unchanged",
+  "conditions": "source-only during learner midpoint499b7cbe; affected software can separately coordinate permitted pure compile; numerics/fairclock require its actualSTOP and quietslot, existing permissions/ownership/resources"
+}
