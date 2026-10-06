@@ -1,0 +1,41 @@
+{
+  "issue": "quoridor-4lc.319",
+  "job_id": "5c0be09e-c06f-4d2c-bfa5-87085ea37e88",
+  "source_sha": "751186344fc52ad0c29bc65922e62c6fa915f006",
+  "source_summary": "/workspaces/quoridor/.worktree/learning-million/.artifacts/learning-million/data-result-summary.json",
+  "source_summary_SHA256": "0ecdb434351af2193578ecc79147ebf159686f1519df6dc39d783fcee8d13fa7",
+  "observed": {
+    "all43_blob_hash_and_LR_input_label_bytes": "PASS",
+    "stored_rows_decoded": 18914078,
+    "candidate_rows_native_qualified": 5674588,
+    "native_code_counts": [3420564, 0, 0, 27664, 612584, 957332, 656444],
+    "candidate_labels": {
+      "positive": 2814210,
+      "negative": 2766420,
+      "zero_unknown_termination": 93958,
+      "invalid_label": 0
+    },
+    "retained": [
+      ["train", 1000000, 323366],
+      ["validation", 50000, 28709],
+      ["test-sealed", 50000, 28669]
+    ],
+    "decisive_native_eligible_by_split": [3063833, 151935, 153672],
+    "unsampled_eligibility": "UNKNOWN",
+    "corpus_bytes": 191400000,
+    "network_bytes": 1664424671,
+    "data_seconds": 341.5802640840411,
+    "job_wall_seconds": 341.8145182740409,
+    "direct_child_reaped": true,
+    "cleanup_complete": true,
+    "remaining": []
+  },
+  "interpretation": {
+    "rows_are_not_distinct_inputs": true,
+    "distinct_counts_are_current_model_input_identity_not_independent_games": true,
+    "prior_4996_group_definition_differs_no_direct_diversity_multiplier_claim": true,
+    "adoption_review_pending": true,
+    "GPU_fit_NOT_STARTED_at_receipt": true,
+    "nested_wall_clocks_not_summed": true
+  }
+}

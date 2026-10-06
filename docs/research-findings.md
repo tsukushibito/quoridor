@@ -47,6 +47,10 @@ Aは末期にtrainへ強く適合しvalidation誤差と飽和が増え、Bは遅
 
 ユーザーは公開全域からの訓練100万行・validation5万行・最終評価5万行、元観測/反転兄弟の分割固定、別観測の盤面一致許容、epoch shuffleとGPU学習を選んだ。先頭入力群だけの抽出とvalidation一致による訓練一律削除を新主経路に使わない。不正入力を除き、公開z0は終了理由不明の教師として別に除外する。複数の条件付き勝敗観測を保持し、実distinct数と分布を報告する。既存モデル・特徴を固定し、初期から細かい曲線と全工程費を観測する。[319契約](../research-data/ai-sigma/public-million-learning/task.md)が実装・実行・資源・停止と検証を定める。受付・実装・実取得・実学習・独立評価を分け、結果は未測定。
 
+319のデータ準備は全43blobのhashと実original/LR入力・ラベルbyte対応を報告し、18,914,078保存行をdecode、抽出候補5,674,588行をnative資格へ通した。適格decisive split候補はT3,063,833/V151,935/E153,672、実保持T1,000,000/V50,000/sealed E50,000。モデル入力distinctはそれぞれ323,366/28,709/28,669であり、100万行を100万種類や独立gameへ読み替えない。旧4,996は元Sigma全plane入力群なので、この新モデル入力identityとの単純な倍率比較も行わない。[集計とRoot読取点](../research-data/ai-sigma/public-million-learning/data-preparation-observed.json)。
+
+data処理341.580264秒、controller全job341.814518秒、network1,664,424,671B、compact corpus191,400,000Bを保存した。時計は包摂するので合算しない。Job exit0/direct child回収/cleanup true/remaining空をRootが確認したが、入力変換・split・教師解釈の導入採用は独立レビュー319.1の確認待ちであり、GPU fitと最終評価はこの読取点で未開始。データ件数の成立を学習利益や棋力へ変換しない。
+
 ## 次に人間が選ぶ事項
 
 百万種類規模はユーザーの暫定設計目標で、理論的な必要最小量ではない。316の提案は、まず公開全43ファイル全域をtarget-freeに調べ、distinct適格モデル入力の量、反射/crosscycle露出、分布の代表性を測ること。小候補がDを超えることを本調査の開始条件にしない。取得・調査・新学習は未開始である。[316提案の正本](../research-data/ai-sigma/frame24-learning-analysis/next-main-learning-proposal-v1.md)。
