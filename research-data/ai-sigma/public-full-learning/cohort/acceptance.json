@@ -1,0 +1,97 @@
+{
+  "at": "2026-10-06T18:51:17.555867+00:00",
+  "scope": "Pre-result fixed3LR cohort/caller static and NN0 review; no actual fullfit success, optimalLR, final Sigma/newE release or main source adoption",
+  "major_findings": [],
+  "ordinary_findings": [],
+  "locked_cohort_sha256": "db5076c65798d68cce14924513e93ed1bd790b31ed57337206beed297a9f44cf",
+  "source_binding_sha256": "49c0e51a78037c9ccebed18c200c9f1ed6930f418e59707f9b6beaa6c5dd3805",
+  "reviewer_related_NN0_PASS": 1,
+  "config_paths_sha_verified": 12,
+  "initial_weights_sha256": "2ddacbf88145816b6b0c86e13ebb983d7c1b64e42f8d346623873a18ae7414ad",
+  "batch": 2048,
+  "steps_per_complete_epoch": 4109,
+  "epoch_tail_rows": 765,
+  "candidate_LR": [3e-5, 0.0001, 0.0003],
+  "fixed_next": "Already authorized sequential scientific-convergence fits same init/data/scale/order/reflection RNG. Fulloriginal V selection, sealed E/Sigma final selection stage. No time/epoch/sample horizon. No RootACK/everyfit review gate.",
+  "archive_sha256": "0af8518b44672de409b84bc74e904d77c6dde7f3860c2ba713bc5801194fe834",
+  "members": {
+    "locked-cohort-v1.json": {
+      "bytes": 5020,
+      "sha256": "db5076c65798d68cce14924513e93ed1bd790b31ed57337206beed297a9f44cf"
+    },
+    "binding/full-fit-source-binding-r4.json": {
+      "bytes": 5620,
+      "sha256": "49c0e51a78037c9ccebed18c200c9f1ed6930f418e59707f9b6beaa6c5dd3805"
+    },
+    "configs/fit-lr3e-5-config.json": {
+      "bytes": 1148,
+      "sha256": "5ff9490830e2dccee1d00a99c7185258f0305cf1be6390de2d6d4f384ffd034f"
+    },
+    "configs/fit-lr3e-5-input-binding.json": {
+      "bytes": 1823,
+      "sha256": "1e3989b007181e4737b6e3fb2af9a992b4a7f4f4c0377f6796bd03e4751b5d8a"
+    },
+    "configs/fit-lr3e-5-guard-config.json": {
+      "bytes": 5718,
+      "sha256": "a5ac3c9044215b1edf70e0e2f45db2284b8a1ffda5230e4cd16aaa8c9ef83a1b"
+    },
+    "configs/fit-lr3e-5-job.json": {
+      "bytes": 1549,
+      "sha256": "4fff89e1589f108bbc549157cf00643ce6af146606df5be74b44e1429ed6f398"
+    },
+    "configs/fit-lr1e-4-config.json": {
+      "bytes": 1149,
+      "sha256": "69fc47cf14a0eaf38a6deca496c26ad52d284c3981d7f6147ca50145449b57e8"
+    },
+    "configs/fit-lr1e-4-input-binding.json": {
+      "bytes": 1823,
+      "sha256": "60881682aaf20033c63305c1714e8021b3f0601941faf556131fb6142cbb66ac"
+    },
+    "configs/fit-lr1e-4-guard-config.json": {
+      "bytes": 5718,
+      "sha256": "5fb72aa4efb6a78e515738a24ca144f0047ba97143eda1aa6bb0d0d936f2ce8d"
+    },
+    "configs/fit-lr1e-4-job.json": {
+      "bytes": 1549,
+      "sha256": "47fde3c2fc0e845ab218fd899bb44a4107246a47af7ca5e575c75e0cee7d2ac0"
+    },
+    "configs/fit-lr3e-4-config.json": {
+      "bytes": 1149,
+      "sha256": "4805a99631faa4e2277d03aabef68eb9a8679f8c4625f1d1d0dfffecd01b3604"
+    },
+    "configs/fit-lr3e-4-input-binding.json": {
+      "bytes": 1823,
+      "sha256": "9574930f65864a8de94434dad6b65c34b5ae26fda048bb289c603a3568fcf103"
+    },
+    "configs/fit-lr3e-4-guard-config.json": {
+      "bytes": 5718,
+      "sha256": "65899d29b55937165889c00d8104e3ce3c89528d3362623c3e86ed25e3ac637e"
+    },
+    "configs/fit-lr3e-4-job.json": {
+      "bytes": 1549,
+      "sha256": "654dfcd8f579ac68fede41be273edcc7170a1a684910fbe81427c68740e9d281"
+    },
+    "review/cohort-review-r4.md": {
+      "bytes": 4247,
+      "sha256": "1d40d1b96248b8e5426a016e6cdec4886b9b5582e6859c10cef72de420a57221"
+    },
+    "review/cohort-review-r4.json": {
+      "bytes": 38410,
+      "sha256": "ba309afdbae921300087541c9776be26c67ef9a8752a8ca9478ce6dfcfc98270"
+    },
+    "review/cohort-review-r4-correspondence.json": {
+      "bytes": 12199,
+      "sha256": "0eb1fb084130b1b61ce9c8d0b5710d39d1022ca89f165b16781c116006406b40"
+    },
+    "review/cohort-review-r4-fixture.json": {
+      "bytes": 1727,
+      "sha256": "3d02fe2082f72fb9b09f72cab9afeb4326d771ac8f5374636d47d8ad1a448df3"
+    },
+    "review/cohort-review-r4-control.json": {
+      "bytes": 7573,
+      "sha256": "6d8f973f74ecdd9f51522dc19b0700db832de12f87398eef197063cf8e686d28"
+    }
+  },
+  "Root_new_build_forward_or_inventory": 0,
+  "supplied_r3_live_proof_vs_r4": "r3 live supply/tiny success preserved separately; new r4 initial identity guard is static+NN0 only"
+}
