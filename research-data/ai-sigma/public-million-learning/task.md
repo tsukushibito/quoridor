@@ -11,6 +11,16 @@ Beads `quoridor-4lc.319`。ユーザーは2026-10-06、Rootの100万行GPU学習
 - 原mixed corpus191,400,000B・元証拠を保持し、新original-only出力/scratch/証拠/Gitまで768MiB内のpeak forecastへ含める。新assets rootをdirected manifestへ加え、fresh within・既slot非競合成立後に再処理する。成立しない場合は具体不足をRootへ戻し、旧保護資産を削除しない。
 - F1 frozen manifestとtestcacheのlabel開封前照合、F2教師適格と露出UNKNOWNの分離、F3一candidate/D/定数のみの最終評価、F4row monitor・実fit config/曲線予定の固定は通常修正する。F5は上の説明と実規則を一致させる。同reviewerへv2の差分とC++ z/STM signの一次sourceを渡し、導入採用前に確認する。本fitはv2の入力/ラベル/主指標と資格成立後のみ。sealed最終評価はfreezeと修正review後の一巡に保つ。
 
+## 基準学習後の正しい左右反転
+
+ユーザーはoriginal-onlyで学習フローを確立した後、正しい左右反転を追加して比較する方向を承認した。まず上のv2をaugmentation OFFで進め、入力/教師/供給/詳細曲線/checkpoint/native対応・保存/評価callerの機能と基準結果を得る。距離超えや棋力改善を次段の恒久gateにしない。
+
+- 次段は正規盤面から左右反転を定義し、正しいnative特徴の再計算との一致・二回反転の完全復帰・合法手/遷移/ゴール/手番/ラベル対応を独立oracleと非対称壁/境界fixtureで確認する。既公開後半のnaiveLRを修正して使ったことにせず、original-only cacheはimmutableに保つ。モデル/探索の数学・重みlayoutは変更しない。
+- 一括反転cacheを保存する方式より、train batch供給時に50%の確率で正しい左右反転を適用するオンラインaugmentationを優先する。元観測ID/分割/ラベルを保持し、shuffleと別の固定seed RNGで反転選択を記録する。validationは固定した元入力で比較し、反転前後の値の差はsecondary。左右だけに限定し、上下/90度回転/プレイヤー交換を自動追加しない。
+- 反転なし/ありは同じ元データ・split・train-only尺度・初期重み・元行順序・batch/LR/optimizerと同更新回数/seenで比較する。先に成立したbaselineの完了更新数を比較対象として固定し、early stopping/BEST選定と計算量を区別する。反転を加えて見かけの保存行数やepochを倍にしない。
+- 現契約のone fitはoriginal-only基準run。基準フロー成立後のaugmentation比較は、同一条件・50%LR一要因・追加一fitまでを次の具体runにし、実残GPU全job3600秒/compile600秒/768MiB内で双方の比較と保存・回収を収めるforecast/条件を結果前にRootへ渡す。Rootが既承認範囲と資源・計時slotを確認して配分し、同じ人間方針の再承認は要求しない。資源不足、batch/LR等の別変更が必要なら具体不足・代替をRootへ戻す。初回runの結果を見てLR/幅/教師まで同時変更するsweepは未配分。
+- 新反転境界は同reviewerへ関連差分・native oracle/fixtureを戻す。損失、左右一致、全時間と凍結後の棋力を採用指標とするが、現在のsealed評価は契約の一候補/D/定数一巡のまま。開封後の同testで新候補を選び直さず、augmentation最終評価・新arenaに必要な未選定入力と予算は別具体配分で用意する。元の対局数が増えたことにはせず、元観測の量・多様性の拡大も競合として保持する。
+
 ## 目的と選択済み方針
 
 公開Sigma全43 NPZの全域から訓練1,000,000行、validation 50,000行、最終評価50,000行を構成し、現QF1＋距離logit残差H32のGPU学習を実施する。これは保存する適格観測行数であり、distinct盤面数・独立game数・学習seen数ではない。学習効果、過学習の推移、GPU供給から保存までの全工程を確認する。小候補の距離超えや全43 distinct数の確定は開始条件にしない。

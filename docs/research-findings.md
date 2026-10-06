@@ -53,6 +53,8 @@ data処理341.580264秒、controller全job341.814518秒、network1,664,424,671B�
 
 独立reviewはfreeze/test cache未照合、UNKNOWN露出のunexposed表示、sealed評価へのinitial追加、primary row monitorの未束縛を指摘した。通常修正を同reviewerへ戻す。さらにnative合法性だけではnaiveLRと元盤面の幾何対応・コピーzの妥当性を証明できないため、ユーザーはoriginal-onlyでT100万/V5万/E5万を新規抽出するv2を選択した。旧corpusと費を保存し、全43再取得系列を別に配分する。原観測alias distinct942,288/47,187/47,191を保持行数とした説明は訂正する。実保持original行は824,069/41,230/41,322で、LRのみ保持されたaliasを元観測へ読み替えない。
 
+ユーザーは、original-onlyでフローと基準結果を確立した後、正しい左右反転をtrain batchで50%適用するオンラインaugmentationを比較する方向を承認した。新反転はnative再計算/二回復帰/合法遷移等のoracleで確認し、同元データ・初期・尺度・LR/batch・同更新回数/seenで比較する。独立した対局観測の増量と区別し、境界修正は同reviewerへ戻す。具体の追加fitは基準成立後の実残予算/保存と計時枠をRootが配分する。旧公開反転データの再使用、開封済みtestでの新候補再選定、追加arenaはこの方針承認だけでは開始しない。
+
 ## 次に人間が選ぶ事項
 
 百万種類規模はユーザーの暫定設計目標で、理論的な必要最小量ではない。316の提案は、まず公開全43ファイル全域をtarget-freeに調べ、distinct適格モデル入力の量、反射/crosscycle露出、分布の代表性を測ること。小候補がDを超えることを本調査の開始条件にしない。取得・調査・新学習は未開始である。[316提案の正本](../research-data/ai-sigma/frame24-learning-analysis/next-main-learning-proposal-v1.md)。
