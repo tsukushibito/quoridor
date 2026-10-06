@@ -1,0 +1,26 @@
+{
+  "schema": "new-gpu-all-attempt-authoritative-overlay-v1",
+  "namespace": "frame24-new-GPU-training-3600",
+  "cap_seconds": 3600,
+  "attempts": [
+    {
+      "job_id": "26ed07e5-e474-4cb4-92ac-f1ca9bdffb83",
+      "case": "CUDA",
+      "model_child_started": true,
+      "background_outcome": "succeeded",
+      "controller_exit": 0,
+      "controller_failed": false,
+      "controller_seconds": 13.211900249007158,
+      "background_seconds": 13.49328894604696,
+      "charged_seconds": 13.49328894604696,
+      "all_components": "admission/init/transfer/fit/fullval/sync/export/parity/record/reap"
+    }
+  ],
+  "consumed_seconds": 13.49328894604696,
+  "remaining_seconds": 3586.506711053953,
+  "no_nested_sum": true,
+  "raw_finally_ledger": "preserved, earlier partial observation not overwritten",
+  "prePopen_or_controller_exception_policy": "planned GPU attempt charged max available whole span even actualGPU0; controllerfailure counted independently of childexit0",
+  "old7200_unknown_lower0": "UNCHANGED",
+  "new_science_from_remaining_seconds": false
+}

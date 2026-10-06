@@ -1,0 +1,98 @@
+{
+  "UTC": "2026-10-06T01:34:16.731641+00:00",
+  "issue": "quoridor-4lc.310",
+  "cases": {
+    "CPU": {
+      "entry": "research-data/ai-sigma/frame24-learning-diagnosis/case-CPU-entry-v2/result.json",
+      "SHA": "ff019c1a8bbec615d852895bb53f6c4012db3c1f836e516bafe9d6b7c37fd406",
+      "scientific_complete": true,
+      "NN": 146932,
+      "current_recorded_exact": [],
+      "background": {
+        "job_id": "15c44c3d-6068-421f-81d5-ca4f68705fc2",
+        "outcome": "succeeded",
+        "error": null,
+        "exit_code": 0,
+        "finished_at": "2026-10-06T01:09:00.180666+00:00",
+        "wall_seconds": 11.677260727039538,
+        "remaining": [],
+        "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+        "cleanup_complete": true,
+        "log_bytes_seen": 0,
+        "log_bytes_retained": 0
+      },
+      "reader_STOP": true
+    },
+    "CUDA": {
+      "entry": "research-data/ai-sigma/frame24-learning-diagnosis/case-CUDA-entry-v2/result.json",
+      "SHA": "fa35ab615b7a0542f43ec427434b0b2f7dc3dcff78dfd5e575f45937d2f677fd",
+      "scientific_complete": true,
+      "NN": 146932,
+      "current_recorded_exact": [],
+      "background": {
+        "job_id": "26ed07e5-e474-4cb4-92ac-f1ca9bdffb83",
+        "outcome": "succeeded",
+        "error": null,
+        "exit_code": 0,
+        "finished_at": "2026-10-06T01:15:36.648530+00:00",
+        "wall_seconds": 13.49328894604696,
+        "remaining": [],
+        "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+        "cleanup_complete": true,
+        "log_bytes_seen": 0,
+        "log_bytes_retained": 0
+      },
+      "reader_STOP": true
+    },
+    "A": {
+      "entry": "research-data/ai-sigma/frame24-learning-diagnosis/case-A-entry-v2/result.json",
+      "SHA": "d1232d4add8b6e410d29071d5913272b86ef84088bbe9b68907b0696aa350c22",
+      "scientific_complete": true,
+      "NN": 1893734,
+      "current_recorded_exact": [],
+      "background": {
+        "job_id": "b71b7074-1e9a-4636-93ab-f02ad310163b",
+        "outcome": "succeeded",
+        "error": null,
+        "exit_code": 0,
+        "finished_at": "2026-10-06T01:24:54.113209+00:00",
+        "wall_seconds": 27.00644894200377,
+        "remaining": [],
+        "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+        "cleanup_complete": true,
+        "log_bytes_seen": 0,
+        "log_bytes_retained": 0
+      },
+      "reader_STOP": true
+    },
+    "B": {
+      "entry": "research-data/ai-sigma/frame24-learning-diagnosis/case-B-entry-v3/result.json",
+      "SHA": "ed57c3100874017e6c19c1253272d59ed87da8fabe9428e96a321eda38fce055",
+      "scientific_complete": true,
+      "NN": 1893734,
+      "current_recorded_exact": [],
+      "background": {
+        "job_id": "769a28f7-fc2b-47b3-ba07-e311bb3fe47a",
+        "outcome": "succeeded",
+        "error": null,
+        "exit_code": 0,
+        "finished_at": "2026-10-06T01:32:28.513900+00:00",
+        "wall_seconds": 26.583959669980686,
+        "remaining": [],
+        "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+        "cleanup_complete": true,
+        "log_bytes_seen": 0,
+        "log_bytes_retained": 0
+      },
+      "reader_STOP": true
+    }
+  },
+  "source_writer_model_code_STOP": true,
+  "metadata_plot_report_writer": "continuing only; no framework/model/forward",
+  "B_supervisor_current": {
+    "PID": 2233899,
+    "currentargv": "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python -B /workspaces/quoridor/scripts/dev/research-job.py run --state-dir /workspaces/quoridor/research-data/ai-sigma/frame24-learning-diagnosis/background-dense-B-r2 ",
+    "role": "background completion notifier, not trainer/guardian/modelreader"
+  },
+  "original_beforePopen_failures": "UNCHANGED"
+}

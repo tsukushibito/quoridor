@@ -1,0 +1,89 @@
+{
+  "schema": "315-canonical-renderer-stopped-v1",
+  "at": "2026-10-06T01:41:19.510306+00:00",
+  "issue": "quoridor-4lc.315",
+  "source_writer_STOP": true,
+  "main_paths": [
+    {
+      "path": "python/quoridor_training/plotting.py",
+      "SHA": "dfa54dd9b2e245cd0917622c91877632a602e4e1d67474768abc2bba97eff453",
+      "B": 12284
+    },
+    {
+      "path": "python/quoridor_training/train.py",
+      "SHA": "bb6544ea82875650d63c61b5d7014cd7f31973e2f54c2f7664211c36d9cf3f41",
+      "B": 39783
+    },
+    {
+      "path": "python/quoridor_training/test_contracts.py",
+      "SHA": "4523ed756ed7e19b00abf5b678319aacabfdb4dcb0b7a73f81343de4b31f67fc",
+      "B": 2509
+    },
+    {
+      "path": "python/quoridor_training/test_plotting.py",
+      "SHA": "813623b4238e1261478d9d780e43e735564e4e69776e0d0f4acfa30881b82665",
+      "B": 5676
+    }
+  ],
+  "private_executable_duplicates": "Retired after frozen archive streamrestore and canonical byteplacement; old receipts/archive unchanged",
+  "verification": "ONE fixture6PASS + caller signatureAST; no Torch/model imports",
+  "NN": 0,
+  "scienceMAX": 0,
+  "testwall_seconds": 0.1095668770140037,
+  "sampled_peakRSS_B": 18685952,
+  "RAM_AS_limit_B": 134217728,
+  "childwait_recorded_exact_absence": true,
+  "formatter_lint": "Ruff scoped4paths + fixture PASS",
+  "math_sampler_model_optimizer": "UNCHANGED; trainerAST same except plotting import/oldfunction removal/drawing call",
+  "all4_readerSTOP": {
+    "path": "research-data/ai-sigma/frame24-learning-diagnosis/all-four-reader-stop-v1.json",
+    "SHA": "8f87af3deea683057cc5b3a8e6edeef8af8422f6563309aad265dade449afdea",
+    "B": 3908
+  },
+  "storageoverlay": {
+    "path": "research-data/ai-sigma/frame24-steward/storage-315-rendering-overlay-v1.json",
+    "SHA": "07054dd6eb9145afc673757c8e9e3463725047299ad11ecbe23b6e1518da8d8c",
+    "B": 1957
+  },
+  "reconstruction": [
+    {
+      "path": "research-data/ai-sigma/frame24-curve-rendering/private-candidate-source-v1.tar.gz",
+      "SHA": "8c04a9510e69ef0d884509d031b980cfb6b531e62d1d11c9481bf9385b96ecc0",
+      "B": 5471
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-curve-rendering/315-before-integration.tar.gz",
+      "SHA": "399541313b930732d066f7716d22f502e0ba834b83c5e19610e05176ca28ffa4",
+      "B": 10853
+    },
+    {
+      "path": "research-data/ai-sigma/frame24-curve-rendering/315-current-source-diff.tar.gz",
+      "SHA": "b3d78d6d83f5ac80fe3ffb1d28daf7757bc4c7578f4e54216b9d4b44239b3152",
+      "B": 2951
+    }
+  ],
+  "streamrestore": "PASS all archived source members; original rendererSHA matches canonical bytes",
+  "old313": "Closed PRIVATE_XML_VERIFIED_MAIN_NOT_ADOPTED/01:30source and01:35save immutable",
+  "old308_310_scientificsource_results": "UNCHANGED",
+  "source30_control10_test5": "New315 prospective; commandwall inclusive spans/LLM read/control unmeasuredUNKNOWN; no historical fee reset",
+  "coordinator_only_Git_review": true,
+  "needed_data_prefix": "research-data/ai-sigma/frame24-curve-rendering/315-*",
+  "parent_goal": "ACTIVE_UNMET",
+  "final_storage": {
+    "current_allocated_B": 118784,
+    "necessary_remaining_uniqueGit_temp_B": 8192,
+    "inclusive_B": 126976,
+    "cap_B": 131072,
+    "parent_added_B": 0
+  },
+  "management_accounting": {
+    "two_mixed_report_close_backup_command_envelopes_seconds": [
+      4.21250327,
+      6.420649202
+    ],
+    "conservative_sum_seconds": 10.633152472,
+    "control_cap_seconds": 10,
+    "exact_control_vs_included_formatter_metadata_wall": "UNMEASURED_UNKNOWN",
+    "budget_status": "CONSERVATIVE_CONTROL_ENVELOPE_EXCEEDS_CAP; no capPASS/reset; raw commandwalls preserved; final accounting notification adds measured wall separately"
+  }
+}

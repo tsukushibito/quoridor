@@ -1,0 +1,33 @@
+{
+  "issue": "quoridor-4lc.315",
+  "source_checks": [
+    {
+      "path": "python/quoridor_training/plotting.py",
+      "SHA": "dfa54dd9b2e245cd0917622c91877632a602e4e1d67474768abc2bba97eff453",
+      "B": 12284
+    },
+    {
+      "path": "python/quoridor_training/train.py",
+      "SHA": "bb6544ea82875650d63c61b5d7014cd7f31973e2f54c2f7664211c36d9cf3f41",
+      "B": 39783
+    },
+    {
+      "path": "python/quoridor_training/test_contracts.py",
+      "SHA": "4523ed756ed7e19b00abf5b678319aacabfdb4dcb0b7a73f81343de4b31f67fc",
+      "B": 2509
+    },
+    {
+      "path": "python/quoridor_training/test_plotting.py",
+      "SHA": "813623b4238e1261478d9d780e43e735564e4e69776e0d0f4acfa30881b82665",
+      "B": 5676
+    }
+  ],
+  "independent_trainer_AST": "unchanged except drawing import/function/call",
+  "owner_XML_fixture": "6PASS/NN0/.109566877, not rerun",
+  "source_acceptance": "DISPLAY_SOURCE_ADOPTED",
+  "management_limit": "owner conservative10.633152472>10/control exact splitUNKNOWN preserved, not budgetPASS",
+  "previous313": "finiteprepared original NOT_ADOPTED unchanged",
+  "science_changes": 0,
+  "new_model_forward": 0,
+  "limits": "SVG metadata/caller correctness only; numeric training/performance not retested"
+}

@@ -14,6 +14,7 @@ import time
 from pathlib import Path
 import numpy as np
 from .cache import load, sha
+from .plotting import render_learning_curves
 
 from .common import resolve_config, measurements, selected_teacher_types, validate_target_tensor
 
@@ -558,7 +559,18 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
         )
         for name, records in [("curves", curve), ("diagnostic-curves", diagnostic_curve)]:
             _curve_csv(records, output / (name + ".csv"))
-            _plot(records, output / (name + ".svg"))
+            render_learning_curves(
+                records,
+                output / (name + ".svg"),
+                selected_step=best_step if name == "curves" and best_exposure is not None else None,
+                references=reference_metrics,
+                sampling=mode,
+                title=(
+                    "Full selector: " + cfg["evaluation"]["monitor"] + " MSE"
+                    if name == "curves"
+                    else "Fixed diagnostics (never checkpoint selection)"
+                ),
+            )
         write(
             output / "sampling.json",
             {
@@ -833,39 +845,6 @@ def _curve_csv(curves, path):
                     point["validation"]["target_game_equal_mse"],
                 ]
             )
-
-
-def _plot(curves, path):
-    # Scientific curve artifact without a plotting dependency in the hot loader.
-    lines = [
-        '<svg xmlns="http://www.w3.org/2000/svg" width="720" height="390">',
-        '<rect width="720" height="390" fill="white"/>',
-    ]
-    if not curves:
-        Path(path).write_text(
-            "\n".join(lines + ['<text x="20" y="30">No completed observation</text>', "</svg>"])
-        )
-        return
-    axis = "row_epoch" if all(c.get("completed_epochs") is not None for c in curves) else "step"
-    max_step = max(c[axis] for c in curves) or 1
-    max_y = (
-        max(c[key]["target_game_equal_mse"] for c in curves for key in ["train", "validation"]) or 1
-    )
-    for key, color in [("train", "#1261a0"), ("validation", "#c33")]:
-        points = " ".join(
-            f"{45 + 630 * c[axis] / max_step:.2f},{320 - 270 * c[key]['target_game_equal_mse'] / max_y:.2f}"
-            for c in curves
-        )
-        lines.append(
-            f'<polyline points="{points}" fill="none" stroke="{color}" stroke-width="2"/><text x="550" y="{20 if key == "train" else 40}" fill="{color}">{key}</text>'
-        )
-    lines += [
-        '<path d="M45 40V320H675" fill="none" stroke="black"/>',
-        f'<text x="310" y="360">{"Epochs" if axis == "row_epoch" else "Optimizer steps"}</text>',
-        '<text x="8" y="25">Game equal MSE</text>',
-        "</svg>",
-    ]
-    Path(path).write_text("\n".join(lines))
 
 
 def test(cache, training, output):

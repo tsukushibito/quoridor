@@ -1,0 +1,29 @@
+{
+  "schema": "curve-rendering-canonical-315-v1",
+  "task": "frame25-canonical-curve-rendering-315-v1",
+  "argv": [
+    "/usr/bin/taskset",
+    "-c",
+    "2",
+    "/usr/bin/python3",
+    "-B",
+    "research-data/ai-sigma/frame24-curve-rendering/315-fixture.py"
+  ],
+  "source": {
+    "python/quoridor_training/plotting.py": "dfa54dd9b2e245cd0917622c91877632a602e4e1d67474768abc2bba97eff453",
+    "python/quoridor_training/train.py": "bb6544ea82875650d63c61b5d7014cd7f31973e2f54c2f7664211c36d9cf3f41",
+    "python/quoridor_training/test_contracts.py": "4523ed756ed7e19b00abf5b678319aacabfdb4dcb0b7a73f81343de4b31f67fc",
+    "python/quoridor_training/test_plotting.py": "813623b4238e1261478d9d780e43e735564e4e69776e0d0f4acfa30881b82665"
+  },
+  "fixture_SHA": "5845eade95acb50d4608ccf76767827215f8191b69f245c55d690fc68f28d780",
+  "ONE_NN0_fixture": true,
+  "NN": 0,
+  "scientificMAX": 0,
+  "hard_seconds": 5,
+  "RAM_cap_B": 134217728,
+  "localcurrent_B": 90112,
+  "localcurrent_plus_remaining_B": 122880,
+  "storage_reference": "research-data/ai-sigma/frame24-steward/storage-313-rendering-overlay-v1.json",
+  "same128KiB_conservation": true,
+  "own_forecast_SHA": "8bc27868462fedb55980d71ea9b5f38d5a54a1c560c635a975c419782a3fd09a"
+}

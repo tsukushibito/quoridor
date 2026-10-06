@@ -1,0 +1,27 @@
+{
+  "task": "frame24-curve-rendering-313-v1",
+  "schema": "curve-rendering-software-fixture-v1",
+  "purpose": "Synthetic SVG XML reporting correctness, no model or measurements recomputed",
+  "source_hashes": {
+    "research-data/ai-sigma/frame24-curve-rendering/plotting.py": "dfa54dd9b2e245cd0917622c91877632a602e4e1d67474768abc2bba97eff453",
+    "research-data/ai-sigma/frame24-curve-rendering/test_plotting.py": "720c022ec1419460780c8d573c71e9b318ff91c09af32c8143c8be4ddd4ed5be"
+  },
+  "argv": [
+    "/usr/bin/python3",
+    "-B",
+    "research-data/ai-sigma/frame24-curve-rendering/test_plotting.py",
+    "-v"
+  ],
+  "CPU": 2,
+  "RAMguard_B": 134217728,
+  "hard_seconds": 5,
+  "software_MAX": 1,
+  "scientific_MAX": 0,
+  "NN": 0,
+  "expected": [
+    "fixture-output.log",
+    "fixture-result-v1.json",
+    "fixture-process-v1.json"
+  ],
+  "main_source_write": false
+}

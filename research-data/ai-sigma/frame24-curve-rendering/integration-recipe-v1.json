@@ -1,0 +1,20 @@
+{
+  "schema": "313-canonical-renderer-integration-recipe-v1",
+  "at": "2026-10-06T01:19:36.320533+00:00",
+  "status": "PREPARED_NO_MAIN_WRITE",
+  "condition": "Ordinary actual310 ALL4 model/guard/selector/candidate/mainreaders STOP; not satisfied by individualCPU orCUDAstop.",
+  "new_maintained_module": "python/quoridor_training/plotting.py",
+  "renderer_sha256": "dfa54dd9b2e245cd0917622c91877632a602e4e1d67474768abc2bba97eff453",
+  "caller": "train.py persist(): replace _plot with render_learning_curves(records, output SVG, selected_step=best_step only fullselector+best_exposure, references=reference_metrics,sampling=mode,title=selector criterion).",
+  "remove": "Old standalone _plot function, no wrapper/shim; historical scientific archive remains immutable.",
+  "tests": "Move synthetic5XML fixture to maintained test_plotting.py; replace dynamic candidate import with relative plotting import only, unchanged test bodies. Update test_contracts current import/call/header expectation. No second selffixture.",
+  "docs": "CurrentSVG uses2metricpanels,actualstep ticks/recordedseen,randomrowpasses vsactualepochs,scopedfulltrain endpoints vsdiagnostic subset,fullselector,explicitfrozen selection; baseline scope refs/unknownsign. PNG optional after numericstop, no deps.",
+  "private_duplicate_retirement": "After accepted canonical byteplacement and fullstreamrestore oldarchive, retire only private executableproto/test copies, record exact hashes; no oldmodel/results/cache deletion.",
+  "if_noSTOP_by01_30": "Finiteprepared partial/no mainadoption; next explicit sourcequiet opportunity, no interruption/deadline extension.",
+  "metrics_sampler_optimizer_model": "UNCHANGED",
+  "sourcecap_seconds": 60,
+  "softwarefixture5PASS": true,
+  "NN": 0,
+  "MAXfixture_consumed": 1,
+  "Git_index": "coordinator only"
+}

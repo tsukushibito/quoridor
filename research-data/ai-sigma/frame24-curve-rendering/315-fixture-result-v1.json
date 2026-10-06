@@ -1,0 +1,33 @@
+{
+  "schema": "curve-rendering-canonical-315-result-v1",
+  "at": "2026-10-06T01:40:18.987092+00:00",
+  "exit_code": 0,
+  "wall_seconds": 0.1095668770140037,
+  "sampled_peak_RSS_B": 18685952,
+  "RLIMIT_AS_B": 134217728,
+  "identity": {
+    "pid": 2255203,
+    "start_ticks": "50388689",
+    "ppid": 2255182,
+    "pgrp": 2255181,
+    "cpu_ticks": 0,
+    "state": "R",
+    "rss": 20480,
+    "cpus": [2],
+    "argv": [
+      "/usr/bin/taskset",
+      "-c",
+      "2",
+      "/usr/bin/python3",
+      "-B",
+      "research-data/ai-sigma/frame24-curve-rendering/315-fixture.py"
+    ]
+  },
+  "childwait": true,
+  "recorded_exact_absent": true,
+  "NN": 0,
+  "software_fixture_attempts": 1,
+  "registrationSHA": "b38ad919ab74ffa398bf9040efd0c3d4fc5ac4b72f12c1b78a25ec0ad38cdc73",
+  "purpose": "5 canonical SVG XML + existing curve contract + caller AST/signature; no Torch/model imports",
+  "logSHA": "dee896bbf45f9546c8e610553c51a2c300554c4ab68db57a14d3a740d47f43f6"
+}

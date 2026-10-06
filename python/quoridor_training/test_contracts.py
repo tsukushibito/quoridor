@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 import numpy as np
 from quoridor_training.cache import sha, load
-from quoridor_training.train import _plot
+from quoridor_training.plotting import render_learning_curves
 
 
 class Contracts(unittest.TestCase):
@@ -53,10 +53,10 @@ class Contracts(unittest.TestCase):
                 }
                 for i in [0, 1, 2, 5, 10]
             ]
-            _plot(curves, output)
+            render_learning_curves(curves, output)
             text = output.read_text()
             self.assertEqual(text.count("<polyline"), 2)
-            self.assertIn("Optimizer steps", text)
+            self.assertIn("Actual optimizer steps", text)
 
 
 if __name__ == "__main__":

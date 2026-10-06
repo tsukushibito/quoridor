@@ -1,0 +1,11 @@
+{
+  "schema": "313-drawing-only-edit-plan-v1",
+  "original_train_SHA": "ba317c1ed2580bca259a10f7bc5dac6ad689a9252677ecd6c2711e86a573a75c",
+  "conditional_main_change_SHA_before_formatter": "589232d30f19acaf5c9482e510deb793c558d80eed41e10d736c9ad39b8a38f1",
+  "new_import": "from .plotting import render_learning_curves",
+  "persist_call": "Pass actual best_step only selector; references=reference_metrics,sampling=mode,criterion in title",
+  "removed_function": "_plot only; no alias/shim",
+  "sampling_model_optimizer_loss_changes": false,
+  "main_written": false,
+  "actualquiet_prerequisite": "All4 model/guard/selector/candidate/mainreaders STOP"
+}

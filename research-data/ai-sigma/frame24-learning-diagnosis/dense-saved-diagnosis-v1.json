@@ -1,0 +1,396 @@
+{
+  "schema": "saved-dense-trajectory-diagnosis-v1",
+  "NN_new_forward": 0,
+  "cases": {
+    "A": {
+      "LR": 0.0001,
+      "points": 200,
+      "minima": {
+        "target_game_equal_mse": {
+          "step": 926,
+          "seen": 118528,
+          "value": 0.5828600392375197,
+          "adjacent_actual_steps": [
+            925,
+            950
+          ]
+        },
+        "target_mse": {
+          "step": 925,
+          "seen": 118400,
+          "value": 0.6364728473251787,
+          "adjacent_actual_steps": [
+            900,
+            926
+          ]
+        }
+      },
+      "initial": {
+        "train": {
+          "rows": 14803,
+          "games": 432,
+          "rootmean_mse": 0.3872014996931828,
+          "rootmean_game_equal_mse": 0.3996235141957503,
+          "rootmean_rows": 14803,
+          "z_mse": 0.649274720069025,
+          "z_game_equal_mse": 0.6153874875862496,
+          "z_rows": 14803,
+          "target_mse": 0.649274720069025,
+          "target_game_equal_mse": 0.6153874875862496,
+          "constant_mse": 0.9964798331849489,
+          "constant_game_equal_mse": 0.9972184641170742,
+          "z_sign_rows": 14755,
+          "z_sign_accuracy": 0.741240257539817,
+          "saturation_fraction": 0.02438694859150172,
+          "distance_ref": "9ae4e25ba8453ce57c8a4a66ccf64960ee4d377aaec45876957951856b190edf",
+          "bias": -0.04796688258647919,
+          "groups_ref": {
+            "file": "observations.jsonl.gz",
+            "kind": "full_selector",
+            "step": 0,
+            "scope": "train"
+          }
+        },
+        "validation": {
+          "rows": 4733,
+          "games": 144,
+          "rootmean_mse": 0.3878760903580828,
+          "rootmean_game_equal_mse": 0.4047673851985343,
+          "rootmean_rows": 4733,
+          "z_mse": 0.6886809004553166,
+          "z_game_equal_mse": 0.6608672738504593,
+          "z_rows": 4733,
+          "target_mse": 0.6886809004553166,
+          "target_game_equal_mse": 0.6608672738504593,
+          "constant_mse": 0.9996724999207253,
+          "constant_game_equal_mse": 0.9994672627760733,
+          "z_sign_rows": 4733,
+          "z_sign_accuracy": 0.6976547644200296,
+          "saturation_fraction": 0.031692372702302976,
+          "distance_ref": "7a04c0a681f9b9e788e0de916919dd442753eb962a9d33ab3949962cd6ded8f6",
+          "bias": -0.04961646348237991,
+          "groups_ref": {
+            "file": "observations.jsonl.gz",
+            "kind": "full_selector",
+            "step": 0,
+            "scope": "validation"
+          }
+        }
+      },
+      "last": {
+        "train": {
+          "rows": 14803,
+          "games": 432,
+          "rootmean_mse": 0.2399443744687875,
+          "rootmean_game_equal_mse": 0.181691699446854,
+          "rootmean_rows": 14803,
+          "z_mse": 0.0068411591532175995,
+          "z_game_equal_mse": 0.005187532033559194,
+          "z_rows": 14803,
+          "target_mse": 0.0068411591532175995,
+          "target_game_equal_mse": 0.005187532033559194,
+          "constant_mse": 0.9964798331849489,
+          "constant_game_equal_mse": 0.9972184641170742,
+          "z_sign_rows": 14755,
+          "z_sign_accuracy": 1.0,
+          "saturation_fraction": 0.8856312909545362,
+          "distance_ref": "9ae4e25ba8453ce57c8a4a66ccf64960ee4d377aaec45876957951856b190edf",
+          "bias": 0.0026237305719405413,
+          "groups_ref": {
+            "file": "observations.jsonl.gz",
+            "kind": "full_selector",
+            "step": 4000,
+            "scope": "train"
+          }
+        },
+        "validation": {
+          "rows": 4733,
+          "games": 144,
+          "rootmean_mse": 0.4745843135326383,
+          "rootmean_game_equal_mse": 0.47141471659077205,
+          "rootmean_rows": 4733,
+          "z_mse": 0.8328168456361575,
+          "z_game_equal_mse": 0.7478949277500688,
+          "z_rows": 4733,
+          "target_mse": 0.8328168456361575,
+          "target_game_equal_mse": 0.7478949277500688,
+          "constant_mse": 0.9996724999207253,
+          "constant_game_equal_mse": 0.9994672627760733,
+          "z_sign_rows": 4733,
+          "z_sign_accuracy": 0.7154024931333193,
+          "saturation_fraction": 0.4722163532643144,
+          "distance_ref": "7a04c0a681f9b9e788e0de916919dd442753eb962a9d33ab3949962cd6ded8f6",
+          "bias": 0.0012385478476062417,
+          "groups_ref": {
+            "file": "observations.jsonl.gz",
+            "kind": "full_selector",
+            "step": 4000,
+            "scope": "validation"
+          }
+        }
+      },
+      "early_recorded_steps": [
+        0,
+        1,
+        2,
+        5,
+        10,
+        20,
+        25,
+        50,
+        75,
+        100,
+        116,
+        125,
+        150,
+        175,
+        200
+      ],
+      "full_train_steps": [
+        0,
+        4000
+      ],
+      "high_frequency_train_scope": "target-blind fixed2048 subset, 420/432 families; not fullT",
+      "sampling": {
+        "seen": 512000,
+        "min": 5,
+        "max": 144,
+        "row_CV": 0.5502040846167937,
+        "validation_sample_count": 0,
+        "equivalent_row_passes": 34.58758359791934,
+        "completed_epochs": null
+      },
+      "old302_common_points": 23,
+      "common_family_MSE_maxabs": 0.0,
+      "initial_final_native_bytes": {
+        "initial-model": {
+          "SHA": "ec4167ccb5042cfe937b23850a1b52d1cd9cf6c3fb1d348627bfe6cc7d023cc5",
+          "old_SHA": "ec4167ccb5042cfe937b23850a1b52d1cd9cf6c3fb1d348627bfe6cc7d023cc5",
+          "bytes_equal": true
+        },
+        "last-model": {
+          "SHA": "0b5d74dd92365b18dfa98cc9bd4e68b8f747edeaf17b14c9171235cb34e6ff99",
+          "old_SHA": "0b5d74dd92365b18dfa98cc9bd4e68b8f747edeaf17b14c9171235cb34e6ff99",
+          "bytes_equal": true
+        }
+      },
+      "best_recorded_family_D_differences": {
+        "groups": 144,
+        "mean_f32_delta": -0.07800722489547399,
+        "improved_groups": 99,
+        "worse_groups": 45,
+        "range": [
+          -0.8598594069480896,
+          1.3243253231048584
+        ],
+        "interpretation": "reused selection exploratory; group f32 values, no independent evaluation CI or playing-strength claim"
+      },
+      "input_bindings": {
+        "curves_uncompressed_SHA": "19f5a90b3ea792354afc2ac129821c03542f419f3322a3e1afe7169e6a777553",
+        "freeze_SHA": "c80459b9b85b06ebd5a14f47d63bdf177d1ff6ae78e92f6de2f31f0501d62809"
+      }
+    },
+    "B": {
+      "LR": 3e-05,
+      "points": 200,
+      "minima": {
+        "target_game_equal_mse": {
+          "step": 3817,
+          "seen": 488576,
+          "value": 0.5742168025927724,
+          "adjacent_actual_steps": [
+            3800,
+            3825
+          ]
+        },
+        "target_mse": {
+          "step": 3075,
+          "seen": 393600,
+          "value": 0.63256341914077,
+          "adjacent_actual_steps": [
+            3050,
+            3100
+          ]
+        }
+      },
+      "initial": {
+        "train": {
+          "rows": 14803,
+          "games": 432,
+          "rootmean_mse": 0.3872014996931828,
+          "rootmean_game_equal_mse": 0.3996235141957503,
+          "rootmean_rows": 14803,
+          "z_mse": 0.649274720069025,
+          "z_game_equal_mse": 0.6153874875862496,
+          "z_rows": 14803,
+          "target_mse": 0.649274720069025,
+          "target_game_equal_mse": 0.6153874875862496,
+          "constant_mse": 0.9964798331849489,
+          "constant_game_equal_mse": 0.9972184641170742,
+          "z_sign_rows": 14755,
+          "z_sign_accuracy": 0.741240257539817,
+          "saturation_fraction": 0.02438694859150172,
+          "distance_ref": "9ae4e25ba8453ce57c8a4a66ccf64960ee4d377aaec45876957951856b190edf",
+          "bias": -0.04796688258647919,
+          "groups_ref": {
+            "file": "observations.jsonl.gz",
+            "kind": "full_selector",
+            "step": 0,
+            "scope": "train"
+          }
+        },
+        "validation": {
+          "rows": 4733,
+          "games": 144,
+          "rootmean_mse": 0.3878760903580828,
+          "rootmean_game_equal_mse": 0.4047673851985343,
+          "rootmean_rows": 4733,
+          "z_mse": 0.6886809004553166,
+          "z_game_equal_mse": 0.6608672738504593,
+          "z_rows": 4733,
+          "target_mse": 0.6886809004553166,
+          "target_game_equal_mse": 0.6608672738504593,
+          "constant_mse": 0.9996724999207253,
+          "constant_game_equal_mse": 0.9994672627760733,
+          "z_sign_rows": 4733,
+          "z_sign_accuracy": 0.6976547644200296,
+          "saturation_fraction": 0.031692372702302976,
+          "distance_ref": "7a04c0a681f9b9e788e0de916919dd442753eb962a9d33ab3949962cd6ded8f6",
+          "bias": -0.04961646348237991,
+          "groups_ref": {
+            "file": "observations.jsonl.gz",
+            "kind": "full_selector",
+            "step": 0,
+            "scope": "validation"
+          }
+        }
+      },
+      "last": {
+        "train": {
+          "rows": 14803,
+          "games": 432,
+          "rootmean_mse": 0.1935859008862651,
+          "rootmean_game_equal_mse": 0.16480770397797928,
+          "rootmean_rows": 14803,
+          "z_mse": 0.3112699025946042,
+          "z_game_equal_mse": 0.24990214590623658,
+          "z_rows": 14803,
+          "target_mse": 0.3112699025946042,
+          "target_game_equal_mse": 0.24990214590623658,
+          "constant_mse": 0.9964798331849489,
+          "constant_game_equal_mse": 0.9972184641170742,
+          "z_sign_rows": 14755,
+          "z_sign_accuracy": 0.9124364622161979,
+          "saturation_fraction": 0.26001486185232725,
+          "distance_ref": "9ae4e25ba8453ce57c8a4a66ccf64960ee4d377aaec45876957951856b190edf",
+          "bias": 0.0231956634670496,
+          "groups_ref": {
+            "file": "observations.jsonl.gz",
+            "kind": "full_selector",
+            "step": 4000,
+            "scope": "train"
+          }
+        },
+        "validation": {
+          "rows": 4733,
+          "games": 144,
+          "rootmean_mse": 0.290975470982559,
+          "rootmean_game_equal_mse": 0.3003305162881287,
+          "rootmean_rows": 4733,
+          "z_mse": 0.6358129449028874,
+          "z_game_equal_mse": 0.5749242003511239,
+          "z_rows": 4733,
+          "target_mse": 0.6358129449028874,
+          "target_game_equal_mse": 0.5749242003511239,
+          "constant_mse": 0.9996724999207253,
+          "constant_game_equal_mse": 0.9994672627760733,
+          "z_sign_rows": 4733,
+          "z_sign_accuracy": 0.765476442002958,
+          "saturation_fraction": 0.20219733784069302,
+          "distance_ref": "7a04c0a681f9b9e788e0de916919dd442753eb962a9d33ab3949962cd6ded8f6",
+          "bias": 0.02017609030008316,
+          "groups_ref": {
+            "file": "observations.jsonl.gz",
+            "kind": "full_selector",
+            "step": 4000,
+            "scope": "validation"
+          }
+        }
+      },
+      "early_recorded_steps": [
+        0,
+        1,
+        2,
+        5,
+        10,
+        20,
+        25,
+        50,
+        75,
+        100,
+        116,
+        125,
+        150,
+        175,
+        200
+      ],
+      "full_train_steps": [
+        0,
+        4000
+      ],
+      "high_frequency_train_scope": "target-blind fixed2048 subset, 420/432 families; not fullT",
+      "sampling": {
+        "seen": 512000,
+        "min": 5,
+        "max": 144,
+        "row_CV": 0.5502040846167937,
+        "validation_sample_count": 0,
+        "equivalent_row_passes": 34.58758359791934,
+        "completed_epochs": null
+      },
+      "old302_common_points": 23,
+      "common_family_MSE_maxabs": 0.0,
+      "initial_final_native_bytes": {
+        "initial-model": {
+          "SHA": "ec4167ccb5042cfe937b23850a1b52d1cd9cf6c3fb1d348627bfe6cc7d023cc5",
+          "old_SHA": "ec4167ccb5042cfe937b23850a1b52d1cd9cf6c3fb1d348627bfe6cc7d023cc5",
+          "bytes_equal": true
+        },
+        "last-model": {
+          "SHA": "c334275997e77716938db5af1d0e8849ca5af7569e5468cf0c2089b6292d2dd9",
+          "old_SHA": "c334275997e77716938db5af1d0e8849ca5af7569e5468cf0c2089b6292d2dd9",
+          "bytes_equal": true
+        }
+      },
+      "best_recorded_family_D_differences": {
+        "groups": 144,
+        "mean_f32_delta": -0.08665046166141918,
+        "improved_groups": 100,
+        "worse_groups": 44,
+        "range": [
+          -0.9860521554946899,
+          1.3729336261749268
+        ],
+        "interpretation": "reused selection exploratory; group f32 values, no independent evaluation CI or playing-strength claim"
+      },
+      "input_bindings": {
+        "curves_uncompressed_SHA": "fb9ac1be107c3d0fb230455b4b04fc2f65aa142b7342b62eee11e4f585e3bd54",
+        "freeze_SHA": "38843b6d410585dad5eaf464ecf4f28c47dca17ca91eb2640c1e4a90d3602504"
+      }
+    }
+  },
+  "same_sample_histogram_and_row_order": true,
+  "sample_sequence": "NOT_RECORDED; equal histogram is not sequence proof",
+  "scientific_NN": 3787468,
+  "competitive_causes": [
+    "LR and finite exposure change where fitting/selection deterioration occurs; lower LR preserves later selection quality in this corpus.",
+    "Representativeness, finite family diversity, teacher-to-leaf meaning, calibration/regularization and QF1 relational bias remain unresolved. No architecture or teacher intervention from this analysis."
+  ],
+  "not_measured": [
+    "continuous optimum between observations",
+    "new heldout transfer or same-wall playing strength",
+    "millions of distinct input coverage",
+    "batch or wider-model GPU performance"
+  ],
+  "wall_seconds": 2.5452033070032485
+}
