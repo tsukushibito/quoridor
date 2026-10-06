@@ -1,0 +1,303 @@
+{
+  "at": "2026-10-06T15:14:50.783453+00:00",
+  "source_baseline": "60d4475add7c3e19119f2b11c6431e085495ee746576323be66ec348e382cb41",
+  "source_candidate": "aa35a17e4f99ffd948f23ec0e44c9957cd6da9c79904499b31f9f2769994a89c",
+  "same_frozen_BEST": {
+    "manifest": "/workspaces/quoridor/.worktree/assets/checkpoints/public-million-learning/baseline-original-v2/output/best-model/manifest.json",
+    "manifest_SHA": "d2b5b285de65e6390f0c9bc38c873cb856104d924b9b4990e9a27209ba0f0e49",
+    "weights_SHA": "c0ec9bf3f8f221c2a2d2db6bf70857fa55647e7c7fd15b38786ef941baa079cd"
+  },
+  "decision": "NOT_ADOPT streamed AA35 to main: fixed same-work whole-search regression. Preserve user-approved heap-avoidance principle and refine implementation. Main remains canonical allocating60d4475 pending a better qualified candidate.",
+  "Root_independent_saved_arithmetic": {
+    "process_wall_ns": {
+      "baseline_sum": 521265283,
+      "candidate_sum": 837984256,
+      "candidate_over_baseline": 1.6075965220189046
+    },
+    "whole_ns": {
+      "baseline_sum": 516113283,
+      "candidate_sum": 834345218,
+      "candidate_over_baseline": 1.6165931889026774
+    },
+    "search_ns": {
+      "baseline_sum": 512825019,
+      "candidate_sum": 831458932,
+      "candidate_over_baseline": 1.6213306706863302
+    },
+    "micro_ns": {
+      "baseline_sum": 108324550,
+      "candidate_sum": 281649107,
+      "candidate_over_baseline": 2.6000487147188704
+    }
+  },
+  "reported_allocator": {
+    "baseline": {
+      "model_load": {
+        "allocation": {
+          "alloc_calls": 15,
+          "dealloc_calls": 11,
+          "realloc_calls": 2,
+          "requested_bytes_including_realloc": 260164,
+          "retained_or_peak_memory": null
+        },
+        "elapsed_ns": 169320,
+        "kind": "model_load"
+      },
+      "search_total": {
+        "alloc_calls": 585221,
+        "dealloc_calls": 581744,
+        "realloc_calls": 1383,
+        "requested_bytes_including_realloc": 85744997
+      },
+      "evaluator_components": {
+        "prepare_context": {
+          "alloc_calls": 25,
+          "calls": 5,
+          "dealloc_calls": 0,
+          "inclusive_ns": 7006,
+          "realloc_calls": 0,
+          "requested_bytes_including_realloc": 2760
+        },
+        "advance_context": {
+          "alloc_calls": 468882,
+          "calls": 94533,
+          "dealloc_calls": 0,
+          "inclusive_ns": 47194333,
+          "realloc_calls": 0,
+          "requested_bytes_including_realloc": 51425616
+        },
+        "evaluate": {
+          "alloc_calls": 88727,
+          "calls": 88727,
+          "dealloc_calls": 88727,
+          "inclusive_ns": 51738199,
+          "realloc_calls": 0,
+          "requested_bytes_including_realloc": 24843560
+        }
+      }
+    },
+    "candidate": {
+      "model_load": {
+        "allocation": {
+          "alloc_calls": 15,
+          "dealloc_calls": 11,
+          "realloc_calls": 2,
+          "requested_bytes_including_realloc": 260164,
+          "retained_or_peak_memory": null
+        },
+        "elapsed_ns": 171630,
+        "kind": "model_load"
+      },
+      "search_total": {
+        "alloc_calls": 496494,
+        "dealloc_calls": 493017,
+        "realloc_calls": 1383,
+        "requested_bytes_including_realloc": 60901437
+      },
+      "evaluator_components": {
+        "prepare_context": {
+          "alloc_calls": 25,
+          "calls": 5,
+          "dealloc_calls": 0,
+          "inclusive_ns": 6119,
+          "realloc_calls": 0,
+          "requested_bytes_including_realloc": 2760
+        },
+        "advance_context": {
+          "alloc_calls": 468882,
+          "calls": 94533,
+          "dealloc_calls": 0,
+          "inclusive_ns": 48233749,
+          "realloc_calls": 0,
+          "requested_bytes_including_realloc": 51425616
+        },
+        "evaluate": {
+          "alloc_calls": 0,
+          "calls": 88727,
+          "dealloc_calls": 0,
+          "inclusive_ns": 113233274,
+          "realloc_calls": 0,
+          "requested_bytes_including_realloc": 0
+        }
+      }
+    }
+  },
+  "correctness": "all16whole searchruns exact valuebits/Action/PV/depth/nodes/exportedcounters;4micro checksum equal. Priorcurrent source independentleafminimax/full-delta/undo bits preserved. Clippy entry PASS.",
+  "scope": "5fixedlegalroots/one frozen BEST/depth3; 8plain ABBA plus8instrumentation checks+4micro; timing results finite onehost; no fragmentation/latency/strength/MCTS inference",
+  "cause_hypothesis": "FT ReLU recomputed per hidden row and iterator/layout/compiler effects are plausible from source, not isolated causal proof.",
+  "exact_STOP": {
+    "whole_job_seconds": 36.363834621035494,
+    "recorded_exact_children_absent": true,
+    "source_writer_STOP": true,
+    "sharedtarget_writer_STOP": true
+  },
+  "performance_overhead_ratio": 1.0708812887643437,
+  "archive": {
+    "bytes": 25777,
+    "SHA256": "1fb10393cafbe9ca736dfa8b5ce042d01b55cf6e3c4ea6a60dca52535c50877d",
+    "members": 40,
+    "index": {
+      "summary.json": {
+        "bytes": 6431,
+        "SHA256": "8960a15697a0dd473d295adf200b716b7e376ac69f2d80a3dc37fd31d938612a"
+      },
+      "result.json": {
+        "bytes": 17671,
+        "SHA256": "f7c0a8b42a396e198e66d3915ecf7f14d6166ca403705648de06314a6cd41b02"
+      },
+      "commands.json": {
+        "bytes": 9143,
+        "SHA256": "21a4caf1225fc2e76075714007810d2d960888ebd97513933ece0fa0ba56cd94"
+      },
+      "plan.json": {
+        "bytes": 4317,
+        "SHA256": "0c5a5a295d3a104189a24a1aaddc6be1023519279d1a06b8fdfc03e5a2aa5d6e"
+      },
+      "binary-binding.json": {
+        "bytes": 1667,
+        "SHA256": "9007392df508c685b875371f49201fa358d171b18ec82df9dec2dccff61c7b05"
+      },
+      "config.json": {
+        "bytes": 1967,
+        "SHA256": "d5a55a6d164b037f12e1bdabc9228f8c009b6383791d16b825938d62c5890fc4"
+      },
+      "stop-receipt.json": {
+        "bytes": 1532,
+        "SHA256": "412c9fbc0183305ed7bfc62c7bea049be5d38d0f9c6ff458e1cdcf021791491e"
+      },
+      "worker.py": {
+        "bytes": 9025,
+        "SHA256": "a47c6378a20e3843405267eaaf698ce7cc9c5592cecc895e6e69bf9d977284ce"
+      },
+      "guard.py": {
+        "bytes": 3876,
+        "SHA256": "57f4e641fef8a029e939385e27e752e3c0f7066aa7ea9aaddf2d239a62ae17c2"
+      },
+      "calibration-5.log": {
+        "bytes": 4897,
+        "SHA256": "7ee079027691efb19ad7e924b6add864bfe348401e1c76762c4ba4b2551da612"
+      },
+      "plain-4.log": {
+        "bytes": 4897,
+        "SHA256": "8bd8689ff9565ab7380116a4339ca8660ca3a447dcda8f41fbaa50ee51bf054f"
+      },
+      "calibration-6.log": {
+        "bytes": 4898,
+        "SHA256": "2d3eef5c3dac3223e1b2034f02a25a6cb82e8edcb67b6209eb075dddc43b2c57"
+      },
+      "micro-1.log": {
+        "bytes": 989,
+        "SHA256": "903f50db69b99ac21fb9d8b1450ab7b9d7dd04600ee728dfb1dc10a1e125faee"
+      },
+      "plain-3.log": {
+        "bytes": 4897,
+        "SHA256": "3de4a06c90790c782f4abfd67352b95a0b87ca28cc115ab11eb0aaf935683964"
+      },
+      "calibration-1.log": {
+        "bytes": 4897,
+        "SHA256": "7268ac9d36dd4f95e79e4dd1ac73566272b82ae3c52c5fafad02524cc8296a19"
+      },
+      "build-candidate-plain.log": {
+        "bytes": 274,
+        "SHA256": "2d4614aeced6452ae80438f9cccefd7a9d048aec7a23f3ef7a14710d166a46b0"
+      },
+      "plain-7.log": {
+        "bytes": 4897,
+        "SHA256": "74621805bec0c9b3a560a29624894e6ca9761ce4ce2a61df8ea91895d3801ac6"
+      },
+      "micro-3.log": {
+        "bytes": 988,
+        "SHA256": "8006dd8a358cb024557ae79647c709b3139f316a4155d5779bba0905774bccaa"
+      },
+      "build-baseline-observed.log": {
+        "bytes": 382,
+        "SHA256": "6b9a9940c53f2a4c64ecdce94b5d106a18c14f438e631beaad63ab401f8d2119"
+      },
+      "plain-6.log": {
+        "bytes": 4897,
+        "SHA256": "f14db7e5df21369d46315a63db4952417dae1f717868e957ebd9370dc3876202"
+      },
+      "calibration-2.log": {
+        "bytes": 9284,
+        "SHA256": "ac2744bc593f21ae45506100498896fac8323b021d8aa33c01713fec96c56063"
+      },
+      "plain-5.log": {
+        "bytes": 4897,
+        "SHA256": "0797b0f99f4d69bdf66c11a73f5b3457e825d0308722deef5c55610c40520740"
+      },
+      "micro-2.log": {
+        "bytes": 989,
+        "SHA256": "da6f54969484d9539d5088ccbdf44f6fb7a25f6b8e183ec8cfec1857c2bfddc6"
+      },
+      "calibration-4.log": {
+        "bytes": 11557,
+        "SHA256": "0937e98513cf1ad6b4ce0cf0ada823158ece3c965b01d43d7801c2f4322037f7"
+      },
+      "build-candidate-observed.log": {
+        "bytes": 274,
+        "SHA256": "f0f24bdff90933797e4f57c4ef753280376f43ef54f12708db41b14d9832af2d"
+      },
+      "plain-1.log": {
+        "bytes": 4897,
+        "SHA256": "bc7f8e0379db781791c27478df956954b1805ef059b823d6c2ae507e2d6921e2"
+      },
+      "build-baseline-plain.log": {
+        "bytes": 274,
+        "SHA256": "6a8641a3acdf77a72e9fa1e3dca9ce5124890fd6a6c777a5cccb0c8dedad4e8f"
+      },
+      "clippy-entry.log": {
+        "bytes": 382,
+        "SHA256": "e49d54a6085ed0951a7af2c657389f90cf74ee51cd886802d90cb687e9ca99c1"
+      },
+      "micro-0.log": {
+        "bytes": 988,
+        "SHA256": "644ff28805ef2ab28b85fb796a409835597fa53fd60bcb92c41c70a22f13887d"
+      },
+      "calibration-7.log": {
+        "bytes": 11549,
+        "SHA256": "87e5cdba8bd205b98fb0f285cd0444e6001772817434a2d7ba80ab22c47f9b8e"
+      },
+      "calibration-0.log": {
+        "bytes": 4896,
+        "SHA256": "3ec2019a48417e5ae3f76d7e1129e5d5cade86858874ebd50f13764f3eca629f"
+      },
+      "plain-0.log": {
+        "bytes": 4898,
+        "SHA256": "f53b30d98cca663f25274b490d109261f245167ace75dbfc8e869921475f56ee"
+      },
+      "plain-2.log": {
+        "bytes": 4897,
+        "SHA256": "24a9ed53a088cee746b2e4e41d5a91a9f3e275bfd9a9b1c78527f6ef26d6848a"
+      },
+      "calibration-3.log": {
+        "bytes": 9214,
+        "SHA256": "f852fc3d6d593ff2dedbc18f9fc580e7a97bb5d176668e7a23d923118f7b0379"
+      },
+      "heap-qualification/result.json": {
+        "bytes": 3282,
+        "SHA256": "d6793e4b48d37b75f907c977dfa16b4d07c7efc3a123943c9e62b13822328629"
+      },
+      "heap-qualification/reference-tests.log": {
+        "bytes": 808,
+        "SHA256": "2f4477575b72b583b87851881617e4656fccd5f54011e63238daf7dbe71bb51c"
+      },
+      "heap-qualification/clippy.log": {
+        "bytes": 278,
+        "SHA256": "cc01f87a431fc9bb08d64c8c0846644425f00168959f8db4b0f93263eeb90f75"
+      },
+      "heap-qualification/candidate.patch": {
+        "bytes": 9659,
+        "SHA256": "3ac1831323876613c1ebbe1467d8db16aa006da646786b0e93bd6072cccc0e25"
+      },
+      "heap-qualification/stop-receipt.json": {
+        "bytes": 7346,
+        "SHA256": "388ca176d5fd7ad31b47f2983b272d690067fa44fa140254bccea34db72ca14c"
+      },
+      "heap-qualification/stopped-residual.rs": {
+        "bytes": 15785,
+        "SHA256": "aa35a17e4f99ffd948f23ec0e44c9957cd6da9c79904499b31f9f2769994a89c"
+      }
+    }
+  },
+  "asset_preservation": "No ELF/weights/raw cache copied into Git or deleted; frozen source/necessary logs only. Old costs/failures/UNKNOWN remain."
+}

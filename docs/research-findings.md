@@ -138,3 +138,17 @@ original-only基準GPU fitは10:30:37 UTCに自然STOP/exit0/cleanup/remaining�
 時間・計算量による作業停止上限は設けない。既存controller/guardianのjob全体経過時間を結果として残すが、累積予算の消費として扱わない。資料読取・整形・連絡・LLM作業の個別時計や過去UNKNOWNの監査を追加しない。研究判断に必要なwhole-search比較・支配費計測は維持し、介入時計と全job費を重複加算しない。原NEW90の費・予約・失敗・UNKNOWNは変更しない。明日の進捗確認は自動停止時刻ではなく、ユーザーの実際の停止指示を待つ。
 
 探索の次profileで保存予測110,477,312Bが旧96MiBを9,814,016B超えたため、Rootは完了・main統合済み学習の予約768→736MiB、探索96→128MiBへ32MiBを前向きに移譲した。学習の最終必要予測754,305,575Bは新736MiBより17,446,361B小さく、合計864MiB・親12GiB・UNKNOWN128MiBは不変更。旧build未知予約や原資産は削除・取り直しせず、全target/global再scanやglobal freeからの新配分をしない。[移譲根拠](../research-data/ai-sigma/search-optimization/storage-reallocation-after-learning.json)。
+
+ヒープ回避の最初のstreamed入力AA35版は、accepted幅1〜2048と同BESTの数値reference/full-delta/undoで限定一致し、観測head allocation88727→0、要求bytes24,843,560B減を達成した。一方、固定5root/depth3の8plain ABBAではprocess全時間比1.607596522/search1.621330671、micro2.600048715で全pair退行。Rootは保存recordsから再計算し、main不採用としてcanonical60d4475を保持する。繰返しReLU/iterator/compiler配置費は原因仮説で、heap原則やNNUE方式の否定ではない。次の小stack組立て改良はcanonical従来版を主対照として自律比較し、広幅・計算順と限定referenceを保つ。[結果・保存と不採用](../research-data/ai-sigma/search-optimization/streamed-input-result/report.md)。
+
+## 全量公開データによる次の主学習方針（2026-10-07）
+
+ユーザーは保存曲線の再分析と100万行の学習延長を次の主配分から外し、公開Sigma全量の適格original観測・正しく再構成した左右反転・ハイパーパラメータ調整を合わせて、効率的な収束を目指す方向を提案した。その後に同条件のSigmaとのMSE比較を行い、表現力増強と速度優先の縮小を選ぶ。Rootは次の主線として妥当と判断する。これは純量因果だけを分離する義務ではなく、全量での到達性能と全工程効率の最適化である。
+
+公開43NPZの18,914,078保存行には旧naiveLRが含まれる。original前半9,457,039観測を原本とし、観測単位の不正と終了理由不明z0を分けて除外、有効な同入力別勝敗を保持する。全域の実適格・distinct数は準備の副産物として報告するが、独立census完了を入口にしない。原観測を訓練/validation/評価へ固定分割し、その兄弟反転を同splitに束縛。既開封評価は新候補の選定へ戻さず、新しい未開封評価の範囲・既露出を明示する。全公開データの利用と、評価用観測までtrainへ投入することは区別する。
+
+旧後半plane flipをそのまま再使用せず、native幾何・壁anchor・両側視点・距離/feature・二回反転復帰・合法遷移のreferenceで正しい変換を確認する。正しい反転はまずtrain batchのonline augmentationとして保存二重化を避け、独立対局量と混同しない。主模型は現QF1+D/FT32/H32を固定し、GPU batch/LR/schedule等を新主corpus上の少数条件で粗く選定、validationの収束・振動・汎化とseen/updates/wallを比較して有力条件を収束まで進める。固定20epochのendpointを到達精度とはしない。評価結果を見て条件を再選定しない。
+
+Sigma比較は凍結したモデル・同一の評価観測・同じSTM/±1尺度/targetでNNUEとSigma valueを測り、MCTS rootmeanをNN単体の基準へ混ぜない。Sigmaの公開data過去露出不明は留保し、全体/局面層のMSE・符号・校正とモデル推論/全探索費を併記する。MSE改善は公開観測上の予測支持で、同時間棋力とは区別する。差が残った場合も特徴・容量・最適化・教師の変動を切り分け、モデル/特徴拡張又は縮小・量子化の新重要設計を人間が選ぶ。
+
+この節は次の方針の記録で、全量学習の新job開始ではない。実行前に全量のcompact/供給/保存、分割・評価基準、GPU/共有CPUと探索計時の非重複を具体化する。旧100万行run・開封結果・費/UNKNOWN・必要資産は保全する。

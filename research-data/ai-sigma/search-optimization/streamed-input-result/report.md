@@ -1,0 +1,7 @@
+入力Vecをimmutable FT streamへ変えたAA35版は、ヒープ回避の限定数値oracleで元の計算と一致し、headの確保を観測88727回から0回へ減らした。要求bytesは24,843,560B減ったが、advance_contextの確保468882回は残る。探索全体がallocation-freeになったとは言わない。
+
+同じ学習済みBEST・5合法履歴・depth3の8plain ABBA比較では、候補/従来のprocess全時間比1.607596522、search比1.621330671、secondary micro比2.600048715。全16search/4microの値・Action/PV/depth/nodes/counters/checksum一致を報告し、Rootは保存recordsから全時間比を独立再計算した。有限の全4pairが退行しているため、Rootはこのstreamed版をmain不採用とし、canonical60d4475を保持する。人間が承認したヒープ回避原則は撤回しない。
+
+head内の各行でReLUを再計算するsourceと、contiguous入力を失ったcompiler/iterator費が原因候補だが、因果を分離した測定ではない。profile介入費は現隣接比較で約7.09%、複合時計と内部時計を足さない。断片化、一般latency、棋力、他モデル/環境への倍率は未測定。
+
+次は有限の小stack入力を一度だけ組立てる改良を同意味の範囲で比較する。主比較は遅いAA35だけでなくcanonical60d4475を対照とする。広いaccepted形状、全zero-route積と加算順を維持し、速度採用とメモリ原則を分ける。必要な原測定・source/方法・限定oracleをevidence archiveへ保存、model/ELF/cacheは既ignored参照で保持する。自律継続は停止指示まで時間・累積計算数の上限なしで、Root受入れ待ちを次の独立作業のgateにしない。
