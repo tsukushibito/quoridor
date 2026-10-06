@@ -1,0 +1,106 @@
+{
+  "at": "2026-10-06T16:37:17.436126+00:00",
+  "adopted_boundary": "r2 fixed full-original producer/alias split/opened-ID isolation/66B geometry loader/correctLR geometry",
+  "binding_sha256": "a8ff260593296ed439d58f7215b46270a2c57eb4a947598f050a97e3a5031c08",
+  "Root_current_11_SHA_match": true,
+  "independent_reviewer_issue": "quoridor-4lc.323.1",
+  "independent_small_NN0_tests": 10,
+  "native_r2_exact_test": "PASS read evidence, not Root re-execution",
+  "native_r1_failure": "preserved terminal fixture turn failure",
+  "not_yet_adopted": [
+    "actual online train-only 50% mask RNG and original V caller",
+    "final frozen evaluation cache caller",
+    "Sigma NN input and final comparison"
+  ],
+  "full_data_or_fit_success_claim": false,
+  "new_Root_build_forward": false,
+  "archive_bytes": 54219,
+  "archive_sha256": "c0faaa2d50b1e952b25d7bd690e577cdb89710cf8b41640d68ed4f856b148ef0",
+  "restored_members": 21,
+  "members": {
+    "input-review-binding-r2.json": {
+      "bytes": 2586,
+      "sha256": "a8ff260593296ed439d58f7215b46270a2c57eb4a947598f050a97e3a5031c08"
+    },
+    "review-input/review.json": {
+      "bytes": 23598,
+      "sha256": "063cbca45a111f4f7d36f19906d2b29103f8768e6fef454774dc260c85c583c0"
+    },
+    "review-input/review.md": {
+      "bytes": 10942,
+      "sha256": "7cf9566830b9c533e412e922007fbd72623fdfacfe6363789efd2887d9d8cbc9"
+    },
+    "review-input/control.json": {
+      "bytes": 4529,
+      "sha256": "e193d2ba61b7098383cba3f7229d88b60cd414ba4a84ca33144023a39bf0c862"
+    },
+    "review-input/fixture.json": {
+      "bytes": 1228,
+      "sha256": "3e419792077638cde25ef1af76ee96c63066a75de1462c33f428000ad5dc41ff"
+    },
+    "input-qualification-r1/stop-receipt.json": {
+      "bytes": 2376,
+      "sha256": "2dd619d36b36c23b535870f20b8bc9f62821f8993366f5adb580eaaa6d0e426a"
+    },
+    "input-qualification-r2/stop-receipt.json": {
+      "bytes": 2584,
+      "sha256": "0a7ea135f0a8e1d96b2d026f0ea11b15450002421f2ed8cb0e3307e538b0a82a"
+    },
+    "input-qualification-r2/native-fixture-0.log": {
+      "bytes": 505,
+      "sha256": "f47efec00ed2bf1d254c7a2fb76ee3c7efce4f209a9c0eee0b28db8d86a45aaf"
+    },
+    "input-qualification-r2/native-fixture-0.process.json": {
+      "bytes": 745,
+      "sha256": "64f9ed3db676fba0b307a41bfa76ee00b424b290de85f4cedd36aaf6c1fcc1fd"
+    },
+    "full-input-NN0-fixture-r2.log": {
+      "bytes": 3235,
+      "sha256": "6c96b1a314d5f5b13d301d2676c1056145780b84d4e85cd0ceb24a53296b2708"
+    },
+    "source/python/quoridor_training/public_sigma.py": {
+      "bytes": 21691,
+      "sha256": "44b5386bf5d8df8afca433fc50cc7deb60bd62839ef3ed76f08b5b6bb2f96471"
+    },
+    "source/python/quoridor_training/public_features.py": {
+      "bytes": 4496,
+      "sha256": "e29f08089150ccebb293d11065e4c9c2693a618041b0de2615e369679d8c96ac"
+    },
+    "source/python/quoridor_training/compact_cache.py": {
+      "bytes": 7793,
+      "sha256": "295edd2799e5f18c9bcdeec59ac09bc9e342198f4bb20f1d9d7246f8c7e315fb"
+    },
+    "source/python/quoridor_training/cache.py": {
+      "bytes": 20043,
+      "sha256": "7a06d8b2e4e29c853c28f3c05453568ee00cda595fb0041a6171b9ab061106c3"
+    },
+    "source/python/quoridor_training/test_public_features.py": {
+      "bytes": 4193,
+      "sha256": "620a6bb41fb9bc07852f480b2ee6e4f55f7616f3fb97aee763c7c36441de6c78"
+    },
+    "source/python/quoridor_training/test_public_sigma.py": {
+      "bytes": 10623,
+      "sha256": "cea3589c1d5cc29be5589f33f06e16a9276734a56f28d7d53baf152a44d09922"
+    },
+    "source/crates/quoridor-data/src/lib.rs": {
+      "bytes": 40136,
+      "sha256": "5cc55727b40fb1350f83518a5d6fe9ea5a532ad044ab6308253f8b99e6326ed1"
+    },
+    "source/crates/quoridor-data/tests/external_outcomes.rs": {
+      "bytes": 11708,
+      "sha256": "b22cdb1cea3d907e4220495311208049406f16b495a1e89d95383e2d1de1764c"
+    },
+    "source/crates/quoridor-core/src/research.rs": {
+      "bytes": 15928,
+      "sha256": "c4aaf1ed318be17e6755d54ed9940e02eb9bbeca5e3a8dcdab8a7ad0274ec3b5"
+    },
+    "source/crates/quoridor-nnue/src/features.rs": {
+      "bytes": 3401,
+      "sha256": "80e1d95af972510b4f161d9fe028069a5498952d6d64a221e56977e5f4fb0b71"
+    },
+    "source/python/quoridor_training/cycle_process.py": {
+      "bytes": 15890,
+      "sha256": "677346b5c327a367d55da403b2a36a0a7f4aa445b93fe56bc6581494b3372b13"
+    }
+  }
+}
