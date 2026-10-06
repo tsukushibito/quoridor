@@ -1,0 +1,93 @@
+{
+  "issue": "quoridor-4lc.319",
+  "dataset_revision": "original-only-v2",
+  "cache_manifest_sha": "1ce0e339808ebe13e6718e6460d851b65e0fa37a917e7ca5c8fa1ed78d489316",
+  "full_source_saved_rows": 18914078,
+  "original_rows_decoded": 9457039,
+  "native_qualified_candidate_rows": 2837294,
+  "excluded_observation_rows": 60811,
+  "partitions": {
+    "train": {
+      "rows": 1000000,
+      "model_input_distinct": 366638,
+      "original_observation_ids_distinct": 1000000,
+      "train_known_input_rows": 1000000,
+      "past_unexposed_claim": false,
+      "other_exposure_history": "UNKNOWN"
+    },
+    "validation": {
+      "rows": 50000,
+      "model_input_distinct": 32263,
+      "original_observation_ids_distinct": 50000,
+      "train_known_input_rows": 35700,
+      "past_unexposed_claim": false,
+      "other_exposure_history": "UNKNOWN"
+    },
+    "test-sealed": {
+      "rows": 50000,
+      "model_input_distinct": 32143,
+      "original_observation_ids_distinct": 50000,
+      "train_known_input_rows": 35887,
+      "past_unexposed_claim": false,
+      "other_exposure_history": "UNKNOWN"
+    }
+  },
+  "observed_rows_positive_negative_groups": 10197,
+  "train_only_scale": {
+    "mu_f32": [0.10477899014949799, 0.09872467815876007],
+    "sigma_f32": [0.05121703818440437, 0.05024738609790802],
+    "binding": {
+      "cache_manifest_sha": "1ce0e339808ebe13e6718e6460d851b65e0fa37a917e7ca5c8fa1ed78d489316",
+      "train_partition_sha": "802600f76b3b8d0f07a69c0cbc9c139fb27648f762b0e9f0cb9a74ff542c67e2",
+      "rows": 1000000,
+      "split": "train",
+      "dataset_revision": "original-only-v2",
+      "target": "z",
+      "weighting": "row",
+      "distance_order": "STM/opponent",
+      "source": "maintained train.training_statistics, bounded4096, no old scale reuse"
+    }
+  },
+  "train_only_constant": 0.008534,
+  "sealed_labels_read_in_qualification": 0,
+  "sealed_payload_sha_independent_verification": "producer receipt only; not reopened for independent hashing",
+  "known_data_seconds_lower_bound": 620.9998653201619,
+  "network": {
+    "original_each_series_cap": 2163752072,
+    "forward_series1_ceiling": 1895316616,
+    "forward_series2_ceiling": 2432187528,
+    "series1_actual": 1664424671,
+    "series2_failed_conservative_actual": 845837744,
+    "series2_recovery_actual": 1534317836,
+    "series2_total": 2380155580,
+    "series2_remaining": 52031948,
+    "combined_43_blob_actual": 4044580251,
+    "combined_cap": 4327504144,
+    "local_reused_blobs": 4,
+    "new_blob_downloads": 39,
+    "tiny_primary_source_requests_separately_recorded": [
+      {
+        "file": "source-read-cost.json",
+        "seconds": 0.6156239419942722,
+        "network_bytes": 18172
+      },
+      {
+        "file": "upstream-sign-read-cost.json",
+        "seconds": 0.5933295940048993,
+        "network_bytes": "see fixed source refs"
+      },
+      {
+        "file": "upstream-engine-read-cost.json",
+        "seconds": 0.29845899902284145,
+        "network_bytes": "see fixed source refs"
+      }
+    ]
+  },
+  "GPUfit_test_at_point": "NOT_STARTED",
+  "qualified_scope": "source/corpus/caller/moments binding; live native and GPU pending",
+  "source_refs": {
+    "/workspaces/quoridor/.worktree/learning-million/.artifacts/learning-million/cache-qualification-v2.json": "a0812c970e86897bbbbe7d12b5df4fca34a295af65afa2b2de122cdff12ea673",
+    "/workspaces/quoridor/.worktree/learning-million/.artifacts/learning-million/fit-input-binding-v2.json": "5268fa7006d2dbb48c91f72a52b601f62f3143b48f3f1a817a2003d40d5d90ee",
+    "/workspaces/quoridor/.worktree/learning-million/.artifacts/learning-million/whole-cost-after-data-v2.json": "2de597961a6a10c3105eb045121b620ae5c8d09574c78cee4e8906be0aebf3fb"
+  }
+}
