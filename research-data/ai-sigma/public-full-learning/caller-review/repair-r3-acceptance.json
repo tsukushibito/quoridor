@@ -1,0 +1,44 @@
+{
+  "at": "2026-10-06T18:31:12.923365+00:00",
+  "binding_sha256": "c9a8f810b970918e832b6b1cc46cf28e3d0571ffc25f3d3e0699f481f563b4b9",
+  "review_source_paths_count": 18,
+  "acceptance": "C1/C2 resolved, no new findings in fixed r3 static and related small NN0 scope",
+  "reviewer_related_tests_PASS": 2,
+  "reflection_mask_probe": "Chunk-independent 2048-row mask matches; 998 reflected, supplied SHA retained in reviewer evidence",
+  "unqualified": [
+    "actual compile/native/CUDA supply",
+    "live null-horizon trainer and named checkpoint/export/PNG",
+    "actual batch and three LR config adoption",
+    "final Sigma/newE release"
+  ],
+  "scope_next": "Proceed already authorized live supply qualification, then fix selected batch/config/input bindings before candidate fits; no extra Root ACK",
+  "archive_sha256": "09f1516efba4c5e9129c53dfa96dd8882fec1df8c6e074376ed7a3d1ca04dd33",
+  "archive_members": {
+    "binding/caller-review-binding-r3.json": {
+      "sha256": "c9a8f810b970918e832b6b1cc46cf28e3d0571ffc25f3d3e0699f481f563b4b9",
+      "bytes": 5045
+    },
+    "review/caller-review-r2.json": {
+      "sha256": "32c18e6a697be3c0abf9cc273b69b1f55528408434ea87c4be5d4e11d0f881fb",
+      "bytes": 23192
+    },
+    "review/caller-review-r2-fixture.json": {
+      "sha256": "8dc0a34a298a399146c86efc130e6e155e767dfac0e5c9308fc9a10ed02fd9e8",
+      "bytes": 3188
+    },
+    "review/caller-review-r2-collection-failure.json": {
+      "sha256": "3f05189ba371daa644928a5e34ba9f51226f40b7365443b8a103a3a9e9c7e6fc",
+      "bytes": 1922
+    },
+    "review/caller-review-r2-intermediate.json": {
+      "sha256": "ae4cec65fc6eced10047694aa8cfbfd79fb41b34258e03f3d044431f4c5b3e6b",
+      "bytes": 5100
+    },
+    "review/caller-review-r2-control.json": {
+      "sha256": "fc13270baade6fd96d2796de253b034126ae88581876dfb9f0f832ee283ba861",
+      "bytes": 4641
+    }
+  },
+  "old_failures_preserved": true,
+  "Root_new_build_forward_fullscan": 0
+}
