@@ -152,3 +152,5 @@ original-only基準GPU fitは10:30:37 UTCに自然STOP/exit0/cleanup/remaining�
 Sigma比較は凍結したモデル・同一の評価観測・同じSTM/±1尺度/targetでNNUEとSigma valueを測り、MCTS rootmeanをNN単体の基準へ混ぜない。Sigmaの公開data過去露出不明は留保し、全体/局面層のMSE・符号・校正とモデル推論/全探索費を併記する。MSE改善は公開観測上の予測支持で、同時間棋力とは区別する。差が残った場合も特徴・容量・最適化・教師の変動を切り分け、モデル/特徴拡張又は縮小・量子化の新重要設計を人間が選ぶ。
 
 この節は次の方針の記録で、全量学習の新job開始ではない。実行前に全量のcompact/供給/保存、分割・評価基準、GPU/共有CPUと探索計時の非重複を具体化する。旧100万行run・開封結果・費/UNKNOWN・必要資産は保全する。
+
+2026-10-07、ユーザーは学習側も時間枠・実行時間上限なく進めると明示した。上の全量方針を実配分へ移し、同じ学習セッションを再用する。終了時刻・累積GPU/CPU時間・MAXjob/forward・固定epochによる打切りを設けず、GPU batch/LR/scheduleを新主corpus上で調整しvalidation収束を科学的停止条件とする。CPU/RAM/VRAM/保存容量・停止要求・正確回収と既結果/未知費は保持する。旧曲線分析・100万行延長へ戻さない。[全量実行契約](../research-data/ai-sigma/public-full-learning/task.md)。新heavyは全量保存/供給の具体成立と公平計時の非競合後に開始し、新jobの開始は別に報告する。
