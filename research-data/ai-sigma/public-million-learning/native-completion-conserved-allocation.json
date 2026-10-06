@@ -1,0 +1,110 @@
+{
+  "namespace": "public-million-trained-native-completion-v1",
+  "authority": "Root explicit same-goal conserved allocation",
+  "donor": {
+    "issue": "quoridor-4lc.318",
+    "original_compute_seconds": 600,
+    "stopped_scope_complete": "COMPLETE_MEASURED_ONECANDIDATE_NO_BENEFIT",
+    "source_process_STOP": true,
+    "no_further_compute": true,
+    "verified_all_job_seconds": 161.23336054896936,
+    "verified_unused_seconds": 438.76663945103064,
+    "retained_forward_compute_seconds": 480,
+    "job_receipts": [
+      {
+        "path": ".worktree/search-optimization/.artifacts/search-optimization/job-profile-runtime/result.json",
+        "sha256": "ff7551c90b79835d6dcc7b9fce3ea7a05aa047f9e4057eb3ccdb70b3df301085",
+        "outcome": "timed_out",
+        "wall_seconds": 120.22065764199942,
+        "cleanup_complete": true
+      },
+      {
+        "path": ".worktree/search-optimization/.artifacts/search-optimization/job-profile-r2-runtime/result.json",
+        "sha256": "c3e67c15d099867907db32336de0fc8b0620d1376982adbdfe797dfb14ef3328",
+        "outcome": "succeeded",
+        "wall_seconds": 3.411966430954635,
+        "cleanup_complete": true
+      },
+      {
+        "path": ".worktree/search-optimization/.artifacts/search-optimization/software-r1-runtime/result.json",
+        "sha256": "488c2438e39652f8e5b8779ef34145c6459e7f2fac899a269fc8bbaadf55793e",
+        "outcome": "succeeded",
+        "wall_seconds": 30.21717749699019,
+        "cleanup_complete": true
+      },
+      {
+        "path": ".worktree/search-optimization/.artifacts/search-optimization/comparison-r1-runtime/result.json",
+        "sha256": "4622d5265411d1a393620b8e1c63761e213f5df4a2a038a5c9cff8ec381a555a",
+        "outcome": "succeeded",
+        "wall_seconds": 7.383558979025111,
+        "cleanup_complete": true
+      }
+    ],
+    "final_handoff_sha256": "b3b08e471cf9c6e7e3d0998d3b255d66b8563a45ad92e4a1572d27efc3b5f58a",
+    "typed_owner_receipt": {
+      "path": ".worktree/search-optimization/.artifacts/search-optimization/donor-receipt-120-r1.json",
+      "sha256": "36c70298e81b1d32d0864e718b84da9d1334028852f0c364ead7c28f33182bba",
+      "accepts_retained480": true,
+      "unmetered_source_support_upper_seconds": 90,
+      "necessary_saved_closure_upper_seconds": 30,
+      "retained_usage_upper_seconds": 281.23336054896936,
+      "retained_headroom_seconds": 198.76663945103064
+    },
+    "verified_unused_scope": "four guarded jobs only; non-job support and closure retained separately as upper reservations"
+  },
+  "recipient": {
+    "issue": "quoridor-4lc.319",
+    "new_separate_all_attempt_seconds": 120,
+    "max_jobs": 1,
+    "worker_seconds": 100,
+    "outer_seconds": 120,
+    "numerical_seconds_upper": 30,
+    "new_forward_upper": 256,
+    "planned_forward": 121,
+    "gpu": 0,
+    "cpu_affinity": [2, 3],
+    "native_primary_cpu": 2,
+    "ram_family_bytes": 4294967296,
+    "storage_bytes": 805306368,
+    "scope": "same frozen BEST supported Scalar/Simd FT full/delta/make-unmake/parent-history qualification only",
+    "accounting_namespace": "NEW319-native-completion120-all-attempts"
+  },
+  "conservation": {
+    "before": 600,
+    "after": 600,
+    "equal": true
+  },
+  "historical_preservation": {
+    "old318_original_cap": 600,
+    "old319_compile_cap": 600,
+    "old319_final_cpu_native_cap": 300,
+    "old319_unknown_support": "retained reserved; neither zeroed nor spent",
+    "old_failed_attempts": "unchanged",
+    "unknown_llm_read_control_fees": "remain UNKNOWN, not computational unused proof"
+  },
+  "entry_conditions": [
+    "320r4 exact STOP and exclusive target",
+    "fresh directed storage covering new output roots, all existing UNKNOWN preserved",
+    "fresh physics and source/bin/model/cache/scale binding",
+    "debit every attempt against new120 only; no blind retry"
+  ],
+  "sealed_test_release": false,
+  "no_new_parent_budget": true,
+  "entry_conditions_status": {
+    "donor_valid": true,
+    "320_r4_controller_exit0_cleanup_remaining_empty_and_all_direct_children_reaped": true,
+    "remaining": "recipient fresh directed admission and actual physics/source binding"
+  },
+  "at": "2026-10-06T11:35:16.904216+00:00",
+  "status": "ALLOCATED; launch conditional on recipient fresh admission and binding",
+  "delivery_correction": "Donor direct send to blocked319 rejected before dispatch; Root unblocks only resolved awaiting-compute, then sends actual allocation. No user pause override.",
+  "actual_dispatch": {
+    "method": "turn/start",
+    "thread_id": "01a1100f-6d45-78e0-8a87-84503ff0fbf6",
+    "turn_id": "01a110ff-3f09-7462-a349-70ea3cb81964",
+    "accepted": true,
+    "receipt_path": ".artifacts/research-coordination/trained-native-new120-delivery.json",
+    "receipt_sha256": "f93c8ee0dcff8d939266de585e2f6079681ae469c285afe09e97d63518d9ce6e",
+    "claim": "allocation accepted; recipient compute START not yet observed"
+  }
+}
