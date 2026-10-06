@@ -65,6 +65,8 @@ original-only v2の復旧job `2c121563-6813-4226-a9e5-716c860cc9ba` は08:55:38 
 
 original-only基準GPU fitは10:30:37 UTCに自然STOP/exit0/cleanup/remaining空・子回収。T100万保存行（366,638モデル入力distinct）を20epoch/156,260更新/2,000万seenまで学習し、fit/eval計51,878,032forward、whole742.821821秒だった。Rootは保存229点と実PNGを確認し、validation5万行のrowMSEは初期.856605583→末期.526443771、末期のfull-train MSE .517122594。記録最良は末期20epochで、今回の範囲では以前の小subsetの明確な末期退行を観測しない。収束・純粋な量の因果・独立game汎化・同時間棋力は未認定。許可されたcompile併走費を速度比較に使わず、trained native資格とfreeze/release後の一巡評価は別の受入れ条件として残す。[保存結果のRoot読取点](../research-data/ai-sigma/public-million-learning/baseline-fit-observed.json)。
 
+同じ凍結BESTの追加native資格は19局面・16子局面/取り消しでScalar/Simd FT・差分更新・親accumulator/history/ply復帰がPASS、CPUとの最大差3.13e-7。残差headはScalarのまま。工程全体は期限終了で失敗し、数値段の親directwaitは未記録だが、native子のdirectwait成功、guardian回収・remaining空と記録した科学PID不在を確認した。Rootは停止版53sourceとprivate ELFをSHA照合し、この限定数値証拠と停止を既評価高速化の引渡し条件として受け入れた。工程全体の成功・速度・棋力を認定せず、再資格やsealed評価を探索着手の追加条件にしない。容量は完成済みRoot結果と既予約を共有し、短い検証の起動前/実行中に共有Cargo cache全体を反復走査する任意ガードを外した。[限定受入れと実配送](../research-data/ai-sigma/search-optimization/learning-native-handoff-accepted.json)。
+
 ## 選択済みの棋力評価環境
 
 ユーザーは既存Linux release Rust arenaを拡張する専用セッションを選んだ。評価器比較は同探索、探索比較は同凍結評価器、全体比較は固定Sigma設定とし、同時間棋力と同仕事の処理速度を分ける。開始prefix/historyを保存し担当側交換のpairで集計する。Sigma参照のabs(Q)<=0.2は暫定主book目安で、均衡や校正確率の保証ではない。初期盤面と傾いた・戦術診断を別群にする。

@@ -106,5 +106,32 @@
     "receipt_path": ".artifacts/research-coordination/trained-native-new120-delivery.json",
     "receipt_sha256": "f93c8ee0dcff8d939266de585e2f6079681ae469c285afe09e97d63518d9ce6e",
     "claim": "allocation accepted; recipient compute START not yet observed"
+  },
+  "entry_control_simplification": {
+    "at": "2026-10-06T12:29:42.208031+00:00",
+    "authority": "Root implements user directive: capacity check sufficient; avoid excessive supporting checks",
+    "old_support_upper_seconds_retained": 72.03610545804258,
+    "remaining_upper_seconds_before_continuation": 47.963894541957416,
+    "routine_source_control_upper_seconds": 5,
+    "ONE_job_outer_upper_seconds": 40,
+    "worker_upper_seconds": 32,
+    "conservative_total_upper_seconds": 117.03610545804258,
+    "no_budget_reset_or_refund": true,
+    "storage_policy": "use completed Root directed WITHIN result, retained 768MiB reservation and build/source forecast64MiB; do not require optional per-poll sharedtarget pathname inventory",
+    "preserved_controls": [
+      "time/deadline",
+      "CPU/RAM",
+      "owned output bound",
+      "single shared Cargo writer",
+      "pause/owner checks",
+      "exact child wait/cleanup",
+      "source/model/cache/config/scale binding"
+    ],
+    "growth_peak_claim": "NOT_RECORDED when omitted; do not report zero or enforced peak",
+    "source_changes": "routine caller/guard-config only; remove optional growth-root inputs and growth-only NN0 fixture from this phase. No mathematical/candidate change. Existing NN0 native-transition test retained within remaining job if it fits.",
+    "same_scope": "ONE frozenBEST Scalar/Simd FT/full-delta/make-unmake, numeric<=30 seconds/newforward<=256/GPU0; sealed test closed",
+    "resource_accounting": "existing build/source64MiB remains reserved inclusive; final artifact/source sizes and any observed growth reported without repeated live shared-cache scans",
+    "existing_Root_result_path": "/workspaces/quoridor/.artifacts/task-session-permissions/storage-repair/storage-fixed-result.json",
+    "existing_Root_result_sha256": "1e8a9464e33d3814124c50a49062529d10861df1ebccca2672b25379bd746829"
   }
 }

@@ -1,0 +1,53 @@
+{
+  "authority": "Root routine integration of accepted native qualification; no new scientific scope",
+  "producer_receipt": "/workspaces/quoridor/.worktree/learning-million/.artifacts/learning-million/native-completion-v2/stop-receipt.json",
+  "producer_receipt_sha256": "8ac0deee615e69593b307adad666dd4e5fed0a2b9ef43f778b37d9997f08f684",
+  "source_count_verified": 53,
+  "source_sha_mismatches": [],
+  "private_ELF_verified": {
+    "built_source": "/workspaces/quoridor/.artifacts/rust-migration/target/release/nnue-diagnose",
+    "private_binary": "/workspaces/quoridor/.worktree/learning-million/.artifacts/learning-million/native-completion-v2/output/immutable-native/1e5a07d9b6be39d00199c310d169ffb24cb9af8614e33f7148fc846ed20de7ed/nnue-diagnose",
+    "sha256": "1e5a07d9b6be39d00199c310d169ffb24cb9af8614e33f7148fc846ed20de7ed",
+    "bytes": 1149216,
+    "source_binding_sha": "45ba6c01133cf92f3fe9492590fe74a937033970d38edd4695adc22eccefcfce",
+    "old_qualified_native_preserved": true
+  },
+  "numeric_result": {
+    "status": "PASS",
+    "freeze_sha": "161b9c313ec563e7a6a6f78282204f7541e092f7c077a7073cb7b8d9e0924bda",
+    "native_binary_sha": "1e5a07d9b6be39d00199c310d169ffb24cb9af8614e33f7148fc846ed20de7ed",
+    "CPU_native_max_errors": {
+      "scalar_full": 3.129243850708008e-7,
+      "simd_full": 3.129243850708008e-7
+    },
+    "native_NN": 102,
+    "CPU_model_forward_rows": 19,
+    "all_forward_rows": 121,
+    "rows": 19,
+    "undo_checks": 16,
+    "parent_history_ply_exact_restore": true,
+    "SIMD_scope": "FT/accumulator; residual head remains scalar",
+    "avx2_available": true,
+    "speed_claim": false,
+    "sealed_test_opened": false,
+    "new_fit": false
+  },
+  "phase_status": "PASS_LIMITED_NUMERICAL_WITH_PHASE_DEADLINE_FAILURE",
+  "operational_limitations": {
+    "phase_deadline_failure_preserved": true,
+    "numeric_parent_direct_wait": "NOT_RECORDED; recorded PID/start absent, guardian direct child reaped and cleanup complete",
+    "no_whole_phase_success_claim": true
+  },
+  "dependency_decision": "Numerical qualification and recorded scientific process/source STOP satisfy the evaluator continuation prerequisite. Whole phase success or rerun is not required. Preserve the deadline failure and missing numeric-stage directwait.",
+  "search_allocation_unchanged": "evaluation-next-phase.json: 180 seconds all-attempts in existing retained480, same arithmetic one candidate, no new models/data/fit/labels",
+  "growth_peak": "NOT_RECORDED; optional target inventory omitted under capacity-only directive",
+  "new_job_started_by_Root": false,
+  "actual_dispatch": {
+    "method": "turn/steer",
+    "thread_id": "01a11004-79f3-7c20-872c-432a2c347664",
+    "turn_id": "01a11136-22c4-7963-bd9e-ddbd6207de68",
+    "accepted": true,
+    "receipt_sha256": "f2ffc582193ac210c46b13b049f905e863cd141721a3ea707d07a049990f8358",
+    "meaning": "existing task continuation accepted; new optimization source/compute/performance not yet observed"
+  }
+}
