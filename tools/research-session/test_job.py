@@ -100,7 +100,12 @@ class Fixture:
         j.write(
             self.directory,
             "state.json",
-            {"phase": "queued", "job_id": "unique-job", "issue": "work", "thread_id": "target"},
+            {
+                "phase": "queued",
+                "job_id": "unique-job",
+                "issue": "work",
+                "thread_id": "target",
+            },
         )
         self.backend = Backend()
 
@@ -108,7 +113,12 @@ class Fixture:
         j.write(
             self.directory,
             "state.json",
-            {"phase": "finished", "job_id": "unique-job", "issue": "work", "thread_id": "target"},
+            {
+                "phase": "finished",
+                "job_id": "unique-job",
+                "issue": "work",
+                "thread_id": "target",
+            },
         )
         j.write(
             self.directory,
@@ -126,7 +136,11 @@ class CommandTests(Fixture, unittest.TestCase):
         return j.execute(self.directory, self.config, self.root, self.backend)
 
     def test_completion_and_bounded_log(self):
-        self.config["argv"] = [sys.executable, "-c", "print('X'*20000); print('THE-END')"]
+        self.config["argv"] = [
+            sys.executable,
+            "-c",
+            "print('X'*20000); print('THE-END')",
+        ]
         result = self.execute()
         self.assertEqual(result["outcome"], "succeeded")
         self.assertTrue(result["cleanup_complete"])
@@ -257,7 +271,9 @@ class NotificationTests(Fixture, unittest.IsolatedAsyncioTestCase):
         self.assertEqual(len(self.backend.server.calls), 1)
         method, params = self.backend.server.calls[0]
         self.assertEqual(method, "turn/start")
-        self.assertEqual(set(params), {"threadId", "input"})
+        self.assertEqual(set(params), {"threadId", "input", "approvalPolicy", "sandboxPolicy"})
+        self.assertEqual(params["approvalPolicy"], "never")
+        self.assertEqual(params["sandboxPolicy"], {"type": "dangerFullAccess"})
         self.assertIn("unique-job", params["input"][0]["text"])
 
     async def test_active_is_deferred_without_steering(self):
@@ -271,7 +287,19 @@ class NotificationTests(Fixture, unittest.IsolatedAsyncioTestCase):
         self.backend.server.state = "notLoaded"
         await self.notify()
         self.assertEqual([x[0] for x in self.backend.server.calls], ["thread/resume", "turn/start"])
-        self.assertEqual(set(self.backend.server.calls[0][1]), {"threadId", "excludeTurns"})
+        self.assertEqual(
+            self.backend.server.calls[0][1],
+            {
+                "threadId": "target",
+                "excludeTurns": True,
+                "sandbox": "danger-full-access",
+                "approvalPolicy": "never",
+            },
+        )
+        self.assertEqual(
+            self.backend.server.calls[1][1]["sandboxPolicy"],
+            {"type": "dangerFullAccess"},
+        )
 
     async def test_paused_or_closed_never_wakes(self):
         for item in (self.backend.items["goal"], self.backend.items["work"]):

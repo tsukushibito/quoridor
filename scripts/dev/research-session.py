@@ -30,7 +30,14 @@ def command_json(args: list[str]) -> dict | list:
 
 def project_root(checkout: Path = CHECKOUT) -> Path:
     result = subprocess.run(
-        ["git", "-C", str(checkout), "rev-parse", "--path-format=absolute", "--git-common-dir"],
+        [
+            "git",
+            "-C",
+            str(checkout),
+            "rev-parse",
+            "--path-format=absolute",
+            "--git-common-dir",
+        ],
         capture_output=True,
         text=True,
         check=True,
@@ -128,6 +135,20 @@ def dispatch_lock(root: Path):
             fcntl.flock(lock, fcntl.LOCK_UN)
 
 
+def task_thread_permissions() -> dict:
+    """Keep the user-authorized project task policy explicit on start/resume."""
+    return {"sandbox": "danger-full-access", "approvalPolicy": "never"}
+
+
+def task_turn_permissions() -> dict:
+    return {"sandboxPolicy": {"type": "dangerFullAccess"}, "approvalPolicy": "never"}
+
+
+def resume_params(thread_id: str) -> dict:
+    # Do not override model, effort, instructions or cwd when restoring a task.
+    return {"threadId": thread_id, "excludeTurns": True, **task_thread_permissions()}
+
+
 def delivery_params(
     thread: dict, turns: list[dict], text: str, cwd: str | None
 ) -> tuple[str, dict]:
@@ -149,7 +170,7 @@ def delivery_params(
         }
     if state not in ("idle", "notLoaded"):
         raise SessionError(f"Thread is not ready to receive work: {state}")
-    params = {"threadId": thread_id, "input": content}
+    params = {"threadId": thread_id, "input": content, **task_turn_permissions()}
     if cwd is not None:
         params["cwd"] = cwd
     return "turn/start", params
@@ -232,7 +253,7 @@ class AppServer:
         thread = await self.read_thread(thread_id)
         if thread["status"]["type"] == "notLoaded":
             # Omit model/effort/instruction overrides to preserve live session settings.
-            await self.request("thread/resume", {"threadId": thread_id, "excludeTurns": True})
+            await self.request("thread/resume", resume_params(thread_id))
             thread = await self.read_thread(thread_id)
         turns = await self.turns(thread_id) if thread["status"]["type"] == "active" else []
         method, params = delivery_params(thread, turns, text, cwd)
@@ -245,11 +266,16 @@ class AppServer:
         }
 
     async def wait(
-        self, thread_id: str, timeout: float, *, subscribe: bool = True, target: dict | None = None
+        self,
+        thread_id: str,
+        timeout: float,
+        *,
+        subscribe: bool = True,
+        target: dict | None = None,
     ) -> dict:
         # Resume subscribes this connection to native events; it does not start a model turn.
         if subscribe:
-            await self.request("thread/resume", {"threadId": thread_id, "excludeTurns": True})
+            await self.request("thread/resume", resume_params(thread_id))
         if target is None:
             turns = await self.turns(thread_id)
             if not turns:
@@ -271,11 +297,19 @@ class AppServer:
             self.notifications.clear()
             remaining = deadline - time.monotonic()
             if remaining <= 0:
-                return {"thread_id": thread_id, "turn_id": target["id"], "status": "still_running"}
+                return {
+                    "thread_id": thread_id,
+                    "turn_id": target["id"],
+                    "status": "still_running",
+                }
             try:
                 message = json.loads(await asyncio.wait_for(self.ws.recv(), remaining))
             except TimeoutError:
-                return {"thread_id": thread_id, "turn_id": target["id"], "status": "still_running"}
+                return {
+                    "thread_id": thread_id,
+                    "turn_id": target["id"],
+                    "status": "still_running",
+                }
             self.notifications.append(message)
 
 
@@ -296,7 +330,11 @@ async def run(args: argparse.Namespace) -> dict:
             with dispatch_lock(root):
                 if args.command == "create":
                     original = creation_issue(args.issue, root)
-                    params = {"cwd": cwd, "ephemeral": False}
+                    params = {
+                        "cwd": cwd,
+                        "ephemeral": False,
+                        **task_thread_permissions(),
+                    }
                     if args.instructions_file:
                         params["developerInstructions"] = Path(args.instructions_file).read_text()
                     response = await server.request("thread/start", params)
@@ -306,7 +344,8 @@ async def run(args: argparse.Namespace) -> dict:
                         assign_created_issue(args.issue, root, original, thread_id)
                         if args.name:
                             await server.request(
-                                "thread/name/set", {"threadId": thread_id, "name": args.name}
+                                "thread/name/set",
+                                {"threadId": thread_id, "name": args.name},
                             )
                         require_owner(args.issue, root, thread_id)
                         response = await server.request(
@@ -314,6 +353,7 @@ async def run(args: argparse.Namespace) -> dict:
                             {
                                 "threadId": thread_id,
                                 "cwd": cwd,
+                                **task_turn_permissions(),
                                 "input": [{"type": "text", "text": body, "text_elements": []}],
                             },
                         )
@@ -330,9 +370,7 @@ async def run(args: argparse.Namespace) -> dict:
                     require_owner(args.issue, root, args.thread)
                     thread = await server.read_thread(args.thread)
                     if thread["status"]["type"] == "notLoaded":
-                        await server.request(
-                            "thread/resume", {"threadId": args.thread, "excludeTurns": True}
-                        )
+                        await server.request("thread/resume", resume_params(args.thread))
                         thread = await server.read_thread(args.thread)
                     turns = (
                         await server.turns(args.thread)
@@ -354,12 +392,19 @@ async def run(args: argparse.Namespace) -> dict:
                         "Archive requires an idle session; never interrupts active work"
                     )
                 response = await server.request("thread/archive", {"threadId": args.thread})
-                return {"thread_id": args.thread, "archived": True, "response": response}
+                return {
+                    "thread_id": args.thread,
+                    "archived": True,
+                    "response": response,
+                }
         thread = await server.read_thread(args.thread)
         if args.command == "status":
             return {"thread": thread}
         if args.command == "read":
-            return {"thread": thread, "turns": await server.turns(args.thread, limit=args.limit)}
+            return {
+                "thread": thread,
+                "turns": await server.turns(args.thread, limit=args.limit),
+            }
         return await server.wait(args.thread, args.timeout)
 
 

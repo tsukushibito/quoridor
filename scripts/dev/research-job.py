@@ -210,7 +210,9 @@ def execute(directory, config, root, backend):
     if state["phase"] != "queued":
         raise JobError("A submitted command is never automatically rerun")
     state.update(
-        phase="starting", supervisor=runtime.process_identity(os.getpid()), updated_at=stamp()
+        phase="starting",
+        supervisor=runtime.process_identity(os.getpid()),
+        updated_at=stamp(),
     )
     write(directory, "state.json", state)
     try:
@@ -339,7 +341,12 @@ async def reconcile(server, directory, notification, thread_id):
     marker = f"[research-job:{read(directory, 'state.json')['job_id']}]"
     cursor = None
     for _ in range(10):
-        params = {"threadId": thread_id, "limit": 100, "itemsView": "full", "sortDirection": "desc"}
+        params = {
+            "threadId": thread_id,
+            "limit": 100,
+            "itemsView": "full",
+            "sortDirection": "desc",
+        }
         if cursor:
             params["cursor"] = cursor
         page = await server.request("thread/turns/list", params)
@@ -350,7 +357,10 @@ async def reconcile(server, directory, notification, thread_id):
                     for part in item.get("content", [])
                 ):
                     notification.update(
-                        status="delivered", turn_id=turn["id"], reconciled=True, updated_at=stamp()
+                        status="delivered",
+                        turn_id=turn["id"],
+                        reconciled=True,
+                        updated_at=stamp(),
                     )
                     write(directory, "notification.json", notification)
                     return notification
@@ -393,12 +403,14 @@ async def notify_once(directory, config, root, backend):
                     thread = await server.read_thread(state["thread_id"])
                     if thread["status"]["type"] == "notLoaded":
                         await server.request(
-                            "thread/resume", {"threadId": state["thread_id"], "excludeTurns": True}
+                            "thread/resume", client.resume_params(state["thread_id"])
                         )
                         thread = await server.read_thread(state["thread_id"])
                     if thread["status"]["type"] != "idle":
                         notification.update(
-                            status="pending", reason="recipient_not_idle", updated_at=stamp()
+                            status="pending",
+                            reason="recipient_not_idle",
+                            updated_at=stamp(),
                         )
                         write(directory, "notification.json", notification)
                         return notification
@@ -421,6 +433,7 @@ async def notify_once(directory, config, root, backend):
                         "turn/start",
                         {
                             "threadId": state["thread_id"],
+                            **client.task_turn_permissions(),
                             "input": [
                                 {
                                     "type": "text",
@@ -431,7 +444,9 @@ async def notify_once(directory, config, root, backend):
                         },
                     )
                     notification.update(
-                        status="delivered", turn_id=response["turn"]["id"], updated_at=stamp()
+                        status="delivered",
+                        turn_id=response["turn"]["id"],
+                        updated_at=stamp(),
                     )
                     write(directory, "notification.json", notification)
         except Exception as error:
@@ -450,7 +465,10 @@ def watch_notification(directory, config, root, backend):
         time.sleep(
             min(
                 config["notify_interval_seconds"],
-                max(0, (runtime.timestamp(config["notify_until"]) - now()).total_seconds()),
+                max(
+                    0,
+                    (runtime.timestamp(config["notify_until"]) - now()).total_seconds(),
+                ),
             )
         )
 
@@ -528,7 +546,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("command", choices=["submit", "run", "status", "cancel", "notify"])
     parser.add_argument(
-        "--state-dir", required=True, type=Path, help="New directory for each submitted run"
+        "--state-dir",
+        required=True,
+        type=Path,
+        help="New directory for each submitted run",
     )
     parser.add_argument("--config", type=Path)
     args = parser.parse_args()
@@ -552,7 +573,10 @@ def main():
                 result[name] = read(directory, f"{name}.json")
     elif args.command == "cancel":
         write(directory, "cancel.json", {"requested_at": stamp()})
-        result = {"cancel_requested": True, "running_job": read(directory, "state.json")}
+        result = {
+            "cancel_requested": True,
+            "running_job": read(directory, "state.json"),
+        }
     else:
         if not (directory / "result.json").exists():
             raise JobError("No durable completion result; never infer exit or rerun automatically")

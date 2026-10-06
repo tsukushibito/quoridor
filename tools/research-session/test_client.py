@@ -27,7 +27,8 @@ class LayoutSafety(unittest.TestCase):
         ):
             self.assertEqual(client.resolve_task_cwd("/project", root), "/project")
             self.assertEqual(
-                client.resolve_task_cwd("/project/.worktree/task", root), "/project/.worktree/task"
+                client.resolve_task_cwd("/project/.worktree/task", root),
+                "/project/.worktree/task",
             )
             for target in (
                 "/project/tools",
@@ -70,7 +71,10 @@ class DispatchSafety(unittest.TestCase):
     def test_active_delivery_preserves_settings_and_uses_current_turn(self):
         method, params = client.delivery_params(
             {"id": "task-session", "cwd": "/worktree", "status": {"type": "active"}},
-            [{"id": "current", "status": "inProgress"}, {"id": "old", "status": "completed"}],
+            [
+                {"id": "current", "status": "inProgress"},
+                {"id": "old", "status": "completed"},
+            ],
             "new evidence",
             None,
         )
@@ -80,7 +84,11 @@ class DispatchSafety(unittest.TestCase):
         self.assertNotIn("effort", params)
 
     def test_active_delivery_cannot_move_worktree_or_guess_turn(self):
-        thread = {"id": "task-session", "cwd": "/worktree", "status": {"type": "active"}}
+        thread = {
+            "id": "task-session",
+            "cwd": "/worktree",
+            "status": {"type": "active"},
+        }
         with self.assertRaises(client.SessionError):
             client.delivery_params(thread, [], "report", None)
         with self.assertRaises(client.SessionError):
@@ -96,7 +104,9 @@ class DispatchSafety(unittest.TestCase):
             None,
         )
         self.assertEqual(method, "turn/start")
-        self.assertEqual(set(params), {"threadId", "input"})
+        self.assertEqual(set(params), {"threadId", "input", "approvalPolicy", "sandboxPolicy"})
+        self.assertEqual(params["approvalPolicy"], "never")
+        self.assertEqual(params["sandboxPolicy"], {"type": "dangerFullAccess"})
 
 
 class CommandTests(unittest.IsolatedAsyncioTestCase):
@@ -166,7 +176,9 @@ class CommandTests(unittest.IsolatedAsyncioTestCase):
                     ),
                 ),
                 patch.object(
-                    client, "command_json", return_value={"status": "running", "socketPath": "fake"}
+                    client,
+                    "command_json",
+                    return_value={"status": "running", "socketPath": "fake"},
                 ),
                 patch.object(client, "AppServer", return_value=server),
             ):
@@ -180,6 +192,9 @@ class CommandTests(unittest.IsolatedAsyncioTestCase):
         start = server.calls[0][1]
         self.assertNotIn("developerInstructions", start)
         self.assertNotIn("model", start)
+        self.assertEqual(start["sandbox"], "danger-full-access")
+        self.assertEqual(start["approvalPolicy"], "never")
+        self.assertEqual(server.calls[1][1]["sandboxPolicy"], {"type": "dangerFullAccess"})
         self.assertIn("Actual implementation task", server.calls[1][1]["input"][0]["text"])
 
     async def test_send_reads_only_explicit_target_and_steers_exact_active_turn(self):
@@ -194,11 +209,32 @@ class CommandTests(unittest.IsolatedAsyncioTestCase):
     async def test_send_refuses_owner_change_after_network_wait(self):
         server = self.Server()
         with patch.object(
-            client, "require_owner", side_effect=[{}, client.SessionError("owner changed")]
+            client,
+            "require_owner",
+            side_effect=[{}, client.SessionError("owner changed")],
         ):
             with self.assertRaises(client.SessionError):
                 await self.invoke("send", server)
         self.assertFalse(any(m in ("turn/start", "turn/steer") for m, _ in server.calls))
+
+    async def test_unloaded_send_restores_permissions_without_model_or_cwd_override(
+        self,
+    ):
+        server = self.Server()
+        server.state = "notLoaded"
+        await self.invoke("send", server)
+        resumes = [params for method, params in server.calls if method == "thread/resume"]
+        self.assertEqual(len(resumes), 1)
+        self.assertEqual(
+            resumes[0],
+            {
+                "threadId": "target",
+                "excludeTurns": True,
+                "sandbox": "danger-full-access",
+                "approvalPolicy": "never",
+            },
+        )
+        self.assertEqual(server.calls[-1][1]["sandboxPolicy"], {"type": "dangerFullAccess"})
 
     async def test_send_foreign_owner_never_contacts_target(self):
         server = self.Server()
@@ -225,7 +261,11 @@ class OwnershipTests(unittest.TestCase):
             patch.object(
                 client,
                 "require_issue",
-                return_value={"id": "work", "status": "open", "assignee": "codex:foreign"},
+                return_value={
+                    "id": "work",
+                    "status": "open",
+                    "assignee": "codex:foreign",
+                },
             ),
             patch.dict(os.environ, CODEX_THREAD_ID="operator"),
         ):
@@ -261,6 +301,32 @@ class FakeSocket:
 
 
 class ProtocolSafety(unittest.IsolatedAsyncioTestCase):
+    async def test_completion_subscription_restores_task_permissions_without_starting_turn(
+        self,
+    ):
+        server = client.AppServer({})
+        server.request = AsyncMock(return_value={})
+        result = await server.wait("worker", 0.2, target={"id": "done", "status": "completed"})
+        self.assertEqual(result["turn"]["status"], "completed")
+        server.request.assert_awaited_once_with("thread/resume", client.resume_params("worker"))
+
+    async def test_direct_delivery_restores_unloaded_task_permissions(self):
+        server = client.AppServer({})
+        server.read_thread = AsyncMock(
+            side_effect=[
+                {"id": "worker", "status": {"type": "notLoaded"}},
+                {"id": "worker", "status": {"type": "idle"}},
+            ]
+        )
+        server.request = AsyncMock(side_effect=[{}, {"turn": {"id": "started"}}])
+        result = await server.deliver("worker", "continue accepted task")
+        self.assertEqual(result["turn_id"], "started")
+        calls = server.request.await_args_list
+        self.assertEqual(calls[0].args, ("thread/resume", client.resume_params("worker")))
+        self.assertEqual(calls[1].args[1]["sandboxPolicy"], {"type": "dangerFullAccess"})
+        self.assertNotIn("model", calls[1].args[1])
+        self.assertNotIn("effort", calls[1].args[1])
+
     async def test_wait_uses_completion_events_before_history_is_flushed(self):
         server = client.AppServer({}, timeout=0.2)
         server.ws = FakeSocket(

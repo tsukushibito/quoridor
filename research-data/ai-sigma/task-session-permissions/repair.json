@@ -1,0 +1,64 @@
+{
+  "issue": "quoridor-4lc.321",
+  "reason": "319 completion resume omitted permissions and reverted to workspace-write; original management failure retained",
+  "source": {
+    "scripts/dev/research-session.py": "7c43491b0ff444ca2b67ec4e9a4d88756e482f18b9657a3b7548ca545a46793b",
+    "scripts/dev/research-job.py": "a7ab99ee281924e789c398424cd2543b082ea0ea2f083f352c8ff97554e3ab74",
+    "tools/research-session/test_client.py": "34d2072ae583745b959fa0e5882956993347bf9a642c475beb3e3911c0f4c752",
+    "tools/research-session/test_job.py": "d8a8f05abd08411876ac42fbe7f812048c600f417e0269ae2a4c5880cd20168c"
+  },
+  "verification": {
+    "tests": 38,
+    "status": "PASS",
+    "log": ".artifacts/task-session-permissions/tests-r3.txt",
+    "formatter": "Ruff",
+    "lint": "PASS",
+    "actual_notification_replay": "NOT_RUN; no extra job or LLM turn created",
+    "formatter_config": "tools/research-quality/ruff.toml",
+    "project_formatter_AST_unchanged": true
+  },
+  "preserved": [
+    "model",
+    "effort",
+    "cwd",
+    "owner/status checks",
+    "active steering",
+    "dispatch lock",
+    "single completion",
+    "uncertain no blind retry",
+    "old data failure/costs"
+  ],
+  "permission_policy": {
+    "thread": {
+      "sandbox": "danger-full-access",
+      "approvalPolicy": "never"
+    },
+    "turn": {
+      "sandboxPolicy": {
+        "type": "dangerFullAccess"
+      },
+      "approvalPolicy": "never"
+    }
+  },
+  "resources": {
+    "CPU_max": 1,
+    "RAM_max_bytes": 536870912,
+    "tests_cap_seconds": 30,
+    "GPU": 0,
+    "NN": 0,
+    "storage_inclusive_bytes": 2097152,
+    "maintenance_previous": 100663296,
+    "maintenance_forward": 98566144,
+    "arena320_unchanged": 67108864,
+    "parent_storage_unchanged": 12884901888,
+    "unknown_retained_unchanged": 134217728
+  },
+  "history": {
+    "first_test_failure": "wrong fake recipient expectation; original tests.txt retained",
+    "second_tests": 36,
+    "final_tests": 38,
+    "test_total_observed_seconds": 16.576
+  },
+  "actual_restored_thread": "01a1100f-6d45-78e0-8a87-84503ff0fbf6",
+  "runtime_recovery_proof": ".artifacts/learning-million-launch/completion-permission-recovery.json"
+}
