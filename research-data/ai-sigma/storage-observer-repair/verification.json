@@ -1,0 +1,65 @@
+{
+  "issue": "quoridor-4lc.322",
+  "status": "FIXED_AND_OBSERVED_WITHIN",
+  "root_result_path": "/workspaces/quoridor/.artifacts/task-session-permissions/storage-repair/storage-fixed-result.json",
+  "root_result_sha256": "1e8a9464e33d3814124c50a49062529d10861df1ebccca2672b25379bd746829",
+  "input_binding": {
+    "at": "2026-10-06T11:56:27.607755+00:00",
+    "recipient_manifest": "/workspaces/quoridor/.worktree/learning-million/.artifacts/learning-million/storage-manifest-native-completion-v2.json",
+    "recipient_sha256": "9cf1deeb0ddba57eb3d2a6d45992eea993a3fb3d6844100039f369029270271c",
+    "root_manifest": "/workspaces/quoridor/.artifacts/task-session-permissions/native-completion-root-manifest.json",
+    "root_manifest_sha256": "568efde9c485df2f50ad219b175e4aa86800c147a35252b37c8f977ee61aabb5",
+    "difference": "only add canonicalsearchroot; every originalroot/reservation/UNKNOWN/cap retained",
+    "observer": "scripts/dev/research-storage.py",
+    "observer_sha256": "24e6a8182fecb968559228e270567036163933983acd60a3e420329056aa3d95",
+    "authority": "Root coordination metadata read only, separate from NEW319120; no recipient cap reset",
+    "wallcap_seconds": 120,
+    "scientific_forward_build_GPU": 0
+  },
+  "observation": {
+    "wall_seconds": 29.681451165000908,
+    "metadata_workers": 8,
+    "metadata_queries": 97709,
+    "metadata_cache_hits": 102269,
+    "snapshot_scope": "this invocation only; no persistent cache or atomic snapshot"
+  },
+  "at": "2026-10-06T12:11:06.325332+00:00",
+  "retained_allocated_inode_bytes": 11621560320,
+  "current_plus_unused_known_bytes": 12873568256,
+  "cap_bytes": 12884901888,
+  "unknown_retained_bytes": 134217728,
+  "errors": [],
+  "margin_bytes": 11333632,
+  "learning_current_allocated_bytes": 517070848,
+  "learner_previous_failed_control_charged_seconds": 52.03610545804258,
+  "learner_NEW120_remaining_upper_seconds": 67.96389454195742,
+  "Root_old_metadata_timeout_seconds": 120.10305336292367,
+  "Root_repair_success_seconds": 29.861231478047557,
+  "NO_learner_budget_refund": true,
+  "scope": "same input root/reservation/UNKNOWN/cap plus canonical search evidence root; fresh per-invocation cache, no persistent cache/no files deleted",
+  "actual_delivery": {
+    "method": "turn/start",
+    "thread_id": "01a1100f-6d45-78e0-8a87-84503ff0fbf6",
+    "turn_id": "01a11123-a675-7092-9a15-b067f44faa08",
+    "accepted": true,
+    "receipt_sha256": "0bf8aa89c9a1fe02fb889638e2cea6db18ef2f32882f7d17159a2edf87c6a4fa",
+    "meaning": "capacity result and existing phase continuation accepted; not scientific job success"
+  },
+  "initial_delivery": {
+    "status": "rejected before RPC because capacity-only blocked",
+    "receipt": ".artifacts/research-coordination/storage-fixed-native-delivery-refusal.json",
+    "resolution": "CAS blocked->in_progress after freshwithin; sameowner/no userpause"
+  },
+  "archived_result": {
+    "path": "research-data/ai-sigma/storage-observer-repair/storage-fixed-result.json.gz",
+    "sha256": "a5692ca88309993e73aedb2f0019a91ff069a443a9a9ebfaa8e3c63ba28d7540",
+    "restored_sha256": "1e8a9464e33d3814124c50a49062529d10861df1ebccca2672b25379bd746829"
+  },
+  "minimum_checks": {
+    "tests": 4,
+    "old_new_static_oracle": "all original accounting fields exactly equal excluding time",
+    "ruff": "PASS",
+    "format": "PASS"
+  },
+  "source_previous_git": "f4b7252:scripts/dev/research-storage.py; SHA24e6a8182fecb968559228e270567036163933983acd60a3e420329056aa3d95"
+}

@@ -1,0 +1,20 @@
+{
+  "exit_code": 124,
+  "direct_child_killed_and_waited": true,
+  "timeout": true,
+  "at": "2026-10-06T11:58:27.799133+00:00",
+  "wall_seconds": 120.10305336292367,
+  "argv": [
+    "taskset",
+    "-c",
+    "0,1",
+    "python3",
+    "-B",
+    "/workspaces/quoridor/scripts/dev/research-storage.py",
+    "/workspaces/quoridor/.artifacts/task-session-permissions/native-completion-root-manifest.json",
+    "--output",
+    "/workspaces/quoridor/.artifacts/task-session-permissions/native-completion-storage-root.json"
+  ],
+  "scope": "Root metadata only, no compile/model/eval",
+  "namespace": "Root task coordination; old319NEW120 spent preserved"
+}
