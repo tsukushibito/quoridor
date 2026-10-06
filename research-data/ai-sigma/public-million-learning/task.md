@@ -30,7 +30,7 @@ CSV/JSONにstep、seen、actual completed epochと進行率、wall、train診断
 ## writer・資源・停止
 
 - 同じsaved thread `01a1100f-6d45-78e0-8a87-84503ff0fbf6` を再用する。Root同fullaccess（danger-full-access/never）、同model/effort。cwdは新managed WT `/workspaces/quoridor/.worktree/learning-million`、base main `d61a91d`。本人はready/show/ownerと実cwdを確認してclaimし、待機解除を実開始と区別する。
-- 本人一人がWTの `crates/quoridor-data`、runnerのdataset/cache入口、`python/quoridor_training`、対応tests/config/docsを編集する。core/ai/nnueの探索数学・モデルレイアウトは変更しない。Rootのみmain/Git index/commit統合担当。stage/commit/ref/merge操作・main source書込・再帰委譲は行わない。停止path/SHAでRootへ引き渡す。
+- 本人一人がWTの `crates/quoridor-data`、runnerのdataset/cache入口、`python/quoridor_training`、対応tests/config/docsを編集する。core/ai/nnueの探索数学・モデルレイアウトは変更しない。Rootのみmain/Git index/commit統合担当。stage/commit/ref/merge操作・main source書込は行わない。下記の独立レビュー一担当に限り学習担当から直接依頼でき、それ以外の再帰委譲は行わない。停止path/SHAでRootへ引き渡す。
 - CPU最大2logical（探索318の0,1を避け2,3を候補にactual affinity/topology確認）、RAM family最大4GiB、VRAM最大6GiB。検索profile測定とCPU/GPU計時・共有Cargo target buildは非重複にする。前のjobを無断interruptしない。限定private target増分は本予算へ。
 - 初回実data取得/decode/変換/資格は累計7200秒、compile/testsは600秒、GPUfit/qualification/transfer/eval/init/failure/recovery合計3600秒、最終CPU/native評価・解析300秒。取得最大固定43blob compressed合計に再試行30%まで、全attempt費を記録。旧GPU7200 UNKNOWN/旧3600残3586秒は保持し、本新配分と混同しない。
 - 新保存768MiB inclusive（compact corpus/index/provenance 512、shard scratch96、build/source/WT48、weights32、必要evidence/Git/temp80MiBが目安）。Rootのfresh directed admissionと再配分を参照し、旧保持12GiB/UNKNOWN128MiBを維持する。Rootは終了済み273/274/275 future growth512MiB、旧1d2 growth160MiB、完了maintenance future growth96MiBを前向き移譲する。旧current資産・科学費・失敗・原capは変更/削除せず、未使用future予約の使途だけ変更。新rootをaggregateへ追加してpeak含むforecastが成立するまで大取得/computeは開始しない。自己tmpの不要scratchはSHA/provenanceと資格後に撤去でき、共有cache・旧資産は削除しない。
@@ -41,6 +41,13 @@ CSV/JSONにstep、seen、actual completed epochと進行率、wall、train診断
 
 初報はclaim/actual cwd/固定source/資源admission/実取得・実学習の開始有無を短く報告する。次はデータ実分母・distinct/alias・GPU供給の意味ある結果、学習曲線、最終評価、重要判断か障害の節目でRootへ通知する。Root thread `01a0f2e9-357d-7ef3-a2fe-b16f80accda5`、宛先issue `quoridor-4lc`。定型通知のためのturnを作らない。
 
-新split/入力変換/教師解釈はRootが導入境界を別担当の独立レビューに回す。該当採用・最終評価releaseはレビュー対象、毎run全員承認ではない。実装・準備・測定を全稿待ちで止めず、必要境界が未確認ならその採用だけ保留する。
+ユーザーが担当直接依頼＋Root採用時確認を選択したため、学習担当は次の条件で独立レビューを一担当へ直接依頼できる。Rootによる監視・起動代行・毎回の承認待ちを作らない。
+
+- 起動条件は、公開データの入力/STM変換・幾何反転・zと除外理由・元観測alias/分割・compact encoder/decoderと学習callerへの接続が、仕様・source SHA・差分・fixture結果としてレビュー可能な版になった時。原sourceと固定仕様から確認するread-onlyレビューをまとめて一度依頼し、指摘修正は同じレビュワーへ戻す。毎fit/epoch/runの再レビューは行わない。
+- 対象は上記導入境界だけ。新研究案、LR/batch/modelの選定、全史監査、全dataset再decode・全suite再実行を依頼しない。元資料・仕様・問い・対象版/差分・実検証を渡し、自分の長い推論履歴・全会話forkを引き継がせない。レビュー中は対象版の整合を保証し、変更した場合は変更点を明示する。
+- レビュー子issueをBeadsに登録し、目的・対象・read-only/証拠writer範囲・owner・版・実予算・停止・受入れを記載する。独立saved session又はfresh-context subagentを必要な一担当だけ作れる。追加レビュワー、レビュー側の再帰委譲は未配分。担当もRoot同fullaccess/neverを明示確認し、モデル/effortを無断変更しない。
+- 予算は親319の768MiB内evidence80MiBからreview2MiBを取り分け、親増額・current資産減額なし。CPU最大1logical/RAM512MiB、読み取りcommand累計60秒＋必要な小NN0 fixture累計20秒を親compile/tests600秒の残内から前向き配分する。build/NNforward/学習/GPU/新取得/重scanは0。親・探索の計時とfixtureを競合させず、source静的確認は並行できる。2MiBにreport/metadata/Git/tmpを含めてforecastを更新する。
+- レビュワーはsourceを変更せず、対象版・指摘・根拠・重大度・確認限界を依頼担当とRootへ返す。通常修正は学習担当が行い、指摘確認を同レビュー担当へ戻す。重大な意味/分割/ラベル/設計変更、想定外の矛盾、追加予算、レビュー要否の不明はRootへ戻す。
+- 導入の採用・最終評価releaseでは、Rootが必要境界を確認した証拠と重大未解決指摘の有無を確認する。採用前に自己レビューだけで独立確認を代用しない。影響しない実装/準備/測定を全稿待ちで止めず、未確認境界の採用だけ保留する。重要な研究結論のレビューは別の採用判断で要否・対象を決める。
 
 停止時にsource/process/正確child回収、変更path/SHA、取得source/hash/配布条件、実分母/除外、元観測aliasとsplit、cache/input/model binding、曲線/画像、whole費、checkpoint/freeze/評価と限界、未完了と次判断を残す。raw/model/cacheはignored assetsへ、small manifestと必要圧縮証拠をmain専用保存先へRootが統合する。Beads status/backupを本人が維持し、最高棋力・独立game汎化・新データ量だけの因果を先取りしない。
