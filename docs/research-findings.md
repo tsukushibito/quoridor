@@ -154,3 +154,5 @@ Sigma比較は凍結したモデル・同一の評価観測・同じSTM/±1尺�
 この節は次の方針の記録で、全量学習の新job開始ではない。実行前に全量のcompact/供給/保存、分割・評価基準、GPU/共有CPUと探索計時の非重複を具体化する。旧100万行run・開封結果・費/UNKNOWN・必要資産は保全する。
 
 2026-10-07、ユーザーは学習側も時間枠・実行時間上限なく進めると明示した。上の全量方針を実配分へ移し、同じ学習セッションを再用する。終了時刻・累積GPU/CPU時間・MAXjob/forward・固定epochによる打切りを設けず、GPU batch/LR/scheduleを新主corpus上で調整しvalidation収束を科学的停止条件とする。CPU/RAM/VRAM/保存容量・停止要求・正確回収と既結果/未知費は保持する。旧曲線分析・100万行延長へ戻さない。[全量実行契約](../research-data/ai-sigma/public-full-learning/task.md)。新heavyは全量保存/供給の具体成立と公平計時の非競合後に開始し、新jobの開始は別に報告する。
+
+全量担当は同セッションで実claim/source準備に着手。全originalを30%抽出/100万行切詰めなしで扱い、正規geometry20B+distance8B+z1B+由来5B+原input SHA32Bの66B/観測、正しい反転online供給を準備している（まだ導入未資格）。新growth900MiBをRootが確保。終了した固定運用の将来growth240MiBを前向き終了し、再取得可能なuvパッケージキャッシュだけをno-forceで除去、インストール済み環境・data/model/旧証拠・UNKNOWN128MiBは保全した。新scope/current+unused+UNKNOWN12,718,735,360B<12,884,901,888B、余166,166,528B。欠落した削除済みcache rootを限定再確認し、raw unknown観測も保存。全体scanを繰返さず完成結果を共有する。[容量配分と原証拠](../research-data/ai-sigma/public-full-learning/storage-admission.json)。旧learner保持736→728MiB、探索128→136MiBの追加8MiB移譲も同合計内で実施し、scratch次検証は予測140,156,928B<142,606,336B。学習のheavy readyで既探索jobの自然STOP後にslotを譲り、source準備は並行する。実取得/全量fitの成功はまだ未認定。

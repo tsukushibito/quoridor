@@ -1,0 +1,53 @@
+{
+  "at": "2026-10-06T15:43:18.521014+00:00",
+  "retired_prospective_growth": [
+    {
+      "category": "conservative-92-remaining-management",
+      "reserved_bytes": 117440512,
+      "owner": "92",
+      "basis": "full bound conservatively adds already held too; actual unused never larger"
+    },
+    {
+      "category": "frame22-supervisor-current-output-growth",
+      "reserved_bytes": 33554432,
+      "owner": "40",
+      "basis": "existing32MiB numerical bound newframe output, historical output still retained"
+    },
+    {
+      "category": "frame23-285-shared-release-additional-growth-upper",
+      "reserved_bytes": 33554432,
+      "owner": "285",
+      "basis": "new incremental build forecast; shared current already observed once, old build reservations retained"
+    },
+    {
+      "category": "frame23-288-sharedbuild-growth-upper",
+      "reserved_bytes": 33554432,
+      "owner": "288",
+      "basis": "prospective from285data32MiB, old285build32MiB preserved; extra sharedtarget growth, no old target/Git free inference",
+      "scope_paths": ["/workspaces/quoridor/.artifacts/rust-migration/target"]
+    },
+    {
+      "category": "frame23-294-sharedbuild-growth-upper",
+      "owner": "294 coordinator",
+      "reserved_bytes": 33554432,
+      "scope_paths": ["/workspaces/quoridor/.artifacts/rust-migration/target"],
+      "basis": "prospective incremental growth32 from old285352->320; current whole sharedtarget retained in live-build once, not consumed against this additional growth cap",
+      "growth_not_whole_root_cap": true
+    }
+  ],
+  "retired_bytes": 251658240,
+  "stopped_authority": "research-data/ai-sigma/frame24-coordinator/final-stopped-coordinator-handoff.md",
+  "past_caps_cost_unknown_changed": false,
+  "asset_deletion": false,
+  "cache_clean": "uv cache clean --offline --no-config, no force; only reproducible package cache; installed env has no uv external links",
+  "cache_clean_stdout": ".artifacts/research-coordination/full-learning-capacity/cache-clean.stdout",
+  "cache_clean_stderr": ".artifacts/research-coordination/full-learning-capacity/cache-clean.stderr",
+  "new_learning_inclusive": 943718400,
+  "unknown_retained": 134217728,
+  "cap": 12884901888,
+  "admission": "within",
+  "current_plus_unused_known_bytes": 12718735360,
+  "margin_bytes": 166166528,
+  "completed_observation": ".artifacts/research-coordination/full-learning-capacity/current-admitted-with-full-learning.json",
+  "raw_missing_cache_observation_retained": ".artifacts/research-coordination/full-learning-capacity/current-with-full-learning.json"
+}
