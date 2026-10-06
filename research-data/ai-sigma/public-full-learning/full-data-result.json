@@ -1,0 +1,62 @@
+{
+  "source": "data-recovery-r1-stop-receipt.json",
+  "receipt_sha256": "64a1c5cfe9dac05ddc74451b2082c56ab50c614d7376e0e81a916a088c4e8008",
+  "manifest_sha256": "07d81abc2230b2fe6b7c5fb7a425e7e3109bf9af2c467f5c72f8d3bdb975279b",
+  "Root_confirmed": "manifest SHA; four lengths vs66*rows; raw denominator arithmetic; controller/guardian cleanup receipts",
+  "Root_extra_payload_hash_or_label_read": false,
+  "original_rows": 9457039,
+  "qualified_rows": 9255077,
+  "partitions": [
+    {
+      "name": "train",
+      "rows": 8413949,
+      "model_input_distinct": 1819065,
+      "payload_bytes": 555320634,
+      "payload_SHA_reported": "f12dc04cc6f94b047e677835191d36b42b71f69e6c8753e5f2555ebddb3dabdb"
+    },
+    {
+      "name": "validation",
+      "rows": 419150,
+      "model_input_distinct": 185666,
+      "payload_bytes": 27663900,
+      "payload_SHA_reported": "babf61a106a4a317601f652069d00025712ff16174c71fee6255aa06c8e9b69f"
+    },
+    {
+      "name": "test-sealed",
+      "rows": 371978,
+      "model_input_distinct": 168816,
+      "payload_bytes": 24550548,
+      "payload_SHA_reported": "073f999192ad124226e02bcbc2a0c9ef71936c2bf55921dfb7712e59cf0b267d"
+    },
+    {
+      "name": "evaluation-opened",
+      "rows": 50000,
+      "model_input_distinct": 32143,
+      "payload_bytes": 3300000,
+      "payload_SHA_reported": "ab6f3d06a66dbab645337599f72fcebc70e811dc8476ba160c1831202646f489"
+    }
+  ],
+  "excluded_rows": 201962,
+  "excluded_reason_counts": {
+    "3": 45642,
+    "7": 156320
+  },
+  "controller": {
+    "job_id": "c557375b-0157-4615-995f-bcf32568d413",
+    "outcome": "succeeded",
+    "error": null,
+    "exit_code": 0,
+    "finished_at": "2026-10-06T17:09:10.551108+00:00",
+    "wall_seconds": 256.15286591101903,
+    "remaining": [],
+    "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+    "cleanup_complete": true,
+    "log_bytes_seen": 0,
+    "log_bytes_retained": 0
+  },
+  "GPU_fit": false,
+  "time_limits": null,
+  "game_history_exposure": "UNKNOWN; distinct model inputs are not games",
+  "old_cancel_failure_and_inflight_unknown": "preserved",
+  "actual_onlineLR_and_GPUTRAIN": "NOT_YET_QUALIFIED"
+}
