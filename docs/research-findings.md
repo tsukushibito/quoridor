@@ -108,3 +108,29 @@ original-only基準GPU fitは10:30:37 UTCに自然STOP/exit0/cleanup/remaining�
 ユーザーは反復NNUE評価・探索の通常hotpathで一時heap確保を避ける原則を承認した。小さなbounded bufferはstack、可変/大scratchはmodel/session/workerのsetup所有として再用し、長期weights/TTのheapは許容する。unsafe未初期化・巨大per-depthstackやFP計算順変更を代用にしない。前inline候補の速度不採用結果は維持し、原則だけで速度・断片化・latency改善を認定しない。[設計原則](design/ai-rust-migration.md#repeated-evaluation-memory)、[同担当への継続配分](../research-data/ai-sigma/search-optimization/heap-avoidance-continuation.json)。
 
 棋力評価環境は単一Rust runnerのbook全履歴・受理時計・色交換pair・全予定分母・manifest/audit/journal復元をmainへ統合した。機能確認4予定slotはD/D人工一手ゴール2件と事前取消2件。対局は双方P1勝ち・完了pair .5、取消は未開始/unknown2で引分けへ変換しない。初回guardが完全履歴15手を追加手1手と誤認した失敗を保持し、対局は再実行せず第二jobで保存値のaudit/recoverを完了した。一pairのCIは出さず、strict_unknownは暫定受理時計、硬い返却・公平な棋力/Elo・二版search adapter・同時間Sigmaは未認定。[統合と運用証拠](../research-data/ai-sigma/arena-evaluation/integration/report.md)。
+
+## 探索担当の自律継続と検証優先度
+
+2026-10-06、ユーザーは検証候補の列挙・優先度決定と、不在中の自律的な作業継続を指示した。同じ探索担当・worktreeを再用し、現在のヒープ回避のまとまった介入を完了してから、[追加実行契約](../research-data/ai-sigma/search-optimization/autonomous-processing-contract.json)の4時間枠へ進む。追加実計算は失敗・ビルド・検証・回収を含め30分、各job最大5分、最大12job・6介入・2,000万forward。CPU0/1・family RAM2GiB・GPU0・既存inclusive96MiBを維持し、旧費・失敗・UNKNOWN・消費済みslotを取り直さない。この一覧は全項目の実施義務ではない。
+
+| 優先     | 検証候補                                                    | 判定と次の動き                                                                                                                                                                                  |
+| -------- | ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1        | ヒープ回避の現介入、accepted topology・所有・再入性         | 通常評価の確保回数/bytes、全幅での入力対応、初期化/コピー、親復帰を確認。速度不支持とメモリ原則の成立を分け、広い形状を未対応のまま完了としない。                                               |
+| 2        | 凍結した今回BESTでの実caller支配費                          | 旧B3817の20.51%等を新重みの実績へ流用せず、評価・特徴/accumulator・距離/合法手・sort・TT/履歴と全費を必要な粒度で測る。時計の介入費、cold/warmと共有分母を分ける。                              |
+| 3        | 評価入力、特徴/accumulator、undo用scratchの確保・コピー再用 | 同算術で反復確保を減らす。full/delta、複数モデル/session、P1/P2、make/unmake、cancel/errorの親復帰を独立referenceで確認。新shared mutable状態や巨大per-depth stackを避ける。                    |
+| 3        | terminal/TT値が確定するchildでの不要な評価更新              | sourceの順序と費を先に確認。葉/terminal/TTの数学だけでなく資格検査・error/cancel/予算意味も保てる範囲で延期・省略を比較。                                                                       |
+| 3        | 同壁配置の距離map・合法手・特徴計算の重複                   | 両goal全81升、壁追加、jump/P2、履歴を参照実装と照合。駒依存の計算を壁だけのcacheへ混同せず、既DSU/exact fallbackを維持。                                                                        |
+| 4        | 実プレイヤー二手跨ぎの永続TT                                | 合法な両側の履歴を進め、同じプレイヤーの次turnで保持を検証。cold/warm、useful bound/cutoff/ordering-only、nodes、初期化/reset/drop/全caller費を出す。単に同rootを反復したhitを代用にしない。    |
+| 4        | TT/PVで重複する合法性検査・key/hash生成                     | fullhistory/ply/model namespace/完全key衝突照合を維持したまま同計算の再用だけを比較。hitを得るためのkey省略・世代/置換方針変更をしない。                                                        |
+| 5        | legal Action buffer・sort周辺の一時領域と再計算             | 現 comparator/最終Action順を維持し、生成・採点・PVのbufferを安全に再用。旧sort_unstable比較の不支持を保持し、同候補を根拠なく反復しない。                                                       |
+| 5        | 残差headの同算術処理、layout・ループ・不要初期化            | 固定加算順序・FP32・活性化・scaleを保つものだけ実装。FT SIMDの既資格とheadを分ける。reduction順/FMA/精度変更は提案まで。                                                                        |
+| 6        | 実callerの初期化・誤り・取消・時計・保存費                  | モデルload、TT/session作成・reset・drop、provider/move適用、completed depth/PV/node/leafとreturned/acceptedを別に測る。速度比較で未記録を0にせず、arenaのfairclock保証を勝手に昇格しない。      |
+| 全介入   | 正しさ、性能退行、代表性、累積効果                          | 序盤/壁多数/jump/P1P2/終盤/履歴つき入力を結果前固定。baseline/candidateの値bits・Action/PV/depth/必要counterと親復帰を確認し、plain AB/BA全費・個別悪化を保存。一介入効果と累積版の効果を区別。 |
+| 保留     | ゾブリスト、TT容量・置換方式の変更                          | 低優先度の候補というユーザー判断を維持。実測で支配費になれば比較提案へ戻し、今は新方式を実装しない。                                                                                            |
+| 設計まで | MPC/ProbCut、LMR、futility、静止探索/延長、厳密solver       | 校正pair/戦術層・未選定評価・ON/OFF比較の不足と全費を整理する。今回の処理最適化許可で選択的枝刈り・新探索をONにしない。                                                                         |
+| 設計まで | aspiration/新move picker/学習ordering・並列探索             | node削減と追加費、同時間棋力・正しさの検証案を提示。既探索window/order/並列性を変える実装は人間判断を待つ。                                                                                     |
+| 設計まで | head SIMD/reduction変更・量子化・Wasm固有変更               | bit対応、許容誤差と精度/モデル条件、target依存の全費を示す。学習・特徴・モデル変更と同じ介入に混ぜない。                                                                                        |
+
+優先2の結果で優先3〜5を更新する。小さな局所時計だけを根拠に選ばず、呼出回数・全費・判別できる不確実性を短く書いて着手する。反証・不支持や有限測定の揺れは保存し、安い診断一つの成功を別案の恒久gateにしない。必要なら既枠内で測定時間を延ばすが、同条件の反復だけを独立局数へ数えない。大きな性能退行又はsource/数値不一致はその候補を採用保留にし、影響しない次候補へ移る。
+
+通常の処理最適化・資格済み同条件測定は毎回人間へ返さず、この配分内で進める。重要設計は具体提案を保存して待ち、別の許可済み仕事を継続する。main採用・GitはRootが停止sourceと意味ある独立oracleを別に確認する。毎runの新reviewerや定期LLM監視、繰返しglobal/target容量scanを追加しない。GPU学習・教師/モデル変更・新arena対局・新取得・依存更新・必要資産削除は今回の対象外。
