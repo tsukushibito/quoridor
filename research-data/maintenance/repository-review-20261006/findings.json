@@ -1,0 +1,438 @@
+{
+  "schema": "repository-maintainability-review-v1",
+  "issue": "quoridor-8th",
+  "reviewer": "codex:/root/maintainability_reviewer",
+  "baseline": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+  "reviewed_at": "2026-10-06T03:37:03.183393+00:00",
+  "method": "read-only source reachability/static review; no builds/tests/models/jobs/network; source/config/docs/Git/index unchanged",
+  "known_in_flight_exclusions": [
+    "quoridor-d3g documentation retirement and knowledge consolidation",
+    ".ignore addition",
+    "scripts/tools README old team/scheduler/watch links"
+  ],
+  "findings": [
+    {
+      "id": "MR-01",
+      "priority": "P1",
+      "severity": "scientific-artifact-attribution",
+      "title": "Frozen native SHA does not bind the checkpoint and scale actually evaluated by test",
+      "locations": [
+        {
+          "path": "python/quoridor_training/train.py",
+          "line": 857,
+          "end_line": 888
+        },
+        {
+          "path": "python/quoridor_training/train.py",
+          "line": 792,
+          "end_line": 810
+        },
+        {
+          "path": "python/quoridor_training/scaled_model.py",
+          "line": 49,
+          "end_line": 55
+        },
+        {
+          "path": "python/quoridor_training/residual_model.py",
+          "line": 25,
+          "end_line": 32
+        }
+      ],
+      "evidence": "Public train test CLI checks best-model native manifest/weights SHA, but builds from config.json/scale.json and loads initial.pt/best.pt; result candidate_sha is the native weights digest. Same-state emission at train.py:739-752 protects the normal immediate post-training case. Nonpersistent buffers make scale/coefficient edits affect evaluated values. No checkpoint/config/scale binding check was found in this entrypoint or reachable callers.",
+      "root_cause": "Frozen descriptor and Python evaluation inputs have separate unverified identities.",
+      "impact": "A same-topology checkpoint mix-up or scale/config edit can change measured predictions while retaining the reported frozen candidate SHA; existing recorded results are not proven corrupt.",
+      "recommendation": "Use one authoritative model descriptor, or hash-bind and verify all consumed checkpoints/model config/scale/target/baselines plus test data before evaluation; retain native parity and reject changed inputs with small fixtures.",
+      "confidence": "high",
+      "verification": "Static call/data-flow and buffer persistence review; no NN execution. External immutable archives may protect specific historical runs but are not enforced by this CLI."
+    },
+    {
+      "id": "MR-02",
+      "priority": "P2",
+      "severity": "input-scale-operational-cost",
+      "title": "Sharded cache concatenates the entire dense corpus into RAM",
+      "locations": [
+        {
+          "path": "python/quoridor_training/cache.py",
+          "line": 96,
+          "end_line": 113
+        },
+        {
+          "path": "python/quoridor_training/cache.py",
+          "line": 131,
+          "end_line": 143
+        },
+        {
+          "path": "python/quoridor_training/train.py",
+          "line": 122,
+          "end_line": 122
+        },
+        {
+          "path": "python/quoridor_training/train.py",
+          "line": 172,
+          "end_line": 174
+        }
+      ],
+      "evidence": "File input routes load→_load_sharded; child tensors are memmaps but return np.concatenate for x/d/y. All rows are JSON lists and copied metadata dictionaries. Feature copy alone costs rows*2*312*4 bytes: 2,496,000,000 bytes per million rows.",
+      "root_cause": "Batch-oriented training API requires one dense global array; shard abstraction is lost during load.",
+      "impact": "Host RAM and initialization cost grow with corpus size before training; three million rows require 7,488,000,000 feature-copy bytes plus metadata/framework/mapped resident pages. No actual OOM is claimed.",
+      "recommendation": "Provide shard-aware bounded batch lookup and bounded metadata while preserving hashes/partitions/exposure rules; update callers rather than preserving parallel legacy dense APIs. Human approval remains required for dataset scale/selection experiments.",
+      "confidence": "high",
+      "verification": "Source and byte arithmetic only; RSS/throughput/GPU costs unmeasured."
+    },
+    {
+      "id": "MR-03",
+      "priority": "P2",
+      "severity": "direct-cycle-lifecycle",
+      "title": "Direct cycle interruption has weaker child cleanup than its timeout path",
+      "locations": [
+        {
+          "path": "python/quoridor_training/cycle.py",
+          "line": 17,
+          "end_line": 46
+        },
+        {
+          "path": "python/quoridor_training/cycle.py",
+          "line": 230,
+          "end_line": 234
+        },
+        {
+          "path": "crates/quoridor-runner/src/main.rs",
+          "line": 128,
+          "end_line": 136
+        },
+        {
+          "path": "scripts/dev/research-job.py",
+          "line": 253,
+          "end_line": 255
+        },
+        {
+          "path": "scripts/dev/research-job.py",
+          "line": 275,
+          "end_line": 313
+        }
+      ],
+      "evidence": "Cycle creates new child sessions. Timeout sends TERM/KILL/wait; generic finally sends TERM plus wait(timeout=3), without KILL on timeout. No SIGTERM handler runs cleanup. Child log files use unlimited direct output streams. Outer research-job periodically records descendants and cleans them by identity, so wrapper protection differs from direct CLI.",
+      "root_cause": "Cycle lifecycle/resource handling is spread across separate stage and outer-wrapper paths.",
+      "impact": "Direct Ctrl-C/SIGTERM may leave detached stage work alive; a TERM-resistant child may escape generic exception cleanup. Stage log/RAM/output/pause limits are not enforced as a whole-cycle contract. Wrapper runs are not asserted to always orphan.",
+      "recommendation": "Own stage child identity and use one TERM→KILL→wait routine for signal/exception/timeout; unify whole-cycle resource, pause and bounded-log handling; verify with artificial short processes in a separate authorized repair.",
+      "confidence": "high for source gap; medium for actual orphan extent",
+      "verification": "Static review only; no process or job launched. Outer exact-descendant cleanup is an existing mitigating protection."
+    },
+    {
+      "id": "MR-04",
+      "priority": "P2",
+      "severity": "regression-gate-coverage",
+      "title": "Lightweight research gate omits maintained NN0 test modules",
+      "locations": [
+        {
+          "path": "scripts/dev/check-research.py",
+          "line": 121,
+          "end_line": 127
+        },
+        {
+          "path": "python/quoridor_training/test_selected_target.py",
+          "line": 19,
+          "end_line": 56
+        },
+        {
+          "path": "python/quoridor_training/test_sharded_cache.py",
+          "line": 87,
+          "end_line": 95
+        },
+        {
+          "path": "python/quoridor_training/test_residual_config.py",
+          "line": 8,
+          "end_line": 29
+        },
+        {
+          "path": "package.json",
+          "line": 16,
+          "end_line": 21
+        }
+      ],
+      "evidence": "Training source is discovered for syntax/format but executed suite names only quoridor_training.test_contracts. Maintained selected_target/residual_config/sampling/plotting/sharded_cache regressions are not called. Observation module contains NN0 contracts and opt-in Torch tests, so unconditional discovery is not the safe replacement. Product check also omits its available audio settings contract script.",
+      "root_cause": "Test execution remains a hand-picked old module while source discovery expanded.",
+      "impact": "Selected-label/provenance/sharded-partition/config regressions can pass the documented routine gate; maintainers must recover individual test commands. Browser audio tests exist, so this is not total audio absence.",
+      "recommendation": "Define an explicit maintained NN0 suite with registration coverage and a separate opt-in model suite; include inexpensive audio persistence tests in the product gate.",
+      "confidence": "high",
+      "verification": "Static entrypoint-to-test comparison; existing test pass/fail not evaluated."
+    },
+    {
+      "id": "MR-05",
+      "priority": "P2",
+      "severity": "quality-gate-coupling",
+      "title": "Product check selects the complete native research workspace",
+      "locations": [
+        {
+          "path": "package.json",
+          "line": 16
+        },
+        {
+          "path": "Cargo.toml",
+          "line": 3,
+          "end_line": 7
+        },
+        {
+          "path": "crates/quoridor-inference/build.rs",
+          "line": 3,
+          "end_line": 8
+        },
+        {
+          "path": "crates/quoridor-inference/build.rs",
+          "line": 93,
+          "end_line": 94
+        },
+        {
+          "path": "crates/quoridor-runner/src/resources.rs",
+          "line": 294,
+          "end_line": 305
+        }
+      ],
+      "evidence": "npm check repeats cargo check/clippy --workspace for rules and AI. Workspace includes inference/data/runner; default inference compiles native/ort.cpp and links dl, runner uses Linux affinity APIs. Product Wasm builds themselves remain separate rules/AI artifacts.",
+      "root_cause": "One quality command binds product validation to research package selection.",
+      "impact": "UI/save changes inherit native research C++/Arrow/Linux environment preparation and failures; product-only checks and fresh-source verification cannot select a smaller package set. Linux research design itself is not rejected.",
+      "recommendation": "Keep shared crates/workspace; define separate product and native research package gates plus an integration entrypoint that invokes both when needed. Preserve DTO/fixtures/strict TS and separate Wasm feature checks.",
+      "confidence": "high for dependency selection; medium for platform impact",
+      "verification": "Static manifests/build script review; build duration and cross-platform failure unmeasured."
+    },
+    {
+      "id": "MR-06",
+      "priority": "P3",
+      "severity": "environment-maintenance-cost",
+      "title": "DevContainer startup still requires unused Godot and unconditional training setup",
+      "locations": [
+        {
+          "path": ".devcontainer/post-create.sh",
+          "line": 35,
+          "end_line": 45
+        },
+        {
+          "path": ".devcontainer/update-toolchain.sh",
+          "line": 57,
+          "end_line": 104
+        },
+        {
+          "path": ".devcontainer/Dockerfile",
+          "line": 67,
+          "end_line": 69
+        },
+        {
+          "path": "scripts/dev/verify_env.sh",
+          "line": 15,
+          "end_line": 21
+        },
+        {
+          "path": "scripts/dev/setup-training.sh",
+          "line": 13
+        }
+      ],
+      "evidence": "Build/post-create installs and updates Godot plus export templates and requires Godot/GDScript tools. No current project.godot/.gd/.cs source was found; verify_env explicitly allows project absence. Container/update code handles arm64 but unconditional training setup rejects non-x86_64.",
+      "root_cause": "Original environment-template obligations remain in common product/research startup.",
+      "impact": "Container recreation pays unused toolchain/template acquisition and shared training setup; arm64 recreation stops even for product-only work. Latest-stable policy is not itself the finding.",
+      "recommendation": "Confirm actual external use, then retire Godot installation/update/check/dead headless paths together and separate common product initialization from explicit research environment acquisition. Preserve NVIDIA/research caches, shared Beads and persistent assets.",
+      "confidence": "medium-high",
+      "verification": "Source reachability and startup chain only; rebuild/download sizes/times and external Godot use unverified."
+    },
+    {
+      "id": "MR-07",
+      "priority": "P3",
+      "severity": "unused-public-compatibility-api",
+      "title": "Initial compatibility probe and Wasm JSON API have no repository callers",
+      "locations": [
+        {
+          "path": "crates/quoridor-core/src/lib.rs",
+          "line": 10,
+          "end_line": 19
+        },
+        {
+          "path": "crates/quoridor-wasm/src/lib.rs",
+          "line": 106,
+          "end_line": 121
+        }
+      ],
+      "evidence": "distance_to_goal is documented as phase0 probe; initial_position_json is documented as a retained compatibility entrypoint and still exported with rules. Search over current source/tests/scripts found definitions only. RulesGame new/get_view supplies the current initial position.",
+      "root_cause": "Retired compatibility obligations survive beside authoritative DTO/Game APIs.",
+      "impact": "Small unnecessary API surface and a second hand-written initial-position JSON representation add maintenance decisions.",
+      "recommendation": "Remove both unused repository entrypoints; retain only if a concrete external consumer is established with explicit removal conditions. Do not remove active standard Game/B0/MCTS/NNUE functionality.",
+      "confidence": "high for repository caller absence; medium for external ABI usage",
+      "verification": "Scoped source search only; external Wasm consumers not inspectable."
+    }
+  ],
+  "source_manifest": [
+    {
+      "path": ".devcontainer/Dockerfile",
+      "bytes": 3440,
+      "sha256": "100515bf156b2effe7e4190dae6d941eb3631a0c89715b96b4aa40cb1e7e8eda",
+      "baseline_equal": true
+    },
+    {
+      "path": ".devcontainer/post-create.sh",
+      "bytes": 1844,
+      "sha256": "f2a007cf0788df5d6fa8fe2cb04d9c5e2669153360ee36d6b28dffb29cdee792",
+      "baseline_equal": true
+    },
+    {
+      "path": ".devcontainer/update-toolchain.sh",
+      "bytes": 7564,
+      "sha256": "e7a35f1efc1eb3dbbd7f030cc9e2b54867be9e740ff6d3464c02ea55c64c3ee1",
+      "baseline_equal": true
+    },
+    {
+      "path": "Cargo.toml",
+      "bytes": 284,
+      "sha256": "6cbcf3b38c98492322761e78db908195789021216be51aa37de2888cacd0ab0b",
+      "baseline_equal": true
+    },
+    {
+      "path": "crates/quoridor-ai/Cargo.toml",
+      "bytes": 453,
+      "sha256": "a880aafe11bb69380558b756235b285a454302f57d832f4b2768c47f3fb64f31",
+      "baseline_equal": true
+    },
+    {
+      "path": "crates/quoridor-core/src/lib.rs",
+      "bytes": 624,
+      "sha256": "24dc7084072d14e4f8a8ebd6572df4ddd2722b10b43178c250358f0a9f0befb0",
+      "baseline_equal": true
+    },
+    {
+      "path": "crates/quoridor-inference/build.rs",
+      "bytes": 3768,
+      "sha256": "0268e075fe36347adc06755fc12f3e7931520fa543c0629a1296d22edb96c224",
+      "baseline_equal": true
+    },
+    {
+      "path": "crates/quoridor-runner/src/config.rs",
+      "bytes": 6075,
+      "sha256": "325e936917259b7ea3f9f7957b0817503d4bd8fdf7752e4f3dd51708351657cc",
+      "baseline_equal": true
+    },
+    {
+      "path": "crates/quoridor-runner/src/main.rs",
+      "bytes": 7302,
+      "sha256": "6e54fc365c339d9edd9c32152258010dc4569a8f4628ba9d04f551c440bb1f1e",
+      "baseline_equal": true
+    },
+    {
+      "path": "crates/quoridor-runner/src/resources.rs",
+      "bytes": 12738,
+      "sha256": "65307f8f2bb7b3b1d96d02f08b712ddf6941ed123706cbeebf1bd7c2c5c95f51",
+      "baseline_equal": true
+    },
+    {
+      "path": "crates/quoridor-wasm/Cargo.toml",
+      "bytes": 1237,
+      "sha256": "f95e164181ecd20373bee35ba0ba9490afcc9ae06fecf61018ccc44f7c541735",
+      "baseline_equal": true
+    },
+    {
+      "path": "crates/quoridor-wasm/src/lib.rs",
+      "bytes": 7597,
+      "sha256": "2795627591ccfa5cc1fa3db9f048af94ae94d60e84724cb3ce3446852f7cbf31",
+      "baseline_equal": true
+    },
+    {
+      "path": "package.json",
+      "bytes": 2074,
+      "sha256": "4a3d4888a194b478418b337827b2b6a599b90505bec59605f8ce20edef907e30",
+      "baseline_equal": true
+    },
+    {
+      "path": "python/quoridor_training/cache.py",
+      "bytes": 7104,
+      "sha256": "1bd9e88b5efbf70a9b85c97de21a79ef999ad58a4f5f65a010cd4e1a1dc1d06f",
+      "baseline_equal": true
+    },
+    {
+      "path": "python/quoridor_training/common.py",
+      "bytes": 10577,
+      "sha256": "5c83814985e62f2550e95423fd90e22d1a205e585715ee6e58d37726b921afbb",
+      "baseline_equal": true
+    },
+    {
+      "path": "python/quoridor_training/cycle.py",
+      "bytes": 8627,
+      "sha256": "afeb1811816ed7c33dd785ee22232dba26003e5c45d068cdc521339aaf0e6154",
+      "baseline_equal": true
+    },
+    {
+      "path": "python/quoridor_training/model.py",
+      "bytes": 825,
+      "sha256": "2baeb2323d98c2422d49045b02dacf1838a0ff1a1e6add631620adb53246b86a",
+      "baseline_equal": true
+    },
+    {
+      "path": "python/quoridor_training/residual_model.py",
+      "bytes": 2443,
+      "sha256": "2104e17f9d091b263acc99b60744a2e834e6b32c1db1a2db62a22a4c94b55f9b",
+      "baseline_equal": true
+    },
+    {
+      "path": "python/quoridor_training/scaled_model.py",
+      "bytes": 2730,
+      "sha256": "e8fb84f2463f6ccc5727042d4461b64938fd3617fe338de616a360cf62ea73d2",
+      "baseline_equal": true
+    },
+    {
+      "path": "python/quoridor_training/test_residual_config.py",
+      "bytes": 1189,
+      "sha256": "b1098ea3a9cb0fc48d73df235375332a86b3596d18e7f5224347c9f3a5f3da47",
+      "baseline_equal": true
+    },
+    {
+      "path": "python/quoridor_training/test_selected_target.py",
+      "bytes": 2416,
+      "sha256": "440c2c435908f02e42bbf95b885a43e6a7cf0cfdf20f1afdedfed100128bdc0e",
+      "baseline_equal": true
+    },
+    {
+      "path": "python/quoridor_training/test_sharded_cache.py",
+      "bytes": 6473,
+      "sha256": "8449dbad210dcee2f96d8cab2f416e81ea5e0be646d5e772d58735b0d90fe558",
+      "baseline_equal": true
+    },
+    {
+      "path": "python/quoridor_training/train.py",
+      "bytes": 39783,
+      "sha256": "bb6544ea82875650d63c61b5d7014cd7f31973e2f54c2f7664211c36d9cf3f41",
+      "baseline_equal": true
+    },
+    {
+      "path": "scripts/dev/check-research.py",
+      "bytes": 5267,
+      "sha256": "20d9e3e2cc08197ad93075bea402be16c43b2b732e29519951ba0fd609b68201",
+      "baseline_equal": true
+    },
+    {
+      "path": "scripts/dev/research-assets.py",
+      "bytes": 3097,
+      "sha256": "b5700da46d437c2cca11e6c14fa394cb122595cee81b64bae6524ecc7b2b9d36",
+      "baseline_equal": true
+    },
+    {
+      "path": "scripts/dev/research-job.py",
+      "bytes": 23408,
+      "sha256": "233c88600a78eff0d9cfdc5d5a6a5db4d7cf5b82cad1677fa4a5009c86ede227",
+      "baseline_equal": true
+    },
+    {
+      "path": "scripts/dev/setup-training.sh",
+      "bytes": 1740,
+      "sha256": "6440d5067d453099859d8e30deefacb90d8545fb40e8d9f9e17b150c6479bc1c",
+      "baseline_equal": true
+    },
+    {
+      "path": "scripts/dev/verify_env.sh",
+      "bytes": 6532,
+      "sha256": "2c9c4970fba76902e5c665a898ce1f136f47e8bc13439e3f1b51f82cddfc3083",
+      "baseline_equal": true
+    }
+  ],
+  "handoff": {
+    "source_STOP": true,
+    "write_scope": "research-data/maintenance/repository-review-20261006/{report.md,findings.json}",
+    "fixes_started": false,
+    "research_resumed": false,
+    "acceptance": "Root independent review/Git integration pending; issue remains in_progress"
+  }
+}
