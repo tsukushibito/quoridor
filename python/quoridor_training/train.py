@@ -11,20 +11,47 @@ import hashlib
 import base64
 import json
 import time
+import tempfile
 from pathlib import Path
 import numpy as np
 from .cache import load, sha
 from .plotting import render_learning_curves
 
-from .common import resolve_config, measurements, selected_teacher_types, validate_target_tensor
+from .common import (
+    resolve_config,
+    selected_teacher_types,
+    validate_target_tensor,
+    MeasurementAccumulator,
+)
 
 
 def write(path, value):
-    Path(path).write_text(json.dumps(value, indent=2, allow_nan=False) + "\n")
+    with Path(path).open("w") as stream:
+        stream_json(stream, value)
+        stream.write("\n")
 
 
-def metrics(rows, prediction, target, constant):
-    return measurements(rows, prediction.tolist(), target, constant)
+def stream_json(stream, value):
+    """Serialize compact arrays and row iterators without materializing JSON lists."""
+    if isinstance(value, dict):
+        stream.write("{")
+        for number, (key, part) in enumerate(value.items()):
+            if number:
+                stream.write(",")
+            stream.write(json.dumps(key) + ":")
+            stream_json(stream, part)
+        stream.write("}")
+    elif isinstance(value, (list, tuple, np.ndarray)) or hasattr(value, "__next__"):
+        stream.write("[")
+        for number, part in enumerate(value):
+            if number:
+                stream.write(",")
+            stream_json(stream, part)
+        stream.write("]")
+    else:
+        if isinstance(value, np.generic):
+            value = value.item()
+        stream.write(json.dumps(value, allow_nan=False))
 
 
 def build_model(config, statistics):
@@ -119,66 +146,55 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
     device = cfg["training"]["device"]
     if device == "cuda":
         torch.cuda.manual_seed_all(cfg["training"]["seed"])
-    binding, rows, x, distances, labels = load(cache)
+    corpus = load(cache)
+    binding, rows, labels = corpus.binding, corpus.rows, corpus.labels
     target = cfg["training"]["target"]
     column = {"rootmean": 0, "z": 1}[target]
     teacher_types = selected_teacher_types(rows, target)
     validate_target_tensor(rows, labels[:, column], target)
-    ix_train = np.array(
-        [
-            i
-            for i, r in enumerate(rows)
-            if r["split"] == "train" and r["primary_eligible"] and np.isfinite(labels[i, column])
-        ],
-        dtype=np.int64,
-    )
-    ix_validation = np.array(
-        [
-            i
-            for i, r in enumerate(rows)
-            if r["split"] == "validation"
-            and r["primary_eligible"]
-            and np.isfinite(labels[i, column])
-        ],
-        dtype=np.int64,
-    )
-    ix_validation_raw = np.array(
-        [i for i, r in enumerate(rows) if r["split"] == "validation"], dtype=np.int64
-    )
+    valid = corpus.eligible & np.isfinite(labels[:, column])
+    ix_train = np.flatnonzero((corpus.splits == 0) & valid)
+    ix_validation = np.flatnonzero((corpus.splits == 1) & valid)
+    ix_validation_raw = np.flatnonzero(corpus.splits == 1)
     if not len(ix_train) or not len(ix_validation):
         raise ValueError("nonempty eligible train and unexposed validation required")
-    families = {}
-    for i in ix_train:
-        families.setdefault(rows[i]["group"], []).append(float(labels[i, column]))
-    constant = float(np.mean([np.mean(values) for values in families.values()]))
+    codes = corpus.groups[ix_train]
+    family_codes, seen_codes = [], set()
+    for code in codes:
+        if int(code) not in seen_codes:
+            family_codes.append(int(code))
+            seen_codes.add(int(code))
+    order = np.argsort(codes, kind="stable")
+    sorted_codes = codes[order]
+    starts = np.searchsorted(sorted_codes, family_codes, side="left")
+    ends = np.searchsorted(sorted_codes, family_codes, side="right")
+    group_flat_sorted = ix_train[order]
+    group_indices = [group_flat_sorted[first:last] for first, last in zip(starts, ends)]
+    families = [corpus.families[code] for code in family_codes]
+    sums = np.zeros(len(corpus.families), dtype=np.float64)
+    counts = np.zeros(len(corpus.families), dtype=np.int64)
+    for first in range(0, len(ix_train), 4096):
+        sub = ix_train[first : first + 4096]
+        np.add.at(sums, corpus.groups[sub], labels[sub, column].astype(np.float64))
+        np.add.at(counts, corpus.groups[sub], 1)
+    constant = float(np.mean(sums[family_codes] / counts[family_codes]))
+    del codes, order, sorted_codes
+    statistics, fitted = training_statistics(corpus, ix_train, column)
     if scale_path is not None:
         from .scaled_model import validate_statistics
 
         statistics = validate_statistics(json.loads(Path(scale_path).read_text()))
-    else:
-        mu = distances[ix_train].mean(axis=0, dtype=np.float64).astype(np.float32)
-        sigma = distances[ix_train].std(axis=0, dtype=np.float64).astype(np.float32)
-        sigma = np.maximum(sigma, np.float32(1e-4))
-        statistics = {"mu_f32": mu.tolist(), "sigma_f32": sigma.tolist()}
-    if cfg["model"]["architecture"] == "distance_residual":
-        distance_fit = {"a": cfg["model"]["distance_a"], "b": cfg["model"]["distance_b"]}
-    else:
-        difference = (distances[ix_train, 1] - distances[ix_train, 0]).astype(np.float64)
-        design = np.column_stack([np.ones(len(ix_train)), difference])
-        fit, *_ = np.linalg.lstsq(design, labels[ix_train, column].astype(np.float64), rcond=None)
-        distance_fit = {"a": float(np.float32(fit[0])), "b": float(np.float32(fit[1]))}
+    distance_fit = (
+        {"a": cfg["model"]["distance_a"], "b": cfg["model"]["distance_b"]}
+        if cfg["model"]["architecture"] == "distance_residual"
+        else fitted
+    )
     model = build_model(cfg["model"], statistics).to(device)
     initial_state = {k: v.detach().cpu().clone() for k, v in model.state_dict().items()}
-    # Keep the corpus mapped on CPU. Only bounded batches enter GPU memory.
-    tx = torch.from_numpy(x)
-    td = torch.from_numpy(distances)
     if device == "cuda":
         free, total = torch.cuda.mem_get_info()
         if free <= 2 * 1024**3:
             raise RuntimeError("CUDA host/display reserve leaves no training window")
-    # Rust has already ordered the two views STM/opponent in the mapped tensor.
-    side = torch.ones(len(rows), dtype=torch.long)
-    targets = torch.from_numpy(labels[:, column].copy())
     generator = torch.Generator().manual_seed(cfg["training"]["seed"] + 1)
     optimizers = {
         "adam": torch.optim.Adam,
@@ -218,9 +234,6 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
     )
     samples, best_step, best_loss, best_state = 0, 0, float("inf"), initial_state
     curve, diagnostics, diagnostic_curve = [], [], []
-    group_indices = [
-        np.array([i for i in ix_train if rows[i]["group"] == family]) for family in families
-    ]
     group_lengths = np.array([len(group) for group in group_indices], dtype=np.int64)
     group_offsets = np.concatenate([[0], np.cumsum(group_lengths)[:-1]])
     group_flat = np.concatenate(group_indices)
@@ -286,7 +299,7 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
     best_exposure = None
     row_loss_weights = np.zeros(len(rows), dtype=np.float32)
     row_loss_weights[ix_train] = loss_weights(
-        [rows[i]["group"] for i in ix_train],
+        corpus.groups[ix_train],
         cfg["training"]["loss_weighting"],
     )
     objective_weights = torch.as_tensor(row_loss_weights)
@@ -340,14 +353,18 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
         if device == "cuda" and torch.cuda.mem_get_info()[0] < 2 * 1024**3:
             raise RuntimeError("CUDA reserve exhausted")
         tick = time.monotonic()
-        index = torch.as_tensor(index, dtype=torch.long)
-        result = tx[index].to(device), td[index].to(device), side[index].to(device)
+        features, distances, _ = corpus.batch(index)
+        result = (
+            torch.from_numpy(features).to(device),
+            torch.from_numpy(distances).to(device),
+            torch.ones(len(index), dtype=torch.long, device=device),
+        )
         sync()
         phase_seconds["transfer"] += time.monotonic() - tick
         return result
 
     def predict(indices, kind):
-        values = []
+        values = mapped_values(len(indices))
         for first in range(0, len(indices), cfg["evaluation"]["batch_size"]):
             sub = indices[first : first + cfg["evaluation"]["batch_size"]]
             inputs = batch(sub)
@@ -357,57 +374,69 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
             sync()
             phase_seconds["inference"] += time.monotonic() - tick
             tick = time.monotonic()
-            values.append(result.cpu().numpy())
+            values[first : first + len(sub)] = result.cpu().numpy()
             phase_seconds["transfer"] += time.monotonic() - tick
             completed_forward_rows[kind] += len(sub)
-        return np.concatenate(values)
+        return values
 
     def summarize(indices, values):
-        selected = [rows[i] for i in indices]
-        report = metrics(selected, values, target, constant)
-        scope = hashlib.sha256(np.asarray(indices, dtype="<i8").tobytes()).hexdigest()
-        grouped = {}
-        for i, row in enumerate(selected):
-            grouped.setdefault(row["group"], []).append(i)
-        ordered = sorted(grouped.items())
-        if scope not in measurement_sets:
-            measurement_sets[scope] = {
-                "groups": [group for group, _ in ordered],
-                "group_rows": [len(local) for _, local in ordered],
-                "input_indices_sha256": scope,
-                "rows": len(indices),
-                "dataset_sha": binding["dataset_sha"],
-            }
-            raw = distances[indices]
+        scope = hashlib.sha256(np.asarray(indices, dtype="<i8")).hexdigest()
+        measured = MeasurementAccumulator(target, constant)
+        reference = MeasurementAccumulator(target, constant)
+        group_distance, group_constant = {}, {}
+        for first in range(0, len(indices), cfg["evaluation"]["batch_size"]):
+            sub = indices[first : first + cfg["evaluation"]["batch_size"]]
+            _, raw, local_labels = corpus.batch(sub)
             baseline = np.tanh(
                 np.float32(distance_fit["a"])
                 + np.float32(distance_fit["b"]) * (raw[:, 1] - raw[:, 0])
             )
+            for j, (i, row) in enumerate(zip(sub, rows.iter_indices(sub))):
+                measured.add(row, values[first + j])
+                reference.add(row, baseline[j])
+                for store, error in (
+                    (group_distance, (baseline[j] - local_labels[j, column]) ** np.float32(2)),
+                    (
+                        group_constant,
+                        (np.float32(constant) - local_labels[j, column]) ** np.float32(2),
+                    ),
+                ):
+                    pair = store.setdefault(row["group"], [0.0, 0])
+                    pair[0] += float(error)
+                    pair[1] += 1
+        ordered = sorted(measured.groups)
+        if scope not in measurement_sets:
+            measurement_sets[scope] = {
+                "groups": ordered,
+                "group_rows": [measured.groups[g]["rows"] for g in ordered],
+                "input_indices_sha256": scope,
+                "rows": len(indices),
+                "dataset_sha": binding["dataset_sha"],
+            }
             reference_metrics[scope] = {
-                "distance": metrics(selected, baseline, target, constant),
+                "distance": reference.result(),
                 "constant": constant,
                 "group_distance_mse_f32": [
-                    float(np.mean((baseline[local] - labels[indices[local], column]) ** 2))
-                    for _, local in ordered
+                    float(np.float32(group_distance[g][0] / group_distance[g][1])) for g in ordered
                 ],
                 "group_constant_mse_f32": [
-                    float(np.mean((constant - labels[indices[local], column]) ** 2))
-                    for _, local in ordered
+                    float(np.float32(group_constant[g][0] / group_constant[g][1])) for g in ordered
                 ],
             }
             write(output / "measurement-sets.json", measurement_sets)
             write(output / "reference-metrics.json", reference_metrics)
-        group_reports = [
-            metrics([selected[i] for i in local], values[local], target, constant)
-            for _, local in ordered
-        ]
+        reports = [measured.result(g) for g in ordered]
         vectors = {
-            field: [group[field] if group[field] is not None else np.nan for group in group_reports]
+            field: [r[field] if r[field] is not None else np.nan for r in reports]
             for field in ("target_mse", "z_sign_accuracy", "saturation_fraction")
         }
         vectors["bias"] = [
-            float(np.mean(values[local] - labels[indices[local], column])) for _, local in ordered
+            measured.groups[g]["bias_sum"] / measured.groups[g]["bias_rows"]
+            if measured.groups[g]["bias_rows"]
+            else np.nan
+            for g in ordered
         ]
+        report = measured.result()
         report["groups"] = {
             "encoding": "little-endian-f32-base64; NaN means missing, never zero",
             "order_ref": scope,
@@ -417,7 +446,11 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
             },
         }
         report["distance_ref"] = scope
-        report["bias"] = float(np.mean(values - labels[indices, column]))
+        report["bias"] = (
+            measured.totals["bias_sum"] / measured.totals["bias_rows"]
+            if measured.totals["bias_rows"]
+            else None
+        )
         return report
 
     subsets = {
@@ -453,7 +486,7 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
     if scheduled:
         for name, indices in [("train", ix_train), ("validation", ix_validation_raw)]:
             with gzip.open(output / f"{name}-order.json.gz", "wt") as stream:
-                json.dump([rows[i]["id"] for i in indices], stream)
+                stream_json(stream, (row["id"] for row in rows.iter_indices(indices)))
 
     def save_checkpoint(step):
         tick = time.monotonic()
@@ -477,7 +510,11 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
                 )
                 ptrain = predict(current_train_eval, "full_selector")
                 praw = predict(evaluation_validation, "full_selector")
-                pval = praw[primary_in_raw] if scheduled else praw
+                pval = (
+                    select_values(praw, primary_in_raw, cfg["evaluation"]["batch_size"])
+                    if scheduled
+                    else praw
+                )
                 record = {
                     **position(),
                     "samples": samples,
@@ -506,11 +543,21 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
                 curve.append(curve_summary(record, "full_selector"))
                 last_completed_point = {"kind": "full_selector", **position()}
                 append_record(observation_log, {"kind": "full_selector", **record})
-                reused.update({int(i): float(v) for i, v in zip(current_train_eval, ptrain)})
-                reused.update({int(i): float(v) for i, v in zip(ix_validation, pval)})
+                for indices, values, diagnostic_indices in (
+                    (current_train_eval, ptrain, diag_train),
+                    (ix_validation, pval, diag_val),
+                ):
+                    positions = np.searchsorted(indices, diagnostic_indices)
+                    for i, at in zip(diagnostic_indices, positions):
+                        if at < len(indices) and indices[at] == i:
+                            reused[int(i)] = float(values[at])
                 if scheduled:
-                    ptrain.astype("<f4").tofile(output / f"train-step{step}.f32")
-                    praw.astype("<f4").tofile(output / f"validation-step{step}.f32")
+                    write_values(
+                        ptrain, output / f"train-step{step}.f32", cfg["evaluation"]["batch_size"]
+                    )
+                    write_values(
+                        praw, output / f"validation-step{step}.f32", cfg["evaluation"]["batch_size"]
+                    )
                 phase_seconds["full_selector"] += time.monotonic() - tick
             if diagnostic:
                 tick = time.monotonic()
@@ -580,10 +627,10 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
                 "row_count_order": "immutable loaded cache order",
                 "attempted_step": attempted_step,
                 "optimizer_steps": completed_step,
-                "training_indices": ix_train.tolist(),
+                "training_indices": ix_train,
                 "training_rows": len(ix_train),
-                "row_counts": sampled_rows.tolist(),
-                "attempted_row_counts": attempted_rows.tolist(),
+                "row_counts": sampled_rows,
+                "attempted_row_counts": attempted_rows,
                 "training_row_min_visits": int(sampled_rows[ix_train].min()),
                 "training_row_max_visits": int(sampled_rows[ix_train].max()),
                 "family_counts": {
@@ -680,7 +727,9 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
                     phase_seconds["inference"] += time.monotonic() - tick
                     completed_forward_rows["train"] += len(index)
                     per_row_loss = torch.nn.functional.mse_loss(
-                        prediction, targets[ix].to(device), reduction="none"
+                        prediction,
+                        torch.from_numpy(labels[index, column].copy()).to(device),
+                        reduction="none",
                     )
                     loss = (per_row_loss * objective_weights[ix].to(device)).mean()
                     if not torch.isfinite(loss):
@@ -768,7 +817,8 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
         try:
             torch.onnx.export(
                 model,
-                (tx[:1].cpu(), td[:1].cpu(), side[:1].cpu()),
+                tuple(torch.from_numpy(v) for v in corpus.batch([0])[:2])
+                + (torch.ones(1, dtype=torch.long),),
                 str(output / "best.onnx"),
                 input_names=["features", "distance", "side"],
                 output_names=["value"],
@@ -790,7 +840,8 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
             phase_seconds["export"] += time.monotonic() - tick
             persist()
     freeze = {
-        "schema": "quoridor-candidate-freeze-v1",
+        "schema": "quoridor-candidate-freeze-v2",
+        "artifacts_sha256": {name: sha(output / name) for name in FROZEN_ARTIFACTS},
         "best_step": best_step,
         "best_validation_mse": best_loss,
         "selected_exposure": best_exposure,
@@ -807,6 +858,7 @@ def train(cache, output, config_path=None, steps=None, *, scale_path=None):
         "test_opened": False,
         "wall_seconds": time.monotonic() - start,
     }
+    corpus.verify_binding()
     write(output / "freeze.json", freeze)
     persist()
     return freeze
@@ -847,76 +899,215 @@ def _curve_csv(curves, path):
             )
 
 
-def test(cache, training, output):
-    import torch
+FROZEN_ARTIFACTS = (
+    "config.json",
+    "scale.json",
+    "data.json",
+    "cache-binding.json.gz",
+    "initial.pt",
+    "best.pt",
+    "initial-model/manifest.json",
+    "initial-model/weights.f32",
+    "initial-model/training-target.json",
+    "best-model/manifest.json",
+    "best-model/weights.f32",
+    "best-model/training-target.json",
+)
 
+
+def verify_freeze(training):
+    training = Path(training)
+    freeze = json.loads((training / "freeze.json").read_text())
+    if freeze.get("schema") != "quoridor-candidate-freeze-v2":
+        raise ValueError("unsupported freeze; historical guarantees cannot be inferred")
+    digests = freeze.get("artifacts_sha256")
+    if not isinstance(digests, dict) or set(digests) != set(FROZEN_ARTIFACTS):
+        raise ValueError("freeze missing required evaluation artifact bindings")
+    for name, digest in digests.items():
+        if sha(training / name) != digest:
+            raise ValueError("frozen evaluation artifact changed: " + name)
+    if (
+        digests["best-model/manifest.json"] != freeze.get("model_sha")
+        or digests["best-model/weights.f32"] != freeze.get("weights_sha")
+        or digests["initial-model/weights.f32"] != freeze.get("initial_weights_sha")
+    ):
+        raise ValueError("freeze native artifact identity differs")
+    with gzip.open(training / "cache-binding.json.gz", "rt") as stream:
+        binding = json.load(stream)
+    data = json.loads((training / "data.json").read_text())
+    if (
+        binding["dataset_sha"] != freeze.get("dataset_sha")
+        or data["binding"]["dataset_sha"] != binding["dataset_sha"]
+    ):
+        raise ValueError("freeze training input identity differs")
+    return freeze
+
+
+def mapped_values(count, dtype="<f4"):
+    # Anonymous disk-backed arrays bound prediction RAM even for full selectors.
+    stream = tempfile.TemporaryFile()
+    stream.truncate(count * np.dtype(dtype).itemsize)
+    result = np.memmap(stream, dtype=dtype, mode="r+", shape=(count,))
+    stream.close()
+    return result
+
+
+def select_values(values, indices, size):
+    result = mapped_values(len(indices))
+    for first in range(0, len(indices), size):
+        result[first : first + size] = values[indices[first : first + size]]
+    return result
+
+
+def write_values(values, path, size):
+    with Path(path).open("wb") as stream:
+        for first in range(0, len(values), size):
+            np.asarray(values[first : first + size], dtype="<f4").tofile(stream)
+
+
+def training_statistics(corpus, indices, column, size=4096):
+    total = np.zeros(2, dtype=np.float64)
+    for _, (_, d, _) in corpus.chunks(indices, size):
+        total += d.sum(axis=0, dtype=np.float64)
+    mu64 = total / len(indices)
+    squared = np.zeros(2, dtype=np.float64)
+    # Incremental QR preserves the least-squares objective without a full design matrix.
+    r = np.empty((0, 2), dtype=np.float64)
+    projected = np.empty(0, dtype=np.float64)
+    for _, (_, d, y) in corpus.chunks(indices, size):
+        squared += ((d.astype(np.float64) - mu64) ** 2).sum(axis=0)
+        difference = (d[:, 1] - d[:, 0]).astype(np.float64)
+        design = np.column_stack((np.ones(len(d)), difference))
+        q, r = np.linalg.qr(np.vstack((r, design)), mode="reduced")
+        projected = q.T @ np.concatenate((projected, y[:, column].astype(np.float64)))
+    fit, *_ = np.linalg.lstsq(r, projected, rcond=np.finfo(np.float64).eps * max(len(indices), 2))
+    return (
+        {
+            "mu_f32": mu64.astype(np.float32).tolist(),
+            "sigma_f32": np.maximum(
+                np.sqrt(squared / len(indices)).astype(np.float32), np.float32(1e-4)
+            ).tolist(),
+        },
+        {"a": float(np.float32(fit[0])), "b": float(np.float32(fit[1]))},
+    )
+
+
+def verify_native_parameters(path, state):
+    native = np.memmap(path, dtype="<f4", mode="r")
+    offset = 0
+    for key in ("ft.weight", "ft.bias", "h.weight", "h.bias", "out.weight", "out.bias"):
+        values = state[key].detach().numpy().reshape(-1)
+        for first in range(0, len(values), 4096):
+            part = values[first : first + 4096]
+            if not np.array_equal(part, native[offset + first : offset + first + len(part)]):
+                raise ValueError("frozen checkpoint/native parameters differ")
+        offset += len(values)
+    if offset != len(native):
+        raise ValueError("frozen native parameter count differs")
+
+
+def test(cache, training, output):
     training = Path(training)
     freeze_path = training / "freeze.json"
     freeze_sha = sha(freeze_path)
-    freeze = json.loads(freeze_path.read_text())
-    if (
-        sha(training / "best-model" / "manifest.json") != freeze["model_sha"]
-        or sha(training / "best-model" / "weights.f32") != freeze["weights_sha"]
-    ):
-        raise ValueError("frozen candidate changed")
-    binding, rows, x, distance, labels = load(cache, allow_test=True)
-    test_index = np.array([i for i, r in enumerate(rows) if r["split"] == "test"], dtype=np.int64)
-    if not len(test_index):
-        raise ValueError("test split empty")
+    # No model construction or forward may precede complete attribution checks.
+    freeze = verify_freeze(training)
+    corpus = load(cache, allow_test=True)
     cfg = json.loads((training / "config.json").read_text())
     data = json.loads((training / "data.json").read_text())
-    torch.set_num_threads(cfg["training"]["threads"])
-    torch.set_num_interop_threads(cfg["training"]["threads"])
     stats = json.loads((training / "scale.json").read_text())
+    target = cfg["training"]["target"]
+    column = {"rootmean": 0, "z": 1}[target]
+    validate_target_tensor(corpus.rows, corpus.labels[:, column], target)
+    test_index = np.flatnonzero(corpus.splits == 2)
+    if not len(test_index):
+        raise ValueError("test split empty")
+    import torch
+
+    torch.set_num_threads(cfg["training"]["threads"])
+    if torch.get_num_interop_threads() != cfg["training"]["threads"]:
+        torch.set_num_interop_threads(cfg["training"]["threads"])
     model = build_model(cfg["model"], stats)
-    tx = torch.from_numpy(x[test_index])
-    td = torch.from_numpy(distance[test_index])
-    side = torch.ones(len(test_index), dtype=torch.long)
     output = Path(output)
     output.mkdir(parents=True)
     predictions, reports = {}, {}
-    selected_rows = [rows[i] for i in test_index]
-    primary = np.array([i for i, r in enumerate(selected_rows) if r["primary_eligible"]])
-    weight_predictions = {}
-    for name in ["initial", "best"]:
+    primary_count = int(corpus.eligible[test_index].sum())
+    # Verify checkpoint/native parameter correspondence before sharing model forwards.
+    checkpoint_predictions = {}
+    size = cfg["evaluation"]["batch_size"]
+    for name in ("initial", "best"):
+        digest = freeze["artifacts_sha256"][name + "-model/weights.f32"]
         cp = torch.load(training / (name + ".pt"), map_location="cpu", weights_only=True)
-        model.load_state_dict(cp["model"])
-        weight_digest = sha(training / (name + "-model") / "weights.f32")
-        if weight_digest not in weight_predictions:
+        if (
+            cp["model_config"] != cfg["model"]
+            or cp["scale"] != stats
+            or cp["target"] != target
+            or cp["dataset_sha"] != freeze["dataset_sha"]
+        ):
+            raise ValueError("checkpoint descriptor differs from frozen evaluation configuration")
+        verify_native_parameters(training / (name + "-model/weights.f32"), cp["model"])
+        if digest not in checkpoint_predictions:
+            model.load_state_dict(cp["model"])
             model.eval()
+            values = mapped_values(len(test_index))
             with torch.inference_mode():
-                weight_predictions[weight_digest] = model(tx, td, side).numpy()
-        predictions[name] = weight_predictions[weight_digest]
+                for first in range(0, len(test_index), size):
+                    sub = test_index[first : first + size]
+                    x, d, _ = corpus.batch(sub)
+                    values[first : first + len(sub)] = model(
+                        torch.from_numpy(x),
+                        torch.from_numpy(d),
+                        torch.ones(len(sub), dtype=torch.long),
+                    ).numpy()
+            checkpoint_predictions[digest] = values
+        predictions[name] = checkpoint_predictions[digest]
+    predictions["distance"] = mapped_values(len(test_index))
+    predictions["constant"] = mapped_values(len(test_index), "<f8")
     fit = data["distance_fit"]
-    predictions["distance"] = np.tanh(
-        fit["a"] + fit["b"] * (distance[test_index, 1] - distance[test_index, 0])
-    )
-    predictions["constant"] = np.full(len(test_index), data["constant"])
-    for name, pred in predictions.items():
+    accumulators = {
+        name: (
+            MeasurementAccumulator(target, data["constant"]),
+            MeasurementAccumulator(target, data["constant"]),
+        )
+        for name in predictions
+    }
+    for first in range(0, len(test_index), size):
+        sub = test_index[first : first + size]
+        _, d, _ = corpus.batch(sub)
+        predictions["distance"][first : first + len(sub)] = np.tanh(
+            fit["a"] + fit["b"] * (d[:, 1] - d[:, 0])
+        )
+        predictions["constant"][first : first + len(sub)] = data["constant"]
+        for j, row in enumerate(corpus.rows.iter_indices(sub)):
+            for name, (all_rows, unexposed) in accumulators.items():
+                value = predictions[name][first + j]
+                all_rows.add(row, value)
+                if row["primary_eligible"]:
+                    unexposed.add(row, value)
+    for name, (all_rows, unexposed) in accumulators.items():
         reports[name] = {
-            "all": metrics(selected_rows, pred, cfg["training"]["target"], data["constant"]),
-            "unexposed": metrics(
-                [selected_rows[i] for i in primary],
-                pred[primary],
-                cfg["training"]["target"],
-                data["constant"],
-            )
-            if len(primary)
-            else None,
+            "all": all_rows.result(),
+            "unexposed": unexposed.result() if primary_count else None,
         }
+    # numpy's zip writer streams array storage rather than constructing a combined tensor.
     np.savez(output / "predictions.npz", **predictions)
     result = {
         "freeze_sha": freeze_sha,
         "candidate_sha": freeze["weights_sha"],
-        "rows": len(selected_rows),
-        "primary_rows": len(primary),
+        "checkpoint_sha256": {
+            name: freeze["artifacts_sha256"][name + ".pt"] for name in ("initial", "best")
+        },
+        "evaluation_cache_binding": corpus.binding,
+        "rows": len(test_index),
+        "primary_rows": primary_count,
         "metrics": reports,
-        "unique_model_forwards": len(weight_predictions),
+        "unique_model_forwards": len(checkpoint_predictions),
         "test_reused_for_selection": False,
     }
+    if sha(freeze_path) != freeze_sha or verify_freeze(training) != freeze:
+        raise ValueError("frozen evaluation inputs mutated during test")
+    corpus.verify_binding()
     write(output / "result.json", result)
-    if sha(freeze_path) != freeze_sha:
-        raise ValueError("freeze mutated during test")
     return result
 
 

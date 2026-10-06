@@ -94,6 +94,7 @@ fn main() {
     println!("cargo:rustc-link-lib=dl");
     for p in [
         "native/ort.cpp",
+        "native/work_counts.h",
         "native/aoti.cpp",
         "native/tensorrt.cpp",
         "native/onnxruntime_c_api.h",

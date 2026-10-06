@@ -111,68 +111,74 @@ fn run() -> Result<()> {
     let mut cpu = OrtBackend::new(&cfg.model, &cfg.library, &cfg.model_sha)?;
     let mut gpu = TensorRtBackend::new(&cfg.engine, &cfg.model_sha, 8, 0, true)?;
     let init = start.elapsed().as_secs_f64();
-    let mut nn_cpu = 0;
-    let mut nn_gpu = 0;
     let mut maxabs = 0f32;
     let mut checks = 0;
-    for b in 1..=8 {
-        let a = cpu.infer(&inputs[..b])?;
-        let z = gpu.infer(&inputs[..b])?;
-        nn_cpu += b;
-        nn_gpu += b;
-        for (a, z) in a.iter().zip(&z) {
-            for (x, y) in a
-                .logits
-                .iter()
-                .chain([&a.value])
-                .zip(z.logits.iter().chain([&z.value]))
-            {
-                let diff = (x - y).abs();
-                maxabs = maxabs.max(diff);
-                checks += 1;
-                if !x.is_finite() || !y.is_finite() || diff > cfg.abs_tol + cfg.rel_tol * x.abs() {
-                    return Err(format!("numeric parity B{b}: {x} {y}").into());
+    let mut roots = Vec::new();
+    let result: Result<()> = (|| {
+        for b in 1..=8 {
+            let a = cpu.infer(&inputs[..b])?;
+            let z = gpu.infer(&inputs[..b])?;
+            for (a, z) in a.iter().zip(&z) {
+                for (x, y) in a
+                    .logits
+                    .iter()
+                    .chain([&a.value])
+                    .zip(z.logits.iter().chain([&z.value]))
+                {
+                    let diff = (x - y).abs();
+                    maxabs = maxabs.max(diff);
+                    checks += 1;
+                    if !x.is_finite()
+                        || !y.is_finite()
+                        || diff > cfg.abs_tol + cfg.rel_tol * x.abs()
+                    {
+                        return Err(format!("numeric parity B{b}: {x} {y}").into());
+                    }
                 }
             }
         }
-    }
-    let mut roots = Vec::new();
-    for (i, c) in contexts.iter().enumerate() {
-        let (a, na) = root(c, &mut cpu)?;
-        let (b, nb) = root(c, &mut gpu)?;
-        nn_cpu += na;
-        nn_gpu += nb;
-        let sa = a.snapshot();
-        let sb = b.snapshot();
-        for s in [&sa, &sb] {
-            if s.root_visits != 64
-                || s.edges.iter().map(|e| e.visits as u64).sum::<u64>() != 63
-                || !s.root_mean.is_finite()
-                || s.action.is_none_or(|id| !c.legal_ids().contains(&id))
-            {
-                return Err("root qualification accounting/legal".into());
+        for (i, c) in contexts.iter().enumerate() {
+            let (a, na) = root(c, &mut cpu)?;
+            let (b, nb) = root(c, &mut gpu)?;
+            let sa = a.snapshot();
+            let sb = b.snapshot();
+            for s in [&sa, &sb] {
+                if s.root_visits != 64
+                    || s.edges.iter().map(|e| e.visits as u64).sum::<u64>() != 63
+                    || !s.root_mean.is_finite()
+                    || s.action.is_none_or(|id| !c.legal_ids().contains(&id))
+                {
+                    return Err("root qualification accounting/legal".into());
+                }
             }
+            let policy_l1: f64 = sa
+                .edges
+                .iter()
+                .map(|e| {
+                    let other = sb
+                        .edges
+                        .iter()
+                        .find(|o| o.action == e.action)
+                        .map(|o| o.visits)
+                        .unwrap_or(0);
+                    (f64::from(e.visits) - f64::from(other)).abs() / 63.
+                })
+                .sum();
+            roots.push(serde_json::json!({"fixture":i,"prefix":cfg.roots[i],"CPU":{"action":sa.action,"root_mean":sa.root_mean,"root_visits":sa.root_visits,"nn":na,"terminal_no_nn":sa.terminal_no_nn},"GPU":{"action":sb.action,"root_mean":sb.root_mean,"root_visits":sb.root_visits,"nn":nb,"terminal_no_nn":sb.terminal_no_nn},"policy_l1":policy_l1,"same_action":sa.action==sb.action,"all_tree_bitexact_gate":false}));
         }
-        let policy_l1: f64 = sa
-            .edges
-            .iter()
-            .map(|e| {
-                let other = sb
-                    .edges
-                    .iter()
-                    .find(|o| o.action == e.action)
-                    .map(|o| o.visits)
-                    .unwrap_or(0);
-                (f64::from(e.visits) - f64::from(other)).abs() / 63.
-            })
-            .sum();
-        roots.push(serde_json::json!({"fixture":i,"prefix":cfg.roots[i],"CPU":{"action":sa.action,"root_mean":sa.root_mean,"root_visits":sa.root_visits,"nn":na,"terminal_no_nn":sa.terminal_no_nn},"GPU":{"action":sb.action,"root_mean":sb.root_mean,"root_visits":sb.root_visits,"nn":nb,"terminal_no_nn":sb.terminal_no_nn},"policy_l1":policy_l1,"same_action":sa.action==sb.action,"all_tree_bitexact_gate":false}));
-    }
+        Ok(())
+    })();
+    let cpu_work = cpu.counters();
+    let gpu_work = gpu.counters();
+    let physical = cpu_work
+        .physical_rows()
+        .zip(gpu_work.physical_rows())
+        .and_then(|(a, b)| a.checked_add(b));
     serde_json::to_writer_pretty(
         File::create(cfg.output)?,
-        &serde_json::json!({"task":"resident-teacher-273-qualification-v1","schema":"teacher-qualification-v1","status":"FINITE_PASS","abs_tol":cfg.abs_tol,"rel_tol":cfg.rel_tol,"max_abs":maxabs,"float_checks":checks,"CPU_NN":nn_cpu,"GPU_logical_NN":nn_gpu,"GPU_warm_NN":36,"physical_NN":nn_cpu+nn_gpu+36,"initialization_seconds":init,"whole_seconds":start.elapsed().as_secs_f64(),"roots":roots,"model_SHA":cfg.model_sha}),
+        &serde_json::json!({"task":"resident-teacher-273-qualification-v1","schema":"teacher-qualification-v1","status":if result.is_ok() { "FINITE_PASS" } else { "FAILED" },"failure":result.as_ref().err().map(|e| e.to_string()),"abs_tol":cfg.abs_tol,"rel_tol":cfg.rel_tol,"max_abs":maxabs,"float_checks":checks,"CPU_NN":cpu_work.logical_rows,"GPU_logical_NN":gpu_work.logical_rows,"GPU_warm_NN":gpu_work.warm_rows,"physical_NN":physical,"CPU_work":quoridor_runner::runtime::inference_work(cpu_work),"GPU_work":quoridor_runner::runtime::inference_work(gpu_work),"initialization_seconds":init,"whole_seconds":start.elapsed().as_secs_f64(),"roots":roots,"model_SHA":cfg.model_sha}),
     )?;
-    Ok(())
+    result
 }
 fn root(c: &SigmaContext, backend: &mut dyn InferenceBackend) -> Result<(Search, usize)> {
     let mut search = Search::new(c.clone(), 1, 64).map_err(|e| format!("{e:?}"))?;

@@ -2,16 +2,15 @@
 
 This project keeps generated state out of the host checkout and separates caches by purpose.
 
-| Data | Location | Persistence |
-| --- | --- | --- |
-| Managed Git worktrees | `${containerWorkspaceFolder}/.worktree` | `volume` mode |
-| Research models/checkpoints/inputs | `${containerWorkspaceFolder}/.worktree/assets` | same worktrees named volume; independent of checkouts |
-| Shared Beads database | `${containerWorkspaceFolder}/.worktree/.beads-state` | worktrees named volume; independent of individual worktrees |
-| Beads full database backup | `${containerWorkspaceFolder}/.artifacts/beads-backup` | host checkout, Git-ignored; not protection against host loss |
-| Godot editor/import cache | `/home/vscode/.cache/godot` | named volume |
-| Inference models and framework downloads | `/home/vscode/.cache/inference` | named volume only in NVIDIA mode |
-| Training Python, uv packages and virtual environment | `$INFERENCE_CACHE_DIR/python`, `$INFERENCE_CACHE_DIR/uv`, `$INFERENCE_CACHE_DIR/envs/quoridor-training` | same named volume |
-| Rust toolchains / Cargo / wasm-pack cache | `/usr/local/rustup`, `/usr/local/cargo` | container-local; restored by Feature and setup script |
+| Data                                                 | Location                                                                                                | Persistence                                                  |
+| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| Managed Git worktrees                                | `${containerWorkspaceFolder}/.worktree`                                                                 | `volume` mode                                                |
+| Research models/checkpoints/inputs                   | `${containerWorkspaceFolder}/.worktree/assets`                                                          | same worktrees named volume; independent of checkouts        |
+| Shared Beads database                                | `${containerWorkspaceFolder}/.worktree/.beads-state`                                                    | worktrees named volume; independent of individual worktrees  |
+| Beads full database backup                           | `${containerWorkspaceFolder}/.artifacts/beads-backup`                                                   | host checkout, Git-ignored; not protection against host loss |
+| Inference models and framework downloads             | `/home/vscode/.cache/inference`                                                                         | named volume only in NVIDIA mode                             |
+| Training Python, uv packages and virtual environment | `$INFERENCE_CACHE_DIR/python`, `$INFERENCE_CACHE_DIR/uv`, `$INFERENCE_CACHE_DIR/envs/quoridor-training` | same named volume                                            |
+| Rust toolchains / Cargo / wasm-pack cache            | `/usr/local/rustup`, `/usr/local/cargo`                                                                 | container-local; restored by Feature and setup script        |
 
 ## Worktrees
 
@@ -42,11 +41,11 @@ Use `scripts/dev/research-storage.py` with a directed roots/reservations manifes
 
 Reproducible, unused binaries, Wasm builds, build caches and duplicate source copies are disposable. Preserve uncommitted source, active runtime files and the minimum shared inputs/models/dependencies needed for reproduction. Account for Git storage and temporary migration copies within the existing research storage limit. See `docs/development/ai-research-experiments.md` for the current rules.
 
-Godot remains on software rendering (`LIBGL_ALWAYS_SOFTWARE=1`). NVIDIA access is for inference compute, not editor or Xvfb rendering.
+Godot is not a project requirement. Its previous installed tools and cache volume are left untouched, while new containers no longer mount or prepare that cache. NVIDIA access is for inference/training compute; browser and Xvfb rendering keep their own settings.
 
 ## Toolchain updates
 
-The postCreate hook runs .devcontainer/update-toolchain.sh after container creation or rebuild. It updates Godot 4.x to the latest stable release, Node.js to the latest LTS, and Codex CLI, uv, gdtoolkit, and VS Code CLI to their current stable releases. These versions can change between container builds; the exact installed versions and update time are recorded in /home/vscode/.local/share/godot-devcontainer/toolchain.json.
+The postCreate hook runs .devcontainer/update-toolchain.sh after container creation or rebuild. It updates Node.js to the latest LTS, and Codex CLI, uv, and VS Code CLI to their current stable releases. These versions can change between container builds; the exact installed versions and update time are recorded in /home/vscode/.local/share/quoridor/toolchain.json.
 
 To update the tools in an existing container, run:
 
@@ -56,6 +55,6 @@ The updater does not run on each container start.
 
 ## Rust and Python setup
 
-Rust uses the official Dev Container Feature. `scripts/dev/setup-project.sh` also installs the environment into an existing container without rebuilding. Add `--update` to update Rust stable, wasm-pack, managed Python and training dependencies. Python packages are recorded in `tools/training/uv.lock`; check and commit its changes after successful updates. The current training target is Linux x86_64 with an NVIDIA GPU.
+Rust uses the official Dev Container Feature. `scripts/dev/setup-project.sh` also installs the project environment into an existing container without rebuilding. Its `--update` updates Rust stable, wasm-pack and Beads; it does not update managed Python or training dependencies. Explicit `setup-training.sh --update` handles those dependencies, recorded in `tools/training/uv.lock`; check and commit lock changes after successful updates. The current training target is Linux x86_64 with an NVIDIA GPU.
 
-postCreate updates and verifies Rust, then restores and verifies the Python training environment. Training libraries are installed, but no model training is started. Runtime version and verification reports are written to `~/.local/share/quoridor/`. See `docs/development/rust-python-environment.md` for individual commands and storage overrides.
+postCreate prepares and verifies Rust and the shared Beads tools. Training is optional: explicitly run `bash scripts/dev/setup-training.sh` to restore and verify the existing locked environment, or add `--update` for a requested dependency update. Neither postCreate nor `setup-project.sh` starts training setup. Existing installed environments, dependency caches and models remain unchanged by this source maintenance. Runtime version and verification reports are written to `~/.local/share/quoridor/`. See `docs/development/rust-python-environment.md` for individual commands and storage overrides.

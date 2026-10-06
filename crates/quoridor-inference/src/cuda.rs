@@ -17,11 +17,13 @@ unsafe extern "C" {
         err: *mut c_char,
         cap: usize,
     ) -> i32;
+    fn qaoti_counters(handle: *mut c_void, counts: *mut NativeCounters);
     fn qaoti_destroy(handle: *mut c_void);
 }
 pub struct AotiBackend {
     handle: NonNull<c_void>,
     metadata: BackendMetadata,
+    counters: InferenceCounters,
 }
 unsafe impl Send for AotiBackend {}
 impl AotiBackend {
@@ -64,7 +66,11 @@ impl AotiBackend {
             )
         })
         .ok_or_else(|| native_error(&error))?;
-        Ok(Self { handle, metadata })
+        Ok(Self {
+            handle,
+            metadata,
+            counters: InferenceCounters::default(),
+        })
     }
 }
 impl InferenceBackend for AotiBackend {
@@ -72,7 +78,8 @@ impl InferenceBackend for AotiBackend {
         check_inputs(inputs, self.metadata.max_batch)?;
         let mut output = vec![0.; inputs.len() * (POLICY + 1)];
         let mut error = [0; 4096];
-        if unsafe {
+        self.counters.logical_rows += inputs.len() as u64;
+        let status = unsafe {
             qaoti_run(
                 self.handle.as_ptr(),
                 inputs.as_ptr().cast(),
@@ -81,14 +88,22 @@ impl InferenceBackend for AotiBackend {
                 error.as_mut_ptr(),
                 error.len(),
             )
-        } != 0
-        {
-            return Err(native_error(&error));
-        }
-        outputs(output)
+        };
+        let mut native = NativeCounters::default();
+        unsafe { qaoti_counters(self.handle.as_ptr(), &mut native) };
+        self.counters.update_native(native);
+        let result = if status == 0 {
+            outputs(output)
+        } else {
+            Err(native_error(&error))
+        };
+        self.counters.finish(inputs.len(), result)
     }
     fn metadata(&self) -> &BackendMetadata {
         &self.metadata
+    }
+    fn counters(&self) -> InferenceCounters {
+        self.counters
     }
 }
 impl Drop for AotiBackend {

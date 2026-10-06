@@ -66,22 +66,23 @@ npm run preview -w @quoridor/web -- --host 0.0.0.0 --port 4275 --strictPort
 
 使用環境: コンテナ内headless Chromium/SwiftShader/WebGL2。実機GPU/WebGPUは今回の検証範囲外。GPU資源数はThree.jsの追跡値であり、総VRAMの実測値ではない。通常buildの既存の大きなJS chunk警告は残る。
 
-
 ## 完成画面と起動状態
 
 通常production（test APIなし）、実UIで駒移動・壁配置を行い2手目の同一対局を切り替えた。4環境×desktop 1440×900/mobile 390×844の8枚と設定欄1枚を撮影し、さらに背景を見やすい低い視点で4枚を撮影した。選択した環境の読込完了をUIから待っており、撮影のために製品の標準カメラ設定は変更していない。標準視点は盤を見下ろすため屋外では地面が多く映る。右ドラッグで背景の森/山を見渡せる。
 
-スクリーンショットの絶対ディレクトリ:
+現物確認（2026-10-06）: 以下の13枚はリンク先と旧worktree内の指定保存先のどちらにも存在せず、現在は閲覧できない。保存archive全体の探索や再撮影は行っていないため、永久消失とは認定しない。この節の画面説明は当時の記録であり、現在利用可能な画像証拠ではない。
+
+スクリーンショットの当時の絶対ディレクトリ:
 `/workspaces/quoridor/.worktree/environment-presets/.artifacts/environments/screenshots/`
 
-| 環境 | 標準PC | モバイル | 背景が見える角度 |
-| --- | --- | --- | --- |
-| 暖かい室内 | [warm-room-desktop.png](../../.artifacts/environments/screenshots/warm-room-desktop.png) | [warm-room-mobile.png](../../.artifacts/environments/screenshots/warm-room-mobile.png) | [warm-room-oblique.png](../../.artifacts/environments/screenshots/warm-room-oblique.png) |
-| 暗めの室内 | [dark-room-desktop.png](../../.artifacts/environments/screenshots/dark-room-desktop.png) | [dark-room-mobile.png](../../.artifacts/environments/screenshots/dark-room-mobile.png) | [dark-room-oblique.png](../../.artifacts/environments/screenshots/dark-room-oblique.png) |
-| 森の中 | [forest-desktop.png](../../.artifacts/environments/screenshots/forest-desktop.png) | [forest-mobile.png](../../.artifacts/environments/screenshots/forest-mobile.png) | [forest-oblique.png](../../.artifacts/environments/screenshots/forest-oblique.png) |
-| 山の上 | [mountain-desktop.png](../../.artifacts/environments/screenshots/mountain-desktop.png) | [mountain-mobile.png](../../.artifacts/environments/screenshots/mountain-mobile.png) | [mountain-oblique.png](../../.artifacts/environments/screenshots/mountain-oblique.png) |
+| 環境       | 標準PC                                  | モバイル                               | 背景が見える角度                        |
+| ---------- | --------------------------------------- | -------------------------------------- | --------------------------------------- |
+| 暖かい室内 | `warm-room-desktop.png`（現在利用不能） | `warm-room-mobile.png`（現在利用不能） | `warm-room-oblique.png`（現在利用不能） |
+| 暗めの室内 | `dark-room-desktop.png`（現在利用不能） | `dark-room-mobile.png`（現在利用不能） | `dark-room-oblique.png`（現在利用不能） |
+| 森の中     | `forest-desktop.png`（現在利用不能）    | `forest-mobile.png`（現在利用不能）    | `forest-oblique.png`（現在利用不能）    |
+| 山の上     | `mountain-desktop.png`（現在利用不能）  | `mountain-mobile.png`（現在利用不能）  | `mountain-oblique.png`（現在利用不能）  |
 
-[設定欄](../../.artifacts/environments/screenshots/settings-desktop.png)。撮影スクリプトと結果JSONは`.artifacts/environments/capture*.mjs` / `capture*.json`に保存。通常撮影で全asset responseは200、page/console errorなし、test API/diagnostics globalsなしを確認した。
+`settings-desktop.png`（現在利用不能）。撮影スクリプトと結果JSONは`.artifacts/environments/capture*.mjs` / `capture*.json`に保存。通常撮影で全asset responseは200、page/console errorなし、test API/diagnostics globalsなしを確認した。
 
 通常previewは **http://localhost:4275/** で起動した状態を残す。ホストで使う場合はDevContainerのPortsで4275を転送する。既存4173のアプリとは別の環境追加版である。
 

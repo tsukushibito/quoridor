@@ -1,5 +1,6 @@
 // Thin LibTorch/CUDA ABI. A Rust owner holds this object and its
 // stream/buffers.
+#include "work_counts.h"
 #include <ATen/ATen.h>
 #include <ATen/Context.h>
 #include <ATen/cuda/CUDAGraph.h>
@@ -24,6 +25,7 @@ struct BatchState {
   std::unique_ptr<at::cuda::CUDAGraph> graph;
 };
 struct AotiState {
+  WorkCounts counts;
   int device;
   size_t max_batch;
   bool graph;
@@ -57,9 +59,12 @@ struct AotiState {
                                  .device(at::Device(at::kCUDA, device)));
     s->policy_cpu = at::empty({static_cast<int64_t>(batch), 136}, cpu);
     s->value_cpu = at::empty({static_cast<int64_t>(batch), 1}, cpu);
-    auto run = [&] {
+    auto run = [&](bool warming) {
       s->input_gpu.copy_(s->input_cpu, true);
-      s->output = loader.run({s->input_gpu}, stream.stream());
+      auto forward = [&] {
+        return loader.run({s->input_gpu}, stream.stream());
+      };
+      s->output = warming ? counts.warm_attempt(batch, forward) : forward();
       if (s->output.size() != 2 ||
           s->output[0].numel() != static_cast<int64_t>(batch * 136) ||
           s->output[1].numel() != static_cast<int64_t>(batch))
@@ -67,14 +72,15 @@ struct AotiState {
       s->policy_cpu.copy_(s->output[0], true);
       s->value_cpu.copy_(s->output[1], true);
     };
-    run();
-    run();
+    run(true);
+    run(true);
     stream.synchronize();
     if (graph) {
       s->graph = std::make_unique<at::cuda::CUDAGraph>();
       s->graph->capture_begin();
       try {
-        run();
+        counts.capture_unknown = 1;
+        run(false);
         s->graph->capture_end();
         stream.synchronize();
       } catch (...) {
@@ -148,9 +154,11 @@ extern "C" int qaoti_run(void *ptr, const float *input, size_t batch,
     auto &s = a.state(batch);
     memcpy(s.input_cpu.data_ptr<float>(), input, batch * 648 * sizeof(float));
     if (a.graph) {
+      a.counts.executed_rows += batch;
       s.graph->replay();
     } else {
       s.input_gpu.copy_(s.input_cpu, true);
+      a.counts.executed_rows += batch;
       s.output = a.loader.run({s.input_gpu}, a.stream.stream());
       s.policy_cpu.copy_(s.output[0], true);
       s.value_cpu.copy_(s.output[1], true);
@@ -169,6 +177,9 @@ extern "C" int qaoti_run(void *ptr, const float *input, size_t batch,
     fail(err, cap, e);
     return -1;
   }
+}
+extern "C" void qaoti_counters(void *ptr, WorkCounts *counts) {
+  *counts = static_cast<AotiState *>(ptr)->counts;
 }
 extern "C" void qaoti_destroy(void *ptr) {
   delete static_cast<AotiState *>(ptr);

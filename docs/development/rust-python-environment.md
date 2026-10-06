@@ -7,10 +7,10 @@ RustはDev Container Feature、学習用Pythonはuvで管理する。現在の�
 リポジトリルートから実行する。
 
 ```bash
-# 未導入ツールを導入し、Python依存はuv.lockから復元して検証
+# RustとBeadsを準備する（学習環境は個別に準備）
 bash scripts/dev/setup-project.sh
 
-# 最新stableのRust、最新安定版wasm-pack、Python、学習依存へ更新して検証
+# 明示的にRust/wasm-packとBeadsを更新する
 bash scripts/dev/setup-project.sh --update
 
 # 現在開いているシェルへRustのPATH等を反映
@@ -19,7 +19,7 @@ source scripts/dev/project-env.sh
 
 スクリプトは呼出し元のカレントディレクトリに依存しない。Rust側の初回導入ではOS依存と`/usr/local`の準備にsudoを使用する。Featureと同じ`CARGO_HOME=/usr/local/cargo`、`RUSTUP_HOME=/usr/local/rustup`を使用する。
 
-Rust Feature追加を反映するリビルドは今回実行しない。次回リビルドではFeatureが基盤を導入し、postCreateがRustの更新・検証とPython学習環境の復元・検証を行う。既存のGodot等の更新処理もpostCreateに残っている。Rust/Pythonだけを変更する場合は上記の専用スクリプトを使う。
+Rust Feature追加を反映するリビルドは今回実行しない。次回リビルドではFeatureが基盤を導入し、postCreateがRustの更新・検証とBeads準備を行う。Godotは製品・研究の必須環境から撤去した。学習用Pythonは必要時だけ`setup-training.sh`で明示準備する。Rust/Pythonだけを変更する場合は上記の専用スクリプトを使う。
 
 個別に操作する場合:
 
@@ -31,7 +31,7 @@ bash scripts/dev/setup-training.sh      # Python環境復元・GPU検証
 bash scripts/dev/setup-training.sh --update  # Python・学習依存更新・GPU検証
 ```
 
-通常の導入は既存のstableツールチェーンやuv.lockの依存を維持する。`--update`は最新安定版を取得し、Pythonでは`uv.lock`も更新する。更新後は差分と検証結果を確認してlockfileをコミットする。新しいPythonに依存パッケージが未対応の場合はエラーを確認し、例えば`QUORIDOR_PYTHON=3.14`で対応する系列を一時指定できる。nightlyやPythonのプレリリースは既定にしない。
+明示した通常の導入は既存のstableツールチェーンやuv.lockの依存を維持する。`--update`は最新安定版を取得し、Pythonでは`uv.lock`も更新する。更新後は差分と検証結果を確認してlockfileをコミットする。新しいPythonに依存パッケージが未対応の場合はエラーを確認し、例えば`QUORIDOR_PYTHON=3.14`で対応する系列を一時指定できる。nightlyやPythonのプレリリースは既定にしない。
 
 Feature自体の実装を更新するときは、Dev Container CLIの`upgrade`で`.devcontainer/devcontainer-lock.json`を更新してリビルドする。このlockfileはFeatureの解決記録であり、Rust stableの手動更新を妨げない。
 
@@ -47,18 +47,18 @@ bash scripts/dev/training.sh python -c 'import torch; print(torch.__version__, t
 # bash scripts/dev/training.sh python tools/training/train.py
 ```
 
-Pythonの仮想環境を手動activateする必要はない。PyTorchをシステムPythonへ入れない。学習コードや自己対戦パイプラインはまだ含まず、環境検証だけを行う。
+Pythonの仮想環境を手動activateする必要はない。PyTorchをシステムPythonへ入れない。現役の学習・生成・評価は[学習手順](nnue-training.md)と[Rust運用](rust-ai.md)を参照する。環境セットアップは研究実行を開始しない。
 
 ## 保存先
 
-| 対象 | 既定の保存先 |
-|---|---|
-| Rust / Cargo | `/usr/local/rustup` / `/usr/local/cargo` |
-| wasm-pack補助バイナリ | `/usr/local/cargo/wasm-pack-cache` |
-| uvの学習依存キャッシュ | `$INFERENCE_CACHE_DIR/uv` |
-| uv管理のPython | `$INFERENCE_CACHE_DIR/python` |
-| 学習用仮想環境 | `$INFERENCE_CACHE_DIR/envs/quoridor-training` |
-| 使用版・検証結果 | `~/.local/share/quoridor/` |
+| 対象                   | 既定の保存先                                  |
+| ---------------------- | --------------------------------------------- |
+| Rust / Cargo           | `/usr/local/rustup` / `/usr/local/cargo`      |
+| wasm-pack補助バイナリ  | `/usr/local/cargo/wasm-pack-cache`            |
+| uvの学習依存キャッシュ | `$INFERENCE_CACHE_DIR/uv`                     |
+| uv管理のPython         | `$INFERENCE_CACHE_DIR/python`                 |
+| 学習用仮想環境         | `$INFERENCE_CACHE_DIR/envs/quoridor-training` |
+| 使用版・検証結果       | `~/.local/share/quoridor/`                    |
 
 Pythonと学習依存は既存のinference-cache volumeへ保存し、ホストのcheckoutへ大量のパッケージを作らない。Rustは次回リビルド時にFeatureから再導入される。worktree間で学習環境を共有するので、異なる依存構成を同時に使う場合は`QUORIDOR_TRAINING_ENV`に別のパスを指定する。セットアップスクリプト同士の並行実行はロックで直列化する。学習実行中にはその環境を更新しない。
 

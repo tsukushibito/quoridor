@@ -409,7 +409,7 @@ fn run(c: &Config, start: Instant) -> Result<Value> {
             }
             let mut s = SigmaContext::from_prefix(prefix)?;
             let mut moves = prefix.clone();
-            let mut status = "STARTED";
+            let status;
             let mut outcome = None;
             let mut reason = None;
             let mut game_hands = 0;

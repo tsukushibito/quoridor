@@ -13,14 +13,18 @@
     "wasm:build": "node scripts/build-wasm.mjs release",
     "dev": "npm run wasm:build:dev && npm run dev -w @quoridor/web",
     "typecheck": "npm run typecheck -w @quoridor/engine-bridge && npm run typecheck -w @quoridor/web",
-    "check": "npm run wasm:build:dev && node scripts/codegen-protocol.mjs --check && node scripts/generate-fixtures.mjs --check && node scripts/generate-ai-fixtures.mjs --check && npm run typecheck && npm run test:render && node scripts/check-boundaries.mjs && cargo fmt --all -- --check && cargo check --locked --workspace --no-default-features --features quoridor-wasm/rules && cargo check --locked --workspace --no-default-features --features quoridor-wasm/ai && cargo clippy --locked --workspace --no-default-features --features quoridor-wasm/rules -- -D warnings && cargo clippy --locked --workspace --no-default-features --features quoridor-wasm/ai -- -D warnings && cargo test --locked -p quoridor-core -p quoridor-ai && cargo test --locked -p quoridor-wasm --no-default-features --features rules && cargo test --locked -p quoridor-wasm --no-default-features --features ai",
+    "check": "npm run wasm:build:dev && node scripts/codegen-protocol.mjs --check && node scripts/generate-fixtures.mjs --check && node scripts/generate-ai-fixtures.mjs --check && npm run typecheck && npm run test:render && npm run test:audio && node scripts/check-boundaries.mjs && cargo fmt --package quoridor-core --package quoridor-ai --package quoridor-wasm -- --check && cargo check --locked -p quoridor-core -p quoridor-ai -p quoridor-wasm --no-default-features --features quoridor-wasm/rules && cargo check --locked -p quoridor-core -p quoridor-ai -p quoridor-wasm --no-default-features --features quoridor-wasm/ai && cargo clippy --locked -p quoridor-core -p quoridor-ai -p quoridor-wasm --no-default-features --features quoridor-wasm/rules -- -D warnings && cargo clippy --locked -p quoridor-core -p quoridor-ai -p quoridor-wasm --no-default-features --features quoridor-wasm/ai -- -D warnings && cargo test --locked -p quoridor-core -p quoridor-ai && cargo test --locked -p quoridor-wasm --no-default-features --features rules && cargo test --locked -p quoridor-wasm --no-default-features --features ai",
     "build": "npm run wasm:build && npm run typecheck && npm run build -w @quoridor/web",
     "test:e2e": "PLAYWRIGHT_BROWSERS_PATH=./artifacts/playwright playwright test",
     "test:render": "node --experimental-strip-types --test tests/render/*.test.mjs",
     "test:audio": "node --experimental-strip-types --test tests/audio/*.test.mjs",
     "test:audio:browsers": "PLAYWRIGHT_BROWSERS_PATH=./artifacts/playwright playwright test --config playwright.audio.config.ts",
     "preview": "npm run preview -w @quoridor/web",
-    "verify:production": "node scripts/verify-production.mjs"
+    "verify:production": "node scripts/verify-production.mjs",
+    "check:research": "python3 -B scripts/dev/check-research.py",
+    "check:research:model": "python3 -B scripts/dev/check-research.py --model-tests",
+    "check:native": "cargo fmt --package quoridor-nnue --package quoridor-inference --package quoridor-data --package quoridor-runner -- --check && cargo check --locked -p quoridor-nnue -p quoridor-inference -p quoridor-data -p quoridor-runner && cargo clippy --locked -p quoridor-nnue -p quoridor-inference -p quoridor-data -p quoridor-runner -- -D warnings && cargo test --locked -p quoridor-nnue -p quoridor-inference -p quoridor-data -p quoridor-runner",
+    "check:all": "npm run check && npm run check:native && npm run check:research"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0"

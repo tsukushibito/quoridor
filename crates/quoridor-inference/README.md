@@ -27,6 +27,13 @@ The broker owns cancellation and generation/request IDs. A CUDA call cannot be
 preempted safely: it finishes, the stream is drained, then a cancelled response is
 discarded. Do not free/reuse an input generation while a request is outstanding.
 
+`InferenceBackend::counters()` returns cumulative submitted logical rows, executed
+rows, attempted warm rows and failure rows from the backend. Warm attempts are
+charged even if initialization fails. CUDA capture work is `None` when its actual
+forward count was not measured; the combined physical total then remains `None`
+rather than substituting a multiplier. Runner records keep these counters separate
+from search visits and request counts.
+
 Build default CPU without SDK configuration:
 
 ```sh

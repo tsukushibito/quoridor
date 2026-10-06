@@ -30,6 +30,12 @@ Explicitly bind the model and ignored artifact paths; existing outputs are rejec
 Export writes `artifact.manifest.json` with source-model/artifact hashes, shapes,
 backend/runtime versions, FP32 settings and conversion time.
 
+Both the artifact and its manifest must be absent before model initialization.
+Conversion intermediates stay in an owned temporary directory on the output
+filesystem; publication uses exclusive links. Failure removes only this attempt's
+files, including its published artifact if manifest publication loses a race.
+Sibling ONNX assets are preserved; TensorRT output itself cannot use `.onnx`.
+
 ```sh
 QUORIDOR_MODEL="$(python3 scripts/dev/research-assets.py --kind models --name ai-sigma/reference/sigma-pcr250/best.onnx)"
 QUORIDOR_EXPORT=/home/vscode/.cache/inference/rust-migration/export
@@ -70,11 +76,11 @@ not a selfplay speedup or proof of identical tree choices/general model accuracy
 
 Recorded initial release run (fixed backend order, concurrent host compilation):
 
-| Requests | CPU ORT | AOTI Graph | TensorRT Graph |
-| --- | ---: | ---: | ---: |
-| 1 | 3.696ms | 0.724ms | 1.063ms |
-| 8 | 28.409ms | 1.633ms | 1.074ms |
-| 24 | 87.359ms | 3.525ms | 2.736ms |
+| Requests |  CPU ORT | AOTI Graph | TensorRT Graph |
+| -------- | -------: | ---------: | -------------: |
+| 1        |  3.696ms |    0.724ms |        1.063ms |
+| 8        | 28.409ms |    1.633ms |        1.074ms |
+| 24       | 87.359ms |    3.525ms |        2.736ms |
 
 AOTI maximum absolute difference9.54e-6; TensorRT4.53e-6 across these fixtures.
 AOTI export10.71s, TensorRT export8.90s after environment preparation. First

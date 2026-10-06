@@ -29,9 +29,75 @@ impl fmt::Display for InferenceError {
     }
 }
 impl std::error::Error for InferenceError {}
+/// Cumulative work since backend construction. Requests and model attempts include failures.
+/// Graph capture work is unmeasured, so totals remain unknown once capture is attempted.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct InferenceCounters {
+    /// Rows submitted by valid infer requests, including requests that later fail.
+    pub logical_rows: u64,
+    /// Rows actually attempted by native model calls/replays for logical requests.
+    pub executed_rows: u64,
+    /// Rows actually attempted by native startup forwards, including failures/retries.
+    pub warm_rows: u64,
+    /// Submitted rows in infer requests returning an error (including output validation).
+    pub failed_rows: u64,
+    /// Warm model invocation rows whose invocation threw or returned failure.
+    pub failed_warm_rows: u64,
+    /// Some(0) before capture; None once capture was attempted, including failed setup.
+    pub capture_rows: Option<u64>,
+}
+impl Default for InferenceCounters {
+    fn default() -> Self {
+        Self {
+            logical_rows: 0,
+            executed_rows: 0,
+            warm_rows: 0,
+            failed_rows: 0,
+            failed_warm_rows: 0,
+            capture_rows: Some(0),
+        }
+    }
+}
+impl InferenceCounters {
+    /// Attempted model rows, including failed attempts; capture may make this unknown.
+    pub fn physical_rows(self) -> Option<u64> {
+        self.executed_rows
+            .checked_add(self.warm_rows)?
+            .checked_add(self.capture_rows?)
+    }
+    fn update_native(&mut self, native: NativeCounters) {
+        self.executed_rows = native.executed_rows;
+        self.warm_rows = native.warm_rows;
+        self.failed_warm_rows = native.failed_warm_rows;
+        self.capture_rows = if native.capture_unknown == 0 {
+            Some(0)
+        } else {
+            None
+        };
+    }
+    fn finish(
+        &mut self,
+        rows: usize,
+        result: Result<Vec<NetworkOutput>, InferenceError>,
+    ) -> Result<Vec<NetworkOutput>, InferenceError> {
+        if result.is_err() {
+            self.failed_rows += rows as u64;
+        }
+        result
+    }
+}
+#[repr(C)]
+#[derive(Default, Clone, Copy)]
+struct NativeCounters {
+    executed_rows: u64,
+    warm_rows: u64,
+    failed_warm_rows: u64,
+    capture_unknown: u64,
+}
 pub trait InferenceBackend: Send {
     fn infer(&mut self, inputs: &[[f32; FEATURES]]) -> Result<Vec<NetworkOutput>, InferenceError>;
     fn metadata(&self) -> &BackendMetadata;
+    fn counters(&self) -> InferenceCounters;
 }
 fn path_string(path: &Path) -> Result<CString, InferenceError> {
     CString::new(path.as_os_str().as_encoded_bytes())
@@ -194,11 +260,13 @@ unsafe extern "C" {
         err: *mut c_char,
         cap: usize,
     ) -> i32;
+    fn qort_counters(handle: *mut c_void, counts: *mut NativeCounters);
     fn qort_destroy(handle: *mut c_void);
 }
 pub struct OrtBackend {
     handle: NonNull<c_void>,
     metadata: BackendMetadata,
+    counters: InferenceCounters,
 }
 // Every session is accessed exclusively through &mut self; ownership can move to its worker.
 unsafe impl Send for OrtBackend {}
@@ -222,7 +290,11 @@ impl OrtBackend {
             )
         })
         .ok_or_else(|| native_error(&error))?;
-        Ok(Self { handle, metadata })
+        Ok(Self {
+            handle,
+            metadata,
+            counters: InferenceCounters::default(),
+        })
     }
 }
 impl InferenceBackend for OrtBackend {
@@ -230,7 +302,8 @@ impl InferenceBackend for OrtBackend {
         check_inputs(inputs, self.metadata.max_batch)?;
         let mut output = vec![0.; inputs.len() * (POLICY + 1)];
         let mut error = [0; 4096];
-        if unsafe {
+        self.counters.logical_rows += inputs.len() as u64;
+        let status = unsafe {
             qort_run(
                 self.handle.as_ptr(),
                 inputs.as_ptr().cast(),
@@ -239,14 +312,22 @@ impl InferenceBackend for OrtBackend {
                 error.as_mut_ptr(),
                 error.len(),
             )
-        } != 0
-        {
-            return Err(native_error(&error));
-        }
-        outputs(output)
+        };
+        let mut native = NativeCounters::default();
+        unsafe { qort_counters(self.handle.as_ptr(), &mut native) };
+        self.counters.update_native(native);
+        let result = if status == 0 {
+            outputs(output)
+        } else {
+            Err(native_error(&error))
+        };
+        self.counters.finish(inputs.len(), result)
     }
     fn metadata(&self) -> &BackendMetadata {
         &self.metadata
+    }
+    fn counters(&self) -> InferenceCounters {
+        self.counters
     }
 }
 impl Drop for OrtBackend {
@@ -265,6 +346,52 @@ pub use tensorrt::TensorRtBackend;
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn counters_preserve_partial_warm_and_failed_request() {
+        let mut counters = InferenceCounters {
+            logical_rows: 8,
+            ..Default::default()
+        };
+        counters.update_native(NativeCounters {
+            executed_rows: 0,
+            warm_rows: 16,
+            failed_warm_rows: 8,
+            capture_unknown: 0,
+        });
+        assert!(
+            counters
+                .finish(8, Err(InferenceError("warm failure".into())))
+                .is_err()
+        );
+        assert_eq!(counters.failed_rows, 8);
+        assert_eq!(counters.failed_warm_rows, 8);
+        assert_eq!(counters.physical_rows(), Some(16));
+        counters.update_native(NativeCounters {
+            executed_rows: 8,
+            warm_rows: 32,
+            failed_warm_rows: 8,
+            capture_unknown: 1,
+        });
+        assert_eq!(counters.physical_rows(), None);
+        assert_eq!(counters.capture_rows, None);
+    }
+    #[test]
+    fn counters_count_output_validation_errors() {
+        let mut counters = InferenceCounters {
+            logical_rows: 1,
+            executed_rows: 1,
+            ..Default::default()
+        };
+        assert!(
+            counters
+                .finish(1, outputs(vec![f32::NAN; POLICY + 1]))
+                .is_err()
+        );
+        assert_eq!(counters.failed_rows, 1);
+        assert_eq!(counters.physical_rows(), Some(1));
+        assert!(counters.finish(1, outputs(vec![0.; POLICY + 1])).is_ok());
+        assert_eq!(counters.failed_rows, 1);
+    }
     #[test]
     fn rejects_invalid_features() {
         assert!(check_inputs(&[], 8).is_err());

@@ -1,6 +1,7 @@
 """Configuration and measurements shared by NNUE training experiments."""
 
 import copy
+from array import array
 import json
 import math
 from pathlib import Path
@@ -216,40 +217,109 @@ def validate_target_tensor(rows, values, target):
 
 
 def measurements(rows, values, target, constant):
-    if len(rows) != len(values) or any(not math.isfinite(v) for v in values):
+    if len(rows) != len(values):
         raise ValueError("invalid predictions")
-    result = {"rows": len(rows), "games": len({r["group"] for r in rows})}
-    for name in ["rootmean", "z"]:
-        valid = [(r, v) for r, v in zip(rows, values) if r.get(name) is not None]
-        errors = [(v - r[name]) ** 2 for r, v in valid]
-        grouped = {}
-        for (row, _), error in zip(valid, errors):
-            grouped.setdefault(row["group"], []).append(error)
-        result[name + "_mse"] = sum(errors) / len(errors) if errors else None
-        result[name + "_game_equal_mse"] = (
-            sum(sum(e) / len(e) for e in grouped.values()) / len(grouped) if grouped else None
-        )
-        result[name + "_rows"] = len(valid)
-    valid = [(r, v) for r, v in zip(rows, values) if r.get(target) is not None]
-    result["target_mse"] = result[target + "_mse"]
-    result["target_game_equal_mse"] = result[target + "_game_equal_mse"]
-    result["constant_mse"] = (
-        sum((r[target] - constant) ** 2 for r, _ in valid) / len(valid) if valid else None
+    accumulator = MeasurementAccumulator(target, constant)
+    for row, value in zip(rows, values):
+        accumulator.add(row, value)
+    return accumulator.result()
+
+
+class _MeasurementStats:
+    fields = (
+        "rows",
+        "rootmean_sum",
+        "rootmean_rows",
+        "z_sum",
+        "z_rows",
+        "constant_sum",
+        "constant_rows",
+        "sign_correct",
+        "sign_rows",
+        "saturated",
+        "bias_sum",
+        "bias_rows",
     )
-    constant_groups = {}
-    for r, _ in valid:
-        constant_groups.setdefault(r["group"], []).append((r[target] - constant) ** 2)
-    result["constant_game_equal_mse"] = (
-        sum(sum(e) / len(e) for e in constant_groups.values()) / len(constant_groups)
-        if constant_groups
-        else None
-    )
-    eligible = [(r, v) for r, v in zip(rows, values) if r.get("z") not in (None, 0)]
-    result["z_sign_rows"] = len(eligible)
-    result["z_sign_accuracy"] = (
-        sum(v * r["z"] > 0 for r, v in eligible) / len(eligible) if eligible else None
-    )
-    result["saturation_fraction"] = (
-        sum(abs(v) >= 0.9 for v in values) / len(values) if values else None
-    )
-    return result
+    positions = {name: i for i, name in enumerate(fields)}
+    __slots__ = ("values",)
+
+    def __init__(self):
+        self.values = array("d", [0.0]) * len(self.fields)
+
+    def __getitem__(self, name):
+        value = self.values[self.positions[name]]
+        return value if name.endswith("_sum") else int(value)
+
+    def __setitem__(self, name, value):
+        self.values[self.positions[name]] = value
+
+
+class MeasurementAccumulator:
+    """Row-ordered sums and per-family sufficient statistics, without row lists."""
+
+    def __init__(self, target, constant):
+        self.target, self.constant = target, constant
+        self.rows, self.saturated = 0, 0
+        self.groups = {}
+        self.totals = self._empty()
+
+    @staticmethod
+    def _empty():
+        return _MeasurementStats()
+
+    def add(self, row, value):
+        value = float(value)
+        if not math.isfinite(value):
+            raise ValueError("invalid predictions")
+        group = self.groups.get(row["group"])
+        if group is None:
+            group = self.groups[row["group"]] = self._empty()
+        for stats in (self.totals, group):
+            stats["rows"] += 1
+            stats["saturated"] += abs(value) >= 0.9
+            for name in ("rootmean", "z"):
+                label = row.get(name)
+                if label is not None:
+                    stats[name + "_sum"] += (value - label) ** 2
+                    stats[name + "_rows"] += 1
+            label = row.get(self.target)
+            if label is not None:
+                stats["constant_sum"] += (label - self.constant) ** 2
+                stats["constant_rows"] += 1
+                stats["bias_sum"] += value - float(np_float32(label))
+                stats["bias_rows"] += 1
+            if row.get("z") not in (None, 0):
+                stats["sign_correct"] += value * row["z"] > 0
+                stats["sign_rows"] += 1
+
+    def result(self, family=None):
+        stats = self.totals if family is None else self.groups[family]
+        groups = list(self.groups.values()) if family is None else [stats]
+
+        def mean(total, count):
+            return total / count if count else None
+
+        result = {"rows": stats["rows"], "games": len(groups)}
+        for name in ("rootmean", "z", "constant"):
+            result[name + "_mse"] = mean(stats[name + "_sum"], stats[name + "_rows"])
+            valid = [g for g in groups if g[name + "_rows"]]
+            result[name + "_game_equal_mse"] = (
+                sum(g[name + "_sum"] / g[name + "_rows"] for g in valid) / len(valid)
+                if valid
+                else None
+            )
+            if name != "constant":
+                result[name + "_rows"] = stats[name + "_rows"]
+        result["target_mse"] = result[self.target + "_mse"]
+        result["target_game_equal_mse"] = result[self.target + "_game_equal_mse"]
+        result["z_sign_rows"] = stats["sign_rows"]
+        result["z_sign_accuracy"] = mean(stats["sign_correct"], stats["sign_rows"])
+        result["saturation_fraction"] = mean(stats["saturated"], stats["rows"])
+        return result
+
+
+def np_float32(value):
+    # Match the native f32 label used by bias vectors without importing numpy for NN0 callers.
+    import struct
+
+    return struct.unpack("<f", struct.pack("<f", value))[0]

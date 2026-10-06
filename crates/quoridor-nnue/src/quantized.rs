@@ -362,19 +362,11 @@ impl QuantizedModel {
         Ok(())
     }
     pub fn load(manifest_path: impl AsRef<Path>) -> Result<Self> {
-        use std::io::Read;
         let path = manifest_path.as_ref();
-        let mut raw = Vec::new();
-        fs::File::open(path)?.take(65537).read_to_end(&mut raw)?;
+        let raw = crate::read_asset(path, 65536, false)?;
         let m = Self::parse_manifest(&raw)?;
         let wp = path.parent().unwrap_or(Path::new(".")).join(&m.weights);
-        if fs::metadata(&wp)?.len() != m.bytes as u64 {
-            return Err(Error::Manifest("quantized physical length".into()));
-        }
-        let mut data = Vec::with_capacity(m.bytes);
-        fs::File::open(wp)?
-            .take(m.bytes as u64 + 1)
-            .read_to_end(&mut data)?;
+        let data = crate::read_asset(&wp, m.bytes, true)?;
         Self::load_bytes(&raw, &data)
     }
     pub fn load_bytes(manifest_json: &[u8], data: &[u8]) -> Result<Self> {

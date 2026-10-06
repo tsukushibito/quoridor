@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Scoped research syntax, formatting, dependency boundaries and NN0 contracts.
 
-No build, Torch/ORT import, model forward, game, dataset expansion or scheduler start.
+Default gate: no build, Torch/ORT import, model forward, game, or scheduler start.
 Use --format to modify only maintained source; frozen recipes/vendor/raw are excluded.
+Use --model-tests separately for explicitly admitted synthetic model fixtures.
 """
 
 from __future__ import annotations
@@ -21,6 +22,7 @@ PY_FILES = (
     "scripts/dev/research-storage.py",
     "scripts/dev/research-assets.py",
     "scripts/dev/test_research_assets.py",
+    "scripts/dev/test_manage_worktree.py",
     "scripts/dev/check-research.py",
     "scripts/dev/research-session.py",
     "scripts/dev/research-runtime.py",
@@ -28,8 +30,26 @@ PY_FILES = (
     "tools/research-session/test_client.py",
     "tools/research-session/test_job.py",
     "tools/research-quality/test_maintenance.py",
+    "tools/research-quality/test_quality_entrypoints.py",
 )
 CALLERS = ("crates/quoridor-wasm/tests/nnue-runtime.cjs",)
+# Enumerate the NN0 contracts; never discover an opt-in model test accidentally.
+NN0_TESTS = (
+    "quoridor_training.test_contracts",
+    "quoridor_training.test_residual_config",
+    "quoridor_training.test_sampling",
+    "quoridor_training.test_observation.ObservationContracts",
+    "quoridor_training.test_plotting",
+    "quoridor_training.test_selected_target",
+    "quoridor_training.test_sharded_cache",
+    "quoridor_training.test_cycle",
+    "quoridor_training.test_corpus_safety.CorpusSafety",
+    "quoridor_training.test_corpus_safety.FreezeSafety",
+)
+MODEL_TESTS = (
+    "quoridor_training.test_observation.LiveTrainerObservation",
+    "quoridor_training.test_corpus_safety.LiveFreezeEvaluation",
+)
 
 
 def run(*args):
@@ -42,6 +62,8 @@ def sources():
         | {
             ROOT / "scripts/export-fresh-source.mjs",
             ROOT / "tools/research-quality/test_export.mjs",
+            ROOT / "scripts/verify-production.mjs",
+            ROOT / "tools/research-quality/test_verify_production.mjs",
         }
     )
     py = sorted(
@@ -68,8 +90,35 @@ def main():
         action="store_true",
         help="Format maintained source only; no tests/jobs",
     )
-    parser.add_argument("--syntax-only", action="store_true")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--syntax-only", action="store_true")
+    mode.add_argument(
+        "--model-tests", action="store_true", help="Run explicitly admitted synthetic model tests"
+    )
     args = parser.parse_args()
+    if args.model_tests:
+        if args.format:
+            parser.error("--model-tests cannot be combined with --format")
+        if os.environ.get("QUORIDOR_OBSERVATION_LIVE_TESTS") != "1":
+            parser.error("Model tests require explicit QUORIDOR_OBSERVATION_LIVE_TESTS=1 admission")
+        test_root = os.environ.get("QUORIDOR_OBSERVATION_TEST_ROOT")
+        if not test_root or not Path(test_root).is_dir():
+            parser.error("Model tests require an existing QUORIDOR_OBSERVATION_TEST_ROOT")
+        layout = json.loads((ROOT / "research-paths.json").read_text())
+        training_python = (
+            Path(os.environ.get("QUORIDOR_TRAINING_ENV", layout["environments"]["training"]))
+            / "bin/python"
+        )
+        if not training_python.exists():
+            parser.error("Existing training environment required; no automatic install")
+        subprocess.run(
+            [str(training_python), "-B", "-m", "unittest", *MODEL_TESTS],
+            cwd=ROOT,
+            env={**os.environ, "PYTHONPATH": str(ROOT / "python"), "ORT_DISABLE_TELEMETRY": "1"},
+            check=True,
+            timeout=120,
+        )
+        return
     js, py = sources()
     check_boundaries(py)
     for file in js:
@@ -111,7 +160,10 @@ def main():
     if args.format:
         return
     run(sys.executable, "-B", "tools/research-quality/test_maintenance.py")
+    run(sys.executable, "-B", "tools/research-quality/test_quality_entrypoints.py")
     run(sys.executable, "-B", "scripts/dev/test_research_assets.py")
+    run(sys.executable, "-B", "scripts/dev/test_manage_worktree.py")
+    run(sys.executable, "-B", "tools/model-export/test_export.py")
     layout = json.loads((ROOT / "research-paths.json").read_text())
     training_env = Path(os.environ.get("QUORIDOR_TRAINING_ENV", layout["environments"]["training"]))
     training_python = training_env / "bin/python"
@@ -119,13 +171,19 @@ def main():
         parser.error("Existing training environment required for tensor-loader contracts")
     env = {**os.environ, "PYTHONPATH": str(ROOT / "python"), "ORT_DISABLE_TELEMETRY": "1"}
     subprocess.run(
-        [str(training_python), "-B", "-m", "unittest", "quoridor_training.test_contracts"],
+        [str(training_python), "-B", "-m", "unittest", *NN0_TESTS],
         cwd=ROOT,
         env=env,
         check=True,
         timeout=60,
     )
     run("node", "--test", "tools/research-quality/test_export.mjs")
+    run(
+        "node",
+        "--experimental-strip-types",
+        "--test",
+        "tools/research-quality/test_verify_production.mjs",
+    )
     layout = json.loads((ROOT / "research-paths.json").read_text())
     session_env = Path(
         os.environ.get("QUORIDOR_RESEARCH_SESSION_ENV", layout["environments"]["sessions"])
@@ -140,11 +198,8 @@ def main():
         "-B",
         "-m",
         "unittest",
-        "discover",
-        "-s",
-        "tools/research-session",
-        "-p",
-        "test_*.py",
+        "tools/research-session/test_client.py",
+        "tools/research-session/test_job.py",
     )
     print(
         json.dumps(

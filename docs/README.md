@@ -23,3 +23,5 @@
 撤去した文書は[復元参照](../research-data/maintenance/documentation-cleanup-20261006/restore-references.json)の元path、commit、Git blob、SHA/sizeから特定できる。`git show <commit>:<元path> > .artifacts/<選んだファイル名>`で必要な一文書だけを復元し、SHA/sizeを照合する。全件の索引や過去本文を`docs/`へ複製しない。以前の未追跡記録は[保全manifest](../research-data/maintenance/untracked-cleanup-20261006/manifest.json)にGit/archive/memberの対応があり、展開先は`.artifacts/`とする。原runの条件・失敗・欠測を書き換えない。
 
 現在の構成の改善候補は[独立保守性レビュー](../research-data/maintenance/repository-review-20261006/report.md)を参照する。所見と実施済み修正を区別し、対応状態はBeadsで管理する。
+
+そのレビューへの対応範囲・検証結果・残る制約は[保守修正の受入れ報告](reports/repository-maintenance.md)を参照する。

@@ -4,14 +4,6 @@ FROM ${UV_IMAGE} AS uv
 FROM mcr.microsoft.com/devcontainers/base:bookworm
 
 ARG TARGETARCH
-ARG GODOT_VERSION
-ARG GODOT_FLAVOR
-ARG GODOT_AMD64_URL
-ARG GODOT_AMD64_SHA256
-ARG GODOT_ARM64_URL
-ARG GODOT_ARM64_SHA256
-ARG GODOT_TEMPLATES_URL
-ARG GODOT_TEMPLATES_SHA256
 ARG INSTALL_GITHUB_CLI
 ARG INSTALL_GIT_LFS
 ARG INSTALL_IMAGE_TOOLS
@@ -30,14 +22,12 @@ RUN set -eux; \
     export DEBIAN_FRONTEND=noninteractive; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
-        bash ca-certificates curl git gnupg jq python3 unzip xz-utils xauth xvfb \
-        libasound2 libfontconfig1 libgl1 libglu1-mesa libpulse0 libx11-6 \
-        libxcursor1 libxext6 libxi6 libxinerama1 libxrandr2 libxrender1; \
+        bash ca-certificates curl git gnupg jq python3 unzip xz-utils; \
     if [ "$INSTALL_GITHUB_CLI" = true ]; then apt-get install -y --no-install-recommends gh; fi; \
     if [ "$INSTALL_GIT_LFS" = true ]; then apt-get install -y --no-install-recommends git-lfs; fi; \
     if [ "$INSTALL_IMAGE_TOOLS" = true ]; then apt-get install -y --no-install-recommends imagemagick optipng pngquant; fi; \
     if [ "$INSTALL_CHATGPT_BROWSER" = true ]; then \
-        apt-get install -y --no-install-recommends novnc openbox websockify x11-utils x11vnc; \
+        apt-get install -y --no-install-recommends novnc openbox websockify x11-utils x11vnc xauth xvfb; \
     fi; \
     if [ "$INSTALL_SSH" = true ]; then \
         apt-get install -y --no-install-recommends openssh-server; \
@@ -64,10 +54,5 @@ RUN set -eux; \
     fi; \
     rm -rf /var/lib/apt/lists/*
 
-COPY .devcontainer/install-godot.sh /usr/local/share/setup-godot/install-godot.sh
-RUN chmod 0755 /usr/local/share/setup-godot/install-godot.sh && \
-    /usr/local/share/setup-godot/install-godot.sh
-
 ENV PATH="/home/vscode/.local/bin:${PATH}"
-ENV GODOT_DATA_PATH="/home/vscode/.local/share/godot"
 ENV DONT_PROMPT_WSL_INSTALL="1"

@@ -2,6 +2,7 @@
 
 from collections import Counter
 import hashlib
+import heapq
 import math
 
 import numpy as np
@@ -48,13 +49,15 @@ class EpochSampler:
 
 
 def loss_weights(groups, mode):
-    if mode not in ("row", "group") or not groups:
+    if mode not in ("row", "group") or not len(groups):
         raise ValueError("nonempty training groups and explicit row/group objective required")
     if mode == "row":
         return np.ones(len(groups), dtype=np.float32)
     counts = Counter(groups)
-    return np.asarray(
-        [len(groups) / (len(counts) * counts[group]) for group in groups], dtype=np.float32
+    return np.fromiter(
+        (len(groups) / (len(counts) * counts[group]) for group in groups),
+        dtype=np.float32,
+        count=len(groups),
     )
 
 
@@ -62,11 +65,20 @@ def diagnostic_indices(rows, indices, count, seed):
     """Stable input-ID-only subset; never consumes the optimizer sampler RNG."""
     if count == 0:
         return np.asarray([], dtype=np.int64)
-    ranked = sorted(
-        indices,
-        key=lambda i: (hashlib.sha256(f"{seed}:{rows[i]['id']}".encode()).digest(), int(i)),
+    candidates = (
+        zip(indices, rows.iter_indices(indices))
+        if hasattr(rows, "iter_indices")
+        else ((i, rows[i]) for i in indices)
     )
-    return np.asarray(sorted(ranked[:count]), dtype=np.int64)
+    ranked = heapq.nsmallest(
+        count,
+        candidates,
+        key=lambda pair: (
+            hashlib.sha256(f"{seed}:{pair[1]['id']}".encode()).digest(),
+            int(pair[0]),
+        ),
+    )
+    return np.asarray(sorted(int(i) for i, _ in ranked), dtype=np.int64)
 
 
 def observation_steps(steps, interval, rows, batch, mode, explicit=None):

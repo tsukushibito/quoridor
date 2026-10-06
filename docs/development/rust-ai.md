@@ -46,7 +46,11 @@ CUDAは`cuda-aoti`、TensorRTは`tensorrt`のCargo featureを明示する。`QUO
 
 以前の固定CPU4/RAM8GiB/VRAM6GiBを新runの上限にしない。実affinity/cgroup・物理core・利用可能RAM/VRAMからadmitし、ホストへ2物理core・RAM4GiB・VRAM2GiBを残す。設定値は利用可能量を超える許可ではない。取消、停止、初期化失敗も全予定slotに記録し、未完了を勝敗や教師のゼロへ変換しない。
 
-速度は同じmodel/K/局面/資源で測る。初期化・capture・queue・転送・forward・尾部・資格・保存・回収を含む適格行/秒と対局/秒を使い、forward倍率をそのまま教師生成倍率にしない。
+`nnue` engineはmanifestから対応するfloat/距離残差loaderを選択し、既存の評価器へ接続する。`model-check --model MANIFEST`は対応形式・署名・サイズを推論前に検査する。2 engineのarenaは色交換ペア単位で分割し、明示した奇数の分割境界は開始前に拒否する。
+
+benchmarkは時間制限を含む場合`fixed_work=false`とし、depth/node/timeの指定と実完了量を保存する。停止・pause・RAM条件は探索中にも確認し、失敗でも完了済みrecordを残す。nativeの同期呼出中の即時停止は別の限界であり、外側jobのexact回収と区別する。
+
+速度は同じmodel/K/局面/資源で測る。初期化・capture・queue・転送・forward・尾部・資格・保存・回収を含む適格行/秒と対局/秒を使い、forward倍率をそのまま教師生成倍率にしない。backendのlogical/executed/warm/failed行数を共通計数として保存し、captureの物理仕事が未計測ならUNKNOWNのままにする。未知の物理費を0や完全な合計へ置換しない。
 
 ## データと学習
 
@@ -56,7 +60,7 @@ CUDAは`cuda-aoti`、TensorRTは`tensorrt`のCargo featureを明示する。`QUO
 
 `python/quoridor_training`内のモデル/設定定義を使い、低stepを含むtrain/validation曲線・gradient・checkpoint・native f32重み・ONNXを出す。学習量や容量の変更は版付き設定で行う。train-only距離尺度、game等重み、定数/距離基準と未見testを分けて確認する。
 
-学習の `--cache` は単一cacheディレクトリ、または `quoridor-sharded-training-cache-v1` のJSON manifestを受ける。後者は元train cacheをSHA付きで参照し、namespaceとfamily単位のtrain/validation割当、全行の資格maskを明示する。元tensorや終局ラベルを複製・書換せず、testや未来ラベルを取り込まない。`cache.load` の戻り値は `(binding, rows, x, distance, labels)`、`rows` は辞書のリストで、全tensorの先頭次元と行数が一致する。
+学習の `--cache` は単一cacheディレクトリ、または `quoridor-sharded-training-cache-v1` のJSON manifestを受ける。後者は元train cacheをSHA付きで参照し、namespaceとfamily単位のtrain/validation割当、全行の資格maskを明示する。元tensorや終局ラベルを複製・書換せず、testや未来ラベルを取り込まない。`cache.load` はCorpusを返し、binding、row_count、遅延metadata、索引付きbatch取得とchunk走査を一つの入口にする。特徴はshardごとにread-only mmapし、必要なbatchだけを展開する。全dense特徴の結合や全行辞書の常駐はしない。metadataの行offsetとgroup/split/資格/labelのコンパクト索引は行数に比例するが、元tensor・ラベル・分割・samplingを変更しない。hash、正確な長さ、STM順、疎特徴と距離の対応は入力時にchunk単位で検査する。
 
 `evaluation.checkpoints` に初期0から最終stepまでの昇順・重複なし配列を指定すると、その固定stepで選定する。省略時は既定intervalを使う。`artifacts.mode: "native"` はONNXを作らずnative重みを保存する。`artifacts.save_scheduled: true` は既存評価forwardのtrain/全raw validation scalarと行順を保存する（full_train必須）。中間のPT/native重みは独立した `artifacts.checkpoint_steps` の明示点だけで保存し、初期/BEST/LASTは正常終了時に保存する。資格外validation行の保存値を選定metricへ混ぜず、保存・forward分もrun予算へ含める。
 

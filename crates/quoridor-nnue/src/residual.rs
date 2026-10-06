@@ -8,7 +8,7 @@ use quoridor_core::Position;
 use quoridor_core::research::SigmaContext;
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
-use std::{fs, path::Path};
+use std::path::Path;
 pub const RESIDUAL_FEATURE: &str = "QF1-route4-f32-STM-scaled-residual-v3";
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
@@ -47,6 +47,10 @@ impl ResidualModel {
     pub fn parameter_count(t: Topology) -> Result<usize> {
         Ok(t.parameter_count()? + 4 * t.hidden_width)
     }
+    #[allow(
+        clippy::too_many_arguments,
+        reason = "explicit residual manifest fields"
+    )]
     pub fn from_parts(
         t: Topology,
         w: Vec<f32>,
@@ -92,10 +96,7 @@ impl ResidualModel {
     }
     pub fn load(path: impl AsRef<Path>) -> Result<Self> {
         let path = path.as_ref();
-        let bytes = fs::read(path)?;
-        if bytes.len() > 65536 {
-            return Err(Error::Manifest("residual manifest size".into()));
-        }
+        let bytes = crate::read_asset(path, 65536, false)?;
         let m: ResidualManifest =
             serde_json::from_slice(&bytes).map_err(|e| Error::Manifest(e.to_string()))?;
         if m.schema != "quoridor-nnue-distance-residual-v3"
@@ -114,7 +115,11 @@ impl ResidualModel {
         if m.weights_bytes != 4 * n || m.little_endian_f32 != n {
             return Err(Error::Manifest("residual layout".into()));
         }
-        let raw = fs::read(path.parent().unwrap_or(Path::new(".")).join(&m.weights))?;
+        let raw = crate::read_asset(
+            &path.parent().unwrap_or(Path::new(".")).join(&m.weights),
+            4 * n,
+            true,
+        )?;
         if raw.len() != 4 * n || format!("{:x}", Sha256::digest(&raw)) != m.weights_sha {
             return Err(Error::Manifest("residual weights SHA/length".into()));
         }
@@ -134,6 +139,13 @@ impl ResidualModel {
             m.route_mu_f32,
             m.route_sigma_f32,
         )
+    }
+    pub fn full_features(
+        &self,
+        features: crate::Features,
+        mode: EvaluationMode,
+    ) -> Result<Accumulator> {
+        self.base.full_features(features, mode)
     }
     pub fn full(&self, p: Position) -> Result<Accumulator> {
         self.base.full(p)

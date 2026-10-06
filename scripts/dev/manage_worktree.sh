@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-workspace_root="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+common_dir="$(git -C "$script_dir" rev-parse --path-format=absolute --git-common-dir)"
+workspace_root="$(dirname -- "$common_dir")"
 managed_root="$workspace_root/.worktree"
-lock_reason="managed by setup-godot-devcontainer"
+lock_reason="managed by quoridor"
 
 usage() {
   echo "Usage: $0 create <name> <branch> [start-point] | create-sparse <name> <branch> <start-point> <directory>... | lock-existing | verify | remove <name>" >&2
@@ -58,11 +60,19 @@ verify_locks() {
 create_worktree() {
   local name="${1:-}" branch="${2:-}" start_point="${3:-HEAD}" target
   local checkout_args=()
-  if [[ "${4:-}" == no-checkout ]]; then checkout_args=(--no-checkout); fi
-  valid_name "$name" || { echo "Invalid worktree name: $name" >&2; exit 2; }
+  if [[ "${4:-}" == no-checkout ]]; then
+    checkout_args=(--no-checkout)
+  fi
+  valid_name "$name" || {
+    echo "Invalid worktree name: $name" >&2
+    exit 2
+  }
   git check-ref-format --branch "$branch" >/dev/null
   target="$managed_root/$name"
-  [[ ! -e "$target" ]] || { echo "Worktree path already exists: $target" >&2; exit 1; }
+  [[ ! -e "$target" ]] || {
+    echo "Worktree path already exists: $target" >&2
+    exit 1
+  }
   mkdir -p "$managed_root"
   if git -C "$workspace_root" show-ref --verify --quiet "refs/heads/$branch"; then
     git -C "$workspace_root" worktree add "${checkout_args[@]}" --lock --reason "$lock_reason" "$target" "$branch"
@@ -73,7 +83,10 @@ create_worktree() {
 
 remove_worktree() {
   local name="${1:-}" target unlocked=0
-  valid_name "$name" || { echo "Invalid worktree name: $name" >&2; exit 2; }
+  valid_name "$name" || {
+    echo "Invalid worktree name: $name" >&2
+    exit 2
+  }
   target="$managed_root/$name"
   git -C "$target" rev-parse --is-inside-work-tree >/dev/null 2>&1 || {
     echo "Managed worktree does not exist: $target" >&2
@@ -83,7 +96,9 @@ remove_worktree() {
     echo "Refusing to remove dirty worktree: $target" >&2
     exit 1
   fi
-  if git -C "$workspace_root" worktree unlock "$target"; then unlocked=1; fi
+  if git -C "$workspace_root" worktree unlock "$target"; then
+    unlocked=1
+  fi
   if ! git -C "$workspace_root" worktree remove "$target"; then
     if [[ "$unlocked" == 1 && -d "$target" ]]; then
       git -C "$workspace_root" worktree lock --reason "$lock_reason" "$target" || true
@@ -94,15 +109,30 @@ remove_worktree() {
 
 require_volume_mode
 case "${1:-}" in
-  create) [[ $# -ge 3 && $# -le 4 ]] || { usage; exit 2; }; create_worktree "$2" "$3" "${4:-HEAD}" ;;
+  create)
+    [[ $# -ge 3 && $# -le 4 ]] || { usage; exit 2; }
+    create_worktree "$2" "$3" "${4:-HEAD}"
+    ;;
   create-sparse)
     [[ $# -ge 5 ]] || { usage; exit 2; }
     create_worktree "$2" "$3" "$4" no-checkout
     git -C "$managed_root/$2" sparse-checkout set --cone --sparse-index -- "${@:5}"
     git -C "$managed_root/$2" read-tree -mu HEAD
     ;;
-  lock-existing) [[ $# -eq 1 ]] || { usage; exit 2; }; lock_existing ;;
-  verify) [[ $# -eq 1 ]] || { usage; exit 2; }; verify_locks ;;
-  remove) [[ $# -eq 2 ]] || { usage; exit 2; }; remove_worktree "$2" ;;
-  *) usage; exit 2 ;;
+  lock-existing)
+    [[ $# -eq 1 ]] || { usage; exit 2; }
+    lock_existing
+    ;;
+  verify)
+    [[ $# -eq 1 ]] || { usage; exit 2; }
+    verify_locks
+    ;;
+  remove)
+    [[ $# -eq 2 ]] || { usage; exit 2; }
+    remove_worktree "$2"
+    ;;
+  *)
+    usage
+    exit 2
+    ;;
 esac

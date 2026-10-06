@@ -4,49 +4,22 @@ import argparse
 import json
 import math
 import os
-import signal
-import subprocess
 import time
 from pathlib import Path
+
+from .cycle_process import CycleResources, cancellation_signals, execute
 
 
 def write(path, value):
     Path(path).write_text(json.dumps(value, indent=2, allow_nan=False) + "\n")
 
 
-def execute(command, log, deadline, cpu_core=None):
-    remaining = deadline - time.monotonic()
-    if remaining <= 0:
-        raise RuntimeError("cycle deadline before child launch")
-    with Path(log).open("x") as stream:
-        child = subprocess.Popen(
-            command,
-            stdout=stream,
-            stderr=subprocess.STDOUT,
-            start_new_session=True,
-            preexec_fn=(lambda: os.sched_setaffinity(0, {cpu_core}))
-            if cpu_core is not None
-            else None,
-        )
-        try:
-            code = child.wait(timeout=remaining)
-        except subprocess.TimeoutExpired:
-            os.killpg(child.pid, signal.SIGTERM)
-            try:
-                child.wait(timeout=3)
-            except subprocess.TimeoutExpired:
-                os.killpg(child.pid, signal.SIGKILL)
-                child.wait()
-            raise RuntimeError("cycle child deadline: " + command[0])
-        finally:
-            if child.poll() is None:
-                os.killpg(child.pid, signal.SIGTERM)
-                child.wait(timeout=3)
-    if code != 0:
-        raise RuntimeError("cycle child failed: " + str(command) + ": " + str(code))
-
-
 def cycle(config_path, runner):
+    with cancellation_signals():
+        return _cycle(config_path, runner)
+
+
+def _cycle(config_path, runner):
     config_path = Path(config_path).resolve()
     config = json.loads(config_path.read_text())
     settings = config.get("cycle")
@@ -61,6 +34,7 @@ def cycle(config_path, runner):
         deadline = min(deadline, time.monotonic() + unix_deadline / 1000 - time.time())
     state = {
         "schema": "quoridor-cycle-v1",
+        "process_records": "*.process.json",
         "status": "running",
         "stages": [],
         "adopted": False,
@@ -68,10 +42,16 @@ def cycle(config_path, runner):
     write(output / "cycle-state.json", state)
     environment_python = os.path.abspath(settings["python"])
     try:
+        resources = CycleResources(config, output, deadline)
+
+        def run(command, log, _deadline, cpu_core=None):
+            resources.check()
+            return execute(command, log, deadline, cpu_core, resources)
+
         generation = {**config, "output": str(output / "generation"), "cycle": None}
         gen_path = output / "generation-config.json"
         write(gen_path, generation)
-        execute(
+        run(
             [str(runner), "selfplay", "--config", str(gen_path)],
             output / "generation.log",
             deadline,
@@ -88,7 +68,7 @@ def cycle(config_path, runner):
             raise RuntimeError("generation must have terminal-qualified data")
         dataset = output / "generation" / "dataset"
         cache = output / "train-cache"
-        execute(
+        run(
             [
                 str(runner),
                 "dataset",
@@ -118,7 +98,7 @@ def cycle(config_path, runner):
             ]
         if settings.get("steps"):
             train_command += ["--steps", str(settings["steps"])]
-        execute(
+        run(
             train_command,
             output / "train.log",
             deadline,
@@ -127,8 +107,14 @@ def cycle(config_path, runner):
         freeze = json.loads((output / "learning" / "freeze.json").read_text())
         state["stages"].append({"name": "training", **freeze})
         write(output / "cycle-state.json", state)
+        model_path = output / "learning" / "best-model" / "manifest.json"
+        run(
+            [str(runner), "model-check", "--model", str(model_path)],
+            output / "model-check.log",
+            deadline,
+        )
         test_cache = output / "test-cache"
-        execute(
+        run(
             [
                 str(runner),
                 "dataset",
@@ -142,7 +128,7 @@ def cycle(config_path, runner):
             output / "test-cache.log",
             deadline,
         )
-        execute(
+        run(
             [
                 environment_python,
                 "-m",
@@ -160,7 +146,6 @@ def cycle(config_path, runner):
             (config.get("cpu_cores") or sorted(os.sched_getaffinity(0)))[0],
         )
         state["stages"].append({"name": "test", "result": "test/result.json"})
-        model_path = output / "learning" / "best-model" / "manifest.json"
         fit = json.loads((output / "learning" / "data.json").read_text())["distance_fit"]
         engines = [
             {
@@ -199,7 +184,7 @@ def cycle(config_path, runner):
             raise ValueError("arena game count must be even")
         arena_path = output / "arena-config.json"
         write(arena_path, arena)
-        execute(
+        run(
             [str(runner), "arena", "--config", str(arena_path)],
             output / "arena.log",
             deadline,
@@ -226,6 +211,7 @@ def cycle(config_path, runner):
             "unknown": unknown,
             "default_weights_changed": False,
         }
+        resources.check()
         state["status"] = "complete"
     except BaseException as error:
         state["status"] = "failed"

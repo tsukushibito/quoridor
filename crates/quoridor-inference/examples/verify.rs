@@ -63,8 +63,9 @@ fn main() {
         results = backend.infer(&inputs).unwrap();
         times.push(t.elapsed().as_secs_f64());
     }
+    let counters = backend.counters();
     println!(
         "{}",
-        serde_json::json!({"backend":backend.metadata().backend,"initialization_seconds":initialization,"forward_seconds":times,"outputs":results.into_iter().map(|v|{let mut a=v.logits.to_vec();a.push(v.value);a}).collect::<Vec<_>>()})
+        serde_json::json!({"backend":backend.metadata().backend,"inference_counters":{"logical_rows":counters.logical_rows,"executed_rows":counters.executed_rows,"warm_rows":counters.warm_rows,"failed_rows":counters.failed_rows,"failed_warm_rows":counters.failed_warm_rows,"capture_rows":counters.capture_rows,"physical_rows":counters.physical_rows()},"initialization_seconds":initialization,"forward_seconds":times,"outputs":results.into_iter().map(|v|{let mut a=v.logits.to_vec();a.push(v.value);a}).collect::<Vec<_>>()})
     );
 }

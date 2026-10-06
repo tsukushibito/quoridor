@@ -1,0 +1,1176 @@
+{
+  "schema": "quoridor-maintenance-repair-verification-v1",
+  "issue": "quoridor-fwe",
+  "result": "accepted maintenance scope complete; all source writers stopped; normal explicit-path Git save follows",
+  "original_review_commit": "ac82eb82cb5512fd90d5c31e146af97092827085",
+  "scope": {
+    "implemented": [
+      "MR-01",
+      "MR-02",
+      "MR-03",
+      "MR-04",
+      "MR-05",
+      "MR-06",
+      "MR-07",
+      "MR-08",
+      "MR-09",
+      "MR-10",
+      "MR-11",
+      "MR-12",
+      "MR-13",
+      "MR-14",
+      "MR-15",
+      "MR-16",
+      "MR-17",
+      "MR-21",
+      "MR-22"
+    ],
+    "documentation_only": ["MR-18"],
+    "missing_evidence_disclosed": ["MR-20"],
+    "deferred": ["MR-19", "MR-23"],
+    "review_discovered_fixed": ["IR-B1", "IR-C1", "IR-F1"]
+  },
+  "bindings": {
+    "source_files": [
+      {
+        "path": "python/quoridor_training/cache.py",
+        "sha256": "9eeb060541f5efe6963bbbc36c344e895b777b0fc49f0f69e96d71bb92651fe0",
+        "bytes": 19770,
+        "owner": "learning_inputs"
+      },
+      {
+        "path": "python/quoridor_training/train.py",
+        "sha256": "153cacd09b55ca6abf14f66a45715595a55f42bebe764066cbb6a4212131c85e",
+        "bytes": 47853,
+        "owner": "learning_inputs"
+      },
+      {
+        "path": "python/quoridor_training/common.py",
+        "sha256": "829da13ee5daf6826a02acd76c66cbe84603f8434566cae489c714ac011b10d1",
+        "bytes": 12622,
+        "owner": "learning_inputs"
+      },
+      {
+        "path": "python/quoridor_training/sampling.py",
+        "sha256": "c46097d0e580050579390e8652f31deee20ce34ca273816bd1570a5da7bee845",
+        "bytes": 4109,
+        "owner": "learning_inputs"
+      },
+      {
+        "path": "python/quoridor_training/test_contracts.py",
+        "sha256": "f8d7d96ac1cffcef1fa04c46eace2ad22b15fee37e9cbc788c9c12d83c6a600f",
+        "bytes": 3185,
+        "owner": "learning_inputs"
+      },
+      {
+        "path": "python/quoridor_training/test_sharded_cache.py",
+        "sha256": "539ef6ed98e7439d0a88389e726b673526d5f35f4454c3dc027f0d008ba4175b",
+        "bytes": 7908,
+        "owner": "learning_inputs"
+      },
+      {
+        "path": "python/quoridor_training/test_observation.py",
+        "sha256": "d25aaf39c44c4a0a1387dcd67d13e8d6ca9fb75dc527960980c0ef57ed57d2c7",
+        "bytes": 11685,
+        "owner": "learning_inputs"
+      },
+      {
+        "path": "python/quoridor_training/test_corpus_safety.py",
+        "sha256": "56c0bce54b8205894717b9aa59a746c6e00c75f859cd20aad3ab603679673f51",
+        "bytes": 15673,
+        "owner": "learning_inputs"
+      },
+      {
+        "path": "python/quoridor_training/cycle.py",
+        "sha256": "68df417f2678374d9043c130793378e03be6cb4d34eb0eca2971ad37337ff320",
+        "bytes": 8030,
+        "owner": "cycle_cleanup"
+      },
+      {
+        "path": "python/quoridor_training/cycle_process.py",
+        "sha256": "9018ce0baef8ffb3ec1e66642f49eb28912dc7290ff3e2d2ec46332144102e9d",
+        "bytes": 12934,
+        "owner": "cycle_cleanup"
+      },
+      {
+        "path": "python/quoridor_training/test_cycle.py",
+        "sha256": "3566d51978cb8426306db14068a84b659bdc54269a434a40eb7428c8f33a895c",
+        "bytes": 13367,
+        "owner": "cycle_cleanup"
+      },
+      {
+        "path": "crates/quoridor-nnue/src/lib.rs",
+        "sha256": "95df6793add8fc846ca27b7e8ba4e3a440343bd6c1c732c52fe1d8d947887c8a",
+        "bytes": 19745,
+        "owner": "rust_runtime"
+      },
+      {
+        "path": "crates/quoridor-nnue/src/quantized.rs",
+        "sha256": "2553767bb6f045f5312d8759e185da518dbc2b211c2849b1b23f93d964c046d6",
+        "bytes": 18380,
+        "owner": "rust_runtime"
+      },
+      {
+        "path": "crates/quoridor-nnue/src/residual.rs",
+        "sha256": "60d4475add7c3e19119f2b11c6431e085495ee746576323be66ec348e382cb41",
+        "bytes": 7779,
+        "owner": "rust_runtime"
+      },
+      {
+        "path": "crates/quoridor-nnue/tests/residual.rs",
+        "sha256": "6f27009dee9199a36c9c09a4e9f97f7b31bb40a1e723c525e92511a24392c2ae",
+        "bytes": 5545,
+        "owner": "rust_runtime"
+      },
+      {
+        "path": "crates/quoridor-runner/src/bin/teacher-qualify.rs",
+        "sha256": "ceb12b037679bb9f414b1f6084086547dc81440458492218816449dc0dcdbfdd",
+        "bytes": 8549,
+        "owner": "rust_runtime"
+      },
+      {
+        "path": "crates/quoridor-runner/src/config.rs",
+        "sha256": "ccb9b9bd63d317a4b311e7f037bdf678217364e19bfb27c32dac95b7ed58da77",
+        "bytes": 7077,
+        "owner": "rust_runtime"
+      },
+      {
+        "path": "crates/quoridor-runner/src/main.rs",
+        "sha256": "5de0b31715e794bb11637491198d7054072ea2f60158f0483e45d51682d084fa",
+        "bytes": 8143,
+        "owner": "rust_runtime"
+      },
+      {
+        "path": "crates/quoridor-runner/src/runtime.rs",
+        "sha256": "c1642f334e3c2916a68b21d3d8194ee3ba4e80e24a6e5857f7e7b6a8132d6671",
+        "bytes": 92771,
+        "owner": "rust_runtime"
+      },
+      {
+        "path": "crates/quoridor-runner/tests/config.rs",
+        "sha256": "0af3c6ee43dd14026fcc0887031803384d28bee771253062cb4e18d2a7e67e4f",
+        "bytes": 1590,
+        "owner": "rust_runtime"
+      },
+      {
+        "path": "crates/quoridor-runner/tests/orchestration.rs",
+        "sha256": "3af1a50bf9caf629ee9ce4e56869052c753f64e81766874023bfdb4cbf2e1f8a",
+        "bytes": 7646,
+        "owner": "rust_runtime"
+      },
+      {
+        "path": "crates/quoridor-runner/src/bin/nnue-diagnose.rs",
+        "sha256": "53eba4153bbace6ebc88de3fe3be94bffd9c1f6b8dbc3fe70d07eda9f20a3ad5",
+        "bytes": 23783,
+        "owner": "rust_runtime"
+      },
+      {
+        "path": "crates/quoridor-runner/src/resources.rs",
+        "sha256": "867ffd82d05e1e777cee220c9f9fd7321e3b83370a85ffb2547ae8ff69042fb2",
+        "bytes": 12739,
+        "owner": "rust_runtime"
+      },
+      {
+        "path": "tools/model-export/export.py",
+        "sha256": "95c6f177e1d11f24611013636604d7361f6dc9ab1cad868bf116f8c60883e160",
+        "bytes": 6009,
+        "owner": "inference_export"
+      },
+      {
+        "path": "tools/model-export/test_export.py",
+        "sha256": "c57ceefd8a870dd5d00fc0291da3f461a834ea04dcf9d4269cc0dada50b59956",
+        "bytes": 8021,
+        "owner": "inference_export"
+      },
+      {
+        "path": "crates/quoridor-inference/src/lib.rs",
+        "sha256": "d7656d85ba0e00fa2e4b2ac40ebfdc0b2c5fa56aca5a52d1e2e4d79f463cfc0f",
+        "bytes": 13843,
+        "owner": "inference_export"
+      },
+      {
+        "path": "crates/quoridor-inference/src/cuda.rs",
+        "sha256": "f4c8816d15e60d4631b660085f56ff6bf5ff12d257d0866a217b25df1cf8bdac",
+        "bytes": 3351,
+        "owner": "inference_export"
+      },
+      {
+        "path": "crates/quoridor-inference/src/tensorrt.rs",
+        "sha256": "f32699f7065e7518c475d806a558f97d9305b23d3e057e530537441f815b78e3",
+        "bytes": 3439,
+        "owner": "inference_export"
+      },
+      {
+        "path": "crates/quoridor-inference/build.rs",
+        "sha256": "59900bcae6e8c82a043ac26eae464fadcc1643287969c8377a206c1eb4d11d34",
+        "bytes": 3800,
+        "owner": "inference_export"
+      },
+      {
+        "path": "crates/quoridor-inference/examples/verify.rs",
+        "sha256": "2441b00122568bf7876553c26b30d3193b8e4eae0c3d708ebec74ba259da041b",
+        "bytes": 2726,
+        "owner": "inference_export"
+      },
+      {
+        "path": "crates/quoridor-inference/native/ort.cpp",
+        "sha256": "0911d448754c58d1a8869cc1ec46aad7adcd8e530e05401446333777c80108d9",
+        "bytes": 6301,
+        "owner": "inference_export"
+      },
+      {
+        "path": "crates/quoridor-inference/native/aoti.cpp",
+        "sha256": "9eea4c35342b6170676160a28b2d6da7ea49a2af99cc4f7319af4d3c424413b2",
+        "bytes": 6670,
+        "owner": "inference_export"
+      },
+      {
+        "path": "crates/quoridor-inference/native/tensorrt.cpp",
+        "sha256": "084d887c6164732026951e23662c347570c831656b60eac3a798e4e12adb561c",
+        "bytes": 9365,
+        "owner": "inference_export"
+      },
+      {
+        "path": "crates/quoridor-inference/native/work_counts.h",
+        "sha256": "da9aa87533e414254185034706f3e03c28626363a4d76ebf38496da2c439a7e1",
+        "bytes": 546,
+        "owner": "inference_export"
+      },
+      {
+        "path": "crates/quoridor-inference/tests/work_counts.cpp",
+        "sha256": "c662d7310c15696ad1bddc2e8db18808525b2a8facdf7d67500a7f43ff2a48ef",
+        "bytes": 757,
+        "owner": "inference_export"
+      },
+      {
+        "path": ".devcontainer/Dockerfile",
+        "sha256": "67bfa7ab3611837e7f06430367ac9e4f2e9872bf3913711b3cf23db40914df48",
+        "bytes": 2866,
+        "owner": "environment_cleanup"
+      },
+      {
+        "path": ".devcontainer/devcontainer.json",
+        "sha256": "487149337ec36545831a165aa23722e68fe4807d41364f20ef50d84dd4010106",
+        "bytes": 3033,
+        "owner": "environment_cleanup"
+      },
+      {
+        "path": ".devcontainer/post-create.sh",
+        "sha256": "98b8702c33e453308bb43c1de2db1160f55d3e3a3878fb05fddb8e1caba56ed4",
+        "bytes": 1770,
+        "owner": "environment_cleanup"
+      },
+      {
+        "path": ".devcontainer/toolchain.lock.json",
+        "sha256": "eda5ea099d81649a0d0c296e53770c818eb09128ec747f47b79c56e6fba3c768",
+        "bytes": 3235,
+        "owner": "environment_cleanup"
+      },
+      {
+        "path": ".devcontainer/update-toolchain.sh",
+        "sha256": "f540a3c9b141d2082140c6185bb8047069b3fc2c1ae6ae1bd3294e76ad07c0da",
+        "bytes": 5003,
+        "owner": "environment_cleanup"
+      },
+      {
+        "path": "crates/quoridor-core/src/lib.rs",
+        "sha256": "c41814c97164d8c59a3bfd45685b54b21942bdbb8acc035cf0d4d809b7741f3b",
+        "bytes": 342,
+        "owner": "environment_cleanup"
+      },
+      {
+        "path": "crates/quoridor-wasm/src/lib.rs",
+        "sha256": "8e6b00105be4e17b1dd78209eaed874105fc4a78fb8f1946a0982c7ebb7b83ac",
+        "bytes": 7072,
+        "owner": "environment_cleanup"
+      },
+      {
+        "path": "scripts/dev/manage_worktree.sh",
+        "sha256": "3afb6dcce13ee47dc2d5775b82e14ee331bc66eab6a2e5c16abc583c83eb5c8c",
+        "bytes": 4037,
+        "owner": "environment_cleanup"
+      },
+      {
+        "path": "scripts/dev/setup-project.sh",
+        "sha256": "5cbeabf64c3d9f68ef96f92f0981e07ac28f761a351aa341fed3e4f00fda9833",
+        "bytes": 447,
+        "owner": "environment_cleanup"
+      },
+      {
+        "path": "scripts/dev/verify_env.sh",
+        "sha256": "6f6ba101c54768ca9a500dc1ebaefb348873f3af2533a4612579bc8f6e67f7f8",
+        "bytes": 5644,
+        "owner": "environment_cleanup"
+      },
+      {
+        "path": "scripts/dev/test_manage_worktree.py",
+        "sha256": "b4526759b1b391a9fd99a152bc5a28312d00b0c7864214e8f2ebb28308174d16",
+        "bytes": 4392,
+        "owner": "environment_cleanup"
+      },
+      {
+        "path": "package.json",
+        "sha256": "8e40f68fb6f9300957d3506d53c2d344e0fc568be376da1e4b01717c29992455",
+        "bytes": 3003,
+        "owner": "quality_product"
+      },
+      {
+        "path": "scripts/dev/check-research.py",
+        "sha256": "eedc06e5cb916831d6910c4c07c8570e9d0dfe626c48e91004f03a87a8ad2596",
+        "bytes": 7955,
+        "owner": "quality_product"
+      },
+      {
+        "path": "scripts/verify-production.mjs",
+        "sha256": "51e10e3abd020719fef9b90d656e3d161ad2c013a1d19b5f81495ebb6fa56a08",
+        "bytes": 3949,
+        "owner": "quality_product"
+      },
+      {
+        "path": "apps/web/vite.config.ts",
+        "sha256": "1bc13321e1f81c059b89d9ae6872e2ee3ca19597a1a24ce8182967e2ea2ff237",
+        "bytes": 1050,
+        "owner": "quality_product"
+      },
+      {
+        "path": "tools/research-quality/test_quality_entrypoints.py",
+        "sha256": "e8fe55d5484bb6602720693285909b43eddf5e0454a8ca559b36a7d04deba2c5",
+        "bytes": 3558,
+        "owner": "quality_product"
+      },
+      {
+        "path": "tools/research-quality/test_verify_production.mjs",
+        "sha256": "250d8555aa33206a7e367bfc07d993802d240acf3768532af9a87e8bc604858f",
+        "bytes": 5598,
+        "owner": "quality_product"
+      },
+      {
+        "path": ".devcontainer/storage-policy.md",
+        "sha256": "cbb81a6318db3dc3942bf6b3bd224ed8d7ec0e86c774b3c8703d31a8578bc765",
+        "bytes": 8897,
+        "owner": "Root"
+      },
+      {
+        "path": "docs/README.md",
+        "sha256": "8f99fe16184ab4636aa7765c20446e430a6b4b1fa3ae6896f98556c1f501907a",
+        "bytes": 4665,
+        "owner": "Root"
+      },
+      {
+        "path": "docs/development/ai-research-code.md",
+        "sha256": "1a9ecea0711374dae92f55516c7928a4c09aa8b7dc83d7116ce90a055ccaa2be",
+        "bytes": 8582,
+        "owner": "Root"
+      },
+      {
+        "path": "docs/development/beads-workflow.md",
+        "sha256": "9fea10034fd6876deae7d5b30af120fc14ffb57aeb22eeb99bd61ba459850d1e",
+        "bytes": 16096,
+        "owner": "Root"
+      },
+      {
+        "path": "docs/development/nnue-training.md",
+        "sha256": "b1fd3c96a61879065e414cecf3fafde3bdd5c3c43b9e9ae6b8699f4a8d18fb35",
+        "bytes": 3226,
+        "owner": "Root"
+      },
+      {
+        "path": "docs/development/rust-ai.md",
+        "sha256": "3863611188e6702bcdaa759be27668378d3aa8545cc73aa6650bb5b580de4dba",
+        "bytes": 14993,
+        "owner": "Root"
+      },
+      {
+        "path": "docs/development/rust-python-environment.md",
+        "sha256": "c3d2d0c31f046595e97a38868865cf3dd0b3a05606c7fdc8e19a190e59a3ec44",
+        "bytes": 5701,
+        "owner": "Root"
+      },
+      {
+        "path": "docs/reports/environment-presets.md",
+        "sha256": "582ae257066020d9ee98f9039f71e84265af0de6630dc5b4b0b681fa965c2a5f",
+        "bytes": 9177,
+        "owner": "Root"
+      },
+      {
+        "path": "docs/reports/repository-maintenance.md",
+        "sha256": "58cdb79f18c85959a4d0e086be8d344da0a79890c053f4b23169b737ff7a298b",
+        "bytes": 6486,
+        "owner": "Root"
+      },
+      {
+        "path": "tools/model-export/README.md",
+        "sha256": "a4913363a8a432ea81b0f8b2a041453e3a698d91a07b693ccfbc0a71ad49d0c6",
+        "bytes": 4841,
+        "owner": "Root"
+      },
+      {
+        "path": "crates/quoridor-inference/README.md",
+        "sha256": "94434f826d7dc7f43a1c11eefd6232874a9ae7af672845f4d401953e513a6b26",
+        "bytes": 2811,
+        "owner": "Root"
+      }
+    ],
+    "deleted": [
+      ".devcontainer/install-godot.sh",
+      "scripts/dev/verify_godot_headless.sh",
+      "scripts/dev/ai-sigma-runner.py",
+      "scripts/dev/ai-sigma-context-runner.py"
+    ],
+    "owner_stop_refs": [
+      {
+        "member": "learning_inputs/handoff.json",
+        "sha256": "54eafb82588bb31aa249b439dc07abdf16c792183d3c7caf863ae3ecd436b2d9",
+        "bytes": 3090
+      },
+      {
+        "member": "cycle_cleanup/handoff.json",
+        "sha256": "05e6fd30f6eb20fe5d758d89b180a3509afe147455b7de0b40549822cd4fb859",
+        "bytes": 1869
+      },
+      {
+        "member": "rust_runtime/STOP.json",
+        "sha256": "235dfc12f1b537b5e47784f704feddb422d23d32f1c320ff177cba84fc5fc75d",
+        "bytes": 2892
+      },
+      {
+        "member": "inference_export/STOP.json",
+        "sha256": "c00ba38e391dcff09dbcac18eafe5d7488fd2a4bd330388bfdaf7e8c77dae290",
+        "bytes": 5271
+      },
+      {
+        "member": "environment_cleanup/STOP.json",
+        "sha256": "43f9029896ac2eade95d1662d1405402243f6ef7467cb11912a68c4233de9efe",
+        "bytes": 3740
+      },
+      {
+        "member": "quality_product/handoff.json",
+        "sha256": "e8b373fa276249f9e21b35eef4315c74010fae6d592962c82cc1e29a8c061848",
+        "bytes": 2280
+      }
+    ],
+    "root_override": [
+      {
+        "path": "apps/web/vite.config.ts",
+        "stopped_owner_sha": "6d547d9f2b5115a05e1006451312b7bf72fc50697ee9c5c9292127c7780b1b70",
+        "current_sha": "1bc13321e1f81c059b89d9ae6872e2ee3ca19597a1a24ce8182967e2ea2ff237",
+        "independent_addendum": "independent-review/integration-addendum.json",
+        "repair": "Omit undefined optional property; preserve default and custom clearing policy"
+      }
+    ],
+    "writers_stopped": true
+  },
+  "independent_review_members": [
+    "independent-review/report.md",
+    "independent-review/review.json",
+    "independent-review/integration-addendum.json"
+  ],
+  "checks": {
+    "research_nn0": 137,
+    "tiny_CPU_model_fixtures": 5,
+    "product_audio_render": 9,
+    "native_provider_all_feature": 6,
+    "nnue_runner": {
+      "pass": 36,
+      "ignored": 1
+    },
+    "product_Rust_release": 39,
+    "browser": {
+      "root": 7,
+      "subpath": 7,
+      "scope": "rules/AI Worker/bridge/lifetime and both initially timed-out audio cases; not full84 UI suite"
+    },
+    "ordinary_dist": {
+      "files": 28,
+      "all_byte_sha_unchanged": true,
+      "hashes": {
+        "index.html": "0a1b2ad317bbb2a819c8706af678ab2ad72f7c06afee039889274d0b7ec8a211",
+        "assets/ai.worker-oNm6zb0k.js": "28548ef8f0c2eeda3362cc75131d4a89153a813c2573f11756519549526001dc",
+        "assets/index-7AuP2xIO.css": "3be571755bbd4154c4fe3cba98e3997205cde2ebb294b84d77fd2a4c2923722c",
+        "assets/index-Dh71Ny_7.js": "e8c5c7dd15d1677ecc2cef666bcd17f0cfca597bfdfcf4af98f7fb7b33e1462d",
+        "assets/noto-sans-jp-japanese-400-normal-Cy9Yahyj.woff2": "4a7b928d4d75e7fc0bace614030664a7ea7eb7d2f754fd2b2da9c3c0ed350570",
+        "assets/noto-sans-jp-japanese-700-normal-Cy7xyTMA.woff2": "a5861823629995d9abb4b16b96a1c57139d9663d7a256209cb6b40640ed5431e",
+        "assets/quoridor_ai_bg-fgkONfPX.wasm": "2a6b22f922ded13a4cb1b644c82e89b53512185a4548ef5f291b899deadd4131",
+        "assets/quoridor_rules_bg-B9hWNwMJ.wasm": "55f6123375a3fa516a505bd1dd032026eb1d41c95ae0d02bc714d9827891b79c",
+        "assets/audio/click.wav": "0ea6c11211783972dc5471a30b936960b0c717a6e6b5913d97b30a0be45253b7",
+        "assets/audio/cozy-puzzle.mp3": "8882f4bda94cfe02495fdd023f7ce1916a065619bc6fdb33ce95f094665772b3",
+        "assets/audio/impact-sounds-license.txt": "6fa7dfb432dc8aefe26116cf179e25407a46bdee5bae736decb5bd88d4a565d2",
+        "assets/audio/interface-sounds-license.txt": "1a2d0f1e2926b1de6f90c843c27a3101cf212ec29fb07d563cbc339a2329ea81",
+        "assets/audio/lose.wav": "660be9eba786b98aa5385af4b55823bcb70eb5c1b6a38b11d65bbc0a5059d64c",
+        "assets/audio/manifest.json": "29a7951f9a33df0dc14bca3a3554ba72497af67cf826d38794b59b400c86120f",
+        "assets/audio/pawn.wav": "846df720ff3453449751bb3db89e4894e19edae9eb96c2488506ae1389ff137c",
+        "assets/audio/README.md": "e56865888152ba4b36a7aca5122fe32eb0c4a5af582f82fd079493f4396f7056",
+        "assets/audio/undo.wav": "4a0bf0c30f935218874cbe4cbbb02528d04797d4899308f28e3acadc0c95073c",
+        "assets/audio/wall.wav": "f05cf60507297b0abe67c899d1f6b5b30ef8509045dc4e6e1b1711e50c5798c3",
+        "assets/audio/win.wav": "2878f500853fcf4dbfe239f1c03dd57324d0b1a3c12ba17d66236611b8534f24",
+        "assets/environments/epping-forest-02-2k.hdr": "d47f6f2c789d44d2b6502523ba93c8cc85d791f2683dea404d608ee73c4a23fb",
+        "assets/environments/qwantani-noon-2k.hdr": "6a36c0fd63f8a11788c84a514bfbb840b17400f24a55166d358b454accbc91a8",
+        "assets/environments/README.md": "457f9524fe5c119c1fb4b00c351b18962bc5a841f69fafa4395ac2aa7634992d",
+        "assets/environments/warm-restaurant-night-2k.hdr": "115fdee7807078798e72277357d40df9671eb65e7667d79ece813f4e06b5d92a",
+        "assets/tabletop/beech-albedo.png": "cc1ebb9b08e6c95336b841601d9dcb4df9b7e577f4c1f1ac4dfa522f8f1f7f2e",
+        "assets/tabletop/comfy-cafe-2k.hdr": "00597d2a2174b7803c10bd2d690922e170bb614bce6c98c9c9b688698f1d234d",
+        "assets/tabletop/README.md": "674f8bcd9556f5a9640aa80952e84b4afb0ac5e6b53d683a175f4dcb6f9d0ec3",
+        "assets/ui/quoridor-title-logo.png": "669c8423640114c05a0d492ebcedf0eb58da9f1b4c0ff26557f34c5e5dfaa23b",
+        "assets/ui/README.md": "6f16b3cc9871a558b647d20ebaa1363b17826a5eda956b559cd797d628b69499"
+      },
+      "test_api_markers": []
+    },
+    "Wasm_research_feature": "PASS",
+    "formatting": "scoped Ruff/Rustfmt/Prettier; C++/Bash manual style + compile/syntax; no formatter install"
+  },
+  "processes": {
+    "product-check": {
+      "command": ["npm", "run", "check"],
+      "status": "failed",
+      "child": {
+        "pid": 2492636,
+        "start_ticks": "51882285",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "log_bytes_seen": 6286,
+      "scope": "session group and periodically recorded descendants; no daemon adoption",
+      "error": "cycle child failed: ['npm', 'run', 'check']: 1",
+      "reason": "CycleStopped",
+      "exit_code": 1,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "cleanup_complete": true,
+      "log_bytes_retained": 6286,
+      "wall_seconds": 98.90089128701948
+    },
+    "product-check-repaired": {
+      "command": [
+        "bash",
+        "-c",
+        "node scripts/codegen-protocol.mjs --check && node scripts/generate-fixtures.mjs --check && node scripts/generate-ai-fixtures.mjs --check && npm run typecheck && npm run test:render && npm run test:audio && node scripts/check-boundaries.mjs && cargo fmt --package quoridor-core --package quoridor-ai --package quoridor-wasm -- --check && cargo check --locked -p quoridor-core -p quoridor-ai -p quoridor-wasm --no-default-features --features quoridor-wasm/rules && cargo check --locked -p quoridor-core -p quoridor-ai -p quoridor-wasm --no-default-features --features quoridor-wasm/ai && cargo clippy --locked -p quoridor-core -p quoridor-ai -p quoridor-wasm --no-default-features --features quoridor-wasm/rules -- -D warnings && cargo clippy --locked -p quoridor-core -p quoridor-ai -p quoridor-wasm --no-default-features --features quoridor-wasm/ai -- -D warnings && cargo test --locked -p quoridor-core -p quoridor-ai && cargo test --locked -p quoridor-wasm --no-default-features --features rules && cargo test --locked -p quoridor-wasm --no-default-features --features ai"
+      ],
+      "status": "failed",
+      "child": {
+        "pid": 2496941,
+        "start_ticks": "51898558",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "log_bytes_seen": 3525,
+      "scope": "session group and periodically recorded descendants; no daemon adoption",
+      "error": "cycle child failed: ['bash', '-c', 'node scripts/codegen-protocol.mjs --check && node scripts/generate-fixtures.mjs --check && node scripts/generate-ai-fixtures.mjs --check && npm run typecheck && npm run test:render && npm run test:audio && node scripts/check-boundaries.mjs && cargo fmt --package quoridor-core --package quoridor-ai --package quoridor-wasm -- --check && cargo check --locked -p quoridor-core -p quoridor-ai -p quoridor-wasm --no-default-features --features quoridor-wasm/rules && cargo check --locked -p quoridor-core -p quoridor-ai -p quoridor-wasm --no-default-features --features quoridor-wasm/ai && cargo clippy --locked -p quoridor-core -p quoridor-ai -p quoridor-wasm --no-default-features --features quoridor-wasm/rules -- -D warnings && cargo clippy --locked -p quoridor-core -p quoridor-ai -p quoridor-wasm --no-default-features --features quoridor-wasm/ai -- -D warnings && cargo test --locked -p quoridor-core -p quoridor-ai && cargo test --locked -p quoridor-wasm --no-default-features --features rules && cargo test --locked -p quoridor-wasm --no-default-features --features ai']: -15",
+      "reason": "CycleStopped",
+      "exit_code": -15,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "cleanup_complete": true,
+      "log_bytes_retained": 3525,
+      "wall_seconds": 54.94531633501174
+    },
+    "product-rust-release": {
+      "command": [
+        "bash",
+        "-c",
+        "cargo fmt --package quoridor-core --package quoridor-ai --package quoridor-wasm -- --check && cargo check --offline --release --locked -p quoridor-core -p quoridor-ai -p quoridor-wasm --no-default-features --features quoridor-wasm/rules && cargo check --offline --release --locked -p quoridor-core -p quoridor-ai -p quoridor-wasm --no-default-features --features quoridor-wasm/ai && cargo clippy --offline --release --locked -p quoridor-core -p quoridor-ai -p quoridor-wasm --no-default-features --features quoridor-wasm/rules -- -D warnings && cargo clippy --offline --release --locked -p quoridor-core -p quoridor-ai -p quoridor-wasm --no-default-features --features quoridor-wasm/ai -- -D warnings && cargo test --offline --release --locked -p quoridor-core -p quoridor-ai && cargo test --offline --release --locked -p quoridor-wasm --no-default-features --features rules && cargo test --offline --release --locked -p quoridor-wasm --no-default-features --features ai"
+      ],
+      "status": "complete",
+      "child": {
+        "pid": 2500363,
+        "start_ticks": "51913271",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "log_bytes_seen": 11181,
+      "scope": "session group and periodically recorded descendants; no daemon adoption",
+      "exit_code": 0,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "cleanup_complete": true,
+      "log_bytes_retained": 11181,
+      "wall_seconds": 233.0902581679984
+    },
+    "production-browser": {
+      "command": ["npm", "run", "verify:production"],
+      "status": "failed",
+      "child": {
+        "pid": 2507392,
+        "start_ticks": "51947403",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "log_bytes_seen": 6181,
+      "scope": "session group and periodically recorded descendants; no daemon adoption",
+      "error": "cycle child failed: ['npm', 'run', 'verify:production']: -15",
+      "reason": "CycleStopped",
+      "exit_code": -15,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "cleanup_complete": true,
+      "log_bytes_retained": 6181,
+      "wall_seconds": 189.39177587104496
+    },
+    "production-scoped": {
+      "command": [
+        "node",
+        "--input-type=module",
+        "-e",
+        "import {verifyProduction} from './scripts/verify-production.mjs';\nimport {spawn} from 'node:child_process';\nawait verifyProduction({run:async(command,args,env)=>{\n if(args.join(' ')==='run wasm:build'){console.log('Reusing completed current-source release rules/AI Wasm from first production attempt');return;}\n const scoped=args.join(' ')==='run test:e2e'?[...args,'--','tests/e2e/phase0.spec.ts','tests/e2e/phase1-rules.spec.ts','tests/e2e/audio.spec.ts','--grep','rules Wasm|Wasm full views|public bridge|Wasm apply|first gesture']:args;\n await new Promise((resolve,reject)=>{const p=spawn(command,scoped,{cwd:process.cwd(),env,stdio:'inherit'});p.on('error',reject);p.on('exit',(c,s)=>c===0?resolve():reject(new Error(`exit ${c??s}`)));});\n}});"
+      ],
+      "status": "complete",
+      "child": {
+        "pid": 2511445,
+        "start_ticks": "51969280",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "log_bytes_seen": 6079,
+      "scope": "session group and periodically recorded descendants; no daemon adoption",
+      "exit_code": 0,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "cleanup_complete": true,
+      "log_bytes_retained": 6079,
+      "wall_seconds": 138.55131634697318
+    },
+    "production-hidden-tab": {
+      "command": [
+        "node",
+        "--input-type=module",
+        "-e",
+        "import {verifyProduction} from './scripts/verify-production.mjs';import{spawn}from'node:child_process';\nawait verifyProduction({run:async(command,args,env)=>{if(args.join(' ')==='run wasm:build'||args.join(' ')==='run build -w @quoridor/web'){console.log('Reusing qualified current-source production outputs');return;}\nconst scoped=[...args,'--','tests/e2e/audio.spec.ts','--grep','^hidden tab stops'];await new Promise((res,rej)=>{const p=spawn(command,scoped,{cwd:process.cwd(),env,stdio:'inherit'});p.on('error',rej);p.on('exit',(c,s)=>c===0?res():rej(new Error(`exit ${c??s}`)));});}});"
+      ],
+      "status": "failed",
+      "child": {
+        "pid": 2518219,
+        "start_ticks": "52018758",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "log_bytes_seen": 1212,
+      "scope": "session group and periodically recorded descendants; no daemon adoption",
+      "error": "cycle child failed: ['node', '--input-type=module', '-e', \"import {verifyProduction} from './scripts/verify-production.mjs';import{spawn}from'node:child_process';\\nawait verifyProduction({run:async(command,args,env)=>{if(args.join(' ')==='run wasm:build'||args.join(' ')==='run build -w @quoridor/web'){console.log('Reusing qualified current-source production outputs');return;}\\nconst scoped=[...args,'--','tests/e2e/audio.spec.ts','--grep','^hidden tab stops'];await new Promise((res,rej)=>{const p=spawn(command,scoped,{cwd:process.cwd(),env,stdio:'inherit'});p.on('error',rej);p.on('exit',(c,s)=>c===0?res():rej(new Error(`exit ${c??s}`)));});}});\"]: 1",
+      "reason": "CycleStopped",
+      "exit_code": 1,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "cleanup_complete": true,
+      "log_bytes_retained": 1212,
+      "wall_seconds": 2.1352173929917626
+    },
+    "production-hidden-tab-r2": {
+      "command": [
+        "node",
+        "--input-type=module",
+        "-e",
+        "import {verifyProduction} from './scripts/verify-production.mjs';import{spawn}from'node:child_process';\nawait verifyProduction({run:async(command,args,env)=>{if(args.join(' ')==='run wasm:build'||args.join(' ')==='run build -w @quoridor/web'){console.log('Reusing qualified current-source production outputs');return;}\nconst scoped=[...args,'--','tests/e2e/audio.spec.ts','--grep','hidden tab stops'];await new Promise((res,rej)=>{const p=spawn(command,scoped,{cwd:process.cwd(),env,stdio:'inherit'});p.on('error',rej);p.on('exit',(c,s)=>c===0?res():rej(new Error(`exit ${c??s}`)));});}});"
+      ],
+      "status": "complete",
+      "child": {
+        "pid": 2519311,
+        "start_ticks": "52026955",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "log_bytes_seen": 1215,
+      "scope": "session group and periodically recorded descendants; no daemon adoption",
+      "exit_code": 0,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "cleanup_complete": true,
+      "log_bytes_retained": 1215,
+      "wall_seconds": 29.151370290957857
+    },
+    "wasm-research-check": {
+      "command": [
+        "cargo",
+        "check",
+        "--offline",
+        "--release",
+        "--locked",
+        "-p",
+        "quoridor-wasm",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--no-default-features",
+        "--features",
+        "research"
+      ],
+      "status": "complete",
+      "child": {
+        "pid": 2514528,
+        "start_ticks": "51989860",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "log_bytes_seen": 1215,
+      "scope": "session group and periodically recorded descendants; no daemon adoption",
+      "exit_code": 0,
+      "remaining": [],
+      "direct_child_reaped": true,
+      "descendant_visibility": "observed",
+      "cleanup_complete": true,
+      "log_bytes_retained": 1215,
+      "wall_seconds": 17.234480846032966
+    }
+  },
+  "resource_limits": {
+    "CPU": 4,
+    "RAM_GiB": 8,
+    "GPU_science": 0,
+    "storage_cap_bytes": 12884901888,
+    "final_directed_current_plus_unused_known_bytes": 12765745152,
+    "unknown_retained_bytes": 134217728,
+    "directed_storage_status": "within",
+    "future_Git_plus_record_bound_bytes": 8388608
+  },
+  "preserved_failures": [
+    "Owner missing native environment, AS mapping, fixture RAM cap and Clippy attempts",
+    "Root initial TypeScript optional-property failure",
+    "Root current dev cache forecast over and over-cap observation, corrected by retiring only regenerable owned current files",
+    "Full UI first audio and hidden-tab timeouts; scoped retry passed; full84 suite incomplete",
+    "Hidden-tab first retry grep selected0 tests and was NOT_RUN"
+  ],
+  "limitations": [
+    "No large-corpus RSS/performance or millions-distinct qualification",
+    "No GPU model forward/capture qualification or actual model export",
+    "No new scientific training/generation/arena/strength claim",
+    "No dependency install/environment update/container rebuild",
+    "Compact metadata/selectors O(rows/groups); chunked reductions not universal BLAS bit identity",
+    "No external/global process-quiet certification",
+    "NNUE pinned-PyTorch unit remains ignored; approved tiny model fixtures verified separately",
+    "No new research authorization or old budget reset"
+  ],
+  "archive": {
+    "path": "research-data/maintenance/repository-repair-20261006/verification-evidence.tar.gz",
+    "sha256": "4fa16ae1c70849986648ad8ffb992af08b828d25ddf3c14814ec72e805dd7d3e",
+    "bytes": 418650,
+    "members": [
+      {
+        "member": "cycle_cleanup/handoff-before-review.json",
+        "sha256": "37215a2614a010e1e4223039c3ce1f381a5fd99e142bea0562a7722905bb49be",
+        "bytes": 1554
+      },
+      {
+        "member": "cycle_cleanup/handoff.json",
+        "sha256": "05e6fd30f6eb20fe5d758d89b180a3509afe147455b7de0b40549822cd4fb859",
+        "bytes": 1869
+      },
+      {
+        "member": "cycle_cleanup/identity-unavailable-process.json",
+        "sha256": "f12a047c59c8099dd7d279b95a72fe23f96333083cfc75c57106af1fe731b545",
+        "bytes": 691
+      },
+      {
+        "member": "cycle_cleanup/resource-check.json",
+        "sha256": "fdc8b43f7b5453cf361e4dbfb7682667cc7e129f6a3fb0aff7f80087c047274b",
+        "bytes": 175
+      },
+      {
+        "member": "cycle_cleanup/tests.txt",
+        "sha256": "a3599908980e7eab1ca7d8da498c870f49d84cfd06acae75252c98c62d016349",
+        "bytes": 1813
+      },
+      {
+        "member": "environment_cleanup/STOP.json",
+        "sha256": "43f9029896ac2eade95d1662d1405402243f6ef7467cb11912a68c4233de9efe",
+        "bytes": 3740
+      },
+      {
+        "member": "environment_cleanup/verify_env_embedded.js",
+        "sha256": "5d6264062220d0a90d883f77f5e5c9c46159a9d3569eba8dbd6f09f807e74faf",
+        "bytes": 574
+      },
+      {
+        "member": "environment_cleanup/verify_env_embedded.py",
+        "sha256": "4f206d4bbab6a9373006172a50ca91b8bfec5c1821a7e1739081e26beb3a91a3",
+        "bytes": 1209
+      },
+      {
+        "member": "independent-review/blockers.json",
+        "sha256": "c87294320e1d32f72e6db1090ee139162618f87c77d29e8b50509c0ef4cb9f87",
+        "bytes": 5007
+      },
+      {
+        "member": "independent-review/integration-addendum.json",
+        "sha256": "adccfe02366a22c15c5851cdf7252c93807135875abd5495d41686c3399a17aa",
+        "bytes": 5561
+      },
+      {
+        "member": "independent-review/parser-fixture.json",
+        "sha256": "d4626aad57022f4b34469c992513bdc20892abac7435275fe575f6dbb3e599f8",
+        "bytes": 922
+      },
+      {
+        "member": "independent-review/report.md",
+        "sha256": "026ee9da45a37bf4c3545cffbbdd516f056cd8b8275db44e2baa0dec1e6f134f",
+        "bytes": 13827
+      },
+      {
+        "member": "independent-review/review.json",
+        "sha256": "68222a41c2e8696ea0c1ffc527c3846b180ce6a2b3a944994917deaa81f54c0a",
+        "bytes": 33622
+      },
+      {
+        "member": "inference_export/STOP.json",
+        "sha256": "c00ba38e391dcff09dbcac18eafe5d7488fd2a4bd330388bfdaf7e8c77dae290",
+        "bytes": 5271
+      },
+      {
+        "member": "inference_export/counter-check-0.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "member": "inference_export/counter-check-1.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "member": "inference_export/counter-checks.json",
+        "sha256": "2315ef1ed0afb462e4840db836260f23f6c4f3a9f3d3e4034b229462d73c279d",
+        "bytes": 705
+      },
+      {
+        "member": "inference_export/light-check-0.txt",
+        "sha256": "c7898f18dd249b374a1833944d38eeddf70146cd940bf3f3e855c78d64db67d1",
+        "bytes": 104
+      },
+      {
+        "member": "inference_export/light-check-1.txt",
+        "sha256": "3bc53bf3e981a98a34a852e175bf9b77af841edea74fca595d9aedcbaf9a4938",
+        "bytes": 26
+      },
+      {
+        "member": "inference_export/light-check-2.txt",
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "bytes": 19
+      },
+      {
+        "member": "inference_export/light-check-3.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "member": "inference_export/native-release-check-affinity.json",
+        "sha256": "e0e0b0973f2364cf5f88f4b1944ebb1b2e7836b788ecdbb14b780c4105a91df3",
+        "bytes": 656
+      },
+      {
+        "member": "inference_export/native-release-check.json",
+        "sha256": "c3f2d7706f2565a16646f72bac829a79ad77848055dbacb54e56a8f4b414743d",
+        "bytes": 611
+      },
+      {
+        "member": "inference_export/native-release-test-affinity.txt",
+        "sha256": "2c62029d72427f2d717042ca3e399bd3322484f34f96368fb907c7320ef296c4",
+        "bytes": 31410
+      },
+      {
+        "member": "inference_export/native-release-test.txt",
+        "sha256": "10fca54649409ebc1e70ab490ba34624d7558da7c16f544215fa59691ed5ab32",
+        "bytes": 3583
+      },
+      {
+        "member": "inference_export/native-test.txt",
+        "sha256": "3549245800c2193e20f89863d187d27eb8dcb31eecd3f499fa766346c11ec700",
+        "bytes": 55
+      },
+      {
+        "member": "inference_export/work-counts-test",
+        "sha256": "4cbb1d9af9ca3f000b821ae320489ca9f7e74560b95d5432d21d3958c1e2d18e",
+        "bytes": 17288
+      },
+      {
+        "member": "integration/dist-before.json",
+        "sha256": "027fcb1b22cc6a29dde3db423b0f08843766b14cb8d46e9b761be0ecc77051b2",
+        "bytes": 2926
+      },
+      {
+        "member": "integration/ordinary-dist-final.json",
+        "sha256": "8ce8a1ff321d44469db3cdadba7cf0052d1a64f2b8361331fa83fef2080dd961",
+        "bytes": 3075
+      },
+      {
+        "member": "integration/prior-product-metrics.json",
+        "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "bytes": 3
+      },
+      {
+        "member": "integration/product-check-repaired.log",
+        "sha256": "952f805837569111ca3993e1cfbdf20e1375daaa8ab39eb859f098b7b85fb2ce",
+        "bytes": 3525
+      },
+      {
+        "member": "integration/product-check-repaired.process.json",
+        "sha256": "4c8929f4919742a3d52b61e2d255404abc373eb9f94ddef21d7b590500da07dc",
+        "bytes": 2745
+      },
+      {
+        "member": "integration/product-check.log",
+        "sha256": "07b4404004d0b4986fc9b1143afbb5304904c7187b1e4e0541ca79829c89e26f",
+        "bytes": 6286
+      },
+      {
+        "member": "integration/product-check.process.json",
+        "sha256": "e9758fda43453550b9500b7a3668b4dbd6dde12b99b6be69062ce9e6ea38181e",
+        "bytes": 605
+      },
+      {
+        "member": "integration/product-rust-release.log",
+        "sha256": "1b29ab19125fe9cb26e944edc6e2ad4f89b521bb5fc02943fe391b3bbfc5b130",
+        "bytes": 11181
+      },
+      {
+        "member": "integration/product-rust-release.process.json",
+        "sha256": "e15abfd678f558fd8bdb1012be83d6f23234399d01c7feda4bb095ed35e75204",
+        "bytes": 1485
+      },
+      {
+        "member": "integration/production-audio-timeout.md",
+        "sha256": "480ed5e7c9a855cd4fac14d587ad092d0b27510ff9cf288cb352b3362f73fd4f",
+        "bytes": 12081
+      },
+      {
+        "member": "integration/production-browser.log",
+        "sha256": "133233f16cf60cf05dbdc742306e06cdf962534fefb7eeac825044385d0b60fe",
+        "bytes": 6181
+      },
+      {
+        "member": "integration/production-browser.process.json",
+        "sha256": "e8264b9fdb77807dce928af2f673fd3f25b4c701f73534a7e9a031f0a828be9e",
+        "bytes": 634
+      },
+      {
+        "member": "integration/production-hidden-tab-r2.log",
+        "sha256": "c9c277a5a1614e706d42b416f50853fda0fc739de4febc42ef63fb191fe982ec",
+        "bytes": 1215
+      },
+      {
+        "member": "integration/production-hidden-tab-r2.process.json",
+        "sha256": "bee5d49d8ed59505fbe9a6818dad01370046ab2b79aa854db5d3fa52d1326b87",
+        "bytes": 1132
+      },
+      {
+        "member": "integration/production-hidden-tab.log",
+        "sha256": "2c824cdbd97826843b279f2fa8af4838b16a9a7488923f2cfb6c56e68daee7e1",
+        "bytes": 1212
+      },
+      {
+        "member": "integration/production-hidden-tab.process.json",
+        "sha256": "a63568dfb52ac709ddfb5a5476c274357695db9b5e8014a4f44fd781d630b426",
+        "bytes": 1834
+      },
+      {
+        "member": "integration/production-scoped.log",
+        "sha256": "fa31be2237cdd8b54b4e9260f204558de1b9f26fc08323778e7b202e6dffeb01",
+        "bytes": 6079
+      },
+      {
+        "member": "integration/production-scoped.process.json",
+        "sha256": "4e0762941db127b0de8e4e532d57a9d7fadde4df2db91c829799bf6502f9d6cf",
+        "bytes": 1295
+      },
+      {
+        "member": "integration/retired-current-product-cache.json.gz",
+        "sha256": "522d3f2e89513375c7b2f0649a5e22a3e71e21d00ceaac887eda80e1416104d3",
+        "bytes": 116083
+      },
+      {
+        "member": "integration/retired-final-product-cache.json.gz",
+        "sha256": "9426c9c8fc2ae67513b1da253ee7169129b72ec82e9775ce6c63683a40448a3a",
+        "bytes": 29082
+      },
+      {
+        "member": "integration/retired-product-release-cache.json.gz",
+        "sha256": "beabc09575194c0c0c9bf464edfeb4bbe9add785a6176c8557dc18426c8a09e2",
+        "bytes": 33830
+      },
+      {
+        "member": "integration/source-bindings.json",
+        "sha256": "9e0e31712e8c2d87d107f6f6c6f4e3e0d5ee6b739298782e1eb82d55c66c8e71",
+        "bytes": 14475
+      },
+      {
+        "member": "integration/storage-after-retirement.json",
+        "sha256": "9d9317d32f392bdc0f125c526582136ed7db7d2b3b49fff4709dc05124acf636",
+        "bytes": 40102
+      },
+      {
+        "member": "integration/storage-current.json",
+        "sha256": "32e705ba53bd30e3e6b11ee321c666643666f2be259427ffb13b4572520542b8",
+        "bytes": 595481
+      },
+      {
+        "member": "integration/storage-final-manifest.json",
+        "sha256": "9d84c98ba679afb9c9b5fc8397d2fa7801c69672368231f4d22b5f16d09a05ea",
+        "bytes": 29350
+      },
+      {
+        "member": "integration/storage-final.json",
+        "sha256": "8a908cd85bf528f17fcf5abcf314015ceaaeddf7cff41559e9c675690ea90c96",
+        "bytes": 40125
+      },
+      {
+        "member": "integration/storage-manifest.json",
+        "sha256": "a2ba3f1e09b6650f8acd4c8eef9b5fabddec39ce585c0cbef5c9e7657788bf80",
+        "bytes": 379473
+      },
+      {
+        "member": "integration/wasm-research-check.log",
+        "sha256": "d5be2ae9b9a41d4e40d9b103ccb8f113e34614cae04c724728cf8cbfc3ca7722",
+        "bytes": 1215
+      },
+      {
+        "member": "integration/wasm-research-check.process.json",
+        "sha256": "925f907539fb9ee53d5dc3c67e1e3eb1a39438b5dfba34d867144491070b8f5c",
+        "bytes": 700
+      },
+      {
+        "member": "learning_inputs/final-model-tests.log",
+        "sha256": "249da7198aa9e02cae58573b99b1e198956cbef470676f91620dc10f2d72a695",
+        "bytes": 103
+      },
+      {
+        "member": "learning_inputs/final-tests.log",
+        "sha256": "465a65effb6ae7f091785b85f56544682a232397c2088b752d429986f03a4b0b",
+        "bytes": 139
+      },
+      {
+        "member": "learning_inputs/handoff.json",
+        "sha256": "54eafb82588bb31aa249b439dc07abdf16c792183d3c7caf863ae3ecd436b2d9",
+        "bytes": 3090
+      },
+      {
+        "member": "learning_inputs/nn-ledger.jsonl",
+        "sha256": "377588aed5b4c4ba50e203707b7a9996d490681cb8e7983ba858ecf625748bd5",
+        "bytes": 2280
+      },
+      {
+        "member": "learning_inputs/nn0-tests.log",
+        "sha256": "6134e028562fe08dc58ab30207288f7587f8390c46283b00e797ce5507dee017",
+        "bytes": 151
+      },
+      {
+        "member": "quality_product/check-research.log",
+        "sha256": "a97252879e60ecb1845be99a12fa5ef3bf739edf2ed6f7f9980e5c4cc4440a73",
+        "bytes": 2435
+      },
+      {
+        "member": "quality_product/handoff.json",
+        "sha256": "e8b373fa276249f9e21b35eef4315c74010fae6d592962c82cc1e29a8c061848",
+        "bytes": 2280
+      },
+      {
+        "member": "review-Git.json",
+        "sha256": "f11ff46b31299fa0cc6251846103b3c0483cff8a6dbb7c63570d7b337b37578b",
+        "bytes": 557
+      },
+      {
+        "member": "review-issue.json",
+        "sha256": "7916fa610464877b36561acf128efa1e05c50665a29c74a368251690398b9498",
+        "bytes": 1643
+      },
+      {
+        "member": "review-paths.json",
+        "sha256": "3ce75a7b846d16c8279a79066f905a89395a79e10204f4094d38d6359ad00ed6",
+        "bytes": 137
+      },
+      {
+        "member": "rust_runtime/STOP.json",
+        "sha256": "235dfc12f1b537b5e47784f704feddb422d23d32f1c320ff177cba84fc5fc75d",
+        "bytes": 2892
+      },
+      {
+        "member": "rust_runtime/failed-fixtures.json",
+        "sha256": "ab7a4e4dd8fe91f8c491158e5dd987624dcb9d942f3fdbbfcf3cd5c41df9c010",
+        "bytes": 22487
+      },
+      {
+        "member": "rust_runtime/orchestration-clippy.json",
+        "sha256": "bf7c65dd19d767ce402c95a9369f3b51edbbe4034f1ed955074188a61113a0f1",
+        "bytes": 473
+      },
+      {
+        "member": "rust_runtime/orchestration-clippy.log",
+        "sha256": "c4f5b1a0ffbd21d3853810ffa6d40e27a872c68a015c62479a7401a10d8fb2eb",
+        "bytes": 30733
+      },
+      {
+        "member": "rust_runtime/orchestration-fixed.json",
+        "sha256": "dd6a95e4f12cda4416ebd537303dc5284639f8489b5f8f4a2e2465f7b70c0c53",
+        "bytes": 893
+      },
+      {
+        "member": "rust_runtime/orchestration-fixed.log",
+        "sha256": "74a33462f4596ef5391d34656caca72015449878368a1ee1ecf748e25bcd3847",
+        "bytes": 31532
+      },
+      {
+        "member": "rust_runtime/release-clippy-fixed.json",
+        "sha256": "b3730abac93d81c9e206f5597ace111e427a03de5060099669eecb131e8c7438",
+        "bytes": 517
+      },
+      {
+        "member": "rust_runtime/release-clippy-fixed.log",
+        "sha256": "e6258004914d16375d38da06c97353146968457fc5313a33dae8b62ac6f0f85f",
+        "bytes": 30812
+      },
+      {
+        "member": "rust_runtime/release-clippy.json",
+        "sha256": "435248eb9b3633624614bd6b8be354aad5c09ccd19d9c29637fb4bd538b51aa7",
+        "bytes": 513
+      },
+      {
+        "member": "rust_runtime/release-clippy.log",
+        "sha256": "0f977afa34a5aba7c3495f9bb6562c2dac8cbbf5e1727e5e2897b39d861fec17",
+        "bytes": 32734
+      },
+      {
+        "member": "rust_runtime/release-tests-native.json",
+        "sha256": "9e972a38c4357b95acd6fdf9f7a1f53cfcc8dfb10a01f9395468891a8759cda5",
+        "bytes": 488
+      },
+      {
+        "member": "rust_runtime/release-tests-native.log",
+        "sha256": "673ec0af5ff47e27fcf2906cd0e55e806e91529fe7c20f89bb4b24c726a2fcf9",
+        "bytes": 33812
+      },
+      {
+        "member": "rust_runtime/release-tests-rss.json",
+        "sha256": "7104d583ccddc510bc7cdfa6bb563792a09d0a23f6b78b618a9bc90418413d7d",
+        "bytes": 2304
+      },
+      {
+        "member": "rust_runtime/release-tests-rss.log",
+        "sha256": "21ebc8e0fca1b17f39a9708280842ce62806aeac3c2f57bb0e204ab4e35694fb",
+        "bytes": 38086
+      },
+      {
+        "member": "rust_runtime/release-tests.log",
+        "sha256": "da16379db8bcf3482c0545d972b4561981f2f8052c5634e4bd1821c12dbf025c",
+        "bytes": 814
+      },
+      {
+        "member": "rust_runtime/retired-debug-cache.json",
+        "sha256": "f83d9df69dadce3d660a77785f7d87d9e3ce8eda7008c94e0ff31665ea31d5ff",
+        "bytes": 380163
+      },
+      {
+        "member": "rust_runtime/verification.md",
+        "sha256": "9ab8f2e5a596a42af4643969adb81c899853b450b3441ba7b75313e187faaf48",
+        "bytes": 4829
+      },
+      {
+        "member": "storage-current.json",
+        "sha256": "073dfedd666ce7ddb6d05ac1ea6172aae04bdd8dd640a5846c85efe028896a9f",
+        "bytes": 39699
+      },
+      {
+        "member": "storage-manifest.json",
+        "sha256": "46b4950b5cd4f16ffa94bac7257083f9767e8444f9d777294426cd46a876577b",
+        "bytes": 33743
+      },
+      {
+        "member": "tasks.json",
+        "sha256": "8128a0743236135a36c31d4051949d3f24ebf75eae54598241a74208435529af",
+        "bytes": 294
+      }
+    ],
+    "full_stream_restore_sha_len_PASS": true
+  }
+}

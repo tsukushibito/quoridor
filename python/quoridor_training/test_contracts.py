@@ -23,7 +23,23 @@ class Contracts(unittest.TestCase):
             np.zeros((1, 2, 312), dtype="<f4").tofile(path / "x.f32")
             np.zeros((1, 2), dtype="<f4").tofile(path / "distance.f32")
             np.zeros((1, 2), dtype="<f4").tofile(path / "labels.f32")
-            (path / "rows.jsonl").write_text(json.dumps({"id": "a", "split": "train"}) + "\n")
+            (path / "rows.jsonl").write_text(
+                json.dumps(
+                    {
+                        "id": "a",
+                        "split": "train",
+                        "group": "g",
+                        "primary_eligible": True,
+                        "side": 1,
+                        "ids": [[], []],
+                        "ids_order": "P1_then_P2",
+                        "tensor_view_order": "STM_then_opponent",
+                        "distance_order": "STM_then_opponent_f32",
+                        "distance": [0, 0],
+                    }
+                )
+                + "\n"
+            )
             names = ["x.f32", "distance.f32", "labels.f32", "rows.jsonl"]
             (path / "cache.json").write_text(
                 json.dumps(
@@ -31,13 +47,15 @@ class Contracts(unittest.TestCase):
                         "feature_count": 312,
                         "rows": 1,
                         "allow_test": False,
+                        "dataset_sha": "fixture",
+                        "files": {name: name for name in names},
                         "sha256": {name: sha(path / name) for name in names},
                     }
                 )
             )
-            _, rows, x, _, _ = load(path)
-            self.assertIsInstance(x, np.memmap)
-            self.assertEqual(rows[0]["id"], "a")
+            corpus = load(path)
+            self.assertIsInstance(corpus.shards[0].x, np.memmap)
+            self.assertEqual(corpus.rows[0]["id"], "a")
             (path / "x.f32").write_bytes(b"changed")
             with self.assertRaisesRegex(ValueError, "binding changed"):
                 load(path)

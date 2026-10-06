@@ -11,6 +11,84 @@ use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 use std::{fmt, fs, path::Path, sync::Arc};
 
+/// Read an asset with a hard allocation bound; exact length is checked after
+/// reading too, so a file changed between metadata and read cannot bypass it.
+fn read_asset(path: &Path, maximum: usize, exact: bool) -> Result<Vec<u8>> {
+    use std::io::Read;
+    let file = fs::File::open(path)?;
+    let length = file.metadata()?.len();
+    if length > maximum as u64 || (exact && length != maximum as u64) {
+        return Err(Error::Manifest("asset physical size mismatch".into()));
+    }
+    let mut bytes = Vec::with_capacity(length as usize);
+    file.take(maximum as u64 + 1).read_to_end(&mut bytes)?;
+    if bytes.len() > maximum || (exact && bytes.len() != maximum) {
+        return Err(Error::Manifest("asset read size mismatch".into()));
+    }
+    Ok(bytes)
+}
+/// Supported manifest formats. Inspection is bounded and does not infer a
+/// format from the weight size. Each loader still validates its whole contract.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
+#[serde(rename_all = "snake_case")]
+pub enum ModelFormat {
+    Float,
+    Residual,
+    Quantized,
+}
+impl ModelFormat {
+    pub fn inspect(path: impl AsRef<Path>) -> Result<Self> {
+        let raw = read_asset(path.as_ref(), 65536, false)?;
+        let value: serde_json::Value =
+            serde_json::from_slice(&raw).map_err(|e| Error::Manifest(e.to_string()))?;
+        match value["feature"].as_str() {
+            Some("QF1-f32-STM-scaled-v1" | "QF1-f32-STM-scaled-v2") => Ok(Self::Float),
+            Some(residual::RESIDUAL_FEATURE) => Ok(Self::Residual),
+            Some("QF1-i16-STM-scaled-v1") => Ok(Self::Quantized),
+            _ => Err(Error::Manifest("unsupported model format".into())),
+        }
+    }
+}
+
+/// Canonical native descriptor dispatch, shared by runner and dataset evaluation.
+#[derive(Debug, Clone)]
+pub enum LoadedModel {
+    Float(Model),
+    Residual(residual::ResidualModel),
+    Quantized(QuantizedModel),
+}
+impl LoadedModel {
+    pub fn load(path: impl AsRef<Path>) -> Result<Self> {
+        let path = path.as_ref();
+        match ModelFormat::inspect(path)? {
+            ModelFormat::Float => Model::load(path).map(Self::Float),
+            ModelFormat::Residual => residual::ResidualModel::load(path).map(Self::Residual),
+            ModelFormat::Quantized => QuantizedModel::load(path).map(Self::Quantized),
+        }
+    }
+    pub fn format(&self) -> ModelFormat {
+        match self {
+            Self::Float(_) => ModelFormat::Float,
+            Self::Residual(_) => ModelFormat::Residual,
+            Self::Quantized(_) => ModelFormat::Quantized,
+        }
+    }
+    pub fn fingerprint(&self) -> [u8; 32] {
+        match self {
+            Self::Float(model) => model.fingerprint(),
+            Self::Residual(model) => model.fingerprint(),
+            Self::Quantized(model) => model.fingerprint(),
+        }
+    }
+    pub fn evaluate_features(&self, features: Features, mode: EvaluationMode) -> Result<f32> {
+        match self {
+            Self::Float(model) => model.evaluate(&model.full_features(features, mode)?),
+            Self::Residual(model) => model.evaluate(&model.full_features(features, mode)?),
+            Self::Quantized(model) => model.evaluate(&model.full_features(features)?),
+        }
+    }
+}
+
 pub type Result<T> = std::result::Result<T, Error>;
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Error {
@@ -137,22 +215,14 @@ impl Model {
     /// Load both legacy H32 (48772 bytes) and scalable QF1 v2 manifests. Weights
     /// are checksum-bound, finite little-endian f32; shapes never inferred from bytes.
     pub fn load(path: impl AsRef<Path>) -> Result<Self> {
-        use std::io::Read;
         let path = path.as_ref();
-        let mut raw = Vec::new();
-        fs::File::open(path)?.take(65537).read_to_end(&mut raw)?;
+        let raw = read_asset(path, 65536, false)?;
         let (manifest, _, bytes) = Self::parse_manifest(&raw)?;
         let weights_path = path
             .parent()
             .unwrap_or(Path::new("."))
             .join(&manifest.weights);
-        if fs::metadata(&weights_path)?.len() != bytes as u64 {
-            return Err(Error::Manifest("weights physical size mismatch".into()));
-        }
-        let mut weights = Vec::with_capacity(bytes);
-        fs::File::open(weights_path)?
-            .take(bytes as u64 + 1)
-            .read_to_end(&mut weights)?;
+        let weights = read_asset(&weights_path, bytes, true)?;
         Self::load_bytes(&raw, &weights)
     }
     /// Shared browser/native loader. No filesystem or Python inference dependency.

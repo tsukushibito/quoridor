@@ -58,9 +58,10 @@ fn execute() -> Result<()> {
                     println!("{}", serde_json::to_string(&manifest)?);
                 }
                 "evaluate" => {
-                    let model =
-                        quoridor_nnue::Model::load(PathBuf::from(argument(&args, "--model")?))
-                            .map_err(|e| e.to_string())?;
+                    let model = quoridor_nnue::LoadedModel::load(PathBuf::from(argument(
+                        &args, "--model",
+                    )?))
+                    .map_err(|e| e.to_string())?;
                     let output = OpenOptions::new()
                         .create_new(true)
                         .write(true)
@@ -81,10 +82,9 @@ fn execute() -> Result<()> {
                                 distance: r.distance,
                                 side: r.side - 1,
                             };
-                            let a = model
-                                .full_features(features, mode)
+                            let value = model
+                                .evaluate_features(features, mode)
                                 .map_err(|e| e.to_string())?;
-                            let value = model.evaluate(&a).map_err(|e| e.to_string())?;
                             serde_json::to_writer(
                                 &mut writer,
                                 &serde_json::json!({"id":r.id,"split":r.split,"value":value}),
@@ -138,6 +138,14 @@ fn execute() -> Result<()> {
                 return Err(format!("learning cycle failed: {status}").into());
             }
         }
+        "model-check" => {
+            let path = PathBuf::from(argument(&args, "--model")?);
+            let model = quoridor_nnue::LoadedModel::load(&path).map_err(|e| e.to_string())?;
+            println!(
+                "{}",
+                serde_json::json!({"format": model.format(), "fingerprint": model.fingerprint()})
+            );
+        }
         "qf1-bulk" => {
             let prefix_json: Vec<Vec<u16>> =
                 serde_json::from_reader(File::open(argument(&args, "--input")?)?)?;
@@ -155,10 +163,21 @@ fn execute() -> Result<()> {
             }
             serde_json::to_writer(&mut output, &features)?;
         }
-        "help" | "--help" | "-h" => println!(
-            "quoridor-runner <selfplay|arena|benchmark|cycle> --config CONFIG\nquoridor-runner dataset <import|cache|inspect> --input PATH [--output PATH] [--allow-test]\nquoridor-runner qf1-bulk --input PREFIXES.json --output FEATURES.json"
-        ),
+        "help" | "--help" | "-h" => println!("{HELP}"),
         _ => return Err("unknown command; use --help".into()),
     }
     Ok(())
+}
+
+const HELP: &str = "quoridor-runner <selfplay|arena|benchmark|cycle> --config CONFIG\nquoridor-runner dataset <cache|inspect> --input PATH [--output PATH] [--allow-test]\nquoridor-runner dataset evaluate --input PATH --model MODEL --output PATH [--simd] [--allow-test]\nquoridor-runner model-check --model MODEL\nquoridor-runner qf1-bulk --input PREFIXES.json --output FEATURES.json\nSigma dataset import: use the separate sigma-import binary";
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn help_exposes_supported_dataset_commands() {
+        assert!(super::HELP.contains("dataset evaluate"));
+        assert!(super::HELP.contains("dataset <cache|inspect>"));
+        assert!(!super::HELP.contains("dataset <import"));
+        assert!(super::HELP.contains("model-check --model"));
+    }
 }

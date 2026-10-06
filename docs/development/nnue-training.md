@@ -24,6 +24,8 @@ family分割とstate/history/input露出maskを生成時に固定する。距離
   --cache NEW_TEST_CACHE --training NEW_RUN --output NEW_TEST
 ```
 
+新runの`quoridor-candidate-freeze-v2`は、実評価で消費するinitial/best checkpoint、native manifest/重み、config、scale、学習基準とcache bindingのSHAを保持する。testはモデル構築前に照合し、変更・欠落・未結合の旧freezeを拒否する。旧結果へ新しい帰属保証を後付けせず、再構成時はそのrunのGit版を使う。
+
 test結果を設定選定へ戻さない。rootmean蒸留、真z、局等重み、未露出群と全行を分け、定数・距離基準と比較する。学習lossの改善を棋力の改善へ読み替えない。棋力は凍結モデルをnative arenaへ接続して評価する。
 
 生成→cache→学習→freeze→test→新arenaを一括で行う場合は`quoridor-runner cycle --config JSON`を使う。runに明示した期限・予算で子を回収し、新出力へ記録する。運用手順やソフト整備の完了は新しい科学実行の許可ではない。
@@ -33,6 +35,7 @@ test結果を設定選定へ戻さない。rootmean蒸留、真z、局等重み�
 ```bash
 PYTHONPATH="$PWD/python" "$QUORIDOR_TRAINING_ENV/bin/python" \
   -B -m unittest quoridor_training.test_contracts
+# 現役NN0 suiteをまとめて検査（model試験は別opt-in）
 python3 scripts/dev/check-research.py
 ```
 

@@ -224,72 +224,6 @@ fn explicit_cpu_selection(
     }
     Ok(free.values().copied().take(2).collect())
 }
-#[cfg(test)]
-mod explicit_tests {
-    use super::*;
-    fn topology() -> BTreeMap<usize, (u64, u64)> {
-        [
-            (0, (0, 0)),
-            (1, (0, 1)),
-            (2, (0, 2)),
-            (3, (0, 3)),
-            (12, (0, 2)),
-        ]
-        .into_iter()
-        .collect()
-    }
-    #[test]
-    fn narrowed_affinity_retains_host_headroom() {
-        assert_eq!(
-            explicit_cpu_selection(1, &[2], 3, &[2, 3], &topology(), Some(4.)).unwrap(),
-            vec![0, 1]
-        );
-    }
-    #[test]
-    fn rejects_unavailable_siblings_and_quota() {
-        assert!(explicit_cpu_selection(1, &[2], 0, &[2, 3], &topology(), None).is_err());
-        assert!(explicit_cpu_selection(1, &[2], 12, &[2, 12], &topology(), None).is_err());
-        assert!(explicit_cpu_selection(2, &[2], 3, &[2, 3], &topology(), None).is_err());
-        assert!(explicit_cpu_selection(1, &[2], 3, &[2, 3], &topology(), Some(3.99)).is_err());
-        assert!(
-            explicit_cpu_selection(
-                1,
-                &[2],
-                3,
-                &[2, 3],
-                &[(2, (0, 2)), (3, (0, 3))].into_iter().collect(),
-                None
-            )
-            .is_err()
-        );
-        assert!(
-            explicit_cpu_selection(
-                1,
-                &[2],
-                3,
-                &[2, 3],
-                &[(0, (0, 0)), (1, (0, 1)), (2, (0, 2))]
-                    .into_iter()
-                    .collect(),
-                None
-            )
-            .is_err()
-        );
-    }
-    #[test]
-    fn memory_guard_keeps_reserve() {
-        assert_eq!(
-            admitted_memory(
-                1024 * 1024 * 1024,
-                128 * 1024 * 1024,
-                Some(256 * 1024 * 1024)
-            )
-            .unwrap(),
-            256 * 1024 * 1024
-        );
-        assert!(admitted_memory(128 * 1024 * 1024, 128 * 1024 * 1024, None).is_err());
-    }
-}
 
 pub fn pin(core: usize) -> Result<()> {
     unsafe {
@@ -382,4 +316,71 @@ pub fn default_workers() -> usize {
         }
     }
     count
+}
+
+#[cfg(test)]
+mod explicit_tests {
+    use super::*;
+    fn topology() -> BTreeMap<usize, (u64, u64)> {
+        [
+            (0, (0, 0)),
+            (1, (0, 1)),
+            (2, (0, 2)),
+            (3, (0, 3)),
+            (12, (0, 2)),
+        ]
+        .into_iter()
+        .collect()
+    }
+    #[test]
+    fn narrowed_affinity_retains_host_headroom() {
+        assert_eq!(
+            explicit_cpu_selection(1, &[2], 3, &[2, 3], &topology(), Some(4.)).unwrap(),
+            vec![0, 1]
+        );
+    }
+    #[test]
+    fn rejects_unavailable_siblings_and_quota() {
+        assert!(explicit_cpu_selection(1, &[2], 0, &[2, 3], &topology(), None).is_err());
+        assert!(explicit_cpu_selection(1, &[2], 12, &[2, 12], &topology(), None).is_err());
+        assert!(explicit_cpu_selection(2, &[2], 3, &[2, 3], &topology(), None).is_err());
+        assert!(explicit_cpu_selection(1, &[2], 3, &[2, 3], &topology(), Some(3.99)).is_err());
+        assert!(
+            explicit_cpu_selection(
+                1,
+                &[2],
+                3,
+                &[2, 3],
+                &[(2, (0, 2)), (3, (0, 3))].into_iter().collect(),
+                None
+            )
+            .is_err()
+        );
+        assert!(
+            explicit_cpu_selection(
+                1,
+                &[2],
+                3,
+                &[2, 3],
+                &[(0, (0, 0)), (1, (0, 1)), (2, (0, 2))]
+                    .into_iter()
+                    .collect(),
+                None
+            )
+            .is_err()
+        );
+    }
+    #[test]
+    fn memory_guard_keeps_reserve() {
+        assert_eq!(
+            admitted_memory(
+                1024 * 1024 * 1024,
+                128 * 1024 * 1024,
+                Some(256 * 1024 * 1024)
+            )
+            .unwrap(),
+            256 * 1024 * 1024
+        );
+        assert!(admitted_memory(128 * 1024 * 1024, 128 * 1024 * 1024, None).is_err());
+    }
 }

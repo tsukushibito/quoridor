@@ -103,23 +103,6 @@ pub fn validate_search_snapshot(bytes: &[u8]) -> Result<String, JsValue> {
     Ok(snapshot.position_key)
 }
 
-// Retain the initial-position compatibility entry point for rules consumers.
-#[cfg(feature = "rules")]
-#[wasm_bindgen]
-pub fn initial_position_json() -> String {
-    let p = quoridor_core::Position::default();
-    format!(
-        "{{\"rulesetId\":\"{}\",\"pawns\":[[{},{}],[{},{}]],\"wallsRemaining\":[{},{}],\"turn\":0}}",
-        quoridor_core::RULESET_ID,
-        p.pawns[0] % 9,
-        p.pawns[0] / 9,
-        p.pawns[1] % 9,
-        p.pawns[1] / 9,
-        p.walls_remaining[0],
-        p.walls_remaining[1]
-    )
-}
-
 #[cfg(feature = "ai")]
 pub const AI_ENGINE_BUILD_ID: &str = "quoridor-b0-1";
 #[cfg(feature = "ai")]

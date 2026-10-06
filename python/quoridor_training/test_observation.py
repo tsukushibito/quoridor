@@ -95,14 +95,36 @@ class LiveTrainerObservation(unittest.TestCase):
         x[:, :, 0] = 1
         d = np.tile(np.asarray([0.1, 0.15], dtype=np.float32), (8, 1))
         labels = np.asarray([[np.nan, r["z"]] for r in self.rows], dtype=np.float32)
-        self.cache_tuple = (
-            {"dataset_sha": "synthetic-observation-input-v1"},
-            self.rows,
-            x,
-            d,
-            labels,
+        from types import SimpleNamespace
+
+        class FixtureRows(list):
+            def iter_indices(self, indices):
+                return (self[int(i)] for i in indices)
+
+        def batch(indices):
+            return x[indices].copy(), d[indices].copy(), labels[indices].copy()
+
+        def chunks(indices=None, size=4096):
+            if indices is None:
+                indices = np.arange(len(self.rows))
+            for first in range(0, len(indices), size):
+                sub = indices[first : first + size]
+                yield sub, batch(sub)
+
+        fixture = SimpleNamespace(
+            binding={"dataset_sha": "synthetic-observation-input-v1"},
+            rows=FixtureRows(self.rows),
+            row_count=8,
+            labels=labels,
+            groups=np.asarray([0, 1, 0, 1, 0, 2, 3, 2], dtype=np.uint32),
+            families=["t0", "t1", "v1", "v0"],
+            splits=np.asarray([0] * 5 + [1] * 3),
+            eligible=np.ones(8, dtype=bool),
+            batch=batch,
+            chunks=chunks,
+            verify_binding=lambda: None,
         )
-        self.load_patch = patch.object(trainer, "load", return_value=self.cache_tuple)
+        self.load_patch = patch.object(trainer, "load", return_value=fixture)
         self.load_patch.start()
         self.addCleanup(self.load_patch.stop)
         self.nn = 0

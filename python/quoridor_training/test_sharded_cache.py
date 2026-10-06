@@ -53,6 +53,7 @@ class ShardedCacheTests(unittest.TestCase):
                         "feature_count": 312,
                         "allow_test": False,
                         "dataset_sha": "fixture",
+                        "files": {name: name for name in files},
                         "sha256": {name: sha(child / name) for name in files},
                     }
                 )
@@ -86,14 +87,22 @@ class ShardedCacheTests(unittest.TestCase):
 
     def test_namespace_p2_draw_and_original_bytes(self):
         before = [sha(Path(s["path"]) / "labels.f32") for s in self.shards]
-        binding, rows, x, d, y = self.run_manifest(self.manifest)
+        corpus = self.run_manifest(self.manifest)
+        binding, rows = corpus.binding, corpus.rows
+        x, d, y = corpus.batch([0, 1])
         self.assertIsInstance(binding, dict)
-        self.assertIsInstance(rows, list)
+        self.assertNotIsInstance(rows, list)
+        self.assertEqual(corpus.row_count, 2)
         self.assertTrue(all(isinstance(row, dict) for row in rows))
         self.assertEqual((len(rows), x.shape[0], d.shape[0], y.shape[0]), (2, 2, 2, 2))
         self.assertEqual([r["id"] for r in rows], ["run0:same-local-id", "run1:same-local-id"])
         self.assertEqual([r["split"] for r in rows], ["train", "validation"])
         self.assertEqual(x.shape, (2, 2, 312))
+        bx, bd, by = corpus.batch([1, 0, 1])
+        np.testing.assert_array_equal(bx, x[[1, 0, 1]])
+        np.testing.assert_array_equal(bd, d[[1, 0, 1]])
+        np.testing.assert_array_equal(by, y[[1, 0, 1]])
+        self.assertEqual(sum(len(ix) for ix, _ in corpus.chunks(size=1)), 2)
         self.assertEqual(d[1].tobytes(), np.asarray([0.1, 0.2], dtype="<f4").tobytes())
         self.assertTrue(np.isnan(y[:, 0]).all())
         self.assertEqual(y[1, 1], 0)
@@ -133,6 +142,23 @@ class ShardedCacheTests(unittest.TestCase):
             stream.write(b"bad")
         with self.assertRaises(ValueError):
             self.run_manifest(self.manifest)
+
+    def test_qualified_identity_collision_across_namespaces_rejected(self):
+        value = copy.deepcopy(self.manifest)
+        value["shards"][0]["namespace"] = "a"
+        value["shards"][1]["namespace"] = "a:b"
+        for number, identity in ((0, "b:c"), (1, "c")):
+            child = Path(value["shards"][number]["path"])
+            row = json.loads((child / "rows.jsonl").read_text())
+            row["id"] = identity
+            (child / "rows.jsonl").write_text(json.dumps(row) + "\n")
+            native = json.loads((child / "cache.json").read_text())
+            native["sha256"]["rows.jsonl"] = sha(child / "rows.jsonl")
+            (child / "cache.json").write_text(json.dumps(native))
+            value["shards"][number]["manifest_SHA"] = sha(child / "cache.json")
+            value["shards"][number]["rows"][0]["id"] = identity
+        with self.assertRaisesRegex(ValueError, "identity duplicated"):
+            self.run_manifest(value)
 
     def test_explicit_schedule_and_native_only_defaults(self):
         defaults = resolve_config()

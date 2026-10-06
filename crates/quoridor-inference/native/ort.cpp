@@ -1,5 +1,6 @@
 // ONNX Runtime C ABI, dynamically loaded; no Python dependency.
 #include "onnxruntime_c_api.h"
+#include "work_counts.h"
 #include <cstring>
 #include <dlfcn.h>
 #include <memory>
@@ -8,6 +9,7 @@
 #include <vector>
 namespace {
 struct OrtBackend {
+  WorkCounts counts;
   void *library = nullptr;
   const OrtApi *api = nullptr;
   OrtEnv *env = nullptr;
@@ -112,6 +114,7 @@ extern "C" int qort_run(void *ptr, const float *input, size_t batch,
       const char *names[] = {b.output_names[0].c_str(),
                              b.output_names[1].c_str()};
       OrtValue *results[2] = {nullptr, nullptr};
+      b.counts.executed_rows += 1;
       OrtStatus *status =
           b.api->Run(b.session, nullptr, in, inputs, 1, names, 2, results);
       auto r0 = std::unique_ptr<OrtValue, void (*)(OrtValue *)>(
@@ -151,6 +154,9 @@ extern "C" int qort_run(void *ptr, const float *input, size_t batch,
     error(err, cap, e);
     return -1;
   }
+}
+extern "C" void qort_counters(void *ptr, WorkCounts *counts) {
+  *counts = static_cast<OrtBackend *>(ptr)->counts;
 }
 extern "C" void qort_destroy(void *ptr) {
   delete static_cast<OrtBackend *>(ptr);

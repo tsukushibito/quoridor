@@ -88,3 +88,82 @@ fn residual_rejects_enabled_routes_and_bad_layout() {
         .is_err()
     );
 }
+
+#[test]
+fn residual_loader_rejects_physical_oversize_before_reading() {
+    use quoridor_nnue::{
+        ModelFormat,
+        residual::{RESIDUAL_FEATURE, ResidualManifest},
+    };
+    use sha2::{Digest, Sha256};
+    let dir = std::env::temp_dir().join(format!(
+        "residual-bounded-{}-{}",
+        std::process::id(),
+        std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .unwrap()
+            .as_nanos()
+    ));
+    std::fs::create_dir(&dir).unwrap();
+    let path = dir.join("model.json");
+    let file = std::fs::File::create(&path).unwrap();
+    file.set_len(65537).unwrap();
+    assert!(ModelFormat::inspect(&path).is_err());
+    assert!(
+        ResidualModel::load(&path)
+            .unwrap_err()
+            .to_string()
+            .contains("physical size")
+    );
+    let topology = Topology {
+        ft_width: 1,
+        hidden_width: 1,
+    };
+    let count = ResidualModel::parameter_count(topology).unwrap();
+    let raw = vec![0u8; count * 4];
+    let manifest = ResidualManifest {
+        schema: "quoridor-nnue-distance-residual-v3".into(),
+        feature: RESIDUAL_FEATURE.into(),
+        value_perspective: "side-to-move".into(),
+        value_parameterization: "fixed-distance-logit-plus-linear-residual-tanh".into(),
+        dense_feature_version: "shortest-dag4-f32-STM-v1".into(),
+        route_mode: RouteMode::Zero4,
+        topology,
+        weights: "weights.f32".into(),
+        weights_sha: format!("{:x}", Sha256::digest(&raw)),
+        weights_bytes: raw.len(),
+        little_endian_f32: count,
+        mu_f32: [0.; 2],
+        sigma_f32: [1.; 2],
+        distance_fit: DistanceFit::default(),
+        route_mu_f32: [0.; 4],
+        route_sigma_f32: [1.; 4],
+    };
+    std::fs::write(&path, serde_json::to_vec(&manifest).unwrap()).unwrap();
+    std::fs::write(dir.join("weights.f32"), &raw).unwrap();
+    assert_eq!(ModelFormat::inspect(&path).unwrap(), ModelFormat::Residual);
+    let loaded = ResidualModel::load(&path).unwrap();
+    assert_ne!(loaded.fingerprint(), [0; 32]);
+    let generic = quoridor_nnue::LoadedModel::load(&path).unwrap();
+    let features = quoridor_nnue::encode_qf1(Position::default()).unwrap();
+    assert_eq!(
+        generic
+            .evaluate_features(features, EvaluationMode::Scalar)
+            .unwrap(),
+        loaded
+            .evaluate(&loaded.full(Position::default()).unwrap())
+            .unwrap()
+    );
+    let file = std::fs::OpenOptions::new()
+        .write(true)
+        .open(dir.join("weights.f32"))
+        .unwrap();
+    file.set_len(raw.len() as u64 + 1).unwrap();
+    assert!(
+        ResidualModel::load(&path)
+            .unwrap_err()
+            .to_string()
+            .contains("physical size")
+    );
+    std::fs::remove_dir_all(dir).unwrap();
+}

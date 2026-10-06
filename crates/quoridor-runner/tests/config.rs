@@ -20,3 +20,23 @@ fn host_reserve_is_not_overridden_by_explicit_memory() {
     let b = quoridor_runner::resources::admit(1, &[65535], false, 0, None);
     assert!(b.is_err());
 }
+
+#[test]
+fn paired_arena_counts_are_admitted_by_family_before_execution() {
+    let mut c = config();
+    c.engines.push(c.engines[0].clone());
+    c.games = 8;
+    assert_eq!(c.split_counts().unwrap(), (4, 2));
+    assert!(c.validate().is_ok());
+    c.train_games = Some(5);
+    assert!(c.validate().unwrap_err().contains("color pairs"));
+    c.train_games = Some(4);
+    c.validation_games = Some(1);
+    assert!(c.validate().is_err());
+    c.validation_games = Some(2);
+    c.games = 7;
+    assert!(c.validate().is_err());
+    c.games = 8;
+    c.train_games = Some(usize::MAX - 1);
+    assert!(c.validate().is_err());
+}

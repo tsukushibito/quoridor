@@ -162,6 +162,33 @@ pub struct Cycle {
     pub adoption_margin: f64,
 }
 impl Config {
+    /// Split the independent opening families; paired colors stay together.
+    pub fn split_counts(&self) -> Result<(usize, usize), String> {
+        let family_size = if self.engines.len() == 2 { 2 } else { 1 };
+        if !self.games.is_multiple_of(family_size)
+            || self
+                .train_games
+                .is_some_and(|n| !n.is_multiple_of(family_size))
+            || self
+                .validation_games
+                .is_some_and(|n| !n.is_multiple_of(family_size))
+        {
+            return Err("arena games and split counts must contain complete color pairs".into());
+        }
+        let train = self
+            .train_games
+            .unwrap_or((self.games / family_size * 2 / 3) * family_size);
+        if train > self.games {
+            return Err("split count exceeds games".into());
+        }
+        let validation = self
+            .validation_games
+            .unwrap_or(((self.games - train) / family_size / 2) * family_size);
+        if validation > self.games - train {
+            return Err("split count exceeds games".into());
+        }
+        Ok((train, validation))
+    }
     pub fn validate(&self) -> Result<(), String> {
         if self.run_id.is_empty()
             || !self
@@ -208,9 +235,7 @@ impl Config {
         if self.engines.iter().any(|e| e.kind == "mcts") && self.inference.is_none() {
             return Err("MCTS needs an explicit inference backend".into());
         }
-        if self.train_games.unwrap_or(0) + self.validation_games.unwrap_or(0) > self.games {
-            return Err("split count exceeds games".into());
-        }
+        self.split_counts()?;
         if self.deadline_unix_ms > 0 && unix_ms() >= self.deadline_unix_ms {
             return Err("execution deadline expired".into());
         }

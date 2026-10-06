@@ -5,7 +5,7 @@ use quoridor_ai::{
 };
 use quoridor_core::research::SigmaContext;
 use quoridor_data::{Result, Split, Teacher, TeacherRow, Visit};
-use quoridor_inference::{InferenceBackend, NetworkOutput, OrtBackend};
+use quoridor_inference::{InferenceBackend, InferenceCounters, NetworkOutput, OrtBackend};
 use serde::{Deserialize, Serialize};
 use std::{
     collections::{BTreeMap, VecDeque},
@@ -19,6 +19,10 @@ use std::{
     thread,
     time::{Duration, Instant},
 };
+/// Serialize the authoritative backend snapshot without estimating native work.
+pub fn inference_work(counters: InferenceCounters) -> serde_json::Value {
+    serde_json::json!({"logical_rows":counters.logical_rows,"executed_rows":counters.executed_rows,"warm_rows":counters.warm_rows,"failed_rows":counters.failed_rows,"failed_warm_rows":counters.failed_warm_rows,"capture_rows":counters.capture_rows,"physical_rows":counters.physical_rows()})
+}
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 pub struct RequestId {
     pub game: usize,
@@ -215,6 +219,8 @@ pub struct PumpProfile {
     pub first16_complete_seconds: Option<f64>,
     pub first16_complete_rows: usize,
     pub backend_warmup_nn: u64,
+    #[serde(default)]
+    pub backend_work: Option<serde_json::Value>,
     pub censored_rows: usize,
     pub advance_calls: u64,
     pub terminal_no_nn: u64,
@@ -389,17 +395,35 @@ fn evaluator(e: &Engine, config: &Config) -> Result<InitializedEvaluator> {
             )
         }
         "nnue" => {
-            let model = Arc::new(
-                quoridor_nnue::Model::load(e.model.as_ref().ok_or("NNUE path")?)
-                    .map_err(|e| e.to_string())?,
-            );
-            let identity = float_identity(&model);
-            let evaluator = NnueEvaluator::new(model).with_mode(if e.simd {
+            let path = e.model.as_ref().ok_or("NNUE path")?;
+            let mode = if e.simd {
                 quoridor_nnue::EvaluationMode::Simd
             } else {
                 quoridor_nnue::EvaluationMode::Scalar
-            });
-            (Some(Arc::new(evaluator)), identity)
+            };
+            match quoridor_nnue::LoadedModel::load(path).map_err(|e| e.to_string())? {
+                quoridor_nnue::LoadedModel::Float(model) => {
+                    let model = Arc::new(model);
+                    let identity = float_identity(&model);
+                    (
+                        Some(Arc::new(NnueEvaluator::new(model).with_mode(mode))),
+                        identity,
+                    )
+                }
+                quoridor_nnue::LoadedModel::Residual(model) => {
+                    let model = Arc::new(model);
+                    let identity = typed_identity("nnue-residual-f32", &model.fingerprint());
+                    (
+                        Some(Arc::new(
+                            alphabeta::ResidualEvaluator::new(model).with_mode(mode),
+                        )),
+                        identity,
+                    )
+                }
+                quoridor_nnue::LoadedModel::Quantized(_) => {
+                    return Err("quantized model requires nnue_quantized engine".into());
+                }
+            }
         }
         "nnue_quantized" => {
             let model = Arc::new(
@@ -424,10 +448,7 @@ fn evaluator(e: &Engine, config: &Config) -> Result<InitializedEvaluator> {
     })
 }
 fn planned(config: &Config) -> Result<Vec<Planned>> {
-    let train = config.train_games.unwrap_or(config.games * 2 / 3);
-    let validation = config
-        .validation_games
-        .unwrap_or((config.games - train) / 2);
+    let (train, validation) = config.split_counts().map_err(|e| format!("config: {e}"))?;
     let mut rng = Rng::new(config.seed);
     let mut out: Vec<Planned> = Vec::new();
     for id in 0..config.games {
@@ -1175,10 +1196,8 @@ fn run_inner(
             let result = b.infer(&input);
             inference_seconds += t.elapsed().as_secs_f64();
             nn_calls += n as u64;
-            if !batches.contains_key(&n) && b.metadata().backend.starts_with("cuda-tensorrt") {
-                // Native state(batch) performs exactly one warm n-row forward on first use.
-                pump.backend_warmup_nn += n as u64;
-            }
+            pump.backend_warmup_nn = b.counters().warm_rows;
+            pump.backend_work = Some(inference_work(b.counters()));
             *batches.entry(n).or_insert(0) += 1;
             match result {
                 Ok(outputs) if outputs.len() == n => {
@@ -1225,6 +1244,10 @@ fn run_inner(
         }
     }
     outcomes.sort_by_key(|o| o.game);
+    if let Some(b) = backend.as_ref() {
+        pump.backend_warmup_nn = b.counters().warm_rows;
+        pump.backend_work = Some(inference_work(b.counters()));
+    }
     let cleanup_start = Instant::now();
     drop(backend);
     pump.backend_cleanup_seconds = cleanup_start.elapsed().as_secs_f64();
@@ -1418,6 +1441,12 @@ fn run_owned(
 /// One warm search plus three steady searches per fixture/engine; each request
 /// includes root encoding, inference, snapshot and legal-admission validation.
 pub fn benchmark(config: &Config) -> Result<serde_json::Value> {
+    benchmark_impl(config, None)
+}
+fn benchmark_impl(
+    config: &Config,
+    provided: Option<Box<dyn InferenceBackend>>,
+) -> Result<serde_json::Value> {
     config.validate().map_err(|e| format!("config: {e}"))?;
     let _affinity = crate::resources::AffinityGuard::capture()?;
     let admission = crate::resources::admit(
@@ -1431,101 +1460,186 @@ pub fn benchmark(config: &Config) -> Result<serde_json::Value> {
     if config.output.exists() {
         return Err("benchmark output exists".into());
     }
+    if config.max_output_bytes < 4096 {
+        return Err("benchmark output budget must reserve at least 4096 bytes".into());
+    }
+    let identity_bytes = serde_json::to_vec(&serde_json::json!({"run_id":config.run_id,"admission":admission,"model_sha":config.inference.as_ref().map(|i| &i.model_sha)}))?.len() as u64;
+    if identity_bytes > config.max_output_bytes.saturating_sub(4096) {
+        return Err("benchmark output budget cannot retain identity and failure metadata".into());
+    }
     fs::create_dir_all(config.output.parent().unwrap_or(Path::new(".")))?;
     fs::create_dir(&config.output)?;
     let start = Instant::now();
-    let mut backend = make_backend(config)?;
-    let evaluators: Vec<_> = config
-        .engines
-        .iter()
-        .map(|e| evaluator(e, config))
-        .collect::<Result<_>>()?;
-    let plans = planned(config)?;
+    let mut completed = OpenOptions::new()
+        .create_new(true)
+        .write(true)
+        .open(config.output.join("completed.jsonl"))?;
     let cancel = AtomicBool::new(false);
     let mut records = Vec::new();
-    for (fixture, p) in plans.iter().enumerate() {
-        for (engine, e) in config.engines.iter().enumerate() {
-            for repeat in 0..4 {
+    let mut backend = None;
+    // The monitor can cancel alpha-beta while it is inside one bounded search.
+    // Synchronous backend calls are checked on return; the outer job owns forced
+    // process cleanup if a native call itself fails to return.
+    let (result, monitored_stop) = thread::scope(|scope| {
+        let (done_tx, done_rx) = mpsc::channel();
+        let cancel_ref = &cancel;
+        let monitor = scope.spawn(move || {
+            loop {
                 if let Some(reason) = guard(config, start, admission.memory_limit) {
-                    return Err(format!("benchmark:{reason}").into());
+                    cancel_ref.store(true, Ordering::Relaxed);
+                    break Some(reason);
                 }
-                let context =
-                    SigmaContext::from_prefix(&p.opening).map_err(|e| format!("{e:?}"))?;
-                if context.terminal_value().is_some() {
-                    return Err("terminal benchmark fixture".into());
+                match done_rx.recv_timeout(Duration::from_millis(5)) {
+                    Err(mpsc::RecvTimeoutError::Timeout) => {}
+                    _ => break None,
                 }
-                let clock = Instant::now();
-                let (action, value, nodes, nn_calls, depth) = if e.kind == "mcts" {
-                    let mut search = Search::with_limits(
-                        context.clone(),
-                        repeat,
-                        config.simulations,
-                        Limits {
-                            max_nodes: config.mcts_max_nodes,
-                            max_depth: 200,
-                            max_bytes: config.mcts_max_bytes,
-                        },
-                    )?;
-                    loop {
-                        match search.advance()? {
-                            Progress::Advanced => {}
-                            Progress::Complete => break,
-                            Progress::NeedInference { token, features } => {
-                                let b = backend.as_mut().ok_or("benchmark backend")?;
-                                let output = b.infer(&[*features])?;
-                                if output.len() != 1 {
-                                    return Err("benchmark backend shape".into());
-                                }
-                                search.supply(token, &output[0].logits, output[0].value)?;
-                            }
-                        }
-                    }
-                    let s = search.snapshot();
-                    (
-                        s.action,
-                        Some(s.root_mean as f32),
-                        s.nodes as u64,
-                        s.nn_calls as u64,
-                        s.max_depth as u16,
-                    )
-                } else {
-                    let result = alphabeta::search(
-                        &context,
-                        evaluators[engine].evaluator.as_ref().unwrap().as_ref(),
-                        &SearchLimits {
-                            max_depth: e.depth,
-                            max_nodes: e.max_nodes,
-                            time_limit: e.time_ms.map(Duration::from_millis),
-                            tt_entries: 65536,
-                            use_pvs: true,
-                            use_tt: true,
-                        },
-                        &cancel,
-                    )
-                    .map_err(|e| e.to_string())?;
-                    (
-                        result.action,
-                        result.value,
-                        result.stats.nodes,
-                        0,
-                        result.completed_depth,
-                    )
-                };
-                if action.is_none() || !context.legal_ids().contains(&action.unwrap()) {
-                    return Err("benchmark no complete/legal action".into());
-                }
-                records.push(serde_json::json!({"fixture":fixture,"engine":e.kind,"repeat":repeat,"warm":repeat==0,"seconds":clock.elapsed().as_secs_f64(),"action":action,"value":value,"nodes":nodes,"nn_calls":nn_calls,"depth":depth,"simulations":if e.kind=="mcts"{Some(config.simulations)}else{None}}));
             }
-        }
+        });
+        let result: Result<()> = (|| {
+            backend = if provided.is_some() {
+                provided
+            } else {
+                make_backend(config)?
+            };
+            let evaluators: Vec<_> = config
+                .engines
+                .iter()
+                .map(|e| evaluator(e, config))
+                .collect::<Result<_>>()?;
+            let plans = planned(config)?;
+            for (fixture, p) in plans.iter().enumerate() {
+                for (engine, e) in config.engines.iter().enumerate() {
+                    for repeat in 0..4 {
+                        if let Some(reason) = guard(config, start, admission.memory_limit) {
+                            return Err(format!("benchmark:{reason}").into());
+                        }
+                        let context =
+                            SigmaContext::from_prefix(&p.opening).map_err(|e| format!("{e:?}"))?;
+                        if context.terminal_value().is_some() {
+                            return Err("terminal benchmark fixture".into());
+                        }
+                        let clock = Instant::now();
+                        let (action, value, nodes, nn_calls, depth, search_stop) = if e.kind
+                            == "mcts"
+                        {
+                            let mut search = Search::with_limits(
+                                context.clone(),
+                                repeat,
+                                config.simulations,
+                                Limits {
+                                    max_nodes: config.mcts_max_nodes,
+                                    max_depth: 200,
+                                    max_bytes: config.mcts_max_bytes,
+                                },
+                            )?;
+                            loop {
+                                if let Some(reason) = guard(config, start, admission.memory_limit) {
+                                    return Err(format!("benchmark:{reason}").into());
+                                }
+                                match search.advance()? {
+                                    Progress::Advanced => {}
+                                    Progress::Complete => break,
+                                    Progress::NeedInference { token, features } => {
+                                        let b = backend.as_mut().ok_or("benchmark backend")?;
+                                        let output = b.infer(&[*features])?;
+                                        if let Some(reason) =
+                                            guard(config, start, admission.memory_limit)
+                                        {
+                                            return Err(format!("benchmark:{reason}").into());
+                                        }
+                                        if output.len() != 1 {
+                                            return Err("benchmark backend shape".into());
+                                        }
+                                        search.supply(token, &output[0].logits, output[0].value)?;
+                                    }
+                                }
+                            }
+                            let s = search.snapshot();
+                            (
+                                s.action,
+                                Some(s.root_mean as f32),
+                                s.nodes as u64,
+                                s.nn_calls as u64,
+                                s.max_depth as u16,
+                                "simulation_limit".to_string(),
+                            )
+                        } else {
+                            let result = alphabeta::search(
+                                &context,
+                                evaluators[engine].evaluator.as_ref().unwrap().as_ref(),
+                                &SearchLimits {
+                                    max_depth: e.depth,
+                                    max_nodes: e.max_nodes,
+                                    time_limit: e.time_ms.map(Duration::from_millis),
+                                    tt_entries: 65536,
+                                    use_pvs: true,
+                                    use_tt: true,
+                                },
+                                &cancel,
+                            )
+                            .map_err(|e| e.to_string())?;
+                            (
+                                result.action,
+                                result.value,
+                                result.stats.nodes,
+                                0,
+                                result.completed_depth,
+                                format!("{:?}", result.stop),
+                            )
+                        };
+                        if let Some(reason) = guard(config, start, admission.memory_limit) {
+                            return Err(format!("benchmark:{reason}").into());
+                        }
+                        if action.is_none() || !context.legal_ids().contains(&action.unwrap()) {
+                            return Err("benchmark no complete/legal action".into());
+                        }
+                        records.push(serde_json::json!({"fixture":fixture,"engine":e.kind,"repeat":repeat,"warm":repeat==0,"seconds":clock.elapsed().as_secs_f64(),"action":action,"value":value,"nodes":nodes,"nn_calls":nn_calls,"depth":depth,"simulations":if e.kind=="mcts"{Some(config.simulations)}else{None},"search_stop":search_stop,"limits":if e.kind=="mcts" {serde_json::json!({"depth":200,"nodes":config.mcts_max_nodes,"memory_bytes":config.mcts_max_bytes,"simulations":config.simulations,"time_ms":null,"budget_kind":"simulations"})} else {serde_json::json!({"depth":e.depth,"nodes":e.max_nodes,"time_ms":e.time_ms,"budget_kind":if e.time_ms.is_some(){"time_node_depth"}else{"node_depth"}})}}));
+                        if serde_json::to_vec(&records)?.len() as u64
+                            > config.max_output_bytes.saturating_sub(4096) / 2
+                        {
+                            records.pop();
+                            return Err("benchmark:output_limit".into());
+                        }
+                        serde_json::to_writer(&mut completed, records.last().unwrap())?;
+                        std::io::Write::write_all(&mut completed, b"\n")?;
+                        std::io::Write::flush(&mut completed)?;
+                    }
+                }
+            }
+            Ok(())
+        })();
+        let _ = done_tx.send(());
+        let monitored_stop = monitor
+            .join()
+            .unwrap_or_else(|_| Some("monitor_failed".into()));
+        (result, monitored_stop)
+    });
+    let mut stopped = monitored_stop.or_else(|| result.as_ref().err().map(|e| e.to_string()));
+
+    let mut report = serde_json::json!({"schema":"quoridor-search-benchmark-v1","run_id":config.run_id,"fixed_work":!config.engines.iter().any(|e| e.kind != "mcts" && e.time_ms.is_some()),"warm_separate":true,"stopped":stopped,"backend_work":backend.as_ref().map(|b| inference_work(b.counters())),"records":records,"total_seconds":start.elapsed().as_secs_f64(),"admission":admission,"model_sha":config.inference.as_ref().map(|i|i.model_sha.clone())});
+    let mut encoded = serde_json::to_vec(&report)?;
+    let remaining = config
+        .max_output_bytes
+        .saturating_sub(completed.metadata()?.len());
+    if encoded.len() as u64 > remaining {
+        // Keep the durable completed ledger; huge error text or identity must not
+        // bypass the output cap. Bind omitted metadata rather than truncating JSON.
+        let omitted_sha = quoridor_data::hex_digest(&encoded);
+        stopped = Some("output_limit".into());
+        report = serde_json::json!({"schema":"quoridor-search-benchmark-v1","run_id_sha":quoridor_data::hex_digest(config.run_id.as_bytes()),"stopped":stopped,"omitted_report_sha":omitted_sha,"backend_work":backend.as_ref().map(|b| inference_work(b.counters())),"completed_records":records.len(),"completed_file":"completed.jsonl","records":[],"fixed_work":!config.engines.iter().any(|e| e.kind != "mcts" && e.time_ms.is_some()),"total_seconds":start.elapsed().as_secs_f64()});
+        encoded = serde_json::to_vec(&report)?;
     }
-    let report = serde_json::json!({"schema":"quoridor-search-benchmark-v1","run_id":config.run_id,"fixed_work":true,"warm_separate":true,"records":records,"total_seconds":start.elapsed().as_secs_f64(),"admission":admission,"model_sha":config.inference.as_ref().map(|i|i.model_sha.clone())});
-    serde_json::to_writer_pretty(
-        OpenOptions::new()
-            .create_new(true)
-            .write(true)
-            .open(config.output.join("result.json"))?,
-        &report,
-    )?;
+    if encoded.len() as u64 > remaining {
+        return Err("benchmark output limit; completed records retained".into());
+    }
+    let mut output = OpenOptions::new()
+        .create_new(true)
+        .write(true)
+        .open(config.output.join("result.json"))?;
+    std::io::Write::write_all(&mut output, &encoded)?;
+    if let Some(reason) = stopped {
+        return Err(format!("benchmark incomplete: {reason}; evidence saved").into());
+    }
     Ok(report)
 }
 
@@ -1542,6 +1656,221 @@ mod tests {
             family: "family".into(),
             split: Split::Train,
         }
+    }
+    #[test]
+    fn benchmark_checks_pause_after_mcts_inference_and_preserves_work() {
+        struct PauseBackend {
+            metadata: quoridor_inference::BackendMetadata,
+            pause: std::path::PathBuf,
+            counters: InferenceCounters,
+        }
+        impl InferenceBackend for PauseBackend {
+            fn infer(
+                &mut self,
+                inputs: &[[f32; 648]],
+            ) -> std::result::Result<Vec<NetworkOutput>, quoridor_inference::InferenceError>
+            {
+                self.counters.logical_rows += inputs.len() as u64;
+                self.counters.executed_rows += inputs.len() as u64;
+                fs::write(&self.pause, b"pause").unwrap();
+                Ok(inputs
+                    .iter()
+                    .map(|_| NetworkOutput {
+                        logits: [0.; 136],
+                        value: 0.,
+                    })
+                    .collect())
+            }
+            fn metadata(&self) -> &quoridor_inference::BackendMetadata {
+                &self.metadata
+            }
+            fn counters(&self) -> InferenceCounters {
+                self.counters
+            }
+        }
+        let mut cfg = config();
+        cfg.output = std::env::temp_dir().join(format!(
+            "benchmark-mcts-pause-{}-{}",
+            std::process::id(),
+            unix_ms()
+        ));
+        cfg.opening_plies = 0;
+        cfg.host_ram_reserve = 0;
+        let pause = cfg.output.with_extension("pause");
+        cfg.pause_file = Some(pause.clone());
+        let backend = PauseBackend {
+            metadata: quoridor_inference::BackendMetadata {
+                backend: "synthetic".into(),
+                model_sha: "0".repeat(64),
+                max_batch: 8,
+                input_features: 648,
+                output_values: 137,
+            },
+            pause: pause.clone(),
+            counters: InferenceCounters::default(),
+        };
+        assert!(benchmark_impl(&cfg, Some(Box::new(backend))).is_err());
+        let report: serde_json::Value =
+            serde_json::from_slice(&fs::read(cfg.output.join("result.json")).unwrap()).unwrap();
+        assert!(report["stopped"].as_str().unwrap().contains("paused"));
+        assert_eq!(report["backend_work"]["logical_rows"], 1);
+        assert!(report["records"].as_array().unwrap().is_empty());
+        fs::remove_dir_all(cfg.output).unwrap();
+        fs::remove_file(pause).unwrap();
+    }
+    #[test]
+    fn benchmark_oversize_failure_report_is_bounded_and_keeps_counters() {
+        struct FailureBackend(quoridor_inference::BackendMetadata);
+        impl InferenceBackend for FailureBackend {
+            fn infer(
+                &mut self,
+                _inputs: &[[f32; 648]],
+            ) -> std::result::Result<Vec<NetworkOutput>, quoridor_inference::InferenceError>
+            {
+                Err(quoridor_inference::InferenceError("x".repeat(20000)))
+            }
+            fn metadata(&self) -> &quoridor_inference::BackendMetadata {
+                &self.0
+            }
+            fn counters(&self) -> InferenceCounters {
+                InferenceCounters {
+                    logical_rows: 1,
+                    executed_rows: 0,
+                    failed_rows: 1,
+                    ..InferenceCounters::default()
+                }
+            }
+        }
+        let mut cfg = config();
+        cfg.output = std::env::temp_dir().join(format!(
+            "benchmark-large-failure-{}-{}",
+            std::process::id(),
+            unix_ms()
+        ));
+        cfg.host_ram_reserve = 0;
+        cfg.opening_plies = 0;
+        cfg.max_output_bytes = 8192;
+        let backend = FailureBackend(quoridor_inference::BackendMetadata {
+            backend: "synthetic".into(),
+            model_sha: "0".repeat(64),
+            max_batch: 8,
+            input_features: 648,
+            output_values: 137,
+        });
+        assert!(
+            benchmark_impl(&cfg, Some(Box::new(backend)))
+                .unwrap_err()
+                .to_string()
+                .contains("output_limit")
+        );
+        let report: serde_json::Value =
+            serde_json::from_slice(&fs::read(cfg.output.join("result.json")).unwrap()).unwrap();
+        assert_eq!(report["stopped"], "output_limit");
+        assert_eq!(report["backend_work"]["failed_rows"], 1);
+        assert_eq!(report["omitted_report_sha"].as_str().unwrap().len(), 64);
+        assert!(crate::resources::directory_bytes(&cfg.output).unwrap() <= cfg.max_output_bytes);
+        fs::remove_dir_all(cfg.output).unwrap();
+    }
+    #[test]
+    fn paired_plans_assign_whole_families_to_default_splits() {
+        let mut cfg = config();
+        cfg.engines.push(cfg.engines[0].clone());
+        cfg.games = 8;
+        cfg.opening_plies = 0;
+        let plans = planned(&cfg).unwrap();
+        for pair in plans.as_chunks::<2>().0 {
+            assert_eq!(pair[0].family, pair[1].family);
+            assert_eq!(pair[0].split, pair[1].split);
+            assert_eq!(pair[0].opening, pair[1].opening);
+        }
+        assert_eq!(plans.iter().filter(|p| p.split == Split::Train).count(), 4);
+        assert_eq!(
+            plans
+                .iter()
+                .filter(|p| p.split == Split::Validation)
+                .count(),
+            2
+        );
+    }
+    #[test]
+    fn residual_manifest_routes_to_existing_evaluator_with_content_identity() {
+        use quoridor_nnue::{
+            DistanceFit, Topology,
+            residual::{RESIDUAL_FEATURE, ResidualManifest, ResidualModel, RouteMode},
+        };
+        let dir = std::env::temp_dir().join(format!(
+            "runner-residual-{}-{}",
+            std::process::id(),
+            unix_ms()
+        ));
+        fs::create_dir(&dir).unwrap();
+        let topology = Topology {
+            ft_width: 1,
+            hidden_width: 1,
+        };
+        let count = ResidualModel::parameter_count(topology).unwrap();
+        let raw = vec![0u8; count * 4];
+        fs::write(dir.join("weights.f32"), &raw).unwrap();
+        let manifest = ResidualManifest {
+            schema: "quoridor-nnue-distance-residual-v3".into(),
+            feature: RESIDUAL_FEATURE.into(),
+            value_perspective: "side-to-move".into(),
+            value_parameterization: "fixed-distance-logit-plus-linear-residual-tanh".into(),
+            dense_feature_version: "shortest-dag4-f32-STM-v1".into(),
+            route_mode: RouteMode::Zero4,
+            topology,
+            weights: "weights.f32".into(),
+            weights_sha: quoridor_data::hex_digest(&raw),
+            weights_bytes: raw.len(),
+            little_endian_f32: count,
+            mu_f32: [0.; 2],
+            sigma_f32: [1.; 2],
+            distance_fit: DistanceFit::default(),
+            route_mu_f32: [0.; 4],
+            route_sigma_f32: [1.; 4],
+        };
+        let path = dir.join("model.json");
+        fs::write(&path, serde_json::to_vec(&manifest).unwrap()).unwrap();
+        let cfg = config();
+        let mut engine = cfg.engines[0].clone();
+        engine.kind = "nnue".into();
+        engine.model = Some(path.clone());
+        let initialized = evaluator(&engine, &cfg).unwrap();
+        let model = ResidualModel::load(&path).unwrap();
+        assert!(
+            initialized
+                .identity
+                .row_identity
+                .starts_with("nnue-residual-f32:")
+        );
+        assert_eq!(
+            initialized.identity.row_identity,
+            typed_identity("nnue-residual-f32", &model.fingerprint()).row_identity
+        );
+        let context = SigmaContext::from_prefix(&[]).unwrap();
+        let accumulator = initialized
+            .evaluator
+            .as_ref()
+            .unwrap()
+            .prepare_context(&context)
+            .unwrap();
+        let value = initialized
+            .evaluator
+            .as_ref()
+            .unwrap()
+            .evaluate(&context, accumulator.as_ref())
+            .unwrap();
+        assert_eq!(
+            value,
+            model
+                .evaluate(
+                    &model
+                        .full_context(&context, quoridor_nnue::EvaluationMode::Scalar)
+                        .unwrap()
+                )
+                .unwrap()
+        );
+        fs::remove_dir_all(dir).unwrap();
     }
     #[test]
     fn stale_response_cancels_generation_and_joins() {

@@ -1,5 +1,6 @@
 // TensorRT native runtime. Stream/event and pinned buffers stay with one Rust
 // owner.
+#include "work_counts.h"
 #include <NvInferRuntime.h>
 #include <cstring>
 #include <cuda_runtime_api.h>
@@ -66,6 +67,7 @@ struct OwnedStream {
   }
 };
 struct TrtState {
+  WorkCounts counts;
   Logger logger;
   std::unique_ptr<nvinfer1::IRuntime> runtime;
   std::unique_ptr<nvinfer1::ICudaEngine> engine;
@@ -148,25 +150,32 @@ struct TrtState {
         !s->context->setTensorAddress(policy.c_str(), s->gpu_p) ||
         !s->context->setTensorAddress(value.c_str(), s->gpu_v))
       throw std::runtime_error("TensorRT shape/address binding failed");
-    auto run = [&] {
+    auto run = [&](bool warming) {
       cuda_check(cudaMemcpyAsync(s->gpu_in, s->host_in,
                                  batch * 648 * sizeof(float),
                                  cudaMemcpyHostToDevice, stream));
-      if (!s->context->enqueueV3(stream))
-        throw std::runtime_error("TensorRT enqueue failed");
+      auto forward = [&] {
+        if (!s->context->enqueueV3(stream))
+          throw std::runtime_error("TensorRT enqueue failed");
+      };
+      if (warming)
+        counts.warm_attempt(batch, forward);
+      else
+        forward();
       cuda_check(cudaMemcpyAsync(s->host_p, s->gpu_p,
                                  batch * 136 * sizeof(float),
                                  cudaMemcpyDeviceToHost, stream));
       cuda_check(cudaMemcpyAsync(s->host_v, s->gpu_v, batch * sizeof(float),
                                  cudaMemcpyDeviceToHost, stream));
     };
-    run();
+    run(true);
     cuda_check(cudaStreamSynchronize(stream));
     if (capture) {
       cuda_check(
           cudaStreamBeginCapture(stream, cudaStreamCaptureModeThreadLocal));
       try {
-        run();
+        counts.capture_unknown = 1;
+        run(false);
         cuda_check(cudaStreamEndCapture(stream, &s->graph));
         cuda_check(cudaGraphInstantiate(&s->executable, s->graph, 0));
       } catch (...) {
@@ -209,11 +218,13 @@ extern "C" int qtrt_run(void *handle, const float *input, size_t batch,
     auto &s = a.state(batch);
     memcpy(s.host_in, input, batch * 648 * sizeof(float));
     if (a.capture) {
+      a.counts.executed_rows += batch;
       cuda_check(cudaGraphLaunch(s.executable, a.stream));
     } else {
       cuda_check(cudaMemcpyAsync(s.gpu_in, s.host_in,
                                  batch * 648 * sizeof(float),
                                  cudaMemcpyHostToDevice, a.stream));
+      a.counts.executed_rows += batch;
       if (!s.context->enqueueV3(a.stream))
         throw std::runtime_error("TensorRT enqueue failed");
       cuda_check(cudaMemcpyAsync(s.host_p, s.gpu_p, batch * 136 * sizeof(float),
@@ -232,6 +243,9 @@ extern "C" int qtrt_run(void *handle, const float *input, size_t batch,
     fail(error, cap, e);
     return -1;
   }
+}
+extern "C" void qtrt_counters(void *handle, WorkCounts *counts) {
+  *counts = static_cast<TrtState *>(handle)->counts;
 }
 extern "C" void qtrt_destroy(void *handle) {
   delete static_cast<TrtState *>(handle);

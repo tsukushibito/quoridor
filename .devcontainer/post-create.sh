@@ -2,15 +2,25 @@
 set -euo pipefail
 
 workspace_root="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
-persistent_paths=(/home/vscode/.local /home/vscode/.cache/godot /home/vscode/.cache/uv /home/vscode/.codex)
+persistent_paths=(/home/vscode/.local /home/vscode/.cache/uv /home/vscode/.codex)
 if [[ "false" == true ]]; then
   persistent_paths+=(/home/vscode/.cache/ms-playwright /home/vscode/.local/share/playwright-chatgpt-profile)
 fi
-if [[ "nvidia" == nvidia ]]; then persistent_paths+=(/home/vscode/.cache/inference); fi
-if [[ "volume" == volume ]]; then persistent_paths+=("$workspace_root/.worktree"); fi
-if [[ "true" == true ]]; then persistent_paths+=(/home/vscode/.config/gh); fi
-if [[ "true" == true ]]; then persistent_paths+=(/home/vscode/.vscode-data); fi
-if [[ "true" == true ]]; then persistent_paths+=(/home/vscode/.ssh); fi
+if [[ "nvidia" == nvidia ]]; then
+  persistent_paths+=(/home/vscode/.cache/inference)
+fi
+if [[ "volume" == volume ]]; then
+  persistent_paths+=("$workspace_root/.worktree")
+fi
+if [[ "true" == true ]]; then
+  persistent_paths+=(/home/vscode/.config/gh)
+fi
+if [[ "true" == true ]]; then
+  persistent_paths+=(/home/vscode/.vscode-data)
+fi
+if [[ "true" == true ]]; then
+  persistent_paths+=(/home/vscode/.ssh)
+fi
 sudo mkdir -p "${persistent_paths[@]}"
 sudo chown -R vscode:vscode "${persistent_paths[@]}"
 mkdir -p /home/vscode/.local/bin
@@ -35,7 +45,6 @@ fi
 bash "$workspace_root/.devcontainer/update-toolchain.sh"
 bash "$workspace_root/scripts/dev/setup-rust.sh" --update
 bash "$workspace_root/scripts/dev/verify-rust.sh"
-bash "$workspace_root/scripts/dev/setup-training.sh"
 bash "$workspace_root/scripts/dev/setup-beads.sh"
 
 if [[ "true" == true ]]; then

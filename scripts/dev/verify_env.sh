@@ -12,21 +12,19 @@ require_command() {
   fi
 }
 
-require_command godot
 require_command node
 require_command npm
 require_command codex
 require_command uv
-require_command gdlint
-require_command gdformat
 require_command git
 require_command python3
 require_command rustup
 require_command rustc
 require_command cargo
 require_command wasm-pack
-if [[ "gdscript" == dotnet ]]; then require_command dotnet; fi
-if [[ "nvidia" == nvidia ]]; then require_command nvidia-smi; fi
+if [[ "nvidia" == nvidia ]]; then
+  require_command nvidia-smi
+fi
 
 if [[ "volume" == volume ]]; then
   bash "$workspace_root/scripts/dev/manage_worktree.sh" verify
@@ -37,8 +35,12 @@ if [[ "nvidia" == nvidia ]]; then
   [[ -w "$inference_cache" ]] || { echo "Inference cache is not writable: $inference_cache" >&2; exit 1; }
 fi
 
-if [[ "true" == true ]]; then require_command gh; fi
-if [[ "true" == true ]]; then require_command git-lfs; fi
+if [[ "true" == true ]]; then
+  require_command gh
+fi
+if [[ "true" == true ]]; then
+  require_command git-lfs
+fi
 if [[ "true" == true ]]; then
   require_command convert
   require_command optipng
@@ -77,7 +79,10 @@ if [[ "false" == true ]]; then
   }
   chrome_profile_dir="$(mktemp -d)"
   chrome_smoke_log="$(mktemp)"
-  cleanup_chrome_smoke() { rm -rf -- "$chrome_profile_dir"; rm -f -- "$chrome_smoke_log"; }
+  cleanup_chrome_smoke() {
+    rm -rf -- "$chrome_profile_dir"
+    rm -f -- "$chrome_smoke_log"
+  }
   trap cleanup_chrome_smoke EXIT
   if ! google-chrome-stable --headless=new --user-data-dir="$chrome_profile_dir" \
     --no-first-run --no-default-browser-check --password-store=basic --dump-dom about:blank \
@@ -96,8 +101,13 @@ const { chromium } = require(path.join(tools, 'node_modules', 'playwright'));
     const page = await browser.newPage();
     await page.goto('data:text/html,<title>chrome-channel-smoke</title>');
     if ((await page.title()) !== 'chrome-channel-smoke') throw new Error('unexpected title');
-  } finally { await browser.close(); }
-})().catch(error => { console.error(error); process.exit(1); });
+  } finally {
+    await browser.close();
+  }
+})().catch((error) => {
+  console.error(error);
+  process.exit(1);
+});
 JS
 fi
 
@@ -109,14 +119,18 @@ import sys
 
 lock = json.load(open(sys.argv[1], encoding="utf-8"))
 commands = {
-    "godot": ["godot", "--version"],
     "node": ["node", "--version"],
     "codex": ["codex", "--version"],
     "uv": ["uv", "--version"],
-    "gdtoolkit": ["gdlint", "--version"],
     "vscode-cli": ["code-cli", "--version"],
-    "playwright": [f"{sys.argv[2]}/.devcontainer/playwright-e2e/node_modules/.bin/playwright", "--version"],
-    "playwright-mcp": [f"{sys.argv[2]}/.devcontainer/playwright-mcp/node_modules/.bin/playwright-mcp", "--version"],
+    "playwright": [
+        f"{sys.argv[2]}/.devcontainer/playwright-e2e/node_modules/.bin/playwright",
+        "--version",
+    ],
+    "playwright-mcp": [
+        f"{sys.argv[2]}/.devcontainer/playwright-mcp/node_modules/.bin/playwright-mcp",
+        "--version",
+    ],
 }
 for name, metadata in lock["tools"].items():
     if not metadata.get("explicit") or name not in commands:
@@ -131,36 +145,17 @@ for name, metadata in lock["tools"].items():
         raise SystemExit(f"Pinned {name} version mismatch: expected {expected!r}, got {output!r}")
 PY
 
-godot_version="$(godot --version)"
-if [[ "$godot_version" != 4.* ]]; then
-  echo "Expected Godot 4.x, got: $godot_version" >&2
-  exit 1
-fi
-if [[ "gdscript" == dotnet && "$godot_version" != *mono* ]]; then
-  echo "Expected the .NET/mono Godot build, got: $godot_version" >&2
-  exit 1
-fi
-if [[ "gdscript" == gdscript && "$godot_version" == *mono* ]]; then
-  echo "Expected the standard GDScript Godot build, got: $godot_version" >&2
-  exit 1
-fi
-
-project_dir="${GODOT_PROJECT_DIR:-godot_project}"
-if [[ ! -f "$workspace_root/$project_dir/project.godot" ]]; then
-  echo "NOTE: project.godot is not present at $project_dir yet; environment checks still passed."
-fi
-
-printf 'Godot: %s\n' "$godot_version"
 printf 'Node: %s\n' "$(node --version)"
 printf 'Codex: %s\n' "$(codex --version)"
 printf 'uv: %s\n' "$(uv --version)"
-printf 'gdtoolkit: %s\n' "$(gdlint --version)"
 if [[ "false" == true ]]; then
   printf 'Playwright: %s\n' "$("$e2e_playwright" --version)"
   printf 'Playwright MCP: %s\n' "$("$playwright_mcp" --version)"
   printf 'Google Chrome: %s\n' "$(google-chrome-stable --version)"
 fi
-if [[ "true" == true ]]; then printf 'VS Code CLI: %s\n' "$(printf '%s\n' "$vscode_cli_version" | head -n 1)"; fi
+if [[ "true" == true ]]; then
+  printf 'VS Code CLI: %s\n' "$(printf '%s\n' "$vscode_cli_version" | head -n 1)"
+fi
 if [[ "nvidia" == nvidia ]]; then
   gpu_info="$(nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv,noheader)"
   if [[ -z "$gpu_info" ]]; then

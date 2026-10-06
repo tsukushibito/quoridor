@@ -32,11 +32,14 @@ source scripts/dev/project-env.sh
 python3 scripts/dev/check-research.py --syntax-only
 python3 scripts/dev/check-research.py
 python3 scripts/dev/check-research.py --format
-cargo test --workspace --features quoridor-wasm/research
-cargo clippy --workspace --features quoridor-wasm/research --all-targets -- -D warnings
+npm run check:native
+# 製品とnative双方を変更した場合
+npm run check:all
 ```
 
-軽量チェックはPython AST、Node構文、限定整形、tensor-loader・保存・export・task session clientの契約を確認する。Torch/ORTの読み込み、学習、対局、非同期job起動はしない。nativeの回収・探索・特徴・重みテストはCargoで、実Wasmの評価/取消は[運用手順](rust-ai.md)で確認する。科学実行の許可と構文検査を混同しない。
+軽量チェックはPython AST、Node構文、限定整形、現役NN0学習/cache/freeze・回収・保存・export・task session clientの契約を明示suiteで確認する。Torch/ORTの読み込み、学習、対局、非同期job起動はしない。nativeの回収・探索・特徴・重みテストはCargoで、実Wasmの評価/取消は[運用手順](rust-ai.md)で確認する。科学実行の許可と構文検査を混同しない。
+
+`npm run check`は製品core/AI/WasmとWeb/DTO/fixture/境界/audio/renderを、`npm run check:native`はnative研究crateを選ぶ。`check:all`は製品・native・軽量研究の統合入口とする。通常のproduction distを検証用buildで上書きせず、`verify:production`は専用outDirを使う。
 
 品質依存の初期導入は専用領域へ行う。共有学習envをformatter導入で変更しない。
 
