@@ -43,7 +43,7 @@ Aは末期にtrainへ強く適合しvalidation誤差と飽和が増え、Bは遅
 
 次の探索課題は、代表局面のwhole-search profileとTT実効性を測り、実測支配費から同意味処理最適化を選ぶこと。現状は全合法手のsortとTT/PV・killer・任意policy・history順で、学習済み方策は既定で使わない。探索方式・ordering方式・選択的枝刈りなどの重要設計は、観測・競合・全費をRoot経由で人間へ提示する。[初回担当契約](../research-data/ai-sigma/search-optimization/task.md)を参照し、担当・進捗はBeadsで管理する。
 
-ゾブリスト化の判断では、318の固定5局面H32/depth2 profileでTT key .49%、履歴1.81%、probe2.79%、store2.84%（exclusive合計7.93%）、sort17.29%、評価20.51%だった。孤立hash費は未分離、計測activeのwhole overhead約25%もあり、productionの改善上限や一般倍率へ換算しない。現TTは完全履歴キーのDefaultHasherをprobe/storeで再計算するため改善候補だが、まず一度計算したfingerprintの再用と履歴構築費を分けて比較するのが低改修費の競合。差分ゾブリストは盤面だけでなく反復回数・ply等の履歴意味を保ち、make/unmake/from-prefix対応と衝突時の完全キー確認を維持する。ハッシュ方式だけで意味上のTTヒット率は上がらない。既sort候補を中断せず、次TT処理候補として検証する価値あり、実装・追加測定・production採用は今回未配分。[判断根拠](../research-data/ai-sigma/search-optimization/zobrist-assessment.json)。
+ゾブリスト化の判断では、318の固定5局面H32/depth2 profileでTT key .49%、履歴1.81%、probe2.79%、store2.84%（exclusive合計7.93%）、sort17.29%、評価20.51%だった。孤立hash費は未分離、計測activeのwhole overhead約25%もあり、productionの改善上限や一般倍率へ換算しない。現TTは完全履歴キーのDefaultHasherをprobe/storeで再計算するため改善候補だが、まず一度計算したfingerprintの再用と履歴構築費を分けて比較するのが低改修費の競合。差分ゾブリストは盤面だけでなく反復回数・ply等の履歴意味を保ち、make/unmake/from-prefix対応と衝突時の完全キー確認を維持する。ハッシュ方式だけで意味上のTTヒット率は上がらない。ユーザー判断により低優先度の候補として保持し、実装・追加測定は割り当てない。代表的whole-searchでTT hash/履歴処理が支配費になった場合、又は高優先度の改善後に全費で利益が見込める場合に再検討する。[判断根拠](../research-data/ai-sigma/search-optimization/zobrist-assessment.json)。
 
 ## 選択済みの次の主学習
 

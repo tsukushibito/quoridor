@@ -34,5 +34,10 @@
     "all TT costs cannot be attributed to hashing",
     "position-only bound reuse is unsafe",
     "no measured Zobrist speedup, implementation, or new experiment allocation"
+  ],
+  "user_priority_decision": "low_priority_candidate_only; no implementation or additional measurement allocation",
+  "reconsider_when": [
+    "representative whole-search measurements show TT hashing/history processing is a significant bottleneck",
+    "after higher-priority processing work, expected whole-search benefit justifies implementation and correctness verification cost"
   ]
 }
