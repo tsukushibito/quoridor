@@ -30,3 +30,9 @@ CPU2,3最大2logical、RAMfamily4GiB、VRAM6GiB、親CPU4/RAM8/保存12GiB/UNKNO
 ## 到達点と停止
 
 全適格公開originalを供給し、正しい反転を含むGPU本学習と新corpus上のhyperparameter比較・収束観測、凍結未開封評価のSigma/D比較、必要native資格/画像/全工程費/限界・停止paths/SHAを引き渡す。旧曲線分析や1m延長を入口にしない。ユーザーの停止/pause、真正な資源不足、非finite/不正対応などは明示して止め、原結果を成功化しない。scope内の未成立候補から別候補へ進み、次設計が全て人間判断だけなら具体質問を返す。最高棋力を達成・default重み採用と先取りしない。必要原data/model/evidence保全、small report/manifests/圧縮evidenceのみmainへRoot統合。
+
+## 人間指定の高学習率比較への継続
+
+全3LRの結果を確認後、ユーザーは「もっと大きい学習率を試して欲しい。上限の確認はしてないよね？」と明示した。旧3e-5/1e-4/3e-4 cohortの観測・最小選定・失敗を保存し、3e-4を旧範囲内の暫定最良とする。初期LRだけを変え、同qualified INITIAL/batch2048/全T/fixed original V/Adam FP32/尺度/seed/反転RNG/257warmup/plateau/科学的停止規則で、まず1e-3、安定性を確認して3e-3を比較する。なお改善する範囲上端なら次1e-2を結果前に束縛し、安定性の喪失や利益の頭打ちを観測して範囲を絞る。有限振動と非finite失敗を区別し、失敗を条件変更で救済しない。普遍的最大LR・最適値とは主張しない。
+
+新候補config/input/guard/job/validation選定規則とinclusive保存予測を結果前に固定する。旧出力/費/UNKNOWNを保持し、現1040MiB等の資源内成立またはRootの具体的な前向き容量配分後に実行する。時間/epoch/forward/job上限は設けない。重要な意味変更を含まないLR比較で毎fitレビューを追加せず、同セッションで継続する。最終Sigma/newE開封は拡張比較・最終選定・global freezeと関連入力境界確認まで保留し、評価labelsを追加LR選定に用いない。
