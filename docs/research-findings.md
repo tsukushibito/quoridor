@@ -43,6 +43,8 @@ Aは末期にtrainへ強く適合しvalidation誤差と飽和が増え、Bは遅
 
 次の探索課題は、代表局面のwhole-search profileとTT実効性を測り、実測支配費から同意味処理最適化を選ぶこと。現状は全合法手のsortとTT/PV・killer・任意policy・history順で、学習済み方策は既定で使わない。探索方式・ordering方式・選択的枝刈りなどの重要設計は、観測・競合・全費をRoot経由で人間へ提示する。[初回担当契約](../research-data/ai-sigma/search-optimization/task.md)を参照し、担当・進捗はBeadsで管理する。
 
+ゾブリスト化の判断では、318の固定5局面H32/depth2 profileでTT key .49%、履歴1.81%、probe2.79%、store2.84%（exclusive合計7.93%）、sort17.29%、評価20.51%だった。孤立hash費は未分離、計測activeのwhole overhead約25%もあり、productionの改善上限や一般倍率へ換算しない。現TTは完全履歴キーのDefaultHasherをprobe/storeで再計算するため改善候補だが、まず一度計算したfingerprintの再用と履歴構築費を分けて比較するのが低改修費の競合。差分ゾブリストは盤面だけでなく反復回数・ply等の履歴意味を保ち、make/unmake/from-prefix対応と衝突時の完全キー確認を維持する。ハッシュ方式だけで意味上のTTヒット率は上がらない。既sort候補を中断せず、次TT処理候補として検証する価値あり、実装・追加測定・production採用は今回未配分。[判断根拠](../research-data/ai-sigma/search-optimization/zobrist-assessment.json)。
+
 ## 選択済みの次の主学習
 
 ユーザーは公開全域からの訓練100万行・validation5万行・最終評価5万行、元観測/反転兄弟の分割固定、別観測の盤面一致許容、epoch shuffleとGPU学習を選んだ。先頭入力群だけの抽出とvalidation一致による訓練一律削除を新主経路に使わない。不正入力を除き、公開z0は終了理由不明の教師として別に除外する。複数の条件付き勝敗観測を保持し、実distinct数と分布を報告する。既存モデル・特徴を固定し、初期から細かい曲線と全工程費を観測する。[319契約](../research-data/ai-sigma/public-million-learning/task.md)が実装・実行・資源・停止と検証を定める。受付・実装・実取得・実学習・独立評価を分け、結果は未測定。

@@ -1,0 +1,38 @@
+{
+  "assessment": "worth_evaluating_as_next_TT_processing_candidate_not_immediate_production_adoption",
+  "observed_at_utc": "2026-10-06T10:05:22.707278+00:00",
+  "evidence": {
+    "path": ".worktree/search-optimization/.artifacts/search-optimization/summary-r2.json",
+    "sha256": "141612a245cd2dbb34fc3274cbc38aa3568bee1ced35c36122493618b9c5b67a",
+    "exclusive_shares": {
+      "tt_key": 0.004923165693807673,
+      "history": 0.018081460674474945,
+      "tt_probe": 0.027862412952398843,
+      "tt_store": 0.028398318107797017,
+      "sort": 0.17288952408041333,
+      "evaluate": 0.20506639287224845
+    },
+    "tt_related_share": 0.07926535742847848,
+    "isolated_hash_cost": "UNKNOWN",
+    "profile_active_overhead_ratio": 1.252953,
+    "scope": "five frozen H32 depth2 roots; instrumented costs, not deployed production bounds"
+  },
+  "source_findings": [
+    "Key::of reconstructs exact history_counts via BTreeMap then Vec",
+    "Key::hash runs DefaultHasher over complete key at probe/store",
+    "TT hit checks complete Key equality",
+    "Sigma repetition legality depends on history; total ply is retained"
+  ],
+  "recommendation": [
+    "retain current comparator candidate; do not interrupt or add compute",
+    "next isolate hashing from history construction and TT probe/store in an exclusive slot",
+    "first compare caching one complete-key fingerprint per Key against repeated hashes",
+    "consider incremental board plus history-count fingerprint only with make/unmake/from-prefix equivalence and complete-key collision verification"
+  ],
+  "non_claims": [
+    "Zobrist alone does not increase semantic TT hit rate",
+    "all TT costs cannot be attributed to hashing",
+    "position-only bound reuse is unsafe",
+    "no measured Zobrist speedup, implementation, or new experiment allocation"
+  ]
+}
