@@ -2,14 +2,9 @@
   "schema": "repository-maintainability-review-v1",
   "issue": "quoridor-8th",
   "reviewer": "codex:/root/maintainability_reviewer",
-  "baseline": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
-  "reviewed_at": "2026-10-06T03:37:03.183393+00:00",
-  "method": "read-only source reachability/static review; no builds/tests/models/jobs/network; source/config/docs/Git/index unchanged",
-  "known_in_flight_exclusions": [
-    "quoridor-d3g documentation retirement and knowledge consolidation",
-    ".ignore addition",
-    "scripts/tools README old team/scheduler/watch links"
-  ],
+  "baseline": "4494564ff7f28148fab6e1205cb83aeb3e980d77",
+  "reviewed_at": "2026-10-06T04:11:32.465906+00:00",
+  "method": "Read-only reachable-source/static review; one small NN0 synthetic numpy/cache parser fixture; no build, model import/init/forward, scientific data, training, games, GPU, install, network or runtime/session operation. No source/config/docs/Git/index edits.",
   "findings": [
     {
       "id": "MR-01",
@@ -256,6 +251,497 @@
       "recommendation": "Remove both unused repository entrypoints; retain only if a concrete external consumer is established with explicit removal conditions. Do not remove active standard Game/B0/MCTS/NNUE functionality.",
       "confidence": "high for repository caller absence; medium for external ABI usage",
       "verification": "Scoped source search only; external Wasm consumers not inspectable."
+    },
+    {
+      "id": "MR-08",
+      "priority": "P2",
+      "severity": "work-accounting",
+      "title": "AOTIの初回warm forwardがNN費用へ計上されない",
+      "locations": [
+        {
+          "path": "crates/quoridor-inference/native/aoti.cpp",
+          "line": 60,
+          "end_line": 79
+        },
+        {
+          "path": "crates/quoridor-runner/src/runtime.rs",
+          "line": 1173,
+          "end_line": 1182
+        },
+        {
+          "path": "crates/quoridor-runner/src/bin/teacher-qualify.rs",
+          "line": 171,
+          "end_line": 173
+        }
+      ],
+      "trigger": "AOTI backendで新しいbatch sizeを初めて使う。",
+      "evidence": "native state(batch)はrun()を70・71行で2回呼びsynchronizeする。一方runnerは公開inferのnだけnn_callsへ加え、backend_warmup_nnの追加はcuda-tensorrtに限定する。AOTIの初回追加2nをこの集計は含めない。graph captureでも77行でrunを呼ぶが、captureを追加の実GPU forward数とは認定しない。",
+      "existing_protection": "通常infer件数・batch histogram・所要時間は記録される。teacher-qualifyにはTRTのB1–8 warmを36 NNとして明示加算する別保護がある。この所見はTRT全入口の計上欠落を意味しない。",
+      "root_cause": "backend内の物理forwardとrunner側の論理request数を、backend名による特例で結合している。",
+      "impact": "AOTIを含む全作業費・NN予算・backend比較が論理requestのみの値になり、初回batch種類数で未記録費が変わる。capture setup費は別の未測事項。過去の科学結果が実際に誤認定されたとは判断していない。",
+      "recommendation": "backendがlogical/warm/capture/failed forward数を返す共通計数契約にし、runner・qualification・benchmarkで同じ項目を保存する。補正のための追加forwardは不要。",
+      "confidence": "high",
+      "verification": "native/Rustの呼出と加算を静的照合。GPU実行・物理計数・capture費・歴史runの再認定は未実施。"
+    },
+    {
+      "id": "MR-09",
+      "priority": "P2",
+      "severity": "late-configuration-failure",
+      "title": "paired arenaのsplitを試合単位で割り当て、family検査で後から失敗する",
+      "locations": [
+        {
+          "path": "crates/quoridor-runner/src/runtime.rs",
+          "line": 426,
+          "end_line": 480
+        },
+        {
+          "path": "crates/quoridor-runner/src/config.rs",
+          "line": 193,
+          "end_line": 216
+        },
+        {
+          "path": "crates/quoridor-data/src/lib.rs",
+          "line": 641,
+          "end_line": 645
+        }
+      ],
+      "trigger": "2 engine・偶数試合のarenaでtrainまたはvalidation境界が奇数になる。8 gamesの既定計算はtrain=5、validation=1。",
+      "evidence": "plannedはid/2をfamilyにし、色交換の兄弟が同じopeningを使う一方、splitは個別idとtrain/validation数で決める。8 gamesではid4/5がfamily2でtrain/validationへ分かれる。configのsplit合計検査はfamily境界を検査しない。DatasetWriter.finishはstreamed family crosses splitとして拒否する。",
+      "existing_protection": "dataset writerの厳格なfamily検査は漏洩したdatasetの完成を防ぐ。arenaの偶数games・2 engine検査と、正しい偶数splitを明示する運用もある。",
+      "root_cause": "paired planの分割単位とdatasetの独立単位が異なり、事前設定検査が後段writerへ委ねられる。",
+      "impact": "正常に受理された設定で対局費を支払った後、dataset最終化に失敗しrunが完結しない。単にデータ漏洩が黙って通るという指摘ではない。",
+      "recommendation": "family単位でsplitを計画するか、arenaデータの用途を明示し、paired境界を科学実行前に検査する。小さなplan算術fixtureで検証する。",
+      "confidence": "high",
+      "verification": "8-game設定の整数算術と呼出の静的照合。対局を実行していない。"
+    },
+    {
+      "id": "MR-10",
+      "priority": "P2",
+      "severity": "benchmark-lifecycle",
+      "title": "benchmarkの全体停止条件が一探索の実行中に反映されない",
+      "locations": [
+        {
+          "path": "crates/quoridor-runner/src/runtime.rs",
+          "line": 494,
+          "end_line": 505
+        },
+        {
+          "path": "crates/quoridor-runner/src/runtime.rs",
+          "line": 1444,
+          "end_line": 1504
+        },
+        {
+          "path": "crates/quoridor-runner/src/runtime.rs",
+          "line": 1521,
+          "end_line": 1529
+        }
+      ],
+      "trigger": "直接benchmark入口で一repeatがwall/deadline/pause/RAM境界を越える、またはbackendが長く停止する。",
+      "evidence": "guardはrepeat開始時だけ。MCTS advance/infer loopには全体guardがなく、alphaへ渡すcancelはfalseのまま誰も更新しない。alphaの任意time_msは全体deadlineとは別条件。recordsは全repeat終了後だけresult.jsonへ書かれる。",
+      "existing_protection": "MCTS/alphaにはnode/depth等の有限上限、alphaには任意の探索時間制限がある。外側research-jobで起動すれば管理側停止がある。これらは直接入口の全体pause/deadlineを探索中に反映する保証とは別。",
+      "root_cause": "benchmarkが自己対局の監視・失敗記録経路から外れ、境界検査と探索cancelを接続していない。",
+      "impact": "一探索中に許可された壁時計/RAM枠を越えて処理が続き得る。中途failureでは完了済みrepeatの記録も失われ、原因と投入費の回収が難しい。無限loopや既往の超過実測を主張しない。",
+      "recommendation": "共通monitorからcancelへ接続し、MCTSの有界advance間で全体条件を確認する。進行・失敗・完了済みrecordsを有界に保存する。同期native呼出の停止保証は外側jobのexact cleanupと区別する。",
+      "confidence": "high",
+      "verification": "静的なguard/cancel/保存経路の確認。長時間探索・停止processは起動していない。"
+    },
+    {
+      "id": "MR-11",
+      "priority": "P1",
+      "severity": "artifact-clobber",
+      "title": "TensorRT exportの一時ONNXが既存兄弟assetを上書きして削除する",
+      "locations": [
+        {
+          "path": "tools/model-export/export.py",
+          "line": 26,
+          "end_line": 27
+        },
+        {
+          "path": "tools/model-export/export.py",
+          "line": 60,
+          "end_line": 89
+        }
+      ],
+      "trigger": "新しいsigma.engineをexportするdirectoryにsigma.onnxがある、またはTensorRT出力名をsigma.onnxにする。",
+      "evidence": "存在拒否はargs.outputのみ。一時入力はoutput.with_suffix('.onnx')を直接使いexport後unlinkする。sigma.engineの兄弟sigma.onnxは上書き対象になる。出力自体が.onnxならtemporary==outputとなり、engineを書いた83行の直後84行でそのengineを削除し89行のSHA取得へ進む。",
+      "existing_protection": "通常の未使用.engine名かつ同stem ONNXが無い場合は衝突しない。最終outputの既存拒否はあるが、この一時pathの所有は検査しない。",
+      "root_cause": "入力assetと一時物を拡張子置換だけで命名し、一時物の排他的所有を確立していない。",
+      "impact": "別exportや検証用ONNXを失う、または高価なexport後に最終artifact自体が無くなる。未保存モデルassetの破壊につながる入口上の欠陥。",
+      "recommendation": "専用TemporaryDirectory内の所有済み一時ONNXを使い、最終artifact/manifestを衝突検査して公開する。output拡張子衝突もモデル初期化前に拒否する。既存assetを触らないpath fixtureで確認できる。",
+      "confidence": "high",
+      "verification": "Path変換・書込・unlink順序を静的確認。Torch/export/GPUは起動していない。"
+    },
+    {
+      "id": "MR-12",
+      "priority": "P2",
+      "severity": "model-contract-routing",
+      "title": "residual学習を受理するcycleがarenaではv1/v2 Model loaderに渡す",
+      "locations": [
+        {
+          "path": "python/quoridor_training/common.py",
+          "line": 115,
+          "end_line": 130
+        },
+        {
+          "path": "python/quoridor_training/train.py",
+          "line": 77,
+          "end_line": 100
+        },
+        {
+          "path": "python/quoridor_training/cycle.py",
+          "line": 163,
+          "end_line": 173
+        },
+        {
+          "path": "crates/quoridor-runner/src/runtime.rs",
+          "line": 391,
+          "end_line": 402
+        },
+        {
+          "path": "crates/quoridor-nnue/src/lib.rs",
+          "line": 205,
+          "end_line": 208
+        },
+        {
+          "path": "crates/quoridor-runner/src/bin/nnue-diagnose.rs",
+          "line": 282,
+          "end_line": 284
+        }
+      ],
+      "trigger": "cycleのtraining configに現在validate_configが受理するdistance_residualを指定してarenaまで進む。",
+      "evidence": "trainはresidual-v3 descriptorをexportするがcycleは常にkind=nnueへ設定する。runnerのnnue evaluatorはModel::loadを使い、そのloaderはQF1 scaled v1/v2だけを受理する。",
+      "existing_protection": "loaderは未知schemaを拒否するため、別モデルを黙って評価しない。ResidualModel/ResidualEvaluatorとnnue-diagnoseの明示residual経路は存在し、residualがリポジトリ全体で未対応という意味ではない。",
+      "root_cause": "学習architectureと下流engine/loaderの適合をcycle admissionで表現していない。",
+      "impact": "生成・学習・testを終えた後のarena初期化で拒否され、許可済みcycleを完了できない。失敗が高価なstageの後へ遅れる。",
+      "recommendation": "共有model descriptorから対応loaderを選ぶか、residualが診断専用ならcycle開始前に明示拒否する。どの経路を製品/研究として支えるかは現行責務に沿って決め、新しいモデル研究を自動開始しない。",
+      "confidence": "high",
+      "verification": "config→export→cycle→loaderの静的照合。residual学習/arenaは未実行。"
+    },
+    {
+      "id": "MR-13",
+      "priority": "P2",
+      "severity": "unbounded-input-read",
+      "title": "ResidualModel loaderだけmanifest/weightsの上限検査前に全fileを読む",
+      "locations": [
+        {
+          "path": "crates/quoridor-nnue/src/residual.rs",
+          "line": 93,
+          "end_line": 119
+        },
+        {
+          "path": "crates/quoridor-nnue/src/lib.rs",
+          "line": 139,
+          "end_line": 155
+        },
+        {
+          "path": "crates/quoridor-runner/src/bin/nnue-diagnose.rs",
+          "line": 282,
+          "end_line": 284
+        }
+      ],
+      "trigger": "診断CLIのresidual pathに大きな誤入力manifest、または期待長より巨大なweightsを与える。",
+      "evidence": "ResidualModel::loadはfs::readの後でmanifest64KiB上限、weights長/SHAを検査する。通常Model loaderはtake(65537)とweights metadata/有界readを使う。",
+      "existing_protection": "residualにもtopology・正確な長さ・SHA・有限値・perspectiveの検査がある。正常モデルは有界で、異常入力を受理する問題ではない。quantized loaderも有界読取を持つ。",
+      "root_cause": "共通のasset reader契約がresidual loaderへ適用されていない。",
+      "impact": "誤入力を拒否するまでにfile総量のRAMを割り当て、モデル検査以前にOOM等で診断を失敗させ得る。",
+      "recommendation": "manifestとweightsの有界readerを共通化し、サイズ確認・上限+1読取・exact-length/SHA検証を全loaderで維持する。",
+      "confidence": "high",
+      "verification": "loader順序と既存bounded loaderの静的比較。巨大file読取/OOMは実施していない。"
+    },
+    {
+      "id": "MR-14",
+      "priority": "P2",
+      "severity": "cache-binding-validation",
+      "title": "native cache readerは必要hashとfeature/distance対応を必須にしない",
+      "locations": [
+        {
+          "path": "python/quoridor_training/cache.py",
+          "line": 116,
+          "end_line": 143
+        },
+        {
+          "path": "python/quoridor_training/cache.py",
+          "line": 17,
+          "end_line": 34
+        },
+        {
+          "path": "python/quoridor_training/train.py",
+          "line": 122,
+          "end_line": 126
+        }
+      ],
+      "trigger": "directory cacheのcache.jsonが必要sha項目を欠く、またはx/dがrows metadataと異なる有限tensorである。",
+      "evidence": "readerはsha256 mapに存在する項目だけ検査し、空mapを受理する。dense xはfiniteのみ、distanceもfiniteのみで、rowsのsparse feature/STM distanceとの一致は検査しない。trainの後段検査は選択target列である。2行の非科学fixtureで空hash、x=.25、metadataと異なるd=.9、manifest不変でx=.75への変更がすべて受理された。",
+      "existing_protection": "通常Rust cache writerは正しい必要hashを保存する。非finite、row ID、test split、target検査はある。sharded child入口にはsparse/binary/distance対応検査があるため、その保護をnative directory全体に無いと一般化しない。",
+      "root_cause": "manifestのhash mapを検証対象の任意一覧として扱い、実消費する必須fileとrows/tensorの一つの入力契約にしていない。",
+      "impact": "壊れたmanifestやcache作成変更で、記録した局面と別の入力特徴から学習できる。誤入力を科学処理前に拒否できず、署名なしtensor変更も検出できない。現存datasetの破損を立証したものではない。",
+      "recommendation": "schema、必須file/hash集合、dtype/正確な長さを要求し、sparse feature・binary値・distance対応をchunk単位で確認する。sharded/nativeで同じ入力契約を使う。",
+      "confidence": "high",
+      "verification": "NN0 numpy/cache parser fixtureで受理を確認。Torch/モデル/forward/科学datasetは未使用。receiptは本JSONのverification_resultsへ保存。"
+    },
+    {
+      "id": "MR-15",
+      "priority": "P2",
+      "severity": "managed-root-identity",
+      "title": "worktree helperの管理rootが呼出checkoutによって変わる",
+      "locations": [
+        {
+          "path": "scripts/dev/manage_worktree.sh",
+          "line": 4,
+          "end_line": 5
+        },
+        {
+          "path": "scripts/dev/manage_worktree.sh",
+          "line": 16,
+          "end_line": 25
+        },
+        {
+          "path": "scripts/dev/manage_worktree.sh",
+          "line": 64,
+          "end_line": 70
+        },
+        {
+          "path": "scripts/dev/beads-env.sh",
+          "line": 4,
+          "end_line": 6
+        },
+        {
+          "path": "scripts/dev/research-session.py",
+          "line": 90,
+          "end_line": 112
+        }
+      ],
+      "trigger": "managed worktreeをcwdとしてmanage_worktree.sh create/verify/lock-existing/removeを呼ぶ。",
+      "evidence": "helperはgit --show-toplevelを正本rootにし、その下の.worktreeを管理対象にする。linked checkoutではそのcheckoutがrootになり、createはnested .worktreeへ、managed_recordsは既存のmain管理pathを対象外にする。共有Beads/session側はcommon-dirからmain rootを解決している。",
+      "existing_protection": "main cwdでの操作は期待どおり。name検査、Git worktree登録・lock、volume検査等はあり、誤rootが直ちに共有DB削除を意味するものではない。",
+      "root_cause": "管理namespaceにcurrent checkout rootとcommon repository rootを混用する。",
+      "impact": "同じhelperが利用場所で別集合を管理し、作成・確認・回収の導線が分岐する。並行checkoutの利用者がmainへ戻る暗黙条件を知らなければ保全検査や回収が漏れる。",
+      "recommendation": "他helperと同じmain/common root resolverを使うか、非main cwdを明示拒否して唯一の管理入口を保つ。",
+      "confidence": "high",
+      "verification": "path構成とroot resolverの静的比較。worktree作成/撤去・Git ref変更は未実施。"
+    },
+    {
+      "id": "MR-16",
+      "priority": "P3",
+      "severity": "duplicate-obsolete-entrypoints",
+      "title": "旧固定run向けguardianがほぼ同じ2scriptとして残る",
+      "locations": [
+        {
+          "path": "scripts/dev/ai-sigma-runner.py",
+          "line": 29,
+          "end_line": 64
+        },
+        {
+          "path": "scripts/dev/ai-sigma-context-runner.py",
+          "line": 29,
+          "end_line": 64
+        }
+      ],
+      "trigger": "旧guardian scriptを直接CLIとして選ぶ、または監視/予算変更時に現役入口を判断する。",
+      "evidence": "2scriptはdefault experiment名とstorage guard以外ほぼ同じ。旧contract fallback/quoridor-4lc.5/seed1979・固定3.5GiB RAM等を持つ。現在のsource/docs/tools/.agentsで両script名のcallerは見つからず、現役research-jobは別入口。",
+      "existing_protection": "現在のtask/job設計とresearch-job入口があるため、通常jobが必ず旧guardianを通るわけではない。過去rawデータや凍結比較sourceの保存とは区別する。",
+      "root_cause": "固定runを汎用scriptへ見せた旧経路が、撤去条件や明示的比較用途なしに二重維持される。",
+      "impact": "監視実装・予算の正本を選ぶ費用が増え、直接旧入口を選ぶと現在task budgetと異なる制御を使う。実害の実測はない。",
+      "recommendation": "具体的な現在比較callerが無ければ両scriptを撤去する。実利用があるなら用途と撤去条件を確認し、現役の共通job制御へ寄せる。関連する過去入力/モデル/証拠を一括削除しない。",
+      "confidence": "high for duplication/repository callers; medium for external usage",
+      "verification": "file差分と限定caller検索。guardianを起動していない。"
+    },
+    {
+      "id": "MR-17",
+      "priority": "P2",
+      "severity": "build-artifact-boundary",
+      "title": "production検証が通常distをtest API付きsubpath buildへ置き換える",
+      "locations": [
+        {
+          "path": "scripts/verify-production.mjs",
+          "line": 23,
+          "end_line": 28
+        },
+        {
+          "path": "apps/web/vite.config.ts",
+          "line": 1,
+          "end_line": 6
+        },
+        {
+          "path": "apps/web/src/main.ts",
+          "line": 694,
+          "end_line": 706
+        }
+      ],
+      "trigger": "通常npm buildの後にverify:productionを実行し、再buildせず同じdistをpreview/配布する。",
+      "evidence": "verificationはroot/subpathの順にAPP_BASEとVITE_PHASE1_E2E=1を設定して既定outDirへbuildする。vite configは検証専用outDirを指定しない。終了時のdistは最後の/quoridor/設定かつtest APIを含む。",
+      "existing_protection": "通常buildを改めて実行すれば正規artifactになる。通常productionのtest globals不在を検査する別smokeもあり、全配布がdebugだと判断していない。",
+      "root_cause": "検証fixture artifactと配布artifactが同じ出力pathを共有する。",
+      "impact": "検証済みと認識した既存distを配布するとbase mismatchやtest hook露出を引き継ぐ。再buildの暗黙条件が運用依存になる。",
+      "recommendation": "検証用root/subpath buildを別outDirへ置き、通常distを保護する。配布対象のbase/test-hook設定を識別・検査できるようにする。",
+      "confidence": "high",
+      "verification": "build環境と出力設定の静的照合。build/preview/配布は未実行。"
+    },
+    {
+      "id": "MR-18",
+      "priority": "P3",
+      "severity": "formatter-coverage",
+      "title": "手書き言語全体の限定整形を実行する入口と対象一覧が揃っていない",
+      "locations": [
+        {
+          "path": "scripts/dev/check-research.py",
+          "line": 18,
+          "end_line": 50
+        },
+        {
+          "path": "package.json",
+          "line": 16,
+          "end_line": 20
+        },
+        {
+          "path": "AGENTS.md",
+          "line": 18,
+          "end_line": 22
+        }
+      ],
+      "trigger": "製品TS/CSS・Shell・native C++、または研究品質scope外の管理Pythonを変更し共通検査を使う。",
+      "evidence": "research品質入口の対象は指定Pythonと3 JSだけ。製品checkはRust fmt・TS型等で、製品TS/CSSやShell/native C++のformat-checkを含まない。調査した配置にはそれらを覆うformatter設定/入口を確認できなかった。",
+      "existing_protection": "AGENTSは変更範囲に限定した全言語整形を要求し、担当者が個別に行える。Rust・研究Python/JSには設定付き入口がある。hosted CI不在そのものは現行設計上の欠陥として数えない。",
+      "root_cause": "変更完了の要求範囲と検証toolの対象が一致せず、担当者の個別手順に依存する。",
+      "impact": "各変更で整形方法と範囲を再発見する必要があり、一部言語だけ抜けても標準検査で検出されない。現在sourceがすべて未整形だという主張ではない。",
+      "recommendation": "現役手書きsourceの対象一覧と限定format-check入口を用意し、未整備言語の方式を決める。generated/vendor/凍結比較は除外し、無関係な一括整形をしない。",
+      "confidence": "medium-high",
+      "verification": "設定とscript対象の静的調査。全baselineファイルのformatter違反検査はしていない。"
+    },
+    {
+      "id": "MR-19",
+      "priority": "P3",
+      "severity": "asset-error-observability",
+      "title": "描画assetのfallbackで失敗原因がdiagnosticsから失われる",
+      "locations": [
+        {
+          "path": "apps/web/src/render/tabletop-assets.ts",
+          "line": 39,
+          "end_line": 42
+        },
+        {
+          "path": "apps/web/src/render/tabletop-assets.ts",
+          "line": 102,
+          "end_line": 108
+        },
+        {
+          "path": "apps/web/src/render/tabletop-assets.ts",
+          "line": 149,
+          "end_line": 159
+        }
+      ],
+      "trigger": "環境HDR/wood取得・decode・PMREM生成等で失敗する。",
+      "evidence": "HTTP errorは原因を持つ例外になるが環境/woodのcatchは例外を保持しない。diagnosticsはerror/fallback状態・texture数・光設定だけで直近原因を返さない。",
+      "existing_protection": "fallbackでゲームを継続でき、世代照合・timeout・GPU resource cleanupがある。利用者UIへ技術詳細を出す必要はない。",
+      "root_cause": "回復表示と開発診断の情報を同じ簡略statusへ落としている。",
+      "impact": "403/timeout/decode/GPU変換失敗を後から区別できず、asset問題の再現と環境依存調査に余計な往復が必要になる。",
+      "recommendation": "asset世代ごとに有界な最新error種別/原因を開発diagnosticsへ保持する。UIは現在の簡単なfallback案内を維持し、取消済み世代のerrorと区別する。",
+      "confidence": "high",
+      "verification": "catchとdiagnosticsの静的追跡。browser/GPU故障を注入していない。"
+    },
+    {
+      "id": "MR-20",
+      "priority": "P3",
+      "severity": "verification-evidence-availability",
+      "title": "現役環境報告から参照する13枚の画面証拠が指定保存先に無い",
+      "locations": [
+        {
+          "path": "docs/reports/environment-presets.md",
+          "line": 72,
+          "end_line": 84
+        }
+      ],
+      "trigger": "現役報告からdesktop/mobile/角度別の完成画面を確認する。",
+      "evidence": "報告は13枚の撮影を記述し、main .artifactsへの相対linkと旧environment-presets worktreeの絶対pathを示す。13指定名のis_file確認は両directoryとも0/13。限定して読んだwebapp保全manifestにそれらへのmappingは見つからなかった。",
+      "existing_protection": "報告の文章と既存e2eは残る。別archiveに証拠が存在する可能性は否定しない。今回完了したdocs一斉整理の件数や古いteam案内とは別の、保持中報告の参照問題。",
+      "root_cause": "歴史的な視覚検証証拠を一時artifact/worktree pathから参照し、現役報告への移行後の所在が明確でない。",
+      "impact": "報告の完成画面を読者が検査できず、文章による成功記録を視覚証拠で裏付けられない。永久消失や撮影が行われなかったとの判断ではない。",
+      "recommendation": "保存済みarchiveがあるなら13証拠の正確な所在へlinkする。無いなら利用不能を明示する。新規撮影・runtime再開は別途許可範囲で判断し、保守のためだけに自動実行しない。",
+      "confidence": "high for referenced-path absence; medium for archive availability",
+      "verification": "指定26 pathの軽量存在確認とwebapp保全manifestの限定文字検索。全archive走査・browser起動は未実施。"
+    },
+    {
+      "id": "MR-21",
+      "priority": "P2",
+      "severity": "benchmark-metadata-semantics",
+      "title": "time-limited探索でもbenchmarkがfixed_work=trueと報告する",
+      "locations": [
+        {
+          "path": "crates/quoridor-runner/src/runtime.rs",
+          "line": 1495,
+          "end_line": 1499
+        },
+        {
+          "path": "crates/quoridor-runner/src/runtime.rs",
+          "line": 1517,
+          "end_line": 1521
+        }
+      ],
+      "trigger": "benchmarkのalpha engineでtime_msを指定し、時間上限がnode/depth上限より先に働く。",
+      "evidence": "SearchLimitsはtime_msをtime_limitとして使うがreportは設定に関わらずfixed_work:true。時間制限では実際のcompleted depth/nodesが処理速度に依存し、同じ時間設定だけでは固定仕事量にならない。",
+      "existing_protection": "各recordにnodes/depth/secondsがあり、利用者が実仕事量の違いを読み取れる。時間制限が発火しない試行まで必ず可変仕事量だと認定しない。",
+      "root_cause": "固定の設定値と固定の実仕事量を同じmetadata booleanで表している。",
+      "impact": "reportを比較入口として扱うと、違う仕事量の時間を固定仕事量として比較する誘因になる。観測済みspeedupや科学結論の誤りは未検証。",
+      "recommendation": "fixed-work modeではtime_msを拒否するか、budget_kindをfixed-time/node/depthなどに区別し、実completed workと比較条件を保存する。",
+      "confidence": "high",
+      "verification": "入力limitsとreport字段の静的照合。benchmark性能/科学効果は未測定。"
+    },
+    {
+      "id": "MR-22",
+      "priority": "P3",
+      "severity": "cli-discoverability",
+      "title": "runner helpは未実装dataset importを案内しevaluateを省く",
+      "locations": [
+        {
+          "path": "crates/quoridor-runner/src/main.rs",
+          "line": 44,
+          "end_line": 114
+        },
+        {
+          "path": "crates/quoridor-runner/src/main.rs",
+          "line": 158,
+          "end_line": 160
+        }
+      ],
+      "trigger": "runner --helpを参照してdataset subcommandを選ぶ。",
+      "evidence": "実dispatchはcache/evaluate/inspectだがhelpはimport/cache/inspectを表示する。sigma-importは別binaryにある。",
+      "existing_protection": "unknown commandはerrorとして拒否する。既存READMEで別import入口を知っている利用者は避けられる。",
+      "root_cause": "CLI grammarと手書きhelpが別正本で更新される。",
+      "impact": "標準helpから到達できない評価入口と、必ず失敗するimport案内があり、利用者がsource/docを再探索する。",
+      "recommendation": "現役subcommandとhelpを一致させ、軽量parse/help契約を検査する。必要なら共通command定義から生成する。",
+      "confidence": "high",
+      "verification": "dispatch/helpの静的比較。CLI科学処理は未実行。"
+    },
+    {
+      "id": "MR-23",
+      "priority": "P2",
+      "severity": "browser-page-lifecycle",
+      "title": "pagehideで不可逆disposeし、保存されたページの復帰経路が無い",
+      "locations": [
+        {
+          "path": "apps/web/src/main.ts",
+          "line": 691,
+          "end_line": 693
+        },
+        {
+          "path": "apps/web/src/main.ts",
+          "line": 710,
+          "end_line": 715
+        },
+        {
+          "path": "apps/web/src/session/session-controller.ts",
+          "line": 217,
+          "end_line": 222
+        }
+      ],
+      "trigger": "browserがこのページをnavigation時に保存しpagehide persisted=trueを送り、後で同じページ状態を復帰させる場合。実際のbrowser/Worker/renderer構成での保存適格性は未測定。",
+      "evidence": "pagehide handlerはevent.persistedを見ずにlisteners abort・input/session/review/board disposeを行い、disposed=trueへ固定する。bootstrapは初回module末尾だけで、pageshow handler/再bootstrapは現役sourceに見つからない。",
+      "existing_protection": "通常のページ破棄では明示cleanupが有効。保存対局からreloadして復元する入口はあるが、同じdocumentを復帰する場合の自動回復ではない。",
+      "root_cause": "一時的なページ退避と永久的破棄を同じdisposeイベントとして扱う。",
+      "impact": "条件を満たす戻る/進む復帰でUIが残ってもlistener・session・rendererは停止済みとなり、reloadまで操作できない可能性がある。現browserで必ず再現するとは判断しない。",
+      "recommendation": "persisted pagehideはpauseとして扱いpageshowでresumeするか、保存復帰時に明示的再初期化する。通常破棄のresource回収を維持し、対応browserの実navigation試験を別途行う。",
+      "confidence": "medium",
+      "verification": "pagehide/disposeとpageshow不在の静的確認。BFCache適格性・navigation/e2eは未確認。"
     }
   ],
   "source_manifest": [
@@ -278,9 +764,39 @@
       "baseline_equal": true
     },
     {
+      "path": "AGENTS.md",
+      "bytes": 8082,
+      "sha256": "faf7021d854815ce27c40ac253d6561628a1000c49141909da547389eba52192",
+      "baseline_equal": true
+    },
+    {
       "path": "Cargo.toml",
       "bytes": 284,
       "sha256": "6cbcf3b38c98492322761e78db908195789021216be51aa37de2888cacd0ab0b",
+      "baseline_equal": true
+    },
+    {
+      "path": "apps/web/src/main.ts",
+      "bytes": 47813,
+      "sha256": "f5d5ead6141d9b281fab8f729922589a593e584a71c4ece4d3df50469b88be86",
+      "baseline_equal": true
+    },
+    {
+      "path": "apps/web/src/render/tabletop-assets.ts",
+      "bytes": 8757,
+      "sha256": "76b3aa406511db0d21c100f53c7af6c13e9b965d34456bf507fc150cf3a157c8",
+      "baseline_equal": true
+    },
+    {
+      "path": "apps/web/src/session/session-controller.ts",
+      "bytes": 13233,
+      "sha256": "51494b5b0e7ef8414c6709a2f756323b314016744d2f9056cf88571058eb241d",
+      "baseline_equal": true
+    },
+    {
+      "path": "apps/web/vite.config.ts",
+      "bytes": 235,
+      "sha256": "1d6a08bcc3ebc4e0fc87aed57f066c734a905e667dd9eca65e8716261e328922",
       "baseline_equal": true
     },
     {
@@ -296,9 +812,45 @@
       "baseline_equal": true
     },
     {
+      "path": "crates/quoridor-data/src/lib.rs",
+      "bytes": 37655,
+      "sha256": "6b6dfd50d439b2f31a053839f83d38d2a47a92ef1afa0345ca1370af88bf169a",
+      "baseline_equal": true
+    },
+    {
       "path": "crates/quoridor-inference/build.rs",
       "bytes": 3768,
       "sha256": "0268e075fe36347adc06755fc12f3e7931520fa543c0629a1296d22edb96c224",
+      "baseline_equal": true
+    },
+    {
+      "path": "crates/quoridor-inference/native/aoti.cpp",
+      "bytes": 6256,
+      "sha256": "2ae9c5532939bede8d6f53028d331818b28f353fd71c83ae29d006e3c0e0a2da",
+      "baseline_equal": true
+    },
+    {
+      "path": "crates/quoridor-nnue/src/lib.rs",
+      "bytes": 16836,
+      "sha256": "e0c3770849726e39c7282f6ef24bd1e85c05a3b1ec0d7afad208ea30472118f7",
+      "baseline_equal": true
+    },
+    {
+      "path": "crates/quoridor-nnue/src/residual.rs",
+      "bytes": 7509,
+      "sha256": "f898c5b4528a404fe4c56f4e5245483eb6b9522eca3548360c16b20e127eac8c",
+      "baseline_equal": true
+    },
+    {
+      "path": "crates/quoridor-runner/src/bin/nnue-diagnose.rs",
+      "bytes": 23799,
+      "sha256": "8df66e5abaa0932dd7b7728ed071ed0761e1347f2096e9edd624ed51ea44b4af",
+      "baseline_equal": true
+    },
+    {
+      "path": "crates/quoridor-runner/src/bin/teacher-qualify.rs",
+      "bytes": 7898,
+      "sha256": "dd3dac4bf64e4d0ce3e9791ddbc451f127e107fc93fc82261ff52f9afd6cd9b5",
       "baseline_equal": true
     },
     {
@@ -320,6 +872,12 @@
       "baseline_equal": true
     },
     {
+      "path": "crates/quoridor-runner/src/runtime.rs",
+      "bytes": 77083,
+      "sha256": "345234616f94494f53085028ec2ba51449cd9e742ba4a63bfad88bd343ac0dae",
+      "baseline_equal": true
+    },
+    {
       "path": "crates/quoridor-wasm/Cargo.toml",
       "bytes": 1237,
       "sha256": "f95e164181ecd20373bee35ba0ba9490afcc9ae06fecf61018ccc44f7c541735",
@@ -329,6 +887,12 @@
       "path": "crates/quoridor-wasm/src/lib.rs",
       "bytes": 7597,
       "sha256": "2795627591ccfa5cc1fa3db9f048af94ae94d60e84724cb3ce3446852f7cbf31",
+      "baseline_equal": true
+    },
+    {
+      "path": "docs/reports/environment-presets.md",
+      "bytes": 9081,
+      "sha256": "6560fd8573c026e215a9eddcc981f0436b596c7189fefe3112f7de55ba8c481c",
       "baseline_equal": true
     },
     {
@@ -398,9 +962,33 @@
       "baseline_equal": true
     },
     {
+      "path": "scripts/dev/ai-sigma-context-runner.py",
+      "bytes": 8125,
+      "sha256": "6a72b9997e9d6ae2bd3e2c4156c4d73f54dbcd8dda3264c78cab073f0f91c589",
+      "baseline_equal": true
+    },
+    {
+      "path": "scripts/dev/ai-sigma-runner.py",
+      "bytes": 8156,
+      "sha256": "ee340a2f6aa528cfc03b95d3f0dbb15ac9ec39a6afa7c3d1662d0c0b8a71b3c2",
+      "baseline_equal": true
+    },
+    {
+      "path": "scripts/dev/beads-env.sh",
+      "bytes": 742,
+      "sha256": "4c314748b38123249a3468b2561a04730522f81dec6e8ef34074a47d534c4496",
+      "baseline_equal": true
+    },
+    {
       "path": "scripts/dev/check-research.py",
       "bytes": 5267,
       "sha256": "20d9e3e2cc08197ad93075bea402be16c43b2b732e29519951ba0fd609b68201",
+      "baseline_equal": true
+    },
+    {
+      "path": "scripts/dev/manage_worktree.sh",
+      "bytes": 3836,
+      "sha256": "542e24f3d6881fe58b1f9a58ade17c81f3168e492994d2df1f10454c1888c60e",
       "baseline_equal": true
     },
     {
@@ -416,6 +1004,12 @@
       "baseline_equal": true
     },
     {
+      "path": "scripts/dev/research-session.py",
+      "bytes": 16833,
+      "sha256": "79dfde7482aa41699718c6dfba77d6af93b387dc615f31b674ebcb1d1a867911",
+      "baseline_equal": true
+    },
+    {
       "path": "scripts/dev/setup-training.sh",
       "bytes": 1740,
       "sha256": "6440d5067d453099859d8e30deefacb90d8545fb40e8d9f9e17b150c6479bc1c",
@@ -426,6 +1020,18 @@
       "bytes": 6532,
       "sha256": "2c9c4970fba76902e5c665a898ce1f136f47e8bc13439e3f1b51f82cddfc3083",
       "baseline_equal": true
+    },
+    {
+      "path": "scripts/verify-production.mjs",
+      "bytes": 2424,
+      "sha256": "2259ab0b2fcdcc529046f7c3d1a32b3479ec228012e236a662d7295d42950bbc",
+      "baseline_equal": true
+    },
+    {
+      "path": "tools/model-export/export.py",
+      "bytes": 4595,
+      "sha256": "133fb9154c3a0fb9b29f98cd8844b2adcb312bdba4e49a7f63677b296f064804",
+      "baseline_equal": true
     }
   ],
   "handoff": {
@@ -433,6 +1039,128 @@
     "write_scope": "research-data/maintenance/repository-review-20261006/{report.md,findings.json}",
     "fixes_started": false,
     "research_resumed": false,
-    "acceptance": "Root independent review/Git integration pending; issue remains in_progress"
+    "acceptance": "Root independent review/Git integration pending; issue remains in_progress; no automatic follow-on fixes."
+  },
+  "original_review": {
+    "baseline": "b2c2533d2e7c4632e5fa027f589e0b410b8b1444",
+    "saved_commit": "36f553ed69ef7a4f8abf4b98669e29ed0e01bc40",
+    "retained_findings": "MR-01 through MR-07 unchanged",
+    "continuation": "User explicitly requested broader findings without a count limit."
+  },
+  "completed_work_exclusions": [
+    "quoridor-d3g documentation retirement/knowledge consolidation/.ignore and old scripts/tools team links completed; not counted as unresolved duplicate findings"
+  ],
+  "coverage": [
+    {
+      "subsystem": "Rust rules / Wasm contracts",
+      "reviewed": [
+        "crates/quoridor-core/src/{game,position,research,profiling,lib}.rs",
+        "crates/quoridor-wasm/src/lib.rs",
+        "core independent wall legality tests; Wasm DTO/fixtures/features"
+      ],
+      "status": "Current entrypoints, rule/history/terminal ownership and selected boundary tests traced; no additional established rules bug."
+    },
+    {
+      "subsystem": "NNUE / alpha-beta / MCTS / TT",
+      "reviewed": [
+        "crates/quoridor-nnue/src/{lib,features,residual,quantized,simd}.rs",
+        "crates/quoridor-ai/src/{lib,research,alphabeta,sigma_mcts}.rs"
+      ],
+      "status": "Scalar/SIMD/delta representation, view/units, model loading, TT evaluator/history namespace and search cancellation/resource bounds reviewed statically; no numerical parity or performance execution."
+    },
+    {
+      "subsystem": "Native inference / export",
+      "reviewed": [
+        "crates/quoridor-inference/src/{lib,cuda,tensorrt}.rs",
+        "crates/quoridor-inference/native/{ort,aoti,tensorrt}.cpp",
+        "crates/quoridor-inference/build.rs",
+        "tools/model-export/{export,folded_sigma,verify-native}.py"
+      ],
+      "status": "Rust/FFI ownership, shape/SHA/finite/version checks, batch state, export path and failure guards traced; vendor headers and real backend/driver behavior excluded."
+    },
+    {
+      "subsystem": "Runner / resources / data",
+      "reviewed": [
+        "crates/quoridor-runner/src/{main,config,resources,runtime}.rs",
+        "crates/quoridor-runner/src/bin/{sigma-import,teacher-qualify,nnue-diagnose}.rs",
+        "crates/quoridor-data/src/lib.rs"
+      ],
+      "status": "Admission, paired planning, selfplay/arena queue, benchmark, engine routing, dataset finalization/cache writer and selected synthetic fault tests reviewed; not every diagnostic loop/test line audited."
+    },
+    {
+      "subsystem": "Python training / evaluation / cache",
+      "reviewed": [
+        "python/quoridor_training/{cache,common,binding,sampling,model,scaled_model,residual_model,train,cycle,plotting}.py",
+        "python/quoridor_training/test_{contracts,selected_target,residual_config,sampling,plotting,sharded_cache,observation}.py"
+      ],
+      "status": "Config, target/schema, sampling/group weighting, native/ONNX export, checkpoint/freeze/test binding, plot artifacts and subprocess lifecycle traced. Parser-only fixture confirms MR-14; no model imports or NN."
+    },
+    {
+      "subsystem": "Web product / interaction / persistence",
+      "reviewed": [
+        "apps/web/src/{main,environment-presets}.ts",
+        "apps/web/src/session/{session-controller,review-controller}.ts",
+        "apps/web/src/persistence/local-state.ts",
+        "apps/web/src/input/input-router.ts",
+        "apps/web/src/render/{board-scene,board-coordinates,three-context,tabletop-assets,ambient-occlusion,environment-light}.ts",
+        "apps/web/src/audio/{audio-controller,audio-controls,audio-settings}.ts",
+        "packages/engine-bridge/src/{protocol,rules-client,ai-client,ai.worker}.ts",
+        "apps/web/src/test-support, product e2e and smoke scripts"
+      ],
+      "status": "Revision/generation/epoch, stale replies/cancellation, replay/save limits, render/material disposal, pointer/keyboard, assets/audio and page lifecycle read. No actual browser, BFCache, GPU, accessibility or visual trial."
+    },
+    {
+      "subsystem": "Task / job / storage / worktree / session operations",
+      "reviewed": [
+        "scripts/dev/{research-job,research-session,research-runtime,research-storage,research-assets,research-save}.py",
+        "scripts/dev/{beads,beads-env,manage_worktree,project-env}.sh",
+        "scripts/dev/{ai-sigma-runner,ai-sigma-context-runner}.py",
+        "selected research-session/job/assets synthetic tests and preservation manifest references"
+      ],
+      "status": "Common root, process identity, bounded logs, exact descendant cleanup, durable notification and source/save boundaries reviewed; no live process/session/job/asset changes or worktree operations."
+    },
+    {
+      "subsystem": "Environment / quality / dependency entrypoints",
+      "reviewed": [
+        "Cargo.toml, rust-toolchain.toml, package.json, workspace package manifests",
+        "scripts/dev/{check-research,setup-training,setup-rust,setup-project,verify_env,verify-rust,verify_godot_headless} entrypoints",
+        ".devcontainer configuration, Dockerfile, post-create/update-toolchain/storage policy",
+        "scripts/{verify-production,export-fresh-source} and tools/research-quality configuration",
+        "AGENTS.md, README.md, current development/design navigation"
+      ],
+      "status": "Dependency direction, source selection, format/test gate scopes and startup chains read. No environment rebuild, package installation, full lock vulnerability/version audit or external documentation lookup."
+    },
+    {
+      "subsystem": "Retained visual verification evidence",
+      "reviewed": [
+        "docs/reports/environment-presets.md",
+        "13 explicit screenshot names at main and old worktree paths",
+        "research-data/worktree-consolidation/1d2/webapp-preservation.json limited reference search"
+      ],
+      "status": "Referenced screenshot paths checked only. No full archive/asset sweep; possible archive evidence location remains unresolved."
+    }
+  ],
+  "review_limits": [
+    "All major current subsystems above were sampled through reachable callers; this is not an all-lines audit or proof that every issue has been exhausted.",
+    "Excluded full vendor headers, full Git history, raw historical research records/model/checkpoint/input bytes, generated assets and giant directory walks.",
+    "Unverified execution domains: GPU/native ABI/runtime, numerical scalar/SIMD/model parity, scientific effect and historical result validity, performance/RSS/timing, races under real load, OS portability, browsers/BFCache/visual/accessibility behavior.",
+    "Potential issues without a distinct supported cause were not promoted: mere file length, intended Sigma-vs-standard distinctions, B0-vs-NNUE comparison paths, hosted CI absence, source-export concurrency without an observed conflicting writer, and unknown external callers.",
+    "Ended after tracing major entrypoints and revisiting loader/budget/schema/view/ownership/error/asset boundaries; follow-up reads did not reveal further independently supported static issues. New runtime evidence or unreviewed code can still produce additional findings."
+  ],
+  "verification_results": {
+    "original_seven_preserved": true,
+    "parser_fixture": {
+      "fixture": "cache-parser-only",
+      "rows": 2,
+      "empty_hash_map_accepted": true,
+      "non_binary_features_accepted": 0.25,
+      "distance_metadata_mismatch_accepted": 0.8999999761581421,
+      "tensor_edit_without_manifest_change_accepted": 0.75,
+      "model_imports": [],
+      "NN": 0,
+      "scientific_data": false
+    },
+    "source_binding": "Every cited/source-manifest file matched current baseline bytes when this record was produced.",
+    "checks": "JSON/schema/unique IDs/locations/source hashes and scoped Prettier checks performed at handoff; no runtime success claim."
   }
 }
