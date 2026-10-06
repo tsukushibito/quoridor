@@ -76,3 +76,9 @@ CSV/JSONにstep、seen、actual completed epochと進行率、wall、train診断
 - 導入の採用・最終評価releaseでは、Rootが必要境界を確認した証拠と重大未解決指摘の有無を確認する。採用前に自己レビューだけで独立確認を代用しない。影響しない実装/準備/測定を全稿待ちで止めず、未確認境界の採用だけ保留する。重要な研究結論のレビューは別の採用判断で要否・対象を決める。
 
 停止時にsource/process/正確child回収、変更path/SHA、取得source/hash/配布条件、実分母/除外、元観測aliasとsplit、cache/input/model binding、曲線/画像、whole費、checkpoint/freeze/評価と限界、未完了と次判断を残す。raw/model/cacheはignored assetsへ、small manifestと必要圧縮証拠をmain専用保存先へRootが統合する。Beads status/backupを本人が維持し、最高棋力・独立game汎化・新データ量だけの因果を先取りしない。
+
+## 学習済みnative資格の仕上げ（2026-10-06）
+
+同じ凍結BESTのScalar19状態/P1P2・delta16children・親履歴対応はPASS_LIMITED、明示ScalarSIMD/inplace undoは未確認として保持する。既存APIを使う最小の維持native caller/fixtureで、同19状態/16childrenの明示mode・make/unmake・親accumulator/history/ply復帰を確認する。初期重みの既資格とBEST=LAST byte対応は再用し、新モデル/数学/入力・追加fitへ拡張しない。SIMD mode資格を残差headのSIMD高速化の証拠にはしない。
+
+318比較STOP→320最終software STOPの後に、ONE completion phase全体最大120秒を既compile/tests600・最終CPU/native300秒の各確認済み残内で配分する（outer120/worker100、数値仕事最大30秒、新forward上界256は既samples60m残内）。実残の範囲確認とfresh source/bin/資産binding・storage・物理成立後のみ開始。CPU2,3/RAM4/GPU0/768MiB不変、nativeはprimaryCPU2・既admission guardを保持する。unsupported APIを理由に未確認資格をPASSへ読み替えず、必要なsupported callerを版固定しold ELF/proofを保全する。通常source整形・限定oracleを使い、shared target writerは一人。新attempt失敗は保持し自動反復しない。凍結後の一候補/D/定数一巡は既契約のまま、native仕上げと実freeze/cache一致の確認前にsealed labelsを開けない。

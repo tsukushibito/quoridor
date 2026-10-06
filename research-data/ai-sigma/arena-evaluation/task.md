@@ -53,3 +53,5 @@
 初回software job `ea112b67` は一時linker objectのinventory raceでexit1となり、controller176.195790845秒・全直接子回収・cleanup/remaining空を保持する。manifest2fixturesはPASS、integration/build-final/lintは未成立。既600秒の残423.804209155秒から、新たにONE recovery phase最大240秒を前向き配分する（support command最大10秒＋outer job最大230秒、worker最大210秒で回収余裕）。旧初回300秒・失敗費をresetしない。
 
 旧guard source/SHAを保存し、single-statとbounded inventory retryで修復する。retry枯渇はUNKNOWN・admission拒否を維持し、消失fileを無条件freeへ換算しない。限定NN0 race/枯渇fixture後、fresh within・実物理・共有target唯一writerを確認して未完了の限定integration/build/Clippyだけを継続する。製品source14path・既PASS fixtureを再用し、fullsuite/NN/arena時計を追加しない。CPU0,1/RAM2/GPU0/build40MiB/inclusive64MiB、319固定fitとの並行・318への直接target開始/終了通知は不変更。このphase失敗時の更なる反復は未配分。
+
+2026-10-06のr2ではarena9/config3とrelease buildはPASS、Clippy2件でexit1。旧費込み249.241232294/600秒・残350.758767706秒を保持する。通常のlet-chain/初期化構文修正後、新しいONE最終software phase最大120秒（support10＋outer110/worker95）を残内から配分する。318比較のexact STOP後にfresh admission/physicsで開始し、変更箇所に関係する限定fixture/build/Clippyを検証する。元版PASSと新版資格を区別し、further retry/fullsuite/NN/arena時計は追加しない。
