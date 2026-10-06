@@ -56,3 +56,5 @@ Aは末期にtrainへ強く適合しvalidation誤差と飽和が増え、Bは遅
 全公開入力のraw f32は約49.0GB、現dense cacheは約47.5GBで旧12GiB枠へ収まらない。Bitset等のcompact表現は提案で、資格decoder・bounded batch API・性能は未検証。Whole costには取得、decode、native資格、hash/group化、alias確認、export、保存Git/archive、失敗と回収を含む。確認済み未使用予約とfresh保存量を束縛し、UNKNOWNや保護資産を空きへ換算しない。古い小subsetのthroughputを全域の保証にしない。
 
 多様性調査を受け、人間が未見分割、条件付きラベル、epoch/sampler、GPU batch、曲線/選定間隔を選ぶ。GPUを本学習の主経路候補として、host展開・転送・更新・選定・保存・回収まで計測する。同batch再現と大batch/prefetch変更は別介入。CUDA4,000step追加比較とMPC校正は保留候補で、残予算や実装容易性だけでは開始しない。探索高速化の初回配分は上記契約へ限定し、データ・学習方針は変更しない。[タスク型研究](design/ai-research-team.md)に従って明示配分する。
+
+学習側の独立セッションへは、この暫定方向だけを共有して実行指示待ちとする。セッションを作成したことは全域調査や学習の開始許可ではなく、具体のデータ・分割・学習条件・資源・検証は次の人間判断とRootの明示配分で決める。
