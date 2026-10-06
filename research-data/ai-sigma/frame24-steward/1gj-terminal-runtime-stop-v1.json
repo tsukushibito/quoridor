@@ -1,0 +1,98 @@
+{
+  "at": "2026-10-06T02:00:20.186151+00:00",
+  "issue": "quoridor-4lc.92",
+  "root_task": "quoridor-1gj",
+  "terminal_user_requested_stop": true,
+  "scheduler": {
+    "pid": 2269819,
+    "start_ticks": "50428490",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "monitor": {
+    "pid": 2271322,
+    "start_ticks": "50433272",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "both_exact_absent": true,
+  "state_phase": "stopped",
+  "owned": null,
+  "Supervisor_after_official_status": {
+    "type": "idle"
+  },
+  "old_state_events_preserved": true,
+  "method": "ownmonitor pidfd TERM -> unchanged standardstop_exact own scheduler; no foreign interrupts",
+  "scheduler_stop_receipt": {
+    "at": "2026-10-06T02:00:16.268069+00:00",
+    "phase": "completed",
+    "command": [
+      "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python",
+      "-B",
+      "/workspaces/quoridor/scripts/dev/research-scheduler.py",
+      "stop",
+      "--state-dir",
+      "/workspaces/quoridor/.artifacts/research-team/frame24-extension25/scheduler",
+      "--interrupt-owned-turn"
+    ],
+    "child_identity": {
+      "pid": 2291395,
+      "start_ticks": "50508100",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "parent_identity": {
+      "pid": 2271322,
+      "start_ticks": "50433272",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "exit_code": 0,
+    "refusal": null,
+    "recovery_error": null,
+    "child_reaped": true,
+    "child_exact_alive": false,
+    "process_group_absence_certified": false,
+    "cumulative_budget": null,
+    "streams": {
+      "stdout": {
+        "bytes_read": 47,
+        "sha256": "eb001387239f811eed2b5d68d6ee1887b912449beb01afd1105cb973663219a7",
+        "complete": true
+      },
+      "stderr": {
+        "bytes_read": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "complete": true
+      }
+    },
+    "selection": {
+      "stdout": {
+        "text": "{\"stopped\": true, \"owned_turn_pending\": false}\n",
+        "source_bytes": 47,
+        "sha256": "eb001387239f811eed2b5d68d6ee1887b912449beb01afd1105cb973663219a7",
+        "overflow": false
+      },
+      "stderr": {
+        "text": "",
+        "source_bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "overflow": false
+      }
+    }
+  },
+  "monitor_end_receipt": {
+    "at": "2026-10-06T02:00:16.280941+00:00",
+    "process": {
+      "pid": 2271322,
+      "start_ticks": "50433272",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "reason": "operator_stop",
+    "error": null,
+    "local_rss_peak_bytes": 214208512,
+    "external_NN_stop_certified": false
+  },
+  "parent_extension25_future_dispatch_responsibility_ended_by_user": true,
+  "standing92_40_operations_end_not_highest_goal_achieved": true,
+  "refresh_restart_developerapply_newroles": false,
+  "parent_config_registry_source_edited": false,
+  "external_science_descendant_or_host_future_absence_certified": false,
+  "317_bounded_software_may_finish_and_handoff": true
+}

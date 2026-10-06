@@ -1,0 +1,10 @@
+{
+  "schema": "saved-metadata-read-failures-v1",
+  "NN": 0,
+  "science_MAX": 0,
+  "failure1": "ad-hoc read assumed data.train mapping, actual countint; TypeError int notiterable before mainmodelimport",
+  "failure2": "ad-hoc read assumed shardedcache.rows array, actual countint; TypeError int notsubscriptable",
+  "original_source_results_or_models_changed": false,
+  "sourcefix": "actualshards rowslist and scalarcount schema handled; no successreplacement or modelretry",
+  "wallcost": "primitive read command toolwall retained; LLM/read UNKNOWN not0"
+}

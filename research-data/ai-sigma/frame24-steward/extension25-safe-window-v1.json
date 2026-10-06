@@ -1,0 +1,47 @@
+{
+  "at": "2026-10-06T01:33:10.160963+00:00",
+  "state_phase": "running",
+  "owned": null,
+  "scheduler": {
+    "pid": 2169413,
+    "start_ticks": "50105376",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "scheduler_exact_alive": true,
+  "monitor": {
+    "pid": 2169432,
+    "start_ticks": "50105414",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "monitor_exact_alive": true,
+  "current_inputs_match": true,
+  "listed_current_process_candidates": [
+    {
+      "identity": {
+        "pid": 2233899,
+        "start_ticks": "50338785",
+        "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+      },
+      "argv": [
+        "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python",
+        "-B",
+        "/workspaces/quoridor/scripts/dev/research-job.py",
+        "run",
+        "--state-dir",
+        "/workspaces/quoridor/research-data/ai-sigma/frame24-learning-diagnosis/background-dense-B-r2"
+      ]
+    }
+  ],
+  "proc_permission_missing_count": 0,
+  "hostwide_or_future_quiet_certified": false,
+  "supervisor_official_status": {
+    "type": "idle"
+  },
+  "latest_supervisor_turn": [
+    {
+      "id": "01a10ec5-8e8e-7041-b45e-b4f470ede898",
+      "status": "completed"
+    }
+  ],
+  "safe_for_ops_change": false
+}

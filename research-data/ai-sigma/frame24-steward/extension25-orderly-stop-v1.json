@@ -1,0 +1,82 @@
+{
+  "at": "2026-10-06T01:44:16.759581+00:00",
+  "old_scheduler": {
+    "pid": 2169413,
+    "start_ticks": "50105376",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "old_monitor": {
+    "pid": 2169432,
+    "start_ticks": "50105414",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "old2_absent": true,
+  "old_state_phase": "stopped",
+  "old_owned": null,
+  "method": "exact pidfd SIGTERM ownmonitor then standard monitor stop_exact scheduler",
+  "foreign_signal": false,
+  "old_state_retained": true,
+  "old_deadlines": {
+    "heavy": "2026-10-06T01:58:46Z",
+    "supervisor": "2026-10-06T02:03:46Z",
+    "monitor": "2026-10-06T02:06:46Z",
+    "final": "2026-10-06T02:08:46Z"
+  },
+  "scheduler_stop_receipt": {
+    "at": "2026-10-06T01:44:12.538300+00:00",
+    "phase": "completed",
+    "command": [
+      "/home/vscode/.cache/inference/envs/quoridor-research-team/bin/python",
+      "-B",
+      "/workspaces/quoridor/scripts/dev/research-scheduler.py",
+      "stop",
+      "--state-dir",
+      "/workspaces/quoridor/.artifacts/research-team/frame24/scheduler",
+      "--interrupt-owned-turn"
+    ],
+    "child_identity": {
+      "pid": 2264380,
+      "start_ticks": "50411804",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "parent_identity": {
+      "pid": 2169432,
+      "start_ticks": "50105414",
+      "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+    },
+    "exit_code": 0,
+    "refusal": null,
+    "recovery_error": null,
+    "child_reaped": true,
+    "child_exact_alive": false,
+    "process_group_absence_certified": false,
+    "cumulative_budget": null,
+    "streams": {
+      "stdout": {
+        "bytes_read": 47,
+        "sha256": "eb001387239f811eed2b5d68d6ee1887b912449beb01afd1105cb973663219a7",
+        "complete": true
+      },
+      "stderr": {
+        "bytes_read": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "complete": true
+      }
+    },
+    "selection": {
+      "stdout": {
+        "text": "{\"stopped\": true, \"owned_turn_pending\": false}\n",
+        "source_bytes": 47,
+        "sha256": "eb001387239f811eed2b5d68d6ee1887b912449beb01afd1105cb973663219a7",
+        "overflow": false
+      },
+      "stderr": {
+        "text": "",
+        "source_bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "overflow": false
+      }
+    }
+  },
+  "unknown_external_stop_certified": false
+}

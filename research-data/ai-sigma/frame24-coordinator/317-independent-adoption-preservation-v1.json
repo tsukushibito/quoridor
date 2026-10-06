@@ -1,0 +1,179 @@
+{
+  "source_checks": [
+    {
+      "path": "crates/quoridor-ai/src/alphabeta.rs",
+      "bytes": 52064,
+      "sha256": "5faf36cf9cbf99d97f35a6e1dd5aa0db183a50e9c22f12b66bb2fba6be2408f6"
+    },
+    {
+      "path": "crates/quoridor-runner/src/runtime.rs",
+      "bytes": 77083,
+      "sha256": "345234616f94494f53085028ec2ba51449cd9e742ba4a63bfad88bd343ac0dae"
+    }
+  ],
+  "adoption": "RESEARCH_TELEMETRY_SOURCE_ADOPTED",
+  "semantic_review": "AI readonly memory getter only; runtime helper retains same constructor/reset/search behavior and key/history/ply/cap. Error counters missing explicitly marked; init/error/success/cancel denominators coherent; nested clock scopes exclude move application/provider. Shared evaluator bytes UNKNOWN.",
+  "owner_verification": "ONE NN0software unit PASS/.104196; allcompile36.260485/60; not rerun by coordinator",
+  "source_children_STOP": "2026-10-06T01:58:13.941669+00:00",
+  "archive": {
+    "path": "research-data/ai-sigma/frame24-coordinator/tt317-stopped-evidence-v1.tar.gz",
+    "B": 32067,
+    "SHA": "e98d63329a4a315db896f5bbf4b22d5fda348ab11015379310043348dc5803de",
+    "members": [
+      {
+        "path": "docs/reports/ai-sigma-critic-extension25-tt-telemetry.md",
+        "B": 4100,
+        "SHA": "76e224281f218c674a9095375d658be27cc260a98f9649b10554681eed53f2b2"
+      },
+      {
+        "path": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/actual-start-0.json",
+        "B": 378,
+        "SHA": "ecbf08e9a5468ca5e7b03ec0b91a4201b287f33655dbd78f4ecb9fcfae703002"
+      },
+      {
+        "path": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/actual-start-1.json",
+        "B": 446,
+        "SHA": "1d0e2ebe436e650e9f3bd36f77ca9adc1b77819ea34f326532b43406bf90d9f0"
+      },
+      {
+        "path": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/actual-start-2.json",
+        "B": 485,
+        "SHA": "a8d5530259057cd7dfdd80afeebfbf35416c00b6c90b4f69023fd91377c5b6f2"
+      },
+      {
+        "path": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/admission.json.gz",
+        "B": 2130,
+        "SHA": "35ce86a082c0dd319547e5954fcaea65ac2704da404cb2e5164124a8d71b4874"
+      },
+      {
+        "path": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/adopted-sourcepoint-v1.json",
+        "B": 1194,
+        "SHA": "b03d4e52d4e7bb415c25a21be5b119e126b68dd3f2b8cba141361c3b319d427a"
+      },
+      {
+        "path": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/check.py.gz",
+        "B": 3170,
+        "SHA": "4eb240a48ffc6b9b3284885a2c33bfdd675645d6eeda40f0334f5c8fc9265820"
+      },
+      {
+        "path": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/command-0.log",
+        "B": 827,
+        "SHA": "4df9756f93e036cc6f66ead46ebf01e835cf6ee25e56106e3eec0c4266b72aa4"
+      },
+      {
+        "path": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/command-1.log",
+        "B": 268,
+        "SHA": "5fa9d2575c7d1996686473f1c598efe0bf7ebb00ea6db62df428097a09124243"
+      },
+      {
+        "path": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/command-2.log",
+        "B": 1331,
+        "SHA": "b279d6dc3c7d16012147af0e689526f26b61f54cec1a2504bd0ded0a4a1bdb84"
+      },
+      {
+        "path": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/compact-retention-manifest.json",
+        "B": 2328,
+        "SHA": "99e45681d4e535ef5613cfb7cc5baaf73c455d0645dba7fc7291c01738d1f084"
+      },
+      {
+        "path": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/donor-and-forecast-v1.json",
+        "B": 1553,
+        "SHA": "468131575c53c7f5079f2f89d3252896092651bd6e7da5aa8ed9d514265066e9"
+      },
+      {
+        "path": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/entry-start-report.txt",
+        "B": 461,
+        "SHA": "0430369471a8ff9554aa78f63427bd4ef30e05e503c6a1f07b3ae8a941ac3641"
+      },
+      {
+        "path": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/entrypoint-fixture.json",
+        "B": 339,
+        "SHA": "11d3c02b2ff55df0e620594fa580b97d5beb83fc1acd84a45acfe4130c678303"
+      },
+      {
+        "path": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/forecast-report.txt",
+        "B": 1099,
+        "SHA": "91edd67403891ab61b163a0ed65e10cf0218addb6ce165fdf31b967e678a0587"
+      },
+      {
+        "path": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/implementation.patch.gz",
+        "B": 4444,
+        "SHA": "c3d46ee7f1d099b59ef7199ee3adc4595235a1e4484c78e98e6d2fbebba4c0b2"
+      },
+      {
+        "path": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/next-workload-proposal-v1.json",
+        "B": 2104,
+        "SHA": "138e22d82a26fd5694076b04aace4f104f0b81a173abb9c66e2505f9b80fdbb7"
+      },
+      {
+        "path": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/owner-close-backup.json",
+        "B": 543,
+        "SHA": "7147538fe79b4caa1cbc48eed19a8fa007c9c93d943917ecac6bc98487ddf63b"
+      },
+      {
+        "path": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/process-archive.json",
+        "B": 803,
+        "SHA": "255662b571858d3278ec81c49345a8a8ca6295d82a88c8381a4ab4bbf5abc20e"
+      },
+      {
+        "path": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/process.json.gz",
+        "B": 8814,
+        "SHA": "95ab3686be502dc9717863833a49cb163162d711587550c944617c5fe41d25d9"
+      },
+      {
+        "path": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/registration.json",
+        "B": 1641,
+        "SHA": "15c33d348e30076fa5e60690d91aab8fa0b06667b2592200b872209102a9ab1b"
+      },
+      {
+        "path": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/result.json.gz",
+        "B": 1672,
+        "SHA": "6717598c1af0abcfd4a4bda43619a7fa726ab8410ebb0c54fd2da7175d78c255"
+      },
+      {
+        "path": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/retention-summary.json",
+        "B": 780,
+        "SHA": "04c80783311574b0eb494e78e8dbcc3ccb0bbad96a31fa8583a0f1937df0386d"
+      },
+      {
+        "path": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/save-handoff.txt",
+        "B": 837,
+        "SHA": "1823e6baa3c2ab39c3deaa72eee8ee336240e1dad736d819c9c4f82a9b734114"
+      },
+      {
+        "path": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/semantic-boundary-v1.json",
+        "B": 397,
+        "SHA": "31fe6fff89e4eaa985b4bcb71eb6b17b7dddcf1a9e8a9ce3779ba92475467134"
+      },
+      {
+        "path": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/software-unit-attempt.json",
+        "B": 134,
+        "SHA": "33e7ebc4b4e32d340eacbd896a77708a52f96b36246b1c2229eafdab503ab88d"
+      },
+      {
+        "path": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/source-stop.json",
+        "B": 1326,
+        "SHA": "c67ade8968c7e372cb34096440e125ec165b651ae06810d551d72ef9002f3031"
+      },
+      {
+        "path": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/static-ready-report.txt",
+        "B": 993,
+        "SHA": "143ced6cc4b6bdada7428c1f8f479a8ca3dcf0671bd51e7850d8033b0a9600ab"
+      },
+      {
+        "path": "research-data/ai-sigma/frame24-persistent-tt/telemetry317/stop-report.txt",
+        "B": 1098,
+        "SHA": "bf7cd6377e88b8138a5d618ac9164620a32a4f1d57b6846a4385b32a3d039a1e"
+      }
+    ],
+    "stream_restore": "PASS"
+  },
+  "science_or_model_new": 0,
+  "limits": [
+    "No NNUE game/benchmark or speed/strength evidence",
+    "PV/key/hash isolated elapsed UNKNOWN",
+    "test-target Clippy not run; scoped production Clippy passed",
+    "raw transient new evidence exceeded64KiB forecast, original deviation preserved; whole2MiB remains bound"
+  ],
+  "allocation_stop": "User approved fixed-team dismantling Root quoridor-1gj; no new scope beyond bounded317/save"
+}

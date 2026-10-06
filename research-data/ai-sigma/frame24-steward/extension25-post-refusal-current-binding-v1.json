@@ -1,0 +1,57 @@
+{
+  "at": "2026-10-06T01:50:24.229527+00:00",
+  "current_validated_by_existing_admit": true,
+  "current_state_binding": {
+    "config_path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame24-extension25/scheduler.json",
+    "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+    "target": "supervisor",
+    "dispatch_issue": "quoridor-4lc.40",
+    "contract_file": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame24-extension25/contract.json",
+    "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+  },
+  "expected_binding": {
+    "config_path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame24-extension25/scheduler.json",
+    "registry": "/workspaces/quoridor/.artifacts/research-team/registry.json",
+    "target": "supervisor",
+    "dispatch_issue": "quoridor-4lc.40",
+    "contract_file": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/SIGMA-RESUME-OPERATIONS-92/frame24-extension25/contract.json",
+    "thread_id": "01a0f6b5-b1bd-7752-b0bb-74a336e459a4"
+  },
+  "scheduler_process": {
+    "pid": 2269819,
+    "start_ticks": "50428490",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "expected_process": {
+    "pid": 2269819,
+    "start_ticks": "50428490",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "exact_scheduler_alive": true,
+  "monitor_process": {
+    "pid": 2271322,
+    "start_ticks": "50433272",
+    "boot_id": "ab5e66ac-12ce-49b0-ac55-afe05e3f5216"
+  },
+  "exact_monitor_alive": true,
+  "registry_matches_expectations_path": true,
+  "registry_matches_state_dir": true,
+  "config_contract_prompt_are_new_paths": true,
+  "input_count": 24,
+  "current_config_sha": "57c179131e0a0c2adb02626b4ddd06b74d322c75b02b4b861f24736dfdafa54c",
+  "current_contract_sha": "0e394a4bb98554fc8b52d3fda034eb0c3ebea1702a157cbefce46a78dc29dfc2",
+  "first_natural_refusedpoint": {
+    "path": "/workspaces/quoridor/.artifacts/ai-sigma/continuation-20261001/supervisor/frame24-extension25/20b07d8b-bb52-4089-8f61-04bcf7e99933/observe.json",
+    "sha256": "564e4ea1984f39fb0c04f0327572f6a6fff629394565ea8f047ad3870923d7a2",
+    "phase": null,
+    "commands_count": 0,
+    "available": null,
+    "note": "original exit2 unavailable bounded state read scheduler identity changed; no rerun or overwrite"
+  },
+  "startup_placeholder_before_binding": "extension25-start-binding-gap-v1.json",
+  "current_refusal_not_current_binding_mismatch": true,
+  "old_state_retained": true,
+  "old_deadlines_scientific_failures_or_GPU_account_reset": false,
+  "source_runtime_restart_or_force_tick": false,
+  "next_natural_observe_finish_effect": "unconfirmed, next regular period; current loaded proof is separate"
+}

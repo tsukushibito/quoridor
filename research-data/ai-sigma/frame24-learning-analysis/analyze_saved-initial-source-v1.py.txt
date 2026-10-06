@@ -1,0 +1,179 @@
+"""Read saved metadata/scalars only; never import a trainer or a model."""
+
+import gzip
+import hashlib
+import json
+import math
+import statistics
+import time
+from pathlib import Path
+
+ROOT = Path("/workspaces/quoridor")
+OUT = Path(__file__).resolve().parent
+ASSETS = ROOT / ".worktree/assets/checkpoints"
+CASES = {
+    "298": ASSETS / "frame23-native-outcome-z-learning/native-z-1m-r1",
+    "302A": ASSETS / "frame23-native-z-lr-contrast/case-A-r1",
+    "302B": ASSETS / "frame23-native-z-lr-contrast/case-B-r1",
+}
+
+
+def read(path):
+    raw = path.read_bytes()
+    return json.loads(gzip.decompress(raw) if path.suffix == ".gz" else raw)
+
+
+def digest(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def spread(values):
+    mean = statistics.mean(values)
+    return {
+        "count": len(values),
+        "sum": sum(values),
+        "min": min(values),
+        "max": max(values),
+        "mean": mean,
+        "CV": statistics.pstdev(values) / mean if mean else None,
+        "zeros": sum(v == 0 for v in values),
+    }
+
+
+def main():
+    begin = time.monotonic()
+    summaries, all_curves, samplings = {}, {}, {}
+    for name, directory in CASES.items():
+        config = read(directory / "config.json")
+        curves = read(directory / "curves.json")
+        sampling = read(directory / "sampling.json")
+        data = read(directory / "data.json")
+        all_curves[name] = curves
+        samplings[name] = sampling
+        best = min(
+            curves, key=lambda c: (c["validation"]["z_game_equal_mse"], c["step"])
+        )
+        index = curves.index(best)
+        best_row = min(curves, key=lambda c: (c["validation"]["z_mse"], c["step"]))
+        metrics = [
+            {
+                "step": c["step"],
+                "seen": c["training_seen"],
+                "equivalent_row_passes_not_epochs": c["training_seen"] / data["train"],
+                "train_row_zMSE": c["train"]["z_mse"],
+                "train_family_zMSE": c["train"]["z_game_equal_mse"],
+                "val_row_zMSE": c["validation"]["z_mse"],
+                "val_family_zMSE": c["validation"]["z_game_equal_mse"],
+                "train_saturation": c["train"]["saturation_fraction"],
+                "val_saturation": c["validation"]["saturation_fraction"],
+                "val_sign": c["validation"]["z_sign_accuracy"],
+            }
+            for c in curves
+        ]
+        summaries[name] = {
+            "config_path": str(directory / "config.json"),
+            "config_SHA": digest(directory / "config.json"),
+            "actual_config": config,
+            "rows_train": data["train"],
+            "rows_validation": data["validation"],
+            "data_binding_canonical_SHA": hashlib.sha256(
+                json.dumps(data["binding"], sort_keys=True).encode()
+            ).hexdigest(),
+            "validation_order_uncompressed_SHA": hashlib.sha256(
+                gzip.decompress((directory / "validation-order.json.gz").read_bytes())
+            ).hexdigest(),
+            "train_order_uncompressed_SHA": hashlib.sha256(
+                gzip.decompress((directory / "train-order.json.gz").read_bytes())
+            ).hexdigest(),
+            "initial_native_SHA": digest(directory / "initial-model/weights.f32"),
+            "schedule_points": len(curves),
+            "metrics": metrics,
+            "minimum_sampled_family": {
+                "step": best["step"],
+                "value": best["validation"]["z_game_equal_mse"],
+                "left_neighbor": curves[index - 1]["step"] if index else None,
+                "right_neighbor": curves[index + 1]["step"]
+                if index + 1 < len(curves)
+                else None,
+            },
+            "minimum_sampled_row": {
+                "step": best_row["step"],
+                "value": best_row["validation"]["z_mse"],
+            },
+            "true_continuous_best": "UNOBSERVED between evaluations; best checkpoint is not true optimum",
+            "row_usage": spread(sampling["row_counts"]),
+            "family_usage": spread(list(sampling["family_counts"].values())),
+            "completed_true_epochs": "NOT_APPLICABLE replacement game->row sampling",
+            "batch_objective": "unweighted sampled-row MSE; game-uniform row sampling gives family-equal expected objective",
+            "full_train_row_MSE_is_batch_objective": False,
+            "selector": "144-family equal zMSE, repeatedly opened exploratory selection, not formal holdout",
+            "forbidden_opened43_48_96_173_read": False,
+        }
+    comparisons = {}
+    for left, right in [("298", "302A"), ("302A", "302B")]:
+        a, b = CASES[left], CASES[right]
+        sa, sb = summaries[left], summaries[right]
+        common = sorted(
+            set(c["step"] for c in all_curves[left])
+            & set(c["step"] for c in all_curves[right])
+        )
+        reuse = []
+        for step in common:
+            weights = [x / f"step{step}-model/weights.f32" for x in [a, b]]
+            scalars = [x / f"validation-step{step}.f32" for x in [a, b]]
+            available = all(p.exists() for p in weights + scalars)
+            same_weights = available and digest(weights[0]) == digest(weights[1])
+            same_scalars = available and digest(scalars[0]) == digest(scalars[1])
+            reuse.append(
+                {
+                    "step": step,
+                    "saved_available": available,
+                    "same_native_weights": same_weights,
+                    "same_validation_f32": same_scalars,
+                    "reuse_scope": "saved scalar and matching export, no new forward; current repaired model source still must bind",
+                }
+            )
+        comparisons[f"{left}:{right}"] = {
+            "same_initial": sa["initial_native_SHA"] == sb["initial_native_SHA"],
+            "same_data_binding": sa["data_binding_canonical_SHA"]
+            == sb["data_binding_canonical_SHA"],
+            "same_train_order": sa["train_order_uncompressed_SHA"]
+            == sb["train_order_uncompressed_SHA"],
+            "same_validation_order": sa["validation_order_uncompressed_SHA"]
+            == sb["validation_order_uncompressed_SHA"],
+            "same_sampling_row_counts_whole_run": samplings[left]["row_counts"]
+            == samplings[right]["row_counts"],
+            "common_points_saved": reuse,
+        }
+    density = set([0, 1, 2, 5, 10, 20]) | set(range(25, 4001, 25))
+    density |= {math.ceil(k * 14803 / 128) for k in range(1, 512000 // 14803 + 1)}
+    result = {
+        "task": "frame24-learning-diagnosis-310-saved-analysis-v1",
+        "schema": "saved-learning-analysis-v1",
+        "summaries": summaries,
+        "comparisons": comparisons,
+        "dense_points": sorted(density),
+        "dense_point_count": len(density),
+        "planned_forward_upper": 1024000
+        + 2 * len(density) * (2048 + 4733)
+        + 59212
+        + 1000,
+        "extra_shared_fullT": "saved-only exact weights/source/input binding, not unspecified forward",
+        "competitive_causes": [
+            "LR/exposure interaction and unobserved early optimum; fixed 23 points leave windows",
+            "regularization/saturation and repeated family exposure; no WD or scheduler contrast was run",
+            "unequal within-family row exposures from family-uniform replacement, not full epochs",
+            "weak representativeness or repeated selection reuse; no independent transfer inference",
+            "feature/history/leaf-horizon limits remain unresolved, not changed by these scalar analyses",
+        ],
+        "models_forward_fit_newlabels_gpu": 0,
+        "science_MAX": 0,
+        "command_wall_s_before_write": time.monotonic() - begin,
+        "unmeasured_LLM_read_control": "UNKNOWN preserved",
+        "highestgoal": False,
+    }
+    (OUT / "saved-analysis-v1.json").write_text(json.dumps(result, indent=2) + "\n")
+
+
+if __name__ == "__main__":
+    main()

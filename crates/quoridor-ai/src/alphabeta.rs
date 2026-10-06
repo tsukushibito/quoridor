@@ -940,6 +940,15 @@ impl SearchSession {
             table: Table::persistent(capacity)?,
         })
     }
+    /// Table accounting includes its header, slot storage and retained history.
+    /// Metadata is outside that bound; shared evaluator/model allocation is unknown here.
+    pub fn retained_memory_bytes(&self) -> (usize, usize) {
+        let metadata = std::mem::size_of::<Self>() - std::mem::size_of::<Table>()
+            + self.namespace.evaluator.capacity()
+            + self.namespace.rules.capacity()
+            + self.namespace.selectivity.capacity();
+        (self.table.retained_bytes(), metadata)
+    }
     pub fn namespace(&self) -> &SearchNamespace {
         &self.namespace
     }

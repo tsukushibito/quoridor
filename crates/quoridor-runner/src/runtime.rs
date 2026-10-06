@@ -25,10 +25,24 @@ pub struct RequestId {
     pub generation: u64,
     pub token: u64,
 }
-/// Inclusive per-player search costs, distinct from overlapping provider spans.
+/// Per-player TT caller accounting. `whole_caller_seconds` includes namespace /
+/// limits setup, initialization/reset, invocation and counter recording, through
+/// return of the search result/error. It excludes move application and provider
+/// spans. Invocation errors and successful Result.elapsed are nested subsets;
+/// never sum them with invocation or whole-caller time.
 #[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct TtProfile {
-    pub searches: u64,
+    pub attempts: u64,
+    pub search_invocations: u64,
+    pub successful_results: u64,
+    pub cancellations: u64,
+    pub no_completed_iteration_results: u64,
+    pub terminal_results: u64,
+    pub initialization_attempts: u64,
+    pub initialization_successes: u64,
+    pub initialization_errors: u64,
+    pub namespace_resets: u64,
+    pub search_errors_without_counters: u64,
     pub errors: u64,
     pub probes: u64,
     pub key_hits: u64,
@@ -45,12 +59,23 @@ pub struct TtProfile {
     pub key_history_capacity_bytes_sum: u64,
     pub hashes: u64,
     pub retained_bytes_peak: usize,
-    pub whole_search_seconds: f64,
+    pub successful_result_elapsed_seconds: f64,
+    pub search_invocation_seconds: f64,
+    pub search_error_invocation_seconds: f64,
+    pub session_initialization_seconds: f64,
+    pub session_reset_seconds: f64,
+    pub whole_caller_seconds: f64,
+    pub session_metadata_bytes_peak: usize,
+    /// Evaluator Arc/model weights are shared; their allocation is not a TT cap.
+    pub shared_evaluator_bytes: Option<usize>,
 }
 impl TtProfile {
     fn record(&mut self, result: &alphabeta::SearchResult) {
         let s = &result.stats;
-        self.searches += 1;
+        self.successful_results += 1;
+        self.cancellations += u64::from(result.stop == alphabeta::StopReason::Cancelled);
+        self.no_completed_iteration_results += u64::from(result.completed_depth == 0);
+        self.terminal_results += u64::from(result.stop == alphabeta::StopReason::Terminal);
         self.probes += s.tt_probes;
         self.key_hits += s.tt_hits;
         self.exact_hits += s.tt_exact_hits;
@@ -66,8 +91,73 @@ impl TtProfile {
         self.key_history_capacity_bytes_sum += s.tt_key_history_capacity_bytes;
         self.hashes += s.tt_hashes;
         self.retained_bytes_peak = self.retained_bytes_peak.max(s.tt_retained_bytes);
-        self.whole_search_seconds += result.elapsed.as_secs_f64();
+        self.successful_result_elapsed_seconds += result.elapsed.as_secs_f64();
     }
+}
+/// One TT caller attempt, including allocation errors and early cancellation.
+/// The owned evaluator/session and numerical search semantics are unchanged.
+#[allow(clippy::too_many_arguments)]
+fn invoke_alpha(
+    session: &mut Option<alphabeta::SearchSession>,
+    profile: &mut TtProfile,
+    evaluator: Arc<dyn StaticEvaluator>,
+    namespace: alphabeta::SearchNamespace,
+    root: &SigmaContext,
+    limits: &SearchLimits,
+    cancel: &AtomicBool,
+    caller_start: Instant,
+    initialize: impl FnOnce(
+        Arc<dyn StaticEvaluator>,
+        alphabeta::SearchNamespace,
+        usize,
+    ) -> alphabeta::Result<alphabeta::SearchSession>,
+) -> alphabeta::Result<alphabeta::SearchResult> {
+    profile.attempts += 1;
+    let outcome = (|| {
+        if session.is_none() {
+            profile.initialization_attempts += 1;
+            let start = Instant::now();
+            let new = initialize(evaluator.clone(), namespace.clone(), limits.tt_entries);
+            profile.session_initialization_seconds += start.elapsed().as_secs_f64();
+            match new {
+                Ok(new) => {
+                    profile.initialization_successes += 1;
+                    *session = Some(new);
+                }
+                Err(error) => {
+                    profile.initialization_errors += 1;
+                    profile.errors += 1;
+                    return Err(error);
+                }
+            }
+        }
+        let session = session.as_mut().unwrap();
+        if session.namespace() != &namespace {
+            let start = Instant::now();
+            session.reset(evaluator, namespace);
+            profile.session_reset_seconds += start.elapsed().as_secs_f64();
+            profile.namespace_resets += 1;
+        }
+        profile.search_invocations += 1;
+        let start = Instant::now();
+        let result = session.search(root, limits, cancel);
+        let invocation_seconds = start.elapsed().as_secs_f64();
+        profile.search_invocation_seconds += invocation_seconds;
+        let (table, metadata) = session.retained_memory_bytes();
+        profile.retained_bytes_peak = profile.retained_bytes_peak.max(table);
+        profile.session_metadata_bytes_peak = profile.session_metadata_bytes_peak.max(metadata);
+        match &result {
+            Ok(result) => profile.record(result),
+            Err(_) => {
+                profile.errors += 1;
+                profile.search_errors_without_counters += 1;
+                profile.search_error_invocation_seconds += invocation_seconds;
+            }
+        }
+        result
+    })();
+    profile.whole_caller_seconds += caller_start.elapsed().as_secs_f64();
+    outcome
 }
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Outcome {
@@ -740,6 +830,7 @@ fn worker(
                     }
                 }
             } else {
+                let caller_start = Instant::now();
                 let limits = SearchLimits {
                     max_depth: e.depth,
                     max_nodes: e.max_nodes,
@@ -756,31 +847,18 @@ fn worker(
                     rules: "Sigma-RuleA-full-history-terminal-ply-v1".into(),
                     selectivity: "fullwidth-PVS-MPC-OFF-v1".into(),
                 };
-                if g.alpha_sessions[engine_index].is_none() {
-                    match alphabeta::SearchSession::new(
-                        evaluators[engine_index].evaluator.as_ref().unwrap().clone(),
-                        namespace.clone(),
-                        limits.tt_entries,
-                    ) {
-                        Ok(session) => g.alpha_sessions[engine_index] = Some(session),
-                        Err(error) => {
-                            let game = games.swap_remove(index);
-                            let (outcome, rows) = finish(game, "unknown", Some(error.to_string()));
-                            let _ = events.send(Event::Finished(outcome, rows));
-                            continue;
-                        }
-                    }
-                }
-                let session = g.alpha_sessions[engine_index].as_mut().unwrap();
-                if session.namespace() != &namespace {
-                    session.reset(
-                        evaluators[engine_index].evaluator.as_ref().unwrap().clone(),
-                        namespace,
-                    );
-                }
-                match session.search(&g.context, &limits, &cancel) {
+                match invoke_alpha(
+                    &mut g.alpha_sessions[engine_index],
+                    &mut g.tt_profiles[engine_index],
+                    evaluators[engine_index].evaluator.as_ref().unwrap().clone(),
+                    namespace,
+                    &g.context,
+                    &limits,
+                    &cancel,
+                    caller_start,
+                    alphabeta::SearchSession::new,
+                ) {
                     Ok(result) => {
-                        g.tt_profiles[engine_index].record(&result);
                         if let (Some(action), Some(value)) = (result.action, result.value) {
                             if let Err(error) = play_completed(
                                 g,
@@ -801,7 +879,6 @@ fn worker(
                         }
                     }
                     Err(error) => {
-                        g.tt_profiles[engine_index].errors += 1;
                         failure = Some(error.to_string());
                     }
                 }
@@ -1723,5 +1800,268 @@ mod tests {
         assert_eq!(quant_ids[0], quant_ids[1]);
         assert_ne!(float_ids[0], quant_ids[0]);
         std::fs::remove_dir_all(base).unwrap();
+    }
+}
+
+#[cfg(test)]
+mod telemetry317_tests {
+    use super::*;
+    use quoridor_ai::alphabeta::{EvalAccumulator, SearchError, SearchStats, StopReason};
+    use quoridor_core::Position;
+
+    struct PrepareFailure;
+    impl StaticEvaluator for PrepareFailure {
+        fn prepare_context(&self, _: &SigmaContext) -> alphabeta::Result<Option<EvalAccumulator>> {
+            Err(SearchError::Evaluation(
+                "software fixture: prepare error".into(),
+            ))
+        }
+        fn evaluate(
+            &self,
+            _: &SigmaContext,
+            _: Option<&EvalAccumulator>,
+        ) -> alphabeta::Result<f32> {
+            panic!("no evaluator forward permitted in software telemetry fixture")
+        }
+    }
+    fn namespace(name: &str) -> alphabeta::SearchNamespace {
+        alphabeta::SearchNamespace {
+            evaluator: name.into(),
+            rules: "RuleA-fullhistory-totalply".into(),
+            selectivity: "fullwidth-PVS-MPC-OFF".into(),
+        }
+    }
+    fn coherent(p: &TtProfile) {
+        assert_eq!(p.attempts, p.successful_results + p.errors);
+        assert_eq!(
+            p.initialization_attempts,
+            p.initialization_successes + p.initialization_errors
+        );
+        assert_eq!(
+            p.search_invocations,
+            p.successful_results + p.search_errors_without_counters
+        );
+        assert_eq!(
+            p.errors,
+            p.initialization_errors + p.search_errors_without_counters
+        );
+        let seconds = [
+            p.successful_result_elapsed_seconds,
+            p.search_invocation_seconds,
+            p.search_error_invocation_seconds,
+            p.session_initialization_seconds,
+            p.session_reset_seconds,
+            p.whole_caller_seconds,
+        ];
+        assert!(seconds.iter().all(|s| s.is_finite() && *s >= 0.));
+        assert!(p.search_error_invocation_seconds <= p.search_invocation_seconds + 1e-9);
+        assert!(p.successful_result_elapsed_seconds <= p.search_invocation_seconds + 1e-9);
+        assert!(
+            p.session_initialization_seconds
+                + p.session_reset_seconds
+                + p.search_invocation_seconds
+                <= p.whole_caller_seconds + 1e-9
+        );
+        assert!(p.retained_bytes_peak <= 1024 * 1024);
+        assert_eq!(p.shared_evaluator_bytes, None);
+    }
+    #[test]
+    fn telemetry317_errors_cancel_terminal_and_reset() {
+        let root = SigmaContext::from_prefix(&[]).unwrap();
+        let evaluator: Arc<dyn StaticEvaluator> = Arc::new(PrepareFailure);
+        let limits = SearchLimits {
+            max_depth: 1,
+            max_nodes: 2,
+            time_limit: None,
+            tt_entries: 4096,
+            use_pvs: true,
+            use_tt: true,
+        };
+        let mut slot = None;
+        let mut profile = TtProfile::default();
+        // Inject construction failure through the same caller accounting path.
+        let r = invoke_alpha(
+            &mut slot,
+            &mut profile,
+            evaluator.clone(),
+            namespace("model-A"),
+            &root,
+            &limits,
+            &AtomicBool::new(false),
+            Instant::now(),
+            |_, _, _| {
+                Err(SearchError::Limits(
+                    "software fixture: allocation error".into(),
+                ))
+            },
+        );
+        assert!(r.is_err());
+        assert!(slot.is_none());
+        coherent(&profile);
+        assert_eq!(profile.initialization_errors, 1);
+        assert_eq!(profile.search_invocations, 0);
+        // Error in real SearchSession::search is timed and marked counter-unavailable.
+        let r = invoke_alpha(
+            &mut slot,
+            &mut profile,
+            evaluator.clone(),
+            namespace("model-A"),
+            &root,
+            &limits,
+            &AtomicBool::new(false),
+            Instant::now(),
+            alphabeta::SearchSession::new,
+        );
+        assert!(r.is_err());
+        coherent(&profile);
+        assert_eq!(profile.search_errors_without_counters, 1);
+        assert!(profile.search_error_invocation_seconds > 0.);
+        // Early cancellation still returns a successful API Result; no evaluator call.
+        let r = invoke_alpha(
+            &mut slot,
+            &mut profile,
+            evaluator.clone(),
+            namespace("model-A"),
+            &root,
+            &limits,
+            &AtomicBool::new(true),
+            Instant::now(),
+            alphabeta::SearchSession::new,
+        )
+        .unwrap();
+        assert_eq!(r.stop, StopReason::Cancelled);
+        assert_eq!(r.completed_depth, 0);
+        assert_eq!(profile.cancellations, 1);
+        coherent(&profile);
+        // Model namespace reset and per-newgame creation are observed separately.
+        let _ = invoke_alpha(
+            &mut slot,
+            &mut profile,
+            evaluator.clone(),
+            namespace("model-B"),
+            &root,
+            &limits,
+            &AtomicBool::new(true),
+            Instant::now(),
+            alphabeta::SearchSession::new,
+        )
+        .unwrap();
+        assert_eq!(profile.namespace_resets, 1);
+        coherent(&profile);
+        slot = None; // New runtime Game owns a new player session.
+        let _ = invoke_alpha(
+            &mut slot,
+            &mut profile,
+            evaluator.clone(),
+            namespace("model-B"),
+            &root,
+            &limits,
+            &AtomicBool::new(true),
+            Instant::now(),
+            alphabeta::SearchSession::new,
+        )
+        .unwrap();
+        assert_eq!(profile.initialization_successes, 2);
+        coherent(&profile);
+        // Terminal is successful without iteration/forward, distinct from cancellation.
+        let p = Position {
+            pawns: [67, 13],
+            walls_remaining: [10, 10],
+            horizontal: 0,
+            vertical: 0,
+            turn: 0,
+            winner: None,
+        };
+        let before = SigmaContext::from_counts(
+            p,
+            2,
+            vec![
+                (Position::default().into(), 1),
+                (Position { turn: 1, ..p }.into(), 1),
+                (p.into(), 1),
+            ],
+        )
+        .unwrap();
+        let terminal = before.play(76).unwrap();
+        let r = invoke_alpha(
+            &mut slot,
+            &mut profile,
+            evaluator,
+            namespace("model-B"),
+            &terminal,
+            &limits,
+            &AtomicBool::new(false),
+            Instant::now(),
+            alphabeta::SearchSession::new,
+        )
+        .unwrap();
+        assert_eq!(r.stop, StopReason::Terminal);
+        assert_eq!(profile.terminal_results, 1);
+        coherent(&profile);
+        assert_eq!(profile.attempts, 6);
+        assert_eq!(profile.successful_results, 4);
+        assert_eq!(profile.errors, 2);
+        assert_eq!(profile.no_completed_iteration_results, 4);
+        assert_eq!(profile.cancellations, 3);
+        assert!(profile.session_metadata_bytes_peak > 0);
+        // Synthetic counters exercise exact aggregation, not real search work/gain.
+        let mut counters = TtProfile {
+            attempts: 1,
+            search_invocations: 1,
+            ..TtProfile::default()
+        };
+        counters.record(&alphabeta::SearchResult {
+            action: Some(13),
+            value: Some(0.),
+            completed_depth: 1,
+            pv: vec![13],
+            stats: SearchStats {
+                tt_probes: 9,
+                tt_hits: 7,
+                tt_exact_hits: 5,
+                tt_usable_depth: 4,
+                tt_cutoffs: 3,
+                tt_order_only: 2,
+                tt_collisions: 1,
+                tt_replacements: 6,
+                tt_capacity_skips: 8,
+                tt_illegal_moves: 10,
+                tt_key_builds: 11,
+                tt_history_items: 12,
+                tt_key_history_capacity_bytes: 13,
+                tt_hashes: 14,
+                tt_retained_bytes: 15,
+                ..SearchStats::default()
+            },
+            stop: StopReason::DepthComplete,
+            elapsed: Duration::ZERO,
+        });
+        assert_eq!(
+            [
+                counters.probes,
+                counters.key_hits,
+                counters.exact_hits,
+                counters.usable_depth,
+                counters.bound_cutoffs,
+                counters.order_only,
+                counters.collisions,
+                counters.replacements,
+                counters.capacity_skips,
+                counters.illegal_moves,
+                counters.key_builds,
+                counters.history_items,
+                counters.key_history_capacity_bytes_sum,
+                counters.hashes
+            ],
+            [9, 7, 5, 4, 3, 2, 1, 6, 8, 10, 11, 12, 13, 14]
+        );
+        coherent(&counters);
+        println!(
+            "TELEMETRY317 {}",
+            serde_json::json!({"task":"frame25-tt-telemetry-317-v1","PASS":true,"nativeNN":0,
+            "scientificMAX":0,"attempts":profile.attempts,"successes":profile.successful_results,"errors":profile.errors,
+            "cancellations":profile.cancellations,"terminal":profile.terminal_results,"stats_missing_errors":profile.search_errors_without_counters,
+            "profile":profile,"software_fixture_only":true,"performance_gain":"NOT_MEASURED"})
+        );
     }
 }
