@@ -1,0 +1,174 @@
+{
+  "at": "2026-10-06T18:41:51.525940+00:00",
+  "Root_acceptance": "Limited live supply/native numeric and tiny null-horizon trainer qualification; batch2048 selected by fixed measured rule. Not full-fit convergence, general GPU speed or strength.",
+  "controller": {
+    "job_id": "f09328c3-fbde-4be7-9d40-ee48e7b84cb4",
+    "outcome": "succeeded",
+    "error": null,
+    "exit_code": 0,
+    "finished_at": "2026-10-06T18:30:39.489088+00:00",
+    "wall_seconds": 40.97973305406049,
+    "remaining": [],
+    "descendant_scope": "process group plus periodically recorded live descendants; no daemon adoption",
+    "cleanup_complete": true,
+    "log_bytes_seen": 0,
+    "log_bytes_retained": 0
+  },
+  "source_binding_sha256": "c9a8f810b970918e832b6b1cc46cf28e3d0571ffc25f3d3e0699f481f563b4b9",
+  "private_native": {
+    "path": "/workspaces/quoridor/.worktree/assets/checkpoints/public-full-learning/supply-recovery-r1/immutable-native/d8d5b91a71d37787f561137b4de3a4f2af4f565f34544c43233203baa2dee635/nnue-diagnose",
+    "SHA": "d8d5b91a71d37787f561137b4de3a4f2af4f565f34544c43233203baa2dee635",
+    "bytes": 1150872,
+    "sharedtarget_reader_writer_STOP": true,
+    "source_binding_SHA": "c9a8f810b970918e832b6b1cc46cf28e3d0571ffc25f3d3e0699f481f563b4b9"
+  },
+  "fixed_next_batch": 2048,
+  "rule": "fixed min median per-row production supply/transfer/update among numerically qualified conditions; no fit weights selected",
+  "batch_reports": [
+    {
+      "batch_size": 128,
+      "rows_each_repetition": 2048,
+      "two_update_max_parameter_difference_vs_CPU": [5.4569682106375694e-12, 3.725290298461914e-9],
+      "initial_max_prediction_difference_vs_CPU": 1.1920928955078125e-7,
+      "measured_supply_transfer_update_seconds": [
+        0.07435289199929684, 0.07020494795870036, 0.06558455899357796, 0.06193935708142817,
+        0.07479343097656965
+      ],
+      "median_seconds_per_original_row": 3.427975974545916e-5,
+      "allocated_peak_bytes": 67752960,
+      "reserved_peak_bytes": 90177536,
+      "qualified": true,
+      "optimization_states": "discarded; not candidates",
+      "includes_cold_initialization": false
+    },
+    {
+      "batch_size": 512,
+      "rows_each_repetition": 2048,
+      "two_update_max_parameter_difference_vs_CPU": [5.4569682106375694e-12, 3.725290298461914e-9],
+      "initial_max_prediction_difference_vs_CPU": 1.1920928955078125e-7,
+      "measured_supply_transfer_update_seconds": [
+        0.02046934701502323, 0.02109215094242245, 0.021780273062177002, 0.022540685022249818,
+        0.022713065962307155
+      ],
+      "median_seconds_per_original_row": 1.0634898956141114e-5,
+      "allocated_peak_bytes": 69184512,
+      "reserved_peak_bytes": 92274688,
+      "qualified": true,
+      "optimization_states": "discarded; not candidates",
+      "includes_cold_initialization": false
+    },
+    {
+      "batch_size": 2048,
+      "rows_each_repetition": 2048,
+      "two_update_max_parameter_difference_vs_CPU": [5.4569682106375694e-12, 1.862645149230957e-9],
+      "initial_max_prediction_difference_vs_CPU": 1.1920928955078125e-7,
+      "measured_supply_transfer_update_seconds": [
+        0.008503781049512327, 0.008801206015050411, 0.0070566050708293915, 0.006493854918517172,
+        0.006053331075236201
+      ],
+      "median_seconds_per_original_row": 3.445607944740914e-6,
+      "allocated_peak_bytes": 74808320,
+      "reserved_peak_bytes": 92274688,
+      "qualified": true,
+      "optimization_states": "discarded; not candidates",
+      "includes_cold_initialization": false
+    }
+  ],
+  "actual_live_fixture": {
+    "status": "EARLY_STOPPED",
+    "fault": null,
+    "step": 2,
+    "training_seen": 2,
+    "row_epoch": 1.0,
+    "completed_epochs": 1,
+    "partial_epoch_fraction": 0.0,
+    "attempted_step": 2,
+    "model_state_status": "LAST_COMPLETED_UPDATE",
+    "selected_exposure": {
+      "step": 0,
+      "training_seen": 0,
+      "row_epoch": 0.0,
+      "completed_epochs": 0,
+      "partial_epoch_fraction": 0.0
+    },
+    "last_completed_point": {
+      "kind": "fixed_diagnostic",
+      "step": 2,
+      "training_seen": 2,
+      "row_epoch": 1.0,
+      "completed_epochs": 1,
+      "partial_epoch_fraction": 0.0
+    },
+    "checkpoint_positions": {
+      "initial": {
+        "step": 0,
+        "training_seen": 0,
+        "row_epoch": 0.0,
+        "completed_epochs": 0,
+        "partial_epoch_fraction": 0.0
+      },
+      "last": {
+        "step": 2,
+        "training_seen": 2,
+        "row_epoch": 1.0,
+        "completed_epochs": 1,
+        "partial_epoch_fraction": 0.0
+      },
+      "best": {
+        "step": 0,
+        "training_seen": 0,
+        "row_epoch": 0.0,
+        "completed_epochs": 0,
+        "partial_epoch_fraction": 0.0
+      }
+    },
+    "samples": 14,
+    "forward_rows_conservative": {
+      "train": 2,
+      "full_selector": 8,
+      "diagnostic": 4,
+      "onnx": 0
+    },
+    "forward_rows_completed": {
+      "train": 2,
+      "full_selector": 8,
+      "diagnostic": 4,
+      "onnx": 0
+    },
+    "phase_seconds_inclusive": {
+      "initialization": 0.8029067770112306,
+      "transfer": 0.001439669169485569,
+      "synchronization": 0.0,
+      "inference": 0.002675969968549907,
+      "update": 0.1732115539489314,
+      "logging": 14.097816870897077,
+      "full_selector": 0.006564347888343036,
+      "fixed_diagnostic": 0.0021589918760582805,
+      "export": 0.008210045984014869
+    },
+    "wall_seconds": 10.442814755951986,
+    "timing_overlap": "inclusive/nested; do not add phases to infer whole wall"
+  },
+  "actual_forward_counts_total": {
+    "CPU": 6182,
+    "CUDA": 55315,
+    "native": 204,
+    "CPU_including_tinyfixture": 6196
+  },
+  "observed_resources": {
+    "peak_family_RSS_bytes": 2624741376,
+    "peak_whole_device_used_bytes": 1813356544,
+    "wall_seconds": 39.30066426296253,
+    "sampling": "guardian sampling, not continuous peak; CPU/VRAM caps include controller/device others"
+  },
+  "old_failure_seconds_preserved": 18.41393473104108,
+  "all_attempt_whole_seconds": 59.39366778510157,
+  "measurement_limit": "warm supply proxy, not whole-fit speed/strength/convergence",
+  "newE_labels": "CLOSED",
+  "next": "Fix actual three LR configs/input bindings with batch2048, same init/data/scale/RNG before fits. Existing authorization, no fixed epoch/time cap; final Sigma/newE remains unreleased.",
+  "Root_new_forward_build_full_inventory": 0,
+  "receipt_raw_sha256": "ef8d3652a3ed925b11ef10f784785dcdfcecce2597bbc339b6e8766d623c1a1e",
+  "receipt_raw_bytes": 102067,
+  "receipt_gzip_sha256": "50b6b3c9fffdc22bfadc895ff0c885d085f8bb3a249032723b8a520303f2eb06",
+  "verification": "All child wait/STOP, binding/privateELF SHA, fixed min qualified median rule, gzip byte restoration. No native/CUDA rerun."
+}
