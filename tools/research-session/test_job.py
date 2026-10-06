@@ -1,5 +1,6 @@
 """Background-job tests use temporary commands and fake RPC, never research/model jobs."""
 
+import asyncio
 from datetime import timedelta
 import importlib.util
 import json
@@ -148,6 +149,43 @@ class CommandTests(Fixture, unittest.TestCase):
         self.assertLessEqual((self.directory / "output.log").stat().st_size, 128)
         self.assertIn(b"THE-END", (self.directory / "output.log").read_bytes())
 
+    def test_no_deadline_or_runtime_limit_completes_and_reaps(self):
+        self.config.update(end_at=None, notify_until=None, max_runtime_seconds=None)
+        validated = j.validate(self.config, self.root)
+        self.assertIsNone(validated["end_at"])
+        self.assertIsNone(validated["notify_until"])
+        self.assertIsNone(validated["max_runtime_seconds"])
+        result = self.execute()
+        self.assertEqual(result["outcome"], "succeeded")
+        self.assertTrue(result["cleanup_complete"])
+        self.assertEqual(result["remaining"], [])
+
+    def test_no_time_limit_still_stops_for_user_pause(self):
+        self.config.update(end_at=None, notify_until=None, max_runtime_seconds=None)
+        self.config["argv"] = [sys.executable, "-c", "import time; time.sleep(30)"]
+        original = self.backend.issue
+        calls = 0
+
+        def issue(issue_id):
+            nonlocal calls
+            calls += 1
+            if calls > 2:
+                self.backend.items["goal"]["labels"] = ["paused-by-user"]
+            return original(issue_id)
+
+        self.backend.issue = issue
+        result = self.execute()
+        self.assertEqual(result["outcome"], "control_error")
+        self.assertTrue(result["cleanup_complete"])
+        self.assertEqual(result["remaining"], [])
+
+    def test_no_time_limit_still_honors_explicit_cancel(self):
+        self.config.update(end_at=None, notify_until=None, max_runtime_seconds=None)
+        j.write(self.directory, "cancel.json", {})
+        with patch.object(j.subprocess, "Popen") as spawn:
+            self.assertEqual(self.execute()["outcome"], "not_started")
+            spawn.assert_not_called()
+
     def test_failure_does_not_become_scientific_success(self):
         self.config["argv"] = [sys.executable, "-c", "raise SystemExit(7)"]
         self.assertEqual(self.execute()["exit_code"], 7)
@@ -276,6 +314,21 @@ class NotificationTests(Fixture, unittest.IsolatedAsyncioTestCase):
         self.assertEqual(params["sandboxPolicy"], {"type": "dangerFullAccess"})
         self.assertIn("unique-job", params["input"][0]["text"])
 
+    async def test_no_notification_deadline_delivers_once(self):
+        self.config["notify_until"] = None
+        self.assertEqual((await self.notify())["status"], "delivered")
+        await self.notify()
+        self.assertEqual(len(self.backend.server.calls), 1)
+
+    async def test_no_notification_deadline_stops_watching_on_pause(self):
+        self.config["notify_until"] = None
+        self.backend.items["goal"]["labels"] = ["paused-by-user"]
+        result = await asyncio.to_thread(
+            j.watch_notification, self.directory, self.config, self.root, self.backend
+        )
+        self.assertEqual(result["status"], "cancelled")
+        self.assertEqual(self.backend.server.calls, [])
+
     async def test_active_is_deferred_without_steering(self):
         self.backend.server.state = "active"
         self.assertEqual((await self.notify())["status"], "pending")
@@ -303,9 +356,11 @@ class NotificationTests(Fixture, unittest.IsolatedAsyncioTestCase):
 
     async def test_paused_or_closed_never_wakes(self):
         for item in (self.backend.items["goal"], self.backend.items["work"]):
+            j.write(self.directory, "notification.json", {"status": "pending"})
             item["status"] = "closed"
-            self.assertEqual((await self.notify())["status"], "pending")
+            self.assertEqual((await self.notify())["status"], "cancelled")
             item["status"] = "in_progress"
+            j.write(self.directory, "notification.json", {"status": "pending"})
             item["labels"] = ["paused-by-user"]
             await self.notify()
             item["labels"] = []
@@ -319,7 +374,7 @@ class NotificationTests(Fixture, unittest.IsolatedAsyncioTestCase):
 
     async def test_changed_owner_never_wakes(self):
         self.backend.items["work"]["assignee"] = "another"
-        await self.notify()
+        self.assertEqual((await self.notify())["status"], "cancelled")
         self.assertEqual(self.backend.server.calls, [])
 
     async def test_lost_response_reconciled_without_second_start(self):

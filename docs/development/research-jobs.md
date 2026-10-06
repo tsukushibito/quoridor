@@ -25,7 +25,7 @@
 | `control_interval_seconds`, `notify_interval_seconds`, `request_timeout_seconds` | 所有・pauseの点検、通知待ち、RPCの各上限                     |
 | `log_max_bytes`                                                                  | 保存するstdout/stderr末尾のbyte上限                          |
 
-`end_at`は実commandの終了期限、`notify_until`は現在許可枠内で担当者を起こせる最終時刻。`max_runtime_seconds`はmonotonic実行上限で、再起動でリセットしない。`resource_contract`は現在の個別契約への参照であり、CPU/RAM/NNの機械的強制を代行しない。
+`end_at`は実commandの終了期限、`notify_until`は担当者を起こせる最終時刻、`max_runtime_seconds`はmonotonic実行上限。ユーザーが期限・計算上限を設けないと明示したタスクでは、それぞれ`null`を指定できる。有限の設定は再起動で取り直さない。`resource_contract`は現在の個別契約への参照であり、CPU/RAM/NNの機械的強制を代行しない。
 
 ```bash
 export UV_NO_SYNC=1 UV_OFFLINE=1 PYTHONDONTWRITEBYTECODE=1
@@ -48,6 +48,8 @@ bash scripts/dev/research-job.sh notify --state-dir /absolute/path/new-job-runti
 - `result.json`: exit/失敗理由/時間/子回収結果。科学データ本体は既存の実験保存先に残す。
 - `output.log`: stdout+stderrの上限付き末尾。総byte数と保持byte数を区別し、全文ログが必要な実験は生成側で保存する。
 - `notification.json`: pending/delivered/uncertain/expired/cancelledと配送turn。submit時の宛先を変えず、現在のissue assigneeと明示thread IDを照合する。role名や定義hashへ依存しない。
+
+期限なしでもpause・終了・所有変更・明示cancelの点検とexact cleanupは維持する。停止/所有変更で完了通知を送れないことが確定した場合は通知待ちも終了し、期限なしの待機processを残さない。
 
 背景processは研究セッションがIdleでも生存する。Beadsの課題・目標のpause/終了や所有変更を`control_interval_seconds`ごとに確認し、問題があればcommandを停止する。読取不能時も実行を続けない。停止検出はその間隔と有界Beads待ち分遅れ得る。同一process groupと定期的に記録した子孫のidentityを対象にSIGTERM→2秒後に必要なSIGKILLで停止し、直接の子をwaitする。別sessionを作った記録済み子孫もpidfdで停止する。短い親から監視前にdaemon化した未記録processは取り込めないため、commandはdaemon化せず、**既存guardianで全子の所有と回収を維持する**。ログpipeが残れば回収未確認として保存する。host全process回収や全子孫waitの保証はしない。
 

@@ -40,6 +40,11 @@ def stamp():
     return now().isoformat()
 
 
+def deadline_reached(value):
+    """A null deadline means the authorized task has no fixed ending time."""
+    return value is not None and now() >= runtime.timestamp(value)
+
+
 @contextmanager
 def lock(directory, name):
     with (directory / name).open("a") as handle:
@@ -99,14 +104,22 @@ def validate(config, base):
     if not Path(argv[0]).is_absolute() or not os.access(argv[0], os.X_OK):
         raise JobError("argv[0] must name an existing absolute executable")
     for field in (
-        "max_runtime_seconds",
         "control_interval_seconds",
         "notify_interval_seconds",
         "request_timeout_seconds",
         "log_max_bytes",
     ):
         runtime.positive(config[field], field)
-    if runtime.timestamp(config["end_at"]) > runtime.timestamp(config["notify_until"]):
+    if config["max_runtime_seconds"] is not None:
+        runtime.positive(config["max_runtime_seconds"], "max_runtime_seconds")
+    for field in ("end_at", "notify_until"):
+        if config[field] is not None:
+            runtime.timestamp(config[field])
+    if (
+        config["end_at"] is not None
+        and config["notify_until"] is not None
+        and runtime.timestamp(config["end_at"]) > runtime.timestamp(config["notify_until"])
+    ):
         raise JobError("notify_until must be at or after end_at within the authorized frame")
     return config
 
@@ -219,7 +232,7 @@ def execute(directory, config, root, backend):
         entry = authority(config, root, backend)
         if entry["thread_id"] != state["thread_id"]:
             raise JobError("Recipient identity changed after submission")
-        if (directory / "cancel.json").exists() or now() >= runtime.timestamp(config["end_at"]):
+        if (directory / "cancel.json").exists() or deadline_reached(config["end_at"]):
             raise JobError("Cancelled or expired before spawn")
     except Exception as error:
         result = {
@@ -258,9 +271,9 @@ def execute(directory, config, root, backend):
                 if (directory / "cancel.json").exists():
                     outcome = "cancelled"
                     break
-                if (
-                    now() >= runtime.timestamp(config["end_at"])
-                    or time.monotonic() - started >= config["max_runtime_seconds"]
+                if deadline_reached(config["end_at"]) or (
+                    config["max_runtime_seconds"] is not None
+                    and time.monotonic() - started >= config["max_runtime_seconds"]
                 ):
                     outcome = "timed_out"
                     break
@@ -386,7 +399,7 @@ async def notify_once(directory, config, root, backend):
             notification.update(status="cancelled", updated_at=stamp())
             write(directory, "notification.json", notification)
             return notification
-        if now() >= runtime.timestamp(config["notify_until"]):
+        if deadline_reached(config["notify_until"]):
             notification.update(status="expired", updated_at=stamp())
             write(directory, "notification.json", notification)
             return notification
@@ -419,7 +432,7 @@ async def notify_once(directory, config, root, backend):
                     if final_entry["thread_id"] != state["thread_id"]:
                         raise JobError("Recipient identity changed before delivery")
                     if (
-                        now() >= runtime.timestamp(config["notify_until"])
+                        deadline_reached(config["notify_until"])
                         or (directory / "cancel.json").exists()
                     ):
                         return notification
@@ -449,6 +462,9 @@ async def notify_once(directory, config, root, backend):
                         updated_at=stamp(),
                     )
                     write(directory, "notification.json", notification)
+        except JobError as error:
+            notification.update(status="cancelled", error=str(error), updated_at=stamp())
+            write(directory, "notification.json", notification)
         except Exception as error:
             if notification["status"] == "dispatching":
                 notification["status"] = "uncertain"
@@ -462,15 +478,12 @@ def watch_notification(directory, config, root, backend):
         notification = asyncio.run(notify_once(directory, config, root, backend))
         if notification["status"] in ("delivered", "expired", "cancelled", "uncertain"):
             return notification
-        time.sleep(
-            min(
-                config["notify_interval_seconds"],
-                max(
-                    0,
-                    (runtime.timestamp(config["notify_until"]) - now()).total_seconds(),
-                ),
+        delay = config["notify_interval_seconds"]
+        if config["notify_until"] is not None:
+            delay = min(
+                delay, max(0, (runtime.timestamp(config["notify_until"]) - now()).total_seconds())
             )
-        )
+        time.sleep(delay)
 
 
 def run(directory, root, backend):
@@ -494,7 +507,7 @@ def run(directory, root, backend):
 def submit(path, directory, root, backend):
     config = validate(runtime.read_json(path), path.resolve().parent)
     entry = authority(config, root, backend)
-    if now() >= runtime.timestamp(config["end_at"]):
+    if deadline_reached(config["end_at"]):
         raise JobError("Cannot submit an expired job")
     directory.mkdir(parents=True, exist_ok=False)
     write(directory, "config.json", config)
