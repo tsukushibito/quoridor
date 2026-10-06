@@ -63,6 +63,8 @@ original-only v2の復旧job `2c121563-6813-4226-a9e5-716c860cc9ba` は08:55:38 
 
 実行の連携では、学習のnative binary/libraryをSHA付きprivate immutable参照へ束縛してから、既CPU2,3/RAM4/GPU6の固定fitと、CPU0,1/RAM2/GPU0の通常ビルド・限定ソフト検証を並行可とした。共有targetは318→320の一人ずつ、ビルドのexact STOPを担当間で直接渡す。profile・速度比較・arena実時計は学習停止後の非競合枠に残す。合計親資源・個別残費は増やさず、同時実行時間は公平な速度比較に使わない。実開始は担当receiptで確認し、配分受理を実学習へ読み替えない。
 
+original-only基準GPU fitは10:30:37 UTCに自然STOP/exit0/cleanup/remaining空・子回収。T100万保存行（366,638モデル入力distinct）を20epoch/156,260更新/2,000万seenまで学習し、fit/eval計51,878,032forward、whole742.821821秒だった。Rootは保存229点と実PNGを確認し、validation5万行のrowMSEは初期.856605583→末期.526443771、末期のfull-train MSE .517122594。記録最良は末期20epochで、今回の範囲では以前の小subsetの明確な末期退行を観測しない。収束・純粋な量の因果・独立game汎化・同時間棋力は未認定。許可されたcompile併走費を速度比較に使わず、trained native資格とfreeze/release後の一巡評価は別の受入れ条件として残す。[保存結果のRoot読取点](../research-data/ai-sigma/public-million-learning/baseline-fit-observed.json)。
+
 ## 選択済みの棋力評価環境
 
 ユーザーは既存Linux release Rust arenaを拡張する専用セッションを選んだ。評価器比較は同探索、探索比較は同凍結評価器、全体比較は固定Sigma設定とし、同時間棋力と同仕事の処理速度を分ける。開始prefix/historyを保存し担当側交換のpairで集計する。Sigma参照のabs(Q)<=0.2は暫定主book目安で、均衡や校正確率の保証ではない。初期盤面と傾いた・戦術診断を別群にする。

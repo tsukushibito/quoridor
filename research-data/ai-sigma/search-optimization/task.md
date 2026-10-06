@@ -34,6 +34,7 @@ MPC/LMR等の選択的枝刈り、探索方針・深さの変更、学習した�
 - worktree・code・build増分・ログ・raw/圧縮証拠・Git/temp込みの新保存は96MiB。既存全保持12GiBとUNKNOWN128MiBは維持する。既存cacheを参照できるが、増分は本タスクへ計上する。開始準備のfresh容量観測はmain `.artifacts/search-optimization-launch/storage-before.json`。実計算前に必要領域を加えたcoverageと現物CPU/RAMを確認する。旧unused台帳の全史監査を新タスクの入口に追加しない。
 - buildは既存の適切なtarget/依存をoffline/lockedで再用し、新規依存取得・環境更新をしない。既存cacheの利用者とsource/binary対応を確認し、共有cacheの無断削除・競合buildをしない。source調査は実測の物理確認待ちと並行できる。
 - 2026-10-06の連携調整: 319のprivate immutable native参照のSHA/size・実caller binding通知後、候補のビルド・限定tests/Clippyだけを最大1job120秒、既累計600秒の残内で固定GPU本fitと並行可。CPU0,1/RAM2GiB/GPU0、共有target唯一writer、同時費は競合ありと記録する。交替binary速度比較・再profileは学習のexact自然STOPまで保留する。ビルドSTOP/childwait/cleanupを320とRootへ直接通知し、320の既配分ソフト検証へ共有targetを引き渡す。Root ACK待ちは追加しない。
+- 319基準fitの実STOP後、旧600秒の残446.150198430秒から、凍結sort候補の交替plain比較をONE job最大60秒で配分する。320の新software recovery exactSTOPと319後段数値仕事のSTOP又はno-current/no-next-numeric留保が両方成立してからfresh quiet/admissionで開始する。固定5root・B3817・source/binary SHA・同完成仕事を維持し、失敗の自動反復や追加profile・新モデルを配分しない。実START/STOPは両担当とRootへ直接通知し、受領ACKをgateにしない。
 - 初回のprofileと最大1比較、予算到達、ユーザーpause、資産/所有/結果妥当性の未解決、重要設計の判断待ちで該当作業を区切る。旧期限・費・失敗は変更しない。長jobは既存背景jobのbounded log/guardian/完了通知を使い、計算待ちでLLM turnを保持しない。
 - 初報でclaim/actual cwd/選んだモデル・代表群・実測開始か準備中かを区別する。その後は支配費、実改善、重要判断、障害の節目で報告し、定型進捗turnを作らない。
 - 完了時はsource/process停止、子回収、方法・結果・不確実性・費、変更path/SHA、再現command、残課題・次の判断をissueに残してbackupする。必要証拠はmainの本タスク専用保存先へRootが統合する。
