@@ -57,3 +57,11 @@ MPC/LMR等の選択的枝刈り、探索方針・深さの変更、学習した�
 許可した同意味処理最適化は実結果で候補を更新し、ユーザーの停止指示まで進められるだけ進める。各jobの計測入力と問いは有限に固定し、完了後に次の有力介入へ進む。無期限許可を根拠のない同候補の無限反復にしない。1候補の不支持やRootのmain受入れ待ちを全体停止条件にせず、停止版と必要証拠を引き渡し、別の許可済みWT作業へ進む。原則・速度・棋力の採用を混同しない。CPU/RAM/GPU/保存と一人のwriter・重要設計の境界は維持する。具体資源不足・不一致は該当工程のみ停止して報告、重要な意味変更は提案を残して人間判断を待つ。新取得/依存/学習/対局/資産削除の許可は増やさない。
 
 job configのend_at/notify_until/max_runtime_secondsをnullにし、許可を変更せず期限なしで動作するcanonical research-jobを使う。既存実行中jobの凍結configは書換えず実STOPを保存し、以降のjobで撤去済み上限を使わない。pause/owner/取消・bounded log・exact cleanup・一度の完了通知は維持し、計算待ちはIdle/完了イベントで進める。ネットワーク・RPC・lock・cleanupの応答timeoutは作業上限とは別に維持できる。個別作業の細かな追加計測、定期LLM監視、繰返しglobal/target容量scanはしない。明日の進捗確認自体を自動stopとせず、実際の停止指示で止める。
+
+## 一時確保を避け、事前確保バッファを参照して使う方針
+
+ユーザーは「避けたいのは一時ヒープ確保で、事前確保ヒープの使用は良い」と明示した。ヒープ回避を大きな値の値渡し化・コピーや全heap storage排除と混同しない。by-value WallMaps案は確保除去と保存/ABI変更を同時に含み、その速度退行を純粋な一時確保回避の効果とは扱わない。compact pointer版の改善も単独のコピー原因証明ではない。
+
+次の優先処理候補はcanonical算術を基準に、実search/session/workerで適切なサイズの入力scratchを一度確保し、各evaluateでReLU/denseを一度だけ埋め、連続sliceを参照して同じscalar内積を行う構成。大きなmap/accumulatorは安全な参照で扱い、不要なpayload移動・全buffer初期化・hidden rowごとの入力再計算・所有管理を増やさない。全accepted topology、親/history復元、reentrant/nonalias/error/cancel保証を保ち、global mutable・unsafe未初期化・巨大な深さ別stackを導入しない。現役standalone callerも正しく維持し、互換性だけの旧経路や探索器コピーを残さない。
+
+比較は一時確保のあるcanonicalとの最小同算術差分に限定し、過去のFT/TT/map複合候補を混ぜない。initと通常のalloc数、独立bit/reference/実caller/parent/error/cancelとplain wholeを確認する。事前確保ヒープ利用は許可済みだが高速化を先取りしない。先のstack packing patch/全negative証拠は保存して代替案とし、新buildは現163MiBのinclusive成立または具体前向き配分後、数値/公平clockは学習の実STOP後のquiet slotで行う。

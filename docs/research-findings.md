@@ -194,3 +194,5 @@ TT cached手だけの合法性確認候補は、全legalset/history/terminal/ply
 ユーザーは比較範囲上端3e-4が最良だったことを受け、より大きい初期学習率の比較を明示指定した。上限は未確認であり、旧3LR内の最小選定を暫定結果として保持する。同INITIAL・batch2048・全T/固定V・optimizer/反転/スケジュールを固定し、1e-3→安定なら3e-3、改善する上端が続けば1e-2へ段階的に拡張する。新候補と保存容量は結果前に束縛、失敗/旧費を保持し、validationで範囲を絞る。最終Sigma/newEは拡張選定とfreeze後まで保留する。これは高LR比較の許可であり、feature/model変更・普遍的LR上限・追加保存の自動超過を意味しない。[継続契約](../research-data/ai-sigma/public-full-learning/task.md)。
 
 高LR探索についてユーザーは最初に極端な上側値を試して二分探索のように絞る方針へ変更した。先の1e-3→3e-3案を置換し、まず初期LR0.1、悪化/非finiteなら既良好3e-4との倍率中点約.005477から絞る。validation MSEの単調性や普遍的安定上限は未証明で、同scheduleでの初期振動・減衰後の回復・最終観測を区別する。全他条件と未開封評価の保留、資源/旧出力保全は不変更。新候補・判定基準・inclusive保存予測を結果前に固定する。
+
+ユーザーはヒープ回避の目的を「評価ごとの一時確保を避ける。事前確保ヒープは利用可」と明確化した。大きなmapのby-value案は確保削減とコピー/ABI変更が混在しており、純粋な一時確保回避の遅延原因と断定しない。探索担当へcanonical算術のままsetup-owned入力bufferを参照して使い、ReLUを一度処理・連続slice内積・不要なmap payload移動を避ける最小比較を優先する指示を渡した。既compact版の所有管理費/コピー因果は未分離、main adoption/速度利益は未認定。旧patch/負結果を保持し、容量/学習quiet slot成立後に独立referenceと実callerの比較を行う。
