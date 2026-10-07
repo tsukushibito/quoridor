@@ -1,6 +1,6 @@
 # NNUE研究・現在の実行許可
 
-2026-10-06更新。**固定チームの研究枠は終了し、現在はユーザーが指定した探索高速化、公開100万行GPU学習、棋力評価環境の構築をタスクとして配分する。** ユーザーが316・317の引渡し後に解体する方針を選び、`quoridor-1gj`で実施した。残予算や過去の契約から次の実験を自動開始しない。
+2026-10-07更新。**固定チームの研究枠は終了し、現在はユーザーが指定した探索高速化、公開100万行GPU学習、棋力評価環境の構築をタスクとして配分する。** ユーザーが316・317の引渡し後に解体する方針を選び、`quoridor-1gj`で実施した。残予算や過去の契約から次の実験を自動開始しない。
 
 ## 現在のタスク許可
 
@@ -17,6 +17,14 @@ CPU2 logical/RAM2GiB/GPU0、compile・tests・profile累計600秒/各job120秒�
 v2の入口チェック未完了後にsubmitが走った制御失敗は取消・回収と実費を保持する。同scope復旧として、確認済み系列1の未使用取得枠から256MiBを系列2へ前向き移譲し、現在のceilingは系列1が1,895,316,616B、系列2が2,432,187,528B、合算上限不変。原cap/費/SHAを上書きせず、検証済み既blobの直接再用、fresh admission成功からsubmitまでの順序修復、累積時間と非競合枠を入口にする。
 
 ユーザーは `quoridor-4lc.320` の独立savedセッションへ既存Rust native arenaの棋力評価環境構築を配分した。[担当契約](../../research-data/ai-sigma/arena-evaluation/task.md)に従い、開始prefix/history、色交換pair、時計とtyped未完了理由、完全pair単位の集計・再現manifestを整える。初回は静的実装、調整済みslotでの累計600秒compile/testsと最大2job/180秒/4slotのD-only小動作確認。CPU最大2/RAM2GiB/GPU0、64MiB inclusiveを完了maintenanceのfuture reservation160→96MiBから移譲し、親保存12GiB/UNKNOWN128MiB・旧current資産を保持する。Root同fullaccess/never、同model/effort。大book生成、Sigma GPU対局、凍結学習候補の本対局、棋力昇格はこの初回構築に含めない。
+
+### 2026-10-07の追加承認
+
+人間は既存FT差分SIMDを採用済みguarded AVX2 headと併用して実装/設定確認・資格・有限比較する方針を承認した。A Scalar FT/B既存Simd FTで同モデル/重み/特徴/尺度/FT列減算加算順を維持し、FT単体とroot setup・実Search全費/同仕事から採否を決める。次に、採用された固定FT/headをbaselineとして、実手からの直接差分特徴生成とSearch所有のbounded子FT/特徴buffer再利用を実装・資格・比較し、残存距離map費を調べる。SIMD不支持でもその問いを完了して次段へ進む。map共有cache/動的最短路の新方式は無条件に実装せず、必要性・効果/保持/保守境界の根拠が出た時に人間へ戻す。[FT比較契約](../../research-data/ai-sigma/search-optimization/ft-delta-simd-v1/task.md)、[直接差分・buffer契約](../../research-data/ai-sigma/search-optimization/feature-delta-buffer-v1/task.md)。
+
+同じ人間承認により、推論高速化完了を待たず、受入れ済みtrained patience1 BEST51/step209559のnative対応・棋力評価準備を既環境担当へ並行配分する。現採用source/backendとモデル/尺度/入力/学習側期待出力を凍結し、実ELF/source/configをSHAで束縛する。同node評価品質と同時間棋力を分け、重要な未承認book/対戦/protocol条件だけ人間へ返す。具体資源と既条件が成立し情報価値がある場合は現版の基準を取り、FT/直接差分・buffer段階の統合後に最終固定版の関連対応と同時間評価を行う。前版結果を探索量が変わる後版の根拠にしない。[trained native/arena契約](../../research-data/ai-sigma/arena-evaluation/trained-reference-v1/task.md)。
+
+保持Sigmaのoriginal-open V診断は既承認の別leafで継続する。original323の本学習pause、新E/旧封印label/未承認test開封、モデル再選定/default更新、FMA/量子化/FT数学/探索規則/枝刈りの保留は変えない。別の保存セッションが実行・統合/main/Gitの唯一writerを所有し、Rootは方針相談・重要判断を扱う。実compile/numeric/性能/時間対局は具体inclusive保存予測・親内の支持されたfuture配分・soleCargo/private binding・fresh actual quiet/exactSTOPで進める。新しい親枠/CPU/GPUや無制限な追加実験は与えない。通常修復/必要工程へ毎回の人間ACK・周期監視・常設roleを追加しない。各具体scope/予測/STOP/検証と担当・状態は上記契約とBeads、結果は[研究知見](../research-findings.md)へ記録する。
 
 ## 終了した枠と証拠
 
